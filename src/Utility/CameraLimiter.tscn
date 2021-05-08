@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Utility/CameraLimiter.gd" type="Script" id=1]
+
+[node name="CameraLimiter" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Left" type="Position2D" parent="."]
+position = Vector2( -128, 0 )
+
+[node name="Right" type="Position2D" parent="."]
+position = Vector2( 128, 0 )
+
+[node name="Top" type="Position2D" parent="."]
+position = Vector2( 0, -128 )
+
+[node name="Bottom" type="Position2D" parent="."]
+position = Vector2( 0, 128 )

@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/SFX/snd_enemy_hurt.ogg" type="AudioStream" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 80, 32 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 8 )
+
+[node name="EnemyTemplate" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 10
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+monitorable = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+modulate = Color( 0, 0.0156863, 0.937255, 0.392157 )
+position = Vector2( 0, -32 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -8 )
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -8 )
+hframes = 18
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+bus = "SFX"
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]

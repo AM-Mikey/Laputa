@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Gestation (Internal Percussion).ogg-b6a06344774dd5d964323e77688a8daa.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/Gestation (Internal Percussion).ogg"
+dest_files=[ "res://.import/Gestation (Internal Percussion).ogg-b6a06344774dd5d964323e77688a8daa.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

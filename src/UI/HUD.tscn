@@ -1,0 +1,275 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://src/UI/HUD.gd" type="Script" id=1]
+[ext_resource path="res://assets/UI/NumberNew.png" type="Texture" id=2]
+[ext_resource path="res://assets/UI/HUD/Background.png" type="Texture" id=3]
+[ext_resource path="res://assets/UI/HUD/HpProgress.png" type="Texture" id=4]
+[ext_resource path="res://assets/UI/HUD/XpProgress.png" type="Texture" id=5]
+[ext_resource path="res://assets/UI/HUD/XpFlash.png" type="Texture" id=6]
+[ext_resource path="res://assets/UI/HUD/HpLost.png" type="Texture" id=7]
+[ext_resource path="res://assets/UI/HUD/CooldownProgress.png" type="Texture" id=8]
+[ext_resource path="res://assets/UI/HUD/CooldownOver.png" type="Texture" id=9]
+[ext_resource path="res://assets/Weapon/GrenadeLauncherIcon.png" type="Texture" id=10]
+[ext_resource path="res://assets/UI/HUD/XpOver.png" type="Texture" id=11]
+[ext_resource path="res://assets/UI/HUD/HpOver.png" type="Texture" id=12]
+[ext_resource path="res://assets/UI/XpBarMax.png" type="Texture" id=13]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Flash"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "XpFlash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("XpBar/XpFlash:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 40, 44 )
+texture = ExtResource( 3 )
+
+[node name="HpBar" type="Control" parent="."]
+margin_left = 16.0
+margin_top = 40.0
+margin_right = 80.0
+margin_bottom = 48.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HpLost" type="TextureProgress" parent="HpBar"]
+visible = false
+margin_left = 16.0
+margin_top = -5.0
+margin_right = 55.0
+value = 70.0
+texture_progress = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HpProgress" type="TextureProgress" parent="HpBar"]
+margin_left = 16.0
+margin_top = -5.0
+margin_right = 55.0
+margin_bottom = 3.0
+value = 100.0
+texture_progress = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Num1" type="Sprite" parent="HpBar"]
+position = Vector2( 0, -4 )
+texture = ExtResource( 2 )
+hframes = 11
+vframes = 4
+frame = 42
+
+[node name="Num2" type="Sprite" parent="HpBar"]
+position = Vector2( 8, -4 )
+texture = ExtResource( 2 )
+hframes = 11
+vframes = 4
+frame = 42
+
+[node name="LostTween" type="Tween" parent="HpBar"]
+
+[node name="HpOver" type="Sprite" parent="HpBar"]
+position = Vector2( 35, -3 )
+texture = ExtResource( 12 )
+
+[node name="XpBar" type="Control" parent="."]
+margin_left = 40.0
+margin_top = 32.0
+margin_right = 80.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="XpProgress" type="TextureProgress" parent="XpBar"]
+margin_left = -12.0
+margin_top = 11.0
+margin_right = 27.0
+margin_bottom = 27.0
+value = 100.0
+texture_progress = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="XpFlash" type="Sprite" parent="XpBar"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -12, 11 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="Num" type="Sprite" parent="XpBar"]
+position = Vector2( -20, 12 )
+texture = ExtResource( 2 )
+hframes = 11
+vframes = 4
+frame = 34
+
+[node name="XpMax" type="Sprite" parent="XpBar"]
+visible = false
+position = Vector2( 27, 13 )
+texture = ExtResource( 13 )
+
+[node name="XpOver" type="Sprite" parent="XpBar"]
+position = Vector2( 7, 13 )
+texture = ExtResource( 11 )
+
+[node name="CooldownBar" type="Control" parent="."]
+margin_left = 25.0
+margin_top = 51.0
+margin_right = 62.0
+margin_bottom = 53.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="CooldownBar"]
+margin_right = 37.0
+margin_bottom = 2.0
+value = 100.0
+texture_progress = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CooldownOver" type="Sprite" parent="CooldownBar"]
+position = Vector2( 19, 1 )
+texture = ExtResource( 9 )
+
+[node name="Weapon" type="HBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 100.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 64, 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="TextureRect" parent="Weapon"]
+margin_right = 64.0
+margin_bottom = 16.0
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shadow" type="TextureRect" parent="Weapon/Sprite"]
+modulate = Color( 0, 0, 0, 1 )
+self_modulate = Color( 1, 1, 1, 0.784314 )
+show_behind_parent = true
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 65.0
+margin_bottom = 17.0
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoCount" type="Control" parent="Weapon"]
+margin_left = 68.0
+margin_right = 68.0
+margin_bottom = 16.0
+
+[node name="Divider" type="Sprite" parent="Weapon/AmmoCount"]
+position = Vector2( 33, 5 )
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( -9, -5 )
+hframes = 11
+vframes = 4
+frame = 21
+
+[node name="Divider2" type="Sprite" parent="Weapon/AmmoCount/Divider"]
+position = Vector2( -8, 8 )
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( -9, -5 )
+hframes = 11
+vframes = 4
+frame = 21
+
+[node name="Num1" type="Sprite" parent="Weapon/AmmoCount"]
+position = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+hframes = 11
+vframes = 4
+frame = 1
+
+[node name="Num2" type="Sprite" parent="Weapon/AmmoCount"]
+position = Vector2( 12, 4 )
+texture = ExtResource( 2 )
+hframes = 11
+vframes = 4
+
+[node name="Num3" type="Sprite" parent="Weapon/AmmoCount"]
+position = Vector2( 20, 4 )
+texture = ExtResource( 2 )
+hframes = 11
+vframes = 4
+
+[node name="Num4" type="Sprite" parent="Weapon/AmmoCount"]
+position = Vector2( 28, 12 )
+texture = ExtResource( 2 )
+hframes = 11
+vframes = 4
+frame = 12
+
+[node name="Num5" type="Sprite" parent="Weapon/AmmoCount"]
+position = Vector2( 36, 12 )
+texture = ExtResource( 2 )
+hframes = 11
+vframes = 4
+frame = 11
+
+[node name="Num6" type="Sprite" parent="Weapon/AmmoCount"]
+position = Vector2( 44, 12 )
+texture = ExtResource( 2 )
+hframes = 11
+vframes = 4
+frame = 11
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Flash = SubResource( 1 )
+anims/XpFlash = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
+bus = "SFX"

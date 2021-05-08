@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/snd_switchweapon.ogg-3752d557d578cd7cbc4cad216a70de12.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/snd_switchweapon.ogg"
+dest_files=[ "res://.import/snd_switchweapon.ogg-3752d557d578cd7cbc4cad216a70de12.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

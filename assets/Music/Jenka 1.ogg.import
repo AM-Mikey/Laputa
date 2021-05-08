@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Jenka 1.ogg-1312a8191bcc7439f9bdecc6b590f61b.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/Jenka 1.ogg"
+dest_files=[ "res://.import/Jenka 1.ogg-1312a8191bcc7439f9bdecc6b590f61b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

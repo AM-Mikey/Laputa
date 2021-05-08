@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/evillaugh.ogg-0dcdae7524ed143521684f378e183284.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/original/evillaugh.ogg"
+dest_files=[ "res://.import/evillaugh.ogg-0dcdae7524ed143521684f378e183284.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

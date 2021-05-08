@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Last Cave.ogg-a6d2f8403ba24c569bd330f508fcabc2.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/Last Cave.ogg"
+dest_files=[ "res://.import/Last Cave.ogg-a6d2f8403ba24c569bd330f508fcabc2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

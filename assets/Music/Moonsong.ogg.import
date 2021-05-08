@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Moonsong.ogg-6d3938f4c8750ebcbcc68b47963cc17a.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/Moonsong.ogg"
+dest_files=[ "res://.import/Moonsong.ogg-6d3938f4c8750ebcbcc68b47963cc17a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

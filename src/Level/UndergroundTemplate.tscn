@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/Level/Level.gd" type="Script" id=1]
+[ext_resource path="res://src/Tile/MimigaB.tres" type="TileSet" id=2]
+[ext_resource path="res://src/Tile/MimigaM.tres" type="TileSet" id=3]
+[ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Prop/Chest.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/Background/bk0.bmp" type="Texture" id=8]
+
+[node name="IndoorTemplate" type="Node2D"]
+script = ExtResource( 1 )
+level_name = "Underground Storage"
+music = "res://assets/Music/Pulse.ogg"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 640.0
+margin_bottom = 384.0
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tiles" type="Node2D" parent="."]
+
+[node name="Background" type="TileMap" parent="Tiles"]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 262165, 0, 0, 327700, 1, 1, 458770, 1, 65537, 458771, 0, 0, 458773, 1, 65536, 524306, 0, 0, 524307, 0, 0, 524309, 0, 0, 589834, 9, 0, 589841, 1, 65537, 655369, 9, 0, 655370, 9, 0, 655371, 9, 0, 655377, 0, 0, 655379, 0, 0, 655380, 6, 0, 655381, 0, 0, 720905, 9, 0, 720906, 9, 0, 720907, 9, 0, 720908, 9, 0, 720910, 9, 0, 720912, 1, 65537, 720916, 6, 65536 )
+
+[node name="Main" type="TileMap" parent="Tiles"]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 262152, 11, 0, 262153, 11, 0, 262154, 11, 0, 262155, 11, 0, 262156, 11, 0, 262157, 11, 0, 262158, 11, 0, 262159, 11, 0, 262160, 11, 0, 262161, 11, 0, 262162, 11, 0, 262163, 11, 0, 262164, 11, 0, 262165, 11, 0, 262166, 11, 0, 262167, 26, 65537, 262168, 10, 65536, 327688, 11, 0, 327702, 2, 0, 327703, 12, 0, 393224, 11, 0, 393237, 10, 1, 393238, 26, 65537, 393239, 5, 0, 458760, 11, 0, 458773, 10, 1, 458774, 26, 0, 458775, 10, 0, 524296, 11, 0, 524310, 26, 65536, 524311, 2, 65537, 589832, 11, 0, 589846, 8, 1, 589847, 12, 0, 655368, 11, 0, 655383, 26, 65537, 655384, 10, 0, 720904, 11, 0, 720919, 26, 0, 720920, 10, 65536, 786440, 11, 0, 786441, 11, 0, 786442, 12, 0, 786443, 11, 0, 786444, 12, 0, 786445, 11, 0, 786446, 11, 0, 786447, 12, 0, 786448, 12, 0, 786449, 12, 0, 786450, 12, 0, 786451, 12, 0, 786452, 12, 0, 786453, 12, 0, 786454, 12, 0, 786455, 11, 0, 786456, 10, 65536 )
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="Chest" parent="Props" instance=ExtResource( 5 )]
+position = Vector2( 168, 184 )
+held_item = "Necklace"
+
+[node name="Chest2" parent="Props" instance=ExtResource( 5 )]
+position = Vector2( 216, 184 )
+held_item = "Necklace"
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="Door" parent="Triggers" instance=ExtResource( 4 )]
+position = Vector2( 328, 192 )
+level = "res://src/Level/DebugLevel.tscn"
+door_index = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 256, 144 )
+current = true

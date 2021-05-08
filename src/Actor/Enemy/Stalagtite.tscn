@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/SFX/snd_enemy_hurt.ogg" type="AudioStream" id=1]
+[ext_resource path="res://assets/Actor/Enemy/EnemyTemp.png" type="Texture" id=2]
+[ext_resource path="res://src/Actor/Enemy/Stalagtite.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 144 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 8 )
+
+[node name="Stalagtite" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 10
+script = ExtResource( 3 )
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+position = Vector2( 0, 64 )
+monitorable = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+modulate = Color( 0, 0.0156863, 0.937255, 0.392157 )
+position = Vector2( 0, 80 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -8 )
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="SpacialHurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+bus = "SFX"
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -8 )
+texture = ExtResource( 2 )
+hframes = 18
+frame = 2
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 64 )
+collision_mask = 9
+collide_with_areas = true
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]

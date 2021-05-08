@@ -1,0 +1,165 @@
+{
+    "default": {
+        "undefined": {
+            "dialogstep": "06"
+        }
+    },
+    "horses": {
+        "001": {
+            "id": "001",
+            "name": "bob",
+            "expression": "neutral",
+            "text": "horse..."
+        },
+        "002": {
+            "id": "002",
+            "name": "jen",
+            "expression": "suprised",
+            "text": "beep boop bo beep ",
+            "code": "speed = 99999999"
+        }
+    },
+    "questions": {
+        "01": {
+            "id": "01",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "I want to ask you a question"
+        },
+        "02": {
+            "id": "02",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "beep boop bo beep?"
+        },
+        "y01": {
+            "id": "y01",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "oh, really?"
+        },
+        "y02": {
+            "id": "y02",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "i didn't expect you to agree"
+        },
+        "n01": {
+            "id": "n01",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "well, that's dissapointing"
+        },
+        "03": {
+            "id": "03",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "Let's try that again. Boop be bo?"
+        },
+        "y201": {
+            "id": "y201",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "Wow."
+        },
+        "n201": {
+            "id": "n201",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "Aw, that's alright"
+        },
+        "n202": {
+            "id": "n202",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "I'm sure plenty of people haven't"
+        },
+        "04": {
+            "id": "04",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "Anyways, what were we talking about?"
+        }
+    },
+    "intro": {
+        "01": {
+            "id": "01",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "Oh, hey there"
+        },
+        "02": {
+            "id": "02",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "How's it going?",
+            "flags": {"branch": "ta1"}
+        },
+        "t01": {
+            "id": "01",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "I was at Scoot's house the other day"
+        },
+        "t02": {
+            "id": "02",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "Wait, this isn't animal crossing!"
+        },
+		 "a01": {
+            "id": "02",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "What did you wanna ask about?",
+			"flags": {"topic": ""}
+        }
+    },
+    "ham": {
+        "01": {
+            "id": "01",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "ham ham ham ham hamham hamhamham"
+        },
+        "02": {
+            "id": "02",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "don't tell anyone, mimigas aren't supposed to eat meat!"
+        }
+    },
+    "cheese": {
+        "01": {
+            "id": "01",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "hahaha funny..."
+        },
+        "02": {
+            "id": "02",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "uh oh..."
+        }
+    }
+}

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Get Heart Tank!.ogg-734346c02e33bb6523081d5b11a70411.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/Get Heart Tank!.ogg"
+dest_files=[ "res://.import/Get Heart Tank!.ogg-734346c02e33bb6523081d5b11a70411.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

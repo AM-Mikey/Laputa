@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/snd_critter_fly.ogg-f833e40ae389a16cc269a9ab03c1b71a.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/snd_critter_fly.ogg"
+dest_files=[ "res://.import/snd_critter_fly.ogg-f833e40ae389a16cc269a9ab03c1b71a.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Pier Walk.ogg-a715795c38cd92c4c1cea69b054d4691.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/Pier Walk.ogg"
+dest_files=[ "res://.import/Pier Walk.ogg-a715795c38cd92c4c1cea69b054d4691.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

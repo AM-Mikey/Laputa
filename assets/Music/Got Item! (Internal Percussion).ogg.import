@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Got Item! (Internal Percussion).ogg-1b1793e4236abe6d7b8caece0cfc76e1.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/Got Item! (Internal Percussion).ogg"
+dest_files=[ "res://.import/Got Item! (Internal Percussion).ogg-1b1793e4236abe6d7b8caece0cfc76e1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

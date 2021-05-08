@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Tyrant.ogg-69b1f6e4d02be4b64dcb0cf2cabda405.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/Tyrant.ogg"
+dest_files=[ "res://.import/Tyrant.ogg-69b1f6e4d02be4b64dcb0cf2cabda405.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

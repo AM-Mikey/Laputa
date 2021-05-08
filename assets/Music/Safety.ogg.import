@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Safety.ogg-284ed3ea633408f72fc18a34a179f914.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/Safety.ogg"
+dest_files=[ "res://.import/Safety.ogg-284ed3ea633408f72fc18a34a179f914.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

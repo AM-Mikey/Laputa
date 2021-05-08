@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://src/Weapon/Weapon.gd" type="Script" id=1]
+[ext_resource path="res://assets/Weapon/PolarStar.png" type="Texture" id=2]
+[ext_resource path="res://assets/Weapon/PolarStarIcon.png" type="Texture" id=4]
+
+[resource]
+resource_name = "PolarStar"
+script = ExtResource( 1 )
+display_name = "Polar Star"
+description = "Your very first gun. It carries the mark of the Northern Star"
+texture = ExtResource( 2 )
+icon_texture = ExtResource( 4 )
+damage = 1
+projectile_range = 100
+projectile_speed = 400
+cooldown_time = 0.25
+automatic = false
+needs_ammo = false
+ammo = 20
+max_ammo = 20
+xp = 0
+max_xp = 0
+level = 1
+max_level = 0

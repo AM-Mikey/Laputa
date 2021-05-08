@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Utility/SimpleTrack.gd" type="Script" id=1]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( -11.0243, 34.4903, 11.0243, -34.4903, -40, -8, -42.9948, 16.694, 42.9948, -16.694, 8, -32, 0, 0, 0, 0, 80, 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 16, 56, -12.7567, 14.3316, 12.7567, -14.3316, -40, 32, -14.6466, 13.8591, 14.6466, -13.8591, -40, -8 )
+}
+
+[node name="SimpleTrack" type="Path2D"]
+position = Vector2( -8, -8 )
+curve = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2( -40, -8 )
+rotate = false

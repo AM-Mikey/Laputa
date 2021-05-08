@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/People of the Root (Internal Percussion).ogg-65d2f445e9f09a3ad590dd0c8d8cc647.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/People of the Root (Internal Percussion).ogg"
+dest_files=[ "res://.import/People of the Root (Internal Percussion).ogg-65d2f445e9f09a3ad590dd0c8d8cc647.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

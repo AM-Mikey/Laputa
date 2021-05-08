@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Cave Story.ogg-d4e804ffc8552fc992eaea02c341b373.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/Cave Story.ogg"
+dest_files=[ "res://.import/Cave Story.ogg-d4e804ffc8552fc992eaea02c341b373.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

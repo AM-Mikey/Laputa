@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Seal Chamber.ogg-901ec073f7471d094c788a91830fedfc.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/Seal Chamber.ogg"
+dest_files=[ "res://.import/Seal Chamber.ogg-901ec073f7471d094c788a91830fedfc.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

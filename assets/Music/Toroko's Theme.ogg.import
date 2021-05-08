@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Toroko's Theme.ogg-b6d589c82df10b07774aa2c8c2d48d33.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/Toroko's Theme.ogg"
+dest_files=[ "res://.import/Toroko's Theme.ogg-b6d589c82df10b07774aa2c8c2d48d33.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/snd_shot_bounce.ogg-9b954b5b859f531f19d85311af92482b.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/snd_shot_bounce.ogg"
+dest_files=[ "res://.import/snd_shot_bounce.ogg-9b954b5b859f531f19d85311af92482b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

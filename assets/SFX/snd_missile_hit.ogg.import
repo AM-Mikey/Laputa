@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/snd_missile_hit.ogg-aa26c03e4fbdb8b9aedc36fcae7e517e.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/snd_missile_hit.ogg"
+dest_files=[ "res://.import/snd_missile_hit.ogg-aa26c03e4fbdb8b9aedc36fcae7e517e.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

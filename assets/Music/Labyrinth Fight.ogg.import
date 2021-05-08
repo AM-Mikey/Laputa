@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Labyrinth Fight.ogg-423813e30db68eb77c241466f062bd33.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/Labyrinth Fight.ogg"
+dest_files=[ "res://.import/Labyrinth Fight.ogg-423813e30db68eb77c241466f062bd33.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

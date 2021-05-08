@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Living Waterway (Internal Percussion).ogg-cd9f6d8d618f539136366abcf1cb0c68.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/Living Waterway (Internal Percussion).ogg"
+dest_files=[ "res://.import/Living Waterway (Internal Percussion).ogg-cd9f6d8d618f539136366abcf1cb0c68.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

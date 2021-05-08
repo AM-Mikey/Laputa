@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/White.ogg-78517217c034571f8969a81c0413c05a.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/White.ogg"
+dest_files=[ "res://.import/White.ogg-78517217c034571f8969a81c0413c05a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

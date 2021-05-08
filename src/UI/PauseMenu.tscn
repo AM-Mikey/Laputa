@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/UI/PauseMenu.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/SoundSettings.tscn" type="PackedScene" id=2]
+
+[node name="PauseMenu" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 352.0
+margin_top = 24.0
+margin_right = 472.0
+margin_bottom = 72.0
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="Button" parent="."]
+margin_left = 200.0
+margin_top = 24.0
+margin_right = 320.0
+margin_bottom = 72.0
+text = "Options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SoundSettings" parent="." instance=ExtResource( 2 )]
+margin_top = 112.0
+margin_bottom = 112.0
+
+[connection signal="pressed" from="Options" to="." method="_on_Options_pressed"]

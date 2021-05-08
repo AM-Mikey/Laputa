@@ -1,0 +1,17 @@
+{
+	"normal":{
+		"000" : {"display_name": "Recruit", "face":"Recruit", "expression": 0, "text": "normal convo 1"},
+		"001" : {"display_name": "Sue", "face":"Sue", "expression": 0, "text": "normal convo 2"},
+		"002" : {"display_name": "Sue", "face":"Sue", "expression": 0, "text": "normal convo 3"}
+	},
+	"horses":{
+		"000" : {"display_name": "Recruit", "face":"Recruit", "expression": 0, "text": "Horse Conversation 1."},
+		"001" : {"display_name": "Sue", "face":"Sue", "expression": 0, "text": "Horse Conversation Part 2."}
+	},
+	"code":{
+		"000" : {"display_name": "Recruit", "face":"Recruit", "expression": 0, "text": "Here's just some normal text."},
+		"001" : {"display_name": "Sue", "face":"Sue", "expression": 0, "text": "This line has a [`a]flag[`r] in it", "flags": {"add_topic": "flags"}},
+		"002" : {"display_name": "Sue", "face":"Sue", "expression": 0, "text": "[`a]Flags[`r] are what tell the NPC to execute a certain function,"},
+		"003" : {"display_name": "Sue", "face":"Sue", "expression": 0, "text": "or which gdscript file to instance"}
+	}
+}
