@@ -30,17 +30,20 @@ func _on_LevelTrigger_body_exited(body):
 func _input(event):
 	var level_name = get_parent().get_parent().level_name
 	var music = get_parent().get_parent().music
+	
+	var sfx_player = world.get_node("SFXPlayer")
+	
 	if event.is_action_pressed("inspect") and has_player_near == true:
 		if not locked:
-			$AudioStreamPlayer.stream = open_sound
-			$AudioStreamPlayer.play()
+			sfx_player.stream = open_sound
+			sfx_player.play()
 			emit_signal("level_change", level, door_index, level_name, music)
 		else:
 			if active_player.inventory.has("Key"):
 				var index = active_player.inventory.find("Key")
 				active_player.inventory.remove(index)
-				$AudioStreamPlayer.stream = open_sound
-				$AudioStreamPlayer.play()
+				sfx_player.stream = open_sound
+				sfx_player.play()
 				emit_signal("level_change", level, door_index, level_name, music)
 			else:
 				$AudioStreamPlayer.stream = locked_sound

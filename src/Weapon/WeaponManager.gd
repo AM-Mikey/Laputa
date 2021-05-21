@@ -2,6 +2,7 @@ extends Node
 #class_name Weapon, "res://assets/Icon/WeaponIcon.png"
 
 const EFFECT = preload("res://src/Effect/Effect.tscn")
+var sound_click = load("res://assets/SFX/snd_gun_click.ogg")
 
 var weapon
 
@@ -17,26 +18,31 @@ signal weapon_updated(icon_texture, level, xp, max_xp)
 
 
 func _ready():
-	weapon = player.weapon_array[0]
+	weapon = player.weapon_array.front()
 	
 	connect("ammo_updated", HUD, "_on_ammo_updated")
 	connect("weapon_updated", HUD, "_on_weapon_updated")
 	
 func update_weapon():
-	weapon = player.weapon_array[0]
-	player.get_node("WeaponSprite").texture = weapon.texture
-	emit_signal("ammo_updated", weapon.needs_ammo, weapon.ammo, weapon.max_ammo)
-	emit_signal("weapon_updated", weapon.icon_texture, weapon.level, weapon.xp, weapon.max_xp)
+	weapon = player.weapon_array.front()
+	if weapon != null:
+		player.get_node("WeaponSprite").texture = weapon.texture
+		emit_signal("ammo_updated", weapon.needs_ammo, weapon.ammo, weapon.max_ammo)
+		emit_signal("weapon_updated", weapon.icon_texture, weapon.level, weapon.xp, weapon.max_xp)
 
 func manual_fire(bullet_pos, effect_pos, bullet_rot): #treats autos and manuals like manual
+	if weapon == null:
+		return
+	
 	var cd = get_node("CooldownTimer")
 	if cd.time_left == 0:
-		cd.start(weapon.cooldown_time)
-		
 		if trigger_held == false: #check to see this is a new press
+			cd.start(weapon.cooldown_time)
 			if weapon.needs_ammo:
 				if weapon.ammo == 0:
 						print("out of ammo")
+						$WeaponAudio.stream = sound_click
+						$WeaponAudio.play()
 				else: #not ammo == 0
 					weapon.ammo -= 1
 					emit_signal("ammo_updated", weapon.needs_ammo, weapon.ammo, weapon.max_ammo)
@@ -46,14 +52,18 @@ func manual_fire(bullet_pos, effect_pos, bullet_rot): #treats autos and manuals 
 			trigger_held = true
 	
 func automatic_fire(bullet_pos, effect_pos, bullet_rot): #only fires autos but holds direction either way
+	if weapon == null:
+		return
+		
 	var cd = get_node("CooldownTimer")
 	if cd.time_left == 0:
-		cd.start(weapon.cooldown_time)
-	
 		if weapon.automatic:
+			cd.start(weapon.cooldown_time)
 			if weapon.needs_ammo:
 				if weapon.ammo == 0:
 						print("out of ammo")
+						$WeaponAudio.stream = sound_click
+						$WeaponAudio.play()
 				else: #not ammo == 0
 					weapon.ammo -= 1
 					emit_signal("ammo_updated", weapon.needs_ammo, weapon.ammo, weapon.max_ammo)
@@ -74,7 +84,6 @@ func prepare_bullet(bullet_pos, effect_pos, bullet_rot):
 	bullet.position = bullet_pos
 	bullet.origin = bullet_pos
 	bullet.direction = get_bullet_dir(bullet_rot)
-	bullet.rotation_degrees = bullet_rot
 	
 	get_tree().get_current_scene().add_child(bullet)
 	
@@ -92,7 +101,7 @@ func prepare_bullet(bullet_pos, effect_pos, bullet_rot):
 func get_bullet_dir(bullet_rot) -> Vector2:
 	if bullet_rot == 90: #Left
 		return Vector2(-1, 0)
-	elif bullet_rot == 270: #Right
+	elif bullet_rot == 270 or bullet_rot == -90: #Right
 		return Vector2(1, 0)
 	elif bullet_rot == 180: #Up
 		return Vector2(0, -1)

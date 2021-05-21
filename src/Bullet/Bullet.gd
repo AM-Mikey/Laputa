@@ -11,16 +11,6 @@ var gravity = 300
 var damage
 
 
-func _on_Bullet_body_entered(body): #detects enemies
-	if not disabled:
-		if body.get_collision_layer_bit(1): #enemy
-			var blood_direction = Vector2(floor((body.global_position.x - global_position.x)/10), floor((body.global_position.y - global_position.y)/10))
-			body.hit(damage, blood_direction)
-			queue_free()
-		elif body.get_collision_layer_bit(3): #world
-			visible = false
-			disabled = true
-			_fizzle_from_world()
 
 
 func _fizzle_from_world():

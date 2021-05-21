@@ -1,3 +1,3 @@
 extends Area2D
 
-export var ammo: int
+export var ammo: float

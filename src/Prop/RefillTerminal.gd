@@ -1,5 +1,7 @@
 extends Area2D
 
+var no_sound = load("res://assets/SFX/snd_quote_bonkhead.ogg")
+
 var has_player_near = false
 var active_player = null
 
@@ -19,4 +21,6 @@ func _input(event):
 		if active_player.hp < active_player.max_hp:
 			active_player.restore_hp()
 			print("restored hp to full")
-			
+		else:
+			$Audio.stream = no_sound
+			$Audio.play()

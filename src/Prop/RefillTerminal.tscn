@@ -55,5 +55,7 @@ hframes = 2
 anims/FlickerOff = SubResource( 2 )
 anims/FlickerOn = SubResource( 3 )
 
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_RefillTerminal_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_RefillTerminal_body_exited"]

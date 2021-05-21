@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "Large"
 length = 3.0
 tracks/0/type = "value"
@@ -31,11 +31,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 20 ]
+"values": [ 0.5 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Small"
+[sub_resource type="Animation" id=3]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame_coords")
@@ -59,19 +58,19 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 5 ]
+"values": [ 0.2 ]
 }
 
 [node name="Ammo" type="Area2D"]
 collision_layer = 4096
 collision_mask = 0
 script = ExtResource( 2 )
-ammo = 20
+ammo = 0.5
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
-vframes = 3
 hframes = 3
+vframes = 3
 frame = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -80,5 +79,5 @@ show_behind_parent = true
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Large = SubResource( 3 )
-anims/Small = SubResource( 2 )
+anims/Large = SubResource( 2 )
+anims/Small = SubResource( 3 )

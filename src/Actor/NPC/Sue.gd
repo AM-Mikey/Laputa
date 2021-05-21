@@ -8,6 +8,8 @@ onready var dialog = load_dialog(dialog_json)
 
 func _input(event):
 	if event.is_action_pressed("inspect") and has_player_near == true:
+		active_player.disabled = true
+		active_player.invincible = true
 		if talking == false:
 			talking = true
 			
@@ -27,4 +29,10 @@ func end_dialog():
 	talking = false
 	dialog_step = 1
 	emit_signal("stop_text")
+	
+	active_player.disabled = false
+	active_player.invincible = false
+
+
+
 

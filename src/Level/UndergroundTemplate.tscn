@@ -4,7 +4,7 @@
 [ext_resource path="res://src/Tile/MimigaB.tres" type="TileSet" id=2]
 [ext_resource path="res://src/Tile/MimigaM.tres" type="TileSet" id=3]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Prop/Chest.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Prop/ChestKeyItem.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/Background/bk0.bmp" type="Texture" id=8]
 
 [node name="IndoorTemplate" type="Node2D"]

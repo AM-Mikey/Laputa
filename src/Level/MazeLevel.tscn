@@ -9,7 +9,7 @@
 [ext_resource path="res://src/Tile/LabyrinthF.tres" type="TileSet" id=7]
 [ext_resource path="res://src/Actor/Enemy/Trenchie.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Prop/Sign.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/Prop/Chest.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/Prop/ChestKeyItem.tscn" type="PackedScene" id=10]
 
 [node name="MazeLevel" type="Node2D"]
 script = ExtResource( 5 )

@@ -65,9 +65,9 @@ func get_move_velocity(
 		out.y = speed.y * move_direction.y
 	return out
 
-func _input(event):
-	if event.is_action_pressed("debug"):
-		print($Timer.time_left)
-		print($Timer.is_stopped())
-		print("target", target)
-		print("move direction", move_direction)
+#func _input(event):
+#	if event.is_action_pressed("debug"):
+#		print($Timer.time_left)
+#		print($Timer.is_stopped())
+#		print("target", target)
+#		print("move direction", move_direction)

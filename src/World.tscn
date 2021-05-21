@@ -13,6 +13,7 @@
 
 [node name="World" type="Node2D"]
 script = ExtResource( 8 )
+starting_level = "res://src/Level/Demo/01PirateCliff.tscn"
 
 [node name="Recruit" parent="." instance=ExtResource( 5 )]
 position = Vector2( 120, 176 )
@@ -44,6 +45,9 @@ visible = false
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 bus = "Music"
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+bus = "SFX"
 
 [connection signal="ammo_updated" from="Recruit" to="UILayer/HUD" method="_on_ammo_updated"]
 [connection signal="player_experience_updated" from="Recruit" to="UILayer/HUD" method="_on_Recruit_player_experience_updated"]

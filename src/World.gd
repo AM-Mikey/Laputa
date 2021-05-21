@@ -7,8 +7,8 @@ var data = {
 	"level_data" : {}
 	}
 
-var starting_level = load("res://src/Level/DebugLevel.tscn")
-onready var current_level = starting_level.instance() #assumes current level to start with, might cause issues down the line
+export var starting_level = "res://src/Level/DebugLevel.tscn"
+onready var current_level = load(starting_level).instance() #assumes current level to start with, might cause issues down the line
 
 func _ready():
 	add_child(current_level)
@@ -70,6 +70,11 @@ func _on_level_change(level, door_index, level_name, music): #clean this up once
 	yield(get_tree().create_timer(0.01), "timeout")
 	$Recruit/Camera2D.smoothing_enabled = true
 	
+
+
+
+
+
 
 func load_music(music):
 	$MusicPlayer.stream = load(music)
@@ -145,7 +150,7 @@ func load_player_data():
 			print("ERROR: no save file found")
 
 func save_level_data():
-	var containers = get_tree().get_nodes_in_group("Container")
+	var containers = get_tree().get_nodes_in_group("Containers")
 	var containers_if_used = []
 	for c in containers:
 		containers_if_used.append(c.used)

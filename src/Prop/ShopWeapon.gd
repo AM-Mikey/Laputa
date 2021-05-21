@@ -18,7 +18,7 @@ var active_tooltip: Node
 onready var ui = get_tree().get_root().get_node("World/UILayer")
 
 func _ready():
-	add_to_group("containers")
+	add_to_group("Containers")
 	$MoneyNumber.value = price
 	$MoneyNumber.display_number()
 	
@@ -60,7 +60,8 @@ func _input(event):
 				active_tooltip.queue_free()
 				$AudioStreamPlayer.stream = get_sound
 				$AudioStreamPlayer.play()
-				active_player.weapon_array.append(weapon)
+				active_player.weapon_array.push_front(weapon)
+				active_player.get_node("WeaponManager").update_weapon()
 				print("added weapon '", weapon_name, "' to inventory")
 			else:
 				print("not enough money")

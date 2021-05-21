@@ -29,21 +29,21 @@ modulate = Color( 0, 0.0156863, 0.937255, 0.392157 )
 position = Vector2( -80, -64 )
 shape = SubResource( 2 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-
-[node name="SpacialHurt" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 4 )
-bus = "SFX"
-
-[node name="SpacialFire" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
-bus = "SFX"
-
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
 hframes = 18
 frame = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+bus = "SFX"
+
+[node name="PosFire" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+bus = "SFX"
 
 [node name="FireCooldown" type="Timer" parent="."]
 one_shot = true

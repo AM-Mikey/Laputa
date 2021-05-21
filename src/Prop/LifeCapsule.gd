@@ -6,7 +6,7 @@ var has_player_near = false
 var active_player = null
 
 func _ready():
-	add_to_group("Container")
+	add_to_group("Containers")
 	if not used:
 		$AnimationPlayer.play("Flash")
 

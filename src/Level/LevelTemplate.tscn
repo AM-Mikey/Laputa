@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Background/bkMaze.bmp" type="Texture" id=4]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
 
@@ -31,20 +32,19 @@ collision_layer = 8
 collision_mask = 0
 format = 1
 
-[node name="Props" type="Node2D" parent="."]
-
-[node name="Actors" type="Node2D" parent="."]
-
 [node name="Triggers" type="Node2D" parent="."]
 
 [node name="Door" parent="Triggers" instance=ExtResource( 2 )]
 position = Vector2( 136, -16 )
 level = "res://src/Levels/IndoorTemplate.tscn"
-door_index = 1
 
 [node name="KillBox" parent="Triggers" instance=ExtResource( 1 )]
 position = Vector2( 240, 808 )
 scale = Vector2( 482.952, 10 )
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="Actors" type="Node2D" parent="."]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -59,3 +59,7 @@ stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CameraLimiter" parent="." instance=ExtResource( 3 )]
+
+[editable path="CameraLimiter"]

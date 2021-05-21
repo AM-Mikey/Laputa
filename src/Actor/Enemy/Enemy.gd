@@ -37,11 +37,11 @@ func _ready():
 	timer.start(damagenum_reset_time)
 
 func _on_timer_timeout():
-	if recent_damage_taken != 0:
-		do_damage_num(recent_damage_taken)
-		recent_damage_taken = 0
 	if not dead:
-		timer.start(damagenum_reset_time)
+		if recent_damage_taken != 0:
+			do_damage_num(recent_damage_taken)
+			recent_damage_taken = 0
+			timer.start(damagenum_reset_time)
 
 func hit(damage, blood_direction):
 	$PosHurt.play()
@@ -64,6 +64,7 @@ func die():
 	if not dead:
 		dead = true
 		do_death_drop()
+		do_damage_num(recent_damage_taken)
 		
 		player_actor.is_in_enemy = false #THIS IS A BAD WAY TO DO THIS if a player is in a different enemy when this one dies, they will be immune to that enemy
 		
@@ -148,6 +149,6 @@ func do_death_drop():
 	else:
 		pass
 
-func _input(event):
-	if event.is_action_pressed("debug"):
-		print("enemy hp in instance '", name, "' : ", hp)
+#func _input(event):
+#	if event.is_action_pressed("debug"):
+#		print("enemy hp in instance '", name, "' : ", hp)

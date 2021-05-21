@@ -16,7 +16,7 @@ func _on_display_text(npc_path, display_name, face, expression, text, justify, v
 	align_box()
 	visible = true
 	
-	if face != "No Face" and face != "":
+	if face != "":
 		$Face.texture = load("res://assets/UI/Face/%s" % face + ".png")
 		$Face.hframes = $Face.texture.get_width()/48
 		$Face.frame = expression
@@ -26,7 +26,11 @@ func _on_display_text(npc_path, display_name, face, expression, text, justify, v
 #	else:
 #		sb.TEXT_VOICE = "null"
 	justify_text(justify)
-	sb.start(String("[`c]" + display_name + ":  [`r]" + text))
+	
+	if display_name != "":
+		sb.start(String("[`c]" + display_name + ":  [`r]" + text))
+	else:
+		sb.start(text)
 
 func _on_speed_text():
 	sb.TEXT_SPEED = .005

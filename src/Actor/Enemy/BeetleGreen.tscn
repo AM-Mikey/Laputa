@@ -88,7 +88,7 @@ anims/MoveRight = SubResource( 3 )
 anims/WaitLeft = SubResource( 4 )
 anims/WaitRight = SubResource( 5 )
 
-[node name="SpacialHurt" type="AudioStreamPlayer2D" parent="."]
+[node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
 attenuation = 0.0583146
 bus = "SFX"

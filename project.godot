@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Actor/Actor.gd"
 }, {
+"base": "Actor",
+"class": "Boss",
+"language": "GDScript",
+"path": "res://src/Actor/Boss/Boss.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Bullet",
 "language": "GDScript",
@@ -66,6 +71,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Actor": "res://assets/Icon/ActorIcon.png",
+"Boss": "res://assets/Icon/BossIcon.png",
 "Bullet": "res://assets/Icon/BulletIcon.png",
 "ContributorClass": "",
 "Enemy": "res://assets/Icon/EnemyIcon.png",
@@ -80,7 +86,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Cave Story Game"
+config/name="Laputa"
 run/main_scene="res://src/World.tscn"
 config/use_custom_user_dir=true
 config/icon="res://assets/UI/Face/FaceREDO.png"
@@ -297,10 +303,12 @@ load_data={
 2d_physics/layer_6="bullet_friend"
 2d_physics/layer_7="bullet_foe"
 2d_physics/layer_8="npc"
+2d_physics/layer_9="breakable"
 2d_physics/layer_11="hp"
 2d_physics/layer_12="xp"
 2d_physics/layer_13="ammo"
 2d_physics/layer_14="kill"
+2d_physics/layer_15="hazard"
 
 [rendering]
 

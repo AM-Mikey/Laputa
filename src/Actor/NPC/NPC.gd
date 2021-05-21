@@ -80,13 +80,10 @@ func animate():
 func _on_PlayerDetector_body_entered(body):
 	has_player_near = true
 	active_player = body
-
-func _on_ExitDetector_body_exited(body):
+	
+func _on_PlayerDetector_body_exited(body):
 	has_player_near = false
-	emit_signal("stop_text")
-	if talking == true:
-		talking = false
-
+	active_player = null
 
 func progress_dialog(dialog):
 	if progress_disabled == false:

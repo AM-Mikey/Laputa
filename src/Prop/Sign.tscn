@@ -30,5 +30,6 @@ shape = SubResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
 texture = ExtResource( 1 )
+
 [connection signal="body_entered" from="." to="." method="_on_Sign_body_entered"]
 [connection signal="body_exited" from="ExitDetector" to="." method="_on_ExitDetector_body_exited"]

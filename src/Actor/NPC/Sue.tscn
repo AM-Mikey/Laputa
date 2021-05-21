@@ -1,16 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/Actor/NPC/Sue.png" type="Texture" id=1]
 [ext_resource path="res://src/Actor/NPC/Sue.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7, 7 )
+extents = Vector2( 8, 7 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 8 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 24, 24 )
 
 [node name="Sue" type="KinematicBody2D"]
 collision_layer = 128
@@ -29,17 +26,10 @@ collision_layer = 0
 modulate = Color( 1, 1, 1, 0.172549 )
 shape = SubResource( 2 )
 
-[node name="ExitDetector" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitDetector"]
-modulate = Color( 1, 1, 1, 0.109804 )
-shape = SubResource( 3 )
-
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 5
 vframes = 2
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
-[connection signal="body_exited" from="ExitDetector" to="." method="_on_ExitDetector_body_exited"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

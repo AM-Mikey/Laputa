@@ -18,7 +18,7 @@ var active_tooltip: Node
 onready var ui = get_tree().get_root().get_node("World/UILayer")
 
 func _ready():
-	add_to_group("containers")
+	add_to_group("Containers")
 	$MoneyNumber.value = price
 	$MoneyNumber.display_number()
 	

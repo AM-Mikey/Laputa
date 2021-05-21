@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/SFX/snd_enemy_hurt.ogg" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 7.5 )
+extents = Vector2( 8, 6.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 72, 48 )
@@ -146,7 +146,7 @@ anims/JumpRight = SubResource( 6 )
 anims/LookLeft = SubResource( 7 )
 anims/LookRight = SubResource( 8 )
 
-[node name="SpacialHurt" type="AudioStreamPlayer2D" parent="."]
+[node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 bus = "SFX"
 area_mask = 2

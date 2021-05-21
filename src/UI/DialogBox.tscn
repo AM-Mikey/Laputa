@@ -37,7 +37,7 @@ texture = ExtResource( 3 )
 [node name="SyndiBox" type="ReferenceRect" parent="."]
 margin_left = 136.0
 margin_top = 200.0
-margin_right = 432.0
+margin_right = 433.0
 margin_bottom = 248.0
 rect_min_size = Vector2( 296, 48 )
 rect_scale = Vector2( 0.997449, 1 )
@@ -64,7 +64,6 @@ __meta__ = {
 }
 
 [node name="NoFaceRect" type="ReferenceRect" parent="."]
-visible = false
 margin_left = 80.0
 margin_top = 200.0
 margin_right = 432.0

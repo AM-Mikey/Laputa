@@ -38,3 +38,6 @@ func _on_CollisionDetector_body_entered(body):
 			visible = false
 			disabled = true
 			_fizzle_from_world()
+
+
+

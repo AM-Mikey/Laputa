@@ -6,23 +6,29 @@ onready var player = get_tree().get_root().get_node("World/Recruit")
 
 
 func _process(delta):
-	$CooldownBar/TextureProgress.value = 100 - ((player.get_node("WeaponManager/CooldownTimer").time_left / player.get_node("WeaponManager").weapon.cooldown_time) * 100)
+	if player.get_node("WeaponManager").weapon != null:
+		if $CooldownBar/TextureProgress.visible == false:
+			$CooldownBar/TextureProgress.visible = true
+		$CooldownBar/TextureProgress.value = 100 - ((player.get_node("WeaponManager/CooldownTimer").time_left / player.get_node("WeaponManager").weapon.cooldown_time) * 100)
 
 
-func _on_Recruit_setup_ui(hp, max_hp, level, xp, max_xp, needs_ammo, ammo, max_ammo, icon_texture):
-	
+func _on_Recruit_setup_ui(hp, max_hp, total_xp, level, xp, max_xp, needs_ammo, ammo, max_ammo, icon_texture):
+	print("setting up ui")
 	$HpBar/HpProgress.value = hp
 	$HpBar/HpProgress.max_value = max_hp
 	display_hp_number(hp)
 	$HpBar/HpLost.value = hp
 	$HpBar/HpLost.max_value = max_hp
 	
+	display_money_number(total_xp)
+	
 	$XpBar/Num.frame_coords.x = level
 	$XpBar/XpProgress.value = xp
 	$XpBar/XpProgress.max_value = max_xp
 	
-	$Weapon/Sprite.texture = icon_texture
-	$Weapon/Sprite/Shadow.texture = icon_texture
+	if icon_texture != null:
+		$Weapon/Sprite.texture = icon_texture
+		$Weapon/Sprite/Shadow.texture = icon_texture
 	
 	if needs_ammo:
 		display_ammo_number(ammo, max_ammo)
@@ -62,10 +68,11 @@ func display_hp_number(hp):
 		$HpBar/Num1.frame_coords.x = 9
 		$HpBar/Num2.frame_coords.x = 9
 	else:
-		print("ERROR: cannot display hp number")
+		print("ERROR: hud cannot display hp number")
 
-func _on_Recruit_player_experience_updated(level, max_level, xp, max_xp):
+func _on_Recruit_player_experience_updated(total_xp, level, max_level, xp, max_xp):
 	modulate = Color(1, 1, 1) #Flash animation from stopping on a transparent frame
+	display_money_number(total_xp)
 	$XpBar/Num.frame_coords.x = level
 	$XpBar/XpProgress.value = xp
 	$XpBar/XpProgress.max_value = max_xp
@@ -94,7 +101,7 @@ func _on_ammo_updated(needs_ammo, ammo, max_ammo):
 		display_infinite_ammo()
 
 func display_ammo_number(ammo, max_ammo):
-	$Weapon/AmmoCount/Divider.visible = true
+	$Weapon/AmmoCount.visible = true
 	if ammo >= 0 and ammo < 10:
 		$Weapon/AmmoCount/Num1.visible = false
 		$Weapon/AmmoCount/Num2.visible = false
@@ -121,7 +128,7 @@ func display_ammo_number(ammo, max_ammo):
 		$Weapon/AmmoCount/Num2.frame_coords.x = 9
 		$Weapon/AmmoCount/Num3.frame_coords.x = 9
 	else:
-		print("ERROR: cannot display current ammo number with value: ", ammo)
+		print("ERROR: hud cannot display current ammo number with value: ", ammo)
 
 	if max_ammo >= 0 and max_ammo < 10:
 		$Weapon/AmmoCount/Num4.visible = true
@@ -149,17 +156,58 @@ func display_ammo_number(ammo, max_ammo):
 		$Weapon/AmmoCount/Num5.frame_coords.x = 9
 		$Weapon/AmmoCount/Num6.frame_coords.x = 9
 	else:
-		print("ERROR: cannot display max ammo number with value: ", max_ammo)
+		print("ERROR: hud cannot display max ammo number with value: ", max_ammo)
 
 func display_infinite_ammo():
-	$Weapon/AmmoCount/Num1.visible = false
-	$Weapon/AmmoCount/Num2.visible = false
-	$Weapon/AmmoCount/Num3.visible = false
-	$Weapon/AmmoCount/Num4.visible = false
-	$Weapon/AmmoCount/Num5.visible = false
-	$Weapon/AmmoCount/Num6.visible = false
-	$Weapon/AmmoCount/Divider.visible = false
+	$Weapon/AmmoCount.visible = false
 
 
 func _on_Recruit_cooldown_updated(time):
 	pass # Replace with function body.
+
+
+func display_money_number(total_xp):
+	if total_xp >= 0 and total_xp < 10:
+		$MoneyCount/Num1.visible = false
+		$MoneyCount/Num2.visible = false
+		$MoneyCount/Num3.visible = true
+		$MoneyCount/Num3.frame_coords.x = total_xp
+	elif total_xp >= 10 and total_xp < 100:
+		$MoneyCount/Num1.visible = false
+		$MoneyCount/Num2.visible = true
+		$MoneyCount/Num3.visible = true
+		$MoneyCount/Num2.frame_coords.x = (total_xp % 100) / 10
+		$MoneyCount/Num3.frame_coords.x = total_xp % 10
+	elif total_xp >= 100 and total_xp < 1000:
+		$MoneyCount/Num1.visible = true
+		$MoneyCount/Num2.visible = true
+		$MoneyCount/Num3.visible = true
+		$MoneyCount/Num1.frame_coords.x = (total_xp % 1000) / 100
+		$MoneyCount/Num2.frame_coords.x = (total_xp % 100) / 10
+		$MoneyCount/Num3.frame_coords.x = total_xp % 10
+	elif total_xp >= 1000:
+		$MoneyCount/Num1.visible = true
+		$MoneyCount/Num2.visible = true
+		$MoneyCount/Num3.visible = true
+		$MoneyCount/Num1.frame_coords.x = 9
+		$MoneyCount/Num2.frame_coords.x = 9
+		$MoneyCount/Num3.frame_coords.x = 9
+	else:
+		print("ERROR: hud cannot display money number")
+
+
+func _on_boss_setup_ui(display_name, hp, max_hp):
+	pass
+
+func _on_boss_health_updated(hp):
+	$HpBar/HpProgress.value = hp
+	display_hp_number(hp)
+	if hp < $HpBar/HpLost.value:
+		$AnimationPlayer.play("Flash")
+		$AudioStreamPlayer.stream = _hurt
+		$AudioStreamPlayer.play()
+	#elif hp > $HpBar/HpLost.value:
+		#$AudioStreamPlayer.stream = _heal
+		#$AudioStreamPlayer.play()
+	$HpBar/LostTween.interpolate_property($HpBar/HpLost, "value", $HpBar/HpLost.value, hp, 0.4, Tween.TRANS_SINE, Tween.EASE_IN_OUT, 0.4)
+	$HpBar/LostTween.start()
