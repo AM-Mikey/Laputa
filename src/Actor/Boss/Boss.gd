@@ -3,13 +3,26 @@ class_name Boss, "res://assets/Icon/BossIcon.png"
 
 const BLOOD = preload("res://src/Effect/EnemyBloodEffect.tscn")
 
+signal setup_ui(display_name, hp, max_hp)
+signal health_updated(hp)
 
+var display_name: String
 var hp: int
+var max_hp: int
 var damage_on_contact: int
+var recent_damage_taken: int
 
+onready var hud = get_tree().get_root().get_node("World/UILayer/HUD")
 
+func _ready():
+	hud.get_node("Boss").visible = true
+	
+	connect("setup_ui", hud, "_on_boss_setup_ui")
+	connect("health_updated", hud, "_on_boss_health_updated")
 
 func hit(damage, blood_direction):
+	emit_signal("health_updated", hp)
+	
 	$PosHurt.play()
 	hp -= damage
 	var blood = BLOOD.instance()
@@ -24,3 +37,8 @@ func hit(damage, blood_direction):
 	recent_damage_taken += damage
 	if hp <= 0:
 		die()
+
+
+func die():
+	hud.get_node("Boss").visible = false
+	queue_free()

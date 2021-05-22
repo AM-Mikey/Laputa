@@ -22,3 +22,5 @@ hframes = 6
 vframes = 4
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="PosHurt" type="AudioStreamPlayer2D" parent="."]

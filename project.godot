@@ -91,13 +91,6 @@ run/main_scene="res://src/World.tscn"
 config/use_custom_user_dir=true
 config/icon="res://assets/UI/Face/FaceREDO.png"
 
-[autoload]
-
-PluginSettings="*res://addons/github-integration/scripts/PluginSettings.gd"
-IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
-UserData="*res://addons/github-integration/scripts/user_data.gd"
-RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
-
 [display]
 
 window/size/width=512
@@ -109,7 +102,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/GodotTIE/plugin.cfg", "res://addons/SyndiBox/plugin.cfg", "res://addons/github-integration/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/GodotTIE/plugin.cfg", "res://addons/SyndiBox/plugin.cfg" )
 
 [importer_defaults]
 
