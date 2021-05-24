@@ -2,8 +2,8 @@ extends Player
 
 export var run_anim_speed = 1.25
 export var acceleration = 50
-export var max_x_speed = 200
-export var jump_speed = 250
+export var max_x_speed = 82.5
+export var jump_speed = 195
 export var minimum_jump_time = 0.1
 export var ground_cof = 0.2
 export var air_cof = 0.05
@@ -19,6 +19,7 @@ var bonk_distance = 4
 
 onready var animation_tree = get_node("AnimationTree")
 onready var animation_mode = animation_tree.get("parameters/playback")
+onready var world = get_tree().get_root().get_node("World")
 
 func _physics_process(delta):
 	if disabled != true:
@@ -522,7 +523,7 @@ func pan_camera_vertical(direction):
 	var camera = $Camera2D
 	var tween = $Camera2D/TweenVertical
 	
-	var camera_pan_distance = 2
+	var camera_pan_distance = 2 / world.resolution_scale
 	var camera_pan_time = 1.5
 	var camera_pan_delay = 0
 	
@@ -550,7 +551,7 @@ func pan_camera_horizontal(direction, _velocity):
 	var camera = $Camera2D
 	var tween = $Camera2D/TweenHorizontal
 	
-	var camera_pan_distance = 1.5 #from 1.5 previously
+	var camera_pan_distance = 2.5 / world.resolution_scale
 	var camera_pan_time = 1.5
 	var camera_pan_delay = 0
 	
