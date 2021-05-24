@@ -17,17 +17,30 @@ var bounciness = .6
 var explosion_time = 2.5
 var start_velocity
 
+var touched_floor = false
 
 func _ready():
+	#set_collision_mask_bit(3, false) #world
+	
 	$ExplosionDetector.scale = Vector2.ZERO
-	$ExplosionDetector.set_collision_mask_bit(1, false)
+	$ExplosionDetector.set_collision_mask_bit(1, false) #enemy
 	$ExplosionDetector.set_collision_mask_bit(8, false)
 	velocity = get_velocity(projectile_speed, direction)
 	start_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 	$Timer.start(explosion_time)
-	$AnimationPlayer.play("Flip")
+	if direction == Vector2.LEFT:
+		$AnimationPlayer.play("FlipLeft")
+	else:
+		$AnimationPlayer.play("FlipRight")
+	
+	#yield(get_tree().create_timer(0.2), "timeout") #turn collision back on after it's left our body
+	#set_collision_mask_bit(3, true) #world
+
 
 func _physics_process(delta):
+	if is_on_floor():
+		touched_floor = true
+	
 	if abs(velocity.x) > minimum_speed and abs(velocity.y) > minimum_speed:
 		if disabled == false:
 			var collision = move_and_collide(velocity * delta)
@@ -65,8 +78,11 @@ func get_velocity(projectile_speed, direction) -> Vector2:
 func _on_CollisionDetector_body_entered(body):
 	if disabled == false:
 		if body.get_collision_layer_bit(1): #enemy
-			var blood_direction = Vector2(floor((body.global_position.x - global_position.x)/10), floor((body.global_position.y - global_position.y)/10))
-			body.hit(damage, blood_direction)
+			var blood_direction = Vector2(floor((body.global_position .x - global_position.x)/10), floor((body.global_position.y - global_position.y)/10))
+			if touched_floor == false:
+				body.hit(damage, blood_direction)
+			else:
+				body.hit(damage/2, blood_direction)
 			queue_free()
 
 
@@ -84,7 +100,7 @@ func _on_ExplosionDetector_body_entered(body):
 	if disabled == false:
 		if body.get_collision_layer_bit(1): #enemy
 			var blood_direction = Vector2(floor((body.global_position.x - global_position.x)/10), floor((body.global_position.y - global_position.y)/10))
-			body.hit(damage, blood_direction)
+			body.hit(damage/4, blood_direction)
 		elif body.get_collision_layer_bit(8): #breakable
 			body.on_break("fire")
 			print("ok")

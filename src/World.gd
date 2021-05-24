@@ -1,5 +1,6 @@
 extends Node2D
 
+var resolution_scale = 4.0
 
 var save_path = "user://save.dat"
 var data = {
@@ -11,10 +12,29 @@ export var starting_level = "res://src/Level/DebugLevel.tscn"
 onready var current_level = load(starting_level).instance() #assumes current level to start with, might cause issues down the line
 
 func _ready():
+	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
+	_on_viewport_size_changed()
 	add_child(current_level)
 	if $UILayer/TitleScreen.visible == true:
 		show_title()
 		
+
+func _on_viewport_size_changed():
+	print("viewport size changed")
+	var viewport_size = get_tree().get_root().size
+	
+	if viewport_size.y <= 405:
+		resolution_scale = 1.0
+	elif viewport_size.y <= 675:
+		resolution_scale = 2.0
+	elif viewport_size.y <= 945:
+		resolution_scale = 3.0
+	else:
+		resolution_scale = 4.0
+	
+	$Recruit.get_node("Camera2D").zoom = Vector2(1 / resolution_scale, 1 / resolution_scale)
+	$UILayer.scale = Vector2(resolution_scale, resolution_scale)
+	
 
 func show_title():
 	$UILayer/HUD.visible =false

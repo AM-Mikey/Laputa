@@ -550,7 +550,7 @@ func pan_camera_horizontal(direction, _velocity):
 	var camera = $Camera2D
 	var tween = $Camera2D/TweenHorizontal
 	
-	var camera_pan_distance = 1.5
+	var camera_pan_distance = 1.5 #from 1.5 previously
 	var camera_pan_time = 1.5
 	var camera_pan_delay = 0
 	
@@ -573,5 +573,7 @@ func home_camera_horizontal():
 	tween.interpolate_property(camera, "offset_h", camera.offset_h, 0, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween, "tween_completed")
+
+
 
 

@@ -139,13 +139,13 @@ volume_db = -5.0
 bus = "SFX"
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 40, 44 )
+position = Vector2( 56, 44 )
 texture = ExtResource( 3 )
 
 [node name="HpBar" type="Control" parent="."]
-margin_left = 16.0
+margin_left = 32.0
 margin_top = 40.0
-margin_right = 80.0
+margin_right = 96.0
 margin_bottom = 48.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -192,9 +192,9 @@ texture = ExtResource( 12 )
 [node name="LostTween" type="Tween" parent="HpBar"]
 
 [node name="XpBar" type="Control" parent="."]
-margin_left = 40.0
+margin_left = 56.0
 margin_top = 32.0
-margin_right = 80.0
+margin_right = 96.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -234,9 +234,9 @@ position = Vector2( 7, 13 )
 texture = ExtResource( 11 )
 
 [node name="CooldownBar" type="Control" parent="."]
-margin_left = 25.0
+margin_left = 40.0
 margin_top = 51.0
-margin_right = 62.0
+margin_right = 77.0
 margin_bottom = 53.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -349,7 +349,8 @@ vframes = 4
 frame = 11
 
 [node name="MoneyCount" type="Control" parent="."]
-margin_right = 40.0
+margin_left = 16.0
+margin_right = 56.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -383,6 +384,7 @@ vframes = 2
 frame = 10
 
 [node name="Boss" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {

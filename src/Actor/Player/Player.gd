@@ -77,6 +77,12 @@ func _input(event):
 		
 		if event.is_action_pressed("toggle_debug"):
 			debug_mode()
+	
+	if Input.is_action_just_pressed("window_resize"):
+		print(OS.get_window_size())
+		var viewport_size = Vector2(OS.get_window_size().x/2, OS.get_window_size().y/2) 
+		get_tree().get_root().size = viewport_size
+		print(get_tree().get_root().size)
 
 func shift_weapon_left():
 		var weapon_to_move = weapon_array.pop_back()
@@ -274,29 +280,23 @@ func _on_EntityDetector_area_exited(area):
 	if area.get_collision_layer_bit(14):
 		is_in_hazard = false
 
-#func _on_HeadDetectorLeft_body_entered(body):
-#
-#
-#	if body.get_collision_layer_bit(1): #enemy
-#		print("enemy on player head")
-#		enemy_on_head = true
-#		yield(get_tree().create_timer(.1), "timeout")
-#		while enemy_on_head == true and not dead: #checks if it's still the case
-#			var enemy_push_dir = Vector2(sign(body.global_position.x - global_position.x), -1)
-#			print("pushing enemy in direction:", enemy_push_dir)
-#			body.move_and_slide(Vector2(enemy_push_dir.x * 1000 * get_process_delta_time(), enemy_push_dir.y * 10), FLOOR_NORMAL)
-#			yield(get_tree(),"idle_frame")
-#
-#	if body.get_collision_layer_bit(3): #world
-#		("player bonked head")
-#		$BonkSound.play()
-#		var player_push_dir = Vector2(sign(global_position.x - body.global_position.x), -1)
-#		print("player: ", global_position.x)
-#		print("body: ", body.global_position.x)
-#		print(player_push_dir)
-		
 
-		
+func _on_HeadDetector_body_entered(body):
+	if body.get_collision_layer_bit(1): #enemy
+		print("enemy on player head")
+		enemy_on_head = true
+		yield(get_tree().create_timer(.1), "timeout")
+		while enemy_on_head == true and not dead: #checks if it's still the case
+			var enemy_push_dir = Vector2(sign(body.global_position.x - global_position.x), -1)
+			print("pushing enemy in direction:", enemy_push_dir)
+			body.move_and_slide(Vector2(enemy_push_dir.x * 1000 * get_process_delta_time(), enemy_push_dir.y * 10), FLOOR_NORMAL)
+			yield(get_tree(),"idle_frame")
+
+
+
+func _on_HeadDetector_body_exited(body): #not the best way, cant tell if multiple enemies are on head
+	enemy_on_head = false
+
 
 
 func restore_hp():
@@ -316,8 +316,10 @@ func update_inventory():
 
 func debug(move_direction, look_direction):
 	if Input.is_action_just_pressed("debug"):
+		print("DEBUG STATS")
 		print("player hp: ", hp)
 		print("player max_hp: ", max_hp)
+		print("player position: ", global_position)
 		print("move_direction: ", move_direction)
 		print("look_direction: ", look_direction)
 		print("total xp: ", total_xp)
@@ -327,6 +329,10 @@ func debug(move_direction, look_direction):
 		print("forgiveness timer time left: ", $ForgivenessTimer.time_left)
 		print("is on floor: ", is_on_floor())
 		print("camera offset: ", $Camera2D.offset)
+		
+		print("screen size: ", OS.get_screen_size())
+		print("window size: ", OS.get_window_size())
+		print("viewport size: ", get_tree().get_root().size)
 
 func debug_mode():
 	if debug_active == false:

@@ -93,12 +93,10 @@ config/icon="res://assets/UI/Face/FaceREDO.png"
 
 [display]
 
-window/size/width=512
-window/size/height=288
+window/size/width=480
+window/size/height=270
 window/size/test_width=1920
 window/size/test_height=1080
-window/stretch/mode="2d"
-window/stretch/aspect="expand"
 
 [editor_plugins]
 
@@ -283,6 +281,11 @@ save_data={
 load_data={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777245,"unicode":0,"echo":false,"script":null)
+ ]
+}
+window_resize={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777229,"unicode":0,"echo":false,"script":null)
  ]
 }
 
