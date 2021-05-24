@@ -154,7 +154,7 @@ position = Vector2( 736, 480 )
 
 [node name="Sign" parent="Props" instance=ExtResource( 10 )]
 position = Vector2( 24, 152 )
-text = "testing out this sign thing"
+text = "hi liz :>"
 
 [node name="RefillTerminal" parent="Props" instance=ExtResource( 11 )]
 position = Vector2( 280, 208 )
@@ -244,11 +244,12 @@ position = Vector2( 88, 56 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2( 0.1, 0.1 )
-motion_mirroring = Vector2( 256, 256 )
 
 [node name="Background" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-margin_right = 512.0
-margin_bottom = 288.0
+margin_left = -1936.0
+margin_top = -1056.0
+margin_right = 1336.0
+margin_bottom = 1304.0
 texture = ExtResource( 15 )
 expand = true
 stretch_mode = 2

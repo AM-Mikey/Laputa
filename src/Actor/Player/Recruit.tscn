@@ -2797,13 +2797,6 @@ modulate = Color( 1, 1, 1, 0.4 )
 position = Vector2( 0, -7.5 )
 shape = ExtResource( 3 )
 
-[node name="Back" type="Sprite" parent="."]
-position = Vector2( 0, -16 )
-texture = ExtResource( 5 )
-hframes = 12
-vframes = 60
-frame = 12
-
 [node name="WeaponSprite" type="Sprite" parent="."]
 position = Vector2( -6, -10 )
 
@@ -2812,6 +2805,13 @@ position = Vector2( 0, -16 )
 texture = ExtResource( 5 )
 hframes = 12
 vframes = 60
+
+[node name="Back" type="Sprite" parent="."]
+position = Vector2( 0, -16 )
+texture = ExtResource( 5 )
+hframes = 12
+vframes = 60
+frame = 12
 
 [node name="BulletVector" type="RayCast2D" parent="."]
 modulate = Color( 1, 0, 0, 0.784314 )
@@ -2860,7 +2860,6 @@ anims/StandRightLookUp = SubResource( 30 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.25, 0.25 )
-limit_bottom = 500
 limit_smoothed = true
 smoothing_enabled = true
 

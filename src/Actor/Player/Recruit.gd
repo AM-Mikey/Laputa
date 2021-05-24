@@ -1,5 +1,7 @@
 extends Player
 
+const BLACKBAR = preload("res://src/Utility/BlackBar.tscn")
+
 export var run_anim_speed = 1.25
 export var acceleration = 50
 export var max_x_speed = 82.5
@@ -514,10 +516,24 @@ func _on_BonkDetector_body_entered(body, direction):
 
 func _on_limit_camera(left, right, top, bottom):
 	var camera = $Camera2D
-	camera.limit_left = left
-	camera.limit_right = right
-	camera.limit_top = top
-	camera.limit_bottom = bottom
+	if  OS.get_window_size().x > right - left:
+		print("WARNING: window width larger than camera limit")
+		var extra_margin = (OS.get_window_size().x - (right - left))/2
+		camera.limit_left = left - extra_margin
+		camera.limit_right = right + extra_margin
+		
+		world.get_node("CanvasLayer").add_child
+	else:
+		camera.limit_left = left
+		camera.limit_right = right
+	if OS.get_window_size().y > bottom - top:
+		print("WARNING: window height larger than camera limit")
+		var extra_margin = (OS.get_window_size().y - (bottom - top))/2
+		camera.limit_top = top - extra_margin
+		camera.limit_bottom = bottom  + extra_margin
+	else:
+		camera.limit_top = top
+		camera.limit_bottom = bottom
 
 func pan_camera_vertical(direction):
 	var camera = $Camera2D

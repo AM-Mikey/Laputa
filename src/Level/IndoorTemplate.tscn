@@ -1,28 +1,20 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=1]
+[ext_resource path="res://src/Background/BackgroundIndoor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Tile/House.tres" type="TileSet" id=3]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/LightTest.png" type="Texture" id=6]
-[ext_resource path="res://assets/Background/bk0.bmp" type="Texture" id=8]
 
 [node name="IndoorTemplate" type="Node2D"]
 script = ExtResource( 1 )
 level_name = "Abandoned House"
 music = "res://assets/Music/Safety.ogg"
 
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -128.0
-margin_top = -128.0
-margin_right = 640.0
-margin_bottom = 384.0
-texture = ExtResource( 8 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="BackgroundIndoor" parent="." instance=ExtResource( 2 )]
 
 [node name="Tiles" type="Node2D" parent="."]
+position = Vector2( 0, 32 )
 
 [node name="Background" type="TileMap" parent="Tiles"]
 tile_set = ExtResource( 3 )
@@ -45,7 +37,7 @@ tile_data = PoolIntArray( 5, 10, 1, 6, 10, 1, 7, 10, 1, 8, 10, 1, 9, 10, 1, 10, 
 [node name="Triggers" type="Node2D" parent="."]
 
 [node name="Door" parent="Triggers" instance=ExtResource( 4 )]
-position = Vector2( 328, 192 )
+position = Vector2( 328, 224 )
 level = "res://src/Level/DebugLevel.tscn"
 door_index = 1
 
@@ -55,5 +47,5 @@ texture = ExtResource( 6 )
 color = Color( 0.792157, 0.592157, 0.305882, 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 232, 104 )
+position = Vector2( 240, 136 )
 current = true
