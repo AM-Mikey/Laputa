@@ -15,7 +15,7 @@ signal inventory_updated(inventory)
 export var dodge_speed = Vector2(700, 100)
 export var dodge_time: float = (0.3)
 
-export var forgiveness_time = 0.5
+export var forgiveness_time = 0.05
 var knockback = false
 var end_knockback_ready = false
 var knockback_direction: Vector2
