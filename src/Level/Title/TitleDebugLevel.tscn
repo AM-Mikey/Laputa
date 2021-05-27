@@ -20,7 +20,7 @@
 [ext_resource path="res://src/Tile/MimigaMD.tres" type="TileSet" id=20]
 [ext_resource path="res://assets/Tile/AutotileChainTest.png" type="Texture" id=21]
 [ext_resource path="res://src/Tile/Conveyor.tres" type="TileSet" id=23]
-[ext_resource path="res://src/Prop/Conveyor.tscn" type="PackedScene" id=24]
+[ext_resource path="res://src/Trigger/Conveyor.tscn" type="PackedScene" id=24]
 [ext_resource path="res://src/Prop/AmmoRefill.tscn" type="PackedScene" id=25]
 [ext_resource path="res://src/Prop/SavePoint.tscn" type="PackedScene" id=26]
 

@@ -30,6 +30,7 @@ var is_in_enemy = false
 var is_in_hazard = false
 var is_on_ladder = false
 var is_in_water = false
+var can_fall_through = false
 var enemy_on_head = false
 var debug_active = false
 export var debug_speed = 500
@@ -78,11 +79,11 @@ func _input(event):
 		if event.is_action_pressed("toggle_debug"):
 			debug_mode()
 	
-	if Input.is_action_just_pressed("window_resize"):
-		print(OS.get_window_size())
-		var viewport_size = Vector2(OS.get_window_size().x/2, OS.get_window_size().y/2) 
-		get_tree().get_root().size = viewport_size
-		print(get_tree().get_root().size)
+#	if Input.is_action_just_pressed("window_resize"):
+#		print(OS.get_window_size())
+#		var viewport_size = Vector2(OS.get_window_size().x/2, OS.get_window_size().y/2) 
+#		get_tree().get_root().size = viewport_size
+#		print(get_tree().get_root().size)
 
 func shift_weapon_left():
 		var weapon_to_move = weapon_array.pop_back()
@@ -329,6 +330,7 @@ func debug(move_direction, look_direction):
 		print("forgiveness timer time left: ", $ForgivenessTimer.time_left)
 		print("is on floor: ", is_on_floor())
 		print("camera offset: ", $Camera2D.offset)
+		print("camera position: ", $Camera2D.global_position)
 		
 		print("screen size: ", OS.get_screen_size())
 		print("window size: ", OS.get_window_size())

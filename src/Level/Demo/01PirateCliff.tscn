@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://src/Tile/MimigaM.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Tile/MimigaF.tres" type="TileSet" id=2]
@@ -129,6 +129,9 @@
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 32, 8 )
 
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 7.82154, 8 )
+
 [node name="PirateCliff" type="Node2D"]
 script = ExtResource( 6 )
 level_name = "Edge of the Island"
@@ -232,12 +235,15 @@ position = Vector2( 0, 8 )
 shape = SubResource( 5 )
 
 [node name="Water" parent="Triggers" instance=ExtResource( 17 )]
-position = Vector2( 208, 8 )
+position = Vector2( 205, 8 )
 scale = Vector2( 4.576, 3.80714 )
 
 [node name="Water2" parent="Triggers" instance=ExtResource( 17 )]
 position = Vector2( 40, -40 )
 scale = Vector2( 10.176, 7.08714 )
+
+[node name="CollisionShape2D" parent="Triggers/Water2" index="0"]
+shape = SubResource( 6 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -338,4 +344,6 @@ visible = false
 position = Vector2( 168, 224 )
 
 [editable path="Triggers/DamageHazard"]
+[editable path="Triggers/Water"]
+[editable path="Triggers/Water2"]
 [editable path="CameraLimiter"]

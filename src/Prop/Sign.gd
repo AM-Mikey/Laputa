@@ -9,7 +9,7 @@ var path = get_path()
 export var display_name = ""
 export var face: String = ""
 export var expression: String = ""
-export var text: String = ""
+export(String, MULTILINE) var text = ""
 export var justify = "NFCenter"
 export var voiced = false
 

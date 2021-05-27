@@ -60,6 +60,10 @@ func _physics_process(delta):
 			if Input.is_action_just_pressed("dodge") and $DodgeTimer.time_left == 0:
 				$DodgeTimer.start(dodge_time)
 			
+			if Input.is_action_just_pressed("look_down") and can_fall_through == true and is_on_floor():
+				position.y += 8
+				
+
 			_velocity = calculate_move_velocity(_velocity, move_dir, look_dir, special_dir, speed, is_jump_interrupted, is_dodge_interrupted)
 			_velocity = move_and_slide(_velocity, FLOOR_NORMAL, true)
 			
@@ -157,8 +161,8 @@ func calculate_move_velocity(linear_velocity: Vector2, move_dir, look_dir, speci
 	
 	if is_on_ladder:
 		out.y = move_dir.y * jump_speed/2
-		out.x = min(abs(out.x) + acceleration, max_x_speed)
-		out.x *= move_dir.x
+		#out.x = min(abs(out.x) + acceleration, max_x_speed)
+		#out.x *= move_dir.x
 	
 	elif is_in_water:
 		out.y += (gravity/2) * get_physics_process_delta_time()
@@ -203,7 +207,7 @@ func calculate_move_velocity(linear_velocity: Vector2, move_dir, look_dir, speci
 		else:
 			out.x = max_x_speed * (special_dir.x * knockback_mod.x)
 			friction = true
-
+	
 
 
 #	else: #with special, no knockback
@@ -544,7 +548,7 @@ func _on_limit_camera(left, right, top, bottom):
 		camera.limit_right = right
 		world.get_node("UILayer/HUD").rect_position.x = 0
 	
-	if OS.get_window_size().y > bottom - top:
+	if OS.get_window_size().y > (bottom - top) * world.resolution_scale:
 		print("WARNING: window height larger than camera limit")
 		var extra_margin = (OS.get_window_size().y - (bottom - top))/2
 		camera.limit_top = top - extra_margin

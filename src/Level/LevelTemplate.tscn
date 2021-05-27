@@ -11,6 +11,23 @@ script = ExtResource( 5 )
 level_name = "LevelTemplate"
 music = "res://assets/Music/Access.ogg"
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 0.1 )
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+margin_left = -408.0
+margin_top = -208.0
+margin_right = 1040.0
+margin_bottom = 600.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Tiles" type="Node2D" parent="."]
 
 [node name="Background" type="TileMap" parent="Tiles"]
@@ -45,20 +62,6 @@ scale = Vector2( 482.952, 10 )
 [node name="Props" type="Node2D" parent="."]
 
 [node name="Actors" type="Node2D" parent="."]
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground"]
-margin_left = -408.0
-margin_top = -208.0
-margin_right = 1040.0
-margin_bottom = 600.0
-texture = ExtResource( 4 )
-expand = true
-stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CameraLimiter" parent="." instance=ExtResource( 3 )]
 

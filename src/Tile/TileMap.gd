@@ -6,7 +6,7 @@ const LADDER = preload("res://src/Trigger/Ladder.tscn")
 onready var triggers = get_parent().get_parent().get_node("Triggers")
 
 func _ready():
-	var ladder_array = get_used_cells_by_id(21) 
+	var ladder_array = get_used_cells_by_id(28) 
 
 	
 	for l in ladder_array:
