@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://src/Weapon/WeaponManager.gd" type="Script" id=1]
 [ext_resource path="res://src/Actor/Player/Recruit.gd" type="Script" id=2]
@@ -6,6 +6,1342 @@
 [ext_resource path="res://assets/SFX/snd_quote_walk.ogg" type="AudioStream" id=4]
 [ext_resource path="res://assets/Actor/Player/RecruitSheet.png" type="Texture" id=5]
 [ext_resource path="res://assets/SFX/snd_quote_bonkhead.ogg" type="AudioStream" id=6]
+[ext_resource path="res://assets/Weapon/WeaponPlaceholder.png" type="Texture" id=7]
+
+[sub_resource type="Animation" id=67]
+resource_name = "BackfallLeft"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 9, -12 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 72 ), Vector2( 1, 72 ), Vector2( 2, 72 ), Vector2( 3, 72 ), Vector2( 4, 72 ), Vector2( 5, 72 ), Vector2( 6, 72 ), Vector2( 7, 72 ), Vector2( 8, 72 ), Vector2( 9, 72 ), Vector2( 10, 72 ), Vector2( 11, 72 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 73 ), Vector2( 1, 73 ), Vector2( 2, 73 ), Vector2( 3, 73 ), Vector2( 4, 73 ), Vector2( 5, 73 ), Vector2( 6, 73 ), Vector2( 7, 73 ), Vector2( 8, 73 ), Vector2( 9, 73 ), Vector2( 10, 73 ), Vector2( 11, 73 ) ]
+}
+
+[sub_resource type="Animation" id=68]
+resource_name = "BackfallLeftLookDown"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 8, -12 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 76 ), Vector2( 1, 76 ), Vector2( 2, 76 ), Vector2( 3, 76 ), Vector2( 4, 76 ), Vector2( 5, 76 ), Vector2( 6, 76 ), Vector2( 7, 76 ), Vector2( 8, 76 ), Vector2( 9, 76 ), Vector2( 10, 76 ), Vector2( 11, 76 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 77 ), Vector2( 1, 77 ), Vector2( 2, 77 ), Vector2( 3, 77 ), Vector2( 4, 77 ), Vector2( 5, 77 ), Vector2( 6, 77 ), Vector2( 7, 77 ), Vector2( 8, 77 ), Vector2( 9, 77 ), Vector2( 10, 77 ), Vector2( 11, 77 ) ]
+}
+
+[sub_resource type="Animation" id=69]
+resource_name = "BackfallLeftLookUp"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 9, -11 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 74 ), Vector2( 1, 74 ), Vector2( 2, 74 ), Vector2( 3, 74 ), Vector2( 4, 74 ), Vector2( 5, 74 ), Vector2( 6, 74 ), Vector2( 7, 74 ), Vector2( 8, 74 ), Vector2( 9, 74 ), Vector2( 10, 74 ), Vector2( 11, 74 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 75 ), Vector2( 1, 75 ), Vector2( 2, 75 ), Vector2( 3, 75 ), Vector2( 4, 75 ), Vector2( 5, 75 ), Vector2( 6, 75 ), Vector2( 7, 75 ), Vector2( 8, 75 ), Vector2( 9, 75 ), Vector2( 10, 75 ), Vector2( 11, 75 ) ]
+}
+
+[sub_resource type="Animation" id=70]
+resource_name = "BackfallRight"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -10, -11 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 78 ), Vector2( 1, 78 ), Vector2( 2, 78 ), Vector2( 3, 78 ), Vector2( 4, 78 ), Vector2( 5, 78 ), Vector2( 6, 78 ), Vector2( 7, 78 ), Vector2( 8, 78 ), Vector2( 9, 78 ), Vector2( 10, 78 ), Vector2( 11, 78 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 79 ), Vector2( 1, 79 ), Vector2( 2, 79 ), Vector2( 3, 79 ), Vector2( 4, 79 ), Vector2( 5, 79 ), Vector2( 6, 79 ), Vector2( 7, 79 ), Vector2( 8, 79 ), Vector2( 9, 79 ), Vector2( 10, 79 ), Vector2( 11, 79 ) ]
+}
+
+[sub_resource type="Animation" id=71]
+resource_name = "BackfallRightLookDown"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -10, -11 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 82 ), Vector2( 1, 82 ), Vector2( 2, 82 ), Vector2( 3, 82 ), Vector2( 4, 82 ), Vector2( 5, 82 ), Vector2( 6, 82 ), Vector2( 7, 82 ), Vector2( 8, 82 ), Vector2( 9, 82 ), Vector2( 10, 82 ), Vector2( 11, 82 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 83 ), Vector2( 1, 83 ), Vector2( 2, 83 ), Vector2( 3, 83 ), Vector2( 4, 83 ), Vector2( 5, 83 ), Vector2( 6, 83 ), Vector2( 7, 83 ), Vector2( 8, 83 ), Vector2( 9, 83 ), Vector2( 10, 83 ), Vector2( 11, 83 ) ]
+}
+
+[sub_resource type="Animation" id=72]
+resource_name = "BackfallRightLookUp"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -10, -11 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 80 ), Vector2( 1, 80 ), Vector2( 2, 80 ), Vector2( 3, 80 ), Vector2( 4, 80 ), Vector2( 5, 80 ), Vector2( 6, 80 ), Vector2( 7, 80 ), Vector2( 8, 80 ), Vector2( 9, 80 ), Vector2( 10, 80 ), Vector2( 11, 80 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 81 ), Vector2( 1, 81 ), Vector2( 2, 81 ), Vector2( 3, 81 ), Vector2( 4, 81 ), Vector2( 5, 81 ), Vector2( 6, 81 ), Vector2( 7, 81 ), Vector2( 8, 81 ), Vector2( 9, 81 ), Vector2( 10, 81 ), Vector2( 11, 81 ) ]
+}
+
+[sub_resource type="Animation" id=61]
+resource_name = "BackriseLeft"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 7, -13 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 60 ), Vector2( 1, 60 ), Vector2( 2, 60 ), Vector2( 3, 60 ), Vector2( 4, 60 ), Vector2( 5, 60 ), Vector2( 6, 60 ), Vector2( 7, 60 ), Vector2( 8, 60 ), Vector2( 9, 60 ), Vector2( 10, 60 ), Vector2( 11, 60 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 61 ), Vector2( 1, 61 ), Vector2( 2, 61 ), Vector2( 3, 61 ), Vector2( 4, 61 ), Vector2( 5, 61 ), Vector2( 6, 61 ), Vector2( 7, 61 ), Vector2( 8, 61 ), Vector2( 9, 61 ), Vector2( 10, 61 ), Vector2( 11, 61 ) ]
+}
+
+[sub_resource type="Animation" id=62]
+resource_name = "BackriseLeftLookDown"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 7, -13 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 64 ), Vector2( 1, 64 ), Vector2( 2, 64 ), Vector2( 3, 64 ), Vector2( 4, 64 ), Vector2( 5, 64 ), Vector2( 6, 64 ), Vector2( 7, 64 ), Vector2( 8, 64 ), Vector2( 9, 64 ), Vector2( 10, 64 ), Vector2( 11, 64 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 65 ), Vector2( 1, 65 ), Vector2( 2, 65 ), Vector2( 3, 65 ), Vector2( 4, 65 ), Vector2( 5, 65 ), Vector2( 6, 65 ), Vector2( 7, 65 ), Vector2( 8, 65 ), Vector2( 9, 65 ), Vector2( 10, 65 ), Vector2( 11, 65 ) ]
+}
+
+[sub_resource type="Animation" id=63]
+resource_name = "BackriseLeftLookUp"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 7, -13 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 62 ), Vector2( 1, 62 ), Vector2( 2, 62 ), Vector2( 3, 62 ), Vector2( 4, 62 ), Vector2( 5, 62 ), Vector2( 6, 62 ), Vector2( 7, 62 ), Vector2( 8, 62 ), Vector2( 9, 62 ), Vector2( 10, 62 ), Vector2( 11, 62 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 63 ), Vector2( 1, 63 ), Vector2( 2, 63 ), Vector2( 3, 63 ), Vector2( 4, 63 ), Vector2( 5, 63 ), Vector2( 6, 63 ), Vector2( 7, 63 ), Vector2( 8, 63 ), Vector2( 9, 63 ), Vector2( 10, 63 ), Vector2( 11, 63 ) ]
+}
+
+[sub_resource type="Animation" id=64]
+resource_name = "BackriseRight"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -6, -13 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 66 ), Vector2( 1, 66 ), Vector2( 2, 66 ), Vector2( 3, 66 ), Vector2( 4, 66 ), Vector2( 5, 66 ), Vector2( 6, 66 ), Vector2( 7, 66 ), Vector2( 8, 66 ), Vector2( 9, 66 ), Vector2( 10, 66 ), Vector2( 11, 66 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 67 ), Vector2( 1, 67 ), Vector2( 2, 67 ), Vector2( 3, 67 ), Vector2( 4, 67 ), Vector2( 5, 67 ), Vector2( 6, 67 ), Vector2( 7, 67 ), Vector2( 8, 67 ), Vector2( 9, 67 ), Vector2( 10, 67 ), Vector2( 11, 67 ) ]
+}
+
+[sub_resource type="Animation" id=65]
+resource_name = "BackriseRightLookDown"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -6, -13 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 70 ), Vector2( 1, 70 ), Vector2( 2, 70 ), Vector2( 3, 70 ), Vector2( 4, 70 ), Vector2( 5, 70 ), Vector2( 6, 70 ), Vector2( 7, 70 ), Vector2( 8, 70 ), Vector2( 9, 70 ), Vector2( 10, 70 ), Vector2( 11, 70 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 71 ), Vector2( 1, 71 ), Vector2( 2, 71 ), Vector2( 3, 71 ), Vector2( 4, 71 ), Vector2( 5, 71 ), Vector2( 6, 71 ), Vector2( 7, 71 ), Vector2( 8, 71 ), Vector2( 9, 71 ), Vector2( 10, 71 ), Vector2( 11, 71 ) ]
+}
+
+[sub_resource type="Animation" id=66]
+resource_name = "BackriseRightLookUp"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -6, -13 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 68 ), Vector2( 1, 68 ), Vector2( 2, 68 ), Vector2( 3, 68 ), Vector2( 4, 68 ), Vector2( 5, 68 ), Vector2( 6, 68 ), Vector2( 7, 68 ), Vector2( 8, 68 ), Vector2( 9, 68 ), Vector2( 10, 68 ), Vector2( 11, 68 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 69 ), Vector2( 1, 69 ), Vector2( 2, 69 ), Vector2( 3, 69 ), Vector2( 4, 69 ), Vector2( 5, 69 ), Vector2( 6, 69 ), Vector2( 7, 69 ), Vector2( 8, 69 ), Vector2( 9, 69 ), Vector2( 10, 69 ), Vector2( 11, 69 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "BackrunLeft"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, -9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 24 ), Vector2( 1, 24 ), Vector2( 2, 24 ), Vector2( 3, 24 ), Vector2( 4, 24 ), Vector2( 5, 24 ), Vector2( 6, 24 ), Vector2( 7, 24 ), Vector2( 8, 24 ), Vector2( 9, 24 ), Vector2( 10, 24 ), Vector2( 11, 24 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 25 ), Vector2( 1, 25 ), Vector2( 2, 25 ), Vector2( 3, 25 ), Vector2( 4, 25 ), Vector2( 5, 25 ), Vector2( 6, 25 ), Vector2( 7, 25 ), Vector2( 8, 25 ), Vector2( 9, 25 ), Vector2( 10, 25 ), Vector2( 11, 25 ) ]
+}
+
+[sub_resource type="Animation" id=79]
+resource_name = "BackrunLeftLookDown"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, -9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 28 ), Vector2( 1, 28 ), Vector2( 2, 28 ), Vector2( 3, 28 ), Vector2( 4, 28 ), Vector2( 5, 28 ), Vector2( 6, 28 ), Vector2( 7, 28 ), Vector2( 8, 28 ), Vector2( 9, 28 ), Vector2( 10, 28 ), Vector2( 11, 28 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 29 ), Vector2( 1, 29 ), Vector2( 2, 29 ), Vector2( 3, 29 ), Vector2( 4, 29 ), Vector2( 5, 29 ), Vector2( 6, 29 ), Vector2( 7, 29 ), Vector2( 8, 29 ), Vector2( 9, 29 ), Vector2( 10, 29 ), Vector2( 11, 29 ) ]
+}
+
+[sub_resource type="Animation" id=80]
+resource_name = "BackrunLeftLookUp"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, -9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 26 ), Vector2( 1, 26 ), Vector2( 2, 26 ), Vector2( 3, 26 ), Vector2( 4, 26 ), Vector2( 5, 26 ), Vector2( 6, 26 ), Vector2( 7, 26 ), Vector2( 8, 26 ), Vector2( 9, 26 ), Vector2( 10, 26 ), Vector2( 11, 26 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 27 ), Vector2( 1, 27 ), Vector2( 2, 27 ), Vector2( 3, 27 ), Vector2( 4, 27 ), Vector2( 5, 27 ), Vector2( 6, 27 ), Vector2( 7, 27 ), Vector2( 8, 27 ), Vector2( 9, 27 ), Vector2( 10, 27 ), Vector2( 11, 27 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 length = 1.2
@@ -32,7 +1368,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 270.0 ]
+"values": [ 90.0 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BulletVector:rotation_degrees")
@@ -120,7 +1456,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 270.0 ]
+"values": [ 90.0 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BulletVector:rotation_degrees")
@@ -132,7 +1468,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 90.0 ]
+"values": [ -90.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("WeaponSprite:flip_h")
@@ -208,7 +1544,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 270.0 ]
+"values": [ 90.0 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BulletVector:rotation_degrees")
@@ -220,7 +1556,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 180.0 ]
+"values": [ 270.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("WeaponSprite:flip_h")
@@ -271,7 +1607,8 @@ tracks/6/keys = {
 "values": [ Vector2( 0, 33 ), Vector2( 1, 33 ), Vector2( 2, 33 ), Vector2( 3, 33 ), Vector2( 4, 33 ), Vector2( 5, 33 ), Vector2( 6, 33 ), Vector2( 7, 33 ), Vector2( 8, 33 ), Vector2( 9, 33 ), Vector2( 10, 33 ), Vector2( 11, 33 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=73]
+resource_name = "ClimbLeft"
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -284,7 +1621,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 2, -9 ) ]
+"values": [ Vector2( -10, -11 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("LookRot:rotation_degrees")
@@ -297,6 +1634,273 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 84 ), Vector2( 1, 84 ), Vector2( 2, 84 ), Vector2( 3, 84 ), Vector2( 4, 84 ), Vector2( 5, 84 ), Vector2( 6, 84 ), Vector2( 7, 84 ), Vector2( 8, 84 ), Vector2( 9, 84 ), Vector2( 10, 84 ), Vector2( 11, 84 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 85 ), Vector2( 1, 85 ), Vector2( 2, 85 ), Vector2( 3, 85 ), Vector2( 4, 85 ), Vector2( 5, 85 ), Vector2( 6, 85 ), Vector2( 7, 85 ), Vector2( 8, 85 ), Vector2( 9, 85 ), Vector2( 10, 85 ), Vector2( 11, 85 ) ]
+}
+
+[sub_resource type="Animation" id=74]
+resource_name = "ClimbLeftLookDown"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -10, -11 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 88 ), Vector2( 1, 88 ), Vector2( 2, 88 ), Vector2( 3, 88 ), Vector2( 4, 88 ), Vector2( 5, 88 ), Vector2( 6, 88 ), Vector2( 7, 88 ), Vector2( 8, 88 ), Vector2( 9, 88 ), Vector2( 10, 88 ), Vector2( 11, 88 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 89 ), Vector2( 1, 89 ), Vector2( 2, 89 ), Vector2( 3, 89 ), Vector2( 4, 89 ), Vector2( 5, 89 ), Vector2( 6, 89 ), Vector2( 7, 89 ), Vector2( 8, 89 ), Vector2( 9, 89 ), Vector2( 10, 89 ), Vector2( 11, 89 ) ]
+}
+
+[sub_resource type="Animation" id=75]
+resource_name = "ClimbLeftLookUp"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -7, -18 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BulletVector:rotation_degrees")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponSprite:flip_h")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponSprite:rotation_degrees")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Front:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 86 ), Vector2( 1, 86 ), Vector2( 2, 86 ), Vector2( 3, 86 ), Vector2( 4, 86 ), Vector2( 5, 86 ), Vector2( 6, 86 ), Vector2( 7, 86 ), Vector2( 8, 86 ), Vector2( 9, 86 ), Vector2( 10, 86 ), Vector2( 11, 86 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Back:frame_coords")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 87 ), Vector2( 1, 87 ), Vector2( 2, 87 ), Vector2( 3, 87 ), Vector2( 4, 87 ), Vector2( 5, 87 ), Vector2( 6, 87 ), Vector2( 7, 87 ), Vector2( 8, 87 ), Vector2( 9, 87 ), Vector2( 10, 87 ), Vector2( 11, 87 ) ]
+}
+
+[sub_resource type="Animation" id=76]
+resource_name = "ClimbRight"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 7, -17 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LookRot:rotation_degrees")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BulletVector:rotation_degrees")
@@ -344,7 +1948,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, 24 ), Vector2( 1, 24 ), Vector2( 2, 24 ), Vector2( 3, 24 ), Vector2( 4, 24 ), Vector2( 5, 24 ), Vector2( 6, 24 ), Vector2( 7, 24 ), Vector2( 8, 24 ), Vector2( 9, 24 ), Vector2( 10, 24 ), Vector2( 11, 24 ) ]
+"values": [ Vector2( 0, 90 ), Vector2( 1, 90 ), Vector2( 2, 90 ), Vector2( 3, 90 ), Vector2( 4, 90 ), Vector2( 5, 90 ), Vector2( 6, 90 ), Vector2( 7, 90 ), Vector2( 8, 90 ), Vector2( 9, 90 ), Vector2( 10, 90 ), Vector2( 11, 90 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Back:frame_coords")
@@ -356,10 +1960,11 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, 25 ), Vector2( 1, 25 ), Vector2( 2, 25 ), Vector2( 3, 25 ), Vector2( 4, 25 ), Vector2( 5, 25 ), Vector2( 6, 25 ), Vector2( 7, 25 ), Vector2( 8, 25 ), Vector2( 9, 25 ), Vector2( 10, 25 ), Vector2( 11, 25 ) ]
+"values": [ Vector2( 0, 91 ), Vector2( 1, 91 ), Vector2( 2, 91 ), Vector2( 3, 91 ), Vector2( 4, 91 ), Vector2( 5, 91 ), Vector2( 6, 91 ), Vector2( 7, 91 ), Vector2( 8, 91 ), Vector2( 9, 91 ), Vector2( 10, 91 ), Vector2( 11, 91 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=77]
+resource_name = "ClimbRightLookDown"
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -372,7 +1977,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 2, -9 ) ]
+"values": [ Vector2( 5, -14 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("LookRot:rotation_degrees")
@@ -384,7 +1989,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 90.0 ]
+"values": [ -90.0 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BulletVector:rotation_degrees")
@@ -396,7 +2001,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ -90.0 ]
+"values": [ 0.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("WeaponSprite:flip_h")
@@ -420,7 +2025,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.0 ]
+"values": [ 90.0 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Front:frame_coords")
@@ -432,7 +2037,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, 28 ), Vector2( 1, 28 ), Vector2( 2, 28 ), Vector2( 3, 28 ), Vector2( 4, 28 ), Vector2( 5, 28 ), Vector2( 6, 28 ), Vector2( 7, 28 ), Vector2( 8, 28 ), Vector2( 9, 28 ), Vector2( 10, 28 ), Vector2( 11, 28 ) ]
+"values": [ Vector2( 0, 94 ), Vector2( 1, 94 ), Vector2( 2, 94 ), Vector2( 3, 94 ), Vector2( 4, 94 ), Vector2( 5, 94 ), Vector2( 6, 94 ), Vector2( 7, 94 ), Vector2( 8, 94 ), Vector2( 9, 94 ), Vector2( 10, 94 ), Vector2( 11, 94 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Back:frame_coords")
@@ -444,10 +2049,11 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, 29 ), Vector2( 1, 29 ), Vector2( 2, 29 ), Vector2( 3, 29 ), Vector2( 4, 29 ), Vector2( 5, 29 ), Vector2( 6, 29 ), Vector2( 7, 29 ), Vector2( 8, 29 ), Vector2( 9, 29 ), Vector2( 10, 29 ), Vector2( 11, 29 ) ]
+"values": [ Vector2( 0, 95 ), Vector2( 1, 95 ), Vector2( 2, 95 ), Vector2( 3, 95 ), Vector2( 4, 95 ), Vector2( 5, 95 ), Vector2( 6, 95 ), Vector2( 7, 95 ), Vector2( 8, 95 ), Vector2( 9, 95 ), Vector2( 10, 95 ), Vector2( 11, 95 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=78]
+resource_name = "ClimbRightLookUp"
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -460,7 +2066,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 2, -9 ) ]
+"values": [ Vector2( 7, -18 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("LookRot:rotation_degrees")
@@ -472,7 +2078,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 90.0 ]
+"values": [ -90.0 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BulletVector:rotation_degrees")
@@ -520,7 +2126,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, 26 ), Vector2( 1, 26 ), Vector2( 2, 26 ), Vector2( 3, 26 ), Vector2( 4, 26 ), Vector2( 5, 26 ), Vector2( 6, 26 ), Vector2( 7, 26 ), Vector2( 8, 26 ), Vector2( 9, 26 ), Vector2( 10, 26 ), Vector2( 11, 26 ) ]
+"values": [ Vector2( 0, 92 ), Vector2( 1, 92 ), Vector2( 2, 92 ), Vector2( 3, 92 ), Vector2( 4, 92 ), Vector2( 5, 92 ), Vector2( 6, 92 ), Vector2( 7, 92 ), Vector2( 8, 92 ), Vector2( 9, 92 ), Vector2( 10, 92 ), Vector2( 11, 92 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Back:frame_coords")
@@ -532,7 +2138,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, 27 ), Vector2( 1, 27 ), Vector2( 2, 27 ), Vector2( 3, 27 ), Vector2( 4, 27 ), Vector2( 5, 27 ), Vector2( 6, 27 ), Vector2( 7, 27 ), Vector2( 8, 27 ), Vector2( 9, 27 ), Vector2( 10, 27 ), Vector2( 11, 27 ) ]
+"values": [ Vector2( 0, 93 ), Vector2( 1, 93 ), Vector2( 2, 93 ), Vector2( 3, 93 ), Vector2( 4, 93 ), Vector2( 5, 93 ), Vector2( 6, 93 ), Vector2( 7, 93 ), Vector2( 8, 93 ), Vector2( 9, 93 ), Vector2( 10, 93 ), Vector2( 11, 93 ) ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -2798,40 +4404,61 @@ position = Vector2( 0, -7.5 )
 shape = ExtResource( 3 )
 
 [node name="WeaponSprite" type="Sprite" parent="."]
-position = Vector2( -6, -10 )
+position = Vector2( 7, -17 )
+texture = ExtResource( 7 )
+flip_h = true
 
 [node name="Front" type="Sprite" parent="."]
 position = Vector2( 0, -16 )
 texture = ExtResource( 5 )
 hframes = 12
-vframes = 60
+vframes = 96
+frame = 1080
 
 [node name="Back" type="Sprite" parent="."]
 position = Vector2( 0, -16 )
 texture = ExtResource( 5 )
 hframes = 12
-vframes = 60
-frame = 12
+vframes = 96
+frame = 1092
 
 [node name="BulletVector" type="RayCast2D" parent="."]
 modulate = Color( 1, 0, 0, 0.784314 )
 position = Vector2( 0, -10 )
-rotation = 1.5708
+rotation = -1.5708
 scale = Vector2( 0.5, 0.5 )
 cast_to = Vector2( 0, 40 )
 
 [node name="LookRot" type="RayCast2D" parent="."]
 modulate = Color( 1, 0.937255, 0, 0.392157 )
-rotation = 1.5708
+rotation = -1.5708
 cast_to = Vector2( 0, 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/BackfallLeft = SubResource( 67 )
+anims/BackfallLeftLookDown = SubResource( 68 )
+anims/BackfallLeftLookUp = SubResource( 69 )
+anims/BackfallRight = SubResource( 70 )
+anims/BackfallRightLookDown = SubResource( 71 )
+anims/BackfallRightLookUp = SubResource( 72 )
+anims/BackriseLeft = SubResource( 61 )
+anims/BackriseLeftLookDown = SubResource( 62 )
+anims/BackriseLeftLookUp = SubResource( 63 )
+anims/BackriseRight = SubResource( 64 )
+anims/BackriseRightLookDown = SubResource( 65 )
+anims/BackriseRightLookUp = SubResource( 66 )
+anims/BackrunLeft = SubResource( 4 )
+anims/BackrunLeftLookDown = SubResource( 79 )
+anims/BackrunLeftLookUp = SubResource( 80 )
 anims/BackrunRight = SubResource( 1 )
 anims/BackrunRightLookDown = SubResource( 2 )
 anims/BackrunRightLookUp = SubResource( 3 )
-anims/BackunLeft = SubResource( 4 )
-anims/BackunLeftLookDown = SubResource( 5 )
-anims/BackunLeftLookUp = SubResource( 6 )
+anims/ClimbLeft = SubResource( 73 )
+anims/ClimbLeftLookDown = SubResource( 74 )
+anims/ClimbLeftLookUp = SubResource( 75 )
+anims/ClimbRight = SubResource( 76 )
+anims/ClimbRightLookDown = SubResource( 77 )
+anims/ClimbRightLookUp = SubResource( 78 )
 anims/FallLeft = SubResource( 7 )
 anims/FallLeftLookDown = SubResource( 8 )
 anims/FallLeftLookUp = SubResource( 9 )

@@ -39,7 +39,7 @@ var total_xp: int = 0
 
 var inventory: Array
 var topic_array: Array = ["ham", "cheese", "marbles", "balogna"]
-var weapon_array: Array = [load("res://src/Weapon/%s" % "Revolver1" + ".tres"), load("res://src/Weapon/%s" % "GrenadeLauncher" + ".tres")]
+var weapon_array: Array = [load("res://src/Weapon/%s" % "Revolver1" + ".tres"), load("res://src/Weapon/%s" % "GrenadeLauncher" + ".tres"), load("res://src/Weapon/%s" % "MachinePistol" + ".tres")]
 
 
 func _ready():

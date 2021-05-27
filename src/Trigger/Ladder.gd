@@ -11,7 +11,11 @@ func _on_Ladder_body_exited(body):
 	active_player.is_on_ladder = false
 	has_player_near = false
 
-
-func _input(event):
-	if event.is_action_pressed("look_up") and has_player_near or event.is_action_pressed("look_down") and has_player_near:
-		active_player.is_on_ladder = true
+func _process(delta):
+	if active_player != null and not active_player.is_on_ladder:
+		if Input.is_action_pressed("look_up") and has_player_near \
+		or Input.is_action_pressed("look_down") and has_player_near and not active_player.is_on_floor() \
+		or Input.is_action_pressed("look_down") and has_player_near and position.y >= active_player.global_position.y:
+			active_player.is_on_ladder = true
+			active_player.position.x = position.x +8
+			active_player.position.y -= 1

@@ -1,13 +1,16 @@
 extends Player
 
 const BLACKBAR = preload("res://src/Utility/BlackBar.tscn")
+const SNAP_DIRECTION = Vector2.DOWN
+const SNAP_LENGTH = 4.0
+
 
 export var run_anim_speed = 1.25
 export var acceleration = 50
 export var max_x_speed = 82.5
 export var jump_speed = 195
 export var minimum_jump_time = 0.1
-export var ground_cof = 0.2
+export var ground_cof = 0.2 #.02 .2??
 export var air_cof = 0.05
 
 var horizontal_focus = Vector2.LEFT
@@ -18,6 +21,7 @@ var panning_down = false
 var direction_lock = Vector2.ZERO
 var starting_direction #for acceleration
 var bonk_distance = 4
+var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
 onready var animation_tree = get_node("AnimationTree")
 onready var animation_mode = animation_tree.get("parameters/playback")
@@ -45,6 +49,15 @@ func _physics_process(delta):
 				$BonkSound.play()
 			
 			if is_on_floor(): #start forgiveness timer on any frame they're on
+				if is_on_ladder == true:
+					is_on_ladder = false
+					if look_dir.x < 0: #Left
+						$AnimationPlayer.play("StandLeft")
+					elif look_dir.x < 0: #Left
+						$AnimationPlayer.play("StandRight")
+				
+				snap_vector = SNAP_DIRECTION * SNAP_LENGTH
+				
 				$ForgivenessTimer.start(forgiveness_time)
 				if end_knockback_ready:
 					special_dir = Vector2.ZERO
@@ -56,6 +69,7 @@ func _physics_process(delta):
 			
 			if Input.is_action_just_pressed("jump") and $ForgivenessTimer.time_left > 0 or Input.is_action_just_pressed("jump") and is_on_floor():
 				$MinimumJumpTimer.start(minimum_jump_time)
+				snap_vector = Vector2.ZERO
 			
 			if Input.is_action_just_pressed("dodge") and $DodgeTimer.time_left == 0:
 				$DodgeTimer.start(dodge_time)
@@ -65,8 +79,9 @@ func _physics_process(delta):
 				
 
 			_velocity = calculate_move_velocity(_velocity, move_dir, look_dir, special_dir, speed, is_jump_interrupted, is_dodge_interrupted)
-			_velocity = move_and_slide(_velocity, FLOOR_NORMAL, true)
-			
+			#_velocity = move_and_slide(_velocity, FLOOR_NORMAL, true)
+			_velocity = move_and_slide_with_snap(_velocity, snap_vector, FLOOR_NORMAL, true)
+			#_velocity.y = move_and_slide(_velocity, FLOOR_NORMAL, true).y
 			
 			animate(move_dir, look_dir, _velocity)
 			
@@ -163,6 +178,10 @@ func calculate_move_velocity(linear_velocity: Vector2, move_dir, look_dir, speci
 		out.y = move_dir.y * jump_speed/2
 		#out.x = min(abs(out.x) + acceleration, max_x_speed)
 		#out.x *= move_dir.x
+		out.x = 0
+		if Input.is_action_just_pressed("jump"):
+			is_on_ladder = false
+			out.y = jump_speed * -1.0
 	
 	elif is_in_water:
 		out.y += (gravity/2) * get_physics_process_delta_time()
@@ -258,92 +277,250 @@ func animate(move_dir, look_dir, _velocity):
 
 	var next_animation: String = ""
 	
-	
-	if direction_lock == Vector2.ZERO:  #NOT DIRECTION LOCKED
-	
-		if is_on_floor():
-			#player.playback_speed = run_anim_speed
-			if Input.is_action_pressed("move_left"):
-				if Input.is_action_pressed("look_up"):
-					next_animation = "RunLeftLookUp"
-				elif Input.is_action_pressed("look_down"):
-					next_animation = "RunLeftLookDown"
-				else:
-					next_animation = "RunLeft"
-			
-			elif Input.is_action_pressed("move_right"):
-				if Input.is_action_pressed("look_up"):
-					next_animation = "RunRightLookUp"
-				elif Input.is_action_pressed("look_down"):
-					next_animation = "RunRightLookDown"
-				else:
-					next_animation = "RunRight"
-
-			else: #not moving on ground
-				player.playback_speed = 1 #reset player to normal speed
-				if look_dir.x < 0: #Left
+	if not is_on_ladder:
+		if direction_lock == Vector2.ZERO:  #NOT DIRECTION LOCKED
+		
+			if is_on_floor():
+				#player.playback_speed = run_anim_speed
+				if Input.is_action_pressed("move_left"):
 					if Input.is_action_pressed("look_up"):
-						next_animation = "StandLeftLookUp"
+						next_animation = "RunLeftLookUp"
 					elif Input.is_action_pressed("look_down"):
-						next_animation = "StandLeftLookDown"
+						next_animation = "RunLeftLookDown"
 					else:
-						next_animation = "StandLeft"
+						next_animation = "RunLeft"
+				
+				elif Input.is_action_pressed("move_right"):
+					if Input.is_action_pressed("look_up"):
+						next_animation = "RunRightLookUp"
+					elif Input.is_action_pressed("look_down"):
+						next_animation = "RunRightLookDown"
+					else:
+						next_animation = "RunRight"
 
-				elif look_dir.x > 0: #Right
+				else: #not moving on ground
+					player.playback_speed = 1 #reset player to normal speed
+					if look_dir.x < 0: #Left
+						if Input.is_action_pressed("look_up"):
+							next_animation = "StandLeftLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "StandLeftLookDown"
+						else:
+							next_animation = "StandLeft"
+
+					elif look_dir.x > 0: #Right
+						if Input.is_action_pressed("look_up"):
+							next_animation = "StandRightLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "StandRightLookDown"
+						else:
+							next_animation = "StandRight"
+			else: #airborne
+				player.playback_speed = 1 #reset player to normal speed
+				
+				if _velocity.y < 0: #Rising
+					if Input.is_action_pressed("move_left"): #Moving Left
+						if Input.is_action_pressed("look_up"):
+							next_animation = "RiseLeftLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "RiseLeftLookDown"
+						else:
+							next_animation = "RiseLeft"
+					elif Input.is_action_pressed("move_right"): #Moving Right
+						if Input.is_action_pressed("look_up"):
+							next_animation = "RiseRightLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "RiseRightLookDown"
+						else:
+							next_animation = "RiseRight"
+				else: #Falling
+					if Input.is_action_pressed("move_left"): #Moving Left
+						if Input.is_action_pressed("look_up"):
+							next_animation = "FallLeftLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "FallLeftLookDown"
+						else:
+							next_animation = "FallLeft"
+					elif Input.is_action_pressed("move_right"): #Moving Right
+						if Input.is_action_pressed("look_up"):
+							next_animation = "FallRightLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "FallRightLookDown"
+						else:
+							next_animation = "FallRight"
+	#			elif look_dir.x < 0:					 #Looking Left
+	#				if Input.is_action_pressed("look_up"):
+	#					next_animation = "StandLeftAimUp"
+	#				elif Input.is_action_pressed("look_down"):
+	#					next_animation = "StandLeftAimDown"
+	#				else:
+	#					next_animation = "StandRightAimDown"
+	#
+	#			elif look_dir.x > 0: 					#Looking Right
+	#				if Input.is_action_pressed("look_up"):
+	#					next_animation = "RunRightAimUp"
+	#				elif Input.is_action_pressed("look_down"):
+	#					next_animation = "StandRightAimUp"
+	#				else:
+	#					next_animation = "AimSmallRight"
+		
+		elif direction_lock == Vector2.LEFT: #DIRECTION LOCKED LEFT
+			
+			if is_on_floor():
+					#player.playback_speed = run_anim_speed
+					if Input.is_action_pressed("move_left"):
+						if Input.is_action_pressed("look_up"):
+							next_animation = "RunLeftLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "RunLeftLookDown"
+						else:
+							next_animation = "RunLeft"
+					
+					elif Input.is_action_pressed("move_right"):
+						if Input.is_action_pressed("look_up"):
+							next_animation = "BackrunRightLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "BackrunRightLookDown"
+						else:
+							next_animation = "BackrunRight"
+
+					else: #not moving on ground
+						player.playback_speed = 1 #reset player to normal speed
+						
+						if Input.is_action_pressed("look_up"):
+							next_animation = "StandLeftLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "StandLeftLookDown"
+						else:
+							next_animation = "StandLeft"
+	#
+			else: #airborne
+				player.playback_speed = 1 #reset player to normal speed
+				
+				if _velocity.y < 0: #Rising
+					if Input.is_action_pressed("move_left"): #Moving Left
+						if Input.is_action_pressed("look_up"):
+							next_animation = "RiseLeftLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "RiseLeftLookDown"
+						else:
+							next_animation = "RiseLeft"
+					elif Input.is_action_pressed("move_right"): #Moving Right
+						if Input.is_action_pressed("look_up"):
+							next_animation = "BackriseRightLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "BackriseRightLookDown"
+						else:
+							next_animation = "BackriseRight"
+				else: #Falling
+					if Input.is_action_pressed("move_left"): #Moving Left
+						if Input.is_action_pressed("look_up"):
+							next_animation = "FallLeftLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "FallLeftLookDown"
+						else:
+							next_animation = "FallLeft"
+					elif Input.is_action_pressed("move_right"): #Moving Right
+						if Input.is_action_pressed("look_up"):
+							next_animation = "BackfallRightLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "BackfallRightLookDown"
+						else:
+							next_animation = "BackfallRight"
+
+		elif direction_lock == Vector2.RIGHT: #DIRECTION LOCKED RIGHT
+			if is_on_floor():
+				#player.playback_speed = run_anim_speed
+				if Input.is_action_pressed("move_left"):
+					if Input.is_action_pressed("look_up"):
+						next_animation = "BackrunLeftLookUp"
+					elif Input.is_action_pressed("look_down"):
+						next_animation = "BackrunLeftLookDown"
+					else:
+						next_animation = "BackrunLeft"
+				
+				elif Input.is_action_pressed("move_right"):
+					if Input.is_action_pressed("look_up"):
+						next_animation = "RunRightLookUp"
+					elif Input.is_action_pressed("look_down"):
+						next_animation = "RunRightLookDown"
+					else:
+						next_animation = "RunRight"
+
+				else: #not moving on ground
+					player.playback_speed = 1 #reset player to normal speed
+					
 					if Input.is_action_pressed("look_up"):
 						next_animation = "StandRightLookUp"
 					elif Input.is_action_pressed("look_down"):
 						next_animation = "StandRightLookDown"
 					else:
 						next_animation = "StandRight"
-		else: #airborne
-			player.playback_speed = 1 #reset player to normal speed
-			
-			if _velocity.y < 0: #Rising
-				if Input.is_action_pressed("move_left"): #Moving Left
-					if Input.is_action_pressed("look_up"):
-						next_animation = "RiseLeftLookUp"
-					elif Input.is_action_pressed("look_down"):
-						next_animation = "RiseLeftLookDown"
-					else:
-						next_animation = "RiseLeft"
-				elif Input.is_action_pressed("move_right"): #Moving Right
-					if Input.is_action_pressed("look_up"):
-						next_animation = "RiseRightLookUp"
-					elif Input.is_action_pressed("look_down"):
-						next_animation = "RiseRightLookDown"
-					else:
-						next_animation = "RiseRight"
-			else: #Falling
-				if Input.is_action_pressed("move_left"): #Moving Left
-					if Input.is_action_pressed("look_up"):
-						next_animation = "FallLeftLookUp"
-					elif Input.is_action_pressed("look_down"):
-						next_animation = "FallLeftLookDown"
-					else:
-						next_animation = "FallLeft"
-				elif Input.is_action_pressed("move_right"): #Moving Right
-					if Input.is_action_pressed("look_up"):
-						next_animation = "FallRightLookUp"
-					elif Input.is_action_pressed("look_down"):
-						next_animation = "FallRightLookDown"
-					else:
-						next_animation = "FallRight"
-#			elif look_dir.x < 0:					 #Looking Left
-#				if Input.is_action_pressed("look_up"):
-#					next_animation = "StandLeftAimUp"
-#				elif Input.is_action_pressed("look_down"):
-#					next_animation = "StandLeftAimDown"
-#				else:
-#					next_animation = "StandRightAimDown"
-#
-#			elif look_dir.x > 0: 					#Looking Right
-#				if Input.is_action_pressed("look_up"):
-#					next_animation = "RunRightAimUp"
-#				elif Input.is_action_pressed("look_down"):
-#					next_animation = "StandRightAimUp"
-#				else:
-#					next_animation = "AimSmallRight"
+						
+			else: #airborne
+				player.playback_speed = 1 #reset player to normal speed
+				
+				if _velocity.y < 0: #Rising
+					if Input.is_action_pressed("move_left"): #Moving Left
+						if Input.is_action_pressed("look_up"):
+							next_animation = "BackriseLeftLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "BackriseLeftLookDown"
+						else:
+							next_animation = "BackriseLeft"
+					elif Input.is_action_pressed("move_right"): #Moving Right
+						if Input.is_action_pressed("look_up"):
+							next_animation = "RiseRightLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "RiseRightLookDown"
+						else:
+							next_animation = "RiseRight"
+				else: #Falling
+					if Input.is_action_pressed("move_left"): #Moving Left
+						if Input.is_action_pressed("look_up"):
+							next_animation = "BackfallLeftLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "BackfallLeftLookDown"
+						else:
+							next_animation = "BackfallLeft"
+					elif Input.is_action_pressed("move_right"): #Moving Right
+						if Input.is_action_pressed("look_up"):
+							next_animation = "FallRightLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "FallRightLookDown"
+						else:
+							next_animation = "FallRight"
+	else: #is on ladder
+		if Input.is_action_pressed("move_left"):
+			if Input.is_action_pressed("look_up"):
+				next_animation = "ClimbLeftLookUp"
+			elif Input.is_action_pressed("look_down"):
+				next_animation = "ClimbLeftLookDown"
+			else:
+				next_animation = "ClimbLeft"
+		elif Input.is_action_pressed("move_right"):
+			if Input.is_action_pressed("look_up"):
+				next_animation = "ClimbRightLookUp"
+			elif Input.is_action_pressed("look_down"):
+				next_animation = "ClimbRightLookDown"
+			else:
+				next_animation = "ClimbRight"
+		else:
+			if look_dir.x < 0: #Left
+				if Input.is_action_pressed("look_up"):
+					next_animation = "ClimbLeftLookUp"
+				elif Input.is_action_pressed("look_down"):
+					next_animation = "ClimbLeftLookDown"
+				else:
+					next_animation = "ClimbLeft"
+			elif look_dir.x > 0: #Right
+				if Input.is_action_pressed("look_up"):
+					next_animation = "ClimbRightLookUp"
+				elif Input.is_action_pressed("look_down"):
+					next_animation = "ClimbRightLookDown"
+				else:
+					next_animation = "ClimbRight"
+
 	if not player.current_animation == next_animation:
 		if next_animation != "":
 			change_animation(next_animation)
@@ -353,165 +530,9 @@ func change_animation(next_animation):
 	var player = $AnimationPlayer
 	var old_time = $AnimationPlayer.current_animation_position
 	
-	
 	player.play(next_animation)
 	#$AnimationPlayer.seek(old_time)
-#			else: #not moving on ground
-#				player.playback_speed = 1 #reset player to normal speed
-#				if look_dir.x < 0: #Left
-#					if Input.is_action_pressed("look_up"):
-#						player.play("StandLeftAimUp")
-#					elif Input.is_action_pressed("look_down"):
-#						player.play("AimSmallLeft")
-#					else:
-#						player.play("AimSmallLeft")
-#
-#				elif look_dir.x > 0: #Right
-#					if Input.is_action_pressed("look_up"):
-#						player.play("StandRightAimUp")
-#					elif Input.is_action_pressed("look_down"):
-#						player.play("AimSmallRight")
-#					else:
-#						player.play("AimSmallRight")
-#		else: #airborne
-#			player.playback_speed = 1 #reset player to normal speed
-#
-#			if Input.is_action_pressed("move_left"): #Moving Left
-#				if Input.is_action_pressed("look_up"):
-#					player.play("RunLeftAimUp")
-#				elif Input.is_action_pressed("look_down"):
-#					player.play("RunLeftAimDown")
-#				else:
-#						player.play("RunLeft")
-#			elif Input.is_action_pressed("move_right"): #Moving Right
-#				if Input.is_action_pressed("look_up"):
-#					player.play("RunRightAimUp")
-#				elif Input.is_action_pressed("look_down"):
-#					player.play("RunRightAimDown")
-#				else:
-#						player.play("RunRight")
-#			elif look_dir.x < 0:					 #Looking Left
-#				if Input.is_action_pressed("look_up"):
-#					player.play("StandLeftAimUp")
-#				elif Input.is_action_pressed("look_down"):
-#					player.play("StandLeftAimDown")
-#				else:
-#					player.play("StandRightAimDown")
-#
-#			elif look_dir.x > 0: 					#Looking Right
-#				if Input.is_action_pressed("look_up"):
-#					player.play("RunRightAimUp")
-#				elif Input.is_action_pressed("look_down"):
-#					player.play("StandRightAimUp")
-#				else:
-#					player.play("AimSmallRight")
-#
-#	elif direction_lock == Vector2.LEFT: #DIRECTION LOCKED LEFT
-#		if is_on_floor():
-#			#moving on ground
-#			player.playback_speed = run_anim_speed #set player speed to run_anim_speed
-#			if Input.is_action_pressed("move_left"):
-#				if Input.is_action_pressed("look_up"):
-#					player.play("RunLeftAimUp")
-#				elif Input.is_action_pressed("look_down"):
-#					player.play("RunLeft")
-#				else:
-#					player.play("RunLeft")
-#
-#			elif Input.is_action_pressed("move_right"):
-#				if Input.is_action_pressed("look_up"):
-#					player.play("RunRightLookLeftAimUp")
-#				elif Input.is_action_pressed("look_down"):
-#					player.play("RunRightLookLeft")
-#				else:
-#					player.play("RunRightLookLeft")
-#
-#			else: #not moving on ground
-#				player.playback_speed = 1 #reset player to normal speed
-#				if look_dir.x < 0: #Left
-#					if Input.is_action_pressed("look_up"):
-#						player.play("StandLeftAimUp")
-#					elif Input.is_action_pressed("look_down"):
-#						player.play("AimSmallLeft")
-#					else:
-#						player.play("AimSmallLeft")
-#
-#				elif look_dir.x > 0: #Right
-#					if Input.is_action_pressed("look_up"):
-#						player.play("StandRightAimUp")
-#					elif Input.is_action_pressed("look_down"):
-#						player.play("AimSmallRight")
-#					else:
-#						player.play("AimSmallRight")
-#		else: #airborne
-#			player.playback_speed = 1 #reset player to normal speed
-#			if Input.is_action_pressed("move_left"):
-#				if Input.is_action_pressed("look_up"):
-#					player.play("RunLeftAimUp")
-#				elif Input.is_action_pressed("look_down"):
-#					player.play("RunLeftAimDown")
-#				else:
-#						player.play("RunLeft")
-#			elif Input.is_action_pressed("move_right"):
-#				if Input.is_action_pressed("look_up"):
-#					player.play("RunRightLookLeftAimUp")
-#				elif Input.is_action_pressed("look_down"):
-#					player.play("RunRightLookLeftAimDown")
-#				else:
-#						player.play("RunRightLookLeft")
-#	else: #DIRECTION LOCKED RIGHT
-#		if is_on_floor():
-#			#moving on ground
-#			player.playback_speed = run_anim_speed #set player speed to run_anim_speed
-#			if Input.is_action_pressed("move_left"):
-#				if Input.is_action_pressed("look_up"):
-#					player.play("RunLeftLookRightAimUp")
-#				elif Input.is_action_pressed("look_down"):
-#					player.play("RunLeftLookRight")
-#				else:
-#					player.play("RunLeftLookRight")
-#
-#			elif Input.is_action_pressed("move_right"):
-#				if Input.is_action_pressed("look_up"):
-#					player.play("RunRightAimUp")
-#				elif Input.is_action_pressed("look_down"):
-#					player.play("RunRight")
-#				else:
-#					player.play("RunRight")
-#
-#			else: #not moving on ground
-#				player.playback_speed = 1 #reset player to normal speed
-#				if look_dir.x < 0: #Left
-#					if Input.is_action_pressed("look_up"):
-#						player.play("StandLeftAimUp")
-#					elif Input.is_action_pressed("look_down"):
-#						player.play("AimSmallLeft")
-#					else:
-#						player.play("AimSmallLeft")
-#
-#				elif look_dir.x > 0: #Right
-#					if Input.is_action_pressed("look_up"):
-#						player.play("StandRightAimUp")
-#					elif Input.is_action_pressed("look_down"):
-#						player.play("AimSmallRight")
-#					else:
-#						player.play("AimSmallRight")
-#		else: #airborne
-#			player.playback_speed = 1 #reset player to normal speed
-#			if Input.is_action_pressed("move_left"):
-#				if Input.is_action_pressed("look_up"):
-#					player.play("RunLeftLookRightAimUp")
-#				elif Input.is_action_pressed("look_down"):
-#					player.play("RunLeftLookRightAimDown")
-#				else:
-#						player.play("RunLeftLookRight")
-#			elif Input.is_action_pressed("move_right"):
-#				if Input.is_action_pressed("look_up"):
-#					player.play("RunRightAimUp")
-#				elif Input.is_action_pressed("look_down"):
-#					player.play("RunRightAimDown")
-#				else:
-#						player.play("RunRight")
+
 
 func _on_BonkDetector_body_entered(body, direction):
 	#print("player bonked head")
