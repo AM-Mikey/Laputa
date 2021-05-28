@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Spawner.png-d655d065168af49d6930e56f95cdf8ce.stex"
+path="res://.import/SemiSolidTrigger.png-886ff8e6179a62e15fbdff4e8ca3a45e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/Spawner.png"
-dest_files=[ "res://.import/Spawner.png-d655d065168af49d6930e56f95cdf8ce.stex" ]
+source_file="res://assets/Tile/TriggerTile/SemiSolidTrigger.png"
+dest_files=[ "res://.import/SemiSolidTrigger.png-886ff8e6179a62e15fbdff4e8ca3a45e.stex" ]
 
 [params]
 

@@ -39,7 +39,6 @@ visible = false
 visible = false
 
 [node name="TitleScreen" parent="UILayer" instance=ExtResource( 1 )]
-visible = false
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )

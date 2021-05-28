@@ -13,7 +13,6 @@ export var rng_min_speed = 50
 export var rng_max_speed = 200
 
 var value: int
-export var xp: int
 
 func _ready():
 	direction = randomize_direction()
@@ -56,3 +55,7 @@ func get_velocity(speed, direction) -> Vector2:
 		out.y = speed.y * direction.y
 
 	return out
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	queue_free()

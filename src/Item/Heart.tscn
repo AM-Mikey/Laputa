@@ -21,18 +21,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 2, 2 ), Vector2( 1, 2 ), Vector2( 2, 2 ), Vector2( 0, 2 ), Vector2( 2, 2 ), Vector2( 1, 2 ), Vector2( 2, 2 ), Vector2( 0, 2 ), Vector2( 2, 1 ), Vector2( 0, 0 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:hp")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 6 ]
-}
 
 [sub_resource type="Animation" id=3]
 length = 3.0
@@ -48,31 +36,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 2, 1 ), Vector2( 1, 1 ), Vector2( 2, 1 ), Vector2( 0, 1 ), Vector2( 2, 1 ), Vector2( 1, 1 ), Vector2( 2, 1 ), Vector2( 0, 1 ), Vector2( 0, 0 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:hp")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 2 ]
-}
 
 [node name="Heart" type="Area2D"]
 collision_layer = 1024
 collision_mask = 0
 script = ExtResource( 2 )
-hp = 6
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 centered = false
 hframes = 3
 vframes = 7
-frame = 6
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 0.360784, 0.901961, 0.172549, 0.639216 )

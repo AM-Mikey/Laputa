@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SemiSolidTrigger.png-dbb0438b66305e6add77d3900683109d.stex"
+path="res://.import/ConveyorTrigger.png-037232b9d9fa13b4d8033c605fb57071.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/SemiSolidTrigger.png"
-dest_files=[ "res://.import/SemiSolidTrigger.png-dbb0438b66305e6add77d3900683109d.stex" ]
+source_file="res://assets/Tile/TriggerTile/ConveyorTrigger.png"
+dest_files=[ "res://.import/ConveyorTrigger.png-037232b9d9fa13b4d8033c605fb57071.stex" ]
 
 [params]
 

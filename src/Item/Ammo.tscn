@@ -48,24 +48,11 @@ tracks/0/keys = {
 "update": 1,
 "values": [ Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 2, 1 ), Vector2( 0, 1 ), Vector2( 2, 1 ), Vector2( 1, 1 ), Vector2( 2, 1 ), Vector2( 0, 1 ), Vector2( 2, 1 ), Vector2( 1, 1 ), Vector2( 2, 1 ), Vector2( 0, 0 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:ammo")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0.2 ]
-}
 
 [node name="Ammo" type="Area2D"]
 collision_layer = 4096
 collision_mask = 0
 script = ExtResource( 2 )
-ammo = 0.2
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 8, 8 )
@@ -83,3 +70,5 @@ shape = SubResource( 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Large = SubResource( 2 )
 anims/Small = SubResource( 3 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

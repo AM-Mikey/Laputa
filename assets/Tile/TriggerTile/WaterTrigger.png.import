@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/WaterTrigger.png-7381ebb723eeac548e2baef3ea478be0.stex"
+path="res://.import/WaterTrigger.png-af3fd4a4e5d5a8173ee87a6ea55f462a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/WaterTrigger.png"
-dest_files=[ "res://.import/WaterTrigger.png-7381ebb723eeac548e2baef3ea478be0.stex" ]
+source_file="res://assets/Tile/TriggerTile/WaterTrigger.png"
+dest_files=[ "res://.import/WaterTrigger.png-af3fd4a4e5d5a8173ee87a6ea55f462a.stex" ]
 
 [params]
 

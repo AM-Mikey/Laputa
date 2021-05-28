@@ -292,7 +292,6 @@ func animate(move_dir, look_dir, _velocity):
 						next_animation = "RunLeftLookDown"
 					else:
 						next_animation = "RunLeft"
-				
 				elif Input.is_action_pressed("move_right"):
 					if Input.is_action_pressed("look_up"):
 						next_animation = "RunRightLookUp"
@@ -300,7 +299,6 @@ func animate(move_dir, look_dir, _velocity):
 						next_animation = "RunRightLookDown"
 					else:
 						next_animation = "RunRight"
-
 				else: #not moving on ground
 					player.playback_speed = 1 #reset player to normal speed
 					if look_dir.x < 0: #Left
@@ -310,7 +308,6 @@ func animate(move_dir, look_dir, _velocity):
 							next_animation = "StandLeftLookDown"
 						else:
 							next_animation = "StandLeft"
-
 					elif look_dir.x > 0: #Right
 						if Input.is_action_pressed("look_up"):
 							next_animation = "StandRightLookUp"
@@ -336,6 +333,22 @@ func animate(move_dir, look_dir, _velocity):
 							next_animation = "RiseRightLookDown"
 						else:
 							next_animation = "RiseRight"
+					else: #not moving rising
+						if look_dir.x < 0: #Left
+							if Input.is_action_pressed("look_up"):
+								next_animation = "RiseLeftLookUp"
+							elif Input.is_action_pressed("look_down"):
+								next_animation = "RiseLeftLookDown"
+							else:
+								next_animation = "RiseLeft"
+						elif look_dir.x > 0: #Right
+							if Input.is_action_pressed("look_up"):
+								next_animation = "RiseRightLookUp"
+							elif Input.is_action_pressed("look_down"):
+								next_animation = "RiseRightLookDown"
+							else:
+								next_animation = "RiseRight"
+							
 				else: #Falling
 					if Input.is_action_pressed("move_left"): #Moving Left
 						if Input.is_action_pressed("look_up"):
@@ -351,24 +364,24 @@ func animate(move_dir, look_dir, _velocity):
 							next_animation = "FallRightLookDown"
 						else:
 							next_animation = "FallRight"
-	#			elif look_dir.x < 0:					 #Looking Left
-	#				if Input.is_action_pressed("look_up"):
-	#					next_animation = "StandLeftAimUp"
-	#				elif Input.is_action_pressed("look_down"):
-	#					next_animation = "StandLeftAimDown"
-	#				else:
-	#					next_animation = "StandRightAimDown"
-	#
-	#			elif look_dir.x > 0: 					#Looking Right
-	#				if Input.is_action_pressed("look_up"):
-	#					next_animation = "RunRightAimUp"
-	#				elif Input.is_action_pressed("look_down"):
-	#					next_animation = "StandRightAimUp"
-	#				else:
-	#					next_animation = "AimSmallRight"
-		
+					else: #not moving falling
+						if look_dir.x < 0: #Left
+							if Input.is_action_pressed("look_up"):
+								next_animation = "FallLeftLookUp"
+							elif Input.is_action_pressed("look_down"):
+								next_animation = "FallLeftLookDown"
+							else:
+								next_animation = "FallLeft"
+						elif look_dir.x > 0: #Right
+							if Input.is_action_pressed("look_up"):
+								next_animation = "FallRightLookUp"
+							elif Input.is_action_pressed("look_down"):
+								next_animation = "FallRightLookDown"
+							else:
+								next_animation = "FallRight"
+
+
 		elif direction_lock == Vector2.LEFT: #DIRECTION LOCKED LEFT
-			
 			if is_on_floor():
 					#player.playback_speed = run_anim_speed
 					if Input.is_action_pressed("move_left"):
@@ -378,7 +391,6 @@ func animate(move_dir, look_dir, _velocity):
 							next_animation = "RunLeftLookDown"
 						else:
 							next_animation = "RunLeft"
-					
 					elif Input.is_action_pressed("move_right"):
 						if Input.is_action_pressed("look_up"):
 							next_animation = "BackrunRightLookUp"
@@ -386,20 +398,17 @@ func animate(move_dir, look_dir, _velocity):
 							next_animation = "BackrunRightLookDown"
 						else:
 							next_animation = "BackrunRight"
-
 					else: #not moving on ground
 						player.playback_speed = 1 #reset player to normal speed
-						
 						if Input.is_action_pressed("look_up"):
 							next_animation = "StandLeftLookUp"
 						elif Input.is_action_pressed("look_down"):
 							next_animation = "StandLeftLookDown"
 						else:
 							next_animation = "StandLeft"
-	#
+							
 			else: #airborne
 				player.playback_speed = 1 #reset player to normal speed
-				
 				if _velocity.y < 0: #Rising
 					if Input.is_action_pressed("move_left"): #Moving Left
 						if Input.is_action_pressed("look_up"):
@@ -415,6 +424,14 @@ func animate(move_dir, look_dir, _velocity):
 							next_animation = "BackriseRightLookDown"
 						else:
 							next_animation = "BackriseRight"
+					else: #not moving rising
+						if Input.is_action_pressed("look_up"):
+							next_animation = "RiseLeftLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "RiseLeftLookDown"
+						else:
+							next_animation = "RiseLeft"
+							
 				else: #Falling
 					if Input.is_action_pressed("move_left"): #Moving Left
 						if Input.is_action_pressed("look_up"):
@@ -430,7 +447,15 @@ func animate(move_dir, look_dir, _velocity):
 							next_animation = "BackfallRightLookDown"
 						else:
 							next_animation = "BackfallRight"
-
+					else: #not moving falling
+						if Input.is_action_pressed("look_up"):
+							next_animation = "FallLeftLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "FallLeftLookDown"
+						else:
+							next_animation = "FallLeft"
+							
+							
 		elif direction_lock == Vector2.RIGHT: #DIRECTION LOCKED RIGHT
 			if is_on_floor():
 				#player.playback_speed = run_anim_speed
@@ -441,7 +466,6 @@ func animate(move_dir, look_dir, _velocity):
 						next_animation = "BackrunLeftLookDown"
 					else:
 						next_animation = "BackrunLeft"
-				
 				elif Input.is_action_pressed("move_right"):
 					if Input.is_action_pressed("look_up"):
 						next_animation = "RunRightLookUp"
@@ -449,10 +473,8 @@ func animate(move_dir, look_dir, _velocity):
 						next_animation = "RunRightLookDown"
 					else:
 						next_animation = "RunRight"
-
 				else: #not moving on ground
 					player.playback_speed = 1 #reset player to normal speed
-					
 					if Input.is_action_pressed("look_up"):
 						next_animation = "StandRightLookUp"
 					elif Input.is_action_pressed("look_down"):
@@ -462,7 +484,6 @@ func animate(move_dir, look_dir, _velocity):
 						
 			else: #airborne
 				player.playback_speed = 1 #reset player to normal speed
-				
 				if _velocity.y < 0: #Rising
 					if Input.is_action_pressed("move_left"): #Moving Left
 						if Input.is_action_pressed("look_up"):
@@ -478,6 +499,14 @@ func animate(move_dir, look_dir, _velocity):
 							next_animation = "RiseRightLookDown"
 						else:
 							next_animation = "RiseRight"
+					else: #not moving falling
+						if Input.is_action_pressed("look_up"):
+							next_animation = "RiseRightLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "RiseRightLookDown"
+						else:
+							next_animation = "RiseRight"
+				
 				else: #Falling
 					if Input.is_action_pressed("move_left"): #Moving Left
 						if Input.is_action_pressed("look_up"):
@@ -493,6 +522,14 @@ func animate(move_dir, look_dir, _velocity):
 							next_animation = "FallRightLookDown"
 						else:
 							next_animation = "FallRight"
+					else: #not moving falling
+						if Input.is_action_pressed("look_up"):
+							next_animation = "FallRightLookUp"
+						elif Input.is_action_pressed("look_down"):
+							next_animation = "FallRightLookDown"
+						else:
+							next_animation = "FallRight"
+	
 	else: #is on ladder
 		if Input.is_action_pressed("move_left"):
 			if Input.is_action_pressed("look_up"):

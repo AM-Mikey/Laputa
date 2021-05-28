@@ -23,24 +23,12 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 2, 2 ), Vector2( 3, 2 ), Vector2( 4, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 2, 2 ), Vector2( 3, 2 ), Vector2( 4, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 2, 2 ), Vector2( 3, 2 ), Vector2( 4, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 2, 2 ), Vector2( 3, 2 ), Vector2( 4, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 2, 2 ), Vector2( 3, 2 ), Vector2( 4, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 2, 2 ), Vector2( 3, 2 ), Vector2( 4, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 2, 2 ), Vector2( 3, 2 ), Vector2( 4, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 2, 2 ), Vector2( 3, 2 ), Vector2( 4, 2 ), Vector2( 0, 2 ), Vector2( 6, 0 ), Vector2( 1, 2 ), Vector2( 6, 0 ), Vector2( 2, 2 ), Vector2( 6, 0 ), Vector2( 3, 2 ), Vector2( 6, 0 ), Vector2( 4, 2 ), Vector2( 5, 2 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath(".:xp")
+tracks/1/path = NodePath("CollisionShape2D:shape")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 20 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("CollisionShape2D:shape")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -132,16 +120,15 @@ collision_layer = 2048
 collision_mask = 8
 script = ExtResource( 3 )
 bounciness = 0.6
-xp = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = ExtResource( 5 )
+shape = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 7
 vframes = 3
-frame = 3
+frame = 6
 
 [node name="BounceSpacial" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
@@ -151,3 +138,5 @@ bus = "SFX"
 anims/Large = SubResource( 1 )
 anims/Medium = SubResource( 2 )
 anims/Small = SubResource( 3 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

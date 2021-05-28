@@ -182,11 +182,11 @@ func _on_EntityDetector_body_entered(body):
 			hit(damage, knockback_direction)
 				
 		if body.get_collision_layer_bit(11): #xp
-			total_xp += body.xp
+			total_xp += body.value
 			if weapon_array.front().level == weapon_array.front().max_level and weapon_array.front().xp == weapon_array.front().max_xp:
 				pass
 			else:
-				weapon_array.front().xp += body.xp
+				weapon_array.front().xp += body.value
 
 			if weapon_array.front().xp >= weapon_array.front().max_xp: #level up
 				if weapon_array.front().level == weapon_array.front().max_level: #already max level
@@ -244,7 +244,7 @@ func _on_EntityDetector_area_entered(area):
 	if disabled != true:
 		
 		if area.get_collision_layer_bit(10): #health
-			hp += area.hp
+			hp += area.value
 			$PickupSound.stream = load("res://assets/SFX/snd_health_refill.ogg")
 			$PickupSound.play()
 			if hp > max_hp:
@@ -255,7 +255,7 @@ func _on_EntityDetector_area_entered(area):
 		if area.get_collision_layer_bit(12): #ammo
 			for w in weapon_array:
 				if w.needs_ammo:
-					w.ammo += w.max_ammo * area.ammo #percent of max ammo
+					w.ammo += w.max_ammo * area.value #percent of max ammo
 					if w.ammo > w.max_ammo:
 						w.ammo = w.max_ammo
 
@@ -347,6 +347,8 @@ func debug_mode():
 	
 	elif debug_active == true:
 		print("debug mode: OFF")
+		is_in_water = false
+		is_on_ladder = false
 		debug_active = false
 		invincible = false
 		colliding = true

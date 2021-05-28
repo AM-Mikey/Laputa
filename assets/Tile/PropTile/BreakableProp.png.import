@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ConveyorTrigger.png-e286d9968bd25d8dd74346809df354c2.stex"
+path="res://.import/BreakableProp.png-5c8c4b872f14b9042e441e8844932538.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/ConveyorTrigger.png"
-dest_files=[ "res://.import/ConveyorTrigger.png-e286d9968bd25d8dd74346809df354c2.stex" ]
+source_file="res://assets/Tile/PropTile/BreakableProp.png"
+dest_files=[ "res://.import/BreakableProp.png-5c8c4b872f14b9042e441e8844932538.stex" ]
 
 [params]
 

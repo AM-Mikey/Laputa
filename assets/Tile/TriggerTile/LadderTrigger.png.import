@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/LadderTrigger.png-7dc139a27a611953b68a8a7e07c522fc.stex"
+path="res://.import/LadderTrigger.png-b2a409b4c3fb051145a8e66d43ffaca4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/LadderTrigger.png"
-dest_files=[ "res://.import/LadderTrigger.png-7dc139a27a611953b68a8a7e07c522fc.stex" ]
+source_file="res://assets/Tile/TriggerTile/LadderTrigger.png"
+dest_files=[ "res://.import/LadderTrigger.png-b2a409b4c3fb051145a8e66d43ffaca4.stex" ]
 
 [params]
 
