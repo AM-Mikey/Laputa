@@ -6,12 +6,9 @@ const SNAP_LENGTH = 4.0
 
 
 export var run_anim_speed = 1.25
-export var acceleration = 50
 export var max_x_speed = 82.5
 export var jump_speed = 195
 export var minimum_jump_time = 0.1
-export var ground_cof = 0.2 #.02 .2??
-export var air_cof = 0.05
 
 var horizontal_focus = Vector2.LEFT
 var homing_camera = false
@@ -26,6 +23,11 @@ var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 onready var animation_tree = get_node("AnimationTree")
 onready var animation_mode = animation_tree.get("parameters/playback")
 onready var world = get_tree().get_root().get_node("World")
+
+func _ready():
+	acceleration = 50
+	ground_cof = 0.2
+	air_cof = 0.05
 
 func _physics_process(delta):
 	if disabled != true:
@@ -212,6 +214,7 @@ func calculate_move_velocity(linear_velocity: Vector2, move_dir, look_dir, speci
 
 
 	elif knockback == true: #with special, knockback #MASSIVE ISSUES HERE WITH ACCELERATION
+		snap_vector = Vector2.ZERO
 		out.y += gravity * get_physics_process_delta_time()
 		if move_dir.y < 0 or special_dir.y < 0: 
 			if move_dir.y != 0:

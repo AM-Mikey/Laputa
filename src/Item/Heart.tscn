@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "Large"
 length = 3.0
 tracks/0/type = "value"
@@ -34,8 +34,7 @@ tracks/1/keys = {
 "values": [ 6 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Small"
+[sub_resource type="Animation" id=3]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame_coords")
@@ -70,14 +69,18 @@ hp = 6
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
-vframes = 7
+centered = false
 hframes = 3
+vframes = 7
 frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 0.360784, 0.901961, 0.172549, 0.639216 )
+position = Vector2( 8, 8 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Large = SubResource( 3 )
-anims/Small = SubResource( 2 )
+anims/Large = SubResource( 2 )
+anims/Small = SubResource( 3 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

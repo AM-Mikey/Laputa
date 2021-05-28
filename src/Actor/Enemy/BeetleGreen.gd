@@ -10,6 +10,7 @@ func _ready():
 	damage_on_contact = 2
 	speed = Vector2(100, 100)
 	move_dir = starting_direction
+	acceleration = 25
 
 func _physics_process(delta):
 	if not dead:

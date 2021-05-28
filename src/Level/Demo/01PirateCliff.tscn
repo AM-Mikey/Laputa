@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/Tile/MimigaM.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Tile/MimigaF.tres" type="TileSet" id=2]
@@ -20,6 +20,8 @@
 [ext_resource path="res://src/Tile/TileMap.gd" type="Script" id=18]
 [ext_resource path="res://assets/Tile/WorldBorder.png" type="Texture" id=19]
 [ext_resource path="res://assets/Tile/AutotileChainTest.png" type="Texture" id=20]
+[ext_resource path="res://src/Actor/Enemy/Cloud.tscn" type="PackedScene" id=21]
+[ext_resource path="res://src/Actor/Enemy/Larry.tscn" type="PackedScene" id=22]
 
 [sub_resource type="TileSet" id=1]
 0/name = "TerrainAutotile.png 0"
@@ -217,6 +219,18 @@ weapon_name = "Pistol"
 
 [node name="Actors" type="Node2D" parent="."]
 
+[node name="Cloud" parent="Actors" instance=ExtResource( 21 )]
+position = Vector2( 552, 88 )
+
+[node name="Larry" parent="Actors" instance=ExtResource( 22 )]
+position = Vector2( 288, 208 )
+
+[node name="Larry2" parent="Actors" instance=ExtResource( 22 )]
+position = Vector2( 152, 160 )
+
+[node name="Larry3" parent="Actors" instance=ExtResource( 22 )]
+position = Vector2( 560, 160 )
+
 [node name="Triggers" type="Node2D" parent="."]
 
 [node name="Door" parent="Triggers" instance=ExtResource( 5 )]
@@ -334,6 +348,18 @@ margin_right = -72.0
 margin_bottom = 539.0
 custom_fonts/font = ExtResource( 10 )
 text = "camera pans down during dialog to indicate where we need to go"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label6" type="Label" parent="Notes"]
+margin_top = 224.0
+margin_right = 152.0
+margin_bottom = 273.0
+custom_fonts/font = ExtResource( 10 )
+text = "hatch is rusted shut, we need the gun to get back up
+"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false

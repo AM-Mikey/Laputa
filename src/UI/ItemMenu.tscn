@@ -36,13 +36,13 @@ __meta__ = {
 [node name="CenterContainer" type="CenterContainer" parent="."]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 496.0
+margin_right = 464.0
 margin_bottom = 272.0
 rect_min_size = Vector2( 32, 32 )
 
 [node name="Background" type="NinePatchRect" parent="CenterContainer"]
-margin_left = 64.0
-margin_right = 416.0
+margin_left = 48.0
+margin_right = 400.0
 margin_bottom = 256.0
 rect_min_size = Vector2( 352, 256 )
 texture = ExtResource( 2 )

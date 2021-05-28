@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://src/Actor/Enemy/PowerCritter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Actor/Enemy/Trenchie.tscn" type="PackedScene" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://src/Prop/SavePoint.tscn" type="PackedScene" id=26]
 [ext_resource path="res://src/Utility/SimpleTrack.tscn" type="PackedScene" id=27]
 [ext_resource path="res://src/Actor/Enemy/Bat.tscn" type="PackedScene" id=28]
+[ext_resource path="res://src/Actor/Enemy/Cloud.tscn" type="PackedScene" id=29]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Mimiga.png 0"
@@ -239,6 +240,9 @@ position = Vector2( -232, -208 )
 position = Vector2( 88, 56 )
 
 [node name="Bat" parent="Actors/SimpleTrack/PathFollow2D" index="0" instance=ExtResource( 28 )]
+
+[node name="Cloud" parent="Actors" instance=ExtResource( 29 )]
+position = Vector2( -264, 152 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

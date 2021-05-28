@@ -20,15 +20,10 @@ var recent_damage_taken: int
 var timer = Timer.new()
 export var damagenum_reset_time: float = 1.0
 
-export var drop_rolls: int = 1
-export var small_hp_chance: float = .2
-export var large_hp_chance: float = .1
-export var small_xp_chance: float = .1
-export var medium_xp_chance: float = .1
-export var large_xp_chance: float = .1
-export var small_ammo_chance: float = .2
-export var large_ammo_chance: float = .1
-
+export var level = 1
+export var hp_chance = 10
+export var xp_chance = 0
+export var ammo_chance = 0
 
 func _ready():
 	timer.connect("timeout",self,"_on_timer_timeout") 
@@ -80,75 +75,48 @@ func die():
 		#$CollisionShape2D.disabled = true #isnt doing anything for some reason
 		yield(player, "animation_finished")
 		effect.queue_free()
-		
-		yield(get_tree().create_timer(5.0), "timeout") #free after 4 seconds to ensure that the drop was either picked up or has despawned
-		print("removed enemy")
 		queue_free()
-	
+
 	
 func do_death_drop():
 	var heart = HEART.instance()
 	var xp = XP.instance()
 	var ammo = AMMO.instance()
 	
-	rng.randomize()
-	var drop = rng.randf()
+	var ray = RayCast2D.new()
+	ray.set_collision_mask_bit(0, false)
+	ray.set_collision_mask_bit(3, true)
+	ray.cast_to = Vector2(0, 1000)
+	ray.enabled = true
+	add_child(ray)
+	yield(get_tree(), "idle_frame")
+	var tilemap = ray.get_collider()
+	ray.queue_free()
 	
-	if drop > 0 and drop < small_hp_chance:
-		get_parent().add_child(heart)
-		heart.position = global_position
-		var player = heart.get_node("AnimationPlayer")
-		player.play("Small")
-		yield(player, "animation_finished")
-		heart.queue_free()
+	var target_pos = global_position
+	var local_pos = tilemap.to_local(target_pos)
+	var map_pos = tilemap.world_to_map(local_pos)
+	var target_cell = tilemap.get_cellv(map_pos)
+	while target_cell != -1: #while target cell is not air
+		map_pos.y -=1
+		target_cell = tilemap.get_cellv(map_pos)
+	local_pos = tilemap.map_to_world(map_pos)
+	target_pos = tilemap.to_global(local_pos)
 
-	elif drop > small_hp_chance and drop < small_hp_chance + large_hp_chance:
-		get_parent().add_child(heart)
-		heart.position = global_position
-		var player = heart.get_node("AnimationPlayer")
-		player.play("Large")
-		yield(player, "animation_finished")
-		heart.queue_free()
 
-	elif drop > small_hp_chance + large_hp_chance and drop < small_hp_chance + large_hp_chance + small_xp_chance:
-		get_parent().add_child(xp)
-		xp.position = global_position
-		var player = xp.get_node("AnimationPlayer")
-		player.play("Small")
-		yield(player, "animation_finished")
-		xp.queue_free()
-		
-	elif drop > small_hp_chance + large_hp_chance + small_xp_chance and drop < small_hp_chance + large_hp_chance + small_xp_chance + medium_xp_chance:
-		get_parent().add_child(xp)
-		xp.position = global_position
-		var player = xp.get_node("AnimationPlayer")
-		player.play("Medium")
-		yield(player, "animation_finished")
-		xp.queue_free()
-	elif drop > small_hp_chance + large_hp_chance + small_xp_chance + medium_xp_chance and drop < small_hp_chance + large_hp_chance + small_xp_chance + medium_xp_chance + large_xp_chance:
-		get_parent().add_child(xp)
-		xp.position = global_position
-		var player = xp.get_node("AnimationPlayer")
-		player.play("Large")
-		yield(player, "animation_finished")
-		xp.queue_free()
-	elif drop > small_hp_chance + large_hp_chance + small_xp_chance + medium_xp_chance + large_xp_chance and drop < small_hp_chance + large_hp_chance + small_xp_chance + medium_xp_chance + large_xp_chance + small_ammo_chance:
-		get_parent().add_child(ammo)
-		ammo.position = global_position
-		var player = ammo.get_node("AnimationPlayer")
-		player.play("Small")
-		yield(player, "animation_finished")
-		ammo.queue_free()
-	elif drop > small_hp_chance + large_hp_chance + small_xp_chance + medium_xp_chance + large_xp_chance + small_ammo_chance and drop < small_hp_chance + large_hp_chance + small_xp_chance + medium_xp_chance + large_xp_chance + small_ammo_chance + large_ammo_chance:
-		get_parent().add_child(ammo)
-		ammo.position = global_position
-		var player = ammo.get_node("AnimationPlayer")
-		player.play("Large")
-		yield(player, "animation_finished")
-		ammo.queue_free()
+	var total_chance = hp_chance + xp_chance + ammo_chance
+	rng.randomize()
+	var drop = rng.randf_range(0, total_chance)
+	
+	if drop <= hp_chance:
+		get_tree().get_current_scene().add_child(heart)
+		heart.position = target_pos
+		heart.value = level
+	elif drop > hp_chance and drop <= hp_chance + xp_chance:
+		get_tree().get_current_scene().add_child(xp)
+		xp.position = target_pos
+		xp.value = level
 	else:
-		pass
-
-#func _input(event):
-#	if event.is_action_pressed("debug"):
-#		print("enemy hp in instance '", name, "' : ", hp)
+		get_tree().get_current_scene().add_child(ammo)
+		ammo.position = target_pos
+		ammo.value = float(level)/10

@@ -5,7 +5,6 @@
 [ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=4]
 
 [node name="TitleScreen" type="Control"]
-visible = false
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false

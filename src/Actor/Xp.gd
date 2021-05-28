@@ -12,12 +12,20 @@ export var minimum_speed: float = .05
 export var rng_min_speed = 50
 export var rng_max_speed = 200
 
+var value: int
 export var xp: int
 
 func _ready():
 	direction = randomize_direction()
 	speed = randomize_speed()
 	_velocity = get_velocity(speed, direction)
+
+	if value <= 1:
+		$AnimationPlayer.play("Small")
+	elif value <= 5:
+		$AnimationPlayer.play("Medium")
+	else:
+		$AnimationPlayer.play("Large")
 
 func _physics_process(delta):
 	if abs(_velocity.x) > minimum_speed and abs(_velocity.y) > minimum_speed:

@@ -13,7 +13,7 @@
 
 [node name="World" type="Node2D"]
 script = ExtResource( 8 )
-starting_level = "res://src/Level/ObstacleCourse.tscn"
+starting_level = "res://src/Level/Demo/01PirateCliff.tscn"
 
 [node name="Recruit" parent="." instance=ExtResource( 5 )]
 position = Vector2( 256, 144 )
@@ -39,6 +39,7 @@ visible = false
 visible = false
 
 [node name="TitleScreen" parent="UILayer" instance=ExtResource( 1 )]
+visible = false
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )

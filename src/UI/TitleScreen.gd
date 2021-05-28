@@ -1,5 +1,7 @@
 extends Control
 
+const LEVELSELECT = preload("res://src/UI/LevelSelect.tscn")
+
 onready var world = get_tree().get_root().get_node("World")
 onready var player = get_tree().get_root().get_node("World/Recruit")
 onready var hud = get_tree().get_root().get_node("World/UILayer/HUD")
@@ -24,7 +26,7 @@ func _on_Options_pressed():
 
 
 func _on_Level_pressed():
-	pass # Replace with function body.
+	add_child(LEVELSELECT.instance())
 
 
 func _on_Quit_pressed():
