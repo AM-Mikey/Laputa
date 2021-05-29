@@ -13,7 +13,6 @@
 
 [node name="World" type="Node2D"]
 script = ExtResource( 8 )
-starting_level = "res://src/Level/Demo/01PirateCliff.tscn"
 
 [node name="Recruit" parent="." instance=ExtResource( 5 )]
 position = Vector2( 256, 144 )

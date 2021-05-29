@@ -105,13 +105,13 @@ func save_player_data():
 	
 	var weapon_data = {}
 	
-	for w in player.get_node("Weapon/WeaponList").get_children():
-		weapon_data[w.name] = {
+	for w in player.weapon_array:
+		weapon_data[w.resource_name] = {
 			"level" : w.level,
 			"xp" : w.xp
 			}
 		if w.needs_ammo:
-			weapon_data[w.name]["ammo"] = w.ammo
+			weapon_data[w.resource_name]["ammo"] = w.ammo
 	
 	data["player_data"] = {
 		"position" : player.position,
@@ -119,7 +119,7 @@ func save_player_data():
 		"max_hp" : player.max_hp,
 		"total_xp" : player.total_xp,
 		"inventory" : player.inventory,
-		"weapon_array" : player.weapon_array,
+		#"weapon_array" : player.weapon_array,
 		"weapon_data" : weapon_data
 	}
 	
@@ -148,19 +148,23 @@ func load_player_data():
 			player.max_hp = data["player_data"]["max_hp"]
 			player.total_xp = data["player_data"]["total_xp"]
 			player.inventory = data["player_data"]["inventory"]
-			player.weapon_array = data["player_data"]["weapon_array"]
+			#player.setup_weapons() not sure what this did
 			
-			player.setup_weapons()
 			
-			for w in player.get_node("Weapon/WeaponList").get_children():
-				w.level = data["player_data"]["weapon_data"][w.name]["level"]
-				w.xp = data["player_data"]["weapon_data"][w.name]["xp"]
+			player.weapon_array.clear()
+			for w in data["player_data"]["weapon_data"]:
+				player.weapon_array.append(load("res://src/Weapon/%s" %w + ".tres"))
+			for w in player.weapon_array:
+				w.level = data["player_data"]["weapon_data"][w.resource_name]["level"]
+				w.xp = data["player_data"]["weapon_data"][w.resource_name]["xp"]
 				if w.needs_ammo:
-					w.ammo = data["player_data"]["weapon_data"][w.name]["ammo"]
+					w.ammo = data["player_data"]["weapon_data"][w.resource_name]["ammo"]
 			
-			player.weapon_array[0].update_weapon()
+			#player.weapon_array[0].update_weapon()
+			player.get_node("WeaponManager").update_weapon()
 			player.update_hp()
 			player.update_max_hp()
+			player.update_xp()
 			player.update_inventory()
 			
 			print("player data loaded")

@@ -220,7 +220,7 @@ func _on_EntityDetector_body_entered(body):
 					audio.stream = load("res://assets/SFX/snd_level_up.ogg")
 					audio.play()
 					
-					emit_signal("player_experience_updated", total_xp, weapon_array.front().level, weapon_array.front().max_level, weapon_array.front().xp, weapon_array.front().max_xp)
+					update_xp()
 					
 					yield(player, "animation_finished")
 					text.queue_free()
@@ -232,7 +232,7 @@ func _on_EntityDetector_body_entered(body):
 				$PickupSound.stream = load("res://assets/SFX/snd_get_xp.ogg")
 				$PickupSound.play()
 				
-				emit_signal("player_experience_updated", total_xp, weapon_array.front().level, weapon_array.front().max_level, weapon_array.front().xp, weapon_array.front().max_xp)
+				update_xp()
 				body.queue_free()
 
 
@@ -311,6 +311,9 @@ func update_hp():
 
 func update_max_hp():
 	emit_signal("player_max_health_updated", max_hp)
+
+func update_xp():
+	emit_signal("player_experience_updated", total_xp, weapon_array.front().level, weapon_array.front().max_level, weapon_array.front().xp, weapon_array.front().max_xp)
 
 func update_inventory():
 	emit_signal("inventory_updated", inventory)

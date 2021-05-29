@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/Weapon/MachinePistolIcon.png" type="Texture" id=5]
 
 [resource]
+resource_name = "MachinePistol"
 script = ExtResource( 1 )
 display_name = "Machine Gun"
 description = "A swift and powerful automatic weapon. It runs out of ammo rather quickly."

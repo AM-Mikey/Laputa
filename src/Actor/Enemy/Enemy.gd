@@ -21,9 +21,9 @@ var timer = Timer.new()
 export var damagenum_reset_time: float = 1.0
 
 export var level = 1
-export var hp_chance = 10
-export var xp_chance = 0
-export var ammo_chance = 0
+export var hp_chance = 1
+export var xp_chance = 1
+export var ammo_chance = 1
 
 func _ready():
 	timer.connect("timeout",self,"_on_timer_timeout") 
