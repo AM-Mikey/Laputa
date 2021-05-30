@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Lv.png-f21fa3a4c676a3776af8a0ed2dff8952.stex"
+path="res://.import/MachinePistolIconoriginalcolor.png-e9eed02b1ace8794b031efc84557918b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Lv.png"
-dest_files=[ "res://.import/Lv.png-f21fa3a4c676a3776af8a0ed2dff8952.stex" ]
+source_file="res://assets/Weapon/MachinePistolIconoriginalcolor.png"
+dest_files=[ "res://.import/MachinePistolIconoriginalcolor.png-e9eed02b1ace8794b031efc84557918b.stex" ]
 
 [params]
 

@@ -9,6 +9,7 @@ export var run_anim_speed = 1.25
 export var max_x_speed = 82.5
 export var jump_speed = 195
 export var minimum_jump_time = 0.1
+export var min_x_velocity = 0.001
 
 var horizontal_focus = Vector2.LEFT
 var homing_camera = false
@@ -26,7 +27,7 @@ onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
 	acceleration = 50
-	ground_cof = 0.2
+	ground_cof = 0.2 #0.2
 	air_cof = 0.05
 
 func _physics_process(delta):
@@ -82,8 +83,9 @@ func _physics_process(delta):
 
 			_velocity = calculate_move_velocity(_velocity, move_dir, look_dir, special_dir, speed, is_jump_interrupted, is_dodge_interrupted)
 			#_velocity = move_and_slide(_velocity, FLOOR_NORMAL, true)
-			_velocity = move_and_slide_with_snap(_velocity, snap_vector, FLOOR_NORMAL, true)
+			#_velocity = move_and_slide_with_snap(_velocity, snap_vector, FLOOR_NORMAL, true)
 			#_velocity.y = move_and_slide(_velocity, FLOOR_NORMAL, true).y
+			_velocity.y = move_and_slide_with_snap(_velocity, snap_vector, FLOOR_NORMAL, true).y
 			
 			animate(move_dir, look_dir, _velocity)
 			
@@ -257,6 +259,9 @@ func calculate_move_velocity(linear_velocity: Vector2, move_dir, look_dir, speci
 		if friction == true:
 			out.x = lerp(out.x, 0, air_cof)
 
+
+	if abs(out.x) < min_x_velocity:
+		out.x = 0
 	#print(out)
 	return out
 

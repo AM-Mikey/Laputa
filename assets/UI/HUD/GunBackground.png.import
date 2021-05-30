@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/HpBarUnder.png-35d2c4303d21d386c320c97175b08df7.stex"
+path="res://.import/GunBackground.png-9e336355b2b7283d5eefb13ebb8baf03.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/HpBarUnder.png"
-dest_files=[ "res://.import/HpBarUnder.png-35d2c4303d21d386c320c97175b08df7.stex" ]
+source_file="res://assets/UI/HUD/GunBackground.png"
+dest_files=[ "res://.import/GunBackground.png-9e336355b2b7283d5eefb13ebb8baf03.stex" ]
 
 [params]
 

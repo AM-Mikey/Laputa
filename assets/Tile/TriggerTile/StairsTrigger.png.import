@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/HpBarLost.png-e4af73b90d165c559ca1baf295d8f4c6.stex"
+path="res://.import/StairsTrigger.png-d388b4aa90e190d9813be83f5d023815.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/HpBarLost.png"
-dest_files=[ "res://.import/HpBarLost.png-e4af73b90d165c559ca1baf295d8f4c6.stex" ]
+source_file="res://assets/Tile/TriggerTile/StairsTrigger.png"
+dest_files=[ "res://.import/StairsTrigger.png-d388b4aa90e190d9813be83f5d023815.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/HpBarProgress.png-c5a809ac08bce8eb550ca0642c03cdcd.stex"
+path="res://.import/MachinePistolIcon2x.png-ec8082fa790b44589803238d68ef9408.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/HpBarProgress.png"
-dest_files=[ "res://.import/HpBarProgress.png-c5a809ac08bce8eb550ca0642c03cdcd.stex" ]
+source_file="res://assets/Weapon/MachinePistolIcon2x.png"
+dest_files=[ "res://.import/MachinePistolIcon2x.png-ec8082fa790b44589803238d68ef9408.stex" ]
 
 [params]
 
