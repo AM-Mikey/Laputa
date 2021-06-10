@@ -30,6 +30,38 @@ func _ready():
 				levels.append("res://src/Level/Demo/%s" %file)
 	demo_dir.list_dir_end()
 	
+	demo_dir.open("res://src/Level/Demo/CloudFactory")
+	demo_dir.list_dir_begin()
+	while true:
+		var file = demo_dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			if file.ends_with(".tscn"):
+				levels.append("res://src/Level/Demo/CloudFactory/%s" %file)
+	demo_dir.list_dir_end()
+	
+	demo_dir.open("res://src/Level/Demo/Coast")
+	demo_dir.list_dir_begin()
+	while true:
+		var file = demo_dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			if file.ends_with(".tscn"):
+				levels.append("res://src/Level/Demo/Coast/%s" %file)
+	demo_dir.list_dir_end()
+	
+	demo_dir.open("res://src/Level/Demo/Village")
+	demo_dir.list_dir_begin()
+	while true:
+		var file = demo_dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			if file.ends_with(".tscn"):
+				levels.append("res://src/Level/Demo/Village/%s" %file)
+	demo_dir.list_dir_end()
 
 	for l in levels:
 		if l.rfind(".tscn"):

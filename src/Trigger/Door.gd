@@ -16,7 +16,7 @@ export var locked = false
 
 func _ready():
 	connect("level_change", world, "_on_level_change")
-	add_to_group("LevelTrigger")
+	add_to_group("LevelTriggers")
 
 func _on_LevelTrigger_body_entered(body):
 	has_player_near = true

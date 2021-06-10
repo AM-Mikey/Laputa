@@ -5,6 +5,7 @@ var target: Node
 export var look_dir: Vector2 = Vector2.LEFT
 var move_dir: Vector2 = Vector2.UP #start moving upwards constantly
 
+var dropped = false
 var panic_run = false
 var touchdown = false
 
@@ -15,21 +16,56 @@ func _ready():
 	hp = 4
 	damage_on_contact = base_damage
 	speed = Vector2(100, 100)
+	setup_collision()
+
+func setup_collision():
+	$RayCast2D.force_raycast_update()
+	var tilemap = $RayCast2D.get_collider()
+	#print(tilemap)
+	$RayCast2D.queue_free()
+	
+	if tilemap != null:
+		var target_pos = global_position
+		var local_pos = tilemap.to_local(target_pos)
+		var map_pos = tilemap.world_to_map(local_pos)
+		var target_cell = tilemap.get_cellv(map_pos)
+		
+		var detector_length = 0
+		
+		while target_cell == -1:
+			detector_length += 1
+			map_pos.y += 1
+			target_cell = tilemap.get_cellv(map_pos)
+				
+		$PlayerDetector.scale.y = detector_length
+		print("dl: ", detector_length)
 
 func _physics_process(delta):
 	if not dead:
 		_velocity = calculate_move_velocity(_velocity, move_dir, speed)
 		_velocity = move_and_slide(_velocity, FLOOR_NORMAL)
 		
-		if panic_run == true:
+		if dropped == true:
 			if is_on_floor() and touchdown == false: #check to see if they've landed before
 				touchdown = true
-				move_dir.x = look_dir.x
-				yield(get_tree().create_timer(0.1), "timeout") #delay to change damage back to base
+				$PlayerDetector.queue_free()
+				yield(get_tree().create_timer(0.01), "timeout") #delay to change damage back to base
 				damage_on_contact = base_damage
+				
+				if look_dir == Vector2.LEFT:
+					$AnimationPlayer.play("SquirmLeft")
+				elif look_dir == Vector2.RIGHT:
+					$AnimationPlayer.play("SquirmRight")
+				
+				yield($AnimationPlayer, "animation_finished")
+				
+				panic_run = true
+				move_dir.x = look_dir.x
+
 			if is_on_wall():
 				move_dir.x *= -1
-
+		
+		animate()
 
 func calculate_move_velocity(_velocity: Vector2, move_dir, speed) -> Vector2:
 	var out: = _velocity
@@ -50,7 +86,17 @@ func _on_PlayerDetector_body_entered(body):
 
 func drop():
 	$PlayerDetector.set_deferred("monitoring", false) #no longer needs to be triggered
+	dropped = true
 	move_dir.y = 0 #fall
-	panic_run = true
 	damage_on_contact = falling_damage
-	#var height_from_target = global_position.y - target.global_position.y
+
+
+func animate():
+	if move_dir == Vector2.UP:
+		$AnimationPlayer.play("HangIdle")
+			
+	if panic_run == true:
+		if move_dir == Vector2.LEFT:
+			$AnimationPlayer.play("RunLeft")
+		elif move_dir == Vector2.RIGHT:
+			$AnimationPlayer.play("RunRight")

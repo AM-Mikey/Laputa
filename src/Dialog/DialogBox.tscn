@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/Dialog/DialogBox.gd" type="Script" id=1]
+[ext_resource path="res://assets/UI/DialogBox.png" type="Texture" id=2]
+[ext_resource path="res://assets/UI/Face/Recruit.png" type="Texture" id=3]
+[ext_resource path="res://assets/UI/Font/momo.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/LightTest.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 12
+use_mipmaps = true
+extra_spacing_top = 2
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 12
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 12
+font_data = ExtResource( 4 )
+
+[node name="DialogBox" type="Control"]
+margin_right = 480.0
+margin_bottom = 272.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [  ]
+}
+dialog_json = "res://src/Dialog/NewDialogPrinter.json"
+
+[node name="Background" type="NinePatchRect" parent="."]
+margin_left = 64.0
+margin_top = 192.0
+margin_right = 448.0
+margin_bottom = 256.0
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 48, 48 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Face" type="Sprite" parent="."]
+position = Vector2( 96, 224 )
+texture = ExtResource( 3 )
+
+[node name="TextBox" type="Label" parent="."]
+light_mask = 2
+margin_left = 128.0
+margin_top = 200.0
+margin_right = 440.0
+margin_bottom = 248.0
+custom_fonts/font = SubResource( 1 )
+text = "gfdgdfgdfg fsfd"
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = "SFX"
+
+[node name="PrintTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 116.0
+margin_top = 116.0
+margin_right = 403.0
+margin_bottom = 164.0
+custom_fonts/mono_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "hello [color=red]popo[/color] hehe"
+text = "hello popo hehe"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light2D" type="Light2D" parent="."]
+visible = false
+position = Vector2( 179, 210 )
+texture = ExtResource( 5 )
+color = Color( 1, 0, 0, 1 )
+energy = 16.0
+mode = 3
+range_item_cull_mask = 2
+shadow_item_cull_mask = 2

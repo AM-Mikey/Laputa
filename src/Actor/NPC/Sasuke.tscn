@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/Actor/NPC/Sasuke.png" type="Texture" id=1]
+[ext_resource path="res://src/Actor/NPC/Sasuke.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 10 )
+
+[node name="Sasuke" type="KinematicBody2D"]
+collision_layer = 128
+collision_mask = 8
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -10 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -16 )
+texture = ExtResource( 1 )
+vframes = 2

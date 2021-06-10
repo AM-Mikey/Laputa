@@ -17,7 +17,10 @@ func _ready():
 	add_child(current_level)
 	if $UILayer/TitleScreen.visible == true:
 		show_title()
-		
+	
+	var spawn_points = get_tree().get_nodes_in_group("SpawnPoints")
+	for s in spawn_points:
+		$Recruit.global_position = s.global_position
 
 func _on_viewport_size_changed():
 	print("viewport size changed")
@@ -70,13 +73,46 @@ func _on_level_change(level, door_index, level_name, music): #clean this up once
 	else:
 		$Recruit/Camera2D.current = true
 	
-		#get the door with the right index
-	var triggers = get_tree().get_nodes_in_group("LevelTrigger")
+	######################## get the door with the right index
+	
+	var doors_found = 0
+	
+	var triggers = get_tree().get_nodes_in_group("LevelTriggers")
 	for t in triggers:
 		if t.level == level_path:
-			$Recruit.position = t.position
-			print("got right door")
+			if t.is_in_group("LoadZones"):
+				$Recruit.position = t.position + (t.direction * -32)
+				print("found a connected zone")
+				doors_found += 1
+			else:
+				$Recruit.position = t.position
+				print("found a connected door")
+				doors_found += 1
+		
+	if doors_found == 0:
+		print("ERROR: could not find door with right level connection")
+	
+	if doors_found > 1: #more than one door with correct level connections
+		doors_found = 0
+		for t in triggers:
+			if t.level == level_path and t.door_index == door_index:
+				if t.is_in_group("LoadZones"):
+					$Recruit.position = t.position + (t.direction * -32)
+					print("got correct zone")
+					doors_found += 1
+				else:
+					$Recruit.position = t.position
+					print("got correct door")
+					doors_found += 1
+		
+		if doors_found == 0:
+			print("ERROR: could not find door with right index")
+		if doors_found > 1:
+			print("ERROR: more than one door with same index")
+	
 	$UILayer/LevelName.display_text(next_level.level_name)
+	
+	##########
 	
 	if next_level.music != music:
 		load_music(next_level.music)
@@ -90,12 +126,13 @@ func _on_level_change(level, door_index, level_name, music): #clean this up once
 	yield(get_tree().create_timer(0.01), "timeout")
 	$Recruit/Camera2D.smoothing_enabled = true
 	
-
-
-
-
-
-
+	
+	
+	#enable player collision after a bit more
+	yield(get_tree().create_timer(0.1), "timeout")
+	$Recruit.set_collision_layer_bit(0, true)
+	
+	
 func load_music(music):
 	$MusicPlayer.stream = load(music)
 	$MusicPlayer.play()

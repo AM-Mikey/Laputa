@@ -2,9 +2,7 @@ extends Boss
 
 var max_x_speed = 100
 var jump_speed = 100
-var acceleration = 50
-export var ground_cof = 0.2
-export var air_cof = 0.05
+
 
 export var idle_time = .5
 
@@ -23,6 +21,10 @@ func _ready():
 	hp = 25
 	max_hp = hp
 	damage_on_contact = 2
+	ground_cof = 0.2
+	air_cof = 0.05
+	
+	acceleration = 50
 	
 	emit_signal("setup_ui", display_name, hp, max_hp)
 

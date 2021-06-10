@@ -7,7 +7,7 @@ const BULLET = preload("res://src/Bullet/EnemyBulletTemplate.tscn")
 export var projectile_speed: int = 120
 export var height_tolerance = 7
 
-var target: Node
+var target: Node = null
 
 
 func _ready():

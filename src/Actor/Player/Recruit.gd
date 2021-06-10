@@ -5,7 +5,6 @@ const SNAP_DIRECTION = Vector2.DOWN
 const SNAP_LENGTH = 4.0
 
 
-export var run_anim_speed = 1.25
 export var max_x_speed = 82.5
 export var jump_speed = 195
 export var minimum_jump_time = 0.1
@@ -20,14 +19,16 @@ var direction_lock = Vector2.ZERO
 var starting_direction #for acceleration
 var bonk_distance = 4
 var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
+var run_anim_speed: float
+
 
 onready var animation_tree = get_node("AnimationTree")
 onready var animation_mode = animation_tree.get("parameters/playback")
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	acceleration = 50
-	ground_cof = 0.2 #0.2
+	acceleration = 5 #was 50
+	ground_cof = 0.2 #was 0.2
 	air_cof = 0.05
 
 func _physics_process(delta):
@@ -87,6 +88,8 @@ func _physics_process(delta):
 			#_velocity.y = move_and_slide(_velocity, FLOOR_NORMAL, true).y
 			_velocity.y = move_and_slide_with_snap(_velocity, snap_vector, FLOOR_NORMAL, true).y
 			
+			run_anim_speed = max((abs(_velocity.x)/max_x_speed) * 1.5, 0.5)
+			#print(run_anim_speed)
 			animate(move_dir, look_dir, _velocity)
 			
 			if Input.is_action_pressed("fire_manual"): #holding
@@ -289,7 +292,7 @@ func animate(move_dir, look_dir, _velocity):
 		if direction_lock == Vector2.ZERO:  #NOT DIRECTION LOCKED
 		
 			if is_on_floor():
-				#player.playback_speed = run_anim_speed
+				player.playback_speed = run_anim_speed
 				if Input.is_action_pressed("move_left"):
 					if Input.is_action_pressed("look_up"):
 						next_animation = "RunLeftLookUp"
@@ -388,7 +391,7 @@ func animate(move_dir, look_dir, _velocity):
 
 		elif direction_lock == Vector2.LEFT: #DIRECTION LOCKED LEFT
 			if is_on_floor():
-					#player.playback_speed = run_anim_speed
+					player.playback_speed = run_anim_speed
 					if Input.is_action_pressed("move_left"):
 						if Input.is_action_pressed("look_up"):
 							next_animation = "RunLeftLookUp"
@@ -463,7 +466,7 @@ func animate(move_dir, look_dir, _velocity):
 							
 		elif direction_lock == Vector2.RIGHT: #DIRECTION LOCKED RIGHT
 			if is_on_floor():
-				#player.playback_speed = run_anim_speed
+				player.playback_speed = run_anim_speed
 				if Input.is_action_pressed("move_left"):
 					if Input.is_action_pressed("look_up"):
 						next_animation = "BackrunLeftLookUp"
@@ -536,6 +539,7 @@ func animate(move_dir, look_dir, _velocity):
 							next_animation = "FallRight"
 	
 	else: #is on ladder
+		player.playback_speed = 1 #reset player to normal speed
 		if Input.is_action_pressed("move_left"):
 			if Input.is_action_pressed("look_up"):
 				next_animation = "ClimbLeftLookUp"
@@ -669,7 +673,7 @@ func pan_camera_horizontal(direction, _velocity):
 	var camera = $Camera2D
 	var tween = $Camera2D/TweenHorizontal
 	
-	var camera_pan_distance = 2.5 / world.resolution_scale
+	var camera_pan_distance = 2.0 / world.resolution_scale
 	var camera_pan_time = 1.5
 	var camera_pan_delay = 0
 	

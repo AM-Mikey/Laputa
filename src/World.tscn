@@ -6,14 +6,13 @@
 [ext_resource path="res://src/UI/LevelName.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Actor/Player/Recruit.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/UI/ItemMenu.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/UI/DialogBox.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Dialog/DialogBox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/World.gd" type="Script" id=8]
 [ext_resource path="res://assets/Music/Cave Story Beta 2001-09-30.ogg" type="AudioStream" id=9]
 [ext_resource path="res://src/UI/MoneyDisplay.tscn" type="PackedScene" id=10]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 8 )
-starting_level = "res://src/Level/ObstacleCourse.tscn"
 
 [node name="Recruit" parent="." instance=ExtResource( 5 )]
 position = Vector2( 256, 144 )
@@ -29,9 +28,6 @@ visible = false
 [node name="PauseMenu" parent="UILayer" instance=ExtResource( 3 )]
 visible = false
 
-[node name="DialogBox" parent="UILayer" instance=ExtResource( 7 )]
-visible = false
-
 [node name="LevelName" parent="UILayer" instance=ExtResource( 4 )]
 visible = false
 
@@ -39,7 +35,8 @@ visible = false
 visible = false
 
 [node name="TitleScreen" parent="UILayer" instance=ExtResource( 1 )]
-visible = false
+
+[node name="DialogBox" parent="UILayer" instance=ExtResource( 7 )]
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )

@@ -5,7 +5,7 @@
 [ext_resource path="res://src/Tile/MimigaM.tres" type="TileSet" id=3]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Prop/ChestKeyItem.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/Background/bk0.bmp" type="Texture" id=8]
+[ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=6]
 
 [node name="IndoorTemplate" type="Node2D"]
 script = ExtResource( 1 )
@@ -17,7 +17,6 @@ margin_left = -128.0
 margin_top = -128.0
 margin_right = 640.0
 margin_bottom = 384.0
-texture = ExtResource( 8 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -61,3 +60,6 @@ door_index = 2
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 256, 144 )
 current = true
+
+[node name="SpawnPoint" parent="." instance=ExtResource( 6 )]
+position = Vector2( 328, 192 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=1]
 [ext_resource path="res://assets/Background/bkMaze.bmp" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/Prop/ShopKeyItem.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Actor/NPC/Shopkeep.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Prop/ShopWeapon.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=9]
 
 [node name="ShopTest" type="Node2D"]
 script = ExtResource( 1 )
@@ -101,3 +102,6 @@ __meta__ = {
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 256, 144 )
 current = true
+
+[node name="SpawnPoint" parent="." instance=ExtResource( 9 )]
+position = Vector2( 120, 224 )

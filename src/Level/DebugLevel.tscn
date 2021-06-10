@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/Actor/Enemy/PowerCritter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Actor/Enemy/Trenchie.tscn" type="PackedScene" id=2]
@@ -29,6 +29,8 @@
 [ext_resource path="res://src/Utility/SimpleTrack.tscn" type="PackedScene" id=27]
 [ext_resource path="res://src/Actor/Enemy/Bat.tscn" type="PackedScene" id=28]
 [ext_resource path="res://src/Actor/Enemy/Cloud.tscn" type="PackedScene" id=29]
+[ext_resource path="res://src/Actor/Enemy/Hunter.tscn" type="PackedScene" id=30]
+[ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=31]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Mimiga.png 0"
@@ -191,10 +193,10 @@ position = Vector2( 304, 152 )
 
 [node name="Sue" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( 200, 88 )
-dialog_json = "res://src/Dialog/topic_demo.json"
+dialog_json = "res://src/Dialog/NewDialogPrinter.json"
 
 [node name="Enemy" parent="Actors" instance=ExtResource( 1 )]
-position = Vector2( 304, 72 )
+position = Vector2( 576, 128 )
 
 [node name="Enemy3" parent="Actors" instance=ExtResource( 1 )]
 position = Vector2( -32, 664 )
@@ -244,6 +246,9 @@ position = Vector2( 88, 56 )
 [node name="Cloud" parent="Actors" instance=ExtResource( 29 )]
 position = Vector2( -264, 152 )
 
+[node name="Hunter" parent="Actors" instance=ExtResource( 30 )]
+position = Vector2( -448, 32 )
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -280,6 +285,9 @@ position = Vector2( 16, -1056 )
 
 [node name="Bottom" parent="CameraLimiter" index="3"]
 position = Vector2( 280, 808 )
+
+[node name="SpawnPoint" parent="." instance=ExtResource( 31 )]
+position = Vector2( 128, 208 )
 
 [editable path="Props/Conveyor"]
 [editable path="Props/Conveyor2"]

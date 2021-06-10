@@ -1,0 +1,92 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/Background/Black.png" type="Texture" id=4]
+[ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
+[ext_resource path="res://src/Tile/DebugTile.tres" type="TileSet" id=6]
+[ext_resource path="res://src/Prop/AmmoRefill.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Prop/SavePoint.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/Prop/ShopWeapon.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Prop/ShopKeyItem.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=11]
+
+[node name="LevelTemplate" type="Node2D"]
+script = ExtResource( 5 )
+level_name = "LevelTemplate"
+music = "res://assets/Music/Access.ogg"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 0.1 )
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+margin_left = -408.0
+margin_top = -272.0
+margin_right = 1040.0
+margin_bottom = 536.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tiles" type="Node2D" parent="."]
+
+[node name="Background" type="TileMap" parent="Tiles"]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 0
+format = 1
+
+[node name="Main" type="TileMap" parent="Tiles"]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 262148, 7, 0, 262149, 7, 0, 262150, 7, 0, 262151, 7, 0, 262152, 7, 0, 262153, 7, 0, 262154, 7, 0, 262155, 7, 0, 262156, 7, 0, 262157, 7, 0, 262158, 7, 0, 262159, 7, 0, 262160, 7, 0, 262161, 7, 0, 262162, 7, 0, 262163, 7, 0, 262164, 7, 0, 262165, 7, 0, 262166, 7, 0, 262167, 7, 0, 262168, 7, 0, 262169, 7, 0, 327684, 7, 0, 327705, 7, 0, 393220, 7, 0, 393241, 7, 0, 458756, 7, 0, 458777, 7, 0, 524292, 7, 0, 524313, 7, 0, 589828, 7, 0, 589849, 7, 0, 655364, 7, 0, 720900, 7, 0, 786436, 7, 0, 786450, 14, 0, 786451, 14, 0, 786453, 14, 0, 786454, 14, 0, 786455, 14, 0, 786456, 14, 0, 851972, 7, 0, 851986, 14, 0, 851987, 14, 0, 851989, 14, 0, 851990, 14, 0, 851991, 14, 0, 851992, 14, 0, 917508, 7, 0, 917509, 7, 0, 917510, 7, 0, 917511, 7, 0, 917512, 7, 0, 917513, 7, 0, 917514, 7, 0, 917515, 7, 0, 917516, 7, 0, 917517, 7, 0, 917518, 7, 0, 917519, 7, 0, 917520, 7, 0, 917521, 7, 0, 917522, 7, 0, 917523, 7, 0, 917524, 7, 0, 917525, 7, 0, 917526, 7, 0, 917527, 7, 0, 917528, 7, 0, 917529, 7, 0 )
+
+[node name="Forground" type="TileMap" parent="Tiles"]
+z_index = 2
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 0
+format = 1
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="Door" parent="Triggers" instance=ExtResource( 2 )]
+position = Vector2( 104, 224 )
+level = "res://src/Levels/IndoorTemplate.tscn"
+
+[node name="KillBox" parent="Triggers" instance=ExtResource( 1 )]
+position = Vector2( 240, 808 )
+scale = Vector2( 482.952, 10 )
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="ShopKeyItem" parent="Props" instance=ExtResource( 10 )]
+position = Vector2( 224, 224 )
+
+[node name="ShopWeapon" parent="Props" instance=ExtResource( 9 )]
+position = Vector2( 272, 224 )
+
+[node name="AmmoRefill" parent="Props" instance=ExtResource( 7 )]
+position = Vector2( 152, 224 )
+
+[node name="SavePoint" parent="Props" instance=ExtResource( 8 )]
+position = Vector2( 176, 224 )
+
+[node name="Actors" type="Node2D" parent="."]
+
+[node name="CameraLimiter" parent="." instance=ExtResource( 3 )]
+
+[node name="SpawnPoint" parent="." instance=ExtResource( 11 )]
+position = Vector2( 104, 224 )
+
+[editable path="CameraLimiter"]

@@ -13,6 +13,7 @@ func _ready():
 	
 	if self.has_node("Notes"):
 		get_node("Notes").visible = false
+	
 
 func _on_viewport_size_changed():
 	$Camera2D.zoom = Vector2(1 / world.resolution_scale, 1 / world.resolution_scale)
