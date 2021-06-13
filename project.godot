@@ -65,7 +65,7 @@ _global_script_class_icons={
 config/name="Laputa"
 run/main_scene="res://src/World.tscn"
 config/use_custom_user_dir=true
-config/icon="res://assets/UI/Face/FaceREDO.png"
+config/icon="res://assets/UI/Face/Recruit.png"
 
 [display]
 

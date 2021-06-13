@@ -32,8 +32,6 @@ func _physics_process(delta):
 		move_and_slide(velocity)
 		var distance_from_origin = origin.distance_to(global_position);
 		if distance_from_origin > projectile_range:
-			visible = false
-			disabled = true
 			_fizzle_from_range()
 			
 
@@ -43,8 +41,6 @@ func _on_CollisionDetector_body_entered(body):
 		if body.get_collision_layer_bit(8): #breakable
 					body.on_break("cut")
 					if body.get_collision_layer_bit(3): #world
-						visible = false
-						disabled = true
 						_fizzle_from_world()
 
 		elif body.get_collision_layer_bit(1): #enemy
@@ -52,6 +48,9 @@ func _on_CollisionDetector_body_entered(body):
 			body.hit(damage, blood_direction)
 			queue_free()
 		elif body.get_collision_layer_bit(3): #world
-			visible = false
-			disabled = true
 			_fizzle_from_world()
+
+
+
+
+

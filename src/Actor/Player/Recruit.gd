@@ -62,6 +62,8 @@ func _physics_process(delta):
 				
 				snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 				
+				if $ForgivenessTimer.time_left == 0: #just landed
+					$LandSound.play()
 				$ForgivenessTimer.start(forgiveness_time)
 				if end_knockback_ready:
 					special_dir = Vector2.ZERO
@@ -74,6 +76,7 @@ func _physics_process(delta):
 			if Input.is_action_just_pressed("jump") and $ForgivenessTimer.time_left > 0 or Input.is_action_just_pressed("jump") and is_on_floor():
 				$MinimumJumpTimer.start(minimum_jump_time)
 				snap_vector = Vector2.ZERO
+				$JumpSound.play()
 			
 			if Input.is_action_just_pressed("dodge") and $DodgeTimer.time_left == 0:
 				$DodgeTimer.start(dodge_time)

@@ -6,8 +6,14 @@ var move_dir: Vector2
 const BULLET = preload("res://src/Bullet/EnemyBulletTemplate.tscn")
 export var projectile_speed: int = 120
 export var height_tolerance = 7
+export var cooldown_time = 1
+export var lock_distance = 8
 
 var target: Node = null
+var cover_blown = false
+var shooting = false
+var hiding = false
+var peeking = false
 
 
 func _ready():
@@ -15,14 +21,19 @@ func _ready():
 	damage_on_contact = 1
 	speed = Vector2(100, 200)
 	gravity = 250
+	
+	$FireCooldown.start(cooldown_time)
+	
+	hide()
 
 func _physics_process(delta):
 	if not is_on_floor():
 		move_dir.y = 0 #don't allow them to jump if they are midair
-	if not dead:
-		_velocity = calculate_move_velocity(_velocity, move_dir, speed)
-		_velocity = move_and_slide(_velocity, FLOOR_NORMAL)
-		
+	
+	_velocity = calculate_move_velocity(_velocity, move_dir, speed)
+	_velocity = move_and_slide(_velocity, FLOOR_NORMAL)
+
+	animate()
 
 func calculate_move_velocity(_velocity: Vector2, move_dir, speed) -> Vector2:
 	var out: = _velocity
@@ -34,21 +45,70 @@ func calculate_move_velocity(_velocity: Vector2, move_dir, speed) -> Vector2:
 
 	return out
 	
-func _on_PlayerDetector_body_entered(body):
-	if visible == true:
+
+func _on_HideDetector_body_entered(body):
+	if cover_blown:
+		fire()
+	else:
 		target = body
-		jump()
+		look_dir = Vector2(sign(target.global_position.x - global_position.x), 0)
+		hide()
+
+func _on_PeekDetector_body_entered(body):
+	target = body
+	look_dir = Vector2(sign(target.global_position.x - global_position.x), 0)
+	peek()
+
+func _on_PeekDetector_body_exited(body):
+	shooting = false
+	target = null
+	hide()
+
+func _on_ShootDetector_body_entered(body):
+	target = body
+	look_dir = Vector2(sign(target.global_position.x - global_position.x), 0)
+	jump()
+
+
+func peek():
+	peeking = true
+	hiding = false
+	shooting = false
+	
+func hide():
+	hiding = true
+	peeking = false
+	shooting = false
+	
 
 func jump():
-	$PlayerDetector.set_deferred("monitoring", false) #will not be triggered while jumping
-	move_dir.y -= 1 #up until leaves ground
-	var height_from_target = global_position.y - target.global_position.y
-	#print(height_from_target)
-	if abs(height_from_target) < height_tolerance and $FireCooldown.time_left == 0: #less than x from target and cooldown finished
-		$FireCooldown.start()
-		prepare_bullet()
-	$PlayerDetector.set_deferred("monitoring", true) #once jump and shoot are finished return to normal
+	cover_blown = true
 
+	move_dir.y -= 1 #up until leaves ground
+
+	fire()
+
+
+func fire():
+	if not shooting:
+			shooting = true
+			if $FireCooldown.is_stopped():
+				while target != null:
+					$FireCooldown.start(cooldown_time)
+					if target.global_position < global_position: #player to the left
+						$AnimationPlayer.play("ShootLeft")
+						look_dir = Vector2.LEFT
+					elif target.global_position > global_position: #player to the right
+						$AnimationPlayer.play("ShootRight")
+						look_dir = Vector2.RIGHT
+					yield(get_tree().create_timer(0.2), "timeout") #delay for animation sync
+					if target == null:
+						break
+					prepare_bullet()
+					yield($FireCooldown, "timeout")
+			else: 
+				yield($FireCooldown, "timeout")
+				fire()
 func prepare_bullet():
 	var bullet = BULLET.instance()
 	get_tree().get_current_scene().add_child(bullet)
@@ -66,3 +126,37 @@ func prepare_bullet():
 func fire_bullet(bullet):
 	bullet.velocity.x = projectile_speed * get_physics_process_delta_time() * sign(bullet.direction.x)
 	bullet.velocity.y = projectile_speed * get_physics_process_delta_time() * sign(bullet.direction.y)
+
+func animate():
+	if look_dir == Vector2.LEFT:
+		if not cover_blown:
+			if hiding:
+				$AnimationPlayer.play("Barrel")
+			elif peeking:
+				$AnimationPlayer.play("BarrelPeekLeft")
+		else:
+			if is_on_floor():
+				$AnimationPlayer.play("StandLeft")
+			else:
+				if move_dir.y < 0:
+					$AnimationPlayer.play("RiseLeft")
+				elif move_dir.y > 0:
+					$AnimationPlayer.play("FallLeft")
+				
+	if look_dir == Vector2.RIGHT:
+		if not cover_blown:
+			if hiding:
+				$AnimationPlayer.play("Barrel")
+			elif peeking:
+				$AnimationPlayer.play("BarrelPeekRight")
+		else:
+			if is_on_floor():
+				$AnimationPlayer.play("StandRight")
+			else:
+				if move_dir.y < 0:
+					$AnimationPlayer.play("RiseRight")
+				elif move_dir.y > 0:
+					$AnimationPlayer.play("FallRight")
+
+
+

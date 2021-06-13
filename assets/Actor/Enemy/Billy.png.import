@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GodotTIE_icon.png-06c5755e573090fa68219dcd4c5b75cc.stex"
+path="res://.import/Billy.png-d5f4011204e040521f319b67692b8a9d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/GodotTIE/GodotTIE_icon.png"
-dest_files=[ "res://.import/GodotTIE_icon.png-06c5755e573090fa68219dcd4c5b75cc.stex" ]
+source_file="res://assets/Actor/Enemy/Billy.png"
+dest_files=[ "res://.import/Billy.png-d5f4011204e040521f319b67692b8a9d.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

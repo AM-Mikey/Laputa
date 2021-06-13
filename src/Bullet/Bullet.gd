@@ -14,10 +14,16 @@ var damage
 
 
 func _fizzle_from_world():
-	#print("fizzle from world")
+	visible = false
+	disabled = true
+	
+	#print("fizzle from world") 
 	var effect = EFFECT.instance()
 	get_parent().add_child(effect)
-	effect.position = $End.global_position
+	if has_node("End"):
+		effect.position = $End.global_position
+	else:
+		effect.position = global_position
 	
 	var player = effect.get_node("AnimationPlayer")
 	player.play("DiamondPop")
@@ -33,6 +39,9 @@ func _fizzle_from_world():
 	queue_free()
 
 func _fizzle_from_range():
+	visible = false
+	disabled = true
+	
 	#print("fizzle from range")
 	var effect = EFFECT.instance()
 	get_parent().add_child(effect)
@@ -45,8 +54,8 @@ func _fizzle_from_range():
 	effect.queue_free()
 	queue_free()
 
-func _on_VisibilityNotifier2D_screen_exited():
+func _on_VisibilityNotifier2D_viewport_exited(viewport):
 	if visible != false:
-		#print("WARNING: bullet has exited screen")
+		print("bullet has exited viewport")
 		queue_free()
 

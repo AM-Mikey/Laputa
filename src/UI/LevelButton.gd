@@ -18,5 +18,4 @@ func _on_Button_pressed():
 	
 	var spawn_points = get_tree().get_nodes_in_group("SpawnPoints")
 	for s in spawn_points:
-		print("pawggers")
 		world.get_node("Recruit").position = s.global_position

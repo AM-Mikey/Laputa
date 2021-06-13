@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=88 format=2]
 
 [ext_resource path="res://src/Weapon/WeaponManager.gd" type="Script" id=1]
 [ext_resource path="res://src/Actor/Player/Recruit.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://assets/Actor/Player/RecruitSheet.png" type="Texture" id=5]
 [ext_resource path="res://assets/SFX/snd_quote_bonkhead.ogg" type="AudioStream" id=6]
 [ext_resource path="res://assets/Weapon/WeaponPlaceholder.png" type="Texture" id=7]
+[ext_resource path="res://assets/SFX/snd_quote_jump.ogg" type="AudioStream" id=8]
+[ext_resource path="res://assets/SFX/snd_thud.ogg" type="AudioStream" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "BackfallLeft"
@@ -4403,34 +4405,33 @@ position = Vector2( 0, -7.5 )
 shape = ExtResource( 3 )
 
 [node name="WeaponSprite" type="Sprite" parent="."]
-position = Vector2( 7, -15 )
+position = Vector2( -8, -9 )
 texture = ExtResource( 7 )
-flip_h = true
 
 [node name="Front" type="Sprite" parent="."]
 position = Vector2( 0, -16 )
 texture = ExtResource( 5 )
 hframes = 12
 vframes = 96
-frame = 1080
+frame = 145
 
 [node name="Back" type="Sprite" parent="."]
 position = Vector2( 0, -16 )
 texture = ExtResource( 5 )
 hframes = 12
 vframes = 96
-frame = 1092
+frame = 157
 
 [node name="BulletVector" type="RayCast2D" parent="."]
 modulate = Color( 1, 0, 0, 0.784314 )
 position = Vector2( 0, -10 )
-rotation = -1.5708
+rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 cast_to = Vector2( 0, 40 )
 
 [node name="LookRot" type="RayCast2D" parent="."]
 modulate = Color( 1, 0.937255, 0, 0.392157 )
-rotation = -1.5708
+rotation = 1.5708
 cast_to = Vector2( 0, 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -4515,7 +4516,7 @@ one_shot = true
 [node name="EffectPlayer" type="AnimationPlayer" parent="."]
 anims/FlashIframe = SubResource( 49 )
 
-[node name="PosWalk" type="AudioStreamPlayer2D" parent="."]
+[node name="WalkSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 bus = "SFX"
 
@@ -4524,6 +4525,14 @@ bus = "SFX"
 
 [node name="BonkSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+bus = "SFX"
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+bus = "SFX"
+
+[node name="LandSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
 bus = "SFX"
 
 [node name="EntityDetector" type="Area2D" parent="."]

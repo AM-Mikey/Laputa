@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-ab5c50c5b68ff5b3a8c38e1d2bbb1ea7.stex"
+path="res://.import/Seed.png-43b95e818318001a7e1c5e8cc960224a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/SyndiBox/icon.png"
-dest_files=[ "res://.import/icon.png-ab5c50c5b68ff5b3a8c38e1d2bbb1ea7.stex" ]
+source_file="res://assets/Bullet/Enemy/Seed.png"
+dest_files=[ "res://.import/Seed.png-43b95e818318001a7e1c5e8cc960224a.stex" ]
 
 [params]
 

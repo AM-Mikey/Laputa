@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/computeraccept.ogg-4139e13d8ddc4a936ea38cda0d921b91.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/computeraccept.ogg"
+dest_files=[ "res://.import/computeraccept.ogg-4139e13d8ddc4a936ea38cda0d921b91.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

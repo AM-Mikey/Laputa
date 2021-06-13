@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/literallygygas.ogg-6c966b3c759bb816b3894586a6168814.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/literallygygas.ogg"
+dest_files=[ "res://.import/literallygygas.ogg-6c966b3c759bb816b3894586a6168814.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
