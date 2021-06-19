@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/HLgunburst.wav-1bc1e5325b788270b00ea2bfa7194323.sample"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/HLgunburst.wav"
+dest_files=[ "res://.import/HLgunburst.wav-1bc1e5325b788270b00ea2bfa7194323.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/LSDkick.ogg-1da4ff396c33164d41b8e13548224624.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/LSDkick.ogg"
+dest_files=[ "res://.import/LSDkick.ogg-1da4ff396c33164d41b8e13548224624.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

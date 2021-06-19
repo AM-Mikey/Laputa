@@ -4,6 +4,8 @@ class_name Player, "res://assets/Icon/PlayerIcon.png"
 const EFFECT = preload("res://src/Effect/Effect.tscn")
 const TEXTEFFECT = preload("res://src/Effect/TextEffect.tscn")
 
+const SNAP_DIRECTION = Vector2.DOWN
+const SNAP_LENGTH = 4.0
 
 signal setup_ui(hp, max_hp, total_xp, weapon_level, weapon_xp, weapon_xp_min, weapon_xp_max, weapon_needs_ammo, weapon_ammo, weapon_max_ammo)
 signal player_health_updated(hp)
@@ -12,17 +14,18 @@ signal player_experience_updated(total_xp, level, weapon_xp, weapon_xp_min, weap
 signal ammo_updated(needs_ammo, ammo, max_ammo)
 signal inventory_updated(inventory)
 
+
+var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
+
 export var dodge_speed = Vector2(700, 100)
 export var dodge_time: float = (0.3)
 
 export var forgiveness_time = 0.05
 var knockback = false
-var end_knockback_ready = false
 var knockback_direction: Vector2
-export var knockback_mod: Vector2 = Vector2(1,1)
 
-export var hp: int = 8
-export var max_hp: int = 8
+export var hp: int = 100
+export var max_hp: int = 100
 var invincible = false
 var colliding = true
 var disabled = false
@@ -30,6 +33,7 @@ var is_in_enemy = false
 var is_in_hazard = false
 var is_on_ladder = false
 var is_in_water = false
+var is_in_spikes = false
 var can_fall_through = false
 var enemy_on_head = false
 var debug_active = false
@@ -39,7 +43,7 @@ var total_xp: int = 0
 
 var inventory: Array
 var topic_array: Array = ["ham", "cheese", "marbles", "balogna"]
-var weapon_array: Array = [load("res://src/Weapon/%s" % "Revolver1" + ".tres"), load("res://src/Weapon/%s" % "GrenadeLauncher" + ".tres"), load("res://src/Weapon/%s" % "MachinePistol" + ".tres")]
+var weapon_array: Array = []#[load("res://src/Weapon/%s" % "Revolver1" + ".tres"), load("res://src/Weapon/%s" % "GrenadeLauncher" + ".tres"), load("res://src/Weapon/%s" % "MachinePistol" + ".tres")]
 
 
 func _ready():
@@ -103,11 +107,13 @@ func play_weapon_change_sound():
 func hit(damage, knockback_direction):
 	if disabled != true:
 		if invincible == false:
-			knockback = true
 			hp -= damage
 			emit_signal("player_health_updated", hp)
 			do_damage_num(damage)
 			do_iframes(damage, knockback_direction)
+			if knockback_direction != Vector2.ZERO:
+				snap_vector = Vector2.ZERO
+				knockback = true
 			
 			if hp <= 0:
 				die()
@@ -153,6 +159,8 @@ func do_iframes(damage, knockback_direction):
 		hit(damage, knockback_direction)
 	if is_in_hazard == true:
 		hit(damage, knockback_direction)
+	if is_in_spikes == true:
+		hit(damage, knockback_direction)
 		
 func die():
 	if dead == false:
@@ -173,14 +181,43 @@ func die():
 		get_tree().reload_current_scene()
 
 
-func _on_EntityDetector_body_entered(body):
-	if disabled != true:
+
+
+func _on_HurtDetector_body_entered(body):
+	if not disabled:
 		if body.get_collision_layer_bit(1): #enemy
 			var damage = body.damage_on_contact
 			is_in_enemy = true
 			knockback_direction = Vector2(sign(global_position.x - body.global_position.x), 0)
 			hit(damage, knockback_direction)
-				
+
+
+func _on_HurtDetector_body_exited(body):
+	is_in_enemy = false
+
+func _on_HurtDetector_area_entered(area):
+	if not disabled:
+		if area.get_collision_layer_bit(13): #kill
+			die()
+	
+		if area.get_collision_layer_bit(14): #hazard
+			var damage = area.damage_on_contact
+			is_in_hazard = true
+			#knockback_direction = Vector2(sign(global_position.x - area.global_position.x), 0)
+			hit(damage, knockback_direction)
+
+
+func _on_HurtDetector_area_exited(area):
+	if area.get_collision_layer_bit(14):
+		is_in_hazard = false
+
+
+
+
+
+
+func _on_EntityDetector_body_entered(body):
+	if disabled != true:
 		if body.get_collision_layer_bit(11): #xp
 			total_xp += body.value
 			if weapon_array.front().level == weapon_array.front().max_level and weapon_array.front().xp == weapon_array.front().max_xp:
@@ -236,9 +273,7 @@ func _on_EntityDetector_body_entered(body):
 				body.queue_free()
 
 
-func _on_EntityDetector_body_exited(body):
-	if body.get_collision_layer_bit(1): #enemy
-		is_in_enemy = false
+
 
 func _on_EntityDetector_area_entered(area):
 	if disabled != true:
@@ -268,23 +303,17 @@ func _on_EntityDetector_area_entered(area):
 			emit_signal("ammo_updated", needs_ammo, ammo, max_ammo)
 			area.queue_free()
 			
-		if area.get_collision_layer_bit(13): #kill
-			die()
-		
-		if area.get_collision_layer_bit(14): #hazard
-			var damage = area.damage_on_contact
-			is_in_hazard = true
-			#knockback_direction = Vector2(sign(global_position.x - area.global_position.x), 0)
-			hit(damage, knockback_direction)
-
-func _on_EntityDetector_area_exited(area):
-	if area.get_collision_layer_bit(14):
-		is_in_hazard = false
 
 
-func _on_HeadDetector_body_entered(body):
+
+
+func _on_HeadDetector_body_entered(body): #DEPRECIATED CODE, SINCE ENEMIES CANNOT COLLIDE WITH PLAYER ANYMORE
 	if body.get_collision_layer_bit(1): #enemy
 		print("enemy on player head")
+		
+		if not body.get_collision_mask_bit(1): #if body does not collide with player, ignore
+			return
+		
 		enemy_on_head = true
 		yield(get_tree().create_timer(.1), "timeout")
 		while enemy_on_head == true and not dead: #checks if it's still the case
@@ -292,8 +321,6 @@ func _on_HeadDetector_body_entered(body):
 			print("pushing enemy in direction:", enemy_push_dir)
 			body.move_and_slide(Vector2(enemy_push_dir.x * 1000 * get_process_delta_time(), enemy_push_dir.y * 10), FLOOR_NORMAL)
 			yield(get_tree(),"idle_frame")
-
-
 
 func _on_HeadDetector_body_exited(body): #not the best way, cant tell if multiple enemies are on head
 	enemy_on_head = false
@@ -346,7 +373,8 @@ func debug_mode():
 		invincible = true
 		colliding = false
 		$CollisionShape2D.disabled = true
-		$EntityDetector.monitoring = false
+		$HurtDetector.monitoring = false
+		$ItemDetector.monitoring = false
 	
 	elif debug_active == true:
 		print("debug mode: OFF")
@@ -356,7 +384,8 @@ func debug_mode():
 		invincible = false
 		colliding = true
 		$CollisionShape2D.disabled = false
-		$EntityDetector.monitoring = true
+		$HurtDetector.monitoring = true
+		$ItemDetector.monitoring = true
 		
 func enable():
 	pass

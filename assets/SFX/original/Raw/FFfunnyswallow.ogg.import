@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/FFfunnyswallow.ogg-42a84458b66c79d3a6269e43c84ece10.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/FFfunnyswallow.ogg"
+dest_files=[ "res://.import/FFfunnyswallow.ogg-42a84458b66c79d3a6269e43c84ece10.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

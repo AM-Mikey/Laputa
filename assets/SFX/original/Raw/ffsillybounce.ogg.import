@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ffsillybounce.ogg-46a6bf6bb0f8931ac227b11840270c2f.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/ffsillybounce.ogg"
+dest_files=[ "res://.import/ffsillybounce.ogg-46a6bf6bb0f8931ac227b11840270c2f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

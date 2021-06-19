@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ffsplash.ogg-47fb1c602d87ec24b5fbd8be3f8d774a.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/ffsplash.ogg"
+dest_files=[ "res://.import/ffsplash.ogg-47fb1c602d87ec24b5fbd8be3f8d774a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

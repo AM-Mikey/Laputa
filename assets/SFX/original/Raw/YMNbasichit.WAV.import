@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/YMNbasichit.WAV-8626098bbccb5fb2d1dfab7a9fd87f22.sample"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/YMNbasichit.WAV"
+dest_files=[ "res://.import/YMNbasichit.WAV-8626098bbccb5fb2d1dfab7a9fd87f22.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

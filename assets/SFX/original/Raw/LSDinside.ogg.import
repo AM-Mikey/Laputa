@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/LSDinside.ogg-037f61ff883fdfbb904aea41e5e74856.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/LSDinside.ogg"
+dest_files=[ "res://.import/LSDinside.ogg-037f61ff883fdfbb904aea41e5e74856.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

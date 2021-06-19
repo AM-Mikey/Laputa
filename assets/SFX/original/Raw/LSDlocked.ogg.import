@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/LSDlocked.ogg-25c9595a43b5cbcf9f27691847a27f64.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/LSDlocked.ogg"
+dest_files=[ "res://.import/LSDlocked.ogg-25c9595a43b5cbcf9f27691847a27f64.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

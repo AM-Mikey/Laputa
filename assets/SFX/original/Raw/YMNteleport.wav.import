@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/YMNteleport.wav-83427dad030f0ac461f60d8a50e6eefb.sample"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/YMNteleport.wav"
+dest_files=[ "res://.import/YMNteleport.wav-83427dad030f0ac461f60d8a50e6eefb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

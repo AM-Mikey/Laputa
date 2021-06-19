@@ -6,14 +6,14 @@ var idle_time: float
 var active_time: float
 
 func _ready():
-	hp = 2
+	hp = 1
 	damage_on_contact = 1
 	speed = Vector2(100, 100)
 
 	level = 1
-	hp_chance = 1
+	hp_chance = 2
 	xp_chance = 1
-	ammo_chance = 1
+	ammo_chance = 0
 
 	rng.randomize()
 	move_dir = Vector2(sign(rng.randf_range(-1, 1)), 0)

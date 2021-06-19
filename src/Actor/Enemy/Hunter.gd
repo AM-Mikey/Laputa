@@ -112,7 +112,7 @@ func search():
 	
 
 func prepare_bullet():
-	print("hunter fired bullet")
+	#print("hunter fired bullet")
 	var bullet = BULLET.instance()
 	get_tree().get_current_scene().add_child(bullet)
 	

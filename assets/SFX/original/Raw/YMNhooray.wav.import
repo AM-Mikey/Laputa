@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/YMNhooray.wav-c8fa94127e45a5ce41790419657899bf.sample"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/YMNhooray.wav"
+dest_files=[ "res://.import/YMNhooray.wav-c8fa94127e45a5ce41790419657899bf.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

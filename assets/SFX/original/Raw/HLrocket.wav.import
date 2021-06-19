@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/HLrocket.wav-a7bcd3f687fe2e2c63e7639b25d408e1.sample"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/HLrocket.wav"
+dest_files=[ "res://.import/HLrocket.wav-a7bcd3f687fe2e2c63e7639b25d408e1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

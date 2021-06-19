@@ -110,10 +110,6 @@ tracks/0/keys = {
 collision_layer = 2
 collision_mask = 10
 script = ExtResource( 1 )
-small_hp_chance = 0.1
-medium_xp_chance = 0.2
-large_xp_chance = 0.2
-small_ammo_chance = 0.1
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 visible = false

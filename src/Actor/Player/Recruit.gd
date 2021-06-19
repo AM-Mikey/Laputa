@@ -1,13 +1,12 @@
 extends Player
 
 const BLACKBAR = preload("res://src/Utility/BlackBar.tscn")
-const SNAP_DIRECTION = Vector2.DOWN
-const SNAP_LENGTH = 4.0
-
 
 export var max_x_speed = 82.5
 export var jump_speed = 195
 export var minimum_jump_time = 0.1
+#export var minimum_direction_time = 0.4 #was 0.5  #scrapped idea where cave story forces you to jump a certain x distance when going max speed before jumping
+#var jump_starting_move_dir_x = Vector2.ZERO
 export var min_x_velocity = 0.001
 
 var horizontal_focus = Vector2.LEFT
@@ -18,7 +17,12 @@ var panning_down = false
 var direction_lock = Vector2.ZERO
 var starting_direction #for acceleration
 var bonk_distance = 4
-var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
+
+
+export var knockback_speed = Vector2(80, 100)
+var knockback_velocity = Vector2.ZERO
+
+
 var run_anim_speed: float
 
 
@@ -32,18 +36,20 @@ func _ready():
 	air_cof = 0.05
 
 func _physics_process(delta):
+	#print("Velocity: ", _velocity)
 	if disabled != true:
 		if colliding == true: #skip this entire thing if we're in debug mode
 			
 			var is_jump_interrupted = false
 			if $MinimumJumpTimer.time_left == 0:
-				is_jump_interrupted = not Input.is_action_pressed("jump") and _velocity.y < 0.0
+				is_jump_interrupted = Input.is_action_just_released("jump") and _velocity.y < 0.0
+				
 				
 			var is_dodge_interrupted = Input.is_action_just_released("dodge") and _velocity.y < 0.0
 			var move_dir = get_move_dir()
 			var look_rot = $LookRot.rotation_degrees
 			var look_dir = get_look_dir(look_rot)
-			var special_dir = get_special_dir(move_dir, look_dir)
+#			var special_dir = get_special_dir(move_dir, look_dir)
 			var bullet_pos = $BulletVector.global_position
 			var effect_pos = $WeaponSprite.position
 			var bullet_rot = $BulletVector.rotation_degrees
@@ -60,21 +66,24 @@ func _physics_process(delta):
 					elif look_dir.x < 0: #Left
 						$AnimationPlayer.play("StandRight")
 				
-				snap_vector = SNAP_DIRECTION * SNAP_LENGTH
+				if knockback == false:
+					snap_vector = SNAP_DIRECTION * SNAP_LENGTH
+				else: 
+					snap_vector = Vector2.ZERO
 				
 				if $ForgivenessTimer.time_left == 0: #just landed
 					$LandSound.play()
 				$ForgivenessTimer.start(forgiveness_time)
-				if end_knockback_ready:
-					special_dir = Vector2.ZERO
-					knockback = false
-					end_knockback_ready = false
+
 			else: #not on floor
-				special_dir.y = 0
 				do_while_airborne()
 			
 			if Input.is_action_just_pressed("jump") and $ForgivenessTimer.time_left > 0 or Input.is_action_just_pressed("jump") and is_on_floor():
 				$MinimumJumpTimer.start(minimum_jump_time)
+#				if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
+#					if abs(_velocity.x) > 82: #since 82.5 is max x velocity, only count as a running jump then
+#						jump_starting_move_dir_x = move_dir.x
+#						$MinimumDirectionTimer.start(minimum_direction_time)
 				snap_vector = Vector2.ZERO
 				$JumpSound.play()
 			
@@ -84,11 +93,21 @@ func _physics_process(delta):
 			if Input.is_action_just_pressed("look_down") and can_fall_through == true and is_on_floor():
 				position.y += 8
 				
+			if knockback:
+				if knockback_velocity == Vector2.ZERO:
+					knockback_velocity = Vector2(knockback_speed.x * knockback_direction.x, knockback_speed.y * -1)
+					_velocity.y = knockback_velocity.y #set knockback y to this ONCE
+				
+				_velocity.x += knockback_velocity.x
+				#print("velocity: ", _velocity)
+				#print("knockback velocity: ", knockback_velocity)
+				knockback_velocity.x /= 2
+				
+				if abs(knockback_velocity.x) < 1:
+					knockback_velocity = Vector2.ZERO
+					knockback = false
 
-			_velocity = calculate_move_velocity(_velocity, move_dir, look_dir, special_dir, speed, is_jump_interrupted, is_dodge_interrupted)
-			#_velocity = move_and_slide(_velocity, FLOOR_NORMAL, true)
-			#_velocity = move_and_slide_with_snap(_velocity, snap_vector, FLOOR_NORMAL, true)
-			#_velocity.y = move_and_slide(_velocity, FLOOR_NORMAL, true).y
+			_velocity = calculate_move_velocity(_velocity, move_dir, look_dir, speed, is_jump_interrupted, is_dodge_interrupted) #special dir was in position 4
 			_velocity.y = move_and_slide_with_snap(_velocity, snap_vector, FLOOR_NORMAL, true).y
 			
 			run_anim_speed = max((abs(_velocity.x)/max_x_speed) * 1.5, 0.5)
@@ -166,28 +185,20 @@ func get_look_dir(look_rot) -> Vector2:
 	elif look_rot == 0: #Down
 		return Vector2(0, 1)
 	else:
-		print ("ERROR: Cant get look direction!")
+		#print ("ERROR: Cant get look direction!")
 		return Vector2.LEFT
 		
 
-func get_special_dir(move_dir, look_dir) -> Vector2:
-	if Input.is_action_pressed("dodge"):
-		return Vector2(look_dir.x * -1, -1.0)
-	if knockback == true:
-		#print("knockback in direction: ", knockback_direction)
-		return Vector2(knockback_direction.x, -1.0)
-	else:
-		return Vector2.ZERO
 
-func calculate_move_velocity(linear_velocity: Vector2, move_dir, look_dir, special_dir, speed, is_jump_interrupted, is_dodge_interrupted) -> Vector2:
+
+func calculate_move_velocity(linear_velocity: Vector2, move_dir, look_dir, speed, is_jump_interrupted, is_dodge_interrupted) -> Vector2:
 	var out: = linear_velocity
 	
 	var friction = false
 	
 	if is_on_ladder:
 		out.y = move_dir.y * jump_speed/2
-		#out.x = min(abs(out.x) + acceleration, max_x_speed)
-		#out.x *= move_dir.x
+
 		out.x = 0
 		if Input.is_action_just_pressed("jump"):
 			is_on_ladder = false
@@ -207,54 +218,20 @@ func calculate_move_velocity(linear_velocity: Vector2, move_dir, look_dir, speci
 			friction = true
 
 	
-	elif special_dir == Vector2.ZERO: #normal, no special
+	else:
 		out.y += gravity * get_physics_process_delta_time()
 		if move_dir.y < 0:
 			out.y = jump_speed * move_dir.y
 		if is_jump_interrupted:
 			out.y = 0.0
-		
+#		if $MinimumDirectionTimer.time_left != 0: #still doing minimum x movement in jump
+#			out.x = max_x_speed
+#			out.x *= jump_starting_move_dir_x
 		if move_dir.x != 0:
 			out.x = min(abs(out.x) + acceleration, max_x_speed)
 			out.x *= move_dir.x
 		else:
 			friction = true
-
-
-	elif knockback == true: #with special, knockback #MASSIVE ISSUES HERE WITH ACCELERATION
-		snap_vector = Vector2.ZERO
-		out.y += gravity * get_physics_process_delta_time()
-		if move_dir.y < 0 or special_dir.y < 0: 
-			if move_dir.y != 0:
-				out.y = jump_speed * ((move_dir.y * knockback_mod.y * special_dir.y)/2)
-			else:
-				out.y = jump_speed * (special_dir.y * knockback_mod.y)
-		if is_jump_interrupted:
-			out.y = 0.0
-		
-		if move_dir.x != 0:
-			out.x = max_x_speed * ((move_dir.x * knockback_mod.x * special_dir.x)/2) 
-		else:
-			out.x = max_x_speed * (special_dir.x * knockback_mod.x)
-			friction = true
-	
-
-
-#	else: #with special, no knockback
-#		out.y += gravity * get_physics_process_delta_time()
-#		if move_dir.y < 0 or special_dir.y < 0: 
-#			if move_dir.y != 0:
-#				out.y = speed.y * ((move_dir.y * special_dir.y)/2)
-#			else:
-#				out.y = speed.y * special_dir.y
-#		if is_jump_interrupted:
-#			out.y = 0.0
-#
-#		if move_dir.x != 0:
-#			out.x = speed.x * ((move_dir.x * special_dir.x)/2)
-#		else:
-#			out.x = speed.x * special_dir.x
-#			friction = true
 
 
 
@@ -273,7 +250,7 @@ func calculate_move_velocity(linear_velocity: Vector2, move_dir, look_dir, speci
 
 func do_while_airborne():
 	yield(get_tree().create_timer(0.1), "timeout")
-	end_knockback_ready = true
+#	end_knockback_ready = true
 
 func get_input_dir() -> Vector2:
 	return Vector2(
@@ -699,6 +676,10 @@ func home_camera_horizontal():
 	tween.interpolate_property(camera, "offset_h", camera.offset_h, 0, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween, "tween_completed")
+
+
+
+
 
 
 

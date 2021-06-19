@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/LSDdrawer.ogg-53ee3758e2c0eaf41d854567228ac63b.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/LSDdrawer.ogg"
+dest_files=[ "res://.import/LSDdrawer.ogg-53ee3758e2c0eaf41d854567228ac63b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

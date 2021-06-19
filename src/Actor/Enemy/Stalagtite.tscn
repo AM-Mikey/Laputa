@@ -88,7 +88,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0, -8 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 8, 6 )
 
 [sub_resource type="Animation" id=6]
@@ -129,7 +129,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 9 ) ]
+"values": [ SubResource( 5 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("CollisionShape2D:position")
@@ -182,7 +182,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 9 ) ]
+"values": [ SubResource( 5 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("CollisionShape2D:position")
@@ -197,8 +197,7 @@ tracks/3/keys = {
 "values": [ Vector2( 0, -6 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "SquirmLeft"
+[sub_resource type="Animation" id=8]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -234,7 +233,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 9 ) ]
+"values": [ SubResource( 5 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("CollisionShape2D:position")
@@ -249,8 +248,7 @@ tracks/3/keys = {
 "values": [ Vector2( 0, -6 ) ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "SquirmRight"
+[sub_resource type="Animation" id=9]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -286,7 +284,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 9 ) ]
+"values": [ SubResource( 5 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("CollisionShape2D:position")
@@ -324,8 +322,8 @@ anims/HangActive = SubResource( 3 )
 anims/HangIdle = SubResource( 4 )
 anims/RunLeft = SubResource( 6 )
 anims/RunRight = SubResource( 7 )
-anims/SquirmLeft = SubResource( 5 )
-anims/SquirmRight = SubResource( 8 )
+anims/SquirmLeft = SubResource( 8 )
+anims/SquirmRight = SubResource( 9 )
 
 [node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )

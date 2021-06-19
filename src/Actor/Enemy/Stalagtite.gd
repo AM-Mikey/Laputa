@@ -39,6 +39,8 @@ func setup_collision():
 				
 		$PlayerDetector.scale.y = detector_length
 		print("dl: ", detector_length)
+	else:
+		print("ERROR: stalagtite could not find a colliding tilemap to setup collision")
 
 func _physics_process(delta):
 	if not dead:

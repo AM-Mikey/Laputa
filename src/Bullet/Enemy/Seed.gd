@@ -33,13 +33,13 @@ func _physics_process(delta):
 
 func get_velocity(projectile_speed, direction) -> Vector2:
 	var out = velocity
-	print("seed dir: ", direction)
+	#print("seed dir: ", direction)
 	out.x = projectile_speed * direction.x
 	out.y += gravity * get_physics_process_delta_time()
 	
 	if direction.y < 0:
 		out.y = projectile_speed * direction.y
-	print(out)
+	#print(out)
 	return out
 
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/LSDbass.ogg-af9390a63ff7b48960eb3ffa676e2b2e.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/LSDbass.ogg"
+dest_files=[ "res://.import/LSDbass.ogg-af9390a63ff7b48960eb3ffa676e2b2e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

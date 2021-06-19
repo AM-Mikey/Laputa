@@ -16,6 +16,9 @@ func _on_Button_pressed():
 	world.get_node("Recruit").disabled = false
 	world.get_node("UILayer/HUD").visible = true
 	
+	yield(get_tree(), "idle_frame")
+	
 	var spawn_points = get_tree().get_nodes_in_group("SpawnPoints")
 	for s in spawn_points:
 		world.get_node("Recruit").position = s.global_position
+		print(s.global_position)

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/HLspray.wav-f2d3ea137ff454a3f9a5a373e60a7afc.sample"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/HLspray.wav"
+dest_files=[ "res://.import/HLspray.wav-f2d3ea137ff454a3f9a5a373e60a7afc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

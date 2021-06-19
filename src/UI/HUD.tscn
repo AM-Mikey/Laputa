@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/UI/HUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/UI/NumberNew.png" type="Texture" id=2]
@@ -18,7 +18,6 @@
 [ext_resource path="res://assets/UI/HUD/BossBackground.png" type="Texture" id=16]
 [ext_resource path="res://assets/UI/HUD/BossOver.png" type="Texture" id=17]
 [ext_resource path="res://assets/UI/HUD/BossLost.png" type="Texture" id=18]
-[ext_resource path="res://assets/Weapon/MachinePistolIcon.png" type="Texture" id=19]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Flash"
@@ -284,10 +283,9 @@ __meta__ = {
 }
 
 [node name="Sprite" type="TextureRect" parent="Weapon"]
-margin_left = 24.0
-margin_right = 56.0
+margin_left = 40.0
+margin_right = 40.0
 margin_bottom = 16.0
-texture = ExtResource( 19 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -300,7 +298,6 @@ margin_left = 1.0
 margin_top = 1.0
 margin_right = 65.0
 margin_bottom = 17.0
-texture = ExtResource( 19 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

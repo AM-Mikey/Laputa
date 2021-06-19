@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/YMNsplash.wav-3f768d86ccc00fa80e01855de0bd4828.sample"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/YMNsplash.wav"
+dest_files=[ "res://.import/YMNsplash.wav-3f768d86ccc00fa80e01855de0bd4828.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

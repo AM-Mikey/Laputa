@@ -50,6 +50,7 @@ func _on_Recruit_player_health_updated(hp):
 	
 func _on_Recruit_player_max_health_updated(max_hp):
 	$HpBar/HpProgress.max_value = max_hp
+	$HpBar/HpLost.max_value = max_hp
 
 
 func display_hp_number(hp):
