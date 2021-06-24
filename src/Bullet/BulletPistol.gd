@@ -37,7 +37,8 @@ func _physics_process(delta):
 
 
 func _on_CollisionDetector_body_entered(body):
-	if disabled == false:
+	yield(get_tree(), "idle_frame")
+	if not disabled:
 		if body.get_collision_layer_bit(8): #breakable
 					body.on_break("cut")
 					if body.get_collision_layer_bit(3): #world

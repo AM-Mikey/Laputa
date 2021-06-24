@@ -21,5 +21,4 @@ shape = SubResource( 1 )
 stream = ExtResource( 2 )
 bus = "SFX"
 
-[connection signal="body_entered" from="." to="." method="_on_LoadZone_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_LoadZone_body_exited"]

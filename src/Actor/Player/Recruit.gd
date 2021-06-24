@@ -3,10 +3,17 @@ extends Player
 const BLACKBAR = preload("res://src/Utility/BlackBar.tscn")
 
 export var max_x_speed = 82.5
+var half_max_x_speed = max_x_speed/2
 export var jump_speed = 195
+#export var normal_jump_speed = 195
+#export var long_jump_speed = 150
+
 export var minimum_jump_time = 0.1
-#export var minimum_direction_time = 0.4 #was 0.5  #scrapped idea where cave story forces you to jump a certain x distance when going max speed before jumping
-#var jump_starting_move_dir_x = Vector2.ZERO
+export var minimum_direction_time = 1.0 #was 0.5  #scrapped idea where cave story forces you to jump a certain x distance when going max speed before jumping
+var jump_starting_move_dir_x: int
+
+var jump_type: String
+
 export var min_x_velocity = 0.001
 
 var horizontal_focus = Vector2.LEFT
@@ -25,13 +32,10 @@ var knockback_velocity = Vector2.ZERO
 
 var run_anim_speed: float
 
-
-onready var animation_tree = get_node("AnimationTree")
-onready var animation_mode = animation_tree.get("parameters/playback")
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	acceleration = 5 #was 50
+	acceleration = 5 #was 5
 	ground_cof = 0.2 #was 0.2
 	air_cof = 0.05
 
@@ -41,15 +45,15 @@ func _physics_process(delta):
 		if colliding == true: #skip this entire thing if we're in debug mode
 			
 			var is_jump_interrupted = false
-			if $MinimumJumpTimer.time_left == 0:
-				is_jump_interrupted = Input.is_action_just_released("jump") and _velocity.y < 0.0
+			if $MinimumJumpTimer.time_left == 0 and _velocity.y < 0.0:
+				if not Input.is_action_pressed("jump"):
+					is_jump_interrupted = true
 				
 				
 			var is_dodge_interrupted = Input.is_action_just_released("dodge") and _velocity.y < 0.0
 			var move_dir = get_move_dir()
 			var look_rot = $LookRot.rotation_degrees
 			var look_dir = get_look_dir(look_rot)
-#			var special_dir = get_special_dir(move_dir, look_dir)
 			var bullet_pos = $BulletVector.global_position
 			var effect_pos = $WeaponSprite.position
 			var bullet_rot = $BulletVector.rotation_degrees
@@ -59,6 +63,8 @@ func _physics_process(delta):
 				$BonkSound.play()
 			
 			if is_on_floor(): #start forgiveness timer on any frame they're on
+				jump_type = ""
+#				jump_speed = normal_jump_speed
 				if is_on_ladder == true:
 					is_on_ladder = false
 					if look_dir.x < 0: #Left
@@ -76,14 +82,17 @@ func _physics_process(delta):
 				$ForgivenessTimer.start(forgiveness_time)
 
 			else: #not on floor
-				do_while_airborne()
+				#yield(get_tree().create_timer(0.1), "timeout")
+				pass
 			
 			if Input.is_action_just_pressed("jump") and $ForgivenessTimer.time_left > 0 or Input.is_action_just_pressed("jump") and is_on_floor():
 				$MinimumJumpTimer.start(minimum_jump_time)
-#				if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
-#					if abs(_velocity.x) > 82: #since 82.5 is max x velocity, only count as a running jump then
-#						jump_starting_move_dir_x = move_dir.x
-#						$MinimumDirectionTimer.start(minimum_direction_time)
+				if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
+					if abs(_velocity.x) > 82: #since 82.5 is max x velocity, only count as a running jump then   ##Running JUMP CHECKING HERE
+						jump_type = "running_jump"
+#						jump_speed = long_jump_speed
+						jump_starting_move_dir_x = move_dir.x
+						$MinimumDirectionTimer.start(minimum_direction_time)
 				snap_vector = Vector2.ZERO
 				$JumpSound.play()
 			
@@ -217,6 +226,33 @@ func calculate_move_velocity(linear_velocity: Vector2, move_dir, look_dir, speed
 		else:
 			friction = true
 
+	elif jump_type == "running_jump":
+		out.y += gravity * get_physics_process_delta_time()
+		if move_dir.y < 0:
+			out.y = jump_speed * move_dir.y
+		if is_jump_interrupted:
+			out.y = 0.0
+		
+		if move_dir.x == jump_starting_move_dir_x *-1: #if we turn around, cancel minimumdirectiontimer
+			$MinimumDirectionTimer.stop()
+		
+		if not $MinimumDirectionTimer.is_stopped(): #still doing minimum x movement in jump #
+			#print("still doing minimum x movement")
+			out.x = max_x_speed
+			out.x *= jump_starting_move_dir_x
+		
+		
+		elif move_dir.x != 0: #try this asn an if instead if its not working
+			if move_dir.x != jump_starting_move_dir_x:
+				out.x = min(abs(out.x) + acceleration, half_max_x_speed)
+				out.x *= move_dir.x
+				#$MinimumDirectionTimer.start(0)
+			else:
+				out.x = min(abs(out.x) + acceleration, max_x_speed)
+				out.x *= move_dir.x
+		else:
+			friction = true
+		
 	
 	else:
 		out.y += gravity * get_physics_process_delta_time()
@@ -224,9 +260,7 @@ func calculate_move_velocity(linear_velocity: Vector2, move_dir, look_dir, speed
 			out.y = jump_speed * move_dir.y
 		if is_jump_interrupted:
 			out.y = 0.0
-#		if $MinimumDirectionTimer.time_left != 0: #still doing minimum x movement in jump
-#			out.x = max_x_speed
-#			out.x *= jump_starting_move_dir_x
+
 		if move_dir.x != 0:
 			out.x = min(abs(out.x) + acceleration, max_x_speed)
 			out.x *= move_dir.x
@@ -248,9 +282,6 @@ func calculate_move_velocity(linear_velocity: Vector2, move_dir, look_dir, speed
 	#print(out)
 	return out
 
-func do_while_airborne():
-	yield(get_tree().create_timer(0.1), "timeout")
-#	end_knockback_ready = true
 
 func get_input_dir() -> Vector2:
 	return Vector2(
@@ -562,10 +593,9 @@ func change_animation(next_animation):
 	player.play(next_animation)
 	#$AnimationPlayer.seek(old_time)
 
-
 func _on_BonkDetector_body_entered(body, direction):
-	#print("player bonked head")
-	global_position += (direction * -1) * Vector2(bonk_distance, 0)
+	if not is_on_floor():
+		global_position += (direction * -1) * Vector2(bonk_distance, 0)
 
 func _on_limit_camera(left, right, top, bottom):
 	var camera = $Camera2D

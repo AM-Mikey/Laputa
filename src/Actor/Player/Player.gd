@@ -43,7 +43,7 @@ var total_xp: int = 0
 
 var inventory: Array
 var topic_array: Array = ["ham", "cheese", "marbles", "balogna"]
-var weapon_array: Array = []#[load("res://src/Weapon/%s" % "Revolver1" + ".tres"), load("res://src/Weapon/%s" % "GrenadeLauncher" + ".tres"), load("res://src/Weapon/%s" % "MachinePistol" + ".tres")]
+var weapon_array: Array = [load("res://src/Weapon/%s" % "Revolver1" + ".tres"), load("res://src/Weapon/%s" % "GrenadeLauncher" + ".tres"), load("res://src/Weapon/%s" % "MachinePistol" + ".tres")]
 
 
 func _ready():
@@ -141,6 +141,8 @@ func hit(damage, knockback_direction):
 				text.position = global_position
 				var player = text.get_node("AnimationPlayer")
 				player.play("LevelDown")
+				yield(player, "animation_finished")
+				text.queue_free()
 #				var audio = text.get_node("AudioStreamPlayer2D") 				#need a SFX for this
 #				audio.stream = load("res://assets/SFX/snd_level_down.ogg")
 #				audio.play()

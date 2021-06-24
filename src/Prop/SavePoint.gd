@@ -18,5 +18,6 @@ func _on_SavePoint_body_exited(body):
 func _input(event):
 	if event.is_action_pressed("inspect") and has_player_near == true:
 		$AudioStreamPlayer.play()
-		world.save_level_data()
-		world.save_player_data()
+		world.save_level_data_to_temp()
+		world.save_player_data_to_save()
+		world.copy_level_data_to_save()

@@ -9,7 +9,7 @@ onready var weapon_wheel = $CenterContainer/Background/MarginContainer/VBoxConta
 var player_inventory: Array
 
 func _process(delta):
-	if Input.is_action_just_pressed("inventory") and get_tree().paused == false:
+	if Input.is_action_just_pressed("inventory") and get_tree().paused == false and player.disabled == false:
 		get_tree().paused = true
 		print("game paused")
 		hud.visible = false
@@ -18,7 +18,7 @@ func _process(delta):
 		weapon_wheel.disabled = false
 		weapon_wheel.setup() #set up whenever inventory is called
 	
-	elif Input.is_action_just_pressed("inventory") and get_tree().paused == true:
+	elif Input.is_action_just_pressed("inventory") and get_tree().paused == true and player.disabled == false:
 		get_tree().paused = false
 		print("game unpaused")
 		hud.visible = true

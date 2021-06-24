@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://src/Weapon/WeaponManager.gd" type="Script" id=1]
 [ext_resource path="res://src/Actor/Player/Recruit.gd" type="Script" id=2]
@@ -4256,127 +4256,9 @@ extents = Vector2( 8, 10.5 )
 extents = Vector2( 6, 7.5 )
 
 [sub_resource type="RectangleShape2D" id=53]
-extents = Vector2( 4, 0.45 )
+extents = Vector2( 4, 1 )
 
-[sub_resource type="AnimationNodeAnimation" id=54]
-animation = "RunLeft"
-
-[sub_resource type="AnimationNodeAnimation" id=55]
-animation = "RunRight"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id=56]
-blend_point_0/node = SubResource( 54 )
-blend_point_0/pos = -1.0
-blend_point_1/node = SubResource( 55 )
-blend_point_1/pos = 1.0
-snap = 1.0
-
-[sub_resource type="AnimationNodeAnimation" id=57]
-animation = "RunRight"
-
-[sub_resource type="AnimationNodeAnimation" id=58]
-animation = "RunLeft"
-
-[sub_resource type="AnimationNodeAnimation" id=59]
-animation = "RunLeft"
-
-[sub_resource type="AnimationNodeAnimation" id=60]
-animation = "RunRight"
-
-[sub_resource type="AnimationNodeAnimation" id=61]
-animation = "RunLeft"
-
-[sub_resource type="AnimationNodeAnimation" id=62]
-animation = "RunRight"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id=63]
-auto_triangles = false
-blend_point_0/node = SubResource( 57 )
-blend_point_0/pos = Vector2( 1, -1 )
-blend_point_1/node = SubResource( 58 )
-blend_point_1/pos = Vector2( -1, -1 )
-blend_point_2/node = SubResource( 59 )
-blend_point_2/pos = Vector2( -1, 0 )
-blend_point_3/node = SubResource( 60 )
-blend_point_3/pos = Vector2( 1, 0 )
-blend_point_4/node = SubResource( 61 )
-blend_point_4/pos = Vector2( -1, 1 )
-blend_point_5/node = SubResource( 62 )
-blend_point_5/pos = Vector2( 1, 1 )
-triangles = PoolIntArray( 0, 1, 3, 1, 2, 3, 2, 3, 5, 2, 4, 5 )
-snap = Vector2( 1, 1 )
-blend_mode = 1
-
-[sub_resource type="AnimationNodeBlendSpace2D" id=64]
-
-[sub_resource type="AnimationNodeAnimation" id=65]
-animation = "RunLeftLookUp"
-
-[sub_resource type="AnimationNodeAnimation" id=66]
-animation = "RunLeftLookUp"
-
-[sub_resource type="AnimationNodeAnimation" id=67]
-animation = "RunLeftLookUp"
-
-[sub_resource type="AnimationNodeAnimation" id=68]
-animation = "RunLeftLookUp"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id=69]
-blend_point_0/node = SubResource( 65 )
-blend_point_0/pos = Vector2( -1, 1 )
-blend_point_1/node = SubResource( 66 )
-blend_point_1/pos = Vector2( 1, 1 )
-blend_point_2/node = SubResource( 67 )
-blend_point_2/pos = Vector2( -1, -1 )
-blend_point_3/node = SubResource( 68 )
-blend_point_3/pos = Vector2( 1, -1 )
-snap = Vector2( 1, 1 )
-blend_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id=70]
-animation = "RunLeft"
-
-[sub_resource type="AnimationNodeAnimation" id=71]
-animation = "RunRight"
-
-[sub_resource type="AnimationNodeStateMachine" id=72]
-states/RunLeft/node = SubResource( 70 )
-states/RunLeft/position = Vector2( 130, 117 )
-states/RunRight/node = SubResource( 71 )
-states/RunRight/position = Vector2( 469, 117 )
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=73]
-switch_mode = 1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=74]
-switch_mode = 1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=75]
-switch_mode = 1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=76]
-switch_mode = 1
-
-[sub_resource type="AnimationNodeStateMachine" id=77]
-states/BlendSpace1D/node = SubResource( 56 )
-states/BlendSpace1D/position = Vector2( 47, -4 )
-states/Run/node = SubResource( 63 )
-states/Run/position = Vector2( 426, 94 )
-states/RunLookDown/node = SubResource( 64 )
-states/RunLookDown/position = Vector2( 400, 196 )
-states/RunLookUp/node = SubResource( 69 )
-states/RunLookUp/position = Vector2( 433, -11 )
-states/StateMachine/node = SubResource( 72 )
-states/StateMachine/position = Vector2( 34, 127 )
-transitions = [ "Run", "RunLookUp", SubResource( 73 ), "RunLookUp", "Run", SubResource( 74 ), "Run", "RunLookDown", SubResource( 75 ), "RunLookDown", "Run", SubResource( 76 ) ]
-start_node = "Run"
-graph_offset = Vector2( -177, -74 )
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id=78]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id=79]
-
-[sub_resource type="RectangleShape2D" id=80]
+[sub_resource type="RectangleShape2D" id=54]
 extents = Vector2( 6, 0.5 )
 
 [node name="Recruit" type="KinematicBody2D"]
@@ -4498,6 +4380,9 @@ one_shot = true
 [node name="MinimumJumpTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="MinimumDirectionTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="EffectPlayer" type="AnimationPlayer" parent="."]
 anims/FlashIframe = SubResource( 50 )
 
@@ -4550,7 +4435,7 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BonkDetectorLeft"]
 modulate = Color( 0.12549, 0, 1, 0.392157 )
-position = Vector2( -2, -18.45 )
+position = Vector2( -2, -19 )
 shape = SubResource( 53 )
 
 [node name="BonkDetectorRight" type="Area2D" parent="."]
@@ -4561,28 +4446,21 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BonkDetectorRight"]
 modulate = Color( 0.12549, 0, 1, 0.392157 )
-position = Vector2( 2, -18.45 )
+position = Vector2( 2, -19 )
 shape = SubResource( 53 )
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 77 )
-anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 78 )
-parameters/BlendSpace1D/blend_position = -0.863561
-parameters/Run/blend_position = Vector2( -0.513369, 0.701149 )
-parameters/RunLookDown/blend_position = Vector2( 0.568627, 0 )
-parameters/RunLookUp/blend_position = Vector2( -0.777184, 0.413793 )
-parameters/StateMachine/playback = SubResource( 79 )
-
 [node name="HeadDetector" type="Area2D" parent="."]
+visible = false
 show_behind_parent = true
+monitoring = false
+monitorable = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadDetector"]
 modulate = Color( 0.12549, 0, 1, 0.392157 )
 position = Vector2( 0, -15.5 )
-shape = SubResource( 80 )
+shape = SubResource( 54 )
 
 [connection signal="area_entered" from="ItemDetector" to="." method="_on_EntityDetector_area_entered"]
 [connection signal="area_exited" from="ItemDetector" to="." method="_on_EntityDetector_area_exited"]

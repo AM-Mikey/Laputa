@@ -4,9 +4,10 @@ export var look_dir: Vector2 = Vector2.LEFT
 var move_dir: Vector2
 
 const BULLET = preload("res://src/Bullet/EnemyBulletTemplate.tscn")
-export var projectile_speed: int = 120
+export var projectile_speed: int = 200
 export var bullet_height_adjustment = 1
-export var cooldown_time = 1
+export var cooldown_time = 4.0
+export var bullet_damage = 4
 
 var target: Node = null
 var locked_on = false
@@ -22,9 +23,11 @@ func _ready():
 	speed = Vector2(80, 100)
 	gravity = 250
 	
+	level = 3
+	
 	$FireCooldown.start(cooldown_time)
 	
-	wander()
+	#wander()
 
 func _physics_process(delta):
 	if is_on_wall():
@@ -123,6 +126,7 @@ func prepare_bullet():
 		bullet.rotation_degrees = 0
 	if look_dir == Vector2.RIGHT:
 		bullet.rotation_degrees = 180
+	bullet.damage = bullet_damage
 	fire_bullet(bullet)
 	$PosFire.play()
 

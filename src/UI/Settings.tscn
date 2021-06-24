@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/UI/Settings.gd" type="Script" id=1]
 [ext_resource path="res://assets/Cave-Story.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/UI/MenuBackground.png" type="Texture" id=3]
+[ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 outline_size = 1
@@ -21,7 +22,7 @@ __meta__ = {
 margin_left = 64.0
 margin_top = 16.0
 margin_right = 448.0
-margin_bottom = 272.0
+margin_bottom = 256.0
 texture = ExtResource( 3 )
 patch_margin_left = 10
 patch_margin_top = 10
@@ -35,7 +36,7 @@ __meta__ = {
 margin_left = 64.0
 margin_top = 16.0
 margin_right = 448.0
-margin_bottom = 224.0
+margin_bottom = 256.0
 custom_constants/margin_right = 16
 custom_constants/margin_top = 16
 custom_constants/margin_left = 16
@@ -48,50 +49,126 @@ __meta__ = {
 margin_left = 16.0
 margin_top = 16.0
 margin_right = 368.0
-margin_bottom = 192.0
+margin_bottom = 224.0
 
-[node name="Sound" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="MasterLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 margin_right = 352.0
-margin_bottom = 20.0
-text = "Sound Settings"
+margin_bottom = 10.0
+custom_fonts/font = ExtResource( 4 )
+text = "Master Volume: 100'/."
+align = 1
+
+[node name="MasterSlider" type="HSlider" parent="MarginContainer/VBoxContainer"]
+margin_top = 14.0
+margin_right = 352.0
+margin_bottom = 30.0
+max_value = 20.0
+value = 10.0
+tick_count = 21
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 34.0
+margin_right = 352.0
+margin_bottom = 44.0
+
+[node name="MusicLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 174.0
+margin_bottom = 10.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+text = "Music Volume: 100'/."
+align = 1
+
+[node name="SFXLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 178.0
+margin_right = 352.0
+margin_bottom = 10.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+text = "SFX Volume: 100'/."
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 48.0
+margin_right = 352.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 174.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+max_value = 10.0
+value = 10.0
+tick_count = 11
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SFXSlider" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 178.0
+margin_right = 352.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+max_value = 10.0
+value = 10.0
+tick_count = 11
+ticks_on_borders = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PixelSnap" type="CheckButton" parent="MarginContainer/VBoxContainer"]
-margin_top = 24.0
+margin_top = 68.0
 margin_right = 352.0
-margin_bottom = 64.0
+margin_bottom = 108.0
 custom_fonts/font = SubResource( 1 )
 pressed = true
 text = "Pixel Snap"
 flat = true
 
 [node name="DisplayMode" type="OptionButton" parent="MarginContainer/VBoxContainer"]
-margin_top = 68.0
+margin_top = 112.0
 margin_right = 352.0
-margin_bottom = 86.0
+margin_bottom = 130.0
 custom_fonts/font = SubResource( 1 )
 text = "Display Mode"
+
+[node name="ResolutionScale" type="OptionButton" parent="MarginContainer/VBoxContainer"]
+margin_top = 134.0
+margin_right = 352.0
+margin_bottom = 152.0
+custom_fonts/font = SubResource( 1 )
+text = "Resolution Scale"
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 margin_left = 64.0
 margin_top = 224.0
 margin_right = 448.0
-margin_bottom = 272.0
+margin_bottom = 256.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2"]
 margin_right = 384.0
-margin_bottom = 48.0
+margin_bottom = 32.0
 alignment = 2
 
 [node name="Default" type="Button" parent="MarginContainer2/HBoxContainer"]
 margin_left = 266.0
 margin_right = 328.0
-margin_bottom = 48.0
+margin_bottom = 32.0
 custom_fonts/font = SubResource( 1 )
 text = "Defaults"
 flat = true
@@ -99,12 +176,16 @@ flat = true
 [node name="Return" type="Button" parent="MarginContainer2/HBoxContainer"]
 margin_left = 332.0
 margin_right = 384.0
-margin_bottom = 48.0
+margin_bottom = 32.0
 custom_fonts/font = SubResource( 1 )
 text = "Return"
 flat = true
 
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/MasterSlider" to="." method="_on_MasterSlider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer2/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer2/SFXSlider" to="." method="_on_SFXSlider_value_changed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/PixelSnap" to="." method="_on_PixelSnap_toggled"]
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/DisplayMode" to="." method="_on_DisplayMode_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/ResolutionScale" to="." method="_on_ResolutionScale_item_selected"]
 [connection signal="pressed" from="MarginContainer2/HBoxContainer/Default" to="." method="_on_Reset_pressed"]
 [connection signal="pressed" from="MarginContainer2/HBoxContainer/Return" to="." method="_on_Save_pressed"]

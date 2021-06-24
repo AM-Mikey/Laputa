@@ -1,8 +1,10 @@
 extends Node2D
 
 var resolution_scale = 4.0
+var viewport_size_ignore = false
 
 var save_path = "user://save.dat"
+var temp_path = "user://temp.dat"
 var data = {
 	 "player_data" : {},
 	"level_data" : {}
@@ -23,6 +25,8 @@ func _ready():
 		$Recruit.global_position = s.global_position
 
 func _on_viewport_size_changed():
+	if viewport_size_ignore:
+		return
 	print("viewport size changed")
 	var viewport_size = get_tree().get_root().size
 	
@@ -49,15 +53,18 @@ func _input(event):
 		get_tree().reload_current_scene()
 	if event.is_action_pressed("break"):
 		get_tree().quit()
+		
 	if event.is_action_pressed("save_data"):
-		save_player_data()
-		save_level_data()
+		save_level_data_to_temp()
+		save_player_data_to_save()
+		copy_level_data_to_save()
 	if event.is_action_pressed("load_data"):
-		load_player_data()
-		load_level_data()
+		load_player_data_from_save()
+		load_level_data_from_save()
+		copy_level_data_to_temp()
 
 func _on_level_change(level, door_index, level_name, music): #clean this up once you get the chance, triggers deserve their own type
-	save_level_data()
+	save_level_data_to_temp()
 	$Recruit/Camera2D.smoothing_enabled = false
 		
 	var level_path = current_level.filename
@@ -120,7 +127,7 @@ func _on_level_change(level, door_index, level_name, music): #clean this up once
 	$UILayer/MoneyDisplay.visible = false
 	
 	current_level = next_level
-	load_level_data()
+	load_level_data_from_temp()
 	
 	#enable smoothing after a bit
 	yield(get_tree().create_timer(0.01), "timeout")
@@ -137,7 +144,7 @@ func load_music(music):
 	$MusicPlayer.stream = load(music)
 	$MusicPlayer.play()
 	
-func save_player_data():
+func save_player_data_to_save():
 	var player = $Recruit
 	
 	var weapon_data = {}
@@ -151,6 +158,7 @@ func save_player_data():
 			weapon_data[w.resource_name]["ammo"] = w.ammo
 	
 	data["player_data"] = {
+		"current_level" : current_level.filename,
 		"position" : player.position,
 		"hp" : player.hp,
 		"max_hp" : player.max_hp,
@@ -167,9 +175,9 @@ func save_player_data():
 		file.close()
 		print("player data saved")
 	else:
-		print("ERROR: player data cannot be saved!")
+		print("ERROR: player data could not be saved!")
 
-func load_player_data():
+func load_player_data_from_save():
 	var player = $Recruit
 	var file = File.new()
 	if file.file_exists(save_path):
@@ -179,6 +187,9 @@ func load_player_data():
 			file.close()
 			
 			print(data["player_data"])
+			
+			_on_level_change(data["player_data"]["current_level"], null, null, null)
+			yield(get_tree(), "idle_frame")
 			
 			player.position = data["player_data"]["position"]
 			player.hp = data["player_data"]["hp"]
@@ -206,11 +217,11 @@ func load_player_data():
 			
 			print("player data loaded")
 		else:
-			print("ERROR: player data cannot be loaded!")
+			print("ERROR: player data could not be loaded!")
 	else:
 			print("ERROR: no save file found")
 
-func save_level_data():
+func save_level_data_to_temp():
 	var containers = get_tree().get_nodes_in_group("Containers")
 	var containers_if_used = []
 	for c in containers:
@@ -222,16 +233,146 @@ func save_level_data():
 	}
 	
 	var file = File.new()
-	var file_written = file.open(save_path, File.WRITE)
+	var file_written = file.open(temp_path, File.WRITE)
 	if file_written == OK:
 		file.store_var(data)
 		file.close()
-		print("level data saved")
+		print("level data saved to temp")
 	else:
-		print("ERROR: level data cannot be saved!")
+		print("ERROR: level data could not be saved to temp!")
 
-func load_level_data():
-	var containers = get_tree().get_nodes_in_group("Container")
+func copy_level_data_to_temp():
+		var success_check = 0
+		var temp_data
+		var save_data
+		
+		var file = File.new()
+		
+		
+		var file_read = file.open(save_path, File.READ)
+		if file_read == OK:
+			save_data = file.get_var()
+			file.close()
+			success_check += 1
+		else:
+			print("ERROR: data could not be loaded from save while copying!")
+			
+		
+		file_read = file.open(temp_path, File.READ)
+		if file_read == OK:
+			temp_data = file.get_var()
+			file.close()
+			success_check += 1
+		else:
+			print("ERROR: data could not be loaded from temp while copying")
+			
+		
+
+		if save_data.has("level_data"):
+			var data = {}
+			data["level_data"] = save_data["level_data"]
+			
+			var file_written = file.open(temp_path, File.WRITE)
+			if file_written == OK:
+				file.store_var(data)
+				file.close()
+				success_check +=1
+			else:
+				print("ERROR: data could not be saved to temp while copying!")
+				return
+		
+		else:
+			print("no level data to copy from save to temp")
+			return
+			
+			
+			
+			
+			
+		if success_check == 3:
+			print("level data copied from save to temp")
+		else:
+			print("ERROR: level data could not be copied from save to temp!")
+	
+func copy_level_data_to_save():
+		var success_check = 0
+		var temp_data
+		var save_data
+		
+		var temp_file = File.new()
+		var temp_file_read = temp_file.open(temp_path, File.READ)
+		if temp_file_read == OK:
+			temp_data = temp_file.get_var()
+			temp_file.close()
+			success_check += 1
+		else:
+			print("ERROR: data could not be loaded from temp while copying!")
+			return
+			
+		var save_file = File.new()
+		var save_file_read = save_file.open(save_path, File.READ)
+		if save_file_read == OK:
+			save_data = save_file.get_var()
+			save_file.close()
+			success_check += 1
+		else:
+			print("ERROR: data could not be loaded from save while copying!")
+			return
+			
+			
+		if temp_data.has("level"):
+			var data = {}
+			data["player_data"] = save_data["player_data"]
+			data["level_data"] = temp_data["level_data"]
+			
+			var save_file_written = save_file.open(save_path, File.WRITE)
+			if save_file_written == OK:
+				save_file.store_var(data)
+				save_file.close()
+				success_check +=1
+			else:
+				print("ERROR: data could not be saved to save while copying!")
+				return
+		
+		else:
+			print("no level data to copy from temp to save")
+			return
+		
+		
+		
+		if success_check == 3:
+			print("level data copied from temp to save")
+		else:
+			print("ERROR: level data could not be copied from temp to save!")
+
+
+func load_level_data_from_temp():
+	var containers = get_tree().get_nodes_in_group("Containers")
+	var file = File.new()
+	if file.file_exists(temp_path):
+		var file_read = file.open(temp_path, File.READ)
+		if file_read == OK:
+			var data = file.get_var()
+			file.close()
+			
+			if data["level_data"].has(current_level.name): #if it finds level data for this level
+				var current_level_data = data["level_data"][current_level.name]
+				if current_level_data["containers_if_used"].empty() == false: #if there are containers in the loaded level
+					for i in containers.size():
+						containers[i].used = current_level_data["containers_if_used"][i]
+						if containers[i].used == true:
+							containers[i].get_node("AnimationPlayer").play("Used")
+				
+				print("level data loaded from temp")
+			else:
+				print("no previous level data in temp")
+		else:
+			print("ERROR: level data could not be loaded from temp!")
+	else:
+		print("ERROR: no temp file found")
+
+func load_level_data_from_save():
+	var containers = get_tree().get_nodes_in_group("Containers")
 	var file = File.new()
 	if file.file_exists(save_path):
 		var file_read = file.open(save_path, File.READ)
@@ -247,10 +388,10 @@ func load_level_data():
 						if containers[i].used == true:
 							containers[i].get_node("AnimationPlayer").play("Used")
 				
-				print("level data loaded")
+				print("level data loaded from save")
 			else:
-				print("no previous level data")
+				print("no previous level data in save")
 		else:
-			print("ERROR: level data cannot be loaded!")
+			print("ERROR: level data could not be loaded from save!")
 	else:
 		print("ERROR: no save file found")

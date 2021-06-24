@@ -11,21 +11,21 @@ onready var player_actor = get_tree().get_root().get_node("World/Recruit")
 
 var rng = RandomNumberGenerator.new()
 
-export var heart_drop_percent = 90
-
 var hp: int
 var damage_on_contact: int
 
 var recent_damage_taken: int
 var timer = Timer.new()
-export var damagenum_reset_time: float = 1.0
+var damagenum_reset_time: float = 1.0
 
+export var id: String
 export var level = 1
 export var hp_chance = 1
 export var xp_chance = 1
 export var ammo_chance = 1
 
 func _ready():
+	add_to_group("Enemies")
 	timer.connect("timeout",self,"_on_timer_timeout") 
 	add_child(timer)
 	timer.one_shot = true

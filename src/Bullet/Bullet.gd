@@ -39,10 +39,11 @@ func _fizzle_from_world():
 	queue_free()
 
 func _fizzle_from_range():
-	visible = false
 	disabled = true
+	visible = false
 	
-	#print("fizzle from range")
+	
+	print("fizzle from range")
 	var effect = EFFECT.instance()
 	get_parent().add_child(effect)
 	effect.position = global_position

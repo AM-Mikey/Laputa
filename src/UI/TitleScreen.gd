@@ -39,9 +39,12 @@ func _ready():
 		if file_read == OK:
 			var data = file.get_var()
 			file.close()
-			if data["player_data"].size() == 0:
-				$MarginContainer/VBoxContainer/Load.queue_free()
-			
+			if data != null:
+				if data.has("player_data"):
+					if data["player_data"].size() == 0:
+						$MarginContainer/VBoxContainer/Load.queue_free()
+				else:$MarginContainer/VBoxContainer/Load.queue_free()
+			else:$MarginContainer/VBoxContainer/Load.queue_free()
 		else: $MarginContainer/VBoxContainer/Load.queue_free()
 	else: $MarginContainer/VBoxContainer/Load.queue_free()
 	
@@ -66,8 +69,9 @@ func _on_Load_pressed():
 	player.disabled = false
 	player.visible = true
 	hud.visible = true
-	world.load_player_data()
-	world.load_level_data()
+	world.load_player_data_from_save()
+	world.load_level_data_from_save()
+	world.copy_level_data_to_temp()
 
 
 func _on_Options_pressed():

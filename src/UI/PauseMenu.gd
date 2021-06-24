@@ -17,3 +17,13 @@ func _process(delta):
 func _on_Options_pressed():
 	var options = OPTIONS.instance()
 	add_child(options)
+
+
+func _on_Return_pressed():
+	get_tree().paused = false
+	print("game unpaused")
+	visible = false
+
+
+func _on_Quit_pressed():
+	get_tree().quit()
