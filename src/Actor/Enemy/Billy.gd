@@ -3,7 +3,7 @@ extends Enemy
 export var look_dir: Vector2 = Vector2.LEFT
 var move_dir: Vector2
 
-const BULLET = preload("res://src/Bullet/Enemy/Seed.tscn")
+const SEED = preload("res://src/Bullet/Enemy/Seed.tscn")
 
 export var height_tolerance = 7
 export var cooldown_time = 1
@@ -115,10 +115,9 @@ func fire():
 				fire()
 
 func prepare_bullet():
-	var bullet = BULLET.instance()
+	var bullet = SEED.instance()
 	bullet.damage = projectile_damage
 	bullet.projectile_speed = projectile_speed
-	
 	bullet.position = Vector2($CollisionShape2D.global_position.x, $CollisionShape2D.global_position.y - height_tolerance)
 	bullet.direction = Vector2(look_dir.x /2 , -1) #Adjust this for angle
 	

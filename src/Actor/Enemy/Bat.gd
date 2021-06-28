@@ -12,6 +12,9 @@ func _ready():
 	move_dir = starting_direction
 	animate(move_dir)
 
+func _physics_process(delta):
+	get_parent().offset += speed.x/100
+
 
 func animate(move_dir):
 	if move_dir == Vector2.LEFT:

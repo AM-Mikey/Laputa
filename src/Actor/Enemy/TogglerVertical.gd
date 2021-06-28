@@ -16,8 +16,8 @@ func _ready():
 	acceleration = 25
 
 	level = 2
-	hp_chance = 1
-	xp_chance = 2
+	heart_chance = 1
+	experience_chance = 2
 	ammo_chance = 0
 	
 	

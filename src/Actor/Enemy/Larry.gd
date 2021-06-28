@@ -7,12 +7,12 @@ var active_time: float
 
 func _ready():
 	hp = 1
-	damage_on_contact = 1
+	damage_on_contact = 0
 	speed = Vector2(100, 100)
 
 	level = 1
-	hp_chance = 2
-	xp_chance = 1
+	heart_chance = 2
+	experience_chance = 1
 	ammo_chance = 0
 
 	rng.randomize()

@@ -16,7 +16,6 @@ func _ready():
 	print(follower_path.get(stop_condition))
 
 func _process(delta):
-	if follower_path.get(stop_condition)  != true:
-		$PathFollow2D.offset += speed
+	$PathFollow2D.offset += speed
 	
 	

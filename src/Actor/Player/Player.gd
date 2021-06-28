@@ -219,13 +219,29 @@ func _on_HurtDetector_area_exited(area):
 
 
 func _on_EntityDetector_body_entered(body):
+	pass
+
+
+
+
+func _on_EntityDetector_area_entered(area):
 	if disabled != true:
-		if body.get_collision_layer_bit(11): #xp
-			total_xp += body.value
+		
+		if area.get_collision_layer_bit(10): #health
+			hp += area.get_parent().value
+			$PickupSound.stream = load("res://assets/SFX/snd_health_refill.ogg")
+			$PickupSound.play()
+			if hp > max_hp:
+				hp = max_hp
+			emit_signal("player_health_updated", hp)
+			area.get_parent().queue_free()
+		
+		if area.get_collision_layer_bit(11): #xp
+			total_xp += area.get_parent().value
 			if weapon_array.front().level == weapon_array.front().max_level and weapon_array.front().xp == weapon_array.front().max_xp:
 				pass
 			else:
-				weapon_array.front().xp += body.value
+				weapon_array.front().xp += area.get_parent().value
 
 			if weapon_array.front().xp >= weapon_array.front().max_xp: #level up
 				if weapon_array.front().level == weapon_array.front().max_level: #already max level
@@ -233,12 +249,11 @@ func _on_EntityDetector_body_entered(body):
 					$PickupSound.stream = load("res://assets/SFX/snd_get_xp.ogg")
 					$PickupSound.play()
 					emit_signal("player_experience_updated", total_xp, weapon_array.front().level, weapon_array.front().max_level, weapon_array.front().xp, weapon_array.front().max_xp)
-					body.queue_free()
+					area.get_parent().queue_free()
 					
 				else: #leveling up normally
 					print("level up normally")
 					var next_level = load(weapon_array.front().resource_path.replace(weapon_array.front().level,weapon_array.front().level + 1))
-					
 					var saved_xp = weapon_array.front().xp - weapon_array.front().max_xp
 					var saved_ammo = weapon_array.front().ammo
 					weapon_array.pop_front()
@@ -246,9 +261,7 @@ func _on_EntityDetector_body_entered(body):
 					weapon_array.front().ammo = saved_ammo
 					weapon_array.front().xp = saved_xp
 					$WeaponManager.update_weapon()
-					
-					
-					body.queue_free()
+					area.get_parent().queue_free()
 					
 					var text = TEXTEFFECT.instance()
 					get_parent().add_child(text)
@@ -258,36 +271,17 @@ func _on_EntityDetector_body_entered(body):
 					var audio = text.get_node("AudioStreamPlayer2D")
 					audio.stream = load("res://assets/SFX/snd_level_up.ogg")
 					audio.play()
-					
 					update_xp()
-					
 					yield(player, "animation_finished")
 					text.queue_free()
-					
-
 					
 			else: #not leveling just collecting xp
 				print("no level just collect xp")
 				$PickupSound.stream = load("res://assets/SFX/snd_get_xp.ogg")
 				$PickupSound.play()
-				
 				update_xp()
-				body.queue_free()
-
-
-
-
-func _on_EntityDetector_area_entered(area):
-	if disabled != true:
+				area.get_parent().queue_free()
 		
-		if area.get_collision_layer_bit(10): #health
-			hp += area.value
-			$PickupSound.stream = load("res://assets/SFX/snd_health_refill.ogg")
-			$PickupSound.play()
-			if hp > max_hp:
-				hp = max_hp
-			emit_signal("player_health_updated", hp)
-			area.queue_free()
 		
 		if area.get_collision_layer_bit(12): #ammo
 			for w in weapon_array:

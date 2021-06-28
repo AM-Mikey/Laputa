@@ -1,17 +1,15 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Tile/LabyrinthHouse.tres" type="TileSet" id=3]
-[ext_resource path="res://assets/Background/bkMaze.bmp" type="Texture" id=4]
-[ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
-[ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=6]
-[ext_resource path="res://src/Utility/PlayerCameraDummy.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/Actor/Boss/Balrog.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Actor/Boss/Balrog.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Level/Level.gd" type="Script" id=7]
+[ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=8]
+[ext_resource path="res://src/Tile/LabyrinthHouse.tres" type="TileSet" id=9]
 
 [node name="TreasureRoom" type="Node2D"]
-script = ExtResource( 5 )
+script = ExtResource( 7 )
 __meta__ = {
 "_editor_description_": "boss room
 full of gold, corp gets here before you do while you search for key, and blows a hole through it"
@@ -22,7 +20,7 @@ music = "res://assets/Music/Access.ogg"
 [node name="Tiles" type="Node2D" parent="."]
 
 [node name="Background" type="TileMap" parent="Tiles"]
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 9 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 8
 collision_mask = 0
@@ -30,7 +28,7 @@ format = 1
 tile_data = PoolIntArray( -65521, 1, 0, -65520, 1, 0, 262159, 1, 0, 262160, 1, 0, 589832, 12, 0, 589833, 12, 0, 589834, 12, 0, 589835, 12, 0, 589836, 12, 0, 589837, 12, 0, 589838, 12, 0, 589839, 12, 0, 589840, 12, 0, 589841, 12, 0, 589842, 12, 0, 589843, 12, 0, 589844, 12, 0, 589845, 12, 0, 720903, 10, 0, 720904, 10, 0, 720905, 10, 0, 720906, 10, 0, 720907, 10, 0, 720908, 10, 0, 720909, 10, 0, 720910, 10, 0, 720911, 10, 0, 720912, 10, 0, 720913, 10, 0, 720914, 10, 0, 720915, 10, 0, 720916, 10, 0, 720917, 10, 0, 851978, 10, 0, 851979, 10, 0, 851980, 10, 0, 851981, 10, 0, 851988, 10, 0, 851989, 10, 0, 851990, 10, 0, 851991, 10, 0, 851992, 10, 0, 851993, 10, 0, 983049, 10, 0, 983050, 10, 0, 983051, 10, 0, 983052, 10, 0, 983053, 10, 0, 983054, 10, 0, 983055, 10, 0, 983056, 10, 0, 983057, 10, 0, 983058, 10, 0, 983059, 10, 0, 983060, 10, 0, 983061, 10, 0, 983062, 10, 0, 983063, 10, 0, 983064, 10, 0, 983065, 10, 0, 983066, 10, 0, 1048582, 1, 0, 1114127, 1, 0, 1114128, 1, 0 )
 
 [node name="Main" type="TileMap" parent="Tiles"]
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 9 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 8
 collision_mask = 0
@@ -39,7 +37,7 @@ tile_data = PoolIntArray( 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 
 
 [node name="Forground" type="TileMap" parent="Tiles"]
 z_index = 2
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 9 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 8
 collision_mask = 0
@@ -47,7 +45,7 @@ format = 1
 
 [node name="Triggers" type="Node2D" parent="."]
 
-[node name="Door" parent="Triggers" instance=ExtResource( 2 )]
+[node name="Door" parent="Triggers" instance=ExtResource( 4 )]
 position = Vector2( 40, 256 )
 level = "res://src/Level/Demo/03Villiage.tscn"
 
@@ -59,22 +57,10 @@ scale = Vector2( 482.952, 10 )
 
 [node name="Actors" type="Node2D" parent="."]
 
-[node name="Balrog" parent="Actors" instance=ExtResource( 8 )]
+[node name="Balrog" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( 328, 256 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground"]
-margin_left = -408.0
-margin_top = -208.0
-margin_right = 1040.0
-margin_bottom = 600.0
-texture = ExtResource( 4 )
-expand = true
-stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Notes" type="Node2D" parent="."]
 
@@ -82,7 +68,7 @@ __meta__ = {
 margin_top = -104.0
 margin_right = 152.0
 margin_bottom = -29.0
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 8 )
 text = "Sequence where corp kidnaps pirate leader
 
 izu is left to fight player"
@@ -96,15 +82,16 @@ margin_left = 520.0
 margin_top = 48.0
 margin_right = 672.0
 margin_bottom = 123.0
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 8 )
 text = "foreshadow spear tossing that the player can stand on using enemies earlier on"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerCameraDummy" parent="." instance=ExtResource( 7 )]
-visible = false
+[node name="SpawnPoint" parent="." instance=ExtResource( 5 )]
+position = Vector2( 40, 256 )
 
-[node name="SpawnPoint" parent="." instance=ExtResource( 9 )]
-position = Vector2( 80, 256 )
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 240, 136 )
+current = true

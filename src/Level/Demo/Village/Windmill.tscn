@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
+[ext_resource path="res://src/Tile/DebugTile.tres" type="TileSet" id=8]
+[ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Tile/DebugBackground.tres" type="TileSet" id=10]
+
+[node name="Windmill" type="Node2D"]
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_description_": "boss room
+full of gold, corp gets here before you do while you search for key, and blows a hole through it"
+}
+
+[node name="Actors" type="Node2D" parent="."]
+
+[node name="Tiles" type="Node2D" parent="."]
+
+[node name="Background" type="TileMap" parent="Tiles"]
+tile_set = ExtResource( 10 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -524284, 0, 0, -524283, 0, 0, -524282, 0, 0, -524281, 0, 0, -524280, 0, 0, -524279, 0, 0, -524278, 0, 0, -458748, 0, 0, -458747, 0, 0, -458746, 0, 0, -458745, 0, 0, -458744, 0, 0, -458743, 0, 0, -458742, 0, 0, -393212, 0, 0, -393211, 0, 0, -393210, 0, 0, -393209, 0, 0, -393208, 0, 0, -393207, 0, 0, -393206, 0, 0, -327676, 0, 0, -327675, 0, 0, -327674, 0, 0, -327673, 0, 0, -327672, 0, 0, -327671, 0, 0, -327670, 0, 0, -262140, 0, 0, -262139, 0, 0, -262138, 0, 0, -262137, 0, 0, -262136, 0, 0, -262135, 0, 0, -262134, 0, 0, -196604, 0, 0, -196603, 0, 0, -196602, 0, 0, -196601, 0, 0, -196600, 0, 0, -196599, 0, 0, -196598, 0, 0, -131068, 0, 0, -131067, 0, 0, -131066, 0, 0, -131065, 0, 0, -131064, 0, 0, -131063, 0, 0, -131062, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, -65526, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 131082, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 655364, 0, 0, 655365, 0, 0, 655366, 0, 0, 655367, 0, 0, 655368, 0, 0, 655369, 0, 0, 655370, 0, 0, 655371, 0, 0, 720900, 0, 0, 720901, 0, 0, 720902, 0, 0, 720903, 0, 0, 720904, 0, 0, 720905, 0, 0, 720906, 0, 0, 720907, 0, 0, 786436, 0, 0, 786437, 0, 0, 786438, 0, 0, 786439, 0, 0, 786440, 0, 0, 786441, 0, 0, 786442, 0, 0, 786443, 0, 0, 851972, 0, 0, 851973, 0, 0, 851974, 0, 0, 851975, 0, 0, 851976, 0, 0, 851977, 0, 0, 851978, 0, 0, 851979, 0, 0, 917508, 0, 0, 917509, 0, 0, 917510, 0, 0, 917511, 0, 0, 917512, 0, 0, 917513, 0, 0, 917514, 0, 0, 917515, 0, 0, 983044, 0, 0, 983045, 0, 0, 983046, 0, 0, 983047, 0, 0, 983048, 0, 0, 983049, 0, 0, 983050, 0, 0, 983051, 0, 0, 1048580, 0, 0, 1048581, 0, 0, 1048582, 0, 0, 1048583, 0, 0, 1048584, 0, 0, 1048585, 0, 0, 1048586, 0, 0, 1048587, 0, 0 )
+
+[node name="Main" type="TileMap" parent="Tiles"]
+tile_set = ExtResource( 8 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -524284, 7, 0, -524283, 7, 0, -524282, 7, 0, -524281, 7, 0, -524280, 7, 0, -524279, 7, 0, -524278, 7, 0, -524277, 7, 0, -458748, 7, 0, -458741, 7, 0, -393212, 7, 0, -393205, 7, 0, -327676, 7, 0, -327669, 7, 0, -262140, 7, 0, -262133, 7, 0, -196604, 7, 0, -196597, 7, 0, -131068, 7, 0, -131061, 7, 0, -65532, 7, 0, -65525, 7, 0, 4, 7, 0, 11, 7, 0, 65540, 7, 0, 65547, 7, 0, 131076, 7, 0, 131083, 7, 0, 196612, 7, 0, 196619, 7, 0, 262148, 7, 0, 262155, 7, 0, 327684, 7, 0, 327691, 7, 0, 393220, 7, 0, 393227, 7, 0, 458756, 7, 0, 458763, 7, 0, 589823, 1, 0, 524292, 7, 0, 524299, 7, 0, 589828, 7, 0, 589835, 7, 0, 655364, 7, 0, 655371, 7, 0, 720900, 7, 0, 720907, 7, 0, 786436, 7, 0, 786443, 7, 0, 851972, 7, 0, 851979, 7, 0, 917508, 7, 0, 917515, 7, 0, 983044, 7, 0, 983051, 7, 0, 1048580, 7, 0, 1048581, 7, 0, 1048582, 7, 0, 1048583, 7, 0, 1048584, 7, 0, 1048585, 7, 0, 1048586, 7, 0, 1048587, 7, 0 )
+
+[node name="Props" type="Node2D" parent="Tiles"]
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="Door" parent="Triggers" instance=ExtResource( 2 )]
+position = Vector2( 128, 256 )
+level = "res://src/Level/Demo/Village/Village.tscn"
+
+[node name="KillBox" parent="Triggers" instance=ExtResource( 1 )]
+position = Vector2( 240, 808 )
+scale = Vector2( 482.952, 10 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Notes" type="Node2D" parent="."]
+
+[node name="SpawnPoint" parent="." instance=ExtResource( 9 )]
+position = Vector2( 128, 256 )
+
+[node name="CameraLimiter" parent="." instance=ExtResource( 3 )]
+
+[node name="Left" parent="CameraLimiter" index="0"]
+position = Vector2( 0, 48 )
+
+[node name="Right" parent="CameraLimiter" index="1"]
+position = Vector2( 256, 64 )
+
+[node name="Top" parent="CameraLimiter" index="2"]
+position = Vector2( 128, -128 )
+
+[node name="Bottom" parent="CameraLimiter" index="3"]
+position = Vector2( 128, 272 )
+
+[editable path="CameraLimiter"]

@@ -4262,7 +4262,7 @@ extents = Vector2( 4, 1 )
 extents = Vector2( 6, 0.5 )
 
 [node name="Recruit" type="KinematicBody2D"]
-collision_mask = 8
+collision_mask = 520
 script = ExtResource( 2 )
 hp = 3
 max_hp = 3

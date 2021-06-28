@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Actor/NPC/Fluffy.gd" type="Script" id=1]
 [ext_resource path="res://assets/Actor/NPC/Fluffy.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 8 )
 
 [node name="Fluffy" type="KinematicBody2D"]
 collision_layer = 128
@@ -15,7 +18,18 @@ script = ExtResource( 1 )
 position = Vector2( 0, -10 )
 shape = SubResource( 1 )
 
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+modulate = Color( 1, 1, 1, 0.172549 )
+position = Vector2( 0, -8 )
+shape = SubResource( 2 )
+
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -16 )
 texture = ExtResource( 2 )
 vframes = 2
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

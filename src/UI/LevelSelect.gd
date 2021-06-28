@@ -70,4 +70,8 @@ func _ready():
 			$ScrollContainer/VBoxContainer.add_child(level_button)
 		else:
 			pass
-		
+	
+	#add a sacrificial item because it clips last item otherwise
+	var level_button = LEVELBUTTON.instance()
+	$ScrollContainer/VBoxContainer.add_child(level_button)
+

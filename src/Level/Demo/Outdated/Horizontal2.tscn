@@ -1,30 +1,31 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://src/Actor/Enemy/Hunter.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Actor/Enemy/TogglerHorizontal.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Actor/Enemy/Billy.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Tile/DebugBackground.tres" type="TileSet" id=5]
-[ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/Trigger/LoadZone.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/Actor/Enemy/Ornithopter.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/Tile/DebugTile.tres" type="TileSet" id=10]
-[ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=11]
-[ext_resource path="res://src/Level/Level.gd" type="Script" id=12]
-[ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=13]
-[ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=14]
-[ext_resource path="res://src/Trigger/EnemyCue.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/Trigger/LoadZone.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Actor/Enemy/TogglerHorizontal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Actor/Enemy/Ornithopter.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Trigger/EnemyCue.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Actor/Enemy/Hunter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Actor/Enemy/Swooper.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/Actor/Enemy/Billy.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Tile/DebugTile.tres" type="TileSet" id=12]
+[ext_resource path="res://src/Tile/DebugBackground.tres" type="TileSet" id=13]
+[ext_resource path="res://src/Level/Level.gd" type="Script" id=14]
+[ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=15]
+[ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=16]
 
 [node name="Horizontal2" type="Node2D"]
-script = ExtResource( 12 )
+script = ExtResource( 14 )
 level_name = "Cave"
 music = "res://assets/Music/Access.ogg"
 
 [node name="Tiles" type="Node2D" parent="."]
 
 [node name="back" type="TileMap" parent="Tiles"]
-tile_set = ExtResource( 5 )
+tile_set = ExtResource( 13 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 8
 collision_mask = 0
@@ -32,7 +33,7 @@ format = 1
 tile_data = PoolIntArray( 196669, 3, 0, 196670, 3, 1, 196671, 3, 2, 196672, 3, 3, 262203, 3, 0, 262204, 3, 1, 262205, 0, 0, 262206, 0, 0, 262207, 0, 0, 262208, 0, 0, 262209, 3, 2, 327739, 0, 0, 327740, 0, 0, 327741, 0, 0, 327742, 0, 0, 327743, 0, 0, 327744, 0, 0, 327745, 0, 0, 393275, 0, 0, 393276, 0, 0, 393277, 5, 0, 393278, 0, 0, 393279, 0, 0, 393280, 5, 0, 393281, 0, 0, 458811, 0, 0, 458812, 0, 0, 458813, 5, 0, 458814, 0, 0, 458815, 0, 0, 458816, 0, 0, 458817, 0, 0, 721027, 0, 0, 721028, 0, 0, 786563, 0, 0, 786564, 0, 0, 852099, 0, 0, 852100, 0, 0, 917635, 0, 0, 917636, 0, 0 )
 
 [node name="main" type="TileMap" parent="Tiles"]
-tile_set = ExtResource( 10 )
+tile_set = ExtResource( 12 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 8
 collision_mask = 0
@@ -43,42 +44,59 @@ tile_data = PoolIntArray( 262171, 19, 1, 262172, 7, 0, 262173, 7, 0, 262174, 7, 
 
 [node name="Actors" type="Node2D" parent="."]
 
-[node name="Billy" parent="Actors" instance=ExtResource( 3 )]
+[node name="Billy" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( 200, 128 )
+heart_chance = 0
+ammo_chance = 0
 
-[node name="Hunter" parent="Actors" instance=ExtResource( 1 )]
+[node name="Hunter" parent="Actors" instance=ExtResource( 6 )]
 position = Vector2( 2096, 128 )
+heart_chance = 0
+ammo_chance = 0
 
-[node name="TogglerHorizontal" parent="Actors" instance=ExtResource( 2 )]
+[node name="TogglerHorizontal" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( 1784, 144 )
+heart_chance = 0
+ammo_chance = 0
 
-[node name="TogglerHorizontal2" parent="Actors" instance=ExtResource( 2 )]
+[node name="TogglerHorizontal2" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( 2232, 144 )
+heart_chance = 0
+ammo_chance = 0
 
-[node name="Hunter2" parent="Actors" instance=ExtResource( 1 )]
+[node name="Hunter2" parent="Actors" instance=ExtResource( 6 )]
 position = Vector2( 568, 64 )
+heart_chance = 0
+ammo_chance = 0
 
-[node name="Ornithopter" parent="Actors" instance=ExtResource( 9 )]
+[node name="Ornithopter" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 864, 24 )
 id = "orn1"
+heart_chance = 0
+ammo_chance = 0
+
+[node name="Swooper" parent="Actors" instance=ExtResource( 8 )]
+position = Vector2( 472, -128 )
+id = "orn1"
+swoop_height = 12
 
 [node name="Triggers" type="Node2D" parent="."]
 
-[node name="Door2" parent="Triggers" instance=ExtResource( 6 )]
+[node name="Door2" parent="Triggers" instance=ExtResource( 10 )]
 position = Vector2( 1432, 1072 )
 level = "res://src/Level/Demo/03bVilliage.tscn"
 
-[node name="KillBox" parent="Triggers" instance=ExtResource( 8 )]
+[node name="KillBox" parent="Triggers" instance=ExtResource( 7 )]
 position = Vector2( 280, 720 )
 scale = Vector2( 482.952, 10 )
 
-[node name="LoadZone" parent="Triggers" instance=ExtResource( 7 )]
+[node name="LoadZone" parent="Triggers" instance=ExtResource( 1 )]
 position = Vector2( 320, 1152 )
 scale = Vector2( 1, 18.84 )
 level = "res://src/Level/Demo/PirateCliff.tscn"
 direction = Vector2( -1, 0 )
 
-[node name="EnemyCue" parent="Triggers" instance=ExtResource( 15 )]
+[node name="EnemyCue" parent="Triggers" instance=ExtResource( 5 )]
 position = Vector2( 408, 136 )
 scale = Vector2( 1, 22.96 )
 id = "orn1"
@@ -95,14 +113,14 @@ margin_left = -40.0
 margin_top = -208.0
 margin_right = 1928.0
 margin_bottom = 328.0
-texture = ExtResource( 11 )
+texture = ExtResource( 16 )
 expand = true
 stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CameraLimiter" parent="." instance=ExtResource( 4 )]
+[node name="CameraLimiter" parent="." instance=ExtResource( 2 )]
 
 [node name="Left" parent="CameraLimiter" index="0"]
 position = Vector2( 0, 264 )
@@ -123,7 +141,7 @@ margin_left = 1088.0
 margin_top = 1000.0
 margin_right = 1240.0
 margin_bottom = 1056.0
-custom_fonts/font = ExtResource( 13 )
+custom_fonts/font = ExtResource( 15 )
 text = "Foreshadow corp landing on the island"
 autowrap = true
 __meta__ = {
@@ -135,14 +153,14 @@ margin_left = 624.0
 margin_top = 984.0
 margin_right = 776.0
 margin_bottom = 1040.0
-custom_fonts/font = ExtResource( 13 )
+custom_fonts/font = ExtResource( 15 )
 text = "track enemies would be good here. put them circling around a platform"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SpawnPoint" parent="." instance=ExtResource( 14 )]
+[node name="SpawnPoint" parent="." instance=ExtResource( 11 )]
 position = Vector2( 56, 80 )
 
 [editable path="CameraLimiter"]

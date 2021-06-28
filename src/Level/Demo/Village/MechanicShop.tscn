@@ -1,9 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/Background/Black.png" type="Texture" id=4]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
 [ext_resource path="res://src/Tile/DebugTile.tres" type="TileSet" id=6]
 [ext_resource path="res://src/Prop/AmmoRefill.tscn" type="PackedScene" id=7]
@@ -23,16 +21,17 @@ music = "res://assets/Music/Access.ogg"
 motion_scale = Vector2( 0.1, 0.1 )
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-margin_left = -408.0
-margin_top = -272.0
-margin_right = 1040.0
-margin_bottom = 536.0
-texture = ExtResource( 4 )
+margin_left = -360.0
+margin_top = -280.0
+margin_right = 1088.0
+margin_bottom = 528.0
 expand = true
 stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Actors" type="Node2D" parent="."]
 
 [node name="Tiles" type="Node2D" parent="."]
 
@@ -62,7 +61,7 @@ format = 1
 
 [node name="Door" parent="Triggers" instance=ExtResource( 2 )]
 position = Vector2( 104, 224 )
-level = "res://src/Levels/IndoorTemplate.tscn"
+level = "res://src/Level/Demo/Village/Village.tscn"
 
 [node name="KillBox" parent="Triggers" instance=ExtResource( 1 )]
 position = Vector2( 240, 808 )
@@ -72,9 +71,11 @@ scale = Vector2( 482.952, 10 )
 
 [node name="ShopKeyItem" parent="Props" instance=ExtResource( 10 )]
 position = Vector2( 224, 224 )
+item_name = "Necklace"
 
 [node name="ShopWeapon" parent="Props" instance=ExtResource( 9 )]
 position = Vector2( 272, 224 )
+weapon_name = "MachinePistol"
 
 [node name="AmmoRefill" parent="Props" instance=ExtResource( 7 )]
 position = Vector2( 152, 224 )
@@ -82,11 +83,9 @@ position = Vector2( 152, 224 )
 [node name="SavePoint" parent="Props" instance=ExtResource( 8 )]
 position = Vector2( 176, 224 )
 
-[node name="Actors" type="Node2D" parent="."]
-
-[node name="CameraLimiter" parent="." instance=ExtResource( 3 )]
-
 [node name="SpawnPoint" parent="." instance=ExtResource( 11 )]
 position = Vector2( 104, 224 )
 
-[editable path="CameraLimiter"]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 240, 136 )
+current = true

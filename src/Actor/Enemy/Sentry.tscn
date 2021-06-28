@@ -1,0 +1,109 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/Actor/Enemy/Sentry.png" type="Texture" id=1]
+[ext_resource path="res://src/Actor/Enemy/Sentry.gd" type="Script" id=2]
+[ext_resource path="res://assets/SFX/snd_em_fire.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/SFX/snd_enemy_hurt.ogg" type="AudioStream" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 192, 192 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "ReloadLeft"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 8, 11 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[node name="Sentry" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 522
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -8 )
+shape = SubResource( 1 )
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+monitorable = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+modulate = Color( 0.992157, 0.992157, 0.992157, 0.156863 )
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -8 )
+texture = ExtResource( 1 )
+hframes = 8
+vframes = 2
+
+[node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+bus = "SFX"
+
+[node name="PosFire" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+bus = "SFX"
+
+[node name="FireCooldown" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/ReloadLeft = SubResource( 3 )
+anims/ShootLeft = SubResource( 4 )
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

@@ -4,7 +4,7 @@ const BLACKBAR = preload("res://src/Utility/BlackBar.tscn")
 
 export var max_x_speed = 82.5
 var half_max_x_speed = max_x_speed/2
-export var jump_speed = 195
+export var jump_speed = 180 #was 195 for 4 blocks
 #export var normal_jump_speed = 195
 #export var long_jump_speed = 150
 
