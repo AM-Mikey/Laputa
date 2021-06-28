@@ -1,3 +1,11 @@
+# My ignores
+*.ase
+*.aseprite
+*.psd
+assets/Concept/
+
+
+
 # Plugin Specific ignores
 default_env.tres
 icon.png
