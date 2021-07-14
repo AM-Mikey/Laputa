@@ -1,0 +1,100 @@
+{
+    "default": {
+        "undefined": {
+            "dialogstep": "06"
+        }
+    },
+    "horses": {
+        "001": {
+            "id": "001",
+            "name": "bob",
+            "expression": "neutral",
+            "text": "horse..."
+        },
+        "002": {
+            "id": "002",
+            "name": "jen",
+            "expression": "suprised",
+            "text": "beep boop bo beep ",
+            "code": "speed = 99999999"
+        }
+    },
+    "questions": {
+        "01": {
+            "id": "01",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "I want to ask you a question"
+        },
+        "02": {
+            "id": "02",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "beep boop bo beep?",
+            "flags": {"branch": "1"}
+        },
+        "y01": {
+            "id": "y01",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "oh, really?"
+        },
+        "y02": {
+            "id": "y02",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "i didn't expect you to agree",
+			"flags": {"merge": 3}
+        },
+        "n01": {
+            "id": "n01",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "well, that's disappointing",
+			"flags": {"merge": 3}
+        },
+        "03": {
+            "id": "03",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "Let's try that again. Boop be bo?",
+            "flags": {"branch": "2"}
+        },
+        "y201": {
+            "id": "y201",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "Wow.",
+			"flags": {"merge": 4}
+        },
+        "n201": {
+            "id": "n201",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "Aw, that's alright"
+        },
+        "n202": {
+            "id": "n202",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "I'm sure plenty of people haven't",
+			"flags": {"merge": 4}
+        },
+        "04": {
+            "id": "04",
+            "displayname": "Sue",
+            "face": "Sue",
+            "expression": "0",
+            "text": "Anyways, what were we talking about?"
+        }
+    }
+}

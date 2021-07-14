@@ -1,0 +1,28 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://src/Weapon/Weapon.gd" type="Script" id=1]
+[ext_resource path="res://src/Bullet/BulletShotgun.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/Weapon/Blunderbuss.png" type="Texture" id=3]
+[ext_resource path="res://assets/SFX/snd_missile_hit.ogg" type="AudioStream" id=5]
+
+[resource]
+resource_name = "Revolver1"
+script = ExtResource( 1 )
+display_name = "Shotgun"
+description = "A shotgun."
+texture = ExtResource( 3 )
+icon_texture = ExtResource( 3 )
+audio_stream = ExtResource( 5 )
+bullet_scene = ExtResource( 2 )
+damage = 3
+projectile_range = 0
+projectile_speed = 0
+cooldown_time = 0.5
+automatic = false
+needs_ammo = false
+ammo = 0
+max_ammo = 0
+xp = 0
+max_xp = 10
+level = 1
+max_level = 1

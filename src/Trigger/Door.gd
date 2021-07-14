@@ -33,7 +33,7 @@ func _input(event):
 	
 	var sfx_player = world.get_node("SFXPlayer")
 	
-	if event.is_action_pressed("inspect") and has_player_near == true:
+	if event.is_action_pressed("inspect") and has_player_near == true and active_player.disabled == false:
 		if not locked:
 			sfx_player.stream = open_sound
 			sfx_player.play()

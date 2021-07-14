@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/IndianFrog.ogg-a8a7370b5ebd51423775a07f743d1581.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/IndianFrog.ogg"
+dest_files=[ "res://.import/IndianFrog.ogg-a8a7370b5ebd51423775a07f743d1581.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

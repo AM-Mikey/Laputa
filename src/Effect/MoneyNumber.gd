@@ -20,4 +20,4 @@ func display_number():
 		$Num2.frame_coords.x = 9
 		$Num3.frame_coords.x = 9
 	else:
-		print("ERROR: No value applied to moneynumber")
+		printerr("ERROR: No value applied to moneynumber")

@@ -17,7 +17,7 @@ func _on_RefillTerminal_body_exited(body):
 	has_player_near = false
 
 func _input(event):
-	if event.is_action_pressed("inspect") and has_player_near == true:
+	if event.is_action_pressed("inspect") and has_player_near == true and active_player.disabled == false:
 		if active_player.hp < active_player.max_hp:
 			active_player.restore_hp()
 			print("restored hp to full")

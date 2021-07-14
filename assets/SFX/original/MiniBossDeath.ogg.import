@@ -11,5 +11,5 @@ dest_files=[ "res://.import/MiniBossDeath.ogg-f7056575a2dd7916b575eb4cc726f985.o
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

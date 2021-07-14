@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Meow.ogg-52ae1b9f378da8a71c8ab2ca640e7920.oggstr" ]
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

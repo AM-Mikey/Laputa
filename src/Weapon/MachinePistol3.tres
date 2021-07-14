@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://src/Weapon/Weapon.gd" type="Script" id=1]
+[ext_resource path="res://assets/SFX/snd_polar_star_l1_2.ogg" type="AudioStream" id=2]
+[ext_resource path="res://assets/Weapon/MachineGun.png" type="Texture" id=3]
+[ext_resource path="res://src/Bullet/BulletMachinePistol1.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/Weapon/MachinePistolIcon.png" type="Texture" id=5]
+
+[resource]
+resource_name = "MachinePistol"
+script = ExtResource( 1 )
+display_name = "Machine Gun"
+description = "A swift and powerful automatic weapon. It runs out of ammo rather quickly."
+texture = ExtResource( 3 )
+icon_texture = ExtResource( 5 )
+audio_stream = ExtResource( 2 )
+bullet_scene = ExtResource( 4 )
+damage = 2
+projectile_range = 150
+projectile_speed = 400
+cooldown_time = 0.15
+automatic = true
+needs_ammo = true
+ammo = 250
+max_ammo = 250
+xp = 0
+max_xp = 10
+level = 3
+max_level = 3

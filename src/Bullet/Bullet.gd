@@ -12,7 +12,6 @@ var damage
 
 
 
-
 func _fizzle_from_world():
 	visible = false
 	disabled = true

@@ -4273,32 +4273,33 @@ position = Vector2( 0, -7.5 )
 shape = SubResource( 1 )
 
 [node name="WeaponSprite" type="Sprite" parent="."]
-position = Vector2( -8, -9 )
+position = Vector2( 2, -9 )
+flip_h = true
 
 [node name="Front" type="Sprite" parent="."]
 position = Vector2( 0, -16 )
 texture = ExtResource( 5 )
 hframes = 12
 vframes = 96
-frame = 145
+frame = 216
 
 [node name="Back" type="Sprite" parent="."]
 position = Vector2( 0, -16 )
 texture = ExtResource( 5 )
 hframes = 12
 vframes = 96
-frame = 157
+frame = 228
 
 [node name="BulletVector" type="RayCast2D" parent="."]
 modulate = Color( 1, 0, 0, 0.784314 )
 position = Vector2( 0, -10 )
-rotation = 1.5708
+rotation = -1.5708
 scale = Vector2( 0.5, 0.5 )
 cast_to = Vector2( 0, 40 )
 
 [node name="LookRot" type="RayCast2D" parent="."]
 modulate = Color( 1, 0.937255, 0, 0.392157 )
-rotation = 1.5708
+rotation = 4.71239
 cast_to = Vector2( 0, 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -4428,10 +4429,11 @@ position = Vector2( 0, -5.5 )
 shape = SubResource( 52 )
 
 [node name="BonkDetectorLeft" type="Area2D" parent="."]
+visible = false
 show_behind_parent = true
 position = Vector2( 0, 3 )
 collision_layer = 0
-collision_mask = 8
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BonkDetectorLeft"]
 modulate = Color( 0.12549, 0, 1, 0.392157 )
@@ -4439,10 +4441,11 @@ position = Vector2( -2, -19 )
 shape = SubResource( 53 )
 
 [node name="BonkDetectorRight" type="Area2D" parent="."]
+visible = false
 show_behind_parent = true
 position = Vector2( 0, 3 )
 collision_layer = 0
-collision_mask = 8
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BonkDetectorRight"]
 modulate = Color( 0.12549, 0, 1, 0.392157 )

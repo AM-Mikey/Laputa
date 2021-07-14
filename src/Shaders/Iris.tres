@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://src/Shaders/Iris.shader" type="Shader" id=1]
+[ext_resource path="res://assets/Effect/Light/SoftLight.png" type="Texture" id=2]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/cutoff = 0.9375
+shader_param/mask = ExtResource( 2 )

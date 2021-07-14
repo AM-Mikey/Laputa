@@ -14,7 +14,7 @@ func _ready():
 	elif value == 8:
 		$AnimationPlayer.play("Large")
 	else:
-		print("ERROR: Heart given non-standard value")
+		printerr("ERROR: Heart given non-standard value")
 
 func _physics_process(delta):
 	var _velocity = get_velocity(speed, dir)

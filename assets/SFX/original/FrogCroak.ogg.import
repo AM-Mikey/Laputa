@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/FrogCroak.ogg-7ac4a12deebcbe5cc86c866a6ff12e05.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/original/FrogCroak.ogg"
+dest_files=[ "res://.import/FrogCroak.ogg-7ac4a12deebcbe5cc86c866a6ff12e05.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

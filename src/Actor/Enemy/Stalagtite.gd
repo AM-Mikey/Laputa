@@ -13,7 +13,8 @@ export var base_damage = 2
 export var falling_damage = 6
 
 func _ready():
-	hp = 4
+	hp = 2
+	level = 2
 	damage_on_contact = base_damage
 	speed = Vector2(100, 100)
 	setup_collision()
@@ -40,7 +41,7 @@ func setup_collision():
 		$PlayerDetector.scale.y = detector_length
 		print("dl: ", detector_length)
 	else:
-		print("ERROR: stalagtite could not find a colliding tilemap to setup collision")
+		printerr("ERROR: stalagtite could not find a colliding tilemap to setup collision")
 
 func _physics_process(delta):
 	if not dead:

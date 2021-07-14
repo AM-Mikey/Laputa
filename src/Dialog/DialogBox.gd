@@ -17,7 +17,7 @@ var starting_line: int = 1 #unused
 var ending_line: int # unused
 
 export var print_delay = 0.05
-export var punctuation_delay = 0.5
+export var punctuation_delay = 0.3
 var in_dialog = false
 var active = true
 var busy = false
@@ -113,7 +113,7 @@ func print_dialog(string):
 	
 	var character = string.substr(step, 1)
 	
-	if character == "." or character == "," or character == "?" or character == "!":
+	if character == ",": #or character == "." or character == "?" or character == "!":
 		print("pausing for punctuation")
 		$PrintTimer.stop()
 		$PrintTimer.start($PrintTimer.time_left + punctuation_delay)
@@ -155,13 +155,14 @@ func stop_printing():
 	#already_talked = true
 	
 	step = 0
-	visible = false
+	#visible = false
 	in_dialog = false
 	active = true
 	busy = false
 	player.disabled = false
 	player.invincible = false
 
+	queue_free()
 
 
 func parse_command(string):
@@ -189,7 +190,7 @@ func parse_command(string):
 
 func face(string):
 	if string == "":
-		print("COMMAND ERROR: no npc given for /face")
+		printerr("COMMAND ERROR: no npc given for /face")
 		return
 	var face = string.split(",", true, 1)
 	var id = face[0]
@@ -203,14 +204,14 @@ func face(string):
 
 func display_name(string):
 	if string == "":
-		print("COMMAND ERROR: no npc given for /name")
+		printerr("COMMAND ERROR: no npc given for /name")
 		return
 	var display_name = string.capitalize() + ": "
 	tb.text = tb.text.insert(0, display_name)
 	
 func do_hide(string):
 	if string == "":
-		print("COMMAND ERROR: no npc given for /hide")
+		printerr("COMMAND ERROR: no npc given for /hide")
 		return
 	var id = string.to_lower()
 	for n in get_tree().get_nodes_in_group("NPCs"):
@@ -219,7 +220,7 @@ func do_hide(string):
 	
 func do_unhide(string):
 	if string == "":
-		print("COMMAND ERROR: no npc given for /unhide")
+		printerr("COMMAND ERROR: no npc given for /unhide")
 		return
 	var id = string.to_lower()
 	for n in get_tree().get_nodes_in_group("NPCs"):
@@ -234,7 +235,7 @@ func walk(string):
 	var distance = int(walk[1])
 	
 	if id == null or distance == null:
-		print("COMMAND ERROR: not enough arguements for /walk")
+		printerr("COMMAND ERROR: not enough arguements for /walk")
 		return
 	
 	for n in get_tree().get_nodes_in_group("NPCs"):

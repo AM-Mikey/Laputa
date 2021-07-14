@@ -10,10 +10,7 @@ func _ready():
 	damage_on_contact = 0
 	speed = Vector2(100, 100)
 
-	level = 1
-	heart_chance = 2
-	experience_chance = 1
-	ammo_chance = 0
+	level = 0
 
 	rng.randomize()
 	move_dir = Vector2(sign(rng.randf_range(-1, 1)), 0)

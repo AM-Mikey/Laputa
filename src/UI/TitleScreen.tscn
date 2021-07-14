@@ -7,36 +7,17 @@
 [ext_resource path="res://assets/Music/laputaintro.ogg" type="AudioStream" id=5]
 
 [node name="TitleScreen" type="Control"]
+margin_right = -327.84
+margin_bottom = -119.88
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="ColorRect" parent="."]
-visible = false
-modulate = Color( 1, 1, 1, 0.156863 )
-margin_right = 480.0
-margin_bottom = 270.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Title" type="TextureRect" parent="."]
-margin_right = 480.0
-margin_bottom = 270.0
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_left = 176.0
-margin_top = 128.0
-margin_right = 304.0
-margin_bottom = 256.0
-grow_horizontal = 2
-grow_vertical = 2
+anchor_right = 1.0
+margin_right = 480.0
+margin_bottom = 272.0
 custom_constants/margin_right = 8
 custom_constants/margin_top = 8
 custom_constants/margin_left = 8
@@ -45,26 +26,68 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VersionLabel" type="Label" parent="MarginContainer"]
+visible = false
 margin_left = 8.0
-margin_top = 8.0
-margin_right = 120.0
-margin_bottom = 120.0
+margin_top = 252.0
+margin_right = 472.0
+margin_bottom = 264.0
+size_flags_vertical = 8
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+text = "Alpha Version:"
+align = 1
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BuildLabel" type="Label" parent="MarginContainer"]
+margin_left = 8.0
+margin_top = 252.0
+margin_right = 472.0
+margin_bottom = 264.0
+size_flags_vertical = 8
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+text = "Alpha Build 0.0.4"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 472.0
+margin_bottom = 264.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+margin_right = 464.0
+margin_bottom = 96.0
+texture = ExtResource( 2 )
+stretch_mode = 4
+
 [node name="New" type="Button" parent="MarginContainer/VBoxContainer"]
-margin_right = 112.0
-margin_bottom = 16.0
+margin_top = 100.0
+margin_right = 464.0
+margin_bottom = 116.0
 custom_fonts/font = ExtResource( 4 )
 text = "New Game"
 flat = true
 
 [node name="Load" type="Button" parent="MarginContainer/VBoxContainer"]
-margin_top = 20.0
-margin_right = 112.0
-margin_bottom = 36.0
+margin_top = 120.0
+margin_right = 464.0
+margin_bottom = 136.0
 custom_fonts/font = ExtResource( 4 )
 text = "Load Game"
 flat = true
@@ -73,9 +96,9 @@ __meta__ = {
 }
 
 [node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
-margin_top = 40.0
-margin_right = 112.0
-margin_bottom = 56.0
+margin_top = 140.0
+margin_right = 464.0
+margin_bottom = 156.0
 custom_fonts/font = ExtResource( 4 )
 text = "Options"
 flat = true
@@ -83,10 +106,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="KeyConfig" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 160.0
+margin_right = 464.0
+margin_bottom = 176.0
+custom_fonts/font = ExtResource( 4 )
+text = "Key Config"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Level" type="Button" parent="MarginContainer/VBoxContainer"]
-margin_top = 60.0
-margin_right = 112.0
-margin_bottom = 76.0
+margin_top = 180.0
+margin_right = 464.0
+margin_bottom = 196.0
 custom_fonts/font = ExtResource( 4 )
 text = "Level Select"
 flat = true
@@ -95,34 +129,12 @@ __meta__ = {
 }
 
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
-margin_top = 80.0
-margin_right = 112.0
-margin_bottom = 96.0
+margin_top = 200.0
+margin_right = 464.0
+margin_bottom = 216.0
 custom_fonts/font = ExtResource( 4 )
 text = "Quit"
 flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
-margin_top = 240.0
-margin_right = 480.0
-margin_bottom = 256.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="CenterContainer"]
-margin_left = 180.0
-margin_top = 2.0
-margin_right = 300.0
-margin_bottom = 14.0
-custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 1
-text = "Alpha Version: Week 15"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -135,5 +147,6 @@ bus = "Music"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/New" to="." method="_on_New_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Load" to="." method="_on_Load_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/KeyConfig" to="." method="_on_KeyConfig_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Level" to="." method="_on_Level_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

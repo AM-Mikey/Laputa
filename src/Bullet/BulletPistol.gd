@@ -37,7 +37,7 @@ func _physics_process(delta):
 
 
 func _on_CollisionDetector_body_entered(body):
-	yield(get_tree(), "idle_frame")
+	
 	if not disabled:
 		if body.get_collision_layer_bit(8): #breakable
 					body.on_break("cut")
@@ -45,6 +45,7 @@ func _on_CollisionDetector_body_entered(body):
 						_fizzle_from_world()
 
 		elif body.get_collision_layer_bit(1): #enemy
+			yield(get_tree(), "idle_frame")
 			var blood_direction = Vector2(floor((body.global_position.x - global_position.x)/10), floor((body.global_position.y - global_position.y)/10))
 			body.hit(damage, blood_direction)
 			queue_free()

@@ -87,14 +87,16 @@ func prepare_bullet(bullet_pos, effect_pos, bullet_rot):
 	
 	get_tree().get_current_scene().add_child(bullet)
 	
+	###fire audio
+	$WeaponAudio.stream = weapon.audio_stream
+	$WeaponAudio.play()
+	
+	###starpop/muzzle flash
 	var effect = EFFECT.instance()
 	get_parent().add_child(effect)
 	effect.position = effect_pos 
 	var anim = effect.get_node("AnimationPlayer")
 	anim.play("StarPop")
-	var audio = effect.get_node("AudioStreamPlayer")
-	audio.stream = weapon.audio_stream
-	audio.play()
 	yield(anim, "animation_finished")
 	effect.queue_free()
 	
@@ -109,4 +111,4 @@ func get_bullet_dir(bullet_rot) -> Vector2:
 		return Vector2(0, 1)
 	else:
 		return Vector2.ZERO
-		print ("ERROR: Cant get bullet direction!")
+		printerr("ERROR: Cant get bullet direction!")

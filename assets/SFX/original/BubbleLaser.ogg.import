@@ -11,5 +11,5 @@ dest_files=[ "res://.import/BubbleLaser.ogg-80b0fab97e96fa4bd48b7477e8b045d6.ogg
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -22,6 +22,8 @@ func _ready():
 	speed = Vector2(100, 200)
 	gravity = 250
 	
+	level = 3
+	
 	$FireCooldown.start(cooldown_time)
 	
 	hide()
@@ -157,6 +159,3 @@ func animate():
 					$AnimationPlayer.play("RiseRight")
 				elif move_dir.y > 0:
 					$AnimationPlayer.play("FallRight")
-
-
-

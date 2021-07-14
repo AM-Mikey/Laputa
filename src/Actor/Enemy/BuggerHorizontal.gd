@@ -16,6 +16,8 @@ func _ready():
 	look_dir = starting_direction
 	acceleration = 25
 	
+	level = 3
+	
 	$RayCast2D.cast_to = Vector2(200, 200) * starting_direction #cast ray left or right 200 px
 
 

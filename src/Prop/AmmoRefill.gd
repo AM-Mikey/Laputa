@@ -18,7 +18,7 @@ func _on_AmmoRefill_body_exited(body):
 	has_player_near = false
 
 func _input(event):
-	if event.is_action_pressed("inspect") and has_player_near == true:
+	if event.is_action_pressed("inspect") and has_player_near == true and active_player.disabled == false:
 		var needed_ammo = false
 		
 		for w in active_player.weapon_array:

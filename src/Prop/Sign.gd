@@ -33,6 +33,6 @@ func _on_ExitDetector_body_exited(body):
 		reading = false
 
 func _input(event):
-	if event.is_action_pressed("inspect") and has_player_near == true and reading == false:
+	if event.is_action_pressed("inspect") and has_player_near == true and active_player.disabled == false:
 		reading = true
 		emit_signal("display_text", display_name, path, face, expression, text, justify, voiced)

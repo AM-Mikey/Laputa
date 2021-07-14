@@ -16,7 +16,7 @@ func _on_Recruit_setup_ui(hp, max_hp, total_xp, level, xp, max_xp, needs_ammo, a
 	print("setting up ui")
 	$HpBar/HpProgress.value = hp
 	$HpBar/HpProgress.max_value = max_hp
-	display_hp_number(hp)
+	display_hp_number(hp, max_hp)
 	$HpBar/HpLost.value = hp
 	$HpBar/HpLost.max_value = max_hp
 	
@@ -35,9 +35,9 @@ func _on_Recruit_setup_ui(hp, max_hp, total_xp, level, xp, max_xp, needs_ammo, a
 	else:
 		display_infinite_ammo()
 
-func _on_Recruit_player_health_updated(hp):
+func _on_Recruit_player_health_updated(hp, max_hp):
 	$HpBar/HpProgress.value = hp
-	display_hp_number(hp)
+	display_hp_number(hp, max_hp)
 	if hp < $HpBar/HpLost.value:
 		$AnimationPlayer.play("Flash")
 		$AudioStreamPlayer.stream = _hurt
@@ -53,7 +53,7 @@ func _on_Recruit_player_max_health_updated(max_hp):
 	$HpBar/HpLost.max_value = max_hp
 
 
-func display_hp_number(hp):
+func display_hp_number(hp, max_hp):
 	if hp > 0 and hp < 10:
 		$HpBar/Num1.visible = false
 		$HpBar/Num2.visible = true
@@ -69,7 +69,17 @@ func display_hp_number(hp):
 		$HpBar/Num1.frame_coords.x = 9
 		$HpBar/Num2.frame_coords.x = 9
 	else:
-		print("ERROR: hud cannot display hp number")
+		printerr("ERROR: hud cannot display hp number")
+		
+	if float(hp) / float(max_hp) <= .20: #less than 10% make red
+		$HpBar/Num1.frame_coords.y = 2
+		$HpBar/Num2.frame_coords.y = 2
+	elif float(hp) / float(max_hp) <= .40: #less than 20% left, make gold
+		$HpBar/Num1.frame_coords.y = 3
+		$HpBar/Num2.frame_coords.y = 3
+	else:
+		$HpBar/Num1.frame_coords.y = 5
+		$HpBar/Num2.frame_coords.y = 5
 
 func _on_Recruit_player_experience_updated(total_xp, level, max_level, xp, max_xp):
 	modulate = Color(1, 1, 1) #Flash animation from stopping on a transparent frame
@@ -129,7 +139,7 @@ func display_ammo_number(ammo, max_ammo):
 		$Weapon/AmmoCount/Num2.frame_coords.x = 9
 		$Weapon/AmmoCount/Num3.frame_coords.x = 9
 	else:
-		print("ERROR: hud cannot display current ammo number with value: ", ammo)
+		printerr("ERROR: hud cannot display current ammo number with value: ", ammo)
 
 	if max_ammo >= 0 and max_ammo < 10:
 		$Weapon/AmmoCount/Num4.visible = true
@@ -157,7 +167,7 @@ func display_ammo_number(ammo, max_ammo):
 		$Weapon/AmmoCount/Num5.frame_coords.x = 9
 		$Weapon/AmmoCount/Num6.frame_coords.x = 9
 	else:
-		print("ERROR: hud cannot display max ammo number with value: ", max_ammo)
+		printerr("ERROR: hud cannot display max ammo number with value: ", max_ammo)
 
 func display_infinite_ammo():
 	$Weapon/AmmoCount.visible = false
@@ -194,7 +204,7 @@ func display_money_number(total_xp):
 		$MoneyCount/Num2.frame_coords.x = 9
 		$MoneyCount/Num3.frame_coords.x = 9
 	else:
-		print("ERROR: hud cannot display money number")
+		printerr("ERROR: hud cannot display money number")
 
 
 func _on_boss_setup_ui(display_name, hp, max_hp):

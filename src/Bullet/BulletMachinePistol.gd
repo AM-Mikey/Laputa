@@ -1,0 +1,70 @@
+extends Bullet
+
+var texture: StreamTexture
+var texture_index: int
+var collision_shape: RectangleShape2D
+
+var velocity = Vector2.ZERO
+var direction = Vector2.ZERO
+var projectile_speed = Vector2.ZERO
+
+var projectile_range: int
+
+#var max_spread_degrees = 15
+var max_spread_distance = 9
+
+var origin = Vector2.ZERO
+
+var rng = RandomNumberGenerator.new()
+
+func _ready():
+	rng.randomize()
+	var spread_distance = int(rng.randf_range(max_spread_distance * -1, max_spread_distance))
+	
+	match direction:
+		Vector2.LEFT:
+			rotation_degrees = 0
+			global_position.y += spread_distance
+		Vector2.RIGHT:
+			rotation_degrees = 180
+			global_position.y += spread_distance
+		Vector2.UP:
+			rotation_degrees = 90
+			global_position.x += spread_distance
+		Vector2.DOWN:
+			rotation_degrees = -90
+			global_position.x += spread_distance
+
+##### old code for when it rotated
+#	var spread_degrees= rng.randf_range(max_spread_degrees * -1, max_spread_degrees)
+#	rotation_degrees += spread_degrees
+#	direction = direction.rotated(deg2rad(spread_degrees))
+
+
+func _physics_process(delta):
+	
+	velocity = projectile_speed * direction
+	
+	if disabled == false:
+		move_and_slide(velocity)
+		var distance_from_origin = origin.distance_to(global_position);
+		if distance_from_origin > projectile_range:
+			_fizzle_from_range()
+			
+
+
+func _on_CollisionDetector_body_entered(body):
+	
+	if not disabled:
+		if body.get_collision_layer_bit(8): #breakable
+					body.on_break("cut")
+					if body.get_collision_layer_bit(3): #world
+						_fizzle_from_world()
+
+		elif body.get_collision_layer_bit(1): #enemy
+			yield(get_tree(), "idle_frame")
+			var blood_direction = Vector2(floor((body.global_position.x - global_position.x)/10), floor((body.global_position.y - global_position.y)/10))
+			body.hit(damage, blood_direction)
+			queue_free()
+		elif body.get_collision_layer_bit(3): #world
+			_fizzle_from_world()

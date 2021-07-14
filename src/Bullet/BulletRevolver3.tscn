@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/Bullet/BulletPistol.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 1 )
+extents = Vector2( 8, 4 )
 
 [node name="BulletRevolverLevel3" type="KinematicBody2D"]
 collision_layer = 0
@@ -31,5 +31,6 @@ scale = Vector2( 0.8, 0.1 )
 position = Vector2( -8, 0 )
 texture = ExtResource( 2 )
 vframes = 3
+frame = 2
 
 [connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]

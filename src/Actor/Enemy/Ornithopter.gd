@@ -16,9 +16,7 @@ func _ready():
 	acceleration = 25
 	
 	level = 2
-	heart_chance = 2
-	experience_chance = 2
-	ammo_chance = 0
+
 	
 	if dir == Vector2.LEFT:
 		$AnimationPlayer.play("FlyLeft")

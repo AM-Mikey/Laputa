@@ -16,10 +16,7 @@ func _ready():
 	acceleration = 25
 
 	level = 2
-	heart_chance = 1
-	experience_chance = 2
-	ammo_chance = 0
-	
+
 	
 func _physics_process(delta):
 	if not dead:

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/PitchReverb.ogg-dd1fdaac241099618ab831232491e238.ogg
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

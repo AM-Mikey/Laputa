@@ -10,6 +10,7 @@ var origin = Vector2.ZERO
 
 
 func _ready():
+	add_to_group("WindBullets")
 	$AnimationPlayer.play("RotateLeft")
 	
 	velocity = get_velocity(projectile_speed, direction)

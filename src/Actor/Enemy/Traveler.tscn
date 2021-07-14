@@ -4,7 +4,7 @@
 [ext_resource path="res://src/Actor/Enemy/Traveler.gd" type="Script" id=2]
 [ext_resource path="res://assets/SFX/snd_enemy_hurt.ogg" type="AudioStream" id=3]
 
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
 [sub_resource type="Animation" id=2]
@@ -586,7 +586,7 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -8 )
-shape = SubResource( 16 )
+shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )

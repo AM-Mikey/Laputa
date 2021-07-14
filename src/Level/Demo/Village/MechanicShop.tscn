@@ -75,7 +75,7 @@ item_name = "Necklace"
 
 [node name="ShopWeapon" parent="Props" instance=ExtResource( 9 )]
 position = Vector2( 272, 224 )
-weapon_name = "MachinePistol"
+weapon_name = "MachinePistol1"
 
 [node name="AmmoRefill" parent="Props" instance=ExtResource( 7 )]
 position = Vector2( 152, 224 )

@@ -2,11 +2,17 @@ extends Control
 
 onready var player = get_tree().get_root().get_node("World/Recruit")
 onready var hud = get_parent().get_node("HUD")
-onready var items = $CenterContainer/Background/MarginContainer/VBoxContainer/Items
-onready var description = $CenterContainer/Background/MarginContainer/VBoxContainer/Description/Label
-onready var weapon_wheel = $CenterContainer/Background/MarginContainer/VBoxContainer/Panel/WeaponWheel
+onready var items = $MarginContainer/MarginContainer/VBoxContainer/Items/ItemList
+onready var description = $MarginContainer/MarginContainer/VBoxContainer/Description/MarginContainer/Label
+onready var weapon_wheel = $MarginContainer/MarginContainer/VBoxContainer/Weapons/MarginContainer/WeaponWheel
 
 var player_inventory: Array
+
+onready var world = get_tree().get_root().get_node("World")
+
+func _ready():
+		get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
+		_on_viewport_size_changed()
 
 func _process(delta):
 	if Input.is_action_just_pressed("inventory") and get_tree().paused == false and player.disabled == false:
@@ -45,3 +51,6 @@ func _on_Items_item_activated(index):
 		var item_path = "res://src/Item/KeyItem/%s" % item_name + ".tres"
 		var item = load(item_path)
 		description.text = item.description
+
+func _on_viewport_size_changed():
+	$MarginContainer.rect_size = get_tree().get_root().size / world.resolution_scale

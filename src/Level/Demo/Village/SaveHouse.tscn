@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/Prop/SavePoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
 [ext_resource path="res://src/Prop/RefillTerminal.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Prop/AmmoRefill.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Tile/DebugTile.tres" type="TileSet" id=8]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Tile/DebugBackground.tres" type="TileSet" id=10]
@@ -53,7 +54,10 @@ format = 1
 position = Vector2( 96, 256 )
 
 [node name="RefillTerminal" parent="Tiles/Props" instance=ExtResource( 6 )]
-position = Vector2( 160, 256 )
+position = Vector2( 168, 256 )
+
+[node name="AmmoRefill" parent="Tiles/Props" instance=ExtResource( 7 )]
+position = Vector2( 152, 256 )
 
 [node name="Triggers" type="Node2D" parent="."]
 

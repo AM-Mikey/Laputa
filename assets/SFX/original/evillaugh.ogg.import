@@ -11,5 +11,5 @@ dest_files=[ "res://.import/evillaugh.ogg-0dcdae7524ed143521684f378e183284.oggst
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

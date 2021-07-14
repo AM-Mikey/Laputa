@@ -1,6 +1,7 @@
 extends Actor
 class_name Enemy, "res://assets/Icon/EnemyIcon.png"
 
+#const DAMAGENUMBER = preload("res://src/Effect/DamageNumber.tscn")
 const EFFECT = preload("res://src/Effect/Effect.tscn")
 const BLOOD = preload("res://src/Effect/EnemyBloodEffect.tscn")
 const HEART = preload("res://src/Actor/ItemActor/Heart.tscn")
@@ -16,14 +17,14 @@ var protected = false
 var hp: int
 var damage_on_contact: int
 
-var recent_damage_taken: int
+var damagenum = null
 var timer = Timer.new()
-var damagenum_reset_time: float = 1.0
+var damagenum_time: float = 0.5
 
 export var id: String
 export var level = 1
 export var heart_chance = 1
-export var experience_chance = 1
+export var experience_chance = 3
 export var ammo_chance = 1
 
 var camera_forgiveness_distance = 64
@@ -60,17 +61,13 @@ func _physics_process(delta):
 
 func _ready():
 	add_to_group("Enemies")
-	timer.connect("timeout",self,"_on_timer_timeout") 
-	add_child(timer)
-	timer.one_shot = true
-	timer.start(damagenum_reset_time)
 
-func _on_timer_timeout():
-	if not dead:
-		if recent_damage_taken != 0:
-			do_damage_num(recent_damage_taken)
-			recent_damage_taken = 0
-			timer.start(damagenum_reset_time)
+
+	#var timer = Timer.new()
+	timer.one_shot = true
+	timer.name = "DamagenumTimer"
+	timer.connect("timeout", self, "_on_DamagenumTimer_timeout")
+	add_child(timer)
 
 func hit(damage, blood_direction):
 	$PosHurt.play()
@@ -79,21 +76,36 @@ func hit(damage, blood_direction):
 	get_parent().add_child(blood)
 	blood.global_position = global_position
 	blood.direction = blood_direction
-	#print(blood_direction)
+
+	prepare_damagenum(damage)
 	
-	#if timer.is_stopped(): #if the reset time is over, then set recent damage to 0
-		
-	#timer.start(damagenum_reset_time) # and restart timer again either way
-	recent_damage_taken += damage
 	if hp <= 0:
 		die()
 
+
+func prepare_damagenum(damage):
+	if damagenum == null: #if we dont already have a damage number create a new one
+		damagenum = DAMAGENUMBER.instance()
+		damagenum.value = damage
+		timer.start(damagenum_time)
+		
+	else: #add time and add values
+		damagenum.value += damage
+		timer.start(timer.time_left + damagenum_time)
+		
+		
+
+func _on_DamagenumTimer_timeout():
+		damagenum.position = global_position #bug here
+		get_parent().add_child(damagenum)
+		damagenum = null
 
 func die():
 	if not dead:
 		dead = true
 		do_death_drop()
-		do_damage_num(recent_damage_taken)
+		timer.stop()
+		_on_DamagenumTimer_timeout()
 		
 		player_actor.is_in_enemy = false #THIS IS A BAD WAY TO DO THIS if a player is in a different enemy when this one dies, they will be immune to that enemy
 		
@@ -120,26 +132,16 @@ func do_death_drop():
 	var experience = EXPERIENCE.instance()
 	var ammo = AMMO.instance()
 	
-#	var ray = RayCast2D.new()
-#	ray.set_collision_mask_bit(0, false)
-#	ray.set_collision_mask_bit(3, true)
-#	ray.cast_to = Vector2(0, 1000)
-#	ray.enabled = true
-#	add_child(ray)
-#	yield(get_tree(), "idle_frame")
-#	var tilemap = ray.get_collider()
-#	ray.queue_free()
+	var player_needs_ammo = false
+	for w in player_actor.weapon_array:
+		if w.ammo < w.max_ammo:
+			player_needs_ammo = true
 	
-#	var target_pos = global_position
-#	var local_pos = tilemap.to_local(target_pos)
-#	var map_pos = tilemap.world_to_map(local_pos)
-#	var target_cell = tilemap.get_cellv(map_pos)
-#	while target_cell != -1: #while target cell is not air
-#		map_pos.y -=1
-#		target_cell = tilemap.get_cellv(map_pos)
-#	local_pos = tilemap.map_to_world(map_pos)
-#	target_pos = tilemap.to_global(local_pos)
-
+	if not player_needs_ammo:
+		ammo_chance = 0
+	
+	if level == 0:
+		return
 
 	var total_chance = heart_chance + experience_chance + ammo_chance
 	rng.randomize()
@@ -148,14 +150,14 @@ func do_death_drop():
 	if drop <= heart_chance:
 		heart.position = position
 		match level:
-			0,1,2: heart.value = 2
+			1,2: heart.value = 2
 			3,4,5: heart.value = 4
 			6,7,8,9,10 : heart.value = 8
 		get_tree().get_current_scene().add_child(heart)
 	elif drop > heart_chance and drop <= heart_chance + experience_chance:
 		experience.position = position
 		match level:
-			0,1:
+			1:
 				experience.value = 1
 				get_tree().get_current_scene().add_child(experience)
 			2:
@@ -172,6 +174,6 @@ func do_death_drop():
 	else:
 		ammo.position = position
 		match level:
-			0,1,2: ammo.value = 0.2
+			1,2: ammo.value = 0.2
 			3,4,5,6,7,8,9,10: ammo.value = 0.5
 		get_tree().get_current_scene().add_child(ammo)

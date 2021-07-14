@@ -11,5 +11,5 @@ dest_files=[ "res://.import/bird.ogg-97b6272afd2c9ab91579ec0b7bf66546.oggstr" ]
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

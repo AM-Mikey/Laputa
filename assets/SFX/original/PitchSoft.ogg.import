@@ -11,5 +11,5 @@ dest_files=[ "res://.import/PitchSoft.ogg-c1eedf938136368d32c48afb85d11afd.oggst
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

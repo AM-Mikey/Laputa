@@ -11,6 +11,8 @@ func _ready():
 	speed = Vector2(100, 100)
 	move_dir = starting_direction
 	acceleration = 25
+	
+	level = 2
 
 func _physics_process(delta):
 	if not dead:

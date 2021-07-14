@@ -19,17 +19,14 @@ func _ready():
 	
 	if not setup_complete:
 		make_path()
-	
-	
+
 	hp = 3
 	damage_on_contact = 4
 	speed = Vector2(200, 200)
 	acceleration = 25
 	
 	level = 3
-	heart_chance = 2
-	experience_chance = 2
-	ammo_chance = 0
+
 	
 	if dir == Vector2.LEFT:
 		$AnimationPlayer.play("FlyLeft")

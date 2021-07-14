@@ -9,10 +9,11 @@ export var highlighted_scale = Vector2(2,2)
 
 var disabled = true
 
-onready var tween = get_parent().get_node("Tween")
-onready var timer = get_parent().get_node("CycleDelay")
-onready var timer_half = get_parent().get_node("HalfCycle")
-onready var label = get_parent().get_node("TextLayer/CenterContainer/Label")
+onready var tween = get_parent().get_parent().get_node("Tween")
+onready var timer = get_parent().get_parent().get_node("CycleDelay")
+onready var timer_half = get_parent().get_parent().get_node("HalfCycle")
+onready var label = get_parent().get_node("Label")
+onready var description = get_parent().get_parent().get_parent().get_node("Description/MarginContainer/Label")
 
 onready var player = get_tree().get_root().get_node("World/Recruit")
 
@@ -30,11 +31,13 @@ func setup():
 		add_child(sprite)
 		sprite.texture = w.icon_texture
 		sprite.name = w.resource_name
-		sprite.editor_description = w.display_name
-
-		if sprite.get_index() == 0:
+		#sprite.editor_description = w.display_name
+		
+		if player.weapon_array.find(w) == 0:
 			sprite.scale = highlighted_scale
-			label.text = sprite.editor_description
+			label.text = w.display_name
+			description.text = w.description
+			
 	
 	timer_half.start(0.000001) #just so it sets z indexes
 	cycle_delay = 0.001
@@ -46,20 +49,22 @@ func _input(event):
 	if disabled != true:
 		if event.is_action_pressed("weapon_left") and timer.time_left == 0:
 			var weapons_size = player.weapon_array.size()
-			timer.start(cycle_delay)
-			timer_half.start(cycle_delay/2)
 			
 			var weapon_to_move = player.weapon_array.pop_back()
 			player.weapon_array.push_front(weapon_to_move)
-			player.weapon_array[0] = load("res://src/Weapon/%s" % player.weapon_array[0] + ".tres")
 			move_child(get_child(weapons_size - 1), 0)
+			
+			timer.start(cycle_delay)
+			timer_half.start(cycle_delay/2)
 			
 			place_buttons()
 			
 			var active_child = get_child(0)
 			var old_child = get_child(1)
 			
-			label.text = active_child.editor_description
+			label.text = player.weapon_array.front().display_name
+			description.text = player.weapon_array.front().description
+			
 			tween.interpolate_property(old_child, "scale", old_child.scale, Vector2(1, 1), cycle_delay, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 			tween.start()
 			tween.interpolate_property(active_child, "scale", active_child.scale, highlighted_scale, cycle_delay, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
@@ -67,20 +72,22 @@ func _input(event):
 
 		if event.is_action_pressed("weapon_right") and timer.time_left == 0:
 			var weapons_size = player.weapon_array.size()
-			timer.start(cycle_delay)
-			timer_half.start(cycle_delay/2)
 			
-			var weapon_to_move = player.weapon_array.pop_back()
-			player.weapon_array.push_front(weapon_to_move)
-			player.weapon_array[0] = load("res://src/Weapon/%s" % player.weapon_array[0] + ".tres")
+			var weapon_to_move = player.weapon_array.pop_front()
+			player.weapon_array.push_back(weapon_to_move)
 			move_child(get_child(0), weapons_size - 1)
 			
+			timer.start(cycle_delay)
+			timer_half.start(cycle_delay/2)
+
 			place_buttons()
 			
 			var active_child = get_child(0)
 			var old_child = get_child(weapons_size - 1)
 			
-			label.text = active_child.editor_description
+			label.text = player.weapon_array.front().display_name
+			description.text = player.weapon_array.front().description
+			
 			tween.interpolate_property(old_child, "scale", old_child.scale, Vector2(1, 1), cycle_delay, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 			tween.start()
 			tween.interpolate_property(active_child, "scale", active_child.scale, highlighted_scale, cycle_delay, Tween.TRANS_SINE, Tween.EASE_IN_OUT)

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Frog.ogg-f3f6f06606b6c6796818e9ceed635a95.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/original/Raw/Frog.ogg"
+dest_files=[ "res://.import/Frog.ogg-f3f6f06606b6c6796818e9ceed635a95.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

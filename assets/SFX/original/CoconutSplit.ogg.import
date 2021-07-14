@@ -11,5 +11,5 @@ dest_files=[ "res://.import/CoconutSplit.ogg-89e695c6fb208190afbcf275febf5a0f.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

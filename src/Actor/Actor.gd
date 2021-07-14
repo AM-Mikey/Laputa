@@ -12,16 +12,3 @@ export var ground_cof = 0.2
 export var air_cof = 0.05
 
 var dead: bool = false
-
-func do_damage_num(recent_damage_taken):
-	var num = DAMAGENUMBER.instance()
-	get_parent().add_child(num)
-	num.position = global_position
-	num.value = recent_damage_taken
-	num.display_number()
-	num.visible = true
-
-	var player = num.get_node("AnimationPlayer")
-	player.play("FloatUp")
-	yield(player, "animation_finished")
-	num.queue_free()

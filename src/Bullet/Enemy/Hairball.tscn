@@ -24,7 +24,7 @@ tracks/0/keys = {
 }
 
 [node name="Hairball" type="KinematicBody2D"]
-collision_layer = 256
+collision_layer = 320
 collision_mask = 0
 script = ExtResource( 1 )
 

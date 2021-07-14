@@ -1,0 +1,6 @@
+[submodule "addons/scaffolder"]
+	path = addons/scaffolder
+	url = https://github.com/SnoringCatGames/scaffolder.git
+[submodule "addons/surfacer"]
+	path = addons/surfacer
+	url = https://github.com/SnoringCatGames/surfacer.git

@@ -44,26 +44,26 @@ anims/FloatUp = SubResource( 1 )
 position = Vector2( -4, 0 )
 texture = ExtResource( 1 )
 hframes = 11
-vframes = 4
+vframes = 6
 frame = 32
 
 [node name="Num1" type="Sprite" parent="Layer"]
 position = Vector2( 5, 0 )
 texture = ExtResource( 1 )
 hframes = 11
-vframes = 4
+vframes = 6
 frame = 31
 
 [node name="Num2" type="Sprite" parent="Layer"]
 position = Vector2( 14, 0 )
 texture = ExtResource( 1 )
 hframes = 11
-vframes = 4
+vframes = 6
 frame = 31
 
 [node name="Num3" type="Sprite" parent="Layer"]
 position = Vector2( 23, 0 )
 texture = ExtResource( 1 )
 hframes = 11
-vframes = 4
+vframes = 6
 frame = 31

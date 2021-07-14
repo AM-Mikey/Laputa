@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Dialog/DialogBox.gd" type="Script" id=1]
 [ext_resource path="res://assets/UI/DialogBox.png" type="Texture" id=2]
-[ext_resource path="res://assets/UI/Face/Recruit.png" type="Texture" id=3]
 [ext_resource path="res://assets/UI/Font/momo.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/LightTest.png" type="Texture" id=5]
 
@@ -47,7 +46,6 @@ __meta__ = {
 
 [node name="Face" type="Sprite" parent="."]
 position = Vector2( 96, 224 )
-texture = ExtResource( 3 )
 
 [node name="TextBox" type="Label" parent="."]
 light_mask = 2
@@ -56,7 +54,6 @@ margin_top = 200.0
 margin_right = 440.0
 margin_bottom = 248.0
 custom_fonts/font = SubResource( 1 )
-text = "gfdgdfgdfg fsfd"
 autowrap = true
 clip_text = true
 __meta__ = {

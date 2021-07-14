@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/Actor/NPC/NavOrb.gd" type="Script" id=1]
+[ext_resource path="res://assets/Actor/Enemy/EnemyTemp.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 7.5
+
+[node name="NavOrb" type="KinematicBody2D"]
+collision_layer = 128
+collision_mask = 520
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+hframes = 18
+
+[node name="NavTimer" type="Timer" parent="."]
+one_shot = true

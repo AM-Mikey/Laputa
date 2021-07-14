@@ -1,5 +1,8 @@
 extends Node2D
 
+
+const TRANSITION = preload("res://src/UI/Transition.tscn")
+
 var resolution_scale = 4.0
 var viewport_size_ignore = false
 
@@ -14,12 +17,17 @@ export var starting_level = "res://src/Level/DebugLevel.tscn"
 onready var current_level = load(starting_level).instance() #assumes current level to start with, might cause issues down the line
 
 func _ready():
+	#surfacer
+	#ScaffolderBootstrap.on_app_ready
+	#SurfacerBootstrap.new()._initialize_framework
+	#
+	
 	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 	_on_viewport_size_changed()
 	add_child(current_level)
 	if $UILayer/TitleScreen.visible == true:
 		show_title()
-	
+
 	var spawn_points = get_tree().get_nodes_in_group("SpawnPoints")
 	for s in spawn_points:
 		$Recruit.global_position = s.global_position
@@ -63,7 +71,16 @@ func _input(event):
 		load_level_data_from_save()
 		copy_level_data_to_temp()
 
-func _on_level_change(level, door_index, level_name, music): #clean this up once you get the chance, triggers deserve their own type
+func _on_level_change(level, door_index, level_name, music):
+	##### add a transition
+#	var transition = TRANSITION.instance()
+#	transition.rect_position = $Recruit.get_global_transform_with_canvas().origin / resolution_scale
+#	transition.animation = "IrisExpand"
+#	$UILayer.add_child(transition)
+#	#add_child(transition)
+#	yield(get_tree().create_timer(0.4), "timeout")
+	#####
+	
 	save_level_data_to_temp()
 	$Recruit/Camera2D.smoothing_enabled = false
 		
@@ -97,7 +114,7 @@ func _on_level_change(level, door_index, level_name, music): #clean this up once
 				doors_found += 1
 		
 	if doors_found == 0:
-		print("ERROR: could not find door with right level connection")
+		printerr("ERROR: could not find door with right level connection")
 	
 	if doors_found > 1: #more than one door with correct level connections
 		doors_found = 0
@@ -113,14 +130,12 @@ func _on_level_change(level, door_index, level_name, music): #clean this up once
 					doors_found += 1
 		
 		if doors_found == 0:
-			print("ERROR: could not find door with right index")
+			printerr("ERROR: could not find door with right index")
 		if doors_found > 1:
-			print("ERROR: more than one door with same index")
+			printerr("ERROR: more than one door with same index")
+	
 	
 	$UILayer/LevelName.display_text(next_level.level_name)
-	
-	##########
-	
 	if next_level.music != music:
 		load_music(next_level.music)
 		
@@ -135,7 +150,7 @@ func _on_level_change(level, door_index, level_name, music): #clean this up once
 	
 	
 	
-	#enable player collision after a bit more
+	#enable player collision after a bit more ## why?
 	yield(get_tree().create_timer(0.1), "timeout")
 	$Recruit.set_collision_layer_bit(0, true)
 	
@@ -175,7 +190,7 @@ func save_player_data_to_save():
 		file.close()
 		print("player data saved")
 	else:
-		print("ERROR: player data could not be saved!")
+		printerr("ERROR: player data could not be saved!")
 
 func load_player_data_from_save():
 	var player = $Recruit
@@ -217,9 +232,9 @@ func load_player_data_from_save():
 			
 			print("player data loaded")
 		else:
-			print("ERROR: player data could not be loaded!")
+			printerr("ERROR: player data could not be loaded!")
 	else:
-			print("ERROR: no save file found")
+			printerr("ERROR: no save file found")
 
 func save_level_data_to_temp():
 	var containers = get_tree().get_nodes_in_group("Containers")
@@ -239,7 +254,7 @@ func save_level_data_to_temp():
 		file.close()
 		print("level data saved to temp")
 	else:
-		print("ERROR: level data could not be saved to temp!")
+		printerr("ERROR: level data could not be saved to temp!")
 
 func copy_level_data_to_temp():
 		var success_check = 0
@@ -255,7 +270,7 @@ func copy_level_data_to_temp():
 			file.close()
 			success_check += 1
 		else:
-			print("ERROR: data could not be loaded from save while copying!")
+			printerr("ERROR: data could not be loaded from save while copying!")
 			
 		
 		file_read = file.open(temp_path, File.READ)
@@ -264,10 +279,11 @@ func copy_level_data_to_temp():
 			file.close()
 			success_check += 1
 		else:
-			print("ERROR: data could not be loaded from temp while copying")
+			printerr("ERROR: data could not be loaded from temp while copying")
 			
 		
 
+	
 		if save_data.has("level_data"):
 			var data = {}
 			data["level_data"] = save_data["level_data"]
@@ -278,7 +294,7 @@ func copy_level_data_to_temp():
 				file.close()
 				success_check +=1
 			else:
-				print("ERROR: data could not be saved to temp while copying!")
+				printerr("ERROR: data could not be saved to temp while copying!")
 				return
 		
 		else:
@@ -292,7 +308,7 @@ func copy_level_data_to_temp():
 		if success_check == 3:
 			print("level data copied from save to temp")
 		else:
-			print("ERROR: level data could not be copied from save to temp!")
+			printerr("ERROR: level data could not be copied from save to temp!")
 	
 func copy_level_data_to_save():
 		var success_check = 0
@@ -306,7 +322,7 @@ func copy_level_data_to_save():
 			temp_file.close()
 			success_check += 1
 		else:
-			print("ERROR: data could not be loaded from temp while copying!")
+			printerr("ERROR: data could not be loaded from temp while copying!")
 			return
 			
 		var save_file = File.new()
@@ -316,7 +332,7 @@ func copy_level_data_to_save():
 			save_file.close()
 			success_check += 1
 		else:
-			print("ERROR: data could not be loaded from save while copying!")
+			printerr("ERROR: data could not be loaded from save while copying!")
 			return
 			
 			
@@ -331,7 +347,7 @@ func copy_level_data_to_save():
 				save_file.close()
 				success_check +=1
 			else:
-				print("ERROR: data could not be saved to save while copying!")
+				printerr("ERROR: data could not be saved to save while copying!")
 				return
 		
 		else:
@@ -343,7 +359,7 @@ func copy_level_data_to_save():
 		if success_check == 3:
 			print("level data copied from temp to save")
 		else:
-			print("ERROR: level data could not be copied from temp to save!")
+			printerr("ERROR: level data could not be copied from temp to save!")
 
 
 func load_level_data_from_temp():
@@ -367,9 +383,9 @@ func load_level_data_from_temp():
 			else:
 				print("no previous level data in temp")
 		else:
-			print("ERROR: level data could not be loaded from temp!")
+			printerr("ERROR: level data could not be loaded from temp!")
 	else:
-		print("ERROR: no temp file found")
+		printerr("ERROR: no temp file found")
 
 func load_level_data_from_save():
 	var containers = get_tree().get_nodes_in_group("Containers")
@@ -392,6 +408,6 @@ func load_level_data_from_save():
 			else:
 				print("no previous level data in save")
 		else:
-			print("ERROR: level data could not be loaded from save!")
+			printerr("ERROR: level data could not be loaded from save!")
 	else:
-		print("ERROR: no save file found")
+		printerr("ERROR: no save file found")

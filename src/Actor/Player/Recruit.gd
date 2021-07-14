@@ -143,7 +143,7 @@ func _physics_process(delta):
 				pan_camera_horizontal(look_dir, _velocity)
 			
 			if $Camera2D/TweenHorizontal.is_active():
-				$Camera2D/TweenHorizontal.playback_speed = max(abs(_velocity.x)/max_x_speed, 0) #second number is minimum camera speed
+				$Camera2D/TweenHorizontal.playback_speed = max(abs(_velocity.x)/max_x_speed, 0.5) #second number is minimum camera speed ##thanks me!
 			
 			if Input.is_action_just_pressed("look_up"):
 				if panning_up == false:
@@ -194,7 +194,7 @@ func get_look_dir(look_rot) -> Vector2:
 	elif look_rot == 0: #Down
 		return Vector2(0, 1)
 	else:
-		#print ("ERROR: Cant get look direction!")
+		#printerr("ERROR: Cant get look direction!")
 		return Vector2.LEFT
 		
 
@@ -304,7 +304,9 @@ func animate(move_dir, look_dir, _velocity):
 		
 			if is_on_floor():
 				player.playback_speed = run_anim_speed
-				if Input.is_action_pressed("move_left"):
+				if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
+					next_animation = "StandLeft"
+				elif Input.is_action_pressed("move_left"):
 					if Input.is_action_pressed("look_up"):
 						next_animation = "RunLeftLookUp"
 					elif Input.is_action_pressed("look_down"):
@@ -607,21 +609,24 @@ func _on_limit_camera(left, right, top, bottom):
 	
 	if  OS.get_window_size().x > (right - left) * world.resolution_scale:
 		print("WARNING: window width larger than camera limit")
-		var extra_margin = (OS.get_window_size().x - (right - left))/2
+		var extra_margin = ((OS.get_window_size().x / world.resolution_scale) - (right - left))/2
+		
 		camera.limit_left = left - extra_margin
 		camera.limit_right = right + extra_margin
-		world.get_node("UILayer/HUD").rect_position.x = extra_margin
+		#world.get_node("UILayer/HUD").rect_position.x = extra_margin #shift ui over to fit within bars
 		
 		var left_pillar = BLACKBAR.instance()
 		left_pillar.name = "BlackBarLeft"
 		left_pillar.rect_size = Vector2(extra_margin, OS.get_window_size().y)
 		world.get_node("UILayer").add_child(left_pillar)
+		world.get_node("UILayer").move_child(left_pillar, 0)
 		
 		var right_pillar = BLACKBAR.instance()
 		right_pillar.name = "BlackBarRight"
 		right_pillar.rect_size = Vector2(extra_margin, OS.get_window_size().y)
 		right_pillar.rect_position = Vector2((right - left) + extra_margin, 0)
 		world.get_node("UILayer").add_child(right_pillar)
+		world.get_node("UILayer").move_child(right_pillar, 0)
 		
 	else:
 		camera.limit_left = left
@@ -633,18 +638,20 @@ func _on_limit_camera(left, right, top, bottom):
 		var extra_margin = (OS.get_window_size().y - (bottom - top))/2
 		camera.limit_top = top - extra_margin
 		camera.limit_bottom = bottom  + extra_margin
-		world.get_node("UILayer/HUD").rect_position.y = extra_margin
+		#world.get_node("UILayer/HUD").rect_position.y = extra_margin #shift ui over to fit within bars
 		
 		var top_pillar = BLACKBAR.instance()
 		top_pillar.name = "BlackBarTop"
 		top_pillar.rect_size = Vector2(OS.get_window_size().x, extra_margin)
 		world.get_node("UILayer").add_child(top_pillar)
+		world.get_node("UILayer").move_child(top_pillar, 0)
 		
 		var bottom_pillar = BLACKBAR.instance()
 		bottom_pillar.name = "BlackBarRight"
 		bottom_pillar.rect_size = Vector2(OS.get_window_size().x, extra_margin)
 		bottom_pillar.rect_position = Vector2(0, (bottom - top) + extra_margin)
 		world.get_node("UILayer").add_child(bottom_pillar)
+		world.get_node("UILayer").move_child(bottom_pillar, 0)
 	
 	else:
 		camera.limit_top = top

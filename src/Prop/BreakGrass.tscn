@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "Burn"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame_coords")
@@ -21,8 +21,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 2 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Cut"
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame_coords")
 tracks/0/interp = 1
@@ -36,8 +35,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 1 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Tall"
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame_coords")
 tracks/0/interp = 1
@@ -70,6 +68,6 @@ frame = 2
 bus = "SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Burn = SubResource( 4 )
-anims/Cut = SubResource( 2 )
-anims/Tall = SubResource( 3 )
+anims/Burn = SubResource( 2 )
+anims/Cut = SubResource( 3 )
+anims/Tall = SubResource( 4 )

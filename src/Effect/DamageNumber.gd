@@ -1,9 +1,15 @@
 extends Node2D
 
-var value: int = 0
+var value: int = -1
 
+func _ready():
+	display_number()
+	$AnimationPlayer.play("FloatUp")
+	yield($AnimationPlayer, "animation_finished")
+	queue_free()
+	
 func display_number():
-	if value > 0 and value < 10:
+	if value >= 0 and value < 10:
 		$Layer/Num1.frame_coords.x = value
 		$Layer/Num2.visible = false
 		$Layer/Num3.visible = false
@@ -20,4 +26,4 @@ func display_number():
 		$Layer/Num2.frame_coords.x = 9
 		$Layer/Num3.frame_coords.x = 9
 	else:
-		print("ERROR: No damage applied to damagenumber")
+		printerr("ERROR: No damage applied to damagenumber")

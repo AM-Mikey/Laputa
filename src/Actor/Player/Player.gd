@@ -8,7 +8,7 @@ const SNAP_DIRECTION = Vector2.DOWN
 const SNAP_LENGTH = 4.0
 
 signal setup_ui(hp, max_hp, total_xp, weapon_level, weapon_xp, weapon_xp_min, weapon_xp_max, weapon_needs_ammo, weapon_ammo, weapon_max_ammo)
-signal player_health_updated(hp)
+signal player_health_updated(hp, max_hp)
 signal player_max_health_updated(max_hp)
 signal player_experience_updated(total_xp, level, weapon_xp, weapon_xp_min, weapon_xp_max)
 signal ammo_updated(needs_ammo, ammo, max_ammo)
@@ -43,7 +43,7 @@ var total_xp: int = 0
 
 var inventory: Array
 var topic_array: Array = ["ham", "cheese", "marbles", "balogna"]
-var weapon_array: Array = [load("res://src/Weapon/%s" % "Revolver1" + ".tres"), load("res://src/Weapon/%s" % "GrenadeLauncher" + ".tres"), load("res://src/Weapon/%s" % "MachinePistol" + ".tres")]
+var weapon_array: Array = [load("res://src/Weapon/%s" % "Revolver1" + ".tres"), load("res://src/Weapon/%s" % "GrenadeLauncher" + ".tres"), load("res://src/Weapon/MachinePistol1.tres"), load("res://src/Weapon/Shotgun.tres")]
 
 
 func _ready():
@@ -82,12 +82,54 @@ func _input(event):
 		
 		if event.is_action_pressed("toggle_debug"):
 			debug_mode()
-	
-#	if Input.is_action_just_pressed("window_resize"):
-#		print(OS.get_window_size())
-#		var viewport_size = Vector2(OS.get_window_size().x/2, OS.get_window_size().y/2) 
-#		get_tree().get_root().size = viewport_size
-#		print(get_tree().get_root().size)
+		
+		if event.is_action_pressed("level_up"):
+			if weapon_array.front().level < weapon_array.front().max_level:
+				print("level up via debug")
+				
+				if weapon_array.front().level == weapon_array.front().max_level and weapon_array.front().xp == weapon_array.front().max_xp: pass
+				else: weapon_array.front().xp = weapon_array.front().max_xp
+				
+				var next_level = load(weapon_array.front().resource_path.replace(weapon_array.front().level,weapon_array.front().level + 1))
+				var saved_xp = weapon_array.front().xp - weapon_array.front().max_xp
+				var saved_ammo = weapon_array.front().ammo
+				weapon_array.pop_front()
+				weapon_array.push_front(next_level)
+				weapon_array.front().ammo = saved_ammo
+				weapon_array.front().xp = saved_xp
+				$WeaponManager.update_weapon()
+				
+				var text = TEXTEFFECT.instance()
+				get_parent().add_child(text)
+				text.position = global_position
+				var player = text.get_node("AnimationPlayer")
+				player.play("LevelUp")
+				var audio = text.get_node("AudioStreamPlayer2D")
+				audio.stream = load("res://assets/SFX/snd_level_up.ogg")
+				audio.play()
+				update_xp()
+				yield(player, "animation_finished")
+				text.queue_free()
+			
+		if event.is_action_pressed("level_down"):
+			if weapon_array.front().level != 1:
+				print("level down via debug")
+				var next_level = load(weapon_array.front().resource_path.replace(weapon_array.front().level, weapon_array.front().level - 1))
+				var saved_xp = weapon_array.front().xp #negative number
+				var saved_ammo = weapon_array.front().ammo
+				weapon_array.pop_front()
+				weapon_array.push_front(next_level)
+				weapon_array.front().ammo = saved_ammo
+				weapon_array.front().xp = weapon_array.front().max_xp + saved_xp
+				$WeaponManager.update_weapon()
+				
+				var text = TEXTEFFECT.instance()
+				get_parent().add_child(text)
+				text.position = global_position
+				var player = text.get_node("AnimationPlayer")
+				player.play("LevelDown")
+				yield(player, "animation_finished")
+				text.queue_free()
 
 func shift_weapon_left():
 		var weapon_to_move = weapon_array.pop_back()
@@ -108,9 +150,15 @@ func hit(damage, knockback_direction):
 	if disabled != true:
 		if invincible == false:
 			hp -= damage
-			emit_signal("player_health_updated", hp)
-			do_damage_num(damage)
-			do_iframes(damage, knockback_direction)
+			if damage > 0:
+				emit_signal("player_health_updated", hp, max_hp)
+				###DamageNumber
+				var damagenum = DAMAGENUMBER.instance()
+				damagenum.position = global_position
+				damagenum.value = damage
+				get_parent().add_child(damagenum)
+				###
+				do_iframes(damage, knockback_direction)
 			if knockback_direction != Vector2.ZERO:
 				snap_vector = Vector2.ZERO
 				knockback = true
@@ -123,7 +171,7 @@ func hit(damage, knockback_direction):
 			elif weapon_array.front().level == 1 and weapon_array.front().xp == 0: #if not level 1 and 0 xp, take away xp
 				return
 			else:
-				weapon_array.front().xp -= damage * 2
+				weapon_array.front().xp = max(weapon_array.front().xp - (damage * 2), 0)
 				emit_signal("player_experience_updated", total_xp, weapon_array.front().level, weapon_array.front().max_level, weapon_array.front().xp, weapon_array.front().max_xp)
 			
 			if weapon_array.front().xp < 0 and weapon_array.front().level != 1: #level down
@@ -233,7 +281,7 @@ func _on_EntityDetector_area_entered(area):
 			$PickupSound.play()
 			if hp > max_hp:
 				hp = max_hp
-			emit_signal("player_health_updated", hp)
+			emit_signal("player_health_updated", hp, max_hp)
 			area.get_parent().queue_free()
 		
 		if area.get_collision_layer_bit(11): #xp
@@ -327,10 +375,10 @@ func restore_hp():
 	$PickupSound.stream = load("res://assets/SFX/snd_health_refill.ogg")
 	$PickupSound.play()
 	hp = max_hp
-	emit_signal("player_health_updated", hp)
+	emit_signal("player_health_updated", hp, max_hp)
 	
 func update_hp():
-	emit_signal("player_health_updated", hp)
+	emit_signal("player_health_updated", hp, max_hp)
 
 func update_max_hp():
 	emit_signal("player_max_health_updated", max_hp)

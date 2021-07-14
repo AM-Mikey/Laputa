@@ -66,7 +66,7 @@ price = 420
 
 [node name="ShopWeapon" parent="Props" instance=ExtResource( 8 )]
 position = Vector2( 168, 224 )
-weapon_name = "MachinePistol"
+weapon_name = "MachinePistol1"
 
 [node name="Actors" type="Node2D" parent="."]
 

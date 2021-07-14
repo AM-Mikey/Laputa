@@ -25,7 +25,7 @@ func _on_Chest_body_exited(body):
 	has_player_near = false
 
 func _input(event):
-	if event.is_action_pressed("inspect") and has_player_near == true:
+	if event.is_action_pressed("inspect") and has_player_near == true and active_player.disabled == false:
 		if used == false:
 			$AnimationPlayer.play("Used")
 			$AudioStreamPlayer.stream = get_sound

@@ -27,6 +27,8 @@ func _ready():
 	speed = Vector2(50, 200)
 	gravity = 250
 	
+	level = 1
+	
 	$FireCooldown.start(cooldown_time)
 	
 

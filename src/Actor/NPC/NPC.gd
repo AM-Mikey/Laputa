@@ -1,6 +1,8 @@
 extends Actor
 class_name NPC, "res://assets/Icon/NPCIcon.png"
 
+const DB = preload("res://src/Dialog/DialogBox.tscn")
+
 export var has_face = false
 export var voiced = true
 
@@ -11,16 +13,14 @@ var has_player_near = false
 var talking = false
 var active_player = null
 
-var id
+export var id: String
 
 export (String, FILE, "*.json") var dialog_json: String
-var conversation
+export var conversation: String
 var dialog_step: int = 1
 var branch: String = ""
 
-
-onready var db = get_tree().get_root().get_node("World").get_node("UILayer/DialogBox")
-
+var db 
 
 
 
@@ -29,19 +29,23 @@ func _ready():
 	add_to_group("NPCs")
 
 
-#movement stuff\
+#movement stuff
 func _physics_process(delta):
 	if talking and active_player.disabled == false: #if db freed the player
 		talking = false
 	
 
-	if target_pos != null:
-		move_to_target_x()
+#	if target_pos != null:
+#		if move_dir == Vector2.ZERO:
+#			get_move_dir()
+#		move_to_target_x()
 		
 	_velocity = calculate_move_velocity(_velocity, move_dir, speed)
 	_velocity = move_and_slide(_velocity, FLOOR_NORMAL)
 
 
+func get_move_dir():
+	move_dir.x = sign(target_pos.x - global_position.x)
 
 func calculate_move_velocity(linear_velocity: Vector2,move_dir: Vector2,speed: Vector2) -> Vector2:
 	var out: = linear_velocity
@@ -69,12 +73,14 @@ func _on_PlayerDetector_body_exited(body):
 	has_player_near = false
 
 func _input(event):
-	if event.is_action_pressed("inspect") and has_player_near == true:
+	if event.is_action_pressed("inspect") and has_player_near == true and dialog_json != "" and conversation != "":
 		start_dialog()
 		
 
 
 func move_to_target_x():
+	if id != null:
+		print(id + " moving to target_pos: ", target_pos)
 	if move_dir == Vector2.LEFT:
 		if global_position.x <= target_pos.x:
 			arrive_at_target()
@@ -83,11 +89,14 @@ func move_to_target_x():
 			arrive_at_target()
 			
 func arrive_at_target():
-	print(id + " arrived at target position")
+	if id != null:
+		print(id + " arrived at target position")
 	move_dir = Vector2.ZERO
 	target_pos = null
-	db.busy = false
-	db.dialog_loop()
+	
+	if talking:
+		db.busy = false
+		db.dialog_loop()
 
 func start_dialog():
 	if talking == false:
@@ -95,5 +104,9 @@ func start_dialog():
 		active_player.disabled = true
 		active_player.invincible = true
 		yield(get_tree().create_timer(.0001), "timeout")
+		
+		db = DB.instance()
+		get_tree().get_root().get_node("World/UILayer").add_child(db)
 	
 		db.start_printing(dialog_json, conversation)  #new dialog start function
+		print("starting conversation")

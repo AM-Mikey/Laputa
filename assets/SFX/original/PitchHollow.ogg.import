@@ -11,5 +11,5 @@ dest_files=[ "res://.import/PitchHollow.ogg-26db089d077e700c23a984bb652b5f7d.ogg
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

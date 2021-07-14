@@ -57,10 +57,10 @@ position = Vector2( 128, 256 )
 [node name="CameraLimiter" parent="." instance=ExtResource( 3 )]
 
 [node name="Left" parent="CameraLimiter" index="0"]
-position = Vector2( 0, 48 )
+position = Vector2( 64, 64 )
 
 [node name="Right" parent="CameraLimiter" index="1"]
-position = Vector2( 256, 64 )
+position = Vector2( 192, 64 )
 
 [node name="Top" parent="CameraLimiter" index="2"]
 position = Vector2( 128, -128 )
