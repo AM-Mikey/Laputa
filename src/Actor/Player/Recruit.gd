@@ -764,31 +764,31 @@ func change_animation(next_animation, texture):
 	back.hframes = texture.get_width()  /32
 	back.vframes = texture.get_height() /32
 	
-	var blend = false
-	
-	match old_animation:
-		"StandLeft", "StandLeftLookUp", "StandLeftLookDown":
-			if next_animation == "StandLeft" or "StandLeftLookUp" or "StandLeftLookDown":
-				blend = true
-		"StandRight", "StandRightLookUp", "StandRightLookDown":
-			if next_animation == "StandRight" or "StandRightLookUp" or "StandRightLookDown":
-				blend = true
-		"RunLeft", "RunLeftLookUp", "RunLeftLookDown":
-			if next_animation == "RunLeft" or "RunLeftLookUp" or "RunLeftLookDown":
-				blend = true
-		"RunRight", "RunRightLookUp", "RunRightLookDown":
-			if next_animation == "RunRight" or "RunRightLookUp" or "RunRightLookDown":
-				blend = true
-		"BackrunLeft", "BackrunLeftLookUp", "BackrunLeftLookDown":
-			if next_animation == "BackrunLeft" or "BackrunLeftAimUp" or "BackrunLeftLookDown":
-				blend = true
-		"BackrunRight", "BackrunRightLookUp", "BackrunRightLookDown":
-			if next_animation == "BackrunRight" or "BackrunRightLookUp" or "BackrunRightLookDown":
-				blend = true
+	var animation_groups = {
+		"StandLeft": 1,
+		"StandLeftLookUp": 1,
+		"StandLeftLookDown": 1,
+		"StandRight": 2,
+		"StandRightLookUp": 2,
+		"StandRightLookDown": 2,
+		"RunLeft": 3,
+		"RunLeftLookUp": 3,
+		"RunLeftLookDown": 3,
+		"RunRight": 4,
+		"RunRightLookUp": 4,
+		"RunRightLookDown": 4,
+		"BackrunLeft": 5,
+		"BarckrunLeftLookUp": 5,
+		"BackrunLeftLookDown": 5,
+		"BackrunRight": 6,
+		"BarckrunRightLookUp": 6,
+		"BackrunRightLookDown": 6
+	}
 	
 	player.play(next_animation)
-	#if blend:
-		#$AnimationPlayer.seek(old_time)
+	if animation_groups.has(old_animation) and animation_groups.has(next_animation):
+		if animation_groups[old_animation] == animation_groups[next_animation]:
+			$AnimationPlayer.seek(old_time)
 
 func _on_BonkDetector_body_entered(body, direction):
 	if not is_on_floor():
