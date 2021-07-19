@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://src/Tile/DebugTile.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Tile/DebugBackground.tres" type="TileSet" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://src/Tile/NavigationTile.tscn" type="PackedScene" id=20]
 [ext_resource path="res://src/Actor/NPC/NavOrb.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/Tile/villagetest.png" type="Texture" id=22]
+[ext_resource path="res://src/Prop/Sign.tscn" type="PackedScene" id=23]
+[ext_resource path="res://src/Prop/FallingChannel.tscn" type="PackedScene" id=24]
 [ext_resource path="res://src/Tile/Village.tres" type="TileSet" id=25]
 
 [sub_resource type="OccluderPolygon2D" id=1]
@@ -1011,6 +1013,17 @@ tile_data = PoolIntArray( 1572887, 0, 0, 1638424, 1, 0, 1703961, 1, 0, 1769498, 
 
 [node name="WindmillBlades" parent="Props" instance=ExtResource( 19 )]
 position = Vector2( 272, 192 )
+
+[node name="Sign" parent="Props" instance=ExtResource( 23 )]
+position = Vector2( 200, 384 )
+text = "<-- old village
+shop --->"
+
+[node name="FallingChannel" parent="Props" instance=ExtResource( 24 )]
+position = Vector2( 352, 280 )
+
+[node name="FallingChannel2" parent="Props" instance=ExtResource( 24 )]
+position = Vector2( 432, 296 )
 
 [node name="Triggers" type="Node2D" parent="."]
 

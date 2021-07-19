@@ -369,18 +369,16 @@ shape = SubResource( 2 )
 [node name="Body" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
-flip_h = true
 hframes = 4
 vframes = 3
-frame = 7
+frame = 4
 
 [node name="Hat" type="Sprite" parent="."]
-position = Vector2( 0, -14 )
+position = Vector2( 0, -13 )
 texture = ExtResource( 2 )
 flip_h = true
 hframes = 4
 vframes = 3
-frame = 3
 
 [node name="HatPlayer" type="AnimationPlayer" parent="."]
 anims/Shoot = SubResource( 3 )

@@ -12,7 +12,7 @@
 [ext_resource path="res://src/UI/Cave-StoryFont.tres" type="DynamicFont" id=10]
 [ext_resource path="res://assets/UI/HUD/XpOver.png" type="Texture" id=11]
 [ext_resource path="res://assets/UI/HUD/HpOver.png" type="Texture" id=12]
-[ext_resource path="res://assets/UI/XpBarMax.png" type="Texture" id=13]
+[ext_resource path="res://assets/UI/HUD/XpMax.png" type="Texture" id=13]
 [ext_resource path="res://assets/UI/NumberSmall.png" type="Texture" id=14]
 [ext_resource path="res://assets/UI/HUD/BossProgress.png" type="Texture" id=15]
 [ext_resource path="res://assets/UI/HUD/BossBackground.png" type="Texture" id=16]
@@ -226,6 +226,7 @@ __meta__ = {
 }
 
 [node name="XpProgress" type="TextureProgress" parent="XpBar"]
+visible = false
 margin_left = -12.0
 margin_top = 11.0
 margin_right = 27.0
@@ -249,14 +250,14 @@ hframes = 11
 vframes = 6
 frame = 56
 
-[node name="XpMax" type="Sprite" parent="XpBar"]
-visible = false
-position = Vector2( 27, 13 )
-texture = ExtResource( 13 )
-
 [node name="XpOver" type="Sprite" parent="XpBar"]
 position = Vector2( 7, 13 )
 texture = ExtResource( 11 )
+
+[node name="XpMax" type="Sprite" parent="XpBar"]
+visible = false
+position = Vector2( 7, 13 )
+texture = ExtResource( 13 )
 
 [node name="CooldownBar" type="Control" parent="."]
 margin_left = 40.0

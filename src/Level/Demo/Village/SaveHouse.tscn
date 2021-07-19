@@ -11,7 +11,7 @@
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Tile/DebugBackground.tres" type="TileSet" id=10]
 
-[node name="SealDoor" type="Node2D"]
+[node name="SaveHouse" type="Node2D"]
 script = ExtResource( 5 )
 __meta__ = {
 "_editor_description_": "boss room

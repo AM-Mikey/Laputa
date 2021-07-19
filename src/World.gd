@@ -1,6 +1,6 @@
 extends Node2D
 
-
+const LEVELNAME = preload("res://src/UI/LevelName.tscn")
 const TRANSITION = preload("res://src/UI/Transition.tscn")
 
 var resolution_scale = 4.0
@@ -134,12 +134,39 @@ func _on_level_change(level, door_index, level_name, music):
 		if doors_found > 1:
 			printerr("ERROR: more than one door with same index")
 	
+	###transition out
+	var already_enabled = false
 	
-	$UILayer/LevelName.display_text(next_level.level_name)
+	if $UILayer.has_node("TransitionWipe"):
+		yield(get_tree().create_timer(0.8), "timeout")
+		$UILayer/TransitionWipe.play_out_animation()
+		already_enabled = true
+		$Recruit.disabled = false
+		
+		if $UILayer.has_node("LevelName"):
+			$UILayer/LevelName.free()
+		
+		var level_name_ui = LEVELNAME.instance()
+		level_name_ui.text = next_level.name #in final version switch this to display name
+		level_name_ui.wait_time = 0.6
+		$UILayer.add_child(level_name_ui)
+		
+		
+	######
+	if not already_enabled:
+		$Recruit.disabled = false
+		
+		if $UILayer.has_node("LevelName"):
+			$UILayer/LevelName.free()
+		var level_name_ui = LEVELNAME.instance()
+		level_name_ui.text = next_level.name #in final version switch this to display name
+		$UILayer.add_child(level_name_ui)
+	
+	
+	
 	if next_level.music != music:
 		load_music(next_level.music)
 		
-	$UILayer/MoneyDisplay.visible = false
 	
 	current_level = next_level
 	load_level_data_from_temp()

@@ -279,6 +279,7 @@ position = Vector2( 0, -8 )
 shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+light_mask = 4
 position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
 flip_h = true

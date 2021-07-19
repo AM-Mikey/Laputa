@@ -10,7 +10,7 @@
 [ext_resource path="res://src/Prop/ShopKeyItem.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=11]
 
-[node name="LevelTemplate" type="Node2D"]
+[node name="MechanicShop" type="Node2D"]
 script = ExtResource( 5 )
 level_name = "LevelTemplate"
 music = "res://assets/Music/Access.ogg"

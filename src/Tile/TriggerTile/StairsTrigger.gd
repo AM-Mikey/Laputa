@@ -49,7 +49,6 @@ func _ready():
 			bottom_right += Vector2(1, 0)
 
 			while get_cellv(bottom_right) == 1 or get_cellv(right) == 1:
-				print("h")
 				if get_cellv(bottom_right) == 1:
 					height += 1
 					length += 1
@@ -147,9 +146,9 @@ func _ready():
 
 	
 		if is_stairs:
-			print("angle: ", angle)
-			print("height: ", height)
-			print("length: ", length)
+			#print("angle: ", angle)
+			#print("height: ", height)
+			#print("length: ", length)
 			
 			var stairs = STAIRS.instance()
 			stairs.global_position = s * 16
@@ -190,25 +189,4 @@ func _ready():
 				if half_start == true:
 					stairs.position.y +=8
 
-
-
-
-				
-				
-				
-#		if get_cellv(bottom_left) == 1:
-#			s += (bottom_left)
-#			if get_cellv(left) == 1:
-#				angle = 26.565
-#			if get_cellv(bottom_left) == 1:
-#				angle = 45
-				
-				
-		
-#
-#		var stairs_size = 1
-#		var below = Vector2(l.x, l.y + 1)
-#		while get_cellv(below) == 1: #ladder section id is 1
-#			ladder_size +=1
-#			below.y += 1
 	visible = false

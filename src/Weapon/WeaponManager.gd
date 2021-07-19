@@ -30,7 +30,7 @@ func update_weapon():
 		emit_signal("ammo_updated", weapon.needs_ammo, weapon.ammo, weapon.max_ammo)
 		emit_signal("weapon_updated", weapon.icon_texture, weapon.level, weapon.xp, weapon.max_xp)
 
-func manual_fire(bullet_pos, effect_pos, bullet_rot): #treats autos and manuals like manual
+func manual_fire(bullet_pos, effect_pos, shoot_dir): #treats autos and manuals like manual
 	if weapon == null:
 		return
 	
@@ -46,12 +46,12 @@ func manual_fire(bullet_pos, effect_pos, bullet_rot): #treats autos and manuals 
 				else: #not ammo == 0
 					weapon.ammo -= 1
 					emit_signal("ammo_updated", weapon.needs_ammo, weapon.ammo, weapon.max_ammo)
-					prepare_bullet(bullet_pos, effect_pos, bullet_rot)
+					prepare_bullet(bullet_pos, effect_pos, shoot_dir)
 			else: #not needs_ammo
-				prepare_bullet(bullet_pos, effect_pos, bullet_rot)
+				prepare_bullet(bullet_pos, effect_pos, shoot_dir)
 			trigger_held = true
 	
-func automatic_fire(bullet_pos, effect_pos, bullet_rot): #only fires autos but holds direction either way
+func automatic_fire(bullet_pos, effect_pos, shoot_dir): #only fires autos but holds direction either way
 	if weapon == null:
 		return
 		
@@ -67,14 +67,14 @@ func automatic_fire(bullet_pos, effect_pos, bullet_rot): #only fires autos but h
 				else: #not ammo == 0
 					weapon.ammo -= 1
 					emit_signal("ammo_updated", weapon.needs_ammo, weapon.ammo, weapon.max_ammo)
-					prepare_bullet(bullet_pos, effect_pos, bullet_rot)
+					prepare_bullet(bullet_pos, effect_pos, shoot_dir)
 			else: #not needs_ammo
-				prepare_bullet(bullet_pos, effect_pos, bullet_rot)
+				prepare_bullet(bullet_pos, effect_pos, shoot_dir)
 
 func release_fire():
 	trigger_held = false
 
-func prepare_bullet(bullet_pos, effect_pos, bullet_rot):
+func prepare_bullet(bullet_pos, effect_pos, shoot_dir):
 	var bullet = weapon.bullet_scene.instance()
 	
 	bullet.damage = weapon.damage
@@ -83,7 +83,7 @@ func prepare_bullet(bullet_pos, effect_pos, bullet_rot):
 	
 	bullet.position = bullet_pos
 	bullet.origin = bullet_pos
-	bullet.direction = get_bullet_dir(bullet_rot)
+	bullet.direction = shoot_dir
 	
 	get_tree().get_current_scene().add_child(bullet)
 	

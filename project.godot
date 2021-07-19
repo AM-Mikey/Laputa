@@ -100,6 +100,10 @@ texture={
 "stream": false,
 "svg/scale": 1.0
 }
+ogg_vorbis={
+"loop": false,
+"loop_offset": 0
+}
 
 [input]
 
@@ -253,11 +257,6 @@ load_data={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777245,"unicode":0,"echo":false,"script":null)
  ]
 }
-perspective={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777229,"unicode":0,"echo":false,"script":null)
- ]
-}
 fullscreen={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777230,"unicode":0,"echo":false,"script":null)
@@ -278,12 +277,21 @@ set_target={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":3,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+movement={
+"deadzone": 0.49,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777229,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
+2d_render/layer_1="default"
 2d_physics/layer_1="player"
+2d_render/layer_2="player"
 2d_physics/layer_2="enemy"
+2d_render/layer_3="enemy"
 2d_physics/layer_3="item"
+2d_render/layer_4="world"
 2d_physics/layer_4="world"
 2d_physics/layer_5="prop"
 2d_physics/layer_6="bullet_friend"

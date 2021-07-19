@@ -1,17 +1,18 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/UI/TitleScreen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/HUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UI/PauseMenu.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/UI/LevelName.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Actor/Player/Recruit.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/UI/ItemMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/World.gd" type="Script" id=8]
 [ext_resource path="res://assets/Music/Cave Story Beta 2001-09-30.ogg" type="AudioStream" id=9]
-[ext_resource path="res://src/UI/MoneyDisplay.tscn" type="PackedScene" id=10]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 8 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 80.0 ]
+}
 starting_level = "res://src/Level/Demo/Village/Village.tscn"
 
 [node name="Recruit" parent="." instance=ExtResource( 5 )]
@@ -22,13 +23,7 @@ max_hp = 8
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="LevelName" parent="UILayer" instance=ExtResource( 4 )]
-visible = false
-
 [node name="HUD" parent="UILayer" instance=ExtResource( 2 )]
-
-[node name="MoneyDisplay" parent="UILayer" instance=ExtResource( 10 )]
-visible = false
 
 [node name="PauseMenu" parent="UILayer" instance=ExtResource( 3 )]
 visible = false

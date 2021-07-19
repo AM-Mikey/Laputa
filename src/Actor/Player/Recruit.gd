@@ -1,12 +1,14 @@
 extends Player
 
 const BLACKBAR = preload("res://src/Utility/BlackBar.tscn")
+const POPUP = preload("res://src/UI/PopupText.tscn")
 
-export var max_x_speed = 82.5
+export var max_x_speed = 90 #was 82.5 for a max gap of 7 (barely)
 var half_max_x_speed = max_x_speed/2
 export var jump_speed = 180 #was 195 for 4 blocks
 #export var normal_jump_speed = 195
 #export var long_jump_speed = 150
+var movement_profile = "chi"
 
 export var minimum_jump_time = 0.1
 export var minimum_direction_time = 1.0 #was 0.5  #scrapped idea where cave story forces you to jump a certain x distance when going max speed before jumping
@@ -35,9 +37,9 @@ var run_anim_speed: float
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	acceleration = 5 #was 5
-	ground_cof = 0.2 #was 0.2
-	air_cof = 0.05
+	acceleration = 2.5 #was 5
+	ground_cof = 0.1 #was 0.2
+	air_cof = 0.05 # was 0.05
 
 func _physics_process(delta):
 	#print("Velocity: ", _velocity)
@@ -52,11 +54,8 @@ func _physics_process(delta):
 				
 			var is_dodge_interrupted = Input.is_action_just_released("dodge") and _velocity.y < 0.0
 			var move_dir = get_move_dir()
-			var look_rot = $LookRot.rotation_degrees
-			var look_dir = get_look_dir(look_rot)
-			var bullet_pos = $BulletVector.global_position
+			var bullet_pos = $BulletOrigin.global_position
 			var effect_pos = $WeaponSprite.position
-			var bullet_rot = $BulletVector.rotation_degrees
 			
 			if is_on_ceiling():
 				#if bonk_dir == Vector2.ZERO:
@@ -67,9 +66,9 @@ func _physics_process(delta):
 #				jump_speed = normal_jump_speed
 				if is_on_ladder == true:
 					is_on_ladder = false
-					if look_dir.x < 0: #Left
+					if face_dir.x < 0: #Left
 						$AnimationPlayer.play("StandLeft")
-					elif look_dir.x < 0: #Left
+					elif face_dir.x < 0: #Left
 						$AnimationPlayer.play("StandRight")
 				
 				if knockback == false:
@@ -116,31 +115,36 @@ func _physics_process(delta):
 					knockback_velocity = Vector2.ZERO
 					knockback = false
 
-			_velocity = calculate_move_velocity(_velocity, move_dir, look_dir, speed, is_jump_interrupted, is_dodge_interrupted) #special dir was in position 4
-			_velocity.y = move_and_slide_with_snap(_velocity, snap_vector, FLOOR_NORMAL, true).y
+			_velocity = calculate_move_velocity(_velocity, move_dir, face_dir, speed, is_jump_interrupted, is_dodge_interrupted) #special dir was in position 4
+			var new_velocity = move_and_slide_with_snap(_velocity, snap_vector, FLOOR_NORMAL, true)
 			
-			run_anim_speed = max((abs(_velocity.x)/max_x_speed) * 1.5, 0.5)
+			if is_on_wall():
+				new_velocity.y = max(_velocity.y, new_velocity.y)
+			
+			_velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
+			
+			run_anim_speed = max((abs(_velocity.x)/max_x_speed) * 1.5, 0.1) #run_anim_speed = max((abs(_velocity.x)/max_x_speed) * 1.5, 0.5)
 			#print(run_anim_speed)
-			animate(move_dir, look_dir, _velocity)
+			animate(move_dir, _velocity)
 			
 			if Input.is_action_pressed("fire_manual"): #holding
-				$WeaponManager.manual_fire(bullet_pos, effect_pos, bullet_rot)
+				$WeaponManager.manual_fire(bullet_pos, effect_pos, shoot_dir)
 			if Input.is_action_pressed("fire_automatic"): #holding
-				$WeaponManager.automatic_fire(bullet_pos, effect_pos, bullet_rot)
+				$WeaponManager.automatic_fire(bullet_pos, effect_pos, shoot_dir)
 			if Input.is_action_just_pressed("fire_automatic"): #only on first pressed
-				direction_lock = look_dir
+				direction_lock = face_dir
 			if Input.is_action_just_released("fire_manual"):
 				$WeaponManager.release_fire()
 			if Input.is_action_just_released("fire_automatic"): 
 				$WeaponManager.release_fire()
 				direction_lock = Vector2.ZERO
 			
-			if look_dir == Vector2.LEFT and horizontal_focus == Vector2.RIGHT:
+			if face_dir == Vector2.LEFT and horizontal_focus == Vector2.RIGHT:
 				horizontal_focus = Vector2.LEFT
-				pan_camera_horizontal(look_dir, _velocity)
-			if look_dir == Vector2.RIGHT and horizontal_focus == Vector2.LEFT:
+				pan_camera_horizontal(face_dir, _velocity)
+			if face_dir == Vector2.RIGHT and horizontal_focus == Vector2.LEFT:
 				horizontal_focus = Vector2.RIGHT
-				pan_camera_horizontal(look_dir, _velocity)
+				pan_camera_horizontal(face_dir, _velocity)
 			
 			if $Camera2D/TweenHorizontal.is_active():
 				$Camera2D/TweenHorizontal.playback_speed = max(abs(_velocity.x)/max_x_speed, 0.5) #second number is minimum camera speed ##thanks me!
@@ -160,7 +164,7 @@ func _physics_process(delta):
 				panning_down = false
 				home_camera_vertical()
 			
-			debug(move_dir, look_dir)
+			debug(move_dir, face_dir)
 		
 		else: #debug mode is on
 			var move_dir = Vector2(
@@ -170,6 +174,9 @@ func _physics_process(delta):
 			debug_speed * move_dir.x,
 			debug_speed * move_dir.y)
 			_velocity = move_and_slide(_velocity, FLOOR_NORMAL, true)
+
+	else: #we are curently disabled
+		pass
 
 func get_move_dir() -> Vector2:
 	if is_on_ladder:
@@ -184,23 +191,7 @@ func get_move_dir() -> Vector2:
 			-1.0 if Input.is_action_just_pressed("jump") and $ForgivenessTimer.time_left > 0 or Input.is_action_just_pressed("jump") and is_on_floor() 
 			else 0.0)
 
-func get_look_dir(look_rot) -> Vector2:
-	if look_rot == 90: #Left
-		return Vector2(-1, 0)
-	elif look_rot == 270 or look_rot == -90: #Right
-		return Vector2(1, 0)
-	elif look_rot == 180: #Up
-		return Vector2(0, -1)
-	elif look_rot == 0: #Down
-		return Vector2(0, 1)
-	else:
-		#printerr("ERROR: Cant get look direction!")
-		return Vector2.LEFT
-		
-
-
-
-func calculate_move_velocity(linear_velocity: Vector2, move_dir, look_dir, speed, is_jump_interrupted, is_dodge_interrupted) -> Vector2:
+func calculate_move_velocity(linear_velocity: Vector2, move_dir, face_dir, speed, is_jump_interrupted, is_dodge_interrupted) -> Vector2:
 	var out: = linear_velocity
 	
 	var friction = false
@@ -289,13 +280,20 @@ func get_input_dir() -> Vector2:
 		Input.get_action_strength("look_up") - Input.get_action_strength("look_down"))
 	
 
-func animate(move_dir, look_dir, _velocity):
+func animate(move_dir, _velocity):
 	var player = $AnimationPlayer
 	var camera = $Camera2D
 	
+
+	
+	var texture
+	var hframes
+	var vframes
+	
 	var input_dir = get_input_dir()
-	#print(input_dir)
-	#print(look_dir)
+
+	
+	#var minimum_velocity = 1 #for the difference between moving and standing
 
 	var next_animation: String = ""
 	
@@ -305,252 +303,415 @@ func animate(move_dir, look_dir, _velocity):
 			if is_on_floor():
 				player.playback_speed = run_anim_speed
 				if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
+					texture = load("res://assets/Actor/Player/RecruitStand.png")
+					face_dir = Vector2.LEFT
+					shoot_dir = Vector2.LEFT
 					next_animation = "StandLeft"
-				elif Input.is_action_pressed("move_left"):
+				
+				elif Input.is_action_pressed("move_left"): #_velocity.x < minimum_velocity * -1: 
+					texture = load("res://assets/Actor/Player/RecruitRun.png")
+					face_dir = Vector2.LEFT
+					
 					if Input.is_action_pressed("look_up"):
+						shoot_dir = Vector2.UP
 						next_animation = "RunLeftLookUp"
 					elif Input.is_action_pressed("look_down"):
+						shoot_dir = Vector2.LEFT
 						next_animation = "RunLeftLookDown"
 					else:
+						shoot_dir = Vector2.LEFT
 						next_animation = "RunLeft"
-				elif Input.is_action_pressed("move_right"):
+				
+				elif Input.is_action_pressed("move_right"): #_velocity.x > minimum_velocity:
+					texture = load("res://assets/Actor/Player/RecruitRun.png")
+					face_dir = Vector2.RIGHT
+					
 					if Input.is_action_pressed("look_up"):
+						shoot_dir = Vector2.UP
 						next_animation = "RunRightLookUp"
 					elif Input.is_action_pressed("look_down"):
+						shoot_dir = Vector2.RIGHT
 						next_animation = "RunRightLookDown"
 					else:
+						shoot_dir = Vector2.RIGHT
 						next_animation = "RunRight"
+				
 				else: #not moving on ground
 					player.playback_speed = 1 #reset player to normal speed
-					if look_dir.x < 0: #Left
+					texture = load("res://assets/Actor/Player/RecruitStand.png")
+					
+					if face_dir == Vector2.LEFT:
 						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
 							next_animation = "StandLeftLookUp"
 						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.LEFT
 							next_animation = "StandLeftLookDown"
 						else:
+							shoot_dir = Vector2.LEFT
 							next_animation = "StandLeft"
-					elif look_dir.x > 0: #Right
+				
+					elif face_dir == Vector2.RIGHT:
 						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
 							next_animation = "StandRightLookUp"
 						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.RIGHT
 							next_animation = "StandRightLookDown"
 						else:
+							shoot_dir = Vector2.RIGHT
 							next_animation = "StandRight"
+
+
 			else: #airborne
 				player.playback_speed = 1 #reset player to normal speed
 				
 				if _velocity.y < 0: #Rising
-					if Input.is_action_pressed("move_left"): #Moving Left
+					texture = load("res://assets/Actor/Player/RecruitRise.png")
+					
+					if Input.is_action_pressed("move_left"):
+						face_dir = Vector2.LEFT
 						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
 							next_animation = "RiseLeftLookUp"
 						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.DOWN
 							next_animation = "RiseLeftLookDown"
 						else:
+							shoot_dir = Vector2.LEFT
 							next_animation = "RiseLeft"
-					elif Input.is_action_pressed("move_right"): #Moving Right
+					
+					elif Input.is_action_pressed("move_right"):
+						face_dir = Vector2.RIGHT
 						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
 							next_animation = "RiseRightLookUp"
 						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.DOWN
 							next_animation = "RiseRightLookDown"
 						else:
+							shoot_dir = Vector2.RIGHT
 							next_animation = "RiseRight"
-					else: #not moving rising
-						if look_dir.x < 0: #Left
-							if Input.is_action_pressed("look_up"):
-								next_animation = "RiseLeftLookUp"
-							elif Input.is_action_pressed("look_down"):
-								next_animation = "RiseLeftLookDown"
-							else:
-								next_animation = "RiseLeft"
-						elif look_dir.x > 0: #Right
-							if Input.is_action_pressed("look_up"):
-								next_animation = "RiseRightLookUp"
-							elif Input.is_action_pressed("look_down"):
-								next_animation = "RiseRightLookDown"
-							else:
-								next_animation = "RiseRight"
 							
-				else: #Falling
-					if Input.is_action_pressed("move_left"): #Moving Left
+					elif face_dir == Vector2.LEFT:
 						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
+							next_animation = "RiseLeftLookUp"
+						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.DOWN
+							next_animation = "RiseLeftLookDown"
+						else:
+							shoot_dir = Vector2.LEFT
+							next_animation = "RiseLeft"
+					
+					elif face_dir == Vector2.RIGHT:
+						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
+							next_animation = "RiseRightLookUp"
+						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.DOWN
+							next_animation = "RiseRightLookDown"
+						else:
+							shoot_dir = Vector2.RIGHT
+							next_animation = "RiseRight"
+						
+				else: #Falling
+					texture = load("res://assets/Actor/Player/RecruitFall.png")
+					
+					if Input.is_action_pressed("move_left") or face_dir == Vector2.LEFT:
+						face_dir = Vector2.LEFT
+						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
 							next_animation = "FallLeftLookUp"
 						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.DOWN
 							next_animation = "FallLeftLookDown"
 						else:
+							shoot_dir = Vector2.LEFT
 							next_animation = "FallLeft"
-					elif Input.is_action_pressed("move_right"): #Moving Right
+							
+					elif Input.is_action_pressed("move_right") or face_dir == Vector2.RIGHT:
+						face_dir = Vector2.RIGHT
 						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
 							next_animation = "FallRightLookUp"
 						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.DOWN
 							next_animation = "FallRightLookDown"
 						else:
+							shoot_dir = Vector2.RIGHT
 							next_animation = "FallRight"
-					else: #not moving falling
-						if look_dir.x < 0: #Left
-							if Input.is_action_pressed("look_up"):
-								next_animation = "FallLeftLookUp"
-							elif Input.is_action_pressed("look_down"):
-								next_animation = "FallLeftLookDown"
-							else:
-								next_animation = "FallLeft"
-						elif look_dir.x > 0: #Right
-							if Input.is_action_pressed("look_up"):
-								next_animation = "FallRightLookUp"
-							elif Input.is_action_pressed("look_down"):
-								next_animation = "FallRightLookDown"
-							else:
-								next_animation = "FallRight"
+
+
+
 
 
 		elif direction_lock == Vector2.LEFT: #DIRECTION LOCKED LEFT
+			face_dir = Vector2.LEFT
+			
 			if is_on_floor():
 					player.playback_speed = run_anim_speed
+					
 					if Input.is_action_pressed("move_left"):
+						texture = load("res://assets/Actor/Player/RecruitRun.png")
+						
 						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
 							next_animation = "RunLeftLookUp"
 						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.LEFT
 							next_animation = "RunLeftLookDown"
 						else:
+							shoot_dir = Vector2.LEFT
 							next_animation = "RunLeft"
+							
 					elif Input.is_action_pressed("move_right"):
+						texture = load("res://assets/Actor/Player/RecruitBackrun.png")
+						
 						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
 							next_animation = "BackrunRightLookUp"
 						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.LEFT
 							next_animation = "BackrunRightLookDown"
 						else:
+							shoot_dir = Vector2.LEFT
 							next_animation = "BackrunRight"
+					
 					else: #not moving on ground
 						player.playback_speed = 1 #reset player to normal speed
+						texture = load("res://assets/Actor/Player/RecruitStand.png")
+						
 						if Input.is_action_pressed("look_up"):
 							next_animation = "StandLeftLookUp"
+							shoot_dir = Vector2.UP
 						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.LEFT
 							next_animation = "StandLeftLookDown"
 						else:
+							shoot_dir = Vector2.LEFT
 							next_animation = "StandLeft"
-							
+
+
 			else: #airborne
 				player.playback_speed = 1 #reset player to normal speed
+				
 				if _velocity.y < 0: #Rising
+					texture = load("res://assets/Actor/Player/RecruitRise.png")
+					
 					if Input.is_action_pressed("move_left"): #Moving Left
 						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
 							next_animation = "RiseLeftLookUp"
 						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.DOWN
 							next_animation = "RiseLeftLookDown"
 						else:
+							shoot_dir = Vector2.LEFT
 							next_animation = "RiseLeft"
+							
 					elif Input.is_action_pressed("move_right"): #Moving Right
 						if Input.is_action_pressed("look_up"):
-							next_animation = "BackriseRightLookUp"
+							shoot_dir = Vector2.UP
+							next_animation = "RiseLeftLookUp"
+							#next_animation = "BackriseRightLookUp"
 						elif Input.is_action_pressed("look_down"):
-							next_animation = "BackriseRightLookDown"
+							shoot_dir = Vector2.DOWN
+							next_animation = "RiseLeftLookDown"
+							#next_animation = "BackriseRightLookDown"
 						else:
-							next_animation = "BackriseRight"
+							shoot_dir = Vector2.LEFT
+							next_animation = "RiseLeft"
+							#next_animation = "BackriseRight"
+							
 					else: #not moving rising
 						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
 							next_animation = "RiseLeftLookUp"
 						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.DOWN
 							next_animation = "RiseLeftLookDown"
 						else:
+							shoot_dir = Vector2.LEFT
 							next_animation = "RiseLeft"
-							
+
+
 				else: #Falling
+					texture = load("res://assets/Actor/Player/RecruitFall.png")
+					
 					if Input.is_action_pressed("move_left"): #Moving Left
 						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
 							next_animation = "FallLeftLookUp"
 						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.DOWN
 							next_animation = "FallLeftLookDown"
 						else:
+							shoot_dir = Vector2.LEFT
 							next_animation = "FallLeft"
+							
 					elif Input.is_action_pressed("move_right"): #Moving Right
 						if Input.is_action_pressed("look_up"):
-							next_animation = "BackfallRightLookUp"
+							shoot_dir = Vector2.UP
+							next_animation = "FallLeftLookUp"
+							#next_animation = "BackfallRightLookUp"
 						elif Input.is_action_pressed("look_down"):
-							next_animation = "BackfallRightLookDown"
+							shoot_dir = Vector2.DOWN
+							next_animation = "FallLeftLookDown"
+							#next_animation = "BackfallRightLookDown"
 						else:
-							next_animation = "BackfallRight"
+							shoot_dir = Vector2.LEFT
+							next_animation = "FallLeft"
+							#next_animation = "BackfallRight"
+							
 					else: #not moving falling
 						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
 							next_animation = "FallLeftLookUp"
 						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.DOWN
 							next_animation = "FallLeftLookDown"
 						else:
+							shoot_dir = Vector2.LEFT
 							next_animation = "FallLeft"
-							
-							
+
+
+
+
+
 		elif direction_lock == Vector2.RIGHT: #DIRECTION LOCKED RIGHT
+			face_dir = Vector2.RIGHT
+			
 			if is_on_floor():
 				player.playback_speed = run_anim_speed
+				
 				if Input.is_action_pressed("move_left"):
+					texture = load("res://assets/Actor/Player/RecruitBackrun.png")
+					
 					if Input.is_action_pressed("look_up"):
+						shoot_dir = Vector2.UP
 						next_animation = "BackrunLeftLookUp"
 					elif Input.is_action_pressed("look_down"):
+						shoot_dir = Vector2.RIGHT
 						next_animation = "BackrunLeftLookDown"
 					else:
+						shoot_dir = Vector2.RIGHT
 						next_animation = "BackrunLeft"
+						
 				elif Input.is_action_pressed("move_right"):
+					texture = load("res://assets/Actor/Player/RecruitRun.png")
+					
 					if Input.is_action_pressed("look_up"):
+						shoot_dir = Vector2.UP
 						next_animation = "RunRightLookUp"
 					elif Input.is_action_pressed("look_down"):
+						shoot_dir = Vector2.RIGHT
 						next_animation = "RunRightLookDown"
 					else:
+						shoot_dir = Vector2.RIGHT
 						next_animation = "RunRight"
+				
 				else: #not moving on ground
 					player.playback_speed = 1 #reset player to normal speed
+					texture = load("res://assets/Actor/Player/RecruitStand.png")
+					
 					if Input.is_action_pressed("look_up"):
+						shoot_dir = Vector2.UP
 						next_animation = "StandRightLookUp"
 					elif Input.is_action_pressed("look_down"):
+						shoot_dir = Vector2.RIGHT
 						next_animation = "StandRightLookDown"
 					else:
+						shoot_dir = Vector2.RIGHT
 						next_animation = "StandRight"
-						
+
+
 			else: #airborne
 				player.playback_speed = 1 #reset player to normal speed
+				
 				if _velocity.y < 0: #Rising
+					texture = load("res://assets/Actor/Player/RecruitRise.png")
+					
 					if Input.is_action_pressed("move_left"): #Moving Left
 						if Input.is_action_pressed("look_up"):
-							next_animation = "BackriseLeftLookUp"
+							shoot_dir = Vector2.UP
+							next_animation = "RiseRightLookUp"
+							#next_animation = "BackriseLeftLookUp"
 						elif Input.is_action_pressed("look_down"):
-							next_animation = "BackriseLeftLookDown"
+							shoot_dir = Vector2.DOWN
+							next_animation = "RiseRightLookDown"
+							#next_animation = "BackriseLeftLookDown"
 						else:
-							next_animation = "BackriseLeft"
+							shoot_dir = Vector2.RIGHT
+							next_animation = "RiseRight"
+							#next_animation = "BackriseLeft"
+				
 					elif Input.is_action_pressed("move_right"): #Moving Right
 						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
 							next_animation = "RiseRightLookUp"
 						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.DOWN
 							next_animation = "RiseRightLookDown"
 						else:
+							shoot_dir = Vector2.RIGHT
 							next_animation = "RiseRight"
-					else: #not moving falling
+					
+					else: #not moving rising
 						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
 							next_animation = "RiseRightLookUp"
 						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.DOWN
 							next_animation = "RiseRightLookDown"
 						else:
+							shoot_dir = Vector2.RIGHT
 							next_animation = "RiseRight"
 				
 				else: #Falling
+					texture = load("res://assets/Actor/Player/RecruitFall.png")
+					
 					if Input.is_action_pressed("move_left"): #Moving Left
 						if Input.is_action_pressed("look_up"):
-							next_animation = "BackfallLeftLookUp"
+							shoot_dir = Vector2.UP
+							next_animation = "FallRightLookUp"
+							#next_animation = "BackfallLeftLookUp"
 						elif Input.is_action_pressed("look_down"):
-							next_animation = "BackfallLeftLookDown"
+							shoot_dir = Vector2.DOWN
+							next_animation = "FallRightLookDown"
+							#next_animation = "BackfallLeftLookDown"
 						else:
-							next_animation = "BackfallLeft"
+							shoot_dir = Vector2.RIGHT
+							next_animation = "FallRight"
+							#next_animation = "BackfallLeft"
+							
 					elif Input.is_action_pressed("move_right"): #Moving Right
 						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
 							next_animation = "FallRightLookUp"
 						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.DOWN
 							next_animation = "FallRightLookDown"
 						else:
+							shoot_dir = Vector2.RIGHT
 							next_animation = "FallRight"
+					
 					else: #not moving falling
 						if Input.is_action_pressed("look_up"):
+							shoot_dir = Vector2.UP
 							next_animation = "FallRightLookUp"
 						elif Input.is_action_pressed("look_down"):
+							shoot_dir = Vector2.DOWN
 							next_animation = "FallRightLookDown"
 						else:
+							shoot_dir = Vector2.RIGHT
 							next_animation = "FallRight"
-	
+
+
+
+
+
+
 	else: #is on ladder
 		player.playback_speed = 1 #reset player to normal speed
 		if Input.is_action_pressed("move_left"):
@@ -568,14 +729,14 @@ func animate(move_dir, look_dir, _velocity):
 			else:
 				next_animation = "ClimbRight"
 		else:
-			if look_dir.x < 0: #Left
+			if face_dir.x < 0: #Left
 				if Input.is_action_pressed("look_up"):
 					next_animation = "ClimbLeftLookUp"
 				elif Input.is_action_pressed("look_down"):
 					next_animation = "ClimbLeftLookDown"
 				else:
 					next_animation = "ClimbLeft"
-			elif look_dir.x > 0: #Right
+			elif face_dir.x > 0: #Right
 				if Input.is_action_pressed("look_up"):
 					next_animation = "ClimbRightLookUp"
 				elif Input.is_action_pressed("look_down"):
@@ -585,15 +746,49 @@ func animate(move_dir, look_dir, _velocity):
 
 	if not player.current_animation == next_animation:
 		if next_animation != "":
-			change_animation(next_animation)
+			change_animation(next_animation, texture)
 
 
-func change_animation(next_animation):
+func change_animation(next_animation, texture):
 	var player = $AnimationPlayer
+	var old_animation = $AnimationPlayer.current_animation
 	var old_time = $AnimationPlayer.current_animation_position
 	
+	var front = $Front
+	var back = $Back
+	
+	front.texture = texture
+	front.hframes = texture.get_width()  /32
+	front.vframes = texture.get_height() /32
+	back.texture = texture
+	back.hframes = texture.get_width()  /32
+	back.vframes = texture.get_height() /32
+	
+	var blend = false
+	
+	match old_animation:
+		"StandLeft", "StandLeftLookUp", "StandLeftLookDown":
+			if next_animation == "StandLeft" or "StandLeftLookUp" or "StandLeftLookDown":
+				blend = true
+		"StandRight", "StandRightLookUp", "StandRightLookDown":
+			if next_animation == "StandRight" or "StandRightLookUp" or "StandRightLookDown":
+				blend = true
+		"RunLeft", "RunLeftLookUp", "RunLeftLookDown":
+			if next_animation == "RunLeft" or "RunLeftLookUp" or "RunLeftLookDown":
+				blend = true
+		"RunRight", "RunRightLookUp", "RunRightLookDown":
+			if next_animation == "RunRight" or "RunRightLookUp" or "RunRightLookDown":
+				blend = true
+		"BackrunLeft", "BackrunLeftLookUp", "BackrunLeftLookDown":
+			if next_animation == "BackrunLeft" or "BackrunLeftAimUp" or "BackrunLeftLookDown":
+				blend = true
+		"BackrunRight", "BackrunRightLookUp", "BackrunRightLookDown":
+			if next_animation == "BackrunRight" or "BackrunRightLookUp" or "BackrunRightLookDown":
+				blend = true
+	
 	player.play(next_animation)
-	#$AnimationPlayer.seek(old_time)
+	#if blend:
+		#$AnimationPlayer.seek(old_time)
 
 func _on_BonkDetector_body_entered(body, direction):
 	if not is_on_floor():
@@ -714,9 +909,32 @@ func home_camera_horizontal():
 	tween.start()
 	yield(tween, "tween_completed")
 
-
-
-
+func _input(event):
+	if event.is_action_pressed("movement"):
+		if movement_profile == "chi":
+			movement_profile = "mu"
+			
+			max_x_speed = 82.5
+			jump_speed = 180
+			
+			acceleration = 5
+			ground_cof = 0.2
+			air_cof = 0.05
+			
+		elif movement_profile == "mu":
+			movement_profile = "chi"
+			
+			max_x_speed = 90
+			jump_speed = 180
+			
+			acceleration = 2.5
+			ground_cof = 0.1
+			air_cof = 0.05
+		
+		yield(get_tree(), "idle_frame")
+		var popup = POPUP.instance()
+		popup.text = "movement profile: " + movement_profile
+		world.get_node("UILayer").add_child(popup)
 
 
 

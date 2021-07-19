@@ -1,5 +1,7 @@
 extends Area2D
 
+const DB = preload("res://src/Dialog/DialogBox.tscn")
+
 var has_player_near = false
 var reading = false
 var active_player = null
@@ -13,14 +15,11 @@ export(String, MULTILINE) var text = ""
 export var justify = "NFCenter"
 export var voiced = false
 
-onready var db = get_tree().get_root().get_node("World").get_node("UILayer/DialogBox")
+var db
 
 signal display_text(path, display_name, face, expression, text, justify, voiced)
 signal stop_text()
 
-func _ready():
-	connect("display_text", db, "_on_display_text")
-	connect("stop_text", db, "_on_stop_text")
 
 func _on_Sign_body_entered(body):
 	has_player_near = true
@@ -29,10 +28,19 @@ func _on_Sign_body_entered(body):
 func _on_ExitDetector_body_exited(body):
 	has_player_near = false
 	emit_signal("stop_text")
-	if reading == true:
+	if reading:
+		db.queue_free()
 		reading = false
 
 func _input(event):
 	if event.is_action_pressed("inspect") and has_player_near == true and active_player.disabled == false:
-		reading = true
-		emit_signal("display_text", display_name, path, face, expression, text, justify, voiced)
+		if not reading:
+			reading = true
+			yield(get_tree().create_timer(.0001), "timeout")
+			
+			db = DB.instance()
+			get_tree().get_root().get_node("World/UILayer").add_child(db)
+			db.print_sign(text)
+		else:
+			db.queue_free()
+			reading = false

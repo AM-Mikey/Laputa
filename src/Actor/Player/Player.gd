@@ -14,6 +14,8 @@ signal player_experience_updated(total_xp, level, weapon_xp, weapon_xp_min, weap
 signal ammo_updated(needs_ammo, ammo, max_ammo)
 signal inventory_updated(inventory)
 
+var face_dir = Vector2.LEFT
+var shoot_dir = Vector2.LEFT
 
 var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
@@ -82,6 +84,7 @@ func _input(event):
 		
 		if event.is_action_pressed("toggle_debug"):
 			debug_mode()
+			
 		
 		if event.is_action_pressed("level_up"):
 			if weapon_array.front().level < weapon_array.front().max_level:

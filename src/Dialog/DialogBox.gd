@@ -25,12 +25,21 @@ var busy = false
 
 var step: int = 0 #step in printing dialog
 
-onready var tb = $TextBox
+onready var tb = $MarginContainer/HBoxContainer/TextBox
+onready var face_container = $MarginContainer/HBoxContainer/Face
+onready var face_sprite = $MarginContainer/HBoxContainer/Face/Sprite
 onready var audio = $AudioStreamPlayer
 onready var player = get_tree().get_root().get_node("World/Recruit")
 
 func _ready():
 	visible = false
+
+func print_sign(text):
+	face_container.free()
+	tb.align = Label.ALIGN_CENTER
+	tb.valign = Label.ALIGN_CENTER
+	tb.text = text
+	visible = true
 
 func start_printing(dialog_json, npc_convo):
 	audio.stream = text_sound
@@ -198,9 +207,9 @@ func face(string):
 	if face.size() > 1:
 		expression = int(face[1])
 	
-	$Face.texture = load("res://assets/UI/Face/%s" % id.capitalize() + ".png")
-	$Face.hframes = $Face.texture.get_width() / 48
-	$Face.frame = expression
+	face_sprite.texture = load("res://assets/UI/Face/%s" % id.capitalize() + ".png")
+	face_sprite.hframes = face_sprite.texture.get_width() / 48
+	face_sprite.frame = expression
 
 func display_name(string):
 	if string == "":

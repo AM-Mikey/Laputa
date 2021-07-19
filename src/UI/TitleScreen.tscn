@@ -27,7 +27,6 @@ __meta__ = {
 }
 
 [node name="VersionLabel" type="Label" parent="MarginContainer"]
-visible = false
 margin_left = 8.0
 margin_top = 252.0
 margin_right = 472.0
@@ -45,6 +44,7 @@ __meta__ = {
 }
 
 [node name="BuildLabel" type="Label" parent="MarginContainer"]
+visible = false
 margin_left = 8.0
 margin_top = 252.0
 margin_right = 472.0
@@ -54,7 +54,7 @@ custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
-text = "Alpha Build 0.0.4"
+text = "Alpha Build 0.0.5"
 align = 1
 valign = 2
 __meta__ = {
