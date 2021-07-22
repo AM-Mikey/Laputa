@@ -19,7 +19,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("shoot"):
 		weapon_array[0].fire_weapon(look_direction)
 	
-	debug(move_direction, look_direction)
+	debug_print(move_direction, look_direction)
 
 func get_move_direction() -> Vector2:
 	return Vector2(

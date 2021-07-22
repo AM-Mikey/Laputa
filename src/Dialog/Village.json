@@ -1,15 +1,20 @@
 {
 	"child": 
-	"
-	/face,child /name,child What do you want, outsider?
-	My dad can kick your ass, so don't piss me off
-	",
+	"/face,child /name,child What do you want, outsider?
+	My dad can kick your ass, so don't piss me off",
 	
 	"sasuke":
 	"
 	/face,sasuke /name,sasuke Managing the windmill is tough work!
 	I almost fell asleep while leaning over in my chair.
 	Say, have you seen my brother around here?
-	"
-	
+	",
+
+	"basil":
+	"/face,fluffy /name,basil Yawn, this is a test of the yes or no system.
+	After this message, select yes or no./yn
+	/dba You picked yes.//db
+	/dbb You picked no.//db
+	/m Now the dialog branches are merged."
 }
+

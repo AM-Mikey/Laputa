@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Grenade20mm.png-a95c3154cc36bc99bbecd14f765537c7.stex"
+path="res://.import/Grenade20mm.png-5ec74e1d8d5a74621b995e812938c0de.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Bullet/Grenade20mm.png"
-dest_files=[ "res://.import/Grenade20mm.png-a95c3154cc36bc99bbecd14f765537c7.stex" ]
+source_file="res://assets/Bullet/old/Grenade20mm.png"
+dest_files=[ "res://.import/Grenade20mm.png-5ec74e1d8d5a74621b995e812938c0de.stex" ]
 
 [params]
 

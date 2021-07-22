@@ -45,7 +45,7 @@ var total_xp: int = 0
 
 var inventory: Array
 var topic_array: Array = ["ham", "cheese", "marbles", "balogna"]
-var weapon_array: Array = [load("res://src/Weapon/%s" % "Revolver1" + ".tres"), load("res://src/Weapon/%s" % "GrenadeLauncher" + ".tres"), load("res://src/Weapon/MachinePistol1.tres"), load("res://src/Weapon/Shotgun.tres")]
+var weapon_array: Array = [load("res://src/Weapon/Revolver1.tres"), load("res://src/Weapon/GrenadeLauncher1.tres"), load("res://src/Weapon/MachinePistol1.tres"), load("res://src/Weapon/Shotgun.tres")]
 
 
 func _ready():
@@ -82,8 +82,8 @@ func _input(event):
 				$WeaponManager.update_weapon()
 				play_weapon_change_sound()
 		
-		if event.is_action_pressed("toggle_debug"):
-			debug_mode()
+		if event.is_action_pressed("debug_fly"):
+			debug_fly()
 			
 		
 		if event.is_action_pressed("level_up"):
@@ -392,30 +392,29 @@ func update_xp():
 func update_inventory():
 	emit_signal("inventory_updated", inventory)
 
-func debug(move_direction, look_direction):
-	if Input.is_action_just_pressed("debug"):
-		print("DEBUG STATS")
-		print("player hp: ", hp)
-		print("player max_hp: ", max_hp)
+func debug_print(move_direction, look_direction):
+	if Input.is_action_just_pressed("debug_print"):
+		print("~~~~~~~~~~~~DEBUG STATS~~~~~~~~~~~~")
+		print("player hp: ", hp, "/", max_hp)
 		print("player position: ", global_position)
 		print("move_direction: ", move_direction)
 		print("look_direction: ", look_direction)
 		print("total xp: ", total_xp)
-		print("weapon xp: ", weapon_array.front().xp)
+		print("weapon xp: ", weapon_array.front().xp, "/", weapon_array.front().max_xp)
 		print("weapon level: ", weapon_array.front().level)
-		print("weapon max_xp ", weapon_array.front().max_xp)
 		print("forgiveness timer time left: ", $ForgivenessTimer.time_left)
 		print("is on floor: ", is_on_floor())
 		print("camera offset: ", $Camera2D.offset)
 		print("camera position: ", $Camera2D.global_position)
-		
+		print("---")
 		print("screen size: ", OS.get_screen_size())
 		print("window size: ", OS.get_window_size())
 		print("viewport size: ", get_tree().get_root().size)
+		print("~~~~~~~~~~~~DEBUG STATS~~~~~~~~~~~~")
 
-func debug_mode():
+func debug_fly():
 	if debug_active == false:
-		print("debug mode: ON")
+		print("debug fly: ON")
 		debug_active = true
 		invincible = true
 		colliding = false
@@ -424,7 +423,7 @@ func debug_mode():
 		$ItemDetector.monitoring = false
 	
 	elif debug_active == true:
-		print("debug mode: OFF")
+		print("debug fly: OFF")
 		is_in_water = false
 		is_on_ladder = false
 		debug_active = false

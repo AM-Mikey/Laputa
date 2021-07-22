@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Spear.png-2634f764210f8d7f961691e26e579a78.stex"
+path="res://.import/Grenade10mm.png-4a32d33fa497c5f773cdd6a9137ac491.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Bullet/Spear.png"
-dest_files=[ "res://.import/Spear.png-2634f764210f8d7f961691e26e579a78.stex" ]
+source_file="res://assets/Bullet/old/Grenade10mm.png"
+dest_files=[ "res://.import/Grenade10mm.png-4a32d33fa497c5f773cdd6a9137ac491.stex" ]
 
 [params]
 

@@ -1,6 +1,7 @@
 extends Control
 
-const OPTIONS = preload("res://src/UI/Settings.tscn")
+const OPTIONS = preload("res://src/UI/Options.tscn")
+const LEVEL = preload("res://src/UI/LevelSelect.tscn")
 
 onready var world = get_tree().get_root().get_node("World")
 
@@ -27,16 +28,19 @@ func _process(delta):
 func _on_Options_pressed():
 	var options = OPTIONS.instance()
 	add_child(options)
-
+	
 
 func _on_Return_pressed():
 	get_tree().paused = false
 	print("game unpaused")
 	visible = false
 
+func _on_Level_pressed():
+	var level = LEVEL.instance()
+	add_child(level)
 
 func _on_Quit_pressed():
 	get_tree().quit()
 
 func _on_viewport_size_changed():
-	$MarginContainer.rect_size = get_tree().get_root().size / world.resolution_scale
+	rect_size = get_tree().get_root().size / world.resolution_scale

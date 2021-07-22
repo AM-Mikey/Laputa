@@ -1,5 +1,7 @@
 extends Control
 
+const YN = preload("res://src/Dialog/DialogYesNo.tscn")
+
 var text_sound = load("res://assets/SFX/snd_msg.ogg")
 
 var prompt_sound = load("res://assets/SFX/snd_menu_prompt.ogg")
@@ -13,10 +15,8 @@ var dialog
 var conversation: String
 var text
 
-var starting_line: int = 1 #unused
-var ending_line: int # unused
-
 export var print_delay = 0.05
+export var do_delay = true
 export var punctuation_delay = 0.3
 var in_dialog = false
 var active = true
@@ -49,7 +49,10 @@ func start_printing(dialog_json, npc_convo):
 	
 	dialog = load_dialog(dialog_json)
 	conversation = npc_convo
-	text = dialog[conversation].json_escape()
+	
+	text = dialog[conversation].strip_edges().json_escape() #strip edges to clean up first and last newlines
+	
+	print(text)
 	
 	dialog_loop()
 
@@ -58,11 +61,11 @@ func dialog_loop():
 		while step < text.length():
 			print_dialog(text)
 			step +=1
-			if $PrintTimer.is_stopped():
-				$PrintTimer.start(print_delay)
-			yield($PrintTimer, "timeout")
-			if active == false:
-				ending_line = tb.get_line_count()
+			if do_delay:
+				if $PrintTimer.is_stopped():
+					$PrintTimer.start(print_delay)
+				yield($PrintTimer, "timeout")
+			if not active:
 				break
 			if busy:
 				break
@@ -89,20 +92,24 @@ func remove_cursor():
 		tb.text = removed_cursor
 
 func _input(event):
-	if event.is_action("inspect"):
+	if event.is_action_pressed("inspect"):
 		if in_dialog:
-			print(text.length())
 			if step >= text.length():
 				print("reached end")
 				stop_printing()
 			
-			if active == false:
+			if not active:
+				do_delay = true
+				#print_delay = default_print_delay
 				active = true
 				remove_cursor()
-				if tb.get_line_count() >= 3:
+				if tb.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
 					tb.text = ""
 				dialog_loop()
-				starting_line = tb.get_line_count()
+			
+			else: #active
+				do_delay = false
+				#print_delay = 0.0
 
 
 func load_dialog(dialog_json) -> Dictionary: #loads json and converts it into a dictionary
@@ -115,7 +122,7 @@ func load_dialog(dialog_json) -> Dictionary: #loads json and converts it into a 
 
 
 func print_dialog(string):
-	if tb.get_line_count() == 4:
+	if tb.get_line_count() == 4: #failsafe for if we overflow
 		tb.lines_skipped = 1
 	else:
 		tb.lines_skipped = 0
@@ -143,14 +150,17 @@ func print_dialog(string):
 	elif character == "/":
 		var command = string.substr(step, -1)
 		var first_space = command.find(" ")
-		if first_space == -1:
-			pass
-		else:
+		var first_escape = command.find("\\")
+		
+		if first_space < first_escape: #the space came first
 			command = command.left(first_space)
+		elif first_space > first_escape: #the escape came first
+			command = command.left(first_escape)
 		
 		print("doing command: ", command)
 		parse_command(command)
 		step += command.length()
+		
 	else:
 		print("insterted char: ", character)
 		tb.text = tb.text.insert(step, character)
@@ -160,19 +170,11 @@ func print_dialog(string):
 
 func stop_printing():
 	print("ended dialog")
-	#branch = "" #may be undesired to reset the convo
-	#already_talked = true
 	
-	step = 0
-	#visible = false
-	in_dialog = false
-	active = true
-	busy = false
 	player.disabled = false
 	player.invincible = false
 
 	queue_free()
-
 
 func parse_command(string):
 	var command = string.split(",", true, 1)
@@ -195,7 +197,14 @@ func parse_command(string):
 			do_hide(argument)
 		"/walk":
 			walk(argument)
+		"/yn":
+			yes_no()
+		"//db":
+			end_branch()
 
+func seek(string):
+	print("seeking: ", string)
+	step = text.find(string, step)
 
 func face(string):
 	if string == "":
@@ -258,3 +267,31 @@ func walk(string):
 				n.move_dir= Vector2.LEFT
 		
 			n.move_to_target_x()
+
+func yes_no():
+	busy = true
+	var yn = YN.instance()
+	add_child(yn)
+	
+	yn.get_node("MarginContainer/HBoxContainer/Yes").connect("pressed", self, "on_select_branch", ["dba"])
+	yn.get_node("MarginContainer/HBoxContainer/No").connect("pressed", self, "on_select_branch", ["dbb"])
+
+func on_select_branch(branch):
+	if branch != null:
+		seek("/" + branch)
+		
+	print("adding extra newline") #inserting newlines like this bypasses the input_event() line check, so add that code here
+	tb.text = tb.text.insert(step, "\n")
+	busy = false
+	if tb.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
+		tb.text = ""
+	dialog_loop()
+
+
+func end_branch():
+	active = false
+	flash_cursor()
+	print("adding back newline")
+	tb.text = tb.text.insert(step, "\n")
+	seek("/m")
+	step -= 5 #WHY WHY WHY WHY WHY

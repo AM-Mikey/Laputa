@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Grenade40mm.png-d4b830e4e2145b5081fe8e84bfe53975.stex"
+path="res://.import/Arrow.png-f0e0424f2f505cfc6af5927eec64f8ae.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Bullet/Grenade40mm.png"
-dest_files=[ "res://.import/Grenade40mm.png-d4b830e4e2145b5081fe8e84bfe53975.stex" ]
+source_file="res://assets/Bullet/old/Arrow.png"
+dest_files=[ "res://.import/Arrow.png-f0e0424f2f505cfc6af5927eec64f8ae.stex" ]
 
 [params]
 

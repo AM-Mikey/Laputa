@@ -2,26 +2,30 @@ extends Control
 
 var settings_path = "user://settings.json"
 
-onready var display_mode = $MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DisplayMode/OptionButton
-onready var resolution_scale = $MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ResolutionScale/OptionButton
+onready var display_mode = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DisplayMode/OptionButton
+onready var resolution_scale = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ResolutionScale/OptionButton
 
-onready var master_label = $MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MasterLabel
-onready var music_label = $MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/MusicLabel
-onready var sfx_label = $MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/SFXLabel
+onready var master_slider = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MasterSlider
+onready var music_slider = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/MusicSlider
+onready var sfx_slider = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/SFXSlider
+
+onready var master_label = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MasterLabel
+onready var music_label = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/MusicLabel
+onready var sfx_label = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/SFXLabel
 
 onready var world = get_tree().get_root().get_node("World")
 
 var default = {
 	"DisplayMode": 0,
 	"ResolutionScale": 0,
-	"MasterSlider": 100,
-	"MusicSlider": 100,
-	"SFXSlider" : 100
+	"MasterSlider": 10.0,
+	"MusicSlider": 0.0,
+	"SFXSlider" : 10.0
 	}
 
 func _ready():
 	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
-	_on_viewport_size_changed()
+#	_on_viewport_size_changed()
 	
 	display_mode.add_item("Windowed")
 	display_mode.add_item("Borderless")
@@ -36,7 +40,38 @@ func _ready():
 	var file = File.new()
 	if not file.file_exists(settings_path):
 		save_defaults()
+	
+	else: 
+		load_settings()
 
+
+func load_settings():
+	var data
+	
+	var file = File.new()
+	if file.file_exists(settings_path):
+		var file_read = file.open(settings_path, File.READ)
+		if file_read == OK:
+			var text = file.get_as_text()
+			data = JSON.parse(text).result
+			file.close()
+
+		display_mode.selected = data["DisplayMode"]
+		_on_DisplayMode_item_selected(data["DisplayMode"])
+		resolution_scale.selected = data["ResolutionScale"]
+		_on_ResolutionScale_item_selected(data["ResolutionScale"])
+		
+		
+		master_slider.value = data["MasterSlider"]
+		_on_MasterSlider_value_changed(data["MasterSlider"])
+		music_slider.value = data["MusicSlider"]
+		_on_MusicSlider_value_changed(data["MusicSlider"])
+		sfx_slider.value = data["SFXSlider"]
+		_on_SFXSlider_value_changed(data["SFXSlider"])
+
+	else: 
+		printerr("ERROR: could not load settings data")
+	
 
 func _on_DisplayMode_item_selected(index):
 	print("display settings changed")
@@ -50,13 +85,11 @@ func _on_DisplayMode_item_selected(index):
 	if index == 2: #fullscreen
 		OS.set_borderless_window(false)
 		OS.set_window_fullscreen(true)
-		
+	
 	save_to_file("DisplayMode", index)
 
 func _on_ResolutionScale_item_selected(index):
 
-
-	
 	if index == 0:
 		world.viewport_size_ignore = false
 		world._on_viewport_size_changed()
@@ -79,8 +112,7 @@ func _on_ResolutionScale_item_selected(index):
 	if get_tree().get_nodes_in_group("CameraLimiters").size() != 0:
 		for c in get_tree().get_nodes_in_group("CameraLimiters"):
 			c._on_viewport_size_changed()
-	_on_viewport_size_changed() #didnt fix it
-
+	
 	save_to_file("ResolutionScale", index)
 
 
@@ -88,8 +120,11 @@ func _on_Reset_pressed():
 	save_defaults()
 
 
-func _on_Save_pressed():
-	queue_free()
+func _on_Return_pressed():
+	if world.has_node("UILayer/Options"):
+		world.get_node("UILayer/Options").queue_free()
+	else:
+		get_parent().queue_free()
 
 
 
@@ -101,7 +136,7 @@ func _on_MasterSlider_value_changed(value):
 	else:
 		master_label.text = "Master Volume: " + str(value) + "0 '/."
 		
-		save_to_file("MasterSlider", value)
+	save_to_file("MasterSlider", value)
 
 func _on_MusicSlider_value_changed(value):
 	var db = percent_to_db(value)
@@ -111,7 +146,7 @@ func _on_MusicSlider_value_changed(value):
 	else:
 		music_label.text = "Music Volume: " + str(value) + "0 '/."
 		
-		save_to_file("MusicSlider", value)
+	save_to_file("MusicSlider", value)
 
 func _on_SFXSlider_value_changed(value):
 	var db = percent_to_db(value)
@@ -120,9 +155,9 @@ func _on_SFXSlider_value_changed(value):
 		sfx_label.text = "SFX Volume: Muted"
 	else:
 		sfx_label.text = "SFX Volume: " + str(value) + "0 '/."
-
-	save_to_file("SFXSlider", value)
 	
+	save_to_file("SFXSlider", value)
+
 func percent_to_db(value) -> float:
 	var db: float
 	
@@ -174,12 +209,24 @@ func percent_to_db(value) -> float:
 	return db
 
 func _on_DeleteSave_pressed():
+	var files = []
 	var dir = Directory.new()
-	dir.remove("user://config.json")
-	dir.remove("user://settings.json")
-	dir.remove("user://save.dat")
-	dir.remove("user://temp.dat")
-	$MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DeleteSave/Button.text = "Done"
+	dir.open("user://")
+	dir.list_dir_begin()
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			files.append(file)
+	
+	
+	for f in files:
+		if f.get_extension() == "dat" or f.get_extension() == "json":
+			dir.remove("user://%s" % f)
+			print("removed file: " + "user://%s" % f)
+	
+	$MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DeleteSave/Button.text = "Done"
 
 func save_defaults():
 	var data = default
@@ -209,17 +256,8 @@ func save_to_file(setting, setting_value):
 
 
 
-
-
-
-
-
-
-
-
-
-func _on_viewport_size_changed():
-	$MarginContainer.rect_size = get_tree().get_root().size / world.resolution_scale
+#func _on_viewport_size_changed():
+#	rect_size = get_tree().get_root().size / world.resolution_scale
 
 
 

@@ -2,6 +2,7 @@ extends Node2D
 
 const LEVELNAME = preload("res://src/UI/LevelName.tscn")
 const TRANSITION = preload("res://src/UI/Transition.tscn")
+const OPTIONS = preload("res://src/UI/Options.tscn")
 
 var resolution_scale = 4.0
 var viewport_size_ignore = false
@@ -17,16 +18,12 @@ export var starting_level = "res://src/Level/DebugLevel.tscn"
 onready var current_level = load(starting_level).instance() #assumes current level to start with, might cause issues down the line
 
 func _ready():
-	#surfacer
-	#ScaffolderBootstrap.on_app_ready
-	#SurfacerBootstrap.new()._initialize_framework
-	#
-	
 	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 	_on_viewport_size_changed()
 	add_child(current_level)
-	if $UILayer/TitleScreen.visible == true:
-		show_title()
+	show_title()
+	
+	load_options()
 
 	var spawn_points = get_tree().get_nodes_in_group("SpawnPoints")
 	for s in spawn_points:
@@ -59,9 +56,6 @@ func show_title():
 func _input(event):
 	if event.is_action_pressed("reload"):
 		get_tree().reload_current_scene()
-	if event.is_action_pressed("break"):
-		get_tree().quit()
-		
 	if event.is_action_pressed("save_data"):
 		save_level_data_to_temp()
 		save_player_data_to_save()
@@ -438,3 +432,12 @@ func load_level_data_from_save():
 			printerr("ERROR: level data could not be loaded from save!")
 	else:
 		printerr("ERROR: no save file found")
+
+func load_options():
+	var options = OPTIONS.instance()
+	$UILayer.add_child(options)
+	options.get_node("TabContainer/Settings").load_settings()
+	options.get_node("TabContainer/KeyConfig").load_input_map()
+	
+	yield(get_tree(), "idle_frame")
+	options.queue_free()

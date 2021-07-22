@@ -10,8 +10,7 @@ var projectile_speed = Vector2.ZERO
 
 var projectile_range: int
 
-#var max_spread_degrees = 15
-var max_spread_distance = 9
+var max_spread_distance = 7
 
 var origin = Vector2.ZERO
 
@@ -34,11 +33,6 @@ func _ready():
 		Vector2.DOWN:
 			rotation_degrees = -90
 			global_position.x += spread_distance
-
-##### old code for when it rotated
-#	var spread_degrees= rng.randf_range(max_spread_degrees * -1, max_spread_degrees)
-#	rotation_degrees += spread_degrees
-#	direction = direction.rotated(deg2rad(spread_degrees))
 
 
 func _physics_process(delta):

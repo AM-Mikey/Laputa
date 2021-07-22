@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/EnemyRock.png-8a73c26efd1a5c2cdd555cfc0b268fcb.stex"
+path="res://.import/Grenade40mm.png-48aee9013bafc39a649e41a9f56e3412.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Bullet/EnemyRock.png"
-dest_files=[ "res://.import/EnemyRock.png-8a73c26efd1a5c2cdd555cfc0b268fcb.stex" ]
+source_file="res://assets/Bullet/old/Grenade40mm.png"
+dest_files=[ "res://.import/Grenade40mm.png-48aee9013bafc39a649e41a9f56e3412.stex" ]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/Actor/NPC/Sasuke.png" type="Texture" id=1]
-[ext_resource path="res://src/Actor/NPC/Sasuke.gd" type="Script" id=2]
+[ext_resource path="res://src/Actor/NPC/NPC.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 10 )
@@ -13,6 +13,9 @@ extents = Vector2( 8, 10 )
 collision_layer = 128
 collision_mask = 8
 script = ExtResource( 2 )
+id = "sasuke"
+dialog_json = "res://src/Dialog/Village.json"
+conversation = "sasuke"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -10 )

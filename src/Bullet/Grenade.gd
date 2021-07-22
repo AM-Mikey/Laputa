@@ -20,58 +20,47 @@ var start_velocity
 var touched_floor = false
 
 func _ready():
-	#set_collision_mask_bit(3, false) #world
-	
 	$ExplosionDetector.scale = Vector2.ZERO
+	$ExplosionDetector.set_collision_mask_bit(0, false) #player
 	$ExplosionDetector.set_collision_mask_bit(1, false) #enemy
-	$ExplosionDetector.set_collision_mask_bit(8, false)
-	velocity = get_velocity(projectile_speed, direction)
+	$ExplosionDetector.set_collision_mask_bit(8, false) #destructable
+	velocity = get_initial_velocity(projectile_speed, direction)
 	start_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 	$Timer.start(explosion_time)
-	if direction == Vector2.LEFT:
-		$AnimationPlayer.play("FlipLeft")
-	else:
-		$AnimationPlayer.play("FlipRight")
-	
-	#yield(get_tree().create_timer(0.2), "timeout") #turn collision back on after it's left our body
-	#set_collision_mask_bit(3, true) #world
+
 
 
 func _physics_process(delta):
 	if is_on_floor():
 		touched_floor = true
 	
-	if abs(velocity.x) > minimum_speed and abs(velocity.y) > minimum_speed:
+	if abs(velocity.x) > minimum_speed or abs(velocity.y) > minimum_speed: #check or not and
 		if disabled == false:
+			if velocity.x < 0:
+				$AnimationPlayer.play("FlipLeft")
+			else:
+				$AnimationPlayer.play("FlipRight")
+			
 			var collision = move_and_collide(velocity * delta)
 			if collision:
 				velocity *= bounciness
 				velocity = velocity.bounce(collision.normal)
 				$Bounce2D.play()
-			
+
 	velocity.y += gravity * delta
 			
 	var avr_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 	$AnimationPlayer.playback_speed = avr_velocity / start_velocity
 	if $AnimationPlayer.playback_speed < .1:
 		$AnimationPlayer.stop()
-			
-	#		var distance_from_origin = origin.distance_to(global_position);
-	#		if distance_from_origin > projectile_range:
-	#			visible = false
-	#			disabled = true
-	#			_fizzle_from_range()
 
-
-func get_velocity(projectile_speed, direction) -> Vector2:
+func get_initial_velocity(projectile_speed, direction) -> Vector2:
 	var out = velocity
 
-	print(direction)
-
 	out.x = projectile_speed * direction.x
-	out.y += gravity * get_physics_process_delta_time()
-	if direction.y == -1.0:
-		out.y = projectile_speed * direction.y
+	out.y = projectile_speed * direction.y
+	
+	out.y -= 100 #give us some ups to start with
 	print(out)
 	return out
 	
@@ -79,7 +68,7 @@ func _on_CollisionDetector_body_entered(body):
 	if disabled == false:
 		if body.get_collision_layer_bit(1): #enemy
 			var blood_direction = Vector2(floor((body.global_position .x - global_position.x)/10), floor((body.global_position.y - global_position.y)/10))
-			if touched_floor == false:
+			if not touched_floor:
 				body.hit(damage, blood_direction)
 			else:
 				body.hit(damage/2, blood_direction)
@@ -87,6 +76,7 @@ func _on_CollisionDetector_body_entered(body):
 
 
 func _on_Timer_timeout():
+	$ExplosionDetector.set_collision_mask_bit(0, true)
 	$ExplosionDetector.set_collision_mask_bit(1, true)
 	$ExplosionDetector.set_collision_mask_bit(8, true)
 	$AnimationPlayer.stop()
@@ -98,6 +88,10 @@ func _on_Timer_timeout():
 
 func _on_ExplosionDetector_body_entered(body):
 	if disabled == false:
+		if body.get_collision_layer_bit(0): #player
+			var knockback_direction = Vector2(sign(body.global_position.x - global_position.x), 0) #sign(body.global_position.y - global_position.y)
+			body.hit(damage/4, knockback_direction)
+		
 		if body.get_collision_layer_bit(1): #enemy
 			var blood_direction = Vector2(floor((body.global_position.x - global_position.x)/10), floor((body.global_position.y - global_position.y)/10))
 			body.hit(damage/4, blood_direction)

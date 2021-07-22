@@ -3215,9 +3215,6 @@ autostart = true
 [node name="WeaponAudio" type="AudioStreamPlayer" parent="WeaponManager"]
 bus = "SFX"
 
-[node name="DodgeTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="ForgivenessTimer" type="Timer" parent="."]
 one_shot = true
 

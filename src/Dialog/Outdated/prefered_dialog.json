@@ -51,7 +51,7 @@ WANT
 	"topic_demo_questions":
 	"
 	/face:sue /name:sue
-	I want to ask you a question /nc
+	I want to ask you a question
 	beep boop bo beep? /yn
 	
 	/dba oh, really? /n I didn't expect you to agree //db

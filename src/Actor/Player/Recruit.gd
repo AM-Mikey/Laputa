@@ -52,7 +52,6 @@ func _physics_process(delta):
 					is_jump_interrupted = true
 				
 				
-			var is_dodge_interrupted = Input.is_action_just_released("dodge") and _velocity.y < 0.0
 			var move_dir = get_move_dir()
 			var bullet_pos = $BulletOrigin.global_position
 			var effect_pos = $WeaponSprite.position
@@ -93,10 +92,12 @@ func _physics_process(delta):
 						jump_starting_move_dir_x = move_dir.x
 						$MinimumDirectionTimer.start(minimum_direction_time)
 				snap_vector = Vector2.ZERO
+				
+#				if get_floor_velocity().y < 0: #borrowed this code to prevent sticking
+#					position.y += get_floor_velocity().y * get_physics_process_delta_time() - gravity * get_physics_process_delta_time() - 1
+				
 				$JumpSound.play()
-			
-			if Input.is_action_just_pressed("dodge") and $DodgeTimer.time_left == 0:
-				$DodgeTimer.start(dodge_time)
+		
 			
 			if Input.is_action_just_pressed("look_down") and can_fall_through == true and is_on_floor():
 				position.y += 8
@@ -115,7 +116,7 @@ func _physics_process(delta):
 					knockback_velocity = Vector2.ZERO
 					knockback = false
 
-			_velocity = calculate_move_velocity(_velocity, move_dir, face_dir, speed, is_jump_interrupted, is_dodge_interrupted) #special dir was in position 4
+			_velocity = calculate_move_velocity(_velocity, move_dir, face_dir, speed, is_jump_interrupted) #special dir was in position 4
 			var new_velocity = move_and_slide_with_snap(_velocity, snap_vector, FLOOR_NORMAL, true)
 			
 			if is_on_wall():
@@ -164,7 +165,7 @@ func _physics_process(delta):
 				panning_down = false
 				home_camera_vertical()
 			
-			debug(move_dir, face_dir)
+			debug_print(move_dir, face_dir)
 		
 		else: #debug mode is on
 			var move_dir = Vector2(
@@ -191,7 +192,7 @@ func get_move_dir() -> Vector2:
 			-1.0 if Input.is_action_just_pressed("jump") and $ForgivenessTimer.time_left > 0 or Input.is_action_just_pressed("jump") and is_on_floor() 
 			else 0.0)
 
-func calculate_move_velocity(linear_velocity: Vector2, move_dir, face_dir, speed, is_jump_interrupted, is_dodge_interrupted) -> Vector2:
+func calculate_move_velocity(linear_velocity: Vector2, move_dir, face_dir, speed, is_jump_interrupted) -> Vector2:
 	var out: = linear_velocity
 	
 	var friction = false
@@ -910,7 +911,7 @@ func home_camera_horizontal():
 	yield(tween, "tween_completed")
 
 func _input(event):
-	if event.is_action_pressed("movement"):
+	if event.is_action_pressed("movement_profile"):
 		if movement_profile == "chi":
 			movement_profile = "mu"
 			

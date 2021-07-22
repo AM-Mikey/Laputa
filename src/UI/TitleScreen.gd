@@ -1,8 +1,7 @@
 extends Control
 
 const LEVELSELECT = preload("res://src/UI/LevelSelect.tscn")
-const SETTINGS = preload("res://src/UI/Settings.tscn")
-const KEYCONFIG = preload("res://src/UI/KeyConfig.tscn")
+const OPTIONS = preload("res://src/UI/Options.tscn")
 
 onready var world = get_tree().get_root().get_node("World")
 onready var player = get_tree().get_root().get_node("World/Recruit")
@@ -77,7 +76,7 @@ func _on_Load_pressed():
 
 
 func _on_Options_pressed():
-	get_parent().add_child(SETTINGS.instance())
+	get_parent().add_child(OPTIONS.instance())
 
 
 func _on_Level_pressed():
@@ -88,8 +87,5 @@ func _on_Quit_pressed():
 	get_tree().quit()
 
 
-func _on_KeyConfig_pressed():
-	get_parent().add_child(KEYCONFIG.instance())
-	
 func _on_viewport_size_changed():
 	$MarginContainer.rect_size = get_tree().get_root().size / world.resolution_scale
