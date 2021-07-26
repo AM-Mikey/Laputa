@@ -8,7 +8,7 @@ var half_max_x_speed = max_x_speed/2
 export var jump_speed = 180 #was 195 for 4 blocks
 #export var normal_jump_speed = 195
 #export var long_jump_speed = 150
-var movement_profile = "chi"
+var movement_profile = "sigma"
 
 export var minimum_jump_time = 0.1
 export var minimum_direction_time = 1.0 #was 0.5  #scrapped idea where cave story forces you to jump a certain x distance when going max speed before jumping
@@ -39,7 +39,7 @@ onready var world = get_tree().get_root().get_node("World")
 func _ready():
 	acceleration = 2.5 #was 5
 	ground_cof = 0.1 #was 0.2
-	air_cof = 0.05 # was 0.05
+	air_cof = 0.00 # was 0.05
 
 func _physics_process(delta):
 	#print("Velocity: ", _velocity)
@@ -59,6 +59,12 @@ func _physics_process(delta):
 			if is_on_ceiling():
 				#if bonk_dir == Vector2.ZERO:
 				$BonkSound.play()
+				var bonk = load("res://src/Effect/BonkEffect.tscn").instance()
+				var bonk_position = position
+				bonk_position.y -= 16
+				bonk.position = bonk_position
+				world.add_child(bonk)
+				
 			
 			if is_on_floor(): #start forgiveness timer on any frame they're on
 				jump_type = ""
@@ -77,6 +83,9 @@ func _physics_process(delta):
 				
 				if $ForgivenessTimer.time_left == 0: #just landed
 					$LandSound.play()
+					var land = load("res://src/Effect/BonkEffect.tscn").instance()
+					land.position = position
+					world.add_child(land)
 				$ForgivenessTimer.start(forgiveness_time)
 
 			else: #not on floor
@@ -809,7 +818,6 @@ func _on_limit_camera(left, right, top, bottom):
 		
 		camera.limit_left = left - extra_margin
 		camera.limit_right = right + extra_margin
-		#world.get_node("UILayer/HUD").rect_position.x = extra_margin #shift ui over to fit within bars
 		
 		var left_pillar = BLACKBAR.instance()
 		left_pillar.name = "BlackBarLeft"
@@ -827,14 +835,13 @@ func _on_limit_camera(left, right, top, bottom):
 	else:
 		camera.limit_left = left
 		camera.limit_right = right
-		world.get_node("UILayer/HUD").rect_position.x = 0
+#		world.get_node("UILayer/HUD").rect_position.x = 0
 	
 	if OS.get_window_size().y > (bottom - top) * world.resolution_scale:
 		print("WARNING: window height larger than camera limit")
 		var extra_margin = (OS.get_window_size().y - (bottom - top))/2
 		camera.limit_top = top - extra_margin
 		camera.limit_bottom = bottom  + extra_margin
-		#world.get_node("UILayer/HUD").rect_position.y = extra_margin #shift ui over to fit within bars
 		
 		var top_pillar = BLACKBAR.instance()
 		top_pillar.name = "BlackBarTop"
@@ -852,7 +859,7 @@ func _on_limit_camera(left, right, top, bottom):
 	else:
 		camera.limit_top = top
 		camera.limit_bottom = bottom
-		world.get_node("UILayer/HUD").rect_position.y = 0
+#		world.get_node("UILayer/HUD").rect_position.y = 0
 
 func pan_camera_vertical(direction):
 	var camera = $Camera2D
@@ -912,7 +919,7 @@ func home_camera_horizontal():
 
 func _input(event):
 	if event.is_action_pressed("movement_profile"):
-		if movement_profile == "chi":
+		if movement_profile == "sigma":
 			movement_profile = "mu"
 			
 			max_x_speed = 82.5
@@ -931,6 +938,17 @@ func _input(event):
 			acceleration = 2.5
 			ground_cof = 0.1
 			air_cof = 0.05
+		
+		elif movement_profile == "chi":
+			movement_profile = "sigma"
+			
+			max_x_speed = 90
+			jump_speed = 180
+			
+			acceleration = 2.5
+			ground_cof = 0.1
+			air_cof = 0.00
+		
 		
 		yield(get_tree(), "idle_frame")
 		var popup = POPUP.instance()

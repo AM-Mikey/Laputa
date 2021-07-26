@@ -1,12 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/UI/TitleScreen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/HUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UI/PauseMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Actor/Player/Recruit.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/UI/ItemMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/World.gd" type="Script" id=8]
-[ext_resource path="res://assets/Music/Cave Story Beta 2001-09-30.ogg" type="AudioStream" id=9]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 8 )
@@ -28,15 +26,11 @@ max_hp = 8
 [node name="PauseMenu" parent="UILayer" instance=ExtResource( 3 )]
 visible = false
 
-[node name="ItemMenu" parent="UILayer" instance=ExtResource( 6 )]
-visible = false
-
 [node name="TitleScreen" parent="UILayer" instance=ExtResource( 1 )]
 anchor_right = 0.683
 anchor_bottom = 0.444
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
 bus = "Music"
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="."]

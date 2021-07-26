@@ -3,7 +3,11 @@ extends Control
 var _hurt = load("res://assets/SFX/snd_quote_hurt.ogg")
 
 onready var player = get_tree().get_root().get_node("World/Recruit")
+onready var world = get_tree().get_root().get_node("World")
 
+func _ready():
+	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
+	_on_viewport_size_changed()
 
 func _process(delta):
 	if player.get_node("WeaponManager").weapon != null:
@@ -27,8 +31,8 @@ func _on_Recruit_setup_ui(hp, max_hp, total_xp, level, xp, max_xp, needs_ammo, a
 	$XpBar/XpProgress.max_value = max_xp
 	
 	if icon_texture != null:
-		$Weapon/Sprite.texture = icon_texture
-		$Weapon/Sprite/Shadow.texture = icon_texture
+		$Weapon/HBoxContainer/Sprite.texture = icon_texture
+		$Weapon/HBoxContainer/Sprite/Shadow.texture = icon_texture
 	
 	if needs_ammo:
 		display_ammo_number(ammo, max_ammo)
@@ -99,8 +103,8 @@ func _on_Recruit_player_experience_updated(total_xp, level, max_level, xp, max_x
 
 
 func _on_weapon_updated(icon_texture, level, xp, max_xp):
-	$Weapon/Sprite.texture = icon_texture
-	$Weapon/Sprite/Shadow.texture = icon_texture
+	$Weapon/HBoxContainer/Sprite.texture = icon_texture
+	$Weapon/HBoxContainer/Sprite/Shadow.texture = icon_texture
 	$XpBar/Num.frame_coords.x = level
 	$XpBar/XpProgress.value = xp
 	$XpBar/XpProgress.max_value = max_xp
@@ -112,65 +116,73 @@ func _on_ammo_updated(needs_ammo, ammo, max_ammo):
 		display_infinite_ammo()
 
 func display_ammo_number(ammo, max_ammo):
-	$Weapon/AmmoCount.visible = true
+	var ammo_count = $Weapon/HboxContainer/AmmoCount
+	var num1 = ammo_count.get_node("Num1")
+	var num2 = ammo_count.get_node("Num2")
+	var num3 = ammo_count.get_node("Num3")
+	var num4 = ammo_count.get_node("Num4")
+	var num5 = ammo_count.get_node("Num5")
+	var num6 = ammo_count.get_node("Num6")
+	
+	ammo_count.visible = true
 	if ammo >= 0 and ammo < 10:
-		$Weapon/AmmoCount/Num1.visible = false
-		$Weapon/AmmoCount/Num2.visible = false
-		$Weapon/AmmoCount/Num3.visible = true
-		$Weapon/AmmoCount/Num3.frame_coords.x = ammo
+		num1.visible = false
+		num2.visible = false
+		num3.visible = true
+		num3.frame_coords.x = ammo
 	elif ammo >= 10 and ammo < 100:
-		$Weapon/AmmoCount/Num1.visible = false
-		$Weapon/AmmoCount/Num2.visible = true
-		$Weapon/AmmoCount/Num3.visible = true
-		$Weapon/AmmoCount/Num2.frame_coords.x = (ammo % 100) / 10
-		$Weapon/AmmoCount/Num3.frame_coords.x = ammo % 10
+		num1.visible = false
+		num2.visible = true
+		num3.visible = true
+		num2.frame_coords.x = (ammo % 100) / 10
+		num3.frame_coords.x = ammo % 10
 	elif ammo >= 100 and ammo < 1000:
-		$Weapon/AmmoCount/Num1.visible = true
-		$Weapon/AmmoCount/Num2.visible = true
-		$Weapon/AmmoCount/Num3.visible = true
-		$Weapon/AmmoCount/Num1.frame_coords.x = (ammo % 1000) / 100
-		$Weapon/AmmoCount/Num2.frame_coords.x = (ammo % 100) / 10
-		$Weapon/AmmoCount/Num3.frame_coords.x = ammo % 10
+		num1.visible = true
+		num2.visible = true
+		num3.visible = true
+		num1.frame_coords.x = (ammo % 1000) / 100
+		num2.frame_coords.x = (ammo % 100) / 10
+		num3.frame_coords.x = ammo % 10
 	elif ammo >= 1000:
-		$Weapon/AmmoCount/Num1.visible = true
-		$Weapon/AmmoCount/Num2.visible = true
-		$Weapon/AmmoCount/Num3.visible = true
-		$Weapon/AmmoCount/Num1.frame_coords.x = 9
-		$Weapon/AmmoCount/Num2.frame_coords.x = 9
-		$Weapon/AmmoCount/Num3.frame_coords.x = 9
+		num1.visible = true
+		num2.visible = true
+		num3.visible = true
+		num1.frame_coords.x = 9
+		num2.frame_coords.x = 9
+		num3.frame_coords.x = 9
 	else:
 		printerr("ERROR: hud cannot display current ammo number with value: ", ammo)
 
 	if max_ammo >= 0 and max_ammo < 10:
-		$Weapon/AmmoCount/Num4.visible = true
-		$Weapon/AmmoCount/Num5.visible = false
-		$Weapon/AmmoCount/Num6.visible = false
-		$Weapon/AmmoCount/Num4.frame_coords.x = max_ammo
+		num4.visible = true
+		num5.visible = false
+		num6.visible = false
+		num4.frame_coords.x = max_ammo
 	elif max_ammo >= 10 and max_ammo < 100:
-		$Weapon/AmmoCount/Num4.visible = true
-		$Weapon/AmmoCount/Num5.visible = true
-		$Weapon/AmmoCount/Num6.visible = false
-		$Weapon/AmmoCount/Num4.frame_coords.x = (max_ammo % 100) / 10
-		$Weapon/AmmoCount/Num5.frame_coords.x = max_ammo % 10
+		num4.visible = true
+		num5.visible = true
+		num6.visible = false
+		num4.frame_coords.x = (max_ammo % 100) / 10
+		num5.frame_coords.x = max_ammo % 10
 	elif max_ammo >= 100 and max_ammo < 1000:
-		$Weapon/AmmoCount/Num4.visible = true
-		$Weapon/AmmoCount/Num5.visible = true
-		$Weapon/AmmoCount/Num6.visible = true
-		$Weapon/AmmoCount/Num4.frame_coords.x = (max_ammo % 1000) / 100
-		$Weapon/AmmoCount/Num5.frame_coords.x = (max_ammo % 100) / 10
-		$Weapon/AmmoCount/Num6.frame_coords.x = max_ammo % 10
+		num4.visible = true
+		num5.visible = true
+		num6.visible = true
+		num4.frame_coords.x = (max_ammo % 1000) / 100
+		num5.frame_coords.x = (max_ammo % 100) / 10
+		num6.frame_coords.x = max_ammo % 10
 	elif max_ammo >= 1000:
-		$Weapon/AmmoCount/Num4.visible = true
-		$Weapon/AmmoCount/Num5.visible = true
-		$Weapon/AmmoCount/Num6.visible = true
-		$Weapon/AmmoCount/Num4.frame_coords.x = 9
-		$Weapon/AmmoCount/Num5.frame_coords.x = 9
-		$Weapon/AmmoCount/Num6.frame_coords.x = 9
+		num4.visible = true
+		num5.visible = true
+		num6.visible = true
+		num4.frame_coords.x = 9
+		num5.frame_coords.x = 9
+		num6.frame_coords.x = 9
 	else:
 		printerr("ERROR: hud cannot display max ammo number with value: ", max_ammo)
 
 func display_infinite_ammo():
-	$Weapon/AmmoCount.visible = false
+	$Weapon/HBoxContainer/AmmoCount.visible = false
 
 
 func _on_Recruit_cooldown_updated(time):
@@ -226,3 +238,8 @@ func _on_boss_health_updated(hp):
 	$Boss/LostTween.stop_all()
 	$Boss/LostTween.interpolate_property($Boss/HpLost, "value", $Boss/HpLost.value, hp, 0.4, Tween.TRANS_SINE, Tween.EASE_IN_OUT, 0.4)
 	$Boss/LostTween.start()
+	
+	
+	
+func _on_viewport_size_changed():
+	rect_size = get_tree().get_root().size / world.resolution_scale

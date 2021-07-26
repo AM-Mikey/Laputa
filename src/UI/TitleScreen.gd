@@ -30,9 +30,9 @@ func _ready():
 			5, 7, 10, 12:
 				days_last_month = 30
 			
-		$MarginContainer/VersionLabel.text = "Alpha Version: " + str(months_since-1) + "m " + str(days_last_month + days_since) + "d"
+		$VersionLabel.text = "Alpha Version: " + str(months_since-1) + "m " + str(days_last_month + days_since) + "d"
 	else:
-		$MarginContainer/VersionLabel.text = "Alpha Version: " + str(months_since) + "m " + str(days_since) + "d"
+		$VersionLabel.text = "Alpha Version: " + str(months_since) + "m " + str(days_since) + "d"
 	
 										#LOAD BUTTON STUFF
 	var file = File.new()
@@ -44,10 +44,10 @@ func _ready():
 			if data != null:
 				if data.has("player_data"):
 					if data["player_data"].size() == 0:
-						$MarginContainer/CenterContainer/VBoxContainer/Load.queue_free()
-				else:$MarginContainer/CenterContainer/VBoxContainer/Load.queue_free()
-			else:$MarginContainer/CenterContainer/VBoxContainer/Load.queue_free()
-		else: $MarginContainer/CenterContainer/VBoxContainer/Load.queue_free()
+						$VBoxContainer/Load.queue_free()
+				else:$VBoxContainer/Load.queue_free()
+			else:$VBoxContainer/Load.queue_free()
+		else: $VBoxContainer/Load.queue_free()
 	
 
 func _on_New_pressed():
@@ -88,4 +88,4 @@ func _on_Quit_pressed():
 
 
 func _on_viewport_size_changed():
-	$MarginContainer.rect_size = get_tree().get_root().size / world.resolution_scale
+	rect_size = get_tree().get_root().size / world.resolution_scale

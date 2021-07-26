@@ -7,18 +7,17 @@ export var cycle_delay = 0.6
 export var highlighted_scale = Vector2(2,2)
 #export var texture_size = Vector2(16, 32)
 
-var disabled = true
+var disabled = false
 
 onready var tween = get_parent().get_parent().get_node("Tween")
 onready var timer = get_parent().get_parent().get_node("CycleDelay")
 onready var timer_half = get_parent().get_parent().get_node("HalfCycle")
-onready var label = get_parent().get_node("Label")
-onready var description = get_parent().get_parent().get_parent().get_node("Description/MarginContainer/Label")
 
 onready var player = get_tree().get_root().get_node("World/Recruit")
 
-func setup():
-	
+onready var inventory = get_tree().get_root().get_node("World/UILayer/Inventory")
+
+func _ready():
 	#clear all children
 	var weapon_sprites = get_children()
 	for s in weapon_sprites: 
@@ -35,8 +34,8 @@ func setup():
 		
 		if player.weapon_array.find(w) == 0:
 			sprite.scale = highlighted_scale
-			label.text = w.display_name
-			description.text = w.description
+			inventory.header.text = w.display_name
+			inventory.body.text = w.description
 			
 	
 	timer_half.start(0.000001) #just so it sets z indexes
@@ -62,8 +61,8 @@ func _input(event):
 			var active_child = get_child(0)
 			var old_child = get_child(1)
 			
-			label.text = player.weapon_array.front().display_name
-			description.text = player.weapon_array.front().description
+			inventory.header.text = player.weapon_array.front().display_name
+			inventory.body.text = player.weapon_array.front().description
 			
 			tween.interpolate_property(old_child, "scale", old_child.scale, Vector2(1, 1), cycle_delay, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 			tween.start()
@@ -85,8 +84,8 @@ func _input(event):
 			var active_child = get_child(0)
 			var old_child = get_child(weapons_size - 1)
 			
-			label.text = player.weapon_array.front().display_name
-			description.text = player.weapon_array.front().description
+			inventory.header.text = player.weapon_array.front().display_name
+			inventory.body.text = player.weapon_array.front().description
 			
 			tween.interpolate_property(old_child, "scale", old_child.scale, Vector2(1, 1), cycle_delay, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 			tween.start()

@@ -3105,10 +3105,11 @@ extents = Vector2( 8, 10.5 )
 extents = Vector2( 6, 7.5 )
 
 [sub_resource type="RectangleShape2D" id=53]
-extents = Vector2( 4, 1 )
-
-[sub_resource type="RectangleShape2D" id=54]
 extents = Vector2( 6, 0.5 )
+
+[sub_resource type="RayShape2D" id=54]
+length = 0.0
+slips_on_slope = true
 
 [node name="Recruit" type="KinematicBody2D"]
 collision_mask = 520
@@ -3247,7 +3248,7 @@ stream = ExtResource( 9 )
 bus = "SFX"
 
 [node name="ItemDetector" type="Area2D" parent="."]
-modulate = Color( 1, 1, 1, 0.2 )
+modulate = Color( 0.117647, 1, 0, 0.2 )
 show_behind_parent = true
 position = Vector2( 0, -2 )
 collision_layer = 0
@@ -3258,7 +3259,7 @@ position = Vector2( 0, -7.5 )
 shape = SubResource( 51 )
 
 [node name="HurtDetector" type="Area2D" parent="."]
-modulate = Color( 1, 1, 1, 0.2 )
+modulate = Color( 0.992157, 0, 1, 0.282353 )
 show_behind_parent = true
 position = Vector2( 0, -2 )
 collision_layer = 0
@@ -3267,30 +3268,6 @@ collision_mask = 24578
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtDetector"]
 position = Vector2( 0, -5.5 )
 shape = SubResource( 52 )
-
-[node name="BonkDetectorLeft" type="Area2D" parent="."]
-visible = false
-show_behind_parent = true
-position = Vector2( 0, 3 )
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BonkDetectorLeft"]
-modulate = Color( 0.12549, 0, 1, 0.392157 )
-position = Vector2( -2, -19 )
-shape = SubResource( 53 )
-
-[node name="BonkDetectorRight" type="Area2D" parent="."]
-visible = false
-show_behind_parent = true
-position = Vector2( 0, 3 )
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BonkDetectorRight"]
-modulate = Color( 0.12549, 0, 1, 0.392157 )
-position = Vector2( 2, -19 )
-shape = SubResource( 53 )
 
 [node name="HeadDetector" type="Area2D" parent="."]
 visible = false
@@ -3303,6 +3280,20 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadDetector"]
 modulate = Color( 0.12549, 0, 1, 0.392157 )
 position = Vector2( 0, -15.5 )
+shape = SubResource( 53 )
+
+[node name="BonkPreventionLeft" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, -7 )
+rotation = 1.5708
+scale = Vector2( 0.5, 1 )
+shape = SubResource( 54 )
+
+[node name="BonkPreventionRight" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, -7 )
+rotation = -1.5708
+scale = Vector2( 0.5, 1 )
 shape = SubResource( 54 )
 
 [connection signal="area_entered" from="ItemDetector" to="." method="_on_EntityDetector_area_entered"]
@@ -3313,7 +3304,5 @@ shape = SubResource( 54 )
 [connection signal="area_exited" from="HurtDetector" to="." method="_on_HurtDetector_area_exited"]
 [connection signal="body_entered" from="HurtDetector" to="." method="_on_HurtDetector_body_entered"]
 [connection signal="body_exited" from="HurtDetector" to="." method="_on_HurtDetector_body_exited"]
-[connection signal="body_entered" from="BonkDetectorLeft" to="." method="_on_BonkDetector_body_entered" binds= [ Vector2( -1, 0 ) ]]
-[connection signal="body_entered" from="BonkDetectorRight" to="." method="_on_BonkDetector_body_entered" binds= [ Vector2( 1, 0 ) ]]
 [connection signal="body_entered" from="HeadDetector" to="." method="_on_HeadDetector_body_entered"]
 [connection signal="body_exited" from="HeadDetector" to="." method="_on_HeadDetector_body_exited"]

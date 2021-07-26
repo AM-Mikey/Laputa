@@ -3,6 +3,7 @@ extends Node2D
 const LEVELNAME = preload("res://src/UI/LevelName.tscn")
 const TRANSITION = preload("res://src/UI/Transition.tscn")
 const OPTIONS = preload("res://src/UI/Options.tscn")
+const INVENTORY = preload("res://src/UI/Inventory.tscn")
 
 var resolution_scale = 4.0
 var viewport_size_ignore = false
@@ -64,6 +65,13 @@ func _input(event):
 		load_player_data_from_save()
 		load_level_data_from_save()
 		copy_level_data_to_temp()
+	if event.is_action_pressed("inventory") and not $Recruit.disabled:
+		if not $UILayer.has_node("Inventory") and not get_tree().paused: 
+			get_tree().paused = true
+			$UILayer/HUD.visible = false
+			var inventory = INVENTORY.instance()
+			$UILayer.add_child(inventory)
+
 
 func _on_level_change(level, door_index, level_name, music):
 	##### add a transition

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/UI/HUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/UI/NumberNew.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/UI/HUD/BossOver.png" type="Texture" id=17]
 [ext_resource path="res://assets/UI/HUD/BossLost.png" type="Texture" id=18]
 [ext_resource path="res://assets/UI/HUD/BossCap.png" type="Texture" id=19]
+[ext_resource path="res://assets/Weapon/PolarStarIcon.png" type="Texture" id=20]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Flash"
@@ -27,80 +28,8 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = false
+tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Background:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("HpBar:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.001, 0.1, 0.2, 0.299, 0.4, 0.499, 0.5, 0.6, 0.699, 0.8, 0.899, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("XpBar:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("CooldownBar:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Weapon:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("MoneyCount:modulate")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
@@ -123,19 +52,11 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[node name="HUD" type="Control"]
+[node name="HUD" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -480.0
-margin_bottom = -270.0
+margin_bottom = 2.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 480.0
-margin_bottom = 272.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -149,32 +70,32 @@ volume_db = -5.0
 bus = "SFX"
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 56, 44 )
+position = Vector2( 16, 32 )
 texture = ExtResource( 3 )
+centered = false
 
 [node name="HpBar" type="Control" parent="."]
-margin_left = 32.0
-margin_top = 40.0
-margin_right = 96.0
-margin_bottom = 48.0
+margin_right = 480.0
+margin_bottom = 272.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HpLost" type="TextureProgress" parent="HpBar"]
-margin_left = 16.0
-margin_top = -5.0
-margin_right = 55.0
+margin_left = 48.0
+margin_top = 35.0
+margin_right = 86.0
+margin_bottom = 39.0
 texture_progress = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HpProgress" type="TextureProgress" parent="HpBar"]
-margin_left = 16.0
-margin_top = -5.0
-margin_right = 55.0
-margin_bottom = 3.0
+margin_left = 48.0
+margin_top = 35.0
+margin_right = 86.0
+margin_bottom = 39.0
 value = 100.0
 texture_progress = ExtResource( 4 )
 __meta__ = {
@@ -182,40 +103,40 @@ __meta__ = {
 }
 
 [node name="Num1" type="Sprite" parent="HpBar"]
-position = Vector2( 0, -4 )
+position = Vector2( 28, 32 )
 texture = ExtResource( 2 )
+centered = false
 hframes = 11
 vframes = 6
 frame = 64
 
 [node name="Num2" type="Sprite" parent="HpBar"]
-position = Vector2( 8, -4 )
+position = Vector2( 36, 32 )
 texture = ExtResource( 2 )
+centered = false
 hframes = 11
 vframes = 6
 frame = 64
 
 [node name="HpOver" type="Sprite" parent="HpBar"]
-position = Vector2( 35, -3 )
+position = Vector2( 45, 34 )
 texture = ExtResource( 12 )
+centered = false
 
 [node name="LostTween" type="Tween" parent="HpBar"]
 
 [node name="XpBar" type="Control" parent="."]
-margin_left = 56.0
-margin_top = 32.0
-margin_right = 96.0
-margin_bottom = 40.0
+margin_right = 480.0
+margin_bottom = 272.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="XpProgress" type="TextureProgress" parent="XpBar"]
-visible = false
-margin_left = -12.0
-margin_top = 11.0
-margin_right = 27.0
-margin_bottom = 27.0
+margin_left = 44.0
+margin_top = 43.0
+margin_right = 83.0
+margin_bottom = 47.0
 value = 100.0
 texture_progress = ExtResource( 5 )
 __meta__ = {
@@ -224,39 +145,39 @@ __meta__ = {
 
 [node name="XpFlash" type="Sprite" parent="XpBar"]
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( -12, 11 )
+position = Vector2( 44, 43 )
 texture = ExtResource( 6 )
 centered = false
 
 [node name="Num" type="Sprite" parent="XpBar"]
-position = Vector2( -20, 12 )
+position = Vector2( 36, 44 )
 texture = ExtResource( 2 )
 hframes = 11
 vframes = 6
 frame = 56
 
 [node name="XpOver" type="Sprite" parent="XpBar"]
-position = Vector2( 7, 13 )
+position = Vector2( 63, 45 )
 texture = ExtResource( 11 )
 
 [node name="XpMax" type="Sprite" parent="XpBar"]
 visible = false
-position = Vector2( 7, 13 )
+position = Vector2( 41, 42 )
 texture = ExtResource( 13 )
+centered = false
 
 [node name="CooldownBar" type="Control" parent="."]
-margin_left = 40.0
-margin_top = 51.0
-margin_right = 77.0
-margin_bottom = 53.0
+margin_right = 480.0
+margin_bottom = 272.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureProgress" type="TextureProgress" parent="CooldownBar"]
-visible = false
-margin_right = 37.0
-margin_bottom = 2.0
+margin_left = 41.0
+margin_top = 51.0
+margin_right = 78.0
+margin_bottom = 53.0
 value = 100.0
 texture_progress = ExtResource( 8 )
 __meta__ = {
@@ -264,29 +185,33 @@ __meta__ = {
 }
 
 [node name="CooldownOver" type="Sprite" parent="CooldownBar"]
-position = Vector2( 19, 1 )
+position = Vector2( 60, 52 )
 texture = ExtResource( 9 )
 
-[node name="Weapon" type="HBoxContainer" parent="."]
-margin_left = 16.0
+[node name="Weapon" type="MarginContainer" parent="."]
+margin_right = 480.0
+margin_bottom = 272.0
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Weapon"]
+margin_left = 32.0
 margin_top = 16.0
-margin_right = 96.0
-margin_bottom = 32.0
+margin_right = 464.0
+margin_bottom = 256.0
 rect_min_size = Vector2( 64, 16 )
-alignment = 1
+
+[node name="Sprite" type="TextureRect" parent="Weapon/HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 240.0
+texture = ExtResource( 20 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="TextureRect" parent="Weapon"]
-margin_left = 38.0
-margin_right = 38.0
-margin_bottom = 16.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Shadow" type="TextureRect" parent="Weapon/Sprite"]
+[node name="Shadow" type="TextureRect" parent="Weapon/HBoxContainer/Sprite"]
 modulate = Color( 0, 0, 0, 1 )
 self_modulate = Color( 1, 1, 1, 0.784314 )
 show_behind_parent = true
@@ -294,16 +219,20 @@ margin_left = 1.0
 margin_top = 1.0
 margin_right = 65.0
 margin_bottom = 17.0
+texture = ExtResource( 20 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AmmoCount" type="Control" parent="Weapon"]
-margin_left = 42.0
-margin_right = 42.0
-margin_bottom = 16.0
+[node name="AmmoCount" type="Control" parent="Weapon/HBoxContainer"]
+margin_left = 36.0
+margin_right = 36.0
+margin_bottom = 240.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Divider" type="Sprite" parent="Weapon/AmmoCount"]
+[node name="Divider" type="Sprite" parent="Weapon/HBoxContainer/AmmoCount"]
 position = Vector2( 33, 5 )
 texture = ExtResource( 2 )
 centered = false
@@ -312,7 +241,7 @@ hframes = 11
 vframes = 6
 frame = 21
 
-[node name="Divider2" type="Sprite" parent="Weapon/AmmoCount/Divider"]
+[node name="Divider2" type="Sprite" parent="Weapon/HBoxContainer/AmmoCount/Divider"]
 position = Vector2( -8, 8 )
 texture = ExtResource( 2 )
 centered = false
@@ -321,40 +250,40 @@ hframes = 11
 vframes = 6
 frame = 21
 
-[node name="Num1" type="Sprite" parent="Weapon/AmmoCount"]
+[node name="Num1" type="Sprite" parent="Weapon/HBoxContainer/AmmoCount"]
 position = Vector2( 4, 4 )
 texture = ExtResource( 2 )
 hframes = 11
 vframes = 6
 frame = 1
 
-[node name="Num2" type="Sprite" parent="Weapon/AmmoCount"]
+[node name="Num2" type="Sprite" parent="Weapon/HBoxContainer/AmmoCount"]
 position = Vector2( 12, 4 )
 texture = ExtResource( 2 )
 hframes = 11
 vframes = 6
 
-[node name="Num3" type="Sprite" parent="Weapon/AmmoCount"]
+[node name="Num3" type="Sprite" parent="Weapon/HBoxContainer/AmmoCount"]
 position = Vector2( 20, 4 )
 texture = ExtResource( 2 )
 hframes = 11
 vframes = 6
 
-[node name="Num4" type="Sprite" parent="Weapon/AmmoCount"]
+[node name="Num4" type="Sprite" parent="Weapon/HBoxContainer/AmmoCount"]
 position = Vector2( 28, 12 )
 texture = ExtResource( 2 )
 hframes = 11
 vframes = 6
 frame = 12
 
-[node name="Num5" type="Sprite" parent="Weapon/AmmoCount"]
+[node name="Num5" type="Sprite" parent="Weapon/HBoxContainer/AmmoCount"]
 position = Vector2( 36, 12 )
 texture = ExtResource( 2 )
 hframes = 11
 vframes = 6
 frame = 11
 
-[node name="Num6" type="Sprite" parent="Weapon/AmmoCount"]
+[node name="Num6" type="Sprite" parent="Weapon/HBoxContainer/AmmoCount"]
 position = Vector2( 44, 12 )
 texture = ExtResource( 2 )
 hframes = 11
@@ -362,36 +291,34 @@ vframes = 6
 frame = 11
 
 [node name="MoneyCount" type="Control" parent="."]
-visible = false
-margin_left = 16.0
-margin_right = 56.0
-margin_bottom = 40.0
+margin_right = 480.0
+margin_bottom = 272.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Num1" type="Sprite" parent="MoneyCount"]
-visible = false
-position = Vector2( 10, 54 )
+position = Vector2( 24, 51 )
 texture = ExtResource( 14 )
+centered = false
 offset = Vector2( 0, -1 )
 hframes = 10
 vframes = 2
 frame = 10
 
 [node name="Num2" type="Sprite" parent="MoneyCount"]
-visible = false
-position = Vector2( 14, 54 )
+position = Vector2( 28, 51 )
 texture = ExtResource( 14 )
+centered = false
 offset = Vector2( 0, -1 )
 hframes = 10
 vframes = 2
 frame = 10
 
 [node name="Num3" type="Sprite" parent="MoneyCount"]
-visible = false
-position = Vector2( 18, 54 )
+position = Vector2( 32, 51 )
 texture = ExtResource( 14 )
+centered = false
 offset = Vector2( 0, -1 )
 hframes = 10
 vframes = 2
@@ -399,8 +326,8 @@ frame = 10
 
 [node name="Boss" type="Control" parent="."]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 480.0
+margin_bottom = 272.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -408,6 +335,7 @@ __meta__ = {
 [node name="Background" type="Sprite" parent="Boss"]
 position = Vector2( 256, 264 )
 texture = ExtResource( 16 )
+centered = false
 
 [node name="HpLost" type="TextureProgress" parent="Boss"]
 margin_left = 142.0
@@ -457,3 +385,4 @@ __meta__ = {
 [node name="BossCap" type="Sprite" parent="Boss"]
 position = Vector2( 197, 264 )
 texture = ExtResource( 19 )
+centered = false

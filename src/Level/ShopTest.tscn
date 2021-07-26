@@ -13,7 +13,6 @@
 [node name="ShopTest" type="Node2D"]
 script = ExtResource( 1 )
 level_name = "Decrepit Shop"
-music = "res://assets/Music/XXXX.ogg"
 
 [node name="Tiles" type="Node2D" parent="."]
 
