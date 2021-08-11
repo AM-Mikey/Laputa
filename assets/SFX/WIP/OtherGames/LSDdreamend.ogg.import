@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/LSDdreamend.ogg-880df8a06a0b16f83f4eca72db9d451f.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/OtherGames/LSDdreamend.ogg"
+dest_files=[ "res://.import/LSDdreamend.ogg-880df8a06a0b16f83f4eca72db9d451f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

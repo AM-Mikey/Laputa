@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/WindStereo.ogg-2ccc469b3ae54cb2611acd504de7bf3e.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/WindStereo.ogg"
+dest_files=[ "res://.import/WindStereo.ogg-2ccc469b3ae54cb2611acd504de7bf3e.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

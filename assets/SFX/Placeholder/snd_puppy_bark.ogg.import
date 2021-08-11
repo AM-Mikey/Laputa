@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/snd_puppy_bark.ogg-7b0a2ba8a651517a898f754a1ed49bee.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/Placeholder/snd_puppy_bark.ogg"
+dest_files=[ "res://.import/snd_puppy_bark.ogg-7b0a2ba8a651517a898f754a1ed49bee.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/HLclick.wav-353a88a5bc795264c4a8ba8fc8a7b6be.sample"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/OtherGames/HLclick.wav"
+dest_files=[ "res://.import/HLclick.wav-353a88a5bc795264c4a8ba8fc8a7b6be.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

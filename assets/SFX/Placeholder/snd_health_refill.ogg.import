@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/snd_health_refill.ogg-6a94b8d8d72bbe5e320cfe348b4ba851.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/Placeholder/snd_health_refill.ogg"
+dest_files=[ "res://.import/snd_health_refill.ogg-6a94b8d8d72bbe5e320cfe348b4ba851.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

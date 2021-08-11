@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/LSDambient.ogg-8a7c74308c4d84650d51c24cb692a91b.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/OtherGames/LSDambient.ogg"
+dest_files=[ "res://.import/LSDambient.ogg-8a7c74308c4d84650d51c24cb692a91b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

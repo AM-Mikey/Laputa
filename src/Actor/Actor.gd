@@ -6,9 +6,10 @@ const FLOOR_NORMAL: = Vector2.UP
 
 export var speed: = Vector2(150, 350)
 export var gravity: = 300
-var _velocity: = Vector2.ZERO
+var velocity: = Vector2.ZERO
 var acceleration = 50
 export var ground_cof = 0.2
 export var air_cof = 0.05
 
 var dead: bool = false
+var is_in_water = false

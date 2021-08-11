@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/snd_jaws.ogg-1927f5e7599d460b324f5a002c218bc9.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/Placeholder/snd_jaws.ogg"
+dest_files=[ "res://.import/snd_jaws.ogg-1927f5e7599d460b324f5a002c218bc9.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -2,10 +2,10 @@ extends Actor
 class_name Enemy, "res://assets/Icon/EnemyIcon.png"
 
 #const DAMAGENUMBER = preload("res://src/Effect/DamageNumber.tscn")
-const EFFECT = preload("res://src/Effect/Effect.tscn")
+const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
 const BLOOD = preload("res://src/Effect/EnemyBloodEffect.tscn")
-const HEART = preload("res://src/Actor/ItemActor/Heart.tscn")
-const EXPERIENCE = preload("res://src/Actor/ItemActor/Experience.tscn")
+const HEART = preload("res://src/Item/Heart.tscn")
+const EXPERIENCE = preload("res://src/Item/Experience.tscn")
 const AMMO = preload("res://src/Item/Ammo.tscn")
 
 onready var player_actor = get_tree().get_root().get_node("World/Recruit")
@@ -62,7 +62,6 @@ func _physics_process(delta):
 func _ready():
 	add_to_group("Enemies")
 
-
 	#var timer = Timer.new()
 	timer.one_shot = true
 	timer.name = "DamagenumTimer"
@@ -70,10 +69,9 @@ func _ready():
 	add_child(timer)
 
 func hit(damage, blood_direction):
-	$PosHurt.play()
 	hp -= damage
 	var blood = BLOOD.instance()
-	get_parent().add_child(blood)
+	get_tree().get_root().get_node("World/Front").add_child(blood)
 	blood.global_position = global_position
 	blood.direction = blood_direction
 
@@ -81,6 +79,8 @@ func hit(damage, blood_direction):
 	
 	if hp <= 0:
 		die()
+	else:
+		$PosHurt.play()
 
 
 func prepare_damagenum(damage):
@@ -96,8 +96,8 @@ func prepare_damagenum(damage):
 		
 
 func _on_DamagenumTimer_timeout():
-		damagenum.position = global_position #bug here
-		get_parent().add_child(damagenum)
+		damagenum.position = global_position
+		get_tree().get_root().get_node("World/Front").add_child(damagenum)
 		damagenum = null
 
 func die():
@@ -109,27 +109,18 @@ func die():
 		
 		player_actor.is_in_enemy = false #THIS IS A BAD WAY TO DO THIS if a player is in a different enemy when this one dies, they will be immune to that enemy
 		
-		var effect = EFFECT.instance()
-		get_parent().add_child(effect)
-		effect.position = global_position
+		var explosion = EXPLOSION.instance()
+		get_tree().get_root().get_node("World/Front").add_child(explosion)
+		explosion.position = global_position
 		
-		var player = effect.get_node("AnimationPlayer")
-		player.play("Explode")
-		visible = false
-		set_collision_layer_bit(1, false) #turn off the fact you are an enemy
-		set_collision_mask_bit(0, false) #turn off checking for player
-		#$CollisionShape2D.disabled = true #isnt doing anything for some reason
-		yield(player, "animation_finished")
-		effect.queue_free()
 		if get_parent().get_parent() is Path2D:
 			get_parent().get_parent().queue_free()
 		else:
 			queue_free()
-
+	
 	
 func do_death_drop():
 	var heart = HEART.instance()
-	var experience = EXPERIENCE.instance()
 	var ammo = AMMO.instance()
 	
 	var player_needs_ammo = false
@@ -153,27 +144,34 @@ func do_death_drop():
 			1,2: heart.value = 2
 			3,4,5: heart.value = 4
 			6,7,8,9,10 : heart.value = 8
-		get_tree().get_current_scene().add_child(heart)
+		get_tree().get_root().get_node("World/Back").add_child(heart)
 	elif drop > heart_chance and drop <= heart_chance + experience_chance:
-		experience.position = position
+
+		var loop_times = 1
+		var value = 1
+		
 		match level:
 			1:
-				experience.value = 1
-				get_tree().get_current_scene().add_child(experience)
+				pass
 			2:
-				experience.value = 1
-				get_tree().get_current_scene().add_child(experience)
-				get_tree().get_current_scene().add_child(experience)
+				loop_times = 2
 			3:
-				experience.value = 3
-				get_tree().get_current_scene().add_child(experience)
+				loop_times = 3
 			4:
-				experience.value = 4
-				get_tree().get_current_scene().add_child(experience)
+				loop_times = 4
+			5:
+				value = 5
+
+		while loop_times > 0:
+			var experience = EXPERIENCE.instance()
+			experience.value = value
+			experience.position = position
+			get_tree().get_root().get_node("World/Back").add_child(experience)
+			loop_times -= 1
 
 	else:
 		ammo.position = position
 		match level:
 			1,2: ammo.value = 0.2
 			3,4,5,6,7,8,9,10: ammo.value = 0.5
-		get_tree().get_current_scene().add_child(ammo)
+		get_tree().get_root().get_node("World/Back").add_child(ammo)

@@ -11,7 +11,7 @@
 [ext_resource path="res://src/Tile/TriggerTile/WaterTrigger.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Tile/TriggerTile/SemiSolidTrigger.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Tile/TriggerTile/ConveyorTrigger.tscn" type="PackedScene" id=11]
-[ext_resource path="res://StairsTrigger.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/Tile/TriggerTile/StairsTrigger.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Tile/Conveyor.tres" type="TileSet" id=15]
 

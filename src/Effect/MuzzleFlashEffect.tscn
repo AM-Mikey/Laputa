@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/Effect/MuzzleFlash.png" type="Texture" id=1]
+[ext_resource path="res://src/Effect/MuzzleFlashEffect.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "MuzzleFlash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ 0, 1 ]
+}
+
+[node name="MuzzleFlashEffect" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/MuzzleFlash = SubResource( 1 )

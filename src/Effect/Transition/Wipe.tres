@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://assets/Effect/Transition/WipeDown.png" type="Texture" id=1]
+[ext_resource path="res://src/Effect/Transition/Wipe.shader" type="Shader" id=2]
+
+[resource]
+shader = ExtResource( 2 )
+shader_param/cutoff = 0.0
+shader_param/mask = ExtResource( 1 )

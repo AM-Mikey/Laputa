@@ -2,8 +2,8 @@ extends Player
 
 
 func _physics_process(delta):
-	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
-	var is_dodge_interrupted: = Input.is_action_just_released("dodge") and _velocity.y < 0.0
+	var is_jump_interrupted: = Input.is_action_just_released("jump") and velocity.y < 0.0
+	var is_dodge_interrupted: = Input.is_action_just_released("dodge") and velocity.y < 0.0
 	var move_direction = get_move_direction()
 	var look_direction = get_look_direction()
 	var special_direction = get_special_direction(move_direction, look_direction)
@@ -11,8 +11,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("dodge") and $Timer.time_left == 0:
 		$Timer.start(dodge_time)
 
-	_velocity = calculate_move_velocity(_velocity, move_direction, look_direction, special_direction, speed, is_jump_interrupted, is_dodge_interrupted)
-	_velocity = move_and_slide(_velocity, FLOOR_NORMAL)
+	velocity = calculate_movevelocity(velocity, move_direction, look_direction, special_direction, speed, is_jump_interrupted, is_dodge_interrupted)
+	velocity = move_and_slide(velocity, FLOOR_NORMAL)
 	
 	animate(move_direction, look_direction)
 	
@@ -41,8 +41,8 @@ func get_special_direction(move_direction, look_direction) -> Vector2:
 		return Vector2.ZERO
 	
 
-func calculate_move_velocity(
-		linear_velocity: Vector2,
+func calculate_movevelocity(
+		linearvelocity: Vector2,
 		move_direction: Vector2,
 		look_direction: Vector2,
 		special_direction: Vector2,
@@ -51,7 +51,7 @@ func calculate_move_velocity(
 		is_dodge_interrupted: bool
 		) -> Vector2:
 	
-	var out: = linear_velocity
+	var out: = linearvelocity
 	
 	if special_direction == Vector2.ZERO:
 		out.x = speed.x * move_direction.x

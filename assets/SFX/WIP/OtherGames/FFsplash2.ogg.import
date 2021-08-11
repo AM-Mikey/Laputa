@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/FFsplash2.ogg-d9b7deca4ac85d0518d8b1e9c5045181.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/OtherGames/FFsplash2.ogg"
+dest_files=[ "res://.import/FFsplash2.ogg-d9b7deca4ac85d0518d8b1e9c5045181.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

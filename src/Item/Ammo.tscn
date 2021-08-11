@@ -21,18 +21,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 2, 2 ), Vector2( 1, 2 ), Vector2( 2, 2 ), Vector2( 0, 2 ), Vector2( 2, 2 ), Vector2( 1, 2 ), Vector2( 2, 2 ), Vector2( 0, 0 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:ammo")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0.5 ]
-}
 
 [sub_resource type="Animation" id=3]
 length = 3.0

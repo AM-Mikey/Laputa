@@ -1,15 +1,15 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/UI/Font/Momo.tres" type="DynamicFont" id=1]
-[ext_resource path="res://assets/UI/TitleLogo.png" type="Texture" id=2]
+[ext_resource path="res://assets/UI/TitleScreen/TitleLogo.png" type="Texture" id=2]
 [ext_resource path="res://src/UI/TitleScreen.gd" type="Script" id=3]
 [ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=4]
 [ext_resource path="res://assets/Music/laputaintro.ogg" type="AudioStream" id=5]
 [ext_resource path="res://src/UI/Font/WelcomeBack.tres" type="DynamicFont" id=6]
 
 [node name="TitleScreen" type="MarginContainer"]
-margin_right = 480.0
-margin_bottom = 272.0
+margin_right = 576.0
+margin_bottom = 360.0
 theme = ExtResource( 4 )
 custom_constants/margin_right = 16
 custom_constants/margin_top = 16
@@ -20,16 +20,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Theme" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-autoplay = true
-bus = "Music"
-
 [node name="VersionLabel" type="Label" parent="."]
 margin_left = 16.0
-margin_top = 244.0
-margin_right = 464.0
-margin_bottom = 256.0
+margin_top = 332.0
+margin_right = 560.0
+margin_bottom = 344.0
 size_flags_vertical = 8
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -45,9 +40,9 @@ __meta__ = {
 [node name="BuildLabel" type="Label" parent="."]
 visible = false
 margin_left = 16.0
-margin_top = 244.0
-margin_right = 464.0
-margin_bottom = 256.0
+margin_top = 332.0
+margin_right = 560.0
+margin_bottom = 344.0
 size_flags_vertical = 8
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -63,70 +58,80 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 464.0
-margin_bottom = 256.0
+margin_right = 560.0
+margin_bottom = 344.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="TextureRect" parent="VBoxContainer"]
-margin_right = 448.0
-margin_bottom = 96.0
+margin_right = 544.0
+margin_bottom = 81.0
 texture = ExtResource( 2 )
 stretch_mode = 4
 
 [node name="New" type="Button" parent="VBoxContainer"]
-margin_left = 183.0
-margin_top = 100.0
-margin_right = 265.0
-margin_bottom = 122.0
+margin_left = 237.0
+margin_top = 85.0
+margin_right = 307.0
+margin_bottom = 107.0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 6 )
+action_mode = 0
 text = "New Game"
 
 [node name="Load" type="Button" parent="VBoxContainer"]
-margin_left = 181.0
-margin_top = 126.0
-margin_right = 267.0
-margin_bottom = 148.0
+margin_left = 235.0
+margin_top = 111.0
+margin_right = 309.0
+margin_bottom = 133.0
 size_flags_horizontal = 4
+action_mode = 0
 text = "Load Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Options" type="Button" parent="VBoxContainer"]
-margin_left = 191.0
-margin_top = 152.0
-margin_right = 257.0
-margin_bottom = 174.0
+margin_left = 245.0
+margin_top = 137.0
+margin_right = 299.0
+margin_bottom = 159.0
 size_flags_horizontal = 4
+action_mode = 0
 text = "Options"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Level" type="Button" parent="VBoxContainer"]
-margin_left = 175.0
-margin_top = 178.0
-margin_right = 272.0
-margin_bottom = 200.0
+margin_left = 229.0
+margin_top = 163.0
+margin_right = 314.0
+margin_bottom = 185.0
 size_flags_horizontal = 4
+action_mode = 0
 text = "Level Select"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Quit" type="Button" parent="VBoxContainer"]
-margin_left = 200.0
-margin_top = 204.0
-margin_right = 247.0
-margin_bottom = 226.0
+margin_left = 254.0
+margin_top = 189.0
+margin_right = 289.0
+margin_bottom = 211.0
 size_flags_horizontal = 4
+action_mode = 0
 text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Theme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+bus = "Music"
 
 [connection signal="pressed" from="VBoxContainer/New" to="." method="_on_New_pressed"]
 [connection signal="pressed" from="VBoxContainer/Load" to="." method="_on_Load_pressed"]

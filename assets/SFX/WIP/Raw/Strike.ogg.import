@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Strike.ogg-67deeba4eae82d517be0e32344603b10.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/Raw/Strike.ogg"
+dest_files=[ "res://.import/Strike.ogg-67deeba4eae82d517be0e32344603b10.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

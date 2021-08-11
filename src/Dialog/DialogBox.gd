@@ -31,8 +31,12 @@ onready var face_sprite = $MarginContainer/HBoxContainer/Face/Sprite
 onready var audio = $AudioStreamPlayer
 onready var player = get_tree().get_root().get_node("World/Recruit")
 
+onready var world = get_tree().get_root().get_node("World")
+
 func _ready():
 	visible = false
+	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
+	_on_viewport_size_changed()
 
 func print_sign(text):
 	face_container.free()
@@ -295,3 +299,13 @@ func end_branch():
 	tb.text = tb.text.insert(step, "\n")
 	seek("/m")
 	step -= 5 #WHY WHY WHY WHY WHY
+
+
+func _on_viewport_size_changed():
+	var viewport_size = get_tree().get_root().size / world.resolution_scale
+	
+
+	
+	#rect_size = get_tree().get_root().size / world.resolution_scale
+	rect_size.x = viewport_size.x
+	rect_position.y = viewport_size.y - 80

@@ -1,9 +1,9 @@
 extends Node2D
 
 const LEVELNAME = preload("res://src/UI/LevelName.tscn")
-const TRANSITION = preload("res://src/UI/Transition.tscn")
-const OPTIONS = preload("res://src/UI/Options.tscn")
-const INVENTORY = preload("res://src/UI/Inventory.tscn")
+const OPTIONS = preload("res://src/UI/Options/Options.tscn")
+const INVENTORY = preload("res://src/UI/Inventory/Inventory.tscn")
+const PAUSEMENU = preload("res://src/UI/PauseMenu.tscn")
 
 var resolution_scale = 4.0
 var viewport_size_ignore = false
@@ -71,18 +71,16 @@ func _input(event):
 			$UILayer/HUD.visible = false
 			var inventory = INVENTORY.instance()
 			$UILayer.add_child(inventory)
+	if event.is_action_pressed("pause") and not $UILayer.has_node("TitleScreen"):
+		if not $UILayer.has_node("PauseMenu") and not get_tree().paused:
+			get_tree().paused = true
+			$UILayer/HUD.visible = false
+			var pause_menu = PAUSEMENU.instance()
+			$UILayer.add_child(pause_menu)
+			
 
 
 func _on_level_change(level, door_index, level_name, music):
-	##### add a transition
-#	var transition = TRANSITION.instance()
-#	transition.rect_position = $Recruit.get_global_transform_with_canvas().origin / resolution_scale
-#	transition.animation = "IrisExpand"
-#	$UILayer.add_child(transition)
-#	#add_child(transition)
-#	yield(get_tree().create_timer(0.4), "timeout")
-	#####
-	
 	save_level_data_to_temp()
 	$Recruit/Camera2D.smoothing_enabled = false
 		
@@ -443,6 +441,7 @@ func load_level_data_from_save():
 
 func load_options():
 	var options = OPTIONS.instance()
+	options.hidden = true
 	$UILayer.add_child(options)
 	options.get_node("TabContainer/Settings").load_settings()
 	options.get_node("TabContainer/KeyConfig").load_input_map()

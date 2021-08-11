@@ -2,8 +2,8 @@
 
 [ext_resource path="res://src/Actor/Enemy/Roller.gd" type="Script" id=1]
 [ext_resource path="res://assets/Actor/Enemy/Roller.png" type="Texture" id=2]
-[ext_resource path="res://assets/SFX/snd_critter_jump.ogg" type="AudioStream" id=3]
-[ext_resource path="res://assets/SFX/snd_enemy_hurt.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/SFX/Placeholder/snd_critter_jump.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" type="AudioStream" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 7.0

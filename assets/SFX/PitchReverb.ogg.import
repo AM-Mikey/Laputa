@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/PitchReverb.ogg-735bfc8aa64912cb6e1dc526d7aac3fa.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/PitchReverb.ogg"
+dest_files=[ "res://.import/PitchReverb.ogg-735bfc8aa64912cb6e1dc526d7aac3fa.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

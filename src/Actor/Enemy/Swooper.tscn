@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/SFX/snd_enemy_hurt.ogg" type="AudioStream" id=1]
+[ext_resource path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" type="AudioStream" id=1]
 [ext_resource path="res://src/Actor/Enemy/Swooper.gd" type="Script" id=2]
 [ext_resource path="res://assets/Actor/Enemy/Swooper.png" type="Texture" id=3]
 

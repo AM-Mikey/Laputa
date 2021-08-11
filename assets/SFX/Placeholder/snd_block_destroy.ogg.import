@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/snd_block_destroy.ogg-72091567a930285106aaf336106bd356.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/Placeholder/snd_block_destroy.ogg"
+dest_files=[ "res://.import/snd_block_destroy.ogg-72091567a930285106aaf336106bd356.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

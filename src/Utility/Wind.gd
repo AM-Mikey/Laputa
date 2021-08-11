@@ -32,7 +32,7 @@ func _physics_process(delta):
 	
 	remove_invalid_targets()
 	if active:
-		add_wind_velocity()
+		add_windvelocity()
 
 func remove_invalid_targets():
 	for p in player_targets:
@@ -50,11 +50,11 @@ func remove_invalid_targets():
 		if b == null:
 			bullet_targets.erase(b)
 
-func add_wind_velocity():
+func add_windvelocity():
 	for p in player_targets:
-		p._velocity.x += speed.x * dir.x
+		p.velocity.x += speed.x * dir.x
 	for e in enemy_targets:
-		e._velocity.x += speed.x * dir.x
+		e.velocity.x += speed.x * dir.x
 	for b in bullet_targets:
 		b.velocity.x += speed.x * dir.x
 

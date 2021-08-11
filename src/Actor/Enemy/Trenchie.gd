@@ -3,7 +3,7 @@ extends Enemy
 export var look_dir: Vector2 = Vector2.LEFT
 var move_dir: Vector2
 
-const BULLET = preload("res://src/Bullet/EnemyBulletTemplate.tscn")
+const BULLET = preload("res://src/Bullet/Enemy/Laser.tscn")
 export var projectile_speed: int = 120
 export var height_tolerance = 7
 export var cooldown_time = 1
@@ -32,13 +32,13 @@ func _physics_process(delta):
 	if not is_on_floor():
 		move_dir.y = 0 #don't allow them to jump if they are midair
 	
-	_velocity = calculate_move_velocity(_velocity, move_dir, speed)
-	_velocity = move_and_slide(_velocity, FLOOR_NORMAL)
+	velocity = calculate_movevelocity(velocity, move_dir, speed)
+	velocity = move_and_slide(velocity, FLOOR_NORMAL)
 
 	animate()
 
-func calculate_move_velocity(_velocity: Vector2, move_dir, speed) -> Vector2:
-	var out: = _velocity
+func calculate_movevelocity(velocity: Vector2, move_dir, speed) -> Vector2:
+	var out: = velocity
 	
 	out.x = speed.x * move_dir.x
 	out.y += gravity * get_physics_process_delta_time()

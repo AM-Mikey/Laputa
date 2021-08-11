@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/FFsweepgun.ogg-97604df923889788c7d92ce44e647341.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/OtherGames/FFsweepgun.ogg"
+dest_files=[ "res://.import/FFsweepgun.ogg-97604df923889788c7d92ce44e647341.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

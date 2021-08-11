@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ffsillybounce.ogg-2bed7324122887020e484f4c99a3e226.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/OtherGames/ffsillybounce.ogg"
+dest_files=[ "res://.import/ffsillybounce.ogg-2bed7324122887020e484f4c99a3e226.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

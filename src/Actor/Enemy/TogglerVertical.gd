@@ -20,8 +20,8 @@ func _ready():
 	
 func _physics_process(delta):
 	if not dead:
-		_velocity = calculate_move_velocity(_velocity, move_dir, speed)
-		_velocity = move_and_slide(_velocity, FLOOR_NORMAL)
+		velocity = calculate_move_velocity(velocity, move_dir, speed)
+		velocity = move_and_slide(velocity, FLOOR_NORMAL)
 		
 		animate()
 		

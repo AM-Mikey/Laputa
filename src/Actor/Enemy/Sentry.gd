@@ -6,7 +6,7 @@ var move_dir: Vector2
 const HAIRBALL = preload("res://src/Bullet/Enemy/Hairball.tscn")
 
 export var height_tolerance = 7
-export var cooldown_time = 1
+export var cooldown_time = 2
 export var projectile_speed: int = 150
 export var projectile_damage: int = 2
 
@@ -27,7 +27,7 @@ func _ready():
 	speed = Vector2(50, 200)
 	gravity = 250
 	
-	level = 1
+	level = 2
 	
 	$FireCooldown.start(cooldown_time)
 	

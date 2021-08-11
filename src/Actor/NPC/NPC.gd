@@ -40,15 +40,15 @@ func _physics_process(delta):
 #			get_move_dir()
 #		move_to_target_x()
 		
-	_velocity = calculate_move_velocity(_velocity, move_dir, speed)
-	_velocity = move_and_slide(_velocity, FLOOR_NORMAL)
+	velocity = calculate_movevelocity(velocity, move_dir, speed)
+	velocity = move_and_slide(velocity, FLOOR_NORMAL)
 
 
 func get_move_dir():
 	move_dir.x = sign(target_pos.x - global_position.x)
 
-func calculate_move_velocity(linear_velocity: Vector2,move_dir: Vector2,speed: Vector2) -> Vector2:
-	var out: = linear_velocity
+func calculate_movevelocity(linearvelocity: Vector2,move_dir: Vector2,speed: Vector2) -> Vector2:
+	var out: = linearvelocity
 	
 	#THIS CODE IS PRIMATIVE COMPARED TO PLAYER AND BOSS
 	#if you need an npc with proper momementum and friction do something else

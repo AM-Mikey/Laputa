@@ -1,24 +1,34 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/UI/DialogBox.png" type="Texture" id=2]
+[ext_resource path="res://src/Dialog/DialogYesNo.gd" type="Script" id=3]
 
 [node name="DialogYesNo" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 80.0
-margin_bottom = 32.0
+margin_left = 376.0
+margin_top = 32.0
+margin_right = 462.0
+margin_bottom = 64.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Panel" type="Panel" parent="MarginContainer"]
+margin_right = 86.0
+margin_bottom = 32.0
+
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
-margin_right = 80.0
+visible = false
+margin_right = 86.0
 margin_bottom = 32.0
 texture = ExtResource( 2 )
 patch_margin_left = 2
@@ -27,22 +37,25 @@ patch_margin_right = 2
 patch_margin_bottom = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-margin_right = 80.0
+margin_right = 86.0
 margin_bottom = 32.0
 
 [node name="Yes" type="Button" parent="MarginContainer/HBoxContainer"]
-margin_right = 38.0
+margin_right = 41.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
 text = "Yes"
 flat = true
 
 [node name="No" type="Button" parent="MarginContainer/HBoxContainer"]
-margin_left = 42.0
-margin_right = 80.0
+margin_left = 45.0
+margin_right = 86.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
 text = "No"
 flat = true
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Yes" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/No" to="." method="_on_button_pressed"]

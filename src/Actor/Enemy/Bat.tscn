@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Actor/Enemy/Bat.gd" type="Script" id=1]
-[ext_resource path="res://assets/SFX/snd_enemy_hurt.ogg" type="AudioStream" id=2]
+[ext_resource path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" type="AudioStream" id=2]
 [ext_resource path="res://assets/Actor/Enemy/Bat.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]

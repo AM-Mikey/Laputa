@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/YMNwettock.WAV-4ecfd89c4f725190e2593e6212ff2bf2.sample"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/OtherGames/YMNwettock.WAV"
+dest_files=[ "res://.import/YMNwettock.WAV-4ecfd89c4f725190e2593e6212ff2bf2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

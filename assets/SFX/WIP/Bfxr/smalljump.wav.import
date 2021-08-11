@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/smalljump.wav-e9957c1eb14e44b7184437648ad7ae75.sample"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/Bfxr/smalljump.wav"
+dest_files=[ "res://.import/smalljump.wav-e9957c1eb14e44b7184437648ad7ae75.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

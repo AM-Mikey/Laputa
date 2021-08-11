@@ -2,7 +2,8 @@ extends KinematicBody2D
 
 class_name Bullet, "res://assets/Icon/BulletIcon.png"
 
-const EFFECT = preload("res://src/Effect/Effect.tscn")
+const STARPOP = preload("res://src/Effect/StarPop.tscn")
+const RICOCHET = preload("res://src/Effect/Ricochet.tscn")
 
 
 
@@ -13,49 +14,21 @@ var damage
 
 
 func _fizzle_from_world():
-	visible = false
-	disabled = true
-	
 	#print("fizzle from world") 
-	var effect = EFFECT.instance()
-	get_parent().add_child(effect)
-	if has_node("End"):
-		effect.position = $End.global_position
-	else:
-		effect.position = global_position
+	var ricochet = RICOCHET.instance()
+	get_tree().get_root().get_node("World/Back").add_child(ricochet)
+	if has_node("End"): ricochet.position = $End.global_position
+	else: ricochet.position = global_position
 	
-	var player = effect.get_node("AnimationPlayer")
-	player.play("DiamondPop")
-	
-	var audio = effect.get_node("AudioStreamPlayer")
-	audio.stream = load("res://assets/SFX/snd_shot_hit.ogg")
-	audio.play()
-	
-	yield(player, "animation_finished")
-	#yield(audio, "finished")
-	#print("removed bullet and effect")
-	effect.queue_free()
 	queue_free()
 
 func _fizzle_from_range():
-	disabled = true
-	visible = false
-	
-	
-	print("fizzle from range")
-	var effect = EFFECT.instance()
-	get_parent().add_child(effect)
-	effect.position = global_position
-	
-	var player = effect.get_node("AnimationPlayer")
-	player.play("StarPop")
-	yield(player, "animation_finished")
-	#print("removed bullet and effect")
-	effect.queue_free()
+	#print("fizzle from range")
+	var star_pop = STARPOP.instance()
+	get_tree().get_root().get_node("World/Back").add_child(star_pop)
+	star_pop.position = global_position
 	queue_free()
 
 func _on_VisibilityNotifier2D_viewport_exited(viewport):
-	if visible != false:
-		print("bullet has exited viewport")
-		queue_free()
+	queue_free()
 

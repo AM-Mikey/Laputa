@@ -1,2 +1,2 @@
 extends Tile
-constant_linear_velocity = (100, 0)
+constant_linearvelocity = (100, 0)

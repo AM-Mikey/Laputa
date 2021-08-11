@@ -1,7 +1,7 @@
 extends Control
 
 const LEVELSELECT = preload("res://src/UI/LevelSelect.tscn")
-const OPTIONS = preload("res://src/UI/Options.tscn")
+const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 
 onready var world = get_tree().get_root().get_node("World")
 onready var player = get_tree().get_root().get_node("World/Recruit")
@@ -11,7 +11,7 @@ var alpha_week: int
 
 func _ready():
 	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
-	_on_viewport_size_changed()
+	
 
 												#VERSION STUFF
 	var current_date = OS.get_date()
@@ -36,18 +36,14 @@ func _ready():
 	
 										#LOAD BUTTON STUFF
 	var file = File.new()
-	if file.file_exists(world.save_path):
-		var file_read = file.open(world.save_path, File.READ)
-		if file_read == OK:
-			var data = file.get_var()
-			file.close()
-			if data != null:
-				if data.has("player_data"):
-					if data["player_data"].size() == 0:
-						$VBoxContainer/Load.queue_free()
-				else:$VBoxContainer/Load.queue_free()
-			else:$VBoxContainer/Load.queue_free()
-		else: $VBoxContainer/Load.queue_free()
+	if not file.file_exists(world.save_path):
+		$VBoxContainer/Load.queue_free()
+	
+	
+	
+	yield(get_tree(), "idle_frame")
+	_on_viewport_size_changed()
+	focus()
 	
 
 func _on_New_pressed():
@@ -62,7 +58,6 @@ func _on_New_pressed():
 	var spawn_points = get_tree().get_nodes_in_group("SpawnPoints")
 	for s in spawn_points:
 		world.get_node("Recruit").position = s.global_position
-	
 
 
 func _on_Load_pressed():
@@ -89,3 +84,11 @@ func _on_Quit_pressed():
 
 func _on_viewport_size_changed():
 	rect_size = get_tree().get_root().size / world.resolution_scale
+
+
+func focus():
+	print("focusing on title screen")
+	if $VBoxContainer.has_node("Load"):
+		$VBoxContainer/Load.grab_focus()
+	else:
+		$VBoxContainer/New.grab_focus()

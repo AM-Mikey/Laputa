@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/snd_spur_fire_max.ogg-e9017ea758765c434b8165ad081b68fa.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/Placeholder/snd_spur_fire_max.ogg"
+dest_files=[ "res://.import/snd_spur_fire_max.ogg-e9017ea758765c434b8165ad081b68fa.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

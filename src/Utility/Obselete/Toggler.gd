@@ -14,8 +14,8 @@ func _ready():
 
 func _physics_process(delta):
 	if not dead:
-		_velocity = calculate_move_velocity(_velocity, move_dir, speed)
-		_velocity = move_and_slide(_velocity, FLOOR_NORMAL)
+		velocity = calculate_movevelocity(velocity, move_dir, speed)
+		velocity = move_and_slide(velocity, FLOOR_NORMAL)
 		
 		animate(move_dir)
 		
@@ -46,13 +46,13 @@ func wait(move_dir):
 	speed = old_speed
 
 
-func calculate_move_velocity(
-		linear_velocity: Vector2,
+func calculate_movevelocity(
+		linearvelocity: Vector2,
 		move_direction: Vector2,
 		speed: Vector2
 		) -> Vector2:
 	
-	var out: = linear_velocity
+	var out: = linearvelocity
 	out.x = speed.x * move_direction.x
 	out.y = speed.y * move_direction.y
 	return out

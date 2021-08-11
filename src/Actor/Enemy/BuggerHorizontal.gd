@@ -26,13 +26,16 @@ func _ready():
 func _physics_process(delta):
 	if waiting:
 		#yield(get_tree().create_timer(wait_time), "timeout")
-		if $RayCast2D.get_collider().get_collision_layer_bit(0): #player
+#		yield(get_tree(), "idle_frame")
+#		$Raycast2D.force_raycast_update()
+		var collider = $RayCast2D.get_collider()
+		if collider.get_collision_layer_bit(0): #player
 			fly()
 
 	
 	if not dead:
-		_velocity = calculate_move_velocity(_velocity, move_dir, speed)
-		_velocity = move_and_slide(_velocity, FLOOR_NORMAL)
+		velocity = calculate_movevelocity(velocity, move_dir, speed)
+		velocity = move_and_slide(velocity, FLOOR_NORMAL)
 		
 		animate()
 		
@@ -59,13 +62,13 @@ func fly():
 	move_dir = Vector2(old_dir.x * -1, old_dir.y)
 	
 
-func calculate_move_velocity(
-		linear_velocity: Vector2,
+func calculate_movevelocity(
+		linearvelocity: Vector2,
 		move_direction: Vector2,
 		speed: Vector2
 		) -> Vector2:
 	
-	var out: = linear_velocity
+	var out: = linearvelocity
 	out.x = speed.x * move_direction.x
 	out.y = speed.y * move_direction.y
 	return out

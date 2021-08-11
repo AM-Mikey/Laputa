@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/Utility/Wind.gd" type="Script" id=1]
-[ext_resource path="res://assets/SFX/original/WindStereo.ogg" type="AudioStream" id=2]
+[ext_resource path="res://assets/SFX/WindStereo.ogg" type="AudioStream" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 240, 136 )

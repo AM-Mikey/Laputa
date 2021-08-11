@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/YMNrobotlockedon.wav-a8bd32a50fe1342cdee63975c59f4f67.sample"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/OtherGames/YMNrobotlockedon.wav"
+dest_files=[ "res://.import/YMNrobotlockedon.wav-a8bd32a50fe1342cdee63975c59f4f67.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

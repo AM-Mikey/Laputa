@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/wobble.ogg-ad09db8b63c3c779e00e1d1291710e53.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/Raw/wobble.ogg"
+dest_files=[ "res://.import/wobble.ogg-ad09db8b63c3c779e00e1d1291710e53.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

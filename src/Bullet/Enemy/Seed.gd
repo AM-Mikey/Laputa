@@ -3,7 +3,7 @@ extends Bullet
 var velocity = Vector2.ZERO
 var direction = Vector2.ZERO
 var projectile_speed: int
-var start_velocity
+var startvelocity
 
 
 var origin = Vector2.ZERO
@@ -13,8 +13,8 @@ func _ready():
 	add_to_group("WindBullets")
 	$AnimationPlayer.play("RotateLeft")
 	
-	velocity = get_velocity(projectile_speed, direction)
-	start_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
+	velocity = getvelocity(projectile_speed, direction)
+	startvelocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 
 
 func _physics_process(delta):
@@ -23,8 +23,8 @@ func _physics_process(delta):
 	
 	velocity.y += gravity * delta
 			
-	var avr_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
-	$AnimationPlayer.playback_speed = avr_velocity / start_velocity
+	var avrvelocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
+	$AnimationPlayer.playback_speed = avrvelocity / startvelocity
 	if $AnimationPlayer.playback_speed < .1:
 		$AnimationPlayer.stop()
 
@@ -32,7 +32,7 @@ func _physics_process(delta):
 			move_and_slide(velocity)
 
 
-func get_velocity(projectile_speed, direction) -> Vector2:
+func getvelocity(projectile_speed, direction) -> Vector2:
 	var out = velocity
 	#print("seed dir: ", direction)
 	out.x = projectile_speed * direction.x

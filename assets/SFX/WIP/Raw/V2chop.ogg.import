@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/V2chop.ogg-54ab5b64a3b4873621fd06d63c2a1bbe.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/Raw/V2chop.ogg"
+dest_files=[ "res://.import/V2chop.ogg-54ab5b64a3b4873621fd06d63c2a1bbe.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

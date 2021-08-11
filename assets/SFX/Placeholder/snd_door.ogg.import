@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/snd_door.ogg-d9e853c08eb87b5ce7f67f4f56f9276b.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/Placeholder/snd_door.ogg"
+dest_files=[ "res://.import/snd_door.ogg-d9e853c08eb87b5ce7f67f4f56f9276b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

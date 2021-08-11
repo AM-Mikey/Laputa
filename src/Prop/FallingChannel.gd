@@ -18,12 +18,12 @@ func _physics_process(delta):
 		#free()
 
 	if falling:
-		_velocity = calculate_move_velocity(_velocity)
-		_velocity = move_and_slide(_velocity, FLOOR_NORMAL)
+		velocity = calculate_movevelocity(velocity)
+		velocity = move_and_slide(velocity, FLOOR_NORMAL)
 
 
-func calculate_move_velocity(linear_velocity: Vector2) -> Vector2:
-	var out: = linear_velocity
+func calculate_movevelocity(linearvelocity: Vector2) -> Vector2:
+	var out: = linearvelocity
 	out.y += gravity * get_physics_process_delta_time()
 	return out
 
@@ -39,7 +39,7 @@ func _on_Timer_timeout():
 		falling = true
 		$Timer.start(respawn_time)
 	else:
-		_velocity = Vector2.ZERO
+		velocity = Vector2.ZERO
 		falling = false
 		position = starting_position
 		$AnimationPlayer.play("Flash")

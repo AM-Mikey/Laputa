@@ -27,7 +27,7 @@ func _physics_process(delta):
 	if nav_point != null:
 		move_to_nav_point()
 		
-		if nav_point != null and _velocity.x == 0 and $NavTimer.time_left == 0:
+		if nav_point != null and velocity.x == 0 and $NavTimer.time_left == 0:
 			jump()
 			
 		elif nav_point != null and abs(global_position.x - nav_point.x) < 32: #less than 32 px horizontally from target
@@ -49,7 +49,7 @@ func get_next_nav_point():
 		t.free()
 	var target_visual = TARGETVISUAL.instance()
 	target_visual.global_position = nav_point
-	get_parent().get_parent().add_child(target_visual)
+	get_tree().get_root().get_node("World/Front").add_child(target_visual)
 	
 	###timer stuff
 	$NavTimer.start(no_jump_time)
@@ -91,8 +91,7 @@ func _input(event):
 		
 		var navigation_line = NAVIGATIONLINE.instance()
 		#navigation_line.global_position = global_position
-		navigation_line.points = new_path
-		get_parent().get_parent().add_child(navigation_line)
+		get_tree().get_root().get_node("World/Front").add_child(navigation_line)
 		
 		
 		nav_path = new_path

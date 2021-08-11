@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://src/Effect/MoneyNumber.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/MoneyNumber.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Prop/ShopWeapon.gd" type="Script" id=2]
-[ext_resource path="res://assets/Weapon/PolarStarIcon.png" type="Texture" id=3]
-[ext_resource path="res://assets/SFX/snd_get_item.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/SFX/Placeholder/snd_get_item.ogg" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
@@ -102,7 +101,6 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -24 )
-texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/DisplayNoPrice = SubResource( 2 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/snd_funny_explode.ogg-4706cfb04514d2e4430cf72aa88580a5.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/Placeholder/snd_funny_explode.ogg"
+dest_files=[ "res://.import/snd_funny_explode.ogg-4706cfb04514d2e4430cf72aa88580a5.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

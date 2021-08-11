@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/snd_mimiga_squeak.ogg-c514b260424ec4816ac60d91115d89d3.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/Placeholder/snd_mimiga_squeak.ogg"
+dest_files=[ "res://.import/snd_mimiga_squeak.ogg-c514b260424ec4816ac60d91115d89d3.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

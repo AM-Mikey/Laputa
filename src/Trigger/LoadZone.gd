@@ -1,6 +1,6 @@
 extends Area2D
 
-const TRANSITION = preload("res://src/UI/TransitionWipe.tscn")
+const TRANSITION = preload("res://src/Effect/Transition/TransitionWipe.tscn")
 
 var open_sound = load("res://assets/SFX/snd_door.ogg")
 

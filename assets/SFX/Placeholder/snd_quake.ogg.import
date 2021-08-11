@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/snd_quake.ogg-98971de99a14f8352efd77dc1228b083.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/Placeholder/snd_quake.ogg"
+dest_files=[ "res://.import/snd_quake.ogg-98971de99a14f8352efd77dc1228b083.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

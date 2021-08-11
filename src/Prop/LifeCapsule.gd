@@ -25,7 +25,6 @@ func _input(event):
 			$AnimationPlayer.play("Used")
 			active_player.max_hp +=2
 			active_player.hp = active_player.max_hp
-			active_player.update_max_hp()
 			active_player.update_hp()
 			$AudioStreamPlayer.play()
 			yield($AudioStreamPlayer, "finished")

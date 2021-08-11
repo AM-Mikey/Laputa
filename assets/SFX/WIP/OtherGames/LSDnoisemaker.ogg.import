@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/LSDnoisemaker.ogg-ce70272e708269fe3eed1f10555839b7.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/OtherGames/LSDnoisemaker.ogg"
+dest_files=[ "res://.import/LSDnoisemaker.ogg-ce70272e708269fe3eed1f10555839b7.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

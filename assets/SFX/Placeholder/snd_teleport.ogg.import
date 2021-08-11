@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/snd_teleport.ogg-0e5b28336e2fffe914be265142d66004.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/Placeholder/snd_teleport.ogg"
+dest_files=[ "res://.import/snd_teleport.ogg-0e5b28336e2fffe914be265142d66004.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

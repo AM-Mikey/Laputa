@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/PopSmall.ogg-d1ff3a7434a2de0acf201834bea1d579.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/PopSmall.ogg"
+dest_files=[ "res://.import/PopSmall.ogg-d1ff3a7434a2de0acf201834bea1d579.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/V2typewriter.ogg-d3c0cbc8822914ad0f3f58d080874c0a.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/Raw/V2typewriter.ogg"
+dest_files=[ "res://.import/V2typewriter.ogg-d3c0cbc8822914ad0f3f58d080874c0a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

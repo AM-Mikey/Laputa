@@ -9,10 +9,10 @@ var look_dir = Vector2.LEFT
 func _ready():
 	hp = 4
 	damage_on_contact = 1
-	speed = Vector2(60, 120)
+	speed = Vector2(12, 120)
 	gravity = 200
 	
-	level = 1
+	level = 2
 
 func _physics_process(delta):
 	if not dead and not disabled:
@@ -30,8 +30,8 @@ func _physics_process(delta):
 			move_dir = get_move_dir()
 			look_dir = Vector2(move_dir.x, 0)
 
-		_velocity = get_move_velocity(_velocity, move_dir, speed)
-		_velocity = move_and_slide(_velocity, FLOOR_NORMAL)
+		velocity = get_movevelocity(velocity, move_dir, speed)
+		velocity = move_and_slide(velocity, FLOOR_NORMAL, true)
 		
 		animate()
 
@@ -44,22 +44,33 @@ func _on_PlayerDetector_body_exited(body):
 func get_move_dir() -> Vector2:
 	return Vector2(sign(target.get_global_position().x - global_position.x), -1)
 
-func get_move_velocity(
-		linear_velocity: Vector2,
+func get_movevelocity(
+		linearvelocity: Vector2,
 		move_direction: Vector2,
 		speed: Vector2
 		) -> Vector2:
 	
-	var out: = linear_velocity
+	var out: = linearvelocity
 	var friction = false
 	
-	out.y += gravity * get_physics_process_delta_time()
-	if move_dir.y < 0:
-		out.y = speed.y * move_dir.y
-	if move_dir.x != 0:
-		out.x = speed.x * move_direction.x
-	else:
-		friction = true
+	if is_in_water: #this code has no acceleration
+		out.y += (gravity/2) * get_physics_process_delta_time()
+		if move_dir.y < 0:
+			out.y = (speed.y * 0.75) * move_dir.y
+		if move_dir.x != 0:
+			out.x = speed.x * move_direction.x
+		else:
+			friction = true
+	
+	else: #this code has no acceleration
+		out.y += gravity * get_physics_process_delta_time()
+		if move_dir.y < 0:
+			out.y = speed.y * move_dir.y
+		if move_dir.x != 0:
+			out.x = speed.x * move_direction.x
+		else:
+			friction = true
+
 
 	if is_on_floor():
 		if friction == true:

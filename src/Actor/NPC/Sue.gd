@@ -4,10 +4,6 @@ var already_talked = false
 
 
 
-func _ready():
-	print("did ready in sue script")
-	id = "sue"
-	conversation = "default_conversation"
 
 
 #func _input(event):

@@ -39,13 +39,13 @@ func _physics_process(delta):
 	else:
 		move_dir.x = 0
 	
-	_velocity = calculate_move_velocity(_velocity, move_dir, speed)
-	_velocity = move_and_slide(_velocity, FLOOR_NORMAL)
+	velocity = calculate_movevelocity(velocity, move_dir, speed)
+	velocity = move_and_slide(velocity, FLOOR_NORMAL)
 
 	animate()
 
-func calculate_move_velocity(_velocity: Vector2, move_dir, speed) -> Vector2:
-	var out: = _velocity
+func calculate_movevelocity(velocity: Vector2, move_dir, speed) -> Vector2:
+	var out: = velocity
 	
 	out.x = speed.x * move_dir.x
 	out.y += gravity * get_physics_process_delta_time()

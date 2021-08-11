@@ -10,7 +10,7 @@ var panic_run = false
 var touchdown = false
 
 export var base_damage = 2
-export var falling_damage = 6
+export var falling_damage = 4
 
 func _ready():
 	hp = 2
@@ -45,8 +45,8 @@ func setup_collision():
 
 func _physics_process(delta):
 	if not dead:
-		_velocity = calculate_move_velocity(_velocity, move_dir, speed)
-		_velocity = move_and_slide(_velocity, FLOOR_NORMAL)
+		velocity = calculate_movevelocity(velocity, move_dir, speed)
+		velocity = move_and_slide(velocity, FLOOR_NORMAL)
 		
 		if dropped == true:
 			if is_on_floor() and touchdown == false: #check to see if they've landed before
@@ -70,8 +70,8 @@ func _physics_process(delta):
 		
 		animate()
 
-func calculate_move_velocity(_velocity: Vector2, move_dir, speed) -> Vector2:
-	var out: = _velocity
+func calculate_movevelocity(velocity: Vector2, move_dir, speed) -> Vector2:
+	var out: = velocity
 	
 	out.x = speed.x * move_dir.x
 	out.y += gravity * get_physics_process_delta_time()

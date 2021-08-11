@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=1]
 [ext_resource path="res://src/Background/BackgroundIndoor.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Tile/House.tres" type="TileSet" id=3]
+[ext_resource path="res://src/Tile/Outdated/House.tres" type="TileSet" id=3]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/LightTest.png" type="Texture" id=6]
 
 [node name="IndoorTemplate" type="Node2D"]
 script = ExtResource( 1 )
@@ -41,11 +40,6 @@ tile_data = PoolIntArray( 5, 10, 1, 6, 10, 1, 7, 10, 1, 8, 10, 1, 9, 10, 1, 10, 
 position = Vector2( 328, 224 )
 level = "res://src/Level/DebugLevel.tscn"
 door_index = 1
-
-[node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 224, 168 )
-texture = ExtResource( 6 )
-color = Color( 0.792157, 0.592157, 0.305882, 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 240, 136 )

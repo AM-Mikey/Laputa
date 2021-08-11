@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Hit_Hurt7.wav-d3e42d29506b046bd1b1b27caacb82fa.sample"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/Bfxr/Hit_Hurt7.wav"
+dest_files=[ "res://.import/Hit_Hurt7.wav-d3e42d29506b046bd1b1b27caacb82fa.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

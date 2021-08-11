@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/snd_little_crash.ogg-1ca8caf102a989422bb5d309871ebb0a.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/Placeholder/snd_little_crash.ogg"
+dest_files=[ "res://.import/snd_little_crash.ogg-1ca8caf102a989422bb5d309871ebb0a.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

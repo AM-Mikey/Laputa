@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/PitchHollow.ogg-500068da227e8284fb8842e65d6397eb.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/PitchHollow.ogg"
+dest_files=[ "res://.import/PitchHollow.ogg-500068da227e8284fb8842e65d6397eb.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

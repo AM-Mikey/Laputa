@@ -17,7 +17,7 @@ var value: int
 func _ready():
 	direction = randomize_direction()
 	speed = randomize_speed()
-	_velocity = get_velocity(speed, direction)
+	velocity = getvelocity(speed, direction)
 
 	if value <= 1:
 		$AnimationPlayer.play("Small")
@@ -27,16 +27,16 @@ func _ready():
 		$AnimationPlayer.play("Large")
 
 func _physics_process(delta):
-	if abs(_velocity.x) > minimum_speed and abs(_velocity.y) > minimum_speed:
-		var collision = move_and_collide(_velocity * delta)
+	if abs(velocity.x) > minimum_speed and abs(velocity.y) > minimum_speed:
+		var collision = move_and_collide(velocity * delta)
 		if collision:
 			#var normal = collision.normal
-			#_velocity = get_bounce_velocity(_velocity, normal)
-			_velocity *= bounciness
-			_velocity = _velocity.bounce(collision.normal)
+			#velocity = get_bouncevelocity(velocity, normal)
+			velocity *= bounciness
+			velocity = velocity.bounce(collision.normal)
 			$BounceSpacial.play()
 			
-	_velocity.y += gravity * get_physics_process_delta_time()
+	velocity.y += gravity * get_physics_process_delta_time()
 
 func randomize_direction():
 	rng.randomize()
@@ -46,8 +46,8 @@ func randomize_speed():
 	rng.randomize()
 	return Vector2(rng.randf_range(rng_min_speed, rng_max_speed),rng.randf_range(rng_min_speed, rng_max_speed))
 	
-func get_velocity(speed, direction) -> Vector2:
-	var out: = _velocity
+func getvelocity(speed, direction) -> Vector2:
+	var out: = velocity
 	
 	out.x = speed.x * direction.x
 	out.y += gravity * get_physics_process_delta_time()

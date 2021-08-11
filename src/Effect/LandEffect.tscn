@@ -6,7 +6,6 @@
 [sub_resource type="Animation" id=1]
 resource_name = "Land"
 length = 0.4
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -27,7 +26,6 @@ script = ExtResource( 1 )
 position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
 hframes = 4
-frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Land = SubResource( 1 )

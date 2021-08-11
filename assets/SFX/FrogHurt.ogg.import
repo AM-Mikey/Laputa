@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/FrogHurt.ogg-655d399242ef19f60542221ba10e702e.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/FrogHurt.ogg"
+dest_files=[ "res://.import/FrogHurt.ogg-655d399242ef19f60542221ba10e702e.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

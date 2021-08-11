@@ -1,7 +1,5 @@
 extends Node
-#class_name Weapon, "res://assets/Icon/WeaponIcon.png"
 
-const EFFECT = preload("res://src/Effect/Effect.tscn")
 var sound_click = load("res://assets/SFX/snd_gun_click.ogg")
 
 var weapon
@@ -10,10 +8,6 @@ var trigger_held = false
 
 onready var HUD = get_tree().get_root().get_node("World/UILayer/HUD")
 onready var player = get_tree().get_root().get_node("World/Recruit")
-
-signal ammo_updated(needs_ammo, ammo, max_ammo)
-signal weapon_updated(icon_texture, level, xp, max_xp)
-
 
 
 
@@ -27,8 +21,7 @@ func update_weapon():
 	weapon = player.weapon_array.front()
 	if weapon != null:
 		player.get_node("WeaponSprite").texture = weapon.texture
-		emit_signal("ammo_updated", weapon.needs_ammo, weapon.ammo, weapon.max_ammo)
-		emit_signal("weapon_updated", weapon.icon_texture, weapon.level, weapon.xp, weapon.max_xp)
+		HUD.update_weapon()
 
 func manual_fire(bullet_pos, effect_pos, shoot_dir): #treats autos and manuals like manual
 	if weapon == null:
@@ -45,7 +38,7 @@ func manual_fire(bullet_pos, effect_pos, shoot_dir): #treats autos and manuals l
 						$WeaponAudio.play()
 				else: #not ammo == 0
 					weapon.ammo -= 1
-					emit_signal("ammo_updated", weapon.needs_ammo, weapon.ammo, weapon.max_ammo)
+					HUD.update_ammo()
 					prepare_bullet(bullet_pos, effect_pos, shoot_dir)
 			else: #not needs_ammo
 				prepare_bullet(bullet_pos, effect_pos, shoot_dir)
@@ -66,7 +59,7 @@ func automatic_fire(bullet_pos, effect_pos, shoot_dir): #only fires autos but ho
 						$WeaponAudio.play()
 				else: #not ammo == 0
 					weapon.ammo -= 1
-					emit_signal("ammo_updated", weapon.needs_ammo, weapon.ammo, weapon.max_ammo)
+					HUD.update_weapon()
 					prepare_bullet(bullet_pos, effect_pos, shoot_dir)
 			else: #not needs_ammo
 				prepare_bullet(bullet_pos, effect_pos, shoot_dir)
@@ -92,13 +85,10 @@ func prepare_bullet(bullet_pos, effect_pos, shoot_dir):
 	$WeaponAudio.play()
 	
 	###starpop/muzzle flash
-	var effect = EFFECT.instance()
-	get_parent().add_child(effect)
-	effect.position = effect_pos 
-	var anim = effect.get_node("AnimationPlayer")
-	anim.play("StarPop")
-	yield(anim, "animation_finished")
-	effect.queue_free()
+	var muzzle_flash = load("res://src/Effect/MuzzleFlashEffect.tscn").instance()
+	muzzle_flash.global_position = get_parent().get_node("WeaponSprite").global_position
+	get_tree().get_root().get_node("World/Front").add_child(muzzle_flash)
+		
 	
 func get_bullet_dir(bullet_rot) -> Vector2:
 	if bullet_rot == 90: #Left

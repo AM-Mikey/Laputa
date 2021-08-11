@@ -72,8 +72,8 @@ func _physics_process(delta):
 	if not is_on_floor():
 		move_dir.y = 0
 	
-	_velocity = calculate_move_velocity(_velocity, move_dir)
-	_velocity = move_and_slide(_velocity, FLOOR_NORMAL, true)
+	velocity = calculate_movevelocity(velocity, move_dir)
+	velocity = move_and_slide(velocity, FLOOR_NORMAL, true)
 	
 	
 	
@@ -90,8 +90,8 @@ func _physics_process(delta):
 			idle = true
 
 
-func calculate_move_velocity(linear_velocity: Vector2, move_dir) -> Vector2:
-	var out = linear_velocity
+func calculate_movevelocity(linearvelocity: Vector2, move_dir) -> Vector2:
+	var out = linearvelocity
 	
 	var friction = false
 	

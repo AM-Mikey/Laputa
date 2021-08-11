@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=1]
-[ext_resource path="res://src/Tile/MimigaB.tres" type="TileSet" id=2]
-[ext_resource path="res://src/Tile/MimigaM.tres" type="TileSet" id=3]
+[ext_resource path="res://src/Tile/Outdated/MimigaB.tres" type="TileSet" id=2]
+[ext_resource path="res://src/Tile/Outdated/MimigaM.tres" type="TileSet" id=3]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Prop/ChestKeyItem.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=6]

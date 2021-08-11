@@ -4,10 +4,8 @@
 [ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=2]
 
 [node name="PauseMenu" type="MarginContainer"]
-pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
 theme = ExtResource( 2 )
 custom_constants/margin_right = 8
 custom_constants/margin_top = 8
@@ -23,7 +21,6 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = 472.0
 margin_bottom = 262.0
-mouse_filter = 2
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 margin_top = 55.0
@@ -39,7 +36,6 @@ valign = 1
 margin_top = 129.0
 margin_right = 464.0
 margin_bottom = 254.0
-mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -47,8 +43,8 @@ __meta__ = {
 }
 
 [node name="Return" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_left = 200.0
-margin_right = 263.0
+margin_left = 206.0
+margin_right = 257.0
 margin_bottom = 22.0
 size_flags_horizontal = 4
 text = "Return"
@@ -57,9 +53,9 @@ __meta__ = {
 }
 
 [node name="Options" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_left = 199.0
+margin_left = 205.0
 margin_top = 26.0
-margin_right = 265.0
+margin_right = 259.0
 margin_bottom = 48.0
 size_flags_horizontal = 4
 text = "Options"
@@ -68,9 +64,9 @@ __meta__ = {
 }
 
 [node name="Level" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_left = 183.0
+margin_left = 189.0
 margin_top = 52.0
-margin_right = 280.0
+margin_right = 274.0
 margin_bottom = 74.0
 size_flags_horizontal = 4
 text = "Level Select"
@@ -79,9 +75,9 @@ __meta__ = {
 }
 
 [node name="Quit" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_left = 208.0
+margin_left = 214.0
 margin_top = 78.0
-margin_right = 255.0
+margin_right = 249.0
 margin_bottom = 100.0
 size_flags_horizontal = 4
 text = "Quit"

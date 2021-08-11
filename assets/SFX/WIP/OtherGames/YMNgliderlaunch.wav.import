@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/YMNgliderlaunch.wav-1b9ed27797e73e9017bdbd6d7feb32e3.sample"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/OtherGames/YMNgliderlaunch.wav"
+dest_files=[ "res://.import/YMNgliderlaunch.wav-1b9ed27797e73e9017bdbd6d7feb32e3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

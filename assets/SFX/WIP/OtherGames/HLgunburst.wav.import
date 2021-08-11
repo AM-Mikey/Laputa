@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/HLgunburst.wav-7563cfe76c5203b5ceb44288996601c2.sample"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/OtherGames/HLgunburst.wav"
+dest_files=[ "res://.import/HLgunburst.wav-7563cfe76c5203b5ceb44288996601c2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

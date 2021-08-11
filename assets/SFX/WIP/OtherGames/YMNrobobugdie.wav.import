@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/YMNrobobugdie.wav-a2811e8a2fd957476ef07580961382a8.sample"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/OtherGames/YMNrobobugdie.wav"
+dest_files=[ "res://.import/YMNrobobugdie.wav-a2811e8a2fd957476ef07580961382a8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,13 +1,14 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://src/Weapon/WeaponManager.gd" type="Script" id=1]
 [ext_resource path="res://src/Actor/Player/Recruit.gd" type="Script" id=2]
 [ext_resource path="res://assets/Weapon/Revolver.png" type="Texture" id=3]
-[ext_resource path="res://assets/SFX/snd_quote_walk.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/SFX/Placeholder/snd_quote_walk.ogg" type="AudioStream" id=4]
 [ext_resource path="res://assets/Actor/Player/RecruitFall.png" type="Texture" id=5]
-[ext_resource path="res://assets/SFX/snd_quote_bonkhead.ogg" type="AudioStream" id=6]
-[ext_resource path="res://assets/SFX/snd_quote_jump.ogg" type="AudioStream" id=8]
-[ext_resource path="res://assets/SFX/snd_thud.ogg" type="AudioStream" id=9]
+[ext_resource path="res://assets/SFX/Placeholder/snd_quote_bonkhead.ogg" type="AudioStream" id=6]
+[ext_resource path="res://assets/SFX/Placeholder/snd_quote_jump.ogg" type="AudioStream" id=7]
+[ext_resource path="res://assets/SFX/Placeholder/snd_quote_hurt.ogg" type="AudioStream" id=8]
+[ext_resource path="res://assets/SFX/Placeholder/snd_thud.ogg" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 7.5 )
@@ -1213,7 +1214,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 1.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 1 ), Vector2( 11, 1 ) ]
+"values": [ Vector2( 0, 1 ), Vector2( 1, 1 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Back:frame_coords")
@@ -1405,7 +1406,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 1.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 7 ), Vector2( 11, 7 ) ]
+"values": [ Vector2( 0, 7 ), Vector2( 1, 7 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Back:frame_coords")
@@ -1417,7 +1418,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 1.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 6 ), Vector2( 11, 6 ) ]
+"values": [ Vector2( 0, 6 ), Vector2( 1, 6 ) ]
 }
 
 [sub_resource type="Animation" id=24]
@@ -3127,12 +3128,11 @@ light_mask = 2
 position = Vector2( 0, -16 )
 texture = ExtResource( 5 )
 vframes = 12
-frame = 8
+frame = 6
 
 [node name="WeaponSprite" type="Sprite" parent="."]
 light_mask = 2
-position = Vector2( 1, -17 )
-rotation = -1.5708
+position = Vector2( 7, -17 )
 texture = ExtResource( 3 )
 flip_h = true
 
@@ -3141,7 +3141,7 @@ light_mask = 2
 position = Vector2( 0, -16 )
 texture = ExtResource( 5 )
 vframes = 12
-frame = 9
+frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/BackfallLeft = SubResource( 2 )
@@ -3225,6 +3225,10 @@ one_shot = true
 [node name="MinimumDirectionTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="BonkTimeout" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
 [node name="EffectPlayer" type="AnimationPlayer" parent="."]
 anims/FlashIframe = SubResource( 50 )
 
@@ -3240,11 +3244,15 @@ stream = ExtResource( 6 )
 bus = "SFX"
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
+stream = ExtResource( 7 )
 bus = "SFX"
 
 [node name="LandSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
+bus = "SFX"
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
 bus = "SFX"
 
 [node name="ItemDetector" type="Area2D" parent="."]
@@ -3263,7 +3271,7 @@ modulate = Color( 0.992157, 0, 1, 0.282353 )
 show_behind_parent = true
 position = Vector2( 0, -2 )
 collision_layer = 0
-collision_mask = 24578
+collision_mask = 8194
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtDetector"]
 position = Vector2( 0, -5.5 )
@@ -3296,12 +3304,8 @@ rotation = -1.5708
 scale = Vector2( 0.5, 1 )
 shape = SubResource( 54 )
 
-[connection signal="area_entered" from="ItemDetector" to="." method="_on_EntityDetector_area_entered"]
-[connection signal="area_exited" from="ItemDetector" to="." method="_on_EntityDetector_area_exited"]
-[connection signal="body_entered" from="ItemDetector" to="." method="_on_EntityDetector_body_entered"]
-[connection signal="body_exited" from="ItemDetector" to="." method="_on_EntityDetector_body_exited"]
+[connection signal="area_entered" from="ItemDetector" to="." method="_on_ItemDetector_area_entered"]
 [connection signal="area_entered" from="HurtDetector" to="." method="_on_HurtDetector_area_entered"]
-[connection signal="area_exited" from="HurtDetector" to="." method="_on_HurtDetector_area_exited"]
 [connection signal="body_entered" from="HurtDetector" to="." method="_on_HurtDetector_body_entered"]
 [connection signal="body_exited" from="HurtDetector" to="." method="_on_HurtDetector_body_exited"]
 [connection signal="body_entered" from="HeadDetector" to="." method="_on_HeadDetector_body_entered"]

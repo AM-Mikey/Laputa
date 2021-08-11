@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/HLflickonn.wav-b9716281f2347b608ad4c26362a59fb5.sample"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/OtherGames/HLflickonn.wav"
+dest_files=[ "res://.import/HLflickonn.wav-b9716281f2347b608ad4c26362a59fb5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -8,7 +8,9 @@ func _ready():
 	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 	_on_viewport_size_changed()
 	
-	var levels = []
+	var nones = []
+	var coasts = []
+	var villages= []
 	var level_dir = Directory.new()
 	var demo_dir = Directory.new()
 	
@@ -20,10 +22,10 @@ func _ready():
 			break
 		elif not file.begins_with("."):
 			if file.ends_with(".tscn"):
-				levels.append("res://src/Level/%s" %file)
+				nones.append("res://src/Level/%s" %file)
 	level_dir.list_dir_end()
 	
-	demo_dir.open("res://src/Level/Demo")
+	demo_dir.open("res://src/Level/Coast")
 	demo_dir.list_dir_begin()
 	while true:
 		var file = demo_dir.get_next()
@@ -31,10 +33,10 @@ func _ready():
 			break
 		elif not file.begins_with("."):
 			if file.ends_with(".tscn"):
-				levels.append("res://src/Level/Demo/%s" %file)
+				coasts.append("res://src/Level/Coast/%s" %file)
 	demo_dir.list_dir_end()
 	
-	demo_dir.open("res://src/Level/Demo/Coast")
+	demo_dir.open("res://src/Level/Village")
 	demo_dir.list_dir_begin()
 	while true:
 		var file = demo_dir.get_next()
@@ -42,46 +44,50 @@ func _ready():
 			break
 		elif not file.begins_with("."):
 			if file.ends_with(".tscn"):
-				levels.append("res://src/Level/Demo/Coast/%s" %file)
+				villages.append("res://src/Level/Village/%s" %file)
 	demo_dir.list_dir_end()
 	
-	demo_dir.open("res://src/Level/Demo/Village")
-	demo_dir.list_dir_begin()
-	while true:
-		var file = demo_dir.get_next()
-		if file == "":
-			break
-		elif not file.begins_with("."):
-			if file.ends_with(".tscn"):
-				levels.append("res://src/Level/Demo/Village/%s" %file)
-	demo_dir.list_dir_end()
-	
-	demo_dir.open("res://src/Level/Demo/CloudFactory")
-	demo_dir.list_dir_begin()
-	while true:
-		var file = demo_dir.get_next()
-		if file == "":
-			break
-		elif not file.begins_with("."):
-			if file.ends_with(".tscn"):
-				levels.append("res://src/Level/Demo/CloudFactory/%s" %file)
-	demo_dir.list_dir_end()
+#	demo_dir.open("res://src/Level/CloudFactory")
+#	demo_dir.list_dir_begin()
+#	while true:
+#		var file = demo_dir.get_next()
+#		if file == "":
+#			break
+#		elif not file.begins_with("."):
+#			if file.ends_with(".tscn"):
+#				nones.append("res://src/Level/CloudFactory/%s" %file)
+#	demo_dir.list_dir_end()
 
-	for l in levels:
-		if l.rfind(".tscn"):
+	for n in nones:
+		if n.rfind(".tscn"):
 			var level_button = LEVELBUTTON.instance()
-			level_button.level = l
-			$MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer.add_child(level_button)
-		else:
-			pass
+			level_button.level = n
+			$MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/None/VBoxContainer.add_child(level_button)
 	
-	#add a sacrificial item because it clips last item otherwise
-	var level_button = LEVELBUTTON.instance()
-	$MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer.add_child(level_button)
+	for c in coasts:
+		if c.rfind(".tscn"):
+			var level_button = LEVELBUTTON.instance()
+			level_button.level = c
+			$MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Coast/VBoxContainer.add_child(level_button)
+		
+	for v in villages:
+		if v.rfind(".tscn"):
+			var level_button = LEVELBUTTON.instance()
+			level_button.level = v
+			$MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Village/VBoxContainer.add_child(level_button)
+
+	########
+	var first_button = $MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/None/VBoxContainer.get_child(0)
+	
+	first_button.grab_focus()
 
 func _on_viewport_size_changed():
-	$MarginContainer.rect_size = get_tree().get_root().size / world.resolution_scale
+	rect_size = get_tree().get_root().size / world.resolution_scale
 
 
 func _on_Return_pressed():
+	if world.has_node("UILayer/PauseMenu"):
+		world.get_node("UILayer/PauseMenu").focus()
+	if world.has_node("UILayer/TitleScreen"):
+		world.get_node("UILayer/TitleScreen").focus()
 	queue_free()

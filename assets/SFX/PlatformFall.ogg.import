@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/PlatformFall.ogg-5c0f0109dbe744e0a9d50661879d62c1.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/PlatformFall.ogg"
+dest_files=[ "res://.import/PlatformFall.ogg-5c0f0109dbe744e0a9d50661879d62c1.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

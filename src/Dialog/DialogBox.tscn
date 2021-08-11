@@ -10,21 +10,25 @@ use_mipmaps = true
 extra_spacing_top = 2
 font_data = ExtResource( 4 )
 
-[node name="DialogBox" type="Control"]
+[node name="DialogBox" type="MarginContainer"]
 margin_right = 480.0
-margin_bottom = 272.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 0, 80 )
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": false,
-"_edit_vertical_guides_": [  ]
+"_edit_use_anchors_": false
 }
 dialog_json = "res://src/Dialog/NewDialogPrinter.json"
 
 [node name="Background" type="NinePatchRect" parent="."]
-margin_left = 64.0
-margin_top = 192.0
-margin_right = 448.0
-margin_bottom = 256.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 472.0
+margin_bottom = 72.0
 texture = ExtResource( 2 )
 region_rect = Rect2( 0, 0, 48, 48 )
 patch_margin_left = 8
@@ -36,10 +40,10 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_left = 64.0
-margin_top = 192.0
-margin_right = 448.0
-margin_bottom = 256.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 472.0
+margin_bottom = 72.0
 custom_constants/margin_right = 8
 custom_constants/margin_top = 8
 custom_constants/margin_left = 8
@@ -51,8 +55,9 @@ __meta__ = {
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 376.0
+margin_right = 456.0
 margin_bottom = 56.0
+custom_constants/separation = 8
 
 [node name="Face" type="Control" parent="MarginContainer/HBoxContainer"]
 margin_right = 48.0
@@ -64,8 +69,8 @@ centered = false
 
 [node name="TextBox" type="Label" parent="MarginContainer/HBoxContainer"]
 light_mask = 2
-margin_left = 52.0
-margin_right = 368.0
+margin_left = 56.0
+margin_right = 448.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

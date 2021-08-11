@@ -20,15 +20,15 @@ func _ready():
 	
 func _physics_process(delta):
 	if not dead:
-		_velocity = calculate_move_velocity(_velocity, move_dir, speed)
-		_velocity = move_and_slide(_velocity, FLOOR_NORMAL)
+		velocity = calculate_movevelocity(velocity, move_dir, speed)
+		velocity = move_and_slide(velocity, FLOOR_NORMAL)
 	
 		if is_on_wall():
 			move_dir *= -1
 			animate()
 
-func calculate_move_velocity(linear_velocity: Vector2, move_dir: Vector2, speed: Vector2) -> Vector2:
-	var out: = linear_velocity
+func calculate_movevelocity(linearvelocity: Vector2, move_dir: Vector2, speed: Vector2) -> Vector2:
+	var out: = linearvelocity
 	var friction = false
 	
 	out.y += gravity * get_physics_process_delta_time()

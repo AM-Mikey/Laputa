@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/YMNbubbleselect.WAV-4c56de07d7a3199d40ce470b2bf1c853.sample"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/OtherGames/YMNbubbleselect.WAV"
+dest_files=[ "res://.import/YMNbubbleselect.WAV-4c56de07d7a3199d40ce470b2bf1c853.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
