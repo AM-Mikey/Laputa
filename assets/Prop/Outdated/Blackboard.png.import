@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Elevator.png-23004353af95ed078e2ec8f7c25d6a78.stex"
+path="res://.import/Blackboard.png-0ad81826bcc2b738b952e6dcbb446890.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Prop/Elevator.png"
-dest_files=[ "res://.import/Elevator.png-23004353af95ed078e2ec8f7c25d6a78.stex" ]
+source_file="res://assets/Prop/Outdated/Blackboard.png"
+dest_files=[ "res://.import/Blackboard.png-0ad81826bcc2b738b952e6dcbb446890.stex" ]
 
 [params]
 

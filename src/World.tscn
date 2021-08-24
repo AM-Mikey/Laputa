@@ -19,6 +19,9 @@ z_index = 1
 hp = 8
 max_hp = 8
 
+[node name="Middle" type="Node2D" parent="."]
+z_index = 1
+
 [node name="Front" type="Node2D" parent="."]
 z_index = 3
 

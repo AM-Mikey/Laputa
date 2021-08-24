@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Cage.png-b2667d0b352abafbca24e8ef47cba0ae.stex"
+path="res://.import/Village4.png-3bfe158a17c389c325cb2fa9422d6ec4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Prop/Cage.png"
-dest_files=[ "res://.import/Cage.png-b2667d0b352abafbca24e8ef47cba0ae.stex" ]
+source_file="res://assets/Prop/Grass/Village4.png"
+dest_files=[ "res://.import/Village4.png-3bfe158a17c389c325cb2fa9422d6ec4.stex" ]
 
 [params]
 

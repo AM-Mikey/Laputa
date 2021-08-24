@@ -1,7 +1,7 @@
 extends Area2D
 
-var open_sound = load("res://assets/SFX/snd_door.ogg")
-var locked_sound = load("res://assets/SFX/snd_gun_click.ogg")
+var open_sound = load("res://assets/SFX/Placeholder/snd_door.ogg")
+var locked_sound = load("res://assets/SFX/Placeholder/snd_gun_click.ogg")
 
 var has_player_near = false
 var active_player = null

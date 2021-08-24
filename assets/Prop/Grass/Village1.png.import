@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Billboard.png-cbdfa73541e993742b41d459d31902ac.stex"
+path="res://.import/Village1.png-7116ace8dfc62294313bbf5b95bb0242.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Prop/Billboard.png"
-dest_files=[ "res://.import/Billboard.png-cbdfa73541e993742b41d459d31902ac.stex" ]
+source_file="res://assets/Prop/Grass/Village1.png"
+dest_files=[ "res://.import/Village1.png-7116ace8dfc62294313bbf5b95bb0242.stex" ]
 
 [params]
 

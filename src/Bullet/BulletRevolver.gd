@@ -53,6 +53,13 @@ func _on_CollisionDetector_body_entered(body):
 			_fizzle_from_world()
 
 
+func _on_CollisionDetector_area_entered(area):
+	if not disabled:
+		if area.get_collision_layer_bit(8): #breakable
+					area.on_break("cut")
+					if area.get_collision_layer_bit(3): #world
+						_fizzle_from_world()
 
 
-
+#TODO: merge all this breaking code into bullet.gd
+#set the default breaking as "cut" and store a var in different bullets as the destruction type

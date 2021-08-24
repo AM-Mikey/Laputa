@@ -85,7 +85,7 @@ func _physics_process(delta):
 				if $ForgivenessTimer.time_left == 0: #just landed
 					if $BonkTimeout.time_left == 0:
 						$BonkTimeout.start(0.4)
-						var collision = get_slide_collision(0)
+						var collision = get_slide_collision(get_slide_count() - 1)
 						print("collision normal:", collision.normal)
 						var bonk = load("res://src/Effect/BonkParticle.tscn").instance()
 						bonk.position = position

@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Tile/Village.tres" type="TileSet" id=1]
+[ext_resource path="res://src/Tile/PropTile/GrassProp.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=5]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=6]
@@ -53,6 +54,9 @@ cell_size = Vector2( 16, 16 )
 collision_layer = 8
 collision_mask = 0
 format = 1
+
+[node name="GrassProp" parent="Tiles" instance=ExtResource( 2 )]
+tile_data = PoolIntArray( 1048576, 0, 0, 1048577, 0, 0, 1048578, 0, 0, 1048579, 0, 0, 1048580, 0, 0, 1048581, 0, 0, 1048582, 0, 0, 1048583, 0, 0, 1048584, 0, 0, 1048585, 0, 0, 1048586, 0, 0, 1114125, 0, 0, 1179664, 0, 0, 1179730, 0, 0, 1179731, 0, 0, 1179732, 0, 0, 1179733, 0, 0, 1179734, 0, 0, 1179735, 0, 0, 1245203, 0, 0, 1245258, 0, 0, 1245259, 0, 0, 1245260, 0, 0, 1245261, 0, 0, 1245262, 0, 0, 1245263, 0, 0, 1245274, 0, 0, 1245275, 0, 0, 1245276, 0, 0, 1245277, 0, 0, 1245278, 0, 0, 1310742, 0, 0, 1310787, 0, 0, 1310788, 0, 0, 1310789, 0, 0, 1310790, 0, 0, 1310791, 0, 0, 1310817, 0, 0, 1310818, 0, 0, 1376281, 0, 0, 1376282, 0, 0, 1376320, 0, 0, 1376357, 0, 0, 1376358, 0, 0, 1376359, 0, 0, 1441821, 0, 0, 1441853, 0, 0, 1507360, 0, 0, 1507361, 0, 0, 1507386, 0, 0, 1572900, 0, 0, 1572901, 0, 0, 1572902, 0, 0, 1572903, 0, 0, 1572904, 0, 0, 1572905, 0, 0, 1572906, 0, 0, 1572907, 0, 0, 1572908, 0, 0, 1572909, 0, 0, 1572910, 0, 0, 1572911, 0, 0, 1572912, 0, 0, 1572913, 0, 0, 1572914, 0, 0, 1572915, 0, 0, 1572916, 0, 0, 1572917, 0, 0, 1572918, 0, 0, 1572919, 0, 0 )
 
 [node name="Props" type="Node2D" parent="."]
 

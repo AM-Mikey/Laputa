@@ -61,7 +61,7 @@ level = "res://src/Level/Coast/PirateShip.tscn"
 [node name="ZoneHorizontal" parent="Triggers" instance=ExtResource( 1 )]
 position = Vector2( 648, 224 )
 scale = Vector2( 1, 20.04 )
-level = "res://src/Level/Demo/Coast/Horizontal.tscn"
+level = "res://src/Level/Coast/Horizontal.tscn"
 
 [node name="KillBox" parent="Triggers" instance=ExtResource( 6 )]
 position = Vector2( 112, 888 )

@@ -1,5 +1,6 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
+[ext_resource path="res://src/Tile/PropTile/GrassProp.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=3]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=5]
 [ext_resource path="res://src/Tile/TriggerTile/StairsTrigger.tscn" type="PackedScene" id=6]
@@ -81,6 +82,9 @@ tile_data = PoolIntArray( 1572887, 53, 1, 1572901, 53, 0, 1572902, 53, 0, 163842
 
 [node name="StairsTrigger" parent="Tiles" instance=ExtResource( 6 )]
 tile_data = PoolIntArray( 1572887, 0, 0, 1638424, 1, 0, 1703961, 1, 0, 1769498, 1, 0, 1835035, 1, 0, 1900572, 1, 0, 1966109, 1, 0, 2031646, 1, 0, 2097183, 1, 0, 2162720, 1, 0 )
+
+[node name="GrassProp" parent="Tiles" instance=ExtResource( 2 )]
+tile_data = PoolIntArray( 1507355, 0, 0, 1507356, 0, 0, 1507357, 0, 0, 1507358, 0, 0, 1507359, 0, 0, 1507360, 0, 0, 1507361, 0, 0, 1507362, 0, 0, 1507363, 0, 0, 1507364, 0, 0, 1507365, 0, 0, 1507366, 0, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
 

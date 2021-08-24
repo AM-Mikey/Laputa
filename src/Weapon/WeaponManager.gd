@@ -86,8 +86,8 @@ func prepare_bullet(bullet_pos, effect_pos, shoot_dir):
 	
 	###starpop/muzzle flash
 	var muzzle_flash = load("res://src/Effect/MuzzleFlashEffect.tscn").instance()
-	muzzle_flash.global_position = get_parent().get_node("WeaponSprite").global_position
-	get_tree().get_root().get_node("World/Front").add_child(muzzle_flash)
+	muzzle_flash.position = get_parent().get_node("WeaponSprite").position
+	get_parent().add_child(muzzle_flash)
 		
 	
 func get_bullet_dir(bullet_rot) -> Vector2:

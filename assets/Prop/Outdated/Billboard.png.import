@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Fan.png-a167948a601bc04059616d692aa63a3e.stex"
+path="res://.import/Billboard.png-084ecf8f2e2b0a4efee3afda5df3f743.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Prop/Fan.png"
-dest_files=[ "res://.import/Fan.png-a167948a601bc04059616d692aa63a3e.stex" ]
+source_file="res://assets/Prop/Outdated/Billboard.png"
+dest_files=[ "res://.import/Billboard.png-084ecf8f2e2b0a4efee3afda5df3f743.stex" ]
 
 [params]
 
