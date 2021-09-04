@@ -22,6 +22,7 @@ func _ready():
 		rotation_degrees = 90
 	if direction == Vector2.DOWN:
 		rotation_degrees = -90
+		
 
 
 func _physics_process(delta):
@@ -53,12 +54,12 @@ func _on_CollisionDetector_body_entered(body):
 			_fizzle_from_world()
 
 
-func _on_CollisionDetector_area_entered(area):
-	if not disabled:
-		if area.get_collision_layer_bit(8): #breakable
-					area.on_break("cut")
-					if area.get_collision_layer_bit(3): #world
-						_fizzle_from_world()
+#func _on_CollisionDetector_area_entered(area):
+#	if not disabled:
+#		if area.get_collision_layer_bit(8): #breakable
+#					area.on_break("cut")
+#					if area.get_collision_layer_bit(3): #world
+#						_fizzle_from_world()
 
 
 #TODO: merge all this breaking code into bullet.gd

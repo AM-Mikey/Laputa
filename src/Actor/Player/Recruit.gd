@@ -1,48 +1,99 @@
 extends Player
 
-const BLACKBAR = preload("res://src/Utility/BlackBar.tscn")
 const POPUP = preload("res://src/UI/PopupText.tscn")
+const LEVELUP = preload("res://src/Effect/LevelUp.tscn")
+const LEVELDOWN = preload("res://src/Effect/LevelDown.tscn")
+
+const SNAP_DIRECTION = Vector2.DOWN
+const SNAP_LENGTH = 4.0
+
+var sfx_get_heart = load("res://assets/SFX/Placeholder/snd_health_refill.ogg")
+var sfx_get_xp = load("res://assets/SFX/Placeholder/snd_get_xp.ogg")
+var sfx_get_ammo = load("res://assets/SFX/Placeholder/snd_get_missile.ogg")
+
+#export var speed.x = 90 #was 82.5 for a max gap of 7 (barely)
+#var half_speed.x = speed.x/2
+#export var speed.y = 180 #was 195 for 4 blocks
+#export var normal_speed.y = 195
+#export var long_speed.y = 150
 
 
-export var max_x_speed = 90 #was 82.5 for a max gap of 7 (barely)
-var half_max_x_speed = max_x_speed/2
-export var jump_speed = 180 #was 195 for 4 blocks
-#export var normal_jump_speed = 195
-#export var long_jump_speed = 150
-var movement_profile = "sigma"
 
 export var minimum_jump_time = 0.0000000001 #was 0.1
 export var minimum_direction_time = 1.0 #was 0.5  #scrapped idea where cave story forces you to jump a certain x distance when going max speed before jumping
 var jump_starting_move_dir_x: int
 
-var jump_type: String
+
 
 export var min_xvelocity = 0.001
 
-var horizontal_focus = Vector2.LEFT
-var homing_camera = false
-var panning_up = false
-var panning_down = false
 
 var direction_lock = Vector2.ZERO
 var starting_direction #for acceleration
 var bonk_distance = 4
 
 
+
+export var hp: int = 100
+export var max_hp: int = 100
+var total_xp: int = 0
+
+
+#STATES
+var movement_profile = "sigma"
+var jump_type: String #still supported?
+
+var invincible = false
+var colliding = true
+var disabled = false
+
+var is_in_enemy = false
+var is_on_ladder = false
+var is_on_ssp = false
+var is_in_spikes = false
+
+var debug_flying = false
+export var debug_fly_speed = 500
+
+var inventory: Array
+var topic_array: Array = ["ham", "cheese", "marbles", "balogna"]
+var weapon_array: Array = [load("res://src/Weapon/Revolver1.tres"), load("res://src/Weapon/GrenadeLauncher1.tres"), load("res://src/Weapon/MachinePistol1.tres"), load("res://src/Weapon/Shotgun1.tres")]
+
+var move_dir = Vector2.LEFT
+var face_dir = Vector2.LEFT
+var shoot_dir = Vector2.LEFT
+
+var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
+
+export var dodge_speed = Vector2(700, 100)
+export var dodge_time: float = (0.3)
+
+export var forgiveness_time = 0.05
+var knockback = false
+var knockback_direction: Vector2
+
+
 export var knockback_speed = Vector2(80, 100)
 var knockbackvelocity = Vector2.ZERO
 
 
-var run_anim_speed: float
+
 
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
+	speed = Vector2(90,100)
+	
+	var item_menu = get_tree().get_root().get_node("World/UILayer/ItemMenu")
+	connect("inventory_updated", item_menu, "_on_inventory_updated")
 	acceleration = 2.5 #was 5
 	ground_cof = 0.1 #was 0.2
 	air_cof = 0.00 # was 0.05
 	
 	$BonkTimeout.start(0.4)
+	
+	if weapon_array.front() != null:
+		$WeaponSprite.texture = weapon_array.front().texture
 
 func _physics_process(delta):
 	#print("Velocity: ", velocity)
@@ -55,9 +106,8 @@ func _physics_process(delta):
 					is_jump_interrupted = true
 				
 				
-			var move_dir = get_move_dir()
-			var bullet_pos = $BulletOrigin.global_position
-			var effect_pos = $WeaponSprite.position
+			move_dir = get_move_dir()
+
 			
 			if is_on_ceiling():
 				if $BonkTimeout.time_left == 0:
@@ -75,7 +125,7 @@ func _physics_process(delta):
 			
 			if is_on_floor():
 				jump_type = ""
-#				jump_speed = normal_jump_speed
+#				speed.y = normal_speed.y
 					
 				if not knockback and not is_on_ladder:
 					snap_vector = SNAP_DIRECTION * SNAP_LENGTH
@@ -111,7 +161,7 @@ func _physics_process(delta):
 				if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
 					if abs(velocity.x) > 82: #since 82.5 is max x velocity, only count as a running jump then   ##Running JUMP CHECKING HERE
 						jump_type = "running_jump"
-#						jump_speed = long_jump_speed
+#						speed.y = long_speed.y
 						jump_starting_move_dir_x = move_dir.x
 						$MinimumDirectionTimer.start(minimum_direction_time)
 				snap_vector = Vector2.ZERO
@@ -122,7 +172,8 @@ func _physics_process(delta):
 				$JumpSound.play()
 		
 			
-			if Input.is_action_just_pressed("look_down") and can_fall_through == true and is_on_floor():
+			#fall through ssp code
+			if Input.is_action_just_pressed("look_down") and is_on_ssp and is_on_floor():
 				position.y += 8
 				
 			if knockback:
@@ -147,69 +198,16 @@ func _physics_process(delta):
 			
 			velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
 			
-			run_anim_speed = max((abs(velocity.x)/max_x_speed) * 1.5, 0.1) #run_anim_speed = max((abs(velocity.x)/max_x_speed) * 1.5, 0.5)
-			#print(run_anim_speed)
-			animate(move_dir, velocity)
+#			$AnimationManager.run_anim_speed = max((abs(velocity.x)/speed.x) * 1.5, 0.1) #run_anim_speed = max((abs(velocity.x)/speed.x) * 1.5, 0.5)
+#			#print(run_anim_speed)
+#			$AnimationManager.animate(move_dir, velocity)
 			
-			if Input.is_action_pressed("fire_manual"): #holding
-				$WeaponManager.manual_fire(bullet_pos, effect_pos, shoot_dir)
-			if Input.is_action_pressed("fire_automatic"): #holding
-				$WeaponManager.automatic_fire(bullet_pos, effect_pos, shoot_dir)
-			if Input.is_action_just_pressed("fire_automatic"): #only on first pressed
+
+			if Input.is_action_just_pressed("fire_automatic"): 
 				direction_lock = face_dir
-			if Input.is_action_just_released("fire_manual"):
-				$WeaponManager.release_fire()
 			if Input.is_action_just_released("fire_automatic"): 
-				$WeaponManager.release_fire()
 				direction_lock = Vector2.ZERO
-			
-			if face_dir == Vector2.LEFT and horizontal_focus == Vector2.RIGHT:
-				horizontal_focus = Vector2.LEFT
-				pan_camera_horizontal(face_dir, velocity)
-			if face_dir == Vector2.RIGHT and horizontal_focus == Vector2.LEFT:
-				horizontal_focus = Vector2.RIGHT
-				pan_camera_horizontal(face_dir, velocity)
-			
-			if $Camera2D/TweenHorizontal.is_active():
-				$Camera2D/TweenHorizontal.playback_speed = max(abs(velocity.x)/max_x_speed, 0.5) #second number is minimum camera speed ##thanks me!
-			
-#			if Input.is_action_pressed("look_up") and Input.is_action_pressed("look_down"):
-#				print("hi")
-#				panning_up = false
-#				panning_down = false
-#				home_camera_vertical()
-#
-			if Input.is_action_just_pressed("look_up"):
-				if panning_down:
-					panning_up = false
-					home_camera_vertical()
-				elif not panning_up:
-					panning_up = true
-					pan_camera_vertical(-1)
 
-			if Input.is_action_just_pressed("look_down"):
-				if panning_up:
-					panning_down = false
-					home_camera_vertical()
-				elif not panning_down:
-					panning_down = true
-					pan_camera_vertical(1)
-
-			if Input.is_action_just_released("look_up"):
-				if Input.is_action_pressed("look_down"):
-					panning_down = true
-					pan_camera_vertical(1)
-				else:
-					panning_up = false
-					home_camera_vertical()
-			
-			if Input.is_action_just_released("look_down"):
-				if Input.is_action_pressed("look_up"):
-					panning_up = true
-					pan_camera_vertical(-1)
-				else:
-					panning_down = false
-					home_camera_vertical()
 
 			debug_print(move_dir, face_dir)
 		
@@ -218,8 +216,8 @@ func _physics_process(delta):
 			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 
 			Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
 			velocity = Vector2(
-			debug_speed * move_dir.x,
-			debug_speed * move_dir.y)
+			debug_fly_speed * move_dir.x,
+			debug_fly_speed * move_dir.y)
 			velocity = move_and_slide(velocity, FLOOR_NORMAL, true)
 
 	else: #we are curently disabled
@@ -244,22 +242,22 @@ func get_move_velocity(velocity, move_dir, face_dir, is_jump_interrupted) -> Vec
 	var friction = false
 	
 	if is_on_ladder:
-		out.y = move_dir.y * jump_speed/2
+		out.y = move_dir.y * speed.y/2
 
 		out.x = 0
 		if Input.is_action_just_pressed("jump"):
 			is_on_ladder = false
-			out.y = jump_speed * -1.0
+			out.y = speed.y * -1.0
 	
 	elif is_in_water:
 		out.y += (gravity/2) * get_physics_process_delta_time()
 		if move_dir.y < 0:
-			out.y = (jump_speed * 0.75) * move_dir.y
+			out.y = (speed.y * 0.75) * move_dir.y
 		if is_jump_interrupted:
 			out.y += (gravity/2) * get_physics_process_delta_time()
 		
 		if move_dir.x != 0:
-			out.x = min(abs(out.x) + acceleration, (max_x_speed/2))
+			out.x = min(abs(out.x) + acceleration, (speed.x/2))
 			out.x *= move_dir.x
 		else:
 			friction = true
@@ -267,7 +265,7 @@ func get_move_velocity(velocity, move_dir, face_dir, is_jump_interrupted) -> Vec
 	elif jump_type == "running_jump":
 		out.y += gravity * get_physics_process_delta_time()
 		if move_dir.y < 0:
-			out.y = jump_speed * move_dir.y
+			out.y = speed.y * move_dir.y
 		if is_jump_interrupted:
 			out.y += gravity * get_physics_process_delta_time()
 		
@@ -276,17 +274,17 @@ func get_move_velocity(velocity, move_dir, face_dir, is_jump_interrupted) -> Vec
 		
 		if not $MinimumDirectionTimer.is_stopped(): #still doing minimum x movement in jump #
 			#print("still doing minimum x movement")
-			out.x = max_x_speed
+			out.x = speed.x
 			out.x *= jump_starting_move_dir_x
 		
 		
 		elif move_dir.x != 0: #try this as an "if" instead, if it's not working
 			if move_dir.x != jump_starting_move_dir_x:
-				out.x = min(abs(out.x) + acceleration, half_max_x_speed)
+				out.x = min(abs(out.x) + acceleration, (speed.x * 0.5))
 				out.x *= move_dir.x
 				#$MinimumDirectionTimer.start(0)
 			else:
-				out.x = min(abs(out.x) + acceleration, max_x_speed)
+				out.x = min(abs(out.x) + acceleration, speed.x)
 				out.x *= move_dir.x
 		else:
 			friction = true
@@ -295,12 +293,12 @@ func get_move_velocity(velocity, move_dir, face_dir, is_jump_interrupted) -> Vec
 	else:
 		out.y += gravity * get_physics_process_delta_time()
 		if move_dir.y < 0:
-			out.y = jump_speed * move_dir.y
+			out.y = speed.y * move_dir.y
 		if is_jump_interrupted:
 			out.y += gravity * get_physics_process_delta_time()
 
 		if move_dir.x != 0:
-			out.x = min(abs(out.x) + acceleration, max_x_speed)
+			out.x = min(abs(out.x) + acceleration, speed.x)
 			out.x *= move_dir.x
 		else:
 			friction = true
@@ -321,480 +319,321 @@ func get_move_velocity(velocity, move_dir, face_dir, is_jump_interrupted) -> Vec
 	return out
 
 
-func get_input_dir() -> Vector2:
-	return Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		Input.get_action_strength("look_up") - Input.get_action_strength("look_down"))
-	
-
-func animate(move_dir, velocity):
-	var player = $AnimationPlayer
-	var camera = $Camera2D
-	
-
-	
-	var texture
-	var hframes
-	var vframes
-	
-	var input_dir = get_input_dir()
-
-	
-	#var minimumvelocity = 1 #for the difference between moving and standing
-
-	var next_animation: String = ""
-	
-	if not is_on_ladder:
-		if direction_lock == Vector2.ZERO:  #NOT DIRECTION LOCKED
-		
-			if is_on_floor():
-				
-				if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
-					player.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitStand.png")
-					next_animation = get_next_animation("Stand", face_dir, false)
-					
-				elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
-					player.playback_speed = run_anim_speed
-					texture = load("res://assets/Actor/Player/RecruitRun.png")
-					if Input.is_action_pressed("move_left"):
-						next_animation = get_next_animation("Run", Vector2.LEFT, false)
-					if Input.is_action_pressed("move_right"):
-						next_animation = get_next_animation("Run", Vector2.RIGHT, false)
-						
-				else:
-					player.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitStand.png")
-					next_animation = get_next_animation("Stand", face_dir, false)
-
-
-			else: #airborne
-				
-				if velocity.y < 0: #Rising
-					player.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitRise.png")
-					
-					if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
-						next_animation = get_next_animation("Rise", face_dir, true)
-					
-					elif Input.is_action_pressed("move_left"):
-							next_animation = get_next_animation("Rise", Vector2.LEFT, true)	
-					elif Input.is_action_pressed("move_right"):
-							next_animation = get_next_animation("Rise", Vector2.RIGHT, true)
-					
-					else:
-						next_animation = get_next_animation("Rise", face_dir, true)
-				
-				else: #Falling
-					player.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitFall.png")
-					
-					if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
-						next_animation = get_next_animation("Fall", face_dir, true)
-					
-					elif Input.is_action_pressed("move_left"):
-							next_animation = get_next_animation("Fall", Vector2.LEFT, true)
-					elif Input.is_action_pressed("move_right"):
-							next_animation = get_next_animation("Fall", Vector2.RIGHT, true)
-					
-					else:
-						next_animation = get_next_animation("Fall", face_dir, true)
-
-
-		elif direction_lock == Vector2.LEFT: #DIRECTION LOCKED LEFT
-			face_dir = Vector2.LEFT
-			
-			if is_on_floor():
-				
-				if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
-					player.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitStand.png")
-					next_animation = get_next_animation("Stand", face_dir, false)
-				
-				elif Input.is_action_pressed("move_left"):
-					player.playback_speed = run_anim_speed
-					texture = load("res://assets/Actor/Player/RecruitRun.png")
-					next_animation = get_next_animation("Run", Vector2.LEFT, false)
-				
-				elif Input.is_action_pressed("move_right"):
-					player.playback_speed = run_anim_speed
-					texture = load("res://assets/Actor/Player/RecruitBackrun.png")
-					next_animation = get_next_animation("Backrun", Vector2.RIGHT, false)
-				
-				else:
-					player.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitStand.png")
-					next_animation = get_next_animation("Stand", face_dir, false)
-
-
-			else: #airborne
-				if velocity.y < 0: #Rising
-					player.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitRise.png")
-					
-					if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
-						next_animation = get_next_animation("Rise", face_dir, true)
-					
-					elif Input.is_action_pressed("move_left"):
-							next_animation = get_next_animation("Rise", Vector2.LEFT, true)	
-					elif Input.is_action_pressed("move_right"):
-							next_animation = get_next_animation("Rise", Vector2.LEFT, true)
-					
-					else:
-						next_animation = get_next_animation("Rise", face_dir, true)
-
-				else: #Falling
-					player.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitFall.png")
-					
-					if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
-						next_animation = get_next_animation("Fall", face_dir, true)
-					
-					elif Input.is_action_pressed("move_left"):
-							next_animation = get_next_animation("Fall", Vector2.LEFT, true)
-					elif Input.is_action_pressed("move_right"):
-							next_animation = get_next_animation("Fall", Vector2.LEFT, true)
-					
-					else:
-						next_animation = get_next_animation("Fall", face_dir, true)
-
-
-		elif direction_lock == Vector2.RIGHT: #DIRECTION LOCKED RIGHT
-			face_dir = Vector2.RIGHT
-			
-			if is_on_floor():
-				
-				if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
-					player.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitStand.png")
-					next_animation = get_next_animation("Stand", face_dir, false)
-				
-				elif Input.is_action_pressed("move_left"):
-					player.playback_speed = run_anim_speed
-					texture = load("res://assets/Actor/Player/RecruitBackrun.png")
-					next_animation = get_next_animation("Backrun", Vector2.LEFT, false)
-				
-				elif Input.is_action_pressed("move_right"):
-					player.playback_speed = run_anim_speed
-					texture = load("res://assets/Actor/Player/RecruitRun.png")
-					next_animation = get_next_animation("Run", Vector2.RIGHT, false)
-				
-				else:
-					player.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitStand.png")
-					next_animation = get_next_animation("Stand", face_dir, false)
-
-
-			else: #airborne
-				if velocity.y < 0: #Rising
-					player.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitRise.png")
-					
-					if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
-						next_animation = get_next_animation("Rise", face_dir, true)
-					
-					elif Input.is_action_pressed("move_left"):
-							next_animation = get_next_animation("Rise", Vector2.RIGHT, true)	
-					elif Input.is_action_pressed("move_right"):
-							next_animation = get_next_animation("Rise", Vector2.RIGHT, true)
-					
-					else:
-						next_animation = get_next_animation("Rise", face_dir, true)
-
-				else: #Falling
-					player.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitFall.png")
-					
-					if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
-						next_animation = get_next_animation("Fall", face_dir, true)
-					
-					elif Input.is_action_pressed("move_left"):
-							next_animation = get_next_animation("Fall", Vector2.RIGHT, true)
-					elif Input.is_action_pressed("move_right"):
-							next_animation = get_next_animation("Fall", Vector2.RIGHT, true)
-					
-					else:
-						next_animation = get_next_animation("Fall", face_dir, true)
-
-
-	else: #is on ladder
-		player.playback_speed = 1 #reset player to normal speed
-		texture = load("res://assets/Actor/Player/RecruitClimb.png")
-		
-		if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
-			next_animation = get_next_animation("Climb", face_dir, true)
-		
-		elif Input.is_action_pressed("move_left"):
-			next_animation = get_next_animation("Climb", Vector2.LEFT, true)	
-		elif Input.is_action_pressed("move_right"):
-			next_animation = get_next_animation("Climb", Vector2.RIGHT, true)
-		
-		else:
-			next_animation = get_next_animation("Climb", face_dir, true)
-
-
-
-
-	if not player.current_animation == next_animation:
-		if next_animation != "":
-			change_animation(next_animation, texture)
-
-func get_next_animation(animation, anim_dir, can_shoot_down):
-	var animation_suffix
-	
-	if anim_dir == Vector2.LEFT:
-		face_dir = Vector2.LEFT
-		
-		if Input.is_action_pressed("look_up") and Input.is_action_pressed("look_down"):
-			animation_suffix = "Left"
-			shoot_dir = Vector2.LEFT
-			
-		elif Input.is_action_pressed("look_up"):
-			animation_suffix = "LeftLookUp"
-			shoot_dir = Vector2.UP
-			
-		elif Input.is_action_pressed("look_down"):
-			animation_suffix = "LeftLookDown"
-			if can_shoot_down:
-				shoot_dir = Vector2.DOWN
-			else:
-				shoot_dir = Vector2.LEFT
-		
-		else:
-			animation_suffix = "Left"
-			shoot_dir = Vector2.LEFT
-			
-	
-	if anim_dir == Vector2.RIGHT:
-		face_dir = Vector2.RIGHT
-
-		if Input.is_action_pressed("look_up") and Input.is_action_pressed("look_down"):
-			animation_suffix = "Right"
-			shoot_dir = Vector2.RIGHT
-
-		elif Input.is_action_pressed("look_up"):
-			animation_suffix = "RightLookUp"
-			shoot_dir = Vector2.UP
-			
-		elif Input.is_action_pressed("look_down"):
-			animation_suffix = "RightLookDown"
-			if can_shoot_down:
-				shoot_dir = Vector2.DOWN
-			else:
-				shoot_dir = Vector2.RIGHT
-		
-		else:
-			animation_suffix = "Right"
-			shoot_dir = Vector2.RIGHT
-		
-		
-	var back = "Back" in animation
-	if back:
-		shoot_dir.x *= -1
-		
-	var next_animation = animation + animation_suffix
-	return next_animation
-
-
-func change_animation(next_animation, texture):
-	var player = $AnimationPlayer
-	var old_animation = $AnimationPlayer.current_animation
-	var old_time = $AnimationPlayer.current_animation_position
-	
-	var front = $Front
-	var back = $Back
-	
-	front.texture = texture
-	front.hframes = texture.get_width()  /32
-	front.vframes = texture.get_height() /32
-	back.texture = texture
-	back.hframes = texture.get_width()  /32
-	back.vframes = texture.get_height() /32
-	
-	var animation_groups = {
-		"StandLeft": 1,
-		"StandLeftLookUp": 1,
-		"StandLeftLookDown": 1,
-		"StandRight": 2,
-		"StandRightLookUp": 2,
-		"StandRightLookDown": 2,
-		"RunLeft": 3,
-		"RunLeftLookUp": 3,
-		"RunLeftLookDown": 3,
-		"RunRight": 4,
-		"RunRightLookUp": 4,
-		"RunRightLookDown": 4,
-		"BackrunLeft": 5,
-		"BarckrunLeftLookUp": 5,
-		"BackrunLeftLookDown": 5,
-		"BackrunRight": 6,
-		"BarckrunRightLookUp": 6,
-		"BackrunRightLookDown": 6
-	}
-	
-	player.play(next_animation)
-	if animation_groups.has(old_animation) and animation_groups.has(next_animation):
-		if animation_groups[old_animation] == animation_groups[next_animation]:
-			$AnimationPlayer.seek(old_time)
-
-#func _on_BonkDetector_body_entered(body, direction):
-#	if not is_on_floor():
-#		global_position += (direction * -1) * Vector2(bonk_distance, 0)
-
-func _on_limit_camera(left, right, top, bottom):
-	var camera = $Camera2D
-	
-	var bars = get_tree().get_nodes_in_group("BlackBars")
-	for b in bars:
-		b.free()
-	
-	
-	if  OS.get_window_size().x > (right - left) * world.resolution_scale:
-		print("WARNING: window width larger than camera limit")
-		var extra_margin = ((OS.get_window_size().x / world.resolution_scale) - (right - left))/2
-		
-		camera.limit_left = left - extra_margin
-		camera.limit_right = right + extra_margin
-		
-		var left_pillar = BLACKBAR.instance()
-		left_pillar.name = "BlackBarLeft"
-		left_pillar.rect_size = Vector2(extra_margin, OS.get_window_size().y)
-		world.get_node("UILayer").add_child(left_pillar)
-		world.get_node("UILayer").move_child(left_pillar, 0)
-		
-		var right_pillar = BLACKBAR.instance()
-		right_pillar.name = "BlackBarRight"
-		right_pillar.rect_size = Vector2(extra_margin, OS.get_window_size().y)
-		right_pillar.rect_position = Vector2((right - left) + extra_margin, 0)
-		world.get_node("UILayer").add_child(right_pillar)
-		world.get_node("UILayer").move_child(right_pillar, 0)
-		
-	else:
-		camera.limit_left = left
-		camera.limit_right = right
-#		world.get_node("UILayer/HUD").rect_position.x = 0
-	
-	if OS.get_window_size().y > (bottom - top) * world.resolution_scale:
-		print("WARNING: window height larger than camera limit")
-		var extra_margin = (OS.get_window_size().y - (bottom - top))/2
-		camera.limit_top = top - extra_margin
-		camera.limit_bottom = bottom  + extra_margin
-		
-		var top_pillar = BLACKBAR.instance()
-		top_pillar.name = "BlackBarTop"
-		top_pillar.rect_size = Vector2(OS.get_window_size().x, extra_margin)
-		world.get_node("UILayer").add_child(top_pillar)
-		world.get_node("UILayer").move_child(top_pillar, 0)
-		
-		var bottom_pillar = BLACKBAR.instance()
-		bottom_pillar.name = "BlackBarRight"
-		bottom_pillar.rect_size = Vector2(OS.get_window_size().x, extra_margin)
-		bottom_pillar.rect_position = Vector2(0, (bottom - top) + extra_margin)
-		world.get_node("UILayer").add_child(bottom_pillar)
-		world.get_node("UILayer").move_child(bottom_pillar, 0)
-	
-	else:
-		camera.limit_top = top
-		camera.limit_bottom = bottom
-#		world.get_node("UILayer/HUD").rect_position.y = 0
-
-func pan_camera_vertical(direction):
-	var camera = $Camera2D
-	var tween = $Camera2D/TweenVertical
-	
-	var camera_pan_distance = 2 / world.resolution_scale
-	var camera_pan_time = 1.5
-	var camera_pan_delay = 0
-	
-	yield(get_tree().create_timer(camera_pan_delay), "timeout")
-	
-	if tween.is_active():
-		tween.stop_all()
-	#	homing_camera = false
-	tween.interpolate_property(camera, "offset_v", camera.offset_v, direction * camera_pan_distance, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	tween.start()
-
-func home_camera_vertical():
-	var camera = $Camera2D
-	var tween = $Camera2D/TweenVertical
-	
-	var camera_pan_time = 1.5
-	
-	if tween.is_active():
-		tween.stop_all()
-	tween.interpolate_property(camera, "offset_v", camera.offset_v, 0, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	tween.start()
-	yield(tween, "tween_completed")
-
-func pan_camera_horizontal(direction, velocity):
-	var camera = $Camera2D
-	var tween = $Camera2D/TweenHorizontal
-	
-	var camera_pan_distance = 2.0 / world.resolution_scale
-	var camera_pan_time = 1.5
-	var camera_pan_delay = 0
-	
-	yield(get_tree().create_timer(camera_pan_delay), "timeout")
-	
-	if tween.is_active():
-		tween.stop_all()
-	#	homing_camera = false
-	tween.interpolate_property(camera, "offset_h", camera.offset_h, direction.x * camera_pan_distance, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	tween.start()
-
-func home_camera_horizontal():
-	var camera = $Camera2D
-	var tween = $Camera2D/TweenHorizontal
-	
-	var camera_pan_time = 1.5
-	
-	if tween.is_active():
-		tween.stop_all()
-	tween.interpolate_property(camera, "offset_h", camera.offset_h, 0, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	tween.start()
-	yield(tween, "tween_completed")
-
 func _input(event):
-	if event.is_action_pressed("movement_profile"):
-		if movement_profile == "sigma":
-			movement_profile = "mu"
+	if not disabled:
+		if event.is_action_pressed("movement_profile"):
+			if movement_profile == "sigma":
+				movement_profile = "mu"
+				
+				speed.x = 82.5
+				speed.y = 180
+				
+				acceleration = 5
+				ground_cof = 0.2
+				air_cof = 0.05
+				
+			elif movement_profile == "mu":
+				movement_profile = "chi"
+				
+				speed.x = 90
+				speed.y = 180
+				
+				acceleration = 2.5
+				ground_cof = 0.1
+				air_cof = 0.05
 			
-			max_x_speed = 82.5
-			jump_speed = 180
+			elif movement_profile == "chi":
+				movement_profile = "sigma"
+				
+				speed.x = 90
+				speed.y = 180
+				
+				acceleration = 2.5
+				ground_cof = 0.1
+				air_cof = 0.00
 			
-			acceleration = 5
-			ground_cof = 0.2
-			air_cof = 0.05
-			
-		elif movement_profile == "mu":
-			movement_profile = "chi"
-			
-			max_x_speed = 90
-			jump_speed = 180
-			
-			acceleration = 2.5
-			ground_cof = 0.1
-			air_cof = 0.05
+			yield(get_tree(), "idle_frame")
+			var popup = POPUP.instance()
+			popup.text = "movement profile: " + movement_profile
+			world.get_node("UILayer").add_child(popup)
+
+
+
+			if event.is_action_pressed("debug_fly"):
+				debug_fly()
+				
+				
+				
+			if event.is_action_pressed("level_up"):
+				if weapon_array.front().level < weapon_array.front().max_level:
+					print("level up via debug")
+
+					if weapon_array.front().level == weapon_array.front().max_level and weapon_array.front().xp == weapon_array.front().max_xp: pass
+					else: weapon_array.front().xp = weapon_array.front().max_xp
+
+					var next_level = load(weapon_array.front().resource_path.replace(weapon_array.front().level,weapon_array.front().level + 1))
+					var saved_xp = weapon_array.front().xp - weapon_array.front().max_xp
+					var saved_ammo = weapon_array.front().ammo
+					weapon_array.pop_front()
+					weapon_array.push_front(next_level)
+					weapon_array.front().ammo = saved_ammo
+					weapon_array.front().xp = saved_xp
+					update_weapon()
+
+					var level_up = LEVELUP.instance()
+					get_tree().get_root().get_node("World/Front").add_child(level_up)
+					level_up.position = global_position
+
+					update_xp()
+
+			if event.is_action_pressed("level_down"):
+				if weapon_array.front().level != 1:
+					print("level down via debug")
+					var next_level = load(weapon_array.front().resource_path.replace(weapon_array.front().level, weapon_array.front().level - 1))
+					var saved_xp = weapon_array.front().xp #negative number
+					var saved_ammo = weapon_array.front().ammo
+					weapon_array.pop_front()
+					weapon_array.push_front(next_level)
+					weapon_array.front().ammo = saved_ammo
+					weapon_array.front().xp = weapon_array.front().max_xp + saved_xp
+					update_weapon()
+
+					var level_down = LEVELDOWN.instance()
+					get_tree().get_root().get_node("World/Front").add_child(level_down)
+
+
+func hit(damage, knockback_direction):
+	if disabled != true:
+		if invincible == false:
+			if knockback_direction != Vector2.ZERO:
+				snap_vector = Vector2.ZERO
+				knockback = true
+			if damage > 0:
+				hp -= damage
+				$HurtSound.play()
+				update_hp()
+				###DamageNumber
+				var damagenum = DAMAGENUMBER.instance()
+				damagenum.position = global_position
+				damagenum.value = damage
+				get_tree().get_root().get_node("World/Front").add_child(damagenum)
+				###
+				do_iframes(damage, knockback_direction)
+
+				if hp <= 0:
+					die()
+
+				if weapon_array.front() == null:
+					return
+				elif weapon_array.front().level == 1 and weapon_array.front().xp == 0: #if not level 1 and 0 xp, take away xp
+					return
+				else:
+					weapon_array.front().xp = max(weapon_array.front().xp - (damage * 2), 0)
+					update_xp()
+				
+				if weapon_array.front().xp < 0 and weapon_array.front().level != 1: #level down
+					var next_level = load(weapon_array.front().resource_path.replace(weapon_array.front().level, weapon_array.front().level - 1))
+					var saved_xp = weapon_array.front().xp #negative number
+					var saved_ammo = weapon_array.front().ammo
+					weapon_array.pop_front()
+					weapon_array.push_front(next_level)
+					weapon_array.front().ammo = saved_ammo
+					weapon_array.front().xp = weapon_array.front().max_xp + saved_xp
+					update_weapon()
+					
+					var level_down = LEVELDOWN.instance()
+					get_tree().get_root().get_node("World/Front").add_child(level_down)
+					level_down.position = global_position
+
+
+func _on_SSPDetector_body_entered(body):
+	is_on_ssp = true
+
+
+func _on_SSPDetector_body_exited(body):
+	is_on_ssp = false
+	
+	
+	
+func debug_print(move_direction, look_direction):
+	if Input.is_action_just_pressed("debug_print"):
+		print("~~~~~~~~~~~~DEBUG STATS~~~~~~~~~~~~")
+		print("player hp: ", hp, "/", max_hp)
+		print("player position: ", global_position)
+		print("player velocity: ", velocity)
+		print("move direction: ", move_direction)
+		print("face direction: ", look_direction)
+		print("total xp: ", total_xp)
+		print("weapon xp: ", weapon_array.front().xp, "/", weapon_array.front().max_xp)
+		print("weapon level: ", weapon_array.front().level)
+		print("forgiveness timer time left: ", $ForgivenessTimer.time_left)
+		print("snap vector: ", snap_vector)
+		print("is on floor: ", is_on_floor())
+		print("is in water: ", is_in_water)
+		print("is on ladder: ", is_on_ladder)
+		print("camera offset: ", $PlayerCamera.offset)
+		print("camera position: ", $PlayerCamera.global_position)
+		print("---")
+		print("screen size: ", OS.get_screen_size())
+		print("window size: ", OS.get_window_size())
+		print("viewport size: ", get_tree().get_root().size)
+		print("---")
+		print("topics: ", topic_array)
+		print("weapons: ", weapon_array)
+		print("~~~~~~~~~~~~DEBUG STATS~~~~~~~~~~~~")
+
+
+func debug_fly():
+	if not debug_flying:
+		print("debug fly: ON")
+		debug_flying = true
+		invincible = true
+		colliding = false
+		$CollisionShape2D.disabled = true
+		$HurtDetector.monitoring = false
+		$ItemDetector.monitoring = false	
+	else:
+		print("debug fly: OFF")
+		is_in_water = false
+		is_on_ladder = false
+		debug_flying = false
+		invincible = false
+		colliding = true
+		$CollisionShape2D.disabled = false
+		$HurtDetector.monitoring = true
+		$ItemDetector.monitoring = true
 		
-		elif movement_profile == "chi":
-			movement_profile = "sigma"
-			
-			max_x_speed = 90
-			jump_speed = 180
-			
-			acceleration = 2.5
-			ground_cof = 0.1
-			air_cof = 0.00
+		
+func _on_ItemDetector_area_entered(area):
+	if disabled != true:
+		
+		if area.get_collision_layer_bit(10): #health
+			hp += area.get_parent().value
+			$PickupSound.stream = sfx_get_heart
+			$PickupSound.play()
+			if hp > max_hp:
+				hp = max_hp
+			update_hp()
+			area.get_parent().queue_free()
+		
+		if area.get_collision_layer_bit(11): #xp
+			total_xp += area.get_parent().value
+			if weapon_array.front().level == weapon_array.front().max_level and weapon_array.front().xp == weapon_array.front().max_xp:
+				pass
+			else:
+				weapon_array.front().xp += area.get_parent().value
+
+			if weapon_array.front().xp >= weapon_array.front().max_xp: #level up
+				if weapon_array.front().level == weapon_array.front().max_level: #already max level
+					print("already max level")
+					$PickupSound.stream = sfx_get_xp
+					$PickupSound.play()
+					update_xp()
+					area.get_parent().queue_free()
+					
+				else: #leveling up normally
+					print("level up normally")
+					var next_level = load(weapon_array.front().resource_path.replace(weapon_array.front().level,weapon_array.front().level + 1))
+					var saved_xp = weapon_array.front().xp - weapon_array.front().max_xp
+					var saved_ammo = weapon_array.front().ammo
+					weapon_array.pop_front()
+					weapon_array.push_front(next_level)
+					weapon_array.front().ammo = saved_ammo
+					weapon_array.front().xp = saved_xp
+					update_weapon()
+					area.get_parent().queue_free()
+					
+					var level_up = LEVELUP.instance()
+					get_tree().get_root().get_node("World/Front").add_child(level_up)
+					level_up.position = global_position
+					
+					update_xp()
+
+					
+			else: #not leveling just collecting xp
+				print("no level just collect xp")
+				$PickupSound.stream = sfx_get_xp
+				$PickupSound.play()
+				update_xp()
+				area.get_parent().queue_free()
 		
 		
-		yield(get_tree(), "idle_frame")
-		var popup = POPUP.instance()
-		popup.text = "movement profile: " + movement_profile
-		world.get_node("UILayer").add_child(popup)
+		if area.get_collision_layer_bit(12): #ammo
+			for w in weapon_array:
+				if w.needs_ammo:
+					w.ammo += w.max_ammo * area.value #percent of max ammo
+					if w.ammo > w.max_ammo:
+						w.ammo = w.max_ammo
+
+			$PickupSound.stream = sfx_get_ammo
+			$PickupSound.play()
+			
+			var needs_ammo = weapon_array.front().needs_ammo
+			var ammo = weapon_array.front().ammo
+			var max_ammo = weapon_array.front().max_ammo
+			update_ammo()
+			area.queue_free()
+
+func do_iframes(damage, knockback_direction):
+	print("do_iframes_started")
+	invincible = true
+	$EffectPlayer.play("FlashIframe")
+	yield($EffectPlayer, "animation_finished")
+	invincible = false
+	print("do_iframes_finished")
+	if is_in_enemy == true: #check if they are REALLY still in an enemy
+		#there was an issue with this failsafe, can't remember what it was
+		hit(damage, knockback_direction)
+	if is_in_spikes == true:
+		hit(damage, knockback_direction)
+		
+func die():
+	if dead == false:
+		dead = true
+		queue_free()
+		get_tree().reload_current_scene()
+
+func _on_HurtDetector_body_entered(body):
+	if not disabled:
+		if body.get_collision_layer_bit(1): #enemy
+			var damage = body.damage_on_contact
+			is_in_enemy = true
+			knockback_direction = Vector2(sign(global_position.x - body.global_position.x), 0)
+			hit(damage, knockback_direction)
 
 
+func _on_HurtDetector_body_exited(body):
+	is_in_enemy = false
+
+func _on_HurtDetector_area_entered(area):
+	if not disabled:
+		if area.get_collision_layer_bit(13): #kill
+			die()
+			
 
 
+#TODO clean these up and get rid of them 
+
+func restore_hp():
+	$PickupSound.stream = sfx_get_heart
+	$PickupSound.play()
+	hp = max_hp
+	update_hp()
+	
+func update_inventory():
+	emit_signal("inventory_updated", inventory)
+
+func update_hp():
+	HUD.update_hp()
+
+func update_xp():
+	HUD.update_xp(true)
+
+func update_ammo():
+	HUD.update_ammo()
+
+func update_weapon():
+	$WeaponManager.update_weapon()
 
 
 

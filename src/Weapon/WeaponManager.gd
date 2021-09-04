@@ -1,26 +1,85 @@
 extends Node
 
-var sound_click = load("res://assets/SFX/snd_gun_click.ogg")
+var sfx_click = load("res://assets/SFX/snd_gun_click.ogg")
+var sfx_switch_weapon =  load("res://assets/SFX/Placeholder/snd_switchweapon.ogg")
 
 var weapon
 
 var trigger_held = false
 
 onready var HUD = get_tree().get_root().get_node("World/UILayer/HUD")
-onready var player = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node("World/Recruit")
+
 
 
 
 func _ready():
-	weapon = player.weapon_array.front()
+	weapon = pc.weapon_array.front()
 	
 	connect("ammo_updated", HUD, "_on_ammo_updated")
 	connect("weapon_updated", HUD, "_on_weapon_updated")
 	
+	
+	
+	
+	
+	
+	#stuff moved from rectuit.gd
+func _physics_process(delta): 
+	var bullet_pos = pc.get_node("BulletOrigin").global_position
+	var effect_pos = pc.get_node("WeaponSprite").position
+	
+	if Input.is_action_pressed("fire_manual"):
+		manual_fire(bullet_pos, effect_pos, pc.shoot_dir)
+	if Input.is_action_pressed("fire_automatic"):
+		automatic_fire(bullet_pos, effect_pos, pc.shoot_dir)
+		
+	if Input.is_action_just_released("fire_manual"):
+		release_fire()
+	if Input.is_action_just_released("fire_automatic"): 
+		release_fire()
+
+	
+func _input(event):
+	if not pc.disabled:
+		if pc.weapon_array.size() > 1: #only swap if more than one weapon
+			if event.is_action_pressed("weapon_left"):
+				shift_weapon("left")
+				update_weapon()
+
+			if event.is_action_pressed("weapon_right"):
+				shift_weapon("right")
+				update_weapon()
+
+
+	
+	
+func shift_weapon(direction):
+	match direction:
+		"left":
+			var weapon_to_move = pc.weapon_array.pop_back()
+			pc.weapon_array.push_front(weapon_to_move)
+		"right":
+			var weapon_to_move = pc.weapon_array.pop_front()
+			pc.weapon_array.push_back(weapon_to_move)
+	$WeaponAudio.stream = sfx_switch_weapon
+	$WeaponAudio.play()
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 func update_weapon():
-	weapon = player.weapon_array.front()
+	weapon = pc.weapon_array.front()
 	if weapon != null:
-		player.get_node("WeaponSprite").texture = weapon.texture
+		pc.get_node("WeaponSprite").texture = weapon.texture
 		HUD.update_weapon()
 
 func manual_fire(bullet_pos, effect_pos, shoot_dir): #treats autos and manuals like manual
@@ -34,7 +93,7 @@ func manual_fire(bullet_pos, effect_pos, shoot_dir): #treats autos and manuals l
 			if weapon.needs_ammo:
 				if weapon.ammo == 0:
 						print("out of ammo")
-						$WeaponAudio.stream = sound_click
+						$WeaponAudio.stream = sfx_click
 						$WeaponAudio.play()
 				else: #not ammo == 0
 					weapon.ammo -= 1
@@ -55,9 +114,9 @@ func automatic_fire(bullet_pos, effect_pos, shoot_dir): #only fires autos but ho
 			if weapon.needs_ammo:
 				if weapon.ammo == 0:
 						print("out of ammo")
-						$WeaponAudio.stream = sound_click
+						$WeaponAudio.stream = sfx_click
 						$WeaponAudio.play()
-				else: #not ammo == 0
+				else:
 					weapon.ammo -= 1
 					HUD.update_weapon()
 					prepare_bullet(bullet_pos, effect_pos, shoot_dir)

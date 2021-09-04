@@ -12,6 +12,11 @@ var gravity = 300
 var damage
 
 
+var break_method = "cut"
+var default_area_collision = true
+var default_body_collision = true
+
+
 
 func _fizzle_from_world():
 	#print("fizzle from world") 
@@ -32,3 +37,28 @@ func _fizzle_from_range():
 func _on_VisibilityNotifier2D_viewport_exited(viewport):
 	queue_free()
 
+
+func _on_CollisionDetector_body_entered(body):
+	
+	if not disabled and default_body_collision:
+		if body.get_collision_layer_bit(8): #breakable
+					body.on_break(break_method)
+					if body.get_collision_layer_bit(3): #world
+						_fizzle_from_world()
+
+		elif body.get_collision_layer_bit(1): #enemy
+			yield(get_tree(), "idle_frame")
+			var blood_direction = Vector2(floor((body.global_position.x - global_position.x)/10), floor((body.global_position.y - global_position.y)/10))
+			body.hit(damage, blood_direction)
+			queue_free()
+		elif body.get_collision_layer_bit(3): #world
+			_fizzle_from_world()
+
+
+#used for animated grass at the moment
+func _on_CollisionDetector_area_entered(area):
+	if not disabled and default_area_collision:
+		if area.get_collision_layer_bit(8): #breakable
+				area.on_break(break_method)
+		elif area.get_collision_layer_bit(3): #world
+			_fizzle_from_world()

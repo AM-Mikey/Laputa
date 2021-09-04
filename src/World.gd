@@ -45,7 +45,7 @@ func _on_viewport_size_changed():
 	else:
 		resolution_scale = 4.0
 	
-	$Recruit.get_node("Camera2D").zoom = Vector2(1 / resolution_scale, 1 / resolution_scale)
+	$Recruit.get_node("PlayerCamera").zoom = Vector2(1 / resolution_scale, 1 / resolution_scale)
 	$UILayer.scale = Vector2(resolution_scale, resolution_scale)
 	
 
@@ -82,7 +82,7 @@ func _input(event):
 
 func _on_level_change(level, door_index, level_name, music):
 	save_level_data_to_temp()
-	$Recruit/Camera2D.smoothing_enabled = false
+	$Recruit/PlayerCamera.smoothing_enabled = false
 		
 	var level_path = current_level.filename
 	current_level.queue_free()
@@ -93,9 +93,9 @@ func _on_level_change(level, door_index, level_name, music):
 	
 		#disable camera if level has one already
 	if next_level.has_node("Camera2D"):
-		$Recruit/Camera2D.current = false
+		$Recruit/PlayerCamera.current = false
 	else:
-		$Recruit/Camera2D.current = true
+		$Recruit/PlayerCamera.current = true
 	
 	######################## get the door with the right index
 	
@@ -173,7 +173,7 @@ func _on_level_change(level, door_index, level_name, music):
 	
 	#enable smoothing after a bit
 	yield(get_tree().create_timer(0.01), "timeout")
-	$Recruit/Camera2D.smoothing_enabled = true
+	$Recruit/PlayerCamera.smoothing_enabled = true
 	
 	
 	
