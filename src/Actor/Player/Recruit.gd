@@ -12,7 +12,6 @@ var sfx_get_xp = load("res://assets/SFX/Placeholder/snd_get_xp.ogg")
 var sfx_get_ammo = load("res://assets/SFX/Placeholder/snd_get_missile.ogg")
 
 #export var speed.x = 90 #was 82.5 for a max gap of 7 (barely)
-#var half_speed.x = speed.x/2
 #export var speed.y = 180 #was 195 for 4 blocks
 #export var normal_speed.y = 195
 #export var long_speed.y = 150
@@ -52,6 +51,7 @@ var is_on_ladder = false
 var is_on_ssp = false
 var is_in_spikes = false
 
+var displaying_debug_info = false
 var debug_flying = false
 export var debug_fly_speed = 500
 
@@ -209,7 +209,7 @@ func _physics_process(delta):
 				direction_lock = Vector2.ZERO
 
 
-			debug_print(move_dir, face_dir)
+			debug_print(move_dir, face_dir) #why the fuck are we debug printing every frame??
 		
 		else: #debug mode is on
 			var move_dir = Vector2(
@@ -456,7 +456,17 @@ func _on_SSPDetector_body_exited(body):
 	
 	
 func debug_print(move_direction, look_direction):
+
+	
 	if Input.is_action_just_pressed("debug_print"):
+		if not displaying_debug_info:
+			displaying_debug_info = true
+			var debug_info = load("res://src/UI/DebugInfo.tscn").instance()
+			world.get_node("UILayer").add_child(debug_info)
+		else:
+			displaying_debug_info = false
+			world.get_node("UILayer/DebugInfo").queue_free()
+
 		print("~~~~~~~~~~~~DEBUG STATS~~~~~~~~~~~~")
 		print("player hp: ", hp, "/", max_hp)
 		print("player position: ", global_position)
