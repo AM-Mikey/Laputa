@@ -30,25 +30,7 @@ custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
-text = "Alpha Version:"
-align = 1
-valign = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BuildLabel" type="Label" parent="."]
-visible = false
-margin_left = 16.0
-margin_top = 332.0
-margin_right = 560.0
-margin_bottom = 344.0
-size_flags_vertical = 8
-custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 1
-text = "Alpha Build: 1.6"
+text = "Version:"
 align = 1
 valign = 2
 __meta__ = {

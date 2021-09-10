@@ -1,6 +1,7 @@
 {
 	"child": 
-	"/face,child /name,child What do you want, outsider?
+	"
+	/face,child /name,child What do you want, outsider?
 	My dad can kick your ass, so don't piss me off",
 	
 	"sasuke":
@@ -11,10 +12,21 @@
 	",
 
 	"basil":
-	"/face,fluffy /name,basil Yawn, this is a test of the yes or no system.
+	"
+	/face,fluffy /name,basil Yawn, this is a test of the yes or no system.
 	After this message, select yes or no./yn
 	/dba You picked yes.//db
 	/dbb You picked no.//db
 	/m Now the dialog branches are merged."
+
+	"free_dialog":
+	"
+	/free /face,fluffy /name,basil This is us testing free dialog
+	/face,mechanic /name,sage Free dialog is a system which lets dialog the player enter and exit conversations without commitment
+	/face,fluffy /name,basil Essentially, This lets us start dialog without you, and you can advance it from anywhere within range
+	/face,mechanic /name,sage Just a heads up, though: exiting the range of the conversation will end it
+	",
+
+
 }
 

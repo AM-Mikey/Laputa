@@ -7,32 +7,16 @@ onready var world = get_tree().get_root().get_node("World")
 onready var player = get_tree().get_root().get_node("World/Recruit")
 onready var hud = get_tree().get_root().get_node("World/UILayer/HUD")
 
-var alpha_week: int
 
 func _ready():
 	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 	
 
 												#VERSION STUFF
-	var current_date = OS.get_date()
-	var years_since = current_date["year"] - 2021
-	var months_since = current_date["month"] - 3
-	var days_since = current_date["day"] - 18
-	
-	if days_since < 0:
-		
-		var days_last_month
-		match current_date["month"]:
-			1, 2, 4, 6, 8, 9, 11: 
-				days_last_month = 31
-			3:
-				days_last_month = 28
-			5, 7, 10, 12:
-				days_last_month = 30
-			
-		$VersionLabel.text = "Alpha Version: " + str(months_since-1) + "m " + str(days_last_month + days_since) + "d"
+	if world.is_release:
+		$VersionLabel.text = "Release Version: " + world.development_stage + "-" + world.release_version
 	else:
-		$VersionLabel.text = "Alpha Version: " + str(months_since) + "m " + str(days_since) + "d"
+		$VersionLabel.text = "Internal Version: " + world.development_stage + "-" + world.internal_version
 	
 										#LOAD BUTTON STUFF
 	var file = File.new()

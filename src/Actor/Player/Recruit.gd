@@ -65,15 +65,13 @@ var shoot_dir = Vector2.LEFT
 
 var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
-export var dodge_speed = Vector2(700, 100)
-export var dodge_time: float = (0.3)
 
 export var forgiveness_time = 0.05
 var knockback = false
 var knockback_direction: Vector2
 
 
-export var knockback_speed = Vector2(80, 100)
+export var knockback_speed = Vector2(80, 180)
 var knockbackvelocity = Vector2.ZERO
 
 
@@ -82,7 +80,7 @@ var knockbackvelocity = Vector2.ZERO
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	speed = Vector2(90,100)
+	speed = Vector2(90,180)
 	
 	var item_menu = get_tree().get_root().get_node("World/UILayer/ItemMenu")
 	connect("inventory_updated", item_menu, "_on_inventory_updated")
@@ -96,7 +94,6 @@ func _ready():
 		$WeaponSprite.texture = weapon_array.front().texture
 
 func _physics_process(delta):
-	#print("Velocity: ", velocity)
 	if disabled != true:
 		if colliding == true: #skip this entire thing if we're in debug mode
 			
@@ -113,7 +110,7 @@ func _physics_process(delta):
 				if $BonkTimeout.time_left == 0:
 					$BonkTimeout.start(0.4)
 					var collision = get_slide_collision(0)
-					print("collision normal:", collision.normal)
+#					print("collision normal:", collision.normal)
 					var bonk = load("res://src/Effect/BonkParticle.tscn").instance()
 					var bonk_position = position
 					bonk_position.y -= 16
@@ -136,7 +133,7 @@ func _physics_process(delta):
 					if $BonkTimeout.time_left == 0:
 						$BonkTimeout.start(0.4)
 						var collision = get_slide_collision(get_slide_count() - 1)
-						print("collision normal:", collision.normal)
+#						print("collision normal:", collision.normal)
 						var bonk = load("res://src/Effect/BonkParticle.tscn").instance()
 						bonk.position = position
 						bonk.normal = collision.normal
@@ -159,7 +156,7 @@ func _physics_process(delta):
 			if Input.is_action_just_pressed("jump") and $ForgivenessTimer.time_left > 0 or Input.is_action_just_pressed("jump") and is_on_floor():
 				$MinimumJumpTimer.start(minimum_jump_time)
 				if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
-					if abs(velocity.x) > 82: #since 82.5 is max x velocity, only count as a running jump then   ##Running JUMP CHECKING HERE
+					if abs(velocity.x) > speed.x * 0.95: #since speed.x is max x velocity, only count as a running jump then   ##Running JUMP CHECKING HERE
 						jump_type = "running_jump"
 #						speed.y = long_speed.y
 						jump_starting_move_dir_x = move_dir.x
@@ -173,8 +170,8 @@ func _physics_process(delta):
 		
 			
 			#fall through ssp code
-			if Input.is_action_just_pressed("look_down") and is_on_ssp and is_on_floor():
-				position.y += 8
+#			if Input.is_action_just_pressed("look_down") and is_on_ssp and is_on_floor():
+#				position.y += 8
 				
 			if knockback:
 				if knockbackvelocity == Vector2.ZERO:
@@ -182,8 +179,6 @@ func _physics_process(delta):
 					velocity.y = knockbackvelocity.y #set knockback y to this ONCE
 				
 				velocity.x += knockbackvelocity.x
-				#print("velocity: ", velocity)
-				#print("knockback velocity: ", knockbackvelocity)
 				knockbackvelocity.x /= 2
 				
 				if abs(knockbackvelocity.x) < 1:
@@ -197,11 +192,7 @@ func _physics_process(delta):
 				new_velocity.y = max(velocity.y, new_velocity.y)
 			
 			velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
-			
-#			$AnimationManager.run_anim_speed = max((abs(velocity.x)/speed.x) * 1.5, 0.1) #run_anim_speed = max((abs(velocity.x)/speed.x) * 1.5, 0.5)
-#			#print(run_anim_speed)
-#			$AnimationManager.animate(move_dir, velocity)
-			
+
 
 			if Input.is_action_just_pressed("fire_automatic"): 
 				direction_lock = face_dir
@@ -359,47 +350,47 @@ func _input(event):
 
 
 
-			if event.is_action_pressed("debug_fly"):
-				debug_fly()
+		if event.is_action_pressed("debug_fly"):
+			debug_fly()
 				
 				
 				
-			if event.is_action_pressed("level_up"):
-				if weapon_array.front().level < weapon_array.front().max_level:
-					print("level up via debug")
+		if event.is_action_pressed("level_up"):
+			if weapon_array.front().level < weapon_array.front().max_level:
+				print("level up via debug")
 
-					if weapon_array.front().level == weapon_array.front().max_level and weapon_array.front().xp == weapon_array.front().max_xp: pass
-					else: weapon_array.front().xp = weapon_array.front().max_xp
+				if weapon_array.front().level == weapon_array.front().max_level and weapon_array.front().xp == weapon_array.front().max_xp: pass
+				else: weapon_array.front().xp = weapon_array.front().max_xp
 
-					var next_level = load(weapon_array.front().resource_path.replace(weapon_array.front().level,weapon_array.front().level + 1))
-					var saved_xp = weapon_array.front().xp - weapon_array.front().max_xp
-					var saved_ammo = weapon_array.front().ammo
-					weapon_array.pop_front()
-					weapon_array.push_front(next_level)
-					weapon_array.front().ammo = saved_ammo
-					weapon_array.front().xp = saved_xp
-					update_weapon()
+				var next_level = load(weapon_array.front().resource_path.replace(weapon_array.front().level,weapon_array.front().level + 1))
+				var saved_xp = weapon_array.front().xp - weapon_array.front().max_xp
+				var saved_ammo = weapon_array.front().ammo
+				weapon_array.pop_front()
+				weapon_array.push_front(next_level)
+				weapon_array.front().ammo = saved_ammo
+				weapon_array.front().xp = saved_xp
+				update_weapon()
 
-					var level_up = LEVELUP.instance()
-					get_tree().get_root().get_node("World/Front").add_child(level_up)
-					level_up.position = global_position
+				var level_up = LEVELUP.instance()
+				get_tree().get_root().get_node("World/Front").add_child(level_up)
+				level_up.position = global_position
 
-					update_xp()
+				update_xp()
 
-			if event.is_action_pressed("level_down"):
-				if weapon_array.front().level != 1:
-					print("level down via debug")
-					var next_level = load(weapon_array.front().resource_path.replace(weapon_array.front().level, weapon_array.front().level - 1))
-					var saved_xp = weapon_array.front().xp #negative number
-					var saved_ammo = weapon_array.front().ammo
-					weapon_array.pop_front()
-					weapon_array.push_front(next_level)
-					weapon_array.front().ammo = saved_ammo
-					weapon_array.front().xp = weapon_array.front().max_xp + saved_xp
-					update_weapon()
+		if event.is_action_pressed("level_down"):
+			if weapon_array.front().level != 1:
+				print("level down via debug")
+				var next_level = load(weapon_array.front().resource_path.replace(weapon_array.front().level, weapon_array.front().level - 1))
+				var saved_xp = weapon_array.front().xp #negative number
+				var saved_ammo = weapon_array.front().ammo
+				weapon_array.pop_front()
+				weapon_array.push_front(next_level)
+				weapon_array.front().ammo = saved_ammo
+				weapon_array.front().xp = weapon_array.front().max_xp + saved_xp
+				update_weapon()
 
-					var level_down = LEVELDOWN.instance()
-					get_tree().get_root().get_node("World/Front").add_child(level_down)
+				var level_down = LEVELDOWN.instance()
+				get_tree().get_root().get_node("World/Front").add_child(level_down)
 
 
 func hit(damage, knockback_direction):
@@ -461,7 +452,7 @@ func debug_print(move_direction, look_direction):
 	if Input.is_action_just_pressed("debug_print"):
 		if not displaying_debug_info:
 			displaying_debug_info = true
-			var debug_info = load("res://src/UI/DebugInfo.tscn").instance()
+			var debug_info = load("res://src/UI//Debug/DebugInfo.tscn").instance()
 			world.get_node("UILayer").add_child(debug_info)
 		else:
 			displaying_debug_info = false

@@ -15,6 +15,12 @@ var data = {
 	"level_data" : {}
 	}
 
+
+export var development_stage: String = "Alpha"
+var internal_version: String = get_internal_version()
+export var release_version: String
+export var is_release: bool = false
+
 export var starting_level = "res://src/Level/DebugLevel.tscn"
 onready var current_level = load(starting_level).instance() #assumes current level to start with, might cause issues down the line
 
@@ -22,6 +28,7 @@ func _ready():
 	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 	_on_viewport_size_changed()
 	add_child(current_level)
+
 	show_title()
 	
 	load_options()
@@ -29,6 +36,29 @@ func _ready():
 	var spawn_points = get_tree().get_nodes_in_group("SpawnPoints")
 	for s in spawn_points:
 		$Recruit.global_position = s.global_position
+
+
+func get_internal_version() -> String:
+	var current_date = OS.get_date()
+	var years_since = current_date["year"] - 2021
+	var months_since = current_date["month"] - 3
+	var days_since = current_date["day"] - 18
+	
+	if days_since < 0:
+		
+		var days_last_month
+		match current_date["month"]:
+			1, 2, 4, 6, 8, 9, 11: 
+				days_last_month = 31
+			3:
+				days_last_month = 28
+			5, 7, 10, 12:
+				days_last_month = 30
+			
+		return(str(months_since -1) + "m" + str(days_last_month + days_since) + "d")
+	else:
+		return(str(months_since) + "m" + str(days_since) + "d")
+
 
 func _on_viewport_size_changed():
 	if viewport_size_ignore:

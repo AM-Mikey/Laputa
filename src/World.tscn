@@ -10,6 +10,8 @@ script = ExtResource( 8 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 80.0 ]
 }
+development_stage = "alpha"
+release_version = "1.6"
 
 [node name="Back" type="Node2D" parent="."]
 

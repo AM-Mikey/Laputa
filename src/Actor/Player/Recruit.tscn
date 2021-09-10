@@ -3130,7 +3130,7 @@ frame = 6
 
 [node name="WeaponSprite" type="Sprite" parent="."]
 light_mask = 2
-position = Vector2( 7, -17 )
+position = Vector2( 9, -12 )
 texture = ExtResource( 3 )
 flip_h = true
 
@@ -3169,6 +3169,9 @@ bus = "SFX"
 one_shot = true
 
 [node name="MinimumDirectionTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ForgivenessTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="BonkTimeout" type="Timer" parent="."]
@@ -3234,9 +3237,6 @@ shape = SubResource( 5 )
 
 [node name="AnimationManager" type="Node" parent="."]
 script = ExtResource( 11 )
-
-[node name="ForgivenessTimer" type="Timer" parent="."]
-one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/BackfallLeft = SubResource( 6 )
