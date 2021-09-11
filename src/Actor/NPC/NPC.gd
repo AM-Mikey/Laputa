@@ -29,6 +29,12 @@ func _ready():
 	add_to_group("NPCs")
 
 
+#getting where the camera's bounds are is a matter of getting the camera/player position, 
+#applying the offset, and then checking the viewport size
+
+
+
+
 #movement stuff
 func _physics_process(delta):
 	if talking and active_player.disabled == false: #if db freed the player

@@ -4,24 +4,21 @@
 [ext_resource path="res://src/UI/Debug/Debug.tres" type="Theme" id=2]
 [ext_resource path="res://src/UI/Font/MomoDigitMono.tres" type="DynamicFont" id=3]
 
-[node name="DebugInfo" type="Control"]
+[node name="DebugInfo" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBox" type="VBoxContainer" parent="."]
-margin_right = 472.0
-margin_bottom = 232.0
+margin_right = 480.0
+margin_bottom = 270.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="General" type="HBoxContainer" parent="VBox"]
-margin_right = 472.0
+margin_right = 480.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 0, 64 )
 theme = ExtResource( 2 )
@@ -64,12 +61,12 @@ __meta__ = {
 
 [node name="HBox" type="HBoxContainer" parent="VBox"]
 margin_top = 64.0
-margin_right = 472.0
-margin_bottom = 232.0
+margin_right = 480.0
+margin_bottom = 244.0
 
 [node name="C1" type="HBoxContainer" parent="VBox/HBox"]
 margin_right = 51.0
-margin_bottom = 168.0
+margin_bottom = 180.0
 theme = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -77,7 +74,7 @@ __meta__ = {
 
 [node name="Q" type="VBoxContainer" parent="VBox/HBox/C1"]
 margin_right = 45.0
-margin_bottom = 168.0
+margin_bottom = 180.0
 theme = ExtResource( 2 )
 
 [node name="Bars" type="Label" parent="VBox/HBox/C1/Q"]
@@ -237,7 +234,7 @@ __meta__ = {
 [node name="A" type="VBoxContainer" parent="VBox/HBox/C1"]
 margin_left = 45.0
 margin_right = 51.0
-margin_bottom = 168.0
+margin_bottom = 180.0
 theme = ExtResource( 2 )
 
 [node name="Bars" type="Label" parent="VBox/HBox/C1/A"]
@@ -392,10 +389,11 @@ __meta__ = {
 }
 
 [node name="C2" type="HBoxContainer" parent="VBox/HBox"]
-margin_left = 424.0
-margin_right = 472.0
-margin_bottom = 168.0
+margin_left = 432.0
+margin_right = 480.0
+margin_bottom = 180.0
 size_flags_horizontal = 10
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -403,7 +401,7 @@ __meta__ = {
 
 [node name="Q" type="VBoxContainer" parent="VBox/HBox/C2"]
 margin_right = 42.0
-margin_bottom = 168.0
+margin_bottom = 180.0
 theme = ExtResource( 2 )
 
 [node name="View" type="Label" parent="VBox/HBox/C2/Q"]
@@ -526,10 +524,54 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Object" type="Label" parent="VBox/HBox/C2/Q"]
+margin_top = 132.0
+margin_right = 42.0
+margin_bottom = 144.0
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
+text = "OBJ"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Front" type="Label" parent="VBox/HBox/C2/Q"]
+margin_top = 144.0
+margin_right = 42.0
+margin_bottom = 156.0
+theme = ExtResource( 2 )
+text = "Front: "
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Middle" type="Label" parent="VBox/HBox/C2/Q"]
+margin_top = 156.0
+margin_right = 42.0
+margin_bottom = 168.0
+theme = ExtResource( 2 )
+text = "Middle: "
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Label" parent="VBox/HBox/C2/Q"]
+margin_top = 168.0
+margin_right = 42.0
+margin_bottom = 180.0
+theme = ExtResource( 2 )
+text = "Back: "
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="A" type="VBoxContainer" parent="VBox/HBox/C2"]
 margin_left = 42.0
 margin_right = 48.0
-margin_bottom = 168.0
+margin_bottom = 180.0
 theme = ExtResource( 2 )
 
 [node name="View" type="Label" parent="VBox/HBox/C2/A"]
@@ -638,6 +680,49 @@ margin_top = 120.0
 margin_right = 6.0
 margin_bottom = 132.0
 theme = ExtResource( 2 )
+text = "-"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Object" type="Label" parent="VBox/HBox/C2/A"]
+margin_top = 132.0
+margin_right = 6.0
+margin_bottom = 144.0
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Front" type="Label" parent="VBox/HBox/C2/A"]
+margin_top = 144.0
+margin_right = 6.0
+margin_bottom = 156.0
+theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
+text = "-"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Middle" type="Label" parent="VBox/HBox/C2/A"]
+margin_top = 156.0
+margin_right = 6.0
+margin_bottom = 168.0
+theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
+text = "-"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Label" parent="VBox/HBox/C2/A"]
+margin_top = 168.0
+margin_right = 6.0
+margin_bottom = 180.0
+theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 text = "-"
 __meta__ = {
 "_edit_use_anchors_": false

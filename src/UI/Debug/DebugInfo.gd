@@ -3,6 +3,10 @@ extends Control
 onready var world = get_tree().get_root().get_node("World")
 onready var pc = get_tree().get_root().get_node("World/Recruit")
 
+func _ready():
+	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
+	on_viewport_size_changed()
+
 
 func _process(delta):
 	if world.is_release:
@@ -40,3 +44,10 @@ func _process(delta):
 	$VBox/HBox/C2/A/Water.text = str(pc.is_in_water)
 	$VBox/HBox/C2/A/Ladder.text = str(pc.is_on_ladder)
 	$VBox/HBox/C2/A/SSP.text = str(pc.is_on_ssp)
+
+	$VBox/HBox/C2/A/Front.text = str(world.get_node("Front").get_child_count())
+	$VBox/HBox/C2/A/Middle.text = str(world.get_node("Middle").get_child_count())
+	$VBox/HBox/C2/A/Back.text = str(world.get_node("Back").get_child_count())
+
+func on_viewport_size_changed():
+	rect_size = get_tree().get_root().size / world.resolution_scale
