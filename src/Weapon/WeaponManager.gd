@@ -25,19 +25,20 @@ func _ready():
 	
 	
 	#stuff moved from rectuit.gd
-func _physics_process(delta): 
+func _physics_process(delta):
 	var bullet_pos = pc.get_node("BulletOrigin").global_position
 	var effect_pos = pc.get_node("WeaponSprite").position
 	
-	if Input.is_action_pressed("fire_manual"):
-		manual_fire(bullet_pos, effect_pos, pc.shoot_dir)
-	if Input.is_action_pressed("fire_automatic"):
-		automatic_fire(bullet_pos, effect_pos, pc.shoot_dir)
-		
-	if Input.is_action_just_released("fire_manual"):
-		release_fire()
-	if Input.is_action_just_released("fire_automatic"): 
-		release_fire()
+	if not pc.disabled:
+		if Input.is_action_pressed("fire_manual"):
+			manual_fire(bullet_pos, effect_pos, pc.shoot_dir)
+		if Input.is_action_pressed("fire_automatic"):
+			automatic_fire(bullet_pos, effect_pos, pc.shoot_dir)
+			
+		if Input.is_action_just_released("fire_manual"):
+			release_fire()
+		if Input.is_action_just_released("fire_automatic"): 
+			release_fire()
 
 	
 func _input(event):

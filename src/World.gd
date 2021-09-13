@@ -113,7 +113,9 @@ func _input(event):
 func _on_level_change(level, door_index, level_name, music):
 	save_level_data_to_temp()
 	$Recruit/PlayerCamera.smoothing_enabled = false
-		
+	if $UILayer.has_node("DialogBox"):
+		$UILayer/DialogBox.stop_printing()
+	
 	var level_path = current_level.filename
 	current_level.queue_free()
 	

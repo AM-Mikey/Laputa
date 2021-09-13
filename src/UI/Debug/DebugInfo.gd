@@ -33,7 +33,7 @@ func _process(delta):
 	$VBox/HBox/C1/A/ShootDir.text = str("%2.f" % pc.shoot_dir.x) + "," + str("%2.f" % pc.shoot_dir.y)
 
 	#useless since only retrieves player camera, which is at player position \/
-	$VBox/HBox/C2/A/CameraPos.text = str("%4.f" % pc.get_node("PlayerCamera").global_position.x) + "," + str("%4.f" % pc.get_node("PlayerCamera").global_position.y)
+	$VBox/HBox/C2/A/CameraPos.text = str("%4.f" % pc.get_node("PlayerCamera").get_camera_screen_center().x) + "," + str("%4.f" % pc.get_node("PlayerCamera").get_camera_screen_center().y)
 	$VBox/HBox/C2/A/CameraOffset.text = str("%4.2f" % pc.get_node("PlayerCamera").offset_h) + "," + str("%4.2f" % pc.get_node("PlayerCamera").offset_v)
 
 

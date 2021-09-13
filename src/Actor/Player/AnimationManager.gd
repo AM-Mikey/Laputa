@@ -23,17 +23,17 @@ func animate(move_dir, velocity):
 			if pc.is_on_floor():
 				
 				if pc.is_on_ssp: #same as on normal ground but we can shoot down
-					if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
+					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 						ap.playback_speed = 1
 						texture = load("res://assets/Actor/Player/RecruitStand.png")
 						next_animation = get_next_animation("Stand", pc.face_dir, true)
 						
-					elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
+					elif get_input_dir().has(Vector2.LEFT) or get_input_dir().has(Vector2.RIGHT):
 						ap.playback_speed = run_anim_speed
 						texture = load("res://assets/Actor/Player/RecruitRun.png")
-						if Input.is_action_pressed("move_left"):
+						if get_input_dir().has(Vector2.LEFT):
 							next_animation = get_next_animation("Run", Vector2.LEFT, true)
-						if Input.is_action_pressed("move_right"):
+						if get_input_dir().has(Vector2.RIGHT):
 							next_animation = get_next_animation("Run", Vector2.RIGHT, true)
 							
 					else:
@@ -42,17 +42,17 @@ func animate(move_dir, velocity):
 						next_animation = get_next_animation("Stand", pc.face_dir, false)
 						
 				else:
-					if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
+					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 						ap.playback_speed = 1
 						texture = load("res://assets/Actor/Player/RecruitStand.png")
 						next_animation = get_next_animation("Stand", pc.face_dir, false)
 						
-					elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
+					elif get_input_dir().has(Vector2.LEFT) or get_input_dir().has(Vector2.RIGHT):
 						ap.playback_speed = run_anim_speed
 						texture = load("res://assets/Actor/Player/RecruitRun.png")
-						if Input.is_action_pressed("move_left"):
+						if get_input_dir().has(Vector2.LEFT):
 							next_animation = get_next_animation("Run", Vector2.LEFT, false)
-						if Input.is_action_pressed("move_right"):
+						if get_input_dir().has(Vector2.RIGHT):
 							next_animation = get_next_animation("Run", Vector2.RIGHT, false)
 							
 					else:
@@ -68,12 +68,12 @@ func animate(move_dir, velocity):
 					ap.playback_speed = 1
 					texture = load("res://assets/Actor/Player/RecruitRise.png")
 					
-					if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
+					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 						next_animation = get_next_animation("Rise", pc.face_dir, true)
 					
-					elif Input.is_action_pressed("move_left"):
+					elif get_input_dir().has(Vector2.LEFT):
 							next_animation = get_next_animation("Rise", Vector2.LEFT, true)	
-					elif Input.is_action_pressed("move_right"):
+					elif get_input_dir().has(Vector2.RIGHT):
 							next_animation = get_next_animation("Rise", Vector2.RIGHT, true)
 					
 					else:
@@ -83,12 +83,12 @@ func animate(move_dir, velocity):
 					ap.playback_speed = 1
 					texture = load("res://assets/Actor/Player/RecruitFall.png")
 					
-					if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
+					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 						next_animation = get_next_animation("Fall", pc.face_dir, true)
 					
-					elif Input.is_action_pressed("move_left"):
+					elif get_input_dir().has(Vector2.LEFT):
 							next_animation = get_next_animation("Fall", Vector2.LEFT, true)
-					elif Input.is_action_pressed("move_right"):
+					elif get_input_dir().has(Vector2.RIGHT):
 							next_animation = get_next_animation("Fall", Vector2.RIGHT, true)
 					
 					else:
@@ -100,17 +100,17 @@ func animate(move_dir, velocity):
 			
 			if pc.is_on_floor():
 				
-				if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
+				if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 					ap.playback_speed = 1
 					texture = load("res://assets/Actor/Player/RecruitStand.png")
 					next_animation = get_next_animation("Stand", pc.face_dir, false)
 				
-				elif Input.is_action_pressed("move_left"):
+				elif get_input_dir().has(Vector2.LEFT):
 					ap.playback_speed = run_anim_speed
 					texture = load("res://assets/Actor/Player/RecruitRun.png")
 					next_animation = get_next_animation("Run", Vector2.LEFT, false)
 				
-				elif Input.is_action_pressed("move_right"):
+				elif get_input_dir().has(Vector2.RIGHT):
 					ap.playback_speed = run_anim_speed
 					texture = load("res://assets/Actor/Player/RecruitBackrun.png")
 					next_animation = get_next_animation("Backrun", Vector2.RIGHT, false)
@@ -126,12 +126,12 @@ func animate(move_dir, velocity):
 					ap.playback_speed = 1
 					texture = load("res://assets/Actor/Player/RecruitRise.png")
 					
-					if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
+					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 						next_animation = get_next_animation("Rise", pc.face_dir, true)
 					
-					elif Input.is_action_pressed("move_left"):
+					elif get_input_dir().has(Vector2.LEFT):
 							next_animation = get_next_animation("Rise", Vector2.LEFT, true)	
-					elif Input.is_action_pressed("move_right"):
+					elif get_input_dir().has(Vector2.RIGHT):
 							next_animation = get_next_animation("Rise", Vector2.LEFT, true)
 					
 					else:
@@ -141,12 +141,12 @@ func animate(move_dir, velocity):
 					ap.playback_speed = 1
 					texture = load("res://assets/Actor/Player/RecruitFall.png")
 					
-					if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
+					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 						next_animation = get_next_animation("Fall", pc.face_dir, true)
 					
-					elif Input.is_action_pressed("move_left"):
+					elif get_input_dir().has(Vector2.LEFT):
 							next_animation = get_next_animation("Fall", Vector2.LEFT, true)
-					elif Input.is_action_pressed("move_right"):
+					elif get_input_dir().has(Vector2.RIGHT):
 							next_animation = get_next_animation("Fall", Vector2.LEFT, true)
 					
 					else:
@@ -158,17 +158,17 @@ func animate(move_dir, velocity):
 			
 			if pc.is_on_floor():
 				
-				if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
+				if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 					ap.playback_speed = 1
 					texture = load("res://assets/Actor/Player/RecruitStand.png")
 					next_animation = get_next_animation("Stand", pc.face_dir, false)
 				
-				elif Input.is_action_pressed("move_left"):
+				elif get_input_dir().has(Vector2.LEFT):
 					ap.playback_speed = run_anim_speed
 					texture = load("res://assets/Actor/Player/RecruitBackrun.png")
 					next_animation = get_next_animation("Backrun", Vector2.LEFT, false)
 				
-				elif Input.is_action_pressed("move_right"):
+				elif get_input_dir().has(Vector2.RIGHT):
 					ap.playback_speed = run_anim_speed
 					texture = load("res://assets/Actor/Player/RecruitRun.png")
 					next_animation = get_next_animation("Run", Vector2.RIGHT, false)
@@ -184,12 +184,12 @@ func animate(move_dir, velocity):
 					ap.playback_speed = 1
 					texture = load("res://assets/Actor/Player/RecruitRise.png")
 					
-					if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
+					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 						next_animation = get_next_animation("Rise", pc.face_dir, true)
 					
-					elif Input.is_action_pressed("move_left"):
+					elif get_input_dir().has(Vector2.LEFT):
 							next_animation = get_next_animation("Rise", Vector2.RIGHT, true)	
-					elif Input.is_action_pressed("move_right"):
+					elif get_input_dir().has(Vector2.RIGHT):
 							next_animation = get_next_animation("Rise", Vector2.RIGHT, true)
 					
 					else:
@@ -199,12 +199,12 @@ func animate(move_dir, velocity):
 					ap.playback_speed = 1
 					texture = load("res://assets/Actor/Player/RecruitFall.png")
 					
-					if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
+					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 						next_animation = get_next_animation("Fall", pc.face_dir, true)
 					
-					elif Input.is_action_pressed("move_left"):
+					elif get_input_dir().has(Vector2.LEFT):
 							next_animation = get_next_animation("Fall", Vector2.RIGHT, true)
-					elif Input.is_action_pressed("move_right"):
+					elif get_input_dir().has(Vector2.RIGHT):
 							next_animation = get_next_animation("Fall", Vector2.RIGHT, true)
 					
 					else:
@@ -215,12 +215,12 @@ func animate(move_dir, velocity):
 		ap.playback_speed = 1 #reset ap to normal speed
 		texture = load("res://assets/Actor/Player/RecruitClimb.png")
 		
-		if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
+		if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 			next_animation = get_next_animation("Climb", pc.face_dir, true)
 		
-		elif Input.is_action_pressed("move_left"):
+		elif get_input_dir().has(Vector2.LEFT):
 			next_animation = get_next_animation("Climb", Vector2.LEFT, true)	
-		elif Input.is_action_pressed("move_right"):
+		elif get_input_dir().has(Vector2.RIGHT):
 			next_animation = get_next_animation("Climb", Vector2.RIGHT, true)
 		
 		else:
@@ -232,6 +232,22 @@ func animate(move_dir, velocity):
 		change_animation(next_animation, texture)
 
 
+func get_input_dir() -> Array:
+	var dir_list = []
+	
+	if not pc.disabled:
+		if Input.is_action_pressed("move_left"): 
+			dir_list.append(Vector2.LEFT)
+		if Input.is_action_pressed("move_right"):
+			dir_list.append(Vector2.RIGHT)
+		if Input.is_action_pressed("look_up"):
+			dir_list.append(Vector2.UP)
+		if Input.is_action_pressed("look_down"):
+			dir_list.append(Vector2.DOWN)
+	else: dir_list = [Vector2.ZERO]
+	
+	return dir_list
+
 
 func get_next_animation(animation, anim_dir, can_shoot_down):
 	var animation_suffix
@@ -239,15 +255,15 @@ func get_next_animation(animation, anim_dir, can_shoot_down):
 	if anim_dir == Vector2.LEFT:
 		pc.face_dir = Vector2.LEFT
 		
-		if Input.is_action_pressed("look_up") and Input.is_action_pressed("look_down"):
+		if get_input_dir().has(Vector2.UP) and get_input_dir().has(Vector2.DOWN):
 			animation_suffix = "Left"
 			pc.shoot_dir = Vector2.LEFT
 			
-		elif Input.is_action_pressed("look_up"):
+		elif get_input_dir().has(Vector2.UP):
 			animation_suffix = "LeftLookUp"
 			pc.shoot_dir = Vector2.UP
 			
-		elif Input.is_action_pressed("look_down"):
+		elif get_input_dir().has(Vector2.DOWN):
 			animation_suffix = "LeftLookDown"
 			if can_shoot_down:
 				pc.shoot_dir = Vector2.DOWN
@@ -262,15 +278,15 @@ func get_next_animation(animation, anim_dir, can_shoot_down):
 	if anim_dir == Vector2.RIGHT:
 		pc.face_dir = Vector2.RIGHT
 
-		if Input.is_action_pressed("look_up") and Input.is_action_pressed("look_down"):
+		if get_input_dir().has(Vector2.UP) and get_input_dir().has(Vector2.DOWN):
 			animation_suffix = "Right"
 			pc.shoot_dir = Vector2.RIGHT
 
-		elif Input.is_action_pressed("look_up"):
+		elif get_input_dir().has(Vector2.UP):
 			animation_suffix = "RightLookUp"
 			pc.shoot_dir = Vector2.UP
 			
-		elif Input.is_action_pressed("look_down"):
+		elif get_input_dir().has(Vector2.DOWN):
 			animation_suffix = "RightLookDown"
 			if can_shoot_down:
 				pc.shoot_dir = Vector2.DOWN

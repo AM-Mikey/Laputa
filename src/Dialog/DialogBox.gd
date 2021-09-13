@@ -1,5 +1,7 @@
 extends Control
 
+signal dialog_finished
+
 const YN = preload("res://src/Dialog/DialogYesNo.tscn")
 
 var text_sound = load("res://assets/SFX/snd_msg.ogg")
@@ -29,9 +31,10 @@ onready var tb = $MarginContainer/HBoxContainer/TextBox
 onready var face_container = $MarginContainer/HBoxContainer/Face
 onready var face_sprite = $MarginContainer/HBoxContainer/Face/Sprite
 onready var audio = $AudioStreamPlayer
-onready var player = get_tree().get_root().get_node("World/Recruit")
+
 
 onready var world = get_tree().get_root().get_node("World")
+onready var pc = get_tree().get_root().get_node("World/Recruit")
 
 func _ready():
 	visible = false
@@ -174,10 +177,9 @@ func print_dialog(string):
 
 func stop_printing():
 	print("ended dialog")
-	
-	player.disabled = false
-	player.invincible = false
-
+	emit_signal("dialog_finished")
+	pc.disabled = false
+	pc.invincible = false
 	queue_free()
 
 func parse_command(string):
@@ -205,6 +207,9 @@ func parse_command(string):
 			yes_no()
 		"//db":
 			end_branch()
+		"/lock":
+			pc.disabled = true
+			pc.invincible = true
 
 func seek(string):
 	print("seeking: ", string)

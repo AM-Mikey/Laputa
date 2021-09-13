@@ -11,26 +11,20 @@ var sfx_get_heart = load("res://assets/SFX/Placeholder/snd_health_refill.ogg")
 var sfx_get_xp = load("res://assets/SFX/Placeholder/snd_get_xp.ogg")
 var sfx_get_ammo = load("res://assets/SFX/Placeholder/snd_get_missile.ogg")
 
-#export var speed.x = 90 #was 82.5 for a max gap of 7 (barely)
-#export var speed.y = 180 #was 195 for 4 blocks
-#export var normal_speed.y = 195
-#export var long_speed.y = 150
-
-
-
+export var forgiveness_time = 0.05
 export var minimum_jump_time = 0.0000000001 #was 0.1
 export var minimum_direction_time = 1.0 #was 0.5  #scrapped idea where cave story forces you to jump a certain x distance when going max speed before jumping
 var jump_starting_move_dir_x: int
+export var min_x_velocity = 0.001
 
-
-
-export var min_xvelocity = 0.001
+var knockback_direction: Vector2
+export var knockback_speed = Vector2(80, 180)
+var knockback_velocity = Vector2.ZERO
 
 
 var direction_lock = Vector2.ZERO
 var starting_direction #for acceleration
 var bonk_distance = 4
-
 
 
 export var hp: int = 100
@@ -40,11 +34,11 @@ var total_xp: int = 0
 
 #STATES
 var movement_profile = "sigma"
-var jump_type: String #still supported?
+var jump_type: String
 
 var invincible = false
-var colliding = true
 var disabled = false
+var knockback = false
 
 var is_in_enemy = false
 var is_on_ladder = false
@@ -66,18 +60,11 @@ var shoot_dir = Vector2.LEFT
 var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
 
-export var forgiveness_time = 0.05
-var knockback = false
-var knockback_direction: Vector2
-
-
-export var knockback_speed = Vector2(80, 180)
-var knockbackvelocity = Vector2.ZERO
-
-
 
 
 onready var world = get_tree().get_root().get_node("World")
+
+
 
 func _ready():
 	speed = Vector2(90,180)
@@ -94,303 +81,113 @@ func _ready():
 		$WeaponSprite.texture = weapon_array.front().texture
 
 func _physics_process(delta):
-	if disabled != true:
-		if colliding == true: #skip this entire thing if we're in debug mode
-			
-			var is_jump_interrupted = false
-			if $MinimumJumpTimer.time_left == 0 and velocity.y < 0.0:
-				if not Input.is_action_pressed("jump"):
-					is_jump_interrupted = true
-				
-				
-			move_dir = get_move_dir()
 
+	if debug_flying: #skip this entire thing if we're flying
+		var move_dir = Vector2(
+		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 
+		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+		velocity = move_dir * debug_fly_speed
+		velocity = move_and_slide(velocity, FLOOR_NORMAL, true)
+
+	else:
+		move_dir = get_move_dir()
+
+
+		if is_on_ceiling():
+			#bonking particle
+			if $BonkTimeout.time_left == 0:
+				$BonkTimeout.start(0.4)
+				var bonk = load("res://src/Effect/BonkParticle.tscn").instance()
+				bonk.position = Vector2(position.x, position.y - 16)
+				bonk.normal = get_slide_collision(get_slide_count() - 1).normal
+				bonk.type = "bonk"
+				get_tree().get_root().get_node("World/Front").add_child(bonk)
+
+
+		if is_on_floor():
+			$ForgivenessTimer.start(forgiveness_time)
+			jump_type = ""
 			
-			if is_on_ceiling():
+			if not knockback and not is_on_ladder:
+				snap_vector = SNAP_DIRECTION * SNAP_LENGTH
+			else: 
+				snap_vector = Vector2.ZERO
+			
+			#landing particle
+			if $ForgivenessTimer.time_left == 0:
 				if $BonkTimeout.time_left == 0:
 					$BonkTimeout.start(0.4)
-					var collision = get_slide_collision(0)
-#					print("collision normal:", collision.normal)
 					var bonk = load("res://src/Effect/BonkParticle.tscn").instance()
-					var bonk_position = position
-					bonk_position.y -= 16
-					bonk.position = bonk_position
-					bonk.normal = collision.normal
-					bonk.type = "bonk"
+					bonk.position = position
+					bonk.normal = get_slide_collision(get_slide_count() - 1).normal
+					bonk.type = "land"
 					get_tree().get_root().get_node("World/Front").add_child(bonk)
-				
-			
-			if is_on_floor():
-				jump_type = ""
-#				speed.y = normal_speed.y
-					
-				if not knockback and not is_on_ladder:
-					snap_vector = SNAP_DIRECTION * SNAP_LENGTH
-				else: 
-					snap_vector = Vector2.ZERO
-				
-				if $ForgivenessTimer.time_left == 0: #just landed
-					if $BonkTimeout.time_left == 0:
-						$BonkTimeout.start(0.4)
-						var collision = get_slide_collision(get_slide_count() - 1)
-#						print("collision normal:", collision.normal)
-						var bonk = load("res://src/Effect/BonkParticle.tscn").instance()
-						bonk.position = position
-						bonk.normal = collision.normal
-						bonk.type = "land"
-						get_tree().get_root().get_node("World/Front").add_child(bonk)
-			
-				if is_on_ladder:
-					if Input.is_action_pressed("look_down"):
-						is_on_ladder = false
-
-
-				$ForgivenessTimer.start(forgiveness_time) #start forgiveness timer on any frame they're on the ground
-
-
-
-
-			
-			
-			
-			if Input.is_action_just_pressed("jump") and $ForgivenessTimer.time_left > 0 or Input.is_action_just_pressed("jump") and is_on_floor():
-				$MinimumJumpTimer.start(minimum_jump_time)
-				if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
-					if abs(velocity.x) > speed.x * 0.95: #since speed.x is max x velocity, only count as a running jump then   ##Running JUMP CHECKING HERE
-						jump_type = "running_jump"
-#						speed.y = long_speed.y
-						jump_starting_move_dir_x = move_dir.x
-						$MinimumDirectionTimer.start(minimum_direction_time)
-				snap_vector = Vector2.ZERO
-				
-#				if get_floorvelocity().y < 0: #borrowed this code to prevent sticking
-#					position.y += get_floorvelocity().y * get_physics_process_delta_time() - gravity * get_physics_process_delta_time() - 1
-				
-				$JumpSound.play()
 		
-			
-			#fall through ssp code
-#			if Input.is_action_just_pressed("look_down") and is_on_ssp and is_on_floor():
-#				position.y += 8
-				
-			if knockback:
-				if knockbackvelocity == Vector2.ZERO:
-					knockbackvelocity = Vector2(knockback_speed.x * knockback_direction.x, knockback_speed.y * -1)
-					velocity.y = knockbackvelocity.y #set knockback y to this ONCE
-				
-				velocity.x += knockbackvelocity.x
-				knockbackvelocity.x /= 2
-				
-				if abs(knockbackvelocity.x) < 1:
-					knockbackvelocity = Vector2.ZERO
-					knockback = false
-
-			velocity = get_move_velocity(velocity, move_dir, face_dir, is_jump_interrupted)
-			var new_velocity = move_and_slide_with_snap(velocity, snap_vector, FLOOR_NORMAL, true)
-			
-			if is_on_wall():
-				new_velocity.y = max(velocity.y, new_velocity.y)
-			
-			velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
+			if is_on_ladder:
+				if Input.is_action_pressed("look_down"):
+					is_on_ladder = false
 
 
-			if Input.is_action_just_pressed("fire_automatic"): 
+
+		#jump interrupt
+		var is_jump_interrupted = false
+		if $MinimumJumpTimer.time_left == 0 and velocity.y < 0.0:
+			if not Input.is_action_pressed("jump"):
+				is_jump_interrupted = true
+
+
+
+		###JUMP
+		if Input.is_action_just_pressed("jump") and $ForgivenessTimer.time_left > 0 or Input.is_action_just_pressed("jump") and is_on_floor():
+			if not disabled:
+				jump()
+
+
+		###DIRECTION LOCK
+		if Input.is_action_just_pressed("fire_automatic"): 
+			if not disabled:
 				direction_lock = face_dir
-			if Input.is_action_just_released("fire_automatic"): 
+		if Input.is_action_just_released("fire_automatic"): 
+			if not disabled:
 				direction_lock = Vector2.ZERO
 
 
-			debug_print(move_dir, face_dir) #why the fuck are we debug printing every frame??
-		
-		else: #debug mode is on
-			var move_dir = Vector2(
-			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 
-			Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
-			velocity = Vector2(
-			debug_fly_speed * move_dir.x,
-			debug_fly_speed * move_dir.y)
-			velocity = move_and_slide(velocity, FLOOR_NORMAL, true)
-
-	else: #we are curently disabled
-		pass
-
-func get_move_dir() -> Vector2:
-	if is_on_ladder:
-		return Vector2(
-			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-			Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
-			)
-	else:
-		return Vector2(
-			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+		if knockback:
+			if knockback_velocity == Vector2.ZERO:
+				knockback_velocity = Vector2(knockback_speed.x * knockback_direction.x, knockback_speed.y * -1)
+				velocity.y = knockback_velocity.y #set knockback y to this ONCE
 			
-			-1.0 if Input.is_action_just_pressed("jump") and $ForgivenessTimer.time_left > 0 or Input.is_action_just_pressed("jump") and is_on_floor() 
-			else 0.0)
-
-func get_move_velocity(velocity, move_dir, face_dir, is_jump_interrupted) -> Vector2:
-	var out = velocity
-	
-	var friction = false
-	
-	if is_on_ladder:
-		out.y = move_dir.y * speed.y/2
-
-		out.x = 0
-		if Input.is_action_just_pressed("jump"):
-			is_on_ladder = false
-			out.y = speed.y * -1.0
-	
-	elif is_in_water:
-		out.y += (gravity/2) * get_physics_process_delta_time()
-		if move_dir.y < 0:
-			out.y = (speed.y * 0.75) * move_dir.y
-		if is_jump_interrupted:
-			out.y += (gravity/2) * get_physics_process_delta_time()
-		
-		if move_dir.x != 0:
-			out.x = min(abs(out.x) + acceleration, (speed.x/2))
-			out.x *= move_dir.x
-		else:
-			friction = true
-
-	elif jump_type == "running_jump":
-		out.y += gravity * get_physics_process_delta_time()
-		if move_dir.y < 0:
-			out.y = speed.y * move_dir.y
-		if is_jump_interrupted:
-			out.y += gravity * get_physics_process_delta_time()
-		
-		if move_dir.x == jump_starting_move_dir_x *-1: #if we turn around, cancel minimumdirectiontimer
-			$MinimumDirectionTimer.stop()
-		
-		if not $MinimumDirectionTimer.is_stopped(): #still doing minimum x movement in jump #
-			#print("still doing minimum x movement")
-			out.x = speed.x
-			out.x *= jump_starting_move_dir_x
-		
-		
-		elif move_dir.x != 0: #try this as an "if" instead, if it's not working
-			if move_dir.x != jump_starting_move_dir_x:
-				out.x = min(abs(out.x) + acceleration, (speed.x * 0.5))
-				out.x *= move_dir.x
-				#$MinimumDirectionTimer.start(0)
-			else:
-				out.x = min(abs(out.x) + acceleration, speed.x)
-				out.x *= move_dir.x
-		else:
-			friction = true
-		
-	
-	else:
-		out.y += gravity * get_physics_process_delta_time()
-		if move_dir.y < 0:
-			out.y = speed.y * move_dir.y
-		if is_jump_interrupted:
-			out.y += gravity * get_physics_process_delta_time()
-
-		if move_dir.x != 0:
-			out.x = min(abs(out.x) + acceleration, speed.x)
-			out.x *= move_dir.x
-		else:
-			friction = true
-
-
-
-	if is_on_floor():
-		if friction == true:
-			out.x = lerp(out.x, 0, ground_cof)
-	else:
-		if friction == true:
-			out.x = lerp(out.x, 0, air_cof)
-
-
-	if abs(out.x) < min_xvelocity:
-		out.x = 0
-	#print(out)
-	return out
-
-
-func _input(event):
-	if not disabled:
-		if event.is_action_pressed("movement_profile"):
-			if movement_profile == "sigma":
-				movement_profile = "mu"
-				
-				speed.x = 82.5
-				speed.y = 180
-				
-				acceleration = 5
-				ground_cof = 0.2
-				air_cof = 0.05
-				
-			elif movement_profile == "mu":
-				movement_profile = "chi"
-				
-				speed.x = 90
-				speed.y = 180
-				
-				acceleration = 2.5
-				ground_cof = 0.1
-				air_cof = 0.05
+			velocity.x += knockback_velocity.x
+			knockback_velocity.x /= 2 #???? why after
 			
-			elif movement_profile == "chi":
-				movement_profile = "sigma"
-				
-				speed.x = 90
-				speed.y = 180
-				
-				acceleration = 2.5
-				ground_cof = 0.1
-				air_cof = 0.00
+			if abs(knockback_velocity.x) < 1:
+				knockback_velocity = Vector2.ZERO
+				knockback = false
+
+
+
+		velocity = get_move_velocity(velocity, move_dir, face_dir, is_jump_interrupted)
+		var new_velocity = move_and_slide_with_snap(velocity, snap_vector, FLOOR_NORMAL, true)
 			
-			yield(get_tree(), "idle_frame")
-			var popup = POPUP.instance()
-			popup.text = "movement profile: " + movement_profile
-			world.get_node("UILayer").add_child(popup)
+		if is_on_wall():
+			new_velocity.y = max(velocity.y, new_velocity.y)
+			
+		velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
 
 
 
-		if event.is_action_pressed("debug_fly"):
-			debug_fly()
-				
-				
-				
-		if event.is_action_pressed("level_up"):
-			if weapon_array.front().level < weapon_array.front().max_level:
-				print("level up via debug")
 
-				if weapon_array.front().level == weapon_array.front().max_level and weapon_array.front().xp == weapon_array.front().max_xp: pass
-				else: weapon_array.front().xp = weapon_array.front().max_xp
 
-				var next_level = load(weapon_array.front().resource_path.replace(weapon_array.front().level,weapon_array.front().level + 1))
-				var saved_xp = weapon_array.front().xp - weapon_array.front().max_xp
-				var saved_ammo = weapon_array.front().ammo
-				weapon_array.pop_front()
-				weapon_array.push_front(next_level)
-				weapon_array.front().ammo = saved_ammo
-				weapon_array.front().xp = saved_xp
-				update_weapon()
+func jump():
+	$MinimumJumpTimer.start(minimum_jump_time)
+	snap_vector = Vector2.ZERO
+	$JumpSound.play()
+	#Check if a running jump. since speed.x is max x velocity, only count as a running jump then
+	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") and abs(velocity.x) > speed.x * 0.95:
+		jump_type = "running_jump"
+		jump_starting_move_dir_x = move_dir.x
+		$MinimumDirectionTimer.start(minimum_direction_time)
 
-				var level_up = LEVELUP.instance()
-				get_tree().get_root().get_node("World/Front").add_child(level_up)
-				level_up.position = global_position
-
-				update_xp()
-
-		if event.is_action_pressed("level_down"):
-			if weapon_array.front().level != 1:
-				print("level down via debug")
-				var next_level = load(weapon_array.front().resource_path.replace(weapon_array.front().level, weapon_array.front().level - 1))
-				var saved_xp = weapon_array.front().xp #negative number
-				var saved_ammo = weapon_array.front().ammo
-				weapon_array.pop_front()
-				weapon_array.push_front(next_level)
-				weapon_array.front().ammo = saved_ammo
-				weapon_array.front().xp = weapon_array.front().max_xp + saved_xp
-				update_weapon()
-
-				var level_down = LEVELDOWN.instance()
-				get_tree().get_root().get_node("World/Front").add_child(level_down)
 
 
 func hit(damage, knockback_direction):
@@ -437,6 +234,203 @@ func hit(damage, knockback_direction):
 					level_down.position = global_position
 
 
+
+
+func get_move_dir() -> Vector2:
+	if not disabled:
+		if is_on_ladder:
+			return Vector2(
+				Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+				Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
+				)
+		else:
+			return Vector2(
+				Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+				
+				-1.0 if Input.is_action_just_pressed("jump") and $ForgivenessTimer.time_left > 0 or Input.is_action_just_pressed("jump") and is_on_floor() 
+				else 0.0)
+	
+	else: #disabled
+		return Vector2.ZERO
+
+
+
+func get_move_velocity(velocity, move_dir, face_dir, is_jump_interrupted) -> Vector2:
+	var out = velocity
+	var friction = false
+	
+	
+	if is_on_ladder:
+		out.y = move_dir.y * speed.y/2
+
+		out.x = 0
+		if Input.is_action_just_pressed("jump"):
+			is_on_ladder = false
+			out.y = speed.y * -1.0
+	
+	
+	elif is_in_water:
+		out.y += (gravity/2) * get_physics_process_delta_time()
+		if move_dir.y < 0:
+			out.y = (speed.y * 0.75) * move_dir.y
+		if is_jump_interrupted:
+			out.y += (gravity/2) * get_physics_process_delta_time()
+		
+		if move_dir.x != 0:
+			out.x = min(abs(out.x) + acceleration, (speed.x/2))
+			out.x *= move_dir.x
+		else:
+			friction = true
+
+
+	elif jump_type == "running_jump":
+		out.y += gravity * get_physics_process_delta_time()
+		if move_dir.y < 0:
+			out.y = speed.y * move_dir.y
+		if is_jump_interrupted:
+			out.y += gravity * get_physics_process_delta_time()
+		
+		if move_dir.x == jump_starting_move_dir_x *-1: #if we turn around, cancel minimumdirectiontimer
+			$MinimumDirectionTimer.stop()
+		
+		if not $MinimumDirectionTimer.is_stopped(): #still doing minimum x movement in jump #
+			#print("still doing minimum x movement")
+			out.x = speed.x
+			out.x *= jump_starting_move_dir_x
+		
+		
+		elif move_dir.x != 0: #try this as an "if" instead, if it's not working
+			if move_dir.x != jump_starting_move_dir_x:
+				out.x = min(abs(out.x) + acceleration, (speed.x * 0.5))
+				out.x *= move_dir.x
+				#$MinimumDirectionTimer.start(0)
+			else:
+				out.x = min(abs(out.x) + acceleration, speed.x)
+				out.x *= move_dir.x
+		else:
+			friction = true
+	
+	
+	#normal
+	else:
+		out.y += gravity * get_physics_process_delta_time()
+		if move_dir.y < 0:
+			out.y = speed.y * move_dir.y
+		if is_jump_interrupted:
+			out.y += gravity * get_physics_process_delta_time()
+
+		if move_dir.x != 0:
+			out.x = min(abs(out.x) + acceleration, speed.x)
+			out.x *= move_dir.x
+		else:
+			friction = true
+
+
+
+	if is_on_floor():
+		if friction:
+			out.x = lerp(out.x, 0, ground_cof)
+	else:
+		if friction:
+			out.x = lerp(out.x, 0, air_cof)
+
+
+	if abs(out.x) < min_x_velocity:
+		out.x = 0
+	#print(out)
+	return out
+
+
+
+
+func _input(event):
+	if not disabled:
+		if event.is_action_pressed("movement_profile"):
+			if movement_profile == "sigma":
+				movement_profile = "mu"
+				
+				speed.x = 82.5
+				speed.y = 180
+				
+				acceleration = 5
+				ground_cof = 0.2
+				air_cof = 0.05
+				
+			elif movement_profile == "mu":
+				movement_profile = "chi"
+				
+				speed.x = 90
+				speed.y = 180
+				
+				acceleration = 2.5
+				ground_cof = 0.1
+				air_cof = 0.05
+			
+			elif movement_profile == "chi":
+				movement_profile = "sigma"
+				
+				speed.x = 90
+				speed.y = 180
+				
+				acceleration = 2.5
+				ground_cof = 0.1
+				air_cof = 0.00
+			
+			yield(get_tree(), "idle_frame")
+			var popup = POPUP.instance()
+			popup.text = "movement profile: " + movement_profile
+			world.get_node("UILayer").add_child(popup)
+
+
+
+		if event.is_action_pressed("debug_fly"):
+			debug_fly()
+
+
+		if Input.is_action_just_pressed("debug_print"):
+			debug_print()
+
+
+		if event.is_action_pressed("level_up"):
+			if weapon_array.front().level < weapon_array.front().max_level:
+				print("level up via debug")
+
+				if weapon_array.front().level == weapon_array.front().max_level and weapon_array.front().xp == weapon_array.front().max_xp: pass
+				else: weapon_array.front().xp = weapon_array.front().max_xp
+
+				var next_level = load(weapon_array.front().resource_path.replace(weapon_array.front().level,weapon_array.front().level + 1))
+				var saved_xp = weapon_array.front().xp - weapon_array.front().max_xp
+				var saved_ammo = weapon_array.front().ammo
+				weapon_array.pop_front()
+				weapon_array.push_front(next_level)
+				weapon_array.front().ammo = saved_ammo
+				weapon_array.front().xp = saved_xp
+				update_weapon()
+
+				var level_up = LEVELUP.instance()
+				get_tree().get_root().get_node("World/Front").add_child(level_up)
+				level_up.position = global_position
+
+				update_xp()
+
+		if event.is_action_pressed("level_down"):
+			if weapon_array.front().level != 1:
+				print("level down via debug")
+				var next_level = load(weapon_array.front().resource_path.replace(weapon_array.front().level, weapon_array.front().level - 1))
+				var saved_xp = weapon_array.front().xp #negative number
+				var saved_ammo = weapon_array.front().ammo
+				weapon_array.pop_front()
+				weapon_array.push_front(next_level)
+				weapon_array.front().ammo = saved_ammo
+				weapon_array.front().xp = weapon_array.front().max_xp + saved_xp
+				update_weapon()
+
+				var level_down = LEVELDOWN.instance()
+				get_tree().get_root().get_node("World/Front").add_child(level_down)
+
+
+
+
 func _on_SSPDetector_body_entered(body):
 	is_on_ssp = true
 
@@ -446,42 +440,39 @@ func _on_SSPDetector_body_exited(body):
 	
 	
 	
-func debug_print(move_direction, look_direction):
+func debug_print():
+	if not displaying_debug_info:
+		displaying_debug_info = true
+		var debug_info = load("res://src/UI//Debug/DebugInfo.tscn").instance()
+		world.get_node("UILayer").add_child(debug_info)
+	else:
+		displaying_debug_info = false
+		world.get_node("UILayer/DebugInfo").queue_free()
 
-	
-	if Input.is_action_just_pressed("debug_print"):
-		if not displaying_debug_info:
-			displaying_debug_info = true
-			var debug_info = load("res://src/UI//Debug/DebugInfo.tscn").instance()
-			world.get_node("UILayer").add_child(debug_info)
-		else:
-			displaying_debug_info = false
-			world.get_node("UILayer/DebugInfo").queue_free()
-
-		print("~~~~~~~~~~~~DEBUG STATS~~~~~~~~~~~~")
-		print("player hp: ", hp, "/", max_hp)
-		print("player position: ", global_position)
-		print("player velocity: ", velocity)
-		print("move direction: ", move_direction)
-		print("face direction: ", look_direction)
-		print("total xp: ", total_xp)
-		print("weapon xp: ", weapon_array.front().xp, "/", weapon_array.front().max_xp)
-		print("weapon level: ", weapon_array.front().level)
-		print("forgiveness timer time left: ", $ForgivenessTimer.time_left)
-		print("snap vector: ", snap_vector)
-		print("is on floor: ", is_on_floor())
-		print("is in water: ", is_in_water)
-		print("is on ladder: ", is_on_ladder)
-		print("camera offset: ", $PlayerCamera.offset)
-		print("camera position: ", $PlayerCamera.global_position)
-		print("---")
-		print("screen size: ", OS.get_screen_size())
-		print("window size: ", OS.get_window_size())
-		print("viewport size: ", get_tree().get_root().size)
-		print("---")
-		print("topics: ", topic_array)
-		print("weapons: ", weapon_array)
-		print("~~~~~~~~~~~~DEBUG STATS~~~~~~~~~~~~")
+	print("~~~~~~~~~~~~DEBUG STATS~~~~~~~~~~~~")
+	print("player hp: ", hp, "/", max_hp)
+	print("player position: ", global_position)
+	print("player velocity: ", velocity)
+	print("move direction: ", move_dir)
+	print("face direction: ", face_dir)
+	print("total xp: ", total_xp)
+	print("weapon xp: ", weapon_array.front().xp, "/", weapon_array.front().max_xp)
+	print("weapon level: ", weapon_array.front().level)
+	print("forgiveness timer time left: ", $ForgivenessTimer.time_left)
+	print("snap vector: ", snap_vector)
+	print("is on floor: ", is_on_floor())
+	print("is in water: ", is_in_water)
+	print("is on ladder: ", is_on_ladder)
+	print("camera offset: ", $PlayerCamera.offset)
+	print("camera position: ", $PlayerCamera.global_position)
+	print("---")
+	print("screen size: ", OS.get_screen_size())
+	print("window size: ", OS.get_window_size())
+	print("viewport size: ", get_tree().get_root().size)
+	print("---")
+	print("topics: ", topic_array)
+	print("weapons: ", weapon_array)
+	print("~~~~~~~~~~~~DEBUG STATS~~~~~~~~~~~~")
 
 
 func debug_fly():
@@ -489,7 +480,6 @@ func debug_fly():
 		print("debug fly: ON")
 		debug_flying = true
 		invincible = true
-		colliding = false
 		$CollisionShape2D.disabled = true
 		$HurtDetector.monitoring = false
 		$ItemDetector.monitoring = false	
@@ -499,7 +489,6 @@ func debug_fly():
 		is_on_ladder = false
 		debug_flying = false
 		invincible = false
-		colliding = true
 		$CollisionShape2D.disabled = false
 		$HurtDetector.monitoring = true
 		$ItemDetector.monitoring = true

@@ -20,38 +20,38 @@ func _physics_process(delta):
 	if $TweenHorizontal.is_active():
 		$TweenHorizontal.playback_speed = max(abs(pc.velocity.x)/pc.speed.x, 0.5) #second number is minimum camera speed ##thanks me!
 	
+	if not pc.disabled:
+		if Input.is_action_just_pressed("look_up"):
+			if panning_down:
+				panning_up = false
+				home_vertical()
+			elif not panning_up:
+				panning_up = true
+				pan_vertical(-1)
 
-	if Input.is_action_just_pressed("look_up"):
-		if panning_down:
-			panning_up = false
-			home_vertical()
-		elif not panning_up:
-			panning_up = true
-			pan_vertical(-1)
+		if Input.is_action_just_pressed("look_down"):
+			if panning_up:
+				panning_down = false
+				home_vertical()
+			elif not panning_down:
+				panning_down = true
+				pan_vertical(1)
 
-	if Input.is_action_just_pressed("look_down"):
-		if panning_up:
-			panning_down = false
-			home_vertical()
-		elif not panning_down:
-			panning_down = true
-			pan_vertical(1)
-
-	if Input.is_action_just_released("look_up"):
-		if Input.is_action_pressed("look_down"):
-			panning_down = true
-			pan_vertical(1)
-		else:
-			panning_up = false
-			home_vertical()
-	
-	if Input.is_action_just_released("look_down"):
-		if Input.is_action_pressed("look_up"):
-			panning_up = true
-			pan_vertical(-1)
-		else:
-			panning_down = false
-			home_vertical()
+		if Input.is_action_just_released("look_up"):
+			if Input.is_action_pressed("look_down"):
+				panning_down = true
+				pan_vertical(1)
+			else:
+				panning_up = false
+				home_vertical()
+		
+		if Input.is_action_just_released("look_down"):
+			if Input.is_action_pressed("look_up"):
+				panning_up = true
+				pan_vertical(-1)
+			else:
+				panning_down = false
+				home_vertical()
 
 
 func _on_limit_camera(left, right, top, bottom):

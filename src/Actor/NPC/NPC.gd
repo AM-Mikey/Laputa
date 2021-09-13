@@ -20,26 +20,36 @@ export var conversation: String
 var dialog_step: int = 1
 var branch: String = ""
 
-var db 
 
 
+var camera_forgiveness = 16
 
+onready var world = get_tree().get_root().get_node("World")
+onready var pc = get_tree().get_root().get_node("World/Recruit")
 
 func _ready():
 	add_to_group("NPCs")
 
 
-#getting where the camera's bounds are is a matter of getting the camera/player position, 
-#applying the offset, and then checking the viewport size
+
 
 
 
 
 #movement stuff
 func _physics_process(delta):
-	if talking and active_player.disabled == false: #if db freed the player
-		talking = false
+#CONNECT A SIGNAL TO TELL NPCS THEY'RE NO LONGER TALKING
+
+#	if talking and active_player.disabled == false: #if db freed the player
+#		talking = false
+
 	
+	if talking:
+		if not check_within_camera():
+			print("npc left screen, ending dialog")
+			talking = false
+			var db = world.get_node("UILayer/DialogBox")
+			db.stop_printing()
 
 #	if target_pos != null:
 #		if move_dir == Vector2.ZERO:
@@ -48,6 +58,18 @@ func _physics_process(delta):
 		
 	velocity = calculate_movevelocity(velocity, move_dir, speed)
 	velocity = move_and_slide(velocity, FLOOR_NORMAL)
+
+
+
+func check_within_camera() -> bool:
+	var cam_size = OS.get_window_size() / world.resolution_scale  #gets active viewport, may have to devide by resolution scale
+	var cam_pos = pc.get_node("PlayerCamera").get_camera_screen_center() #gets ONLY the player camera center with offset
+	
+	if global_position.x > cam_pos.x - (cam_size.x /2 + camera_forgiveness) and global_position.x < cam_pos.x + (cam_size.x /2 + camera_forgiveness):
+		if global_position.y > cam_pos.y - (cam_size.y /2 + camera_forgiveness) and global_position.y < cam_pos.y + (cam_size.y /2 + camera_forgiveness):
+			return true
+		else: return false
+	else: return false
 
 
 func get_move_dir():
@@ -70,6 +92,7 @@ func animate():
 	pass
 
 
+
 #dialog stuff
 func _on_PlayerDetector_body_entered(body):
 	has_player_near = true
@@ -81,9 +104,29 @@ func _on_PlayerDetector_body_exited(body):
 func _input(event):
 	if event.is_action_pressed("inspect") and has_player_near == true and dialog_json != "" and conversation != "":
 		start_dialog()
-		
 
 
+func start_dialog():
+	if not talking:
+		talking = true
+		yield(get_tree().create_timer(.0001), "timeout") #why?
+	
+		if world.has_node("UILayer/DialogBox"): #clear old dialog box if there is one
+			world.get_node("UILayer/DialogBox").stop_printing()
+			
+		var dialog_box = DB.instance()
+		dialog_box.connect("dialog_finished", self, "on_dialog_finished")
+		get_tree().get_root().get_node("World/UILayer").add_child(dialog_box)
+		dialog_box.start_printing(dialog_json, conversation)
+		print("starting conversation")
+
+
+func on_dialog_finished():
+	talking = false
+
+
+
+#movement stuff
 func move_to_target_x():
 	if id != null:
 		print(id + " moving to target_pos: ", target_pos)
@@ -95,6 +138,8 @@ func move_to_target_x():
 			arrive_at_target()
 			
 func arrive_at_target():
+	var db = world.get_node("UILayer/DialogBox")
+	
 	if id != null:
 		print(id + " arrived at target position")
 	move_dir = Vector2.ZERO
@@ -103,16 +148,3 @@ func arrive_at_target():
 	if talking:
 		db.busy = false
 		db.dialog_loop()
-
-func start_dialog():
-	if talking == false:
-		talking = true
-		active_player.disabled = true
-		active_player.invincible = true
-		yield(get_tree().create_timer(.0001), "timeout")
-		
-		db = DB.instance()
-		get_tree().get_root().get_node("World/UILayer").add_child(db)
-	
-		db.start_printing(dialog_json, conversation)  #new dialog start function
-		print("starting conversation")
