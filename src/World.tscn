@@ -18,8 +18,18 @@ release_version = "1.6"
 [node name="Recruit" parent="." instance=ExtResource( 5 )]
 position = Vector2( 256, 144 )
 z_index = 1
+speed = Vector2( 150, 350 )
+gravity = 300
+ground_cof = 0.2
+air_cof = 0.05
+forgiveness_time = 0.05
+minimum_jump_time = 1e-10
+minimum_direction_time = 1.0
+min_x_velocity = 0.001
+knockback_speed = Vector2( 80, 180 )
 hp = 8
 max_hp = 8
+debug_fly_speed = 500
 
 [node name="Middle" type="Node2D" parent="."]
 z_index = 1

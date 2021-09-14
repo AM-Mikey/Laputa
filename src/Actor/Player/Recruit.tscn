@@ -3113,8 +3113,18 @@ tracks/4/keys = {
 [node name="Recruit" type="KinematicBody2D"]
 collision_mask = 520
 script = ExtResource( 2 )
+speed = null
+gravity = null
+ground_cof = null
+air_cof = null
+forgiveness_time = null
+minimum_jump_time = null
+minimum_direction_time = null
+min_x_velocity = null
+knockback_speed = null
 hp = 3
 max_hp = 3
+debug_fly_speed = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 1, 1, 1, 0.4 )

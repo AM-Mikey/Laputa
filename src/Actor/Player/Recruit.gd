@@ -262,14 +262,13 @@ func get_move_velocity(velocity, move_dir, face_dir, is_jump_interrupted) -> Vec
 	
 	if is_on_ladder:
 		out.y = move_dir.y * speed.y/2
-
 		out.x = 0
 		if Input.is_action_just_pressed("jump"):
 			is_on_ladder = false
 			out.y = speed.y * -1.0
 	
 	
-	elif is_in_water:
+	if is_in_water:
 		out.y += (gravity/2) * get_physics_process_delta_time()
 		if move_dir.y < 0:
 			out.y = (speed.y * 0.75) * move_dir.y
