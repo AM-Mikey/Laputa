@@ -27,7 +27,7 @@ var busy = false
 
 var step: int = 0 #step in printing dialog
 
-onready var tb = $MarginContainer/HBoxContainer/TextBox
+onready var tb = $MarginContainer/HBoxContainer/RichTextBox
 onready var face_container = $MarginContainer/HBoxContainer/Face
 onready var face_sprite = $MarginContainer/HBoxContainer/Face/Sprite
 onready var audio = $AudioStreamPlayer
@@ -43,14 +43,12 @@ func _ready():
 
 func print_sign(text):
 	face_container.free()
-	tb.align = Label.ALIGN_CENTER
-	tb.valign = Label.ALIGN_CENTER
-	tb.text = text
+	tb.bbcode_text = "[b][center]" + text
 	visible = true
 
 func start_printing(dialog_json, npc_convo):
 	audio.stream = text_sound
-	tb.text = ""
+	tb.bbcode_text = ""
 	visible = true
 	in_dialog = true
 	
@@ -80,23 +78,23 @@ func dialog_loop():
 func flash_cursor():
 	yield(get_tree().create_timer(0.3), "timeout")
 	print("flashing cursor")
-	var added_text = tb.text.insert(tb.text.length() - 1, "§")
-	var deleted_text = tb.text
+	var added_text = tb.bbcode_text + "§"
+	var deleted_text = tb.bbcode_text
 	
 	while active == false:
-		tb.text = added_text
+		tb.bbcode_text = added_text
 		yield(get_tree().create_timer(0.3), "timeout")
 		if active:
 			break
-		tb.text = deleted_text
+		tb.bbcode_text = deleted_text
 		yield(get_tree().create_timer(0.3), "timeout")
 
 func remove_cursor():
-	var cursor_position = tb.text.rfind("§")
+	var cursor_position = tb.bbcode_text.rfind("§")
 	if cursor_position != -1:
-		var removed_cursor = tb.text
+		var removed_cursor = tb.bbcode_text
 		removed_cursor.erase(cursor_position, 1)
-		tb.text = removed_cursor
+		tb.bbcode_text = removed_cursor
 
 func _input(event):
 	if event.is_action_pressed("inspect"):
@@ -111,7 +109,7 @@ func _input(event):
 				active = true
 				remove_cursor()
 				if tb.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
-					tb.text = ""
+					tb.bbcode_text = ""
 				dialog_loop()
 			
 			else: #active
@@ -130,9 +128,10 @@ func load_dialog(dialog_json) -> Dictionary: #loads json and converts it into a 
 
 func print_dialog(string):
 	if tb.get_line_count() == 4: #failsafe for if we overflow
-		tb.lines_skipped = 1
-	else:
-		tb.lines_skipped = 0
+		tb.remove_line(1)
+		#tb.lines_skipped = 1
+	#else:
+		#tb.lines_skipped = 0
 	
 	var character = string.substr(step, 1)
 	
@@ -141,7 +140,7 @@ func print_dialog(string):
 		$PrintTimer.stop()
 		$PrintTimer.start($PrintTimer.time_left + punctuation_delay)
 		print("insterted char: ", character)
-		tb.text = tb.text.insert(step, character)
+		tb.bbcode_text += character
 	
 	elif character == "\\":
 		print("skipping escape char")
@@ -151,7 +150,7 @@ func print_dialog(string):
 			active = false
 			flash_cursor()
 			print("adding back newline")
-			tb.text = tb.text.insert(step, "\n")
+			tb.bbcode_text += "\n" #tb.bbcode_text = tb.bbcode_text.insert(step, "\n")
 			
 	
 	elif character == "/":
@@ -170,7 +169,7 @@ func print_dialog(string):
 		
 	else:
 		print("insterted char: ", character)
-		tb.text = tb.text.insert(step, character)
+		tb.bbcode_text += character #tb.bbcode_text = tb.bbcode_text.insert(step, character)
 		#audio.stop()
 		audio.play()
 
@@ -178,6 +177,7 @@ func print_dialog(string):
 func stop_printing():
 	print("ended dialog")
 	emit_signal("dialog_finished")
+	pc.get_node("PlayerCamera").position = Vector2.ZERO
 	pc.disabled = false
 	pc.invincible = false
 	queue_free()
@@ -210,6 +210,11 @@ func parse_command(string):
 		"/lock":
 			pc.disabled = true
 			pc.invincible = true
+		"/focus":
+			focus(argument)
+		"/turn":
+			turn(argument)
+
 
 func seek(string):
 	print("seeking: ", string)
@@ -230,11 +235,15 @@ func face(string):
 	face_sprite.frame = expression
 
 func display_name(string):
+	var name_regex = RegEx.new()
+	name_regex.compile("\\[b]\\[color=red].*\\[/color]\\[/b]")
+	tb.bbcode_text = name_regex.sub(tb.bbcode_text, "")
+
 	if string == "":
 		printerr("COMMAND ERROR: no npc given for /name")
 		return
 	var display_name = string.capitalize() + ": "
-	tb.text = tb.text.insert(0, display_name)
+	tb.bbcode_text = "[b][color=red]" + display_name + "[/color][/b]" + tb.bbcode_text
 	
 func do_hide(string):
 	if string == "":
@@ -262,7 +271,7 @@ func walk(string):
 	var distance = int(walk[1])
 	
 	if id == null or distance == null:
-		printerr("COMMAND ERROR: not enough arguements for /walk")
+		printerr("COMMAND ERROR: not enough arguments for /walk")
 		return
 	
 	for n in get_tree().get_nodes_in_group("NPCs"):
@@ -290,10 +299,10 @@ func on_select_branch(branch):
 		seek("/" + branch)
 		
 	print("adding extra newline") #inserting newlines like this bypasses the input_event() line check, so add that code here
-	tb.text = tb.text.insert(step, "\n")
+	tb.bbcode_text = tb.bbcode_text.insert(step, "\n")
 	busy = false
 	if tb.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
-		tb.text = ""
+		tb.bbcode_text = ""
 	dialog_loop()
 
 
@@ -301,9 +310,52 @@ func end_branch():
 	active = false
 	flash_cursor()
 	print("adding back newline")
-	tb.text = tb.text.insert(step, "\n")
+	tb.bbcode_text = tb.bbcode_text.insert(step, "\n")
 	seek("/m")
-	step -= 5 #WHY WHY WHY WHY WHY
+	step -= 3 #5 it changed #WHY WHY WHY WHY WHY #this is probably the cause of the step number going out of sync
+	#we should hope to eliminate steps alltogether
+
+
+func focus(string):
+	if string == "":
+		printerr("COMMAND ERROR: no npc given for /focus")
+		return
+	var id = string.to_lower()
+	for n in get_tree().get_nodes_in_group("NPCs"):
+		if n.id == id:
+			pc.get_node("PlayerCamera").global_position = n.global_position
+
+
+func turn(string):
+	var turn = string.split(",", true, 1)
+	var id = turn[0]
+	var direction = turn[1].capitalize()
+	
+	if id == null or direction == null:
+		printerr("COMMAND ERROR: not enough arguments for /turn")
+		return
+	
+	var found_npcs = 0
+	for n in get_tree().get_nodes_in_group("NPCs"):
+		if n.id == id:
+			found_npcs += 1
+			var ap = n.get_node("AnimationPlayer")
+			var animation = ap.current_animation.trim_suffix("Left") if "Left" in ap.current_animation else ap.current_animation.trim_suffix("Right") 
+			
+			if direction == "Left" or direction == "Right":
+				ap.play(animation + direction)
+		
+			elif direction == "Player":
+				match int(sign(pc.global_position.x - n.global_position.x)):
+					-1: direction = "Left"
+					1: direction = "Right"
+				ap.play(animation + direction)
+			
+			else:
+				printerr("COMMAND ERROR: invalid direction for /turn")
+
+	if found_npcs == 0:
+		printerr("COMMAND ERROR: could not find NPC with id: " + id)
 
 
 func _on_viewport_size_changed():

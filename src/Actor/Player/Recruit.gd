@@ -13,7 +13,7 @@ var sfx_get_ammo = load("res://assets/SFX/Placeholder/snd_get_missile.ogg")
 
 export var forgiveness_time = 0.05
 export var minimum_jump_time = 0.0000000001 #was 0.1
-export var minimum_direction_time = 1.0 #was 0.5  #scrapped idea where cave story forces you to jump a certain x distance when going max speed before jumping
+export var minimum_direction_time = 1.0 #was 0.5  #cave story forces you to jump a certain x distance when going max speed before jumping
 var jump_starting_move_dir_x: int
 export var min_x_velocity = 0.001
 
@@ -579,8 +579,9 @@ func do_iframes(damage, knockback_direction):
 func die():
 	if dead == false:
 		dead = true
-		queue_free()
-		get_tree().reload_current_scene()
+		disabled = true
+		visible = false
+		world.get_node("UILayer").add_child(load("res://src/UI/DeathScreen.tscn").instance())
 
 func _on_HurtDetector_body_entered(body):
 	if not disabled:

@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Dialog/DialogBox.gd" type="Script" id=1]
 [ext_resource path="res://assets/UI/DialogBox.png" type="Texture" id=2]
+[ext_resource path="res://src/UI/Font/Momo.tres" type="DynamicFont" id=3]
 [ext_resource path="res://assets/UI/Font/momo.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://src/UI/Font/WelcomeBack.tres" type="DynamicFont" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 12
@@ -57,6 +59,7 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = 456.0
 margin_bottom = 56.0
+size_flags_vertical = 5
 custom_constants/separation = 8
 
 [node name="Face" type="Control" parent="MarginContainer/HBoxContainer"]
@@ -68,6 +71,7 @@ rect_min_size = Vector2( 48, 48 )
 centered = false
 
 [node name="TextBox" type="Label" parent="MarginContainer/HBoxContainer"]
+visible = false
 light_mask = 2
 margin_left = 56.0
 margin_right = 448.0
@@ -81,6 +85,18 @@ clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="RichTextBox" type="RichTextLabel" parent="MarginContainer/HBoxContainer"]
+light_mask = 2
+margin_left = 56.0
+margin_right = 448.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/bold_font = ExtResource( 5 )
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+scroll_active = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = "SFX"

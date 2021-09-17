@@ -9,7 +9,7 @@ onready var hud = get_tree().get_root().get_node("World/UILayer/HUD")
 
 
 func _ready():
-	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
+	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	
 
 												#VERSION STUFF
@@ -26,7 +26,7 @@ func _ready():
 	
 	
 	yield(get_tree(), "idle_frame")
-	_on_viewport_size_changed()
+	on_viewport_size_changed()
 	focus()
 	
 
@@ -66,7 +66,7 @@ func _on_Quit_pressed():
 	get_tree().quit()
 
 
-func _on_viewport_size_changed():
+func on_viewport_size_changed():
 	rect_size = get_tree().get_root().size / world.resolution_scale
 
 

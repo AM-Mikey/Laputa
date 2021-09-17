@@ -1,0 +1,108 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=1]
+[ext_resource path="res://src/UI/DeathScreen.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "In"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBox:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -16 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.156863 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBox/Label:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBox/HBox:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="DeathScreen" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 480.0
+margin_bottom = 270.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="VBox" type="VBoxContainer" parent="."]
+margin_right = 480.0
+margin_bottom = 270.0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBox"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 115.0
+margin_right = 480.0
+margin_bottom = 129.0
+text = "You are Dead"
+align = 1
+
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+margin_top = 133.0
+margin_right = 480.0
+margin_bottom = 155.0
+alignment = 1
+
+[node name="Continue" type="Button" parent="VBox/HBox"]
+margin_left = 189.0
+margin_right = 251.0
+margin_bottom = 22.0
+text = "Continue"
+
+[node name="Quit" type="Button" parent="VBox/HBox"]
+margin_left = 255.0
+margin_right = 290.0
+margin_bottom = 22.0
+text = "Quit"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/In = SubResource( 1 )
+
+[connection signal="pressed" from="VBox/HBox/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="VBox/HBox/Quit" to="." method="_on_Quit_pressed"]

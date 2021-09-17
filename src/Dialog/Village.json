@@ -29,8 +29,8 @@
 
 	"down_there":
 	"
-	/lock /name,??? Hey you down there!
-	/face,mechanic /name,sage Yeah, you!
+	/lock /name,??? /turn,mechanic,right Hey you down there!
+	/focus,mechanic /face,mechanic /name,sage /turn,mechanic,player Yeah, you!
 	You can access the shop by jumping up here!
 	"
 }

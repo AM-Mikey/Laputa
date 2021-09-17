@@ -4,7 +4,7 @@ onready var world = get_tree().get_root().get_node("World")
 onready var pc = get_tree().get_root().get_node("World/Recruit")
 
 func _ready():
-	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
+	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 
 

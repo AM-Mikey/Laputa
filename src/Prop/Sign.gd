@@ -20,6 +20,7 @@ var db
 signal display_text(path, display_name, face, expression, text, justify, voiced)
 signal stop_text()
 
+onready var world = get_tree().get_root().get_node("World")
 
 func _on_Sign_body_entered(body):
 	has_player_near = true
@@ -37,6 +38,9 @@ func _input(event):
 		if not reading:
 			reading = true
 			yield(get_tree().create_timer(.0001), "timeout")
+			
+			if world.has_node("UILayer/DialogBox"): #clear old dialog box if there is one
+				world.get_node("UILayer/DialogBox").stop_printing()
 			
 			db = DB.instance()
 			get_tree().get_root().get_node("World/UILayer").add_child(db)

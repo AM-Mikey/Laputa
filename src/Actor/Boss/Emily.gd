@@ -10,10 +10,13 @@ export var idle_time = .5
 var move_dir = Vector2.ZERO
 var target_position
 
-var active_state: String
-var idle = true
+
 var step = 1
 var max_step = 1
+
+#states
+var active_state: String
+signal idle
 
 
 func _ready():
@@ -27,13 +30,49 @@ func _ready():
 	acceleration = 50
 	
 	emit_signal("setup_ui", display_name, hp, max_hp)
+	
+	loop()
+
+
+
+
+func loop():
+	while hp > 0:
+		walk(Vector2.LEFT, 6)
+		yield(self, "idle")
+		yield(get_tree().create_timer(0.4), "timeout")
+		
+		walk(Vector2.RIGHT, 6)
+		yield(self, "idle")
+		yield(get_tree().create_timer(0.4), "timeout")
+		
+		charge(Vector2.LEFT)
+		yield(self, "idle")
+		yield(get_tree().create_timer(0.4), "timeout")
+		
+		charge(Vector2.RIGHT)
+		yield(self, "idle")
+		yield(get_tree().create_timer(0.4), "timeout")
 
 
 func walk(dir, dist):
-	active_state = "walk"
+	print("walking")
 	move_dir = dir
 	target_position = Vector2(global_position.x + (((dist * 16 ) -8) * dir.x), global_position.y)
+	active_state = "walk"
 
+func charge(dir):
+	print("charging")
+	move_dir = dir
+	yield(get_tree().create_timer(0.1), "timeout") #wait before declaring active state, so process doesn't catch the charge at 0 velocity
+	active_state = "charge"
+
+func stop():
+	print("stopping")
+	move_dir = Vector2.ZERO
+	active_state = "idle"
+	emit_signal("idle")
+	
 
 
 func jump(dir, dist, height):
@@ -47,47 +86,28 @@ func jump(dir, dist, height):
 	target_position = Vector2(global_position.x + (((dist * 16 ) -8) * dir.x), global_position.y)
 
 
-
-func _process(delta):
-	if idle == true:
-		idle = false
-		yield(get_tree().create_timer(idle_time), "timeout")
-		if step == 1:
-			#walk(Vector2.LEFT, 6)
-			jump(Vector2.LEFT, 10, 3)
-			
-		if step == 2:
-			#walk(Vector2.RIGHT, 6)
-			pass
-		if step == 3:
-			pass
-		
-		#if step == max_step:
-			#step = 1
-		#else:
-		step +=1
-
-
 func _physics_process(delta):
 	if not is_on_floor():
 		move_dir.y = 0
 	
+	match active_state:
+		"walk":
+			match move_dir:
+				Vector2.LEFT: 
+					if global_position.x <= target_position.x:
+						stop()
+				Vector2.RIGHT:
+					if global_position.x >= target_position.x:
+						stop()
+		"charge":
+			if abs(velocity.x) < 0.1:
+				stop()
+		
+	
 	velocity = calculate_movevelocity(velocity, move_dir)
 	velocity = move_and_slide(velocity, FLOOR_NORMAL, true)
-	
-	
-	
-	if move_dir == Vector2.LEFT:
-		if global_position.x <= target_position.x:
-			print("stopping")
-			move_dir = Vector2.ZERO
-			idle = true
 
-	if move_dir == Vector2.RIGHT:
-		if global_position.x >= target_position.x:
-			print("stopping")
-			move_dir = Vector2.ZERO
-			idle = true
+
 
 
 func calculate_movevelocity(linearvelocity: Vector2, move_dir) -> Vector2:

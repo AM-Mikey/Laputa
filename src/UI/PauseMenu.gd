@@ -6,8 +6,8 @@ const LEVEL = preload("res://src/UI/LevelSelect.tscn")
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
-	_on_viewport_size_changed()
+	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	on_viewport_size_changed()
 	focus()
 
 func _input(event):
@@ -37,5 +37,5 @@ func _on_Level_pressed():
 func _on_Quit_pressed():
 	get_tree().quit()
 
-func _on_viewport_size_changed():
+func on_viewport_size_changed():
 	rect_size = get_tree().get_root().size / world.resolution_scale

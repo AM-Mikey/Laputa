@@ -75,7 +75,6 @@ func _on_viewport_size_changed():
 	else:
 		resolution_scale = 4.0
 	
-	$Recruit.get_node("PlayerCamera").zoom = Vector2(1 / resolution_scale, 1 / resolution_scale)
 	$UILayer.scale = Vector2(resolution_scale, resolution_scale)
 	
 

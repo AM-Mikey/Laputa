@@ -13,48 +13,11 @@ onready var pc = get_tree().get_root().get_node("World/Recruit")
 func _ready():
 	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
-
-func _physics_process(delta):
-	if horizontal_focus != pc.face_dir:
-		horizontal_focus = pc.face_dir
-		pan_horizontal(pc.face_dir, pc.velocity)
-
 	
-	if $TweenHorizontal.is_active():
-		$TweenHorizontal.playback_speed = max(abs(pc.velocity.x)/pc.speed.x, 0.5) #second number is minimum camera speed ##thanks me!
-	
-	if not pc.disabled:
-		if Input.is_action_just_pressed("look_up"):
-			if panning_down:
-				panning_up = false
-				home_vertical()
-			elif not panning_up:
-				panning_up = true
-				pan_vertical(-1)
-
-		if Input.is_action_just_pressed("look_down"):
-			if panning_up:
-				panning_down = false
-				home_vertical()
-			elif not panning_down:
-				panning_down = true
-				pan_vertical(1)
-
-		if Input.is_action_just_released("look_up"):
-			if Input.is_action_pressed("look_down"):
-				panning_down = true
-				pan_vertical(1)
-			else:
-				panning_up = false
-				home_vertical()
-		
-		if Input.is_action_just_released("look_down"):
-			if Input.is_action_pressed("look_up"):
-				panning_up = true
-				pan_vertical(-1)
-			else:
-				panning_down = false
-				home_vertical()
+	global_position = pc.global_position
+	#yield(get_tree(),"idle_frame")
+	yield(get_tree().create_timer(1.0), "timeout")
+	#position = Vector2.ZERO
 
 
 func _on_limit_camera(left, right, top, bottom):
@@ -111,52 +74,6 @@ func _on_limit_camera(left, right, top, bottom):
 		limit_bottom = bottom
 
 
-func pan_vertical(direction):
-	var tween = $TweenVertical
-	var camera_pan_distance = 2 / world.resolution_scale
-	var camera_pan_time = 1.5
-	var camera_pan_delay = 0
-	
-	yield(get_tree().create_timer(camera_pan_delay), "timeout")
-	
-	if tween.is_active():
-		tween.stop_all()
-	tween.interpolate_property(self, "offset_v", offset_v, direction * camera_pan_distance, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	tween.start()
-
-func home_vertical():
-	var tween = $TweenVertical
-	var camera_pan_time = 1.5
-	
-	if tween.is_active():
-		tween.stop_all()
-	tween.interpolate_property(self, "offset_v", offset_v, 0, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	tween.start()
-	yield(tween, "tween_completed")
-
-func pan_horizontal(direction, velocity):
-	var tween = $TweenHorizontal
-	var camera_pan_distance = 2.0 / world.resolution_scale
-	var camera_pan_time = 1.5
-	var camera_pan_delay = 0
-	
-	yield(get_tree().create_timer(camera_pan_delay), "timeout")
-	
-	if tween.is_active():
-		tween.stop_all()
-	tween.interpolate_property(self, "offset_h", offset_h, direction.x * camera_pan_distance, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	tween.start()
-
-func home_horizontal():
-	var tween = $TweenHorizontal
-	var camera_pan_time = 1.5
-	
-	if tween.is_active():
-		tween.stop_all()
-	tween.interpolate_property(self, "offset_h", offset_h, 0, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	tween.start()
-	yield(tween, "tween_completed")
 
 func on_viewport_size_changed():
-	print("plaptrl")
 	zoom = Vector2(1 / world.resolution_scale, 1 / world.resolution_scale)
