@@ -17,7 +17,7 @@ func _ready():
 
 
 func _on_LevelButton_pressed():
-	world._on_level_change(level, 0, "LevelSelect", "res://assets/Music/XXXX.ogg")
+	world.on_level_change(level, 0, "LevelSelect", "res://assets/Music/XXXX.ogg")
 	if world.has_node("UILayer/TitleScreen"):
 		world.get_node("UILayer/TitleScreen").queue_free()
 	if world.has_node("UILayer/PauseMenu"):

@@ -33,15 +33,15 @@ func _physics_process(delta):
 			_fizzle_from_range()
 
 
-func get_velocity(projectile_speed, direction) -> Vector2:
-	var out = velocity
-	#print("seed dir: ", direction)
-	out.x = projectile_speed * direction.x
-	
-	if direction.y < 0:
-		out.y = projectile_speed * direction.y
-	#print(out)
-	return out
+#func get_velocity(projectile_speed, direction) -> Vector2: #is this ever used?
+#	var out = velocity
+#	#print("seed dir: ", direction)
+#	out.x = projectile_speed * direction.x
+#
+#	if direction.y < 0:
+#		out.y = projectile_speed * direction.y
+#	#print(out)
+#	return out
 
 
 func _on_CollisionDetector_body_entered(body):

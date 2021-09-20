@@ -16,8 +16,8 @@ func _ready():
 			3: grass.num = 3
 			0: grass.num = 4
 		
-		grass.global_position = g * 16
-		grass.global_position += Vector2(8, 16)
+		grass.position = g * 16
+		grass.position += Vector2(8, 16)
 		props.add_child(grass)
 
 	visible = false

@@ -38,7 +38,7 @@ func _physics_process(delta):
 func _on_PlayerDetector_body_entered(body):
 	target = body
 
-func _on_PlayerDetector_body_exited(body):
+func _on_PlayerDetector_body_exited(_body):
 	target = null
 
 func get_move_dir() -> Vector2:

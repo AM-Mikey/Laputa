@@ -109,7 +109,7 @@ func _input(event):
 			
 
 
-func _on_level_change(level, door_index, level_name, music):
+func on_level_change(level, door_index, level_name, music):
 	save_level_data_to_temp()
 	$Recruit/PlayerCamera.smoothing_enabled = false
 	if $UILayer.has_node("DialogBox"):
@@ -261,7 +261,7 @@ func load_player_data_from_save():
 			
 			print(data["player_data"])
 			
-			_on_level_change(data["player_data"]["current_level"], null, null, null)
+			on_level_change(data["player_data"]["current_level"], null, null, null)
 			yield(get_tree(), "idle_frame")
 			
 			player.position = data["player_data"]["position"]
@@ -274,7 +274,11 @@ func load_player_data_from_save():
 			
 			player.weapon_array.clear()
 			for w in data["player_data"]["weapon_data"]:
-				player.weapon_array.append(load("res://src/Weapon/%s" %w + ".tres"))
+				var weapon_resource = load("res://src/Weapon/%s" %w + ".tres")
+				if weapon_resource != null:
+					player.weapon_array.append(weapon_resource)
+				else:
+					printerr("ERROR: cannot find weapon resource at: res://src/Weapon/%s" %w + ".tres")
 			for w in player.weapon_array:
 				w.level = data["player_data"]["weapon_data"][w.resource_name]["level"]
 				w.xp = data["player_data"]["weapon_data"][w.resource_name]["xp"]
@@ -295,9 +299,8 @@ func load_player_data_from_save():
 			printerr("ERROR: no save file found")
 
 func save_level_data_to_temp():
-	var containers = get_tree().get_nodes_in_group("Containers")
 	var containers_if_used = []
-	for c in containers:
+	for c in get_tree().get_nodes_in_group("Containers"):
 		containers_if_used.append(c.used)
 		
 	

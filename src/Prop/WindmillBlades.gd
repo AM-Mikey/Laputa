@@ -3,7 +3,7 @@ extends Node2D
 export var degrees_per_frame = 0.5
 var rotation_around_point = 0
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	rotation_degrees += degrees_per_frame
 
 	$BladeNorth.rotation_degrees -= degrees_per_frame

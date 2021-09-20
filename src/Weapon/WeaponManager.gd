@@ -1,6 +1,6 @@
 extends Node
 
-var sfx_click = load("res://assets/SFX/snd_gun_click.ogg")
+var sfx_click = load("res://assets/SFX/Placeholder/snd_gun_click.ogg")
 var sfx_switch_weapon =  load("res://assets/SFX/Placeholder/snd_switchweapon.ogg")
 
 var weapon

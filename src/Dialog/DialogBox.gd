@@ -4,14 +4,14 @@ signal dialog_finished
 
 const YN = preload("res://src/Dialog/DialogYesNo.tscn")
 
-var text_sound = load("res://assets/SFX/snd_msg.ogg")
+var text_sound = load("res://assets/SFX/Placeholder/snd_msg.ogg")
 
-var prompt_sound = load("res://assets/SFX/snd_menu_prompt.ogg")
-var move_sound = load("res://assets/SFX/snd_menu_move.ogg")
-var select_sound = load("res://assets/SFX/snd_menu_select.ogg")
+var prompt_sound = load("res://assets/SFX/Placeholder/snd_menu_prompt.ogg")
+var move_sound = load("res://assets/SFX/Placeholder/snd_menu_move.ogg")
+var select_sound = load("res://assets/SFX/Placeholder/snd_menu_select.ogg")
 
 
-export (String, FILE, "*.json") var dialog_json: String
+#export (String, FILE, "*.json") var dialog_json: String #we're passing this instead of setting
 
 var dialog
 var conversation: String
@@ -23,9 +23,10 @@ export var punctuation_delay = 0.3
 var in_dialog = false
 var active = true
 var busy = false
+#var completed = false
 
 
-var step: int = 0 #step in printing dialog
+var step: int = 0 #step in printing dialog		
 
 onready var tb = $MarginContainer/HBoxContainer/RichTextBox
 onready var face_container = $MarginContainer/HBoxContainer/Face
@@ -41,7 +42,7 @@ func _ready():
 	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 	_on_viewport_size_changed()
 
-func print_sign(text):
+func print_sign():
 	face_container.free()
 	tb.bbcode_text = "[b][center]" + text
 	visible = true
@@ -55,7 +56,7 @@ func start_printing(dialog_json, npc_convo):
 	dialog = load_dialog(dialog_json)
 	conversation = npc_convo
 	
-	text = dialog[conversation].strip_edges().json_escape() #strip edges to clean up first and last newlines
+	text = dialog[conversation].strip_edges().replace("\t", "") #.json_escape() ## strip edges to clean up first and last newlines ### remove tabulation
 	
 	print(text)
 	
@@ -63,7 +64,7 @@ func start_printing(dialog_json, npc_convo):
 
 func dialog_loop():
 	if not busy:
-		while step < text.length():
+		while step < text.length(): #not completed: 
 			print_dialog(text)
 			step +=1
 			if do_delay:
@@ -108,6 +109,10 @@ func _input(event):
 				#print_delay = default_print_delay
 				active = true
 				remove_cursor()
+				
+				print("adding back newline")
+				tb.bbcode_text += "\n"
+				
 				if tb.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
 					tb.bbcode_text = ""
 				dialog_loop()
@@ -119,11 +124,11 @@ func _input(event):
 
 func load_dialog(dialog_json) -> Dictionary: #loads json and converts it into a dictionary
 	var file = File.new()
-
 	file.open(dialog_json, file.READ)
-	var text = file.get_as_text()
-	var dialog = JSON.parse(text).result
-	return dialog
+	
+	var loaded_text = file.get_as_text()
+	var loaded_dialog = JSON.parse(loaded_text).result
+	return loaded_dialog
 
 
 func print_dialog(string):
@@ -135,42 +140,47 @@ func print_dialog(string):
 	
 	var character = string.substr(step, 1)
 	
-	if character == ",": #or character == "." or character == "?" or character == "!":
+	if character == ",": #or character == "." or character == "?" or character == "!": ##leave out other punctuation since the pause after a line is bad UX
 		print("pausing for punctuation")
 		$PrintTimer.stop()
 		$PrintTimer.start($PrintTimer.time_left + punctuation_delay)
 		print("insterted char: ", character)
 		tb.bbcode_text += character
 	
-	elif character == "\\":
-		print("skipping escape char")
-		step += 1
-		character = string.substr(step, 1)
-		if character == "n":
-			active = false
-			flash_cursor()
-			print("adding back newline")
-			tb.bbcode_text += "\n" #tb.bbcode_text = tb.bbcode_text.insert(step, "\n")
-			
-	
+#	elif character == "\\": #this just looks for literal "\"
+#		print("skipping escape char")
+#		#step += 1
+#		character = #string.substr(step, 1)
+#		if character == "n":
+#			active = false
+#			flash_cursor()
+#			print("adding back newline")
+#			tb.bbcode_text += "\n"
+#
+	elif character == "\n":
+		print("skipping newline")
+		active = false
+		flash_cursor()
+
+
 	elif character == "/":
 		var command = string.substr(step, -1)
 		var first_space = command.find(" ")
-		var first_escape = command.find("\\")
+		var first_newline = command.find("\n")
 		
-		if first_space < first_escape: #the space came first
+		if first_space < first_newline: #the space came first
 			command = command.left(first_space)
-		elif first_space > first_escape: #the escape came first
-			command = command.left(first_escape)
+		elif first_space > first_newline: #the newline came first
+			command = command.left(first_newline)
+		
 		
 		print("doing command: ", command)
 		parse_command(command)
 		step += command.length()
 		
 	else:
-		print("insterted char: ", character)
-		tb.bbcode_text += character #tb.bbcode_text = tb.bbcode_text.insert(step, character)
-		#audio.stop()
+		print("step " + str(step) + " : " + character)
+		tb.bbcode_text += character
 		audio.play()
 
 
@@ -212,6 +222,8 @@ func parse_command(string):
 			pc.invincible = true
 		"/focus":
 			focus(argument)
+		"/unfocus":
+			unfocus()
 		"/turn":
 			turn(argument)
 
@@ -242,6 +254,7 @@ func display_name(string):
 	if string == "":
 		printerr("COMMAND ERROR: no npc given for /name")
 		return
+	
 	var display_name = string.capitalize() + ": "
 	tb.bbcode_text = "[b][color=red]" + display_name + "[/color][/b]" + tb.bbcode_text
 	
@@ -270,7 +283,7 @@ func walk(string):
 	var id = walk[0]
 	var distance = int(walk[1])
 	
-	if id == null or distance == null:
+	if walk[1] == null:
 		printerr("COMMAND ERROR: not enough arguments for /walk")
 		return
 	
@@ -299,7 +312,7 @@ func on_select_branch(branch):
 		seek("/" + branch)
 		
 	print("adding extra newline") #inserting newlines like this bypasses the input_event() line check, so add that code here
-	tb.bbcode_text = tb.bbcode_text.insert(step, "\n")
+	tb.bbcode_text += "\n"
 	busy = false
 	if tb.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
 		tb.bbcode_text = ""
@@ -310,7 +323,7 @@ func end_branch():
 	active = false
 	flash_cursor()
 	print("adding back newline")
-	tb.bbcode_text = tb.bbcode_text.insert(step, "\n")
+	tb.bbcode_text += "\n"
 	seek("/m")
 	step -= 3 #5 it changed #WHY WHY WHY WHY WHY #this is probably the cause of the step number going out of sync
 	#we should hope to eliminate steps alltogether
@@ -326,12 +339,16 @@ func focus(string):
 			pc.get_node("PlayerCamera").global_position = n.global_position
 
 
+func unfocus():
+	pc.get_node("PlayerCamera").position = Vector2.ZERO
+
+
 func turn(string):
 	var turn = string.split(",", true, 1)
 	var id = turn[0]
 	var direction = turn[1].capitalize()
 	
-	if id == null or direction == null:
+	if turn[1] == null:
 		printerr("COMMAND ERROR: not enough arguments for /turn")
 		return
 	

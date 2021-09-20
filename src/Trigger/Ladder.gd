@@ -7,7 +7,7 @@ func _on_Ladder_body_entered(body):
 	active_player = body
 	has_player_near = true
 
-func _on_Ladder_body_exited(body):
+func _on_Ladder_body_exited(_body):
 	active_player.is_on_ladder = false
 	has_player_near = false
 

@@ -28,7 +28,7 @@ func _ready():
 	
 	hide()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not is_on_floor():
 		move_dir.y = 0 #don't allow them to jump if they are midair
 	
@@ -61,7 +61,7 @@ func _on_PeekDetector_body_entered(body):
 	look_dir = Vector2(sign(target.global_position.x - global_position.x), 0)
 	peek()
 
-func _on_PeekDetector_body_exited(body):
+func _on_PeekDetector_body_exited(_body):
 	shooting = false
 	target = null
 	hide()

@@ -1,7 +1,7 @@
 extends Area2D
 
-var refill_sound = load("res://assets/SFX/snd_get_missile.ogg")
-var no_sound = load("res://assets/SFX/snd_quote_bonkhead.ogg")
+var refill_sound = load("res://assets/SFX/placeholder/snd_get_missile.ogg")
+var no_sound = load("res://assets/SFX/placeholder/snd_quote_bonkhead.ogg")
 
 var has_player_near = false
 var active_player: Node
@@ -14,7 +14,7 @@ func _on_AmmoRefill_body_entered(body):
 	has_player_near = true
 	active_player = body
 
-func _on_AmmoRefill_body_exited(body):
+func _on_AmmoRefill_body_exited(_body):
 	has_player_near = false
 
 func _input(event):

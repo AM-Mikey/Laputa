@@ -60,7 +60,7 @@ func _on_PlayerDetector_body_entered(body):
 	target = body
 	locked_on = true
 
-func _on_PlayerDetector_body_exited(body):
+func _on_PlayerDetector_body_exited(_body):
 	shooting = false
 	target = null
 	locked_on = false

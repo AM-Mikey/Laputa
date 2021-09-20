@@ -6,8 +6,10 @@ var has_player_near = false
 var reading = false
 var active_player = null
 
-var path = get_path()
+var path = get_path() #what is this doing anyway?
 
+
+#we're not actually passing any of these right now other than text
 export var display_name = ""
 export var face: String = ""
 export var expression: String = ""
@@ -17,8 +19,8 @@ export var voiced = false
 
 var db
 
-signal display_text(path, display_name, face, expression, text, justify, voiced)
-signal stop_text()
+#signal display_text(path, display_name, face, expression, text, justify, voiced)
+#signal stop_text()
 
 onready var world = get_tree().get_root().get_node("World")
 
@@ -26,7 +28,7 @@ func _on_Sign_body_entered(body):
 	has_player_near = true
 	active_player = body
 
-func _on_ExitDetector_body_exited(body):
+func _on_ExitDetector_body_exited(_body):
 	has_player_near = false
 	emit_signal("stop_text")
 	if reading:
@@ -44,7 +46,8 @@ func _input(event):
 			
 			db = DB.instance()
 			get_tree().get_root().get_node("World/UILayer").add_child(db)
-			db.print_sign(text)
+			db.text = text
+			db.print_sign()
 		else:
 			db.queue_free()
 			reading = false

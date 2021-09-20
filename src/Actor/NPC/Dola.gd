@@ -2,8 +2,7 @@ extends NPC
 
 var already_talked = false
 
-var conversation
-onready var dialog = load_dialog(dialog_json)
+#onready var dialog = load_dialog(dialog_json)
 
 
 func _input(event):

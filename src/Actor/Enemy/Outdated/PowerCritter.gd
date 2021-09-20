@@ -34,7 +34,7 @@ func _on_PlayerDetector_body_entered(body):
 	target = body
 
 
-func _on_PlayerDetector_body_exited(body):
+func _on_PlayerDetector_body_exited(_body):
 	if is_on_floor():
 		target = null
 	else:

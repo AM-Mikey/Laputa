@@ -20,7 +20,7 @@ func _ready():
 
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not is_on_floor():
 		move_dir.y = 0
 		

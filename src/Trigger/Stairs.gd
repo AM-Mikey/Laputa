@@ -11,7 +11,7 @@ func _on_Stairs_body_entered(body):
 	old_ground_cof = active_player.ground_cof
 	active_player.ground_cof = 1
 	
-func _on_Stairs_body_exited(body):
+func _on_Stairs_body_exited(_body):
 	print("left stairs")
 	active_player.is_on_ladder = false
 	has_player_near = false

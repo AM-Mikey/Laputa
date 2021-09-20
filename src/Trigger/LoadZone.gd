@@ -2,7 +2,7 @@ extends Area2D
 
 const TRANSITION = preload("res://src/Effect/Transition/TransitionWipe.tscn")
 
-var open_sound = load("res://assets/SFX/snd_door.ogg")
+var open_sound = load("res://assets/SFX/placeholder/snd_door.ogg")
 
 var active_player = null
 
@@ -29,7 +29,7 @@ func _on_LoadZone_body_entered(body):
 		active_player.get_node("AnimationPlayer").stop()
 	prepare_next_level()
 
-func _on_LoadZone_body_exited(body):
+func _on_LoadZone_body_exited(_body):
 	pass
 
 

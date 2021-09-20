@@ -53,7 +53,7 @@ func _on_PlayerDetector_body_entered(body):
 		$AnimationPlayer.play("Rustle")
 	
 
-func _on_PlayerDetector_body_exited(body):
+func _on_PlayerDetector_body_exited(_body):
 	if not broken:
 		$AnimationPlayer.play("Unrustle")
 

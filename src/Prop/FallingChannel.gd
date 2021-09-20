@@ -8,13 +8,13 @@ export var respawn_time = 4.0
 onready var starting_position = position
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var camera_limiters = get_tree().get_nodes_in_group("CameraLimiters")
 	var bottom
 	for c in camera_limiters:
 		bottom = c.get_node("Bottom").global_position.y
-	if global_position.y > bottom + camera_forgiveness_distance:
-		print("falling channel left camera limits, freeing")
+	#if global_position.y > bottom + camera_forgiveness_distance:
+		#print("falling channel left camera limits, freeing")
 		#free()
 
 	if falling:

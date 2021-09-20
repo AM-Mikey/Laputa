@@ -434,7 +434,7 @@ func _on_SSPDetector_body_entered(body):
 	is_on_ssp = true
 
 
-func _on_SSPDetector_body_exited(body):
+func _on_SSPDetector_body_exited(_body):
 	is_on_ssp = false
 	
 	
@@ -592,7 +592,7 @@ func _on_HurtDetector_body_entered(body):
 			hit(damage, knockback_direction)
 
 
-func _on_HurtDetector_body_exited(body):
+func _on_HurtDetector_body_exited(_body):
 	is_in_enemy = false
 
 func _on_HurtDetector_area_entered(area):

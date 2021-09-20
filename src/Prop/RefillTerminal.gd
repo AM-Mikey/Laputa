@@ -1,6 +1,6 @@
 extends Area2D
 
-var no_sound = load("res://assets/SFX/snd_quote_bonkhead.ogg")
+var no_sound = load("res://assets/SFX/Placeholder/snd_quote_bonkhead.ogg")
 
 var has_player_near = false
 var active_player = null
