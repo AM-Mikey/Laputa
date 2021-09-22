@@ -20,7 +20,7 @@ func _ready():
 	experience_chance = 2
 	ammo_chance = 0
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not dead:
 		velocity = calculate_movevelocity(velocity, move_dir, speed)
 		velocity = move_and_slide(velocity, FLOOR_NORMAL)

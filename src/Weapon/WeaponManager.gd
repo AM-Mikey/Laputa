@@ -16,8 +16,8 @@ onready var pc = get_tree().get_root().get_node("World/Recruit")
 func _ready():
 	weapon = pc.weapon_array.front()
 	
-	connect("ammo_updated", HUD, "_on_ammo_updated")
-	connect("weapon_updated", HUD, "_on_weapon_updated")
+#	connect("ammo_updated", HUD, "update_ammo") #these signals aren't even defined?
+#	connect("weapon_updated", HUD, "update_weapon")
 	
 	
 	
@@ -25,7 +25,7 @@ func _ready():
 	
 	
 	#stuff moved from rectuit.gd
-func _physics_process(delta):
+func _physics_process(_delta):
 	var bullet_pos = pc.get_node("BulletOrigin").global_position
 	var effect_pos = pc.get_node("WeaponSprite").position
 	

@@ -39,8 +39,8 @@ onready var pc = get_tree().get_root().get_node("World/Recruit")
 
 func _ready():
 	visible = false
-	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
-	_on_viewport_size_changed()
+	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	on_viewport_size_changed()
 
 func print_sign():
 	face_container.free()
@@ -375,11 +375,8 @@ func turn(string):
 		printerr("COMMAND ERROR: could not find NPC with id: " + id)
 
 
-func _on_viewport_size_changed():
+func on_viewport_size_changed():
 	var viewport_size = get_tree().get_root().size / world.resolution_scale
-	
-
-	
 	#rect_size = get_tree().get_root().size / world.resolution_scale
 	rect_size.x = viewport_size.x
 	rect_position.y = viewport_size.y - 80

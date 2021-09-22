@@ -16,7 +16,7 @@ func _ready():
 	else:
 		printerr("ERROR: Heart given non-standard value")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var velocity = getvelocity(speed, dir)
 	move_and_slide(velocity)
 
@@ -32,5 +32,5 @@ func getvelocity(speed, direction) -> Vector2:
 
 	return out
 
-func _on_AnimationPlayer_animation_finished(anim_name):
+func _on_AnimationPlayer_animation_finished(_anim_name):
 	queue_free()

@@ -8,7 +8,7 @@ export var conversation: String
 onready var world = get_tree().get_root().get_node("World")
 
 
-func _on_DialogCue_body_entered(body):
+func _on_DialogCue_body_entered(_body):
 	yield(get_tree().create_timer(.0001), "timeout") #why?
 
 	if world.has_node("UILayer/DialogBox"): #clear old dialog box if there is one

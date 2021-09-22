@@ -43,7 +43,7 @@ func setup_collision():
 	else:
 		printerr("ERROR: stalagtite could not find a colliding tilemap to setup collision")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not dead:
 		velocity = calculate_movevelocity(velocity, move_dir, speed)
 		velocity = move_and_slide(velocity, FLOOR_NORMAL)

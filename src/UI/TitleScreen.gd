@@ -34,7 +34,7 @@ func _on_New_pressed():
 	visible = false
 	queue_free()
 	
-	world._on_level_change(world.starting_level, 0, "LevelSelect", "res://assets/Music/XXXX.ogg")
+	world.on_level_change(world.starting_level, 0, "LevelSelect", "res://assets/Music/XXXX.ogg")
 	world.get_node("Recruit").visible = true
 	world.get_node("Recruit").disabled = false
 	world.get_node("UILayer/HUD").visible = true

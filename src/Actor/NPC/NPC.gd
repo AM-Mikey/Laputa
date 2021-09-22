@@ -37,7 +37,7 @@ func _ready():
 
 
 #movement stuff
-func _physics_process(delta):
+func _physics_process(_delta):
 #CONNECT A SIGNAL TO TELL NPCS THEY'RE NO LONGER TALKING
 
 #	if talking and active_player.disabled == false: #if db freed the player

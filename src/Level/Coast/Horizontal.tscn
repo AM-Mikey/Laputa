@@ -15,7 +15,7 @@
 [ext_resource path="res://src/Tile/DebugTile.tres" type="TileSet" id=13]
 [ext_resource path="res://src/Tile/DebugBackground.tres" type="TileSet" id=14]
 [ext_resource path="res://src/Tile/DebugSSP.tres" type="TileSet" id=15]
-[ext_resource path="res://src/Tile/Village.tres" type="TileSet" id=16]
+[ext_resource path="res://src/Tile/VillageOld.tres" type="TileSet" id=16]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=17]
 
 [sub_resource type="DynamicFont" id=1]

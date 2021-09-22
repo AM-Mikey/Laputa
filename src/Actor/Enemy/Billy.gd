@@ -30,7 +30,7 @@ func _ready():
 	$FireCooldown.start(cooldown_time)
 	
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	
 	if locked_on:
 		distance_lock()

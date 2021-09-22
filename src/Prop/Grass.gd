@@ -48,7 +48,7 @@ func _ready():
 	
 
 
-func _on_PlayerDetector_body_entered(body):
+func _on_PlayerDetector_body_entered(_body):
 	if not broken:
 		$AnimationPlayer.play("Rustle")
 	

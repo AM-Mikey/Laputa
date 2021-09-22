@@ -14,7 +14,7 @@ func _ready():
 	
 	level = 2
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not dead and not disabled:
 		if not is_on_floor():
 			move_dir.y = 0 #don't allow them to jump if they are midair

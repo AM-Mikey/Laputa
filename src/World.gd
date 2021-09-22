@@ -288,7 +288,7 @@ func load_player_data_from_save():
 			#player.weapon_array[0].update_weapon()
 			player.get_node("WeaponManager").update_weapon()
 			player.update_hp()
-			player.update_max_hp()
+			#player.update_max_hp()
 			player.update_xp()
 			player.update_inventory()
 			

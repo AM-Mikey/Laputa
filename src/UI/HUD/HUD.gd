@@ -8,15 +8,15 @@ onready var p = get_tree().get_root().get_node("World/Recruit")
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
-	_on_viewport_size_changed()
+	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	on_viewport_size_changed()
 	
 	update_hp()
 	update_weapon()
 
 	
 
-func _process(delta):
+func _process(_delta):
 	if p.get_node("WeaponManager").weapon != null:
 		if $CooldownBar/TextureProgress.visible == false:
 			$CooldownBar/TextureProgress.visible = true
@@ -144,5 +144,5 @@ func display_money_number():
 		printerr("ERROR: hud cannot display money number")
 
 
-func _on_viewport_size_changed():
+func on_viewport_size_changed():
 	rect_size = get_tree().get_root().size / world.resolution_scale

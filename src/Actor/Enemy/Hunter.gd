@@ -29,7 +29,7 @@ func _ready():
 	
 	#wander()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if is_on_wall():
 		if not locked_on:
 				move_dir.x *= -1

@@ -6,8 +6,8 @@ onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
 		print("playing in animation")
-		get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
-		_on_viewport_size_changed()
+		get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+		on_viewport_size_changed()
 		$AnimationPlayer.play(animation)
 	
 	
@@ -15,9 +15,7 @@ func play_out_animation():
 	print("playing out animation")
 	$AnimationPlayer.play(animation)
 	
-func _on_viewport_size_changed():
-	var viewport_size = get_tree().get_root().size / world.resolution_scale
-	$MarginContainer.rect_size = viewport_size
+
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	match anim_name:
@@ -30,3 +28,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		"WipeOutRight": queue_free()
 		"WipeOutUp": queue_free()
 		"WipeOutDown": queue_free()
+
+
+func on_viewport_size_changed():
+	var viewport_size = get_tree().get_root().size / world.resolution_scale
+	$MarginContainer.rect_size = viewport_size

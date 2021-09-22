@@ -55,7 +55,7 @@ func _on_CollisionDetector_body_entered(body):
 			_fizzle_from_world()
 
 
-func on_break(method):
+func on_break(_method):
 	if disabled == false:
 		print("destroyed seed")
 		_fizzle_from_world()

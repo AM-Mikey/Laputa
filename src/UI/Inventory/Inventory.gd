@@ -13,10 +13,10 @@ var player_inventory: Array
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-		get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
-		_on_viewport_size_changed()
+		get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+		on_viewport_size_changed()
 
-func _process(delta):
+func _process(_delta):
 	yield(get_tree(), "idle_frame")
 	if Input.is_action_just_pressed("inventory"):
 		get_tree().paused = false
@@ -51,4 +51,8 @@ func _on_viewport_size_changed():
 #		rect_size = Vector2(viewport_size.y, viewport_size.y)
 #		#rect_position = viewport_size/2
 	
+	rect_size = get_tree().get_root().size / world.resolution_scale
+
+
+func on_viewport_size_changed():
 	rect_size = get_tree().get_root().size / world.resolution_scale

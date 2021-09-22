@@ -14,7 +14,7 @@ func _ready():
 	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if horizontal_focus != pc.face_dir:
 		horizontal_focus = pc.face_dir
 		pan_horizontal(pc.face_dir, pc.velocity)

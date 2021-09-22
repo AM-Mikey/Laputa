@@ -36,7 +36,7 @@ func _ready():
 			global_position.x += spread_distance
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	
 	velocity = projectile_speed * direction
 	

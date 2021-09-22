@@ -30,7 +30,7 @@ export var ammo_chance = 1
 var camera_forgiveness_distance = 64
 var free_counter = 0
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not disabled and not protected:
 		var camera_limiters = get_tree().get_nodes_in_group("CameraLimiters")
 		var left
@@ -144,7 +144,7 @@ func do_death_drop():
 			1,2: heart.value = 2
 			3,4,5: heart.value = 4
 			6,7,8,9,10 : heart.value = 8
-		get_tree().get_root().get_node("World/Back").add_child(heart)
+		get_tree().get_root().get_node("World/Middle").add_child(heart)
 	elif drop > heart_chance and drop <= heart_chance + experience_chance:
 
 		var loop_times = 1
@@ -166,7 +166,7 @@ func do_death_drop():
 			var experience = EXPERIENCE.instance()
 			experience.value = value
 			experience.position = position
-			get_tree().get_root().get_node("World/Back").add_child(experience)
+			get_tree().get_root().get_node("World/Middle").add_child(experience)
 			loop_times -= 1
 
 	else:
@@ -174,4 +174,4 @@ func do_death_drop():
 		match level:
 			1,2: ammo.value = 0.2
 			3,4,5,6,7,8,9,10: ammo.value = 0.5
-		get_tree().get_root().get_node("World/Back").add_child(ammo)
+		get_tree().get_root().get_node("World/Middle").add_child(ammo)

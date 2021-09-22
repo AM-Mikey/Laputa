@@ -23,7 +23,7 @@ func _ready():
 
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if waiting:
 		#yield(get_tree().create_timer(wait_time), "timeout")
 #		yield(get_tree(), "idle_frame")

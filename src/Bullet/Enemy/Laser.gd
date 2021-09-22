@@ -22,7 +22,7 @@ func _ready():
 		rotation_degrees = -90
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	
 	velocity = projectile_speed * direction
 	

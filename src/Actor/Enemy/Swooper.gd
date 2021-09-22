@@ -35,7 +35,7 @@ func _ready():
 		
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if setup_complete and not disabled:
 		get_parent().offset += speed.x/100
 		if get_parent().unit_offset == 1: #finished path

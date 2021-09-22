@@ -15,7 +15,7 @@ func _on_LifeCapsule_body_entered(body):
 	active_player = body
 
 
-func _on_LifeCapsule_body_exited(body):
+func _on_LifeCapsule_body_exited(_body):
 	has_player_near = false
 
 func _input(event):

@@ -74,7 +74,7 @@ func _ready():
 	set_option_buttons()
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_joy_button_pressed(0, JOY_DS_Y):
 		faceleft.frame = 1
 	else: faceleft.frame = 0

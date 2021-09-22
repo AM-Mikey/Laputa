@@ -18,7 +18,7 @@ func _ready():
 	level = 2
 
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not dead:
 		velocity = calculate_move_velocity(velocity, move_dir, speed)
 		velocity = move_and_slide(velocity, FLOOR_NORMAL)

@@ -20,7 +20,7 @@
 [ext_resource path="res://src/Actor/NPC/NavOrb.tscn" type="PackedScene" id=21]
 [ext_resource path="res://src/Prop/Sign.tscn" type="PackedScene" id=23]
 [ext_resource path="res://src/Prop/FallingChannel.tscn" type="PackedScene" id=24]
-[ext_resource path="res://src/Tile/Village.tres" type="TileSet" id=25]
+[ext_resource path="res://src/Tile/VillageOld.tres" type="TileSet" id=25]
 [ext_resource path="res://src/Prop/AmmoRefill.tscn" type="PackedScene" id=26]
 
 [sub_resource type="CanvasItemMaterial" id=1]
@@ -95,6 +95,8 @@ dialog_json = "res://src/Dialog/DemoCutscene.json"
 
 [node name="Fluffy" parent="Actors" instance=ExtResource( 14 )]
 position = Vector2( 616, 256 )
+dialog_json = "res://src/Dialog/Village.json"
+conversation = "basil"
 
 [node name="Child" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 304, 544 )

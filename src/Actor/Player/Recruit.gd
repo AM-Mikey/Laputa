@@ -80,7 +80,7 @@ func _ready():
 	if weapon_array.front() != null:
 		$WeaponSprite.texture = weapon_array.front().texture
 
-func _physics_process(delta):
+func _physics_process(_delta):
 
 	if debug_flying: #skip this entire thing if we're flying
 		var move_dir = Vector2(
@@ -430,7 +430,7 @@ func _input(event):
 
 
 
-func _on_SSPDetector_body_entered(body):
+func _on_SSPDetector_body_entered(_body):
 	is_on_ssp = true
 
 
