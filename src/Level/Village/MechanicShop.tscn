@@ -1,14 +1,20 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Tile/Debug.tres" type="TileSet" id=3]
+[ext_resource path="res://src/Tile/Layers/Collision.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
+[ext_resource path="res://src/Tile/Layers/Back.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Prop/AmmoRefill.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Prop/SavePoint.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Prop/ShopWeapon.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Prop/ShopKeyItem.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Tile/VillageInterior.tres" type="TileSet" id=12]
+[ext_resource path="res://src/Tile/Layers/Decortation.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/Tile/Layers/Front.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/Tile/Layers/SSP.tscn" type="PackedScene" id=15]
 
 [node name="MechanicShop" type="Node2D"]
 script = ExtResource( 5 )
@@ -22,9 +28,9 @@ motion_scale = Vector2( 0.1, 0.1 )
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
 margin_left = -384.0
-margin_top = -256.0
+margin_top = -256.281
 margin_right = 1064.0
-margin_bottom = 552.0
+margin_bottom = 551.719
 expand = true
 stretch_mode = 2
 __meta__ = {
@@ -36,6 +42,7 @@ __meta__ = {
 [node name="Tiles" type="Node2D" parent="."]
 
 [node name="Collision" type="TileMap" parent="Tiles"]
+visible = false
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 8
@@ -44,12 +51,32 @@ format = 1
 tile_data = PoolIntArray( 327683, 1, 0, 327684, 1, 0, 327685, 1, 0, 327686, 1, 0, 327687, 1, 0, 327688, 1, 0, 327689, 1, 0, 327690, 1, 0, 327691, 1, 0, 327692, 1, 0, 327693, 1, 0, 327694, 1, 0, 327695, 1, 0, 327696, 1, 0, 327697, 1, 0, 327698, 1, 0, 327699, 1, 0, 327700, 1, 0, 327701, 1, 0, 327702, 1, 0, 327703, 1, 0, 327704, 1, 0, 393219, 1, 0, 393240, 1, 0, 458755, 1, 0, 458776, 1, 0, 524291, 1, 0, 524312, 1, 0, 589827, 1, 0, 589848, 1, 0, 655363, 1, 0, 655384, 1, 0, 720899, 1, 0, 720920, 1, 0, 786435, 1, 0, 786456, 1, 0, 851971, 1, 0, 851987, 1, 0, 851988, 1, 0, 851989, 1, 0, 851992, 1, 0, 917507, 1, 0, 917508, 0, 0, 917509, 0, 0, 917510, 0, 0, 917511, 0, 0, 917512, 0, 0, 917513, 0, 0, 917514, 0, 0, 917515, 0, 0, 917516, 0, 0, 917517, 0, 0, 917518, 0, 0, 917519, 0, 0, 917520, 0, 0, 917521, 0, 0, 917522, 0, 0, 917523, 0, 0, 917524, 0, 0, 917525, 0, 0, 917526, 0, 0, 917527, 0, 0, 917528, 1, 0 )
 
 [node name="Decoration" type="TileMap" parent="Tiles"]
+visible = false
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 8
 collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 786438, 16, 0 )
+
+[node name="Back" parent="Tiles" instance=ExtResource( 6 )]
+tile_set = ExtResource( 12 )
+tile_data = PoolIntArray( 131075, 0, 0, 131079, 0, 0, 131083, 0, 0, 131087, 0, 0, 393219, 0, 0, 393223, 0, 0, 393227, 0, 0, 393231, 0, 0, 393235, 0, 0, 393239, 0, 0, 458757, 5, 0, 524294, 51, 0, 655363, 0, 0, 655367, 0, 0, 655371, 0, 0, 655375, 0, 0, 655379, 0, 0, 655383, 0, 0, 786435, 10, 0, 786439, 10, 0, 851981, 25, 0, 851982, 25, 0, 851984, 25, 0, 851985, 25, 0 )
+
+[node name="Collision2" parent="Tiles" instance=ExtResource( 4 )]
+tile_set = ExtResource( 12 )
+tile_data = PoolIntArray( 262146, 25, 0, 262147, 25, 0, 262148, 25, 0, 262149, 25, 0, 262150, 25, 0, 262151, 25, 0, 262152, 25, 0, 262153, 25, 0, 262154, 25, 0, 262155, 25, 0, 262156, 25, 0, 262157, 25, 0, 262158, 25, 0, 262159, 25, 0, 262160, 25, 0, 262161, 25, 0, 262162, 25, 0, 262163, 25, 0, 262164, 25, 0, 262165, 25, 0, 262166, 25, 0, 262167, 25, 0, 262168, 25, 0, 262169, 25, 0, 327682, 25, 0, 327705, 25, 0, 393218, 25, 0, 393241, 25, 0, 458754, 25, 0, 458777, 25, 0, 524290, 25, 0, 524296, 42, 1, 524313, 25, 0, 589826, 25, 0, 589827, 26, 0, 589828, 26, 0, 589829, 26, 0, 589830, 26, 0, 589831, 26, 0, 589832, 26, 0, 589849, 25, 0, 655362, 25, 0, 655363, 30, 0, 655364, 30, 65537, 720898, 25, 0, 720899, 30, 65537, 786434, 25, 0, 851970, 25, 0, 917506, 24, 0, 917510, 24, 0, 917514, 24, 0, 917518, 49, 0, 917519, 54, 0, 917520, 55, 0, 917529, 55, 1, 917530, 54, 0, 917531, 54, 0, 917532, 54, 0, 983042, 50, 0, 983043, 50, 0, 983044, 50, 0, 983045, 50, 0, 983046, 50, 0, 983047, 50, 0, 983048, 50, 0, 983049, 50, 0, 983050, 50, 0, 983051, 50, 0, 983052, 50, 0, 983053, 50, 0, 983054, 50, 0, 983055, 50, 0, 983056, 55, 131072, 983057, 55, 0, 983065, 55, 65537, 983066, 50, 0, 983067, 50, 0, 983068, 50, 0, 1048578, 50, 0, 1048579, 50, 0, 1048580, 50, 0, 1048581, 50, 0, 1048582, 50, 0, 1048583, 50, 0, 1048584, 50, 0, 1048585, 50, 0, 1048586, 50, 0, 1048587, 50, 0, 1048588, 50, 0, 1048589, 50, 0, 1048590, 50, 0, 1048591, 50, 0, 1048592, 50, 0, 1048593, 55, 131072, 1048594, 54, 0, 1048595, 54, 0, 1048596, 54, 0, 1048597, 54, 0, 1048598, 54, 0, 1048599, 54, 0, 1048600, 54, 0, 1048601, 55, 131073, 1048602, 50, 0, 1048603, 50, 0, 1048604, 50, 0, 1114114, 50, 0, 1114115, 50, 0, 1114116, 50, 0, 1114117, 50, 0, 1114118, 50, 0, 1114119, 50, 0, 1114120, 50, 0, 1114121, 50, 0, 1114122, 50, 0, 1114123, 50, 0, 1114124, 50, 0, 1114125, 50, 0, 1114126, 50, 0, 1114127, 50, 0, 1114128, 50, 0, 1114129, 50, 0, 1114130, 50, 0, 1114131, 50, 0, 1114132, 50, 0, 1114133, 50, 0, 1114134, 50, 0, 1114135, 50, 0, 1114136, 50, 0, 1114137, 50, 0, 1114138, 50, 0, 1114139, 50, 0, 1114140, 50, 0, 1179650, 50, 0, 1179651, 50, 0, 1179652, 50, 0, 1179653, 50, 0, 1179654, 50, 0, 1179655, 50, 0, 1179656, 50, 0, 1179657, 50, 0, 1179658, 50, 0, 1179659, 50, 0, 1179660, 50, 0, 1179661, 50, 0, 1179662, 50, 0, 1179663, 50, 0, 1179664, 50, 0, 1179665, 50, 0, 1179666, 50, 0, 1179667, 50, 0, 1179668, 50, 0, 1179669, 50, 0, 1179670, 50, 0, 1179671, 50, 0, 1179672, 50, 0, 1179673, 50, 0, 1179674, 50, 0, 1179675, 50, 0, 1179676, 50, 0 )
+
+[node name="Decoration2" parent="Tiles" instance=ExtResource( 13 )]
+tile_set = ExtResource( 12 )
+tile_data = PoolIntArray( 720907, 31, 0, 786437, 34, 0, 851980, 18, 0 )
+
+[node name="Front" parent="Tiles" instance=ExtResource( 14 )]
+tile_set = ExtResource( 12 )
+
+[node name="SSP" parent="Tiles" instance=ExtResource( 15 )]
+tile_set = ExtResource( 12 )
+tile_data = PoolIntArray( 917523, 44, 0, 917524, 44, 0, 917525, 44, 0, 917526, 44, 0, 917527, 44, 0, 917528, 44, 0 )
 
 [node name="Triggers" type="Node2D" parent="."]
 
