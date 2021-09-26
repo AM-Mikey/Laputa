@@ -15,7 +15,7 @@ export var door_index: int = 0
 export var direction = Vector2.RIGHT
 
 func _ready():
-	connect("level_change", world, "_on_level_change")
+	connect("level_change", world, "on_level_change")
 	add_to_group("LevelTriggers")
 	add_to_group("LoadZones")
 
