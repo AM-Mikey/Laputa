@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/Actor/Enemy/Climber.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 4.0
+
+[node name="ClimberArm" type="Area2D"]
+
+[node name="Arm" type="Area2D" parent="."]
+position = Vector2( 20, 2 )
+
+[node name="Sprite" type="Sprite" parent="Arm"]
+position = Vector2( -20, -2 )
+texture = ExtResource( 2 )
+hframes = 8
+vframes = 2
+frame = 8
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Arm"]
+position = Vector2( -20, -2 )
+shape = SubResource( 1 )
