@@ -15,7 +15,6 @@
 [ext_resource path="res://src/Actor/Enemy/Roller.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/Utility/EnemySpawner.tscn" type="PackedScene" id=17]
 
-
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
 
