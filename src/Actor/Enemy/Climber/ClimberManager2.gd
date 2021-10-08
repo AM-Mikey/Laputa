@@ -51,8 +51,7 @@ func _physics_process(delta):
 	for c in get_children():
 		if c.part_type == "arm" and c != pivot:
 				c.arm_angle += arm_angle_speed
-				#c.global_position = pivot.global_position + Vector2(cos(c.arm_angle), sin(c.arm_angle)) * arm_distance 
-				c.position = c.position.rotated(arm_angle_speed)
+				c.global_position = pivot.global_position + Vector2(cos(c.arm_angle), sin(c.arm_angle)) * arm_distance 
 				#c.position =  Vector2(arm_distance/2, 0).rotated(c.arm_angle) #pivot.global_position + Vector2(cos(c.arm_angle), sin(c.arm_angle)) * arm_distance 
 
 
