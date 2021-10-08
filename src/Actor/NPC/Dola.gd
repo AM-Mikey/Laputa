@@ -13,7 +13,7 @@ func _input(event):
 			talking = true
 			
 			#if already_talked == false:
-			conversation = dialog["intro"]
+			#conversation = dialog["intro"]
 			#else:
 			#conversation = dialog["default"]
 				

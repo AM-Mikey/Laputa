@@ -2,7 +2,7 @@ extends Enemy
 
 var target: Node
 
-export var direction: Vector2 = Vector2.ZERO
+export var look_dir: Vector2 = Vector2.LEFT
 var move_dir: Vector2 = Vector2.UP #start moving upwards constantly
 
 var dropped = false
@@ -17,57 +17,58 @@ func _ready():
 	level = 2
 	damage_on_contact = base_damage
 	speed = Vector2(100, 100)
+	setup_collision()
 
+func setup_collision():
+	$RayCast2D.force_raycast_update()
+	var tilemap = $RayCast2D.get_collider()
+	#print(tilemap)
+	$RayCast2D.queue_free()
+	
+	if tilemap != null:
+		var target_pos = global_position
+		var local_pos = tilemap.to_local(target_pos)
+		var map_pos = tilemap.world_to_map(local_pos)
+		var target_cell = tilemap.get_cellv(map_pos)
+		
+		var detector_length = 0
+		
+		while target_cell == -1:
+			detector_length += 1
+			map_pos.y += 1
+			target_cell = tilemap.get_cellv(map_pos)
+				
+		$PlayerDetector.scale.y = detector_length
+		print("dl: ", detector_length)
+	else:
+		printerr("ERROR: stalagtite could not find a colliding tilemap to setup collision")
 
 func _physics_process(_delta):
 	if not dead:
 		velocity = calculate_movevelocity(velocity, move_dir, speed)
 		velocity = move_and_slide(velocity, FLOOR_NORMAL)
 		
-		if not dropped:
-			if $RayCast2D.get_collider() != null:
-				if $RayCast2D.get_collider().get_collision_layer_bit(0):
-					target = $RayCast2D.get_collider()
-					drop()
-		
-		
-		
-		if dropped:
+		if dropped == true:
 			if is_on_floor() and touchdown == false: #check to see if they've landed before
 				touchdown = true
-				$RayCast2D.queue_free()
+				$PlayerDetector.queue_free()
 				yield(get_tree().create_timer(0.01), "timeout") #delay to change damage back to base
 				damage_on_contact = base_damage
 				
+				if look_dir == Vector2.LEFT:
+					$AnimationPlayer.play("SquirmLeft")
+				elif look_dir == Vector2.RIGHT:
+					$AnimationPlayer.play("SquirmRight")
 				
-				
-				if direction != Vector2.LEFT and direction != Vector2.RIGHT:
-					var rng = RandomNumberGenerator.new()
-					rng.randomize()
-					direction = Vector2(sign(rng.randf_range(-1.0, 1.0)), 0)
-					
-				match direction:
-					Vector2.LEFT:
-						$AnimationPlayer.play("SquirmLeft")
-					Vector2.RIGHT:
-						$AnimationPlayer.play("SquirmRight")
-
 				yield($AnimationPlayer, "animation_finished")
+				
 				panic_run = true
-				move_dir = direction
+				move_dir.x = look_dir.x
 
 			if is_on_wall():
 				move_dir.x *= -1
 		
 		animate()
-
-
-func drop():
-	dropped = true
-	move_dir.y = 0 #fall
-	damage_on_contact = falling_damage
-
-
 
 func calculate_movevelocity(velocity: Vector2, move_dir, speed) -> Vector2:
 	var out: = velocity
@@ -78,7 +79,19 @@ func calculate_movevelocity(velocity: Vector2, move_dir, speed) -> Vector2:
 		out.y = speed.y * move_dir.y
 
 	return out
+	
+	
+	
+func _on_PlayerDetector_body_entered(body):
+	if visible == true:
+		target = body
+		drop()
 
+func drop():
+	$PlayerDetector.set_deferred("monitoring", false) #no longer needs to be triggered
+	dropped = true
+	move_dir.y = 0 #fall
+	damage_on_contact = falling_damage
 
 
 func animate():

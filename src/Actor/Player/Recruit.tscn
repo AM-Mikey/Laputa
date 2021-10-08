@@ -3153,7 +3153,7 @@ script = ExtResource( 10 )
 [node name="TweenHorizontal" type="Tween" parent="PlayerCamera"]
 
 [node name="BulletOrigin" type="Position2D" parent="."]
-position = Vector2( 0, -7 )
+position = Vector2( 0, -8 )
 
 [node name="WeaponManager" type="Node" parent="."]
 script = ExtResource( 1 )

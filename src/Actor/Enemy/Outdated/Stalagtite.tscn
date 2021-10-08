@@ -1,13 +1,16 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" type="AudioStream" id=1]
-[ext_resource path="res://assets/Actor/Enemy/Stalagtite.png" type="Texture" id=2]
-[ext_resource path="res://src/Actor/Enemy/Stalagtite.gd" type="Script" id=3]
+[ext_resource path="res://src/Actor/Enemy/Outdated/Stalagtite.gd" type="Script" id=2]
+[ext_resource path="res://assets/Actor/Enemy/Stalagtite.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 8 )
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 7, 8 )
+
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -21,7 +24,7 @@ tracks/0/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -33,34 +36,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=4]
-length = 0.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 8, 11 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -88,10 +63,38 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=6]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 8, 11 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=7]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -118,7 +121,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -148,19 +151,28 @@ tracks/1/keys = {
 [node name="Stalagtite" type="KinematicBody2D"]
 collision_layer = 2
 collision_mask = 8
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -8 )
 shape = SubResource( 1 )
 
+[node name="PlayerDetector" type="Area2D" parent="."]
+monitorable = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+modulate = Color( 0, 0.0156863, 0.937255, 0.392157 )
+position = Vector2( 0, 8 )
+shape = SubResource( 2 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/HangActive = SubResource( 2 )
-anims/HangIdle = SubResource( 3 )
-anims/RunLeft = SubResource( 4 )
-anims/RunRight = SubResource( 5 )
-anims/SquirmLeft = SubResource( 6 )
-anims/SquirmRight = SubResource( 7 )
+anims/HangActive = SubResource( 3 )
+anims/HangIdle = SubResource( 4 )
+anims/RunLeft = SubResource( 5 )
+anims/RunRight = SubResource( 6 )
+anims/SquirmLeft = SubResource( 7 )
+anims/SquirmRight = SubResource( 8 )
 
 [node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )
@@ -168,13 +180,16 @@ bus = "SFX"
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
+flip_h = true
 hframes = 8
 vframes = 3
-frame = 16
+frame = 1
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 0, 1000 )
-collision_mask = 9
+collision_mask = 8
 collide_with_areas = true
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]

@@ -9,7 +9,7 @@
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=10]
-[ext_resource path="res://src/Actor/Enemy/Stalagtite.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Actor/Enemy/Outdated/Stalagtite.tscn" type="PackedScene" id=11]
 
 [node name="Staircase" type="Node2D"]
 script = ExtResource( 5 )

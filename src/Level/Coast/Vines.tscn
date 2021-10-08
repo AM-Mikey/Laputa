@@ -40,6 +40,11 @@ tile_data = PoolIntArray( 917513, 16, 0, 2883768, 16, 0 )
 
 [node name="Props" type="Node2D" parent="."]
 
+[node name="FallingChannel9" parent="Props" instance=ExtResource( 15 )]
+position = Vector2( 488, 240 )
+rotation = 0.19624
+scale = Vector2( 15.646, 1 )
+
 [node name="FallingChannel" parent="Props" instance=ExtResource( 15 )]
 position = Vector2( 1112, 544 )
 
