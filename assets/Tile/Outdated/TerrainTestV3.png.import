@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Debug.png-dc1fcdec8b77da7b6dad7dfa896f578f.stex"
+path="res://.import/TerrainTestV3.png-b35cf3d6232aede9f05a44ecef7e4987.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/Debug.png"
-dest_files=[ "res://.import/Debug.png-dc1fcdec8b77da7b6dad7dfa896f578f.stex" ]
+source_file="res://assets/Tile/Outdated/TerrainTestV3.png"
+dest_files=[ "res://.import/TerrainTestV3.png-b35cf3d6232aede9f05a44ecef7e4987.stex" ]
 
 [params]
 

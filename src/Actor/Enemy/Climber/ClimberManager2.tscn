@@ -3,7 +3,8 @@
 [ext_resource path="res://src/Actor/Enemy/Climber/ClimberBody.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Actor/Enemy/Climber/ClimberManager2.gd" type="Script" id=2]
 
-[node name="ClimberManager" type="Node2D"]
+[node name="ClimberManager2" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="ClimberBody" parent="." instance=ExtResource( 1 )]
+visible = false

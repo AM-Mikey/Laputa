@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/balcony palette analysis.png-0d736bf3c1c6cb44d5fc89dd6902b130.stex"
+path="res://.import/TerrainTest.png-bcf94b74526da8d70373c49a145ae9fd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Palette/balcony palette analysis.png"
-dest_files=[ "res://.import/balcony palette analysis.png-0d736bf3c1c6cb44d5fc89dd6902b130.stex" ]
+source_file="res://assets/Tile/Outdated/TerrainTest.png"
+dest_files=[ "res://.import/TerrainTest.png-bcf94b74526da8d70373c49a145ae9fd.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Mimiga.png-790965f89e8679f636977360f4de204c.stex"
+path="res://.import/House.png-57bbf86e4928e02162cf23bedc46f85d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/Mimiga.png"
-dest_files=[ "res://.import/Mimiga.png-790965f89e8679f636977360f4de204c.stex" ]
+source_file="res://assets/Tile/Outdated/House.png"
+dest_files=[ "res://.import/House.png-57bbf86e4928e02162cf23bedc46f85d.stex" ]
 
 [params]
 

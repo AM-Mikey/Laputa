@@ -51,21 +51,32 @@ func _physics_process(delta):
 	for c in get_children():
 		if c.part_type == "arm" and c != pivot:
 				c.arm_angle += arm_angle_speed
-				c.global_position = pivot.global_position + Vector2(cos(c.arm_angle), sin(c.arm_angle)) * arm_distance 
-				#c.position =  Vector2(arm_distance/2, 0).rotated(c.arm_angle) #pivot.global_position + Vector2(cos(c.arm_angle), sin(c.arm_angle)) * arm_distance 
+				
+				#this causes it to rotate around the pivot
+				#c.global_position = pivot.global_position + Vector2(cos(c.arm_angle), sin(c.arm_angle)) * arm_distance 
+				
+				#this causes it to rotate around the origin point
+				#c.position =  Vector2(arm_distance/2, 0).rotated(c.arm_angle) 
+				
+				#this causes arms to rotate around pivot in the proper shape when (arm_angle_offset = (2 * PI) / arm_count)
+				#the issue is it should be making this shape around the origin instead
+				#c.position = pivot.position + Vector2(cos(c.arm_angle), sin(c.arm_angle)) * arm_distance 
+				
+				#this causes it to make the proper shape and position it at the origin, but it also rotates around the origin which is undesirable
+				#c.position = Vector2(cos(c.arm_angle), sin(c.arm_angle)) * arm_distance 
 
 
 
 
-func on_arm_body_entered(body, arm):
-	print("attached with: " + str(arm))
-	pivot = arm
-	
-	#var arm_start_angle = arm_angle_offset
-	var number = 1
-	for c in get_children():
-		if c.part_type == "arm" and c != pivot:
-			c.arm_angle = pivot.arm_angle + 2 * PI / arm_count - 1 * number #(2 * PI / arm_count)
-			#arm_start_angle += arm_angle_offset
-			number += 1
-			pass
+#func on_arm_body_entered(body, arm):
+#	print("attached with: " + str(arm))
+#	pivot = arm
+#
+#	#var arm_start_angle = arm_angle_offset
+#	var number = 1
+#	for c in get_children():
+#		if c.part_type == "arm" and c != pivot:
+#			c.arm_angle = pivot.arm_angle + 2 * PI / arm_count - 1 * number #(2 * PI / arm_count)
+#			#arm_start_angle += arm_angle_offset
+#			number += 1
+#			pass

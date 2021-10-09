@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/NotBug.png-b0a334f8ea402254ba733997fa2b4816.stex"
+path="res://.import/TerrainTestV4.png-0c1b6d8c5f44a89a0bf36987332380b6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Icon/Discord/NotBug.png"
-dest_files=[ "res://.import/NotBug.png-b0a334f8ea402254ba733997fa2b4816.stex" ]
+source_file="res://assets/Tile/Outdated/TerrainTestV4.png"
+dest_files=[ "res://.import/TerrainTestV4.png-0c1b6d8c5f44a89a0bf36987332380b6.stex" ]
 
 [params]
 

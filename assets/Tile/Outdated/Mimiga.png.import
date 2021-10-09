@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TerrainTestV3.png-61dd892f37b2fd54a9fb369585f08eeb.stex"
+path="res://.import/Mimiga.png-95f84069b9c9e7dd7b5a2832d9d7e218.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/TerrainTestV3.png"
-dest_files=[ "res://.import/TerrainTestV3.png-61dd892f37b2fd54a9fb369585f08eeb.stex" ]
+source_file="res://assets/Tile/Outdated/Mimiga.png"
+dest_files=[ "res://.import/Mimiga.png-95f84069b9c9e7dd7b5a2832d9d7e218.stex" ]
 
 [params]
 

@@ -582,6 +582,7 @@ func die():
 		disabled = true
 		visible = false
 		world.get_node("UILayer").add_child(load("res://src/UI/DeathScreen.tscn").instance())
+		queue_free()
 
 func _on_HurtDetector_body_entered(body):
 	if not disabled:

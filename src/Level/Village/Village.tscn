@@ -3,7 +3,6 @@
 [ext_resource path="res://src/Trigger/DialogCue.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Tile/PropTile/GrassProp.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=3]
-[ext_resource path="res://src/Actor/Enemy/Climber/ClimberManager.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=5]
 [ext_resource path="res://src/Tile/TriggerTile/StairsTrigger.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Effect/CloudSmallKinematic.tscn" type="PackedScene" id=7]
@@ -17,6 +16,7 @@
 [ext_resource path="res://src/Trigger/LoadZone.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/Actor/NPC/Child.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/Actor/NPC/Sasuke.tscn" type="PackedScene" id=17]
+[ext_resource path="res://src/Actor/Enemy/Climber/ClimberManager2.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Prop/WindmillBlades.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/Actor/NPC/NavOrb.tscn" type="PackedScene" id=21]
 [ext_resource path="res://src/Prop/Sign.tscn" type="PackedScene" id=23]
@@ -111,9 +111,9 @@ position = Vector2( 345, 384 )
 position = Vector2( 208, 528 )
 id = "navorb"
 
-[node name="ClimberManager" parent="Actors" instance=ExtResource( 4 )]
-position = Vector2( 160, 296 )
-arm_count = 3
+[node name="ClimberManager2" parent="Actors" instance=ExtResource( 18 )]
+position = Vector2( 160, 295 )
+arm_count = 5
 
 [node name="Props" type="Node2D" parent="."]
 

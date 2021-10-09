@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/NotBug.png-b0a334f8ea402254ba733997fa2b4816.stex"
+path="res://.import/balcony palette analysis.png-eddf0a2cb0179a974bfc9e213fea14c8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Icon/Discord/NotBug.png"
-dest_files=[ "res://.import/NotBug.png-b0a334f8ea402254ba733997fa2b4816.stex" ]
+source_file="res://assets/Palette/Outdated/balcony palette analysis.png"
+dest_files=[ "res://.import/balcony palette analysis.png-eddf0a2cb0179a974bfc9e213fea14c8.stex" ]
 
 [params]
 

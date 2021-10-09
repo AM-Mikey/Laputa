@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/palette analysis.png-81ec60fc9434421fe9712542baff8b8a.stex"
+path="res://.import/palette analysis.png-dbdfdce6fa7b93dab45bebf3d71bb284.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Palette/palette analysis.png"
-dest_files=[ "res://.import/palette analysis.png-81ec60fc9434421fe9712542baff8b8a.stex" ]
+source_file="res://assets/Palette/Outdated/palette analysis.png"
+dest_files=[ "res://.import/palette analysis.png-dbdfdce6fa7b93dab45bebf3d71bb284.stex" ]
 
 [params]
 

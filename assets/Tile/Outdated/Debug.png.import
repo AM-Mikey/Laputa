@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Labyrinth.png-87f9f4f95aed0c6f1099797ef9dab119.stex"
+path="res://.import/Debug.png-b3b9a21cb07b5a5b669cac0ff0830512.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/Labyrinth.png"
-dest_files=[ "res://.import/Labyrinth.png-87f9f4f95aed0c6f1099797ef9dab119.stex" ]
+source_file="res://assets/Tile/Outdated/Debug.png"
+dest_files=[ "res://.import/Debug.png-b3b9a21cb07b5a5b669cac0ff0830512.stex" ]
 
 [params]
 
