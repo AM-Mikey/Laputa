@@ -7,4 +7,7 @@
 script = ExtResource( 2 )
 
 [node name="ClimberBody" parent="." instance=ExtResource( 1 )]
-visible = false
+
+[node name="PivotCooldown" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true

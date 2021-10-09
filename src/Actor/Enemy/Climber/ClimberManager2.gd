@@ -4,79 +4,68 @@ const ARM = preload("res://src/Actor/Enemy/Climber/ClimberArm.tscn")
 
 
 var pivot
+var pivot_pos
 onready var body = $ClimberBody
+
+var rotation_cycle = 0
+
 
 export var climb_dir = "cw"
 export var arm_count: int = 2
 
 
 
-var arm_distance = 32
+export var arm_distance = 64
 var arm_angle_speed = 0.01
-onready var arm_angle_offset = (2 * PI) / arm_count #how did this work for 3 arms? #PI / arm_count #2 * PI / arm_count - 1 
 
 
 
 func _ready():
-	var arm_start_angle = 0.0
+	setup_arms()
+
+func get_arm_angle_offset() -> float:
+	return (2 * PI) / float(arm_count)
+
+func setup_arms():
+	var arm_index = 0
+	
 	for n in arm_count:
 		var arm = ARM.instance()
 		add_child(arm)
+		
+		arm.index = arm_index
 		arm.get_node("WorldDetector").connect("body_entered", self, "on_arm_body_entered", [arm])
-		arm.position = Vector2(arm_distance/2, 0).rotated(arm_start_angle) #useless
-		arm.arm_angle = arm_start_angle
-		if arm_start_angle == 0: #first
+		
+		arm.position = Vector2(arm_distance/2, 0).rotated(get_arm_angle_offset() * arm.index)
+		
+		if arm_index == 0:
 			pivot = arm
+			pivot.modulate = Color("red")
+			pivot_pos = arm.global_position
+		arm_index += 1
 
-		arm_start_angle += arm_angle_offset
+func replace_arms():
+	for a in get_children():
+		if "part_type" in a:
+			if a.part_type == "arm":
+				a.queue_free()
+	
+	setup_arms()
+
 
 
 func _physics_process(delta):
-	for c in get_children():
-		if c.part_type == "body":
-			var arm_positions = []
-			for a in get_children():
-				if a.part_type == "arm":
-					arm_positions.append(a.position)
-
-			var arm_average = Vector2.ZERO
-			for p in arm_positions:
-				arm_average += p
-			arm_average /= arm_positions.size()
-
-			c.position = arm_average
-
-
-	var arm_start_angle = 0.0
-	for c in get_children():
-		if c.part_type == "arm" and c != pivot:
-				c.arm_angle += arm_angle_speed
-				
-				#this causes it to rotate around the pivot
-				#c.global_position = pivot.global_position + Vector2(cos(c.arm_angle), sin(c.arm_angle)) * arm_distance 
-				
-				#this causes it to rotate around the origin point
-				#c.position =  Vector2(arm_distance/2, 0).rotated(c.arm_angle) 
-				
-				#this causes arms to rotate around pivot in the proper shape when (arm_angle_offset = (2 * PI) / arm_count)
-				#the issue is it should be making this shape around the origin instead
-				#c.position = pivot.position + Vector2(cos(c.arm_angle), sin(c.arm_angle)) * arm_distance 
-				
-				#this causes it to make the proper shape and position it at the origin, but it also rotates around the origin which is undesirable
-				#c.position = Vector2(cos(c.arm_angle), sin(c.arm_angle)) * arm_distance 
+	rotation_cycle += arm_angle_speed
+	global_position = pivot_pos + Vector2(cos(rotation_cycle), sin(rotation_cycle)) * arm_distance /2
+	rotation += arm_angle_speed
 
 
 
-
-#func on_arm_body_entered(body, arm):
-#	print("attached with: " + str(arm))
-#	pivot = arm
-#
-#	#var arm_start_angle = arm_angle_offset
-#	var number = 1
-#	for c in get_children():
-#		if c.part_type == "arm" and c != pivot:
-#			c.arm_angle = pivot.arm_angle + 2 * PI / arm_count - 1 * number #(2 * PI / arm_count)
-#			#arm_start_angle += arm_angle_offset
-#			number += 1
-#			pass
+func on_arm_body_entered(body, arm):
+	if $PivotCooldown.time_left == 0:
+		$PivotCooldown.start(0.1)
+		print("attached with: " + str(arm))
+		var old_pivot_pos = pivot_pos
+		pivot = arm
+		pivot_pos = arm.global_position
+		rotation_cycle +=  2 * PI - get_arm_angle_offset()
