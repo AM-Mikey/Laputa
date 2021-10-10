@@ -1,6 +1,6 @@
 [gd_scene format=2]
 
-[node name="Transparent" type="TileMap"]
+[node name="Trans" type="TileMap"]
 cell_size = Vector2( 16, 16 )
 collision_layer = 0
 collision_mask = 0

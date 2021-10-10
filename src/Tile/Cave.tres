@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=43 format=2]
+[gd_resource type="TileSet" load_steps=44 format=2]
 
 [ext_resource path="res://assets/Tile/Cave.png" type="Texture" id=1]
 
@@ -120,9 +120,12 @@ points = PoolVector2Array( 0, 16, 0, 6, 12, 0, 16, 0, 16, 8 )
 points = PoolVector2Array( 12, 0, 16, 0, 16, 16, 0, 16, 0, 6 )
 
 [sub_resource type="ConvexPolygonShape2D" id=40]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+points = PoolVector2Array( 16, 64, 16, 48, 32, 32, 32, 16, 80, 16, 80, 32, 96, 48, 112, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=41]
+points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=42]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [resource]
@@ -343,20 +346,20 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 9/navigation_offset = Vector2( 0, 0 )
 9/shape_offset = Vector2( 0, 0 )
 9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-9/shape = SubResource( 40 )
+9/shape = SubResource( 41 )
 9/shape_one_way = false
 9/shape_one_way_margin = 1.0
 9/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 40 ),
+"shape": SubResource( 41 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 1, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 41 ),
+"shape": SubResource( 42 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 9/z_index = 0
@@ -1226,7 +1229,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 41/shape_one_way_margin = 0.0
 41/shapes = [  ]
 41/z_index = 0
-42/name = "Cave.png 42"
+42/name = "c_dirt_top"
 42/texture = ExtResource( 1 )
 42/tex_offset = Vector2( 0, 0 )
 42/modulate = Color( 1, 1, 1, 1 )
@@ -1249,7 +1252,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 42/shape_one_way_margin = 0.0
 42/shapes = [  ]
 42/z_index = 0
-43/name = "Cave.png 43"
+43/name = "c_dirt_right"
 43/texture = ExtResource( 1 )
 43/tex_offset = Vector2( 0, 0 )
 43/modulate = Color( 1, 1, 1, 1 )
@@ -1272,7 +1275,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 43/shape_one_way_margin = 0.0
 43/shapes = [  ]
 43/z_index = 0
-44/name = "Cave.png 44"
+44/name = "c_dirt_left"
 44/texture = ExtResource( 1 )
 44/tex_offset = Vector2( 0, 0 )
 44/modulate = Color( 1, 1, 1, 1 )
@@ -1295,7 +1298,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 44/shape_one_way_margin = 0.0
 44/shapes = [  ]
 44/z_index = 0
-45/name = "Cave.png 45"
+45/name = "c_dirt_bottom"
 45/texture = ExtResource( 1 )
 45/tex_offset = Vector2( 0, 0 )
 45/modulate = Color( 1, 1, 1, 1 )
@@ -1318,7 +1321,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 45/shape_one_way_margin = 0.0
 45/shapes = [  ]
 45/z_index = 0
-46/name = "Cave.png 46"
+46/name = "c_dirt"
 46/texture = ExtResource( 1 )
 46/tex_offset = Vector2( 0, 0 )
 46/modulate = Color( 1, 1, 1, 1 )
@@ -1332,7 +1335,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 46/shape_one_way_margin = 0.0
 46/shapes = [  ]
 46/z_index = 0
-47/name = "Cave.png 47"
+47/name = "c_dirt_Corner"
 47/texture = ExtResource( 1 )
 47/tex_offset = Vector2( 0, 0 )
 47/modulate = Color( 1, 1, 1, 1 )
@@ -1353,7 +1356,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 47/shape_one_way_margin = 0.0
 47/shapes = [  ]
 47/z_index = 0
-48/name = "Cave.png 48"
+48/name = "c_dirt_topleft"
 48/texture = ExtResource( 1 )
 48/tex_offset = Vector2( 0, 0 )
 48/modulate = Color( 1, 1, 1, 1 )
@@ -1376,7 +1379,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 48/shape_one_way_margin = 0.0
 48/shapes = [  ]
 48/z_index = 0
-49/name = "Cave.png 49"
+49/name = "c_dirt_topright"
 49/texture = ExtResource( 1 )
 49/tex_offset = Vector2( 0, 0 )
 49/modulate = Color( 1, 1, 1, 1 )
@@ -1399,7 +1402,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 49/shape_one_way_margin = 0.0
 49/shapes = [  ]
 49/z_index = 0
-50/name = "Cave.png 50"
+50/name = "c_dirt_bottomleft"
 50/texture = ExtResource( 1 )
 50/tex_offset = Vector2( 0, 0 )
 50/modulate = Color( 1, 1, 1, 1 )
@@ -1422,7 +1425,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 50/shape_one_way_margin = 0.0
 50/shapes = [  ]
 50/z_index = 0
-51/name = "Cave.png 51"
+51/name = "c_dirt_bottomright"
 51/texture = ExtResource( 1 )
 51/tex_offset = Vector2( 0, 0 )
 51/modulate = Color( 1, 1, 1, 1 )
@@ -1445,7 +1448,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 51/shape_one_way_margin = 0.0
 51/shapes = [  ]
 51/z_index = 0
-52/name = "Cave.png 52"
+52/name = "c_dam"
 52/texture = ExtResource( 1 )
 52/tex_offset = Vector2( 0, 0 )
 52/modulate = Color( 1, 1, 1, 1 )
@@ -1455,11 +1458,18 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 52/navigation_offset = Vector2( 0, 0 )
 52/shape_offset = Vector2( 0, 0 )
 52/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+52/shape = SubResource( 40 )
 52/shape_one_way = false
-52/shape_one_way_margin = 0.0
-52/shapes = [  ]
+52/shape_one_way_margin = 1.0
+52/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 40 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 52/z_index = 0
-53/name = "Cave.png 53"
+53/name = "b_dirt"
 53/texture = ExtResource( 1 )
 53/tex_offset = Vector2( 0, 0 )
 53/modulate = Color( 1, 1, 1, 1 )
@@ -1496,7 +1506,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 54/shape_one_way_margin = 0.0
 54/shapes = [  ]
 54/z_index = 0
-55/name = "Cave.png 55"
+55/name = "b_dirt_right"
 55/texture = ExtResource( 1 )
 55/tex_offset = Vector2( 0, 0 )
 55/modulate = Color( 1, 1, 1, 1 )
@@ -1519,7 +1529,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 55/shape_one_way_margin = 0.0
 55/shapes = [  ]
 55/z_index = 0
-56/name = "Cave.png 56"
+56/name = "b_dirt_left"
 56/texture = ExtResource( 1 )
 56/tex_offset = Vector2( 0, 0 )
 56/modulate = Color( 1, 1, 1, 1 )
@@ -1542,7 +1552,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 56/shape_one_way_margin = 0.0
 56/shapes = [  ]
 56/z_index = 0
-57/name = "Cave.png 57"
+57/name = "b_dirt_bottom"
 57/texture = ExtResource( 1 )
 57/tex_offset = Vector2( 0, 0 )
 57/modulate = Color( 1, 1, 1, 1 )
@@ -1565,7 +1575,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 57/shape_one_way_margin = 0.0
 57/shapes = [  ]
 57/z_index = 0
-58/name = "Cave.png 58"
+58/name = "b_dirt_topleft"
 58/texture = ExtResource( 1 )
 58/tex_offset = Vector2( 0, 0 )
 58/modulate = Color( 1, 1, 1, 1 )
@@ -1588,7 +1598,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 58/shape_one_way_margin = 0.0
 58/shapes = [  ]
 58/z_index = 0
-59/name = "Cave.png 59"
+59/name = "b_dirt_topright"
 59/texture = ExtResource( 1 )
 59/tex_offset = Vector2( 0, 0 )
 59/modulate = Color( 1, 1, 1, 1 )
@@ -1611,7 +1621,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 59/shape_one_way_margin = 0.0
 59/shapes = [  ]
 59/z_index = 0
-60/name = "Cave.png 60"
+60/name = "b_dirt_bottomleft"
 60/texture = ExtResource( 1 )
 60/tex_offset = Vector2( 0, 0 )
 60/modulate = Color( 1, 1, 1, 1 )
@@ -1634,7 +1644,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 60/shape_one_way_margin = 0.0
 60/shapes = [  ]
 60/z_index = 0
-61/name = "Cave.png 61"
+61/name = "b_dirt_bottomright"
 61/texture = ExtResource( 1 )
 61/tex_offset = Vector2( 0, 0 )
 61/modulate = Color( 1, 1, 1, 1 )

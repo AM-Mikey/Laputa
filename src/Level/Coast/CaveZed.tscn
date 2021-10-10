@@ -130,7 +130,6 @@ position = Vector2( 1000, 152 )
 position = Vector2( 712, 632 )
 
 [node name="Actors" type="Node2D" parent="."]
-visible = false
 
 [node name="Frog" parent="Actors" instance=ExtResource( 15 )]
 position = Vector2( 584, 144 )
