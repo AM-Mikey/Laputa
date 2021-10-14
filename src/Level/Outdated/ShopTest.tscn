@@ -1,23 +1,23 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://src/Level/Level.gd" type="Script" id=1]
-[ext_resource path="res://assets/Background/bkMaze.bmp" type="Texture" id=2]
-[ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Tile/Outdated/LabyrinthHouse.tres" type="TileSet" id=5]
+[ext_resource path="res://assets/Background/bkMaze.bmp" type="Texture" id=1]
+[ext_resource path="res://src/Actor/NPC/Outdated/Shopkeep.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Prop/ShopKeyItem.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/Actor/NPC/Shopkeep.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/Prop/ShopWeapon.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Prop/ShopWeapon.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Level/Level.gd" type="Script" id=8]
+[ext_resource path="res://src/Tile/Outdated/LabyrinthHouse.tres" type="TileSet" id=9]
 
 [node name="ShopTest" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource( 8 )
 level_name = "Decrepit Shop"
 
 [node name="Tiles" type="Node2D" parent="."]
 
 [node name="Black" type="TileMap" parent="Tiles"]
-tile_set = ExtResource( 5 )
+tile_set = ExtResource( 9 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 8
 collision_mask = 0
@@ -26,7 +26,7 @@ tile_data = PoolIntArray( -720905, 0, 0, -720904, 0, 0, -720903, 0, 0, -720902, 
 
 [node name="Background" type="TileMap" parent="Tiles"]
 position = Vector2( 0, -16 )
-tile_set = ExtResource( 5 )
+tile_set = ExtResource( 9 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 8
 collision_mask = 0
@@ -35,7 +35,7 @@ tile_data = PoolIntArray( 327690, 15, 0, 327692, 15, 0, 327694, 15, 0, 327696, 1
 
 [node name="Main" type="TileMap" parent="Tiles"]
 position = Vector2( 0, -16 )
-tile_set = ExtResource( 5 )
+tile_set = ExtResource( 9 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 8
 collision_mask = 0
@@ -45,7 +45,7 @@ tile_data = PoolIntArray( 262154, 1, 0, 262155, 1, 0, 262156, 1, 0, 262157, 1, 0
 [node name="Forground" type="TileMap" parent="Tiles"]
 position = Vector2( 0, -16 )
 z_index = 2
-tile_set = ExtResource( 5 )
+tile_set = ExtResource( 9 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 8
 collision_mask = 0
@@ -63,24 +63,24 @@ position = Vector2( 272, 224 )
 item_name = "Fang"
 price = 420
 
-[node name="ShopWeapon" parent="Props" instance=ExtResource( 8 )]
+[node name="ShopWeapon" parent="Props" instance=ExtResource( 7 )]
 position = Vector2( 168, 224 )
 weapon_name = "MachinePistol1"
 
 [node name="Actors" type="Node2D" parent="."]
 
-[node name="Shopkeep" parent="Actors" instance=ExtResource( 7 )]
+[node name="Shopkeep" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( 344, 200 )
 dialog_json = "res://src/Dialog/shopkeeper1.json"
 
 [node name="Triggers" type="Node2D" parent="."]
 
-[node name="Door" parent="Triggers" instance=ExtResource( 3 )]
+[node name="Door" parent="Triggers" instance=ExtResource( 4 )]
 position = Vector2( 120, 224 )
 level = "res://src/Level/DebugLevel.tscn"
 door_index = 5
 
-[node name="KillBox" parent="Triggers" instance=ExtResource( 4 )]
+[node name="KillBox" parent="Triggers" instance=ExtResource( 5 )]
 position = Vector2( 256, 416 )
 scale = Vector2( 482.952, 10 )
 
@@ -91,7 +91,7 @@ margin_left = -408.0
 margin_top = -208.0
 margin_right = 1040.0
 margin_bottom = 600.0
-texture = ExtResource( 2 )
+texture = ExtResource( 1 )
 expand = true
 stretch_mode = 2
 __meta__ = {
@@ -102,5 +102,5 @@ __meta__ = {
 position = Vector2( 256, 144 )
 current = true
 
-[node name="SpawnPoint" parent="." instance=ExtResource( 9 )]
+[node name="SpawnPoint" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 224 )

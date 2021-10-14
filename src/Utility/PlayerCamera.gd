@@ -111,6 +111,7 @@ func _on_limit_camera(left, right, top, bottom):
 		limit_bottom = bottom
 
 
+
 func pan_vertical(direction):
 	var tween = $TweenVertical
 	var camera_pan_distance = 2 / world.resolution_scale
@@ -156,6 +157,10 @@ func home_horizontal():
 	tween.interpolate_property(self, "offset_h", offset_h, 0, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween, "tween_completed")
+
+func stop_tween():
+	$TweenHorizontal.stop_all()
+	$TweenVertical.stop_all()
 
 func on_viewport_size_changed():
 	print("plaptrl")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Tile/VillageOld.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Tile/PropTile/GrassProp.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Actor/Enemy/Sphagnum.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=5]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=6]
@@ -61,6 +62,9 @@ tile_data = PoolIntArray( 1048576, 0, 0, 1048577, 0, 0, 1048578, 0, 0, 1048579, 
 [node name="Props" type="Node2D" parent="."]
 
 [node name="Actors" type="Node2D" parent="."]
+
+[node name="Sphagnum" parent="Actors" instance=ExtResource( 3 )]
+position = Vector2( 736, 400 )
 
 [node name="Triggers" type="Node2D" parent="."]
 

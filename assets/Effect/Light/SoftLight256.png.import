@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/NotBug.png-b0a334f8ea402254ba733997fa2b4816.stex"
+path="res://.import/SoftLight256.png-a335f4813b4966546b96b9bc51c62302.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Icon/Discord/NotBug.png"
-dest_files=[ "res://.import/NotBug.png-b0a334f8ea402254ba733997fa2b4816.stex" ]
+source_file="res://assets/Effect/Light/SoftLight256.png"
+dest_files=[ "res://.import/SoftLight256.png-a335f4813b4966546b96b9bc51c62302.stex" ]
 
 [params]
 

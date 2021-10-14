@@ -1,0 +1,39 @@
+extends Control
+
+var animation = "IrisContract"
+
+onready var world = get_tree().get_root().get_node("World")
+onready var pc = world.get_node("Recruit")
+
+func _ready():
+		print("playing in animation")
+		$AnimationPlayer.play(animation)
+	
+	
+func play_out_animation():
+	print("playing out animation")
+	$AnimationPlayer.play(animation)
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	match anim_name:
+		"IrisContract": animation = "IrisExpand"
+		"IrisExpand": queue_free()
+
+
+func _physics_process(delta):
+	var vp_size = get_tree().get_root().size / world.resolution_scale
+	
+	var cam = pc.get_node("PlayerCamera")
+	if not cam.current:
+		for l in get_tree().get_nodes_in_group("Levels"):
+			cam = l.get_node("Camera2D")
+	
+	
+	var player_pos_from_cam_center = Vector2(pc.position.x, pc.position.y - 16) - cam.get_camera_screen_center()
+	var max_dist_from_vp = max(abs(player_pos_from_cam_center.x) + vp_size.x / 2, abs(player_pos_from_cam_center.y) + vp_size.y / 2)
+	var nearest_multiple = ceil((max_dist_from_vp * 2) / 256) * 256 #round up to nearest 256 multiple
+	$MarginContainer.rect_size = Vector2(nearest_multiple, nearest_multiple)
+	
+	$MarginContainer.rect_position = Vector2(vp_size.x - $MarginContainer.rect_size.x, vp_size.y - $MarginContainer.rect_size.y) / 2
+	$MarginContainer.rect_position += player_pos_from_cam_center

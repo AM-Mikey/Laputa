@@ -43,7 +43,7 @@ tracks/0/keys = {
 }
 
 [node name="FallingChannel" type="KinematicBody2D"]
-collision_layer = 8
+collision_layer = 512
 collision_mask = 0
 script = ExtResource( 2 )
 
@@ -72,6 +72,7 @@ anims/Shake = SubResource( 4 )
 
 [node name="FallSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+bus = "SFX"
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

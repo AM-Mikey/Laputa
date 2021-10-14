@@ -1,0 +1,4 @@
+[gd_scene format=2]
+
+[node name="PosSFX" type="AudioStreamPlayer2D"]
+bus = "SFX"

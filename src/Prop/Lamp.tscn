@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/Prop/Lamp.png" type="Texture" id=1]
 [ext_resource path="res://src/Prop/Lamp.gd" type="Script" id=2]
+[ext_resource path="res://assets/SFX/Placeholder/snd_switchweapon.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/Effect/Light/SoftLight.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -10,15 +12,26 @@ extents = Vector2( 8, 8 )
 collision_layer = 0
 script = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -8 )
-shape = SubResource( 1 )
-
 [node name="Sprite" type="Sprite" parent="."]
+light_mask = 0
 position = Vector2( 0, -8 )
 texture = ExtResource( 1 )
 hframes = 2
 vframes = 3
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 0, -8 )
+enabled = false
+texture = ExtResource( 4 )
+color = Color( 1, 0.807843, 0.396078, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -8 )
+shape = SubResource( 1 )
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_Lamp_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Lamp_body_exited"]

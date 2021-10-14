@@ -3143,7 +3143,6 @@ frame = 7
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.25, 0.25 )
 limit_smoothed = true
 smoothing_enabled = true
 script = ExtResource( 10 )

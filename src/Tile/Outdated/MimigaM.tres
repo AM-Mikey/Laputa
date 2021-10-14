@@ -1,6 +1,4 @@
-[gd_resource type="TileSet" load_steps=41 format=2]
-
-[ext_resource path="res://assets/Tile/Mimiga.png" type="Texture" id=1]
+[gd_resource type="TileSet" load_steps=40 format=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -121,7 +119,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 
 [resource]
 0/name = "Mimiga.png 0"
-0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 32, 32, 16 )
@@ -155,7 +152,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 } ]
 0/z_index = 0
 2/name = "Mimiga.png 2"
-2/texture = ExtResource( 1 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 32, 0, 32, 32 )
@@ -189,7 +185,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 } ]
 2/z_index = 0
 5/name = "Mimiga.png 5"
-5/texture = ExtResource( 1 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 96, 16, 32, 16 )
@@ -229,7 +224,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 } ]
 5/z_index = 0
 6/name = "Mimiga.png 6"
-6/texture = ExtResource( 1 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
 6/region = Rect2( 96, 32, 32, 16 )
@@ -263,7 +257,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 } ]
 6/z_index = 0
 7/name = "Mimiga.png 7"
-7/texture = ExtResource( 1 )
 7/tex_offset = Vector2( 0, 0 )
 7/modulate = Color( 1, 1, 1, 1 )
 7/region = Rect2( 64, 0, 32, 48 )
@@ -309,7 +302,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 } ]
 7/z_index = 0
 8/name = "Mimiga.png 8"
-8/texture = ExtResource( 1 )
 8/tex_offset = Vector2( 0, 0 )
 8/modulate = Color( 1, 1, 1, 1 )
 8/region = Rect2( 128, 16, 32, 32 )
@@ -330,7 +322,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 8/shapes = [  ]
 8/z_index = 0
 10/name = "Mimiga.png 10"
-10/texture = ExtResource( 1 )
 10/tex_offset = Vector2( 0, 0 )
 10/modulate = Color( 1, 1, 1, 1 )
 10/region = Rect2( 192, 16, 48, 32 )
@@ -351,7 +342,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 10/shapes = [  ]
 10/z_index = 0
 11/name = "Mimiga.png 11"
-11/texture = ExtResource( 1 )
 11/tex_offset = Vector2( 0, 0 )
 11/modulate = Color( 1, 1, 1, 1 )
 11/region = Rect2( 0, 80, 16, 16 )
@@ -372,7 +362,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 } ]
 11/z_index = 0
 12/name = "Mimiga.png 12"
-12/texture = ExtResource( 1 )
 12/tex_offset = Vector2( 0, 0 )
 12/modulate = Color( 1, 1, 1, 1 )
 12/region = Rect2( 16, 80, 16, 16 )
@@ -393,7 +382,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 } ]
 12/z_index = 0
 13/name = "Mimiga.png 13"
-13/texture = ExtResource( 1 )
 13/tex_offset = Vector2( 0, 0 )
 13/modulate = Color( 1, 1, 1, 1 )
 13/region = Rect2( 224, 64, 80, 16 )
@@ -445,7 +433,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 } ]
 13/z_index = 0
 14/name = "Mimiga.png 14"
-14/texture = ExtResource( 1 )
 14/tex_offset = Vector2( 0, 0 )
 14/modulate = Color( 1, 1, 1, 1 )
 14/region = Rect2( 32, 0, 32, 32 )
@@ -459,7 +446,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 14/shapes = [  ]
 14/z_index = 0
 15/name = "Mimiga.png 15"
-15/texture = ExtResource( 1 )
 15/tex_offset = Vector2( 0, 0 )
 15/modulate = Color( 1, 1, 1, 1 )
 15/region = Rect2( 64, 0, 32, 32 )
@@ -473,7 +459,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 15/shapes = [  ]
 15/z_index = 0
 16/name = "Mimiga.png 16"
-16/texture = ExtResource( 1 )
 16/tex_offset = Vector2( 0, 0 )
 16/modulate = Color( 1, 1, 1, 1 )
 16/region = Rect2( 160, 16, 32, 16 )
@@ -487,7 +472,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 16/shapes = [  ]
 16/z_index = 0
 17/name = "Mimiga.png 17"
-17/texture = ExtResource( 1 )
 17/tex_offset = Vector2( 0, 0 )
 17/modulate = Color( 1, 1, 1, 1 )
 17/region = Rect2( 160, 32, 32, 16 )
@@ -501,7 +485,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 17/shapes = [  ]
 17/z_index = 0
 18/name = "Mimiga.png 18"
-18/texture = ExtResource( 1 )
 18/tex_offset = Vector2( 0, 0 )
 18/modulate = Color( 1, 1, 1, 1 )
 18/region = Rect2( 96, 16, 32, 16 )
@@ -515,7 +498,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 18/shapes = [  ]
 18/z_index = 0
 19/name = "Mimiga.png 19"
-19/texture = ExtResource( 1 )
 19/tex_offset = Vector2( 0, 0 )
 19/modulate = Color( 1, 1, 1, 1 )
 19/region = Rect2( 96, 32, 32, 16 )
@@ -529,7 +511,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 19/shapes = [  ]
 19/z_index = 0
 20/name = "Mimiga.png 20"
-20/texture = ExtResource( 1 )
 20/tex_offset = Vector2( 0, 0 )
 20/modulate = Color( 1, 1, 1, 1 )
 20/region = Rect2( 64, 32, 32, 16 )
@@ -543,7 +524,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 20/shapes = [  ]
 20/z_index = 0
 21/name = "Mimiga.png 21"
-21/texture = ExtResource( 1 )
 21/tex_offset = Vector2( 0, 0 )
 21/modulate = Color( 1, 1, 1, 1 )
 21/region = Rect2( 0, 32, 32, 16 )
@@ -557,7 +537,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 21/shapes = [  ]
 21/z_index = 0
 22/name = "Mimiga.png 22"
-22/texture = ExtResource( 1 )
 22/tex_offset = Vector2( 0, 0 )
 22/modulate = Color( 1, 1, 1, 1 )
 22/region = Rect2( 96, 48, 32, 32 )
@@ -571,7 +550,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 22/shapes = [  ]
 22/z_index = 0
 23/name = "Mimiga.png 23"
-23/texture = ExtResource( 1 )
 23/tex_offset = Vector2( 0, 0 )
 23/modulate = Color( 1, 1, 1, 1 )
 23/region = Rect2( 0, 48, 32, 16 )
@@ -593,7 +571,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 } ]
 23/z_index = 0
 24/name = "Mimiga.png 24"
-24/texture = ExtResource( 1 )
 24/tex_offset = Vector2( 0, 0 )
 24/modulate = Color( 1, 1, 1, 1 )
 24/region = Rect2( 0, 64, 32, 16 )
@@ -615,7 +592,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 } ]
 24/z_index = 0
 25/name = "Mimiga.png 25"
-25/texture = ExtResource( 1 )
 25/tex_offset = Vector2( 0, 0 )
 25/modulate = Color( 1, 1, 1, 1 )
 25/region = Rect2( 0, 48, 32, 32 )
@@ -637,7 +613,6 @@ points = PoolVector2Array( 0, 16, 0, 8, 16, 0, 16, 16 )
 } ]
 25/z_index = 0
 26/name = "Mimiga.png 26"
-26/texture = ExtResource( 1 )
 26/tex_offset = Vector2( 0, 0 )
 26/modulate = Color( 1, 1, 1, 1 )
 26/region = Rect2( 0, 48, 32, 32 )

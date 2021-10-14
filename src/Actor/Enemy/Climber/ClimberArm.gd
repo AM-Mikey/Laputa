@@ -17,8 +17,8 @@ func die():
 	if not dead:
 		dead = true
 		
-#		get_parent().arm_count -= 1
-#		get_parent().replace_arms()
+		get_parent().arm_count -= 1
+		get_parent().replace_arms(index)
 		
 		do_death_drop()
 		timer.stop()

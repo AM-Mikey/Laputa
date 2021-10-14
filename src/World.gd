@@ -168,9 +168,25 @@ func on_level_change(level, door_index, level_name, music):
 	###transition out
 	var already_enabled = false
 	
+	#LOADZONES
 	if $UILayer.has_node("TransitionWipe"):
 		yield(get_tree().create_timer(0.8), "timeout")
 		$UILayer/TransitionWipe.play_out_animation()
+		already_enabled = true
+		$Recruit.disabled = false
+		
+		if $UILayer.has_node("LevelName"):
+			$UILayer/LevelName.free()
+		
+		var level_name_ui = LEVELNAME.instance()
+		level_name_ui.text = next_level.name #in final version switch this to display name
+		level_name_ui.wait_time = 0.6
+		$UILayer.add_child(level_name_ui)
+		
+	#DOORS
+	elif $UILayer.has_node("TransitionIris"):
+		yield(get_tree().create_timer(0.4), "timeout")
+		$UILayer/TransitionIris.play_out_animation()
 		already_enabled = true
 		$Recruit.disabled = false
 		
