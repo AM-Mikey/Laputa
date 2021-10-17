@@ -68,5 +68,6 @@ visible = false
 position = Vector2( 184, 192 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 192, 128 )
+position = Vector2( 160, 128 )
+z_index = 2
 current = true

@@ -58,7 +58,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -70,7 +70,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -122,7 +122,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -134,7 +134,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -186,7 +186,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -198,7 +198,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -250,7 +250,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -262,7 +262,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -314,7 +314,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -326,7 +326,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -378,7 +378,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -390,7 +390,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -442,7 +442,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -454,7 +454,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -506,7 +506,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -518,7 +518,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -570,7 +570,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -582,7 +582,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -634,7 +634,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -646,7 +646,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -698,7 +698,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -710,7 +710,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -762,7 +762,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -774,7 +774,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -826,7 +826,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -838,7 +838,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -890,7 +890,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -902,7 +902,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -954,7 +954,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -966,7 +966,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1018,7 +1018,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1030,7 +1030,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1082,7 +1082,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1094,7 +1094,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1146,7 +1146,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1158,7 +1158,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1210,7 +1210,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1222,7 +1222,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1274,7 +1274,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1286,7 +1286,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1338,7 +1338,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1350,7 +1350,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1402,7 +1402,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1414,7 +1414,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1466,7 +1466,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1478,7 +1478,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1530,7 +1530,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1542,7 +1542,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1594,7 +1594,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1606,7 +1606,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1658,7 +1658,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1670,7 +1670,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1722,7 +1722,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1734,7 +1734,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1786,7 +1786,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1798,7 +1798,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1850,7 +1850,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1862,7 +1862,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1914,7 +1914,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1926,7 +1926,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1978,7 +1978,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1990,7 +1990,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2042,7 +2042,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2054,7 +2054,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2106,7 +2106,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2118,7 +2118,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2170,7 +2170,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2182,7 +2182,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2234,7 +2234,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2246,7 +2246,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2298,7 +2298,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2310,7 +2310,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2362,7 +2362,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2374,7 +2374,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2426,7 +2426,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2438,7 +2438,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2490,7 +2490,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2502,7 +2502,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2554,7 +2554,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2566,7 +2566,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2618,7 +2618,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2630,7 +2630,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2682,7 +2682,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2694,7 +2694,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2746,7 +2746,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2758,7 +2758,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2810,7 +2810,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2822,7 +2822,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2874,7 +2874,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2886,7 +2886,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -2934,48 +2934,36 @@ tracks/0/keys = {
 "values": [ Vector2( 6, -10 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("WeaponSprite:flip_h")
+tracks/1/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
-tracks/2/interp = 0
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0.0 ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("Front:frame_coords")
-tracks/3/interp = 1
-tracks/3/loop_wrap = false
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/path = NodePath("Front:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0, 1.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 7 ), Vector2( 11, 7 ) ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("Back:frame_coords")
-tracks/4/interp = 1
-tracks/4/loop_wrap = false
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/path = NodePath("Back:frame_coords")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0, 1.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
@@ -3002,7 +2990,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -3014,7 +3002,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -3066,7 +3054,7 @@ tracks/1/path = NodePath("WeaponSprite:flip_h")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -3078,7 +3066,7 @@ tracks/2/path = NodePath("WeaponSprite:rotation_degrees")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -3126,20 +3114,21 @@ light_mask = 2
 position = Vector2( 0, -16 )
 texture = ExtResource( 5 )
 vframes = 12
-frame = 6
 
 [node name="WeaponSprite" type="Sprite" parent="."]
 light_mask = 2
-position = Vector2( 9, -12 )
+position = Vector2( -6, -10 )
 texture = ExtResource( 3 )
-flip_h = true
+
+[node name="MuzzlePos" type="Position2D" parent="WeaponSprite"]
+position = Vector2( -5, -1 )
 
 [node name="Front" type="Sprite" parent="."]
 light_mask = 2
 position = Vector2( 0, -16 )
 texture = ExtResource( 5 )
 vframes = 12
-frame = 7
+frame = 1
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 current = true

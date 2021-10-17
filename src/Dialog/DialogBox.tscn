@@ -24,7 +24,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-dialog_json = "res://src/Dialog/NewDialogPrinter.json"
 
 [node name="Background" type="NinePatchRect" parent="."]
 margin_left = 8.0

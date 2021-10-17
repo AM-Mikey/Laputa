@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Got Item!.mp3-ffe4e18aa4ff124eb2a38b966b716938.mp3str"
+
+[deps]
+
+source_file="res://assets/SFX/Placeholder/Got Item!.mp3"
+dest_files=[ "res://.import/Got Item!.mp3-ffe4e18aa4ff124eb2a38b966b716938.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

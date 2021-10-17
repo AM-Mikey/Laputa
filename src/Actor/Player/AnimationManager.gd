@@ -252,55 +252,70 @@ func get_input_dir() -> Array:
 func get_next_animation(animation, anim_dir, can_shoot_down):
 	var animation_suffix
 	
+	var ws = get_parent().get_node("WeaponSprite")
+	
 	if anim_dir == Vector2.LEFT:
 		pc.face_dir = Vector2.LEFT
+		ws.scale.x = 1
 		
 		if get_input_dir().has(Vector2.UP) and get_input_dir().has(Vector2.DOWN):
 			animation_suffix = "Left"
 			pc.shoot_dir = Vector2.LEFT
+			ws.rotation_degrees = 0
 			
 		elif get_input_dir().has(Vector2.UP):
 			animation_suffix = "LeftLookUp"
 			pc.shoot_dir = Vector2.UP
+			ws.rotation_degrees = 90
 			
 		elif get_input_dir().has(Vector2.DOWN):
 			animation_suffix = "LeftLookDown"
 			if can_shoot_down:
 				pc.shoot_dir = Vector2.DOWN
+				ws.rotation_degrees = -90
 			else:
 				pc.shoot_dir = Vector2.LEFT
+				ws.rotation_degrees = 0
 		
 		else:
 			animation_suffix = "Left"
 			pc.shoot_dir = Vector2.LEFT
+			ws.rotation_degrees = 0
 			
 	
 	if anim_dir == Vector2.RIGHT:
 		pc.face_dir = Vector2.RIGHT
+		ws.scale.x = -1
 
 		if get_input_dir().has(Vector2.UP) and get_input_dir().has(Vector2.DOWN):
 			animation_suffix = "Right"
 			pc.shoot_dir = Vector2.RIGHT
+			ws.rotation_degrees = 0
 
 		elif get_input_dir().has(Vector2.UP):
 			animation_suffix = "RightLookUp"
 			pc.shoot_dir = Vector2.UP
+			ws.rotation_degrees = -90
 			
 		elif get_input_dir().has(Vector2.DOWN):
 			animation_suffix = "RightLookDown"
 			if can_shoot_down:
 				pc.shoot_dir = Vector2.DOWN
+				ws.rotation_degrees = 90
 			else:
 				pc.shoot_dir = Vector2.RIGHT
+				ws.rotation_degrees = 0
 		
 		else:
 			animation_suffix = "Right"
 			pc.shoot_dir = Vector2.RIGHT
+			ws.rotation_degrees = 0
 		
 		
 	var backwards = "Back" in animation
 	if backwards:
 		pc.shoot_dir.x *= -1
+		ws.scale.x *= -1
 		
 	var next_animation = animation + animation_suffix
 	return next_animation

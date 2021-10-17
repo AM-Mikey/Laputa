@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Get Heart Tank!.mp3-1e2db32500a495cfe40078d9aee613e9.mp3str"
+
+[deps]
+
+source_file="res://assets/SFX/Placeholder/Get Heart Tank!.mp3"
+dest_files=[ "res://.import/Get Heart Tank!.mp3-1e2db32500a495cfe40078d9aee613e9.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
