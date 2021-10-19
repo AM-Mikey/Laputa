@@ -35,3 +35,12 @@ func _input(event):
 			$TabContainer.current_tab = 0
 		else:
 			$TabContainer.current_tab += 1
+	
+#	if event.is_action_pressed("ui_cancel"):
+#
+#		if world.has_node("UILayer/PauseMenu"):
+#			world.get_node("UILayer/PauseMenu").focus()
+#		if world.has_node("UILayer/TitleScreen"):
+#			world.get_node("UILayer/TitleScreen").focus()
+#		else:
+#			queue_free()

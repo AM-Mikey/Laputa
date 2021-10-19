@@ -34,7 +34,7 @@ func _process(delta):
 
 	#useless since only retrieves player camera, which is at player position \/
 	$VBox/HBox/C2/A/CameraPos.text = str("%4.f" % pc.get_node("PlayerCamera").get_camera_screen_center().x) + "," + str("%4.f" % pc.get_node("PlayerCamera").get_camera_screen_center().y)
-	$VBox/HBox/C2/A/CameraOffset.text = str("%4.2f" % pc.get_node("PlayerCamera").offset_h) + "," + str("%4.2f" % pc.get_node("PlayerCamera").offset_v)
+	$VBox/HBox/C2/A/CameraOffset.text = str("%+0.2f" % pc.get_node("PlayerCamera").offset_h) + "," + str("%+0.2f" % pc.get_node("PlayerCamera").offset_v)
 
 
 	$VBox/HBox/C2/A/Disabled.text = str(pc.disabled)

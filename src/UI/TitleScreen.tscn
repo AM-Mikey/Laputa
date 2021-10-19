@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/UI/Font/Momo.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/UI/TitleScreen/TitleLogo.png" type="Texture" id=2]
 [ext_resource path="res://src/UI/TitleScreen.gd" type="Script" id=3]
 [ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=4]
-[ext_resource path="res://assets/Music/laputaintro.ogg" type="AudioStream" id=5]
 [ext_resource path="res://src/UI/Font/WelcomeBack.tres" type="DynamicFont" id=6]
 
 [node name="TitleScreen" type="MarginContainer"]
@@ -22,7 +21,7 @@ __meta__ = {
 
 [node name="VersionLabel" type="Label" parent="."]
 margin_left = 16.0
-margin_top = 332.0
+margin_top = 329.0
 margin_right = 560.0
 margin_bottom = 344.0
 size_flags_vertical = 8
@@ -109,11 +108,6 @@ text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Theme" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-autoplay = true
-bus = "Music"
 
 [connection signal="pressed" from="VBoxContainer/New" to="." method="_on_New_pressed"]
 [connection signal="pressed" from="VBoxContainer/Load" to="." method="_on_Load_pressed"]

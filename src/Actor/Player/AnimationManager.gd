@@ -7,7 +7,7 @@ onready var ap = pc.get_node("AnimationPlayer")
 
 
 func _physics_process(delta):
-	run_anim_speed = max((abs(pc.velocity.x)/pc.speed.x) * 1.5, 0.1) #run_anim_speed = max((abs(velocity.x)/max_x_speed) * 1.5, 0.5)
+	run_anim_speed = max((abs(pc.velocity.x)/pc.speed.x) * 2, 0.1) #run_anim_speed = max((abs(velocity.x)/max_x_speed) * 1.5, 0.5) #was 1.5 rev it up to 2
 	animate(pc.move_dir, pc.velocity)
 
 func animate(move_dir, velocity):

@@ -33,8 +33,7 @@
 	/lock /name,??? /turn,mechanic,right Hey you down there!
 	/focus,mechanic /face,mechanic /name,sage /turn,mechanic,player Yeah, you!
 	You can access the shop by jumping up here!
-	/unfocus See ya around!
-	/unfocus See ya around!
+	See ya around! /unfocus
 	"
 }
 

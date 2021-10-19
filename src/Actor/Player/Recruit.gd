@@ -3,6 +3,7 @@ extends Player
 const POPUP = preload("res://src/UI/PopupText.tscn")
 const LEVELUP = preload("res://src/Effect/LevelUp.tscn")
 const LEVELDOWN = preload("res://src/Effect/LevelDown.tscn")
+const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
 
 const SNAP_DIRECTION = Vector2.DOWN
 const SNAP_LENGTH = 4.0
@@ -12,7 +13,7 @@ var sfx_get_xp = load("res://assets/SFX/Placeholder/snd_get_xp.ogg")
 var sfx_get_ammo = load("res://assets/SFX/Placeholder/snd_get_missile.ogg")
 
 export var forgiveness_time = 0.05
-export var minimum_jump_time = 0.0000000001 #was 0.1
+#export var minimum_jump_time = 0.0000000001 #was 0.1 #still too much? #something else is forcing us to jump minimum y
 export var minimum_direction_time = 1.0 #was 0.5  #cave story forces you to jump a certain x distance when going max speed before jumping
 var jump_starting_move_dir_x: int
 export var min_x_velocity = 0.001
@@ -131,7 +132,7 @@ func _physics_process(_delta):
 
 		#jump interrupt
 		var is_jump_interrupted = false
-		if $MinimumJumpTimer.time_left == 0 and velocity.y < 0.0:
+		if  velocity.y < 0.0: #$MinimumJumpTimer.time_left == 0 and
 			if not Input.is_action_pressed("jump"):
 				is_jump_interrupted = true
 
@@ -179,7 +180,7 @@ func _physics_process(_delta):
 
 
 func jump():
-	$MinimumJumpTimer.start(minimum_jump_time)
+	#$MinimumJumpTimer.start(minimum_jump_time) 
 	snap_vector = Vector2.ZERO
 	$JumpSound.play()
 	#Check if a running jump. since speed.x is max x velocity, only count as a running jump then
@@ -581,6 +582,11 @@ func die():
 		dead = true
 		disabled = true
 		visible = false
+		
+		var explosion = EXPLOSION.instance()
+		get_tree().get_root().get_node("World/Front").add_child(explosion)
+		explosion.position = global_position
+		
 		world.get_node("UILayer").add_child(load("res://src/UI/DeathScreen.tscn").instance())
 		#queue_free()
 

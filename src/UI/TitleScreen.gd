@@ -3,6 +3,8 @@ extends Control
 const LEVELSELECT = preload("res://src/UI/LevelSelect.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 
+var music_theme = load("res://assets/Music/laputaintro.wav")
+
 onready var world = get_tree().get_root().get_node("World")
 onready var player = get_tree().get_root().get_node("World/Recruit")
 onready var hud = get_tree().get_root().get_node("World/UILayer/HUD")
@@ -23,12 +25,16 @@ func _ready():
 	if not file.file_exists(world.save_path):
 		$VBoxContainer/Load.queue_free()
 	
+	#####
 	
+	world.get_node("MusicPlayer").stream = music_theme
+	world.get_node("MusicPlayer").play()
 	
 	yield(get_tree(), "idle_frame")
 	on_viewport_size_changed()
 	focus()
-	
+
+
 
 func _on_New_pressed():
 	visible = false
