@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PossibleBug.png-ccd01117a7d3a332d41cd32da2ed6895.stex"
+path="res://.import/Quincy.png-c9d84177711016cafa5168d6e042ff8c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Icon/discord/PossibleBug.png"
-dest_files=[ "res://.import/PossibleBug.png-ccd01117a7d3a332d41cd32da2ed6895.stex" ]
+source_file="res://assets/Actor/NPC/Quincy.png"
+dest_files=[ "res://.import/Quincy.png-c9d84177711016cafa5168d6e042ff8c.stex" ]
 
 [params]
 

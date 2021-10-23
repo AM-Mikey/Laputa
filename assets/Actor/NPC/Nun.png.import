@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PossibleBug.png-ccd01117a7d3a332d41cd32da2ed6895.stex"
+path="res://.import/Nun.png-c4b4e87b406f04c31ad145b2a2ec0f98.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Icon/discord/PossibleBug.png"
-dest_files=[ "res://.import/PossibleBug.png-ccd01117a7d3a332d41cd32da2ed6895.stex" ]
+source_file="res://assets/Actor/NPC/Nun.png"
+dest_files=[ "res://.import/Nun.png-c4b4e87b406f04c31ad145b2a2ec0f98.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PossibleBug.png-ccd01117a7d3a332d41cd32da2ed6895.stex"
+path="res://.import/Fuuka.png-d5d41b3d1688d8684c22d3ab9e12d10f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Icon/discord/PossibleBug.png"
-dest_files=[ "res://.import/PossibleBug.png-ccd01117a7d3a332d41cd32da2ed6895.stex" ]
+source_file="res://assets/Actor/NPC/Fuuka.png"
+dest_files=[ "res://.import/Fuuka.png-d5d41b3d1688d8684c22d3ab9e12d10f.stex" ]
 
 [params]
 

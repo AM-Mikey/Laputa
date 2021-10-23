@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PossibleBug.png-ccd01117a7d3a332d41cd32da2ed6895.stex"
+path="res://.import/Lucille.png-6071793f05bd0836f42a8c67e4920330.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Icon/discord/PossibleBug.png"
-dest_files=[ "res://.import/PossibleBug.png-ccd01117a7d3a332d41cd32da2ed6895.stex" ]
+source_file="res://assets/Actor/NPC/Lucille.png"
+dest_files=[ "res://.import/Lucille.png-6071793f05bd0836f42a8c67e4920330.stex" ]
 
 [params]
 

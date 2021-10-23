@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://src/Tile/VillageOld.tres" type="TileSet" id=1]
+[ext_resource path="res://src/Tile/Outdated/VillageOld.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Tile/PropTile/GrassProp.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Actor/Enemy/Sphagnum.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=4]
@@ -10,6 +10,7 @@
 [ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Utility/PlayerCameraDummy.tscn" type="PackedScene" id=11]
+
 
 [node name="Grassy" type="Node2D"]
 script = ExtResource( 6 )
