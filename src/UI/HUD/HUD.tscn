@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/UI/HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/UI/NumberNew.png" type="Texture" id=2]
@@ -9,10 +9,12 @@
 [ext_resource path="res://assets/UI/HUD/HpLost.png" type="Texture" id=7]
 [ext_resource path="res://assets/UI/HUD/CooldownProgress.png" type="Texture" id=8]
 [ext_resource path="res://assets/UI/HUD/CooldownOver.png" type="Texture" id=9]
+[ext_resource path="res://assets/UI/HUD/HpCap.png" type="Texture" id=10]
 [ext_resource path="res://assets/UI/HUD/XpOver.png" type="Texture" id=11]
 [ext_resource path="res://assets/UI/HUD/HpOver.png" type="Texture" id=12]
 [ext_resource path="res://assets/UI/HUD/XpMax.png" type="Texture" id=13]
 [ext_resource path="res://assets/UI/NumberSmall.png" type="Texture" id=14]
+[ext_resource path="res://assets/UI/HUD/HpLostCap.png" type="Texture" id=15]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Flash"
@@ -84,16 +86,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HpLostCap" type="Sprite" parent="HpBar/HpLost"]
+position = Vector2( 19, 2 )
+texture = ExtResource( 15 )
+
 [node name="HpProgress" type="TextureProgress" parent="HpBar"]
 margin_left = 48.0
 margin_top = 35.0
 margin_right = 86.0
 margin_bottom = 39.0
-value = 100.0
+value = 50.0
 texture_progress = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HpCap" type="Sprite" parent="HpBar/HpProgress"]
+position = Vector2( 19, 2 )
+texture = ExtResource( 10 )
 
 [node name="Num1" type="Sprite" parent="HpBar"]
 position = Vector2( 28, 32 )

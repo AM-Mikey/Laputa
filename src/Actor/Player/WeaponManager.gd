@@ -7,6 +7,7 @@ var weapon
 
 var trigger_held = false
 
+onready var world = get_tree().get_root().get_node("World")
 onready var HUD = get_tree().get_root().get_node("World/UILayer/HUD")
 onready var pc = get_tree().get_root().get_node("World/Recruit")
 
@@ -138,7 +139,7 @@ func prepare_bullet(bullet_pos, effect_pos, shoot_dir):
 	bullet.origin = bullet_pos
 	bullet.direction = shoot_dir
 	
-	get_tree().get_current_scene().add_child(bullet)
+	world.get_node("Middle").add_child(bullet)
 	
 	###fire audio
 	$WeaponAudio.stream = weapon.audio_stream

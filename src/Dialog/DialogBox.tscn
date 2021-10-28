@@ -3,33 +3,22 @@
 [ext_resource path="res://src/Dialog/DialogBox.gd" type="Script" id=1]
 [ext_resource path="res://assets/UI/DialogBox.png" type="Texture" id=2]
 [ext_resource path="res://src/UI/Font/Momo.tres" type="DynamicFont" id=3]
-[ext_resource path="res://assets/UI/Font/momo.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/UI/Face/Izu.png" type="Texture" id=4]
 [ext_resource path="res://src/UI/Font/WelcomeBack.tres" type="DynamicFont" id=5]
-
-[sub_resource type="DynamicFont" id=1]
-size = 12
-use_mipmaps = true
-extra_spacing_top = 2
-font_data = ExtResource( 4 )
+[ext_resource path="res://src/Dialog/CommandHandler.gd" type="Script" id=6]
 
 [node name="DialogBox" type="MarginContainer"]
+pause_mode = 1
 margin_right = 480.0
 margin_bottom = 64.0
-rect_min_size = Vector2( 0, 80 )
-custom_constants/margin_right = 8
-custom_constants/margin_top = 8
-custom_constants/margin_left = 8
-custom_constants/margin_bottom = 8
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Background" type="NinePatchRect" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 472.0
-margin_bottom = 72.0
+margin_right = 480.0
+margin_bottom = 64.0
 texture = ExtResource( 2 )
 region_rect = Rect2( 0, 0, 48, 48 )
 patch_margin_left = 8
@@ -40,11 +29,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 472.0
-margin_bottom = 72.0
+[node name="Margin" type="MarginContainer" parent="."]
+margin_right = 480.0
+margin_bottom = 64.0
 custom_constants/margin_right = 8
 custom_constants/margin_top = 8
 custom_constants/margin_left = 8
@@ -53,52 +40,55 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBox" type="HBoxContainer" parent="Margin"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 456.0
+margin_right = 472.0
 margin_bottom = 56.0
 size_flags_vertical = 5
 custom_constants/separation = 8
 
-[node name="Face" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="Face" type="Control" parent="Margin/HBox"]
 margin_right = 48.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
+rect_clip_content = true
 
-[node name="Sprite" type="Sprite" parent="MarginContainer/HBoxContainer/Face"]
+[node name="Sprite" type="Sprite" parent="Margin/HBox/Face"]
+position = Vector2( -48, 0 )
+texture = ExtResource( 4 )
 centered = false
 
-[node name="TextBox" type="Label" parent="MarginContainer/HBoxContainer"]
-visible = false
+[node name="RichTextBox" type="RichTextLabel" parent="Margin/HBox"]
 light_mask = 2
 margin_left = 56.0
-margin_right = 448.0
-margin_bottom = 48.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = SubResource( 1 )
-text = "fdgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggdddddddddddddffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
-autowrap = true
-clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextBox" type="RichTextLabel" parent="MarginContainer/HBoxContainer"]
-light_mask = 2
-margin_left = 56.0
-margin_right = 448.0
+margin_right = 464.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/bold_font = ExtResource( 5 )
 custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
+text = "this
+is
+super
+cool
+what
+a suprise
+that
+you 
+would do
+that"
 scroll_active = false
+scroll_following = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = "SFX"
 
 [node name="PrintTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="CommandHandler" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="Tween" type="Tween" parent="CommandHandler"]

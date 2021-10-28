@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://src/Tile/Layers/Decortation.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/Tile/Layers/Front.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Tile/Layers/SSP.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/Trigger/FlavorText.tscn" type="PackedScene" id=16]
 
 [node name="MechanicShop" type="Node2D"]
 script = ExtResource( 5 )
@@ -74,6 +75,11 @@ level = "res://src/Level/Village/Village.tscn"
 [node name="KillBox" parent="Triggers" instance=ExtResource( 1 )]
 position = Vector2( 240, 808 )
 scale = Vector2( 482.952, 10 )
+
+[node name="FlavorText" parent="Triggers" instance=ExtResource( 16 )]
+position = Vector2( 88, 136 )
+text = "An unfinished diagram of a gun. 
+The inscription underneath it reads \"Polaris\""
 
 [node name="Props" type="Node2D" parent="."]
 

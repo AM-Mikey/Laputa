@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/NotBug.png-b0a334f8ea402254ba733997fa2b4816.stex"
+path="res://.import/AmmoCountInf.png-16b164fced19d3f52b24a0aad5a54af4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Icon/Discord/NotBug.png"
-dest_files=[ "res://.import/NotBug.png-b0a334f8ea402254ba733997fa2b4816.stex" ]
+source_file="res://assets/UI/Outdated/AmmoCountInf.png"
+dest_files=[ "res://.import/AmmoCountInf.png-16b164fced19d3f52b24a0aad5a54af4.stex" ]
 
 [params]
 

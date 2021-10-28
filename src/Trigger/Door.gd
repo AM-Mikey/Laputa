@@ -36,7 +36,7 @@ func _input(event):
 	
 	var sfx_player = world.get_node("SFXPlayer")
 	
-	if event.is_action_pressed("inspect") and has_player_near and not active_player.disabled:
+	if event.is_action_pressed("inspect") and has_player_near and not active_player.disabled and active_player.is_on_floor(): #floor check recently
 		if not locked:
 			active_player.set_collision_layer_bit(0, false)
 			active_player.disabled = true

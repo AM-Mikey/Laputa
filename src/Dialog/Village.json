@@ -7,9 +7,11 @@
 	
 	"sasuke":
 	"
-	/name,sasuke /face,sasuke Managing the windmill is tough work!
+	/face,sasuke /name,sasuke Managing the windmill is tough work! /pass
 	I almost fell asleep while leaning over in my chair.
 	Say, have you seen my brother around here?
+	/wait here's a forth line for good measure /pass
+	have a fifth
 	",
 
 	"basil":
@@ -30,10 +32,10 @@
 
 	"down_there":
 	"
-	/lock /name,??? /turn,mechanic,right Hey you down there!
-	/focus,mechanic /face,mechanic /name,sage /turn,mechanic,player Yeah, you!
+	/lock /name,??? /right,mechanic Hey you down there!
+	/focus,mechanic /face,mechanic /name,sage /left,mechanic Yeah, you!
 	You can access the shop by jumping up here!
-	See ya around! /unfocus
+	/unfocus See ya around!
 	"
 }
 

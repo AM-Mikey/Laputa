@@ -1,6 +1,6 @@
 [gd_scene load_steps=65 format=2]
 
-[ext_resource path="res://src/Weapon/WeaponManager.gd" type="Script" id=1]
+[ext_resource path="res://src/Actor/Player/WeaponManager.gd" type="Script" id=1]
 [ext_resource path="res://src/Actor/Player/Recruit.gd" type="Script" id=2]
 [ext_resource path="res://assets/Weapon/Revolver.png" type="Texture" id=3]
 [ext_resource path="res://assets/SFX/Placeholder/snd_quote_walk.ogg" type="AudioStream" id=4]
@@ -9,22 +9,22 @@
 [ext_resource path="res://assets/SFX/Placeholder/snd_quote_jump.ogg" type="AudioStream" id=7]
 [ext_resource path="res://assets/SFX/Placeholder/snd_quote_hurt.ogg" type="AudioStream" id=8]
 [ext_resource path="res://assets/SFX/Placeholder/snd_thud.ogg" type="AudioStream" id=9]
-[ext_resource path="res://src/Utility/PlayerCamera.gd" type="Script" id=10]
+[ext_resource path="res://src/Actor/Player/PlayerCamera.gd" type="Script" id=10]
 [ext_resource path="res://src/Actor/Player/AnimationManager.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 7.5 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 10.5 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 6, 7.5 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 1, 1 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -88,7 +88,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 73 ), Vector2( 1, 73 ), Vector2( 2, 73 ), Vector2( 3, 73 ), Vector2( 4, 73 ), Vector2( 5, 73 ), Vector2( 6, 73 ), Vector2( 7, 73 ), Vector2( 8, 73 ), Vector2( 9, 73 ), Vector2( 10, 73 ), Vector2( 11, 73 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -152,7 +152,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 77 ), Vector2( 1, 77 ), Vector2( 2, 77 ), Vector2( 3, 77 ), Vector2( 4, 77 ), Vector2( 5, 77 ), Vector2( 6, 77 ), Vector2( 7, 77 ), Vector2( 8, 77 ), Vector2( 9, 77 ), Vector2( 10, 77 ), Vector2( 11, 77 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -216,7 +216,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 75 ), Vector2( 1, 75 ), Vector2( 2, 75 ), Vector2( 3, 75 ), Vector2( 4, 75 ), Vector2( 5, 75 ), Vector2( 6, 75 ), Vector2( 7, 75 ), Vector2( 8, 75 ), Vector2( 9, 75 ), Vector2( 10, 75 ), Vector2( 11, 75 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -280,7 +280,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 79 ), Vector2( 1, 79 ), Vector2( 2, 79 ), Vector2( 3, 79 ), Vector2( 4, 79 ), Vector2( 5, 79 ), Vector2( 6, 79 ), Vector2( 7, 79 ), Vector2( 8, 79 ), Vector2( 9, 79 ), Vector2( 10, 79 ), Vector2( 11, 79 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -344,7 +344,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 83 ), Vector2( 1, 83 ), Vector2( 2, 83 ), Vector2( 3, 83 ), Vector2( 4, 83 ), Vector2( 5, 83 ), Vector2( 6, 83 ), Vector2( 7, 83 ), Vector2( 8, 83 ), Vector2( 9, 83 ), Vector2( 10, 83 ), Vector2( 11, 83 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -408,7 +408,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 81 ), Vector2( 1, 81 ), Vector2( 2, 81 ), Vector2( 3, 81 ), Vector2( 4, 81 ), Vector2( 5, 81 ), Vector2( 6, 81 ), Vector2( 7, 81 ), Vector2( 8, 81 ), Vector2( 9, 81 ), Vector2( 10, 81 ), Vector2( 11, 81 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=11]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -472,7 +472,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 61 ), Vector2( 1, 61 ), Vector2( 2, 61 ), Vector2( 3, 61 ), Vector2( 4, 61 ), Vector2( 5, 61 ), Vector2( 6, 61 ), Vector2( 7, 61 ), Vector2( 8, 61 ), Vector2( 9, 61 ), Vector2( 10, 61 ), Vector2( 11, 61 ) ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=12]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -536,7 +536,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 65 ), Vector2( 1, 65 ), Vector2( 2, 65 ), Vector2( 3, 65 ), Vector2( 4, 65 ), Vector2( 5, 65 ), Vector2( 6, 65 ), Vector2( 7, 65 ), Vector2( 8, 65 ), Vector2( 9, 65 ), Vector2( 10, 65 ), Vector2( 11, 65 ) ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=13]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -600,7 +600,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 63 ), Vector2( 1, 63 ), Vector2( 2, 63 ), Vector2( 3, 63 ), Vector2( 4, 63 ), Vector2( 5, 63 ), Vector2( 6, 63 ), Vector2( 7, 63 ), Vector2( 8, 63 ), Vector2( 9, 63 ), Vector2( 10, 63 ), Vector2( 11, 63 ) ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=14]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -664,7 +664,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 67 ), Vector2( 1, 67 ), Vector2( 2, 67 ), Vector2( 3, 67 ), Vector2( 4, 67 ), Vector2( 5, 67 ), Vector2( 6, 67 ), Vector2( 7, 67 ), Vector2( 8, 67 ), Vector2( 9, 67 ), Vector2( 10, 67 ), Vector2( 11, 67 ) ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=15]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -728,7 +728,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 71 ), Vector2( 1, 71 ), Vector2( 2, 71 ), Vector2( 3, 71 ), Vector2( 4, 71 ), Vector2( 5, 71 ), Vector2( 6, 71 ), Vector2( 7, 71 ), Vector2( 8, 71 ), Vector2( 9, 71 ), Vector2( 10, 71 ), Vector2( 11, 71 ) ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=16]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -792,7 +792,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 69 ), Vector2( 1, 69 ), Vector2( 2, 69 ), Vector2( 3, 69 ), Vector2( 4, 69 ), Vector2( 5, 69 ), Vector2( 6, 69 ), Vector2( 7, 69 ), Vector2( 8, 69 ), Vector2( 9, 69 ), Vector2( 10, 69 ), Vector2( 11, 69 ) ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=17]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -856,7 +856,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 11, 0 ) ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=18]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -920,7 +920,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 4 ), Vector2( 11, 4 ) ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=19]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -984,7 +984,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 2 ), Vector2( 11, 2 ) ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=20]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -1048,7 +1048,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 6 ), Vector2( 11, 6 ) ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=21]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -1112,7 +1112,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 10 ), Vector2( 11, 10 ) ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=22]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -1176,7 +1176,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 8 ), Vector2( 11, 8 ) ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=23]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -1240,7 +1240,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id=24]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -1304,7 +1304,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 4 ), Vector2( 11, 4 ) ]
 }
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=25]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -1368,7 +1368,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 2 ), Vector2( 11, 2 ) ]
 }
 
-[sub_resource type="Animation" id=27]
+[sub_resource type="Animation" id=26]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -1432,7 +1432,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 6 ), Vector2( 1, 6 ) ]
 }
 
-[sub_resource type="Animation" id=28]
+[sub_resource type="Animation" id=27]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -1496,7 +1496,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 10 ), Vector2( 11, 10 ) ]
 }
 
-[sub_resource type="Animation" id=29]
+[sub_resource type="Animation" id=28]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -1560,7 +1560,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 8 ), Vector2( 11, 8 ) ]
 }
 
-[sub_resource type="Animation" id=30]
+[sub_resource type="Animation" id=29]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -1624,7 +1624,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=31]
+[sub_resource type="Animation" id=30]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -1688,7 +1688,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 4 ) ]
 }
 
-[sub_resource type="Animation" id=32]
+[sub_resource type="Animation" id=31]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -1752,7 +1752,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 2 ) ]
 }
 
-[sub_resource type="Animation" id=33]
+[sub_resource type="Animation" id=32]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -1816,7 +1816,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 6 ) ]
 }
 
-[sub_resource type="Animation" id=34]
+[sub_resource type="Animation" id=33]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -1880,7 +1880,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 10 ) ]
 }
 
-[sub_resource type="Animation" id=35]
+[sub_resource type="Animation" id=34]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -1944,7 +1944,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 8 ) ]
 }
 
-[sub_resource type="Animation" id=36]
+[sub_resource type="Animation" id=35]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -2008,7 +2008,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=36]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -2072,7 +2072,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 4 ) ]
 }
 
-[sub_resource type="Animation" id=38]
+[sub_resource type="Animation" id=37]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -2136,7 +2136,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 2 ) ]
 }
 
-[sub_resource type="Animation" id=39]
+[sub_resource type="Animation" id=38]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -2200,7 +2200,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 6 ) ]
 }
 
-[sub_resource type="Animation" id=40]
+[sub_resource type="Animation" id=39]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -2264,7 +2264,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 10 ) ]
 }
 
-[sub_resource type="Animation" id=41]
+[sub_resource type="Animation" id=40]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -2328,7 +2328,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 8 ) ]
 }
 
-[sub_resource type="Animation" id=42]
+[sub_resource type="Animation" id=41]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -2404,7 +2404,7 @@ tracks/5/keys = {
 "values": [ true, true ]
 }
 
-[sub_resource type="Animation" id=43]
+[sub_resource type="Animation" id=42]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -2480,7 +2480,7 @@ tracks/5/keys = {
 "values": [ true, true ]
 }
 
-[sub_resource type="Animation" id=44]
+[sub_resource type="Animation" id=43]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -2556,7 +2556,7 @@ tracks/5/keys = {
 "values": [ true, true ]
 }
 
-[sub_resource type="Animation" id=45]
+[sub_resource type="Animation" id=44]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -2632,7 +2632,7 @@ tracks/5/keys = {
 "values": [ true, true ]
 }
 
-[sub_resource type="Animation" id=46]
+[sub_resource type="Animation" id=45]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -2708,7 +2708,7 @@ tracks/5/keys = {
 "values": [ true, true ]
 }
 
-[sub_resource type="Animation" id=47]
+[sub_resource type="Animation" id=46]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -2784,7 +2784,7 @@ tracks/5/keys = {
 "values": [ true, true ]
 }
 
-[sub_resource type="Animation" id=48]
+[sub_resource type="Animation" id=47]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -2848,7 +2848,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 11, 0 ) ]
 }
 
-[sub_resource type="Animation" id=49]
+[sub_resource type="Animation" id=48]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -2912,7 +2912,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 4 ), Vector2( 11, 4 ) ]
 }
 
-[sub_resource type="Animation" id=50]
+[sub_resource type="Animation" id=49]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -2976,7 +2976,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 2 ), Vector2( 11, 2 ) ]
 }
 
-[sub_resource type="Animation" id=51]
+[sub_resource type="Animation" id=50]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -3028,7 +3028,7 @@ tracks/3/keys = {
 "values": [ Vector2( 0, 6 ), Vector2( 11, 6 ) ]
 }
 
-[sub_resource type="Animation" id=52]
+[sub_resource type="Animation" id=51]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -3092,7 +3092,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 10 ), Vector2( 11, 10 ) ]
 }
 
-[sub_resource type="Animation" id=53]
+[sub_resource type="Animation" id=52]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -3156,7 +3156,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 8 ), Vector2( 11, 8 ) ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=53]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -3186,10 +3186,11 @@ light_mask = 2
 position = Vector2( 0, -16 )
 texture = ExtResource( 5 )
 vframes = 12
+frame = 2
 
 [node name="WeaponSprite" type="Sprite" parent="."]
 light_mask = 2
-position = Vector2( -10, -11 )
+position = Vector2( -3, -17 )
 rotation = -1.5708
 texture = ExtResource( 3 )
 
@@ -3201,7 +3202,7 @@ light_mask = 2
 position = Vector2( 0, -16 )
 texture = ExtResource( 5 )
 vframes = 12
-frame = 1
+frame = 3
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 current = true
@@ -3271,7 +3272,7 @@ collision_mask = 7172
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemDetector"]
 position = Vector2( 0, -7.5 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="HurtDetector" type="Area2D" parent="."]
 modulate = Color( 0.992157, 0, 1, 0.282353 )
@@ -3282,7 +3283,7 @@ collision_mask = 8194
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtDetector"]
 position = Vector2( 0, -5.5 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="SSPDetector" type="Area2D" parent="."]
 collision_layer = 0
@@ -3291,63 +3292,63 @@ collision_mask = 512
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SSPDetector"]
 modulate = Color( 0, 0.462745, 0.0509804, 1 )
 position = Vector2( 0, 1 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="AnimationManager" type="Node" parent="."]
 script = ExtResource( 11 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/BackfallLeft = SubResource( 6 )
-anims/BackfallLeftLookDown = SubResource( 7 )
-anims/BackfallLeftLookUp = SubResource( 8 )
-anims/BackfallRight = SubResource( 9 )
-anims/BackfallRightLookDown = SubResource( 10 )
-anims/BackfallRightLookUp = SubResource( 11 )
-anims/BackriseLeft = SubResource( 12 )
-anims/BackriseLeftLookDown = SubResource( 13 )
-anims/BackriseLeftLookUp = SubResource( 14 )
-anims/BackriseRight = SubResource( 15 )
-anims/BackriseRightLookDown = SubResource( 16 )
-anims/BackriseRightLookUp = SubResource( 17 )
-anims/BackrunLeft = SubResource( 18 )
-anims/BackrunLeftLookDown = SubResource( 19 )
-anims/BackrunLeftLookUp = SubResource( 20 )
-anims/BackrunRight = SubResource( 21 )
-anims/BackrunRightLookDown = SubResource( 22 )
-anims/BackrunRightLookUp = SubResource( 23 )
-anims/ClimbLeft = SubResource( 24 )
-anims/ClimbLeftLookDown = SubResource( 25 )
-anims/ClimbLeftLookUp = SubResource( 26 )
-anims/ClimbRight = SubResource( 27 )
-anims/ClimbRightLookDown = SubResource( 28 )
-anims/ClimbRightLookUp = SubResource( 29 )
-anims/FallLeft = SubResource( 30 )
-anims/FallLeftLookDown = SubResource( 31 )
-anims/FallLeftLookUp = SubResource( 32 )
-anims/FallRight = SubResource( 33 )
-anims/FallRightLookDown = SubResource( 34 )
-anims/FallRightLookUp = SubResource( 35 )
-anims/RiseLeft = SubResource( 36 )
-anims/RiseLeftLookDown = SubResource( 37 )
-anims/RiseLeftLookUp = SubResource( 38 )
-anims/RiseRight = SubResource( 39 )
-anims/RiseRightLookDown = SubResource( 40 )
-anims/RiseRightLookUp = SubResource( 41 )
-anims/RunLeft = SubResource( 42 )
-anims/RunLeftLookDown = SubResource( 43 )
-anims/RunLeftLookUp = SubResource( 44 )
-anims/RunRight = SubResource( 45 )
-anims/RunRightLookDown = SubResource( 46 )
-anims/RunRightLookUp = SubResource( 47 )
-anims/StandLeft = SubResource( 48 )
-anims/StandLeftLookDown = SubResource( 49 )
-anims/StandLeftLookUp = SubResource( 50 )
-anims/StandRight = SubResource( 51 )
-anims/StandRightLookDown = SubResource( 52 )
-anims/StandRightLookUp = SubResource( 53 )
+anims/BackfallLeft = SubResource( 5 )
+anims/BackfallLeftLookDown = SubResource( 6 )
+anims/BackfallLeftLookUp = SubResource( 7 )
+anims/BackfallRight = SubResource( 8 )
+anims/BackfallRightLookDown = SubResource( 9 )
+anims/BackfallRightLookUp = SubResource( 10 )
+anims/BackriseLeft = SubResource( 11 )
+anims/BackriseLeftLookDown = SubResource( 12 )
+anims/BackriseLeftLookUp = SubResource( 13 )
+anims/BackriseRight = SubResource( 14 )
+anims/BackriseRightLookDown = SubResource( 15 )
+anims/BackriseRightLookUp = SubResource( 16 )
+anims/BackrunLeft = SubResource( 17 )
+anims/BackrunLeftLookDown = SubResource( 18 )
+anims/BackrunLeftLookUp = SubResource( 19 )
+anims/BackrunRight = SubResource( 20 )
+anims/BackrunRightLookDown = SubResource( 21 )
+anims/BackrunRightLookUp = SubResource( 22 )
+anims/ClimbLeft = SubResource( 23 )
+anims/ClimbLeftLookDown = SubResource( 24 )
+anims/ClimbLeftLookUp = SubResource( 25 )
+anims/ClimbRight = SubResource( 26 )
+anims/ClimbRightLookDown = SubResource( 27 )
+anims/ClimbRightLookUp = SubResource( 28 )
+anims/FallLeft = SubResource( 29 )
+anims/FallLeftLookDown = SubResource( 30 )
+anims/FallLeftLookUp = SubResource( 31 )
+anims/FallRight = SubResource( 32 )
+anims/FallRightLookDown = SubResource( 33 )
+anims/FallRightLookUp = SubResource( 34 )
+anims/RiseLeft = SubResource( 35 )
+anims/RiseLeftLookDown = SubResource( 36 )
+anims/RiseLeftLookUp = SubResource( 37 )
+anims/RiseRight = SubResource( 38 )
+anims/RiseRightLookDown = SubResource( 39 )
+anims/RiseRightLookUp = SubResource( 40 )
+anims/RunLeft = SubResource( 41 )
+anims/RunLeftLookDown = SubResource( 42 )
+anims/RunLeftLookUp = SubResource( 43 )
+anims/RunRight = SubResource( 44 )
+anims/RunRightLookDown = SubResource( 45 )
+anims/RunRightLookUp = SubResource( 46 )
+anims/StandLeft = SubResource( 47 )
+anims/StandLeftLookDown = SubResource( 48 )
+anims/StandLeftLookUp = SubResource( 49 )
+anims/StandRight = SubResource( 50 )
+anims/StandRightLookDown = SubResource( 51 )
+anims/StandRightLookUp = SubResource( 52 )
 
 [node name="EffectPlayer" type="AnimationPlayer" parent="."]
-anims/FlashIframe = SubResource( 2 )
+anims/FlashIframe = SubResource( 53 )
 
 [connection signal="area_entered" from="ItemDetector" to="." method="_on_ItemDetector_area_entered"]
 [connection signal="area_entered" from="HurtDetector" to="." method="_on_HurtDetector_area_entered"]

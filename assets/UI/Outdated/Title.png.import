@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/AmmoCountInf.png-6ed71298f78d5d3c5f719bb4d9da5223.stex"
+path="res://.import/Title.png-f718c74e42dffc67167d60a18d5d733d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/AmmoCountInf.png"
-dest_files=[ "res://.import/AmmoCountInf.png-6ed71298f78d5d3c5f719bb4d9da5223.stex" ]
+source_file="res://assets/UI/Outdated/Title.png"
+dest_files=[ "res://.import/Title.png-f718c74e42dffc67167d60a18d5d733d.stex" ]
 
 [params]
 

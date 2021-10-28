@@ -17,6 +17,8 @@ func _ready():
 	
 
 func _process(_delta):
+	$HpBar/HpLost/HpLostCap.position.x = 38 * $HpBar/HpLost.value / $HpBar/HpLost.max_value
+	
 	if p.get_node("WeaponManager").weapon != null:
 		if $CooldownBar/TextureProgress.visible == false:
 			$CooldownBar/TextureProgress.visible = true
@@ -46,6 +48,8 @@ func update_hp():
 	
 	$HpBar/HpProgress.max_value = p.max_hp
 	$HpBar/HpLost.max_value = p.max_hp
+	
+	$HpBar/HpProgress/HpCap.position.x = 38 * $HpBar/HpProgress.value / $HpBar/HpProgress.max_value
 	
 	if p.hp < $HpBar/HpLost.value:
 		$AnimationPlayer.play("Flash")

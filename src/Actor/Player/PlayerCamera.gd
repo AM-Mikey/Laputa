@@ -58,6 +58,7 @@ func _physics_process(_delta):
 
 
 func _on_limit_camera(left, right, top, bottom):
+	#print("limit camera")
 	var bars = get_tree().get_nodes_in_group("BlackBars")
 	for b in bars:
 		b.free()
@@ -126,6 +127,7 @@ func pan_vertical(direction):
 	tween.start()
 
 func home_vertical():
+	#print("home vert")
 	var tween = $TweenVertical
 	var camera_pan_time = 1.5
 	
@@ -135,20 +137,23 @@ func home_vertical():
 	tween.start()
 	yield(tween, "tween_completed")
 
-func pan_horizontal(direction, velocity):
+func pan_horizontal(direction, velocity): #we're not actually using velocity anywhere here, that's in _process
+	#print("pan horz")
+
 	var tween = $TweenHorizontal
 	var camera_pan_distance = 2.0 / world.resolution_scale
 	var camera_pan_time = 1.5
-	var camera_pan_delay = 0
-	
-	yield(get_tree().create_timer(camera_pan_delay), "timeout")
+
 	
 	if tween.is_active():
 		tween.stop_all()
 	tween.interpolate_property(self, "offset_h", offset_h, direction.x * camera_pan_distance, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	tween.start()
 
+
+
 func home_horizontal():
+	#print("homing horz")
 	var tween = $TweenHorizontal
 	var camera_pan_time = 1.5
 	
@@ -159,9 +164,9 @@ func home_horizontal():
 	yield(tween, "tween_completed")
 
 func stop_tween():
+	#print("stopping tween")
 	$TweenHorizontal.stop_all()
 	$TweenVertical.stop_all()
 
 func on_viewport_size_changed():
-	print("plaptrl")
 	zoom = Vector2(1 / world.resolution_scale, 1 / world.resolution_scale)

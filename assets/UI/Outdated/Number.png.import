@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BodyFont.png-8bc40659e191954ee70c071613a3f482.stex"
+path="res://.import/Number.png-06032340991b8aaab6a3156b52dfdced.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/BodyFont.png"
-dest_files=[ "res://.import/BodyFont.png-8bc40659e191954ee70c071613a3f482.stex" ]
+source_file="res://assets/UI/Outdated/Number.png"
+dest_files=[ "res://.import/Number.png-06032340991b8aaab6a3156b52dfdced.stex" ]
 
 [params]
 

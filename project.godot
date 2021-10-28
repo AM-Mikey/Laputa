@@ -79,6 +79,7 @@ window/size/width=480
 window/size/height=270
 window/size/test_width=1920
 window/size/test_height=1080
+window/vsync/vsync_via_compositor=true
 
 [editor_plugins]
 
@@ -325,6 +326,5 @@ set_target={
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 2d/snapping/use_gpu_pixel_snap=true
 environment/default_environment="res://default_env.tres"

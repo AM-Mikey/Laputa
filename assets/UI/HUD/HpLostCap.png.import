@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/NotBug.png-b0a334f8ea402254ba733997fa2b4816.stex"
+path="res://.import/HpLostCap.png-7a8c0dee2835ac9d47eb7c68efb90c14.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Icon/Discord/NotBug.png"
-dest_files=[ "res://.import/NotBug.png-b0a334f8ea402254ba733997fa2b4816.stex" ]
+source_file="res://assets/UI/HUD/HpLostCap.png"
+dest_files=[ "res://.import/HpLostCap.png-7a8c0dee2835ac9d47eb7c68efb90c14.stex" ]
 
 [params]
 

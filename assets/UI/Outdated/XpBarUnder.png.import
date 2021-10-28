@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/NotBug.png-b0a334f8ea402254ba733997fa2b4816.stex"
+path="res://.import/XpBarUnder.png-6b5b70d048d18d84da82210d8ce69cbf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Icon/Discord/NotBug.png"
-dest_files=[ "res://.import/NotBug.png-b0a334f8ea402254ba733997fa2b4816.stex" ]
+source_file="res://assets/UI/Outdated/XpBarUnder.png"
+dest_files=[ "res://.import/XpBarUnder.png-6b5b70d048d18d84da82210d8ce69cbf.stex" ]
 
 [params]
 

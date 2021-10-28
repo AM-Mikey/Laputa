@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TestWeapon.png-ece5d892359c6cf392ffed00407cff00.stex"
+path="res://.import/Iris.png-ee70d12a80ef89c0a2ea21061a5c4342.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/TestWeapon.png"
-dest_files=[ "res://.import/TestWeapon.png-ece5d892359c6cf392ffed00407cff00.stex" ]
+source_file="res://assets/Effect/Transition/Iris.png"
+dest_files=[ "res://.import/Iris.png-ee70d12a80ef89c0a2ea21061a5c4342.stex" ]
 
 [params]
 

@@ -103,17 +103,23 @@ func _input(event):
 	if event.is_action_pressed("pause") and not $UILayer.has_node("TitleScreen"):
 		if not $UILayer.has_node("PauseMenu") and not get_tree().paused:
 			get_tree().paused = true
+			
 			$UILayer/HUD.visible = false
+			if self.has_node("UILayer/DialogBox"):
+				self.get_node("UILayer/DialogBox").visible = false
+			
 			var pause_menu = PAUSEMENU.instance()
 			$UILayer.add_child(pause_menu)
 			
 
 
 func on_level_change(level, door_index, level_name, music):
+	print("level change")
 	save_level_data_to_temp()
 	$Recruit/PlayerCamera.smoothing_enabled = false
 	if $UILayer.has_node("DialogBox"):
 		$UILayer/DialogBox.stop_printing()
+	clear_spawn_layers()
 	
 	var level_path = current_level.filename
 	current_level.queue_free()
@@ -498,3 +504,11 @@ func load_options():
 	
 	yield(get_tree(), "idle_frame")
 	options.queue_free()
+
+func clear_spawn_layers():
+	for c in $Back.get_children():
+		c.free()
+	for c in $Middle.get_children():
+		c.free()
+	for c in $Front.get_children():
+		c.free()

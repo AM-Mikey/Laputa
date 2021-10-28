@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/XpBarMax.png-fe15057f4fc8794038fcb4d468736520.stex"
+path="res://.import/WeaponStats.png-ca0cf89f1983dfb55168ee2694571992.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/XpBarMax.png"
-dest_files=[ "res://.import/XpBarMax.png-fe15057f4fc8794038fcb4d468736520.stex" ]
+source_file="res://assets/UI/Outdated/WeaponStats.png"
+dest_files=[ "res://.import/WeaponStats.png-ca0cf89f1983dfb55168ee2694571992.stex" ]
 
 [params]
 

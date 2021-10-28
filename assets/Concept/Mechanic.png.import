@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/XpBarFlash.png-a7fb63226120ae9166dc1f767d210267.stex"
+path="res://.import/Mechanic.png-f0e63dea6fc396c6c64972902c6cf05a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/XpBarFlash.png"
-dest_files=[ "res://.import/XpBarFlash.png-a7fb63226120ae9166dc1f767d210267.stex" ]
+source_file="res://assets/Concept/Mechanic.png"
+dest_files=[ "res://.import/Mechanic.png-f0e63dea6fc396c6c64972902c6cf05a.stex" ]
 
 [params]
 

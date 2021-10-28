@@ -27,7 +27,6 @@
 [ext_resource path="res://src/Tile/Layers/SSP.tscn" type="PackedScene" id=27]
 [ext_resource path="res://src/Tile/Layers/Front.tscn" type="PackedScene" id=28]
 
-
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 2
 
