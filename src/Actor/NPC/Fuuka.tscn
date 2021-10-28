@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Actor/NPC/NPC.gd" type="Script" id=1]
-[ext_resource path="res://assets/Actor/NPC/Mechanic.png" type="Texture" id=2]
+[ext_resource path="res://assets/Actor/NPC/Fuuka.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 14 )
@@ -20,10 +20,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 1.4, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1 ]
+"values": [ 0, 1, 2 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -43,11 +43,11 @@ tracks/0/keys = {
 "values": [ 8, 15 ]
 }
 
-[node name="Mechanic" type="KinematicBody2D"]
+[node name="Fuuka" type="KinematicBody2D"]
 collision_layer = 128
 collision_mask = 8
 script = ExtResource( 1 )
-id = "mechanic"
+id = "fuuka"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -14 )
@@ -64,8 +64,7 @@ shape = SubResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -16 )
 texture = ExtResource( 2 )
-hframes = 8
-vframes = 2
+hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
