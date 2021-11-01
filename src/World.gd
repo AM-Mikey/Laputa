@@ -76,6 +76,7 @@ func _on_viewport_size_changed():
 		resolution_scale = 4.0
 	
 	$UILayer.scale = Vector2(resolution_scale, resolution_scale)
+	$Background.scale = Vector2(resolution_scale, resolution_scale)
 	
 
 func show_title():

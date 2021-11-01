@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=2]
@@ -16,6 +16,9 @@
 [ext_resource path="res://src/Tile/Layers/Front.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Tile/Layers/SSP.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/Trigger/FlavorText.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/Actor/NPC/Mechanic.tscn" type="PackedScene" id=17]
+[ext_resource path="res://src/Prop/Fan.tscn" type="PackedScene" id=18]
+[ext_resource path="res://src/Actor/NPC/Fluffy.tscn" type="PackedScene" id=19]
 
 [node name="MechanicShop" type="Node2D"]
 script = ExtResource( 5 )
@@ -38,8 +41,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Actors" type="Node2D" parent="."]
-
 [node name="Tiles" type="Node2D" parent="."]
 
 [node name="Back" parent="Tiles" instance=ExtResource( 6 )]
@@ -48,7 +49,7 @@ tile_data = PoolIntArray( 131075, 0, 0, 131079, 0, 0, 131083, 0, 0, 131087, 0, 0
 
 [node name="Back2" parent="Tiles" instance=ExtResource( 6 )]
 tile_set = ExtResource( 12 )
-tile_data = PoolIntArray( 458756, 5, 0, 524295, 16, 0, 655364, 30, 0, 655365, 30, 65537, 720899, 30, 0, 720900, 30, 65537, 786435, 30, 65537, 851970, 19, 0, 851981, 60, 0, 851982, 60, 1, 851984, 60, 0, 851985, 60, 1 )
+tile_data = PoolIntArray( 458756, 5, 0, 524295, 16, 0, 655364, 30, 0, 655365, 30, 65537, 720899, 30, 0, 720900, 30, 65537, 786435, 30, 65537, 851970, 19, 0, 851981, 25, 0, 851982, 25, 0, 851983, 25, 0, 851984, 25, 0, 851985, 25, 0 )
 
 [node name="Collision" parent="Tiles" instance=ExtResource( 4 )]
 tile_set = ExtResource( 12 )
@@ -65,6 +66,14 @@ tile_data = PoolIntArray( 65535, 50, 0, 0, 50, 0, 1, 50, 0, 2, 50, 0, 3, 50, 0, 
 [node name="SSP" parent="Tiles" instance=ExtResource( 15 )]
 tile_set = ExtResource( 12 )
 tile_data = PoolIntArray( 917523, 44, 0, 917524, 44, 0, 917525, 44, 0, 917526, 44, 0, 917527, 44, 0, 917528, 44, 0 )
+
+[node name="Actors" type="Node2D" parent="."]
+
+[node name="Mechanic" parent="Actors" instance=ExtResource( 17 )]
+position = Vector2( 360, 256 )
+
+[node name="Fluffy" parent="Actors" instance=ExtResource( 19 )]
+position = Vector2( 104, 144 )
 
 [node name="Triggers" type="Node2D" parent="."]
 
@@ -88,7 +97,7 @@ position = Vector2( 224, 224 )
 item_name = "Necklace"
 
 [node name="ShopWeapon" parent="Props" instance=ExtResource( 9 )]
-position = Vector2( 272, 224 )
+position = Vector2( 304, 224 )
 weapon_name = "MachinePistol1"
 
 [node name="AmmoRefill" parent="Props" instance=ExtResource( 7 )]
@@ -103,6 +112,9 @@ position = Vector2( 120, 136 )
 [node name="Lamp2" parent="Props" instance=ExtResource( 3 )]
 position = Vector2( 200, 208 )
 style = 1
+
+[node name="Fan" parent="Props" instance=ExtResource( 18 )]
+position = Vector2( 280, 208 )
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 11 )]
 position = Vector2( 88, 224 )

@@ -31,7 +31,7 @@ var camera_forgiveness_distance = 64
 var free_counter = 0
 
 func _physics_process(_delta):
-	if not disabled and not protected:
+	if not disabled and not protected and hp == 99999999999: #never do for now
 		var camera_limiters = get_tree().get_nodes_in_group("CameraLimiters")
 		var left
 		var right

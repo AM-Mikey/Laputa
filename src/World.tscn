@@ -14,6 +14,9 @@ development_stage = "alpha"
 release_version = "1.7"
 starting_level = "res://src/Level/Village/Village.tscn"
 
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
 [node name="Back" type="Node2D" parent="."]
 
 [node name="Recruit" parent="." instance=ExtResource( 5 )]

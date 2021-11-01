@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/Tile/Layers/Front.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Tile/Layers/Back.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Tile/Layers/Collision.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Actor/NPC/Grandma.tscn" type="PackedScene" id=12]
 
 [node name="OldHouse" type="Node2D"]
 script = ExtResource( 5 )
@@ -48,6 +49,12 @@ tile_data = PoolIntArray( 655363, 80, 0 )
 visible = false
 tile_data = PoolIntArray( 327698, 0, 0, 393234, 1, 0, 458770, 1, 0, 524301, 0, 0, 589837, 1, 0, 655373, 1, 0, 720909, 1, 0 )
 
+[node name="Actors" type="Node2D" parent="."]
+
+[node name="Grandma" parent="Actors" instance=ExtResource( 12 )]
+position = Vector2( 88, 192 )
+scale = Vector2( -1, 1 )
+
 [node name="Triggers" type="Node2D" parent="."]
 
 [node name="Door" parent="Triggers" instance=ExtResource( 2 )]
@@ -60,8 +67,6 @@ position = Vector2( 240, 808 )
 scale = Vector2( 482.952, 10 )
 
 [node name="Props" type="Node2D" parent="."]
-
-[node name="Actors" type="Node2D" parent="."]
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 7 )]
 visible = false

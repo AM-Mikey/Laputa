@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/Trigger/DialogCue.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Tile/PropTile/GrassProp.tscn" type="PackedScene" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=5]
 [ext_resource path="res://src/Tile/TriggerTile/StairsTrigger.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Effect/CloudSmallKinematic.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/Utility/LevelLimiter.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Actor/NPC/Mechanic.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Effect/CloudLargeKinematic.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=11]
@@ -18,6 +18,7 @@
 [ext_resource path="res://src/Actor/NPC/Child.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/Actor/NPC/Sasuke.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/Actor/Enemy/Climber/ClimberManager.tscn" type="PackedScene" id=18]
+[ext_resource path="res://src/Actor/NPC/Hermit.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/Tile/Layers/Collision.tscn" type="PackedScene" id=20]
 [ext_resource path="res://src/Tile/Layers/Back.tscn" type="PackedScene" id=21]
 [ext_resource path="res://src/Tile/Layers/Decortation.tscn" type="PackedScene" id=22]
@@ -38,6 +39,13 @@ refuel, save and buy new weapon for cave y and boss"
 }
 level_name = "The Village"
 music = "res://assets/Music/Mimiga Town.ogg"
+
+[node name="LevelLimiter" parent="." instance=ExtResource( 8 )]
+margin_left = -32.0
+margin_top = -64.0
+margin_right = 832.0
+margin_bottom = 720.0
+background = ExtResource( 5 )
 
 [node name="Tiles" type="Node2D" parent="."]
 
@@ -101,7 +109,6 @@ conversation = "basil"
 
 [node name="Child" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 304, 544 )
-id = "child"
 dialog_json = "res://src/Dialog/Village.json"
 
 [node name="Sasuke" parent="Actors" instance=ExtResource( 17 )]
@@ -111,6 +118,9 @@ position = Vector2( 345, 384 )
 position = Vector2( 216, 297 )
 arm_count = 6
 arm_distance = 32
+
+[node name="Hermit" parent="Actors" instance=ExtResource( 19 )]
+position = Vector2( 552, 112 )
 
 [node name="Props" type="Node2D" parent="."]
 
@@ -179,6 +189,7 @@ shop --->"
 motion_scale = Vector2( 0, 0 )
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+visible = false
 margin_left = -768.0
 margin_top = -432.0
 margin_right = 768.0
@@ -204,20 +215,6 @@ motion_scale = Vector2( 1.1, 1.1 )
 
 [node name="CloudSmallKinematic" parent="ParallaxForeground/ParallaxLayer" instance=ExtResource( 7 )]
 position = Vector2( 152, 313 )
-
-[node name="CameraLimiter" parent="." instance=ExtResource( 8 )]
-
-[node name="Left" parent="CameraLimiter" index="0"]
-position = Vector2( -32, 352 )
-
-[node name="Right" parent="CameraLimiter" index="1"]
-position = Vector2( 832, 392 )
-
-[node name="Top" parent="CameraLimiter" index="2"]
-position = Vector2( 448, -64 )
-
-[node name="Bottom" parent="CameraLimiter" index="3"]
-position = Vector2( 384, 720 )
 
 [node name="Notes" type="Node2D" parent="."]
 
@@ -309,5 +306,3 @@ __meta__ = {
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 13 )]
 position = Vector2( 280, 384 )
-
-[editable path="CameraLimiter"]

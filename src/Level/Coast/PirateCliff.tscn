@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Trigger/LoadZone.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/Concept/SharkShipConcept.png" type="Texture" id=2]
 [ext_resource path="res://src/Prop/ChestWeapon.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=7]
@@ -173,5 +174,9 @@ __meta__ = {
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 16 )]
 position = Vector2( 216, 224 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 192, 144 )
+texture = ExtResource( 2 )
 
 [editable path="CameraLimiter"]

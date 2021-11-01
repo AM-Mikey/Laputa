@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Actor/NPC/NPC.gd" type="Script" id=1]
-[ext_resource path="res://assets/Actor/NPC/Mechanic.png" type="Texture" id=2]
+[ext_resource path="res://assets/Actor/NPC/Gote.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 14 )
@@ -43,11 +43,11 @@ tracks/0/keys = {
 "values": [ 8, 15 ]
 }
 
-[node name="Mechanic" type="KinematicBody2D"]
+[node name="Gote" type="KinematicBody2D"]
 collision_layer = 128
 collision_mask = 8
 script = ExtResource( 1 )
-id = "mechanic"
+id = "grandma"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -14 )
