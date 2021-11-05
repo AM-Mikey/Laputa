@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/VillageNewOrder.png-761d290217c5a50a5c2d59811664e00a.stex"
+path="res://.import/Dola.png-f576259e705c5f45f63614f9ba284279.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/VillageNewOrder.png"
-dest_files=[ "res://.import/VillageNewOrder.png-761d290217c5a50a5c2d59811664e00a.stex" ]
+source_file="res://assets/Face/Dola.png"
+dest_files=[ "res://.import/Dola.png-f576259e705c5f45f63614f9ba284279.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/VillageNewOrder.png-761d290217c5a50a5c2d59811664e00a.stex"
+path="res://.import/YellowRobot.png-521ed3c94e9b7ad887d795aa43aa7be8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/VillageNewOrder.png"
-dest_files=[ "res://.import/VillageNewOrder.png-761d290217c5a50a5c2d59811664e00a.stex" ]
+source_file="res://assets/Face/YellowRobot.png"
+dest_files=[ "res://.import/YellowRobot.png-521ed3c94e9b7ad887d795aa43aa7be8.stex" ]
 
 [params]
 

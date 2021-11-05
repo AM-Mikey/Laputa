@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/VillageNewOrder.png-761d290217c5a50a5c2d59811664e00a.stex"
+path="res://.import/David.png-1ba98f0bea3ffbfcc903a20ad23c6f25.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/VillageNewOrder.png"
-dest_files=[ "res://.import/VillageNewOrder.png-761d290217c5a50a5c2d59811664e00a.stex" ]
+source_file="res://assets/Face/David.png"
+dest_files=[ "res://.import/David.png-1ba98f0bea3ffbfcc903a20ad23c6f25.stex" ]
 
 [params]
 
