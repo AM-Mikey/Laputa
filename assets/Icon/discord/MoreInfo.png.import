@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/MoreInfo.png-90aee1bf1b7b52e4d63c991310b83079.stex"
+path="res://.import/MoreInfo.png-6ca04f9a101fb920e9e27ffcbb11f0c6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Icon/Discord/MoreInfo.png"
-dest_files=[ "res://.import/MoreInfo.png-90aee1bf1b7b52e4d63c991310b83079.stex" ]
+source_file="res://assets/Icon/discord/MoreInfo.png"
+dest_files=[ "res://.import/MoreInfo.png-6ca04f9a101fb920e9e27ffcbb11f0c6.stex" ]
 
 [params]
 
