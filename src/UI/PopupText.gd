@@ -4,13 +4,10 @@ var text
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
-	_on_viewport_size_changed()
+	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	on_viewport_size_changed()
 	
 	$MarginContainer/Label.text = text
-	
-func _on_viewport_size_changed():
-	$MarginContainer.rect_size = get_tree().get_root().size / world.resolution_scale
 
 
 func _on_Timer_timeout():
@@ -18,3 +15,7 @@ func _on_Timer_timeout():
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	queue_free()
+
+
+func on_viewport_size_changed():
+	rect_size = get_tree().get_root().size / world.resolution_scale

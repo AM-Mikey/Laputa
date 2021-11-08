@@ -1,6 +1,6 @@
 extends Player
 
-const POPUP = preload("res://src/UI/PopupText.tscn")
+#const POPUP = preload("res://src/UI/PopupText.tscn")
 const LEVELUP = preload("res://src/Effect/LevelUp.tscn")
 const LEVELDOWN = preload("res://src/Effect/LevelDown.tscn")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
@@ -377,9 +377,9 @@ func _input(event):
 				air_cof = 0.00
 			
 			yield(get_tree(), "idle_frame")
-			var popup = POPUP.instance()
-			popup.text = "movement profile: " + movement_profile
-			world.get_node("UILayer").add_child(popup)
+#			var popup = POPUP.instance()
+#			popup.text = "movement profile: " + movement_profile
+#			world.get_node("UILayer").add_child(popup)
 
 
 

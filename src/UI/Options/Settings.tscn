@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=1]
 [ext_resource path="res://src/UI/LightBox.tres" type="StyleBox" id=2]
 [ext_resource path="res://src/UI/BluedBox.tres" type="StyleBox" id=3]
 [ext_resource path="res://src/UI/DarkBox.tres" type="StyleBox" id=4]
-[ext_resource path="res://assets/UI/MenuBackground.png" type="Texture" id=5]
 [ext_resource path="res://src/UI/Options/Settings.gd" type="Script" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=1]
@@ -26,33 +25,8 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
-visible = false
 margin_right = 480.0
 margin_bottom = 272.0
-
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-visible = false
-margin_right = 480.0
-margin_bottom = 272.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 5 )
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 8
-patch_margin_bottom = 8
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-margin_right = 480.0
-margin_bottom = 272.0
-color = Color( 0.619608, 0.168627, 0.156863, 0.52549 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 480.0
@@ -79,20 +53,20 @@ follow_focus = true
 scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
-margin_right = 448.0
-margin_bottom = 192.0
+margin_right = 442.0
+margin_bottom = 216.0
 size_flags_horizontal = 3
 alignment = 1
 
 [node name="MasterLabel" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_right = 448.0
+margin_right = 442.0
 margin_bottom = 14.0
 text = "Master Volume: 100'/."
 align = 1
 
 [node name="MasterSlider" type="HSlider" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 18.0
-margin_right = 448.0
+margin_right = 442.0
 margin_bottom = 34.0
 max_value = 20.0
 value = 10.0
@@ -104,7 +78,7 @@ __meta__ = {
 
 [node name="MusicLabel" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 38.0
-margin_right = 448.0
+margin_right = 442.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
 text = "Music Volume: 100'/."
@@ -112,7 +86,7 @@ align = 1
 
 [node name="MusicSlider" type="HSlider" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 56.0
-margin_right = 448.0
+margin_right = 442.0
 margin_bottom = 72.0
 size_flags_horizontal = 3
 max_value = 10.0
@@ -125,7 +99,7 @@ __meta__ = {
 
 [node name="SFXLabel" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 76.0
-margin_right = 448.0
+margin_right = 442.0
 margin_bottom = 90.0
 size_flags_horizontal = 3
 text = "SFX Volume: 100'/."
@@ -136,7 +110,7 @@ __meta__ = {
 
 [node name="SFXSlider" type="HSlider" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 94.0
-margin_right = 448.0
+margin_right = 442.0
 margin_bottom = 110.0
 size_flags_horizontal = 3
 max_value = 10.0
@@ -149,13 +123,13 @@ __meta__ = {
 
 [node name="DisplayMode" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 114.0
-margin_right = 448.0
-margin_bottom = 138.0
+margin_right = 442.0
+margin_bottom = 146.0
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DisplayMode"]
-margin_top = 5.0
+margin_top = 9.0
 margin_right = 75.0
-margin_bottom = 19.0
+margin_bottom = 23.0
 text = "Display Mode"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -163,21 +137,21 @@ __meta__ = {
 
 [node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DisplayMode"]
 margin_left = 79.0
-margin_right = 164.0
-margin_bottom = 24.0
+margin_right = 168.0
+margin_bottom = 32.0
 text = "Windowed"
 items = [ "Windowed", null, false, 0, null, "Borderless", null, false, 1, null, "FullScreen", null, false, 2, null ]
 selected = 0
 
 [node name="ResolutionScale" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 142.0
-margin_right = 448.0
-margin_bottom = 166.0
+margin_top = 150.0
+margin_right = 442.0
+margin_bottom = 182.0
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ResolutionScale"]
-margin_top = 5.0
+margin_top = 9.0
 margin_right = 97.0
-margin_bottom = 19.0
+margin_bottom = 23.0
 text = "Resolution Scale"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -185,21 +159,21 @@ __meta__ = {
 
 [node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ResolutionScale"]
 margin_left = 101.0
-margin_right = 157.0
-margin_bottom = 24.0
+margin_right = 161.0
+margin_bottom = 32.0
 text = "Auto"
 items = [ "Auto", null, false, 0, null, "1x", null, false, 1, null, "2x", null, false, 2, null, "3x", null, false, 3, null, "4x", null, false, 4, null ]
 selected = 0
 
 [node name="DeleteSave" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 170.0
-margin_right = 448.0
-margin_bottom = 192.0
+margin_top = 186.0
+margin_right = 442.0
+margin_bottom = 216.0
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DeleteSave"]
-margin_top = 4.0
+margin_top = 8.0
 margin_right = 134.0
-margin_bottom = 18.0
+margin_bottom = 22.0
 text = "Delete all Data (Debug)"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -207,8 +181,8 @@ __meta__ = {
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DeleteSave"]
 margin_left = 138.0
-margin_right = 156.0
-margin_bottom = 22.0
+margin_right = 160.0
+margin_bottom = 30.0
 theme = ExtResource( 1 )
 text = ":("
 
@@ -223,24 +197,24 @@ alignment = 2
 margin_left = 341.0
 margin_right = 397.0
 margin_bottom = 23.0
+custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 4 )
 custom_styles/focus = SubResource( 1 )
 custom_styles/disabled = SubResource( 2 )
 custom_styles/normal = ExtResource( 3 )
-custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
 text = "Defaults"
 
 [node name="Return" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 401.0
 margin_right = 448.0
 margin_bottom = 23.0
+custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 4 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = ExtResource( 3 )
-custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
 text = "Return"
 
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MasterSlider" to="." method="_on_MasterSlider_value_changed"]

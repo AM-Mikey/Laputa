@@ -34,10 +34,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Item/KeyItem/KeyItem.gd"
 }, {
-"base": "Node2D",
+"base": "Reference",
 "class": "Movement",
 "language": "GDScript",
-"path": "res://duncathan_movement.gd"
+"path": "res://src/duncathan_movement.gd"
 }, {
 "base": "Actor",
 "class": "NPC",

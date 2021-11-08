@@ -41,18 +41,14 @@ func _on_Items_item_activated(index):
 		var item = load(item_path)
 		body.text = item.description
 
-func _on_viewport_size_changed():
-	var viewport_size = get_tree().get_root().size / world.resolution_scale
-	
-#	if viewport_size.x <= viewport_size.y:
-#		rect_size = Vector2(viewport_size.x, viewport_size.x)
-#		#rect_position = viewport_size/2
-#	else:
-#		rect_size = Vector2(viewport_size.y, viewport_size.y)
-#		#rect_position = viewport_size/2
-	
-	rect_size = get_tree().get_root().size / world.resolution_scale
-
-
 func on_viewport_size_changed():
-	rect_size = get_tree().get_root().size / world.resolution_scale
+	var viewport_size = get_tree().get_root().size / world.resolution_scale
+	var target_width = 400
+	
+	if target_width > viewport_size.x:
+		rect_size.x = viewport_size.x
+	else:
+		rect_size.x = target_width
+		rect_position.x = (viewport_size.x - target_width) /2
+	rect_size.y = viewport_size.y
+	

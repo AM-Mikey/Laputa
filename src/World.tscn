@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/UI/TitleScreen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/HUD/HUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Actor/Player/Recruit.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/World.gd" type="Script" id=8]
@@ -35,10 +34,6 @@ z_index = 3
 pause_mode = 2
 
 [node name="HUD" parent="UILayer" instance=ExtResource( 2 )]
-
-[node name="TitleScreen" parent="UILayer" instance=ExtResource( 1 )]
-anchor_right = 0.683
-anchor_bottom = 0.444
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 bus = "Music"
