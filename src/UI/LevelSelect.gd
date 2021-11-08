@@ -5,8 +5,8 @@ const LEVELBUTTON = preload("res://src/UI/LevelButton.tscn")
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
-	_on_viewport_size_changed()
+	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	on_viewport_size_changed()
 	
 	var nones = []
 	var coasts = []
@@ -62,27 +62,24 @@ func _ready():
 		if n.rfind(".tscn"):
 			var level_button = LEVELBUTTON.instance()
 			level_button.level = n
-			$MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/None/VBoxContainer.add_child(level_button)
+			$MarginContainer/ScrollContainer/VBox/HBox/None/VBox.add_child(level_button)
 	
 	for c in coasts:
 		if c.rfind(".tscn"):
 			var level_button = LEVELBUTTON.instance()
 			level_button.level = c
-			$MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Coast/VBoxContainer.add_child(level_button)
+			$MarginContainer/ScrollContainer/VBox/HBox/Coast/VBox.add_child(level_button)
 		
 	for v in villages:
 		if v.rfind(".tscn"):
 			var level_button = LEVELBUTTON.instance()
 			level_button.level = v
-			$MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Village/VBoxContainer.add_child(level_button)
+			$MarginContainer/ScrollContainer/VBox/HBox/Village/VBox.add_child(level_button)
 
 	########
-	var first_button = $MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/None/VBoxContainer.get_child(0)
+	var first_button = $MarginContainer/ScrollContainer/VBox/HBox/None/VBox.get_child(0)
 	
 	first_button.grab_focus()
-
-func _on_viewport_size_changed():
-	rect_size = get_tree().get_root().size / world.resolution_scale
 
 
 func _on_Return_pressed():
@@ -91,3 +88,6 @@ func _on_Return_pressed():
 	if world.has_node("UILayer/TitleScreen"):
 		world.get_node("UILayer/TitleScreen").focus()
 	queue_free()
+
+func on_viewport_size_changed():
+	rect_size = get_tree().get_root().size / world.resolution_scale

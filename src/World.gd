@@ -1,5 +1,6 @@
 extends Node2D
 
+const TITLE = preload("res://src/UI/TitleScreen.tscn")
 const LEVELNAME = preload("res://src/UI/LevelName.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 const INVENTORY = preload("res://src/UI/Inventory/Inventory.tscn")
@@ -20,6 +21,7 @@ export var development_stage: String = "Alpha"
 var internal_version: String = get_internal_version()
 export var release_version: String
 export var is_release: bool = false
+export var skip_title: bool = false
 
 export var starting_level = "res://src/Level/DebugLevel.tscn"
 onready var current_level = load(starting_level).instance() #assumes current level to start with, might cause issues down the line
@@ -29,7 +31,8 @@ func _ready():
 	_on_viewport_size_changed()
 	add_child(current_level)
 
-	show_title()
+	if not skip_title:
+		load_title()
 	
 	load_options()
 
@@ -79,9 +82,9 @@ func _on_viewport_size_changed():
 	$Background.scale = Vector2(resolution_scale, resolution_scale)
 	
 
-func show_title():
-	$UILayer/HUD.visible =false
-	$Recruit.visible = false
+func load_title():
+	var title = TITLE.instance()
+	$UILayer.add_child(title)
 	$Recruit.disabled = true #just as a way to skip physics_process
 
 func _input(event):

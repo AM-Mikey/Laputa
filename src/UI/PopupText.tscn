@@ -19,29 +19,19 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[node name="PopupText" type="Control"]
+[node name="PopupText" type="MarginContainer"]
+margin_right = 480.0
+margin_bottom = 270.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 480.0
-margin_bottom = 264.0
-custom_constants/margin_right = 64
-custom_constants/margin_top = 64
-custom_constants/margin_left = 64
-custom_constants/margin_bottom = 64
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="MarginContainer"]
+[node name="Label" type="Label" parent="."]
 margin_left = 204.0
-margin_top = 64.0
 margin_right = 275.0
-margin_bottom = 78.0
+margin_bottom = 14.0
 size_flags_horizontal = 4
 size_flags_vertical = 0
 text = "Popup Label"

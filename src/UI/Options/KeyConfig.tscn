@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=1]
 [ext_resource path="res://src/UI/LightBox.tres" type="StyleBox" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://src/UI/DarkBox.tres" type="StyleBox" id=4]
 [ext_resource path="res://src/UI/Font/Momo.tres" type="DynamicFont" id=5]
 [ext_resource path="res://src/UI/Options/KeyConfig.gd" type="Script" id=6]
-[ext_resource path="res://assets/UI/MenuBackground.png" type="Texture" id=7]
 [ext_resource path="res://src/UI/Font/MomoNoSpacing.tres" type="DynamicFont" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=1]
@@ -23,22 +22,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="NinePatchRect" parent="."]
-visible = false
-margin_right = 480.0
-margin_bottom = 270.0
-texture = ExtResource( 7 )
-region_rect = Rect2( 0, 0, 48, 48 )
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Panel" type="Panel" parent="."]
-visible = false
 margin_right = 480.0
 margin_bottom = 270.0
 
@@ -95,268 +79,268 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal"]
-margin_right = 117.0
-margin_bottom = 308.0
+margin_right = 121.0
+margin_bottom = 404.0
 custom_constants/separation = 4
 
 [node name="jump" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer"]
-margin_right = 117.0
-margin_bottom = 22.0
+margin_right = 121.0
+margin_bottom = 30.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/jump"]
-margin_top = 5.0
+margin_top = 9.0
 margin_right = 28.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 custom_fonts/font = ExtResource( 8 )
 text = "Jump"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/jump"]
 margin_left = 32.0
-margin_right = 44.0
-margin_bottom = 22.0
+margin_right = 48.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="fire_manual" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer"]
-margin_top = 26.0
-margin_right = 117.0
-margin_bottom = 48.0
+margin_top = 34.0
+margin_right = 121.0
+margin_bottom = 64.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/fire_manual"]
-margin_top = 5.0
+margin_top = 9.0
 margin_right = 59.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 custom_fonts/font = ExtResource( 8 )
 text = "Manual Fire"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/fire_manual"]
 margin_left = 63.0
-margin_right = 75.0
-margin_bottom = 22.0
+margin_right = 79.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="fire_automatic" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer"]
-margin_top = 52.0
-margin_right = 117.0
-margin_bottom = 74.0
+margin_top = 68.0
+margin_right = 121.0
+margin_bottom = 98.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/fire_automatic"]
-margin_top = 5.0
+margin_top = 9.0
 margin_right = 74.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 custom_fonts/font = ExtResource( 8 )
 text = "Automatic Fire"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/fire_automatic"]
 margin_left = 78.0
-margin_right = 90.0
-margin_bottom = 22.0
+margin_right = 94.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="move_left" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer"]
-margin_top = 78.0
-margin_right = 117.0
-margin_bottom = 100.0
+margin_top = 102.0
+margin_right = 121.0
+margin_bottom = 132.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/move_left"]
-margin_top = 5.0
+margin_top = 9.0
 margin_right = 52.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 custom_fonts/font = ExtResource( 8 )
 text = "Move Left"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/move_left"]
 margin_left = 56.0
-margin_right = 68.0
-margin_bottom = 22.0
+margin_right = 72.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="move_right" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer"]
-margin_top = 104.0
-margin_right = 117.0
-margin_bottom = 126.0
+margin_top = 136.0
+margin_right = 121.0
+margin_bottom = 166.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/move_right"]
-margin_top = 5.0
+margin_top = 9.0
 margin_right = 57.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 custom_fonts/font = ExtResource( 8 )
 text = "Move Right"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/move_right"]
 margin_left = 61.0
-margin_right = 73.0
-margin_bottom = 22.0
+margin_right = 77.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="look_up" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer"]
-margin_top = 130.0
-margin_right = 117.0
-margin_bottom = 152.0
+margin_top = 170.0
+margin_right = 121.0
+margin_bottom = 200.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/look_up"]
-margin_top = 5.0
+margin_top = 9.0
 margin_right = 40.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 custom_fonts/font = ExtResource( 8 )
 text = "Look Up"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/look_up"]
 margin_left = 44.0
-margin_right = 56.0
-margin_bottom = 22.0
+margin_right = 60.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="look_down" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer"]
-margin_top = 156.0
-margin_right = 117.0
-margin_bottom = 178.0
+margin_top = 204.0
+margin_right = 121.0
+margin_bottom = 234.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/look_down"]
-margin_top = 5.0
+margin_top = 9.0
 margin_right = 56.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 custom_fonts/font = ExtResource( 8 )
 text = "Look Down"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/look_down"]
 margin_left = 60.0
-margin_right = 72.0
-margin_bottom = 22.0
+margin_right = 76.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="inspect" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer"]
-margin_top = 182.0
-margin_right = 117.0
-margin_bottom = 204.0
+margin_top = 238.0
+margin_right = 121.0
+margin_bottom = 268.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/inspect"]
-margin_top = 5.0
+margin_top = 9.0
 margin_right = 36.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 custom_fonts/font = ExtResource( 8 )
 text = "Inspect"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/inspect"]
 margin_left = 40.0
-margin_right = 52.0
-margin_bottom = 22.0
+margin_right = 56.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="inventory" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer"]
-margin_top = 208.0
-margin_right = 117.0
-margin_bottom = 230.0
+margin_top = 272.0
+margin_right = 121.0
+margin_bottom = 302.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/inventory"]
-margin_top = 5.0
+margin_top = 9.0
 margin_right = 49.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 custom_fonts/font = ExtResource( 8 )
 text = "Inventory"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/inventory"]
 margin_left = 53.0
-margin_right = 65.0
-margin_bottom = 22.0
+margin_right = 69.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="weapon_left" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer"]
-margin_top = 234.0
-margin_right = 117.0
-margin_bottom = 256.0
+margin_top = 306.0
+margin_right = 121.0
+margin_bottom = 336.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/weapon_left"]
-margin_top = 5.0
+margin_top = 9.0
 margin_right = 96.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 custom_fonts/font = ExtResource( 8 )
 text = "Cycle Weapon Left"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/weapon_left"]
 margin_left = 100.0
-margin_right = 112.0
-margin_bottom = 22.0
+margin_right = 116.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="weapon_right" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer"]
-margin_top = 260.0
-margin_right = 117.0
-margin_bottom = 282.0
+margin_top = 340.0
+margin_right = 121.0
+margin_bottom = 370.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/weapon_right"]
-margin_top = 5.0
+margin_top = 9.0
 margin_right = 101.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 custom_fonts/font = ExtResource( 8 )
 text = "Cycle Weapon Right"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/weapon_right"]
 margin_left = 105.0
-margin_right = 117.0
-margin_bottom = 22.0
+margin_right = 121.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="pause" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer"]
-margin_top = 286.0
-margin_right = 117.0
-margin_bottom = 308.0
+margin_top = 374.0
+margin_right = 121.0
+margin_bottom = 404.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/pause"]
-margin_top = 5.0
+margin_top = 9.0
 margin_right = 30.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 custom_fonts/font = ExtResource( 8 )
 text = "Pause"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/pause"]
 margin_left = 34.0
-margin_right = 46.0
-margin_bottom = 22.0
+margin_right = 50.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -373,101 +357,101 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug"]
-margin_right = 158.0
-margin_bottom = 215.0
+margin_right = 162.0
+margin_bottom = 271.0
 custom_constants/separation = 4
 
 [node name="debug_print" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer"]
-margin_right = 158.0
-margin_bottom = 22.0
+margin_right = 162.0
+margin_bottom = 30.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer/debug_print"]
-margin_top = 3.0
+margin_top = 7.0
 margin_right = 55.0
-margin_bottom = 18.0
+margin_bottom = 22.0
 custom_fonts/font = ExtResource( 5 )
 text = "Debug Info"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer/debug_print"]
 margin_left = 59.0
-margin_right = 71.0
-margin_bottom = 22.0
+margin_right = 75.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="debug_fly" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer"]
-margin_top = 26.0
-margin_right = 158.0
-margin_bottom = 48.0
+margin_top = 34.0
+margin_right = 162.0
+margin_bottom = 64.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer/debug_fly"]
-margin_top = 3.0
+margin_top = 7.0
 margin_right = 49.0
-margin_bottom = 18.0
+margin_bottom = 22.0
 custom_fonts/font = ExtResource( 5 )
 text = "Debug Fly"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer/debug_fly"]
 margin_left = 53.0
-margin_right = 65.0
-margin_bottom = 22.0
+margin_right = 69.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="save_data" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer"]
-margin_top = 52.0
-margin_right = 158.0
-margin_bottom = 74.0
+margin_top = 68.0
+margin_right = 162.0
+margin_bottom = 98.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer/save_data"]
-margin_top = 3.0
+margin_top = 7.0
 margin_right = 49.0
-margin_bottom = 18.0
+margin_bottom = 22.0
 custom_fonts/font = ExtResource( 5 )
 text = "Quicksave"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer/save_data"]
 margin_left = 53.0
-margin_right = 65.0
-margin_bottom = 22.0
+margin_right = 69.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="load_data" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer"]
-margin_top = 78.0
-margin_right = 158.0
-margin_bottom = 100.0
+margin_top = 102.0
+margin_right = 162.0
+margin_bottom = 132.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer/load_data"]
-margin_top = 3.0
+margin_top = 7.0
 margin_right = 46.0
-margin_bottom = 18.0
+margin_bottom = 22.0
 custom_fonts/font = ExtResource( 5 )
 text = "Quickload"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer/load_data"]
 margin_left = 50.0
-margin_right = 62.0
-margin_bottom = 22.0
+margin_right = 66.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="reload" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer"]
-margin_top = 104.0
-margin_right = 158.0
-margin_bottom = 137.0
+margin_top = 136.0
+margin_right = 162.0
+margin_bottom = 169.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer/reload"]
@@ -479,7 +463,7 @@ text = "Reload Game
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer/reload"]
 margin_left = 146.0
-margin_right = 158.0
+margin_right = 162.0
 margin_bottom = 33.0
 toggle_mode = true
 __meta__ = {
@@ -487,66 +471,66 @@ __meta__ = {
 }
 
 [node name="level_up" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer"]
-margin_top = 141.0
-margin_right = 158.0
-margin_bottom = 163.0
+margin_top = 173.0
+margin_right = 162.0
+margin_bottom = 203.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer/level_up"]
-margin_top = 3.0
+margin_top = 7.0
 margin_right = 43.0
-margin_bottom = 18.0
+margin_bottom = 22.0
 custom_fonts/font = ExtResource( 5 )
 text = "Level Up"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer/level_up"]
 margin_left = 47.0
-margin_right = 59.0
-margin_bottom = 22.0
+margin_right = 63.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="level_down" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer"]
-margin_top = 167.0
-margin_right = 158.0
-margin_bottom = 189.0
+margin_top = 207.0
+margin_right = 162.0
+margin_bottom = 237.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer/level_down"]
-margin_top = 3.0
+margin_top = 7.0
 margin_right = 59.0
-margin_bottom = 18.0
+margin_bottom = 22.0
 custom_fonts/font = ExtResource( 5 )
 text = "Level Down"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer/level_down"]
 margin_left = 63.0
-margin_right = 75.0
-margin_bottom = 22.0
+margin_right = 79.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="movement_profile" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer"]
-margin_top = 193.0
-margin_right = 158.0
-margin_bottom = 215.0
+margin_top = 241.0
+margin_right = 162.0
+margin_bottom = 271.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer/movement_profile"]
-margin_top = 3.0
+margin_top = 7.0
 margin_right = 131.0
-margin_bottom = 18.0
+margin_bottom = 22.0
 custom_fonts/font = ExtResource( 5 )
 text = "Change Movement Profile"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer/movement_profile"]
 margin_left = 135.0
-margin_right = 147.0
-margin_bottom = 22.0
+margin_right = 151.0
+margin_bottom = 30.0
 toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -578,12 +562,12 @@ flat = true
 margin_left = 417.0
 margin_right = 464.0
 margin_bottom = 23.0
+custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 4 )
 custom_styles/focus = SubResource( 1 )
 custom_styles/disabled = SubResource( 2 )
 custom_styles/normal = ExtResource( 3 )
-custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
 text = "Return"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Navigation/Mikey" to="." method="_on_Mikey_pressed"]
