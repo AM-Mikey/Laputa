@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ButtonHighlighted.png-926f276fd21d2d7f847c434434bf2453.stex"
+path="res://.import/Lantern.png-dec6c0ec5ff68e147a06a8734a866c35.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Outdated/ButtonHighlighted.png"
-dest_files=[ "res://.import/ButtonHighlighted.png-926f276fd21d2d7f847c434434bf2453.stex" ]
+source_file="res://assets/Prop/Lantern.png"
+dest_files=[ "res://.import/Lantern.png-dec6c0ec5ff68e147a06a8734a866c35.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

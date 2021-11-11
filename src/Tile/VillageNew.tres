@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=28 format=2]
+[gd_resource type="TileSet" load_steps=31 format=2]
 
 [ext_resource path="res://assets/Tile/VillageNewOrder.png" type="Texture" id=1]
 
@@ -41,6 +41,15 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 [sub_resource type="ConvexPolygonShape2D" id=23]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
+[sub_resource type="ConvexPolygonShape2D" id=27]
+points = PoolVector2Array( 0, 16, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=28]
+points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=29]
+points = PoolVector2Array( 0, 0, 16, 0, 0, 16 )
+
 [sub_resource type="ConvexPolygonShape2D" id=10]
 points = PoolVector2Array( 0, 16, 8, 0, 16, 0, 16, 16 )
 
@@ -81,7 +90,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [resource]
-83/name = "VillageNewOrder.png 83"
+83/name = "c_base"
 83/texture = ExtResource( 1 )
 83/tex_offset = Vector2( 0, 0 )
 83/modulate = Color( 1, 1, 1, 1 )
@@ -95,7 +104,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 83/shape_one_way_margin = 0.0
 83/shapes = [  ]
 83/z_index = 0
-84/name = "VillageNewOrder.png 84"
+84/name = "c_base_side"
 84/texture = ExtResource( 1 )
 84/tex_offset = Vector2( 0, 0 )
 84/modulate = Color( 1, 1, 1, 1 )
@@ -355,34 +364,6 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 97/shape_one_way_margin = 0.0
 97/shapes = [  ]
 97/z_index = 0
-98/name = "VillageNewOrder.png 98"
-98/texture = ExtResource( 1 )
-98/tex_offset = Vector2( 0, 0 )
-98/modulate = Color( 1, 1, 1, 1 )
-98/region = Rect2( 80, 0, 32, 16 )
-98/tile_mode = 0
-98/occluder_offset = Vector2( 0, 0 )
-98/navigation_offset = Vector2( 0, 0 )
-98/shape_offset = Vector2( 0, 0 )
-98/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-98/shape_one_way = false
-98/shape_one_way_margin = 0.0
-98/shapes = [  ]
-98/z_index = 0
-99/name = "VillageNewOrder.png 99"
-99/texture = ExtResource( 1 )
-99/tex_offset = Vector2( 0, 0 )
-99/modulate = Color( 1, 1, 1, 1 )
-99/region = Rect2( 80, 16, 32, 16 )
-99/tile_mode = 0
-99/occluder_offset = Vector2( 0, 0 )
-99/navigation_offset = Vector2( 0, 0 )
-99/shape_offset = Vector2( 0, 0 )
-99/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-99/shape_one_way = false
-99/shape_one_way_margin = 0.0
-99/shapes = [  ]
-99/z_index = 0
 100/name = "VillageNewOrder.png 100"
 100/texture = ExtResource( 1 )
 100/tex_offset = Vector2( 0, 0 )
@@ -1122,7 +1103,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 148/shape_one_way_margin = 0.0
 148/shapes = [  ]
 148/z_index = 0
-149/name = "VillageNewOrder.png 149"
+149/name = "f_drainpipe"
 149/texture = ExtResource( 1 )
 149/tex_offset = Vector2( 0, 0 )
 149/modulate = Color( 1, 1, 1, 1 )
@@ -1313,35 +1294,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 157/shape_one_way_margin = 0.0
 157/shapes = [  ]
 157/z_index = 0
-158/name = "VillageNewOrder.png 158"
-158/texture = ExtResource( 1 )
-158/tex_offset = Vector2( 0, 0 )
-158/modulate = Color( 1, 1, 1, 1 )
-158/region = Rect2( 256, 128, 48, 16 )
-158/tile_mode = 0
-158/occluder_offset = Vector2( 0, 0 )
-158/navigation_offset = Vector2( 0, 0 )
-158/shape_offset = Vector2( 0, 0 )
-158/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-158/shape_one_way = false
-158/shape_one_way_margin = 0.0
-158/shapes = [  ]
-158/z_index = 0
-159/name = "VillageNewOrder.png 159"
-159/texture = ExtResource( 1 )
-159/tex_offset = Vector2( 0, 0 )
-159/modulate = Color( 1, 1, 1, 1 )
-159/region = Rect2( 256, 144, 48, 16 )
-159/tile_mode = 0
-159/occluder_offset = Vector2( 0, 0 )
-159/navigation_offset = Vector2( 0, 0 )
-159/shape_offset = Vector2( 0, 0 )
-159/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-159/shape_one_way = false
-159/shape_one_way_margin = 0.0
-159/shapes = [  ]
-159/z_index = 0
-160/name = "VillageNewOrder.png 160"
+160/name = "f_pillar"
 160/texture = ExtResource( 1 )
 160/tex_offset = Vector2( 0, 0 )
 160/modulate = Color( 1, 1, 1, 1 )
@@ -1477,7 +1430,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 165/shape_one_way_margin = 0.0
 165/shapes = [  ]
 165/z_index = 0
-166/name = "VillageNewOrder.png 166"
+166/name = "b_block_side"
 166/texture = ExtResource( 1 )
 166/tex_offset = Vector2( 0, 0 )
 166/modulate = Color( 1, 1, 1, 1 )
@@ -1711,7 +1664,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 176/shape_one_way_margin = 0.0
 176/shapes = [  ]
 176/z_index = 0
-177/name = "VillageNewOrder.png 177"
+177/name = "f_drainpipe"
 177/texture = ExtResource( 1 )
 177/tex_offset = Vector2( 0, 0 )
 177/modulate = Color( 1, 1, 1, 1 )
@@ -1728,9 +1681,28 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 177/navigation_offset = Vector2( 0, 0 )
 177/shape_offset = Vector2( 0, 0 )
 177/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-177/shape_one_way = false
-177/shape_one_way_margin = 0.0
-177/shapes = [  ]
+177/shape = SubResource( 27 )
+177/shape_one_way = true
+177/shape_one_way_margin = 1.0
+177/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": true,
+"one_way_margin": 1.0,
+"shape": SubResource( 27 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 0 ),
+"one_way": true,
+"one_way_margin": 1.0,
+"shape": SubResource( 28 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 2, 0 ),
+"one_way": true,
+"one_way_margin": 1.0,
+"shape": SubResource( 29 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 177/z_index = 0
 178/name = "b_fence"
 178/texture = ExtResource( 1 )
@@ -1832,3 +1804,73 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 182/shape_one_way_margin = 0.0
 182/shapes = [  ]
 182/z_index = 0
+183/name = "VillageNewOrder.png 183"
+183/texture = ExtResource( 1 )
+183/tex_offset = Vector2( 0, 0 )
+183/modulate = Color( 1, 1, 1, 1 )
+183/region = Rect2( 80, 0, 32, 32 )
+183/tile_mode = 2
+183/autotile/icon_coordinate = Vector2( 0, 0 )
+183/autotile/tile_size = Vector2( 32, 16 )
+183/autotile/spacing = 0
+183/autotile/occluder_map = [  ]
+183/autotile/navpoly_map = [  ]
+183/autotile/priority_map = [  ]
+183/autotile/z_index_map = [  ]
+183/occluder_offset = Vector2( 0, 0 )
+183/navigation_offset = Vector2( 0, 0 )
+183/shape_offset = Vector2( 0, 0 )
+183/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+183/shape_one_way = false
+183/shape_one_way_margin = 0.0
+183/shapes = [  ]
+183/z_index = 0
+184/name = "f_pillar_top"
+184/texture = ExtResource( 1 )
+184/tex_offset = Vector2( 0, 0 )
+184/modulate = Color( 1, 1, 1, 1 )
+184/region = Rect2( 256, 128, 48, 32 )
+184/tile_mode = 2
+184/autotile/icon_coordinate = Vector2( 0, 0 )
+184/autotile/tile_size = Vector2( 48, 16 )
+184/autotile/spacing = 0
+184/autotile/occluder_map = [  ]
+184/autotile/navpoly_map = [  ]
+184/autotile/priority_map = [  ]
+184/autotile/z_index_map = [  ]
+184/occluder_offset = Vector2( 0, 0 )
+184/navigation_offset = Vector2( 0, 0 )
+184/shape_offset = Vector2( 0, 0 )
+184/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+184/shape_one_way = false
+184/shape_one_way_margin = 0.0
+184/shapes = [  ]
+184/z_index = 0
+185/name = "b_tree_bare"
+185/texture = ExtResource( 1 )
+185/tex_offset = Vector2( 0, 0 )
+185/modulate = Color( 1, 1, 1, 1 )
+185/region = Rect2( 464, 16, 32, 32 )
+185/tile_mode = 0
+185/occluder_offset = Vector2( 0, 0 )
+185/navigation_offset = Vector2( 0, 0 )
+185/shape_offset = Vector2( 0, 0 )
+185/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+185/shape_one_way = false
+185/shape_one_way_margin = 0.0
+185/shapes = [  ]
+185/z_index = 0
+186/name = "b_tree_full"
+186/texture = ExtResource( 1 )
+186/tex_offset = Vector2( 0, 0 )
+186/modulate = Color( 1, 1, 1, 1 )
+186/region = Rect2( 496, 0, 32, 48 )
+186/tile_mode = 0
+186/occluder_offset = Vector2( 0, 0 )
+186/navigation_offset = Vector2( 0, 0 )
+186/shape_offset = Vector2( 0, 0 )
+186/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+186/shape_one_way = false
+186/shape_one_way_margin = 0.0
+186/shapes = [  ]
+186/z_index = 0
