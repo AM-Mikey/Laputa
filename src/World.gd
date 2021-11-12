@@ -79,7 +79,7 @@ func _on_viewport_size_changed():
 		resolution_scale = 4.0
 	
 	$UILayer.scale = Vector2(resolution_scale, resolution_scale)
-	$Background.scale = Vector2(resolution_scale, resolution_scale)
+	$Back.scale = Vector2(resolution_scale, resolution_scale)
 	
 
 func load_title():
@@ -124,6 +124,7 @@ func on_level_change(level, door_index, level_name, music):
 	if $UILayer.has_node("DialogBox"):
 		$UILayer/DialogBox.stop_printing()
 	clear_spawn_layers()
+	clear_bg_layer()
 	
 	var level_path = current_level.filename
 	current_level.queue_free()
@@ -515,4 +516,8 @@ func clear_spawn_layers():
 	for c in $Middle.get_children():
 		c.free()
 	for c in $Front.get_children():
+		c.free()
+
+func clear_bg_layer():
+	for c in $BackgroundLayer.get_children():
 		c.free()

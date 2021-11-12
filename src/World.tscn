@@ -5,7 +5,6 @@
 [ext_resource path="res://src/World.gd" type="Script" id=8]
 
 [node name="World" type="Node2D"]
-visible = false
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 80.0 ]
@@ -14,8 +13,10 @@ development_stage = "alpha"
 release_version = "1.7"
 starting_level = "res://src/Level/Village/Village.tscn"
 
-[node name="Background" type="CanvasLayer" parent="."]
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -1
+
+[node name="Back" type="Node2D" parent="."]
 
 [node name="Recruit" parent="." instance=ExtResource( 5 )]
 position = Vector2( 256, 144 )
@@ -27,7 +28,7 @@ max_hp = 8
 z_index = 1
 
 [node name="Front" type="Node2D" parent="."]
-z_index = 3
+z_index = 1
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 pause_mode = 2

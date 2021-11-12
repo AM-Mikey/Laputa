@@ -224,61 +224,61 @@ func _on_Return_pressed():
 
 
 
-func _on_Mikey_pressed():
-	var dict = {
-		"ui_left": KEY_A,
-		"ui_right": KEY_D,
-		"ui_up": KEY_W,
-		"ui_down": KEY_S,
-		"move_left": KEY_A,
-		"move_right": KEY_D,
-		"look_up": KEY_W,
-		"look_down": KEY_S,
-		"jump": KEY_SPACE,
-		"inspect": KEY_E,
-		"inventory": KEY_I
-		}
-	for k in dict.keys():
-		InputMap.action_erase_events(k) #delete all other binds
-		var new_input = InputEventKey.new()
-		new_input.set_scancode((dict[k]))
-		InputMap.action_add_event(k, new_input)
-
-	var dict2 = {
-		"fire_manual": BUTTON_LEFT,
-		"fire_automatic": BUTTON_RIGHT,
-		"weapon_right": BUTTON_WHEEL_DOWN,
-		"weapon_left": BUTTON_WHEEL_UP
-		}
-	for k in dict2.keys():
-		InputMap.action_erase_events(k) #delete all other binds
-		var new_input = InputEventMouseButton.new()
-		new_input.button_index = dict2[k]
-		InputMap.action_add_event(k, new_input)
-
-func _on_CS_pressed():
-	var dict = {
-		"ui_left": KEY_LEFT,
-		"ui_right": KEY_RIGHT,
-		"ui_up": KEY_UP,
-		"ui_down": KEY_DOWN,
-		"move_left": KEY_LEFT,
-		"move_right": KEY_RIGHT,
-		"look_up": KEY_UP,
-		"look_down": KEY_DOWN,
-		"jump": KEY_Z,
-		"fire_manual": KEY_X,
-		"fire_automatic": KEY_SHIFT,
-		"inspect": KEY_C,
-		"weapon_right": KEY_A,
-		"weapon_left": KEY_S,
-		"inventory": KEY_Q
-		}
-	for k in dict.keys():
-		InputMap.action_erase_events(k) #delete all other binds
-		var new_input = InputEventKey.new()
-		new_input.set_scancode((dict[k]))
-		InputMap.action_add_event(k, new_input)
+#func _on_Mikey_pressed():
+#	var dict = {
+#		"ui_left": KEY_A,
+#		"ui_right": KEY_D,
+#		"ui_up": KEY_W,
+#		"ui_down": KEY_S,
+#		"move_left": KEY_A,
+#		"move_right": KEY_D,
+#		"look_up": KEY_W,
+#		"look_down": KEY_S,
+#		"jump": KEY_SPACE,
+#		"inspect": KEY_E,
+#		"inventory": KEY_I
+#		}
+#	for k in dict.keys():
+#		InputMap.action_erase_events(k) #delete all other binds
+#		var new_input = InputEventKey.new()
+#		new_input.set_scancode((dict[k]))
+#		InputMap.action_add_event(k, new_input)
+#
+#	var dict2 = {
+#		"fire_manual": BUTTON_LEFT,
+#		"fire_automatic": BUTTON_RIGHT,
+#		"weapon_right": BUTTON_WHEEL_DOWN,
+#		"weapon_left": BUTTON_WHEEL_UP
+#		}
+#	for k in dict2.keys():
+#		InputMap.action_erase_events(k) #delete all other binds
+#		var new_input = InputEventMouseButton.new()
+#		new_input.button_index = dict2[k]
+#		InputMap.action_add_event(k, new_input)
+#
+#func _on_CS_pressed():
+#	var dict = {
+#		"ui_left": KEY_LEFT,
+#		"ui_right": KEY_RIGHT,
+#		"ui_up": KEY_UP,
+#		"ui_down": KEY_DOWN,
+#		"move_left": KEY_LEFT,
+#		"move_right": KEY_RIGHT,
+#		"look_up": KEY_UP,
+#		"look_down": KEY_DOWN,
+#		"jump": KEY_Z,
+#		"fire_manual": KEY_X,
+#		"fire_automatic": KEY_SHIFT,
+#		"inspect": KEY_C,
+#		"weapon_right": KEY_A,
+#		"weapon_left": KEY_S,
+#		"inventory": KEY_Q
+#		}
+#	for k in dict.keys():
+#		InputMap.action_erase_events(k) #delete all other binds
+#		var new_input = InputEventKey.new()
+#		new_input.set_scancode((dict[k]))
+#		InputMap.action_add_event(k, new_input)
 		
 
 #func _on_viewport_size_changed():

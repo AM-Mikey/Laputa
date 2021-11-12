@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/Actor/Enemy/Crusher.png" type="Texture" id=1]
+[ext_resource path="res://src/Actor/Enemy/Crusher.gd" type="Script" id=2]
+[ext_resource path="res://assets/SFX/Placeholder/snd_critter_jump.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/SFX/FrogCroak.ogg" type="AudioStream" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 2 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Float"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[node name="Crusher" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 520
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1 )
+shape = SubResource( 1 )
+
+[node name="Standable" type="KinematicBody2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Standable"]
+position = Vector2( 0, -6 )
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+light_mask = 4
+texture = ExtResource( 1 )
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Float = SubResource( 3 )
+
+[node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+attenuation = 0.164938
+bus = "SFX"
+
+[node name="PosCroak" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+bus = "SFX"
+
+[node name="PosJump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+bus = "SFX"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true

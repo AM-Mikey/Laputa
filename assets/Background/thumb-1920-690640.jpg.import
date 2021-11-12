@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/NewBug.png-3fd27d8e41c19295fbeeb04b9e9ccb43.stex"
+path="res://.import/thumb-1920-690640.jpg-34f77c4d98768d672bd728877f54467f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Icon/Discord/NewBug.png"
-dest_files=[ "res://.import/NewBug.png-3fd27d8e41c19295fbeeb04b9e9ccb43.stex" ]
+source_file="res://assets/Background/thumb-1920-690640.jpg"
+dest_files=[ "res://.import/thumb-1920-690640.jpg-34f77c4d98768d672bd728877f54467f.stex" ]
 
 [params]
 

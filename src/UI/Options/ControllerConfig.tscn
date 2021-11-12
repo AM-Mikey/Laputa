@@ -1,9 +1,6 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=1]
-[ext_resource path="res://src/UI/LightBox.tres" type="StyleBox" id=2]
-[ext_resource path="res://src/UI/BluedBox.tres" type="StyleBox" id=3]
-[ext_resource path="res://src/UI/DarkBox.tres" type="StyleBox" id=4]
 [ext_resource path="res://src/UI/Options/ControllerConfig.gd" type="Script" id=5]
 [ext_resource path="res://assets/UI/Settings/ControllerConfig/FrontBack.png" type="Texture" id=6]
 [ext_resource path="res://assets/UI/Settings/ControllerConfig/CompassBack.png" type="Texture" id=7]
@@ -16,14 +13,6 @@
 [ext_resource path="res://assets/UI/Settings/ControllerConfig/TopBack.png" type="Texture" id=14]
 [ext_resource path="res://assets/UI/Settings/ControllerConfig/Trigger.png" type="Texture" id=15]
 [ext_resource path="res://assets/UI/Settings/ControllerConfig/CompassFront.png" type="Texture" id=16]
-
-[sub_resource type="StyleBoxEmpty" id=1]
-
-[sub_resource type="StyleBoxEmpty" id=2]
-
-[sub_resource type="StyleBoxEmpty" id=3]
-
-[sub_resource type="StyleBoxEmpty" id=4]
 
 [node name="ControllerConfig" type="MarginContainer"]
 anchor_right = 1.0
@@ -370,26 +359,26 @@ __meta__ = {
 }
 
 [node name="L3" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 41.0
-margin_right = 75.0
+margin_left = 25.0
+margin_right = 59.0
 margin_bottom = 32.0
 
 [node name="Select" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 79.0
-margin_right = 113.0
+margin_left = 63.0
+margin_right = 97.0
 margin_bottom = 32.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Start" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 117.0
-margin_right = 151.0
+margin_left = 101.0
+margin_right = 135.0
 margin_bottom = 32.0
 
 [node name="R3" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 155.0
-margin_right = 189.0
+margin_left = 139.0
+margin_right = 173.0
 margin_bottom = 32.0
 
 [node name="AnalogDisable2" type="CheckButton" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
@@ -413,27 +402,17 @@ margin_bottom = 24.0
 text = "Accept Button"
 
 [node name="Default" type="Button" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 193.0
-margin_right = 249.0
+margin_left = 177.0
+margin_right = 241.0
 margin_bottom = 32.0
 custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/focus = SubResource( 1 )
-custom_styles/disabled = SubResource( 2 )
-custom_styles/normal = ExtResource( 3 )
 text = "Defaults"
 
 [node name="Return" type="Button" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 253.0
+margin_left = 245.0
 margin_right = 300.0
 margin_bottom = 32.0
 custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/normal = ExtResource( 3 )
 text = "Return"
 
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/HBoxContainer2/Default" to="." method="_on_Default_pressed"]

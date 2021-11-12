@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/OldBug.png-29a9100fcccbfd890639cd85f65127f5.stex"
+path="res://.import/OldBug.png-458695097316295208b7bf0922dbef68.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Icon/discord/OldBug.png"
-dest_files=[ "res://.import/OldBug.png-29a9100fcccbfd890639cd85f65127f5.stex" ]
+source_file="res://assets/Icon/Discord/OldBug.png"
+dest_files=[ "res://.import/OldBug.png-458695097316295208b7bf0922dbef68.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

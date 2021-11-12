@@ -271,8 +271,8 @@ shape = SubResource( 1 )
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 visible = false
-monitorable = false
 collision_layer = 0
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 modulate = Color( 0.188235, 0.537255, 0.529412, 0.188235 )

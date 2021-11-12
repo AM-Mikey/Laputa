@@ -1,16 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=1]
-[ext_resource path="res://src/UI/LightBox.tres" type="StyleBox" id=2]
-[ext_resource path="res://src/UI/BluedBox.tres" type="StyleBox" id=3]
-[ext_resource path="res://src/UI/DarkBox.tres" type="StyleBox" id=4]
 [ext_resource path="res://src/UI/Font/Momo.tres" type="DynamicFont" id=5]
 [ext_resource path="res://src/UI/Options/KeyConfig.gd" type="Script" id=6]
 [ext_resource path="res://src/UI/Font/MomoNoSpacing.tres" type="DynamicFont" id=8]
-
-[sub_resource type="StyleBoxEmpty" id=1]
-
-[sub_resource type="StyleBoxEmpty" id=2]
 
 [node name="KeyConfig" type="MarginContainer"]
 anchor_right = 1.0
@@ -66,12 +59,12 @@ text = "Debug Controls:"
 [node name="ScrollContainers" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 18.0
 margin_right = 464.0
-margin_bottom = 227.0
+margin_bottom = 220.0
 size_flags_vertical = 3
 
 [node name="Normal" type="ScrollContainer" parent="MarginContainer/VBoxContainer/ScrollContainers"]
 margin_right = 230.0
-margin_bottom = 209.0
+margin_bottom = 202.0
 size_flags_horizontal = 3
 follow_focus = true
 __meta__ = {
@@ -349,7 +342,7 @@ __meta__ = {
 [node name="Debug" type="ScrollContainer" parent="MarginContainer/VBoxContainer/ScrollContainers"]
 margin_left = 234.0
 margin_right = 464.0
-margin_bottom = 209.0
+margin_bottom = 202.0
 size_flags_horizontal = 3
 follow_focus = true
 __meta__ = {
@@ -537,39 +530,16 @@ __meta__ = {
 }
 
 [node name="Navigation" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 231.0
+margin_top = 224.0
 margin_right = 464.0
 margin_bottom = 254.0
 alignment = 2
 
-[node name="Mikey" type="Button" parent="MarginContainer/VBoxContainer/Navigation"]
-visible = false
-margin_left = 321.0
-margin_right = 408.0
-margin_bottom = 16.0
-text = "WASD+Mouse"
-flat = true
-
-[node name="CS" type="Button" parent="MarginContainer/VBoxContainer/Navigation"]
-visible = false
-margin_left = 351.0
-margin_right = 408.0
-margin_bottom = 16.0
-text = "CS-Like"
-flat = true
-
 [node name="Return" type="Button" parent="MarginContainer/VBoxContainer/Navigation"]
-margin_left = 417.0
+margin_left = 409.0
 margin_right = 464.0
-margin_bottom = 23.0
+margin_bottom = 30.0
 custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/focus = SubResource( 1 )
-custom_styles/disabled = SubResource( 2 )
-custom_styles/normal = ExtResource( 3 )
 text = "Return"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Navigation/Mikey" to="." method="_on_Mikey_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Navigation/CS" to="." method="_on_CS_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Navigation/Return" to="." method="_on_Return_pressed"]

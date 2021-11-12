@@ -18,9 +18,6 @@ margin_bottom = 264.0
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 2
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
 margin_right = 416.0
