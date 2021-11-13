@@ -1,26 +1,18 @@
 extends Enemy
 
 
-export var amplitude: float = 2
-export var frequency: float = 3
-#export var period: float = .9
+export var amplitude: float = 16
+export var frequency: float = 4
 
+var middle_height: int
 var time: float = 0
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	hp = 4
-	damage_on_contact = 1
-	speed = Vector2(12, 120)
-	gravity = 200
-	
-	level = 2
+	$AnimationPlayer.play("Float")
+	middle_height = global_position.y
 
 func _physics_process(delta):
 	if not dead and not disabled:
 		time += delta * frequency
-		position.y += cos(time) * amplitude
-		
-	
-		
-		#move_and_slide(velocity)
+		position.y = middle_height + cos(time) * amplitude
+

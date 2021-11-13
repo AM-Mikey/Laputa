@@ -34,7 +34,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Item/KeyItem/KeyItem.gd"
 }, {
-"base": "Node2D",
+"base": "Reference",
 "class": "Movement",
 "language": "GDScript",
 "path": "res://src/duncathan_movement.gd"
@@ -326,5 +326,6 @@ set_target={
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 2d/snapping/use_gpu_pixel_snap=true
 environment/default_environment="res://default_env.tres"
