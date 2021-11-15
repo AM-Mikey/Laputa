@@ -2,12 +2,14 @@ extends Control
 
 const LEVELSELECT = preload("res://src/UI/LevelSelect.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
+const RECRUIT = preload("res://src/Actor/Player/Recruit.tscn")
+const HUD = preload("res://src/UI/HUD/HUD.tscn")
 
 var music_theme = load("res://assets/Music/laputaintro.wav")
 
 onready var world = get_tree().get_root().get_node("World")
-onready var player = get_tree().get_root().get_node("World/Recruit")
-onready var hud = get_tree().get_root().get_node("World/UILayer/HUD")
+#onready var player = get_tree().get_root().get_node("World/Recruit")
+#onready var hud = get_tree().get_root().get_node("World/UILayer/HUD")
 
 
 func _ready():
@@ -41,9 +43,8 @@ func _on_New_pressed():
 	queue_free()
 	
 	world.on_level_change(world.starting_level, 0, "LevelSelect", "res://assets/Music/XXXX.ogg")
-	world.get_node("Recruit").visible = true
-	world.get_node("Recruit").disabled = false
-	world.get_node("UILayer/HUD").visible = true
+	world.add_child(RECRUIT.instance())
+	world.get_node("UILayer").add_child(HUD.instance())
 	
 	var spawn_points = get_tree().get_nodes_in_group("SpawnPoints")
 	for s in spawn_points:
@@ -52,9 +53,8 @@ func _on_New_pressed():
 
 func _on_Load_pressed():
 	visible = false
-	player.disabled = false
-	player.visible = true
-	hud.visible = true
+	world.add_child(RECRUIT.instance())
+	world.get_node("UILayer").add_child(HUD.instance())
 	world.load_player_data_from_save()
 	world.load_level_data_from_save()
 	world.copy_level_data_to_temp()

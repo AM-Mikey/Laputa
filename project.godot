@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Actor/Actor.gd"
 }, {
+"base": "Resource",
+"class": "Background",
+"language": "GDScript",
+"path": "res://src/Background/Background.gd"
+}, {
 "base": "Actor",
 "class": "Boss",
 "language": "GDScript",
@@ -34,7 +39,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Item/KeyItem/KeyItem.gd"
 }, {
-"base": "Reference",
+"base": "Node2D",
 "class": "Movement",
 "language": "GDScript",
 "path": "res://src/duncathan_movement.gd"
@@ -56,6 +61,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Actor": "res://assets/Icon/ActorIcon.png",
+"Background": "res://assets/Icon/BackgroundIcon.png",
 "Boss": "res://assets/Icon/BossIcon.png",
 "Bullet": "res://assets/Icon/BulletIcon.png",
 "Enemy": "res://assets/Icon/EnemyIcon.png",
@@ -326,6 +332,5 @@ set_target={
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 2d/snapping/use_gpu_pixel_snap=true
 environment/default_environment="res://default_env.tres"

@@ -1,7 +1,5 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/UI/HUD/HUD.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Actor/Player/Recruit.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/World.gd" type="Script" id=8]
 
 [node name="World" type="Node2D"]
@@ -18,12 +16,6 @@ layer = -1
 
 [node name="Back" type="Node2D" parent="."]
 
-[node name="Recruit" parent="." instance=ExtResource( 5 )]
-position = Vector2( 256, 144 )
-z_index = 1
-hp = 8
-max_hp = 8
-
 [node name="Middle" type="Node2D" parent="."]
 z_index = 1
 
@@ -33,10 +25,10 @@ z_index = 1
 [node name="UILayer" type="CanvasLayer" parent="."]
 pause_mode = 2
 
-[node name="HUD" parent="UILayer" instance=ExtResource( 2 )]
-
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 bus = "Music"
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
 bus = "SFX"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]

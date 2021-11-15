@@ -9,13 +9,13 @@ func _ready():
 	add_to_group("Levels")
 	if self.has_node("Camera2D"):
 		get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
-		$Camera2D.zoom = Vector2(1 / world.resolution_scale, 1 / world.resolution_scale)
+		on_viewport_size_changed()
 	
 	if self.has_node("Notes"):
 		get_node("Notes").visible = false
 	
 
-func _on_viewport_size_changed():
+func on_viewport_size_changed():
 	$Camera2D.zoom = Vector2(1 / world.resolution_scale, 1 / world.resolution_scale)
 	
 

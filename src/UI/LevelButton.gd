@@ -1,9 +1,12 @@
 extends Control
 
+const RECRUIT = preload("res://src/Actor/Player/Recruit.tscn")
+const HUD = preload("res://src/UI/HUD/HUD.tscn")
 
-onready var world = get_tree().get_root().get_node("World")
 
 var level = "res://src/Level/Demo/01PirateCliff.tscn"
+
+onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
 	self.text = (level.trim_prefix("res://src/Level/")).trim_suffix(".tscn") #"..." + 
@@ -22,9 +25,8 @@ func _on_LevelButton_pressed():
 		world.get_node("UILayer/TitleScreen").queue_free()
 	if world.has_node("UILayer/PauseMenu"):
 		world.get_node("UILayer/PauseMenu").unpause()
-	world.get_node("Recruit").visible = true
-	world.get_node("Recruit").disabled = false
-	world.get_node("UILayer/HUD").visible = true
+	world.add_child(RECRUIT.instance())
+	world.get_node("UILayer").add_child(HUD.instance())
 	
 	yield(get_tree(), "idle_frame")
 	

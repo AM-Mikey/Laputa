@@ -4,56 +4,60 @@ const WEAPONICON = preload("res://src/UI/HUD/WeaponIcon.tscn")
 const AMMOCOUNT = preload("res://src/UI/HUD/AmmoCount.tscn")
 
 
-onready var p = get_tree().get_root().get_node("World/Recruit")
+#onready var p = get_tree().get_root().get_node("World/Recruit")
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
 	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 	
-	update_hp()
-	update_weapon()
-
 	
+	if world.has_node("Recruit"):
+		var pc = world.get_node("Recruit")
+		pc.connect("hp_updated", self, "update_hp")
+		pc.connect("weapons_updated", self, "update_weapons")
+		pc.connect("total_xp_updated", self, "update_total_xp")
+		pc.setup_hud()
+		
 
 func _process(_delta):
 	$HpBar/HpLost/HpLostCap.position.x = 38 * $HpBar/HpLost.value / $HpBar/HpLost.max_value
-	
-	if p.get_node("WeaponManager").weapon != null:
-		if $CooldownBar/TextureProgress.visible == false:
+	if world.has_node("Recruit"):
+		var pc = world.get_node("Recruit")
+		if pc.weapon_array.front() != null: #TODO: make this independant
 			$CooldownBar/TextureProgress.visible = true
-		$CooldownBar/TextureProgress.value = 100 - ((p.get_node("WeaponManager/CooldownTimer").time_left / p.get_node("WeaponManager").weapon.cooldown_time) * 100)
+			$CooldownBar/TextureProgress.value = 100 - ((pc.get_node("WeaponManager/CooldownTimer").time_left / pc.weapon_array.front().cooldown_time) * 100)
+		else: $CooldownBar/TextureProgress.visible = false
 
-func update_weapon():
+func update_weapons(weapon_array):
 	for i in $Weapon/HBoxContainer.get_children(): #clear old
-		i.queue_free()
-
-	for a in p.weapon_array:
-		if p.weapon_array.find(a) == 0:
-				var weapon_icon = WEAPONICON.instance() #add the first icon
-				weapon_icon.texture = p.weapon_array.front()["icon_texture"]
-				$Weapon/HBoxContainer.add_child(weapon_icon)
-				$Weapon/HBoxContainer.move_child(weapon_icon, 0)
+			i.queue_free()
+	for w in weapon_array:
+		if weapon_array.find(w) == 0: #check if front
+			var weapon_icon = WEAPONICON.instance() #add the first icon
+			weapon_icon.texture = w["icon_texture"]
+			$Weapon/HBoxContainer.add_child(weapon_icon)
+			$Weapon/HBoxContainer.move_child(weapon_icon, 0)
+			
+			update_xp(w.xp, w.max_xp, w.level, w.max_level)
+			update_ammo(w.ammo, w.max_ammo, w.needs_ammo)
 		else: 
 			var weapon_icon = WEAPONICON.instance() #add all other icons
-			weapon_icon.texture = a["texture"]
+			weapon_icon.texture = w["texture"]
 			$Weapon/HBoxContainer.add_child(weapon_icon)
 
-	update_xp(false)
-	update_ammo()
-
-func update_hp():
-	$HpBar/HpProgress.value = p.hp
-	display_hp_number(p.hp, p.max_hp)
+func update_hp(hp, max_hp):
+	$HpBar/HpProgress.value = hp
+	display_hp_number(hp, max_hp)
 	
-	$HpBar/HpProgress.max_value = p.max_hp
-	$HpBar/HpLost.max_value = p.max_hp
+	$HpBar/HpProgress.max_value = max_hp
+	$HpBar/HpLost.max_value = max_hp
 	
 	$HpBar/HpProgress/HpCap.position.x = 38 * $HpBar/HpProgress.value / $HpBar/HpProgress.max_value
 	
-	if p.hp < $HpBar/HpLost.value:
+	if hp < $HpBar/HpLost.value:
 		$AnimationPlayer.play("Flash")
-	$HpBar/LostTween.interpolate_property($HpBar/HpLost, "value", $HpBar/HpLost.value, p.hp, 0.4, Tween.TRANS_SINE, Tween.EASE_IN_OUT, 0.4)
+	$HpBar/LostTween.interpolate_property($HpBar/HpLost, "value", $HpBar/HpLost.value, hp, 0.4, Tween.TRANS_SINE, Tween.EASE_IN_OUT, 0.4)
 	$HpBar/LostTween.start()
 
 
@@ -85,20 +89,20 @@ func display_hp_number(hp, max_hp):
 		$HpBar/Num1.frame_coords.y = 5
 		$HpBar/Num2.frame_coords.y = 5
 
-func update_xp(flash):
+func update_xp(xp, max_xp, level, max_level):
 	modulate = Color(1, 1, 1) #to prevent flash animation from stopping on a transparent frame
-	display_money_number()
-	$XpBar/Num.frame_coords.x = p.weapon_array.front().level
-	
-	if flash:
-		$AnimationPlayer.play("XpFlash")
-	$XpBar/XpProgress.value = p.weapon_array.front().xp
-		
-	$XpBar/XpProgress.max_value = p.weapon_array.front().max_xp
-	
-	
-	
-	if p.weapon_array.front().xp == p.weapon_array.front().max_xp and p.weapon_array.front().level == p.weapon_array.front().max_level:
+
+	$XpBar/Num.frame_coords.x = level
+
+#	if flash:
+#		$AnimationPlayer.play("XpFlash")
+	$XpBar/XpProgress.value = xp
+
+	$XpBar/XpProgress.max_value = max_xp
+
+
+
+	if xp == max_xp and level == max_level:
 		$XpBar/XpProgress.visible = false
 		$XpBar/XpMax.visible = true
 	else:
@@ -107,45 +111,46 @@ func update_xp(flash):
 
 
 
-func update_ammo():
+func update_ammo(ammo, max_ammo, needs_ammo):
 	if $Weapon/HBoxContainer.has_node("AmmoCount"):
 			$Weapon/HBoxContainer/AmmoCount.free()
-	if p.weapon_array.front().needs_ammo:
+	if needs_ammo:
 		var ammo_count = AMMOCOUNT.instance()
-		ammo_count.ammo = p.weapon_array.front().ammo
-		ammo_count.max_ammo = p.weapon_array.front().max_ammo
+		ammo_count.ammo = ammo
+		ammo_count.max_ammo = max_ammo
 		$Weapon/HBoxContainer.add_child(ammo_count)
 		$Weapon/HBoxContainer.move_child(ammo_count, 1)
 
 
-func display_money_number():
-	if p.total_xp >= 0 and p.total_xp < 10:
+func update_total_xp(total_xp):
+	if total_xp >= 0 and total_xp < 10:
 		$MoneyCount/Num1.visible = false
 		$MoneyCount/Num2.visible = false
 		$MoneyCount/Num3.visible = true
-		$MoneyCount/Num3.frame_coords.x = p.total_xp
-	elif p.total_xp >= 10 and p.total_xp < 100:
+		$MoneyCount/Num3.frame_coords.x = total_xp
+	elif total_xp >= 10 and total_xp < 100:
 		$MoneyCount/Num1.visible = false
 		$MoneyCount/Num2.visible = true
 		$MoneyCount/Num3.visible = true
-		$MoneyCount/Num2.frame_coords.x = (p.total_xp % 100) / 10
-		$MoneyCount/Num3.frame_coords.x = p.total_xp % 10
-	elif p.total_xp >= 100 and p.total_xp < 1000:
+		$MoneyCount/Num2.frame_coords.x = (total_xp % 100) / 10
+		$MoneyCount/Num3.frame_coords.x = total_xp % 10
+	elif total_xp >= 100 and total_xp < 1000:
 		$MoneyCount/Num1.visible = true
 		$MoneyCount/Num2.visible = true
 		$MoneyCount/Num3.visible = true
-		$MoneyCount/Num1.frame_coords.x = (p.total_xp % 1000) / 100
-		$MoneyCount/Num2.frame_coords.x = (p.total_xp % 100) / 10
-		$MoneyCount/Num3.frame_coords.x = p.total_xp % 10
-	elif p.total_xp >= 1000:
+		$MoneyCount/Num1.frame_coords.x = (total_xp % 1000) / 100
+		$MoneyCount/Num2.frame_coords.x = (total_xp % 100) / 10
+		$MoneyCount/Num3.frame_coords.x = total_xp % 10
+	elif total_xp >= 1000:
 		$MoneyCount/Num1.visible = true
 		$MoneyCount/Num2.visible = true
 		$MoneyCount/Num3.visible = true
 		$MoneyCount/Num1.frame_coords.x = 9
 		$MoneyCount/Num2.frame_coords.x = 9
 		$MoneyCount/Num3.frame_coords.x = 9
+		print("WARNING: hud cannot display total_xp higher than 999")
 	else:
-		printerr("ERROR: hud cannot display money number")
+		printerr("ERROR: hud cannot display total_xp value of: " + total_xp)
 
 
 func on_viewport_size_changed():

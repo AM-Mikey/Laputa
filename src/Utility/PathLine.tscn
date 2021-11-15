@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="PathLine" type="Line2D"]
+width = 0.5
+default_color = Color( 0.976471, 0.811765, 0.247059, 1 )
+antialiased = true

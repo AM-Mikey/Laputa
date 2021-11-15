@@ -71,6 +71,9 @@ format = 1
 
 [node name="Crusher" parent="Actors" instance=ExtResource( 7 )]
 position = Vector2( 272, 232 )
+level = 2
+amplitude_v = 0.0
+frequency = 1.0
 
 [node name="Triggers" type="Node2D" parent="."]
 

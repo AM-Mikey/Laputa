@@ -103,8 +103,9 @@ func _on_ResolutionScale_item_selected(index):
 		world.resolution_scale = 4.0
 		world.viewport_size_ignore = true
 	
-	world.get_node("Recruit").get_node("PlayerCamera").zoom = Vector2(1 / world.resolution_scale, 1 / world.resolution_scale)
-	world.get_node("UILayer").scale = Vector2(world.resolution_scale, world.resolution_scale)
+	world.get_node("TitleCam").zoom = Vector2(1 / world.resolution_scale, 1 / world.resolution_scale)
+	#world.get_node("UILayer").scale = Vector2(world.resolution_scale, world.resolution_scale)
+	#TODO: make sure this carrys over for playercamera
 	
 	if get_tree().get_nodes_in_group("CameraLimiters").size() != 0:
 		for c in get_tree().get_nodes_in_group("CameraLimiters"):

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://src/Background/Background.gd" type="Script" id=1]
+[ext_resource path="res://assets/Background/cyansky3.png" type="Texture" id=2]
+[ext_resource path="res://assets/Background/cyansky1.png" type="Texture" id=3]
+[ext_resource path="res://assets/Background/cyansky0.png" type="Texture" id=4]
+[ext_resource path="res://assets/Background/cyansky2.png" type="Texture" id=5]
+
+[resource]
+script = ExtResource( 1 )
+textures = [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 2 ) ]
+motion_scales = [ Vector2( 0, 0 ), Vector2( 0.25, 0.25 ), Vector2( 0.5, 0.5 ), Vector2( 0.75, 0.75 ) ]

@@ -9,7 +9,7 @@
 [ext_resource path="res://assets/SFX/Placeholder/snd_quote_jump.ogg" type="AudioStream" id=7]
 [ext_resource path="res://assets/SFX/Placeholder/snd_quote_hurt.ogg" type="AudioStream" id=8]
 [ext_resource path="res://assets/SFX/Placeholder/snd_thud.ogg" type="AudioStream" id=9]
-[ext_resource path="res://src/Actor/Player/PlayerCamera.gd" type="Script" id=10]
+[ext_resource path="res://src/Actor/Player/PlayerCamera.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Actor/Player/AnimationManager.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -3171,10 +3171,11 @@ tracks/0/keys = {
 }
 
 [node name="Recruit" type="KinematicBody2D"]
+z_index = 1
 collision_mask = 520
 script = ExtResource( 2 )
-hp = 3
-max_hp = 3
+hp = 8
+max_hp = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 1, 1, 1, 0.4 )
@@ -3204,15 +3205,7 @@ texture = ExtResource( 5 )
 vframes = 12
 frame = 3
 
-[node name="PlayerCamera" type="Camera2D" parent="."]
-current = true
-limit_smoothed = true
-smoothing_enabled = true
-script = ExtResource( 10 )
-
-[node name="TweenVertical" type="Tween" parent="PlayerCamera"]
-
-[node name="TweenHorizontal" type="Tween" parent="PlayerCamera"]
+[node name="PlayerCamera" parent="." instance=ExtResource( 10 )]
 
 [node name="BulletOrigin" type="Position2D" parent="."]
 position = Vector2( 0, -8 )

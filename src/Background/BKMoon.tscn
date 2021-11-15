@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/Background/Moon3.png" type="Texture" id=1]
+[ext_resource path="res://assets/Background/Moon2.png" type="Texture" id=2]
+[ext_resource path="res://assets/Background/Moon4.png" type="Texture" id=3]
+[ext_resource path="res://assets/Background/Moon0.png" type="Texture" id=4]
+[ext_resource path="res://assets/Background/Moon1.png" type="Texture" id=6]
+
+[node name="BKMoon" type="ParallaxBackground"]
+
+[node name="ParallaxLayer0" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0, 0 )
+
+[node name="Moon1" type="Sprite" parent="ParallaxLayer0"]
+texture = ExtResource( 4 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 4000, 240 )
+
+[node name="ParallaxLayer1" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.25, 0.25 )
+
+[node name="Moon1" type="Sprite" parent="ParallaxLayer1"]
+texture = ExtResource( 6 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 4000, 240 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.5, 0.5 )
+
+[node name="Moon1" type="Sprite" parent="ParallaxLayer2"]
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 4000, 240 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.75, 0.75 )
+
+[node name="Moon1" type="Sprite" parent="ParallaxLayer3"]
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 4000, 240 )
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+
+[node name="Moon1" type="Sprite" parent="ParallaxLayer4"]
+texture = ExtResource( 3 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 4000, 240 )

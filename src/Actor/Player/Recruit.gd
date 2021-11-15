@@ -4,6 +4,7 @@ extends Player
 const LEVELUP = preload("res://src/Effect/LevelUp.tscn")
 const LEVELDOWN = preload("res://src/Effect/LevelDown.tscn")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
+const DEATHCAM = preload("res://src/Utility/DeathCam.tscn")
 
 const SNAP_DIRECTION = Vector2.DOWN
 const SNAP_LENGTH = 4.0
@@ -11,6 +12,12 @@ const SNAP_LENGTH = 4.0
 var sfx_get_heart = load("res://assets/SFX/Placeholder/snd_health_refill.ogg")
 var sfx_get_xp = load("res://assets/SFX/Placeholder/snd_get_xp.ogg")
 var sfx_get_ammo = load("res://assets/SFX/Placeholder/snd_get_missile.ogg")
+
+
+signal hp_updated(hp, max_hp)
+signal total_xp_updated(total_xp)
+signal weapons_updated(weapon_array)
+
 
 export var forgiveness_time = 0.05
 #export var minimum_jump_time = 0.0000000001 #was 0.1 #still too much? #something else is forcing us to jump minimum y
@@ -38,7 +45,7 @@ var movement_profile = "sigma"
 var jump_type: String
 
 var invincible = false
-var disabled = false
+var disabled = true
 var knockback = false
 
 var is_in_enemy = false
@@ -64,6 +71,7 @@ var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
 
 onready var world = get_tree().get_root().get_node("World")
+onready var HUD
 
 
 
@@ -80,6 +88,9 @@ func _ready():
 	
 	if weapon_array.front() != null:
 		$WeaponSprite.texture = weapon_array.front().texture
+	
+
+
 
 func _physics_process(_delta):
 
@@ -192,47 +203,46 @@ func jump():
 
 
 func hit(damage, knockback_direction):
-	if disabled != true:
-		if invincible == false:
-			if knockback_direction != Vector2.ZERO:
-				snap_vector = Vector2.ZERO
-				knockback = true
-			if damage > 0:
-				hp -= damage
-				$HurtSound.play()
-				update_hp()
-				###DamageNumber
-				var damagenum = DAMAGENUMBER.instance()
-				damagenum.position = global_position
-				damagenum.value = damage
-				get_tree().get_root().get_node("World/Front").add_child(damagenum)
-				###
-				do_iframes(damage, knockback_direction)
+	if not disabled and not invincible:
+		if knockback_direction != Vector2.ZERO:
+			snap_vector = Vector2.ZERO
+			knockback = true
+		if damage > 0:
+			hp -= damage
+			$HurtSound.play()
+			emit_signal("hp_updated", hp, max_hp)
+			###DamageNumber
+			var damagenum = DAMAGENUMBER.instance()
+			damagenum.position = global_position
+			damagenum.value = damage
+			get_tree().get_root().get_node("World/Front").add_child(damagenum)
+			###
+			do_iframes(damage, knockback_direction)
 
-				if hp <= 0:
-					die()
+			if hp <= 0:
+				die()
 
-				if weapon_array.front() == null:
-					return
-				elif weapon_array.front().level == 1 and weapon_array.front().xp == 0: #if not level 1 and 0 xp, take away xp
-					return
-				else:
-					weapon_array.front().xp = max(weapon_array.front().xp - (damage * 2), 0)
-					update_xp()
+			if weapon_array.front() == null:
+				return
+			elif weapon_array.front().level == 1 and weapon_array.front().xp == 0: #if not level 1 and 0 xp, take away xp
+				return
+			else:
+				weapon_array.front().xp = max(weapon_array.front().xp - (damage * 2), 0)
+				emit_signal("weapons_updated", weapon_array)
+			
+			if weapon_array.front().xp < 0 and weapon_array.front().level != 1: #level down
+				var next_level = load(weapon_array.front().resource_path.replace(weapon_array.front().level, weapon_array.front().level - 1))
+				var saved_xp = weapon_array.front().xp #negative number
+				var saved_ammo = weapon_array.front().ammo
+				weapon_array.pop_front()
+				weapon_array.push_front(next_level)
+				weapon_array.front().ammo = saved_ammo
+				weapon_array.front().xp = weapon_array.front().max_xp + saved_xp
+				emit_signal("weapons_updated", weapon_array)
 				
-				if weapon_array.front().xp < 0 and weapon_array.front().level != 1: #level down
-					var next_level = load(weapon_array.front().resource_path.replace(weapon_array.front().level, weapon_array.front().level - 1))
-					var saved_xp = weapon_array.front().xp #negative number
-					var saved_ammo = weapon_array.front().ammo
-					weapon_array.pop_front()
-					weapon_array.push_front(next_level)
-					weapon_array.front().ammo = saved_ammo
-					weapon_array.front().xp = weapon_array.front().max_xp + saved_xp
-					update_weapon()
-					
-					var level_down = LEVELDOWN.instance()
-					get_tree().get_root().get_node("World/Front").add_child(level_down)
-					level_down.position = global_position
+				var level_down = LEVELDOWN.instance()
+				get_tree().get_root().get_node("World/Front").add_child(level_down)
+				level_down.position = global_position
 
 
 
@@ -405,13 +415,13 @@ func _input(event):
 				weapon_array.push_front(next_level)
 				weapon_array.front().ammo = saved_ammo
 				weapon_array.front().xp = saved_xp
-				update_weapon()
+				emit_signal("weapons_updated", weapon_array)
 
 				var level_up = LEVELUP.instance()
 				get_tree().get_root().get_node("World/Front").add_child(level_up)
 				level_up.position = global_position
 
-				update_xp()
+				emit_signal("weapons_updated", weapon_array)
 
 		if event.is_action_pressed("level_down"):
 			if weapon_array.front().level != 1:
@@ -423,7 +433,7 @@ func _input(event):
 				weapon_array.push_front(next_level)
 				weapon_array.front().ammo = saved_ammo
 				weapon_array.front().xp = weapon_array.front().max_xp + saved_xp
-				update_weapon()
+				emit_signal("weapons_updated", weapon_array)
 
 				var level_down = LEVELDOWN.instance()
 				get_tree().get_root().get_node("World/Front").add_child(level_down)
@@ -503,11 +513,12 @@ func _on_ItemDetector_area_entered(area):
 			$PickupSound.play()
 			if hp > max_hp:
 				hp = max_hp
-			update_hp()
+			emit_signal("hp_updated", hp, max_hp)
 			area.get_parent().queue_free()
 		
 		if area.get_collision_layer_bit(11): #xp
 			total_xp += area.get_parent().value
+			emit_signal("total_xp_updated", total_xp)
 			if weapon_array.front().level == weapon_array.front().max_level and weapon_array.front().xp == weapon_array.front().max_xp:
 				pass
 			else:
@@ -518,7 +529,8 @@ func _on_ItemDetector_area_entered(area):
 					print("already max level")
 					$PickupSound.stream = sfx_get_xp
 					$PickupSound.play()
-					update_xp()
+				
+					emit_signal("weapons_updated", weapon_array)
 					area.get_parent().queue_free()
 					
 				else: #leveling up normally
@@ -530,21 +542,22 @@ func _on_ItemDetector_area_entered(area):
 					weapon_array.push_front(next_level)
 					weapon_array.front().ammo = saved_ammo
 					weapon_array.front().xp = saved_xp
-					update_weapon()
+					emit_signal("weapons_updated", weapon_array)
 					area.get_parent().queue_free()
 					
 					var level_up = LEVELUP.instance()
 					get_tree().get_root().get_node("World/Front").add_child(level_up)
 					level_up.position = global_position
 					
-					update_xp()
+					
+					emit_signal("weapons_updated", weapon_array)
 
 					
 			else: #not leveling just collecting xp
 				print("no level just collect xp")
 				$PickupSound.stream = sfx_get_xp
 				$PickupSound.play()
-				update_xp()
+				emit_signal("weapons_updated", weapon_array)
 				area.get_parent().queue_free()
 		
 		
@@ -561,7 +574,7 @@ func _on_ItemDetector_area_entered(area):
 			var needs_ammo = weapon_array.front().needs_ammo
 			var ammo = weapon_array.front().ammo
 			var max_ammo = weapon_array.front().max_ammo
-			update_ammo()
+			emit_signal("weapons_updated", weapon_array)
 			area.queue_free()
 
 func do_iframes(damage, knockback_direction):
@@ -571,24 +584,28 @@ func do_iframes(damage, knockback_direction):
 	yield($EffectPlayer, "animation_finished")
 	invincible = false
 	print("do_iframes_finished")
-	if is_in_enemy == true: #check if they are REALLY still in an enemy
-		#there was an issue with this failsafe, can't remember what it was
-		hit(damage, knockback_direction)
-	if is_in_spikes == true:
-		hit(damage, knockback_direction)
+#	if is_in_enemy == true: #check if they are REALLY still in an enemy
+#		#there was an issue with this failsafe, can't remember what it was
+#		hit(damage, knockback_direction)
+#	if is_in_spikes == true:
+#		hit(damage, knockback_direction)
+		
 		
 func die():
-	if dead == false:
+	if not dead:
 		dead = true
 		disabled = true
+		world.add_child(DEATHCAM.instance())
 		visible = false
 		
 		var explosion = EXPLOSION.instance()
-		get_tree().get_root().get_node("World/Front").add_child(explosion)
 		explosion.position = global_position
+		world.get_node("Front").add_child(explosion)
 		
 		world.get_node("UILayer").add_child(load("res://src/UI/DeathScreen.tscn").instance())
-		#queue_free()
+		if world.has_node("UILayer/HUD"):
+			world.get_node("UILayer/HUD").free()
+		queue_free()
 
 func _on_HurtDetector_body_entered(body):
 	if not disabled:
@@ -611,26 +628,16 @@ func _on_HurtDetector_area_entered(area):
 
 #TODO clean these up and get rid of them 
 
-func restore_hp():
+func restore_hp(): #TODO: remove this and merge with health canister
 	$PickupSound.stream = sfx_get_heart
 	$PickupSound.play()
 	hp = max_hp
-	update_hp()
+	emit_signal("hp_updated", hp, max_hp)
 	
 func update_inventory():
 	emit_signal("inventory_updated", inventory)
 
-func update_hp():
-	HUD.update_hp()
-
-func update_xp():
-	HUD.update_xp(true)
-
-func update_ammo():
-	HUD.update_ammo()
-
-func update_weapon():
-	$WeaponManager.update_weapon()
-
-
-
+func setup_hud():
+	emit_signal("hp_updated", hp, max_hp)
+	emit_signal("total_xp_updated", total_xp)
+	emit_signal("weapons_updated", weapon_array)

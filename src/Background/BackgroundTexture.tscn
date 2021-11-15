@@ -3,6 +3,8 @@
 [ext_resource path="res://src/Background/BackgroundTexture.gd" type="Script" id=1]
 
 [node name="BackgroundTexture" type="TextureRect"]
+expand = true
+stretch_mode = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

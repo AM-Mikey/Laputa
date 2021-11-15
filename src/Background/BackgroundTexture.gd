@@ -7,4 +7,5 @@ func _ready():
 		on_viewport_size_changed()
 
 func on_viewport_size_changed():
-	rect_size = get_tree().get_root().size / world.resolution_scale
+	#rect_size = get_tree().get_root().size / world.resolution_scale
+	pass

@@ -79,6 +79,7 @@ margin_left = 48.0
 margin_top = 35.0
 margin_right = 86.0
 margin_bottom = 39.0
+value = 50.0
 texture_progress = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false

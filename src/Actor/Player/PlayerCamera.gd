@@ -164,9 +164,9 @@ func home_horizontal():
 	yield(tween, "tween_completed")
 
 func stop_tween():
-	#print("stopping tween")
 	$TweenHorizontal.stop_all()
 	$TweenVertical.stop_all()
+
 
 func on_viewport_size_changed():
 	zoom = Vector2(1 / world.resolution_scale, 1 / world.resolution_scale)

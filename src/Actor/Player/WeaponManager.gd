@@ -3,12 +3,14 @@ extends Node
 var sfx_click = load("res://assets/SFX/Placeholder/snd_gun_click.ogg")
 var sfx_switch_weapon =  load("res://assets/SFX/Placeholder/snd_switchweapon.ogg")
 
+
+
 var weapon
 
 var trigger_held = false
 
 onready var world = get_tree().get_root().get_node("World")
-onready var HUD = get_tree().get_root().get_node("World/UILayer/HUD")
+onready var HUD
 onready var pc = get_tree().get_root().get_node("World/Recruit")
 
 
@@ -16,16 +18,7 @@ onready var pc = get_tree().get_root().get_node("World/Recruit")
 
 func _ready():
 	weapon = pc.weapon_array.front()
-	
-#	connect("ammo_updated", HUD, "update_ammo") #these signals aren't even defined?
-#	connect("weapon_updated", HUD, "update_weapon")
-	
-	
-	
-	
-	
-	
-	#stuff moved from rectuit.gd
+
 func _physics_process(_delta):
 	var bullet_pos = pc.get_node("BulletOrigin").global_position
 	var effect_pos = pc.get_node("WeaponSprite").position
@@ -82,7 +75,8 @@ func update_weapon():
 	weapon = pc.weapon_array.front()
 	if weapon != null:
 		pc.get_node("WeaponSprite").texture = weapon.texture
-		HUD.update_weapon()
+		if HUD != null:
+			HUD.update_weapon()
 
 func manual_fire(bullet_pos, effect_pos, shoot_dir): #treats autos and manuals like manual
 	if weapon == null:
@@ -99,7 +93,7 @@ func manual_fire(bullet_pos, effect_pos, shoot_dir): #treats autos and manuals l
 						$WeaponAudio.play()
 				else: #not ammo == 0
 					weapon.ammo -= 1
-					HUD.update_ammo()
+					pc.emit_signal("weapons_updated", pc.weapon_array)
 					prepare_bullet(bullet_pos, effect_pos, shoot_dir)
 			else: #not needs_ammo
 				prepare_bullet(bullet_pos, effect_pos, shoot_dir)
@@ -120,7 +114,7 @@ func automatic_fire(bullet_pos, effect_pos, shoot_dir): #only fires autos but ho
 						$WeaponAudio.play()
 				else:
 					weapon.ammo -= 1
-					HUD.update_weapon()
+					pc.emit_signal("weapons_updated", pc.weapon_array)
 					prepare_bullet(bullet_pos, effect_pos, shoot_dir)
 			else: #not needs_ammo
 				prepare_bullet(bullet_pos, effect_pos, shoot_dir)

@@ -1,6 +1,7 @@
 extends Node2D
 
 const TITLE = preload("res://src/UI/TitleScreen.tscn")
+const TITLECAM = preload("res://src/Utility/TitleCam.tscn")
 const LEVELNAME = preload("res://src/UI/LevelName.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 const INVENTORY = preload("res://src/UI/Inventory/Inventory.tscn")
@@ -27,18 +28,17 @@ export var starting_level = "res://src/Level/DebugLevel.tscn"
 onready var current_level = load(starting_level).instance() #assumes current level to start with, might cause issues down the line
 
 func _ready():
-	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
-	_on_viewport_size_changed()
+	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	on_viewport_size_changed()
 	add_child(current_level)
-
+	add_child(TITLECAM.instance())
+	
 	if not skip_title:
 		load_title()
 	
 	load_options()
 
-	var spawn_points = get_tree().get_nodes_in_group("SpawnPoints")
-	for s in spawn_points:
-		$Recruit.global_position = s.global_position
+	
 
 
 func get_internal_version() -> String:
@@ -63,29 +63,13 @@ func get_internal_version() -> String:
 		return(str(months_since) + "m" + str(days_since) + "d")
 
 
-func _on_viewport_size_changed():
-	if viewport_size_ignore:
-		return
-	print("viewport size changed")
-	var viewport_size = get_tree().get_root().size
-	
-	if viewport_size.y <= 405:
-		resolution_scale = 1.0
-	elif viewport_size.y <= 675:
-		resolution_scale = 2.0
-	elif viewport_size.y <= 945:
-		resolution_scale = 3.0
-	else:
-		resolution_scale = 4.0
-	
-	$UILayer.scale = Vector2(resolution_scale, resolution_scale)
-	$Back.scale = Vector2(resolution_scale, resolution_scale)
+
 	
 
 func load_title():
 	var title = TITLE.instance()
 	$UILayer.add_child(title)
-	$Recruit.disabled = true #just as a way to skip physics_process
+	#$Recruit.disabled = true #just as a way to skip physics_process
 
 func _input(event):
 	if event.is_action_pressed("reload"):
@@ -120,7 +104,8 @@ func _input(event):
 func on_level_change(level, door_index, level_name, music):
 	print("level change")
 	save_level_data_to_temp()
-	$Recruit/PlayerCamera.smoothing_enabled = false
+	if has_node("Recruit"): #TODO check if working
+		$Recruit/PlayerCamera.smoothing_enabled = false
 	if $UILayer.has_node("DialogBox"):
 		$UILayer/DialogBox.stop_printing()
 	clear_spawn_layers()
@@ -278,7 +263,7 @@ func save_player_data_to_save():
 		printerr("ERROR: player data could not be saved!")
 
 func load_player_data_from_save():
-	var player = $Recruit
+	var pc = $Recruit
 	var file = File.new()
 	if file.file_exists(save_path):
 		var file_read = file.open(save_path, File.READ)
@@ -291,33 +276,32 @@ func load_player_data_from_save():
 			on_level_change(data["player_data"]["current_level"], null, null, null)
 			yield(get_tree(), "idle_frame")
 			
-			player.position = data["player_data"]["position"]
-			player.hp = data["player_data"]["hp"]
-			player.max_hp = data["player_data"]["max_hp"]
-			player.total_xp = data["player_data"]["total_xp"]
-			player.inventory = data["player_data"]["inventory"]
+			pc.position = data["player_data"]["position"]
+			pc.hp = data["player_data"]["hp"]
+			pc.max_hp = data["player_data"]["max_hp"]
+			pc.total_xp = data["player_data"]["total_xp"]
+			pc.inventory = data["player_data"]["inventory"]
 			#player.setup_weapons() not sure what this did
 			
 			
-			player.weapon_array.clear()
+			pc.weapon_array.clear()
 			for w in data["player_data"]["weapon_data"]:
 				var weapon_resource = load("res://src/Weapon/%s" %w + ".tres")
 				if weapon_resource != null:
-					player.weapon_array.append(weapon_resource)
+					pc.weapon_array.append(weapon_resource)
 				else:
 					printerr("ERROR: cannot find weapon resource at: res://src/Weapon/%s" %w + ".tres")
-			for w in player.weapon_array:
+			for w in pc.weapon_array:
 				w.level = data["player_data"]["weapon_data"][w.resource_name]["level"]
 				w.xp = data["player_data"]["weapon_data"][w.resource_name]["xp"]
 				if w.needs_ammo:
 					w.ammo = data["player_data"]["weapon_data"][w.resource_name]["ammo"]
 			
 			#player.weapon_array[0].update_weapon()
-			player.get_node("WeaponManager").update_weapon()
-			player.update_hp()
-			#player.update_max_hp()
-			player.update_xp()
-			player.update_inventory()
+			pc.get_node("WeaponManager").update_weapon() #TODO: check compatability
+			pc.emit_signal("hp_updated", pc.hp, pc.max_hp)
+			pc.emit_signal("weapon_updated", pc.weapon_array.front())
+			pc.update_inventory()
 			
 			print("player data loaded")
 		else:
@@ -521,3 +505,22 @@ func clear_spawn_layers():
 func clear_bg_layer():
 	for c in $BackgroundLayer.get_children():
 		c.free()
+
+
+func on_viewport_size_changed():
+	if viewport_size_ignore:
+		return
+	print("viewport size changed")
+	var viewport_size = get_tree().get_root().size
+	
+	if viewport_size.y <= 405:
+		resolution_scale = 1.0
+	elif viewport_size.y <= 675:
+		resolution_scale = 2.0
+	elif viewport_size.y <= 945:
+		resolution_scale = 3.0
+	else:
+		resolution_scale = 4.0
+	
+	$UILayer.scale = Vector2(resolution_scale, resolution_scale)
+	$Back.scale = Vector2(resolution_scale, resolution_scale)
