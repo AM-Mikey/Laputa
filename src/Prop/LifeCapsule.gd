@@ -3,7 +3,7 @@ extends Area2D
 var used = false
 
 var has_player_near = false
-var active_player = null
+var pc = null
 
 func _ready():
 	add_to_group("Containers")
@@ -12,20 +12,20 @@ func _ready():
 
 func _on_LifeCapsule_body_entered(body):
 	has_player_near = true
-	active_player = body
+	pc = body
 
 
 func _on_LifeCapsule_body_exited(_body):
 	has_player_near = false
 
 func _input(event):
-	if event.is_action_pressed("inspect") and has_player_near == true and active_player.disabled == false:
+	if event.is_action_pressed("inspect") and has_player_near == true and pc.disabled == false:
 		if used == false:
 			used = true
 			$AnimationPlayer.play("Used")
-			active_player.max_hp +=2
-			active_player.hp = active_player.max_hp
-			active_player.update_hp()
+			pc.max_hp +=2
+			pc.hp = pc.max_hp
+			pc.emit_signal("hp_updated", pc.hp, pc.max_hp)
 			$AudioStreamPlayer.play()
 			yield($AudioStreamPlayer, "finished")
 			

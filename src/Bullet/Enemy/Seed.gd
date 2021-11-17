@@ -18,9 +18,6 @@ func _ready():
 
 
 func _physics_process(delta):
-#	if is_on_floor():
-#		queue_free()
-	
 	velocity.y += gravity * delta
 			
 	var avrvelocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
@@ -58,6 +55,7 @@ func _on_CollisionDetector_body_entered(body):
 func on_break(_method):
 	if disabled == false:
 		print("destroyed seed")
+		
 		_fizzle_from_world()
 
 

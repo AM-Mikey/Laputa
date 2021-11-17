@@ -1,11 +1,13 @@
 extends Node2D
 
-const TITLE = preload("res://src/UI/TitleScreen.tscn")
-const TITLECAM = preload("res://src/Utility/TitleCam.tscn")
+const HUD = preload("res://src/UI/HUD/HUD.tscn")
+const INVENTORY = preload("res://src/UI/Inventory/Inventory.tscn")
 const LEVELNAME = preload("res://src/UI/LevelName.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
-const INVENTORY = preload("res://src/UI/Inventory/Inventory.tscn")
 const PAUSEMENU = preload("res://src/UI/PauseMenu.tscn")
+const RECRUIT = preload("res://src/Actor/Player/Recruit.tscn")
+const TITLE = preload("res://src/UI/TitleScreen.tscn")
+const TITLECAM = preload("res://src/Utility/TitleCam.tscn")
 
 var resolution_scale = 4.0
 var viewport_size_ignore = false
@@ -24,7 +26,7 @@ export var release_version: String
 export var is_release: bool = false
 export var skip_title: bool = false
 
-export var starting_level = "res://src/Level/DebugLevel.tscn"
+export var starting_level = "res://src/Level/Village/Village.tscn"
 onready var current_level = load(starting_level).instance() #assumes current level to start with, might cause issues down the line
 
 func _ready():
@@ -35,7 +37,8 @@ func _ready():
 	
 	if not skip_title:
 		load_title()
-	
+	else:
+		skip_title()
 	load_options()
 
 	
@@ -69,7 +72,16 @@ func get_internal_version() -> String:
 func load_title():
 	var title = TITLE.instance()
 	$UILayer.add_child(title)
-	#$Recruit.disabled = true #just as a way to skip physics_process
+
+func skip_title():
+	on_level_change(starting_level, 0, "LevelSelect", "res://assets/Music/XXXX.ogg")
+	add_child(RECRUIT.instance())
+	get_node("UILayer").add_child(HUD.instance())
+	
+	var spawn_points = get_tree().get_nodes_in_group("SpawnPoints")
+	for s in spawn_points:
+		get_node("Recruit").position = s.global_position
+
 
 func _input(event):
 	if event.is_action_pressed("reload"):
@@ -99,6 +111,8 @@ func _input(event):
 			var pause_menu = PAUSEMENU.instance()
 			$UILayer.add_child(pause_menu)
 			
+
+
 
 
 func on_level_change(level, door_index, level_name, music):
