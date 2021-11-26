@@ -61,8 +61,7 @@ onready var HUD
 
 
 func _ready():
-
-	var item_menu = get_tree().get_root().get_node("World/UILayer/ItemMenu")
+	var item_menu = get_tree().get_root().get_node("World/UILayer/Inventory")
 	connect("inventory_updated", item_menu, "_on_inventory_updated")
 
 	

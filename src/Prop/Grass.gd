@@ -21,7 +21,7 @@ var broken = false
 
 var wind_time = 2.4
 
-onready var player_actor = get_tree().get_root().get_node("World/Recruit")
+onready var player_actor = get_tree().get_root().get_node_or_null("World/Recruit")
 
 func _ready():
 	$WindTimer.start(wind_time)
@@ -93,6 +93,8 @@ func do_break_drop():
 		print("grass dropped item")
 		
 		var player_needs_ammo = false
+		if player_actor == null:
+			player_actor = get_tree().get_root().get_node_or_null("World/Recruit")
 		for w in player_actor.weapon_array:
 			if w.ammo < w.max_ammo:
 				player_needs_ammo = true

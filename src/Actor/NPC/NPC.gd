@@ -24,7 +24,7 @@ var branch: String = ""
 var camera_forgiveness = 16
 
 onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node_or_null("World/Recruit")
 
 func _ready():
 	add_to_group("NPCs")
@@ -61,15 +61,22 @@ func _physics_process(_delta):
 
 
 func check_within_camera() -> bool:
-	var cam_size = OS.get_window_size() / world.resolution_scale  #gets active viewport, may have to devide by resolution scale
+	if pc:
+		pc = get_tree().get_root().get_node_or_null("World/Recruit")
 	var cam_pos = pc.get_node("PlayerCamera").get_camera_screen_center() #gets ONLY the player camera center with offset
-	
+	if cam_pos:
+		return is_within_camera(cam_pos)
+	else:
+		return false
+
+
+func is_within_camera(cam_pos):
+	var cam_size = OS.get_window_size() / world.resolution_scale  #gets active viewport, may have to devide by resolution scale
 	if global_position.x > cam_pos.x - (cam_size.x /2 + camera_forgiveness) and global_position.x < cam_pos.x + (cam_size.x /2 + camera_forgiveness):
 		if global_position.y > cam_pos.y - (cam_size.y /2 + camera_forgiveness) and global_position.y < cam_pos.y + (cam_size.y /2 + camera_forgiveness):
 			return true
 		else: return false
 	else: return false
-
 
 func get_move_dir():
 	move_dir.x = sign(target_pos.x - global_position.x)
