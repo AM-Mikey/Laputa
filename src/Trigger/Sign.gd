@@ -6,9 +6,6 @@ var has_player_near = false
 var reading = false
 var active_player = null
 
-var path = get_path() #what is this doing anyway?
-
-
 #we're not actually passing any of these right now other than text
 export var display_name = ""
 export var face: String = ""
@@ -18,9 +15,6 @@ export var justify = "NFCenter"
 export var voiced = false
 
 var db
-
-#signal display_text(path, display_name, face, expression, text, justify, voiced)
-#signal stop_text()
 
 onready var world = get_tree().get_root().get_node("World")
 
