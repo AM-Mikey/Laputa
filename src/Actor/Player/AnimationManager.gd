@@ -1,5 +1,14 @@
 extends Node
 
+enum Layer {BACK, FRONT, BOTH}
+
+var tx_stand = preload("res://assets/Actor/Player/Stand.png")
+var tx_run = preload("res://assets/Actor/Player/Run.png")
+var tx_backrun = preload("res://assets/Actor/Player/RecruitBackrun.png")
+var tx_rise = preload("res://assets/Actor/Player/Rise.png")
+var tx_fall = preload("res://assets/Actor/Player/RecruitFall.png")
+var tx_climb = preload("res://assets/Actor/Player/RecruitClimb.png")
+
 var run_anim_speed: float
 
 onready var pc = get_tree().get_root().get_node("World/Recruit")
@@ -17,7 +26,12 @@ func animate(move_dir, velocity):
 
 	var next_animation: String = ""
 	
-	if not pc.is_on_ladder:
+	if pc.is_inspecting:
+		ap.playback_speed = 1
+		texture = load("res://assets/Actor/Player/Reverseidle.png") #TODO animation should remove this
+		next_animation = get_next_animation("Reverseidle", pc.face_dir, true)
+		
+	elif not pc.is_on_ladder:
 		if pc.direction_lock == Vector2.ZERO:  #NOT DIRECTION LOCKED
 		
 			if pc.is_on_floor():
@@ -25,12 +39,12 @@ func animate(move_dir, velocity):
 				if pc.is_on_ssp: #same as on normal ground but we can shoot down
 					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 						ap.playback_speed = 1
-						texture = load("res://assets/Actor/Player/RecruitStand.png")
+						texture = tx_stand
 						next_animation = get_next_animation("Stand", pc.face_dir, true)
 						
 					elif get_input_dir().has(Vector2.LEFT) or get_input_dir().has(Vector2.RIGHT):
 						ap.playback_speed = run_anim_speed
-						texture = load("res://assets/Actor/Player/RecruitRun.png")
+						texture = tx_run
 						if get_input_dir().has(Vector2.LEFT):
 							next_animation = get_next_animation("Run", Vector2.LEFT, true)
 						if get_input_dir().has(Vector2.RIGHT):
@@ -38,18 +52,18 @@ func animate(move_dir, velocity):
 							
 					else:
 						ap.playback_speed = 1
-						texture = load("res://assets/Actor/Player/RecruitStand.png")
-						next_animation = get_next_animation("Stand", pc.face_dir, false)
+						texture = tx_stand
+						next_animation = get_next_animation("Stand", pc.face_dir, true)
 						
 				else:
 					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 						ap.playback_speed = 1
-						texture = load("res://assets/Actor/Player/RecruitStand.png")
+						texture = tx_stand
 						next_animation = get_next_animation("Stand", pc.face_dir, false)
 						
 					elif get_input_dir().has(Vector2.LEFT) or get_input_dir().has(Vector2.RIGHT):
 						ap.playback_speed = run_anim_speed
-						texture = load("res://assets/Actor/Player/RecruitRun.png")
+						texture = tx_run
 						if get_input_dir().has(Vector2.LEFT):
 							next_animation = get_next_animation("Run", Vector2.LEFT, false)
 						if get_input_dir().has(Vector2.RIGHT):
@@ -57,7 +71,7 @@ func animate(move_dir, velocity):
 							
 					else:
 						ap.playback_speed = 1
-						texture = load("res://assets/Actor/Player/RecruitStand.png")
+						texture = tx_stand
 						next_animation = get_next_animation("Stand", pc.face_dir, false)
 				
 				
@@ -66,7 +80,7 @@ func animate(move_dir, velocity):
 				
 				if pc.velocity.y < 0: #Rising
 					ap.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitRise.png")
+					texture = tx_rise
 					
 					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 						next_animation = get_next_animation("Rise", pc.face_dir, true)
@@ -81,7 +95,7 @@ func animate(move_dir, velocity):
 				
 				else: #Falling
 					ap.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitFall.png")
+					texture = tx_fall
 					
 					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 						next_animation = get_next_animation("Fall", pc.face_dir, true)
@@ -102,29 +116,29 @@ func animate(move_dir, velocity):
 				
 				if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 					ap.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitStand.png")
+					texture = tx_stand
 					next_animation = get_next_animation("Stand", pc.face_dir, false)
 				
 				elif get_input_dir().has(Vector2.LEFT):
 					ap.playback_speed = run_anim_speed
-					texture = load("res://assets/Actor/Player/RecruitRun.png")
+					texture = tx_run
 					next_animation = get_next_animation("Run", Vector2.LEFT, false)
 				
 				elif get_input_dir().has(Vector2.RIGHT):
 					ap.playback_speed = run_anim_speed
-					texture = load("res://assets/Actor/Player/RecruitBackrun.png")
+					texture = tx_backrun
 					next_animation = get_next_animation("Backrun", Vector2.RIGHT, false)
 				
 				else:
 					ap.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitStand.png")
+					texture = tx_stand
 					next_animation = get_next_animation("Stand", pc.face_dir, false)
 
 
 			else: #airborne
 				if velocity.y < 0: #Rising
 					ap.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitRise.png")
+					texture = tx_rise
 					
 					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 						next_animation = get_next_animation("Rise", pc.face_dir, true)
@@ -139,7 +153,7 @@ func animate(move_dir, velocity):
 
 				else: #Falling
 					ap.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitFall.png")
+					texture = tx_fall
 					
 					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 						next_animation = get_next_animation("Fall", pc.face_dir, true)
@@ -160,29 +174,29 @@ func animate(move_dir, velocity):
 				
 				if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 					ap.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitStand.png")
+					texture = tx_stand
 					next_animation = get_next_animation("Stand", pc.face_dir, false)
 				
 				elif get_input_dir().has(Vector2.LEFT):
 					ap.playback_speed = run_anim_speed
-					texture = load("res://assets/Actor/Player/RecruitBackrun.png")
+					texture = tx_backrun
 					next_animation = get_next_animation("Backrun", Vector2.LEFT, false)
 				
 				elif get_input_dir().has(Vector2.RIGHT):
 					ap.playback_speed = run_anim_speed
-					texture = load("res://assets/Actor/Player/RecruitRun.png")
+					texture = tx_run
 					next_animation = get_next_animation("Run", Vector2.RIGHT, false)
 				
 				else:
 					ap.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitStand.png")
+					texture = tx_stand
 					next_animation = get_next_animation("Stand", pc.face_dir, false)
 
 
 			else: #airborne
 				if velocity.y < 0: #Rising
 					ap.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitRise.png")
+					texture = tx_rise
 					
 					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 						next_animation = get_next_animation("Rise", pc.face_dir, true)
@@ -197,7 +211,7 @@ func animate(move_dir, velocity):
 
 				else: #Falling
 					ap.playback_speed = 1
-					texture = load("res://assets/Actor/Player/RecruitFall.png")
+					texture = tx_fall
 					
 					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 						next_animation = get_next_animation("Fall", pc.face_dir, true)
@@ -213,7 +227,7 @@ func animate(move_dir, velocity):
 
 	else: #is on ladder
 		ap.playback_speed = 1 #reset ap to normal speed
-		texture = load("res://assets/Actor/Player/RecruitClimb.png")
+		texture = tx_climb
 		
 		if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
 			next_animation = get_next_animation("Climb", pc.face_dir, true)
@@ -249,6 +263,20 @@ func get_input_dir() -> Array:
 	return dir_list
 
 
+func setup_sprites(texture: StreamTexture):
+	print("setting up")
+	var front = pc.get_node("Front")
+	var back = pc.get_node("Back")
+	
+
+	front.texture = texture
+	front.hframes = texture.get_width() /32
+	front.vframes = texture.get_height() /32
+	back.texture = texture
+	back.hframes = texture.get_width() /32
+	back.vframes = texture.get_height() /32
+
+
 func get_next_animation(animation, anim_dir, can_shoot_down):
 	var animation_suffix
 	
@@ -259,26 +287,27 @@ func get_next_animation(animation, anim_dir, can_shoot_down):
 		ws.scale.x = 1
 		
 		if get_input_dir().has(Vector2.UP) and get_input_dir().has(Vector2.DOWN):
-			animation_suffix = "Left"
+			animation_suffix = ".L"
 			pc.shoot_dir = Vector2.LEFT
 			ws.rotation_degrees = 0
 			
 		elif get_input_dir().has(Vector2.UP):
-			animation_suffix = "LeftLookUp"
+			animation_suffix = ".L1"
 			pc.shoot_dir = Vector2.UP
 			ws.rotation_degrees = 90
 			
 		elif get_input_dir().has(Vector2.DOWN):
-			animation_suffix = "LeftLookDown"
 			if can_shoot_down:
+				animation_suffix = ".L2"
 				pc.shoot_dir = Vector2.DOWN
 				ws.rotation_degrees = -90
 			else:
+				animation_suffix = ".L3"
 				pc.shoot_dir = Vector2.LEFT
 				ws.rotation_degrees = 0
 		
 		else:
-			animation_suffix = "Left"
+			animation_suffix = ".L"
 			pc.shoot_dir = Vector2.LEFT
 			ws.rotation_degrees = 0
 			
@@ -288,26 +317,27 @@ func get_next_animation(animation, anim_dir, can_shoot_down):
 		ws.scale.x = -1
 
 		if get_input_dir().has(Vector2.UP) and get_input_dir().has(Vector2.DOWN):
-			animation_suffix = "Right"
+			animation_suffix = ".R"
 			pc.shoot_dir = Vector2.RIGHT
 			ws.rotation_degrees = 0
 
 		elif get_input_dir().has(Vector2.UP):
-			animation_suffix = "RightLookUp"
+			animation_suffix = ".R1"
 			pc.shoot_dir = Vector2.UP
 			ws.rotation_degrees = -90
 			
 		elif get_input_dir().has(Vector2.DOWN):
-			animation_suffix = "RightLookDown"
 			if can_shoot_down:
+				animation_suffix = ".R2"
 				pc.shoot_dir = Vector2.DOWN
 				ws.rotation_degrees = 90
 			else:
+				animation_suffix = ".R3"
 				pc.shoot_dir = Vector2.RIGHT
 				ws.rotation_degrees = 0
 		
 		else:
-			animation_suffix = "Right"
+			animation_suffix = ".R"
 			pc.shoot_dir = Vector2.RIGHT
 			ws.rotation_degrees = 0
 		
@@ -328,6 +358,15 @@ func change_animation(next_animation, texture):
 	var front = pc.get_node("Front")
 	var back = pc.get_node("Back")
 	
+	var animation_layers = {
+		"RunLeft": Layer.BACK,
+		"RunLeftLookUp": Layer.BACK,
+		"RunLeftLookDown": Layer.BACK,
+		"RunRight": Layer.BOTH,
+		"RunRightLookUp": Layer.BOTH,
+		"RunRightLookDown": Layer.BOTH
+	}
+
 	front.texture = texture
 	front.hframes = texture.get_width() /32
 	front.vframes = texture.get_height() /32
@@ -335,7 +374,16 @@ func change_animation(next_animation, texture):
 	back.hframes = texture.get_width() /32
 	back.vframes = texture.get_height() /32
 	
-	var animation_groups = {
+	
+	
+	if animation_layers.has(next_animation):
+		if animation_layers[next_animation] == Layer.FRONT:
+			back.texture = null
+		elif animation_layers[next_animation] == Layer.BACK:
+			front.texture = null
+	
+	
+	var animation_groups = { #only add if it needs to blend
 		"StandLeft": 1,
 		"StandLeftLookUp": 1,
 		"StandLeftLookDown": 1,
@@ -355,7 +403,7 @@ func change_animation(next_animation, texture):
 		"BarckrunRightLookUp": 6,
 		"BackrunRightLookDown": 6
 	}
-	
+
 	ap.play(next_animation)
 	
 	#blending

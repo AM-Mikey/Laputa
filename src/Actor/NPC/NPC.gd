@@ -9,7 +9,6 @@ export var voiced = true
 var move_dir= Vector2.ZERO
 var target_pos = null
 
-var has_player_near = false
 var talking = false
 var active_player = null
 
@@ -95,21 +94,20 @@ func animate():
 
 #dialog stuff
 func _on_PlayerDetector_body_entered(body):
-	has_player_near = true
 	active_player = body
 	
 func _on_PlayerDetector_body_exited(_body):
-	has_player_near = false
+	active_player = null
 
 func _input(event):
-	if event.is_action_pressed("inspect") and has_player_near == true and dialog_json != "" and conversation != "":
+	if event.is_action_pressed("inspect") and active_player != null and dialog_json != "" and conversation != "":
 		start_dialog()
 
 
 func start_dialog():
 	if not talking:
 		talking = true
-		yield(get_tree().create_timer(.0001), "timeout") #why?
+		yield(get_tree().create_timer(.0001), "timeout") #why? #TODO
 	
 		if world.has_node("UILayer/DialogBox"): #clear old dialog box if there is one
 			world.get_node("UILayer/DialogBox").stop_printing()

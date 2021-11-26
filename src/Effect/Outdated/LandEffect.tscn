@@ -26,6 +26,7 @@ script = ExtResource( 1 )
 position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
 hframes = 4
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Land = SubResource( 1 )

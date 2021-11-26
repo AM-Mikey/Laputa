@@ -10,7 +10,6 @@ __meta__ = {
 development_stage = "alpha"
 release_version = "1.7"
 skip_title = true
-starting_level = "res://src/Level/Bridge.tscn"
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -33,3 +32,11 @@ bus = "Music"
 bus = "SFX"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]

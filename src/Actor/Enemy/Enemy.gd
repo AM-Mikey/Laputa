@@ -8,7 +8,7 @@ const HEART = preload("res://src/Item/Heart.tscn")
 const EXPERIENCE = preload("res://src/Item/Experience.tscn")
 const AMMO = preload("res://src/Item/Ammo.tscn")
 
-onready var player_actor = get_tree().get_root().get_node("World/Recruit")
+
 
 var rng = RandomNumberGenerator.new()
 var disabled = false
@@ -18,17 +18,33 @@ var hp: int
 var damage_on_contact: int
 
 var damagenum = null
-var timer = Timer.new()
+#var timer = Timer.new()
 var damagenum_time: float = 0.5
 
 export var id: String
 export var level = 1
-export var heart_chance = 1
-export var experience_chance = 3
-export var ammo_chance = 1
+
+
+var heart_chance = 1
+var experience_chance = 3
+var ammo_chance = 1
 
 var camera_forgiveness_distance = 64
 var free_counter = 0
+
+onready var player_actor = get_tree().get_root().get_node("World/Recruit")
+
+
+
+func _ready():
+	add_to_group("Enemies")
+
+	var timer = Timer.new()
+	timer.one_shot = true
+	timer.name = "DamagenumTimer"
+	timer.connect("timeout", self, "_on_DamagenumTimer_timeout")
+	add_child(timer)
+
 
 func _physics_process(_delta):
 	if not disabled and not protected and hp == 99999999999: #never do for now
@@ -59,14 +75,7 @@ func _physics_process(_delta):
 			else:
 				free()
 
-func _ready():
-	add_to_group("Enemies")
 
-	#var timer = Timer.new()
-	timer.one_shot = true
-	timer.name = "DamagenumTimer"
-	timer.connect("timeout", self, "_on_DamagenumTimer_timeout")
-	add_child(timer)
 
 func hit(damage, blood_direction):
 	hp -= damage
@@ -87,11 +96,11 @@ func prepare_damagenum(damage):
 	if damagenum == null: #if we dont already have a damage number create a new one
 		damagenum = DAMAGENUMBER.instance()
 		damagenum.value = damage
-		timer.start(damagenum_time)
+		$DamagenumTimer.start(damagenum_time)
 		
 	else: #add time and add values
 		damagenum.value += damage
-		timer.start(timer.time_left + damagenum_time)
+		$DamagenumTimer.start($DamagenumTimer.time_left + damagenum_time)
 		
 		
 
@@ -104,7 +113,7 @@ func die():
 	if not dead:
 		dead = true
 		do_death_drop()
-		timer.stop()
+		$DamagenumTimer.stop()
 		_on_DamagenumTimer_timeout()
 		
 		player_actor.is_in_enemy = false #THIS IS A BAD WAY TO DO THIS if a player is in a different enemy when this one dies, they will be immune to that enemy

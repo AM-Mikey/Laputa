@@ -22,7 +22,7 @@ var active = true
 var busy = false
 var auto_input = false
 
-
+var current_dialog_json
 var step: int = 0 #step in printing dialog
 
 onready var tb = $Margin/HBox/RichTextBox
@@ -39,10 +39,13 @@ func _ready():
 	on_viewport_size_changed()
 	audio.stream = text_sound
 	tb.bbcode_text = "\n" #""
+	
+	#get_parent().add_child(load("res://src/Dialog/TopicBox.tscn").instance()) #TESTING
 
 func print_sign():
 	face_container.free()
 	tb.bbcode_text = "\n" + "[b][center]" + text
+	pc.is_inspecting = true
 
 
 func print_flavor_text():
@@ -50,17 +53,22 @@ func print_flavor_text():
 	#custom_constants/margin_left = 64
 	#face_container.free()
 	in_dialog = true
+	pc.is_inspecting = true
 	text = text
 	print(text)
 	dialog_loop()
 
 func start_printing(dialog_json, conversation):
+	current_dialog_json = dialog_json
 	in_dialog = true
 	
 	dialog = load_dialog(dialog_json)
 	text = dialog[conversation].strip_edges().replace("\t", "") #strip edges to clean up first and last newlines ## remove tabulation
 	print(text)
 	
+	pc.disabled = true
+	pc.invincible = true
+	pc.is_inspecting = true
 	dialog_loop()
 
 
@@ -108,7 +116,7 @@ func remove_cursor():
 		tb.bbcode_text = removed_cursor
 
 func _input(event):
-	if event.is_action_pressed("inspect") and in_dialog and not auto_input:
+	if event.is_action_pressed("ui_accept") and in_dialog and not auto_input:
 		if step >= text.length():
 			print("reached end")
 			stop_printing()
@@ -180,6 +188,7 @@ func stop_printing():
 	pc.get_node("PlayerCamera").position = Vector2.ZERO
 	pc.disabled = false
 	pc.invincible = false
+	pc.is_inspecting = false
 	queue_free()
 
 

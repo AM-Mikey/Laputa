@@ -111,9 +111,12 @@ conversation = "basil"
 [node name="Child" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 304, 544 )
 dialog_json = "res://src/Dialog/Village.json"
+conversation = "child"
 
 [node name="Sasuke" parent="Actors" instance=ExtResource( 17 )]
 position = Vector2( 345, 384 )
+dialog_json = "res://src/Dialog/Village.json"
+conversation = "sasuke"
 
 [node name="ClimberManager" parent="Actors" instance=ExtResource( 18 )]
 position = Vector2( 216, 297 )

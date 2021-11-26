@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ThreatCaveSample.mp3-edfd7a7ca6a165cf3f6ac82b43ba0d68.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/Production/ThreatCaveSample.mp3"
+dest_files=[ "res://.import/ThreatCaveSample.mp3-edfd7a7ca6a165cf3f6ac82b43ba0d68.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

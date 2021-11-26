@@ -1,6 +1,7 @@
 extends Node
 
 const YN = preload("res://src/Dialog/DialogYesNo.tscn")
+const TBOX = preload("res://src/Dialog/TopicBox.tscn")
 
 onready var world = get_tree().get_root().get_node("World")
 onready var pc = get_tree().get_root().get_node("World/Recruit")
@@ -61,6 +62,11 @@ func parse_command(string):
 			db.auto_input = true
 			yield(get_tree().create_timer(0.1),"timeout") #a bad way of doing this
 			db.auto_input = false
+			
+		"/tbox":
+			pc.disabled = true
+			pc.invincible = true
+			world.get_node("UILayer").add_child(TBOX.instance())
 
 
 

@@ -9,6 +9,8 @@ func _ready():
 
 
 func _process(delta):
+	get_parent().move_child(self, get_parent().get_child_count() - 1)
+	
 	if world.is_release:
 		$VBox/General/Label.text = "Laputa " + world.internal_version + " (" + world.release_version+ ")"
 	else:
@@ -26,7 +28,7 @@ func _process(delta):
 	$VBox/HBox/C1/A/Velocity.text = str("%4.f" % pc.velocity.x) + "," + str("%4.f" % pc.velocity.y)
 	$VBox/HBox/C1/A/Speed.text = str("%4.f" % pc.speed.x) + "," + str("%4.f" % pc.speed.y)
 	$VBox/HBox/C1/A/Pos.text = str("%4.f" % pc.global_position.x) + "," + str("%4.f" % pc.global_position.y)
-	$VBox/HBox/C1/A/JumpForgiveness.text = str("%2.2f" % pc.get_node("ForgivenessTimer").time_left)
+	#$VBox/HBox/C1/A/JumpForgiveness.text = str("%2.2f" % pc.get_node("ForgivenessTimer").time_left)
 
 	$VBox/HBox/C1/A/MoveDir.text = str("%2.f" % pc.move_dir.x) + "," + str("%2.f" % pc.move_dir.y)
 	$VBox/HBox/C1/A/FaceDir.text = str("%2.f" % pc.face_dir.x) + "," + str("%2.f" % pc.face_dir.y)
@@ -44,6 +46,7 @@ func _process(delta):
 	$VBox/HBox/C2/A/Water.text = str(pc.is_in_water)
 	$VBox/HBox/C2/A/Ladder.text = str(pc.is_on_ladder)
 	$VBox/HBox/C2/A/SSP.text = str(pc.is_on_ssp)
+	$VBox/HBox/C2/A/Inspect.text = str(pc.is_inspecting)
 
 	$VBox/HBox/C2/A/Front.text = str(world.get_node("Front").get_child_count())
 	$VBox/HBox/C2/A/Middle.text = str(world.get_node("Middle").get_child_count())

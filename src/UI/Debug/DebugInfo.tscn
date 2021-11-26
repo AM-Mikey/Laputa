@@ -66,11 +66,11 @@ __meta__ = {
 [node name="HBox" type="HBoxContainer" parent="VBox"]
 margin_top = 64.0
 margin_right = 480.0
-margin_bottom = 244.0
+margin_bottom = 256.0
 
 [node name="C1" type="HBoxContainer" parent="VBox/HBox"]
 margin_right = 51.0
-margin_bottom = 180.0
+margin_bottom = 192.0
 theme = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -78,15 +78,15 @@ __meta__ = {
 
 [node name="Q" type="VBoxContainer" parent="VBox/HBox/C1"]
 margin_right = 45.0
-margin_bottom = 180.0
+margin_bottom = 192.0
 theme = ExtResource( 2 )
 
 [node name="Bars" type="Label" parent="VBox/HBox/C1/Q"]
 margin_right = 45.0
 margin_bottom = 12.0
 theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
+custom_fonts/font = ExtResource( 4 )
 text = "BARS"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -146,8 +146,8 @@ margin_right = 45.0
 margin_bottom = 72.0
 rect_pivot_offset = Vector2( 410, 336 )
 theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
+custom_fonts/font = ExtResource( 4 )
 text = "MOVE"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -206,8 +206,8 @@ margin_top = 120.0
 margin_right = 45.0
 margin_bottom = 132.0
 theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
+custom_fonts/font = ExtResource( 4 )
 text = "DIR"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -252,15 +252,15 @@ __meta__ = {
 [node name="A" type="VBoxContainer" parent="VBox/HBox/C1"]
 margin_left = 45.0
 margin_right = 51.0
-margin_bottom = 180.0
+margin_bottom = 192.0
 theme = ExtResource( 2 )
 
 [node name="Bars" type="Label" parent="VBox/HBox/C1/A"]
 margin_right = 6.0
 margin_bottom = 12.0
 theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
+custom_fonts/font = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -315,8 +315,8 @@ margin_right = 6.0
 margin_bottom = 72.0
 rect_pivot_offset = Vector2( 410, 336 )
 theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
+custom_fonts/font = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -370,8 +370,8 @@ margin_top = 120.0
 margin_right = 6.0
 margin_bottom = 132.0
 theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
+custom_fonts/font = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -412,7 +412,7 @@ __meta__ = {
 [node name="C2" type="HBoxContainer" parent="VBox/HBox"]
 margin_left = 432.0
 margin_right = 480.0
-margin_bottom = 180.0
+margin_bottom = 192.0
 size_flags_horizontal = 10
 size_flags_vertical = 0
 theme = ExtResource( 2 )
@@ -422,15 +422,15 @@ __meta__ = {
 
 [node name="Q" type="VBoxContainer" parent="VBox/HBox/C2"]
 margin_right = 42.0
-margin_bottom = 180.0
+margin_bottom = 192.0
 theme = ExtResource( 2 )
 
 [node name="View" type="Label" parent="VBox/HBox/C2/Q"]
 margin_right = 42.0
 margin_bottom = 12.0
 theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
+custom_fonts/font = ExtResource( 4 )
 text = "CAM"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -465,8 +465,8 @@ margin_top = 36.0
 margin_right = 42.0
 margin_bottom = 48.0
 theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
+custom_fonts/font = ExtResource( 4 )
 text = "STATE"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -556,22 +556,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Object" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="Inspect" type="Label" parent="VBox/HBox/C2/Q"]
 margin_top = 132.0
 margin_right = 42.0
 margin_bottom = 144.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
+text = "Inspec: "
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Object" type="Label" parent="VBox/HBox/C2/Q"]
+margin_top = 144.0
+margin_right = 42.0
+margin_bottom = 156.0
+theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
+custom_fonts/font = ExtResource( 4 )
 text = "OBJ"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Front" type="Label" parent="VBox/HBox/C2/Q"]
-margin_top = 144.0
+margin_top = 156.0
 margin_right = 42.0
-margin_bottom = 156.0
+margin_bottom = 168.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
 text = "Front: "
@@ -581,9 +593,9 @@ __meta__ = {
 }
 
 [node name="Middle" type="Label" parent="VBox/HBox/C2/Q"]
-margin_top = 156.0
+margin_top = 168.0
 margin_right = 42.0
-margin_bottom = 168.0
+margin_bottom = 180.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
 text = "Middle: "
@@ -593,9 +605,9 @@ __meta__ = {
 }
 
 [node name="Back" type="Label" parent="VBox/HBox/C2/Q"]
-margin_top = 168.0
+margin_top = 180.0
 margin_right = 42.0
-margin_bottom = 180.0
+margin_bottom = 192.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
 text = "Back: "
@@ -607,15 +619,15 @@ __meta__ = {
 [node name="A" type="VBoxContainer" parent="VBox/HBox/C2"]
 margin_left = 42.0
 margin_right = 48.0
-margin_bottom = 180.0
+margin_bottom = 192.0
 theme = ExtResource( 2 )
 
 [node name="View" type="Label" parent="VBox/HBox/C2/A"]
 margin_right = 6.0
 margin_bottom = 12.0
 theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
+custom_fonts/font = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -647,8 +659,8 @@ margin_top = 36.0
 margin_right = 6.0
 margin_bottom = 48.0
 theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
+custom_fonts/font = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -730,29 +742,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Object" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Inspect" type="Label" parent="VBox/HBox/C2/A"]
 margin_top = 132.0
 margin_right = 6.0
 margin_bottom = 144.0
 theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Front" type="Label" parent="VBox/HBox/C2/A"]
-margin_top = 144.0
-margin_right = 6.0
-margin_bottom = 156.0
-theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "-"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Middle" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Object" type="Label" parent="VBox/HBox/C2/A"]
+margin_top = 144.0
+margin_right = 6.0
+margin_bottom = 156.0
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
+custom_fonts/font = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Front" type="Label" parent="VBox/HBox/C2/A"]
 margin_top = 156.0
 margin_right = 6.0
 margin_bottom = 168.0
@@ -763,10 +775,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Back" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Middle" type="Label" parent="VBox/HBox/C2/A"]
 margin_top = 168.0
 margin_right = 6.0
 margin_bottom = 180.0
+theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
+text = "-"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Label" parent="VBox/HBox/C2/A"]
+margin_top = 180.0
+margin_right = 6.0
+margin_bottom = 192.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "-"

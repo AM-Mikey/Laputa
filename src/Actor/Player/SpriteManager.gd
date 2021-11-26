@@ -1,0 +1,41 @@
+tool
+extends Node
+
+export var texture: StreamTexture setget on_texture_changed
+export var hframe: int setget on_hframe_changed
+export var back_vframe: int setget on_back_vframe_changed
+export var front_vframe: int setget on_front_vframe_changed
+
+
+onready var back = get_parent().get_node("Back")
+onready var front = get_parent().get_node("Front")
+
+func on_texture_changed(new_texture):
+	#texture = new_texture
+
+	back.texture = new_texture
+	back.hframes = back.texture.get_width() /32
+	back.vframes = back.texture.get_height() /32
+	front.texture = new_texture
+	front.hframes = back.texture.get_width() /32
+	front.vframes = back.texture.get_height() /32
+
+
+func on_hframe_changed(new_hframe):
+	#hframe = new_hframe
+	back.frame_coords.x = new_hframe
+	front.frame_coords.x = new_hframe
+
+func on_back_vframe_changed(new_vframe):
+	if new_vframe == -1:
+		back.texture = null
+	else:
+	#	back_vframe = new_vframe
+		back.frame_coords.y = new_vframe
+
+func on_front_vframe_changed(new_vframe):
+	if new_vframe == -1:
+		front.texture = null
+	else:
+	#	front_vframe = new_vframe
+		front.frame_coords.y = new_vframe

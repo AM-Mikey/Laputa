@@ -16,7 +16,7 @@
 [ext_resource path="res://assets/Tile/TerrainAutotile.png" type="Texture" id=14]
 [ext_resource path="res://src/Actor/Enemy/TogglerVertical.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/Prop/LifeCapsule.tscn" type="PackedScene" id=16]
-[ext_resource path="res://src/Actor/Enemy/TogglerHorizontal.tscn" type="PackedScene" id=17]
+[ext_resource path="res://src/Actor/Enemy/BeetleGreen.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/Tile/TriggerTile/SpikesTrigger.tscn" type="PackedScene" id=18]
 
 [sub_resource type="TileSet" id=1]
