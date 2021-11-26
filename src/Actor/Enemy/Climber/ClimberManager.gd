@@ -48,7 +48,7 @@ func replace_arms(dead_arm_index):
 	collision_disabled = true
 	
 	var arm_index
-	cif dead_arm_index != pivot.index:
+	if dead_arm_index != pivot.index:
 		arm_index = 1
 	else:
 		arm_index = 0
