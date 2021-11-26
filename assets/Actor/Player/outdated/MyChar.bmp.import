@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/MyChar.bmp-20e48c4e1cd440ccf1b89443e2aa818b.stex"
+path="res://.import/MyChar.bmp-d12d7b623cb7c1a64fbc5d68a5603455.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Player/Outdated/MyChar.bmp"
-dest_files=[ "res://.import/MyChar.bmp-20e48c4e1cd440ccf1b89443e2aa818b.stex" ]
+source_file="res://assets/Actor/Player/outdated/MyChar.bmp"
+dest_files=[ "res://.import/MyChar.bmp-d12d7b623cb7c1a64fbc5d68a5603455.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Juniper.png-72c02792a7cabd6aa206c55745c3bf6b.stex"
+path="res://.import/Juniper.png-a8b6aefa6d0b9cddac8ac5713f27db97.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Player/Outdated/Juniper.png"
-dest_files=[ "res://.import/Juniper.png-72c02792a7cabd6aa206c55745c3bf6b.stex" ]
+source_file="res://assets/Actor/Player/outdated/Juniper.png"
+dest_files=[ "res://.import/Juniper.png-a8b6aefa6d0b9cddac8ac5713f27db97.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false
