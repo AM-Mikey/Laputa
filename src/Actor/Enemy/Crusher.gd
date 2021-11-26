@@ -14,9 +14,6 @@ var time: float = 0
 var t_body = null
 var t_dir = null
 
-
-onready var pc = get_tree().get_root().get_node("World/Recruit")
-
 func _ready():
 	hp = 4
 	level = 2

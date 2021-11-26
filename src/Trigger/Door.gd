@@ -9,7 +9,6 @@ var has_player_near = false
 var active_player = null
 
 onready var world = get_tree().get_root().get_node("World")
-onready var pc = world.get_node("Recruit")
 
 signal level_change(level, door_index, level_name, music)
 
