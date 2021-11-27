@@ -11,8 +11,7 @@ func physics_process():
 	pass
 	
 func enter():
-	beetle_actor.swap_direction_vector()
-	beetle_actor.detection_raycast.cast_to = beetle_actor.direction_vector * beetle_actor.sight_distance
+	beetle_actor.swap_direction_vector()	
 	set_animation()
 	reset_timer.start()
 	pass
@@ -22,7 +21,7 @@ func exit():
 
 func _on_Timer_timeout():
 	beetle_actor.change_state(beetle_actor.idle_state)
-
+	
 func set_animation():
 	if beetle_actor.is_on_floor():
 		#use floor idle
@@ -36,6 +35,6 @@ func set_animation():
 		pass
 		
 	if beetle_actor.is_on_wall():
-		beetle_actor.animated_sprite.animation = "Idle_Wall"		
+		beetle_actor.animated_sprite.animation = "Idle_Wall"
 		#use wall idle
 		pass
