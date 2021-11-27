@@ -2,13 +2,6 @@ extends Node
 
 enum Layer {BACK, FRONT, BOTH}
 
-var tx_stand = preload("res://assets/Actor/Player/Stand.png")
-var tx_run = preload("res://assets/Actor/Player/Run.png")
-var tx_backrun = preload("res://assets/Actor/Player/RecruitBackrun.png")
-var tx_rise = preload("res://assets/Actor/Player/Rise.png")
-var tx_fall = preload("res://assets/Actor/Player/RecruitFall.png")
-var tx_climb = preload("res://assets/Actor/Player/RecruitClimb.png")
-
 var run_anim_speed: float
 
 onready var pc = get_tree().get_root().get_node("World/Recruit")
@@ -25,6 +18,7 @@ func animate(move_dir, velocity):
 	var vframes
 
 	var next_animation: String = ""
+	var start_time: float
 	
 	if pc.is_inspecting:
 		ap.playback_speed = 1
@@ -36,314 +30,146 @@ func animate(move_dir, velocity):
 		
 			if pc.is_on_floor():
 				
-				if pc.is_on_ssp: #same as on normal ground but we can shoot down
-					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
-						ap.playback_speed = 1
-						texture = tx_stand
-						next_animation = get_next_animation("Stand", pc.face_dir, true)
-						
-					elif get_input_dir().has(Vector2.LEFT) or get_input_dir().has(Vector2.RIGHT):
-						ap.playback_speed = run_anim_speed
-						texture = tx_run
-						if get_input_dir().has(Vector2.LEFT):
-							next_animation = get_next_animation("Run", Vector2.LEFT, true)
-						if get_input_dir().has(Vector2.RIGHT):
-							next_animation = get_next_animation("Run", Vector2.RIGHT, true)
-							
-					else:
-						ap.playback_speed = 1
-						texture = tx_stand
-						next_animation = get_next_animation("Stand", pc.face_dir, true)
-						
+				if get_input_dir().x != 0:
+					ap.playback_speed = run_anim_speed
+					next_animation = get_next_animation("Run", get_input_dir(), pc.is_on_ssp)
 				else:
-					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
-						ap.playback_speed = 1
-						texture = tx_stand
-						next_animation = get_next_animation("Stand", pc.face_dir, false)
-						
-					elif get_input_dir().has(Vector2.LEFT) or get_input_dir().has(Vector2.RIGHT):
-						ap.playback_speed = run_anim_speed
-						texture = tx_run
-						if get_input_dir().has(Vector2.LEFT):
-							next_animation = get_next_animation("Run", Vector2.LEFT, false)
-						if get_input_dir().has(Vector2.RIGHT):
-							next_animation = get_next_animation("Run", Vector2.RIGHT, false)
-							
-					else:
-						ap.playback_speed = 1
-						texture = tx_stand
-						next_animation = get_next_animation("Stand", pc.face_dir, false)
-				
-				
+					ap.playback_speed = 1
+					next_animation = get_next_animation("Stand", pc.face_dir, pc.is_on_ssp)
 
-			else: #airborne
+
+			else: #arial
+				ap.playback_speed = 0
 				
-				if pc.velocity.y < 0: #Rising
-					ap.playback_speed = 1
-					texture = tx_rise
-					
-					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
-						next_animation = get_next_animation("Rise", pc.face_dir, true)
-					
-					elif get_input_dir().has(Vector2.LEFT):
-							next_animation = get_next_animation("Rise", Vector2.LEFT, true)	
-					elif get_input_dir().has(Vector2.RIGHT):
-							next_animation = get_next_animation("Rise", Vector2.RIGHT, true)
-					
-					else:
-						next_animation = get_next_animation("Rise", pc.face_dir, true)
+				if get_input_dir() == Vector2.LEFT or get_input_dir() == Vector2.RIGHT:
+					next_animation = get_next_animation("Arial", get_input_dir(), true)
+				else:
+					next_animation = get_next_animation("Arial", pc.face_dir, true)
 				
-				else: #Falling
-					ap.playback_speed = 1
-					texture = tx_fall
-					
-					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
-						next_animation = get_next_animation("Fall", pc.face_dir, true)
-					
-					elif get_input_dir().has(Vector2.LEFT):
-							next_animation = get_next_animation("Fall", Vector2.LEFT, true)
-					elif get_input_dir().has(Vector2.RIGHT):
-							next_animation = get_next_animation("Fall", Vector2.RIGHT, true)
-					
-					else:
-						next_animation = get_next_animation("Fall", pc.face_dir, true)
+				if pc.velocity.y < 0: 		#Rising
+					start_time = 0
+				elif pc.velocity.y == 0:	#Zenith
+					start_time = 0.1
+				else: 						#Falling
+					start_time = 0.2
+
 
 
 		elif pc.direction_lock == Vector2.LEFT: #DIRECTION LOCKED LEFT
 			pc.face_dir = Vector2.LEFT
 			
 			if pc.is_on_floor():
-				
-				if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
-					ap.playback_speed = 1
-					texture = tx_stand
-					next_animation = get_next_animation("Stand", pc.face_dir, false)
-				
-				elif get_input_dir().has(Vector2.LEFT):
+				if get_input_dir().x == -1:
 					ap.playback_speed = run_anim_speed
-					texture = tx_run
-					next_animation = get_next_animation("Run", Vector2.LEFT, false)
-				
-				elif get_input_dir().has(Vector2.RIGHT):
+					next_animation = get_next_animation("Run", Vector2.LEFT, pc.is_on_ssp)
+				elif get_input_dir().x == 1:
 					ap.playback_speed = run_anim_speed
-					texture = tx_backrun
-					next_animation = get_next_animation("Backrun", Vector2.RIGHT, false)
-				
+					next_animation = get_next_animation("Backrun", Vector2.RIGHT, pc.is_on_ssp)
 				else:
 					ap.playback_speed = 1
-					texture = tx_stand
-					next_animation = get_next_animation("Stand", pc.face_dir, false)
+					next_animation = get_next_animation("Stand", pc.face_dir, pc.is_on_ssp)
 
 
-			else: #airborne
-				if velocity.y < 0: #Rising
-					ap.playback_speed = 1
-					texture = tx_rise
-					
-					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
-						next_animation = get_next_animation("Rise", pc.face_dir, true)
-					
-					elif get_input_dir().has(Vector2.LEFT):
-							next_animation = get_next_animation("Rise", Vector2.LEFT, true)	
-					elif get_input_dir().has(Vector2.RIGHT):
-							next_animation = get_next_animation("Rise", Vector2.LEFT, true)
-					
-					else:
-						next_animation = get_next_animation("Rise", pc.face_dir, true)
-
-				else: #Falling
-					ap.playback_speed = 1
-					texture = tx_fall
-					
-					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
-						next_animation = get_next_animation("Fall", pc.face_dir, true)
-					
-					elif get_input_dir().has(Vector2.LEFT):
-							next_animation = get_next_animation("Fall", Vector2.LEFT, true)
-					elif get_input_dir().has(Vector2.RIGHT):
-							next_animation = get_next_animation("Fall", Vector2.LEFT, true)
-					
-					else:
-						next_animation = get_next_animation("Fall", pc.face_dir, true)
+			else: #arial
+				ap.playback_speed = 0
+				
+				if get_input_dir().x == -1:
+					next_animation = get_next_animation("Arial", Vector2.LEFT, true)
+				elif get_input_dir().x == 1:
+					next_animation = get_next_animation("Arial", Vector2.LEFT, true) #TODO backarial
+				else:
+					next_animation = get_next_animation("Arial", pc.face_dir, true)
+				
+				if pc.velocity.y < 0: 		#Rising
+					start_time = 0
+				elif pc.velocity.y == 0:	#Zenith
+					start_time = 0.1
+				else: 						#Falling
+					start_time = 0.2
 
 
 		elif pc.direction_lock == Vector2.RIGHT: #DIRECTION LOCKED RIGHT
 			pc.face_dir = Vector2.RIGHT
 			
 			if pc.is_on_floor():
-				
-				if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
-					ap.playback_speed = 1
-					texture = tx_stand
-					next_animation = get_next_animation("Stand", pc.face_dir, false)
-				
-				elif get_input_dir().has(Vector2.LEFT):
+				if get_input_dir().x == -1:
 					ap.playback_speed = run_anim_speed
-					texture = tx_backrun
-					next_animation = get_next_animation("Backrun", Vector2.LEFT, false)
-				
-				elif get_input_dir().has(Vector2.RIGHT):
+					next_animation = get_next_animation("Backrun", Vector2.LEFT, pc.is_on_ssp)
+				elif get_input_dir().x == 1:
 					ap.playback_speed = run_anim_speed
-					texture = tx_run
-					next_animation = get_next_animation("Run", Vector2.RIGHT, false)
-				
+					next_animation = get_next_animation("Run", Vector2.RIGHT, pc.is_on_ssp)
 				else:
 					ap.playback_speed = 1
-					texture = tx_stand
-					next_animation = get_next_animation("Stand", pc.face_dir, false)
+					next_animation = get_next_animation("Stand", pc.face_dir, pc.is_on_ssp)
 
 
-			else: #airborne
-				if velocity.y < 0: #Rising
-					ap.playback_speed = 1
-					texture = tx_rise
-					
-					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
-						next_animation = get_next_animation("Rise", pc.face_dir, true)
-					
-					elif get_input_dir().has(Vector2.LEFT):
-							next_animation = get_next_animation("Rise", Vector2.RIGHT, true)	
-					elif get_input_dir().has(Vector2.RIGHT):
-							next_animation = get_next_animation("Rise", Vector2.RIGHT, true)
-					
-					else:
-						next_animation = get_next_animation("Rise", pc.face_dir, true)
-
-				else: #Falling
-					ap.playback_speed = 1
-					texture = tx_fall
-					
-					if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
-						next_animation = get_next_animation("Fall", pc.face_dir, true)
-					
-					elif get_input_dir().has(Vector2.LEFT):
-							next_animation = get_next_animation("Fall", Vector2.RIGHT, true)
-					elif get_input_dir().has(Vector2.RIGHT):
-							next_animation = get_next_animation("Fall", Vector2.RIGHT, true)
-					
-					else:
-						next_animation = get_next_animation("Fall", pc.face_dir, true)
+			else: #arial
+				ap.playback_speed = 0
+				
+				if get_input_dir().x == -1:
+					next_animation = get_next_animation("Arial", Vector2.RIGHT, true)
+				elif get_input_dir().x == 1:
+					next_animation = get_next_animation("Arial", Vector2.RIGHT, true) #TODO backarial
+				else:
+					next_animation = get_next_animation("Arial", pc.face_dir, true)
+				
+				if pc.velocity.y < 0: 		#Rising
+					start_time = 0
+				elif pc.velocity.y == 0:	#Zenith
+					start_time = 0.1
+				else: 						#Falling
+					start_time = 0.2
 
 
 	else: #is on ladder
-		ap.playback_speed = 1 #reset ap to normal speed
-		texture = tx_climb
-		
-		if get_input_dir().has(Vector2.LEFT) and get_input_dir().has(Vector2.RIGHT):
-			next_animation = get_next_animation("Climb", pc.face_dir, true)
-		
-		elif get_input_dir().has(Vector2.LEFT):
-			next_animation = get_next_animation("Climb", Vector2.LEFT, true)	
-		elif get_input_dir().has(Vector2.RIGHT):
-			next_animation = get_next_animation("Climb", Vector2.RIGHT, true)
-		
-		else:
-			next_animation = get_next_animation("Climb", pc.face_dir, true)
+		ap.playback_speed = 1 #TODO variable speed
+		next_animation = get_next_animation("Climb", pc.face_dir, true)
 
 
 
-	if ap.current_animation != next_animation and next_animation != "":
-		change_animation(next_animation, texture)
+	if (ap.current_animation != next_animation or (ap.current_animation == next_animation and start_time)) and next_animation != "":
+		change_animation(next_animation, texture, start_time)
 
 
-func get_input_dir() -> Array:
-	var dir_list = []
-	
+
+func get_input_dir() -> Vector2:
+
 	if not pc.disabled:
-		if Input.is_action_pressed("move_left"): 
-			dir_list.append(Vector2.LEFT)
-		if Input.is_action_pressed("move_right"):
-			dir_list.append(Vector2.RIGHT)
-		if Input.is_action_pressed("look_up"):
-			dir_list.append(Vector2.UP)
-		if Input.is_action_pressed("look_down"):
-			dir_list.append(Vector2.DOWN)
-	else: dir_list = [Vector2.ZERO]
-	
-	return dir_list
+		return Vector2(
+			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 
+			Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+	else: return Vector2.ZERO
 
-
-func setup_sprites(texture: StreamTexture):
-	print("setting up")
-	var front = pc.get_node("Front")
-	var back = pc.get_node("Back")
-	
-
-	front.texture = texture
-	front.hframes = texture.get_width() /32
-	front.vframes = texture.get_height() /32
-	back.texture = texture
-	back.hframes = texture.get_width() /32
-	back.vframes = texture.get_height() /32
 
 
 func get_next_animation(animation, anim_dir, can_shoot_down):
 	var animation_suffix
-	
 	var ws = get_parent().get_node("WeaponSprite")
 	
-	if anim_dir == Vector2.LEFT:
-		pc.face_dir = Vector2.LEFT
-		ws.scale.x = 1
-		
-		if get_input_dir().has(Vector2.UP) and get_input_dir().has(Vector2.DOWN):
-			animation_suffix = ".L"
-			pc.shoot_dir = Vector2.LEFT
-			ws.rotation_degrees = 0
-			
-		elif get_input_dir().has(Vector2.UP):
-			animation_suffix = ".L1"
-			pc.shoot_dir = Vector2.UP
-			ws.rotation_degrees = 90
-			
-		elif get_input_dir().has(Vector2.DOWN):
-			if can_shoot_down:
-				animation_suffix = ".L2"
-				pc.shoot_dir = Vector2.DOWN
-				ws.rotation_degrees = -90
-			else:
-				animation_suffix = ".L3"
-				pc.shoot_dir = Vector2.LEFT
-				ws.rotation_degrees = 0
-		
-		else:
-			animation_suffix = ".L"
-			pc.shoot_dir = Vector2.LEFT
-			ws.rotation_degrees = 0
-			
+	pc.face_dir = anim_dir
+	pc.shoot_dir = Vector2(anim_dir.x, 0)
+	ws.rotation_degrees = 0
 	
-	if anim_dir == Vector2.RIGHT:
-		pc.face_dir = Vector2.RIGHT
+	if anim_dir.x == -1:
+		animation_suffix = ".L"
+		ws.scale.x = 1
+	elif anim_dir.x == 1:
+		animation_suffix = ".R"
 		ws.scale.x = -1
 
-		if get_input_dir().has(Vector2.UP) and get_input_dir().has(Vector2.DOWN):
-			animation_suffix = ".R"
-			pc.shoot_dir = Vector2.RIGHT
-			ws.rotation_degrees = 0
-
-		elif get_input_dir().has(Vector2.UP):
-			animation_suffix = ".R1"
-			pc.shoot_dir = Vector2.UP
-			ws.rotation_degrees = -90
-			
-		elif get_input_dir().has(Vector2.DOWN):
-			if can_shoot_down:
-				animation_suffix = ".R2"
-				pc.shoot_dir = Vector2.DOWN
-				ws.rotation_degrees = 90
-			else:
-				animation_suffix = ".R3"
-				pc.shoot_dir = Vector2.RIGHT
-				ws.rotation_degrees = 0
-		
+	if get_input_dir().y == -1:
+		animation_suffix += "1"
+		pc.shoot_dir = Vector2.UP
+		ws.rotation_degrees = anim_dir.x * 90 * -1
+	elif get_input_dir().y == 1:
+		if can_shoot_down:
+			animation_suffix += "2"
+			pc.shoot_dir = Vector2.DOWN
+			ws.rotation_degrees = anim_dir.x * 90
 		else:
-			animation_suffix = ".R"
-			pc.shoot_dir = Vector2.RIGHT
-			ws.rotation_degrees = 0
-		
-		
-	var backwards = "Back" in animation
-	if backwards:
+			animation_suffix += "3"
+
+	if "Back" in animation:
 		pc.shoot_dir.x *= -1
 		ws.scale.x *= -1
 		
@@ -351,64 +177,27 @@ func get_next_animation(animation, anim_dir, can_shoot_down):
 	return next_animation
 
 
-func change_animation(next_animation, texture):
+func change_animation(next_animation, texture, start_time = 0):
 	var old_animation = ap.current_animation
 	var old_time = ap.current_animation_position
 	
 	var front = pc.get_node("Front")
 	var back = pc.get_node("Back")
 	
-	var animation_layers = {
-		"RunLeft": Layer.BACK,
-		"RunLeftLookUp": Layer.BACK,
-		"RunLeftLookDown": Layer.BACK,
-		"RunRight": Layer.BOTH,
-		"RunRightLookUp": Layer.BOTH,
-		"RunRightLookDown": Layer.BOTH
-	}
-
-	front.texture = texture
-	front.hframes = texture.get_width() /32
-	front.vframes = texture.get_height() /32
-	back.texture = texture
-	back.hframes = texture.get_width() /32
-	back.vframes = texture.get_height() /32
-	
-	
-	
-	if animation_layers.has(next_animation):
-		if animation_layers[next_animation] == Layer.FRONT:
-			back.texture = null
-		elif animation_layers[next_animation] == Layer.BACK:
-			front.texture = null
-	
-	
-	var animation_groups = { #only add if it needs to blend
-		"StandLeft": 1,
-		"StandLeftLookUp": 1,
-		"StandLeftLookDown": 1,
-		"StandRight": 2,
-		"StandRightLookUp": 2,
-		"StandRightLookDown": 2,
-		"RunLeft": 3,
-		"RunLeftLookUp": 3,
-		"RunLeftLookDown": 3,
-		"RunRight": 4,
-		"RunRightLookUp": 4,
-		"RunRightLookDown": 4,
-		"BackrunLeft": 5,
-		"BarckrunLeftLookUp": 5,
-		"BackrunLeftLookDown": 5,
-		"BackrunRight": 6,
-		"BarckrunRightLookUp": 6,
-		"BackrunRightLookDown": 6
-	}
+	var blend_groups = [
+		"Stand.L",
+		"Stand.R",
+		"Run.L",
+		"Run.R",
+		"Backrun.L",
+		"Backrun.R",
+	]
 
 	ap.play(next_animation)
-	
+	ap.seek(start_time)
 	#blending
-	if animation_groups.has(old_animation) and animation_groups.has(next_animation):
-		if animation_groups[old_animation] == animation_groups[next_animation]:
+	for g in blend_groups:
+		if g in old_animation and g in next_animation:
 			ap.seek(old_time)
 
 

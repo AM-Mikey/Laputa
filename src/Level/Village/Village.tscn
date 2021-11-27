@@ -132,18 +132,6 @@ position = Vector2( 320, 312 )
 level = 2
 amplitude_h = 0.0
 
-[node name="Crusher2" parent="Actors" instance=ExtResource( 29 )]
-position = Vector2( 520, 301 )
-level = 2
-amplitude_v = 32.0
-amplitude_h = 0.0
-
-[node name="Crusher3" parent="Actors" instance=ExtResource( 29 )]
-position = Vector2( 408, 264 )
-level = 2
-amplitude_v = 128.0
-amplitude_h = 0.0
-
 [node name="Props" type="Node2D" parent="."]
 
 [node name="AmmoRefill" parent="Props" instance=ExtResource( 26 )]

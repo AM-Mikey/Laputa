@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/RecruitRise.png-f4fde281d55c2db5a9332a90fe4ca1fa.stex"
+path="res://.import/RecruitRunOldColor.png-bafa5a0cf879c42a21fbcace299cf6d9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Player/RecruitRise.png"
-dest_files=[ "res://.import/RecruitRise.png-f4fde281d55c2db5a9332a90fe4ca1fa.stex" ]
+source_file="res://assets/Actor/Player/Outdated/RecruitRunOldColor.png"
+dest_files=[ "res://.import/RecruitRunOldColor.png-bafa5a0cf879c42a21fbcace299cf6d9.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/RecruitBackrun.png-8696e87e9e774a4a020cd85166e3ff41.stex"
+path="res://.import/RecruitClimb.png-b63e23bb9686bf7e93334409243870ba.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Player/RecruitBackrun.png"
-dest_files=[ "res://.import/RecruitBackrun.png-8696e87e9e774a4a020cd85166e3ff41.stex" ]
+source_file="res://assets/Actor/Player/Outdated/RecruitClimb.png"
+dest_files=[ "res://.import/RecruitClimb.png-b63e23bb9686bf7e93334409243870ba.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false
