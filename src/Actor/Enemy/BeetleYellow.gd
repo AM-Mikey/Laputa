@@ -3,70 +3,85 @@ extends Enemy
 enum StartingDirection {LEFT, RIGHT, UP, DOWN}
 export(StartingDirection) var starting_direction
 
+var direction_vector: Vector2
+export(float) var sight_distance = 200
+onready var detection_raycast:RayCast2D = $RayCast2D
+onready var state_label = $States/StateLabel
+onready var animated_sprite = $AnimatedSprite
+var is_attacking: bool = false
 
-#export var starting_direction = Vector2.LEFT
-var direction: Vector2
-var idle = false
+export var is_debug = false
 
+#states
+var idle_state
+var attack_state
+var reset_state
+
+var current_state
 
 func _ready():
 	hp = 4
 	damage_on_contact = 2
-	speed = Vector2(100, 100)
-	acceleration = 25
+	get_direction_vector_from_starting_dir()
+	detection_raycast.cast_to = direction_vector * sight_distance
+	init_states()	
+	pass
 	
-	level = 3
+func _physics_process(delta):
+	if is_debug:
+		state_label.text = current_state.state_name
+	current_state.physics_process()
+	pass
 	
-	$RayCast2D.cast_to = Vector2(200, 200) * starting_direction #cast ray left or right 200 px
-
-
-
-
-func _physics_process(_delta):
-	if idle:
-		var collider = $RayCast2D.get_collider()
-		if collider.get_collision_layer_bit(0): #player
-			fly()
-
-	else:
-		if is_on_wall():
-			wait()
+	
+func init_states():
+	#init idle
+	idle_state = $States/Idle
+	idle_state.beetle_actor = self
+	
+	#init attacking state
+	attack_state = $States/Attack
+	attack_state.beetle_actor = self
+	
+	#init reset state
+	reset_state = $States/Reset
+	reset_state.beetle_actor = self
+	#choose starting state
+	current_state = idle_state
+	
+	
+func change_state(new_state):
+	#always enter and exit when changing states
+	current_state.exit()
+	current_state = new_state
+	current_state.enter()
+	
+func get_direction_vector_from_starting_dir():
+	direction_vector = Vector2(0,0)
+	match starting_direction:
+		StartingDirection.LEFT:
+			direction_vector = Vector2.LEFT
+		StartingDirection.RIGHT:
+			direction_vector = Vector2.RIGHT
+		StartingDirection.UP:
+			direction_vector = Vector2.UP
+		StartingDirection.DOWN:
+			direction_vector = Vector2.DOWN
+	pass
+	
+func swap_direction_vector():
+	if direction_vector == Vector2.LEFT:
+		direction_vector = Vector2.RIGHT
+		return
 		
-		velocity = calculate_move_velocity(velocity, direction, speed)
-		velocity = move_and_slide(velocity, FLOOR_NORMAL)
-
-		animate()
-
-func fly():
-	idle = false
-	direction *= -1 
-
-
-func wait():
-	idle = true
-	old_dir = move_dir
-	move_dir = Vector2.ZERO
-
-	if old_dir.x == -1:
-		$AnimationPlayer.play("ClingLeftCrawlUp")
-	elif old_dir.x == 1:
-		$AnimationPlayer.play("ClingRightCrawlUp")
+	if direction_vector == Vector2.RIGHT:
+		direction_vector = Vector2.LEFT
+		return
 		
-	$RayCast2D.cast_to.x *= -1
-
-
-	
-
-func calculate_move_velocity(linearvelocity: Vector2, move_direction: Vector2, speed: Vector2) -> Vector2:
-	
-	var out: = linearvelocity
-	out.x = speed.x * move_direction.x
-	out.y = speed.y * move_direction.y
-	return out
-	
-func animate():
-	if not is_on_wall():
-		if move_dir == Vector2.LEFT:
-			$AnimationPlayer.play("FlyLeft")
-		if move_dir == Vector2.RIGHT:
-			$AnimationPlayer.play("FlyRight")
+	if direction_vector == Vector2.UP:
+		direction_vector = Vector2.DOWN
+		return
+		
+	if direction_vector == Vector2.DOWN:
+		direction_vector = Vector2.UP
+		return

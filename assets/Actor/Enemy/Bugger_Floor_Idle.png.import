@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/RecruitBackrun.png-f6c29fbd2a8fa9383bcea7e93dddaae8.stex"
+path="res://.import/Bugger_Floor_Idle.png-cb14ea7ae50c3265a7b416844265c7a8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Player/outdated/RecruitBackrun.png"
-dest_files=[ "res://.import/RecruitBackrun.png-f6c29fbd2a8fa9383bcea7e93dddaae8.stex" ]
+source_file="res://assets/Actor/Enemy/Bugger_Floor_Idle.png"
+dest_files=[ "res://.import/Bugger_Floor_Idle.png-cb14ea7ae50c3265a7b416844265c7a8.stex" ]
 
 [params]
 

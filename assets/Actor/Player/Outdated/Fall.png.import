@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Fall.png-6247b835ea18637ce1c73c2ea41f361d.stex"
+path="res://.import/Fall.png-f633261620e115c3c6d43f5c9a962025.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Player/Outdated/Fall.png"
-dest_files=[ "res://.import/Fall.png-6247b835ea18637ce1c73c2ea41f361d.stex" ]
+source_file="res://assets/Actor/Player/outdated/Fall.png"
+dest_files=[ "res://.import/Fall.png-f633261620e115c3c6d43f5c9a962025.stex" ]
 
 [params]
 
