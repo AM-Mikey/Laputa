@@ -40,7 +40,7 @@ func setup_arms():
 		
 		if arm_index == 0:
 			pivot = arm
-			pivot.modulate = Color("red")
+			pivot.modulate = Color.red
 			pivot_pos = arm.global_position
 		arm_index += 1
 

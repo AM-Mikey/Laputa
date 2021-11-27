@@ -179,7 +179,9 @@ func get_next_animation(animation, anim_dir, can_shoot_down):
 
 func change_animation(next_animation, texture, start_time = 0):
 	var old_animation = ap.current_animation
-	var old_time = ap.current_animation_position
+	var old_time = null
+	if ap && ap.current_animation != "":
+		old_time = ap.current_animation_position
 	
 	var front = pc.get_node("Front")
 	var back = pc.get_node("Back")
@@ -196,8 +198,9 @@ func change_animation(next_animation, texture, start_time = 0):
 	ap.play(next_animation)
 	ap.seek(start_time)
 	#blending
-	for g in blend_groups:
-		if g in old_animation and g in next_animation:
-			ap.seek(old_time)
+	if old_time:
+		for g in blend_groups:
+			if g in old_animation and g in next_animation:
+				ap.seek(old_time)
 
 

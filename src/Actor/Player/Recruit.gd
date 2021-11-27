@@ -61,8 +61,7 @@ onready var HUD
 
 
 func _ready():
-	var item_menu = get_tree().get_root().get_node("World/UILayer/Inventory")
-	connect("inventory_updated", item_menu, "_on_inventory_updated")
+	connect_inventory()
 
 	
 	
@@ -73,14 +72,8 @@ func _ready():
 
 func _input(event):
 	if not disabled:
-
-
-
-
 		if Input.is_action_just_pressed("debug_print"):
 			debug_print()
-
-
 		if event.is_action_pressed("level_up"):
 			if weapon_array.front().level < weapon_array.front().max_level:
 				print("level up via debug")
@@ -320,3 +313,10 @@ func setup_hud():
 	emit_signal("hp_updated", hp, max_hp)
 	emit_signal("total_xp_updated", total_xp)
 	emit_signal("weapons_updated", weapon_array)
+
+
+func connect_inventory():
+	#if this is always null when ready is called does it do anything? why do we have this?
+	var item_menu = get_tree().get_root().get_node_or_null("World/UILayer/Inventory")
+	if item_menu:
+		connect("inventory_updated", item_menu, "_on_inventory_updated")

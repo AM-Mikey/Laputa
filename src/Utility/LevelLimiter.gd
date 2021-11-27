@@ -10,7 +10,7 @@ export var background: StreamTexture
 export(Resource) var resource
 
 onready var world = get_tree().get_root().get_node("World")
-onready var camera = get_tree().get_root().get_node("World/Recruit/PlayerCamera")
+onready var camera = get_tree().get_root().get_node_or_null("World/Recruit/PlayerCamera")
 
 enum PxFocus {CENTER, TOP, ONE_QUARTER, THREE_QUARTERS, BOTTOM}
 export(PxFocus) var px_focus
@@ -98,7 +98,10 @@ func _ready():
 	######################################################################################################
 		#add_to_group("CameraLimiters")
 		get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
-		connect("limit_camera", camera, "_on_limit_camera")
+		if !camera:
+			camera = get_tree().get_root().get_node_or_null("World/Recruit/PlayerCamera")
+		if camera:
+			connect("limit_camera", camera, "_on_limit_camera")
 		on_viewport_size_changed()
 
 func _process(delta):
