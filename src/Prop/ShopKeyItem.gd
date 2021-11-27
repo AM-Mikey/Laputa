@@ -35,7 +35,7 @@ func _on_ShopKeyItem_body_entered(body):
 		display_tooltip()
 		$AnimationPlayer.play("DisplayNoPrice")
 
-func _on_ShopKeyItem_body_exited(body):
+func _on_ShopKeyItem_body_exited(_body):
 	if used == false:
 		has_player_near = false
 		if active_tooltip != null:
