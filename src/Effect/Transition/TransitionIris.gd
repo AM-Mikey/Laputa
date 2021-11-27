@@ -21,7 +21,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		"IrisExpand": queue_free()
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var vp_size = get_tree().get_root().size / world.resolution_scale
 	
 	var cam = pc.get_node("PlayerCamera")

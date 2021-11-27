@@ -50,9 +50,6 @@ onready var pc = get_parent()
 
 func _physics_process(_delta):
 	if pc.debug_flying:
-		var move_dir = Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 
-		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
 		pc.velocity = pc.move_dir * debug_fly_speed
 		pc.velocity = pc.move_and_slide(pc.velocity, FLOOR_NORMAL, true)
 
@@ -210,7 +207,7 @@ func get_move_dir() -> Vector2:
 
 
 
-func get_move_velocity(velocity, move_dir, face_dir, is_jump_interrupted) -> Vector2:
+func get_move_velocity(velocity, move_dir, _face_dir, is_jump_interrupted) -> Vector2:
 	var out = velocity
 	var friction = false
 	
@@ -224,10 +221,12 @@ func get_move_velocity(velocity, move_dir, face_dir, is_jump_interrupted) -> Vec
 	
 	
 	elif pc.is_in_water:
+# warning-ignore:integer_division
 		out.y += (GRAVITY/2) * get_physics_process_delta_time()
 		if move_dir.y < 0:
 			out.y = (pc.speed.y * 0.75) * move_dir.y
 		if is_jump_interrupted:
+# warning-ignore:integer_division
 			out.y += (GRAVITY/2) * get_physics_process_delta_time()
 		
 		if move_dir.x != 0:

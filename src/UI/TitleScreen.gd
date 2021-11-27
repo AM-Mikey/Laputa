@@ -13,7 +13,7 @@ onready var world = get_tree().get_root().get_node("World")
 
 
 func _ready():
-	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	
 
 												#VERSION STUFF

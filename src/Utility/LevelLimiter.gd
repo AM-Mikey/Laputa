@@ -97,14 +97,14 @@ func _ready():
 			world.get_node("BackgroundLayer").add_child(tr)
 	######################################################################################################
 		#add_to_group("CameraLimiters")
-		get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+		var _size = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 		if !camera:
 			camera = get_tree().get_root().get_node_or_null("World/Recruit/PlayerCamera")
 		if camera:
-			connect("limit_camera", camera, "_on_limit_camera")
+			var _value = connect("limit_camera", camera, "_on_limit_camera")
 		on_viewport_size_changed()
 
-func _process(delta):
+func _process(_delta):
 	if Engine.editor_hint:
 		$TextureRect.texture = background
 

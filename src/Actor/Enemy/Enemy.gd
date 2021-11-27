@@ -116,7 +116,7 @@ func die():
 		$DamagenumTimer.stop()
 		_on_DamagenumTimer_timeout()
 		if player_actor == null:
-			get_tree().get_root().get_node_or_null("World/Recruit")
+			player_actor = get_tree().get_root().get_node_or_null("World/Recruit")
 		
 		if player_actor:
 			player_actor.is_in_enemy = false #THIS IS A BAD WAY TO DO THIS if a player is in a different enemy when this one dies, they will be immune to that enemy

@@ -133,7 +133,7 @@ func _on_Return_pressed():
 
 func _on_MasterSlider_value_changed(value):
 	var db = percent_to_db(value)
-	var volume = AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),db)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),db)
 	if value == 0:
 		master_label.text = "Master Volume: Muted"
 	else:
@@ -143,7 +143,7 @@ func _on_MasterSlider_value_changed(value):
 
 func _on_MusicSlider_value_changed(value):
 	var db = percent_to_db(value)
-	var volume = AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),db)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),db)
 	if value == 0:
 		music_label.text = "Music Volume: Muted"
 	else:
@@ -153,7 +153,7 @@ func _on_MusicSlider_value_changed(value):
 
 func _on_SFXSlider_value_changed(value):
 	var db = percent_to_db(value)
-	var volume = AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),db)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),db)
 	if value == 0:
 		sfx_label.text = "SFX Volume: Muted"
 	else:

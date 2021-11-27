@@ -8,15 +8,13 @@ onready var pc = get_tree().get_root().get_node("World/Recruit")
 onready var ap = pc.get_node("AnimationPlayer")
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	run_anim_speed = max((abs(pc.velocity.x)/pc.speed.x) * 2, 0.1) #run_anim_speed = max((abs(velocity.x)/max_x_speed) * 1.5, 0.5) #was 1.5 rev it up to 2
 	animate(pc.move_dir, pc.velocity)
 
-func animate(move_dir, velocity):
+#TODO: Determine if _move_dir and _velocity can be removed the are not used in the function
+func animate(_move_dir, _velocity):
 	var texture
-	var hframes
-	var vframes
-
 	var next_animation: String = ""
 	var start_time: float
 	
@@ -176,15 +174,15 @@ func get_next_animation(animation, anim_dir, can_shoot_down):
 	var next_animation = animation + animation_suffix
 	return next_animation
 
-
-func change_animation(next_animation, texture, start_time = 0):
+#TODO: can we safely remove _texture?
+func change_animation(next_animation, _texture, start_time = 0):
 	var old_animation = ap.current_animation
 	var old_time = null
 	if ap && ap.current_animation != "":
 		old_time = ap.current_animation_position
 	
-	var front = pc.get_node("Front")
-	var back = pc.get_node("Back")
+	var _front = pc.get_node("Front")
+	var _back = pc.get_node("Back")
 	
 	var blend_groups = [
 		"Stand.L",

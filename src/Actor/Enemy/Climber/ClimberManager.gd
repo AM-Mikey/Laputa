@@ -71,19 +71,19 @@ func replace_arms(dead_arm_index):
 	collision_disabled = false
 	
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	rotation_cycle += arm_angle_speed
 	global_position = pivot_pos + Vector2(cos(rotation_cycle), sin(rotation_cycle)) * arm_distance /2
 	rotation += arm_angle_speed
 
 
 
-func on_arm_body_entered(body, arm):
+func on_arm_body_entered(_body, arm):
 	if not collision_disabled:
 		if $PivotCooldown.time_left == 0:
 			$PivotCooldown.start(0.1)
 			print("attached with: " + str(arm))
-			var old_pivot_pos = pivot_pos
+			var _old_pivot_pos = pivot_pos
 			pivot = arm
 			pivot_pos = arm.global_position
 			rotation_cycle +=  2 * PI - get_arm_angle_offset()

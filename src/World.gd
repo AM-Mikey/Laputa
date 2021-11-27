@@ -24,18 +24,18 @@ export var development_stage: String = "Alpha"
 var internal_version: String = get_internal_version()
 export var release_version: String
 export var is_release: bool = false
-export var skip_title: bool = false
+export var should_skip_title: bool = false
 
 export var starting_level = "res://src/Level/Village/Village.tscn"
 onready var current_level = load(starting_level).instance() #assumes current level to start with, might cause issues down the line
 
 func _ready():
-	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 	add_child(current_level)
 	add_child(TITLECAM.instance())
 	
-	if not skip_title:
+	if not should_skip_title:
 		load_title()
 	else:
 		skip_title()
@@ -46,7 +46,7 @@ func _ready():
 
 func get_internal_version() -> String:
 	var current_date = OS.get_date()
-	var years_since = current_date["year"] - 2021
+	var _years_since = current_date["year"] - 2021
 	var months_since = current_date["month"] - 3
 	var days_since = current_date["day"] - 18
 	
@@ -85,7 +85,7 @@ func skip_title():
 
 func _input(event):
 	if event.is_action_pressed("reload"):
-		get_tree().reload_current_scene()
+		var _err = get_tree().reload_current_scene()
 	if event.is_action_pressed("save_data"):
 		save_level_data_to_temp()
 		save_player_data_to_save()
@@ -114,8 +114,8 @@ func _input(event):
 
 
 
-
-func on_level_change(level, door_index, level_name, music):
+#TODO: can we remove level_name safely? It is unused
+func on_level_change(level, door_index, _level_name, music):
 	print("level change")
 	save_level_data_to_temp()
 	if has_node("Recruit"): #TODO check if working
@@ -283,34 +283,34 @@ func load_player_data_from_save():
 	if file.file_exists(save_path):
 		var file_read = file.open(save_path, File.READ)
 		if file_read == OK:
-			var data = file.get_var()
+			var scoped_data = file.get_var()
 			file.close()
 			
-			print(data["player_data"])
+			print(scoped_data["player_data"])
 			
-			on_level_change(data["player_data"]["current_level"], null, null, null)
+			on_level_change(scoped_data["player_data"]["current_level"], null, null, null)
 			yield(get_tree(), "idle_frame")
 			
-			pc.position = data["player_data"]["position"]
-			pc.hp = data["player_data"]["hp"]
-			pc.max_hp = data["player_data"]["max_hp"]
-			pc.total_xp = data["player_data"]["total_xp"]
-			pc.inventory = data["player_data"]["inventory"]
+			pc.position = scoped_data["player_data"]["position"]
+			pc.hp = scoped_data["player_data"]["hp"]
+			pc.max_hp = scoped_data["player_data"]["max_hp"]
+			pc.total_xp = scoped_data["player_data"]["total_xp"]
+			pc.inventory = scoped_data["player_data"]["inventory"]
 			#player.setup_weapons() not sure what this did
 			
 			
 			pc.weapon_array.clear()
-			for w in data["player_data"]["weapon_data"]:
+			for w in scoped_data["player_data"]["weapon_data"]:
 				var weapon_resource = load("res://src/Weapon/%s" %w + ".tres")
 				if weapon_resource != null:
 					pc.weapon_array.append(weapon_resource)
 				else:
 					printerr("ERROR: cannot find weapon resource at: res://src/Weapon/%s" %w + ".tres")
 			for w in pc.weapon_array:
-				w.level = data["player_data"]["weapon_data"][w.resource_name]["level"]
-				w.xp = data["player_data"]["weapon_data"][w.resource_name]["xp"]
+				w.level = scoped_data["player_data"]["weapon_data"][w.resource_name]["level"]
+				w.xp = scoped_data["player_data"]["weapon_data"][w.resource_name]["xp"]
 				if w.needs_ammo:
-					w.ammo = data["player_data"]["weapon_data"][w.resource_name]["ammo"]
+					w.ammo = scoped_data["player_data"]["weapon_data"][w.resource_name]["ammo"]
 			
 			#player.weapon_array[0].update_weapon()
 			pc.get_node("WeaponManager").update_weapon() #TODO: check compatability
@@ -345,7 +345,7 @@ func save_level_data_to_temp():
 
 func copy_level_data_to_temp():
 		var success_check = 0
-		var temp_data
+		var _temp_data
 		var save_data
 		
 		var file = File.new()
@@ -362,7 +362,7 @@ func copy_level_data_to_temp():
 		
 		file_read = file.open(temp_path, File.READ)
 		if file_read == OK:
-			temp_data = file.get_var()
+			_temp_data = file.get_var()
 			file.close()
 			success_check += 1
 		else:
@@ -372,12 +372,12 @@ func copy_level_data_to_temp():
 
 	
 		if save_data.has("level_data"):
-			var data = {}
-			data["level_data"] = save_data["level_data"]
+			var scoped_data = {}
+			scoped_data["level_data"] = save_data["level_data"]
 			
 			var file_written = file.open(temp_path, File.WRITE)
 			if file_written == OK:
-				file.store_var(data)
+				file.store_var(scoped_data)
 				file.close()
 				success_check +=1
 			else:
@@ -424,13 +424,13 @@ func copy_level_data_to_save():
 			
 			
 		if temp_data.has("level"):
-			var data = {}
-			data["player_data"] = save_data["player_data"]
-			data["level_data"] = temp_data["level_data"]
+			var scoped_data = {}
+			scoped_data["player_data"] = save_data["player_data"]
+			scoped_data["level_data"] = temp_data["level_data"]
 			
 			var save_file_written = save_file.open(save_path, File.WRITE)
 			if save_file_written == OK:
-				save_file.store_var(data)
+				save_file.store_var(scoped_data)
 				save_file.close()
 				success_check +=1
 			else:
@@ -455,11 +455,11 @@ func load_level_data_from_temp():
 	if file.file_exists(temp_path):
 		var file_read = file.open(temp_path, File.READ)
 		if file_read == OK:
-			var data = file.get_var()
+			var scoped_data = file.get_var()
 			file.close()
 			
-			if data["level_data"].has(current_level.name): #if it finds level data for this level
-				var current_level_data = data["level_data"][current_level.name]
+			if scoped_data["level_data"].has(current_level.name): #if it finds level data for this level
+				var current_level_data = scoped_data["level_data"][current_level.name]
 				if current_level_data["containers_if_used"].empty() == false: #if there are containers in the loaded level
 					for i in containers.size():
 						containers[i].used = current_level_data["containers_if_used"][i]
@@ -480,11 +480,11 @@ func load_level_data_from_save():
 	if file.file_exists(save_path):
 		var file_read = file.open(save_path, File.READ)
 		if file_read == OK:
-			var data = file.get_var()
+			var scoped_data = file.get_var()
 			file.close()
 			
-			if data["level_data"].has(current_level.name): #if it finds level data for this level
-				var current_level_data = data["level_data"][current_level.name]
+			if scoped_data["level_data"].has(current_level.name): #if it finds level data for this level
+				var current_level_data = scoped_data["level_data"][current_level.name]
 				if current_level_data["containers_if_used"].empty() == false: #if there are containers in the loaded level
 					for i in containers.size():
 						containers[i].used = current_level_data["containers_if_used"][i]

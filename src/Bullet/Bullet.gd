@@ -34,7 +34,7 @@ func _fizzle_from_range():
 	star_pop.position = global_position
 	queue_free()
 
-func _on_VisibilityNotifier2D_viewport_exited(viewport):
+func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 	queue_free()
 
 

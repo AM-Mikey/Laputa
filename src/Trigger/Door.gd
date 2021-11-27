@@ -17,7 +17,7 @@ export var door_index: int = 0
 export var locked = false
 
 func _ready():
-	connect("level_change", world, "on_level_change")
+	var _val = connect("level_change", world, "on_level_change")
 	add_to_group("LevelTriggers")
 	add_to_group("Doors")
 
@@ -30,11 +30,6 @@ func _on_Door_body_exited(_body):
 
 
 func _input(event):
-	var level_name = get_parent().get_parent().level_name
-	var music = get_parent().get_parent().music
-	
-	var sfx_player = world.get_node("SFXPlayer")
-	
 	if event.is_action_pressed("inspect") and has_player_near and not active_player.disabled and active_player.is_on_floor(): #floor check recently
 		if not locked:
 			active_player.set_collision_layer_bit(0, false)

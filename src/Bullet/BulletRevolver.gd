@@ -30,7 +30,7 @@ func _physics_process(_delta):
 	velocity = projectile_speed * direction
 	
 	if disabled == false:
-		move_and_slide(velocity)
+		var _return_velo = move_and_slide(velocity)
 		var distance_from_origin = origin.distance_to(global_position);
 		if distance_from_origin > projectile_range:
 			_fizzle_from_range()
