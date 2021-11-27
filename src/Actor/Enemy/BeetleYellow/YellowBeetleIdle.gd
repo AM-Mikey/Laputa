@@ -4,6 +4,8 @@ var state_name = "Idle"
 
 var beetle_actor
 
+onready var attack_timer = $Timer
+
 func physics_process():
 	var collision = beetle_actor.detection_raycast.get_collider()
 	if collision != null && collision.is_in_group("Player"):

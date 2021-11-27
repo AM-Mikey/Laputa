@@ -240,8 +240,9 @@ func on_level_change(level, door_index, level_name, music):
 	
 	
 func load_music(music):
-	$MusicPlayer.stream = load(music)
-	$MusicPlayer.play()
+	if music:
+		$MusicPlayer.stream = load(music)
+		$MusicPlayer.play()
 	
 func save_player_data_to_save():
 	var player = $Recruit
