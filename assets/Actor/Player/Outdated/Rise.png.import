@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Rise.png-905de81dd5c62b49fab96c8f387ddf6b.stex"
+path="res://.import/Rise.png-f2ba6901d33ed35ea31ebfd3075e4938.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Player/outdated/Rise.png"
-dest_files=[ "res://.import/Rise.png-905de81dd5c62b49fab96c8f387ddf6b.stex" ]
+source_file="res://assets/Actor/Player/Outdated/Rise.png"
+dest_files=[ "res://.import/Rise.png-f2ba6901d33ed35ea31ebfd3075e4938.stex" ]
 
 [params]
 

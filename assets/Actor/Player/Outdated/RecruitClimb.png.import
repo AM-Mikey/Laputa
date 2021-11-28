@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/RecruitClimb.png-b28dac895a300bd9bb9d9f6f752f15b3.stex"
+path="res://.import/RecruitClimb.png-b63e23bb9686bf7e93334409243870ba.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Player/outdated/RecruitClimb.png"
-dest_files=[ "res://.import/RecruitClimb.png-b28dac895a300bd9bb9d9f6f752f15b3.stex" ]
+source_file="res://assets/Actor/Player/Outdated/RecruitClimb.png"
+dest_files=[ "res://.import/RecruitClimb.png-b63e23bb9686bf7e93334409243870ba.stex" ]
 
 [params]
 
