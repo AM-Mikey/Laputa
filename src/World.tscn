@@ -9,7 +9,7 @@ __meta__ = {
 }
 development_stage = "alpha"
 release_version = "1.7"
-skip_title = true
+should_skip_title = true
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -1

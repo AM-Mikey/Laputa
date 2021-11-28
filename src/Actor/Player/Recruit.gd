@@ -1,4 +1,5 @@
-extends Player
+extends Actor
+class_name Recruit, "res://assets/Icon/PlayerIcon.png"
 
 #const POPUP = preload("res://src/UI/PopupText.tscn")
 const LEVELUP = preload("res://src/Effect/LevelUp.tscn")
@@ -61,8 +62,7 @@ onready var HUD
 
 
 func _ready():
-	var item_menu = get_tree().get_root().get_node("World/UILayer/Inventory")
-	connect("inventory_updated", item_menu, "_on_inventory_updated")
+	connect_inventory()
 
 	
 	
@@ -73,14 +73,8 @@ func _ready():
 
 func _input(event):
 	if not disabled:
-
-
-
-
 		if Input.is_action_just_pressed("debug_print"):
 			debug_print()
-
-
 		if event.is_action_pressed("level_up"):
 			if weapon_array.front().level < weapon_array.front().max_level:
 				print("level up via debug")
@@ -207,25 +201,21 @@ func _on_ItemDetector_area_entered(area):
 			$PickupSound.stream = sfx_get_ammo
 			$PickupSound.play()
 			
-			var needs_ammo = weapon_array.front().needs_ammo
-			var ammo = weapon_array.front().ammo
-			var max_ammo = weapon_array.front().max_ammo
+			var _needs_ammo = weapon_array.front().needs_ammo
+			var _ammo = weapon_array.front().ammo
+			var _max_ammo = weapon_array.front().max_ammo
 			emit_signal("weapons_updated", weapon_array)
 			area.queue_free()
 
-func do_iframes(damage, knockback_direction):
+#TODO: Can we remove damage safely? If so remove as it is not used in the function.
+#TODO: Can we remove knockback_direction safely? If so remove as it is not used in the function.
+func do_iframes(_damage, _knockback_direction):
 	print("do_iframes_started")
 	invincible = true
 	$EffectPlayer.play("FlashIframe")
 	yield($EffectPlayer, "animation_finished")
 	invincible = false
 	print("do_iframes_finished")
-#	if is_in_enemy == true: #check if they are REALLY still in an enemy
-#		#there was an issue with this failsafe, can't remember what it was
-#		hit(damage, knockback_direction)
-#	if is_in_spikes == true:
-#		hit(damage, knockback_direction)
-		
 
 func hit(damage, knockback_direction):
 	if not disabled and not invincible:
@@ -320,3 +310,10 @@ func setup_hud():
 	emit_signal("hp_updated", hp, max_hp)
 	emit_signal("total_xp_updated", total_xp)
 	emit_signal("weapons_updated", weapon_array)
+
+
+func connect_inventory():
+	#if this is always null when ready is called does it do anything? why do we have this?
+	var item_menu = get_tree().get_root().get_node_or_null("World/UILayer/Inventory")
+	if item_menu:
+		var _err = connect("inventory_updated", item_menu, "_on_inventory_updated")

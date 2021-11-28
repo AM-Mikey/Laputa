@@ -122,7 +122,7 @@ func automatic_fire(bullet_pos, effect_pos, shoot_dir): #only fires autos but ho
 func release_fire():
 	trigger_held = false
 
-func prepare_bullet(bullet_pos, effect_pos, shoot_dir):
+func prepare_bullet(bullet_pos, _effect_pos, shoot_dir):
 	var bullet = weapon.bullet_scene.instance()
 	
 	bullet.damage = weapon.damage
@@ -155,5 +155,6 @@ func get_bullet_dir(bullet_rot) -> Vector2:
 	elif bullet_rot == 0: #Down
 		return Vector2(0, 1)
 	else:
-		return Vector2.ZERO
 		printerr("ERROR: Cant get bullet direction!")
+		return Vector2.ZERO
+

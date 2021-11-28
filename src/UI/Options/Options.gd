@@ -9,7 +9,7 @@ func _ready():
 		visible = false
 	else:
 		$TabContainer/Settings.focus()
-		get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
+		var _err = get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 		_on_viewport_size_changed()
 
 

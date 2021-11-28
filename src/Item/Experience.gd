@@ -57,13 +57,13 @@ func randomize_speed():
 	rng.randomize()
 	return Vector2(rng.randf_range(rng_min_speed, rng_max_speed),rng.randf_range(rng_min_speed, rng_max_speed))
 	
-func getvelocity(speed, direction) -> Vector2:
+func getvelocity(speed, scoped_direction) -> Vector2:
 	var out: = velocity
 	
-	out.x = speed.x * direction.x
+	out.x = speed.x * scoped_direction.x
 	out.y += gravity * get_physics_process_delta_time()
-	if direction.y == -1.0:
-		out.y = speed.y * direction.y
+	if scoped_direction.y == -1.0:
+		out.y = speed.y * scoped_direction.y
 
 	return out
 

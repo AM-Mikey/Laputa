@@ -81,16 +81,16 @@ func is_within_camera(cam_pos):
 func get_move_dir():
 	move_dir.x = sign(target_pos.x - global_position.x)
 
-func calculate_movevelocity(linearvelocity: Vector2,move_dir: Vector2,speed: Vector2) -> Vector2:
+func calculate_movevelocity(linearvelocity: Vector2, scoped_move_dir: Vector2, speed: Vector2) -> Vector2:
 	var out: = linearvelocity
 	
 	#THIS CODE IS PRIMATIVE COMPARED TO PLAYER AND BOSS
 	#if you need an npc with proper momementum and friction do something else
 	
-	out.x = speed.x * move_dir.x
+	out.x = speed.x * scoped_move_dir.x
 	out.y += gravity * get_physics_process_delta_time()
-	if move_dir.y < 0:
-		out.y = speed.y * move_dir.y
+	if scoped_move_dir.y < 0:
+		out.y = speed.y * scoped_move_dir.y
 	return out
 
 #sprite stuff

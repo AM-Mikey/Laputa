@@ -77,11 +77,11 @@ func _physics_process(delta):
 	if $AnimationPlayer.playback_speed < .1:
 		$AnimationPlayer.stop()
 
-func get_initial_velocity(projectile_speed, direction) -> Vector2:
+func get_initial_velocity(scoped_projectile_speed, scoped_direction) -> Vector2:
 	var out = velocity
 
-	out.x = projectile_speed * direction.x
-	out.y = projectile_speed * direction.y
+	out.x = scoped_projectile_speed * scoped_direction.x
+	out.y = scoped_projectile_speed * scoped_direction.y
 	
 	if player_on_floor and player_held_down:  #look down on ground
 		out.y -= 50

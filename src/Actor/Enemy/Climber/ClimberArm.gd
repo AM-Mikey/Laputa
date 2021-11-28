@@ -8,7 +8,7 @@ func _ready():
 	damage_on_contact = 1
 	level = 1
 
-func _process(delta):
+func _process(_delta):
 	if get_parent() != null:
 		$Sprite.rotation = 2 * PI - get_parent().rotation
 

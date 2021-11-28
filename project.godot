@@ -50,9 +50,9 @@ _global_script_classes=[ {
 "path": "res://src/Actor/NPC/NPC.gd"
 }, {
 "base": "Actor",
-"class": "Player",
+"class": "Recruit",
 "language": "GDScript",
-"path": "res://src/Actor/Player/Player.gd"
+"path": "res://src/Actor/Player/Recruit.gd"
 }, {
 "base": "Resource",
 "class": "Weapon",
@@ -68,7 +68,7 @@ _global_script_class_icons={
 "KeyItem": "res://assets/Icon/KeyItemIcon.png",
 "Movement": "",
 "NPC": "res://assets/Icon/NPCIcon.png",
-"Player": "res://assets/Icon/PlayerIcon.png",
+"Recruit": "res://assets/Icon/PlayerIcon.png",
 "Weapon": "res://assets/Icon/WeaponIcon.png"
 }
 

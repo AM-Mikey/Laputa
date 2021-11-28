@@ -71,7 +71,8 @@ func _physics_process(delta):
 func on_crush_body_entered(body, dir):
 	t_body = body
 	t_dir = dir
-func on_crush_body_exited(body):
+
+func on_crush_body_exited(_body):
 	t_body = null
 	t_dir = null
 

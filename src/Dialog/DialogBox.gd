@@ -35,7 +35,7 @@ onready var world = get_tree().get_root().get_node("World")
 onready var pc = get_tree().get_root().get_node("World/Recruit")
 
 func _ready():
-	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	var _con = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 	audio.stream = text_sound
 	tb.bbcode_text = "\n" #""
@@ -58,12 +58,12 @@ func print_flavor_text():
 	print(text)
 	dialog_loop()
 
-func start_printing(dialog_json, conversation):
+func start_printing(dialog_json, conversation_to_print):
 	current_dialog_json = dialog_json
 	in_dialog = true
 	
 	dialog = load_dialog(dialog_json)
-	text = dialog[conversation].strip_edges().replace("\t", "") #strip edges to clean up first and last newlines ## remove tabulation
+	text = dialog[conversation_to_print].strip_edges().replace("\t", "") #strip edges to clean up first and last newlines ## remove tabulation
 	print(text)
 	
 	pc.disabled = true
@@ -194,7 +194,7 @@ func stop_printing():
 
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var viewport_size = get_tree().get_root().size / world.resolution_scale
 	
 	if pc.get_node("PlayerCamera").offset_v >= 1 / world.resolution_scale: #more than halfway down

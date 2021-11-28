@@ -15,7 +15,7 @@ func _on_Lamp_body_entered(body):
 	has_player_near = true
 	active_player = body
 
-func _on_Lamp_body_exited(body):
+func _on_Lamp_body_exited(_body):
 	has_player_near = false
 	
 

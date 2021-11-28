@@ -6,8 +6,8 @@ const TOOLTIP = preload("res://src/UI/ShopTooltip.tscn")
 export var item_name: String
 export var price: int
 
-var get_sound = load("res://assets/SFX/snd_get_item.ogg")
-var no_sound = load("res://assets/SFX/snd_quote_bonkhead.ogg")
+var get_sound = load("res://assets/SFX/Placeholder/snd_get_item.ogg")
+var no_sound = load("res://assets/SFX/Placeholder/snd_quote_bonkhead.ogg")
 
 var used = false
 var has_player_near = false
@@ -35,7 +35,7 @@ func _on_ShopKeyItem_body_entered(body):
 		display_tooltip()
 		$AnimationPlayer.play("DisplayNoPrice")
 
-func _on_ShopKeyItem_body_exited(body):
+func _on_ShopKeyItem_body_exited(_body):
 	if used == false:
 		has_player_near = false
 		if active_tooltip != null:

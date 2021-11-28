@@ -14,11 +14,14 @@ func display_number():
 		$Layer/Num2.visible = false
 		$Layer/Num3.visible = false
 	elif value >= 10 and value < 100:
+# warning-ignore:integer_division
 		$Layer/Num1.frame_coords.x = (value % 100) / 10
 		$Layer/Num2.frame_coords.x = value % 10
 		$Layer/Num3.visible = false
 	elif value >= 100 and value < 1000:
+# warning-ignore:integer_division
 		$Layer/Num1.frame_coords.x = (value % 1000) / 100
+# warning-ignore:integer_division
 		$Layer/Num2.frame_coords.x = (value % 100) / 10
 		$Layer/Num3.frame_coords.x = value % 10
 	elif value >= 1000:

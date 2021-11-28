@@ -6,7 +6,7 @@ var wait_time = 0.2
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 	_on_viewport_size_changed()
 	$Label.text = text
 	$Timer.start(wait_time)
