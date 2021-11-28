@@ -2,11 +2,12 @@ extends Control
 
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 const LEVEL = preload("res://src/UI/LevelSelect.tscn")
+const TITLE = preload("res://src/UI/TitleScreen.tscn")
 
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 	focus()
 
@@ -37,7 +38,10 @@ func _on_Level_pressed():
 	get_parent().add_child(level)
 
 func _on_Quit_pressed():
-	get_tree().quit()
+	var title = TITLE.instance()
+	if not world.has_node("UILayer/TitleScreen"):
+		world.get_node("UILayer").add_child(title)
+	queue_free()
 
 func on_viewport_size_changed():
 	rect_size = get_tree().get_root().size / world.resolution_scale

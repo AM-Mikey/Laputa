@@ -5,6 +5,7 @@ const INVENTORY = preload("res://src/UI/Inventory/Inventory.tscn")
 const LEVELNAME = preload("res://src/UI/LevelName.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 const PAUSEMENU = preload("res://src/UI/PauseMenu.tscn")
+const POPUP = preload("res://src/UI/PopupText.tscn")
 const RECRUIT = preload("res://src/Actor/Player/Recruit.tscn")
 const TITLE = preload("res://src/UI/TitleScreen.tscn")
 const TITLECAM = preload("res://src/Utility/TitleCam.tscn")
@@ -87,10 +88,16 @@ func _input(event):
 	if event.is_action_pressed("reload"):
 		var _err = get_tree().reload_current_scene()
 	if event.is_action_pressed("save_data"):
+		var popup = POPUP.instance()
+		popup.text = "quicksaved..."
+		$UILayer.add_child(popup)
 		save_level_data_to_temp()
 		save_player_data_to_save()
 		copy_level_data_to_save()
 	if event.is_action_pressed("load_data"):
+		var popup = POPUP.instance()
+		popup.text = "loaded save"
+		$UILayer.add_child(popup)
 		load_player_data_from_save()
 		load_level_data_from_save()
 		copy_level_data_to_temp()

@@ -1,13 +1,13 @@
 extends Control
 
-var text
+var text: String
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
 	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 	
-	$MarginContainer/Label.text = text
+	$Label.text = text
 
 
 func _on_Timer_timeout():
