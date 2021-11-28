@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/RecruitRunOldColor.png-bafa5a0cf879c42a21fbcace299cf6d9.stex"
+path="res://.import/RecruitRunOldColor.png-f18a2c7fbee356181747ef909f8d8fff.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Player/Outdated/RecruitRunOldColor.png"
-dest_files=[ "res://.import/RecruitRunOldColor.png-bafa5a0cf879c42a21fbcace299cf6d9.stex" ]
+source_file="res://assets/Actor/Player/outdated/RecruitRunOldColor.png"
+dest_files=[ "res://.import/RecruitRunOldColor.png-f18a2c7fbee356181747ef909f8d8fff.stex" ]
 
 [params]
 
