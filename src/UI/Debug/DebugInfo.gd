@@ -41,7 +41,7 @@ func _process(delta):
 
 	$VBox/HBox/C2/A/Disabled.text = str(pc.disabled)
 	$VBox/HBox/C2/A/Invincible.text = str(pc.invincible)
-	$VBox/HBox/C2/A/DebugFly.text = str(pc.debug_flying)
+#	$VBox/HBox/C2/A/DebugFly.text = str(pc.debug_flying)
 	$VBox/HBox/C2/A/Floor.text = str(pc.is_on_floor())
 	$VBox/HBox/C2/A/Water.text = str(pc.is_in_water)
 	$VBox/HBox/C2/A/Ladder.text = str(pc.is_on_ladder)

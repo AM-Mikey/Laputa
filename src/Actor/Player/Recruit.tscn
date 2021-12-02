@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://src/Actor/Player/WeaponManager.gd" type="Script" id=1]
 [ext_resource path="res://src/Actor/Player/Recruit.gd" type="Script" id=2]
@@ -17,6 +17,11 @@
 [ext_resource path="res://assets/Actor/Player/Aerial.png" type="Texture" id=15]
 [ext_resource path="res://assets/Actor/Player/Climb.png" type="Texture" id=16]
 [ext_resource path="res://assets/Actor/Player/Backrun.png" type="Texture" id=17]
+[ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=18]
+[ext_resource path="res://src/Actor/Player/Fly.gd" type="Script" id=19]
+[ext_resource path="res://src/Actor/Player/Normal.gd" type="Script" id=20]
+[ext_resource path="res://src/Actor/Player/Falling.gd" type="Script" id=21]
+[ext_resource path="res://src/Actor/Player/Jumping.gd" type="Script" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 7.5 )
@@ -2486,13 +2491,47 @@ script = ExtResource( 2 )
 hp = 8
 max_hp = 8
 
-[node name="MovementManager" type="Node" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color( 1, 1, 1, 0.4 )
+position = Vector2( 0, -7.5 )
+shape = SubResource( 1 )
+
+[node name="MovementManager" type="Node2D" parent="."]
 script = ExtResource( 12 )
 
-[node name="MinimumDirectionTimer" type="Timer" parent="MovementManager"]
+[node name="States" type="Node2D" parent="MovementManager"]
+
+[node name="StateLabel" type="Label" parent="MovementManager/States"]
+margin_left = -21.1084
+margin_top = -34.0
+margin_right = 18.8916
+margin_bottom = -20.0
+theme = ExtResource( 18 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Water" type="Node" parent="MovementManager/States"]
+
+[node name="Normal" type="Node" parent="MovementManager/States"]
+script = ExtResource( 20 )
+
+[node name="Jumping" type="Node" parent="MovementManager/States"]
+script = ExtResource( 22 )
+
+[node name="Falling" type="Node" parent="MovementManager/States"]
+script = ExtResource( 21 )
+
+[node name="Ladder" type="Node" parent="MovementManager/States"]
+
+[node name="Fly" type="Node" parent="MovementManager/States"]
+script = ExtResource( 19 )
+
+[node name="MinDirTimer" type="Timer" parent="MovementManager"]
 one_shot = true
 
-[node name="ForgivenessTimer" type="Timer" parent="MovementManager"]
+[node name="ForgiveTimer" type="Timer" parent="MovementManager"]
 one_shot = true
 
 [node name="BonkTimeout" type="Timer" parent="MovementManager"]
@@ -2503,11 +2542,6 @@ autostart = true
 [node name="JumpSound" type="AudioStreamPlayer" parent="MovementManager"]
 stream = ExtResource( 7 )
 bus = "SFX"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-modulate = Color( 1, 1, 1, 0.4 )
-position = Vector2( 0, -7.5 )
-shape = SubResource( 1 )
 
 [node name="SpriteManager" type="Node" parent="."]
 script = ExtResource( 13 )

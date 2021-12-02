@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 
 const BONK: = preload("res://src/Effect/BonkParticle.tscn")
@@ -14,14 +14,13 @@ var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 enum Jump {NORMAL, RUNNING}
 var jump_type
 
-enum State {
-}
-
 
 var speed = Vector2(90,180)
 var acceleration = 2.5 #was 5
 var ground_cof = 0.1 #was 0.2
 var air_cof = 0.00 # was 0.05
+
+
 
 
 
@@ -40,81 +39,111 @@ var knockback_velocity = Vector2.ZERO
 var starting_direction #for acceleration
 var bonk_distance = 4 #this was for corner clipping
 
-
-var debug_fly_speed = 500
-
+var states = {}
+var current_state
+var is_debug = true
 
 
 onready var world = get_tree().get_root().get_node("World")
 onready var pc = get_parent()
+onready var state_label = get_node("States/StateLabel")
+onready var sp = get_node("States")
+
+onready var min_dir_timer = get_node("MinDirTimer")
+onready var forgive_timer = get_node("ForgiveTimer")
+
+func _ready():
+	initialize_states()
+
+
+func change_state(new_state):
+	#always enter and exit when changing states
+	if current_state:
+		current_state.exit()
+	current_state = new_state
+	current_state.enter()
+
+
+
+
+
+func initialize_states():
+	for c in sp.get_children():
+		if c.get_class() == "Node":
+			states[c.name.to_lower()] = c
+	
+	current_state = states["normal"]
+
+
 
 func _physics_process(_delta):
-	if pc.debug_flying:
-		pc.velocity = pc.move_dir * debug_fly_speed
-		pc.velocity = pc.move_and_slide(pc.velocity, FLOOR_NORMAL, true)
-
-	else:
-		pc.move_dir = get_move_dir()
-
-		if pc.is_on_ceiling() and $BonkTimeout.time_left == 0:
-			bonk("bonk")
-
-
-		if pc.is_on_floor():
-			
-			jump_type = Jump.NORMAL
-			
-			#if not pc.knockback and not pc.is_on_ladder: this was our check to keep the snap vector 0 allowing jumps
-			
-			if $ForgivenessTimer.time_left == 0:
-				snap_vector = SNAP_DIRECTION * SNAP_LENGTH
-				if $BonkTimeout.time_left == 0:
-					bonk("Land")
-			
-			if pc.is_on_ladder:
-				if Input.is_action_pressed("look_down"):
-					pc.is_on_ladder = false
-					
-			$ForgivenessTimer.start(forgiveness_time)
-
-
-
-
-
-
-		#jump interrupt
-		var is_jump_interrupted = false
-		if pc.velocity.y < 0.0: #$MinimumJumpTimer.time_left == 0 and
-			if not Input.is_action_pressed("jump"):
-				is_jump_interrupted = true
-
-
-
-
-
-
-		if pc.knockback:
-			if knockback_velocity == Vector2.ZERO:
-				knockback_velocity = Vector2(knockback_speed.x * knockback_direction.x, knockback_speed.y * -1)
-				pc.velocity.y = knockback_velocity.y #set knockback y to this ONCE
-			
-			pc.velocity.x += knockback_velocity.x
-			knockback_velocity.x /= 2 #???? why after
-			
-			if abs(knockback_velocity.x) < 1:
-				knockback_velocity = Vector2.ZERO
-				pc.knockback = false
- 
-
-
-		pc.velocity = get_move_velocity(pc.velocity, pc.move_dir, pc.face_dir, is_jump_interrupted)
-		var new_velocity = pc.move_and_slide_with_snap(pc.velocity, snap_vector, FLOOR_NORMAL, true)
-			
-		if pc.is_on_wall():
-			new_velocity.y = max(pc.velocity.y, new_velocity.y)
-			
-		pc.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
-
+	if is_debug:
+		state_label.text = current_state.name.to_lower()
+	current_state.state_process()
+#
+#
+#
+#	pc.move_dir = get_move_dir()
+#
+#	if pc.is_on_ceiling() and $BonkTimeout.time_left == 0:
+#		bonk("bonk")
+#
+#
+#	if pc.is_on_floor():
+#
+#		jump_type = Jump.NORMAL
+#
+#		#if not pc.knockback and not pc.is_on_ladder: this was our check to keep the snap vector 0 allowing jumps
+#
+#		if $ForgivenessTimer.time_left == 0:
+#			snap_vector = SNAP_DIRECTION * SNAP_LENGTH
+#			if $BonkTimeout.time_left == 0:
+#				bonk("Land")
+#
+#		if pc.is_on_ladder:
+#			if Input.is_action_pressed("look_down"):
+#				pc.is_on_ladder = false
+#
+#		$ForgivenessTimer.start(forgiveness_time)
+#
+#
+#
+#
+#
+#
+#	#jump interrupt
+#	var is_jump_interrupted = false
+#	if pc.velocity.y < 0.0: #$MinimumJumpTimer.time_left == 0 and
+#		if not Input.is_action_pressed("jump"):
+#			is_jump_interrupted = true
+#
+#
+#
+#
+#
+#
+#	if pc.knockback:
+#		if knockback_velocity == Vector2.ZERO:
+#			knockback_velocity = Vector2(knockback_speed.x * knockback_direction.x, knockback_speed.y * -1)
+#			pc.velocity.y = knockback_velocity.y #set knockback y to this ONCE
+#
+#		pc.velocity.x += knockback_velocity.x
+#		knockback_velocity.x /= 2 #???? why after
+#
+#		if abs(knockback_velocity.x) < 1:
+#			knockback_velocity = Vector2.ZERO
+#			pc.knockback = false
+#
+#
+#
+#	pc.velocity = get_move_velocity(pc.velocity, pc.move_dir, pc.face_dir, is_jump_interrupted)
+#	var new_velocity = pc.move_and_slide_with_snap(pc.velocity, snap_vector, FLOOR_NORMAL, true)
+#
+#	if pc.is_on_wall():
+#		new_velocity.y = max(pc.velocity.y, new_velocity.y)
+#
+#	pc.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
+#
 
 
 func _input(event):
@@ -131,7 +160,9 @@ func _input(event):
 			pc.direction_lock = Vector2.ZERO
 		
 		if event.is_action_pressed("debug_fly"):
-			debug_fly()
+			if current_state != states["fly"]:
+				change_state(states["fly"])
+			else: change_state(states["normal"])
 		
 		if pc.is_inspecting:
 			if event.is_action_pressed("move_left") \
@@ -142,17 +173,17 @@ func _input(event):
 
 
 
-func debug_fly():
-	if not pc.debug_flying:
-		print("debug fly: ON")
-		pc.debug_flying = true
-		pc.invincible = true
-	else:
-		print("debug fly: OFF")
-		pc.is_in_water = false
-		pc.is_on_ladder = false
-		pc.debug_flying = false
-		pc.invincible = false
+#func debug_fly():
+#	if not pc.debug_flying:
+#		print("debug fly: ON")
+#		pc.debug_flying = true
+#		pc.invincible = true
+#		pc.is_in_water = false
+#		pc.is_on_ladder = false
+#	else:
+#		print("debug fly: OFF")
+#		pc.debug_flying = false
+#		pc.invincible = false
 
 
 func bonk(type):

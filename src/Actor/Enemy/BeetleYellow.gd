@@ -28,7 +28,7 @@ func _ready():
 	
 func _physics_process(delta):
 	if is_debug:
-		state_label.text = current_state.state_name
+		state_label.text = current_state
 	current_state.physics_process()
 	pass
 	

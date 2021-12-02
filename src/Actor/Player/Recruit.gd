@@ -27,9 +27,9 @@ export var max_hp: int = 100
 var total_xp: int = 0
 
 
+
 #STATES
 var direction_lock = Vector2.ZERO
-var debug_flying = false
 
 var invincible = false
 var disabled = true
