@@ -7,7 +7,7 @@ const FLOOR_NORMAL: = Vector2.UP
 const SNAP_DIRECTION = Vector2.DOWN
 const SNAP_LENGTH = 4.0
 
-const GRAVITY = 300
+const GRAVITY = 300.0
 
 var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
@@ -51,6 +51,7 @@ onready var sp = get_node("States")
 
 onready var min_dir_timer = get_node("MinDirTimer")
 onready var forgive_timer = get_node("ForgiveTimer")
+onready var bonk_timeout = get_node("BonkTimeout")
 
 func _ready():
 	initialize_states()
@@ -149,7 +150,7 @@ func _physics_process(_delta):
 func _input(event):
 	if not pc.disabled:
 		
-		if event.is_action_pressed("jump") and $ForgivenessTimer.time_left > 0 \
+		if event.is_action_pressed("jump") and $ForgiveTimer.time_left > 0 \
 		or event.is_action_pressed("jump") and pc.is_on_floor():
 
 			jump()
@@ -210,7 +211,7 @@ func jump():
 	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") and abs(pc.velocity.x) > pc.speed.x * 0.95:
 		jump_type = Jump.RUNNING
 		jump_starting_move_dir_x = pc.move_dir.x
-		$MinimumDirectionTimer.start(minimum_direction_time)
+		$MinDirTimer.start(minimum_direction_time)
 
 
 
@@ -230,7 +231,7 @@ func get_move_dir() -> Vector2:
 			return Vector2(
 				Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 				
-				-1.0 if Input.is_action_just_pressed("jump") and $ForgivenessTimer.time_left > 0 or Input.is_action_just_pressed("jump") and pc.is_on_floor() 
+				-1.0 if Input.is_action_just_pressed("jump") and $ForgiveTimer.time_left > 0 or Input.is_action_just_pressed("jump") and pc.is_on_floor() 
 				else 0.0)
 	
 	else: #disabled

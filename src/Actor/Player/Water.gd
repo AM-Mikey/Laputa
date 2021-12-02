@@ -4,7 +4,7 @@ enum Jump {NORMAL, RUNNING}
 var jump_type
 var forgiveness_time = 0.05
 
-var speed = Vector2(90,180)
+var speed = Vector2(60,140)
 var acceleration = 2.5 #was 5
 var ground_cof = 0.1 #was 0.2
 var air_cof = 0.00 # was 0.05
@@ -76,11 +76,13 @@ func get_move_dir():
 
 
 
+
 func get_move_velocity(velocity, move_dir, is_jump_interrupted):
 	var out = velocity
 	var friction = false
 	
 	
+
 
 
 	if jump_type == Jump.RUNNING:
@@ -110,18 +112,17 @@ func get_move_velocity(velocity, move_dir, is_jump_interrupted):
 			friction = true
 	
 	
-	#normal
-	else:
-		out.y += mm.GRAVITY * get_physics_process_delta_time()
+
+	else: 	#water stuff
+		out.y += (mm.GRAVITY/2) * get_physics_process_delta_time()
 		if move_dir.y < 0:
-			out.y = speed.y * pc.move_dir.y
-		
+			out.y = (pc.speed.y) * move_dir.y
 		if is_jump_interrupted:
-			out.y += mm.GRAVITY * get_physics_process_delta_time()
+			out.y += (mm.GRAVITY/2) * get_physics_process_delta_time()
 
 		if move_dir.x != 0:
-			out.x = min(abs(out.x) + acceleration, speed.x)
-			out.x *= pc.move_dir.x
+			out.x = min(abs(out.x) + pc.acceleration, (pc.speed.x))
+			out.x *= move_dir.x
 		else:
 			friction = true
 

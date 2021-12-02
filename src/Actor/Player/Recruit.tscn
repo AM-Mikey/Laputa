@@ -20,8 +20,8 @@
 [ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=18]
 [ext_resource path="res://src/Actor/Player/Fly.gd" type="Script" id=19]
 [ext_resource path="res://src/Actor/Player/Normal.gd" type="Script" id=20]
-[ext_resource path="res://src/Actor/Player/Falling.gd" type="Script" id=21]
-[ext_resource path="res://src/Actor/Player/Jumping.gd" type="Script" id=22]
+[ext_resource path="res://src/Actor/Player/Water.gd" type="Script" id=21]
+[ext_resource path="res://src/Actor/Player/Ladder.gd" type="Script" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 7.5 )
@@ -2513,17 +2513,17 @@ __meta__ = {
 }
 
 [node name="Water" type="Node" parent="MovementManager/States"]
+script = ExtResource( 21 )
 
 [node name="Normal" type="Node" parent="MovementManager/States"]
 script = ExtResource( 20 )
 
 [node name="Jumping" type="Node" parent="MovementManager/States"]
-script = ExtResource( 22 )
 
 [node name="Falling" type="Node" parent="MovementManager/States"]
-script = ExtResource( 21 )
 
 [node name="Ladder" type="Node" parent="MovementManager/States"]
+script = ExtResource( 22 )
 
 [node name="Fly" type="Node" parent="MovementManager/States"]
 script = ExtResource( 19 )
