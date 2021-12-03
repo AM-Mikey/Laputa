@@ -4,10 +4,7 @@ enum Jump {NORMAL, RUNNING}
 var jump_type
 var forgiveness_time = 0.05
 
-var speed = Vector2(90,180)
-var acceleration = 2.5 #was 5
-var ground_cof = 0.1 #was 0.2
-var air_cof = 0.00 # was 0.05
+
 
 
 onready var world = get_tree().get_root().get_node("World")
@@ -41,7 +38,7 @@ func state_process():
 
 	#jump interrupt
 	var is_jump_interrupted = false
-	if pc.velocity.y < 0.0:
+	if mm.velocity.y < 0.0:
 		if not Input.is_action_pressed("jump"):
 			is_jump_interrupted = true
 
@@ -53,13 +50,13 @@ func state_process():
 
 
 
-	pc.velocity = get_move_velocity(pc.velocity, pc.move_dir, is_jump_interrupted)
-	var new_velocity = pc.move_and_slide_with_snap(pc.velocity, mm.snap_vector, mm.FLOOR_NORMAL, true)
+	mm.velocity = get_move_velocity(mm.velocity, pc.move_dir, is_jump_interrupted)
+	var new_velocity = pc.move_and_slide_with_snap(mm.velocity, mm.snap_vector, mm.FLOOR_NORMAL, true)
 		
 	if pc.is_on_wall():
-		new_velocity.y = max(pc.velocity.y, new_velocity.y)
+		new_velocity.y = max(mm.velocity.y, new_velocity.y)
 		
-	pc.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
+	mm.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
 
 
 
@@ -81,57 +78,54 @@ func get_move_velocity(velocity, move_dir, is_jump_interrupted):
 	var friction = false
 	
 	
+	
+	
+	out.y += mm.GRAVITY * get_physics_process_delta_time()
+	if move_dir.y < 0:
+		out.y = mm.speed.y * move_dir.y
+	
+	if is_jump_interrupted:
+		out.y += mm.GRAVITY * get_physics_process_delta_time()
+
+
+
+
 
 
 	if jump_type == Jump.RUNNING:
-		out.y += mm.GRAVITY * get_physics_process_delta_time()
-		if move_dir.y < 0:
-			out.y = pc.speed.y * move_dir.y
-		if is_jump_interrupted:
-			out.y += mm.GRAVITY * get_physics_process_delta_time()
-		
-		if move_dir.x == mm.jump_starting_move_dir_x *-1: #if we turn around, cancel minimumdirectiontimer
+		if move_dir.x != mm.jump_starting_move_dir_x: #if we turn around, cancel min_dir_timer
 			mm.min_dir_timer.stop()
 		
-		if not mm.min_dir_timer.is_stopped():
-			out.x = pc.speed.x
-			out.x *= mm.jump_starting_move_dir_x
-		
-		
-		elif move_dir.x != 0: #try this as an "if" instead, if it's not working
-			if move_dir.x != mm.jump_starting_move_dir_x:
-				out.x = min(abs(out.x) + pc.acceleration, (pc.speed.x * 0.5))
-				out.x *= pc.move_dir.x
-				#$MinimumDirectionTimer.start(0)
+		if mm.min_dir_timer.is_stopped():
+			#min direction bypassed
+			if move_dir.x != 0:
+				if move_dir.x != mm.jump_starting_move_dir_x: #if we're not facing out start dir, slow down
+					out.x = min(abs(out.x) + mm.acceleration, (mm.speed.x * 0.5)) * pc.move_dir.x
+				else:
+					out.x = min(abs(out.x) + mm.acceleration, mm.speed.x) * pc.move_dir.x
 			else:
-				out.x = min(abs(out.x) + pc.acceleration, pc.speed.x)
-				out.x *= pc.move_dir.x
-		else:
-			friction = true
+				friction = true
+			
+		else: #still doing min direction time
+			out.x = pc.speed.x * mm.jump_starting_move_dir_x
 	
 	
-	#normal
-	else:
-		out.y += mm.GRAVITY * get_physics_process_delta_time()
-		if move_dir.y < 0:
-			out.y = speed.y * pc.move_dir.y
-		
-		if is_jump_interrupted:
-			out.y += mm.GRAVITY * get_physics_process_delta_time()
-
+	
+	else: #normal
 		if move_dir.x != 0:
-			out.x = min(abs(out.x) + acceleration, speed.x)
-			out.x *= pc.move_dir.x
+			out.x = min(abs(out.x) + mm.acceleration, mm.speed.x) * pc.move_dir.x
 		else:
 			friction = true
+
+
 
 
 
 	if friction:
 		if pc.is_on_floor():
-			out.x = lerp(out.x, 0, ground_cof)
-	else:
-		out.x = lerp(out.x, 0, air_cof)
+			out.x = lerp(out.x, 0, mm.ground_cof)
+		else:
+			out.x = lerp(out.x, 0, mm.air_cof)
 
 
 	if abs(out.x) < mm.min_x_velocity: #clamp velocity
@@ -144,7 +138,7 @@ func get_move_velocity(velocity, move_dir, is_jump_interrupted):
 
 
 func enter():
-	pc.speed = speed
+	pass
 	
 func exit():
 	pass

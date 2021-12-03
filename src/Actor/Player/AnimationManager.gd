@@ -5,15 +5,16 @@ enum Layer {BACK, FRONT, BOTH}
 var run_anim_speed: float
 
 onready var pc = get_tree().get_root().get_node("World/Recruit")
+onready var mm = pc.get_node("MovementManager")
 onready var ap = pc.get_node("AnimationPlayer")
 
 
 func _physics_process(_delta):
-	run_anim_speed = max((abs(pc.velocity.x)/pc.speed.x) * 2, 0.1) #run_anim_speed = max((abs(velocity.x)/max_x_speed) * 1.5, 0.5) #was 1.5 rev it up to 2
-	animate(pc.move_dir, pc.velocity)
+	run_anim_speed = max((abs(mm.velocity.x)/mm.speed.x) * 2, 0.1)
+	animate()
 
-#TODO: Determine if _move_dir and _velocity can be removed the are not used in the function
-func animate(_move_dir, _velocity):
+
+func animate():
 	var texture
 	var next_animation: String = ""
 	var start_time: float
@@ -44,9 +45,9 @@ func animate(_move_dir, _velocity):
 				else:
 					next_animation = get_next_animation("Arial", pc.face_dir, true)
 				
-				if pc.velocity.y < 0: 		#Rising
+				if mm.velocity.y < 0: 		#Rising
 					start_time = 0
-				elif pc.velocity.y == 0:	#Zenith
+				elif mm.velocity.y == 0:	#Zenith
 					start_time = 0.1
 				else: 						#Falling
 					start_time = 0.2
@@ -78,9 +79,9 @@ func animate(_move_dir, _velocity):
 				else:
 					next_animation = get_next_animation("Arial", pc.face_dir, true)
 				
-				if pc.velocity.y < 0: 		#Rising
+				if mm.velocity.y < 0: 		#Rising
 					start_time = 0
-				elif pc.velocity.y == 0:	#Zenith
+				elif mm.velocity.y == 0:	#Zenith
 					start_time = 0.1
 				else: 						#Falling
 					start_time = 0.2
@@ -111,9 +112,9 @@ func animate(_move_dir, _velocity):
 				else:
 					next_animation = get_next_animation("Arial", pc.face_dir, true)
 				
-				if pc.velocity.y < 0: 		#Rising
+				if mm.velocity.y < 0: 		#Rising
 					start_time = 0
-				elif pc.velocity.y == 0:	#Zenith
+				elif mm.velocity.y == 0:	#Zenith
 					start_time = 0.1
 				else: 						#Falling
 					start_time = 0.2

@@ -1,12 +1,6 @@
 extends Node
 
 
-var speed = Vector2(90,180)
-var acceleration = 2.5 #was 5
-var ground_cof = 0.1 #was 0.2
-var air_cof = 0.00 # was 0.05
-
-
 onready var world = get_tree().get_root().get_node("World")
 onready var pc = world.get_node("Recruit")
 onready var mm = pc.get_node("MovementManager")
@@ -25,9 +19,9 @@ func state_process():
 		
 
 
-	pc.velocity = get_move_velocity(pc.velocity, pc.move_dir)
-	var new_velocity = pc.move_and_slide_with_snap(pc.velocity, mm.snap_vector, mm.FLOOR_NORMAL, true)
-	pc.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
+	mm.velocity = get_move_velocity(mm.velocity, pc.move_dir)
+	var new_velocity = pc.move_and_slide_with_snap(mm.velocity, mm.snap_vector, mm.FLOOR_NORMAL, true)
+	mm.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
 
 
 
@@ -44,17 +38,16 @@ func get_move_velocity(velocity, move_dir):
 	
 	
 
-	out.y = move_dir.y * pc.speed.y * 0.5
+	out.y = move_dir.y * mm.speed.y * 0.5
 	out.x = 0
 	if Input.is_action_just_pressed("jump"):
 		pc.is_on_ladder = false
 		mm.change_state(mm.states["normal"])
-		out.y = pc.speed.y * -1.0
+		out.y = mm.speed.y * -1.0
 
 
 
-	if abs(out.x) < mm.min_x_velocity: #clamp velocity
-		out.x = 0
+	if abs(out.x) < mm.min_x_velocity: out.x = 0 #clamp velocity
 		
 	return out
 
@@ -63,7 +56,6 @@ func get_move_velocity(velocity, move_dir):
 
 
 func enter():
-	pc.speed = speed
 	mm.snap_vector = Vector2.ZERO
 	pc.set_collision_mask_bit(9, false) #ssp
 	

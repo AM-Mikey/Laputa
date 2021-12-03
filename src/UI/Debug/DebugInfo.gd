@@ -2,6 +2,7 @@ extends Control
 
 onready var world = get_tree().get_root().get_node("World")
 onready var pc = get_tree().get_root().get_node("World/Recruit")
+onready var mm = pc.get_node("MovementManager")
 
 func _ready():
 	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
@@ -25,8 +26,8 @@ func _process(delta):
 	$VBox/HBox/C1/A/WeaponXP.text = str("%2.f" % pc.weapon_array.front().xp) + "/" + str("%2.f" % pc.weapon_array.front().max_xp)
 	$VBox/HBox/C1/A/WeaponCooldown.text = str("%2.2f" % pc.get_node("WeaponManager/CooldownTimer").time_left)
 	
-	$VBox/HBox/C1/A/Velocity.text = str("%4.f" % pc.velocity.x) + "," + str("%4.f" % pc.velocity.y)
-	$VBox/HBox/C1/A/Speed.text = str("%4.f" % pc.speed.x) + "," + str("%4.f" % pc.speed.y)
+	$VBox/HBox/C1/A/Velocity.text = str("%4.f" % mm.velocity.x) + "," + str("%4.f" % mm.velocity.y)
+	$VBox/HBox/C1/A/Speed.text = str("%4.f" % mm.speed.x) + "," + str("%4.f" % mm.speed.y)
 	$VBox/HBox/C1/A/Pos.text = str("%4.f" % pc.global_position.x) + "," + str("%4.f" % pc.global_position.y)
 	#$VBox/HBox/C1/A/JumpForgiveness.text = str("%2.2f" % pc.get_node("ForgivenessTimer").time_left)
 

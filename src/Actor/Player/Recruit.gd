@@ -1,4 +1,5 @@
-extends Actor
+#TODO re-extend to actor once we remove movement from actor.gd
+extends KinematicBody2D
 class_name Recruit, "res://assets/Icon/PlayerIcon.png"
 
 #const POPUP = preload("res://src/UI/PopupText.tscn")
@@ -6,6 +7,7 @@ const LEVELUP = preload("res://src/Effect/LevelUp.tscn")
 const LEVELDOWN = preload("res://src/Effect/LevelDown.tscn")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
 const DEATHCAM = preload("res://src/Utility/DeathCam.tscn")
+const DAMAGENUMBER = preload("res://src/Effect/DamageNumber.tscn")
 
 
 
@@ -35,13 +37,14 @@ var invincible = false
 var disabled = true
 var knockback = false
 
-var is_in_enemy = false
+var is_in_enemy = false #TODO: check if this works
 var is_on_ladder = false
 var is_on_ssp = false
 var is_inspecting = false
 #var is_in_spikes = false
-
+var is_in_water = false
 var displaying_debug_info = false
+var dead = false
 
 
 var inventory: Array
@@ -207,19 +210,12 @@ func _on_ItemDetector_area_entered(area):
 			emit_signal("weapons_updated", weapon_array)
 			area.queue_free()
 
-#TODO: Can we remove damage safely? If so remove as it is not used in the function.
-#TODO: Can we remove knockback_direction safely? If so remove as it is not used in the function.
-func do_iframes(_damage, _knockback_direction):
-	print("do_iframes_started")
-	invincible = true
-	$EffectPlayer.play("FlashIframe")
-	yield($EffectPlayer, "animation_finished")
-	invincible = false
-	print("do_iframes_finished")
+
 
 func hit(damage, knockback_direction):
 	if not disabled and not invincible:
 		if knockback_direction != Vector2.ZERO:
+			#print("Knockback in Dir: " + str(knockback_direction))
 			$MovementManager.snap_vector = Vector2.ZERO
 			$MovementManager.change_state($MovementManager.states["knockback"])
 			knockback = true
@@ -233,7 +229,7 @@ func hit(damage, knockback_direction):
 			damagenum.value = damage
 			get_tree().get_root().get_node("World/Front").add_child(damagenum)
 			###
-			do_iframes(damage, knockback_direction)
+			do_iframes()
 
 			if hp <= 0:
 				die()
@@ -260,6 +256,12 @@ func hit(damage, knockback_direction):
 				var level_down = LEVELDOWN.instance()
 				get_tree().get_root().get_node("World/Front").add_child(level_down)
 				level_down.position = global_position
+
+func do_iframes():
+	invincible = true
+	$EffectPlayer.play("FlashIframe")
+	yield($EffectPlayer, "animation_finished")
+	invincible = false
 
 
 func die():
