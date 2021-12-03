@@ -221,6 +221,7 @@ func hit(damage, knockback_direction):
 	if not disabled and not invincible:
 		if knockback_direction != Vector2.ZERO:
 			$MovementManager.snap_vector = Vector2.ZERO
+			$MovementManager.change_state($MovementManager.states["knockback"])
 			knockback = true
 		if damage > 0:
 			hp -= damage
@@ -236,6 +237,7 @@ func hit(damage, knockback_direction):
 
 			if hp <= 0:
 				die()
+
 
 			if weapon_array.front() == null:
 				return

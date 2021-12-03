@@ -67,6 +67,9 @@ position = Vector2( -32, 0 )
 [node name="FrogEasy" parent="Actors" instance=ExtResource( 13 )]
 position = Vector2( 312, 160 )
 
+[node name="FrogEasy6" parent="Actors" instance=ExtResource( 13 )]
+position = Vector2( 136, 192 )
+
 [node name="FrogEasy2" parent="Actors" instance=ExtResource( 13 )]
 position = Vector2( 424, 56 )
 

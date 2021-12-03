@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://src/Actor/Player/WeaponManager.gd" type="Script" id=1]
 [ext_resource path="res://src/Actor/Player/Recruit.gd" type="Script" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://src/Actor/Player/Normal.gd" type="Script" id=20]
 [ext_resource path="res://src/Actor/Player/Water.gd" type="Script" id=21]
 [ext_resource path="res://src/Actor/Player/Ladder.gd" type="Script" id=22]
+[ext_resource path="res://src/Actor/Player/Knockback.gd" type="Script" id=23]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 7.5 )
@@ -2512,21 +2513,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Disabled" type="Node" parent="MovementManager/States"]
+
 [node name="Water" type="Node" parent="MovementManager/States"]
 script = ExtResource( 21 )
 
 [node name="Normal" type="Node" parent="MovementManager/States"]
 script = ExtResource( 20 )
 
-[node name="Jumping" type="Node" parent="MovementManager/States"]
-
-[node name="Falling" type="Node" parent="MovementManager/States"]
-
 [node name="Ladder" type="Node" parent="MovementManager/States"]
 script = ExtResource( 22 )
 
 [node name="Fly" type="Node" parent="MovementManager/States"]
 script = ExtResource( 19 )
+
+[node name="Knockback" type="Node" parent="MovementManager/States"]
+script = ExtResource( 23 )
 
 [node name="MinDirTimer" type="Timer" parent="MovementManager"]
 one_shot = true
