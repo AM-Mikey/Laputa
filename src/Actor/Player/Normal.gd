@@ -80,12 +80,12 @@ func get_move_velocity(velocity, move_dir, is_jump_interrupted):
 	
 	
 	
-	out.y += mm.GRAVITY * get_physics_process_delta_time()
+	out.y += mm.gravity * get_physics_process_delta_time()
 	if move_dir.y < 0:
 		out.y = mm.speed.y * move_dir.y
 	
 	if is_jump_interrupted:
-		out.y += mm.GRAVITY * get_physics_process_delta_time()
+		out.y += mm.gravity * get_physics_process_delta_time()
 
 
 
@@ -121,7 +121,7 @@ func get_move_velocity(velocity, move_dir, is_jump_interrupted):
 
 
 
-	if friction:
+	if friction and not pc.is_on_conveyor: #TODO lerp to conveyor speed instead of to 0 when on conveyor
 		if pc.is_on_floor():
 			out.x = lerp(out.x, 0, mm.ground_cof)
 		else:

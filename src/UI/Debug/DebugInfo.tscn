@@ -177,10 +177,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Pos" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="Gravity" type="Label" parent="VBox/HBox/C1/Q"]
 margin_top = 96.0
 margin_right = 45.0
 margin_bottom = 108.0
+theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
+text = "Grav: "
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pos" type="Label" parent="VBox/HBox/C1/Q"]
+margin_top = 108.0
+margin_right = 45.0
+margin_bottom = 120.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
 text = "Gbl Pos: "
@@ -190,9 +202,9 @@ __meta__ = {
 }
 
 [node name="JumpForgiveness" type="Label" parent="VBox/HBox/C1/Q"]
-margin_top = 108.0
+margin_top = 120.0
 margin_right = 45.0
-margin_bottom = 120.0
+margin_bottom = 132.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
 text = "JF: "
@@ -202,9 +214,9 @@ __meta__ = {
 }
 
 [node name="Direction" type="Label" parent="VBox/HBox/C1/Q"]
-margin_top = 120.0
+margin_top = 132.0
 margin_right = 45.0
-margin_bottom = 132.0
+margin_bottom = 144.0
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
 custom_fonts/font = ExtResource( 4 )
@@ -214,9 +226,9 @@ __meta__ = {
 }
 
 [node name="MoveDir" type="Label" parent="VBox/HBox/C1/Q"]
-margin_top = 132.0
+margin_top = 144.0
 margin_right = 45.0
-margin_bottom = 144.0
+margin_bottom = 156.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
 text = "Move: "
@@ -226,9 +238,9 @@ __meta__ = {
 }
 
 [node name="FaceDir" type="Label" parent="VBox/HBox/C1/Q"]
-margin_top = 144.0
+margin_top = 156.0
 margin_right = 45.0
-margin_bottom = 156.0
+margin_bottom = 168.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
 text = "Face: "
@@ -238,9 +250,9 @@ __meta__ = {
 }
 
 [node name="ShootDir" type="Label" parent="VBox/HBox/C1/Q"]
-margin_top = 156.0
+margin_top = 168.0
 margin_right = 45.0
-margin_bottom = 168.0
+margin_bottom = 180.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
 text = "Shoot: "
@@ -343,7 +355,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Pos" type="Label" parent="VBox/HBox/C1/A"]
+[node name="Gravity" type="Label" parent="VBox/HBox/C1/A"]
 margin_top = 96.0
 margin_right = 6.0
 margin_bottom = 108.0
@@ -354,7 +366,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="JumpForgiveness" type="Label" parent="VBox/HBox/C1/A"]
+[node name="Pos" type="Label" parent="VBox/HBox/C1/A"]
 margin_top = 108.0
 margin_right = 6.0
 margin_bottom = 120.0
@@ -365,10 +377,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Direction" type="Label" parent="VBox/HBox/C1/A"]
+[node name="JumpForgiveness" type="Label" parent="VBox/HBox/C1/A"]
 margin_top = 120.0
 margin_right = 6.0
 margin_bottom = 132.0
+theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
+text = "-"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Direction" type="Label" parent="VBox/HBox/C1/A"]
+margin_top = 132.0
+margin_right = 6.0
+margin_bottom = 144.0
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -377,17 +400,6 @@ __meta__ = {
 }
 
 [node name="MoveDir" type="Label" parent="VBox/HBox/C1/A"]
-margin_top = 132.0
-margin_right = 6.0
-margin_bottom = 144.0
-theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
-text = "-"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FaceDir" type="Label" parent="VBox/HBox/C1/A"]
 margin_top = 144.0
 margin_right = 6.0
 margin_bottom = 156.0
@@ -398,10 +410,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ShootDir" type="Label" parent="VBox/HBox/C1/A"]
+[node name="FaceDir" type="Label" parent="VBox/HBox/C1/A"]
 margin_top = 156.0
 margin_right = 6.0
 margin_bottom = 168.0
+theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
+text = "-"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShootDir" type="Label" parent="VBox/HBox/C1/A"]
+margin_top = 168.0
+margin_right = 6.0
+margin_bottom = 180.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "-"

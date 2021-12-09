@@ -39,6 +39,7 @@ var knockback = false
 
 var is_in_enemy = false #TODO: check if this works
 var is_on_ladder = false
+var is_on_conveyor = false
 var is_on_ssp = false
 var is_inspecting = false
 #var is_in_spikes = false

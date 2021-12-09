@@ -7,7 +7,8 @@ const FLOOR_NORMAL: = Vector2.UP
 const SNAP_DIRECTION = Vector2.DOWN
 const SNAP_LENGTH = 4.0
 
-const GRAVITY = 300.0
+
+
 
 var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
@@ -15,13 +16,15 @@ enum Jump {NORMAL, RUNNING}
 var jump_type
 
 
-var speed = Vector2(90,180)
+var speed = Vector2(90, 180)
+var gravity = 300.0
+
 var velocity = Vector2.ZERO
 var acceleration = 2.5
 var ground_cof = 0.1
 var air_cof = 0.00
 
-
+#var conveyor_speed = Vector2.ZERO
 
 
 var bonk_time = 0.4
@@ -77,6 +80,11 @@ func initialize_states():
 
 
 func _physics_process(_delta):
+#	velocity += conveyor_speed
+	
+	speed = Vector2(90, 180) if not get_parent().is_in_water else Vector2(60, 140)
+	gravity = 300.0 if not get_parent().is_in_water else 150.0
+	
 	if is_debug:
 		state_label.text = current_state.name.to_lower()
 	current_state.state_process()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://src/Actor/Player/WeaponManager.gd" type="Script" id=1]
 [ext_resource path="res://src/Actor/Player/Recruit.gd" type="Script" id=2]
@@ -20,7 +20,6 @@
 [ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=18]
 [ext_resource path="res://src/Actor/Player/Fly.gd" type="Script" id=19]
 [ext_resource path="res://src/Actor/Player/Normal.gd" type="Script" id=20]
-[ext_resource path="res://src/Actor/Player/Water.gd" type="Script" id=21]
 [ext_resource path="res://src/Actor/Player/Ladder.gd" type="Script" id=22]
 [ext_resource path="res://src/Actor/Player/Knockback.gd" type="Script" id=23]
 
@@ -2514,9 +2513,6 @@ __meta__ = {
 }
 
 [node name="Disabled" type="Node" parent="MovementManager/States"]
-
-[node name="Water" type="Node" parent="MovementManager/States"]
-script = ExtResource( 21 )
 
 [node name="Normal" type="Node" parent="MovementManager/States"]
 script = ExtResource( 20 )

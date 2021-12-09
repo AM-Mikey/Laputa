@@ -52,12 +52,12 @@ func get_move_velocity(velocity, move_dir):
 	var out = velocity
 	var friction = false
 
-	out.y += mm.GRAVITY * get_physics_process_delta_time()
+	out.y += mm.gravity * get_physics_process_delta_time()
 	if move_dir.y < 0:
 		out.y = mm.speed.y * pc.move_dir.y
 	
 #	if is_jump_interrupted:
-#		out.y += mm.GRAVITY * get_physics_process_delta_time()
+#		out.y += mm.gravity * get_physics_process_delta_time()
 
 	if move_dir.x != 0:
 		out.x = min(abs(out.x) + mm.acceleration, mm.speed.x)
