@@ -20,11 +20,15 @@ func _ready():
 
 
 func _on_LevelButton_pressed():
+	world.get_node("Recruit").free()
+	
 	world.on_level_change(level, 0, "LevelSelect", "res://assets/Music/XXXX.ogg")
+	
 	if world.has_node("UILayer/TitleScreen"):
 		world.get_node("UILayer/TitleScreen").queue_free()
 	if world.has_node("UILayer/PauseMenu"):
 		world.get_node("UILayer/PauseMenu").unpause()
+
 	world.add_child(RECRUIT.instance())
 	world.get_node("UILayer").add_child(HUD.instance())
 	

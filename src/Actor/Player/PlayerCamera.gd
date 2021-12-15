@@ -9,19 +9,20 @@ var panning_down = false
 
 onready var world = get_tree().get_root().get_node("World")
 onready var pc = get_tree().get_root().get_node("World/Recruit")
+onready var mm = pc.get_node("MovementManager")
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 
 func _physics_process(_delta):
 	if horizontal_focus != pc.face_dir:
 		horizontal_focus = pc.face_dir
-		pan_horizontal(pc.face_dir, pc.velocity)
+		pan_horizontal(pc.face_dir)
 
 	
 	if $TweenHorizontal.is_active():
-		$TweenHorizontal.playback_speed = max(abs(pc.velocity.x)/pc.speed.x, 0.5) #second number is minimum camera speed ##thanks me!
+		$TweenHorizontal.playback_speed = max(abs(mm.velocity.x)/mm.speed.x, 0.5) #second number is minimum camera speed
 	
 	if not pc.disabled:
 		if Input.is_action_just_pressed("look_up"):
@@ -135,17 +136,14 @@ func home_vertical():
 		tween.stop_all()
 	tween.interpolate_property(self, "offset_v", offset_v, 0, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	tween.start()
-	yield(tween, "tween_completed")
 
-#TODO: Determine if we can remove velocity. Then remove.
-func pan_horizontal(direction, _velocity): #we're not actually using velocity anywhere here, that's in _process
+
+func pan_horizontal(direction):
 	#print("pan horz")
-
 	var tween = $TweenHorizontal
 	var camera_pan_distance = 2.0 / world.resolution_scale
 	var camera_pan_time = 1.5
 
-	
 	if tween.is_active():
 		tween.stop_all()
 	tween.interpolate_property(self, "offset_h", offset_h, direction.x * camera_pan_distance, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
@@ -154,7 +152,7 @@ func pan_horizontal(direction, _velocity): #we're not actually using velocity an
 
 
 func home_horizontal():
-	#print("homing horz")
+	#print("home horz")
 	var tween = $TweenHorizontal
 	var camera_pan_time = 1.5
 	
@@ -162,7 +160,6 @@ func home_horizontal():
 		tween.stop_all()
 	tween.interpolate_property(self, "offset_h", offset_h, 0, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	tween.start()
-	yield(tween, "tween_completed")
 
 func stop_tween():
 	$TweenHorizontal.stop_all()
@@ -170,4 +167,4 @@ func stop_tween():
 
 
 func on_viewport_size_changed():
-	zoom = Vector2(1 / world.resolution_scale, 1 / world.resolution_scale)
+	zoom = Vector2(1.0 / world.resolution_scale, 1.0 / world.resolution_scale)

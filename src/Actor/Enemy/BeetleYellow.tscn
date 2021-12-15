@@ -106,7 +106,6 @@ one_shot = true
 position = Vector2( 0, 3.67081 )
 frames = SubResource( 2 )
 animation = "Idle_Floor"
-frame = 1
 playing = true
 
 [connection signal="timeout" from="States/Reset/Timer" to="States/Reset" method="_on_Timer_timeout"]

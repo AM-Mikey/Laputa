@@ -125,8 +125,7 @@ func _input(event):
 func on_level_change(level, door_index, _level_name, music):
 	print("level change")
 	save_level_data_to_temp()
-	if has_node("Recruit"): #TODO check if working
-		$Recruit/PlayerCamera.smoothing_enabled = false
+	
 	if $UILayer.has_node("DialogBox"):
 		$UILayer/DialogBox.stop_printing()
 	clear_spawn_layers()
@@ -139,11 +138,11 @@ func on_level_change(level, door_index, _level_name, music):
 	var next_level = load(level).instance()
 	add_child(next_level)
 	
-		#disable camera if level has one already
-	if next_level.has_node("Camera2D"):
-		$Recruit/PlayerCamera.current = false
-	else:
-		$Recruit/PlayerCamera.current = true
+	if has_node("Recruit"):
+		$Recruit/PlayerCamera.smoothing_enabled = false
+		$Recruit/PlayerCamera.current = not next_level.has_node("Camera2D") #turn off camera if level has one already
+		
+
 	
 	######################## get the door with the right index
 	
@@ -220,11 +219,11 @@ func on_level_change(level, door_index, _level_name, music):
 	if not already_enabled:
 		$Recruit.disabled = false
 		
-		if $UILayer.has_node("LevelName"):
-			$UILayer/LevelName.free()
-		var level_name_ui = LEVELNAME.instance()
-		level_name_ui.text = next_level.name #in final version switch this to display name
-		$UILayer.add_child(level_name_ui)
+	if $UILayer.has_node("LevelName"):
+		$UILayer/LevelName.free()
+	var level_name_ui = LEVELNAME.instance()
+	level_name_ui.text = next_level.name #in final version switch this to display name
+	$UILayer.add_child(level_name_ui)
 	
 	
 	
