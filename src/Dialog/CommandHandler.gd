@@ -94,8 +94,9 @@ func face(string):
 	$Tween.start()
 
 func display_name(string):
-	var color = "white"
+	tb.bbcode_text = "" #clear text for new speaker
 	
+	var color = "white"
 	var name_regex = RegEx.new()
 	name_regex.compile("\\[b]\\[color=" + color + "].*\\[/color]\\[/b]")
 	tb.bbcode_text = name_regex.sub(tb.bbcode_text, "")

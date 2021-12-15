@@ -17,7 +17,7 @@
 script = ExtResource( 5 )
 level_type = 1
 dialog_json = "res://src/Dialog/Village.json"
-conversation = "sasuke"
+conversation = "cutscene_test"
 
 [node name="LevelLimiter" parent="." instance=ExtResource( 2 )]
 margin_top = -64.0
@@ -70,3 +70,4 @@ scale = Vector2( 482.952, 10 )
 position = Vector2( 256, 160 )
 
 [node name="LevelCamera" parent="." instance=ExtResource( 3 )]
+position = Vector2( 256, 96 )

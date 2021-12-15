@@ -185,10 +185,11 @@ func print_dialog(string):
 func stop_printing():
 	print("ended dialog")
 	emit_signal("dialog_finished")
-	pc.get_node("PlayerCamera").position = Vector2.ZERO
-	pc.disabled = false
-	pc.invincible = false
-	pc.is_inspecting = false
+	if is_instance_valid(pc):
+		pc.get_node("PlayerCamera").position = Vector2.ZERO
+		pc.disabled = false
+		pc.invincible = false
+		pc.is_inspecting = false
 	queue_free()
 
 
