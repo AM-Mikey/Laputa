@@ -17,6 +17,6 @@ func _on_PlayerDetector_body_entered(body):
 func _on_PlayerDetector_body_exited(body):
 	active_pc = null
 
-func _physics_process(delta):
-	if active_pc != null:
-		active_pc.is_on_conveyor = active_pc.is_on_floor()
+#func _physics_process(delta):
+#	if active_pc != null:
+#		active_pc.is_on_conveyor = active_pc.is_on_floor()
