@@ -197,9 +197,11 @@ func stop_printing():
 func _physics_process(_delta):
 	var viewport_size = get_tree().get_root().size / world.resolution_scale
 	
-	if pc.get_node("PlayerCamera").offset_v >= 1 / world.resolution_scale: #more than halfway down
+	var active_camera = get_current_camera()
+	
+	if active_camera.offset_v >= 1 / world.resolution_scale: #more than halfway down
 		rect_position.y = viewport_size.y - (rect_size.y + 16) #bottom
-	if pc.get_node("PlayerCamera").offset_v <= -1 / world.resolution_scale: #more than halfway up
+	if active_camera.offset_v <= -1 / world.resolution_scale: #more than halfway up
 		rect_position.y = 16 #top
 	
 func on_viewport_size_changed():
@@ -208,3 +210,12 @@ func on_viewport_size_changed():
 	rect_size.x = min(viewport_size.x, 400)
 	rect_position.x = (viewport_size.x - rect_size.x) /2
 	rect_position.y = viewport_size.y - 80
+
+func get_current_camera() -> Node:
+	var cameras = get_tree().get_nodes_in_group("Cameras")
+	for c in cameras:
+		if c.current:
+			print("found current camera")
+			return c
+	printerr("ERROR: could not find current camera!")
+	return cameras[0]

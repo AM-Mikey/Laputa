@@ -8,14 +8,14 @@ var active_player = null
 
 onready var world = get_tree().get_root().get_node("World")
 
-signal level_change(level, door_index, level_name, music)
+signal level_change(level, door_index, music)
 
 export var level: String
 export var door_index: int = 0
 export var direction = Vector2.RIGHT
 
 func _ready():
-	var _err = connect("level_change", world, "on_level_change")
+	var _err = connect("level_change", world, "on_level_change") #TODO: what is this?
 	add_to_group("LevelTriggers")
 	add_to_group("LoadZones")
 
@@ -55,7 +55,7 @@ func prepare_next_level():
 	
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")
 	
-	emit_signal("level_change", level, door_index, level_name, music)
+	emit_signal("level_change", level, door_index, music)
 	
 
 

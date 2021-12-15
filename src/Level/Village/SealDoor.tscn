@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Tile/Debug.tres" type="TileSet" id=3]
 [ext_resource path="res://src/Effect/SealDoor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
+[ext_resource path="res://src/Utility/LevelCamera.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=9]
 
 [node name="SealDoor" type="Node2D"]
@@ -73,6 +74,5 @@ __meta__ = {
 [node name="SpawnPoint" parent="." instance=ExtResource( 9 )]
 position = Vector2( 120, 256 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 240, 168 )
-current = true
+[node name="LevelCamera" parent="." instance=ExtResource( 6 )]
+position = Vector2( 248, 160 )

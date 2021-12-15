@@ -16,7 +16,8 @@ func _input(event):
 		unpause()
 
 func unpause():
-	world.get_node("UILayer/HUD").visible = true
+	if world.has_node("UILayer/HUD"):
+		world.get_node("UILayer/HUD").visible = true
 	if world.has_node("UILayer/DialogBox"):
 		world.get_node("UILayer/DialogBox").visible = true
 	get_tree().paused = false

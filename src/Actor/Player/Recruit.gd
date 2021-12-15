@@ -6,7 +6,7 @@ class_name Recruit, "res://assets/Icon/PlayerIcon.png"
 const LEVELUP = preload("res://src/Effect/LevelUp.tscn")
 const LEVELDOWN = preload("res://src/Effect/LevelDown.tscn")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
-const DEATHCAM = preload("res://src/Utility/DeathCam.tscn")
+const DEATH_CAMERA = preload("res://src/Utility/DeathCamera.tscn")
 const DAMAGENUMBER = preload("res://src/Effect/DamageNumber.tscn")
 
 
@@ -100,7 +100,7 @@ func _on_ItemDetector_area_entered(area):
 		
 		if area.get_collision_layer_bit(10): #health
 			hp += area.get_parent().value
-			hp = max(hp, max_hp)
+			hp = min(hp, max_hp)
 			
 			$PickupSound.stream = sfx_get_heart
 			$PickupSound.play()
@@ -245,7 +245,7 @@ func die():
 	if not dead:
 		dead = true
 		disabled = true
-		world.add_child(DEATHCAM.instance())
+		world.add_child(DEATH_CAMERA.instance())
 		visible = false
 		
 		var explosion = EXPLOSION.instance()

@@ -3,7 +3,7 @@ extends Node2D
 const DEBUG_INFO = preload("res://src/UI/Debug/DebugInfo.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const INVENTORY = preload("res://src/UI/Inventory/Inventory.tscn")
-const LEVELNAME = preload("res://src/UI/LevelName.tscn")
+const LEVEL_TEXT = preload("res://src/UI/LevelText.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 const PAUSEMENU = preload("res://src/UI/PauseMenu.tscn")
 const POPUP = preload("res://src/UI/PopupText.tscn")
@@ -32,7 +32,7 @@ export var starting_level = "res://src/Level/Village/Village.tscn"
 onready var current_level = load(starting_level).instance() #assumes current level to start with, might cause issues down the line
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed") #TODO err?
 	on_viewport_size_changed()
 	add_child(current_level)
 	add_child(TITLECAM.instance())
@@ -76,13 +76,13 @@ func load_title():
 	$UILayer.add_child(title)
 
 func skip_title():
-	on_level_change(starting_level, 0, "LevelSelect", "res://assets/Music/XXXX.ogg")
+	on_level_change(starting_level, 0, "res://assets/Music/XXXX.ogg")
 	add_child(RECRUIT.instance())
 	get_node("UILayer").add_child(HUD.instance())
-	
-	var spawn_points = get_tree().get_nodes_in_group("SpawnPoints")
-	for s in spawn_points:
-		get_node("Recruit").position = s.global_position
+
+	for s in get_tree().get_nodes_in_group("SpawnPoints"):
+		$Recruit.position = s.global_position
+		print("moved player")
 
 
 func _input(event):
@@ -124,128 +124,140 @@ func _input(event):
 
 
 
-#TODO: can we remove level_name safely? It is unused
-func on_level_change(level, door_index, _level_name, music):
+func on_level_change(level, door_index, music):
 	print("level change")
 	save_level_data_to_temp()
 	
+	### Clean up stuff we don't need
 	if $UILayer.has_node("DialogBox"):
 		$UILayer/DialogBox.stop_printing()
 	clear_spawn_layers()
 	clear_bg_layer()
+	###
 	
 	var level_path = current_level.filename
 	current_level.queue_free()
 	
-	yield(get_tree(), 'idle_frame') #what is this for?
+	yield(get_tree(), 'idle_frame') #this gives time for recruit to spawn. probably not neccesary
 	var next_level = load(level).instance()
 	add_child(next_level)
 	
-	if has_node("Recruit"):
-		$Recruit/PlayerCamera.smoothing_enabled = false
-		$Recruit/PlayerCamera.current = not next_level.has_node("Camera2D") #turn off camera if level has one already
-		
+	if next_level.level_type == next_level.LevelType.NORMAL:#############################################################
+		if has_node("Recruit"):
+			$Recruit/PlayerCamera.smoothing_enabled = false
+			$Recruit/PlayerCamera.current = not next_level.has_node("LevelCamera") #turn off camera if level has one already
+			
 
-	
-	######################## get the door with the right index
-	
-	var doors_found = 0
-	
-	var triggers = get_tree().get_nodes_in_group("LevelTriggers")
-	for t in triggers:
-		if t.level == level_path:
-			if t.is_in_group("LoadZones"):
-				$Recruit.position = t.position + (t.direction * -32)
-				print("found a connected zone")
-				doors_found += 1
-			else:
-				$Recruit.position = t.position
-				print("found a connected door")
-				doors_found += 1
 		
-	if doors_found == 0:
-		printerr("ERROR: could not find door with right level connection")
-	
-	if doors_found > 1: #more than one door with correct level connections
-		doors_found = 0
+		######################## get the door with the right index
+		
+		var doors_found = 0
+		
+		var triggers = get_tree().get_nodes_in_group("LevelTriggers")
 		for t in triggers:
-			if t.level == level_path and t.door_index == door_index:
+			if t.level == level_path:
 				if t.is_in_group("LoadZones"):
 					$Recruit.position = t.position + (t.direction * -32)
-					print("got correct zone")
+					print("found a connected zone")
 					doors_found += 1
 				else:
 					$Recruit.position = t.position
-					print("got correct door")
+					print("found a connected door")
 					doors_found += 1
-		
+			
 		if doors_found == 0:
-			printerr("ERROR: could not find door with right index")
-		if doors_found > 1:
-			printerr("ERROR: more than one door with same index")
-	
-	###transition out
-	var already_enabled = false
-	
-	#LOADZONES
-	if $UILayer.has_node("TransitionWipe"):
-		yield(get_tree().create_timer(0.8), "timeout")
-		$UILayer/TransitionWipe.play_out_animation()
-		already_enabled = true
-		$Recruit.disabled = false
+			printerr("ERROR: could not find door with right level connection")
 		
+		if doors_found > 1: #more than one door with correct level connections
+			doors_found = 0
+			for t in triggers:
+				if t.level == level_path and t.door_index == door_index:
+					if t.is_in_group("LoadZones"):
+						$Recruit.position = t.position + (t.direction * -32)
+						print("got correct zone")
+						doors_found += 1
+					else:
+						$Recruit.position = t.position
+						print("got correct door")
+						doors_found += 1
+			
+			if doors_found == 0:
+				printerr("ERROR: could not find door with right index")
+			if doors_found > 1:
+				printerr("ERROR: more than one door with same index")
+		
+		###transition out
+		var already_enabled = false
+	
+		#LOADZONES
+		if $UILayer.has_node("TransitionWipe"):
+			yield(get_tree().create_timer(0.8), "timeout")
+			$UILayer/TransitionWipe.play_out_animation()
+			already_enabled = true
+			$Recruit.disabled = false
+			
+			if $UILayer.has_node("LevelName"):
+				$UILayer/LevelName.free()
+			
+			var level_text = LEVEL_TEXT.instance()
+			level_text.text = next_level.name #TODO: in final version switch this to display name
+			level_text.wait_time = 0.6
+			$UILayer.add_child(level_text)
+			
+		#DOORS
+		elif $UILayer.has_node("TransitionIris"):
+			yield(get_tree().create_timer(0.4), "timeout")
+			$UILayer/TransitionIris.play_out_animation()
+			already_enabled = true
+			$Recruit.disabled = false
+			
+			if $UILayer.has_node("LevelName"):
+				$UILayer/LevelName.free()
+			
+			var level_text = LEVEL_TEXT.instance()
+			level_text.text = next_level.name #TODO: in final version switch this to display name
+			level_text.wait_time = 0.6
+			$UILayer.add_child(level_text)
+			
+			
+		######
+		if not already_enabled:
+			$Recruit.disabled = false
+			
 		if $UILayer.has_node("LevelName"):
 			$UILayer/LevelName.free()
-		
-		var level_name_ui = LEVELNAME.instance()
-		level_name_ui.text = next_level.name #in final version switch this to display name
-		level_name_ui.wait_time = 0.6
-		$UILayer.add_child(level_name_ui)
-		
-	#DOORS
-	elif $UILayer.has_node("TransitionIris"):
-		yield(get_tree().create_timer(0.4), "timeout")
-		$UILayer/TransitionIris.play_out_animation()
-		already_enabled = true
-		$Recruit.disabled = false
-		
-		if $UILayer.has_node("LevelName"):
-			$UILayer/LevelName.free()
-		
-		var level_name_ui = LEVELNAME.instance()
-		level_name_ui.text = next_level.name #in final version switch this to display name
-		level_name_ui.wait_time = 0.6
-		$UILayer.add_child(level_name_ui)
+		var level_text = LEVEL_TEXT.instance()
+		level_text.text = next_level.name #TODO: in final version switch this to display name
+		$UILayer.add_child(level_text)
 		
 		
-	######
-	if not already_enabled:
-		$Recruit.disabled = false
 		
-	if $UILayer.has_node("LevelName"):
-		$UILayer/LevelName.free()
-	var level_name_ui = LEVELNAME.instance()
-	level_name_ui.text = next_level.name #in final version switch this to display name
-	$UILayer.add_child(level_name_ui)
+
+		
+		#enable smoothing after a bit
+		yield(get_tree().create_timer(0.01), "timeout")
+		$Recruit/PlayerCamera.smoothing_enabled = true
+		
+		
+		
+
+	
+	if next_level.level_type == next_level.LevelType.PLAYERLESS_CUTSCENE:#############################################
+		#TODO: right now recruit isn't unloaded between levels unless we're using level buttons or starting
+		$Recruit.queue_free()
+		$UILayer/HUD.queue_free()
+		
 	
 	
 	
+	
+	##################################################################################################################
 	if next_level.music != music:
 		load_music(next_level.music)
-		
+	
 	
 	current_level = next_level
 	load_level_data_from_temp()
-	
-	#enable smoothing after a bit
-	yield(get_tree().create_timer(0.01), "timeout")
-	$Recruit/PlayerCamera.smoothing_enabled = true
-	
-	
-	
-	#enable player collision after a bit more ## why?
-	yield(get_tree().create_timer(0.1), "timeout")
-	$Recruit.set_collision_layer_bit(0, true)
 	
 	
 func load_music(music):
@@ -297,7 +309,7 @@ func load_player_data_from_save():
 			
 			print(scoped_data["player_data"])
 			
-			on_level_change(scoped_data["player_data"]["current_level"], null, null, null)
+			on_level_change(scoped_data["player_data"]["current_level"], null, null)
 			yield(get_tree(), "idle_frame")
 			
 			pc.position = scoped_data["player_data"]["position"]

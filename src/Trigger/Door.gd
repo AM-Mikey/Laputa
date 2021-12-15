@@ -10,7 +10,7 @@ var active_player = null
 
 onready var world = get_tree().get_root().get_node("World")
 
-signal level_change(level, door_index, level_name, music)
+signal level_change(level, door_index, music)
 
 export var level: String
 export var door_index: int = 0
@@ -71,4 +71,4 @@ func prepare_next_level():
 	
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")
 	
-	emit_signal("level_change", level, door_index, level_name, music)
+	emit_signal("level_change", level, door_index, music)

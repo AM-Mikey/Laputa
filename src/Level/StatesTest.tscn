@@ -101,4 +101,4 @@ position = Vector2( 0, 1344 )
 scale = Vector2( 482.952, 10 )
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 4 )]
-position = Vector2( 48, 104 )
+position = Vector2( 64, 192 )

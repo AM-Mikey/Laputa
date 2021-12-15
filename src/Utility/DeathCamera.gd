@@ -12,7 +12,8 @@ onready var player_pos = pc.global_position
 onready var camera_pos = pc.get_node("PlayerCamera").get_camera_screen_center()
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	add_to_group("Cameras")
+	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed") #TODO: err
 	on_viewport_size_changed()
 	
 	global_position = camera_pos

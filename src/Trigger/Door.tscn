@@ -6,9 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 16 )
 
-[node name="Door" type="Area2D" groups=[
-"Trigger",
-]]
+[node name="Door" type="Area2D" groups=["Trigger"]]
 collision_layer = 0
 script = ExtResource( 1 )
 

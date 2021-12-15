@@ -27,7 +27,7 @@ func _physics_process(_delta):
 	var cam = pc.get_node("PlayerCamera")
 	if not cam.current:
 		for l in get_tree().get_nodes_in_group("Levels"):
-			cam = l.get_node("Camera2D")
+			cam = l.get_node("LevelCamera")
 	
 	
 	var player_pos_from_cam_center = Vector2(pc.position.x, pc.position.y - 16) - cam.get_camera_screen_center()
