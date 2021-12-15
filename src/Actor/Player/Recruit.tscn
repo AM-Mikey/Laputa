@@ -2488,8 +2488,6 @@ tracks/0/keys = {
 z_index = 1
 collision_mask = 520
 script = ExtResource( 2 )
-hp = 8
-max_hp = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 1, 1, 1, 0.4 )

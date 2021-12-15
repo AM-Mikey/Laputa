@@ -57,6 +57,8 @@ func shift_weapon(direction):
 		"right":
 			var weapon_to_move = pc.weapon_array.pop_front()
 			pc.weapon_array.push_back(weapon_to_move)
+	
+	pc.emit_signal("weapons_updated", pc.weapon_array)
 	$WeaponAudio.stream = sfx_switch_weapon
 	$WeaponAudio.play()
 	

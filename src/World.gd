@@ -1,5 +1,6 @@
 extends Node2D
 
+const DEBUG_INFO = preload("res://src/UI/Debug/DebugInfo.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const INVENTORY = preload("res://src/UI/Inventory/Inventory.tscn")
 const LEVELNAME = preload("res://src/UI/LevelName.tscn")
@@ -85,6 +86,8 @@ func skip_title():
 
 
 func _input(event):
+	if Input.is_action_just_pressed("debug_print"):
+		debug_print()
 	if event.is_action_pressed("reload"):
 		var _err = get_tree().reload_current_scene()
 	if event.is_action_pressed("save_data"):
@@ -527,6 +530,12 @@ func clear_bg_layer():
 	for c in $BackgroundLayer.get_children():
 		c.free()
 
+func debug_print():
+	if not $UILayer.has_node("DebugInfo"):
+		var debug_info = DEBUG_INFO.instance()
+		$UILayer.add_child(debug_info)
+	else:
+		$UILayer/DebugInfo.queue_free()
 
 func on_viewport_size_changed():
 	if viewport_size_ignore:

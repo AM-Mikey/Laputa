@@ -8,7 +8,7 @@ var look_dir = Vector2.LEFT
 
 func _ready():
 	hp = 4
-	damage_on_contact = 1
+	damage_on_contact = 2
 	speed = Vector2(12, 120)
 	gravity = 200
 	
