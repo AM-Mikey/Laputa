@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/UI/Font/momo.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://src/UI/LevelButton.gd" type="Script" id=2]
-[ext_resource path="res://src/UI/CursorBox.tres" type="StyleBox" id=3]
+[ext_resource path="res://src/UI/CursorBox.tres" type="StyleBox" id=2]
+[ext_resource path="res://src/UI/LevelSelect/LevelButton.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=5]
 size = 12
@@ -26,14 +26,14 @@ custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 5 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = ExtResource( 3 )
+custom_styles/focus = ExtResource( 2 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 4 )
 action_mode = 0
 text = "Level Name"
 flat = true
 align = 0
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -1,6 +1,6 @@
 extends Control
 
-const LEVELSELECT = preload("res://src/UI/LevelSelect.tscn")
+const LEVELSELECT = preload("res://src/UI/LevelSelect/LevelSelect.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 const RECRUIT = preload("res://src/Actor/Player/Recruit.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")

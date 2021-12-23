@@ -2,7 +2,6 @@ extends Node
 
 enum Layer {BACK, FRONT, BOTH}
 
-var run_anim_speed: float
 
 onready var pc = get_tree().get_root().get_node("World/Recruit")
 onready var mm = pc.get_node("MovementManager")
@@ -10,7 +9,6 @@ onready var ap = pc.get_node("AnimationPlayer")
 
 
 func _physics_process(_delta):
-	run_anim_speed = max((abs(mm.velocity.x)/mm.speed.x) * 2, 0.1)
 	animate()
 
 
@@ -18,13 +16,20 @@ func animate():
 	var texture
 	var next_animation: String = ""
 	var start_time: float
+	var run_anim_speed = max((abs(mm.velocity.x)/mm.speed.x) * 2, 0.1)
+	
 	
 	if pc.is_inspecting:
 		ap.playback_speed = 1
 		texture = load("res://assets/Actor/Player/Reverseidle.png") #TODO animation should remove this
 		next_animation = get_next_animation("Reverseidle", pc.face_dir, true)
-		
-	elif not pc.is_on_ladder:
+
+	elif mm.current_state == mm.states["ladder"]:
+		ap.playback_speed = 1 #TODO: variable speed
+		next_animation = get_next_animation("Climb", pc.face_dir, true)
+
+
+	else: #normal animation
 		if pc.direction_lock == Vector2.ZERO:  #NOT DIRECTION LOCKED
 		
 			if pc.is_on_floor():
@@ -120,9 +125,7 @@ func animate():
 					start_time = 0.2
 
 
-	else: #is on ladder
-		ap.playback_speed = 1 #TODO variable speed
-		next_animation = get_next_animation("Climb", pc.face_dir, true)
+
 
 
 
@@ -156,21 +159,24 @@ func get_next_animation(animation, anim_dir, can_shoot_down):
 		animation_suffix = ".R"
 		ws.scale.x = -1
 
-	if get_input_dir().y == -1:
-		animation_suffix += "1"
-		pc.shoot_dir = Vector2.UP
-		ws.rotation_degrees = anim_dir.x * 90 * -1
-	elif get_input_dir().y == 1:
-		if can_shoot_down:
-			animation_suffix += "2"
-			pc.shoot_dir = Vector2.DOWN
-			ws.rotation_degrees = anim_dir.x * 90
-		else:
-			animation_suffix += "3"
+
+	if not "Climb" in animation: #climbing doesnt look up or down so skip this section
+		if get_input_dir().y == -1:
+			animation_suffix += "1"
+			pc.shoot_dir = Vector2.UP
+			ws.rotation_degrees = anim_dir.x * 90 * -1
+		elif get_input_dir().y == 1:
+			if can_shoot_down:
+				animation_suffix += "2"
+				pc.shoot_dir = Vector2.DOWN
+				ws.rotation_degrees = anim_dir.x * 90
+			else:
+				animation_suffix += "3"
 
 	if "Back" in animation:
 		pc.shoot_dir.x *= -1
 		ws.scale.x *= -1
+		
 		
 	var next_animation = animation + animation_suffix
 	return next_animation

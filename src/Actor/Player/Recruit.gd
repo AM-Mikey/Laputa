@@ -39,7 +39,6 @@ var disabled = true
 #var is_on_conveyor = false
 var enemies_touching = []
 var is_inspecting = false
-var is_on_ladder = false
 var is_on_ssp = false
 var is_in_water = false
 var dead = false

@@ -1,6 +1,6 @@
 extends Control
 
-const LEVELBUTTON = preload("res://src/UI/LevelButton.tscn")
+const LEVELBUTTON = preload("res://src/UI//LevelSelect/LevelButton.tscn")
 
 onready var world = get_tree().get_root().get_node("World")
 

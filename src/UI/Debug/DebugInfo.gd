@@ -52,7 +52,6 @@ func _physics_process(delta):
 		$VBox/HBox/C2/A/Invincible.text = str(pc.invincible)
 		$VBox/HBox/C2/A/Floor.text = str(pc.is_on_floor())
 		$VBox/HBox/C2/A/Inspect.text = str(pc.is_inspecting)
-		$VBox/HBox/C2/A/Ladder.text = str(pc.is_on_ladder)
 		$VBox/HBox/C2/A/SSP.text = str(pc.is_on_ssp)
 		$VBox/HBox/C2/A/Water.text = str(pc.is_in_water)
 		

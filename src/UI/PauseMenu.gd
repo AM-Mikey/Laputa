@@ -1,7 +1,7 @@
 extends Control
 
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
-const LEVEL = preload("res://src/UI/LevelSelect.tscn")
+const LEVEL = preload("res://src/UI/LevelSelect/LevelSelect.tscn")
 const TITLE = preload("res://src/UI/TitleScreen.tscn")
 
 onready var world = get_tree().get_root().get_node("World")

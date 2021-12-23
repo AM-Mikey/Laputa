@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=1]
-[ext_resource path="res://src/UI/LevelSelect.gd" type="Script" id=3]
+[ext_resource path="res://src/UI/LevelSelect/LevelSelect.gd" type="Script" id=2]
 
 [node name="LevelSelect" type="MarginContainer"]
 margin_right = 480.0
@@ -11,7 +11,7 @@ custom_constants/margin_right = 8
 custom_constants/margin_top = 8
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 8
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

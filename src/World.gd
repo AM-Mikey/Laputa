@@ -88,8 +88,10 @@ func skip_title():
 func _input(event):
 	if Input.is_action_just_pressed("debug_print"):
 		debug_print()
+	
 	if event.is_action_pressed("reload"):
-		var _err = get_tree().reload_current_scene()
+		reload_level()
+	
 	if event.is_action_pressed("save_data"):
 		var popup = POPUP.instance()
 		popup.text = "quicksaved..."
@@ -97,6 +99,7 @@ func _input(event):
 		save_level_data_to_temp()
 		save_player_data_to_save()
 		copy_level_data_to_save()
+	
 	if event.is_action_pressed("load_data"):
 		var popup = POPUP.instance()
 		popup.text = "loaded save"
@@ -104,12 +107,14 @@ func _input(event):
 		load_player_data_from_save()
 		load_level_data_from_save()
 		copy_level_data_to_temp()
+	
 	if event.is_action_pressed("inventory") and not $Recruit.disabled:
 		if not $UILayer.has_node("Inventory") and not get_tree().paused: 
 			get_tree().paused = true
 			$UILayer/HUD.visible = false
 			var inventory = INVENTORY.instance()
 			$UILayer.add_child(inventory)
+	
 	if event.is_action_pressed("pause") and not $UILayer.has_node("TitleScreen"):
 		if not $UILayer.has_node("PauseMenu") and not get_tree().paused:
 			get_tree().paused = true
@@ -548,6 +553,26 @@ func debug_print():
 		$UILayer.add_child(debug_info)
 	else:
 		$UILayer/DebugInfo.queue_free()
+
+func reload_level():
+	$Recruit.free() #we free and respawn them so we have a clean slate when we load in
+	$UILayer/HUD.free()
+	
+	on_level_change(current_level, 0, current_level.music)
+	
+#	if has_node("UILayer/TitleScreen"):
+#		$UILayer/TitleScreen.queue_free()
+	if has_node("UILayer/PauseMenu"):
+		$UILayer/PauseMenu.unpause()
+
+	add_child(RECRUIT.instance())
+	$UILayer.add_child(HUD.instance())
+	
+	yield(get_tree(), "idle_frame")
+	
+	for s in get_tree().get_nodes_in_group("SpawnPoints"):
+		$Recruit.global_position = s.global_position
+
 
 func on_viewport_size_changed():
 	if viewport_size_ignore:
