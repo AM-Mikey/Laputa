@@ -17,6 +17,7 @@ func animate():
 	var next_animation: String = ""
 	var start_time: float
 	var run_anim_speed = max((abs(mm.velocity.x)/mm.speed.x) * 2, 0.1)
+	var climb_anim_speed = mm.velocity.y / (mm.speed.y * 0.5)
 	
 	
 	if pc.is_inspecting:
@@ -25,8 +26,14 @@ func animate():
 		next_animation = get_next_animation("Reverseidle", pc.face_dir, true)
 
 	elif mm.current_state == mm.states["ladder"]:
-		ap.playback_speed = 1 #TODO: variable speed
-		next_animation = get_next_animation("Climb", pc.face_dir, true)
+#		if climb_anim_speed == 0:
+#			ap.stop(false)
+#		else:
+		ap.playback_speed = climb_anim_speed
+		if get_input_dir().x != 0:
+			next_animation = get_next_animation("Climb", get_input_dir(), true)
+		else:
+			next_animation = get_next_animation("Climb", pc.face_dir, true)
 
 
 	else: #normal animation
@@ -129,8 +136,9 @@ func animate():
 
 
 
-	if (ap.current_animation != next_animation or (ap.current_animation == next_animation and start_time)) and next_animation != "":
-		change_animation(next_animation, texture, start_time)
+	if (ap.current_animation != next_animation \
+	or (ap.current_animation == next_animation and start_time)) and next_animation != "":
+		change_animation(next_animation, start_time)
 
 
 
@@ -181,8 +189,8 @@ func get_next_animation(animation, anim_dir, can_shoot_down):
 	var next_animation = animation + animation_suffix
 	return next_animation
 
-#TODO: can we safely remove _texture?
-func change_animation(next_animation, _texture, start_time = 0):
+
+func change_animation(next_animation, start_time = 0):
 	var old_animation = ap.current_animation
 	var old_time = null
 	if ap && ap.current_animation != "":
@@ -191,13 +199,14 @@ func change_animation(next_animation, _texture, start_time = 0):
 	var _front = pc.get_node("Front")
 	var _back = pc.get_node("Back")
 	
-	var blend_groups = [
+	var blend_groups = [ #see if the string matches in new/old animations
 		"Stand.L",
 		"Stand.R",
 		"Run.L",
 		"Run.R",
 		"Backrun.L",
 		"Backrun.R",
+		"Climb"
 	]
 
 	ap.play(next_animation)

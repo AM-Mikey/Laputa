@@ -21,12 +21,12 @@ var data = {
 	"level_data" : {}
 	}
 
-
 export var development_stage: String = "Alpha"
 var internal_version: String = get_internal_version()
 export var release_version: String
-export var is_release: bool = false
-export var should_skip_title: bool = false
+export var is_release = false
+export var should_skip_title = false
+export var visible_triggers = false
 
 export var starting_level = "res://src/Level/Village/Village.tscn"
 onready var current_level = load(starting_level).instance() #assumes current level to start with, might cause issues down the line
@@ -89,10 +89,15 @@ func _input(event):
 	if Input.is_action_just_pressed("debug_print"):
 		debug_print()
 	
-	if event.is_action_pressed("reload"):
+	if event.is_action_pressed("debug_reload"):
 		reload_level()
 	
-	if event.is_action_pressed("save_data"):
+	if event.is_action_pressed("debug_triggers"):
+		visible_triggers = !visible_triggers
+		for v in get_tree().get_nodes_in_group("TriggerVisuals"):
+			v.visible = visible_triggers
+	
+	if event.is_action_pressed("debug_save"):
 		var popup = POPUP.instance()
 		popup.text = "quicksaved..."
 		$UILayer.add_child(popup)
@@ -100,7 +105,7 @@ func _input(event):
 		save_player_data_to_save()
 		copy_level_data_to_save()
 	
-	if event.is_action_pressed("load_data"):
+	if event.is_action_pressed("debug_load"):
 		var popup = POPUP.instance()
 		popup.text = "loaded save"
 		$UILayer.add_child(popup)
@@ -558,7 +563,7 @@ func reload_level():
 	$Recruit.free() #we free and respawn them so we have a clean slate when we load in
 	$UILayer/HUD.free()
 	
-	on_level_change(current_level, 0, current_level.music)
+	on_level_change(current_level.filename, 0, current_level.music)
 	
 #	if has_node("UILayer/TitleScreen"):
 #		$UILayer/TitleScreen.queue_free()

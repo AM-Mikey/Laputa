@@ -7,7 +7,6 @@ export var conversation: String
 
 onready var world = get_tree().get_root().get_node("World")
 
-
 func _on_DialogCue_body_entered(_body):
 	yield(get_tree().create_timer(.0001), "timeout") #why?
 

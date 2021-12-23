@@ -237,13 +237,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="JumpForgiveness" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="Animation" type="Label" parent="VBox/HBox/C1/Q"]
 margin_top = 120.0
 margin_right = 45.0
 margin_bottom = 132.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
-text = "JF: "
+text = "Anim: "
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -413,12 +413,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="JumpForgiveness" type="Label" parent="VBox/HBox/C1/A"]
+[node name="Animation" type="Label" parent="VBox/HBox/C1/A"]
 margin_top = 120.0
 margin_right = 6.0
 margin_bottom = 132.0
 theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "-"
 __meta__ = {
 "_edit_use_anchors_": false

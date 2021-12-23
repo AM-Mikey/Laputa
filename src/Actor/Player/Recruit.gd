@@ -74,11 +74,11 @@ func _ready():
 
 func _input(event):
 	if not disabled:
-		if event.is_action_pressed("level_up"):
+		if event.is_action_pressed("debug_level_up"):
 			if weapon_array.front().level < weapon_array.front().max_level:
 				level_up(true)
 
-		if event.is_action_pressed("level_down"):
+		if event.is_action_pressed("debug_level_down"):
 			if weapon_array.front().level != 1:
 				level_down(true)
 

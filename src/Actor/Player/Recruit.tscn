@@ -444,7 +444,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -521,7 +521,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -598,7 +598,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -675,7 +675,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -752,7 +752,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -829,7 +829,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -906,7 +906,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -983,7 +983,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1060,7 +1060,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.3, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1137,7 +1137,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.3, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1186,7 +1186,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 1 ]
 }
 
 [sub_resource type="Animation" id=118]
@@ -1359,7 +1359,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1436,7 +1436,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1513,7 +1513,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1590,7 +1590,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1667,7 +1667,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1744,7 +1744,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1821,7 +1821,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1898,7 +1898,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -2545,8 +2545,10 @@ script = ExtResource( 13 )
 [node name="Back" type="Sprite" parent="."]
 light_mask = 2
 position = Vector2( 0, -16 )
-hframes = 8
-vframes = 2
+texture = ExtResource( 15 )
+hframes = 3
+vframes = 12
+frame = 32
 region_rect = Rect2( 173, 193, 24, 35 )
 script = ExtResource( 9 )
 
@@ -2562,9 +2564,10 @@ position = Vector2( -5, -1 )
 [node name="Front" type="Sprite" parent="."]
 light_mask = 2
 position = Vector2( 0, -16 )
-texture = ExtResource( 16 )
-hframes = 8
-vframes = 2
+texture = ExtResource( 15 )
+hframes = 3
+vframes = 12
+frame = 35
 script = ExtResource( 9 )
 
 [node name="PlayerCamera" parent="." instance=ExtResource( 10 )]

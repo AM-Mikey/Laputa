@@ -5,16 +5,17 @@ const TRANSITION = preload("res://src/Effect/Transition/TransitionIris.tscn")
 var open_sound = load("res://assets/SFX/Placeholder/snd_door.ogg")
 var locked_sound = load("res://assets/SFX/Placeholder/snd_gun_click.ogg")
 
-var has_player_near = false
-var active_player = null
-
-onready var world = get_tree().get_root().get_node("World")
 
 signal level_change(level, door_index, music)
+
+var has_player_near = false
+var active_player = null
 
 export var level: String
 export var door_index: int = 0
 export var locked = false
+
+onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
 	var _val = connect("level_change", world, "on_level_change")
