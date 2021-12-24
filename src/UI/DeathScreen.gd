@@ -19,6 +19,7 @@ func _ready():
 	on_viewport_size_changed()
 
 func _on_DeathSound_finished():
+	world.in_menu = true
 	focus()
 	visible = true
 	world.get_node("MusicPlayer").stream = music_gameover

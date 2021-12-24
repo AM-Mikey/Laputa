@@ -1,26 +1,22 @@
-extends Area2D
+extends Prop
 
-#var sfx_click = load("res://assets/SFX/Placeholder/snd_switchweapon.ogg")
 export var style: int = 0
-
-var has_player_near = false
-var active_player = null
 
 func _ready():
 	$Sprite.frame_coords.y = style
 
 
-func on_body_entered(body):
-	has_player_near = true
-	active_player = body
+func _on_body_entered(body):
+	active_pc
 
-func on_body_exited(_body):
-	has_player_near = false
+func _on_body_exited(_body):
+	active_pc = null
 	
 
 func _input(event):
-	if event.is_action_pressed("inspect") and has_player_near == true and active_player.disabled == false:
-		toggle_fan()
+	if event.is_action_pressed("inspect") and active_pc != null:
+		if not active_pc.disabled:
+			toggle_fan()
 
 
 func toggle_fan():

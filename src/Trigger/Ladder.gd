@@ -1,20 +1,24 @@
-extends Area2D
+extends Trigger
 
-var active_player = null
+func _ready():
+	trigger_type = "ladder"
+
 
 func _on_Ladder_body_entered(body):
-	active_player = body
+	active_pc = body
 
 func _on_Ladder_body_exited(_body):
-	active_player.get_node("MovementManager").change_state(active_player.get_node("MovementManager").states["normal"])
-	active_player = null
+	if not get_overlap():
+		active_pc.get_node("MovementManager").change_state(active_pc.get_node("MovementManager").states["normal"])
+	
+	active_pc = null
 
 
 func _physics_process(delta):
-	if active_player and not active_player.get_node("MovementManager").current_state == active_player.get_node("MovementManager").states["ladder"]:
+	if active_pc and not active_pc.get_node("MovementManager").current_state == active_pc.get_node("MovementManager").states["ladder"]:
 		if Input.is_action_just_pressed("look_up") \
-		or Input.is_action_just_pressed("look_down") and not active_player.is_on_floor() \
-		or Input.is_action_just_pressed("look_down") and active_player.is_on_ssp:
-			active_player.get_node("MovementManager").change_state(active_player.get_node("MovementManager").states["ladder"])
-			active_player.position.x = position.x + 8
-			active_player.position.y -= 1
+		or Input.is_action_just_pressed("look_down") and not active_pc.is_on_floor() \
+		or Input.is_action_just_pressed("look_down") and active_pc.is_on_ssp:
+			active_pc.get_node("MovementManager").change_state(active_pc.get_node("MovementManager").states["ladder"])
+			active_pc.position.x = position.x + 8
+			active_pc.position.y -= 1

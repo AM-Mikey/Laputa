@@ -49,10 +49,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Actor/NPC/NPC.gd"
 }, {
+"base": "Node",
+"class": "Prop",
+"language": "GDScript",
+"path": "res://src/Prop/Prop.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Recruit",
 "language": "GDScript",
 "path": "res://src/Actor/Player/Recruit.gd"
+}, {
+"base": "Area2D",
+"class": "Trigger",
+"language": "GDScript",
+"path": "res://src/Trigger/Trigger.gd"
 }, {
 "base": "Resource",
 "class": "Weapon",
@@ -68,7 +78,9 @@ _global_script_class_icons={
 "KeyItem": "res://assets/Icon/KeyItemIcon.png",
 "Movement": "",
 "NPC": "res://assets/Icon/NPCIcon.png",
+"Prop": "res://assets/Icon/PropIcon.png",
 "Recruit": "res://assets/Icon/PlayerIcon.png",
+"Trigger": "res://assets/Icon/TriggerIcon.png",
 "Weapon": "res://assets/Icon/WeaponIcon.png"
 }
 

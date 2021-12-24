@@ -7,6 +7,7 @@ const TITLE = preload("res://src/UI/TitleScreen.tscn")
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
+	world.in_menu = true
 	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 	focus()

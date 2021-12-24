@@ -9,9 +9,7 @@ __meta__ = {
 }
 development_stage = "alpha"
 release_version = "1.7"
-should_skip_title = true
-visible_triggers = true
-starting_level = "res://src/Level/StatesTest.tscn"
+starting_level = "res://src/Level/Village/MechanicShop.tscn"
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -1

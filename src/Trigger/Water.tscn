@@ -19,3 +19,4 @@ shape = SubResource( 1 )
 color = Color( 0, 0, 0.701961, 1 )
 
 [connection signal="body_entered" from="." to="." method="_on_Water_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_Water_body_exited"]

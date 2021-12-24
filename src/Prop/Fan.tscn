@@ -46,5 +46,5 @@ bus = "SFX"
 autoplay = "Spin"
 anims/Spin = SubResource( 2 )
 
-[connection signal="body_entered" from="." to="." method="on_body_entered"]
-[connection signal="body_exited" from="." to="." method="on_body_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

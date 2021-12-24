@@ -8,11 +8,11 @@ const HUD = preload("res://src/UI/HUD/HUD.tscn")
 var music_theme = load("res://assets/Music/laputaintro.wav")
 
 onready var world = get_tree().get_root().get_node("World")
-#onready var player = get_tree().get_root().get_node("World/Recruit")
-#onready var hud = get_tree().get_root().get_node("World/UILayer/HUD")
+
 
 
 func _ready():
+	world.in_menu = true
 	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	
 
@@ -42,7 +42,7 @@ func _on_New_pressed():
 	visible = false
 	queue_free()
 	
-	world.on_level_change(world.starting_level, 0, "LevelSelect", "res://assets/Music/XXXX.ogg")
+	world.on_level_change(world.starting_level, 0, "res://assets/Music/XXXX.ogg")
 	world.add_child(RECRUIT.instance())
 	world.get_node("UILayer").add_child(HUD.instance())
 	
@@ -71,14 +71,12 @@ func _on_Level_pressed():
 func _on_Quit_pressed():
 	get_tree().quit()
 
-
-func on_viewport_size_changed():
-	rect_size = get_tree().get_root().size / world.resolution_scale
-
-
 func focus():
 	print("focusing on title screen")
 	if $VBoxContainer.has_node("Load"):
 		$VBoxContainer/Load.grab_focus()
 	else:
 		$VBoxContainer/New.grab_focus()
+
+func on_viewport_size_changed():
+	rect_size = get_tree().get_root().size / world.resolution_scale

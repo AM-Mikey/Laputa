@@ -28,6 +28,8 @@ export var is_release = false
 export var should_skip_title = false
 export var visible_triggers = false
 
+var in_menu = false
+
 export var starting_level = "res://src/Level/Village/Village.tscn"
 onready var current_level = load(starting_level).instance() #assumes current level to start with, might cause issues down the line
 

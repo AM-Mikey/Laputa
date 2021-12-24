@@ -26,9 +26,6 @@ func animate():
 		next_animation = get_next_animation("Reverseidle", pc.face_dir, true)
 
 	elif mm.current_state == mm.states["ladder"]:
-#		if climb_anim_speed == 0:
-#			ap.stop(false)
-#		else:
 		ap.playback_speed = climb_anim_speed
 		if get_input_dir().x != 0:
 			next_animation = get_next_animation("Climb", get_input_dir(), true)

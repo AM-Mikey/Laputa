@@ -20,8 +20,10 @@ func _ready():
 
 
 func _on_LevelButton_pressed():
-	world.get_node("Recruit").free() #we free and respawn them so we have a clean slate when we load in
-	world.get_node("UILayer/HUD").free()
+	if world.has_node("Recruit"):
+		world.get_node("Recruit").free() #we free and respawn them so we have a clean slate when we load in
+	if world.has_node("UILayer/HUD"):
+		world.get_node("UILayer/HUD").free()
 	
 	world.on_level_change(level, 0, "res://assets/Music/XXXX.ogg")
 	

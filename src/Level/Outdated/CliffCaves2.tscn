@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/Background/bkMaze.bmp" type="Texture" id=1]
 [ext_resource path="res://src/Tile/TriggerTile/SpikesTrigger.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Actor/Enemy/BeetleGreen.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Tile/TriggerTile/SemiSolidTrigger.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Tile/TriggerTile/Outdated/SemiSolidTrigger.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Tile/PropTile/BreakableProp.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Actor/Enemy/TogglerVertical.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Tile/TriggerTile/WaterTrigger.tscn" type="PackedScene" id=7]
@@ -17,6 +17,7 @@
 [ext_resource path="res://src/Tile/DebugBackground.tres" type="TileSet" id=15]
 [ext_resource path="res://src/Tile/DebugTile.tres" type="TileSet" id=16]
 [ext_resource path="res://src/Tile/DebugSSP.tres" type="TileSet" id=17]
+
 
 [node name="CliffCaves2" type="Node2D"]
 script = ExtResource( 14 )

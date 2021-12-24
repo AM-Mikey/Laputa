@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Trigger/Door.gd" type="Script" id=1]
-[ext_resource path="res://assets/SFX/Placeholder/snd_door.ogg" type="AudioStream" id=2]
+[ext_resource path="res://src/Utility/SFX.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Utility/TriggerVisual.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -15,12 +15,10 @@ script = ExtResource( 1 )
 position = Vector2( 0, -16 )
 shape = SubResource( 1 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
-bus = "SFX"
-
 [node name="TriggerVisual" parent="." instance=ExtResource( 3 )]
 color = Color( 0, 0.4, 0, 1 )
 
-[connection signal="body_entered" from="." to="." method="_on_Door_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_Door_body_exited"]
+[node name="SFX" parent="." instance=ExtResource( 2 )]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
