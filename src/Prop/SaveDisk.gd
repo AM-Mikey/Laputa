@@ -16,6 +16,6 @@ func _input(event):
 		if not active_pc.disabled:
 			$SFX.play()
 			$AnimationPlayer.playback_speed = 0.5
-			world.save_level_data_to_temp()
-			world.save_player_data_to_save()
-			world.copy_level_data_to_save()
+			world.write_level_data_to_temp()
+			world.write_player_data_to_save()
+			world.copy_level_data_from_temp_to_save()

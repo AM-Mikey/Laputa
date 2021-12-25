@@ -1,22 +1,18 @@
-extends Area2D
+extends Trigger
 
 var damage = 2
 
-var active_pc = null
-
-func _on_Spikes_body_entered(body):
+func _on_body_entered(body):
 	active_pc = body
-	do_damage()
+	_do_damage()
 
-func _on_Spikes_body_exited(body):
+func _on_body_exited(body):
 	active_pc = null
-
 
 func _physics_process(delta):
 	if active_pc != null:
 		if not active_pc.invincible:
-			do_damage()
+			_do_damage()
 
-
-func do_damage():
+func _do_damage():
 	active_pc.hit(damage, Vector2.ZERO)

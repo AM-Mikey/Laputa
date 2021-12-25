@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/Trigger/EnemyCue.gd" type="Script" id=1]
-[ext_resource path="res://src/Utility/TriggerVisual.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -9,11 +8,9 @@ extents = Vector2( 8, 8 )
 [node name="EnemyCue" type="Area2D"]
 collision_layer = 0
 script = ExtResource( 1 )
+color = Color( 1, 0, 0.666667, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
-
-[node name="TriggerVisual" parent="." instance=ExtResource( 2 )]
-color = Color( 1, 0, 0.666667, 1 )
 
 [connection signal="body_entered" from="." to="." method="_on_EnemyCue_body_entered"]

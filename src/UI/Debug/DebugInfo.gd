@@ -39,6 +39,7 @@ func _physics_process(delta):
 		$VBox/HBox/C1/A/Gravity.text = str("%.f" % mm.gravity)
 		$VBox/HBox/C1/A/Pos.text = str("%4.f" % pc.global_position.x) + "," + str("%4.f" % pc.global_position.y)
 		$VBox/HBox/C1/A/Animation.text = str(pc.get_node("AnimationPlayer").current_animation)
+		$VBox/HBox/C1/A/State.text = str(pc.get_node("MovementManager").current_state.name)
 
 		$VBox/HBox/C1/A/MoveDir.text = str("%2.f" % pc.move_dir.x) + "," + str("%2.f" % pc.move_dir.y)
 		$VBox/HBox/C1/A/FaceDir.text = str("%2.f" % pc.face_dir.x) + "," + str("%2.f" % pc.face_dir.y)
@@ -50,8 +51,8 @@ func _physics_process(delta):
 
 		$VBox/HBox/C2/A/Disabled.text = str(pc.disabled)
 		$VBox/HBox/C2/A/Invincible.text = str(pc.invincible)
+		$VBox/HBox/C2/A/Inspect.text = str(pc.inspecting)
 		$VBox/HBox/C2/A/Floor.text = str(pc.is_on_floor())
-		$VBox/HBox/C2/A/Inspect.text = str(pc.is_inspecting)
 		$VBox/HBox/C2/A/SSP.text = str(pc.is_on_ssp)
 		$VBox/HBox/C2/A/Water.text = str(pc.is_in_water)
 		

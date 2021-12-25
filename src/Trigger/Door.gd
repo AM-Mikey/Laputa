@@ -2,9 +2,6 @@ extends Trigger
 
 const TRANSITION = preload("res://src/Effect/Transition/TransitionIris.tscn")
 
-var open_sound = load("res://assets/SFX/Placeholder/snd_door.ogg")
-var locked_sound = load("res://assets/SFX/Placeholder/snd_gun_click.ogg")
-
 signal level_change(level, door_index, music)
 
 export var level: String
@@ -29,40 +26,36 @@ func _on_body_exited(_body):
 
 
 func _input(event):
-	if event.is_action_pressed("inspect") and active_pc != null:
+	if event.is_action("inspect") and active_pc != null:
 		if not active_pc.disabled and active_pc.is_on_floor():
 			if not locked:
-				active_pc.set_collision_layer_bit(0, false) #TODO: why not just respawn the player?
-				active_pc.disabled = true
-				if active_pc.get_node("AnimationPlayer").is_playing():
-					active_pc.get_node("AnimationPlayer").stop()
-				prepare_next_level()
+				enter_door()
+			
 			else:
 				if active_pc.inventory.has("Key"):
 					var index = active_pc.inventory.find("Key") #TODO: have door store a specific key
 					active_pc.inventory.remove(index)
-			
-					active_pc.set_collision_layer_bit(0, false)
-					active_pc.disabled = true
-					if active_pc.get_node("AnimationPlayer").is_playing():
-						active_pc.get_node("AnimationPlayer").stop()
-					prepare_next_level()
+					enter_door()
 				else:
-					$AudioStreamPlayer.stream = locked_sound
-					$AudioStreamPlayer.play()
+					$SFX.stream = sfx_locked
+					$SFX.play()
 
 
 
-func prepare_next_level():
+func enter_door():
+	active_pc.inspecting = true
+	active_pc.disable()
+	active_pc.move_to(position)
+	
+	
+	
+	
+	$SFX.stream = sfx_door
+	$SFX.play()
 	var music = get_parent().get_parent().music
-	
-	var sfx_player = world.get_node("SFXPlayer")
-	sfx_player.stream = open_sound
-	sfx_player.play()
-	
 	var transition = TRANSITION.instance()
-	
-	
+
+
 	if world.get_node("UILayer").has_node("TransitionIris"):
 		world.get_node("UILayer/TransitionIris").free()
 	
@@ -70,5 +63,6 @@ func prepare_next_level():
 	
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")
 	
+	active_pc.inspecting = false
+	
 	emit_signal("level_change", level, door_index, music)
-

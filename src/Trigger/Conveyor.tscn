@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/Trigger/Conveyor.gd" type="Script" id=1]
-[ext_resource path="res://src/Utility/TriggerVisual.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -25,9 +24,6 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 position = Vector2( 0, -2.5 )
 shape = SubResource( 2 )
-
-[node name="TriggerVisual" parent="." instance=ExtResource( 2 )]
-color = Color( 0.35, 0, 0.7, 1 )
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

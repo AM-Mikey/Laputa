@@ -26,7 +26,7 @@ var air_cof = 0.00
 
 #var conveyor_speed = Vector2.ZERO
 
-
+var can_bonk = true
 var bonk_time = 0.4
 var forgiveness_time = 0.05
 export var minimum_direction_time = 1.0 #cave story forces you to jump a certain x distance when going max speed before jumping
@@ -37,6 +37,7 @@ var knockback_direction: Vector2
 export var knockback_speed = Vector2(40, 100) #(80, 180)
 var knockback_velocity = Vector2.ZERO
 
+var move_target = Vector2.ZERO
 
 var starting_direction #for acceleration
 var bonk_distance = 4 #this was for corner clipping
@@ -109,29 +110,30 @@ func _input(event):
 				change_state(states["fly"])
 			else: change_state(states["normal"])
 		
-		if pc.is_inspecting:
+		if pc.inspecting: #TODO: why this way?
 			if event.is_action_pressed("move_left") \
 			or event.is_action_pressed("move_right") \
 			or event.is_action_pressed("jump"):
-				pc.is_inspecting = false
+				pc.inspecting = false
 
 
 
 
 
 func bonk(type):
-	$BonkTimeout.start(bonk_time)
-	
-	var bonk = BONK.instance()
-	bonk.position = pc.position
-	bonk.normal = pc.get_slide_collision(pc.get_slide_count() - 1).normal
-	match type:
-		"bonk":
-			bonk.position.y -=16
-			bonk.type = "bonk"
-		"land":
-			bonk.type = "land"
-	world.get_node("Front").add_child(bonk)
+	if can_bonk:
+		$BonkTimeout.start(bonk_time)
+
+		var bonk = BONK.instance()
+		bonk.position = pc.position
+		bonk.normal = pc.get_slide_collision(pc.get_slide_count() - 1).normal
+		match type:
+			"bonk":
+				bonk.position.y -=16
+				bonk.type = "bonk"
+			"land":
+				bonk.type = "land"
+		world.get_node("Front").add_child(bonk)
 
 
 

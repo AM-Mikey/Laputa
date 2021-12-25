@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/Trigger/Door.gd" type="Script" id=1]
 [ext_resource path="res://src/Utility/SFX.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Utility/TriggerVisual.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 16 )
@@ -10,13 +9,11 @@ extents = Vector2( 8, 16 )
 [node name="Door" type="Area2D" groups=["Trigger"]]
 collision_layer = 0
 script = ExtResource( 1 )
+color = Color( 0, 0.4, 0, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -16 )
 shape = SubResource( 1 )
-
-[node name="TriggerVisual" parent="." instance=ExtResource( 3 )]
-color = Color( 0, 0.4, 0, 1 )
 
 [node name="SFX" parent="." instance=ExtResource( 2 )]
 

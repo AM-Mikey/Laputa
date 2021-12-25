@@ -39,8 +39,6 @@ func _ready():
 	on_viewport_size_changed()
 	audio.stream = text_sound
 	tb.bbcode_text = "\n" #""
-	
-	#get_parent().add_child(load("res://src/Dialog/TopicBox.tscn").instance()) #TESTING
 
 func print_sign():
 	face_container.free()
@@ -66,9 +64,8 @@ func start_printing(dialog_json, conversation_to_print):
 	text = dialog[conversation_to_print].strip_edges().replace("\t", "") #strip edges to clean up first and last newlines ## remove tabulation
 	print(text)
 	
-	pc.disabled = true
-	pc.invincible = true
-	pc.is_inspecting = true
+	pc.disable()
+	pc.inspecting = true
 	dialog_loop()
 
 
@@ -187,9 +184,8 @@ func stop_printing():
 	emit_signal("dialog_finished")
 	if is_instance_valid(pc):
 		pc.get_node("PlayerCamera").position = Vector2.ZERO
-		pc.disabled = false
-		pc.invincible = false
-		pc.is_inspecting = false
+		pc.enable()
+		pc.inspecting = false
 	queue_free()
 
 

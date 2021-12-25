@@ -38,8 +38,7 @@ func parse_command(string):
 			end_branch()
 		
 		"/lock":#																		disables and makes the player character invincible
-			pc.disabled = true
-			pc.invincible = true
+			pc.disable()
 		"/focus":#					/focus, (string: npc_id)							focuses PlayerCamera on an npc, doesn't work indoors
 			focus(argument)
 		"/unfocus":#																	returns camera focus to the pc
@@ -64,8 +63,7 @@ func parse_command(string):
 			db.auto_input = false
 			
 		"/tbox":
-			pc.disabled = true
-			pc.invincible = true
+			pc.disable()
 			world.get_node("UILayer").add_child(TBOX.instance())
 
 

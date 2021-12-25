@@ -1,8 +1,9 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://src/Utility/Obselete/Xp.gd" type="Script" id=1]
+[ext_resource path="res://src/Utility/Outdated/Xp.gd" type="Script" id=1]
 [ext_resource path="res://assets/SFX/Placeholder/snd_xp_bounce.ogg" type="AudioStream" id=2]
 [ext_resource path="res://assets/Actor/Xp.png" type="Texture" id=3]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )

@@ -5,6 +5,8 @@ onready var world = get_tree().get_root().get_node("World")
 func _ready():
 	add_to_group("TriggerVisuals")
 	
+	color = get_parent().color
+	
 	get_parent().z_index = 100
 	var col
 	if get_parent().has_node("CollisionShape2D"):

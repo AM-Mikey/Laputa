@@ -18,14 +18,10 @@ func animate():
 	var start_time: float
 	var run_anim_speed = max((abs(mm.velocity.x)/mm.speed.x) * 2, 0.1)
 	var climb_anim_speed = mm.velocity.y / (mm.speed.y * 0.5)
-	
-	
-	if pc.is_inspecting:
-		ap.playback_speed = 1
-		texture = load("res://assets/Actor/Player/Reverseidle.png") #TODO animation should remove this
-		next_animation = get_next_animation("Reverseidle", pc.face_dir, true)
 
-	elif mm.current_state == mm.states["ladder"]:
+
+
+	if mm.current_state == mm.states["ladder"]:
 		ap.playback_speed = climb_anim_speed
 		if get_input_dir().x != 0:
 			next_animation = get_next_animation("Climb", get_input_dir(), true)
@@ -43,7 +39,9 @@ func animate():
 					next_animation = get_next_animation("Run", get_input_dir(), pc.is_on_ssp)
 				else:
 					ap.playback_speed = 1
-					next_animation = get_next_animation("Stand", pc.face_dir, pc.is_on_ssp)
+					match pc.inspecting:
+						true: next_animation = get_next_animation("Reverseidle", pc.face_dir, true)
+						false: next_animation = get_next_animation("Stand", pc.face_dir, pc.is_on_ssp)
 
 
 			else: #arial
@@ -75,7 +73,9 @@ func animate():
 					next_animation = get_next_animation("Backrun", Vector2.RIGHT, pc.is_on_ssp)
 				else:
 					ap.playback_speed = 1
-					next_animation = get_next_animation("Stand", pc.face_dir, pc.is_on_ssp)
+					match pc.inspecting:
+						true: next_animation = get_next_animation("Reverseidle", pc.face_dir, true)
+						false: next_animation = get_next_animation("Stand", pc.face_dir, pc.is_on_ssp)
 
 
 			else: #arial
@@ -108,7 +108,9 @@ func animate():
 					next_animation = get_next_animation("Run", Vector2.RIGHT, pc.is_on_ssp)
 				else:
 					ap.playback_speed = 1
-					next_animation = get_next_animation("Stand", pc.face_dir, pc.is_on_ssp)
+					match pc.inspecting:
+						true: next_animation = get_next_animation("Reverseidle", pc.face_dir, true)
+						false: next_animation = get_next_animation("Stand", pc.face_dir, pc.is_on_ssp)
 
 
 			else: #arial
@@ -140,12 +142,14 @@ func animate():
 
 
 func get_input_dir() -> Vector2:
-
 	if not pc.disabled:
 		return Vector2(
 			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 
 			Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
-	else: return Vector2.ZERO
+	else:
+		return Vector2(
+			pc.move_dir.x if mm.current_state == mm.states["moveto"] else 0,
+			0)
 
 
 

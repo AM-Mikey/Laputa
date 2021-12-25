@@ -2,7 +2,6 @@ extends Node
 
 enum Jump {NORMAL, RUNNING}
 var jump_type
-var forgiveness_time = 0.05
 
 
 
@@ -29,7 +28,7 @@ func state_process():
 				mm.bonk("Land")
 		
 
-		mm.forgive_timer.start(forgiveness_time)
+		mm.forgive_timer.start(mm.forgiveness_time)
 
 
 
@@ -60,6 +59,14 @@ func state_process():
 
 
 
+
+
+
+
+
+
+
+
 func get_move_dir():
 	return Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
@@ -68,6 +75,10 @@ func get_move_dir():
 		if Input.is_action_just_pressed("jump") and mm.forgive_timer.time_left > 0 \
 		or Input.is_action_just_pressed("jump") and pc.is_on_floor() 
 		else 0.0)
+
+
+
+
 
 
 
@@ -86,9 +97,6 @@ func get_move_velocity(velocity, move_dir, is_jump_interrupted):
 	
 	if is_jump_interrupted:
 		out.y += mm.gravity * get_physics_process_delta_time()
-
-
-
 
 
 
@@ -111,7 +119,7 @@ func get_move_velocity(velocity, move_dir, is_jump_interrupted):
 	
 	
 	
-	else: #normal
+	else: #normal 
 		if move_dir.x != 0:
 			out.x = min(abs(out.x) + mm.acceleration, mm.speed.x) * pc.move_dir.x
 		else:

@@ -41,7 +41,6 @@ func get_move_velocity(velocity, move_dir):
 	out.y = move_dir.y * mm.speed.y * 0.5
 	out.x = 0
 	if Input.is_action_just_pressed("jump"):
-		#pc.is_on_ladder = false
 		mm.change_state(mm.states["normal"])
 		out.y = mm.speed.y * -1.0
 

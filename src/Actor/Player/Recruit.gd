@@ -34,11 +34,11 @@ var direction_lock = Vector2.ZERO
 
 var invincible = false
 var disabled = true
+var inspecting = false
 
 
 #var is_on_conveyor = false
 var enemies_touching = []
-var is_inspecting = false
 var is_on_ssp = false
 var is_in_water = false
 var dead = false
@@ -81,13 +81,32 @@ func _input(event):
 		if event.is_action_pressed("debug_level_down"):
 			if weapon_array.front().level != 1:
 				level_down(true)
+		
+#		if event.is_action_pressed("inspect"):
+#			if is_on_floor():
+#				inspecting = true
+#		if event.is_action_released("inspect"):
+#			inspecting = false
 
 
+func disable():
+	disabled = true
+	invincible = true
+	$MovementManager.can_bonk = false
+	$MovementManager.change_state($MovementManager.states["disabled"])
 
+func enable():
+	disabled = false
+	invincible = false
+	$MovementManager.can_bonk = true
+	$MovementManager.change_state($MovementManager.states["normal"])
+
+func move_to(pos):
+	$MovementManager.move_target = pos
+	$MovementManager.change_state($MovementManager.states["moveto"])
 
 func _on_SSPDetector_body_entered(_body):
 	is_on_ssp = true
-
 func _on_SSPDetector_body_exited(_body):
 	is_on_ssp = false
 

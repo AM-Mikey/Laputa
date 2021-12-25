@@ -1,10 +1,8 @@
-extends Area2D
+extends Trigger
 
 const DB = preload("res://src/Dialog/DialogBox.tscn")
 
-var has_player_near = false
 var reading = false
-var active_player = null
 
 #we're not actually passing any of these right now other than text
 export var display_name = ""
@@ -19,29 +17,28 @@ var db
 onready var world = get_tree().get_root().get_node("World")
 
 func _on_Sign_body_entered(body):
-	has_player_near = true
-	active_player = body
+	active_pc = body
 
 func _on_ExitDetector_body_exited(_body):
-	has_player_near = false
+	active_pc = null
 	emit_signal("stop_text")
 	if reading:
 		db.queue_free()
 		reading = false
 
 func _input(event):
-	if event.is_action_pressed("inspect") and has_player_near == true and active_player.disabled == false:
-		if not reading:
-			reading = true
-			yield(get_tree().create_timer(.0001), "timeout")
-			
-			if world.has_node("UILayer/DialogBox"): #clear old dialog box if there is one
-				world.get_node("UILayer/DialogBox").stop_printing()
-			
-			db = DB.instance()
-			get_tree().get_root().get_node("World/UILayer").add_child(db)
-			db.text = text
-			db.print_sign()
-		else:
-			db.queue_free()
-			reading = false
+	if not reading:
+		if event.is_action_pressed("inspect") and active_pc != null:
+			if not active_pc.disabled:
+				reading = true
+				
+				if world.has_node("UILayer/DialogBox"): #clear old dialog box if there is one
+					world.get_node("UILayer/DialogBox").stop_printing()
+				
+				db = DB.instance()
+				get_tree().get_root().get_node("World/UILayer").add_child(db)
+				db.text = text
+				db.print_sign()
+	else:
+		db.queue_free()
+		reading = false
