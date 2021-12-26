@@ -16,6 +16,8 @@ var spent = false
 func _ready():
 	add_to_group("Triggers")
 	add_child(TRIGGER_VISUAL.instance())
+	if limited:
+		add_to_group("LimitedTriggers")
 
 func get_overlap() -> bool:
 	var _triggers_touching = 0
