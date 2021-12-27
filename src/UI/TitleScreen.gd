@@ -12,23 +12,20 @@ onready var world = get_tree().get_root().get_node("World")
 
 
 func _ready():
-	world.in_menu = true
+	world.in_menu = true #TODO: obselete?
 	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	
-
 												#VERSION STUFF
 	if world.is_release:
 		$VersionLabel.text = "Release Version: " + world.development_stage + "-" + world.release_version
 	else:
 		$VersionLabel.text = "Internal Version: " + world.development_stage + "-" + world.internal_version
-	
 										#LOAD BUTTON STUFF
-	var file = File.new()
-	if not file.file_exists(world.save_path):
+	if not File.new().file_exists(world.save_path):
 		$VBoxContainer/Load.queue_free()
 	
-	#####
 	
+	####
 	world.get_node("MusicPlayer").stream = music_theme
 	world.get_node("MusicPlayer").play()
 	
@@ -38,8 +35,7 @@ func _ready():
 
 
 
-func _on_New_pressed():
-	visible = false
+func _on_new():
 	queue_free()
 	
 	world.on_level_change(world.starting_level, 0, "res://assets/Music/XXXX.ogg")
@@ -51,25 +47,27 @@ func _on_New_pressed():
 		world.get_node("Recruit").position = s.global_position
 
 
-func _on_Load_pressed():
-	visible = false
+func _on_load():
+	queue_free()
+	
 	world.add_child(RECRUIT.instance())
 	world.get_node("UILayer").add_child(HUD.instance())
-	world.load_player_data_from_save()
-	world.load_level_data_from_save()
-	world.copy_level_data_to_temp()
+	world.read_player_data_from_save()
+	world.read_level_data_from_save()
+	world.copy_level_data_from_save_to_temp()
 
 
-func _on_Options_pressed():
+func _on_options():
 	get_parent().add_child(OPTIONS.instance())
 
 
-func _on_Level_pressed():
+func _on_level():
 	get_parent().add_child(LEVELSELECT.instance())
 
 
-func _on_Quit_pressed():
+func _on_quit():
 	get_tree().quit()
+	
 
 func focus():
 	print("focusing on title screen")

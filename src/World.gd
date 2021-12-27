@@ -32,7 +32,6 @@ var in_menu = false
 
 export var starting_level = "res://src/Level/Village/Village.tscn"
 onready var current_level = load(starting_level).instance() #assumes current level to start with, might cause issues down the line
-#onready var am = $AudioManager
 
 func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed") #TODO err?
