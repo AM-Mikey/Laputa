@@ -1,10 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/Prop/Lamp.png" type="Texture" id=1]
 [ext_resource path="res://src/Prop/Lamp.gd" type="Script" id=2]
-[ext_resource path="res://assets/SFX/Placeholder/snd_switchweapon.ogg" type="AudioStream" id=3]
 [ext_resource path="res://assets/Effect/Light/SoftLight.png" type="Texture" id=4]
-[ext_resource path="res://src/Utility/SFX.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 12 )
@@ -29,9 +27,6 @@ position = Vector2( 0, -8 )
 enabled = false
 texture = ExtResource( 4 )
 color = Color( 1, 0.807843, 0.396078, 1 )
-
-[node name="SFX" parent="." instance=ExtResource( 5 )]
-stream = ExtResource( 3 )
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

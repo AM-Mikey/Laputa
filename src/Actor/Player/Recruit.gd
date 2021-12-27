@@ -277,16 +277,8 @@ func die():
 
 ### MISC
 
-
-
 #TODO: clean these up and get rid of them 
 
-func restore_hp(): #TODO: remove this and merge with health canister
-	$PickupSound.stream = sfx_get_heart
-	$PickupSound.play()
-	hp = max_hp
-	emit_signal("hp_updated", hp, max_hp)
-	
 func update_inventory():
 	emit_signal("inventory_updated", inventory)
 

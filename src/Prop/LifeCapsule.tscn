@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/Prop/LifeCapsule.png" type="Texture" id=1]
 [ext_resource path="res://src/Prop/LifeCapsule.gd" type="Script" id=2]
-[ext_resource path="res://assets/Music/Get Heart Tank!.ogg" type="AudioStream" id=3]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8, 8 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "Flash"
@@ -35,12 +37,14 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 8, 8 )
-
 [node name="LifeCapsule" type="Area2D"]
 collision_layer = 16
 script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+show_behind_parent = true
+position = Vector2( 0, -8 )
+shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
@@ -48,17 +52,9 @@ texture = ExtResource( 1 )
 hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Flash"
 anims/Flash = SubResource( 1 )
 anims/Used = SubResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-show_behind_parent = true
-position = Vector2( 0, -8 )
-shape = SubResource( 3 )
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-bus = "Music"
 
 [connection signal="body_entered" from="." to="." method="_on_LifeCapsule_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_LifeCapsule_body_exited"]

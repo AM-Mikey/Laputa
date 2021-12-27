@@ -39,7 +39,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Item/KeyItem/KeyItem.gd"
 }, {
-"base": "Reference",
+"base": "Node2D",
 "class": "Movement",
 "language": "GDScript",
 "path": "res://src/duncathan_movement.gd"
@@ -90,6 +90,10 @@ config/name="Laputa"
 run/main_scene="res://src/World.tscn"
 config/use_custom_user_dir=true
 config/icon="res://assets/UI/Face/Recruit.png"
+
+[autoload]
+
+am="*res://src/Utility/AudioManager.gd"
 
 [display]
 
@@ -340,6 +344,5 @@ debug_triggers={
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 2d/snapping/use_gpu_pixel_snap=true
 environment/default_environment="res://default_env.tres"

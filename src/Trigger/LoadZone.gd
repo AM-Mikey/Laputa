@@ -9,10 +9,9 @@ export var door_index: int = 0
 export var direction = Vector2.RIGHT
 
 
-onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	var _err = connect("level_change", world, "on_level_change")
+	var _err = connect("level_change", w, "on_level_change")
 	trigger_type = "load_zone"
 	add_to_group("LevelTriggers")
 	add_to_group("LoadZones")
@@ -30,8 +29,7 @@ func enter_load_zone():
 	var level_name = get_parent().get_parent().level_name
 	var music = get_parent().get_parent().music
 	
-	$SFX.stream = sfx_door
-	$SFX.play()
+	w.am.sfx("door")
 	
 	var transition = TRANSITION.instance()
 	match direction:
@@ -40,10 +38,10 @@ func enter_load_zone():
 		Vector2.UP: transition.animation = "WipeInUp"
 		Vector2.DOWN: transition.animation = "WipeInDown"
 	
-	if world.get_node("UILayer").has_node("TransitionWipe"):
-		world.get_node("UILayer/TransitionWipe").free()
+	if w.get_node("UILayer").has_node("TransitionWipe"):
+		w.get_node("UILayer/TransitionWipe").free()
 	
-	world.get_node("UILayer").add_child(transition)
+	w.get_node("UILayer").add_child(transition)
 	
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")
 	

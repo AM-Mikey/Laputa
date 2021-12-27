@@ -4,16 +4,18 @@ const DB = preload("res://src/Dialog/DialogBox.tscn")
 
 export (String, FILE, "*.json") var dialog_json: String
 export var conversation: String
+export var repeatable = false
 
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
 	trigger_type = "dialog_cue"
-	limited = true
+	if not repeatable:
+		add_to_group("LimitedTriggers")
 
 func _on_body_entered(_body):
 	if not spent:
-		spent = true
+		expend_trigger()
 		
 		if world.has_node("UILayer/DialogBox"):
 			world.get_node("UILayer/DialogBox").stop_printing()

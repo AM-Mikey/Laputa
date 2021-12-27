@@ -8,10 +8,8 @@ export var level: String
 export var door_index: int = 0
 export var locked = false
 
-onready var world = get_tree().get_root().get_node("World")
-
 func _ready():
-	var _val = connect("level_change", world, "on_level_change") #TODO a better way of not returning this
+	var _val = connect("level_change", w, "on_level_change") #TODO a better way of not returning this
 	
 	trigger_type = "door"
 	
@@ -37,8 +35,7 @@ func _input(event):
 					active_pc.inventory.remove(index)
 					enter_door()
 				else:
-					$SFX.stream = sfx_locked
-					$SFX.play()
+					am.play("locked")
 
 
 
@@ -47,22 +44,17 @@ func enter_door():
 	active_pc.disable()
 	active_pc.move_to(position)
 	
+	am.play("door")
 	
-	
-	
-	$SFX.stream = sfx_door
-	$SFX.play()
 	var music = get_parent().get_parent().music
 	var transition = TRANSITION.instance()
 
 
-	if world.get_node("UILayer").has_node("TransitionIris"):
-		world.get_node("UILayer/TransitionIris").free()
+	if w.get_node("UILayer").has_node("TransitionIris"):
+		w.get_node("UILayer/TransitionIris").free()
 	
-	world.get_node("UILayer").add_child(transition)
-	
+	w.get_node("UILayer").add_child(transition)
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")
 	
 	active_pc.inspecting = false
-	
 	emit_signal("level_change", level, door_index, music)

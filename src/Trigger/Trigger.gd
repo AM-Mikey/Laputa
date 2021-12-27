@@ -10,14 +10,13 @@ export var color = Color(1, 0, 0)
 
 var active_pc = null
 var trigger_type = ""
-var limited = false
 var spent = false
+
+onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
 	add_to_group("Triggers")
 	add_child(TRIGGER_VISUAL.instance())
-	if limited:
-		add_to_group("LimitedTriggers")
 
 func get_overlap() -> bool:
 	var _triggers_touching = 0
@@ -29,3 +28,7 @@ func get_overlap() -> bool:
 		return true
 	else: 
 		return false
+
+func expend_trigger():
+	spent = true
+	visible = false

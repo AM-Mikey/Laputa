@@ -32,6 +32,7 @@ var in_menu = false
 
 export var starting_level = "res://src/Level/Village/Village.tscn"
 onready var current_level = load(starting_level).instance() #assumes current level to start with, might cause issues down the line
+#onready var am = $AudioManager
 
 func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed") #TODO err?
@@ -331,17 +332,24 @@ func read_player_data_from_save():
 			printerr("ERROR: no save file found")
 
 func write_level_data_to_temp():
-	var containers_if_used = []
-	for c in get_tree().get_nodes_in_group("Containers"):
-		containers_if_used.append(c.used)
+	var limited_props = []
+	for p in get_tree().get_nodes_in_group("LimitedProps"):
+		var scoped_data = {
+			"position" : p.position,
+			"spent" : p.spent
+			}
+		limited_props.append(scoped_data)
 	
 	var limited_triggers = []
-	for t in get_tree().get_nodes_in_group("Triggers"):
-		if t.limited:
-			limited_triggers.append(t.spent)
+	for t in get_tree().get_nodes_in_group("LimitedTriggers"):
+		var scoped_data = {
+			"position" : t.position,
+			"spent" : t.spent
+			}
+		limited_triggers.append(scoped_data)
 	
 	data["level_data"][current_level.name] = {
-		"containers_if_used": containers_if_used,
+		"limited_props": limited_props,
 		"limited_triggers": limited_triggers
 	}
 	
@@ -386,61 +394,45 @@ func copy_level_data_from_temp_to_save():
 ### LOAD ###
 
 func read_level_data_from_temp():
-	var containers = get_tree().get_nodes_in_group("Containers")
-	
-
 	var scoped_data = read_from_file(temp_path)
-	
 	if scoped_data["level_data"].has(current_level.name): #if it finds level data for this level
 		var current_level_data = scoped_data["level_data"][current_level.name]
-		
-		if not current_level_data["containers_if_used"].empty(): #if there are containers in the loaded level
-			for i in containers.size():
-				containers[i].used = current_level_data["containers_if_used"][i]
-				if containers[i].used == true:
-					containers[i].get_node("AnimationPlayer").play("Used") #TODO: TODO: terrible way of doing this. add ids, because this data changes based on the order things are placed in. Any save data from different versions becomes incompatable.
-		
-		
-		var triggers = get_tree().get_nodes_in_group("Triggers")
-		var limited_triggers = []
-		for t in triggers: if t.limited: limited_triggers.append(t)
 
-		#if not current_level_data["limited_triggers"].empty():
-		for i in limited_triggers.size():
-			limited_triggers[i].spent = current_level_data["limited_triggers"][i]
+		for saved in current_level_data["limited_props"]:
+			for current in get_tree().get_nodes_in_group("LimitedProps"):
+				if saved["position"] == current.position:
+					if saved["spent"]:
+						current.expend_prop()
 		
-		
+		for saved in current_level_data["limited_triggers"]:
+			for current in get_tree().get_nodes_in_group("LimitedTriggers"):
+				if saved["position"] == current.position:
+					if saved["spent"]:
+						current.expend_trigger()
+
 	else:
 		print("no previous level data in temp")
 		return
-		
-		print("level data loaded from temp")
+	print("level data loaded from temp")
+
 
 
 func read_level_data_from_save():
-	var containers = get_tree().get_nodes_in_group("Containers")
-	var file = File.new()
-	if file.file_exists(save_path):
-		var file_read = file.open(save_path, File.READ)
-		if file_read == OK:
-			var scoped_data = file.get_var()
-			file.close()
-			
-			if scoped_data["level_data"].has(current_level.name): #if it finds level data for this level
-				var current_level_data = scoped_data["level_data"][current_level.name]
-				if current_level_data["containers_if_used"].empty() == false: #if there are containers in the loaded level
-					for i in containers.size():
-						containers[i].used = current_level_data["containers_if_used"][i]
-						if containers[i].used == true:
-							containers[i].get_node("AnimationPlayer").play("Used")
-				
-				print("level data loaded from save")
-			else:
-				print("no previous level data in save")
-		else:
-			printerr("ERROR: level data could not be loaded from save!")
+	var scoped_data = read_from_file(save_path)
+	if scoped_data["level_data"].has(current_level.name): #if it finds level data for this level
+		var current_level_data = scoped_data["level_data"][current_level.name]
+		
+		for saved in current_level_data["limited_props"]:
+			for current in get_tree().get_nodes_in_group("LimitedProps"):
+				if saved["position"] == current.position:
+					if saved["spent"]:
+						current.expend_prop()
+
 	else:
-		printerr("ERROR: no save file found")
+		print("no previous level data in save")
+		return
+	print("level data loaded from save")
+
 
 
 ##################################################################################

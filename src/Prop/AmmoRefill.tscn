@@ -7,7 +7,7 @@
 extents = Vector2( 8, 8 )
 
 [node name="AmmoRefill" type="Area2D"]
-collision_layer = 16
+collision_layer = 272
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -18,8 +18,5 @@ shape = SubResource( 1 )
 position = Vector2( 0, -8 )
 texture = ExtResource( 1 )
 
-[node name="Audio" type="AudioStreamPlayer" parent="."]
-bus = "SFX"
-
-[connection signal="body_entered" from="." to="." method="_on_AmmoRefill_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_AmmoRefill_body_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
