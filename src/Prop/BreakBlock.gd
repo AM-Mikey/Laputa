@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Prop
 
 func on_break(method):
 	$BreakSound.play()

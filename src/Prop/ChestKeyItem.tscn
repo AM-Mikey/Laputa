@@ -46,14 +46,11 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 4
-frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Shine"
 anims/Shine = SubResource( 2 )
 anims/Used = SubResource( 3 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-bus = "SFX"
-
-[connection signal="body_entered" from="." to="." method="_on_Chest_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_Chest_body_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

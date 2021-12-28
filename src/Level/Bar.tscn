@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/Actor/NPC/Dola.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Actor/NPC/Fuuka.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Actor/NPC/Quincy.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Utility/LevelCamera.tscn" type="PackedScene" id=12]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
@@ -124,7 +125,5 @@ motion_scale = Vector2( 0, 0 )
 [node name="SpawnPoint" parent="." instance=ExtResource( 4 )]
 position = Vector2( 8, 256 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 128, 192 )
-z_index = 1
-current = true
+[node name="LevelCamera" parent="." instance=ExtResource( 12 )]
+position = Vector2( 136, 192 )

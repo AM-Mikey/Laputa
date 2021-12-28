@@ -1,45 +1,35 @@
-extends Area2D
+extends Trigger
 
 const TRANSITION = preload("res://src/Effect/Transition/TransitionWipe.tscn")
 
-var open_sound = load("res://assets/SFX/placeholder/snd_door.ogg")
-
-var active_player = null
-
-onready var world = get_tree().get_root().get_node("World")
-
-signal level_change(level, door_index, level_name, music)
+signal level_change(level, door_index)
 
 export var level: String
 export var door_index: int = 0
 export var direction = Vector2.RIGHT
 
+
+
 func _ready():
-	var _err = connect("level_change", world, "on_level_change")
+	var _err = connect("level_change", w, "on_level_change")
+	trigger_type = "load_zone"
 	add_to_group("LevelTriggers")
 	add_to_group("LoadZones")
 
 
-func _on_LoadZone_body_entered(body):
-	active_player = body
+func _on_body_entered(body):
+	active_pc = body
+	enter_load_zone()
 
-	active_player.set_collision_layer_bit(0, false)
-	active_player.disabled = true
-	if active_player.get_node("AnimationPlayer").is_playing():
-		active_player.get_node("AnimationPlayer").stop()
-	prepare_next_level()
-
-func _on_LoadZone_body_exited(_body):
+func _on_body_exited(_body):
 	pass
 
 
-func prepare_next_level():
+func enter_load_zone():
 	var level_name = get_parent().get_parent().level_name
 	var music = get_parent().get_parent().music
 	
-	var sfx_player = world.get_node("SFXPlayer")
-	sfx_player.stream = open_sound
-	sfx_player.play()
+	w.am.sfx("door")
 	
 	var transition = TRANSITION.instance()
 	match direction:
@@ -48,17 +38,13 @@ func prepare_next_level():
 		Vector2.UP: transition.animation = "WipeInUp"
 		Vector2.DOWN: transition.animation = "WipeInDown"
 	
-	if world.get_node("UILayer").has_node("TransitionWipe"):
-		world.get_node("UILayer/TransitionWipe").free()
+	if w.get_node("UILayer").has_node("TransitionWipe"):
+		w.get_node("UILayer/TransitionWipe").free()
 	
-	world.get_node("UILayer").add_child(transition)
+	w.get_node("UILayer").add_child(transition)
 	
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")
 	
-	emit_signal("level_change", level, door_index, level_name, music)
+	emit_signal("level_change", level, door_index)
 	
-
-
-
-
 

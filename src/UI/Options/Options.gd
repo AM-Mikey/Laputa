@@ -9,6 +9,8 @@ func _ready():
 		visible = false
 	else:
 		$TabContainer/Settings.focus()
+		if world.has_node("UILayer/TitleScreen"):
+			world.get_node("UILayer/TitleScreen").visible = false
 		var _err = get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 		_on_viewport_size_changed()
 
@@ -36,11 +38,3 @@ func _input(event):
 		else:
 			$TabContainer.current_tab += 1
 	
-#	if event.is_action_pressed("ui_cancel"):
-#
-#		if world.has_node("UILayer/PauseMenu"):
-#			world.get_node("UILayer/PauseMenu").focus()
-#		if world.has_node("UILayer/TitleScreen"):
-#			world.get_node("UILayer/TitleScreen").focus()
-#		else:
-#			queue_free()

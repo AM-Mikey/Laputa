@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/Prop/SaveDisk.png" type="Texture" id=1]
-[ext_resource path="res://assets/SFX/Placeholder/snd_menu_select.ogg" type="AudioStream" id=2]
 [ext_resource path="res://src/Prop/SaveDisk.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 8 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "Spin"
@@ -22,11 +24,13 @@ tracks/0/keys = {
 "values": [ 0, 27 ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 8 )
-
-[node name="SaveDisk" type="Node2D"]
+[node name="SaveDisk" type="Area2D"]
+collision_layer = 0
 script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -8 )
+shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
@@ -34,18 +38,8 @@ texture = ExtResource( 1 )
 hframes = 28
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Spin"
 anims/Spin = SubResource( 1 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
-bus = "SFX"
-
-[node name="PlayerDetector" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-position = Vector2( 0, -8 )
-shape = SubResource( 2 )
-
-[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
-[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

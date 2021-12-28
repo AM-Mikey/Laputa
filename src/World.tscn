@@ -9,8 +9,8 @@ __meta__ = {
 }
 development_stage = "alpha"
 release_version = "1.7"
-should_skip_title = true
-starting_level = "res://src/Level/StatesTest.tscn"
+visible_triggers = true
+starting_level = "res://src/Level/Village/MechanicShop.tscn"
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -26,18 +26,4 @@ z_index = 1
 [node name="UILayer" type="CanvasLayer" parent="."]
 pause_mode = 2
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-bus = "Music"
-
-[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
-bus = "SFX"
-
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]

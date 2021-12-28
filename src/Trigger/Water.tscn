@@ -6,13 +6,14 @@
 extents = Vector2( 8, 8 )
 
 [node name="Water" type="Area2D"]
-modulate = Color( 0.12549, 0, 1, 1 )
 collision_layer = 0
 collision_mask = 7
 script = ExtResource( 1 )
+color = Color( 0, 0, 0.701961, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 8, 8 )
 shape = SubResource( 1 )
 
 [connection signal="body_entered" from="." to="." method="_on_Water_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_Water_body_exited"]

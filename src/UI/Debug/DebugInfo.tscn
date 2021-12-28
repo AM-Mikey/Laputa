@@ -8,6 +8,7 @@
 [node name="DebugInfo" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -23,8 +24,8 @@ __meta__ = {
 
 [node name="General" type="HBoxContainer" parent="VBox"]
 margin_right = 480.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 0, 64 )
+margin_bottom = 56.0
+rect_min_size = Vector2( 0, 56 )
 theme = ExtResource( 2 )
 custom_constants/separation = 16
 
@@ -42,10 +43,11 @@ __meta__ = {
 [node name="FPS" type="Label" parent="VBox/General"]
 margin_left = 50.0
 margin_right = 77.0
-margin_bottom = 15.0
+margin_bottom = 12.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
 text = "FPS: "
 __meta__ = {
 "_edit_use_anchors_": false
@@ -54,19 +56,53 @@ __meta__ = {
 [node name="Screen" type="Label" parent="VBox/General"]
 margin_left = 93.0
 margin_right = 131.0
-margin_bottom = 15.0
+margin_bottom = 12.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
 text = "Screen:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Arrays" type="HBoxContainer" parent="VBox/General"]
+margin_left = 147.0
+margin_right = 202.0
+margin_bottom = 56.0
+
+[node name="Weapon" type="VBoxContainer" parent="VBox/General/Arrays"]
+margin_right = 55.0
+margin_bottom = 56.0
+rect_pivot_offset = Vector2( 125, 80 )
+
+[node name="Label" type="Label" parent="VBox/General/Arrays/Weapon"]
+margin_right = 55.0
+margin_bottom = 12.0
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "WEAPONS"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inventory" type="VBoxContainer" parent="VBox/General/Arrays"]
+margin_left = 55.0
+margin_right = 55.0
+margin_bottom = 56.0
+rect_pivot_offset = Vector2( 125, 80 )
+
+[node name="Topic" type="VBoxContainer" parent="VBox/General/Arrays"]
+margin_left = 55.0
+margin_right = 55.0
+margin_bottom = 56.0
+rect_pivot_offset = Vector2( 125, 80 )
+
 [node name="HBox" type="HBoxContainer" parent="VBox"]
-margin_top = 64.0
+margin_top = 56.0
 margin_right = 480.0
-margin_bottom = 244.0
+margin_bottom = 236.0
 
 [node name="C1" type="HBoxContainer" parent="VBox/HBox"]
 margin_right = 51.0
@@ -201,13 +237,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="JumpForgiveness" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="Animation" type="Label" parent="VBox/HBox/C1/Q"]
 margin_top = 120.0
 margin_right = 45.0
 margin_bottom = 132.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
-text = "JF: "
+text = "Anim: "
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="State" type="Label" parent="VBox/HBox/C1/Q"]
+visible = false
+margin_top = 132.0
+margin_right = 45.0
+margin_bottom = 144.0
+theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
+text = "State: "
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -377,12 +426,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="JumpForgiveness" type="Label" parent="VBox/HBox/C1/A"]
+[node name="Animation" type="Label" parent="VBox/HBox/C1/A"]
 margin_top = 120.0
 margin_right = 6.0
 margin_bottom = 132.0
 theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "-"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="State" type="Label" parent="VBox/HBox/C1/A"]
+visible = false
+margin_top = 132.0
+margin_right = 6.0
+margin_bottom = 144.0
+theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
 text = "-"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -433,9 +494,9 @@ __meta__ = {
 }
 
 [node name="C2" type="HBoxContainer" parent="VBox/HBox"]
-margin_left = 432.0
+margin_left = 434.0
 margin_right = 480.0
-margin_bottom = 180.0
+margin_bottom = 168.0
 size_flags_horizontal = 10
 size_flags_vertical = 0
 theme = ExtResource( 2 )
@@ -444,12 +505,12 @@ __meta__ = {
 }
 
 [node name="Q" type="VBoxContainer" parent="VBox/HBox/C2"]
-margin_right = 42.0
-margin_bottom = 180.0
+margin_right = 40.0
+margin_bottom = 168.0
 theme = ExtResource( 2 )
 
-[node name="View" type="Label" parent="VBox/HBox/C2/Q"]
-margin_right = 42.0
+[node name="Cam" type="Label" parent="VBox/HBox/C2/Q"]
+margin_right = 40.0
 margin_bottom = 12.0
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
@@ -461,7 +522,7 @@ __meta__ = {
 
 [node name="CameraPos" type="Label" parent="VBox/HBox/C2/Q"]
 margin_top = 12.0
-margin_right = 42.0
+margin_right = 40.0
 margin_bottom = 24.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
@@ -473,7 +534,7 @@ __meta__ = {
 
 [node name="CameraOffset" type="Label" parent="VBox/HBox/C2/Q"]
 margin_top = 24.0
-margin_right = 42.0
+margin_right = 40.0
 margin_bottom = 36.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
@@ -485,7 +546,7 @@ __meta__ = {
 
 [node name="State" type="Label" parent="VBox/HBox/C2/Q"]
 margin_top = 36.0
-margin_right = 42.0
+margin_right = 40.0
 margin_bottom = 48.0
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
@@ -497,7 +558,7 @@ __meta__ = {
 
 [node name="Disabled" type="Label" parent="VBox/HBox/C2/Q"]
 margin_top = 48.0
-margin_right = 42.0
+margin_right = 40.0
 margin_bottom = 60.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
@@ -509,7 +570,7 @@ __meta__ = {
 
 [node name="Invincible" type="Label" parent="VBox/HBox/C2/Q"]
 margin_top = 60.0
-margin_right = 42.0
+margin_right = 40.0
 margin_bottom = 72.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
@@ -519,58 +580,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Floor" type="Label" parent="VBox/HBox/C2/Q"]
-margin_top = 72.0
-margin_right = 42.0
-margin_bottom = 84.0
-theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 4 )
-text = "Floor: "
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Water" type="Label" parent="VBox/HBox/C2/Q"]
-margin_top = 84.0
-margin_right = 42.0
-margin_bottom = 96.0
-theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 4 )
-text = "Water: "
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Ladder" type="Label" parent="VBox/HBox/C2/Q"]
-margin_top = 96.0
-margin_right = 42.0
-margin_bottom = 108.0
-theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 4 )
-text = "Ladder: "
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SSP" type="Label" parent="VBox/HBox/C2/Q"]
-margin_top = 108.0
-margin_right = 42.0
-margin_bottom = 120.0
-theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 4 )
-text = "SSP: "
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Inspect" type="Label" parent="VBox/HBox/C2/Q"]
-margin_top = 120.0
-margin_right = 42.0
-margin_bottom = 132.0
+margin_top = 72.0
+margin_right = 40.0
+margin_bottom = 84.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
 text = "Inspec: "
@@ -579,10 +592,46 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Floor" type="Label" parent="VBox/HBox/C2/Q"]
+margin_top = 84.0
+margin_right = 40.0
+margin_bottom = 96.0
+theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
+text = "Floor: "
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SSP" type="Label" parent="VBox/HBox/C2/Q"]
+margin_top = 96.0
+margin_right = 40.0
+margin_bottom = 108.0
+theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
+text = "SSP: "
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Water" type="Label" parent="VBox/HBox/C2/Q"]
+margin_top = 108.0
+margin_right = 40.0
+margin_bottom = 120.0
+theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
+text = "Water: "
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Object" type="Label" parent="VBox/HBox/C2/Q"]
-margin_top = 132.0
-margin_right = 42.0
-margin_bottom = 144.0
+margin_top = 120.0
+margin_right = 40.0
+margin_bottom = 132.0
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
 custom_fonts/font = ExtResource( 4 )
@@ -592,9 +641,9 @@ __meta__ = {
 }
 
 [node name="Front" type="Label" parent="VBox/HBox/C2/Q"]
-margin_top = 144.0
-margin_right = 42.0
-margin_bottom = 156.0
+margin_top = 132.0
+margin_right = 40.0
+margin_bottom = 144.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
 text = "Front: "
@@ -604,9 +653,9 @@ __meta__ = {
 }
 
 [node name="Middle" type="Label" parent="VBox/HBox/C2/Q"]
-margin_top = 156.0
-margin_right = 42.0
-margin_bottom = 168.0
+margin_top = 144.0
+margin_right = 40.0
+margin_bottom = 156.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
 text = "Middle: "
@@ -616,9 +665,9 @@ __meta__ = {
 }
 
 [node name="Back" type="Label" parent="VBox/HBox/C2/Q"]
-margin_top = 168.0
-margin_right = 42.0
-margin_bottom = 180.0
+margin_top = 156.0
+margin_right = 40.0
+margin_bottom = 168.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
 text = "Back: "
@@ -628,9 +677,9 @@ __meta__ = {
 }
 
 [node name="A" type="VBoxContainer" parent="VBox/HBox/C2"]
-margin_left = 42.0
-margin_right = 48.0
-margin_bottom = 180.0
+margin_left = 40.0
+margin_right = 46.0
+margin_bottom = 168.0
 theme = ExtResource( 2 )
 
 [node name="View" type="Label" parent="VBox/HBox/C2/A"]
@@ -698,7 +747,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Floor" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Inspect" type="Label" parent="VBox/HBox/C2/A"]
 margin_top = 72.0
 margin_right = 6.0
 margin_bottom = 84.0
@@ -709,7 +758,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Water" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Floor" type="Label" parent="VBox/HBox/C2/A"]
 margin_top = 84.0
 margin_right = 6.0
 margin_bottom = 96.0
@@ -720,7 +769,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Ladder" type="Label" parent="VBox/HBox/C2/A"]
+[node name="SSP" type="Label" parent="VBox/HBox/C2/A"]
 margin_top = 96.0
 margin_right = 6.0
 margin_bottom = 108.0
@@ -731,7 +780,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SSP" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Water" type="Label" parent="VBox/HBox/C2/A"]
 margin_top = 108.0
 margin_right = 6.0
 margin_bottom = 120.0
@@ -742,21 +791,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Inspect" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Object" type="Label" parent="VBox/HBox/C2/A"]
 margin_top = 120.0
 margin_right = 6.0
 margin_bottom = 132.0
-theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 4 )
-text = "-"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Object" type="Label" parent="VBox/HBox/C2/A"]
-margin_top = 132.0
-margin_right = 6.0
-margin_bottom = 144.0
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -765,6 +803,17 @@ __meta__ = {
 }
 
 [node name="Front" type="Label" parent="VBox/HBox/C2/A"]
+margin_top = 132.0
+margin_right = 6.0
+margin_bottom = 144.0
+theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
+text = "-"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Middle" type="Label" parent="VBox/HBox/C2/A"]
 margin_top = 144.0
 margin_right = 6.0
 margin_bottom = 156.0
@@ -775,21 +824,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Middle" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Back" type="Label" parent="VBox/HBox/C2/A"]
 margin_top = 156.0
 margin_right = 6.0
 margin_bottom = 168.0
-theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
-text = "-"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Back" type="Label" parent="VBox/HBox/C2/A"]
-margin_top = 168.0
-margin_right = 6.0
-margin_bottom = 180.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "-"

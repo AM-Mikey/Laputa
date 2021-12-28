@@ -1,12 +1,7 @@
-extends Area2D
+extends Prop
 
-#var sfx_click = load("res://assets/SFX/Placeholder/snd_switchweapon.ogg")
 export var style: int = 0
 
-var has_player_near = false
-var active_player = null
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	$Sprite.frame_coords.y = style
 

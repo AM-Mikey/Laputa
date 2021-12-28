@@ -26,11 +26,13 @@ func on_hframe_changed(new_hframe):
 func on_back_vframe_changed(new_vframe):
 	if new_vframe == -1:
 		back.texture = null
+		back.frame_coords.y = 0
 	else:
 		back.frame_coords.y = new_vframe
 
 func on_front_vframe_changed(new_vframe):
 	if new_vframe == -1:
 		front.texture = null
+		front.frame_coords.y = 0
 	else:
 		front.frame_coords.y = new_vframe

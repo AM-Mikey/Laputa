@@ -120,8 +120,10 @@ func _on_Reset_pressed():
 
 func _on_Return_pressed():
 	if world.has_node("UILayer/PauseMenu"):
+		world.get_node("UILayer/PauseMenu").visible = true
 		world.get_node("UILayer/PauseMenu").focus()
 	if world.has_node("UILayer/TitleScreen"):
+		world.get_node("UILayer/TitleScreen").visible = true
 		world.get_node("UILayer/TitleScreen").focus()
 		
 	if world.has_node("UILayer/Options"):

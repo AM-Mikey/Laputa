@@ -12,6 +12,7 @@ onready var pc = get_tree().get_root().get_node("World/Recruit")
 onready var mm = pc.get_node("MovementManager")
 
 func _ready():
+	add_to_group("Cameras")
 	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 

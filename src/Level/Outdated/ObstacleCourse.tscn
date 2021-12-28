@@ -4,7 +4,7 @@
 [ext_resource path="res://src/Tile/TriggerTile/WaterTrigger.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Tile/TriggerTile/LadderTrigger.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Tile/TriggerTile/ConveyorTrigger.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Tile/TriggerTile/SemiSolidTrigger.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Tile/TriggerTile/Outdated/SemiSolidTrigger.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Trigger/Sign.tscn" type="PackedScene" id=8]
@@ -14,6 +14,7 @@
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=12]
 [ext_resource path="res://src/Tile/DebugTile.tres" type="TileSet" id=13]
 [ext_resource path="res://src/Tile/Conveyor.tres" type="TileSet" id=14]
+
 
 [node name="ObstacleCourse" type="Node2D"]
 script = ExtResource( 12 )

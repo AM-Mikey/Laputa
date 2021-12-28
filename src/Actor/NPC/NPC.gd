@@ -10,7 +10,7 @@ var move_dir= Vector2.ZERO
 var target_pos = null
 
 var talking = false
-var active_player = null
+var active_pc = null
 
 export var id: String
 
@@ -36,13 +36,10 @@ func _ready():
 
 
 #movement stuff
+
+
 func _physics_process(_delta):
-#CONNECT A SIGNAL TO TELL NPCS THEY'RE NO LONGER TALKING
 
-#	if talking and active_player.disabled == false: #if db freed the player
-#		talking = false
-
-	
 	if talking:
 		if not check_within_camera():
 			print("npc left screen, ending dialog")
@@ -50,15 +47,51 @@ func _physics_process(_delta):
 			var db = world.get_node("UILayer/DialogBox")
 			db.stop_printing()
 
-#	if target_pos != null:
-#		if move_dir == Vector2.ZERO:
-#			get_move_dir()
-#		move_to_target_x()
-		
+
+
 	velocity = calculate_movevelocity(velocity, move_dir, speed)
 	velocity = move_and_slide(velocity, FLOOR_NORMAL)
 
 
+
+
+
+
+#dialog stuff
+func _on_PlayerDetector_body_entered(body):
+	active_pc = body
+	
+func _on_PlayerDetector_body_exited(_body):
+	active_pc = null
+
+func _input(event):
+	if event.is_action_pressed("inspect") and active_pc != null and dialog_json != "" and conversation != "":
+		start_dialog()
+
+
+func start_dialog():
+	if not talking:
+		talking = true
+		orient()
+		yield(get_tree().create_timer(.0001), "timeout") #why? #TODO
+	
+		if world.has_node("UILayer/DialogBox"): #clear old dialog box if there is one
+			world.get_node("UILayer/DialogBox").stop_printing()
+			
+		var dialog_box = DB.instance()
+		dialog_box.connect("dialog_finished", self, "on_dialog_finished")
+		get_tree().get_root().get_node("World/UILayer").add_child(dialog_box)
+		dialog_box.start_printing(dialog_json, conversation)
+		print("starting conversation")
+
+
+func orient():
+	active_pc.face_dir.x = sign(position.x - active_pc.position.x)
+
+func on_dialog_finished():
+	talking = false
+
+############################################################### TODO: clean up this old stuff \/
 
 func check_within_camera() -> bool:
 	if pc:
@@ -96,38 +129,6 @@ func calculate_movevelocity(linearvelocity: Vector2, scoped_move_dir: Vector2, s
 #sprite stuff
 func animate():
 	pass
-
-
-
-#dialog stuff
-func _on_PlayerDetector_body_entered(body):
-	active_player = body
-	
-func _on_PlayerDetector_body_exited(_body):
-	active_player = null
-
-func _input(event):
-	if event.is_action_pressed("inspect") and active_player != null and dialog_json != "" and conversation != "":
-		start_dialog()
-
-
-func start_dialog():
-	if not talking:
-		talking = true
-		yield(get_tree().create_timer(.0001), "timeout") #why? #TODO
-	
-		if world.has_node("UILayer/DialogBox"): #clear old dialog box if there is one
-			world.get_node("UILayer/DialogBox").stop_printing()
-			
-		var dialog_box = DB.instance()
-		dialog_box.connect("dialog_finished", self, "on_dialog_finished")
-		get_tree().get_root().get_node("World/UILayer").add_child(dialog_box)
-		dialog_box.start_printing(dialog_json, conversation)
-		print("starting conversation")
-
-
-func on_dialog_finished():
-	talking = false
 
 
 

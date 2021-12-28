@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://src/Actor/Player/WeaponManager.gd" type="Script" id=1]
 [ext_resource path="res://src/Actor/Player/Recruit.gd" type="Script" id=2]
@@ -20,8 +20,10 @@
 [ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=18]
 [ext_resource path="res://src/Actor/Player/Fly.gd" type="Script" id=19]
 [ext_resource path="res://src/Actor/Player/Normal.gd" type="Script" id=20]
+[ext_resource path="res://src/Actor/Player/Disabled.gd" type="Script" id=21]
 [ext_resource path="res://src/Actor/Player/Ladder.gd" type="Script" id=22]
 [ext_resource path="res://src/Actor/Player/Knockback.gd" type="Script" id=23]
+[ext_resource path="res://src/Actor/Player/MoveTo.gd" type="Script" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 7.5 )
@@ -444,7 +446,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -521,7 +523,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -598,7 +600,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -675,7 +677,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -752,7 +754,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -829,7 +831,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -906,7 +908,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -983,7 +985,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1060,7 +1062,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.3, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1137,7 +1139,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.3, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1186,7 +1188,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 1 ]
 }
 
 [sub_resource type="Animation" id=118]
@@ -1359,7 +1361,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1436,7 +1438,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1513,7 +1515,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1590,7 +1592,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1667,7 +1669,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1744,7 +1746,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1821,7 +1823,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -1898,7 +1900,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 2,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
@@ -2488,8 +2490,6 @@ tracks/0/keys = {
 z_index = 1
 collision_mask = 520
 script = ExtResource( 2 )
-hp = 8
-max_hp = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 1, 1, 1, 0.4 )
@@ -2513,6 +2513,7 @@ __meta__ = {
 }
 
 [node name="Disabled" type="Node" parent="MovementManager/States"]
+script = ExtResource( 21 )
 
 [node name="Normal" type="Node" parent="MovementManager/States"]
 script = ExtResource( 20 )
@@ -2525,6 +2526,9 @@ script = ExtResource( 19 )
 
 [node name="Knockback" type="Node" parent="MovementManager/States"]
 script = ExtResource( 23 )
+
+[node name="MoveTo" type="Node" parent="MovementManager/States"]
+script = ExtResource( 24 )
 
 [node name="MinDirTimer" type="Timer" parent="MovementManager"]
 one_shot = true
@@ -2550,7 +2554,7 @@ position = Vector2( 0, -16 )
 texture = ExtResource( 15 )
 hframes = 3
 vframes = 12
-frame = 2
+frame = 32
 region_rect = Rect2( 173, 193, 24, 35 )
 script = ExtResource( 9 )
 
@@ -2569,7 +2573,7 @@ position = Vector2( 0, -16 )
 texture = ExtResource( 15 )
 hframes = 3
 vframes = 12
-frame = 4
+frame = 35
 script = ExtResource( 9 )
 
 [node name="PlayerCamera" parent="." instance=ExtResource( 10 )]

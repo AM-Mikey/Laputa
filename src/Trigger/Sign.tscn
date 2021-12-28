@@ -11,6 +11,7 @@ extents = Vector2( 24, 24 )
 [node name="Sign" type="Area2D"]
 collision_layer = 0
 script = ExtResource( 2 )
+color = Color( 0.901961, 0.74902, 0, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 show_behind_parent = true

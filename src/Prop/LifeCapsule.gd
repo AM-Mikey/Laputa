@@ -1,32 +1,16 @@
-extends Area2D
-
-var used = false
-
-var has_player_near = false
-var pc = null
+extends Prop
 
 func _ready():
-	add_to_group("Containers")
-	if not used:
-		$AnimationPlayer.play("Flash")
+	add_to_group("LimitedProps")
 
-func _on_LifeCapsule_body_entered(body):
-	has_player_near = true
-	pc = body
+func activate():
+	expend_prop()
+	active_pc.max_hp +=2
+	active_pc.hp = active_pc.max_hp
+	active_pc.emit_signal("hp_updated", active_pc.hp, active_pc.max_hp)
+	am.play("hp_refill") #TODO: insert jingle
+	print("got life capsule")
 
-
-func _on_LifeCapsule_body_exited(_body):
-	has_player_near = false
-
-func _input(event):
-	if event.is_action_pressed("inspect") and has_player_near == true and pc.disabled == false:
-		if used == false:
-			used = true
-			$AnimationPlayer.play("Used")
-			pc.max_hp +=2
-			pc.hp = pc.max_hp
-			pc.emit_signal("hp_updated", pc.hp, pc.max_hp)
-			$AudioStreamPlayer.play()
-			yield($AudioStreamPlayer, "finished")
-			
-			print("got life capsule")
+func expend_prop():
+	spent = true
+	$AnimationPlayer.play("Used")

@@ -3,7 +3,7 @@
 [ext_resource path="res://src/Trigger/Spikes.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 8 )
+extents = Vector2( 4, 6 )
 
 [node name="SpikesLeft" type="Area2D"]
 collision_layer = 0
@@ -13,5 +13,5 @@ script = ExtResource( 1 )
 position = Vector2( 4, 8 )
 shape = SubResource( 1 )
 
-[connection signal="body_entered" from="." to="." method="_on_Spikes_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_Spikes_body_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

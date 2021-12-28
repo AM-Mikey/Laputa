@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/Trigger/DialogCue.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Tile/PropTile/GrassProp.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/Background/690661.jpg" type="Texture" id=7]
 [ext_resource path="res://src/Utility/LevelLimiter.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Actor/NPC/Mechanic.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Prop/ChestKeyItem.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/Actor/NPC/Fluffy.tscn" type="PackedScene" id=14]
@@ -37,7 +38,7 @@ __meta__ = {
 refuel, save and buy new weapon for cave y and boss"
 }
 level_name = "The Village"
-music = "res://assets/Music/Mimiga Town.ogg"
+music = "village"
 
 [node name="LevelLimiter" parent="." instance=ExtResource( 8 )]
 margin_left = -32.0
@@ -136,6 +137,10 @@ amplitude_h = 0.0
 
 [node name="AmmoRefill" parent="Props" instance=ExtResource( 26 )]
 position = Vector2( 560, 384 )
+
+[node name="Chest" parent="Props" instance=ExtResource( 10 )]
+position = Vector2( 760, 248 )
+held_item = "Necklace"
 
 [node name="Triggers" type="Node2D" parent="."]
 

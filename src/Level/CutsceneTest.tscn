@@ -1,0 +1,73 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Utility/LevelLimiter.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Utility/LevelCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
+[ext_resource path="res://src/Tile/VillageNewer.tres" type="TileSet" id=6]
+[ext_resource path="res://src/Tile/Layers/Collision.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Tile/Layers/Front.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/Tile/Layers/Back.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Tile/Layers/SSP.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/Actor/NPC/Fuuka.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Actor/NPC/Quincy.tscn" type="PackedScene" id=12]
+
+[node name="CutsceneTest" type="Node2D"]
+script = ExtResource( 5 )
+level_type = 1
+dialog_json = "res://src/Dialog/Village.json"
+conversation = "cutscene_test"
+
+[node name="LevelLimiter" parent="." instance=ExtResource( 2 )]
+margin_top = -64.0
+margin_right = 512.0
+margin_bottom = 256.0
+background = null
+
+[node name="Tiles" type="Node2D" parent="."]
+
+[node name="Back" parent="Tiles" instance=ExtResource( 9 )]
+tile_set = ExtResource( 6 )
+
+[node name="Back2" parent="Tiles" instance=ExtResource( 9 )]
+tile_set = ExtResource( 6 )
+
+[node name="Collision" parent="Tiles" instance=ExtResource( 7 )]
+tile_set = ExtResource( 6 )
+tile_data = PoolIntArray( 655360, 197, 0, 655361, 197, 0, 655362, 197, 0, 655363, 197, 0, 655364, 197, 0, 655365, 197, 0, 655366, 197, 0, 655367, 197, 0, 655368, 197, 0, 655369, 197, 0, 655370, 197, 0, 655371, 197, 0, 655372, 197, 0, 655373, 197, 0, 655374, 197, 0, 655375, 197, 0, 655376, 197, 0, 655377, 197, 0, 655378, 197, 0, 655379, 197, 0, 655380, 197, 0, 655381, 197, 0, 655382, 197, 0, 655383, 197, 0, 655384, 197, 0, 655385, 197, 0, 655386, 197, 0, 655387, 197, 0, 655388, 197, 0, 655389, 197, 0, 655390, 197, 0, 655391, 197, 0 )
+
+[node name="Trim" parent="Tiles" instance=ExtResource( 9 )]
+z_index = 1
+tile_set = ExtResource( 6 )
+
+[node name="Front" parent="Tiles" instance=ExtResource( 8 )]
+tile_set = ExtResource( 6 )
+
+[node name="SSPFront" parent="Tiles" instance=ExtResource( 10 )]
+z_index = 2
+tile_set = ExtResource( 6 )
+
+[node name="Props" type="Node2D" parent="."]
+position = Vector2( -32, 0 )
+
+[node name="Actors" type="Node2D" parent="."]
+
+[node name="Fuuka" parent="Actors" instance=ExtResource( 11 )]
+position = Vector2( 216, 160 )
+scale = Vector2( -1, 1 )
+
+[node name="Quincy" parent="Actors" instance=ExtResource( 12 )]
+position = Vector2( 296, 160 )
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="KillBox" parent="Triggers" instance=ExtResource( 1 )]
+position = Vector2( 0, 1344 )
+scale = Vector2( 482.952, 10 )
+
+[node name="SpawnPoint" parent="." instance=ExtResource( 4 )]
+position = Vector2( 256, 160 )
+
+[node name="LevelCamera" parent="." instance=ExtResource( 3 )]
+position = Vector2( 256, 96 )

@@ -6,7 +6,7 @@ var sfx_switch_weapon =  load("res://assets/SFX/Placeholder/snd_switchweapon.ogg
 
 
 var weapon
-
+var weapon_disabled = false
 var trigger_held = false
 
 onready var world = get_tree().get_root().get_node("World")
@@ -23,7 +23,7 @@ func _physics_process(_delta):
 	var bullet_pos = pc.get_node("BulletOrigin").global_position
 	var effect_pos = pc.get_node("WeaponSprite").position
 	
-	if not pc.disabled:
+	if not pc.disabled and not weapon_disabled:
 		if Input.is_action_pressed("fire_manual"):
 			manual_fire(bullet_pos, effect_pos, pc.shoot_dir)
 		if Input.is_action_pressed("fire_automatic"):
@@ -36,7 +36,7 @@ func _physics_process(_delta):
 
 	
 func _input(event):
-	if not pc.disabled:
+	if not pc.disabled and not weapon_disabled:
 		if pc.weapon_array.size() > 1: #only swap if more than one weapon
 			if event.is_action_pressed("weapon_left"):
 				shift_weapon("left")
@@ -57,16 +57,19 @@ func shift_weapon(direction):
 		"right":
 			var weapon_to_move = pc.weapon_array.pop_front()
 			pc.weapon_array.push_back(weapon_to_move)
+	
+	pc.emit_signal("weapons_updated", pc.weapon_array)
 	$WeaponAudio.stream = sfx_switch_weapon
 	$WeaponAudio.play()
 	
 	
-	
-	
-	
-	
-	
-	
+func disable_weapon():
+	weapon_disabled = true
+	pc.get_node("WeaponSprite").visible = false
+
+func enable_weapon():
+	weapon_disabled = false
+	pc.get_node("WeaponSprite").visible = true
 	
 	
 	

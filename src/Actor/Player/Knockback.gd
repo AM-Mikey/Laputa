@@ -21,7 +21,7 @@ func state_process():
 
 	if abs(mm.knockback_velocity.x) < 1:
 		mm.knockback_velocity = Vector2.ZERO
-		pc.knockback = false
+		#pc.knockback = false
 		mm.change_state(mm.states["normal"])
 
 

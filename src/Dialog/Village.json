@@ -37,6 +37,13 @@
 	/focus,mechanic /face,mechanic /name,sage /left,mechanic Yeah, you!
 	You can access the shop by jumping up here!
 	/unfocus See ya around!
+	",
+	
+	"cutscene_test":
+	"
+	/name,quincy Here's an example of a cutscene
+	/name,fuuka It can go on without the player even in the scene!
+	for some reason text-commands mess up on the last line so here's one without any!
 	"
 }
 

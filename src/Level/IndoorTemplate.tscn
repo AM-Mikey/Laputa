@@ -9,7 +9,7 @@
 [node name="IndoorTemplate" type="Node2D"]
 script = ExtResource( 1 )
 level_name = "Abandoned House"
-music = "res://assets/Music/Safety.ogg"
+music = "safety"
 
 [node name="BackgroundIndoor" parent="." instance=ExtResource( 2 )]
 

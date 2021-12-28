@@ -8,6 +8,7 @@ extents = Vector2( 8, 8 )
 [node name="EnemyCue" type="Area2D"]
 collision_layer = 0
 script = ExtResource( 1 )
+color = Color( 1, 0, 0.666667, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

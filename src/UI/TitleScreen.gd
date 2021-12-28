@@ -1,36 +1,29 @@
 extends Control
 
-const LEVELSELECT = preload("res://src/UI/LevelSelect.tscn")
+const LEVELSELECT = preload("res://src/UI/LevelSelect/LevelSelect.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 const RECRUIT = preload("res://src/Actor/Player/Recruit.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 
-var music_theme = load("res://assets/Music/laputaintro.wav")
+onready var w = get_tree().get_root().get_node("World")
 
-onready var world = get_tree().get_root().get_node("World")
-#onready var player = get_tree().get_root().get_node("World/Recruit")
-#onready var hud = get_tree().get_root().get_node("World/UILayer/HUD")
 
 
 func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	
-
 												#VERSION STUFF
-	if world.is_release:
-		$VersionLabel.text = "Release Version: " + world.development_stage + "-" + world.release_version
+	if w.is_release:
+		$VersionLabel.text = "Release Version: " + w.development_stage + "-" + w.release_version
 	else:
-		$VersionLabel.text = "Internal Version: " + world.development_stage + "-" + world.internal_version
-	
+		$VersionLabel.text = "Internal Version: " + w.development_stage + "-" + w.internal_version
 										#LOAD BUTTON STUFF
-	var file = File.new()
-	if not file.file_exists(world.save_path):
-		$VBoxContainer/Load.queue_free()
+	if not File.new().file_exists(w.save_path):
+		$VBox/Load.queue_free()
 	
-	#####
 	
-	world.get_node("MusicPlayer").stream = music_theme
-	world.get_node("MusicPlayer").play()
+	####
+	am.play_music("theme")
 	
 	yield(get_tree(), "idle_frame")
 	on_viewport_size_changed()
@@ -38,47 +31,46 @@ func _ready():
 
 
 
-func _on_New_pressed():
-	visible = false
+func _on_new():
 	queue_free()
 	
-	world.on_level_change(world.starting_level, 0, "LevelSelect", "res://assets/Music/XXXX.ogg")
-	world.add_child(RECRUIT.instance())
-	world.get_node("UILayer").add_child(HUD.instance())
+	w.on_level_change(w.starting_level, 0)
+	w.add_child(RECRUIT.instance())
+	w.get_node("UILayer").add_child(HUD.instance())
 	
 	var spawn_points = get_tree().get_nodes_in_group("SpawnPoints")
 	for s in spawn_points:
-		world.get_node("Recruit").position = s.global_position
+		w.get_node("Recruit").position = s.global_position
 
 
-func _on_Load_pressed():
-	visible = false
-	world.add_child(RECRUIT.instance())
-	world.get_node("UILayer").add_child(HUD.instance())
-	world.load_player_data_from_save()
-	world.load_level_data_from_save()
-	world.copy_level_data_to_temp()
+func _on_load():
+	queue_free()
+	
+	w.add_child(RECRUIT.instance())
+	w.get_node("UILayer").add_child(HUD.instance())
+	w.read_player_data_from_save()
+	w.read_level_data_from_save()
+	w.copy_level_data_from_save_to_temp()
 
 
-func _on_Options_pressed():
+func _on_options():
 	get_parent().add_child(OPTIONS.instance())
 
 
-func _on_Level_pressed():
+func _on_level():
 	get_parent().add_child(LEVELSELECT.instance())
 
 
-func _on_Quit_pressed():
+func _on_quit():
 	get_tree().quit()
-
-
-func on_viewport_size_changed():
-	rect_size = get_tree().get_root().size / world.resolution_scale
-
+	
 
 func focus():
 	print("focusing on title screen")
-	if $VBoxContainer.has_node("Load"):
-		$VBoxContainer/Load.grab_focus()
+	if $VBox.has_node("Load"):
+		$VBox/Load.grab_focus()
 	else:
-		$VBoxContainer/New.grab_focus()
+		$VBox/New.grab_focus()
+
+func on_viewport_size_changed():
+	rect_size = get_tree().get_root().size / w.resolution_scale

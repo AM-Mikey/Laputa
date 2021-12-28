@@ -39,7 +39,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Item/KeyItem/KeyItem.gd"
 }, {
-"base": "Node2D",
+"base": "Reference",
 "class": "Movement",
 "language": "GDScript",
 "path": "res://src/duncathan_movement.gd"
@@ -49,10 +49,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Actor/NPC/NPC.gd"
 }, {
+"base": "Node",
+"class": "Prop",
+"language": "GDScript",
+"path": "res://src/Prop/Prop.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Recruit",
 "language": "GDScript",
 "path": "res://src/Actor/Player/Recruit.gd"
+}, {
+"base": "Area2D",
+"class": "Trigger",
+"language": "GDScript",
+"path": "res://src/Trigger/Trigger.gd"
 }, {
 "base": "Resource",
 "class": "Weapon",
@@ -68,7 +78,9 @@ _global_script_class_icons={
 "KeyItem": "res://assets/Icon/KeyItemIcon.png",
 "Movement": "",
 "NPC": "res://assets/Icon/NPCIcon.png",
+"Prop": "res://assets/Icon/PropIcon.png",
 "Recruit": "res://assets/Icon/PlayerIcon.png",
+"Trigger": "res://assets/Icon/TriggerIcon.png",
 "Weapon": "res://assets/Icon/WeaponIcon.png"
 }
 
@@ -78,6 +90,10 @@ config/name="Laputa"
 run/main_scene="res://src/World.tscn"
 config/use_custom_user_dir=true
 config/icon="res://assets/UI/Face/Recruit.png"
+
+[autoload]
+
+am="*res://src/Utility/AudioManager.gd"
 
 [display]
 
@@ -260,20 +276,15 @@ weapon_left={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":4,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
-debug_print={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":96,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
-}
 pause={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":11,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
-reload={
+debug_reload={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":92,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 debug_fly={
@@ -281,34 +292,34 @@ debug_fly={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
-save_data={
+debug_save={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777244,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
-load_data={
+debug_print={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":96,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+debug_load={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777245,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
-level_up={
+debug_level_up={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777235,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
-level_down={
+debug_level_down={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777236,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
-movement_profile={
-"deadzone": 0.49,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777229,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
-}
-set_target={
+debug_triggers={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":3,"pressed":false,"doubleclick":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777223,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 
@@ -333,5 +344,6 @@ set_target={
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 2d/snapping/use_gpu_pixel_snap=true
 environment/default_environment="res://default_env.tres"

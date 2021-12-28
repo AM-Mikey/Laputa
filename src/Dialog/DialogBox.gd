@@ -35,27 +35,27 @@ onready var world = get_tree().get_root().get_node("World")
 onready var pc = get_tree().get_root().get_node("World/Recruit")
 
 func _ready():
-	var _con = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 	audio.stream = text_sound
 	tb.bbcode_text = "\n" #""
-	
-	#get_parent().add_child(load("res://src/Dialog/TopicBox.tscn").instance()) #TESTING
 
 func print_sign():
 	face_container.free()
-	tb.bbcode_text = "\n" + "[b][center]" + text
-	pc.is_inspecting = true
+	in_dialog = true
+	#tb.bbcode_text = "\n" + "[b][center]" + text
+	print(text)
+	pc.disable()
+	pc.inspecting = true
+	dialog_loop()
 
 
 func print_flavor_text():
-	#custom_constants/margin_right = 64
-	#custom_constants/margin_left = 64
-	#face_container.free()
 	in_dialog = true
-	pc.is_inspecting = true
-	text = text
+	#tb.text = flavor_text
 	print(text)
+	pc.disable()
+	pc.inspecting = true
 	dialog_loop()
 
 func start_printing(dialog_json, conversation_to_print):
@@ -65,10 +65,8 @@ func start_printing(dialog_json, conversation_to_print):
 	dialog = load_dialog(dialog_json)
 	text = dialog[conversation_to_print].strip_edges().replace("\t", "") #strip edges to clean up first and last newlines ## remove tabulation
 	print(text)
-	
-	pc.disabled = true
-	pc.invincible = true
-	pc.is_inspecting = true
+	pc.disable()
+	pc.inspecting = true
 	dialog_loop()
 
 
@@ -185,10 +183,10 @@ func print_dialog(string):
 func stop_printing():
 	print("ended dialog")
 	emit_signal("dialog_finished")
-	pc.get_node("PlayerCamera").position = Vector2.ZERO
-	pc.disabled = false
-	pc.invincible = false
-	pc.is_inspecting = false
+	if is_instance_valid(pc):
+		pc.get_node("PlayerCamera").position = Vector2.ZERO
+		pc.enable()
+		pc.inspecting = false
 	queue_free()
 
 
@@ -197,9 +195,11 @@ func stop_printing():
 func _physics_process(_delta):
 	var viewport_size = get_tree().get_root().size / world.resolution_scale
 	
-	if pc.get_node("PlayerCamera").offset_v >= 1 / world.resolution_scale: #more than halfway down
+	var active_camera = get_current_camera()
+	
+	if active_camera.offset_v >= 1 / world.resolution_scale: #more than halfway down
 		rect_position.y = viewport_size.y - (rect_size.y + 16) #bottom
-	if pc.get_node("PlayerCamera").offset_v <= -1 / world.resolution_scale: #more than halfway up
+	if active_camera.offset_v <= -1 / world.resolution_scale: #more than halfway up
 		rect_position.y = 16 #top
 	
 func on_viewport_size_changed():
@@ -208,3 +208,12 @@ func on_viewport_size_changed():
 	rect_size.x = min(viewport_size.x, 400)
 	rect_position.x = (viewport_size.x - rect_size.x) /2
 	rect_position.y = viewport_size.y - 80
+
+func get_current_camera() -> Node:
+	var cameras = get_tree().get_nodes_in_group("Cameras")
+	for c in cameras:
+		if c.current:
+			print("found current camera")
+			return c
+	printerr("ERROR: could not find current camera!")
+	return cameras[0]

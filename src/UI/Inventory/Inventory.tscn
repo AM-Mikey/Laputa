@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=2]
 [ext_resource path="res://src/UI/StyleBox/ChromeRimmed.tres" type="StyleBox" id=3]
@@ -8,7 +8,6 @@
 [ext_resource path="res://src/UI/Inventory/WeaponWheel.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/StyleBox/RustTrimmedScrews.tres" type="StyleBox" id=8]
 [ext_resource path="res://src/UI/StyleBox/SteelRoundRiveted.tres" type="StyleBox" id=9]
-[ext_resource path="res://assets/Item/KeyItem/Necklace.png" type="Texture" id=10]
 
 [node name="Inventory" type="MarginContainer"]
 pause_mode = 2
@@ -109,7 +108,6 @@ size_flags_vertical = 3
 [node name="ItemList" type="ItemList" parent="MarginContainer/VBoxContainer/Items"]
 margin_right = 320.0
 margin_bottom = 67.0
-items = [ "", ExtResource( 10 ), false, "", null, false ]
 max_columns = 4
 fixed_icon_size = Vector2( 32, 16 )
 __meta__ = {
