@@ -24,7 +24,7 @@
 [node name="MechanicShop" type="Node2D"]
 script = ExtResource( 5 )
 level_name = "LevelTemplate"
-music = "res://assets/Music/Access.ogg"
+music = "access"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

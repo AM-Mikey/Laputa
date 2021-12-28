@@ -2,7 +2,7 @@ extends Trigger
 
 const TRANSITION = preload("res://src/Effect/Transition/TransitionWipe.tscn")
 
-signal level_change(level, door_index, music)
+signal level_change(level, door_index)
 
 export var level: String
 export var door_index: int = 0
@@ -45,6 +45,6 @@ func enter_load_zone():
 	
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")
 	
-	emit_signal("level_change", level, door_index, music)
+	emit_signal("level_change", level, door_index)
 	
 

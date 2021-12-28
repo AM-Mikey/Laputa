@@ -4,13 +4,13 @@ const DB = preload("res://src/Dialog/DialogBox.tscn")
 
 var reading = false
 
-#we're not actually passing any of these right now other than text
-export var display_name = ""
-export var face: String = ""
-export var expression: String = ""
+#we're not actually passing any of these right now other than text ###TODO: fix signs
+#export var display_name = ""
+#export var face: String = ""
+#export var expression: String = ""
 export(String, MULTILINE) var text = ""
-export var justify = "NFCenter"
-export var voiced = false
+#export var justify = "NFCenter"
+#export var voiced = false
 
 var db
 
@@ -23,8 +23,7 @@ func _on_ExitDetector_body_exited(_body):
 	active_pc = null
 	emit_signal("stop_text")
 	if reading:
-		db.queue_free()
-		reading = false
+		db.stop_printing()
 
 func _input(event):
 	if not reading:
@@ -37,8 +36,10 @@ func _input(event):
 				
 				db = DB.instance()
 				get_tree().get_root().get_node("World/UILayer").add_child(db)
+				db.connect("dialog_finished", self, "on_dialog_finished")
 				db.text = text
 				db.print_sign()
-	else:
-		db.queue_free()
-		reading = false
+
+
+func on_dialog_finished():
+	reading = false

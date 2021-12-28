@@ -19,7 +19,7 @@ __meta__ = {
 full of gold, corp gets here before you do while you search for key, and blows a hole through it"
 }
 level_name = "...?"
-music = "res://assets/Music/Access.ogg"
+music = "access"
 
 [node name="Tiles" type="Node2D" parent="."]
 

@@ -5,7 +5,7 @@ const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const INVENTORY = preload("res://src/UI/Inventory/Inventory.tscn")
 const LEVEL_TEXT = preload("res://src/UI/LevelText.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
-const PAUSEMENU = preload("res://src/UI/PauseMenu.tscn")
+const PAUSEMENU = preload("res://src/UI/PauseMenu/PauseMenu.tscn")
 const POPUP = preload("res://src/UI/PopupText.tscn")
 const RECRUIT = preload("res://src/Actor/Player/Recruit.tscn")
 const TITLE = preload("res://src/UI/TitleScreen.tscn")
@@ -28,24 +28,22 @@ export var is_release = false
 export var should_skip_title = false
 export var visible_triggers = false
 
-var in_menu = false
-
 export var starting_level = "res://src/Level/Village/Village.tscn"
 onready var current_level = load(starting_level).instance() #assumes current level to start with, might cause issues down the line
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed") #TODO err?
+	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
-	add_child(current_level)
-	add_child(TITLECAM.instance())
 	
 	if not should_skip_title:
-		load_title()
+		$UILayer.add_child(TITLE.instance())
+		add_child(TITLECAM.instance())
+		add_child(current_level)
 	else:
+		add_child(current_level)
 		skip_title()
-	load_options()
-
 	
+	load_options()
 
 
 func get_internal_version() -> String:
@@ -71,14 +69,9 @@ func get_internal_version() -> String:
 
 
 
-	
-
-func load_title():
-	var title = TITLE.instance()
-	$UILayer.add_child(title)
 
 func skip_title():
-	on_level_change(starting_level, 0, "res://assets/Music/XXXX.ogg")
+	on_level_change(starting_level, 0)
 	add_child(RECRUIT.instance())
 	get_node("UILayer").add_child(HUD.instance())
 
@@ -136,7 +129,7 @@ func _input(event):
 
 
 
-func on_level_change(level, door_index, music):
+func on_level_change(level, door_index):
 	print("level change")
 	write_level_data_to_temp()
 	
@@ -243,18 +236,10 @@ func on_level_change(level, door_index, music):
 	
 	
 	##################################################################################################################
-	if next_level.music != music:
-		load_music(next_level.music)
-	
-	
 	current_level = next_level
 	read_level_data_from_temp()
 	
 	
-func load_music(music):
-	if music:
-		$MusicPlayer.stream = load(music)
-		$MusicPlayer.play()
 	
 func write_player_data_to_save():
 	var pc = $Recruit
@@ -294,7 +279,7 @@ func read_player_data_from_save():
 			
 			#print(scoped_data["player_data"])
 			
-			on_level_change(scoped_data["player_data"]["current_level"], null, null)
+			on_level_change(scoped_data["player_data"]["current_level"], null)
 			yield(get_tree(), "idle_frame")
 			
 			pc.position = scoped_data["player_data"]["position"]
@@ -491,7 +476,7 @@ func reload_level():
 	$Recruit.free() #we free and respawn them so we have a clean slate when we load in
 	$UILayer/HUD.free()
 	
-	on_level_change(current_level.filename, 0, current_level.music)
+	on_level_change(current_level.filename, 0)
 	
 #	if has_node("UILayer/TitleScreen"):
 #		$UILayer/TitleScreen.queue_free()

@@ -35,25 +35,27 @@ onready var world = get_tree().get_root().get_node("World")
 onready var pc = get_tree().get_root().get_node("World/Recruit")
 
 func _ready():
-	var _con = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 	audio.stream = text_sound
 	tb.bbcode_text = "\n" #""
 
 func print_sign():
 	face_container.free()
-	tb.bbcode_text = "\n" + "[b][center]" + text
-	pc.is_inspecting = true
+	in_dialog = true
+	#tb.bbcode_text = "\n" + "[b][center]" + text
+	print(text)
+	pc.disable()
+	pc.inspecting = true
+	dialog_loop()
 
 
 func print_flavor_text():
-	#custom_constants/margin_right = 64
-	#custom_constants/margin_left = 64
-	#face_container.free()
 	in_dialog = true
-	pc.is_inspecting = true
-	text = text
+	#tb.text = flavor_text
 	print(text)
+	pc.disable()
+	pc.inspecting = true
 	dialog_loop()
 
 func start_printing(dialog_json, conversation_to_print):
@@ -63,7 +65,6 @@ func start_printing(dialog_json, conversation_to_print):
 	dialog = load_dialog(dialog_json)
 	text = dialog[conversation_to_print].strip_edges().replace("\t", "") #strip edges to clean up first and last newlines ## remove tabulation
 	print(text)
-	
 	pc.disable()
 	pc.inspecting = true
 	dialog_loop()

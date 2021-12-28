@@ -16,7 +16,6 @@ __meta__ = {
 full of gold, corp gets here before you do while you search for key, and blows a hole through it"
 }
 level_name = "Treasure Room"
-music = "res://assets/Music/Access.ogg"
 
 [node name="Tiles" type="Node2D" parent="."]
 

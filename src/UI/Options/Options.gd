@@ -8,7 +8,6 @@ func _ready():
 	if hidden:
 		visible = false
 	else:
-		world.in_menu = true
 		$TabContainer/Settings.focus()
 		if world.has_node("UILayer/TitleScreen"):
 			world.get_node("UILayer/TitleScreen").visible = false

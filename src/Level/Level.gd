@@ -10,18 +10,24 @@ export(LevelType) var level_type
 export (String, FILE, "*.json") var dialog_json: String
 export var conversation: String
 
-onready var world = get_tree().get_root().get_node("World")
+onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
 	add_to_group("Levels")
+	
+	if not w.has_node("UILayer/TitleScreen"):
+		if music == "":
+			am.play_music("none")
+		else:
+			am.play_music(music)
 
 	if self.has_node("Notes"):
 		get_node("Notes").visible = false
 		
 	if level_type == LevelType.PLAYERLESS_CUTSCENE:
 		
-		if world.has_node("UILayer/DialogBox"): #clear old dialog box if there is one
-			world.get_node("UILayer/DialogBox").stop_printing()
+		if w.has_node("UILayer/DialogBox"): #clear old dialog box if there is one
+			w.get_node("UILayer/DialogBox").stop_printing()
 			
 		var dialog_box = DB.instance()
 		dialog_box.connect("dialog_finished", self, "on_dialog_finished")

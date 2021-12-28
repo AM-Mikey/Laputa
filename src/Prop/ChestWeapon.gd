@@ -10,6 +10,7 @@ func _ready():
 func activate():
 	expend_prop()
 	am.play("chest")
+	am.play_music("get_item")
 	active_pc.weapon_array.push_front(weapon)
 	active_pc.get_node("WeaponManager").update_weapon()
 	print("added weapon '", weapon_name, "' to inventory")
