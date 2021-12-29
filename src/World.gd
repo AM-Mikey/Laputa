@@ -246,15 +246,16 @@ func on_level_change(level, door_index):
 	
 func write_player_data_to_save():
 	var pc = $Recruit
-	var weapon_data = {}
+	var guns = pc.guns
+	var gun_data = {}
 	
-	for w in pc.weapon_array:
-		weapon_data[w.resource_name] = {
-			"level" : w.level,
-			"xp" : w.xp
+	for g in guns.get_children():
+		gun_data[g.name] = {
+			"level" : g.level,
+			"xp" : g.xp
 			}
-		if w.needs_ammo:
-			weapon_data[w.resource_name]["ammo"] = w.ammo
+		if g.max_ammo != 0:
+			gun_data[g.resource_name]["ammo"] = g.ammo
 	
 	data["player_data"] = {
 		"current_level" : current_level.filename,
@@ -263,8 +264,7 @@ func write_player_data_to_save():
 		"max_hp" : pc.max_hp,
 		"total_xp" : pc.total_xp,
 		"inventory" : pc.inventory,
-		#"weapon_array" : pc.weapon_array,
-		"weapon_data" : weapon_data
+		"gun_data" : gun_data
 	}
 	
 	write_to_file(save_path, data)
@@ -273,50 +273,42 @@ func write_player_data_to_save():
 
 func read_player_data_from_save():
 	var pc = $Recruit
-	var file = File.new()
-	if file.file_exists(save_path):
-		var file_read = file.open(save_path, File.READ)
-		if file_read == OK:
-			var scoped_data = file.get_var()
-			file.close()
+	var guns = pc.guns
+	
+	var scoped_data = read_from_file(save_path)
+	var player_data = scoped_data["player_data"]
+	
+	on_level_change(player_data["current_level"], null)
+	yield(get_tree(), "idle_frame")
+	
+	pc.position = player_data["position"]
+	pc.hp = player_data["hp"]
+	pc.max_hp = player_data["max_hp"]
+	pc.total_xp = player_data["total_xp"]
+	pc.inventory = player_data["inventory"]
+	
+	
+	for g in guns.get_children():
+		g.free()
+		
+	for d in player_data["gun_data"]:
+		var gun_scene = load("res://src/Gun/%s" %d + ".tres")
+		if gun_scene == null:
+			printerr("ERROR: cannot find gun scene at: res://src/Gun/%s" %d + ".tres")
+			return
+		guns.add_child(gun_scene.isntance())
+
+	for g in guns.get_children():
+		g.level = player_data["gun_data"][g.resource_name]["level"]
+		g.xp = player_data["gun_data"][g.resource_name]["xp"]
+		if g.max_ammo != 0:
+			g.ammo = player_data["gun_data"][g.resource_name]["ammo"]
+	
+	pc.emit_signal("hp_updated", pc.hp, pc.max_hp)
+	pc.emit_signal("guns_updated", guns.get_children)
+	pc.update_inventory()
 			
-			#print(scoped_data["player_data"])
-			
-			on_level_change(scoped_data["player_data"]["current_level"], null)
-			yield(get_tree(), "idle_frame")
-			
-			pc.position = scoped_data["player_data"]["position"]
-			pc.hp = scoped_data["player_data"]["hp"]
-			pc.max_hp = scoped_data["player_data"]["max_hp"]
-			pc.total_xp = scoped_data["player_data"]["total_xp"]
-			pc.inventory = scoped_data["player_data"]["inventory"]
-			#player.setup_weapons() not sure what this did
-			
-			
-			pc.weapon_array.clear()
-			for w in scoped_data["player_data"]["weapon_data"]:
-				var weapon_resource = load("res://src/Weapon/%s" %w + ".tres")
-				if weapon_resource != null:
-					pc.weapon_array.append(weapon_resource)
-				else:
-					printerr("ERROR: cannot find weapon resource at: res://src/Weapon/%s" %w + ".tres")
-			for w in pc.weapon_array:
-				w.level = scoped_data["player_data"]["weapon_data"][w.resource_name]["level"]
-				w.xp = scoped_data["player_data"]["weapon_data"][w.resource_name]["xp"]
-				if w.needs_ammo:
-					w.ammo = scoped_data["player_data"]["weapon_data"][w.resource_name]["ammo"]
-			
-			#player.weapon_array[0].update_weapon()
-			pc.get_node("WeaponManager").update_weapon() #TODO: check compatability
-			pc.emit_signal("hp_updated", pc.hp, pc.max_hp)
-			pc.emit_signal("weapon_updated", pc.weapon_array.front())
-			pc.update_inventory()
-			
-			print("player data loaded")
-		else:
-			printerr("ERROR: player data could not be loaded!")
-	else:
-			printerr("ERROR: no save file found")
+	print("player data loaded")
 
 func write_level_data_to_temp():
 	var limited_props = []

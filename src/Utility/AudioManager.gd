@@ -24,12 +24,19 @@ export var sfx_dict: Dictionary = {
 	"pc_die": preload("res://assets/SFX/Placeholder/snd_quote_die.ogg"),
 	
 	"gun_click": preload("res://assets/SFX/placeholder/snd_gun_click.ogg"),
-	
+	"gun_shift": preload("res://assets/SFX/Placeholder/snd_switchweapon.ogg"),
+	"gun_pistol": preload("res://assets/SFX/Placeholder/snd_polar_star_l1_2.ogg"),
+	"gun_shotgun": preload("res://assets/SFX/Placeholder/snd_missile_hit.ogg"),
+	"gun_grenade": preload("res://assets/SFX/Placeholder/snd_expl_small.ogg"),
+
+	"get_hp": preload("res://assets/SFX/Placeholder/snd_health_refill.ogg"),
+	"get_xp": preload("res://assets/SFX/Placeholder/snd_get_xp.ogg"),
+	"get_ammo": preload("res://assets/SFX/Placeholder/snd_get_missile.ogg"),
 }
 
 export var music_dict: Dictionary = {
 	"get_item": preload("res://assets/Music/Placeholder/Got Item!.ogg"),
-	"get_hp": preload("res://assets/Music/Placeholder/Get Heart Tank!.ogg"),
+	"get_hp": preload("res://assets/Music/Placeholder/Get Heart Tank!.ogg"), #TODO: rename
 	"gameover": preload("res://assets/Music/Placeholder/Gameover.ogg"),
 	"victory": preload("res://assets/Music/Placeholder/Victory!.ogg"),
 	
@@ -44,7 +51,7 @@ export var music_dict: Dictionary = {
 
 
 
-export var remove_duplicate_sfx = true
+export var remove_duplicate_sfx = false
 export var sfx_player_max = 8
 var sfx_players = []
 var sfx_queue = []
@@ -62,7 +69,7 @@ var interrupt_queue = []
 func _ready():
 	pass
 
-func play(sfx_string):
+func play(sfx_string: String):
 	if sfx_dict.has(sfx_string):
 		if sfx_queue.has(sfx_string) and remove_duplicate_sfx:
 			print("WARNING: SFX already playing! Removed SFX with name: " + sfx_string)

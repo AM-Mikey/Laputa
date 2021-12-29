@@ -1,163 +1,87 @@
 extends Node
 
-var sfx_click = load("res://assets/SFX/Placeholder/snd_gun_click.ogg")
-var sfx_switch_weapon =  load("res://assets/SFX/Placeholder/snd_switchweapon.ogg")
+const LEVELUP = preload("res://src/Effect/LevelUp.tscn")
+const LEVELDOWN = preload("res://src/Effect/LevelDown.tscn")
 
-
-
-var weapon
-var weapon_disabled = false
-var trigger_held = false
+var disabled = false
 
 onready var world = get_tree().get_root().get_node("World")
-onready var HUD
 onready var pc = get_tree().get_root().get_node("World/Recruit")
 
 
-
-
-func _ready():
-	weapon = pc.weapon_array.front()
-
-func _physics_process(_delta):
-	var bullet_pos = pc.get_node("BulletOrigin").global_position
-	var effect_pos = pc.get_node("WeaponSprite").position
-	
-	if not pc.disabled and not weapon_disabled:
-		if Input.is_action_pressed("fire_manual"):
-			manual_fire(bullet_pos, effect_pos, pc.shoot_dir)
-		if Input.is_action_pressed("fire_automatic"):
-			automatic_fire(bullet_pos, effect_pos, pc.shoot_dir)
-			
-		if Input.is_action_just_released("fire_manual"):
-			release_fire()
-		if Input.is_action_just_released("fire_automatic"): 
-			release_fire()
-
-	
 func _input(event):
-	if not pc.disabled and not weapon_disabled:
-		if pc.weapon_array.size() > 1: #only swap if more than one weapon
-			if event.is_action_pressed("weapon_left"):
-				shift_weapon("left")
-				update_weapon()
+	if not pc.disabled and not disabled and $Guns.get_child_count() > 0:
+		var active_gun = $Guns.get_child(0)
+		
+		if event.is_action_pressed("fire_manual"):
+			active_gun.fire("manual")
+		if event.is_action_pressed("fire_automatic") and active_gun.automatic:
+			active_gun.fire("automatic")
+		if event.is_action_released("fire_manual") or event.is_action_released("fire_automatic"):
+			active_gun.release_fire()
 
-			if event.is_action_pressed("weapon_right"):
-				shift_weapon("right")
-				update_weapon()
+		if $Guns.get_child_count() > 1: #only swap if more than one gun
+			if event.is_action_pressed("gun_left"):
+				shift_gun("left")
+			if event.is_action_pressed("gun_right"):
+				shift_gun("right")
+
+		if event.is_action_pressed("debug_level_up") and active_gun.level < active_gun.max_level:
+				level_up(true)
+		if event.is_action_pressed("debug_level_down") and active_gun.level != 1:
+				level_down(true)
 
 
-	
-	
-func shift_weapon(direction):
+func shift_gun(direction):
 	match direction:
 		"left":
-			var weapon_to_move = pc.weapon_array.pop_back()
-			pc.weapon_array.push_front(weapon_to_move)
+			var child_to_move = $Guns.get_child($Guns.get_child_count() - 1)
+			$Guns.move_child(child_to_move, 0)
 		"right":
-			var weapon_to_move = pc.weapon_array.pop_front()
-			pc.weapon_array.push_back(weapon_to_move)
+			var child_to_move = $Guns.get_child(0)
+			$Guns.move_child(child_to_move, $Guns.get_child_count() - 1)
+			
+	pc.emit_signal("guns_updated", $Guns.get_children())
+	am.play("gun_shift")
 	
-	pc.emit_signal("weapons_updated", pc.weapon_array)
-	$WeaponAudio.stream = sfx_switch_weapon
-	$WeaponAudio.play()
-	
-	
-func disable_weapon():
-	weapon_disabled = true
-	pc.get_node("WeaponSprite").visible = false
 
-func enable_weapon():
-	weapon_disabled = false
-	pc.get_node("WeaponSprite").visible = true
-	
-	
-	
-	
-func update_weapon():
-	weapon = pc.weapon_array.front()
-	if weapon != null:
-		pc.get_node("WeaponSprite").texture = weapon.texture
-		if HUD != null:
-			HUD.update_weapon()
 
-func manual_fire(bullet_pos, effect_pos, shoot_dir): #treats autos and manuals like manual
-	if weapon == null:
-		return
+func level_up(debug):
+	var last_gun = $Guns.get_child(0)
+	var next_gun = load(last_gun.resource_path.replace(last_gun.level, last_gun.level + 1))
 	
-	var cd = get_node("CooldownTimer")
-	if cd.time_left == 0:
-		if trigger_held == false: #check to see this is a new press
-			cd.start(weapon.cooldown_time)
-			if weapon.needs_ammo:
-				if weapon.ammo == 0:
-						print("out of ammo")
-						$WeaponAudio.stream = sfx_click
-						$WeaponAudio.play()
-				else: #not ammo == 0
-					weapon.ammo -= 1
-					pc.emit_signal("weapons_updated", pc.weapon_array)
-					prepare_bullet(bullet_pos, effect_pos, shoot_dir)
-			else: #not needs_ammo
-				prepare_bullet(bullet_pos, effect_pos, shoot_dir)
-			trigger_held = true
-	
-func automatic_fire(bullet_pos, effect_pos, shoot_dir): #only fires autos but holds direction either way
-	if weapon == null:
-		return
+	$Guns.add_child(next_gun)
+	move_child(next_gun, 0)
+	next_gun.ammo = last_gun.ammo
+	next_gun.xp = 0 if debug else last_gun.xp - last_gun.max_xp
+	last_gun.queue_free()
+	emit_signal("gunss_updated", $Guns.get_children())
+
+	var level_up = LEVELUP.instance()
+	world.get_node("Front").add_child(level_up)
+	level_up.position = pc.global_position
+
+
+func level_down(debug):
+		var last_gun = $Guns.get_child(0)
+		var next_gun = load(last_gun.resource_path.replace(last_gun.level, last_gun.level - 1))
 		
-	var cd = get_node("CooldownTimer")
-	if cd.time_left == 0:
-		if weapon.automatic:
-			cd.start(weapon.cooldown_time)
-			if weapon.needs_ammo:
-				if weapon.ammo == 0:
-						print("out of ammo")
-						$WeaponAudio.stream = sfx_click
-						$WeaponAudio.play()
-				else:
-					weapon.ammo -= 1
-					pc.emit_signal("weapons_updated", pc.weapon_array)
-					prepare_bullet(bullet_pos, effect_pos, shoot_dir)
-			else: #not needs_ammo
-				prepare_bullet(bullet_pos, effect_pos, shoot_dir)
+		$Guns.add_child(next_gun)
+		move_child(next_gun, 0)
+		next_gun.ammo = last_gun.ammo
+		next_gun.xp = 0 if debug else next_gun.max_xp + last_gun.xp
+		emit_signal("gunss_updated", $Guns.get_children())
 
-func release_fire():
-	trigger_held = false
+		var level_down = LEVELDOWN.instance()
+		world.get_node("Front").add_child(level_down)
+		level_down.position = pc.global_position
 
-func prepare_bullet(bullet_pos, _effect_pos, shoot_dir):
-	var bullet = weapon.bullet_scene.instance()
-	
-	bullet.damage = weapon.damage
-	bullet.projectile_range = weapon.projectile_range
-	bullet.projectile_speed = weapon.projectile_speed
-	
-	bullet.position = bullet_pos
-	bullet.origin = bullet_pos
-	bullet.direction = shoot_dir
-	
-	world.get_node("Middle").add_child(bullet)
-	
-	###fire audio
-	$WeaponAudio.stream = weapon.audio_stream
-	$WeaponAudio.play()
-	
-	###starpop/muzzle flash
-	var muzzle_flash = load("res://src/Effect/MuzzleFlashEffect.tscn").instance()
-	muzzle_flash.position = get_parent().get_node("WeaponSprite/MuzzlePos").position
-	get_parent().get_node("WeaponSprite").add_child(muzzle_flash)
-		
-	
-func get_bullet_dir(bullet_rot) -> Vector2:
-	if bullet_rot == 90: #Left
-		return Vector2(-1, 0)
-	elif bullet_rot == 270 or bullet_rot == -90: #Right
-		return Vector2(1, 0)
-	elif bullet_rot == 180: #Up
-		return Vector2(0, -1)
-	elif bullet_rot == 0: #Down
-		return Vector2(0, 1)
-	else:
-		printerr("ERROR: Cant get bullet direction!")
-		return Vector2.ZERO
 
+
+func disable():
+	disabled = true
+	pc.get_node("GunSprite").visible = false
+
+func enable():
+	disabled = false
+	pc.get_node("GunSprite").visible = true

@@ -1,6 +1,6 @@
 extends Control
 
-onready var player = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node("World/Recruit")
 onready var hud = get_parent().get_node("HUD")
 onready var items = $MarginContainer/VBoxContainer/Items/ItemList
 onready var weapon_wheel = $MarginContainer/VBoxContainer/Weapons/MarginContainer/WeaponWheel
@@ -21,7 +21,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("inventory"):
 		get_tree().paused = false
 		hud.visible = true
-		player.get_node("WeaponManager").update_weapon()
+		pc.emit_signal("guns_updated", pc.guns.get_children())
 		queue_free()
 
 

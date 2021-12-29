@@ -34,10 +34,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Actor/Enemy/Enemy.gd"
 }, {
-"base": "Node2D",
+"base": "Node",
 "class": "Gun",
 "language": "GDScript",
-"path": "res://src/Weapon/Gun.gd"
+"path": "res://src/Gun/Gun.gd"
 }, {
 "base": "Resource",
 "class": "KeyItem",
@@ -72,7 +72,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "Weapon",
 "language": "GDScript",
-"path": "res://src/Weapon/Weapon.gd"
+"path": "res://src/Gun/Weapon.gd"
 } ]
 _global_script_class_icons={
 "Actor": "res://assets/Icon/ActorIcon.png",
@@ -80,7 +80,7 @@ _global_script_class_icons={
 "Boss": "res://assets/Icon/BossIcon.png",
 "Bullet": "res://assets/Icon/BulletIcon.png",
 "Enemy": "res://assets/Icon/EnemyIcon.png",
-"Gun": "",
+"Gun": "res://assets/Icon/GunIcon.png",
 "KeyItem": "res://assets/Icon/KeyItemIcon.png",
 "Movement": "",
 "NPC": "res://assets/Icon/NPCIcon.png",
@@ -269,13 +269,13 @@ inventory={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":3,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
-weapon_right={
+gun_right={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":5,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
-weapon_left={
+gun_left={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":4,"pressure":0.0,"pressed":false,"script":null)

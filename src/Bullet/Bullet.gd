@@ -9,7 +9,15 @@ const RICOCHET = preload("res://src/Effect/Ricochet.tscn")
 
 var disabled = false
 var gravity = 300
+
+
 var damage
+var f_range
+var speed
+var origin = Vector2.ZERO
+var velocity = Vector2.ZERO
+var direction = Vector2.ZERO
+
 
 
 var break_method = "cut"

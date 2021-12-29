@@ -134,7 +134,7 @@ func do_death_drop():
 	var ammo = AMMO.instance()
 	
 	var player_needs_ammo = false
-	for w in player_actor.weapon_array:
+	for w in player_actor.get_node("GunManager/Guns").get_children():
 		if w.ammo < w.max_ammo:
 			player_needs_ammo = true
 	

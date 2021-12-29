@@ -95,8 +95,8 @@ func do_break_drop():
 		var player_needs_ammo = false
 		if player_actor == null:
 			player_actor = get_tree().get_root().get_node_or_null("World/Recruit")
-		for w in player_actor.weapon_array:
-			if w.ammo < w.max_ammo:
+		for g in player_actor.get_node("GunManager/Guns").get_children():
+			if g.ammo < g.max_ammo:
 				player_needs_ammo = true
 	
 		if not player_needs_ammo:

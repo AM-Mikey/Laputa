@@ -15,7 +15,7 @@ func _ready():
 	if world.has_node("Recruit"):
 		var pc = world.get_node("Recruit")
 		pc.connect("hp_updated", self, "update_hp")
-		pc.connect("weapons_updated", self, "update_weapons")
+		pc.connect("guns_updated", self, "update_guns")
 		pc.connect("total_xp_updated", self, "update_total_xp")
 		pc.setup_hud()
 		
@@ -24,26 +24,26 @@ func _process(_delta):
 	$HpBar/HpLost/HpLostCap.position.x = 38 * $HpBar/HpLost.value / $HpBar/HpLost.max_value
 	if world.has_node("Recruit"):
 		var pc = world.get_node("Recruit")
-		if pc.weapon_array.front() != null: #TODO: make this independant
+		if pc.guns.get_child(0) != null: #TODO: make this independant
 			$CooldownBar/TextureProgress.visible = true
-			$CooldownBar/TextureProgress.value = 100 - ((pc.get_node("WeaponManager/CooldownTimer").time_left / pc.weapon_array.front().cooldown_time) * 100)
+			$CooldownBar/TextureProgress.value = 100 - ((pc.get_node("GunManager/CooldownTimer").time_left / pc.guns.get_child(0).cooldown_time) * 100)
 		else: $CooldownBar/TextureProgress.visible = false
 
-func update_weapons(weapon_array):
+func update_guns(guns):
 	for i in $Weapon/HBoxContainer.get_children(): #clear old
 			i.queue_free()
-	for w in weapon_array:
-		if weapon_array.find(w) == 0: #check if front
+	for g in guns:
+		if guns.find(g) == 0: #check if front
 			var weapon_icon = WEAPONICON.instance() #add the first icon
-			weapon_icon.texture = w["icon_texture"]
+			weapon_icon.texture = g["icon_texture"]
 			$Weapon/HBoxContainer.add_child(weapon_icon)
 			$Weapon/HBoxContainer.move_child(weapon_icon, 0)
 			
-			update_xp(w.xp, w.max_xp, w.level, w.max_level)
-			update_ammo(w.ammo, w.max_ammo, w.needs_ammo)
+			update_xp(g.xp, g.max_xp, g.level, g.max_level)
+			update_ammo(g.ammo, g.max_ammo)
 		else: 
 			var weapon_icon = WEAPONICON.instance() #add all other icons
-			weapon_icon.texture = w["texture"]
+			weapon_icon.texture = g["texture"]
 			$Weapon/HBoxContainer.add_child(weapon_icon)
 
 func update_hp(hp, max_hp):
@@ -111,10 +111,10 @@ func update_xp(xp, max_xp, level, max_level):
 
 
 
-func update_ammo(ammo, max_ammo, needs_ammo):
+func update_ammo(ammo, max_ammo):
 	if $Weapon/HBoxContainer.has_node("AmmoCount"):
 			$Weapon/HBoxContainer/AmmoCount.free()
-	if needs_ammo:
+	if max_ammo != 0:
 		var ammo_count = AMMOCOUNT.instance()
 		ammo_count.ammo = ammo
 		ammo_count.max_ammo = max_ammo

@@ -3,13 +3,13 @@ extends Area2D
 
 const TOOLTIP = preload("res://src/UI/ShopTooltip.tscn")
 
-export var weapon_name: String
+export var gun_name: String
 export var price: int
 
 var get_sound = load("res://assets/SFX/Placeholder/snd_get_item.ogg")
 var no_sound = load("res://assets/SFX/Placeholder/snd_quote_bonkhead.ogg")
 
-var weapon
+var gun
 var used = false
 var has_player_near = false
 var active_player = null
@@ -22,9 +22,9 @@ func _ready():
 	$MoneyNumber.value = price
 	$MoneyNumber.display_number()
 	
-	weapon = load("res://src/Weapon/%s" % weapon_name + ".tres")
+	gun = load("res://src/Gun/%s" % gun_name + ".tres")
 	
-	$Sprite.texture = weapon.icon_texture
+	$Sprite.texture = gun.icon_texture
 	$AnimationPlayer.play("DisplayPrice")
 
 func _on_ShopWeapon_body_entered(body):
@@ -43,8 +43,8 @@ func _on_ShopWeapon_body_exited(_body):
 
 func display_tooltip():
 	var tooltip = TOOLTIP.instance()
-	tooltip.item_name = weapon.display_name
-	tooltip.item_description = weapon.description
+	tooltip.item_name = gun.display_name
+	tooltip.item_description = gun.description
 	tooltip.price = price
 	add_child(tooltip)
 	active_tooltip = tooltip
@@ -60,9 +60,9 @@ func _input(event):
 				active_tooltip.queue_free()
 				$AudioStreamPlayer.stream = get_sound
 				$AudioStreamPlayer.play()
-				active_player.weapon_array.push_front(weapon)
-				active_player.get_node("WeaponManager").update_weapon()
-				print("added weapon '", weapon_name, "' to inventory")
+				active_player.get_node("GunManager/Guns").add_child(gun)
+				active_player.emit_signal("guns_updated", active_player.get_node("GunManager/Guns").get_children())
+				print("added gun '", gun_name, "' to inventory")
 			else:
 				print("not enough money")
 				$AudioStreamPlayer.stream = no_sound

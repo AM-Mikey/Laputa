@@ -9,8 +9,8 @@ func _ready():
 	
 	if is_instance_valid(world.get_node("Recruit")):
 		var pc = world.get_node("Recruit")
-		pc.connect("weapons_updated", self, "on_weapons_updated")
-		on_weapons_updated(pc.weapon_array)
+		pc.connect("guns_updated", self, "on_guns_updated")
+		on_guns_updated(pc.guns.get_children())
 	
 	if world.is_release:
 		$VBox/General/Label.text = "Laputa " + world.internal_version + " (" + world.release_version+ ")"
@@ -28,10 +28,14 @@ func _physics_process(delta):
 	if is_instance_valid(world.get_node("Recruit")):
 		var pc = world.get_node("Recruit")
 		var mm = pc.get_node("MovementManager")
+		var active_gun = null
+		if pc.guns.get_child(0) != null:
+			active_gun = pc.guns.get_child(0) 
+		
 
 		$VBox/HBox/C1/A/HP.text = str("%2.f" % pc.hp) + "/" + str("%2.f" % pc.max_hp)
 		$VBox/HBox/C1/A/TotalXP.text = str(pc.total_xp)
-		$VBox/HBox/C1/A/WeaponXP.text = str("%2.f" % pc.weapon_array.front().xp) + "/" + str("%2.f" % pc.weapon_array.front().max_xp)
+		$VBox/HBox/C1/A/WeaponXP.text = str("%2.f" % active_gun.xp) + "/" + str("%2.f" % active_gun.max_xp)
 		$VBox/HBox/C1/A/WeaponCooldown.text = str("%2.2f" % pc.get_node("WeaponManager/CooldownTimer").time_left)
 		
 		$VBox/HBox/C1/A/Velocity.text = str("%4.f" % mm.velocity.x) + "," + str("%4.f" % mm.velocity.y)
@@ -63,13 +67,13 @@ func _physics_process(delta):
 
 
 
-func on_weapons_updated(weapon_array):
+func on_guns_updated(guns):
 	for c in $VBox/General/Arrays/Weapon.get_children():
 		if c.name != "Label":
 			c.queue_free()
-	for w in weapon_array:
+	for g in guns:
 		var label = Label.new()
-		label.text = w.resource_name
+		label.text = g.name
 		$VBox/General/Arrays/Weapon.add_child(label)
 
 

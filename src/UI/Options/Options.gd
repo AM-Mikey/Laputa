@@ -26,13 +26,13 @@ func _on_TabContainer_tab_changed(tab):
 		2: $TabContainer/ControllerConfig.focus()
 
 func _input(event):
-	if event.is_action_pressed("weapon_left"):
+	if event.is_action_pressed("gun_left"):
 		if $TabContainer.current_tab == 0:
 			$TabContainer.current_tab = 2
 		else:
 			$TabContainer.current_tab -= 1
 		
-	if event.is_action_pressed("weapon_right"):
+	if event.is_action_pressed("gun_right"):
 		if $TabContainer.current_tab == 2:
 			$TabContainer.current_tab = 0
 		else:

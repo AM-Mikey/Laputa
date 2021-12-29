@@ -58,8 +58,8 @@ onready var option_pairs = {
 	op_start: start
 }
 
-onready var action_names = ["*None*", "Jump", "Manual Fire", "Automatic Fire", "Inspect", "Inventory", "Weapon Left", "Weapon Right", "Pause"]
-onready var actions = [null, "jump", "fire_manual", "fire_automatic", "inspect", "inventory", "weapon_left", "weapon_right", "pause"]
+onready var action_names = ["*None*", "Jump", "Manual Fire", "Automatic Fire", "Inspect", "Inventory", "Gun Left", "Gun Right", "Pause"]
+onready var actions = [null, "jump", "fire_manual", "fire_automatic", "inspect", "inventory", "gun_left", "gun_right", "pause"]
 
 func _ready():
 #	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")

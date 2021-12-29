@@ -4,13 +4,6 @@ var texture: StreamTexture
 var texture_index: int
 var collision_shape: RectangleShape2D
 
-var velocity = Vector2.ZERO
-var direction = Vector2.ZERO
-var projectile_speed = Vector2.ZERO
-
-var projectile_range: int
-
-var origin = Vector2.ZERO
 
 
 
@@ -22,14 +15,11 @@ func _ready():
 	
 	$Timer.start(duration)
 	
-	if direction == Vector2.LEFT:
-		rotation_degrees = 0
-	if direction == Vector2.RIGHT:
-		rotation_degrees = 180
-	if direction == Vector2.UP:
-		rotation_degrees = 90
-	if direction == Vector2.DOWN:
-		rotation_degrees = -90
+	match direction:
+		Vector2.LEFT: rotation_degrees = 0
+		Vector2.RIGHT: rotation_degrees = 180
+		Vector2.UP: rotation_degrees = 90
+		Vector2.DOWN: rotation_degrees = -90
 
 #shotgun bullets do not stop on world so it doesn't delete the bullet if it clipped world
 #shotgun bullets can also go through multiple creatures, they only dissapear after their timer ends
