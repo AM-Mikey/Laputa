@@ -66,75 +66,64 @@ func play(sfx_string):
 			print("WARNING: SFX already playing! Removed SFX with name: " + sfx_string)
 			return
 		
-		sfx_queue.append(sfx_string)
-		var player = SFX_PLAYER.instance()
-		sfx_players.append(player)
-		add_child(player)
-		player.stream = sfx_dict[sfx_string]
-		player.play()
-		
+		var player = add_player("sfx", sfx_string)
 		while sfx_players.size() > sfx_player_max:
-			sfx_queue.pop_front()
-			sfx_players.pop_front().queue_free()
+			clear_player("sfx", player)
 		
 		yield(player, "finished")
-		player.queue_free()
-		sfx_queue.erase(sfx_string)
+		clear_player("sfx", player)
 		
 	else:
 		printerr("ERROR: No SFX with name: " + sfx_string)
 
-##########
 
 func play_music(music_string):
 	if music_dict.has(music_string):
 		if music_queue.has(music_string): #don't play if already playing
 			return
 		
-		music_queue.append(music_string)
-		var player = MUSIC_PLAYER.instance()
-		music_players.append(player)
-		add_child(player)
-		player.stream = music_dict[music_string]
-		player.play()
-		
+		var player = add_player("music", music_string)
 		while music_players.size() > music_player_max:
-			music_queue.pop_front()
-			music_players.pop_front().queue_free()
+			clear_player("music", player)
 		
 		yield(player, "finished")
-		player.queue_free()
-		music_queue.erase(music_string)
+		clear_player("music", player)
 	
 	else:
 		printerr("ERROR: No music with name: " + music_string)
 
-########
 
 func play_interrupt(music_string): #play_time, wait_start, wait_end
 	for p in music_players: #pause music players
 		p.stream_paused = true
 
-	interrupt_queue.append(music_string)
-	var player = MUSIC_PLAYER.instance()
-	interrupt_players.append(player)
-	add_child(player)
-	player.stream = music_dict[music_string]
-	player.play()
-	
+	var player = add_player("interrupt", music_string)
 	while interrupt_players.size() > interrupt_player_max:
-		interrupt_queue.pop_front()
-		interrupt_players.pop_front().queue_free()
+		clear_player("interrupt", player)
 	
 	yield(player, "finished")
-	player.queue_free()
-	interrupt_queue.erase(music_string)
+	clear_player("interrupt", player)
 	emit_signal("interrupt_finished")
-	
 	for p in music_players: #unpause music players
 		p.stream_paused = false
 
-####
+#####
+
+func add_player(type, string):
+	get(type + "_queue").append(string)
+	var player = SFX_PLAYER.instance() if type == "sfx" else MUSIC_PLAYER.instance()
+	get(type + "_players").append(player)
+	add_child(player)
+	player.stream = get(type + "_dict")[string]
+	player.play()
+	return player
+
+func clear_player(type, player):
+		get(type + "_queue").pop_front()
+		get(type + "_players").pop_front()
+		player.queue_free()
+
+#####
 
 func stop_sfx():
 	for p in sfx_players:

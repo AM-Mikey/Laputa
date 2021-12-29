@@ -10,15 +10,13 @@ export var locked = false
 
 func _ready():
 	var _val = connect("level_change", w, "on_level_change") #TODO a better way of not returning this
-	
 	trigger_type = "door"
-	
 	add_to_group("LevelTriggers")
 	add_to_group("Doors")
 
+
 func _on_body_entered(body):
 	active_pc = body
-
 func _on_body_exited(_body):
 	active_pc = null
 
@@ -38,7 +36,6 @@ func _input(event):
 					am.play("locked")
 
 
-
 func enter_door():
 	active_pc.inspecting = true
 	active_pc.disable()
@@ -46,15 +43,11 @@ func enter_door():
 	
 	am.play("door")
 	
-	var music = get_parent().get_parent().music
 	var transition = TRANSITION.instance()
-
-
 	if w.get_node("UILayer").has_node("TransitionIris"):
 		w.get_node("UILayer/TransitionIris").free()
-	
 	w.get_node("UILayer").add_child(transition)
-	yield(transition.get_node("AnimationPlayer"), "animation_finished")
 	
+	yield(transition.get_node("AnimationPlayer"), "animation_finished")
 	active_pc.inspecting = false
 	emit_signal("level_change", level, door_index)
