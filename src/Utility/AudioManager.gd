@@ -23,6 +23,8 @@ export var sfx_dict: Dictionary = {
 	
 	"pc_die": preload("res://assets/SFX/Placeholder/snd_quote_die.ogg"),
 	
+	"gun_click": preload("res://assets/SFX/placeholder/snd_gun_click.ogg"),
+	
 }
 
 export var music_dict: Dictionary = {

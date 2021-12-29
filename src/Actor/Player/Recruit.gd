@@ -46,7 +46,7 @@ var dead = false
 
 var inventory: Array
 var topic_array: Array = ["child", "sasuke", "basil", "free_dialog"]
-var weapon_array: Array = [load("res://src/Weapon/Revolver1.tres"), load("res://src/Weapon/GrenadeLauncher1.tres"), load("res://src/Weapon/MachinePistol1.tres"), load("res://src/Weapon/Shotgun1.tres")]
+var weapon_array: Array = [load("res://src/Weapon/Revolver1.tres"), load("res://src/Weapon/GreaseGun.tres"), load("res://src/Weapon/Defender.tres"), load("res://src/Weapon/GrenadeLauncher1.tres"), load("res://src/Weapon/MachinePistol1.tres"), load("res://src/Weapon/Shotgun1.tres")]
 
 
 var move_dir = Vector2.LEFT
@@ -60,6 +60,7 @@ var shoot_dir = Vector2.LEFT
 
 onready var world = get_tree().get_root().get_node("World")
 onready var HUD
+onready var mm = get_node("MovementManager")
 
 
 func _ready():

@@ -92,6 +92,9 @@ func _input(event):
 		for v in get_tree().get_nodes_in_group("TriggerVisuals"):
 			v.visible = visible_triggers
 	
+	if event.is_action_pressed("debug_quit"):
+		get_tree().quit()
+	
 	if event.is_action_pressed("debug_save"):
 		var popup = POPUP.instance()
 		popup.text = "quicksaved..."
