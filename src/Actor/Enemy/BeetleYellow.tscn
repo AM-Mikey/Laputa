@@ -5,9 +5,10 @@
 [ext_resource path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" type="AudioStream" id=3]
 [ext_resource path="res://src/Actor/Enemy/BeetleYellow/YellowBeetleIdle.gd" type="Script" id=4]
 [ext_resource path="res://src/Actor/Enemy/BeetleYellow/YellowBeetleAttack.gd" type="Script" id=5]
-[ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=6]
+[ext_resource path="res://src/UI/Theme/LaputaTheme.tres" type="Theme" id=6]
 [ext_resource path="res://src/Actor/Enemy/BeetleYellow/YellowBeetleReset.gd" type="Script" id=7]
 [ext_resource path="res://assets/Actor/Enemy/Bugger_Floor_Idle.png" type="Texture" id=8]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 4 )

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://assets/Gun/RevolverIcon.png" type="Texture" id=1]
-[ext_resource path="res://src/UI/HUD/WeaponIcon.gd" type="Script" id=2]
+[ext_resource path="res://src/UI/HUD/GunIcon.gd" type="Script" id=2]
 
 [node name="WeaponIcon" type="TextureRect"]
 margin_right = 40.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=1]
+[ext_resource path="res://src/UI/Theme/LaputaTheme.tres" type="Theme" id=1]
 [ext_resource path="res://src/UI/DeathScreen.gd" type="Script" id=2]
 [ext_resource path="res://assets/SFX/Placeholder/snd_quote_die.ogg" type="AudioStream" id=4]
 

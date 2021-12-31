@@ -55,16 +55,6 @@ func _ready():
 	connect_inventory()
 #	if weapon_array.front() != null: TODO:fix
 #		$WeaponSprite.texture = weapon_array.front().texture
-	
-
-func _input(event):
-	if not disabled:
-		pass
-#		if event.is_action_pressed("inspect"):
-#			if is_on_floor():
-#				inspecting = true
-#		if event.is_action_released("inspect"):
-#			inspecting = false
 
 
 func disable():

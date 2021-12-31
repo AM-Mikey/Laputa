@@ -339,7 +339,6 @@ func write_level_data_to_temp():
 ### COPY ###
 
 func copy_level_data_from_save_to_temp():
-	var temp_data = read_from_file(temp_path)
 	var save_data = read_from_file(save_path)
 
 	if save_data.has("level_data"):
@@ -442,8 +441,8 @@ func load_options():
 	var options = OPTIONS.instance()
 	options.hidden = true
 	$UILayer.add_child(options)
-	options.get_node("TabContainer/Settings").load_settings()
-	options.get_node("TabContainer/KeyConfig").load_input_map()
+	options.tabs.get_node("Settings").load_settings()
+	options.tabs.get_node("KeyConfig").load_input_map()
 	
 	yield(get_tree(), "idle_frame")
 	options.queue_free()

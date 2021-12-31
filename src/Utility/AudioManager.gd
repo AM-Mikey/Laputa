@@ -55,6 +55,9 @@ export var remove_duplicate_sfx = false
 export var sfx_player_max = 8
 var sfx_players = []
 var sfx_queue = []
+export var remove_recent_duplicate_sfx = true
+export var sfx_recent_time = 0.1
+var sfx_recent = []
 
 export var music_player_max = 1
 var music_players = []
@@ -71,32 +74,44 @@ func _ready():
 
 func play(sfx_string: String):
 	if sfx_dict.has(sfx_string):
+		
 		if sfx_queue.has(sfx_string) and remove_duplicate_sfx:
 			print("WARNING: SFX already playing! Removed SFX with name: " + sfx_string)
 			return
 		
-		var player = add_player("sfx", sfx_string)
+		if remove_recent_duplicate_sfx:
+			if sfx_recent.has(sfx_string):
+				print("WARNING: SFX already playing! Removed SFX with name: " + sfx_string)
+				return
+			else:
+				_do_recent_time(sfx_string)
+		
+		var player = _add_player("sfx", sfx_string)
 		while sfx_players.size() > sfx_player_max:
-			clear_player("sfx", player)
+			_clear_player("sfx", sfx_players[0])
 		
 		yield(player, "finished")
-		clear_player("sfx", player)
+		_clear_player("sfx", player)
 		
 	else:
 		printerr("ERROR: No SFX with name: " + sfx_string)
 
+func _do_recent_time(sfx_string):
+	sfx_recent.append(sfx_string)
+	yield(get_tree().create_timer(sfx_recent_time), "timeout")
+	sfx_recent.erase(sfx_string)
 
 func play_music(music_string):
 	if music_dict.has(music_string):
 		if music_queue.has(music_string): #don't play if already playing
 			return
 		
-		var player = add_player("music", music_string)
+		var player = _add_player("music", music_string)
 		while music_players.size() > music_player_max:
-			clear_player("music", player)
+			_clear_player("music", music_players[0])
 		
 		yield(player, "finished")
-		clear_player("music", player)
+		_clear_player("music", player)
 	
 	else:
 		printerr("ERROR: No music with name: " + music_string)
@@ -106,28 +121,28 @@ func play_interrupt(music_string): #play_time, wait_start, wait_end
 	for p in music_players: #pause music players
 		p.stream_paused = true
 
-	var player = add_player("interrupt", music_string)
+	var player = _add_player("interrupt", music_string)
 	while interrupt_players.size() > interrupt_player_max:
-		clear_player("interrupt", player)
+		_clear_player("interrupt", interrupt_players[0])
 	
 	yield(player, "finished")
-	clear_player("interrupt", player)
+	_clear_player("interrupt", player)
 	emit_signal("interrupt_finished")
 	for p in music_players: #unpause music players
 		p.stream_paused = false
 
 #####
 
-func add_player(type, string):
+func _add_player(type, string):
 	get(type + "_queue").append(string)
 	var player = SFX_PLAYER.instance() if type == "sfx" else MUSIC_PLAYER.instance()
 	get(type + "_players").append(player)
 	add_child(player)
-	player.stream = get(type + "_dict")[string]
+	player.stream = sfx_dict[string] if type == "sfx" else music_dict[string]
 	player.play()
 	return player
 
-func clear_player(type, player):
+func _clear_player(type, player):
 		get(type + "_queue").pop_front()
 		get(type + "_players").pop_front()
 		player.queue_free()

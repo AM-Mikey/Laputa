@@ -1,0 +1,152 @@
+[gd_resource type="Theme" load_steps=38 format=2]
+
+[ext_resource path="res://src/UI/StyleBox/LeatherLight.tres" type="StyleBox" id=1]
+[ext_resource path="res://src/UI/Font/WelcomeBack.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/UI/StyleBox/SteelRoundRiveted.tres" type="StyleBox" id=3]
+[ext_resource path="res://src/UI/StyleBox/RustRoundInset.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/UI/Button/OptionArrow.png" type="Texture" id=5]
+[ext_resource path="res://src/UI/Slider/Slider.tres" type="StyleBox" id=6]
+[ext_resource path="res://assets/UI/Slider/SliderGrabber.png" type="Texture" id=7]
+[ext_resource path="res://assets/UI/Slider/Grabber.png" type="Texture" id=8]
+[ext_resource path="res://src/UI/CursorBox.tres" type="StyleBox" id=9]
+[ext_resource path="res://src/UI/StyleBox/SteelBeveledLight.tres" type="StyleBox" id=10]
+[ext_resource path="res://src/UI/StyleBox/RustTabsLight.tres" type="StyleBox" id=11]
+[ext_resource path="res://src/UI/StyleBox/RustTabsDark.tres" type="StyleBox" id=12]
+[ext_resource path="res://src/UI/Slider/ScrollBarGrabber.tres" type="StyleBox" id=13]
+[ext_resource path="res://src/UI/Slider/ScrollBarGrabberHighlight.tres" type="StyleBox" id=14]
+[ext_resource path="res://assets/UI/Slider/ScrollBarGrabberHighlight.png" type="Texture" id=15]
+[ext_resource path="res://src/UI/StyleBox/LeatherDark.tres" type="StyleBox" id=16]
+[ext_resource path="res://assets/UI/Slider/Slider.png" type="Texture" id=17]
+[ext_resource path="res://assets/UI/Slider/SliderGrabberHighlight.png" type="Texture" id=18]
+[ext_resource path="res://assets/UI/Button/CheckYes.png" type="Texture" id=19]
+[ext_resource path="res://assets/UI/Button/CheckNo.png" type="Texture" id=20]
+[ext_resource path="res://src/UI/StyleBox/Leather.tres" type="StyleBox" id=21]
+[ext_resource path="res://assets/UI/CheckYes.png" type="Texture" id=22]
+[ext_resource path="res://assets/UI/CheckNo.png" type="Texture" id=23]
+[ext_resource path="res://src/UI/StyleBox/PaperSwatch.tres" type="StyleBox" id=24]
+[ext_resource path="res://src/UI/StyleBox/Paper.tres" type="StyleBox" id=25]
+[ext_resource path="res://src/UI/Font/WelcomeBackButton.tres" type="DynamicFont" id=26]
+[ext_resource path="res://src/UI/StyleBox/SteelRoundInset.tres" type="StyleBox" id=27]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[resource]
+default_font = ExtResource( 2 )
+Button/colors/font_color = Color( 0.145098, 0.0941176, 0.12549, 1 )
+Button/colors/font_color_disabled = Color( 0.403922, 0.286275, 0.262745, 1 )
+Button/colors/font_color_focus = Color( 0.968627, 0.886275, 0.717647, 1 )
+Button/colors/font_color_hover = Color( 0.968627, 0.886275, 0.717647, 1 )
+Button/colors/font_color_pressed = Color( 0.0352941, 0.0431373, 0.101961, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = ExtResource( 26 )
+Button/styles/disabled = ExtResource( 16 )
+Button/styles/focus = ExtResource( 1 )
+Button/styles/hover = ExtResource( 1 )
+Button/styles/normal = ExtResource( 21 )
+Button/styles/pressed = ExtResource( 16 )
+CheckBox/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+CheckBox/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+CheckBox/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+CheckBox/colors/font_color_hover_pressed = Color( 1, 1, 1, 1 )
+CheckBox/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+CheckBox/constants/check_vadjust = 0
+CheckBox/constants/hseparation = 4
+CheckBox/fonts/font = ExtResource( 26 )
+CheckBox/icons/checked = ExtResource( 15 )
+CheckBox/icons/unchecked = ExtResource( 17 )
+CheckButton/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+CheckButton/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+CheckButton/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+CheckButton/colors/font_color_hover_pressed = Color( 1, 1, 1, 1 )
+CheckButton/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+CheckButton/constants/check_vadjust = 0
+CheckButton/constants/hseparation = 4
+CheckButton/fonts/font = null
+CheckButton/icons/off = ExtResource( 20 )
+CheckButton/icons/on = ExtResource( 19 )
+CheckButton/styles/disabled = SubResource( 2 )
+CheckButton/styles/focus = ExtResource( 9 )
+CheckButton/styles/hover = SubResource( 3 )
+CheckButton/styles/hover_pressed = SubResource( 4 )
+CheckButton/styles/normal = SubResource( 5 )
+CheckButton/styles/pressed = SubResource( 6 )
+HScrollBar/styles/grabber = ExtResource( 13 )
+HScrollBar/styles/grabber_highlight = ExtResource( 14 )
+HScrollBar/styles/grabber_pressed = ExtResource( 14 )
+HScrollBar/styles/scroll = ExtResource( 6 )
+HSlider/icons/grabber = ExtResource( 8 )
+HSlider/icons/grabber_highlight = ExtResource( 18 )
+HSlider/styles/grabber_area = SubResource( 7 )
+HSlider/styles/grabber_area_highlight = SubResource( 8 )
+HSlider/styles/slider = ExtResource( 6 )
+ItemList/colors/font_color = Color( 1, 1, 1, 1 )
+ItemList/colors/font_color_selected = Color( 1, 1, 1, 1 )
+ItemList/colors/guide_color = Color( 0, 0, 0, 0.1 )
+ItemList/constants/hseparation = 4
+ItemList/constants/icon_margin = 4
+ItemList/constants/line_separation = 2
+ItemList/constants/vseparation = 2
+ItemList/fonts/font = null
+ItemList/styles/bg = ExtResource( 4 )
+ItemList/styles/bg_focus = ExtResource( 4 )
+Label/colors/font_color = Color( 0.843137, 0.682353, 0.533333, 1 )
+Label/colors/font_color_shadow = Color( 0.0352941, 0.0431373, 0.101961, 1 )
+Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+Label/constants/line_spacing = 3
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/fonts/font = null
+LineEdit/styles/focus = ExtResource( 4 )
+LineEdit/styles/normal = ExtResource( 4 )
+LineEdit/styles/read_only = ExtResource( 4 )
+MenuButton/styles/disabled = ExtResource( 10 )
+OptionButton/constants/arrow_margin = 2
+OptionButton/constants/hseparation = 2
+OptionButton/fonts/font = ExtResource( 26 )
+OptionButton/icons/arrow = ExtResource( 5 )
+Panel/styles/panel = ExtResource( 27 )
+PopupMenu/colors/font_color = Color( 0.462745, 0.486275, 0.431373, 1 )
+PopupMenu/colors/font_color_hover = Color( 0.505882, 0.0980392, 0.0980392, 1 )
+PopupMenu/icons/radio_checked = ExtResource( 22 )
+PopupMenu/icons/radio_unchecked = ExtResource( 23 )
+PopupMenu/styles/hover = SubResource( 11 )
+PopupMenu/styles/panel = ExtResource( 25 )
+TabContainer/colors/font_color_bg = Color( 0.403922, 0.286275, 0.262745, 1 )
+TabContainer/colors/font_color_disabled = Color( 0.403922, 0.286275, 0.262745, 1 )
+TabContainer/colors/font_color_fg = Color( 0.968627, 0.886275, 0.717647, 1 )
+TabContainer/styles/panel = ExtResource( 3 )
+TabContainer/styles/tab_bg = ExtResource( 12 )
+TabContainer/styles/tab_disabled = ExtResource( 12 )
+TabContainer/styles/tab_fg = ExtResource( 11 )
+TextEdit/styles/completion = ExtResource( 4 )
+TextEdit/styles/focus = ExtResource( 4 )
+TextEdit/styles/normal = ExtResource( 4 )
+TextEdit/styles/read_only = ExtResource( 4 )
+Tree/styles/bg = ExtResource( 24 )
+VScrollBar/styles/grabber = ExtResource( 13 )
+VScrollBar/styles/grabber_highlight = ExtResource( 14 )
+VScrollBar/styles/grabber_pressed = ExtResource( 14 )
+VScrollBar/styles/scroll = ExtResource( 6 )
+VSlider/icons/grabber = ExtResource( 7 )
+VSlider/styles/grabber_area = SubResource( 9 )
+VSlider/styles/grabber_area_highlight = SubResource( 10 )
+VSlider/styles/slider = ExtResource( 6 )

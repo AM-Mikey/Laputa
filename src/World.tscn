@@ -9,7 +9,6 @@ __meta__ = {
 }
 development_stage = "alpha"
 release_version = "1.7"
-should_skip_title = true
 visible_triggers = true
 starting_level = "res://src/Level/Village/Grassy.tscn"
 

@@ -13,7 +13,6 @@ func _physics_process(_delta):
 
 
 func animate():
-	var texture
 	var next_animation: String = ""
 	var start_time: float
 	var run_anim_speed = max((abs(mm.velocity.x)/mm.speed.x) * 2, 0.1)

@@ -1,19 +1,15 @@
 extends Bullet
 
-var velocity = Vector2.ZERO
-var direction = Vector2.ZERO
-var projectile_speed: int
+
 var start_velocity
 
-
-var origin = Vector2.ZERO
 
 
 func _ready():
 	gravity *= .5
 	$AnimationPlayer.play("Rotate")
 	
-	velocity = get_velocity(projectile_speed, direction)
+	velocity = get_velocity(speed, direction)
 	start_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 
 

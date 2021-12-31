@@ -5,11 +5,8 @@ class_name Bullet, "res://assets/Icon/BulletIcon.png"
 const STARPOP = preload("res://src/Effect/StarPop.tscn")
 const RICOCHET = preload("res://src/Effect/Ricochet.tscn")
 
-
-
 var disabled = false
 var gravity = 300
-
 
 var damage
 var f_range
@@ -18,27 +15,23 @@ var origin = Vector2.ZERO
 var velocity = Vector2.ZERO
 var direction = Vector2.ZERO
 
-
-
 var break_method = "cut"
 var default_area_collision = true
 var default_body_collision = true
 
+onready var world = get_tree().get_root().get_node("World")
 
 
 func _fizzle_from_world():
-	#print("fizzle from world") 
 	var ricochet = RICOCHET.instance()
-	get_tree().get_root().get_node("World/Middle").add_child(ricochet)
+	world.get_node("Middle").add_child(ricochet)
 	if has_node("End"): ricochet.position = $End.global_position
 	else: ricochet.position = global_position
-	
 	queue_free()
 
 func _fizzle_from_range():
-	#print("fizzle from range")
 	var star_pop = STARPOP.instance()
-	get_tree().get_root().get_node("World/Middle").add_child(star_pop)
+	world.get_node("Middle").add_child(star_pop)
 	star_pop.position = global_position
 	queue_free()
 
@@ -47,7 +40,6 @@ func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 
 
 func _on_CollisionDetector_body_entered(body):
-	
 	if not disabled and default_body_collision:
 		if body.get_collision_layer_bit(8): #breakable
 					body.on_break(break_method)

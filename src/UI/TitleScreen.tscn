@@ -3,7 +3,7 @@
 [ext_resource path="res://src/UI/Font/Momo.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/UI/TitleScreen/TitleLogo.png" type="Texture" id=2]
 [ext_resource path="res://src/UI/TitleScreen.gd" type="Script" id=3]
-[ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=4]
+[ext_resource path="res://src/UI/Theme/Floating.tres" type="Theme" id=4]
 [ext_resource path="res://src/UI/MenuButton.tscn" type="PackedScene" id=7]
 
 [node name="TitleScreen" type="MarginContainer"]
@@ -55,33 +55,33 @@ stretch_mode = 4
 margin_left = 235.0
 margin_top = 85.0
 margin_right = 309.0
-margin_bottom = 115.0
+margin_bottom = 105.0
 text = "New Game"
 
 [node name="Load" parent="VBox" instance=ExtResource( 7 )]
 margin_left = 233.0
-margin_top = 119.0
+margin_top = 109.0
 margin_right = 311.0
-margin_bottom = 149.0
+margin_bottom = 129.0
 text = "Load Game"
 
 [node name="Options" parent="VBox" instance=ExtResource( 7 )]
 margin_left = 243.0
-margin_top = 153.0
+margin_top = 133.0
 margin_right = 301.0
-margin_bottom = 183.0
+margin_bottom = 153.0
 text = "Options"
 
 [node name="Level" parent="VBox" instance=ExtResource( 7 )]
 margin_left = 227.0
-margin_top = 187.0
+margin_top = 157.0
 margin_right = 316.0
-margin_bottom = 217.0
+margin_bottom = 177.0
 text = "Level Select"
 
 [node name="Quit" parent="VBox" instance=ExtResource( 7 )]
 margin_left = 252.0
-margin_top = 221.0
+margin_top = 181.0
 margin_right = 291.0
-margin_bottom = 251.0
+margin_bottom = 201.0
 text = "Quit"

@@ -5,8 +5,6 @@ var texture_index: int
 var collision_shape: RectangleShape2D
 
 
-
-
 var duration = 0.1
 
 

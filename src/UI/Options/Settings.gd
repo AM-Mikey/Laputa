@@ -5,13 +5,9 @@ var settings_path = "user://settings.json"
 onready var display_mode = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DisplayMode/OptionButton
 onready var resolution_scale = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ResolutionScale/OptionButton
 
-onready var master_slider = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MasterSlider
-onready var music_slider = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MusicSlider
-onready var sfx_slider = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/SFXSlider
-
-onready var master_label = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MasterLabel
-onready var music_label = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MusicLabel
-onready var sfx_label = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/SFXLabel
+onready var p_master = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Master
+onready var p_sfx = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBox/SFX
+onready var p_music = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBox/Music
 
 onready var world = get_tree().get_root().get_node("World")
 
@@ -51,11 +47,11 @@ func load_settings():
 		_on_ResolutionScale_item_selected(data["ResolutionScale"])
 		
 		
-		master_slider.value = data["MasterSlider"]
+		p_master.get_node("Slider").value = data["MasterSlider"]
 		_on_MasterSlider_value_changed(data["MasterSlider"])
-		music_slider.value = data["MusicSlider"]
+		p_music.get_node("Slider").value = data["MusicSlider"]
 		_on_MusicSlider_value_changed(data["MusicSlider"])
-		sfx_slider.value = data["SFXSlider"]
+		p_sfx.get_node("Slider").value = data["SFXSlider"]
 		_on_SFXSlider_value_changed(data["SFXSlider"])
 
 	else: 
@@ -137,31 +133,19 @@ func _on_Return_pressed():
 func _on_MasterSlider_value_changed(value):
 	var db = percent_to_db(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),db)
-	if value == 0:
-		master_label.text = "Master Volume: Muted"
-	else:
-		master_label.text = "Master Volume: " + str(value) + "0 %"
-		
+	p_master.get_node("Label").text = "Master Volume: Muted" if value == 0 else "Master Volume: " + str(value) + "0 %"
 	save_to_file("MasterSlider", value)
 
 func _on_MusicSlider_value_changed(value):
 	var db = percent_to_db(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),db)
-	if value == 0:
-		music_label.text = "Music Volume: Muted"
-	else:
-		music_label.text = "Music Volume: " + str(value) + "0 %"
-		
+	p_music.get_node("Label").text = "Music Volume: Muted" if value == 0 else "Music Volume: " + str(value) + "0 %"
 	save_to_file("MusicSlider", value)
 
 func _on_SFXSlider_value_changed(value):
 	var db = percent_to_db(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),db)
-	if value == 0:
-		sfx_label.text = "SFX Volume: Muted"
-	else:
-		sfx_label.text = "SFX Volume: " + str(value) + "0 %"
-	
+	p_sfx.get_node("Label").text = "SFX Volume: Muted" if value == 0 else "SFX Volume: " + str(value) + "0 %"
 	save_to_file("SFXSlider", value)
 
 func percent_to_db(value) -> float:
@@ -265,6 +249,6 @@ func save_to_file(setting, setting_value):
 
 
 func focus():
-	$MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MasterSlider.grab_focus()
+	p_master.get_node("Slider").grab_focus()
 
 

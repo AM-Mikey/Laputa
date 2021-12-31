@@ -6,42 +6,42 @@ onready var world = get_tree().get_root().get_node("World")
 var compass_distance = 8
 
 
-onready var op_l2 = $ScrollContainer/VBoxContainer/HBoxContainer/Left/L2
-onready var op_l1 = $ScrollContainer/VBoxContainer/HBoxContainer/Left/L1
-onready var op_l3 = $ScrollContainer/VBoxContainer/HBoxContainer2/L3
+onready var op_l2 = $Margin/Scroll/VBoxContainer/HBoxContainer/Left/L2
+onready var op_l1 = $Margin/Scroll/VBoxContainer/HBoxContainer/Left/L1
+onready var op_l3 = $Margin/Scroll/VBoxContainer/HBoxContainer2/L3
 
-onready var op_r2 = $ScrollContainer/VBoxContainer/HBoxContainer/Right/R2
-onready var op_r1 = $ScrollContainer/VBoxContainer/HBoxContainer/Right/R1
-onready var op_r3 = $ScrollContainer/VBoxContainer/HBoxContainer2/R3
+onready var op_r2 = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/R2
+onready var op_r1 = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/R1
+onready var op_r3 = $Margin/Scroll/VBoxContainer/HBoxContainer2/R3
 
-onready var op_facetop = $ScrollContainer/VBoxContainer/HBoxContainer/Right/Face/Top
-onready var op_faceleft = $ScrollContainer/VBoxContainer/HBoxContainer/Right/Face/Left
-onready var op_faceright = $ScrollContainer/VBoxContainer/HBoxContainer/Right/Face/Right
-onready var op_facebottom = $ScrollContainer/VBoxContainer/HBoxContainer/Right/Face/Bottom
+onready var op_facetop = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/Face/Top
+onready var op_faceleft = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/Face/Left
+onready var op_faceright = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/Face/Right
+onready var op_facebottom = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/Face/Bottom
 
 
-onready var op_select = $ScrollContainer/VBoxContainer/HBoxContainer2/Select
-onready var op_start = $ScrollContainer/VBoxContainer/HBoxContainer2/Start
+onready var op_select = $Margin/Scroll/VBoxContainer/HBoxContainer2/Select
+onready var op_start = $Margin/Scroll/VBoxContainer/HBoxContainer2/Start
 
 onready var option_buttons = [op_l2, op_l1, op_l3, op_r2, op_r1, op_r3, op_facetop, op_faceleft, op_faceright, op_facebottom, op_select, op_start]
 
-onready var faceleft = $ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/HBoxContainer/FaceButtonLeft/Sprite
-onready var faceright = $ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/HBoxContainer/FaceButtonRight/Sprite
-onready var facetop = $ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/FaceButtonTop/Sprite
-onready var facebottom = $ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/FaceButtonBottom/Sprite
+onready var faceleft = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/HBoxContainer/FaceButtonLeft/Sprite
+onready var faceright = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/HBoxContainer/FaceButtonRight/Sprite
+onready var facetop = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/FaceButtonTop/Sprite
+onready var facebottom = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/FaceButtonBottom/Sprite
 
-onready var select = $ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/ScrewLeft/Sprite
-onready var start = $ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/ScrewRight/Sprite
+onready var select = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/ScrewLeft/Sprite
+onready var start = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/ScrewRight/Sprite
 
-onready var l1 = $ScrollContainer/VBoxContainer/HBoxContainer/Center/Top/GridContainer/BumperLeft/Sprite
-onready var r1 = $ScrollContainer/VBoxContainer/HBoxContainer/Center/Top/GridContainer/BumperRight/Sprite
-onready var l2 = $ScrollContainer/VBoxContainer/HBoxContainer/Center/Top/GridContainer/TriggerLeft/Sprite
-onready var r2 = $ScrollContainer/VBoxContainer/HBoxContainer/Center/Top/GridContainer/TriggerRight/Sprite
+onready var l1 = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer/BumperLeft/Sprite
+onready var r1 = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer/BumperRight/Sprite
+onready var l2 = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer/TriggerLeft/Sprite
+onready var r2 = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer/TriggerRight/Sprite
 
-onready var lstick = $ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer2/StickLeft/Sprite
-onready var rstick = $ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer2/StickRight/Sprite
+onready var lstick = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer2/StickLeft/Sprite
+onready var rstick = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer2/StickRight/Sprite
 
-onready var dpad = $ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Compass/CrossHair
+onready var dpad = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Compass/CrossHair
 
 onready var option_pairs = {
 	op_l2: l2,

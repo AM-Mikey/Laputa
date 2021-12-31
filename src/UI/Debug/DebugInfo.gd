@@ -19,7 +19,7 @@ func _ready():
 
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	get_parent().move_child(self, get_parent().get_child_count() - 1)
 	$VBox/General/FPS.text = str(Engine.get_frames_per_second()) + " fps" 
 	$VBox/General/Screen.text = str(OS.get_window_size().x) + "x" + str(OS.get_window_size().y)
@@ -36,7 +36,7 @@ func _physics_process(delta):
 		$VBox/HBox/C1/A/HP.text = str("%2.f" % pc.hp) + "/" + str("%2.f" % pc.max_hp)
 		$VBox/HBox/C1/A/TotalXP.text = str(pc.total_xp)
 		$VBox/HBox/C1/A/WeaponXP.text = str("%2.f" % active_gun.xp) + "/" + str("%2.f" % active_gun.max_xp)
-		$VBox/HBox/C1/A/WeaponCooldown.text = str("%2.2f" % pc.get_node("WeaponManager/CooldownTimer").time_left)
+		$VBox/HBox/C1/A/WeaponCooldown.text = str("%2.2f" % pc.get_node("GunManager/CooldownTimer").time_left)
 		
 		$VBox/HBox/C1/A/Velocity.text = str("%4.f" % mm.velocity.x) + "," + str("%4.f" % mm.velocity.y)
 		$VBox/HBox/C1/A/Speed.text = str("%4.f" % mm.speed.x) + "," + str("%4.f" % mm.speed.y)
