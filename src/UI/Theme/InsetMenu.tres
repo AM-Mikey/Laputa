@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=38 format=2]
+[gd_resource type="Theme" load_steps=40 format=2]
 
 [ext_resource path="res://src/UI/StyleBox/LeatherLight.tres" type="StyleBox" id=1]
 [ext_resource path="res://src/UI/Font/WelcomeBack.tres" type="DynamicFont" id=2]
@@ -27,6 +27,10 @@
 [ext_resource path="res://src/UI/StyleBox/Paper.tres" type="StyleBox" id=25]
 [ext_resource path="res://src/UI/Font/WelcomeBackButton.tres" type="DynamicFont" id=26]
 [ext_resource path="res://src/UI/StyleBox/SteelRoundInset.tres" type="StyleBox" id=27]
+[ext_resource path="res://src/UI/StyleBox/SelectedLight.tres" type="StyleBox" id=28]
+[ext_resource path="res://src/UI/StyleBox/Selected.tres" type="StyleBox" id=29]
+
+[sub_resource type="StyleBoxEmpty" id=12]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -42,8 +46,6 @@
 
 [sub_resource type="StyleBoxEmpty" id=8]
 
-[sub_resource type="StyleBoxEmpty" id=11]
-
 [sub_resource type="StyleBoxEmpty" id=9]
 
 [sub_resource type="StyleBoxEmpty" id=10]
@@ -58,7 +60,7 @@ Button/colors/font_color_pressed = Color( 0.0352941, 0.0431373, 0.101961, 1 )
 Button/constants/hseparation = 2
 Button/fonts/font = ExtResource( 26 )
 Button/styles/disabled = ExtResource( 16 )
-Button/styles/focus = ExtResource( 1 )
+Button/styles/focus = SubResource( 12 )
 Button/styles/hover = ExtResource( 1 )
 Button/styles/normal = ExtResource( 21 )
 Button/styles/pressed = ExtResource( 16 )
@@ -97,8 +99,8 @@ HSlider/icons/grabber_highlight = ExtResource( 18 )
 HSlider/styles/grabber_area = SubResource( 7 )
 HSlider/styles/grabber_area_highlight = SubResource( 8 )
 HSlider/styles/slider = ExtResource( 6 )
-ItemList/colors/font_color = Color( 1, 1, 1, 1 )
-ItemList/colors/font_color_selected = Color( 1, 1, 1, 1 )
+ItemList/colors/font_color = Color( 0.968627, 0.886275, 0.717647, 1 )
+ItemList/colors/font_color_selected = Color( 0.882353, 0.882353, 0.882353, 1 )
 ItemList/colors/guide_color = Color( 0, 0, 0, 0.1 )
 ItemList/constants/hseparation = 4
 ItemList/constants/icon_margin = 4
@@ -107,6 +109,8 @@ ItemList/constants/vseparation = 2
 ItemList/fonts/font = null
 ItemList/styles/bg = ExtResource( 4 )
 ItemList/styles/bg_focus = ExtResource( 4 )
+ItemList/styles/selected = ExtResource( 29 )
+ItemList/styles/selected_focus = ExtResource( 28 )
 Label/colors/font_color = Color( 0.843137, 0.682353, 0.533333, 1 )
 Label/colors/font_color_shadow = Color( 0.0352941, 0.0431373, 0.101961, 1 )
 Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
@@ -120,7 +124,6 @@ LineEdit/styles/normal = ExtResource( 4 )
 LineEdit/styles/read_only = ExtResource( 4 )
 MenuButton/styles/disabled = ExtResource( 10 )
 OptionButton/constants/arrow_margin = 2
-OptionButton/constants/hseparation = 2
 OptionButton/fonts/font = ExtResource( 26 )
 OptionButton/icons/arrow = ExtResource( 5 )
 Panel/styles/panel = ExtResource( 27 )
@@ -128,7 +131,7 @@ PopupMenu/colors/font_color = Color( 0.462745, 0.486275, 0.431373, 1 )
 PopupMenu/colors/font_color_hover = Color( 0.505882, 0.0980392, 0.0980392, 1 )
 PopupMenu/icons/radio_checked = ExtResource( 22 )
 PopupMenu/icons/radio_unchecked = ExtResource( 23 )
-PopupMenu/styles/hover = SubResource( 11 )
+PopupMenu/styles/hover = ExtResource( 28 )
 PopupMenu/styles/panel = ExtResource( 25 )
 TabContainer/colors/font_color_bg = Color( 0.403922, 0.286275, 0.262745, 1 )
 TabContainer/colors/font_color_disabled = Color( 0.403922, 0.286275, 0.262745, 1 )

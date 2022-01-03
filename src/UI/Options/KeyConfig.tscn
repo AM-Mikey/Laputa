@@ -1,6 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/UI/Theme/InsetMenu.tres" type="Theme" id=1]
+[ext_resource path="res://assets/UI/Settings/KeyboardMouse.png" type="Texture" id=2]
+[ext_resource path="res://assets/UI/Settings/KeyboardClassic.png" type="Texture" id=3]
+[ext_resource path="res://assets/UI/Settings/KeyboardCustom.png" type="Texture" id=4]
+[ext_resource path="res://src/UI/Theme/WindowDialog.tres" type="Theme" id=5]
 [ext_resource path="res://src/UI/Options/KeyConfig.gd" type="Script" id=6]
 [ext_resource path="res://src/UI/Font/MomoNoSpacing.tres" type="DynamicFont" id=8]
 
@@ -14,8 +18,9 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-buttons = NodePath("Margin/VBox/Scroll/VBox")
-focus = NodePath("Margin/VBox/Scroll/VBox/jump/Button")
+buttons = NodePath("Margin/HBox/VBox/Scroll/VBox")
+focus = NodePath("Margin/HBox/VBox/Scroll/VBox/jump/Button")
+preset_path = NodePath("Margin/HBox/VBox2/ItemList")
 
 [node name="Panel" type="Panel" parent="."]
 margin_right = 480.0
@@ -32,24 +37,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBox" type="VBoxContainer" parent="Margin"]
+[node name="HBox" type="HBoxContainer" parent="Margin"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 472.0
 margin_bottom = 262.0
+
+[node name="VBox" type="VBoxContainer" parent="Margin/HBox"]
+margin_right = 332.0
+margin_bottom = 254.0
+size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Margin/VBox"]
-margin_right = 464.0
+[node name="Label" type="Label" parent="Margin/HBox/VBox"]
+margin_right = 332.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
-text = "Normal Controls:"
+text = "Controls:"
 
-[node name="Scroll" type="ScrollContainer" parent="Margin/VBox"]
+[node name="Scroll" type="ScrollContainer" parent="Margin/HBox/VBox"]
 margin_top = 18.0
-margin_right = 464.0
+margin_right = 332.0
 margin_bottom = 254.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -58,36 +68,36 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBox" type="VBoxContainer" parent="Margin/VBox/Scroll"]
+[node name="VBox" type="VBoxContainer" parent="Margin/HBox/VBox/Scroll"]
 margin_right = 173.0
-margin_bottom = 304.0
+margin_bottom = 388.0
 custom_constants/separation = 4
 
-[node name="jump" type="HBoxContainer" parent="Margin/VBox/Scroll/VBox"]
+[node name="jump" type="HBoxContainer" parent="Margin/HBox/VBox/Scroll/VBox"]
 margin_right = 173.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/VBox/Scroll/VBox/jump"]
+[node name="Button" type="Button" parent="Margin/HBox/VBox/Scroll/VBox/jump"]
 margin_right = 12.0
 margin_bottom = 24.0
 toggle_mode = true
 
-[node name="Label" type="Label" parent="Margin/VBox/Scroll/VBox/jump"]
+[node name="Label" type="Label" parent="Margin/HBox/VBox/Scroll/VBox/jump"]
 margin_left = 16.0
 margin_top = 6.0
-margin_right = 124.0
+margin_right = 44.0
 margin_bottom = 18.0
 custom_fonts/font = ExtResource( 8 )
-text = "Jump / Menu Accept"
+text = "Jump"
 
-[node name="fire_manual" type="HBoxContainer" parent="Margin/VBox/Scroll/VBox"]
+[node name="fire_manual" type="HBoxContainer" parent="Margin/HBox/VBox/Scroll/VBox"]
 margin_top = 28.0
 margin_right = 173.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/VBox/Scroll/VBox/fire_manual"]
+[node name="Button" type="Button" parent="Margin/HBox/VBox/Scroll/VBox/fire_manual"]
 margin_right = 12.0
 margin_bottom = 24.0
 toggle_mode = true
@@ -95,21 +105,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Margin/VBox/Scroll/VBox/fire_manual"]
+[node name="Label" type="Label" parent="Margin/HBox/VBox/Scroll/VBox/fire_manual"]
 margin_left = 16.0
 margin_top = 6.0
-margin_right = 153.0
+margin_right = 75.0
 margin_bottom = 18.0
 custom_fonts/font = ExtResource( 8 )
-text = "Manual Fire / Menu Cancel"
+text = "Manual Fire"
 
-[node name="fire_automatic" type="HBoxContainer" parent="Margin/VBox/Scroll/VBox"]
+[node name="fire_automatic" type="HBoxContainer" parent="Margin/HBox/VBox/Scroll/VBox"]
 margin_top = 56.0
 margin_right = 173.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/VBox/Scroll/VBox/fire_automatic"]
+[node name="Button" type="Button" parent="Margin/HBox/VBox/Scroll/VBox/fire_automatic"]
 margin_right = 12.0
 margin_bottom = 24.0
 toggle_mode = true
@@ -117,7 +127,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Margin/VBox/Scroll/VBox/fire_automatic"]
+[node name="Label" type="Label" parent="Margin/HBox/VBox/Scroll/VBox/fire_automatic"]
 margin_left = 16.0
 margin_top = 6.0
 margin_right = 173.0
@@ -125,13 +135,13 @@ margin_bottom = 18.0
 custom_fonts/font = ExtResource( 8 )
 text = "Automatic Fire / Direction Lock"
 
-[node name="move_left" type="HBoxContainer" parent="Margin/VBox/Scroll/VBox"]
+[node name="move_left" type="HBoxContainer" parent="Margin/HBox/VBox/Scroll/VBox"]
 margin_top = 84.0
 margin_right = 173.0
 margin_bottom = 108.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/VBox/Scroll/VBox/move_left"]
+[node name="Button" type="Button" parent="Margin/HBox/VBox/Scroll/VBox/move_left"]
 margin_right = 12.0
 margin_bottom = 24.0
 toggle_mode = true
@@ -139,7 +149,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Margin/VBox/Scroll/VBox/move_left"]
+[node name="Label" type="Label" parent="Margin/HBox/VBox/Scroll/VBox/move_left"]
 margin_left = 16.0
 margin_top = 6.0
 margin_right = 68.0
@@ -147,13 +157,13 @@ margin_bottom = 18.0
 custom_fonts/font = ExtResource( 8 )
 text = "Move Left"
 
-[node name="move_right" type="HBoxContainer" parent="Margin/VBox/Scroll/VBox"]
+[node name="move_right" type="HBoxContainer" parent="Margin/HBox/VBox/Scroll/VBox"]
 margin_top = 112.0
 margin_right = 173.0
 margin_bottom = 136.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/VBox/Scroll/VBox/move_right"]
+[node name="Button" type="Button" parent="Margin/HBox/VBox/Scroll/VBox/move_right"]
 margin_right = 12.0
 margin_bottom = 24.0
 toggle_mode = true
@@ -161,7 +171,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Margin/VBox/Scroll/VBox/move_right"]
+[node name="Label" type="Label" parent="Margin/HBox/VBox/Scroll/VBox/move_right"]
 margin_left = 16.0
 margin_top = 6.0
 margin_right = 73.0
@@ -169,13 +179,13 @@ margin_bottom = 18.0
 custom_fonts/font = ExtResource( 8 )
 text = "Move Right"
 
-[node name="look_up" type="HBoxContainer" parent="Margin/VBox/Scroll/VBox"]
+[node name="look_up" type="HBoxContainer" parent="Margin/HBox/VBox/Scroll/VBox"]
 margin_top = 140.0
 margin_right = 173.0
 margin_bottom = 164.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/VBox/Scroll/VBox/look_up"]
+[node name="Button" type="Button" parent="Margin/HBox/VBox/Scroll/VBox/look_up"]
 margin_right = 12.0
 margin_bottom = 24.0
 toggle_mode = true
@@ -183,7 +193,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Margin/VBox/Scroll/VBox/look_up"]
+[node name="Label" type="Label" parent="Margin/HBox/VBox/Scroll/VBox/look_up"]
 margin_left = 16.0
 margin_top = 6.0
 margin_right = 56.0
@@ -191,13 +201,13 @@ margin_bottom = 18.0
 custom_fonts/font = ExtResource( 8 )
 text = "Look Up"
 
-[node name="look_down" type="HBoxContainer" parent="Margin/VBox/Scroll/VBox"]
+[node name="look_down" type="HBoxContainer" parent="Margin/HBox/VBox/Scroll/VBox"]
 margin_top = 168.0
 margin_right = 173.0
 margin_bottom = 192.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/VBox/Scroll/VBox/look_down"]
+[node name="Button" type="Button" parent="Margin/HBox/VBox/Scroll/VBox/look_down"]
 margin_right = 12.0
 margin_bottom = 24.0
 toggle_mode = true
@@ -205,22 +215,59 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Margin/VBox/Scroll/VBox/look_down"]
+[node name="Label" type="Label" parent="Margin/HBox/VBox/Scroll/VBox/look_down"]
 margin_left = 16.0
 margin_top = 6.0
-margin_right = 122.0
+margin_right = 72.0
 margin_bottom = 18.0
 custom_fonts/font = ExtResource( 8 )
-text = "Look Down / Inspect"
+text = "Look Down"
 
-[node name="inspect" type="HBoxContainer" parent="Margin/VBox/Scroll/VBox"]
-visible = false
+[node name="ui_accept" type="HBoxContainer" parent="Margin/HBox/VBox/Scroll/VBox"]
 margin_top = 196.0
 margin_right = 173.0
 margin_bottom = 220.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/VBox/Scroll/VBox/inspect"]
+[node name="Button" type="Button" parent="Margin/HBox/VBox/Scroll/VBox/ui_accept"]
+margin_right = 12.0
+margin_bottom = 24.0
+toggle_mode = true
+
+[node name="Label" type="Label" parent="Margin/HBox/VBox/Scroll/VBox/ui_accept"]
+margin_left = 16.0
+margin_top = 6.0
+margin_right = 82.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 8 )
+text = "Menu Accept"
+
+[node name="ui_cancel" type="HBoxContainer" parent="Margin/HBox/VBox/Scroll/VBox"]
+margin_top = 224.0
+margin_right = 173.0
+margin_bottom = 248.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Margin/HBox/VBox/Scroll/VBox/ui_cancel"]
+margin_right = 12.0
+margin_bottom = 24.0
+toggle_mode = true
+
+[node name="Label" type="Label" parent="Margin/HBox/VBox/Scroll/VBox/ui_cancel"]
+margin_left = 16.0
+margin_top = 6.0
+margin_right = 80.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 8 )
+text = "Menu Cancel"
+
+[node name="inspect" type="HBoxContainer" parent="Margin/HBox/VBox/Scroll/VBox"]
+margin_top = 252.0
+margin_right = 173.0
+margin_bottom = 276.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Margin/HBox/VBox/Scroll/VBox/inspect"]
 margin_right = 12.0
 margin_bottom = 24.0
 toggle_mode = true
@@ -228,7 +275,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Margin/VBox/Scroll/VBox/inspect"]
+[node name="Label" type="Label" parent="Margin/HBox/VBox/Scroll/VBox/inspect"]
 margin_left = 16.0
 margin_top = 6.0
 margin_right = 52.0
@@ -236,13 +283,13 @@ margin_bottom = 18.0
 custom_fonts/font = ExtResource( 8 )
 text = "Inspect"
 
-[node name="inventory" type="HBoxContainer" parent="Margin/VBox/Scroll/VBox"]
-margin_top = 196.0
+[node name="inventory" type="HBoxContainer" parent="Margin/HBox/VBox/Scroll/VBox"]
+margin_top = 280.0
 margin_right = 173.0
-margin_bottom = 220.0
+margin_bottom = 304.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/VBox/Scroll/VBox/inventory"]
+[node name="Button" type="Button" parent="Margin/HBox/VBox/Scroll/VBox/inventory"]
 margin_right = 12.0
 margin_bottom = 24.0
 toggle_mode = true
@@ -250,7 +297,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Margin/VBox/Scroll/VBox/inventory"]
+[node name="Label" type="Label" parent="Margin/HBox/VBox/Scroll/VBox/inventory"]
 margin_left = 16.0
 margin_top = 6.0
 margin_right = 65.0
@@ -258,13 +305,13 @@ margin_bottom = 18.0
 custom_fonts/font = ExtResource( 8 )
 text = "Inventory"
 
-[node name="gun_left" type="HBoxContainer" parent="Margin/VBox/Scroll/VBox"]
-margin_top = 224.0
+[node name="gun_left" type="HBoxContainer" parent="Margin/HBox/VBox/Scroll/VBox"]
+margin_top = 308.0
 margin_right = 173.0
-margin_bottom = 248.0
+margin_bottom = 332.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/VBox/Scroll/VBox/gun_left"]
+[node name="Button" type="Button" parent="Margin/HBox/VBox/Scroll/VBox/gun_left"]
 margin_right = 12.0
 margin_bottom = 24.0
 toggle_mode = true
@@ -272,21 +319,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Margin/VBox/Scroll/VBox/gun_left"]
+[node name="Label" type="Label" parent="Margin/HBox/VBox/Scroll/VBox/gun_left"]
 margin_left = 16.0
 margin_top = 6.0
-margin_right = 90.0
+margin_right = 63.0
 margin_bottom = 18.0
 custom_fonts/font = ExtResource( 8 )
-text = "Cycle Gun Left"
+text = "Next Gun"
 
-[node name="gun_right" type="HBoxContainer" parent="Margin/VBox/Scroll/VBox"]
-margin_top = 252.0
+[node name="gun_right" type="HBoxContainer" parent="Margin/HBox/VBox/Scroll/VBox"]
+margin_top = 336.0
 margin_right = 173.0
-margin_bottom = 276.0
+margin_bottom = 360.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/VBox/Scroll/VBox/gun_right"]
+[node name="Button" type="Button" parent="Margin/HBox/VBox/Scroll/VBox/gun_right"]
 margin_right = 12.0
 margin_bottom = 24.0
 toggle_mode = true
@@ -294,21 +341,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Margin/VBox/Scroll/VBox/gun_right"]
+[node name="Label" type="Label" parent="Margin/HBox/VBox/Scroll/VBox/gun_right"]
 margin_left = 16.0
 margin_top = 6.0
-margin_right = 95.0
+margin_right = 83.0
 margin_bottom = 18.0
 custom_fonts/font = ExtResource( 8 )
-text = "Cycle Gun Right"
+text = "Previous Gun"
 
-[node name="pause" type="HBoxContainer" parent="Margin/VBox/Scroll/VBox"]
-margin_top = 280.0
+[node name="pause" type="HBoxContainer" parent="Margin/HBox/VBox/Scroll/VBox"]
+margin_top = 364.0
 margin_right = 173.0
-margin_bottom = 304.0
+margin_bottom = 388.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/VBox/Scroll/VBox/pause"]
+[node name="Button" type="Button" parent="Margin/HBox/VBox/Scroll/VBox/pause"]
 margin_right = 12.0
 margin_bottom = 24.0
 toggle_mode = true
@@ -316,10 +363,47 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Margin/VBox/Scroll/VBox/pause"]
+[node name="Label" type="Label" parent="Margin/HBox/VBox/Scroll/VBox/pause"]
 margin_left = 16.0
 margin_top = 6.0
 margin_right = 46.0
 margin_bottom = 18.0
 custom_fonts/font = ExtResource( 8 )
 text = "Pause"
+
+[node name="VBox2" type="VBoxContainer" parent="Margin/HBox"]
+margin_left = 336.0
+margin_right = 464.0
+margin_bottom = 254.0
+
+[node name="Label" type="Label" parent="Margin/HBox/VBox2"]
+margin_right = 128.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Presets:"
+
+[node name="ItemList" type="ItemList" parent="Margin/HBox/VBox2"]
+margin_top = 18.0
+margin_right = 128.0
+margin_bottom = 254.0
+rect_min_size = Vector2( 128, 0 )
+size_flags_vertical = 3
+items = [ "Custom", ExtResource( 4 ), false, "Classic", ExtResource( 3 ), false, "Mouse", ExtResource( 2 ), false ]
+same_column_width = true
+icon_mode = 0
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+margin_left = 140.0
+margin_top = 99.0
+margin_right = 340.0
+margin_bottom = 171.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource( 5 )
+window_title = ""
+dialog_text = "Load Preset?
+(All controls will be erased)"
+
+[connection signal="item_selected" from="Margin/HBox/VBox2/ItemList" to="." method="_on_ItemList_item_selected"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
+[connection signal="popup_hide" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_popup_hide"]

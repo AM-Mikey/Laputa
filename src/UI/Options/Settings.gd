@@ -5,9 +5,14 @@ var settings_path = "user://settings.json"
 onready var display_mode = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DisplayMode/OptionButton
 onready var resolution_scale = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ResolutionScale/OptionButton
 
-onready var p_master = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Master
-onready var p_sfx = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBox/SFX
-onready var p_music = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBox/Music
+var after_ready = false
+
+export(NodePath) var p_master
+onready var s_master = get_node(p_master)
+export(NodePath) var p_sfx
+onready var sfx = get_node(p_sfx)
+export(NodePath) var p_music
+onready var music = get_node(p_music)
 
 onready var world = get_tree().get_root().get_node("World")
 
@@ -20,15 +25,13 @@ var default = {
 	}
 
 func _ready():
-	
-	
 	var file = File.new()
 	if not file.file_exists(settings_path):
 		save_defaults()
 	else: 
 		load_settings()
 
-
+	after_ready = true
 
 func load_settings():
 	var data
@@ -47,11 +50,11 @@ func load_settings():
 		_on_ResolutionScale_item_selected(data["ResolutionScale"])
 		
 		
-		p_master.get_node("Slider").value = data["MasterSlider"]
+		s_master.get_node("Slider").value = data["MasterSlider"]
 		_on_MasterSlider_value_changed(data["MasterSlider"])
-		p_music.get_node("Slider").value = data["MusicSlider"]
+		music.get_node("Slider").value = data["MusicSlider"]
 		_on_MusicSlider_value_changed(data["MusicSlider"])
-		p_sfx.get_node("Slider").value = data["SFXSlider"]
+		sfx.get_node("Slider").value = data["SFXSlider"]
 		_on_SFXSlider_value_changed(data["SFXSlider"])
 
 	else: 
@@ -133,19 +136,25 @@ func _on_Return_pressed():
 func _on_MasterSlider_value_changed(value):
 	var db = percent_to_db(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),db)
-	p_master.get_node("Label").text = "Master Volume: Muted" if value == 0 else "Master Volume: " + str(value) + "0 %"
+	if not world.get_node("UILayer/Options").hidden and after_ready:
+		am.play_master("sound_test")
+	s_master.get_node("Label").text = "Master Volume: Muted" if value == 0 else "Master Volume: " + str(value) + "0 %"
 	save_to_file("MasterSlider", value)
 
 func _on_MusicSlider_value_changed(value):
 	var db = percent_to_db(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),db)
-	p_music.get_node("Label").text = "Music Volume: Muted" if value == 0 else "Music Volume: " + str(value) + "0 %"
+	if not world.get_node("UILayer/Options").hidden and after_ready:
+		am.play_music("sound_test")
+	music.get_node("Label").text = "Music Volume: Muted" if value == 0 else "Music Volume: " + str(value) + "0 %"
 	save_to_file("MusicSlider", value)
 
 func _on_SFXSlider_value_changed(value):
 	var db = percent_to_db(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),db)
-	p_sfx.get_node("Label").text = "SFX Volume: Muted" if value == 0 else "SFX Volume: " + str(value) + "0 %"
+	if not world.get_node("UILayer/Options").hidden and after_ready:
+		am.play("sound_test")
+	sfx.get_node("Label").text = "SFX Volume: Muted" if value == 0 else "SFX Volume: " + str(value) + "0 %"
 	save_to_file("SFXSlider", value)
 
 func percent_to_db(value) -> float:
@@ -249,6 +258,6 @@ func save_to_file(setting, setting_value):
 
 
 func focus():
-	p_master.get_node("Slider").grab_focus()
+	s_master.get_node("Slider").grab_focus()
 
 

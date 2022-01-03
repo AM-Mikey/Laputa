@@ -27,19 +27,19 @@ func _on_TabContainer_tab_changed(tab):
 		1: tabs.get_node("KeyConfig").focus()
 		2: tabs.get_node("ControllerConfig").focus()
 
-func _input(event):
-	if event.is_action_pressed("gun_left"):
-		if tabs.current_tab == 0:
-			tabs.current_tab = 2
-		else:
-			tabs.current_tab -= 1
-		
-	if event.is_action_pressed("gun_right"):
-		if tabs.current_tab == 2:
-			tabs.current_tab = 0
-		else:
-			tabs.current_tab += 1
-	
+#func _input(event):
+#	if event.is_action_pressed("gun_left"):
+#		if tabs.current_tab == 0:
+#			tabs.current_tab = 2
+#		else:
+#			tabs.current_tab -= 1
+#
+#	if event.is_action_pressed("gun_right"):
+#		if tabs.current_tab == 2:
+#			tabs.current_tab = 0
+#		else:
+#			tabs.current_tab += 1
+#
 
 
 func _on_Return_pressed():

@@ -4,7 +4,6 @@
 [ext_resource path="res://src/UI/MoneyNumber.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/UI/ShopTooltip.gd" type="Script" id=4]
 
-
 [node name="ShopTooltip" type="Node2D"]
 position = Vector2( -112, -176 )
 z_index = 5

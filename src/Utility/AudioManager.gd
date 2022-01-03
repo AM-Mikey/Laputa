@@ -6,6 +6,7 @@ const MUSIC_PLAYER = preload("res://src/Utility/Music.tscn")
 signal interrupt_finished
 
 export var sfx_dict: Dictionary = {
+	"sound_test": preload("res://assets/SFX/Placeholder/snd_menu_move.ogg"),
 	"ui_accept": preload("res://assets/SFX/Placeholder/snd_menu_select.ogg"),
 	"ui_deny": preload("res://assets/SFX/Placeholder/snd_quote_bonkhead.ogg"),
 	"ui_move": preload("res://assets/SFX/Placeholder/snd_menu_move.ogg"),
@@ -35,6 +36,7 @@ export var sfx_dict: Dictionary = {
 }
 
 export var music_dict: Dictionary = {
+	"sound_test": preload("res://assets/SFX/Placeholder/snd_menu_move.ogg"),
 	"get_item": preload("res://assets/Music/Placeholder/Got Item!.ogg"),
 	"get_hp": preload("res://assets/Music/Placeholder/Get Heart Tank!.ogg"), #TODO: rename
 	"gameover": preload("res://assets/Music/Placeholder/Gameover.ogg"),
@@ -101,6 +103,17 @@ func _do_recent_time(sfx_string):
 	yield(get_tree().create_timer(sfx_recent_time), "timeout")
 	sfx_recent.erase(sfx_string)
 
+func play_master(sfx_string):
+	if sfx_dict.has(sfx_string):
+		var player = _add_player("sfx", sfx_string)
+		player.bus = "Master"
+		while sfx_players.size() > sfx_player_max:
+			_clear_player("sfx", sfx_players[0])
+		yield(player, "finished")
+		_clear_player("sfx", player)
+	else:
+		printerr("ERROR: No SFX with name: " + sfx_string)
+
 func play_music(music_string):
 	if music_dict.has(music_string):
 		if music_queue.has(music_string): #don't play if already playing
@@ -130,6 +143,7 @@ func play_interrupt(music_string): #play_time, wait_start, wait_end
 	emit_signal("interrupt_finished")
 	for p in music_players: #unpause music players
 		p.stream_paused = false
+
 
 #####
 

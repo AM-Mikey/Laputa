@@ -111,8 +111,8 @@ func _input(event):
 		read_level_data_from_save()
 		copy_level_data_from_save_to_temp()
 	
-	if event.is_action_pressed("inventory") and not $Recruit.disabled:
-		if not $UILayer.has_node("Inventory") and not get_tree().paused: 
+	if event.is_action_pressed("inventory") and has_node("Recruit"):
+		if not $UILayer.has_node("Inventory") and not get_tree().paused and not $Recruit.disabled:
 			get_tree().paused = true
 			$UILayer/HUD.visible = false
 			var inventory = INVENTORY.instance()
