@@ -9,6 +9,7 @@ const TRIGGER_VISUAL = preload("res://src/Utility/TriggerVisual.tscn")
 export var color = Color(1, 0, 0)
 
 var active_pc = null
+var active_bodies = []
 var trigger_type = ""
 var spent = false
 
@@ -18,16 +19,28 @@ func _ready():
 	add_to_group("Triggers")
 	add_child(TRIGGER_VISUAL.instance())
 
-func get_overlap() -> bool:
+func get_overlap(body) -> bool:
 	var _triggers_touching = 0
 	for t in get_tree().get_nodes_in_group("Triggers"):
-		if t.active_pc != null and t.trigger_type == trigger_type:
+		if t.active_bodies.has(body) and t.trigger_type == trigger_type:
 			_triggers_touching += 1
 	
 	if _triggers_touching > 1: 
 		return true
 	else: 
 		return false
+
+#
+#func get_overlap() -> bool:
+#	var _triggers_touching = 0
+#	for t in get_tree().get_nodes_in_group("Triggers"):
+#		if t.active_pc != null and t.trigger_type == trigger_type:
+#			_triggers_touching += 1
+#
+#	if _triggers_touching > 1: 
+#		return true
+#	else: 
+#		return false
 
 func expend_trigger():
 	spent = true

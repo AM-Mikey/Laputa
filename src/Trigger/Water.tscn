@@ -7,7 +7,7 @@ extents = Vector2( 8, 8 )
 
 [node name="Water" type="Area2D"]
 collision_layer = 0
-collision_mask = 7
+collision_mask = 3
 script = ExtResource( 1 )
 color = Color( 0, 0, 0.701961, 1 )
 

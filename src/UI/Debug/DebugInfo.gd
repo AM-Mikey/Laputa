@@ -68,13 +68,13 @@ func _physics_process(_delta):
 
 
 func on_guns_updated(guns):
-	for c in $VBox/General/Arrays/Weapon.get_children():
+	for c in $VBox/General/Arrays/Guns.get_children():
 		if c.name != "Label":
 			c.queue_free()
 	for g in guns:
 		var label = Label.new()
 		label.text = g.name
-		$VBox/General/Arrays/Weapon.add_child(label)
+		$VBox/General/Arrays/Guns.add_child(label)
 
 
 

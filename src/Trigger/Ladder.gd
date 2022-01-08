@@ -7,8 +7,8 @@ func _ready():
 func _on_Ladder_body_entered(body):
 	active_pc = body
 
-func _on_Ladder_body_exited(_body):
-	if not get_overlap():
+func _on_Ladder_body_exited(body):
+	if not get_overlap(body):
 		active_pc.get_node("MovementManager").change_state(active_pc.get_node("MovementManager").states["normal"])
 	
 	active_pc = null

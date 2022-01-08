@@ -27,9 +27,10 @@ export var release_version: String
 export var is_release = false
 export var should_skip_title = false
 export var visible_triggers = false
+export var show_state_labels = false ###############################################
 
-export var starting_level = "res://src/Level/Village/Village.tscn"
-onready var current_level = load(starting_level).instance() #assumes current level to start with, might cause issues down the line
+export var start_level: PackedScene
+onready var current_level = start_level.instance() #assumes current level to start with, might cause issues down the line
 
 func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
@@ -48,9 +49,11 @@ func _ready():
 
 func get_internal_version() -> String:
 	var current_date = OS.get_date()
-	var _years_since = current_date["year"] - 2021
+	var years_since = current_date["year"] - 2021
 	var months_since = current_date["month"] - 3
 	var days_since = current_date["day"] - 18
+	
+	months_since += 12 * years_since
 	
 	if days_since < 0:
 		
@@ -66,12 +69,13 @@ func get_internal_version() -> String:
 		return(str(months_since -1) + "m" + str(days_last_month + days_since) + "d")
 	else:
 		return(str(months_since) + "m" + str(days_since) + "d")
+	
 
 
 
 
 func skip_title():
-	on_level_change(starting_level, 0)
+	on_level_change(start_level, 0)
 	add_child(RECRUIT.instance())
 	get_node("UILayer").add_child(HUD.instance())
 
@@ -147,7 +151,7 @@ func on_level_change(level, door_index):
 	current_level.queue_free()
 	
 	yield(get_tree(), 'idle_frame') #this gives time for recruit to spawn. probably not neccesary
-	var next_level = load(level).instance()
+	var next_level = level.instance()
 	add_child(next_level)
 	
 	if next_level.level_type == next_level.LevelType.NORMAL:#############################################################

@@ -1,0 +1,31 @@
+extends Node
+
+var state_name = "Attack"
+
+onready var ap = get_parent().get_parent().get_node("AnimationPlayer")
+onready var em = get_parent().get_parent()
+
+
+func state_process():
+	if em.position.y <= em.jump_pos.y:
+		em.change_state(em.states["fall"])
+
+	em.velocity = em.move_and_slide(get_velocity())
+
+
+func get_velocity() -> Vector2:
+	var out = em.velocity
+	
+	out.y += em.gravity * get_physics_process_delta_time()
+	if em.move_dir.y < 0:
+		out.y = em.speed.y * em.move_dir.y
+	
+	return out
+
+func enter():
+	ap.play("Target")
+	yield(ap, "animation_finished")
+	em.move_dir = Vector2.UP
+
+func exit():
+	pass

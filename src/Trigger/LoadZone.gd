@@ -40,4 +40,4 @@ func enter_load_zone():
 	w.get_node("UILayer").add_child(transition)
 
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")
-	emit_signal("level_change", level, door_index)
+	emit_signal("level_change", load(level), door_index)

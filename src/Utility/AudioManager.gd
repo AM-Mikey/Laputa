@@ -33,6 +33,8 @@ export var sfx_dict: Dictionary = {
 	"get_hp": preload("res://assets/SFX/Placeholder/snd_health_refill.ogg"),
 	"get_xp": preload("res://assets/SFX/Placeholder/snd_get_xp.ogg"),
 	"get_ammo": preload("res://assets/SFX/Placeholder/snd_get_missile.ogg"),
+	
+	"level_up": preload("res://assets/SFX/Placeholder/snd_level_up.ogg"),
 }
 
 export var music_dict: Dictionary = {

@@ -1,6 +1,6 @@
 [gd_scene load_steps=68 format=2]
 
-[ext_resource path="res://src/Actor/Player/WeaponManager.gd" type="Script" id=1]
+[ext_resource path="res://src/Actor/Player/GunManager.gd" type="Script" id=1]
 [ext_resource path="res://src/Actor/Player/Recruit.gd" type="Script" id=2]
 [ext_resource path="res://assets/Gun/Revolver.png" type="Texture" id=3]
 [ext_resource path="res://assets/SFX/Placeholder/snd_quote_walk.ogg" type="AudioStream" id=4]
@@ -2557,7 +2557,6 @@ position = Vector2( 0, -16 )
 texture = ExtResource( 15 )
 hframes = 3
 vframes = 12
-frame = 32
 region_rect = Rect2( 173, 193, 24, 35 )
 script = ExtResource( 9 )
 
@@ -2576,7 +2575,7 @@ position = Vector2( 0, -16 )
 texture = ExtResource( 15 )
 hframes = 3
 vframes = 12
-frame = 35
+frame = 3
 script = ExtResource( 9 )
 
 [node name="PlayerCamera" parent="." instance=ExtResource( 10 )]

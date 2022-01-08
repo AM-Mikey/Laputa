@@ -25,7 +25,7 @@ func _on_LevelButton_pressed():
 	if world.has_node("UILayer/HUD"):
 		world.get_node("UILayer/HUD").free()
 	
-	world.on_level_change(level, 0)
+	world.on_level_change(load(level), 0)
 	
 	if world.has_node("UILayer/TitleScreen"):
 		world.get_node("UILayer/TitleScreen").queue_free()
