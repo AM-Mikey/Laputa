@@ -20,12 +20,12 @@ func _ready():
 	add_child(TRIGGER_VISUAL.instance())
 
 func get_overlap(body) -> bool:
-	var _triggers_touching = 0
+	var body_in_triggers = 0
 	for t in get_tree().get_nodes_in_group("Triggers"):
 		if t.active_bodies.has(body) and t.trigger_type == trigger_type:
-			_triggers_touching += 1
+			body_in_triggers += 1
 	
-	if _triggers_touching > 1: 
+	if body_in_triggers > 1: 
 		return true
 	else: 
 		return false

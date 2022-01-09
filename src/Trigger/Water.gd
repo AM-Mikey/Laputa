@@ -4,13 +4,8 @@ func _ready():
 	trigger_type = "water"
 
 func _on_Water_body_entered(body):
-	if body.get_collision_layer_bit(0): #player
-		active_pc = body
-	
-	if body.get_collision_layer_bit(1): #enemy
-		active_bodies.append(body)
-	
-	
+	active_bodies.append(body)
+
 	if not body.is_in_water:
 		body.is_in_water = true
 		
@@ -21,14 +16,6 @@ func _on_Water_body_entered(body):
 
 
 func _on_Water_body_exited(body):
-	if body.get_collision_layer_bit(0): #player
-		if not get_overlap(body):
-			active_pc.is_in_water = false
-		active_pc = null
-
-
-	if body.get_collision_layer_bit(1): #enemy
-		if not get_overlap(body):
-			body.is_in_water = false
-		active_bodies.erase(body)
-		
+	if not get_overlap(body):
+		body.is_in_water = false
+	active_bodies.erase(body)

@@ -97,6 +97,7 @@ position = Vector2( 736, 192 )
 
 [node name="Fish" parent="Actors" instance=ExtResource( 17 )]
 position = Vector2( 328, 248 )
+debug = true
 jump_height = 9
 can_move_x = false
 

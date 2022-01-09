@@ -32,6 +32,10 @@ export var show_state_labels = false ###########################################
 export var start_level: PackedScene
 onready var current_level = start_level.instance() #assumes current level to start with, might cause issues down the line
 
+onready var front = $Front
+onready var middle = $Middle
+onready var back = $Back
+
 func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()

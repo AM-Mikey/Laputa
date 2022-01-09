@@ -15,14 +15,16 @@ var jump_pos
 
 export var can_move_x = true
 export var x_min = -3 setget on_x_min_changed
-export var x_max = 3 setget on_x_min_changed
+export var x_max = 3 setget on_x_max_changed
 
 onready var sp = get_node("States")
 
 func _ready():
-	speed = Vector2(20,100)
+	print("ready fish")
+	speed = Vector2(20,150)
 	damage_on_contact = 1
-	on_jump_height_changed(jump_height)
+	#on_jump_height_changed(jump_height)
+	update_path_lines()
 	initialize_states()
 
 
@@ -52,27 +54,37 @@ func on_x_max_changed(new):
 	update_path_lines()
 	
 func update_path_lines():
-	if Engine.editor_hint or debug:
-		for c in get_children():
-			if c.name == "VPath" or c.name == "HPath": c.free()
-		
-		var vline = PATH_LINE.instance()
+	#if Engine.editor_hint or debug:
+	for c in get_children():
+		if c.name == "VPath" or c.name == "HPath": c.free()
+	
+	var vline = PATH_LINE.instance()
+	vline.name = "VPath"
+	vline.default_color = Color.lightgreen
+	if Engine.editor_hint: 
 		vline.add_point(Vector2.ZERO)
 		vline.add_point(Vector2(0, jump_height * -16))
-		vline.name = "VPath"
-		vline.default_color = Color.lightgreen
 		add_child(vline)
 		move_child(vline, 0)
-		if Engine.editor_hint: 
-			$RayCast2D.cast_to = Vector2(0, jump_height * -16)
+	elif debug and world:
+		vline.add_point(position)
+		vline.add_point(Vector2(jump_pos))
+		world.front.add_child(vline)
+	
+	$RayCast2D.cast_to = Vector2(0, jump_height * -16)
 
-		var hline = PATH_LINE.instance()
+	var hline = PATH_LINE.instance()
+	hline.name = "HPath"
+	hline.default_color = Color.red
+	if Engine.editor_hint: 
 		hline.add_point(Vector2(x_min * 16,0))
 		hline.add_point(Vector2(x_max * 16,0))
-		hline.name = "HPath"
-		hline.default_color = Color.red
 		add_child(hline)
 		move_child(hline, 0)
+	elif debug and world:
+		hline.add_point(position + Vector2(x_min * 16,0))
+		hline.add_point(position + Vector2(x_max * 16,0))
+		world.front.add_child(hline)
 
 
 
@@ -95,42 +107,3 @@ func initialize_states():
 			states[c.name.to_lower()] = c
 	
 	change_state(states["idle"])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#
-#func _ready():
-#	$AnimationPlayer.play("Idle")
-#	speed = Vector2(0, -100)
-#
-#
-#func jump():
-#	move_dir = Vector2.UP
-#
-#func _physics_process(delta):
-#	if not is_in_water
-#
-#
-#
-#		velocity = get_move_velocity(velocity, move_dir, speed)
-#		velocity = move_and_slide(velocity, FLOOR_NORMAL)
-#
-#func get_move_velocity(velocity, move_dir, face_dir, is_jump_interrupted) -> Vector2:
-#	var out = velocity
-#
-#
-#	out.y += gravity * get_physics_process_delta_time()
-#	if move_dir.y < 0:
-#		out.y = jump_speed * move_dir.y
-
