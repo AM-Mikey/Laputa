@@ -9,6 +9,7 @@
 [ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=7]
 [ext_resource path="res://assets/Background/bkMaze.bmp" type="Texture" id=8]
 
+
 [node name="StairwayLeft" type="Node2D"]
 script = ExtResource( 6 )
 __meta__ = {

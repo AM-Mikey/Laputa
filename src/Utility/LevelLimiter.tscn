@@ -3,6 +3,7 @@
 [ext_resource path="res://assets/Background/bkMaze.bmp" type="Texture" id=1]
 [ext_resource path="res://src/Utility/LevelLimiter.gd" type="Script" id=2]
 
+
 [node name="LevelLimiter" type="MarginContainer"]
 margin_right = 416.0
 margin_bottom = 264.0

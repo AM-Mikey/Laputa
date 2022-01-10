@@ -10,6 +10,7 @@ func _ready():
 	if is_instance_valid(world.get_node("Recruit")):
 		var pc = world.get_node("Recruit")
 		pc.connect("guns_updated", self, "on_guns_updated")
+		am.connect("players_updated", self, "on_audio_players_updated")
 		on_guns_updated(pc.guns.get_children())
 	
 	if world.is_release:
@@ -68,14 +69,26 @@ func _physics_process(_delta):
 
 
 func on_guns_updated(guns):
-	for c in $VBox/General/Arrays/Guns.get_children():
-		if c.name != "Label":
-			c.queue_free()
+	var array = $VBox/General/Arrays/Guns
+	_clear_array(array)
 	for g in guns:
 		var label = Label.new()
 		label.text = g.name
-		$VBox/General/Arrays/Guns.add_child(label)
+		array.add_child(label)
 
+func on_audio_players_updated():
+	var array = $VBox/General/Arrays/Sfx
+	_clear_array(array)
+	for p in am.sfx_queue:
+		var label = Label.new()
+		label.text = p
+		array.add_child(label)
+
+
+func _clear_array(array):
+	for c in array.get_children():
+		if c.name != "Label":
+			c.queue_free()
 
 
 func on_viewport_size_changed():

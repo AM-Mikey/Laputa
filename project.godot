@@ -44,7 +44,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Item/KeyItem/KeyItem.gd"
 }, {
-"base": "Node2D",
+"base": "Reference",
 "class": "Movement",
 "language": "GDScript",
 "path": "res://src/duncathan_movement.gd"
@@ -63,6 +63,11 @@ _global_script_classes=[ {
 "class": "Recruit",
 "language": "GDScript",
 "path": "res://src/Actor/Player/Recruit.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://src/Utility/State.gd"
 }, {
 "base": "Area2D",
 "class": "Trigger",
@@ -86,6 +91,7 @@ _global_script_class_icons={
 "NPC": "res://assets/Icon/NPCIcon.png",
 "Prop": "res://assets/Icon/PropIcon.png",
 "Recruit": "res://assets/Icon/PlayerIcon.png",
+"State": "",
 "Trigger": "res://assets/Icon/TriggerIcon.png",
 "Weapon": "res://assets/Icon/WeaponIcon.png"
 }
@@ -99,7 +105,7 @@ config/icon="res://assets/UI/Face/Recruit.png"
 
 [autoload]
 
-am="*res://src/Utility/AudioManager.gd"
+am="*res://src/Audio/AudioManager.gd"
 
 [display]
 
@@ -354,5 +360,6 @@ debug_quit={
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 2d/snapping/use_gpu_pixel_snap=true
 environment/default_environment="res://default_env.tres"

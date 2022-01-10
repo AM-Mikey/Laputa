@@ -68,18 +68,56 @@ __meta__ = {
 
 [node name="Arrays" type="HBoxContainer" parent="VBox/General"]
 margin_left = 147.0
-margin_right = 147.0
+margin_right = 201.0
 margin_bottom = 56.0
+custom_constants/separation = 4
 
 [node name="Guns" type="VBoxContainer" parent="VBox/General/Arrays"]
+margin_right = 29.0
 margin_bottom = 56.0
 rect_pivot_offset = Vector2( 125, 80 )
 
+[node name="Label" type="Label" parent="VBox/General/Arrays/Guns"]
+margin_right = 29.0
+margin_bottom = 15.0
+custom_colors/font_color = Color( 0.501961, 0.501961, 0.501961, 1 )
+text = "GUNS"
+
+[node name="Sfx" type="VBoxContainer" parent="VBox/General/Arrays"]
+margin_left = 33.0
+margin_right = 54.0
+margin_bottom = 56.0
+rect_pivot_offset = Vector2( 125, 80 )
+
+[node name="Label" type="Label" parent="VBox/General/Arrays/Sfx"]
+margin_right = 21.0
+margin_bottom = 15.0
+custom_colors/font_color = Color( 0.501961, 0.501961, 0.501961, 1 )
+text = "SFX"
+
+[node name="Music" type="VBoxContainer" parent="VBox/General/Arrays"]
+visible = false
+margin_left = 42.0
+margin_right = 70.0
+margin_bottom = 56.0
+rect_pivot_offset = Vector2( 125, 80 )
+
+[node name="Label" type="Label" parent="VBox/General/Arrays/Music"]
+margin_right = 28.0
+margin_bottom = 15.0
+text = "Music"
+
 [node name="Inventory" type="VBoxContainer" parent="VBox/General/Arrays"]
+visible = false
+margin_left = 42.0
+margin_right = 42.0
 margin_bottom = 56.0
 rect_pivot_offset = Vector2( 125, 80 )
 
 [node name="Topic" type="VBoxContainer" parent="VBox/General/Arrays"]
+visible = false
+margin_left = 42.0
+margin_right = 42.0
 margin_bottom = 56.0
 rect_pivot_offset = Vector2( 125, 80 )
 
@@ -105,7 +143,7 @@ theme = ExtResource( 2 )
 margin_right = 45.0
 margin_bottom = 12.0
 theme = ExtResource( 2 )
-custom_colors/font_color = Color( 0.5, 0.5, 0.5, 1 )
+custom_colors/font_color = Color( 0.501961, 0.501961, 0.501961, 1 )
 custom_fonts/font = ExtResource( 4 )
 text = "BARS"
 __meta__ = {

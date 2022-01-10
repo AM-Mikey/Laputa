@@ -16,6 +16,7 @@
 [ext_resource path="res://src/Tile/TriggerTile/Outdated/SemiSolidTrigger.tscn" type="PackedScene" id=18]
 
 
+
 [node name="CaveZed" type="Node2D"]
 script = ExtResource( 6 )
 music = "res://assets/Music/Access.ogg"

@@ -28,6 +28,7 @@
 [ext_resource path="res://src/Tile/Layers/Outdated/Front.tscn" type="PackedScene" id=28]
 [ext_resource path="res://src/Actor/Enemy/Crusher.tscn" type="PackedScene" id=29]
 
+
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 2
 

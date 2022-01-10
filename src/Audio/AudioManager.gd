@@ -1,9 +1,11 @@
 extends Node
 
-const SFX_PLAYER = preload("res://src/Utility/SFX.tscn")
-const MUSIC_PLAYER = preload("res://src/Utility/Music.tscn")
+const SFX_PLAYER = preload("res://src/Audio/SFX.tscn")
+const POS_SFX_PLAYER = preload("res://src/Audio/PosSFX.tscn")
+const MUSIC_PLAYER = preload("res://src/Audio/Music.tscn")
 
 signal interrupt_finished
+signal players_updated
 
 export var sfx_dict: Dictionary = {
 	"sound_test": preload("res://assets/SFX/Placeholder/snd_menu_move.ogg"),
@@ -35,6 +37,10 @@ export var sfx_dict: Dictionary = {
 	"get_ammo": preload("res://assets/SFX/Placeholder/snd_get_missile.ogg"),
 	
 	"level_up": preload("res://assets/SFX/Placeholder/snd_level_up.ogg"),
+	
+	"enemy_jump": preload("res://assets/SFX/Placeholder/snd_critter_jump.ogg"),
+	"enemy_croak": preload("res://assets/SFX/FrogCroak.ogg"),
+	"enemy_hurt": preload("res://assets/SFX/Placeholder/snd_enemy_hurt.ogg"),
 }
 
 export var music_dict: Dictionary = {
@@ -105,7 +111,31 @@ func _do_recent_time(sfx_string):
 	yield(get_tree().create_timer(sfx_recent_time), "timeout")
 	sfx_recent.erase(sfx_string)
 
-func play_master(sfx_string):
+func play_pos(sfx_string: String, actor: Node):
+	if sfx_dict.has(sfx_string):
+		
+		if sfx_queue.has(sfx_string) and remove_duplicate_sfx:
+			print("WARNING: SFX already playing! Removed SFX with name: " + sfx_string)
+			return
+		
+		if remove_recent_duplicate_sfx:
+			if sfx_recent.has(sfx_string):
+				print("WARNING: SFX already playing! Removed SFX with name: " + sfx_string)
+				return
+			else:
+				_do_recent_time(sfx_string)
+		
+		var player = _add_player("sfx", sfx_string)
+		while sfx_players.size() > sfx_player_max:
+			_clear_player("sfx", sfx_players[0])
+		
+		yield(player, "finished")
+		_clear_player("sfx", player)
+		
+	else:
+		printerr("ERROR: No SFX with name: " + sfx_string)
+
+func play_master(sfx_string: String):
 	if sfx_dict.has(sfx_string):
 		var player = _add_player("sfx", sfx_string)
 		player.bus = "Master"
@@ -156,19 +186,33 @@ func _add_player(type, string):
 	add_child(player)
 	player.stream = sfx_dict[string] if type == "sfx" else music_dict[string]
 	player.play()
+	emit_signal("players_updated")
+	return player
+
+func _add_pos_player(string, actor):
+	sfx_queue.append(string)
+	var player = POS_SFX_PLAYER.instance()
+	sfx_players.append(player)
+	actor.add_child(player)
+	player.stream = sfx_dict[string]
+	player.play()
+	emit_signal("players_updated")
 	return player
 
 func _clear_player(type, player):
 		get(type + "_queue").pop_front()
 		get(type + "_players").pop_front()
 		player.queue_free()
+		emit_signal("players_updated")
 
 #####
 
 func stop_sfx():
 	for p in sfx_players:
 		p.queue_free()
+		emit_signal("players_updated")
 
 func stop_music():
 	for p in music_players:
 		p.queue_free()
+		emit_signal("players_updated")

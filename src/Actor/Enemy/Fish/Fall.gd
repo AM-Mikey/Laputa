@@ -1,6 +1,6 @@
-extends Node
+extends State
 
-var state_name = "Fall"
+#var state_name = "Fall"
 
 onready var ap = get_parent().get_parent().get_node("AnimationPlayer")
 onready var em = get_parent().get_parent()
@@ -15,7 +15,7 @@ func state_process():
 		$Tween.interpolate_property(em, "position", em.position, Vector2(em.position.x, em.start_pos.y), 0.8, Tween.TRANS_BACK, Tween.EASE_OUT)
 		$Tween.start()
 		yield($Tween, "tween_completed")
-		em.change_state(em.states["idle"])
+		sm.change_state("idle")
 
 	
 func get_velocity() -> Vector2:

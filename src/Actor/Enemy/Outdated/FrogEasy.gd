@@ -6,6 +6,7 @@ var jump_delay = 4
 var move_dir = Vector2.ZERO
 var look_dir = Vector2.LEFT
 
+
 func _ready():
 	hp = 2
 	damage_on_contact = 1

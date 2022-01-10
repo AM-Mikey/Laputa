@@ -17,6 +17,7 @@
 [ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=15]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=16]
 
+
 [node name="Horizontal2" type="Node2D"]
 script = ExtResource( 14 )
 level_name = "Cave"

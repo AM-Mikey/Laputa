@@ -1,6 +1,6 @@
-extends Node
+extends State
 
-var state_name = "Swim"
+#var state_name = "Swim"
 
 onready var em = get_parent().get_parent()
 onready var ap = em.get_node("AnimationPlayer")
@@ -13,14 +13,16 @@ func state_process():
 	var collision = rc.get_collider()
 	if collision != null:
 		if collision.get_collision_layer_bit(0): #player
-			print("got target")
-			em.change_state(em.states["attack"])
+			if em.debug: print("got target")
+			sm.change_state("attack")
 	
 	
 	if em.position.x < em.start_pos.x + em.x_min * 16:
 		em.move_dir = Vector2.RIGHT
+		em.get_node("Sprite").scale.x = 1
 	if em.position.x > em.start_pos.x + em.x_max * 16:
 		em.move_dir = Vector2.LEFT
+		em.get_node("Sprite").scale.x = -1
 	
 	em.velocity = em.move_and_slide(get_velocity())
 

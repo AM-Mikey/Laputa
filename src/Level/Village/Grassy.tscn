@@ -11,6 +11,7 @@
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Utility/PlayerCameraDummy.tscn" type="PackedScene" id=11]
 
+
 [node name="Grassy" type="Node2D"]
 script = ExtResource( 6 )
 level_name = "Clover Field"

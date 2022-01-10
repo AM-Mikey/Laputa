@@ -20,6 +20,7 @@
 [ext_resource path="res://src/Tile/Layers/Outdated/SSP.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Tile/Layers/Outdated/Front.tscn" type="PackedScene" id=19]
 
+
 [sub_resource type="DynamicFont" id=1]
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )

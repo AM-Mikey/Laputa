@@ -1,6 +1,6 @@
-extends Node
+extends State
 
-var state_name = "Attack"
+#var state_name = "Attack"
 
 onready var ap = get_parent().get_parent().get_node("AnimationPlayer")
 onready var em = get_parent().get_parent()
@@ -8,7 +8,7 @@ onready var em = get_parent().get_parent()
 
 func state_process():
 	if em.position.y <= em.jump_pos.y:
-		em.change_state(em.states["fall"])
+		sm.change_state("fall")
 
 	em.velocity = em.move_and_slide(get_velocity())
 

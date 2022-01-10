@@ -19,6 +19,7 @@
 [ext_resource path="res://src/Actor/Enemy/BeetleGreen.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/Tile/TriggerTile/SpikesTrigger.tscn" type="PackedScene" id=18]
 
+
 [sub_resource type="TileSet" id=1]
 0/name = "TerrainAutotile.png 0"
 0/texture = ExtResource( 14 )

@@ -12,7 +12,7 @@
 [ext_resource path="res://src/Tile/Layers/SSP.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Actor/Enemy/Frog.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Tile/TriggerTile/LadderTrigger.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/Actor/Enemy/FrogEasy.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/Actor/Enemy/Outdated/FrogEasy.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/Prop/ChestKeyItem.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Actor/Enemy/BeetleGreen.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/Actor/Enemy/Sentry.tscn" type="PackedScene" id=16]
@@ -20,6 +20,7 @@
 [ext_resource path="res://src/Trigger/Sign.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Tile/PropTile/BreakableProp.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/Trigger/LoadZone.tscn" type="PackedScene" id=20]
+
 
 [node name="Bridge" type="Node2D"]
 script = ExtResource( 5 )

@@ -13,16 +13,16 @@ const AMMO = preload("res://src/Item/Ammo.tscn")
 var rng = RandomNumberGenerator.new()
 var disabled = false
 var protected = false
+export var debug = false
 
 var hp: int
 var damage_on_contact: int
 
 var damagenum = null
-#var timer = Timer.new()
 var damagenum_time: float = 0.5
 
 export var id: String
-export var level = 1
+var level = 1
 
 
 var heart_chance = 1
@@ -89,7 +89,7 @@ func hit(damage, blood_direction):
 	if hp <= 0:
 		die()
 	else:
-		$PosHurt.play()
+		am.play_pos("enemy_hurt", self) #TODO: different hit sounds per enemy
 
 
 func prepare_damagenum(damage):
