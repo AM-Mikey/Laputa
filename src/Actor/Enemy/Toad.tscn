@@ -270,8 +270,8 @@ position = Vector2( 0, -8 )
 shape = SubResource( 1 )
 
 [node name="PlayerDetector" type="Area2D" parent="."]
-monitorable = false
 collision_layer = 0
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 modulate = Color( 0.188235, 0.537255, 0.529412, 0.188235 )
@@ -282,10 +282,9 @@ shape = SubResource( 2 )
 light_mask = 4
 position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
-flip_h = true
 hframes = 4
 vframes = 2
-frame = 7
+frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/CroakLeft = SubResource( 3 )

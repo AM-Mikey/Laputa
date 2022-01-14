@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Actor/Actor.gd"
 }, {
+"base": "Node2D",
+"class": "AutotileGenerator",
+"language": "GDScript",
+"path": "res://addons/AutotileGenerator/AutotileGenerator.gd"
+}, {
 "base": "Resource",
 "class": "Background",
 "language": "GDScript",
@@ -34,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Actor/Enemy/Enemy.gd"
 }, {
+"base": "CanvasLayer",
+"class": "Fade",
+"language": "GDScript",
+"path": "res://addons/UniversalFade/Fade.gd"
+}, {
 "base": "Node",
 "class": "Gun",
 "language": "GDScript",
@@ -44,7 +54,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Item/KeyItem/KeyItem.gd"
 }, {
-"base": "Reference",
+"base": "Node2D",
 "class": "Movement",
 "language": "GDScript",
 "path": "res://src/duncathan_movement.gd"
@@ -81,10 +91,12 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Actor": "res://assets/Icon/ActorIcon.png",
+"AutotileGenerator": "",
 "Background": "res://assets/Icon/BackgroundIcon.png",
 "Boss": "res://assets/Icon/BossIcon.png",
 "Bullet": "res://assets/Icon/BulletIcon.png",
 "Enemy": "res://assets/Icon/EnemyIcon.png",
+"Fade": "",
 "Gun": "res://assets/Icon/GunIcon.png",
 "KeyItem": "res://assets/Icon/KeyItemIcon.png",
 "Movement": "",
@@ -95,6 +107,52 @@ _global_script_class_icons={
 "Trigger": "res://assets/Icon/TriggerIcon.png",
 "Weapon": "res://assets/Icon/WeaponIcon.png"
 }
+
+[addons]
+
+instance_dock/scenes=[ {
+"name": "enemies",
+"scenes": [ {
+"scene": "res://src/Actor/Enemy/Fish/Fish.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Frog.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Pather.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Roller.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Sentry.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Sphagnum.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Stalagtite.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Swooper.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Toad.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/TogglerVertical.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Trenchie.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Larry.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Hunter.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Crusher.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Billy.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/BeetleYellow.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/BeetleGreen.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Bat.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Climber/ClimberManager.tscn"
+} ],
+"scroll": 0
+} ]
 
 [application]
 
@@ -116,7 +174,7 @@ window/size/test_height=1080
 
 [editor_plugins]
 
-enabled=PoolStringArray(  )
+enabled=PoolStringArray( "res://addons/AutotileGenerator/plugin.cfg", "res://addons/InstanceDock/plugin.cfg" )
 
 [importer_defaults]
 
@@ -360,6 +418,5 @@ debug_quit={
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 2d/snapping/use_gpu_pixel_snap=true
 environment/default_environment="res://default_env.tres"

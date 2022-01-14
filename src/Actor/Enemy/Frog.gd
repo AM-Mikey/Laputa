@@ -1,33 +1,50 @@
 tool
 extends Enemy
 
+var tx_toad = preload("res://assets/Actor/Enemy/Toad.png")
+var tx_frog = preload("res://assets/Actor/Enemy/Frog.png")
+
 var target = null
 
 var jump_delay = 3
 var move_dir = Vector2.ZERO
 var look_dir = Vector2.LEFT
 
-enum Difficulty {easy, normal}
+enum Difficulty {easy, normal, hard}
 export(Difficulty) var difficulty = Difficulty.normal setget _on_difficulty_changed
 
 func _ready():
-	speed = Vector2(12, 120)
 	gravity = 200
 
 
 func _on_difficulty_changed(new):
 	difficulty = new
 	match difficulty:
+		
+		Difficulty.hard:
+			hp = 4
+			level = 3
+			damage_on_contact = 2
+			$Sprite.modulate = Color(1,1,1)
+			$Sprite.texture = tx_toad
+			speed = Vector2(60, 120)
+		
 		Difficulty.normal:
 			hp = 4
 			level = 2
 			damage_on_contact = 2
 			$Sprite.modulate = Color(1,1,1)
+			$Sprite.texture = tx_frog
+			speed = Vector2(12, 120)
+		
 		Difficulty.easy:
 			hp = 2
 			level = 1
 			damage_on_contact = 1
 			$Sprite.modulate = Color(0, 0.976471, 1)
+			$Sprite.texture = tx_frog
+			speed = Vector2(12, 120)
+
 
 func _physics_process(_delta):
 	if not dead and not disabled and not Engine.editor_hint:

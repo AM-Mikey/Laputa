@@ -478,7 +478,7 @@ func reload_level():
 	$Recruit.free() #we free and respawn them so we have a clean slate when we load in
 	$UILayer/HUD.free()
 	
-	on_level_change(current_level.filename, 0)
+	on_level_change(load(current_level.filename), 0)
 	
 #	if has_node("UILayer/TitleScreen"):
 #		$UILayer/TitleScreen.queue_free()

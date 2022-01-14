@@ -127,6 +127,8 @@ func _input(event):
 
 
 func _change_key(new_key):
+	preset.select(0)
+	
 	#Delete key of pressed button
 	if !InputMap.get_action_list(action_string).empty():
 		var input = _get_first_valid_input(action_string)
@@ -233,12 +235,20 @@ func _on_ItemList_item_selected(index):
 func _on_ConfirmationDialog_confirmed():
 	preset.select(active_preset)
 
+
+func _on_Return_pressed():
+	if world.has_node("UILayer/PauseMenu"):
+		world.get_node("UILayer/PauseMenu").visible = true
+		world.get_node("UILayer/PauseMenu").focus()
+	if world.has_node("UILayer/TitleScreen"):
+		world.get_node("UILayer/TitleScreen").visible = true
+		world.get_node("UILayer/TitleScreen").focus()
+		
+	if world.has_node("UILayer/Options"):
+		world.get_node("UILayer/Options").queue_free()
+	else:
+		get_parent().queue_free()
+
+
 func focus():
 	get_node(focus).grab_focus()
-
-
-
-
-
-
-

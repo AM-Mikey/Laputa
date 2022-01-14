@@ -78,49 +78,34 @@ position = Vector2( -32, 0 )
 
 [node name="Frog" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 736, 192 )
-speed = Vector2( 12, 120 )
-gravity = 200
 id = "0.5"
 
 [node name="Fish" parent="Actors" instance=ExtResource( 17 )]
 position = Vector2( 328, 248 )
 jump_height = 9
 
-[node name="Frog2" parent="Actors" instance=ExtResource( 16 )]
-position = Vector2( 40, 184 )
-speed = Vector2( 12, 120 )
-gravity = 200
-id = "0.5"
-difficulty = 0
-
 [node name="Frog3" parent="Actors" instance=ExtResource( 16 )]
-position = Vector2( 352, 56 )
-speed = Vector2( 12, 120 )
-gravity = 200
+position = Vector2( 312, 64 )
+speed = Vector2( 60, 120 )
 id = "0.5"
-difficulty = 0
+difficulty = 2
 
 [node name="Frog4" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 448, 48 )
-speed = Vector2( 12, 120 )
-gravity = 200
 id = "0.5"
 
 [node name="Frog5" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 544, 160 )
-speed = Vector2( 12, 120 )
-gravity = 200
 id = "0.5"
 difficulty = 0
 
 [node name="Frog6" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 440, 184 )
-speed = Vector2( 12, 120 )
-gravity = 200
 id = "0.5"
 difficulty = 0
 
 [node name="Triggers" type="Node2D" parent="."]
+position = Vector2( 1, 0 )
 
 [node name="KillBox" parent="Triggers" instance=ExtResource( 1 )]
 position = Vector2( 0, 1344 )

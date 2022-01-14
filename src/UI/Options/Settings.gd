@@ -2,8 +2,8 @@ extends Control
 
 var settings_path = "user://settings.json"
 
-onready var display_mode = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DisplayMode/OptionButton
-onready var resolution_scale = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ResolutionScale/OptionButton
+#onready var display_mode = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DisplayMode/OptionButton
+#onready var resolution_scale = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ResolutionScale/OptionButton
 
 var after_ready = false
 
@@ -13,6 +13,14 @@ export(NodePath) var p_sfx
 onready var sfx = get_node(p_sfx)
 export(NodePath) var p_music
 onready var music = get_node(p_music)
+
+export(NodePath) var display_b
+export(NodePath) var resolution_b
+export(NodePath) var mouse_b
+export(NodePath) var delete_b
+
+export(NodePath) var scroll_c
+#var scroll_size = 
 
 onready var world = get_tree().get_root().get_node("World")
 
@@ -30,8 +38,13 @@ func _ready():
 		save_defaults()
 	else: 
 		load_settings()
-
+	get_node(scroll_c).get_v_scrollbar().connect("item_rect_changed", self, "_on_scrollbar_changed")
 	after_ready = true
+
+
+func _on_scrollbar_changed():
+	print("scroll changed")
+	get_node(scroll_c).get_v_scrollbar().rect_size.y = get_node(scroll_c).rect_size.y - 48
 
 func load_settings():
 	var data
@@ -44,9 +57,9 @@ func load_settings():
 			data = JSON.parse(text).result
 			file.close()
 
-		display_mode.selected = data["DisplayMode"]
+		get_node(display_b).selected = data["DisplayMode"]
 		_on_DisplayMode_item_selected(data["DisplayMode"])
-		resolution_scale.selected = data["ResolutionScale"]
+		get_node(resolution_b).selected = data["ResolutionScale"]
 		_on_ResolutionScale_item_selected(data["ResolutionScale"])
 		
 		
@@ -207,6 +220,12 @@ func percent_to_db(value) -> float:
 	
 	return db
 
+func _on_MouseLock_toggled(value):
+	if value:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 func _on_DeleteSave_pressed():
 	var files = []
 	var dir = Directory.new()
@@ -259,5 +278,12 @@ func save_to_file(setting, setting_value):
 
 func focus():
 	s_master.get_node("Slider").grab_focus()
+
+
+
+
+
+
+
 
 

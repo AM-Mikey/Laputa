@@ -1,0 +1,87 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/AutotileGenerator/Interface.gd" type="Script" id=1]
+[ext_resource path="res://addons/AutotileGenerator/Folder.svg" type="Texture" id=2]
+
+[node name="AutotileGenerator" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="OutputTileSet" type="HBoxContainer" parent="VBox"]
+margin_right = 480.0
+margin_bottom = 24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBox/OutputTileSet"]
+margin_top = 5.0
+margin_right = 75.0
+margin_bottom = 19.0
+text = "TileSet Path"
+
+[node name="LineEdit" type="LineEdit" parent="VBox/OutputTileSet"]
+margin_left = 79.0
+margin_right = 460.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "tileset.tres"
+
+[node name="Folder" type="TextureButton" parent="VBox/OutputTileSet"]
+margin_left = 464.0
+margin_right = 480.0
+margin_bottom = 24.0
+texture_normal = ExtResource( 2 )
+
+[node name="OutputImage" type="HBoxContainer" parent="VBox"]
+margin_top = 28.0
+margin_right = 480.0
+margin_bottom = 52.0
+
+[node name="Label" type="Label" parent="VBox/OutputImage"]
+margin_top = 5.0
+margin_right = 72.0
+margin_bottom = 19.0
+text = "Image Path"
+
+[node name="LineEdit" type="LineEdit" parent="VBox/OutputImage"]
+margin_left = 76.0
+margin_right = 460.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "tileset.png"
+
+[node name="Folder" type="TextureButton" parent="VBox/OutputImage"]
+margin_left = 464.0
+margin_right = 480.0
+margin_bottom = 24.0
+texture_normal = ExtResource( 2 )
+
+[node name="GenImage" type="Button" parent="VBox"]
+margin_top = 56.0
+margin_right = 480.0
+margin_bottom = 76.0
+text = "Generate Image"
+
+[node name="GenTileSet" type="Button" parent="VBox"]
+margin_top = 80.0
+margin_right = 480.0
+margin_bottom = 100.0
+text = "Generate TileSet"
+
+[connection signal="pressed" from="VBox/OutputTileSet/Folder" to="." method="_on_Folder_pressed" binds= [ "output_tileset" ]]
+[connection signal="pressed" from="VBox/OutputImage/Folder" to="." method="_on_Folder_pressed" binds= [ "output_image" ]]
+[connection signal="pressed" from="VBox/GenImage" to="." method="_on_GenImage_pressed"]
+[connection signal="pressed" from="VBox/GenTileSet" to="." method="_on_GenTileSet_pressed"]

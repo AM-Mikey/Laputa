@@ -153,18 +153,24 @@ func _on_Default_pressed():
 	pass # Replace with function body.
 
 
-#func _on_Return_pressed():
-#	if world.has_node("UILayer/PauseMenu"):
-#		world.get_node("UILayer/PauseMenu").visible = true
-#		world.get_node("UILayer/PauseMenu").focus()
-#	if world.has_node("UILayer/TitleScreen"):
-#		world.get_node("UILayer/TitleScreen").visible = true
-#		world.get_node("UILayer/TitleScreen").focus()
-#
-#	if world.has_node("UILayer/Options"):
-#		world.get_node("UILayer/Options").queue_free()
-#	else:
-#		get_parent().queue_free()
+
+
+
+
+func _on_Return_pressed():
+	if world.has_node("UILayer/PauseMenu"):
+		world.get_node("UILayer/PauseMenu").visible = true
+		world.get_node("UILayer/PauseMenu").focus()
+	if world.has_node("UILayer/TitleScreen"):
+		world.get_node("UILayer/TitleScreen").visible = true
+		world.get_node("UILayer/TitleScreen").focus()
+		
+	if world.has_node("UILayer/Options"):
+		world.get_node("UILayer/Options").queue_free()
+	else:
+		get_parent().queue_free()
+
+
 
 func focus():
 	pass
