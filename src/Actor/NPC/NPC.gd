@@ -23,7 +23,7 @@ var branch: String = ""
 
 var camera_forgiveness = 16
 
-onready var world = get_tree().get_root().get_node("World")
+#onready var world = get_tree().get_root().get_node("World")
 onready var pc = get_tree().get_root().get_node_or_null("World/Recruit")
 
 func _ready():

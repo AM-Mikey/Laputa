@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="1">
+ <tileset firstgid="1" name="Village5" tilewidth="16" tileheight="16" tilecount="704" columns="32">
+  <image source="../../../assets/Tile/Village5.png" width="512" height="352"/>
+  <wangsets>
+   <wangset name="Dirt2" type="mixed" tile="-1">
+    <wangcolor name="" color="#ff0000" tile="-1" probability="1"/>
+    <wangtile tileid="200" wangid="0,0,1,1,1,0,0,0"/>
+    <wangtile tileid="202" wangid="0,0,1,1,1,1,1,0"/>
+    <wangtile tileid="203" wangid="0,0,0,0,1,1,1,0"/>
+    <wangtile tileid="232" wangid="1,1,0,0,0,0,0,0"/>
+    <wangtile tileid="234" wangid="1,1,0,0,0,0,0,1"/>
+    <wangtile tileid="235" wangid="1,0,0,0,0,0,0,1"/>
+    <wangtile tileid="264" wangid="1,1,1,1,1,0,0,0"/>
+    <wangtile tileid="266" wangid="1,1,1,1,1,1,1,1"/>
+    <wangtile tileid="267" wangid="1,0,0,0,1,1,1,1"/>
+    <wangtile tileid="296" wangid="1,1,1,0,0,0,0,0"/>
+    <wangtile tileid="298" wangid="1,1,1,0,0,0,1,1"/>
+    <wangtile tileid="299" wangid="1,0,0,0,0,0,1,1"/>
+   </wangset>
+   <wangset name="Dirt3" type="mixed" tile="-1">
+    <wangcolor name="" color="#ff0000" tile="-1" probability="1"/>
+    <wangcolor name="" color="#00ff00" tile="-1" probability="1"/>
+    <wangcolor name="" color="#0000ff" tile="-1" probability="1"/>
+    <wangtile tileid="200" wangid="0,0,3,3,3,0,0,0"/>
+    <wangtile tileid="201" wangid="0,0,3,3,3,3,3,0"/>
+    <wangtile tileid="203" wangid="0,0,0,0,3,3,3,0"/>
+    <wangtile tileid="232" wangid="3,3,1,1,1,0,0,0"/>
+    <wangtile tileid="233" wangid="3,3,1,1,1,1,1,3"/>
+    <wangtile tileid="235" wangid="3,0,0,0,1,1,1,3"/>
+    <wangtile tileid="264" wangid="1,1,2,2,2,0,0,0"/>
+    <wangtile tileid="265" wangid="1,1,2,2,2,2,2,1"/>
+    <wangtile tileid="267" wangid="1,0,0,0,2,2,2,1"/>
+    <wangtile tileid="296" wangid="2,2,2,0,0,0,0,0"/>
+    <wangtile tileid="297" wangid="2,2,2,0,0,0,2,2"/>
+    <wangtile tileid="299" wangid="2,0,0,0,0,0,2,2"/>
+   </wangset>
+   <wangset name="Dirt4" type="mixed" tile="-1">
+    <wangcolor name="" color="#ff0000" tile="-1" probability="1"/>
+    <wangtile tileid="205" wangid="0,0,1,1,1,0,0,0"/>
+    <wangtile tileid="206" wangid="0,0,1,1,1,1,1,0"/>
+    <wangtile tileid="207" wangid="0,0,1,1,1,1,1,0"/>
+    <wangtile tileid="208" wangid="0,0,0,0,1,1,1,0"/>
+    <wangtile tileid="237" wangid="1,1,1,1,1,0,0,0"/>
+    <wangtile tileid="238" wangid="1,1,1,1,1,1,1,1"/>
+    <wangtile tileid="239" wangid="1,1,1,1,1,1,1,1"/>
+    <wangtile tileid="240" wangid="1,0,0,0,1,1,1,1"/>
+    <wangtile tileid="269" wangid="1,1,1,1,1,0,0,0"/>
+    <wangtile tileid="270" wangid="1,1,1,1,1,1,1,1"/>
+    <wangtile tileid="271" wangid="1,1,1,1,1,1,1,1"/>
+    <wangtile tileid="272" wangid="1,0,0,0,1,1,1,1"/>
+    <wangtile tileid="296" wangid="1,1,1,0,0,0,0,0"/>
+    <wangtile tileid="297" wangid="1,1,1,0,0,0,1,1"/>
+    <wangtile tileid="298" wangid="1,1,1,0,0,0,1,1"/>
+    <wangtile tileid="299" wangid="1,0,0,0,0,0,1,1"/>
+   </wangset>
+   <wangset name="dirttop" type="corner" tile="-1">
+    <wangcolor name="" color="#ff0000" tile="-1" probability="1"/>
+    <wangcolor name="" color="#00ff00" tile="-1" probability="1"/>
+    <wangcolor name="" color="#0000ff" tile="-1" probability="1"/>
+    <wangtile tileid="205" wangid="0,0,1,1,1,0,0,0"/>
+    <wangtile tileid="206" wangid="0,0,1,1,1,1,1,0"/>
+    <wangtile tileid="207" wangid="0,0,1,1,1,1,1,0"/>
+    <wangtile tileid="208" wangid="0,0,0,0,1,1,1,0"/>
+    <wangtile tileid="237" wangid="1,0,1,1,1,0,0,0"/>
+    <wangtile tileid="238" wangid="1,0,1,1,1,1,1,0"/>
+    <wangtile tileid="239" wangid="1,1,1,1,1,1,1,1"/>
+    <wangtile tileid="240" wangid="1,0,0,0,1,1,1,1"/>
+    <wangtile tileid="269" wangid="1,1,1,0,0,0,0,0"/>
+    <wangtile tileid="270" wangid="1,1,1,0,0,0,1,1"/>
+    <wangtile tileid="271" wangid="1,1,1,0,0,0,1,1"/>
+    <wangtile tileid="272" wangid="1,0,0,0,0,0,1,1"/>
+   </wangset>
+   <wangset name="Unnamed Set" type="corner" tile="238">
+    <wangcolor name="" color="#ff0000" tile="-1" probability="1"/>
+    <wangtile tileid="205" wangid="0,0,0,1,0,0,0,0"/>
+    <wangtile tileid="206" wangid="0,0,0,1,0,1,0,0"/>
+    <wangtile tileid="207" wangid="0,0,0,1,0,1,0,0"/>
+    <wangtile tileid="208" wangid="0,0,0,0,0,1,0,0"/>
+    <wangtile tileid="237" wangid="0,1,0,0,0,0,0,0"/>
+    <wangtile tileid="238" wangid="0,1,0,0,0,0,0,1"/>
+    <wangtile tileid="239" wangid="0,1,0,0,0,0,0,1"/>
+    <wangtile tileid="240" wangid="0,0,0,0,0,0,0,1"/>
+   </wangset>
+  </wangsets>
+ </tileset>
+ <tileset firstgid="705" source="../../../assets/Tile/Dirt1.tsx"/>
+ <layer id="3" name="output_dirt" width="16" height="16">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,778,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="2" name="input_dirt" width="16" height="16">
+  <properties>
+   <property name="StrictEmpty" type="bool" value="true"/>
+  </properties>
+  <data encoding="csv">
+0,705,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+705,0,705,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,705,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="1" name="regions_output" width="16" height="16">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,708,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="4" name="regions_input" width="16" height="16">
+  <data encoding="csv">
+0,707,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+707,707,707,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,707,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>
