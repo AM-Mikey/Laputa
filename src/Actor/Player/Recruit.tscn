@@ -2505,6 +2505,7 @@ script = ExtResource( 12 )
 [node name="States" type="Node2D" parent="MovementManager"]
 
 [node name="StateLabel" type="Label" parent="MovementManager/States"]
+visible = false
 margin_left = -21.1084
 margin_top = -34.0
 margin_right = 18.8916

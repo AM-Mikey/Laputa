@@ -24,9 +24,7 @@ func _ready():
 
 
 func _physics_process(_delta):
-	if Engine.editor_hint:
-		pass
-	else:
+	if not Engine.editor_hint:
 		gravity = 300.0 if not is_in_water else 150.0
 
 
@@ -63,7 +61,7 @@ func update_path_lines():
 		move_child(vline, 0)
 	elif debug and world:
 		vline.add_point(position)
-		vline.add_point(Vector2(jump_pos))
+		vline.add_point(jump_pos)
 		world.front.add_child(vline)
 	
 	$RayCast2D.cast_to = Vector2(0, jump_height * -16)
