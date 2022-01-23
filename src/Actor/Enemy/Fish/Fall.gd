@@ -32,4 +32,5 @@ func enter():
 	ap.play("Fall")
 
 func exit():
+	em.velocity = Vector2.ZERO
 	has_recovered = false

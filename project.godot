@@ -155,6 +155,8 @@ instance_dock/scenes=[ {
 "scene": "res://src/Actor/Enemy/Bat.tscn"
 }, {
 "scene": "res://src/Actor/Enemy/Climber/ClimberManager.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Goalie/Goalie.tscn"
 } ],
 "scroll": 0
 } ]

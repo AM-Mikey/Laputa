@@ -18,11 +18,9 @@ func state_process():
 	
 	
 	if em.position.x < em.start_pos.x + em.x_min * 16:
-		em.move_dir = Vector2.RIGHT
-		em.get_node("Sprite").scale.x = 1
+		em.swim_dir_x = 1
 	if em.position.x > em.start_pos.x + em.x_max * 16:
-		em.move_dir = Vector2.LEFT
-		em.get_node("Sprite").scale.x = -1
+		em.swim_dir_x = -1
 	
 	em.velocity = em.move_and_slide(get_velocity())
 
@@ -35,7 +33,7 @@ func get_velocity() -> Vector2:
 	return out
 
 func enter():
-	em.move_dir = Vector2.LEFT
+	em.move_dir.x = em.swim_dir_x
 	ap.play("Idle")
 
 func exit():

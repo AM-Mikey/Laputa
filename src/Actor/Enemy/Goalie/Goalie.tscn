@@ -1,0 +1,173 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://assets/Actor/Enemy/Goalie.png" type="Texture" id=1]
+[ext_resource path="res://src/Actor/Enemy/Goalie/Idle.gd" type="Script" id=2]
+[ext_resource path="res://src/Utility/StateMachine.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Actor/Enemy/Goalie/Goalie.gd" type="Script" id=4]
+[ext_resource path="res://src/Actor/Enemy/Goalie/Jump.gd" type="Script" id=5]
+[ext_resource path="res://src/Actor/Enemy/Goalie/Active.gd" type="Script" id=6]
+[ext_resource path="res://src/UI/Theme/LaputaTheme.tres" type="Theme" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 128, 64 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 96, 40 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "Active"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Fall"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 8, 9 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Idle"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Kick"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 6, 7 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Rise"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 4, 5 ]
+}
+
+[node name="Goalie" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 8
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -8 )
+shape = SubResource( 1 )
+
+[node name="ActiveDetector" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActiveDetector"]
+modulate = Color( 0.992157, 0.992157, 0.992157, 0.156863 )
+position = Vector2( 0, -64 )
+shape = SubResource( 3 )
+
+[node name="JumpDetector" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpDetector"]
+modulate = Color( 0, 0.0156863, 0.937255, 0.392157 )
+position = Vector2( 0, -88 )
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -16 )
+texture = ExtResource( 1 )
+hframes = 2
+vframes = 5
+frame = 2
+
+[node name="FireCooldown" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="StateMachine" parent="." instance=ExtResource( 3 )]
+
+[node name="Label" type="Label" parent="StateMachine"]
+margin_left = -24.0
+margin_top = -32.0
+margin_right = 24.0
+margin_bottom = -16.0
+theme = ExtResource( 7 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 2 )
+
+[node name="Active" type="Node" parent="StateMachine"]
+script = ExtResource( 6 )
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Active = SubResource( 5 )
+anims/Fall = SubResource( 6 )
+anims/Idle = SubResource( 7 )
+anims/Kick = SubResource( 8 )
+anims/Rise = SubResource( 9 )
+
+[connection signal="body_entered" from="ActiveDetector" to="." method="_on_ActiveDetector_body_entered"]
+[connection signal="body_exited" from="ActiveDetector" to="." method="_on_ActiveDetector_body_exited"]
+[connection signal="body_entered" from="JumpDetector" to="." method="_on_JumpDetector_body_entered"]

@@ -5,7 +5,8 @@ extends Enemy
 const PATH_LINE = preload("res://src/Utility/PathLine.tscn")
 
 
-var move_dir = Vector2.ZERO
+var move_dir = Vector2.LEFT
+export var swim_dir_x = -1 setget on_swim_dir_x_changed
 export var jump_height: int = 6 setget on_jump_height_changed
 onready var start_pos = position
 var jump_pos
@@ -29,10 +30,14 @@ func _physics_process(_delta):
 		gravity = 300.0 if not is_in_water else 150.0
 
 
+func on_swim_dir_x_changed(new):
+	swim_dir_x = new
+	$Sprite.scale.x = new
+	move_dir.x = new
 
 func on_jump_height_changed(new):
 	jump_height = new
-	jump_pos = Vector2(position.x, position.y + jump_height * -16)
+	jump_pos = Vector2(position.x, position.y + new * -16)
 	update_path_lines()
 
 func on_x_min_changed(new):

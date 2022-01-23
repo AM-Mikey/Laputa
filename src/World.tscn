@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/Level/LevelDesignTest.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Level/StatesTest.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/World.gd" type="Script" id=8]
 
 [node name="World" type="Node2D"]

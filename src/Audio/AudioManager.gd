@@ -41,6 +41,7 @@ export var sfx_dict: Dictionary = {
 	"enemy_jump": preload("res://assets/SFX/Placeholder/snd_critter_jump.ogg"),
 	"enemy_croak": preload("res://assets/SFX/FrogCroak.ogg"),
 	"enemy_hurt": preload("res://assets/SFX/Placeholder/snd_enemy_hurt.ogg"),
+	"enemy_shoot": preload("res://assets/SFX/Placeholder/snd_em_fire.ogg"),
 }
 
 export var music_dict: Dictionary = {

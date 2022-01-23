@@ -91,6 +91,7 @@ id = "0.5"
 shape = SubResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( -1, 1 )
 texture = ExtResource( 1 )
 hframes = 4
 vframes = 4
@@ -112,10 +113,11 @@ collide_with_areas = true
 start_state = NodePath("Idle")
 
 [node name="Label" type="Label" parent="StateMachine"]
-margin_left = -19.0
-margin_top = -14.0
-margin_right = 21.0
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
 theme = ExtResource( 5 )
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

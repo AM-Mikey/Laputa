@@ -17,7 +17,7 @@ func initialize_states():
 	if new_state: 
 		change_state(new_state.name)
 	else:
-		change_state(get_child(0).name)
+		change_state(get_child(1).name) #first after label
 
 
 func change_state(state_name):
