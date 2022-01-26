@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Utility/LevelLimiter.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
 [ext_resource path="res://src/Tile/Village4.tres" type="TileSet" id=6]
 [ext_resource path="res://assets/Tile/Dirt1.tsx" type="TileSet" id=7]
+[ext_resource path="res://src/Tile/Village6.tsx" type="TileSet" id=8]
 [ext_resource path="res://addons/frontrider.tiledtools/map_tools/TilemapLoader.gd" type="Script" id=9]
 
 [node name="LevelDesignTest" type="Node2D"]
@@ -15,19 +16,20 @@ level_name = "states test"
 tile_set = ExtResource( 6 )
 
 [node name="LevelLimiter" parent="." instance=ExtResource( 2 )]
+visible = false
 margin_top = -64.0
 margin_right = 832.0
 margin_bottom = 384.0
 background = ExtResource( 3 )
 
 [node name="Tiled Map" type="Node2D" parent="."]
-position = Vector2( -1040, -456 )
 script = ExtResource( 9 )
 __meta__ = {
 "_editor_description_": ""
 }
-tileset = ExtResource( 7 )
-tile_map_path = "C:/Users/zim21/Documents/Laputa/src/Level/LevelDesignTestDirt.json"
+tileset = ExtResource( 8 )
+terrain_tileset = ExtResource( 7 )
+tile_map_path = "C:/Users/zim21/Documents/Laputa/src/Level/LevelDesignTestTerrain.json"
 
 [node name="Props" type="Node2D" parent="."]
 position = Vector2( -32, 0 )

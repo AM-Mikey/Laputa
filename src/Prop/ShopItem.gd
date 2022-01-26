@@ -22,20 +22,20 @@ func _ready():
 	$MoneyNumber.value = price
 	$MoneyNumber.display_number()
 	
-	var item_path = "res://src/Item/KeyItem/%s" % item_name + ".tres"
+	var item_path = "res://src/Item/%s" % item_name + ".tres"
 	var item = load(item_path)
 	active_item = item
 	$Sprite.texture = item.texture
 	$AnimationPlayer.play("DisplayPrice")
 
-func _on_ShopKeyItem_body_entered(body):
+func _on_ShopItem_body_entered(body):
 	if used == false:
 		has_player_near = true
 		active_player = body
 		display_tooltip()
 		$AnimationPlayer.play("DisplayNoPrice")
 
-func _on_ShopKeyItem_body_exited(_body):
+func _on_ShopItem_body_exited(_body):
 	if used == false:
 		has_player_near = false
 		if active_tooltip != null:

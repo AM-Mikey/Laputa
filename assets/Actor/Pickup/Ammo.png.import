@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Experience.png-e1a1a8f8b7a4020dec04262ef48e8b0f.stex"
+path="res://.import/Ammo.png-0eb79cd164a6a1b6386e38a3ea7ac4bc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Item/Experience.png"
-dest_files=[ "res://.import/Experience.png-e1a1a8f8b7a4020dec04262ef48e8b0f.stex" ]
+source_file="res://assets/Actor/Pickup/Ammo.png"
+dest_files=[ "res://.import/Ammo.png-0eb79cd164a6a1b6386e38a3ea7ac4bc.stex" ]
 
 [params]
 

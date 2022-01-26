@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/UI/MoneyNumber.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Prop/ShopKeyItem.gd" type="Script" id=2]
-[ext_resource path="res://assets/Item/KeyItem/Necklace.png" type="Texture" id=3]
+[ext_resource path="res://src/Prop/ShopItem.gd" type="Script" id=2]
+[ext_resource path="res://assets/Item/Necklace.png" type="Texture" id=3]
 [ext_resource path="res://assets/SFX/Placeholder/snd_get_item.ogg" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -89,7 +89,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[node name="ShopKeyItem" type="Area2D"]
+[node name="ShopItem" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="MoneyNumber" parent="." instance=ExtResource( 1 )]
@@ -112,5 +112,5 @@ anims/Used = SubResource( 4 )
 stream = ExtResource( 4 )
 bus = "SFX"
 
-[connection signal="body_entered" from="." to="." method="_on_ShopKeyItem_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_ShopKeyItem_body_exited"]
+[connection signal="body_entered" from="." to="." method="_on_ShopItem_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_ShopItem_body_exited"]

@@ -4,9 +4,9 @@ class_name Enemy, "res://assets/Icon/EnemyIcon.png"
 #const DAMAGENUMBER = preload("res://src/Effect/DamageNumber.tscn")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
 const BLOOD = preload("res://src/Effect/EnemyBloodEffect.tscn")
-const HEART = preload("res://src/Item/Heart.tscn")
-const EXPERIENCE = preload("res://src/Item/Experience.tscn")
-const AMMO = preload("res://src/Item/Ammo.tscn")
+const HEART = preload("res://src/Actor/Pickup/Heart.tscn")
+const EXPERIENCE = preload("res://src/Actor/Pickup/Experience.tscn")
+const AMMO = preload("res://src/Actor/Pickup/Ammo.tscn")
 
 
 

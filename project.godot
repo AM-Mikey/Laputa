@@ -50,9 +50,9 @@ _global_script_classes=[ {
 "path": "res://src/Gun/Gun.gd"
 }, {
 "base": "Resource",
-"class": "KeyItem",
+"class": "Item",
 "language": "GDScript",
-"path": "res://src/Item/KeyItem/KeyItem.gd"
+"path": "res://src/Item/Item.gd"
 }, {
 "base": "Node2D",
 "class": "Movement",
@@ -103,7 +103,7 @@ _global_script_class_icons={
 "Enemy": "res://assets/Icon/EnemyIcon.png",
 "Fade": "",
 "Gun": "res://assets/Icon/GunIcon.png",
-"KeyItem": "res://assets/Icon/KeyItemIcon.png",
+"Item": "res://assets/Icon/ItemIcon.png",
 "Movement": "",
 "NPC": "res://assets/Icon/NPCIcon.png",
 "Prop": "res://assets/Icon/PropIcon.png",
