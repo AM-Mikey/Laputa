@@ -16,14 +16,63 @@ export(NodePath) var buttons
 onready var p_button = get_node(buttons)
 export(NodePath) var focus
 export(NodePath) var preset_path
-onready var preset = get_node(preset_path)
 
 onready var world = get_tree().get_root().get_node("World")
 
+var preset_classic = {
+	"jump": KEY_X,
+	"fire_manual": KEY_C,
+	"fire_automatic": KEY_Z,
+	"move_left": KEY_LEFT,
+	"move_right": KEY_RIGHT,
+	"look_up": KEY_UP,
+	"look_down": KEY_DOWN,
+	"ui_accept": KEY_X,
+	"ui_cancel": KEY_C,
+	"inspect": KEY_DOWN,
+	"inventory": KEY_Q,
+	"gun_left": KEY_A,
+	"gun_right": KEY_S,
+	"pause": KEY_ESCAPE,
+}
+
+var preset_mouse = {
+	"jump": KEY_SPACE,
+	"fire_manual": BUTTON_LEFT,
+	"fire_automatic": BUTTON_RIGHT,
+	"move_left": KEY_A,
+	"move_right": KEY_D,
+	"look_up": KEY_W,
+	"look_down": KEY_S,
+	"ui_accept": KEY_E,
+	"ui_cancel": KEY_Q,
+	"inspect": KEY_E,
+	"inventory": KEY_TAB,
+	"gun_left": BUTTON_WHEEL_DOWN,
+	"gun_right": BUTTON_WHEEL_UP,
+	"pause": KEY_ESCAPE,
+}
+
+var preset_onehand = {
+	"jump": KEY_SHIFT,
+	"fire_manual": KEY_SPACE,
+	"fire_automatic": KEY_ALT,
+	"move_left": KEY_A,
+	"move_right": KEY_D,
+	"look_up": KEY_W,
+	"look_down": KEY_S,
+	"ui_accept": KEY_SPACE,
+	"ui_cancel": KEY_ESCAPE,
+	"inspect": KEY_S,
+	"inventory": KEY_TAB,
+	"gun_left": KEY_Q,
+	"gun_right": KEY_E,
+	"pause": KEY_ESCAPE,
+}
 
 
 func _ready():
-	preset.select(0)
+	get_node(preset_path).select(0)
 	var buttons_normal = []
 	
 	for c in p_button.get_children():
@@ -33,7 +82,7 @@ func _ready():
 				buttons_normal.append(s)
 
 	for b in buttons_normal:
-		b.connect("pressed", self, "_mark_button_normal", [b.get_parent().name])
+		b.connect("pressed", self, "_mark_button", [b.get_parent().name])
 		actions.append(b.get_parent().name)
 
 	_set_keys()
@@ -92,7 +141,7 @@ func _get_first_valid_input(j):
 
 
 
-func _mark_button_normal(string):
+func _mark_button(string):
 	if button_ignore:
 		button_ignore = false
 		
@@ -127,7 +176,7 @@ func _input(event):
 
 
 func _change_key(new_key):
-	preset.select(0)
+	get_node(preset_path).select(0)
 	
 	#Delete key of pressed button
 	if !InputMap.get_action_list(action_string).empty():
@@ -202,7 +251,6 @@ func load_input_map():
 		if file_read == OK:
 			var text = file.get_as_text()
 			data = JSON.parse(text).result
-			#data = file.get_var()
 			file.close()
 			
 			for a in data.keys():
@@ -226,14 +274,57 @@ func load_input_map():
 		printerr("ERROR: could not load input map data")
 
 
-func _on_ItemList_item_selected(index):
-	preset.select(active_preset)
+func _on_preset_selected(index):
+	get_node(preset_path).select(active_preset)
 	if index != 0:
 		active_preset = index
 		$ConfirmationDialog.popup()
 
 func _on_ConfirmationDialog_confirmed():
-	preset.select(active_preset)
+	get_node(preset_path).select(active_preset)
+	match active_preset:
+		1: set_preset(preset_classic)
+		2: set_preset(preset_mouse)
+		3: set_preset(preset_onehand)
+
+func set_preset(preset):
+	for k in preset.keys():
+		#Delete key of pressed button
+		if !InputMap.get_action_list(k).empty():
+			var old_input = _get_first_valid_input(k)
+			if old_input:
+				InputMap.action_erase_event(k, old_input)
+
+		#Add new key
+		var new_input
+		if preset[k] <= 10: #TODO: not a great way to determine if a key enum is a key or mouse
+			new_input = InputEventMouseButton.new()
+			new_input.button_index = preset[k]
+		else:
+			new_input = InputEventKey.new()
+			new_input.scancode = preset[k]
+		InputMap.action_add_event(k, new_input)
+	
+
+		#Alias action
+		var alias_action_string
+		match k:
+			"move_left": alias_action_string = "ui_left"
+			"move_right": alias_action_string = "ui_right"
+			"look_up": alias_action_string = "ui_up"
+			"look_down": alias_action_string = "ui_down"
+			
+		if alias_action_string:
+			if !InputMap.get_action_list(alias_action_string).empty():
+				var old_input = _get_first_valid_input(alias_action_string)
+				if old_input:
+					InputMap.action_erase_event(alias_action_string, old_input)
+			InputMap.action_add_event(alias_action_string, new_input)
+	
+	
+	save_input_map()
+	_set_keys()
+
 
 
 func _on_Return_pressed():

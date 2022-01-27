@@ -1,6 +1,6 @@
 extends Control
 
-onready var pc = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node("World/Juniper")
 onready var hud = get_parent().get_node("HUD")
 onready var items = $MarginContainer/VBoxContainer/Items/ItemList
 onready var weapon_wheel = $MarginContainer/VBoxContainer/Weapons/MarginContainer/WeaponWheel

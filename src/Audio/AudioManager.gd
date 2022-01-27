@@ -33,6 +33,7 @@ export var sfx_dict: Dictionary = {
 	"gun_grenade": preload("res://assets/SFX/Placeholder/snd_expl_small.ogg"),
 
 	"get_hp": preload("res://assets/SFX/Placeholder/snd_health_refill.ogg"),
+	"xp": preload("res://assets/SFX/Placeholder/snd_xp_bounce.ogg"),
 	"get_xp": preload("res://assets/SFX/Placeholder/snd_get_xp.ogg"),
 	"get_ammo": preload("res://assets/SFX/Placeholder/snd_get_missile.ogg"),
 	

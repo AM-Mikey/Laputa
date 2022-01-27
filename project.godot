@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Item/Item.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Juniper",
+"language": "GDScript",
+"path": "res://src/Actor/Player/Juniper.gd"
+}, {
 "base": "Node2D",
 "class": "Movement",
 "language": "GDScript",
@@ -68,11 +73,6 @@ _global_script_classes=[ {
 "class": "Prop",
 "language": "GDScript",
 "path": "res://src/Prop/Prop.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "Recruit",
-"language": "GDScript",
-"path": "res://src/Actor/Player/Recruit.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -104,10 +104,10 @@ _global_script_class_icons={
 "Fade": "",
 "Gun": "res://assets/Icon/GunIcon.png",
 "Item": "res://assets/Icon/ItemIcon.png",
+"Juniper": "res://assets/Icon/PlayerIcon.png",
 "Movement": "",
 "NPC": "res://assets/Icon/NPCIcon.png",
 "Prop": "res://assets/Icon/PropIcon.png",
-"Recruit": "res://assets/Icon/PlayerIcon.png",
 "State": "",
 "TilesetProperties": "",
 "Trigger": "res://assets/Icon/TriggerIcon.png",
@@ -171,6 +171,7 @@ config/icon="res://assets/UI/Face/Recruit.png"
 [autoload]
 
 am="*res://src/Audio/AudioManager.gd"
+DebugHotkeys="*res://src/Utility/DebugHotkeys.gd"
 
 [display]
 

@@ -1,6 +1,6 @@
 extends Node
 
-onready var camera = get_tree().get_root().get_node("World/Recruit/PlayerCamera")
+onready var camera = get_tree().get_root().get_node("World/Juniper/PlayerCamera")
 
 signal limit_camera(left, right, top, bottom)
 

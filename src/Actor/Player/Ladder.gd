@@ -2,7 +2,7 @@ extends Node
 
 
 onready var world = get_tree().get_root().get_node("World")
-onready var pc = world.get_node("Recruit")
+onready var pc = world.get_node("Juniper")
 onready var mm = pc.get_node("MovementManager")
 onready var gm = pc.get_node("GunManager")
 

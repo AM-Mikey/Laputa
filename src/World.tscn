@@ -10,7 +10,7 @@ __meta__ = {
 }
 development_stage = "alpha"
 release_version = "1.7"
-should_skip_title = true
+skip_title = true
 start_level = ExtResource( 1 )
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]

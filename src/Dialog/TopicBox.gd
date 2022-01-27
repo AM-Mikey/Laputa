@@ -14,7 +14,7 @@ onready var button_path = $Margin/HBox/ScrollContainer/GridContainer
 onready var face_sprite = $Margin/HBox/Face/Sprite
 
 onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node("World/Juniper")
 
 func _ready():
 	$Tween.interpolate_property(self, "margin_bottom", 0, 64, 0.8, Tween.EASE_IN_OUT, Tween.TRANS_SINE)

@@ -3,7 +3,7 @@ extends Node
 enum Layer {BACK, FRONT, BOTH}
 
 
-onready var pc = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node("World/Juniper")
 onready var mm = pc.get_node("MovementManager")
 onready var ap = pc.get_node("AnimationPlayer")
 

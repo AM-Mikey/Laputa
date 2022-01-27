@@ -16,7 +16,7 @@ var origin = Vector2.ZERO
 
 var rng = RandomNumberGenerator.new()
 
-onready var pc = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node("World/Juniper")
 
 func _ready():
 	rng.randomize()

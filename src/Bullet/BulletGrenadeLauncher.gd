@@ -24,7 +24,7 @@ func _ready():
 	$ExplosionDetector.set_collision_mask_bit(1, false) #enemy
 	$ExplosionDetector.set_collision_mask_bit(8, false) #destructable
 	
-	var player = get_tree().get_root().get_node("World/Recruit")
+	var player = get_tree().get_root().get_node("World/Juniper")
 	player_on_floor = player.is_on_floor()
 	player_held_down = Input.is_action_pressed("look_down")
 	

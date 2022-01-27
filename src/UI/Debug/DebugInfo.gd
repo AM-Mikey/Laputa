@@ -7,8 +7,8 @@ func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 	
-	if is_instance_valid(world.get_node("Recruit")):
-		var pc = world.get_node("Recruit")
+	if is_instance_valid(world.get_node("Juniper")):
+		var pc = world.get_node("Juniper")
 		pc.connect("guns_updated", self, "on_guns_updated")
 		am.connect("players_updated", self, "on_audio_players_updated")
 		on_guns_updated(pc.guns.get_children())
@@ -26,8 +26,8 @@ func _physics_process(_delta):
 	$VBox/General/Screen.text = str(OS.get_window_size().x) + "x" + str(OS.get_window_size().y)
 	
 	
-	if is_instance_valid(world.get_node("Recruit")):
-		var pc = world.get_node("Recruit")
+	if is_instance_valid(world.get_node("Juniper")):
+		var pc = world.get_node("Juniper")
 		var mm = pc.get_node("MovementManager")
 		var active_gun = null
 		if pc.guns.get_child(0) != null:

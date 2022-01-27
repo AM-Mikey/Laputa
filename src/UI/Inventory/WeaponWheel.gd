@@ -13,7 +13,7 @@ onready var tween = get_parent().get_parent().get_node("Tween")
 onready var timer = get_parent().get_parent().get_node("CycleDelay")
 onready var timer_half = get_parent().get_parent().get_node("HalfCycle")
 
-onready var pc = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node("World/Juniper")
 
 onready var inventory = get_tree().get_root().get_node("World/UILayer/Inventory")
 

@@ -1,7 +1,7 @@
 extends NPC
 
 ##onready var md = get_tree().get_root().get_node("World/UILayer/MoneyDisplay")
-#onready var player = get_tree().get_root().get_node("World/Recruit")
+#onready var player = get_tree().get_root().get_node("World/Juniper")
 #
 #func _ready():
 ##	md.get_node("MoneyNumber").value = player.total_xp

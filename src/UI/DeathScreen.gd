@@ -1,12 +1,12 @@
 extends MarginContainer
 
-const RECRUIT = preload("res://src/Actor/Player/Recruit.tscn")
+const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const TITLESCREEN = preload("res://src/UI/TitleScreen.tscn")
 
 
 onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node("World/Juniper")
 onready var hud = get_tree().get_root().get_node("World/UILayer/HUD")
 
 func _ready():
@@ -32,7 +32,7 @@ func _on_Continue_pressed():
 	visible = false
 	
 	
-	world.add_child(RECRUIT.instance())
+	world.add_child(JUNIPER.instance())
 	world.get_node("UILayer").add_child(HUD.instance())
 	
 	world.load_player_data_from_save()

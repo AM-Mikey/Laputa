@@ -2,7 +2,7 @@ extends Control
 
 const LEVELSELECT = preload("res://src/UI/LevelSelect/LevelSelect.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
-const RECRUIT = preload("res://src/Actor/Player/Recruit.tscn")
+const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 
 onready var w = get_tree().get_root().get_node("World")
@@ -35,18 +35,18 @@ func _on_new():
 	queue_free()
 	
 	w.on_level_change(w.start_level, 0)
-	w.add_child(RECRUIT.instance())
+	w.add_child(JUNIPER.instance())
 	w.get_node("UILayer").add_child(HUD.instance())
 	
 	var spawn_points = get_tree().get_nodes_in_group("SpawnPoints")
 	for s in spawn_points:
-		w.get_node("Recruit").position = s.global_position
+		w.get_node("Juniper").position = s.global_position
 
 
 func _on_load():
 	queue_free()
 	
-	w.add_child(RECRUIT.instance())
+	w.add_child(JUNIPER.instance())
 	w.get_node("UILayer").add_child(HUD.instance())
 	w.read_player_data_from_save()
 	w.read_level_data_from_save()

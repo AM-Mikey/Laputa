@@ -3,7 +3,7 @@ extends Control
 var animation = "IrisContract"
 
 onready var world = get_tree().get_root().get_node("World")
-onready var pc = world.get_node("Recruit")
+onready var pc = world.get_node("Juniper")
 
 func _ready():
 		print("playing in animation")

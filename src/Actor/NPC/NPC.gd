@@ -24,7 +24,7 @@ var branch: String = ""
 var camera_forgiveness = 16
 
 #onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_tree().get_root().get_node_or_null("World/Recruit")
+onready var pc = get_tree().get_root().get_node_or_null("World/Juniper")
 
 func _ready():
 	add_to_group("NPCs")
@@ -95,7 +95,7 @@ func on_dialog_finished():
 
 func check_within_camera() -> bool:
 	if pc:
-		pc = get_tree().get_root().get_node_or_null("World/Recruit")
+		pc = get_tree().get_root().get_node_or_null("World/Juniper")
 	var cam_pos = pc.get_node("PlayerCamera").get_camera_screen_center() #gets ONLY the player camera center with offset
 	if cam_pos:
 		return is_within_camera(cam_pos)

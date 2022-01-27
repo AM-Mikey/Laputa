@@ -7,7 +7,7 @@ var select_sound = load("res://assets/SFX/snd_menu_select.ogg")
 var connected_npc: Node
 
 onready var sb = $SyndiBox
-onready var player = get_tree().get_root().get_node("World/Recruit")
+onready var player = get_tree().get_root().get_node("World/Juniper")
 
 
 func _on_display_text(npc_path, display_name, face, expression, text, justify, voiced):

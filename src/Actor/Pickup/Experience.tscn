@@ -1,14 +1,16 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/Actor/Pickup/Experience.gd" type="Script" id=1]
 [ext_resource path="res://assets/Actor/Pickup/Experience.png" type="Texture" id=2]
-[ext_resource path="res://assets/SFX/Placeholder/snd_xp_bounce.ogg" type="AudioStream" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5, 5 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5, 5 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "MediumLeft"
@@ -38,9 +40,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [ SubResource( 1 ) ]
 }
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 5, 5 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "MediumPop"
@@ -233,13 +232,13 @@ script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -8 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
-[node name="PlayerDetector" type="Area2D" parent="."]
+[node name="CollectArea" type="Area2D" parent="."]
 collision_layer = 2048
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
 modulate = Color( 0.360784, 0.901961, 0.172549, 0.639216 )
 position = Vector2( 0, -8 )
 shape = SubResource( 2 )
@@ -249,11 +248,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
 hframes = 5
 vframes = 3
-frame = 5
-
-[node name="Bounce2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
-bus = "SFX"
+frame = 9
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/MediumLeft = SubResource( 3 )
@@ -268,11 +263,8 @@ anims/Flash = SubResource( 13 )
 anims/Steady = SubResource( 14 )
 
 [node name="DecayTimer" type="Timer" parent="."]
-wait_time = 4.0
-one_shot = true
 
 [node name="PopTimer" type="Timer" parent="."]
-one_shot = true
 
 [connection signal="timeout" from="DecayTimer" to="." method="_on_DecayTimer_timeout"]
 [connection signal="timeout" from="PopTimer" to="." method="_on_PopTimer_timeout"]

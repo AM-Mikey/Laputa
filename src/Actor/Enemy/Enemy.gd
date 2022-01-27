@@ -32,7 +32,7 @@ var ammo_chance = 1
 var camera_forgiveness_distance = 64
 var free_counter = 0
 
-onready var player_actor = get_tree().get_root().get_node_or_null("World/Recruit")
+onready var player_actor = get_tree().get_root().get_node_or_null("World/Juniper")
 
 
 
@@ -116,7 +116,7 @@ func die():
 		$DamagenumTimer.stop()
 		_on_DamagenumTimer_timeout()
 		if player_actor == null:
-			player_actor = get_tree().get_root().get_node_or_null("World/Recruit")
+			player_actor = get_tree().get_root().get_node_or_null("World/Juniper")
 			player_actor.enemies_touched.erase(self)
 		
 		var explosion = EXPLOSION.instance()

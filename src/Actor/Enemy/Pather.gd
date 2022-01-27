@@ -14,7 +14,7 @@ var t_body = null
 var t_dir = null
 
 
-onready var pc = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node("World/Juniper")
 
 func _ready():
 	hp = 4

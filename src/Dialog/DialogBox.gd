@@ -32,7 +32,7 @@ onready var audio = $AudioStreamPlayer
 
 
 onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node("World/Juniper")
 
 func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")

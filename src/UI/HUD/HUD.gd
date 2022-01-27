@@ -4,7 +4,7 @@ const GUNICON = preload("res://src/UI/HUD/GunIcon.tscn")
 const AMMOCOUNT = preload("res://src/UI/HUD/AmmoCount.tscn")
 
 
-#onready var p = get_tree().get_root().get_node("World/Recruit")
+#onready var p = get_tree().get_root().get_node("World/Juniper")
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
@@ -12,8 +12,8 @@ func _ready():
 	on_viewport_size_changed()
 	
 	
-	if world.has_node("Recruit"):
-		var pc = world.get_node("Recruit")
+	if world.has_node("Juniper"):
+		var pc = world.get_node("Juniper")
 		pc.connect("hp_updated", self, "update_hp")
 		pc.connect("guns_updated", self, "update_guns")
 		pc.connect("total_xp_updated", self, "update_total_xp")
@@ -22,8 +22,8 @@ func _ready():
 
 func _process(_delta):
 	$HpBar/HpLost/HpLostCap.position.x = 38 * $HpBar/HpLost.value / $HpBar/HpLost.max_value
-	if world.has_node("Recruit"):
-		var pc = world.get_node("Recruit")
+	if world.has_node("Juniper"):
+		var pc = world.get_node("Juniper")
 		if pc.guns.get_child(0) != null: #TODO: make this independant
 			$CooldownBar/TextureProgress.visible = true
 			$CooldownBar/TextureProgress.value = 100 - ((pc.get_node("GunManager/CooldownTimer").time_left / pc.guns.get_child(0).cooldown_time) * 100)

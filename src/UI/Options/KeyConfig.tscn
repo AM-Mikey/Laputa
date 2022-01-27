@@ -420,7 +420,7 @@ margin_right = 128.0
 margin_bottom = 208.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_vertical = 3
-items = [ "Custom", ExtResource( 4 ), false, "Classic", ExtResource( 3 ), false, "Mouse", ExtResource( 2 ), false ]
+items = [ "Custom", ExtResource( 4 ), false, "Classic", ExtResource( 3 ), false, "Mouse", ExtResource( 2 ), false, "Left Hand (Keys)", null, false ]
 same_column_width = true
 icon_mode = 0
 
@@ -489,7 +489,7 @@ window_title = ""
 dialog_text = "Load Preset?
 (All controls will be erased)"
 
-[connection signal="item_selected" from="Margin/HBox/Presets/ItemList" to="." method="_on_ItemList_item_selected"]
+[connection signal="item_selected" from="Margin/HBox/Presets/ItemList" to="." method="_on_preset_selected"]
 [connection signal="pressed" from="Corner/Margin/HBox/Return" to="." method="_on_Return_pressed"]
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
 [connection signal="popup_hide" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_popup_hide"]

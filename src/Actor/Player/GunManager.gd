@@ -6,7 +6,7 @@ const LEVELDOWN = preload("res://src/Effect/LevelDown.tscn")
 var disabled = false
 
 onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node("World/Juniper")
 
 
 func _input(event):

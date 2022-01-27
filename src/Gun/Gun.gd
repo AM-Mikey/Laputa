@@ -27,7 +27,7 @@ export var level: int = 1
 var trigger_held = false
 
 onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node("World/Juniper")
 onready var cd = pc.get_node("GunManager/CooldownTimer")
 
 

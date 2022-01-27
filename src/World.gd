@@ -1,13 +1,13 @@
 extends Node2D
 
-const DEBUG_INFO = preload("res://src/UI/Debug/DebugInfo.tscn")
+#const DEBUG_INFO = preload("res://src/UI/Debug/DebugInfo.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const INVENTORY = preload("res://src/UI/Inventory/Inventory.tscn")
 const LEVEL_TEXT = preload("res://src/UI/LevelText.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 const PAUSEMENU = preload("res://src/UI/PauseMenu/PauseMenu.tscn")
-const POPUP = preload("res://src/UI/PopupText.tscn")
-const RECRUIT = preload("res://src/Actor/Player/Recruit.tscn")
+#const POPUP = preload("res://src/UI/PopupText.tscn")
+const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
 const TITLE = preload("res://src/UI/TitleScreen.tscn")
 const TITLECAM = preload("res://src/Utility/TitleCam.tscn")
 
@@ -25,7 +25,7 @@ export var development_stage: String = "Alpha"
 var internal_version: String = get_internal_version()
 export var release_version: String
 export var is_release = false
-export var should_skip_title = false
+export var skip_title = false
 export var visible_triggers = false
 export var show_state_labels = false ###############################################
 
@@ -40,7 +40,7 @@ func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 	
-	if not should_skip_title:
+	if not skip_title:
 		$UILayer.add_child(TITLE.instance())
 		add_child(TITLECAM.instance())
 		add_child(current_level)
@@ -80,47 +80,17 @@ func get_internal_version() -> String:
 
 func skip_title():
 	on_level_change(start_level, 0)
-	add_child(RECRUIT.instance())
+	add_child(JUNIPER.instance())
 	get_node("UILayer").add_child(HUD.instance())
 
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
-		$Recruit.position = s.global_position
+		$Juniper.position = s.global_position
 		print("moved player")
 
 
 func _input(event):
-	if Input.is_action_just_pressed("debug_print"):
-		debug_print()
-	
-	if event.is_action_pressed("debug_reload"):
-		reload_level()
-	
-	if event.is_action_pressed("debug_triggers"):
-		visible_triggers = !visible_triggers
-		for v in get_tree().get_nodes_in_group("TriggerVisuals"):
-			v.visible = visible_triggers
-	
-	if event.is_action_pressed("debug_quit"):
-		get_tree().quit()
-	
-	if event.is_action_pressed("debug_save"):
-		var popup = POPUP.instance()
-		popup.text = "quicksaved..."
-		$UILayer.add_child(popup)
-		write_level_data_to_temp()
-		write_player_data_to_save()
-		copy_level_data_from_temp_to_save()
-	
-	if event.is_action_pressed("debug_load"):
-		var popup = POPUP.instance()
-		popup.text = "loaded save"
-		$UILayer.add_child(popup)
-		read_player_data_from_save()
-		read_level_data_from_save()
-		copy_level_data_from_save_to_temp()
-	
-	if event.is_action_pressed("inventory") and has_node("Recruit"):
-		if not $UILayer.has_node("Inventory") and not get_tree().paused and not $Recruit.disabled:
+	if event.is_action_pressed("inventory") and has_node("Juniper"):
+		if not $UILayer.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled:
 			get_tree().paused = true
 			$UILayer/HUD.visible = false
 			var inventory = INVENTORY.instance()
@@ -154,14 +124,14 @@ func on_level_change(level, door_index):
 	var level_path = current_level.filename
 	current_level.queue_free()
 	
-	yield(get_tree(), 'idle_frame') #this gives time for recruit to spawn. probably not neccesary
+	yield(get_tree(), 'idle_frame') #this gives time for juniper to spawn. probably not neccesary
 	var next_level = level.instance()
 	add_child(next_level)
 	
 	if next_level.level_type == next_level.LevelType.NORMAL:#############################################################
-		if has_node("Recruit"):
-			$Recruit/PlayerCamera.smoothing_enabled = false
-			$Recruit/PlayerCamera.current = not next_level.has_node("LevelCamera") #turn off camera if level has one already
+		if has_node("Juniper"):
+			$Juniper/PlayerCamera.smoothing_enabled = false
+			$Juniper/PlayerCamera.current = not next_level.has_node("LevelCamera") #turn off camera if level has one already
 			
 
 		
@@ -173,11 +143,11 @@ func on_level_change(level, door_index):
 		for t in triggers:
 			if t.level == level_path:
 				if t.is_in_group("LoadZones"):
-					$Recruit.position = t.position + (t.direction * -32)
+					$Juniper.position = t.position + (t.direction * -32)
 					print("found a connected zone")
 					doors_found += 1
 				else:
-					$Recruit.position = t.position
+					$Juniper.position = t.position
 					print("found a connected door")
 					doors_found += 1
 			
@@ -189,11 +159,11 @@ func on_level_change(level, door_index):
 			for t in triggers:
 				if t.level == level_path and t.door_index == door_index:
 					if t.is_in_group("LoadZones"):
-						$Recruit.position = t.position + (t.direction * -32)
+						$Juniper.position = t.position + (t.direction * -32)
 						print("got correct zone")
 						doors_found += 1
 					else:
-						$Recruit.position = t.position
+						$Juniper.position = t.position
 						print("got correct door")
 						doors_found += 1
 			
@@ -210,18 +180,18 @@ func on_level_change(level, door_index):
 			yield(get_tree().create_timer(0.8), "timeout")
 			$UILayer/TransitionWipe.play_out_animation()
 			already_enabled = true
-			$Recruit.enable()
+			$Juniper.enable()
 
 		#DOORS
 		elif $UILayer.has_node("TransitionIris"):
 			yield(get_tree().create_timer(0.4), "timeout")
 			$UILayer/TransitionIris.play_out_animation()
 			already_enabled = true
-			$Recruit.enable()
+			$Juniper.enable()
 
 		######
 		if not already_enabled:
-			$Recruit.enable()
+			$Juniper.enable()
 			
 		if $UILayer.has_node("LevelText"):
 			$UILayer/LevelText.free()
@@ -232,14 +202,14 @@ func on_level_change(level, door_index):
 
 		#enable smoothing after a bit
 		yield(get_tree().create_timer(0.01), "timeout")
-		$Recruit/PlayerCamera.smoothing_enabled = true
+		$Juniper/PlayerCamera.smoothing_enabled = true
 		
 		
 
 	
 	if next_level.level_type == next_level.LevelType.PLAYERLESS_CUTSCENE:#############################################
-		#TODO: right now recruit isn't unloaded between levels unless we're using level buttons or starting
-		$Recruit.queue_free()
+		#TODO: right now juniper isn't unloaded between levels unless we're using level buttons or starting
+		$Juniper.queue_free()
 		$UILayer/HUD.queue_free()
 		
 	
@@ -253,7 +223,7 @@ func on_level_change(level, door_index):
 	
 	
 func write_player_data_to_save():
-	var pc = $Recruit
+	var pc = $Juniper
 	var guns = pc.guns
 	var gun_data = {}
 	
@@ -280,13 +250,13 @@ func write_player_data_to_save():
 
 
 func read_player_data_from_save():
-	var pc = $Recruit
+	var pc = $Juniper
 	var guns = pc.guns
 	
 	var scoped_data = read_from_file(save_path)
 	var player_data = scoped_data["player_data"]
 	
-	on_level_change(player_data["current_level"], null)
+	on_level_change(load(player_data["current_level"]), null)
 	yield(get_tree(), "idle_frame")
 	
 	pc.position = player_data["position"]
@@ -300,20 +270,20 @@ func read_player_data_from_save():
 		g.free()
 		
 	for d in player_data["gun_data"]:
-		var gun_scene = load("res://src/Gun/%s" %d + ".tres")
+		var gun_scene = load("res://src/Gun/%s" %d + ".tscn")
 		if gun_scene == null:
-			printerr("ERROR: cannot find gun scene at: res://src/Gun/%s" %d + ".tres")
+			printerr("ERROR: cannot find gun scene at: res://src/Gun/%s" %d + ".tscn")
 			return
-		guns.add_child(gun_scene.isntance())
+		guns.add_child(gun_scene.instance())
 
 	for g in guns.get_children():
-		g.level = player_data["gun_data"][g.resource_name]["level"]
-		g.xp = player_data["gun_data"][g.resource_name]["xp"]
+		g.level = player_data["gun_data"][g.name]["level"]
+		g.xp = player_data["gun_data"][g.name]["xp"]
 		if g.max_ammo != 0:
-			g.ammo = player_data["gun_data"][g.resource_name]["ammo"]
+			g.ammo = player_data["gun_data"][g.name]["ammo"]
 	
 	pc.emit_signal("hp_updated", pc.hp, pc.max_hp)
-	pc.emit_signal("guns_updated", guns.get_children)
+	pc.emit_signal("guns_updated", guns.get_children())
 	pc.update_inventory()
 			
 	print("player data loaded")
@@ -466,32 +436,6 @@ func clear_spawn_layers():
 func clear_bg_layer():
 	for c in $BackgroundLayer.get_children():
 		c.free()
-
-func debug_print():
-	if not $UILayer.has_node("DebugInfo"):
-		var debug_info = DEBUG_INFO.instance()
-		$UILayer.add_child(debug_info)
-	else:
-		$UILayer/DebugInfo.queue_free()
-
-func reload_level():
-	$Recruit.free() #we free and respawn them so we have a clean slate when we load in
-	$UILayer/HUD.free()
-	
-	on_level_change(load(current_level.filename), 0)
-	
-#	if has_node("UILayer/TitleScreen"):
-#		$UILayer/TitleScreen.queue_free()
-	if has_node("UILayer/PauseMenu"):
-		$UILayer/PauseMenu.unpause()
-
-	add_child(RECRUIT.instance())
-	$UILayer.add_child(HUD.instance())
-	
-	yield(get_tree(), "idle_frame")
-	
-	for s in get_tree().get_nodes_in_group("SpawnPoints"):
-		$Recruit.global_position = s.global_position
 
 
 func on_viewport_size_changed():
