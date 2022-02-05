@@ -1,4 +1,8 @@
+tool
 extends Enemy
+
+var tx_toad = preload("res://assets/Actor/Enemy/Toad.png")
+var tx_frog = preload("res://assets/Actor/Enemy/Frog.png")
 
 var target = null
 
@@ -6,16 +10,44 @@ var jump_delay = 3
 var move_dir = Vector2.ZERO
 var look_dir = Vector2.LEFT
 
+enum Difficulty {easy, normal, hard}
+export(Difficulty) var difficulty = Difficulty.normal setget _on_difficulty_changed
+
 func _ready():
-	hp = 4
-	damage_on_contact = 2
-	speed = Vector2(12, 120)
 	gravity = 200
-	
-	level = 2
+
+
+func _on_difficulty_changed(new):
+	difficulty = new
+	match difficulty:
+		
+		Difficulty.hard:
+			hp = 4
+			level = 3
+			damage_on_contact = 2
+			$Sprite.modulate = Color(1,1,1)
+			$Sprite.texture = tx_toad
+			speed = Vector2(60, 120)
+		
+		Difficulty.normal:
+			hp = 4
+			level = 2
+			damage_on_contact = 2
+			$Sprite.modulate = Color(1,1,1)
+			$Sprite.texture = tx_frog
+			speed = Vector2(12, 120)
+		
+		Difficulty.easy:
+			hp = 2
+			level = 1
+			damage_on_contact = 1
+			$Sprite.modulate = Color(0, 0.976471, 1)
+			$Sprite.texture = tx_frog
+			speed = Vector2(12, 120)
+
 
 func _physics_process(_delta):
-	if not dead and not disabled:
+	if not dead and not disabled and not Engine.editor_hint:
 		if not is_on_floor():
 			move_dir.y = 0 #don't allow them to jump if they are midair
 		
@@ -26,7 +58,7 @@ func _physics_process(_delta):
 
 		if $Timer.time_left == 0 and target != null and is_on_floor():
 			$Timer.start(jump_delay)
-			$PosJump.play()
+			am.play_pos("enemy_jump", self)
 			move_dir = get_move_dir()
 			look_dir = Vector2(move_dir.x, 0)
 

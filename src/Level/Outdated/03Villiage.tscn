@@ -12,6 +12,7 @@
 [ext_resource path="res://src/Tile/Outdated/MimigaF.tres" type="TileSet" id=10]
 [ext_resource path="res://assets/Tile/AdobeTile.png" type="Texture" id=11]
 
+
 [sub_resource type="TileSet" id=1]
 0/name = "AdobeTile.png 0"
 0/texture = ExtResource( 11 )

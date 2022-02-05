@@ -1,6 +1,6 @@
 extends Control
 
-const RECRUIT = preload("res://src/Actor/Player/Recruit.tscn")
+const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 
 
@@ -20,24 +20,24 @@ func _ready():
 
 
 func _on_LevelButton_pressed():
-	if world.has_node("Recruit"):
-		world.get_node("Recruit").free() #we free and respawn them so we have a clean slate when we load in
+	if world.has_node("Juniper"):
+		world.get_node("Juniper").free() #we free and respawn them so we have a clean slate when we load in
 	if world.has_node("UILayer/HUD"):
 		world.get_node("UILayer/HUD").free()
 	
-	world.on_level_change(level, 0)
+	world.on_level_change(load(level), 0)
 	
 	if world.has_node("UILayer/TitleScreen"):
 		world.get_node("UILayer/TitleScreen").queue_free()
 	if world.has_node("UILayer/PauseMenu"):
 		world.get_node("UILayer/PauseMenu").unpause()
 
-	world.add_child(RECRUIT.instance())
+	world.add_child(JUNIPER.instance())
 	world.get_node("UILayer").add_child(HUD.instance())
 	
 	yield(get_tree(), "idle_frame")
 	
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
-		world.get_node("Recruit").global_position = s.global_position
+		world.get_node("Juniper").global_position = s.global_position
 	
 	world.get_node("UILayer/LevelSelect").queue_free()

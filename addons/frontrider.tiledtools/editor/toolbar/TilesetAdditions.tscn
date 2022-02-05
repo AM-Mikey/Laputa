@@ -1,0 +1,78 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/frontrider.tiledtools/editor/toolbar/TilesetAdditions.gd" type="Script" id=1]
+
+[node name="Control" type="Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuButton" type="MenuButton" parent="."]
+margin_right = 12.0
+margin_bottom = 20.0
+text = "Tiled Tools"
+items = [ "Export tileset to Tiled", null, 0, false, false, 0, 0, null, "", false, "Import tileset from Tiled", null, 0, false, false, 1, 0, null, "", false, "Node tools", null, 0, false, false, 3, 0, null, "", true, "Render map", null, 0, false, false, 4, 0, null, "", false, "Clear rendered map", null, 0, false, false, 2, 0, null, "", false ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ImportFileDialog" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -259.5
+margin_top = -164.5
+margin_right = 259.5
+margin_bottom = 164.5
+window_title = "Import Tiled Tileset"
+resizable = true
+mode_overrides_title = false
+mode = 0
+filters = PoolStringArray( "*.json" )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExportFileDialog" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.5
+margin_top = -181.5
+margin_right = 320.5
+margin_bottom = 181.5
+window_title = "Export tileset to tiled"
+resizable = true
+mode_overrides_title = false
+access = 2
+filters = PoolStringArray( "*.json" )
+show_hidden_files = true
+current_dir = "/"
+current_path = "/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tilesetImportError" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -174.5
+margin_top = -50.0
+margin_right = 174.5
+margin_bottom = 50.0
+window_title = "Error"
+dialog_text = "Tileset and it's image must be a part of the project!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="file_selected" from="ImportFileDialog" to="." method="_on_ImportFileDialog_file_selected"]
+[connection signal="file_selected" from="ExportFileDialog" to="." method="_on_ExportFileDialog_file_selected"]

@@ -16,6 +16,7 @@
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Tile/Outdated/Adobe.tres" type="TileSet" id=15]
 
+
 [node name="Village" type="Node2D"]
 script = ExtResource( 1 )
 __meta__ = {

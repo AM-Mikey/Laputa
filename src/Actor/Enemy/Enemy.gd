@@ -4,25 +4,25 @@ class_name Enemy, "res://assets/Icon/EnemyIcon.png"
 #const DAMAGENUMBER = preload("res://src/Effect/DamageNumber.tscn")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
 const BLOOD = preload("res://src/Effect/EnemyBloodEffect.tscn")
-const HEART = preload("res://src/Item/Heart.tscn")
-const EXPERIENCE = preload("res://src/Item/Experience.tscn")
-const AMMO = preload("res://src/Item/Ammo.tscn")
+const HEART = preload("res://src/Actor/Pickup/Heart.tscn")
+const EXPERIENCE = preload("res://src/Actor/Pickup/Experience.tscn")
+const AMMO = preload("res://src/Actor/Pickup/Ammo.tscn")
 
 
 
 var rng = RandomNumberGenerator.new()
 var disabled = false
 var protected = false
+export var debug = false
 
 var hp: int
 var damage_on_contact: int
 
 var damagenum = null
-#var timer = Timer.new()
 var damagenum_time: float = 0.5
 
 export var id: String
-export var level = 1
+var level = 1
 
 
 var heart_chance = 1
@@ -32,7 +32,7 @@ var ammo_chance = 1
 var camera_forgiveness_distance = 64
 var free_counter = 0
 
-onready var player_actor = get_tree().get_root().get_node_or_null("World/Recruit")
+onready var player_actor = get_tree().get_root().get_node_or_null("World/Juniper")
 
 
 
@@ -89,7 +89,7 @@ func hit(damage, blood_direction):
 	if hp <= 0:
 		die()
 	else:
-		$PosHurt.play()
+		am.play_pos("enemy_hurt", self) #TODO: different hit sounds per enemy
 
 
 func prepare_damagenum(damage):
@@ -116,7 +116,7 @@ func die():
 		$DamagenumTimer.stop()
 		_on_DamagenumTimer_timeout()
 		if player_actor == null:
-			player_actor = get_tree().get_root().get_node_or_null("World/Recruit")
+			player_actor = get_tree().get_root().get_node_or_null("World/Juniper")
 			player_actor.enemies_touched.erase(self)
 		
 		var explosion = EXPLOSION.instance()
@@ -134,7 +134,7 @@ func do_death_drop():
 	var ammo = AMMO.instance()
 	
 	var player_needs_ammo = false
-	for w in player_actor.weapon_array:
+	for w in player_actor.get_node("GunManager/Guns").get_children():
 		if w.ammo < w.max_ammo:
 			player_needs_ammo = true
 	

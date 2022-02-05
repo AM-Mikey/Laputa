@@ -50,4 +50,4 @@ func enter_door():
 	
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")
 	active_pc.inspecting = false
-	emit_signal("level_change", level, door_index)
+	emit_signal("level_change", load(level), door_index)

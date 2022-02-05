@@ -104,7 +104,7 @@ func fire():
 func prepare_bullet():
 	var bullet = HAIRBALL.instance()
 	bullet.damage = projectile_damage
-	bullet.projectile_speed = projectile_speed
+	bullet.speed = projectile_speed
 	
 	bullet.position = Vector2($CollisionShape2D.global_position.x, $CollisionShape2D.global_position.y - height_tolerance)
 	bullet.direction = Vector2(look_dir.x /2 , -1) #Adjust this for angle

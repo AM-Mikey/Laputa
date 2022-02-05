@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://assets/SFX/Placeholder/snd_polar_star_l1_2.ogg" type="AudioStream" id=1]
+[ext_resource path="res://src/Bullet/BulletRevolver1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/Gun/Revolver.png" type="Texture" id=3]
+[ext_resource path="res://assets/Gun/RevolverIcon.png" type="Texture" id=4]
+[ext_resource path="res://src/Gun/Weapon.gd" type="Script" id=5]
+
+[resource]
+resource_name = "Revolver1"
+script = ExtResource( 5 )
+display_name = "Revolver"
+description = "Your first weapon."
+texture = ExtResource( 3 )
+icon_texture = ExtResource( 4 )
+audio_stream = ExtResource( 1 )
+bullet_scene = ExtResource( 2 )
+damage = 1
+projectile_range = 60
+projectile_speed = 256
+cooldown_time = 0.1
+automatic = false
+needs_ammo = false
+ammo = 0
+max_ammo = 0
+xp = 0
+max_xp = 10
+level = 1
+max_level = 3

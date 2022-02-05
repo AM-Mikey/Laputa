@@ -42,6 +42,7 @@
 [ext_resource path="res://src/Tile/TriggerTile/LadderTrigger.tscn" type="PackedScene" id=40]
 
 
+
 [sub_resource type="TileSet" id=1]
 0/name = "Mimiga.png 0"
 0/texture = ExtResource( 14 )

@@ -7,10 +7,11 @@ func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 	
-	if is_instance_valid(world.get_node("Recruit")):
-		var pc = world.get_node("Recruit")
-		pc.connect("weapons_updated", self, "on_weapons_updated")
-		on_weapons_updated(pc.weapon_array)
+	if is_instance_valid(world.get_node("Juniper")):
+		var pc = world.get_node("Juniper")
+		pc.connect("guns_updated", self, "on_guns_updated")
+		am.connect("players_updated", self, "on_audio_players_updated")
+		on_guns_updated(pc.guns.get_children())
 	
 	if world.is_release:
 		$VBox/General/Label.text = "Laputa " + world.internal_version + " (" + world.release_version+ ")"
@@ -19,20 +20,24 @@ func _ready():
 
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	get_parent().move_child(self, get_parent().get_child_count() - 1)
 	$VBox/General/FPS.text = str(Engine.get_frames_per_second()) + " fps" 
 	$VBox/General/Screen.text = str(OS.get_window_size().x) + "x" + str(OS.get_window_size().y)
 	
 	
-	if is_instance_valid(world.get_node("Recruit")):
-		var pc = world.get_node("Recruit")
+	if is_instance_valid(world.get_node("Juniper")):
+		var pc = world.get_node("Juniper")
 		var mm = pc.get_node("MovementManager")
+		var active_gun = null
+		if pc.guns.get_child(0) != null:
+			active_gun = pc.guns.get_child(0) 
+		
 
 		$VBox/HBox/C1/A/HP.text = str("%2.f" % pc.hp) + "/" + str("%2.f" % pc.max_hp)
 		$VBox/HBox/C1/A/TotalXP.text = str(pc.total_xp)
-		$VBox/HBox/C1/A/WeaponXP.text = str("%2.f" % pc.weapon_array.front().xp) + "/" + str("%2.f" % pc.weapon_array.front().max_xp)
-		$VBox/HBox/C1/A/WeaponCooldown.text = str("%2.2f" % pc.get_node("WeaponManager/CooldownTimer").time_left)
+		$VBox/HBox/C1/A/WeaponXP.text = str("%2.f" % active_gun.xp) + "/" + str("%2.f" % active_gun.max_xp)
+		$VBox/HBox/C1/A/WeaponCooldown.text = str("%2.2f" % pc.get_node("GunManager/CooldownTimer").time_left)
 		
 		$VBox/HBox/C1/A/Velocity.text = str("%4.f" % mm.velocity.x) + "," + str("%4.f" % mm.velocity.y)
 		$VBox/HBox/C1/A/Speed.text = str("%4.f" % mm.speed.x) + "," + str("%4.f" % mm.speed.y)
@@ -63,15 +68,27 @@ func _physics_process(delta):
 
 
 
-func on_weapons_updated(weapon_array):
-	for c in $VBox/General/Arrays/Weapon.get_children():
+func on_guns_updated(guns):
+	var array = $VBox/General/Arrays/Guns
+	_clear_array(array)
+	for g in guns:
+		var label = Label.new()
+		label.text = g.name
+		array.add_child(label)
+
+func on_audio_players_updated():
+	var array = $VBox/General/Arrays/Sfx
+	_clear_array(array)
+	for p in am.sfx_queue:
+		var label = Label.new()
+		label.text = p
+		array.add_child(label)
+
+
+func _clear_array(array):
+	for c in array.get_children():
 		if c.name != "Label":
 			c.queue_free()
-	for w in weapon_array:
-		var label = Label.new()
-		label.text = w.resource_name
-		$VBox/General/Arrays/Weapon.add_child(label)
-
 
 
 func on_viewport_size_changed():

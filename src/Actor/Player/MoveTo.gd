@@ -7,7 +7,7 @@ var jump_type
 
 
 onready var world = get_tree().get_root().get_node("World")
-onready var pc = world.get_node("Recruit")
+onready var pc = world.get_node("Juniper")
 onready var mm = pc.get_node("MovementManager")
 
 func state_process():
@@ -26,7 +26,7 @@ func state_process():
 
 
 
-	mm.velocity = get_move_velocity(mm.velocity, pc.move_dir)
+	mm.velocity = get_move_velocity(mm.velocity)
 	var new_velocity = pc.move_and_slide_with_snap(mm.velocity, mm.snap_vector, mm.FLOOR_NORMAL, true)
 		
 	if pc.is_on_wall():
@@ -45,35 +45,13 @@ func state_process():
 
 
 
-
-func get_move_velocity(velocity, move_dir):
+func get_move_velocity(velocity):
 	var out = velocity
-#	var friction = false
-	
 
 	out.y += mm.gravity * get_physics_process_delta_time()
-
-#	if move_dir.x != 0:
 	out.x = min(abs(out.x) + mm.acceleration, mm.speed.x) * pc.move_dir.x
-#	else:
-#		friction = true
-#
-#
-#
-#
-#
-#	if friction:
-#		if pc.is_on_floor():
-#			out.x = lerp(out.x, 0, 1)
-#		else:
-#			out.x = lerp(out.x, 0, 1)
-#
-#
-#	if abs(out.x) < mm.min_x_velocity: #clamp velocity
-#		out.x = 0
-#
-	return out
 
+	return out
 
 
 

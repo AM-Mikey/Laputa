@@ -13,3 +13,5 @@ export var air_cof = 0.05
 
 var dead = false
 var is_in_water = false
+
+onready var world = get_tree().get_root().get_node("World")

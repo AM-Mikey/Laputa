@@ -1,419 +1,330 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=1]
+[ext_resource path="res://src/UI/Theme/InsetMenu.tres" type="Theme" id=1]
+[ext_resource path="res://src/UI/Options/ActionOption.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/StyleBox/SteelBeveledDark.tres" type="StyleBox" id=3]
+[ext_resource path="res://src/UI/StyleBox/SteelCorner.tres" type="StyleBox" id=4]
 [ext_resource path="res://src/UI/Options/ControllerConfig.gd" type="Script" id=5]
 [ext_resource path="res://assets/UI/Settings/ControllerConfig/FrontBack.png" type="Texture" id=6]
-[ext_resource path="res://assets/UI/Settings/ControllerConfig/CompassBack.png" type="Texture" id=7]
-[ext_resource path="res://assets/UI/Settings/ControllerConfig/FaceButton.png" type="Texture" id=8]
-[ext_resource path="res://assets/UI/Settings/ControllerConfig/Stick.png" type="Texture" id=9]
-[ext_resource path="res://assets/UI/Settings/ControllerConfig/CompassCrosshair.png" type="Texture" id=10]
-[ext_resource path="res://assets/UI/Settings/ControllerConfig/Bumper.png" type="Texture" id=11]
-[ext_resource path="res://assets/UI/Settings/ControllerConfig/ScrewRight.png" type="Texture" id=12]
-[ext_resource path="res://assets/UI/Settings/ControllerConfig/ScrewLeft.png" type="Texture" id=13]
+[ext_resource path="res://src/UI/StyleBox/SteelBeveled.tres" type="StyleBox" id=7]
 [ext_resource path="res://assets/UI/Settings/ControllerConfig/TopBack.png" type="Texture" id=14]
-[ext_resource path="res://assets/UI/Settings/ControllerConfig/Trigger.png" type="Texture" id=15]
-[ext_resource path="res://assets/UI/Settings/ControllerConfig/CompassFront.png" type="Texture" id=16]
 
 [node name="ControllerConfig" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = 2.0
 theme = ExtResource( 1 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Lines" type="Node2D" parent="."]
-visible = false
-position = Vector2( -21, -36 )
-
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="Panel" type="Panel" parent="."]
 margin_right = 480.0
-margin_bottom = 270.0
-follow_focus = true
+margin_bottom = 272.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 300.0
-margin_bottom = 260.0
+[node name="Margin" type="MarginContainer" parent="."]
+margin_right = 480.0
+margin_bottom = 272.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_right = 300.0
-margin_bottom = 224.0
-alignment = 1
-
-[node name="Left" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
-margin_right = 34.0
-margin_bottom = 224.0
-
-[node name="L2" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer/Left"]
-margin_right = 34.0
-margin_bottom = 32.0
-
-[node name="L1" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer/Left"]
-margin_top = 36.0
-margin_right = 34.0
-margin_bottom = 68.0
-
-[node name="Center" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
-margin_left = 38.0
-margin_right = 262.0
-margin_bottom = 224.0
-custom_constants/separation = 0
-
-[node name="Top" type="CenterContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center"]
-margin_right = 224.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 224, 80 )
-
-[node name="TopBack" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Top"]
-margin_right = 224.0
-margin_bottom = 80.0
+[node name="Top" type="TextureRect" parent="Margin"]
+margin_left = 252.0
+margin_top = 4.0
+margin_right = 476.0
+margin_bottom = 84.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
 texture = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="GridContainer" type="GridContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Top"]
-margin_left = 48.0
-margin_top = 18.0
-margin_right = 176.0
-margin_bottom = 62.0
-rect_min_size = Vector2( 0, 44 )
-columns = 2
-
-[node name="TriggerLeft" type="Control" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Top/GridContainer"]
-margin_right = 124.0
-margin_bottom = 26.0
-rect_min_size = Vector2( 124, 26 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Sprite" type="Sprite" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Top/GridContainer/TriggerLeft"]
-texture = ExtResource( 15 )
-hframes = 2
-
-[node name="TriggerRight" type="Control" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Top/GridContainer"]
-margin_left = 128.0
-margin_right = 128.0
-margin_bottom = 26.0
-grow_vertical = 0
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
-[node name="Sprite" type="Sprite" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Top/GridContainer/TriggerRight"]
-texture = ExtResource( 15 )
-hframes = 2
-
-[node name="BumperLeft" type="Control" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Top/GridContainer"]
-margin_top = 30.0
-margin_right = 124.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 124, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Sprite" type="Sprite" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Top/GridContainer/BumperLeft"]
-texture = ExtResource( 11 )
-hframes = 2
-
-[node name="BumperRight" type="Control" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Top/GridContainer"]
-margin_left = 128.0
-margin_top = 30.0
-margin_right = 128.0
-margin_bottom = 30.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Sprite" type="Sprite" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Top/GridContainer/BumperRight"]
-texture = ExtResource( 11 )
-hframes = 2
-
-[node name="Front" type="CenterContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center"]
-margin_top = 80.0
-margin_right = 224.0
-margin_bottom = 224.0
-
-[node name="FrontBack" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front"]
-margin_right = 224.0
-margin_bottom = 144.0
+[node name="Front" type="TextureRect" parent="Margin"]
+margin_left = 4.0
+margin_top = 124.0
+margin_right = 228.0
+margin_bottom = 268.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
 texture = ExtResource( 6 )
-stretch_mode = 4
 
-[node name="VboxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front"]
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 200.0
-margin_bottom = 119.0
-rect_min_size = Vector2( 176, 95 )
+[node name="Sprites" type="VBoxContainer" parent="Margin"]
+visible = false
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 476.0
+margin_bottom = 268.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer"]
-margin_right = 176.0
-margin_bottom = 35.0
-rect_min_size = Vector2( 0, 35 )
-
-[node name="Compass" type="Control" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer"]
-margin_right = 68.0
-margin_bottom = 35.0
-rect_min_size = Vector2( 68, 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Back" type="Sprite" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Compass"]
-texture = ExtResource( 7 )
-centered = false
-offset = Vector2( 4, 4 )
-
-[node name="CrossHair" type="Sprite" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Compass"]
-position = Vector2( -1, 1 )
-texture = ExtResource( 10 )
-centered = false
-offset = Vector2( 9, 7 )
-
-[node name="Front" type="Sprite" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Compass"]
-texture = ExtResource( 16 )
-centered = false
-
-[node name="ScrewLeft" type="Control" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer"]
-margin_left = 72.0
-margin_right = 100.0
-margin_bottom = 35.0
-rect_min_size = Vector2( 28, 10 )
-
-[node name="Sprite" type="Sprite" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/ScrewLeft"]
-texture = ExtResource( 13 )
-offset = Vector2( 0, 20 )
-hframes = 4
-
-[node name="ScrewRight" type="Control" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer"]
-margin_left = 104.0
-margin_right = 124.0
-margin_bottom = 35.0
-rect_min_size = Vector2( 20, 10 )
-
-[node name="Sprite" type="Sprite" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/ScrewRight"]
-texture = ExtResource( 12 )
-offset = Vector2( 0, 20 )
-hframes = 4
-
-[node name="Face" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer"]
-margin_left = 128.0
-margin_right = 168.0
-margin_bottom = 35.0
-rect_min_size = Vector2( 40, 0 )
-
-[node name="FaceButtonTop" type="Control" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face"]
-margin_left = 16.0
-margin_right = 40.0
-margin_bottom = 12.0
-rect_min_size = Vector2( 24, 12 )
+[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/Sprites"]
+margin_left = 472.0
+margin_right = 472.0
 size_flags_horizontal = 8
-__meta__ = {
-"_edit_use_anchors_": false
-}
+size_flags_vertical = 0
 
-[node name="Sprite" type="Sprite" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/FaceButtonTop"]
-texture = ExtResource( 8 )
-centered = false
-hframes = 2
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/Sprites"]
+margin_top = 4.0
+margin_bottom = 4.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face"]
-margin_top = 16.0
-margin_right = 40.0
-margin_bottom = 28.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Controls" type="HBoxContainer" parent="Margin"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 476.0
+margin_bottom = 268.0
 
-[node name="FaceButtonLeft" type="Control" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/HBoxContainer"]
-margin_right = 28.0
-margin_bottom = 12.0
-rect_min_size = Vector2( 28, 12 )
-__meta__ = {
-"_edit_use_anchors_": true
-}
+[node name="Front" type="VBoxContainer" parent="Margin/Controls"]
+margin_right = 234.0
+margin_bottom = 264.0
+size_flags_horizontal = 3
 
-[node name="Sprite" type="Sprite" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/HBoxContainer/FaceButtonLeft"]
-texture = ExtResource( 8 )
-centered = false
-hframes = 2
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/Controls/Front"]
+margin_right = 234.0
+margin_bottom = 77.0
 
-[node name="FaceButtonRight" type="Control" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/HBoxContainer"]
-margin_left = 32.0
+[node name="Dpad" type="VBoxContainer" parent="Margin/Controls/Front/HBoxContainer"]
+visible = false
+margin_left = 43.0
+margin_right = 75.0
+margin_bottom = 77.0
+size_flags_horizontal = 10
+
+[node name="DpadUp" parent="Margin/Controls/Front/HBoxContainer/Dpad" instance=ExtResource( 2 )]
+margin_left = 9.0
+margin_right = 23.0
+margin_bottom = 23.0
+size_flags_horizontal = 4
+
+[node name="HBox" type="HBoxContainer" parent="Margin/Controls/Front/HBoxContainer/Dpad"]
+margin_top = 27.0
 margin_right = 32.0
-margin_bottom = 12.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_bottom = 50.0
 
-[node name="Sprite" type="Sprite" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/HBoxContainer/FaceButtonRight"]
-texture = ExtResource( 8 )
-centered = false
-hframes = 2
+[node name="DpadLeft" parent="Margin/Controls/Front/HBoxContainer/Dpad/HBox" instance=ExtResource( 2 )]
+margin_bottom = 23.0
 
-[node name="FaceButtonBottom" type="Control" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face"]
-margin_left = 16.0
-margin_top = 32.0
-margin_right = 40.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 24, 0 )
-size_flags_horizontal = 8
+[node name="DpadRight" parent="Margin/Controls/Front/HBoxContainer/Dpad/HBox" instance=ExtResource( 2 )]
+margin_left = 18.0
+margin_right = 32.0
+margin_bottom = 23.0
 
-[node name="Sprite" type="Sprite" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/FaceButtonBottom"]
-texture = ExtResource( 8 )
-centered = false
-hframes = 2
+[node name="DpadDown" parent="Margin/Controls/Front/HBoxContainer/Dpad" instance=ExtResource( 2 )]
+margin_left = 9.0
+margin_top = 54.0
+margin_right = 23.0
+margin_bottom = 77.0
+size_flags_horizontal = 4
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer"]
-margin_top = 39.0
-margin_right = 176.0
-margin_bottom = 39.0
-alignment = 2
+[node name="Menu" type="HBoxContainer" parent="Margin/Controls/Front/HBoxContainer"]
+margin_left = 41.0
+margin_top = 27.0
+margin_right = 73.0
+margin_bottom = 50.0
+size_flags_horizontal = 6
+size_flags_vertical = 4
 
-[node name="StickLeft" type="Control" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer2"]
-margin_left = 39.0
-margin_right = 99.0
-rect_min_size = Vector2( 60, 0 )
+[node name="Select" parent="Margin/Controls/Front/HBoxContainer/Menu" instance=ExtResource( 2 )]
+margin_bottom = 23.0
 
-[node name="Sprite" type="Sprite" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer2/StickLeft"]
-texture = ExtResource( 9 )
-centered = false
-hframes = 2
+[node name="Start" parent="Margin/Controls/Front/HBoxContainer/Menu" instance=ExtResource( 2 )]
+margin_left = 18.0
+margin_right = 32.0
+margin_bottom = 23.0
 
-[node name="StickRight" type="Control" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer2"]
-margin_left = 103.0
-margin_right = 176.0
-rect_min_size = Vector2( 73, 0 )
+[node name="Face" type="VBoxContainer" parent="Margin/Controls/Front/HBoxContainer"]
+margin_left = 202.0
+margin_right = 234.0
+margin_bottom = 77.0
+size_flags_horizontal = 10
 
-[node name="Sprite" type="Sprite" parent="ScrollContainer/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer2/StickRight"]
-texture = ExtResource( 9 )
-centered = false
-hframes = 2
+[node name="FaceUp" parent="Margin/Controls/Front/HBoxContainer/Face" instance=ExtResource( 2 )]
+margin_left = 9.0
+margin_right = 23.0
+margin_bottom = 23.0
+size_flags_horizontal = 4
 
-[node name="Right" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
-margin_left = 266.0
-margin_right = 300.0
-margin_bottom = 224.0
+[node name="HBox" type="HBoxContainer" parent="Margin/Controls/Front/HBoxContainer/Face"]
+margin_top = 27.0
+margin_right = 32.0
+margin_bottom = 50.0
 
-[node name="R2" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer/Right"]
-margin_right = 34.0
-margin_bottom = 32.0
+[node name="FaceLeft" parent="Margin/Controls/Front/HBoxContainer/Face/HBox" instance=ExtResource( 2 )]
+margin_bottom = 23.0
 
-[node name="R1" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer/Right"]
-margin_top = 36.0
-margin_right = 34.0
-margin_bottom = 68.0
+[node name="FaceRight" parent="Margin/Controls/Front/HBoxContainer/Face/HBox" instance=ExtResource( 2 )]
+margin_left = 18.0
+margin_right = 32.0
+margin_bottom = 23.0
 
-[node name="HSeperator" type="HSeparator" parent="ScrollContainer/VBoxContainer/HBoxContainer/Right"]
-margin_top = 72.0
-margin_right = 34.0
-margin_bottom = 76.0
+[node name="FaceDown" parent="Margin/Controls/Front/HBoxContainer/Face" instance=ExtResource( 2 )]
+margin_left = 9.0
+margin_top = 54.0
+margin_right = 23.0
+margin_bottom = 77.0
+size_flags_horizontal = 4
 
-[node name="Face" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/Right"]
-margin_top = 80.0
-margin_right = 34.0
-margin_bottom = 220.0
-
-[node name="Top" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer/Right/Face"]
-margin_right = 34.0
-margin_bottom = 32.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Left" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer/Right/Face"]
-margin_top = 36.0
-margin_right = 34.0
-margin_bottom = 68.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Right" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer/Right/Face"]
-margin_top = 72.0
-margin_right = 34.0
-margin_bottom = 104.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Bottom" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer/Right/Face"]
-margin_top = 108.0
-margin_right = 34.0
-margin_bottom = 140.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 228.0
-margin_right = 300.0
-margin_bottom = 260.0
-alignment = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="L3" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 25.0
-margin_right = 59.0
-margin_bottom = 32.0
-
-[node name="Select" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 63.0
-margin_right = 97.0
-margin_bottom = 32.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Start" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 101.0
-margin_right = 135.0
-margin_bottom = 32.0
-
-[node name="R3" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 139.0
-margin_right = 173.0
-margin_bottom = 32.0
-
-[node name="AnalogDisable2" type="CheckButton" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="Margin/Controls/Front"]
 visible = false
-margin_right = 137.0
+margin_top = 84.0
+margin_right = 224.0
+margin_bottom = 228.0
+size_flags_vertical = 8
+texture = ExtResource( 6 )
+
+[node name="Top" type="VBoxContainer" parent="Margin/Controls"]
+margin_left = 238.0
+margin_right = 472.0
+margin_bottom = 264.0
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="Margin/Controls/Top"]
+margin_right = 234.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
+
+[node name="TextureRect" type="TextureRect" parent="Margin/Controls/Top"]
+visible = false
+margin_top = 132.0
+margin_right = 264.0
+margin_bottom = 212.0
+size_flags_vertical = 0
+texture = ExtResource( 14 )
+
+[node name="Top" type="HBoxContainer" parent="Margin/Controls/Top"]
+margin_top = 84.0
+margin_right = 234.0
+margin_bottom = 134.0
+
+[node name="Left" type="VBoxContainer" parent="Margin/Controls/Top/Top"]
+margin_left = 30.0
+margin_right = 44.0
+margin_bottom = 50.0
+size_flags_horizontal = 6
+
+[node name="L1" parent="Margin/Controls/Top/Top/Left" instance=ExtResource( 2 )]
+margin_bottom = 23.0
+
+[node name="L2" parent="Margin/Controls/Top/Top/Left" instance=ExtResource( 2 )]
+margin_top = 27.0
+margin_bottom = 50.0
+
+[node name="Stick" type="HBoxContainer" parent="Margin/Controls/Top/Top"]
+margin_left = 100.0
+margin_top = 13.0
+margin_right = 132.0
+margin_bottom = 36.0
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="L3" parent="Margin/Controls/Top/Top/Stick" instance=ExtResource( 2 )]
+margin_bottom = 23.0
+
+[node name="R3" parent="Margin/Controls/Top/Top/Stick" instance=ExtResource( 2 )]
+margin_left = 18.0
+margin_right = 32.0
+margin_bottom = 23.0
+
+[node name="Right" type="VBoxContainer" parent="Margin/Controls/Top/Top"]
+margin_left = 189.0
+margin_right = 203.0
+margin_bottom = 50.0
+size_flags_horizontal = 6
+
+[node name="R1" parent="Margin/Controls/Top/Top/Right" instance=ExtResource( 2 )]
+margin_bottom = 23.0
+
+[node name="R2" parent="Margin/Controls/Top/Top/Right" instance=ExtResource( 2 )]
+margin_top = 27.0
+margin_bottom = 50.0
+
+[node name="Extra" type="HBoxContainer" parent="Margin/Controls/Top"]
+margin_top = 138.0
+margin_right = 234.0
+margin_bottom = 192.0
+
+[node name="MenuButtons" type="VBoxContainer" parent="Margin/Controls/Top/Extra"]
+margin_right = 72.0
+margin_bottom = 54.0
+
+[node name="Label" type="Label" parent="Margin/Controls/Top/Extra/MenuButtons"]
+margin_right = 72.0
+margin_bottom = 14.0
+text = "Select Style"
+
+[node name="OptionButton" type="OptionButton" parent="Margin/Controls/Top/Extra/MenuButtons"]
+margin_top = 18.0
+margin_right = 72.0
+margin_bottom = 54.0
+size_flags_horizontal = 3
+text = "Xbox"
+items = [ "Xbox", null, false, 0, null, "Nintendo", null, false, 1, null ]
+selected = 0
+
+[node name="MenuButtons3" type="VBoxContainer" parent="Margin/Controls/Top/Extra"]
+margin_left = 76.0
+margin_right = 140.0
+margin_bottom = 54.0
+
+[node name="Label" type="Label" parent="Margin/Controls/Top/Extra/MenuButtons3"]
+margin_right = 64.0
+margin_bottom = 14.0
+text = "Movement"
+
+[node name="OptionButton" type="OptionButton" parent="Margin/Controls/Top/Extra/MenuButtons3"]
+margin_top = 18.0
+margin_right = 64.0
+margin_bottom = 54.0
+size_flags_horizontal = 3
+text = "Either"
+items = [ "Either", null, false, 0, null, "Left Stick", null, false, 1, null, "Dpad", null, false, 2, null ]
+selected = 0
+
+[node name="Corner" type="Panel" parent="."]
+margin_left = 352.0
+margin_top = 224.0
+margin_right = 480.0
+margin_bottom = 272.0
+rect_min_size = Vector2( 128, 48 )
+size_flags_horizontal = 10
+size_flags_vertical = 10
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin" type="MarginContainer" parent="Corner"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 128.0
 margin_bottom = 48.0
-text = "Disable Analog"
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="DpadDisable2" type="CheckButton" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
-visible = false
-margin_left = 141.0
-margin_right = 273.0
-margin_bottom = 48.0
-text = "Disable D-Pad"
+[node name="HBox" type="HBoxContainer" parent="Corner/Margin"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 116.0
+margin_bottom = 36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="AcceptButton" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
-visible = false
-margin_left = 277.0
-margin_right = 390.0
-margin_bottom = 24.0
-text = "Accept Button"
-
-[node name="Default" type="Button" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 177.0
-margin_right = 241.0
+[node name="Return" type="Button" parent="Corner/Margin/HBox"]
+margin_right = 55.0
 margin_bottom = 32.0
-custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
-text = "Defaults"
-
-[node name="Return" type="Button" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 245.0
-margin_right = 300.0
-margin_bottom = 32.0
-custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
+custom_colors/font_color = Color( 0.968627, 0.886275, 0.717647, 1 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/normal = ExtResource( 3 )
 text = "Return"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[connection signal="pressed" from="ScrollContainer/VBoxContainer/HBoxContainer2/Default" to="." method="_on_Default_pressed"]
-[connection signal="pressed" from="ScrollContainer/VBoxContainer/HBoxContainer2/Return" to="." method="_on_Return_pressed"]
+[connection signal="pressed" from="Corner/Margin/HBox/Return" to="." method="_on_Return_pressed"]

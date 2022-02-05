@@ -9,7 +9,7 @@
 [ext_resource path="res://src/Prop/AmmoRefill.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Prop/SaveDisk.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Prop/ShopWeapon.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/Prop/ShopKeyItem.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/Prop/ShopItem.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Tile/VillageInterior.tres" type="TileSet" id=12]
 [ext_resource path="res://src/Tile/Layers/Outdated/Decortation.tscn" type="PackedScene" id=13]
@@ -20,6 +20,7 @@
 [ext_resource path="res://src/Prop/Fan.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Actor/NPC/Fluffy.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/Utility/LevelCamera.tscn" type="PackedScene" id=20]
+
 
 [node name="MechanicShop" type="Node2D"]
 script = ExtResource( 5 )

@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/Background/bkMaze.bmp" type="Texture" id=8]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=9]
 
+
 [node name="ElevatorShaft" type="Node2D"]
 script = ExtResource( 6 )
 __meta__ = {

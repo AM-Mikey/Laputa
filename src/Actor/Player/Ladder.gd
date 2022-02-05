@@ -2,9 +2,9 @@ extends Node
 
 
 onready var world = get_tree().get_root().get_node("World")
-onready var pc = world.get_node("Recruit")
+onready var pc = world.get_node("Juniper")
 onready var mm = pc.get_node("MovementManager")
-onready var wm = pc.get_node("WeaponManager")
+onready var gm = pc.get_node("GunManager")
 
 func state_process():
 	pc.move_dir = get_move_dir()
@@ -57,8 +57,8 @@ func get_move_velocity(velocity, move_dir):
 func enter():
 	mm.snap_vector = Vector2.ZERO
 	pc.set_collision_mask_bit(9, false) #ssp
-	wm.disable_weapon()
+	gm.disable()
 	
 func exit():
 	pc.set_collision_mask_bit(9, true) #ssp
-	wm.enable_weapon()
+	gm.enable()

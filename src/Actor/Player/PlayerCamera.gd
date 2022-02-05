@@ -8,12 +8,12 @@ var panning_up = false
 var panning_down = false
 
 onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node("World/Juniper")
 onready var mm = pc.get_node("MovementManager")
 
 func _ready():
 	add_to_group("Cameras")
-	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 
 func _physics_process(_delta):

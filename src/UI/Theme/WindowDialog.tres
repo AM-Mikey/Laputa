@@ -1,0 +1,28 @@
+[gd_resource type="Theme" load_steps=6 format=2]
+
+[ext_resource path="res://src/UI/Font/WelcomeBack.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/UI/Font/WelcomeBackButton.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/UI/StyleBox/Paper.tres" type="StyleBox" id=3]
+[ext_resource path="res://src/UI/StyleBox/Leather.tres" type="StyleBox" id=4]
+[ext_resource path="res://src/UI/StyleBox/PaperBorder.tres" type="StyleBox" id=5]
+
+[resource]
+default_font = ExtResource( 1 )
+Button/colors/font_color = Color( 0.462745, 0.486275, 0.431373, 1 )
+Button/colors/font_color_focus = Color( 0.666667, 0.690196, 0.592157, 1 )
+Button/colors/font_color_hover = Color( 0.666667, 0.690196, 0.592157, 1 )
+Button/colors/font_color_pressed = Color( 0.462745, 0.486275, 0.431373, 1 )
+Button/fonts/font = ExtResource( 2 )
+Button/styles/focus = ExtResource( 3 )
+Button/styles/hover = ExtResource( 3 )
+Button/styles/normal = ExtResource( 3 )
+Button/styles/pressed = ExtResource( 5 )
+Label/colors/font_color = Color( 0.690196, 0.392157, 0.2, 1 )
+Label/colors/font_color_shadow = Color( 0.305882, 0.129412, 0.0823529, 1 )
+Label/constants/shadow_offset_x = -1
+Label/constants/shadow_offset_y = -1
+WindowDialog/constants/close_h_ofs = -100000
+WindowDialog/constants/close_v_ofs = -100000
+WindowDialog/constants/scaleborder_size = 0
+WindowDialog/constants/title_height = 0
+WindowDialog/styles/panel = ExtResource( 4 )

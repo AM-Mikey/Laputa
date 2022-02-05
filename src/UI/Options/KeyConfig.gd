@@ -4,50 +4,130 @@ const CONTROLLERCONFIG = preload("res://src/UI/Options/ControllerConfig.tscn")
 
 var input_map_path = "user://inputmap.json"
 
-var can_change_key = false
+var assignment_mode = false
+var button_ignore = false
 var action_string
 var actions = []
 var debug_actions = []
 
+var active_preset = 0
 
-var path_string = "MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer"
-var debug_path_string = "MarginContainer/VBoxContainer/ScrollContainers/Debug/VBoxContainer"
+export(NodePath) var buttons
+onready var p_button = get_node(buttons)
+export(NodePath) var focus
+export(NodePath) var preset_path
 
 onready var world = get_tree().get_root().get_node("World")
 
+var preset_classic = {
+	"jump": KEY_X,
+	"fire_manual": KEY_C,
+	"fire_automatic": KEY_Z,
+	"move_left": KEY_LEFT,
+	"move_right": KEY_RIGHT,
+	"look_up": KEY_UP,
+	"look_down": KEY_DOWN,
+	"ui_accept": KEY_X,
+	"ui_cancel": KEY_C,
+	"inspect": KEY_DOWN,
+	"inventory": KEY_Q,
+	"gun_left": KEY_A,
+	"gun_right": KEY_S,
+	"pause": KEY_ESCAPE,
+}
+
+var preset_mouse = {
+	"jump": KEY_SPACE,
+	"fire_manual": BUTTON_LEFT,
+	"fire_automatic": BUTTON_RIGHT,
+	"move_left": KEY_A,
+	"move_right": KEY_D,
+	"look_up": KEY_W,
+	"look_down": KEY_S,
+	"ui_accept": KEY_E,
+	"ui_cancel": KEY_Q,
+	"inspect": KEY_E,
+	"inventory": KEY_TAB,
+	"gun_left": BUTTON_WHEEL_DOWN,
+	"gun_right": BUTTON_WHEEL_UP,
+	"pause": KEY_ESCAPE,
+}
+
+var preset_onehand = {
+	"jump": KEY_SHIFT,
+	"fire_manual": KEY_SPACE,
+	"fire_automatic": KEY_ALT,
+	"move_left": KEY_A,
+	"move_right": KEY_D,
+	"look_up": KEY_W,
+	"look_down": KEY_S,
+	"ui_accept": KEY_SPACE,
+	"ui_cancel": KEY_ESCAPE,
+	"inspect": KEY_S,
+	"inventory": KEY_TAB,
+	"gun_left": KEY_Q,
+	"gun_right": KEY_E,
+	"pause": KEY_ESCAPE,
+}
+
+
 func _ready():
-	#add_child(CONTROLLERCONFIG.instance())
-#	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
-#	_on_viewport_size_changed()
-
-
-
+	get_node(preset_path).select(0)
 	var buttons_normal = []
-	var buttons_debug = []
-	for c in get_node(path_string).get_children():
+	
+	for c in p_button.get_children():
 		var subchildren = c.get_children()
 		for s in subchildren:
 			if s is Button:
 				buttons_normal.append(s)
-	for c in get_node(debug_path_string).get_children():
-		var subchildren = c.get_children()
-		for s in subchildren:
-			if s is Button:
-				buttons_debug.append(s)
-			
+
 	for b in buttons_normal:
-		b.connect("pressed", self, "mark_button_normal", [b.get_parent().name])
+		b.connect("pressed", self, "_mark_button", [b.get_parent().name])
 		actions.append(b.get_parent().name)
-		#print(b.get_parent().name)
-	
-	for b in buttons_debug:
-		b.connect("pressed", self, "mark_button_debug", [b.get_parent().name])
-		debug_actions.append(b.get_parent().name)
-		#print(b.get_parent().name)
-	
-	_set_keys()  
+
+	_set_keys()
+
+
+
+func _set_keys():
+	for j in actions:
+		var button = p_button.get_node(str(j) + "/Button")
+		button.set_pressed(false)
+		
+		if InputMap.get_action_list(j).empty():
+			button.set_text("No Button!")
+			#button.set_pressed(false)
+			return
+		
+		var input = _get_first_valid_input(j)
+		if input != null:
+			if input is InputEventKey:
+				button.set_text(input.as_text())
+			elif input is InputEventMouseButton:
+				var mouse_index
+				match input.button_index:
+					1: mouse_index = "LMB"
+					2: mouse_index = "RMB"
+					3: mouse_index = "MMB"
+					4: mouse_index = "MWHEELUP"
+					5: mouse_index = "MWHEELDOWN"
+					6: mouse_index = "MWHEELLEFT"
+					7: mouse_index = "MWHEELRIGHT"
+					8: mouse_index = "M4"
+					9: mouse_index = "M5"
+				button.set_text(mouse_index)
+			
+#			print("/////////////")
+#			print ("input" + str(input))
+#			print(_get_first_valid_input("ui_accept"))
+#			if input == _get_first_valid_input("ui_accept"): #toggle off the button if we're not pressing our ui_accept
+#				print("bingo")
+##			else:
+#			button.set_pressed(false)
+
+
   
-func get_first_valid_input(j):
+func _get_first_valid_input(j):
 			var index = 0
 			var good_input = InputMap.get_action_list(j)[index]
 			while not good_input is InputEventKey and not good_input is InputEventMouseButton and index < InputMap.get_action_list(j).size() - 1:
@@ -59,93 +139,78 @@ func get_first_valid_input(j):
 			else:
 				return good_input
 
-func _set_keys():
-	for j in actions:
-		get_node(path_string + "/" + str(j) + "/Button").set_pressed(false)
-		if !InputMap.get_action_list(j).empty():
-			var input = get_first_valid_input(j)
-			if input != null:
-				if input is InputEventKey:
-					get_node(path_string + "/" + str(j) + "/Button").set_text(input.as_text())
-				elif input is InputEventMouseButton:
-					var mouse_index
-					match input.button_index:
-						1: mouse_index = "LMB"
-						2: mouse_index = "RMB"
-						3: mouse_index = "MMB"
-						4: mouse_index = "MWHEELUP"
-						5: mouse_index = "MWHEELDOWN"
-						6: mouse_index = "MWHEELLEFT"
-						7: mouse_index = "MWHEELRIGHT"
-						8: mouse_index = "M4"
-						9: mouse_index = "M5"
-					get_node(path_string + "/" + str(j) + "/Button").set_text(mouse_index)
-		else:
-			get_node(path_string + "/" + str(j) + "/Button").set_text("No Button!")
-
-	for j in debug_actions:
-		get_node(debug_path_string + "/" + str(j) + "/Button").set_pressed(false)
-		if !InputMap.get_action_list(j).empty():
-			var input = get_first_valid_input(j)
-			if input != null:
-				if input is InputEventKey:
-					get_node(debug_path_string + "/" + str(j) + "/Button").set_text(input.as_text())
-				elif input is InputEventMouseButton:
-					var mouse_index
-					match input.button_index:
-						1: mouse_index = "LMB"
-						2: mouse_index = "RMB"
-						3: mouse_index = "MMB"
-						4: mouse_index = "MWHEELUP"
-						5: mouse_index = "MWHEELDOWN"
-						6: mouse_index = "MWHEELLEFT"
-						7: mouse_index = "MWHEELRIGHT"
-						8: mouse_index = "M4"
-						9: mouse_index = "M5"
-					get_node(debug_path_string + "/" + str(j) + "/Button").set_text(mouse_index)
-		else:
-			get_node(debug_path_string + "/" + str(j) + "/Button").set_text("No Button!")
 
 
-func mark_button_normal(string):
-	can_change_key = true
-	action_string = string
-	
-	for j in actions:
-		if j != string:
-			get_node(path_string + "/" + str(j) + "/Button").set_pressed(false)
+func _mark_button(string):
+	if button_ignore:
+		button_ignore = false
+		
+		for j in actions:
+			if j == string:
+				p_button.get_node(str(j) + "/Button").set_pressed(false)
+		
+	else:
+		assignment_mode = true
+		action_string = string
+		
+		for j in actions:
+			if j != string:
+				p_button.get_node(str(j) + "/Button").set_pressed(false)
 
-func mark_button_debug(string):
-	can_change_key = true
-	action_string = string
-	
-	for j in debug_actions:
-		if j != string:
-			get_node(debug_path_string + "/" + str(j) + "/Button").set_pressed(false)
+
 
 func _input(event):
-	if event is InputEventKey or event is InputEventMouseButton: 
-		if can_change_key:
-			_change_key(event)
-			can_change_key = false
+	if (event is InputEventKey or event is InputEventMouseButton) and assignment_mode:
+		print("second_input")
+		_change_key(event)
+		assignment_mode = false
+		
+		var accept_event = _get_first_valid_input("ui_accept") #prevent us from entering another assignment mode when event is accept_event
+		if event is InputEventKey and accept_event is InputEventKey:
+			if event.scancode == accept_event.scancode:
+				button_ignore = true
+		if event is InputEventMouseButton and accept_event is InputEventMouseButton:
+			if event.button_index == accept_event.button_index:
+				button_ignore = true
+
 
 
 func _change_key(new_key):
+	get_node(preset_path).select(0)
+	
 	#Delete key of pressed button
 	if !InputMap.get_action_list(action_string).empty():
-		var input = get_first_valid_input(action_string)
+		var input = _get_first_valid_input(action_string)
 		if input != null:
 			InputMap.action_erase_event(action_string, input)
 	
-	#Check if new key was assigned somewhere
-	var all_actions = actions + debug_actions
-	for i in all_actions:
-		if InputMap.action_has_event(i, new_key):
-			InputMap.action_erase_event(i, new_key)
+	#Check if new key was assigned somewhere 		#pass for now
+#	var all_actions = actions + debug_actions
+#	for i in all_actions:
+#		if InputMap.action_has_event(i, new_key):
+#			InputMap.action_erase_event(i, new_key)
 			
 			
 	#Add new Key
 	InputMap.action_add_event(action_string, new_key)
+	
+	
+	#alias action
+	var alias_action_string
+	match action_string:
+		"move_left": alias_action_string = "ui_left"
+		"move_right": alias_action_string = "ui_right"
+		"look_up": alias_action_string = "ui_up"
+		"look_down": alias_action_string = "ui_down"
+
+	if alias_action_string != null:
+		if !InputMap.get_action_list(alias_action_string).empty():
+			var input = _get_first_valid_input(alias_action_string)
+			if input != null:
+				InputMap.action_erase_event(alias_action_string, input)
+		InputMap.action_add_event(alias_action_string, new_key)
+	
+	###
 	
 	save_input_map()
 	_set_keys()
@@ -170,7 +235,6 @@ func save_input_map():
 	var file = File.new()
 	var file_written = file.open(input_map_path, File.WRITE)
 	if file_written == OK:
-		#file.store_var(data)
 		file.store_string(var2str(data))
 		file.close()
 		print("input map data saved")
@@ -187,7 +251,6 @@ func load_input_map():
 		if file_read == OK:
 			var text = file.get_as_text()
 			data = JSON.parse(text).result
-			#data = file.get_var()
 			file.close()
 			
 			for a in data.keys():
@@ -209,8 +272,61 @@ func load_input_map():
 
 	else: 
 		printerr("ERROR: could not load input map data")
+
+
+func _on_preset_selected(index):
+	get_node(preset_path).select(active_preset)
+	if index != 0:
+		active_preset = index
+		$ConfirmationDialog.popup()
+
+func _on_ConfirmationDialog_confirmed():
+	get_node(preset_path).select(active_preset)
+	match active_preset:
+		1: set_preset(preset_classic)
+		2: set_preset(preset_mouse)
+		3: set_preset(preset_onehand)
+
+func set_preset(preset):
+	for k in preset.keys():
+		#Delete key of pressed button
+		if !InputMap.get_action_list(k).empty():
+			var old_input = _get_first_valid_input(k)
+			if old_input:
+				InputMap.action_erase_event(k, old_input)
+
+		#Add new key
+		var new_input
+		if preset[k] <= 10: #TODO: not a great way to determine if a key enum is a key or mouse
+			new_input = InputEventMouseButton.new()
+			new_input.button_index = preset[k]
+		else:
+			new_input = InputEventKey.new()
+			new_input.scancode = preset[k]
+		InputMap.action_add_event(k, new_input)
+	
+
+		#Alias action
+		var alias_action_string
+		match k:
+			"move_left": alias_action_string = "ui_left"
+			"move_right": alias_action_string = "ui_right"
+			"look_up": alias_action_string = "ui_up"
+			"look_down": alias_action_string = "ui_down"
+			
+		if alias_action_string:
+			if !InputMap.get_action_list(alias_action_string).empty():
+				var old_input = _get_first_valid_input(alias_action_string)
+				if old_input:
+					InputMap.action_erase_event(alias_action_string, old_input)
+			InputMap.action_add_event(alias_action_string, new_input)
 	
 	
+	save_input_map()
+	_set_keys()
+
+
+
 func _on_Return_pressed():
 	if world.has_node("UILayer/PauseMenu"):
 		world.get_node("UILayer/PauseMenu").visible = true
@@ -225,66 +341,5 @@ func _on_Return_pressed():
 		get_parent().queue_free()
 
 
-
-#func _on_Mikey_pressed():
-#	var dict = {
-#		"ui_left": KEY_A,
-#		"ui_right": KEY_D,
-#		"ui_up": KEY_W,
-#		"ui_down": KEY_S,
-#		"move_left": KEY_A,
-#		"move_right": KEY_D,
-#		"look_up": KEY_W,
-#		"look_down": KEY_S,
-#		"jump": KEY_SPACE,
-#		"inspect": KEY_E,
-#		"inventory": KEY_I
-#		}
-#	for k in dict.keys():
-#		InputMap.action_erase_events(k) #delete all other binds
-#		var new_input = InputEventKey.new()
-#		new_input.set_scancode((dict[k]))
-#		InputMap.action_add_event(k, new_input)
-#
-#	var dict2 = {
-#		"fire_manual": BUTTON_LEFT,
-#		"fire_automatic": BUTTON_RIGHT,
-#		"weapon_right": BUTTON_WHEEL_DOWN,
-#		"weapon_left": BUTTON_WHEEL_UP
-#		}
-#	for k in dict2.keys():
-#		InputMap.action_erase_events(k) #delete all other binds
-#		var new_input = InputEventMouseButton.new()
-#		new_input.button_index = dict2[k]
-#		InputMap.action_add_event(k, new_input)
-#
-#func _on_CS_pressed():
-#	var dict = {
-#		"ui_left": KEY_LEFT,
-#		"ui_right": KEY_RIGHT,
-#		"ui_up": KEY_UP,
-#		"ui_down": KEY_DOWN,
-#		"move_left": KEY_LEFT,
-#		"move_right": KEY_RIGHT,
-#		"look_up": KEY_UP,
-#		"look_down": KEY_DOWN,
-#		"jump": KEY_Z,
-#		"fire_manual": KEY_X,
-#		"fire_automatic": KEY_SHIFT,
-#		"inspect": KEY_C,
-#		"weapon_right": KEY_A,
-#		"weapon_left": KEY_S,
-#		"inventory": KEY_Q
-#		}
-#	for k in dict.keys():
-#		InputMap.action_erase_events(k) #delete all other binds
-#		var new_input = InputEventKey.new()
-#		new_input.set_scancode((dict[k]))
-#		InputMap.action_add_event(k, new_input)
-		
-
-#func _on_viewport_size_changed():
-#	rect_size = get_tree().get_root().size / world.resolution_scale
-
 func focus():
-	$MarginContainer/VBoxContainer/ScrollContainers/Normal/VBoxContainer/jump/Button.grab_focus()
+	get_node(focus).grab_focus()

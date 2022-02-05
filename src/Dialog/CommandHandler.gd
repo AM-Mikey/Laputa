@@ -4,7 +4,7 @@ const YN = preload("res://src/Dialog/DialogYesNo.tscn")
 const TBOX = preload("res://src/Dialog/TopicBox.tscn")
 
 onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node("World/Juniper")
 onready var db = get_parent()
 
 onready var tb = db.get_node("Margin/HBox/RichTextBox")

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://assets/Gun/GrenadeLauncherIcon.png" type="Texture" id=1]
+[ext_resource path="res://assets/SFX/Placeholder/snd_expl_small.ogg" type="AudioStream" id=2]
+[ext_resource path="res://assets/Gun/GrenadeLauncher.png" type="Texture" id=3]
+[ext_resource path="res://src/Gun/Weapon.gd" type="Script" id=4]
+[ext_resource path="res://src/Bullet/BulletGrenadeLauncher1.tscn" type="PackedScene" id=5]
+
+
+[resource]
+resource_name = "GrenadeLauncher1"
+script = ExtResource( 4 )
+display_name = "Grenade Launcher"
+description = "A grenade launcher."
+texture = ExtResource( 3 )
+icon_texture = ExtResource( 1 )
+audio_stream = ExtResource( 2 )
+bullet_scene = ExtResource( 5 )
+damage = 4
+projectile_range = 0
+projectile_speed = 200
+cooldown_time = 1.0
+automatic = false
+needs_ammo = true
+ammo = 10
+max_ammo = 10
+xp = 0
+max_xp = 20
+level = 1
+max_level = 3

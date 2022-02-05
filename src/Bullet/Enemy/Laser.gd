@@ -1,14 +1,11 @@
 extends Bullet
 
-var velocity = Vector2.ZERO
-var direction = Vector2.ZERO
 var projectile_speed = 24
 var start_velocity
 
 var projectile_range = 64
 
 
-var origin = Vector2.ZERO
 
 
 func _ready():

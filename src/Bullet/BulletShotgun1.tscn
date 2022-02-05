@@ -20,7 +20,6 @@ position = Vector2( -24, 0 )
 shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-visible = false
 position = Vector2( -8, 0 )
 scale = Vector2( 0.8, 0.1 )
 

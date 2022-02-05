@@ -10,6 +10,7 @@
 [ext_resource path="res://src/Tile/DebugBackground.tres" type="TileSet" id=10]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=11]
 
+
 [node name="CloudCave" type="Node2D"]
 script = ExtResource( 8 )
 __meta__ = {

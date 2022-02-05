@@ -1,13 +1,13 @@
 extends Node2D
 
-const DEBUG_INFO = preload("res://src/UI/Debug/DebugInfo.tscn")
+#const DEBUG_INFO = preload("res://src/UI/Debug/DebugInfo.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const INVENTORY = preload("res://src/UI/Inventory/Inventory.tscn")
 const LEVEL_TEXT = preload("res://src/UI/LevelText.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 const PAUSEMENU = preload("res://src/UI/PauseMenu/PauseMenu.tscn")
-const POPUP = preload("res://src/UI/PopupText.tscn")
-const RECRUIT = preload("res://src/Actor/Player/Recruit.tscn")
+#const POPUP = preload("res://src/UI/PopupText.tscn")
+const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
 const TITLE = preload("res://src/UI/TitleScreen.tscn")
 const TITLECAM = preload("res://src/Utility/TitleCam.tscn")
 
@@ -25,17 +25,22 @@ export var development_stage: String = "Alpha"
 var internal_version: String = get_internal_version()
 export var release_version: String
 export var is_release = false
-export var should_skip_title = false
+export var skip_title = false
 export var visible_triggers = false
+export var show_state_labels = false ###############################################
 
-export var starting_level = "res://src/Level/Village/Village.tscn"
-onready var current_level = load(starting_level).instance() #assumes current level to start with, might cause issues down the line
+export var start_level: PackedScene
+onready var current_level = start_level.instance() #assumes current level to start with, might cause issues down the line
+
+onready var front = $Front
+onready var middle = $Middle
+onready var back = $Back
 
 func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 	
-	if not should_skip_title:
+	if not skip_title:
 		$UILayer.add_child(TITLE.instance())
 		add_child(TITLECAM.instance())
 		add_child(current_level)
@@ -48,9 +53,11 @@ func _ready():
 
 func get_internal_version() -> String:
 	var current_date = OS.get_date()
-	var _years_since = current_date["year"] - 2021
+	var years_since = current_date["year"] - 2021
 	var months_since = current_date["month"] - 3
 	var days_since = current_date["day"] - 18
+	
+	months_since += 12 * years_since
 	
 	if days_since < 0:
 		
@@ -66,50 +73,24 @@ func get_internal_version() -> String:
 		return(str(months_since -1) + "m" + str(days_last_month + days_since) + "d")
 	else:
 		return(str(months_since) + "m" + str(days_since) + "d")
+	
 
 
 
 
 func skip_title():
-	on_level_change(starting_level, 0)
-	add_child(RECRUIT.instance())
+	on_level_change(start_level, 0)
+	add_child(JUNIPER.instance())
 	get_node("UILayer").add_child(HUD.instance())
 
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
-		$Recruit.position = s.global_position
+		$Juniper.position = s.global_position
 		print("moved player")
 
 
 func _input(event):
-	if Input.is_action_just_pressed("debug_print"):
-		debug_print()
-	
-	if event.is_action_pressed("debug_reload"):
-		reload_level()
-	
-	if event.is_action_pressed("debug_triggers"):
-		visible_triggers = !visible_triggers
-		for v in get_tree().get_nodes_in_group("TriggerVisuals"):
-			v.visible = visible_triggers
-	
-	if event.is_action_pressed("debug_save"):
-		var popup = POPUP.instance()
-		popup.text = "quicksaved..."
-		$UILayer.add_child(popup)
-		write_level_data_to_temp()
-		write_player_data_to_save()
-		copy_level_data_from_temp_to_save()
-	
-	if event.is_action_pressed("debug_load"):
-		var popup = POPUP.instance()
-		popup.text = "loaded save"
-		$UILayer.add_child(popup)
-		read_player_data_from_save()
-		read_level_data_from_save()
-		copy_level_data_from_save_to_temp()
-	
-	if event.is_action_pressed("inventory") and not $Recruit.disabled:
-		if not $UILayer.has_node("Inventory") and not get_tree().paused: 
+	if event.is_action_pressed("inventory") and has_node("Juniper"):
+		if not $UILayer.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled:
 			get_tree().paused = true
 			$UILayer/HUD.visible = false
 			var inventory = INVENTORY.instance()
@@ -143,14 +124,14 @@ func on_level_change(level, door_index):
 	var level_path = current_level.filename
 	current_level.queue_free()
 	
-	yield(get_tree(), 'idle_frame') #this gives time for recruit to spawn. probably not neccesary
-	var next_level = load(level).instance()
+	yield(get_tree(), 'idle_frame') #this gives time for juniper to spawn. probably not neccesary
+	var next_level = level.instance()
 	add_child(next_level)
 	
 	if next_level.level_type == next_level.LevelType.NORMAL:#############################################################
-		if has_node("Recruit"):
-			$Recruit/PlayerCamera.smoothing_enabled = false
-			$Recruit/PlayerCamera.current = not next_level.has_node("LevelCamera") #turn off camera if level has one already
+		if has_node("Juniper"):
+			$Juniper/PlayerCamera.smoothing_enabled = false
+			$Juniper/PlayerCamera.current = not next_level.has_node("LevelCamera") #turn off camera if level has one already
 			
 
 		
@@ -162,11 +143,11 @@ func on_level_change(level, door_index):
 		for t in triggers:
 			if t.level == level_path:
 				if t.is_in_group("LoadZones"):
-					$Recruit.position = t.position + (t.direction * -32)
+					$Juniper.position = t.position + (t.direction * -32)
 					print("found a connected zone")
 					doors_found += 1
 				else:
-					$Recruit.position = t.position
+					$Juniper.position = t.position
 					print("found a connected door")
 					doors_found += 1
 			
@@ -178,11 +159,11 @@ func on_level_change(level, door_index):
 			for t in triggers:
 				if t.level == level_path and t.door_index == door_index:
 					if t.is_in_group("LoadZones"):
-						$Recruit.position = t.position + (t.direction * -32)
+						$Juniper.position = t.position + (t.direction * -32)
 						print("got correct zone")
 						doors_found += 1
 					else:
-						$Recruit.position = t.position
+						$Juniper.position = t.position
 						print("got correct door")
 						doors_found += 1
 			
@@ -199,18 +180,18 @@ func on_level_change(level, door_index):
 			yield(get_tree().create_timer(0.8), "timeout")
 			$UILayer/TransitionWipe.play_out_animation()
 			already_enabled = true
-			$Recruit.enable()
+			$Juniper.enable()
 
 		#DOORS
 		elif $UILayer.has_node("TransitionIris"):
 			yield(get_tree().create_timer(0.4), "timeout")
 			$UILayer/TransitionIris.play_out_animation()
 			already_enabled = true
-			$Recruit.enable()
+			$Juniper.enable()
 
 		######
 		if not already_enabled:
-			$Recruit.enable()
+			$Juniper.enable()
 			
 		if $UILayer.has_node("LevelText"):
 			$UILayer/LevelText.free()
@@ -221,14 +202,14 @@ func on_level_change(level, door_index):
 
 		#enable smoothing after a bit
 		yield(get_tree().create_timer(0.01), "timeout")
-		$Recruit/PlayerCamera.smoothing_enabled = true
+		$Juniper/PlayerCamera.smoothing_enabled = true
 		
 		
 
 	
 	if next_level.level_type == next_level.LevelType.PLAYERLESS_CUTSCENE:#############################################
-		#TODO: right now recruit isn't unloaded between levels unless we're using level buttons or starting
-		$Recruit.queue_free()
+		#TODO: right now juniper isn't unloaded between levels unless we're using level buttons or starting
+		$Juniper.queue_free()
 		$UILayer/HUD.queue_free()
 		
 	
@@ -242,16 +223,17 @@ func on_level_change(level, door_index):
 	
 	
 func write_player_data_to_save():
-	var pc = $Recruit
-	var weapon_data = {}
+	var pc = $Juniper
+	var guns = pc.guns
+	var gun_data = {}
 	
-	for w in pc.weapon_array:
-		weapon_data[w.resource_name] = {
-			"level" : w.level,
-			"xp" : w.xp
+	for g in guns.get_children():
+		gun_data[g.name] = {
+			"level" : g.level,
+			"xp" : g.xp
 			}
-		if w.needs_ammo:
-			weapon_data[w.resource_name]["ammo"] = w.ammo
+		if g.max_ammo != 0:
+			gun_data[g.resource_name]["ammo"] = g.ammo
 	
 	data["player_data"] = {
 		"current_level" : current_level.filename,
@@ -260,8 +242,7 @@ func write_player_data_to_save():
 		"max_hp" : pc.max_hp,
 		"total_xp" : pc.total_xp,
 		"inventory" : pc.inventory,
-		#"weapon_array" : pc.weapon_array,
-		"weapon_data" : weapon_data
+		"gun_data" : gun_data
 	}
 	
 	write_to_file(save_path, data)
@@ -269,51 +250,43 @@ func write_player_data_to_save():
 
 
 func read_player_data_from_save():
-	var pc = $Recruit
-	var file = File.new()
-	if file.file_exists(save_path):
-		var file_read = file.open(save_path, File.READ)
-		if file_read == OK:
-			var scoped_data = file.get_var()
-			file.close()
+	var pc = $Juniper
+	var guns = pc.guns
+	
+	var scoped_data = read_from_file(save_path)
+	var player_data = scoped_data["player_data"]
+	
+	on_level_change(load(player_data["current_level"]), null)
+	yield(get_tree(), "idle_frame")
+	
+	pc.position = player_data["position"]
+	pc.hp = player_data["hp"]
+	pc.max_hp = player_data["max_hp"]
+	pc.total_xp = player_data["total_xp"]
+	pc.inventory = player_data["inventory"]
+	
+	
+	for g in guns.get_children():
+		g.free()
+		
+	for d in player_data["gun_data"]:
+		var gun_scene = load("res://src/Gun/%s" %d + ".tscn")
+		if gun_scene == null:
+			printerr("ERROR: cannot find gun scene at: res://src/Gun/%s" %d + ".tscn")
+			return
+		guns.add_child(gun_scene.instance())
+
+	for g in guns.get_children():
+		g.level = player_data["gun_data"][g.name]["level"]
+		g.xp = player_data["gun_data"][g.name]["xp"]
+		if g.max_ammo != 0:
+			g.ammo = player_data["gun_data"][g.name]["ammo"]
+	
+	pc.emit_signal("hp_updated", pc.hp, pc.max_hp)
+	pc.emit_signal("guns_updated", guns.get_children())
+	pc.update_inventory()
 			
-			#print(scoped_data["player_data"])
-			
-			on_level_change(scoped_data["player_data"]["current_level"], null)
-			yield(get_tree(), "idle_frame")
-			
-			pc.position = scoped_data["player_data"]["position"]
-			pc.hp = scoped_data["player_data"]["hp"]
-			pc.max_hp = scoped_data["player_data"]["max_hp"]
-			pc.total_xp = scoped_data["player_data"]["total_xp"]
-			pc.inventory = scoped_data["player_data"]["inventory"]
-			#player.setup_weapons() not sure what this did
-			
-			
-			pc.weapon_array.clear()
-			for w in scoped_data["player_data"]["weapon_data"]:
-				var weapon_resource = load("res://src/Weapon/%s" %w + ".tres")
-				if weapon_resource != null:
-					pc.weapon_array.append(weapon_resource)
-				else:
-					printerr("ERROR: cannot find weapon resource at: res://src/Weapon/%s" %w + ".tres")
-			for w in pc.weapon_array:
-				w.level = scoped_data["player_data"]["weapon_data"][w.resource_name]["level"]
-				w.xp = scoped_data["player_data"]["weapon_data"][w.resource_name]["xp"]
-				if w.needs_ammo:
-					w.ammo = scoped_data["player_data"]["weapon_data"][w.resource_name]["ammo"]
-			
-			#player.weapon_array[0].update_weapon()
-			pc.get_node("WeaponManager").update_weapon() #TODO: check compatability
-			pc.emit_signal("hp_updated", pc.hp, pc.max_hp)
-			pc.emit_signal("weapon_updated", pc.weapon_array.front())
-			pc.update_inventory()
-			
-			print("player data loaded")
-		else:
-			printerr("ERROR: player data could not be loaded!")
-	else:
-			printerr("ERROR: no save file found")
+	print("player data loaded")
 
 func write_level_data_to_temp():
 	var limited_props = []
@@ -344,7 +317,6 @@ func write_level_data_to_temp():
 ### COPY ###
 
 func copy_level_data_from_save_to_temp():
-	var temp_data = read_from_file(temp_path)
 	var save_data = read_from_file(save_path)
 
 	if save_data.has("level_data"):
@@ -447,8 +419,8 @@ func load_options():
 	var options = OPTIONS.instance()
 	options.hidden = true
 	$UILayer.add_child(options)
-	options.get_node("TabContainer/Settings").load_settings()
-	options.get_node("TabContainer/KeyConfig").load_input_map()
+	options.tabs.get_node("Settings").load_settings()
+	options.tabs.get_node("KeyConfig").load_input_map()
 	
 	yield(get_tree(), "idle_frame")
 	options.queue_free()
@@ -464,32 +436,6 @@ func clear_spawn_layers():
 func clear_bg_layer():
 	for c in $BackgroundLayer.get_children():
 		c.free()
-
-func debug_print():
-	if not $UILayer.has_node("DebugInfo"):
-		var debug_info = DEBUG_INFO.instance()
-		$UILayer.add_child(debug_info)
-	else:
-		$UILayer/DebugInfo.queue_free()
-
-func reload_level():
-	$Recruit.free() #we free and respawn them so we have a clean slate when we load in
-	$UILayer/HUD.free()
-	
-	on_level_change(current_level.filename, 0)
-	
-#	if has_node("UILayer/TitleScreen"):
-#		$UILayer/TitleScreen.queue_free()
-	if has_node("UILayer/PauseMenu"):
-		$UILayer/PauseMenu.unpause()
-
-	add_child(RECRUIT.instance())
-	$UILayer.add_child(HUD.instance())
-	
-	yield(get_tree(), "idle_frame")
-	
-	for s in get_tree().get_nodes_in_group("SpawnPoints"):
-		$Recruit.global_position = s.global_position
 
 
 func on_viewport_size_changed():

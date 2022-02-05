@@ -1,6 +1,6 @@
 extends Control
 
-onready var player = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node("World/Juniper")
 onready var hud = get_parent().get_node("HUD")
 onready var items = $MarginContainer/VBoxContainer/Items/ItemList
 onready var weapon_wheel = $MarginContainer/VBoxContainer/Weapons/MarginContainer/WeaponWheel
@@ -21,7 +21,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("inventory"):
 		get_tree().paused = false
 		hud.visible = true
-		player.get_node("WeaponManager").update_weapon()
+		pc.emit_signal("guns_updated", pc.guns.get_children())
 		queue_free()
 
 
@@ -29,7 +29,7 @@ func _on_inventory_updated(inventory):
 	if not inventory.empty():
 		player_inventory = inventory
 		var item_name = player_inventory[-1]
-		var item_path = "res://src/Item/KeyItem/%s" % item_name + ".tres"
+		var item_path = "res://src/Item/%s" % item_name + ".tres"
 		var item = load(item_path)
 		items.add_icon_item(item.texture)
 		#body.text = item.description
@@ -37,7 +37,7 @@ func _on_inventory_updated(inventory):
 
 func _on_Items_item_activated(index):
 		var item_name = player_inventory[index] 
-		var item_path = "res://src/Item/KeyItem/%s" % item_name + ".tres"
+		var item_path = "res://src/Item/%s" % item_name + ".tres"
 		var item = load(item_path)
 		body.text = item.description
 

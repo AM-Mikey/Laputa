@@ -1,19 +1,19 @@
 extends Prop
 
-export var weapon_name: String
-var weapon
+export var gun_name: String
+var gun
 
 func _ready():
 	add_to_group("LimitedProps")
-	weapon = load("res://src/Weapon/%s" % weapon_name + ".tres")
+	gun = load("res://src/Gun/%s" % gun_name + ".tres")
 
 func activate():
 	expend_prop()
 	am.play("chest")
 	am.play_music("get_item")
-	active_pc.weapon_array.push_front(weapon)
-	active_pc.get_node("WeaponManager").update_weapon()
-	print("added weapon '", weapon_name, "' to inventory")
+	active_pc.get_node("GunManager/Guns").add_child(gun)
+	active_pc.emit_signal("guns_updated", active_pc.guns.get_children())
+	print("added gun '", gun_name, "' to inventory")
 
 func expend_prop():
 	spent = true

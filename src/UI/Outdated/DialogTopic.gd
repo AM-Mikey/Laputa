@@ -6,7 +6,7 @@ var select_sound = load("res://assets/SFX/snd_menu_select.ogg")
 
 var font = load("res://src/UI/Cave-StoryFont.tres")
 
-onready var player = get_tree().get_root().get_node("World/Recruit")
+onready var player = get_tree().get_root().get_node("World/Juniper")
 onready var db = get_tree().get_root().get_node("World").get_node("UILayer/DialogBox")
 onready var gc = $MarginContainer/ScrollContainer/GridContainer
 

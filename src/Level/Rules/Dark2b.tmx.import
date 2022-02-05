@@ -1,0 +1,22 @@
+[remap]
+
+importer="vnen.tiled_importer"
+type="PackedScene"
+path="res://.import/Dark2b.tmx-84a61a268a503513fcade415829b51e4.scn"
+
+[deps]
+
+source_file="res://src/Level/Rules/Dark2b.tmx"
+dest_files=[ "res://.import/Dark2b.tmx-84a61a268a503513fcade415829b51e4.scn" ]
+
+[params]
+
+custom_properties=true
+tile_metadata=false
+uv_clip=true
+image_flags=7
+collision_layer=1
+embed_internal_images=false
+save_tiled_properties=false
+add_background=true
+post_import_script=""

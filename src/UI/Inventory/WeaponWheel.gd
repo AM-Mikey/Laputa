@@ -13,7 +13,7 @@ onready var tween = get_parent().get_parent().get_node("Tween")
 onready var timer = get_parent().get_parent().get_node("CycleDelay")
 onready var timer_half = get_parent().get_parent().get_node("HalfCycle")
 
-onready var player = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node("World/Juniper")
 
 onready var inventory = get_tree().get_root().get_node("World/UILayer/Inventory")
 
@@ -25,17 +25,16 @@ func _ready():
 		
 	yield(get_tree(), 'idle_frame')
 
-	for w in player.weapon_array:
+	for g in pc.guns.get_children():
 		var sprite = Sprite.new()
 		add_child(sprite)
-		sprite.texture = w.icon_texture
-		sprite.name = w.resource_name
-		#sprite.editor_description = w.display_name
+		sprite.texture = g.icon_texture
+		sprite.name = g.name
 		
-		if player.weapon_array.find(w) == 0:
+		if pc.guns.get_children().find(g) == 0:
 			sprite.scale = highlighted_scale
-			inventory.header.text = w.display_name
-			inventory.body.text = w.description
+			inventory.header.text = g.display_name
+			inventory.body.text = g.description
 			
 	
 	timer_half.start(0.000001) #just so it sets z indexes
@@ -45,13 +44,13 @@ func _ready():
 
 
 func _input(event):
-	if disabled != true:
-		if event.is_action_pressed("weapon_left") and timer.time_left == 0:
-			var weapons_size = player.weapon_array.size()
+	if not disabled:
+		var gun_count = pc.guns.get_child_count()
+		if event.is_action_pressed("gun_left") and timer.time_left == 0:
 			
-			var weapon_to_move = player.weapon_array.pop_back()
-			player.weapon_array.push_front(weapon_to_move)
-			move_child(get_child(weapons_size - 1), 0)
+			var gun_to_move = pc.guns.get_child(gun_count - 1)
+			pc.guns.move_child(gun_to_move, 0)
+			move_child(get_child(gun_count - 1), 0)
 			
 			timer.start(cycle_delay)
 			timer_half.start(cycle_delay/2)
@@ -61,20 +60,18 @@ func _input(event):
 			var active_child = get_child(0)
 			var old_child = get_child(1)
 			
-			inventory.header.text = player.weapon_array.front().display_name
-			inventory.body.text = player.weapon_array.front().description
+			inventory.header.text = pc.guns.get_child(0).display_name
+			inventory.body.text = pc.guns.get_child(0).description
 			
 			tween.interpolate_property(old_child, "scale", old_child.scale, Vector2(1, 1), cycle_delay, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 			tween.start()
 			tween.interpolate_property(active_child, "scale", active_child.scale, highlighted_scale, cycle_delay, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 			tween.start()
 
-		if event.is_action_pressed("weapon_right") and timer.time_left == 0:
-			var weapons_size = player.weapon_array.size()
-			
-			var weapon_to_move = player.weapon_array.pop_front()
-			player.weapon_array.push_back(weapon_to_move)
-			move_child(get_child(0), weapons_size - 1)
+		if event.is_action_pressed("gun_right") and timer.time_left == 0:
+			var gun_to_move = pc.guns.get_child(0)
+			pc.guns.move_child(gun_to_move, gun_count - 1)
+			move_child(get_child(0), gun_count - 1)
 			
 			timer.start(cycle_delay)
 			timer_half.start(cycle_delay/2)
@@ -82,10 +79,10 @@ func _input(event):
 			place_buttons()
 			
 			var active_child = get_child(0)
-			var old_child = get_child(weapons_size - 1)
+			var old_child = get_child(gun_count - 1)
 			
-			inventory.header.text = player.weapon_array.front().display_name
-			inventory.body.text = player.weapon_array.front().description
+			inventory.header.text = pc.guns.get_child(0).display_name
+			inventory.body.text = pc.guns.get_child(0).description
 			
 			tween.interpolate_property(old_child, "scale", old_child.scale, Vector2(1, 1), cycle_delay, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 			tween.start()

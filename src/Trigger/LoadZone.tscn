@@ -8,6 +8,7 @@ extents = Vector2( 8, 8 )
 [node name="LoadZone" type="Area2D"]
 collision_layer = 0
 script = ExtResource( 1 )
+color = Color( 0, 0.4, 0, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -8 )

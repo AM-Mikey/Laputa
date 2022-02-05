@@ -183,7 +183,7 @@ position = Vector2( 16, 32 )
 texture = ExtResource( 9 )
 centered = false
 
-[node name="Weapon" type="MarginContainer" parent="."]
+[node name="Gun" type="MarginContainer" parent="."]
 margin_right = 480.0
 margin_bottom = 272.0
 custom_constants/margin_right = 16
@@ -191,20 +191,20 @@ custom_constants/margin_top = 16
 custom_constants/margin_left = 32
 custom_constants/margin_bottom = 16
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Weapon"]
+[node name="HBox" type="HBoxContainer" parent="Gun"]
 margin_left = 32.0
 margin_top = 16.0
 margin_right = 464.0
 margin_bottom = 256.0
 rect_min_size = Vector2( 64, 16 )
 
-[node name="AmmoCount" type="Control" parent="Weapon/HBoxContainer"]
+[node name="AmmoCount" type="Control" parent="Gun/HBox"]
 margin_bottom = 240.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Divider" type="Sprite" parent="Weapon/HBoxContainer/AmmoCount"]
+[node name="Divider" type="Sprite" parent="Gun/HBox/AmmoCount"]
 position = Vector2( 33, 5 )
 texture = ExtResource( 2 )
 centered = false
@@ -213,7 +213,7 @@ hframes = 11
 vframes = 6
 frame = 21
 
-[node name="Divider2" type="Sprite" parent="Weapon/HBoxContainer/AmmoCount/Divider"]
+[node name="Divider2" type="Sprite" parent="Gun/HBox/AmmoCount/Divider"]
 position = Vector2( -8, 8 )
 texture = ExtResource( 2 )
 centered = false
@@ -222,40 +222,40 @@ hframes = 11
 vframes = 6
 frame = 21
 
-[node name="Num1" type="Sprite" parent="Weapon/HBoxContainer/AmmoCount"]
+[node name="Num1" type="Sprite" parent="Gun/HBox/AmmoCount"]
 position = Vector2( 4, 4 )
 texture = ExtResource( 2 )
 hframes = 11
 vframes = 6
 frame = 1
 
-[node name="Num2" type="Sprite" parent="Weapon/HBoxContainer/AmmoCount"]
+[node name="Num2" type="Sprite" parent="Gun/HBox/AmmoCount"]
 position = Vector2( 12, 4 )
 texture = ExtResource( 2 )
 hframes = 11
 vframes = 6
 
-[node name="Num3" type="Sprite" parent="Weapon/HBoxContainer/AmmoCount"]
+[node name="Num3" type="Sprite" parent="Gun/HBox/AmmoCount"]
 position = Vector2( 20, 4 )
 texture = ExtResource( 2 )
 hframes = 11
 vframes = 6
 
-[node name="Num4" type="Sprite" parent="Weapon/HBoxContainer/AmmoCount"]
+[node name="Num4" type="Sprite" parent="Gun/HBox/AmmoCount"]
 position = Vector2( 28, 12 )
 texture = ExtResource( 2 )
 hframes = 11
 vframes = 6
 frame = 12
 
-[node name="Num5" type="Sprite" parent="Weapon/HBoxContainer/AmmoCount"]
+[node name="Num5" type="Sprite" parent="Gun/HBox/AmmoCount"]
 position = Vector2( 36, 12 )
 texture = ExtResource( 2 )
 hframes = 11
 vframes = 6
 frame = 11
 
-[node name="Num6" type="Sprite" parent="Weapon/HBoxContainer/AmmoCount"]
+[node name="Num6" type="Sprite" parent="Gun/HBox/AmmoCount"]
 position = Vector2( 44, 12 )
 texture = ExtResource( 2 )
 hframes = 11

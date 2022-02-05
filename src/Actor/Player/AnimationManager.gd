@@ -3,7 +3,7 @@ extends Node
 enum Layer {BACK, FRONT, BOTH}
 
 
-onready var pc = get_tree().get_root().get_node("World/Recruit")
+onready var pc = get_tree().get_root().get_node("World/Juniper")
 onready var mm = pc.get_node("MovementManager")
 onready var ap = pc.get_node("AnimationPlayer")
 
@@ -13,7 +13,6 @@ func _physics_process(_delta):
 
 
 func animate():
-	var texture
 	var next_animation: String = ""
 	var start_time: float
 	var run_anim_speed = max((abs(mm.velocity.x)/mm.speed.x) * 2, 0.1)
@@ -155,36 +154,36 @@ func get_input_dir() -> Vector2:
 
 func get_next_animation(animation, anim_dir, can_shoot_down):
 	var animation_suffix
-	var ws = get_parent().get_node("WeaponSprite")
+	var gs = get_parent().get_node("GunSprite")
 	
 	pc.face_dir = anim_dir
 	pc.shoot_dir = Vector2(anim_dir.x, 0)
-	ws.rotation_degrees = 0
+	gs.rotation_degrees = 0
 	
 	if anim_dir.x == -1:
 		animation_suffix = ".L"
-		ws.scale.x = 1
+		gs.scale.x = 1
 	elif anim_dir.x == 1:
 		animation_suffix = ".R"
-		ws.scale.x = -1
+		gs.scale.x = -1
 
 
 	if not "Climb" in animation: #climbing doesnt look up or down so skip this section
 		if get_input_dir().y == -1:
 			animation_suffix += "1"
 			pc.shoot_dir = Vector2.UP
-			ws.rotation_degrees = anim_dir.x * 90 * -1
+			gs.rotation_degrees = anim_dir.x * 90 * -1
 		elif get_input_dir().y == 1:
 			if can_shoot_down:
 				animation_suffix += "2"
 				pc.shoot_dir = Vector2.DOWN
-				ws.rotation_degrees = anim_dir.x * 90
+				gs.rotation_degrees = anim_dir.x * 90
 			else:
 				animation_suffix += "3"
 
 	if "Back" in animation:
 		pc.shoot_dir.x *= -1
-		ws.scale.x *= -1
+		gs.scale.x *= -1
 		
 		
 	var next_animation = animation + animation_suffix

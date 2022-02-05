@@ -4,25 +4,14 @@ var texture: StreamTexture
 var texture_index: int
 var collision_shape: RectangleShape2D
 
-var velocity = Vector2.ZERO
-var direction = Vector2.ZERO
-var projectile_speed: int
-
-var projectile_range: int
-
-var origin = Vector2.ZERO
-
 
 var minimum_speed: float = 24
 var bounciness = .6
 var explosion_time = 2.5
 var start_velocity
-
 var touched_floor = false
-
 var player_on_floor = false
 var player_held_down = false
-
 var zero_speed_last_frame = false
 
 func _ready():
@@ -35,11 +24,11 @@ func _ready():
 	$ExplosionDetector.set_collision_mask_bit(1, false) #enemy
 	$ExplosionDetector.set_collision_mask_bit(8, false) #destructable
 	
-	var player = get_tree().get_root().get_node("World/Recruit")
+	var player = get_tree().get_root().get_node("World/Juniper")
 	player_on_floor = player.is_on_floor()
 	player_held_down = Input.is_action_pressed("look_down")
 	
-	velocity = get_initial_velocity(projectile_speed, direction)
+	velocity = get_initial_velocity(speed, direction)
 	start_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 	$Timer.start(explosion_time)
 

@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=14]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=16]
 
+
 [node name="PirateCliff" type="Node2D"]
 script = ExtResource( 11 )
 level_name = "Edge of the Island"

@@ -5,20 +5,12 @@
 [ext_resource path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" type="AudioStream" id=3]
 [ext_resource path="res://src/Actor/Enemy/BeetleYellow/YellowBeetleIdle.gd" type="Script" id=4]
 [ext_resource path="res://src/Actor/Enemy/BeetleYellow/YellowBeetleAttack.gd" type="Script" id=5]
-[ext_resource path="res://src/UI/LaputaTheme.tres" type="Theme" id=6]
+[ext_resource path="res://src/UI/Theme/LaputaTheme.tres" type="Theme" id=6]
 [ext_resource path="res://src/Actor/Enemy/BeetleYellow/YellowBeetleReset.gd" type="Script" id=7]
 [ext_resource path="res://assets/Actor/Enemy/Bugger_Floor_Idle.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 4 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 16, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 2 )
-region = Rect2( 16, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 8 )
@@ -36,13 +28,16 @@ region = Rect2( 0, 32, 16, 16 )
 atlas = ExtResource( 2 )
 region = Rect2( 16, 32, 16, 16 )
 
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 16, 16, 16 )
+
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ SubResource( 5 ), SubResource( 6 ) ],
-"loop": true,
-"name": "Attack",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
 "name": "Idle_Floor",
@@ -52,6 +47,11 @@ animations = [ {
 "loop": true,
 "name": "Idle_Wall",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "Attack",
+"speed": 10.0
 } ]
 
 [node name="BeetleYellow" type="KinematicBody2D"]

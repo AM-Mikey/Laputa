@@ -3,7 +3,7 @@ extends Node
 export var fly_speed = Vector2(500, 500)
 
 onready var world = get_tree().get_root().get_node("World")
-onready var pc = world.get_node("Recruit")
+onready var pc = world.get_node("Juniper")
 onready var mm = pc.get_node("MovementManager")
 
 func state_process():

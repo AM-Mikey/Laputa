@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/Actor/Enemy/Trenchie.gd" type="Script" id=1]
 [ext_resource path="res://assets/Actor/Enemy/Trenchie.png" type="Texture" id=2]
-[ext_resource path="res://assets/SFX/Placeholder/snd_em_fire.ogg" type="AudioStream" id=3]
-[ext_resource path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" type="AudioStream" id=4]
+[ext_resource path="res://src/Utility/StateMachine.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Actor/Enemy/Trenchie/Jump.gd" type="Script" id=4]
+[ext_resource path="res://src/Actor/Enemy/Trenchie/Idle.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -306,8 +307,8 @@ position = Vector2( 0, -8 )
 shape = SubResource( 1 )
 
 [node name="HideDetector" type="Area2D" parent="."]
-monitorable = false
 collision_layer = 0
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HideDetector"]
 modulate = Color( 0.188235, 0.537255, 0.529412, 0.603922 )
@@ -315,16 +316,16 @@ position = Vector2( 0, -56 )
 shape = SubResource( 2 )
 
 [node name="PeekDetector" type="Area2D" parent="."]
-monitorable = false
 collision_layer = 0
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PeekDetector"]
 modulate = Color( 0.992157, 0.992157, 0.992157, 0.156863 )
 shape = SubResource( 3 )
 
 [node name="ShootDetector" type="Area2D" parent="."]
-monitorable = false
 collision_layer = 0
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShootDetector"]
 modulate = Color( 0, 0.0156863, 0.937255, 0.392157 )
@@ -337,6 +338,7 @@ texture = ExtResource( 2 )
 flip_h = true
 hframes = 4
 vframes = 4
+frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Barrel = SubResource( 5 )
@@ -350,17 +352,24 @@ anims/ShootRight = SubResource( 12 )
 anims/StandLeft = SubResource( 13 )
 anims/StandRight = SubResource( 14 )
 
-[node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 4 )
-bus = "SFX"
-
-[node name="PosFire" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
-bus = "SFX"
-
 [node name="FireCooldown" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="StateMachine" parent="." instance=ExtResource( 3 )]
+
+[node name="Label" type="Label" parent="StateMachine"]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
 
 [connection signal="body_entered" from="HideDetector" to="." method="_on_HideDetector_body_entered"]
 [connection signal="body_entered" from="PeekDetector" to="." method="_on_PeekDetector_body_entered"]

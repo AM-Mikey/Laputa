@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Actor/Actor.gd"
 }, {
+"base": "Node2D",
+"class": "AutotileGenerator",
+"language": "GDScript",
+"path": "res://addons/AutotileGenerator/AutotileGenerator.gd"
+}, {
 "base": "Resource",
 "class": "Background",
 "language": "GDScript",
@@ -34,10 +39,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Actor/Enemy/Enemy.gd"
 }, {
-"base": "Resource",
-"class": "KeyItem",
+"base": "CanvasLayer",
+"class": "Fade",
 "language": "GDScript",
-"path": "res://src/Item/KeyItem/KeyItem.gd"
+"path": "res://addons/UniversalFade/Fade.gd"
+}, {
+"base": "Node",
+"class": "Gun",
+"language": "GDScript",
+"path": "res://src/Gun/Gun.gd"
+}, {
+"base": "Resource",
+"class": "Item",
+"language": "GDScript",
+"path": "res://src/Item/Item.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Juniper",
+"language": "GDScript",
+"path": "res://src/Actor/Player/Juniper.gd"
 }, {
 "base": "Node2D",
 "class": "Movement",
@@ -54,10 +74,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Prop/Prop.gd"
 }, {
-"base": "KinematicBody2D",
-"class": "Recruit",
+"base": "Node",
+"class": "State",
 "language": "GDScript",
-"path": "res://src/Actor/Player/Recruit.gd"
+"path": "res://src/Utility/State.gd"
+}, {
+"base": "Resource",
+"class": "TilesetProperties",
+"language": "GDScript",
+"path": "res://addons/frontrider.tiledtools/loader/TilesetPropertyResource.gd"
 }, {
 "base": "Area2D",
 "class": "Trigger",
@@ -67,22 +92,74 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "Weapon",
 "language": "GDScript",
-"path": "res://src/Weapon/Weapon.gd"
+"path": "res://src/Gun/Weapon.gd"
 } ]
 _global_script_class_icons={
 "Actor": "res://assets/Icon/ActorIcon.png",
+"AutotileGenerator": "",
 "Background": "res://assets/Icon/BackgroundIcon.png",
 "Boss": "res://assets/Icon/BossIcon.png",
 "Bullet": "res://assets/Icon/BulletIcon.png",
 "Enemy": "res://assets/Icon/EnemyIcon.png",
-"KeyItem": "res://assets/Icon/KeyItemIcon.png",
+"Fade": "",
+"Gun": "res://assets/Icon/GunIcon.png",
+"Item": "res://assets/Icon/ItemIcon.png",
+"Juniper": "res://assets/Icon/PlayerIcon.png",
 "Movement": "",
 "NPC": "res://assets/Icon/NPCIcon.png",
 "Prop": "res://assets/Icon/PropIcon.png",
-"Recruit": "res://assets/Icon/PlayerIcon.png",
+"State": "",
+"TilesetProperties": "",
 "Trigger": "res://assets/Icon/TriggerIcon.png",
 "Weapon": "res://assets/Icon/WeaponIcon.png"
 }
+
+[addons]
+
+instance_dock/scenes=[ {
+"name": "enemies",
+"scenes": [ {
+"scene": "res://src/Actor/Enemy/Fish/Fish.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Frog.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Pather.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Roller.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Sentry.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Sphagnum.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Stalagtite.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Swooper.tscn"
+}, {
+}, {
+"scene": "res://src/Actor/Enemy/TogglerVertical.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Trenchie.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Larry.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Hunter.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Crusher.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Billy.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/BeetleYellow.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/BeetleGreen.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Bat.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Climber/ClimberManager.tscn"
+}, {
+"scene": "res://src/Actor/Enemy/Goalie/Goalie.tscn"
+} ],
+"scroll": 0
+} ]
 
 [application]
 
@@ -93,7 +170,8 @@ config/icon="res://assets/UI/Face/Recruit.png"
 
 [autoload]
 
-am="*res://src/Utility/AudioManager.gd"
+am="*res://src/Audio/AudioManager.gd"
+DebugHotkeys="*res://src/Utility/DebugHotkeys.gd"
 
 [display]
 
@@ -104,7 +182,7 @@ window/size/test_height=1080
 
 [editor_plugins]
 
-enabled=PoolStringArray(  )
+enabled=PoolStringArray( "res://addons/AutotileGenerator/plugin.cfg", "res://addons/InstanceDock/plugin.cfg", "res://addons/frontrider.tiledtools/plugin.cfg", "res://addons/vnen.tiled_importer/plugin.cfg" )
 
 [importer_defaults]
 
@@ -263,13 +341,13 @@ inventory={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":3,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
-weapon_right={
+gun_right={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":5,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
-weapon_left={
+gun_left={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":4,"pressure":0.0,"pressed":false,"script":null)
@@ -321,6 +399,11 @@ debug_triggers={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777223,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+debug_quit={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777230,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -345,3 +428,12 @@ debug_triggers={
 
 2d/snapping/use_gpu_pixel_snap=true
 environment/default_environment="res://default_env.tres"
+
+[tiled_importer]
+
+enable_json_format=true
+
+[tiled_tools]
+
+tileset_folder="res://assets/tileset_folder"
+tiled_path="tiled"

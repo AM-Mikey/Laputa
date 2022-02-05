@@ -5,20 +5,20 @@ func _ready():
 
 
 func _on_Ladder_body_entered(body):
-	active_pc = body
+	active_bodies.append(body)
 
-func _on_Ladder_body_exited(_body):
-	if not get_overlap():
-		active_pc.get_node("MovementManager").change_state(active_pc.get_node("MovementManager").states["normal"])
-	
-	active_pc = null
+func _on_Ladder_body_exited(body):
+	if not get_overlap(body):
+		body.mm.change_state(body.mm.states["normal"])
+	active_bodies.erase(body)
 
 
 func _physics_process(delta):
-	if active_pc and not active_pc.get_node("MovementManager").current_state == active_pc.get_node("MovementManager").states["ladder"]:
-		if Input.is_action_just_pressed("look_up") \
-		or Input.is_action_just_pressed("look_down") and not active_pc.is_on_floor() \
-		or Input.is_action_just_pressed("look_down") and active_pc.is_on_ssp:
-			active_pc.get_node("MovementManager").change_state(active_pc.get_node("MovementManager").states["ladder"])
-			active_pc.position.x = position.x + 8
-			active_pc.position.y -= 1
+	for b in active_bodies:
+		if not b.mm.current_state == b.mm.states["ladder"]:
+			if Input.is_action_just_pressed("look_up") \
+			or Input.is_action_just_pressed("look_down") and not b.is_on_floor() \
+			or Input.is_action_just_pressed("look_down") and b.is_on_ssp:
+				b.get_node("MovementManager").change_state(b.get_node("MovementManager").states["ladder"])
+				b.position.x = position.x + 8
+				b.position.y -= 1

@@ -1,6 +1,5 @@
 extends Prop
 
 func on_break(method):
-	$BreakSound.play()
-	yield($BreakSound, "finished")
+	am.play("break_block")
 	queue_free()

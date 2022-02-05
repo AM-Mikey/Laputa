@@ -2,16 +2,25 @@ extends Control
 
 var settings_path = "user://settings.json"
 
-onready var display_mode = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DisplayMode/OptionButton
-onready var resolution_scale = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ResolutionScale/OptionButton
+#onready var display_mode = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DisplayMode/OptionButton
+#onready var resolution_scale = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ResolutionScale/OptionButton
 
-onready var master_slider = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MasterSlider
-onready var music_slider = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MusicSlider
-onready var sfx_slider = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/SFXSlider
+var after_ready = false
 
-onready var master_label = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MasterLabel
-onready var music_label = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MusicLabel
-onready var sfx_label = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/SFXLabel
+export(NodePath) var p_master
+onready var s_master = get_node(p_master)
+export(NodePath) var p_sfx
+onready var sfx = get_node(p_sfx)
+export(NodePath) var p_music
+onready var music = get_node(p_music)
+
+export(NodePath) var display_b
+export(NodePath) var resolution_b
+export(NodePath) var mouse_b
+export(NodePath) var delete_b
+
+export(NodePath) var scroll_c
+#var scroll_size = 
 
 onready var world = get_tree().get_root().get_node("World")
 
@@ -24,15 +33,18 @@ var default = {
 	}
 
 func _ready():
-	
-	
 	var file = File.new()
 	if not file.file_exists(settings_path):
 		save_defaults()
 	else: 
 		load_settings()
+	get_node(scroll_c).get_v_scrollbar().connect("item_rect_changed", self, "_on_scrollbar_changed")
+	after_ready = true
 
 
+func _on_scrollbar_changed():
+	print("scroll changed")
+	get_node(scroll_c).get_v_scrollbar().rect_size.y = get_node(scroll_c).rect_size.y - 48
 
 func load_settings():
 	var data
@@ -45,17 +57,17 @@ func load_settings():
 			data = JSON.parse(text).result
 			file.close()
 
-		display_mode.selected = data["DisplayMode"]
+		get_node(display_b).selected = data["DisplayMode"]
 		_on_DisplayMode_item_selected(data["DisplayMode"])
-		resolution_scale.selected = data["ResolutionScale"]
+		get_node(resolution_b).selected = data["ResolutionScale"]
 		_on_ResolutionScale_item_selected(data["ResolutionScale"])
 		
 		
-		master_slider.value = data["MasterSlider"]
+		s_master.get_node("Slider").value = data["MasterSlider"]
 		_on_MasterSlider_value_changed(data["MasterSlider"])
-		music_slider.value = data["MusicSlider"]
+		music.get_node("Slider").value = data["MusicSlider"]
 		_on_MusicSlider_value_changed(data["MusicSlider"])
-		sfx_slider.value = data["SFXSlider"]
+		sfx.get_node("Slider").value = data["SFXSlider"]
 		_on_SFXSlider_value_changed(data["SFXSlider"])
 
 	else: 
@@ -103,7 +115,8 @@ func _on_ResolutionScale_item_selected(index):
 		world.resolution_scale = 4.0
 		world.viewport_size_ignore = true
 	
-	world.get_node("TitleCam").zoom = Vector2(1 / world.resolution_scale, 1 / world.resolution_scale)
+	if world.has_node("TitleCam"):
+		world.get_node("TitleCam").zoom = Vector2(1 / world.resolution_scale, 1 / world.resolution_scale)
 	#world.get_node("UILayer").scale = Vector2(world.resolution_scale, world.resolution_scale)
 	#TODO: make sure this carrys over for playercamera
 	
@@ -136,31 +149,25 @@ func _on_Return_pressed():
 func _on_MasterSlider_value_changed(value):
 	var db = percent_to_db(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),db)
-	if value == 0:
-		master_label.text = "Master Volume: Muted"
-	else:
-		master_label.text = "Master Volume: " + str(value) + "0 %"
-		
+	if not world.get_node("UILayer/Options").hidden and after_ready:
+		am.play_master("sound_test")
+	s_master.get_node("Label").text = "Master Volume: Muted" if value == 0 else "Master Volume: " + str(value) + "0 %"
 	save_to_file("MasterSlider", value)
 
 func _on_MusicSlider_value_changed(value):
 	var db = percent_to_db(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),db)
-	if value == 0:
-		music_label.text = "Music Volume: Muted"
-	else:
-		music_label.text = "Music Volume: " + str(value) + "0 %"
-		
+	if not world.get_node("UILayer/Options").hidden and after_ready:
+		am.play_music("sound_test")
+	music.get_node("Label").text = "Music Volume: Muted" if value == 0 else "Music Volume: " + str(value) + "0 %"
 	save_to_file("MusicSlider", value)
 
 func _on_SFXSlider_value_changed(value):
 	var db = percent_to_db(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),db)
-	if value == 0:
-		sfx_label.text = "SFX Volume: Muted"
-	else:
-		sfx_label.text = "SFX Volume: " + str(value) + "0 %"
-	
+	if not world.get_node("UILayer/Options").hidden and after_ready:
+		am.play("sound_test")
+	sfx.get_node("Label").text = "SFX Volume: Muted" if value == 0 else "SFX Volume: " + str(value) + "0 %"
 	save_to_file("SFXSlider", value)
 
 func percent_to_db(value) -> float:
@@ -213,6 +220,12 @@ func percent_to_db(value) -> float:
 	
 	return db
 
+func _on_MouseLock_toggled(value):
+	if value:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 func _on_DeleteSave_pressed():
 	var files = []
 	var dir = Directory.new()
@@ -264,6 +277,13 @@ func save_to_file(setting, setting_value):
 
 
 func focus():
-	$MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MasterSlider.grab_focus()
+	s_master.get_node("Slider").grab_focus()
+
+
+
+
+
+
+
 
 

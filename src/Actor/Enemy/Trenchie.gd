@@ -123,7 +123,7 @@ func prepare_bullet():
 	if look_dir == Vector2.RIGHT:
 		bullet.rotation_degrees = 180
 	fire_bullet(bullet)
-	$PosFire.play()
+	am.play("enemy_shoot")
 
 func fire_bullet(bullet):
 	bullet.velocity.x = projectile_speed * get_physics_process_delta_time() * sign(bullet.direction.x)

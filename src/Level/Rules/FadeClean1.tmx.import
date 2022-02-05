@@ -1,0 +1,22 @@
+[remap]
+
+importer="vnen.tiled_importer"
+type="PackedScene"
+path="res://.import/FadeClean1.tmx-178e18aa50415d5b7f9cd7f478328007.scn"
+
+[deps]
+
+source_file="res://src/Level/Rules/FadeClean1.tmx"
+dest_files=[ "res://.import/FadeClean1.tmx-178e18aa50415d5b7f9cd7f478328007.scn" ]
+
+[params]
+
+custom_properties=true
+tile_metadata=false
+uv_clip=true
+image_flags=7
+collision_layer=1
+embed_internal_images=false
+save_tiled_properties=false
+add_background=true
+post_import_script=""

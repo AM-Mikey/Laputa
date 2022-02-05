@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/Actor/Enemy/Frog.gd" type="Script" id=1]
 [ext_resource path="res://assets/Actor/Enemy/Frog.png" type="Texture" id=2]
-[ext_resource path="res://assets/SFX/Placeholder/snd_critter_jump.ogg" type="AudioStream" id=3]
 [ext_resource path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" type="AudioStream" id=4]
 [ext_resource path="res://assets/SFX/FrogCroak.ogg" type="AudioStream" id=5]
 
@@ -264,6 +263,8 @@ tracks/1/keys = {
 collision_layer = 2
 collision_mask = 520
 script = ExtResource( 1 )
+speed = Vector2( 12, 120 )
+gravity = 200
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -7 )
@@ -305,10 +306,6 @@ bus = "SFX"
 
 [node name="PosCroak" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
-bus = "SFX"
-
-[node name="PosJump" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
 bus = "SFX"
 
 [node name="Timer" type="Timer" parent="."]
