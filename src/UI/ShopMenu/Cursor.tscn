@@ -1,0 +1,219 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/UI/ShopMenu/Cursor.png" type="Texture" id=1]
+[ext_resource path="res://src/UI/ShopMenu/Cursor.gd" type="Script" id=2]
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform vec2 offset = vec2(1.0, 1.0);
+uniform vec4 modulate : hint_color;
+
+void fragment() {
+	vec2 ps = TEXTURE_PIXEL_SIZE;
+
+	vec4 shadow = vec4(modulate.rgb, texture(TEXTURE, UV - offset * ps).a * modulate.a);
+	vec4 col = texture(TEXTURE, UV);
+
+	COLOR = mix(shadow, col, col.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+shader_param/offset = Vector2( 1, 1 )
+shader_param/modulate = Color( 0, 0, 0, 0.501961 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "Select"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("TL:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TR:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BL:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BR:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TL/Shad:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 3 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("TR/Shad:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = false
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 3 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("BL/Shad:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = false
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("BR/Shad:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = false
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 3 ]
+}
+
+[node name="Cursor" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -413.0
+margin_bottom = -159.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+color = Color( 1, 0.227451, 0.227451, 1 )
+
+[node name="TL" type="Sprite" parent="."]
+self_modulate = Color( 1, 0.227451, 0.227451, 1 )
+material = SubResource( 5 )
+use_parent_material = true
+texture = ExtResource( 1 )
+hframes = 4
+frame = 1
+
+[node name="Shad" type="Sprite" parent="TL"]
+modulate = Color( 0, 0, 0, 0.501961 )
+show_behind_parent = true
+material = SubResource( 5 )
+use_parent_material = true
+position = Vector2( 1, 1 )
+texture = ExtResource( 1 )
+hframes = 4
+frame = 1
+
+[node name="TR" type="Sprite" parent="."]
+self_modulate = Color( 1, 0.227451, 0.227451, 1 )
+use_parent_material = true
+position = Vector2( 67, 0 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+texture = ExtResource( 1 )
+hframes = 4
+frame = 1
+
+[node name="Shad" type="Sprite" parent="TR"]
+modulate = Color( 0, 0, 0, 0.501961 )
+show_behind_parent = true
+material = SubResource( 5 )
+use_parent_material = true
+position = Vector2( -1, 0.999998 )
+texture = ExtResource( 1 )
+hframes = 4
+frame = 1
+
+[node name="BL" type="Sprite" parent="."]
+self_modulate = Color( 1, 0.227451, 0.227451, 1 )
+use_parent_material = true
+position = Vector2( 0, 111 )
+scale = Vector2( 1, -1 )
+texture = ExtResource( 1 )
+hframes = 4
+frame = 1
+
+[node name="Shad" type="Sprite" parent="BL"]
+modulate = Color( 0, 0, 0, 0.501961 )
+show_behind_parent = true
+material = SubResource( 5 )
+use_parent_material = true
+position = Vector2( 1, -1 )
+texture = ExtResource( 1 )
+hframes = 4
+frame = 1
+
+[node name="BR" type="Sprite" parent="."]
+self_modulate = Color( 1, 0.227451, 0.227451, 1 )
+use_parent_material = true
+position = Vector2( 67, 111 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+hframes = 4
+frame = 1
+
+[node name="Shad" type="Sprite" parent="BR"]
+modulate = Color( 0, 0, 0, 0.501961 )
+show_behind_parent = true
+material = SubResource( 5 )
+use_parent_material = true
+position = Vector2( -1, -0.999996 )
+texture = ExtResource( 1 )
+hframes = 4
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Select"
+anims/Select = SubResource( 1 )
+
+[connection signal="resized" from="." to="." method="_on_Cursor_resized"]

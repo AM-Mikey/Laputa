@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://assets/Item/Items.png" type="Texture" id=1]
+[ext_resource path="res://src/Item/Item.gd" type="Script" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 160, 0, 32, 16 )
+
+[resource]
+script = ExtResource( 2 )
+item_name = "Linen"
+index = 5
+texture = SubResource( 1 )
+description = "A small bauble shaped like an ox."
+price = 0

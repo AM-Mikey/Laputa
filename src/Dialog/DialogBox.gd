@@ -4,10 +4,8 @@ signal dialog_finished
 
 var text_sound = load("res://assets/SFX/Placeholder/snd_msg.ogg")
 
-var prompt_sound = load("res://assets/SFX/Placeholder/snd_menu_prompt.ogg")
-var move_sound = load("res://assets/SFX/Placeholder/snd_menu_move.ogg")
-var select_sound = load("res://assets/SFX/Placeholder/snd_menu_select.ogg")
 
+export(NodePath) var face_path
 
 
 var dialog
@@ -57,6 +55,7 @@ func print_flavor_text():
 	pc.disable()
 	pc.inspecting = true
 	dialog_loop()
+
 
 func start_printing(dialog_json, conversation_to_print):
 	current_dialog_json = dialog_json
@@ -191,17 +190,6 @@ func stop_printing():
 
 
 
-
-func _physics_process(_delta):
-	var viewport_size = get_tree().get_root().size / world.resolution_scale
-	
-	var active_camera = get_current_camera()
-	
-	if active_camera.offset_v >= 1 / world.resolution_scale: #more than halfway down
-		rect_position.y = viewport_size.y - (rect_size.y + 16) #bottom
-	if active_camera.offset_v <= -1 / world.resolution_scale: #more than halfway up
-		rect_position.y = 16 #top
-	
 func on_viewport_size_changed():
 	var viewport_size = get_tree().get_root().size / world.resolution_scale
 	#rect_size = get_tree().get_root().size / world.resolution_scale
@@ -209,11 +197,19 @@ func on_viewport_size_changed():
 	rect_position.x = (viewport_size.x - rect_size.x) /2
 	rect_position.y = viewport_size.y - 80
 
-func get_current_camera() -> Node:
-	var cameras = get_tree().get_nodes_in_group("Cameras")
-	for c in cameras:
-		if c.current:
-			print("found current camera")
-			return c
-	printerr("ERROR: could not find current camera!")
-	return cameras[0]
+
+
+func flip_top():
+	rect_position.y = 16
+
+func flip_bottom():
+	var viewport_size = get_tree().get_root().size / world.resolution_scale
+	rect_position.y = viewport_size.y - (rect_size.y + 16)
+
+func flip_left():
+	get_node(face_path).get_parent.move_child(face_path.get_index(), 0)
+	get_node(face_path).sprite.scale.x = 1
+
+func flip_right():
+	get_node(face_path).get_parent.move_child(face_path.get_index(), 1)
+	get_node(face_path).sprite.scale.x = -1

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Dialog/DialogBox.gd" type="Script" id=1]
-[ext_resource path="res://src/UI/StyleBox/ChromeRimmed.tres" type="StyleBox" id=2]
+[ext_resource path="res://src/UI/StyleBox/SteelRoundDark.tres" type="StyleBox" id=2]
 [ext_resource path="res://src/UI/Font/Momo.tres" type="DynamicFont" id=3]
 [ext_resource path="res://assets/UI/Face/Izu.png" type="Texture" id=4]
 [ext_resource path="res://src/UI/Font/WelcomeBack.tres" type="DynamicFont" id=5]
@@ -61,26 +61,16 @@ size_flags_vertical = 3
 custom_fonts/bold_font = ExtResource( 5 )
 custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
-text = "this
-is
-super
-cool
-what
-a suprise
-that
-you 
-would do
-that"
 scroll_active = false
 scroll_following = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = "SFX"
 
-[node name="PrintTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="CommandHandler" type="Node" parent="."]
 script = ExtResource( 6 )
 
 [node name="Tween" type="Tween" parent="CommandHandler"]
+
+[node name="PrintTimer" type="Timer" parent="."]
+one_shot = true

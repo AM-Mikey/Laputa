@@ -1,0 +1,12 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+void fragment(){
+    vec2 newuv = UV;
+    newuv.x += TIME;
+	newuv.y -= TIME;
+    vec4 c = texture(TEXTURE, newuv);
+    COLOR = c;
+}"

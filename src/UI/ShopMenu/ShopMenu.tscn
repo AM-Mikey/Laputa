@@ -1,0 +1,157 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/UI/ShopMenu/BackgroundOrange.png" type="Texture" id=1]
+[ext_resource path="res://src/UI/ShopMenu/BackgroundShader.tres" type="Shader" id=2]
+[ext_resource path="res://src/UI/ShopMenu/ShopMenuItem.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/UI/Theme/LaputaThemeMenus.tres" type="Theme" id=4]
+[ext_resource path="res://src/Dialog/DialogBox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/UI/Font/WelcomeBack2x.tres" type="DynamicFont" id=7]
+[ext_resource path="res://src/UI/ShopMenu/ShopMenu.gd" type="Script" id=8]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+
+[node name="ShopMenu" type="MarginContainer"]
+margin_right = 480.0
+margin_bottom = 270.0
+theme = ExtResource( 4 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+items = NodePath("Margin/VBox/Margin/Grid")
+
+[node name="Background" type="TextureRect" parent="."]
+material = SubResource( 1 )
+margin_right = 480.0
+margin_bottom = 270.0
+texture = ExtResource( 1 )
+stretch_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="."]
+margin_right = 480.0
+margin_bottom = 270.0
+
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+margin_right = 480.0
+margin_bottom = 270.0
+
+[node name="Top" type="MarginContainer" parent="Margin/VBox"]
+margin_right = 480.0
+margin_bottom = 48.0
+
+[node name="Panel" type="Panel" parent="Margin/VBox/Top"]
+margin_right = 480.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 0, 48 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin" type="MarginContainer" parent="Margin/VBox/Top"]
+margin_right = 480.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBox" type="HBoxContainer" parent="Margin/VBox/Top/Margin"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 476.0
+margin_bottom = 44.0
+
+[node name="Description" type="Label" parent="Margin/VBox/Top/Margin/HBox"]
+margin_top = 4.0
+margin_right = 154.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+text = "Item Description
+"
+
+[node name="Name" type="Label" parent="Margin/VBox/Top/Margin/HBox"]
+margin_left = 158.0
+margin_right = 313.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 7 )
+text = "LINEN"
+align = 1
+valign = 2
+
+[node name="Price" type="Label" parent="Margin/VBox/Top/Margin/HBox"]
+margin_left = 317.0
+margin_top = 4.0
+margin_right = 472.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+text = "Price
+"
+
+[node name="Margin" type="MarginContainer" parent="Margin/VBox"]
+margin_top = 52.0
+margin_right = 480.0
+margin_bottom = 202.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Grid" type="GridContainer" parent="Margin/VBox/Margin"]
+margin_left = 120.0
+margin_top = 19.0
+margin_right = 360.0
+margin_bottom = 131.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/vseparation = 16
+custom_constants/hseparation = 16
+columns = 4
+
+[node name="ShopMenuItem" parent="Margin/VBox/Margin/Grid" instance=ExtResource( 3 )]
+
+[node name="ShopMenuItem2" parent="Margin/VBox/Margin/Grid" instance=ExtResource( 3 )]
+margin_left = 64.0
+margin_right = 112.0
+
+[node name="ShopMenuItem3" parent="Margin/VBox/Margin/Grid" instance=ExtResource( 3 )]
+margin_left = 128.0
+margin_right = 176.0
+
+[node name="ShopMenuItem4" parent="Margin/VBox/Margin/Grid" instance=ExtResource( 3 )]
+margin_left = 192.0
+margin_right = 240.0
+
+[node name="ShopMenuItem5" parent="Margin/VBox/Margin/Grid" instance=ExtResource( 3 )]
+margin_top = 64.0
+margin_bottom = 112.0
+
+[node name="ShopMenuItem6" parent="Margin/VBox/Margin/Grid" instance=ExtResource( 3 )]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 112.0
+margin_bottom = 112.0
+
+[node name="ShopMenuItem7" parent="Margin/VBox/Margin/Grid" instance=ExtResource( 3 )]
+margin_left = 128.0
+margin_top = 64.0
+margin_right = 176.0
+margin_bottom = 112.0
+
+[node name="ShopMenuItem8" parent="Margin/VBox/Margin/Grid" instance=ExtResource( 3 )]
+margin_left = 192.0
+margin_top = 64.0
+margin_right = 240.0
+margin_bottom = 112.0
+
+[node name="Dialog" type="MarginContainer" parent="Margin/VBox"]
+margin_top = 206.0
+margin_right = 480.0
+margin_bottom = 270.0
+
+[node name="DialogBox" parent="Margin/VBox/Dialog" instance=ExtResource( 6 )]
