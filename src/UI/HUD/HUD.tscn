@@ -49,7 +49,7 @@ tracks/0/keys = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = 2.0
-mouse_filter = 1
+mouse_filter = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -71,6 +71,7 @@ centered = false
 [node name="HpBar" type="Control" parent="."]
 margin_right = 480.0
 margin_bottom = 272.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -80,6 +81,7 @@ margin_left = 48.0
 margin_top = 35.0
 margin_right = 86.0
 margin_bottom = 39.0
+mouse_filter = 2
 value = 50.0
 texture_progress = ExtResource( 7 )
 __meta__ = {
@@ -95,6 +97,7 @@ margin_left = 48.0
 margin_top = 35.0
 margin_right = 86.0
 margin_bottom = 39.0
+mouse_filter = 2
 value = 50.0
 texture_progress = ExtResource( 4 )
 __meta__ = {
@@ -126,6 +129,7 @@ frame = 64
 [node name="XpBar" type="Control" parent="."]
 margin_right = 480.0
 margin_bottom = 272.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -135,6 +139,7 @@ margin_left = 44.0
 margin_top = 43.0
 margin_right = 83.0
 margin_bottom = 47.0
+mouse_filter = 2
 value = 100.0
 texture_progress = ExtResource( 5 )
 __meta__ = {
@@ -163,6 +168,7 @@ centered = false
 [node name="CooldownBar" type="Control" parent="."]
 margin_right = 480.0
 margin_bottom = 272.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -172,6 +178,7 @@ margin_left = 41.0
 margin_top = 51.0
 margin_right = 78.0
 margin_bottom = 53.0
+mouse_filter = 2
 value = 100.0
 texture_progress = ExtResource( 8 )
 __meta__ = {
@@ -186,6 +193,7 @@ centered = false
 [node name="Gun" type="MarginContainer" parent="."]
 margin_right = 480.0
 margin_bottom = 272.0
+mouse_filter = 2
 custom_constants/margin_right = 16
 custom_constants/margin_top = 16
 custom_constants/margin_left = 32
@@ -197,9 +205,11 @@ margin_top = 16.0
 margin_right = 464.0
 margin_bottom = 256.0
 rect_min_size = Vector2( 64, 16 )
+mouse_filter = 2
 
 [node name="AmmoCount" type="Control" parent="Gun/HBox"]
 margin_bottom = 240.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -265,6 +275,7 @@ frame = 11
 [node name="MoneyCount" type="Control" parent="."]
 margin_right = 480.0
 margin_bottom = 272.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

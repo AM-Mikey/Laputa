@@ -1,0 +1,20 @@
+[remap]
+
+importer="vnen.tiled_tileset_importer"
+type="TileSet"
+path="res://.import/Village7.tsx-e9a34941e47ece1e48bfdc37d5d9f532.res"
+
+[deps]
+
+source_file="res://src/Level/Village7.tsx"
+dest_files=[ "res://.import/Village7.tsx-e9a34941e47ece1e48bfdc37d5d9f532.res" ]
+
+[params]
+
+custom_properties=true
+tile_metadata=false
+image_flags=7
+embed_internal_images=false
+save_tiled_properties=false
+apply_offset=false
+post_import_script=""

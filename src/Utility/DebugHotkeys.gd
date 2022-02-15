@@ -1,8 +1,10 @@
 extends Node
 
 const DEBUG_INFO = preload("res://src/UI/Debug/DebugInfo.tscn")
+const EDITOR_CAMERA = preload("res://src/Editor/EditorCamera.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
+const LEVEL_EDITOR = preload("res://src/Editor/LevelEditor.tscn")
 const POPUP = preload("res://src/UI/PopupText.tscn")
 
 onready var world = get_tree().get_root().get_node("World")
@@ -12,6 +14,17 @@ func _ready():
 	pause_mode = PAUSE_MODE_PROCESS
 
 func _input(event):
+	if event.is_action_pressed("debug_editor"):
+		if ui.has_node("LevelEditor"):
+			ui.get_node("EditorCamera").queue_free()
+			ui.get_node("LevelEditor").queue_free()
+			ui.add_child(HUD.instance())
+			world.get_node("Juniper/PlayerCamera").current = true
+		else:
+			ui.add_child(LEVEL_EDITOR.instance())
+			ui.add_child(EDITOR_CAMERA.instance())
+			ui.get_node("HUD").queue_free()
+	
 	if event.is_action_pressed("debug_print"):
 		debug_print()
 

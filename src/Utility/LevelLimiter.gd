@@ -94,6 +94,7 @@ func _ready():
 			tr.rect_position = Vector2.ZERO
 			tr.rect_scale = Vector2(float(world.resolution_scale), float(world.resolution_scale))
 			tr.rect_size = get_tree().get_root().size / world.resolution_scale
+			tr.mouse_filter = MOUSE_FILTER_IGNORE
 			world.get_node("BackgroundLayer").add_child(tr)
 	######################################################################################################
 		#add_to_group("CameraLimiters")
