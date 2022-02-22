@@ -182,7 +182,7 @@ window/size/test_height=1080
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/AutotileGenerator/plugin.cfg", "res://addons/InstanceDock/plugin.cfg", "res://addons/frontrider.tiledtools/plugin.cfg", "res://addons/vnen.tiled_importer/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/AutotileGenerator/plugin.cfg", "res://addons/InstanceDock/plugin.cfg", "res://addons/frontrider.tiledtools/plugin.cfg" )
 
 [importer_defaults]
 

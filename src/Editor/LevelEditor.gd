@@ -19,8 +19,8 @@ var mouse_start_pos
 var shift_held = false
 var ctrl_held = false
 
-var operations = []
-var held_trace = []
+var operations = [] #[[op][op][op]]
+var active_operation = [] #[[subop][subop][subop]]
 
 func _ready():
 	var list_id = 0
@@ -54,13 +54,22 @@ func _unhandled_input(event):
 			set_tiles(get_cell(mouse_pos), active_tile)
 
 	if event.is_action_released("editor_lmb"):
-		if not held_trace.empty():
-			operations.append(["set_tiles", held_trace])
-			held_trace.clear
+		
+		if not active_operation.empty():
+			operations.append(["set_tiles", active_operation])
+			print("active op: ", active_operation)
+			print("operations: ", operations)
+			active_operation.clear()
 		if ctrl_held:
-			draw_box(mouse_start_pos, mouse_pos)
+			#draw_box(mouse_start_pos, mouse_pos)
+			pass
+		
 		lmb_held = false
 
+
+#func do_active_operation():
+#	active_operation = []
+	
 
 	if event.is_action_pressed("editor_rmb"):
 		rmb_held = true
@@ -71,7 +80,8 @@ func _unhandled_input(event):
 
 	if event.is_action_released("editor_rmb"):
 		if ctrl_held:
-			erase_box(mouse_start_pos, mouse_pos)
+			#erase_box(mouse_start_pos, mouse_pos)
+			pass
 		rmb_held = false
 
 
@@ -106,12 +116,14 @@ func _unhandled_input(event):
 
 
 func undo():
+	print("operations: ", operations)
 	var last = operations.pop_back()
+	print("undoing operation: ", last)
 	
 	if last:
 		match last[0]:
 			"set_tiles":
-				for t in last[1]: #held trace
+				for t in last[1]: #subops
 					set_tiles([t[0]], t[2], false) #pos_array, old_tile
 #
 #			"draw_tile":
@@ -136,27 +148,27 @@ func redo():
 
 
 func set_tiles(pos_array: Array, tile, traced = true):
-	for pos in pos_array:
+	for pos in pos_array: #subops
 		var old_tile = tilemap.get_cellv(pos)
 		tilemap.set_cellv(pos, tile)
 		if traced:
-			held_trace.append([pos, tile, old_tile])
+			active_operation.append([pos, tile, old_tile])
 #	if traced and not lmb_held:
 #		operations.append(["set_tiles", held_trace])
-#		held_trace.clear()
+#		active_operation.clear()
 	
 
-func draw_box(start, end, tile = active_tile, traced = true):
-	for t in get_box(start, end):
-		tilemap.set_cellv(t, active_tile)
-	if traced:
-		operations.append(["draw_box", start, end, tile])
-
-func erase_box(start, end, tile = active_tile, traced = true):
-	for t in get_box(start, end):
-		tilemap.set_cellv(t, -1)
-	if traced:
-		operations.append(["erase_box", start, end, tile])
+#func draw_box(start, end, tile = active_tile, traced = true):
+#	for t in get_box(start, end):
+#		tilemap.set_cellv(t, active_tile)
+#	if traced:
+#		operations.append(["draw_box", start, end, tile])
+#
+#func erase_box(start, end, tile = active_tile, traced = true):
+#	for t in get_box(start, end):
+#		tilemap.set_cellv(t, -1)
+#	if traced:
+#		operations.append(["erase_box", start, end, tile])
 
 
 ### PREVIEW ###
