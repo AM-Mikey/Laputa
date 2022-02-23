@@ -13,13 +13,14 @@ var tiles = {}
 var active_tile: int
 var lmb_held = false
 var rmb_held = false
-
+var brush = "paint"
 var mouse_start_pos
 
 var shift_held = false
 var ctrl_held = false
 
-var operations = [] #[[op][op][op]]
+var past_operations = [] #[[op][op][op]]
+var future_operations = [] #[[op][op][op]]
 var active_operation = [] #[[subop][subop][subop]]
 
 func _ready():
@@ -48,57 +49,78 @@ func _unhandled_input(event):
 	
 	if event.is_action_pressed("editor_lmb") and active_tile:
 		lmb_held = true
-		if ctrl_held:
-			mouse_start_pos = mouse_pos
+		future_operations.clear()
+		mouse_start_pos = mouse_pos
+		
+		if shift_held:
+			brush = "line"
+		elif ctrl_held:
+			brush = "box"
 		else:
-			set_tiles(get_cell(mouse_pos), active_tile)
+			brush = "paint"
+			set_tiles([get_cell(mouse_pos)], active_tile)
+
 
 	if event.is_action_released("editor_lmb"):
+		lmb_held = false
+		if brush == "line":
+			set_tiles(get_line(mouse_start_pos, mouse_pos), active_tile)
+		elif brush == "box":
+			set_tiles(get_box(mouse_start_pos, mouse_pos), active_tile)
 		
 		if not active_operation.empty():
-			operations.append(["set_tiles", active_operation])
-			print("active op: ", active_operation)
-			print("operations: ", operations)
+			past_operations.append(["set_tiles", active_operation.duplicate()])
+			#print("active op: ", active_operation)
 			active_operation.clear()
-		if ctrl_held:
-			#draw_box(mouse_start_pos, mouse_pos)
-			pass
-		
-		lmb_held = false
 
 
-#func do_active_operation():
-#	active_operation = []
-	
 
 	if event.is_action_pressed("editor_rmb"):
 		rmb_held = true
-		if ctrl_held:
-			mouse_start_pos = mouse_pos
+		future_operations.clear()
+		mouse_start_pos = mouse_pos
+		if shift_held:
+			brush = "line"
+		elif ctrl_held:
+			brush = "box"
 		else:
-			set_tiles(get_cell(mouse_pos), -1)
+			brush = "paint"
+			set_tiles([get_cell(mouse_pos)], -1)
+
 
 	if event.is_action_released("editor_rmb"):
-		if ctrl_held:
-			#erase_box(mouse_start_pos, mouse_pos)
-			pass
 		rmb_held = false
+		if brush == "line":
+			set_tiles(get_line(mouse_start_pos, mouse_pos), -1)
+		elif brush == "box":
+			set_tiles(get_box(mouse_start_pos, mouse_pos), -1)
+		
+		if not active_operation.empty():
+			past_operations.append(["set_tiles", active_operation.duplicate()])
+			#print("active op: ", active_operation)
+			active_operation.clear()
+
+
 
 
 	if event is InputEventMouseMotion:
-		if lmb_held and not ctrl_held:
-			set_tiles(get_cell(mouse_pos), active_tile)
-		if rmb_held and not ctrl_held:
-			set_tiles(get_cell(mouse_pos), -1)
+		if lmb_held and brush == "paint":
+			set_tiles([get_cell(mouse_pos)], active_tile)
+		if rmb_held and brush == "paint":
+			set_tiles([get_cell(mouse_pos)], -1)
 		
 		hide_preview()
-#		if ctrl_held and lmb_held or ctrl_held and rmb_held:
-#			show_box_preview(mouse_start_pos, mouse_pos)
-#		elif active_tile:
-#			show_tile_preview(get_cell(mouse_pos))
+		if brush == "paint":
+			preview_tiles([get_cell(mouse_pos)])
+		
+		elif lmb_held or rmb_held:
+			if brush == "line":
+				preview_tiles(get_line(mouse_start_pos, mouse_pos))
+			if brush == "box":
+				preview_tiles(get_box(mouse_start_pos, mouse_pos))
 
 
-	
+
 	if event.is_action_pressed("editor_ctrl"):
 		ctrl_held = true
 	if event.is_action_released("editor_ctrl"):
@@ -116,35 +138,34 @@ func _unhandled_input(event):
 
 
 func undo():
-	print("operations: ", operations)
-	var last = operations.pop_back()
-	print("undoing operation: ", last)
+	var last = past_operations.pop_back()
 	
 	if last:
+		future_operations.append(last)
+		print("undoing operation: ", last)
+		
 		match last[0]:
 			"set_tiles":
 				for t in last[1]: #subops
-					set_tiles([t[0]], t[2], false) #pos_array, old_tile
-#
-#			"draw_tile":
-#				draw_tile(last[1], last[3], false)
-	#		"draw_box":
-	#			erase_box(last_operation[1], false)
-	#		"erase_box":
-	#			erase_box(last_operation[1], false)
+					set_tiles([t[0]], t[2], false) #pos_array, old_tile, traced
+#	else:
+#		print("nothing left to undo!")
 
-	
+
 func redo():
-	pass
+	var next = future_operations.pop_back()
+	
+	if next:
+		past_operations.append(next)
+		print("redoing operation: ", next)
+		
+		match next[0]:
+			"set_tiles":
+				for t in next[1]: #subops
+					set_tiles([t[0]], t[1], false) #pos_array, new_tile, traced
+#	else:
+#		print("nothing left to redo!")
 
-
-### OPERATIONS ###
-
-#func draw_tile(mouse_pos, tile = active_tile, traced = true):
-#	var old_tile = tilemap.get_cellv(get_cell(mouse_pos))
-#	tilemap.set_cellv(get_cell(mouse_pos), tile)
-#	if traced:
-#		operations.append(["draw_tile", mouse_pos, tile, old_tile])
 
 
 func set_tiles(pos_array: Array, tile, traced = true):
@@ -152,23 +173,11 @@ func set_tiles(pos_array: Array, tile, traced = true):
 		var old_tile = tilemap.get_cellv(pos)
 		tilemap.set_cellv(pos, tile)
 		if traced:
+			for s in active_operation:
+				if s[0] == pos: #positions match
+					return
 			active_operation.append([pos, tile, old_tile])
-#	if traced and not lmb_held:
-#		operations.append(["set_tiles", held_trace])
-#		active_operation.clear()
-	
 
-#func draw_box(start, end, tile = active_tile, traced = true):
-#	for t in get_box(start, end):
-#		tilemap.set_cellv(t, active_tile)
-#	if traced:
-#		operations.append(["draw_box", start, end, tile])
-#
-#func erase_box(start, end, tile = active_tile, traced = true):
-#	for t in get_box(start, end):
-#		tilemap.set_cellv(t, -1)
-#	if traced:
-#		operations.append(["erase_box", start, end, tile])
 
 
 ### PREVIEW ###
@@ -186,9 +195,6 @@ func hide_preview():
 	for c in tilemap.get_children():
 		c.queue_free()
 
-#func show_box_preview(start, end):
-#	for t in get_box(start, end):
-#		show_tile_preview(t)
 
 
 ### GETTERS ###
@@ -197,12 +203,41 @@ func get_box(start, end) -> Array:
 	var tiles = []
 	var start_tile = get_cell(start)
 	var end_tile = get_cell(end)
-	for i in range(int(min(start_tile.x, end_tile.x)), int(max(start_tile.x, end_tile.x))+1):
-		for j in range(int(min(start_tile.y, end_tile.y)), int(max(start_tile.y, end_tile.y))+1):
-			tiles.append(Vector2(i,j))
+	
+	var x_min = min(start_tile.x, end_tile.x)
+	var x_max = max(start_tile.x, end_tile.x)
+	var y_min = min(start_tile.y, end_tile.y)
+	var y_max = max(start_tile.y, end_tile.y)
+	
+	for i in range(x_min, x_max + 1):
+		for j in range(y_min, y_max + 1):
+			tiles.append(Vector2(i, j))
 	return tiles
 
-func get_cell(mouse_pos) -> Array:
+
+func get_cell(mouse_pos) -> Vector2:
 	var local_pos = tilemap.to_local(mouse_pos)
 	var map_pos = tilemap.world_to_map(local_pos)
-	return [map_pos]
+	return map_pos
+
+
+func get_line(start, end) -> Array:
+	var tiles = []
+	var start_tile = get_cell(start)
+	var end_tile = get_cell(end)
+	
+	var dx = end_tile.x - start_tile.x
+	var dy = end_tile.y - start_tile.y
+	if dx == 0:
+		dx = .0001
+	
+	if abs(dx) >= abs(dy):
+		for x in range(start_tile.x, end_tile.x+1) if start_tile.x < end_tile.x else range(end_tile.x, start_tile.x+1):
+			var y = round(start_tile.y + dy * (x - start_tile.x) / dx)
+			tiles.append(Vector2(x,y))
+	else:
+		for y in range(start_tile.y, end_tile.y+1) if start_tile.y < end_tile.y else range(end_tile.y, start_tile.y+1):
+			var x = round(start_tile.x + dx * (y - start_tile.y) / dy)
+			tiles.append(Vector2(x,y))
+	
+	return tiles
