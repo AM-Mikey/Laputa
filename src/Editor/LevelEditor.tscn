@@ -13,6 +13,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 tile_list = NodePath("Tab/Tiles/TileList")
+layer_list = NodePath("Tab/Layers/Scroll/LayerList")
 
 [node name="Tab" type="TabContainer" parent="."]
 margin_left = 288.0
@@ -42,16 +43,31 @@ __meta__ = {
 }
 
 [node name="Layers" type="Tabs" parent="Tab"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
 margin_top = 30.0
-margin_right = -136.0
-margin_bottom = -138.0
+margin_right = -16.0
+margin_bottom = -16.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Tab/Layers"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="Panel" type="Panel" parent="Tab/Layers"]
+margin_right = 160.0
+margin_bottom = 146.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scroll" type="ScrollContainer" parent="Tab/Layers"]
+margin_right = 160.0
+margin_bottom = 146.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LayerList" type="VBoxContainer" parent="Tab/Layers/Scroll"]
+margin_right = 160.0
+size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }

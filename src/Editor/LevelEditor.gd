@@ -1,5 +1,7 @@
 extends Control
 
+const EDITOR_LAYER = preload("res://src/Editor/EditorLayer.tscn")
+
 onready var w = get_tree().get_root().get_node("World")
 
 onready var tilemap = w.current_level.get_node("Tiles").get_node("Collision") #get_child(0)
@@ -7,15 +9,19 @@ onready var tileset = tilemap.tile_set
 
 
 export(NodePath) var tile_list
+export(NodePath) var layer_list
 
 
 var tiles = {}
 var active_tile: int
-var lmb_held = false
-var rmb_held = false
+
+var layers = {}
+var active_layer
+
 var brush = "paint"
 var mouse_start_pos
-
+var lmb_held = false
+var rmb_held = false
 var shift_held = false
 var ctrl_held = false
 
@@ -24,6 +30,11 @@ var future_operations = [] #[[op][op][op]]
 var active_operation = [] #[[subop][subop][subop]]
 
 func _ready():
+	setup_tiles()
+	setup_layers()
+
+
+func setup_tiles():
 	var list_id = 0
 	
 	for i in tileset.get_tiles_ids():
@@ -33,7 +44,15 @@ func _ready():
 		get_node(tile_list).add_item(tile_name, get_tile_texture(i))
 		list_id += 1
 
-
+func setup_layers():
+	for l in w.current_level.get_node("Tiles").get_children():
+		layers[l.name] = l
+		
+		var editor_layer = EDITOR_LAYER.instance()
+		editor_layer.layer = l
+		get_node(layer_list).add_child(editor_layer)
+	
+	
 func get_tile_texture(tile):
 	var tile_texture = AtlasTexture.new()
 	tile_texture.atlas = tileset.tile_get_texture(tile)
