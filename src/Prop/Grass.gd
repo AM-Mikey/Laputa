@@ -1,8 +1,8 @@
 extends Area2D
 
-const HEART = preload("res://src/Item/Heart.tscn")
-const EXPERIENCE = preload("res://src/Item/Experience.tscn")
-const AMMO = preload("res://src/Item/Ammo.tscn")
+const HEART = preload("res://src/Actor/Pickup/Heart.tscn")
+const EXPERIENCE = preload("res://src/Actor/Pickup/Experience.tscn")
+const AMMO = preload("res://src/Actor/Pickup/Ammo.tscn")
 
 export var drop_chance = 0.1
 export var heart_chance = 1

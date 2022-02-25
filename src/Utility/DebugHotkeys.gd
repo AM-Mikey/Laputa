@@ -6,6 +6,7 @@ const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
 const LEVEL_EDITOR = preload("res://src/Editor/LevelEditor.tscn")
 const POPUP = preload("res://src/UI/PopupText.tscn")
+const SHOP_MENU = preload("res://src/UI/ShopMenu/ShopMenu.tscn")
 
 onready var world = get_tree().get_root().get_node("World")
 onready var ui = world.get_node("UILayer")
@@ -55,6 +56,9 @@ func _input(event):
 		world.read_level_data_from_save()
 		world.copy_level_data_from_save_to_temp()
 
+	if event.is_action_pressed("debug_shop"):
+		var shop_menu = SHOP_MENU.instance()
+		ui.add_child(shop_menu)
 
 func debug_print():
 	if not ui.has_node("DebugInfo"):
