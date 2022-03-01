@@ -20,11 +20,13 @@ func _input(event):
 			ui.get_node("EditorCamera").queue_free()
 			ui.get_node("LevelEditor").queue_free()
 			ui.add_child(HUD.instance())
+			world.get_node("Juniper").enable()
 			world.get_node("Juniper/PlayerCamera").current = true
 		else:
 			ui.add_child(LEVEL_EDITOR.instance())
 			ui.add_child(EDITOR_CAMERA.instance())
 			ui.get_node("HUD").queue_free()
+			world.get_node("Juniper").disable()
 	
 	if event.is_action_pressed("debug_print"):
 		debug_print()

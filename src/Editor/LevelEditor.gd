@@ -3,9 +3,9 @@ extends Control
 const EDITOR_LAYER = preload("res://src/Editor/EditorLayer.tscn")
 
 onready var w = get_tree().get_root().get_node("World")
-
-onready var tilemap = w.current_level.get_node("Tiles").get_node("Collision") #get_child(0)
-onready var tileset = tilemap.tile_set
+onready var tile_collection = w.current_level.get_node("Tiles")
+var tilemap
+onready var tileset = tile_collection.get_child(0).tile_set
 
 
 export(NodePath) var tile_list
@@ -16,7 +16,7 @@ var tiles = {}
 var active_tile: int
 
 var layers = {}
-var active_layer
+var auto_layer = true
 
 var brush = "paint"
 var mouse_start_pos
@@ -35,7 +35,7 @@ func _ready():
 
 
 func setup_tiles():
-	var list_id = 0
+	var list_id = 0 #bug if tile id is 0?
 	
 	for i in tileset.get_tiles_ids():
 		tiles[list_id] = i
@@ -44,15 +44,7 @@ func setup_tiles():
 		get_node(tile_list).add_item(tile_name, get_tile_texture(i))
 		list_id += 1
 
-func setup_layers():
-	for l in w.current_level.get_node("Tiles").get_children():
-		layers[l.name] = l
-		
-		var editor_layer = EDITOR_LAYER.instance()
-		editor_layer.layer = l
-		get_node(layer_list).add_child(editor_layer)
-	
-	
+
 func get_tile_texture(tile):
 	var tile_texture = AtlasTexture.new()
 	tile_texture.atlas = tileset.tile_get_texture(tile)
@@ -62,6 +54,8 @@ func get_tile_texture(tile):
 
 func _on_TileList_item_selected(index):
 	active_tile = tiles[index]
+	if auto_layer:
+		change_layer(get_auto_layer())
 
 func _unhandled_input(event):
 	var mouse_pos = w.get_global_mouse_position()
@@ -208,11 +202,12 @@ func preview_tiles(pos_array: Array):
 		sprite.modulate = Color(1, 1, 1, 0.5)
 		sprite.centered = false
 		sprite.position = pos * 16
-		tilemap.add_child(sprite)
+		tile_collection.add_child(sprite)
 
 func hide_preview():
-	for c in tilemap.get_children():
-		c.queue_free()
+	for c in tile_collection.get_children():
+		if c is Sprite:
+			c.queue_free()
 
 
 
@@ -260,3 +255,39 @@ func get_line(start, end) -> Array:
 			tiles.append(Vector2(x,y))
 	
 	return tiles
+	
+
+
+###LAYERS
+
+func setup_layers():
+	var layer_index = 0
+	for l in w.current_level.get_node("Tiles").get_children():
+		layers[l.name] = l
+		
+		var editor_layer = EDITOR_LAYER.instance()
+		editor_layer.layer = l
+		editor_layer.connect("layer_changed", self, "change_layer")
+		if layer_index == 0:
+			editor_layer.active = true
+			tilemap = l
+		get_node(layer_list).add_child(editor_layer)
+		layer_index += 1
+
+func change_layer(layer):
+	tilemap = layer
+	for e in get_node(layer_list).get_children():
+		if e.layer == layer:
+			e.activate()
+
+func get_auto_layer():
+	var layer
+	var tile_pos = tileset.tile_get_region(active_tile).position
+	
+	match int(floor(tile_pos.y /16 / 4)):
+		0: layer = layers["FarBack"]
+		1: layer = layers["Back"]
+		2: layer = layers["Front"]
+		3: layer = layers["FarFront"]
+		_: layer = layers["Front"]
+	return layer

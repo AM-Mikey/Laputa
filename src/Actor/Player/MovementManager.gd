@@ -105,7 +105,7 @@ func _input(event):
 		if event.is_action_released("fire_automatic"): 
 			pc.direction_lock = Vector2.ZERO
 		
-		if event.is_action_pressed("debug_fly") or event.is_action_pressed("debug_editor"):
+		if event.is_action_pressed("debug_fly"):
 			if current_state != states["fly"]:
 				change_state(states["fly"])
 			else: change_state(states["normal"])
