@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Actor/Actor.gd"
 }, {
-"base": "Node2D",
-"class": "AutotileGenerator",
-"language": "GDScript",
-"path": "res://addons/AutotileGenerator/AutotileGenerator.gd"
-}, {
 "base": "Resource",
 "class": "Background",
 "language": "GDScript",
@@ -38,11 +33,6 @@ _global_script_classes=[ {
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://src/Actor/Enemy/Enemy.gd"
-}, {
-"base": "CanvasLayer",
-"class": "Fade",
-"language": "GDScript",
-"path": "res://addons/UniversalFade/Fade.gd"
 }, {
 "base": "Node",
 "class": "Gun",
@@ -79,11 +69,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Utility/State.gd"
 }, {
-"base": "Resource",
-"class": "TilesetProperties",
-"language": "GDScript",
-"path": "res://addons/frontrider.tiledtools/loader/TilesetPropertyResource.gd"
-}, {
 "base": "Area2D",
 "class": "Trigger",
 "language": "GDScript",
@@ -96,12 +81,10 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Actor": "res://assets/Icon/ActorIcon.png",
-"AutotileGenerator": "",
 "Background": "res://assets/Icon/BackgroundIcon.png",
 "Boss": "res://assets/Icon/BossIcon.png",
 "Bullet": "res://assets/Icon/BulletIcon.png",
 "Enemy": "res://assets/Icon/EnemyIcon.png",
-"Fade": "",
 "Gun": "res://assets/Icon/GunIcon.png",
 "Item": "res://assets/Icon/ItemIcon.png",
 "Juniper": "res://assets/Icon/PlayerIcon.png",
@@ -109,7 +92,6 @@ _global_script_class_icons={
 "NPC": "res://assets/Icon/NPCIcon.png",
 "Prop": "res://assets/Icon/PropIcon.png",
 "State": "",
-"TilesetProperties": "",
 "Trigger": "res://assets/Icon/TriggerIcon.png",
 "Weapon": "res://assets/Icon/WeaponIcon.png"
 }
@@ -182,7 +164,7 @@ window/size/test_height=1080
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/AutotileGenerator/plugin.cfg", "res://addons/InstanceDock/plugin.cfg", "res://addons/frontrider.tiledtools/plugin.cfg" )
+enabled=PoolStringArray(  )
 
 [importer_defaults]
 
@@ -406,7 +388,7 @@ debug_quit={
 }
 debug_editor={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777225,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777253,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 editor_lmb={

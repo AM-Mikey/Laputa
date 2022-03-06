@@ -1,24 +1,16 @@
-[gd_resource type="Theme" load_steps=30 format=2]
+[gd_resource type="Theme" load_steps=22 format=2]
 
 [ext_resource path="res://src/UI/StyleBox/SteelRoundDark.tres" type="StyleBox" id=1]
 [ext_resource path="res://src/UI/Font/WelcomeBack.tres" type="DynamicFont" id=2]
 [ext_resource path="res://src/UI/StyleBox/SteelRoundRiveted.tres" type="StyleBox" id=3]
 [ext_resource path="res://src/UI/StyleBox/RustRoundInset.tres" type="StyleBox" id=4]
-[ext_resource path="res://assets/UI/Button/OptionArrow.png" type="Texture" id=5]
 [ext_resource path="res://src/UI/Slider/Slider.tres" type="StyleBox" id=6]
-[ext_resource path="res://assets/UI/Slider/SliderGrabber.png" type="Texture" id=7]
-[ext_resource path="res://assets/UI/Slider/SliderTick.png" type="Texture" id=8]
 [ext_resource path="res://src/UI/CursorBox.tres" type="StyleBox" id=9]
 [ext_resource path="res://src/UI/StyleBox/SteelBeveledLight.tres" type="StyleBox" id=10]
 [ext_resource path="res://src/UI/StyleBox/RustTabsLight.tres" type="StyleBox" id=11]
 [ext_resource path="res://src/UI/StyleBox/RustTabsDark.tres" type="StyleBox" id=12]
 [ext_resource path="res://src/UI/Slider/ScrollBarGrabber.tres" type="StyleBox" id=13]
 [ext_resource path="res://src/UI/Slider/ScrollBarGrabberHighlight.tres" type="StyleBox" id=14]
-[ext_resource path="res://assets/UI/Slider/ScrollBarGrabberHighlight.png" type="Texture" id=15]
-[ext_resource path="res://assets/UI/Slider/Slider.png" type="Texture" id=17]
-[ext_resource path="res://assets/UI/Slider/SliderGrabberHighlight.png" type="Texture" id=18]
-[ext_resource path="res://assets/UI/Button/CheckYes.png" type="Texture" id=19]
-[ext_resource path="res://assets/UI/Button/CheckNo.png" type="Texture" id=20]
 [ext_resource path="res://src/UI/StyleBox/SteelBeveledDark.tres" type="StyleBox" id=24]
 
 [sub_resource type="StyleBoxEmpty" id=2]
@@ -56,8 +48,8 @@ CheckBox/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 CheckBox/constants/check_vadjust = 0
 CheckBox/constants/hseparation = 4
 CheckBox/fonts/font = null
-CheckBox/icons/checked = ExtResource( 15 )
-CheckBox/icons/unchecked = ExtResource( 17 )
+CheckBox/icons/checked = null
+CheckBox/icons/unchecked = null
 CheckButton/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
 CheckButton/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
 CheckButton/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
@@ -66,8 +58,8 @@ CheckButton/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 CheckButton/constants/check_vadjust = 0
 CheckButton/constants/hseparation = 4
 CheckButton/fonts/font = null
-CheckButton/icons/off = ExtResource( 20 )
-CheckButton/icons/on = ExtResource( 19 )
+CheckButton/icons/off = null
+CheckButton/icons/on = null
 CheckButton/styles/disabled = SubResource( 2 )
 CheckButton/styles/focus = ExtResource( 9 )
 CheckButton/styles/hover = SubResource( 3 )
@@ -78,9 +70,9 @@ HScrollBar/styles/grabber = ExtResource( 13 )
 HScrollBar/styles/grabber_highlight = ExtResource( 14 )
 HScrollBar/styles/grabber_pressed = ExtResource( 14 )
 HScrollBar/styles/scroll = ExtResource( 6 )
-HSlider/icons/grabber = ExtResource( 7 )
-HSlider/icons/grabber_highlight = ExtResource( 18 )
-HSlider/icons/tick = ExtResource( 8 )
+HSlider/icons/grabber = null
+HSlider/icons/grabber_highlight = null
+HSlider/icons/tick = null
 HSlider/styles/grabber_area = SubResource( 7 )
 HSlider/styles/grabber_area_highlight = SubResource( 8 )
 HSlider/styles/slider = ExtResource( 6 )
@@ -109,7 +101,7 @@ OptionButton/colors/font_color_pressed = Color( 0.2, 0.168627, 0.176471, 1 )
 OptionButton/constants/arrow_margin = 2
 OptionButton/constants/hseparation = 2
 OptionButton/fonts/font = null
-OptionButton/icons/arrow = ExtResource( 5 )
+OptionButton/icons/arrow = null
 Panel/styles/panel = ExtResource( 1 )
 TabContainer/colors/font_color_bg = Color( 0.403922, 0.286275, 0.262745, 1 )
 TabContainer/colors/font_color_disabled = Color( 0.403922, 0.286275, 0.262745, 1 )
@@ -127,7 +119,7 @@ VScrollBar/styles/grabber = ExtResource( 13 )
 VScrollBar/styles/grabber_highlight = ExtResource( 14 )
 VScrollBar/styles/grabber_pressed = ExtResource( 14 )
 VScrollBar/styles/scroll = ExtResource( 6 )
-VSlider/icons/grabber = ExtResource( 7 )
+VSlider/icons/grabber = null
 VSlider/styles/grabber_area = SubResource( 9 )
 VSlider/styles/grabber_area_highlight = SubResource( 10 )
 VSlider/styles/slider = ExtResource( 6 )

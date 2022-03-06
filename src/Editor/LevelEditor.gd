@@ -33,15 +33,35 @@ func _ready():
 	setup_tiles()
 	setup_layers()
 
+func import_tileset():
+	var texture = tileset.tile_get_texture(0)
+	var columns = texture.get_size().x/16
+	get_node(tile_list).max_columns = columns
+	
+	tileset.clear()
+	var id = tileset.get_last_unused_tile_id()
+	tileset.create_tile(id)
+	tileset.tile_set_texture(id, texture)
+	var shape = RectangleShape2D.new()
+	shape.extents = Vector2(8, 8)
+	
+	var transform = Transform2D(0, map_to_world(cell) - 16)
+	tileset.tile_add_shape(id, shape, transform)
+	
+	
+	
+	
 
 func setup_tiles():
+	import_tileset()
+	
 	var list_id = 0 #bug if tile id is 0?
 	
 	for i in tileset.get_tiles_ids():
 		tiles[list_id] = i
 		
 		var tile_name = tileset.tile_get_name(i)
-		get_node(tile_list).add_item(tile_name, get_tile_texture(i))
+		get_node(tile_list).add_icon_item(get_tile_texture(i))
 		list_id += 1
 
 
