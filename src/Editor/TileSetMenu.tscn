@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Editor/Cursor.tres" type="StyleBox" id=1]
+[ext_resource path="res://src/Editor/TileSetMenu.gd" type="Script" id=2]
+
+[node name="TileSetMenu" type="ScrollContainer"]
+margin_right = 500.0
+margin_bottom = 500.0
+mouse_filter = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="."]
+custom_constants/separation = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="."]
+margin_right = 500.0
+margin_bottom = 500.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Cursor" type="Panel" parent="Control"]
+mouse_filter = 2
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

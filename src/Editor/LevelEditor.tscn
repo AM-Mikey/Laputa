@@ -1,44 +1,64 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/UI/Theme/LaputaThemeMenus.tres" type="Theme" id=1]
 [ext_resource path="res://src/Editor/LevelEditor.gd" type="Script" id=2]
+[ext_resource path="res://src/Editor/TileSetMenu.tscn" type="PackedScene" id=3]
 
-[node name="LevelEditor" type="Control"]
+[node name="LevelEditor" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
+margin_right = -184.0
+margin_bottom = -238.0
+mouse_filter = 1
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
-tile_list = NodePath("Tab/Tiles/TileList")
-layer_list = NodePath("Tab/Layers/Scroll/LayerList")
+__meta__ = {
+"_edit_use_anchors_": false
+}
+tile_list = NodePath("Window/Tab/Tiles/TileList")
+layer_list = NodePath("Window/Tab/Layers/Scroll/LayerList")
 
-[node name="Tab" type="TabContainer" parent="."]
-margin_left = 288.0
-margin_right = 480.0
-margin_bottom = 192.0
+[node name="Window" type="WindowDialog" parent="."]
+visible = true
+margin_right = 296.0
+margin_bottom = 32.0
+mouse_filter = 1
+popup_exclusive = true
+resizable = true
 
-[node name="Tiles" type="Tabs" parent="Tab"]
+[node name="Tab" type="TabContainer" parent="Window"]
+margin_right = 264.0
+margin_bottom = 216.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tiles" type="MarginContainer" parent="Window/Tab"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
 margin_top = 30.0
 margin_right = -16.0
 margin_bottom = -16.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="TileList" type="ItemList" parent="Tab/Tiles"]
-margin_right = 152.0
-margin_bottom = 138.0
+[node name="TileList" type="ItemList" parent="Window/Tab/Tiles"]
+margin_right = 232.0
+margin_bottom = 170.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 1
 custom_constants/hseparation = 1
-max_columns = 20
+select_mode = 1
+max_columns = 32
 icon_mode = 0
 fixed_icon_size = Vector2( 16, 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Layers" type="Tabs" parent="Tab"]
+[node name="Layers" type="MarginContainer" parent="Window/Tab"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -47,28 +67,42 @@ margin_top = 30.0
 margin_right = -16.0
 margin_bottom = -16.0
 
-[node name="Panel" type="Panel" parent="Tab/Layers"]
-margin_right = 160.0
-margin_bottom = 146.0
+[node name="Panel" type="Panel" parent="Window/Tab/Layers"]
+margin_right = 232.0
+margin_bottom = 170.0
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Scroll" type="ScrollContainer" parent="Tab/Layers"]
-margin_right = 160.0
-margin_bottom = 146.0
-mouse_filter = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LayerList" type="VBoxContainer" parent="Tab/Layers/Scroll"]
-margin_right = 160.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scroll" type="ScrollContainer" parent="Window/Tab/Layers"]
+margin_right = 232.0
+margin_bottom = 170.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LayerList" type="VBoxContainer" parent="Window/Tab/Layers/Scroll"]
+margin_right = 232.0
+margin_bottom = 170.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="item_selected" from="Tab/Tiles/TileList" to="." method="_on_TileList_item_selected"]
+[node name="TileSetMenu" parent="Window/Tab" instance=ExtResource( 3 )]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 30.0
+margin_right = -16.0
+margin_bottom = -16.0
+
+[connection signal="item_selected" from="Window/Tab/Tiles/TileList" to="." method="_on_TileList_item_selected"]

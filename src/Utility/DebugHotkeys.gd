@@ -10,23 +10,24 @@ const SHOP_MENU = preload("res://src/UI/ShopMenu/ShopMenu.tscn")
 
 onready var world = get_tree().get_root().get_node("World")
 onready var ui = world.get_node("UILayer")
+onready var el = world.get_node("EditorLayer")
 
 func _ready():
 	pause_mode = PAUSE_MODE_PROCESS
 
 func _input(event):
 	if event.is_action_pressed("debug_editor"):
-		if ui.has_node("LevelEditor"):
-			ui.get_node("EditorCamera").queue_free()
-			ui.get_node("LevelEditor").queue_free()
+		if el.has_node("LevelEditor"):
+			el.get_node("EditorCamera").queue_free()
+			el.get_node("LevelEditor").queue_free()
 			ui.add_child(HUD.instance())
-			world.get_node("Juniper").enable()
+			#world.get_node("Juniper").enable()
 			world.get_node("Juniper/PlayerCamera").current = true
 		else:
-			ui.add_child(LEVEL_EDITOR.instance())
-			ui.add_child(EDITOR_CAMERA.instance())
+			el.add_child(LEVEL_EDITOR.instance())
+			el.add_child(EDITOR_CAMERA.instance())
 			ui.get_node("HUD").queue_free()
-			world.get_node("Juniper").disable()
+			#world.get_node("Juniper").disable()
 	
 	if event.is_action_pressed("debug_print"):
 		debug_print()

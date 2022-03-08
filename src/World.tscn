@@ -27,4 +27,8 @@ z_index = 1
 [node name="UILayer" type="CanvasLayer" parent="."]
 pause_mode = 2
 
+[node name="EditorLayer" type="CanvasLayer" parent="."]
+scale = Vector2( 2, 2 )
+transform = Transform2D( 2, 0, 0, 2, 0, 0 )
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]

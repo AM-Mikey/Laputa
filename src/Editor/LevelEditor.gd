@@ -2,10 +2,7 @@ extends Control
 
 const EDITOR_LAYER = preload("res://src/Editor/EditorLayer.tscn")
 
-onready var w = get_tree().get_root().get_node("World")
-onready var tile_collection = w.current_level.get_node("Tiles")
-var tilemap
-onready var tileset = tile_collection.get_child(0).tile_set
+
 
 
 export(NodePath) var tile_list
@@ -29,24 +26,38 @@ var past_operations = [] #[[op][op][op]]
 var future_operations = [] #[[op][op][op]]
 var active_operation = [] #[[subop][subop][subop]]
 
+
+onready var w = get_tree().get_root().get_node("World")
+onready var tile_collection = w.current_level.get_node("Tiles")
+var tilemap
+onready var tileset = tile_collection.get_child(0).tile_set
+
 func _ready():
+	var _err = get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
+	_on_viewport_size_changed()
+	$Window.popup_centered()
 	setup_tiles()
 	setup_layers()
 
 func import_tileset():
 	var texture = tileset.tile_get_texture(0)
-	var columns = texture.get_size().x/16
+	var rows = int(texture.get_size().y/16)
+	var columns = int(texture.get_size().x/16)
 	get_node(tile_list).max_columns = columns
 	
 	tileset.clear()
-	var id = tileset.get_last_unused_tile_id()
-	tileset.create_tile(id)
-	tileset.tile_set_texture(id, texture)
-	var shape = RectangleShape2D.new()
-	shape.extents = Vector2(8, 8)
 	
-	var transform = Transform2D(0, map_to_world(cell) - 16)
-	tileset.tile_add_shape(id, shape, transform)
+	var id = tileset.get_last_unused_tile_id()
+	while id < rows * columns:
+		tileset.create_tile(id)
+		tileset.tile_set_texture(id, texture)
+		
+		var x_pos = (id % columns) * 16
+		var y_pos = floor(id / columns) * 16
+		var region = Rect2(x_pos, y_pos, 16, 16)
+		tileset.tile_set_region(id, region)
+		id += 1
+		print("added")
 	
 	
 	
@@ -311,3 +322,7 @@ func get_auto_layer():
 		3: layer = layers["FarFront"]
 		_: layer = layers["Front"]
 	return layer
+
+func _on_viewport_size_changed():
+	rect_size = get_tree().get_root().size / w.get_node("EditorLayer").scale
+	pass
