@@ -6,7 +6,8 @@ var columns = int(texture.get_size().x/16)
 var rows = int(texture.get_size().y/16)
 
 var hovered_tile
-var selected_tiles = Vector2.ZERO
+var selected_tile_region = Vector2.ZERO #Vector2: Top Left, Vector2: Bottom Right
+var selected_tiles = []
 
 
 func _ready():
@@ -66,37 +67,26 @@ func unhover():
 
 func start_selection(tile):
 	print("started ", tile.id)
-	selected_tiles.x = tile.id
+	selected_tile_region.x = tile.id
 
-#func select_tile(event, tile):
-#	if event is InputEventMouseButton:
-#		print(event, tile)
-#	if event.is_action_pressed("editor_lmb"):
-#		print("started ", tile.id)
-#		selected_tiles.x = tile.id
-#
-#	if event.is_action_released("editor_lmb"):
-#		print("ended ", tile.id)
-#		selected_tiles.y = tile.id
-#		set_cursor()
 
 func _input(event):
 	if event.is_action_pressed("editor_lmb") and hovered_tile:
 		print("started ", hovered_tile)
-		selected_tiles.x = hovered_tile
+		selected_tile_region.x = hovered_tile
 	if event.is_action_released("editor_lmb") and hovered_tile:
 		print("ended ", hovered_tile)
-		selected_tiles.y = hovered_tile
+		selected_tile_region.y = hovered_tile
 		set_cursor()
 
 
 
 func set_cursor():
-	var start_id = int(min(selected_tiles.x, selected_tiles.y))
-	var end_id = int(max(selected_tiles.x, selected_tiles.y))
+	var start_id = int(min(selected_tile_region.x, selected_tile_region.y))
+	var end_id = int(max(selected_tile_region.x, selected_tile_region.y))
 	var x0 = (start_id % columns) * 17
 	var y0 = floor(start_id / columns) * 17
-	var x1 = (end_id % columns +1) * 17
+	var x1 = (end_id % columns+1) * 17
 	var y1 = floor(end_id / columns+1) * 17
 	var dx = x1 - x0
 	var dy = y1 - y0

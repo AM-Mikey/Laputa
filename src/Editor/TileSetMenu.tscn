@@ -8,9 +8,6 @@ margin_right = 500.0
 margin_bottom = 500.0
 mouse_filter = 1
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBox" type="VBoxContainer" parent="."]
 custom_constants/separation = 1
