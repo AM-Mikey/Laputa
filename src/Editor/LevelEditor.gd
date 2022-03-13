@@ -361,3 +361,9 @@ func _on_TileSetMenu_autolayer_updated(is_autolayer):
 
 func _on_TileSetMenu_multi_erase_toggled(toggle):
 	multi_erase = toggle
+
+
+func _on_TileSet_collision_updated(tile_id, shape):
+	var transform = Transform2D.IDENTITY
+	tileset.tile_add_shape(tile_id, shape, transform)
+	tileset.tile_set_shape(tile_id, 0, shape)

@@ -4,6 +4,9 @@ signal tile_selection_updated(tile_selection)
 signal autolayer_updated(is_autolayer)
 signal multi_erase_toggled(toggle)
 
+var tx_col_brush = preload("res://assets/Editor/CollisionBrushes.png")
+
+
 var tileset = load("res://src/Tile/VillageMinimal.tres")
 var texture = tileset.tile_get_texture(0)
 var columns = int(texture.get_size().x/16)
@@ -14,14 +17,13 @@ var selected_tile_region = Vector2.ZERO #Top Left ID, Bottom Right ID
 var selected_tiles = []
 
 
+
 func _ready():
 	#$Control.rect_size = texture.get_size()
 	import_tileset()
-	
 
 
 
-	
 func import_tileset():
 	var r_id = 0
 	for y in rows:

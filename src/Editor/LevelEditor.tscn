@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/UI/Theme/LaputaThemeMenus.tres" type="Theme" id=1]
 [ext_resource path="res://src/Editor/LevelEditor.gd" type="Script" id=2]
-[ext_resource path="res://src/Editor/TileSetMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Editor/Tiles.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Editor/ResizeWindow.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Editor/TileSet.tscn" type="PackedScene" id=5]
 
 [node name="LevelEditor" type="Control"]
 anchor_right = 1.0
@@ -13,9 +14,6 @@ margin_bottom = -22.0
 mouse_filter = 2
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 layer_list = NodePath("ResizeWindow/Tab/Layers/Scroll/LayerList")
 
 [node name="ResizeWindow" parent="." instance=ExtResource( 4 )]
@@ -33,11 +31,8 @@ margin_bottom = 248.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="TileSetMenu" parent="ResizeWindow/Tab" instance=ExtResource( 3 )]
+[node name="Tiles" parent="ResizeWindow/Tab" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
@@ -84,6 +79,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="autolayer_updated" from="ResizeWindow/Tab/TileSetMenu" to="." method="_on_TileSetMenu_autolayer_updated"]
-[connection signal="multi_erase_toggled" from="ResizeWindow/Tab/TileSetMenu" to="." method="_on_TileSetMenu_multi_erase_toggled"]
-[connection signal="tile_selection_updated" from="ResizeWindow/Tab/TileSetMenu" to="." method="_on_TileSetMenu_tile_selection_updated"]
+[node name="TileSet" parent="ResizeWindow/Tab" instance=ExtResource( 5 )]
+visible = false
+
+[connection signal="autolayer_updated" from="ResizeWindow/Tab/Tiles" to="." method="_on_TileSetMenu_autolayer_updated"]
+[connection signal="multi_erase_toggled" from="ResizeWindow/Tab/Tiles" to="." method="_on_TileSetMenu_multi_erase_toggled"]
+[connection signal="tile_selection_updated" from="ResizeWindow/Tab/Tiles" to="." method="_on_TileSetMenu_tile_selection_updated"]
+[connection signal="collision_updated" from="ResizeWindow/Tab/TileSet" to="." method="_on_TileSet_collision_updated"]

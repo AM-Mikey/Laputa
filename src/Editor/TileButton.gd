@@ -1,7 +1,4 @@
 extends TextureRect
 
-#var texture
-var id
-#
-#func _ready():
-#	texture_normal = texture
+var id: int
+var collision: String

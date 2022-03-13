@@ -1,0 +1,149 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/Editor/Cursor.tres" type="StyleBox" id=1]
+[ext_resource path="res://src/Editor/TileSet.gd" type="Script" id=2]
+[ext_resource path="res://src/UI/Theme/LaputaThemeMenus.tres" type="Theme" id=3]
+[ext_resource path="res://src/UI/StyleBox/SteelRoundInset.tres" type="StyleBox" id=4]
+
+[node name="TileSet" type="MarginContainer"]
+margin_right = 480.0
+margin_bottom = 270.0
+mouse_filter = 1
+theme = ExtResource( 3 )
+script = ExtResource( 2 )
+brushes = NodePath("TabContainer/Collision/Scroll2/Brushes")
+col_tiles = NodePath("TabContainer/Collision/Scroll/Tiles")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+margin_right = 480.0
+margin_bottom = 270.0
+mouse_filter = 1
+
+[node name="Normal" type="VBoxContainer" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 30.0
+margin_right = -16.0
+margin_bottom = -16.0
+
+[node name="Scroll" type="ScrollContainer" parent="TabContainer/Normal"]
+margin_right = 448.0
+margin_bottom = 224.0
+mouse_filter = 1
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="TabContainer/Normal/Scroll"]
+custom_constants/separation = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="TabContainer/Normal/Scroll"]
+margin_right = 448.0
+margin_bottom = 224.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Cursor" type="Panel" parent="TabContainer/Normal/Scroll/Control"]
+mouse_filter = 2
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Collision" type="VBoxContainer" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 30.0
+margin_right = -16.0
+margin_bottom = -16.0
+
+[node name="Scroll2" type="ScrollContainer" parent="TabContainer/Collision"]
+margin_right = 448.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_styles/bg = ExtResource( 4 )
+scroll_horizontal_enabled = false
+scroll_vertical_enabled = false
+
+[node name="Brushes" type="HBoxContainer" parent="TabContainer/Collision/Scroll2"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 440.0
+margin_bottom = 16.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Scroll" type="ScrollContainer" parent="TabContainer/Collision"]
+margin_top = 28.0
+margin_right = 448.0
+margin_bottom = 224.0
+mouse_filter = 1
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tiles" type="VBoxContainer" parent="TabContainer/Collision/Scroll"]
+custom_constants/separation = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="TabContainer/Collision/Scroll"]
+margin_right = 448.0
+margin_bottom = 196.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Cursor" type="Panel" parent="TabContainer/Collision/Scroll/Control"]
+mouse_filter = 2
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin" type="MarginContainer" parent="."]
+margin_right = 480.0
+margin_bottom = 270.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="HBox" type="HBoxContainer" parent="Margin"]
+margin_left = 8.0
+margin_top = 232.0
+margin_right = 472.0
+margin_bottom = 262.0
+size_flags_vertical = 8
+alignment = 2
+
+[node name="Save" type="Button" parent="Margin/HBox"]
+margin_left = 167.0
+margin_right = 273.0
+margin_bottom = 30.0
+text = "Save Tileset As"
+
+[node name="New" type="Button" parent="Margin/HBox"]
+margin_left = 277.0
+margin_right = 372.0
+margin_bottom = 30.0
+text = "Import Image"
+
+[node name="Load" type="Button" parent="Margin/HBox"]
+margin_left = 376.0
+margin_right = 464.0
+margin_bottom = 30.0
+text = "Load TileSet"
