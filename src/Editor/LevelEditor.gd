@@ -14,6 +14,7 @@ var active_tile: int
 
 var layers = {}
 var auto_layer = true
+var multi_erase = false
 
 var brush = "paint"
 var mouse_start_pos
@@ -35,15 +36,14 @@ onready var tileset = tile_collection.get_child(0).tile_set
 func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 	_on_viewport_size_changed()
-	$Window.popup_centered()
-	setup_tiles()
+	#setup_tiles()
+	import_tileset()
 	setup_layers()
 
 func import_tileset():
 	var texture = tileset.tile_get_texture(0)
 	var rows = int(texture.get_size().y/16)
 	var columns = int(texture.get_size().x/16)
-	get_node(tile_list).max_columns = columns
 	
 	tileset.clear()
 	
@@ -57,23 +57,22 @@ func import_tileset():
 		var region = Rect2(x_pos, y_pos, 16, 16)
 		tileset.tile_set_region(id, region)
 		id += 1
-		print("added")
 	
 	
 	
 	
 
-func setup_tiles():
-	import_tileset()
-	
-	var list_id = 0 #bug if tile id is 0?
-	
-	for i in tileset.get_tiles_ids():
-		tiles[list_id] = i
-		
-		var tile_name = tileset.tile_get_name(i)
-		get_node(tile_list).add_icon_item(get_tile_texture(i))
-		list_id += 1
+#func setup_tiles():
+#	import_tileset()
+#
+#	var list_id = 0 #bug if tile id is 0?
+#
+#	for i in tileset.get_tiles_ids():
+#		tiles[list_id] = i
+#
+#		var tile_name = tileset.tile_get_name(i)
+#		get_node(tile_list).add_icon_item(get_tile_texture(i))
+#		list_id += 1
 
 
 func get_tile_texture(tile):
@@ -129,7 +128,10 @@ func _unhandled_input(event):
 			brush = "box"
 		else:
 			brush = "paint"
-			set_tiles([get_cell(mouse_pos)], -1)
+			if multi_erase:
+				set_tiles_on_all_layers([get_cell(mouse_pos)], -1)
+			else:
+				set_tiles([get_cell(mouse_pos)], -1)
 
 
 	if event.is_action_released("editor_rmb"):
@@ -140,7 +142,8 @@ func _unhandled_input(event):
 			set_tiles(get_box(mouse_start_pos, mouse_pos), -1)
 		
 		if not active_operation.empty():
-			past_operations.append(["set_tiles", active_operation.duplicate()])
+			var operation_name = "set_tiles_on_all_layers" if multi_erase else "set_tiles"
+			past_operations.append([operation_name, active_operation.duplicate()])
 			#print("active op: ", active_operation)
 			active_operation.clear()
 
@@ -151,7 +154,10 @@ func _unhandled_input(event):
 		if lmb_held and brush == "paint":
 			set_tiles([get_cell(mouse_pos)], active_tile)
 		if rmb_held and brush == "paint":
-			set_tiles([get_cell(mouse_pos)], -1)
+			if multi_erase:
+				set_tiles_on_all_layers([get_cell(mouse_pos)], -1)
+			else:
+				set_tiles([get_cell(mouse_pos)], -1)
 		
 		hide_preview()
 		if brush == "paint":
@@ -162,6 +168,7 @@ func _unhandled_input(event):
 				preview_tiles(get_line(mouse_start_pos, mouse_pos))
 			if brush == "box":
 				preview_tiles(get_box(mouse_start_pos, mouse_pos))
+				
 
 
 
@@ -180,6 +187,8 @@ func _unhandled_input(event):
 		if ctrl_held and shift_held:
 			redo()
 
+
+### OPERATIONS ###
 
 func undo():
 	var last = past_operations.pop_back()
@@ -222,7 +231,17 @@ func set_tiles(pos_array: Array, tile, traced = true):
 					return
 			active_operation.append([pos, tile, old_tile])
 
-
+func set_tiles_on_all_layers(pos_array: Array, tile, traced = true): #TODO: finish this as it doesnt work right now
+	for pos in pos_array: #subops
+		for l in layers:
+			var layer = layers[l]
+			var old_tile = layer.get_cellv(pos)
+			layer.set_cellv(pos, tile)
+			if traced:
+				for s in active_operation:
+					if s[1] == pos: #positions match
+						return
+				active_operation.append([layer, pos, tile, old_tile])
 
 ### PREVIEW ###
 
@@ -289,7 +308,7 @@ func get_line(start, end) -> Array:
 	
 
 
-###LAYERS
+### LAYERS ###
 
 func setup_layers():
 	var layer_index = 0
@@ -321,8 +340,24 @@ func get_auto_layer():
 		2: layer = layers["Front"]
 		3: layer = layers["FarFront"]
 		_: layer = layers["Front"]
+	print(layer.name)
 	return layer
+
+### MISC ###
 
 func _on_viewport_size_changed():
 	rect_size = get_tree().get_root().size / w.get_node("EditorLayer").scale
 	pass
+
+
+func _on_TileSetMenu_tile_selection_updated(tile_selection):
+	active_tile = int(tile_selection.x)
+	if auto_layer:
+		change_layer(get_auto_layer())
+
+func _on_TileSetMenu_autolayer_updated(is_autolayer):
+	auto_layer = is_autolayer
+
+
+func _on_TileSetMenu_multi_erase_toggled(toggle):
+	multi_erase = toggle

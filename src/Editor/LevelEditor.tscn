@@ -1,38 +1,43 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/UI/Theme/LaputaThemeMenus.tres" type="Theme" id=1]
 [ext_resource path="res://src/Editor/LevelEditor.gd" type="Script" id=2]
 [ext_resource path="res://src/Editor/TileSetMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Editor/ResizeWindow.tscn" type="PackedScene" id=4]
 
-[node name="LevelEditor" type="MarginContainer"]
+[node name="LevelEditor" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -184.0
-margin_bottom = -238.0
-mouse_filter = 1
+margin_right = -136.0
+margin_bottom = -22.0
+mouse_filter = 2
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
-tile_list = NodePath("Window/Tab/Tiles/TileList")
-layer_list = NodePath("Window/Tab/Layers/Scroll/LayerList")
+__meta__ = {
+"_edit_use_anchors_": false
+}
+layer_list = NodePath("ResizeWindow/Tab/Layers/Scroll/LayerList")
 
-[node name="Window" type="WindowDialog" parent="."]
-visible = true
-margin_right = 296.0
-margin_bottom = 32.0
+[node name="ResizeWindow" parent="." instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 344.0
+margin_bottom = 248.0
+rect_min_size = Vector2( 80, 240 )
+bar_offset = 14
+debug = true
+
+[node name="Tab" type="TabContainer" parent="ResizeWindow"]
+margin_right = 344.0
+margin_bottom = 248.0
 mouse_filter = 1
-popup_exclusive = true
-resizable = true
-
-[node name="Tab" type="TabContainer" parent="Window"]
-margin_right = 264.0
-margin_bottom = 216.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tiles" type="MarginContainer" parent="Window/Tab"]
+[node name="TileSetMenu" parent="ResizeWindow/Tab" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
@@ -40,22 +45,7 @@ margin_top = 30.0
 margin_right = -16.0
 margin_bottom = -16.0
 
-[node name="TileList" type="ItemList" parent="Window/Tab/Tiles"]
-margin_right = 232.0
-margin_bottom = 170.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/vseparation = 1
-custom_constants/hseparation = 1
-select_mode = 1
-max_columns = 32
-icon_mode = 0
-fixed_icon_size = Vector2( 16, 16 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Layers" type="MarginContainer" parent="Window/Tab"]
+[node name="Layers" type="MarginContainer" parent="ResizeWindow/Tab"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -63,10 +53,11 @@ margin_left = 16.0
 margin_top = 30.0
 margin_right = -16.0
 margin_bottom = -16.0
+mouse_filter = 1
 
-[node name="Panel" type="Panel" parent="Window/Tab/Layers"]
-margin_right = 232.0
-margin_bottom = 170.0
+[node name="Panel" type="Panel" parent="ResizeWindow/Tab/Layers"]
+margin_right = 312.0
+margin_bottom = 202.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -74,18 +65,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Scroll" type="ScrollContainer" parent="Window/Tab/Layers"]
-margin_right = 232.0
-margin_bottom = 170.0
+[node name="Scroll" type="ScrollContainer" parent="ResizeWindow/Tab/Layers"]
+margin_right = 312.0
+margin_bottom = 202.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LayerList" type="VBoxContainer" parent="Window/Tab/Layers/Scroll"]
-margin_right = 232.0
-margin_bottom = 170.0
+[node name="LayerList" type="VBoxContainer" parent="ResizeWindow/Tab/Layers/Scroll"]
+margin_right = 312.0
+margin_bottom = 202.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
@@ -93,13 +84,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TileSetMenu" parent="Window/Tab" instance=ExtResource( 3 )]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 16.0
-margin_top = 30.0
-margin_right = -16.0
-margin_bottom = -16.0
-
-[connection signal="item_selected" from="Window/Tab/Tiles/TileList" to="." method="_on_TileList_item_selected"]
+[connection signal="autolayer_updated" from="ResizeWindow/Tab/TileSetMenu" to="." method="_on_TileSetMenu_autolayer_updated"]
+[connection signal="multi_erase_toggled" from="ResizeWindow/Tab/TileSetMenu" to="." method="_on_TileSetMenu_multi_erase_toggled"]
+[connection signal="tile_selection_updated" from="ResizeWindow/Tab/TileSetMenu" to="." method="_on_TileSetMenu_tile_selection_updated"]

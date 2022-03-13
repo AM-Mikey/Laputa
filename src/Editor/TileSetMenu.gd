@@ -1,12 +1,16 @@
 extends Control
 
+signal tile_selection_updated(tile_selection)
+signal autolayer_updated(is_autolayer)
+signal multi_erase_toggled(toggle)
+
 var tileset = load("res://src/Tile/VillageMinimal.tres")
 var texture = tileset.tile_get_texture(0)
 var columns = int(texture.get_size().x/16)
 var rows = int(texture.get_size().y/16)
 
 var hovered_tile
-var selected_tile_region = Vector2.ZERO #Vector2: Top Left, Vector2: Bottom Right
+var selected_tile_region = Vector2.ZERO #Top Left ID, Bottom Right ID
 var selected_tiles = []
 
 
@@ -23,7 +27,7 @@ func import_tileset():
 	for y in rows:
 		var row = HBoxContainer.new()
 		row.add_constant_override("separation", 1)
-		$VBox.add_child(row)
+		$VBox/Scroll/VBox.add_child(row)
 		
 		var c_id = 0
 		for x in columns:
@@ -34,10 +38,8 @@ func import_tileset():
 			tile.id = r_id * columns + c_id
 			tile.texture = sp_tex
 			row.add_child(tile)
-			#tile.connect("button_down", self, "start_selection", [tile])
 			tile.connect("mouse_entered", self, "hover_tile", [tile])
 			tile.connect("mouse_exited", self, "unhover")
-			#tile.connect("gui_input", self, "select_tile", [tile])
 			c_id +=1
 		
 		r_id += 1
@@ -55,29 +57,24 @@ func import_tileset():
 		var region = Rect2(x_pos, y_pos, 16, 16)
 		tileset.tile_set_region(id, region)
 		id += 1
-		print("added")
 
 func hover_tile(tile):
 	hovered_tile = tile.id
-	print(tile.id)
-
 func unhover():
-	#hovered_tiles.erase(tile.id)
 	hovered_tile = null
 
-func start_selection(tile):
-	print("started ", tile.id)
-	selected_tile_region.x = tile.id
 
 
 func _input(event):
 	if event.is_action_pressed("editor_lmb") and hovered_tile:
-		print("started ", hovered_tile)
+		#print("started ", hovered_tile)
 		selected_tile_region.x = hovered_tile
+	
 	if event.is_action_released("editor_lmb") and hovered_tile:
-		print("ended ", hovered_tile)
+		#print("ended ", hovered_tile)
 		selected_tile_region.y = hovered_tile
 		set_cursor()
+		emit_signal("tile_selection_updated", selected_tile_region)
 
 
 
@@ -90,6 +87,14 @@ func set_cursor():
 	var y1 = floor(end_id / columns+1) * 17
 	var dx = x1 - x0
 	var dy = y1 - y0
-	$Control/Cursor.rect_position = Vector2(x0, y0)
-	$Control/Cursor.rect_size = Vector2(dx, dy)
+	$VBox/Scroll/Control/Cursor.rect_position = Vector2(x0, y0)
+	$VBox/Scroll/Control/Cursor.rect_size = Vector2(dx, dy)
 
+
+
+func _on_AutoLayer_toggled(button_pressed):
+	emit_signal("autolayer_updated", button_pressed)
+
+
+func _on_MultiErase_toggled(button_pressed):
+	emit_signal("multi_erase_toggled", button_pressed)
