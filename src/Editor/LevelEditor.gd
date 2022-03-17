@@ -1,11 +1,11 @@
 extends Control
 
-const EDITOR_LAYER = preload("res://src/Editor/EditorLayer.tscn")
+const LAYER = preload("res://src/Editor/Layer.tscn")
 
 
 
 
-export(NodePath) var tile_list
+export(NodePath) var tiles_tab
 export(NodePath) var layer_list
 
 
@@ -31,23 +31,21 @@ var active_operation = [] #[[subop][subop][subop]]
 onready var w = get_tree().get_root().get_node("World")
 onready var tile_collection = w.current_level.get_node("Tiles")
 var tilemap
-onready var tileset = tile_collection.get_child(0).tile_set
+var tileset
 
 func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 	_on_viewport_size_changed()
 	#setup_tiles()
-	import_tileset()
+	create_tileset_from_texture(load("res://assets/Tile/VillageMinimal.png"))
 	setup_layers()
 
-func import_tileset():
-	var texture = tileset.tile_get_texture(0)
+func create_tileset_from_texture(texture):
+	tileset = TileSet.new()
 	var rows = int(texture.get_size().y/16)
 	var columns = int(texture.get_size().x/16)
 	
-	tileset.clear()
-	
-	var id = tileset.get_last_unused_tile_id()
+	var id = 0
 	while id < rows * columns:
 		tileset.create_tile(id)
 		tileset.tile_set_texture(id, texture)
@@ -58,8 +56,28 @@ func import_tileset():
 		tileset.tile_set_region(id, region)
 		id += 1
 	
+	get_node(tiles_tab).setup_tileset(tileset)
+
+
+func load_tileset(path):
+	tileset = load(path)
+	var texture = tileset.tile_get_texture(0)
+	var rows = int(texture.get_size().y/16)
+	var columns = int(texture.get_size().x/16)
+
+	for c in tile_collection.get_children():
+		if c is TileMap:
+			c.tile_set = tileset
+
+#	var id = 0 #tileset.get_last_unused_tile_id()
+#	while id < rows * columns:
+#		var x_pos = (id % columns) * 16
+#		var y_pos = floor(id / columns) * 16
+#		var region = Rect2(x_pos, y_pos, 16, 16)
+#		tileset.tile_set_region(id, region)
+#		id += 1
 	
-	
+	get_node(tiles_tab).setup_tileset(tileset)
 	
 
 #func setup_tiles():
@@ -315,13 +333,13 @@ func setup_layers():
 	for l in w.current_level.get_node("Tiles").get_children():
 		layers[l.name] = l
 		
-		var editor_layer = EDITOR_LAYER.instance()
-		editor_layer.layer = l
-		editor_layer.connect("layer_changed", self, "change_layer")
+		var layer_node = LAYER.instance()
+		layer_node.layer = l
+		layer_node.connect("layer_changed", self, "change_layer")
 		if layer_index == 0:
-			editor_layer.active = true
+			layer_node.active = true
 			tilemap = l
-		get_node(layer_list).add_child(editor_layer)
+		get_node(layer_list).add_child(layer_node)
 		layer_index += 1
 
 func change_layer(layer):
@@ -367,3 +385,11 @@ func _on_TileSet_collision_updated(tile_id, shape):
 	var transform = Transform2D.IDENTITY
 	tileset.tile_add_shape(tile_id, shape, transform)
 	tileset.tile_set_shape(tile_id, 0, shape)
+
+
+func _on_TileSet_tile_set_saved(path):
+	ResourceSaver.save(path, tileset)
+
+
+func _on_TileSet_tile_set_loaded(path):
+	load_tileset(path)

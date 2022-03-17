@@ -4,32 +4,37 @@ signal tile_selection_updated(tile_selection)
 signal autolayer_updated(is_autolayer)
 signal multi_erase_toggled(toggle)
 
-var tx_col_brush = preload("res://assets/Editor/CollisionBrushes.png")
 
-
-var tileset = load("res://src/Tile/VillageMinimal.tres")
-var texture = tileset.tile_get_texture(0)
-var columns = int(texture.get_size().x/16)
-var rows = int(texture.get_size().y/16)
+var tileset 
+var texture
+var columns
+var rows
 
 var hovered_tile
 var selected_tile_region = Vector2.ZERO #Top Left ID, Bottom Right ID
 var selected_tiles = []
 
+export(NodePath) var buttons
+export(NodePath) var cursor
+
+func setup_tileset(new):
+	tileset = new
+	texture = tileset.tile_get_texture(0)
+	columns = int(texture.get_size().x/16)
+	rows = int(texture.get_size().y/16)
+	
+	setup_tile_buttons()
 
 
-func _ready():
-	#$Control.rect_size = texture.get_size()
-	import_tileset()
-
-
-
-func import_tileset():
+func setup_tile_buttons():
+	for c in get_node(buttons).get_children():
+		c.free()
+	
 	var r_id = 0
 	for y in rows:
 		var row = HBoxContainer.new()
 		row.add_constant_override("separation", 1)
-		$VBox/Scroll/VBox.add_child(row)
+		get_node(buttons).add_child(row)
 		
 		var c_id = 0
 		for x in columns:
@@ -46,19 +51,20 @@ func import_tileset():
 		
 		r_id += 1
 	
-	
-	tileset.clear()
-	
-	var id = tileset.get_last_unused_tile_id()
-	while id < rows * columns:
-		tileset.create_tile(id)
-		tileset.tile_set_texture(id, texture)
-		
-		var x_pos = (id % columns) * 16
-		var y_pos = floor(id / columns) * 16
-		var region = Rect2(x_pos, y_pos, 16, 16)
-		tileset.tile_set_region(id, region)
-		id += 1
+#
+#	tileset.clear()
+#
+#	var id = tileset.get_last_unused_tile_id()
+#	while id < rows * columns:
+#		tileset.create_tile(id)
+#		tileset.tile_set_texture(id, texture)
+#
+#		var x_pos = (id % columns) * 16
+#		var y_pos = floor(id / columns) * 16
+#		var region = Rect2(x_pos, y_pos, 16, 16)
+#		tileset.tile_set_region(id, region)
+#		id += 1
+
 
 func hover_tile(tile):
 	hovered_tile = tile.id
@@ -89,8 +95,8 @@ func set_cursor():
 	var y1 = floor(end_id / columns+1) * 17
 	var dx = x1 - x0
 	var dy = y1 - y0
-	$VBox/Scroll/Control/Cursor.rect_position = Vector2(x0, y0)
-	$VBox/Scroll/Control/Cursor.rect_size = Vector2(dx, dy)
+	get_node(cursor).rect_position = Vector2(x0, y0)
+	get_node(cursor).rect_size = Vector2(dx, dy)
 
 
 

@@ -1,15 +1,17 @@
 extends Control
 
 signal collision_updated(tile_id, shape)
+signal tile_set_saved(path)
+signal tile_set_loaded(path)
 
 
 var tx_col_brush = preload("res://assets/Editor/CollisionBrushes.png")
 
 
-var tileset = load("res://src/Tile/VillageMinimal.tres")
-var texture = tileset.tile_get_texture(0)
-var columns = int(texture.get_size().x/16)
-var rows = int(texture.get_size().y/16)
+var tileset
+var texture
+var columns
+var rows
 
 var hovered_tile
 #var selected_tile_region = Vector2.ZERO #Top Left ID, Bottom Right ID
@@ -23,26 +25,23 @@ export(NodePath) var brushes
 export(NodePath) var col_tiles
 
 func _ready():
-	#$Control.rect_size = texture.get_size()
-	import_tileset()
 	setup_brushes()
-	
 
+
+func setup_tileset(new):
+	tileset = new
+	texture = tileset.tile_get_texture(0)
+	columns = int(texture.get_size().x/16)
+	rows = int(texture.get_size().y/16)
+	
+	setup_tile_buttons()
 
 func setup_brushes():
 	var brush_count = int(tx_col_brush.get_size().x / 16)
-	
 	var brush_id = 0
-#	for i in brush_count:
-#		var button = TextureButton.new()
-#		var texture = AtlasTexture.new()
-#		texture.atlas = tx_col_brush
-#		texture.region = Rect2(brush_id * 16, 0, 16, 16)
-#		get_node(brushes).add_icon_item(texture)
-#		brush_id += 1
-		
 	for i in brush_count:
 		var button = TextureButton.new()
+		
 		var tx_normal = AtlasTexture.new()
 		tx_normal.atlas = tx_col_brush
 		tx_normal.region = Rect2(brush_id * 16, 0, 16, 16)
@@ -51,6 +50,7 @@ func setup_brushes():
 		tx_pressed.region = Rect2(brush_id * 16, 16, 16, 16)
 		button.texture_normal = tx_normal
 		button.texture_pressed = tx_pressed
+		
 		button.toggle_mode = true
 		button.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
 		button.connect("pressed", self, "on_brush_selected", [i])
@@ -68,7 +68,7 @@ func on_brush_selected(brush):
 			active_col_brush = c.get_index()
 		
 
-func import_tileset():
+func setup_tile_buttons():
 	var p = get_node(col_tiles)
 	var r_id = 0
 	for y in rows:
@@ -92,18 +92,18 @@ func import_tileset():
 		r_id += 1
 	
 	
-	tileset.clear()
-	
-	var id = tileset.get_last_unused_tile_id()
-	while id < rows * columns:
-		tileset.create_tile(id)
-		tileset.tile_set_texture(id, texture)
-		
-		var x_pos = (id % columns) * 16
-		var y_pos = floor(id / columns) * 16
-		var region = Rect2(x_pos, y_pos, 16, 16)
-		tileset.tile_set_region(id, region)
-		id += 1
+#	tileset.clear()
+#
+#	var id = tileset.get_last_unused_tile_id()
+#	while id < rows * columns:
+#		tileset.create_tile(id)
+#		tileset.tile_set_texture(id, texture)
+#
+#		var x_pos = (id % columns) * 16
+#		var y_pos = floor(id / columns) * 16
+#		var region = Rect2(x_pos, y_pos, 16, 16)
+#		tileset.tile_set_region(id, region)
+#		id += 1
 
 func hover_tile(tile_node):
 	print("hover")
@@ -162,5 +162,25 @@ func set_collision(tile_node):
 func erase_collision(tile_node):
 	for c in tile_node.get_children():
 		c.free()
+
+
+
+
+func _on_Save_pressed():
+	$Save.popup()
+func _on_Load_pressed():
+	$Load.popup()
+
+func _on_Save_confirmed():
+	var path = $Save.current_path
+	emit_signal("tile_set_saved", path.get_basename() + ".tres")
+
+
+func _on_Load_file_selected(path):
+	emit_signal("tile_set_loaded", path)
+
+
+
+
 
 

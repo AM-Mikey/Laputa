@@ -1,24 +1,27 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/UI/StyleBox/SteelRound.tres" type="StyleBox" id=1]
-[ext_resource path="res://assets/Editor/VisFalse.png" type="Texture" id=2]
-[ext_resource path="res://assets/Editor/EditTrue.png" type="Texture" id=3]
-[ext_resource path="res://assets/Editor/EditFalse.png" type="Texture" id=4]
+[ext_resource path="res://assets/Editor/LayerTheme.tres" type="Theme" id=2]
+[ext_resource path="res://src/Editor/Layer.gd" type="Script" id=3]
+[ext_resource path="res://assets/Editor/EditTrue.png" type="Texture" id=4]
 [ext_resource path="res://assets/Editor/VisTrue.png" type="Texture" id=5]
-[ext_resource path="res://src/Editor/EditorLayer.gd" type="Script" id=6]
-[ext_resource path="res://assets/Editor/LayerTheme.tres" type="Theme" id=7]
+[ext_resource path="res://assets/Editor/VisFalse.png" type="Texture" id=6]
+[ext_resource path="res://assets/Editor/EditFalse.png" type="Texture" id=7]
 
-[node name="EditorLayer" type="MarginContainer"]
+[node name="Layer" type="MarginContainer"]
 margin_right = 256.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 mouse_filter = 2
-theme = ExtResource( 7 )
+theme = ExtResource( 2 )
 custom_constants/margin_right = 8
 custom_constants/margin_top = 0
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 0
-script = ExtResource( 6 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Panel" type="Panel" parent="."]
 margin_left = 8.0
@@ -65,7 +68,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 4
 toggle_mode = true
 texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 2 )
+texture_pressed = ExtResource( 6 )
 
 [node name="EditButton" type="TextureButton" parent="HBox"]
 margin_left = 220.0
@@ -75,8 +78,8 @@ margin_bottom = 20.0
 size_flags_horizontal = 8
 size_flags_vertical = 4
 toggle_mode = true
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 4 )
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 7 )
 
 [node name="Spacer2" type="Control" parent="HBox"]
 margin_left = 232.0

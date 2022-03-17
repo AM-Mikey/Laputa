@@ -10,3 +10,6 @@ margin_right = -240.0
 mouse_filter = 1
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
