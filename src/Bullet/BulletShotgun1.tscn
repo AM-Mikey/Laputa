@@ -35,5 +35,5 @@ one_shot = true
 
 [connection signal="area_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
 [connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
-[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="on_viewport_exit"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -6,16 +6,12 @@ var collision_shape: RectangleShape2D
 
 
 
-
-
-
 func _ready():
 	match direction:
 		Vector2.LEFT: rotation_degrees = 0
 		Vector2.RIGHT: rotation_degrees = 180
 		Vector2.UP: rotation_degrees = 90
 		Vector2.DOWN: rotation_degrees = -90
-
 
 func _physics_process(_delta):
 	velocity = speed * direction
@@ -28,29 +24,11 @@ func _physics_process(_delta):
 
 
 func _on_CollisionDetector_body_entered(body):
-	
 	if not disabled:
-		if body.get_collision_layer_bit(8): #breakable
-					body.on_break("cut")
-					if body.get_collision_layer_bit(3): #world
-						_fizzle_from_world()
-
-		elif body.get_collision_layer_bit(1): #enemy
+		if body.get_collision_layer_bit(1): #enemy
 			yield(get_tree(), "idle_frame")
 			var blood_direction = Vector2(floor((body.global_position.x - global_position.x)/10), floor((body.global_position.y - global_position.y)/10))
 			body.hit(damage, blood_direction)
 			queue_free()
 		elif body.get_collision_layer_bit(3): #world
 			_fizzle_from_world()
-
-
-#func _on_CollisionDetector_area_entered(area):
-#	if not disabled:
-#		if area.get_collision_layer_bit(8): #breakable
-#					area.on_break("cut")
-#					if area.get_collision_layer_bit(3): #world
-#						_fizzle_from_world()
-
-
-#TODO: merge all this breaking code into bullet.gd
-#set the default breaking as "cut" and store a var in different bullets as the destruction type

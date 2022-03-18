@@ -22,11 +22,6 @@ shape = SubResource( 1 )
 [node name="End" type="Position2D" parent="."]
 position = Vector2( -16, 0 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-visible = false
-position = Vector2( -8, 4.76837e-07 )
-scale = Vector2( 0.8, 0.1 )
-
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -8, 0 )
 texture = ExtResource( 2 )

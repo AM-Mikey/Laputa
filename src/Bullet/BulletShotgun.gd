@@ -35,3 +35,6 @@ func _on_CollisionDetector_body_entered(body):
 
 func _on_Timer_timeout():
 	queue_free()
+
+
+

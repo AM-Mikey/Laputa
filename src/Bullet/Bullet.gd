@@ -22,6 +22,12 @@ var default_body_collision = true
 onready var world = get_tree().get_root().get_node("World")
 
 
+func _ready():
+	var vis = VisibilityNotifier2D.new()
+	add_child(vis)
+	vis.connect("viewport_exited", self, "on_viewport_exit")
+
+
 func _fizzle_from_world():
 	var ricochet = RICOCHET.instance()
 	world.get_node("Middle").add_child(ricochet)
@@ -35,7 +41,8 @@ func _fizzle_from_range():
 	star_pop.position = global_position
 	queue_free()
 
-func _on_VisibilityNotifier2D_viewport_exited(_viewport):
+func on_viewport_exit(_viewport):
+	print("bullet exited viewport, freeing")
 	queue_free()
 
 
