@@ -16,7 +16,7 @@ func _ready():
 func _physics_process(_delta):
 	velocity = speed * direction
 	
-	if disabled == false:
+	if not disabled:
 		var _return_velo = move_and_slide(velocity)
 		var distance_from_origin = origin.distance_to(global_position);
 		if distance_from_origin > f_range:
