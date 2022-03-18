@@ -139,7 +139,7 @@ func bonk(type):
 
 func jump():
 	snap_vector = Vector2.ZERO
-	$JumpSound.play()
+	am.play("pc_jump")
 	#Check if a running jump. since speed.x is max x velocity, only count as a running jump then
 	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") and abs(velocity.x) > speed.x * 0.95:
 		jump_type = Jump.RUNNING

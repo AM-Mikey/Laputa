@@ -42,7 +42,6 @@ func _fizzle_from_range():
 	queue_free()
 
 func on_viewport_exit(_viewport):
-	print("bullet exited viewport, freeing")
 	queue_free()
 
 
@@ -66,6 +65,7 @@ func _on_CollisionDetector_body_entered(body):
 func _on_CollisionDetector_area_entered(area):
 	if not disabled and default_area_collision:
 		if area.get_collision_layer_bit(8): #breakable
+				print("entered breakable")
 				area.on_break(break_method)
 		elif area.get_collision_layer_bit(3): #world
 			_fizzle_from_world()

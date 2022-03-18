@@ -148,7 +148,7 @@ func hit(damage, knockback_direction):
 			$MovementManager.change_state($MovementManager.states["knockback"])
 		if damage > 0:
 			hp -= damage
-			$HurtSound.play()
+			am.play("pc_hurt")
 			emit_signal("hp_updated", hp, max_hp)
 			###DamageNumber
 			var damagenum = DAMAGENUMBER.instance()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://src/Gun/Defender.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Actor/Player/PlayerCamera.tscn" type="PackedScene" id=2]
@@ -16,7 +16,6 @@
 [ext_resource path="res://src/Actor/Player/Juniper.gd" type="Script" id=14]
 [ext_resource path="res://src/Actor/Player/MovementManager.gd" type="Script" id=15]
 [ext_resource path="res://src/Actor/Player/SpriteManager.gd" type="Script" id=16]
-[ext_resource path="res://assets/SFX/Placeholder/snd_quote_hurt.ogg" type="AudioStream" id=17]
 [ext_resource path="res://assets/Actor/Player/Aerial.png" type="Texture" id=18]
 [ext_resource path="res://assets/Actor/Player/Climb.png" type="Texture" id=19]
 [ext_resource path="res://assets/Actor/Player/Backrun.png" type="Texture" id=20]
@@ -25,7 +24,6 @@
 [ext_resource path="res://assets/SFX/Placeholder/snd_quote_walk.ogg" type="AudioStream" id=23]
 [ext_resource path="res://assets/Actor/Player/Run.png" type="Texture" id=24]
 [ext_resource path="res://assets/Gun/Revolver.png" type="Texture" id=25]
-[ext_resource path="res://assets/SFX/Placeholder/snd_quote_jump.ogg" type="AudioStream" id=26]
 [ext_resource path="res://src/Actor/Player/AnimationManager.gd" type="Script" id=27]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -2545,19 +2543,16 @@ wait_time = 0.4
 one_shot = true
 autostart = true
 
-[node name="JumpSound" type="AudioStreamPlayer" parent="MovementManager"]
-stream = ExtResource( 26 )
-bus = "SFX"
-
 [node name="SpriteManager" type="Node" parent="."]
 script = ExtResource( 16 )
 
 [node name="Back" type="Sprite" parent="."]
 light_mask = 2
 position = Vector2( 0, -16 )
-texture = ExtResource( 18 )
-hframes = 3
-vframes = 12
+texture = ExtResource( 20 )
+hframes = 12
+vframes = 16
+frame = 24
 region_rect = Rect2( 173, 193, 24, 35 )
 script = ExtResource( 13 )
 
@@ -2573,10 +2568,10 @@ position = Vector2( -5, -1 )
 [node name="Front" type="Sprite" parent="."]
 light_mask = 2
 position = Vector2( 0, -16 )
-texture = ExtResource( 18 )
-hframes = 3
-vframes = 12
-frame = 3
+texture = ExtResource( 20 )
+hframes = 12
+vframes = 16
+frame = 36
 script = ExtResource( 13 )
 
 [node name="PlayerCamera" parent="." instance=ExtResource( 2 )]
@@ -2602,10 +2597,6 @@ autostart = true
 
 [node name="WalkSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 23 )
-bus = "SFX"
-
-[node name="HurtSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 17 )
 bus = "SFX"
 
 [node name="ItemDetector" type="Area2D" parent="."]

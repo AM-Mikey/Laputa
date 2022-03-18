@@ -52,7 +52,7 @@ func level_up(debug):
 	current_gun.level += 1
 	current_gun.load_level()
 	current_gun.xp = 0 if debug else current_gun.xp - last_max_xp
-	emit_signal("guns_updated", $Guns.get_children())
+	get_parent().emit_signal("guns_updated", $Guns.get_children())
 
 	var level_up = LEVELUP.instance()
 	world.get_node("Front").add_child(level_up)
@@ -64,7 +64,7 @@ func level_down(debug):
 	current_gun.level -= 1
 	current_gun.load_level()
 	current_gun.xp = 0 if debug else current_gun.xp + current_gun.max_xp
-	emit_signal("guns_updated", $Guns.get_children())
+	get_parent().emit_signal("guns_updated", $Guns.get_children())
 
 	var level_down = LEVELDOWN.instance()
 	world.get_node("Front").add_child(level_down)
