@@ -38,11 +38,6 @@ collision_mask = 265
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
 shape = SubResource( 1 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-visible = false
-position = Vector2( -8.9407e-07, -1.19209e-07 )
-scale = Vector2( 0.6, 0.6 )
-
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 hframes = 2

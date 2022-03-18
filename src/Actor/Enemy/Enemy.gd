@@ -100,7 +100,7 @@ func prepare_damagenum(damage):
 		
 	else: #add time and add values
 		damagenum.value += damage
-		$DamagenumTimer.start($DamagenumTimer.time_left + damagenum_time)
+		$DamagenumTimer.start($DamagenumTimer.time_left)
 		
 		
 
