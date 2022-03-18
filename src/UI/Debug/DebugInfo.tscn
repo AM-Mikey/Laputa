@@ -8,7 +8,7 @@
 [node name="DebugInfo" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 1
+mouse_filter = 2
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -18,6 +18,7 @@ __meta__ = {
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_right = 480.0
 margin_bottom = 270.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -26,6 +27,7 @@ __meta__ = {
 margin_right = 480.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 0, 56 )
+mouse_filter = 2
 theme = ExtResource( 2 )
 custom_constants/separation = 16
 
@@ -70,12 +72,14 @@ __meta__ = {
 margin_left = 147.0
 margin_right = 201.0
 margin_bottom = 56.0
+mouse_filter = 2
 custom_constants/separation = 4
 
 [node name="Guns" type="VBoxContainer" parent="VBox/General/Arrays"]
 margin_right = 29.0
 margin_bottom = 56.0
 rect_pivot_offset = Vector2( 125, 80 )
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="VBox/General/Arrays/Guns"]
 margin_right = 29.0
@@ -88,6 +92,7 @@ margin_left = 33.0
 margin_right = 54.0
 margin_bottom = 56.0
 rect_pivot_offset = Vector2( 125, 80 )
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="VBox/General/Arrays/Sfx"]
 margin_right = 21.0
@@ -101,6 +106,7 @@ margin_left = 42.0
 margin_right = 70.0
 margin_bottom = 56.0
 rect_pivot_offset = Vector2( 125, 80 )
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="VBox/General/Arrays/Music"]
 margin_right = 28.0
@@ -113,6 +119,7 @@ margin_left = 42.0
 margin_right = 42.0
 margin_bottom = 56.0
 rect_pivot_offset = Vector2( 125, 80 )
+mouse_filter = 2
 
 [node name="Topic" type="VBoxContainer" parent="VBox/General/Arrays"]
 visible = false
@@ -120,15 +127,18 @@ margin_left = 42.0
 margin_right = 42.0
 margin_bottom = 56.0
 rect_pivot_offset = Vector2( 125, 80 )
+mouse_filter = 2
 
 [node name="HBox" type="HBoxContainer" parent="VBox"]
 margin_top = 56.0
 margin_right = 480.0
 margin_bottom = 236.0
+mouse_filter = 2
 
 [node name="C1" type="HBoxContainer" parent="VBox/HBox"]
 margin_right = 51.0
 margin_bottom = 180.0
+mouse_filter = 2
 theme = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -137,6 +147,7 @@ __meta__ = {
 [node name="Q" type="VBoxContainer" parent="VBox/HBox/C1"]
 margin_right = 45.0
 margin_bottom = 180.0
+mouse_filter = 2
 theme = ExtResource( 2 )
 
 [node name="Bars" type="Label" parent="VBox/HBox/C1/Q"]
@@ -253,7 +264,7 @@ margin_right = 45.0
 margin_bottom = 120.0
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
-text = "Gbl Pos: "
+text = "Position: "
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -336,6 +347,7 @@ __meta__ = {
 margin_left = 45.0
 margin_right = 51.0
 margin_bottom = 180.0
+mouse_filter = 2
 theme = ExtResource( 2 )
 
 [node name="Bars" type="Label" parent="VBox/HBox/C1/A"]
@@ -519,6 +531,7 @@ __meta__ = {
 margin_left = 434.0
 margin_right = 480.0
 margin_bottom = 168.0
+mouse_filter = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
 theme = ExtResource( 2 )
@@ -529,6 +542,7 @@ __meta__ = {
 [node name="Q" type="VBoxContainer" parent="VBox/HBox/C2"]
 margin_right = 40.0
 margin_bottom = 168.0
+mouse_filter = 2
 theme = ExtResource( 2 )
 
 [node name="Cam" type="Label" parent="VBox/HBox/C2/Q"]
@@ -702,6 +716,7 @@ __meta__ = {
 margin_left = 40.0
 margin_right = 46.0
 margin_bottom = 168.0
+mouse_filter = 2
 theme = ExtResource( 2 )
 
 [node name="View" type="Label" parent="VBox/HBox/C2/A"]
