@@ -20,7 +20,6 @@
 [ext_resource path="res://src/Tile/Layers/Outdated/SSP.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Tile/Layers/Outdated/Front.tscn" type="PackedScene" id=19]
 
-
 [sub_resource type="DynamicFont" id=1]
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -62,28 +61,18 @@ position = Vector2( 1816, 0 )
 
 [node name="Billy4" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 1064, 48 )
-heart_chance = 0
-ammo_chance = 0
 
 [node name="Billy6" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 1296, 0 )
-heart_chance = 0
-ammo_chance = 0
 
 [node name="Billy7" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 1272, 96 )
-heart_chance = 0
-ammo_chance = 0
 
 [node name="Billy9" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 2480, 0 )
-heart_chance = 0
-ammo_chance = 0
 
 [node name="Billy3" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 1896, 16 )
-heart_chance = 0
-ammo_chance = 0
 
 [node name="Sentry10" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( 2536, 64 )

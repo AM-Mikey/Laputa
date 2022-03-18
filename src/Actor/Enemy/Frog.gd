@@ -14,6 +14,7 @@ enum Difficulty {easy, normal, hard}
 export(Difficulty) var difficulty = Difficulty.normal setget _on_difficulty_changed
 
 func _ready():
+	_on_difficulty_changed(difficulty)
 	gravity = 200
 
 
