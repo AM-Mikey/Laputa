@@ -1,5 +1,6 @@
 extends Control
 
+const KEY_GUIDE = preload("res://src/UI/KeyGuide.tscn")
 const LEVELSELECT = preload("res://src/UI/LevelSelect/LevelSelect.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
@@ -63,6 +64,9 @@ func _on_level():
 
 func _on_quit():
 	get_tree().quit()
+
+func _on_keyguide():
+	get_parent().add_child(KEY_GUIDE.instance())
 	
 
 func focus():

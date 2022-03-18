@@ -1,7 +1,8 @@
 extends Control
 
-const OPTIONS = preload("res://src/UI/Options/Options.tscn")
+const KEY_GUIDE = preload("res://src/UI/KeyGuide.tscn")
 const LEVEL = preload("res://src/UI/LevelSelect/LevelSelect.tscn")
+const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 const TITLE = preload("res://src/UI/TitleScreen.tscn")
 
 onready var world = get_tree().get_root().get_node("World")
@@ -34,6 +35,9 @@ func _on_Options_pressed():
 	var options = OPTIONS.instance()
 	get_parent().add_child(options)
 
+func _on_KeyGuide_pressed():
+	get_parent().add_child(KEY_GUIDE.instance())
+
 func _on_Level_pressed():
 	var level = LEVEL.instance()
 	get_parent().add_child(level)
@@ -46,3 +50,6 @@ func _on_Quit_pressed():
 
 func on_viewport_size_changed():
 	rect_size = get_tree().get_root().size / world.resolution_scale
+
+
+

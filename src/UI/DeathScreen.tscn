@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/UI/Theme/LaputaTheme.tres" type="Theme" id=1]
 [ext_resource path="res://src/UI/DeathScreen.gd" type="Script" id=2]
-[ext_resource path="res://assets/SFX/Placeholder/snd_quote_die.ogg" type="AudioStream" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "In"
@@ -106,10 +105,5 @@ text = "Quit"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/In = SubResource( 1 )
 
-[node name="DeathSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
-bus = "SFX"
-
 [connection signal="pressed" from="VBox/HBox/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="VBox/HBox/Quit" to="." method="_on_Quit_pressed"]
-[connection signal="finished" from="DeathSound" to="." method="_on_DeathSound_finished"]

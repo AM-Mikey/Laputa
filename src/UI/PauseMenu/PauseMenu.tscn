@@ -63,11 +63,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Level" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_left = 187.0
+[node name="KeyGuide" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_left = 188.0
 margin_top = 48.0
 margin_right = 276.0
 margin_bottom = 68.0
+size_flags_horizontal = 4
+text = "How To Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_left = 187.0
+margin_top = 72.0
+margin_right = 276.0
+margin_bottom = 92.0
 size_flags_horizontal = 4
 text = "Level Select"
 __meta__ = {
@@ -76,9 +87,9 @@ __meta__ = {
 
 [node name="Quit" type="Button" parent="VBoxContainer/VBoxContainer"]
 margin_left = 212.0
-margin_top = 72.0
+margin_top = 96.0
 margin_right = 251.0
-margin_bottom = 92.0
+margin_bottom = 116.0
 size_flags_horizontal = 4
 text = "Quit"
 __meta__ = {
@@ -87,5 +98,6 @@ __meta__ = {
 
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Return" to="." method="_on_Return_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/KeyGuide" to="." method="_on_KeyGuide_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Level" to="." method="_on_Level_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

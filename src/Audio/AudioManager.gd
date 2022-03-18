@@ -13,11 +13,11 @@ export var sfx_dict: Dictionary = {
 	"ui_deny": preload("res://assets/SFX/Placeholder/snd_quote_bonkhead.ogg"),
 	"ui_move": preload("res://assets/SFX/Placeholder/snd_menu_move.ogg"),
 	
-	"door": preload("res://assets/SFX/placeholder/snd_door.ogg"),
-	"locked": preload("res://assets/SFX/placeholder/snd_gun_click.ogg"),
-	"click": preload("res://assets/SFX/placeholder/snd_gun_click.ogg"),
-	"ammo_refill": preload("res://assets/SFX/placeholder/snd_get_missile.ogg"),
-	"chest": preload("res://assets/SFX/placeholder/snd_chest_open.ogg"),
+	"door": preload("res://assets/SFX/Placeholder/snd_door.ogg"),
+	"locked": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
+	"click": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
+	"ammo_refill": preload("res://assets/SFX/Placeholder/snd_get_missile.ogg"),
+	"chest": preload("res://assets/SFX/Placeholder/snd_chest_open.ogg"),
 	
 	"break_block": preload("res://assets/SFX/Placeholder/snd_block_destroy.ogg"),
 	"break_grass": preload("res://assets/SFX/Placeholder/snd_explosion2.ogg"),
@@ -26,7 +26,7 @@ export var sfx_dict: Dictionary = {
 	
 	"pc_die": preload("res://assets/SFX/Placeholder/snd_quote_die.ogg"),
 	
-	"gun_click": preload("res://assets/SFX/placeholder/snd_gun_click.ogg"),
+	"gun_click": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
 	"gun_shift": preload("res://assets/SFX/Placeholder/snd_switchweapon.ogg"),
 	"gun_pistol": preload("res://assets/SFX/Placeholder/snd_polar_star_l1_2.ogg"),
 	"gun_shotgun": preload("res://assets/SFX/Placeholder/snd_missile_hit.ogg"),

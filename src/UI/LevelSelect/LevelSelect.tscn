@@ -3,7 +3,6 @@
 [ext_resource path="res://src/UI/Theme/LaputaTheme.tres" type="Theme" id=1]
 [ext_resource path="res://src/UI/LevelSelect/LevelSelect.gd" type="Script" id=2]
 
-
 [node name="LevelSelect" type="MarginContainer"]
 margin_right = 480.0
 margin_bottom = 272.0

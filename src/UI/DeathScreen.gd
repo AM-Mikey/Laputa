@@ -14,15 +14,16 @@ func _ready():
 	#world.get_node("MusicPlayer").stop()
 	am.play("pc_die")
 	hud.visible = false
-	get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
-
-func _on_DeathSound_finished():
+	
+	#TODO: wait and fix camera
 	focus()
 	visible = true
 	am.play_music("gameover")
 	$AnimationPlayer.play("In")
-	world.get_node("DeathCam").focus_player()
+	#world.get_node("DeathCam").focus_player()
+
 
 func focus():
 	print("focused")
@@ -35,12 +36,12 @@ func _on_Continue_pressed():
 	world.add_child(JUNIPER.instance())
 	world.get_node("UILayer").add_child(HUD.instance())
 	
-	world.load_player_data_from_save()
-	world.load_level_data_from_save()
-	world.copy_level_data_to_temp()
+	world.read_player_data_from_save()
+	world.read_level_data_from_save()
+	world.copy_level_data_from_save_to_temp()
 	
 	
-	world.get_node("DeathCam").queue_free()
+	#world.get_node("DeathCam").queue_free()
 	queue_free()
 	
 

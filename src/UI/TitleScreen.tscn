@@ -72,16 +72,23 @@ margin_right = 301.0
 margin_bottom = 153.0
 text = "Options"
 
-[node name="Level" parent="VBox" instance=ExtResource( 7 )]
-margin_left = 227.0
+[node name="KeyGuide" parent="VBox" instance=ExtResource( 7 )]
+margin_left = 228.0
 margin_top = 157.0
 margin_right = 316.0
 margin_bottom = 177.0
+text = "How To Play"
+
+[node name="Level" parent="VBox" instance=ExtResource( 7 )]
+margin_left = 227.0
+margin_top = 181.0
+margin_right = 316.0
+margin_bottom = 201.0
 text = "Level Select"
 
 [node name="Quit" parent="VBox" instance=ExtResource( 7 )]
 margin_left = 252.0
-margin_top = 181.0
+margin_top = 205.0
 margin_right = 291.0
-margin_bottom = 201.0
+margin_bottom = 225.0
 text = "Quit"
