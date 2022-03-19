@@ -14,44 +14,102 @@ var hovered_tile
 var selected_tile_region = Vector2.ZERO #Top Left ID, Bottom Right ID
 var selected_tiles = []
 
+export var tile_separation: int = 1
+
 export(NodePath) var buttons
 export(NodePath) var cursor
 
 func setup_tileset(new):
 	tileset = new
-	texture = tileset.tile_get_texture(0)
-	columns = int(texture.get_size().x/16)
-	rows = int(texture.get_size().y/16)
+	texture = tileset.tile_get_texture(tileset.get_tiles_ids().front())
+	columns = floor(texture.get_width()/16)
+	rows = floor(texture.get_height()/16)
 	
 	setup_tile_buttons()
 
 
 func setup_tile_buttons():
-	for c in get_node(buttons).get_children():
+	#var buttons = get_node(buttons)
+#	buttons.add_constant_override("separation", tile_separation)
+	
+	for c in get_node(buttons).get_children(): #clear old rows
 		c.free()
-	
+		
+	###########################################################################
+	get_node(buttons).add_constant_override("separation", tile_separation)
 	var r_id = 0
-	for y in rows:
+	for r in rows:
 		var row = HBoxContainer.new()
-		row.add_constant_override("separation", 1)
+		row.add_constant_override("separation", tile_separation)
 		get_node(buttons).add_child(row)
-		
 		var c_id = 0
-		for x in columns:
-			var tile = load("res://src/Editor/TileButton.tscn").instance()
-			var sp_tex = AtlasTexture.new()
-			sp_tex.atlas = texture
-			sp_tex.region = Rect2(c_id * 16, r_id * 16, 16, 16)
-			tile.id = r_id * columns + c_id
-			tile.texture = sp_tex
-			row.add_child(tile)
-			tile.connect("mouse_entered", self, "hover_tile", [tile])
-			tile.connect("mouse_exited", self, "unhover")
-			c_id +=1
-		
+		for c in columns:
+			var button = load("res://src/Editor/TileButton.tscn").instance()
+			row.add_child(button)
+			c_id += 1
 		r_id += 1
-	
+
+
+################################
+		
+		
+#	for r in rows:
+#		var row = HBoxContainer.new()
+#		row.add_constant_override("separation", tile_separation)
+#		get_node(buttons).add_child(row)
+#		for c in columns:
+#			var column = VBoxContainer.new()
+#			column.add_constant_override("separation", tile_separation)
+#			row.add_child(column)
+		
+####################################################
+
+	#var texture_last_tile_id = floor(columns * rows) -1
+
+	for i in tileset.get_tiles_ids(): # for i in range(0, texture_last_tile_id):
+		var x_pos: int = floor(tileset.tile_get_region(i).position.x/16)
+		var y_pos: int = floor(tileset.tile_get_region(i).position.y/16)
+		
+		var button = get_node(buttons).get_child(y_pos).get_child(x_pos)
+		button.id = i
+		button.texture = get_tile_as_texture(i)
+		button.connect("mouse_entered", self, "hover_tile", [button])
+		button.connect("mouse_exited", self, "unhover")
+
+
+
+#########################
+
+# OLD
+#	get_node(buttons).add_constant_override("separation", tile_separation)
 #
+#	var r_id = 0
+#	for r in rows:
+#		var row = HBoxContainer.new()
+#		row.add_constant_override("separation", tile_seperation)
+#		get_node(buttons).add_child(row)
+#
+#		var c_id = 0
+#		for x in columns:
+#			var tile = load("res://src/Editor/TileButton.tscn").instance()
+#			var sp_tex = AtlasTexture.new()
+#			sp_tex.atlas = texture
+#			sp_tex.region = Rect2(c_id * 16, r_id * 16, 16, 16)
+#
+#			tile.id = r_id * columns + c_id
+#			tile.texture = sp_tex
+#			row.add_child(tile)
+#			tile.connect("mouse_entered", self, "hover_tile", [tile])
+#			tile.connect("mouse_exited", self, "unhover")
+#			c_id +=1
+#
+#		r_id += 1
+	
+	
+	
+	
+	
+#OLD OLD
 #	tileset.clear()
 #
 #	var id = tileset.get_last_unused_tile_id()
@@ -64,6 +122,13 @@ func setup_tile_buttons():
 #		var region = Rect2(x_pos, y_pos, 16, 16)
 #		tileset.tile_set_region(id, region)
 #		id += 1
+
+func get_tile_as_texture(id) -> Texture:
+	var tile_texture = AtlasTexture.new()
+	tile_texture.atlas = texture
+	tile_texture.region = tileset.tile_get_region(id)
+	return tile_texture
+
 
 
 func hover_tile(tile):

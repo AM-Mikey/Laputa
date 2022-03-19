@@ -53,9 +53,11 @@ __meta__ = {
 [node name="Buttons" type="VBoxContainer" parent="VBox/Scroll"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 8.0
-margin_bottom = 8.0
-custom_constants/separation = 1
+margin_right = 472.0
+margin_bottom = 226.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }

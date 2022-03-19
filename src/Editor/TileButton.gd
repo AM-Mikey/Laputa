@@ -1,4 +1,4 @@
 extends TextureRect
 
-var id: int
+var id: int = -1
 var collision: String

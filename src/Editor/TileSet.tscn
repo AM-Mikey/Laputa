@@ -23,7 +23,6 @@ margin_bottom = 270.0
 mouse_filter = 1
 
 [node name="Normal" type="VBoxContainer" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
@@ -61,6 +60,7 @@ __meta__ = {
 }
 
 [node name="Collision" type="VBoxContainer" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
@@ -161,6 +161,8 @@ text = "Load TileSet"
 margin_right = 480.0
 margin_bottom = 270.0
 filters = PoolStringArray( "*.tres" )
+current_dir = "res://src/Tile"
+current_path = "res://src/Tile/"
 
 [node name="Load" type="FileDialog" parent="."]
 visible = true
@@ -169,6 +171,8 @@ margin_bottom = 270.0
 window_title = "Open a File"
 mode = 0
 filters = PoolStringArray( "*.tres" )
+current_dir = "res://src/Tile"
+current_path = "res://src/Tile/"
 
 [connection signal="pressed" from="Margin/HBox/Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="Margin/HBox/Load" to="." method="_on_Load_pressed"]
