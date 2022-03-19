@@ -8,10 +8,11 @@
 [ext_resource path="res://src/Actor/Enemy/Frog.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Background/ParallaxTest.tres" type="Resource" id=7]
 [ext_resource path="res://src/Tile/Layers/Front.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/Utility/LevelLimiter.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Tile/Layers/SSP.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Tile/Layers/Collision.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Tile/VillageNew.tres" type="TileSet" id=12]
+
 
 
 [node name="11-5Converted" type="Node2D"]

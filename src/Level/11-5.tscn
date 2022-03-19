@@ -6,7 +6,7 @@
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
 [ext_resource path="res://src/Tile/Village.tres" type="TileSet" id=6]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=7]
-[ext_resource path="res://src/Utility/LevelLimiter.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 

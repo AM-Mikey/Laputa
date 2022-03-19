@@ -5,19 +5,19 @@ var texture_index: int
 var collision_shape: RectangleShape2D
 
 
-var minimum_speed: float = 24
+var minimum_speed: float = 0.1
 var bounciness = .6
 var explosion_time = 2.5
 var start_velocity
 var touched_floor = false
 var player_on_floor = false
 var player_held_down = false
-var zero_speed_last_frame = false
 
 func _ready():
 	break_method = "burn"
 	default_area_collision = false
 	default_body_collision = false
+	default_clear = false
 	
 	$ExplosionDetector.scale = Vector2.ZERO
 	$ExplosionDetector.set_collision_mask_bit(0, false) #player
@@ -35,32 +35,40 @@ func _ready():
 
 
 func _physics_process(delta):
+	
+	
+	if not disabled:
+		velocity.y += gravity * delta
+		
+		if velocity.x < 0:
+			$AnimationPlayer.play("FlipLeft")
+		else:
+			$AnimationPlayer.play("FlipRight")
+		
+		var collision = move_and_collide(velocity * delta)
+		if collision:
+			velocity *= bounciness
+			velocity = velocity.bounce(collision.normal)
+			#$Bounce2D.play()
+			am.play_pos("gun_grenade_bounce", self)
+	
+	
+	if abs(velocity.y) < minimum_speed and is_on_floor():
+		velocity = Vector2.ZERO
+
+
 	if is_on_floor():
 		touched_floor = true
-	
-	if abs(velocity.x) > minimum_speed or abs(velocity.y) > minimum_speed: #check or not and
-		if disabled == false:
-			if velocity.x < 0:
-				$AnimationPlayer.play("FlipLeft")
-			else:
-				$AnimationPlayer.play("FlipRight")
-			
-			var collision = move_and_collide(velocity * delta)
-			if collision:
-				velocity *= bounciness
-				velocity = velocity.bounce(collision.normal)
-				$Bounce2D.play()
-	
-	else: #if it ever gets below the minimum speed in x or y
-		if zero_speed_last_frame:
-			velocity = Vector2.ZERO
-		else:
-			zero_speed_last_frame = true
-		
-		
 
-	velocity.y += gravity * delta
-			
+	
+	
+	
+#	#else: #if it ever gets below the minimum speed in x or y
+#		print("min speed check")
+#		if is_on_floor():
+#			velocity = Vector2.ZERO
+
+	
 	var avr_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 	$AnimationPlayer.playback_speed = avr_velocity / start_velocity
 	if $AnimationPlayer.playback_speed < .1:
@@ -79,7 +87,6 @@ func get_initial_velocity(scoped_projectile_speed, scoped_direction) -> Vector2:
 	else:
 		out.y -= 100 #give us some ups to start with
 
-	#print(out)
 	return out
 	
 func _on_CollisionDetector_body_entered(body):

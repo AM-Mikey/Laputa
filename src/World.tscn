@@ -16,6 +16,8 @@ start_level = ExtResource( 1 )
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -1
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
 [node name="Back" type="Node2D" parent="."]
 
 [node name="Middle" type="Node2D" parent="."]
@@ -30,5 +32,3 @@ pause_mode = 2
 [node name="EditorLayer" type="CanvasLayer" parent="."]
 scale = Vector2( 2, 2 )
 transform = Transform2D( 2, 0, 0, 2, 0, 0 )
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]

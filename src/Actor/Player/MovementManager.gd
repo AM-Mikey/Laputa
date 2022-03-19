@@ -97,7 +97,6 @@ func _input(event):
 		
 		if event.is_action_pressed("jump") and $ForgiveTimer.time_left > 0 \
 		or event.is_action_pressed("jump") and pc.is_on_floor():
-
 			jump()
 		
 		if event.is_action_pressed("fire_automatic"):
@@ -145,7 +144,3 @@ func jump():
 		jump_type = Jump.RUNNING
 		jump_starting_move_dir_x = pc.move_dir.x
 		$MinDirTimer.start(minimum_direction_time)
-
-
-
-

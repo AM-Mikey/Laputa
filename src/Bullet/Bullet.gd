@@ -18,14 +18,16 @@ var direction = Vector2.ZERO
 var break_method = "cut"
 var default_area_collision = true
 var default_body_collision = true
+var default_clear
 
 onready var world = get_tree().get_root().get_node("World")
 
 
 func _ready():
-	var vis = VisibilityNotifier2D.new()
-	add_child(vis)
-	vis.connect("viewport_exited", self, "on_viewport_exit")
+	if default_clear:
+		var vis = VisibilityNotifier2D.new()
+		add_child(vis)
+		vis.connect("viewport_exited", self, "on_viewport_exit")
 
 
 func _fizzle_from_world():

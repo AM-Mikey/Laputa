@@ -27,7 +27,7 @@ func _ready():
 	global_position = w.get_node("Juniper/PlayerCamera").global_position 
 	
 func _unhandled_input(event):
-	#print("ok")
+	print("unhandled input")
 	if event.is_action_pressed("editor_scroll_down"):
 		if current_zoom < zooms.size() - 1:
 			var old_zoom = current_zoom

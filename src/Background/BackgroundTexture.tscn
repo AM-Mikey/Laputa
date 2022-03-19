@@ -3,6 +3,7 @@
 [ext_resource path="res://src/Background/BackgroundTexture.gd" type="Script" id=1]
 
 [node name="BackgroundTexture" type="TextureRect"]
+mouse_filter = 2
 expand = true
 stretch_mode = 2
 script = ExtResource( 1 )

@@ -14,24 +14,6 @@ func state_process():
 
 	pc.move_dir = get_move_dir()
 
-	if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
-		mm.bonk("bonk")
-
-
-	if pc.is_on_floor():
-		jump_type = Jump.NORMAL
-		
-		
-		if mm.forgive_timer.time_left == 0:
-			mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
-			if mm.bonk_timeout.time_left == 0:
-				mm.bonk("Land")
-		
-
-		mm.forgive_timer.start(mm.forgiveness_time)
-
-
-
 
 
 
@@ -40,11 +22,6 @@ func state_process():
 	if mm.velocity.y < 0.0:
 		if not Input.is_action_pressed("jump"):
 			is_jump_interrupted = true
-
-
-
-
-
 
 
 
@@ -58,7 +35,17 @@ func state_process():
 	mm.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
 
 
+	### checks with new velocity
+	if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
+		mm.bonk("bonk")
 
+	if pc.is_on_floor():
+		jump_type = Jump.NORMAL
+		if mm.forgive_timer.time_left == 0:
+			mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
+			if mm.bonk_timeout.time_left == 0:
+				mm.bonk("Land")
+		mm.forgive_timer.start(mm.forgiveness_time)
 
 
 
