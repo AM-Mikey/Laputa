@@ -26,6 +26,7 @@ anchor_bottom = 0.0
 margin_right = 344.0
 margin_bottom = 448.0
 rect_min_size = Vector2( 80, 240 )
+mouse_filter = 2
 bar_offset = 14
 debug = true
 
@@ -52,7 +53,7 @@ margin_left = 16.0
 margin_top = 30.0
 margin_right = -16.0
 margin_bottom = -16.0
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="ResizeWindow/Tab/Layers"]
 margin_right = 312.0
@@ -91,6 +92,7 @@ margin_left = 16.0
 margin_top = 30.0
 margin_right = -16.0
 margin_bottom = -16.0
+mouse_filter = 2
 
 [connection signal="autolayer_updated" from="ResizeWindow/Tab/Tiles" to="." method="_on_TileSetMenu_autolayer_updated"]
 [connection signal="multi_erase_toggled" from="ResizeWindow/Tab/Tiles" to="." method="_on_TileSetMenu_multi_erase_toggled"]
