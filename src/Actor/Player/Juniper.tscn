@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://src/Gun/Defender.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Actor/Player/PlayerCamera.tscn" type="PackedScene" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://assets/SFX/Placeholder/snd_quote_walk.ogg" type="AudioStream" id=23]
 [ext_resource path="res://assets/Actor/Player/Run.png" type="Texture" id=24]
 [ext_resource path="res://assets/Gun/Revolver.png" type="Texture" id=25]
+[ext_resource path="res://src/Actor/Player/GunSprite.gd" type="Script" id=26]
 [ext_resource path="res://src/Actor/Player/AnimationManager.gd" type="Script" id=27]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -2561,6 +2562,7 @@ script = ExtResource( 13 )
 light_mask = 2
 position = Vector2( 1, -15 )
 texture = ExtResource( 25 )
+script = ExtResource( 26 )
 
 [node name="MuzzlePos" type="Position2D" parent="GunSprite"]
 visible = false
@@ -2676,6 +2678,7 @@ anims/Stand.R3 = SubResource( 107 )
 [node name="EffectPlayer" type="AnimationPlayer" parent="."]
 anims/FlashIframe = SubResource( 53 )
 
+[connection signal="guns_updated" from="." to="GunSprite" method="_on_Juniper_guns_updated"]
 [connection signal="area_entered" from="ItemDetector" to="." method="_on_ItemDetector_area_entered"]
 [connection signal="area_entered" from="HurtDetector" to="." method="_on_HurtDetector_area_entered"]
 [connection signal="body_entered" from="HurtDetector" to="." method="_on_HurtDetector_body_entered"]

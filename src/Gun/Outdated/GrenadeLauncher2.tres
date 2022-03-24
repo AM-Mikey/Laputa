@@ -1,20 +1,19 @@
 [gd_resource type="Resource" load_steps=6 format=2]
 
-[ext_resource path="res://src/Gun/Weapon.gd" type="Script" id=1]
+[ext_resource path="res://assets/SFX/Placeholder/snd_expl_small.ogg" type="AudioStream" id=1]
 [ext_resource path="res://src/Bullet/GLauncher2.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Gun/GLauncher.png" type="Texture" id=3]
 [ext_resource path="res://assets/Gun/GLauncherIcon.png" type="Texture" id=4]
-[ext_resource path="res://assets/SFX/Placeholder/snd_expl_small.ogg" type="AudioStream" id=5]
-
+[ext_resource path="res://src/Gun/Weapon.gd" type="Script" id=5]
 
 [resource]
 resource_name = "GrenadeLauncher2"
-script = ExtResource( 1 )
+script = ExtResource( 5 )
 display_name = "Grenade Launcher"
 description = "A grenade launcher."
 texture = ExtResource( 3 )
 icon_texture = ExtResource( 4 )
-audio_stream = ExtResource( 5 )
+audio_stream = ExtResource( 1 )
 bullet_scene = ExtResource( 2 )
 damage = 4
 projectile_range = 0

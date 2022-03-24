@@ -40,7 +40,7 @@ func shift_gun(direction):
 		"right":
 			var child_to_move = $Guns.get_child(0)
 			$Guns.move_child(child_to_move, $Guns.get_child_count() - 1)
-			
+	
 	pc.emit_signal("guns_updated", $Guns.get_children())
 	am.play("gun_shift")
 	

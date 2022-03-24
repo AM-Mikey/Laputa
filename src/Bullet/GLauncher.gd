@@ -49,7 +49,6 @@ func _physics_process(delta):
 		if collision:
 			velocity *= bounciness
 			velocity = velocity.bounce(collision.normal)
-			#$Bounce2D.play()
 			am.play_pos("gun_grenade_bounce", self)
 	
 	

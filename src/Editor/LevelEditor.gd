@@ -48,12 +48,13 @@ func create_tileset_from_texture(texture):
 	
 	var id = 0
 	while id < rows * columns:
-		tileset.create_tile(id)
-		tileset.tile_set_texture(id, texture)
-		
 		var x_pos = (id % columns) * 16
 		var y_pos = floor(id / columns) * 16
 		var region = Rect2(x_pos, y_pos, 16, 16)
+		
+		#if texture_alpha_check(texture, region):
+		tileset.create_tile(id)
+		tileset.tile_set_texture(id, texture)
 		tileset.tile_set_region(id, region)
 		id += 1
 	
@@ -62,6 +63,38 @@ func create_tileset_from_texture(texture):
 	for c in tile_collection.get_children():
 		if c is TileMap:
 			c.tile_set = tileset
+
+
+func texture_alpha_check(texture, region) -> bool: #TODO does not work
+	var image = Image.new()
+	image.load(texture.resource_path)
+	if image.get_rect(region).is_invisible():
+		return true
+	else:
+		return false
+	
+	
+	
+	
+	
+#	var pixel_check_count = 0
+#	var pixel_pos = Vector2.ZERO
+	
+#	for row in cropped.get_height():
+#		for column in cropped.get_width():
+#			var pixel = AtlasTexture.new()
+#			pixel.atlas = texture
+#			pixel.region = Rect2(column, row, 1, 1)
+#			if pixel.has_alpha():
+#				pixel_check_count += 1
+#
+#
+#	#if pixel_check_count != 0:
+#	print("pixel_check_count:", pixel_check_count)
+#	if pixel_check_count == cropped.get_height() * cropped.get_width():
+#		return true
+#	else:
+#		return false
 
 
 func load_tileset(path):
