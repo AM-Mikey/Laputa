@@ -11,9 +11,6 @@ margin_bottom = 270.0
 mouse_filter = 1
 theme = ExtResource( 3 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 brushes = NodePath("TabContainer/Collision/Scroll2/Brushes")
 col_tiles = NodePath("TabContainer/Collision/Scroll/Tiles")
 
@@ -160,6 +157,7 @@ text = "New From Image"
 [node name="Save" type="FileDialog" parent="."]
 margin_right = 480.0
 margin_bottom = 270.0
+rect_min_size = Vector2( 400, 140 )
 filters = PoolStringArray( "*.tres" )
 current_dir = "res://src/Tile"
 current_path = "res://src/Tile/"
@@ -167,6 +165,7 @@ current_path = "res://src/Tile/"
 [node name="Load" type="FileDialog" parent="."]
 margin_right = 480.0
 margin_bottom = 270.0
+rect_min_size = Vector2( 400, 140 )
 window_title = "Open a File"
 mode = 0
 filters = PoolStringArray( "*.tres" )
@@ -177,6 +176,7 @@ current_path = "res://src/Tile/"
 visible = true
 margin_right = 480.0
 margin_bottom = 270.0
+rect_min_size = Vector2( 400, 140 )
 window_title = "Open a File"
 mode = 0
 filters = PoolStringArray( "*.jpg", "*.bmp", "*.png" )

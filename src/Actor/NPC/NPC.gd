@@ -28,21 +28,25 @@ onready var pc = get_tree().get_root().get_node_or_null("World/Juniper")
 
 func _ready():
 	add_to_group("NPCs")
+	change_animation("Idle", true)
+
+
+
+
+
+func change_animation(animation: String, random_start = false):
+	if not $AnimationPlayer.has_animation(animation):
+		print("WARNING: animation: " + animation + " not found on npc with name: " + name)
 	
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-	var wait_time = rng.randf_range(0, 8)
-	yield(get_tree().create_timer(wait_time), "timeout")
-	change_animation("Idle")
-
-
-
-
-
-func change_animation(animation: String):
-	if $AnimationPlayer.has_animation(animation):
-		$AnimationPlayer.play(animation)
-
+	$AnimationPlayer.play(animation)
+	var start_time = 0
+	
+	if random_start:
+		var rng = RandomNumberGenerator.new()
+		rng.randomize()
+		start_time = rng.randf_range(0, $AnimationPlayer.current_animation_length)
+	
+	$AnimationPlayer.seek(start_time, true)
 
 
 #movement stuff

@@ -58,6 +58,10 @@ func create_tileset_from_texture(texture):
 		id += 1
 	
 	get_node(tiles_tab).setup_tileset(tileset)
+	
+	for c in tile_collection.get_children():
+		if c is TileMap:
+			c.tile_set = tileset
 
 
 func load_tileset(path):
