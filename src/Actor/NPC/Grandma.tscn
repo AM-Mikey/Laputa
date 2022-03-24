@@ -11,7 +11,7 @@ extents = Vector2( 8, 14 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "Idle"
-length = 1.6
+length = 3.2
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
