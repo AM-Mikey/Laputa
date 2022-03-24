@@ -165,7 +165,6 @@ current_dir = "res://src/Tile"
 current_path = "res://src/Tile/"
 
 [node name="Load" type="FileDialog" parent="."]
-visible = true
 margin_right = 480.0
 margin_bottom = 270.0
 window_title = "Open a File"

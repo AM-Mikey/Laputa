@@ -28,14 +28,26 @@ onready var pc = get_tree().get_root().get_node_or_null("World/Juniper")
 
 func _ready():
 	add_to_group("NPCs")
+	
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var wait_time = rng.randf_range(0, 10)
+	yield(get_tree().create_timer(wait_time), "timeout")
+	change_animation("Idle")
 
 
 
 
+
+func change_animation(animation: String):
+	if $AnimationPlayer.has_animation(animation):
+		$AnimationPlayer.play(animation)
 
 
 
 #movement stuff
+
+
 
 
 func _physics_process(_delta):
@@ -127,8 +139,7 @@ func calculate_movevelocity(linearvelocity: Vector2, scoped_move_dir: Vector2, s
 	return out
 
 #sprite stuff
-func animate():
-	pass
+
 
 
 

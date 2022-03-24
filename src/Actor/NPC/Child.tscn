@@ -50,7 +50,6 @@ texture = ExtResource( 1 )
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Idle"
 anims/Idle = SubResource( 3 )
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]

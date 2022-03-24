@@ -68,6 +68,5 @@ vframes = 2
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Idle"
 anims/Idle = SubResource( 3 )
 anims/Walk = SubResource( 4 )
