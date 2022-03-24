@@ -5,7 +5,8 @@
 [ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
-[ext_resource path="res://assets/Background/bkMaze.bmp" type="Texture" id=6]
+[ext_resource path="res://assets/Background/Outdated/bkMaze.bmp" type="Texture" id=6]
+
 
 
 [node name="LevelTemplate" type="Node2D"]

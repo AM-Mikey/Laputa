@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bkGray.bmp-b204646d6689d16c07a28f5c1d13ea47.stex"
+path="res://.import/bkGreen.bmp-459cfa90fa0150215f14ee6fd45c0b91.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Background/bkGray.bmp"
-dest_files=[ "res://.import/bkGray.bmp-b204646d6689d16c07a28f5c1d13ea47.stex" ]
+source_file="res://assets/Background/Outdated/bkGreen.bmp"
+dest_files=[ "res://.import/bkGreen.bmp-459cfa90fa0150215f14ee6fd45c0b91.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

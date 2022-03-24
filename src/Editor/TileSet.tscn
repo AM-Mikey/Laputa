@@ -140,22 +140,22 @@ size_flags_vertical = 8
 alignment = 2
 
 [node name="Save" type="Button" parent="Margin/HBox"]
-margin_left = 167.0
-margin_right = 273.0
+margin_left = 150.0
+margin_right = 256.0
 margin_bottom = 30.0
 text = "Save Tileset As"
 
-[node name="New" type="Button" parent="Margin/HBox"]
-margin_left = 277.0
-margin_right = 372.0
-margin_bottom = 30.0
-text = "Import Image"
-
 [node name="Load" type="Button" parent="Margin/HBox"]
-margin_left = 376.0
-margin_right = 464.0
+margin_left = 260.0
+margin_right = 348.0
 margin_bottom = 30.0
 text = "Load TileSet"
+
+[node name="New" type="Button" parent="Margin/HBox"]
+margin_left = 352.0
+margin_right = 464.0
+margin_bottom = 30.0
+text = "New From Image"
 
 [node name="Save" type="FileDialog" parent="."]
 margin_right = 480.0
@@ -173,7 +173,19 @@ filters = PoolStringArray( "*.tres" )
 current_dir = "res://src/Tile"
 current_path = "res://src/Tile/"
 
+[node name="New" type="FileDialog" parent="."]
+visible = true
+margin_right = 480.0
+margin_bottom = 270.0
+window_title = "Open a File"
+mode = 0
+filters = PoolStringArray( "*.jpg", "*.bmp", "*.png" )
+current_dir = "res://assets/Tile"
+current_path = "res://assets/Tile/"
+
 [connection signal="pressed" from="Margin/HBox/Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="Margin/HBox/Load" to="." method="_on_Load_pressed"]
+[connection signal="pressed" from="Margin/HBox/New" to="." method="_on_New_pressed"]
 [connection signal="confirmed" from="Save" to="." method="_on_Save_confirmed"]
 [connection signal="file_selected" from="Load" to="." method="_on_Load_file_selected"]
+[connection signal="file_selected" from="New" to="." method="_on_New_file_selected"]

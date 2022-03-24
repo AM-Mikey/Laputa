@@ -98,5 +98,6 @@ mouse_filter = 2
 [connection signal="multi_erase_toggled" from="ResizeWindow/Tab/Tiles" to="." method="_on_TileSetMenu_multi_erase_toggled"]
 [connection signal="tile_selection_updated" from="ResizeWindow/Tab/Tiles" to="." method="_on_TileSetMenu_tile_selection_updated"]
 [connection signal="collision_updated" from="ResizeWindow/Tab/TileSet" to="." method="_on_TileSet_collision_updated"]
+[connection signal="image_loaded" from="ResizeWindow/Tab/TileSet" to="." method="_on_TileSet_image_loaded"]
 [connection signal="tile_set_loaded" from="ResizeWindow/Tab/TileSet" to="." method="_on_TileSet_tile_set_loaded"]
 [connection signal="tile_set_saved" from="ResizeWindow/Tab/TileSet" to="." method="_on_TileSet_tile_set_saved"]

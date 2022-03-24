@@ -31,7 +31,7 @@ func _ready():
 	
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	var wait_time = rng.randf_range(0, 10)
+	var wait_time = rng.randf_range(0, 8)
 	yield(get_tree().create_timer(wait_time), "timeout")
 	change_animation("Idle")
 

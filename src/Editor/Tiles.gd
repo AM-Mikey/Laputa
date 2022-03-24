@@ -1,6 +1,6 @@
 extends Control
 
-signal tile_selection_updated(tile_selection)
+signal tile_selection_updated(selected_tiles)
 signal autolayer_updated(is_autolayer)
 signal multi_erase_toggled(toggle)
 
@@ -55,10 +55,7 @@ func setup_tile_buttons():
 		button.texture = get_tile_as_texture(i)
 		button.connect("mouse_entered", self, "hover_tile", [button])
 		button.connect("mouse_exited", self, "unhover")
-#		button.get_child(0).connect("mouse_entered", self, "hover_tile", [button])
-#		button.get_child(0).connect("mouse_exited", self, "unhover")
-		
-#		button.connect("gui_input", self, "button_input", [button])
+
 
 
 func get_tile_as_texture(id) -> Texture:
@@ -67,18 +64,7 @@ func get_tile_as_texture(id) -> Texture:
 	tile_texture.region = tileset.tile_get_region(id)
 	return tile_texture
 
-#func button_input(event, button):
-#	if event.is_action_pressed("editor_lmb"):
-#		print("started ", button.id)
-#		selected_tile_region = tileset.tile_get_region(button.id)
-#		selected_tiles.clear()
-#		return
-#	elif event.is_action_released("editor_lmb"):
-#		print("ended ", button.id)
-#		selected_tile_region.expand(tileset.tile_get_region(button.id).position + Vector2(16, 16))
-#		set_selection()
-#	else:
-#		return
+
 
 func hover_tile(tile):
 	hovered_tile = tile.id
@@ -86,8 +72,7 @@ func hover_tile(tile):
 func unhover():
 	hovered_tile = null
 
-#
-#
+
 func _input(event):
 	if event.is_action_pressed("editor_lmb") and hovered_tile:
 		print("started ", hovered_tile)
@@ -99,7 +84,7 @@ func _input(event):
 		yield(get_tree(), "idle_frame")
 		print("ended ", hovered_tile)
 		if hovered_tile:
-			selected_tile_region = selected_tile_region.expand(tileset.tile_get_region(hovered_tile).position + Vector2(16, 16)) #TODO expand is not working
+			selected_tile_region = selected_tile_region.expand(tileset.tile_get_region(hovered_tile).position + Vector2(16, 16))
 			set_selection()
 
 
@@ -109,11 +94,12 @@ func _input(event):
 func set_selection():
 	set_cursor()
 	for i in tileset.get_tiles_ids():
-		if selected_tile_region.encloses(tileset.tile_get_region(i)):
+		if selected_tile_region.encloses(tileset.tile_get_region(i)): #not working proepr;y
 			selected_tiles.append(i)
 	print("region: ", selected_tile_region)
 	print("selected: ", selected_tiles)
-	#emit_signal("tile_selection_updated", selected_tiles)
+	emit_signal("tile_selection_updated", selected_tiles)
+
 
 func set_cursor():
 	var x_pos = selected_tile_region.position.x + (floor(selected_tile_region.position.x / 16) * tile_separation)

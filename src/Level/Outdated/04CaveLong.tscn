@@ -5,10 +5,11 @@
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
-[ext_resource path="res://assets/Background/bkMaze.bmp" type="Texture" id=6]
+[ext_resource path="res://assets/Background/Outdated/bkMaze.bmp" type="Texture" id=6]
 [ext_resource path="res://src/Tile/Outdated/LabyrinthF.tres" type="TileSet" id=7]
 [ext_resource path="res://src/Tile/Outdated/LabyrinthB.tres" type="TileSet" id=8]
 [ext_resource path="res://src/Tile/Outdated/LabyrinthM.tres" type="TileSet" id=9]
+
 
 
 [node name="CaveLong" type="Node2D"]

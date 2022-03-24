@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/Background/LevelLimiter.gd" type="Script" id=1]
-[ext_resource path="res://assets/Background/bkMaze.bmp" type="Texture" id=2]
+[ext_resource path="res://assets/Background/Outdated/bkMaze.bmp" type="Texture" id=2]
 
 [node name="LevelLimiter" type="MarginContainer"]
 margin_right = 416.0

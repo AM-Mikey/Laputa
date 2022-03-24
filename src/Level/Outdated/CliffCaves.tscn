@@ -6,7 +6,7 @@
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=6]
-[ext_resource path="res://assets/Background/bkMaze.bmp" type="Texture" id=7]
+[ext_resource path="res://assets/Background/Outdated/bkMaze.bmp" type="Texture" id=7]
 [ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=10]
@@ -18,6 +18,7 @@
 [ext_resource path="res://src/Prop/LifeCapsule.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/Actor/Enemy/BeetleGreen.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/Tile/TriggerTile/SpikesTrigger.tscn" type="PackedScene" id=18]
+
 
 
 [sub_resource type="TileSet" id=1]

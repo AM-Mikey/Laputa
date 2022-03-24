@@ -37,7 +37,8 @@ func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 	_on_viewport_size_changed()
 	#setup_tiles()
-	create_tileset_from_texture(load("res://assets/Tile/VillageMinimal.png"))
+	#create_tileset_from_texture(load("res://assets/Tile/VillageMinimal.png"))
+	load_tileset(tile_collection.get_child(0).tile_set.resource_path)
 	setup_layers()
 
 func create_tileset_from_texture(texture):
@@ -348,7 +349,7 @@ func change_layer(layer):
 		if e.layer == layer:
 			e.activate()
 
-func get_auto_layer():
+func get_auto_layer() -> Node:
 	var layer
 	var tile_pos = tileset.tile_get_region(active_tile).position
 	
@@ -368,8 +369,8 @@ func _on_viewport_size_changed():
 	pass
 
 
-func _on_TileSetMenu_tile_selection_updated(tile_selection):
-	active_tile = int(tile_selection.x)
+func _on_TileSetMenu_tile_selection_updated(selected_tiles):
+	active_tile = selected_tiles.front()
 	if auto_layer:
 		change_layer(get_auto_layer())
 
@@ -386,10 +387,11 @@ func _on_TileSet_collision_updated(tile_id, shape):
 	tileset.tile_add_shape(tile_id, shape, transform)
 	tileset.tile_set_shape(tile_id, 0, shape)
 
-
 func _on_TileSet_tile_set_saved(path):
 	ResourceSaver.save(path, tileset)
 
-
 func _on_TileSet_tile_set_loaded(path):
 	load_tileset(path)
+
+func _on_TileSet_image_loaded(path):
+	create_tileset_from_texture(load(path))

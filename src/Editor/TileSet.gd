@@ -3,6 +3,7 @@ extends Control
 signal collision_updated(tile_id, shape)
 signal tile_set_saved(path)
 signal tile_set_loaded(path)
+signal image_loaded(path)
 
 
 var tx_col_brush = preload("res://assets/Editor/CollisionBrushes.png")
@@ -170,6 +171,9 @@ func _on_Save_pressed():
 	$Save.popup()
 func _on_Load_pressed():
 	$Load.popup()
+func _on_New_pressed():
+	$New.popup()
+
 
 func _on_Save_confirmed():
 	var path = $Save.current_path
@@ -178,6 +182,14 @@ func _on_Save_confirmed():
 
 func _on_Load_file_selected(path):
 	emit_signal("tile_set_loaded", path)
+
+
+func _on_New_file_selected(path):
+	emit_signal("image_loaded", path)
+
+
+
+
 
 
 

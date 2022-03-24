@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://assets/Background/bkMaze.bmp" type="Texture" id=1]
+[ext_resource path="res://assets/Background/Outdated/bkMaze.bmp" type="Texture" id=1]
 [ext_resource path="res://src/Tile/TriggerTile/SpikesTrigger.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Actor/Enemy/BeetleGreen.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Tile/TriggerTile/Outdated/SemiSolidTrigger.tscn" type="PackedScene" id=4]
@@ -17,6 +17,7 @@
 [ext_resource path="res://src/Tile/DebugBackground.tres" type="TileSet" id=15]
 [ext_resource path="res://src/Tile/DebugTile.tres" type="TileSet" id=16]
 [ext_resource path="res://src/Tile/DebugSSP.tres" type="TileSet" id=17]
+
 
 
 

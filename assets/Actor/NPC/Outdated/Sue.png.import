@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Sue.png-f39b196bbafb4eafb410db1d858ec554.stex"
+path="res://.import/Sue.png-d5c233e9476c14b21403d4eae6d5e2e3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/NPC/Sue.png"
-dest_files=[ "res://.import/Sue.png-f39b196bbafb4eafb410db1d858ec554.stex" ]
+source_file="res://assets/Actor/NPC/Outdated/Sue.png"
+dest_files=[ "res://.import/Sue.png-d5c233e9476c14b21403d4eae6d5e2e3.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

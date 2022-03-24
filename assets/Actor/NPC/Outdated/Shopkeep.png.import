@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Shopkeep.png-f169f052c456b661584798b63c9b23f9.stex"
+path="res://.import/Shopkeep.png-8158df8dc6183096322a78f503db090c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/NPC/Shopkeep.png"
-dest_files=[ "res://.import/Shopkeep.png-f169f052c456b661584798b63c9b23f9.stex" ]
+source_file="res://assets/Actor/NPC/Outdated/Shopkeep.png"
+dest_files=[ "res://.import/Shopkeep.png-8158df8dc6183096322a78f503db090c.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

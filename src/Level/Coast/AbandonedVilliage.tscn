@@ -5,13 +5,14 @@
 [ext_resource path="res://src/Tile/DebugBackground.tres" type="TileSet" id=3]
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=6]
-[ext_resource path="res://assets/Background/bkMaze.bmp" type="Texture" id=7]
+[ext_resource path="res://assets/Background/Outdated/bkMaze.bmp" type="Texture" id=7]
 [ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Utility/PlayerCameraDummy.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Tile/TriggerTile/SpikesTrigger.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/Tile/DebugTile.tres" type="TileSet" id=13]
 [ext_resource path="res://src/Tile/TriggerTile/Outdated/SemiSolidTrigger.tscn" type="PackedScene" id=18]
+
 
 
 

@@ -8,11 +8,11 @@
 [ext_resource path="res://src/Tile/TriggerTile/StairsTrigger.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/Background/690661.jpg" type="Texture" id=7]
 [ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/Actor/NPC/Mechanic.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Actor/NPC/Sage.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Prop/ChestKeyItem.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/Actor/NPC/Fluffy.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/Actor/NPC/Basil.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Trigger/LoadZone.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/Actor/NPC/Child.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/Actor/NPC/Sasuke.tscn" type="PackedScene" id=17]
@@ -99,11 +99,11 @@ tile_data = PoolIntArray( 1507355, 0, 0, 1507356, 0, 0, 1507357, 0, 0, 1507358, 
 
 [node name="Actors" type="Node2D" parent="."]
 
-[node name="Mechanic" parent="Actors" instance=ExtResource( 9 )]
+[node name="Sage" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( 648, 256 )
 dialog_json = "res://src/Dialog/DemoCutscene.json"
 
-[node name="Fluffy" parent="Actors" instance=ExtResource( 14 )]
+[node name="Basil" parent="Actors" instance=ExtResource( 14 )]
 position = Vector2( 616, 256 )
 dialog_json = "res://src/Dialog/Village.json"
 conversation = "basil"

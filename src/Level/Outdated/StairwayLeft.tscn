@@ -7,7 +7,8 @@
 [ext_resource path="res://src/Tile/DebugTile.tres" type="TileSet" id=5]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=6]
 [ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=7]
-[ext_resource path="res://assets/Background/bkMaze.bmp" type="Texture" id=8]
+[ext_resource path="res://assets/Background/Outdated/bkMaze.bmp" type="Texture" id=8]
+
 
 
 [node name="StairwayLeft" type="Node2D"]

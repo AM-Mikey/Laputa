@@ -8,7 +8,8 @@
 [ext_resource path="res://src/Tile/DebugTile.tres" type="TileSet" id=6]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=7]
 [ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=8]
-[ext_resource path="res://assets/Background/bkMaze.bmp" type="Texture" id=9]
+[ext_resource path="res://assets/Background/Outdated/bkMaze.bmp" type="Texture" id=9]
+
 
 
 [node name="LowerFactory" type="Node2D"]

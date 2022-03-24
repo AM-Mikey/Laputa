@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bkMaze.bmp-eda8912bd1945e8432fde4525c0954b5.stex"
+path="res://.import/bkMaze.bmp-b39ad66457439e79dd5ead1d955c801f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Background/bkMaze.bmp"
-dest_files=[ "res://.import/bkMaze.bmp-eda8912bd1945e8432fde4525c0954b5.stex" ]
+source_file="res://assets/Background/Outdated/bkMaze.bmp"
+dest_files=[ "res://.import/bkMaze.bmp-b39ad66457439e79dd5ead1d955c801f.stex" ]
 
 [params]
 
