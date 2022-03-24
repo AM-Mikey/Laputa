@@ -191,30 +191,20 @@ func get_next_animation(animation, anim_dir, can_shoot_down):
 
 
 func change_animation(next_animation, start_time = 0):
-	var old_animation = ap.current_animation
-	var old_time = null
-	if ap && ap.current_animation != "":
-		old_time = ap.current_animation_position
-	
-	var _front = pc.get_node("Front")
-	var _back = pc.get_node("Back")
-	
 	var blend_groups = [ #see if the string matches in new/old animations
-		"Stand.L",
-		"Stand.R",
-		"Run.L",
-		"Run.R",
-		"Backrun.L",
-		"Backrun.R",
-		"Climb"
+	"Stand.L",
+	"Stand.R",
+	"Run.L",
+	"Run.R",
+	"Backrun.L",
+	"Backrun.R",
+	"Climb",
 	]
+	
+	if ap.current_animation:
+		for g in blend_groups:
+			if g in ap.current_animation and g in next_animation:
+				start_time = ap.current_animation_position
 
 	ap.play(next_animation)
 	ap.seek(start_time)
-	#blending
-	if old_time:
-		for g in blend_groups:
-			if g in old_animation and g in next_animation:
-				ap.seek(old_time)
-
-
