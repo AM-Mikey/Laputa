@@ -5,7 +5,7 @@ var texture_index: int
 var collision_shape: RectangleShape2D
 
 
-var minimum_speed: float = 0.1
+var minimum_speed: float = 6
 var bounciness = .6
 var explosion_time = 2.5
 var start_velocity
@@ -35,8 +35,6 @@ func _ready():
 
 
 func _physics_process(delta):
-	
-	
 	if not disabled:
 		velocity.y += gravity * delta
 		
@@ -47,31 +45,21 @@ func _physics_process(delta):
 		
 		var collision = move_and_collide(velocity * delta)
 		if collision:
-			velocity *= bounciness
-			velocity = velocity.bounce(collision.normal)
-			am.play_pos("gun_grenade_bounce", self)
+			if abs(velocity.y) > minimum_speed:
+				velocity *= bounciness
+				velocity = velocity.bounce(collision.normal)
+				am.play_pos("gun_grenade_bounce", self)
+			else:
+				velocity = Vector2.ZERO
 	
-	
-	if abs(velocity.y) < minimum_speed and is_on_floor():
-		velocity = Vector2.ZERO
-
-
-	if is_on_floor():
-		touched_floor = true
-
-	
-	
-	
-#	#else: #if it ever gets below the minimum speed in x or y
-#		print("min speed check")
-#		if is_on_floor():
-#			velocity = Vector2.ZERO
-
 	
 	var avr_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 	$AnimationPlayer.playback_speed = avr_velocity / start_velocity
 	if $AnimationPlayer.playback_speed < .1:
 		$AnimationPlayer.stop()
+
+
+
 
 func get_initial_velocity(scoped_projectile_speed, scoped_direction) -> Vector2:
 	var out = velocity
