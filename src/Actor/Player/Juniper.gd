@@ -119,7 +119,7 @@ func _on_ItemDetector_area_entered(area):
 					w.ammo = max(w.ammo, w.max_ammo)
 
 			am.play("get_ammo")
-			emit_signal("guns_updated", $WeaponManager/Guns.get_children())
+			emit_signal("guns_updated", $GunManager/Guns.get_children())
 			area.queue_free()
 
 
