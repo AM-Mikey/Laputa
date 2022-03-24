@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://src/Gun/Defender.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Actor/Player/PlayerCamera.tscn" type="PackedScene" id=2]
@@ -27,6 +27,7 @@
 [ext_resource path="res://assets/Gun/Revolver.png" type="Texture" id=25]
 [ext_resource path="res://src/Actor/Player/GunSprite.gd" type="Script" id=26]
 [ext_resource path="res://src/Actor/Player/AnimationManager.gd" type="Script" id=27]
+[ext_resource path="res://src/Gun/MPistol.tscn" type="PackedScene" id=28]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 7.5 )
@@ -2598,6 +2599,8 @@ autostart = true
 [node name="Shotgun" parent="GunManager/Guns" instance=ExtResource( 4 )]
 
 [node name="GLauncher" parent="GunManager/Guns" instance=ExtResource( 17 )]
+
+[node name="MPistol" parent="GunManager/Guns" instance=ExtResource( 28 )]
 
 [node name="WalkSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 23 )

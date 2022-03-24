@@ -44,11 +44,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Item/Item.gd"
 }, {
-"base": "KinematicBody2D",
-"class": "Juniper",
-"language": "GDScript",
-"path": "res://src/Actor/Player/Juniper.gd"
-}, {
 "base": "Node2D",
 "class": "Movement",
 "language": "GDScript",
@@ -58,6 +53,11 @@ _global_script_classes=[ {
 "class": "NPC",
 "language": "GDScript",
 "path": "res://src/Actor/NPC/NPC.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://src/Actor/Player/Juniper.gd"
 }, {
 "base": "Node",
 "class": "Prop",
@@ -87,9 +87,9 @@ _global_script_class_icons={
 "Enemy": "res://assets/Icon/EnemyIcon.png",
 "Gun": "res://assets/Icon/GunIcon.png",
 "Item": "res://assets/Icon/ItemIcon.png",
-"Juniper": "res://assets/Icon/PlayerIcon.png",
 "Movement": "",
 "NPC": "res://assets/Icon/NPCIcon.png",
+"Player": "res://assets/Icon/PlayerIcon.png",
 "Prop": "res://assets/Icon/PropIcon.png",
 "State": "",
 "Trigger": "res://assets/Icon/TriggerIcon.png",

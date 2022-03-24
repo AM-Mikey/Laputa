@@ -31,26 +31,31 @@ onready var pc = get_tree().get_root().get_node("World/Juniper")
 onready var cd = pc.get_node("GunManager/CooldownTimer")
 
 
+
+
 func fire(type):
+	trigger_held = true
+	
 	if cd.time_left == 0:
-		if type == "manual" and trigger_held: #require a new trigger press
-			pass
-		trigger_held = true
-		cd.start(cooldown_time)
-		if max_ammo == 0:
+		if max_ammo == 0 or ammo != 0:
+			if max_ammo != 0:
+				ammo -= 1
+			pc.emit_signal("guns_updated", pc.get_node("GunManager/Guns").get_children())
 			activate()
 		else:
-			if ammo == 0:
-				print("out of ammo")
-				am.play("click")
-			else:
-				ammo -= 1
-				pc.emit_signal("guns_updated", pc.get_node("GunManager/Guns").get_children())
-				activate()
+			print("out of ammo")
+			am.play("click")
+
+		cd.start(cooldown_time)
+		
+		if type == "automatic":
+			yield(cd, "timeout")
+			if trigger_held:
+				fire("automatic")
+
 
 func release_fire():
 	trigger_held = false
-
 
 func activate():
 	pass

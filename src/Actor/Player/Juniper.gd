@@ -1,6 +1,6 @@
 #TODO re-extend to actor once we remove movement from actor.gd
 extends KinematicBody2D
-class_name Juniper, "res://assets/Icon/PlayerIcon.png"
+class_name Player, "res://assets/Icon/PlayerIcon.png"
 
 #const POPUP = preload("res://src/UI/PopupText.tscn")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")

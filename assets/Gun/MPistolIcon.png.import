@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/MachinePistolIcon.png-7f477ed2405fd3a19d31aa3555b8ccd0.stex"
+path="res://.import/MPistolIcon.png-3c5c7970144b93472b6d7c2e748e76a0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Gun/MachinePistolIcon.png"
-dest_files=[ "res://.import/MachinePistolIcon.png-7f477ed2405fd3a19d31aa3555b8ccd0.stex" ]
+source_file="res://assets/Gun/MPistolIcon.png"
+dest_files=[ "res://.import/MPistolIcon.png-3c5c7970144b93472b6d7c2e748e76a0.stex" ]
 
 [params]
 
