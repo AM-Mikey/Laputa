@@ -10,7 +10,7 @@ export(NodePath) var layer_list
 
 
 var tiles = {}
-var active_tile: int
+var active_tiles = [] #2D array
 
 var layers = {}
 var auto_layer = true
@@ -116,19 +116,7 @@ func load_tileset(path):
 #		id += 1
 	
 	get_node(tiles_tab).setup_tileset(tileset)
-	
 
-#func setup_tiles():
-#	import_tileset()
-#
-#	var list_id = 0 #bug if tile id is 0?
-#
-#	for i in tileset.get_tiles_ids():
-#		tiles[list_id] = i
-#
-#		var tile_name = tileset.tile_get_name(i)
-#		get_node(tile_list).add_icon_item(get_tile_texture(i))
-#		list_id += 1
 
 
 func get_tile_texture(tile):
@@ -138,15 +126,12 @@ func get_tile_texture(tile):
 	return tile_texture
 
 
-func _on_TileList_item_selected(index):
-	active_tile = tiles[index]
-	if auto_layer:
-		change_layer(get_auto_layer())
+
 
 func _unhandled_input(event):
 	var mouse_pos = w.get_global_mouse_position()
 	
-	if event.is_action_pressed("editor_lmb") and active_tile:
+	if event.is_action_pressed("editor_lmb") and not active_tiles.empty():
 		lmb_held = true
 		future_operations.clear()
 		mouse_start_pos = mouse_pos
@@ -157,15 +142,16 @@ func _unhandled_input(event):
 			brush = "box"
 		else:
 			brush = "paint"
-			set_tiles([get_cell(mouse_pos)], active_tile)
+			get_centerbox(mouse_pos)
+			#set_tiles([get_cell(mouse_pos)], active_tiles)
 
 
 	if event.is_action_released("editor_lmb"):
 		lmb_held = false
 		if brush == "line":
-			set_tiles(get_line(mouse_start_pos, mouse_pos), active_tile)
+			set_tiles(get_line(mouse_start_pos, mouse_pos), active_tiles)
 		elif brush == "box":
-			set_tiles(get_box(mouse_start_pos, mouse_pos), active_tile)
+			set_tiles(get_box(mouse_start_pos, mouse_pos), active_tiles)
 		
 		if not active_operation.empty():
 			past_operations.append(["set_tiles", active_operation.duplicate()])
@@ -207,24 +193,25 @@ func _unhandled_input(event):
 
 
 	if event is InputEventMouseMotion:
-		if lmb_held and brush == "paint":
-			set_tiles([get_cell(mouse_pos)], active_tile)
-		if rmb_held and brush == "paint":
-			if multi_erase:
-				set_tiles_on_all_layers([get_cell(mouse_pos)], -1)
-			else:
-				set_tiles([get_cell(mouse_pos)], -1)
-		
+#		if lmb_held and brush == "paint":
+#			set_tiles([get_cell(mouse_pos)], active_tiles)
+#		if rmb_held and brush == "paint":
+#			if multi_erase:
+#				set_tiles_on_all_layers([get_cell(mouse_pos)], -1)
+#			else:
+#				set_tiles([get_cell(mouse_pos)], -1)
+
 		hide_preview()
 		if brush == "paint":
-			preview_tiles([get_cell(mouse_pos)])
-		
+			preview_2d_array(get_centerbox(mouse_pos))
+			#preview_tiles([get_cell(mouse_pos)])
+
 		elif lmb_held or rmb_held:
 			if brush == "line":
 				preview_tiles(get_line(mouse_start_pos, mouse_pos))
 			if brush == "box":
 				preview_tiles(get_box(mouse_start_pos, mouse_pos))
-				
+
 
 
 
@@ -302,13 +289,34 @@ func set_tiles_on_all_layers(pos_array: Array, tile, traced = true): #TODO: fini
 ### PREVIEW ###
 
 func preview_tiles(pos_array: Array):
-	for pos in pos_array:
-		var sprite = Sprite.new()
-		sprite.texture = get_tile_texture(active_tile)
-		sprite.modulate = Color(1, 1, 1, 0.5)
-		sprite.centered = false
-		sprite.position = pos * 16
-		tile_collection.add_child(sprite)
+	if not active_tiles.empty():
+		for pos in pos_array:
+			var sprite = Sprite.new()
+			sprite.texture = get_tile_texture(active_tiles.front().front())
+			sprite.modulate = Color(1, 1, 1, 0.5)
+			sprite.centered = false
+			sprite.position = pos * 16
+			tile_collection.add_child(sprite)
+
+
+
+func preview_2d_array(cells: Array):
+	if not active_tiles.empty():
+		var r_id = 0
+		for r in cells:
+			var c_id = 0
+			for c in r:
+				var tile = active_tiles[r_id][c_id]
+				if tile != -1: #empty
+					var sprite = Sprite.new()
+					sprite.texture = get_tile_texture(tile)
+					sprite.modulate = Color(1, 1, 1, 0.5)
+					sprite.centered = false
+					sprite.position = c * 16
+					tile_collection.add_child(sprite)
+				c_id += 1
+			r_id += 1
+
 
 func hide_preview():
 	for c in tile_collection.get_children():
@@ -318,9 +326,34 @@ func hide_preview():
 
 
 ### GETTERS ###
+func get_centerbox(mouse_pos) -> Array: #2D Array #actuve tiles
+	var cells = []
+	
+	
+	var height = active_tiles.size()
+	var width = 0
+	for r in active_tiles:
+		if r.size() > width:
+			width = r.size()
+	
+	var center = Vector2(floor(width/2), floor(height/2))
+	var center_cell = get_cell(mouse_pos)
+	#assumes an odd number
+	for r in height:
+		var row_cells = []
+		for c in width:
+			var offset = Vector2(c - center.x, r - center.y)
+			row_cells.append(center_cell + offset) #position of cell in map space
+		if not row_cells.empty():
+			cells.append(row_cells)
+	
+	#print(cells)
+	return cells
+
+
 
 func get_box(start, end) -> Array:
-	var tiles = []
+	var cells = []
 	var start_tile = get_cell(start)
 	var end_tile = get_cell(end)
 	
@@ -331,8 +364,8 @@ func get_box(start, end) -> Array:
 	
 	for i in range(x_min, x_max + 1):
 		for j in range(y_min, y_max + 1):
-			tiles.append(Vector2(i, j))
-	return tiles
+			cells.append(Vector2(i, j))
+	return cells
 
 
 func get_cell(mouse_pos) -> Vector2:
@@ -342,7 +375,7 @@ func get_cell(mouse_pos) -> Vector2:
 
 
 func get_line(start, end) -> Array:
-	var tiles = []
+	var cells = []
 	var start_tile = get_cell(start)
 	var end_tile = get_cell(end)
 	
@@ -354,13 +387,13 @@ func get_line(start, end) -> Array:
 	if abs(dx) >= abs(dy):
 		for x in range(start_tile.x, end_tile.x+1) if start_tile.x < end_tile.x else range(end_tile.x, start_tile.x+1):
 			var y = round(start_tile.y + dy * (x - start_tile.x) / dx)
-			tiles.append(Vector2(x,y))
+			cells.append(Vector2(x,y))
 	else:
 		for y in range(start_tile.y, end_tile.y+1) if start_tile.y < end_tile.y else range(end_tile.y, start_tile.y+1):
 			var x = round(start_tile.x + dx * (y - start_tile.y) / dy)
-			tiles.append(Vector2(x,y))
+			cells.append(Vector2(x,y))
 	
-	return tiles
+	return cells
 	
 
 
@@ -386,20 +419,20 @@ func change_layer(layer):
 		if e.layer == layer:
 			e.activate()
 
-func get_auto_layer() -> Node:
-	var layer
-	var tile_pos = tileset.tile_get_region(active_tile).position
-	
-	match int(floor(tile_pos.y /16 / 4)):
-		0: layer = layers["FarBack"]
-		1: layer = layers["Back"]
-		2: layer = layers["Front"]
-		3: layer = layers["FarFront"]
-		_: layer = layers["Front"]
-	print(layer.name)
-	return layer
+#func get_auto_layer() -> Node: TODO FIX for multibox
+#	var layer
+#	var tile_pos = tileset.tile_get_region(active_tile).position
+#
+#	match int(floor(tile_pos.y /16 / 4)):
+#		0: layer = layers["FarBack"]
+#		1: layer = layers["Back"]
+#		2: layer = layers["Front"]
+#		3: layer = layers["FarFront"]
+#		_: layer = layers["Front"]
+#	print(layer.name)
+#	return layer
 
-### MISC ###
+### SIGNALS ###
 
 func _on_viewport_size_changed():
 	rect_size = get_tree().get_root().size / w.get_node("EditorLayer").scale
@@ -407,9 +440,9 @@ func _on_viewport_size_changed():
 
 
 func _on_TileSetMenu_tile_selection_updated(selected_tiles):
-	active_tile = selected_tiles.front().front()
-	if auto_layer:
-		change_layer(get_auto_layer())
+	active_tiles = selected_tiles
+#	if auto_layer:
+#		change_layer(get_auto_layer())
 
 func _on_TileSetMenu_autolayer_updated(is_autolayer):
 	auto_layer = is_autolayer

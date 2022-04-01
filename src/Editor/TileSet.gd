@@ -186,13 +186,3 @@ func _on_Load_file_selected(path):
 
 func _on_New_file_selected(path):
 	emit_signal("image_loaded", path)
-
-
-
-
-
-
-
-
-
-

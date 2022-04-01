@@ -42,7 +42,7 @@ func setup_tile_buttons():
 		var c_id = 0
 		for c in columns:
 			var button = load("res://src/Editor/TileButton.tscn").instance()
-			button.tileset_position = Vector2(c_id *16, r_id *16) 
+			button.tileset_position = Vector2(c_id*16, r_id*16) 
 			row.add_child(button)
 			button.connect("mouse_entered", self, "hover_button", [button])
 			button.connect("mouse_exited", self, "unhover")
@@ -104,7 +104,9 @@ func _input(event):
 
 func set_selection():
 	set_cursor()
-	var selected_tiles = []
+	#appends to a 2D array
+	#[[1, 2, 3], 
+	#[4, 5, 6]]
 	for r in get_node(buttons).get_children():
 		var row_selection = []
 		for b in r.get_children():
@@ -113,15 +115,6 @@ func set_selection():
 		if not row_selection.empty():
 			selected_tiles.append(row_selection)
 	
-	
-#	for i in tileset.get_tiles_ids():
-#		if selected_tile_region.encloses(tileset.tile_get_region(i)):
-#			selected_tiles.append(i)
-#
-			#[[1, 2, 3], 
-			#[4, 5, 6]]
-			
-			
 	print("region: ", selected_tile_region)
 	print("selected: ", selected_tiles)
 	emit_signal("tile_selection_updated", selected_tiles)
