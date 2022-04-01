@@ -244,7 +244,9 @@ func undo():
 		
 		match last[0]:
 			"set_tiles":
-				for t in last[1]: #subops
+				var subops = last[1]
+				subops.invert()
+				for t in subops:
 					set_tiles([t[0]], t[2], false) #pos_array, old_tile, traced
 #	else:
 #		print("nothing left to undo!")
@@ -259,7 +261,9 @@ func redo():
 		
 		match next[0]:
 			"set_tiles":
-				for t in next[1]: #subops
+				var subops = next[1]
+				subops.invert()
+				for t in subops:
 					set_tiles([t[0]], t[1], false) #pos_array, new_tile, traced
 #	else:
 #		print("nothing left to redo!")
@@ -274,7 +278,7 @@ func set_tiles(cells: Array, tile, traced = true): #TODO currently unused
 		tilemap.set_cellv(cell, tile)
 		if traced:
 			for s in active_operation:
-				if s[0] == cell: #already setting this cell in the current operation
+				if s[0] == cell: #already setting this cell in the current operation, this prevents reactivating on mouse movement
 					return
 			active_operation.append([cell, tile, old_tile])
 
@@ -291,9 +295,9 @@ func set_2d_array(cells: Array, tiles: Array, traced = true):
 					tilemap.set_cellv(cell, tile)
 					
 					if traced:
-#						for s in active_operation:
-#							if s[0] == cell: #already setting this cell in the current operation
-#								return
+						for s in active_operation:
+							if s[0] == cell and s[1] == tile: #already setting this cell in the current operation, this prevents reactivating on mouse movement
+								return
 						active_operation.append([cell, tile, old_tile])
 
 				c_id += 1
