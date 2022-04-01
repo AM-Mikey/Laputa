@@ -49,15 +49,12 @@ func setup_tile_buttons():
 			c_id += 1
 		r_id += 1
 ###
-	for i in tileset.get_tiles_ids(): # for i in range(0, texture_last_tile_id):
+	for i in tileset.get_tiles_ids():
 		var x_pos: int = floor(tileset.tile_get_region(i).position.x/16)
 		var y_pos: int = floor(tileset.tile_get_region(i).position.y/16)
-		
 		var button = get_node(buttons).get_child(y_pos).get_child(x_pos)
 		button.id = i
 		button.texture = get_tile_as_texture(i)
-#		button.connect("mouse_entered", self, "hover_tile", [button])
-#		button.connect("mouse_exited", self, "unhover")
 
 
 

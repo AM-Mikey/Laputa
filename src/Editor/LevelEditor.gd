@@ -142,7 +142,8 @@ func _unhandled_input(event):
 			brush = "box"
 		else:
 			brush = "paint"
-			get_centerbox(mouse_pos)
+			#get_centerbox(mouse_pos)
+			set_2d_array(get_centerbox(mouse_pos), active_tiles)
 			#set_tiles([get_cell(mouse_pos)], active_tiles)
 
 
@@ -193,13 +194,14 @@ func _unhandled_input(event):
 
 
 	if event is InputEventMouseMotion:
-#		if lmb_held and brush == "paint":
-#			set_tiles([get_cell(mouse_pos)], active_tiles)
-#		if rmb_held and brush == "paint":
-#			if multi_erase:
-#				set_tiles_on_all_layers([get_cell(mouse_pos)], -1)
-#			else:
-#				set_tiles([get_cell(mouse_pos)], -1)
+		if lmb_held and brush == "paint":
+			#set_tiles([get_cell(mouse_pos)], active_tiles)
+			set_2d_array(get_centerbox(mouse_pos), active_tiles)
+		if rmb_held and brush == "paint":
+			if multi_erase:
+				set_tiles_on_all_layers([get_cell(mouse_pos)], -1)
+			else:
+				set_tiles([get_cell(mouse_pos)], -1)
 
 		hide_preview()
 		if brush == "paint":
@@ -264,15 +266,39 @@ func redo():
 
 
 
-func set_tiles(pos_array: Array, tile, traced = true):
-	for pos in pos_array: #subops
-		var old_tile = tilemap.get_cellv(pos)
-		tilemap.set_cellv(pos, tile)
+func set_tiles(cells: Array, tile, traced = true): #TODO currently unused
+	if tile == -2: #null
+		return
+	for cell in cells: #subops
+		var old_tile = tilemap.get_cellv(cell)
+		tilemap.set_cellv(cell, tile)
 		if traced:
 			for s in active_operation:
-				if s[0] == pos: #positions match
+				if s[0] == cell: #already setting this cell in the current operation
 					return
-			active_operation.append([pos, tile, old_tile])
+			active_operation.append([cell, tile, old_tile])
+
+
+func set_2d_array(cells: Array, tiles: Array, traced = true):
+	if not active_tiles.empty():
+		var r_id = 0
+		for row in cells:
+			var c_id = 0
+			for cell in row: #subops
+				var tile = active_tiles[r_id][c_id]
+				if tile != -2: #null
+					var old_tile = tilemap.get_cellv(cell)
+					tilemap.set_cellv(cell, tile)
+					
+					if traced:
+#						for s in active_operation:
+#							if s[0] == cell: #already setting this cell in the current operation
+#								return
+						active_operation.append([cell, tile, old_tile])
+
+				c_id += 1
+			r_id += 1
+
 
 func set_tiles_on_all_layers(pos_array: Array, tile, traced = true): #TODO: finish this as it doesnt work right now
 	for pos in pos_array: #subops
@@ -307,7 +333,7 @@ func preview_2d_array(cells: Array):
 			var c_id = 0
 			for c in r:
 				var tile = active_tiles[r_id][c_id]
-				if tile != -1: #empty
+				if tile != -2: #null
 					var sprite = Sprite.new()
 					sprite.texture = get_tile_texture(tile)
 					sprite.modulate = Color(1, 1, 1, 0.5)
