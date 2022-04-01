@@ -407,7 +407,7 @@ func _on_viewport_size_changed():
 
 
 func _on_TileSetMenu_tile_selection_updated(selected_tiles):
-	active_tile = selected_tiles.front()
+	active_tile = selected_tiles.front().front()
 	if auto_layer:
 		change_layer(get_auto_layer())
 

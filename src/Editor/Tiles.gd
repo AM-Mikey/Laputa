@@ -12,7 +12,7 @@ var rows: int
 
 var hovered_button
 var selected_tile_region: Rect2 = Rect2(0, 0, 16, 16) #in texture space
-var selected_tiles = []
+var selected_tiles = [] #2D array
 
 export var tile_separation: int = 1
 
@@ -104,9 +104,24 @@ func _input(event):
 
 func set_selection():
 	set_cursor()
-	for i in tileset.get_tiles_ids():
-		if selected_tile_region.encloses(tileset.tile_get_region(i)): #not working proepr;y
-			selected_tiles.append(i)
+	var selected_tiles = []
+	for r in get_node(buttons).get_children():
+		var row_selection = []
+		for b in r.get_children():
+			if selected_tile_region.encloses(Rect2(b.tileset_position, Vector2(16, 16))):
+				row_selection.append(b.id)
+		if not row_selection.empty():
+			selected_tiles.append(row_selection)
+	
+	
+#	for i in tileset.get_tiles_ids():
+#		if selected_tile_region.encloses(tileset.tile_get_region(i)):
+#			selected_tiles.append(i)
+#
+			#[[1, 2, 3], 
+			#[4, 5, 6]]
+			
+			
 	print("region: ", selected_tile_region)
 	print("selected: ", selected_tiles)
 	emit_signal("tile_selection_updated", selected_tiles)
