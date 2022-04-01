@@ -11,6 +11,9 @@ margin_bottom = 270.0
 mouse_filter = 1
 theme = ExtResource( 3 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 brushes = NodePath("TabContainer/Collision/Scroll2/Brushes")
 col_tiles = NodePath("TabContainer/Collision/Scroll/Tiles")
 

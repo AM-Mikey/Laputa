@@ -3,6 +3,7 @@
 [ext_resource path="res://src/Editor/TileButton.gd" type="Script" id=1]
 
 [node name="TileButton" type="TextureRect"]
+rect_min_size = Vector2( 16, 16 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
