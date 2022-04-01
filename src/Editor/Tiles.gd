@@ -43,6 +43,8 @@ func setup_tile_buttons():
 		for c in columns:
 			var button = load("res://src/Editor/TileButton.tscn").instance()
 			row.add_child(button)
+			button.connect("mouse_entered", self, "hover_tile", [button])
+			button.connect("mouse_exited", self, "unhover")
 			c_id += 1
 		r_id += 1
 ###
@@ -53,8 +55,8 @@ func setup_tile_buttons():
 		var button = get_node(buttons).get_child(y_pos).get_child(x_pos)
 		button.id = i
 		button.texture = get_tile_as_texture(i)
-		button.connect("mouse_entered", self, "hover_tile", [button])
-		button.connect("mouse_exited", self, "unhover")
+#		button.connect("mouse_entered", self, "hover_tile", [button])
+#		button.connect("mouse_exited", self, "unhover")
 
 
 
@@ -74,24 +76,25 @@ func unhover():
 
 
 func _input(event):
-	if event.is_action_pressed("editor_lmb") and hovered_tile:
+	
+	if event.is_action_pressed("editor_lmb") and hovered_tile != null:
 		print("started ", hovered_tile)
 		selected_tile_region = tileset.tile_get_region(hovered_tile)
 		selected_tiles.clear()
 
 
-	if event.is_action_released("editor_lmb"):
+	if event.is_action_released("editor_lmb") and hovered_tile != null:
 		yield(get_tree(), "idle_frame")
 		print("ended ", hovered_tile)
-		if hovered_tile:
+		if hovered_tile != null:
 			var start_position = selected_tile_region.position
 			var end_position = tileset.tile_get_region(hovered_tile).position
 			
 			var offset = Vector2.ZERO
 			if start_position.x <= end_position.x: #left to right
-				offset.x += 16 #offset.x + 16
+				offset.x += 16
 			if start_position.y <= end_position.y: #top to bottom
-				offset.y += 16 # = offset.y + 16
+				offset.y += 16
 			
 			selected_tile_region = selected_tile_region.expand(end_position + offset)
 			set_selection()
