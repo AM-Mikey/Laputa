@@ -84,7 +84,16 @@ func _input(event):
 		yield(get_tree(), "idle_frame")
 		print("ended ", hovered_tile)
 		if hovered_tile:
-			selected_tile_region = selected_tile_region.expand(tileset.tile_get_region(hovered_tile).position + Vector2(16, 16))
+			var start_position = selected_tile_region.position
+			var end_position = tileset.tile_get_region(hovered_tile).position
+			
+			var offset = Vector2.ZERO
+			if start_position.x <= end_position.x: #left to right
+				offset.x += 16 #offset.x + 16
+			if start_position.y <= end_position.y: #top to bottom
+				offset.y += 16 # = offset.y + 16
+			
+			selected_tile_region = selected_tile_region.expand(end_position + offset)
 			set_selection()
 
 
