@@ -174,7 +174,7 @@ func _unhandled_input(event):
 			if multi_erase:
 				set_tiles_on_all_layers([get_cell(mouse_pos)], -1)
 			else:
-				set_tiles([get_cell(mouse_pos)], -1)
+				set_2d_array(get_centerbox(mouse_pos), get_centerbox_eraser())
 
 
 	if event.is_action_released("editor_rmb"):
@@ -201,7 +201,8 @@ func _unhandled_input(event):
 			if multi_erase:
 				set_tiles_on_all_layers([get_cell(mouse_pos)], -1)
 			else:
-				set_tiles([get_cell(mouse_pos)], -1)
+				#set_tiles([get_cell(mouse_pos)], -1)
+				set_2d_array(get_centerbox(mouse_pos), get_centerbox_eraser())
 
 		hide_preview()
 		if brush == "paint":
@@ -232,6 +233,16 @@ func _unhandled_input(event):
 		if ctrl_held and shift_held:
 			redo()
 
+
+func get_centerbox_eraser() -> Array:
+	var eraser = []
+	for row in active_tiles:
+		var eraser_row = []
+		for tile in row:
+			eraser_row.append(-2) if tile == -2 else eraser_row.append(-1)
+		eraser.append(eraser_row)
+	print(eraser)
+	return eraser
 
 ### OPERATIONS ###
 
@@ -270,7 +281,7 @@ func redo():
 
 
 
-func set_tiles(cells: Array, tile, traced = true): #TODO currently unused
+func set_tiles(cells: Array, tile, traced = true): 
 	if tile == -2: #null
 		return
 	for cell in cells: #subops
@@ -284,12 +295,12 @@ func set_tiles(cells: Array, tile, traced = true): #TODO currently unused
 
 
 func set_2d_array(cells: Array, tiles: Array, traced = true):
-	if not active_tiles.empty():
+	if not tiles.empty():
 		var r_id = 0
 		for row in cells:
 			var c_id = 0
 			for cell in row: #subops
-				var tile = active_tiles[r_id][c_id]
+				var tile = tiles[r_id][c_id]
 				if tile != -2: #null
 					var old_tile = tilemap.get_cellv(cell)
 					tilemap.set_cellv(cell, tile)
