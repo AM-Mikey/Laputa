@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/UI/Theme/LaputaThemeMenus.tres" type="Theme" id=1]
 [ext_resource path="res://src/Editor/LevelEditor.gd" type="Script" id=2]
 [ext_resource path="res://src/Editor/Tiles.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Editor/ResizeWindow.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Editor/TileSet.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Editor/Levels.tscn" type="PackedScene" id=6]
 
 [node name="LevelEditor" type="Control"]
 anchor_right = 1.0
@@ -96,6 +97,13 @@ margin_top = 30.0
 margin_right = -16.0
 margin_bottom = -16.0
 mouse_filter = 2
+
+[node name="Levels" parent="ResizeWindow/Tab" instance=ExtResource( 6 )]
+visible = false
+margin_left = 16.0
+margin_top = 30.0
+margin_right = -16.0
+margin_bottom = -16.0
 
 [connection signal="autolayer_updated" from="ResizeWindow/Tab/Tiles" to="." method="_on_TileSetMenu_autolayer_updated"]
 [connection signal="multi_erase_toggled" from="ResizeWindow/Tab/Tiles" to="." method="_on_TileSetMenu_multi_erase_toggled"]

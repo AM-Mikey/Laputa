@@ -176,7 +176,6 @@ current_dir = "res://src/Tile"
 current_path = "res://src/Tile/"
 
 [node name="New" type="FileDialog" parent="."]
-visible = true
 margin_right = 480.0
 margin_bottom = 270.0
 rect_min_size = Vector2( 400, 140 )

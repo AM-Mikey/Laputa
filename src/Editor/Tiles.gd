@@ -126,10 +126,10 @@ func set_cursor():
 	get_node(cursor).rect_size = Vector2(x_size, y_size) 
 	
 
+### SIGNALS ###
 
 func _on_AutoLayer_toggled(button_pressed):
 	emit_signal("autolayer_updated", button_pressed)
-
 
 func _on_MultiErase_toggled(button_pressed):
 	emit_signal("multi_erase_toggled", button_pressed)

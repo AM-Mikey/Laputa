@@ -165,7 +165,7 @@ func erase_collision(tile_node):
 		c.free()
 
 
-
+### SIGNALS ###
 
 func _on_Save_pressed():
 	$Save.popup()
@@ -174,15 +174,10 @@ func _on_Load_pressed():
 func _on_New_pressed():
 	$New.popup()
 
-
 func _on_Save_confirmed():
 	var path = $Save.current_path
 	emit_signal("tile_set_saved", path.get_basename() + ".tres")
-
-
 func _on_Load_file_selected(path):
 	emit_signal("tile_set_loaded", path)
-
-
 func _on_New_file_selected(path):
 	emit_signal("image_loaded", path)
