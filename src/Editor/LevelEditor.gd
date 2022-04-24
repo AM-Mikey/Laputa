@@ -9,7 +9,6 @@ export(NodePath) var tiles_tab
 export(NodePath) var layer_list
 
 
-var tiles = {}
 var active_tiles = [] #2D array
 
 var layers = {}
@@ -72,11 +71,6 @@ func texture_alpha_check(texture, region) -> bool: #TODO does not work
 		return true
 	else:
 		return false
-	
-	
-	
-	
-	
 #	var pixel_check_count = 0
 #	var pixel_pos = Vector2.ZERO
 	
@@ -142,17 +136,15 @@ func _unhandled_input(event):
 			brush = "box"
 		else:
 			brush = "paint"
-			#get_centerbox(mouse_pos)
 			set_2d_array(get_centerbox(mouse_pos), active_tiles)
-			#set_tiles([get_cell(mouse_pos)], active_tiles)
 
 
 	if event.is_action_released("editor_lmb"):
 		lmb_held = false
 		if brush == "line":
-			set_tiles(get_line(mouse_start_pos, mouse_pos), active_tiles)
+			set_line(get_brush_origin_line(mouse_start_pos, mouse_pos), active_tiles)
 		elif brush == "box":
-			set_tiles(get_box(mouse_start_pos, mouse_pos), active_tiles)
+			set_2d_array(get_box(mouse_start_pos, mouse_pos), active_tiles)
 		
 		if not active_operation.empty():
 			past_operations.append(["set_tiles", active_operation.duplicate()])
@@ -171,18 +163,18 @@ func _unhandled_input(event):
 			brush = "box"
 		else:
 			brush = "paint"
-			if multi_erase:
-				set_tiles_on_all_layers([get_cell(mouse_pos)], -1)
-			else:
-				set_2d_array(get_centerbox(mouse_pos), get_centerbox_eraser())
+#			if multi_erase: #TODO: does not work
+#				set_tiles_on_all_layers([get_cell(mouse_pos)], -1) 
+#			else:
+			set_2d_array(get_centerbox(mouse_pos), get_brush_as_eraser())
 
 
 	if event.is_action_released("editor_rmb"):
 		rmb_held = false
 		if brush == "line":
-			set_tiles(get_line(mouse_start_pos, mouse_pos), -1)
+			set_2d_array(get_brush_line(mouse_start_pos, mouse_pos), get_brush_as_eraser())
 		elif brush == "box":
-			set_tiles(get_box(mouse_start_pos, mouse_pos), -1)
+			set_2d_array(get_box(mouse_start_pos, mouse_pos), get_brush_as_eraser())
 		
 		if not active_operation.empty():
 			var operation_name = "set_tiles_on_all_layers" if multi_erase else "set_tiles"
@@ -198,11 +190,11 @@ func _unhandled_input(event):
 			#set_tiles([get_cell(mouse_pos)], active_tiles)
 			set_2d_array(get_centerbox(mouse_pos), active_tiles)
 		if rmb_held and brush == "paint":
-			if multi_erase:
-				set_tiles_on_all_layers([get_cell(mouse_pos)], -1)
-			else:
-				#set_tiles([get_cell(mouse_pos)], -1)
-				set_2d_array(get_centerbox(mouse_pos), get_centerbox_eraser())
+#			if multi_erase: #TODO: not working
+#				set_cells_on_all_layers([get_cell(mouse_pos)], -1)
+#			else:
+#				#set_tiles([get_cell(mouse_pos)], -1)
+				set_2d_array(get_centerbox(mouse_pos), get_brush_as_eraser())
 
 		hide_preview()
 		if brush == "paint":
@@ -211,9 +203,9 @@ func _unhandled_input(event):
 
 		elif lmb_held or rmb_held:
 			if brush == "line":
-				preview_tiles(get_line(mouse_start_pos, mouse_pos))
+				preview_line(get_brush_origin_line(mouse_start_pos, mouse_pos))
 			if brush == "box":
-				preview_tiles(get_box(mouse_start_pos, mouse_pos))
+				preview_2d_array(get_box(mouse_start_pos, mouse_pos))
 
 
 
@@ -234,15 +226,7 @@ func _unhandled_input(event):
 			redo()
 
 
-func get_centerbox_eraser() -> Array:
-	var eraser = []
-	for row in active_tiles:
-		var eraser_row = []
-		for tile in row:
-			eraser_row.append(-2) if tile == -2 else eraser_row.append(-1)
-		eraser.append(eraser_row)
-	print(eraser)
-	return eraser
+
 
 ### OPERATIONS ###
 
@@ -258,7 +242,7 @@ func undo():
 				var subops = last[1]
 				subops.invert()
 				for t in subops:
-					set_tiles([t[0]], t[2], false) #pos_array, old_tile, traced
+					set_cells([t[0]], t[2], false) #pos_array, old_tile, traced
 #	else:
 #		print("nothing left to undo!")
 
@@ -275,13 +259,13 @@ func redo():
 				var subops = next[1]
 				subops.invert()
 				for t in subops:
-					set_tiles([t[0]], t[1], false) #pos_array, new_tile, traced
+					set_cells([t[0]], t[1], false) #pos_array, new_tile, traced
 #	else:
 #		print("nothing left to redo!")
 
 
 
-func set_tiles(cells: Array, tile, traced = true): 
+func set_cells(cells: Array, tile, traced = true): #TODO, new draw methods use set 2d array instead, this can only handle one tile
 	if tile == -2: #null
 		return
 	for cell in cells: #subops
@@ -293,29 +277,62 @@ func set_tiles(cells: Array, tile, traced = true):
 					return
 			active_operation.append([cell, tile, old_tile])
 
-
 func set_2d_array(cells: Array, tiles: Array, traced = true):
-	if not tiles.empty():
-		var r_id = 0
-		for row in cells:
-			var c_id = 0
-			for cell in row: #subops
-				var tile = tiles[r_id][c_id]
-				if tile != -2: #null
-					var old_tile = tilemap.get_cellv(cell)
-					tilemap.set_cellv(cell, tile)
+	if tiles.empty():
+		return
+	var r_id = 0
+	var r_max = tiles.size()
+	for row in cells:
+		var c_id = 0
+		var c_max = tiles[c_id].size()
+		for cell in row: #subops
+			var tile = tiles[r_id % r_max][c_id % c_max] # % so it repeats if cells > tiles
+			if tile != -2: #null
+				var old_tile = tilemap.get_cellv(cell)
+				tilemap.set_cellv(cell, tile)
+				
+				if traced:
+					for s in active_operation:
+						if s[0] == cell and s[1] == tile: #already setting this cell in the current operation, this prevents reactivating on mouse movement
+							return
+					active_operation.append([cell, tile, old_tile])
+
+			c_id += 1
+		r_id += 1
+
+func set_line(cells: Array, tiles: Array, traced = true):
+	if tiles.empty():
+		return
+	var r_id = 0
+	var r_max = tiles.size()
+	for row in cells:
+		var c_id = 0
+		var c_max = tiles[c_id].size()
+		for cell in row: #subops
+			var br_id = 0
+			for b_row in active_tiles:
+				var bc_id = 0
+				for b_cell in b_row:
+					var tile = b_cell
+					if tile != -2: #null
+						var offset = Vector2(bc_id, br_id)
+						var old_tile = tilemap.get_cellv(cell + offset)
+						tilemap.set_cellv(cell + offset, tile)
+						
+						if traced:
+							for s in active_operation:
+								if s[0] == cell and s[1] == tile: #already setting this cell in the current operation, this prevents reactivating on mouse movement
+									return
+							active_operation.append([cell + offset, tile, old_tile])
 					
-					if traced:
-						for s in active_operation:
-							if s[0] == cell and s[1] == tile: #already setting this cell in the current operation, this prevents reactivating on mouse movement
-								return
-						active_operation.append([cell, tile, old_tile])
-
-				c_id += 1
-			r_id += 1
+					bc_id += 1
+				br_id +=1
+			c_id += 1
+		r_id += 1
 
 
-func set_tiles_on_all_layers(pos_array: Array, tile, traced = true): #TODO: finish this as it doesnt work right now
+
+func set_cells_on_all_layers(pos_array: Array, tile, traced = true): #TODO: finish this as it doesnt work right now
 	for pos in pos_array: #subops
 		for l in layers:
 			var layer = layers[l]
@@ -329,35 +346,48 @@ func set_tiles_on_all_layers(pos_array: Array, tile, traced = true): #TODO: fini
 
 ### PREVIEW ###
 
-func preview_tiles(pos_array: Array):
-	if not active_tiles.empty():
-		for pos in pos_array:
-			var sprite = Sprite.new()
-			sprite.texture = get_tile_texture(active_tiles.front().front())
-			sprite.modulate = Color(1, 1, 1, 0.5)
-			sprite.centered = false
-			sprite.position = pos * 16
-			tile_collection.add_child(sprite)
-
-
-
 func preview_2d_array(cells: Array):
-	if not active_tiles.empty():
-		var r_id = 0
-		for r in cells:
-			var c_id = 0
-			for c in r:
-				var tile = active_tiles[r_id][c_id]
-				if tile != -2: #null
-					var sprite = Sprite.new()
-					sprite.texture = get_tile_texture(tile)
-					sprite.modulate = Color(1, 1, 1, 0.5)
-					sprite.centered = false
-					sprite.position = c * 16
-					tile_collection.add_child(sprite)
-				c_id += 1
-			r_id += 1
+	var r_id = 0
+	var r_max = active_tiles.size()
+	for row in cells:
+		var c_id = 0
+		var c_max = active_tiles[c_id].size()
+		for cell in row:
+			var tile = active_tiles[r_id % r_max][c_id % c_max] # % so it repeats if cells > tiles
+			set_preview(cell, tile)
+			c_id += 1
+		r_id += 1
 
+func preview_line(cells: Array): #use get_brush_origin for this
+	var r_id = 0
+	var r_max = active_tiles.size()
+	for row in cells:
+		var c_id = 0
+		var c_max = active_tiles[c_id].size()
+		for cell in row:
+			
+			var br_id = 0
+			for b_row in active_tiles:
+				var bc_id = 0
+				for b_cell in b_row:
+					var tile = b_cell
+					var offset = Vector2(bc_id, br_id)
+					set_preview(cell + offset, tile)
+					bc_id += 1
+				br_id +=1
+			c_id += 1
+		r_id += 1
+
+func set_preview(cell, tile):
+	if tile == -2: #null
+		return
+		
+	var sprite = Sprite.new()
+	sprite.texture = get_tile_texture(tile)
+	sprite.modulate = Color(1, 1, 1, 0.5)
+	sprite.centered = false
+	sprite.position = cell * 16
+	tile_collection.add_child(sprite)
 
 func hide_preview():
 	for c in tile_collection.get_children():
@@ -367,23 +397,24 @@ func hide_preview():
 
 
 ### GETTERS ###
+func get_cell(mouse_pos) -> Vector2:
+	var local_pos = tilemap.to_local(mouse_pos)
+	var map_pos = tilemap.world_to_map(local_pos)
+	return map_pos
+
+
 func get_centerbox(mouse_pos) -> Array: #2D Array #actuve tiles
 	var cells = []
+	var bx = get_brush_size("x")
+	var by = get_brush_size("y")
 	
-	
-	var height = active_tiles.size()
-	var width = 0
-	for r in active_tiles:
-		if r.size() > width:
-			width = r.size()
-	
-	var center = Vector2(floor(width/2), floor(height/2))
+	var center = Vector2(floor(bx/2), floor(by/2))
 	var center_cell = get_cell(mouse_pos)
 	#assumes an odd number
-	for r in height:
+	for row in by:
 		var row_cells = []
-		for c in width:
-			var offset = Vector2(c - center.x, r - center.y)
+		for cell in bx:
+			var offset = Vector2(cell - center.x, row - center.y)
 			row_cells.append(center_cell + offset) #position of cell in map space
 		if not row_cells.empty():
 			cells.append(row_cells)
@@ -393,50 +424,150 @@ func get_centerbox(mouse_pos) -> Array: #2D Array #actuve tiles
 
 
 
-func get_box(start, end) -> Array:
+func get_box(start_pos, end_pos) -> Array: #2d
 	var cells = []
-	var start_tile = get_cell(start)
-	var end_tile = get_cell(end)
+	var start = get_cell(start_pos)
+	var end = get_cell(end_pos)
+	var x_min = min(start.x, end.x)
+	var x_max = max(start.x, end.x)
+	var y_min = min(start.y, end.y)
+	var y_max = max(start.y, end.y)
 	
-	var x_min = min(start_tile.x, end_tile.x)
-	var x_max = max(start_tile.x, end_tile.x)
-	var y_min = min(start_tile.y, end_tile.y)
-	var y_max = max(start_tile.y, end_tile.y)
-	
-	for i in range(x_min, x_max + 1):
-		for j in range(y_min, y_max + 1):
-			cells.append(Vector2(i, j))
+	for y in range(y_min, y_max + 1):
+		var row = []
+		for x in range(x_min, x_max + 1):
+			row.append(Vector2(x, y))
+		cells.append(row)
 	return cells
 
+#func get_line(start_pos, end_pos) -> Array: #2d
+#	var cells = [] #1d
+#	var start = get_cell(start_pos)
+#	var end = get_cell(end_pos)
+#	var x_min = min(start.x, end.x)
+#	var x_max = max(start.x, end.x)
+#	var y_min = min(start.y, end.y)
+#	var y_max = max(start.y, end.y)
+#	var dx = end.x - start.x
+#	var dy = end.y - start.y
+#	if dx == 0:
+#		dx = .0001
+#
+#	var fake_cells = []
+#	if abs(dx) >= abs(dy):
+#		for x in range(x_min, x_max+1):
+#			var y = round(start.y + dy * (x - start.x) / dx)
+#			cells.append(Vector2(x,y))
+#	else:
+#		for y in range(y_min, y_max+1):
+#			var x = round(start.x + dx * (y - start.y) / dy)
+#			cells.append(Vector2(x,y))
+#	return get_2d_array_from_Vector2_array(cells)
 
-func get_cell(mouse_pos) -> Vector2:
-	var local_pos = tilemap.to_local(mouse_pos)
-	var map_pos = tilemap.world_to_map(local_pos)
-	return map_pos
-
-
-func get_line(start, end) -> Array:
+func get_brush_line(start_pos, end_pos) -> Array: #2d
 	var cells = []
-	var start_tile = get_cell(start)
-	var end_tile = get_cell(end)
-	
-	var dx = end_tile.x - start_tile.x
-	var dy = end_tile.y - start_tile.y
+	var start = get_cell(start_pos)
+	var end = get_cell(end_pos)
+	var x_min = min(start.x, end.x)
+	var x_max = max(start.x, end.x)
+	var y_min = min(start.y, end.y)
+	var y_max = max(start.y, end.y)
+	var dx = end.x - start.x
+	var dy = end.y - start.y
 	if dx == 0:
 		dx = .0001
-	
-	if abs(dx) >= abs(dy):
-		for x in range(start_tile.x, end_tile.x+1) if start_tile.x < end_tile.x else range(end_tile.x, start_tile.x+1):
-			var y = round(start_tile.y + dy * (x - start_tile.x) / dx)
-			cells.append(Vector2(x,y))
-	else:
-		for y in range(start_tile.y, end_tile.y+1) if start_tile.y < end_tile.y else range(end_tile.y, start_tile.y+1):
-			var x = round(start_tile.x + dx * (y - start_tile.y) / dy)
-			cells.append(Vector2(x,y))
-	
-	return cells
-	
+	var bx = get_brush_size("x")
+	var by = get_brush_size("y")
 
+	if abs(dx) >= (float(bx)/float(by)) * abs(dy): #TODO: this division seems to slow down the game with very tall brushes
+		for x in range(x_min, x_max+1):
+			if x % bx == 0: #start of a brush 
+				var y = round(start.y + dy * (x - start.x) / dx)
+
+				for row in by:
+					for cell in bx:
+						cells.append(Vector2(x + cell, y + row))
+
+	else:
+		for y in range(y_min, y_max+1):
+			if y % by == 0: #start of a brush 
+				var x = round(start.x + dx * (y - start.y) / dy)
+
+				for row in by:
+					for cell in bx:
+						cells.append(Vector2(x + cell, y + row))
+
+	#print("cells: ",get_2d_array_from_Vector2_array(cells))
+	return get_2d_array_from_Vector2_array(cells)
+
+func get_brush_origin_line(start_pos, end_pos) -> Array: #2d, only origin points of brushes
+	var cells = []
+	var start = get_cell(start_pos)
+	var end = get_cell(end_pos)
+	var x_min = min(start.x, end.x)
+	var x_max = max(start.x, end.x)
+	var y_min = min(start.y, end.y)
+	var y_max = max(start.y, end.y)
+	var dx = end.x - start.x
+	var dy = end.y - start.y
+	if dx == 0:
+		dx = .0001
+	var bx = get_brush_size("x")
+	var by = get_brush_size("y")
+	
+	if abs(dx) >= (float(bx)/float(by)) * abs(dy): #TODO: this division seems to slow down the game with very tall brushes
+		for x in range(x_min, x_max+1):
+			if x % bx == 0: #start of a brush 
+				var y = round(start.y + dy * (x - start.x) / dx)
+				cells.append(Vector2(x, y))
+	
+	else:
+		for y in range(y_min, y_max+1):
+			if y % by == 0: #start of a brush 
+				var x = round(start.x + dx * (y - start.y) / dy)
+				cells.append(Vector2(x, y))
+	
+	#print("cells: ",get_2d_array_from_Vector2_array(cells))
+	return get_2d_array_from_Vector2_array(cells)
+
+
+func get_brush_as_eraser() -> Array:
+	var eraser = []
+	for row in active_tiles:
+		var eraser_row = []
+		for tile in row:
+			eraser_row.append(-2) if tile == -2 else eraser_row.append(-1)
+		eraser.append(eraser_row)
+	print(eraser)
+	return eraser
+
+### HELPER GETTERS ###
+
+func get_brush_size(axis = "both"):
+	var brush_size = Vector2.ZERO
+	brush_size.y = active_tiles.size()
+	for row in active_tiles:
+		if row.size() > brush_size.x:
+			brush_size.x = row.size()
+	if axis == "x":
+		return int(brush_size.x)
+	if axis == "y":
+		return int(brush_size.y)
+	else:
+		return brush_size
+
+func get_2d_array_from_Vector2_array(array) -> Array:
+	var new_array = []
+	var recorded_ys = []
+	for i in array:
+		if not recorded_ys.has(i.y):
+			recorded_ys.append(i.y)
+			var row = []
+			row.append(i)
+			new_array.append(row)
+		else:
+			new_array[recorded_ys.find(i.y)].append(i)
+	return new_array
 
 ### LAYERS ###
 

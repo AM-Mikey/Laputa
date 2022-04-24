@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/DirtTest.png-b3f8527894af8676888f52af1d10e32c.stex"
+path="res://.import/AbandonedVillageMockup.png-ef8e01ca5d577f5ef18819908dcaf4af.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/DirtTest.png"
-dest_files=[ "res://.import/DirtTest.png-b3f8527894af8676888f52af1d10e32c.stex" ]
+source_file="res://assets/Concept/AbandonedVillageMockup.png"
+dest_files=[ "res://.import/AbandonedVillageMockup.png-ef8e01ca5d577f5ef18819908dcaf4af.stex" ]
 
 [params]
 

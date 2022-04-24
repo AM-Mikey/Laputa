@@ -25,7 +25,7 @@ export var development_stage: String = "Alpha"
 var internal_version: String = get_internal_version()
 export var release_version: String
 export var is_release = false
-export var skip_title = false
+export var do_skip_title = false
 export var visible_triggers = false
 export var show_state_labels = false ###############################################
 
@@ -40,7 +40,7 @@ func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
 	
-	if not skip_title:
+	if not do_skip_title:
 		$UILayer.add_child(TITLE.instance())
 		add_child(TITLECAM.instance())
 		add_child(current_level)

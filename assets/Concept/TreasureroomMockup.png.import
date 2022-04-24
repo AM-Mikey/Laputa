@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/DirtTest2.png-def4b5215a3254c5cbef1f6d92ce232a.stex"
+path="res://.import/TreasureroomMockup.png-7012f1191f31c567cede76ee197007e1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/DirtTest2.png"
-dest_files=[ "res://.import/DirtTest2.png-def4b5215a3254c5cbef1f6d92ce232a.stex" ]
+source_file="res://assets/Concept/TreasureroomMockup.png"
+dest_files=[ "res://.import/TreasureroomMockup.png-7012f1191f31c567cede76ee197007e1.stex" ]
 
 [params]
 
