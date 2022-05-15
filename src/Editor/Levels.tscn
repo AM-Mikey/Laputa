@@ -55,9 +55,9 @@ margin_bottom = 270.0
 rect_min_size = Vector2( 400, 140 )
 window_title = "Open a File"
 mode = 0
-filters = PoolStringArray( "*.tres" )
-current_dir = "res://src/Tile"
-current_path = "res://src/Tile/"
+filters = PoolStringArray( "*.tscn" )
+current_dir = "res://src/Level"
+current_path = "res://src/Level/"
 
 [node name="New" type="FileDialog" parent="."]
 margin_right = 480.0
@@ -65,9 +65,11 @@ margin_bottom = 270.0
 rect_min_size = Vector2( 400, 140 )
 window_title = "Open a File"
 mode = 0
-filters = PoolStringArray( "*.jpg", "*.bmp", "*.png" )
-current_dir = "res://assets/Tile"
-current_path = "res://assets/Tile/"
+filters = PoolStringArray( "*.tscn" )
+current_dir = "res://src/Level"
+current_path = "res://src/Level/"
 
 [connection signal="pressed" from="HBox/Save" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="HBox/Load" to="." method="_on_Load_pressed"]
 [connection signal="confirmed" from="Save" to="." method="_on_Save_confirmed"]
+[connection signal="file_selected" from="Load" to="." method="_on_Load_file_selected"]

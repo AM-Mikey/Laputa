@@ -7,7 +7,6 @@
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
 [ext_resource path="res://src/Tile/Village4.tres" type="TileSet" id=6]
 
-
 [node name="LevelDesignTest" type="Node2D"]
 script = ExtResource( 5 )
 level_name = "states test"
