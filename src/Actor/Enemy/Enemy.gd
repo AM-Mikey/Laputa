@@ -44,6 +44,9 @@ func _ready():
 	timer.name = "DamagenumTimer"
 	timer.connect("timeout", self, "_on_DamagenumTimer_timeout")
 	add_child(timer)
+	
+	if get_parent() is Control:
+		disabled = true
 
 
 func _physics_process(_delta):

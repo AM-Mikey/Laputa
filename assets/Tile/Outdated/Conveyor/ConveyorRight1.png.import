@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ConveyorRight1.png-fe20529561a7b4a63a2da8f01c022893.stex"
+path="res://.import/ConveyorRight1.png-89f44542cd24381c93636cb63bd3942a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/Conveyor/ConveyorRight1.png"
-dest_files=[ "res://.import/ConveyorRight1.png-fe20529561a7b4a63a2da8f01c022893.stex" ]
+source_file="res://assets/Tile/Outdated/Conveyor/ConveyorRight1.png"
+dest_files=[ "res://.import/ConveyorRight1.png-89f44542cd24381c93636cb63bd3942a.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

@@ -56,7 +56,7 @@ func _on_Load_file_selected(path):
 	
 	
 	el.get_node("EditorCamera").queue_free()
-	el.get_node("LevelEditor").queue_free()
+	el.get_node("Editor").queue_free()
 	ui.add_child(HUD.instance())
 	#w.get_node("Juniper").enable()
 	w.get_node("Juniper/PlayerCamera").current = true

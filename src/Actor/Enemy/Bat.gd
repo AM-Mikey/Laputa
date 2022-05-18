@@ -15,6 +15,8 @@ func _ready():
 	level = 2
 
 func _physics_process(_delta):
+	if disabled:
+		return
 	get_parent().offset += speed.x/100
 
 

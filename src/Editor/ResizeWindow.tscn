@@ -3,13 +3,173 @@
 [ext_resource path="res://src/Editor/ResizeWindow.gd" type="Script" id=1]
 [ext_resource path="res://src/Editor/EmptyButton.tres" type="Theme" id=2]
 
-[node name="ResizeWindow" type="Control"]
+[node name="ResizeWindow" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -240.0
-mouse_filter = 1
+margin_right = -224.0
+margin_bottom = 14.0
+mouse_filter = 2
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Handles" type="VBoxContainer" parent="."]
+margin_right = 256.0
+margin_bottom = 284.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Header" type="Control" parent="Handles"]
+margin_right = 256.0
+mouse_filter = 2
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Handles/Header"]
+visible = false
+margin_right = 256.0
+mouse_filter = 2
+border_color = Color( 0, 0, 0, 1 )
+editor_only = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Top" type="HBoxContainer" parent="Handles"]
+margin_right = 256.0
+margin_bottom = 4.0
+mouse_filter = 2
+size_flags_vertical = 0
+custom_constants/separation = 0
+
+[node name="TopLeft" type="TextureButton" parent="Handles/Top"]
+margin_right = 4.0
+margin_bottom = 4.0
+rect_min_size = Vector2( 4, 4 )
+mouse_filter = 1
+mouse_default_cursor_shape = 12
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Top" type="TextureButton" parent="Handles/Top"]
+margin_left = 4.0
+margin_right = 252.0
+margin_bottom = 4.0
+rect_min_size = Vector2( 0, 4 )
+mouse_filter = 1
+mouse_default_cursor_shape = 9
+size_flags_horizontal = 3
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopRight" type="TextureButton" parent="Handles/Top"]
+margin_left = 252.0
+margin_right = 256.0
+margin_bottom = 4.0
+rect_min_size = Vector2( 4, 4 )
+mouse_filter = 1
+mouse_default_cursor_shape = 11
+size_flags_horizontal = 8
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mid" type="HBoxContainer" parent="Handles"]
+margin_top = 4.0
+margin_right = 256.0
+margin_bottom = 280.0
+mouse_filter = 2
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="Left" type="TextureButton" parent="Handles/Mid"]
+margin_right = 4.0
+margin_bottom = 276.0
+rect_min_size = Vector2( 4, 0 )
+mouse_filter = 1
+mouse_default_cursor_shape = 10
+size_flags_horizontal = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar" type="TextureButton" parent="Handles/Mid"]
+margin_left = 4.0
+margin_right = 252.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 0, 12 )
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Handles/Mid/Bar"]
+visible = false
+margin_right = 248.0
+margin_bottom = 13.0
+rect_min_size = Vector2( 0, 12 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureButton" parent="Handles/Mid"]
+margin_left = 252.0
+margin_right = 256.0
+margin_bottom = 276.0
+rect_min_size = Vector2( 4, 0 )
+mouse_filter = 1
+mouse_default_cursor_shape = 10
+size_flags_horizontal = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bottom" type="HBoxContainer" parent="Handles"]
+margin_top = 280.0
+margin_right = 256.0
+margin_bottom = 284.0
+rect_min_size = Vector2( 0, 4 )
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="BottomLeft" type="TextureButton" parent="Handles/Bottom"]
+margin_right = 4.0
+margin_bottom = 4.0
+rect_min_size = Vector2( 4, 4 )
+mouse_filter = 1
+mouse_default_cursor_shape = 11
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="Bottom" type="TextureButton" parent="Handles/Bottom"]
+margin_left = 4.0
+margin_right = 252.0
+margin_bottom = 4.0
+rect_min_size = Vector2( 0, 4 )
+mouse_filter = 1
+mouse_default_cursor_shape = 9
+size_flags_horizontal = 3
+size_flags_vertical = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomRight" type="TextureButton" parent="Handles/Bottom"]
+margin_left = 252.0
+margin_right = 256.0
+margin_bottom = 4.0
+rect_min_size = Vector2( 4, 4 )
+mouse_filter = 1
+mouse_default_cursor_shape = 12
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+visible = false
+margin_right = 256.0
+margin_bottom = 284.0
+mouse_filter = 2
+border_color = Color( 1, 1, 1, 1 )
+editor_only = false

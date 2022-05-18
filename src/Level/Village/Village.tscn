@@ -128,6 +128,7 @@ position = Vector2( 552, 112 )
 
 [node name="Crusher" parent="Actors" instance=ExtResource( 29 )]
 position = Vector2( 320, 312 )
+debug = true
 amplitude_h = 0.0
 
 [node name="Props" type="Node2D" parent="."]

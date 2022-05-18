@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=6 format=2]
+[gd_resource type="Theme" load_steps=7 format=2]
+
+[sub_resource type="BitmapFont" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -16,6 +18,8 @@ Button/colors/font_color_disabled = Color( 0, 0, 0, 0 )
 Button/colors/font_color_focus = Color( 0, 0, 0, 0 )
 Button/colors/font_color_hover = Color( 0, 0, 0, 0 )
 Button/colors/font_color_pressed = Color( 0, 0, 0, 0 )
+Button/constants/hseparation = 0
+Button/fonts/font = SubResource( 6 )
 Button/styles/disabled = SubResource( 1 )
 Button/styles/focus = SubResource( 2 )
 Button/styles/hover = SubResource( 3 )

@@ -2,11 +2,11 @@
 
 [ext_resource path="res://src/UI/StyleBox/SteelRound.tres" type="StyleBox" id=1]
 [ext_resource path="res://assets/Editor/LayerTheme.tres" type="Theme" id=2]
-[ext_resource path="res://src/Editor/Layer.gd" type="Script" id=3]
-[ext_resource path="res://assets/Editor/EditTrue.png" type="Texture" id=4]
-[ext_resource path="res://assets/Editor/VisTrue.png" type="Texture" id=5]
+[ext_resource path="res://src/Editor/LayerButton.gd" type="Script" id=3]
+[ext_resource path="res://assets/Editor/EditFalse.png" type="Texture" id=4]
+[ext_resource path="res://assets/Editor/EditTrue.png" type="Texture" id=5]
 [ext_resource path="res://assets/Editor/VisFalse.png" type="Texture" id=6]
-[ext_resource path="res://assets/Editor/EditFalse.png" type="Texture" id=7]
+[ext_resource path="res://assets/Editor/VisTrue.png" type="Texture" id=7]
 
 [node name="Layer" type="MarginContainer"]
 margin_right = 256.0
@@ -67,7 +67,7 @@ margin_bottom = 20.0
 size_flags_horizontal = 8
 size_flags_vertical = 4
 toggle_mode = true
-texture_normal = ExtResource( 5 )
+texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 6 )
 
 [node name="EditButton" type="TextureButton" parent="HBox"]
@@ -78,8 +78,8 @@ margin_bottom = 20.0
 size_flags_horizontal = 8
 size_flags_vertical = 4
 toggle_mode = true
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 7 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 4 )
 
 [node name="Spacer2" type="Control" parent="HBox"]
 margin_left = 232.0

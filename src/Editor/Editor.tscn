@@ -1,0 +1,125 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/UI/Theme/LaputaThemeMenus.tres" type="Theme" id=1]
+[ext_resource path="res://src/Editor/Editor.gd" type="Script" id=2]
+[ext_resource path="res://src/Editor/ResizeWindow.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Editor/Tiles.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Editor/TileSet.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Editor/Levels.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Editor/Inspector.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Editor/Enemies.tscn" type="PackedScene" id=8]
+
+[node name="Editor" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 2.0
+mouse_filter = 2
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+tiles_tab = NodePath("Main/Tab/Tiles")
+layer_list = NodePath("Main/Tab/Layers/Scroll/LayerList")
+
+[node name="Main" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 272.0
+margin_bottom = 256.0
+rect_min_size = Vector2( 80, 240 )
+header_size = 16
+bar_size = 16
+
+[node name="Tab" type="TabContainer" parent="Main"]
+margin_right = 272.0
+margin_bottom = 256.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tiles" parent="Main/Tab" instance=ExtResource( 4 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 30.0
+margin_right = -16.0
+margin_bottom = -16.0
+
+[node name="Layers" type="MarginContainer" parent="Main/Tab"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 30.0
+margin_right = -16.0
+margin_bottom = -16.0
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="Main/Tab/Layers"]
+margin_right = 240.0
+margin_bottom = 210.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scroll" type="ScrollContainer" parent="Main/Tab/Layers"]
+margin_right = 240.0
+margin_bottom = 210.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LayerList" type="VBoxContainer" parent="Main/Tab/Layers/Scroll"]
+margin_right = 240.0
+margin_bottom = 210.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TileSet" parent="Main/Tab" instance=ExtResource( 5 )]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 30.0
+margin_right = -16.0
+margin_bottom = -16.0
+mouse_filter = 2
+
+[node name="Levels" parent="Main/Tab" instance=ExtResource( 6 )]
+visible = false
+margin_left = 16.0
+margin_top = 30.0
+margin_right = -16.0
+margin_bottom = -16.0
+
+[node name="Enemies" parent="Main/Tab" instance=ExtResource( 8 )]
+visible = false
+margin_left = 16.0
+margin_top = 30.0
+margin_right = -16.0
+margin_bottom = -16.0
+
+[node name="Secondary" parent="." instance=ExtResource( 3 )]
+margin_left = 392.0
+margin_right = 168.0
+
+[node name="Inspector" parent="Secondary" instance=ExtResource( 7 )]
+
+[connection signal="autolayer_updated" from="Main/Tab/Tiles" to="." method="_on_TileSetMenu_autolayer_updated"]
+[connection signal="multi_erase_toggled" from="Main/Tab/Tiles" to="." method="_on_TileSetMenu_multi_erase_toggled"]
+[connection signal="tile_selection_updated" from="Main/Tab/Tiles" to="." method="_on_TileSetMenu_tile_selection_updated"]
+[connection signal="collision_updated" from="Main/Tab/TileSet" to="." method="_on_TileSet_collision_updated"]
+[connection signal="image_loaded" from="Main/Tab/TileSet" to="." method="_on_TileSet_image_loaded"]
+[connection signal="tile_set_loaded" from="Main/Tab/TileSet" to="." method="_on_TileSet_tile_set_loaded"]
+[connection signal="tile_set_saved" from="Main/Tab/TileSet" to="." method="_on_TileSet_tile_set_saved"]

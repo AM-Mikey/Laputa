@@ -1,7 +1,7 @@
 extends Control
 
-const LAYER = preload("res://src/Editor/Layer.tscn")
-
+const LAYER_BUTTON = preload("res://src/Editor/LayerButton.tscn")
+const LIMITER = preload("res://src/Editor/EditorLevelLimiter.tscn")
 
 
 
@@ -35,10 +35,15 @@ var tileset
 func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 	_on_viewport_size_changed()
-	#setup_tiles()
-	#create_tileset_from_texture(load("res://assets/Tile/VillageMinimal.png"))
 	load_tileset(tile_collection.get_child(0).tile_set.resource_path)
+	setup_level_limiter()
 	setup_layers()
+	#$Main.move_child($Main/Tab, 0) TODO: was supposed to make tabcontainer go behind resize controls, didnt work
+
+
+func setup_level_limiter():
+	#w.get_node("EditorLayer").add_child(LIMITER.instance())
+	w.current_level.add_child(LIMITER.instance())
 
 func create_tileset_from_texture(texture):
 	tileset = TileSet.new()
@@ -576,13 +581,13 @@ func setup_layers():
 	for l in w.current_level.get_node("Tiles").get_children():
 		layers[l.name] = l
 		
-		var layer_node = LAYER.instance()
-		layer_node.layer = l
-		layer_node.connect("layer_changed", self, "change_layer")
+		var layer_button = LAYER_BUTTON.instance()
+		layer_button.layer = l
+		layer_button.connect("layer_changed", self, "change_layer")
 		if layer_index == 0:
-			layer_node.active = true
+			layer_button.active = true
 			tilemap = l
-		get_node(layer_list).add_child(layer_node)
+		get_node(layer_list).add_child(layer_button)
 		layer_index += 1
 
 func change_layer(layer):

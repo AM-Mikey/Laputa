@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/Background/LevelLimiter.gd" type="Script" id=1]
-[ext_resource path="res://assets/Background/Outdated/bkMaze.bmp" type="Texture" id=2]
+[ext_resource path="res://assets/Background/Blue.png" type="Texture" id=2]
 
 [node name="LevelLimiter" type="MarginContainer"]
-margin_right = 416.0
+margin_right = 472.0
 margin_bottom = 264.0
 mouse_filter = 2
 script = ExtResource( 1 )
@@ -14,7 +14,7 @@ __meta__ = {
 background = ExtResource( 2 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 416.0
+margin_right = 472.0
 margin_bottom = 264.0
 mouse_filter = 2
 texture = ExtResource( 2 )
@@ -22,7 +22,7 @@ expand = true
 stretch_mode = 2
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
-margin_right = 416.0
+margin_right = 472.0
 margin_bottom = 264.0
 mouse_filter = 2
 border_color = Color( 1, 1, 1, 1 )

@@ -154,7 +154,7 @@ func get_input_dir() -> Vector2:
 
 func get_next_animation(animation, anim_dir, can_shoot_down):
 	var animation_suffix
-	var gs = get_parent().get_node("GunSprite")
+	var gs = get_parent().get_node("SpriteManager/GunSprite")
 	
 	pc.face_dir = anim_dir
 	pc.shoot_dir = Vector2(anim_dir.x, 0)

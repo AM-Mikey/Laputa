@@ -75,8 +75,8 @@ func spawn_bullet(bullet_pos, shoot_dir):
 	am.play(sfx)
 	
 	var muzzle_flash = load("res://src/Effect/MuzzleFlashEffect.tscn").instance()
-	muzzle_flash.position = pc.get_node("GunSprite/MuzzlePos").position
-	pc.get_node("GunSprite").add_child(muzzle_flash)
+	muzzle_flash.position = pc.get_node("SpriteManager/GunSprite/MuzzlePos").position
+	pc.get_node("SpriteManager/GunSprite").add_child(muzzle_flash)
 	
 	
 	

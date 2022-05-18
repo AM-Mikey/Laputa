@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ConveyorMiddle3.png-7afb3baa30a6e8c7b84deef32bc12690.stex"
+path="res://.import/ConveyorMiddle3.png-b1a7991b21613e79f257c5065a790ecb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/Conveyor/ConveyorMiddle3.png"
-dest_files=[ "res://.import/ConveyorMiddle3.png-7afb3baa30a6e8c7b84deef32bc12690.stex" ]
+source_file="res://assets/Tile/Outdated/Conveyor/ConveyorMiddle3.png"
+dest_files=[ "res://.import/ConveyorMiddle3.png-b1a7991b21613e79f257c5065a790ecb.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

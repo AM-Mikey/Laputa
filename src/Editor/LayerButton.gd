@@ -7,7 +7,7 @@ var active = false
 
 
 func _ready():
-	add_to_group("EditorLayers")
+	add_to_group("LayerButtons")
 	$HBox/LayerButton.text = layer.name
 	$HBox/VisButton.pressed = !layer.visible
 	$PanelActive.visible = active
@@ -27,7 +27,7 @@ func _on_LayerButton_pressed():
 
 
 func activate():
-	for l in get_tree().get_nodes_in_group("EditorLayers"):
+	for l in get_tree().get_nodes_in_group("LayerButtons"):
 		l.get_node("PanelActive").visible = false
 		l.active = false
 	active = true

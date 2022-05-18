@@ -4,7 +4,7 @@ const DEBUG_INFO = preload("res://src/UI/Debug/DebugInfo.tscn")
 const EDITOR_CAMERA = preload("res://src/Editor/EditorCamera.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
-const LEVEL_EDITOR = preload("res://src/Editor/LevelEditor.tscn")
+const LEVEL_EDITOR = preload("res://src/Editor/Editor.tscn")
 const POPUP = preload("res://src/UI/PopupText.tscn")
 const SHOP_MENU = preload("res://src/UI/ShopMenu/ShopMenu.tscn")
 
@@ -17,9 +17,11 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("debug_editor"):
-		if el.has_node("LevelEditor"):
+		if el.has_node("Editor"):
+			el.get_node("Editor").hide_preview() #delete brush preview
+			world.current_level.get_node("EditorLevelLimiter").queue_free() #delete in-editor level limiter
 			el.get_node("EditorCamera").queue_free()
-			el.get_node("LevelEditor").queue_free()
+			el.get_node("Editor").queue_free()
 			ui.add_child(HUD.instance())
 			#world.get_node("Juniper").enable()
 			world.get_node("Juniper/PlayerCamera").current = true

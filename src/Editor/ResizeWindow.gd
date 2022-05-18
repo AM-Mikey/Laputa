@@ -1,78 +1,78 @@
 tool
-extends Control
+extends MarginContainer
 
 var state = "idle"
-
+var active_handle = null
 var drag_offset = Vector2.ZERO
 
-export var bar_thickness = 16 setget on_bar_height_changed
-export var bar_offset = 0 setget on_bar_offset_changed
-export var debug = false
+
+export var header_size = 0 setget on_header_size_changed
+export var bar_size = 12 setget on_bar_size_changed
 
 
 func _ready():
-	add_bar()
-	setup_bar()
-	add_reference()
-
-func add_bar():
-	var bar = Button.new()
-	bar.flat = true
-	bar.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
-	bar.rect_size.y = bar_thickness
-	bar.rect_position.y = bar_offset
-	bar.name = "Bar"
-	add_child(bar)
-	bar.connect("pressed", self, "on_bar_pressed")
-	
-
-#func _input(event):
-#	if event.is_action_pressed("editor_lmb"):
-#		var event_pos = event.global_position
-#		var bar_pos = $Bar.rect_position
-#		var bar_size = $Bar.rect_size
-#		var target_rect = Rect2(bar_pos.x, bar_pos.y, bar_size.x, bar_size.y)
-#
-#		if target_rect.has_point(event_pos):
-#			print("clicked")
-
-func on_bar_pressed():
-	print("ashfaishfd")
-	state = "drag"
-	drag_offset =  rect_global_position - get_global_mouse_position()
+	for h in $Handles/Top.get_children():
+			h.connect("button_down", self, "on_handle", [h])
+	for h in $Handles/Mid.get_children():
+			h.connect("button_down", self, "on_handle", [h])
+	for h in $Handles/Bottom.get_children():
+			h.connect("button_down", self, "on_handle", [h])
 
 func _input(event):
-	if state == "drag":
-		if event is InputEventMouseMotion:
-			rect_position = get_global_mouse_position() + drag_offset
-		if event.is_action_released("editor_lmb"):
-			state = "idle"
-
-func on_bar_height_changed(new):
-	bar_thickness = new
-	if Engine.editor_hint:
-		setup_bar()
-		add_reference()
-
-func on_bar_offset_changed(new):
-	bar_offset = new
-	if Engine.editor_hint:
-		setup_bar()
-		add_reference()
+	if event.is_action_released("editor_lmb"):
+		state = "idle"
+		return
 	
-func setup_bar():
-	$Bar.rect_size.x = rect_size.x
-	$Bar.rect_size.y = bar_thickness
-	$Bar.rect_position.y = bar_offset
-	
-func add_reference():
-	for c in get_children():
-		if c is ReferenceRect:
-			c.free()
-	var ref = ReferenceRect.new()
-	ref.mouse_filter = MOUSE_FILTER_IGNORE
-	ref.rect_size = $Bar.rect_size
-	ref.rect_position = $Bar.rect_position
-	if debug:
-		ref.editor_only = false
-	add_child(ref)
+	if event is InputEventMouseMotion:
+		if state == "drag":
+				rect_position = get_global_mouse_position() + drag_offset
+		
+		if state == "resize":
+			var x = get_global_mouse_position().x + drag_offset.x
+			var y = get_global_mouse_position().y + drag_offset.y
+			
+			match active_handle.name:
+				"TopLeft":
+					margin_top = y
+					margin_left = x
+				"TopRight":
+					margin_top = y
+					margin_right = x + 16
+				"BottomLeft":
+					margin_bottom = y + 16
+					margin_left = x
+				"BottomRight":
+					margin_bottom = y + 16
+					margin_right = x + 16
+				"Top":
+					margin_top = y
+				"Bottom":
+					margin_bottom = y + 16
+				"Left":
+					margin_left = x
+				"Right":
+					margin_right = x + 16
+
+###SIGNALS
+
+func on_header_size_changed(new):
+	header_size = new
+	$Handles/Header.rect_min_size.y = new
+	$Handles/Header/ReferenceRect.rect_size = $Handles/Header.rect_size
+
+func on_bar_size_changed(new):
+	bar_size = new
+	$Handles/Mid/Bar.rect_min_size.y = new
+	$Handles/Mid/Bar/ReferenceRect.rect_size = $Handles/Mid/Bar.rect_size
+
+
+
+func on_handle(handle):
+	if handle.name != "Bar":
+		print("handle grabbed")
+		state = "resize"
+		active_handle = handle
+		drag_offset =  handle.rect_global_position - get_global_mouse_position()
+	else:
+		state = "drag"
+		drag_offset =  rect_global_position - get_global_mouse_position()
