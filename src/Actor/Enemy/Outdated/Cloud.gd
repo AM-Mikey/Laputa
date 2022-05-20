@@ -10,7 +10,7 @@ func _ready():
 	damage_on_contact = 1
 	$AnimationPlayer.play("Idle")
 	
-	level = 4
+	reward = 4
 	
 	print($RayCast2D.get_collider())
 

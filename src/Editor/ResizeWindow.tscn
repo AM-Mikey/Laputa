@@ -101,13 +101,14 @@ margin_left = 4.0
 margin_right = 252.0
 margin_bottom = 12.0
 rect_min_size = Vector2( 0, 12 )
+mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
 [node name="ReferenceRect" type="ReferenceRect" parent="Handles/Mid/Bar"]
 visible = false
 margin_right = 248.0
-margin_bottom = 13.0
+margin_bottom = 12.0
 rect_min_size = Vector2( 0, 12 )
 mouse_filter = 2
 __meta__ = {

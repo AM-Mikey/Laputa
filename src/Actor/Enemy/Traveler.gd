@@ -26,11 +26,13 @@ func _ready():
 	look_dir = starting_direction
 	acceleration = 25
 	
-	level = 3
+	reward = 3
 	
 #	$RayCast2D.cast_to = Vector2(200, 200) * starting_direction #cast ray left or right 200 px
 
 func _physics_process(_delta):
+	if disabled or dead:
+		return
 	if climb_dir == "cw":
 		if is_on_floor() and not is_on_wall() and not is_on_ceiling():
 			move_dir = Vector2.LEFT

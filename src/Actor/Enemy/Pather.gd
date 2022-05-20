@@ -14,11 +14,9 @@ var t_body = null
 var t_dir = null
 
 
-onready var pc = get_tree().get_root().get_node("World/Juniper")
-
 func _ready():
 	hp = 4
-	level = 2
+	reward = 2
 
 	center_pos = global_position
 
@@ -55,21 +53,17 @@ func _physics_process(delta):
 	if Engine.editor_hint:
 		pass
 	else:
-		if not dead and not disabled:
-	#		if pc.is_on_floor():
-	#			damage_on_contact = 999
-	#		else:
-	#			damage_on_contact = 1
+		if disabled or dead:
+			return
 			
-			time += delta * frequency
-			position.y = center_pos.y + cos(time) * amplitude_v
-			
-			if t_body != null:
-				crush_check()
-			
-			animate()
+		time += delta * frequency
+		position.y = center_pos.y + cos(time) * amplitude_v
 		
+		if t_body != null:
+			crush_check()
 		
+		animate()
+
 
 
 func on_crush_body_entered(body, dir):

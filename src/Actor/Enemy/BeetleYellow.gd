@@ -23,14 +23,14 @@ func _ready():
 	damage_on_contact = 2
 	get_direction_vector_from_starting_dir()
 	detection_raycast.cast_to = direction_vector * sight_distance
-	init_states()	
-	pass
+	init_states()
 	
 func _physics_process(delta):
+	if disabled or dead:
+		return
 	if is_debug:
 		state_label.text = current_state
 	current_state.physics_process()
-	pass
 	
 	
 func init_states():

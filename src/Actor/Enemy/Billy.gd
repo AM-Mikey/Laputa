@@ -31,7 +31,9 @@ func _ready():
 	
 
 func _physics_process(_delta):
-	
+	if disabled or dead:
+		return
+		
 	if locked_on:
 		distance_lock()
 		if move_dir.x == 0: #in position to hit

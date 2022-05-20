@@ -23,13 +23,15 @@ func _ready():
 	speed = Vector2(80, 100)
 	gravity = 250
 	
-	level = 4
+	reward = 4
 	
 	$FireCooldown.start(cooldown_time)
 	
 	#wander()
 
 func _physics_process(_delta):
+	if disabled or dead:
+		return
 	if is_on_wall():
 		if not locked_on:
 				move_dir.x *= -1

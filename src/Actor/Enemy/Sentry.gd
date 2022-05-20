@@ -27,25 +27,23 @@ func _ready():
 	speed = Vector2(50, 200)
 	gravity = 250
 	
-	level = 2
+	reward = 2
 	
 	$FireCooldown.start(cooldown_time)
 	
 
 func _physics_process(delta):
-	
+	if disabled or dead:
+		return
 	if locked_on:
 		distance_lock()
 		if move_dir.x == 0: #in position to hit
 			fire()
 	else:
 		move_dir.x = 0
-	
-
 
 #	animate()
 
-	
 
 
 func _on_PlayerDetector_body_entered(body):

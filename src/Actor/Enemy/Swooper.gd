@@ -14,7 +14,6 @@ onready var levels = get_tree().get_nodes_in_group("Levels")
 
 func _ready():
 	disabled = true
-	#visible = false
 	protected = true
 	
 	if not setup_complete:
@@ -25,7 +24,7 @@ func _ready():
 	speed = Vector2(200, 200)
 	acceleration = 25
 	
-	level = 3
+	reward = 3
 
 	
 	if dir == Vector2.LEFT:
@@ -36,11 +35,11 @@ func _ready():
 
 
 func _physics_process(_delta):
-	if setup_complete and not disabled:
-		get_parent().offset += speed.x/100
-		if get_parent().unit_offset == 1: #finished path
-			protected = false
-	
+	if disabled or dead or not setup_complete:
+		return
+	get_parent().offset += speed.x/100
+	if get_parent().unit_offset == 1: #finished path
+		protected = false
 
 func on_cue():
 	visible = true

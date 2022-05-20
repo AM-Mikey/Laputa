@@ -1,8 +1,9 @@
 extends Control
 
+const EDITOR_CAMERA = preload("res://src/Editor/EditorCamera.tscn")
+const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const LAYER_BUTTON = preload("res://src/Editor/LayerButton.tscn")
 const LIMITER = preload("res://src/Editor/EditorLevelLimiter.tscn")
-
 
 
 export(NodePath) var tiles_tab
@@ -15,7 +16,8 @@ var layers = {}
 var auto_layer = true
 var multi_erase = false
 
-var brush = "paint"
+var active_tool = "tile"
+var subtool = "paint"
 var mouse_start_pos
 var lmb_held = false
 var rmb_held = false
@@ -28,18 +30,39 @@ var active_operation = [] #[[subop][subop][subop]]
 
 
 onready var w = get_tree().get_root().get_node("World")
+onready var ui = w.get_node("UILayer")
+onready var el = w.get_node("EditorLayer")
 onready var tile_collection = w.current_level.get_node("Tiles")
+onready var actor_collection = w.current_level.get_node("Actors")
 var tilemap
 var tileset
 
 func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 	_on_viewport_size_changed()
+	
+	el.add_child(EDITOR_CAMERA.instance())
+	ui.get_node("HUD").queue_free()
+	#w.get_node("Juniper").disable()
+	for e in get_tree().get_nodes_in_group("Enemies"):
+		e.disable()
+	
+	
 	load_tileset(tile_collection.get_child(0).tile_set.resource_path)
 	setup_level_limiter()
 	setup_layers()
 	#$Main.move_child($Main/Tab, 0) TODO: was supposed to make tabcontainer go behind resize controls, didnt work
 
+func exit():
+	hide_preview() #delete tile brush preview
+	w.current_level.get_node("EditorLevelLimiter").queue_free()
+	el.get_node("EditorCamera").queue_free()
+	ui.add_child(HUD.instance())
+	#world.get_node("Juniper").enable()
+	w.get_node("Juniper/PlayerCamera").current = true
+	for e in get_tree().get_nodes_in_group("Enemies"):
+		e.enable()
+	queue_free()
 
 func setup_level_limiter():
 	#w.get_node("EditorLayer").add_child(LIMITER.instance())
@@ -125,115 +148,107 @@ func get_tile_texture(tile):
 	return tile_texture
 
 
-
+### INPUT ###
 
 func _unhandled_input(event):
-	var mouse_pos = w.get_global_mouse_position()
-	
-	if event.is_action_pressed("editor_lmb") and not active_tiles.empty():
-		lmb_held = true
-		future_operations.clear()
-		mouse_start_pos = mouse_pos
-		
-		if shift_held:
-			brush = "line"
-		elif ctrl_held:
-			brush = "box"
-		else:
-			brush = "paint"
-			set_2d_array(get_centerbox(mouse_pos), active_tiles)
-
-
-	if event.is_action_released("editor_lmb"):
-		lmb_held = false
-		if brush == "line":
-			set_line(get_brush_origin_line(mouse_start_pos, mouse_pos), active_tiles)
-		elif brush == "box":
-			set_2d_array(get_box(mouse_start_pos, mouse_pos), active_tiles)
-		
-		if not active_operation.empty():
-			past_operations.append(["set_tiles", active_operation.duplicate()])
-			#print("active op: ", active_operation)
-			active_operation.clear()
-
-
-
-	if event.is_action_pressed("editor_rmb"):
-		rmb_held = true
-		future_operations.clear()
-		mouse_start_pos = mouse_pos
-		if shift_held:
-			brush = "line"
-		elif ctrl_held:
-			brush = "box"
-		else:
-			brush = "paint"
-#			if multi_erase: #TODO: does not work
-#				set_tiles_on_all_layers([get_cell(mouse_pos)], -1) 
-#			else:
-			set_2d_array(get_centerbox(mouse_pos), get_brush_as_eraser())
-
-
-	if event.is_action_released("editor_rmb"):
-		rmb_held = false
-		if brush == "line":
-			set_2d_array(get_brush_line(mouse_start_pos, mouse_pos), get_brush_as_eraser())
-		elif brush == "box":
-			set_2d_array(get_box(mouse_start_pos, mouse_pos), get_brush_as_eraser())
-		
-		if not active_operation.empty():
-			var operation_name = "set_tiles_on_all_layers" if multi_erase else "set_tiles"
-			past_operations.append([operation_name, active_operation.duplicate()])
-			#print("active op: ", active_operation)
-			active_operation.clear()
-
-
-
-
-	if event is InputEventMouseMotion:
-		if lmb_held and brush == "paint":
-			#set_tiles([get_cell(mouse_pos)], active_tiles)
-			set_2d_array(get_centerbox(mouse_pos), active_tiles)
-		if rmb_held and brush == "paint":
-#			if multi_erase: #TODO: not working
-#				set_cells_on_all_layers([get_cell(mouse_pos)], -1)
-#			else:
-#				#set_tiles([get_cell(mouse_pos)], -1)
-				set_2d_array(get_centerbox(mouse_pos), get_brush_as_eraser())
-
-		hide_preview()
-		if brush == "paint":
-			preview_2d_array(get_centerbox(mouse_pos))
-			#preview_tiles([get_cell(mouse_pos)])
-
-		elif lmb_held or rmb_held:
-			if brush == "line":
-				preview_line(get_brush_origin_line(mouse_start_pos, mouse_pos))
-			if brush == "box":
-				preview_2d_array(get_box(mouse_start_pos, mouse_pos))
-
-
-
-
-	if event.is_action_pressed("editor_ctrl"):
-		ctrl_held = true
-	if event.is_action_released("editor_ctrl"):
-		ctrl_held = false
-	if event.is_action_pressed("editor_shift"):
-		shift_held = true
-	if event.is_action_released("editor_shift"):
-		shift_held = false
+	if event.is_action_pressed("editor_ctrl"): ctrl_held = true
+	if event.is_action_released("editor_ctrl"): ctrl_held = false
+	if event.is_action_pressed("editor_shift"): shift_held = true
+	if event.is_action_released("editor_shift"): shift_held = false
 
 	if event is InputEventKey and event.is_pressed() and event.scancode == KEY_Z and not event.is_echo():
 		if ctrl_held and not shift_held:
 			undo()
 		if ctrl_held and shift_held:
 			redo()
+	
+	
+	if event.is_action_pressed("editor_lmb"):
+		lmb_held = true
+		rmb_held = false #this might fuck things up for other tools
+		future_operations.clear()
+
+	if event.is_action_pressed("editor_rmb"):
+		rmb_held = true
+		lmb_held = false #this might fuck things up for other tools
+		future_operations.clear()
+
+	#main part
+	match active_tool:
+		"tile": do_tile_input(event)
+		"enemy": do_enemy_input(event)
+
+	#after, just so we can check held during main part
+	if event.is_action_released("editor_lmb"):
+		lmb_held = false
+	if event.is_action_released("editor_rmb"):
+		rmb_held = false
+
+func do_enemy_input(event):
+	var mouse_pos = w.get_global_mouse_position()
+	var brush
+	if lmb_held: brush = $Main/Tab/Enemies.active_enemy
+	if rmb_held: brush = null
+	
+	#moving
+	if event is InputEventMouseMotion:
+		hide_preview()
+		preview_enemy(get_actor_pos(mouse_pos), $Main/Tab/Enemies.active_enemy)
+
+	#pressing
+	if event.is_action_pressed("editor_lmb") and not brush.empty():
+		set_enemy(get_actor_pos(mouse_pos), brush)
+		if not active_operation.empty():
+			past_operations.append(["set_enemy", active_operation.duplicate()])
+			#print("active op: ", active_operation)
+			active_operation.clear()
 
 
+
+func do_tile_input(event):
+	var mouse_pos = w.get_global_mouse_position()
+	var brush
+	if lmb_held: brush = active_tiles
+	if rmb_held: brush = get_brush_as_eraser()
+	
+	#pressing
+	if event.is_action_pressed("editor_rmb") or event.is_action_pressed("editor_lmb") and not active_tiles.empty():
+		mouse_start_pos = mouse_pos
+		if shift_held: subtool = "line"
+		elif ctrl_held: subtool = "box"
+		else: 
+			subtool = "paint"
+			set_2d_array(get_centerbox(mouse_pos), brush) #TODO: on all layers
+	
+	#moving
+	if event is InputEventMouseMotion:
+		hide_preview()
+		match subtool:
+			"line": preview_line(get_brush_origin_line(mouse_start_pos, mouse_pos))
+			"box": preview_2d_array(get_box(mouse_start_pos, mouse_pos))
+			"paint":
+				if lmb_held or rmb_held:
+					set_2d_array(get_centerbox(mouse_pos), brush) #TODO: on all layers
+				else:
+					preview_2d_array(get_centerbox(mouse_pos))
+	
+	#releasing
+	if event.is_action_released("editor_lmb") and lmb_held or event.is_action_released("editor_rmb") and rmb_held:
+		match subtool:
+			"line": set_line(get_brush_origin_line(mouse_start_pos, mouse_pos), brush) #TODO: on all layers
+			"box": set_2d_array(get_box(mouse_start_pos, mouse_pos), brush)
+		subtool = "paint"
+		if not active_operation.empty():
+			var operation_name = "set_tiles_on_all_layers" if multi_erase and event.is_action_released("editor_rmb") else "set_tiles" #depreciated name "set_tiles_on_all_layers"
+			past_operations.append([operation_name, active_operation.duplicate()])
+			#print("active op: ", active_operation)
+			active_operation.clear()
 
 
 ### OPERATIONS ###
+
+
+
 
 func undo():
 	var last = past_operations.pop_back()
@@ -248,6 +263,15 @@ func undo():
 				subops.invert()
 				for t in subops:
 					set_cells([t[0]], t[2], false) #pos_array, old_tile, traced
+			"set_enemy":
+				var subops = last[1] #set_enemy only has one subop right now
+				subops.invert()
+				for t in subops: #t = [position, enemy_path, old_enemy_paths]
+					if t[2].empty(): #no old enemy
+						set_enemy(t[0], null, false) #position, enemy_path, traced
+					else:
+						for old in t[2]: #only god knows what order these will be respawned in
+							set_enemy(t[0], old, false)
 #	else:
 #		print("nothing left to undo!")
 
@@ -265,6 +289,14 @@ func redo():
 				subops.invert()
 				for t in subops:
 					set_cells([t[0]], t[1], false) #pos_array, new_tile, traced
+			"set_enemy":
+				var subops = next[1]
+				subops.invert()
+				for t in subops: #t = [position, enemy_path, old_enemy_paths]
+					if t[1]: #not null
+						set_enemy(t[0], t[1], false) #position, enemy_path, traced
+					else:
+						set_enemy(t[0], null, false)
 #	else:
 #		print("nothing left to redo!")
 
@@ -282,16 +314,16 @@ func set_cells(cells: Array, tile, traced = true): #TODO, new draw methods use s
 					return
 			active_operation.append([cell, tile, old_tile])
 
-func set_2d_array(cells: Array, tiles: Array, traced = true):
-	if tiles.empty():
+func set_2d_array(cells: Array, brush: Array, traced = true):
+	if brush.empty():
 		return
 	var r_id = 0
-	var r_max = tiles.size()
+	var r_max = brush.size()
 	for row in cells:
 		var c_id = 0
-		var c_max = tiles[c_id].size()
+		var c_max = brush[c_id].size()
 		for cell in row: #subops
-			var tile = tiles[r_id % r_max][c_id % c_max] # % so it repeats if cells > tiles
+			var tile = brush[r_id % r_max][c_id % c_max] # % so it repeats if cells > tiles
 			if tile != -2: #null
 				var old_tile = tilemap.get_cellv(cell)
 				tilemap.set_cellv(cell, tile)
@@ -305,49 +337,64 @@ func set_2d_array(cells: Array, tiles: Array, traced = true):
 			c_id += 1
 		r_id += 1
 
-func set_line(cells: Array, tiles: Array, traced = true):
-	if tiles.empty():
+func set_line(canvas: Array, brush: Array, traced = true):
+	if brush.empty():
 		return
 	var r_id = 0
-	var r_max = tiles.size()
-	for row in cells:
+	var r_max = brush.size()
+	for row in canvas:
 		var c_id = 0
-		var c_max = tiles[c_id].size()
+		var c_max = brush[c_id].size()
 		for cell in row: #subops
-			var br_id = 0
-			for b_row in active_tiles:
-				var bc_id = 0
-				for b_cell in b_row:
-					var tile = b_cell
+			var brush_r_id = 0
+			for brush_row in brush: #in Active Tiles
+				var brush_c_id = 0
+				for brush_cell in brush_row:
+					var tile = brush_cell
 					if tile != -2: #null
-						var offset = Vector2(bc_id, br_id)
+						var offset = Vector2(brush_c_id, brush_r_id)
 						var old_tile = tilemap.get_cellv(cell + offset)
 						tilemap.set_cellv(cell + offset, tile)
 						
 						if traced:
-							for s in active_operation:
-								if s[0] == cell and s[1] == tile: #already setting this cell in the current operation, this prevents reactivating on mouse movement
-									return
 							active_operation.append([cell + offset, tile, old_tile])
 					
-					bc_id += 1
-				br_id +=1
+					brush_c_id += 1
+				brush_r_id +=1
 			c_id += 1
 		r_id += 1
 
+func set_enemy(position, enemy_path, traced = true):
+	var old_enemies = []
+	var old_enemy_paths = []
+	for e in get_tree().get_nodes_in_group("Enemies"):
+		if abs(position.x - e.global_position.x) < 4 and abs(position.y - e.global_position.y) < 4 and not e.is_in_group("EnemyPreviews"): #less than 4px away
+			old_enemies.append(e)
+	for e in old_enemies:
+		old_enemy_paths.append(e.filename)
+	
+	if enemy_path:
+		var enemy = load(enemy_path).instance()
+		enemy.disable()
+		enemy.global_position = position
+		actor_collection.add_child(enemy)
+	if traced:
+		active_operation.append([position, enemy_path, old_enemy_paths])
+	for e in old_enemies:
+		e.queue_free()
 
 
-func set_cells_on_all_layers(pos_array: Array, tile, traced = true): #TODO: finish this as it doesnt work right now
-	for pos in pos_array: #subops
-		for l in layers:
-			var layer = layers[l]
-			var old_tile = layer.get_cellv(pos)
-			layer.set_cellv(pos, tile)
-			if traced:
-				for s in active_operation:
-					if s[1] == pos: #positions match
-						return
-				active_operation.append([layer, pos, tile, old_tile])
+#func set_cells_on_all_layers(pos_array: Array, tile, traced = true): #TODO: finish this as it doesnt work right now
+#	for pos in pos_array: #subops
+#		for l in layers:
+#			var layer = layers[l]
+#			var old_tile = layer.get_cellv(pos)
+#			layer.set_cellv(pos, tile)
+#			if traced:
+#				for s in active_operation:
+#					if s[1] == pos: #positions match
+#						return
+#				active_operation.append([layer, pos, tile, old_tile])
 
 ### PREVIEW ###
 
@@ -398,8 +445,18 @@ func hide_preview():
 	for c in tile_collection.get_children():
 		if c is Sprite:
 			c.queue_free()
+	for e in get_tree().get_nodes_in_group("EnemyPreviews"):
+		e.queue_free()
+		
 
-
+func preview_enemy(position, enemy_path):
+	var enemy = load(enemy_path).instance()
+	enemy.disable()
+	enemy.add_to_group("EnemyPreviews")
+	enemy.global_position = position
+	actor_collection.add_child(enemy)
+	
+	
 
 ### GETTERS ###
 func get_cell(mouse_pos) -> Vector2:
@@ -407,8 +464,11 @@ func get_cell(mouse_pos) -> Vector2:
 	var map_pos = tilemap.world_to_map(local_pos)
 	return map_pos
 
+func get_actor_pos(mouse_pos) -> Vector2:
+	var step = 8
+	return Vector2(stepify(mouse_pos.x, step), stepify(mouse_pos.y, step))
 
-func get_centerbox(mouse_pos) -> Array: #2D Array #actuve tiles
+func get_centerbox(mouse_pos) -> Array: #2D Array #active tiles
 	var cells = []
 	var bx = get_brush_size("x")
 	var by = get_brush_size("y")
@@ -423,13 +483,11 @@ func get_centerbox(mouse_pos) -> Array: #2D Array #actuve tiles
 			row_cells.append(center_cell + offset) #position of cell in map space
 		if not row_cells.empty():
 			cells.append(row_cells)
-	
 	#print(cells)
 	return cells
 
 
-
-func get_box(start_pos, end_pos) -> Array: #2d
+func get_box(start_pos, end_pos) -> Array: #2d #TODO: massive slowdown when drawing bigger boxes. memory leak.
 	var cells = []
 	var start = get_cell(start_pos)
 	var end = get_cell(end_pos)
@@ -443,10 +501,12 @@ func get_box(start_pos, end_pos) -> Array: #2d
 		for x in range(x_min, x_max + 1):
 			row.append(Vector2(x, y))
 		cells.append(row)
+	#print(cells)
 	return cells
 
-#func get_line(start_pos, end_pos) -> Array: #2d
-#	var cells = [] #1d
+
+#func get_brush_line(start_pos, end_pos) -> Array: #2d #Depreciated, only used for brushes of size = 1, like erasers
+#	var cells = []
 #	var start = get_cell(start_pos)
 #	var end = get_cell(end_pos)
 #	var x_min = min(start.x, end.x)
@@ -457,53 +517,29 @@ func get_box(start_pos, end_pos) -> Array: #2d
 #	var dy = end.y - start.y
 #	if dx == 0:
 #		dx = .0001
+#	var bx = get_brush_size("x")
+#	var by = get_brush_size("y")
 #
-#	var fake_cells = []
-#	if abs(dx) >= abs(dy):
+#	if abs(dx) >= (float(bx)/float(by)) * abs(dy): #TODO: this division seems to slow down the game with very tall brushes
 #		for x in range(x_min, x_max+1):
-#			var y = round(start.y + dy * (x - start.x) / dx)
-#			cells.append(Vector2(x,y))
+#			if x % bx == 0: #start of a brush 
+#				var y = round(start.y + dy * (x - start.x) / dx)
+#
+#				for row in by:
+#					for cell in bx:
+#						cells.append(Vector2(x + cell, y + row))
+#
 #	else:
 #		for y in range(y_min, y_max+1):
-#			var x = round(start.x + dx * (y - start.y) / dy)
-#			cells.append(Vector2(x,y))
+#			if y % by == 0: #start of a brush 
+#				var x = round(start.x + dx * (y - start.y) / dy)
+#
+#				for row in by:
+#					for cell in bx:
+#						cells.append(Vector2(x + cell, y + row))
+#
+#	#print("cells: ",get_2d_array_from_Vector2_array(cells))
 #	return get_2d_array_from_Vector2_array(cells)
-
-func get_brush_line(start_pos, end_pos) -> Array: #2d
-	var cells = []
-	var start = get_cell(start_pos)
-	var end = get_cell(end_pos)
-	var x_min = min(start.x, end.x)
-	var x_max = max(start.x, end.x)
-	var y_min = min(start.y, end.y)
-	var y_max = max(start.y, end.y)
-	var dx = end.x - start.x
-	var dy = end.y - start.y
-	if dx == 0:
-		dx = .0001
-	var bx = get_brush_size("x")
-	var by = get_brush_size("y")
-
-	if abs(dx) >= (float(bx)/float(by)) * abs(dy): #TODO: this division seems to slow down the game with very tall brushes
-		for x in range(x_min, x_max+1):
-			if x % bx == 0: #start of a brush 
-				var y = round(start.y + dy * (x - start.x) / dx)
-
-				for row in by:
-					for cell in bx:
-						cells.append(Vector2(x + cell, y + row))
-
-	else:
-		for y in range(y_min, y_max+1):
-			if y % by == 0: #start of a brush 
-				var x = round(start.x + dx * (y - start.y) / dy)
-
-				for row in by:
-					for cell in bx:
-						cells.append(Vector2(x + cell, y + row))
-
-	#print("cells: ",get_2d_array_from_Vector2_array(cells))
-	return get_2d_array_from_Vector2_array(cells)
 
 func get_brush_origin_line(start_pos, end_pos) -> Array: #2d, only origin points of brushes
 	var cells = []
@@ -536,15 +572,6 @@ func get_brush_origin_line(start_pos, end_pos) -> Array: #2d, only origin points
 	return get_2d_array_from_Vector2_array(cells)
 
 
-func get_brush_as_eraser() -> Array:
-	var eraser = []
-	for row in active_tiles:
-		var eraser_row = []
-		for tile in row:
-			eraser_row.append(-2) if tile == -2 else eraser_row.append(-1)
-		eraser.append(eraser_row)
-	print(eraser)
-	return eraser
 
 ### HELPER GETTERS ###
 
@@ -560,6 +587,17 @@ func get_brush_size(axis = "both"):
 		return int(brush_size.y)
 	else:
 		return brush_size
+
+func get_brush_as_eraser(var null_erase = true) -> Array: #erase with null tiles by default
+	var eraser = []
+	for row in active_tiles:
+		var eraser_row = []
+		for tile in row:
+			if null_erase: eraser_row.append(-1)
+			else: eraser_row.append(-2) if tile == -2 else eraser_row.append(-1) #null if null, else eraser
+		eraser.append(eraser_row)
+	print(eraser)
+	return eraser
 
 func get_2d_array_from_Vector2_array(array) -> Array:
 	var new_array = []
@@ -642,3 +680,12 @@ func _on_TileSet_tile_set_loaded(path):
 
 func _on_TileSet_image_loaded(path):
 	create_tileset_from_texture(load(path))
+
+
+func on_tab_changed(tab):
+	match $Main/Tab.get_child(tab).name:
+		"Tiles": 
+			active_tool = "tile"
+			subtool = "paint"
+		"Enemies": 
+			active_tool = "enemy"

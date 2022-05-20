@@ -22,13 +22,15 @@ func _ready():
 	speed = Vector2(100, 200)
 	gravity = 250
 	
-	level = 3
+	reward = 3
 	
 	$FireCooldown.start(cooldown_time)
 	
 	hide()
 
 func _physics_process(_delta):
+	if disabled or dead:
+		return
 	if not is_on_floor():
 		move_dir.y = 0 #don't allow them to jump if they are midair
 	

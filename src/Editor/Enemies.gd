@@ -6,6 +6,7 @@ var enemies = {}
 var active_enemy
 
 
+
 func _ready():
 	setup_enemies()
 
@@ -50,3 +51,6 @@ func change_enemy(enemy_path):
 	for e in $Scroll/Buttons.get_children():
 		if e.enemy_path == active_enemy: #this is weird, we should have already done this. for extra security in case it was activated another way?
 			e.activate()
+
+
+

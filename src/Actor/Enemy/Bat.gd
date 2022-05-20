@@ -12,10 +12,10 @@ func _ready():
 	move_dir = starting_direction
 	animate(move_dir)
 	
-	level = 2
+	reward = 2
 
 func _physics_process(_delta):
-	if disabled:
+	if disabled or dead:
 		return
 	get_parent().offset += speed.x/100
 

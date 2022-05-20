@@ -1,7 +1,6 @@
 extends Node
 
 const DEBUG_INFO = preload("res://src/UI/Debug/DebugInfo.tscn")
-const EDITOR_CAMERA = preload("res://src/Editor/EditorCamera.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
 const LEVEL_EDITOR = preload("res://src/Editor/Editor.tscn")
@@ -12,24 +11,20 @@ onready var world = get_tree().get_root().get_node("World")
 onready var ui = world.get_node("UILayer")
 onready var el = world.get_node("EditorLayer")
 
+var editor_tab = 0 #to save when we re-enter the editor
+
 func _ready():
 	pause_mode = PAUSE_MODE_PROCESS
 
 func _input(event):
 	if event.is_action_pressed("debug_editor"):
 		if el.has_node("Editor"):
-			el.get_node("Editor").hide_preview() #delete brush preview
-			world.current_level.get_node("EditorLevelLimiter").queue_free() #delete in-editor level limiter
-			el.get_node("EditorCamera").queue_free()
-			el.get_node("Editor").queue_free()
-			ui.add_child(HUD.instance())
-			#world.get_node("Juniper").enable()
-			world.get_node("Juniper/PlayerCamera").current = true
+			editor_tab = el.get_node("Editor/Main/Tab").current_tab
+			el.get_node("Editor").exit()
 		else:
 			el.add_child(LEVEL_EDITOR.instance())
-			el.add_child(EDITOR_CAMERA.instance())
-			ui.get_node("HUD").queue_free()
-			#world.get_node("Juniper").disable()
+			el.get_node("Editor/Main/Tab").current_tab = editor_tab
+			el.get_node("Editor").on_tab_changed(editor_tab)
 	
 	if event.is_action_pressed("debug_print"):
 		debug_print()
@@ -77,7 +72,8 @@ func reload_level():
 		ui.get_node("PauseMenu").unpause()
 	
 	world.get_node("Juniper").free() #we free and respawn them so we have a clean slate when we load in
-	ui.get_node("HUD").free()
+	if ui.has_node("HUD"):
+		ui.get_node("HUD").free()
 	world.on_level_change(load(world.current_level.filename), 0)
 
 

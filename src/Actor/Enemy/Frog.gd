@@ -24,7 +24,7 @@ func _on_difficulty_changed(new):
 		
 		Difficulty.hard:
 			hp = 4
-			level = 3
+			reward = 3
 			damage_on_contact = 2
 			$Sprite.modulate = Color(1,1,1)
 			$Sprite.texture = tx_toad
@@ -32,7 +32,7 @@ func _on_difficulty_changed(new):
 		
 		Difficulty.normal:
 			hp = 4
-			level = 2
+			reward = 2
 			damage_on_contact = 2
 			$Sprite.modulate = Color(1,1,1)
 			$Sprite.texture = tx_frog
@@ -40,7 +40,7 @@ func _on_difficulty_changed(new):
 		
 		Difficulty.easy:
 			hp = 2
-			level = 1
+			reward = 1
 			damage_on_contact = 1
 			$Sprite.modulate = Color(0, 0.976471, 1)
 			$Sprite.texture = tx_frog
@@ -48,7 +48,8 @@ func _on_difficulty_changed(new):
 
 
 func _physics_process(_delta):
-	if not dead and not disabled and not Engine.editor_hint:
+	if disabled or dead or Engine.editor_hint:
+		return
 		if not is_on_floor():
 			move_dir.y = 0 #don't allow them to jump if they are midair
 		

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/Background/Outdated/bkMaze.bmp" type="Texture" id=1]
 [ext_resource path="res://src/Tile/TriggerTile/SpikesTrigger.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Actor/Enemy/BeetleGreen.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Actor/Enemy/Outdated/BeetleGreen.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Tile/TriggerTile/Outdated/SemiSolidTrigger.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Tile/PropTile/BreakableProp.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Actor/Enemy/TogglerVertical.tscn" type="PackedScene" id=6]

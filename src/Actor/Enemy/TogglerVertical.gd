@@ -15,19 +15,20 @@ func _ready():
 	look_dir = starting_direction
 	acceleration = 25
 
-	level = 2
+	reward = 2
 
 	
 func _physics_process(_delta):
-	if not dead:
-		velocity = calculate_move_velocity(velocity, move_dir, speed)
-		velocity = move_and_slide(velocity, FLOOR_NORMAL)
-		
-		animate()
-		
-		if is_on_floor() or is_on_ceiling():
-			if waiting == false:
-				wait()
+	if disabled or dead:
+		return
+	velocity = calculate_move_velocity(velocity, move_dir, speed)
+	velocity = move_and_slide(velocity, FLOOR_NORMAL)
+	
+	animate()
+	
+	if is_on_floor() or is_on_ceiling():
+		if waiting == false:
+			wait()
 
 
 func wait():
@@ -55,6 +56,9 @@ func calculate_move_velocity(
 	out.x = speed.x * move_direction.x
 	out.y = speed.y * move_direction.y
 	return out
+	
+	
+	
 	
 func animate():
 	if not is_on_floor() and not is_on_ceiling():

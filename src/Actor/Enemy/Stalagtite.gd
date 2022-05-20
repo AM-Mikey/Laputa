@@ -2,74 +2,88 @@ extends Enemy
 
 var target: Node
 
-export var direction: Vector2 = Vector2.ZERO
-var move_dir: Vector2 = Vector2.UP #start moving upwards constantly
+var move_dir = Vector2.ZERO
+export var difficulty = 2
 
-var dropped = false
-var panic_run = false
-var touchdown = false
+var base_gravity
 
-export var base_damage = 2
-export var falling_damage = 4
+var base_damage = 2
+var drop_damage = 4
 
 func _ready():
+	state = "hang"
 	hp = 2
-	level = 2
+	reward = 2
 	damage_on_contact = base_damage
-	speed = Vector2(100, 100)
+	speed = Vector2.ZERO
+	base_gravity = gravity
+	gravity = 0
 
 
 func _physics_process(_delta):
-	if not dead:
-		velocity = calculate_movevelocity(velocity, move_dir, speed)
-		velocity = move_and_slide(velocity, FLOOR_NORMAL)
-		
-		if not dropped:
-			if $RayCast2D.get_collider() != null:
-				if $RayCast2D.get_collider().get_collision_layer_bit(0):
-					target = $RayCast2D.get_collider()
-					drop()
-		
-		
-		
-		if dropped:
-			if is_on_floor() and touchdown == false: #check to see if they've landed before
-				touchdown = true
-				$RayCast2D.queue_free()
-				yield(get_tree().create_timer(0.01), "timeout") #delay to change damage back to base
-				damage_on_contact = base_damage
-				
-				
-				
-				if direction != Vector2.LEFT and direction != Vector2.RIGHT:
-					var rng = RandomNumberGenerator.new()
-					rng.randomize()
-					direction = Vector2(sign(rng.randf_range(-1.0, 1.0)), 0)
-					
-				match direction:
-					Vector2.LEFT:
-						$AnimationPlayer.play("SquirmLeft")
-					Vector2.RIGHT:
-						$AnimationPlayer.play("SquirmRight")
-
-				yield($AnimationPlayer, "animation_finished")
-				panic_run = true
-				move_dir = direction
-
-			if is_on_wall():
-				move_dir.x *= -1
-		
-		animate()
+	if disabled or dead:
+		return
+	velocity = calculate_move_velocity(velocity, move_dir, speed)
+	velocity = move_and_slide(velocity, FLOOR_NORMAL)
 
 
-func drop():
-	dropped = true
-	move_dir.y = 0 #fall
-	damage_on_contact = falling_damage
+func enter_hang():
+	$AnimationPlayer.play("HangIdle")
+
+func do_hang():
+	if $RayCast2D.get_collider():
+		if $RayCast2D.get_collider().get_collision_layer_bit(0):
+			target = $RayCast2D.get_collider()
+			change_state("drop")
+
+
+func enter_drop():
+	gravity = base_gravity
+	damage_on_contact = drop_damage
+
+func do_drop():
+	if is_on_floor():
+		change_state("squirm")
+
+
+func enter_squirm():
+	$RayCast2D.queue_free()
+	#yield(get_tree().create_timer(0.01), "timeout") #delay to change damage back to base
+	damage_on_contact = base_damage
+	
+	match difficulty:
+		1:
+			rng.randomize()
+			move_dir = Vector2(sign(rng.randf_range(-1.0, 1.0)), 0) #random
+		2:
+			move_dir = Vector2(sign(target.position.x - position.x), 0) #direction of player
+	match move_dir:
+		Vector2.LEFT: $AnimationPlayer.play("SquirmLeft")
+		Vector2.RIGHT: $AnimationPlayer.play("SquirmRight")
+	yield($AnimationPlayer, "animation_finished")
+	change_state("run")
+
+
+func enter_run():
+	speed = Vector2(100, 100)
+
+func do_run():
+	match move_dir:
+		Vector2.LEFT:
+			$AnimationPlayer.play("RunLeft")
+		Vector2.RIGHT:
+			$AnimationPlayer.play("RunRight")
+	if is_on_wall():
+			move_dir.x *= -1
 
 
 
-func calculate_movevelocity(velocity: Vector2, move_dir, speed) -> Vector2:
+
+
+
+
+
+func calculate_move_velocity(velocity: Vector2, move_dir, speed) -> Vector2:
 	var out: = velocity
 	
 	out.x = speed.x * move_dir.x
@@ -78,15 +92,3 @@ func calculate_movevelocity(velocity: Vector2, move_dir, speed) -> Vector2:
 		out.y = speed.y * move_dir.y
 
 	return out
-
-
-
-func animate():
-	if move_dir == Vector2.UP:
-		$AnimationPlayer.play("HangIdle")
-			
-	if panic_run == true:
-		if move_dir == Vector2.LEFT:
-			$AnimationPlayer.play("RunLeft")
-		elif move_dir == Vector2.RIGHT:
-			$AnimationPlayer.play("RunRight")

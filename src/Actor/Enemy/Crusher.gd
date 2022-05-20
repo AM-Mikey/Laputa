@@ -16,7 +16,7 @@ var t_dir = null
 
 func _ready():
 	hp = 4
-	level = 2
+	reward = 2
 
 	center_pos = global_position
 
@@ -53,19 +53,16 @@ func _physics_process(delta):
 	if Engine.editor_hint:
 		pass
 	else:
-		if not dead and not disabled:
-
-			time += delta * frequency
-			position.x = center_pos.x + sin(time) * amplitude_h
-			position.y = center_pos.y + cos(time) * amplitude_v
-			
-			
-			if t_body != null and crushing:
-				crush_check()
-			
-			animate()
+		if disabled or dead:
+			return
+		time += delta * frequency
+		position.x = center_pos.x + sin(time) * amplitude_h
+		position.y = center_pos.y + cos(time) * amplitude_v
 		
-		
+		if t_body != null and crushing:
+			crush_check()
+			
+		animate()
 
 
 func on_crush_body_entered(body, dir):

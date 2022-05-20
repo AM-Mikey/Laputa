@@ -10,7 +10,7 @@ func _ready():
 	damage_on_contact = 0
 	speed = Vector2(100, 100)
 
-	level = 0
+	reward = 0
 
 	rng.randomize()
 	move_dir = Vector2(sign(rng.randf_range(-1, 1)), 0)
@@ -20,15 +20,16 @@ func _ready():
 	$Timer.wait_time = active_time
 	
 func _physics_process(delta):
-	if not dead:
-		velocity = calculate_movevelocity(velocity, move_dir, speed)
-		velocity = move_and_slide(velocity, FLOOR_NORMAL)
-		
-		animate(move_dir)
-		
-		if is_on_wall():
-			if idle == false:
-				move_dir *= -1
+	if disabled or dead:
+		return
+	velocity = calculate_movevelocity(velocity, move_dir, speed)
+	velocity = move_and_slide(velocity, FLOOR_NORMAL)
+	
+	animate(move_dir)
+	
+	if is_on_wall():
+		if idle == false:
+			move_dir *= -1
 
 func wait(move_dir):
 	idle = true

@@ -23,7 +23,7 @@ func _ready():
 	speed = Vector2(100, 200)
 	gravity = 250
 	
-	level = 3
+	reward = 3
 	on_jump_height_changed(jump_height)
 	#update_path_lines()
 

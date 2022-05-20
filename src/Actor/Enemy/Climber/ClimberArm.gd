@@ -6,7 +6,7 @@ var index
 func _ready():
 	hp = 2
 	damage_on_contact = 1
-	level = 1
+	reward = 1
 
 func _process(_delta):
 	if get_parent() != null:

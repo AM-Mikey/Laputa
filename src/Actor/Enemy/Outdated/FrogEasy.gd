@@ -13,7 +13,7 @@ func _ready():
 	speed = Vector2(12, 120)
 	gravity = 200
 	
-	level = 1
+	reward = 1
 
 func _physics_process(_delta):
 	if not dead and not disabled:

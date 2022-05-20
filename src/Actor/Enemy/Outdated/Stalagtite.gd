@@ -14,7 +14,7 @@ export var falling_damage = 4
 
 func _ready():
 	hp = 2
-	level = 2
+	reward = 2
 	damage_on_contact = base_damage
 	speed = Vector2(100, 100)
 	setup_collision()

@@ -15,7 +15,7 @@ func _ready():
 	speed = Vector2(100, 100)
 	acceleration = 25
 	
-	level = 2
+	reward = 2
 
 	
 	if dir == Vector2.LEFT:
@@ -24,7 +24,8 @@ func _ready():
 		$AnimationPlayer.play("FlyRight")
 	
 func _physics_process(delta):
-	if not disabled:
+	if disabled or dead:
+		return
 #		if dir == Vector2.LEFT:
 #			if position.x <= cl.get_node("Left").position.x - safe_distance:
 #				print("freed ornithopter")

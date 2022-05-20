@@ -24,34 +24,34 @@ func _input(event):
 		return
 	
 	if event is InputEventMouseMotion:
-		if state == "drag":
+		match state:
+			"drag":
 				rect_position = get_global_mouse_position() + drag_offset
-		
-		if state == "resize":
-			var x = get_global_mouse_position().x + drag_offset.x
-			var y = get_global_mouse_position().y + drag_offset.y
-			
-			match active_handle.name:
-				"TopLeft":
-					margin_top = y
-					margin_left = x
-				"TopRight":
-					margin_top = y
-					margin_right = x + 16
-				"BottomLeft":
-					margin_bottom = y + 16
-					margin_left = x
-				"BottomRight":
-					margin_bottom = y + 16
-					margin_right = x + 16
-				"Top":
-					margin_top = y
-				"Bottom":
-					margin_bottom = y + 16
-				"Left":
-					margin_left = x
-				"Right":
-					margin_right = x + 16
+			"resize":
+				var x = get_global_mouse_position().x + drag_offset.x
+				var y = get_global_mouse_position().y + drag_offset.y
+				
+				match active_handle.name:
+					"TopLeft":
+						margin_top = y - header_size
+						margin_left = x
+					"TopRight":
+						margin_top = y - header_size
+						margin_right = x + 4 #no idea why this is 4
+					"BottomLeft":
+						margin_bottom = y + 4
+						margin_left = x
+					"BottomRight":
+						margin_bottom = y + 4
+						margin_right = x + 4
+					"Top":
+						margin_top = y - header_size
+					"Bottom":
+						margin_bottom = y + 4
+					"Left":
+						margin_left = x
+					"Right":
+						margin_right = x + 4
 
 ###SIGNALS
 
@@ -72,7 +72,7 @@ func on_handle(handle):
 		print("handle grabbed")
 		state = "resize"
 		active_handle = handle
-		drag_offset =  handle.rect_global_position - get_global_mouse_position()
+		drag_offset = handle.rect_global_position - get_global_mouse_position()
 	else:
 		state = "drag"
-		drag_offset =  rect_global_position - get_global_mouse_position()
+		drag_offset = rect_global_position - get_global_mouse_position()

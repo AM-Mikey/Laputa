@@ -6,26 +6,24 @@ var move_dir
 
 func _ready():
 	hp = 3
-	level = 2
+	reward = 2
 	damage_on_contact = 2
 	speed = Vector2(60, 60)
 	gravity = 200
-	
-	level = 1
-	
 	move_dir = start_dir
 	animate()
 	
 	
 	
 func _physics_process(delta):
-	if not dead:
-		velocity = calculate_movevelocity(velocity, move_dir, speed)
-		velocity = move_and_slide(velocity, FLOOR_NORMAL)
-	
-		if is_on_wall():
-			move_dir *= -1
-			animate()
+	if disabled or dead:
+		return
+	velocity = calculate_movevelocity(velocity, move_dir, speed)
+	velocity = move_and_slide(velocity, FLOOR_NORMAL)
+
+	if is_on_wall():
+		move_dir *= -1
+		animate()
 
 func calculate_movevelocity(linearvelocity: Vector2, move_dir: Vector2, speed: Vector2) -> Vector2:
 	var out: = linearvelocity

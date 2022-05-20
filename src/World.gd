@@ -31,7 +31,8 @@ export var show_state_labels = false ###########################################
 
 export var start_level: PackedScene
 onready var current_level = start_level.instance() #assumes current level to start with, might cause issues down the line
-
+onready var ui = $UILayer
+onready var el = $EditorLayer
 onready var front = $Front
 onready var middle = $Middle
 onready var back = $Back
@@ -41,7 +42,7 @@ func _ready():
 	on_viewport_size_changed()
 	
 	if not do_skip_title:
-		$UILayer.add_child(TITLE.instance())
+		ui.add_child(TITLE.instance())
 		add_child(TITLECAM.instance())
 		add_child(current_level)
 	else:
@@ -90,22 +91,23 @@ func skip_title():
 
 func _input(event):
 	if event.is_action_pressed("inventory") and has_node("Juniper"):
-		if not $UILayer.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled:
+		if not ui.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled:
 			get_tree().paused = true
 			$UILayer/HUD.visible = false
 			var inventory = INVENTORY.instance()
-			$UILayer.add_child(inventory)
+			ui.add_child(inventory)
 	
-	if event.is_action_pressed("pause") and not $UILayer.has_node("TitleScreen"):
-		if not $UILayer.has_node("PauseMenu") and not get_tree().paused:
+	if event.is_action_pressed("pause") and not ui.has_node("TitleScreen"):
+		if not ui.has_node("PauseMenu") and not get_tree().paused:
 			get_tree().paused = true
 			
-			$UILayer/HUD.visible = false
-			if self.has_node("UILayer/DialogBox"):
-				self.get_node("UILayer/DialogBox").visible = false
+			if ui.has_node("HUD"):
+				$UILayer/HUD.visible = false
+			if ui.has_node("DialogBox"):
+				$UILayer/DialogBox.visible = false
 			
 			var pause_menu = PAUSEMENU.instance()
-			$UILayer.add_child(pause_menu)
+			ui.add_child(pause_menu)
 			
 
 
@@ -115,7 +117,7 @@ func on_level_change(level, door_index):
 	write_level_data_to_temp()
 	
 	### Clean up stuff we don't need
-	if $UILayer.has_node("DialogBox"):
+	if ui.has_node("DialogBox"):
 		$UILayer/DialogBox.stop_printing()
 	clear_spawn_layers()
 	clear_bg_layer()
@@ -176,14 +178,14 @@ func on_level_change(level, door_index):
 		var already_enabled = false
 	
 		#LOADZONES
-		if $UILayer.has_node("TransitionWipe"):
+		if ui.has_node("TransitionWipe"):
 			yield(get_tree().create_timer(0.8), "timeout")
 			$UILayer/TransitionWipe.play_out_animation()
 			already_enabled = true
 			$Juniper.enable()
 
 		#DOORS
-		elif $UILayer.has_node("TransitionIris"):
+		elif ui.has_node("TransitionIris"):
 			yield(get_tree().create_timer(0.4), "timeout")
 			$UILayer/TransitionIris.play_out_animation()
 			already_enabled = true
@@ -193,11 +195,11 @@ func on_level_change(level, door_index):
 		if not already_enabled:
 			$Juniper.enable()
 			
-		if $UILayer.has_node("LevelText"):
+		if ui.has_node("LevelText"):
 			$UILayer/LevelText.free()
 		var level_text = LEVEL_TEXT.instance()
 		level_text.text = next_level.name #TODO: in final version switch this to display name
-		$UILayer.add_child(level_text)
+		ui.add_child(level_text)
 		
 
 		#enable smoothing after a bit
@@ -418,7 +420,7 @@ func write_to_file(file_path, written_data):
 func load_options():
 	var options = OPTIONS.instance()
 	options.hidden = true
-	$UILayer.add_child(options)
+	ui.add_child(options)
 	options.tabs.get_node("Settings").load_settings()
 	options.tabs.get_node("KeyConfig").load_input_map()
 	
@@ -426,11 +428,11 @@ func load_options():
 	options.queue_free()
 
 func clear_spawn_layers():
-	for c in $Back.get_children():
+	for c in back.get_children():
 		c.free()
-	for c in $Middle.get_children():
+	for c in middle.get_children():
 		c.free()
-	for c in $Front.get_children():
+	for c in front.get_children():
 		c.free()
 
 func clear_bg_layer():
@@ -453,5 +455,5 @@ func on_viewport_size_changed():
 	else:
 		resolution_scale = 4.0
 	
-	$UILayer.scale = Vector2(resolution_scale, resolution_scale)
-	$Back.scale = Vector2(resolution_scale, resolution_scale)
+	ui.scale = Vector2(resolution_scale, resolution_scale)
+	back.scale = Vector2(resolution_scale, resolution_scale)
