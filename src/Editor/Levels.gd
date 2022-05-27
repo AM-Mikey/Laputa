@@ -18,6 +18,9 @@ func _on_Save_confirmed():
 	level.name = $Save.current_path.get_file().get_basename()
 	level.level_name = $Save.current_path.get_file().get_basename()
 	
+	if $Save.current_path.file_exists():
+		print("you saved over")
+	
 	
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(level)

@@ -74,25 +74,27 @@ func load_settings():
 		printerr("ERROR: could not load settings data")
 	
 
-func _on_DisplayMode_item_selected(index):
+func _on_DisplayMode_item_selected(index: int):
+	OS.set_window_maximized(false)
+
+	match index:
+		0: #windowed
+			OS.set_window_fullscreen(false)
+			OS.set_borderless_window(false)
+#			OS.set_window_size(OS.get_window_size()) #set window size so we can trigger _on_viewport_size_changed everywhere
+		1: #borderless
+			OS.set_window_fullscreen(false)
+			OS.set_borderless_window(true)
+			OS.set_window_size(OS.get_screen_size())
+			OS.set_window_position(Vector2.ZERO)
+		2: #fullscreen
+			OS.set_window_fullscreen(true)
+		3: #maximized
+			OS.set_window_fullscreen(false)
+			OS.set_borderless_window(false)
+			OS.set_window_maximized(true)
+		
 	print("display settings changed")
-	
-	if index == 0: #windowed
-		OS.set_borderless_window(false)
-		OS.set_window_fullscreen(false)
-		
-#		OS.set_window_size(OS.get_window_size()) #set window size so we can trigger _on_viewport_size_changed everywhere
-		
-	if index == 1: #borderless
-		OS.set_window_fullscreen(false)
-		OS.set_window_size(OS.get_screen_size())
-		OS.set_window_position(Vector2.ZERO)
-		OS.set_borderless_window(true)
-		
-	if index == 2: #fullscreen
-		OS.set_borderless_window(false)
-		OS.set_window_fullscreen(true)
-	
 	save_to_file("DisplayMode", index)
 
 func _on_ResolutionScale_item_selected(index):

@@ -37,7 +37,6 @@ margin_bottom = 30.0
 text = "New Level"
 
 [node name="Save" type="FileDialog" parent="."]
-visible = true
 margin_right = 480.0
 margin_bottom = 270.0
 rect_min_size = Vector2( 400, 140 )
@@ -45,6 +44,7 @@ dialog_hide_on_ok = true
 filters = PoolStringArray( "*.tscn" )
 
 [node name="Load" type="FileDialog" parent="."]
+visible = true
 margin_right = 480.0
 margin_bottom = 270.0
 rect_min_size = Vector2( 400, 140 )
