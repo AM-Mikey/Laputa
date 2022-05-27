@@ -13,17 +13,14 @@ anchor_bottom = 1.0
 margin_bottom = 2.0
 theme = ExtResource( 2 )
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-p_master = NodePath("Margin/Scroll/VBox/Master")
-p_sfx = NodePath("Margin/Scroll/VBox/SFX")
-p_music = NodePath("Margin/Scroll/VBox/Music")
-display_b = NodePath("Margin/Scroll/VBox/DisplayMode/OptionButton")
-resolution_b = NodePath("Margin/Scroll/VBox/ResolutionScale/OptionButton")
-mouse_b = NodePath("Margin/Scroll/VBox/MouseLock/OptionButton")
-delete_b = NodePath("Margin/Scroll/VBox/DeleteSave/Button")
-scroll_c = NodePath("Margin/Scroll")
+mastervolume_path = NodePath("Margin/Scroll/VBox/MasterVolume")
+sfxvolume_path = NodePath("Margin/Scroll/VBox/SFXVolume")
+musicvolume_path = NodePath("Margin/Scroll/VBox/MusicVolume")
+displaymode_path = NodePath("Margin/Scroll/VBox/DisplayMode/OptionButton")
+resolutionscale_path = NodePath("Margin/Scroll/VBox/ResolutionScale/OptionButton")
+mouselock_path = NodePath("Margin/Scroll/VBox/MouseLock/OptionButton")
+deletesave_path = NodePath("Margin/Scroll/VBox/DeleteSave/Button")
+scroll_path = NodePath("Margin/Scroll")
 
 [node name="Panel" type="Panel" parent="."]
 margin_right = 480.0
@@ -52,18 +49,18 @@ margin_bottom = 178.0
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Master" type="VBoxContainer" parent="Margin/Scroll/VBox"]
+[node name="MasterVolume" type="VBoxContainer" parent="Margin/Scroll/VBox"]
 margin_right = 448.0
 margin_bottom = 34.0
 
-[node name="Label" type="Label" parent="Margin/Scroll/VBox/Master"]
+[node name="Label" type="Label" parent="Margin/Scroll/VBox/MasterVolume"]
 margin_right = 448.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Master Volume: 100%"
 align = 1
 
-[node name="Slider" type="HSlider" parent="Margin/Scroll/VBox/Master"]
+[node name="Slider" type="HSlider" parent="Margin/Scroll/VBox/MasterVolume"]
 margin_top = 18.0
 margin_right = 448.0
 margin_bottom = 34.0
@@ -77,13 +74,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Music" type="HBoxContainer" parent="Margin/Scroll/VBox"]
+[node name="MusicVolume" type="HBoxContainer" parent="Margin/Scroll/VBox"]
 margin_top = 38.0
 margin_right = 448.0
 margin_bottom = 54.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Margin/Scroll/VBox/Music"]
+[node name="Label" type="Label" parent="Margin/Scroll/VBox/MusicVolume"]
 margin_top = 1.0
 margin_right = 222.0
 margin_bottom = 15.0
@@ -91,7 +88,7 @@ size_flags_horizontal = 3
 text = "Music Volume: 100%"
 align = 2
 
-[node name="Slider" type="HSlider" parent="Margin/Scroll/VBox/Music"]
+[node name="Slider" type="HSlider" parent="Margin/Scroll/VBox/MusicVolume"]
 margin_left = 226.0
 margin_right = 448.0
 margin_bottom = 16.0
@@ -105,13 +102,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SFX" type="HBoxContainer" parent="Margin/Scroll/VBox"]
+[node name="SFXVolume" type="HBoxContainer" parent="Margin/Scroll/VBox"]
 margin_top = 58.0
 margin_right = 448.0
 margin_bottom = 74.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Margin/Scroll/VBox/SFX"]
+[node name="Label" type="Label" parent="Margin/Scroll/VBox/SFXVolume"]
 margin_top = 1.0
 margin_right = 222.0
 margin_bottom = 15.0
@@ -122,7 +119,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slider" type="HSlider" parent="Margin/Scroll/VBox/SFX"]
+[node name="Slider" type="HSlider" parent="Margin/Scroll/VBox/SFXVolume"]
 margin_left = 226.0
 margin_right = 448.0
 margin_bottom = 16.0
@@ -163,9 +160,9 @@ selected = 0
 
 [node name="ResolutionScale" type="HBoxContainer" parent="Margin/Scroll/VBox"]
 visible = false
-margin_top = 170.0
-margin_right = 438.0
-margin_bottom = 206.0
+margin_top = 118.0
+margin_right = 448.0
+margin_bottom = 154.0
 
 [node name="Label" type="Label" parent="Margin/Scroll/VBox/ResolutionScale"]
 margin_top = 11.0
@@ -263,9 +260,6 @@ custom_constants/margin_right = 4
 custom_constants/margin_top = 4
 custom_constants/margin_left = 4
 custom_constants/margin_bottom = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBox" type="HBoxContainer" parent="Corner/Margin"]
 margin_left = 4.0
@@ -276,8 +270,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Reset" type="Button" parent="Corner/Margin/HBox"]
+margin_right = 48.0
+margin_bottom = 32.0
+custom_colors/font_color = Color( 0.8, 0.168627, 0.168627, 1 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/normal = ExtResource( 4 )
+text = "Reset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Return" type="Button" parent="Corner/Margin/HBox"]
-margin_right = 55.0
+margin_left = 52.0
+margin_right = 107.0
 margin_bottom = 32.0
 custom_colors/font_color = Color( 0.968627, 0.886275, 0.717647, 1 )
 custom_styles/hover = ExtResource( 5 )
@@ -288,11 +295,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="value_changed" from="Margin/Scroll/VBox/Master/Slider" to="." method="_on_MasterSlider_value_changed"]
-[connection signal="value_changed" from="Margin/Scroll/VBox/Music/Slider" to="." method="_on_MusicSlider_value_changed"]
-[connection signal="value_changed" from="Margin/Scroll/VBox/SFX/Slider" to="." method="_on_SFXSlider_value_changed"]
-[connection signal="item_selected" from="Margin/Scroll/VBox/DisplayMode/OptionButton" to="." method="_on_DisplayMode_item_selected"]
-[connection signal="item_selected" from="Margin/Scroll/VBox/ResolutionScale/OptionButton" to="." method="_on_ResolutionScale_item_selected"]
-[connection signal="toggled" from="Margin/Scroll/VBox/MouseLock/OptionButton" to="." method="_on_MouseLock_toggled"]
-[connection signal="pressed" from="Margin/Scroll/VBox/DeleteSave/Button" to="." method="_on_DeleteSave_pressed"]
-[connection signal="pressed" from="Corner/Margin/HBox/Return" to="." method="_on_Return_pressed"]
+[connection signal="value_changed" from="Margin/Scroll/VBox/MasterVolume/Slider" to="." method="on_mastervolume_changed"]
+[connection signal="value_changed" from="Margin/Scroll/VBox/MusicVolume/Slider" to="." method="on_musicvolume_changed"]
+[connection signal="value_changed" from="Margin/Scroll/VBox/SFXVolume/Slider" to="." method="on_sfxvolume_changed"]
+[connection signal="item_selected" from="Margin/Scroll/VBox/DisplayMode/OptionButton" to="." method="on_displaymode_changed"]
+[connection signal="item_selected" from="Margin/Scroll/VBox/ResolutionScale/OptionButton" to="." method="on_resolutionscale_changed"]
+[connection signal="toggled" from="Margin/Scroll/VBox/MouseLock/OptionButton" to="." method="on_mouselock"]
+[connection signal="pressed" from="Margin/Scroll/VBox/DeleteSave/Button" to="." method="on_deletesave"]
+[connection signal="pressed" from="Corner/Margin/HBox/Reset" to="." method="on_reset"]
+[connection signal="pressed" from="Corner/Margin/HBox/Return" to="." method="on_return"]

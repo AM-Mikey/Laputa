@@ -2,81 +2,50 @@ extends Control
 
 var settings_path = "user://settings.json"
 
-#onready var display_mode = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DisplayMode/OptionButton
-#onready var resolution_scale = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ResolutionScale/OptionButton
-
-var after_ready = false
-
-export(NodePath) var p_master
-onready var s_master = get_node(p_master)
-export(NodePath) var p_sfx
-onready var sfx = get_node(p_sfx)
-export(NodePath) var p_music
-onready var music = get_node(p_music)
-
-export(NodePath) var display_b
-export(NodePath) var resolution_b
-export(NodePath) var mouse_b
-export(NodePath) var delete_b
-
-export(NodePath) var scroll_c
-#var scroll_size = 
-
-onready var world = get_tree().get_root().get_node("World")
+export(NodePath) var mastervolume_path
+export(NodePath) var sfxvolume_path
+export(NodePath) var musicvolume_path
+export(NodePath) var displaymode_path
+export(NodePath) var resolutionscale_path
+export(NodePath) var mouselock_path
+export(NodePath) var deletesave_path
+export(NodePath) var scroll_path
 
 var default = {
-	"DisplayMode": 0,
+	"MasterVolume": 10.0,
+	"MusicVolume": 0.0,
+	"SFXVolume" : 10.0,
+	"DisplayMode": 3,
 	"ResolutionScale": 0,
-	"MasterSlider": 10.0,
-	"MusicSlider": 0.0,
-	"SFXSlider" : 10.0
+	"MouseLock": false,
 	}
+var after_ready = false
+
+onready var w = get_tree().get_root().get_node("World")
+
+onready var mastervolume = get_node(mastervolume_path)
+onready var sfxvolume = get_node(sfxvolume_path)
+onready var musicvolume = get_node(musicvolume_path)
+onready var displaymode = get_node(displaymode_path)
+onready var resolutionscale = get_node(resolutionscale_path)
+onready var mouselock = get_node(mouselock_path)
+onready var deletesave = get_node(deletesave_path)
+onready var scroll = get_node(scroll_path)
 
 func _ready():
 	var file = File.new()
-	if not file.file_exists(settings_path):
-		save_defaults()
-	else: 
+	if file.file_exists(settings_path):
 		load_settings()
-	get_node(scroll_c).get_v_scrollbar().connect("item_rect_changed", self, "_on_scrollbar_changed")
+	else: 
+		save_defaults()
+	
+	scroll.get_v_scrollbar().connect("item_rect_changed", self, "on_scrollbar_changed")
 	after_ready = true
 
+### SIGNALS
 
-func _on_scrollbar_changed():
-	print("scroll changed")
-	get_node(scroll_c).get_v_scrollbar().rect_size.y = get_node(scroll_c).rect_size.y - 48
-
-func load_settings():
-	var data
-	
-	var file = File.new()
-	if file.file_exists(settings_path):
-		var file_read = file.open(settings_path, File.READ)
-		if file_read == OK:
-			var text = file.get_as_text()
-			data = JSON.parse(text).result
-			file.close()
-
-		get_node(display_b).selected = data["DisplayMode"]
-		_on_DisplayMode_item_selected(data["DisplayMode"])
-		get_node(resolution_b).selected = data["ResolutionScale"]
-		_on_ResolutionScale_item_selected(data["ResolutionScale"])
-		
-		
-		s_master.get_node("Slider").value = data["MasterSlider"]
-		_on_MasterSlider_value_changed(data["MasterSlider"])
-		music.get_node("Slider").value = data["MusicSlider"]
-		_on_MusicSlider_value_changed(data["MusicSlider"])
-		sfx.get_node("Slider").value = data["SFXSlider"]
-		_on_SFXSlider_value_changed(data["SFXSlider"])
-
-	else: 
-		printerr("ERROR: could not load settings data")
-	
-
-func _on_DisplayMode_item_selected(index: int):
+func on_displaymode_changed(index: int):
 	OS.set_window_maximized(false)
-
 	match index:
 		0: #windowed
 			OS.set_window_fullscreen(false)
@@ -93,142 +62,91 @@ func _on_DisplayMode_item_selected(index: int):
 			OS.set_window_fullscreen(false)
 			OS.set_borderless_window(false)
 			OS.set_window_maximized(true)
-		
 	print("display settings changed")
-	save_to_file("DisplayMode", index)
+	save_setting("DisplayMode", index)
 
-func _on_ResolutionScale_item_selected(index):
-
-	if index == 0:
-		world.viewport_size_ignore = false
-		#world._on_viewport_size_changed()
-		OS.set_window_size(OS.get_window_size()) #set window size so we can trigger _on_viewport_size_changed everywhere
-		
-	if index == 1:
-		world.resolution_scale = 1.0
-		world.viewport_size_ignore = true
-	if index == 2:
-		world.resolution_scale = 2.0
-		world.viewport_size_ignore = true
-	if index == 3:
-		world.resolution_scale = 3.0
-		world.viewport_size_ignore = true
-	if index == 4:
-		world.resolution_scale = 4.0
-		world.viewport_size_ignore = true
+func on_resolutionscale_changed(index: int):
+	match index:
+		0:
+			w.viewport_size_ignore = false
+			#world._on_viewport_size_changed()
+			OS.set_window_size(OS.get_window_size()) #set window size so we can trigger _on_viewport_size_changed everywhere
+		1:
+			w.resolution_scale = 1.0
+			w.viewport_size_ignore = true
+		2:
+			w.resolution_scale = 2.0
+			w.viewport_size_ignore = true
+		3:
+			w.resolution_scale = 3.0
+			w.viewport_size_ignore = true
+		4:
+			w.resolution_scale = 4.0
+			w.viewport_size_ignore = true
 	
-	if world.has_node("TitleCam"):
-		world.get_node("TitleCam").zoom = Vector2(1 / world.resolution_scale, 1 / world.resolution_scale)
+	if w.has_node("TitleCam"):
+		w.get_node("TitleCam").zoom = Vector2(1 / w.resolution_scale, 1 / w.resolution_scale)
 	#world.get_node("UILayer").scale = Vector2(world.resolution_scale, world.resolution_scale)
 	#TODO: make sure this carrys over for playercamera
-	
 	if get_tree().get_nodes_in_group("CameraLimiters").size() != 0:
 		for c in get_tree().get_nodes_in_group("CameraLimiters"):
 			c._on_viewport_size_changed()
 	
-	save_to_file("ResolutionScale", index)
+	save_setting("ResolutionScale", index)
 
 
-func _on_Reset_pressed():
-	save_defaults()
+func on_mastervolume_changed(value):
+	var db = get_percent_as_db(value)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),db)
+	if not w.get_node("UILayer/Options").hidden and after_ready:
+		am.play_master("sound_test")
+	mastervolume.get_node("Label").text = "Master Volume: Muted" if value == 0 else "Master Volume: " + str(value) + "0 %"
+	save_setting("MasterVolume", value)
+
+func on_musicvolume_changed(value):
+	var db = get_percent_as_db(value)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),db)
+	if not w.get_node("UILayer/Options").hidden and after_ready:
+		am.play_music("sound_test")
+	musicvolume.get_node("Label").text = "Music Volume: Muted" if value == 0 else "Music Volume: " + str(value) + "0 %"
+	save_setting("MusicVolume", value)
+
+func on_sfxvolume_changed(value):
+	var db = get_percent_as_db(value)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),db)
+	if not w.get_node("UILayer/Options").hidden and after_ready:
+		am.play("sound_test")
+	sfxvolume.get_node("Label").text = "SFX Volume: Muted" if value == 0 else "SFX Volume: " + str(value) + "0 %"
+	save_setting("SFXVolume", value)
 
 
-func _on_Return_pressed():
-	if world.has_node("UILayer/PauseMenu"):
-		world.get_node("UILayer/PauseMenu").visible = true
-		world.get_node("UILayer/PauseMenu").focus()
-	if world.has_node("UILayer/TitleScreen"):
-		world.get_node("UILayer/TitleScreen").visible = true
-		world.get_node("UILayer/TitleScreen").focus()
+func on_return():
+	if w.has_node("UILayer/PauseMenu"):
+		w.get_node("UILayer/PauseMenu").visible = true
+		w.get_node("UILayer/PauseMenu").focus()
+	if w.has_node("UILayer/TitleScreen"):
+		w.get_node("UILayer/TitleScreen").visible = true
+		w.get_node("UILayer/TitleScreen").focus()
 		
-	if world.has_node("UILayer/Options"):
-		world.get_node("UILayer/Options").queue_free()
+	if w.has_node("UILayer/Options"):
+		w.get_node("UILayer/Options").queue_free()
 	else:
 		get_parent().queue_free()
 
 
 
-func _on_MasterSlider_value_changed(value):
-	var db = percent_to_db(value)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),db)
-	if not world.get_node("UILayer/Options").hidden and after_ready:
-		am.play_master("sound_test")
-	s_master.get_node("Label").text = "Master Volume: Muted" if value == 0 else "Master Volume: " + str(value) + "0 %"
-	save_to_file("MasterSlider", value)
 
-func _on_MusicSlider_value_changed(value):
-	var db = percent_to_db(value)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),db)
-	if not world.get_node("UILayer/Options").hidden and after_ready:
-		am.play_music("sound_test")
-	music.get_node("Label").text = "Music Volume: Muted" if value == 0 else "Music Volume: " + str(value) + "0 %"
-	save_to_file("MusicSlider", value)
+func on_reset():
+	save_defaults()
+	#yield(get_tree(), "idle_frame")
+	load_settings()
 
-func _on_SFXSlider_value_changed(value):
-	var db = percent_to_db(value)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),db)
-	if not world.get_node("UILayer/Options").hidden and after_ready:
-		am.play("sound_test")
-	sfx.get_node("Label").text = "SFX Volume: Muted" if value == 0 else "SFX Volume: " + str(value) + "0 %"
-	save_to_file("SFXSlider", value)
+func on_mouselock(value):
+	if value: Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+	else: Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	save_setting("MouseLock", value)
 
-func percent_to_db(value) -> float:
-	var db: float
-	
-	if value == 0:
-		db = -80
-	elif value == 1:
-		db = -20
-	elif value == 2:
-		db = -13.9794
-	elif value == 3:
-		db = -10.4576
-	elif value == 4:
-		db = -7.9588
-	elif value == 5:
-		db = -6.0206
-	elif value == 6:
-		db = -4.4370 
-	elif value == 7:
-		db = -3.0980
-	elif value == 8:
-		db = -1.9382 
-	elif value == 9:
-		db = -0.9151
-	elif value == 10:
-		db = 0
-	elif value == 11:
-		db = 0.8279 
-	elif value == 12:
-		db = 1.5836 
-	elif value == 13:
-		db = 2.2789
-	elif value == 14:
-		db = 2.9226
-	elif value == 15:
-		db = 3.5218
-	elif value == 16:
-		db = 4.0824
-	elif value == 17:
-		db = 4.6090
-	elif value == 18:
-		db = 5.1055
-	elif value == 19:
-		db = 5.5751 
-	elif value == 20:
-		db = 6.0206
-	else:
-		db = 0
-	
-	return db
-
-func _on_MouseLock_toggled(value):
-	if value:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
-	else:
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
-func _on_DeleteSave_pressed():
+func on_deletesave():
 	var files = []
 	var dir = Directory.new()
 	dir.open("user://")
@@ -240,31 +158,48 @@ func _on_DeleteSave_pressed():
 		elif not file.begins_with("."):
 			files.append(file)
 	
-	
 	for f in files:
 		if f.get_extension() == "dat" or f.get_extension() == "json":
 			dir.remove("user://%s" % f)
 			print("removed file: " + "user://%s" % f)
 	
-	$MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DeleteSave/Button.text = "Done"
+	on_reset()
+	deletesave.text = "Done"
+
+func on_scrollbar_changed():
+	scroll.get_v_scrollbar().rect_size.y = scroll.rect_size.y - 48
+
+
+### SAVE/LOAD
 
 func save_defaults():
-	var data = default
-	
-	var file = File.new()
-	var file_written = file.open(settings_path, File.WRITE)
-	if file_written == OK:
-		file.store_string(var2str(data))
-		file.close()
-		print("default settings data saved")
-	else:
-		printerr("ERROR: default settings data could not be saved!")
+	write_data(default)
 
-func save_to_file(setting, setting_value):
-
-	var data = default
+func save_setting(setting, setting_value):
+	var data = read_data()
 	data[setting] = setting_value
+	write_data(data)
+
+func load_settings():
+	var data = read_data()
 	
+	mastervolume.get_node("Slider").value = data["MasterVolume"]
+	on_mastervolume_changed(data["MasterVolume"])
+	musicvolume.get_node("Slider").value = data["MusicVolume"]
+	on_musicvolume_changed(data["MusicVolume"])
+	sfxvolume.get_node("Slider").value = data["SFXVolume"]
+	on_sfxvolume_changed(data["SFXVolume"])
+	
+	displaymode.selected = data["DisplayMode"]
+	on_displaymode_changed(data["DisplayMode"])
+	resolutionscale.selected = data["ResolutionScale"]
+	on_resolutionscale_changed(data["ResolutionScale"])
+	
+	mouselock.pressed = data["MouseLock"]
+	on_mouselock(data["MouseLock"])
+
+
+func write_data(data):
 	var file = File.new()
 	var file_written = file.open(settings_path, File.WRITE)
 	if file_written == OK:
@@ -274,18 +209,51 @@ func save_to_file(setting, setting_value):
 	else:
 		printerr("ERROR: settings data could not be saved!")
 
+func read_data() -> Dictionary:
+	var data
+	var file = File.new()
+	if file.file_exists(settings_path):
+		var file_read = file.open(settings_path, File.READ)
+		if file_read == OK:
+			var text = file.get_as_text()
+			data = JSON.parse(text).result
+			file.close()
+	else: 
+		printerr("ERROR: could not load settings data")
+	return data
 
 
+### HELPER GETTERS
 
+func get_percent_as_db(value) -> float:
+	var db: float
+	match value:
+		0: db = -80
+		1: db = -20
+		2: db = -13.9794
+		3: db = -10.4576
+		4: db = -7.9588
+		5: db = -6.0206
+		6: db = -4.4370 
+		7: db = -3.0980
+		8: db = -1.9382 
+		9: db = -0.9151
+		10: db = 0
+		11: db = 0.8279 
+		12: db = 1.5836 
+		13: db = 2.2789
+		14: db = 2.9226
+		15: db = 3.5218
+		16: db = 4.0824
+		17: db = 4.6090
+		18: db = 5.1055
+		19: db = 5.5751 
+		20: db = 6.0206
+		_: db = 0
+	return db
+
+
+### MISC
 
 func focus():
-	s_master.get_node("Slider").grab_focus()
-
-
-
-
-
-
-
-
-
+	mastervolume.get_node("Slider").grab_focus()
