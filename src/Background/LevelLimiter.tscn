@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/Background/LevelLimiter.gd" type="Script" id=1]
-[ext_resource path="res://assets/Background/Blue.png" type="Texture" id=2]
+[ext_resource path="res://assets/Background/bkBlue.bmp" type="Texture" id=2]
 
 [node name="LevelLimiter" type="MarginContainer"]
 margin_right = 472.0
@@ -11,7 +11,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-background = ExtResource( 2 )
+texture = ExtResource( 2 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_right = 472.0

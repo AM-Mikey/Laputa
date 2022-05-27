@@ -4,8 +4,9 @@
 [ext_resource path="res://src/Editor/Inspector.gd" type="Script" id=2]
 
 [node name="Inspector" type="MarginContainer"]
-margin_right = 256.0
-margin_bottom = 286.0
+margin_right = 600.0
+margin_bottom = 400.0
+mouse_filter = 2
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -13,9 +14,40 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 256.0
-margin_bottom = 286.0
+margin_right = 600.0
+margin_bottom = 400.0
+mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_right = 256.0
-margin_bottom = 286.0
+[node name="Margin" type="MarginContainer" parent="."]
+margin_right = 600.0
+margin_bottom = 400.0
+mouse_filter = 2
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 592.0
+margin_bottom = 392.0
+
+[node name="Label" type="Label" parent="Margin/VBox"]
+margin_right = 584.0
+margin_bottom = 14.0
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0.878431, 0.784314, 0.345098, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+align = 1
+
+[node name="Scroll" type="ScrollContainer" parent="Margin/VBox"]
+margin_top = 18.0
+margin_right = 584.0
+margin_bottom = 384.0
+size_flags_vertical = 3
+
+[node name="VBox" type="VBoxContainer" parent="Margin/VBox/Scroll"]
+margin_right = 584.0
+mouse_filter = 2
+size_flags_horizontal = 3

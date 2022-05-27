@@ -5,11 +5,12 @@
 [ext_resource path="res://src/Prop/ChestWeapon.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Utility/Outdated/CameraLimiter.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=11]
 [ext_resource path="res://src/Tile/Debug.tres" type="TileSet" id=12]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=14]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=16]
+
 
 
 [node name="PirateCliff" type="Node2D"]

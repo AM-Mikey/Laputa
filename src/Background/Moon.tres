@@ -1,13 +1,9 @@
-[gd_resource type="Resource" load_steps=7 format=2]
+[gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://src/Background/Background.gd" type="Script" id=1]
-[ext_resource path="res://assets/Background/Moon3.png" type="Texture" id=2]
-[ext_resource path="res://assets/Background/Moon2.png" type="Texture" id=3]
 [ext_resource path="res://assets/Background/Moon4.png" type="Texture" id=4]
-[ext_resource path="res://assets/Background/Moon0.png" type="Texture" id=5]
-[ext_resource path="res://assets/Background/Moon1.png" type="Texture" id=6]
 
 [resource]
 script = ExtResource( 1 )
-textures = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ) ]
+textures = [ null, null, null, null, ExtResource( 4 ) ]
 motion_scales = [ Vector2( 0, 0 ), Vector2( 0.25, 0.25 ), Vector2( 0.5, 0.5 ), Vector2( 0.75, 0.75 ), Vector2( 1, 1 ) ]

@@ -1,12 +1,10 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://src/Trigger/DialogCue.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Tile/PropTile/GrassProp.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=3]
 [ext_resource path="res://src/Tile/Village.tres" type="TileSet" id=4]
-[ext_resource path="res://src/Background/CyanSky.tres" type="Resource" id=5]
 [ext_resource path="res://src/Tile/TriggerTile/StairsTrigger.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/Background/690661.jpg" type="Texture" id=7]
 [ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Actor/NPC/Sage.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Prop/ChestKeyItem.tscn" type="PackedScene" id=10]
@@ -45,9 +43,6 @@ margin_left = -32.0
 margin_top = -64.0
 margin_right = 832.0
 margin_bottom = 720.0
-background = ExtResource( 7 )
-resource = ExtResource( 5 )
-px_focus = 3
 tile_mode = 1
 
 [node name="Tiles" type="Node2D" parent="."]

@@ -4,9 +4,9 @@ extends Enemy
 var tx_toad = preload("res://assets/Actor/Enemy/Toad.png")
 var tx_frog = preload("res://assets/Actor/Enemy/Frog.png")
 
-var target = null
+var target
 
-var jump_delay = 3
+export var jump_delay = 3
 var move_dir = Vector2.ZERO
 var look_dir = Vector2.LEFT
 

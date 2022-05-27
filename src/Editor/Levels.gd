@@ -15,8 +15,8 @@ func _on_Save_confirmed():
 	var path = $Save.current_path.get_basename() + ".tscn"
 	var level = w.current_level
 	
-	level.name = $Save.current_path.get_file()
-	level.level_name = $Save.current_path.get_file()
+	level.name = $Save.current_path.get_file().get_basename()
+	level.level_name = $Save.current_path.get_file().get_basename()
 	
 	
 	var packed_scene = PackedScene.new()

@@ -1,91 +1,110 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/Editor/LayerTheme.tres" type="Theme" id=1]
 [ext_resource path="res://src/UI/StyleBox/SteelRound.tres" type="StyleBox" id=2]
-[ext_resource path="res://assets/Editor/EditFalse.png" type="Texture" id=3]
-[ext_resource path="res://assets/Editor/EditTrue.png" type="Texture" id=4]
-[ext_resource path="res://assets/Editor/VisFalse.png" type="Texture" id=5]
-[ext_resource path="res://assets/Editor/VisTrue.png" type="Texture" id=6]
+[ext_resource path="res://src/Editor/PropertyButton.gd" type="Script" id=3]
 
-[node name="PropertyButton" type="Control"]
+[node name="PropertyButton" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -160.0
+margin_bottom = -222.0
+rect_min_size = Vector2( 0, 32 )
+mouse_filter = 1
 theme = ExtResource( 1 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_left = 8.0
-margin_right = 248.0
-margin_bottom = 32.0
+margin_right = 320.0
+margin_bottom = 48.0
 mouse_filter = 2
 
 [node name="PanelActive" type="Panel" parent="."]
-margin_left = 8.0
-margin_right = 248.0
-margin_bottom = 32.0
+margin_right = 320.0
+margin_bottom = 48.0
 mouse_filter = 2
 custom_styles/panel = ExtResource( 2 )
 
 [node name="HBox" type="HBoxContainer" parent="."]
-margin_left = 8.0
-margin_right = 248.0
-margin_bottom = 32.0
+margin_right = 320.0
+margin_bottom = 48.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Spacer" type="Control" parent="HBox"]
 margin_right = 8.0
-margin_bottom = 32.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 8, 0 )
 mouse_filter = 2
 
-[node name="LayerButton" type="Button" parent="HBox"]
+[node name="Button" type="Button" parent="HBox"]
 margin_left = 12.0
-margin_right = 124.0
-margin_bottom = 32.0
+margin_right = 308.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
-text = "Layer 1"
+text = "Property"
 flat = true
 align = 0
 
-[node name="VisButton" type="TextureButton" parent="HBox"]
+[node name="Bool" type="CheckBox" parent="HBox"]
 visible = false
-margin_left = 200.0
-margin_top = 12.0
-margin_right = 208.0
-margin_bottom = 20.0
-size_flags_horizontal = 8
-size_flags_vertical = 4
-toggle_mode = true
-texture_normal = ExtResource( 6 )
-texture_pressed = ExtResource( 5 )
+margin_left = 276.0
+margin_right = 304.0
+margin_bottom = 48.0
 
-[node name="EditButton" type="TextureButton" parent="HBox"]
+[node name="Enum" type="OptionButton" parent="HBox"]
 visible = false
-margin_left = 200.0
-margin_top = 12.0
-margin_right = 208.0
-margin_bottom = 20.0
-size_flags_horizontal = 8
-size_flags_vertical = 4
-toggle_mode = true
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 3 )
+margin_left = 68.0
+margin_right = 82.0
+margin_bottom = 48.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="TextEdit" type="TextEdit" parent="HBox"]
-margin_left = 128.0
-margin_right = 240.0
-margin_bottom = 32.0
-size_flags_horizontal = 3
-text = "rewf"
+[node name="String" type="LineEdit" parent="HBox"]
+visible = false
+margin_left = 72.0
+margin_right = 148.0
+margin_bottom = 48.0
+placeholder_text = "Null"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Spacer2" type="Control" parent="HBox"]
+[node name="Vector2X" type="LineEdit" parent="HBox"]
+visible = false
+margin_left = 152.0
+margin_right = 228.0
+margin_bottom = 48.0
+align = 1
+placeholder_text = "Null"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Vector2Y" type="LineEdit" parent="HBox"]
 visible = false
 margin_left = 232.0
-margin_right = 240.0
-margin_bottom = 32.0
+margin_right = 308.0
+margin_bottom = 48.0
+align = 1
+placeholder_text = "Null"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer2" type="Control" parent="HBox"]
+margin_left = 312.0
+margin_right = 320.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 8, 0 )
 mouse_filter = 2
+
+[connection signal="toggled" from="HBox/Bool" to="." method="on_bool_toggled"]
+[connection signal="text_entered" from="HBox/String" to="." method="on_text_entered"]
+[connection signal="text_entered" from="HBox/Vector2X" to="." method="on_vector2x_entered"]
+[connection signal="text_entered" from="HBox/Vector2Y" to="." method="on_vector2y_entered"]

@@ -12,7 +12,7 @@
 [ext_resource path="res://src/Effect/CloudLargeKinematic.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Actor/NPC/Basil.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Actor/NPC/Sasuke.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/Utility/Outdated/CameraLimiter.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Tile/Outdated/Adobe.tres" type="TileSet" id=15]
 

@@ -120,7 +120,6 @@ func on_level_change(level, door_index):
 	if ui.has_node("DialogBox"):
 		$UILayer/DialogBox.stop_printing()
 	clear_spawn_layers()
-	clear_bg_layer()
 	###
 	
 	var level_path = current_level.filename
@@ -435,9 +434,6 @@ func clear_spawn_layers():
 	for c in front.get_children():
 		c.free()
 
-func clear_bg_layer():
-	for c in $BackgroundLayer.get_children():
-		c.free()
 
 
 func on_viewport_size_changed():

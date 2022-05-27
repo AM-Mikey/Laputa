@@ -7,8 +7,9 @@
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
 [ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=6]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=7]
-[ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Utility/Outdated/CameraLimiter.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Trigger/LoadZone.tscn" type="PackedScene" id=10]
+
 
 
 [node name="Balcony" type="Node2D"]

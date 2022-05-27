@@ -1,5 +1,7 @@
 extends Control
 
+signal enemy_selected(enemy)
+
 const EDITOR_CAMERA = preload("res://src/Editor/EditorCamera.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const LAYER_BUTTON = preload("res://src/Editor/LayerButton.tscn")
@@ -34,6 +36,7 @@ onready var ui = w.get_node("UILayer")
 onready var el = w.get_node("EditorLayer")
 onready var tile_collection = w.current_level.get_node("Tiles")
 onready var actor_collection = w.current_level.get_node("Actors")
+onready var inspector = $Secondary/Inspector
 var tilemap
 var tileset
 
@@ -65,8 +68,9 @@ func exit():
 	queue_free()
 
 func setup_level_limiter():
-	#w.get_node("EditorLayer").add_child(LIMITER.instance())
-	w.current_level.add_child(LIMITER.instance())
+	var limiter = LIMITER.instance()
+	w.current_level.add_child(limiter)
+	#w.current_level.move_child(limiter, 0)
 
 func create_tileset_from_texture(texture):
 	tileset = TileSet.new()
@@ -185,23 +189,36 @@ func _unhandled_input(event):
 		rmb_held = false
 
 func do_enemy_input(event):
-	var mouse_pos = w.get_global_mouse_position()
+	var mouse_pos = w.get_global_mouse_position() #Vector2(w.get_global_mouse_position().x, w.get_global_mouse_position().y + 8)
+	var actor_pos = get_actor_pos(mouse_pos)
+	var pos_has_enemy = false
+	for e in get_tree().get_nodes_in_group("Enemies"):
+		if is_actor_at_position(e, actor_pos):
+			pos_has_enemy = true
+
 	var brush
-	if lmb_held: brush = $Main/Tab/Enemies.active_enemy
+	if lmb_held: brush = $Main/Tab/Enemies.active_enemy_path
 	if rmb_held: brush = null
 	
+
 	#moving
 	if event is InputEventMouseMotion:
 		hide_preview()
-		preview_enemy(get_actor_pos(mouse_pos), $Main/Tab/Enemies.active_enemy)
+		if not pos_has_enemy:
+			preview_enemy(actor_pos, $Main/Tab/Enemies.active_enemy_path)
 
 	#pressing
-	if event.is_action_pressed("editor_lmb") and not brush.empty():
-		set_enemy(get_actor_pos(mouse_pos), brush)
-		if not active_operation.empty():
-			past_operations.append(["set_enemy", active_operation.duplicate()])
-			#print("active op: ", active_operation)
-			active_operation.clear()
+	if (event.is_action_pressed("editor_lmb") and not brush.empty()) or event.is_action_pressed("editor_rmb"):
+		if (lmb_held and not pos_has_enemy) or (rmb_held):
+			set_enemy(actor_pos, brush)
+		else:
+			pass
+			select_enemy(actor_pos)
+		
+#		if not active_operation.empty():
+#			past_operations.append(["set_enemy", active_operation.duplicate()]) #???????? what does this do? is it for drawing like a brush?
+#			#print("active op: ", active_operation)
+#			active_operation.clear()
 
 
 
@@ -368,7 +385,7 @@ func set_enemy(position, enemy_path, traced = true):
 	var old_enemies = []
 	var old_enemy_paths = []
 	for e in get_tree().get_nodes_in_group("Enemies"):
-		if abs(position.x - e.global_position.x) < 4 and abs(position.y - e.global_position.y) < 4 and not e.is_in_group("EnemyPreviews"): #less than 4px away
+		if is_actor_at_position(e, position):
 			old_enemies.append(e)
 	for e in old_enemies:
 		old_enemy_paths.append(e.filename)
@@ -377,11 +394,27 @@ func set_enemy(position, enemy_path, traced = true):
 		var enemy = load(enemy_path).instance()
 		enemy.disable()
 		enemy.global_position = position
+		#enemy.name = enemy.script.resource_path.get_file().get_basename() only works for first instance
 		actor_collection.add_child(enemy)
+		if traced:
+			emit_signal("enemy_selected", enemy) #select new enemy
+	else:
+		emit_signal("enemy_selected", null) #or select null
 	if traced:
 		active_operation.append([position, enemy_path, old_enemy_paths])
 	for e in old_enemies:
+		print("freeing enemy: " + e.name)
 		e.queue_free()
+
+
+
+func select_enemy(position):
+	var selection
+	for e in get_tree().get_nodes_in_group("Enemies"):
+		if is_actor_at_position(e, position):
+			selection = e
+	emit_signal("enemy_selected", selection)
+
 
 
 #func set_cells_on_all_layers(pos_array: Array, tile, traced = true): #TODO: finish this as it doesnt work right now
@@ -464,9 +497,13 @@ func get_cell(mouse_pos) -> Vector2:
 	var map_pos = tilemap.world_to_map(local_pos)
 	return map_pos
 
-func get_actor_pos(mouse_pos) -> Vector2:
-	var step = 8
-	return Vector2(stepify(mouse_pos.x, step), stepify(mouse_pos.y, step))
+func get_actor_pos(mouse_pos, mode = "course") -> Vector2:
+	var step = 16
+	var offset = Vector2(8,0)
+	if mode == "fine":
+		step = 8
+		offset = Vector2(0, 0)
+	return Vector2(stepify(mouse_pos.x - offset.x, step), stepify(mouse_pos.y - offset.y, step)) + offset
 
 func get_centerbox(mouse_pos) -> Array: #2D Array #active tiles
 	var cells = []
@@ -612,6 +649,13 @@ func get_2d_array_from_Vector2_array(array) -> Array:
 			new_array[recorded_ys.find(i.y)].append(i)
 	return new_array
 
+func is_actor_at_position(actor, position, forgiveness = 4):
+	var out = false
+	if abs(position.x - actor.global_position.x) < forgiveness and abs(position.y - actor.global_position.y) < forgiveness:
+		if not actor.is_in_group("EnemyPreviews"):
+			out = true
+	return out
+
 ### LAYERS ###
 
 func setup_layers():
@@ -674,7 +718,7 @@ func _on_TileSet_collision_updated(tile_id, shape):
 
 func _on_TileSet_tile_set_saved(path):
 	ResourceSaver.save(path, tileset)
-
+	
 func _on_TileSet_tile_set_loaded(path):
 	load_tileset(path)
 

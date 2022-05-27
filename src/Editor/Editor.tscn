@@ -12,7 +12,8 @@
 [node name="Editor" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = 2.0
+margin_right = 488.0
+margin_bottom = 186.0
 mouse_filter = 2
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
@@ -22,29 +23,40 @@ __meta__ = {
 tiles_tab = NodePath("Main/Tab/Tiles")
 layer_list = NodePath("Main/Tab/Layers/Scroll/LayerList")
 
+[node name="Secondary" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 704.0
+margin_top = 16.0
+margin_right = 952.0
+margin_bottom = 464.0
+mouse_filter = 1
+
+[node name="Inspector" parent="Secondary" instance=ExtResource( 7 )]
+margin_right = 248.0
+margin_bottom = 448.0
+
 [node name="Main" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 448.0
-margin_bottom = 256.0
-rect_min_size = Vector2( 80, 240 )
+margin_right = 256.0
+margin_bottom = 264.0
 header_size = 16
 bar_size = 16
 
 [node name="Tab" type="TabContainer" parent="Main"]
-margin_right = 448.0
-margin_bottom = 256.0
-mouse_filter = 2
+margin_right = 256.0
+margin_bottom = 264.0
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Tiles" parent="Main/Tab" instance=ExtResource( 4 )]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
-margin_top = 14.0
+margin_top = 30.0
 margin_right = -16.0
 margin_bottom = -16.0
 
@@ -59,8 +71,8 @@ margin_bottom = -16.0
 mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="Main/Tab/Layers"]
-margin_right = 416.0
-margin_bottom = 210.0
+margin_right = 224.0
+margin_bottom = 218.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -69,8 +81,8 @@ __meta__ = {
 }
 
 [node name="Scroll" type="ScrollContainer" parent="Main/Tab/Layers"]
-margin_right = 416.0
-margin_bottom = 210.0
+margin_right = 224.0
+margin_bottom = 218.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -78,8 +90,8 @@ __meta__ = {
 }
 
 [node name="LayerList" type="VBoxContainer" parent="Main/Tab/Layers/Scroll"]
-margin_right = 416.0
-margin_bottom = 210.0
+margin_right = 224.0
+margin_bottom = 218.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
@@ -105,19 +117,15 @@ margin_right = -16.0
 margin_bottom = -16.0
 
 [node name="Enemies" parent="Main/Tab" instance=ExtResource( 8 )]
+visible = false
 margin_left = 16.0
 margin_top = 30.0
 margin_right = -16.0
 margin_bottom = -16.0
 
-[node name="Secondary" parent="." instance=ExtResource( 3 )]
-visible = false
-margin_left = 392.0
-margin_right = 168.0
-
-[node name="Inspector" parent="Secondary" instance=ExtResource( 7 )]
-
+[connection signal="enemy_selected" from="." to="Secondary/Inspector" method="on_enemy_selected"]
 [connection signal="tab_changed" from="Main/Tab" to="." method="on_tab_changed"]
+[connection signal="tab_changed" from="Main/Tab" to="Secondary/Inspector" method="on_tab_changed"]
 [connection signal="autolayer_updated" from="Main/Tab/Tiles" to="." method="_on_TileSetMenu_autolayer_updated"]
 [connection signal="multi_erase_toggled" from="Main/Tab/Tiles" to="." method="_on_TileSetMenu_multi_erase_toggled"]
 [connection signal="tile_selection_updated" from="Main/Tab/Tiles" to="." method="_on_TileSetMenu_tile_selection_updated"]

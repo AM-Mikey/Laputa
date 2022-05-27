@@ -14,9 +14,6 @@ release_version = "1.8"
 do_skip_title = true
 start_level = ExtResource( 1 )
 
-[node name="BackgroundLayer" type="CanvasLayer" parent="."]
-layer = -1
-
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="Back" type="Node2D" parent="."]

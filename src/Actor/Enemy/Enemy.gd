@@ -45,9 +45,10 @@ func _ready():
 	timer.connect("timeout", self, "_on_DamagenumTimer_timeout")
 	add_child(timer)
 	
-	yield(get_tree(), "idle_frame")
-	if state != "":
-		change_state(state)
+	if not is_in_group("EnemyPreviews"):
+		yield(get_tree(), "idle_frame")
+		if state != "": #TODO: this prevents enemies from starting in a state if we dont yield? we get ton of errors if we dont because we delete the enemy when moving it
+			change_state(state)
 	
 
 func disable():

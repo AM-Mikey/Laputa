@@ -8,7 +8,8 @@
 [ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=6]
 [ext_resource path="res://src/Trigger/LoadZone.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Utility/Outdated/CameraLimiter.tscn" type="PackedScene" id=9]
+
 
 
 [node name="TopFloor" type="Node2D"]

@@ -4,13 +4,14 @@
 [ext_resource path="res://src/Trigger/LoadZone.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Prop/ChestKeyItem.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Utility/Outdated/CameraLimiter.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Tile/DebugTile.tres" type="TileSet" id=6]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=7]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=8]
 [ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=9]
 [ext_resource path="res://src/Tile/DebugBackground.tres" type="TileSet" id=10]
 [ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=11]
+
 
 
 [node name="CloudCliff" type="Node2D"]

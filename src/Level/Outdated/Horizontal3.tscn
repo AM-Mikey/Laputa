@@ -5,7 +5,7 @@
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=3]
 [ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=4]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=5]
-[ext_resource path="res://src/Utility/CameraLimiter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Utility/Outdated/CameraLimiter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Actor/Enemy/Billy.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Actor/Enemy/Sentry.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Tile/TriggerTile/SpikesTrigger.tscn" type="PackedScene" id=9]
@@ -17,6 +17,7 @@
 [ext_resource path="res://src/Tile/DebugSSP.tres" type="TileSet" id=15]
 [ext_resource path="res://src/Actor/Enemy/Frog.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/Utility/Wind.tscn" type="PackedScene" id=17]
+
 
 
 [node name="Horizontal" type="Node2D"]

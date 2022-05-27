@@ -1,7 +1,10 @@
 extends MarginContainer
 
+signal background_selected(background)
+
 onready var world = get_tree().get_root().get_node("World")
 onready var level_limiter = world.current_level.get_node("LevelLimiter")
+onready var editor = world.get_node("EditorLayer/Editor")
 
 var state = "idle"
 var active_handle = null
@@ -15,12 +18,15 @@ func _ready():
 	for c in get_children():
 		if c is TextureButton:
 			c.connect("button_down", self, "on_handle", [c])
+	
+	connect("background_selected", editor.inspector, "on_background_selected")
 
 
 func on_handle(handle):
 	state = "resize"
 	active_handle = handle
 	drag_offset =  handle.rect_global_position - get_global_mouse_position()
+	emit_signal("background_selected", self)
 
 
 
@@ -52,8 +58,8 @@ func _input(event):
 				"Right":
 					margin_right = x
 			
-			level_limiter.rect_global_position = $MarginContainer/LevelRect.rect_global_position
-			level_limiter.rect_size = $MarginContainer/LevelRect.rect_size
+			level_limiter.rect_global_position = $Margin/LevelRect.rect_global_position
+			level_limiter.rect_size = $Margin/LevelRect.rect_size
 			level_limiter.on_viewport_size_changed()
 		
 		if event.is_action_released("editor_lmb"):
