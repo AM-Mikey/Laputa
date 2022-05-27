@@ -17,9 +17,6 @@ margin_bottom = 186.0
 mouse_filter = 2
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 tiles_tab = NodePath("Main/Tab/Tiles")
 layer_list = NodePath("Main/Tab/Layers/Scroll/LayerList")
 

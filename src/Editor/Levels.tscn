@@ -9,9 +9,6 @@ anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 320, 120 )
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBox" type="HBoxContainer" parent="."]
 margin_top = 240.0
@@ -46,8 +43,6 @@ margin_bottom = 270.0
 rect_min_size = Vector2( 400, 140 )
 dialog_hide_on_ok = true
 filters = PoolStringArray( "*.tscn" )
-current_dir = "res://src/Level"
-current_path = "res://src/Level/"
 
 [node name="Load" type="FileDialog" parent="."]
 margin_right = 480.0
@@ -56,8 +51,6 @@ rect_min_size = Vector2( 400, 140 )
 window_title = "Open a File"
 mode = 0
 filters = PoolStringArray( "*.tscn" )
-current_dir = "res://src/Level"
-current_path = "res://src/Level/"
 
 [node name="New" type="FileDialog" parent="."]
 margin_right = 480.0
@@ -66,8 +59,6 @@ rect_min_size = Vector2( 400, 140 )
 window_title = "Open a File"
 mode = 0
 filters = PoolStringArray( "*.tscn" )
-current_dir = "res://src/Level"
-current_path = "res://src/Level/"
 
 [connection signal="pressed" from="HBox/Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="HBox/Load" to="." method="_on_Load_pressed"]

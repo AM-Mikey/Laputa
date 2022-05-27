@@ -396,6 +396,7 @@ func set_enemy(position, enemy_path, traced = true):
 		enemy.global_position = position
 		#enemy.name = enemy.script.resource_path.get_file().get_basename() only works for first instance
 		actor_collection.add_child(enemy)
+		enemy.owner = w.current_level
 		if traced:
 			emit_signal("enemy_selected", enemy) #select new enemy
 	else:
