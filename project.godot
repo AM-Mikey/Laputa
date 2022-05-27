@@ -167,6 +167,10 @@ window/size/test_height=1080
 
 enabled=PoolStringArray(  )
 
+[global]
+
+auto_complete=false
+
 [importer_defaults]
 
 texture={

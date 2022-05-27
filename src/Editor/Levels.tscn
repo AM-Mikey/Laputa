@@ -18,16 +18,22 @@ size_flags_vertical = 8
 alignment = 2
 
 [node name="Save" type="Button" parent="HBox"]
-margin_left = 299.0
-margin_right = 397.0
+margin_left = 323.0
+margin_right = 367.0
 margin_bottom = 30.0
-text = "Save Level As"
+text = "Save"
+
+[node name="SaveAs" type="Button" parent="HBox"]
+margin_left = 371.0
+margin_right = 433.0
+margin_bottom = 30.0
+text = "Save As"
 
 [node name="Load" type="Button" parent="HBox"]
-margin_left = 401.0
+margin_left = 437.0
 margin_right = 480.0
 margin_bottom = 30.0
-text = "Load Level"
+text = "Load"
 
 [node name="New" type="Button" parent="HBox"]
 visible = false
@@ -36,15 +42,14 @@ margin_right = 480.0
 margin_bottom = 30.0
 text = "New Level"
 
-[node name="Save" type="FileDialog" parent="."]
+[node name="SaveDialog" type="FileDialog" parent="."]
 margin_right = 480.0
 margin_bottom = 270.0
 rect_min_size = Vector2( 400, 140 )
 dialog_hide_on_ok = true
 filters = PoolStringArray( "*.tscn" )
 
-[node name="Load" type="FileDialog" parent="."]
-visible = true
+[node name="LoadDialog" type="FileDialog" parent="."]
 margin_right = 480.0
 margin_bottom = 270.0
 rect_min_size = Vector2( 400, 140 )
@@ -52,7 +57,7 @@ window_title = "Open a File"
 mode = 0
 filters = PoolStringArray( "*.tscn" )
 
-[node name="New" type="FileDialog" parent="."]
+[node name="NewDialog" type="FileDialog" parent="."]
 margin_right = 480.0
 margin_bottom = 270.0
 rect_min_size = Vector2( 400, 140 )
@@ -60,7 +65,8 @@ window_title = "Open a File"
 mode = 0
 filters = PoolStringArray( "*.tscn" )
 
-[connection signal="pressed" from="HBox/Save" to="." method="_on_Save_pressed"]
-[connection signal="pressed" from="HBox/Load" to="." method="_on_Load_pressed"]
-[connection signal="confirmed" from="Save" to="." method="_on_Save_confirmed"]
-[connection signal="file_selected" from="Load" to="." method="_on_Load_file_selected"]
+[connection signal="pressed" from="HBox/Save" to="." method="on_save"]
+[connection signal="pressed" from="HBox/SaveAs" to="." method="on_save_as"]
+[connection signal="pressed" from="HBox/Load" to="." method="on_load"]
+[connection signal="confirmed" from="SaveDialog" to="." method="on_save_confirmed"]
+[connection signal="file_selected" from="LoadDialog" to="." method="on_load_selected"]

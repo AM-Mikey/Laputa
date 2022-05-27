@@ -1,6 +1,7 @@
 extends Control
 
 signal enemy_selected(enemy)
+signal level_saved()
 
 const EDITOR_CAMERA = preload("res://src/Editor/EditorCamera.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
@@ -160,11 +161,12 @@ func _unhandled_input(event):
 	if event.is_action_pressed("editor_shift"): shift_held = true
 	if event.is_action_released("editor_shift"): shift_held = false
 
-	if event is InputEventKey and event.is_pressed() and event.scancode == KEY_Z and not event.is_echo():
-		if ctrl_held and not shift_held:
-			undo()
-		if ctrl_held and shift_held:
-			redo()
+	if event is InputEventKey and event.is_pressed() and not event.is_echo() and ctrl_held:
+		if event.scancode == KEY_Z:
+			if shift_held: redo()
+			else: undo()
+		if event.scancode == KEY_S:
+			emit_signal("level_saved")
 	
 	
 	if event.is_action_pressed("editor_lmb"):

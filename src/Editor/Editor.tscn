@@ -121,6 +121,7 @@ margin_right = -16.0
 margin_bottom = -16.0
 
 [connection signal="enemy_selected" from="." to="Secondary/Inspector" method="on_enemy_selected"]
+[connection signal="level_saved" from="." to="Main/Tab/Levels" method="on_save"]
 [connection signal="tab_changed" from="Main/Tab" to="." method="on_tab_changed"]
 [connection signal="tab_changed" from="Main/Tab" to="Secondary/Inspector" method="on_tab_changed"]
 [connection signal="autolayer_updated" from="Main/Tab/Tiles" to="." method="_on_TileSetMenu_autolayer_updated"]
