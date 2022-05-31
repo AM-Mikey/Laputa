@@ -1,6 +1,6 @@
 extends MarginContainer
 
-signal background_selected(background)
+signal selected(background, type)
 
 onready var world = get_tree().get_root().get_node("World")
 onready var level_limiter = world.current_level.get_node("LevelLimiter")
@@ -19,14 +19,14 @@ func _ready():
 		if c is TextureButton:
 			c.connect("button_down", self, "on_handle", [c])
 	
-	connect("background_selected", editor.inspector, "on_background_selected")
+	connect("selected", editor.inspector, "on_selected")
 
 
 func on_handle(handle):
 	state = "resize"
 	active_handle = handle
 	drag_offset =  handle.rect_global_position - get_global_mouse_position()
-	emit_signal("background_selected", self)
+	emit_signal("selected", self, "background")
 
 
 
@@ -64,3 +64,11 @@ func _input(event):
 		
 		if event.is_action_released("editor_lmb"):
 			state = "idle"
+
+### SIGNALS
+
+func on_editor_select():
+	modulate = Color.red
+
+func on_editor_deselect():
+	modulate = Color(1,1,1)

@@ -4,7 +4,7 @@
 [ext_resource path="res://src/Background/BackgroundIndoor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Tile/Outdated/House.tres" type="TileSet" id=3]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=5]
 
 [node name="IndoorTemplate" type="Node2D"]
 script = ExtResource( 1 )

@@ -1,0 +1,182 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://src/Editor/EditorTheme.tres" type="Theme" id=1]
+[ext_resource path="res://src/UI/StyleBox/SteelRound.tres" type="StyleBox" id=2]
+[ext_resource path="res://src/Editor/Button/PropertyButton.gd" type="Script" id=3]
+[ext_resource path="res://src/UI/StyleBox/RustRoundInset.tres" type="StyleBox" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[node name="PropertyButton" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -224.0
+margin_bottom = -238.0
+rect_min_size = Vector2( 0, 32 )
+mouse_filter = 1
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 256.0
+margin_bottom = 32.0
+mouse_filter = 2
+
+[node name="PanelActive" type="Panel" parent="."]
+margin_right = 256.0
+margin_bottom = 32.0
+mouse_filter = 2
+custom_styles/panel = ExtResource( 2 )
+
+[node name="HBox" type="HBoxContainer" parent="."]
+margin_right = 256.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer" type="Control" parent="HBox"]
+margin_right = 16.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 16, 0 )
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="HBox"]
+margin_left = 20.0
+margin_right = 244.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Property"
+flat = true
+align = 0
+
+[node name="Bool" type="CheckBox" parent="HBox"]
+visible = false
+margin_left = 216.0
+margin_right = 244.0
+margin_bottom = 32.0
+mouse_filter = 1
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/hover_pressed = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
+
+[node name="Panel" type="Panel" parent="HBox/Bool"]
+show_behind_parent = true
+margin_left = -4.0
+margin_right = 28.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 0 )
+mouse_filter = 2
+custom_styles/panel = ExtResource( 4 )
+
+[node name="Enum" type="OptionButton" parent="HBox"]
+visible = false
+margin_left = 170.0
+margin_right = 244.0
+margin_bottom = 32.0
+mouse_filter = 1
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+text = "testing"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="String" type="LineEdit" parent="HBox"]
+visible = false
+margin_left = 168.0
+margin_right = 244.0
+margin_bottom = 32.0
+mouse_filter = 1
+size_flags_horizontal = 10
+placeholder_text = "Null"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Load" type="LineEdit" parent="HBox"]
+visible = false
+margin_left = 168.0
+margin_right = 244.0
+margin_bottom = 32.0
+mouse_filter = 1
+size_flags_horizontal = 10
+editable = false
+placeholder_text = "Null"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Vector2X" type="LineEdit" parent="HBox"]
+visible = false
+margin_left = 88.0
+margin_right = 164.0
+margin_bottom = 32.0
+mouse_filter = 1
+align = 1
+placeholder_text = "Null"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Vector2Y" type="LineEdit" parent="HBox"]
+visible = false
+margin_left = 168.0
+margin_right = 244.0
+margin_bottom = 32.0
+mouse_filter = 1
+align = 1
+placeholder_text = "Null"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer2" type="Control" parent="HBox"]
+margin_left = 248.0
+margin_right = 256.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 8, 0 )
+mouse_filter = 2
+
+[connection signal="pressed" from="HBox/Button" to="." method="on_pressed"]
+[connection signal="toggled" from="HBox/Bool" to="." method="on_bool_toggled"]
+[connection signal="item_selected" from="HBox/Enum" to="." method="on_enum_selected"]
+[connection signal="focus_exited" from="HBox/String" to="." method="on_text_entered"]
+[connection signal="text_entered" from="HBox/String" to="." method="on_text_entered"]
+[connection signal="focus_exited" from="HBox/Load" to="." method="on_text_entered"]
+[connection signal="text_entered" from="HBox/Load" to="." method="on_text_entered"]
+[connection signal="focus_exited" from="HBox/Vector2X" to="." method="on_vector2x_entered"]
+[connection signal="text_entered" from="HBox/Vector2X" to="." method="on_vector2x_entered"]
+[connection signal="focus_exited" from="HBox/Vector2Y" to="." method="on_vector2y_entered"]
+[connection signal="text_entered" from="HBox/Vector2Y" to="." method="on_vector2y_entered"]

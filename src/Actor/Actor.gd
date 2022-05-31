@@ -15,3 +15,14 @@ var dead = false
 var is_in_water = false
 
 onready var world = get_tree().get_root().get_node("World")
+
+
+#func _input_event(viewport, event, shape_idx): #TODO: selecting in editor
+#	if event is InputEventMouseButton:
+
+
+func on_editor_select():
+	modulate = Color(2,2,2)
+
+func on_editor_deselect():
+	modulate = Color(1,1,1)

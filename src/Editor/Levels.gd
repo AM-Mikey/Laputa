@@ -18,9 +18,11 @@ func on_save():
 	save_level(w.current_level, w.current_level.filename)
 
 func on_save_as():
+	$SaveDialog.current_path = "res://src/level/"
 	$SaveDialog.popup()
 
 func on_load():
+	$LoadDialog.current_path = "res://src/level/"
 	$LoadDialog.popup()
 
 
@@ -37,8 +39,8 @@ func on_load_selected(path):
 ### SAVE/LOAD
 
 func save_level(level, path):
-	level.name = path.get_basename()
-	level.level_name = path.get_basename() #Todo, add this to inspector
+	level.name = path.get_file().get_basename()
+	level.level_name = path.get_file().get_basename() #TODO: add this to inspector
 	
 	var dir = Directory.new()
 	if dir.file_exists(path):

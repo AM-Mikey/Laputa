@@ -6,7 +6,7 @@
 [ext_resource path="res://src/Effect/SealDoor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
 [ext_resource path="res://src/Utility/LevelCamera.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=9]
 
 [node name="SealDoor" type="Node2D"]
 script = ExtResource( 5 )

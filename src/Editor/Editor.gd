@@ -1,27 +1,30 @@
 extends Control
 
 signal enemy_selected(enemy)
+signal prop_selected(prop)
+signal level_selected(level)
+signal tile_collection_selected(tile_collection)
+
 signal level_saved()
+
 
 const EDITOR_CAMERA = preload("res://src/Editor/EditorCamera.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
-const LAYER_BUTTON = preload("res://src/Editor/LayerButton.tscn")
+const LAYER_BUTTON = preload("res://src/Editor/Button/LayerButton.tscn")
 const LIMITER = preload("res://src/Editor/EditorLevelLimiter.tscn")
 
 
-export(NodePath) var tiles_tab
-export(NodePath) var layer_list
-
+var disabled = false
 
 var active_tiles = [] #2D array
 
-var layers = {}
 var auto_layer = true
 var multi_erase = false
 
 var active_tool = "tile"
 var subtool = "paint"
 var mouse_start_pos
+var grab_offset = Vector2()
 var lmb_held = false
 var rmb_held = false
 var shift_held = false
@@ -35,29 +38,57 @@ var active_operation = [] #[[subop][subop][subop]]
 onready var w = get_tree().get_root().get_node("World")
 onready var ui = w.get_node("UILayer")
 onready var el = w.get_node("EditorLayer")
-onready var tile_collection = w.current_level.get_node("Tiles")
-onready var actor_collection = w.current_level.get_node("Actors")
 onready var inspector = $Secondary/Inspector
-var tilemap
-var tileset
+var tile_collection
+var actor_collection
+var prop_collection
+var tile_map
+var tile_set
+
 
 func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 	_on_viewport_size_changed()
-	
+	connect("tile_collection_selected", inspector, "on_tile_collection_selected")
+	connect("level_selected", inspector, "on_level_selected")
 	el.add_child(EDITOR_CAMERA.instance())
-	ui.get_node("HUD").queue_free()
-	#w.get_node("Juniper").disable()
-	for e in get_tree().get_nodes_in_group("Enemies"):
-		e.disable()
+
 	
-	
-	load_tileset(tile_collection.get_child(0).tile_set.resource_path)
-	setup_level_limiter()
-	setup_layers()
+	setup_level() #Call this every time the level is changed or reloaded
 	#$Main.move_child($Main/Tab, 0) TODO: was supposed to make tabcontainer go behind resize controls, didnt work
 
+func setup_level():
+	#emit_signal("level_selected", w.current_level)
+
+	
+	#w.get_node("Juniper").disable()
+	ui.get_node("HUD").queue_free()
+	for e in get_tree().get_nodes_in_group("Enemies"):
+		e.disable()
+	tile_collection = w.current_level.get_node("Tiles")
+	actor_collection = w.current_level.get_node("Actors")
+	prop_collection = w.current_level.get_node("Props")
+	
+	tile_map = tile_collection.get_child(0)
+	tile_set = w.current_level.tile_set
+	on_tile_set_loaded(tile_set.resource_path) #so we can set every tile map to the tile set
+	$Main/Tab/TileSet.setup_tile_set(tile_set)
+	$Main/Tab/Tiles.setup_tile_set(tile_set)
+	setup_level_limiter()
+	
+	for s in get_tree().get_nodes_in_group("SpawnPoints"):
+		s.connect("selected", inspector, "on_selected")
+
+
+
+func setup_level_limiter():
+	var limiter = LIMITER.instance()
+	w.current_level.add_child(limiter)
+	#w.current_level.move_child(limiter, 0)
+
 func exit():
+	inspector.exit()
+	
 	hide_preview() #delete tile brush preview
 	w.current_level.get_node("EditorLevelLimiter").queue_free()
 	el.get_node("EditorCamera").queue_free()
@@ -68,94 +99,75 @@ func exit():
 		e.enable()
 	queue_free()
 
-func setup_level_limiter():
-	var limiter = LIMITER.instance()
-	w.current_level.add_child(limiter)
-	#w.current_level.move_child(limiter, 0)
 
-func create_tileset_from_texture(texture):
-	tileset = TileSet.new()
+
+func create_tile_set_from_texture(texture):
+	tile_set = TileSet.new()
 	var rows = int(texture.get_size().y/16)
 	var columns = int(texture.get_size().x/16)
-	
+
 	var id = 0
 	while id < rows * columns:
 		var x_pos = (id % columns) * 16
 		var y_pos = floor(id / columns) * 16
 		var region = Rect2(x_pos, y_pos, 16, 16)
-		
+
 		#if texture_alpha_check(texture, region):
-		tileset.create_tile(id)
-		tileset.tile_set_texture(id, texture)
-		tileset.tile_set_region(id, region)
+		tile_set.create_tile(id)
+		tile_set.tile_set_texture(id, texture)
+		tile_set.tile_set_region(id, region)
 		id += 1
-	
-	get_node(tiles_tab).setup_tileset(tileset)
-	
+
+	$Main/Tab/TileSet.setup_tile_set(tile_set)
+
 	for c in tile_collection.get_children():
 		if c is TileMap:
-			c.tile_set = tileset
+			c.tile_set = tile_set
 
 
-func texture_alpha_check(texture, region) -> bool: #TODO does not work
-	var image = Image.new()
-	image.load(texture.resource_path)
-	if image.get_rect(region).is_invisible():
-		return true
-	else:
-		return false
-#	var pixel_check_count = 0
-#	var pixel_pos = Vector2.ZERO
-	
-#	for row in cropped.get_height():
-#		for column in cropped.get_width():
-#			var pixel = AtlasTexture.new()
-#			pixel.atlas = texture
-#			pixel.region = Rect2(column, row, 1, 1)
-#			if pixel.has_alpha():
-#				pixel_check_count += 1
-#
-#
-#	#if pixel_check_count != 0:
-#	print("pixel_check_count:", pixel_check_count)
-#	if pixel_check_count == cropped.get_height() * cropped.get_width():
+#func texture_alpha_check(texture, region) -> bool: #TODO does not work
+#	var image = Image.new()
+#	image.load(texture.resource_path)
+#	if image.get_rect(region).is_invisible():
 #		return true
 #	else:
 #		return false
+##	var pixel_check_count = 0
+##	var pixel_pos = Vector2.ZERO
+#
+##	for row in cropped.get_height():
+##		for column in cropped.get_width():
+##			var pixel = AtlasTexture.new()
+##			pixel.atlas = texture
+##			pixel.region = Rect2(column, row, 1, 1)
+##			if pixel.has_alpha():
+##				pixel_check_count += 1
+##
+##
+##	#if pixel_check_count != 0:
+##	print("pixel_check_count:", pixel_check_count)
+##	if pixel_check_count == cropped.get_height() * cropped.get_width():
+##		return true
+##	else:
+##		return false
 
 
-func load_tileset(path):
-	tileset = load(path)
-	var texture = tileset.tile_get_texture(0)
-	var rows = int(texture.get_size().y/16)
-	var columns = int(texture.get_size().x/16)
-
-	for c in tile_collection.get_children():
-		if c is TileMap:
-			c.tile_set = tileset
-
-#	var id = 0 #tileset.get_last_unused_tile_id()
-#	while id < rows * columns:
-#		var x_pos = (id % columns) * 16
-#		var y_pos = floor(id / columns) * 16
-#		var region = Rect2(x_pos, y_pos, 16, 16)
-#		tileset.tile_set_region(id, region)
-#		id += 1
-	
-	get_node(tiles_tab).setup_tileset(tileset)
 
 
 
 func get_tile_texture(tile):
 	var tile_texture = AtlasTexture.new()
-	tile_texture.atlas = tileset.tile_get_texture(tile)
-	tile_texture.region = tileset.tile_get_region(tile)
+	tile_texture.atlas = tile_set.tile_get_texture(tile)
+	tile_texture.region = tile_set.tile_get_region(tile)
 	return tile_texture
 
 
 ### INPUT ###
 
 func _unhandled_input(event):
+	if disabled:
+		return
+	
 	if event.is_action_pressed("editor_ctrl"): ctrl_held = true
 	if event.is_action_released("editor_ctrl"): ctrl_held = false
 	if event.is_action_pressed("editor_shift"): shift_held = true
@@ -183,12 +195,16 @@ func _unhandled_input(event):
 	match active_tool:
 		"tile": do_tile_input(event)
 		"enemy": do_enemy_input(event)
+		"prop": do_prop_input(event)
+		"grab": do_grab_input(event)
 
 	#after, just so we can check held during main part
 	if event.is_action_released("editor_lmb"):
 		lmb_held = false
 	if event.is_action_released("editor_rmb"):
 		rmb_held = false
+
+
 
 func do_enemy_input(event):
 	var mouse_pos = w.get_global_mouse_position() #Vector2(w.get_global_mouse_position().x, w.get_global_mouse_position().y + 8)
@@ -210,17 +226,42 @@ func do_enemy_input(event):
 			preview_enemy(actor_pos, $Main/Tab/Enemies.active_enemy_path)
 
 	#pressing
-	if (event.is_action_pressed("editor_lmb") and not brush.empty()) or event.is_action_pressed("editor_rmb"):
+	if (event.is_action_pressed("editor_lmb") and not brush.empty()): #or event.is_action_pressed("editor_rmb"):
 		if (lmb_held and not pos_has_enemy) or (rmb_held):
 			set_enemy(actor_pos, brush)
 		else:
 			pass
 			select_enemy(actor_pos)
+	
+	if event.is_action_pressed("editor_rmb"):
+		set_tool("grab")
 		
 #		if not active_operation.empty():
 #			past_operations.append(["set_enemy", active_operation.duplicate()]) #???????? what does this do? is it for drawing like a brush?
 #			#print("active op: ", active_operation)
 #			active_operation.clear()
+
+func do_prop_input(event):
+	var mouse_pos = w.get_global_mouse_position() #Vector2(w.get_global_mouse_position().x, w.get_global_mouse_position().y + 8)
+	var actor_pos = get_actor_pos(mouse_pos, "fine")
+
+	var brush
+	if lmb_held: brush = $Main/Tab/Props.active_prop_path
+	if rmb_held: brush = null
+	
+
+	#moving
+	if event is InputEventMouseMotion:
+		hide_preview()
+		preview_prop(actor_pos, $Main/Tab/Props.active_prop_path)
+
+	#pressing
+	if (event.is_action_pressed("editor_lmb") and not brush.empty()): #or event.is_action_pressed("editor_rmb"):
+		set_prop(actor_pos, brush)
+
+	if event.is_action_pressed("editor_rmb"):
+		set_tool("grab")
+
 
 
 
@@ -233,10 +274,10 @@ func do_tile_input(event):
 	#pressing
 	if event.is_action_pressed("editor_rmb") or event.is_action_pressed("editor_lmb") and not active_tiles.empty():
 		mouse_start_pos = mouse_pos
-		if shift_held: subtool = "line"
-		elif ctrl_held: subtool = "box"
+		if shift_held: set_tool("tile", "line")
+		elif ctrl_held: set_tool("tile", "box")
 		else: 
-			subtool = "paint"
+			set_tool("tile", "paint")
 			set_2d_array(get_centerbox(mouse_pos), brush) #TODO: on all layers
 	
 	#moving
@@ -262,6 +303,30 @@ func do_tile_input(event):
 			past_operations.append([operation_name, active_operation.duplicate()])
 			#print("active op: ", active_operation)
 			active_operation.clear()
+
+
+
+func do_grab_input(event):
+	var mouse_pos = w.get_global_mouse_position() #Vector2(w.get_global_mouse_position().x, w.get_global_mouse_position().y + 8)
+	var actor_pos = get_actor_pos(mouse_pos)
+
+	#pressing
+	if event.is_action_pressed("editor_lmb") and inspector.active:
+		set_tool("grab", "hold")
+		grab_offset = inspector.active.position - actor_pos
+	
+	if event.is_action_pressed("editor_rmb"):
+		inspector.on_deselected()
+	
+	#releasing
+	if event.is_action_released("editor_lmb"):
+		set_tool("grab", "release")
+
+	#moving
+	if event is InputEventMouseMotion and subtool == "hold":
+		inspector.active.position = actor_pos + grab_offset
+
+
 
 
 ### OPERATIONS ###
@@ -325,8 +390,8 @@ func set_cells(cells: Array, tile, traced = true): #TODO, new draw methods use s
 	if tile == -2: #null
 		return
 	for cell in cells: #subops
-		var old_tile = tilemap.get_cellv(cell)
-		tilemap.set_cellv(cell, tile)
+		var old_tile = tile_map.get_cellv(cell)
+		tile_map.set_cellv(cell, tile)
 		if traced:
 			for s in active_operation:
 				if s[0] == cell: #already setting this cell in the current operation, this prevents reactivating on mouse movement
@@ -344,8 +409,8 @@ func set_2d_array(cells: Array, brush: Array, traced = true):
 		for cell in row: #subops
 			var tile = brush[r_id % r_max][c_id % c_max] # % so it repeats if cells > tiles
 			if tile != -2: #null
-				var old_tile = tilemap.get_cellv(cell)
-				tilemap.set_cellv(cell, tile)
+				var old_tile = tile_map.get_cellv(cell)
+				tile_map.set_cellv(cell, tile)
 				
 				if traced:
 					for s in active_operation:
@@ -372,8 +437,8 @@ func set_line(canvas: Array, brush: Array, traced = true):
 					var tile = brush_cell
 					if tile != -2: #null
 						var offset = Vector2(brush_c_id, brush_r_id)
-						var old_tile = tilemap.get_cellv(cell + offset)
-						tilemap.set_cellv(cell + offset, tile)
+						var old_tile = tile_map.get_cellv(cell + offset)
+						tile_map.set_cellv(cell + offset, tile)
 						
 						if traced:
 							active_operation.append([cell + offset, tile, old_tile])
@@ -382,6 +447,30 @@ func set_line(canvas: Array, brush: Array, traced = true):
 				brush_r_id +=1
 			c_id += 1
 		r_id += 1
+
+func set_prop(position, prop_path, traced = true):
+	var old_props = []
+	var old_prop_paths = []
+	for p in get_tree().get_nodes_in_group("Props"):
+		if is_prop_at_position(p, position):
+			old_props.append(p)
+	for p in old_props:
+		old_prop_paths.append(p.filename)
+	
+	if prop_path:
+		var prop = load(prop_path).instance()
+		#prop.disable()
+		prop.global_position = position
+		prop_collection.add_child(prop)
+		prop.owner = w.current_level
+		if traced:
+			emit_signal("prop_selected", prop) #select new prop
+	if traced:
+		active_operation.append([position, prop_path, old_prop_paths])
+	for p in old_props:
+		print("freeing prop: " + p.name)
+		p.queue_free()
+
 
 func set_enemy(position, enemy_path, traced = true):
 	var old_enemies = []
@@ -432,6 +521,8 @@ func select_enemy(position):
 #						return
 #				active_operation.append([layer, pos, tile, old_tile])
 
+
+
 ### PREVIEW ###
 
 func preview_2d_array(cells: Array):
@@ -477,27 +568,38 @@ func set_preview(cell, tile):
 	sprite.position = cell * 16
 	tile_collection.add_child(sprite)
 
+func preview_enemy(position, enemy_path):
+	var enemy = load(enemy_path).instance()
+	enemy.disable()
+	enemy.modulate = Color(1, 1, 1, 0.5)
+	enemy.add_to_group("EnemyPreviews")
+	enemy.global_position = position
+	actor_collection.add_child(enemy)
+
+func preview_prop(position, prop_path):
+	var prop = load(prop_path).instance()
+	#prop.disable()
+	prop.modulate = Color(1, 1, 1, 0.5)
+	prop.add_to_group("PropPreviews")
+	prop.global_position = position
+	prop_collection.add_child(prop)
+
 func hide_preview():
 	for c in tile_collection.get_children():
 		if c is Sprite:
 			c.queue_free()
 	for e in get_tree().get_nodes_in_group("EnemyPreviews"):
 		e.queue_free()
-		
+	for p in get_tree().get_nodes_in_group("PropPreviews"):
+		p.queue_free()
 
-func preview_enemy(position, enemy_path):
-	var enemy = load(enemy_path).instance()
-	enemy.disable()
-	enemy.add_to_group("EnemyPreviews")
-	enemy.global_position = position
-	actor_collection.add_child(enemy)
-	
-	
+
 
 ### GETTERS ###
+
 func get_cell(mouse_pos) -> Vector2:
-	var local_pos = tilemap.to_local(mouse_pos)
-	var map_pos = tilemap.world_to_map(local_pos)
+	var local_pos = tile_map.to_local(mouse_pos)
+	var map_pos = tile_map.world_to_map(local_pos)
 	return map_pos
 
 func get_actor_pos(mouse_pos, mode = "course") -> Vector2:
@@ -636,7 +738,7 @@ func get_brush_as_eraser(var null_erase = true) -> Array: #erase with null tiles
 			if null_erase: eraser_row.append(-1)
 			else: eraser_row.append(-2) if tile == -2 else eraser_row.append(-1) #null if null, else eraser
 		eraser.append(eraser_row)
-	print(eraser)
+	#print(eraser)
 	return eraser
 
 func get_2d_array_from_Vector2_array(array) -> Array:
@@ -659,31 +761,35 @@ func is_actor_at_position(actor, position, forgiveness = 4):
 			out = true
 	return out
 
-### LAYERS ###
+func is_prop_at_position(prop, position, forgiveness = 4):
+	var out = false
+	if abs(position.x - prop.global_position.x) < forgiveness and abs(position.y - prop.global_position.y) < forgiveness:
+		if not prop.is_in_group("PropPreviews"):
+			out = true
+	return out
 
-func setup_layers():
-	var layer_index = 0
-	for l in w.current_level.get_node("Tiles").get_children():
-		layers[l.name] = l
-		
-		var layer_button = LAYER_BUTTON.instance()
-		layer_button.layer = l
-		layer_button.connect("layer_changed", self, "change_layer")
-		if layer_index == 0:
-			layer_button.active = true
-			tilemap = l
-		get_node(layer_list).add_child(layer_button)
-		layer_index += 1
 
-func change_layer(layer):
-	tilemap = layer
-	for e in get_node(layer_list).get_children():
-		if e.layer == layer:
-			e.activate()
+### HELPERS
+
+func set_tool(new_tool = "", new_subtool = ""):
+	hide_preview()
+	active_tool = new_tool
+	if new_subtool == "":
+		match active_tool: #default subtools
+			"tile": new_subtool = "paint"
+			"grab": new_subtool = "release"
+			_: new_subtool = ""
+	
+	subtool = new_subtool
+	
+	
+
+func on_layer_changed(layer):
+	tile_map = layer
 
 #func get_auto_layer() -> Node: TODO FIX for multibox
 #	var layer
-#	var tile_pos = tileset.tile_get_region(active_tile).position
+#	var tile_pos = tile_set.tile_get_region(active_tile).position
 #
 #	match int(floor(tile_pos.y /16 / 4)):
 #		0: layer = layers["FarBack"]
@@ -693,6 +799,8 @@ func change_layer(layer):
 #		_: layer = layers["Front"]
 #	print(layer.name)
 #	return layer
+
+
 
 ### SIGNALS ###
 
@@ -716,23 +824,46 @@ func _on_TileSetMenu_multi_erase_toggled(toggle):
 
 func _on_TileSet_collision_updated(tile_id, shape):
 	var transform = Transform2D.IDENTITY
-	tileset.tile_add_shape(tile_id, shape, transform)
-	tileset.tile_set_shape(tile_id, 0, shape)
-
-func _on_TileSet_tile_set_saved(path):
-	ResourceSaver.save(path, tileset)
-	
-func _on_TileSet_tile_set_loaded(path):
-	load_tileset(path)
+	tile_set.tile_add_shape(tile_id, shape, transform)
+	tile_set.tile_set_shape(tile_id, 0, shape)
 
 func _on_TileSet_image_loaded(path):
-	create_tileset_from_texture(load(path))
+	create_tile_set_from_texture(load(path))
+
+
+
+
+#func on_tile_set_changed(new): #TODO: DELETE THIS IF U CAN
+#	tile_set = new
+#	$Main/Tab/Tiles.setup_tile_set(tile_set)
+#	$Main/Tab/TileSet.setup_tile_set(tile_set)
+
+func on_tile_set_saved(path):
+	ResourceSaver.save(path, load(path))
+	
+func on_tile_set_loaded(path):
+	tile_set = load(path)
+	$Main/Tab/Tiles.setup_tile_set(tile_set)
+	$Main/Tab/TileSet.setup_tile_set(tile_set)
+	for c in tile_collection.get_children():
+		if c is TileMap:
+			c.tile_set = tile_set
+
 
 
 func on_tab_changed(tab):
 	match $Main/Tab.get_child(tab).name:
 		"Tiles": 
-			active_tool = "tile"
-			subtool = "paint"
+			set_tool("tile")
+			emit_signal("tile_collection_selected", w.current_level.get_node("Tiles"))
+		"TileSet":
+			set_tool("tile_set")
 		"Enemies": 
-			active_tool = "enemy"
+			set_tool("enemy")
+		"Levels":
+			set_tool("level")
+			emit_signal("level_selected", w.current_level)
+		"Props":
+			set_tool("prop")
+		_:
+			print("WARNING: could not find tab with name: " + $Main/Tab.get_child(tab).name)

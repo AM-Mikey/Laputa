@@ -3,13 +3,13 @@ extends MarginContainer
 
 signal limit_camera(left, right, top, bottom)
 
-enum Focus {CENTER, TOP, ONE_QUARTER, THREE_QUARTERS, BOTTOM}
+enum Focus {TOP, ONE_QUARTER, CENTER, THREE_QUARTERS, BOTTOM}
 enum TileMode {BOTH, HORIZONTAL, VERTICAL, NONE}
 
 export var texture: StreamTexture
 export var layers := 1
-export var parallax_far := 0.0
 export var parallax_near := 0.8
+export var parallax_far := 0.0
 export(Focus) var focus
 export(TileMode) var tile_mode
 

@@ -1,13 +1,13 @@
 extends MarginContainer
 
-const ENEMY_BUTTON = preload("res://src/Editor/EnemyButton.tscn")
+const ENEMY_BUTTON = preload("res://src/Editor/Button/EnemyButton.tscn")
 
 signal enemy_changed(enemy_path)
 
 var enemies = {}
 var active_enemy_path
 
-
+onready var editor = get_parent().get_parent().get_parent()
 
 func _ready():
 	setup_enemies()
@@ -49,6 +49,7 @@ func find_enemy_scenes(path):
 	return files
 
 func change_enemy(enemy_path):
+	editor.set_tool("enemy")
 	active_enemy_path = enemy_path
 	for e in $Scroll/Buttons.get_children():
 		if e.enemy_path == active_enemy_path: #this is weird, we should have already done this. for extra security in case it was activated another way?

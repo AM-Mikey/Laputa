@@ -30,7 +30,15 @@ func _input(event):
 		debug_print()
 
 	if event.is_action_pressed("debug_reload"):
+		if el.has_node("Editor"):
+			el.get_node("Editor").disabled = true
 		reload_level()
+		yield(get_tree(), "idle_frame")
+		if el.has_node("Editor"):
+			print("huhuhu")
+			el.get_node("Editor").setup_level()
+			el.get_node("Editor").disabled = false
+			
 
 	if event.is_action_pressed("debug_triggers"):
 		world.visible_triggers = !world.visible_triggers

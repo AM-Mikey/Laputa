@@ -1,5 +1,5 @@
 # My ignores
-
+.DS_Store
 
 # Plugin Specific ignores
 default_env.tres

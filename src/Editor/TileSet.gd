@@ -9,7 +9,7 @@ signal image_loaded(path)
 var tx_col_brush = preload("res://assets/Editor/CollisionBrushes.png")
 
 
-var tileset
+var tile_set
 var texture
 var columns
 var rows
@@ -25,13 +25,14 @@ var rmb_pressed = false
 export(NodePath) var brushes
 export(NodePath) var col_tiles
 
+
 func _ready():
 	setup_brushes()
 
 
-func setup_tileset(new):
-	tileset = new
-	texture = tileset.tile_get_texture(0)
+func setup_tile_set(new):
+	tile_set = new
+	texture = tile_set.tile_get_texture(0)
 	columns = int(texture.get_size().x/16)
 	rows = int(texture.get_size().y/16)
 	
@@ -79,7 +80,7 @@ func setup_tile_buttons():
 		
 		var c_id = 0
 		for x in columns:
-			var tile = load("res://src/Editor/TileButton.tscn").instance()
+			var tile = load("res://src/Editor/Button/TileButton.tscn").instance()
 			var sp_tex = AtlasTexture.new()
 			sp_tex.atlas = texture
 			sp_tex.region = Rect2(c_id * 16, r_id * 16, 16, 16)
@@ -93,17 +94,17 @@ func setup_tile_buttons():
 		r_id += 1
 	
 	
-#	tileset.clear()
+#	tile_set.clear()
 #
-#	var id = tileset.get_last_unused_tile_id()
+#	var id = tile_set.get_last_unused_tile_id()
 #	while id < rows * columns:
-#		tileset.create_tile(id)
-#		tileset.tile_set_texture(id, texture)
+#		tile_set.create_tile(id)
+#		tile_set.tile_set_texture(id, texture)
 #
 #		var x_pos = (id % columns) * 16
 #		var y_pos = floor(id / columns) * 16
 #		var region = Rect2(x_pos, y_pos, 16, 16)
-#		tileset.tile_set_region(id, region)
+#		tile_set.tile_set_region(id, region)
 #		id += 1
 
 func hover_tile(tile_node):
@@ -168,16 +169,21 @@ func erase_collision(tile_node):
 ### SIGNALS ###
 
 func _on_Save_pressed():
+	$Load.current_path = "res://src/Tile/"
 	$Save.popup()
 func _on_Load_pressed():
+	$Load.current_path = "res://src/Tile/"
 	$Load.popup()
 func _on_New_pressed():
+	$Load.current_path = "res://src/Tile/"
 	$New.popup()
 
 func _on_Save_confirmed():
 	var path = $Save.current_path
 	emit_signal("tile_set_saved", path.get_basename() + ".tres")
+	
 func _on_Load_file_selected(path):
 	emit_signal("tile_set_loaded", path)
+	
 func _on_New_file_selected(path):
 	emit_signal("image_loaded", path)

@@ -125,8 +125,10 @@ func on_level_change(level, door_index):
 	var level_path = current_level.filename
 	current_level.queue_free()
 	
+	
 	yield(get_tree(), 'idle_frame') #this gives time for juniper to spawn. probably not neccesary
 	var next_level = level.instance()
+	current_level = next_level #next level set so current level is never null
 	add_child(next_level)
 	
 	if next_level.level_type == next_level.LevelType.NORMAL:#############################################################
@@ -213,12 +215,9 @@ func on_level_change(level, door_index):
 		$Juniper.queue_free()
 		$UILayer/HUD.queue_free()
 		
-	
-	
-	
-	
+
 	##################################################################################################################
-	current_level = next_level
+	#current_level = next_level
 	read_level_data_from_temp()
 	
 	

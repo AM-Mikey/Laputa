@@ -5,7 +5,7 @@ signal autolayer_updated(is_autolayer)
 signal multi_erase_toggled(toggle)
 
 
-var tileset 
+var tile_set 
 var texture
 var columns: int
 var rows: int
@@ -19,9 +19,10 @@ export var tile_separation: int = 1
 export(NodePath) var buttons
 export(NodePath) var cursor
 
-func setup_tileset(new):
-	tileset = new
-	texture = tileset.tile_get_texture(tileset.get_tiles_ids().front())
+func setup_tile_set(new):
+	print("heyo")
+	tile_set = new
+	texture = tile_set.tile_get_texture(tile_set.get_tiles_ids().front())
 	columns = floor(texture.get_width()/16)
 	rows = floor(texture.get_height()/16)
 	
@@ -41,17 +42,17 @@ func setup_tile_buttons():
 		get_node(buttons).add_child(row)
 		var c_id = 0
 		for c in columns:
-			var button = load("res://src/Editor/TileButton.tscn").instance()
-			button.tileset_position = Vector2(c_id*16, r_id*16) 
+			var button = load("res://src/Editor/Button/TileButton.tscn").instance()
+			button.tile_set_position = Vector2(c_id*16, r_id*16) 
 			row.add_child(button)
 			button.connect("mouse_entered", self, "hover_button", [button])
 			button.connect("mouse_exited", self, "unhover")
 			c_id += 1
 		r_id += 1
 ###
-	for i in tileset.get_tiles_ids():
-		var x_pos: int = floor(tileset.tile_get_region(i).position.x/16)
-		var y_pos: int = floor(tileset.tile_get_region(i).position.y/16)
+	for i in tile_set.get_tiles_ids():
+		var x_pos: int = floor(tile_set.tile_get_region(i).position.x/16)
+		var y_pos: int = floor(tile_set.tile_get_region(i).position.y/16)
 		var button = get_node(buttons).get_child(y_pos).get_child(x_pos)
 		button.id = i
 		button.texture = get_tile_as_texture(i)
@@ -61,7 +62,7 @@ func setup_tile_buttons():
 func get_tile_as_texture(id) -> Texture:
 	var tile_texture = AtlasTexture.new()
 	tile_texture.atlas = texture
-	tile_texture.region = tileset.tile_get_region(id)
+	tile_texture.region = tile_set.tile_get_region(id)
 	return tile_texture
 
 
@@ -74,18 +75,18 @@ func unhover():
 
 func _input(event):
 	if event.is_action_pressed("editor_lmb") and hovered_button:
-		print("started ", hovered_button.id)
-		selected_tile_region = Rect2(hovered_button.tileset_position, Vector2(16, 16))
+		#print("started ", hovered_button.id)
+		selected_tile_region = Rect2(hovered_button.tile_set_position, Vector2(16, 16))
 		selected_tiles.clear()
 
 
 	if event.is_action_released("editor_lmb"):
 		yield(get_tree(), "idle_frame")
 		if hovered_button:
-			print("ended ", hovered_button.id)
+			#print("ended ", hovered_button.id)
 			
 			var start_position = selected_tile_region.position
-			var end_position = hovered_button.tileset_position
+			var end_position = hovered_button.tile_set_position
 			
 			var offset = Vector2.ZERO
 			if start_position.x <= end_position.x: #left to right
@@ -107,7 +108,7 @@ func set_selection():
 	for r in get_node(buttons).get_children():
 		var row_selection = []
 		for b in r.get_children():
-			if selected_tile_region.encloses(Rect2(b.tileset_position, Vector2(16, 16))):
+			if selected_tile_region.encloses(Rect2(b.tile_set_position, Vector2(16, 16))):
 				row_selection.append(b.id)
 		if not row_selection.empty():
 			selected_tiles.append(row_selection)

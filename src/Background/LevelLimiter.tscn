@@ -8,9 +8,6 @@ margin_right = 472.0
 margin_bottom = 264.0
 mouse_filter = 2
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 texture = ExtResource( 2 )
 
 [node name="TextureRect" type="TextureRect" parent="."]

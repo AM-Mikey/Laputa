@@ -1,0 +1,236 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://src/Trigger/Trigger.gd" type="Script" id=1]
+[ext_resource path="res://src/Background/LevelLimiter.gd" type="Script" id=2]
+[ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Tile/Layers/Collision.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Tile/Layers/Front.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Tile/Winter.tres" type="TileSet" id=8]
+[ext_resource path="res://assets/Background/bkMoon.png" type="Texture" id=9]
+[ext_resource path="res://src/Actor/Enemy/Frog.gd" type="Script" id=10]
+[ext_resource path="res://src/Actor/Enemy/Trenchie.gd" type="Script" id=11]
+[ext_resource path="res://src/Editor/SpawnPoint.gd" type="Script" id=12]
+[ext_resource path="res://src/Level/Level.gd" type="Script" id=13]
+[ext_resource path="res://src/Actor/Enemy/Trenchie.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/Actor/Enemy/Frog.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/Actor/Enemy/Goalie/Goalie.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/Actor/Enemy/Fish/Fish.tscn" type="PackedScene" id=17]
+[ext_resource path="res://src/Actor/Enemy/Fish/Fish.gd" type="Script" id=18]
+[ext_resource path="res://src/Actor/Enemy/Goalie/Goalie.gd" type="Script" id=19]
+
+[node name="WinterFuck" type="Node2D"]
+script = ExtResource( 13 )
+level_name = "WinterFuck"
+level_type = 0
+tile_set = ExtResource( 8 )
+music = ""
+dialog_json = "res://src/Dialog/Village.json"
+conversation = "cutscene_test"
+
+[node name="LevelLimiter" type="MarginContainer" parent="." instance=ExtResource( 4 )]
+margin_left = 8.0
+margin_top = -56.0
+margin_right = 848.0
+margin_bottom = 288.0
+mouse_filter = 2
+script = ExtResource( 2 )
+texture = ExtResource( 9 )
+layers = 5
+parallax_near = 1.0
+parallax_far = 0.0
+focus = 3
+tile_mode = 1
+
+[node name="Tiles" type="Node2D" parent="."]
+
+[node name="FarBack" type="TileMap" parent="Tiles"]
+tile_set = ExtResource( 8 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 327718, 6, 0, 327719, 7, 0, 327720, 7, 0, 327721, 7, 0, 327722, 7, 0, 327723, 7, 0, 327724, 8, 0, 327725, 8, 0, 393254, 40, 0, 393255, 40, 0, 393256, 42, 0, 393257, 40, 0, 393258, 40, 0, 393259, 40, 0, 393260, 41, 0, 393261, 41, 0, 458777, 227, 0, 458778, 275, 0, 458779, 275, 1, 458780, 275, 1, 458781, 276, 0, 458782, 276, 1, 458783, 276, 2, 458790, 40, 0, 458791, 40, 0, 458792, 41, 0, 458793, 40, 0, 458794, 40, 0, 458795, 40, 0, 458796, 40, 0, 458797, 40, 0, 458798, 41, 0, 524312, 6, 0, 524313, 6, 0, 524314, 6, 0, 524315, 6, 0, 524316, 6, 0, 524317, 6, 0, 524318, 6, 0, 524319, 6, 0, 524320, 7, 0, 524321, 8, 0, 524322, 8, 0, 524323, 8, 0, 524326, 40, 0, 524327, 73, 0, 524328, 74, 0, 524329, 40, 0, 524330, 40, 0, 524331, 40, 0, 524332, 40, 0, 524333, 40, 0, 524334, 41, 0, 524335, 41, 0, 589848, 6, 0, 589849, 6, 0, 589850, 6, 0, 589851, 6, 0, 589852, 6, 0, 589853, 6, 0, 589854, 6, 0, 589855, 6, 0, 589856, 7, 0, 589857, 8, 0, 589858, 8, 0, 589859, 8, 0, 589864, 40, 0, 589865, 40, 0, 589866, 40, 0, 589867, 40, 0, 589868, 40, 0, 589869, 40, 0, 589870, 41, 0, 589871, 41, 0, 655384, 6, 0, 655385, 2, 0, 655386, 6, 0, 655387, 6, 0, 655388, 6, 0, 655389, 6, 0, 655390, 2, 0, 655391, 6, 0, 655392, 7, 0, 655393, 4, 0, 655394, 4, 0, 655395, 8, 0, 720920, 6, 0, 720921, 6, 0, 720922, 6, 0, 720923, 6, 0, 720924, 6, 0, 720925, 6, 0, 720926, 6, 0, 720927, 6, 0, 720928, 7, 0, 720929, 8, 0, 720930, 8, 0, 786451, 247, 0, 786452, 247, 0, 786453, 247, 0, 786454, 247, 0, 786455, 247, 0, 786457, 227, 0, 786458, 227, 0, 786459, 227, 0, 786460, 227, 0, 851987, 247, 0, 851988, 247, 0, 851989, 247, 0, 851990, 247, 0, 851991, 247, 0, 851993, 227, 0, 851994, 227, 0, 851995, 227, 0, 851996, 227, 0, 851997, 227, 0, 851998, 227, 0, 851999, 227, 0, 852000, 227, 0, 852001, 227, 0, 852002, 227, 0, 852003, 227, 0, 852004, 227, 0, 852005, 227, 0, 917523, 247, 0, 917524, 247, 0, 917525, 247, 0, 917526, 247, 0, 917527, 247, 0, 917528, 227, 0, 917529, 227, 0, 917530, 227, 0, 917531, 227, 0, 917532, 227, 0, 917533, 227, 0, 917534, 227, 0, 917535, 227, 0, 917536, 227, 0, 917537, 227, 0, 917538, 227, 0, 917539, 227, 0, 917540, 227, 0, 917541, 227, 0, 983059, 247, 0, 983060, 247, 0, 983061, 247, 0, 983062, 247, 0, 983063, 227, 0, 983064, 227, 0, 983065, 227, 0, 983066, 227, 0, 983067, 227, 0, 983068, 227, 0, 983069, 227, 0, 983070, 227, 0, 983071, 227, 0, 983072, 227, 0, 983073, 227, 0, 983074, 227, 0, 983075, 227, 0, 983076, 227, 0, 983077, 227, 0, 1048595, 247, 0, 1048596, 247, 0, 1048597, 247, 0, 1048598, 247, 0, 1048599, 227, 0, 1048600, 227, 0, 1048601, 227, 0, 1048602, 227, 0, 1048603, 227, 0, 1048604, 227, 0, 1048605, 227, 0, 1048606, 227, 0, 1048607, 227, 0, 1048608, 227, 0, 1048609, 227, 0, 1048610, 227, 0, 1048611, 227, 0, 1048612, 227, 0, 1114132, 247, 0, 1114133, 247, 0, 1114137, 227, 0, 1114138, 227, 0, 1114139, 227, 0, 1114140, 227, 0, 1114141, 227, 0, 1114142, 227, 0, 1114143, 227, 0, 1114144, 227, 0, 1114145, 227, 0, 1114146, 227, 0, 1114147, 227, 0, 1114148, 227, 0, 1179674, 227, 0, 1179675, 227, 0, 1179676, 227, 0, 1179677, 227, 0, 1179678, 227, 0, 1179679, 227, 0, 1179680, 227, 0, 1179681, 227, 0, 1179682, 227, 0, 1179683, 227, 0, 1179684, 227, 0, 1245213, 227, 0, 1245214, 227, 0, 1245215, 227, 0, 1245216, 227, 0, 1245217, 227, 0, 1245218, 227, 0, 1245219, 227, 0, 1245220, 227, 0, 1310749, 227, 0, 1310750, 227, 0, 1310751, 227, 0, 1310752, 227, 0, 1310753, 227, 0, 1310755, 227, 0, 1376285, 227, 0, 1376286, 227, 0, 1376287, 227, 0, 1376288, 227, 0, 1376290, 227, 0, 1376291, 227, 0 )
+
+[node name="Back" type="TileMap" parent="Tiles"]
+tile_set = ExtResource( 8 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 327717, 6, 0, 327718, 7, 0, 327725, 6, 0, 327726, 7, 0, 327727, 8, 0, 327728, 8, 0, 327729, 9, 0, 393261, 40, 0, 393262, 40, 0, 393263, 41, 0, 393264, 74, 0, 458799, 41, 0, 655378, 17, 0, 655381, 17, 0, 655388, 10, 0, 655397, 17, 0, 655399, 17, 0, 655400, 51, 0, 655401, 52, 0, 655402, 53, 0, 655403, 54, 0, 655404, 55, 0, 655405, 56, 0, 655409, 199, 0, 655411, 199, 0, 720922, 15, 0, 720936, 84, 0, 720937, 85, 0, 720938, 86, 0, 720939, 87, 0, 720940, 88, 0, 720941, 89, 0, 720945, 232, 0, 720947, 232, 0 )
+
+[node name="Front" type="TileMap" parent="Tiles" instance=ExtResource( 6 )]
+z_index = 1
+tile_set = ExtResource( 8 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 458776, 19, 0, 458777, 19, 0, 458778, 19, 0, 458779, 19, 0, 458780, 19, 0, 458781, 19, 0, 458782, 19, 0, 458783, 19, 0, 458784, 19, 0, 458785, 19, 0, 458786, 19, 0, 458787, 19, 0, 720928, 264, 0, 720929, 265, 0, 720930, 266, 0, 720931, 267, 0, 720932, 268, 0, 720933, 264, 0, 720934, 265, 0, 720935, 266, 0, 720936, 267, 0, 720937, 268, 0, 720938, 264, 0, 720939, 265, 0, 720940, 266, 0, 720941, 267, 0, 720942, 268, 0, 720943, 264, 0, 720944, 265, 0, 720945, 266, 0, 720946, 267, 0, 720947, 268, 0, 720948, 264, 0, 786447, 18, 0, 786448, 18, 0, 786449, 18, 0, 786464, 297, 0, 786465, 298, 0, 786466, 299, 0, 786467, 300, 0, 786468, 301, 0, 786469, 297, 0, 786470, 298, 0, 786471, 299, 0, 786472, 300, 0, 786473, 301, 0, 786474, 297, 0, 786475, 298, 0, 786476, 299, 0, 786477, 300, 0, 786478, 301, 0, 786479, 297, 0, 786480, 298, 0, 786481, 299, 0, 786482, 300, 0, 786483, 301, 0, 786484, 297, 0 )
+
+[node name="FarFront" type="TileMap" parent="Tiles" instance=ExtResource( 7 )]
+z_index = 2
+tile_set = ExtResource( 8 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 0
+format = 1
+
+[node name="Props" type="Node2D" parent="."]
+position = Vector2( -32, 0 )
+
+[node name="Actors" type="Node2D" parent="."]
+
+[node name="Goalie" type="KinematicBody2D" parent="Actors" instance=ExtResource( 16 )]
+position = Vector2( 264, 192 )
+collision_layer = 2
+collision_mask = 8
+script = ExtResource( 19 )
+speed = Vector2( 100, 200 )
+gravity = 250
+ground_cof = 0.2
+air_cof = 0.05
+debug = false
+id = ""
+jump_height = 6
+cooldown_time = 1
+
+[node name="Goalie2" type="KinematicBody2D" parent="Actors" instance=ExtResource( 16 )]
+position = Vector2( 1064, 192 )
+collision_layer = 2
+collision_mask = 8
+script = ExtResource( 19 )
+speed = Vector2( 100, 200 )
+gravity = 250
+ground_cof = 0.2
+air_cof = 0.05
+debug = false
+id = ""
+jump_height = 3
+cooldown_time = 1
+
+[node name="Frog" type="KinematicBody2D" parent="Actors" instance=ExtResource( 15 )]
+position = Vector2( 736, 192 )
+collision_layer = 2
+collision_mask = 520
+script = ExtResource( 10 )
+speed = Vector2( 12, 120 )
+gravity = 200
+ground_cof = 0.2
+air_cof = 0.05
+debug = false
+id = "0.5"
+jump_delay = 0
+difficulty = 1
+
+[node name="Fish" type="KinematicBody2D" parent="Actors" instance=ExtResource( 17 )]
+position = Vector2( 326.667, 248 )
+collision_layer = 2
+collision_mask = 8
+script = ExtResource( 18 )
+speed = Vector2( 20, 150 )
+gravity = 300
+ground_cof = 0.2
+air_cof = 0.05
+debug = true
+id = "0.5"
+swim_dir_x = -1
+jump_height = 9
+can_move_x = true
+x_min = -3
+x_max = 3
+
+[node name="Frog4" type="KinematicBody2D" parent="Actors" instance=ExtResource( 15 )]
+position = Vector2( 448, 48 )
+collision_layer = 2
+collision_mask = 520
+script = ExtResource( 10 )
+speed = Vector2( 12, 120 )
+gravity = 200
+ground_cof = 0.2
+air_cof = 0.05
+debug = false
+id = "0.5"
+jump_delay = 0
+difficulty = 1
+
+[node name="Frog5" type="KinematicBody2D" parent="Actors" instance=ExtResource( 15 )]
+position = Vector2( 544, 160 )
+collision_layer = 2
+collision_mask = 520
+script = ExtResource( 10 )
+speed = Vector2( 12, 120 )
+gravity = 200
+ground_cof = 0.2
+air_cof = 0.05
+debug = false
+id = "0.5"
+jump_delay = 0
+difficulty = 0
+
+[node name="Frog6" type="KinematicBody2D" parent="Actors" instance=ExtResource( 15 )]
+position = Vector2( 440, 184 )
+collision_layer = 2
+collision_mask = 520
+script = ExtResource( 10 )
+speed = Vector2( 12, 120 )
+gravity = 200
+ground_cof = 0.2
+air_cof = 0.05
+debug = false
+id = "0.5"
+jump_delay = 0
+difficulty = 0
+
+[node name="Trenchie" type="KinematicBody2D" parent="Actors" instance=ExtResource( 14 )]
+position = Vector2( 600, 72371.2 )
+collision_layer = 2
+collision_mask = 10
+script = ExtResource( 11 )
+speed = Vector2( 100, 200 )
+gravity = 250
+ground_cof = 0.2
+air_cof = 0.05
+debug = false
+id = ""
+look_dir = Vector2( -1, 0 )
+projectile_speed = 120
+height_tolerance = 7
+cooldown_time = 1
+lock_distance = 8
+
+[node name="Trenchie2" type="KinematicBody2D" parent="Actors" instance=ExtResource( 14 )]
+position = Vector2( 696, 72339.2 )
+collision_layer = 2
+collision_mask = 10
+script = ExtResource( 11 )
+speed = Vector2( 100, 200 )
+gravity = 250
+ground_cof = 0.2
+air_cof = 0.05
+debug = false
+id = ""
+look_dir = Vector2( -1, 0 )
+projectile_speed = 120
+height_tolerance = 7
+cooldown_time = 1
+lock_distance = 8
+
+[node name="Triggers" type="Node2D" parent="."]
+position = Vector2( 1, 0 )
+
+[node name="KillBox" type="Area2D" parent="Triggers" instance=ExtResource( 3 )]
+position = Vector2( 0, 1344 )
+scale = Vector2( 482.952, 10 )
+z_index = 100
+collision_layer = 8192
+collision_mask = 0
+monitoring = false
+script = ExtResource( 1 )
+color = Color( 1, 0, 0, 1 )
+
+[node name="SpawnPoint" type="Position2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( 328, 192 )
+script = ExtResource( 12 )

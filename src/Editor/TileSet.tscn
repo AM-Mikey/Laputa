@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/Editor/Cursor.tres" type="StyleBox" id=1]
 [ext_resource path="res://src/Editor/TileSet.gd" type="Script" id=2]
-[ext_resource path="res://src/UI/Theme/LaputaThemeMenus.tres" type="Theme" id=3]
+[ext_resource path="res://src/Editor/EditorTheme.tres" type="Theme" id=3]
 [ext_resource path="res://src/UI/StyleBox/SteelRoundInset.tres" type="StyleBox" id=4]
 
 [node name="TileSet" type="MarginContainer"]
@@ -11,9 +11,6 @@ margin_bottom = 270.0
 mouse_filter = 1
 theme = ExtResource( 3 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 brushes = NodePath("TabContainer/Collision/Scroll2/Brushes")
 col_tiles = NodePath("TabContainer/Collision/Scroll/Tiles")
 
@@ -162,8 +159,6 @@ margin_right = 480.0
 margin_bottom = 270.0
 rect_min_size = Vector2( 400, 140 )
 filters = PoolStringArray( "*.tres" )
-current_dir = "res://src/Tile"
-current_path = "res://src/Tile/"
 
 [node name="Load" type="FileDialog" parent="."]
 margin_right = 480.0
@@ -172,8 +167,6 @@ rect_min_size = Vector2( 400, 140 )
 window_title = "Open a File"
 mode = 0
 filters = PoolStringArray( "*.tres" )
-current_dir = "res://src/Tile"
-current_path = "res://src/Tile/"
 
 [node name="New" type="FileDialog" parent="."]
 margin_right = 480.0
@@ -182,8 +175,6 @@ rect_min_size = Vector2( 400, 140 )
 window_title = "Open a File"
 mode = 0
 filters = PoolStringArray( "*.jpg", "*.bmp", "*.png" )
-current_dir = "res://assets/Tile"
-current_path = "res://assets/Tile/"
 
 [connection signal="pressed" from="Margin/HBox/Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="Margin/HBox/Load" to="." method="_on_Load_pressed"]

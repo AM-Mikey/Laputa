@@ -1,8 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=1]
-[ext_resource path="res://src/Utility/SpawnPoint.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Tile/InsideLaputa.png" type="Texture" id=3]
+
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )

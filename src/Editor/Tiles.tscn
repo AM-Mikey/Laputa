@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/Editor/Cursor.tres" type="StyleBox" id=1]
 [ext_resource path="res://src/Editor/Tiles.gd" type="Script" id=2]
-[ext_resource path="res://src/UI/Theme/LaputaThemeMenus.tres" type="Theme" id=3]
+[ext_resource path="res://src/Editor/EditorTheme.tres" type="Theme" id=3]
 [ext_resource path="res://src/UI/StyleBox/SteelRoundInset.tres" type="StyleBox" id=4]
 
 [node name="Tiles" type="MarginContainer"]
@@ -11,9 +11,6 @@ margin_bottom = 270.0
 mouse_filter = 2
 theme = ExtResource( 3 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 buttons = NodePath("VBox/Scroll/Buttons")
 cursor = NodePath("VBox/Scroll/Control/Cursor")
 
@@ -24,12 +21,12 @@ mouse_filter = 2
 
 [node name="HBox" type="HBoxContainer" parent="VBox"]
 margin_right = 480.0
-margin_bottom = 32.0
+margin_bottom = 48.0
 mouse_filter = 2
 
 [node name="AutoLayer" type="CheckBox" parent="VBox/HBox"]
-margin_right = 95.0
-margin_bottom = 32.0
+margin_right = 105.0
+margin_bottom = 48.0
 pressed = true
 text = "AutoLayer"
 flat = true
@@ -43,7 +40,7 @@ text = "MultiErase"
 flat = true
 
 [node name="Scroll" type="ScrollContainer" parent="VBox"]
-margin_top = 36.0
+margin_top = 52.0
 margin_right = 480.0
 margin_bottom = 270.0
 mouse_filter = 2
@@ -57,7 +54,7 @@ __meta__ = {
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 472.0
-margin_bottom = 226.0
+margin_bottom = 210.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -70,7 +67,7 @@ __meta__ = {
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 472.0
-margin_bottom = 226.0
+margin_bottom = 210.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

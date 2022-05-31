@@ -97,6 +97,7 @@ func on_resolutionscale_changed(index: int):
 
 func on_mastervolume_changed(value):
 	var db = get_percent_as_db(value)
+	print(db)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),db)
 	if not w.get_node("UILayer/Options").hidden and after_ready:
 		am.play_master("sound_test")
@@ -226,6 +227,7 @@ func read_data() -> Dictionary:
 ### HELPER GETTERS
 
 func get_percent_as_db(value) -> float:
+	value = int(value)
 	var db: float
 	match value:
 		0: db = -80
@@ -250,6 +252,7 @@ func get_percent_as_db(value) -> float:
 		19: db = 5.5751 
 		20: db = 6.0206
 		_: db = 0
+		
 	return db
 
 

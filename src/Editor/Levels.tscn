@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/UI/Theme/LaputaTheme.tres" type="Theme" id=1]
+[ext_resource path="res://src/Editor/EditorTheme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Editor/Levels.gd" type="Script" id=2]
 
 [node name="Levels" type="MarginContainer"]

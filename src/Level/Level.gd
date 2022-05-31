@@ -1,4 +1,3 @@
-tool
 extends Node2D
 
 signal tile_set_changed
@@ -8,7 +7,7 @@ enum LevelType {NORMAL, PLAYERLESS_CUTSCENE}
 
 export var level_name: String
 export(LevelType) var level_type
-export(TileSet) var tile_set setget on_tile_set_changed
+export(TileSet) var tile_set
 export var music: String
 export (String, FILE, "*.json") var dialog_json: String
 export var conversation: String
@@ -34,10 +33,6 @@ func _ready():
 		if level_type == LevelType.PLAYERLESS_CUTSCENE:
 			do_playerless_cutscene()
 
-
-func on_tile_set_changed(new):
-	tile_set = new
-	emit_signal("tile_set_changed")
 
 func do_playerless_cutscene():
 	if w.has_node("UILayer/DialogBox"): #clear old dialog box if there is one
