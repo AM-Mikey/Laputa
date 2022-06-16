@@ -5,7 +5,6 @@ onready var w = get_tree().get_root().get_node("World")
 func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
-	focus()
 
 func _on_return():
 	if w.has_node("UILayer/PauseMenu"):
@@ -18,4 +17,4 @@ func on_viewport_size_changed():
 	rect_size = get_tree().get_root().size / w.resolution_scale
 
 func focus():
-	$Margin/VBoxContainer/Scroll/VBox/Controls.grab_focus()
+	$Margin/VBoxContainer/HBoxContainer/Return.grab_focus()

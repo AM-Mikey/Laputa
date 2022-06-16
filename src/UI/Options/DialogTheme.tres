@@ -9,7 +9,7 @@
 [resource]
 default_font = ExtResource( 1 )
 Button/colors/font_color = Color( 0.462745, 0.486275, 0.431373, 1 )
-Button/colors/font_color_focus = Color( 0.666667, 0.690196, 0.592157, 1 )
+Button/colors/font_color_focus = Color( 0.52549, 0.0470588, 0.101961, 1 )
 Button/colors/font_color_hover = Color( 0.666667, 0.690196, 0.592157, 1 )
 Button/colors/font_color_pressed = Color( 0.462745, 0.486275, 0.431373, 1 )
 Button/fonts/font = ExtResource( 2 )

@@ -85,24 +85,24 @@ size_flags_horizontal = 12
 text = "Return"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-visible = false
 margin_left = 16.0
 margin_top = 8.0
 margin_right = 506.0
 margin_bottom = 294.0
+mouse_filter = 2
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
-margin_left = 107.0
-margin_right = 363.0
+margin_left = 91.0
+margin_right = 379.0
 margin_bottom = 286.0
-rect_min_size = Vector2( 256, 0 )
+rect_min_size = Vector2( 288, 0 )
 mouse_filter = 2
 texture = ExtResource( 7 )
 
 [node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
-margin_left = 367.0
-margin_right = 383.0
+margin_left = 383.0
+margin_right = 399.0
 margin_bottom = 286.0
 mouse_filter = 2
 texture = ExtResource( 6 )

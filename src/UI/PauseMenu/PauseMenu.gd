@@ -36,7 +36,10 @@ func _on_Options_pressed():
 	get_parent().add_child(options)
 
 func _on_KeyGuide_pressed():
-	get_parent().add_child(KEY_GUIDE.instance())
+	var key_guide = KEY_GUIDE.instance()
+	get_parent().add_child(key_guide)
+	key_guide.focus()
+	
 
 func _on_Level_pressed():
 	var level = LEVEL.instance()
