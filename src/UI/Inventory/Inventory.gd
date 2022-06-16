@@ -15,15 +15,19 @@ onready var world = get_tree().get_root().get_node("World")
 func _ready():
 		var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 		on_viewport_size_changed()
+		
+		enter()
 
-func _process(_delta):
-	yield(get_tree(), "idle_frame")
-	if Input.is_action_just_pressed("inventory"):
-		get_tree().paused = false
-		hud.visible = true
-		pc.emit_signal("guns_updated", pc.guns.get_children())
-		queue_free()
 
+func enter():
+	get_tree().paused = true
+	hud.visible = false
+
+func exit():
+	get_tree().paused = false
+	hud.visible = true
+	pc.emit_signal("guns_updated", pc.guns.get_children())
+	queue_free()
 
 func _on_inventory_updated(inventory):
 	if not inventory.empty():

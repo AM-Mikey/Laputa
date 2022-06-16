@@ -1,45 +1,34 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/Effect/Light/SunLight.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
-[ext_resource path="res://src/Prop/SaveDisk.gd" type="Script" id=6]
-[ext_resource path="res://src/Actor/NPC/NPC.gd" type="Script" id=7]
-[ext_resource path="res://src/Background/LevelLimiter.gd" type="Script" id=8]
+[ext_resource path="res://src/Prop/ChestKeyItem.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Tile/Village.tres" type="TileSet" id=9]
-[ext_resource path="res://src/Editor/SpawnPoint.gd" type="Script" id=10]
-[ext_resource path="res://src/Actor/Enemy/Frog.gd" type="Script" id=11]
 [ext_resource path="res://src/Actor/NPC/Hermit.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/Trigger/Door.gd" type="Script" id=13]
-[ext_resource path="res://src/Effect/Light/SunLight.gd" type="Script" id=14]
 [ext_resource path="res://src/Prop/SaveDisk.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/Actor/Enemy/Frog.tscn" type="PackedScene" id=16]
-[ext_resource path="res://src/Prop/AmmoRefill.gd" type="Script" id=17]
 [ext_resource path="res://assets/Background/SkyDemo.png" type="Texture" id=20]
 [ext_resource path="res://src/Prop/AmmoRefill.tscn" type="PackedScene" id=21]
 
 [node name="LayersTest" type="Node2D"]
 script = ExtResource( 5 )
 level_name = "LayersTest"
-level_type = 0
 tile_set = ExtResource( 9 )
 music = "res://assets/Music/PhiDelta_Shop_Intro.wav"
 dialog_json = "res://src/Dialog/Village.json"
 conversation = "cutscene_test"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." instance=ExtResource( 2 )]
+[node name="LevelLimiter" parent="." instance=ExtResource( 2 )]
 margin_left = -64.0
 margin_top = -16.0
 margin_right = 832.0
 margin_bottom = 256.0
-mouse_filter = 2
-script = ExtResource( 8 )
 texture = ExtResource( 20 )
 layers = 5
 parallax_near = 1.0
-parallax_far = 0.0
 focus = 3
 tile_mode = 1
 
@@ -86,92 +75,43 @@ tile_data = PoolIntArray( 196632, 344, 0, 196633, 345, 0, 196634, 346, 0, 196635
 
 [node name="Props" type="Node2D" parent="."]
 
-[node name="@SaveDisk@3946" type="Area2D" parent="Props" instance=ExtResource( 15 )]
+[node name="@SaveDisk@3946" parent="Props" instance=ExtResource( 15 )]
 position = Vector2( 568, 208 )
-collision_layer = 0
 input_pickable = false
-script = ExtResource( 6 )
 
-[node name="AmmoRefill" type="Area2D" parent="Props" instance=ExtResource( 21 )]
+[node name="AmmoRefill" parent="Props" instance=ExtResource( 21 )]
 position = Vector2( 456, 112 )
-collision_layer = 16
 input_pickable = false
-script = ExtResource( 17 )
+
+[node name="Chest" parent="Props" instance=ExtResource( 6 )]
+position = Vector2( 104, 208 )
 
 [node name="Actors" type="Node2D" parent="."]
 
-[node name="Frog4" type="KinematicBody2D" parent="Actors" instance=ExtResource( 16 )]
+[node name="Frog4" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 518, 97 )
-collision_layer = 2
-collision_mask = 520
-script = ExtResource( 11 )
-speed = Vector2( 12, 120 )
-gravity = 200
-ground_cof = 0.2
-air_cof = 0.05
-debug = false
 id = "0.5"
-jump_delay = 0
-difficulty = 1
 
-[node name="Hermit" type="KinematicBody2D" parent="Actors" instance=ExtResource( 12 )]
+[node name="Hermit" parent="Actors" instance=ExtResource( 12 )]
 modulate = Color( 2, 2, 2, 1 )
 position = Vector2( 264, 192 )
-collision_layer = 128
-collision_mask = 8
-script = ExtResource( 7 )
-speed = Vector2( 20, 20 )
-gravity = 300
-ground_cof = 0.2
-air_cof = 0.05
-id = ""
 dialog_json = "res://src/Dialog/Village.json"
 conversation = "hermit"
-has_face = false
-voiced = true
 
-[node name="@Hermit@6982" type="KinematicBody2D" parent="Actors" instance=ExtResource( 12 )]
+[node name="@Hermit@6982" parent="Actors" instance=ExtResource( 12 )]
 position = Vector2( 440, 64 )
-collision_layer = 128
-collision_mask = 8
-script = ExtResource( 7 )
-speed = Vector2( 20, 20 )
-gravity = 300
-ground_cof = 0.2
-air_cof = 0.05
-id = ""
-dialog_json = ""
-conversation = ""
-has_face = false
-voiced = true
 
 [node name="Triggers" type="Node2D" parent="."]
 
-[node name="Door" type="Area2D" parent="Triggers" groups=["Trigger"] instance=ExtResource( 3 )]
+[node name="Door" parent="Triggers" instance=ExtResource( 3 )]
 position = Vector2( 440, 192 )
 z_index = 100
 collision_layer = 32
 input_pickable = false
-script = ExtResource( 13 )
-color = Color( 0, 0.4, 0, 1 )
 level = "res://src/Level/lillevel.tscn"
-door_index = 0
-locked = false
 
-[node name="SpawnPoint" type="Area2D" parent="." instance=ExtResource( 4 )]
+[node name="SpawnPoint" parent="." instance=ExtResource( 4 )]
 position = Vector2( 328, 192 )
-script = ExtResource( 10 )
 
-[node name="SunLight" type="Area2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 240, -16 )
-script = ExtResource( 14 )
-light_color = Color( 0.5, 0.5, 0.5, 1 )
-shadow_color = Color( 0, 0, 0, 1 )
-modulate_color = Color( 0.5, 0.5, 0.5, 1 )
-
-[connection signal="body_entered" from="Props/@SaveDisk@3946" to="Props/@SaveDisk@3946" method="_on_body_entered"]
-[connection signal="body_exited" from="Props/@SaveDisk@3946" to="Props/@SaveDisk@3946" method="_on_body_exited"]
-[connection signal="body_entered" from="Props/AmmoRefill" to="Props/AmmoRefill" method="_on_body_entered"]
-[connection signal="body_exited" from="Props/AmmoRefill" to="Props/AmmoRefill" method="_on_body_exited"]
-[connection signal="body_entered" from="Triggers/Door" to="Triggers/Door" method="_on_body_entered"]
-[connection signal="body_exited" from="Triggers/Door" to="Triggers/Door" method="_on_body_exited"]
+[node name="SunLight" parent="." instance=ExtResource( 1 )]
+position = Vector2( 241, 0 )

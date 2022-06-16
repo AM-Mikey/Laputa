@@ -47,6 +47,7 @@ var prop_collection
 var trigger_collection
 var tile_map
 var tile_set
+var editor_level_limiter
 
 
 func _ready():
@@ -105,19 +106,18 @@ func set_entities_pickable(pickable = true):
 		t.input_pickable = pickable
 
 func setup_level_limiter():
-	var limiter = LIMITER.instance()
+	editor_level_limiter = LIMITER.instance()
 	var level_layer = Node2D.new()
 	level_layer.name = "LevelEditorLayer"
 	level_layer.z_index = 8
 	w.current_level.add_child(level_layer)
-	level_layer.add_child(limiter)
-	w.current_level.add_child(limiter)
+	level_layer.add_child(editor_level_limiter)
 
 func exit():
 	inspector.exit()
 	
 	hide_preview() #delete tile brush preview
-	w.current_level.get_node("EditorLevelLimiter").queue_free()
+	editor_level_limiter.queue_free()
 	el.get_node("EditorCamera").queue_free()
 	ui.add_child(HUD.instance())
 	#world.get_node("Juniper").enable()

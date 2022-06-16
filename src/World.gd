@@ -92,11 +92,12 @@ func skip_title():
 func _input(event):
 	if event.is_action_pressed("inventory") and has_node("Juniper"):
 		if not ui.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled:
-			get_tree().paused = true
-			$UILayer/HUD.visible = false
 			var inventory = INVENTORY.instance()
 			ui.add_child(inventory)
-	
+		elif ui.has_node("Inventory"):
+			ui.get_node("Inventory").exit()
+
+
 	if event.is_action_pressed("pause") and not ui.has_node("TitleScreen"):
 		if not ui.has_node("PauseMenu") and not get_tree().paused:
 			get_tree().paused = true
