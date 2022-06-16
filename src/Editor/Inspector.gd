@@ -144,9 +144,6 @@ func on_property_selected(property_name):
 
 func on_property_changed(property_name, property_value):
 	match active_type:
-		"enemy":
-			active.set(property_name, property_value)
-			
 		"background":
 			match property_name:
 				"margin_left", "margin_top", "margin_right", "margin_bottom":
@@ -159,7 +156,9 @@ func on_property_changed(property_name, property_value):
 					active.level_limiter.set(property_name, load(property_value))
 					active.level_limiter.setup_layers()
 					active.level_limiter.set_focus()
-
+		"enemy":
+			active.set(property_name, property_value)
+			
 		"level":
 			match property_name:
 				"tile_set": 
@@ -173,8 +172,10 @@ func on_property_changed(property_name, property_value):
 			active.setup_colors()
 		"npc":
 			active.set(property_name, property_value)
+		"trigger":
+			active.set(property_name, property_value)
 		_:
-					active.set(property_name, property_value)
+			active.set(property_name, property_value)
 	display_data() #to reload
 	print("Changed " + active_type + " " + active.name + "'s " + property_name + " to " + String(property_value))
 
