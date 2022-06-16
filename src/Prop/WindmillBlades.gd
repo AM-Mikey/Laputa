@@ -1,4 +1,4 @@
-extends Node2D
+extends Prop
 
 export var degrees_per_frame = 0.5
 var rotation_around_point = 0

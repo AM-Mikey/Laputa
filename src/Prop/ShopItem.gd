@@ -1,4 +1,4 @@
-extends Area2D
+extends Prop
 
 
 const TOOLTIP = preload("res://src/UI/ShopTooltip.tscn")

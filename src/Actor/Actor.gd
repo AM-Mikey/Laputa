@@ -4,6 +4,8 @@ class_name Actor, "res://assets/Icon/ActorIcon.png"
 const DAMAGENUMBER = preload("res://src/Effect/DamageNumber.tscn")
 const FLOOR_NORMAL: = Vector2.UP
 
+export var editor_hidden = false
+
 export var speed: = Vector2(150, 350)
 export var gravity: = 300
 var velocity: = Vector2.ZERO
@@ -15,7 +17,6 @@ var dead = false
 var is_in_water = false
 var home := Vector2(0, 0)
 var rng = RandomNumberGenerator.new()
-
 onready var world = get_tree().get_root().get_node("World")
 
 func _ready():

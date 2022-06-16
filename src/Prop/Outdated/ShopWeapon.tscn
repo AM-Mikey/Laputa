@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/UI/MoneyNumber.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Prop/ShopWeapon.gd" type="Script" id=2]
+[ext_resource path="res://src/Prop/Outdated/ShopWeapon.gd" type="Script" id=2]
 [ext_resource path="res://assets/SFX/Placeholder/snd_get_item.ogg" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]

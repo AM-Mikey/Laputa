@@ -1,4 +1,4 @@
-extends Area2D
+extends Prop
 
 const HEART = preload("res://src/Actor/Pickup/Heart.tscn")
 const EXPERIENCE = preload("res://src/Actor/Pickup/Experience.tscn")

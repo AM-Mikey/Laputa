@@ -19,18 +19,18 @@ func setup_props():
 	for p in find_prop_scenes("res://src/Prop/"):
 		
 		var prop = load(p).instance()
-		
-		props[prop.name] = prop
-		
-		var prop_button = PROP_BUTTON.instance()
-		prop_button.prop_path = p
-		prop_button.prop_name = prop.name
-		prop_button.connect("prop_changed", self, "on_prop_changed")
-		if index == 0:
-			prop_button.active = true
-			active_prop_path = p
-		$VBox/Margin/Scroll/Buttons.add_child(prop_button)
-		index += 1
+		if not prop.editor_hidden:
+			props[prop.name] = prop
+			
+			var prop_button = PROP_BUTTON.instance()
+			prop_button.prop_path = p
+			prop_button.prop_name = prop.name
+			prop_button.connect("prop_changed", self, "on_prop_changed")
+			if index == 0:
+				prop_button.active = true
+				active_prop_path = p
+			$VBox/Margin/Scroll/Buttons.add_child(prop_button)
+			index += 1
 		
 
 ### GETTERS
@@ -46,7 +46,7 @@ func find_prop_scenes(path):
 		if file == "":
 			break
 		if file.ends_with(".tscn"):
-			files.append(path + file)
+				files.append(path + file)
 			
 	return files
 

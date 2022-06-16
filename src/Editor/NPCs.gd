@@ -19,19 +19,19 @@ func setup_npcs():
 	for p in find_npc_scenes("res://src/Actor/NPC/"):
 		
 		var npc = load(p).instance()
-		
-		npcs[npc.name] = npc
-		
-		var npc_button = NPC_BUTTON.instance()
-		npc_button.npc_path = p
-		npc_button.npc_name = npc.name
-		npc_button.connect("npc_changed", self, "on_npc_changed")
-		if index == 0:
-			npc_button.active = true
-			active_npc_path = p
-		$VBox/Margin/Scroll/Buttons.add_child(npc_button)
-		index += 1
-		
+		if not npc.editor_hidden:
+			npcs[npc.name] = npc
+			
+			var npc_button = NPC_BUTTON.instance()
+			npc_button.npc_path = p
+			npc_button.npc_name = npc.name
+			npc_button.connect("npc_changed", self, "on_npc_changed")
+			if index == 0:
+				npc_button.active = true
+				active_npc_path = p
+			$VBox/Margin/Scroll/Buttons.add_child(npc_button)
+			index += 1
+
 
 ### GETTERS
 

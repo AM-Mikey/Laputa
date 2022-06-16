@@ -9,6 +9,7 @@ var sfx_chest = load("res://assets/SFX/placeholder/snd_chest_open.ogg")
 var active_pc = null
 var prop_type = ""
 var spent = false
+export var editor_hidden = false
 
 onready var w = get_tree().get_root().get_node("World")
 

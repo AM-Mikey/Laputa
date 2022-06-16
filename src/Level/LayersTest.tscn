@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/Effect/Light/SunLight.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://src/Actor/Enemy/Frog.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/Background/SkyDemo.png" type="Texture" id=20]
 [ext_resource path="res://src/Prop/AmmoRefill.tscn" type="PackedScene" id=21]
+[ext_resource path="res://src/Prop/Grass.tscn" type="PackedScene" id=22]
 
 [node name="LayersTest" type="Node2D"]
 script = ExtResource( 5 )
@@ -77,29 +78,44 @@ tile_data = PoolIntArray( 196632, 344, 0, 196633, 345, 0, 196634, 346, 0, 196635
 
 [node name="@SaveDisk@3946" parent="Props" instance=ExtResource( 15 )]
 position = Vector2( 568, 208 )
-input_pickable = false
 
 [node name="AmmoRefill" parent="Props" instance=ExtResource( 21 )]
 position = Vector2( 456, 112 )
-input_pickable = false
 
 [node name="Chest" parent="Props" instance=ExtResource( 6 )]
 position = Vector2( 104, 208 )
+
+[node name="@Grass@13675" parent="Props" instance=ExtResource( 22 )]
+position = Vector2( 280, 192 )
+
+[node name="@Grass@13752" parent="Props" instance=ExtResource( 22 )]
+position = Vector2( 264, 192 )
+
+[node name="Grass" parent="Props" instance=ExtResource( 22 )]
+position = Vector2( 248, 192 )
+
+[node name="@Grass@13890" parent="Props" instance=ExtResource( 22 )]
+position = Vector2( 232, 192 )
 
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Frog4" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 518, 97 )
+input_pickable = true
+editor_hidden = Object(RandomNumberGenerator,"seed":-6398989897141750821,"state":-6332740101472756719,"script":null)
+
 id = "0.5"
 
 [node name="Hermit" parent="Actors" instance=ExtResource( 12 )]
 modulate = Color( 2, 2, 2, 1 )
 position = Vector2( 264, 192 )
+input_pickable = true
 dialog_json = "res://src/Dialog/Village.json"
 conversation = "hermit"
 
 [node name="@Hermit@6982" parent="Actors" instance=ExtResource( 12 )]
 position = Vector2( 440, 64 )
+input_pickable = true
 
 [node name="Triggers" type="Node2D" parent="."]
 
@@ -107,7 +123,6 @@ position = Vector2( 440, 64 )
 position = Vector2( 440, 192 )
 z_index = 100
 collision_layer = 32
-input_pickable = false
 level = "res://src/Level/lillevel.tscn"
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 4 )]

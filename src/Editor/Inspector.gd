@@ -165,6 +165,7 @@ func on_property_changed(property_name, property_value):
 				"tile_set": 
 					active.set(property_name, load(property_value))
 					editor.on_TileSet_tile_set_loaded(property_value)
+					editor.on_TileSet_tile_set_loaded(property_value)
 				_:
 					active.set(property_name, property_value)
 		"light":
@@ -193,6 +194,8 @@ func clear_data():
 		c.queue_free()
 
 func create_button(property, value, type = TYPE_NIL, enum_items = []):
+	if property == "editor_hidden":
+		return
 	var button = PROPERTY_BUTTON.instance()
 	button.property_name = property
 	button.property_value = value

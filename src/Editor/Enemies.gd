@@ -19,19 +19,18 @@ func setup_enemies():
 	for e in find_enemy_scenes("res://src/Actor/Enemy/"):
 		
 		var enemy = load(e).instance()
-		
-		enemies[enemy.name] = enemy
-		
-		var enemy_button = ENEMY_BUTTON.instance()
-		enemy_button.enemy_path = e
-		enemy_button.enemy_name = enemy.name
-		enemy_button.connect("enemy_changed", self, "change_enemy")
-		if index == 0:
-			enemy_button.active = true
-			active_enemy_path = e
-		$VBox/Margin/Scroll/Buttons.add_child(enemy_button)
-		index += 1
-		
+		if not enemy.editor_hidden:
+			enemies[enemy.name] = enemy
+			
+			var enemy_button = ENEMY_BUTTON.instance()
+			enemy_button.enemy_path = e
+			enemy_button.enemy_name = enemy.name
+			enemy_button.connect("enemy_changed", self, "change_enemy")
+			if index == 0:
+				enemy_button.active = true
+				active_enemy_path = e
+			$VBox/Margin/Scroll/Buttons.add_child(enemy_button)
+			index += 1
 
 
 func find_enemy_scenes(path):
