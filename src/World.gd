@@ -94,8 +94,6 @@ func _input(event):
 		if not ui.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled:
 			var inventory = INVENTORY.instance()
 			ui.add_child(inventory)
-		elif ui.has_node("Inventory"):
-			ui.get_node("Inventory").exit()
 
 
 	if event.is_action_pressed("pause") and not ui.has_node("TitleScreen"):

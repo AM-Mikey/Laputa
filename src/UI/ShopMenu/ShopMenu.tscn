@@ -16,9 +16,6 @@ margin_right = 480.0
 margin_bottom = 270.0
 theme = ExtResource( 4 )
 script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 items = NodePath("Margin/VBox/Margin/Grid")
 
 [node name="Background" type="TextureRect" parent="."]

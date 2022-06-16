@@ -1,33 +1,40 @@
 extends Control
 
+var player_inventory: Array
+var disabled = true
+
+onready var world = get_tree().get_root().get_node("World")
 onready var pc = get_tree().get_root().get_node("World/Juniper")
 onready var hud = get_parent().get_node("HUD")
 onready var items = $MarginContainer/VBoxContainer/Items/ItemList
 onready var weapon_wheel = $MarginContainer/VBoxContainer/Weapons/MarginContainer/WeaponWheel
-
 onready var header = $MarginContainer/VBoxContainer/Description/MarginContainer/VBoxContainer/Header
 onready var body = $MarginContainer/VBoxContainer/Description/MarginContainer/VBoxContainer/Body
 
-var player_inventory: Array
-
-onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
 		var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 		on_viewport_size_changed()
-		
 		enter()
 
+func _input(event):
+	if event.is_action_pressed("inventory") and not disabled:
+		exit()
 
 func enter():
 	get_tree().paused = true
 	hud.visible = false
+	yield(get_tree(), "idle_frame")
+	disabled = false
 
 func exit():
 	get_tree().paused = false
 	hud.visible = true
 	pc.emit_signal("guns_updated", pc.guns.get_children())
 	queue_free()
+
+
+### SIGNALS
 
 func _on_inventory_updated(inventory):
 	if not inventory.empty():
@@ -55,4 +62,3 @@ func on_viewport_size_changed():
 		rect_size.x = target_width
 		rect_position.x = (viewport_size.x - target_width) /2
 	rect_size.y = viewport_size.y
-	
