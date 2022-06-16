@@ -28,7 +28,7 @@ var air_cof = 0.00
 
 var can_bonk = true
 var bonk_time = 0.4
-var forgiveness_time = 0.05
+var coyote_time = 0.05
 export var minimum_direction_time = 1.0 #cave story forces you to jump a certain x distance when going max speed before jumping
 var jump_starting_move_dir_x: int
 export var min_x_velocity = 0.001
@@ -52,9 +52,9 @@ onready var pc = get_parent()
 onready var state_label = get_node("States/StateLabel")
 onready var sp = get_node("States")
 
+onready var coyote_timer = get_node("CoyoteTimer")
 onready var min_dir_timer = get_node("MinDirTimer")
-onready var forgive_timer = get_node("ForgiveTimer")
-onready var bonk_timeout = get_node("BonkTimeout")
+#onready var bonk_timeout = get_node("BonkTimeout")
 
 func _ready():
 	initialize_states()
@@ -76,7 +76,7 @@ func initialize_states():
 		if c.get_class() == "Node":
 			states[c.name.to_lower()] = c
 	
-	current_state = states["normal"]
+	current_state = states["run"]
 
 
 
@@ -94,11 +94,6 @@ func _physics_process(_delta):
 
 func _input(event):
 	if not pc.disabled:
-		
-		if event.is_action_pressed("jump") and $ForgiveTimer.time_left > 0 \
-		or event.is_action_pressed("jump") and pc.is_on_floor():
-			jump()
-		
 		if event.is_action_pressed("fire_automatic"):
 			pc.direction_lock = pc.face_dir
 		if event.is_action_released("fire_automatic"): 
@@ -107,7 +102,7 @@ func _input(event):
 		if event.is_action_pressed("debug_fly") or event.is_action_pressed("debug_editor"):
 			if current_state != states["fly"]:
 				change_state(states["fly"])
-			else: change_state(states["normal"])
+			else: change_state(states["run"])
 		
 		if pc.inspecting: #TODO: why this way?
 			if event.is_action_pressed("move_left") \
@@ -116,12 +111,16 @@ func _input(event):
 				pc.inspecting = false
 
 
-
+func do_coyote_time():
+	$CoyoteTimer.start(coyote_time)
+	yield($CoyoteTimer, "timeout")
+	if not pc.is_on_floor() and current_state ==states["run"]:
+		change_state(states["fall"])
 
 
 func bonk(type):
-	if can_bonk:
-		$BonkTimeout.start(bonk_time)
+#	if can_bonk:
+#		$BonkTimeout.start(bonk_time)
 
 		var bonk = BONK.instance()
 		bonk.position = pc.position
@@ -141,6 +140,9 @@ func jump():
 	am.play("pc_jump")
 	#Check if a running jump. since speed.x is max x velocity, only count as a running jump then
 	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") and abs(velocity.x) > speed.x * 0.95:
-		jump_type = Jump.RUNNING
+		#jump_type = Jump.RUNNING
 		jump_starting_move_dir_x = pc.move_dir.x
 		$MinDirTimer.start(minimum_direction_time)
+		change_state(states["longjump"])
+	else:
+		change_state(states["jump"])

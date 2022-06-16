@@ -33,14 +33,14 @@ margin_bottom = 392.0
 
 [node name="Label" type="Label" parent="Margin/VBox"]
 margin_right = 584.0
-margin_bottom = 14.0
+margin_bottom = 4.0
 size_flags_vertical = 0
 custom_colors/font_color = Color( 0.878431, 0.784314, 0.345098, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 align = 1
 
 [node name="Scroll" type="ScrollContainer" parent="Margin/VBox"]
-margin_top = 18.0
+margin_top = 8.0
 margin_right = 584.0
 margin_bottom = 365.0
 size_flags_vertical = 3

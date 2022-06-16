@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Editor/EditorTheme.tres" type="Theme" id=1]
+[ext_resource path="res://src/Editor/NPCs.gd" type="Script" id=2]
+
+[node name="NPCs" type="MarginContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="VBox" type="VBoxContainer" parent="."]
+margin_right = 64.0
+margin_bottom = 64.0
+
+[node name="Label" type="Label" parent="VBox"]
+margin_right = 64.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 0, 8 )
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0.878431, 0.784314, 0.345098, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "NPCs"
+align = 1
+
+[node name="Margin" type="MarginContainer" parent="VBox"]
+margin_top = 12.0
+margin_right = 64.0
+margin_bottom = 64.0
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="VBox/Margin"]
+margin_right = 64.0
+margin_bottom = 52.0
+
+[node name="Scroll" type="ScrollContainer" parent="VBox/Margin"]
+margin_right = 64.0
+margin_bottom = 52.0
+size_flags_vertical = 3
+
+[node name="Buttons" type="VBoxContainer" parent="VBox/Margin/Scroll"]
+margin_right = 64.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+size_flags_vertical = 3

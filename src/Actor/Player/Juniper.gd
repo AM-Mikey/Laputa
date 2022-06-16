@@ -67,7 +67,7 @@ func enable():
 	disabled = false
 	invincible = false
 	$MovementManager.can_bonk = true
-	$MovementManager.change_state($MovementManager.states["normal"])
+	$MovementManager.change_state($MovementManager.states["run"])
 
 func move_to(pos):
 	$MovementManager.move_target = pos

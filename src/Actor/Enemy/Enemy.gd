@@ -10,7 +10,6 @@ const AMMO = preload("res://src/Actor/Pickup/Ammo.tscn")
 
 var state: String 
 
-var rng = RandomNumberGenerator.new()
 var disabled = false
 var protected = false
 export var debug = false

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/Font/WelcomeBack.tres" type="DynamicFont" id=1]
+
+[node name="StateLabel" type="Label"]
+margin_left = -20.0
+margin_top = -39.0
+margin_right = 20.0
+margin_bottom = -25.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Test"
+align = 1

@@ -12,9 +12,6 @@ pause_mode = 1
 margin_right = 480.0
 margin_bottom = 64.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="."]
 margin_right = 480.0
@@ -63,9 +60,6 @@ custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 scroll_active = false
 scroll_following = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-bus = "SFX"
 
 [node name="CommandHandler" type="Node" parent="."]
 script = ExtResource( 6 )

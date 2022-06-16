@@ -64,9 +64,23 @@ shape = SubResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -16 )
 texture = ExtResource( 2 )
-hframes = 2
+hframes = 4
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 3 )
 anims/Walk = SubResource( 4 )
+
+[node name="FloorDetectorL" type="RayCast2D" parent="."]
+position = Vector2( -8, 0 )
+enabled = true
+cast_to = Vector2( 0, 8 )
+collision_mask = 8
+collide_with_areas = true
+
+[node name="FloorDetectorR" type="RayCast2D" parent="."]
+position = Vector2( 8, 0 )
+enabled = true
+cast_to = Vector2( 0, 8 )
+collision_mask = 8
+collide_with_areas = true

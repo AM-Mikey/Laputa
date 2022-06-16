@@ -7,11 +7,6 @@ onready var mm = pc.get_node("MovementManager")
 
 func state_process():
 	pc.move_dir = get_move_dir()
-
-	if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
-		mm.bonk("bonk")
-		
-		
 	if mm.knockback_velocity == Vector2.ZERO:
 		mm.knockback_velocity = Vector2(mm.knockback_speed.x * mm.knockback_direction.x, mm.knockback_speed.y * -1)
 		mm.velocity.y = mm.knockback_velocity.y #set knockback y to this ONCE
@@ -33,6 +28,11 @@ func state_process():
 		new_velocity.y = max(mm.velocity.y, new_velocity.y)
 		
 	mm.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
+	
+	
+	
+	if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
+		mm.bonk("bonk")
 
 
 

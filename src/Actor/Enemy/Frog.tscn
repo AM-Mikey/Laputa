@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/Actor/Enemy/Frog.gd" type="Script" id=1]
 [ext_resource path="res://assets/Actor/Enemy/Frog.png" type="Texture" id=2]
@@ -10,6 +10,8 @@ extents = Vector2( 7, 7 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 72, 56 )
+
+[sub_resource type="CanvasItemMaterial" id=11]
 
 [sub_resource type="Animation" id=3]
 resource_name = "CroakLeft"
@@ -283,6 +285,7 @@ shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 light_mask = 4
+material = SubResource( 11 )
 position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
 flip_h = true

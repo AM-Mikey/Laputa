@@ -1,11 +1,10 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://src/Gun/Defender.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Actor/Player/PlayerCamera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Gun/Revolver.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Gun/Shotgun.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/UI/Theme/LaputaTheme.tres" type="Theme" id=5]
-[ext_resource path="res://src/Actor/Player/Normal.gd" type="Script" id=6]
 [ext_resource path="res://src/Actor/Player/Knockback.gd" type="Script" id=7]
 [ext_resource path="res://src/Actor/Player/MoveTo.gd" type="Script" id=8]
 [ext_resource path="res://src/Actor/Player/Fly.gd" type="Script" id=9]
@@ -28,6 +27,10 @@
 [ext_resource path="res://src/Actor/Player/GunSprite.gd" type="Script" id=26]
 [ext_resource path="res://src/Actor/Player/AnimationManager.gd" type="Script" id=27]
 [ext_resource path="res://src/Gun/MPistol.tscn" type="PackedScene" id=28]
+[ext_resource path="res://src/Actor/Player/Jump.gd" type="Script" id=29]
+[ext_resource path="res://src/Actor/Player/Run.gd" type="Script" id=30]
+[ext_resource path="res://src/Actor/Player/LongJump.gd" type="Script" id=31]
+[ext_resource path="res://src/Actor/Player/Fall.gd" type="Script" id=32]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 7.5 )
@@ -2497,6 +2500,7 @@ script = ExtResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 1, 1, 1, 0.4 )
+light_mask = 0
 position = Vector2( 0, -7.5 )
 shape = SubResource( 1 )
 
@@ -2506,22 +2510,27 @@ script = ExtResource( 15 )
 [node name="States" type="Node2D" parent="MovementManager"]
 
 [node name="StateLabel" type="Label" parent="MovementManager/States"]
-visible = false
 margin_left = -21.1084
 margin_top = -34.0
 margin_right = 18.8916
 margin_bottom = -20.0
 theme = ExtResource( 5 )
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Disabled" type="Node" parent="MovementManager/States"]
 script = ExtResource( 11 )
 
-[node name="Normal" type="Node" parent="MovementManager/States"]
-script = ExtResource( 6 )
+[node name="Run" type="Node" parent="MovementManager/States"]
+script = ExtResource( 30 )
+
+[node name="Jump" type="Node" parent="MovementManager/States"]
+script = ExtResource( 29 )
+
+[node name="LongJump" type="Node" parent="MovementManager/States"]
+script = ExtResource( 31 )
+
+[node name="Fall" type="Node" parent="MovementManager/States"]
+script = ExtResource( 32 )
 
 [node name="Ladder" type="Node" parent="MovementManager/States"]
 script = ExtResource( 10 )
@@ -2538,7 +2547,7 @@ script = ExtResource( 8 )
 [node name="MinDirTimer" type="Timer" parent="MovementManager"]
 one_shot = true
 
-[node name="ForgiveTimer" type="Timer" parent="MovementManager"]
+[node name="CoyoteTimer" type="Timer" parent="MovementManager"]
 one_shot = true
 
 [node name="BonkTimeout" type="Timer" parent="MovementManager"]
@@ -2614,6 +2623,7 @@ collision_layer = 0
 collision_mask = 7172
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemDetector"]
+light_mask = 0
 position = Vector2( 0, -7.5 )
 shape = SubResource( 2 )
 
@@ -2625,6 +2635,7 @@ collision_layer = 0
 collision_mask = 8194
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtDetector"]
+light_mask = 0
 position = Vector2( 0, -5.5 )
 shape = SubResource( 3 )
 
@@ -2634,6 +2645,7 @@ collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SSPDetector"]
 modulate = Color( 0, 0.462745, 0.0509804, 1 )
+light_mask = 0
 position = Vector2( 0, 1 )
 shape = SubResource( 4 )
 
@@ -2679,6 +2691,12 @@ anims/Stand.R3 = SubResource( 107 )
 
 [node name="EffectPlayer" type="AnimationPlayer" parent="."]
 anims/FlashIframe = SubResource( 53 )
+
+[node name="FloorDetector" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 4 )
+collision_mask = 8
+collide_with_areas = true
 
 [connection signal="guns_updated" from="." to="SpriteManager/GunSprite" method="_on_Juniper_guns_updated"]
 [connection signal="area_entered" from="ItemDetector" to="." method="_on_ItemDetector_area_entered"]

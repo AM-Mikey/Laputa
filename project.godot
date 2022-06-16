@@ -59,7 +59,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Actor/Player/Juniper.gd"
 }, {
-"base": "Node",
+"base": "Node2D",
 "class": "Prop",
 "language": "GDScript",
 "path": "res://src/Prop/Prop.gd"
@@ -448,6 +448,7 @@ debug_shop={
 2d_physics/layer_3="item"
 2d_physics/layer_4="world"
 2d_physics/layer_5="prop"
+2d_physics/layer_6=0
 2d_physics/layer_8="npc"
 2d_physics/layer_9="breakable"
 2d_physics/layer_10="ssp"

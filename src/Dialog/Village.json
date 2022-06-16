@@ -21,7 +21,8 @@
 	After this message, select yes or no./yn
 	/dba You picked yes.//db
 	/dbb You picked no.//db
-	/m Now the dialog branches are merged.",
+	/m Now the dialog branches are merged.
+	",
 
 	"free_dialog":
 	"
@@ -44,6 +45,13 @@
 	/name,quincy Here's an example of a cutscene
 	/name,fuuka It can go on without the player even in the scene!
 	for some reason text-commands mess up on the last line so here's one without any!
+	",
+	
+	"hermit":
 	"
+	/name,kermit I'm Kermit, I guess...
+	/flip,right didn't really get to choose the name, so I'm not too happy about that
+	",
+
 }
 

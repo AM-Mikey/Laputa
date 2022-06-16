@@ -36,17 +36,15 @@ func state_process():
 
 
 	### checks with new velocity
-	if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
+	if pc.is_on_ceiling(): #and mm.bonk_timeout.time_left == 0:
 		mm.bonk("bonk")
 
 	if pc.is_on_floor():
-		jump_type = Jump.NORMAL
-		if mm.forgive_timer.time_left == 0:
-			mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
-			if mm.bonk_timeout.time_left == 0:
-				mm.bonk("Land")
 		mm.forgive_timer.start(mm.forgiveness_time)
 
+	#if not pc.get_node("FloorDetector").is_colliding():
+	if snap
+		mm.change_state(mm.states["fall"])
 
 
 
@@ -56,18 +54,7 @@ func state_process():
 
 func get_move_dir():
 	return Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		
-		-1.0 \
-		if Input.is_action_just_pressed("jump") and mm.forgive_timer.time_left > 0 \
-		or Input.is_action_just_pressed("jump") and pc.is_on_floor() 
-		else 0.0)
-
-
-
-
-
-
+		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0)
 
 
 
@@ -129,11 +116,7 @@ func get_move_velocity(velocity, move_dir, is_jump_interrupted):
 	return out
 
 
-
-
-
 func enter():
 	pass
-	
 func exit():
 	pass

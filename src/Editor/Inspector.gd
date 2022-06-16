@@ -14,12 +14,15 @@ func _physics_process(delta):
 	display_tool_labels()
 
 func exit():
-	on_selected(null, "enemy")
+	on_deselected()
 
 
 ### SELECTING
 
 func on_selected(selection, selection_type):
+	if selection.is_in_group("Previews"):
+		return
+	
 	if active:
 		if active.has_method("on_editor_deselect"):
 			active.on_editor_deselect()
@@ -32,7 +35,9 @@ func on_selected(selection, selection_type):
 	
 	match active_type:
 		"spawn_point":
-			editor.set_tool("grab")
+			editor.set_tool("entity", "noplace")
+		"light":
+			editor.set_tool("entity", "noplace")
 		_:
 			pass
 
@@ -43,6 +48,7 @@ func on_deselected():
 	active = null
 	active_type = ""
 	active_property = ""
+	clear_data()
 	
 
 ### DISPLAY DATA
@@ -66,14 +72,29 @@ func display_data():
 			for p in active.get_property_list():
 				if p["usage"] == 8199: #exported properties
 					create_button(p["name"], active.get(p["name"]), p["type"])
+		"npc":
+			for p in active.get_property_list():
+				if p["usage"] == 8199: #exported properties
+					create_button(p["name"], active.get(p["name"]), p["type"])
+		"prop":
+			for p in active.get_property_list():
+				if p["usage"] == 8199: #exported properties
+					create_button(p["name"], active.get(p["name"]), p["type"])
+		"trigger":
+			for p in active.get_property_list():
+				if p["usage"] == 8199: #exported properties
+					create_button(p["name"], active.get(p["name"]), p["type"])
 		"level":
 			create_button("level_name", active.level_name, "string")
 			create_button("level_type", active.level_type, "enum", active.LevelType.keys())
 			create_button("tile_set", active.tile_set.resource_path, "load")
-			create_button("music", active.music, "string")
+			create_button("music", active.music, "load")
 			create_button("dialog_json", active.dialog_json, "load")
 			create_button("conversation", active.conversation, "string")
-		
+		"light":
+			for p in active.get_property_list():
+				if p["usage"] == 8199: #exported properties
+					create_button(p["name"], active.get(p["name"]), p["type"])
 		"tile_collection":
 			#create_button("auto_select_layer", true, "bool")
 			var layers = []
@@ -108,6 +129,17 @@ func on_property_selected(property_name):
 					$FileDialog.current_dir = "res://src/Dialog/"
 					$FileDialog.set_filters(PoolStringArray(["*.json"]))
 					$FileDialog.popup()
+				"music":
+					$FileDialog.current_dir = "res://assets/Music/"
+					$FileDialog.set_filters(PoolStringArray(["*.wav"]))
+					$FileDialog.popup()
+		"npc":
+			match property_name:
+				"dialog_json":
+					$FileDialog.current_dir = "res://src/Dialog/"
+					$FileDialog.set_filters(PoolStringArray(["*.json"]))
+					$FileDialog.popup()
+
 
 
 func on_property_changed(property_name, property_value):
@@ -132,10 +164,16 @@ func on_property_changed(property_name, property_value):
 			match property_name:
 				"tile_set": 
 					active.set(property_name, load(property_value))
-					editor.on_tile_set_loaded(property_value)
+					editor.on_TileSet_tile_set_loaded(property_value)
 				_:
 					active.set(property_name, property_value)
-					
+		"light":
+			active.set(property_name, property_value)
+			active.setup_colors()
+		"npc":
+			active.set(property_name, property_value)
+		_:
+					active.set(property_name, property_value)
 	display_data() #to reload
 	print("Changed " + active_type + " " + active.name + "'s " + property_name + " to " + String(property_value))
 

@@ -14,19 +14,7 @@ func state_process():
 	pc.move_dir.x = sign(mm.move_target.x - pc.position.x) #get direction to move
 
 
-	if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
-		mm.bonk("bonk")
-
-	if pc.is_on_floor():
-		if mm.forgive_timer.time_left == 0:
-			mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
-			if mm.bonk_timeout.time_left == 0:
-				mm.bonk("Land")
-		mm.forgive_timer.start(mm.forgiveness_time)
-
-
-
-	mm.velocity = get_move_velocity(mm.velocity)
+	mm.velocity = get_move_velocity()
 	var new_velocity = pc.move_and_slide_with_snap(mm.velocity, mm.snap_vector, mm.FLOOR_NORMAL, true)
 		
 	if pc.is_on_wall():
@@ -35,18 +23,29 @@ func state_process():
 	mm.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
 
 
+#	if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
+#		mm.bonk("bonk")
+
+#	if pc.is_on_floor():
+#		if mm.forgive_timer.time_left == 0:
+#			mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
+#			if mm.bonk_timeout.time_left == 0:
+#				mm.bonk("Land")
+#		mm.forgive_timer.start(mm.forgiveness_time)
+
+
 	if abs(mm.move_target.x - pc.position.x) < 1: #when within one pixel
 		pc.move_dir.x = 0
 		if pc.disabled:
 			mm.change_state(mm.states["disabled"])
 		else:
-			mm.change_state(mm.states["normal"])
+			mm.change_state(mm.states["run"])
 
 
 
 
-func get_move_velocity(velocity):
-	var out = velocity
+func get_move_velocity():
+	var out = mm.velocity
 
 	out.y += mm.gravity * get_physics_process_delta_time()
 	out.x = min(abs(out.x) + mm.acceleration, mm.speed.x) * pc.move_dir.x

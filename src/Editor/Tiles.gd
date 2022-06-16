@@ -1,9 +1,12 @@
 extends Control
 
 signal tile_selection_updated(selected_tiles)
-signal autolayer_updated(is_autolayer)
-signal multi_erase_toggled(toggle)
+signal autolayer_toggled(toggled)
+signal multi_erase_toggled(toggled)
+signal terrain_toggled(toggled)
+signal tile_transform_updated(tile_rotation_degrees, tile_scale_vector)
 
+var icon = "res://assets/Icon/TileSetIcon.png"
 
 var tile_set 
 var texture
@@ -11,8 +14,10 @@ var columns: int
 var rows: int
 
 var hovered_button
-var selected_tile_region: Rect2 = Rect2(0, 0, 16, 16) #in texture space
+var selected_tile_region := Rect2(0, 0, 16, 16) #in texture space
 var selected_tiles = [] #2D array
+var tile_rotation_degrees: float = 0
+var tile_scale_vector := Vector2(1,1)
 
 export var tile_separation: int = 1
 
@@ -20,7 +25,6 @@ export(NodePath) var buttons
 export(NodePath) var cursor
 
 func setup_tile_set(new):
-	print("heyo")
 	tile_set = new
 	texture = tile_set.tile_get_texture(tile_set.get_tiles_ids().front())
 	columns = floor(texture.get_width()/16)
@@ -43,7 +47,7 @@ func setup_tile_buttons():
 		var c_id = 0
 		for c in columns:
 			var button = load("res://src/Editor/Button/TileButton.tscn").instance()
-			button.tile_set_position = Vector2(c_id*16, r_id*16) 
+			button.tile_set_position = Vector2(c_id*16, r_id*16)
 			row.add_child(button)
 			button.connect("mouse_entered", self, "hover_button", [button])
 			button.connect("mouse_exited", self, "unhover")
@@ -56,7 +60,17 @@ func setup_tile_buttons():
 		var button = get_node(buttons).get_child(y_pos).get_child(x_pos)
 		button.id = i
 		button.texture = get_tile_as_texture(i)
+		
 
+func transform_buttons():
+	var tiles = []
+	for c in get_node(buttons).get_children():
+		for g in c.get_children():
+			tiles.append(g)
+	for t in tiles:
+		t.rect_rotation = tile_rotation_degrees
+		t.rect_scale = tile_scale_vector
+	emit_signal("tile_transform_updated")
 
 
 func get_tile_as_texture(id) -> Texture:
@@ -134,3 +148,32 @@ func _on_AutoLayer_toggled(button_pressed):
 
 func _on_MultiErase_toggled(button_pressed):
 	emit_signal("multi_erase_toggled", button_pressed)
+
+func _on_Terrain_toggled(button_pressed):
+	emit_signal("terrain_toggled", button_pressed)
+
+
+func _on_FlipH_toggled(button_pressed):
+	tile_scale_vector.x = -1 if button_pressed else 1
+	transform_buttons()
+
+func _on_FlipV_toggled(button_pressed):
+	tile_scale_vector.y = -1 if button_pressed else 1
+	transform_buttons()
+	#emit_signal("tile_transform_updated", tile_rotation_degrees, tile_scale_vector)
+
+func _on_RotateC_pressed():
+	if tile_rotation_degrees == 270:
+		tile_rotation_degrees = 0
+	else:
+		tile_rotation_degrees += 90
+	transform_buttons()
+	#emit_signal("tile_transform_updated", tile_rotation_degrees, tile_scale_vector)
+
+func _on_RotateCC_pressed():
+	if tile_rotation_degrees == 0:
+		tile_rotation_degrees = 270
+	else:
+		tile_rotation_degrees -= 90
+	transform_buttons()
+	#emit_signal("tile_transform_updated", tile_rotation_degrees, tile_scale_vector)

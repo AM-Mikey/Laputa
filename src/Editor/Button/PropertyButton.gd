@@ -17,7 +17,9 @@ func _ready():
 		"bool", TYPE_BOOL:
 			$HBox/Bool.visible = true
 			$HBox/Bool.pressed = property_value
-			
+		"color", TYPE_COLOR:
+			$HBox/Color.visible = true
+			$HBox/Color.color = property_value
 		"enum":
 			$HBox/Enum.visible = true
 			for i in enum_items:
@@ -73,9 +75,12 @@ func on_text_entered(new_text):
 	property_value = new_text
 	emit_signal("property_changed", property_name, property_value)
 
-
 func on_bool_toggled(button_pressed):
 	property_value = button_pressed
+	emit_signal("property_changed", property_name, property_value)
+
+func on_color_changed():
+	property_value = $HBox/Color.color
 	emit_signal("property_changed", property_name, property_value)
 
 func on_enum_selected(index):
@@ -88,9 +93,3 @@ func on_vector2x_entered(new_text):
 func on_vector2y_entered(new_text):
 	property_value.y = float(new_text)
 	emit_signal("property_changed", property_name, property_value)
-
-
-
-
-
-

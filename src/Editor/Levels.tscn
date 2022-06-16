@@ -10,6 +10,19 @@ rect_pivot_offset = Vector2( 320, 120 )
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
+[node name="VBox" type="VBoxContainer" parent="."]
+margin_right = 480.0
+margin_bottom = 270.0
+
+[node name="Label" type="Label" parent="VBox"]
+margin_right = 480.0
+margin_bottom = 4.0
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0.878431, 0.784314, 0.345098, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Levels"
+align = 1
+
 [node name="HBox" type="HBoxContainer" parent="."]
 margin_top = 240.0
 margin_right = 480.0

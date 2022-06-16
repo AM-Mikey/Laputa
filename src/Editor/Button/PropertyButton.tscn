@@ -97,6 +97,18 @@ rect_min_size = Vector2( 32, 0 )
 mouse_filter = 2
 custom_styles/panel = ExtResource( 4 )
 
+[node name="Color" type="ColorPickerButton" parent="HBox"]
+visible = false
+margin_left = 212.0
+margin_right = 244.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 0 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+
 [node name="Enum" type="OptionButton" parent="HBox"]
 visible = false
 margin_left = 170.0
@@ -171,6 +183,7 @@ mouse_filter = 2
 
 [connection signal="pressed" from="HBox/Button" to="." method="on_pressed"]
 [connection signal="toggled" from="HBox/Bool" to="." method="on_bool_toggled"]
+[connection signal="popup_closed" from="HBox/Color" to="." method="on_color_changed"]
 [connection signal="item_selected" from="HBox/Enum" to="." method="on_enum_selected"]
 [connection signal="focus_exited" from="HBox/String" to="." method="on_text_entered"]
 [connection signal="text_entered" from="HBox/String" to="." method="on_text_entered"]

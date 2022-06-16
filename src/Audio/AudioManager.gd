@@ -5,6 +5,7 @@ const POS_SFX_PLAYER = preload("res://src/Audio/PosSFX.tscn")
 const MUSIC_PLAYER = preload("res://src/Audio/Music.tscn")
 
 signal interrupt_finished
+signal fadeout_finished
 signal players_updated
 
 export var sfx_dict: Dictionary = {
@@ -47,6 +48,8 @@ export var sfx_dict: Dictionary = {
 	"enemy_croak": preload("res://assets/SFX/FrogCroak.ogg"),
 	"enemy_hurt": preload("res://assets/SFX/Placeholder/snd_enemy_hurt.ogg"),
 	"enemy_shoot": preload("res://assets/SFX/Placeholder/snd_em_fire.ogg"),
+	
+	"npc_dialog": preload("res://assets/SFX/Placeholder/snd_msg.ogg"),
 }
 
 export var music_dict: Dictionary = {
@@ -78,6 +81,10 @@ var sfx_recent = []
 export var music_player_max = 1
 var music_players = []
 var music_queue = []
+
+#export var track_player_max = 1
+#var track_players = []
+#var track_queue = []
 
 export var interrupt_player_max = 1
 var interrupt_players = []
@@ -168,6 +175,49 @@ func play_music(music_string):
 		printerr("ERROR: No music with name: " + music_string)
 
 
+
+func play_track(track_path):
+#		if track_queue.has(track_string): #don't play if already playing
+#			return
+			
+	var file_name = track_path.get_file().get_basename()
+	var file_info = file_name.split("_")
+	
+	var dir = Directory.new()
+	var intro_path = track_path.get_base_dir().plus_file(file_info[0] + "_" + file_info[1] + "_Intro.wav")
+	var loop_path = track_path.get_base_dir().plus_file(file_info[0] + "_" + file_info[1] + ".wav")
+	var outro_path = track_path.get_base_dir().plus_file(file_info[0] + "_" + file_info[1] + "_Outro.wav")
+	
+	
+	var track = {}
+	track["producer"] = file_info[0]
+	track["name"] = file_info[1]
+	track["intro"] = ""
+	track["loop"] = loop_path
+	track["outro"] = ""
+	
+	if dir.file_exists(intro_path):
+		track["intro"] = intro_path
+	if dir.file_exists(outro_path):
+		track["intro"] = outro_path
+
+
+	var player
+	if track["intro"] != "": #has intro
+		player = _add_track_player(track["intro"])
+		while music_players.size() > music_player_max:
+			_clear_player("music", music_players[0])
+#		yield(get_tree(), "idle_frame")
+		yield(player, "finished")
+		player.stream = load(track["loop"])
+		player.play()
+	else:
+		player = _add_track_player(track["loop"])
+	
+#	_clear_player("music", player)
+
+
+
 func play_interrupt(music_string): #play_time, wait_start, wait_end
 	for p in music_players: #pause music players
 		p.stream_paused = true
@@ -195,6 +245,17 @@ func _add_player(type, string):
 	emit_signal("players_updated")
 	return player
 
+func _add_track_player(path):
+	#get("music_queue").append(player)
+	var player = MUSIC_PLAYER.instance()
+	get("music_players").append(player)
+	add_child(player)
+	player.stream = load(path)
+	player.play()
+	emit_signal("players_updated")
+	return player
+
+
 func _add_pos_player(string, actor):
 	sfx_queue.append(string)
 	var player = POS_SFX_PLAYER.instance()
@@ -213,7 +274,7 @@ func _clear_player(type, player):
 
 #####
 
-func stop_sfx():
+func stop_sfx(): #TODO: shouldnt these methods use _clear_player?
 	for p in sfx_players:
 		p.queue_free()
 		emit_signal("players_updated")
@@ -222,3 +283,19 @@ func stop_music():
 	for p in music_players:
 		p.queue_free()
 		emit_signal("players_updated")
+
+func fade_music(duration = 1.0):
+	if music_players.empty():
+		return
+	
+	var player = music_players.front()
+	var tween = Tween.new()
+	add_child(tween)
+	tween.interpolate_property(player, "volume_db", player.volume_db, -80, duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	tween.start()
+	yield(tween, "tween_completed")
+	_clear_player("music", player)
+	
+	
+	tween.queue_free()
+	emit_signal("fadeout_finished")

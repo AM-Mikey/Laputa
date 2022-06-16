@@ -92,7 +92,7 @@ func _on_limit_camera(left, right, top, bottom):
 	
 	if OS.get_window_size().y > (bottom - top) * world.resolution_scale:
 		print("WARNING: window height larger than camera limit")
-		var extra_margin = (OS.get_window_size().y - (bottom - top))/2
+		var extra_margin = (OS.get_window_size().y / world.resolution_scale - (bottom - top))/2
 		limit_top = top - extra_margin
 		limit_bottom = bottom  + extra_margin
 		

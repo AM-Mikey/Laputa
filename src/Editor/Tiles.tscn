@@ -1,9 +1,37 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/Editor/Cursor.tres" type="StyleBox" id=1]
 [ext_resource path="res://src/Editor/Tiles.gd" type="Script" id=2]
 [ext_resource path="res://src/Editor/EditorTheme.tres" type="Theme" id=3]
 [ext_resource path="res://src/UI/StyleBox/SteelRoundInset.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/Editor/RotateCC.png" type="Texture" id=5]
+[ext_resource path="res://assets/Editor/FlipH.png" type="Texture" id=6]
+[ext_resource path="res://assets/Editor/FlipV.png" type="Texture" id=7]
+[ext_resource path="res://assets/Editor/RotateC.png" type="Texture" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=12]
 
 [node name="Tiles" type="MarginContainer"]
 margin_right = 480.0
@@ -19,28 +47,144 @@ margin_right = 480.0
 margin_bottom = 270.0
 mouse_filter = 2
 
-[node name="HBox" type="HBoxContainer" parent="VBox"]
+[node name="Label" type="Label" parent="VBox"]
 margin_right = 480.0
-margin_bottom = 48.0
+margin_bottom = 4.0
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0.878431, 0.784314, 0.345098, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Tiles"
+align = 1
+
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+margin_top = 8.0
+margin_right = 480.0
+margin_bottom = 40.0
 mouse_filter = 2
 
+[node name="AutoLayerLabel" type="Label" parent="VBox/HBox"]
+margin_top = 14.0
+margin_right = 69.0
+margin_bottom = 18.0
+text = "DrawOnAuto"
+
 [node name="AutoLayer" type="CheckBox" parent="VBox/HBox"]
-margin_right = 105.0
-margin_bottom = 48.0
+margin_left = 73.0
+margin_right = 101.0
+margin_bottom = 32.0
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/hover_pressed = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
 pressed = true
-text = "AutoLayer"
-flat = true
+
+[node name="VSeparator" type="VSeparator" parent="VBox/HBox"]
+margin_left = 105.0
+margin_right = 121.0
+margin_bottom = 32.0
+
+[node name="MultiEraseLabel" type="Label" parent="VBox/HBox"]
+margin_left = 125.0
+margin_top = 14.0
+margin_right = 186.0
+margin_bottom = 18.0
+text = "EraseOnAll"
 
 [node name="MultiErase" type="CheckBox" parent="VBox/HBox"]
-visible = false
-margin_left = 99.0
-margin_right = 194.0
+margin_left = 190.0
+margin_right = 218.0
 margin_bottom = 32.0
-text = "MultiErase"
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/hover_pressed = SubResource( 11 )
+custom_styles/normal = SubResource( 12 )
+pressed = true
 flat = true
 
+[node name="VSeparator2" type="VSeparator" parent="VBox/HBox"]
+visible = false
+margin_left = 222.0
+margin_right = 238.0
+margin_bottom = 32.0
+
+[node name="TerrainLabel" type="Label" parent="VBox/HBox"]
+visible = false
+margin_left = 242.0
+margin_top = 14.0
+margin_right = 285.0
+margin_bottom = 18.0
+text = "Terrain"
+
+[node name="Terrain" type="CheckBox" parent="VBox/HBox"]
+visible = false
+margin_left = 289.0
+margin_right = 317.0
+margin_bottom = 32.0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/hover_pressed = SubResource( 11 )
+custom_styles/normal = SubResource( 12 )
+flat = true
+
+[node name="Options" type="HBoxContainer" parent="VBox"]
+visible = false
+margin_top = 44.0
+margin_right = 480.0
+margin_bottom = 76.0
+
+[node name="FlipH" type="Button" parent="VBox/Options"]
+margin_right = 32.0
+margin_bottom = 32.0
+hint_tooltip = "Flip Horizontal"
+size_flags_vertical = 0
+toggle_mode = true
+icon = ExtResource( 6 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="FlipV" type="Button" parent="VBox/Options"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+hint_tooltip = "Flip Vertical"
+size_flags_vertical = 0
+toggle_mode = true
+icon = ExtResource( 7 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="RotateC" type="Button" parent="VBox/Options"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+hint_tooltip = "Rotate Clockwise"
+size_flags_vertical = 0
+icon = ExtResource( 8 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="RotateCC" type="Button" parent="VBox/Options"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+hint_tooltip = "Rotate Counterclockwise"
+size_flags_vertical = 0
+icon = ExtResource( 5 )
+__meta__ = {
+"_editor_description_": ""
+}
+
 [node name="Scroll" type="ScrollContainer" parent="VBox"]
-margin_top = 52.0
+margin_top = 44.0
 margin_right = 480.0
 margin_bottom = 270.0
 mouse_filter = 2
@@ -54,7 +198,7 @@ __meta__ = {
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 472.0
-margin_bottom = 210.0
+margin_bottom = 218.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -67,7 +211,7 @@ __meta__ = {
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 472.0
-margin_bottom = 210.0
+margin_bottom = 218.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -75,9 +219,11 @@ size_flags_vertical = 3
 [node name="Cursor" type="Panel" parent="VBox/Scroll/Control"]
 mouse_filter = 2
 custom_styles/panel = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="toggled" from="VBox/HBox/AutoLayer" to="." method="_on_AutoLayer_toggled"]
 [connection signal="toggled" from="VBox/HBox/MultiErase" to="." method="_on_MultiErase_toggled"]
+[connection signal="toggled" from="VBox/HBox/Terrain" to="." method="_on_Terrain_toggled"]
+[connection signal="toggled" from="VBox/Options/FlipH" to="." method="_on_FlipH_toggled"]
+[connection signal="toggled" from="VBox/Options/FlipV" to="." method="_on_FlipV_toggled"]
+[connection signal="pressed" from="VBox/Options/RotateC" to="." method="_on_RotateC_pressed"]
+[connection signal="pressed" from="VBox/Options/RotateCC" to="." method="_on_RotateCC_pressed"]

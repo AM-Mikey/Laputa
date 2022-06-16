@@ -4,6 +4,7 @@ const PROP_BUTTON = preload("res://src/Editor/Button/PropButton.tscn")
 
 signal prop_changed(prop_path)
 
+var icon = "res://assets/Icon/PropIcon.png"
 var props = {}
 var active_prop_path
 
@@ -28,7 +29,7 @@ func setup_props():
 		if index == 0:
 			prop_button.active = true
 			active_prop_path = p
-		$Scroll/Buttons.add_child(prop_button)
+		$VBox/Margin/Scroll/Buttons.add_child(prop_button)
 		index += 1
 		
 
@@ -52,9 +53,9 @@ func find_prop_scenes(path):
 ### SIGNALS
 
 func on_prop_changed(prop_path):
-	editor.set_tool("prop")
+	editor.set_tool("entity", "prop")
 	active_prop_path = prop_path
-	for b in $Scroll/Buttons.get_children():
+	for b in $VBox/Margin/Scroll/Buttons.get_children():
 		if b.prop_path == active_prop_path: #this is weird, we should have already done this. for extra security in case it was activated another way?
 			b.activate()
 	

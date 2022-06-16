@@ -2,12 +2,6 @@ extends Control
 
 signal dialog_finished
 
-var text_sound = load("res://assets/SFX/Placeholder/snd_msg.ogg")
-
-
-export(NodePath) var face_path
-
-
 var dialog
 var conversation: String
 var text
@@ -26,8 +20,6 @@ var step: int = 0 #step in printing dialog
 onready var tb = $Margin/HBox/RichTextBox
 onready var face_container = $Margin/HBox/Face
 onready var face_sprite = $Margin/HBox/Face/Sprite
-onready var audio = $AudioStreamPlayer
-
 
 onready var world = get_tree().get_root().get_node("World")
 onready var pc = get_tree().get_root().get_node("World/Juniper")
@@ -35,7 +27,6 @@ onready var pc = get_tree().get_root().get_node("World/Juniper")
 func _ready():
 	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
 	on_viewport_size_changed()
-	audio.stream = text_sound
 	tb.bbcode_text = "\n" #""
 
 func print_sign():
@@ -62,8 +53,10 @@ func start_printing(dialog_json, conversation_to_print):
 	in_dialog = true
 	
 	dialog = load_dialog(dialog_json)
+	conversation_to_print = conversation_to_print.to_lower()
 	text = dialog[conversation_to_print].strip_edges().replace("\t", "") #strip edges to clean up first and last newlines ## remove tabulation
 	print(text)
+	align_box()
 	pc.disable()
 	pc.inspecting = true
 	dialog_loop()
@@ -93,11 +86,10 @@ func dialog_loop():
 
 func flash_cursor():
 	yield(get_tree().create_timer(0.3), "timeout")
-	print("flashing cursor")
 	var added_text = tb.bbcode_text + "§"
 	var deleted_text = tb.bbcode_text
 	
-	while active == false:
+	while not active:
 		tb.bbcode_text = added_text
 		yield(get_tree().create_timer(0.3), "timeout")
 		if active:
@@ -116,7 +108,7 @@ func _input(event):
 	if event.is_action_pressed("ui_accept") and in_dialog and not auto_input:
 		if step >= text.length():
 			print("reached end")
-			stop_printing()
+			exit()
 		
 		if not active:
 			do_delay = true
@@ -157,16 +149,24 @@ func print_dialog(string):
 	
 	
 	elif character == "/":
-		var command = string.substr(step, -1)
-		var first_space = command.find(" ")
-		var first_newline = command.find("\n")
+		var command = string.substr(step+1, -1) #everything after the slash
+		var first_space = 999
+		var first_newline = 999
+		var first_slash = 999
 		
-		if first_space < first_newline: #the space came first
-			command = command.left(first_space)
-			step += command.length()
-		elif first_space > first_newline: #the newline came first
-			command = command.left(first_newline)
-			step += command.length() #-1 #believe it or not breaking the step count breaks the dialog (huh who knew?)
+		if " " in command:
+			first_space = command.find(" ")
+		if "\n" in command:
+			first_newline = command.find("\n")
+		if "/" in command:
+			first_slash = command.find("/")
+
+
+		var first = min(min(first_space, first_newline), first_slash) #first command end character
+		command = command.left(first)
+		step += command.length()
+		if first == first_space: #skip space
+			step += 1
 		
 		print("doing command: ", command)
 		$CommandHandler.parse_command(command)
@@ -176,10 +176,10 @@ func print_dialog(string):
 	else:
 		print("step " + str(step) + " : " + character)
 		tb.bbcode_text += character
-		audio.play()
+		am.play("npc_dialog")
 
 
-func stop_printing():
+func exit():
 	print("ended dialog")
 	emit_signal("dialog_finished")
 	if is_instance_valid(pc):
@@ -188,7 +188,39 @@ func stop_printing():
 		pc.inspecting = false
 	queue_free()
 
+### HELPERS
 
+func align_box():
+	var viewport_size = get_tree().get_root().size / world.resolution_scale
+	var pc_pos = pc.global_position
+	var camera
+	for c in get_tree().get_nodes_in_group("Cameras"):
+		if c.current:
+			camera = c
+	var camera_center = camera.get_camera_screen_center()
+
+	if pc_pos.y < camera_center.y + (viewport_size.y / 6): #bottom
+		rect_position.y = viewport_size.y - (rect_size.y + 16)
+	else: #top
+		rect_position.y = 16
+
+
+func flip_face(dir = "auto"):
+	if dir == "auto":
+		var face_index = face_container.get_index()
+		match face_index:
+			0: dir = "right"
+			1: dir = "left"
+
+	match dir:
+		"left":
+			face_container.get_parent().move_child(face_container, 0)
+			face_sprite.scale.x = 1
+		"right":
+			face_container.get_parent().move_child(face_container, 1)
+			face_sprite.scale.x = -1
+
+### SIGNALS
 
 func on_viewport_size_changed():
 	var viewport_size = get_tree().get_root().size / world.resolution_scale
@@ -196,20 +228,3 @@ func on_viewport_size_changed():
 	rect_size.x = min(viewport_size.x, 400)
 	rect_position.x = (viewport_size.x - rect_size.x) /2
 	rect_position.y = viewport_size.y - 80
-
-
-
-func flip_top():
-	rect_position.y = 16
-
-func flip_bottom():
-	var viewport_size = get_tree().get_root().size / world.resolution_scale
-	rect_position.y = viewport_size.y - (rect_size.y + 16)
-
-func flip_left():
-	get_node(face_path).get_parent.move_child(face_path.get_index(), 0)
-	get_node(face_path).sprite.scale.x = 1
-
-func flip_right():
-	get_node(face_path).get_parent.move_child(face_path.get_index(), 1)
-	get_node(face_path).sprite.scale.x = -1

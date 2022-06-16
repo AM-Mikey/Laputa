@@ -12,13 +12,13 @@
 [ext_resource path="res://src/Tile/TriggerTile/SpikesTrigger.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/Tile/Village.tres" type="TileSet" id=13]
-[ext_resource path="res://src/Tile/Layers/Outdated/Back.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/Tile/Outdated/Village.tres" type="TileSet" id=13]
+[ext_resource path="res://src/Tile/Outdated/Layers/Outdated/Back.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Prop/LifeCapsule.tscn" type="PackedScene" id=15]
-[ext_resource path="res://src/Tile/Layers/Outdated/Collision.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/Tile/Outdated/Layers/Outdated/Collision.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=17]
-[ext_resource path="res://src/Tile/Layers/Outdated/SSP.tscn" type="PackedScene" id=18]
-[ext_resource path="res://src/Tile/Layers/Outdated/Front.tscn" type="PackedScene" id=19]
+[ext_resource path="res://src/Tile/Outdated/Layers/Outdated/SSP.tscn" type="PackedScene" id=18]
+[ext_resource path="res://src/Tile/Outdated/Layers/Outdated/Front.tscn" type="PackedScene" id=19]
 
 [sub_resource type="DynamicFont" id=1]
 outline_size = 1

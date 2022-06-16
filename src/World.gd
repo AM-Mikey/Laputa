@@ -233,7 +233,7 @@ func write_player_data_to_save():
 			"xp" : g.xp
 			}
 		if g.max_ammo != 0:
-			gun_data[g.resource_name]["ammo"] = g.ammo
+			gun_data[g.name]["ammo"] = g.ammo
 	
 	data["player_data"] = {
 		"current_level" : current_level.filename,

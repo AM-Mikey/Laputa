@@ -3,6 +3,8 @@ extends MarginContainer
 const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 
+var icon = "res://assets/Icon/LevelIcon.png"
+
 onready var w = get_tree().get_root().get_node("World")
 onready var ui = w.get_node("UILayer")
 onready var el = w.get_node("EditorLayer")

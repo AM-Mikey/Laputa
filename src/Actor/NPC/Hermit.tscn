@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Actor/NPC/NPC.gd" type="Script" id=1]
 [ext_resource path="res://assets/Actor/NPC/Hermit.png" type="Texture" id=2]
@@ -26,6 +26,22 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
+[sub_resource type="Animation" id=5]
+resource_name = "Notice"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+
 [sub_resource type="Animation" id=4]
 resource_name = "Walk"
 length = 0.8
@@ -37,17 +53,17 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 8, 15 ]
+"values": [ 4, 7 ]
 }
 
 [node name="Hermit" type="KinematicBody2D"]
 collision_layer = 128
 collision_mask = 8
 script = ExtResource( 1 )
-id = "hermit"
+speed = Vector2( 20, 20 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -14 )
@@ -64,9 +80,27 @@ shape = SubResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -16 )
 texture = ExtResource( 2 )
-hframes = 3
-frame = 1
+hframes = 4
+vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 3 )
+anims/Notice = SubResource( 5 )
 anims/Walk = SubResource( 4 )
+
+[node name="FloorDetectorL" type="RayCast2D" parent="."]
+position = Vector2( -8, 0 )
+enabled = true
+cast_to = Vector2( 0, 8 )
+collision_mask = 8
+collide_with_areas = true
+
+[node name="FloorDetectorR" type="RayCast2D" parent="."]
+position = Vector2( 8, 0 )
+enabled = true
+cast_to = Vector2( 0, 8 )
+collision_mask = 8
+collide_with_areas = true
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

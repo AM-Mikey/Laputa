@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/Editor/EditorTheme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Editor/Editor.gd" type="Script" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://src/Editor/Inspector.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Editor/Enemies.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Editor/Props.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Editor/NPCs.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/Editor/Triggers.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Editor/TabButtons.gd" type="Script" id=12]
 
 [node name="Editor" type="Control"]
 anchor_right = 1.0
@@ -35,15 +38,17 @@ margin_bottom = 448.0
 [node name="Main" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
+margin_left = 8.0
+margin_top = 32.0
 margin_right = 256.0
-margin_bottom = 264.0
-header_size = 16
-bar_size = 16
+margin_bottom = 424.0
+mouse_filter = 1
 
 [node name="Tab" type="TabContainer" parent="Main"]
-margin_right = 256.0
-margin_bottom = 264.0
-mouse_filter = 1
+margin_right = 250.0
+margin_bottom = 392.0
+mouse_filter = 2
+tabs_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -52,7 +57,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
-margin_top = 30.0
+margin_top = 16.0
 margin_right = -16.0
 margin_bottom = -16.0
 
@@ -61,7 +66,6 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
-margin_top = 30.0
 margin_right = -16.0
 margin_bottom = -16.0
 mouse_filter = 2
@@ -69,28 +73,46 @@ mouse_filter = 2
 [node name="Levels" parent="Main/Tab" instance=ExtResource( 6 )]
 visible = false
 margin_left = 16.0
-margin_top = 30.0
 margin_right = -16.0
 margin_bottom = -16.0
 
 [node name="Enemies" parent="Main/Tab" instance=ExtResource( 8 )]
 visible = false
 margin_left = 16.0
-margin_top = 30.0
 margin_right = -16.0
 margin_bottom = -16.0
 
 [node name="Props" parent="Main/Tab" instance=ExtResource( 9 )]
 visible = false
 
-[connection signal="enemy_selected" from="." to="Secondary/Inspector" method="on_selected" binds= [ "enemy" ]]
+[node name="NPCs" parent="Main/Tab" instance=ExtResource( 10 )]
+visible = false
+
+[node name="Triggers" parent="Main/Tab" instance=ExtResource( 11 )]
+visible = false
+
+[node name="TabButtons" type="Control" parent="Main"]
+show_behind_parent = true
+margin_right = 250.0
+margin_bottom = 392.0
+mouse_filter = 2
+script = ExtResource( 12 )
+
+[node name="VBox" type="HBoxContainer" parent="Main/TabButtons"]
+margin_top = -24.0
+margin_right = 256.0
+margin_bottom = 16.0
+mouse_filter = 2
+
+[connection signal="entity_selected" from="." to="Secondary/Inspector" method="on_selected"]
 [connection signal="level_saved" from="." to="Main/Tab/Levels" method="on_save"]
-[connection signal="prop_selected" from="." to="Secondary/Inspector" method="on_selected" binds= [ "prop" ]]
 [connection signal="tab_changed" from="Main/Tab" to="." method="on_tab_changed"]
-[connection signal="autolayer_updated" from="Main/Tab/Tiles" to="." method="_on_TileSetMenu_autolayer_updated"]
-[connection signal="multi_erase_toggled" from="Main/Tab/Tiles" to="." method="_on_TileSetMenu_multi_erase_toggled"]
-[connection signal="tile_selection_updated" from="Main/Tab/Tiles" to="." method="_on_TileSetMenu_tile_selection_updated"]
+[connection signal="autolayer_toggled" from="Main/Tab/Tiles" to="." method="on_Tiles_autolayer_toggled"]
+[connection signal="multi_erase_toggled" from="Main/Tab/Tiles" to="." method="_on_Tiles_multi_erase_toggled"]
+[connection signal="terrain_toggled" from="Main/Tab/Tiles" to="." method="on_terrain_toggled"]
+[connection signal="tile_selection_updated" from="Main/Tab/Tiles" to="." method="on_Tiles_tile_selection_updated"]
+[connection signal="tile_transform_updated" from="Main/Tab/Tiles" to="." method="_on_Tiles_tile_transform_updated"]
 [connection signal="collision_updated" from="Main/Tab/TileSet" to="." method="_on_TileSet_collision_updated"]
-[connection signal="image_loaded" from="Main/Tab/TileSet" to="." method="_on_TileSet_image_loaded"]
-[connection signal="tile_set_loaded" from="Main/Tab/TileSet" to="." method="on_tile_set_loaded"]
-[connection signal="tile_set_saved" from="Main/Tab/TileSet" to="." method="on_tile_set_saved"]
+[connection signal="image_loaded" from="Main/Tab/TileSet" to="." method="on_TileSet_image_loaded"]
+[connection signal="tile_set_loaded" from="Main/Tab/TileSet" to="." method="on_TileSet_tile_set_loaded"]
+[connection signal="tile_set_saved" from="Main/Tab/TileSet" to="." method="on_TileSet_tile_set_saved"]

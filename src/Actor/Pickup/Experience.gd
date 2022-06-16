@@ -1,6 +1,5 @@
 extends Actor
 
-var rng = RandomNumberGenerator.new()
 var direction
 export var bounciness: float = .75
 export var minimum_speed: float = .5

@@ -1,25 +1,53 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Editor/Cursor.tres" type="StyleBox" id=1]
 [ext_resource path="res://src/Editor/TileSet.gd" type="Script" id=2]
 [ext_resource path="res://src/Editor/EditorTheme.tres" type="Theme" id=3]
 [ext_resource path="res://src/UI/StyleBox/SteelRoundInset.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/Editor/CollisionOneWay.png" type="Texture" id=5]
+[ext_resource path="res://assets/Editor/FlipH.png" type="Texture" id=6]
+[ext_resource path="res://assets/Editor/FlipV.png" type="Texture" id=7]
+[ext_resource path="res://assets/Editor/RotateCC.png" type="Texture" id=8]
+[ext_resource path="res://assets/Editor/RotateC.png" type="Texture" id=9]
 
 [node name="TileSet" type="MarginContainer"]
-margin_right = 480.0
-margin_bottom = 270.0
+margin_right = 384.0
+margin_bottom = 288.0
+rect_pivot_offset = Vector2( -408, -64 )
 mouse_filter = 1
 theme = ExtResource( 3 )
 script = ExtResource( 2 )
-brushes = NodePath("TabContainer/Collision/Scroll2/Brushes")
-col_tiles = NodePath("TabContainer/Collision/Scroll/Tiles")
+normal_buttons = NodePath("VBox/Margin/Tab/Normal/Scroll/VBox")
+collision_buttons = NodePath("VBox/Margin/Tab/Collision/Scroll/Tiles")
+normal_cursor = NodePath("VBox/Margin/Tab/Normal/Scroll/Control/Cursor")
+brushes = NodePath("VBox/Margin/Tab/Collision/HBox/Scroll2/Brushes")
 
-[node name="TabContainer" type="TabContainer" parent="."]
-margin_right = 480.0
-margin_bottom = 270.0
+[node name="VBox" type="VBoxContainer" parent="."]
+margin_right = 384.0
+margin_bottom = 288.0
+
+[node name="Label" type="Label" parent="VBox"]
+margin_right = 384.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 0, 8 )
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0.878431, 0.784314, 0.345098, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "TileSet"
+align = 1
+
+[node name="Margin" type="MarginContainer" parent="VBox"]
+margin_top = 12.0
+margin_right = 384.0
+margin_bottom = 288.0
+size_flags_vertical = 3
+
+[node name="Tab" type="TabContainer" parent="VBox/Margin"]
+margin_right = 384.0
+margin_bottom = 276.0
 mouse_filter = 1
 
-[node name="Normal" type="VBoxContainer" parent="TabContainer"]
+[node name="Normal" type="VBoxContainer" parent="VBox/Margin/Tab"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
@@ -27,36 +55,39 @@ margin_top = 30.0
 margin_right = -16.0
 margin_bottom = -16.0
 
-[node name="Scroll" type="ScrollContainer" parent="TabContainer/Normal"]
-margin_right = 448.0
-margin_bottom = 224.0
+[node name="Scroll" type="ScrollContainer" parent="VBox/Margin/Tab/Normal"]
+margin_right = 352.0
+margin_bottom = 200.0
 mouse_filter = 1
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBox" type="VBoxContainer" parent="TabContainer/Normal/Scroll"]
+[node name="VBox" type="VBoxContainer" parent="VBox/Margin/Tab/Normal/Scroll"]
 custom_constants/separation = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control" type="Control" parent="TabContainer/Normal/Scroll"]
-margin_right = 448.0
-margin_bottom = 224.0
+[node name="Control" type="Control" parent="VBox/Margin/Tab/Normal/Scroll"]
+margin_right = 352.0
+margin_bottom = 200.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Cursor" type="Panel" parent="TabContainer/Normal/Scroll/Control"]
+[node name="Cursor" type="Panel" parent="VBox/Margin/Tab/Normal/Scroll/Control"]
 mouse_filter = 2
 custom_styles/panel = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Collision" type="VBoxContainer" parent="TabContainer"]
+[node name="Spacer" type="Control" parent="VBox/Margin/Tab/Normal"]
+margin_top = 204.0
+margin_right = 352.0
+margin_bottom = 230.0
+rect_min_size = Vector2( 0, 26 )
+
+[node name="Collision" type="VBoxContainer" parent="VBox/Margin/Tab"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -65,120 +96,173 @@ margin_top = 30.0
 margin_right = -16.0
 margin_bottom = -16.0
 
-[node name="Scroll2" type="ScrollContainer" parent="TabContainer/Collision"]
-margin_right = 448.0
-margin_bottom = 24.0
+[node name="HBox" type="HBoxContainer" parent="VBox/Margin/Tab/Collision"]
+margin_right = 352.0
+margin_bottom = 32.0
+
+[node name="FlipH" type="Button" parent="VBox/Margin/Tab/Collision/HBox"]
+margin_right = 32.0
+margin_bottom = 32.0
+toggle_mode = true
+icon = ExtResource( 6 )
+
+[node name="FlipV" type="Button" parent="VBox/Margin/Tab/Collision/HBox"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+toggle_mode = true
+icon = ExtResource( 7 )
+
+[node name="RotateC" type="Button" parent="VBox/Margin/Tab/Collision/HBox"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+toggle_mode = true
+icon = ExtResource( 9 )
+
+[node name="RotateCC" type="Button" parent="VBox/Margin/Tab/Collision/HBox"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+toggle_mode = true
+icon = ExtResource( 8 )
+
+[node name="OneWay" type="Button" parent="VBox/Margin/Tab/Collision/HBox"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+toggle_mode = true
+icon = ExtResource( 5 )
+
+[node name="Scroll2" type="ScrollContainer" parent="VBox/Margin/Tab/Collision/HBox"]
+margin_left = 180.0
+margin_right = 352.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 0, 24 )
 mouse_filter = 2
 size_flags_horizontal = 3
 custom_styles/bg = ExtResource( 4 )
 scroll_vertical_enabled = false
 
-[node name="Brushes" type="HBoxContainer" parent="TabContainer/Collision/Scroll2"]
+[node name="Brushes" type="HBoxContainer" parent="VBox/Margin/Tab/Collision/HBox/Scroll2"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 440.0
-margin_bottom = 16.0
+margin_right = 164.0
+margin_bottom = 24.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Scroll" type="ScrollContainer" parent="TabContainer/Collision"]
-margin_top = 28.0
-margin_right = 448.0
-margin_bottom = 194.0
+[node name="Scroll" type="ScrollContainer" parent="VBox/Margin/Tab/Collision"]
+margin_top = 36.0
+margin_right = 352.0
+margin_bottom = 200.0
 mouse_filter = 1
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tiles" type="VBoxContainer" parent="TabContainer/Collision/Scroll"]
+[node name="Tiles" type="VBoxContainer" parent="VBox/Margin/Tab/Collision/Scroll"]
 custom_constants/separation = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control" type="Control" parent="TabContainer/Collision/Scroll"]
-margin_right = 448.0
-margin_bottom = 166.0
+[node name="Control" type="Control" parent="VBox/Margin/Tab/Collision/Scroll"]
+margin_right = 352.0
+margin_bottom = 164.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Cursor" type="Panel" parent="TabContainer/Collision/Scroll/Control"]
+[node name="Cursor" type="Panel" parent="VBox/Margin/Tab/Collision/Scroll/Control"]
 mouse_filter = 2
 custom_styles/panel = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Spacer" type="Control" parent="TabContainer/Collision"]
-margin_top = 198.0
-margin_right = 448.0
-margin_bottom = 224.0
+[node name="Spacer" type="Control" parent="VBox/Margin/Tab/Collision"]
+margin_top = 204.0
+margin_right = 352.0
+margin_bottom = 230.0
 rect_min_size = Vector2( 0, 26 )
 
-[node name="Margin" type="MarginContainer" parent="."]
-margin_right = 480.0
-margin_bottom = 270.0
+[node name="Margin" type="MarginContainer" parent="VBox/Margin"]
+margin_right = 384.0
+margin_bottom = 276.0
 mouse_filter = 2
 custom_constants/margin_right = 8
 custom_constants/margin_top = 8
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 8
 
-[node name="HBox" type="HBoxContainer" parent="Margin"]
+[node name="HBox" type="HBoxContainer" parent="VBox/Margin/Margin"]
 margin_left = 8.0
-margin_top = 232.0
-margin_right = 472.0
-margin_bottom = 262.0
+margin_top = 238.0
+margin_right = 376.0
+margin_bottom = 268.0
 size_flags_vertical = 8
 alignment = 2
 
-[node name="Save" type="Button" parent="Margin/HBox"]
-margin_left = 150.0
-margin_right = 256.0
+[node name="Save" type="Button" parent="VBox/Margin/Margin/HBox"]
+margin_left = 143.0
+margin_right = 205.0
 margin_bottom = 30.0
-text = "Save Tileset As"
+text = "Save As"
 
-[node name="Load" type="Button" parent="Margin/HBox"]
-margin_left = 260.0
-margin_right = 348.0
+[node name="Load" type="Button" parent="VBox/Margin/Margin/HBox"]
+margin_left = 209.0
+margin_right = 252.0
 margin_bottom = 30.0
-text = "Load TileSet"
+text = "Load"
 
-[node name="New" type="Button" parent="Margin/HBox"]
-margin_left = 352.0
-margin_right = 464.0
+[node name="Reload" type="Button" parent="VBox/Margin/Margin/HBox"]
+visible = false
+margin_left = 197.0
+margin_right = 252.0
+margin_bottom = 30.0
+text = "Reload"
+
+[node name="New" type="Button" parent="VBox/Margin/Margin/HBox"]
+margin_left = 256.0
+margin_right = 368.0
 margin_bottom = 30.0
 text = "New From Image"
 
 [node name="Save" type="FileDialog" parent="."]
-margin_right = 480.0
-margin_bottom = 270.0
+margin_right = 400.0
+margin_bottom = 288.0
 rect_min_size = Vector2( 400, 140 )
 filters = PoolStringArray( "*.tres" )
 
 [node name="Load" type="FileDialog" parent="."]
-margin_right = 480.0
-margin_bottom = 270.0
+margin_right = 400.0
+margin_bottom = 288.0
 rect_min_size = Vector2( 400, 140 )
 window_title = "Open a File"
 mode = 0
 filters = PoolStringArray( "*.tres" )
 
 [node name="New" type="FileDialog" parent="."]
-margin_right = 480.0
-margin_bottom = 270.0
+margin_right = 400.0
+margin_bottom = 288.0
 rect_min_size = Vector2( 400, 140 )
 window_title = "Open a File"
 mode = 0
 filters = PoolStringArray( "*.jpg", "*.bmp", "*.png" )
 
-[connection signal="pressed" from="Margin/HBox/Save" to="." method="_on_Save_pressed"]
-[connection signal="pressed" from="Margin/HBox/Load" to="." method="_on_Load_pressed"]
-[connection signal="pressed" from="Margin/HBox/New" to="." method="_on_New_pressed"]
+[connection signal="tab_changed" from="VBox/Margin/Tab" to="." method="on_tab_changed"]
+[connection signal="toggled" from="VBox/Margin/Tab/Collision/HBox/FlipH" to="." method="_on_FlipH_toggled"]
+[connection signal="toggled" from="VBox/Margin/Tab/Collision/HBox/FlipV" to="." method="_on_FlipV_toggled"]
+[connection signal="toggled" from="VBox/Margin/Tab/Collision/HBox/RotateC" to="." method="_on_RotateC_toggled"]
+[connection signal="toggled" from="VBox/Margin/Tab/Collision/HBox/RotateCC" to="." method="_on_RotateCC_toggled"]
+[connection signal="toggled" from="VBox/Margin/Tab/Collision/HBox/OneWay" to="." method="_on_OneWay_toggled"]
+[connection signal="pressed" from="VBox/Margin/Margin/HBox/Save" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="VBox/Margin/Margin/HBox/Load" to="." method="_on_Load_pressed"]
+[connection signal="pressed" from="VBox/Margin/Margin/HBox/Reload" to="." method="_on_Reload_pressed"]
+[connection signal="pressed" from="VBox/Margin/Margin/HBox/New" to="." method="_on_New_pressed"]
 [connection signal="confirmed" from="Save" to="." method="_on_Save_confirmed"]
 [connection signal="file_selected" from="Load" to="." method="_on_Load_file_selected"]
 [connection signal="file_selected" from="New" to="." method="_on_New_file_selected"]

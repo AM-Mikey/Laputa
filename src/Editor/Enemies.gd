@@ -4,6 +4,7 @@ const ENEMY_BUTTON = preload("res://src/Editor/Button/EnemyButton.tscn")
 
 signal enemy_changed(enemy_path)
 
+var icon = "res://assets/Icon/EnemyIcon.png"
 var enemies = {}
 var active_enemy_path
 
@@ -28,7 +29,7 @@ func setup_enemies():
 		if index == 0:
 			enemy_button.active = true
 			active_enemy_path = e
-		$Scroll/Buttons.add_child(enemy_button)
+		$VBox/Margin/Scroll/Buttons.add_child(enemy_button)
 		index += 1
 		
 
@@ -49,13 +50,16 @@ func find_enemy_scenes(path):
 	return files
 
 func change_enemy(enemy_path):
-	editor.set_tool("enemy")
+	editor.set_tool("entity", "enemy")
 	active_enemy_path = enemy_path
-	for e in $Scroll/Buttons.get_children():
+	for e in $VBox/Margin/Scroll/Buttons.get_children():
 		if e.enemy_path == active_enemy_path: #this is weird, we should have already done this. for extra security in case it was activated another way?
 			e.activate()
 	
 	emit_signal("enemy_changed", active_enemy_path)
 
 
-
+func unpick_enemy():
+	active_enemy_path = null
+	for e in $VBox/Margin/Scroll/Buttons.get_children():
+			e.deactivate()

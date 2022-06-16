@@ -42,6 +42,7 @@ func enter_door():
 	active_pc.move_to(position)
 	
 	am.play("door")
+	am.fade_music()
 	
 	var transition = TRANSITION.instance()
 	if w.get_node("UILayer").has_node("TransitionIris"):

@@ -19,19 +19,23 @@ onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
 	add_to_group("Levels")
+	if Engine.editor_hint:
+		return
 	
-	if not Engine.editor_hint:
-		if not w.has_node("UILayer/TitleScreen"):
-			if music == "":
-				am.play_music("none")
-			else:
-				am.play_music(music)
+	if has_node("Notes"):
+		get_node("Notes").visible = false
+		
+	if level_type == LevelType.PLAYERLESS_CUTSCENE:
+		do_playerless_cutscene()
 
-		if self.has_node("Notes"):
-			get_node("Notes").visible = false
-			
-		if level_type == LevelType.PLAYERLESS_CUTSCENE:
-			do_playerless_cutscene()
+	if not am.music_players.empty():
+		yield(am, "fadeout_finished")
+	if not w.has_node("UILayer/TitleScreen"):
+		if music == "":
+			pass
+		else:
+			am.play_track(music)
+
 
 
 func do_playerless_cutscene():

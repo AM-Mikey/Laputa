@@ -4,4 +4,5 @@
 
 [node name="TileButton" type="TextureRect"]
 rect_min_size = Vector2( 16, 16 )
+rect_pivot_offset = Vector2( 8, 8 )
 script = ExtResource( 1 )

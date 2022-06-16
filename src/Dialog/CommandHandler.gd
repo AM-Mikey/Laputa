@@ -23,46 +23,48 @@ func parse_command(string):
 	print("argument: ", argument)
 
 	match function:
-		"/face":#				/face, (sprite_name) 									changes face_sprite to the specified file
+		"face":#				/face, (sprite_name) 									changes face_sprite to the specified file
 			face(argument)
-		"/name":#				/name, (string)											prints a name on the first line
+		"flip_face":
+			flip_face(argument)
+		"name":#				/name, (string)											prints a name on the first line
 			display_name(argument)
 		
-		"/hide":#				/hide, (string: npc_id)									makes the npc with given id invisible
+		"hide":#				/hide, (string: npc_id)									makes the npc with given id invisible
 			do_hide(argument)
-		"/walk":#				/walk, (string: npc_id), (int: distance)				makes an npc walk a certain distance from their current pos
+		"walk":#				/walk, (string: npc_id), (int: distance)				makes an npc walk a certain distance from their current pos
 			walk(argument)#																with negative being left and positive being right
-		"/yn":
+		"yn":
 			yes_no()
-		"//db":
+		"/db":
 			end_branch()
 		
-		"/lock":#																		disables and makes the player character invincible
+		"lock":#																		disables and makes the player character invincible
 			pc.disable()
-		"/focus":#					/focus, (string: npc_id)							focuses PlayerCamera on an npc, doesn't work indoors
+		"focus":#					/focus, (string: npc_id)							focuses PlayerCamera on an npc, doesn't work indoors
 			focus(argument)
-		"/unfocus":#																	returns camera focus to the pc
+		"unfocus":#																	returns camera focus to the pc
 			unfocus()
 		
-		"/left":#																		faces an npc left
+		"left":#																		faces an npc left
 			flip(Vector2.LEFT, argument)
-		"/right":#																		faces an npc right
+		"right":#																		faces an npc right
 			flip(Vector2.RIGHT, argument)
 
 		
-		"/clear":#																		clears the text
+		"clear":#																		clears the text
 			tb.bbcode_text = ""
-		"/wait":#					/wait, (float: duration = 1.0)						clears text and hides db until duration
+		"wait":#					/wait, (float: duration = 1.0)						clears text and hides db until duration
 			wait(argument)
 		
-		"/auto":#																		blocks input and automatically progresses text
+		"auto":#																		blocks input and automatically progresses text
 			db.auto_input = true
-		"/pass":#																		automatically progresses the next line
+		"pass":#																		automatically progresses the next line
 			db.auto_input = true
 			yield(get_tree().create_timer(0.1),"timeout") #a bad way of doing this
 			db.auto_input = false
 			
-		"/tbox":
+		"tbox":
 			pc.disable()
 			world.get_node("UILayer").add_child(TBOX.instance())
 
@@ -90,6 +92,12 @@ func face(string):
 	
 	$Tween.interpolate_property(face_sprite, "position", face_sprite.position, Vector2.ZERO, 0.1, Tween.TRANS_SINE, Tween.EASE_OUT)
 	$Tween.start()
+
+func flip_face(arguement):
+	if not arguement:
+		db.flip_face()
+	else:
+		db.flip_face(arguement)
 
 func display_name(string):
 	tb.bbcode_text = "" #clear text for new speaker
@@ -200,7 +208,7 @@ func flip(direction, string):
 			found_npcs += 1
 			match direction:
 				Vector2.LEFT: n.get_node("Sprite").flip_h = false
-				Vector2.LEFT: n.get_node("Sprite").flip_h = true
+				Vector2.RIGHT: n.get_node("Sprite").flip_h = true
 
 	if found_npcs == 0:
 		printerr("COMMAND ERROR: could not find NPC with id: " + id)

@@ -14,8 +14,7 @@ func state_process():
 func get_move_dir():
 	return Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
-		)
+		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
 
 func enter():
 	pc.get_node("CollisionShape2D").disabled = true

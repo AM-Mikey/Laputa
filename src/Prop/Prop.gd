@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name Prop, "res://assets/Icon/PropIcon.png"
 
 var sfx_ammo_refill = load("res://assets/SFX/placeholder/snd_get_missile.ogg")
@@ -14,6 +14,7 @@ onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
 	add_to_group("Props")
+	add_to_group("Entities")
 
 func _on_body_entered(body):
 	active_pc = body
@@ -27,3 +28,9 @@ func _input(event):
 
 func activate():
 	pass
+
+func _input_event(viewport, event, shape_idx): #selecting in editor
+	var editor = w.get_node("EditorLayer/Editor")
+	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT and event.is_pressed():
+		editor.inspector.on_selected(self, "prop")
+		#print("clicked on a prop")

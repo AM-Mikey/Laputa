@@ -65,6 +65,7 @@ tile_data = PoolIntArray( 7, 0, 0, 65542, 1, 0, 131077, 1, 0, 196612, 1, 0, 3276
 [node name="Props" type="Node2D" parent="."]
 
 [node name="Actors" type="Node2D" parent="."]
+visible = false
 
 [node name="Frog" parent="Actors" instance=ExtResource( 11 )]
 position = Vector2( 104, 400 )

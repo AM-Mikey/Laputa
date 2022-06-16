@@ -48,9 +48,24 @@ shape = SubResource( 2 )
 position = Vector2( 0, -16 )
 texture = ExtResource( 1 )
 hframes = 4
+vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 3 )
+
+[node name="FloorDetectorL" type="RayCast2D" parent="."]
+position = Vector2( -8, 0 )
+enabled = true
+cast_to = Vector2( 0, 8 )
+collision_mask = 8
+collide_with_areas = true
+
+[node name="FloorDetectorR" type="RayCast2D" parent="."]
+position = Vector2( 8, 0 )
+enabled = true
+cast_to = Vector2( 0, 8 )
+collision_mask = 8
+collide_with_areas = true
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

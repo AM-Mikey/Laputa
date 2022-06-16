@@ -19,6 +19,7 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("debug_editor"):
 		if el.has_node("Editor"):
+			print("showing level editor")
 			editor_tab = el.get_node("Editor/Main/Tab").current_tab
 			el.get_node("Editor").exit()
 		else:
@@ -28,25 +29,27 @@ func _input(event):
 	
 	if event.is_action_pressed("debug_print"):
 		debug_print()
-
+	
 	if event.is_action_pressed("debug_reload"):
 		if el.has_node("Editor"):
 			el.get_node("Editor").disabled = true
 		reload_level()
 		yield(get_tree(), "idle_frame")
 		if el.has_node("Editor"):
-			print("huhuhu")
 			el.get_node("Editor").setup_level()
 			el.get_node("Editor").disabled = false
 			
 
 	if event.is_action_pressed("debug_triggers"):
 		world.visible_triggers = !world.visible_triggers
+		print("visible triggers == " + String(world.visible_triggers))
 		for v in get_tree().get_nodes_in_group("TriggerVisuals"):
 			v.visible = world.visible_triggers
-#
+
 	if event.is_action_pressed("debug_quit"):
-		get_tree().quit()
+		if not el.has_node("Editor"):
+			print("quitting...")
+			get_tree().quit()
 
 	if event.is_action_pressed("debug_save"):
 		var popup = POPUP.instance()
@@ -70,12 +73,14 @@ func _input(event):
 
 func debug_print():
 	if not ui.has_node("DebugInfo"):
+		print("showing debug info")
 		ui.add_child(DEBUG_INFO.instance())
 	else:
 		ui.get_node("DebugInfo").queue_free()
 #
 #
 func reload_level():
+	print("reloading level")
 	if ui.has_node("PauseMenu"):
 		ui.get_node("PauseMenu").unpause()
 	

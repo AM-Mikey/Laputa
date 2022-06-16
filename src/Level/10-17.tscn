@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/Background/Clouds25.png" type="Texture" id=3]
 [ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
-[ext_resource path="res://src/Tile/Village.tres" type="TileSet" id=6]
+[ext_resource path="res://src/Tile/Outdated/Village.tres" type="TileSet" id=6]
 [ext_resource path="res://src/Actor/Enemy/Crusher.tscn" type="PackedScene" id=7]
 
 [node name="10-17" type="Node2D"]
