@@ -106,8 +106,12 @@ func set_entities_pickable(pickable = true):
 
 func setup_level_limiter():
 	var limiter = LIMITER.instance()
+	var level_layer = Node2D.new()
+	level_layer.name = "LevelEditorLayer"
+	level_layer.z_index = 8
+	w.current_level.add_child(level_layer)
+	level_layer.add_child(limiter)
 	w.current_level.add_child(limiter)
-	#w.current_level.move_child(limiter, 0)
 
 func exit():
 	inspector.exit()

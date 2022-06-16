@@ -12,8 +12,8 @@ var drag_offset = Vector2.ZERO
 
 
 func _ready():
-	rect_position = level_limiter.rect_position - Vector2(8,8)
-	rect_size = level_limiter.rect_size + Vector2(16,16)
+	rect_position = level_limiter.rect_position - Vector2(16,16)
+	rect_size = level_limiter.rect_size + Vector2(32,32)
 	
 	for c in get_children():
 		if c is TextureButton:

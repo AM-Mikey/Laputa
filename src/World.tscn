@@ -26,5 +26,7 @@ z_index = 1
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 pause_mode = 2
+layer = 2
 
 [node name="EditorLayer" type="CanvasLayer" parent="."]
+layer = 3
