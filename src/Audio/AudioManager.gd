@@ -28,7 +28,7 @@ export var sfx_dict: Dictionary = {
 	"pc_die": preload("res://assets/SFX/Placeholder/snd_quote_die.ogg"),
 	"pc_hurt": preload("res://assets/SFX/Placeholder/snd_quote_hurt.ogg"),
 	"pc_jump": preload("res://assets/SFX/Placeholder/snd_quote_jump.ogg"),
-	"pc_walk": preload("res://assets/SFX/Placeholder/snd_quote_walk.ogg"),
+	"pc_step": preload("res://assets/SFX/Placeholder/snd_quote_walk.ogg"),
 	
 	"gun_click": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
 	"gun_shift": preload("res://assets/SFX/Placeholder/snd_switchweapon.ogg"),
@@ -75,7 +75,7 @@ export var sfx_player_max = 8
 var sfx_players = []
 var sfx_queue = []
 export var remove_recent_duplicate_sfx = true
-export var sfx_recent_time = 0.1
+export var sfx_recent_time = 0.05
 var sfx_recent = []
 
 export var music_player_max = 1

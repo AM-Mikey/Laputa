@@ -47,7 +47,7 @@ func _physics_process(_delta):
 		$VBox/HBox/C1/A/State.text = str(pc.get_node("MovementManager").current_state.name)
 
 		$VBox/HBox/C1/A/MoveDir.text = str("%2.f" % pc.move_dir.x) + "," + str("%2.f" % pc.move_dir.y)
-		$VBox/HBox/C1/A/FaceDir.text = str("%2.f" % pc.face_dir.x) + "," + str("%2.f" % pc.face_dir.y)
+		$VBox/HBox/C1/A/FaceDir.text = str("%2.f" % pc.look_dir.x) + "," + str("%2.f" % pc.look_dir.y)
 		$VBox/HBox/C1/A/ShootDir.text = str("%2.f" % pc.shoot_dir.x) + "," + str("%2.f" % pc.shoot_dir.y)
 
 
@@ -92,4 +92,4 @@ func _clear_array(array):
 
 
 func on_viewport_size_changed():
-	rect_size = get_tree().get_root().size / world.resolution_scale
+	rect_size = get_tree().get_root().size / world.get_node("DebugLayer").scale

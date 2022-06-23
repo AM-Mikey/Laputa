@@ -17,9 +17,9 @@ func _ready():
 	on_viewport_size_changed()
 
 func _physics_process(_delta):
-	if horizontal_focus != pc.face_dir:
-		horizontal_focus = pc.face_dir
-		pan_horizontal(pc.face_dir)
+	if horizontal_focus != pc.look_dir:
+		horizontal_focus = pc.look_dir
+		pan_horizontal(pc.look_dir)
 
 	
 	if $TweenHorizontal.is_active():

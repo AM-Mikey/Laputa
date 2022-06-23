@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/RunRightLookDown.png-82b347606600622e6e3f361aa19c0e52.stex"
+path="res://.import/RunNew.png-8b90a32a1fa84340796e8acb046b2251.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Player/RunRightLookDown.png"
-dest_files=[ "res://.import/RunRightLookDown.png-82b347606600622e6e3f361aa19c0e52.stex" ]
+source_file="res://assets/Actor/Player/RunNew.png"
+dest_files=[ "res://.import/RunNew.png-8b90a32a1fa84340796e8acb046b2251.stex" ]
 
 [params]
 

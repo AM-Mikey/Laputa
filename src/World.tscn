@@ -31,3 +31,8 @@ layer = 2
 layer = 3
 scale = Vector2( 2, 2 )
 transform = Transform2D( 2, 0, 0, 2, 0, 0 )
+
+[node name="DebugLayer" type="CanvasLayer" parent="."]
+layer = 4
+scale = Vector2( 3, 3 )
+transform = Transform2D( 3, 0, 0, 3, 0, 0 )

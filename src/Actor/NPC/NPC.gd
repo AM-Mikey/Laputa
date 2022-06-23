@@ -165,7 +165,7 @@ func _input(event):
 
 
 func orient():
-	active_pc.face_dir.x = sign(position.x - active_pc.position.x)
+	active_pc.look_dir.x = sign(position.x - active_pc.position.x)
 
 func on_dialog_finished():
 	change_state(cached_state)

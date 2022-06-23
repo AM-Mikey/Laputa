@@ -28,7 +28,8 @@ var inspecting = false
 
 #var is_on_conveyor = false
 var enemies_touching = []
-var is_on_ssp = false
+var is_on_ssp = true
+var is_crouching = false
 var is_in_water = false
 var dead = false
 
@@ -39,7 +40,7 @@ var topic_array: Array = ["child", "sasuke", "basil", "free_dialog"]
 
 
 var move_dir = Vector2.LEFT
-var face_dir = Vector2.LEFT
+var look_dir = Vector2.LEFT
 var shoot_dir = Vector2.LEFT
 
 
@@ -211,8 +212,11 @@ func die():
 
 ### MISC
 
-#TODO: clean these up and get rid of them 
 
+func do_step():
+	am.play("pc_step")
+
+#TODO: clean these up and get rid of them 
 func update_inventory():
 	emit_signal("inventory_updated", inventory)
 

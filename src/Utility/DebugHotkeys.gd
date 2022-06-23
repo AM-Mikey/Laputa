@@ -10,6 +10,7 @@ const SHOP_MENU = preload("res://src/UI/ShopMenu/ShopMenu.tscn")
 onready var world = get_tree().get_root().get_node("World")
 onready var ui = world.get_node("UILayer")
 onready var el = world.get_node("EditorLayer")
+onready var dl = world.get_node("DebugLayer")
 
 var editor_tab = 0 #to save when we re-enter the editor
 
@@ -72,11 +73,11 @@ func _input(event):
 		ui.add_child(shop_menu)
 
 func debug_print():
-	if not ui.has_node("DebugInfo"):
+	if not dl.has_node("DebugInfo"):
 		print("showing debug info")
-		ui.add_child(DEBUG_INFO.instance())
+		dl.add_child(DEBUG_INFO.instance())
 	else:
-		ui.get_node("DebugInfo").queue_free()
+		dl.get_node("DebugInfo").queue_free()
 #
 #
 func reload_level():

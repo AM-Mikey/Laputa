@@ -12,8 +12,7 @@ const SNAP_LENGTH = 4.0
 
 var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
-enum Jump {NORMAL, RUNNING}
-var jump_type
+
 
 
 var speed = Vector2(90, 180)
@@ -31,7 +30,7 @@ var bonk_time = 0.4
 var coyote_time = 0.05
 export var minimum_direction_time = 1.0 #cave story forces you to jump a certain x distance when going max speed before jumping
 var jump_starting_move_dir_x: int
-export var min_x_velocity = 0.001
+export var min_x_velocity = 0.01 #0.001
 
 var knockback_direction: Vector2
 export var knockback_speed = Vector2(40, 100) #(80, 180)
@@ -76,26 +75,43 @@ func initialize_states():
 		if c.get_class() == "Node":
 			states[c.name.to_lower()] = c
 	
-	current_state = states["run"]
+	#yield(get_tree(), "idle_frame") #wait to setup states
+	change_state(states["run"])
 
 
 
 func _physics_process(_delta):
 #	velocity += conveyor_speed
 	
-	speed = Vector2(90, 180) if not get_parent().is_in_water else Vector2(60, 140)
-	gravity = 300.0 if not get_parent().is_in_water else 150.0
+	if not pc.disabled:
 	
-	if is_debug:
-		state_label.text = current_state.name.to_lower()
-	current_state.state_process()
+		speed = Vector2(90, 180) if not get_parent().is_in_water else Vector2(60, 140)
+		gravity = 300.0 if not get_parent().is_in_water else 150.0
+		
+		if is_debug:
+			state_label.text = current_state.name.to_lower()
+		current_state.state_process()
+		
+		#check_ssp()
 
+
+func check_ssp():
+	if world.current_level != null:
+		if world.current_level.has_node("Tiles"):
+			for layer in world.current_level.get_node("Tiles").get_children():
+				if layer is TileMap:
+					var tile_pos = layer.world_to_map(Vector2(pc.position.x, pc.position.y + 8))
+					var tile = layer.get_cellv(tile_pos)
+					if layer.tile_set.tile_get_shape_one_way(tile, 0):
+						print("player is on ssp"
+						)
+						pc.is_on_ssp = true
 
 
 func _input(event):
 	if not pc.disabled:
 		if event.is_action_pressed("fire_automatic"):
-			pc.direction_lock = pc.face_dir
+			pc.direction_lock = pc.look_dir
 		if event.is_action_released("fire_automatic"): 
 			pc.direction_lock = Vector2.ZERO
 		
@@ -114,7 +130,7 @@ func _input(event):
 func do_coyote_time():
 	$CoyoteTimer.start(coyote_time)
 	yield($CoyoteTimer, "timeout")
-	if not pc.is_on_floor() and current_state ==states["run"]:
+	if not pc.is_on_floor() and current_state == states["run"]:
 		change_state(states["fall"])
 
 
@@ -136,6 +152,8 @@ func bonk(type):
 
 
 func jump():
+	#if pc.is_crouching: return
+	
 	snap_vector = Vector2.ZERO
 	am.play("pc_jump")
 	#Check if a running jump. since speed.x is max x velocity, only count as a running jump then
@@ -146,3 +164,11 @@ func jump():
 		change_state(states["longjump"])
 	else:
 		change_state(states["jump"])
+
+### SIGNALS
+
+func _on_CrouchDetector_body_entered(body):
+	pc.is_crouching = true
+
+func _on_CrouchDetector_body_exited(body):
+	pc.is_crouching = false

@@ -3,6 +3,10 @@ extends Node
 onready var world = get_tree().get_root().get_node("World")
 onready var pc = world.get_node("Juniper")
 onready var mm = pc.get_node("MovementManager")
+onready var sprite = pc.get_node("Sprite")
+onready var gun_sprite = pc.get_node("GunSprite")
+onready var ap = pc.get_node("AnimationPlayer")
+onready var anim = pc.get_node("AnimationManager")
 
 func state_process():
 	#jump interrupt
@@ -10,14 +14,14 @@ func state_process():
 	if mm.velocity.y < 0.0 and not Input.is_action_pressed("jump"):
 		is_jump_interrupted = true
 
-	pc.move_dir = get_move_dir()
+	set_player_directions()
 	mm.velocity = get_velocity(is_jump_interrupted)
 	var new_velocity = pc.move_and_slide_with_snap(mm.velocity, mm.snap_vector, mm.FLOOR_NORMAL, true)
 	if pc.is_on_wall():
 		new_velocity.y = max(mm.velocity.y, new_velocity.y)
 		
 	mm.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
-
+	animate()
 
 
 	if pc.is_on_ceiling(): #and mm.bonk_timeout.time_left == 0:
@@ -29,15 +33,33 @@ func state_process():
 		mm.change_state(mm.states["run"])
 
 
-func get_move_dir():
-	var out_y = 0
+func set_player_directions():
+	var input_dir = Vector2(\
+	Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),\
+	Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+	
+	#get move dir
+	var out_y = 0.0
 	if mm.coyote_timer.time_left > 0:
 		mm.coyote_timer.stop()
-		out_y = -1
+		out_y = -1.0
 	if pc.is_on_floor():
-		out_y = -1
+		out_y = -1.0
+	pc.move_dir = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), out_y)
 	
-	return Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), out_y)
+	#get look dir
+	if pc.move_dir.x != 0:
+		pc.look_dir = Vector2(pc.move_dir.x, input_dir.y)
+	else:
+		pc.look_dir = Vector2(pc.look_dir.x, input_dir.y)
+	
+	#get shoot dir
+	if pc.is_on_ssp:
+		if pc.look_dir.y != 0: #up or down
+			pc.shoot_dir = Vector2(0, pc.look_dir.y)
+		else:
+			pc.shoot_dir = pc.look_dir
+
 
 
 func get_velocity(is_jump_interrupted):
@@ -54,6 +76,9 @@ func get_velocity(is_jump_interrupted):
 	
 	if pc.move_dir.x != mm.jump_starting_move_dir_x: #if we turn around, cancel min_dir_timer
 		mm.min_dir_timer.stop()
+#	if pc.is_on_wall(): #TODO: consider stopping min dir if we hit a wall #there are other problems here, like the fact we dont drop vel if we hit a wall
+#		print("hit wall, cancelling")
+#		mm.min_dir_timer.stop()
 	
 	if not mm.min_dir_timer.is_stopped(): #still doing min direction time
 		out.x = mm.speed.x * mm.jump_starting_move_dir_x
@@ -74,6 +99,49 @@ func get_velocity(is_jump_interrupted):
 	if abs(out.x) < mm.min_x_velocity: #clamp velocity
 		out.x = 0
 	return out
+
+
+
+
+func animate():
+	var animation: String
+	
+	if abs(mm.velocity.y) < 20:
+		animation = "aerial_top"
+	elif mm.velocity.y < 0:
+		animation = "aerial_rise"
+	elif mm.velocity.y > 0:
+		animation = "aerial_fall"
+	
+	if not ap.is_playing() or ap.current_animation != animation:
+		ap.play(animation)
+		ap.playback_speed = 1
+	
+	
+	var vframe: int
+	if pc.look_dir.x < 0: #left
+		vframe = 0
+		gun_sprite.flip_h = false
+	else: #right
+		vframe = 4
+		gun_sprite.flip_h = true
+
+	
+	
+	
+	if pc.shoot_dir.y < 0: #up
+		vframe += 1
+
+		gun_sprite.rotation_degrees = 90 if not gun_sprite.flip_h else -90
+	elif pc.shoot_dir.y > 0: #down
+		vframe += 2
+
+		gun_sprite.rotation_degrees = -90 if not gun_sprite.flip_h else 90
+	elif pc.shoot_dir.y == 0 and pc.look_dir.y > 0: #look down, don't shoot down
+		vframe += 3
+		gun_sprite.rotation_degrees = 0
+	else:
+		gun_sprite.rotation_degrees = 0
 
 
 func enter():

@@ -23,7 +23,6 @@ conversation = "cutscene_test"
 margin_top = -64.0
 margin_right = 512.0
 margin_bottom = 256.0
-background = null
 
 [node name="Tiles" type="Node2D" parent="."]
 

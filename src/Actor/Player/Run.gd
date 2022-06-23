@@ -1,36 +1,57 @@
 extends Node
 
-enum Jump {NORMAL, RUNNING}
-var jump_type
-
-
-
-
 onready var world = get_tree().get_root().get_node("World")
 onready var pc = world.get_node("Juniper")
 onready var mm = pc.get_node("MovementManager")
+onready var sprite = pc.get_node("Sprite")
+onready var gun_sprite = pc.get_node("GunSprite")
+onready var ap = pc.get_node("AnimationPlayer")
+onready var anim = pc.get_node("AnimationManager")
 
 func state_process():
-	pc.move_dir = get_move_dir()
+	set_player_directions()
 	mm.velocity = get_velocity()
 	var new_velocity = pc.move_and_slide_with_snap(mm.velocity, mm.snap_vector, mm.FLOOR_NORMAL, true)
 	if pc.is_on_wall():
 		new_velocity.y = max(mm.velocity.y, new_velocity.y)
 
 	mm.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
+	animate()
 	
 	
-	
-	if Input.is_action_pressed("jump"):
+	if Input.is_action_just_pressed("jump"):
 		mm.jump()
 	
 	if not pc.is_on_floor():
 		mm.do_coyote_time()
 
 
+func set_player_directions():
+	var input_dir = Vector2(\
+	Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),\
+	Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+	
+	#get move_dir
+	pc.move_dir = Vector2(input_dir.x, 0)
+	
+	#get look_dir
+	if pc.move_dir.x != 0:
+		pc.look_dir = Vector2(pc.move_dir.x, input_dir.y)
+	else:
+		pc.look_dir = Vector2(pc.look_dir.x, input_dir.y)
+	
+	#get shoot_dir
+	if pc.is_on_ssp:
+		if pc.look_dir.y != 0: #up or down
+			pc.shoot_dir = Vector2(0, pc.look_dir.y)
+		else:
+			pc.shoot_dir = pc.look_dir
+	else:
+		if pc.look_dir.y < 0: #up
+			pc.shoot_dir = Vector2(0, pc.look_dir.y) 
+		pc.shoot_dir = Vector2(pc.look_dir.x, min(pc.look_dir.y, 0)) #no look down
 
-func get_move_dir():
-	return Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0)
+
 
 
 func get_velocity():
@@ -51,6 +72,58 @@ func get_velocity():
 		out.x = 0
 		
 	return out
+
+func animate():
+	var blend_time = 0
+	
+	var animation = "run"
+	if pc.is_crouching:
+		animation = "crouch_run"
+	if pc.move_dir.x == 0: #abs(mm.velocity.x) < mm.min_x_velocity:
+		animation = "stand"
+	
+	if ap.is_playing() and ap.current_animation == animation:
+		match ap.current_animation:
+			"run", "crouch_run":
+				blend_time = ap.current_animation_position
+	else:
+		ap.play(animation)
+	
+	
+	var vframe: int
+	if pc.look_dir.x < 0: #left
+		vframe = 0
+		gun_sprite.flip_h = false
+	else: #right
+		vframe = 4
+		gun_sprite.flip_h = true
+#		gun_sprite.position.x = gun_sprite.position.x + 8
+		
+	
+	
+	
+	
+	if pc.shoot_dir.y < 0: #up
+		vframe += 1
+
+		gun_sprite.rotation_degrees = 90 if not gun_sprite.flip_h else -90
+	elif pc.shoot_dir.y > 0: #down
+		vframe += 2
+
+		gun_sprite.rotation_degrees = -90 if not gun_sprite.flip_h else 90
+	elif pc.shoot_dir.y == 0 and pc.look_dir.y > 0: #look down, don't shoot down
+		vframe += 3
+		gun_sprite.rotation_degrees = 0
+	else:
+		gun_sprite.rotation_degrees = 0
+	
+	if animation == "run" or animation == "crouch_run":
+		ap.playback_speed = max((abs(mm.velocity.x)/mm.speed.x) * 2, 0.1)
+	else:
+		ap.playback_speed = 1
+	
+	sprite.frame_coords.y = vframe
+	gun_sprite.position = anim.get_gun_pos(animation, vframe, sprite.frame_coords.x) #changes the gun sprite every time animate is called
 
 
 
