@@ -24,11 +24,12 @@ func _on_Sprite_texture_changed():
 func _process(_delta):
 	if get_parent() != null:
 		if get_parent().has_node("GunSprite"):
-			#get_parent().get_node("GunSprite").rotation_degrees = gun_rot
+			var gun_index
 			
 			if not get_parent().get_node("GunSprite").flip_h:
-				#get_parent().get_node("GunSprite").position = gun_pos
-				get_parent().get_node("GunSprite").z_index = -1
+				gun_index = get_index() - 1
 			else: 
-				#get_parent().get_node("GunSprite").position = Vector2(gun_pos.x + gun_flip_offset, gun_pos.y)
-				get_parent().get_node("GunSprite").z_index = 0
+				gun_index = get_index() + 1
+			
+			var gun_sprite = get_parent().get_node("GunSprite")
+			get_parent().move_child(gun_sprite, gun_index)

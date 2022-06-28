@@ -531,6 +531,16 @@ shape = SubResource( 63 )
 [node name="AnimationManager" type="Node" parent="."]
 script = ExtResource( 16 )
 
+[node name="GunSprite" type="Sprite" parent="."]
+light_mask = 2
+position = Vector2( -4, -9 )
+texture = ExtResource( 25 )
+script = ExtResource( 26 )
+
+[node name="MuzzlePos" type="Position2D" parent="GunSprite"]
+visible = false
+position = Vector2( -5, -1 )
+
 [node name="Sprite" type="Sprite" parent="."]
 light_mask = 2
 material = SubResource( 61 )
@@ -539,17 +549,6 @@ texture = ExtResource( 19 )
 hframes = 5
 vframes = 6
 script = ExtResource( 13 )
-
-[node name="GunSprite" type="Sprite" parent="."]
-light_mask = 2
-position = Vector2( -7, -9 )
-z_index = -1
-texture = ExtResource( 25 )
-script = ExtResource( 26 )
-
-[node name="MuzzlePos" type="Position2D" parent="GunSprite"]
-visible = false
-position = Vector2( -5, -1 )
 
 [node name="EffectPlayer" type="AnimationPlayer" parent="."]
 anims/FlashIframe = SubResource( 53 )
@@ -563,6 +562,7 @@ anims/crouch_run = SubResource( 64 )
 anims/run = SubResource( 54 )
 anims/stand = SubResource( 65 )
 
+[connection signal="guns_updated" from="." to="GunSprite" method="_on_Juniper_guns_updated"]
 [connection signal="area_entered" from="ItemDetector" to="." method="_on_ItemDetector_area_entered"]
 [connection signal="area_entered" from="HurtDetector" to="." method="_on_HurtDetector_area_entered"]
 [connection signal="body_entered" from="HurtDetector" to="." method="_on_HurtDetector_body_entered"]
