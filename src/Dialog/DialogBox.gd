@@ -37,15 +37,17 @@ func print_sign():
 	dialog_loop()
 
 
-func print_flavor_text():
+func print_flavor_text(justification := "no_face"):
 	in_dialog = true
 	print(text)
+	justify_text(justification)
+	align_box()
 	pc.disable()
 	pc.inspecting = true
 	dialog_loop()
 
 
-func start_printing(dialog_json, conversation: String, justification: String = "no_face"):
+func start_printing(dialog_json, conversation: String, justification := "no_face"):
 	current_dialog_json = dialog_json
 	in_dialog = true
 	
