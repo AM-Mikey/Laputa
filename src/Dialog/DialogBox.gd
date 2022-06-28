@@ -45,7 +45,7 @@ func print_flavor_text():
 	dialog_loop()
 
 
-func start_printing(dialog_json, conversation):
+func start_printing(dialog_json, conversation: String, justification: String = "no_face"):
 	current_dialog_json = dialog_json
 	in_dialog = true
 	
@@ -57,6 +57,7 @@ func start_printing(dialog_json, conversation):
 		text = dialog[conversation].strip_edges().replace("\t", "") #strip edges to clean up first and last newlines ## remove tabulation
 	
 	#print(text)
+	justify_text(justification)
 	align_box()
 	pc.disable()
 	pc.inspecting = true
@@ -190,6 +191,16 @@ func exit():
 	queue_free()
 
 ### HELPERS
+
+
+func justify_text(justification: String):
+	match justification:
+		"face":
+			$Margin/HBox/NoFaceSpacer.visible = false
+			$Margin/HBox/Face.visible = true
+		"no_face":
+			$Margin/HBox/NoFaceSpacer.visible = true
+			$Margin/HBox/Face.visible = false
 
 func align_box():
 	var viewport_size = get_tree().get_root().size / world.resolution_scale

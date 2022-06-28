@@ -149,7 +149,12 @@ func enter_talk():
 	var dialog_box = DB.instance()
 	dialog_box.connect("dialog_finished", self, "on_dialog_finished")
 	get_tree().get_root().get_node("World/UILayer").add_child(dialog_box)
-	dialog_box.start_printing(dialog_json, conversation)
+	
+	var justification = "face"
+	if not has_face:
+		justification = "no_face"
+	
+	dialog_box.start_printing(dialog_json, conversation, justification)
 	print("starting conversation")
 
 func do_talk():
