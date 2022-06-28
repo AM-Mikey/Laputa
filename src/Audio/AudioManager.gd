@@ -23,7 +23,7 @@ export var sfx_dict: Dictionary = {
 	"break_block": preload("res://assets/SFX/Placeholder/snd_block_destroy.ogg"),
 	"break_grass": preload("res://assets/SFX/Placeholder/snd_explosion2.ogg"),
 	
-	"save": preload("res://assets/SFX/Placeholder/snd_menu_select.ogg"),
+	"save": preload("res://assets/SFX/Placeholder/snd_health_refill.ogg"),
 	
 	"pc_die": preload("res://assets/SFX/Placeholder/snd_quote_die.ogg"),
 	"pc_hurt": preload("res://assets/SFX/Placeholder/snd_quote_hurt.ogg"),

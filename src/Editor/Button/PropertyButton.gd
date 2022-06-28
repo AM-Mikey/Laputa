@@ -71,11 +71,14 @@ func on_pressed():
 	#print("button_pressed")
 	emit_signal("property_selected", property_name)
 
-#func on_text_entered(new_text):
-#	property_value = new_text
-#	emit_signal("property_changed", property_name, property_value)
+func _on_String_text_entered(new_text):
+	$HBox/String.release_focus()
+	am.play("ui_accept")
+	property_value = new_text
+	emit_signal("property_changed", property_name, property_value)
 
 func on_bool_toggled(button_pressed):
+	#am.play("ui_accept")
 	property_value = button_pressed
 	emit_signal("property_changed", property_name, property_value)
 
@@ -84,17 +87,15 @@ func on_color_changed():
 	emit_signal("property_changed", property_name, property_value)
 
 func on_enum_selected(index):
+	#am.play("ui_accept")
 	property_value = index
 	emit_signal("property_changed", property_name, property_value)
 
 func on_vector2x_entered(new_text):
+	#am.play("ui_accept")
 	property_value.x = float(new_text)
 	emit_signal("property_changed", property_name, property_value)
 func on_vector2y_entered(new_text):
+	#am.play("ui_accept")
 	property_value.y = float(new_text)
-	emit_signal("property_changed", property_name, property_value)
-
-
-func _on_String_text_changed(new_text):
-	property_value = new_text
 	emit_signal("property_changed", property_name, property_value)
