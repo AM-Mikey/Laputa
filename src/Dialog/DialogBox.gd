@@ -2,8 +2,6 @@ extends Control
 
 signal dialog_finished
 
-var dialog
-var conversation: String
 var text
 
 export var print_delay = 0.05
@@ -41,21 +39,24 @@ func print_sign():
 
 func print_flavor_text():
 	in_dialog = true
-	#tb.text = flavor_text
 	print(text)
 	pc.disable()
 	pc.inspecting = true
 	dialog_loop()
 
 
-func start_printing(dialog_json, conversation_to_print):
+func start_printing(dialog_json, conversation):
 	current_dialog_json = dialog_json
 	in_dialog = true
 	
-	dialog = load_dialog(dialog_json)
-	conversation_to_print = conversation_to_print.to_lower()
-	text = dialog[conversation_to_print].strip_edges().replace("\t", "") #strip edges to clean up first and last newlines ## remove tabulation
-	print(text)
+	var dialog = load_dialog(dialog_json)
+	conversation = conversation.to_lower()
+	if not dialog.has(conversation): #null convo
+		text = "hey dummy, there's no conversation with the name: " + conversation
+	else:
+		text = dialog[conversation].strip_edges().replace("\t", "") #strip edges to clean up first and last newlines ## remove tabulation
+	
+	#print(text)
 	align_box()
 	pc.disable()
 	pc.inspecting = true

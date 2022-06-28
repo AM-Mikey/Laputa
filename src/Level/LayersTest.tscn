@@ -9,23 +9,23 @@
 [ext_resource path="res://src/Trigger/FlavorText.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Effect/Light/SunLight.gd" type="Script" id=8]
 [ext_resource path="res://src/Tile/Village.tres" type="TileSet" id=9]
-[ext_resource path="res://src/Actor/Enemy/Frog.gd" type="Script" id=10]
-[ext_resource path="res://src/Prop/ChestKeyItem.gd" type="Script" id=11]
-[ext_resource path="res://src/Background/LevelLimiter.gd" type="Script" id=12]
-[ext_resource path="res://src/Trigger/FlavorText.gd" type="Script" id=13]
-[ext_resource path="res://src/Trigger/Door.gd" type="Script" id=14]
+[ext_resource path="res://src/Trigger/FlavorText.gd" type="Script" id=10]
+[ext_resource path="res://src/Prop/SaveDisk.gd" type="Script" id=11]
+[ext_resource path="res://src/Editor/SpawnPoint.gd" type="Script" id=12]
+[ext_resource path="res://src/Background/LevelLimiter.gd" type="Script" id=13]
+[ext_resource path="res://src/Actor/Enemy/Frog.gd" type="Script" id=14]
 [ext_resource path="res://src/Prop/SaveDisk.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/Actor/Enemy/Frog.tscn" type="PackedScene" id=16]
-[ext_resource path="res://src/Editor/SpawnPoint.gd" type="Script" id=17]
-[ext_resource path="res://src/Prop/SaveDisk.gd" type="Script" id=18]
-[ext_resource path="res://src/Actor/NPC/NPC.gd" type="Script" id=19]
+[ext_resource path="res://src/Prop/ChestKeyItem.gd" type="Script" id=17]
+[ext_resource path="res://src/Trigger/Door.gd" type="Script" id=18]
+[ext_resource path="res://src/Prop/Grass.gd" type="Script" id=19]
 [ext_resource path="res://assets/Background/SkyDemo.png" type="Texture" id=20]
 [ext_resource path="res://src/Prop/AmmoRefill.tscn" type="PackedScene" id=21]
 [ext_resource path="res://src/Prop/Grass.tscn" type="PackedScene" id=22]
-[ext_resource path="res://src/Prop/BreakBlock.gd" type="Script" id=23]
-[ext_resource path="res://src/Prop/AmmoRefill.gd" type="Script" id=24]
+[ext_resource path="res://src/Prop/AmmoRefill.gd" type="Script" id=23]
+[ext_resource path="res://src/Actor/NPC/NPC.gd" type="Script" id=24]
 [ext_resource path="res://src/Actor/NPC/Hermit.tscn" type="PackedScene" id=25]
-[ext_resource path="res://src/Prop/Grass.gd" type="Script" id=26]
+[ext_resource path="res://src/Prop/BreakBlock.gd" type="Script" id=26]
 [ext_resource path="res://src/Prop/BreakBlock.tscn" type="PackedScene" id=27]
 
 [node name="LayersTest" type="Node2D"]
@@ -43,7 +43,7 @@ margin_top = -16.0
 margin_right = 832.0
 margin_bottom = 256.0
 mouse_filter = 2
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 texture = ExtResource( 20 )
 layers = 5
 parallax_near = 1.0
@@ -97,21 +97,18 @@ tile_data = PoolIntArray( 196632, 344, 0, 196633, 345, 0, 196634, 346, 0, 196635
 [node name="@SaveDisk@3946" type="Area2D" parent="Props" instance=ExtResource( 15 )]
 position = Vector2( 568, 208 )
 collision_layer = 0
-input_pickable = false
-script = ExtResource( 18 )
+script = ExtResource( 11 )
 editor_hidden = false
 
 [node name="AmmoRefill" type="Area2D" parent="Props" instance=ExtResource( 21 )]
 position = Vector2( 456, 112 )
 collision_layer = 16
-input_pickable = false
-script = ExtResource( 24 )
+script = ExtResource( 23 )
 editor_hidden = false
 
 [node name="Chest" type="Area2D" parent="Props" instance=ExtResource( 6 )]
 position = Vector2( 104, 208 )
-input_pickable = false
-script = ExtResource( 11 )
+script = ExtResource( 17 )
 editor_hidden = false
 held_item = ""
 
@@ -120,8 +117,7 @@ position = Vector2( 280, 192 )
 z_index = 2
 collision_layer = 256
 collision_mask = 0
-input_pickable = false
-script = ExtResource( 26 )
+script = ExtResource( 19 )
 editor_hidden = false
 drop_chance = 0.1
 heart_chance = 1
@@ -133,8 +129,7 @@ position = Vector2( 264, 192 )
 z_index = 2
 collision_layer = 256
 collision_mask = 0
-input_pickable = false
-script = ExtResource( 26 )
+script = ExtResource( 19 )
 editor_hidden = false
 drop_chance = 0.1
 heart_chance = 1
@@ -146,8 +141,7 @@ position = Vector2( 248, 192 )
 z_index = 2
 collision_layer = 256
 collision_mask = 0
-input_pickable = false
-script = ExtResource( 26 )
+script = ExtResource( 19 )
 editor_hidden = false
 drop_chance = 0.1
 heart_chance = 1
@@ -159,8 +153,7 @@ position = Vector2( 232, 192 )
 z_index = 2
 collision_layer = 256
 collision_mask = 0
-input_pickable = false
-script = ExtResource( 26 )
+script = ExtResource( 19 )
 editor_hidden = false
 drop_chance = 0.1
 heart_chance = 1
@@ -171,63 +164,72 @@ ammo_chance = 1
 position = Vector2( 120, 128 )
 collision_layer = 264
 collision_mask = 0
-script = ExtResource( 23 )
+input_pickable = true
+script = ExtResource( 26 )
 editor_hidden = false
 
 [node name="@BreakBlock@5077" type="StaticBody2D" parent="Props" instance=ExtResource( 27 )]
 position = Vector2( 136, 128 )
 collision_layer = 264
 collision_mask = 0
-script = ExtResource( 23 )
+input_pickable = true
+script = ExtResource( 26 )
 editor_hidden = false
 
 [node name="BreakBlock" type="StaticBody2D" parent="Props" instance=ExtResource( 27 )]
 position = Vector2( 136, 144 )
 collision_layer = 264
 collision_mask = 0
-script = ExtResource( 23 )
+input_pickable = true
+script = ExtResource( 26 )
 editor_hidden = false
 
 [node name="@BreakBlock@5092" type="StaticBody2D" parent="Props" instance=ExtResource( 27 )]
 position = Vector2( 120, 128 )
 collision_layer = 264
 collision_mask = 0
-script = ExtResource( 23 )
+input_pickable = true
+script = ExtResource( 26 )
 editor_hidden = false
 
 [node name="@BreakBlock@5104" type="StaticBody2D" parent="Props" instance=ExtResource( 27 )]
 position = Vector2( 136, 144 )
 collision_layer = 264
 collision_mask = 0
-script = ExtResource( 23 )
+input_pickable = true
+script = ExtResource( 26 )
 editor_hidden = false
 
 [node name="@BreakBlock@5118" type="StaticBody2D" parent="Props" instance=ExtResource( 27 )]
 position = Vector2( 136, 144 )
 collision_layer = 264
 collision_mask = 0
-script = ExtResource( 23 )
+input_pickable = true
+script = ExtResource( 26 )
 editor_hidden = false
 
 [node name="@BreakBlock@5143" type="StaticBody2D" parent="Props" instance=ExtResource( 27 )]
 position = Vector2( 120, 160 )
 collision_layer = 264
 collision_mask = 0
-script = ExtResource( 23 )
+input_pickable = true
+script = ExtResource( 26 )
 editor_hidden = false
 
 [node name="@BreakBlock@5158" type="StaticBody2D" parent="Props" instance=ExtResource( 27 )]
 position = Vector2( 136, 160 )
 collision_layer = 264
 collision_mask = 0
-script = ExtResource( 23 )
+input_pickable = true
+script = ExtResource( 26 )
 editor_hidden = false
 
 [node name="@BreakBlock@5236" type="StaticBody2D" parent="Props" instance=ExtResource( 27 )]
 position = Vector2( 152, 160 )
 collision_layer = 264
 collision_mask = 0
-script = ExtResource( 23 )
+input_pickable = true
+script = ExtResource( 26 )
 editor_hidden = false
 
 [node name="Actors" type="Node2D" parent="."]
@@ -236,7 +238,8 @@ editor_hidden = false
 position = Vector2( 518, 97 )
 collision_layer = 2
 collision_mask = 520
-script = ExtResource( 10 )
+input_pickable = true
+script = ExtResource( 14 )
 editor_hidden = Object(RandomNumberGenerator,"seed":-6398989897141750821,"state":-6332740101472756719,"script":null)
 
 speed = Vector2( 12, 120 )
@@ -249,11 +252,11 @@ jump_delay = 0
 difficulty = 1
 
 [node name="Hermit" type="KinematicBody2D" parent="Actors" instance=ExtResource( 25 )]
-modulate = Color( 2, 2, 2, 1 )
-position = Vector2( 264, 176 )
+position = Vector2( 264, 192 )
 collision_layer = 128
 collision_mask = 8
-script = ExtResource( 19 )
+input_pickable = true
+script = ExtResource( 24 )
 editor_hidden = false
 speed = Vector2( 20, 20 )
 gravity = 300
@@ -261,7 +264,7 @@ ground_cof = 0.2
 air_cof = 0.05
 id = ""
 dialog_json = "res://src/Dialog/Village.json"
-conversation = "kermit"
+conversation = ""
 has_face = false
 voiced = true
 
@@ -271,8 +274,7 @@ voiced = true
 position = Vector2( 440, 192 )
 z_index = 100
 collision_layer = 32
-input_pickable = false
-script = ExtResource( 14 )
+script = ExtResource( 18 )
 editor_hidden = false
 color = Color( 0, 0.4, 0, 1 )
 level = "res://src/Level/lillevel.tscn"
@@ -283,15 +285,14 @@ locked = false
 position = Vector2( 360, 192 )
 z_index = 100
 collision_layer = 32
-input_pickable = false
-script = ExtResource( 13 )
+script = ExtResource( 10 )
 editor_hidden = false
 color = Color( 0.901961, 0.74902, 0, 1 )
 text = "testing"
 
 [node name="SpawnPoint" type="Area2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 328, 192 )
-script = ExtResource( 17 )
+script = ExtResource( 12 )
 
 [node name="SunLight" type="Area2D" parent="." instance=ExtResource( 1 )]
 position = Vector2( 241, 0 )
