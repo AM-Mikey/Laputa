@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/Effect/Light/SunLight.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/Background/SkyDemo.png" type="Texture" id=20]
 [ext_resource path="res://src/Prop/AmmoRefill.tscn" type="PackedScene" id=21]
 [ext_resource path="res://src/Prop/Grass.tscn" type="PackedScene" id=22]
+[ext_resource path="res://src/Actor/NPC/Hermit.tscn" type="PackedScene" id=25]
 [ext_resource path="res://src/Prop/BreakBlock.tscn" type="PackedScene" id=27]
 
 [node name="LayersTest" type="Node2D"]
@@ -147,6 +148,12 @@ ground_cof = 50
 air_cof = 0.2
 id = "0.5"
 
+[node name="Hermit" parent="Actors" instance=ExtResource( 25 )]
+modulate = Color( 2, 2, 2, 1 )
+position = Vector2( 264, 192 )
+input_pickable = true
+dialog_json = "res://src/Dialog/Village.json"
+
 [node name="Triggers" type="Node2D" parent="."]
 
 [node name="Door" parent="Triggers" instance=ExtResource( 3 )]
@@ -159,6 +166,7 @@ level = "res://src/Level/lillevel.tscn"
 position = Vector2( 360, 192 )
 z_index = 100
 collision_layer = 32
+text = "testing"
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 4 )]
 position = Vector2( 328, 192 )

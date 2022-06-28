@@ -63,7 +63,7 @@ func _ready():
 
 func setup_level():
 	#emit_signal("level_selected", w.current_level)
-	#w.get_node("Juniper").disable()
+	w.get_node("Juniper").disable()
 	ui.get_node("HUD").queue_free()
 	for a in get_tree().get_nodes_in_group("Actors"):
 		if a.has_method("disable"):
@@ -302,7 +302,7 @@ func do_entity_input(event):
 	
 	#deleting
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
-		if event.scancode == KEY_DELETE or event.scancode == KEY_BACKSPACE or (event.scancode == KEY_X and not ctrl_held):
+		if event.scancode == KEY_DELETE: #or event.scancode == KEY_BACKSPACE or (event.scancode == KEY_X and not ctrl_held)
 			if inspector.active:
 				if not(inspector.active_type == "background" or inspector.active_type == "spawn_point"):
 					inspector.active.queue_free()

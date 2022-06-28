@@ -185,7 +185,7 @@ mouse_filter = 2
 [connection signal="toggled" from="HBox/Bool" to="." method="on_bool_toggled"]
 [connection signal="popup_closed" from="HBox/Color" to="." method="on_color_changed"]
 [connection signal="item_selected" from="HBox/Enum" to="." method="on_enum_selected"]
-[connection signal="text_entered" from="HBox/String" to="." method="on_text_entered"]
+[connection signal="text_changed" from="HBox/String" to="." method="_on_String_text_changed"]
 [connection signal="text_entered" from="HBox/Load" to="." method="on_text_entered"]
 [connection signal="text_entered" from="HBox/Vector2X" to="." method="on_vector2x_entered"]
 [connection signal="text_entered" from="HBox/Vector2Y" to="." method="on_vector2y_entered"]

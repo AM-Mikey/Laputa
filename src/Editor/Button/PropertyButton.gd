@@ -71,9 +71,9 @@ func on_pressed():
 	#print("button_pressed")
 	emit_signal("property_selected", property_name)
 
-func on_text_entered(new_text):
-	property_value = new_text
-	emit_signal("property_changed", property_name, property_value)
+#func on_text_entered(new_text):
+#	property_value = new_text
+#	emit_signal("property_changed", property_name, property_value)
 
 func on_bool_toggled(button_pressed):
 	property_value = button_pressed
@@ -92,4 +92,9 @@ func on_vector2x_entered(new_text):
 	emit_signal("property_changed", property_name, property_value)
 func on_vector2y_entered(new_text):
 	property_value.y = float(new_text)
+	emit_signal("property_changed", property_name, property_value)
+
+
+func _on_String_text_changed(new_text):
+	property_value = new_text
 	emit_signal("property_changed", property_name, property_value)

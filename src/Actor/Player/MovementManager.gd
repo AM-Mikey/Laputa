@@ -43,6 +43,7 @@ var bonk_distance = 4 #this was for corner clipping
 
 var states = {}
 var current_state
+var cached_state
 var is_debug = true
 
 
@@ -114,10 +115,7 @@ func _input(event):
 		if event.is_action_released("fire_automatic"): 
 			pc.direction_lock = Vector2.ZERO
 		
-		if event.is_action_pressed("debug_fly") or event.is_action_pressed("debug_editor"):
-			if current_state != states["fly"]:
-				change_state(states["fly"])
-			else: change_state(states["run"])
+
 		
 		if pc.inspecting: #TODO: why this way?
 			if event.is_action_pressed("move_left") \

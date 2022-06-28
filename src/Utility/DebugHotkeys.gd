@@ -72,6 +72,18 @@ func _input(event):
 		var shop_menu = SHOP_MENU.instance()
 		ui.add_child(shop_menu)
 
+
+	if event.is_action_pressed("debug_fly"):
+		if world.has_node("Juniper"):
+			var pc = world.get_node("Juniper")
+			if pc.mm.current_state != pc.mm.states["fly"]:
+				pc.mm.cached_state = pc.mm.current_state
+				pc.mm.change_state(pc.mm.states["fly"])
+			else:
+				pc.mm.change_state(pc.mm.cached_state)
+
+
+
 func debug_print():
 	if not dl.has_node("DebugInfo"):
 		print("showing debug info")
