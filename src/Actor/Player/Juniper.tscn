@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://src/Gun/Defender.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Actor/Player/PlayerCamera.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://assets/Actor/Player/CrouchRunNew.png" type="Texture" id=20]
 [ext_resource path="res://assets/Actor/Player/StandNew.png" type="Texture" id=21]
 [ext_resource path="res://assets/Actor/Player/Palette/Mono.png" type="Texture" id=22]
+[ext_resource path="res://assets/Actor/Player/BackRunNew.png" type="Texture" id=23]
 [ext_resource path="res://assets/Gun/Revolver.png" type="Texture" id=25]
 [ext_resource path="res://src/Actor/Player/GunSprite.gd" type="Script" id=26]
 [ext_resource path="res://src/Gun/MPistol.tscn" type="PackedScene" id=28]
@@ -96,9 +97,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
-
-[sub_resource type="Animation" id=66]
-resource_name = "Aerial"
 
 [sub_resource type="Animation" id=67]
 resource_name = "aerial_fall"
@@ -218,6 +216,52 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=70]
+resource_name = "back_run"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 23 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "do_step"
+}, {
+"args": [  ],
+"method": "do_step"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 11 ]
 }
 
 [sub_resource type="Animation" id=64]
@@ -494,7 +538,6 @@ position = Vector2( 0, -16 )
 texture = ExtResource( 19 )
 hframes = 5
 vframes = 6
-frame = 2
 script = ExtResource( 13 )
 
 [node name="GunSprite" type="Sprite" parent="."]
@@ -512,10 +555,10 @@ position = Vector2( -5, -1 )
 anims/FlashIframe = SubResource( 53 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Aerial = SubResource( 66 )
 anims/aerial_fall = SubResource( 67 )
 anims/aerial_rise = SubResource( 68 )
 anims/aerial_top = SubResource( 69 )
+anims/back_run = SubResource( 70 )
 anims/crouch_run = SubResource( 64 )
 anims/run = SubResource( 54 )
 anims/stand = SubResource( 65 )

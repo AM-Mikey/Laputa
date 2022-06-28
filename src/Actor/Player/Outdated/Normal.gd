@@ -43,7 +43,9 @@ func state_process():
 		mm.forgive_timer.start(mm.forgiveness_time)
 
 	#if not pc.get_node("FloorDetector").is_colliding():
-	if snap
+#	if snap
+	if not pc.is_on_floor():
+		print("fall detected")
 		mm.change_state(mm.states["fall"])
 
 

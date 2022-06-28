@@ -52,6 +52,8 @@ func set_player_directions():
 		pc.look_dir = Vector2(pc.move_dir.x, input_dir.y)
 	else:
 		pc.look_dir = Vector2(pc.look_dir.x, input_dir.y)
+	if pc.direction_lock != Vector2.ZERO:
+		pc.look_dir = pc.direction_lock
 	
 	#get shoot dir
 	if pc.is_on_ssp:
@@ -109,23 +111,16 @@ func animate():
 		vframe = 0
 		gun_sprite.flip_h = false
 	else: #right
-		vframe = 4
+		vframe = 3
 		gun_sprite.flip_h = true
-
-	
 	
 	
 	if pc.shoot_dir.y < 0: #up
 		vframe += 1
-
 		gun_sprite.rotation_degrees = 90 if not gun_sprite.flip_h else -90
 	elif pc.shoot_dir.y > 0: #down
 		vframe += 2
-
 		gun_sprite.rotation_degrees = -90 if not gun_sprite.flip_h else 90
-	elif pc.shoot_dir.y == 0 and pc.look_dir.y > 0: #look down, don't shoot down
-		vframe += 3
-		gun_sprite.rotation_degrees = 0
 	else:
 		gun_sprite.rotation_degrees = 0
 	

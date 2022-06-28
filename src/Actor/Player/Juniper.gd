@@ -31,6 +31,7 @@ var enemies_touching = []
 var is_on_ssp = true
 var is_crouching = false
 var is_in_water = false
+var is_in_coyote = false
 var dead = false
 
 

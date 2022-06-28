@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Stand.png-dc7a2795e0cf63a7fd280e7ea0e0e63a.stex"
+path="res://.import/ServerJune.png-9406a7931b0049f6e906bfd57384f083.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Player/Stand.png"
-dest_files=[ "res://.import/Stand.png-dc7a2795e0cf63a7fd280e7ea0e0e63a.stex" ]
+source_file="res://assets/Icon/discord/ServerJune.png"
+dest_files=[ "res://.import/ServerJune.png-9406a7931b0049f6e906bfd57384f083.stex" ]
 
 [params]
 

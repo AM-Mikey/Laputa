@@ -81,18 +81,17 @@ func initialize_states():
 
 
 func _physics_process(_delta):
-#	velocity += conveyor_speed
+	if pc.disabled: return
 	
-	if not pc.disabled:
+	#velocity += conveyor_speed
+	speed = Vector2(90, 180) if not get_parent().is_in_water else Vector2(60, 140)
+	gravity = 300.0 if not get_parent().is_in_water else 150.0
 	
-		speed = Vector2(90, 180) if not get_parent().is_in_water else Vector2(60, 140)
-		gravity = 300.0 if not get_parent().is_in_water else 150.0
-		
-		if is_debug:
-			state_label.text = current_state.name.to_lower()
-		current_state.state_process()
-		
-		#check_ssp()
+	if is_debug:
+		state_label.text = current_state.name.to_lower()
+	current_state.state_process()
+	
+	#check_ssp()
 
 
 func check_ssp():
@@ -130,7 +129,9 @@ func _input(event):
 func do_coyote_time():
 	$CoyoteTimer.start(coyote_time)
 	yield($CoyoteTimer, "timeout")
+	print(current_state)
 	if not pc.is_on_floor() and current_state == states["run"]:
+		pc.is_in_coyote = false
 		change_state(states["fall"])
 
 

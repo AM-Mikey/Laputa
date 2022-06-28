@@ -22,8 +22,11 @@ func state_process():
 	if Input.is_action_just_pressed("jump"):
 		mm.jump()
 	
-	if not pc.is_on_floor():
+	if not pc.is_on_floor() and not pc.is_in_coyote:
+		pc.is_in_coyote = true
 		mm.do_coyote_time()
+#		print("fall detected")
+#		mm.change_state(mm.states["fall"])
 
 
 func set_player_directions():
@@ -39,6 +42,8 @@ func set_player_directions():
 		pc.look_dir = Vector2(pc.move_dir.x, input_dir.y)
 	else:
 		pc.look_dir = Vector2(pc.look_dir.x, input_dir.y)
+	if pc.direction_lock != Vector2.ZERO:
+		pc.look_dir = pc.direction_lock
 	
 	#get shoot_dir
 	if pc.is_on_ssp:
@@ -73,21 +78,45 @@ func get_velocity():
 		
 	return out
 
+#		elif pc.direction_lock == Vector2.LEFT: #DIRECTION LOCKED LEFT
+#			pc.face_dir = Vector2.LEFT
+#
+#			if pc.is_on_floor():
+#				if get_input_dir().x == -1:
+#					ap.playback_speed = run_anim_speed
+#					next_animation = get_next_animation("Run", Vector2.LEFT, pc.is_on_ssp)
+#				elif get_input_dir().x == 1:
+#					ap.playback_speed = run_anim_speed
+#					next_animation = get_next_animation("Backrun", Vector2.RIGHT, pc.is_on_ssp)
+#				else:
+#					ap.playback_speed = 1
+#					match pc.inspecting:
+#						true: next_animation = get_next_animation("Reverseidle", pc.face_dir, true)
+#						false: next_animation = get_next_animation("Stand", pc.face_dir, pc.is_on_ssp)
+
+
 func animate():
 	var blend_time = 0
 	
+	
 	var animation = "run"
+	if pc.direction_lock != Vector2.ZERO and pc.direction_lock.x != pc.move_dir.x:
+		animation = "back_run"
 	if pc.is_crouching:
 		animation = "crouch_run"
 	if pc.move_dir.x == 0: #abs(mm.velocity.x) < mm.min_x_velocity:
 		animation = "stand"
+
+
 	
-	if ap.is_playing() and ap.current_animation == animation:
-		match ap.current_animation:
-			"run", "crouch_run":
-				blend_time = ap.current_animation_position
-	else:
+	if not ap.is_playing() or ap.current_animation != animation:
+		for g in anim.blend_array:
+			if g.has(animation) and g.has(ap.current_animation):
+				print("blending")
+				blend_time = ap.current_animation_position #only blend certain animations
 		ap.play(animation)
+		ap.seek(blend_time)
+
 	
 	
 	var vframe: int
@@ -117,7 +146,7 @@ func animate():
 	else:
 		gun_sprite.rotation_degrees = 0
 	
-	if animation == "run" or animation == "crouch_run":
+	if animation == "run" or animation == "crouch_run" or animation == "back_run":
 		ap.playback_speed = max((abs(mm.velocity.x)/mm.speed.x) * 2, 0.1)
 	else:
 		ap.playback_speed = 1

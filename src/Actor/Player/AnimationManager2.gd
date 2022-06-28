@@ -9,6 +9,11 @@ onready var ap = pc.get_node("AnimationPlayer")
 
 
 
+var blend_array = [
+	["run", "crouch_run", "back_run"],
+	["stand"],
+]
+
 var gun_pos_dict = {
 
 	"stand" : [
@@ -42,26 +47,30 @@ var gun_pos_dict = {
 			{0: Vector2(1,-7), 3: Vector2(2,-7), 4: Vector2(3,-7), 9: Vector2(2,-7), 10: Vector2(1,-7)},
 			],
 	"aerial_rise" : [
-			{0: Vector2(-7,-7), 3: Vector2(-6,-7), 4: Vector2(-5,-7), 9: Vector2(-6,-7), 10: Vector2(-7,-7)},
-			{0: Vector2(-5,-14), 1: Vector2(-5,-12), 2: Vector2(-5,-13), 5: Vector2(-5,-12), 6: Vector2(-5,-11), 7: Vector2(-5,-9), 8: Vector2(-5,-10), 9: Vector2(-5,-12), 10: Vector2(-5,-14)},
-			{0: Vector2(-3,-4), 1: Vector2(-3,-3), 2: Vector2(-3,-4), 4: Vector2(-3,-5), 6: Vector2(-3,-4), 7: Vector2(-3,-3), 8: Vector2(-3,-4), 10: Vector2(-3,-5)},
-			{0: Vector2(-7,-7), 3: Vector2(-6,-7), 4: Vector2(-5,-7), 9: Vector2(-6,-7), 10: Vector2(-7,-7)},
-			{0: Vector2(1,-7), 3: Vector2(2,-7), 4: Vector2(3,-7), 9: Vector2(2,-7), 10: Vector2(1,-7)},
-			{0: Vector2(1,-11), 1: Vector2(1,-9), 2: Vector2(1,-10), 3: Vector2(1,-12), 4: Vector2(1,-14), 6: Vector2(1,-14), 7: Vector2(1,-12), 8: Vector2(1,-13), 11: Vector2(1,-12)},
-			{0: Vector2(3,-4), 1: Vector2(3,-3), 2: Vector2(3,-4), 4: Vector2(3,-5), 6: Vector2(3,-4), 7: Vector2(3,-3), 8: Vector2(3,-4), 10: Vector2(3,-5)},
-			{0: Vector2(1,-7), 3: Vector2(2,-7), 4: Vector2(3,-7), 9: Vector2(2,-7), 10: Vector2(1,-7)},
+			{0: Vector2(-7,-11)},
+			{0: Vector2(-5,-16)},
+			{0: Vector2(-7,-7)},
+			{0: Vector2(3,-11)},
+			{0: Vector2(5,-16)},
+			{0: Vector2(2,-7)},
 			],
 	"aerial_top" : [
-			{0: Vector2(-7,-7), 3: Vector2(-6,-7), 4: Vector2(-5,-7), 9: Vector2(-6,-7), 10: Vector2(-7,-7)},
-			{0: Vector2(-5,-14), 1: Vector2(-5,-12), 2: Vector2(-5,-13), 5: Vector2(-5,-12), 6: Vector2(-5,-11), 7: Vector2(-5,-9), 8: Vector2(-5,-10), 9: Vector2(-5,-12), 10: Vector2(-5,-14)},
-			{0: Vector2(-3,-4), 1: Vector2(-3,-3), 2: Vector2(-3,-4), 4: Vector2(-3,-5), 6: Vector2(-3,-4), 7: Vector2(-3,-3), 8: Vector2(-3,-4), 10: Vector2(-3,-5)},
-			{0: Vector2(-7,-7), 3: Vector2(-6,-7), 4: Vector2(-5,-7), 9: Vector2(-6,-7), 10: Vector2(-7,-7)},
-			{0: Vector2(1,-7), 3: Vector2(2,-7), 4: Vector2(3,-7), 9: Vector2(2,-7), 10: Vector2(1,-7)},
-			{0: Vector2(1,-11), 1: Vector2(1,-9), 2: Vector2(1,-10), 3: Vector2(1,-12), 4: Vector2(1,-14), 6: Vector2(1,-14), 7: Vector2(1,-12), 8: Vector2(1,-13), 11: Vector2(1,-12)},
-			{0: Vector2(3,-4), 1: Vector2(3,-3), 2: Vector2(3,-4), 4: Vector2(3,-5), 6: Vector2(3,-4), 7: Vector2(3,-3), 8: Vector2(3,-4), 10: Vector2(3,-5)},
-			{0: Vector2(1,-7), 3: Vector2(2,-7), 4: Vector2(3,-7), 9: Vector2(2,-7), 10: Vector2(1,-7)},
+			{0: Vector2(-5,-11)},
+			{0: Vector2(-3,-16)},
+			{0: Vector2(-3,-6)},
+			{0: Vector2(2,-11)},
+			{0: Vector2(3,-16)},
+			{0: Vector2(1,-7)},
 			],
 	"aerial_fall" : [
+			{0: Vector2(-3,-11)},
+			{0: Vector2(-1,-16)},
+			{0: Vector2(0,-6)},
+			{0: Vector2(0,-11)},
+			{0: Vector2(1,-16)},
+			{0: Vector2(0,-6)},
+			],
+	"back_run" : [
 			{0: Vector2(-7,-7), 3: Vector2(-6,-7), 4: Vector2(-5,-7), 9: Vector2(-6,-7), 10: Vector2(-7,-7)},
 			{0: Vector2(-5,-14), 1: Vector2(-5,-12), 2: Vector2(-5,-13), 5: Vector2(-5,-12), 6: Vector2(-5,-11), 7: Vector2(-5,-9), 8: Vector2(-5,-10), 9: Vector2(-5,-12), 10: Vector2(-5,-14)},
 			{0: Vector2(-3,-4), 1: Vector2(-3,-3), 2: Vector2(-3,-4), 4: Vector2(-3,-5), 6: Vector2(-3,-4), 7: Vector2(-3,-3), 8: Vector2(-3,-4), 10: Vector2(-3,-5)},
