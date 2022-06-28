@@ -62,18 +62,22 @@ func _ready():
 func disable():
 	disabled = true
 	invincible = true
-	$MovementManager.can_bonk = false
-	$MovementManager.change_state($MovementManager.states["disabled"])
+	mm.can_bonk = false
+	mm.cached_state = mm.current_state
+	mm.change_state(mm.states["disabled"])
 
 func enable():
 	disabled = false
 	invincible = false
-	$MovementManager.can_bonk = true
-	$MovementManager.change_state($MovementManager.states["run"])
+	mm.can_bonk = true
+	if mm.cached_state:
+		mm.change_state(mm.cached_state)
+	else:
+		mm.change_state(mm.states["run"])
 
 func move_to(pos):
-	$MovementManager.move_target = pos
-	$MovementManager.change_state($MovementManager.states["moveto"])
+	mm.move_target = pos
+	mm.change_state(mm.states["moveto"])
 
 func _on_SSPDetector_body_entered(_body):
 	is_on_ssp = true
