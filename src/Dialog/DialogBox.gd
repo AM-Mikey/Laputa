@@ -191,8 +191,9 @@ func exit():
 	emit_signal("dialog_finished")
 	if is_instance_valid(pc):
 		pc.get_node("PlayerCamera").position = Vector2.ZERO
-		pc.enable()
-		pc.mm.change_state(pc.mm.cached_state)
+		#pc.enable()
+		yield(get_tree(), "idle_frame")
+		pc.mm.change_state(pc.mm.states["run"]) #change to run so we don't continue a jump
 	queue_free()
 
 ### HELPERS

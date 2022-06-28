@@ -25,8 +25,6 @@ func state_process():
 	if not pc.is_on_floor() and not pc.is_in_coyote:
 		pc.is_in_coyote = true
 		mm.do_coyote_time()
-#		print("fall detected")
-#		mm.change_state(mm.states["fall"])
 
 
 func set_player_directions():
