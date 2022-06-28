@@ -120,7 +120,7 @@ func exit():
 	editor_level_limiter.queue_free()
 	el.get_node("EditorCamera").queue_free()
 	ui.add_child(HUD.instance())
-	#world.get_node("Juniper").enable()
+	w.get_node("Juniper").enable()
 	w.get_node("Juniper/PlayerCamera").current = true
 	for a in get_tree().get_nodes_in_group("Actors"):
 		if a.has_method("enable"):

@@ -82,14 +82,14 @@ func initialize_states():
 
 
 func _physics_process(_delta):
+	if is_debug:
+		state_label.text = current_state.name.to_lower()
 	if pc.disabled: return
 	
 	#velocity += conveyor_speed
 	speed = Vector2(90, 180) if not get_parent().is_in_water else Vector2(60, 140)
 	gravity = 300.0 if not get_parent().is_in_water else 150.0
 	
-	if is_debug:
-		state_label.text = current_state.name.to_lower()
 	current_state.state_process()
 	
 	#check_ssp()
