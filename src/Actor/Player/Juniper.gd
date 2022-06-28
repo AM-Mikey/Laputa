@@ -23,7 +23,7 @@ var direction_lock = Vector2.ZERO
 
 var invincible = false
 var disabled = true
-var inspecting = false
+#var inspecting = false
 
 
 #var is_on_conveyor = false

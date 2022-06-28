@@ -32,8 +32,9 @@ func print_sign():
 	in_dialog = true
 	#tb.bbcode_text = "\n" + "[b][center]" + text
 	print(text)
-	pc.disable()
-	pc.inspecting = true
+	#pc.disable()
+	pc.mm.cached_state = pc.mm.current_state
+	pc.mm.change_state(pc.mm.states["inspect"])
 	dialog_loop()
 
 
@@ -42,8 +43,9 @@ func print_flavor_text(justification := "no_face"):
 	print(text)
 	justify_text(justification)
 	align_box()
-	pc.disable()
-	pc.inspecting = true
+	#pc.disable()
+	pc.mm.cached_state = pc.mm.current_state
+	pc.mm.change_state(pc.mm.states["inspect"])
 	dialog_loop()
 
 
@@ -61,8 +63,9 @@ func start_printing(dialog_json, conversation: String, justification := "no_face
 	#print(text)
 	justify_text(justification)
 	align_box()
-	pc.disable()
-	pc.inspecting = true
+	#pc.disable()
+	pc.mm.cached_state = pc.mm.current_state
+	pc.mm.change_state(pc.mm.states["inspect"])
 	dialog_loop()
 
 
@@ -189,7 +192,7 @@ func exit():
 	if is_instance_valid(pc):
 		pc.get_node("PlayerCamera").position = Vector2.ZERO
 		pc.enable()
-		pc.inspecting = false
+		pc.mm.change_state(pc.mm.cached_state)
 	queue_free()
 
 ### HELPERS

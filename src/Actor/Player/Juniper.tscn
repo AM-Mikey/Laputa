@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://src/Gun/Defender.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Actor/Player/PlayerCamera.tscn" type="PackedScene" id=2]
@@ -23,8 +23,10 @@
 [ext_resource path="res://assets/Actor/Player/StandNew.png" type="Texture" id=21]
 [ext_resource path="res://assets/Actor/Player/Palette/Mono.png" type="Texture" id=22]
 [ext_resource path="res://assets/Actor/Player/BackRunNew.png" type="Texture" id=23]
+[ext_resource path="res://assets/Actor/Player/InspectNew.png" type="Texture" id=24]
 [ext_resource path="res://assets/Gun/Revolver.png" type="Texture" id=25]
 [ext_resource path="res://src/Actor/Player/GunSprite.gd" type="Script" id=26]
+[ext_resource path="res://src/Actor/Player/Inspect.gd" type="Script" id=27]
 [ext_resource path="res://src/Gun/MPistol.tscn" type="PackedScene" id=28]
 [ext_resource path="res://src/Actor/Player/Jump.gd" type="Script" id=29]
 [ext_resource path="res://src/Actor/Player/Run.gd" type="Script" id=30]
@@ -310,6 +312,46 @@ tracks/2/keys = {
 "values": [ 0, 11 ]
 }
 
+[sub_resource type="Animation" id=71]
+resource_name = "inspect"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 24 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 0.7, 0.9, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
 [sub_resource type="Animation" id=54]
 resource_name = "run"
 length = 1.2
@@ -422,6 +464,9 @@ align = 1
 
 [node name="Disabled" type="Node" parent="MovementManager/States"]
 script = ExtResource( 11 )
+
+[node name="Inspect" type="Node" parent="MovementManager/States"]
+script = ExtResource( 27 )
 
 [node name="Run" type="Node" parent="MovementManager/States"]
 script = ExtResource( 30 )
@@ -545,9 +590,9 @@ position = Vector2( -5, -1 )
 light_mask = 2
 material = SubResource( 61 )
 position = Vector2( 0, -16 )
-texture = ExtResource( 19 )
-hframes = 5
-vframes = 6
+texture = ExtResource( 24 )
+hframes = 6
+vframes = 2
 script = ExtResource( 13 )
 
 [node name="EffectPlayer" type="AnimationPlayer" parent="."]
@@ -559,6 +604,7 @@ anims/aerial_rise = SubResource( 68 )
 anims/aerial_top = SubResource( 69 )
 anims/back_run = SubResource( 70 )
 anims/crouch_run = SubResource( 64 )
+anims/inspect = SubResource( 71 )
 anims/run = SubResource( 54 )
 anims/stand = SubResource( 65 )
 

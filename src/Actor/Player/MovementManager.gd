@@ -114,14 +114,7 @@ func _input(event):
 			pc.direction_lock = pc.look_dir
 		if event.is_action_released("fire_automatic"): 
 			pc.direction_lock = Vector2.ZERO
-		
 
-		
-		if pc.inspecting: #TODO: why this way?
-			if event.is_action_pressed("move_left") \
-			or event.is_action_pressed("move_right") \
-			or event.is_action_pressed("jump"):
-				pc.inspecting = false
 
 
 func do_coyote_time():
