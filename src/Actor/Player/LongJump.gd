@@ -138,7 +138,8 @@ func animate():
 		gun_sprite.rotation_degrees = -90 if not gun_sprite.flip_h else 90
 	else:
 		gun_sprite.rotation_degrees = 0
-
+	
+	anim.set_gun_draw_index()
 	sprite.frame_coords.y = vframe
 	gun_sprite.position = anim.get_gun_pos(animation, vframe, sprite.frame_coords.x) #changes the gun sprite every time animate is called
 

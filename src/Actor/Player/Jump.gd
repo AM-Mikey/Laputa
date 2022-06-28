@@ -126,7 +126,7 @@ func animate():
 	
 	
 	
-	
+	anim.set_gun_draw_index()
 	sprite.frame_coords.y = vframe
 	gun_sprite.position = anim.get_gun_pos(animation, vframe, sprite.frame_coords.x) #changes the gun sprite every time animate is called
 

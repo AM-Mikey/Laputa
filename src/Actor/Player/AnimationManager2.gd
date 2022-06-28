@@ -7,6 +7,9 @@ onready var pc = get_tree().get_root().get_node("World/Juniper")
 onready var mm = pc.get_node("MovementManager")
 onready var ap = pc.get_node("AnimationPlayer")
 
+onready var sprite = pc.get_node("Sprite")
+onready var gun_sprite = pc.get_node("GunSprite")
+
 
 
 var blend_array = [
@@ -98,6 +101,17 @@ func get_gun_pos(sheet_name: String, animation_index: int, frame_index: int) -> 
 				gun_pos = animation_data[k]
 	
 	return gun_pos
+
+
+func set_gun_draw_index():
+	var gun_index
+	if not gun_sprite.flip_h:
+		gun_index = sprite.get_index() - 1
+	else: 
+		gun_index = sprite.get_index() + 1
+	get_parent().move_child(gun_sprite, gun_index)
+
+
 
 
 #func _physics_process(_delta):
