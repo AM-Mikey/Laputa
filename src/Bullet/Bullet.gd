@@ -48,18 +48,20 @@ func on_viewport_exit(_viewport):
 
 
 func _on_CollisionDetector_body_entered(body):
+	print("body entered")
 	if not disabled and default_body_collision:
 		if body.get_collision_layer_bit(8): #breakable
-					body.on_break(break_method)
-					if body.get_collision_layer_bit(3): #world
-						_fizzle_from_world()
+			body.on_break(break_method)
+			print("break")
+
 
 		elif body.get_collision_layer_bit(1): #enemy
 			yield(get_tree(), "idle_frame")
 			var blood_direction = Vector2(floor((body.global_position.x - global_position.x)/10), floor((body.global_position.y - global_position.y)/10))
 			body.hit(damage, blood_direction)
 			queue_free()
-		elif body.get_collision_layer_bit(3): #world
+	
+		if body.get_collision_layer_bit(3): #world
 			_fizzle_from_world()
 
 

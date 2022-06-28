@@ -21,14 +21,3 @@ func _physics_process(_delta):
 		var distance_from_origin = origin.distance_to(global_position);
 		if distance_from_origin > f_range:
 			_fizzle_from_range()
-
-
-func _on_CollisionDetector_body_entered(body):
-	if not disabled:
-		if body.get_collision_layer_bit(1): #enemy
-			yield(get_tree(), "idle_frame")
-			var blood_direction = Vector2(floor((body.global_position.x - global_position.x)/10), floor((body.global_position.y - global_position.y)/10))
-			body.hit(damage, blood_direction)
-			queue_free()
-		elif body.get_collision_layer_bit(3): #world
-			_fizzle_from_world()
