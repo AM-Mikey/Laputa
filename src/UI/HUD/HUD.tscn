@@ -51,9 +51,6 @@ anchor_bottom = 1.0
 margin_bottom = 2.0
 mouse_filter = 2
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Flash = SubResource( 1 )
@@ -84,9 +81,6 @@ margin_bottom = 39.0
 mouse_filter = 2
 value = 50.0
 texture_progress = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HpLostCap" type="Sprite" parent="HpBar/HpLost"]
 position = Vector2( 19, 2 )

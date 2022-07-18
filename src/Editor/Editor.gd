@@ -981,6 +981,7 @@ func on_TileSet_tile_set_loaded(path):
 ### MISC SIGNALS
 
 func _on_viewport_size_changed():
+	$Margin.rect_size = get_tree().get_root().size / w.get_node("EditorLayer").scale
 	rect_size = get_tree().get_root().size / w.get_node("EditorLayer").scale
 	pass
 

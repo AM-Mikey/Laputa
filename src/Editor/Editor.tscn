@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/Editor/EditorTheme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Editor/Editor.gd" type="Script" id=2]
@@ -12,41 +12,71 @@
 [ext_resource path="res://src/Editor/NPCs.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Editor/Triggers.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Editor/TabButtons.gd" type="Script" id=12]
+[ext_resource path="res://src/UI/Debug/50PercentBlack.tres" type="StyleBox" id=13]
+[ext_resource path="res://src/Editor/Coordinates.gd" type="Script" id=14]
 
 [node name="Editor" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 488.0
-margin_bottom = 186.0
+margin_right = -312.0
+margin_bottom = 90.0
 mouse_filter = 2
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
+[node name="Margin" type="MarginContainer" parent="."]
+margin_right = 960.0
+margin_bottom = 448.0
+mouse_filter = 2
+
+[node name="Coordinates" type="MarginContainer" parent="Margin"]
+margin_top = 432.0
+margin_right = 48.0
+margin_bottom = 448.0
+rect_min_size = Vector2( 48, 16 )
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+script = ExtResource( 14 )
+
+[node name="Panel" type="Panel" parent="Margin/Coordinates"]
+margin_right = 48.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 8, 8 )
+mouse_filter = 2
+custom_styles/panel = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="Margin/Coordinates"]
+margin_left = 3.0
+margin_right = 44.0
+margin_bottom = 16.0
+size_flags_horizontal = 4
+size_flags_vertical = 1
+text = "123, 33"
+valign = 1
+
 [node name="Secondary" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 704.0
-margin_top = 16.0
-margin_right = 952.0
-margin_bottom = 464.0
+margin_left = 761.0
+margin_right = 968.0
+margin_bottom = 440.0
 mouse_filter = 1
 
 [node name="Inspector" parent="Secondary" instance=ExtResource( 7 )]
-margin_right = 341.0
-margin_bottom = 448.0
+margin_right = 207.0
+margin_bottom = 440.0
 
 [node name="Main" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 8.0
-margin_top = 32.0
-margin_right = 256.0
-margin_bottom = 424.0
+margin_right = 250.0
+margin_bottom = 416.0
 mouse_filter = 1
 
 [node name="Tab" type="TabContainer" parent="Main"]
 margin_right = 250.0
-margin_bottom = 392.0
+margin_bottom = 416.0
 mouse_filter = 2
 tabs_visible = false
 __meta__ = {
@@ -94,7 +124,7 @@ visible = false
 [node name="TabButtons" type="Control" parent="Main"]
 show_behind_parent = true
 margin_right = 250.0
-margin_bottom = 392.0
+margin_bottom = 416.0
 mouse_filter = 2
 script = ExtResource( 12 )
 
@@ -108,7 +138,6 @@ mouse_filter = 2
 [connection signal="level_saved" from="." to="Main/Tab/Levels" method="on_save"]
 [connection signal="tab_changed" from="Main/Tab" to="." method="on_tab_changed"]
 [connection signal="autolayer_toggled" from="Main/Tab/Tiles" to="." method="on_Tiles_autolayer_toggled"]
-[connection signal="multi_erase_toggled" from="Main/Tab/Tiles" to="." method="_on_Tiles_multi_erase_toggled"]
 [connection signal="terrain_toggled" from="Main/Tab/Tiles" to="." method="on_terrain_toggled"]
 [connection signal="tile_selection_updated" from="Main/Tab/Tiles" to="." method="on_Tiles_tile_selection_updated"]
 [connection signal="tile_transform_updated" from="Main/Tab/Tiles" to="." method="_on_Tiles_tile_transform_updated"]
