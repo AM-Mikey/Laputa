@@ -32,7 +32,7 @@ margin_bottom = 464.0
 mouse_filter = 1
 
 [node name="Inspector" parent="Secondary" instance=ExtResource( 7 )]
-margin_right = 248.0
+margin_right = 341.0
 margin_bottom = 448.0
 
 [node name="Main" parent="." instance=ExtResource( 3 )]

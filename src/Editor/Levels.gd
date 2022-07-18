@@ -9,6 +9,7 @@ onready var w = get_tree().get_root().get_node("World")
 onready var ui = w.get_node("UILayer")
 onready var el = w.get_node("EditorLayer")
 
+var default_level = "res://src/Level/Default.tscn"
 var ctrl_held := false
 
 func _unhandled_input(event):
@@ -27,6 +28,9 @@ func on_load():
 	$LoadDialog.current_path = "res://src/level/"
 	$LoadDialog.popup()
 
+func on_new():
+	$NewDialog.current_path = "res://src/level/"
+	$NewDialog.popup()
 
 ### DIALOG SIGNALS
 
@@ -37,6 +41,13 @@ func on_save_confirmed():
 
 func on_load_selected(path):
 	load_level(path)
+
+func on_new_confirmed():
+	var level = load(default_level).instance()
+	var path = $NewDialog.current_path.get_basename() + ".tscn"
+	save_level(level, path)
+	load_level(path)
+
 
 ### SAVE/LOAD
 

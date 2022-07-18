@@ -31,31 +31,31 @@ size_flags_vertical = 8
 alignment = 2
 
 [node name="Save" type="Button" parent="HBox"]
-margin_left = 323.0
-margin_right = 367.0
+margin_left = 280.0
+margin_right = 324.0
 margin_bottom = 30.0
 text = "Save"
 
 [node name="SaveAs" type="Button" parent="HBox"]
-margin_left = 371.0
-margin_right = 433.0
+margin_left = 328.0
+margin_right = 390.0
 margin_bottom = 30.0
 text = "Save As"
 
 [node name="Load" type="Button" parent="HBox"]
-margin_left = 437.0
-margin_right = 480.0
+margin_left = 394.0
+margin_right = 437.0
 margin_bottom = 30.0
 text = "Load"
 
 [node name="New" type="Button" parent="HBox"]
-visible = false
-margin_left = 405.0
+margin_left = 441.0
 margin_right = 480.0
 margin_bottom = 30.0
-text = "New Level"
+text = "New"
 
 [node name="SaveDialog" type="FileDialog" parent="."]
+visible = true
 margin_right = 480.0
 margin_bottom = 270.0
 rect_min_size = Vector2( 400, 140 )
@@ -71,15 +71,16 @@ mode = 0
 filters = PoolStringArray( "*.tscn" )
 
 [node name="NewDialog" type="FileDialog" parent="."]
+visible = true
 margin_right = 480.0
 margin_bottom = 270.0
 rect_min_size = Vector2( 400, 140 )
-window_title = "Open a File"
-mode = 0
 filters = PoolStringArray( "*.tscn" )
 
 [connection signal="pressed" from="HBox/Save" to="." method="on_save"]
 [connection signal="pressed" from="HBox/SaveAs" to="." method="on_save_as"]
 [connection signal="pressed" from="HBox/Load" to="." method="on_load"]
+[connection signal="pressed" from="HBox/New" to="." method="on_new"]
 [connection signal="confirmed" from="SaveDialog" to="." method="on_save_confirmed"]
 [connection signal="file_selected" from="LoadDialog" to="." method="on_load_selected"]
+[connection signal="confirmed" from="NewDialog" to="." method="on_new_confirmed"]
