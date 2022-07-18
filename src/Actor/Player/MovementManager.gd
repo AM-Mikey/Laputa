@@ -42,8 +42,8 @@ var starting_direction #for acceleration
 var bonk_distance = 4 #this was for corner clipping
 
 var states = {}
-var current_state
-var cached_state
+var current_state: Node
+var cached_state: Node
 var is_debug = true
 
 
@@ -60,11 +60,12 @@ func _ready():
 	initialize_states()
 
 
-func change_state(new_state):
-	#always enter and exit when changing states
+func change_state(new_state: String, do_cache_state = true):
 	if current_state:
+		if do_cache_state: cached_state = current_state
 		current_state.exit()
-	current_state = new_state
+	
+	current_state = states[new_state]
 	current_state.enter()
 
 
@@ -77,7 +78,7 @@ func initialize_states():
 			states[c.name.to_lower()] = c
 	
 	#yield(get_tree(), "idle_frame") #wait to setup states
-	change_state(states["run"])
+	change_state("run")
 
 
 
@@ -123,7 +124,7 @@ func do_coyote_time():
 	print(current_state)
 	if not pc.is_on_floor() and current_state == states["run"]:
 		pc.is_in_coyote = false
-		change_state(states["fall"])
+		change_state("fall")
 
 
 func bonk(type):
@@ -153,9 +154,9 @@ func jump():
 		#jump_type = Jump.RUNNING
 		jump_starting_move_dir_x = pc.move_dir.x
 		$MinDirTimer.start(minimum_direction_time)
-		change_state(states["longjump"])
+		change_state("longjump")
 	else:
-		change_state(states["jump"])
+		change_state("jump")
 
 ### SIGNALS
 

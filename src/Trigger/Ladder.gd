@@ -19,6 +19,6 @@ func _physics_process(delta):
 			if Input.is_action_just_pressed("look_up") \
 			or Input.is_action_just_pressed("look_down") and not b.is_on_floor() \
 			or Input.is_action_just_pressed("look_down") and b.is_on_ssp:
-				b.get_node("MovementManager").change_state(b.get_node("MovementManager").states["ladder"])
+				b.mm.change_state("ladder")
 				b.position.x = position.x + 8
 				b.position.y -= 1

@@ -46,7 +46,7 @@ func state_process():
 #	if snap
 	if not pc.is_on_floor():
 		print("fall detected")
-		mm.change_state(mm.states["fall"])
+		mm.change_state("fall")
 
 
 

@@ -25,7 +25,6 @@ var invincible = false
 var disabled = true
 #var inspecting = false
 
-
 #var is_on_conveyor = false
 var enemies_touching = []
 var is_on_ssp = true
@@ -63,95 +62,34 @@ func disable():
 	disabled = true
 	invincible = true
 	mm.can_bonk = false
-	mm.cached_state = mm.current_state
-	mm.change_state(mm.states["disabled"])
+	mm.change_state("disabled")
 
 func enable():
 	disabled = false
 	invincible = false
 	mm.can_bonk = true
 	if mm.cached_state:
-		mm.change_state(mm.cached_state)
+		mm.change_state(mm.cached_state.name.to_lower())
 	else:
-		mm.change_state(mm.states["run"])
+		mm.change_state("run")
+
+
+
+### ACTIONS
 
 func move_to(pos):
 	mm.move_target = pos
-	mm.change_state(mm.states["moveto"])
+	mm.change_state("moveto")
 
-func _on_SSPDetector_body_entered(_body):
-	is_on_ssp = true
-func _on_SSPDetector_body_exited(_body):
-	is_on_ssp = false
-
-
-
-
-func _on_ItemDetector_area_entered(area):
-	if not disabled:
-		
-		if area.get_collision_layer_bit(10): #health
-			hp += area.get_parent().value
-			hp = min(hp, max_hp)
-			
-			am.play("get_hp")
-			emit_signal("hp_updated", hp, max_hp)
-			area.get_parent().queue_free()
-		
-		
-		if area.get_collision_layer_bit(11): #xp
-			var active_gun = $GunManager/Guns.get_child(0)
-			
-			total_xp += area.get_parent().value
-			active_gun.xp += area.get_parent().value
-
-			if active_gun.xp >= active_gun.max_xp:
-				if active_gun.level == active_gun.max_level:
-					active_gun.xp = active_gun.max_xp
-					#TODO: Flash MAX on HUD
-				else:
-					$GunManager.level_up(false)
-
-			am.play("get_xp")
-			emit_signal("total_xp_updated", total_xp)
-			emit_signal("guns_updated", $GunManager/Guns.get_children())
-			area.get_parent().queue_free()
-
-		
-		if area.get_collision_layer_bit(12): #ammo
-			for w in $GunManager/Guns.get_children():
-				if w.max_ammo != 0:
-					w.ammo += w.max_ammo * area.value #percent of max ammo
-					w.ammo = max(w.ammo, w.max_ammo)
-
-			am.play("get_ammo")
-			emit_signal("guns_updated", $GunManager/Guns.get_children())
-			area.queue_free()
-
-
-### DAMAGE, IFRAMES, AND DYING
-
-func _on_HurtDetector_body_entered(body):
-	if not disabled and body.get_collision_layer_bit(1): #enemy
-		enemies_touching.append(body)
-		
-		var damage = body.damage_on_contact
-		var knockback_direction = Vector2(sign(global_position.x - body.global_position.x), 0)
-		hit(damage, knockback_direction)
-
-func _on_HurtDetector_body_exited(body):
-	enemies_touching.erase(body)
-
-func _on_HurtDetector_area_entered(area): #KILLBOX
-	if area.get_collision_layer_bit(13): #kill
-		die()
+func do_step():
+	am.play("pc_step")
 
 func hit(damage, knockback_direction):
 	if not disabled and not invincible:
 		if knockback_direction != Vector2.ZERO:
 			#print("Knockback in Dir: " + str(knockback_direction))
-			$MovementManager.snap_vector = Vector2.ZERO
-			$MovementManager.change_state($MovementManager.states["knockback"])
+			mm.snap_vector = Vector2.ZERO
+			mm.change_state("knockback")
 		if damage > 0:
 			hp -= damage
 			am.play("pc_hurt")
@@ -215,11 +153,77 @@ func die():
 			world.get_node("UILayer/HUD").free()
 		queue_free()
 
+
+
+
+
+### SIGNALS
+
+func _on_SSPDetector_body_entered(_body):
+	is_on_ssp = true
+func _on_SSPDetector_body_exited(_body):
+	is_on_ssp = false
+
+func _on_ItemDetector_area_entered(area):
+	if not disabled:
+		
+		if area.get_collision_layer_bit(10): #health
+			hp += area.get_parent().value
+			hp = min(hp, max_hp)
+			
+			am.play("get_hp")
+			emit_signal("hp_updated", hp, max_hp)
+			area.get_parent().queue_free()
+		
+		
+		if area.get_collision_layer_bit(11): #xp
+			var active_gun = $GunManager/Guns.get_child(0)
+			
+			total_xp += area.get_parent().value
+			active_gun.xp += area.get_parent().value
+
+			if active_gun.xp >= active_gun.max_xp:
+				if active_gun.level == active_gun.max_level:
+					active_gun.xp = active_gun.max_xp
+					#TODO: Flash MAX on HUD
+				else:
+					$GunManager.level_up(false)
+
+			am.play("get_xp")
+			emit_signal("total_xp_updated", total_xp)
+			emit_signal("guns_updated", $GunManager/Guns.get_children())
+			area.get_parent().queue_free()
+
+		
+		if area.get_collision_layer_bit(12): #ammo
+			for w in $GunManager/Guns.get_children():
+				if w.max_ammo != 0:
+					w.ammo += w.max_ammo * area.value #percent of max ammo
+					w.ammo = max(w.ammo, w.max_ammo)
+
+			am.play("get_ammo")
+			emit_signal("guns_updated", $GunManager/Guns.get_children())
+			area.queue_free()
+
+func _on_HurtDetector_body_entered(body):
+	if not disabled and body.get_collision_layer_bit(1): #enemy
+		enemies_touching.append(body)
+		
+		var damage = body.damage_on_contact
+		var knockback_direction = Vector2(sign(global_position.x - body.global_position.x), 0)
+		hit(damage, knockback_direction)
+
+func _on_HurtDetector_body_exited(body):
+	enemies_touching.erase(body)
+
+func _on_HurtDetector_area_entered(area): #KILLBOX
+	if area.get_collision_layer_bit(13): #kill
+		die()
+
+
+
 ### MISC
 
-
-func do_step():
-	am.play("pc_step")
 
 #TODO: clean these up and get rid of them 
 func update_inventory():

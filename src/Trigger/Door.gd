@@ -37,7 +37,7 @@ func _input(event):
 
 
 func enter_door():
-	active_pc.inspecting = true
+	active_pc.mm.change_state("inspect")
 	active_pc.disable()
 	active_pc.move_to(position)
 	
@@ -50,5 +50,5 @@ func enter_door():
 	w.get_node("UILayer").add_child(transition)
 	
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")
-	active_pc.inspecting = false
+	#active_pc.inspecting = false
 	emit_signal("level_change", load(level), door_index)

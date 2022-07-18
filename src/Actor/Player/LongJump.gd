@@ -30,7 +30,7 @@ func state_process():
 	if pc.is_on_floor(): #landed
 		mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
 		mm.bonk("Land")
-		mm.change_state(mm.states["run"])
+		mm.change_state("run")
 
 
 func set_player_directions():

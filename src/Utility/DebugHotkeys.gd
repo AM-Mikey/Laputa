@@ -78,9 +78,9 @@ func _input(event):
 			var pc = world.get_node("Juniper")
 			if pc.mm.current_state != pc.mm.states["fly"]:
 				pc.mm.cached_state = pc.mm.current_state
-				pc.mm.change_state(pc.mm.states["fly"])
+				pc.mm.change_state("fly")
 			else:
-				pc.mm.change_state(pc.mm.cached_state)
+				pc.mm.change_state(pc.mm.cached_state.name.to_lower())
 
 
 

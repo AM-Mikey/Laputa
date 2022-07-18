@@ -5,7 +5,7 @@ const DB = preload("res://src/Dialog/DialogBox.tscn")
 const STATE_LABEL = preload("res://src/Utility/StateLabel.tscn")
 
 var state: String
-var cached_state: String
+#var cached_state: String
 var talking = false
 var dialog_step: int = 1
 var branch: String = ""
@@ -165,7 +165,7 @@ func exit_talk():
 
 func _input(event):
 	if event.is_action_pressed("inspect") and active_pc and dialog_json != "" and conversation != "":
-		cached_state = state
+		#cached_state = state
 		change_state("talk")
 
 
@@ -173,7 +173,7 @@ func orient():
 	active_pc.look_dir.x = sign(position.x - active_pc.position.x)
 
 func on_dialog_finished():
-	change_state(cached_state)
+	change_state(active_pc.mm.cached_state.name.to_lower())
 	#talking = false
 
 ############################################################### TODO: clean up this old stuff \/

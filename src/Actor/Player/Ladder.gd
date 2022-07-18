@@ -17,7 +17,7 @@ func state_process():
 	
 	if pc.is_on_floor() and not pc.is_on_ssp:
 		if Input.is_action_pressed("look_down"):
-			mm.change_state(mm.states["run"])
+			mm.change_state("run")
 
 	if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
 		mm.bonk("bonk")
@@ -37,7 +37,7 @@ func get_velocity():
 	out.y = pc.move_dir.y * mm.speed.y * 0.5
 	out.x = 0
 	if Input.is_action_just_pressed("jump"):
-		mm.change_state(mm.states["jump"]) #TODO fix
+		mm.change_state("jump") #TODO fix
 		out.y = mm.speed.y * -1.0
 
 	if abs(out.x) < mm.min_x_velocity: out.x = 0 #clamp velocity

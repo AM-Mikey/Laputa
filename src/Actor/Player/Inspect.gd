@@ -23,7 +23,7 @@ func state_process():
 #	if Input.is_action_pressed("move_left") \
 #	or Input.is_action_pressed("move_right") \
 #	or Input.is_action_pressed("jump"):
-#		pc.mm.change_state(pc.mm.cached_state)
+#		pc.mm.change_state(pc.mm.cached_state.name.to_lower())
 
 
 func get_velocity():

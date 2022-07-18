@@ -34,7 +34,7 @@ func print_sign():
 	print(text)
 	#pc.disable()
 	pc.mm.cached_state = pc.mm.current_state
-	pc.mm.change_state(pc.mm.states["inspect"])
+	pc.mm.change_state("inspect")
 	dialog_loop()
 
 
@@ -45,7 +45,7 @@ func print_flavor_text(justification := "no_face"):
 	align_box()
 	#pc.disable()
 	pc.mm.cached_state = pc.mm.current_state
-	pc.mm.change_state(pc.mm.states["inspect"])
+	pc.mm.change_state("inspect")
 	dialog_loop()
 
 
@@ -65,7 +65,7 @@ func start_printing(dialog_json, conversation: String, justification := "no_face
 	align_box()
 	#pc.disable()
 	pc.mm.cached_state = pc.mm.current_state
-	pc.mm.change_state(pc.mm.states["inspect"])
+	pc.mm.change_state("inspect")
 	dialog_loop()
 
 
@@ -193,7 +193,7 @@ func exit():
 		pc.get_node("PlayerCamera").position = Vector2.ZERO
 		#pc.enable()
 		yield(get_tree(), "idle_frame")
-		pc.mm.change_state(pc.mm.states["run"]) #change to run so we don't continue a jump
+		pc.mm.change_state("run") #change to run so we don't continue a jump
 	queue_free()
 
 ### HELPERS
