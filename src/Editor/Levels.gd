@@ -64,6 +64,8 @@ func load_level(path):
 	if ui.has_node("TitleScreen"): ui.get_node("TitleScreen").queue_free()
 	if ui.has_node("PauseMenu"): ui.get_node("PauseMenu").unpause()
 	
+	el.get_node("Editor").inspector.on_deselected()
+	
 	w.on_level_change(load(path), 0)
 
 	w.add_child(JUNIPER.instance())
@@ -73,10 +75,6 @@ func load_level(path):
 	
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		w.get_node("Juniper").global_position = s.global_position
-	
-	el.get_node("EditorCamera").queue_free()
-	el.get_node("Editor").queue_free()
-	ui.add_child(HUD.instance())
-	#w.get_node("Juniper").enable()
-	w.get_node("Juniper/PlayerCamera").current = true
 
+	el.get_node("Editor").setup_level()
+	el.get_node("EditorCamera").current = true

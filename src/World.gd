@@ -192,7 +192,7 @@ func on_level_change(level, door_index):
 			#$Juniper.enable() TODO: we dont need to enable june for doors since he never is disabled. fix this enabling since it changes his state
 
 		######
-		if not already_enabled:
+		if not already_enabled and not $EditorLayer.has_node("Editor"): #TODO: this was causing issues with june enabling on editor load level (should stay in editor and stay disabled)
 			$Juniper.enable()
 			
 		if ui.has_node("LevelText"):

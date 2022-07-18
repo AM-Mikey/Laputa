@@ -76,7 +76,6 @@ func setup_level():
 	tile_map = tile_collection.get_child(0)
 	tile_set = w.current_level.tile_set
 	on_TileSet_tile_set_loaded(tile_set.resource_path) #so we can set every tile map to the tile set
-	
 	setup_level_limiter()
 	set_entities_pickable()
 	set_triggers_visible()
