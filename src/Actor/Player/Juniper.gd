@@ -23,6 +23,7 @@ var direction_lock = Vector2.ZERO
 
 var invincible = false
 var disabled = true
+var can_input = true
 #var inspecting = false
 
 #var is_on_conveyor = false
@@ -60,6 +61,7 @@ func _ready():
 
 func disable():
 	disabled = true
+	can_input = false
 	invincible = true
 	mm.can_bonk = false
 	mm.change_state("disabled")
@@ -72,7 +74,6 @@ func enable():
 		mm.change_state(mm.cached_state.name.to_lower())
 	else:
 		mm.change_state("run")
-
 
 
 ### ACTIONS

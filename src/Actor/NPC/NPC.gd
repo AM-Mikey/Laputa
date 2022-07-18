@@ -4,8 +4,8 @@ class_name NPC, "res://assets/Icon/NPCIcon.png"
 const DB = preload("res://src/Dialog/DialogBox.tscn")
 const STATE_LABEL = preload("res://src/Utility/StateLabel.tscn")
 
-var state: String
-#var cached_state: String
+var state: String #TODO: make npc states, player states and enemy states work the same
+var cached_state: String
 var talking = false
 var dialog_step: int = 1
 var branch: String = ""
@@ -173,7 +173,7 @@ func orient():
 	active_pc.look_dir.x = sign(position.x - active_pc.position.x)
 
 func on_dialog_finished():
-	change_state(active_pc.mm.cached_state.name.to_lower())
+	change_state(cached_state)
 	#talking = false
 
 ############################################################### TODO: clean up this old stuff \/

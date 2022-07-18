@@ -189,7 +189,7 @@ func on_level_change(level, door_index):
 			yield(get_tree().create_timer(0.4), "timeout")
 			$UILayer/TransitionIris.play_out_animation()
 			already_enabled = true
-			$Juniper.enable()
+			#$Juniper.enable() TODO: we dont need to enable june for doors since he never is disabled. fix this enabling since it changes his state
 
 		######
 		if not already_enabled:

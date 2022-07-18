@@ -22,8 +22,8 @@ func _on_body_exited(_body):
 
 
 func _input(event):
-	if event.is_action("inspect") and active_pc != null:
-		if not active_pc.disabled and active_pc.is_on_floor():
+	if event.is_action_pressed("inspect") and active_pc != null:
+		if active_pc.is_on_floor() and active_pc.can_input:
 			if not locked:
 				enter_door()
 			
@@ -37,8 +37,8 @@ func _input(event):
 
 
 func enter_door():
+	active_pc.can_input = false
 	active_pc.mm.change_state("inspect")
-	active_pc.disable()
 	active_pc.move_to(position)
 	
 	am.play("door")
@@ -50,5 +50,8 @@ func enter_door():
 	w.get_node("UILayer").add_child(transition)
 	
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")
-	#active_pc.inspecting = false
+	
+	print("door state start")
+	active_pc.mm.change_state("run")
+	active_pc.can_input = true
 	emit_signal("level_change", load(level), door_index)

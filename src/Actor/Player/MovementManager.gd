@@ -64,7 +64,7 @@ func change_state(new_state: String, do_cache_state = true):
 	if current_state:
 		if do_cache_state: cached_state = current_state
 		current_state.exit()
-	
+	print("changed state to " + new_state)
 	current_state = states[new_state]
 	current_state.enter()
 

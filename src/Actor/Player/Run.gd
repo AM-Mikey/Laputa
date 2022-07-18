@@ -76,22 +76,6 @@ func get_velocity():
 		
 	return out
 
-#		elif pc.direction_lock == Vector2.LEFT: #DIRECTION LOCKED LEFT
-#			pc.face_dir = Vector2.LEFT
-#
-#			if pc.is_on_floor():
-#				if get_input_dir().x == -1:
-#					ap.playback_speed = run_anim_speed
-#					next_animation = get_next_animation("Run", Vector2.LEFT, pc.is_on_ssp)
-#				elif get_input_dir().x == 1:
-#					ap.playback_speed = run_anim_speed
-#					next_animation = get_next_animation("Backrun", Vector2.RIGHT, pc.is_on_ssp)
-#				else:
-#					ap.playback_speed = 1
-#					match pc.inspecting:
-#						true: next_animation = get_next_animation("Reverseidle", pc.face_dir, true)
-#						false: next_animation = get_next_animation("Stand", pc.face_dir, pc.is_on_ssp)
-
 
 func animate():
 	var blend_time = 0

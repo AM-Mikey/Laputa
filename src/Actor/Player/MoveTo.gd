@@ -18,6 +18,7 @@ onready var anim = pc.get_node("AnimationManager")
 
 func state_process():
 	pc.move_dir.x = sign(mm.move_target.x - pc.position.x) #get direction to move
+	pc.look_dir.x = pc.move_dir.x
 
 	mm.velocity = get_velocity()
 	var new_velocity = pc.move_and_slide_with_snap(mm.velocity, mm.snap_vector, mm.FLOOR_NORMAL, true)
@@ -41,10 +42,12 @@ func state_process():
 
 	if abs(mm.move_target.x - pc.position.x) < 1: #when within one pixel
 		pc.move_dir.x = 0
-		if pc.disabled:
-			mm.change_state("disabled")
-		else:
-			mm.change_state("run")
+#		if pc.disabled:
+#			mm.change_state("disabled")
+#		else:
+		#mm.change_state("run")
+		print("moveto state clear")
+		mm.change_state(mm.cached_state.name.to_lower())
 
 
 
@@ -61,8 +64,6 @@ func animate():
 	var blend_time = 0
 	
 	var animation = "run"
-	if pc.direction_lock != Vector2.ZERO and pc.direction_lock.x != pc.move_dir.x:
-		animation = "back_run"
 	if pc.is_crouching:
 		animation = "crouch_run"
 	if pc.move_dir.x == 0: #abs(mm.velocity.x) < mm.min_x_velocity:
@@ -75,37 +76,19 @@ func animate():
 				blend_time = ap.current_animation_position #only blend certain animations
 		ap.play(animation)
 		ap.seek(blend_time)
-
 	
 	
 	var vframe: int
-	if pc.look_dir.x < 0: #left
+	if pc.move_dir.x < 0: #left
 		vframe = 0
 		gun_sprite.flip_h = false
 	else: #right
 		vframe = 4
 		gun_sprite.flip_h = true
-#		gun_sprite.position.x = gun_sprite.position.x + 8
-		
 	
 	
 	
-	
-	if pc.shoot_dir.y < 0: #up
-		vframe += 1
-
-		gun_sprite.rotation_degrees = 90 if not gun_sprite.flip_h else -90
-	elif pc.shoot_dir.y > 0: #down
-		vframe += 2
-
-		gun_sprite.rotation_degrees = -90 if not gun_sprite.flip_h else 90
-	elif pc.shoot_dir.y == 0 and pc.look_dir.y > 0: #look down, don't shoot down
-		vframe += 3
-		gun_sprite.rotation_degrees = 0
-	else:
-		gun_sprite.rotation_degrees = 0
-	
-	if animation == "run" or animation == "crouch_run" or animation == "back_run":
+	if animation == "run" or animation == "crouch_run":
 		ap.playback_speed = max((abs(mm.velocity.x)/mm.speed.x) * 2, 0.1)
 	else:
 		ap.playback_speed = 1
