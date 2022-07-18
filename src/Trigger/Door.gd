@@ -9,7 +9,7 @@ export var door_index: int = 0
 export var locked = false
 
 func _ready():
-	var _val = connect("level_change", w, "on_level_change") #TODO a better way of not returning this
+	var _err = connect("level_change", w, "on_level_change") #TODO a better way of not returning this
 	trigger_type = "door"
 	add_to_group("LevelTriggers")
 	add_to_group("Doors")

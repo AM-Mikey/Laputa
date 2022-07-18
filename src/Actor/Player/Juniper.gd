@@ -68,6 +68,7 @@ func disable():
 
 func enable():
 	disabled = false
+	can_input = true
 	invincible = false
 	mm.can_bonk = true
 	if mm.cached_state:

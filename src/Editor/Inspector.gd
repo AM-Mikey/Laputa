@@ -82,7 +82,10 @@ func display_data():
 					create_button(p["name"], active.get(p["name"]), p["type"])
 		"trigger":
 			for p in active.get_property_list():
-				if p["usage"] == 8199: #exported properties
+				if p["name"] == "level": #a trigger wants to load a level path
+					create_button("level", active.get("level"), "load")
+				
+				elif p["usage"] == 8199: #exported properties
 					create_button(p["name"], active.get(p["name"]), p["type"])
 		"level":
 			create_button("level_name", active.level_name, "string")
@@ -138,6 +141,12 @@ func on_property_selected(property_name):
 				"dialog_json":
 					$FileDialog.current_dir = "res://src/Dialog/"
 					$FileDialog.set_filters(PoolStringArray(["*.json"]))
+					$FileDialog.popup()
+		"trigger":
+			match property_name:
+				"level":
+					$FileDialog.current_dir = "res://src/Level/"
+					$FileDialog.set_filters(PoolStringArray(["*.tscn"]))
 					$FileDialog.popup()
 
 
