@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Normal.png-45eb0ab0ae8c30aaa783e36c16e8112d.stex"
+path="res://.import/VillageMinimal2.png-5aba2ef7b9f575c6fd7deff34001ff85.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/Utility/Normal.png"
-dest_files=[ "res://.import/Normal.png-45eb0ab0ae8c30aaa783e36c16e8112d.stex" ]
+source_file="res://assets/Tile/VillageMinimal2.png"
+dest_files=[ "res://.import/VillageMinimal2.png-5aba2ef7b9f575c6fd7deff34001ff85.stex" ]
 
 [params]
 

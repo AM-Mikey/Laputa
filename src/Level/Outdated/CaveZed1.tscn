@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://src/Tile/TriggerTile/WaterTrigger.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Tile/PropTile/BreakableProp.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Tile/Outdated/TriggerTile/WaterTrigger.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Tile/Outdated/PropTile/BreakableProp.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Tile/DebugBackground.tres" type="TileSet" id=3]
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=5]
@@ -11,9 +11,9 @@
 [ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=10]
 [ext_resource path="res://src/Utility/PlayerCameraDummy.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/Tile/TriggerTile/SpikesTrigger.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/Tile/Outdated/TriggerTile/SpikesTrigger.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/Tile/DebugTile.tres" type="TileSet" id=13]
-[ext_resource path="res://src/Tile/TriggerTile/Outdated/SemiSolidTrigger.tscn" type="PackedScene" id=18]
+[ext_resource path="res://src/Tile/Outdated/TriggerTile/Outdated/SemiSolidTrigger.tscn" type="PackedScene" id=18]
 
 
 

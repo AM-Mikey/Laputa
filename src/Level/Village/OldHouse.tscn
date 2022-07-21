@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Tile/TriggerTile/LadderTrigger.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Tile/Outdated/TriggerTile/LadderTrigger.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Tile/VillageInterior.tres" type="TileSet" id=4]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
 [ext_resource path="res://src/Tile/Outdated/Layers/Outdated/SSP.tscn" type="PackedScene" id=6]

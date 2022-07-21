@@ -5,7 +5,7 @@ var idle_time = 2
 var fly_speed = Vector2(100, 100)
 
 func _ready():
-	state = "idle"
+	change_state("idle")
 	hp = 4
 	reward = 2
 	damage_on_contact = 2

@@ -30,7 +30,8 @@ func _input(event):
 	
 	if event.is_action_pressed("debug_print"):
 		debug_print()
-	
+
+
 	if event.is_action_pressed("debug_reload"):
 		if el.has_node("Editor"):
 			el.get_node("Editor").disabled = true
@@ -39,18 +40,17 @@ func _input(event):
 		if el.has_node("Editor"):
 			el.get_node("Editor").setup_level()
 			el.get_node("Editor").disabled = false
-			
+
 
 	if event.is_action_pressed("debug_triggers"):
-		world.visible_triggers = !world.visible_triggers
-		print("visible triggers == " + String(world.visible_triggers))
-		for v in get_tree().get_nodes_in_group("TriggerVisuals"):
-			v.visible = world.visible_triggers
+		world.set_debug_visible()
+
 
 	if event.is_action_pressed("debug_quit"):
 		if not el.has_node("Editor"):
 			print("quitting...")
 			get_tree().quit()
+
 
 	if event.is_action_pressed("debug_save"):
 		var popup = POPUP.instance()
@@ -59,6 +59,7 @@ func _input(event):
 		world.write_level_data_to_temp()
 		world.write_player_data_to_save()
 		world.copy_level_data_from_temp_to_save()
+
 
 	if event.is_action_pressed("debug_load"):
 		var popup = POPUP.instance()

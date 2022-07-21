@@ -232,9 +232,6 @@ tracks/1/keys = {
 
 [node name="TransitionWipe" type="Control"]
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 288.0

@@ -1,14 +1,15 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/Tile/PropTile/GrassProp.png" type="Texture" id=1]
-[ext_resource path="res://src/Tile/PropTile/GrassProp.gd" type="Script" id=2]
+[ext_resource path="res://assets/Tile/TriggerTile/WaterTrigger.png" type="Texture" id=1]
+[ext_resource path="res://src/Tile/Outdated/TriggerTile/WaterTrigger.gd" type="Script" id=2]
+
 
 [sub_resource type="TileSet" id=1]
-0/name = "GrassProp.png 0"
+0/name = "WaterTrigger.png 0"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 16, 32 )
+0/region = Rect2( 0, 0, 16, 16 )
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
@@ -19,7 +20,8 @@
 0/shapes = [  ]
 0/z_index = 0
 
-[node name="GrassProp" type="TileMap"]
+[node name="WaterTrigger" type="TileMap"]
+z_index = 100
 tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 0

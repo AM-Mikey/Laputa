@@ -14,4 +14,4 @@ func _ready():
 		rect_position = col.position - col.shape.extents
 		rect_size = col.shape.extents * 2
 	
-	visible = world.visible_triggers
+	visible = world.debug_visible

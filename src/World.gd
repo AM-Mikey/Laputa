@@ -26,7 +26,7 @@ var internal_version: String = get_internal_version()
 export var release_version: String
 export var is_release = false
 export var do_skip_title = false
-export var visible_triggers = false
+export var debug_visible = false
 export var show_state_labels = false ###############################################
 
 export var start_level: PackedScene
@@ -77,7 +77,13 @@ func get_internal_version() -> String:
 	
 
 
-
+func set_debug_visible(visible = !debug_visible): #makes triggers and visutils visible
+	debug_visible = visible
+	for t in get_tree().get_nodes_in_group("TriggerVisuals"):
+		t.visible = visible
+	for u in get_tree().get_nodes_in_group("VisualUtilities"):
+		u.visible = visible
+	print("debug_visible == " + String(debug_visible))
 
 func skip_title():
 	on_level_change(start_level, 0)

@@ -7,6 +7,7 @@ const BLOOD = preload("res://src/Effect/EnemyBloodEffect.tscn")
 const HEART = preload("res://src/Actor/Pickup/Heart.tscn")
 const EXPERIENCE = preload("res://src/Actor/Pickup/Experience.tscn")
 const AMMO = preload("res://src/Actor/Pickup/Ammo.tscn")
+const STATE_LABEL = preload("res://src/Utility/StateLabel.tscn")
 
 var state: String 
 
@@ -31,7 +32,9 @@ var ammo_chance = 1
 var camera_forgiveness_distance = 64
 var free_counter = 0
 
+onready var w = get_tree().get_root().get_node("World")
 onready var pc = get_tree().get_root().get_node_or_null("World/Juniper")
+
 
 
 
@@ -44,11 +47,14 @@ func _ready():
 	timer.connect("timeout", self, "_on_DamagenumTimer_timeout")
 	add_child(timer)
 	
+	var state
+	add_child(STATE_LABEL.instance())
+	
 	if not is_in_group("EnemyPreviews"):
 		yield(get_tree(), "idle_frame")
-		if state != "": #TODO: this prevents enemies from starting in a state if we dont yield? we get ton of errors if we dont because we delete the enemy when moving it
+		if state != "" and state != null: #TODO: this prevents enemies from starting in a state if we dont yield? we get ton of errors if we dont because we delete the enemy when moving it
 			change_state(state)
-	
+
 
 func disable():
 	disabled = true
@@ -62,6 +68,8 @@ func _physics_process(_delta):
 		return
 	if state != "":
 		do_state()
+	if debug:
+		$StateLabel.text = state
 
 
 

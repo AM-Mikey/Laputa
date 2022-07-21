@@ -78,7 +78,7 @@ func setup_level():
 	on_TileSet_tile_set_loaded(tile_set.resource_path) #so we can set every tile map to the tile set
 	setup_level_limiter()
 	set_entities_pickable()
-	set_triggers_visible()
+	w.set_debug_visible(true)
 	move_actors_to_home()
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		s.visible = true
@@ -90,10 +90,6 @@ func move_actors_to_home():
 	for a in actor_collection.get_children():
 		a.global_position = a.home
 
-func set_triggers_visible(visible = true):
-	w.visible_triggers = visible
-	for v in get_tree().get_nodes_in_group("TriggerVisuals"):
-		v.visible = w.visible_triggers
 
 func set_entities_pickable(pickable = true):
 	for a in actor_collection.get_children():
@@ -124,7 +120,7 @@ func exit():
 		if a.has_method("enable"):
 			a.enable()
 	set_entities_pickable(false)
-	set_triggers_visible(false)
+	w.set_debug_visible(false)
 	move_actors_to_home()
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		s.visible = false

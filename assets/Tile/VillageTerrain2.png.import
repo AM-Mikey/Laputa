@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Behemoth.png-c988c2a8d709b84a0c70e4bb6025c8fc.stex"
+path="res://.import/VillageTerrain2.png-180afa6749e8994e6b72af7b5cf36173.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Enemy/Outdated/Behemoth.png"
-dest_files=[ "res://.import/Behemoth.png-c988c2a8d709b84a0c70e4bb6025c8fc.stex" ]
+source_file="res://assets/Tile/VillageTerrain2.png"
+dest_files=[ "res://.import/VillageTerrain2.png-180afa6749e8994e6b72af7b5cf36173.stex" ]
 
 [params]
 

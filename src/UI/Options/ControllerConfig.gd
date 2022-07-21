@@ -61,7 +61,7 @@ func _setup_action_options():
 #						print("e.button_index : " + str(e.button_index))
 #						print("button_dict[o.name] : " + str(button_dict[o.name]))
 						if e.button_index == button_dict[o.name]:
-							print("YAHOO: " + o.name)
+							#print("YAHOO: " + o.name)
 							o.modulate = Color.aqua
 							o.select(action_dict.keys().find(a))
 #							o.selected = action_dict.keys().find(a)

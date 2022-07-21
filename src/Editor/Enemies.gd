@@ -8,6 +8,7 @@ var icon = "res://assets/Icon/EnemyIcon.png"
 var enemies = {}
 var active_enemy_path
 
+
 onready var editor = get_parent().get_parent().get_parent()
 
 func _ready():
