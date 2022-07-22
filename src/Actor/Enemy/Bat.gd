@@ -9,6 +9,7 @@ var can_flap = false
 
 var waypoints = {}
 export var start_waypoint := 0
+var aggro_waypoint = null
 var current_waypoint := 0
 var target_tolerance = 2
 
@@ -22,6 +23,7 @@ onready var target_pos = position
 onready var ap = $AnimationPlayer
 
 func _ready():
+	if disabled: return
 	change_state("idle")
 	hp = 4
 	reward = 2
@@ -33,7 +35,7 @@ func _ready():
 
 func find_waypoints():
 	for w in get_tree().get_nodes_in_group("Waypoints"):
-		if w.owner_id == id:
+		if w.owner_id == id and w.index != -1: #dont include the aggro waypoint
 			waypoints[w.index] = w
 	set_target(start_waypoint)
 
@@ -41,7 +43,10 @@ func find_waypoints():
 func set_target(index: int):
 	if target != null:
 		target.deactivate()
-	target = waypoints[index]
+	if index == -1:
+		target = aggro_waypoint
+	else:
+		target = waypoints[index]
 	target.activate()
 	target_pos = target.position
 	$BailTimer.start(bail_time)
@@ -50,7 +55,7 @@ func set_target(index: int):
 func _physics_process(_delta):
 	if disabled or dead: return
 	#target_pos = w.get_global_mouse_position()
-	velocity = get_custom_velocity(velocity, move_dir, speed)
+	velocity = get_velocity(velocity, move_dir, speed)
 	velocity = move_and_slide(velocity, FLOOR_NORMAL)
 	
 	if aggro:
@@ -61,15 +66,15 @@ func _physics_process(_delta):
 		$RayCast2D.cast_to = player_from_self
 		
 		if $RayCast2D.get_collider() == null:
-			for w in get_tree().get_nodes_in_group("Waypoints"):
-				if w.owner_id == id and w.index == -1:
-					w.queue_free()
+			if aggro_waypoint != null:
+				aggro_waypoint.queue_free()
+				aggro_waypoint = null
 			var waypoint = WAYPOINT.instance()
 			waypoint.position = position + player_from_self #world pos of raycast
-#			waypoint.owner_id = id #TODO: breaks if we have no id
-#			waypoint.index = -1
+			waypoint.owner_id = id
+			waypoint.index = -1
 			world.current_level.add_child(waypoint)
-			waypoints[-1] = waypoint
+			aggro_waypoint = waypoint
 			set_target(-1)
 			
 	
@@ -81,16 +86,18 @@ func _physics_process(_delta):
 func get_next_index(last_index) -> int:
 	var next_index
 	
-	if waypoints.has(-1):
-		waypoints[-1].queue_free()
-		waypoints.erase(-1) #get rid of aggro waypoint here
+	if last_index == -1:
+		aggro_waypoint.queue_free()
+		aggro_waypoint = null
+		next_index = start_waypoint
 	
-	var indexes = waypoints.keys()
-	var array_pos = indexes.find(last_index)
-	if array_pos != indexes.size() - 1: #not last position in array
-		next_index = indexes[array_pos + 1]
-	else:
-		next_index = indexes.front()
+	else: #normal
+		var indexes = waypoints.keys()
+		var array_pos = indexes.find(last_index)
+		if array_pos != indexes.size() - 1: #not last position in array
+			next_index = indexes[array_pos + 1]
+		else:
+			next_index = indexes.front()
 	
 	return next_index
 
@@ -105,7 +112,7 @@ func enter_idle():
 	move_dir = Vector2(lerp(move_dir.x, x_dir, 0.2), 0)
 		
 	$Sprite.flip_h = x_dir > 0
-	ap.play("UnflapAggro") if waypoints.has(-1) else ap.play("Unflap")
+	ap.play("UnflapAggro") if aggro_waypoint else ap.play("Unflap")
 	yield(get_tree().create_timer(idle_time), "timeout")
 	can_flap = true
 
@@ -124,23 +131,11 @@ func enter_flap():
 	move_dir = Vector2(lerp(move_dir.x, x_dir, 0.2), -1)
 		
 	$Sprite.flip_h = x_dir > 0
-	ap.play("FlapAggro") if waypoints.has(-1) else ap.play("Flap")
+	ap.play("FlapAggro") if aggro_waypoint else ap.play("Flap")
 	yield(get_tree().create_timer(flap_time), "timeout")
 	change_state("idle")
 
 
-
-func get_custom_velocity(velocity: Vector2, move_dir, speed, do_gravity = true) -> Vector2:
-	var out: = velocity
-	out.x = speed.x * move_dir.x
-	if do_gravity:
-		out.y += gravity * get_physics_process_delta_time()
-		if move_dir.y < 0:
-			out.y = speed.y * move_dir.y
-	else:
-		out.y = speed.y * move_dir.y
-		
-	return out
 
 
 
