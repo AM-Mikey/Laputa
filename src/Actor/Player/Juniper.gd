@@ -13,8 +13,8 @@ signal total_xp_updated(total_xp)
 signal guns_updated(guns)
 
 
-export var hp: int = 8
-export var max_hp: int = 8
+export var hp: int = 16
+export var max_hp: int = 16
 var total_xp: int = 0
 
 

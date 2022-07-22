@@ -142,6 +142,10 @@ position = Vector2( 152, 160 )
 position = Vector2( 296, 160 )
 id = "bat"
 
+[node name="Bat2" parent="Actors" instance=ExtResource( 8 )]
+position = Vector2( 176, 72 )
+id = "bat"
+
 [node name="Triggers" type="Node2D" parent="."]
 
 [node name="Door" parent="Triggers" instance=ExtResource( 3 )]
@@ -176,7 +180,7 @@ position = Vector2( 256, 128 )
 owner_id = "bat"
 
 [node name="Waypoint2" parent="." instance=ExtResource( 10 )]
-position = Vector2( 200, 160 )
+position = Vector2( 192, 160 )
 owner_id = "bat"
 index = 1
 
@@ -199,3 +203,22 @@ index = 5
 position = Vector2( 241, 104 )
 owner_id = "bat"
 index = 2
+
+[node name="Waypoint7" parent="." instance=ExtResource( 10 )]
+position = Vector2( 128, 80 )
+owner_id = "bat2"
+
+[node name="Waypoint8" parent="." instance=ExtResource( 10 )]
+position = Vector2( -16, 96 )
+owner_id = "bat2"
+index = 1
+
+[node name="Waypoint9" parent="." instance=ExtResource( 10 )]
+position = Vector2( 120, 40 )
+owner_id = "bat2"
+index = 2
+
+[node name="Waypoint10" parent="." instance=ExtResource( 10 )]
+position = Vector2( 360, 96 )
+owner_id = "bat2"
+index = 3
