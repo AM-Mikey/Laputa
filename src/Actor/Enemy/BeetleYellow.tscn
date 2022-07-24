@@ -57,6 +57,9 @@ collision_mask = 8
 script = ExtResource( 1 )
 editor_hidden = true
 speed = Vector2( 150, 150 )
+gravity = null
+ground_cof = null
+air_cof = null
 sight_distance = 1000.0
 is_debug = true
 

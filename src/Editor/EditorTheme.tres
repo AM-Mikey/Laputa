@@ -105,6 +105,7 @@ Label/constants/shadow_as_outline = 0
 Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
 Label/fonts/font = ExtResource( 21 )
+LineEdit/constants/minimum_spaces = 4
 LineEdit/styles/focus = ExtResource( 2 )
 LineEdit/styles/normal = ExtResource( 2 )
 LineEdit/styles/read_only = ExtResource( 2 )

@@ -140,11 +140,20 @@ position = Vector2( 152, 160 )
 
 [node name="Bat" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 296, 160 )
+speed = Vector2( 100, 50 )
 id = "bat"
+move_dir = Vector2( -0.292433, 0 )
 
 [node name="Bat2" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 176, 72 )
+speed = Vector2( 100, 50 )
 id = "bat"
+move_dir = Vector2( -0.0364061, 0 )
+
+[node name="@Bat@2414" parent="Actors" instance=ExtResource( 8 )]
+modulate = Color( 2, 2, 2, 1 )
+position = Vector2( 344, 48 )
+speed = Vector2( 100, 50 )
 
 [node name="Triggers" type="Node2D" parent="."]
 
@@ -185,6 +194,7 @@ owner_id = "bat"
 index = 1
 
 [node name="Waypoint3" parent="." instance=ExtResource( 10 )]
+modulate = Color( 0.545098, 0, 0, 1 )
 position = Vector2( 280, 64 )
 owner_id = "bat"
 index = 3

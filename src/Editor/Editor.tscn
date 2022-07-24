@@ -112,10 +112,10 @@ margin_left = 16.0
 margin_right = -16.0
 margin_bottom = -16.0
 
-[node name="Props" parent="Main/Tab" instance=ExtResource( 9 )]
+[node name="NPCs" parent="Main/Tab" instance=ExtResource( 10 )]
 visible = false
 
-[node name="NPCs" parent="Main/Tab" instance=ExtResource( 10 )]
+[node name="Props" parent="Main/Tab" instance=ExtResource( 9 )]
 visible = false
 
 [node name="Triggers" parent="Main/Tab" instance=ExtResource( 11 )]

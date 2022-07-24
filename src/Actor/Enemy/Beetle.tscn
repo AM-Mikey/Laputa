@@ -46,6 +46,9 @@ collision_mask = 8
 script = ExtResource( 3 )
 editor_hidden = true
 speed = Vector2( 150, 150 )
+gravity = null
+ground_cof = null
+air_cof = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -4 )

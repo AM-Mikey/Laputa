@@ -63,10 +63,11 @@ func _ready():
 
 func setup_level():
 	#emit_signal("level_selected", w.current_level)
+	#get_tree().paused = true
 	w.get_node("Juniper").disable()
 	ui.get_node("HUD").queue_free()
 	for a in get_tree().get_nodes_in_group("Actors"):
-		if a.has_method("disable"):
+		if a.has_method("disable"): #TODO TODO:, better way of doing this and resetting vars at the same time
 			a.disable()
 	tile_collection = w.current_level.get_node("Tiles")
 	actor_collection = w.current_level.get_node("Actors")
@@ -108,6 +109,7 @@ func setup_level_limiter():
 	level_layer.add_child(editor_level_limiter)
 
 func exit():
+	#get_tree().paused = false
 	inspector.exit()
 	
 	hide_preview() #delete tile brush preview

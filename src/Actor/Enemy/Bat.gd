@@ -37,7 +37,8 @@ func find_waypoints():
 	for w in get_tree().get_nodes_in_group("Waypoints"):
 		if w.owner_id == id and w.index != -1: #dont include the aggro waypoint
 			waypoints[w.index] = w
-	set_target(start_waypoint)
+	if not waypoints.empty():
+		set_target(start_waypoint)
 
 
 func set_target(index: int):
@@ -66,7 +67,7 @@ func _physics_process(_delta):
 		$RayCast2D.cast_to = player_from_self
 		
 		if $RayCast2D.get_collider() == null:
-			if aggro_waypoint != null:
+			if aggro_waypoint:
 				aggro_waypoint.queue_free()
 				aggro_waypoint = null
 			var waypoint = WAYPOINT.instance()
@@ -80,7 +81,8 @@ func _physics_process(_delta):
 	
 	if target:
 		if abs(target_pos.x - position.x) < target_tolerance and abs(target_pos.y - position.y) < target_tolerance:
-			set_target(get_next_index(target.index))
+			if not waypoints.empty(): #no target
+				set_target(get_next_index(target.index))
 
 
 func get_next_index(last_index) -> int:
@@ -149,4 +151,8 @@ func _on_PlayerDetector_body_exited(body):
 
 
 func _on_BailTimer_timeout():
-	set_target(get_next_index(target.index))
+	if waypoints.empty(): #no target
+		aggro_waypoint.queue_free()
+		aggro_waypoint = null
+	else:
+		set_target(get_next_index(target.index))
