@@ -48,13 +48,13 @@ func _on_CollisionDetector_body_entered(body):
 			body.hit(damage, blood_direction)
 			queue_free()
 		elif body.get_collision_layer_bit(3): #world
-			_fizzle_from_world()
+			fizzle("world")
 
 
 func on_break(method):
 	if disabled == false:
 		print("destroyed hairball")
-		_fizzle_from_world()
+		fizzle("bullet")
 
 
 

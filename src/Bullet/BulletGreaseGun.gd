@@ -4,15 +4,11 @@ var texture: StreamTexture
 var texture_index: int
 var collision_shape: RectangleShape2D
 
-var velocity = Vector2.ZERO
-var direction = Vector2.ZERO
 var projectile_speed = Vector2.ZERO
 
 var projectile_range: int
 var max_spread_distance = 7
 var recoil_velocity = 40
-
-var origin = Vector2.ZERO
 
 var rng = RandomNumberGenerator.new()
 
@@ -48,4 +44,4 @@ func _physics_process(_delta):
 		move_and_slide(velocity)
 		var distance_from_origin = origin.distance_to(global_position);
 		if distance_from_origin > projectile_range:
-			_fizzle_from_range()
+			fizzle("range")

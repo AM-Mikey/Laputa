@@ -27,4 +27,4 @@ func _physics_process(_delta):
 		var _after_slide_velo = move_and_slide(velocity)
 		var distance_from_origin = origin.distance_to(global_position);
 		if distance_from_origin > f_range:
-			_fizzle_from_range()
+			fizzle("range")

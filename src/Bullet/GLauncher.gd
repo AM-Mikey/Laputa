@@ -4,7 +4,6 @@ var texture: StreamTexture
 var texture_index: int
 var collision_shape: RectangleShape2D
 
-
 var minimum_speed: float = 6
 var bounciness = .6
 var explosion_time = 2.5

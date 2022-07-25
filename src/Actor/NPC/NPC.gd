@@ -121,8 +121,6 @@ func enter_wait():
 	change_state("walk")
 
 
-#func do_wait():
-	
 
 func _physics_process(_delta):
 	if disabled:

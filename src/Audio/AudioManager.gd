@@ -36,7 +36,11 @@ export var sfx_dict: Dictionary = {
 	"gun_shotgun": preload("res://assets/SFX/Placeholder/snd_missile_hit.ogg"),
 	"gun_grenade": preload("res://assets/SFX/Placeholder/snd_expl_small.ogg"),
 	"gun_grenade_bounce": preload("res://assets/SFX/Placeholder/snd_thud.ogg"),
-
+	
+	"bullet_thud": preload("res://assets/SFX/Placeholder/snd_shot_hit.ogg"),
+	"bullet_clink": preload("res://assets/SFX/Placeholder/snd_shot_bounce.ogg"),
+	"bullet_destroy" : preload("res://assets/SFX/Placeholder/snd_expl_small.ogg"),
+	
 	"get_hp": preload("res://assets/SFX/Placeholder/snd_health_refill.ogg"),
 	"xp": preload("res://assets/SFX/Placeholder/snd_xp_bounce.ogg"),
 	"get_xp": preload("res://assets/SFX/Placeholder/snd_get_xp.ogg"),

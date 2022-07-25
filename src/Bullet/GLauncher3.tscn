@@ -56,14 +56,14 @@ shape = SubResource( 1 )
 
 [node name="CollisionDetector" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 291
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
 shape = SubResource( 2 )
 
 [node name="ExplosionDetector" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 259
+collision_mask = 291
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionDetector"]
 shape = SubResource( 3 )

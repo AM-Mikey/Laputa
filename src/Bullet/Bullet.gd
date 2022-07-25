@@ -2,8 +2,7 @@ extends KinematicBody2D
 
 class_name Bullet, "res://assets/Icon/BulletIcon.png"
 
-const STARPOP = preload("res://src/Effect/StarPop.tscn")
-const RICOCHET = preload("res://src/Effect/Ricochet.tscn")
+const FIZZLE = preload("res://src/Effect/BulletFizzle.tscn")
 
 var disabled = false
 var gravity = 300
@@ -29,31 +28,27 @@ func _ready():
 		add_child(vis)
 		vis.connect("viewport_exited", self, "on_viewport_exit")
 
+### FIZZLE ###
 
-func _fizzle_from_world():
-	var ricochet = RICOCHET.instance()
-	world.get_node("Middle").add_child(ricochet)
-	if has_node("End"): ricochet.position = $End.global_position
-	else: ricochet.position = global_position
+func fizzle(type: String):
+	var fizzle = FIZZLE.instance()
+	fizzle.type = type.to_lower()
+	world.get_node("Middle").add_child(fizzle)
+	if has_node("End"): fizzle.position = $End.global_position
+	else: fizzle.position = global_position
 	queue_free()
 
-func _fizzle_from_range():
-	var star_pop = STARPOP.instance()
-	world.get_node("Middle").add_child(star_pop)
-	star_pop.position = global_position
-	queue_free()
+### SIGNALS ###
 
 func on_viewport_exit(_viewport):
 	queue_free()
 
-
 func _on_CollisionDetector_body_entered(body):
-	print("body entered")
+	#print("body entered")
 	if not disabled and default_body_collision:
 		if body.get_collision_layer_bit(8): #breakable
 			body.on_break(break_method)
-			print("break")
-
+			print("breaking via method:" + break_method)
 
 		elif body.get_collision_layer_bit(1): #enemy
 			yield(get_tree(), "idle_frame")
@@ -61,15 +56,19 @@ func _on_CollisionDetector_body_entered(body):
 			body.hit(damage, blood_direction)
 			queue_free()
 	
-		if body.get_collision_layer_bit(3): #world
-			_fizzle_from_world()
+		elif body.get_collision_layer_bit(3): #world
+			fizzle("world")
+		elif body.get_collision_layer_bit(5): #armor
+			fizzle("armor")
 
 
 #used for animated grass at the moment
 func _on_CollisionDetector_area_entered(area):
 	if not disabled and default_area_collision:
 		if area.get_collision_layer_bit(8): #breakable
-				print("entered breakable")
 				area.on_break(break_method)
+				print("breaking via method:" + break_method)
 		elif area.get_collision_layer_bit(3): #world
-			_fizzle_from_world()
+			fizzle("world")
+		elif area.get_collision_layer_bit(5): #armor
+			fizzle("armor")
