@@ -7,12 +7,12 @@
 extents = Vector2( 24, 16 )
 
 [node name="BulletShotgun1" type="KinematicBody2D"]
-collision_layer = 0
+collision_layer = 64
 collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="CollisionDetector" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 64
 collision_mask = 298
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]

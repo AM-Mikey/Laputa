@@ -85,13 +85,11 @@ jump_height = 9
 position = Vector2( 600, 363909 )
 input_pickable = true
 speed = Vector2( 100, 200 )
-gravity = 250
 
 [node name="Trenchie2" parent="Actors" instance=ExtResource( 15 )]
 position = Vector2( 696, 363877 )
 input_pickable = true
 speed = Vector2( 100, 200 )
-gravity = 250
 
 [node name="Triggers" type="Node2D" parent="."]
 position = Vector2( 1, 0 )

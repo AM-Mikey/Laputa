@@ -1,6 +1,7 @@
 extends Enemy
 
 export var move_dir = Vector2.LEFT
+export var defend_time = 0.4
 
 onready var ap = $AnimationPlayer
 onready var bb = $BulletBlocker
@@ -13,9 +14,11 @@ func _ready():
 	damage_on_contact = 2
 	speed = Vector2(50, 50)
 
+func bb(state: bool):
+	bb.monitoring = state
+	bb.monitorable = state
 
-func enter_defend():
-	pass
+### STATES ###
 
 func enter_walk():
 	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
@@ -26,18 +29,17 @@ func enter_walk():
 	match move_dir:
 		Vector2.LEFT: 
 			ap.play("WalkLeft")
-			#bb.scale.x = 1
-			collision_layer = 32 #shield
+			bb(true)
+			#collision_layer = 32 #shield
 		Vector2.RIGHT: 
 			ap.play("WalkRight")
-			#bb.scale.x = -1
-			collision_layer = 2 #enemy
+			bb(false)
+			#collision_layer = 2 #enemy
 	
 	rng.randomize()
 	$StateTimer.start(rng.randf_range(1.0, 10.0))
 	yield($StateTimer, "timeout")
 	change_state("idle")
-
 
 func do_walk():
 	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
@@ -48,18 +50,38 @@ func do_walk():
 		velocity = get_velocity(velocity, move_dir, speed)
 		velocity = move_and_slide(velocity, FLOOR_NORMAL)
 
+
 func enter_idle():
 	rng.randomize()
 	match move_dir:
 		Vector2.LEFT: 
 			ap.play("IdleLeft")
-			#bb.scale.x = 1
-			collision_layer = 32 #shield
+			bb(true)
+			#collision_layer = 32 #shield
 		Vector2.RIGHT:
 			ap.play("IdleRight")
-			#bb.scale.x = -1
-			collision_layer = 2 #enemy
+			bb(false)
+			#collision_layer = 2 #enemy
 	$StateTimer.start(rng.randf_range(1.0, 5.0))
 	yield($StateTimer, "timeout")
 	change_state("walk")
 
+
+func enter_defend():
+	ap.play("IdleLeft")
+	$StateTimer.start(defend_time)
+	yield($StateTimer, "timeout")
+	change_state("walk")
+
+### SIGNALS ###
+
+func _on_BulletBlocker_body_entered(body):
+	print("dasasdasdas")
+	if body.get_collision_layer_bit(6): #bullet
+		if move_dir == Vector2.LEFT:
+			change_state("defend")
+
+func _on_BulletBlocker_area_entered(area):
+	if area.get_collision_layer_bit(6): #bullet
+		if move_dir == Vector2.LEFT:
+			change_state("defend")

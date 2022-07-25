@@ -3,6 +3,9 @@
 [ext_resource path="res://src/Actor/Enemy/Shield.gd" type="Script" id=1]
 [ext_resource path="res://assets/Actor/Enemy/Shield.png" type="Texture" id=3]
 
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 8, 10.5 )
+
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 9 )
 
@@ -74,14 +77,20 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 5 ]
 }
 
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 1, 9 )
-
 [node name="Shield" type="KinematicBody2D"]
 collision_layer = 2
 collision_mask = 8
 script = ExtResource( 1 )
 debug = true
+
+[node name="BulletBlocker" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 64
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletBlocker"]
+position = Vector2( 0, -9.5 )
+shape = SubResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -9 )
@@ -114,14 +123,8 @@ cast_to = Vector2( 0, 8 )
 collision_mask = 8
 collide_with_areas = true
 
-[node name="BulletBlocker" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletBlocker"]
-position = Vector2( -8, -9 )
-shape = SubResource( 10 )
-
 [node name="StateTimer" type="Timer" parent="."]
 one_shot = true
+
+[connection signal="area_entered" from="BulletBlocker" to="." method="_on_BulletBlocker_area_entered"]
+[connection signal="body_entered" from="BulletBlocker" to="." method="_on_BulletBlocker_body_entered"]

@@ -164,21 +164,18 @@ position = Vector2( 720, 192 )
 [node name="Door" parent="Triggers" instance=ExtResource( 3 )]
 position = Vector2( 440, 192 )
 z_index = 100
-collision_layer = 32
 input_pickable = false
 level = "res://src/Level/lillevel.tscn"
 
 [node name="FlavorText" parent="Triggers" instance=ExtResource( 7 )]
 position = Vector2( 360, 192 )
 z_index = 100
-collision_layer = 32
 input_pickable = false
 text = "testing"
 
 [node name="LoadZone" parent="Triggers" instance=ExtResource( 28 )]
 position = Vector2( 840, 192 )
 z_index = 100
-collision_layer = 32
 input_pickable = false
 level = "res://src/Level/Bridge2.tscn"
 

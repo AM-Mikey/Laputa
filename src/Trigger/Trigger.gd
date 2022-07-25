@@ -16,7 +16,6 @@ onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
 	add_to_group("Triggers")
-	collision_layer = 32 #trigger
 	
 	var visual = TRIGGER_VISUAL.instance()
 	visual.name = "Visual"
