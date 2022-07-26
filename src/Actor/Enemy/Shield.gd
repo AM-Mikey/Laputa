@@ -1,6 +1,8 @@
 extends Enemy
 
 export var move_dir = Vector2.LEFT
+export var idle_max_time = 5.0
+export var walk_max_time = 10.0
 export var defend_time = 0.4
 
 onready var ap = $AnimationPlayer
@@ -37,7 +39,7 @@ func enter_walk():
 			#collision_layer = 2 #enemy
 	
 	rng.randomize()
-	$StateTimer.start(rng.randf_range(1.0, 10.0))
+	$StateTimer.start(rng.randf_range(1.0, walk_max_time))
 	yield($StateTimer, "timeout")
 	change_state("idle")
 
@@ -62,7 +64,7 @@ func enter_idle():
 			ap.play("IdleRight")
 			bb(false)
 			#collision_layer = 2 #enemy
-	$StateTimer.start(rng.randf_range(1.0, 5.0))
+	$StateTimer.start(rng.randf_range(1.0, idle_max_time))
 	yield($StateTimer, "timeout")
 	change_state("walk")
 

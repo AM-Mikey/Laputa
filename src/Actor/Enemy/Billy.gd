@@ -1,168 +1,143 @@
 extends Enemy
 
-export var look_dir: Vector2 = Vector2.LEFT
-var move_dir: Vector2
-
 const SEED = preload("res://src/Bullet/Enemy/Seed.tscn")
+const WAYPOINT = preload("res://src/Utility/Waypoint.tscn")
 
-export var height_tolerance = 7
+export var move_dir = Vector2.LEFT
+export var look_dir = Vector2.LEFT
+
+export var idle_max_time = 5.0
+export var walk_max_time = 10.0
+export var defend_time = 0.4
+
+
+
 export var cooldown_time = 1
-export var projectile_speed: int = 200
-export var projectile_damage: int = 2
+export var bullet_speed: int = 200
+export var bullet_damage: int = 2
 
 
 export var lock_distance = 128
 export var lock_tolerance = 16
 
-var target: Node = null
+var target: Node
 var locked_on = false
-
-
 var shooting = false
+
+var waypoint
+
+onready var ap = $AnimationPlayer
 
 
 func _ready():
-	hp = 4
+	if disabled: return
+	change_state("walk")
+	hp = 6
+	reward = 2
 	damage_on_contact = 1
-	speed = Vector2(50, 200)
-	gravity = 250
-	
-	$FireCooldown.start(cooldown_time)
-	
+	speed = Vector2(50, 50)
 
-func _physics_process(_delta):
-	if disabled or dead:
-		return
-		
-	if locked_on:
-		distance_lock()
-		if move_dir.x == 0: #in position to hit
-			fire()
-	else:
-		move_dir.x = 0
+
+
+
+### STATES ###
+
+func enter_walk():
+	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
+		move_dir = Vector2.RIGHT
+	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
+		move_dir = Vector2.LEFT
 	
-	velocity = calculate_movevelocity(velocity, move_dir, speed)
+	ap.play("Walk")
+	
+	match move_dir:
+		Vector2.LEFT: $Sprite.flip_h = false
+		Vector2.RIGHT: $Sprite.flip_h = true
+	
+	rng.randomize()
+	$StateTimer.start(rng.randf_range(1.0, walk_max_time))
+	yield($StateTimer, "timeout")
+	change_state("idle")
+
+func do_walk():
+	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
+		change_state("idle")
+	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
+		change_state("idle")
+	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
+		velocity = get_velocity(velocity, move_dir, speed)
+		velocity = move_and_slide(velocity, FLOOR_NORMAL)
+
+
+func enter_idle():
+	rng.randomize()
+	ap.play("Idle")
+	match move_dir:
+		Vector2.LEFT: $Sprite.flip_h = false
+		Vector2.RIGHT: $Sprite.flip_h = true
+	$StateTimer.start(rng.randf_range(1.0, idle_max_time))
+	yield($StateTimer, "timeout")
+	change_state("walk")
+
+
+func enter_aggro():
+	pass
+
+func do_aggro():
+	if pc: #TODO: global enemy shutdown fix
+		var target_dir = Vector2(sign(position.x - pc.position.x), 0)
+		look_dir = target_dir * -1
+		set_waypoint(target_dir)
+	#this isnt the best way to do this, but returns a good result. 
+	#right now this cuts off move_dir when it's more than a block away (to -1 or 1)
+	#the small adjustment when less than that is why we don't just use sign()
+	var x_dir = clamp((waypoint.position.x - position.x)/16, -1, 1) 
+	move_dir = Vector2(lerp(move_dir.x, x_dir, 0.2), 0)
+
+	if abs(position.x - waypoint.position.x) < lock_tolerance:
+		if abs(move_dir.x) < 0.1:
+			ap.play("StandShoot")
+		else:
+			ap.play("WalkShoot")
+	else:
+		ap.play("Walk")
+
+#	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
+	velocity = get_velocity(velocity, move_dir, speed)
 	velocity = move_and_slide(velocity, FLOOR_NORMAL)
 
-	animate()
-
-func calculate_movevelocity(velocity: Vector2, move_dir, speed) -> Vector2:
-	var out: = velocity
-	
-	out.x = speed.x * move_dir.x
-	out.y += gravity * get_physics_process_delta_time()
-	if move_dir.y < 0:
-		out.y = speed.y * move_dir.y
-
-	return out
-	
 
 
-func _on_PlayerDetector_body_entered(body):
-	target = body
-	locked_on = true
-
-func _on_PlayerDetector_body_exited(_body):
-	shooting = false
-	target = null
-	locked_on = false
-	
-
-func distance_lock():
-		var lock_pos_x = target.global_position.x
-		
-		if global_position.x - lock_pos_x > 0: #player to the left
-			lock_pos_x += lock_distance
-			look_dir = Vector2.LEFT
-		elif global_position.x - lock_pos_x < 0: #player to the right
-			lock_pos_x -= lock_distance
-			look_dir = Vector2.RIGHT
-			
-		move_dir.x = sign(lock_pos_x - global_position.x)
-		
-		#print("distance to lock pos: ", lock_pos_x - global_position.x)
-		
-		if abs(global_position.x - lock_pos_x) < lock_tolerance:
-			move_dir.x = 0
-
-
-#func jump():
-#	cover_blown = true
-#
-#	move_dir.y -= 1 #up until leaves ground
-#
-#	fire()
-
+### HELPERS ###
 
 func fire():
-	if not shooting:
-			shooting = true
-			if $FireCooldown.is_stopped():
-				while target != null:
-					$FireCooldown.start(cooldown_time)
-					
-#					if target.global_position < global_position: #player to the left
-#						#look_dir = Vector2.LEFT
-#					elif target.global_position > global_position: #player to the right
-#						#look_dir = Vector2.RIGHT
-						
-					$HatPlayer.play("Shoot")
-					yield(get_tree().create_timer(0.2), "timeout") #delay for animation sync
-					if target == null:
-						break
-					prepare_bullet()
-					yield($FireCooldown, "timeout")
-			else: 
-				yield($FireCooldown, "timeout")
-				fire()
-
-func prepare_bullet():
 	var bullet = SEED.instance()
-	bullet.damage = projectile_damage
-	bullet.projectile_speed = projectile_speed
-	bullet.position = Vector2($CollisionShape2D.global_position.x, $CollisionShape2D.global_position.y - height_tolerance)
-	bullet.direction = Vector2(look_dir.x /2 , -1) #Adjust this for angle
 	
-	get_tree().get_current_scene().add_child(bullet)
+	bullet.damage = bullet_damage
+	bullet.speed = bullet_speed
+	bullet.position = $BulletOrigin.global_position
+	bullet.origin = $BulletOrigin.global_position
+	bullet.direction = Vector2(look_dir.x /2 , -1) #Adjust this for angle
 
+	world.get_node("Middle").add_child(bullet)
+	am.play("enemy_shoot")
 
-	$PosFire.play()
+func set_waypoint(target_dir: Vector2):
+	if waypoint: waypoint.queue_free()
+	waypoint = WAYPOINT.instance()
+	waypoint.position = Vector2(pc.position.x + (lock_distance * target_dir.x), pc.position.y) #left or right of pc
+	waypoint.owner_id = id
+	waypoint.index = -1
+	world.current_level.add_child(waypoint)
 
+### SIGNALS ###
 
+func _on_PlayerDetector_body_entered(body):
+	$StateTimer.stop()
+	change_state("aggro")
 
-
-func animate():
-	if look_dir == Vector2.LEFT:
-		if locked_on:
-			if move_dir.x != 0:
-				$BodyPlayer.play("WalkLeft")
-			else:
-				$BodyPlayer.play("StandLeft")
-		else:
-			if is_on_floor():
-				$BodyPlayer.play("StandLeft")
-#			else:
-#				if move_dir.y < 0:
-#					$BodyPlayer.play("RiseLeft")
-#				elif move_dir.y > 0:
-#					$BodyPlayer.play("FallLeft")
-				
-	if look_dir == Vector2.RIGHT:
-		if locked_on:
-			if move_dir.x != 0:
-				$BodyPlayer.play("WalkRight")
-			else:
-				$BodyPlayer.play("StandRight")
-		else:
-			if is_on_floor():
-				$BodyPlayer.play("StandRight")
-#			else:
-#				if move_dir.y < 0:
-#					$BodyPlayer.play("RiseRight")
-#				elif move_dir.y > 0:
-#					$BodyPlayer.play("FallRight")
-
-
-
-
-
+func _on_PlayerDetector_body_exited(_body):
+	pass
+	#shooting = false
+	#target = null
+	#change_state("walk")

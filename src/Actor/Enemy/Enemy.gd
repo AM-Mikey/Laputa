@@ -206,7 +206,7 @@ func do_death_drop():
 			3,4,5,6,7,8,9,10: ammo.value = 0.5
 		world.middle.add_child(ammo)
 
-#func check_camera_limits():
+#func check_camera_limits(): #USE VISIBILILTYENABLER INSTEAD
 #	var c = get_tree().get_nodes_in_group("CameraLimiters")[0] #pulls the first limiter
 #	var left = c.get_node("Left").global_position.x
 #	var right = c.get_node("Right").global_position.x

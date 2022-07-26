@@ -55,15 +55,11 @@ func set_target(index: int):
 
 func _physics_process(_delta):
 	if disabled or dead: return
-	#target_pos = w.get_global_mouse_position()
 	velocity = get_velocity(velocity, move_dir, speed)
 	velocity = move_and_slide(velocity, FLOOR_NORMAL)
 	
 	if aggro:
 		var player_from_self = pc.position - position
-#		var magnatude = sqrt(pow(player_from_self.x, 2) + pow(player_from_self.y, 2))
-#		var normalized = player_from_self / magnatude #magnatude = 1
-#		var scalar = normalized * dive_range
 		$RayCast2D.cast_to = player_from_self
 		
 		if $RayCast2D.get_collider() == null:
@@ -104,13 +100,14 @@ func get_next_index(last_index) -> int:
 	return next_index
 
 
+### STATES ###
+
 func enter_idle():
 	can_flap = false
+	#this isnt the best way to do this, but returns a good result. 
+	#right now this cuts off move_dir when it's more than a block away (to -1 or 1)
+	#the small adjustment when less than that is why we don't just use sign()
 	var x_dir = clamp((target_pos.x - position.x)/16, -1, 1)
-
-#	if abs(target_pos.x - position.x) < 16: #at target
-#		x_dir = lerp(x_dir, 0, 0.2)
-
 	move_dir = Vector2(lerp(move_dir.x, x_dir, 0.2), 0)
 		
 	$Sprite.flip_h = x_dir > 0
@@ -125,11 +122,8 @@ func do_idle():
 		change_state("flap")
 
 func enter_flap():
+	#this isnt the best way to do this, but returns a good result.
 	var x_dir = clamp((target_pos.x - position.x)/16, -1, 1)
-	
-#	if abs(target_pos.x - position.x) < 16: #at target
-#		x_dir = lerp(x_dir, 0, 0.2)
-		
 	move_dir = Vector2(lerp(move_dir.x, x_dir, 0.2), -1)
 		
 	$Sprite.flip_h = x_dir > 0
@@ -138,8 +132,7 @@ func enter_flap():
 	change_state("idle")
 
 
-
-
+### SIGNALS ###
 
 func _on_PlayerDetector_body_entered(body):
 	aggro = true

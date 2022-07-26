@@ -32,8 +32,8 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="CollisionDetector" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 265
+collision_layer = 320
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
 shape = SubResource( 1 )
@@ -41,9 +41,13 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 hframes = 4
-frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RotateLeft = SubResource( 2 )
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 2.38419e-07, 2.38419e-07 )
+scale = Vector2( 0.4, 0.4 )
+
 [connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

@@ -1,410 +1,180 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Actor/Enemy/Billy.gd" type="Script" id=1]
 [ext_resource path="res://assets/Actor/Enemy/Billy.png" type="Texture" id=2]
-[ext_resource path="res://assets/SFX/Placeholder/snd_em_fire.ogg" type="AudioStream" id=3]
-[ext_resource path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 7.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 192, 112 )
+extents = Vector2( 128, 80 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "Shoot"
+[sub_resource type="Animation" id=6]
+resource_name = "Idle"
 length = 0.4
+loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Hat:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0, 3 ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
+resource_name = "Jump"
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Body:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 11 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Body:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Hat:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( 0, -14 ) ]
-}
-
-[sub_resource type="Animation" id=5]
-length = 0.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 11 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Body:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Hat:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( 0, -14 ) ]
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "JumpLeft"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 8, 9, 10 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Body:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Hat:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 0, -13 ), Vector2( 0, -12 ), Vector2( 0, -15 ) ]
+"values": [ 8, 9, 10, 11 ]
 }
 
 [sub_resource type="Animation" id=7]
-resource_name = "JumpRight"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 8, 9, 10 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Body:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Hat:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 0, -13 ), Vector2( 0, -12 ), Vector2( 0, -15 ) ]
-}
-
-[sub_resource type="Animation" id=8]
+resource_name = "StandShoot"
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Body:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 8 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Body:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Hat:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( 0, -13 ) ]
-}
-
-[sub_resource type="Animation" id=9]
-length = 0.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 8 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Body:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Hat:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( 0, -13 ) ]
-}
-
-[sub_resource type="Animation" id=10]
-resource_name = "WalkLeft"
-length = 0.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 4, 7 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Body:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Hat:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, -13 ), Vector2( 0, -14 ), Vector2( 0, -13 ), Vector2( 0, -14 ) ]
+"values": [ 16, 17, 18, 19 ]
 }
-
-[sub_resource type="Animation" id=11]
-resource_name = "WalkRight"
-length = 0.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 4, 7 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Body:flip_h")
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"values": [ {
+"args": [  ],
+"method": "fire"
+} ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("Hat:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
+
+[sub_resource type="Animation" id=4]
+resource_name = "Walk"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, -13 ), Vector2( 0, -14 ), Vector2( 0, -13 ), Vector2( 0, -14 ) ]
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "WalkShoot"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "fire"
+} ]
 }
 
 [node name="Billy" type="KinematicBody2D"]
 collision_layer = 2
 collision_mask = 520
 script = ExtResource( 1 )
+debug = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -7.5 )
 shape = SubResource( 1 )
 
 [node name="PlayerDetector" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 modulate = Color( 0.992157, 0.992157, 0.992157, 0.156863 )
+position = Vector2( 0, -16 )
 shape = SubResource( 2 )
 
-[node name="Body" type="Sprite" parent="."]
-position = Vector2( 0, -8 )
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -16 )
 texture = ExtResource( 2 )
 hframes = 4
-vframes = 3
-frame = 4
+vframes = 5
+frame = 17
 
-[node name="Hat" type="Sprite" parent="."]
-position = Vector2( 0, -13 )
-texture = ExtResource( 2 )
-flip_h = true
-hframes = 4
-vframes = 3
+[node name="StateTimer" type="Timer" parent="."]
 
-[node name="HatPlayer" type="AnimationPlayer" parent="."]
-anims/Shoot = SubResource( 3 )
-
-[node name="BodyPlayer" type="AnimationPlayer" parent="."]
-anims/FallLeft = SubResource( 4 )
-anims/FallRight = SubResource( 5 )
-anims/JumpLeft = SubResource( 6 )
-anims/JumpRight = SubResource( 7 )
-anims/StandLeft = SubResource( 8 )
-anims/StandRight = SubResource( 9 )
-anims/WalkLeft = SubResource( 10 )
-anims/WalkRight = SubResource( 11 )
-
-[node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 4 )
-bus = "SFX"
-
-[node name="PosFire" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
-bus = "SFX"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 6 )
+anims/Jump = SubResource( 3 )
+anims/StandShoot = SubResource( 7 )
+anims/Walk = SubResource( 4 )
+anims/WalkShoot = SubResource( 5 )
 
 [node name="FireCooldown" type="Timer" parent="."]
 one_shot = true
-autostart = true
+
+[node name="BulletOrigin" type="Position2D" parent="."]
+position = Vector2( 0, -16 )
+
+[node name="FloorDetectorL" type="RayCast2D" parent="."]
+position = Vector2( -6, 0 )
+enabled = true
+cast_to = Vector2( 0, 8 )
+collision_mask = 8
+collide_with_areas = true
+
+[node name="FloorDetectorR" type="RayCast2D" parent="."]
+position = Vector2( 7, 0 )
+enabled = true
+cast_to = Vector2( 0, 8 )
+collision_mask = 8
+collide_with_areas = true
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

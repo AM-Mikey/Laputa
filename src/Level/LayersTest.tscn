@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/Effect/Light/SunLight.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/Tile/Village.tres" type="TileSet" id=9]
 [ext_resource path="res://src/Utility/Waypoint.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Actor/Enemy/Shield.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Actor/Enemy/Billy.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/Prop/SaveDisk.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/Background/SkyDemo.png" type="Texture" id=20]
 [ext_resource path="res://src/Prop/AmmoRefill.tscn" type="PackedScene" id=21]
@@ -157,7 +158,10 @@ position = Vector2( 344, 48 )
 speed = Vector2( 100, 50 )
 
 [node name="Shield" parent="Actors" instance=ExtResource( 11 )]
-position = Vector2( 720, 192 )
+position = Vector2( 727, 240 )
+
+[node name="Billy" parent="Actors" instance=ExtResource( 12 )]
+position = Vector2( 776, 192 )
 
 [node name="Triggers" type="Node2D" parent="."]
 
@@ -180,7 +184,7 @@ input_pickable = false
 level = "res://src/Level/Bridge2.tscn"
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 4 )]
-position = Vector2( 648, 192 )
+position = Vector2( 520, 192 )
 
 [node name="SunLight" parent="." instance=ExtResource( 1 )]
 visible = false
