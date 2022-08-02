@@ -183,6 +183,7 @@ func on_property_changed(property_name, property_value):
 			active.set(property_name, property_value)
 		"trigger":
 			active.set(property_name, property_value)
+			active.visual.update()
 		_:
 			active.set(property_name, property_value)
 	display_data() #to reload
