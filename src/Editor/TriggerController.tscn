@@ -3,18 +3,19 @@
 [ext_resource path="res://src/Editor/TriggerController.gd" type="Script" id=1]
 
 [node name="TriggerController" type="MarginContainer"]
-margin_right = 256.0
+margin_right = 128.0
 margin_bottom = 128.0
+mouse_filter = 1
 script = ExtResource( 1 )
 
 [node name="Handles" type="VBoxContainer" parent="."]
-margin_right = 256.0
+margin_right = 128.0
 margin_bottom = 128.0
 mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="Top" type="HBoxContainer" parent="Handles"]
-margin_right = 256.0
+margin_right = 128.0
 margin_bottom = 4.0
 mouse_filter = 2
 size_flags_vertical = 0
@@ -31,7 +32,7 @@ size_flags_vertical = 0
 
 [node name="Top" type="TextureButton" parent="Handles/Top"]
 margin_left = 4.0
-margin_right = 252.0
+margin_right = 124.0
 margin_bottom = 4.0
 rect_min_size = Vector2( 0, 4 )
 mouse_filter = 1
@@ -43,8 +44,8 @@ __meta__ = {
 }
 
 [node name="TopRight" type="TextureButton" parent="Handles/Top"]
-margin_left = 252.0
-margin_right = 256.0
+margin_left = 124.0
+margin_right = 128.0
 margin_bottom = 4.0
 rect_min_size = Vector2( 4, 4 )
 mouse_filter = 1
@@ -57,7 +58,7 @@ __meta__ = {
 
 [node name="Mid" type="HBoxContainer" parent="Handles"]
 margin_top = 4.0
-margin_right = 256.0
+margin_right = 128.0
 margin_bottom = 124.0
 mouse_filter = 2
 size_flags_vertical = 3
@@ -76,13 +77,15 @@ __meta__ = {
 
 [node name="Mid" type="TextureButton" parent="Handles/Mid"]
 margin_left = 4.0
-margin_right = 252.0
+margin_right = 124.0
 margin_bottom = 120.0
+mouse_filter = 1
+mouse_default_cursor_shape = 13
 size_flags_horizontal = 3
 
 [node name="Right" type="TextureButton" parent="Handles/Mid"]
-margin_left = 252.0
-margin_right = 256.0
+margin_left = 124.0
+margin_right = 128.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 4, 0 )
 mouse_filter = 1
@@ -94,7 +97,7 @@ __meta__ = {
 
 [node name="Bottom" type="HBoxContainer" parent="Handles"]
 margin_top = 124.0
-margin_right = 256.0
+margin_right = 128.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 0, 4 )
 mouse_filter = 2
@@ -111,7 +114,7 @@ size_flags_vertical = 8
 
 [node name="Bottom" type="TextureButton" parent="Handles/Bottom"]
 margin_left = 4.0
-margin_right = 252.0
+margin_right = 124.0
 margin_bottom = 4.0
 rect_min_size = Vector2( 0, 4 )
 mouse_filter = 1
@@ -123,8 +126,8 @@ __meta__ = {
 }
 
 [node name="BottomRight" type="TextureButton" parent="Handles/Bottom"]
-margin_left = 252.0
-margin_right = 256.0
+margin_left = 124.0
+margin_right = 128.0
 margin_bottom = 4.0
 rect_min_size = Vector2( 4, 4 )
 mouse_filter = 1
@@ -134,5 +137,6 @@ size_flags_vertical = 8
 
 [node name="ColorRect" type="ColorRect" parent="."]
 modulate = Color( 1, 1, 1, 0.294118 )
-margin_right = 256.0
+margin_right = 128.0
 margin_bottom = 128.0
+mouse_filter = 2

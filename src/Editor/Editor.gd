@@ -96,14 +96,14 @@ func move_actors_to_home():
 
 func set_entities_pickable(pickable = true):
 	for a in actor_collection.get_children():
-		if not is_in_group("Previews"):
+		if not a.is_in_group("Previews"):
 			a.input_pickable = pickable
 	for p in prop_collection.get_children():
-		if not is_in_group("Previews"):
+		if not p.is_in_group("Previews"):
 			p.input_pickable = pickable
-	for t in trigger_collection.get_children():
-		if not is_in_group("Previews"):
-			t.input_pickable = pickable
+#	for t in trigger_collection.get_children(): #TODO: turned this off as we move to trigger controller system. please turn this on for normal triggers
+#		if not t.is_in_group("Previews"):
+#			t.input_pickable = pickable
 
 func setup_level_limiter():
 	editor_level_limiter = LIMITER.instance()
@@ -609,6 +609,7 @@ func set_entity(position, entity_path, entity_type, traced = true):
 		"prop":
 			prop_collection.add_child(entity)
 		"trigger":
+			entity = TRIGGER_CONTROLLER.instance()
 			trigger_collection.add_child(entity)
 		_:
 			printerr("ERROR: cannot find entity_type: " + entity_type)
