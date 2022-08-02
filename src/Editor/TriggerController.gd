@@ -76,8 +76,8 @@ func on_handle(handle):
 		drag_offset = handle.rect_global_position - get_global_mouse_position()
 	else:
 		state = "drag"
-		drag_offset = rect_global_position - get_global_mouse_position()
-	emit_signal("selected", self, "triggercontroller")
+		drag_offset = get_parent().position - get_global_mouse_position()
+	emit_signal("selected", get_parent(), "trigger")
 
 
 func on_editor_select():
