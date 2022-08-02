@@ -9,17 +9,31 @@ var drag_offset = Vector2.ZERO
 onready var world = get_tree().get_root().get_node("World")
 onready var editor = world.get_node("EditorLayer/Editor")
 
+var buttons = []
 
 func _ready():
 	for h in $Handles/Top.get_children():
 			h.connect("button_down", self, "on_handle", [h])
+			buttons.append(h)
 	for h in $Handles/Mid.get_children():
 			h.connect("button_down", self, "on_handle", [h])
+			buttons.append(h)
 	for h in $Handles/Bottom.get_children():
 			h.connect("button_down", self, "on_handle", [h])
+			buttons.append(h)
 	connect("selected", editor.inspector, "on_selected")
 
+
+func disable():
+	state = "disabled"
+	visible = false
+func enable():
+	state = "enabled"
+	visible = true
+
 func _input(event):
+	if state == "disabled": return
+	
 	if event.is_action_released("editor_lmb"):
 		state = "idle"
 		return
@@ -69,6 +83,8 @@ func _input(event):
 ### SIGNALS 
 
 func on_handle(handle):
+	if state == "disabled": return
+	
 	if handle.name != "Mid":
 		#print("handle grabbed")
 		state = "resize"

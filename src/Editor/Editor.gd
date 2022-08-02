@@ -14,7 +14,6 @@ const ENTITY_PREVIEW = preload("res://src/Editor/EntityPreview.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const LAYER_BUTTON = preload("res://src/Editor/Button/LayerButton.tscn")
 const LIMITER = preload("res://src/Editor/EditorLevelLimiter.tscn")
-const TRIGGER_CONTROLLER = preload("res://src/Editor/TriggerController.tscn")
 
 
 var disabled = false
@@ -87,6 +86,9 @@ func setup_level():
 		s.visible = true
 	for l in get_tree().get_nodes_in_group("SunLights"):
 		l.editor_enter()
+	for t in trigger_collection.get_children():
+		if t.has_node("TriggerController"):
+			t.get_node("TriggerController").enable()
 
 ### SETUP
 func move_actors_to_home():
@@ -134,6 +136,9 @@ func exit():
 	for l in get_tree().get_nodes_in_group("SunLights"):
 		l.editor_exit()
 	queue_free()
+	for t in trigger_collection.get_children():
+		if t.has_node("TriggerController"):
+			t.get_node("TriggerController").disable()
 
 ### TILES
 
