@@ -14,6 +14,7 @@ const ENTITY_PREVIEW = preload("res://src/Editor/EntityPreview.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const LAYER_BUTTON = preload("res://src/Editor/Button/LayerButton.tscn")
 const LIMITER = preload("res://src/Editor/EditorLevelLimiter.tscn")
+const TRIGGER_CONTROLLER = preload("res://src/Editor/TriggerController.tscn")
 
 
 var disabled = false
@@ -295,6 +296,8 @@ func do_entity_input(event):
 				preview_entity(grid_pos, $Main/Tab/Props.active_prop_path, subtool)
 			"npc":
 				preview_entity(grid_pos, $Main/Tab/NPCs.active_npc_path, subtool)
+			"trigger":
+				preview_entity(grid_pos, $Main/Tab/Triggers.active_trigger_path, subtool)
 			"grab":
 				inspector.active.global_position = grid_pos + grab_offset
 				if "home" in inspector.active:
@@ -673,6 +676,7 @@ func set_preview(cell, tile):
 
 func preview_entity(position, entity_path, entity_type):
 	var preview = ENTITY_PREVIEW.instance()
+	preview.entity_type = entity_type
 	preview.entity_path = entity_path
 	preview.global_position = position
 	match entity_type:

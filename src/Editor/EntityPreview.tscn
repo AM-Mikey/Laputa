@@ -5,3 +5,9 @@
 [node name="EntityPreview" type="Node2D"]
 modulate = Color( 1, 1, 1, 0.5 )
 script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0.294118 )
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
