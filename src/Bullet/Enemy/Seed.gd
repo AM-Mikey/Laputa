@@ -36,10 +36,7 @@ func get_initial_velocity() -> Vector2:
 	return out
 
 
-func on_break(_method):
-	if disabled: return
-	print("destroyed seed")
-	fizzle("bullet")
+
 
 ### SIGNALS
 

@@ -10,6 +10,7 @@ signal level_saved()
 
 
 const EDITOR_CAMERA = preload("res://src/Editor/EditorCamera.tscn")
+const ENTITY_PREVIEW = preload("res://src/Editor/EntityPreview.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const LAYER_BUTTON = preload("res://src/Editor/Button/LayerButton.tscn")
 const LIMITER = preload("res://src/Editor/EditorLevelLimiter.tscn")
@@ -94,11 +95,14 @@ func move_actors_to_home():
 
 func set_entities_pickable(pickable = true):
 	for a in actor_collection.get_children():
-		a.input_pickable = pickable
+		if not is_in_group("Previews"):
+			a.input_pickable = pickable
 	for p in prop_collection.get_children():
-		p.input_pickable = pickable
+		if not is_in_group("Previews"):
+			p.input_pickable = pickable
 	for t in trigger_collection.get_children():
-		t.input_pickable = pickable
+		if not is_in_group("Previews"):
+			t.input_pickable = pickable
 
 func setup_level_limiter():
 	editor_level_limiter = LIMITER.instance()
@@ -668,19 +672,16 @@ func set_preview(cell, tile):
 
 
 func preview_entity(position, entity_path, entity_type):
-	var entity = load(entity_path).instance()
-	if entity.has_method("disable"):
-		entity.disable()
-	entity.modulate = Color(1, 1, 1, 0.5)
-	entity.add_to_group("Previews")
-	entity.global_position = position
+	var preview = ENTITY_PREVIEW.instance()
+	preview.entity_path = entity_path
+	preview.global_position = position
 	match entity_type:
 		"enemy", "npc", "player", "boss", "pickup":
-			actor_collection.add_child(entity)
+			actor_collection.add_child(preview)
 		"prop":
-			prop_collection.add_child(entity)
+			prop_collection.add_child(preview)
 		"trigger":
-			trigger_collection.add_child(entity)
+			trigger_collection.add_child(preview)
 		_:
 			printerr("ERROR: cannot find entity_type: " + entity_type)
 

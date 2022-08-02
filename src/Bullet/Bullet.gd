@@ -28,7 +28,12 @@ func _ready():
 		add_child(vis)
 		vis.connect("viewport_exited", self, "on_viewport_exit")
 
-### FIZZLE ###
+### HELPERS ###
+
+func on_break(_method):
+	if disabled: return
+	print("destroyed bullet: " + name)
+	fizzle("bullet")
 
 func fizzle(type: String):
 	var fizzle = FIZZLE.instance()
@@ -47,8 +52,7 @@ func _on_CollisionDetector_body_entered(body):
 	#print("body entered")
 	if not disabled and default_body_collision:
 		if body.get_collision_layer_bit(8): #breakable
-			body.on_break(break_method)
-			print("breaking via method:" + break_method)
+			on_break(break_method)
 
 		elif body.get_collision_layer_bit(1): #enemy
 			yield(get_tree(), "idle_frame")
@@ -66,8 +70,7 @@ func _on_CollisionDetector_body_entered(body):
 func _on_CollisionDetector_area_entered(area):
 	if not disabled and default_area_collision:
 		if area.get_collision_layer_bit(8): #breakable
-				area.on_break(break_method)
-				print("breaking via method:" + break_method)
+			on_break(break_method)
 		elif area.get_collision_layer_bit(3): #world
 			fizzle("world")
 		elif area.get_collision_layer_bit(5): #armor

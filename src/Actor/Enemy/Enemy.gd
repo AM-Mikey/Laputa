@@ -39,6 +39,7 @@ onready var pc = get_tree().get_root().get_node_or_null("World/Juniper")
 
 
 func _ready():
+	if disabled: return
 	add_to_group("Enemies")
 
 	var timer = Timer.new()
@@ -54,9 +55,16 @@ func _ready():
 		yield(get_tree(), "idle_frame")
 		if state != "" and state != null: #TODO: this prevents enemies from starting in a state if we dont yield? we get ton of errors if we dont because we delete the enemy when moving it
 			change_state(state)
+	
+	setup()
 
+func setup():
+	pass #to be determined in enemy script
 
 func disable():
+	if get("starting_state"):
+		change_state(get("starting_state"))
+	else: print("ERRRORRRRR NO STARTING STATE FOR ENEMY")
 	disabled = true
 
 func enable():
@@ -64,12 +72,14 @@ func enable():
 
 
 func _physics_process(_delta):
+	if debug:
+		$StateLabel.text = state
+	
 	if disabled or dead:
 		return
 	if state != "":
 		do_state()
-	if debug:
-		$StateLabel.text = state
+	
 
 
 
@@ -95,12 +105,14 @@ func get_velocity(velocity: Vector2, move_dir, speed, do_gravity = true) -> Vect
 ### STATES ###
 
 func do_state():
+	if disabled: return
 	var do_method = "do_" + state
 	if has_method(do_method):
 		call(do_method)
 	#else: printerr("ERROR: Enemy: " + name + " is missing state method with name: " + do_method)
 
 func change_state(new):
+	if disabled: return
 	var exit_method = "exit_" + state
 	if has_method(exit_method):
 		call(exit_method)

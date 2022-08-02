@@ -11,7 +11,7 @@
 [ext_resource path="res://src/Tile/Village.tres" type="TileSet" id=9]
 [ext_resource path="res://src/Utility/Waypoint.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Actor/Enemy/Shield.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/Actor/Enemy/Billy.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/Actor/Enemy/Crusher.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/Prop/SaveDisk.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/Background/SkyDemo.png" type="Texture" id=20]
 [ext_resource path="res://src/Prop/AmmoRefill.tscn" type="PackedScene" id=21]
@@ -160,8 +160,8 @@ speed = Vector2( 100, 50 )
 [node name="Shield" parent="Actors" instance=ExtResource( 11 )]
 position = Vector2( 727, 240 )
 
-[node name="Billy" parent="Actors" instance=ExtResource( 12 )]
-position = Vector2( 776, 192 )
+[node name="Crusher" parent="Actors" instance=ExtResource( 12 )]
+position = Vector2( 768, 126 )
 
 [node name="Triggers" type="Node2D" parent="."]
 

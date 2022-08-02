@@ -1,5 +1,6 @@
 extends Enemy
 
+var starting_state = "walk"
 export var move_dir = Vector2.LEFT
 export var idle_max_time = 5.0
 export var walk_max_time = 10.0
@@ -8,9 +9,8 @@ export var defend_time = 0.4
 onready var ap = $AnimationPlayer
 onready var bb = $BulletBlocker
 
-func _ready():
-	if disabled: return
-	change_state("walk")
+func setup():
+	change_state(starting_state)
 	hp = 6
 	reward = 2
 	damage_on_contact = 2

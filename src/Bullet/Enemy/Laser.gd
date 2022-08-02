@@ -27,18 +27,8 @@ func _physics_process(_delta):
 		move_and_slide(velocity)
 		var distance_from_origin = origin.distance_to(global_position);
 		if distance_from_origin > projectile_range:
-			_fizzle_from_range()
+			fizzle("range")
 
-
-#func get_velocity(projectile_speed, direction) -> Vector2: #is this ever used?
-#	var out = velocity
-#	#print("seed dir: ", direction)
-#	out.x = projectile_speed * direction.x
-#
-#	if direction.y < 0:
-#		out.y = projectile_speed * direction.y
-#	#print(out)
-#	return out
 
 
 func _on_CollisionDetector_body_entered(body):
@@ -49,4 +39,4 @@ func _on_CollisionDetector_body_entered(body):
 			body.hit(damage, blood_direction)
 			queue_free()
 		elif body.get_collision_layer_bit(3): #world
-			_fizzle_from_world()
+			fizzle("world")

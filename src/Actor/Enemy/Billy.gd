@@ -29,8 +29,8 @@ var waypoint
 onready var ap = $AnimationPlayer
 
 
-func _ready():
-	if disabled: return
+
+func setup():
 	change_state("walk")
 	hp = 6
 	reward = 2

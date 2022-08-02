@@ -13,8 +13,8 @@ var aggro_waypoint = null
 var current_waypoint := 0
 var target_tolerance = 2
 
+var starting_state = "idle"
 var aggro = false
-#var dive_range = 100
 var bail_time = 6.0
 
 
@@ -22,16 +22,16 @@ onready var target: Node
 onready var target_pos = position
 onready var ap = $AnimationPlayer
 
-func _ready():
-	if disabled: return
-	change_state("idle")
+
+
+func setup():
+	change_state(starting_state)
 	hp = 4
 	reward = 2
 	damage_on_contact = 2
 	speed = Vector2(100, 50)
 	yield(get_tree(), "idle_frame")
 	find_waypoints()
-
 
 func find_waypoints():
 	for w in get_tree().get_nodes_in_group("Waypoints"):
@@ -144,6 +144,7 @@ func _on_PlayerDetector_body_exited(body):
 
 
 func _on_BailTimer_timeout():
+	if disabled: return
 	if waypoints.empty(): #no target
 		aggro_waypoint.queue_free()
 		aggro_waypoint = null
