@@ -270,7 +270,7 @@ func do_entity_input(event):
 			"npc":
 				set_entity(grid_pos, $Main/Tab/NPCs.active_npc_path, subtool)
 			"trigger":
-				set_entity(grid_pos, $Main/Tab/Triggers.active_trigger_path, subtool)
+				set_entity(get_grid_pos(mouse_pos, "course", "trigger"), $Main/Tab/Triggers.active_trigger_path, subtool)
 			"noplace":
 				pass
 
@@ -297,7 +297,7 @@ func do_entity_input(event):
 			"npc":
 				preview_entity(grid_pos, $Main/Tab/NPCs.active_npc_path, subtool)
 			"trigger":
-				preview_entity(grid_pos, $Main/Tab/Triggers.active_trigger_path, subtool)
+				preview_entity(get_grid_pos(mouse_pos, "course", "trigger"), $Main/Tab/Triggers.active_trigger_path, subtool)
 			"grab":
 				inspector.active.global_position = grid_pos + grab_offset
 				if "home" in inspector.active:
@@ -609,7 +609,7 @@ func set_entity(position, entity_path, entity_type, traced = true):
 		"prop":
 			prop_collection.add_child(entity)
 		"trigger":
-			entity = TRIGGER_CONTROLLER.instance()
+			#entity = TRIGGER_CONTROLLER.instance()
 			trigger_collection.add_child(entity)
 		_:
 			printerr("ERROR: cannot find entity_type: " + entity_type)
@@ -727,13 +727,17 @@ func get_cell(mouse_pos) -> Vector2:
 	var map_pos = tile_map.world_to_map(local_pos)
 	return map_pos
 
-func get_grid_pos(mouse_pos, mode = "course") -> Vector2:
+func get_grid_pos(mouse_pos, mode = "course", exception = "none") -> Vector2:
 	var step = 16
 	var offset = Vector2(8,0)
 	if mode == "fine":
 		step = 8
 		offset = Vector2(0, 0)
-	return Vector2(stepify(mouse_pos.x - offset.x, step), stepify(mouse_pos.y - offset.y, step)) + offset
+	if exception == "trigger":
+		return Vector2(stepify(mouse_pos.x, step), stepify(mouse_pos.y, step))
+	else:
+		return Vector2(stepify(mouse_pos.x - offset.x, step), stepify(mouse_pos.y - offset.y, step)) + offset
+	
 
 func get_centerbox(mouse_pos) -> Array: #2D Array #active tiles
 	var cells = []

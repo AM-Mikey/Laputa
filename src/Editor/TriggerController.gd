@@ -26,35 +26,45 @@ func _input(event):
 	if event is InputEventMouseMotion and state != "idle": #dragging or resizing
 		var x = stepify(get_global_mouse_position().x + drag_offset.x, 16)
 		var y = stepify(get_global_mouse_position().y + drag_offset.y, 16)
+		
+		var parent_x = get_parent().position.x
+		var parent_y = get_parent().position.y
+		
 		match state:
 			"drag":
-				rect_position = Vector2(x, y)
+				get_parent().position = Vector2(x, y)
 			"resize":
-				
 				match active_handle.name:
 					"TopLeft":
-						margin_top = y
-						margin_left = x
+						margin_top = y - parent_y
+						margin_left = x - parent_x
 					"TopRight":
-						margin_top = y
-						margin_right = x #+ 4 #no idea why this is 4
+						margin_top = y - parent_y
+						margin_right = x - parent_x
 					"BottomLeft":
-						margin_bottom = y #+ 4
-						margin_left = x
+						margin_bottom = y - parent_y
+						margin_left = x - parent_x
 					"BottomRight":
-						margin_bottom = y #+ 4
-						margin_right = x #+ 4
+						margin_bottom = y - parent_y
+						margin_right = x - parent_x
 					"Top":
-						margin_top = y
+						margin_top = y - parent_y
 					"Bottom":
-						margin_bottom = y #+ 4
+						margin_bottom = y - parent_y
 					"Left":
-						margin_left = x
+						margin_left = x - parent_x
 					"Right":
-						margin_right = x #+ 4'
-	
-	else:
-		set_process_unhandled_input(true)
+						margin_right = x - parent_x
+				
+				var col = get_parent().get_node("CollisionShape2D")
+				var parent = get_parent()
+				var new_shape = RectangleShape2D.new()
+				new_shape.extents = rect_size * 0.5
+				get_parent().get_node("CollisionShape2D").shape = new_shape
+				get_parent().get_node("CollisionShape2D").position = rect_position + new_shape.extents
+				
+				get_parent().visual.update()
+
 
 ### SIGNALS 
 

@@ -135,8 +135,9 @@ mouse_default_cursor_shape = 12
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="ColorRect" type="ColorRect" parent="."]
-modulate = Color( 1, 1, 1, 0.294118 )
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+visible = false
 margin_right = 128.0
 margin_bottom = 128.0
 mouse_filter = 2
+editor_only = false

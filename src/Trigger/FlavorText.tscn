@@ -15,11 +15,11 @@ color = Color( 0.901961, 0.74902, 0, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 show_behind_parent = true
-position = Vector2( 0, -8 )
+position = Vector2( 8, 8 )
 shape = SubResource( 1 )
 
 [node name="ExitDetector" type="Area2D" parent="."]
-position = Vector2( 0, -8 )
+position = Vector2( 8, 8 )
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitDetector"]

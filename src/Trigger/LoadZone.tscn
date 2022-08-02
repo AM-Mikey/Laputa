@@ -11,7 +11,7 @@ script = ExtResource( 1 )
 color = Color( 0, 0.4, 0, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -8 )
+position = Vector2( 8, 8 )
 shape = SubResource( 1 )
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
