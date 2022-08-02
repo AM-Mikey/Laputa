@@ -583,7 +583,6 @@ texture = ExtResource( 25 )
 script = ExtResource( 26 )
 
 [node name="MuzzlePos" type="Position2D" parent="GunSprite"]
-visible = false
 position = Vector2( -5, -1 )
 
 [node name="Sprite" type="Sprite" parent="."]

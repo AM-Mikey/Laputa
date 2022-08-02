@@ -4,10 +4,10 @@
 [ext_resource path="res://assets/Actor/Enemy/Shield.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 8, 10.5 )
+extents = Vector2( 8, 8.5 )
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7, 9 )
+extents = Vector2( 7, 7.5 )
 
 [sub_resource type="Animation" id=8]
 resource_name = "IdleLeft"
@@ -89,11 +89,11 @@ collision_mask = 64
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletBlocker"]
-position = Vector2( 0, -9.5 )
+position = Vector2( 0, -7.5 )
 shape = SubResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -9 )
+position = Vector2( 0, -7.5 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]

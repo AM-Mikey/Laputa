@@ -83,93 +83,95 @@ tile_data = PoolIntArray( 196632, 344, 0, 196633, 345, 0, 196634, 346, 0, 196635
 
 [node name="@SaveDisk@3946" parent="Props" instance=ExtResource( 15 )]
 position = Vector2( 568, 208 )
-input_pickable = false
 
 [node name="AmmoRefill" parent="Props" instance=ExtResource( 21 )]
 position = Vector2( 456, 112 )
-input_pickable = false
 
 [node name="Chest" parent="Props" instance=ExtResource( 6 )]
 position = Vector2( 104, 208 )
-input_pickable = false
 
 [node name="@Grass@13675" parent="Props" instance=ExtResource( 22 )]
 position = Vector2( 280, 192 )
-input_pickable = false
 ammo_chance = 0
 
 [node name="@Grass@13752" parent="Props" instance=ExtResource( 22 )]
 position = Vector2( 264, 192 )
-input_pickable = false
 
 [node name="Grass" parent="Props" instance=ExtResource( 22 )]
 position = Vector2( 248, 192 )
-input_pickable = false
 ammo_chance = 0
 
 [node name="@Grass@13890" parent="Props" instance=ExtResource( 22 )]
 position = Vector2( 232, 192 )
-input_pickable = false
 
 [node name="@BreakBlock@5068" parent="Props" instance=ExtResource( 27 )]
 position = Vector2( 120, 128 )
+input_pickable = true
 
 [node name="@BreakBlock@5077" parent="Props" instance=ExtResource( 27 )]
 position = Vector2( 136, 128 )
+input_pickable = true
 
 [node name="BreakBlock" parent="Props" instance=ExtResource( 27 )]
 position = Vector2( 136, 144 )
+input_pickable = true
 
 [node name="@BreakBlock@5092" parent="Props" instance=ExtResource( 27 )]
 position = Vector2( 120, 128 )
+input_pickable = true
 
 [node name="@BreakBlock@5104" parent="Props" instance=ExtResource( 27 )]
 position = Vector2( 136, 144 )
+input_pickable = true
 
 [node name="@BreakBlock@5118" parent="Props" instance=ExtResource( 27 )]
 position = Vector2( 136, 144 )
+input_pickable = true
 
 [node name="@BreakBlock@5143" parent="Props" instance=ExtResource( 27 )]
 position = Vector2( 120, 160 )
+input_pickable = true
 
 [node name="@BreakBlock@5158" parent="Props" instance=ExtResource( 27 )]
 position = Vector2( 136, 160 )
+input_pickable = true
 
 [node name="@BreakBlock@5236" parent="Props" instance=ExtResource( 27 )]
 position = Vector2( 152, 160 )
+input_pickable = true
 
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Bat" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 296, 160 )
+input_pickable = true
 speed = Vector2( 100, 50 )
 id = "bat"
-move_dir = Vector2( -0.292433, 0 )
+move_dir = Vector2( 0.267884, 0 )
 
 [node name="Bat2" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 176, 72 )
+input_pickable = true
 speed = Vector2( 100, 50 )
 id = "bat"
-move_dir = Vector2( -0.0364061, 0 )
+move_dir = Vector2( 0.585527, 0 )
 
 [node name="@Bat@2414" parent="Actors" instance=ExtResource( 8 )]
 modulate = Color( 2, 2, 2, 1 )
 position = Vector2( 344, 48 )
+input_pickable = true
 speed = Vector2( 100, 50 )
 
 [node name="Shield" parent="Actors" instance=ExtResource( 11 )]
 position = Vector2( 727, 240 )
+input_pickable = true
+speed = Vector2( 50, 50 )
 
 [node name="Crusher" parent="Actors" instance=ExtResource( 12 )]
 position = Vector2( 768, 126 )
+input_pickable = true
 
 [node name="Triggers" type="Node2D" parent="."]
-
-[node name="Door" parent="Triggers" instance=ExtResource( 3 )]
-position = Vector2( 440, 192 )
-z_index = 100
-input_pickable = false
-level = "res://src/Level/lillevel.tscn"
 
 [node name="FlavorText" parent="Triggers" instance=ExtResource( 7 )]
 position = Vector2( 360, 192 )
@@ -178,10 +180,14 @@ input_pickable = false
 text = "testing"
 
 [node name="LoadZone" parent="Triggers" instance=ExtResource( 28 )]
-position = Vector2( 840, 192 )
+position = Vector2( 832, 176 )
 z_index = 100
 input_pickable = false
 level = "res://src/Level/Bridge2.tscn"
+
+[node name="@Door@2306" parent="Triggers" instance=ExtResource( 3 )]
+position = Vector2( 432, 160 )
+z_index = 100
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 4 )]
 position = Vector2( 520, 192 )
@@ -191,6 +197,7 @@ visible = false
 position = Vector2( 241, 0 )
 
 [node name="Waypoint" parent="." instance=ExtResource( 10 )]
+modulate = Color( 0.545098, 0, 0, 1 )
 position = Vector2( 256, 128 )
 owner_id = "bat"
 

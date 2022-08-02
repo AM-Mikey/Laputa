@@ -1,6 +1,10 @@
 extends Node
 class_name Gun, "res://assets/Icon/GunIcon.png"
 
+const MUZZLE_FLASH = preload("res://src/Effect/MuzzleFlashEffect.tscn")
+
+
+
 var display_name: String = "Debug Gun"
 var description: String = "Debug Description"
 
@@ -74,7 +78,7 @@ func spawn_bullet(bullet_pos, shoot_dir):
 	world.get_node("Middle").add_child(bullet)
 	am.play(sfx)
 	
-	var muzzle_flash = load("res://src/Effect/MuzzleFlashEffect.tscn").instance()
+	var muzzle_flash = MUZZLE_FLASH.instance()
 	muzzle_flash.position = pc.get_node("GunSprite/MuzzlePos").position
 	pc.get_node("GunSprite").add_child(muzzle_flash)
 	
