@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/Editor/EditorTheme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Editor/Editor.gd" type="Script" id=2]
@@ -12,8 +12,7 @@
 [ext_resource path="res://src/Editor/NPCs.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Editor/Triggers.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Editor/TabButtons.gd" type="Script" id=12]
-[ext_resource path="res://src/UI/Debug/50PercentBlack.tres" type="StyleBox" id=13]
-[ext_resource path="res://src/Editor/Coordinates.gd" type="Script" id=14]
+[ext_resource path="res://src/Editor/Tooltip.tscn" type="PackedScene" id=13]
 
 [node name="Editor" type="Control"]
 anchor_right = 1.0
@@ -29,31 +28,7 @@ margin_right = 960.0
 margin_bottom = 448.0
 mouse_filter = 2
 
-[node name="Coordinates" type="MarginContainer" parent="Margin"]
-margin_top = 432.0
-margin_right = 48.0
-margin_bottom = 448.0
-rect_min_size = Vector2( 48, 16 )
-mouse_filter = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-script = ExtResource( 14 )
-
-[node name="Panel" type="Panel" parent="Margin/Coordinates"]
-margin_right = 48.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 8, 8 )
-mouse_filter = 2
-custom_styles/panel = ExtResource( 13 )
-
-[node name="Label" type="Label" parent="Margin/Coordinates"]
-margin_left = 3.0
-margin_right = 44.0
-margin_bottom = 16.0
-size_flags_horizontal = 4
-size_flags_vertical = 1
-text = "123, 33"
-valign = 1
+[node name="Tooltip" parent="Margin" instance=ExtResource( 13 )]
 
 [node name="Secondary" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
