@@ -40,6 +40,7 @@ extents = Vector2( 6, 7.5 )
 extents = Vector2( 8, 10.5 )
 
 [sub_resource type="RectangleShape2D" id=3]
+custom_solver_bias = 0.395
 extents = Vector2( 6, 7.5 )
 
 [sub_resource type="RectangleShape2D" id=4]

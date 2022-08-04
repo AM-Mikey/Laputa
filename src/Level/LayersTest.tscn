@@ -180,7 +180,7 @@ input_pickable = false
 text = "testing"
 
 [node name="LoadZone" parent="Triggers" instance=ExtResource( 28 )]
-position = Vector2( 832, 176 )
+position = Vector2( 952, 160 )
 z_index = 100
 input_pickable = false
 level = "res://src/Level/Bridge2.tscn"

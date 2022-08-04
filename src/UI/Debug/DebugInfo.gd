@@ -42,7 +42,7 @@ func _physics_process(_delta):
 		$VBox/HBox/C1/A/Velocity.text = str("%4.f" % mm.velocity.x) + "," + str("%4.f" % mm.velocity.y)
 		$VBox/HBox/C1/A/Speed.text = str("%4.f" % mm.speed.x) + "," + str("%4.f" % mm.speed.y)
 		$VBox/HBox/C1/A/Gravity.text = str("%.f" % mm.gravity)
-		$VBox/HBox/C1/A/Pos.text = str("%4.f" % pc.global_position.x) + "," + str("%4.f" % pc.global_position.y)
+		$VBox/HBox/C1/A/Pos.text = str("%4.3f" % pc.global_position.x) + "," + str("%4.3f" % pc.global_position.y)
 		$VBox/HBox/C1/A/Animation.text = str(pc.get_node("AnimationPlayer").current_animation)
 		$VBox/HBox/C1/A/State.text = str(pc.get_node("MovementManager").current_state.name)
 
