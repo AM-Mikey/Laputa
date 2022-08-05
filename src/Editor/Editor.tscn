@@ -29,6 +29,7 @@ margin_bottom = 448.0
 mouse_filter = 2
 
 [node name="Tooltip" parent="Margin" instance=ExtResource( 13 )]
+margin_right = 90.0
 
 [node name="Secondary" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0

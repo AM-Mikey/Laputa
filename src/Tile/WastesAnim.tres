@@ -1,6 +1,30 @@
-[gd_resource type="TileSet" load_steps=2 format=2]
+[gd_resource type="TileSet" load_steps=10 format=2]
 
 [ext_resource path="res://assets/Tile/WastesAnim.png" type="Texture" id=1]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 16, 16, 8, 16, 8, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 8, 16, 0, 16, 0, 0, 8, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+points = PoolVector2Array( 16, 16, 8, 16, 8, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+points = PoolVector2Array( 8, 16, 0, 16, 0, 0, 8, 0 )
 
 [resource]
 0/name = ""
@@ -1379,7 +1403,7 @@
 98/texture = ExtResource( 1 )
 98/tex_offset = Vector2( 0, 0 )
 98/modulate = Color( 1, 1, 1, 1 )
-98/region = Rect2( 32, 48, 16, 16 )
+98/region = Rect2( 112, 144, 16, 16 )
 98/tile_mode = 0
 98/occluder_offset = Vector2( 0, 0 )
 98/navigation_offset = Vector2( 0, 0 )
@@ -3661,7 +3685,7 @@
 261/texture = ExtResource( 1 )
 261/tex_offset = Vector2( 0, 0 )
 261/modulate = Color( 1, 1, 1, 1 )
-261/region = Rect2( 80, 128, 16, 16 )
+261/region = Rect2( 96, 160, 16, 16 )
 261/tile_mode = 0
 261/occluder_offset = Vector2( 0, 0 )
 261/navigation_offset = Vector2( 0, 0 )
@@ -4137,7 +4161,7 @@
 295/texture = ExtResource( 1 )
 295/tex_offset = Vector2( 0, 0 )
 295/modulate = Color( 1, 1, 1, 1 )
-295/region = Rect2( 112, 144, 16, 16 )
+295/region = Rect2( 80, 128, 16, 16 )
 295/tile_mode = 0
 295/occluder_offset = Vector2( 0, 0 )
 295/navigation_offset = Vector2( 0, 0 )
@@ -4493,9 +4517,16 @@
 320/navigation_offset = Vector2( 0, 0 )
 320/shape_offset = Vector2( 0, 0 )
 320/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+320/shape = SubResource( 1 )
 320/shape_one_way = false
-320/shape_one_way_margin = 0.0
-320/shapes = [  ]
+320/shape_one_way_margin = 1.0
+320/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 320/z_index = 0
 321/name = ""
 321/texture = ExtResource( 1 )
@@ -4507,9 +4538,16 @@
 321/navigation_offset = Vector2( 0, 0 )
 321/shape_offset = Vector2( 0, 0 )
 321/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+321/shape = SubResource( 2 )
 321/shape_one_way = false
-321/shape_one_way_margin = 0.0
-321/shapes = [  ]
+321/shape_one_way_margin = 1.0
+321/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 321/z_index = 0
 322/name = ""
 322/texture = ExtResource( 1 )
@@ -4521,9 +4559,16 @@
 322/navigation_offset = Vector2( 0, 0 )
 322/shape_offset = Vector2( 0, 0 )
 322/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+322/shape = SubResource( 3 )
 322/shape_one_way = false
-322/shape_one_way_margin = 0.0
-322/shapes = [  ]
+322/shape_one_way_margin = 1.0
+322/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 3 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 322/z_index = 0
 323/name = ""
 323/texture = ExtResource( 1 )
@@ -4535,9 +4580,16 @@
 323/navigation_offset = Vector2( 0, 0 )
 323/shape_offset = Vector2( 0, 0 )
 323/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+323/shape = SubResource( 4 )
 323/shape_one_way = false
-323/shape_one_way_margin = 0.0
-323/shapes = [  ]
+323/shape_one_way_margin = 1.0
+323/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 4 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 323/z_index = 0
 324/name = ""
 324/texture = ExtResource( 1 )
@@ -4571,7 +4623,7 @@
 326/texture = ExtResource( 1 )
 326/tex_offset = Vector2( 0, 0 )
 326/modulate = Color( 1, 1, 1, 1 )
-326/region = Rect2( 96, 160, 16, 16 )
+326/region = Rect2( 32, 48, 16, 16 )
 326/tile_mode = 0
 326/occluder_offset = Vector2( 0, 0 )
 326/navigation_offset = Vector2( 0, 0 )
@@ -4717,9 +4769,16 @@
 336/navigation_offset = Vector2( 0, 0 )
 336/shape_offset = Vector2( 0, 0 )
 336/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+336/shape = SubResource( 5 )
 336/shape_one_way = false
-336/shape_one_way_margin = 0.0
-336/shapes = [  ]
+336/shape_one_way_margin = 1.0
+336/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 5 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 336/z_index = 0
 337/name = ""
 337/texture = ExtResource( 1 )
@@ -4731,9 +4790,16 @@
 337/navigation_offset = Vector2( 0, 0 )
 337/shape_offset = Vector2( 0, 0 )
 337/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+337/shape = SubResource( 6 )
 337/shape_one_way = false
-337/shape_one_way_margin = 0.0
-337/shapes = [  ]
+337/shape_one_way_margin = 1.0
+337/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 6 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 337/z_index = 0
 338/name = ""
 338/texture = ExtResource( 1 )
@@ -4745,9 +4811,16 @@
 338/navigation_offset = Vector2( 0, 0 )
 338/shape_offset = Vector2( 0, 0 )
 338/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+338/shape = SubResource( 7 )
 338/shape_one_way = false
-338/shape_one_way_margin = 0.0
-338/shapes = [  ]
+338/shape_one_way_margin = 1.0
+338/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 7 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 338/z_index = 0
 339/name = ""
 339/texture = ExtResource( 1 )
@@ -4759,9 +4832,16 @@
 339/navigation_offset = Vector2( 0, 0 )
 339/shape_offset = Vector2( 0, 0 )
 339/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+339/shape = SubResource( 8 )
 339/shape_one_way = false
-339/shape_one_way_margin = 0.0
-339/shapes = [  ]
+339/shape_one_way_margin = 1.0
+339/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 8 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 339/z_index = 0
 340/name = ""
 340/texture = ExtResource( 1 )

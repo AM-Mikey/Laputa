@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://src/Gun/Defender.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Actor/Player/PlayerCamera.tscn" type="PackedScene" id=2]
@@ -439,6 +439,10 @@ tracks/2/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 0, 6, 7, 0, 0, 1, 2, 3, 4, 5 ]
 }
 
+[sub_resource type="CapsuleShape2D" id=72]
+radius = 8.0
+height = 2.0
+
 [node name="Juniper" type="KinematicBody2D" groups=["Player"]]
 z_index = 1
 collision_mask = 520
@@ -607,6 +611,14 @@ anims/crouch_run = SubResource( 64 )
 anims/inspect = SubResource( 71 )
 anims/run = SubResource( 54 )
 anims/stand = SubResource( 65 )
+
+[node name="PhysicsBody" type="KinematicBody2D" parent="."]
+collision_layer = 32768
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsBody"]
+position = Vector2( 0, -9 )
+shape = SubResource( 72 )
 
 [connection signal="guns_updated" from="." to="GunSprite" method="_on_Juniper_guns_updated"]
 [connection signal="area_entered" from="ItemDetector" to="." method="_on_ItemDetector_area_entered"]
