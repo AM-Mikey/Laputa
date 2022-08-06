@@ -356,7 +356,8 @@ func do_tile_input(event):
 				if lmb_held:
 					set_cells_2d(get_box_2d(mouse_start_pos, mouse_pos), brush)
 				elif rmb_held:
-					set_cells_1d(get_box_1d(mouse_start_pos, mouse_pos), -1)
+					set_cells_2d(get_box_2d(mouse_start_pos, mouse_pos), get_brush_as_eraser())
+					#set_cells_1d(get_box_1d(mouse_start_pos, mouse_pos), -1)
 				
 		subtool = "paint"
 		if not active_operation.empty():
@@ -418,35 +419,40 @@ func get_entity_type(entity: Node): #called by actor.gd
 
 
 func undo():
-	print("SAD")
-	pass
-#	var last = past_operations.pop_back()
-#
-#	if last:
-#		future_operations.append(last)
-#		print("undoing operation: ", last)
-#
-#		match inspector.active_type: #get rid of selection to prevent time travel paradoxes
-#			"enemy", "npc", "prop":
-#				inspector.on_deselected()
-#
-#
-#		match last[0]:
-#			"set_cells":
-#				var subops = last[1]
-#				subops.invert()
-#				for t in subops:
-#					var old_tile_dic = t[2]
-#					for layer in old_tile_dic: #old_tile_dic= {layer: [[cell, tile][cell, tile][cell, tile]]}
-#						for cell in old_tile_dic[layer]:
-#							var cell_pos = cell[0]
-#							var tile = cell[1]
-#							set_cell(cell_pos, tile, layer)
-#			"set_entity":
-#				var arg = last[1]
-#				del_entity(arg[0], false) #position, traced
-#	else:
-#		print("nothing left to undo!")
+	var last = past_operations.pop_back()
+
+	if last:
+		future_operations.append(last)
+		#print("undoing operation: ", last)
+
+		match inspector.active_type: #get rid of selection to prevent time travel paradoxes
+			"enemy", "npc", "prop":
+				inspector.on_deselected()
+
+
+		match last[0]: #["operation_name", [subop1], [subop2], [
+			"set_cells":
+				var subops = last[1]
+				subops.invert()
+				for t in subops: #subop = [layer: object, position, tile, old_tile (dict or int)
+					var old_tile = t[3]
+					if old_tile is int:
+						var layer = t[0]
+						var cell_pos = t[1]
+						var new_tile = t[2]
+						set_cell(cell_pos, old_tile, layer)
+					
+					elif old_tile is Dictionary :#old_tile = {layer: [cell, tile]}
+						for layer in old_tile:
+							var cell_pos = old_tile[layer][0]
+							var layer_old_tile = old_tile[layer][1]
+							set_cell(cell_pos, layer_old_tile, layer)
+		
+			"set_entity":
+				var arg = last[1]
+				del_entity(arg[0], false) #position, traced
+	else:
+		print("nothing left to undo!")
 
 func redo():
 	pass
@@ -479,42 +485,42 @@ func set_cell(cell: Vector2, tile: int, layer): #set one cell, one layer, one ti
 
 
 
-func set_cells_1d(cells: Array, tile, traced = true): #sets a 1d array of cells with a single tile
-	if tile == -2: #null
-		return
-		
-	var old_tile_dic = {} # layer: [[cell, tile][cell, tile][cell, tile]]
-	for layer in tile_collection.get_children():
-		if layer is TileMap:
-			old_tile_dic[layer] = []
-		
-	for cell in cells: #subops
-
-		var layer = tile_map
-		if auto_layer and not tile == -1: #not eraser and auto layer
-			layer = get_auto_layer(tile)
-		if multi_erase and tile == -1: #eraser
-			for l in tile_collection.get_children():
-				if l is TileMap:
-					
-					if l.get_cellv(cell) == tile: #if old tile == new tile
-						pass
-					else:
-						old_tile_dic[l].append([cell, l.get_cellv(cell)])
-						l.set_cellv(cell, tile)
-		else: #not multi_eraser
-			if layer.get_cellv(cell) == tile: #if old tile == new tile
-				pass
-			else:
-				old_tile_dic[layer].append([cell, layer.get_cellv(cell)])
-				layer.set_cellv(cell, tile)
-
-	if traced:
-#		for s in active_operation:
-#			if s[0] == cell: #already setting this cell in the current operation, this prevents reactivating on mouse movement
-#				return
-		active_operation.append([cells, tile, old_tile_dic])
-		#print(active_operation)
+#func set_cells_1d(cells: Array, tile, traced = true): #sets a 1d array of cells with a single tile
+#	if tile == -2: #null
+#		return
+#
+#	var old_tile_dic = {} # layer: [[cell, tile][cell, tile][cell, tile]]
+#	for layer in tile_collection.get_children():
+#		if layer is TileMap:
+#			old_tile_dic[layer] = []
+#
+#	for cell in cells: #subops
+#
+#		var layer = tile_map
+#		if auto_layer and not tile == -1: #not eraser and auto layer
+#			layer = get_auto_layer(tile)
+#		if multi_erase and tile == -1: #eraser
+#			for l in tile_collection.get_children():
+#				if l is TileMap:
+#
+#					if l.get_cellv(cell) == tile: #if old tile == new tile
+#						pass
+#					else:
+#						old_tile_dic[l].append([cell, l.get_cellv(cell)])
+#						l.set_cellv(cell, tile)
+#		else: #not multi_eraser
+#			if layer.get_cellv(cell) == tile: #if old tile == new tile
+#				pass
+#			else:
+#				old_tile_dic[layer].append([cell, layer.get_cellv(cell)])
+#				layer.set_cellv(cell, tile)
+#
+#	if traced:
+##		for s in active_operation:
+##			if s[0] == cell: #already setting this cell in the current operation, this prevents reactivating on mouse movement
+##				return
+#		active_operation.append([cells, tile, old_tile_dic])
+#		#print(active_operation)
 
 
 func set_cells_2d(cells: Array, brush: Array, traced = true): #There is no reason we need a 2d array of cells. cells have their positions already
@@ -529,29 +535,33 @@ func set_cells_2d(cells: Array, brush: Array, traced = true): #There is no reaso
 			var tile = brush[r_id % r_max][c_id % c_max] # % so it repeats if cells > tiles
 			if tile == -2: pass #null
 				
-			var old_tile_dic = {}
-			
+			var old_tile
 			var layer = tile_map
 			var is_eraser = brush == get_brush_as_eraser() #this works as long as nobody added an arguement to get_brush_as_eraser
 			
-			if multi_erase and is_eraser: 
-				for l in tile_collection.get_children():
-					if l is TileMap:
-						old_tile_dic[l] = l.get_cellv(cell)
-						l.set_cellv(cell, tile)
-						
-			else: #not eraser
-				if auto_layer and not is_eraser: #if auto layer is on, still use the current layer as the eraser
-					layer = get_auto_layer(tile)
-				old_tile_dic[layer] = layer.get_cellv(cell)
-				layer.set_cellv(cell, tile)
-				
 			
+			if multi_erase and is_eraser:
+				old_tile = {}
+				for l in tile_collection.get_children():
+					if l is TileMap and not l.is_in_group("Previews"):
+						var replaced_tile = l.get_cellv(cell) #get old tile
+						if replaced_tile != -1: #if this layer actually had tiles replaced
+							old_tile[l] = [cell, replaced_tile]
+							l.set_cellv(cell, tile) #set new tile (eraser == -1)
+
+
+			if auto_layer and not is_eraser: #if auto layer is on, still use the current layer as the eraser
+				layer = get_auto_layer(tile)
+				old_tile = layer.get_cellv(cell) #get old tile
+				layer.set_cellv(cell, tile) #set new tile
+
+
 			if traced:
 #				for s in active_operation:
 #					if s[0] == cell and s[1] == tile: #already setting this cell in the current operation, this prevents reactivating on mouse movement
 #						return
-				active_operation.append([cell, tile, old_tile_dic])
+				active_operation.append([layer, cell, tile, old_tile])
+
 
 
 			c_id += 1
@@ -575,24 +585,32 @@ func set_line(canvas: Array, brush: Array, traced = true):
 					if tile != -2: #null
 						var offset = Vector2(brush_c_id, brush_r_id)
 						
-						var old_tile_dic = {}
+						var old_tile
 						var layer = tile_map
 						if auto_layer:
 							layer = get_auto_layer(tile)
+						
 						if multi_erase and brush == get_brush_as_eraser(): #this works as long as nobody added an arguement to get_brush_as_eraser
+							old_tile = {}
 							for l in tile_collection.get_children():
-								if l is TileMap:
-									l.set_cellv(cell + offset, tile)
-									old_tile_dic[l] = l.get_cellv(cell)
+								if l is TileMap and not l.is_in_group("Previews"):
+									var replaced_tile = l.get_cellv(cell + offset) #get old tile
+									if replaced_tile != -1: #if this layer actually had tiles replaced
+										old_tile[l] = [cell + offset, replaced_tile] 
+									l.set_cellv(cell + offset, tile) #set_new_tile
+						
+						
 						else: #not eraser
+							old_tile = layer.get_cellv(cell + offset) #get_old_tile
 							layer.set_cellv(cell + offset, tile)
-							old_tile_dic[layer] = layer.get_cellv(cell)
 						
 						if traced:
 							if multi_erase and brush == get_brush_as_eraser():
-								active_operation.append([cell + offset, tile, old_tile_dic])
+								active_operation.append([layer, cell + offset, tile, old_tile])
 							else:
-								active_operation.append([cell + offset, tile, old_tile_dic])
+								active_operation.append([layer, cell + offset, tile, old_tile])
+								
+								active_operation.append([layer, cell, tile, old_tile])
 					
 					brush_c_id += 1
 				brush_r_id +=1
@@ -641,14 +659,15 @@ func del_entity(position, traced = true):
 
 func preview_tiles(cells: Array, type = "box"): #2D array of cells
 	for m in tile_collection.get_children():
-		if m.is_in_group("TilePreviews"):
+		if m.is_in_group("Previews"):
 			m.queue_free()
 	
 	var tile_map = TileMap.new()
-	tile_map.add_to_group("TilePreviews")
+	tile_map.add_to_group("Previews")
 	tile_map.tile_set = tile_set
 	tile_map.cell_size = Vector2(16, 16)
 	tile_map.modulate = Color(1, 1, 1, 0.5)
+	tile_map.z_index = 999
 	tile_collection.add_child(tile_map)
 	
 	match type:
@@ -775,20 +794,20 @@ func get_centerbox(mouse_pos) -> Array: #2D Array #active tiles
 	return cells
 
 
-func get_box_1d(start_pos, end_pos) -> Array: #1d
-	var cells = []
-	var start = get_cell(start_pos)
-	var end = get_cell(end_pos)
-	var x_min = min(start.x, end.x)
-	var x_max = max(start.x, end.x)
-	var y_min = min(start.y, end.y)
-	var y_max = max(start.y, end.y)
-	
-	for y in range(y_min, y_max + 1):
-		for x in range(x_min, x_max + 1):
-			cells.append(Vector2(x, y))
-	#print(cells)
-	return cells
+#func get_box_1d(start_pos, end_pos) -> Array: #1d
+#	var cells = []
+#	var start = get_cell(start_pos)
+#	var end = get_cell(end_pos)
+#	var x_min = min(start.x, end.x)
+#	var x_max = max(start.x, end.x)
+#	var y_min = min(start.y, end.y)
+#	var y_max = max(start.y, end.y)
+#
+#	for y in range(y_min, y_max + 1):
+#		for x in range(x_min, x_max + 1):
+#			cells.append(Vector2(x, y))
+#	#print(cells)
+#	return cells
 
 
 func get_box_2d(start_pos, end_pos) -> Array:#PoolVector2Array: #2d #TODO: massive slowdown when drawing bigger boxes. memory leak.
