@@ -139,7 +139,6 @@ func on_return():
 
 func on_reset():
 	save_defaults()
-	#yield(get_tree(), "idle_frame")
 	load_settings()
 
 func on_mouselock(value):

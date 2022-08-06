@@ -340,13 +340,13 @@ func do_tile_input(event):
 	if event is InputEventMouseMotion:
 		hide_preview()
 		match subtool:
-			"line": preview_line(get_brush_origin_line(mouse_start_pos, mouse_pos))
-			"box": preview_2d_array(get_box_2d(mouse_start_pos, mouse_pos))
+			"line": preview_tiles(get_brush_origin_line(mouse_start_pos, mouse_pos), "line")
+			"box": preview_tiles(get_box_2d(mouse_start_pos, mouse_pos), "box")
 			"paint":
 				if lmb_held or rmb_held:
 					set_cells_2d(get_centerbox(mouse_pos), brush) #TODO: on all layers
 				else:
-					preview_2d_array(get_centerbox(mouse_pos))
+					preview_tiles(get_centerbox(mouse_pos), "box")
 	
 	#releasing
 	if event.is_action_released("editor_lmb") and lmb_held or event.is_action_released("editor_rmb") and rmb_held:
@@ -418,55 +418,58 @@ func get_entity_type(entity: Node): #called by actor.gd
 
 
 func undo():
-	var last = past_operations.pop_back()
-	
-	if last:
-		future_operations.append(last)
-		print("undoing operation: ", last)
-		
-		match inspector.active_type: #get rid of selection to prevent time travel paradoxes
-			"enemy", "npc", "prop":
-				inspector.on_deselected()
-		
-		
-		match last[0]:
-			"set_cells":
-				var subops = last[1]
-				subops.invert()
-				for t in subops:
-					var old_tile_dic = t[2]
-					for layer in old_tile_dic: #old_tile_dic= {layer: [[cell, tile][cell, tile][cell, tile]]}
-						for cell in old_tile_dic[layer]:
-							var cell_pos = cell[0]
-							var tile = cell[1]
-							set_cell(cell_pos, tile, layer)
-			"set_entity":
-				var arg = last[1]
-				del_entity(arg[0], false) #position, traced
-	else:
-		print("nothing left to undo!")
+	print("SAD")
+	pass
+#	var last = past_operations.pop_back()
+#
+#	if last:
+#		future_operations.append(last)
+#		print("undoing operation: ", last)
+#
+#		match inspector.active_type: #get rid of selection to prevent time travel paradoxes
+#			"enemy", "npc", "prop":
+#				inspector.on_deselected()
+#
+#
+#		match last[0]:
+#			"set_cells":
+#				var subops = last[1]
+#				subops.invert()
+#				for t in subops:
+#					var old_tile_dic = t[2]
+#					for layer in old_tile_dic: #old_tile_dic= {layer: [[cell, tile][cell, tile][cell, tile]]}
+#						for cell in old_tile_dic[layer]:
+#							var cell_pos = cell[0]
+#							var tile = cell[1]
+#							set_cell(cell_pos, tile, layer)
+#			"set_entity":
+#				var arg = last[1]
+#				del_entity(arg[0], false) #position, traced
+#	else:
+#		print("nothing left to undo!")
 
 func redo():
-	var next = future_operations.pop_back()
-	
-	if next:
-		past_operations.append(next)
-		print("redoing operation: ", next)
-		
-		match next[0]:
-			"set_tiles_1d":
-				var subops = next[1]
-				subops.invert()
-				for t in subops:
-					var cell_pos = t[0]
-					var tile = t[1]
-					set_cells_1d(cell_pos, tile)
-					#set_cells_1d([t[0]], t[1], t[3], false) #pos_array, new_tile, layer, traced
-			"set_entity":
-				var arg = next[1]
-				set_entity(arg[0], arg[1], arg[2], false) #position, entity_path, entity_type
-	else:
-		print("nothing left to redo!")
+	pass
+#	var next = future_operations.pop_back()
+#
+#	if next:
+#		past_operations.append(next)
+#		print("redoing operation: ", next)
+#
+#		match next[0]:
+#			"set_tiles_1d":
+#				var subops = next[1]
+#				subops.invert()
+#				for t in subops:
+#					var cell_pos = t[0]
+#					var tile = t[1]
+#					set_cells_1d(cell_pos, tile)
+#					#set_cells_1d([t[0]], t[1], t[3], false) #pos_array, new_tile, layer, traced
+#			"set_entity":
+#				var arg = next[1]
+#				set_entity(arg[0], arg[1], arg[2], false) #position, entity_path, entity_type
+#	else:
+#		print("nothing left to redo!")
 
 
 func set_cell(cell: Vector2, tile: int, layer): #set one cell, one layer, one tile ##ONLY VIA UNDO/REDO
@@ -511,12 +514,12 @@ func set_cells_1d(cells: Array, tile, traced = true): #sets a 1d array of cells 
 #			if s[0] == cell: #already setting this cell in the current operation, this prevents reactivating on mouse movement
 #				return
 		active_operation.append([cells, tile, old_tile_dic])
-		print(active_operation)
+		#print(active_operation)
 
 
-func set_cells_2d(cells: Array, brush: Array, traced = true):
-	if brush.empty():
-		return
+func set_cells_2d(cells: Array, brush: Array, traced = true): #There is no reason we need a 2d array of cells. cells have their positions already
+	if brush.empty(): return
+	
 	var r_id = 0
 	var r_max = brush.size()
 	for row in cells:
@@ -635,7 +638,25 @@ func del_entity(position, traced = true):
 
 ### PREVIEW ###
 
-func preview_2d_array(cells: Array):
+
+func preview_tiles(cells: Array, type = "box"): #2D array of cells
+	for m in tile_collection.get_children():
+		if m.is_in_group("TilePreviews"):
+			m.queue_free()
+	
+	var tile_map = TileMap.new()
+	tile_map.add_to_group("TilePreviews")
+	tile_map.tile_set = tile_set
+	tile_map.cell_size = Vector2(16, 16)
+	tile_map.modulate = Color(1, 1, 1, 0.5)
+	tile_collection.add_child(tile_map)
+	
+	match type:
+		"box": set_preview_box(cells, tile_map)
+		"line": set_preview_line(cells, tile_map)
+
+
+func set_preview_box(cells, tile_map):
 	var r_id = 0
 	var r_max = active_tiles.size()
 	for row in cells:
@@ -643,11 +664,13 @@ func preview_2d_array(cells: Array):
 		var c_max = active_tiles[c_id].size()
 		for cell in row:
 			var tile = active_tiles[r_id % r_max][c_id % c_max] # % so it repeats if cells > tiles
-			set_preview(cell, tile)
+			
+			tile_map.set_cellv(cell, tile)
 			c_id += 1
 		r_id += 1
 
-func preview_line(cells: Array): #use get_brush_origin for this
+
+func set_preview_line(cells: Array, tile_map):
 	var r_id = 0
 	var r_max = active_tiles.size()
 	for row in cells:
@@ -661,23 +684,12 @@ func preview_line(cells: Array): #use get_brush_origin for this
 				for b_cell in b_row:
 					var tile = b_cell
 					var offset = Vector2(bc_id, br_id)
-					set_preview(cell + offset, tile)
+					tile_map.set_cellv(cell + offset, tile)
 					bc_id += 1
 				br_id +=1
 			c_id += 1
 		r_id += 1
 
-func set_preview(cell, tile):
-	if tile == -2: #null
-		return
-		
-	var sprite = Sprite.new()
-	sprite.texture = get_tile_texture(tile)
-	sprite.modulate = Color(1, 1, 1, 0.5)
-	sprite.centered = false
-	sprite.position = cell * 16
-	sprite.z_index = 2
-	tile_collection.add_child(sprite)
 
 
 func preview_entity(position, entity_path, entity_type):
@@ -779,8 +791,8 @@ func get_box_1d(start_pos, end_pos) -> Array: #1d
 	return cells
 
 
-func get_box_2d(start_pos, end_pos) -> Array: #2d #TODO: massive slowdown when drawing bigger boxes. memory leak.
-	var cells = []
+func get_box_2d(start_pos, end_pos) -> Array:#PoolVector2Array: #2d #TODO: massive slowdown when drawing bigger boxes. memory leak.
+	var cells = []#PoolVector2Array()
 	var start = get_cell(start_pos)
 	var end = get_cell(end_pos)
 	var x_min = min(start.x, end.x)
@@ -1028,5 +1040,3 @@ func on_tab_changed(tab):
 			set_entities_pickable()
 		_:
 			print("WARNING: could not find tab with name: " + $Main/Tab.get_child(tab).name)
-
-
