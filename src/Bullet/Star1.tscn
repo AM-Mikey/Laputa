@@ -1,20 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://src/Bullet/GLauncher.gd" type="Script" id=1]
-[ext_resource path="res://assets/Bullet/BulletGrenadeLauncher.png" type="Texture" id=2]
+[ext_resource path="res://src/Bullet/Star.gd" type="Script" id=1]
+[ext_resource path="res://assets/Bullet/Star.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+extents = Vector2( 3.5, 3.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 8 )
-
-[sub_resource type="CircleShape2D" id=3]
-radius = 64.0
+extents = Vector2( 3.5, 3.5 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "FlipLeft"
-length = 0.8
+length = 0.3
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -23,14 +20,14 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 23, 16 ]
+"values": [ 0, 3 ]
 }
 
 [sub_resource type="Animation" id=5]
-length = 0.8
+length = 0.3
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -39,18 +36,19 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 23, 16 ]
+"values": [ 3, 0 ]
 }
 
-[node name="GLauncher3" type="KinematicBody2D"]
+[node name="Star1" type="KinematicBody2D"]
 collision_layer = 64
 collision_mask = 8
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, -0.5 )
 shape = SubResource( 1 )
 
 [node name="CollisionDetector" type="Area2D" parent="."]
@@ -58,33 +56,28 @@ collision_layer = 64
 collision_mask = 291
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
+position = Vector2( -0.5, -0.5 )
 shape = SubResource( 2 )
 
-[node name="ExplosionDetector" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 291
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionDetector"]
-shape = SubResource( 3 )
-
 [node name="End" type="Position2D" parent="."]
-position = Vector2( 0, 8 )
+position = Vector2( 0, 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-hframes = 8
+hframes = 4
 vframes = 3
-frame = 23
-
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-
-[node name="Tween" type="Tween" parent="."]
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/FlipLeft = SubResource( 4 )
 anims/FlipRight = SubResource( 5 )
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -0.5, -0.5 )
+scale = Vector2( 0.35, 0.35 )
+
+[node name="FizzleTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
-[connection signal="body_entered" from="ExplosionDetector" to="." method="_on_ExplosionDetector_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
+[connection signal="timeout" from="FizzleTimer" to="." method="_on_FizzleTimer_timeout"]

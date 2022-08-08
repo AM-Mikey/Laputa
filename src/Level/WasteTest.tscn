@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Effect/Light/SunLight.tscn" type="PackedScene" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://src/Prop/AmmoRefill.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Utility/Waypoint.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/Prop/Grass.tscn" type="PackedScene" id=16]
-[ext_resource path="res://src/Actor/Enemy/Crusher.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/Prop/ChestKeyItem.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Prop/SaveDisk.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=20]
@@ -242,12 +241,8 @@ position = Vector2( 344, 48 )
 speed = Vector2( 100, 50 )
 
 [node name="Shield" parent="Actors" instance=ExtResource( 24 )]
-modulate = Color( 2, 2, 2, 1 )
-position = Vector2( 695, 256 )
-speed = Vector2( 50, 50 )
-
-[node name="Crusher" parent="Actors" instance=ExtResource( 17 )]
-position = Vector2( 768, 126 )
+position = Vector2( 672, 256 )
+id = "shield"
 
 [node name="Triggers" type="Node2D" parent="."]
 

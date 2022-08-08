@@ -19,6 +19,7 @@ var hp: int
 var damage_on_contact: int
 
 var damagenum = null
+var damagenum_timer = null
 var damagenum_time: float = 0.5
 
 export var id: String
@@ -51,7 +52,9 @@ func _ready():
 		setup()
 
 func setup(): #EVERY ENEMY MUST HAVE
-	pass #to be determined in enemy script. 
+	setup_damagenum_timer()
+	print("sad")
+	#pass #to be determined in enemy script. 
 
 
 
@@ -122,7 +125,7 @@ func hit(damage, blood_direction):
 	blood.global_position = global_position
 	blood.direction = blood_direction
 
-	prepare_damagenum(damage)
+	set_damagenum(damage)
 	
 	if hp <= 0:
 		die()
@@ -132,21 +135,21 @@ func hit(damage, blood_direction):
 ### DAMAGE NUMBER ###
 
 func setup_damagenum_timer():
-	var timer = Timer.new()
-	timer.one_shot = true
-	timer.name = "DamagenumTimer"
-	timer.connect("timeout", self, "_on_DamagenumTimer_timeout")
-	add_child(timer)
+	damagenum_timer = Timer.new()
+	damagenum_timer.one_shot = true
+	damagenum_timer.connect("timeout", self, "_on_DamagenumTimer_timeout")
+	add_child(damagenum_timer)
+	print("yaaay: ", id)
 
 
-func prepare_damagenum(damage):
+func set_damagenum(damage):
 	if not damagenum: #if we dont already have a damage number create a new one
 		damagenum = DAMAGENUMBER.instance()
 		damagenum.value = damage
-		$DamagenumTimer.start(damagenum_time)
+		damagenum_timer.start(damagenum_time)
 	else: #add time and add values
 		damagenum.value += damage
-		$DamagenumTimer.start($DamagenumTimer.time_left)
+		damagenum_timer.start(damagenum_timer.time_left)
 
 
 func _on_DamagenumTimer_timeout():
