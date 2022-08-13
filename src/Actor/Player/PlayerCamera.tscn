@@ -3,6 +3,7 @@
 [ext_resource path="res://src/Actor/Player/PlayerCamera.gd" type="Script" id=1]
 
 [node name="PlayerCamera" type="Camera2D"]
+position = Vector2( 0, -16 )
 current = true
 limit_smoothed = true
 smoothing_enabled = true
