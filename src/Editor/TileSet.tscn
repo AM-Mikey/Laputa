@@ -48,6 +48,7 @@ margin_bottom = 276.0
 mouse_filter = 1
 
 [node name="Normal" type="VBoxContainer" parent="VBox/Margin/Tab"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
@@ -88,7 +89,6 @@ margin_bottom = 230.0
 rect_min_size = Vector2( 0, 26 )
 
 [node name="Collision" type="VBoxContainer" parent="VBox/Margin/Tab"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0

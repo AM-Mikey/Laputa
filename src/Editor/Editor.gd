@@ -22,6 +22,7 @@ var active_tiles = [] #2D array
 
 var auto_layer = true
 var multi_erase = true
+var auto_tile = true
 
 var active_tool = "tile"
 var subtool = "paint"
@@ -327,6 +328,13 @@ func do_tile_input(event):
 	if lmb_held: brush = active_tiles
 	if rmb_held: brush = get_brush_as_eraser()
 	
+	if event.is_action_pressed("debug_fly"):
+		print(active_operation)
+		if auto_tile:
+			print("auto tiling")
+			set_auto_tiles() #TODO: testing
+
+	
 	#pressing
 	if event.is_action_pressed("editor_rmb") or event.is_action_pressed("editor_lmb") and not active_tiles.empty():
 		mouse_start_pos = mouse_pos
@@ -364,6 +372,10 @@ func do_tile_input(event):
 			past_operations.append(["set_cells", active_operation.duplicate()])
 			#print("active op: ", active_operation)
 			active_operation.clear()
+		
+		if auto_tile:
+			print("auto tiling")
+			set_auto_tiles() #TODO: testing
 
 
 
@@ -557,9 +569,9 @@ func set_cells_2d(cells: Array, brush: Array, traced = true): #There is no reaso
 
 
 			if traced:
-#				for s in active_operation:
-#					if s[0] == cell and s[1] == tile: #already setting this cell in the current operation, this prevents reactivating on mouse movement
-#						return
+				for s in active_operation:
+					if s[1] == cell and s[2] == tile: #already setting this cell in the current operation, this prevents reactivating on mouse movement
+						return
 				active_operation.append([layer, cell, tile, old_tile])
 
 
@@ -605,6 +617,9 @@ func set_line(canvas: Array, brush: Array, traced = true):
 							layer.set_cellv(cell + offset, tile)
 						
 						if traced:
+#							if s[1] == cell and s[2] == tile: #already setting this cell in the current operation, this prevents reactivating on mouse movement
+#								return
+							
 							if multi_erase and brush == get_brush_as_eraser():
 								active_operation.append([layer, cell + offset, tile, old_tile])
 							else:
@@ -618,6 +633,16 @@ func set_line(canvas: Array, brush: Array, traced = true):
 		r_id += 1
 
 
+func set_auto_tiles():
+	var script_path = "res://src/Tile/%s.gd"
+	var auto_tile_script = load(script_path % tile_set.resource_path.get_file().trim_suffix(".tres")) #get tile set's name and find corresponding script
+	var node = Node.new()
+	node.set_script(auto_tile_script)
+	node.farback = tile_collection.get_node("FarBack")
+	node.back = tile_collection.get_node("Back")
+	node.front = tile_collection.get_node("Front")
+	node.farfront = tile_collection.get_node("FarFront")
+	add_child(node)
 
 func set_entity(position, entity_path, entity_type, traced = true):
 	if entity_path == null:

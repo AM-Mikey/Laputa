@@ -8,6 +8,13 @@ signal tile_transform_updated(tile_rotation_degrees, tile_scale_vector)
 
 var icon = "res://assets/Icon/TileSetIcon.png"
 
+var auto_layer_true = load("res://assets/Editor/AutoLayerTrue.png")
+var auto_layer_false = load("res://assets/Editor/AutoLayerFalse.png")
+var multi_erase_true = load("res://assets/Editor/MultiEraseTrue.png")
+var multi_erase_false = load("res://assets/Editor/MultiEraseFalse.png")
+var auto_tile_true = load("res://assets/Editor/AutoTileTrue.png")
+var auto_tile_false = load("res://assets/Editor/AutoTileFalse.png")
+
 var tile_set 
 var texture
 var columns: int
@@ -144,13 +151,28 @@ func set_cursor():
 ### SIGNALS ###
 
 func _on_AutoLayer_toggled(button_pressed):
+	if button_pressed:
+		$VBox/HBox/AutoLayer.icon = auto_layer_true
+	else:
+		$VBox/HBox/AutoLayer.icon = auto_layer_false
 	emit_signal("autolayer_updated", button_pressed)
 
 func _on_MultiErase_toggled(button_pressed):
+	if button_pressed:
+		$VBox/HBox/MultiErase.icon = multi_erase_true
+	else:
+		$VBox/HBox/MultiErase.icon = multi_erase_false
 	emit_signal("multi_erase_toggled", button_pressed)
 
-func _on_Terrain_toggled(button_pressed):
-	emit_signal("terrain_toggled", button_pressed)
+func _on_AutoTile_toggled(button_pressed):
+	if button_pressed:
+		$VBox/HBox/AutoTile.icon = auto_tile_true
+	else:
+		$VBox/HBox/AutoTile.icon = auto_tile_false
+	pass # Replace with function body.
+
+#func _on_Terrain_toggled(button_pressed):
+#	emit_signal("terrain_toggled", button_pressed)
 
 
 func _on_FlipH_toggled(button_pressed):
@@ -177,3 +199,6 @@ func _on_RotateCC_pressed():
 		tile_rotation_degrees -= 90
 	transform_buttons()
 	#emit_signal("tile_transform_updated", tile_rotation_degrees, tile_scale_vector)
+
+
+

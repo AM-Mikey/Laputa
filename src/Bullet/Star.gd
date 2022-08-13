@@ -5,8 +5,8 @@ var texture_index: int
 var collision_shape: RectangleShape2D
 
 var minimum_speed: float = 6
-var bounciness = .6
-var fizzle_time = 1
+var bounciness = 1 #.6
+var fizzle_time = 12.0
 var start_velocity
 var touched_floor = false
 
@@ -24,7 +24,7 @@ func _ready():
 	default_clear = false
 	
 
-	velocity = get_initial_velocity(speed, direction)
+	velocity = get_initial_velocity()
 	start_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 	
 
@@ -33,7 +33,7 @@ func _physics_process(delta):
 	if not disabled:
 		velocity.y += gravity * delta
 		
-		if velocity.x < 0:
+		if velocity.x > 0:
 			$AnimationPlayer.play("FlipLeft")
 		else:
 			$AnimationPlayer.play("FlipRight")
@@ -43,7 +43,7 @@ func _physics_process(delta):
 			if abs(velocity.y) > minimum_speed:
 				velocity *= bounciness
 				velocity = velocity.bounce(collision.normal)
-				am.play_pos("gun_grenade_bounce", self)
+				am.play_pos("gun_star_bounce", self)
 			else:
 				velocity = Vector2.ZERO
 	
@@ -56,13 +56,13 @@ func _physics_process(delta):
 
 
 
-func get_initial_velocity(scoped_projectile_speed, scoped_direction) -> Vector2:
+func get_initial_velocity() -> Vector2:
 	var out = velocity
 
-	out.x = scoped_projectile_speed * scoped_direction.x
-	out.y = scoped_projectile_speed * scoped_direction.y
+	out.x = speed * direction.x
+	out.y = speed * direction.y
 	
-	out.y -= 100 #give us some ups to start with
+	out.y -= 80 #give us some ups to start with
 
 	return out
 

@@ -77,6 +77,8 @@ position = Vector2( -0.5, -0.5 )
 scale = Vector2( 0.35, 0.35 )
 
 [node name="FizzleTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
 
 [connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
 [connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

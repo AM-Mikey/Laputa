@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Actor/Actor.gd"
 }, {
+"base": "Node",
+"class": "AutoTile",
+"language": "GDScript",
+"path": "res://src/Tile/AutoTile.gd"
+}, {
 "base": "Resource",
 "class": "Background",
 "language": "GDScript",
@@ -81,6 +86,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Actor": "res://assets/Icon/ActorIcon.png",
+"AutoTile": "res://assets/Icon/NPCIcon.png",
 "Background": "res://assets/Icon/BackgroundIcon.png",
 "Boss": "res://assets/Icon/BossIcon.png",
 "Bullet": "res://assets/Icon/BulletIcon.png",

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/Editor/Cursor.tres" type="StyleBox" id=1]
 [ext_resource path="res://src/Editor/Tiles.gd" type="Script" id=2]
@@ -8,18 +8,9 @@
 [ext_resource path="res://assets/Editor/FlipH.png" type="Texture" id=6]
 [ext_resource path="res://assets/Editor/FlipV.png" type="Texture" id=7]
 [ext_resource path="res://assets/Editor/RotateC.png" type="Texture" id=8]
-
-[sub_resource type="StyleBoxEmpty" id=1]
-
-[sub_resource type="StyleBoxEmpty" id=2]
-
-[sub_resource type="StyleBoxEmpty" id=3]
-
-[sub_resource type="StyleBoxEmpty" id=4]
-
-[sub_resource type="StyleBoxEmpty" id=5]
-
-[sub_resource type="StyleBoxEmpty" id=6]
+[ext_resource path="res://assets/Editor/AutoLayerFalse.png" type="Texture" id=9]
+[ext_resource path="res://assets/Editor/MultiEraseFalse.png" type="Texture" id=10]
+[ext_resource path="res://assets/Editor/AutoTileFalse.png" type="Texture" id=11]
 
 [sub_resource type="StyleBoxEmpty" id=7]
 
@@ -63,53 +54,51 @@ margin_bottom = 40.0
 mouse_filter = 2
 
 [node name="AutoLayerLabel" type="Label" parent="VBox/HBox"]
+visible = false
 margin_top = 14.0
 margin_right = 69.0
 margin_bottom = 18.0
 text = "DrawOnAuto"
 
-[node name="AutoLayer" type="CheckBox" parent="VBox/HBox"]
-margin_left = 73.0
-margin_right = 101.0
+[node name="AutoLayer" type="Button" parent="VBox/HBox"]
+margin_right = 32.0
 margin_bottom = 32.0
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/hover_pressed = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
-pressed = true
+toggle_mode = true
+icon = ExtResource( 9 )
 
 [node name="VSeparator" type="VSeparator" parent="VBox/HBox"]
-margin_left = 105.0
-margin_right = 121.0
+visible = false
+margin_left = 36.0
+margin_right = 52.0
 margin_bottom = 32.0
 
 [node name="MultiEraseLabel" type="Label" parent="VBox/HBox"]
-margin_left = 125.0
+visible = false
+margin_left = 129.0
 margin_top = 14.0
-margin_right = 186.0
+margin_right = 190.0
 margin_bottom = 18.0
 text = "EraseOnAll"
 
-[node name="MultiErase" type="CheckBox" parent="VBox/HBox"]
-margin_left = 190.0
-margin_right = 218.0
+[node name="MultiErase" type="Button" parent="VBox/HBox"]
+margin_left = 36.0
+margin_right = 68.0
 margin_bottom = 32.0
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 8 )
-custom_styles/focus = SubResource( 9 )
-custom_styles/disabled = SubResource( 10 )
-custom_styles/hover_pressed = SubResource( 11 )
-custom_styles/normal = SubResource( 12 )
-pressed = true
-flat = true
+toggle_mode = true
+icon = ExtResource( 10 )
 
 [node name="VSeparator2" type="VSeparator" parent="VBox/HBox"]
 visible = false
 margin_left = 222.0
 margin_right = 238.0
 margin_bottom = 32.0
+
+[node name="AutoTile" type="Button" parent="VBox/HBox"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+toggle_mode = true
+icon = ExtResource( 11 )
 
 [node name="TerrainLabel" type="Label" parent="VBox/HBox"]
 visible = false
@@ -121,8 +110,8 @@ text = "Terrain"
 
 [node name="Terrain" type="CheckBox" parent="VBox/HBox"]
 visible = false
-margin_left = 289.0
-margin_right = 317.0
+margin_left = 108.0
+margin_right = 136.0
 margin_bottom = 32.0
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
@@ -222,6 +211,7 @@ custom_styles/panel = ExtResource( 1 )
 
 [connection signal="toggled" from="VBox/HBox/AutoLayer" to="." method="_on_AutoLayer_toggled"]
 [connection signal="toggled" from="VBox/HBox/MultiErase" to="." method="_on_MultiErase_toggled"]
+[connection signal="toggled" from="VBox/HBox/AutoTile" to="." method="_on_AutoTile_toggled"]
 [connection signal="toggled" from="VBox/HBox/Terrain" to="." method="_on_Terrain_toggled"]
 [connection signal="toggled" from="VBox/Options/FlipH" to="." method="_on_FlipH_toggled"]
 [connection signal="toggled" from="VBox/Options/FlipV" to="." method="_on_FlipV_toggled"]

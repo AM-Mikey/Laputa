@@ -49,12 +49,11 @@ func _ready():
 			change_state(state)
 	
 	if not w.get_node("EditorLayer").has_node("Editor"):
+		setup_damagenum_timer()
 		setup()
 
 func setup(): #EVERY ENEMY MUST HAVE
-	setup_damagenum_timer()
-	print("sad")
-	#pass #to be determined in enemy script. 
+	pass #to be determined in enemy script. 
 
 
 
@@ -139,7 +138,6 @@ func setup_damagenum_timer():
 	damagenum_timer.one_shot = true
 	damagenum_timer.connect("timeout", self, "_on_DamagenumTimer_timeout")
 	add_child(damagenum_timer)
-	print("yaaay: ", id)
 
 
 func set_damagenum(damage):
@@ -163,7 +161,7 @@ func die():
 	if dead: return
 	dead = true
 	do_death_drop()
-	$DamagenumTimer.stop()
+	damagenum_timer.stop()
 	_on_DamagenumTimer_timeout()
 	if not pc:
 		pc = get_tree().get_root().get_node_or_null("World/Juniper")

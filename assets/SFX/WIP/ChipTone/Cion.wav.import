@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Cion.wav-d6947e16a37db1ed382d3b25e3a58893.sample"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/ChipTone/Cion.wav"
+dest_files=[ "res://.import/Cion.wav-d6947e16a37db1ed382d3b25e3a58893.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

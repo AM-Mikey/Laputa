@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/FloatJump.wav-eb18a6287f85e52ecac958c474780412.sample"
+
+[deps]
+
+source_file="res://assets/SFX/WIP/ChipTone/FloatJump.wav"
+dest_files=[ "res://.import/FloatJump.wav-eb18a6287f85e52ecac958c474780412.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
