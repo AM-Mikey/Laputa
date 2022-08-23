@@ -118,6 +118,7 @@ func set_entities_pickable(pickable = true):
 #		if not t.is_in_group("Previews"):
 #			t.input_pickable = pickable
 
+
 func setup_level_limiter():
 	editor_level_limiter = LIMITER.instance()
 	var level_layer = Node2D.new()
@@ -125,6 +126,13 @@ func setup_level_limiter():
 	level_layer.z_index = 8
 	w.current_level.add_child(level_layer)
 	level_layer.add_child(editor_level_limiter)
+
+
+###
+
+func load_editor_windows():
+	pass
+
 
 func exit():
 	#get_tree().paused = false
@@ -1094,3 +1102,11 @@ func on_tab_changed(tab):
 			set_entities_pickable()
 		_:
 			print("WARNING: could not find tab with name: " + $Main/Tab.get_child(tab).name)
+
+
+func _on_mouse_entered():
+	pass # Replace with function body.
+
+
+func _on_mouse_exited():
+	pass # Replace with function body.

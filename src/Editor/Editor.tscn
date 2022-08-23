@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/Editor/EditorTheme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Editor/Editor.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://src/Editor/Triggers.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Editor/TabButtons.gd" type="Script" id=12]
 [ext_resource path="res://src/Editor/Tooltip.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/Editor/EditorSettings.gd" type="Script" id=14]
 
 [node name="Editor" type="Control"]
 anchor_right = 1.0
@@ -37,11 +38,11 @@ anchor_bottom = 0.0
 margin_left = 761.0
 margin_right = 968.0
 margin_bottom = 440.0
-mouse_filter = 1
 
 [node name="Inspector" parent="Secondary" instance=ExtResource( 7 )]
 margin_right = 207.0
 margin_bottom = 440.0
+mouse_filter = 1
 
 [node name="Main" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
@@ -110,8 +111,15 @@ margin_right = 256.0
 margin_bottom = 16.0
 mouse_filter = 2
 
+[node name="EditorSettings" type="Node" parent="."]
+script = ExtResource( 14 )
+
 [connection signal="entity_selected" from="." to="Secondary/Inspector" method="on_selected"]
 [connection signal="level_saved" from="." to="Main/Tab/Levels" method="on_save"]
+[connection signal="mouse_entered" from="Secondary" to="Secondary" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Secondary" to="Secondary" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Main" to="Main" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Main" to="Main" method="_on_mouse_exited"]
 [connection signal="tab_changed" from="Main/Tab" to="." method="on_tab_changed"]
 [connection signal="autolayer_toggled" from="Main/Tab/Tiles" to="." method="on_Tiles_autolayer_toggled"]
 [connection signal="terrain_toggled" from="Main/Tab/Tiles" to="." method="on_terrain_toggled"]
