@@ -31,6 +31,10 @@ export var tile_separation: int = 1
 export(NodePath) var buttons
 export(NodePath) var cursor
 
+onready var auto_layer_button = $VBox/HBox/AutoLayer
+onready var multi_erase_button = $VBox/HBox/MultiErase
+onready var auto_tile_button = $VBox/HBox/AutoTile
+
 func setup_tile_set(new):
 	tile_set = new
 	texture = tile_set.tile_get_texture(tile_set.get_tiles_ids().front())

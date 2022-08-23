@@ -90,8 +90,18 @@ func setup_level():
 	for t in trigger_collection.get_children():
 		if t.has_node("TriggerController"):
 			t.get_node("TriggerController").enable()
+	setup_tile_options()
+	
+	
 
 ### SETUP
+
+func setup_tile_options():
+	var tiles = $Main/Tab/Tiles
+	tiles.auto_layer_button.pressed = auto_layer
+	tiles.multi_erase_button.pressed = multi_erase
+	tiles.auto_layer_button.pressed = auto_layer
+
 func move_actors_to_home():
 	for a in actor_collection.get_children():
 		a.global_position = a.home

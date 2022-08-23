@@ -4,6 +4,7 @@ extends AutoTile
 const DIRT = {
 	mid = [161, 161, 161, 161, 161, 161, 162, 163],
 	s = [177, 178, 179, 180],
+	vine = [148, 149, 150, 151],
 }
 
 const GRASS = {
@@ -77,12 +78,17 @@ func pattern_dirt(cell):
 #	if DIRT["mid"].has(get_tile(front, cell, "self")):
 #
 #	if get_air(front, cell, "south"):
-	if is_npt(cell+S, DIRT):
-		#front.set_cellv(cell, get_random(DIRT, "south"))
-		set_random(cell, DIRT.s)
+	
+	if is_tile(cell, DIRT.vine):
+		set_random(cell, DIRT.vine)
+	
 	else:
-		#front.set_cellv(cell, get_random(DIRT, "mid"))
-		set_random(cell, DIRT.mid)
+		if is_npt(cell+S, DIRT):
+			#front.set_cellv(cell, get_random(DIRT, "south"))
+			set_random(cell, DIRT.s)
+		else:
+			#front.set_cellv(cell, get_random(DIRT, "mid"))
+			set_random(cell, DIRT.mid)
 
 
 	if is_npt(cell+N, DIRT):
