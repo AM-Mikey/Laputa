@@ -1,22 +1,12 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Effect/Light/SunLight.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Tile/Wastes.tres" type="TileSet" id=3]
-[ext_resource path="res://src/Utility/Wire.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Utility/Rope/Rope.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/Background/LevelLimiter.gd" type="Script" id=6]
-[ext_resource path="res://src/Effect/Light/SunLight.gd" type="Script" id=7]
-[ext_resource path="res://src/Utility/Rope/Rope.gd" type="Script" id=8]
-[ext_resource path="res://src/Utility/Wire.gd" type="Script" id=9]
-[ext_resource path="res://src/Prop/AmmoRefill.gd" type="Script" id=10]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=11]
-[ext_resource path="res://src/Trigger/Door.gd" type="Script" id=12]
-[ext_resource path="res://src/Prop/ChestKeyItem.gd" type="Script" id=13]
 [ext_resource path="res://src/Prop/AmmoRefill.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Utility/Waypoint.tscn" type="PackedScene" id=15]
-[ext_resource path="res://src/Prop/Grass.tscn" type="PackedScene" id=16]
-[ext_resource path="res://src/Editor/SpawnPoint.gd" type="Script" id=17]
 [ext_resource path="res://src/Prop/ChestKeyItem.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Prop/SaveDisk.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=20]
@@ -24,32 +14,9 @@
 [ext_resource path="res://src/Trigger/FlavorText.tscn" type="PackedScene" id=22]
 [ext_resource path="res://src/Actor/Enemy/Bat.tscn" type="PackedScene" id=23]
 [ext_resource path="res://src/Actor/Enemy/Shield.tscn" type="PackedScene" id=24]
-[ext_resource path="res://src/Prop/Grass.gd" type="Script" id=25]
-[ext_resource path="res://src/Utility/Waypoint.gd" type="Script" id=26]
-[ext_resource path="res://src/Prop/SaveDisk.gd" type="Script" id=27]
-[ext_resource path="res://src/Prop/BreakBlock.gd" type="Script" id=28]
-[ext_resource path="res://src/Actor/Enemy/Shield.gd" type="Script" id=29]
-[ext_resource path="res://src/Actor/Enemy/Bat.gd" type="Script" id=30]
 [ext_resource path="res://src/Prop/BreakBlock.tscn" type="PackedScene" id=31]
 [ext_resource path="res://assets/Background/Wastes.png" type="Texture" id=32]
 [ext_resource path="res://src/Trigger/DialogCue.tscn" type="PackedScene" id=33]
-[ext_resource path="res://src/Trigger/DialogCue.gd" type="Script" id=34]
-[ext_resource path="res://src/Trigger/FlavorText.gd" type="Script" id=35]
-
-[sub_resource type="Curve2D" id=1]
-_data = {
-"points": PoolVector2Array( -71.7063, -31.7887, 71.7063, 31.7887, 834, 134, 0, 0, 0, 0, 962, 150 )
-}
-
-[sub_resource type="Curve2D" id=2]
-_data = {
-"points": PoolVector2Array( -86.2499, -118.988, 86.2499, 118.988, 772.125, 368.516, 0, 0, 0, 0, 986.125, 464.516 )
-}
-
-[sub_resource type="Curve2D" id=3]
-_data = {
-"points": PoolVector2Array( -42.5042, -24.9522, 42.5042, 24.9522, 752, 459, 0, 0, 0, 0, 822, 459 )
-}
 
 [sub_resource type="Curve2D" id=4]
 _data = {
@@ -59,23 +26,19 @@ _data = {
 [node name="WasteTest" type="Node2D"]
 script = ExtResource( 11 )
 level_name = "WasteTest"
-level_type = 0
 tile_set = ExtResource( 3 )
 music = "res://assets/Music/PhiDelta_Shop_Intro.wav"
 dialog_json = "res://src/Dialog/Village.json"
 conversation = "cutscene_test"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." instance=ExtResource( 1 )]
+[node name="LevelLimiter" parent="." instance=ExtResource( 1 )]
 margin_left = -64.0
 margin_top = -32.0
 margin_right = 2320.0
 margin_bottom = 464.0
-mouse_filter = 2
-script = ExtResource( 6 )
 texture = ExtResource( 32 )
 layers = 6
 parallax_near = 1.0
-parallax_far = 0.0
 focus = 2
 tile_mode = 1
 
@@ -120,28 +83,8 @@ occluder_light_mask = 8
 format = 1
 tile_data = PoolIntArray( 589940, 192, 0, 589941, 194, 0, 589942, 194, 0, 589943, 194, 0, 589944, 194, 0, 589945, 194, 0, 589946, 193, 0, 589947, 194, 0, 589948, 194, 0, 589949, 193, 0, 589950, 193, 0, 589951, 193, 0, 589952, 194, 0, 589953, 193, 0, 589954, 193, 0, 589955, 195, 0, 655461, 192, 0, 655462, 193, 0, 655463, 193, 0, 655464, 193, 0, 655465, 194, 0, 655466, 193, 0, 655467, 194, 0, 655468, 193, 0, 655469, 193, 0, 655470, 194, 0, 655471, 193, 0, 655472, 193, 0, 655473, 193, 0, 655474, 194, 0, 655475, 194, 0, 655476, 226, 0, 655477, 242, 0, 655478, 209, 0, 655479, 209, 0, 655480, 209, 0, 655481, 210, 0, 655482, 209, 0, 655483, 210, 0, 655484, 209, 0, 655485, 210, 0, 655486, 209, 0, 655487, 210, 0, 655488, 210, 0, 655489, 209, 0, 655490, 243, 0, 655491, 227, 0, 655492, 194, 0, 655493, 194, 0, 655494, 193, 0, 655495, 194, 0, 655496, 195, 0, 720913, 192, 0, 720914, 194, 0, 720915, 194, 0, 720916, 194, 0, 720917, 194, 0, 720918, 193, 0, 720919, 193, 0, 720920, 193, 0, 720921, 193, 0, 720922, 195, 0, 720997, 208, 0, 720998, 209, 0, 720999, 210, 0, 721000, 209, 0, 721001, 210, 0, 721002, 209, 0, 721003, 209, 0, 721004, 210, 0, 721005, 209, 0, 721006, 209, 0, 721007, 210, 0, 721008, 209, 0, 721009, 210, 0, 721010, 210, 0, 721011, 210, 0, 721012, 210, 0, 721013, 211, 0, 721026, 208, 0, 721027, 209, 0, 721028, 210, 0, 721029, 209, 0, 721030, 209, 0, 721031, 210, 0, 721032, 211, 0, 851963, 192, 0, 851964, 194, 0, 851965, 193, 0, 851966, 194, 0, 851967, 195, 0, 786443, 192, 0, 786444, 194, 0, 786445, 193, 0, 786446, 193, 0, 786447, 193, 0, 786448, 193, 0, 786449, 226, 0, 786450, 242, 0, 786451, 210, 0, 786452, 210, 0, 786453, 209, 0, 786454, 209, 0, 786455, 210, 0, 786456, 210, 0, 786457, 210, 0, 786458, 211, 0, 786494, 192, 0, 786495, 194, 0, 786496, 193, 0, 786497, 193, 0, 786498, 193, 0, 786499, 195, 0, 917499, 208, 0, 917500, 210, 0, 917501, 209, 0, 917502, 243, 0, 917503, 227, 0, 851968, 195, 0, 851979, 208, 0, 851980, 210, 0, 851981, 210, 0, 851982, 210, 0, 851983, 209, 0, 851984, 209, 0, 851985, 209, 0, 851986, 211, 0, 852030, 208, 0, 852031, 210, 0, 852032, 209, 0, 852033, 209, 0, 852034, 209, 0, 852035, 211, 0, 983038, 208, 0, 983039, 243, 0, 917504, 227, 0, 917505, 195, 0, 917511, 192, 0, 917512, 194, 0, 917513, 194, 0, 917514, 194, 0, 917515, 193, 0, 917516, 195, 0, 917529, 192, 0, 917530, 194, 0, 917531, 195, 0, 917550, 192, 0, 917551, 193, 0, 917552, 193, 0, 917553, 194, 0, 917554, 193, 0, 917555, 194, 0, 917556, 193, 0, 917557, 194, 0, 917558, 194, 0, 917559, 194, 0, 917560, 193, 0, 917561, 194, 0, 917562, 193, 0, 917563, 193, 0, 917564, 193, 0, 917565, 194, 0, 917566, 195, 0, 917571, 192, 0, 917572, 193, 0, 917573, 195, 0, 1048575, 208, 0, 983040, 243, 0, 983041, 227, 0, 983042, 195, 0, 983044, 192, 0, 983045, 194, 0, 983046, 193, 0, 983047, 224, 0, 983048, 209, 0, 983049, 210, 0, 983050, 209, 0, 983051, 210, 0, 983052, 211, 0, 983065, 208, 0, 983066, 209, 0, 983067, 225, 0, 983068, 193, 0, 983069, 193, 0, 983070, 194, 0, 983071, 195, 0, 983074, 192, 0, 983075, 194, 0, 983076, 194, 0, 983077, 193, 0, 983078, 193, 0, 983079, 193, 0, 983080, 194, 0, 983081, 194, 0, 983082, 194, 0, 983083, 193, 0, 983084, 193, 0, 983085, 193, 0, 983086, 224, 0, 983087, 209, 0, 983088, 209, 0, 983089, 210, 0, 983090, 209, 0, 983091, 209, 0, 983092, 209, 0, 983093, 210, 0, 983094, 209, 0, 983095, 210, 0, 983096, 210, 0, 983097, 210, 0, 983098, 210, 0, 983099, 210, 0, 983100, 210, 0, 983101, 243, 0, 983102, 227, 0, 983103, 195, 0, 983107, 208, 0, 983108, 209, 0, 983109, 211, 0, 1048576, 208, 0, 1048577, 243, 0, 1048578, 227, 0, 1048579, 193, 0, 1048580, 224, 0, 1048581, 210, 0, 1048582, 243, 0, 1048583, 227, 0, 1048584, 195, 0, 1048603, 208, 0, 1048604, 209, 0, 1048605, 210, 0, 1048606, 210, 0, 1048607, 211, 0, 1048610, 208, 0, 1048611, 209, 0, 1048612, 209, 0, 1048613, 210, 0, 1048614, 209, 0, 1048615, 210, 0, 1048616, 209, 0, 1048617, 209, 0, 1048618, 209, 0, 1048619, 210, 0, 1048620, 210, 0, 1048621, 210, 0, 1048622, 211, 0, 1048637, 208, 0, 1048638, 209, 0, 1048639, 211, 0, 1114113, 208, 0, 1114114, 210, 0, 1114115, 209, 0, 1114116, 211, 0, 1114118, 208, 0, 1114119, 210, 0, 1114120, 211, 0, 1114201, 192, 0, 1114202, 193, 0, 1114203, 193, 0, 1114204, 194, 0, 1114205, 194, 0, 1114206, 193, 0, 1114207, 195, 0, 1114221, 192, 0, 1114222, 194, 0, 1114223, 193, 0, 1114224, 194, 0, 1114225, 194, 0, 1114226, 194, 0, 1114227, 193, 0, 1114228, 194, 0, 1114229, 194, 0, 1114230, 194, 0, 1114231, 193, 0, 1114232, 195, 0, 1179737, 208, 0, 1179738, 209, 0, 1179739, 210, 0, 1179740, 209, 0, 1179741, 209, 0, 1179742, 209, 0, 1179743, 211, 0, 1179749, 192, 0, 1179750, 193, 0, 1179751, 194, 0, 1179752, 193, 0, 1179753, 194, 0, 1179754, 193, 0, 1179755, 193, 0, 1179756, 193, 0, 1179757, 226, 0, 1179758, 242, 0, 1179759, 210, 0, 1179760, 210, 0, 1179761, 210, 0, 1179762, 209, 0, 1179763, 210, 0, 1179764, 209, 0, 1179765, 210, 0, 1179766, 209, 0, 1179767, 243, 0, 1179768, 227, 0, 1179769, 194, 0, 1179770, 193, 0, 1179771, 193, 0, 1179772, 193, 0, 1179773, 194, 0, 1179774, 193, 0, 1179775, 194, 0, 1179776, 194, 0, 1179777, 194, 0, 1179778, 193, 0, 1179779, 194, 0, 1179780, 194, 0, 1179781, 193, 0, 1179782, 194, 0, 1179783, 193, 0, 1179784, 195, 0, 1245285, 208, 0, 1245286, 210, 0, 1245287, 210, 0, 1245288, 209, 0, 1245289, 209, 0, 1245290, 209, 0, 1245291, 209, 0, 1245292, 210, 0, 1245293, 210, 0, 1245294, 211, 0, 1245303, 208, 0, 1245304, 209, 0, 1245305, 210, 0, 1245306, 209, 0, 1245307, 209, 0, 1245308, 209, 0, 1245309, 210, 0, 1245310, 209, 0, 1245311, 209, 0, 1245312, 210, 0, 1245313, 210, 0, 1245314, 209, 0, 1245315, 209, 0, 1245316, 209, 0, 1245317, 210, 0, 1245318, 210, 0, 1245319, 210, 0, 1245320, 211, 0, 1310789, 192, 0, 1310790, 193, 0, 1310791, 194, 0, 1310792, 194, 0, 1310793, 194, 0, 1310794, 194, 0, 1310795, 193, 0, 1310796, 193, 0, 1310797, 193, 0, 1310798, 194, 0, 1310799, 194, 0, 1310800, 194, 0, 1310801, 193, 0, 1310802, 195, 0, 1376325, 208, 0, 1376326, 210, 0, 1376327, 210, 0, 1376328, 210, 0, 1376329, 210, 0, 1376330, 210, 0, 1376331, 209, 0, 1376332, 210, 0, 1376333, 210, 0, 1376334, 210, 0, 1376335, 210, 0, 1376336, 209, 0, 1376337, 209, 0, 1376338, 211, 0 )
 
-[node name="Wire" type="Path2D" parent="Tiles" instance=ExtResource( 4 )]
-visible = false
-curve = SubResource( 1 )
-script = ExtResource( 9 )
-
-[node name="Wire2" type="Path2D" parent="Tiles" instance=ExtResource( 4 )]
-visible = false
-position = Vector2( 199.875, -218.516 )
-curve = SubResource( 2 )
-script = ExtResource( 9 )
-
-[node name="Wire3" type="Path2D" parent="Tiles" instance=ExtResource( 4 )]
-visible = false
-position = Vector2( 444, -213 )
-curve = SubResource( 3 )
-script = ExtResource( 9 )
-
 [node name="Rope" parent="Tiles" instance=ExtResource( 5 )]
 position = Vector2( 834, 134 )
-script = ExtResource( 8 )
-softness = 0.01
-bias = 0.1
 
 [node name="EndPos" parent="Tiles/Rope" index="1"]
 position = Vector2( 128, 16 )
@@ -151,17 +94,9 @@ curve = SubResource( 4 )
 
 [node name="Line2D" parent="Tiles/Rope" index="3"]
 points = PoolVector2Array( 0, 0, 4.05585, 0.536148, 9.65186, 2.95464, 15.3088, 5.22385, 21.0239, 7.33963, 26.7939, 9.29817, 32.6151, 11.0961, 38.4834, 12.7304, 44.395, 14.1984, 50.3451, 15.4975, 56.3295, 16.6254, 62.3437, 17.58, 68.3827, 18.3589, 74.4432, 18.9603, 80.5172, 19.3817, 86.6008, 19.6215, 92.6887, 19.6778, 98.7756, 19.5494, 104.856, 19.2352, 110.924, 18.7349, 116.974, 18.0487, 122.999, 17.1781, 128, 16 )
-width = 1.0
-default_color = Color( 0, 0, 0, 1 )
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
 
 [node name="Rope2" parent="Tiles" instance=ExtResource( 5 )]
 position = Vector2( 972, 150 )
-script = ExtResource( 8 )
-softness = 0.01
-bias = 0.1
 
 [node name="EndPos" parent="Tiles/Rope2" index="1"]
 position = Vector2( 214, 96 )
@@ -171,17 +106,9 @@ curve = SubResource( 4 )
 
 [node name="Line2D" parent="Tiles/Rope2" index="3"]
 points = PoolVector2Array( 0, 0, 3.76959, 1.74889, 8.31421, 5.91039, 12.9099, 10.0126, 17.5573, 14.0534, 22.257, 18.0307, 27.009, 21.9423, 31.8141, 25.7857, 36.6727, 29.5587, 41.5803, 33.2554, 46.5461, 36.8804, 51.5658, 40.4275, 56.6396, 43.8943, 61.7719, 47.2812, 66.9534, 50.5791, 72.1833, 53.786, 77.4712, 56.9049, 82.8167, 59.9327, 88.2092, 62.8611, 93.6531, 65.6902, 99.1473, 68.4171, 104.691, 71.039, 110.284, 73.5528, 115.923, 75.9559, 121.609, 78.2453, 127.34, 80.418, 133.113, 82.4712, 138.927, 84.4023, 144.781, 86.2085, 150.671, 87.8872, 156.596, 89.4361, 162.553, 90.853, 168.541, 92.1358, 174.554, 93.2827, 180.593, 94.2924, 186.652, 95.1635, 192.729, 95.8949, 198.822, 96.486, 204.925, 96.9363, 211.033, 97.2453, 214, 96 )
-width = 1.0
-default_color = Color( 0, 0, 0, 1 )
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
 
 [node name="Rope3" parent="Tiles" instance=ExtResource( 5 )]
 position = Vector2( 1196, 246 )
-script = ExtResource( 8 )
-softness = 0.01
-bias = 0.1
 
 [node name="EndPos" parent="Tiles/Rope3" index="1"]
 position = Vector2( 70, 0 )
@@ -191,17 +118,9 @@ curve = SubResource( 4 )
 
 [node name="Line2D" parent="Tiles/Rope3" index="3"]
 points = PoolVector2Array( 0, 0, 4.06494, 0.0184784, 9.95654, 1.46672, 15.9026, 2.6687, 21.8939, 3.61469, 27.9209, 4.29631, 33.972, 4.70732, 40.0356, 4.8438, 46.0991, 4.70438, 52.1499, 4.29034, 58.1766, 3.60558, 64.1676, 2.65633, 70.1128, 1.45094, 70, 0 )
-width = 1.0
-default_color = Color( 0, 0, 0, 1 )
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
 
 [node name="Rope4" parent="Tiles" instance=ExtResource( 5 )]
 position = Vector2( 1276, 246 )
-script = ExtResource( 8 )
-softness = 0.01
-bias = 0.1
 
 [node name="EndPos" parent="Tiles/Rope4" index="1"]
 position = Vector2( 182, -48 )
@@ -211,328 +130,145 @@ curve = SubResource( 4 )
 
 [node name="Line2D" parent="Tiles/Rope4" index="3"]
 points = PoolVector2Array( 0, 0, 3.97644, -1.00757, 10.0597, -0.449341, 16.1549, -0.0439453, 22.2584, 0.208023, 28.366, 0.306534, 34.4745, 0.251892, 40.5792, 0.0448761, 46.6777, -0.313385, 52.7654, -0.821365, 58.8392, -1.47725, 64.8959, -2.27901, 70.9321, -3.22437, 76.9452, -4.31091, 82.932, -5.53624, 88.8899, -6.89764, 94.8164, -8.39268, 100.709, -10.0186, 106.565, -11.7731, 112.383, -13.6534, 118.161, -15.6571, 123.896, -17.7819, 129.587, -20.0252, 135.232, -22.3847, 140.829, -24.8581, 146.377, -27.4429, 151.873, -30.1362, 157.317, -32.9367, 162.708, -35.8416, 168.045, -38.8481, 173.326, -41.9539, 178.551, -45.1564, 182, -48 )
-width = 1.0
-default_color = Color( 0, 0, 0, 1 )
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
 
 [node name="Props" type="Node2D" parent="."]
 
-[node name="@SaveDisk@3946" type="Area2D" parent="Props" instance=ExtResource( 19 )]
+[node name="@SaveDisk@3946" parent="Props" instance=ExtResource( 19 )]
 position = Vector2( 568, 208 )
-collision_layer = 0
 input_pickable = false
-script = ExtResource( 27 )
-editor_hidden = false
 
-[node name="AmmoRefill" type="Area2D" parent="Props" instance=ExtResource( 14 )]
+[node name="AmmoRefill" parent="Props" instance=ExtResource( 14 )]
 position = Vector2( 456, 112 )
-collision_layer = 16
 input_pickable = false
-script = ExtResource( 10 )
-editor_hidden = false
 
-[node name="Chest" type="Area2D" parent="Props" instance=ExtResource( 18 )]
+[node name="Chest" parent="Props" instance=ExtResource( 18 )]
 position = Vector2( 104, 208 )
 input_pickable = false
-script = ExtResource( 13 )
-editor_hidden = false
-held_item = ""
 
-[node name="@Grass@13675" type="Area2D" parent="Props" instance=ExtResource( 16 )]
-position = Vector2( 280, 192 )
-z_index = 2
-collision_layer = 256
-collision_mask = 0
-input_pickable = false
-script = ExtResource( 25 )
-editor_hidden = false
-drop_chance = 0.1
-heart_chance = 1
-experience_chance = 1
-ammo_chance = 0
-
-[node name="@Grass@13752" type="Area2D" parent="Props" instance=ExtResource( 16 )]
-position = Vector2( 264, 192 )
-z_index = 2
-collision_layer = 256
-collision_mask = 0
-input_pickable = false
-script = ExtResource( 25 )
-editor_hidden = false
-drop_chance = 0.1
-heart_chance = 1
-experience_chance = 1
-ammo_chance = 1
-
-[node name="Grass" type="Area2D" parent="Props" instance=ExtResource( 16 )]
-position = Vector2( 248, 192 )
-z_index = 2
-collision_layer = 256
-collision_mask = 0
-input_pickable = false
-script = ExtResource( 25 )
-editor_hidden = false
-drop_chance = 0.1
-heart_chance = 1
-experience_chance = 1
-ammo_chance = 0
-
-[node name="@Grass@13890" type="Area2D" parent="Props" instance=ExtResource( 16 )]
-position = Vector2( 232, 192 )
-z_index = 2
-collision_layer = 256
-collision_mask = 0
-input_pickable = false
-script = ExtResource( 25 )
-editor_hidden = false
-drop_chance = 0.1
-heart_chance = 1
-experience_chance = 1
-ammo_chance = 1
-
-[node name="@BreakBlock@5068" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="@BreakBlock@5068" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 120, 128 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
-[node name="@BreakBlock@5077" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="@BreakBlock@5077" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 136, 128 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
-[node name="BreakBlock" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="BreakBlock" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 136, 144 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
-[node name="@BreakBlock@5092" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="@BreakBlock@5092" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 120, 128 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
-[node name="@BreakBlock@5104" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="@BreakBlock@5104" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 136, 144 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
-[node name="@BreakBlock@5118" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="@BreakBlock@5118" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 136, 144 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
-[node name="@BreakBlock@5143" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="@BreakBlock@5143" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 120, 160 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
-[node name="@BreakBlock@5158" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="@BreakBlock@5158" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 136, 160 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
-[node name="@BreakBlock@5236" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="@BreakBlock@5236" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 152, 160 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
 [node name="Actors" type="Node2D" parent="."]
 
-[node name="Bat" type="KinematicBody2D" parent="Actors" instance=ExtResource( 23 )]
+[node name="Bat" parent="Actors" instance=ExtResource( 23 )]
 position = Vector2( 296, 160 )
-collision_layer = 2
-collision_mask = 8
-script = ExtResource( 30 )
-editor_hidden = false
 speed = Vector2( 100, 50 )
-debug = true
 id = "bat"
 move_dir = Vector2( -0.785285, 0 )
-flap_time = 0.1
-idle_time = 0.05
-start_waypoint = 0
 
-[node name="Bat2" type="KinematicBody2D" parent="Actors" instance=ExtResource( 23 )]
+[node name="Bat2" parent="Actors" instance=ExtResource( 23 )]
 position = Vector2( 176, 72 )
-collision_layer = 2
-collision_mask = 8
-script = ExtResource( 30 )
-editor_hidden = false
 speed = Vector2( 100, 50 )
-debug = true
 id = "bat"
 move_dir = Vector2( 0.43229, 0 )
-flap_time = 0.1
-idle_time = 0.05
-start_waypoint = 0
 
-[node name="@Bat@2414" type="KinematicBody2D" parent="Actors" instance=ExtResource( 23 )]
+[node name="@Bat@2414" parent="Actors" instance=ExtResource( 23 )]
 modulate = Color( 2, 2, 2, 1 )
 position = Vector2( 344, 48 )
-collision_layer = 2
-collision_mask = 8
-script = ExtResource( 30 )
-editor_hidden = false
 speed = Vector2( 100, 50 )
-debug = true
-id = ""
-move_dir = Vector2( 0, 0 )
-flap_time = 0.1
-idle_time = 0.05
-start_waypoint = 0
 
-[node name="Shield" type="KinematicBody2D" parent="Actors" instance=ExtResource( 24 )]
+[node name="Shield" parent="Actors" instance=ExtResource( 24 )]
 position = Vector2( 696, 256 )
-collision_layer = 2
-collision_mask = 8
-script = ExtResource( 29 )
-editor_hidden = false
 speed = Vector2( 50, 50 )
-debug = true
 id = "shield"
-move_dir = Vector2( -1, 0 )
-idle_max_time = 5.0
-walk_max_time = 10.0
-defend_time = 0.4
 
 [node name="Triggers" type="Node2D" parent="."]
 
-[node name="FlavorText" type="Area2D" parent="Triggers" instance=ExtResource( 22 )]
+[node name="FlavorText" parent="Triggers" instance=ExtResource( 22 )]
 position = Vector2( 360, 192 )
 z_index = 100
-collision_layer = 0
 input_pickable = false
-script = ExtResource( 35 )
-editor_hidden = false
-color = Color( 0.901961, 0.74902, 0, 1 )
 text = "testing"
 
-[node name="@Door@2306" type="Area2D" parent="Triggers" groups=["Trigger"] instance=ExtResource( 20 )]
+[node name="@Door@2306" parent="Triggers" instance=ExtResource( 20 )]
 position = Vector2( 432, 160 )
 z_index = 100
-collision_layer = 0
-script = ExtResource( 12 )
-editor_hidden = false
-color = Color( 0, 0.4, 0, 1 )
-level = ""
-door_index = 0
-locked = false
 
-[node name="DialogCue" type="Area2D" parent="Triggers" instance=ExtResource( 33 )]
+[node name="DialogCue" parent="Triggers" instance=ExtResource( 33 )]
 position = Vector2( -80, -128 )
 z_index = 100
-collision_layer = 0
-script = ExtResource( 34 )
-editor_hidden = false
-color = Color( 1, 0, 0, 1 )
-dialog_json = ""
-conversation = ""
-repeatable = false
 
-[node name="SpawnPoint" type="Area2D" parent="." instance=ExtResource( 21 )]
+[node name="SpawnPoint" parent="." instance=ExtResource( 21 )]
 position = Vector2( 840, 240 )
-script = ExtResource( 17 )
 
-[node name="SunLight" type="Area2D" parent="." instance=ExtResource( 2 )]
+[node name="SunLight" parent="." instance=ExtResource( 2 )]
 visible = false
 position = Vector2( 241, 0 )
-script = ExtResource( 7 )
-light_color = Color( 0.5, 0.5, 0.5, 1 )
-shadow_color = Color( 0, 0, 0, 1 )
-modulate_color = Color( 0.5, 0.5, 0.5, 1 )
 
-[node name="Waypoint" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint" parent="." instance=ExtResource( 15 )]
 modulate = Color( 0.545098, 0, 0, 1 )
 position = Vector2( 256, 128 )
-script = ExtResource( 26 )
 owner_id = "bat"
-index = 0
 
-[node name="Waypoint2" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint2" parent="." instance=ExtResource( 15 )]
 position = Vector2( 192, 160 )
-script = ExtResource( 26 )
 owner_id = "bat"
 index = 1
 
-[node name="Waypoint3" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint3" parent="." instance=ExtResource( 15 )]
 position = Vector2( 280, 64 )
-script = ExtResource( 26 )
 owner_id = "bat"
 index = 3
 
-[node name="Waypoint4" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint4" parent="." instance=ExtResource( 15 )]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 304, 224 )
-script = ExtResource( 26 )
 owner_id = "bat"
 index = 4
 
-[node name="Waypoint5" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint5" parent="." instance=ExtResource( 15 )]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 208, 224 )
-script = ExtResource( 26 )
 owner_id = "bat"
 index = 5
 
-[node name="Waypoint6" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint6" parent="." instance=ExtResource( 15 )]
 position = Vector2( 241, 104 )
-script = ExtResource( 26 )
 owner_id = "bat"
 index = 2
 
-[node name="Waypoint7" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint7" parent="." instance=ExtResource( 15 )]
 position = Vector2( 128, 80 )
-script = ExtResource( 26 )
 owner_id = "bat2"
-index = 0
 
-[node name="Waypoint8" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint8" parent="." instance=ExtResource( 15 )]
 position = Vector2( -16, 96 )
-script = ExtResource( 26 )
 owner_id = "bat2"
 index = 1
 
-[node name="Waypoint9" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint9" parent="." instance=ExtResource( 15 )]
 position = Vector2( 120, 40 )
-script = ExtResource( 26 )
 owner_id = "bat2"
 index = 2
 
-[node name="Waypoint10" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint10" parent="." instance=ExtResource( 15 )]
 position = Vector2( 360, 96 )
-script = ExtResource( 26 )
 owner_id = "bat2"
 index = 3
-
-[connection signal="body_entered" from="Props/@SaveDisk@3946" to="Props/@SaveDisk@3946" method="_on_body_entered"]
-[connection signal="body_exited" from="Props/@SaveDisk@3946" to="Props/@SaveDisk@3946" method="_on_body_exited"]
-[connection signal="body_entered" from="Props/AmmoRefill" to="Props/AmmoRefill" method="_on_body_entered"]
-[connection signal="body_exited" from="Props/AmmoRefill" to="Props/AmmoRefill" method="_on_body_exited"]
-[connection signal="body_entered" from="Props/Chest" to="Props/Chest" method="_on_body_entered"]
-[connection signal="body_exited" from="Props/Chest" to="Props/Chest" method="_on_body_exited"]
-[connection signal="body_entered" from="Triggers/FlavorText" to="Triggers/FlavorText" method="_on_Sign_body_entered"]
-[connection signal="body_entered" from="Triggers/@Door@2306" to="Triggers/@Door@2306" method="_on_body_entered"]
-[connection signal="body_exited" from="Triggers/@Door@2306" to="Triggers/@Door@2306" method="_on_body_exited"]
-[connection signal="body_entered" from="Triggers/DialogCue" to="Triggers/DialogCue" method="_on_body_entered"]
 
 [editable path="Tiles/Rope"]
 [editable path="Tiles/Rope2"]
