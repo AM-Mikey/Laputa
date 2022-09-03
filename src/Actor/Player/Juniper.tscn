@@ -591,20 +591,21 @@ script = ExtResource( 16 )
 [node name="GunSprite" type="Sprite" parent="."]
 visible = false
 light_mask = 2
-position = Vector2( -4, -9 )
+position = Vector2( -19, 0 )
 texture = ExtResource( 25 )
 script = ExtResource( 26 )
 
 [node name="MuzzlePos" type="Position2D" parent="GunSprite"]
-position = Vector2( -5, -1 )
+position = Vector2( -6, -1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 light_mask = 2
 material = SubResource( 61 )
 position = Vector2( 0, -16 )
-texture = ExtResource( 21 )
-hframes = 8
+texture = ExtResource( 6 )
+hframes = 12
 vframes = 8
+frame = 10
 script = ExtResource( 13 )
 
 [node name="EffectPlayer" type="AnimationPlayer" parent="."]
