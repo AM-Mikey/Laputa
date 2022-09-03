@@ -99,7 +99,7 @@ _global_script_class_icons={
 "Prop": "res://assets/Icon/PropIcon.png",
 "State": "",
 "Trigger": "res://assets/Icon/TriggerIcon.png",
-"Weapon": "res://assets/Icon/WeaponIcon.png"
+"Weapon": ""
 }
 
 [addons]
