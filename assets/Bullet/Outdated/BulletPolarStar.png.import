@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BulletPolarStar.png-ba01ed4b95d8374d0e9c50cecc015a0c.stex"
+path="res://.import/BulletPolarStar.png-0b2d8d51004c5d48c4e251c0036322b4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Bullet/BulletPolarStar.png"
-dest_files=[ "res://.import/BulletPolarStar.png-ba01ed4b95d8374d0e9c50cecc015a0c.stex" ]
+source_file="res://assets/Bullet/Outdated/BulletPolarStar.png"
+dest_files=[ "res://.import/BulletPolarStar.png-0b2d8d51004c5d48c4e251c0036322b4.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false
