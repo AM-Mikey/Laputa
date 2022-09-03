@@ -92,10 +92,10 @@ func animate():
 	var vframe: int
 	if pc.look_dir.x < 0: #left
 		vframe = 0
-		guns.flip_h = false
+		guns.scale.x = 1
 	else: #right
 		vframe = 3
-		guns.flip_h = true
+		guns.scale.x = -1
 	
 	
 	if pc.shoot_dir.y < 0: #up

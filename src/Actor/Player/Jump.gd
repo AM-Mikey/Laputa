@@ -117,10 +117,10 @@ func animate():
 	
 	if pc.shoot_dir.y < 0: #up
 		vframe += 1
-		guns.rotation_degrees = 90 if not guns.scale.x == 1 else -90
+		guns.rotation_degrees = 90 if guns.scale.x == 1 else -90
 	elif pc.shoot_dir.y > 0: #down
 		vframe += 2
-		guns.rotation_degrees = -90 if not guns.scale.x == 1 else 90
+		guns.rotation_degrees = -90 if guns.scale.x == 1 else 90
 	else:
 		guns.rotation_degrees = 0
 	
