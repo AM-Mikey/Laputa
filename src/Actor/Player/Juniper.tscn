@@ -523,7 +523,8 @@ script = ExtResource( 12 )
 one_shot = true
 autostart = true
 
-[node name="Guns" type="Node" parent="GunManager"]
+[node name="Guns" type="Node2D" parent="GunManager"]
+position = Vector2( -6, -9 )
 
 [node name="Revolver" parent="GunManager/Guns" instance=ExtResource( 3 )]
 
@@ -588,6 +589,7 @@ shape = SubResource( 63 )
 script = ExtResource( 16 )
 
 [node name="GunSprite" type="Sprite" parent="."]
+visible = false
 light_mask = 2
 position = Vector2( -4, -9 )
 texture = ExtResource( 25 )
@@ -600,8 +602,8 @@ position = Vector2( -5, -1 )
 light_mask = 2
 material = SubResource( 61 )
 position = Vector2( 0, -16 )
-texture = ExtResource( 6 )
-hframes = 12
+texture = ExtResource( 21 )
+hframes = 8
 vframes = 8
 script = ExtResource( 13 )
 

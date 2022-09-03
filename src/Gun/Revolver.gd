@@ -3,7 +3,7 @@ extends Gun
 func _ready():
 	display_name = "Revolver"
 	description = "Your first weapon."
-	texture = load("res://assets/Gun/Revolver.png")
+#	texture = load("res://assets/Gun/Revolver.png")
 	icon_texture = load("res://assets/Gun/RevolverIcon.png")
 	sfx = "gun_pistol"
 	cooldown_time = 0.1

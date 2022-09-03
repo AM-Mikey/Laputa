@@ -5,7 +5,7 @@ onready var pc = world.get_node("Juniper")
 onready var mm = pc.get_node("MovementManager")
 
 onready var sprite = pc.get_node("Sprite")
-onready var gun_sprite = pc.get_node("GunSprite")
+onready var guns = pc.get_node("Gunmanager/Guns")
 onready var ap = pc.get_node("AnimationPlayer")
 onready var anim = pc.get_node("AnimationManager")
 
@@ -61,7 +61,7 @@ func animate():
 
 
 func enter():
-	gun_sprite.visible = false
+	guns.visible = false
 	
 func exit():
-	gun_sprite.visible = true
+	guns.visible = true

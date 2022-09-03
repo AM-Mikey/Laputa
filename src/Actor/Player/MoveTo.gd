@@ -10,7 +10,7 @@ onready var world = get_tree().get_root().get_node("World")
 onready var pc = world.get_node("Juniper")
 onready var mm = pc.get_node("MovementManager")
 onready var sprite = pc.get_node("Sprite")
-onready var gun_sprite = pc.get_node("GunSprite")
+onready var guns = pc.get_node("GunManager/Guns")
 onready var ap = pc.get_node("AnimationPlayer")
 onready var anim = pc.get_node("AnimationManager")
 
@@ -79,12 +79,12 @@ func animate():
 	
 	
 	var vframe: int
-	if pc.move_dir.x < 0: #left
+	if pc.look_dir.x < 0: #left
 		vframe = 0
-		gun_sprite.flip_h = false
+		guns.scale.x = 1
 	else: #right
 		vframe = 4
-		gun_sprite.flip_h = true
+		guns.scale.x = -1
 	
 	
 	
@@ -95,7 +95,7 @@ func animate():
 	
 	anim.set_gun_draw_index()
 	sprite.frame_coords.y = vframe
-	gun_sprite.position = anim.get_gun_pos(animation, vframe, sprite.frame_coords.x) #changes the gun sprite every time animate is called
+	guns.position = anim.get_gun_pos(animation, vframe, sprite.frame_coords.x) #changes the gun sprite every time animate is called
 
 
 
