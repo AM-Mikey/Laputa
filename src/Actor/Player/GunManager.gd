@@ -8,6 +8,8 @@ var disabled = false
 onready var world = get_tree().get_root().get_node("World")
 onready var pc = get_tree().get_root().get_node("World/Juniper")
 
+func _ready():
+	set_guns_visible()
 
 func _input(event):
 	if not pc.disabled and not disabled and $Guns.get_child_count() > 0:
@@ -31,6 +33,7 @@ func _input(event):
 		if event.is_action_pressed("debug_level_down") and active_gun.level != 1:
 				level_down(true)
 
+### METHODS
 
 func shift_gun(direction):
 	match direction:
@@ -41,9 +44,12 @@ func shift_gun(direction):
 			var child_to_move = $Guns.get_child(0)
 			$Guns.move_child(child_to_move, $Guns.get_child_count() - 1)
 	
+	set_guns_visible()
+	
+	
 	pc.emit_signal("guns_updated", $Guns.get_children())
 	am.play("gun_shift")
-	
+
 
 
 func level_up(debug):
@@ -79,3 +85,12 @@ func disable():
 func enable():
 	disabled = false
 	pc.get_node("GunSprite").visible = true
+
+
+### HELPERS
+
+func set_guns_visible():
+	var active_gun = $Guns.get_child(0)
+	for g in $Guns.get_children():
+		g.visible = false
+	active_gun.visible = true

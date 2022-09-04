@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name Gun, "res://assets/Icon/GunIcon.png"
 
 const MUZZLE_FLASH = preload("res://src/Effect/MuzzleFlashEffect.tscn")
