@@ -3,7 +3,7 @@
 [ext_resource path="res://src/Actor/Player/PlayerCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Gun/Revolver.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Gun/GLauncher.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Gun/Defender.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Gun/Outdated/Defender.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Gun/Shotgun.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Gun/MPistol.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Actor/Player/GunSprite.gd" type="Script" id=7]
@@ -29,6 +29,7 @@
 [ext_resource path="res://src/Actor/Player/LongJump.gd" type="Script" id=29]
 [ext_resource path="res://src/Actor/Player/Fall.gd" type="Script" id=30]
 [ext_resource path="res://assets/Actor/Player/Climb.png" type="Texture" id=32]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 7.5 )
