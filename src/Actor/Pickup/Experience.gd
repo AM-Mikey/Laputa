@@ -51,6 +51,9 @@ func _physics_process(delta):
 
 	var ave_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 	$AnimationPlayer.playback_speed = ave_velocity / start_velocity
+	
+	if $AnimationPlayer.playback_speed > 1:
+		$AnimationPlayer.playback_speed = 1
 	if $AnimationPlayer.playback_speed < .1:
 		$AnimationPlayer.stop()
 

@@ -77,7 +77,7 @@ export var music_dict: Dictionary = {
 
 
 export var remove_duplicate_sfx = false
-export var sfx_player_max = 999 #8
+export var sfx_player_max = 999 #8 #TODO: broken, triggering this causes crash from queue_free on deleted node
 var sfx_players = []
 var sfx_queue = []
 export var remove_recent_duplicate_sfx = true
