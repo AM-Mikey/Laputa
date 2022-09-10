@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=6 format=2]
 
 [ext_resource path="res://assets/SFX/Placeholder/snd_polar_star_l1_2.ogg" type="AudioStream" id=1]
-[ext_resource path="res://src/Gun/Weapon.gd" type="Script" id=2]
+[ext_resource path="res://src/Gun/Outdated/Weapon.gd" type="Script" id=2]
 [ext_resource path="res://src/Bullet/MPistol.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Gun/MPistol.png" type="Texture" id=4]
 [ext_resource path="res://assets/Gun/MPistolIcon.png" type="Texture" id=5]

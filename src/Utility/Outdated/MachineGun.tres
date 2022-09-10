@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=4 format=2]
 
-[ext_resource path="res://src/Gun/Weapon.gd" type="Script" id=1]
+[ext_resource path="res://src/Gun/Outdated/Weapon.gd" type="Script" id=1]
 [ext_resource path="res://assets/Weapon/MachineGun.png" type="Texture" id=2]
 [ext_resource path="res://assets/Weapon/MachineGunIcon.png" type="Texture" id=3]
 

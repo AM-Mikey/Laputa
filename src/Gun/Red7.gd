@@ -1,5 +1,9 @@
 extends Gun
 
+var clip_size = 7
+var clip
+var reload_time = 0.5
+var fire_time = 0.1
 #fires in bursts of 7 bullets. you can fire less but not more before cooldown
 
 func _ready():
@@ -18,22 +22,40 @@ func load_level():
 	match level:
 		1:
 			bullet_scene = load("res://src/Bullet/BulletRevolver1.tscn")
+			clip_size = 3
 			f_range = 60
 			speed = 256
 			max_xp = 10
 		2:
 			bullet_scene = load("res://src/Bullet/BulletRevolver2.tscn")
-			damage = 2
+			clip_size = 5
+			damage = 1
 			f_range = 96
 			speed = 320
 			max_xp = 15
 		3:
 			bullet_scene = load("res://src/Bullet/BulletRevolver3.tscn")
-			damage = 4
+			clip_size = 7
+			damage = 1
 			f_range = 128
 			speed = 384
 			max_xp = 20
+	clip = clip_size
 
 func activate():
 	var origin = pc.get_node("BulletOrigin").global_position
 	spawn_bullet(origin, pc.shoot_dir)
+	
+	cooldown_time = fire_time
+	clip -= 1
+	if clip == 0:
+		reload()
+	else:
+		$AutoReload.start(reload_time)
+
+func reload():
+	clip = clip_size
+	cooldown_time = reload_time
+
+func _on_AutoReload_timeout():
+	clip = clip_size

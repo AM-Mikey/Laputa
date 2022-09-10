@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/SFX/Placeholder/snd_polar_star_l3.ogg" type="AudioStream" id=2]
 [ext_resource path="res://assets/Gun/Revolver.png" type="Texture" id=3]
 [ext_resource path="res://assets/Gun/RevolverIcon.png" type="Texture" id=4]
-[ext_resource path="res://src/Gun/Weapon.gd" type="Script" id=5]
+[ext_resource path="res://src/Gun/Outdated/Weapon.gd" type="Script" id=5]
 
 [resource]
 resource_name = "Revolver3"
