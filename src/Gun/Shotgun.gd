@@ -17,5 +17,4 @@ func _ready():
 	max_level = 1
 
 func activate():
-	var origin = pc.get_node("BulletOrigin").global_position
-	spawn_bullet(origin, pc.shoot_dir)
+	spawn_bullet($Muzzle.global_position, pc.shoot_dir)

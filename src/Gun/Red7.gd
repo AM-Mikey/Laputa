@@ -21,20 +21,20 @@ func _ready():
 func load_level():
 	match level:
 		1:
-			bullet_scene = load("res://src/Bullet/BulletRevolver1.tscn")
+			bullet_scene = load("res://src/Bullet/Fan1.tscn")
 			clip_size = 3
 			f_range = 60
 			speed = 256
 			max_xp = 10
 		2:
-			bullet_scene = load("res://src/Bullet/BulletRevolver2.tscn")
+			bullet_scene = load("res://src/Bullet/Fan2.tscn")
 			clip_size = 5
 			damage = 1
 			f_range = 96
 			speed = 320
 			max_xp = 15
 		3:
-			bullet_scene = load("res://src/Bullet/BulletRevolver3.tscn")
+			bullet_scene = load("res://src/Bullet/Fan3.tscn")
 			clip_size = 7
 			damage = 1
 			f_range = 128
@@ -43,8 +43,7 @@ func load_level():
 	clip = clip_size
 
 func activate():
-	var origin = pc.get_node("BulletOrigin").global_position
-	spawn_bullet(origin, pc.shoot_dir)
+	spawn_bullet(get_origin(), pc.shoot_dir)
 	
 	cooldown_time = fire_time
 	clip -= 1

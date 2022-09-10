@@ -37,5 +37,4 @@ func load_level():
 			max_xp = 10
 
 func activate():
-	var origin = pc.get_node("BulletOrigin").global_position
-	spawn_bullet(origin, pc.shoot_dir)
+	spawn_bullet(get_origin(), pc.shoot_dir)
