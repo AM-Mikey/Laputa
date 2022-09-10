@@ -8,7 +8,8 @@ onready var mm = pc.get_node("MovementManager")
 onready var ap = pc.get_node("AnimationPlayer")
 
 onready var sprite = pc.get_node("Sprite")
-onready var gun_sprite = pc.get_node("GunSprite")
+onready var gun_manager = pc.get_node("GunManager")
+onready var guns = pc.get_node("GunManager/Guns")
 
 
 
@@ -105,11 +106,11 @@ func get_gun_pos(sheet_name: String, animation_index: int, frame_index: int) -> 
 
 func set_gun_draw_index():
 	var gun_index
-	if not gun_sprite.flip_h:
+	if guns.scale.x == 1:
 		gun_index = sprite.get_index() - 1
 	else: 
 		gun_index = sprite.get_index() + 1
-	get_parent().move_child(gun_sprite, gun_index)
+	get_parent().move_child(gun_manager, gun_index)
 
 
 

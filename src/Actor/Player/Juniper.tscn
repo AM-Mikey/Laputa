@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://src/Gun/Red7.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Actor/Player/PlayerCamera.tscn" type="PackedScene" id=2]
@@ -24,8 +24,6 @@
 [ext_resource path="res://assets/Actor/Player/Palette/Mono.png" type="Texture" id=22]
 [ext_resource path="res://assets/Actor/Player/BackRunNew.png" type="Texture" id=23]
 [ext_resource path="res://assets/Actor/Player/InspectNew.png" type="Texture" id=24]
-[ext_resource path="res://assets/Gun/Revolver.png" type="Texture" id=25]
-[ext_resource path="res://src/Actor/Player/GunSprite.gd" type="Script" id=26]
 [ext_resource path="res://src/Actor/Player/Inspect.gd" type="Script" id=27]
 [ext_resource path="res://src/Gun/MPistol.tscn" type="PackedScene" id=28]
 [ext_resource path="res://src/Actor/Player/Jump.gd" type="Script" id=29]
@@ -588,16 +586,6 @@ shape = SubResource( 63 )
 [node name="AnimationManager" type="Node" parent="."]
 script = ExtResource( 16 )
 
-[node name="GunSprite" type="Sprite" parent="."]
-visible = false
-light_mask = 2
-position = Vector2( -19, -12 )
-texture = ExtResource( 25 )
-script = ExtResource( 26 )
-
-[node name="MuzzlePos" type="Position2D" parent="GunSprite"]
-position = Vector2( -6, -1 )
-
 [node name="Sprite" type="Sprite" parent="."]
 light_mask = 2
 material = SubResource( 61 )
@@ -629,7 +617,6 @@ collision_mask = 32768
 position = Vector2( 0, -9 )
 shape = SubResource( 72 )
 
-[connection signal="guns_updated" from="." to="GunSprite" method="_on_Juniper_guns_updated"]
 [connection signal="area_entered" from="ItemDetector" to="." method="_on_ItemDetector_area_entered"]
 [connection signal="area_entered" from="HurtDetector" to="." method="_on_HurtDetector_area_entered"]
 [connection signal="body_entered" from="HurtDetector" to="." method="_on_HurtDetector_body_entered"]

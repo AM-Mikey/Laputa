@@ -79,7 +79,6 @@ func spawn_bullet(bullet_pos, shoot_dir):
 	am.play(sfx)
 	
 	var muzzle_flash = MUZZLE_FLASH.instance()
-	#muzzle_flash.position = pc.get_node("GunSprite/MuzzlePos").global_position
 	$Muzzle.add_child(muzzle_flash)
 	
 	
