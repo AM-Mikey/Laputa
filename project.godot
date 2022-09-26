@@ -82,7 +82,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "Weapon",
 "language": "GDScript",
-"path": "res://src/Gun/Weapon.gd"
+"path": "res://src/Gun/Outdated/Weapon.gd"
 } ]
 _global_script_class_icons={
 "Actor": "res://assets/Icon/ActorIcon.png",

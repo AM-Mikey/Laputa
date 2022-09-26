@@ -79,9 +79,22 @@ func spawn_bullet(bullet_pos, shoot_dir):
 	am.play(sfx)
 	
 	var muzzle_flash = MUZZLE_FLASH.instance()
-	muzzle_flash.position = pc.get_node("GunSprite/MuzzlePos").position
-	pc.get_node("GunSprite").add_child(muzzle_flash)
+	$Muzzle.add_child(muzzle_flash)
+
+
+### GETTERS
+
+func get_origin() -> Vector2:
+	var bullet_origin = pc.get_node("BulletOrigin").global_position
 	
+	var out = $Muzzle.global_position
+	
+	if pc.shoot_dir.x != 0: #left or right
+		out.x = bullet_origin.x
+	elif pc.shoot_dir.y != 0: #up or down
+		out.y = bullet_origin.y
+	
+	return out
 	
 	
 #func get_bullet_dir(bullet_rot) -> Vector2:

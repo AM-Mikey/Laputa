@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/SFX/Placeholder/snd_missile_hit.ogg" type="AudioStream" id=1]
 [ext_resource path="res://assets/Gun/Blunderbuss.png" type="Texture" id=2]
-[ext_resource path="res://src/Gun/Weapon.gd" type="Script" id=3]
+[ext_resource path="res://src/Gun/Outdated/Weapon.gd" type="Script" id=3]
 [ext_resource path="res://src/Bullet/BulletShotgun1.tscn" type="PackedScene" id=4]
 
 [resource]

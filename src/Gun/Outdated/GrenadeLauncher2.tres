@@ -4,7 +4,7 @@
 [ext_resource path="res://src/Bullet/GLauncher2.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Gun/GLauncher.png" type="Texture" id=3]
 [ext_resource path="res://assets/Gun/GLauncherIcon.png" type="Texture" id=4]
-[ext_resource path="res://src/Gun/Weapon.gd" type="Script" id=5]
+[ext_resource path="res://src/Gun/Outdated/Weapon.gd" type="Script" id=5]
 
 [resource]
 resource_name = "GrenadeLauncher2"
