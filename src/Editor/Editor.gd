@@ -655,12 +655,14 @@ func set_auto_tiles():
 	var script_path = "res://src/Tile/%s.gd"
 	var auto_tile_script = load(script_path % tile_set.resource_path.get_file().trim_suffix(".tres")) #get tile set's name and find corresponding script
 	var node = Node.new()
-	node.set_script(auto_tile_script)
-	node.farback = tile_collection.get_node("FarBack")
-	node.back = tile_collection.get_node("Back")
-	node.front = tile_collection.get_node("Front")
-	node.farfront = tile_collection.get_node("FarFront")
-	add_child(node)
+	
+	if auto_tile_script:
+		node.set_script(auto_tile_script)
+		node.farback = tile_collection.get_node("FarBack")
+		node.back = tile_collection.get_node("Back")
+		node.front = tile_collection.get_node("Front")
+		node.farfront = tile_collection.get_node("FarFront")
+		add_child(node)
 
 func set_entity(position, entity_path, entity_type, traced = true):
 	if entity_path == null:
