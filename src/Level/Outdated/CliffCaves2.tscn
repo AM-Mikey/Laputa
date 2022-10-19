@@ -14,9 +14,9 @@
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=14]
-[ext_resource path="res://src/Tile/DebugBackground.tres" type="TileSet" id=15]
-[ext_resource path="res://src/Tile/DebugTile.tres" type="TileSet" id=16]
-[ext_resource path="res://src/Tile/DebugSSP.tres" type="TileSet" id=17]
+[ext_resource path="res://src/Tile/Outdated/DebugBackground.tres" type="TileSet" id=15]
+[ext_resource path="res://src/Tile/Outdated/DebugTile.tres" type="TileSet" id=16]
+[ext_resource path="res://src/Tile/Outdated/DebugSSP.tres" type="TileSet" id=17]
 
 
 

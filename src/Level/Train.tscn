@@ -1,0 +1,90 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://src/Level/Level.gd" type="Script" id=1]
+[ext_resource path="res://src/Background/LevelLimiter.gd" type="Script" id=2]
+[ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Effect/Light/SunLight.gd" type="Script" id=4]
+[ext_resource path="res://src/Effect/Light/SunLight.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Editor/SpawnPoint.gd" type="Script" id=7]
+[ext_resource path="res://src/Tile/Village.tres" type="TileSet" id=8]
+[ext_resource path="res://assets/Background/SkyDemo.png" type="Texture" id=9]
+[ext_resource path="res://src/Tile/Debug.tres" type="TileSet" id=10]
+
+[node name="Train" type="Node2D"]
+script = ExtResource( 1 )
+level_name = "Train"
+level_type = 0
+tile_set = ExtResource( 8 )
+music = "res://assets/Music/PhiDelta_Shop_Intro.wav"
+dialog_json = "res://src/Dialog/Village.json"
+conversation = "cutscene_test"
+
+[node name="LevelLimiter" type="MarginContainer" parent="." instance=ExtResource( 3 )]
+margin_top = -240.0
+margin_right = 496.0
+margin_bottom = 16.0
+mouse_filter = 2
+script = ExtResource( 2 )
+texture = ExtResource( 9 )
+layers = 5
+parallax_near = 1.0
+parallax_far = 0.0
+focus = 3
+tile_mode = 1
+
+[node name="Tiles" type="Node2D" parent="."]
+light_mask = 8
+
+[node name="FarBack" type="TileMap" parent="Tiles"]
+tile_set = ExtResource( 10 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 0
+occluder_light_mask = 8
+format = 1
+tile_data = PoolIntArray( 1703956, 2, 0 )
+
+[node name="Back" type="TileMap" parent="Tiles"]
+tile_set = ExtResource( 10 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 0
+occluder_light_mask = 8
+format = 1
+
+[node name="Front" type="TileMap" parent="Tiles"]
+z_index = 1
+tile_set = ExtResource( 10 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 0
+occluder_light_mask = 8
+format = 1
+tile_data = PoolIntArray( 0, 128, 0, 1, 128, 0, 2, 128, 0, 3, 128, 0, 4, 128, 0 )
+
+[node name="FarFront" type="TileMap" parent="Tiles"]
+z_index = 2
+tile_set = ExtResource( 10 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 0
+occluder_light_mask = 8
+format = 1
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="Actors" type="Node2D" parent="."]
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="SpawnPoint" type="Area2D" parent="." instance=ExtResource( 6 )]
+position = Vector2( 8, 0 )
+script = ExtResource( 7 )
+
+[node name="SunLight" type="Area2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1, -192 )
+script = ExtResource( 4 )
+light_color = Color( 0.5, 0.5, 0.5, 1 )
+shadow_color = Color( 0, 0, 0, 1 )
+modulate_color = Color( 0.5, 0.5, 0.5, 1 )

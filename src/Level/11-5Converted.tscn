@@ -11,7 +11,7 @@
 [ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Tile/Outdated/Layers/SSP.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Tile/Outdated/Layers/Collision.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/Tile/VillageNew.tres" type="TileSet" id=12]
+[ext_resource path="res://src/Tile/Outdated/VillageNew.tres" type="TileSet" id=12]
 
 
 

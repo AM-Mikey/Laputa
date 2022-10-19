@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://src/Tile/Cave.tres" type="TileSet" id=1]
+[ext_resource path="res://src/Tile/Outdated/Cave.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Tile/Outdated/VillageOld.tres" type="TileSet" id=2]
 [ext_resource path="res://src/Tile/Outdated/PropTile/GrassProp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=4]

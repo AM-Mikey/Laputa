@@ -53,7 +53,7 @@ collision_layer = 8
 collision_mask = 0
 occluder_light_mask = 8
 format = 1
-tile_data = PoolIntArray( 0, 280, 0, 1, 280, 0 )
+tile_data = PoolIntArray( 0, 280, 0 )
 
 [node name="FarFront" type="TileMap" parent="Tiles"]
 z_index = 2
