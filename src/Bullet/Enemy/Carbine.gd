@@ -1,12 +1,11 @@
 extends Bullet
 
-var texture: StreamTexture
-var texture_index: int
-var collision_shape: RectangleShape2D
-
-
+#TODO: consider having a instancable scene for bullet collision detectors
 
 func _ready():
+	speed = 128
+	f_range = 64
+	is_enemy_bullet = true
 	rotation_degrees = get_rot(direction)
 
 func _physics_process(_delta):

@@ -13,11 +13,7 @@ func _ready():
 	rng.randomize()
 	var spread_distance = int(rng.randf_range(max_spread_distance * -1, max_spread_distance))
 	
-	match direction:
-		Vector2.LEFT: rotation_degrees = 0
-		Vector2.RIGHT: rotation_degrees = 180
-		Vector2.UP: rotation_degrees = 90
-		Vector2.DOWN: rotation_degrees = -90
+	rotation_degrees = get_rot(direction)
 
 
 func _physics_process(_delta):

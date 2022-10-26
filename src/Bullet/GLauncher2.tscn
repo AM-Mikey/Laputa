@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/Bullet/BulletGrenadeLauncher.png" type="Texture" id=1]
 [ext_resource path="res://src/Bullet/GLauncher.gd" type="Script" id=2]
+[ext_resource path="res://src/Bullet/CollisionDetector.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 6 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 6, 6 )
 
 [sub_resource type="CircleShape2D" id=3]
@@ -53,12 +54,10 @@ script = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="CollisionDetector" type="Area2D" parent="."]
-collision_layer = 64
-collision_mask = 291
+[node name="CollisionDetector" parent="." instance=ExtResource( 3 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
-shape = SubResource( 2 )
+shape = SubResource( 6 )
 
 [node name="ExplosionDetector" type="Area2D" parent="."]
 collision_layer = 0
@@ -85,6 +84,5 @@ one_shot = true
 anims/FlipLeft = SubResource( 4 )
 anims/FlipRight = SubResource( 5 )
 
-[connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
 [connection signal="body_entered" from="ExplosionDetector" to="." method="_on_ExplosionDetector_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -44,6 +44,12 @@ func fizzle(type: String):
 	else: fizzle.position = global_position
 	queue_free()
 
+### GETTERS ###
+
+func get_rot(direction) -> float:
+	var out = rad2deg(direction.rotated(PI).angle())
+	return out
+
 func get_blood_dir(body) -> Vector2:
 	var out = Vector2(\
 	floor((body.global_position.x - global_position.x)/10), \

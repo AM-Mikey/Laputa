@@ -1,19 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/Bullet/BulletShotgun.png" type="Texture" id=1]
 [ext_resource path="res://src/Bullet/BulletShotgun.gd" type="Script" id=2]
+[ext_resource path="res://src/Bullet/CollisionDetector.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 24, 16 )
+extents = Vector2( 24, 15 )
 
 [node name="BulletShotgun1" type="KinematicBody2D"]
 collision_layer = 64
 collision_mask = 0
 script = ExtResource( 2 )
 
-[node name="CollisionDetector" type="Area2D" parent="."]
-collision_layer = 64
-collision_mask = 298
+[node name="CollisionDetector" parent="." instance=ExtResource( 3 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
 position = Vector2( -24, 0 )
@@ -29,6 +28,4 @@ position = Vector2( -48, 0 )
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="area_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
-[connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

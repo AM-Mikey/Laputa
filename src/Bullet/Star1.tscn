@@ -1,12 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Bullet/Star.gd" type="Script" id=1]
 [ext_resource path="res://assets/Bullet/Star.png" type="Texture" id=2]
+[ext_resource path="res://src/Bullet/CollisionDetector.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3.5, 3.5 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 3.5, 3.5 )
 
 [sub_resource type="Animation" id=4]
@@ -51,13 +52,11 @@ script = ExtResource( 1 )
 position = Vector2( -0.5, -0.5 )
 shape = SubResource( 1 )
 
-[node name="CollisionDetector" type="Area2D" parent="."]
-collision_layer = 64
-collision_mask = 291
+[node name="CollisionDetector" parent="." instance=ExtResource( 3 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
 position = Vector2( -0.5, -0.5 )
-shape = SubResource( 2 )
+shape = SubResource( 6 )
 
 [node name="End" type="Position2D" parent="."]
 position = Vector2( 0, 3 )
@@ -72,14 +71,8 @@ frame = 2
 anims/FlipLeft = SubResource( 4 )
 anims/FlipRight = SubResource( 5 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( -0.5, -0.5 )
-scale = Vector2( 0.35, 0.35 )
-
 [node name="FizzleTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
 
-[connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
-[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
 [connection signal="timeout" from="FizzleTimer" to="." method="_on_FizzleTimer_timeout"]

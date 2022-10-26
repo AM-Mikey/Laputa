@@ -1,6 +1,6 @@
 extends Enemy
 
-const BULLET = preload("res://src/Bullet/Enemy/Laser.tscn")
+const BULLET = preload("res://src/Bullet/Enemy/Carbine.tscn")
 
 var starting_state = "walk"
 export var move_dir = Vector2.LEFT
@@ -64,6 +64,9 @@ func enter_shoot():
 	ap.play("Shoot")
 	st.start(reload_time)
 	var bullet = BULLET.instance()
+	bullet.position = $BulletOrigin.global_position
+	bullet.origin = bullet.position #TODO: WHY not just have it set origin on ready?
+	bullet.direction = move_dir
 	w.middle.add_child(bullet)
 
 
@@ -74,9 +77,11 @@ func do_flip_check():
 		Vector2.LEFT: 
 			$Sprite.flip_h = false
 			$PlayerDetector.scale.x = 1
+			$BulletOrigin.position = Vector2(-13, -13)
 		Vector2.RIGHT: 
 			$Sprite.flip_h = true
 			$PlayerDetector.scale.x = -1
+			$BulletOrigin.position = Vector2(13, -13)
 
 ### SIGNALS ###
 

@@ -15,18 +15,15 @@ func _ready():
 	rng.randomize()
 	var spread_distance = int(rng.randf_range(max_spread_distance * -1, max_spread_distance))
 	
+	rotation_degrees = get_rot(direction)
 	match direction:
 		Vector2.LEFT:
-			rotation_degrees = 0
 			global_position.y += spread_distance
 		Vector2.RIGHT:
-			rotation_degrees = 180
 			global_position.y += spread_distance
 		Vector2.UP:
-			rotation_degrees = 90
 			global_position.x += spread_distance
 		Vector2.DOWN:
-			rotation_degrees = -90
 			global_position.x += spread_distance
 
 
