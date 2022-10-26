@@ -5,16 +5,13 @@ var texture_index: int
 var collision_shape: RectangleShape2D
 
 var projectile_speed = Vector2.ZERO
-
 var projectile_range: int
-
 var max_spread_distance = 7
 
 
 
-var rng = RandomNumberGenerator.new()
-
 func _ready():
+	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var spread_distance = int(rng.randf_range(max_spread_distance * -1, max_spread_distance))
 	
@@ -34,11 +31,9 @@ func _ready():
 
 
 func _physics_process(_delta):
+	if disabled: return
 	
-	velocity = projectile_speed * direction
-	
-	if disabled == false:
-		var _after_slide_velo = move_and_slide(velocity)
-		var distance_from_origin = origin.distance_to(global_position);
-		if distance_from_origin > projectile_range:
-			fizzle("range")
+	velocity = speed * direction
+	velocity = move_and_slide(velocity)
+	if origin.distance_to(global_position) > f_range:
+		fizzle("range")

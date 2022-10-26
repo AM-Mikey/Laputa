@@ -14,10 +14,9 @@ func _ready():
 		Vector2.DOWN: rotation_degrees = -90
 
 func _physics_process(_delta):
-	velocity = speed * direction
+	if disabled: return
 	
-	if not disabled:
-		var _return_velo = move_and_slide(velocity)
-		var distance_from_origin = origin.distance_to(global_position);
-		if distance_from_origin > f_range:
-			fizzle("range")
+	velocity = speed * direction
+	velocity = move_and_slide(velocity)
+	if origin.distance_to(global_position) > f_range:
+		fizzle("range")

@@ -106,6 +106,8 @@ func do_state():
 
 func change_state(new):
 	if disabled: return
+	if has_node("StateTimer"): #this prevents previous states using the same timer from triggering things
+		get_node("StateTimer").stop()
 	var exit_method = "exit_" + state
 	if has_method(exit_method):
 		call(exit_method)
@@ -113,6 +115,7 @@ func change_state(new):
 	var enter_method = "enter_" + state
 	if has_method(enter_method):
 		call(enter_method)
+
 
 
 ### DAMAGE/DEATH ###

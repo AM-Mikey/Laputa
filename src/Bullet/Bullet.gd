@@ -17,6 +17,7 @@ var direction = Vector2.ZERO
 var break_method = "cut"
 var default_area_collision = true
 var default_body_collision = true
+var is_enemy_bullet = false
 var default_clear
 
 onready var world = get_tree().get_root().get_node("World")
@@ -43,26 +44,39 @@ func fizzle(type: String):
 	else: fizzle.position = global_position
 	queue_free()
 
+func get_blood_dir(body) -> Vector2:
+	var out = Vector2(\
+	floor((body.global_position.x - global_position.x)/10), \
+	floor((body.global_position.y - global_position.y)/10))
+	if out == null:
+		printerr("ERROR: BULLET CANNOT GET BODY FOR BLOOD DIR CALCULATION")
+		out = Vector2.ZERO
+	return out
+
 ### SIGNALS ###
 
 func on_viewport_exit(_viewport):
 	queue_free()
 
 func _on_CollisionDetector_body_entered(body):
-	#print("body entered")
 	if not disabled and default_body_collision:
-		if body.get_collision_layer_bit(8): #breakable
+		#breakable
+		if body.get_collision_layer_bit(8): 
 			on_break(break_method)
-
-		elif body.get_collision_layer_bit(1): #enemy
-			yield(get_tree(), "idle_frame")
-			var blood_direction = Vector2(floor((body.global_position.x - global_position.x)/10), floor((body.global_position.y - global_position.y)/10))
-			body.hit(damage, blood_direction)
+		#enemy
+		elif body.get_collision_layer_bit(1) and not is_enemy_bullet: 
+			yield(get_tree(), "idle_frame") #why?
+			body.hit(damage, get_blood_dir(body))
 			queue_free()
-	
-		elif body.get_collision_layer_bit(3): #world
+		#player
+		elif body.get_collision_layer_bit(0) and is_enemy_bullet: 
+			body.hit(damage, get_blood_dir(body))
+			queue_free()
+		#world
+		elif body.get_collision_layer_bit(3): 
 			fizzle("world")
-		elif body.get_collision_layer_bit(5): #armor
+		#armor
+		elif body.get_collision_layer_bit(5): 
 			fizzle("armor")
 
 
