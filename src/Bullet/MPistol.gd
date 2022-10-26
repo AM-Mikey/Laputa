@@ -4,8 +4,8 @@ var texture: StreamTexture
 var texture_index: int
 var collision_shape: RectangleShape2D
 
-
 var max_spread_distance = 7
+
 
 
 func _ready():

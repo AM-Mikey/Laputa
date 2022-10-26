@@ -70,20 +70,16 @@ func get_initial_velocity() -> Vector2:
 
 ### SIGNALS ###
 
-
 func _on_CollisionDetector_body_entered(body):
-	if disabled == false:
-		if body.get_collision_layer_bit(1): #enemy
-			var blood_direction = Vector2(floor((body.global_position .x - global_position.x)/10), floor((body.global_position.y - global_position.y)/10))
-			if not touched_floor:
-				body.hit(damage, blood_direction)
-			else:
-				body.hit(damage/2, blood_direction)
-			queue_free()
+	if disabled: return
+	#enemy
+	if body.get_collision_layer_bit(1): 
+		if not touched_floor:
+			body.hit(damage, get_blood_dir(body))
+		else:
+			body.hit(damage/2, get_blood_dir(body))
+		queue_free()
 
 
 func _on_FizzleTimer_timeout():
 	fizzle("range")
-
-func _on_VisibilityNotifier2D_viewport_exited(viewport):
-	queue_free()

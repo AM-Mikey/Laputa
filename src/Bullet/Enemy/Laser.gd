@@ -1,14 +1,10 @@
 extends Bullet
 
-var projectile_speed = 24
-var start_velocity
-
-var projectile_range = 64
-
-
 
 
 func _ready():
+	speed = 24
+	f_range = 64
 	is_enemy_bullet = true
 	match direction:
 		Vector2.LEFT: rotation_degrees = 0
@@ -18,10 +14,9 @@ func _ready():
 
 
 func _physics_process(_delta):
-	velocity = projectile_speed * direction
+	if disabled: return
 	
-	if disabled == false:
-		move_and_slide(velocity)
-		var distance_from_origin = origin.distance_to(global_position);
-		if distance_from_origin > projectile_range:
-			fizzle("range")
+	velocity = speed * direction
+	velocity = move_and_slide(velocity)
+	if origin.distance_to(global_position) > f_range:
+		fizzle("range")

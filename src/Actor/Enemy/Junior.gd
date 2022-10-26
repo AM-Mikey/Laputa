@@ -1,5 +1,7 @@
 extends Enemy
 
+const BULLET = preload("res://src/Bullet/Enemy/Laser.tscn")
+
 var starting_state = "walk"
 export var move_dir = Vector2.LEFT
 export var idle_max_time = 5.0
@@ -61,8 +63,8 @@ func enter_aim():
 func enter_shoot():
 	ap.play("Shoot")
 	st.start(reload_time)
-	yield(st,"timeout")
-	ap.play("Shoot")
+	var bullet = BULLET.instance()
+	w.middle.add_child(bullet)
 
 
 ### HELPERS ###
