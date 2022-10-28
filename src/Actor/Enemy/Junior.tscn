@@ -73,7 +73,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 16, 10 )
+extents = Vector2( 40, 24 )
 
 [node name="Junior" type="KinematicBody2D"]
 collision_layer = 2
@@ -118,11 +118,12 @@ one_shot = true
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-position = Vector2( -16, -10 )
+position = Vector2( -40, -16 )
 shape = SubResource( 10 )
 
 [node name="BulletOrigin" type="Position2D" parent="."]
 position = Vector2( -13, -13 )
 
+[connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
