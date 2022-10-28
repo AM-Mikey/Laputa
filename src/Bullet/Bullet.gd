@@ -7,7 +7,7 @@ const FIZZLE = preload("res://src/Effect/BulletFizzle.tscn")
 var disabled = false
 var gravity = 300
 
-var damage
+var damage = 0
 var f_range
 var speed
 var origin = Vector2.ZERO

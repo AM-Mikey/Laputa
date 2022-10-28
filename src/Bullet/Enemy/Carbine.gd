@@ -3,6 +3,7 @@ extends Bullet
 #TODO: consider having a instancable scene for bullet collision detectors
 
 func _ready():
+	damage = 4
 	speed = 128
 	f_range = 64
 	is_enemy_bullet = true

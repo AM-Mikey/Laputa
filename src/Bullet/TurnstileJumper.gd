@@ -16,3 +16,7 @@ func _physics_process(_delta):
 	velocity = move_and_slide(velocity)
 	if origin.distance_to(global_position) > f_range:
 		fizzle("range")
+
+
+func _on_CollisionDetector_body_exited(body):
+	pass # Replace with function body.

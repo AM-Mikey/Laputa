@@ -14,9 +14,9 @@ onready var st = $StateTimer
 
 func setup():
 	change_state(starting_state)
-	hp = 6
-	reward = 2
-	damage_on_contact = 2
+	hp = 12
+	reward = 8
+	damage_on_contact = 3
 	speed = Vector2(50, 50)
 
 

@@ -19,7 +19,7 @@ var speed = Vector2(90, 180)
 var gravity = 300.0
 
 var velocity = Vector2.ZERO
-var acceleration = 2.5
+var acceleration = 2.0 #was 2.5, changed 10.26.22
 var ground_cof = 0.1
 var air_cof = 0.00
 

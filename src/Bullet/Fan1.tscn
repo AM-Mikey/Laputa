@@ -25,3 +25,6 @@ vframes = 3
 
 [node name="End" type="Position2D" parent="."]
 position = Vector2( -5, 0 )
+
+[connection signal="area_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
+[connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]

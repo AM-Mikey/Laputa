@@ -84,5 +84,7 @@ one_shot = true
 anims/FlipLeft = SubResource( 4 )
 anims/FlipRight = SubResource( 5 )
 
+[connection signal="area_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
+[connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
 [connection signal="body_entered" from="ExplosionDetector" to="." method="_on_ExplosionDetector_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
