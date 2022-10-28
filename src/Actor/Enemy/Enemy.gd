@@ -121,6 +121,7 @@ func change_state(new):
 ### DAMAGE/DEATH ###
 
 func hit(damage, blood_direction):
+	_on_hit(damage, blood_direction)
 	hp -= damage
 	var blood = BLOOD.instance()
 	get_tree().get_root().get_node("World/Front").add_child(blood)
@@ -134,6 +135,8 @@ func hit(damage, blood_direction):
 	else:
 		am.play_pos("enemy_hurt", self) #TODO: different hit sounds per enemy
 
+func _on_hit(damage, blood_direction): #For inhereted enemies to do something on hit
+	pass
 ### DAMAGE NUMBER ###
 
 func setup_damagenum_timer():

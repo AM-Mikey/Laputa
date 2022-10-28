@@ -21,10 +21,6 @@ func setup():
 	damage_on_contact = 3
 	speed = Vector2(50, 50)
 
-
-#func hit(_damage, blood_direction):
-#	if blood_direction.x
-
 ### STATES ###
 
 func enter_idle():
@@ -84,6 +80,14 @@ func do_flip_check():
 			$BulletOrigin.position = Vector2(13, -13)
 
 ### SIGNALS ###
+
+func _on_hit(_damage, blood_direction):
+	if sign(blood_direction.x) == sign(move_dir.x): #shot from behind
+		ap.play("Shock")
+		yield(ap, "animation_finished")
+		ap.play("Idle")
+		move_dir.x = move_dir.x * -1
+		do_flip_check()
 
 func _on_PlayerDetector_body_entered(body):
 	target = body

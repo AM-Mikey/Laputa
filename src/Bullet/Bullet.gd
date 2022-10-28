@@ -50,7 +50,7 @@ func get_rot(direction) -> float:
 	var out = rad2deg(direction.rotated(PI).angle())
 	return out
 
-func get_blood_dir(body) -> Vector2:
+func get_blood_dir(body) -> Vector2: #TODO this update changed knockback dir calculation, try calculating seperately
 	var out: Vector2
 	
 	var body_center = body.get_node("CollisionShape2D").global_position
