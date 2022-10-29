@@ -19,6 +19,7 @@ var speed: int = 200
 
 var cooldown_time: float = 0.2
 var automatic: bool = false
+var charging: bool = false
 var ammo: int = 0
 var max_ammo: int = 0
 
@@ -50,7 +51,8 @@ func fire(type):
 			print("out of ammo")
 			am.play("click")
 
-		cd.start(cooldown_time)
+		if not charging:
+			cd.start(cooldown_time)
 		
 		if type == "automatic":
 			yield(cd, "timeout")
@@ -58,14 +60,26 @@ func fire(type):
 				fire("automatic")
 
 
-func release_fire():
+func release_manual_fire():
 	trigger_held = false
+	if charging:
+		cd.start(cooldown_time)
+	deactivate_manual()
+	
+func release_auto_fire():
+	trigger_held = false
+	deactivate_auto()
+
 
 func activate():
 	pass
 
+func deactivate_manual():
+	pass
+func deactivate_auto():
+	pass
 
-func spawn_bullet(bullet_pos, shoot_dir):
+func spawn_bullet(bullet_pos, shoot_dir) -> Node:
 	var bullet = bullet_scene.instance()
 	
 	bullet.damage = damage
@@ -80,6 +94,7 @@ func spawn_bullet(bullet_pos, shoot_dir):
 	
 	var muzzle_flash = MUZZLE_FLASH.instance()
 	$Muzzle.add_child(muzzle_flash)
+	return bullet
 
 
 ### GETTERS
