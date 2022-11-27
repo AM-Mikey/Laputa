@@ -19,8 +19,10 @@ func _input(event):
 			active_gun.fire("manual")
 		if event.is_action_pressed("fire_automatic") and active_gun.automatic:
 			active_gun.fire("automatic")
+		if event.is_action_released("fire_manual"):
+			active_gun.release_manual_fire()
 		if event.is_action_released("fire_automatic"):
-			active_gun.release_fire()
+			active_gun.release_auto_fire()
 
 		if $Guns.get_child_count() > 1: #only swap if more than one gun
 			if event.is_action_pressed("gun_left"):

@@ -50,10 +50,14 @@ func get_rot(direction) -> float:
 	var out = rad2deg(direction.rotated(PI).angle())
 	return out
 
-func get_blood_dir(body) -> Vector2:
-	var out = Vector2(\
-	floor((body.global_position.x - global_position.x)/10), \
-	floor((body.global_position.y - global_position.y)/10))
+func get_blood_dir(body) -> Vector2: #TODO this update changed knockback dir calculation, try calculating seperately
+	var out: Vector2
+	
+	var body_center = body.get_node("CollisionShape2D").global_position
+	
+	out = Vector2(\
+	floor((body_center.x - global_position.x)/10), \
+	floor((body_center.y - global_position.y)/10))
 	if out == null:
 		printerr("ERROR: BULLET CANNOT GET BODY FOR BLOOD DIR CALCULATION")
 		out = Vector2.ZERO

@@ -7,7 +7,9 @@ export var move_dir = Vector2.LEFT
 export var idle_max_time = 5.0
 export var walk_max_time = 10.0
 export var aim_time = 0.2
-export var reload_time = 0.4
+export var reload_time = 2.0
+
+var target: Node
 
 onready var ap = $AnimationPlayer
 onready var st = $StateTimer
@@ -19,7 +21,6 @@ func setup():
 	damage_on_contact = 3
 	speed = Vector2(50, 50)
 
-
 ### STATES ###
 
 func enter_idle():
@@ -27,9 +28,6 @@ func enter_idle():
 	ap.play("Idle")
 	rng.randomize()
 	st.start(rng.randf_range(1.0, idle_max_time))
-	yield(st, "timeout")
-	print("idle to walk")
-	change_state("walk")
 
 func enter_walk():
 	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
@@ -40,8 +38,6 @@ func enter_walk():
 	ap.play("Walk")
 	rng.randomize()
 	st.start(rng.randf_range(1.0, walk_max_time))
-	yield(st, "timeout") #IT WILL CONTINUE THIS YIELD IN ANOTHER STATE, EVEN IF THE TIMER IS DEAD
-	change_state("idle")
 
 func do_walk():
 	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
@@ -62,12 +58,12 @@ func enter_aim():
 
 func enter_shoot():
 	ap.play("Shoot")
-	st.start(reload_time)
 	var bullet = BULLET.instance()
 	bullet.position = $BulletOrigin.global_position
 	bullet.origin = bullet.position #TODO: WHY not just have it set origin on ready?
 	bullet.direction = move_dir
 	w.middle.add_child(bullet)
+	st.start(reload_time)
 
 
 ### HELPERS ###
@@ -85,9 +81,33 @@ func do_flip_check():
 
 ### SIGNALS ###
 
+func _on_hit(_damage, blood_direction):
+	if sign(blood_direction.x) == sign(move_dir.x): #shot from behind
+		ap.play("Shock")
+		yield(ap, "animation_finished")
+		ap.play("Idle")
+		move_dir.x = move_dir.x * -1
+		do_flip_check()
+
 func _on_PlayerDetector_body_entered(body):
-	change_state("aim")
+	target = body
+	if state != "shoot" and state != "aim":
+		change_state("aim")
 
 
 func _on_PlayerDetector_body_exited(body):
-	pass # Replace with function body.
+	target = null
+
+
+func _on_StateTimer_timeout():
+	match state:
+		"idle":
+			change_state("walk")
+		"walk":
+			change_state("idle")
+		"shoot":
+			if target:
+				change_state("shoot")
+			else:
+				change_state("idle")
+		_: pass

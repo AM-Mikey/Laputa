@@ -11,3 +11,6 @@ texture = ExtResource( 2 )
 
 [node name="Muzzle" type="Position2D" parent="."]
 position = Vector2( -6, -1 )
+
+[node name="ChargeTimer" type="Timer" parent="."]
+one_shot = true
