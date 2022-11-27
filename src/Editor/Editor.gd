@@ -576,6 +576,7 @@ func set_cells_2d(cells: Array, brush: Array, traced = true): #There is no reaso
 			
 			
 			if multi_erase and is_eraser:
+				print("multi erase toggled")
 				old_tile = {}
 				for l in tile_collection.get_children():
 					if l is TileMap and not l.is_in_group("Previews"):

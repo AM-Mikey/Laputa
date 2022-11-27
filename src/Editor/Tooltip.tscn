@@ -45,3 +45,15 @@ size_flags_vertical = 1
 custom_colors/font_color = Color( 0.639216, 0.14902, 0.14902, 1 )
 text = "Bizmuth"
 valign = 1
+
+[node name="StrokeSize" type="Label" parent="HBox"]
+visible = false
+margin_left = 94.0
+margin_right = 131.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( -259, -176 )
+size_flags_horizontal = 4
+size_flags_vertical = 1
+custom_colors/font_color = Color( 0.666667, 0.690196, 0.592157, 1 )
+text = "[5, 40]"
+valign = 1
