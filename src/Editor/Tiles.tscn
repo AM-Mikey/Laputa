@@ -63,6 +63,7 @@ text = "DrawOnAuto"
 [node name="AutoLayer" type="Button" parent="VBox/HBox"]
 margin_right = 32.0
 margin_bottom = 32.0
+hint_tooltip = "Auto-Select Drawing Layer"
 toggle_mode = true
 icon = ExtResource( 9 )
 
@@ -84,27 +85,29 @@ text = "EraseOnAll"
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
+hint_tooltip = "Erase On All Layers"
 toggle_mode = true
 icon = ExtResource( 10 )
 
 [node name="VSeparator2" type="VSeparator" parent="VBox/HBox"]
 visible = false
-margin_left = 222.0
-margin_right = 238.0
+margin_left = 72.0
+margin_right = 88.0
 margin_bottom = 32.0
 
 [node name="AutoTile" type="Button" parent="VBox/HBox"]
 margin_left = 72.0
 margin_right = 104.0
 margin_bottom = 32.0
+hint_tooltip = "Toggle AutoTile"
 toggle_mode = true
 icon = ExtResource( 11 )
 
 [node name="TerrainLabel" type="Label" parent="VBox/HBox"]
 visible = false
-margin_left = 242.0
+margin_left = 108.0
 margin_top = 14.0
-margin_right = 285.0
+margin_right = 151.0
 margin_bottom = 18.0
 text = "Terrain"
 
