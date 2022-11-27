@@ -4,7 +4,6 @@ const PROP_BUTTON = preload("res://src/Editor/Button/PropButton.tscn")
 
 signal prop_changed(prop_path)
 
-var icon = "res://assets/Icon/PropIcon.png"
 var props = {}
 var active_prop_path
 

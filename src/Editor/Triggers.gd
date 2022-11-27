@@ -4,7 +4,6 @@ const TRIGGER_BUTTON = preload("res://src/Editor/Button/TriggerButton.tscn")
 
 signal trigger_changed(trigger_path)
 
-var icon = "res://assets/Icon/TriggerIcon.png"
 var triggers = {}
 var active_trigger_path
 

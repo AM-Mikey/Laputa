@@ -4,7 +4,6 @@ const NPC_BUTTON = preload("res://src/Editor/Button/NPCButton.tscn")
 
 signal npc_changed(npc_path)
 
-var icon = "res://assets/Icon/NPCIcon.png"
 var npcs = {}
 var active_npc_path
 

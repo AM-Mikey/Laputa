@@ -5,7 +5,6 @@ signal tile_set_saved(path)
 signal tile_set_loaded(path)
 signal image_loaded(path)
 
-var icon = "res://assets/Icon/TileIcon.png"
 var tx_col_brush = preload("res://assets/Editor/CollisionBrushes.png")
 
 var active_tab = "normal"

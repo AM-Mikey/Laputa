@@ -76,11 +76,3 @@ func on_handle(handle):
 	else:
 		state = "drag"
 		drag_offset = rect_global_position - get_global_mouse_position()
-
-
-#func _on_mouse_entered():
-#	modulate = Color(1, 1, 1, 1)
-
-
-#func _on_mouse_exited():
-#	modulate = Color(1, 1, 1, 0.50)

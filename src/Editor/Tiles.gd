@@ -6,8 +6,6 @@ signal multi_erase_toggled(toggled)
 signal terrain_toggled(toggled)
 signal tile_transform_updated(tile_rotation_degrees, tile_scale_vector)
 
-var icon = "res://assets/Icon/TileSetIcon.png"
-
 var auto_layer_true = load("res://assets/Editor/AutoLayerTrue.png")
 var auto_layer_false = load("res://assets/Editor/AutoLayerFalse.png")
 var multi_erase_true = load("res://assets/Editor/MultiEraseTrue.png")

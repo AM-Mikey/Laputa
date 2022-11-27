@@ -159,6 +159,11 @@ func exit():
 		if t.has_node("TriggerController"):
 			t.get_node("TriggerController").disable()
 
+### PROCESS ###
+
+func _physics_process(delta):
+	set_menu_alpha()
+
 ### TILES
 
 func create_tile_set_from_texture(texture):
@@ -1020,6 +1025,23 @@ func get_auto_layer(tile):
 func on_layer_changed(layer):
 	tile_map = layer
 
+### UI ###
+func set_menu_alpha():
+	var mouse_pos = get_global_mouse_position()
+	var main_rect = Rect2($Main.rect_position, $Main.rect_size)
+	var secondary_rect = Rect2($Secondary.rect_position, $Secondary.rect_size)
+	if main_rect.has_point(mouse_pos):
+		$Main.modulate = Color(1, 1, 1, 1)
+	else:
+		$Main.modulate = Color(1, 1, 1, 0.50)
+	if secondary_rect.has_point(mouse_pos):
+		$Secondary.modulate = Color(1, 1, 1, 1)
+	else:
+		$Secondary.modulate = Color(1, 1, 1, 0.50)
+
+
+
+
 ### SIGNALS ###
 
 
@@ -1104,11 +1126,3 @@ func on_tab_changed(tab):
 			set_entities_pickable()
 		_:
 			print("WARNING: could not find tab with name: " + $Main/Tab.get_child(tab).name)
-
-
-func _on_mouse_entered():
-	pass # Replace with function body.
-
-
-func _on_mouse_exited():
-	pass # Replace with function body.

@@ -1,18 +1,17 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=1]
 [ext_resource path="res://src/Actor/Enemy/Junior.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Effect/Light/SunLight.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/Tile/Village.tres" type="TileSet" id=8]
 [ext_resource path="res://assets/Background/SkyDemo.png" type="Texture" id=9]
 [ext_resource path="res://src/Tile/Debug.tres" type="TileSet" id=10]
 
 [node name="Train" type="Node2D"]
 script = ExtResource( 1 )
 level_name = "Train"
-tile_set = ExtResource( 8 )
+tile_set = ExtResource( 10 )
 music = "res://assets/Music/PhiDelta_Shop_Intro.wav"
 dialog_json = "res://src/Dialog/Village.json"
 conversation = "cutscene_test"

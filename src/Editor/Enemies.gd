@@ -4,7 +4,6 @@ const ENEMY_BUTTON = preload("res://src/Editor/Button/EnemyButton.tscn")
 
 signal enemy_changed(enemy_path)
 
-var icon = "res://assets/Icon/EnemyIcon.png"
 var enemies = {}
 var active_enemy_path
 
