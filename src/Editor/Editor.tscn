@@ -119,7 +119,6 @@ script = ExtResource( 14 )
 [connection signal="mouse_entered" from="Secondary" to="Secondary" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Secondary" to="Secondary" method="_on_mouse_exited"]
 [connection signal="tab_changed" from="Main/Tab" to="." method="on_tab_changed"]
-[connection signal="autolayer_toggled" from="Main/Tab/Tiles" to="." method="on_Tiles_autolayer_toggled"]
 [connection signal="terrain_toggled" from="Main/Tab/Tiles" to="." method="on_terrain_toggled"]
 [connection signal="tile_selection_updated" from="Main/Tab/Tiles" to="." method="on_Tiles_tile_selection_updated"]
 [connection signal="tile_transform_updated" from="Main/Tab/Tiles" to="." method="_on_Tiles_tile_transform_updated"]

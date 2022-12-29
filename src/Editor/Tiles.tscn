@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/Editor/Cursor.tres" type="StyleBox" id=1]
 [ext_resource path="res://src/Editor/Tiles.gd" type="Script" id=2]
@@ -11,18 +11,7 @@
 [ext_resource path="res://assets/Editor/AutoLayerFalse.png" type="Texture" id=9]
 [ext_resource path="res://assets/Editor/MultiEraseFalse.png" type="Texture" id=10]
 [ext_resource path="res://assets/Editor/AutoTileFalse.png" type="Texture" id=11]
-
-[sub_resource type="StyleBoxEmpty" id=7]
-
-[sub_resource type="StyleBoxEmpty" id=8]
-
-[sub_resource type="StyleBoxEmpty" id=9]
-
-[sub_resource type="StyleBoxEmpty" id=10]
-
-[sub_resource type="StyleBoxEmpty" id=11]
-
-[sub_resource type="StyleBoxEmpty" id=12]
+[ext_resource path="res://assets/Editor/ModePaint.png" type="Texture" id=12]
 
 [node name="Tiles" type="MarginContainer"]
 margin_right = 480.0
@@ -67,20 +56,6 @@ hint_tooltip = "Auto-Select Drawing Layer"
 toggle_mode = true
 icon = ExtResource( 9 )
 
-[node name="VSeparator" type="VSeparator" parent="VBox/HBox"]
-visible = false
-margin_left = 36.0
-margin_right = 52.0
-margin_bottom = 32.0
-
-[node name="MultiEraseLabel" type="Label" parent="VBox/HBox"]
-visible = false
-margin_left = 129.0
-margin_top = 14.0
-margin_right = 190.0
-margin_bottom = 18.0
-text = "EraseOnAll"
-
 [node name="MultiErase" type="Button" parent="VBox/HBox"]
 margin_left = 36.0
 margin_right = 68.0
@@ -88,12 +63,6 @@ margin_bottom = 32.0
 hint_tooltip = "Erase On All Layers"
 toggle_mode = true
 icon = ExtResource( 10 )
-
-[node name="VSeparator2" type="VSeparator" parent="VBox/HBox"]
-visible = false
-margin_left = 72.0
-margin_right = 88.0
-margin_bottom = 32.0
 
 [node name="AutoTile" type="Button" parent="VBox/HBox"]
 margin_left = 72.0
@@ -103,26 +72,13 @@ hint_tooltip = "Toggle AutoTile"
 toggle_mode = true
 icon = ExtResource( 11 )
 
-[node name="TerrainLabel" type="Label" parent="VBox/HBox"]
-visible = false
+[node name="Mode" type="Button" parent="VBox/HBox"]
 margin_left = 108.0
-margin_top = 14.0
-margin_right = 151.0
-margin_bottom = 18.0
-text = "Terrain"
-
-[node name="Terrain" type="CheckBox" parent="VBox/HBox"]
-visible = false
-margin_left = 108.0
-margin_right = 136.0
+margin_right = 140.0
 margin_bottom = 32.0
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 8 )
-custom_styles/focus = SubResource( 9 )
-custom_styles/disabled = SubResource( 10 )
-custom_styles/hover_pressed = SubResource( 11 )
-custom_styles/normal = SubResource( 12 )
-flat = true
+hint_tooltip = "Toggle AutoTile"
+toggle_mode = true
+icon = ExtResource( 12 )
 
 [node name="Options" type="HBoxContainer" parent="VBox"]
 visible = false
@@ -215,7 +171,7 @@ custom_styles/panel = ExtResource( 1 )
 [connection signal="toggled" from="VBox/HBox/AutoLayer" to="." method="_on_AutoLayer_toggled"]
 [connection signal="toggled" from="VBox/HBox/MultiErase" to="." method="_on_MultiErase_toggled"]
 [connection signal="toggled" from="VBox/HBox/AutoTile" to="." method="_on_AutoTile_toggled"]
-[connection signal="toggled" from="VBox/HBox/Terrain" to="." method="_on_Terrain_toggled"]
+[connection signal="pressed" from="VBox/HBox/Mode" to="." method="_on_Mode_pressed"]
 [connection signal="toggled" from="VBox/Options/FlipH" to="." method="_on_FlipH_toggled"]
 [connection signal="toggled" from="VBox/Options/FlipV" to="." method="_on_FlipV_toggled"]
 [connection signal="pressed" from="VBox/Options/RotateC" to="." method="_on_RotateC_pressed"]

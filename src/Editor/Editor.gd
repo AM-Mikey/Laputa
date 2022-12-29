@@ -14,12 +14,13 @@ const ENTITY_PREVIEW = preload("res://src/Editor/EntityPreview.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const LAYER_BUTTON = preload("res://src/Editor/Button/LayerButton.tscn")
 const LIMITER = preload("res://src/Editor/EditorLevelLimiter.tscn")
+const TILE_MAP_CURSOR = preload("res://src/Editor/TileMapCursor.tscn")
 
 
 var disabled = false
 
 var active_tiles = [] #2D array
-
+var tile_map_selection: Rect2
 var auto_layer = true
 var multi_erase = true
 var auto_tile = true
@@ -50,6 +51,7 @@ var trigger_collection
 var tile_map
 var tile_set
 var editor_level_limiter
+var tile_map_cursor
 
 
 func _ready():
@@ -79,7 +81,7 @@ func setup_level():
 	tile_map = tile_collection.get_child(0)
 	tile_set = w.current_level.tile_set
 	on_TileSet_tile_set_loaded(tile_set.resource_path) #so we can set every tile map to the tile set
-	setup_level_limiter()
+	setup_level_editor_layer()
 	set_entities_pickable()
 	w.set_debug_visible(true)
 	move_actors_to_home()
@@ -90,17 +92,10 @@ func setup_level():
 	for t in trigger_collection.get_children():
 		if t.has_node("TriggerController"):
 			t.get_node("TriggerController").enable()
-	setup_tile_options()
 	
 	
 
 ### SETUP
-
-func setup_tile_options():
-	var tiles = $Main/Tab/Tiles
-	tiles.auto_layer_button.pressed = auto_layer
-	tiles.multi_erase_button.pressed = multi_erase
-	tiles.auto_layer_button.pressed = auto_layer
 
 func move_actors_to_home():
 	for a in actor_collection.get_children():
@@ -119,13 +114,15 @@ func set_entities_pickable(pickable = true):
 #			t.input_pickable = pickable
 
 
-func setup_level_limiter():
+func setup_level_editor_layer(): #the layer for editor overlays that go over the level
+	var editor_layer = Node2D.new()
+	editor_layer.name = "Editor"
+	editor_layer.z_index = 8
+	w.current_level.add_child(editor_layer)
 	editor_level_limiter = LIMITER.instance()
-	var level_layer = Node2D.new()
-	level_layer.name = "LevelEditorLayer"
-	level_layer.z_index = 8
-	w.current_level.add_child(level_layer)
-	level_layer.add_child(editor_level_limiter)
+	editor_layer.add_child(editor_level_limiter)
+	tile_map_cursor = TILE_MAP_CURSOR.instance()
+	editor_layer.add_child(tile_map_cursor)
 
 
 ###
@@ -189,32 +186,6 @@ func create_tile_set_from_texture(texture):
 		if c is TileMap:
 			c.tile_set = tile_set
 
-
-#func texture_alpha_check(texture, region) -> bool: #TODO does not work
-#	var image = Image.new()
-#	image.load(texture.resource_path)
-#	if image.get_rect(region).is_invisible():
-#		return true
-#	else:
-#		return false
-##	var pixel_check_count = 0
-##	var pixel_pos = Vector2.ZERO
-#
-##	for row in cropped.get_height():
-##		for column in cropped.get_width():
-##			var pixel = AtlasTexture.new()
-##			pixel.atlas = texture
-##			pixel.region = Rect2(column, row, 1, 1)
-##			if pixel.has_alpha():
-##				pixel_check_count += 1
-##
-##
-##	#if pixel_check_count != 0:
-##	print("pixel_check_count:", pixel_check_count)
-##	if pixel_check_count == cropped.get_height() * cropped.get_width():
-##		return true
-##	else:
-##		return false
 
 
 
@@ -359,20 +330,28 @@ func do_tile_input(event):
 
 	
 	#pressing
-	if event.is_action_pressed("editor_rmb") or event.is_action_pressed("editor_lmb") and not active_tiles.empty():
+	if event.is_action_pressed("editor_rmb") or event.is_action_pressed("editor_lmb"):
 		mouse_start_pos = mouse_pos
-		if shift_held: set_tool("tile", "line")
-		elif ctrl_held: set_tool("tile", "box")
-		else: 
-			set_tool("tile", "paint")
-			set_cells_2d(get_centerbox(mouse_pos), brush) #TODO: on all layers
+		if subtool == "select" and event.is_action_pressed("editor_lmb"): #select
+			set_tile_map_selection(mouse_start_pos, mouse_pos)
+		elif not active_tiles.empty(): #normal draw
+			if shift_held: set_tool("tile", "line")
+			elif ctrl_held: set_tool("tile", "box")
+			else: 
+				set_tool("tile", "paint")
+				set_cells_2d(get_centerbox(mouse_pos), brush) #TODO: on all layers
 	
 	#moving
 	if event is InputEventMouseMotion:
 		hide_preview()
 		match subtool:
-			"line": preview_tiles(get_brush_origin_line(mouse_start_pos, mouse_pos), "line")
-			"box": preview_tiles(get_box_2d(mouse_start_pos, mouse_pos), "box")
+			"select":
+				if lmb_held:
+					set_tile_map_selection(mouse_start_pos, mouse_pos)
+			"line":
+				preview_tiles(get_brush_origin_line(mouse_start_pos, mouse_pos), "line")
+			"box":
+				preview_tiles(get_box_2d(mouse_start_pos, mouse_pos), "box")
 			"paint":
 				if lmb_held or rmb_held:
 					set_cells_2d(get_centerbox(mouse_pos), brush) #TODO: on all layers
@@ -382,7 +361,8 @@ func do_tile_input(event):
 	#releasing
 	if event.is_action_released("editor_lmb") and lmb_held or event.is_action_released("editor_rmb") and rmb_held:
 		match subtool:
-			"line": set_line(get_brush_origin_line(mouse_start_pos, mouse_pos), brush) #TODO: on all layers
+			"line":
+				set_line(get_brush_origin_line(mouse_start_pos, mouse_pos), brush) #TODO: on all layers
 			"box":
 				if lmb_held:
 					set_cells_2d(get_box_2d(mouse_start_pos, mouse_pos), brush)
@@ -390,7 +370,8 @@ func do_tile_input(event):
 					set_cells_2d(get_box_2d(mouse_start_pos, mouse_pos), get_brush_as_eraser())
 					#set_cells_1d(get_box_1d(mouse_start_pos, mouse_pos), -1)
 				
-		subtool = "paint"
+		if subtool != "select":
+			subtool = "paint"
 		if not active_operation.empty():
 			past_operations.append(["set_cells", active_operation.duplicate()])
 			#print("active op: ", active_operation)
@@ -450,7 +431,13 @@ func get_entity_type(entity: Node): #called by actor.gd
 	
 ### OPERATIONS ###
 
-
+func set_tile_map_selection(start_pos, end_pos):
+	tile_map_selection = Rect2(get_cell(start_pos), Vector2.ZERO)
+	tile_map_selection = tile_map_selection.expand(get_cell(end_pos))
+	tile_map_selection.size += Vector2.ONE
+	tile_map_cursor.rect_position = tile_map_selection.position * 16
+	tile_map_cursor.rect_size = tile_map_selection.size * 16
+	print(tile_map_selection)
 
 
 func undo():
@@ -789,25 +776,6 @@ func hide_preview():
 
 ### GETTERS ###
 
-#func get_terrain_tile(position):
-#	var cell = get_cell(position) #vector2
-#
-#	var adjacent = {
-#	"n": Vector2(cell.x, cell.y-1),
-#	"ne": Vector2(cell.x+1, cell.y-1),
-#	"e": Vector2(cell.x+1, cell.y),
-#	"se": Vector2(cell.x-1, cell.y+1),
-#	"s": Vector2(cell.x, cell.y+1),
-#	"sw": Vector2(cell.x-1, cell.y+1),
-#	"w": Vector2(cell.x-1, cell.y),
-#	"nw": Vector2(cell.x-1, cell.y-1),
-#	}
-#
-#	for c in adjacent:
-#		if tile_map.get_cell_v(c) = tile:
-#			pass
-
-
 
 func get_cell(mouse_pos) -> Vector2:
 	var local_pos = tile_map.to_local(mouse_pos)
@@ -824,7 +792,7 @@ func get_grid_pos(mouse_pos, mode = "course", exception = "none") -> Vector2:
 		return Vector2(stepify(mouse_pos.x, step), stepify(mouse_pos.y, step))
 	else:
 		return Vector2(stepify(mouse_pos.x - offset.x, step), stepify(mouse_pos.y - offset.y, step)) + offset
-	
+
 
 func get_centerbox(mouse_pos) -> Array: #2D Array #active tiles
 	var cells = []
@@ -1052,17 +1020,11 @@ func set_menu_alpha():
 func on_Tiles_tile_selection_updated(selected_tiles):
 	active_tiles = selected_tiles
 
-func on_Tiles_autolayer_toggled(toggled):
-	auto_layer = toggled
-
-func on_Tiles_multi_erase_toggled(toggled):
-	multi_erase = toggled
-
 func on_terrain_toggled(toggle): #DEBUG
 	create_tile_set_from_texture(load("res://assets/Tile/VillageTerrain.png"))
 
 func _on_Tiles_tile_transform_updated(tile_rotation_degrees, tile_scale_vector):
-	pass # Replace with function body.
+	pass # Replace with function body. #TODO move to tiles code
 
 
 ### TILESET SIGNALS
