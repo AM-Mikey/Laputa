@@ -148,7 +148,8 @@ func setup_damagenum_timer():
 
 func set_damagenum(damage):
 	if not damagenum: #if we dont already have a damage number create a new one
-		damagenum = DAMAGENUMBER.instance()
+		damagenum = DAMAGENUMBER.instance() #this node is an orphan, it's not able to actually do this, i dont think TODO: fix
+		setup_damagenum_timer()
 		damagenum.value = damage
 		damagenum_timer.start(damagenum_time)
 	else: #add time and add values

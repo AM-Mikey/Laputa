@@ -1051,6 +1051,7 @@ func on_TileSet_tile_set_loaded(path):
 	for c in tile_collection.get_children():
 		if c is TileMap:
 			c.tile_set = tile_set
+	w.current_level.tile_set = tile_set
 
 ### MISC SIGNALS
 
