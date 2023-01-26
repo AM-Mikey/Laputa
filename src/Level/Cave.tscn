@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Tile/Temple.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=2]
 [ext_resource path="res://src/Effect/Light/SunLight.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/Actor/NPC/Sasuke.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Actor/Player/Sasuke.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/Background/SkyDemo.png" type="Texture" id=9]
 
@@ -71,10 +70,7 @@ format = 1
 
 [node name="Actors" type="Node2D" parent="."]
 
-[node name="Sasuke" parent="Actors" instance=ExtResource( 6 )]
-position = Vector2( 160, 16 )
-
-[node name="Sasuke2" parent="Actors" instance=ExtResource( 7 )]
+[node name="Sasuke" parent="Actors" instance=ExtResource( 7 )]
 position = Vector2( 240, 8 )
 
 [node name="Triggers" type="Node2D" parent="."]

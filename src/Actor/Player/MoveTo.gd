@@ -7,7 +7,7 @@ var jump_type
 
 
 onready var world = get_tree().get_root().get_node("World")
-onready var pc = world.get_node("Juniper")
+onready var pc = get_parent().get_parent().get_parent()
 onready var mm = pc.get_node("MovementManager")
 onready var sprite = pc.get_node("Sprite")
 onready var guns = pc.get_node("GunManager/Guns")
