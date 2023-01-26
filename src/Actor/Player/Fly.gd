@@ -12,9 +12,17 @@ func state_process():
 	mm.velocity = pc.move_and_slide(mm.velocity, mm.FLOOR_NORMAL, true)
 
 func get_move_dir():
-	return Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+	var input_dir: Vector2
+	match pc.controller_id:
+		#juniper
+		0: input_dir = Vector2(\
+			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),\
+			Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+		#sasuke
+		1: input_dir = Vector2(\
+			Input.get_action_strength("sasuke_right") - Input.get_action_strength("sasuke_left"),\
+			Input.get_action_strength("sasuke_down") - Input.get_action_strength("sasuke_up"))
+	return input_dir
 
 func enter():
 	pc.get_node("CollisionShape2D").disabled = true

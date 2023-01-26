@@ -8,6 +8,7 @@ const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 const PAUSEMENU = preload("res://src/UI/PauseMenu/PauseMenu.tscn")
 #const POPUP = preload("res://src/UI/PopupText.tscn")
 const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
+const SASUKE = preload("res://src/Actor/Player/Sasuke.tscn")
 const TITLE = preload("res://src/UI/TitleScreen.tscn")
 const TITLECAM = preload("res://src/Utility/TitleCam.tscn")
 
@@ -88,12 +89,21 @@ func set_debug_visible(visible = !debug_visible): #makes triggers and visutils v
 
 func skip_title():
 	on_level_change(start_level, 0)
-	add_child(JUNIPER.instance())
-	get_node("UILayer").add_child(HUD.instance())
+	match gamemode:
+		"story":
+			add_child(JUNIPER.instance())
+			get_node("UILayer").add_child(HUD.instance())
+			for s in get_tree().get_nodes_in_group("SpawnPoints"):
+				$Juniper.position = s.global_position
+		"pvp":
+			add_child(JUNIPER.instance())
+			add_child(SASUKE.instance())
+			
+			
+			for s in get_tree().get_nodes_in_group("SpawnPoints"):
+				$Juniper.position = s.global_position
+				$Sasuke.position = s.global_position + Vector2(32, 0)
 
-	for s in get_tree().get_nodes_in_group("SpawnPoints"):
-		$Juniper.position = s.global_position
-		print("moved player")
 
 
 func _input(event):
@@ -116,10 +126,10 @@ func _input(event):
 			ui.add_child(pause_menu)
 			
 
-
+### LEVEL CHANGE ###
 
 func on_level_change(level, door_index):
-	print("level change")
+	print("changing level...")
 	write_level_data_to_temp()
 	
 	### Clean up stuff we don't need
@@ -132,102 +142,71 @@ func on_level_change(level, door_index):
 	current_level.queue_free()
 	
 	
-	yield(get_tree(), 'idle_frame') #this gives time for juniper to spawn. probably not neccesary
+	yield(get_tree(), 'idle_frame') #this gives time for juniper to spawn. this is neccesary
 	var next_level = level.instance()
 	current_level = next_level #next level set so current level is never null
 	add_child(next_level)
 	
-	if next_level.level_type == next_level.LevelType.NORMAL:#############################################################
+	if next_level.level_type == next_level.LevelType.NORMAL:
 		if has_node("Juniper"):
 			$Juniper/PlayerCamera.smoothing_enabled = false
 			$Juniper/PlayerCamera.current = not next_level.has_node("LevelCamera") #turn off camera if level has one already
 			
-
-		
-		######################## get the door with the right index
-		
+		#### get the door with the right index
 		var doors_found = 0
 		
 		var triggers = get_tree().get_nodes_in_group("LevelTriggers")
 		for t in triggers:
-			if t.level == level_path:
+			if t.level == level_path and t.door_index == door_index:
 				if t.is_in_group("LoadZones"):
 					$Juniper.position = t.position + (t.direction * -32)
-					print("found a connected zone")
+					#print("found a connected zone")
 					doors_found += 1
 				else:
 					$Juniper.position = t.position
-					print("found a connected door")
+					#print("found a connected door")
 					doors_found += 1
-			
-		if doors_found == 0:
-			printerr("ERROR: could not find door with right level connection")
-		
-		if doors_found > 1: #more than one door with correct level connections
-			doors_found = 0
-			for t in triggers:
-				if t.level == level_path and t.door_index == door_index:
-					if t.is_in_group("LoadZones"):
-						$Juniper.position = t.position + (t.direction * -32)
-						print("got correct zone")
-						doors_found += 1
-					else:
-						$Juniper.position = t.position
-						print("got correct door")
-						doors_found += 1
-			
+
 			if doors_found == 0:
 				printerr("ERROR: could not find door with right index")
 			if doors_found > 1:
 				printerr("ERROR: more than one door with same index")
 		
 		###transition out
-		var already_enabled = false
-	
-		#LOADZONES
-		if ui.has_node("TransitionWipe"):
+		if ui.has_node("TransitionWipe"): #LOADZONES
 			yield(get_tree().create_timer(0.8), "timeout")
 			$UILayer/TransitionWipe.play_out_animation()
-			already_enabled = true
-			$Juniper.enable()
 
-		#DOORS
-		elif ui.has_node("TransitionIris"):
+		elif ui.has_node("TransitionIris"): #DOORS
 			yield(get_tree().create_timer(0.4), "timeout")
 			$UILayer/TransitionIris.play_out_animation()
-			already_enabled = true
-			#$Juniper.enable() TODO: we dont need to enable june for doors since he never is disabled. fix this enabling since it changes his state
 
-		######
-		if not already_enabled and not $EditorLayer.has_node("Editor"): #TODO: this was causing issues with june enabling on editor load level (should stay in editor and stay disabled)
-			$Juniper.enable()
-			
-		if ui.has_node("LevelText"):
-			$UILayer/LevelText.free()
-		var level_text = LEVEL_TEXT.instance()
-		level_text.text = next_level.name #TODO: in final version switch this to display name
-		ui.add_child(level_text)
+		display_level_text(next_level)
 		
-
+		if not $EditorLayer.has_node("Editor"): #TODO: this was causing issues with june enabling on editor load level (should stay in editor and stay disabled)
+			for pc in get_tree().get_nodes_in_group("Players"):
+				pc.enable()
+		
 		#enable smoothing after a bit
 		yield(get_tree().create_timer(0.01), "timeout")
 		$Juniper/PlayerCamera.smoothing_enabled = true
-		
-		
-
 	
 	if next_level.level_type == next_level.LevelType.PLAYERLESS_CUTSCENE:#############################################
 		#TODO: right now juniper isn't unloaded between levels unless we're using level buttons or starting
 		$Juniper.queue_free()
 		$UILayer/HUD.queue_free()
-		
-
-	##################################################################################################################
-	#current_level = next_level
+	
 	read_level_data_from_temp()
-	
-	
-	
+
+func display_level_text(level):
+	if ui.has_node("LevelText"):
+		$UILayer/LevelText.free()
+	var level_text = LEVEL_TEXT.instance()
+	level_text.text = level.name #TODO: in final version switch this to display name
+	ui.add_child(level_text)
+
+### SAVE/LOAD ###
+
 func write_player_data_to_save():
 	var pc = $Juniper
 	var guns = pc.guns

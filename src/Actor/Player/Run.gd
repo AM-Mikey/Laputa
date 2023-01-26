@@ -19,7 +19,8 @@ func state_process():
 	animate()
 	
 	
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_pressed("jump") and pc.controller_id == 0 or\
+	Input.is_action_pressed("sasuke_jump") and pc.controller_id == 1:
 		mm.jump()
 	
 	if not pc.is_on_floor() and not pc.is_in_coyote:
@@ -28,9 +29,16 @@ func state_process():
 
 
 func set_player_directions():
-	var input_dir = Vector2(\
-	Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),\
-	Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+	var input_dir: Vector2
+	match pc.controller_id:
+		#juniper
+		0: input_dir = Vector2(\
+			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),\
+			Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+		#sasuke
+		1: input_dir = Vector2(\
+			Input.get_action_strength("sasuke_right") - Input.get_action_strength("sasuke_left"),\
+			Input.get_action_strength("sasuke_down") - Input.get_action_strength("sasuke_up"))
 	
 	#get move_dir
 	pc.move_dir = Vector2(input_dir.x, 0)

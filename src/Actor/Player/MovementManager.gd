@@ -7,17 +7,10 @@ const FLOOR_NORMAL: = Vector2.UP
 const SNAP_DIRECTION = Vector2.DOWN
 const SNAP_LENGTH = 4.0
 
-
-
-
 var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
-
-
-
 
 var speed = Vector2(90, 180)
 var gravity = 300.0
-
 var velocity = Vector2.ZERO
 var acceleration = 2.0 #was 2.5, changed 10.26.22
 var ground_cof = 0.1
@@ -110,10 +103,16 @@ func check_ssp():
 
 func _input(event):
 	if not pc.disabled:
-		if event.is_action_pressed("fire_automatic"):
-			pc.direction_lock = pc.look_dir
-		if event.is_action_released("fire_automatic"): 
-			pc.direction_lock = Vector2.ZERO
+		if pc.controller_id == 0: #juniper
+			if event.is_action_pressed("fire_automatic"):
+				pc.direction_lock = pc.look_dir
+			if event.is_action_released("fire_automatic"): 
+				pc.direction_lock = Vector2.ZERO
+		if pc.controller_id == 1: #sasuke
+			if event.is_action_pressed("sasuke_lock"):
+				pc.direction_lock = pc.look_dir
+			if event.is_action_released("sasuke_lock"): 
+				pc.direction_lock = Vector2.ZERO
 
 
 
@@ -149,11 +148,12 @@ func jump():
 	snap_vector = Vector2.ZERO
 	am.play("pc_jump")
 	#Check if a running jump. since speed.x is max x velocity, only count as a running jump then
-	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") and abs(velocity.x) > speed.x * 0.95:
-		#jump_type = Jump.RUNNING
-		jump_starting_move_dir_x = pc.move_dir.x
-		$MinDirTimer.start(minimum_direction_time)
-		change_state("longjump")
+	if abs(velocity.x) > speed.x * 0.95:
+		if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") and pc.controller_id == 0 or \
+		Input.is_action_pressed("sasuke_left") or Input.is_action_pressed("sasuke_right") and pc.controller_id == 1:
+			jump_starting_move_dir_x = pc.move_dir.x
+			$MinDirTimer.start(minimum_direction_time)
+			change_state("longjump")
 	else:
 		change_state("jump")
 

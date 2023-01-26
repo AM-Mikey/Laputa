@@ -35,6 +35,7 @@ func _input(event):
 		if event.is_action_pressed("debug_level_down") and active_gun.level != 1:
 				level_down(true)
 
+
 ### METHODS
 
 func shift_gun(direction):

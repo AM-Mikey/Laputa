@@ -30,12 +30,23 @@ func state_process():
 
 
 func set_player_directions():
-	var input_dir = Vector2(\
-	Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),\
-	Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+	var input_dir: Vector2
+	match pc.controller_id:
+		#juniper
+		0: input_dir = Vector2(\
+			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),\
+			Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+		#sasuke
+		1: input_dir = Vector2(\
+			Input.get_action_strength("sasuke_right") - Input.get_action_strength("sasuke_left"),\
+			Input.get_action_strength("sasuke_down") - Input.get_action_strength("sasuke_up"))
+	
+	
 	
 	#get move dir
-	pc.move_dir = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0)
+	match pc.controller_id:
+		0: pc.move_dir = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0)
+		1: pc.move_dir = Vector2(Input.get_action_strength("sasuke_right") - Input.get_action_strength("sasuke_left"), 0)
 	
 	#get look dir
 	if pc.move_dir.x != 0:

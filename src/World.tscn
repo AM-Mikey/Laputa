@@ -12,6 +12,7 @@ development_stage = "alpha"
 release_version = "1.8"
 do_skip_title = true
 debug_visible = true
+gamemode = "pvp"
 start_level = ExtResource( 1 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]

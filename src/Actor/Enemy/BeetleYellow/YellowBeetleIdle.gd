@@ -8,7 +8,7 @@ onready var attack_timer = $Timer
 
 func physics_process():
 	var collision = beetle_actor.detection_raycast.get_collider()
-	if collision != null && collision.is_in_group("Player"):
+	if collision != null && collision.is_in_group("Players"):
 		#player detected.		
 		#change state.
 		beetle_actor.change_state(beetle_actor.attack_state)

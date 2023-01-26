@@ -13,9 +13,9 @@
 [ext_resource path="res://src/Actor/Player/Disabled.gd" type="Script" id=11]
 [ext_resource path="res://src/Actor/Player/GunManager.gd" type="Script" id=12]
 [ext_resource path="res://src/Actor/Player/PlayerSprite.gd" type="Script" id=13]
-[ext_resource path="res://src/Actor/Player/Juniper.gd" type="Script" id=14]
+[ext_resource path="res://src/Actor/Player/Player.gd" type="Script" id=14]
 [ext_resource path="res://src/Actor/Player/MovementManager.gd" type="Script" id=15]
-[ext_resource path="res://src/Actor/Player/AnimationManager2.gd" type="Script" id=16]
+[ext_resource path="res://src/Actor/Player/AnimationManager.gd" type="Script" id=16]
 [ext_resource path="res://src/Gun/GLauncher.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/Actor/Player/Palette/Normal.png" type="Texture" id=18]
 [ext_resource path="res://assets/Actor/Player/AerialNew.png" type="Texture" id=19]
@@ -443,7 +443,7 @@ tracks/2/keys = {
 radius = 8.0
 height = 2.0
 
-[node name="Juniper" type="KinematicBody2D" groups=["Player"]]
+[node name="Juniper" type="KinematicBody2D" groups=["Players"]]
 z_index = 1
 collision_mask = 520
 script = ExtResource( 14 )

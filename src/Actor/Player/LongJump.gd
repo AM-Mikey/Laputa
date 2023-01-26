@@ -11,8 +11,10 @@ onready var anim = pc.get_node("AnimationManager")
 func state_process():
 	#jump interrupt
 	var is_jump_interrupted = false
-	if mm.velocity.y < 0.0 and not Input.is_action_pressed("jump"):
-		is_jump_interrupted = true
+	if mm.velocity.y < 0.0:
+		if not Input.is_action_pressed("jump") and pc.controller_id == 0 or \
+		not Input.is_action_pressed("sasuke_jump") and pc.controller_id == 1:
+			is_jump_interrupted = true
 
 	set_player_directions()
 	mm.velocity = get_velocity(is_jump_interrupted)
@@ -33,10 +35,18 @@ func state_process():
 		mm.change_state("run")
 
 
+
 func set_player_directions():
-	var input_dir = Vector2(\
-	Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),\
-	Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+	var input_dir: Vector2
+	match pc.controller_id:
+		#juniper
+		0: input_dir = Vector2(\
+			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),\
+			Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+		#sasuke
+		1: input_dir = Vector2(\
+			Input.get_action_strength("sasuke_right") - Input.get_action_strength("sasuke_left"),\
+			Input.get_action_strength("sasuke_down") - Input.get_action_strength("sasuke_up"))
 	
 	#get move dir
 	var out_y = 0.0
@@ -45,7 +55,7 @@ func set_player_directions():
 		out_y = -1.0
 	if pc.is_on_floor():
 		out_y = -1.0
-	pc.move_dir = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), out_y)
+	pc.move_dir = Vector2(input_dir.x, out_y)
 	
 	#get look dir
 	if pc.move_dir.x != 0:

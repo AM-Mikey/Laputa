@@ -6,7 +6,7 @@ onready var pc = get_parent().get_parent().get_parent()
 onready var mm = pc.get_node("MovementManager")
 
 func state_process():
-	pc.move_dir = get_move_dir()
+	set_move_dir()
 	if mm.knockback_velocity == Vector2.ZERO:
 		mm.knockback_velocity = Vector2(mm.knockback_speed.x * mm.knockback_direction.x, mm.knockback_speed.y * -1)
 		mm.velocity.y = mm.knockback_velocity.y #set knockback y to this ONCE
@@ -35,15 +35,17 @@ func state_process():
 		mm.bonk("bonk")
 
 
-
-func get_move_dir():
-	return Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		
-		-1.0 \
-		if Input.is_action_just_pressed("jump") and mm.coyote_timer.time_left > 0 \
-		or Input.is_action_just_pressed("jump") and pc.is_on_floor() 
-		else 0.0)
+#or Input.is_action_just_pressed("jump") and pc.is_on_floor():
+func set_move_dir():
+	var move_dir = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0)
+	if mm.coyote_timer.time_left > 0:
+		match pc.controller_id:
+			0: if Input.is_action_just_pressed("jump"):
+				move_dir = Vector2(move_dir.x, -1)
+			1: if Input.is_action_just_pressed("sasuke_jump"):
+				move_dir = Vector2(move_dir.x, -1)
+			
+	pc.move_dir = move_dir
 
 
 
