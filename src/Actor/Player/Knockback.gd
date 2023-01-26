@@ -41,7 +41,7 @@ func get_move_dir():
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		
 		-1.0 \
-		if Input.is_action_just_pressed("jump") and mm.forgive_timer.time_left > 0 \
+		if Input.is_action_just_pressed("jump") and mm.coyote_timer.time_left > 0 \
 		or Input.is_action_just_pressed("jump") and pc.is_on_floor() 
 		else 0.0)
 

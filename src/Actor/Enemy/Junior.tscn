@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/Actor/Enemy/Junior.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 10 )
+extents = Vector2( 6, 10 )
 
 [sub_resource type="Animation" id=6]
 resource_name = "Aim"
@@ -115,14 +115,14 @@ anims/Shoot = SubResource( 7 )
 anims/Walk = SubResource( 9 )
 
 [node name="FloorDetectorL" type="RayCast2D" parent="."]
-position = Vector2( -8, 0 )
+position = Vector2( -6, 0 )
 enabled = true
 cast_to = Vector2( 0, 8 )
 collision_mask = 8
 collide_with_areas = true
 
 [node name="FloorDetectorR" type="RayCast2D" parent="."]
-position = Vector2( 8, 0 )
+position = Vector2( 6, 0 )
 enabled = true
 cast_to = Vector2( 0, 8 )
 collision_mask = 8

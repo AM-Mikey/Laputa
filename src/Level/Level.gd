@@ -5,6 +5,7 @@ signal tile_set_changed
 const DB = preload("res://src/Dialog/DialogBox.tscn")
 enum LevelType {NORMAL, PLAYERLESS_CUTSCENE}
 
+export var editor_hidden = false
 export var level_name: String
 export(LevelType) var level_type
 export(TileSet) var tile_set

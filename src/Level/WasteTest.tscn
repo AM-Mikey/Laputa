@@ -1,22 +1,12 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Effect/Light/SunLight.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Tile/Wastes.tres" type="TileSet" id=3]
-[ext_resource path="res://src/Effect/Light/SunLight.gd" type="Script" id=4]
 [ext_resource path="res://src/Utility/Rope/Rope.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/Utility/Rope/Rope.gd" type="Script" id=6]
-[ext_resource path="res://src/Background/LevelLimiter.gd" type="Script" id=7]
-[ext_resource path="res://src/Actor/Enemy/Bat.gd" type="Script" id=8]
-[ext_resource path="res://src/Trigger/Door.gd" type="Script" id=9]
-[ext_resource path="res://src/Trigger/FlavorText.gd" type="Script" id=10]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=11]
-[ext_resource path="res://src/Editor/SpawnPoint.gd" type="Script" id=12]
-[ext_resource path="res://src/Prop/AmmoRefill.gd" type="Script" id=13]
 [ext_resource path="res://src/Prop/AmmoRefill.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Utility/Waypoint.tscn" type="PackedScene" id=15]
-[ext_resource path="res://src/Prop/ChestKeyItem.gd" type="Script" id=16]
-[ext_resource path="res://src/Prop/SaveDisk.gd" type="Script" id=17]
 [ext_resource path="res://src/Prop/ChestKeyItem.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Prop/SaveDisk.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=20]
@@ -24,10 +14,6 @@
 [ext_resource path="res://src/Trigger/FlavorText.tscn" type="PackedScene" id=22]
 [ext_resource path="res://src/Actor/Enemy/Bat.tscn" type="PackedScene" id=23]
 [ext_resource path="res://src/Actor/Enemy/Shield.tscn" type="PackedScene" id=24]
-[ext_resource path="res://src/Utility/Waypoint.gd" type="Script" id=25]
-[ext_resource path="res://src/Trigger/DialogCue.gd" type="Script" id=26]
-[ext_resource path="res://src/Actor/Enemy/Shield.gd" type="Script" id=27]
-[ext_resource path="res://src/Prop/BreakBlock.gd" type="Script" id=28]
 [ext_resource path="res://src/Actor/Enemy/Frog.gd" type="Script" id=29]
 [ext_resource path="res://src/Actor/Enemy/Frog.tscn" type="PackedScene" id=30]
 [ext_resource path="res://src/Prop/BreakBlock.tscn" type="PackedScene" id=31]
@@ -42,23 +28,19 @@ _data = {
 [node name="WasteTest" type="Node2D"]
 script = ExtResource( 11 )
 level_name = "WasteTest"
-level_type = 0
 tile_set = ExtResource( 3 )
 music = "res://assets/Music/PhiDelta_Shop_Intro.wav"
 dialog_json = "res://src/Dialog/Village.json"
 conversation = "cutscene_test"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." instance=ExtResource( 1 )]
+[node name="LevelLimiter" parent="." instance=ExtResource( 1 )]
 margin_left = -64.0
 margin_top = -32.0
 margin_right = 2320.0
 margin_bottom = 464.0
-mouse_filter = 2
-script = ExtResource( 7 )
 texture = ExtResource( 32 )
 layers = 6
 parallax_near = 1.0
-parallax_far = 0.0
 focus = 2
 tile_mode = 1
 
@@ -105,9 +87,6 @@ tile_data = PoolIntArray( 589940, 192, 0, 589941, 193, 0, 589942, 194, 0, 589943
 
 [node name="Rope" parent="Tiles" instance=ExtResource( 5 )]
 position = Vector2( 834, 134 )
-script = ExtResource( 6 )
-softness = 0.01
-bias = 0.1
 
 [node name="EndPos" parent="Tiles/Rope" index="1"]
 position = Vector2( 128, 16 )
@@ -117,17 +96,9 @@ curve = SubResource( 4 )
 
 [node name="Line2D" parent="Tiles/Rope" index="3"]
 points = PoolVector2Array( 0, 0, 4.05585, 0.536163, 9.65363, 2.95535, 15.3105, 5.22453, 21.0256, 7.34026, 26.7939, 9.29823, 32.6167, 11.0967, 38.4835, 12.7306, 44.3949, 14.1986, 50.3469, 15.498, 56.3313, 16.6259, 62.3455, 17.5803, 68.3845, 18.3591, 74.4434, 18.9603, 80.5172, 19.3817, 86.6008, 19.6214, 92.6888, 19.6778, 98.7756, 19.5493, 104.856, 19.2351, 110.922, 18.735, 116.972, 18.0489, 122.999, 17.1781, 128, 16 )
-width = 1.0
-default_color = Color( 0, 0, 0, 1 )
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
 
 [node name="Rope2" parent="Tiles" instance=ExtResource( 5 )]
 position = Vector2( 972, 150 )
-script = ExtResource( 6 )
-softness = 0.01
-bias = 0.1
 
 [node name="EndPos" parent="Tiles/Rope2" index="1"]
 position = Vector2( 214, 96 )
@@ -137,17 +108,9 @@ curve = SubResource( 4 )
 
 [node name="Line2D" parent="Tiles/Rope2" index="3"]
 points = PoolVector2Array( 0, 0, 3.76392, 1.74316, 8.33014, 5.87193, 12.948, 9.93849, 17.6186, 13.9418, 22.3411, 17.8793, 27.1172, 21.7506, 31.946, 25.5532, 36.8282, 29.2858, 41.7615, 32.9449, 46.7477, 36.5301, 51.7859, 40.039, 56.8768, 43.4702, 62.0187, 46.8205, 67.2112, 50.0882, 72.4543, 53.2712, 77.7479, 56.3673, 83.0912, 59.374, 88.4835, 62.2889, 93.9246, 65.1093, 99.4132, 67.8328, 104.949, 70.4564, 110.53, 72.977, 116.158, 75.3924, 121.83, 77.6992, 127.545, 79.8947, 133.301, 81.975, 139.098, 83.9373, 144.934, 85.7785, 150.806, 87.4955, 156.714, 89.0851, 162.653, 90.5442, 168.624, 91.8705, 174.623, 93.0608, 180.647, 94.1127, 186.693, 95.0239, 192.759, 95.7926, 198.841, 96.4171, 204.936, 96.896, 211.04, 97.2284, 214, 96 )
-width = 1.0
-default_color = Color( 0, 0, 0, 1 )
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
 
 [node name="Rope3" parent="Tiles" instance=ExtResource( 5 )]
 position = Vector2( 1196, 246 )
-script = ExtResource( 6 )
-softness = 0.01
-bias = 0.1
 
 [node name="EndPos" parent="Tiles/Rope3" index="1"]
 position = Vector2( 70, 0 )
@@ -157,17 +120,9 @@ curve = SubResource( 4 )
 
 [node name="Line2D" parent="Tiles/Rope3" index="3"]
 points = PoolVector2Array( 0, 0, 4.06152, 0.0177307, 9.95642, 1.46687, 15.8989, 2.66844, 21.8938, 3.61502, 27.9209, 4.29655, 33.9686, 4.70732, 40.032, 4.84384, 46.0953, 4.70445, 52.1465, 4.29048, 58.1764, 3.6053, 64.1641, 2.65663, 70.1095, 1.45148, 70, 0 )
-width = 1.0
-default_color = Color( 0, 0, 0, 1 )
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
 
 [node name="Rope4" parent="Tiles" instance=ExtResource( 5 )]
 position = Vector2( 1276, 246 )
-script = ExtResource( 6 )
-softness = 0.01
-bias = 0.1
 
 [node name="EndPos" parent="Tiles/Rope4" index="1"]
 position = Vector2( 182, -48 )
@@ -177,291 +132,156 @@ curve = SubResource( 4 )
 
 [node name="Line2D" parent="Tiles/Rope4" index="3"]
 points = PoolVector2Array( 0, 0, 3.97498, -1.00768, 10.0583, -0.449371, 16.1536, -0.043869, 22.257, 0.208267, 28.3661, 0.306946, 34.4746, 0.252426, 40.578, 0.0456085, 46.6764, -0.312469, 52.7656, -0.820358, 58.838, -1.47594, 64.8961, -2.27773, 70.9324, -3.22296, 76.9456, -4.30945, 82.931, -5.53438, 88.889, -6.89568, 94.8169, -8.39098, 100.709, -10.0169, 106.566, -11.7714, 112.384, -13.6518, 118.161, -15.6556, 123.897, -17.7804, 129.588, -20.0238, 135.233, -22.3835, 140.83, -24.857, 146.377, -27.4419, 151.874, -30.136, 157.319, -32.9367, 162.71, -35.8418, 168.046, -38.8485, 173.328, -41.9545, 178.551, -45.1563, 182, -48 )
-width = 1.0
-default_color = Color( 0, 0, 0, 1 )
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
 
 [node name="Props" type="Node2D" parent="."]
 
-[node name="@SaveDisk@3946" type="Area2D" parent="Props" instance=ExtResource( 19 )]
+[node name="@SaveDisk@3946" parent="Props" instance=ExtResource( 19 )]
 position = Vector2( 568, 208 )
-collision_layer = 0
 input_pickable = false
-script = ExtResource( 17 )
-editor_hidden = false
 
-[node name="AmmoRefill" type="Area2D" parent="Props" instance=ExtResource( 14 )]
+[node name="AmmoRefill" parent="Props" instance=ExtResource( 14 )]
 position = Vector2( 456, 112 )
-collision_layer = 16
 input_pickable = false
-script = ExtResource( 13 )
-editor_hidden = false
 
-[node name="Chest" type="Area2D" parent="Props" instance=ExtResource( 18 )]
+[node name="Chest" parent="Props" instance=ExtResource( 18 )]
 position = Vector2( 104, 208 )
 input_pickable = false
-script = ExtResource( 16 )
-editor_hidden = false
-held_item = ""
 
-[node name="@BreakBlock@5068" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="@BreakBlock@5068" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 120, 128 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
-[node name="@BreakBlock@5077" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="@BreakBlock@5077" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 136, 128 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
-[node name="BreakBlock" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="BreakBlock" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 136, 144 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
-[node name="@BreakBlock@5092" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="@BreakBlock@5092" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 120, 128 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
-[node name="@BreakBlock@5104" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="@BreakBlock@5104" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 136, 144 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
-[node name="@BreakBlock@5118" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="@BreakBlock@5118" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 136, 144 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
-[node name="@BreakBlock@5143" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="@BreakBlock@5143" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 120, 160 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
-[node name="@BreakBlock@5158" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="@BreakBlock@5158" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 136, 160 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
-[node name="@BreakBlock@5236" type="StaticBody2D" parent="Props" instance=ExtResource( 31 )]
+[node name="@BreakBlock@5236" parent="Props" instance=ExtResource( 31 )]
 position = Vector2( 152, 160 )
-collision_layer = 264
-collision_mask = 0
-script = ExtResource( 28 )
-editor_hidden = false
 
 [node name="Actors" type="Node2D" parent="."]
 
-[node name="Bat" type="KinematicBody2D" parent="Actors" instance=ExtResource( 23 )]
+[node name="Bat" parent="Actors" instance=ExtResource( 23 )]
 position = Vector2( 296, 160 )
-collision_layer = 2
-collision_mask = 8
-script = ExtResource( 8 )
-editor_hidden = false
 speed = Vector2( 100, 50 )
-debug = true
 id = "bat"
 move_dir = Vector2( -0.958517, 0 )
-flap_time = 0.1
-idle_time = 0.05
-start_waypoint = 0
 
-[node name="Bat2" type="KinematicBody2D" parent="Actors" instance=ExtResource( 23 )]
+[node name="Bat2" parent="Actors" instance=ExtResource( 23 )]
 position = Vector2( 176, 72 )
-collision_layer = 2
-collision_mask = 8
-script = ExtResource( 8 )
-editor_hidden = false
 speed = Vector2( 100, 50 )
-debug = true
 id = "bat"
 move_dir = Vector2( 0.0395771, 0 )
-flap_time = 0.1
-idle_time = 0.05
-start_waypoint = 0
 
-[node name="@Bat@2414" type="KinematicBody2D" parent="Actors" instance=ExtResource( 23 )]
+[node name="@Bat@2414" parent="Actors" instance=ExtResource( 23 )]
 modulate = Color( 2, 2, 2, 1 )
 position = Vector2( 344, 48 )
-collision_layer = 2
-collision_mask = 8
-script = ExtResource( 8 )
-editor_hidden = false
 speed = Vector2( 100, 50 )
-debug = true
-id = ""
-move_dir = Vector2( 0, 0 )
-flap_time = 0.1
-idle_time = 0.05
-start_waypoint = 0
 
-[node name="Shield" type="KinematicBody2D" parent="Actors" instance=ExtResource( 24 )]
+[node name="Shield" parent="Actors" instance=ExtResource( 24 )]
 position = Vector2( 696, 256 )
-collision_layer = 2
-collision_mask = 8
-script = ExtResource( 27 )
-editor_hidden = false
 speed = Vector2( 50, 50 )
-debug = true
 id = "shield"
 move_dir = Vector2( 1, 0 )
-idle_max_time = 5.0
-walk_max_time = 10.0
-defend_time = 0.4
 
-[node name="Frog" type="KinematicBody2D" parent="Actors" instance=ExtResource( 30 )]
+[node name="Frog" parent="Actors" instance=ExtResource( 30 )]
 modulate = Color( 2, 2, 2, 1 )
 position = Vector2( 504, 400 )
-collision_layer = 2
-collision_mask = 520
 script = ExtResource( 29 )
-editor_hidden = false
 speed = Vector2( 12, 120 )
-debug = false
-id = ""
 jump_delay = 0
 difficulty = 1
 
 [node name="Triggers" type="Node2D" parent="."]
 
-[node name="FlavorText" type="Area2D" parent="Triggers" instance=ExtResource( 22 )]
+[node name="FlavorText" parent="Triggers" instance=ExtResource( 22 )]
 position = Vector2( 360, 192 )
 z_index = 100
-collision_layer = 0
 input_pickable = false
-script = ExtResource( 10 )
-editor_hidden = false
-color = Color( 0.901961, 0.74902, 0, 1 )
 text = "testing"
 
-[node name="@Door@2306" type="Area2D" parent="Triggers" groups=["Trigger"] instance=ExtResource( 20 )]
+[node name="@Door@2306" parent="Triggers" instance=ExtResource( 20 )]
 position = Vector2( 432, 160 )
 z_index = 100
-collision_layer = 0
-script = ExtResource( 9 )
-editor_hidden = false
-color = Color( 0, 0.4, 0, 1 )
-level = ""
-door_index = 0
-locked = false
 
-[node name="DialogCue" type="Area2D" parent="Triggers" instance=ExtResource( 33 )]
+[node name="DialogCue" parent="Triggers" instance=ExtResource( 33 )]
 position = Vector2( -80, -128 )
 z_index = 100
-collision_layer = 0
-script = ExtResource( 26 )
-editor_hidden = false
-color = Color( 1, 0, 0, 1 )
-dialog_json = ""
-conversation = ""
-repeatable = false
 
-[node name="SpawnPoint" type="Area2D" parent="." instance=ExtResource( 21 )]
+[node name="SpawnPoint" parent="." instance=ExtResource( 21 )]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 136, 112 )
-script = ExtResource( 12 )
 
-[node name="SunLight" type="Area2D" parent="." instance=ExtResource( 2 )]
+[node name="SunLight" parent="." instance=ExtResource( 2 )]
 visible = false
 position = Vector2( 241, 0 )
-script = ExtResource( 4 )
-light_color = Color( 0.5, 0.5, 0.5, 1 )
-shadow_color = Color( 0, 0, 0, 1 )
-modulate_color = Color( 0.5, 0.5, 0.5, 1 )
 
-[node name="Waypoint" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint" parent="." instance=ExtResource( 15 )]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 256, 128 )
-script = ExtResource( 25 )
 owner_id = "bat"
-index = 0
 
-[node name="Waypoint2" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint2" parent="." instance=ExtResource( 15 )]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 192, 160 )
-script = ExtResource( 25 )
 owner_id = "bat"
 index = 1
 
-[node name="Waypoint3" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint3" parent="." instance=ExtResource( 15 )]
 position = Vector2( 280, 64 )
-script = ExtResource( 25 )
 owner_id = "bat"
 index = 3
 
-[node name="Waypoint4" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint4" parent="." instance=ExtResource( 15 )]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 304, 224 )
-script = ExtResource( 25 )
 owner_id = "bat"
 index = 4
 
-[node name="Waypoint5" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint5" parent="." instance=ExtResource( 15 )]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 208, 224 )
-script = ExtResource( 25 )
 owner_id = "bat"
 index = 5
 
-[node name="Waypoint6" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint6" parent="." instance=ExtResource( 15 )]
 position = Vector2( 241, 104 )
-script = ExtResource( 25 )
 owner_id = "bat"
 index = 2
 
-[node name="Waypoint7" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint7" parent="." instance=ExtResource( 15 )]
 position = Vector2( 128, 80 )
-script = ExtResource( 25 )
 owner_id = "bat2"
-index = 0
 
-[node name="Waypoint8" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint8" parent="." instance=ExtResource( 15 )]
 position = Vector2( -16, 96 )
-script = ExtResource( 25 )
 owner_id = "bat2"
 index = 1
 
-[node name="Waypoint9" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint9" parent="." instance=ExtResource( 15 )]
 position = Vector2( 120, 40 )
-script = ExtResource( 25 )
 owner_id = "bat2"
 index = 2
 
-[node name="Waypoint10" type="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="Waypoint10" parent="." instance=ExtResource( 15 )]
 position = Vector2( 360, 96 )
-script = ExtResource( 25 )
 owner_id = "bat2"
 index = 3
-
-[connection signal="body_entered" from="Props/@SaveDisk@3946" to="Props/@SaveDisk@3946" method="_on_body_entered"]
-[connection signal="body_exited" from="Props/@SaveDisk@3946" to="Props/@SaveDisk@3946" method="_on_body_exited"]
-[connection signal="body_entered" from="Props/AmmoRefill" to="Props/AmmoRefill" method="_on_body_entered"]
-[connection signal="body_exited" from="Props/AmmoRefill" to="Props/AmmoRefill" method="_on_body_exited"]
-[connection signal="body_entered" from="Props/Chest" to="Props/Chest" method="_on_body_entered"]
-[connection signal="body_exited" from="Props/Chest" to="Props/Chest" method="_on_body_exited"]
-[connection signal="body_entered" from="Triggers/FlavorText" to="Triggers/FlavorText" method="_on_Sign_body_entered"]
-[connection signal="body_entered" from="Triggers/@Door@2306" to="Triggers/@Door@2306" method="_on_body_entered"]
-[connection signal="body_exited" from="Triggers/@Door@2306" to="Triggers/@Door@2306" method="_on_body_exited"]
-[connection signal="body_entered" from="Triggers/DialogCue" to="Triggers/DialogCue" method="_on_body_entered"]
 
 [editable path="Tiles/Rope"]
 [editable path="Tiles/Rope2"]

@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Actor/Enemy/Billy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
 [ext_resource path="res://src/Tile/Outdated/Village.tres" type="TileSet" id=6]
-[ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=7]
 [ext_resource path="res://src/Actor/Enemy/Sentry.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=9]
 
@@ -17,7 +16,6 @@ level_name = "demo level"
 margin_top = 184.0
 margin_right = 1408.0
 margin_bottom = 528.0
-background = ExtResource( 7 )
 
 [node name="Tiles" type="Node2D" parent="."]
 

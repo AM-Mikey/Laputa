@@ -1,29 +1,38 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=1]
 [ext_resource path="res://src/Actor/Enemy/Junior.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Actor/Enemy/Junior.gd" type="Script" id=4]
 [ext_resource path="res://src/Effect/Light/SunLight.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Editor/SpawnPoint.gd" type="Script" id=7]
 [ext_resource path="res://src/Tile/Train.tres" type="TileSet" id=8]
 [ext_resource path="res://assets/Background/SkyDemo.png" type="Texture" id=9]
+[ext_resource path="res://src/Background/LevelLimiter.gd" type="Script" id=10]
+[ext_resource path="res://src/Effect/Light/SunLight.gd" type="Script" id=11]
 
 [node name="Train" type="Node2D"]
 script = ExtResource( 1 )
+editor_hidden = false
 level_name = "Train"
+level_type = 0
 tile_set = ExtResource( 8 )
 music = "res://assets/Music/PhiDelta_Shop_Intro.wav"
 dialog_json = "res://src/Dialog/Village.json"
 conversation = "cutscene_test"
 
-[node name="LevelLimiter" parent="." instance=ExtResource( 3 )]
+[node name="LevelLimiter" type="MarginContainer" parent="." instance=ExtResource( 3 )]
 margin_left = -64.0
 margin_top = -160.0
 margin_right = 1584.0
 margin_bottom = 96.0
+mouse_filter = 2
+script = ExtResource( 10 )
 texture = ExtResource( 9 )
 layers = 5
 parallax_near = 1.0
+parallax_far = 0.0
 focus = 3
 tile_mode = 1
 
@@ -72,16 +81,45 @@ tile_data = PoolIntArray( -327679, 196, 0, -327661, 96, 0, -327660, 96, 0, -3276
 
 [node name="Actors" type="Node2D" parent="."]
 
-[node name="Junior" parent="Actors" instance=ExtResource( 2 )]
+[node name="Junior" type="KinematicBody2D" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( 288, 0 )
+collision_layer = 2
+collision_mask = 8
+script = ExtResource( 4 )
+editor_hidden = false
+speed = Vector2( 50, 50 )
+debug = false
+id = ""
+move_dir = Vector2( -1, 0 )
+idle_max_time = 5.0
+walk_max_time = 10.0
+aim_time = 0.2
+reload_time = 2.0
 
-[node name="Junior2" parent="Actors" instance=ExtResource( 2 )]
+[node name="Junior2" type="KinematicBody2D" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( 192, 0 )
+collision_layer = 2
+collision_mask = 8
+script = ExtResource( 4 )
+editor_hidden = false
+speed = Vector2( 50, 50 )
+debug = false
+id = ""
+move_dir = Vector2( -1, 0 )
+idle_max_time = 5.0
+walk_max_time = 10.0
+aim_time = 0.2
+reload_time = 2.0
 
 [node name="Triggers" type="Node2D" parent="."]
 
-[node name="SpawnPoint" parent="." instance=ExtResource( 6 )]
+[node name="SpawnPoint" type="Area2D" parent="." instance=ExtResource( 6 )]
 position = Vector2( 88, 0 )
+script = ExtResource( 7 )
 
-[node name="SunLight" parent="." instance=ExtResource( 5 )]
+[node name="SunLight" type="Area2D" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1, -192 )
+script = ExtResource( 11 )
+light_color = Color( 0.5, 0.5, 0.5, 1 )
+shadow_color = Color( 0, 0, 0, 1 )
+modulate_color = Color( 0.5, 0.5, 0.5, 1 )

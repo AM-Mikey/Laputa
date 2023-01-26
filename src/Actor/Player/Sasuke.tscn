@@ -21,7 +21,7 @@
 [ext_resource path="res://assets/Actor/Player/AerialNew.png" type="Texture" id=19]
 [ext_resource path="res://assets/Actor/Player/CrouchRunNew.png" type="Texture" id=20]
 [ext_resource path="res://assets/Actor/Player/StandNew.png" type="Texture" id=21]
-[ext_resource path="res://assets/Actor/Player/Palette/Mono.png" type="Texture" id=22]
+[ext_resource path="res://assets/Actor/Player/Palette/OceanPink.png" type="Texture" id=22]
 [ext_resource path="res://assets/Actor/Player/BackRunNew.png" type="Texture" id=23]
 [ext_resource path="res://assets/Actor/Player/InspectNew.png" type="Texture" id=24]
 [ext_resource path="res://src/Actor/Player/Inspect.gd" type="Script" id=27]
@@ -443,7 +443,7 @@ tracks/2/keys = {
 radius = 8.0
 height = 2.0
 
-[node name="Juniper" type="KinematicBody2D" groups=["Player"]]
+[node name="Sasuke" type="KinematicBody2D" groups=["Player"]]
 z_index = 1
 collision_mask = 520
 script = ExtResource( 14 )
@@ -591,9 +591,10 @@ script = ExtResource( 16 )
 light_mask = 2
 material = SubResource( 61 )
 position = Vector2( 0, -16 )
-texture = ExtResource( 6 )
-hframes = 12
-vframes = 8
+texture = ExtResource( 19 )
+hframes = 5
+vframes = 6
+frame = 3
 script = ExtResource( 13 )
 
 [node name="EffectPlayer" type="AnimationPlayer" parent="."]

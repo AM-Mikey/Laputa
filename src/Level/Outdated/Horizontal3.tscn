@@ -1,9 +1,8 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/Tile/Outdated/DebugTile.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Tile/Outdated/DebugBackground.tres" type="TileSet" id=2]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=3]
-[ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=4]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=5]
 [ext_resource path="res://src/Utility/Outdated/CameraLimiter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Actor/Enemy/Billy.tscn" type="PackedScene" id=7]
@@ -18,10 +17,9 @@
 [ext_resource path="res://src/Actor/Enemy/Frog.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/Utility/Wind.tscn" type="PackedScene" id=17]
 
-
-
 [node name="Horizontal" type="Node2D"]
 script = ExtResource( 3 )
+editor_hidden = true
 level_name = "Bridge"
 
 [node name="Tiles" type="Node2D" parent="."]
@@ -63,23 +61,15 @@ tile_data = PoolIntArray( 196758, 0, 0, 262294, 1, 0, 327830, 1, 0, 393366, 1, 0
 
 [node name="Billy" parent="Actors" instance=ExtResource( 7 )]
 position = Vector2( 656, 64 )
-heart_chance = 0
-ammo_chance = 0
 
 [node name="Billy2" parent="Actors" instance=ExtResource( 7 )]
 position = Vector2( 1064, 80 )
-heart_chance = 0
-ammo_chance = 0
 
 [node name="Billy4" parent="Actors" instance=ExtResource( 7 )]
 position = Vector2( 1608, 128 )
-heart_chance = 0
-ammo_chance = 0
 
 [node name="Billy3" parent="Actors" instance=ExtResource( 7 )]
 position = Vector2( 2016, 128 )
-heart_chance = 0
-ammo_chance = 0
 
 [node name="Sentry" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 1544, 64 )
@@ -173,7 +163,6 @@ margin_left = 1088.0
 margin_top = 1000.0
 margin_right = 1240.0
 margin_bottom = 1056.0
-custom_fonts/font = ExtResource( 4 )
 text = "Foreshadow corp landing on the island"
 autowrap = true
 __meta__ = {
@@ -185,7 +174,6 @@ margin_left = 624.0
 margin_top = 984.0
 margin_right = 776.0
 margin_bottom = 1040.0
-custom_fonts/font = ExtResource( 4 )
 text = "track enemies would be good here. put them circling around a platform"
 autowrap = true
 __meta__ = {

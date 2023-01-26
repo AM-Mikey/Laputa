@@ -11,8 +11,6 @@
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=14]
 [ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=16]
 
-
-
 [node name="PirateCliff" type="Node2D"]
 script = ExtResource( 11 )
 level_name = "Edge of the Island"
@@ -41,7 +39,6 @@ tile_data = PoolIntArray( 786445, 16, 0, 786462, 16, 0, 1179653, 16, 0 )
 [node name="ChestWeapon" parent="Props" instance=ExtResource( 5 )]
 position = Vector2( -8, 328 )
 collision_layer = 0
-weapon_name = "Revolver1"
 
 [node name="Actors" type="Node2D" parent="."]
 

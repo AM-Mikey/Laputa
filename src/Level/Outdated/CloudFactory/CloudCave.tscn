@@ -10,8 +10,6 @@
 [ext_resource path="res://src/Tile/Outdated/DebugBackground.tres" type="TileSet" id=10]
 [ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=11]
 
-
-
 [node name="CloudCave" type="Node2D"]
 script = ExtResource( 8 )
 __meta__ = {
@@ -19,6 +17,7 @@ __meta__ = {
 
 get the key to the treasure room and return"
 }
+editor_hidden = true
 music = "res://assets/Music/Access.ogg"
 
 [node name="Tiles" type="Node2D" parent="."]

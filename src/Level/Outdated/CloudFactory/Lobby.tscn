@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/Utility/Outdated/CameraLimiter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Prop/Outdated/SavePoint.tscn" type="PackedScene" id=2]
@@ -7,12 +7,10 @@
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Tile/Outdated/DebugTile.tres" type="TileSet" id=6]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=7]
-[ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=8]
 [ext_resource path="res://src/Background/BackgroundIndoor.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Tile/Outdated/DebugBackground.tres" type="TileSet" id=10]
 [ext_resource path="res://src/Prop/RefillTerminal.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Actor/Enemy/Billy.tscn" type="PackedScene" id=12]
-
 
 [node name="Lobby" type="Node2D"]
 script = ExtResource( 7 )
@@ -21,6 +19,7 @@ __meta__ = {
 
 get the key to the treasure room and return"
 }
+editor_hidden = true
 level_name = "Lobby"
 music = "res://assets/Music/Access.ogg"
 
@@ -90,7 +89,6 @@ margin_left = 728.0
 margin_top = -8.0
 margin_right = 880.0
 margin_bottom = 48.0
-custom_fonts/font = ExtResource( 8 )
 text = "the plaza is nice ofc but the elevator/stairs can still be parking structure-y"
 autowrap = true
 __meta__ = {

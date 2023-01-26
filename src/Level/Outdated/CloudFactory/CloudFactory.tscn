@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Trigger/LoadZone.tscn" type="PackedScene" id=2]
@@ -8,11 +8,8 @@
 [ext_resource path="res://src/Tile/Outdated/DebugTile.tres" type="TileSet" id=6]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=7]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=8]
-[ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=9]
 [ext_resource path="res://src/Tile/Outdated/DebugBackground.tres" type="TileSet" id=10]
 [ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=11]
-
-
 
 [node name="CloudFactory" type="Node2D"]
 script = ExtResource( 8 )
@@ -21,6 +18,7 @@ __meta__ = {
 
 get the key to the treasure room and return"
 }
+editor_hidden = true
 music = "res://assets/Music/Access.ogg"
 
 [node name="Tiles" type="Node2D" parent="."]
@@ -111,7 +109,6 @@ margin_left = 576.0
 margin_top = 152.0
 margin_right = 728.0
 margin_bottom = 214.0
-custom_fonts/font = ExtResource( 9 )
 text = "get out from under here, take a look take in the scenery and enter the building when ready
 "
 autowrap = true

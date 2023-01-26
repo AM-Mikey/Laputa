@@ -7,7 +7,6 @@
 [ext_resource path="res://src/Utility/Outdated/CameraLimiter.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=9]
 
-
 [node name="PirateShip" type="Node2D"]
 script = ExtResource( 6 )
 level_name = "The Ship"

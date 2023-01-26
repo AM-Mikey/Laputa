@@ -2,16 +2,65 @@ extends MarginContainer
 
 const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
+const LEVEL_BUTTON = preload("res://src/Editor/Button/LevelButton.tscn")
+
+signal level_changed(level_path)
+
+var levels = {}
+var active_level_path
+var default_level = "res://src/Level/Default.tscn"
+var ctrl_held := false
 
 onready var w = get_tree().get_root().get_node("World")
 onready var ui = w.get_node("UILayer")
 onready var el = w.get_node("EditorLayer")
 
-var default_level = "res://src/Level/Default.tscn"
-var ctrl_held := false
-
 func _unhandled_input(event):
 	if event.is_action_pressed("editor_ctrl"): ctrl_held = true
+
+
+
+
+
+func _ready():
+	setup_enemies()
+
+
+func setup_enemies():
+	var index = 0
+	for l in find_level_scenes("res://src/Level/"):
+		
+		var level = load(l).instance()
+		if not level.editor_hidden:
+			levels[level.name] = level
+			
+			var level_button = LEVEL_BUTTON.instance()
+			level_button.level_path = l
+			level_button.level_name = level.name
+			level_button.connect("level_changed", self, "change_level")
+			if index == 0:
+				level_button.active = true
+				active_level_path = l
+			$VBox/Margin/Scroll/Buttons.add_child(level_button)
+			index += 1
+
+func find_level_scenes(path):
+	var files = []
+	var dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin(true, true)
+
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		if file.ends_with(".tscn"):
+			files.append(path + file)
+			
+	return files
+
+func change_level(path): #connected to level buttons
+	load_level(path)
 
 ### BUTTON SIGNALS
 
@@ -29,6 +78,20 @@ func on_load():
 func on_new():
 	$NewDialog.current_path = "res://src/level/"
 	$NewDialog.popup()
+
+func _on_Default_pressed():
+	w.start_level = load(w.current_level.filename)
+	#am.play("save")
+
+
+	var packed_scene = PackedScene.new()
+	packed_scene.pack(w) #packing world is a bad idea, we need to be sure nothing else gets saved along with default level
+	var err = ResourceSaver.save("res://src/World.tscn", packed_scene)
+	
+	if err == OK:
+		print("Saved Default Level as: " + w.current_level.filename)
+		am.play("save")
+	else: printerr("ERROR: Could Not Save Default Level")
 
 ### DIALOG SIGNALS
 
@@ -87,3 +150,6 @@ func load_level(path):
 
 	el.get_node("Editor").setup_level()
 	el.get_node("EditorCamera").current = true
+
+
+

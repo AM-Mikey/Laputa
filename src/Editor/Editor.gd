@@ -19,7 +19,7 @@ const TILE_MAP_CURSOR = preload("res://src/Editor/TileMapCursor.tscn")
 
 var disabled = false
 
-var active_tiles = [] #2D array
+var brush = {} #2D array THIS IS BRUSH
 var tile_map_selection: Rect2
 var auto_layer = true
 var multi_erase = true
@@ -65,7 +65,7 @@ func _ready():
 	setup_level() #Call this every time the level is changed or reloaded
 	#$Main.move_child($Main/Tab, 0) TODO: was supposed to make tabcontainer go behind resize controls, didnt work
 
-func setup_level():
+func setup_level(): #TODO: clear undo history
 	#emit_signal("level_selected", w.current_level)
 	#get_tree().paused = true
 	w.get_node("Juniper").disable()
@@ -80,7 +80,8 @@ func setup_level():
 	
 	tile_map = tile_collection.get_child(0)
 	tile_set = w.current_level.tile_set
-	on_TileSet_tile_set_loaded(tile_set.resource_path) #so we can set every tile map to the tile set
+	$Main/Tab/TileSet.load_tile_set(tile_set.resource_path)
+	
 	setup_level_editor_layer()
 	set_entities_pickable()
 	w.set_debug_visible(true)
@@ -162,31 +163,6 @@ func _physics_process(delta):
 	set_menu_alpha()
 
 ### TILES
-
-func create_tile_set_from_texture(texture):
-	tile_set = TileSet.new()
-	var rows = int(texture.get_size().y/16)
-	var columns = int(texture.get_size().x/16)
-
-	var id = 0
-	while id < rows * columns:
-		var x_pos = (id % columns) * 16
-		var y_pos = floor(id / columns) * 16
-		var region = Rect2(x_pos, y_pos, 16, 16)
-
-		#if texture_alpha_check(texture, region):
-		tile_set.create_tile(id)
-		tile_set.tile_set_texture(id, texture)
-		tile_set.tile_set_region(id, region)
-		id += 1
-
-	$Main/Tab/TileSet.setup_tile_set(tile_set)
-
-	for c in tile_collection.get_children():
-		if c is TileMap:
-			c.tile_set = tile_set
-
-
 
 
 
@@ -317,10 +293,9 @@ func do_entity_input(event):
 
 func do_tile_input(event):
 	var mouse_pos = w.get_global_mouse_position()
-	var brush
 	
-	if lmb_held: brush = active_tiles
-	if rmb_held: brush = get_brush_as_eraser()
+	if lmb_held: pass #brush = brush
+	if rmb_held: pass#brush = get_brush_as_eraser()
 	
 	if event.is_action_pressed("debug_fly"):
 		print(active_operation)
@@ -332,9 +307,12 @@ func do_tile_input(event):
 	#pressing
 	if event.is_action_pressed("editor_rmb") or event.is_action_pressed("editor_lmb"):
 		mouse_start_pos = mouse_pos
-		if subtool == "select" and event.is_action_pressed("editor_lmb"): #select
-			set_tile_map_selection(mouse_start_pos, mouse_pos)
-		elif not active_tiles.empty(): #normal draw
+		if subtool == "select":
+			if event.is_action_pressed("editor_lmb"):
+				set_tile_map_selection(mouse_start_pos, mouse_pos)
+#			if event.is_action_pressed("editor_rmb"):
+#				move_tile_map_selection("mou")
+		else: #not brush.empty(): #normal draw              #TODO:WHY
 			if shift_held: set_tool("tile", "line")
 			elif ctrl_held: set_tool("tile", "box")
 			else: 
@@ -349,25 +327,32 @@ func do_tile_input(event):
 				if lmb_held:
 					set_tile_map_selection(mouse_start_pos, mouse_pos)
 			"line":
-				preview_tiles(get_brush_origin_line(mouse_start_pos, mouse_pos), "line")
+				#preview_tiles(get_brush_origin_line(mouse_start_pos, mouse_pos), "line")
+				pass
 			"box":
-				preview_tiles(get_box_2d(mouse_start_pos, mouse_pos), "box")
+				pass
+				#preview_tiles(get_box_2d_array(mouse_start_pos, mouse_pos), "box")
 			"paint":
 				if lmb_held or rmb_held:
 					set_cells_2d(get_centerbox(mouse_pos), brush) #TODO: on all layers
 				else:
-					preview_tiles(get_centerbox(mouse_pos), "box")
+					pass
+					#preview_tiles(get_centerbox(mouse_pos), "box")
 	
 	#releasing
 	if event.is_action_released("editor_lmb") and lmb_held or event.is_action_released("editor_rmb") and rmb_held:
 		match subtool:
+			"select":
+				if rmb_held:
+					move_tile_map_selection(mouse_start_pos, mouse_pos)
 			"line":
 				set_line(get_brush_origin_line(mouse_start_pos, mouse_pos), brush) #TODO: on all layers
 			"box":
 				if lmb_held:
-					set_cells_2d(get_box_2d(mouse_start_pos, mouse_pos), brush)
+					set_cells_2d_array(get_box_2d_array(mouse_start_pos, mouse_pos), brush)
 				elif rmb_held:
-					set_cells_2d(get_box_2d(mouse_start_pos, mouse_pos), get_brush_as_eraser())
+					pass
+					#set_cells_2d_array(get_box_2d_array(mouse_start_pos, mouse_pos), get_brush_as_eraser())
 					#set_cells_1d(get_box_1d(mouse_start_pos, mouse_pos), -1)
 				
 		if subtool != "select":
@@ -437,8 +422,47 @@ func set_tile_map_selection(start_pos, end_pos):
 	tile_map_selection.size += Vector2.ONE
 	tile_map_cursor.rect_position = tile_map_selection.position * 16
 	tile_map_cursor.rect_size = tile_map_selection.size * 16
-	print(tile_map_selection)
+	#print(tile_map_selection)
 
+func move_tile_map_selection(start_pos, end_pos):# TODO: make work with undo/redo
+	var selected_tiles = get_selected_tiles_as_dictionary()
+	
+	var change = get_cell(end_pos) - get_cell(start_pos)
+	tile_map_selection.position += change
+	tile_map_cursor.rect_position = tile_map_selection.position * 16
+	tile_map_cursor.rect_size = tile_map_selection.size * 16
+
+	set_selected_tiles_from_dictionary(selected_tiles, change)
+
+func del_tile_map_selection(): #TODO: test
+	var selected_tiles = get_selected_tiles_as_dictionary()
+	
+	for layer in selected_tiles:
+		for position in selected_tiles[layer]:
+			layer.set_cellv(position, -1)
+
+
+func get_selected_tiles_as_dictionary() -> Dictionary: #used for tile map selection
+	var selected_tiles = {}
+	for layer in tile_collection.get_children():
+		var layer_tiles = {}
+		for row in tile_map_selection.size.y:
+			for column in tile_map_selection.size.x:
+				var position = tile_map_selection.position + Vector2(column, row)
+				layer_tiles[position] = layer.get_cellv(position)
+		selected_tiles[layer] = layer_tiles
+	return(selected_tiles)
+
+
+func set_selected_tiles_from_dictionary(selected_tiles, change): #used for tile map selection
+	for layer in selected_tiles:
+		for position in selected_tiles[layer]:
+			var map_position = position + change
+			var tile_id = selected_tiles[layer][position]
+			layer.set_cellv(position, -1)
+			layer.set_cellv(map_position, tile_id)
+#			if tile_id != -1:
+#				print("got tile")
 
 func undo():
 	var last = past_operations.pop_back()
@@ -545,8 +569,44 @@ func set_cell(cell: Vector2, tile: int, layer): #set one cell, one layer, one ti
 #		#print(active_operation)
 
 
+func set_cells_dictionary(cells: Dictionary, brush: Dictionary): #ex: {layerobject1:{Vector2(0,0): -1, Vector2(0,1): 1}}
+	var min_pos = Vector2(9999, 9999)
+	var brush_size = Vector2(0, 0)
+	
+	for layer in cells:
+		for position in cells[layer]:
+			if position.x < min_pos.x or (position.x == min_pos.x and position.y < min_pos.y):
+				position = min_pos
+	
+	for layer in brush:
+		for position in brush[layer]:
+			if position.x > brush_size.x or (position.x == brush_size.x and position.y > brush_size.y):
+				position = brush_size
+				
+	for layer in cells:
+		for position in cells[layer]:
+			
+			var brush_pos = (position - min_pos) % brush_size
+			var tile_id = brush[layer][brush_pos]
+			layer.set_cellv(position, tile_id)
+		
+	
+func set_cells_2d_array(cells: Dictionary, brush: Dictionary, traced = true):
+	var brush_size = get_brush_size()
+	for b_layer in brush:
+		if not brush[b_layer].empty(): #if layer is not empty
+			var layer_id = b_layer
+			var layer = cells[layer_id]
+			for row in layer:
+				for cell in row:
+					var tile = brush[b_layer][layer.find(row) % int(brush_size.y)][row.find(cell) % int(brush_size.x)]
+					b_layer.set_cellv(cell, tile) #TODO: add empty rows, add empty tiles, skip nonexistant rows, change brush size calulation to only consider x layer
+		
+	
 func set_cells_2d(cells: Array, brush: Array, traced = true): #There is no reason we need a 2d array of cells. cells have their positions already
-	if brush.empty(): return
+	#if brush.empty(): return
+	
+	
 	
 	var r_id = 0
 	var r_max = brush.size()
@@ -554,6 +614,7 @@ func set_cells_2d(cells: Array, brush: Array, traced = true): #There is no reaso
 		var c_id = 0
 		var c_max = brush[c_id].size()
 		for cell in row: #subops
+			
 			var tile = brush[r_id % r_max][c_id % c_max] # % so it repeats if cells > tiles
 			if tile == -2: pass #null
 				
@@ -715,12 +776,12 @@ func preview_tiles(cells: Array, type = "box"): #2D array of cells
 
 func set_preview_box(cells, tile_map):
 	var r_id = 0
-	var r_max = active_tiles.size()
+	var r_max = brush.size()
 	for row in cells:
 		var c_id = 0
-		var c_max = active_tiles[c_id].size()
+		var c_max = brush[c_id].size()
 		for cell in row:
-			var tile = active_tiles[r_id % r_max][c_id % c_max] # % so it repeats if cells > tiles
+			var tile = brush[r_id % r_max][c_id % c_max] # % so it repeats if cells > tiles
 			
 			tile_map.set_cellv(cell, tile)
 			c_id += 1
@@ -729,14 +790,14 @@ func set_preview_box(cells, tile_map):
 
 func set_preview_line(cells: Array, tile_map):
 	var r_id = 0
-	var r_max = active_tiles.size()
+	var r_max = brush.size()
 	for row in cells:
 		var c_id = 0
-		var c_max = active_tiles[c_id].size()
+		var c_max = brush[c_id].size()
 		for cell in row:
 			
 			var br_id = 0
-			for b_row in active_tiles:
+			for b_row in brush:
 				var bc_id = 0
 				for b_cell in b_row:
 					var tile = b_cell
@@ -796,20 +857,18 @@ func get_grid_pos(mouse_pos, mode = "course", exception = "none") -> Vector2:
 
 func get_centerbox(mouse_pos) -> Array: #2D Array #active tiles
 	var cells = []
-	var bx = get_brush_size("x")
-	var by = get_brush_size("y")
+	var b = get_brush_size()
 	
-	var center = Vector2(floor(bx/2), floor(by/2))
+	var center = Vector2(floor(b.x/2), floor(b.y/2))
 	var center_cell = get_cell(mouse_pos)
 	#assumes an odd number
-	for row in by:
+	for row in b.y:
 		var row_cells = []
-		for cell in bx:
+		for cell in b.x:
 			var offset = Vector2(cell - center.x, row - center.y)
 			row_cells.append(center_cell + offset) #position of cell in map space
 		if not row_cells.empty():
 			cells.append(row_cells)
-	#print(cells)
 	return cells
 
 
@@ -829,8 +888,24 @@ func get_centerbox(mouse_pos) -> Array: #2D Array #active tiles
 #	return cells
 
 
-func get_box_2d(start_pos, end_pos) -> Array:#PoolVector2Array: #2d #TODO: massive slowdown when drawing bigger boxes. memory leak.
-	var cells = []#PoolVector2Array()
+#func get_box_2d(start_pos, end_pos) -> Array:#PoolVector2Array: #2d #TODO: massive slowdown when drawing bigger boxes. memory leak.
+#	var cells = []#PoolVector2Array()
+#	var start = get_cell(start_pos)
+#	var end = get_cell(end_pos)
+#	var x_min = min(start.x, end.x)
+#	var x_max = max(start.x, end.x)
+#	var y_min = min(start.y, end.y)
+#	var y_max = max(start.y, end.y)
+#
+#	for y in range(y_min, y_max + 1):
+#		var row = []
+#		for x in range(x_min, x_max + 1):
+#			row.append(Vector2(x, y))
+#		cells.append(row)
+#	#print(cells)
+#	return cells
+
+func get_box_2d_array(start_pos, end_pos) -> Dictionary:
 	var start = get_cell(start_pos)
 	var end = get_cell(end_pos)
 	var x_min = min(start.x, end.x)
@@ -838,14 +913,16 @@ func get_box_2d(start_pos, end_pos) -> Array:#PoolVector2Array: #2d #TODO: massi
 	var y_min = min(start.y, end.y)
 	var y_max = max(start.y, end.y)
 	
-	for y in range(y_min, y_max + 1):
-		var row = []
-		for x in range(x_min, x_max + 1):
-			row.append(Vector2(x, y))
-		cells.append(row)
-	#print(cells)
+	var cells = {}
+	for layer in tile_collection.get_children():
+		if layer is TileMap:
+			cells[layer] = []
+			for y in range(y_min, y_max + 1):
+				var row = []
+				for x in range(x_min, x_max + 1):
+					row.append(Vector2(x, y))
+				cells[layer].append(row)
 	return cells
-
 
 #func get_brush_line(start_pos, end_pos) -> Array: #2d #Depreciated, only used for brushes of size = 1, like erasers
 #	var cells = []
@@ -895,44 +972,39 @@ func get_brush_origin_line(start_pos, end_pos) -> Array: #2d, only origin points
 	var dy = end.y - start.y
 	if dx == 0:
 		dx = .0001
-	var bx = get_brush_size("x")
-	var by = get_brush_size("y")
+	var b = get_brush_size()
 	
-	if abs(dx) >= (float(bx)/float(by)) * abs(dy): #TODO: this division seems to slow down the game with very tall brushes
+	if abs(dx) >= (b.x/b.y) * abs(dy): #TODO: this division seems to slow down the game with very tall brushes #May be fixed, check
 		for x in range(x_min, x_max+1):
-			if x % bx == 0: #start of a brush 
+			if x % b.x == 0: #start of a brush
 				var y = round(start.y + dy * (x - start.x) / dx)
 				cells.append(Vector2(x, y))
 	
 	else:
 		for y in range(y_min, y_max+1):
-			if y % by == 0: #start of a brush 
+			if y % b.y == 0: #start of a brush 
 				var x = round(start.x + dx * (y - start.y) / dy)
 				cells.append(Vector2(x, y))
 	
-	#print("cells: ",get_2d_array_from_Vector2_array(cells))
 	return get_2d_array_from_Vector2_array(cells)
 
 
 
 ### HELPER GETTERS ###
 
-func get_brush_size(axis = "both"):
+func get_brush_size() -> Vector2:
 	var brush_size = Vector2.ZERO
-	brush_size.y = active_tiles.size()
-	for row in active_tiles:
-		if row.size() > brush_size.x:
-			brush_size.x = row.size()
-	if axis == "x":
-		return int(brush_size.x)
-	if axis == "y":
-		return int(brush_size.y)
-	else:
-		return brush_size
+	brush_size.y = brush.size()
+	for layer in brush:
+		for row in brush[layer]:
+			if row.size() > brush_size.x:
+				brush_size.x = row.size()
+	return brush_size
+
 
 func get_brush_as_eraser(var null_erase = true) -> Array: #erase with null tiles by default
 	var eraser = []
-	for row in active_tiles:
+	for row in brush:
 		var eraser_row = []
 		for tile in row:
 			if null_erase: eraser_row.append(-1)
@@ -1017,41 +1089,14 @@ func set_menu_alpha():
 
 ### TILES SIGNALS
 
-func on_Tiles_tile_selection_updated(selected_tiles):
-	active_tiles = selected_tiles
-
-func on_terrain_toggled(toggle): #DEBUG
-	create_tile_set_from_texture(load("res://assets/Tile/VillageTerrain.png"))
+#func on_terrain_toggled(toggle): #DEBUG
+#	create_tile_set_from_texture(load("res://assets/Tile/VillageTerrain.png"))
 
 func _on_Tiles_tile_transform_updated(tile_rotation_degrees, tile_scale_vector):
 	pass # Replace with function body. #TODO move to tiles code
 
 
-### TILESET SIGNALS
 
-func _on_TileSet_collision_updated(tile_id, shape):
-	var transform = Transform2D.IDENTITY
-	tile_set.tile_add_shape(tile_id, shape, transform)
-	tile_set.tile_set_shape(tile_id, 0, shape)
-
-func on_TileSet_image_loaded(path):
-	create_tile_set_from_texture(load(path))
-
-func on_TileSet_tile_set_saved(path):
-	var err = ResourceSaver.save(path, tile_set)
-	if err == OK:
-		print("tile set saved")
-	else:
-		printerr("ERROR: tile set not saved!")
-
-func on_TileSet_tile_set_loaded(path):
-	tile_set = load(path)
-	$Main/Tab/Tiles.setup_tile_set(tile_set)
-	$Main/Tab/TileSet.setup_tile_set(tile_set)
-	for c in tile_collection.get_children():
-		if c is TileMap:
-			c.tile_set = tile_set
-	w.current_level.tile_set = tile_set
 
 ### MISC SIGNALS
 

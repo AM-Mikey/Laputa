@@ -1,7 +1,6 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=1]
-[ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=3]
 [ext_resource path="res://assets/Effect/CloudSmallKinematic.png" type="Texture" id=4]
 [ext_resource path="res://src/Actor/NPC/Child.tscn" type="PackedScene" id=5]
@@ -16,14 +15,13 @@
 [ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Tile/Outdated/Adobe.tres" type="TileSet" id=15]
 
-
-
 [node name="Village" type="Node2D"]
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": "Hub Area
 refuel, save and buy new weapon for cave y and boss"
 }
+editor_hidden = true
 level_name = "The Village"
 music = "res://assets/Music/Access.ogg"
 
@@ -181,7 +179,6 @@ margin_left = 80.0
 margin_top = 1160.0
 margin_right = 232.0
 margin_bottom = 1216.0
-custom_fonts/font = ExtResource( 2 )
 text = "Use weapons as keys: grenade launcher to break open door would be good here"
 autowrap = true
 __meta__ = {
@@ -194,7 +191,6 @@ margin_top = 80.0
 margin_right = 1432.0
 margin_bottom = 136.0
 rect_pivot_offset = Vector2( 76, 32 )
-custom_fonts/font = ExtResource( 2 )
 text = "Player Goes through this challenge to find grenade launcher
 to open boss room"
 autowrap = true
@@ -208,7 +204,6 @@ margin_top = 576.0
 margin_right = 1440.0
 margin_bottom = 651.0
 rect_pivot_offset = Vector2( -24, 128 )
-custom_fonts/font = ExtResource( 2 )
 text = "Player exits challenge using the newly found g. launcher, opening up a previously barred door in the process, leading them to the boss room"
 autowrap = true
 __meta__ = {
@@ -221,7 +216,6 @@ margin_top = 776.0
 margin_right = 872.0
 margin_bottom = 851.0
 rect_pivot_offset = Vector2( -24, 128 )
-custom_fonts/font = ExtResource( 2 )
 text = "let the player test out new weapon and visit shop one last time"
 autowrap = true
 __meta__ = {
@@ -234,7 +228,6 @@ margin_top = 448.0
 margin_right = 648.0
 margin_bottom = 523.0
 rect_pivot_offset = Vector2( -24, 128 )
-custom_fonts/font = ExtResource( 2 )
 text = "meet dola and get map from townspeople"
 autowrap = true
 __meta__ = {
@@ -247,7 +240,6 @@ margin_top = 400.0
 margin_right = 1104.0
 margin_bottom = 475.0
 rect_pivot_offset = Vector2( -24, 128 )
-custom_fonts/font = ExtResource( 2 )
 text = "discover shop and buy machine gun or upgrade pistol"
 autowrap = true
 __meta__ = {

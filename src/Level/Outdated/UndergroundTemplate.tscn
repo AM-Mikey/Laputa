@@ -7,9 +7,9 @@
 [ext_resource path="res://src/Tile/Outdated/MimigaM.tres" type="TileSet" id=5]
 [ext_resource path="res://src/Tile/Outdated/MimigaB.tres" type="TileSet" id=6]
 
-
 [node name="IndoorTemplate" type="Node2D"]
 script = ExtResource( 4 )
+editor_hidden = true
 level_name = "Underground Storage"
 
 [node name="TextureRect" type="TextureRect" parent="."]

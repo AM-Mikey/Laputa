@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/Bullet/BulletLaser.png" type="Texture" id=1]
+[ext_resource path="res://assets/Bullet/Laser.png" type="Texture" id=1]
 [ext_resource path="res://src/Bullet/Laser.gd" type="Script" id=2]
 [ext_resource path="res://src/Bullet/CollisionDetector.tscn" type="PackedScene" id=3]
 

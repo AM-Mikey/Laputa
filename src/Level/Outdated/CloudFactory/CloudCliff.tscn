@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Trigger/LoadZone.tscn" type="PackedScene" id=2]
@@ -8,11 +8,8 @@
 [ext_resource path="res://src/Tile/Outdated/DebugTile.tres" type="TileSet" id=6]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=7]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=8]
-[ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=9]
 [ext_resource path="res://src/Tile/Outdated/DebugBackground.tres" type="TileSet" id=10]
 [ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=11]
-
-
 
 [node name="CloudCliff" type="Node2D"]
 script = ExtResource( 8 )
@@ -21,6 +18,7 @@ __meta__ = {
 
 get the key to the treasure room and return"
 }
+editor_hidden = true
 music = "res://assets/Music/Access.ogg"
 
 [node name="Tiles" type="Node2D" parent="."]
@@ -111,7 +109,6 @@ margin_left = -8.0
 margin_top = 336.0
 margin_right = 144.0
 margin_bottom = 398.0
-custom_fonts/font = ExtResource( 9 )
 text = "shipping truck falling off edge"
 autowrap = true
 __meta__ = {

@@ -1,7 +1,5 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://src/Trigger/Trigger.gd" type="Script" id=1]
-[ext_resource path="res://src/Background/LevelLimiter.gd" type="Script" id=2]
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=5]
@@ -10,36 +8,27 @@
 [ext_resource path="res://src/Tile/Winter.tres" type="TileSet" id=8]
 [ext_resource path="res://assets/Background/bkMoon.png" type="Texture" id=9]
 [ext_resource path="res://src/Actor/Enemy/Frog.gd" type="Script" id=10]
-[ext_resource path="res://src/Actor/Enemy/Trenchie.gd" type="Script" id=11]
-[ext_resource path="res://src/Editor/SpawnPoint.gd" type="Script" id=12]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=13]
 [ext_resource path="res://src/Actor/Enemy/Trenchie.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Actor/Enemy/Frog.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/Actor/Enemy/Goalie/Goalie.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/Actor/Enemy/Fish/Fish.tscn" type="PackedScene" id=17]
-[ext_resource path="res://src/Actor/Enemy/Fish/Fish.gd" type="Script" id=18]
-[ext_resource path="res://src/Actor/Enemy/Goalie/Goalie.gd" type="Script" id=19]
 
 [node name="WinterFuck" type="Node2D"]
 script = ExtResource( 13 )
 level_name = "WinterFuck"
-level_type = 0
 tile_set = ExtResource( 8 )
-music = ""
 dialog_json = "res://src/Dialog/Village.json"
 conversation = "cutscene_test"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." instance=ExtResource( 4 )]
+[node name="LevelLimiter" parent="." instance=ExtResource( 4 )]
 margin_left = 8.0
 margin_top = -56.0
 margin_right = 848.0
 margin_bottom = 288.0
-mouse_filter = 2
-script = ExtResource( 2 )
 texture = ExtResource( 9 )
 layers = 5
 parallax_near = 1.0
-parallax_far = 0.0
 focus = 3
 tile_mode = 1
 
@@ -61,176 +50,78 @@ collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 327717, 6, 0, 327718, 7, 0, 327725, 6, 0, 327726, 7, 0, 327727, 8, 0, 327728, 8, 0, 327729, 9, 0, 393261, 40, 0, 393262, 40, 0, 393263, 41, 0, 393264, 74, 0, 458799, 41, 0, 655378, 17, 0, 655381, 17, 0, 655388, 10, 0, 655397, 17, 0, 655399, 17, 0, 655400, 51, 0, 655401, 52, 0, 655402, 53, 0, 655403, 54, 0, 655404, 55, 0, 655405, 56, 0, 655409, 199, 0, 655411, 199, 0, 720922, 15, 0, 720936, 84, 0, 720937, 85, 0, 720938, 86, 0, 720939, 87, 0, 720940, 88, 0, 720941, 89, 0, 720945, 232, 0, 720947, 232, 0 )
 
-[node name="Front" type="TileMap" parent="Tiles" instance=ExtResource( 6 )]
-z_index = 1
+[node name="Front" parent="Tiles" instance=ExtResource( 6 )]
 tile_set = ExtResource( 8 )
-cell_size = Vector2( 16, 16 )
-collision_layer = 8
-collision_mask = 0
-format = 1
 tile_data = PoolIntArray( 458776, 19, 0, 458777, 19, 0, 458778, 19, 0, 458779, 19, 0, 458780, 19, 0, 458781, 19, 0, 458782, 19, 0, 458783, 19, 0, 458784, 19, 0, 458785, 19, 0, 458786, 19, 0, 458787, 19, 0, 720928, 264, 0, 720929, 265, 0, 720930, 266, 0, 720931, 267, 0, 720932, 268, 0, 720933, 264, 0, 720934, 265, 0, 720935, 266, 0, 720936, 267, 0, 720937, 268, 0, 720938, 264, 0, 720939, 265, 0, 720940, 266, 0, 720941, 267, 0, 720942, 268, 0, 720943, 264, 0, 720944, 265, 0, 720945, 266, 0, 720946, 267, 0, 720947, 268, 0, 720948, 264, 0, 786447, 18, 0, 786448, 18, 0, 786449, 18, 0, 786464, 297, 0, 786465, 298, 0, 786466, 299, 0, 786467, 300, 0, 786468, 301, 0, 786469, 297, 0, 786470, 298, 0, 786471, 299, 0, 786472, 300, 0, 786473, 301, 0, 786474, 297, 0, 786475, 298, 0, 786476, 299, 0, 786477, 300, 0, 786478, 301, 0, 786479, 297, 0, 786480, 298, 0, 786481, 299, 0, 786482, 300, 0, 786483, 301, 0, 786484, 297, 0 )
 
-[node name="FarFront" type="TileMap" parent="Tiles" instance=ExtResource( 7 )]
-z_index = 2
+[node name="FarFront" parent="Tiles" instance=ExtResource( 7 )]
 tile_set = ExtResource( 8 )
-cell_size = Vector2( 16, 16 )
 collision_layer = 8
-collision_mask = 0
-format = 1
 
 [node name="Props" type="Node2D" parent="."]
 position = Vector2( -32, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
 
-[node name="Goalie" type="KinematicBody2D" parent="Actors" instance=ExtResource( 16 )]
+[node name="Goalie" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 264, 192 )
-collision_layer = 2
-collision_mask = 8
-script = ExtResource( 19 )
-speed = Vector2( 100, 200 )
-gravity = 250
-ground_cof = 0.2
-air_cof = 0.05
-debug = false
-id = ""
-jump_height = 6
-cooldown_time = 1
 
-[node name="Goalie2" type="KinematicBody2D" parent="Actors" instance=ExtResource( 16 )]
+[node name="Goalie2" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 1064, 192 )
-collision_layer = 2
-collision_mask = 8
-script = ExtResource( 19 )
-speed = Vector2( 100, 200 )
-gravity = 250
-ground_cof = 0.2
-air_cof = 0.05
-debug = false
-id = ""
 jump_height = 3
-cooldown_time = 1
 
-[node name="Frog" type="KinematicBody2D" parent="Actors" instance=ExtResource( 15 )]
+[node name="Frog" parent="Actors" instance=ExtResource( 15 )]
 position = Vector2( 736, 192 )
-collision_layer = 2
-collision_mask = 520
 script = ExtResource( 10 )
 speed = Vector2( 12, 120 )
-gravity = 200
-ground_cof = 0.2
-air_cof = 0.05
-debug = false
 id = "0.5"
 jump_delay = 0
 difficulty = 1
 
-[node name="Fish" type="KinematicBody2D" parent="Actors" instance=ExtResource( 17 )]
+[node name="Fish" parent="Actors" instance=ExtResource( 17 )]
 position = Vector2( 326.667, 248 )
-collision_layer = 2
-collision_mask = 8
-script = ExtResource( 18 )
-speed = Vector2( 20, 150 )
-gravity = 300
-ground_cof = 0.2
-air_cof = 0.05
 debug = true
-id = "0.5"
-swim_dir_x = -1
 jump_height = 9
-can_move_x = true
-x_min = -3
-x_max = 3
 
-[node name="Frog4" type="KinematicBody2D" parent="Actors" instance=ExtResource( 15 )]
+[node name="Frog4" parent="Actors" instance=ExtResource( 15 )]
 position = Vector2( 448, 48 )
-collision_layer = 2
-collision_mask = 520
 script = ExtResource( 10 )
 speed = Vector2( 12, 120 )
-gravity = 200
-ground_cof = 0.2
-air_cof = 0.05
-debug = false
 id = "0.5"
 jump_delay = 0
 difficulty = 1
 
-[node name="Frog5" type="KinematicBody2D" parent="Actors" instance=ExtResource( 15 )]
+[node name="Frog5" parent="Actors" instance=ExtResource( 15 )]
 position = Vector2( 544, 160 )
-collision_layer = 2
-collision_mask = 520
 script = ExtResource( 10 )
 speed = Vector2( 12, 120 )
-gravity = 200
-ground_cof = 0.2
-air_cof = 0.05
-debug = false
 id = "0.5"
 jump_delay = 0
 difficulty = 0
 
-[node name="Frog6" type="KinematicBody2D" parent="Actors" instance=ExtResource( 15 )]
+[node name="Frog6" parent="Actors" instance=ExtResource( 15 )]
 position = Vector2( 440, 184 )
-collision_layer = 2
-collision_mask = 520
 script = ExtResource( 10 )
 speed = Vector2( 12, 120 )
-gravity = 200
-ground_cof = 0.2
-air_cof = 0.05
-debug = false
 id = "0.5"
 jump_delay = 0
 difficulty = 0
 
-[node name="Trenchie" type="KinematicBody2D" parent="Actors" instance=ExtResource( 14 )]
+[node name="Trenchie" parent="Actors" instance=ExtResource( 14 )]
 position = Vector2( 600, 72371.2 )
-collision_layer = 2
-collision_mask = 10
-script = ExtResource( 11 )
 speed = Vector2( 100, 200 )
-gravity = 250
-ground_cof = 0.2
-air_cof = 0.05
-debug = false
-id = ""
-look_dir = Vector2( -1, 0 )
-projectile_speed = 120
-height_tolerance = 7
-cooldown_time = 1
-lock_distance = 8
 
-[node name="Trenchie2" type="KinematicBody2D" parent="Actors" instance=ExtResource( 14 )]
+[node name="Trenchie2" parent="Actors" instance=ExtResource( 14 )]
 position = Vector2( 696, 72339.2 )
-collision_layer = 2
-collision_mask = 10
-script = ExtResource( 11 )
 speed = Vector2( 100, 200 )
-gravity = 250
-ground_cof = 0.2
-air_cof = 0.05
-debug = false
-id = ""
-look_dir = Vector2( -1, 0 )
-projectile_speed = 120
-height_tolerance = 7
-cooldown_time = 1
-lock_distance = 8
 
 [node name="Triggers" type="Node2D" parent="."]
 position = Vector2( 1, 0 )
 
-[node name="KillBox" type="Area2D" parent="Triggers" instance=ExtResource( 3 )]
+[node name="KillBox" parent="Triggers" instance=ExtResource( 3 )]
 position = Vector2( 0, 1344 )
 scale = Vector2( 482.952, 10 )
 z_index = 100
-collision_layer = 8192
-collision_mask = 0
-monitoring = false
-script = ExtResource( 1 )
-color = Color( 1, 0, 0, 1 )
 
-[node name="SpawnPoint" type="Position2D" parent="." instance=ExtResource( 5 )]
+[node name="SpawnPoint" parent="." instance=ExtResource( 5 )]
 position = Vector2( 328, 192 )
-script = ExtResource( 12 )

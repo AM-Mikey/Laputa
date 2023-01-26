@@ -1,6 +1,5 @@
 extends Control
 
-signal tile_selection_updated(selected_tiles)
 signal terrain_toggled(toggled)
 signal tile_transform_updated(tile_rotation_degrees, tile_scale_vector)
 
@@ -15,14 +14,14 @@ var auto_tile_false = load("res://assets/Editor/AutoTileFalse.png")
 var mode_paint = load("res://assets/Editor/ModePaint.png")
 var mode_select = load("res://assets/Editor/ModeSelect.png")
 
-var tile_set 
+#var tile_set 
 var texture
 var columns: int
 var rows: int
 
 var hovered_button
 var selected_tile_region := Rect2(0, 0, 16, 16) #in texture space
-var selected_tiles = [] #2D array
+#var selected_tiles = [] #2D array
 var tile_rotation_degrees: float = 0
 var tile_scale_vector := Vector2(1,1)
 
@@ -49,9 +48,8 @@ func setup_options(): #AutoLayer, Mode, Etc... TODO: use this if you need to set
 	#mode needs no default, always default to paint
 
 
-func setup_tile_set(new):
-	tile_set = new
-	texture = tile_set.tile_get_texture(tile_set.get_tiles_ids().front())
+func setup_tile_set():
+	texture = editor.tile_set.tile_get_texture(editor.tile_set.get_tiles_ids().front())
 	columns = floor(texture.get_width()/16)
 	rows = floor(texture.get_height()/16)
 	setup_tile_buttons()
@@ -78,9 +76,9 @@ func setup_tile_buttons():
 			c_id += 1
 		r_id += 1
 ###
-	for i in tile_set.get_tiles_ids():
-		var x_pos: int = floor(tile_set.tile_get_region(i).position.x/16)
-		var y_pos: int = floor(tile_set.tile_get_region(i).position.y/16)
+	for i in editor.tile_set.get_tiles_ids():
+		var x_pos: int = floor(editor.tile_set.tile_get_region(i).position.x/16)
+		var y_pos: int = floor(editor.tile_set.tile_get_region(i).position.y/16)
 		var button = get_node(buttons).get_child(y_pos).get_child(x_pos)
 		button.id = i
 		button.texture = get_tile_as_texture(i)
@@ -100,7 +98,7 @@ func transform_buttons():
 func get_tile_as_texture(id) -> Texture:
 	var tile_texture = AtlasTexture.new()
 	tile_texture.atlas = texture
-	tile_texture.region = tile_set.tile_get_region(id)
+	tile_texture.region = editor.tile_set.tile_get_region(id)
 	return tile_texture
 
 
@@ -115,7 +113,8 @@ func _input(event):
 	if event.is_action_pressed("editor_lmb") and hovered_button:
 		#print("started ", hovered_button.id)
 		selected_tile_region = Rect2(hovered_button.tile_set_position, Vector2(16, 16))
-		selected_tiles.clear()
+		editor.brush.clear() #TODO: fix
+		print("clear")
 
 
 	if event.is_action_released("editor_lmb"):
@@ -140,20 +139,41 @@ func _input(event):
 
 func set_selection():
 	set_cursor()
-	#appends to a 2D array
+	print("oooo")
+	#appends to a 2D array in a dictionary
+	#{layer 1:
 	#[[1, 2, 3], 
-	#[4, 5, 6]]
-	for r in get_node(buttons).get_children():
-		var row_selection = []
-		for b in r.get_children():
-			if selected_tile_region.encloses(Rect2(b.tile_set_position, Vector2(16, 16))):
-				row_selection.append(b.id)
-		if not row_selection.empty():
-			selected_tiles.append(row_selection)
-	
-	print("region: ", selected_tile_region)
-	print("selected: ", selected_tiles)
-	emit_signal("tile_selection_updated", selected_tiles)
+	#[4, 5, 6]]}
+	if editor.auto_layer:
+		var brush = {}
+		
+		for layer in editor.tile_collection.get_children():
+			brush[layer] = []
+			for row in get_node(buttons).get_children():
+				var row_index = get_node(buttons).get_children().find(row) + 1
+				print(row_index)
+				var layer_index = brush.keys().find(layer) + 1
+				
+				if layer_index  * 4 >= row_index and (layer_index - 1) * 4 < row_index:
+					var row_selection = []
+					for button in row.get_children():
+						if selected_tile_region.encloses(Rect2(button.tile_set_position, Vector2(16, 16))):
+							row_selection.append(button.id)
+					if not row_selection.empty():
+						brush[layer].append(row_selection)
+			editor.brush = brush
+
+	else: #no auto_layer
+		var brush = {}
+		brush[editor.tile_map] = []
+		for row in get_node(buttons).get_children():
+			var row_selection = []
+			for button in row.get_children():
+				if selected_tile_region.encloses(Rect2(button.tile_set_position, Vector2(16, 16))):
+					row_selection.append(button.id)
+			if not row_selection.empty():
+				brush[editor.tile_map].append(row_selection)
+		editor.brush = brush
 
 
 func set_cursor():

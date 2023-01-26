@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://src/Actor/Enemy/Frog.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Actor/Enemy/Trenchie.tscn" type="PackedScene" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://src/Prop/RefillTerminal.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=12]
 [ext_resource path="res://src/Tile/Outdated/MimigaB.tres" type="TileSet" id=13]
-[ext_resource path="res://assets/Tile/Mimiga.png" type="Texture" id=14]
 [ext_resource path="res://assets/Background/Blue.png" type="Texture" id=15]
 [ext_resource path="res://src/Tile/Outdated/MimigaMQ.tres" type="TileSet" id=16]
 [ext_resource path="res://src/Tile/Outdated/MimigaM.tres" type="TileSet" id=17]
@@ -41,12 +40,8 @@
 [ext_resource path="res://src/Tile/Outdated/TriggerTile/ConveyorTrigger.tscn" type="PackedScene" id=39]
 [ext_resource path="res://src/Tile/Outdated/TriggerTile/LadderTrigger.tscn" type="PackedScene" id=40]
 
-
-
-
 [sub_resource type="TileSet" id=1]
 0/name = "Mimiga.png 0"
-0/texture = ExtResource( 14 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 240, 16, 16, 16 )
@@ -60,7 +55,6 @@
 0/shapes = [  ]
 0/z_index = 0
 1/name = "Mimiga.png 1"
-1/texture = ExtResource( 14 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 240, 32, 16, 16 )
@@ -76,6 +70,7 @@
 
 [node name="DebugLevel" type="Node2D"]
 script = ExtResource( 12 )
+editor_hidden = true
 level_name = "The Villiage"
 music = "res://assets/Music/Mimiga Town.ogg"
 

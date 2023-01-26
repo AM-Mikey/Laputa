@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Utility/Outdated/CameraLimiter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=2]
@@ -7,10 +7,6 @@
 [ext_resource path="res://src/Tile/Outdated/DebugBackground.tres" type="TileSet" id=5]
 [ext_resource path="res://src/Tile/Outdated/DebugTile.tres" type="TileSet" id=6]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=7]
-[ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=8]
-[ext_resource path="res://assets/Background/Outdated/bkMaze.bmp" type="Texture" id=9]
-
-
 
 [node name="LowerFactory" type="Node2D"]
 script = ExtResource( 7 )
@@ -19,6 +15,7 @@ __meta__ = {
 
 get the key to the treasure room and return"
 }
+editor_hidden = true
 music = "res://assets/Music/Access.ogg"
 
 [node name="Tiles" type="Node2D" parent="."]
@@ -97,7 +94,6 @@ margin_left = -408.0
 margin_top = -208.0
 margin_right = 1040.0
 margin_bottom = 600.0
-texture = ExtResource( 9 )
 expand = true
 stretch_mode = 2
 __meta__ = {
@@ -125,7 +121,6 @@ margin_left = 704.0
 margin_top = 208.0
 margin_right = 856.0
 margin_bottom = 264.0
-custom_fonts/font = ExtResource( 8 )
 text = "the plaza is nice ofc but these lower levels can still be parking structury"
 autowrap = true
 __meta__ = {

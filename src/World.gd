@@ -28,6 +28,7 @@ export var is_release = false
 export var do_skip_title = false
 export var debug_visible = false
 export var show_state_labels = false ###############################################
+export var gamemode = "story"
 
 export var start_level: PackedScene
 onready var current_level = start_level.instance() #assumes current level to start with, might cause issues down the line

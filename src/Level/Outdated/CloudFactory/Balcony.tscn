@@ -1,16 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Tile/Outdated/DebugTile.tres" type="TileSet" id=3]
 [ext_resource path="res://src/Tile/Outdated/DebugBackground.tres" type="TileSet" id=4]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
-[ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=6]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=7]
 [ext_resource path="res://src/Utility/Outdated/CameraLimiter.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Trigger/LoadZone.tscn" type="PackedScene" id=10]
-
-
 
 [node name="Balcony" type="Node2D"]
 script = ExtResource( 5 )
@@ -19,6 +16,7 @@ __meta__ = {
 
 get the key to the treasure room and return"
 }
+editor_hidden = true
 music = "res://assets/Music/Access.ogg"
 
 [node name="Tiles" type="Node2D" parent="."]
@@ -111,7 +109,6 @@ margin_left = 656.0
 margin_top = 144.0
 margin_right = 808.0
 margin_bottom = 200.0
-custom_fonts/font = ExtResource( 6 )
 text = "as you go up it turns from blue collar to white collar, nicer and less gun mentiony. mural will be up here"
 autowrap = true
 __meta__ = {

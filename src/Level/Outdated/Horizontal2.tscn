@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/Trigger/LoadZone.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Utility/Outdated/CameraLimiter.tscn" type="PackedScene" id=2]
@@ -14,13 +14,11 @@
 [ext_resource path="res://src/Tile/Outdated/DebugTile.tres" type="TileSet" id=12]
 [ext_resource path="res://src/Tile/Outdated/DebugBackground.tres" type="TileSet" id=13]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=14]
-[ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=15]
 [ext_resource path="res://assets/Background/cyansky.png" type="Texture" id=16]
-
-
 
 [node name="Horizontal2" type="Node2D"]
 script = ExtResource( 14 )
+editor_hidden = true
 level_name = "Cave"
 music = "res://assets/Music/Access.ogg"
 
@@ -48,34 +46,22 @@ tile_data = PoolIntArray( 262171, 19, 1, 262172, 7, 0, 262173, 7, 0, 262174, 7, 
 
 [node name="Billy" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( 200, 128 )
-heart_chance = 0
-ammo_chance = 0
 
 [node name="Hunter" parent="Actors" instance=ExtResource( 6 )]
 position = Vector2( 2096, 128 )
-heart_chance = 0
-ammo_chance = 0
 
 [node name="TogglerHorizontal" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( 1784, 144 )
-heart_chance = 0
-ammo_chance = 0
 
 [node name="TogglerHorizontal2" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( 2232, 144 )
-heart_chance = 0
-ammo_chance = 0
 
 [node name="Hunter2" parent="Actors" instance=ExtResource( 6 )]
 position = Vector2( 568, 64 )
-heart_chance = 0
-ammo_chance = 0
 
 [node name="Ornithopter" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 864, 24 )
 id = "orn1"
-heart_chance = 0
-ammo_chance = 0
 
 [node name="Swooper" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 472, -128 )
@@ -143,7 +129,6 @@ margin_left = 1088.0
 margin_top = 1000.0
 margin_right = 1240.0
 margin_bottom = 1056.0
-custom_fonts/font = ExtResource( 15 )
 text = "Foreshadow corp landing on the island"
 autowrap = true
 __meta__ = {
@@ -155,7 +140,6 @@ margin_left = 624.0
 margin_top = 984.0
 margin_right = 776.0
 margin_bottom = 1040.0
-custom_fonts/font = ExtResource( 15 )
 text = "track enemies would be good here. put them circling around a platform"
 autowrap = true
 __meta__ = {

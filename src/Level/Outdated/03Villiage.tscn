@@ -1,22 +1,17 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Utility/Outdated/CameraLimiter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Trigger/Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Trigger/KillBox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=4]
-[ext_resource path="res://src/UI/CaveStoryShadow.tres" type="DynamicFont" id=5]
 [ext_resource path="res://assets/Background/GreenSky.png" type="Texture" id=6]
 [ext_resource path="res://src/Tile/Outdated/Adobe.tres" type="TileSet" id=7]
 [ext_resource path="res://src/Tile/Outdated/MimigaB.tres" type="TileSet" id=8]
 [ext_resource path="res://src/Tile/Outdated/MimigaM.tres" type="TileSet" id=9]
 [ext_resource path="res://src/Tile/Outdated/MimigaF.tres" type="TileSet" id=10]
-[ext_resource path="res://assets/Tile/AdobeTile.png" type="Texture" id=11]
-
-
 
 [sub_resource type="TileSet" id=1]
 0/name = "AdobeTile.png 0"
-0/texture = ExtResource( 11 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 64, 64 )
@@ -39,7 +34,6 @@
 0/shapes = [  ]
 0/z_index = 0
 1/name = "AdobeTile.png 1"
-1/texture = ExtResource( 11 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 0, 64, 64, 16 )
@@ -62,7 +56,6 @@
 1/shapes = [  ]
 1/z_index = 0
 2/name = "AdobeTile.png 2"
-2/texture = ExtResource( 11 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 48, 64, 16, 64 )
@@ -85,7 +78,6 @@
 2/shapes = [  ]
 2/z_index = 0
 3/name = "AdobeTile.png 3"
-3/texture = ExtResource( 11 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 48, 64, 16, 16 )
@@ -99,7 +91,6 @@
 3/shapes = [  ]
 3/z_index = 0
 4/name = "AdobeTile.png 4"
-4/texture = ExtResource( 11 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 0, 80, 48, 16 )
@@ -113,7 +104,6 @@
 4/shapes = [  ]
 4/z_index = 0
 5/name = "AdobeTile.png 5"
-5/texture = ExtResource( 11 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 64, 16, 48, 48 )
@@ -142,6 +132,7 @@ __meta__ = {
 "_editor_description_": "Hub Area
 refuel, save and buy new weapon for cave y and boss"
 }
+editor_hidden = true
 level_name = "The Village"
 music = "res://assets/Music/Access.ogg"
 
@@ -270,7 +261,6 @@ margin_left = 80.0
 margin_top = 1160.0
 margin_right = 232.0
 margin_bottom = 1216.0
-custom_fonts/font = ExtResource( 5 )
 text = "Use weapons as keys: grenade launcher to break open door would be good here"
 autowrap = true
 __meta__ = {
@@ -283,7 +273,6 @@ margin_top = 80.0
 margin_right = 1432.0
 margin_bottom = 136.0
 rect_pivot_offset = Vector2( 76, 32 )
-custom_fonts/font = ExtResource( 5 )
 text = "Player Goes through this challenge to find grenade launcher
 to open boss room"
 autowrap = true
@@ -297,7 +286,6 @@ margin_top = 576.0
 margin_right = 1440.0
 margin_bottom = 651.0
 rect_pivot_offset = Vector2( -24, 128 )
-custom_fonts/font = ExtResource( 5 )
 text = "Player exits challenge using the newly found g. launcher, opening up a previously barred door in the process, leading them to the boss room"
 autowrap = true
 __meta__ = {
@@ -310,7 +298,6 @@ margin_top = 776.0
 margin_right = 872.0
 margin_bottom = 851.0
 rect_pivot_offset = Vector2( -24, 128 )
-custom_fonts/font = ExtResource( 5 )
 text = "let the player test out new weapon and visit shop one last time"
 autowrap = true
 __meta__ = {
@@ -323,7 +310,6 @@ margin_top = 448.0
 margin_right = 648.0
 margin_bottom = 523.0
 rect_pivot_offset = Vector2( -24, 128 )
-custom_fonts/font = ExtResource( 5 )
 text = "meet dola and get map from townspeople"
 autowrap = true
 __meta__ = {
@@ -336,7 +322,6 @@ margin_top = 400.0
 margin_right = 1104.0
 margin_bottom = 475.0
 rect_pivot_offset = Vector2( -24, 128 )
-custom_fonts/font = ExtResource( 5 )
 text = "discover shop and buy machine gun or upgrade pistol"
 autowrap = true
 __meta__ = {

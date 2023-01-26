@@ -1,16 +1,16 @@
 extends Control
 
-signal collision_updated(tile_id, shape)
-signal tile_set_saved(path)
-signal tile_set_loaded(path)
-signal image_loaded(path)
+#signal collision_updated(tile_id, shape) #moved to internal
+#signal tile_set_saved(path)
+#signal tile_set_loaded(path)
+#signal image_loaded(path)
 
 var tx_col_brush = preload("res://assets/Editor/CollisionBrushes.png")
 
 var active_tab = "normal"
 var active_tile: int
 
-var tile_set
+#var tile_set
 var texture
 var columns
 var rows
@@ -33,6 +33,8 @@ export(NodePath) var normal_cursor
 #export(NodePath) var collision_cursor
 export(NodePath) var brushes
 
+onready var w = get_tree().get_root().get_node("World")
+onready var editor = get_parent().get_parent().get_parent()
 
 
 func _ready():
@@ -40,9 +42,8 @@ func _ready():
 
 ### SETUP
 
-func setup_tile_set(new):
-	tile_set = new
-	texture = tile_set.tile_get_texture(0)
+func setup_tile_set():
+	texture = editor.tile_set.tile_get_texture(0)
 	columns = int(texture.get_size().x/16)
 	rows = int(texture.get_size().y/16)
 	
@@ -70,9 +71,9 @@ func setup_tile_buttons(parent):
 			c_id += 1
 		r_id += 1
 ###
-	for i in tile_set.get_tiles_ids():
-		var x_pos: int = floor(tile_set.tile_get_region(i).position.x/16)
-		var y_pos: int = floor(tile_set.tile_get_region(i).position.y/16)
+	for i in editor.tile_set.get_tiles_ids():
+		var x_pos: int = floor(editor.tile_set.tile_get_region(i).position.x/16)
+		var y_pos: int = floor(editor.tile_set.tile_get_region(i).position.y/16)
 		var button = get_node(parent).get_child(y_pos).get_child(x_pos)
 		button.id = i
 		button.texture = get_tile_as_texture(i)
@@ -81,7 +82,7 @@ func setup_tile_buttons(parent):
 func get_tile_as_texture(id) -> Texture:
 	var tile_texture = AtlasTexture.new()
 	tile_texture.atlas = texture
-	tile_texture.region = tile_set.tile_get_region(id)
+	tile_texture.region = editor.tile_set.tile_get_region(id)
 	return tile_texture
 
 func setup_brushes():
@@ -144,42 +145,42 @@ func _input(event):
 
 func select_tile(tile: int):
 	active_tile = tile
-	var tile_region = tile_set.tile_get_region(tile)
+	var tile_region = editor.tile_set.tile_get_region(tile)
 	set_cursor(tile_region)
 
 
 func swap_tile(first: int, second: int): #repalces tile mapping without graphics
-	var first_region = tile_set.tile_get_region(first)
-	var second_region = tile_set.tile_get_region(second)
-	tile_set.tile_set_region(first, second_region)
-	tile_set.tile_set_region(second, first_region)
+	var first_region = editor.tile_set.tile_get_region(first)
+	var second_region = editor.tile_set.tile_get_region(second)
+	editor.tile_set.tile_set_region(first, second_region)
+	editor.tile_set.tile_set_region(second, first_region)
 
 func move_tile(first: int, second: int):
-	var first_region = tile_set.tile_get_region(first)
-	var second_region = tile_set.tile_get_region(second)
+	var first_region = editor.tile_set.tile_get_region(first)
+	var second_region = editor.tile_set.tile_get_region(second)
 	var first_pixels = get_tile_as_pixels(first_region)
 	var second_pixels = get_tile_as_pixels(second_region)
 	set_pixels(first_region, second_pixels)
 	set_pixels(second_region, first_pixels)
-	tile_set.tile_set_region(first, second_region)
-	tile_set.tile_set_region(second, first_region)
+	editor.tile_set.tile_set_region(first, second_region)
+	editor.tile_set.tile_set_region(second, first_region)
 	
-	var texture = tile_set.tile_get_texture(tile_set.get_tiles_ids().front())
+	var texture = editor.tile_set.tile_get_texture(editor.tile_set.get_tiles_ids().front())
 	var path = texture.get_path()
 	var image = texture.get_data()
 	
 	image.save_png(path)
-	emit_signal("tile_set_saved", tile_set.get_path())
-	emit_signal("tile_set_loaded", tile_set.get_path())
+	emit_signal("tile_set_saved", editor.tile_set.get_path())
+	emit_signal("tile_set_loaded", editor.tile_set.get_path())
 	active_tile = second
 
 
 func get_tile_region(id):
-	tile_set.tile_get_region(id)
+	editor.tile_set.tile_get_region(id)
 
 
 func get_tile_as_pixels(region: Rect2) -> Array: #2d
-	var texture = tile_set.tile_get_texture(tile_set.get_tiles_ids().front())
+	var texture = editor.tile_set.tile_get_texture(editor.tile_set.get_tiles_ids().front())
 	var image = texture.get_data()
 	
 	image.lock()
@@ -200,7 +201,7 @@ func get_tile_as_pixels(region: Rect2) -> Array: #2d
 
 func set_pixels(region: Rect2, pixels: Array):
 	#print("setting pixels in region: " + String(region))
-	var texture = tile_set.tile_get_texture(tile_set.get_tiles_ids().front())
+	var texture = editor.tile_set.tile_get_texture(editor.tile_set.get_tiles_ids().front())
 	var image = texture.get_data()
 	
 	image.lock()
@@ -319,7 +320,10 @@ func set_collision(tile: int):
 		
 	shape.points = PoolVector2Array(transformed)
 
-	emit_signal("collision_updated", tile, shape)
+	#emit_signal("collision_updated", tile, shape)
+	var transform = Transform2D.IDENTITY
+	editor.tile_set.tile_add_shape(tile, shape, transform)
+	editor.tile_set.tile_set_shape(tile, 0, shape)
 
 
 
@@ -350,19 +354,66 @@ func _on_New_pressed():
 
 func _on_Save_confirmed():
 	var path = $Save.current_path
-	emit_signal("tile_set_saved", path.get_basename() + ".tres")
+	#emit_signal("tile_set_saved", path.get_basename() + ".tres")
+	var err = ResourceSaver.save(path.get_basename() + ".tres", editor.tile_set)
+	if err == OK:
+		print("tile set saved")
+	else:
+		printerr("ERROR: tile set not saved!")
+	load_tile_set(path)
+	
 	
 func _on_Load_file_selected(path):
-	emit_signal("tile_set_loaded", path)
+	#emit_signal("tile_set_loaded", path)
+	load_tile_set(path)
 
-func _on_Reload_pressed():
-	emit_signal("tile_set_loaded", tile_set.get_path())
-	var texture = tile_set.tile_get_texture(tile_set.get_tiles_ids().front())
-	var image = texture.get_data()
-	VisualServer.texture_set_data(texture.get_rid(), image)
+func load_tile_set(path):
+	editor.tile_set = load(path)
+	
+	editor.get_node("Main/Tab/Tiles").setup_tile_set()
+	setup_tile_set()
+	
+	for c in editor.tile_collection.get_children():
+		if c is TileMap:
+			c.tile_set = editor.tile_set
+	w.current_level.tile_set = editor.tile_set
+
+
+
+#func _on_Reload_pressed():
+#	emit_signal("tile_set_loaded", tile_set.get_path())
+#	var texture = tile_set.tile_get_texture(tile_set.get_tiles_ids().front())
+#	var image = texture.get_data()
+#	VisualServer.texture_set_data(texture.get_rid(), image)
 
 func _on_New_file_selected(path):
-	emit_signal("image_loaded", path)
+	#emit_signal("image_loaded", path)
+	#editor.create_tile_set_from_texture(load(path))
+#func create_tile_set_from_texture(texture):
+	editor.tile_set = TileSet.new()
+	texture = load(path)
+	rows = int(texture.get_size().y/16)
+	var columns = int(texture.get_size().x/16)
+
+	var id = 0
+	while id < rows * columns:
+		var x_pos = (id % columns) * 16
+		var y_pos = floor(id / columns) * 16
+		var region = Rect2(x_pos, y_pos, 16, 16)
+
+		editor.tile_set.create_tile(id)
+		editor.tile_set.tile_set_texture(id, texture)
+		editor.tile_set.tile_set_region(id, region)
+		id += 1
+
+	editor.get_node("Main/Tab/Tiles").setup_tile_set() #TODO: merge with save or load
+	setup_tile_set()
+
+	for c in editor.tile_collection.get_children():
+		if c is TileMap:
+			c.tile_set = editor.tile_set
+
+
 
 
 func on_tab_changed(tab):
@@ -395,6 +446,3 @@ func _on_RotateCC_toggled(button_pressed):
 	else:
 		brush_rotation_degrees -= 90
 	setup_brushes()
-
-
-

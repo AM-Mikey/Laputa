@@ -1,9 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=1]
 [ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/Tile/InsideLaputa.png" type="Texture" id=3]
-
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -13,7 +11,6 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="TileSet" id=3]
 0/name = "InsideLaputa.png 0"
-0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 16, 16, 16, 16 )
@@ -34,7 +31,6 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 } ]
 0/z_index = 0
 1/name = "InsideLaputa.png 1"
-1/texture = ExtResource( 3 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 48, 16, 16, 16 )
@@ -48,7 +44,6 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 1/shapes = [  ]
 1/z_index = 0
 2/name = "InsideLaputa.png 2"
-2/texture = ExtResource( 3 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 96, 0, 16, 16 )
@@ -71,6 +66,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [node name="TileTestRoom" type="Node2D"]
 script = ExtResource( 1 )
+editor_hidden = true
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 3 )
