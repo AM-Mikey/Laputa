@@ -161,6 +161,7 @@ config/icon="res://assets/UI/Face/Recruit.png"
 am="*res://src/Audio/AudioManager.gd"
 DebugHotkeys="*res://src/Utility/DebugHotkeys.gd"
 WindowResizer="*res://addons/WindowResizer.gd"
+Main="*res://src/Main.tscn"
 
 [display]
 

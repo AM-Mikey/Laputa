@@ -54,6 +54,7 @@ func _ready():
 	load_options()
 
 
+
 func get_internal_version() -> String:
 	var current_date = OS.get_date()
 	var years_since = current_date["year"] - 2021
@@ -76,7 +77,7 @@ func get_internal_version() -> String:
 		return(str(months_since -1) + "m" + str(days_last_month + days_since) + "d")
 	else:
 		return(str(months_since) + "m" + str(days_since) + "d")
-	
+
 
 
 func set_debug_visible(visible = !debug_visible): #makes triggers and visutils visible
@@ -99,6 +100,8 @@ func skip_title():
 			add_child(JUNIPER.instance())
 			add_child(SASUKE.instance())
 			
+			get_tree().get_root().get_node("Main").viewport1.world_2d = self
+			get_tree().get_root().get_node("Main").viewport2.world_2d = self
 			
 			for s in get_tree().get_nodes_in_group("SpawnPoints"):
 				$Juniper.position = s.global_position

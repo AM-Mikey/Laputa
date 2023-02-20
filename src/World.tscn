@@ -5,9 +5,6 @@
 
 [node name="World" type="Node2D"]
 script = ExtResource( 8 )
-__meta__ = {
-"_edit_horizontal_guides_": [ 80.0 ]
-}
 development_stage = "alpha"
 release_version = "1.8"
 do_skip_title = true
