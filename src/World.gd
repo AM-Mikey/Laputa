@@ -90,24 +90,10 @@ func set_debug_visible(visible = !debug_visible): #makes triggers and visutils v
 
 func skip_title():
 	on_level_change(start_level, 0)
-	match gamemode:
-		"story":
-			add_child(JUNIPER.instance())
-			get_node("UILayer").add_child(HUD.instance())
-			for s in get_tree().get_nodes_in_group("SpawnPoints"):
-				$Juniper.position = s.global_position
-		"pvp":
-			add_child(JUNIPER.instance())
-			add_child(SASUKE.instance())
-			
-			get_tree().get_root().get_node("Main").viewport1.world_2d = self
-			get_tree().get_root().get_node("Main").viewport2.world_2d = self
-			
-			for s in get_tree().get_nodes_in_group("SpawnPoints"):
-				$Juniper.position = s.global_position
-				$Sasuke.position = s.global_position + Vector2(32, 0)
-
-
+	add_child(JUNIPER.instance())
+	get_node("UILayer").add_child(HUD.instance())
+	for s in get_tree().get_nodes_in_group("SpawnPoints"):
+		$Juniper.position = s.global_position
 
 func _input(event):
 	if event.is_action_pressed("inventory") and has_node("Juniper"):

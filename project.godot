@@ -49,11 +49,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Item/Item.gd"
 }, {
-"base": "Node2D",
-"class": "Movement",
-"language": "GDScript",
-"path": "res://src/duncathan_movement.gd"
-}, {
 "base": "Actor",
 "class": "NPC",
 "language": "GDScript",
@@ -93,7 +88,6 @@ _global_script_class_icons={
 "Enemy": "res://assets/Icon/EnemyIcon.png",
 "Gun": "res://assets/Icon/GunIcon.png",
 "Item": "res://assets/Icon/ItemIcon.png",
-"Movement": "",
 "NPC": "res://assets/Icon/NPCIcon.png",
 "Player": "res://assets/Icon/PlayerIcon.png",
 "Prop": "res://assets/Icon/PropIcon.png",
