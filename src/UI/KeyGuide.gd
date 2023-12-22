@@ -1,20 +1,20 @@
 extends MarginContainer
 
-onready var w = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 	on_viewport_size_changed()
 
 func _on_return():
 	if w.has_node("UILayer/PauseMenu"):
-		w.get_node("UILayer/PauseMenu").focus()
+		w.get_node("UILayer/PauseMenu").do_focus()
 	if w.has_node("UILayer/TitleScreen"):
-		w.get_node("UILayer/TitleScreen").focus()
+		w.get_node("UILayer/TitleScreen").do_focus()
 	queue_free()
 
 func on_viewport_size_changed():
-	rect_size = get_tree().get_root().size / w.resolution_scale
+	size = get_tree().get_root().size / w.resolution_scale
 
-func focus():
+func do_focus():
 	$Margin/VBoxContainer/HBoxContainer/Return.grab_focus()

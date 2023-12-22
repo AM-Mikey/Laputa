@@ -1,10 +1,10 @@
 extends Prop
 
-export var held_item: String
+@export var held_item: String
 
 func _ready():
 	add_to_group("LimitedProps")
-	var _err = am.connect("interrupt_finished", self, "on_interrupt_finished")
+	var _err = am.connect("interrupt_finished", Callable(self, "on_interrupt_finished"))
 	if not held_item:
 		expend_prop()
 	

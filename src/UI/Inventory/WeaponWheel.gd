@@ -1,21 +1,20 @@
 extends Container
 
-export var weapon_radius = 100
-export var height_modifier = .5
-export var starting_radians = 0.5 * PI
-export var cycle_delay = 0.6
-export var highlighted_scale = Vector2(2,2)
+@export var weapon_radius = 100
+@export var height_modifier = .5
+@export var starting_radians = 0.5 * PI
+@export var cycle_delay = 0.6
+@export var highlighted_scale = Vector2(2,2)
 #export var texture_size = Vector2(16, 32)
 
 var disabled = false
 
-onready var tween = get_parent().get_parent().get_node("Tween")
-onready var timer = get_parent().get_parent().get_node("CycleDelay")
-onready var timer_half = get_parent().get_parent().get_node("HalfCycle")
+@onready var timer = get_parent().get_parent().get_node("CycleDelay")
+@onready var timer_half = get_parent().get_parent().get_node("HalfCycle")
 
-onready var pc = get_tree().get_root().get_node("World/Juniper")
+@onready var pc = get_tree().get_root().get_node("World/Juniper")
 
-onready var inventory = get_tree().get_root().get_node("World/UILayer/Inventory")
+@onready var inventory = get_tree().get_root().get_node("World/UILayer/Inventory")
 
 func _ready():
 	#clear all children
@@ -23,10 +22,10 @@ func _ready():
 	for s in weapon_sprites: 
 		s.free()
 		
-	yield(get_tree(), 'idle_frame')
+	await get_tree().process_frame
 
 	for g in pc.guns.get_children():
-		var sprite = Sprite.new()
+		var sprite = Sprite2D.new()
 		add_child(sprite)
 		sprite.texture = g.icon_texture
 		sprite.name = g.name
@@ -46,48 +45,31 @@ func _ready():
 func _input(event):
 	if not disabled:
 		var gun_count = pc.guns.get_child_count()
-		if event.is_action_pressed("gun_left") and timer.time_left == 0:
+		if (event.is_action_pressed("gun_left") and timer.time_left == 0) or (event.is_action_pressed("gun_right") and timer.time_left == 0):
 			
-			var gun_to_move = pc.guns.get_child(gun_count - 1)
-			pc.guns.move_child(gun_to_move, 0)
-			move_child(get_child(gun_count - 1), 0)
+			var old_child = get_child(0)
+			var gun_to_move 
 			
-			timer.start(cycle_delay)
-			timer_half.start(cycle_delay/2)
-			
-			place_buttons()
+			if event.is_action_pressed("gun_left"):
+				gun_to_move = pc.guns.get_child(gun_count - 1)
+				pc.guns.move_child(gun_to_move, 0)
+				move_child(get_child(gun_count - 1), 0)
+			elif event.is_action_pressed("gun_right"):
+				gun_to_move = pc.guns.get_child(0)
+				pc.guns.move_child(gun_to_move, gun_count - 1)
+				move_child(get_child(0), gun_count - 1)
 			
 			var active_child = get_child(0)
-			var old_child = get_child(1)
-			
+			timer.start(cycle_delay)
+			timer_half.start(cycle_delay / 2.0)
+			place_buttons()
 			inventory.header.text = pc.guns.get_child(0).display_name
 			inventory.body.text = pc.guns.get_child(0).description
 			
-			tween.interpolate_property(old_child, "scale", old_child.scale, Vector2(1, 1), cycle_delay, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-			tween.start()
-			tween.interpolate_property(active_child, "scale", active_child.scale, highlighted_scale, cycle_delay, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-			tween.start()
-
-		if event.is_action_pressed("gun_right") and timer.time_left == 0:
-			var gun_to_move = pc.guns.get_child(0)
-			pc.guns.move_child(gun_to_move, gun_count - 1)
-			move_child(get_child(0), gun_count - 1)
-			
-			timer.start(cycle_delay)
-			timer_half.start(cycle_delay/2)
-
-			place_buttons()
-			
-			var active_child = get_child(0)
-			var old_child = get_child(gun_count - 1)
-			
-			inventory.header.text = pc.guns.get_child(0).display_name
-			inventory.body.text = pc.guns.get_child(0).description
-			
-			tween.interpolate_property(old_child, "scale", old_child.scale, Vector2(1, 1), cycle_delay, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-			tween.start()
-			tween.interpolate_property(active_child, "scale", active_child.scale, highlighted_scale, cycle_delay, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-			tween.start()
+			var tween = get_tree().create_tween()
+			tween.tween_property(old_child, "scale", Vector2.ONE, cycle_delay).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+			var tween2 = get_tree().create_tween()
+			tween2.tween_property(active_child, "scale", highlighted_scale, cycle_delay).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 
 func place_buttons():
@@ -100,15 +82,16 @@ func place_buttons():
 	for s in weapon_sprites:
 		var pre_circle_pos = Vector2(weapon_radius, 0).rotated(angle)
 		var circle_pos = Vector2(pre_circle_pos.x, (pre_circle_pos.y * height_modifier))
-		set_z_index(s, angle)
-		tween.interpolate_property(s, "position", s.position, circle_pos, cycle_delay, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-		tween.start()
+		order_z_index(s, angle)
+		
+		var tween = get_tree().create_tween()
+		tween.tween_property(s, "position", circle_pos, cycle_delay).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		#sprite.position = circle_pos
 		angle += angle_offset
 
 
-func set_z_index(sprite, angle): #prepared to handle 8 guns
-	yield(timer_half, "timeout") #wait for halfcycle to change z-index
+func order_z_index(sprite, angle): #prepared to handle 8 guns
+	await timer_half.timeout #wait for halfcycle to change z-index
 	
 	if angle == starting_radians: #zero
 		sprite.set_z_index(5)

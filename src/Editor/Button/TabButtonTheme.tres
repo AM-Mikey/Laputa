@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=6 format=2]
 
 [ext_resource path="res://src/UI/StyleBox/Leather.tres" type="StyleBox" id=1]
-[ext_resource path="res://src/UI/Font/WelcomeBackButton.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/UI/Font/WelcomeBackButton.tres" type="FontFile" id=2]
 [ext_resource path="res://src/UI/StyleBox/LeatherDark.tres" type="StyleBox" id=3]
 [ext_resource path="res://src/UI/StyleBox/LeatherLight.tres" type="StyleBox" id=4]
 

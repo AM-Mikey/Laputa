@@ -3,17 +3,17 @@ extends Control
 var player_inventory: Array
 var disabled = true
 
-onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_tree().get_root().get_node("World/Juniper")
-onready var hud = get_parent().get_node("HUD")
-onready var items = $MarginContainer/VBoxContainer/Items/ItemList
-onready var weapon_wheel = $MarginContainer/VBoxContainer/Weapons/MarginContainer/WeaponWheel
-onready var header = $MarginContainer/VBoxContainer/Description/MarginContainer/VBoxContainer/Header
-onready var body = $MarginContainer/VBoxContainer/Description/MarginContainer/VBoxContainer/Body
+@onready var world = get_tree().get_root().get_node("World")
+@onready var pc = get_tree().get_root().get_node("World/Juniper")
+@onready var hud = get_parent().get_node("HUD")
+@onready var items = $MarginContainer/VBoxContainer/Items/ItemList
+@onready var weapon_wheel = $MarginContainer/VBoxContainer/Weapons/MarginContainer/WeaponWheel
+@onready var header = $MarginContainer/VBoxContainer/Description/MarginContainer/VBoxContainer/Header
+@onready var body = $MarginContainer/VBoxContainer/Description/MarginContainer/VBoxContainer/Body
 
 
 func _ready():
-		var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+		var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 		on_viewport_size_changed()
 		enter()
 
@@ -24,7 +24,7 @@ func _input(event):
 func enter():
 	get_tree().paused = true
 	hud.visible = false
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 	disabled = false
 
 func exit():
@@ -37,7 +37,7 @@ func exit():
 ### SIGNALS
 
 func _on_inventory_updated(inventory):
-	if not inventory.empty():
+	if not inventory.is_empty():
 		player_inventory = inventory
 		var item_name = player_inventory[-1]
 		var item_path = "res://src/Item/%s" % item_name + ".tres"
@@ -57,8 +57,8 @@ func on_viewport_size_changed():
 	var target_width = 400
 	
 	if target_width > viewport_size.x:
-		rect_size.x = viewport_size.x
+		size.x = viewport_size.x
 	else:
-		rect_size.x = target_width
-		rect_position.x = (viewport_size.x - target_width) /2
-	rect_size.y = viewport_size.y
+		size.x = target_width
+		position.x = (viewport_size.x - target_width) /2
+	size.y = viewport_size.y

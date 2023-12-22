@@ -4,7 +4,7 @@
 
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+size = Vector2( 8, 8 )
 
 [node name="SemiSolid" type="Area2D"]
 collision_layer = 0

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/HLclick.wav-353a88a5bc795264c4a8ba8fc8a7b6be.sample"
+type="AudioStreamWAV"
+uid="uid://baascsuieafub"
+path="res://.godot/imported/HLclick.wav-353a88a5bc795264c4a8ba8fc8a7b6be.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/HLclick.wav"
-dest_files=[ "res://.import/HLclick.wav-353a88a5bc795264c4a8ba8fc8a7b6be.sample" ]
+dest_files=["res://.godot/imported/HLclick.wav-353a88a5bc795264c4a8ba8fc8a7b6be.sample"]
 
 [params]
 

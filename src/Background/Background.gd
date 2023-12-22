@@ -1,9 +1,10 @@
+@icon("res://assets/Icon/BackgroundIcon.png")
 extends Resource
-class_name Background, "res://assets/Icon/BackgroundIcon.png"
+class_name Background
 
 
 #export var texture: StreamTexture
 
-export(Array, Texture) var textures
+@export var textures: Array[Texture2D]
 
-export(Array, Vector2) var motion_scales
+@export var motion_scales: Array[Vector2]

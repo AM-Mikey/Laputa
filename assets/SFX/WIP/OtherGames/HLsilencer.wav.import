@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/HLsilencer.wav-02c7eef00daa9d1d10d5c32b066e2f75.sample"
+type="AudioStreamWAV"
+uid="uid://ym3inhivoxu1"
+path="res://.godot/imported/HLsilencer.wav-02c7eef00daa9d1d10d5c32b066e2f75.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/HLsilencer.wav"
-dest_files=[ "res://.import/HLsilencer.wav-02c7eef00daa9d1d10d5c32b066e2f75.sample" ]
+dest_files=["res://.godot/imported/HLsilencer.wav-02c7eef00daa9d1d10d5c32b066e2f75.sample"]
 
 [params]
 

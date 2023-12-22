@@ -1,28 +1,28 @@
 [gd_resource type="TileSet" load_steps=9 format=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
-points = PoolVector2Array( 32, 16, 0, 16, 0, 0, 32, 0 )
+points = PackedVector2Array( 32, 16, 0, 16, 0, 0, 32, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
-points = PoolVector2Array( 32, 16, 0, 16, 0, 0, 32, 0 )
+points = PackedVector2Array( 32, 16, 0, 16, 0, 0, 32, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 32, 16, 0, 16, 0, 0, 32, 0 )
+points = PackedVector2Array( 32, 16, 0, 16, 0, 0, 32, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
-points = PoolVector2Array( 32, 0, 0, 16, 0, 0 )
+points = PackedVector2Array( 32, 0, 0, 16, 0, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 16 )
+points = PackedVector2Array( 0, 0, 32, 0, 32, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=6]
-points = PoolVector2Array( 0, 16, 32, 0, 32, 16 )
+points = PackedVector2Array( 0, 16, 32, 0, 32, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=7]
-points = PoolVector2Array( 0, 16, 32, 32, 0, 32 )
+points = PackedVector2Array( 0, 16, 32, 32, 0, 32 )
 
 [sub_resource type="ConvexPolygonShape2D" id=8]
-points = PoolVector2Array( 0, 32, 32, 16, 32, 32 )
+points = PackedVector2Array( 0, 32, 32, 16, 32, 32 )
 
 [resource]
 0/name = "Mimiga.png 0"

@@ -1,5 +1,6 @@
+@icon("res://assets/Icon/EnemyIcon.png")
 extends Actor
-class_name Enemy, "res://assets/Icon/EnemyIcon.png"
+class_name Enemy
 
 #const DAMAGENUMBER = preload("res://src/Effect/DamageNumber.tscn")
 const AMMO = preload("res://src/Actor/Pickup/Ammo.tscn")
@@ -13,7 +14,7 @@ var state: String
 
 var disabled = false
 var protected = false
-export var debug = false
+@export var debug = false
 
 var hp: int
 var damage_on_contact: int
@@ -22,7 +23,7 @@ var damagenum = null
 var damagenum_timer = null
 var damagenum_time: float = 0.5
 
-export var id: String
+@export var id: String
 
 var reward = 1
 var heart_chance = 1
@@ -30,8 +31,8 @@ var experience_chance = 3
 var ammo_chance = 1
 
 
-onready var w = get_tree().get_root().get_node("World")
-onready var pc = get_tree().get_root().get_node_or_null("World/Juniper")
+@onready var w = get_tree().get_root().get_node("World")
+@onready var pc = get_tree().get_root().get_node_or_null("World/Juniper")
 
 
 
@@ -41,10 +42,10 @@ func _ready():
 	if disabled: return
 
 	if debug:
-		add_child(STATE_LABEL.instance())
+		add_child(STATE_LABEL.instantiate())
 	
 	if not is_in_group("EnemyPreviews"):
-		yield(get_tree(), "idle_frame")
+		await get_tree().process_frame
 		if state != "" and state != null: #TODO: this prevents enemies from starting in a state if we dont yield? we get ton of errors if we dont because we delete the enemy when moving it
 			change_state(state)
 	
@@ -83,7 +84,7 @@ func exit():
 	else:
 		queue_free()
 
-func get_velocity(velocity: Vector2, move_dir, speed, do_gravity = true) -> Vector2:
+func calc_velocity(velocity: Vector2, move_dir, speed, do_gravity = true) -> Vector2:
 	var out: = velocity
 	out.x = speed.x * move_dir.x
 	if do_gravity:
@@ -123,7 +124,7 @@ func change_state(new):
 func hit(damage, blood_direction):
 	_on_hit(damage, blood_direction)
 	hp -= damage
-	var blood = BLOOD.instance()
+	var blood = BLOOD.instantiate()
 	get_tree().get_root().get_node("World/Front").add_child(blood)
 	blood.global_position = global_position
 	blood.direction = blood_direction
@@ -133,7 +134,7 @@ func hit(damage, blood_direction):
 	if hp <= 0:
 		die()
 	else:
-		am.play_pos("enemy_hurt", self) #TODO: different hit sounds per enemy
+		am.play("enemy_hurt", self) #TODO: different hit sounds per enemy
 
 func _on_hit(damage, blood_direction): #For inhereted enemies to do something on hit
 	pass
@@ -142,13 +143,13 @@ func _on_hit(damage, blood_direction): #For inhereted enemies to do something on
 func setup_damagenum_timer():
 	damagenum_timer = Timer.new()
 	damagenum_timer.one_shot = true
-	damagenum_timer.connect("timeout", self, "_on_DamagenumTimer_timeout")
+	damagenum_timer.connect("timeout", Callable(self, "_on_DamagenumTimer_timeout"))
 	add_child(damagenum_timer)
 
 
 func set_damagenum(damage):
 	if not damagenum: #if we dont already have a damage number create a new one
-		damagenum = DAMAGENUMBER.instance() #this node is an orphan, it's not able to actually do this, i dont think TODO: fix
+		damagenum = DAMAGENUMBER.instantiate() #this node is an orphan, it's not able to actually do this, i dont think TODO: fix
 		setup_damagenum_timer()
 		damagenum.value = damage
 		damagenum_timer.start(damagenum_time)
@@ -173,7 +174,7 @@ func die():
 	if not pc:
 		pc = get_tree().get_root().get_node_or_null("World/Juniper")
 		pc.enemies_touched.erase(self)
-	var explosion = EXPLOSION.instance()
+	var explosion = EXPLOSION.instantiate()
 	explosion.position = global_position
 	world.front.add_child(explosion)
 	exit()
@@ -182,8 +183,8 @@ func die():
 func do_death_drop():
 	if reward == 0:return
 	
-	var heart = HEART.instance()
-	var ammo = AMMO.instance()
+	var heart = HEART.instantiate()
+	var ammo = AMMO.instantiate()
 	
 	#ammo chance
 	var player_needs_ammo = false
@@ -219,7 +220,7 @@ func do_death_drop():
 			5: value = 5
 		
 		while loop_times > 0:
-			var experience = EXPERIENCE.instance()
+			var experience = EXPERIENCE.instantiate()
 			experience.value = value
 			experience.position = position
 			world.middle.add_child(experience)

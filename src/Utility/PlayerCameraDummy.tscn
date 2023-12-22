@@ -3,10 +3,10 @@
 [node name="PlayerCameraDummy" type="Node2D"]
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
-margin_left = -256.0
-margin_top = -144.0
-margin_right = 256.0
-margin_bottom = 144.0
+offset_left = -256.0
+offset_top = -144.0
+offset_right = 256.0
+offset_bottom = 144.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

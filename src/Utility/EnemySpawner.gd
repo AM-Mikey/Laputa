@@ -1,7 +1,7 @@
 extends Node2D
 
-export var spawn_time = 3.0
-export var enemy = "res://src/Actor/Enemy/Roller.tscn"
+@export var spawn_time = 3.0
+@export var enemy = "res://src/Actor/Enemy/Roller.tscn"
 
 func _ready():
 	var file_check = File.new()

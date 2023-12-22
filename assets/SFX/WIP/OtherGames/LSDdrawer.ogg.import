@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/LSDdrawer.ogg-a4dcdfa5cae423e539abf97cc167b149.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cc27oxj57257m"
+path="res://.godot/imported/LSDdrawer.ogg-a4dcdfa5cae423e539abf97cc167b149.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/LSDdrawer.ogg"
-dest_files=[ "res://.import/LSDdrawer.ogg-a4dcdfa5cae423e539abf97cc167b149.oggstr" ]
+dest_files=["res://.godot/imported/LSDdrawer.ogg-a4dcdfa5cae423e539abf97cc167b149.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,4 +1,4 @@
-tool
+@tool
 extends Enemy
 
 var tx_toad = preload("res://assets/Actor/Enemy/Toad.png")
@@ -6,12 +6,12 @@ var tx_frog = preload("res://assets/Actor/Enemy/Frog.png")
 
 var target
 
-export var jump_delay = 3
+@export var jump_delay = 3
 var move_dir = Vector2.ZERO
 var look_dir = Vector2.LEFT
 
 enum Difficulty {easy, normal, hard}
-export(Difficulty) var difficulty = Difficulty.normal setget _on_difficulty_changed
+@export var difficulty: Difficulty = Difficulty.normal: set = _on_difficulty_changed
 
 func _ready():
 	_on_difficulty_changed(difficulty)
@@ -26,29 +26,29 @@ func _on_difficulty_changed(new):
 			hp = 4
 			reward = 3
 			damage_on_contact = 2
-			$Sprite.modulate = Color(1,1,1)
-			$Sprite.texture = tx_toad
+			$Sprite2D.modulate = Color(1,1,1)
+			$Sprite2D.texture = tx_toad
 			speed = Vector2(60, 120)
 		
 		Difficulty.normal:
 			hp = 4
 			reward = 2
 			damage_on_contact = 2
-			$Sprite.modulate = Color(1,1,1)
-			$Sprite.texture = tx_frog
+			$Sprite2D.modulate = Color(1,1,1)
+			$Sprite2D.texture = tx_frog
 			speed = Vector2(12, 120)
 		
 		Difficulty.easy:
 			hp = 2
 			reward = 1
 			damage_on_contact = 1
-			$Sprite.modulate = Color(0, 0.976471, 1)
-			$Sprite.texture = tx_frog
+			$Sprite2D.modulate = Color(0, 0.976471, 1)
+			$Sprite2D.texture = tx_frog
 			speed = Vector2(12, 120)
 
 
 func _physics_process(_delta):
-	if disabled or dead or Engine.editor_hint:
+	if disabled or dead or Engine.is_editor_hint():
 		return
 		if not is_on_floor():
 			move_dir.y = 0 #don't allow them to jump if they are midair
@@ -60,12 +60,16 @@ func _physics_process(_delta):
 
 		if $Timer.time_left == 0 and target != null and is_on_floor():
 			$Timer.start(jump_delay)
-			am.play_pos("enemy_jump", self)
+			am.play("enemy_jump", self)
 			move_dir = get_move_dir()
 			look_dir = Vector2(move_dir.x, 0)
 
 		velocity = get_movevelocity(velocity, move_dir, speed)
-		velocity = move_and_slide(velocity, FLOOR_NORMAL, true)
+		set_velocity(velocity)
+		set_up_direction(FLOOR_NORMAL)
+		set_floor_stop_on_slope_enabled(true)
+		move_and_slide()
+		velocity = velocity
 		
 		animate()
 

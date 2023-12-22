@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNfullrestore.wav-066dca3bb2cad1707d0addeb00d38bed.sample"
+type="AudioStreamWAV"
+uid="uid://dsstairg08yjh"
+path="res://.godot/imported/YMNfullrestore.wav-066dca3bb2cad1707d0addeb00d38bed.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNfullrestore.wav"
-dest_files=[ "res://.import/YMNfullrestore.wav-066dca3bb2cad1707d0addeb00d38bed.sample" ]
+dest_files=["res://.godot/imported/YMNfullrestore.wav-066dca3bb2cad1707d0addeb00d38bed.sample"]
 
 [params]
 

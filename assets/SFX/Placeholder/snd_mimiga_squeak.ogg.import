@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/snd_mimiga_squeak.ogg-c514b260424ec4816ac60d91115d89d3.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cli6fw3ftfwcv"
+path="res://.godot/imported/snd_mimiga_squeak.ogg-c514b260424ec4816ac60d91115d89d3.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/Placeholder/snd_mimiga_squeak.ogg"
-dest_files=[ "res://.import/snd_mimiga_squeak.ogg-c514b260424ec4816ac60d91115d89d3.oggstr" ]
+dest_files=["res://.godot/imported/snd_mimiga_squeak.ogg-c514b260424ec4816ac60d91115d89d3.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

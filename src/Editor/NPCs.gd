@@ -7,7 +7,7 @@ signal npc_changed(npc_path)
 var npcs = {}
 var active_npc_path
 
-onready var editor = get_parent().get_parent().get_parent()
+@onready var editor = get_parent().get_parent().get_parent()
 
 func _ready():
 	setup_npcs()
@@ -17,14 +17,14 @@ func setup_npcs():
 	var index = 0
 	for p in find_npc_scenes("res://src/Actor/NPC/"):
 		
-		var npc = load(p).instance()
+		var npc = load(p).instantiate()
 		if not npc.editor_hidden:
 			npcs[npc.name] = npc
 			
-			var npc_button = NPC_BUTTON.instance()
+			var npc_button = NPC_BUTTON.instantiate()
 			npc_button.npc_path = p
 			npc_button.npc_name = npc.name
-			npc_button.connect("npc_changed", self, "on_npc_changed")
+			npc_button.connect("npc_changed", Callable(self, "on_npc_changed"))
 			if index == 0:
 				npc_button.active = true
 				active_npc_path = p
@@ -36,9 +36,8 @@ func setup_npcs():
 
 func find_npc_scenes(path):
 	var files = []
-	var dir = Directory.new()
-	dir.open(path)
-	dir.list_dir_begin(true, true)
+	var dir = DirAccess.open(path)
+	dir.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 
 	while true:
 		var file = dir.get_next()

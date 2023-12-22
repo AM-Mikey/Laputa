@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/HLcharge.wav-531e0febf007912ccd3d9eeb6e661cdb.sample"
+type="AudioStreamWAV"
+uid="uid://b7f7g8g6ktfcm"
+path="res://.godot/imported/HLcharge.wav-531e0febf007912ccd3d9eeb6e661cdb.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/HLcharge.wav"
-dest_files=[ "res://.import/HLcharge.wav-531e0febf007912ccd3d9eeb6e661cdb.sample" ]
+dest_files=["res://.godot/imported/HLcharge.wav-531e0febf007912ccd3d9eeb6e661cdb.sample"]
 
 [params]
 

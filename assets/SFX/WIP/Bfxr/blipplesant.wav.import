@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/blipplesant.wav-a3f1efea4b4388a6f3394a3d1e1259b2.sample"
+type="AudioStreamWAV"
+uid="uid://cbj25d52ro36t"
+path="res://.godot/imported/blipplesant.wav-a3f1efea4b4388a6f3394a3d1e1259b2.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/blipplesant.wav"
-dest_files=[ "res://.import/blipplesant.wav-a3f1efea4b4388a6f3394a3d1e1259b2.sample" ]
+dest_files=["res://.godot/imported/blipplesant.wav-a3f1efea4b4388a6f3394a3d1e1259b2.sample"]
 
 [params]
 

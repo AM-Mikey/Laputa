@@ -3,7 +3,7 @@ extends MarginContainer
 const PROPERTY_BUTTON = preload("res://src/Editor/Button/PropertyButton.tscn")
 const LAYER_BUTTON = preload("res://src/Editor/Button/LayerButton.tscn")
 
-onready var editor = get_parent().get_parent()
+@onready var editor = get_parent().get_parent()
 
 var active
 var active_type: String
@@ -119,34 +119,34 @@ func on_property_selected(property_name):
 			match property_name:
 				"texture":
 					$FileDialog.current_dir = "res://assets/Background/"
-					$FileDialog.set_filters(PoolStringArray(["*.png"]))
+					$FileDialog.set_filters(PackedStringArray(["*.png"]))
 					$FileDialog.popup()
 		
 		"level":
 			match property_name:
 				"tile_set":
 					$FileDialog.current_dir = "res://src/Tile/"
-					$FileDialog.set_filters(PoolStringArray(["*.tres"]))
+					$FileDialog.set_filters(PackedStringArray(["*.tres"]))
 					$FileDialog.popup()
 				"dialog_json":
 					$FileDialog.current_dir = "res://src/Dialog/"
-					$FileDialog.set_filters(PoolStringArray(["*.json"]))
+					$FileDialog.set_filters(PackedStringArray(["*.json"]))
 					$FileDialog.popup()
 				"music":
 					$FileDialog.current_dir = "res://assets/Music/"
-					$FileDialog.set_filters(PoolStringArray(["*.wav"]))
+					$FileDialog.set_filters(PackedStringArray(["*.wav"]))
 					$FileDialog.popup()
 		"npc":
 			match property_name:
 				"dialog_json":
 					$FileDialog.current_dir = "res://src/Dialog/"
-					$FileDialog.set_filters(PoolStringArray(["*.json"]))
+					$FileDialog.set_filters(PackedStringArray(["*.json"]))
 					$FileDialog.popup()
 		"trigger":
 			match property_name:
 				"level":
 					$FileDialog.current_dir = "res://src/Level/"
-					$FileDialog.set_filters(PoolStringArray(["*.tscn"]))
+					$FileDialog.set_filters(PackedStringArray(["*.tscn"]))
 					$FileDialog.popup()
 
 
@@ -155,7 +155,7 @@ func on_property_changed(property_name, property_value):
 	match active_type:
 		"background":
 			match property_name:
-				"margin_left", "margin_top", "margin_right", "margin_bottom":
+				"offset_left", "offset_top", "offset_right", "offset_bottom":
 					pass
 				"layers", "parallax_near", "parallax_far", "focus", "tile_mode":
 					active.level_limiter.set(property_name, property_value)
@@ -207,22 +207,22 @@ func clear_data():
 func create_button(property, value, type = TYPE_NIL, enum_items = []):
 	if property == "editor_hidden":
 		return
-	var button = PROPERTY_BUTTON.instance()
+	var button = PROPERTY_BUTTON.instantiate()
 	button.property_name = property
 	button.property_value = value
 	button.property_type = type
 	button.enum_items = enum_items
 	$Margin/VBox/Scroll/VBox.add_child(button)
-	button.connect("property_changed", self, "on_property_changed")
-	button.connect("property_selected", self, "on_property_selected")
+	button.connect("property_changed", Callable(self, "on_property_changed"))
+	button.connect("property_selected", Callable(self, "on_property_selected"))
 
 func create_layer(layer, id):
-	var button = LAYER_BUTTON.instance()
+	var button = LAYER_BUTTON.instantiate()
 	button.layer = layer
 	if id == 0:
 		button.active = true
 	$Margin/VBox/Scroll/VBox.add_child(button)
-	button.connect("layer_changed", editor, "on_layer_changed")
+	button.connect("layer_changed", Callable(editor, "on_layer_changed"))
 
 func display_tool_labels():
 	$Margin/VBox/HBox/Tool.text = editor.active_tool

@@ -26,7 +26,10 @@ func _physics_process(delta):
 			move_dir = get_move_dir()
 
 		velocity = get_movevelocity(velocity, move_dir, speed)
-		velocity = move_and_slide(velocity, FLOOR_NORMAL)
+		set_velocity(velocity)
+		set_up_direction(FLOOR_NORMAL)
+		move_and_slide()
+		velocity = velocity
 
 
 
@@ -41,7 +44,7 @@ func _on_PlayerDetector_body_exited(_body):
 		add_child(timer)
 	$Timer.one_shot = true
 	$Timer.start(1)
-	yield($Timer, "timeout")
+	await $Timer.timeout
 	target = null
 
 

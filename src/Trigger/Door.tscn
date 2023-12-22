@@ -3,7 +3,7 @@
 [ext_resource path="res://src/Trigger/Door.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 16 )
+size = Vector2( 8, 16 )
 
 [node name="Door" type="Area2D" groups=["Trigger"]]
 collision_layer = 0

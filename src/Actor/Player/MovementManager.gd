@@ -18,15 +18,15 @@ var air_cof = 0.00
 
 #var conveyor_speed = Vector2.ZERO
 
-var can_bonk = true
-var bonk_time = 0.4
+var on_ceiling = false
+
 var coyote_time = 0.05
-export var minimum_direction_time = 1.0 #cave story forces you to jump a certain x distance when going max speed before jumping
+@export var minimum_direction_time = 1.0 #cave story forces you to jump a certain x distance when going max speed before jumping
 var jump_starting_move_dir_x: int
-export var min_x_velocity = 0.01 #0.001
+@export var min_x_velocity = 0.01 #0.001
 
 var knockback_direction: Vector2
-export var knockback_speed = Vector2(40, 100) #(80, 180)
+@export var knockback_speed = Vector2(40, 100) #(80, 180)
 var knockback_velocity = Vector2.ZERO
 
 var move_target = Vector2.ZERO
@@ -40,14 +40,13 @@ var cached_state: Node
 var is_debug = true
 
 
-onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_parent()
-onready var state_label = get_node("States/StateLabel")
-onready var sp = get_node("States")
+@onready var world = get_tree().get_root().get_node("World")
+@onready var pc = get_parent()
+@onready var state_label = get_node("States/StateLabel")
+@onready var sp = get_node("States")
 
-onready var coyote_timer = get_node("CoyoteTimer")
-onready var min_dir_timer = get_node("MinDirTimer")
-#onready var bonk_timeout = get_node("BonkTimeout")
+@onready var coyote_timer = get_node("CoyoteTimer")
+@onready var min_dir_timer = get_node("MinDirTimer")
 
 func _ready():
 	initialize_states()
@@ -69,7 +68,6 @@ func initialize_states():
 		if c.get_class() == "Node":
 			states[c.name.to_lower()] = c
 	
-	#yield(get_tree(), "idle_frame") #wait to setup states
 	change_state("run")
 
 
@@ -83,6 +81,16 @@ func _physics_process(_delta):
 	speed = Vector2(90, 180) if not get_parent().is_in_water else Vector2(60, 140)
 	gravity = 300.0 if not get_parent().is_in_water else 150.0
 	
+	if pc.is_on_ceiling():
+		if not on_ceiling:
+			var ceiling_normal = pc.get_slide_collision(pc.get_slide_collision_count() - 1).get_normal()
+			bonk("head", ceiling_normal)
+		on_ceiling = true
+	else:
+
+		on_ceiling = false
+		
+	
 	current_state.state_process()
 	
 	#check_ssp()
@@ -93,8 +101,8 @@ func check_ssp():
 		if world.current_level.has_node("Tiles"):
 			for layer in world.current_level.get_node("Tiles").get_children():
 				if layer is TileMap:
-					var tile_pos = layer.world_to_map(Vector2(pc.position.x, pc.position.y + 8))
-					var tile = layer.get_cellv(tile_pos)
+					var tile_pos = layer.local_to_map(Vector2(pc.position.x, pc.position.y + 8))
+					var tile = layer.get_cell_source_id(0, tile_pos)
 					if layer.tile_set.tile_get_shape_one_way(tile, 0):
 						print("player is on ssp"
 						)
@@ -108,37 +116,29 @@ func _input(event):
 				pc.direction_lock = pc.look_dir
 			if event.is_action_released("fire_automatic"): 
 				pc.direction_lock = Vector2.ZERO
-		if pc.controller_id == 1: #sasuke
-			if event.is_action_pressed("sasuke_lock"):
-				pc.direction_lock = pc.look_dir
-			if event.is_action_released("sasuke_lock"): 
-				pc.direction_lock = Vector2.ZERO
+		#if pc.controller_id == 1: #sasuke
+			#if event.is_action_pressed("sasuke_lock"):
+				#pc.direction_lock = pc.look_dir
+			#if event.is_action_released("sasuke_lock"): 
+				#pc.direction_lock = Vector2.ZERO
 
 
 
 func do_coyote_time():
 	$CoyoteTimer.start(coyote_time)
-	yield($CoyoteTimer, "timeout")
+	await $CoyoteTimer.timeout
 	print(current_state)
 	if not pc.is_on_floor() and current_state == states["run"]:
 		pc.is_in_coyote = false
 		change_state("fall")
 
 
-func bonk(type):
-#	if can_bonk:
-#		$BonkTimeout.start(bonk_time)
-
-		var bonk = BONK.instance()
-		bonk.position = pc.position
-		bonk.normal = pc.get_slide_collision(pc.get_slide_count() - 1).normal
-		match type:
-			"bonk":
-				bonk.position.y -=16
-				bonk.type = "bonk"
-			"land":
-				bonk.type = "land"
-		world.get_node("Front").add_child(bonk)
+func bonk(type, normal):
+	var effect = BONK.instantiate()
+	effect.position = pc.position
+	effect.type = type
+	effect.normal = normal
+	world.get_node("Front").add_child(effect)
 
 
 
@@ -159,8 +159,8 @@ func jump():
 
 ### SIGNALS
 
-func _on_CrouchDetector_body_entered(body):
+func _on_CrouchDetector_body_entered(_body):
 	pc.is_crouching = true
 
-func _on_CrouchDetector_body_exited(body):
+func _on_CrouchDetector_body_exited(_body):
 	pc.is_crouching = false

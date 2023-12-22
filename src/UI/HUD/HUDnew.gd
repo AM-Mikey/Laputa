@@ -5,54 +5,54 @@ const AMMOCOUNT = preload("res://src/UI/HUD/AmmoCount.tscn")
 
 
 #onready var p = get_tree().get_root().get_node("World/Juniper")
-onready var world = get_tree().get_root().get_node("World")
+@onready var world = get_tree().get_root().get_node("World")
 
-export(NodePath) onready var ammo_path
-export(NodePath) onready var hp_path
-export(NodePath) onready var xp_path
-export(NodePath) onready var cooldown_path
-export(NodePath) onready var money_path
+@export(NodePath) onready var ammo_path
+@export(NodePath) onready var hp_path
+@export(NodePath) onready var xp_path
+@export(NodePath) onready var cooldown_path
+@export(NodePath) onready var money_path
 
-onready var ao = get_node(ammo_path)
-onready var ao_1 = ao.get_node("Num1")
-onready var ao_2 = ao.get_node("Num2")
-onready var ao_3 = ao.get_node("Num3")
-onready var ao_4 = ao.get_node("Num4")
-onready var ao_5 = ao.get_node("Num5")
-onready var ao_6 = ao.get_node("Num6")
+@onready var ao = get_node(ammo_path)
+@onready var ao_1 = ao.get_node("Num1")
+@onready var ao_2 = ao.get_node("Num2")
+@onready var ao_3 = ao.get_node("Num3")
+@onready var ao_4 = ao.get_node("Num4")
+@onready var ao_5 = ao.get_node("Num5")
+@onready var ao_6 = ao.get_node("Num6")
 
-onready var hp = get_node(hp_path)
-onready var hp_lost = hp.get_node("Lost")
-onready var hp_lost_cap = hp_lost.get_node("Cap")
-onready var hp_progress = hp.get_node("Progress")
-onready var hp_progress_cap = hp_progress.get_node("Cap")
-onready var hp_1 = hp.get_node("Num1")
-onready var hp_2 = hp.get_node("Num2")
+@onready var hp = get_node(hp_path)
+@onready var hp_lost = hp.get_node("Lost")
+@onready var hp_lost_cap = hp_lost.get_node("Cap")
+@onready var hp_progress = hp.get_node("Progress")
+@onready var hp_progress_cap = hp_progress.get_node("Cap")
+@onready var hp_1 = hp.get_node("Num1")
+@onready var hp_2 = hp.get_node("Num2")
 
-onready var xp = get_node(xp_path)
-onready var xp_progress = xp.get_node("Progress")
-onready var xp_flash = xp.get_node("Flash")
-onready var xp_max = xp.get_node("Max")
-onready var xp_num = xp.get_node("Num")
+@onready var xp = get_node(xp_path)
+@onready var xp_progress = xp.get_node("Progress")
+@onready var xp_flash = xp.get_node("Flash")
+@onready var xp_max = xp.get_node("Max")
+@onready var xp_num = xp.get_node("Num")
 
-onready var cd = get_node(cooldown_path)
-onready var cd_progress = cd.get_node("Progress")
+@onready var cd = get_node(cooldown_path)
+@onready var cd_progress = cd.get_node("Progress")
 
-onready var money = get_node(money_path)
-onready var money_1 = money.get_node("Num1")
-onready var money_2 = money.get_node("Num2")
-onready var money_3 = money.get_node("Num2")
+@onready var money = get_node(money_path)
+@onready var money_1 = money.get_node("Num1")
+@onready var money_2 = money.get_node("Num2")
+@onready var money_3 = money.get_node("Num2")
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 	on_viewport_size_changed()
 	
 	
 	if world.has_node("Juniper"):
 		var pc = world.get_node("Juniper")
-		pc.connect("hp_updated", self, "update_hp")
-		pc.connect("guns_updated", self, "update_guns")
-		pc.connect("total_xp_updated", self, "update_total_xp")
+		pc.connect("hp_updated", Callable(self, "update_hp"))
+		pc.connect("guns_updated", Callable(self, "update_guns"))
+		pc.connect("total_xp_updated", Callable(self, "update_total_xp"))
 		pc.setup_hud()
 		
 
@@ -62,16 +62,16 @@ func _process(_delta):
 	if world.has_node("Juniper"):
 		var pc = world.get_node("Juniper")
 		if pc.guns.get_child(0) != null: #TODO: make this independant
-			$CooldownBar/TextureProgress.visible = true
-			$CooldownBar/TextureProgress.value = 100 - ((pc.get_node("GunManager/CooldownTimer").time_left / pc.guns.get_child(0).cooldown_time) * 100)
-		else: $CooldownBar/TextureProgress.visible = false
+			$CooldownBar/TextureProgressBar.visible = true
+			$CooldownBar/TextureProgressBar.value = 100 - ((pc.get_node("GunManager/CooldownTimer").time_left / pc.guns.get_child(0).cooldown_time) * 100)
+		else: $CooldownBar/TextureProgressBar.visible = false
 
 func update_guns(guns):
 	for i in $Gun/HBox.get_children(): #clear old
 			i.queue_free()
 	for g in guns:
 		if guns.find(g) == 0: #check if front
-			var gun_icon = GUNICON.instance() #add the first icon
+			var gun_icon = GUNICON.instantiate() #add the first icon
 			gun_icon.texture = g["icon_texture"]
 			$Gun/HBox.add_child(gun_icon)
 			$Gun/HBox.move_child(gun_icon, 0)
@@ -79,7 +79,7 @@ func update_guns(guns):
 			update_xp(g.xp, g.max_xp, g.level, g.max_level)
 			update_ammo(g.ammo, g.max_ammo)
 		else: 
-			var gun_icon = GUNICON.instance() #add all other icons
+			var gun_icon = GUNICON.instantiate() #add all other icons
 			gun_icon.texture = g["texture"]
 			$Gun/HBox.add_child(gun_icon)
 
@@ -94,8 +94,8 @@ func update_hp(hp, max_hp):
 	
 	if hp < $HpBar/HpLost.value:
 		$AnimationPlayer.play("Flash")
-	$HpBar/LostTween.interpolate_property($HpBar/HpLost, "value", $HpBar/HpLost.value, hp, 0.4, Tween.TRANS_SINE, Tween.EASE_IN_OUT, 0.4)
-	$HpBar/LostTween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property($HpBar/HpLost, "value", hp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
 
 
 func display_hp_number(hp, max_hp):
@@ -152,7 +152,7 @@ func update_ammo(have, maximum): #TODO FIX this instancing. ammo and max ammo ar
 	if ao:
 			ao.free()
 	if maximum != 0:
-		var ao = AMMOCOUNT.instance()
+		var ao = AMMOCOUNT.instantiate()
 		ao.ammo = have
 		ao.max_ammo = maximum
 		$Gun/HBox.add_child(ao)
@@ -186,4 +186,4 @@ func update_money(money):
 
 
 func on_viewport_size_changed():
-	rect_size = get_tree().get_root().size / world.resolution_scale
+	size = get_tree().get_root().size / world.resolution_scale

@@ -6,19 +6,19 @@ var select_sound = load("res://assets/SFX/snd_menu_select.ogg")
 
 var font = load("res://src/UI/Cave-StoryFont.tres")
 
-onready var player = get_tree().get_root().get_node("World/Juniper")
-onready var db = get_tree().get_root().get_node("World").get_node("UILayer/DialogBox")
-onready var gc = $MarginContainer/ScrollContainer/GridContainer
+@onready var player = get_tree().get_root().get_node("World/Juniper")
+@onready var db = get_tree().get_root().get_node("World").get_node("UILayer/DialogBox")
+@onready var gc = $MarginContainer/ScrollContainer/GridContainer
 
 func _ready():
 	for t in player.topic_array:
 		var button = Button.new()
 		button.flat = true
-		button.add_font_override("font", font)
+		button.add_theme_font_override("font", font)
 		button.text = t
 		gc.add_child(button)
 		
-		button.connect("pressed", self, "_on_button_pressed", [t])
+		button.connect("pressed", Callable(self, "_on_button_pressed").bind(t))
 
 func _on_button_pressed(t_array):
 	var button_name = String(t_array)

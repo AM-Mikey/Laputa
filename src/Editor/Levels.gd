@@ -11,9 +11,9 @@ var active_level_path
 var default_level = "res://src/Level/Default.tscn"
 var ctrl_held := false
 
-onready var w = get_tree().get_root().get_node("World")
-onready var ui = w.get_node("UILayer")
-onready var el = w.get_node("EditorLayer")
+@onready var w = get_tree().get_root().get_node("World")
+@onready var ui = w.get_node("UILayer")
+@onready var el = w.get_node("EditorLayer")
 
 func _unhandled_input(event):
 	if event.is_action_pressed("editor_ctrl"): ctrl_held = true
@@ -30,14 +30,14 @@ func setup_enemies():
 	var index = 0
 	for l in find_level_scenes("res://src/Level/"):
 		
-		var level = load(l).instance()
+		var level = load(l).instantiate()
 		if not level.editor_hidden:
 			levels[level.name] = level
 			
-			var level_button = LEVEL_BUTTON.instance()
+			var level_button = LEVEL_BUTTON.instantiate()
 			level_button.level_path = l
 			level_button.level_name = level.name
-			level_button.connect("level_changed", self, "change_level")
+			level_button.connect("level_changed", Callable(self, "change_level"))
 			if index == 0:
 				level_button.active = true
 				active_level_path = l
@@ -46,9 +46,8 @@ func setup_enemies():
 
 func find_level_scenes(path):
 	var files = []
-	var dir = Directory.new()
-	dir.open(path)
-	dir.list_dir_begin(true, true)
+	var dir = DirAccess.open(path)
+	dir.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 
 	while true:
 		var file = dir.get_next()
@@ -65,7 +64,7 @@ func change_level(path): #connected to level buttons
 ### BUTTON SIGNALS
 
 func on_save():
-	save_level(w.current_level, w.current_level.filename)
+	save_level(w.current_level, w.current_level.scene_file_path)
 
 func on_save_as():
 	$SaveDialog.current_path = "res://src/level/"
@@ -80,16 +79,16 @@ func on_new():
 	$NewDialog.popup()
 
 func _on_Default_pressed():
-	w.start_level = load(w.current_level.filename)
+	w.start_level = load(w.current_level.scene_file_path)
 	#am.play("save")
 
 
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(w) #packing world is a bad idea, we need to be sure nothing else gets saved along with default level
-	var err = ResourceSaver.save("res://src/World.tscn", packed_scene)
+	var err = ResourceSaver.save(packed_scene, "res://src/World.tscn")
 	
 	if err == OK:
-		print("Saved Default Level as: " + w.current_level.filename)
+		print("Saved Default Level as: " + w.current_level.scene_file_path)
 		am.play("save")
 	else: printerr("ERROR: Could Not Save Default Level")
 
@@ -104,7 +103,7 @@ func on_load_selected(path):
 	load_level(path)
 
 func on_new_confirmed():
-	var level = load(default_level).instance()
+	var level = load(default_level).instantiate()
 	var path = $NewDialog.current_path.get_basename() + ".tscn"
 	save_level(level, path)
 	load_level(path)
@@ -116,8 +115,7 @@ func save_level(level, path):
 	level.name = path.get_file().get_basename()
 	level.level_name = path.get_file().get_basename() #TODO: add this to inspector
 	
-	var dir = Directory.new()
-	if dir.file_exists(path):
+	if FileAccess.file_exists(path):
 		print("WARNING: Saved over File!")
 		
 	var packed_scene = PackedScene.new()
@@ -140,10 +138,10 @@ func load_level(path):
 	
 	w.on_level_change(load(path), 0)
 
-	w.add_child(JUNIPER.instance())
-	ui.add_child(HUD.instance())
+	w.add_child(JUNIPER.instantiate())
+	ui.add_child(HUD.instantiate())
 	
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 	
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		w.get_node("Juniper").global_position = s.global_position

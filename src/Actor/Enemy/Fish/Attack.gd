@@ -2,18 +2,20 @@ extends State
 
 #var state_name = "Attack"
 
-onready var ap = get_parent().get_parent().get_node("AnimationPlayer")
-onready var em = get_parent().get_parent()
+@onready var ap = get_parent().get_parent().get_node("AnimationPlayer")
+@onready var em = get_parent().get_parent()
 
 
 func state_process():
 	if em.position.y <= em.jump_pos.y:
 		sm.change_state("fall")
 
-	em.velocity = em.move_and_slide(get_velocity())
+	em.set_velocity(calc_velocity())
+	em.move_and_slide()
+	em.velocity = em.velocity
 
 
-func get_velocity() -> Vector2:
+func calc_velocity() -> Vector2:
 	var out = em.velocity
 	
 	out.y += em.gravity * get_physics_process_delta_time()
@@ -24,7 +26,7 @@ func get_velocity() -> Vector2:
 
 func enter():
 	ap.play("Target")
-	yield(ap, "animation_finished")
+	await ap.animation_finished
 	em.move_dir = Vector2.UP
 
 func exit():

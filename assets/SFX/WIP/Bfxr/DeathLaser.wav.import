@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/DeathLaser.wav-5617db60138db58442a3acd92e8c2a11.sample"
+type="AudioStreamWAV"
+uid="uid://cu74fwot20aeq"
+path="res://.godot/imported/DeathLaser.wav-5617db60138db58442a3acd92e8c2a11.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/DeathLaser.wav"
-dest_files=[ "res://.import/DeathLaser.wav-5617db60138db58442a3acd92e8c2a11.sample" ]
+dest_files=["res://.godot/imported/DeathLaser.wav-5617db60138db58442a3acd92e8c2a11.sample"]
 
 [params]
 

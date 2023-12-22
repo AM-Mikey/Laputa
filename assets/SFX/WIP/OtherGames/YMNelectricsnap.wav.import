@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNelectricsnap.wav-b555155133329706d2b8d57b1335f46b.sample"
+type="AudioStreamWAV"
+uid="uid://08wot4m7iyjv"
+path="res://.godot/imported/YMNelectricsnap.wav-b555155133329706d2b8d57b1335f46b.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNelectricsnap.wav"
-dest_files=[ "res://.import/YMNelectricsnap.wav-b555155133329706d2b8d57b1335f46b.sample" ]
+dest_files=["res://.godot/imported/YMNelectricsnap.wav-b555155133329706d2b8d57b1335f46b.sample"]
 
 [params]
 

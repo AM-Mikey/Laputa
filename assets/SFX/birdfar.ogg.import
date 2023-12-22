@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/birdfar.ogg-4bdd9f1b3538b17d93be31bc86d8a2b0.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dobkdkl83la7n"
+path="res://.godot/imported/birdfar.ogg-4bdd9f1b3538b17d93be31bc86d8a2b0.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/birdfar.ogg"
-dest_files=[ "res://.import/birdfar.ogg-4bdd9f1b3538b17d93be31bc86d8a2b0.oggstr" ]
+dest_files=["res://.godot/imported/birdfar.ogg-4bdd9f1b3538b17d93be31bc86d8a2b0.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

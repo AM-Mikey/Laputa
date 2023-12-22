@@ -1,6 +1,6 @@
 extends Camera2D
 
-onready var w = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 var current_zoom: int
 var zooms = [

@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/Safety.ogg-5a2a50c394fce2af15ee4eb198714b92.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c5705n0knm8it"
+path="res://.godot/imported/Safety.ogg-5a2a50c394fce2af15ee4eb198714b92.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/Music/Placeholder/Safety.ogg"
-dest_files=[ "res://.import/Safety.ogg-5a2a50c394fce2af15ee4eb198714b92.oggstr" ]
+dest_files=["res://.godot/imported/Safety.ogg-5a2a50c394fce2af15ee4eb198714b92.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -2,170 +2,122 @@ extends Camera2D
 
 const BLACKBAR = preload("res://src/Utility/BlackBar.tscn")
 
-var horizontal_focus = Vector2.LEFT
+var h_dir = -1
 var homing_camera = false
-var panning_up = false
-var panning_down = false
 
-onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_parent()
-onready var mm = pc.get_node("MovementManager")
+@export var h_pan_min_speed = 0.5
+@export var h_pan_time = 1.5
+@export var v_pan_time = 1.5
+@export var h_pan_delay = 0.0
+@export var v_pan_delay = 0.0
+@export var h_pan_distance = 2.0
+@export var v_pan_distance = 2.0
+
+@onready var world = get_tree().get_root().get_node("World")
+@onready var pc = get_parent()
+@onready var mm = pc.get_node("MovementManager")
+var h_tween: Tween
+var v_tween: Tween
 
 func _ready():
 	add_to_group("Cameras")
-	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 	on_viewport_size_changed()
 
 func _physics_process(_delta):
-	if horizontal_focus != pc.look_dir:
-		horizontal_focus = pc.look_dir
-		pan_horizontal(pc.look_dir)
+	if h_dir != pc.look_dir.x:
+		h_dir = pc.look_dir.x
+		pan_horizontal(pc.look_dir.x)
 
-	
-	if $TweenHorizontal.is_active():
-		$TweenHorizontal.playback_speed = max(abs(mm.velocity.x)/mm.speed.x, 0.5) #second number is minimum camera speed
+	if h_tween: #TODO: this should only run if h_tween is running
+		h_tween.set_speed_scale(max(abs(mm.velocity.x)/mm.speed.x, h_pan_min_speed))
 	
 	if not pc.disabled:
-		if Input.is_action_just_pressed("look_up"):
-			if panning_down:
-				panning_up = false
-				home_vertical()
-			elif not panning_up:
-				panning_up = true
-				pan_vertical(-1)
-
-		if Input.is_action_just_pressed("look_down"):
-			if panning_up:
-				panning_down = false
-				home_vertical()
-			elif not panning_down:
-				panning_down = true
-				pan_vertical(1)
-
-		if Input.is_action_just_released("look_up"):
-			if Input.is_action_pressed("look_down"):
-				panning_down = true
-				pan_vertical(1)
-			else:
-				panning_up = false
-				home_vertical()
-		
-		if Input.is_action_just_released("look_down"):
-			if Input.is_action_pressed("look_up"):
-				panning_up = true
-				pan_vertical(-1)
-			else:
-				panning_down = false
-				home_vertical()
+		if Input.is_action_just_pressed("look_up") or Input.is_action_just_pressed("look_down") \
+		or Input.is_action_just_released("look_up") or Input.is_action_just_released("look_down"):
+				pan_vertical(get_v_dir())
 
 
+### MAIN ###
+
+func pan_vertical(dir):
+	var dist = v_pan_distance / world.resolution_scale
+	if v_tween:
+		v_tween.kill()
+	v_tween = create_tween()
+	v_tween.tween_property(self, "drag_vertical_offset", dir * dist, v_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(v_pan_delay)
+
+func pan_horizontal(dir):
+	var dist = h_pan_distance / world.resolution_scale
+	if h_tween:
+		h_tween.kill()
+	h_tween = create_tween()
+	h_tween.tween_property(self, "drag_horizontal_offset", dir * dist, h_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(h_pan_delay)
+
+func stop_tween():
+	h_tween.kill()
+	v_tween.kill()
+
+### GETTERS ###
+func get_v_dir() -> int:
+	var dir = 0
+	if Input.is_action_pressed("look_up"):
+		dir += 1
+	if Input.is_action_pressed("look_down"):
+		dir -= 1
+	return dir
+
+### TRIGGERS ###
 func _on_limit_camera(left, right, top, bottom):
-	#print("limit camera")
-	var bars = get_tree().get_nodes_in_group("BlackBars")
-	for b in bars:
+	var window_width = get_window().get_size().x
+	var window_height = get_window().get_size().y
+	
+	for b in get_tree().get_nodes_in_group("BlackBars"):
 		b.free()
 	
-	
-	if  OS.get_window_size().x > (right - left) * world.resolution_scale:
+	if window_width > (right - left) * world.resolution_scale:
 		print("WARNING: window width larger than camera limit")
-		var extra_margin = ((OS.get_window_size().x / world.resolution_scale) - (right - left))/2
+		var thickness = ((window_width / world.resolution_scale) - (right - left))/2
 		
-		limit_left = left - extra_margin
-		limit_right = right + extra_margin
+		spawn_black_bar("BarLeft", \
+		Vector2(thickness, window_height), \
+		Vector2.ZERO)
+		spawn_black_bar("BarRight", \
+		Vector2(thickness, window_height), \
+		Vector2((right - left) + thickness, 0))
 		
-		var left_pillar = BLACKBAR.instance()
-		left_pillar.name = "BlackBarLeft"
-		left_pillar.rect_size = Vector2(extra_margin, OS.get_window_size().y)
-		world.get_node("UILayer").add_child(left_pillar)
-		world.get_node("UILayer").move_child(left_pillar, 0)
-		
-		var right_pillar = BLACKBAR.instance()
-		right_pillar.name = "BlackBarRight"
-		right_pillar.rect_size = Vector2(extra_margin, OS.get_window_size().y)
-		right_pillar.rect_position = Vector2((right - left) + extra_margin, 0)
-		world.get_node("UILayer").add_child(right_pillar)
-		world.get_node("UILayer").move_child(right_pillar, 0)
-		
+		limit_left = left - thickness
+		limit_right = right + thickness
 	else:
 		limit_left = left
 		limit_right = right
 	
-	if OS.get_window_size().y > (bottom - top) * world.resolution_scale:
+	if get_window().get_size().y > (bottom - top) * world.resolution_scale:
 		print("WARNING: window height larger than camera limit")
-		var extra_margin = (OS.get_window_size().y / world.resolution_scale - (bottom - top))/2
-		limit_top = top - extra_margin
-		limit_bottom = bottom  + extra_margin
+		var thickness = (window_height / world.resolution_scale - (bottom - top))/2
 		
-		var top_pillar = BLACKBAR.instance()
-		top_pillar.name = "BlackBarTop"
-		top_pillar.rect_size = Vector2(OS.get_window_size().x, extra_margin)
-		world.get_node("UILayer").add_child(top_pillar)
-		world.get_node("UILayer").move_child(top_pillar, 0)
+		spawn_black_bar("BarTop", \
+		Vector2(window_width, thickness), \
+		Vector2.ZERO)
+		spawn_black_bar("BarBottom", \
+		Vector2(window_width, thickness), \
+		Vector2(0, (bottom - top) + thickness))
 		
-		var bottom_pillar = BLACKBAR.instance()
-		bottom_pillar.name = "BlackBarRight"
-		bottom_pillar.rect_size = Vector2(OS.get_window_size().x, extra_margin)
-		bottom_pillar.rect_position = Vector2(0, (bottom - top) + extra_margin)
-		world.get_node("UILayer").add_child(bottom_pillar)
-		world.get_node("UILayer").move_child(bottom_pillar, 0)
-	
+		limit_top = top - thickness
+		limit_bottom = bottom  + thickness
 	else:
 		limit_top = top
 		limit_bottom = bottom
 
-
-
-func pan_vertical(direction):
-	var tween = $TweenVertical
-	var camera_pan_distance = 2 / world.resolution_scale
-	var camera_pan_time = 1.5
-	var camera_pan_delay = 0
-	
-	yield(get_tree().create_timer(camera_pan_delay), "timeout")
-	
-	if tween.is_active():
-		tween.stop_all()
-	tween.interpolate_property(self, "offset_v", offset_v, direction * camera_pan_distance, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	tween.start()
-
-func home_vertical():
-	#print("home vert")
-	var tween = $TweenVertical
-	var camera_pan_time = 1.5
-	
-	if tween.is_active():
-		tween.stop_all()
-	tween.interpolate_property(self, "offset_v", offset_v, 0, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	tween.start()
-
-
-func pan_horizontal(direction):
-	#print("pan horz")
-	var tween = $TweenHorizontal
-	var camera_pan_distance = 2.0 / world.resolution_scale
-	var camera_pan_time = 1.5
-
-	if tween.is_active():
-		tween.stop_all()
-	tween.interpolate_property(self, "offset_h", offset_h, direction.x * camera_pan_distance, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	tween.start()
-
-
-
-func home_horizontal():
-	#print("home horz")
-	var tween = $TweenHorizontal
-	var camera_pan_time = 1.5
-	
-	if tween.is_active():
-		tween.stop_all()
-	tween.interpolate_property(self, "offset_h", offset_h, 0, camera_pan_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	tween.start()
-
-func stop_tween():
-	$TweenHorizontal.stop_all()
-	$TweenVertical.stop_all()
+func spawn_black_bar(bar_name, size, bar_position):
+		var ui = world.get_node("UILayer")
+		var bar = BLACKBAR.instantiate()
+		bar.name = bar_name
+		bar.size = size
+		bar.position = bar_position
+		ui.add_child(bar)
+		ui.move_child(bar, 0)
 
 
 func on_viewport_size_changed():
-	zoom = Vector2(1.0 / world.resolution_scale, 1.0 / world.resolution_scale)
+	zoom = Vector2(world.resolution_scale, world.resolution_scale)

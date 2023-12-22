@@ -1,11 +1,11 @@
 extends Enemy
 
-export var look_dir: Vector2 = Vector2.LEFT
+@export var look_dir: Vector2 = Vector2.LEFT
 var move_dir: Vector2
 
 const BULLET = preload("res://src/Bullet/EnemyBulletTemplate.tscn")
-export var projectile_speed: int = 120
-export var height_tolerance = 7
+@export var projectile_speed: int = 120
+@export var height_tolerance = 7
 
 var target: Node
 
@@ -21,7 +21,10 @@ func _physics_process(delta):
 		move_dir.y = 0 #don't allow them to jump if they are midair
 	if not dead:
 		velocity = calculate_movevelocity(velocity, move_dir, speed)
-		velocity = move_and_slide(velocity, FLOOR_NORMAL)
+		set_velocity(velocity)
+		set_up_direction(FLOOR_NORMAL)
+		move_and_slide()
+		velocity = velocity
 		
 
 func calculate_movevelocity(velocity: Vector2, move_dir, speed) -> Vector2:
@@ -50,7 +53,7 @@ func jump():
 	$PlayerDetector.set_deferred("monitoring", true) #once jump and shoot are finished return to normal
 
 func prepare_bullet():
-	var bullet = BULLET.instance()
+	var bullet = BULLET.instantiate()
 	get_tree().get_current_scene().add_child(bullet)
 	
 	bullet.position = Vector2($CollisionShape2D.global_position.x, $CollisionShape2D.global_position.y - height_tolerance)

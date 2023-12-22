@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/snd_puppy_bark.ogg-7b0a2ba8a651517a898f754a1ed49bee.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bv7x3sdgu7jlf"
+path="res://.godot/imported/snd_puppy_bark.ogg-7b0a2ba8a651517a898f754a1ed49bee.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/Placeholder/snd_puppy_bark.ogg"
-dest_files=[ "res://.import/snd_puppy_bark.ogg-7b0a2ba8a651517a898f754a1ed49bee.oggstr" ]
+dest_files=["res://.godot/imported/snd_puppy_bark.ogg-7b0a2ba8a651517a898f754a1ed49bee.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

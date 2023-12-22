@@ -16,7 +16,7 @@ func _ready():
 	match property_type:
 		"bool", TYPE_BOOL:
 			$HBox/HBox/Bool.visible = true
-			$HBox/HBox/Bool.pressed = property_value
+			$HBox/HBox/Bool.button_pressed = property_value
 		"color", TYPE_COLOR:
 			$HBox/HBox/Color.visible = true
 			$HBox/HBox/Color.color = property_value
@@ -31,7 +31,7 @@ func _ready():
 			$HBox/HBox/String.visible = true
 			if property_value != null: #"if property_value" doesn't trigger for value = 0
 				$HBox/HBox/String.text = String("%.f" % property_value)
-		"float", TYPE_REAL:
+		"float", TYPE_FLOAT:
 			$HBox/HBox/String.visible = true
 			if property_value != null:
 				$HBox/HBox/String.text = String(property_value)

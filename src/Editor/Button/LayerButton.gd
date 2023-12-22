@@ -9,7 +9,7 @@ var active = false
 func _ready():
 	add_to_group("LayerButtons")
 	$HBox/LayerButton.text = layer.name
-	$HBox/VisButton.pressed = !layer.visible
+	$HBox/VisButton.button_pressed = !layer.visible
 	$PanelActive.visible = active
 
 

@@ -1,94 +1,58 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://driq444nxd8v8"]
 
-[ext_resource path="res://src/UI/Font/Momo.tres" type="DynamicFont" id=1]
-[ext_resource path="res://assets/UI/TitleScreen/TitleLogo.png" type="Texture" id=2]
-[ext_resource path="res://src/UI/TitleScreen.gd" type="Script" id=3]
-[ext_resource path="res://src/UI/Theme/Floating.tres" type="Theme" id=4]
-[ext_resource path="res://src/UI/MenuButton.tscn" type="PackedScene" id=7]
+[ext_resource type="FontFile" path="res://src/UI/Font/Momo.tres" id="1"]
+[ext_resource type="Texture2D" uid="uid://dgmnv6hoo3avn" path="res://assets/UI/TitleScreen/TitleLogo.png" id="2"]
+[ext_resource type="Script" path="res://src/UI/TitleScreen.gd" id="3"]
+[ext_resource type="Theme" path="res://src/UI/Theme/Floating.tres" id="4"]
+[ext_resource type="PackedScene" path="res://src/UI/MenuButton.tscn" id="7"]
 
 [node name="TitleScreen" type="MarginContainer"]
-margin_right = 576.0
-margin_bottom = 360.0
-theme = ExtResource( 4 )
-custom_constants/margin_right = 16
-custom_constants/margin_top = 16
-custom_constants/margin_left = 16
-custom_constants/margin_bottom = 16
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_right = 576.0
+offset_bottom = 360.0
+theme = ExtResource("4")
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+script = ExtResource("3")
 
 [node name="VersionLabel" type="Label" parent="."]
-margin_left = 16.0
-margin_top = 329.0
-margin_right = 560.0
-margin_bottom = 344.0
+layout_mode = 2
 size_flags_vertical = 8
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 1
-custom_fonts/font = ExtResource( 1 )
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("1")
 text = "Version:"
-align = 1
-valign = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBox" type="VBoxContainer" parent="."]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 560.0
-margin_bottom = 344.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Title" type="TextureRect" parent="VBox"]
-margin_right = 544.0
-margin_bottom = 81.0
-texture = ExtResource( 2 )
+layout_mode = 2
+texture = ExtResource("2")
 stretch_mode = 4
 
-[node name="New" parent="VBox" instance=ExtResource( 7 )]
-margin_left = 235.0
-margin_top = 85.0
-margin_right = 309.0
-margin_bottom = 105.0
+[node name="New" parent="VBox" instance=ExtResource("7")]
+layout_mode = 2
 text = "New Game"
 
-[node name="Load" parent="VBox" instance=ExtResource( 7 )]
-margin_left = 233.0
-margin_top = 109.0
-margin_right = 311.0
-margin_bottom = 129.0
+[node name="Load" parent="VBox" instance=ExtResource("7")]
+layout_mode = 2
 text = "Load Game"
 
-[node name="Options" parent="VBox" instance=ExtResource( 7 )]
-margin_left = 243.0
-margin_top = 133.0
-margin_right = 301.0
-margin_bottom = 153.0
+[node name="Options" parent="VBox" instance=ExtResource("7")]
+layout_mode = 2
 text = "Options"
 
-[node name="KeyGuide" parent="VBox" instance=ExtResource( 7 )]
-margin_left = 228.0
-margin_top = 157.0
-margin_right = 316.0
-margin_bottom = 177.0
+[node name="KeyGuide" parent="VBox" instance=ExtResource("7")]
+layout_mode = 2
 text = "How To Play"
 
-[node name="Level" parent="VBox" instance=ExtResource( 7 )]
-margin_left = 227.0
-margin_top = 181.0
-margin_right = 316.0
-margin_bottom = 201.0
+[node name="Level" parent="VBox" instance=ExtResource("7")]
+layout_mode = 2
 text = "Level Select"
 
-[node name="Quit" parent="VBox" instance=ExtResource( 7 )]
-margin_left = 252.0
-margin_top = 205.0
-margin_right = 291.0
-margin_bottom = 225.0
+[node name="Quit" parent="VBox" instance=ExtResource("7")]
+layout_mode = 2
 text = "Quit"

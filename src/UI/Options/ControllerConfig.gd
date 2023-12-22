@@ -1,11 +1,11 @@
 extends Control
 
 var input_map_path = "user://inputmap.json"
-onready var world = get_tree().get_root().get_node("World")
+@onready var world = get_tree().get_root().get_node("World")
 
 var compass_distance = 8
 
-onready var action_options = get_tree().get_nodes_in_group("ActionOptions")
+@onready var action_options = get_tree().get_nodes_in_group("ActionOptions")
 
 var action_dict = {
 	"": "None",
@@ -20,22 +20,22 @@ var action_dict = {
 }
 
 var button_dict = {
-	"DpadUp": JOY_DPAD_UP,
-	"DpadLeft": JOY_DPAD_LEFT,
-	"DpadRight": JOY_DPAD_RIGHT,
-	"DpadDown": JOY_DPAD_DOWN,
-	"Select": JOY_SELECT,
-	"Start": JOY_START,
-	"FaceUp": JOY_DS_X,
-	"FaceLeft": JOY_DS_Y,
-	"FaceRight": JOY_DS_A,
-	"FaceDown": JOY_DS_B,
-	"L1": JOY_L,
-	"L2": JOY_L2,
-	"L3": JOY_L3,
-	"R1": JOY_R,
-	"R2": JOY_R2,
-	"R3": JOY_R3,
+	"DpadUp": JOY_BUTTON_DPAD_UP,
+	"DpadLeft": JOY_BUTTON_DPAD_LEFT,
+	"DpadRight": JOY_BUTTON_DPAD_RIGHT,
+	"DpadDown": JOY_BUTTON_DPAD_DOWN,
+	"Select": JOY_BUTTON_BACK,
+	"Start": JOY_BUTTON_START,
+	"FaceUp": JOY_BUTTON_Y,
+	"FaceLeft": JOY_BUTTON_X,
+	"FaceRight": JOY_BUTTON_B,
+	"FaceDown": JOY_BUTTON_A,
+	"L1": JOY_BUTTON_LEFT_SHOULDER,
+	"L2": JOY_AXIS_TRIGGER_LEFT,
+	"L3": JOY_BUTTON_LEFT_STICK,
+	"R1": JOY_BUTTON_RIGHT_SHOULDER,
+	"R2": JOY_AXIS_TRIGGER_RIGHT,
+	"R3": JOY_BUTTON_RIGHT_STICK,
 	}
 
 func _ready():
@@ -44,7 +44,6 @@ func _ready():
 			o.add_item(action_dict[a])
 #			if o.get_signal_list().size() == 0:
 			#o.connect("item_selected", self, "_set_button_action", [o.name])
-	#yield(get_tree(), "idle_frame")
 	_setup_action_options()
 
 
@@ -56,13 +55,13 @@ func _setup_action_options():
 		
 		for a in InputMap.get_actions():
 			if a in action_dict.keys():
-				for e in InputMap.get_action_list(a):
+				for e in InputMap.action_get_events(a):
 					if e is InputEventJoypadButton:
 #						print("e.button_index : " + str(e.button_index))
 #						print("button_dict[o.name] : " + str(button_dict[o.name]))
 						if e.button_index == button_dict[o.name]:
 							#print("YAHOO: " + o.name)
-							o.modulate = Color.aqua
+							o.modulate = Color.AQUA
 							o.select(action_dict.keys().find(a))
 #							o.selected = action_dict.keys().find(a)
 
@@ -160,10 +159,10 @@ func _on_Default_pressed():
 func _on_Return_pressed():
 	if world.has_node("UILayer/PauseMenu"):
 		world.get_node("UILayer/PauseMenu").visible = true
-		world.get_node("UILayer/PauseMenu").focus()
+		world.get_node("UILayer/PauseMenu").do_focus()
 	if world.has_node("UILayer/TitleScreen"):
 		world.get_node("UILayer/TitleScreen").visible = true
-		world.get_node("UILayer/TitleScreen").focus()
+		world.get_node("UILayer/TitleScreen").do_focus()
 		
 	if world.has_node("UILayer/Options"):
 		world.get_node("UILayer/Options").queue_free()
@@ -172,6 +171,7 @@ func _on_Return_pressed():
 
 
 
-func focus():
+func do_focus():
 	pass
+	print("TODO: controller config is not focusing, why?")
 	#op_l2.grab_focus()

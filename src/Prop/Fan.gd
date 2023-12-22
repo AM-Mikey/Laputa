@@ -1,9 +1,9 @@
 extends Prop
 
-export var style: int = 0
+@export var style: int = 0
 
 func _ready():
-	$Sprite.frame_coords.y = style
+	$Sprite2D.frame_coords.y = style
 
 func activate():
 	am.play("click")

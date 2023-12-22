@@ -1,10 +1,10 @@
 extends Control
 
 var text: String
-onready var world = get_tree().get_root().get_node("World")
+@onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 	on_viewport_size_changed()
 	
 	$Label.text = text
@@ -18,4 +18,4 @@ func _on_AnimationPlayer_animation_finished(_anim_name):
 
 
 func on_viewport_size_changed():
-	rect_size = get_tree().get_root().size / world.resolution_scale
+	size = get_tree().get_root().size / world.resolution_scale

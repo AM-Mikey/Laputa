@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNscuttering.wav-de6084386639a81bb0f8556ddc9de132.sample"
+type="AudioStreamWAV"
+uid="uid://bwx3i3r7c77b6"
+path="res://.godot/imported/YMNscuttering.wav-de6084386639a81bb0f8556ddc9de132.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNscuttering.wav"
-dest_files=[ "res://.import/YMNscuttering.wav-de6084386639a81bb0f8556ddc9de132.sample" ]
+dest_files=["res://.godot/imported/YMNscuttering.wav-de6084386639a81bb0f8556ddc9de132.sample"]
 
 [params]
 

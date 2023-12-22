@@ -2,12 +2,12 @@ extends Trigger
 
 signal cue
 
-export var id: String
+@export var id: String
 
 func _on_EnemyCue_body_entered(_body):
 	var enemies = get_tree().get_nodes_in_group("Enemies")
 	for e in enemies:
 		if e.id == id:
-			connect("cue", e, "on_cue")
+			connect("cue", Callable(e, "on_cue"))
 	emit_signal("cue")
 	queue_free()

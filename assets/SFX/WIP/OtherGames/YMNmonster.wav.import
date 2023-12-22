@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNmonster.wav-f757edd6d8bbc8479ed6ed8dcec029f0.sample"
+type="AudioStreamWAV"
+uid="uid://dip56n5lfjfi6"
+path="res://.godot/imported/YMNmonster.wav-f757edd6d8bbc8479ed6ed8dcec029f0.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNmonster.wav"
-dest_files=[ "res://.import/YMNmonster.wav-f757edd6d8bbc8479ed6ed8dcec029f0.sample" ]
+dest_files=["res://.godot/imported/YMNmonster.wav-f757edd6d8bbc8479ed6ed8dcec029f0.sample"]
 
 [params]
 

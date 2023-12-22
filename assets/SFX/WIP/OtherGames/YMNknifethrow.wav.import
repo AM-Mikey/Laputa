@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNknifethrow.wav-bba8e6b463dca8a3e49c55041158cea0.sample"
+type="AudioStreamWAV"
+uid="uid://vule7dw1vond"
+path="res://.godot/imported/YMNknifethrow.wav-bba8e6b463dca8a3e49c55041158cea0.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNknifethrow.wav"
-dest_files=[ "res://.import/YMNknifethrow.wav-bba8e6b463dca8a3e49c55041158cea0.sample" ]
+dest_files=["res://.godot/imported/YMNknifethrow.wav-bba8e6b463dca8a3e49c55041158cea0.sample"]
 
 [params]
 

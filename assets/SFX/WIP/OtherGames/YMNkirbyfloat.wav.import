@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNkirbyfloat.wav-75197bd426e74510a3c58c9e992d39f0.sample"
+type="AudioStreamWAV"
+uid="uid://cchobuy5tw3lp"
+path="res://.godot/imported/YMNkirbyfloat.wav-75197bd426e74510a3c58c9e992d39f0.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNkirbyfloat.wav"
-dest_files=[ "res://.import/YMNkirbyfloat.wav-75197bd426e74510a3c58c9e992d39f0.sample" ]
+dest_files=["res://.godot/imported/YMNkirbyfloat.wav-75197bd426e74510a3c58c9e992d39f0.sample"]
 
 [params]
 

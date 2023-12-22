@@ -3,10 +3,10 @@
 [ext_resource path="res://src/Trigger/Sign.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+size = Vector2( 8, 8 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 24, 24 )
+size = Vector2( 24, 24 )
 
 [node name="Sign" type="Area2D"]
 collision_layer = 0

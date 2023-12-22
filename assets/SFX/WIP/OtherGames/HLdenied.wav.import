@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/HLdenied.wav-cb03c946e60d3d5169cc4defc87b80bb.sample"
+type="AudioStreamWAV"
+uid="uid://cmeoybjuggx67"
+path="res://.godot/imported/HLdenied.wav-cb03c946e60d3d5169cc4defc87b80bb.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/HLdenied.wav"
-dest_files=[ "res://.import/HLdenied.wav-cb03c946e60d3d5169cc4defc87b80bb.sample" ]
+dest_files=["res://.godot/imported/HLdenied.wav-cb03c946e60d3d5169cc4defc87b80bb.sample"]
 
 [params]
 

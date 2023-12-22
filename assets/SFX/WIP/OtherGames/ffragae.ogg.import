@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/ffragae.ogg-d532c344153e44710d66557aac66199c.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c7t0bvr6df4tx"
+path="res://.godot/imported/ffragae.ogg-d532c344153e44710d66557aac66199c.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/ffragae.ogg"
-dest_files=[ "res://.import/ffragae.ogg-d532c344153e44710d66557aac66199c.oggstr" ]
+dest_files=["res://.godot/imported/ffragae.ogg-d532c344153e44710d66557aac66199c.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

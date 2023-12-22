@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Bonk.wav-3b5ce633067f670de2614c0cf4da7d85.sample"
+type="AudioStreamWAV"
+uid="uid://5rtb7tj0amra"
+path="res://.godot/imported/Bonk.wav-3b5ce633067f670de2614c0cf4da7d85.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/Bonk.wav"
-dest_files=[ "res://.import/Bonk.wav-3b5ce633067f670de2614c0cf4da7d85.sample" ]
+dest_files=["res://.godot/imported/Bonk.wav-3b5ce633067f670de2614c0cf4da7d85.sample"]
 
 [params]
 

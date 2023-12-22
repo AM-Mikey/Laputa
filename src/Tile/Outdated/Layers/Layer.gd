@@ -1,9 +1,9 @@
-tool
+@tool
 extends TileMap
 
 func _ready():
 	if get_parent().get_parent():
-		get_parent().get_parent().connect("tile_set_changed", self, "_on_tile_set_changed")
+		get_parent().get_parent().connect("tile_set_changed", Callable(self, "_on_tile_set_changed"))
 	
 	_on_tile_set_changed()
 

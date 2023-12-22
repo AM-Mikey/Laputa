@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/snd_msg.ogg-e8f03818761be4184bb9f2ccc4b880fb.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dn3cvpqa8ui1c"
+path="res://.godot/imported/snd_msg.ogg-e8f03818761be4184bb9f2ccc4b880fb.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/Placeholder/snd_msg.ogg"
-dest_files=[ "res://.import/snd_msg.ogg-e8f03818761be4184bb9f2ccc4b880fb.oggstr" ]
+dest_files=["res://.godot/imported/snd_msg.ogg-e8f03818761be4184bb9f2ccc4b880fb.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

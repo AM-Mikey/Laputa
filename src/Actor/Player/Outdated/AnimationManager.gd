@@ -3,9 +3,9 @@ extends Node
 enum Layer {BACK, FRONT, BOTH}
 
 
-onready var pc = get_tree().get_root().get_node("World/Juniper")
-onready var mm = pc.get_node("MovementManager")
-onready var ap = pc.get_node("AnimationPlayer")
+@onready var pc = get_tree().get_root().get_node("World/Juniper")
+@onready var mm = pc.get_node("MovementManager")
+@onready var ap = pc.get_node("AnimationPlayer")
 
 
 func _physics_process(_delta):
@@ -21,7 +21,7 @@ func animate():
 
 
 	if mm.current_state == mm.states["ladder"]:
-		ap.playback_speed = climb_anim_speed
+		ap.speed_scale = climb_anim_speed
 		if get_input_dir().x != 0:
 			next_animation = get_next_animation("Climb", get_input_dir(), true)
 		else:
@@ -34,17 +34,17 @@ func animate():
 			if pc.is_on_floor():
 				
 				if get_input_dir().x != 0:
-					ap.playback_speed = run_anim_speed
+					ap.speed_scale = run_anim_speed
 					next_animation = get_next_animation("Run", get_input_dir(), pc.is_on_ssp)
 				else:
-					ap.playback_speed = 1
+					ap.speed_scale = 1
 					match pc.inspecting:
 						true: next_animation = get_next_animation("Reverseidle", pc.face_dir, true)
 						false: next_animation = get_next_animation("Stand", pc.face_dir, pc.is_on_ssp)
 
 
 			else: #arial
-				ap.playback_speed = 0
+				ap.speed_scale = 0
 				
 				if get_input_dir() == Vector2.LEFT or get_input_dir() == Vector2.RIGHT:
 					next_animation = get_next_animation("Arial", get_input_dir(), true)
@@ -65,20 +65,20 @@ func animate():
 			
 			if pc.is_on_floor():
 				if get_input_dir().x == -1:
-					ap.playback_speed = run_anim_speed
+					ap.speed_scale = run_anim_speed
 					next_animation = get_next_animation("Run", Vector2.LEFT, pc.is_on_ssp)
 				elif get_input_dir().x == 1:
-					ap.playback_speed = run_anim_speed
+					ap.speed_scale = run_anim_speed
 					next_animation = get_next_animation("Backrun", Vector2.RIGHT, pc.is_on_ssp)
 				else:
-					ap.playback_speed = 1
+					ap.speed_scale = 1
 					match pc.inspecting:
 						true: next_animation = get_next_animation("Reverseidle", pc.face_dir, true)
 						false: next_animation = get_next_animation("Stand", pc.face_dir, pc.is_on_ssp)
 
 
 			else: #arial
-				ap.playback_speed = 0
+				ap.speed_scale = 0
 				
 				if get_input_dir().x == -1:
 					next_animation = get_next_animation("Arial", Vector2.LEFT, true)
@@ -100,20 +100,20 @@ func animate():
 			
 			if pc.is_on_floor():
 				if get_input_dir().x == -1:
-					ap.playback_speed = run_anim_speed
+					ap.speed_scale = run_anim_speed
 					next_animation = get_next_animation("Backrun", Vector2.LEFT, pc.is_on_ssp)
 				elif get_input_dir().x == 1:
-					ap.playback_speed = run_anim_speed
+					ap.speed_scale = run_anim_speed
 					next_animation = get_next_animation("Run", Vector2.RIGHT, pc.is_on_ssp)
 				else:
-					ap.playback_speed = 1
+					ap.speed_scale = 1
 					match pc.inspecting:
 						true: next_animation = get_next_animation("Reverseidle", pc.face_dir, true)
 						false: next_animation = get_next_animation("Stand", pc.face_dir, pc.is_on_ssp)
 
 
 			else: #arial
-				ap.playback_speed = 0
+				ap.speed_scale = 0
 				
 				if get_input_dir().x == -1:
 					next_animation = get_next_animation("Arial", Vector2.RIGHT, true)

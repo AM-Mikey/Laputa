@@ -43,7 +43,8 @@ func load_level():
 	clip = clip_size
 
 func activate():
-	spawn_bullet(get_origin(), pc.shoot_dir)
+	var bullet = spawn_bullet(get_origin(), pc.shoot_dir)
+	bullet.instant_fizzle_check()
 	
 	cooldown_time = fire_time
 	clip -= 1
@@ -51,6 +52,7 @@ func activate():
 		reload()
 	else:
 		$AutoReload.start(reload_time)
+	
 
 func reload():
 	clip = clip_size

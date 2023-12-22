@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNexplosion.wav-dfee359f688a8bbb49e11507a2c26939.sample"
+type="AudioStreamWAV"
+uid="uid://dvq837wjtqof3"
+path="res://.godot/imported/YMNexplosion.wav-dfee359f688a8bbb49e11507a2c26939.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNexplosion.wav"
-dest_files=[ "res://.import/YMNexplosion.wav-dfee359f688a8bbb49e11507a2c26939.sample" ]
+dest_files=["res://.godot/imported/YMNexplosion.wav-dfee359f688a8bbb49e11507a2c26939.sample"]
 
 [params]
 

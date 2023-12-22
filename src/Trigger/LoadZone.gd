@@ -4,12 +4,12 @@ const TRANSITION = preload("res://src/Effect/Transition/TransitionWipe.tscn")
 
 signal level_change(level, door_index)
 
-export var level: String
-export var door_index: int = 0
-export var direction = Vector2.RIGHT
+@export var level: String
+@export var door_index: int = 0
+@export var direction = Vector2.RIGHT
 
 func _ready():
-	var _err = connect("level_change", w, "on_level_change")
+	var _err = connect("level_change", Callable(w, "on_level_change"))
 	trigger_type = "load_zone"
 	add_to_group("LevelTriggers")
 	add_to_group("LoadZones")
@@ -28,7 +28,7 @@ func enter_load_zone():
 	
 	am.play("door")
 	
-	var transition = TRANSITION.instance()
+	var transition = TRANSITION.instantiate()
 	match direction:
 		Vector2.LEFT: transition.animation = "WipeInLeft"
 		Vector2.RIGHT: transition.animation = "WipeInRight"
@@ -39,5 +39,5 @@ func enter_load_zone():
 		w.get_node("UILayer/TransitionWipe").free()
 	w.get_node("UILayer").add_child(transition)
 
-	yield(transition.get_node("AnimationPlayer"), "animation_finished")
+	await transition.get_node("AnimationPlayer").animation_finished
 	emit_signal("level_change", load(level), door_index)

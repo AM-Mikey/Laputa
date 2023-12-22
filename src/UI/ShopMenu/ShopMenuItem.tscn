@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/UI/StyleBox/ChromeRimmed.tres" type="StyleBox" id=1]
 [ext_resource path="res://src/UI/ShopMenu/ShopMenuItem.gd" type="Script" id=2]
-[ext_resource path="res://assets/Item/Items.png" type="Texture" id=4]
+[ext_resource path="res://assets/Item/Items.png" type="Texture2D" id=4]
 [ext_resource path="res://src/Item/Linen.tres" type="Resource" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -10,32 +10,32 @@ atlas = ExtResource( 4 )
 region = Rect2( 160, 0, 32, 16 )
 
 [node name="ShopMenuItem" type="MarginContainer"]
-margin_right = 48.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
+offset_right = 48.0
+offset_bottom = 48.0
+custom_minimum_size = Vector2( 48, 48 )
 focus_mode = 2
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 item = ExtResource( 5 )
-sprite = NodePath("Sprite")
-shadow = NodePath("Sprite/Shadow")
+sprite = NodePath("Sprite2D")
+shadow = NodePath("Sprite2D/Shadow")
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 48.0
-margin_bottom = 48.0
-custom_styles/panel = ExtResource( 1 )
+offset_right = 48.0
+offset_bottom = 48.0
+theme_override_styles/panel = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2( 24, 24 )
 scale = Vector2( 2, 2 )
 texture = SubResource( 1 )
 
-[node name="Shadow" type="Sprite" parent="Sprite"]
+[node name="Shadow" type="Sprite2D" parent="Sprite2D"]
 modulate = Color( 0, 0, 0, 0.501961 )
 show_behind_parent = true
 position = Vector2( 1, 1 )

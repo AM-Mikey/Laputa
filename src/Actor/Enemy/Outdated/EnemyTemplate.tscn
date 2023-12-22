@@ -3,12 +3,12 @@
 [ext_resource path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" type="AudioStream" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 80, 32 )
+size = Vector2( 80, 32 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 8 )
+size = Vector2( 8, 8 )
 
-[node name="EnemyTemplate" type="KinematicBody2D"]
+[node name="EnemyTemplate" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 10
 
@@ -25,7 +25,7 @@ shape = SubResource( 1 )
 position = Vector2( 0, -8 )
 shape = SubResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2( 0, -8 )
 hframes = 18
 

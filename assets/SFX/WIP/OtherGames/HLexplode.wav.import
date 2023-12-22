@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/HLexplode.wav-1ed1bdd674db62d68bcc187042fc046a.sample"
+type="AudioStreamWAV"
+uid="uid://dps7xob4f18mg"
+path="res://.godot/imported/HLexplode.wav-1ed1bdd674db62d68bcc187042fc046a.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/HLexplode.wav"
-dest_files=[ "res://.import/HLexplode.wav-1ed1bdd674db62d68bcc187042fc046a.sample" ]
+dest_files=["res://.godot/imported/HLexplode.wav-1ed1bdd674db62d68bcc187042fc046a.sample"]
 
 [params]
 

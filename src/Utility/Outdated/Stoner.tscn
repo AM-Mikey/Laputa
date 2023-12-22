@@ -3,16 +3,16 @@
 [ext_resource path="res://assets/SFX/Placeholder/snd_em_fire.ogg" type="AudioStream" id=1]
 [ext_resource path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" type="AudioStream" id=2]
 [ext_resource path="res://src/Utility/Outdated/Stoner.gd" type="Script" id=3]
-[ext_resource path="res://assets/Actor/Enemy/EnemyTemp.png" type="Texture" id=4]
+[ext_resource path="res://assets/Actor/Enemy/EnemyTemp.png" type="Texture2D" id=4]
 
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+size = Vector2( 8, 8 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 88, 48 )
+size = Vector2( 88, 48 )
 
-[node name="Stoner" type="KinematicBody2D"]
+[node name="Stoner" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 10
 script = ExtResource( 3 )
@@ -30,7 +30,7 @@ modulate = Color( 0, 0.0156863, 0.937255, 0.392157 )
 position = Vector2( -80, -64 )
 shape = SubResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2( 0, -8 )
 texture = ExtResource( 4 )
 hframes = 18

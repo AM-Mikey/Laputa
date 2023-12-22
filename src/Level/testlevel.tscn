@@ -5,7 +5,7 @@
 [ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Tile/Village.tres" type="TileSet" id=4]
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
-[ext_resource path="res://assets/Background/SkyDemo.png" type="Texture" id=9]
+[ext_resource path="res://assets/Background/SkyDemo.png" type="Texture2D" id=9]
 
 [node name="testlevel" type="Node2D"]
 script = ExtResource( 5 )
@@ -16,9 +16,9 @@ dialog_json = "res://src/Dialog/Village.json"
 conversation = "cutscene_test"
 
 [node name="LevelLimiter" parent="." instance=ExtResource( 2 )]
-margin_top = -240.0
-margin_right = 496.0
-margin_bottom = 16.0
+offset_top = -240.0
+offset_right = 496.0
+offset_bottom = 16.0
 texture = ExtResource( 9 )
 layers = 5
 parallax_near = 1.0
@@ -35,7 +35,7 @@ collision_layer = 8
 collision_mask = 0
 occluder_light_mask = 8
 format = 1
-tile_data = PoolIntArray( 1703956, 2, 0 )
+tile_data = PackedInt32Array( 1703956, 2, 0 )
 
 [node name="Back" type="TileMap" parent="Tiles"]
 tile_set = ExtResource( 4 )
@@ -53,7 +53,7 @@ collision_layer = 8
 collision_mask = 0
 occluder_light_mask = 8
 format = 1
-tile_data = PoolIntArray( 0, 280, 0, 1, 280, 0 )
+tile_data = PackedInt32Array( 0, 280, 0, 1, 280, 0 )
 
 [node name="FarFront" type="TileMap" parent="Tiles"]
 z_index = 2

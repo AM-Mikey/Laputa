@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/DopplerDie.wav-a0f0556de01a77f4a6c48b8866e17bb1.sample"
+type="AudioStreamWAV"
+uid="uid://76v45wmehfvp"
+path="res://.godot/imported/DopplerDie.wav-a0f0556de01a77f4a6c48b8866e17bb1.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/JFXR/DopplerDie.wav"
-dest_files=[ "res://.import/DopplerDie.wav-a0f0556de01a77f4a6c48b8866e17bb1.sample" ]
+dest_files=["res://.godot/imported/DopplerDie.wav-a0f0556de01a77f4a6c48b8866e17bb1.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

@@ -4,16 +4,16 @@ extends Enemy
 #const SNAP_LENGTH = 4.0
 #var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
-export var starting_direction = Vector2.LEFT
+@export var starting_direction = Vector2.LEFT
 var move_dir: Vector2
 var ground_dir: Vector2
 
 
 var look_dir: Vector2
 var waiting = false
-export var wait_time = 1.0
+@export var wait_time = 1.0
 
-export var climb_dir = "cw"
+@export var climb_dir = "cw"
 
 
 var did_air_frame = false
@@ -83,17 +83,19 @@ func _physics_process(_delta):
 
 	#snap_vector = ground_dir * SNAP_LENGTH
 	velocity = calculate_movevelocity(velocity, move_dir, ground_dir, speed)
-	move_and_slide(velocity, FLOOR_NORMAL)
+	set_velocity(velocity)
+	set_up_direction(FLOOR_NORMAL)
+	move_and_slide()
 	#move_and_slide_with_snap(velocity, snap_vector, FLOOR_NORMAL, true)
 	
 	animate()
 
 func get_which_wall_collided():
-	for i in range(get_slide_count()):
+	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
-		if collision.normal.x > 0:
+		if collision.get_normal().x > 0:
 			return "left"
-		elif collision.normal.x < 0:
+		elif collision.get_normal().x < 0:
 			return "right"
 	return "none"
 

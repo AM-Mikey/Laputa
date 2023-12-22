@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/Tile/TriggerTile/ConveyorTrigger.png" type="Texture" id=1]
+[ext_resource path="res://assets/Tile/TriggerTile/ConveyorTrigger.png" type="Texture2D" id=1]
 [ext_resource path="res://src/Tile/Outdated/TriggerTile/ConveyorTrigger.gd" type="Script" id=2]
 
 

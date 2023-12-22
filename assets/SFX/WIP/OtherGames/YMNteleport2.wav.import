@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNteleport2.wav-b949d12b0431925570a1da98123ebc82.sample"
+type="AudioStreamWAV"
+uid="uid://cdym37a2x0r7s"
+path="res://.godot/imported/YMNteleport2.wav-b949d12b0431925570a1da98123ebc82.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNteleport2.wav"
-dest_files=[ "res://.import/YMNteleport2.wav-b949d12b0431925570a1da98123ebc82.sample" ]
+dest_files=["res://.godot/imported/YMNteleport2.wav-b949d12b0431925570a1da98123ebc82.sample"]
 
 [params]
 

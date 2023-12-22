@@ -1,6 +1,6 @@
 extends Gun
 
-func _ready():
+func _ready(): #since preload, this happens on game start
 	display_name = "Revolver"
 	description = "Your first weapon."
 #	texture = load("res://assets/Gun/Revolver.png")
@@ -33,4 +33,5 @@ func load_level():
 			max_xp = 20
 
 func activate():
-	spawn_bullet(get_origin(), pc.shoot_dir)
+	var bullet = spawn_bullet(get_origin(), pc.shoot_dir)
+	bullet.instant_fizzle_check()

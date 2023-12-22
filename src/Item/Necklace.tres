@@ -1,15 +1,16 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://byjca3nj3tsjk"]
 
-[ext_resource path="res://src/Item/Item.gd" type="Script" id=1]
-[ext_resource path="res://assets/Item/Items.png" type="Texture" id=2]
+[ext_resource type="Script" path="res://src/Item/Item.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://c256cy5lf35mq" path="res://assets/Item/Items.png" id="2"]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
-region = Rect2( 192, 0, 32, 16 )
+[sub_resource type="AtlasTexture" id="1"]
+atlas = ExtResource("2")
+region = Rect2(192, 0, 32, 16)
 
 [resource]
-script = ExtResource( 1 )
+script = ExtResource("1")
 item_name = "Necklace"
 index = 6
-texture = SubResource( 1 )
+texture = SubResource("1")
 description = "A lost Necklace. It's not clear who the owner is."
+price = 0

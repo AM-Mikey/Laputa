@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNelevatorcall.wav-a300c02f36402e40ee3d184790f2fe37.sample"
+type="AudioStreamWAV"
+uid="uid://cugmbmm0wp4ut"
+path="res://.godot/imported/YMNelevatorcall.wav-a300c02f36402e40ee3d184790f2fe37.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNelevatorcall.wav"
-dest_files=[ "res://.import/YMNelevatorcall.wav-a300c02f36402e40ee3d184790f2fe37.sample" ]
+dest_files=["res://.godot/imported/YMNelevatorcall.wav-a300c02f36402e40ee3d184790f2fe37.sample"]
 
 [params]
 

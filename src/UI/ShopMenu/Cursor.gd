@@ -1,10 +1,10 @@
-tool
+@tool
 extends MarginContainer
 
-export var color: Color = Color.white setget _on_color_changed
+@export var color: Color = Color.WHITE: set = _on_color_changed
 
 func _on_color_changed(new):
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		color = new
 		$TL.self_modulate = new
 		$TR.self_modulate = new
@@ -14,9 +14,9 @@ func _on_color_changed(new):
 
 func _on_Cursor_resized():
 	var l = 0
-	var r = rect_size.x
+	var r = size.x
 	var t = 0
-	var b = rect_size.y
+	var b = size.y
 	
 	$TL.position = Vector2(l, t)
 	$TR.position = Vector2(r, t)

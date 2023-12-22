@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNbubbleselect.WAV-4c56de07d7a3199d40ce470b2bf1c853.sample"
+type="AudioStreamWAV"
+uid="uid://dti7sgxkjcqjc"
+path="res://.godot/imported/YMNbubbleselect.WAV-4c56de07d7a3199d40ce470b2bf1c853.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNbubbleselect.WAV"
-dest_files=[ "res://.import/YMNbubbleselect.WAV-4c56de07d7a3199d40ce470b2bf1c853.sample" ]
+dest_files=["res://.godot/imported/YMNbubbleselect.WAV-4c56de07d7a3199d40ce470b2bf1c853.sample"]
 
 [params]
 

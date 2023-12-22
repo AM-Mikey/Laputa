@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/dustyengine.wav-a66c888795560f72bb3441af4fd58417.sample"
+type="AudioStreamWAV"
+uid="uid://d2flplpty4qgu"
+path="res://.godot/imported/dustyengine.wav-a66c888795560f72bb3441af4fd58417.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/dustyengine.wav"
-dest_files=[ "res://.import/dustyengine.wav-a66c888795560f72bb3441af4fd58417.sample" ]
+dest_files=["res://.godot/imported/dustyengine.wav-a66c888795560f72bb3441af4fd58417.sample"]
 
 [params]
 

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNstompbrigade.wav-6122a73dd0bf738e3c54ed8ed4465c2f.sample"
+type="AudioStreamWAV"
+uid="uid://2cm17v1b2o04"
+path="res://.godot/imported/YMNstompbrigade.wav-6122a73dd0bf738e3c54ed8ed4465c2f.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNstompbrigade.wav"
-dest_files=[ "res://.import/YMNstompbrigade.wav-6122a73dd0bf738e3c54ed8ed4465c2f.sample" ]
+dest_files=["res://.godot/imported/YMNstompbrigade.wav-6122a73dd0bf738e3c54ed8ed4465c2f.sample"]
 
 [params]
 

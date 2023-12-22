@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/shop_extended.wav-de70e3f76e38e3fd8ca3cf35bd2eeedc.sample"
+type="AudioStreamWAV"
+uid="uid://b3rr7pann18gv"
+path="res://.godot/imported/shop_extended.wav-de70e3f76e38e3fd8ca3cf35bd2eeedc.sample"
 
 [deps]
 
 source_file="res://assets/Music/OST/shop_extended.wav"
-dest_files=[ "res://.import/shop_extended.wav-de70e3f76e38e3fd8ca3cf35bd2eeedc.sample" ]
+dest_files=["res://.godot/imported/shop_extended.wav-de70e3f76e38e3fd8ca3cf35bd2eeedc.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/HLgunclip.wav-f355ccda6e3b2857227deb1675ef508a.sample"
+type="AudioStreamWAV"
+uid="uid://bnsegdq8rp7bp"
+path="res://.godot/imported/HLgunclip.wav-f355ccda6e3b2857227deb1675ef508a.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/HLgunclip.wav"
-dest_files=[ "res://.import/HLgunclip.wav-f355ccda6e3b2857227deb1675ef508a.sample" ]
+dest_files=["res://.godot/imported/HLgunclip.wav-f355ccda6e3b2857227deb1675ef508a.sample"]
 
 [params]
 

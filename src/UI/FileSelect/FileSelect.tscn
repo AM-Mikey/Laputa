@@ -9,64 +9,64 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
-custom_constants/margin_right = 16
-custom_constants/margin_top = 16
-custom_constants/margin_left = 16
-custom_constants/margin_bottom = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_bottom = 16
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 464.0
-margin_bottom = 254.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 464.0
+offset_bottom = 254.0
 
 [node name="Margin" type="MarginContainer" parent="."]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 464.0
-margin_bottom = 254.0
-custom_constants/margin_right = 24
-custom_constants/margin_top = 16
-custom_constants/margin_left = 24
-custom_constants/margin_bottom = 16
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 464.0
+offset_bottom = 254.0
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_bottom = 16
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Panel" type="Panel" parent="Margin"]
-margin_left = 24.0
-margin_top = 16.0
-margin_right = 424.0
-margin_bottom = 222.0
-custom_styles/panel = ExtResource( 3 )
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 424.0
+offset_bottom = 222.0
+theme_override_styles/panel = ExtResource( 3 )
 
 [node name="Scroll" type="ScrollContainer" parent="Margin"]
-margin_left = 24.0
-margin_top = 16.0
-margin_right = 424.0
-margin_bottom = 222.0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 424.0
+offset_bottom = 222.0
 
 [node name="VBox" type="VBoxContainer" parent="Margin/Scroll"]
-margin_right = 400.0
-margin_bottom = 206.0
+offset_right = 400.0
+offset_bottom = 206.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 
 [node name="Panel2" parent="Margin/Scroll/VBox" instance=ExtResource( 1 )]
-margin_right = 400.0
-margin_bottom = 68.0
+offset_right = 400.0
+offset_bottom = 68.0
 
 [node name="Panel3" parent="Margin/Scroll/VBox" instance=ExtResource( 1 )]
-margin_top = 68.0
-margin_right = 400.0
-margin_bottom = 136.0
+offset_top = 68.0
+offset_right = 400.0
+offset_bottom = 136.0
 
 [node name="Panel4" parent="Margin/Scroll/VBox" instance=ExtResource( 1 )]
-margin_top = 136.0
-margin_right = 400.0
-margin_bottom = 204.0
+offset_top = 136.0
+offset_right = 400.0
+offset_bottom = 204.0

@@ -1,7 +1,7 @@
 extends Button
 
 func _ready():
-	var _err = connect("pressed", self.owner, "_on_" + name.to_lower())
+	var _err = connect("pressed", Callable(self.owner, "_on_" + name.to_lower()))
 #	var _err2 = connect("focus_entered", self, "_on_focus_entered", [])
 
 func _on_pressed():

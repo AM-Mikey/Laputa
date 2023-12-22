@@ -8,7 +8,7 @@ signal interrupt_finished
 signal fadeout_finished
 signal players_updated
 
-export var sfx_dict: Dictionary = {
+@export var sfx_dict: Dictionary = {
 	"sound_test": preload("res://assets/SFX/Placeholder/snd_menu_move.ogg"),
 	"ui_accept": preload("res://assets/SFX/Placeholder/snd_menu_select.ogg"),
 	"ui_deny": preload("res://assets/SFX/Placeholder/snd_quote_bonkhead.ogg"),
@@ -29,6 +29,8 @@ export var sfx_dict: Dictionary = {
 	"pc_hurt": preload("res://assets/SFX/Placeholder/snd_quote_hurt.ogg"),
 	"pc_jump": preload("res://assets/SFX/Placeholder/snd_quote_jump.ogg"),
 	"pc_step": preload("res://assets/SFX/Placeholder/snd_quote_walk.ogg"),
+	"pc_bonk": preload("res://assets/SFX/Placeholder/snd_quote_bonkhead.ogg"),
+	"pc_land": preload("res://assets/SFX/Placeholder/snd_thud.ogg"),
 	
 	"gun_click": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
 	"gun_shift": preload("res://assets/SFX/Placeholder/snd_switchweapon.ogg"),
@@ -58,7 +60,7 @@ export var sfx_dict: Dictionary = {
 	"npc_dialog": preload("res://assets/SFX/Placeholder/snd_msg.ogg"),
 }
 
-export var music_dict: Dictionary = {
+@export var music_dict: Dictionary = {
 	"sound_test": preload("res://assets/SFX/Placeholder/snd_menu_move.ogg"),
 	"get_item": preload("res://assets/Music/Placeholder/Got Item!.ogg"),
 	"get_hp": preload("res://assets/Music/Placeholder/Get Heart Tank!.ogg"), #TODO: rename
@@ -72,236 +74,181 @@ export var music_dict: Dictionary = {
 	"safety": preload("res://assets/Music/Placeholder/Safety.ogg"),
 	
 	"theme": preload("res://assets/Music/Placeholder/laputaintro.ogg"),
+	"shop": preload("res://assets/Music/PhiDelta_Shop.wav"),
+	"shop_intro": preload("res://assets/Music/PhiDelta_Shop_Intro.wav")
 }
 
 
-
-export var remove_duplicate_sfx = false
-export var sfx_player_max = 999 #8 #TODO: broken, triggering this causes crash from queue_free on deleted node
-var sfx_players = []
+@export var sfx_player_max = 12
 var sfx_queue = []
-export var remove_recent_duplicate_sfx = true
-export var sfx_recent_time = 0.05
+@export var remove_recent_duplicate_sfx = true
+@export var sfx_recent_time = 0.05
 var sfx_recent = []
 
-export var music_player_max = 1
-var music_players = []
+@export var music_player_max = 1
 var music_queue = []
 
-#export var track_player_max = 1
-#var track_players = []
-#var track_queue = []
-
-export var interrupt_player_max = 1
-var interrupt_players = []
+@export var interrupt_player_max = 1
 var interrupt_queue = []
 
 
-
-func _ready():
-	pass
-
-func play(sfx_string: String):
-	if sfx_dict.has(sfx_string):
-		
-		if sfx_queue.has(sfx_string) and remove_duplicate_sfx:
-			print("WARNING: SFX already playing! Removed SFX with name: " + sfx_string)
-			return
-		
-		if remove_recent_duplicate_sfx:
-			if sfx_recent.has(sfx_string):
-				print("WARNING: SFX already playing! Removed SFX with name: " + sfx_string)
-				return
-			else:
-				_do_recent_time(sfx_string)
-		
-		var player = _add_player("sfx", sfx_string)
-		while sfx_players.size() > sfx_player_max:
-			_clear_player("sfx", sfx_players[0])
-		
-		yield(player, "finished")
-		_clear_player("sfx", player)
-		
-	else:
-		printerr("ERROR: No SFX with name: " + sfx_string)
-
-func _do_recent_time(sfx_string):
-	sfx_recent.append(sfx_string)
-	yield(get_tree().create_timer(sfx_recent_time), "timeout")
-	sfx_recent.erase(sfx_string)
-
-func play_pos(sfx_string: String, actor: Node):
-	if sfx_dict.has(sfx_string):
-		
-		if sfx_queue.has(sfx_string) and remove_duplicate_sfx:
-			print("WARNING: SFX already playing! Removed SFX with name: " + sfx_string)
-			return
-		
-		if remove_recent_duplicate_sfx:
-			if sfx_recent.has(sfx_string):
-				print("WARNING: SFX already playing! Removed SFX with name: " + sfx_string)
-				return
-			else:
-				_do_recent_time(sfx_string)
-		
-		var player = _add_player("sfx", sfx_string)
-		while sfx_players.size() > sfx_player_max:
-			_clear_player("sfx", sfx_players[0])
-		
-		yield(player, "finished")
-		_clear_player("sfx", player)
-		
-	else:
-		printerr("ERROR: No SFX with name: " + sfx_string)
-
-func play_master(sfx_string: String):
-	if sfx_dict.has(sfx_string):
-		var player = _add_player("sfx", sfx_string)
-		player.bus = "Master"
-		while sfx_players.size() > sfx_player_max:
-			_clear_player("sfx", sfx_players[0])
-		yield(player, "finished")
-		_clear_player("sfx", player)
-	else:
-		printerr("ERROR: No SFX with name: " + sfx_string)
-
-func play_music(music_string):
-	if music_dict.has(music_string):
-		if music_queue.has(music_string): #don't play if already playing
-			return
-		
-		var player = _add_player("music", music_string)
-		while music_players.size() > music_player_max:
-			_clear_player("music", music_players[0])
-		
-		yield(player, "finished")
-		_clear_player("music", player)
-	
-	else:
-		printerr("ERROR: No music with name: " + music_string)
-
-
-
-func play_track(track_path):
-#		if track_queue.has(track_string): #don't play if already playing
-#			return
+func play(sfx_string: String, actor = null, bus = null):
+	if _check_sfx(sfx_string):
+		var player
+		if actor == null: #non-positional
+			player = _add_player("sfx", sfx_string)
+		else: #positional
+			player = _add_player("pos", sfx_string, actor)
 			
-	var file_name = track_path.get_file().get_basename()
-	var file_info = file_name.split("_")
-	
-	var dir = Directory.new()
-	var intro_path = track_path.get_base_dir().plus_file(file_info[0] + "_" + file_info[1] + "_Intro.wav")
-	var loop_path = track_path.get_base_dir().plus_file(file_info[0] + "_" + file_info[1] + ".wav")
-	var outro_path = track_path.get_base_dir().plus_file(file_info[0] + "_" + file_info[1] + "_Outro.wav")
-	
-	
-	var track = {}
-	track["producer"] = file_info[0]
-	track["name"] = file_info[1]
-	track["intro"] = ""
-	track["loop"] = loop_path
-	track["outro"] = ""
-	
-	if dir.file_exists(intro_path):
-		track["intro"] = intro_path
-	if dir.file_exists(outro_path):
-		track["intro"] = outro_path
+		if sfx_queue.size() > sfx_player_max:
+			print("WARNING: Too many SFX players! Removed first player")
+			_clear_player("sfx", sfx_queue.front())
+			
+		if bus != null: #non-specific bus
+			player.bus = bus
+			
+		await player.finished
+		var queue_slot = [player, sfx_string]
+		_clear_player("sfx", queue_slot)
 
 
+func play_music(music_string): #TODO: add a resource with track info
+	#var track = {
+		#"producer" = file_info[0],
+		#"name" = file_info[1],
+		#"intro" = "",
+		#"loop" = loop_path,
+		#"outro" = ""
+	#}
+	
+	var loop = music_string #TODO: implement outro
+	var intro = ""
+	if music_dict.has(String(music_string + "_intro")) :
+		intro = String(music_string + "_intro")
+	
+	
+	var now_playing = ""
 	var player
-	if track["intro"] != "": #has intro
-		player = _add_track_player(track["intro"])
-		while music_players.size() > music_player_max:
-			_clear_player("music", music_players[0])
-#		yield(get_tree(), "idle_frame")
-		yield(player, "finished")
-		player.stream = load(track["loop"])
-		player.play()
-	else:
-		player = _add_track_player(track["loop"])
+	if intro != "":
+		player = _add_player("music", intro)
+		now_playing = "intro"
+	else: #no intro
+		player = _add_player("music", loop)
+		now_playing = "loop"
 	
-#	_clear_player("music", player)
+	if music_queue.size() > music_player_max:
+		_clear_player("music", music_queue.front())
+	
+	if now_playing == "intro": #switch to loop
+		await player.finished
+		var queue_slot = [player, intro]
+		_clear_player("music", queue_slot)
+		player = _add_player("music", loop)
+		now_playing = "loop"
 
 
 
-func play_interrupt(music_string): #play_time, wait_start, wait_end
-	for p in music_players: #pause music players
-		p.stream_paused = true
-
+func play_interrupt(music_string):
+	pause_music(true)
 	var player = _add_player("interrupt", music_string)
-	while interrupt_players.size() > interrupt_player_max:
-		_clear_player("interrupt", interrupt_players[0])
-	
-	yield(player, "finished")
-	_clear_player("interrupt", player)
+	if interrupt_queue.size() > interrupt_player_max:
+		_clear_player("interrupt", interrupt_queue.front())
+	await player.finished
+	var queue_slot = [player, music_string]
+	_clear_player("interrupt", queue_slot)
 	emit_signal("interrupt_finished")
-	for p in music_players: #unpause music players
-		p.stream_paused = false
+	pause_music(false)
 
 
-#####
+### ADD AND REMOVE ###
 
-func _add_player(type, string):
-	get(type + "_queue").append(string)
-	var player = SFX_PLAYER.instance() if type == "sfx" else MUSIC_PLAYER.instance()
-	get(type + "_players").append(player)
-	add_child(player)
-	player.stream = sfx_dict[string] if type == "sfx" else music_dict[string]
+func _add_player(type, audio_string, actor = null):
+	var player 
+	match type:
+		"sfx":
+			player = SFX_PLAYER.instantiate()
+			player.stream = sfx_dict[audio_string]
+			add_child(player)
+			var queue_slot = [player, audio_string]
+			sfx_queue.append(queue_slot)
+		"pos":
+			player = POS_SFX_PLAYER.instantiate()
+			player.stream = sfx_dict[audio_string]
+			actor.add_child(player)
+			var queue_slot = [player, audio_string]
+			sfx_queue.append(queue_slot)
+		"interrupt":
+			player = MUSIC_PLAYER.instantiate()
+			player.stream = music_dict[audio_string]
+			add_child(player)
+			var queue_slot = [player, audio_string]
+			interrupt_queue.append(queue_slot)
+		"music": 
+			player = MUSIC_PLAYER.instantiate()
+			player.stream = music_dict[audio_string]
+			add_child(player)
+			var queue_slot = [player, audio_string]
+			music_queue.append(queue_slot)
 	player.play()
 	emit_signal("players_updated")
 	return player
 
-func _add_track_player(path):
-	#get("music_queue").append(player)
-	var player = MUSIC_PLAYER.instance()
-	get("music_players").append(player)
-	add_child(player)
-	player.stream = load(path)
-	player.play()
+
+func _clear_player(type, queue_slot):
+	match type:
+		"sfx", "pos":
+			sfx_queue.erase(queue_slot)
+		"music":
+			music_queue.erase(queue_slot)
+		"interrupt":
+			interrupt_queue.erase(queue_slot)
+	#queue_slot[0].queue_free() #player
 	emit_signal("players_updated")
-	return player
 
+### CONTROLS ###
 
-func _add_pos_player(string, actor):
-	sfx_queue.append(string)
-	var player = POS_SFX_PLAYER.instance()
-	sfx_players.append(player)
-	actor.add_child(player)
-	player.stream = sfx_dict[string]
-	player.play()
-	emit_signal("players_updated")
-	return player
-
-func _clear_player(type, player):
-		get(type + "_queue").pop_front()
-		get(type + "_players").pop_front()
-		player.queue_free()
-		emit_signal("players_updated")
-
-#####
-
-func stop_sfx(): #TODO: shouldnt these methods use _clear_player?
-	for p in sfx_players:
-		p.queue_free()
+func stop_sfx():
+	for s in sfx_queue:
+		s[0].queue_free()
 		emit_signal("players_updated")
 
 func stop_music():
-	for p in music_players:
-		p.queue_free()
+	for s in music_queue:
+		s[0].queue_free()
 		emit_signal("players_updated")
 
+func pause_music(pause = true):
+	for s in music_queue:
+		s[0].stream_paused = pause
+
 func fade_music(duration = 1.0):
-	if music_players.empty():
+	if music_queue.is_empty():
 		return
-	
-	var player = music_players.front()
-	var tween = Tween.new()
+	var player = music_queue.front()[0]
+	var tween = get_tree().create_tween()
 	add_child(tween)
-	tween.interpolate_property(player, "volume_db", player.volume_db, -80, duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	tween.start()
-	yield(tween, "tween_completed")
-	_clear_player("music", player)
-	
-	
-	tween.queue_free()
+	tween.tween_property(player, "volume_db", -80, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	await tween.finished
+	_clear_player("music", music_queue.front())
 	emit_signal("fadeout_finished")
+
+
+### GETTERS ###
+
+func _check_sfx(sfx_string) -> bool:
+	if not sfx_dict.has(sfx_string):
+		printerr("ERROR: No SFX with name: " + sfx_string)
+		return false
+	
+	if remove_recent_duplicate_sfx:
+		if sfx_recent.has(sfx_string):
+			print("WARNING: SFX already playing! Removed SFX with name: " + sfx_string)
+			return false
+		else:
+			_do_recent_time(sfx_string)
+	return true
+
+func _do_recent_time(sfx_string):
+	sfx_recent.append(sfx_string)
+	await get_tree().create_timer(sfx_recent_time).timeout
+	sfx_recent.erase(sfx_string)

@@ -6,22 +6,22 @@ var state = "idle"
 var active_handle = null
 var drag_offset = Vector2.ZERO
 
-onready var world = get_tree().get_root().get_node("World")
-onready var editor = world.get_node("EditorLayer/Editor")
+@onready var world = get_tree().get_root().get_node("World")
+@onready var editor = world.get_node("EditorLayer/Editor")
 
 var buttons = []
 
 func _ready():
 	for h in $Handles/Top.get_children():
-			h.connect("button_down", self, "on_handle", [h])
+			h.connect("button_down", Callable(self, "on_handle").bind(h))
 			buttons.append(h)
 	for h in $Handles/Mid.get_children():
-			h.connect("button_down", self, "on_handle", [h])
+			h.connect("button_down", Callable(self, "on_handle").bind(h))
 			buttons.append(h)
 	for h in $Handles/Bottom.get_children():
-			h.connect("button_down", self, "on_handle", [h])
+			h.connect("button_down", Callable(self, "on_handle").bind(h))
 			buttons.append(h)
-	connect("selected", editor.inspector, "on_selected")
+	connect("selected", Callable(editor.inspector, "on_selected"))
 
 
 func disable():
@@ -38,8 +38,8 @@ func _input(event):
 		state = "idle"
 		return
 	if event is InputEventMouseMotion and state != "idle": #dragging or resizing
-		var x = stepify(get_global_mouse_position().x + drag_offset.x, 16)
-		var y = stepify(get_global_mouse_position().y + drag_offset.y, 16)
+		var x = snapped(get_global_mouse_position().x + drag_offset.x, 16)
+		var y = snapped(get_global_mouse_position().y + drag_offset.y, 16)
 		
 		var parent_x = get_parent().position.x
 		var parent_y = get_parent().position.y
@@ -50,32 +50,32 @@ func _input(event):
 			"resize":
 				match active_handle.name:
 					"TopLeft":
-						margin_top = y - parent_y
-						margin_left = x - parent_x
+						offset_top = y - parent_y
+						offset_left = x - parent_x
 					"TopRight":
-						margin_top = y - parent_y
-						margin_right = x - parent_x
+						offset_top = y - parent_y
+						offset_right = x - parent_x
 					"BottomLeft":
-						margin_bottom = y - parent_y
-						margin_left = x - parent_x
+						offset_bottom = y - parent_y
+						offset_left = x - parent_x
 					"BottomRight":
-						margin_bottom = y - parent_y
-						margin_right = x - parent_x
+						offset_bottom = y - parent_y
+						offset_right = x - parent_x
 					"Top":
-						margin_top = y - parent_y
+						offset_top = y - parent_y
 					"Bottom":
-						margin_bottom = y - parent_y
+						offset_bottom = y - parent_y
 					"Left":
-						margin_left = x - parent_x
+						offset_left = x - parent_x
 					"Right":
-						margin_right = x - parent_x
+						offset_right = x - parent_x
 				
 				var col = get_parent().get_node("CollisionShape2D")
 				var parent = get_parent()
 				var new_shape = RectangleShape2D.new()
-				new_shape.extents = rect_size * 0.5
+				new_shape.size = size * 0.5
 				get_parent().get_node("CollisionShape2D").shape = new_shape
-				get_parent().get_node("CollisionShape2D").position = rect_position + new_shape.extents
+				get_parent().get_node("CollisionShape2D").position = position + new_shape.size
 				
 				get_parent().visual.update()
 
@@ -89,7 +89,7 @@ func on_handle(handle):
 		#print("handle grabbed")
 		state = "resize"
 		active_handle = handle
-		drag_offset = handle.rect_global_position - get_global_mouse_position()
+		drag_offset = handle.global_position - get_global_mouse_position()
 	else:
 		state = "drag"
 		drag_offset = get_parent().position - get_global_mouse_position()
@@ -97,7 +97,7 @@ func on_handle(handle):
 
 
 func on_editor_select():
-	modulate = Color.red
+	modulate = Color.RED
 
 func on_editor_deselect():
 	modulate = Color(1,1,1)

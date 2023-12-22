@@ -1,16 +1,16 @@
 extends Control
 #TODO: this scene doesnt pass mouse input for some reason.
 
-onready var world = get_tree().get_root().get_node("World")
+@onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 	on_viewport_size_changed()
 	
 	if is_instance_valid(world.get_node("Juniper")):
 		var pc = world.get_node("Juniper")
-		pc.connect("guns_updated", self, "on_guns_updated")
-		am.connect("players_updated", self, "on_audio_players_updated")
+		pc.connect("guns_updated", Callable(self, "on_guns_updated"))
+		am.connect("players_updated", Callable(self, "on_audio_players_updated"))
 		on_guns_updated(pc.guns.get_children())
 	
 	if world.is_release:
@@ -23,7 +23,7 @@ func _ready():
 func _physics_process(_delta):
 	get_parent().move_child(self, get_parent().get_child_count() - 1)
 	$VBox/General/FPS.text = str(Engine.get_frames_per_second()) + " fps" 
-	$VBox/General/Screen.text = str(OS.get_window_size().x) + "x" + str(OS.get_window_size().y)
+	$VBox/General/Screen.text = str(get_window().get_size().x) + "x" + str(get_window().get_size().y)
 	
 	
 	if is_instance_valid(world.get_node("Juniper")):
@@ -51,8 +51,8 @@ func _physics_process(_delta):
 		$VBox/HBox/C1/A/ShootDir.text = str("%2.f" % pc.shoot_dir.x) + "," + str("%2.f" % pc.shoot_dir.y)
 
 
-		$VBox/HBox/C2/A/CameraPos.text = str("%4.f" % pc.get_node("PlayerCamera").get_camera_screen_center().x) + "," + str("%4.f" % pc.get_node("PlayerCamera").get_camera_screen_center().y)
-		$VBox/HBox/C2/A/CameraOffset.text = str("%+0.2f" % pc.get_node("PlayerCamera").offset_h) + "," + str("%+0.2f" % pc.get_node("PlayerCamera").offset_v)
+		$VBox/HBox/C2/A/CameraPos.text = str("%4.f" % pc.get_node("PlayerCamera").get_screen_center_position().x) + "," + str("%4.f" % pc.get_node("PlayerCamera").get_screen_center_position().y)
+		$VBox/HBox/C2/A/CameraOffset.text = str("%+0.2f" % pc.get_node("PlayerCamera").drag_horizontal_offset) + "," + str("%+0.2f" % pc.get_node("PlayerCamera").drag_vertical_offset)
 
 		$VBox/HBox/C2/A/Disabled.text = str(pc.disabled)
 		$VBox/HBox/C2/A/Invincible.text = str(pc.invincible)
@@ -92,4 +92,4 @@ func _clear_array(array):
 
 
 func on_viewport_size_changed():
-	rect_size = get_tree().get_root().size / world.get_node("DebugLayer").scale
+	size = get_tree().get_root().size / Vector2i(world.get_node("DebugLayer").scale)

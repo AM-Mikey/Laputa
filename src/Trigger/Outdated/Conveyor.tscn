@@ -3,10 +3,10 @@
 [ext_resource path="res://src/Trigger/Outdated/Conveyor.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+size = Vector2( 8, 8 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 2.5 )
+size = Vector2( 8, 2.5 )
 
 [node name="Conveyor" type="StaticBody2D"]
 collision_layer = 8

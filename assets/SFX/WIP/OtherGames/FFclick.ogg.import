@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/FFclick.ogg-0d2e50e2ff0032163b832fd51a548d6a.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cfqpv74mdfhgo"
+path="res://.godot/imported/FFclick.ogg-0d2e50e2ff0032163b832fd51a548d6a.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/FFclick.ogg"
-dest_files=[ "res://.import/FFclick.ogg-0d2e50e2ff0032163b832fd51a548d6a.oggstr" ]
+dest_files=["res://.godot/imported/FFclick.ogg-0d2e50e2ff0032163b832fd51a548d6a.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

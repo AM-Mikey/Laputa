@@ -1,5 +1,6 @@
+@icon("res://assets/Icon/BossIcon.png")
 extends Actor
-class_name Boss, "res://assets/Icon/BossIcon.png"
+class_name Boss
 
 const BLOOD = preload("res://src/Effect/EnemyBloodEffect.tscn")
 
@@ -12,8 +13,8 @@ var max_hp: int
 var damage_on_contact: int
 var recent_damage_taken: int
 
-onready var world = get_tree().get_root().get_node("World")
-onready var hud = get_tree().get_root().get_node("World/UILayer/HUD")
+@onready var world = get_tree().get_root().get_node("World")
+@onready var hud = get_tree().get_root().get_node("World/UILayer/HUD")
 
 #func _ready():
 	#hud.get_node("Boss").visible = true
@@ -25,7 +26,7 @@ func hit(damage, blood_direction):
 	#emit_signal("health_updated", hp)
 	$PosHurt.play()
 	hp -= damage
-	var blood = BLOOD.instance()
+	var blood = BLOOD.instantiate()
 	for l in get_tree().get_nodes_in_group("Levels"):
 		world.get_node("Front").add_child(blood)
 	blood.global_position = global_position

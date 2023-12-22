@@ -1,6 +1,6 @@
 extends Node2D
 
-export(NodePath) var start_state
+@export var start_state: NodePath
 var current_state
 
 func _ready():

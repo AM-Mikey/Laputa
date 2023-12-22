@@ -4,12 +4,12 @@ const TRANSITION = preload("res://src/Effect/Transition/TransitionIris.tscn")
 
 signal level_change(level, door_index)
 
-export var level: String
-export var door_index: int = 0
-export var locked = false
+@export var level: String
+@export var door_index: int = 0
+@export var locked = false
 
 func _ready():
-	var _err = connect("level_change", w, "on_level_change") #TODO a better way of not returning this
+	var _err = connect("level_change", Callable(w, "on_level_change")) #TODO a better way of not returning this
 	trigger_type = "door"
 	add_to_group("LevelTriggers")
 	add_to_group("Doors")
@@ -44,12 +44,12 @@ func enter_door():
 	am.play("door")
 	am.fade_music()
 	
-	var transition = TRANSITION.instance()
+	var transition = TRANSITION.instantiate()
 	if w.get_node("UILayer").has_node("TransitionIris"):
 		w.get_node("UILayer/TransitionIris").free()
 	w.get_node("UILayer").add_child(transition)
 	
-	yield(transition.get_node("AnimationPlayer"), "animation_finished")
+	await transition.get_node("AnimationPlayer").animation_finished
 	
 	print("door state start")
 	active_pc.mm.change_state("run")

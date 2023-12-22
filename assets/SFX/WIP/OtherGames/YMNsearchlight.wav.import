@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNsearchlight.wav-05adcb7eb5a04d0c3b3b038b95e5465c.sample"
+type="AudioStreamWAV"
+uid="uid://of8p7aurdbmy"
+path="res://.godot/imported/YMNsearchlight.wav-05adcb7eb5a04d0c3b3b038b95e5465c.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNsearchlight.wav"
-dest_files=[ "res://.import/YMNsearchlight.wav-05adcb7eb5a04d0c3b3b038b95e5465c.sample" ]
+dest_files=["res://.godot/imported/YMNsearchlight.wav-05adcb7eb5a04d0c3b3b038b95e5465c.sample"]
 
 [params]
 

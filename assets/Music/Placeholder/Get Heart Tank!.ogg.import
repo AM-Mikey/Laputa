@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/Get Heart Tank!.ogg-12ed625bb1a03bfe6db974bf4f47ead9.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bucygt2kf5835"
+path="res://.godot/imported/Get Heart Tank!.ogg-12ed625bb1a03bfe6db974bf4f47ead9.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/Music/Placeholder/Get Heart Tank!.ogg"
-dest_files=[ "res://.import/Get Heart Tank!.ogg-12ed625bb1a03bfe6db974bf4f47ead9.oggstr" ]
+dest_files=["res://.godot/imported/Get Heart Tank!.ogg-12ed625bb1a03bfe6db974bf4f47ead9.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

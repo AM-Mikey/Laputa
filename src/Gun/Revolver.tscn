@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://byv37yjh2rp36"]
 
-[ext_resource path="res://src/Gun/Revolver.gd" type="Script" id=1]
-[ext_resource path="res://assets/Gun/Revolver.png" type="Texture" id=2]
+[ext_resource type="Script" path="res://src/Gun/Revolver.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dtdexbpc2hbtu" path="res://assets/Gun/Revolver.png" id="2"]
 
 [node name="Revolver" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2")
 
-[node name="Muzzle" type="Position2D" parent="."]
-position = Vector2( -6, -1 )
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(-6, -1)
+
+[node name="Lifetime" type="Timer" parent="."]

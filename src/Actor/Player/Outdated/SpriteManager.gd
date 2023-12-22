@@ -1,14 +1,14 @@
-tool
+@tool
 extends Node2D
 
-export var texture: StreamTexture setget on_texture_changed
-export var hframe: int setget on_hframe_changed
-export var back_vframe: int setget on_back_vframe_changed
-export var front_vframe: int setget on_front_vframe_changed
+@export var texture: CompressedTexture2D: set = on_texture_changed
+@export var hframe: int: set = on_hframe_changed
+@export var back_vframe: int: set = on_back_vframe_changed
+@export var front_vframe: int: set = on_front_vframe_changed
 
 
-onready var back = $Back#get_parent().get_node("Back")
-onready var front = $Front#get_parent().get_node("Front")
+@onready var back = $Back#get_parent().get_node("Back")
+@onready var front = $Front#get_parent().get_node("Front")
 
 func on_texture_changed(new_texture): #TODO, texture needs to be changed before frames
 	back.texture = new_texture

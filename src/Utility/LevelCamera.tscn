@@ -1,8 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://defadp8dyc6vc"]
 
-[ext_resource path="res://src/Utility/LevelCamera.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://src/Utility/LevelCamera.gd" id="1"]
 
 [node name="LevelCamera" type="Camera2D"]
 z_index = 100
-current = true
-script = ExtResource( 1 )
+script = ExtResource("1")

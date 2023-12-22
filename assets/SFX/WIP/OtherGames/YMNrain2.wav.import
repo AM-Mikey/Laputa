@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNrain2.wav-f63a42d1015d57a4265d95d7388d025b.sample"
+type="AudioStreamWAV"
+uid="uid://b4cuxnrvlaxyw"
+path="res://.godot/imported/YMNrain2.wav-f63a42d1015d57a4265d95d7388d025b.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNrain2.wav"
-dest_files=[ "res://.import/YMNrain2.wav-f63a42d1015d57a4265d95d7388d025b.sample" ]
+dest_files=["res://.godot/imported/YMNrain2.wav-f63a42d1015d57a4265d95d7388d025b.sample"]
 
 [params]
 

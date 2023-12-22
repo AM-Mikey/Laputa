@@ -3,7 +3,7 @@
 [ext_resource path="res://src/Trigger/Ladder.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5, 8 )
+size = Vector2( 5, 8 )
 
 [node name="Ladder" type="Area2D"]
 collision_layer = 0

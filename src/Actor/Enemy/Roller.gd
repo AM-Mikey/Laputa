@@ -1,6 +1,6 @@
 extends Enemy
 
-export var start_dir = Vector2.LEFT
+@export var start_dir = Vector2.LEFT
 
 var move_dir
 
@@ -19,7 +19,10 @@ func _physics_process(delta):
 	if disabled or dead:
 		return
 	velocity = calculate_movevelocity(velocity, move_dir, speed)
-	velocity = move_and_slide(velocity, FLOOR_NORMAL)
+	set_velocity(velocity)
+	set_up_direction(FLOOR_NORMAL)
+	move_and_slide()
+	velocity = velocity
 
 	if is_on_wall():
 		move_dir *= -1
@@ -40,10 +43,10 @@ func calculate_movevelocity(linearvelocity: Vector2, move_dir: Vector2, speed: V
 
 	if is_on_floor():
 		if friction == true:
-			out.x = lerp(out.x, 0, ground_cof)
+			out.x = lerp(out.x, 0.0, ground_cof)
 	else:
 		if friction == true:
-			out.x = lerp(out.x, 0, air_cof)
+			out.x = lerp(out.x, 0.0, air_cof)
 	return out
 
 func animate():

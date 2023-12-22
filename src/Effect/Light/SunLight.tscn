@@ -1,30 +1,30 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://bbwmr0cmbastp"]
 
-[ext_resource path="res://src/Effect/Light/SunLight.gd" type="Script" id=1]
-[ext_resource path="res://assets/Effect/Light/White32.png" type="Texture" id=2]
-[ext_resource path="res://assets/Effect/Light/SunLightIcon.png" type="Texture" id=3]
+[ext_resource type="Script" path="res://src/Effect/Light/SunLight.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://c6eiwwhgpql8e" path="res://assets/Effect/Light/White32.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bqlqnbmkk0ewe" path="res://assets/Effect/Light/SunLightIcon.png" id="3"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(8, 8)
 
 [node name="SunLight" type="Area2D"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 3 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3")
 
-[node name="Light2D" type="Light2D" parent="."]
-scale = Vector2( 500, 500 )
-texture = ExtResource( 2 )
-color = Color( 0.501961, 0.501961, 0.501961, 1 )
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(500, 500)
+color = Color(0.501961, 0.501961, 0.501961, 1)
 range_item_cull_mask = 7
 shadow_enabled = true
-shadow_color = Color( 0, 0, 0, 1 )
+shadow_color = Color(0, 0, 0, 1)
 shadow_item_cull_mask = 14
+texture = ExtResource("2")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 light_mask = 0
-color = Color( 0.501961, 0.501961, 0.501961, 1 )
+color = Color(0.501961, 0.501961, 0.501961, 1)

@@ -10,7 +10,7 @@ func _ready():
 
 func _process(_delta):
 	if get_parent() != null:
-		$Sprite.rotation = 2 * PI - get_parent().rotation
+		$Sprite2D.rotation = 2 * PI - get_parent().rotation
 
 
 func die():
@@ -24,7 +24,7 @@ func die():
 		$DamagenumTimer.stop()
 		_on_DamagenumTimer_timeout()
 		
-		var explosion = EXPLOSION.instance()
+		var explosion = EXPLOSION.instantiate()
 		get_tree().get_root().get_node("World/Front").add_child(explosion)
 		explosion.position = global_position
 		

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Curelapse_Orphanage.wav-330b3ba344fc8d6515ca9b07c2e5ea05.sample"
+type="AudioStreamWAV"
+uid="uid://cf0mn0un881mo"
+path="res://.godot/imported/Curelapse_Orphanage.wav-330b3ba344fc8d6515ca9b07c2e5ea05.sample"
 
 [deps]
 
 source_file="res://assets/Music/Curelapse_Orphanage.wav"
-dest_files=[ "res://.import/Curelapse_Orphanage.wav-330b3ba344fc8d6515ca9b07c2e5ea05.sample" ]
+dest_files=["res://.godot/imported/Curelapse_Orphanage.wav-330b3ba344fc8d6515ca9b07c2e5ea05.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

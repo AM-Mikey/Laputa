@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/smalljump.wav-e9957c1eb14e44b7184437648ad7ae75.sample"
+type="AudioStreamWAV"
+uid="uid://c08grdrlyl4ul"
+path="res://.godot/imported/smalljump.wav-e9957c1eb14e44b7184437648ad7ae75.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/smalljump.wav"
-dest_files=[ "res://.import/smalljump.wav-e9957c1eb14e44b7184437648ad7ae75.sample" ]
+dest_files=["res://.godot/imported/smalljump.wav-e9957c1eb14e44b7184437648ad7ae75.sample"]
 
 [params]
 

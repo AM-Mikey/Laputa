@@ -2,7 +2,7 @@
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -24, 40, 0, 0, 0, 0, -23.0154, -27.1475, 0, 0, 0, 0, 40, -27.1475, 0, 0, 0, 0, 40, 40, 0, 0, 0, 0, -24, 40 )
+"points": PackedVector2Array( 0, 0, 0, 0, -24, 40, 0, 0, 0, 0, -23.0154, -27.1475, 0, 0, 0, 0, 40, -27.1475, 0, 0, 0, 0, 40, 40, 0, 0, 0, 0, -24, 40 )
 }
 
 [node name="SimpleTrack" type="Path2D"]

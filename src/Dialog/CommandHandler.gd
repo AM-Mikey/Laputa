@@ -3,12 +3,12 @@ extends Node
 const YN = preload("res://src/Dialog/DialogYesNo.tscn")
 const TBOX = preload("res://src/Dialog/TopicBox.tscn")
 
-onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_tree().get_root().get_node("World/Juniper")
-onready var db = get_parent()
+@onready var world = get_tree().get_root().get_node("World")
+@onready var pc = get_tree().get_root().get_node("World/Juniper")
+@onready var db = get_parent()
 
-onready var tb = db.get_node("Margin/HBox/RichTextBox")
-onready var face_sprite = db.get_node("Margin/HBox/Face/Sprite")
+@onready var tb = db.get_node("Margin/HBox/RichTextBox")
+@onready var face_sprite = db.get_node("Margin/HBox/Face/Sprite2D")
 
 func parse_command(string):
 	var command = string.split(",", true, 1)
@@ -53,7 +53,7 @@ func parse_command(string):
 
 		
 		"clear":#																		clears the text
-			tb.bbcode_text = ""
+			tb.text = ""
 		"wait":#					/wait, (float: duration = 1.0)						clears text and hides db until duration
 			wait(argument)
 		
@@ -61,12 +61,12 @@ func parse_command(string):
 			db.auto_input = true
 		"pass":#																		automatically progresses the next line
 			db.auto_input = true
-			yield(get_tree().create_timer(0.1),"timeout") #a bad way of doing this
+			await get_tree().create_timer(0.1).timeout #a bad way of doing this
 			db.auto_input = false
 			
 		"tbox":
 			pc.disable()
-			world.get_node("UILayer").add_child(TBOX.instance())
+			world.get_node("UILayer").add_child(TBOX.instantiate())
 
 
 
@@ -90,8 +90,8 @@ func face(string):
 	face_sprite.hframes = face_sprite.texture.get_width() / 48
 	face_sprite.frame = expression
 	
-	$Tween.interpolate_property(face_sprite, "position", face_sprite.position, Vector2.ZERO, 0.1, Tween.TRANS_SINE, Tween.EASE_OUT)
-	$Tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property(face_sprite, "position", Vector2.ZERO, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 func flip_face(arguement):
 	if not arguement:
@@ -100,19 +100,19 @@ func flip_face(arguement):
 		db.flip_face(arguement)
 
 func display_name(string):
-	tb.bbcode_text = "" #clear text for new speaker
+	tb.text = "" #clear text for new speaker
 	
 	var color = "white"
 	var name_regex = RegEx.new()
 	name_regex.compile("\\[b]\\[color=" + color + "].*\\[/color]\\[/b]")
-	tb.bbcode_text = name_regex.sub(tb.bbcode_text, "")
+	tb.text = name_regex.sub(tb.text, "")
 
 	if string == "":
 		printerr("COMMAND ERROR: no npc given for /name")
 		return
 	
 	var display_name = string.capitalize() + ": "
-	tb.bbcode_text = "[b][color=" + color + "]" + display_name + "[/color][/b]" + tb.bbcode_text
+	tb.text = "[b][color=" + color + "]" + display_name + "[/color][/b]" + tb.text
 	
 func do_hide(string):
 	if string == "":
@@ -157,21 +157,21 @@ func walk(string):
 
 func yes_no():
 	db.busy = true
-	var yn = YN.instance()
+	var yn = YN.instantiate()
 	add_child(yn)
 	
-	yn.get_node("MarginContainer/HBoxContainer/Yes").connect("pressed", self, "on_select_branch", ["dba"])
-	yn.get_node("MarginContainer/HBoxContainer/No").connect("pressed", self, "on_select_branch", ["dbb"])
+	yn.get_node("MarginContainer/HBoxContainer/Yes").connect("pressed", Callable(self, "on_select_branch").bind("dba"))
+	yn.get_node("MarginContainer/HBoxContainer/No").connect("pressed", Callable(self, "on_select_branch").bind("dbb"))
 
 func on_select_branch(branch):
 	if branch != null:
 		seek("/" + branch)
 		
 	print("adding extra newline") #inserting newlines like this bypasses the input_event() line check, so add that code here
-	tb.bbcode_text += "\n"
+	tb.text += "\n"
 	db.busy = false
 	if tb.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
-		tb.bbcode_text = ""
+		tb.text = ""
 	db.dialog_loop()
 
 
@@ -179,7 +179,7 @@ func end_branch():
 	db.active = false
 	db.flash_cursor()
 	print("adding back newline")
-	tb.bbcode_text += "\n"
+	tb.text += "\n"
 	seek("/m")
 	db.step -= 3 #5 it changed #WHY WHY WHY WHY WHY #this is probably the cause of the step number going out of sync
 	#we should hope to eliminate steps alltogether
@@ -207,8 +207,8 @@ func flip(direction, string):
 		if n.id == id:
 			found_npcs += 1
 			match direction:
-				Vector2.LEFT: n.get_node("Sprite").flip_h = false
-				Vector2.RIGHT: n.get_node("Sprite").flip_h = true
+				Vector2.LEFT: n.get_node("Sprite2D").flip_h = false
+				Vector2.RIGHT: n.get_node("Sprite2D").flip_h = true
 
 	if found_npcs == 0:
 		printerr("COMMAND ERROR: could not find NPC with id: " + id)
@@ -219,11 +219,11 @@ func wait(string):
 	
 	db.visible = false
 	db.busy = true
-	yield(get_tree().create_timer(wait_time), "timeout")
+	await get_tree().create_timer(wait_time).timeout
 	
 	db.visible = true
 	db.busy = false
-	tb.bbcode_text = ""
+	tb.text = ""
 	db.dialog_loop()
 	print("finished waiting")
 

@@ -1,11 +1,11 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=2]
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://dceypmylvy2ho"]
 
-[ext_resource path="res://assets/UI/StyleBox/StoneBeveled.png" type="Texture" id=1]
+[ext_resource type="Texture2D" uid="uid://cee7t2onua5g1" path="res://assets/UI/StyleBox/StoneBeveled.png" id="1_5hu62"]
 
 [resource]
-texture = ExtResource( 1 )
-region_rect = Rect2( 0, 0, 16, 16 )
-margin_left = 8.0
-margin_right = 8.0
-margin_top = 8.0
-margin_bottom = 8.0
+texture = ExtResource("1_5hu62")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+region_rect = Rect2(0, 0, 16, 16)

@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/snd_enemy_damage.ogg-0425f0b2f2d7febb3309e6481327751a.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://e04beml16t88"
+path="res://.godot/imported/snd_enemy_damage.ogg-0425f0b2f2d7febb3309e6481327751a.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/Placeholder/snd_enemy_damage.ogg"
-dest_files=[ "res://.import/snd_enemy_damage.ogg-0425f0b2f2d7febb3309e6481327751a.oggstr" ]
+dest_files=["res://.godot/imported/snd_enemy_damage.ogg-0425f0b2f2d7febb3309e6481327751a.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

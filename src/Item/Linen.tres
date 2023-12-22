@@ -1,14 +1,14 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://2a3f41pycu57"]
 
-[ext_resource path="res://src/Item/Item.gd" type="Script" id=2]
+[ext_resource type="Script" path="res://src/Item/Item.gd" id="2"]
 
-[sub_resource type="AtlasTexture" id=1]
-region = Rect2( 160, 0, 32, 16 )
+[sub_resource type="AtlasTexture" id="1"]
+region = Rect2(160, 0, 32, 16)
 
 [resource]
-script = ExtResource( 2 )
+script = ExtResource("2")
 item_name = "Linen"
 index = 5
-texture = SubResource( 1 )
+texture = SubResource("1")
 description = "A small bauble shaped like an ox."
 price = 0

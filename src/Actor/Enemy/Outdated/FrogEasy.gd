@@ -32,7 +32,11 @@ func _physics_process(_delta):
 			look_dir = Vector2(move_dir.x, 0)
 
 		velocity = get_movevelocity(velocity, move_dir, speed)
-		velocity = move_and_slide(velocity, FLOOR_NORMAL, true)
+		set_velocity(velocity)
+		set_up_direction(FLOOR_NORMAL)
+		set_floor_stop_on_slope_enabled(true)
+		move_and_slide()
+		velocity = velocity
 		
 		animate()
 
@@ -75,10 +79,10 @@ func get_movevelocity(
 
 	if is_on_floor():
 		if friction == true:
-			out.x = lerp(out.x, 0, ground_cof)
+			out.x = lerp(out.x, 0.0, ground_cof)
 	else:
 		if friction == true:
-			out.x = lerp(out.x, 0, air_cof)
+			out.x = lerp(out.x, 0.0, air_cof)
 	return out
 	
 

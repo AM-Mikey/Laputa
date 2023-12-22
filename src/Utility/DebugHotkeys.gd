@@ -7,24 +7,25 @@ const LEVEL_EDITOR = preload("res://src/Editor/Editor.tscn")
 const POPUP = preload("res://src/UI/PopupText.tscn")
 const SHOP_MENU = preload("res://src/UI/ShopMenu/ShopMenu.tscn")
 
-onready var world = get_tree().get_root().get_node("World")
-onready var ui = world.get_node("UILayer")
-onready var el = world.get_node("EditorLayer")
-onready var dl = world.get_node("DebugLayer")
+@onready var world = get_tree().get_root().get_node("World")
+@onready
+var ui = world.get_node("UILayer")
+@onready var el = world.get_node("EditorLayer")
+@onready var dl = world.get_node("DebugLayer")
 
 var editor_tab = 0 #to save when we re-enter the editor
 
 func _ready():
-	pause_mode = PAUSE_MODE_PROCESS
+	process_mode = PROCESS_MODE_ALWAYS
 
 func _input(event):
 	if event.is_action_pressed("debug_editor"):
 		if el.has_node("Editor"):
-			print("showing level editor")
 			editor_tab = el.get_node("Editor/Main/Tab").current_tab
 			el.get_node("Editor").exit()
 		else:
-			el.add_child(LEVEL_EDITOR.instance())
+			print("showing level editor")
+			el.add_child(LEVEL_EDITOR.instantiate())
 			el.get_node("Editor/Main/Tab").current_tab = editor_tab
 			el.get_node("Editor").on_tab_changed(editor_tab)
 	
@@ -36,7 +37,7 @@ func _input(event):
 		if el.has_node("Editor"):
 			el.get_node("Editor").disabled = true
 		reload_level()
-		yield(get_tree(), "idle_frame")
+		await get_tree().process_frame
 		if el.has_node("Editor"):
 			el.get_node("Editor").setup_level()
 			el.get_node("Editor").disabled = false
@@ -53,7 +54,7 @@ func _input(event):
 
 
 	if event.is_action_pressed("debug_save"):
-		var popup = POPUP.instance()
+		var popup = POPUP.instantiate()
 		popup.text = "quicksaved..."
 		ui.add_child(popup)
 		world.write_level_data_to_temp()
@@ -62,7 +63,7 @@ func _input(event):
 
 
 	if event.is_action_pressed("debug_load"):
-		var popup = POPUP.instance()
+		var popup = POPUP.instantiate()
 		popup.text = "loaded save"
 		ui.add_child(popup)
 		world.read_player_data_from_save()
@@ -70,7 +71,7 @@ func _input(event):
 		world.copy_level_data_from_save_to_temp()
 
 	if event.is_action_pressed("debug_shop"):
-		var shop_menu = SHOP_MENU.instance()
+		var shop_menu = SHOP_MENU.instantiate()
 		ui.add_child(shop_menu)
 
 
@@ -88,7 +89,7 @@ func _input(event):
 func debug_print():
 	if not dl.has_node("DebugInfo"):
 		print("showing debug info")
-		dl.add_child(DEBUG_INFO.instance())
+		dl.add_child(DEBUG_INFO.instantiate())
 	else:
 		dl.get_node("DebugInfo").queue_free()
 #
@@ -101,13 +102,13 @@ func reload_level():
 	world.get_node("Juniper").free() #we free and respawn them so we have a clean slate when we load in
 	if ui.has_node("HUD"):
 		ui.get_node("HUD").free()
-	world.on_level_change(load(world.current_level.filename), 0)
+	world.on_level_change(load(world.current_level.scene_file_path), 0)
 
 
-	world.add_child(JUNIPER.instance())
-	ui.add_child(HUD.instance())
+	world.add_child(JUNIPER.instantiate())
+	ui.add_child(HUD.instantiate())
 
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		world.get_node("Juniper").global_position = s.global_position

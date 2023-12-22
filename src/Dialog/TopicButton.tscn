@@ -5,8 +5,8 @@
 
 
 [node name="TopicButton" type="Button"]
-margin_right = 40.0
-margin_bottom = 14.0
+offset_right = 40.0
+offset_bottom = 14.0
 theme = ExtResource( 1 )
 text = "Test Topic"
 flat = true

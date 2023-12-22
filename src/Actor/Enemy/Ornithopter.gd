@@ -1,10 +1,10 @@
 extends Enemy
 
-export var dir = Vector2.LEFT
+@export var dir = Vector2.LEFT
 #var safe_distance = 100
 
-onready var levels = get_tree().get_nodes_in_group("Levels")
-onready var cl = get_parent().get_parent().get_node("CameraLimiter")
+@onready var levels = get_tree().get_nodes_in_group("Levels")
+@onready var cl = get_parent().get_parent().get_node("CameraLimiter")
 
 func _ready():
 	disabled = true
@@ -35,7 +35,8 @@ func _physics_process(delta):
 #				print("freed ornithopter")
 #				queue_free()
 
-		move_and_slide(speed * dir)
+		set_velocity(speed * dir)
+		move_and_slide()
 
 
 func on_cue():

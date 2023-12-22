@@ -5,17 +5,17 @@ const ARM = preload("res://src/Actor/Enemy/Climber/ClimberArm.tscn")
 
 var pivot
 var pivot_pos
-onready var body = $ClimberBody
+@onready var body = $ClimberBody
 
 var rotation_cycle = 0
 
 
-export var climb_dir = "cw"
-export var arm_count: int = 2
+@export var climb_dir = "cw"
+@export var arm_count: int = 2
 
 
 
-export var arm_distance = 64
+@export var arm_distance = 64
 var arm_angle_speed = 0.01
 
 var collision_disabled = false
@@ -30,17 +30,17 @@ func setup_arms():
 	var arm_index = 0
 	
 	for n in arm_count:
-		var arm = ARM.instance()
+		var arm = ARM.instantiate()
 		add_child(arm)
 		
 		arm.index = arm_index
-		arm.get_node("WorldDetector").connect("body_entered", self, "on_arm_body_entered", [arm])
+		arm.get_node("WorldDetector").connect("body_entered", Callable(self, "on_arm_body_entered").bind(arm))
 		
 		arm.position = Vector2(arm_distance/2, 0).rotated((get_arm_angle_offset() * arm.index) + PI) #add pi to the rotation to add 180 degrees since it wont work otherwise
 		
 		if arm_index == 0:
 			pivot = arm
-			pivot.modulate = Color.red
+			pivot.modulate = Color.RED
 			pivot_pos = arm.global_position
 		arm_index += 1
 
@@ -58,16 +58,15 @@ func replace_arms(dead_arm_index):
 			if a.part_type == "arm" and a != pivot and not a.dead:
 				a.index = arm_index
 				
-				$Tween.interpolate_property(a, "position",
-				a.position, Vector2(arm_distance/2, 0).rotated((get_arm_angle_offset() * a.index) + PI),
-				0.4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-				$Tween.start()
+				var new_pos = Vector2(arm_distance/2.0, 0.0).rotated((get_arm_angle_offset() * a.index) + PI)
+				var tween = get_tree().create_tween()
+				tween.tween_property(a, "position", new_pos, 0.4).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 				
 				arm_index += 1
 			elif a.part_type == "arm" and a == pivot and not a.dead:
 				a.index = 0
 	
-	yield(get_tree().create_timer(0.4), "timeout")
+	await get_tree().create_timer(0.4).timeout
 	collision_disabled = false
 	
 

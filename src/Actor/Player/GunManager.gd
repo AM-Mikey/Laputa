@@ -5,8 +5,8 @@ const LEVELDOWN = preload("res://src/Effect/LevelDown.tscn")
 
 var disabled = false
 
-onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_parent()
+@onready var world = get_tree().get_root().get_node("World")
+@onready var pc = get_parent()
 
 func _ready():
 	set_guns_visible()
@@ -63,9 +63,9 @@ func level_up(debug):
 	current_gun.xp = 0 if debug else current_gun.xp - last_max_xp
 	get_parent().emit_signal("guns_updated", $Guns.get_children())
 
-	var level_up = LEVELUP.instance()
-	world.get_node("Front").add_child(level_up)
-	level_up.position = pc.global_position
+	var effect = LEVELUP.instantiate()
+	world.get_node("Front").add_child(effect)
+	effect.position = pc.global_position
 
 
 func level_down(debug):
@@ -75,9 +75,9 @@ func level_down(debug):
 	current_gun.xp = 0 if debug else current_gun.xp + current_gun.max_xp
 	get_parent().emit_signal("guns_updated", $Guns.get_children())
 
-	var level_down = LEVELDOWN.instance()
-	world.get_node("Front").add_child(level_down)
-	level_down.position = pc.global_position
+	var effect = LEVELDOWN.instantiate()
+	world.get_node("Front").add_child(effect)
+	effect.position = pc.global_position
 
 
 

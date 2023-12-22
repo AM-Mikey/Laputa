@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/platformfall2.wav-75385e5b194483be795bc8cfc579ffd2.sample"
+type="AudioStreamWAV"
+uid="uid://cw7rxqw2yx5a4"
+path="res://.godot/imported/platformfall2.wav-75385e5b194483be795bc8cfc579ffd2.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/platformfall2.wav"
-dest_files=[ "res://.import/platformfall2.wav-75385e5b194483be795bc8cfc579ffd2.sample" ]
+dest_files=["res://.godot/imported/platformfall2.wav-75385e5b194483be795bc8cfc579ffd2.sample"]
 
 [params]
 

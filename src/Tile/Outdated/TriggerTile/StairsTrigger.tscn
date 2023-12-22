@@ -1,44 +1,63 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://cnb1eoa5tek5k"]
 
-[ext_resource path="res://src/Tile/Outdated/TriggerTile/StairsTrigger.gd" type="Script" id=1]
-[ext_resource path="res://assets/Tile/TriggerTile/StairsTrigger.png" type="Texture" id=2]
+[ext_resource type="Script" path="res://src/Tile/Outdated/TriggerTile/StairsTrigger.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://c6u88sdhq1dn5" path="res://assets/Tile/TriggerTile/StairsTrigger.png" id="2"]
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_26qao"]
+texture = ExtResource("2")
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
 
-[sub_resource type="TileSet" id=1]
-0/name = "StairsTrigger.png 0"
-0/texture = ExtResource( 2 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 16, 16 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-1/name = "StairsTrigger.png 1"
-1/texture = ExtResource( 2 )
-1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 16, 0, 16, 16 )
-1/tile_mode = 0
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shape_offset = Vector2( 0, 0 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape_one_way = false
-1/shape_one_way_margin = 0.0
-1/shapes = [  ]
-1/z_index = 0
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r1l5y"]
+texture = ExtResource("2")
+margins = Vector2i(16, 0)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[sub_resource type="TileSet" id="1"]
+sources/0 = SubResource("TileSetAtlasSource_26qao")
+sources/1 = SubResource("TileSetAtlasSource_r1l5y")
 
 [node name="StairsTrigger" type="TileMap"]
 z_index = 100
-tile_set = SubResource( 1 )
-cell_size = Vector2( 16, 16 )
-collision_layer = 0
-collision_mask = 0
-format = 1
-script = ExtResource( 1 )
+tile_set = SubResource("1")
+format = 2
+script = ExtResource("1")

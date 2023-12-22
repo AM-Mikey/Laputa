@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/hurt.wav-b4517d2169a0b411c8bf490ddded1f6a.sample"
+type="AudioStreamWAV"
+uid="uid://n4p4iu5i2q1o"
+path="res://.godot/imported/hurt.wav-b4517d2169a0b411c8bf490ddded1f6a.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/hurt.wav"
-dest_files=[ "res://.import/hurt.wav-b4517d2169a0b411c8bf490ddded1f6a.sample" ]
+dest_files=["res://.godot/imported/hurt.wav-b4517d2169a0b411c8bf490ddded1f6a.sample"]
 
 [params]
 

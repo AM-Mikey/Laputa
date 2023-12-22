@@ -1,18 +1,18 @@
-tool
+@tool
 extends Node2D
 
-export var texture: StreamTexture setget on_texture_changed
-export var hframe: int setget on_hframe_changed
+@export var texture: CompressedTexture2D: set = on_texture_changed
+@export var hframe: int: set = on_hframe_changed
 #export var back_vframe: int setget on_back_vframe_changed
 #export var middle_vframe: int setget on_middle_vframe_changed
 #export var front_vframe: int setget on_front_vframe_changed
 
 
-onready var back = $Back
-onready var middle = $Middle
-onready var front = $Front
+@onready var back = $Back
+@onready var middle = $Middle
+@onready var front = $Front
 
-onready var sprites = [back, middle, front]
+@onready var sprites = [back, middle, front]
 
 func on_texture_changed(new_texture): #TODO, texture needs to be changed before frames
 	for s in sprites:

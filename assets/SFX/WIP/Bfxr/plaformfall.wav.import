@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/plaformfall.wav-985ea1d99eb4cbb9202a7ac971ed1adc.sample"
+type="AudioStreamWAV"
+uid="uid://bccsg1p7jbpq5"
+path="res://.godot/imported/plaformfall.wav-985ea1d99eb4cbb9202a7ac971ed1adc.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/plaformfall.wav"
-dest_files=[ "res://.import/plaformfall.wav-985ea1d99eb4cbb9202a7ac971ed1adc.sample" ]
+dest_files=["res://.godot/imported/plaformfall.wav-985ea1d99eb4cbb9202a7ac971ed1adc.sample"]
 
 [params]
 

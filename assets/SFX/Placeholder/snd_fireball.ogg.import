@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/snd_fireball.ogg-409dc14e97e1de7a2b9c58c223a08490.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dlxpov41tbh8e"
+path="res://.godot/imported/snd_fireball.ogg-409dc14e97e1de7a2b9c58c223a08490.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/Placeholder/snd_fireball.ogg"
-dest_files=[ "res://.import/snd_fireball.ogg-409dc14e97e1de7a2b9c58c223a08490.oggstr" ]
+dest_files=["res://.godot/imported/snd_fireball.ogg-409dc14e97e1de7a2b9c58c223a08490.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

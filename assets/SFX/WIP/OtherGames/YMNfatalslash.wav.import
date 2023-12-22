@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNfatalslash.wav-1f496ee4d0dd1c371a22cb242f1b0a2d.sample"
+type="AudioStreamWAV"
+uid="uid://byfotmrth4hcb"
+path="res://.godot/imported/YMNfatalslash.wav-1f496ee4d0dd1c371a22cb242f1b0a2d.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNfatalslash.wav"
-dest_files=[ "res://.import/YMNfatalslash.wav-1f496ee4d0dd1c371a22cb242f1b0a2d.sample" ]
+dest_files=["res://.godot/imported/YMNfatalslash.wav-1f496ee4d0dd1c371a22cb242f1b0a2d.sample"]
 
 [params]
 

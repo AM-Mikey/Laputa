@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Pickup_Coin5.wav-f02fe9dd8b497ea64fd7ec70c47e1d9a.sample"
+type="AudioStreamWAV"
+uid="uid://xbgdg5vknn58"
+path="res://.godot/imported/Pickup_Coin5.wav-f02fe9dd8b497ea64fd7ec70c47e1d9a.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/Pickup_Coin5.wav"
-dest_files=[ "res://.import/Pickup_Coin5.wav-f02fe9dd8b497ea64fd7ec70c47e1d9a.sample" ]
+dest_files=["res://.godot/imported/Pickup_Coin5.wav-f02fe9dd8b497ea64fd7ec70c47e1d9a.sample"]
 
 [params]
 

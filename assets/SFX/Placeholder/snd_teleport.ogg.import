@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/snd_teleport.ogg-0e5b28336e2fffe914be265142d66004.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d3n0tpjwckr66"
+path="res://.godot/imported/snd_teleport.ogg-0e5b28336e2fffe914be265142d66004.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/Placeholder/snd_teleport.ogg"
-dest_files=[ "res://.import/snd_teleport.ogg-0e5b28336e2fffe914be265142d66004.oggstr" ]
+dest_files=["res://.godot/imported/snd_teleport.ogg-0e5b28336e2fffe914be265142d66004.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

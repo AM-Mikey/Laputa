@@ -1,45 +1,52 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://cyy201xw8120x"]
 
-[ext_resource path="res://src/Bullet/Enemy/Seed.gd" type="Script" id=1]
-[ext_resource path="res://assets/Bullet/Enemy/Seed.png" type="Texture" id=2]
-[ext_resource path="res://src/Bullet/CollisionDetector.tscn" type="PackedScene" id=3]
+[ext_resource type="Script" path="res://src/Bullet/Enemy/Seed.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dkhsxpnntjtp7" path="res://assets/Bullet/Enemy/Seed.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/CollisionDetector.tscn" id="3"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 4 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(4, 4)
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 resource_name = "RotateLeft"
 length = 0.4
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 0, 3 ]
+"values": [0, 3]
 }
 
-[node name="Seed" type="KinematicBody2D"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0of4l"]
+_data = {
+"RotateLeft": SubResource("2")
+}
+
+[node name="Seed" type="CharacterBody2D"]
 collision_layer = 320
 collision_mask = 0
-script = ExtResource( 1 )
+script = ExtResource("1")
 
-[node name="CollisionDetector" parent="." instance=ExtResource( 3 )]
+[node name="CollisionDetector" parent="." instance=ExtResource("3")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2")
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RotateLeft = SubResource( 2 )
+libraries = {
+"": SubResource("AnimationLibrary_0of4l")
+}
 
 [connection signal="area_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
 [connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]

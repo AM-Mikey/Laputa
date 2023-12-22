@@ -1,148 +1,157 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=3 uid="uid://ckeh37ixn76w8"]
 
-[ext_resource path="res://src/Actor/Enemy/Billy.gd" type="Script" id=1]
-[ext_resource path="res://assets/Actor/Enemy/Billy.png" type="Texture" id=2]
+[ext_resource type="Script" path="res://src/Actor/Enemy/Billy.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dxp874vl8xdex" path="res://assets/Actor/Enemy/Billy.png" id="2"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7, 7.5 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(14, 15)
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 128, 80 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(256, 160)
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id="6"]
 resource_name = "Idle"
 length = 0.4
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ 0 ]
+"values": [0]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 resource_name = "Jump"
 length = 0.4
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 8, 9, 10, 11 ]
+"values": [8, 9, 10, 11]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id="7"]
 resource_name = "StandShoot"
 length = 0.4
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 16, 17, 18, 19 ]
+"values": [16, 17, 18, 19]
 }
 tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "fire"
-} ]
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fire"
+}]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id="4"]
 resource_name = "Walk"
 length = 0.4
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [0, 1, 2, 3]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id="5"]
 resource_name = "WalkShoot"
 length = 0.4
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 4, 5, 6, 7 ]
+"values": [4, 5, 6, 7]
 }
 tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "fire"
-} ]
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fire"
+}]
 }
 
-[node name="Billy" type="KinematicBody2D"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_afpet"]
+_data = {
+"Idle": SubResource("6"),
+"Jump": SubResource("3"),
+"StandShoot": SubResource("7"),
+"Walk": SubResource("4"),
+"WalkShoot": SubResource("5")
+}
+
+[node name="Billy" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 520
-script = ExtResource( 1 )
+script = ExtResource("1")
 debug = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -7.5 )
-shape = SubResource( 1 )
+position = Vector2(0, -7.5)
+shape = SubResource("1")
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-modulate = Color( 0.992157, 0.992157, 0.992157, 0.156863 )
-position = Vector2( 0, -16 )
-shape = SubResource( 2 )
+modulate = Color(0.992157, 0.992157, 0.992157, 0.156863)
+position = Vector2(0, -16)
+shape = SubResource("2")
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -16 )
-texture = ExtResource( 2 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("2")
 hframes = 4
 vframes = 5
 frame = 17
@@ -150,29 +159,25 @@ frame = 17
 [node name="StateTimer" type="Timer" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Idle = SubResource( 6 )
-anims/Jump = SubResource( 3 )
-anims/StandShoot = SubResource( 7 )
-anims/Walk = SubResource( 4 )
-anims/WalkShoot = SubResource( 5 )
+libraries = {
+"": SubResource("AnimationLibrary_afpet")
+}
 
 [node name="FireCooldown" type="Timer" parent="."]
 one_shot = true
 
-[node name="BulletOrigin" type="Position2D" parent="."]
-position = Vector2( 0, -16 )
+[node name="BulletOrigin" type="Marker2D" parent="."]
+position = Vector2(0, -16)
 
 [node name="FloorDetectorL" type="RayCast2D" parent="."]
-position = Vector2( -6, 0 )
-enabled = true
-cast_to = Vector2( 0, 8 )
+position = Vector2(-6, 0)
+target_position = Vector2(0, 8)
 collision_mask = 8
 collide_with_areas = true
 
 [node name="FloorDetectorR" type="RayCast2D" parent="."]
-position = Vector2( 7, 0 )
-enabled = true
-cast_to = Vector2( 0, 8 )
+position = Vector2(7, 0)
+target_position = Vector2(0, 8)
 collision_mask = 8
 collide_with_areas = true
 

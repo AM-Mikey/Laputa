@@ -18,10 +18,10 @@ music = "res://assets/Music/Access.ogg"
 motion_scale = Vector2( 0.1, 0.1 )
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-margin_left = -408.0
-margin_top = -208.0
-margin_right = 1040.0
-margin_bottom = 600.0
+offset_left = -408.0
+offset_top = -208.0
+offset_right = 1040.0
+offset_bottom = 600.0
 expand = true
 stretch_mode = 2
 __meta__ = {

@@ -1,70 +1,74 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://d3sw60ygo6bb6"]
 
-[ext_resource path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" type="AudioStream" id=1]
-[ext_resource path="res://assets/Actor/Enemy/Toggler.png" type="Texture" id=2]
-[ext_resource path="res://src/Actor/Enemy/Beetle.gd" type="Script" id=3]
+[ext_resource type="AudioStream" uid="uid://cpbrsidi03i20" path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" id="1"]
+[ext_resource type="Texture2D" uid="uid://c7u8mwvcp2l6v" path="res://assets/Actor/Enemy/Toggler.png" id="2"]
+[ext_resource type="Script" path="res://src/Actor/Enemy/Beetle.gd" id="3"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7, 4 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(14, 8)
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 resource_name = "Fly"
 length = 0.2
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ 2, 3 ]
+"values": [2, 3]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 resource_name = "Idle"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ 1 ]
+"values": [1]
 }
 
-[node name="Beetle" type="KinematicBody2D"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hpx8l"]
+_data = {
+"Fly": SubResource("2"),
+"Idle": SubResource("3")
+}
+
+[node name="Beetle" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 8
-script = ExtResource( 3 )
+script = ExtResource("3")
 editor_hidden = true
-speed = Vector2( 150, 150 )
-gravity = null
-ground_cof = null
-air_cof = null
+speed = Vector2(150, 150)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -4 )
-shape = SubResource( 1 )
+position = Vector2(0, -4)
+shape = SubResource("1")
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -8 )
-texture = ExtResource( 2 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2")
 hframes = 2
 vframes = 2
 
 [node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 1 )
+stream = ExtResource("1")
 attenuation = 0.058315
-bus = "SFX"
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Fly = SubResource( 2 )
-anims/Idle = SubResource( 3 )
+libraries = {
+"": SubResource("AnimationLibrary_hpx8l")
+}

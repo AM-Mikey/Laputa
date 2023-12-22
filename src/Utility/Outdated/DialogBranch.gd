@@ -6,7 +6,7 @@ var select_sound = load("res://assets/SFX/snd_menu_select.ogg")
 
 var branch_id = ""
 
-onready var db = get_tree().get_root().get_node("World").get_node("UILayer/DialogBox")
+@onready var db = get_tree().get_root().get_node("World").get_node("UILayer/DialogBox")
 
 func _on_Yes_pressed():
 	$Audio.stream = select_sound

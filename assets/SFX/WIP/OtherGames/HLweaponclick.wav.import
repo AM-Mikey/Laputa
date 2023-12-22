@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/HLweaponclick.wav-bc2fa17942308dab7e332d3c19651f41.sample"
+type="AudioStreamWAV"
+uid="uid://gxfgvolw7xh2"
+path="res://.godot/imported/HLweaponclick.wav-bc2fa17942308dab7e332d3c19651f41.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/HLweaponclick.wav"
-dest_files=[ "res://.import/HLweaponclick.wav-bc2fa17942308dab7e332d3c19651f41.sample" ]
+dest_files=["res://.godot/imported/HLweaponclick.wav-bc2fa17942308dab7e332d3c19651f41.sample"]
 
 [params]
 

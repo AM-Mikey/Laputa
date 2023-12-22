@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/StubToe2.wav-b9649fae9fecd73a42b13d7e79e49c25.sample"
+type="AudioStreamWAV"
+uid="uid://b6eyf00hck57n"
+path="res://.godot/imported/StubToe2.wav-b9649fae9fecd73a42b13d7e79e49c25.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/JFXR/StubToe2.wav"
-dest_files=[ "res://.import/StubToe2.wav-b9649fae9fecd73a42b13d7e79e49c25.sample" ]
+dest_files=["res://.godot/imported/StubToe2.wav-b9649fae9fecd73a42b13d7e79e49c25.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

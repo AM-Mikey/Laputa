@@ -1,10 +1,10 @@
 extends Enemy
 
-export var starting_direction = Vector2.LEFT
+@export var starting_direction = Vector2.LEFT
 var move_dir: Vector2
 var look_dir: Vector2
 var waiting = false
-export var wait_time = 1.0
+@export var wait_time = 1.0
 
 
 func _ready():
@@ -24,7 +24,10 @@ func _physics_process(_delta):
 	if disabled or dead:
 		return
 	velocity = calculate_movevelocity(velocity, move_dir, speed)
-	velocity = move_and_slide(velocity, FLOOR_NORMAL)
+	set_velocity(velocity)
+	set_up_direction(FLOOR_NORMAL)
+	move_and_slide()
+	velocity = velocity
 	
 	animate()
 	
@@ -43,7 +46,7 @@ func wait():
 	elif old_dir.x == 1:
 		$AnimationPlayer.play("ClingRightCrawlUp")
 
-	yield(get_tree().create_timer(wait_time), "timeout")
+	await get_tree().create_timer(wait_time).timeout
 	move_dir = Vector2(old_dir.x * -1, old_dir.y)
 	waiting = false
 

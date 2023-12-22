@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/LSDnoisemaker.ogg-ce70272e708269fe3eed1f10555839b7.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cs40iuk5x2ndb"
+path="res://.godot/imported/LSDnoisemaker.ogg-ce70272e708269fe3eed1f10555839b7.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/LSDnoisemaker.ogg"
-dest_files=[ "res://.import/LSDnoisemaker.ogg-ce70272e708269fe3eed1f10555839b7.oggstr" ]
+dest_files=["res://.godot/imported/LSDnoisemaker.ogg-ce70272e708269fe3eed1f10555839b7.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

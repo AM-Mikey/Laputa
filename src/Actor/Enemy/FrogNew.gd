@@ -1,4 +1,4 @@
-tool
+@tool
 extends Enemy
 
 var tx_toad = preload("res://assets/Actor/Enemy/Toad.png")
@@ -6,7 +6,7 @@ var tx_frog = preload("res://assets/Actor/Enemy/Frog.png")
 
 var target
 
-export var jump_delay = 3
+@export var jump_delay = 3
 var move_dir = Vector2.ZERO
 var look_dir = Vector2.LEFT
 
@@ -14,15 +14,16 @@ var look_dir = Vector2.LEFT
 #export(Difficulty) var difficulty = Difficulty.normal setget _on_difficulty_changed
 
 func _ready():
-#	_on_difficulty_changed(difficulty)
+	damage_on_contact = 1
+	#_on_difficulty_changed(difficulty)
 	#gravity = 200
-	pass
+	#pass
 
 
 
 
 func _physics_process(_delta):
-	if disabled or dead or Engine.editor_hint:
+	if disabled or dead or Engine.is_editor_hint():
 		return
 		if not is_on_floor():
 			move_dir.y = 0 #don't allow them to jump if they are midair
@@ -34,12 +35,16 @@ func _physics_process(_delta):
 
 		if $Timer.time_left == 0 and target != null and is_on_floor():
 			$Timer.start(jump_delay)
-			am.play_pos("enemy_jump", self)
+			am.play("enemy_jump", self)
 			move_dir = get_move_dir()
 			look_dir = Vector2(move_dir.x, 0)
 
 		velocity = get_move_velocity(velocity, move_dir, speed)
-		velocity = move_and_slide(velocity, FLOOR_NORMAL, true)
+		set_velocity(velocity)
+		set_up_direction(FLOOR_NORMAL)
+		set_floor_stop_on_slope_enabled(true)
+		move_and_slide()
+		velocity = velocity
 		
 
 func _on_PlayerDetector_body_entered(body):
@@ -81,10 +86,10 @@ func get_move_velocity(
 
 	if is_on_floor():
 		if friction == true:
-			out.x = lerp(out.x, 0, ground_cof)
+			out.x = lerp(out.x, 0.0, ground_cof)
 	else:
 		if friction == true:
-			out.x = lerp(out.x, 0, air_cof)
+			out.x = lerp(out.x, 0.0, air_cof)
 	return out
 
 

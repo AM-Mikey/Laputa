@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/snd_lightning_strike.ogg-209e4aa05b28f067458820035c4fe45f.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ds4rg7gfsw7gj"
+path="res://.godot/imported/snd_lightning_strike.ogg-209e4aa05b28f067458820035c4fe45f.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/Placeholder/snd_lightning_strike.ogg"
-dest_files=[ "res://.import/snd_lightning_strike.ogg-209e4aa05b28f067458820035c4fe45f.oggstr" ]
+dest_files=["res://.godot/imported/snd_lightning_strike.ogg-209e4aa05b28f067458820035c4fe45f.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

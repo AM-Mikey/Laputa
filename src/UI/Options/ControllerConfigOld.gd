@@ -1,49 +1,49 @@
 extends Control
 
 var input_map_path = "user://inputmap.json"
-onready var world = get_tree().get_root().get_node("World")
+@onready var world = get_tree().get_root().get_node("World")
 
 var compass_distance = 8
 
 
-onready var op_l2 = $Margin/Scroll/VBoxContainer/HBoxContainer/Left/L2
-onready var op_l1 = $Margin/Scroll/VBoxContainer/HBoxContainer/Left/L1
-onready var op_l3 = $Margin/Scroll/VBoxContainer/HBoxContainer2/L3
+@onready var op_l2 = $Margin/Scroll/VBoxContainer/HBoxContainer/Left/L2
+@onready var op_l1 = $Margin/Scroll/VBoxContainer/HBoxContainer/Left/L1
+@onready var op_l3 = $Margin/Scroll/VBoxContainer/HBoxContainer2/L3
 
-onready var op_r2 = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/R2
-onready var op_r1 = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/R1
-onready var op_r3 = $Margin/Scroll/VBoxContainer/HBoxContainer2/R3
+@onready var op_r2 = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/R2
+@onready var op_r1 = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/R1
+@onready var op_r3 = $Margin/Scroll/VBoxContainer/HBoxContainer2/R3
 
-onready var op_facetop = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/Face/Top
-onready var op_faceleft = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/Face/Left
-onready var op_faceright = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/Face/Right
-onready var op_facebottom = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/Face/Bottom
+@onready var op_facetop = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/Face/Top
+@onready var op_faceleft = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/Face/Left
+@onready var op_faceright = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/Face/Right
+@onready var op_facebottom = $Margin/Scroll/VBoxContainer/HBoxContainer/Right/Face/Bottom
 
 
-onready var op_select = $Margin/Scroll/VBoxContainer/HBoxContainer2/Select
-onready var op_start = $Margin/Scroll/VBoxContainer/HBoxContainer2/Start
+@onready var op_select = $Margin/Scroll/VBoxContainer/HBoxContainer2/Select
+@onready var op_start = $Margin/Scroll/VBoxContainer/HBoxContainer2/Start
 
-onready var option_buttons = [op_l2, op_l1, op_l3, op_r2, op_r1, op_r3, op_facetop, op_faceleft, op_faceright, op_facebottom, op_select, op_start]
+@onready var option_buttons = [op_l2, op_l1, op_l3, op_r2, op_r1, op_r3, op_facetop, op_faceleft, op_faceright, op_facebottom, op_select, op_start]
 
-onready var faceleft = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/HBoxContainer/FaceButtonLeft/Sprite
-onready var faceright = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/HBoxContainer/FaceButtonRight/Sprite
-onready var facetop = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/FaceButtonTop/Sprite
-onready var facebottom = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/FaceButtonBottom/Sprite
+@onready var faceleft = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/HBoxContainer/FaceButtonLeft/Sprite2D
+@onready var faceright = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/HBoxContainer/FaceButtonRight/Sprite2D
+@onready var facetop = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/FaceButtonTop/Sprite2D
+@onready var facebottom = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/FaceButtonBottom/Sprite2D
 
-onready var select = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/ScrewLeft/Sprite
-onready var start = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/ScrewRight/Sprite
+@onready var select = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/ScrewLeft/Sprite2D
+@onready var start = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/ScrewRight/Sprite2D
 
-onready var l1 = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer/BumperLeft/Sprite
-onready var r1 = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer/BumperRight/Sprite
-onready var l2 = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer/TriggerLeft/Sprite
-onready var r2 = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer/TriggerRight/Sprite
+@onready var l1 = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer/BumperLeft/Sprite2D
+@onready var r1 = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer/BumperRight/Sprite2D
+@onready var l2 = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer/TriggerLeft/Sprite2D
+@onready var r2 = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer/TriggerRight/Sprite2D
 
-onready var lstick = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer2/StickLeft/Sprite
-onready var rstick = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer2/StickRight/Sprite
+@onready var lstick = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer2/StickLeft/Sprite2D
+@onready var rstick = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer2/StickRight/Sprite2D
 
-onready var dpad = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Compass/CrossHair
+@onready var dpad = $Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Compass/CrossHair
 
-onready var option_pairs = {
+@onready var option_pairs = {
 	op_l2: l2,
 	op_l1: l1,
 	op_l3: lstick,
@@ -58,8 +58,8 @@ onready var option_pairs = {
 	op_start: start
 }
 
-onready var action_names = ["*None*", "Jump", "Manual Fire", "Automatic Fire", "Inspect", "Inventory", "Gun Left", "Gun Right", "Pause"]
-onready var actions = [null, "jump", "fire_manual", "fire_automatic", "inspect", "inventory", "gun_left", "gun_right", "pause"]
+@onready var action_names = ["*None*", "Jump", "Manual Fire", "Automatic Fire", "Inspect", "Inventory", "Gun Left", "Gun Right", "Pause"]
+@onready var actions = [null, "jump", "fire_manual", "fire_automatic", "inspect", "inventory", "gun_left", "gun_right", "pause"]
 
 func _ready():
 #	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
@@ -69,7 +69,7 @@ func _ready():
 		for a in action_names:
 			o.add_item(a)
 			if o.get_signal_list().size() == 0:
-				o.connect("item_selected", self, "change_event", [o.name])
+				o.connect("item_selected", Callable(self, "change_event").bind(o.name))
 
 	set_option_buttons()
 
@@ -178,11 +178,11 @@ func save_input_map():
 	var input_actions = InputMap.get_actions()
 	for a in input_actions:
 		var inputs = []
-		for i in InputMap.get_action_list(a):
+		for i in InputMap.action_get_events(a):
 				if i is InputEventMouseButton:
 					inputs.append(["mouse", i.button_index])
 				if i is InputEventKey:
-					inputs.append(["key", i.scancode])
+					inputs.append(["key", i.keycode])
 				if i is InputEventJoypadButton:
 					inputs.append(["joy", i.button_index])
 		data[a] = inputs
@@ -192,7 +192,7 @@ func save_input_map():
 	var file_written = file.open(input_map_path, File.WRITE)
 	if file_written == OK:
 		#file.store_var(data)
-		file.store_string(var2str(data))
+		file.store_string(var_to_str(data))
 		file.close()
 		print("input map data saved")
 	else:
@@ -207,7 +207,9 @@ func load_input_map():
 		var file_read = file.open(input_map_path, File.READ)
 		if file_read == OK:
 			var text = file.get_as_text()
-			data = JSON.parse(text).result
+			var test_json_conv = JSON.new()
+			test_json_conv.parse(text).result
+			data = test_json_conv.get_data()
 			#data = file.get_var()
 			file.close()
 			
@@ -221,7 +223,7 @@ func load_input_map():
 							new_input.set_button_index(i.back())
 						"key":
 							new_input = InputEventKey.new()
-							new_input.set_scancode(i.back())
+							new_input.set_keycode(i.back())
 						"joy":
 							new_input = InputEventJoypadButton.new()
 							new_input.set_button_index(i.back())
@@ -281,15 +283,15 @@ func _on_Default_pressed():
 func _on_Return_pressed():
 	if world.has_node("UILayer/PauseMenu"):
 		world.get_node("UILayer/PauseMenu").visible = true
-		world.get_node("UILayer/PauseMenu").focus()
+		world.get_node("UILayer/PauseMenu").do_focus()
 	if world.has_node("UILayer/TitleScreen"):
 		world.get_node("UILayer/TitleScreen").visible = true
-		world.get_node("UILayer/TitleScreen").focus()
+		world.get_node("UILayer/TitleScreen").do_focus()
 		
 	if world.has_node("UILayer/Options"):
 		world.get_node("UILayer/Options").queue_free()
 	else:
 		get_parent().queue_free()
 
-func focus():
+func do_focus():
 	op_l2.grab_focus()

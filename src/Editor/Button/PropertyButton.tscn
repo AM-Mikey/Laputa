@@ -30,99 +30,99 @@
 [node name="PropertyButton" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -224.0
-margin_bottom = -238.0
+offset_right = -224.0
+offset_bottom = -238.0
 mouse_filter = 1
 theme = ExtResource( 1 )
 script = ExtResource( 3 )
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 256.0
-margin_bottom = 32.0
+offset_right = 256.0
+offset_bottom = 32.0
 mouse_filter = 2
 
 [node name="PanelActive" type="Panel" parent="."]
-margin_right = 256.0
-margin_bottom = 32.0
+offset_right = 256.0
+offset_bottom = 32.0
 mouse_filter = 2
-custom_styles/panel = ExtResource( 2 )
+theme_override_styles/panel = ExtResource( 2 )
 
 [node name="HBox" type="HBoxContainer" parent="."]
-margin_right = 256.0
-margin_bottom = 32.0
+offset_right = 256.0
+offset_bottom = 32.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Spacer" type="Control" parent="HBox"]
-margin_right = 8.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 8, 0 )
+offset_right = 8.0
+offset_bottom = 32.0
+custom_minimum_size = Vector2( 8, 0 )
 mouse_filter = 2
 
 [node name="Button" type="Button" parent="HBox"]
-margin_left = 12.0
-margin_right = 126.0
-margin_bottom = 32.0
+offset_left = 12.0
+offset_right = 126.0
+offset_bottom = 32.0
 size_flags_horizontal = 3
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
+theme_override_styles/hover = SubResource( 1 )
+theme_override_styles/pressed = SubResource( 2 )
+theme_override_styles/focus = SubResource( 3 )
+theme_override_styles/disabled = SubResource( 4 )
+theme_override_styles/normal = SubResource( 5 )
 text = "Property"
 flat = true
 align = 0
 
 [node name="HBox" type="HBoxContainer" parent="HBox"]
-margin_left = 130.0
-margin_right = 244.0
-margin_bottom = 32.0
+offset_left = 130.0
+offset_right = 244.0
+offset_bottom = 32.0
 size_flags_horizontal = 3
 
 [node name="Bool" type="CheckBox" parent="HBox/HBox"]
 visible = false
-margin_left = -28.0
-margin_bottom = 32.0
+offset_left = -28.0
+offset_bottom = 32.0
 mouse_filter = 1
-custom_styles/hover = SubResource( 6 )
-custom_styles/pressed = SubResource( 7 )
-custom_styles/focus = SubResource( 8 )
-custom_styles/disabled = SubResource( 9 )
-custom_styles/hover_pressed = SubResource( 10 )
-custom_styles/normal = SubResource( 11 )
+theme_override_styles/hover = SubResource( 6 )
+theme_override_styles/pressed = SubResource( 7 )
+theme_override_styles/focus = SubResource( 8 )
+theme_override_styles/disabled = SubResource( 9 )
+theme_override_styles/hover_pressed = SubResource( 10 )
+theme_override_styles/normal = SubResource( 11 )
 
 [node name="Panel" type="Panel" parent="HBox/HBox/Bool"]
 show_behind_parent = true
-margin_left = -2.0
-margin_right = 30.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 0 )
+offset_left = -2.0
+offset_right = 30.0
+offset_bottom = 32.0
+custom_minimum_size = Vector2( 32, 0 )
 mouse_filter = 2
-custom_styles/panel = ExtResource( 4 )
+theme_override_styles/panel = ExtResource( 4 )
 
 [node name="Color" type="ColorPickerButton" parent="HBox/HBox"]
 visible = false
-margin_left = -32.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 0 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 4 )
+offset_left = -32.0
+offset_bottom = 32.0
+custom_minimum_size = Vector2( 32, 0 )
+theme_override_styles/hover = ExtResource( 4 )
+theme_override_styles/pressed = ExtResource( 4 )
+theme_override_styles/focus = ExtResource( 4 )
+theme_override_styles/disabled = ExtResource( 4 )
+theme_override_styles/normal = ExtResource( 4 )
 
 [node name="Enum" type="OptionButton" parent="HBox/HBox"]
 visible = false
-margin_left = -110.0
-margin_bottom = 32.0
+offset_left = -110.0
+offset_bottom = 32.0
 mouse_filter = 1
 size_flags_horizontal = 3
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 4 )
+theme_override_styles/hover = ExtResource( 4 )
+theme_override_styles/pressed = ExtResource( 4 )
+theme_override_styles/focus = ExtResource( 4 )
+theme_override_styles/disabled = ExtResource( 4 )
+theme_override_styles/normal = ExtResource( 4 )
 text = "testing"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -130,8 +130,8 @@ __meta__ = {
 
 [node name="String" type="LineEdit" parent="HBox/HBox"]
 visible = false
-margin_left = -110.0
-margin_bottom = 32.0
+offset_left = -110.0
+offset_bottom = 32.0
 mouse_filter = 1
 size_flags_horizontal = 3
 deselect_on_focus_loss_enabled = false
@@ -142,8 +142,8 @@ __meta__ = {
 
 [node name="Load" type="LineEdit" parent="HBox/HBox"]
 visible = false
-margin_right = 110.0
-margin_bottom = 32.0
+offset_right = 110.0
+offset_bottom = 32.0
 mouse_filter = 1
 size_flags_horizontal = 11
 editable = false
@@ -154,8 +154,8 @@ __meta__ = {
 
 [node name="Vector2X" type="LineEdit" parent="HBox/HBox"]
 visible = false
-margin_right = 110.0
-margin_bottom = 32.0
+offset_right = 110.0
+offset_bottom = 32.0
 mouse_filter = 1
 size_flags_horizontal = 3
 align = 1
@@ -166,9 +166,9 @@ __meta__ = {
 
 [node name="Vector2Y" type="LineEdit" parent="HBox/HBox"]
 visible = false
-margin_left = 57.0
-margin_right = 110.0
-margin_bottom = 32.0
+offset_left = 57.0
+offset_right = 110.0
+offset_bottom = 32.0
 mouse_filter = 1
 size_flags_horizontal = 3
 align = 1
@@ -178,17 +178,17 @@ __meta__ = {
 }
 
 [node name="Spacer2" type="Control" parent="HBox"]
-margin_left = 248.0
-margin_right = 256.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 8, 0 )
+offset_left = 248.0
+offset_right = 256.0
+offset_bottom = 32.0
+custom_minimum_size = Vector2( 8, 0 )
 mouse_filter = 2
 
 [connection signal="pressed" from="HBox/Button" to="." method="on_pressed"]
 [connection signal="toggled" from="HBox/HBox/Bool" to="." method="on_bool_toggled"]
 [connection signal="popup_closed" from="HBox/HBox/Color" to="." method="on_color_changed"]
 [connection signal="item_selected" from="HBox/HBox/Enum" to="." method="on_enum_selected"]
-[connection signal="text_entered" from="HBox/HBox/String" to="." method="_on_String_text_entered"]
-[connection signal="text_entered" from="HBox/HBox/Load" to="." method="on_text_entered"]
-[connection signal="text_entered" from="HBox/HBox/Vector2X" to="." method="on_vector2x_entered"]
-[connection signal="text_entered" from="HBox/HBox/Vector2Y" to="." method="on_vector2y_entered"]
+[connection signal="text_submitted" from="HBox/HBox/String" to="." method="_on_String_text_entered"]
+[connection signal="text_submitted" from="HBox/HBox/Load" to="." method="on_text_entered"]
+[connection signal="text_submitted" from="HBox/HBox/Vector2X" to="." method="on_vector2x_entered"]
+[connection signal="text_submitted" from="HBox/HBox/Vector2Y" to="." method="on_vector2y_entered"]

@@ -1,13 +1,13 @@
 extends Enemy
 
-export var look_dir: Vector2 = Vector2.LEFT
+@export var look_dir: Vector2 = Vector2.LEFT
 var move_dir: Vector2
 
 const BULLET = preload("res://src/Bullet/Enemy/Laser.tscn")
-export var projectile_speed: int = 200
-export var bullet_height_adjustment = 1
-export var cooldown_time = 4.0
-export var bullet_damage = 4
+@export var projectile_speed: int = 200
+@export var bullet_height_adjustment = 1
+@export var cooldown_time = 4.0
+@export var bullet_damage = 4
 
 var target: Node = null
 var locked_on = false
@@ -38,7 +38,10 @@ func _physics_process(_delta):
 
 
 	velocity = calculate_movevelocity(velocity, move_dir, speed)
-	velocity = move_and_slide(velocity, FLOOR_NORMAL)
+	set_velocity(velocity)
+	set_up_direction(FLOOR_NORMAL)
+	move_and_slide()
+	velocity = velocity
 	
 	animate()
 
@@ -69,13 +72,13 @@ func wander():
 		move_dir = dir
 		look_dir = dir
 		
-		yield(get_tree().create_timer(walk_time), "timeout")
+		await get_tree().create_timer(walk_time).timeout
 		move_dir = Vector2.ZERO
 		if look_dir == Vector2.LEFT:
 			$AnimationPlayer.play("BlinkLeft")
 		elif look_dir == Vector2.RIGHT:
 			$AnimationPlayer.play("BlinkRight")
-		yield($AnimationPlayer, "animation_finished")
+		await $AnimationPlayer.animation_finished
 
 func fire():
 	if not shooting:
@@ -89,15 +92,15 @@ func fire():
 				elif target.global_position > global_position: #player to the right
 					$AnimationPlayer.play("ShootRight")
 					look_dir = Vector2.RIGHT
-				yield(get_tree().create_timer(0.2), "timeout") #delay for animation sync
+				await get_tree().create_timer(0.2).timeout #delay for animation sync
 				if not locked_on:
 					break
 				prepare_bullet()
-				yield($FireCooldown, "timeout")
+				await $FireCooldown.timeout
 				if not locked_on:
 					break
 		else: 
-			yield($FireCooldown, "timeout")
+			await $FireCooldown.timeout
 			fire()
 
 func search():
@@ -107,18 +110,18 @@ func search():
 		move_dir = dir
 		look_dir = dir
 		
-		yield(get_tree().create_timer(walk_time), "timeout")
+		await get_tree().create_timer(walk_time).timeout
 		move_dir = Vector2.ZERO
 		if look_dir == Vector2.LEFT:
 			$AnimationPlayer.play("SniffLeft")
 		elif look_dir == Vector2.RIGHT:
 			$AnimationPlayer.play("SniffRight")
-		yield($AnimationPlayer, "animation_finished")
+		await $AnimationPlayer.animation_finished
 	
 
 func prepare_bullet():
 	#print("hunter fired bullet")
-	var bullet = BULLET.instance()
+	var bullet = BULLET.instantiate()
 	get_tree().get_current_scene().add_child(bullet)
 	
 	bullet.position = Vector2($CollisionShape2D.global_position.x, $CollisionShape2D.global_position.y + bullet_height_adjustment)

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNrobobugdie.wav-a2811e8a2fd957476ef07580961382a8.sample"
+type="AudioStreamWAV"
+uid="uid://bk5ow35r7dybd"
+path="res://.godot/imported/YMNrobobugdie.wav-a2811e8a2fd957476ef07580961382a8.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNrobobugdie.wav"
-dest_files=[ "res://.import/YMNrobobugdie.wav-a2811e8a2fd957476ef07580961382a8.sample" ]
+dest_files=["res://.godot/imported/YMNrobobugdie.wav-a2811e8a2fd957476ef07580961382a8.sample"]
 
 [params]
 

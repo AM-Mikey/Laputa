@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/bassexplosion.wav-6ad007e6f0d7102836287eb9548741f8.sample"
+type="AudioStreamWAV"
+uid="uid://vojvrb7sq8sj"
+path="res://.godot/imported/bassexplosion.wav-6ad007e6f0d7102836287eb9548741f8.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/bassexplosion.wav"
-dest_files=[ "res://.import/bassexplosion.wav-6ad007e6f0d7102836287eb9548741f8.sample" ]
+dest_files=["res://.godot/imported/bassexplosion.wav-6ad007e6f0d7102836287eb9548741f8.sample"]
 
 [params]
 

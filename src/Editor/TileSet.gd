@@ -26,15 +26,15 @@ var brush_rotation_degrees = 0
 var brush_one_way = false
 
 
-export var tile_separation: int = 1
-export(NodePath) var normal_buttons
-export(NodePath) var collision_buttons
-export(NodePath) var normal_cursor
+@export var tile_separation: int = 1
+@export var normal_buttons: NodePath
+@export var collision_buttons: NodePath
+@export var normal_cursor: NodePath
 #export(NodePath) var collision_cursor
-export(NodePath) var brushes
+@export var brushes: NodePath
 
-onready var w = get_tree().get_root().get_node("World")
-onready var editor = get_parent().get_parent().get_parent()
+@onready var w = get_tree().get_root().get_node("World")
+@onready var editor = get_parent().get_parent().get_parent()
 
 
 func _ready():
@@ -54,20 +54,20 @@ func setup_tile_buttons(parent):
 	for c in get_node(parent).get_children(): #clear old rows
 		c.free()
 ###
-	get_node(parent).add_constant_override("separation", tile_separation)
+	get_node(parent).add_theme_constant_override("separation", tile_separation)
 	var r_id = 0
 	for r in rows:
 		var row = HBoxContainer.new()
-		row.add_constant_override("separation", tile_separation)
+		row.add_theme_constant_override("separation", tile_separation)
 		#row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		get_node(parent).add_child(row)
 		var c_id = 0
 		for c in columns:
-			var button = load("res://src/Editor/Button/TileButton.tscn").instance()
+			var button = load("res://src/Editor/Button/TileButton.tscn").instantiate()
 			button.tile_set_position = Vector2(c_id*16, r_id*16) 
 			row.add_child(button)
-			button.connect("mouse_entered", self, "hover_button", [button])
-			button.connect("mouse_exited", self, "unhover")
+			button.connect("mouse_entered", Callable(self, "hover_button").bind(button))
+			button.connect("mouse_exited", Callable(self, "unhover"))
 			c_id += 1
 		r_id += 1
 ###
@@ -79,7 +79,7 @@ func setup_tile_buttons(parent):
 		button.texture = get_tile_as_texture(i)
 
 
-func get_tile_as_texture(id) -> Texture:
+func get_tile_as_texture(id) -> Texture2D:
 	var tile_texture = AtlasTexture.new()
 	tile_texture.atlas = texture
 	tile_texture.region = editor.tile_set.tile_get_region(id)
@@ -103,17 +103,17 @@ func setup_brushes():
 		
 		button.texture_normal = tx_normal
 		button.texture_pressed = tx_pressed
-		button.rect_rotation = brush_rotation_degrees
+		button.rotation = brush_rotation_degrees
 		button.flip_h = brush_flip_h
 		button.flip_v = brush_flip_v
 		
 		
 		button.toggle_mode = true
 		button.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
-		button.connect("pressed", self, "on_brush_selected", [i])
+		button.connect("pressed", Callable(self, "on_brush_selected").bind(i))
 		get_node(brushes).add_child(button)
 		if brush_id == 0:
-			button.pressed = true
+			button.button_pressed = true
 		brush_id += 1
 
 
@@ -183,7 +183,7 @@ func get_tile_as_pixels(region: Rect2) -> Array: #2d
 	var texture = editor.tile_set.tile_get_texture(editor.tile_set.get_tiles_ids().front())
 	var image = texture.get_data()
 	
-	image.lock()
+	false # image.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var tile = []
 	var r_id = region.position.y
 	for r in region.size.y:
@@ -196,7 +196,7 @@ func get_tile_as_pixels(region: Rect2) -> Array: #2d
 		tile.append(row)
 		r_id += 1
 	
-	image.unlock()
+	false # image.unlock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return tile
 
 func set_pixels(region: Rect2, pixels: Array):
@@ -204,7 +204,7 @@ func set_pixels(region: Rect2, pixels: Array):
 	var texture = editor.tile_set.tile_get_texture(editor.tile_set.get_tiles_ids().front())
 	var image = texture.get_data()
 	
-	image.lock()
+	false # image.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 
 	var r_id = region.position.y
 	for r in pixels:
@@ -214,8 +214,8 @@ func set_pixels(region: Rect2, pixels: Array):
 			p_id += 1
 		r_id += 1
 	
-	image.unlock()
-	VisualServer.texture_set_data(texture.get_rid(), image)
+	false # image.unlock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+	RenderingServer.texture_2d_update(texture.get_rid(), image, 0)
 
 
 
@@ -223,11 +223,11 @@ func set_pixels(region: Rect2, pixels: Array):
 func set_cursor(region: Rect2):
 	var x_pos = region.position.x + (floor(region.position.x / 16) * tile_separation)
 	var y_pos = region.position.y + (floor(region.position.y / 16) * tile_separation)
-	get_node(normal_cursor).rect_position = Vector2(x_pos, y_pos) 
+	get_node(normal_cursor).position = Vector2(x_pos, y_pos) 
 #	get_node(collision_cursor).rect_position = Vector2(x_pos, y_pos) 
 	var x_size = region.size.x + (floor(region.size.x / 16) * tile_separation)
 	var y_size = region.size.y + (floor(region.size.y / 16) * tile_separation)
-	get_node(normal_cursor).rect_size = Vector2(x_size, y_size) 
+	get_node(normal_cursor).size = Vector2(x_size, y_size) 
 #	get_node(collision_cursor).rect_size = Vector2(x_size, y_size) 
 
 
@@ -240,9 +240,9 @@ func set_cursor(region: Rect2):
 func on_brush_selected(brush):
 	for c in get_node(brushes).get_children():
 		if c.get_index() != brush:
-			c.pressed = false
+			c.button_pressed = false
 		else:
-			c.pressed = true
+			c.button_pressed = true
 			active_col_brush = c.get_index()
 
 var collision_dict = {
@@ -258,14 +258,14 @@ var collision_dict = {
 func set_collision_icons():
 	var tiles = []
 	for r in get_node(collision_buttons).get_children():
-		for t in r:
-			tiles.append(t)
+		#for t in r: #TODO: check, not sure but 4.1 changed this
+		tiles.append(r)
 	
 	for t in tiles:
 		for i in t.get_children():
 			i.free()
 
-		var sprite = Sprite.new()
+		var sprite = Sprite2D.new()
 		var texture = AtlasTexture.new()
 		texture.atlas = tx_col_brush
 		texture.region = Rect2(active_col_brush * 16, 32, 16, 16)
@@ -291,7 +291,7 @@ func set_collision(tile: int):
 	for c in tile_button.get_children():
 		c.free()
 			
-	var sprite = Sprite.new()
+	var sprite = Sprite2D.new()
 	var texture = AtlasTexture.new()
 	texture.atlas = tx_col_brush
 	texture.region = Rect2(active_col_brush * 16, 32, 16, 16)
@@ -318,7 +318,7 @@ func set_collision(tile: int):
 		var y = 16 - p.y if brush_flip_v else p.y
 		transformed.append(Vector2(x, y))
 		
-	shape.points = PoolVector2Array(transformed)
+	shape.points = PackedVector2Array(transformed)
 
 	#emit_signal("collision_updated", tile, shape)
 	var transform = Transform2D.IDENTITY

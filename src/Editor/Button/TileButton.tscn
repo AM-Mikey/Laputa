@@ -3,6 +3,6 @@
 [ext_resource path="res://src/Editor/Button/TileButton.gd" type="Script" id=1]
 
 [node name="TileButton" type="TextureRect"]
-rect_min_size = Vector2( 16, 16 )
-rect_pivot_offset = Vector2( 8, 8 )
+custom_minimum_size = Vector2( 16, 16 )
+pivot_offset = Vector2( 8, 8 )
 script = ExtResource( 1 )

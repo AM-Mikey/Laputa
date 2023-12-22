@@ -1,11 +1,11 @@
-tool
+@tool
 extends Node2D
 
 
-export var hframe: int setget on_hframe_changed
+@export var hframe: int: set = on_hframe_changed
 
 
-onready var sprite = $Sprite
+@onready var sprite = $Sprite2D
 
 
 

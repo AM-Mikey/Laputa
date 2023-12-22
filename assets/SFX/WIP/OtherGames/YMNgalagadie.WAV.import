@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNgalagadie.WAV-75bcc949da35b595c1e5849ed8ec8c30.sample"
+type="AudioStreamWAV"
+uid="uid://bvayrc6gmhlmh"
+path="res://.godot/imported/YMNgalagadie.WAV-75bcc949da35b595c1e5849ed8ec8c30.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNgalagadie.WAV"
-dest_files=[ "res://.import/YMNgalagadie.WAV-75bcc949da35b595c1e5849ed8ec8c30.sample" ]
+dest_files=["res://.godot/imported/YMNgalagadie.WAV-75bcc949da35b595c1e5849ed8ec8c30.sample"]
 
 [params]
 

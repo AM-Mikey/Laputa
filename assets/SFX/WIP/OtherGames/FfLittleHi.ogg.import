@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/FfLittleHi.ogg-9584c7ff423e913aa49d22fcd9a1408f.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cswbhlfc5ugrt"
+path="res://.godot/imported/FfLittleHi.ogg-9584c7ff423e913aa49d22fcd9a1408f.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/FfLittleHi.ogg"
-dest_files=[ "res://.import/FfLittleHi.ogg-9584c7ff423e913aa49d22fcd9a1408f.oggstr" ]
+dest_files=["res://.godot/imported/FfLittleHi.ogg-9584c7ff423e913aa49d22fcd9a1408f.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

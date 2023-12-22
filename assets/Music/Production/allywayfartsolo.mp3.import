@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/allywayfartsolo.mp3-2dbe6479129e8f7cd99c6ec235d0fe54.mp3str"
+uid="uid://bqg6q4bjb245k"
+path="res://.godot/imported/allywayfartsolo.mp3-2dbe6479129e8f7cd99c6ec235d0fe54.mp3str"
 
 [deps]
 
 source_file="res://assets/Music/Production/allywayfartsolo.mp3"
-dest_files=[ "res://.import/allywayfartsolo.mp3-2dbe6479129e8f7cd99c6ec235d0fe54.mp3str" ]
+dest_files=["res://.godot/imported/allywayfartsolo.mp3-2dbe6479129e8f7cd99c6ec235d0fe54.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

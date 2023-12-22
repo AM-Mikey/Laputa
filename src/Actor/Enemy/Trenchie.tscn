@@ -1,375 +1,378 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=3 uid="uid://b06vi8xuugq3x"]
 
-[ext_resource path="res://src/Actor/Enemy/Trenchie.gd" type="Script" id=1]
-[ext_resource path="res://assets/Actor/Enemy/Trenchie.png" type="Texture" id=2]
-[ext_resource path="res://src/Utility/StateMachine.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Actor/Enemy/Trenchie/Jump.gd" type="Script" id=4]
-[ext_resource path="res://src/Actor/Enemy/Trenchie/Idle.gd" type="Script" id=5]
+[ext_resource type="Script" path="res://src/Actor/Enemy/Trenchie.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://2j2flsg5b2p1" path="res://assets/Actor/Enemy/Trenchie.png" id="2"]
+[ext_resource type="PackedScene" path="res://src/Utility/StateMachine.tscn" id="3"]
+[ext_resource type="Script" path="res://src/Actor/Enemy/Trenchie/Jump.gd" id="4"]
+[ext_resource type="Script" path="res://src/Actor/Enemy/Trenchie/Idle.gd" id="5"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 16)
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 96, 56 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(192, 112)
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 192, 112 )
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(384, 224)
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 96, 40 )
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(192, 80)
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id="5"]
 length = 0.4
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 5 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=6]
-length = 0.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 6 ]
+"values": [5]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id="6"]
 length = 0.4
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 7 ]
+"values": [6]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id="7"]
 length = 0.4
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 12, 15 ]
+"values": [7]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id="8"]
 length = 0.4
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 12, 15 ]
+"values": [12, 15]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [false]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id="9"]
 length = 0.4
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 8, 11 ]
+"values": [12, 15]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [true]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id="10"]
 length = 0.4
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 8, 11 ]
+"values": [8, 11]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [false]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id="11"]
 length = 0.4
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 0, 3 ]
+"values": [8, 11]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id="12"]
 length = 0.4
-loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 4 ]
+"values": [0, 3]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [true]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id="13"]
 length = 0.4
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 4 ]
+"values": [4]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [false]
 }
 
-[node name="Trenchie" type="KinematicBody2D"]
+[sub_resource type="Animation" id="14"]
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u10c2"]
+_data = {
+"Barrel": SubResource("5"),
+"BarrelPeekLeft": SubResource("6"),
+"BarrelPeekRight": SubResource("7"),
+"FallLeft": SubResource("8"),
+"FallRight": SubResource("9"),
+"RiseLeft": SubResource("10"),
+"RiseRight": SubResource("11"),
+"ShootRight": SubResource("12"),
+"StandLeft": SubResource("13"),
+"StandRight": SubResource("14")
+}
+
+[node name="Trenchie" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 10
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -8 )
-shape = SubResource( 1 )
+position = Vector2(0, -8)
+shape = SubResource("1")
 
 [node name="HideDetector" type="Area2D" parent="."]
 collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HideDetector"]
-modulate = Color( 0.188235, 0.537255, 0.529412, 0.603922 )
-position = Vector2( 0, -56 )
-shape = SubResource( 2 )
+modulate = Color(0.188235, 0.537255, 0.529412, 0.603922)
+position = Vector2(0, -56)
+shape = SubResource("2")
 
 [node name="PeekDetector" type="Area2D" parent="."]
 collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PeekDetector"]
-modulate = Color( 0.992157, 0.992157, 0.992157, 0.156863 )
-shape = SubResource( 3 )
+modulate = Color(0.992157, 0.992157, 0.992157, 0.156863)
+shape = SubResource("3")
 
 [node name="ShootDetector" type="Area2D" parent="."]
 collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShootDetector"]
-modulate = Color( 0, 0.0156863, 0.937255, 0.392157 )
-position = Vector2( 0, -72 )
-shape = SubResource( 4 )
+modulate = Color(0, 0.0156863, 0.937255, 0.392157)
+position = Vector2(0, -72)
+shape = SubResource("4")
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -16 )
-texture = ExtResource( 2 )
-flip_h = true
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("2")
 hframes = 4
 vframes = 4
-frame = 8
+frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Barrel = SubResource( 5 )
-anims/BarrelPeekLeft = SubResource( 6 )
-anims/BarrelPeekRight = SubResource( 7 )
-anims/FallLeft = SubResource( 8 )
-anims/FallRight = SubResource( 9 )
-anims/RiseLeft = SubResource( 10 )
-anims/RiseRight = SubResource( 11 )
-anims/ShootRight = SubResource( 12 )
-anims/StandLeft = SubResource( 13 )
-anims/StandRight = SubResource( 14 )
+libraries = {
+"": SubResource("AnimationLibrary_u10c2")
+}
 
 [node name="FireCooldown" type="Timer" parent="."]
 one_shot = true
 autostart = true
 
-[node name="StateMachine" parent="." instance=ExtResource( 3 )]
+[node name="StateMachine" parent="." instance=ExtResource("3")]
 
 [node name="Label" type="Label" parent="StateMachine"]
-margin_right = 40.0
-margin_bottom = 14.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_right = 40.0
+offset_bottom = 14.0
 
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource( 5 )
+script = ExtResource("5")
 
 [node name="Jump" type="Node" parent="StateMachine"]
-script = ExtResource( 4 )
+script = ExtResource("4")
 
 [connection signal="body_entered" from="HideDetector" to="." method="_on_HideDetector_body_entered"]
 [connection signal="body_entered" from="PeekDetector" to="." method="_on_PeekDetector_body_entered"]

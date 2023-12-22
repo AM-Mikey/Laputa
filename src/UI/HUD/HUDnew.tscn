@@ -1,236 +1,256 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=3 uid="uid://dulcn8jx6cd3y"]
 
-[ext_resource path="res://src/UI/HUD/HUDnew.gd" type="Script" id=1]
-[ext_resource path="res://assets/UI/NumberNew.png" type="Texture" id=2]
-[ext_resource path="res://assets/UI/HUD/Background.png" type="Texture" id=3]
-[ext_resource path="res://assets/UI/HUD/HpProgress.png" type="Texture" id=4]
-[ext_resource path="res://assets/UI/HUD/XpProgress.png" type="Texture" id=5]
-[ext_resource path="res://assets/UI/HUD/XpFlash.png" type="Texture" id=6]
-[ext_resource path="res://assets/UI/HUD/HpLost.png" type="Texture" id=7]
-[ext_resource path="res://assets/UI/HUD/CooldownProgress.png" type="Texture" id=8]
-[ext_resource path="res://assets/UI/HUD/GlassBars.png" type="Texture" id=9]
-[ext_resource path="res://assets/UI/HUD/HpCap.png" type="Texture" id=10]
-[ext_resource path="res://src/UI/HUD/GunIcon.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/UI/HUD/AmmoCount.tscn" type="PackedScene" id=12]
-[ext_resource path="res://assets/UI/HUD/XpMax.png" type="Texture" id=13]
-[ext_resource path="res://assets/UI/NumberSmall.png" type="Texture" id=14]
-[ext_resource path="res://assets/UI/HUD/HpLostCap.png" type="Texture" id=15]
+[ext_resource type="Script" path="res://src/UI/HUD/HUDnew.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://c7wyw4y3jdl7j" path="res://assets/UI/NumberNew.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://do03ns87tmu82" path="res://assets/UI/HUD/Background.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://4wopjt8nlvp1" path="res://assets/UI/HUD/HpProgress.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://nkjwbokhsfxc" path="res://assets/UI/HUD/XpProgress.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://bp2x66vhi4s1f" path="res://assets/UI/HUD/XpFlash.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://cn3hthxv2o1lq" path="res://assets/UI/HUD/HpLost.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://bqejmth0dsfvu" path="res://assets/UI/HUD/CooldownProgress.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://bua4vdl5ti3sm" path="res://assets/UI/HUD/GlassBars.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://c74tdbmtpnw3v" path="res://assets/UI/HUD/HpCap.png" id="10"]
+[ext_resource type="PackedScene" uid="uid://bf3lvcu6ts2nr" path="res://src/UI/HUD/GunIcon.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://src/UI/HUD/AmmoCount.tscn" id="12"]
+[ext_resource type="Texture2D" uid="uid://dc056na67sdc5" path="res://assets/UI/HUD/XpMax.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://2fp1scy7ajqk" path="res://assets/UI/NumberSmall.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://c2xhxpgm4yocx" path="res://assets/UI/HUD/HpLostCap.png" id="15"]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id="1"]
 resource_name = "Flash"
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 resource_name = "XpFlash"
 length = 0.2
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("VBox/Base/Xp/Flash:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2a4ya"]
+_data = {
+"Flash": SubResource("1"),
+"XpFlash": SubResource("2")
 }
 
 [node name="HUDnew" type="MarginContainer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = 2.0
+offset_bottom = 2.0
 mouse_filter = 2
-script = ExtResource( 1 )
+script = ExtResource("1")
 hp_path = NodePath("VBox/Base/Hp")
 xp_path = NodePath("VBox/Base/Xp")
 cooldown_path = NodePath("VBox/Base/Cooldown")
 money_path = NodePath("VBox/Base/Money")
 
 [node name="VBox" type="VBoxContainer" parent="."]
-margin_right = 480.0
-margin_bottom = 272.0
+layout_mode = 2
 
 [node name="Gun" type="Control" parent="VBox"]
-margin_right = 480.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 0, 24 )
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
 mouse_filter = 2
 
-[node name="WeaponIcon" parent="VBox/Gun" instance=ExtResource( 11 )]
-margin_left = 8.0
-margin_top = 8.0
-margin_bottom = 24.0
+[node name="WeaponIcon" parent="VBox/Gun" instance=ExtResource("11")]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_bottom = 24.0
 
-[node name="AmmoCount" parent="VBox/Gun" instance=ExtResource( 12 )]
-margin_left = 48.0
-margin_top = 8.0
-margin_right = -384.0
-margin_bottom = 0.0
+[node name="AmmoCount" parent="VBox/Gun" instance=ExtResource("12")]
+anchors_preset = 0
+offset_left = 48.0
+offset_top = 8.0
+offset_right = -384.0
+offset_bottom = 0.0
 
 [node name="HBox" type="HBoxContainer" parent="VBox/Gun"]
-margin_left = 104.0
-margin_top = 16.0
-margin_right = 104.0
-margin_bottom = 16.0
+layout_mode = 0
+offset_left = 104.0
+offset_top = 16.0
+offset_right = 104.0
+offset_bottom = 16.0
 mouse_filter = 2
 
 [node name="Base" type="Control" parent="VBox"]
-margin_top = 28.0
-margin_right = 480.0
-margin_bottom = 28.0
+layout_mode = 2
 
-[node name="Back" type="Sprite" parent="VBox/Base"]
-texture = ExtResource( 3 )
+[node name="Back" type="Sprite2D" parent="VBox/Base"]
+texture = ExtResource("3")
 centered = false
 
 [node name="Hp" type="Control" parent="VBox/Base"]
-margin_right = 480.0
-margin_bottom = 272.0
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 272.0
 mouse_filter = 2
 
-[node name="Lost" type="TextureProgress" parent="VBox/Base/Hp"]
-margin_left = 32.0
-margin_top = 3.0
-margin_right = 70.0
-margin_bottom = 7.0
-mouse_filter = 2
-value = 50.0
-texture_progress = ExtResource( 7 )
-
-[node name="Cap" type="Sprite" parent="VBox/Base/Hp/Lost"]
-position = Vector2( 19, 2 )
-texture = ExtResource( 15 )
-
-[node name="Progress" type="TextureProgress" parent="VBox/Base/Hp"]
-margin_left = 32.0
-margin_top = 3.0
-margin_right = 70.0
-margin_bottom = 7.0
+[node name="Lost" type="TextureProgressBar" parent="VBox/Base/Hp"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 3.0
+offset_right = 70.0
+offset_bottom = 7.0
 mouse_filter = 2
 value = 50.0
-texture_progress = ExtResource( 4 )
+texture_progress = ExtResource("7")
 
-[node name="Cap" type="Sprite" parent="VBox/Base/Hp/Progress"]
-position = Vector2( 19, 2 )
-texture = ExtResource( 10 )
+[node name="Cap" type="Sprite2D" parent="VBox/Base/Hp/Lost"]
+position = Vector2(19, 2)
+texture = ExtResource("15")
 
-[node name="Num1" type="Sprite" parent="VBox/Base/Hp"]
-position = Vector2( 12, 0 )
-texture = ExtResource( 2 )
+[node name="Progress" type="TextureProgressBar" parent="VBox/Base/Hp"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 3.0
+offset_right = 70.0
+offset_bottom = 7.0
+mouse_filter = 2
+value = 50.0
+texture_progress = ExtResource("4")
+
+[node name="Cap" type="Sprite2D" parent="VBox/Base/Hp/Progress"]
+position = Vector2(19, 2)
+texture = ExtResource("10")
+
+[node name="Num1" type="Sprite2D" parent="VBox/Base/Hp"]
+position = Vector2(12, 0)
+texture = ExtResource("2")
 centered = false
 hframes = 11
 vframes = 6
 frame = 64
 
-[node name="Num2" type="Sprite" parent="VBox/Base/Hp"]
-position = Vector2( 20, 0 )
-texture = ExtResource( 2 )
+[node name="Num2" type="Sprite2D" parent="VBox/Base/Hp"]
+position = Vector2(20, 0)
+texture = ExtResource("2")
 centered = false
 hframes = 11
 vframes = 6
 frame = 64
 
 [node name="LostTween" type="Tween" parent="VBox/Base/Hp"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+script = null
 
 [node name="Xp" type="Control" parent="VBox/Base"]
-margin_right = 480.0
-margin_bottom = 272.0
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 272.0
 mouse_filter = 2
 
-[node name="Progress" type="TextureProgress" parent="VBox/Base/Xp"]
-margin_left = 28.0
-margin_top = 11.0
-margin_right = 66.0
-margin_bottom = 15.0
+[node name="Progress" type="TextureProgressBar" parent="VBox/Base/Xp"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 11.0
+offset_right = 66.0
+offset_bottom = 15.0
 mouse_filter = 2
 value = 100.0
-texture_progress = ExtResource( 5 )
+texture_progress = ExtResource("5")
 
-[node name="Flash" type="Sprite" parent="VBox/Base/Xp"]
-modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 28, 11 )
-texture = ExtResource( 6 )
+[node name="Flash" type="Sprite2D" parent="VBox/Base/Xp"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(28, 11)
+texture = ExtResource("6")
 centered = false
 
-[node name="Num" type="Sprite" parent="VBox/Base/Xp"]
-position = Vector2( 20, 12 )
-texture = ExtResource( 2 )
+[node name="Num" type="Sprite2D" parent="VBox/Base/Xp"]
+position = Vector2(20, 12)
+texture = ExtResource("2")
 hframes = 11
 vframes = 6
 frame = 56
 
-[node name="Max" type="Sprite" parent="VBox/Base/Xp"]
+[node name="Max" type="Sprite2D" parent="VBox/Base/Xp"]
 visible = false
-position = Vector2( 25, 10 )
 z_index = 1
-texture = ExtResource( 13 )
+position = Vector2(25, 10)
+texture = ExtResource("13")
 centered = false
 
 [node name="Cooldown" type="Control" parent="VBox/Base"]
-margin_right = 480.0
-margin_bottom = 272.0
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 272.0
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Progress" type="TextureProgress" parent="VBox/Base/Cooldown"]
-margin_left = 25.0
-margin_top = 19.0
-margin_right = 62.0
-margin_bottom = 21.0
+[node name="Progress" type="TextureProgressBar" parent="VBox/Base/Cooldown"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 19.0
+offset_right = 62.0
+offset_bottom = 21.0
 mouse_filter = 2
 value = 100.0
-texture_progress = ExtResource( 8 )
+texture_progress = ExtResource("8")
 
 [node name="Money" type="Control" parent="VBox/Base"]
-margin_right = 480.0
-margin_bottom = 272.0
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 272.0
 mouse_filter = 2
 
-[node name="Num1" type="Sprite" parent="VBox/Base/Money"]
-position = Vector2( 8, 19 )
-texture = ExtResource( 14 )
+[node name="Num1" type="Sprite2D" parent="VBox/Base/Money"]
+position = Vector2(8, 19)
+texture = ExtResource("14")
 centered = false
-offset = Vector2( 0, -1 )
+offset = Vector2(0, -1)
 hframes = 10
 vframes = 2
 frame = 10
 
-[node name="Num2" type="Sprite" parent="VBox/Base/Money"]
-position = Vector2( 12, 19 )
-texture = ExtResource( 14 )
+[node name="Num2" type="Sprite2D" parent="VBox/Base/Money"]
+position = Vector2(12, 19)
+texture = ExtResource("14")
 centered = false
-offset = Vector2( 0, -1 )
+offset = Vector2(0, -1)
 hframes = 10
 vframes = 2
 frame = 10
 
-[node name="Num3" type="Sprite" parent="VBox/Base/Money"]
-position = Vector2( 16, 19 )
-texture = ExtResource( 14 )
+[node name="Num3" type="Sprite2D" parent="VBox/Base/Money"]
+position = Vector2(16, 19)
+texture = ExtResource("14")
 centered = false
-offset = Vector2( 0, -1 )
+offset = Vector2(0, -1)
 hframes = 10
 vframes = 2
 frame = 10
 
-[node name="Front" type="Sprite" parent="VBox/Base"]
-texture = ExtResource( 9 )
+[node name="Front" type="Sprite2D" parent="VBox/Base"]
+texture = ExtResource("9")
 centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Flash = SubResource( 1 )
-anims/XpFlash = SubResource( 2 )
+libraries = {
+"": SubResource("AnimationLibrary_2a4ya")
+}

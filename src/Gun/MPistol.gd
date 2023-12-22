@@ -37,4 +37,5 @@ func load_level():
 			max_xp = 10
 
 func activate():
-	spawn_bullet(get_origin(), pc.shoot_dir)
+	var bullet = spawn_bullet(get_origin(), pc.shoot_dir)
+	bullet.instant_fizzle_check()

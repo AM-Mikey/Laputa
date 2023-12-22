@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/HLstep.wav-69b921a190b78a6e8b7d9b5074b7b8a4.sample"
+type="AudioStreamWAV"
+uid="uid://dcxbp43jsaxs"
+path="res://.godot/imported/HLstep.wav-69b921a190b78a6e8b7d9b5074b7b8a4.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/HLstep.wav"
-dest_files=[ "res://.import/HLstep.wav-69b921a190b78a6e8b7d9b5074b7b8a4.sample" ]
+dest_files=["res://.godot/imported/HLstep.wav-69b921a190b78a6e8b7d9b5074b7b8a4.sample"]
 
 [params]
 

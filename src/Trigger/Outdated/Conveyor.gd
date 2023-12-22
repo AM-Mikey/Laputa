@@ -1,11 +1,11 @@
 extends StaticBody2D
 
-export var direction = Vector2.LEFT
-export var speed = Vector2(60,60)
+@export var direction = Vector2.LEFT
+@export var speed = Vector2(60,60)
 
 var active_pc = null
 
-onready var world = get_tree().get_root().get_node("World")
+@onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
 	constant_linear_velocity = speed * direction

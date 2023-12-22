@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/UI/Theme/LaputaTheme.tres" type="Theme" id=1]
 [ext_resource path="res://src/UI/StyleBox/SteelRoundInset.tres" type="StyleBox" id=2]
-[ext_resource path="res://src/UI/Font/Momo.tres" type="DynamicFont" id=3]
+[ext_resource path="res://src/UI/Font/Momo.tres" type="FontFile" id=3]
 [ext_resource path="res://src/UI/StyleBox/SteelRound.tres" type="StyleBox" id=4]
 [ext_resource path="res://src/UI/MenuButton.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/UI/KeyGuide.gd" type="Script" id=6]
@@ -14,389 +14,389 @@ theme = ExtResource( 1 )
 script = ExtResource( 6 )
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 480.0
-margin_bottom = 270.0
-custom_styles/panel = ExtResource( 4 )
+offset_right = 480.0
+offset_bottom = 270.0
+theme_override_styles/panel = ExtResource( 4 )
 
 [node name="Margin" type="MarginContainer" parent="."]
-margin_right = 480.0
-margin_bottom = 270.0
-custom_constants/margin_right = 8
-custom_constants/margin_top = 8
-custom_constants/margin_left = 8
-custom_constants/margin_bottom = 8
+offset_right = 480.0
+offset_bottom = 270.0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Margin"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 472.0
-margin_bottom = 262.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 472.0
+offset_bottom = 262.0
 
 [node name="Scroll" type="ScrollContainer" parent="Margin/VBoxContainer"]
-margin_right = 464.0
-margin_bottom = 220.0
+offset_right = 464.0
+offset_bottom = 220.0
 size_flags_vertical = 3
-custom_styles/bg = ExtResource( 2 )
+theme_override_styles/bg = ExtResource( 2 )
 follow_focus = true
 
 [node name="VBox" type="VBoxContainer" parent="Margin/VBoxContainer/Scroll"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 450.0
-margin_bottom = 325.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 450.0
+offset_bottom = 325.0
 size_flags_horizontal = 3
 
 [node name="Controls" type="Label" parent="Margin/VBoxContainer/Scroll/VBox"]
-margin_right = 442.0
-margin_bottom = 14.0
+offset_right = 442.0
+offset_bottom = 14.0
 text = "How to Play"
 align = 1
 
 [node name="HBox4" type="HBoxContainer" parent="Margin/VBoxContainer/Scroll/VBox"]
-margin_top = 18.0
-margin_right = 442.0
-margin_bottom = 33.0
+offset_top = 18.0
+offset_right = 442.0
+offset_bottom = 33.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox4"]
-margin_right = 76.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 3 )
+offset_right = 76.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource( 3 )
 text = "Jump / Accept"
 
 [node name="Key" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox4"]
-margin_left = 434.0
-margin_right = 442.0
-margin_bottom = 15.0
+offset_left = 434.0
+offset_right = 442.0
+offset_bottom = 15.0
 size_flags_horizontal = 10
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "X"
 
 [node name="HBox2" type="HBoxContainer" parent="Margin/VBoxContainer/Scroll/VBox"]
-margin_top = 37.0
-margin_right = 442.0
-margin_bottom = 52.0
+offset_top = 37.0
+offset_right = 442.0
+offset_bottom = 52.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox2"]
-margin_right = 77.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 3 )
+offset_right = 77.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource( 3 )
 text = "Shoot / Decline"
 
 [node name="Key" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox2"]
-margin_left = 435.0
-margin_right = 442.0
-margin_bottom = 15.0
+offset_left = 435.0
+offset_right = 442.0
+offset_bottom = 15.0
 size_flags_horizontal = 10
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "C"
 
 [node name="HBox3" type="HBoxContainer" parent="Margin/VBoxContainer/Scroll/VBox"]
-margin_top = 56.0
-margin_right = 442.0
-margin_bottom = 71.0
+offset_top = 56.0
+offset_right = 442.0
+offset_bottom = 71.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox3"]
-margin_right = 157.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 3 )
+offset_right = 157.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource( 3 )
 text = "Direction Lock / Autofire (Hold)"
 
 [node name="Key" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox3"]
-margin_left = 434.0
-margin_right = 442.0
-margin_bottom = 15.0
+offset_left = 434.0
+offset_right = 442.0
+offset_bottom = 15.0
 size_flags_horizontal = 10
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "Z"
 
 [node name="HBox6" type="HBoxContainer" parent="Margin/VBoxContainer/Scroll/VBox"]
-margin_top = 75.0
-margin_right = 442.0
-margin_bottom = 90.0
+offset_top = 75.0
+offset_right = 442.0
+offset_bottom = 90.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox6"]
-margin_right = 85.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 3 )
+offset_right = 85.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource( 3 )
 text = "Switch Weapons"
 
 [node name="Key" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox6"]
-margin_left = 413.0
-margin_right = 442.0
-margin_bottom = 15.0
+offset_left = 413.0
+offset_right = 442.0
+offset_bottom = 15.0
 size_flags_horizontal = 10
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "A / S"
 
 [node name="HBox8" type="HBoxContainer" parent="Margin/VBoxContainer/Scroll/VBox"]
-margin_top = 94.0
-margin_right = 442.0
-margin_bottom = 109.0
+offset_top = 94.0
+offset_right = 442.0
+offset_bottom = 109.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox8"]
-margin_right = 49.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 3 )
+offset_right = 49.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource( 3 )
 text = "Inventory"
 
 [node name="Key" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox8"]
-margin_left = 434.0
-margin_right = 442.0
-margin_bottom = 15.0
+offset_left = 434.0
+offset_right = 442.0
+offset_bottom = 15.0
 size_flags_horizontal = 10
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "Q"
 
 [node name="HBox7" type="HBoxContainer" parent="Margin/VBoxContainer/Scroll/VBox"]
-margin_top = 113.0
-margin_right = 442.0
-margin_bottom = 128.0
+offset_top = 113.0
+offset_right = 442.0
+offset_bottom = 128.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox7"]
-margin_right = 62.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 3 )
+offset_right = 62.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource( 3 )
 text = "Pause Menu"
 
 [node name="Key" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox7"]
-margin_left = 408.0
-margin_right = 442.0
-margin_bottom = 15.0
+offset_left = 408.0
+offset_right = 442.0
+offset_bottom = 15.0
 size_flags_horizontal = 10
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "Escape"
 
 [node name="Debug" type="Label" parent="Margin/VBoxContainer/Scroll/VBox"]
-margin_top = 132.0
-margin_right = 442.0
-margin_bottom = 146.0
+offset_top = 132.0
+offset_right = 442.0
+offset_bottom = 146.0
 text = "Debug Hotkeys"
 align = 1
 
 [node name="HBox" type="HBoxContainer" parent="Margin/VBoxContainer/Scroll/VBox"]
-margin_top = 150.0
-margin_right = 442.0
-margin_bottom = 165.0
+offset_top = 150.0
+offset_right = 442.0
+offset_bottom = 165.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox"]
-margin_right = 191.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 3 )
+offset_right = 191.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource( 3 )
 text = "Debug Info (use when bug reporting!)"
 
 [node name="Key" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox"]
-margin_left = 400.0
-margin_right = 442.0
-margin_bottom = 15.0
+offset_left = 400.0
+offset_right = 442.0
+offset_bottom = 15.0
 size_flags_horizontal = 10
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "~ (Tilde)"
 
 [node name="HBox5" type="HBoxContainer" parent="Margin/VBoxContainer/Scroll/VBox"]
-margin_top = 169.0
-margin_right = 442.0
-margin_bottom = 184.0
+offset_top = 169.0
+offset_right = 442.0
+offset_bottom = 184.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox5"]
-margin_right = 63.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 3 )
+offset_right = 63.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource( 3 )
 text = "Reload Level"
 
 [node name="Key" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox5"]
-margin_left = 377.0
-margin_right = 442.0
-margin_bottom = 15.0
+offset_left = 377.0
+offset_right = 442.0
+offset_bottom = 15.0
 size_flags_horizontal = 10
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "\\ (Backslash)"
 
 [node name="HBox10" type="HBoxContainer" parent="Margin/VBoxContainer/Scroll/VBox"]
-margin_top = 188.0
-margin_right = 442.0
-margin_bottom = 203.0
+offset_top = 188.0
+offset_right = 442.0
+offset_bottom = 203.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox10"]
-margin_right = 50.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 3 )
+offset_right = 50.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource( 3 )
 text = "Toggle Fly"
 
 [node name="Key" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox10"]
-margin_left = 435.0
-margin_right = 442.0
-margin_bottom = 15.0
+offset_left = 435.0
+offset_right = 442.0
+offset_bottom = 15.0
 size_flags_horizontal = 10
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "P"
 
 [node name="HBox13" type="HBoxContainer" parent="Margin/VBoxContainer/Scroll/VBox"]
-margin_top = 207.0
-margin_right = 442.0
-margin_bottom = 222.0
+offset_top = 207.0
+offset_right = 442.0
+offset_bottom = 222.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox13"]
-margin_right = 54.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 3 )
+offset_right = 54.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource( 3 )
 text = "Quit Game"
 
 [node name="Key" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox13"]
-margin_left = 424.0
-margin_right = 442.0
-margin_bottom = 15.0
+offset_left = 424.0
+offset_right = 442.0
+offset_bottom = 15.0
 size_flags_horizontal = 10
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "End"
 
 [node name="HBox11" type="HBoxContainer" parent="Margin/VBoxContainer/Scroll/VBox"]
-margin_top = 226.0
-margin_right = 442.0
-margin_bottom = 241.0
+offset_top = 226.0
+offset_right = 442.0
+offset_bottom = 241.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox11"]
-margin_right = 59.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 3 )
+offset_right = 59.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource( 3 )
 text = "Level Editor"
 
 [node name="Key" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox11"]
-margin_left = 426.0
-margin_right = 442.0
-margin_bottom = 15.0
+offset_left = 426.0
+offset_right = 442.0
+offset_bottom = 15.0
 size_flags_horizontal = 10
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "F10"
 
 [node name="HBox15" type="HBoxContainer" parent="Margin/VBoxContainer/Scroll/VBox"]
-margin_top = 245.0
-margin_right = 442.0
-margin_bottom = 260.0
+offset_top = 245.0
+offset_right = 442.0
+offset_bottom = 260.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox15"]
-margin_right = 55.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 3 )
+offset_right = 55.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource( 3 )
 text = "Save/Load"
 
 [node name="Key" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox15"]
-margin_left = 406.0
-margin_right = 442.0
-margin_bottom = 15.0
+offset_left = 406.0
+offset_right = 442.0
+offset_bottom = 15.0
 size_flags_horizontal = 10
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "F1 / F2"
 
 [node name="HBox14" type="HBoxContainer" parent="Margin/VBoxContainer/Scroll/VBox"]
-margin_top = 264.0
-margin_right = 442.0
-margin_bottom = 279.0
+offset_top = 264.0
+offset_right = 442.0
+offset_bottom = 279.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox14"]
-margin_right = 277.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 3 )
+offset_right = 277.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource( 3 )
 text = "Toggle Trigger Visuals (Hitboxes for Props, Dialog, Etc.)"
 
 [node name="Key" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox14"]
-margin_left = 412.0
-margin_right = 442.0
-margin_bottom = 15.0
+offset_left = 412.0
+offset_right = 442.0
+offset_bottom = 15.0
 size_flags_horizontal = 10
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "Insert"
 
 [node name="HBox9" type="HBoxContainer" parent="Margin/VBoxContainer/Scroll/VBox"]
-margin_top = 283.0
-margin_right = 442.0
-margin_bottom = 298.0
+offset_top = 283.0
+offset_right = 442.0
+offset_bottom = 298.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox9"]
-margin_right = 86.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 3 )
+offset_right = 86.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource( 3 )
 text = "Level Up / Down"
 
 [node name="Key" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox9"]
-margin_left = 336.0
-margin_right = 442.0
-margin_bottom = 15.0
+offset_left = 336.0
+offset_right = 442.0
+offset_bottom = 15.0
 size_flags_horizontal = 10
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "PageUp / PageDown"
 
 [node name="HBox12" type="HBoxContainer" parent="Margin/VBoxContainer/Scroll/VBox"]
-margin_top = 302.0
-margin_right = 442.0
-margin_bottom = 317.0
+offset_top = 302.0
+offset_right = 442.0
+offset_bottom = 317.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox12"]
-margin_right = 57.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 3 )
+offset_right = 57.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource( 3 )
 text = "Shop Menu"
 
 [node name="Key" type="Label" parent="Margin/VBoxContainer/Scroll/VBox/HBox12"]
-margin_left = 317.0
-margin_right = 442.0
-margin_bottom = 15.0
+offset_left = 317.0
+offset_right = 442.0
+offset_bottom = 15.0
 size_flags_horizontal = 10
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "Menu (Keyboard Button)"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer"]
-margin_top = 224.0
-margin_right = 464.0
-margin_bottom = 254.0
+offset_top = 224.0
+offset_right = 464.0
+offset_bottom = 254.0
 alignment = 2
 
 [node name="Return" parent="Margin/VBoxContainer/HBoxContainer" instance=ExtResource( 5 )]
-margin_left = 409.0
-margin_right = 464.0
-margin_bottom = 30.0
+offset_left = 409.0
+offset_right = 464.0
+offset_bottom = 30.0
 text = "Return"

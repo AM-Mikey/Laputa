@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/HLreload.wav-ff3eeb8eddddd303938e363db2dd097b.sample"
+type="AudioStreamWAV"
+uid="uid://br5y0roxl1r7x"
+path="res://.godot/imported/HLreload.wav-ff3eeb8eddddd303938e363db2dd097b.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/HLreload.wav"
-dest_files=[ "res://.import/HLreload.wav-ff3eeb8eddddd303938e363db2dd097b.sample" ]
+dest_files=["res://.godot/imported/HLreload.wav-ff3eeb8eddddd303938e363db2dd097b.sample"]
 
 [params]
 

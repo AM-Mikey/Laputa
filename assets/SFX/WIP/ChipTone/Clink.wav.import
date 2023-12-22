@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Clink.wav-f64f07fe4bbd738bfbc3cd1a17e819e4.sample"
+type="AudioStreamWAV"
+uid="uid://3m6sytw4ur5m"
+path="res://.godot/imported/Clink.wav-f64f07fe4bbd738bfbc3cd1a17e819e4.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/ChipTone/Clink.wav"
-dest_files=[ "res://.import/Clink.wav-f64f07fe4bbd738bfbc3cd1a17e819e4.sample" ]
+dest_files=["res://.godot/imported/Clink.wav-f64f07fe4bbd738bfbc3cd1a17e819e4.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

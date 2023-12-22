@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNboomerangthrow.wav-a18c66ed3c7fe977bb32e91aac0195aa.sample"
+type="AudioStreamWAV"
+uid="uid://cadggbhv5g0x6"
+path="res://.godot/imported/YMNboomerangthrow.wav-a18c66ed3c7fe977bb32e91aac0195aa.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNboomerangthrow.wav"
-dest_files=[ "res://.import/YMNboomerangthrow.wav-a18c66ed3c7fe977bb32e91aac0195aa.sample" ]
+dest_files=["res://.godot/imported/YMNboomerangthrow.wav-a18c66ed3c7fe977bb32e91aac0195aa.sample"]
 
 [params]
 

@@ -13,7 +13,7 @@ angular_damp = 100.0
 position = Vector2( 0, 2 )
 shape = SubResource( 1 )
 
-[node name="Joint" type="PinJoint2D" parent="."]
+[node name="Joint3D" type="PinJoint2D" parent="."]
 position = Vector2( 0, 4 )
 scale = Vector2( 0.2, 0.2 )
 node_a = NodePath("..")

@@ -23,7 +23,10 @@ func _physics_process(delta):
 	if disabled or dead:
 		return
 	velocity = calculate_movevelocity(velocity, move_dir, speed)
-	velocity = move_and_slide(velocity, FLOOR_NORMAL)
+	set_velocity(velocity)
+	set_up_direction(FLOOR_NORMAL)
+	move_and_slide()
+	velocity = velocity
 	
 	animate(move_dir)
 	
@@ -44,7 +47,7 @@ func wait(move_dir):
 		if move_dir.x == 1:
 			$AnimationPlayer.play("IdleRight")
 
-	yield($Timer, "timeout")
+	await $Timer.timeout
 	rng.randomize()
 	move_dir = Vector2(sign(rng.randf_range(-1, 1)), 0)
 	idle = false
@@ -68,10 +71,10 @@ func calculate_movevelocity(linearvelocity: Vector2, move_direction: Vector2, sp
 
 	if is_on_floor():
 		if friction == true:
-			out.x = lerp(out.x, 0, ground_cof)
+			out.x = lerp(out.x, 0.0, ground_cof)
 	else:
 		if friction == true:
-			out.x = lerp(out.x, 0, air_cof)
+			out.x = lerp(out.x, 0.0, air_cof)
 	return out
 
 

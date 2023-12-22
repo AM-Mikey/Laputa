@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Burst.wav-2e427677a208c02f63c2e1ed60f47cf5.sample"
+type="AudioStreamWAV"
+uid="uid://dhr72lc8cph3"
+path="res://.godot/imported/Burst.wav-2e427677a208c02f63c2e1ed60f47cf5.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/JFXR/Burst.wav"
-dest_files=[ "res://.import/Burst.wav-2e427677a208c02f63c2e1ed60f47cf5.sample" ]
+dest_files=["res://.godot/imported/Burst.wav-2e427677a208c02f63c2e1ed60f47cf5.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

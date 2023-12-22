@@ -27,8 +27,8 @@ func _on_FireCooldown_timeout():
 	if tilemap != null:
 		var target_pos = global_position
 		var local_pos = tilemap.to_local(target_pos)
-		var map_pos = tilemap.world_to_map(local_pos)
-		var target_cell = tilemap.get_cellv(map_pos)
+		var map_pos = tilemap.local_to_map(local_pos)
+		var target_cell = tilemap.get_cell_source_id(0, map_pos)
 		
 		var starting_time = 0
 		var ending_time = .4
@@ -36,10 +36,10 @@ func _on_FireCooldown_timeout():
 		while target_cell == -1:
 			map_pos.y += 1
 			print(map_pos)
-			target_cell = tilemap.get_cellv(map_pos)
+			target_cell = tilemap.get_cell_source_id(0, map_pos)
 			if target_cell == -1:
-				var bolt = BOLT.instance()
-				local_pos = tilemap.map_to_world(map_pos)
+				var bolt = BOLT.instantiate()
+				local_pos = tilemap.map_to_local(map_pos)
 				bolt.global_position = tilemap.to_global(local_pos)
 				bolt.global_position.x += 8
 				bolt.global_position.y += 8

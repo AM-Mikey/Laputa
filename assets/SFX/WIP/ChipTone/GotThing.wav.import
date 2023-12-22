@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/GotThing.wav-ae2e4cc3844309033b48a21bbd26e087.sample"
+type="AudioStreamWAV"
+uid="uid://vn1r4f0qv1xc"
+path="res://.godot/imported/GotThing.wav-ae2e4cc3844309033b48a21bbd26e087.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/ChipTone/GotThing.wav"
-dest_files=[ "res://.import/GotThing.wav-ae2e4cc3844309033b48a21bbd26e087.sample" ]
+dest_files=["res://.godot/imported/GotThing.wav-ae2e4cc3844309033b48a21bbd26e087.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

@@ -2,7 +2,7 @@ extends TileMap
 
 const STAIRS = preload("res://src/Trigger/Stairs.tscn")
 
-onready var triggers = get_parent().get_parent().get_node("Triggers")
+@onready var triggers = get_parent().get_parent().get_node("Triggers")
 
 func _ready():
 	var stairs_top_tiles = get_used_cells_by_id(0)
@@ -20,7 +20,7 @@ func _ready():
 		var length: int = 0
 		var direction = Vector2(-1, 1)
 		
-		if get_cellv(left) == 1:
+		if get_cell_source_id(0, left) == 1:
 			is_stairs = true
 			angle = 26.565
 			direction.x = -1
@@ -28,19 +28,19 @@ func _ready():
 			left += Vector2(-1, 0)
 			bottom_left += Vector2(-1, 0)
 
-			while get_cellv(bottom_left) == 1 or get_cellv(left) == 1:
-				if get_cellv(bottom_left) == 1:
+			while get_cell_source_id(0, bottom_left) == 1 or get_cell_source_id(0, left) == 1:
+				if get_cell_source_id(0, bottom_left) == 1:
 					height += 1
 					length += 1
 					left += Vector2(-1, 1)
 					bottom_left += Vector2(-1, 1)
 					
-				if get_cellv(left) == 1:
+				if get_cell_source_id(0, left) == 1:
 					length += 1
 					left += Vector2(-1, 0)
 					bottom_left += Vector2(-1, 0)
 
-		if get_cellv(right) == 1:
+		if get_cell_source_id(0, right) == 1:
 			is_stairs = true
 			angle = 26.565
 			direction.x = 1
@@ -48,19 +48,19 @@ func _ready():
 			right += Vector2(1, 0)
 			bottom_right += Vector2(1, 0)
 
-			while get_cellv(bottom_right) == 1 or get_cellv(right) == 1:
-				if get_cellv(bottom_right) == 1:
+			while get_cell_source_id(0, bottom_right) == 1 or get_cell_source_id(0, right) == 1:
+				if get_cell_source_id(0, bottom_right) == 1:
 					height += 1
 					length += 1
 					right += Vector2(1, 1)
 					bottom_right += Vector2(1, 1)
 				
-				if get_cellv(right) == 1:
+				if get_cell_source_id(0, right) == 1:
 					length += 1
 					right += Vector2(1, 0)
 					bottom_right += Vector2(1, 0)
 	
-		if get_cellv(bottom_left) == 1:
+		if get_cell_source_id(0, bottom_left) == 1:
 			direction.x = -1
 			height += 1
 			length += 1
@@ -68,7 +68,7 @@ func _ready():
 			bottom_left += Vector2(-1, 1)
 	
 	
-			if get_cellv(bottom_left) == 1:
+			if get_cell_source_id(0, bottom_left) == 1:
 				is_stairs = true
 				angle = 45
 				height += 1
@@ -76,13 +76,13 @@ func _ready():
 				left += Vector2(-1, 1)
 				bottom_left += Vector2(-1, 1)
 				
-				while get_cellv(bottom_left) == 1:
+				while get_cell_source_id(0, bottom_left) == 1:
 					height += 1
 					length += 1
 					left += Vector2(-1, 1)
 					bottom_left += Vector2(-1, 1)
 			
-			if get_cellv(left) == 1:
+			if get_cell_source_id(0, left) == 1:
 				is_stairs = true
 				half_start = true
 				angle = 26.565
@@ -90,19 +90,19 @@ func _ready():
 				left += Vector2(-1, 0)
 				bottom_left += Vector2(-1, 0)
 				
-				while get_cellv(bottom_left) == 1 or get_cellv(left) == 1:
-					if get_cellv(bottom_left) == 1:
+				while get_cell_source_id(0, bottom_left) == 1 or get_cell_source_id(0, left) == 1:
+					if get_cell_source_id(0, bottom_left) == 1:
 						height += 1
 						length += 1
 						left += Vector2(-1, 1)
 						bottom_left += Vector2(-1, 1)
 						
-					if get_cellv(left) == 1:
+					if get_cell_source_id(0, left) == 1:
 						length += 1
 						left += Vector2(-1, 0)
 						bottom_left += Vector2(-1, 0)
 
-		if get_cellv(bottom_right) == 1:
+		if get_cell_source_id(0, bottom_right) == 1:
 			direction.x = 1
 			height += 1
 			length += 1
@@ -110,7 +110,7 @@ func _ready():
 			bottom_right += Vector2(1, 1)
 	
 	
-			if get_cellv(bottom_right) == 1:
+			if get_cell_source_id(0, bottom_right) == 1:
 				is_stairs = true
 				angle = 45
 				height += 1
@@ -118,13 +118,13 @@ func _ready():
 				right += Vector2(1, 1)
 				bottom_right += Vector2(1, 1)
 				
-				while get_cellv(bottom_right) == 1:
+				while get_cell_source_id(0, bottom_right) == 1:
 					height += 1
 					length += 1
 					right += Vector2(1, 1)
 					bottom_right += Vector2(1, 1)
 			
-			if get_cellv(right) == 1:
+			if get_cell_source_id(0, right) == 1:
 				is_stairs = true
 				half_start = true
 				angle = 26.565
@@ -132,14 +132,14 @@ func _ready():
 				right += Vector2(1, 0)
 				bottom_right += Vector2(1, 0)
 				
-				while get_cellv(bottom_right) == 1 or get_cellv(right) == 1:
-					if get_cellv(bottom_right) == 1:
+				while get_cell_source_id(0, bottom_right) == 1 or get_cell_source_id(0, right) == 1:
+					if get_cell_source_id(0, bottom_right) == 1:
 						height += 1
 						length += 1
 						right += Vector2(1, 1)
 						bottom_right += Vector2(1, 1)
 						
-					if get_cellv(right) == 1:
+					if get_cell_source_id(0, right) == 1:
 						length += 1
 						right += Vector2(1, 0)
 						bottom_right += Vector2(1, 0)
@@ -150,7 +150,7 @@ func _ready():
 			#print("height: ", height)
 			#print("length: ", length)
 			
-			var stairs = STAIRS.instance()
+			var stairs = STAIRS.instantiate()
 			stairs.global_position = s * 16
 			triggers.add_child(stairs)
 			

@@ -8,7 +8,6 @@ const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 const PAUSEMENU = preload("res://src/UI/PauseMenu/PauseMenu.tscn")
 #const POPUP = preload("res://src/UI/PopupText.tscn")
 const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
-const SASUKE = preload("res://src/Actor/Player/Sasuke.tscn")
 const TITLE = preload("res://src/UI/TitleScreen.tscn")
 const TITLECAM = preload("res://src/Utility/TitleCam.tscn")
 
@@ -22,30 +21,30 @@ var data = {
 	"level_data" : {}
 	}
 
-export var development_stage: String = "Alpha"
+@export var development_stage: String = "Alpha"
 var internal_version: String = get_internal_version()
-export var release_version: String
-export var is_release = false
-export var do_skip_title = false
-export var debug_visible = false
-export var show_state_labels = false ###############################################
-export var gamemode = "story"
+@export var release_version: String
+@export var is_release = false
+@export var do_skip_title = false
+@export var debug_visible = false
+@export var show_state_labels = false ###############################################
+@export var gamemode = "story"
 
-export var start_level: PackedScene
-onready var current_level = start_level.instance() #assumes current level to start with, might cause issues down the line
-onready var ui = $UILayer
-onready var el = $EditorLayer
-onready var front = $Front
-onready var middle = $Middle
-onready var back = $Back
+@export var start_level: PackedScene
+@onready var current_level = start_level.instantiate() #assumes current level to start with, might cause issues down the line
+@onready var ui = $UILayer
+@onready var el = $EditorLayer
+@onready var front = $Front
+@onready var middle = $Middle
+@onready var back = $Back
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 	on_viewport_size_changed()
 	
 	if not do_skip_title:
-		ui.add_child(TITLE.instance())
-		add_child(TITLECAM.instance())
+		ui.add_child(TITLE.instantiate())
+		add_child(TITLECAM.instantiate())
 		add_child(current_level)
 	else:
 		add_child(current_level)
@@ -56,7 +55,7 @@ func _ready():
 
 
 func get_internal_version() -> String:
-	var current_date = OS.get_date()
+	var current_date = Time.get_date_dict_from_system()
 	var years_since = current_date["year"] - 2021
 	var months_since = current_date["month"] - 3
 	var days_since = current_date["day"] - 18
@@ -80,25 +79,25 @@ func get_internal_version() -> String:
 
 
 
-func set_debug_visible(visible = !debug_visible): #makes triggers and visutils visible
-	debug_visible = visible
+func set_debug_visible(vis = !debug_visible): #makes triggers and visutils visible
+	debug_visible = vis
 	for t in get_tree().get_nodes_in_group("TriggerVisuals"):
-		t.visible = visible
+		t.visible = vis
 	for u in get_tree().get_nodes_in_group("VisualUtilities"):
-		u.visible = visible
-	print("debug_visible == " + String(debug_visible))
+		u.visible = vis
+	print("debug_visible == ", debug_visible)
 
 func skip_title():
 	on_level_change(start_level, 0)
-	add_child(JUNIPER.instance())
-	get_node("UILayer").add_child(HUD.instance())
+	add_child(JUNIPER.instantiate())
+	get_node("UILayer").add_child(HUD.instantiate())
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		$Juniper.position = s.global_position
 
 func _input(event):
 	if event.is_action_pressed("inventory") and has_node("Juniper"):
 		if not ui.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled:
-			var inventory = INVENTORY.instance()
+			var inventory = INVENTORY.instantiate()
 			ui.add_child(inventory)
 
 
@@ -111,7 +110,7 @@ func _input(event):
 			if ui.has_node("DialogBox"):
 				$UILayer/DialogBox.visible = false
 			
-			var pause_menu = PAUSEMENU.instance()
+			var pause_menu = PAUSEMENU.instantiate()
 			ui.add_child(pause_menu)
 			
 
@@ -127,19 +126,19 @@ func on_level_change(level, door_index):
 	clear_spawn_layers()
 	###
 	
-	var level_path = current_level.filename
+	var level_path = current_level.scene_file_path
 	current_level.queue_free()
 	
 	
-	yield(get_tree(), 'idle_frame') #this gives time for juniper to spawn. this is neccesary
-	var next_level = level.instance()
+	await get_tree().process_frame #this gives time for juniper to spawn. this is neccesary
+	var next_level = level.instantiate()
 	current_level = next_level #next level set so current level is never null
 	add_child(next_level)
 	
 	if next_level.level_type == next_level.LevelType.NORMAL:
 		if has_node("Juniper"):
-			$Juniper/PlayerCamera.smoothing_enabled = false
-			$Juniper/PlayerCamera.current = not next_level.has_node("LevelCamera") #turn off camera if level has one already
+			$Juniper/PlayerCamera.position_smoothing_enabled = false
+			$Juniper/PlayerCamera.enabled = not next_level.has_node("LevelCamera") #turn off camera if level has one already
 			
 		#### get the door with the right index
 		var doors_found = 0
@@ -163,11 +162,11 @@ func on_level_change(level, door_index):
 		
 		###transition out
 		if ui.has_node("TransitionWipe"): #LOADZONES
-			yield(get_tree().create_timer(0.8), "timeout")
+			await get_tree().create_timer(0.8).timeout
 			$UILayer/TransitionWipe.play_out_animation()
 
 		elif ui.has_node("TransitionIris"): #DOORS
-			yield(get_tree().create_timer(0.4), "timeout")
+			await get_tree().create_timer(0.4).timeout
 			$UILayer/TransitionIris.play_out_animation()
 
 		display_level_text(next_level)
@@ -177,8 +176,8 @@ func on_level_change(level, door_index):
 				pc.enable()
 		
 		#enable smoothing after a bit
-		yield(get_tree().create_timer(0.01), "timeout")
-		$Juniper/PlayerCamera.smoothing_enabled = true
+		await get_tree().create_timer(0.01).timeout
+		$Juniper/PlayerCamera.position_smoothing_enabled = true
 	
 	if next_level.level_type == next_level.LevelType.PLAYERLESS_CUTSCENE:#############################################
 		#TODO: right now juniper isn't unloaded between levels unless we're using level buttons or starting
@@ -190,7 +189,7 @@ func on_level_change(level, door_index):
 func display_level_text(level):
 	if ui.has_node("LevelText"):
 		$UILayer/LevelText.free()
-	var level_text = LEVEL_TEXT.instance()
+	var level_text = LEVEL_TEXT.instantiate()
 	level_text.text = level.name #TODO: in final version switch this to display name
 	ui.add_child(level_text)
 
@@ -210,7 +209,7 @@ func write_player_data_to_save():
 			gun_data[g.name]["ammo"] = g.ammo
 	
 	data["player_data"] = {
-		"current_level" : current_level.filename,
+		"current_level" : current_level.scene_file_path,
 		"position" : pc.position,
 		"hp" : pc.hp,
 		"max_hp" : pc.max_hp,
@@ -231,7 +230,7 @@ func read_player_data_from_save():
 	var player_data = scoped_data["player_data"]
 	
 	on_level_change(load(player_data["current_level"]), null)
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 	
 	pc.position = player_data["position"]
 	pc.hp = player_data["hp"]
@@ -248,7 +247,7 @@ func read_player_data_from_save():
 		if gun_scene == null:
 			printerr("ERROR: cannot find gun scene at: res://src/Gun/%s" %d + ".tscn")
 			return
-		guns.add_child(gun_scene.instance())
+		guns.add_child(gun_scene.instantiate())
 
 	for g in guns.get_children():
 		g.level = player_data["gun_data"][g.name]["level"]
@@ -367,22 +366,17 @@ func read_level_data_from_save():
 
 ##################################################################################
 func read_from_file(file_path):
-	var file = File.new()
 	var read_data
-	if file.file_exists(file_path):
-		var read_file = file.open(file_path, File.READ)
-		if read_file == OK:
-			read_data = file.get_var()
-			file.close()
-		else:
-			printerr("ERROR: cannot read file at: " + file_path)
-	else: printerr("ERROR: no file at: " + file_path)
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	if file:
+		read_data = file.get_var()
+	else:
+		printerr("ERROR: cannot read file at: " + file_path)
 	return read_data
 
 func write_to_file(file_path, written_data):
-	var file = File.new()
-	var written_file = file.open(file_path, File.WRITE)
-	if written_file == OK:
+	var file = FileAccess.open(file_path, FileAccess.WRITE)
+	if file: #if this doesnt work try file.get_error() == OK
 		file.store_var(written_data)
 		file.close()
 	else:
@@ -390,13 +384,13 @@ func write_to_file(file_path, written_data):
 ##################################################################################
 
 func load_options():
-	var options = OPTIONS.instance()
-	options.hidden = true
+	var options = OPTIONS.instantiate()
+	options.ishidden = true
 	ui.add_child(options)
 	options.tabs.get_node("Settings").load_settings()
 	options.tabs.get_node("KeyConfig").load_input_map()
 	
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 	options.queue_free()
 
 func clear_spawn_layers():

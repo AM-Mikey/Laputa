@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/Utility/Black.png" type="Texture" id=1]
+[ext_resource path="res://assets/Utility/Black.png" type="Texture2D" id=1]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.0
@@ -15,12 +15,12 @@ angular_damp = 100.0
 position = Vector2( 0, 3 )
 shape = SubResource( 1 )
 
-[node name="Joint" type="PinJoint2D" parent="."]
+[node name="Joint3D" type="PinJoint2D" parent="."]
 position = Vector2( 0, 6 )
 scale = Vector2( 0.2, 0.2 )
 node_a = NodePath("..")
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 position = Vector2( 5.68434e-14, 0 )
 scale = Vector2( 1, 6 )

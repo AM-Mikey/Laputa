@@ -8,5 +8,5 @@ func _ready():
 	$AnimationPlayer.play(size)
 	
 	#yield($AnimationPlayer, "animation_finished")
-	yield($AudioStreamPlayer2D, "finished")
+	await $AudioStreamPlayer2D.finished
 	queue_free()

@@ -8,7 +8,7 @@ var enemies = {}
 var active_enemy_path
 
 
-onready var editor = get_parent().get_parent().get_parent()
+@onready var editor = get_parent().get_parent().get_parent()
 
 func _ready():
 	setup_enemies()
@@ -18,14 +18,14 @@ func setup_enemies():
 	var index = 0
 	for e in find_enemy_scenes("res://src/Actor/Enemy/"):
 		
-		var enemy = load(e).instance()
+		var enemy = load(e).instantiate()
 		if not enemy.editor_hidden:
 			enemies[enemy.name] = enemy
 			
-			var enemy_button = ENEMY_BUTTON.instance()
+			var enemy_button = ENEMY_BUTTON.instantiate()
 			enemy_button.enemy_path = e
 			enemy_button.enemy_name = enemy.name
-			enemy_button.connect("enemy_changed", self, "change_enemy")
+			enemy_button.connect("enemy_changed", Callable(self, "change_enemy"))
 			if index == 0:
 				enemy_button.active = true
 				active_enemy_path = e
@@ -35,9 +35,8 @@ func setup_enemies():
 
 func find_enemy_scenes(path):
 	var files = []
-	var dir = Directory.new()
-	dir.open(path)
-	dir.list_dir_begin(true, true)
+	var dir = DirAccess.open(path)
+	dir.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 
 	while true:
 		var file = dir.get_next()

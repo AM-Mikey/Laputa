@@ -1,16 +1,16 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/Actor/NPC/Outdated/Sue.png" type="Texture" id=1]
+[ext_resource path="res://assets/Actor/NPC/Outdated/Sue.png" type="Texture2D" id=1]
 [ext_resource path="res://src/Actor/NPC/Outdated/Sue.gd" type="Script" id=2]
 
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 7 )
+size = Vector2( 8, 7 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 8 )
+size = Vector2( 8, 8 )
 
-[node name="Sue" type="KinematicBody2D"]
+[node name="Sue" type="CharacterBody2D"]
 collision_layer = 128
 collision_mask = 8
 script = ExtResource( 2 )
@@ -27,7 +27,7 @@ collision_layer = 0
 modulate = Color( 1, 1, 1, 0.172549 )
 shape = SubResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource( 1 )
 hframes = 5
 vframes = 2

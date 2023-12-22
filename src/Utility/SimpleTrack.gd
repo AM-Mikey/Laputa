@@ -1,7 +1,7 @@
 extends Path2D
 
-export var direction = "cw"
-export var speed = 1 #degrees per frame
+@export var direction = "cw"
+@export var speed = 1 #degrees per frame
 
 var follower_path
 var stop_condition

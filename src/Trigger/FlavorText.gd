@@ -5,11 +5,11 @@ const DB = preload("res://src/Dialog/DialogBox.tscn")
 var reading = false
 
 
-export(String, MULTILINE) var text = ""
+@export var text = "" # (String, MULTILINE)
 
 var db
 
-onready var world = get_tree().get_root().get_node("World")
+@onready var world = get_tree().get_root().get_node("World")
 
 func _on_Sign_body_entered(body):
 	active_pc = body
@@ -29,9 +29,9 @@ func _input(event):
 				if world.has_node("UILayer/DialogBox"): #clear old dialog box if there is one
 					world.get_node("UILayer/DialogBox").stop_printing()
 				
-				db = DB.instance()
+				db = DB.instantiate()
 				get_tree().get_root().get_node("World/UILayer").add_child(db)
-				db.connect("dialog_finished", self, "on_dialog_finished")
+				db.connect("dialog_finished", Callable(self, "on_dialog_finished"))
 				db.text = text
 				db.print_flavor_text()
 

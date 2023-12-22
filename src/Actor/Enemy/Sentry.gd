@@ -1,18 +1,18 @@
 extends Enemy
 
-export var look_dir: Vector2 = Vector2.LEFT
+@export var look_dir: Vector2 = Vector2.LEFT
 var move_dir: Vector2
 
 const HAIRBALL = preload("res://src/Bullet/Enemy/Hairball.tscn")
 
-export var height_tolerance = 7
-export var cooldown_time = 2
-export var projectile_speed: int = 150
-export var projectile_damage: int = 2
+@export var height_tolerance = 7
+@export var cooldown_time = 2
+@export var projectile_speed: int = 150
+@export var projectile_damage: int = 2
 
 
-export var lock_distance = 128
-export var lock_tolerance = 16
+@export var lock_distance = 128
+@export var lock_tolerance = 16
 
 var target: Node = null
 var locked_on = false
@@ -90,17 +90,17 @@ func fire():
 #						#look_dir = Vector2.RIGHT
 						
 					$AnimationPlayer.play("ShootLeft")
-					yield(get_tree().create_timer(0.2), "timeout") #delay for animation sync
+					await get_tree().create_timer(0.2).timeout #delay for animation sync
 					if target == null:
 						break
 					prepare_bullet()
-					yield($FireCooldown, "timeout")
+					await $FireCooldown.timeout
 			else: 
-				yield($FireCooldown, "timeout")
+				await $FireCooldown.timeout
 				fire()
 
 func prepare_bullet():
-	var bullet = HAIRBALL.instance()
+	var bullet = HAIRBALL.instantiate()
 	bullet.damage = projectile_damage
 	bullet.speed = projectile_speed
 	

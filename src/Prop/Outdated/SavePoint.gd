@@ -3,7 +3,7 @@ extends Area2D
 var has_player_near = false
 var active_player: Node
 
-onready var world = get_tree().get_root().get_node("World")
+@onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
 	$AnimationPlayer.play("Spin")

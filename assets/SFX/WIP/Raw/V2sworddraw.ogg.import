@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/V2sworddraw.ogg-7ff9827da053e0fa1eb47712f9a3d593.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://mm41gi057yug"
+path="res://.godot/imported/V2sworddraw.ogg-7ff9827da053e0fa1eb47712f9a3d593.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Raw/V2sworddraw.ogg"
-dest_files=[ "res://.import/V2sworddraw.ogg-7ff9827da053e0fa1eb47712f9a3d593.oggstr" ]
+dest_files=["res://.godot/imported/V2sworddraw.ogg-7ff9827da053e0fa1eb47712f9a3d593.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

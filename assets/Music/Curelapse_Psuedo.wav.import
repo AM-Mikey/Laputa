@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Curelapse_Psuedo.wav-adc3cb0ec265d7d0d60aac1c21170ad6.sample"
+type="AudioStreamWAV"
+uid="uid://bd8btswn3ggfl"
+path="res://.godot/imported/Curelapse_Psuedo.wav-adc3cb0ec265d7d0d60aac1c21170ad6.sample"
 
 [deps]
 
 source_file="res://assets/Music/Curelapse_Psuedo.wav"
-dest_files=[ "res://.import/Curelapse_Psuedo.wav-adc3cb0ec265d7d0d60aac1c21170ad6.sample" ]
+dest_files=["res://.godot/imported/Curelapse_Psuedo.wav-adc3cb0ec265d7d0d60aac1c21170ad6.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

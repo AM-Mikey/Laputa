@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/snd_spur_fire_l2.ogg-7307f465bec3c179581f130218835c89.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c2t60cutfh5nv"
+path="res://.godot/imported/snd_spur_fire_l2.ogg-7307f465bec3c179581f130218835c89.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/Placeholder/snd_spur_fire_l2.ogg"
-dest_files=[ "res://.import/snd_spur_fire_l2.ogg-7307f465bec3c179581f130218835c89.oggstr" ]
+dest_files=["res://.godot/imported/snd_spur_fire_l2.ogg-7307f465bec3c179581f130218835c89.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

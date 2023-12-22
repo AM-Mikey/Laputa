@@ -1,15 +1,15 @@
 extends Control
 
-var settings_path = "user://settings.json"
+var settings_path = "user://settings.json" #TODO FIX ALL SIGNALS ON ALL BUTTONS
 
-export(NodePath) var mastervolume_path
-export(NodePath) var sfxvolume_path
-export(NodePath) var musicvolume_path
-export(NodePath) var displaymode_path
-export(NodePath) var resolutionscale_path
-export(NodePath) var mouselock_path
-export(NodePath) var deletesave_path
-export(NodePath) var scroll_path
+@export var mastervolume_path: NodePath
+@export var sfxvolume_path: NodePath
+@export var musicvolume_path: NodePath
+@export var displaymode_path: NodePath
+@export var resolutionscale_path: NodePath
+@export var mouselock_path: NodePath
+@export var deletesave_path: NodePath
+@export var scroll_path: NodePath
 
 var default = {
 	"MasterVolume": 10.0,
@@ -21,47 +21,45 @@ var default = {
 	}
 var after_ready = false
 
-onready var w = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
-onready var mastervolume = get_node(mastervolume_path)
-onready var sfxvolume = get_node(sfxvolume_path)
-onready var musicvolume = get_node(musicvolume_path)
-onready var displaymode = get_node(displaymode_path)
-onready var resolutionscale = get_node(resolutionscale_path)
-onready var mouselock = get_node(mouselock_path)
-onready var deletesave = get_node(deletesave_path)
-onready var scroll = get_node(scroll_path)
+@onready var mastervolume = get_node(mastervolume_path)
+@onready var sfxvolume = get_node(sfxvolume_path)
+@onready var musicvolume = get_node(musicvolume_path)
+@onready var displaymode = get_node(displaymode_path)
+@onready var resolutionscale = get_node(resolutionscale_path)
+@onready var mouselock = get_node(mouselock_path)
+@onready var deletesave = get_node(deletesave_path)
+@onready var scroll = get_node(scroll_path)
 
 func _ready():
-	var file = File.new()
-	if file.file_exists(settings_path):
+	if FileAccess.file_exists(settings_path):
 		load_settings()
 	else: 
 		save_defaults()
 	
-	scroll.get_v_scrollbar().connect("item_rect_changed", self, "on_scrollbar_changed")
+	scroll.get_v_scroll_bar().connect("item_rect_changed", Callable(self, "on_scrollbar_changed"))
 	after_ready = true
 
 ### SIGNALS
 
 func on_displaymode_changed(index: int):
-	OS.set_window_maximized(false)
+	var win = get_window()
 	match index:
 		0: #windowed
-			OS.set_window_fullscreen(false)
-			OS.set_borderless_window(false)
-#			OS.set_window_size(OS.get_window_size()) #set window size so we can trigger _on_viewport_size_changed everywhere
+			win.mode = Window.MODE_WINDOWED
+			win.size = Vector2i(960, 540)
+			win.move_to_center()
+			win.borderless = false
 		1: #borderless
-			OS.set_window_fullscreen(false)
-			OS.set_borderless_window(true)
-			OS.set_window_size(OS.get_screen_size())
-			OS.set_window_position(Vector2.ZERO)
+			win.mode = Window.MODE_FULLSCREEN #TODO: is this true borderless? check
+			win.borderless = true
 		2: #fullscreen
-			OS.set_window_fullscreen(true)
+			win.mode = Window.MODE_EXCLUSIVE_FULLSCREEN
+			win.borderless = false
 		3: #maximized
-			OS.set_window_fullscreen(false)
-			OS.set_borderless_window(false)
-			OS.set_window_maximized(true)
+			win.mode = Window.MODE_MAXIMIZED #TODO: if win is unmaximized, this setting doesnt change
+			win.borderless = false
 	print("display settings changed")
 	save_setting("DisplayMode", index)
 
@@ -70,7 +68,7 @@ func on_resolutionscale_changed(index: int):
 		0:
 			w.viewport_size_ignore = false
 			#world._on_viewport_size_changed()
-			OS.set_window_size(OS.get_window_size()) #set window size so we can trigger _on_viewport_size_changed everywhere
+			get_window().set_size(get_window().get_size()) #set window size so we can trigger _on_viewport_size_changed everywhere
 		1:
 			w.resolution_scale = 1.0
 			w.viewport_size_ignore = true
@@ -100,7 +98,7 @@ func on_mastervolume_changed(value):
 	print(db)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),db)
 	if not w.get_node("UILayer/Options").hidden and after_ready:
-		am.play_master("sound_test")
+		am.play("sound_test", null, "master") #play on master
 	mastervolume.get_node("Label").text = "Master Volume: Muted" if value == 0 else "Master Volume: " + str(value) + "0 %"
 	save_setting("MasterVolume", value)
 
@@ -108,7 +106,7 @@ func on_musicvolume_changed(value):
 	var db = get_percent_as_db(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),db)
 	if not w.get_node("UILayer/Options").hidden and after_ready:
-		am.play_music("sound_test")
+		am.play_sfx("sound_test")
 	musicvolume.get_node("Label").text = "Music Volume: Muted" if value == 0 else "Music Volume: " + str(value) + "0 %"
 	save_setting("MusicVolume", value)
 
@@ -124,10 +122,10 @@ func on_sfxvolume_changed(value):
 func on_return():
 	if w.has_node("UILayer/PauseMenu"):
 		w.get_node("UILayer/PauseMenu").visible = true
-		w.get_node("UILayer/PauseMenu").focus()
+		w.get_node("UILayer/PauseMenu").do_focus()
 	if w.has_node("UILayer/TitleScreen"):
 		w.get_node("UILayer/TitleScreen").visible = true
-		w.get_node("UILayer/TitleScreen").focus()
+		w.get_node("UILayer/TitleScreen").do_focus()
 		
 	if w.has_node("UILayer/Options"):
 		w.get_node("UILayer/Options").queue_free()
@@ -148,9 +146,8 @@ func on_mouselock(value):
 
 func on_deletesave():
 	var files = []
-	var dir = Directory.new()
-	dir.open("user://")
-	dir.list_dir_begin()
+	var dir = DirAccess.open("user://")
+	dir.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 	while true:
 		var file = dir.get_next()
 		if file == "":
@@ -167,7 +164,7 @@ func on_deletesave():
 	deletesave.text = "Done"
 
 func on_scrollbar_changed():
-	scroll.get_v_scrollbar().rect_size.y = scroll.rect_size.y - 48
+	scroll.get_v_scroll_bar().size.y = scroll.size.y - 48
 
 
 ### SAVE/LOAD
@@ -195,15 +192,14 @@ func load_settings():
 	resolutionscale.selected = data["ResolutionScale"]
 	on_resolutionscale_changed(data["ResolutionScale"])
 	
-	mouselock.pressed = data["MouseLock"]
+	mouselock.button_pressed = data["MouseLock"]
 	on_mouselock(data["MouseLock"])
 
 
 func write_data(data):
-	var file = File.new()
-	var file_written = file.open(settings_path, File.WRITE)
-	if file_written == OK:
-		file.store_string(var2str(data))
+	var file = FileAccess.open(settings_path, FileAccess.WRITE)
+	if file:
+		file.store_string(var_to_str(data))
 		file.close()
 		print("settings data saved")
 	else:
@@ -211,12 +207,13 @@ func write_data(data):
 
 func read_data() -> Dictionary:
 	var data
-	var file = File.new()
-	if file.file_exists(settings_path):
-		var file_read = file.open(settings_path, File.READ)
-		if file_read == OK:
+	if FileAccess.file_exists(settings_path):
+		var file = FileAccess.open(settings_path, FileAccess.READ)
+		if file:
 			var text = file.get_as_text()
-			data = JSON.parse(text).result
+			var test_json_conv = JSON.new()
+			test_json_conv.parse(text)
+			data = test_json_conv.get_data()
 			file.close()
 	else: 
 		printerr("ERROR: could not load settings data")
@@ -257,5 +254,5 @@ func get_percent_as_db(value) -> float:
 
 ### MISC
 
-func focus():
+func do_focus():
 	mastervolume.get_node("Slider").grab_focus()

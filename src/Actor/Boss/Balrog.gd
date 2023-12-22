@@ -4,7 +4,7 @@ var max_x_speed = 100
 var jump_speed = 100
 
 
-export var idle_time = .5
+@export var idle_time = .5
 
 
 var move_dir = Vector2.ZERO
@@ -51,7 +51,7 @@ func jump(dir, dist, height):
 func _process(delta):
 	if idle == true:
 		idle = false
-		yield(get_tree().create_timer(idle_time), "timeout")
+		await get_tree().create_timer(idle_time).timeout
 		if step == 1:
 			#walk(Vector2.LEFT, 6)
 			jump(Vector2.LEFT, 10, 3)
@@ -73,7 +73,11 @@ func _physics_process(delta):
 		move_dir.y = 0
 	
 	velocity = calculate_movevelocity(velocity, move_dir)
-	velocity = move_and_slide(velocity, FLOOR_NORMAL, true)
+	set_velocity(velocity)
+	set_up_direction(FLOOR_NORMAL)
+	set_floor_stop_on_slope_enabled(true)
+	move_and_slide()
+	velocity = velocity
 	
 	
 	
@@ -111,9 +115,9 @@ func calculate_movevelocity(linearvelocity: Vector2, move_dir) -> Vector2:
 
 	if is_on_floor():
 		if friction == true:
-			out.x = lerp(out.x, 0, ground_cof)
+			out.x = lerp(out.x, 0.0, ground_cof)
 	else:
 		if friction == true:
-			out.x = lerp(out.x, 0, air_cof)
+			out.x = lerp(out.x, 0.0, air_cof)
 		
 	return out

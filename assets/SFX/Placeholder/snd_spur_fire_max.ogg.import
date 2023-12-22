@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/snd_spur_fire_max.ogg-e9017ea758765c434b8165ad081b68fa.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b3qih8lplmg2h"
+path="res://.godot/imported/snd_spur_fire_max.ogg-e9017ea758765c434b8165ad081b68fa.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/Placeholder/snd_spur_fire_max.ogg"
-dest_files=[ "res://.import/snd_spur_fire_max.ogg-e9017ea758765c434b8165ad081b68fa.oggstr" ]
+dest_files=["res://.godot/imported/snd_spur_fire_max.ogg-e9017ea758765c434b8165ad081b68fa.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

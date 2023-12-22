@@ -1,175 +1,175 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/UI/StyleBox/ChromeRimmed.tres" type="StyleBox" id=1]
-[ext_resource path="res://assets/Icon/GameIcon.png" type="Texture" id=2]
+[ext_resource path="res://assets/Icon/GameIcon.png" type="Texture2D" id=2]
 [ext_resource path="res://src/UI/Theme/LaputaTheme.tres" type="Theme" id=3]
-[ext_resource path="res://src/UI/Font/Momo.tres" type="DynamicFont" id=4]
-[ext_resource path="res://assets/UI/FileSelect/HpIcon.png" type="Texture" id=5]
-[ext_resource path="res://assets/UI/FileSelect/XpIcon.png" type="Texture" id=6]
+[ext_resource path="res://src/UI/Font/Momo.tres" type="FontFile" id=4]
+[ext_resource path="res://assets/UI/FileSelect/HpIcon.png" type="Texture2D" id=5]
+[ext_resource path="res://assets/UI/FileSelect/XpIcon.png" type="Texture2D" id=6]
 [ext_resource path="res://src/UI/HUD/GunIcon.tscn" type="PackedScene" id=17]
 
 [node name="FilePreview" type="MarginContainer"]
-margin_right = 360.0
-margin_bottom = 72.0
+offset_right = 360.0
+offset_bottom = 72.0
 theme = ExtResource( 3 )
-custom_constants/margin_right = 4
-custom_constants/margin_top = 4
-custom_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_left = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 356.0
-margin_bottom = 72.0
-rect_min_size = Vector2( 0, 64 )
-custom_styles/panel = ExtResource( 1 )
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 356.0
+offset_bottom = 72.0
+custom_minimum_size = Vector2( 0, 64 )
+theme_override_styles/panel = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Margin" type="MarginContainer" parent="."]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 356.0
-margin_bottom = 72.0
-custom_constants/margin_right = 4
-custom_constants/margin_top = 4
-custom_constants/margin_left = 4
-custom_constants/margin_bottom = 4
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 356.0
+offset_bottom = 72.0
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_bottom = 4
 
 [node name="HBox" type="HBoxContainer" parent="Margin"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 348.0
-margin_bottom = 64.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 348.0
+offset_bottom = 64.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Margin/HBox"]
-margin_right = 344.0
-margin_bottom = 60.0
+offset_right = 344.0
+offset_bottom = 60.0
 size_flags_horizontal = 3
 
-[node name="Sprite" type="Sprite" parent="Margin/HBox/HBoxContainer"]
+[node name="Sprite2D" type="Sprite2D" parent="Margin/HBox/HBoxContainer"]
 position = Vector2( 34.257, 30.0525 )
 texture = ExtResource( 2 )
 
 [node name="Control" type="Control" parent="Margin/HBox/HBoxContainer"]
-margin_right = 64.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 64, 0 )
+offset_right = 64.0
+offset_bottom = 60.0
+custom_minimum_size = Vector2( 64, 0 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Margin/HBox/HBoxContainer"]
-margin_left = 68.0
-margin_right = 344.0
-margin_bottom = 60.0
+offset_left = 68.0
+offset_right = 344.0
+offset_bottom = 60.0
 size_flags_horizontal = 3
 
 [node name="Top" type="HBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer"]
-margin_right = 276.0
-margin_bottom = 16.0
-custom_constants/separation = 16
+offset_right = 276.0
+offset_bottom = 16.0
+theme_override_constants/separation = 16
 
 [node name="Stats" type="HBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top"]
-margin_right = 67.0
-margin_bottom = 16.0
-custom_constants/separation = 16
+offset_right = 67.0
+offset_bottom = 16.0
+theme_override_constants/separation = 16
 
 [node name="Hp" type="HBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Stats"]
-margin_right = 19.0
-margin_bottom = 16.0
+offset_right = 19.0
+offset_bottom = 16.0
 
 [node name="Icon" type="TextureRect" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Stats/Hp"]
-margin_right = 8.0
-margin_bottom = 16.0
+offset_right = 8.0
+offset_bottom = 16.0
 texture = ExtResource( 5 )
 stretch_mode = 4
 
 [node name="Label" type="Label" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Stats/Hp"]
-margin_left = 12.0
-margin_top = 1.0
-margin_right = 19.0
-margin_bottom = 15.0
+offset_left = 12.0
+offset_top = 1.0
+offset_right = 19.0
+offset_bottom = 15.0
 text = "5"
 
 [node name="Xp" type="HBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Stats"]
-margin_left = 35.0
-margin_right = 67.0
-margin_bottom = 16.0
+offset_left = 35.0
+offset_right = 67.0
+offset_bottom = 16.0
 
 [node name="Icon" type="TextureRect" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Stats/Xp"]
-margin_right = 7.0
-margin_bottom = 16.0
+offset_right = 7.0
+offset_bottom = 16.0
 texture = ExtResource( 6 )
 stretch_mode = 4
 
 [node name="Label" type="Label" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Stats/Xp"]
-margin_left = 11.0
-margin_top = 1.0
-margin_right = 32.0
-margin_bottom = 15.0
+offset_left = 11.0
+offset_top = 1.0
+offset_right = 32.0
+offset_bottom = 15.0
 text = "256"
 
 [node name="Guns" type="HBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top"]
-margin_left = 83.0
-margin_right = 276.0
-margin_bottom = 16.0
+offset_left = 83.0
+offset_right = 276.0
+offset_bottom = 16.0
 size_flags_horizontal = 3
 
 [node name="WeaponIcon" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Guns" instance=ExtResource( 17 )]
-margin_right = 32.0
-margin_bottom = 16.0
+offset_right = 32.0
+offset_bottom = 16.0
 
 [node name="WeaponIcon2" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Guns" instance=ExtResource( 17 )]
-margin_left = 36.0
-margin_right = 68.0
-margin_bottom = 16.0
+offset_left = 36.0
+offset_right = 68.0
+offset_bottom = 16.0
 
 [node name="WeaponIcon3" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Guns" instance=ExtResource( 17 )]
-margin_left = 72.0
-margin_right = 104.0
-margin_bottom = 16.0
+offset_left = 72.0
+offset_right = 104.0
+offset_bottom = 16.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer"]
-margin_top = 20.0
-margin_right = 276.0
-margin_bottom = 52.0
-custom_constants/separation = 16
+offset_top = 20.0
+offset_right = 276.0
+offset_bottom = 52.0
+theme_override_constants/separation = 16
 
 [node name="VBox" type="VBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_right = 42.0
-margin_bottom = 32.0
+offset_right = 42.0
+offset_bottom = 32.0
 
 [node name="Label" type="Label" parent="Margin/HBox/HBoxContainer/VBoxContainer/HBoxContainer/VBox"]
-margin_right = 42.0
-margin_bottom = 14.0
+offset_right = 42.0
+offset_bottom = 14.0
 text = "Recruit"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 58.0
-margin_right = 109.0
-margin_bottom = 32.0
+offset_left = 58.0
+offset_right = 109.0
+offset_bottom = 32.0
 
 [node name="Label2" type="Label" parent="Margin/HBox/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 51.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 4 )
+offset_right = 51.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource( 4 )
 text = "Sanctuary"
 
 [node name="VBox2" type="VBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 210.0
-margin_right = 276.0
-margin_bottom = 32.0
+offset_left = 210.0
+offset_right = 276.0
+offset_bottom = 32.0
 size_flags_horizontal = 10
 
 [node name="Label" type="Label" parent="Margin/HBox/HBoxContainer/VBoxContainer/HBoxContainer/VBox2"]
-margin_right = 66.0
-margin_bottom = 14.0
+offset_right = 66.0
+offset_bottom = 14.0
 text = "12/29/2021"
 
 [node name="Label2" type="Label" parent="Margin/HBox/HBoxContainer/VBoxContainer/HBoxContainer/VBox2"]
-margin_top = 18.0
-margin_right = 66.0
-margin_bottom = 32.0
+offset_top = 18.0
+offset_right = 66.0
+offset_bottom = 32.0
 text = "5:14 PM"

@@ -1,7 +1,7 @@
 extends Bullet
 
 var start_velocity
-onready var ap = $AnimationPlayer
+@onready var ap = $AnimationPlayer
 
 
 
@@ -11,23 +11,26 @@ func _ready():
 	ap.play("Rotate")
 	gravity *= .5
 	
-	velocity = get_velocity(speed, direction)
-	start_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
+	velocity = calc_velocity(speed, direction)
+	start_velocity = abs(velocity.x) + abs(velocity.y) / 2.0 #used to calculate animation slowdown
+	setup_vis_notifier()
 
 
 func _physics_process(delta):
 	if disabled: return
 	
 	velocity.y += gravity * delta
-	velocity = move_and_slide(velocity)
+	set_velocity(velocity)
+	move_and_slide()
+	velocity = velocity
 	
 	var current_velocity = abs(velocity.x) + abs(velocity.y) /2 #used to calculate animation slowdown
-	ap.playback_speed = current_velocity / start_velocity
-	if ap.playback_speed < .1:
+	ap.speed_scale = current_velocity / start_velocity
+	if ap.speed_scale < .1:
 		ap.stop()
 
 
-func get_velocity(projectile_speed, direction) -> Vector2:
+func calc_velocity(projectile_speed, direction) -> Vector2:
 	var out = velocity
 	out.x = projectile_speed * direction.x
 	out.y += gravity * get_physics_process_delta_time()
@@ -38,4 +41,4 @@ func get_velocity(projectile_speed, direction) -> Vector2:
 
 func on_break(method):
 	if disabled == false:
-		fizzle("bullet")
+		do_fizzle("bullet")

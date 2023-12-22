@@ -5,7 +5,7 @@ var entity_type: String
 
 
 func _ready():
-	var entity = load(entity_path).instance()
+	var entity = load(entity_path).instantiate()
 	
 	if entity_type == "trigger":
 		z_index = 100
@@ -13,12 +13,12 @@ func _ready():
 		$ColorRect.color = entity.color
 		if entity.has_node("CollisionShape2D"):
 			var col = entity.get_node("CollisionShape2D")
-			$ColorRect.rect_position = col.position - col.shape.extents
-			$ColorRect.rect_size = col.shape.extents * 2
+			$ColorRect.position = col.position - col.shape.size
+			$ColorRect.size = col.shape.size * 2
 		
 		
 	else:
-		var sprite = entity.get_node("Sprite")
+		var sprite = entity.get_node("Sprite2D")
 		add_child(sprite.duplicate())
 	
 	entity.queue_free()

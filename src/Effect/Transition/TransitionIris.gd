@@ -2,8 +2,8 @@ extends Control
 
 var animation = "IrisContract"
 
-onready var world = get_tree().get_root().get_node("World")
-onready var pc = world.get_node("Juniper")
+@onready var world = get_tree().get_root().get_node("World")
+@onready var pc = world.get_node("Juniper")
 
 func _ready():
 		print("playing in animation")
@@ -30,10 +30,10 @@ func _physics_process(_delta):
 			cam = l.get_node("LevelCamera")
 	
 	
-	var player_pos_from_cam_center = Vector2(pc.position.x, pc.position.y - 16) - cam.get_camera_screen_center()
+	var player_pos_from_cam_center = Vector2(pc.position.x, pc.position.y - 16) - cam.get_screen_center_position()
 	var max_dist_from_vp = max(abs(player_pos_from_cam_center.x) + vp_size.x / 2, abs(player_pos_from_cam_center.y) + vp_size.y / 2)
 	var nearest_multiple = ceil((max_dist_from_vp * 2) / 256) * 256 #round up to nearest 256 multiple
-	$MarginContainer.rect_size = Vector2(nearest_multiple, nearest_multiple)
+	$MarginContainer.size = Vector2(nearest_multiple, nearest_multiple)
 	
-	$MarginContainer.rect_position = Vector2(vp_size.x - $MarginContainer.rect_size.x, vp_size.y - $MarginContainer.rect_size.y) / 2
-	$MarginContainer.rect_position += player_pos_from_cam_center
+	$MarginContainer.position = Vector2(vp_size.x - $MarginContainer.size.x, vp_size.y - $MarginContainer.size.y) / 2
+	$MarginContainer.position += player_pos_from_cam_center

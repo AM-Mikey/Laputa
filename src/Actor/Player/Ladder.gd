@@ -1,15 +1,20 @@
 extends Node
 
 
-onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_parent().get_parent().get_parent()
-onready var mm = pc.get_node("MovementManager")
-onready var gm = pc.get_node("GunManager")
+@onready var world = get_tree().get_root().get_node("World")
+@onready var pc = get_parent().get_parent().get_parent()
+@onready var mm = pc.get_node("MovementManager")
+@onready var gm = pc.get_node("GunManager")
 
 func state_process():
 	pc.move_dir = get_move_dir()
-	mm.velocity = get_velocity()
-	var new_velocity = pc.move_and_slide_with_snap(mm.velocity, mm.snap_vector, mm.FLOOR_NORMAL, true)
+	mm.velocity = calc_velocity()
+	pc.set_velocity(mm.velocity)
+	# TODOConverter3To4 looks that snap in Godot 4 is float, not vector like in Godot 3 - previous value `mm.snap_vector`
+	pc.set_up_direction(mm.FLOOR_NORMAL)
+	pc.set_floor_stop_on_slope_enabled(true)
+	pc.move_and_slide()
+	var new_velocity = pc.velocity
 	
 	mm.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
 	
@@ -20,8 +25,8 @@ func state_process():
 		Input.is_action_pressed("sasuke_down") and pc.controller_id == 1:
 			mm.change_state("run")
 
-	if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
-		mm.bonk("bonk")
+	#if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
+		#mm.bonk("head")  #TODO: fix multi bonks
 
 
 
@@ -32,7 +37,7 @@ func get_move_dir():
 
 
 
-func get_velocity():
+func calc_velocity():
 	var out = mm.velocity
 	
 	out.y = pc.move_dir.y * mm.speed.y * 0.5
@@ -51,9 +56,9 @@ func get_velocity():
 
 func enter():
 	mm.snap_vector = Vector2.ZERO
-	pc.set_collision_mask_bit(9, false) #ssp
+	pc.set_collision_mask_value(9, false) #ssp
 	gm.disable()
 	
 func exit():
-	pc.set_collision_mask_bit(9, true) #ssp
+	pc.set_collision_mask_value(9, true) #ssp
 	gm.enable()

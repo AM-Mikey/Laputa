@@ -1,13 +1,13 @@
 extends Enemy
 
-export var look_dir: Vector2 = Vector2.LEFT
+@export var look_dir: Vector2 = Vector2.LEFT
 var move_dir: Vector2
 
 const BULLET = preload("res://src/Bullet/Enemy/Laser.tscn")
-export var projectile_speed: int = 120
-export var height_tolerance = 7
-export var cooldown_time = 1
-export var lock_distance = 8
+@export var projectile_speed: int = 120
+@export var height_tolerance = 7
+@export var cooldown_time = 1
+@export var lock_distance = 8
 
 var target: Node = null
 var cover_blown = false
@@ -26,7 +26,7 @@ func _ready():
 	
 	$FireCooldown.start(cooldown_time)
 	
-	hide()
+	cover()
 
 func _physics_process(_delta):
 	if disabled or dead:
@@ -35,7 +35,10 @@ func _physics_process(_delta):
 		move_dir.y = 0 #don't allow them to jump if they are midair
 	
 	velocity = calculate_movevelocity(velocity, move_dir, speed)
-	velocity = move_and_slide(velocity, FLOOR_NORMAL)
+	set_velocity(velocity)
+	set_up_direction(FLOOR_NORMAL)
+	move_and_slide()
+	velocity = velocity
 
 	animate()
 
@@ -79,7 +82,7 @@ func peek():
 	hiding = false
 	shooting = false
 	
-func hide():
+func cover():
 	hiding = true
 	peeking = false
 	shooting = false
@@ -105,16 +108,16 @@ func fire():
 					elif target.global_position > global_position: #player to the right
 						$AnimationPlayer.play("ShootRight")
 						look_dir = Vector2.RIGHT
-					yield(get_tree().create_timer(0.2), "timeout") #delay for animation sync
+					await get_tree().create_timer(0.2).timeout #delay for animation sync
 					if target == null:
 						break
 					prepare_bullet()
-					yield($FireCooldown, "timeout")
+					await $FireCooldown.timeout
 			else: 
-				yield($FireCooldown, "timeout")
+				await $FireCooldown.timeout
 				fire()
 func prepare_bullet():
-	var bullet = BULLET.instance()
+	var bullet = BULLET.instantiate()
 	get_tree().get_current_scene().add_child(bullet)
 	
 	bullet.position = Vector2($CollisionShape2D.global_position.x, $CollisionShape2D.global_position.y - height_tolerance)

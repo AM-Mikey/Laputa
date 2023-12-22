@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNshing.wav-2fb52e1c6b256839fa7181f2248d8b31.sample"
+type="AudioStreamWAV"
+uid="uid://ccev2u4m7a53"
+path="res://.godot/imported/YMNshing.wav-2fb52e1c6b256839fa7181f2248d8b31.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNshing.wav"
-dest_files=[ "res://.import/YMNshing.wav-2fb52e1c6b256839fa7181f2248d8b31.sample" ]
+dest_files=["res://.godot/imported/YMNshing.wav-2fb52e1c6b256839fa7181f2248d8b31.sample"]
 
 [params]
 

@@ -1,9 +1,9 @@
-[gd_resource type="Shader" format=2]
+[gd_resource type="Shader" format=3 uid="uid://66obeswk8sv6"]
 
 [resource]
 code = "shader_type canvas_item;
 
-uniform vec4 outline_color: hint_color;
+uniform vec4 outline_color: source_color;
 
 void fragment(){
 	float size_x = 1.0/float(textureSize(TEXTURE, 0).x);

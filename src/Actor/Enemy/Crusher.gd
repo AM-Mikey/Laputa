@@ -1,12 +1,12 @@
-tool
+@tool
 extends Enemy
 
 const PATH_LINE = preload("res://src/Utility/PathLine.tscn")
 
-export var amplitude_v: float = 64 setget on_amplitude_v_changed
-export var amplitude_h: float = 0 setget on_amplitude_h_changed
-export var frequency: float = 2
-export var crushing: bool = true
+@export var amplitude_v: float = 64: set = on_amplitude_v_changed
+@export var amplitude_h: float = 0: set = on_amplitude_h_changed
+@export var frequency: float = 2
+@export var crushing: bool = true
 
 var center_pos: Vector2
 var time: float = 0
@@ -23,11 +23,11 @@ func _ready():
 func on_amplitude_v_changed(new_amplitude):
 	amplitude_v = new_amplitude
 	
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		for c in get_children():
 			if c.name == "PathV": c.free()
 			
-		var line = PATH_LINE.instance()
+		var line = PATH_LINE.instantiate()
 		line.add_point(Vector2(0, new_amplitude * -1))
 		line.add_point(Vector2(0, new_amplitude))
 		line.name = "PathV"
@@ -37,11 +37,11 @@ func on_amplitude_v_changed(new_amplitude):
 func on_amplitude_h_changed(new_amplitude):
 	amplitude_h = new_amplitude
 	
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		for c in get_children():
 			if c.name == "PathH": c.free()
 				
-		var line = PATH_LINE.instance()
+		var line = PATH_LINE.instantiate()
 		line.add_point(Vector2(new_amplitude * -1, 0))
 		line.add_point(Vector2(new_amplitude, 0 ))
 		line.name = "PathH"
@@ -50,7 +50,7 @@ func on_amplitude_h_changed(new_amplitude):
 
 
 func _physics_process(delta):
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		pass
 	else:
 		if disabled or dead:
@@ -85,14 +85,14 @@ func crush_check():
 
 func animate():
 	if global_position.x < center_pos.x - (amplitude_h * .75):
-		$Sprite.frame = 1
+		$Sprite2D.frame = 1
 	elif global_position.x > center_pos.x + (amplitude_h * .75):
-		$Sprite.frame = 2
+		$Sprite2D.frame = 2
 	
 	elif global_position.y < center_pos.y - (amplitude_v * .75):
-		$Sprite.frame = 3
+		$Sprite2D.frame = 3
 	elif global_position.y > center_pos.y + (amplitude_v * .75):
-		$Sprite.frame = 4
+		$Sprite2D.frame = 4
 	
 	else:
-		$Sprite.frame = 0
+		$Sprite2D.frame = 0

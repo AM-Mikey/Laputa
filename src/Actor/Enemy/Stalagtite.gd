@@ -3,7 +3,7 @@ extends Enemy
 var target: Node
 
 var move_dir = Vector2.ZERO
-export var difficulty = 2
+@export var difficulty = 2
 
 var base_gravity
 
@@ -24,7 +24,10 @@ func _physics_process(_delta):
 	if disabled or dead:
 		return
 	velocity = calculate_move_velocity(velocity, move_dir, speed)
-	velocity = move_and_slide(velocity, FLOOR_NORMAL)
+	set_velocity(velocity)
+	set_up_direction(FLOOR_NORMAL)
+	move_and_slide()
+	velocity = velocity
 
 
 func enter_hang():
@@ -32,7 +35,7 @@ func enter_hang():
 
 func do_hang():
 	if $RayCast2D.get_collider():
-		if $RayCast2D.get_collider().get_collision_layer_bit(0):
+		if $RayCast2D.get_collider().get_collision_layer_value(0):
 			target = $RayCast2D.get_collider()
 			change_state("drop")
 
@@ -60,7 +63,7 @@ func enter_squirm():
 	match move_dir:
 		Vector2.LEFT: $AnimationPlayer.play("SquirmLeft")
 		Vector2.RIGHT: $AnimationPlayer.play("SquirmRight")
-	yield($AnimationPlayer, "animation_finished")
+	await $AnimationPlayer.animation_finished
 	change_state("run")
 
 

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNglassbreak.wav-7d86d736198355c644595f99f4e681a0.sample"
+type="AudioStreamWAV"
+uid="uid://dc54cid6jxjya"
+path="res://.godot/imported/YMNglassbreak.wav-7d86d736198355c644595f99f4e681a0.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNglassbreak.wav"
-dest_files=[ "res://.import/YMNglassbreak.wav-7d86d736198355c644595f99f4e681a0.sample" ]
+dest_files=["res://.godot/imported/YMNglassbreak.wav-7d86d736198355c644595f99f4e681a0.sample"]
 
 [params]
 

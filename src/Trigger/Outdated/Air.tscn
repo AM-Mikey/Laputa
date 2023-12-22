@@ -5,7 +5,7 @@
 
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8.01808, 8 )
+size = Vector2( 8.01808, 8 )
 
 [node name="Air" type="Area2D"]
 collision_layer = 0

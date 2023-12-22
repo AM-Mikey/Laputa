@@ -4,8 +4,8 @@ var state = "normal"
 
 var state_color = {
 	"normal" : Color(0.964706, 0.964706, 0.964706),
-	"new" : Color.chartreuse,
-	"old" : Color.darkgray
+	"new" : Color.CHARTREUSE,
+	"old" : Color.DARK_GRAY
 }
 
 

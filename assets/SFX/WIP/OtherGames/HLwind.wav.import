@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/HLwind.wav-02936ed89f7a4155bdc016273ba9273e.sample"
+type="AudioStreamWAV"
+uid="uid://di8sp8aypptyf"
+path="res://.godot/imported/HLwind.wav-02936ed89f7a4155bdc016273ba9273e.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/HLwind.wav"
-dest_files=[ "res://.import/HLwind.wav-02936ed89f7a4155bdc016273ba9273e.sample" ]
+dest_files=["res://.godot/imported/HLwind.wav-02936ed89f7a4155bdc016273ba9273e.sample"]
 
 [params]
 

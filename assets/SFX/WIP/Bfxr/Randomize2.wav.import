@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Randomize2.wav-f72695db801932152856798e7056e5da.sample"
+type="AudioStreamWAV"
+uid="uid://bnadb44nfg6hx"
+path="res://.godot/imported/Randomize2.wav-f72695db801932152856798e7056e5da.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/Randomize2.wav"
-dest_files=[ "res://.import/Randomize2.wav-f72695db801932152856798e7056e5da.sample" ]
+dest_files=["res://.godot/imported/Randomize2.wav-f72695db801932152856798e7056e5da.sample"]
 
 [params]
 

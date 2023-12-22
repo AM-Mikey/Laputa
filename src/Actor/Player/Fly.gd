@@ -1,15 +1,19 @@
 extends Node
 
-export var fly_speed = Vector2(500, 500)
+@export var fly_speed = Vector2(500, 500)
 
-onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_parent().get_parent().get_parent()
-onready var mm = pc.get_node("MovementManager")
+@onready var world = get_tree().get_root().get_node("World")
+@onready var pc = get_parent().get_parent().get_parent()
+@onready var mm = pc.get_node("MovementManager")
 
 func state_process():
 	pc.move_dir = get_move_dir()
 	mm.velocity = pc.move_dir * fly_speed
-	mm.velocity = pc.move_and_slide(mm.velocity, mm.FLOOR_NORMAL, true)
+	pc.set_velocity(mm.velocity)
+	pc.set_up_direction(mm.FLOOR_NORMAL)
+	pc.set_floor_stop_on_slope_enabled(true)
+	pc.move_and_slide()
+	mm.velocity = pc.velocity
 
 func get_move_dir():
 	var input_dir: Vector2

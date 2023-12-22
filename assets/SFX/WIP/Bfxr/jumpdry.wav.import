@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/jumpdry.wav-b3081ce4f967bccccf7691630edc9762.sample"
+type="AudioStreamWAV"
+uid="uid://bm035njsemakl"
+path="res://.godot/imported/jumpdry.wav-b3081ce4f967bccccf7691630edc9762.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/jumpdry.wav"
-dest_files=[ "res://.import/jumpdry.wav-b3081ce4f967bccccf7691630edc9762.sample" ]
+dest_files=["res://.godot/imported/jumpdry.wav-b3081ce4f967bccccf7691630edc9762.sample"]
 
 [params]
 

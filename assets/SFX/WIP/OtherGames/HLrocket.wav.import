@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/HLrocket.wav-b381208f2e562f6c7ecc2c8f3e38ba5b.sample"
+type="AudioStreamWAV"
+uid="uid://blqp56fe1puyg"
+path="res://.godot/imported/HLrocket.wav-b381208f2e562f6c7ecc2c8f3e38ba5b.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/HLrocket.wav"
-dest_files=[ "res://.import/HLrocket.wav-b381208f2e562f6c7ecc2c8f3e38ba5b.sample" ]
+dest_files=["res://.godot/imported/HLrocket.wav-b381208f2e562f6c7ecc2c8f3e38ba5b.sample"]
 
 [params]
 

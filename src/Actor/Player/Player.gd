@@ -1,6 +1,7 @@
+@icon("res://assets/Icon/PlayerIcon.png")
 #TODO re-extend to actor once we remove movement from actor.gd
-extends KinematicBody2D
-class_name Player, "res://assets/Icon/PlayerIcon.png"
+extends CharacterBody2D
+class_name Player
 
 #const POPUP = preload("res://src/UI/PopupText.tscn")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
@@ -13,8 +14,8 @@ signal total_xp_updated(total_xp)
 signal guns_updated(guns)
 
 
-export var hp: int = 16
-export var max_hp: int = 16
+@export var hp: int = 16
+@export var max_hp: int = 16
 var total_xp: int = 0
 
 
@@ -33,7 +34,7 @@ var is_crouching = false
 var is_in_water = false
 var is_in_coyote = false
 var dead = false
-export var controller_id: int = 0
+@export var controller_id: int = 0
 
 
 var inventory: Array
@@ -46,11 +47,11 @@ var shoot_dir = Vector2.LEFT
 
 
 
-onready var world = get_tree().get_root().get_node("World")
-onready var HUD
-onready var mm = get_node("MovementManager")
-onready var gm = get_node("GunManager")
-onready var guns = get_node("GunManager/Guns")
+@onready var world = get_tree().get_root().get_node("World")
+@onready var HUD
+@onready var mm = get_node("MovementManager")
+@onready var gm = get_node("GunManager")
+@onready var guns = get_node("GunManager/Guns")
 
 
 func _ready():
@@ -63,14 +64,12 @@ func disable():
 	disabled = true
 	can_input = false
 	invincible = true
-	mm.can_bonk = false
 	mm.change_state("disabled")
 
 func enable():
 	disabled = false
 	can_input = true
 	invincible = false
-	mm.can_bonk = true
 	if mm.cached_state:
 		mm.change_state(mm.cached_state.name.to_lower())
 	else:
@@ -97,7 +96,7 @@ func hit(damage, knockback_direction):
 			am.play("pc_hurt")
 			emit_signal("hp_updated", hp, max_hp)
 			###DamageNumber
-			var damagenum = DAMAGENUMBER.instance()
+			var damagenum = DAMAGENUMBER.instantiate()
 			damagenum.position = global_position
 			damagenum.value = damage
 			get_tree().get_root().get_node("World/Front").add_child(damagenum)
@@ -121,9 +120,9 @@ func hit(damage, knockback_direction):
 func do_iframes():
 	invincible = true
 	$EffectPlayer.play("FlashIframe")
-	yield($EffectPlayer, "animation_finished")
+	await $EffectPlayer.animation_finished
 	invincible = false
-	if not enemies_touching.empty():
+	if not enemies_touching.is_empty():
 		hit_again()
 
 func hit_again(): #TODO: prioritize this for all forms of damage, not just enemies
@@ -143,14 +142,14 @@ func die():
 	if not dead:
 		dead = true
 		disabled = true
-		world.add_child(DEATH_CAMERA.instance())
+		world.add_child(DEATH_CAMERA.instantiate())
 		visible = false
 		
-		var explosion = EXPLOSION.instance()
+		var explosion = EXPLOSION.instantiate()
 		explosion.position = global_position
 		world.get_node("Front").add_child(explosion)
 		
-		world.get_node("UILayer").add_child(load("res://src/UI/DeathScreen.tscn").instance())
+		world.get_node("UILayer").add_child(load("res://src/UI/DeathScreen.tscn").instantiate())
 		if world.has_node("UILayer/HUD"):
 			world.get_node("UILayer/HUD").free()
 		queue_free()
@@ -169,7 +168,7 @@ func _on_SSPDetector_body_exited(_body):
 func _on_ItemDetector_area_entered(area):
 	if not disabled:
 		
-		if area.get_collision_layer_bit(10): #health
+		if area.get_collision_layer_value(11): #health
 			hp += area.get_parent().value
 			hp = min(hp, max_hp)
 			
@@ -178,7 +177,7 @@ func _on_ItemDetector_area_entered(area):
 			area.get_parent().queue_free()
 		
 		
-		if area.get_collision_layer_bit(11): #xp
+		if area.get_collision_layer_value(12): #xp
 			var active_gun = $GunManager/Guns.get_child(0)
 			
 			total_xp += area.get_parent().value
@@ -197,7 +196,7 @@ func _on_ItemDetector_area_entered(area):
 			area.get_parent().queue_free()
 
 		
-		if area.get_collision_layer_bit(12): #ammo
+		if area.get_collision_layer_value(13): #ammo
 			for w in $GunManager/Guns.get_children():
 				if w.max_ammo != 0:
 					w.ammo += w.max_ammo * area.value #percent of max ammo
@@ -208,7 +207,7 @@ func _on_ItemDetector_area_entered(area):
 			area.queue_free()
 
 func _on_HurtDetector_body_entered(body):
-	if not disabled and body.get_collision_layer_bit(1): #enemy
+	if not disabled and body.get_collision_layer_value(2): #enemy
 		enemies_touching.append(body)
 		
 		var damage = body.damage_on_contact
@@ -219,7 +218,7 @@ func _on_HurtDetector_body_exited(body):
 	enemies_touching.erase(body)
 
 func _on_HurtDetector_area_entered(area): #KILLBOX
-	if area.get_collision_layer_bit(13): #kill
+	if area.get_collision_layer_value(14): #kill
 		die()
 
 
@@ -241,4 +240,4 @@ func connect_inventory():
 	#if this is always null when ready is called does it do anything? why do we have this?
 	var item_menu = get_tree().get_root().get_node_or_null("World/UILayer/Inventory")
 	if item_menu:
-		var _err = connect("inventory_updated", item_menu, "_on_inventory_updated")
+		var _err = connect("inventory_updated", Callable(item_menu, "_on_inventory_updated"))

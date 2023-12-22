@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/FFslideup.ogg-247a6b279fa19434468802e09c39407d.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c7pjb25px8q3l"
+path="res://.godot/imported/FFslideup.ogg-247a6b279fa19434468802e09c39407d.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/FFslideup.ogg"
-dest_files=[ "res://.import/FFslideup.ogg-247a6b279fa19434468802e09c39407d.oggstr" ]
+dest_files=["res://.godot/imported/FFslideup.ogg-247a6b279fa19434468802e09c39407d.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

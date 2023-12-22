@@ -6,8 +6,8 @@ var select_sound = load("res://assets/SFX/snd_menu_select.ogg")
 
 var connected_npc: Node
 
-onready var sb = $SyndiBox
-onready var player = get_tree().get_root().get_node("World/Juniper")
+@onready var sb = $SyndiBox
+@onready var player = get_tree().get_root().get_node("World/Juniper")
 
 
 func _on_display_text(npc_path, display_name, face, expression, text, justify, voiced):
@@ -57,7 +57,7 @@ func _on_show_branch(branch):
 		$DialogBranch.get_node("Yes").visible = true
 		$DialogBranch.get_node("No").visible = true
 		
-	yield(sb, "printing_finished")
+	await sb.printing_finished
 	$DialogBranch.visible = true
 	if int(branch) != 1: 
 		$DialogBranch.branch_id = String(int(branch))
@@ -67,7 +67,7 @@ func _on_show_branch(branch):
 	$Audio.play()
 	
 func _on_show_topic():
-	yield(sb, "printing_finished")
+	await sb.printing_finished
 	$DialogTopic.visible = true
 	$Audio.stream = prompt_sound
 	$Audio.play()
@@ -79,28 +79,28 @@ func align_box():
 	var player_pos = player.get_global_transform_with_canvas().get_origin() #dont ask why this works, but it does
 	var part_viewport_height = (get_viewport().size.y)/6
 	if player_pos.y > part_viewport_height:
-		rect_position.y = -160
+		position.y = -160
 	else:
-		rect_position.y = 0
+		position.y = 0
 
 func justify_text(justify):
 	if justify == "Face":
-		sb.margin_left = $FaceRect.margin_left
-		sb.margin_right = $FaceRect.margin_right
-		sb.margin_top = $FaceRect.margin_top
-		sb.margin_bottom = $FaceRect.margin_bottom
+		sb.offset_left = $FaceRect.offset_left
+		sb.offset_right = $FaceRect.offset_right
+		sb.offset_top = $FaceRect.offset_top
+		sb.offset_bottom = $FaceRect.offset_bottom
 		$Face.visible = true
 	if justify == "NoFace":
-		sb.margin_left = $NoFaceRect.margin_left
-		sb.margin_right = $NoFaceRect.margin_right
-		sb.margin_top = $NoFaceRect.margin_top
-		sb.margin_bottom = $NoFaceRect.margin_bottom
+		sb.offset_left = $NoFaceRect.offset_left
+		sb.offset_right = $NoFaceRect.offset_right
+		sb.offset_top = $NoFaceRect.offset_top
+		sb.offset_bottom = $NoFaceRect.offset_bottom
 		$Face.visible = false
 	if justify == "NFCenter":
-		sb.margin_left = $NoFaceRect.margin_left
-		sb.margin_right = $NoFaceRect.margin_right
-		sb.margin_top = $NoFaceRect.margin_top
-		sb.margin_bottom = $NoFaceRect.margin_bottom
+		sb.offset_left = $NoFaceRect.offset_left
+		sb.offset_right = $NoFaceRect.offset_right
+		sb.offset_top = $NoFaceRect.offset_top
+		sb.offset_bottom = $NoFaceRect.offset_bottom
 		$Face.visible = false
 	#else:
 		#print ("ERROR: no justification applied to text")

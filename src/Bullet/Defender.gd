@@ -1,6 +1,6 @@
 extends Bullet
 
-var texture: StreamTexture
+var texture: CompressedTexture2D
 var texture_index: int
 var collision_shape: RectangleShape2D
 
@@ -25,12 +25,15 @@ func _ready():
 			global_position.x += spread_distance
 		Vector2.DOWN:
 			global_position.x += spread_distance
+	setup_vis_notifier()
 
 
 func _physics_process(_delta):
 	if disabled: return
 	
 	velocity = speed * direction
-	velocity = move_and_slide(velocity)
+	set_velocity(velocity)
+	move_and_slide()
+	velocity = velocity
 	if origin.distance_to(global_position) > f_range:
-		fizzle("range")
+		do_fizzle("range")

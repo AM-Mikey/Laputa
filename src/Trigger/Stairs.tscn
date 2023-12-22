@@ -8,7 +8,7 @@ script = ExtResource( 1 )
 color = Color( 1, 0.494118, 0, 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygon = PackedVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

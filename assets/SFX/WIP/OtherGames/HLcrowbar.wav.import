@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/HLcrowbar.wav-41e0aa2714db4b3fb73a1b6341eceb8a.sample"
+type="AudioStreamWAV"
+uid="uid://g1pmt4qk47jf"
+path="res://.godot/imported/HLcrowbar.wav-41e0aa2714db4b3fb73a1b6341eceb8a.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/HLcrowbar.wav"
-dest_files=[ "res://.import/HLcrowbar.wav-41e0aa2714db4b3fb73a1b6341eceb8a.sample" ]
+dest_files=["res://.godot/imported/HLcrowbar.wav-41e0aa2714db4b3fb73a1b6341eceb8a.sample"]
 
 [params]
 

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Explosion 1.wav-7f365fa6f877af1efdd0126fca453e84.sample"
+type="AudioStreamWAV"
+uid="uid://4tkay2uqilau"
+path="res://.godot/imported/Explosion 1.wav-7f365fa6f877af1efdd0126fca453e84.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/JFXR/Explosion 1.wav"
-dest_files=[ "res://.import/Explosion 1.wav-7f365fa6f877af1efdd0126fca453e84.sample" ]
+dest_files=["res://.godot/imported/Explosion 1.wav-7f365fa6f877af1efdd0126fca453e84.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

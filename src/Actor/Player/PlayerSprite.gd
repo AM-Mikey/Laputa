@@ -1,14 +1,14 @@
-tool
-extends Sprite
+@tool
+extends Sprite2D
 
-export var hframe: int setget on_hframe_changed
+@export var hframe: int: set = on_hframe_changed
 
 func on_hframe_changed(new_hframe):
 	frame_coords.x = new_hframe
 
 func _on_Sprite_texture_changed():
-	hframes = texture.get_width() /32
-	vframes = texture.get_height() /32
+	hframes = int(texture.get_width() / 32.0)
+	vframes = int(texture.get_height() / 32.0)
 
 func _process(_delta):
 	if get_parent() != null:

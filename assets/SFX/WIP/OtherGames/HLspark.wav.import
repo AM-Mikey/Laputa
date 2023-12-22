@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/HLspark.wav-57c2adecf774da3bb3de641d7c4a2846.sample"
+type="AudioStreamWAV"
+uid="uid://yur1kemar4qq"
+path="res://.godot/imported/HLspark.wav-57c2adecf774da3bb3de641d7c4a2846.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/HLspark.wav"
-dest_files=[ "res://.import/HLspark.wav-57c2adecf774da3bb3de641d7c4a2846.sample" ]
+dest_files=["res://.godot/imported/HLspark.wav-57c2adecf774da3bb3de641d7c4a2846.sample"]
 
 [params]
 

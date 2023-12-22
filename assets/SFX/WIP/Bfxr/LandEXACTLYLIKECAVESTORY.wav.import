@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/LandEXACTLYLIKECAVESTORY.wav-b46e8fa27a4b6958957a734ff5309965.sample"
+type="AudioStreamWAV"
+uid="uid://cnabxstjovftg"
+path="res://.godot/imported/LandEXACTLYLIKECAVESTORY.wav-b46e8fa27a4b6958957a734ff5309965.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/LandEXACTLYLIKECAVESTORY.wav"
-dest_files=[ "res://.import/LandEXACTLYLIKECAVESTORY.wav-b46e8fa27a4b6958957a734ff5309965.sample" ]
+dest_files=["res://.godot/imported/LandEXACTLYLIKECAVESTORY.wav-b46e8fa27a4b6958957a734ff5309965.sample"]
 
 [params]
 

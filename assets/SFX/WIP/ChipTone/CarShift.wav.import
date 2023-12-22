@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/CarShift.wav-cce98e3157b116b6e4ae2dff3dc02cce.sample"
+type="AudioStreamWAV"
+uid="uid://dootx48ou7ica"
+path="res://.godot/imported/CarShift.wav-cce98e3157b116b6e4ae2dff3dc02cce.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/ChipTone/CarShift.wav"
-dest_files=[ "res://.import/CarShift.wav-cce98e3157b116b6e4ae2dff3dc02cce.sample" ]
+dest_files=["res://.godot/imported/CarShift.wav-cce98e3157b116b6e4ae2dff3dc02cce.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

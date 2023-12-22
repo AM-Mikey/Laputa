@@ -1,31 +1,31 @@
 extends MarginContainer
 
 
-onready var world = get_tree().get_root().get_node("World")
-var hidden = false
+@onready var world = get_tree().get_root().get_node("World")
+var ishidden = false
 
-onready var tabs = $VBoxContainer2/TabContainer
+@onready var tabs = $VBoxContainer2/TabContainer
 
 func _ready():
-	if hidden:
+	if ishidden:
 		visible = false
 	else:
-		tabs.get_node("Settings").focus()
+		tabs.get_node("Settings").do_focus()
 		if world.has_node("UILayer/TitleScreen"):
 			world.get_node("UILayer/TitleScreen").visible = false
-		var _err = get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
+		var _err = get_tree().root.connect("size_changed", Callable(self, "_on_viewport_size_changed"))
 		_on_viewport_size_changed()
 
 
 func _on_viewport_size_changed():
-	rect_size = get_tree().get_root().size / world.resolution_scale
+	size = get_tree().get_root().size / world.resolution_scale
 
 
 func _on_TabContainer_tab_changed(tab):
 	match tab:
-		0: tabs.get_node("Settings").focus()
-		1: tabs.get_node("KeyConfig").focus()
-		2: tabs.get_node("ControllerConfig").focus()
+		0: tabs.get_node("Settings").do_focus()
+		1: tabs.get_node("KeyConfig").do_focus()
+		2: tabs.get_node("ControllerConfig").do_focus()
 
 func _input(event):
 	if event.is_action_pressed("gun_left"):
@@ -45,9 +45,9 @@ func _input(event):
 func _on_Return_pressed():
 	if world.has_node("UILayer/PauseMenu"):
 		world.get_node("UILayer/PauseMenu").visible = true
-		world.get_node("UILayer/PauseMenu").focus()
+		world.get_node("UILayer/PauseMenu").do_focus()
 	if world.has_node("UILayer/TitleScreen"):
 		world.get_node("UILayer/TitleScreen").visible = true
-		world.get_node("UILayer/TitleScreen").focus()
+		world.get_node("UILayer/TitleScreen").do_focus()
 		
 	queue_free()

@@ -40,16 +40,16 @@ const GRASS = {
 
 func _ready(): #TODO iterate through this all at once #IF a tile appears multiple times in a dict this will mess up
 	for cell in farfront.get_used_cells(): #clear all grass tiles
-		if get_pattern_ids(GRASS).has(farfront.get_cellv(cell)):
+		if get_pattern_ids(GRASS).has(farfront.get_cell_source_id(0, cell)):
 			farfront.set_cellv(cell, -1)
 		
 		
 	for cell in front.get_used_cells():
-		if get_pattern_ids(DIRT).has(front.get_cellv(cell)):
+		if get_pattern_ids(DIRT).has(front.get_cell_source_id(0, cell)):
 			pattern_dirt(cell)
 
 	for cell in farfront.get_used_cells():
-		if get_pattern_ids(GRASS).has(farfront.get_cellv(cell)):
+		if get_pattern_ids(GRASS).has(farfront.get_cell_source_id(0, cell)):
 			pattern_grass(cell)
 #	for id in get_pattern_ids(DIRT):
 #		for cell in front.get_used_cells_by_id(id):

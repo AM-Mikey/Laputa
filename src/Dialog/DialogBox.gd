@@ -4,9 +4,9 @@ signal dialog_finished
 
 var text
 
-export var print_delay = 0.05
-export var do_delay = true
-export var punctuation_delay = 0.3
+@export var print_delay = 0.05
+@export var do_delay = true
+@export var punctuation_delay = 0.3
 var in_dialog = false
 var active = true
 var busy = false
@@ -15,17 +15,17 @@ var auto_input = false
 var current_dialog_json
 var step: int = 0 #step in printing dialog
 
-onready var tb = $Margin/HBox/RichTextBox
-onready var face_container = $Margin/HBox/Face
-onready var face_sprite = $Margin/HBox/Face/Sprite
+@onready var tb = $Margin/HBox/RichTextBox
+@onready var face_container = $Margin/HBox/Face
+@onready var face_sprite = $Margin/HBox/Face/Sprite2D
 
-onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_tree().get_root().get_node("World/Juniper")
+@onready var world = get_tree().get_root().get_node("World")
+@onready var pc = get_tree().get_root().get_node("World/Juniper")
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 	on_viewport_size_changed()
-	tb.bbcode_text = "\n" #""
+	tb.text = "\n" #""
 
 func print_sign():
 	face_container.free()
@@ -70,11 +70,12 @@ func start_printing(dialog_json, conversation: String, justification := "no_face
 
 
 func load_dialog(dialog_json) -> Dictionary: #loads json and converts it into a dictionary
-	var file = File.new()
-	file.open(dialog_json, file.READ)
+	var file = FileAccess.open(dialog_json, FileAccess.READ)
 	
 	var loaded_text = file.get_as_text()
-	var loaded_dialog = JSON.parse(loaded_text).result
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(loaded_text)
+	var loaded_dialog = test_json_conv.get_data()
 	return loaded_dialog
 
 
@@ -86,30 +87,30 @@ func dialog_loop():
 			if do_delay:
 				if $PrintTimer.is_stopped():
 					$PrintTimer.start(print_delay)
-				yield($PrintTimer, "timeout")
+				await $PrintTimer.timeout
 			
 			if busy or not active:
 				break
 
 func flash_cursor():
-	yield(get_tree().create_timer(0.3), "timeout")
-	var added_text = tb.bbcode_text + "§"
-	var deleted_text = tb.bbcode_text
+	await get_tree().create_timer(0.3).timeout
+	var added_text = tb.text + "§"
+	var deleted_text = tb.text
 	
 	while not active:
-		tb.bbcode_text = added_text
-		yield(get_tree().create_timer(0.3), "timeout")
+		tb.text = added_text
+		await get_tree().create_timer(0.3).timeout
 		if active:
 			break
-		tb.bbcode_text = deleted_text
-		yield(get_tree().create_timer(0.3), "timeout")
+		tb.text = deleted_text
+		await get_tree().create_timer(0.3).timeout
 
 func remove_cursor():
-	var cursor_position = tb.bbcode_text.rfind("§")
+	var cursor_position = tb.text.rfind("§")
 	if cursor_position != -1:
-		var removed_cursor = tb.bbcode_text
+		var removed_cursor = tb.text
 		removed_cursor.erase(cursor_position, 1)
-		tb.bbcode_text = removed_cursor
+		tb.text = removed_cursor
 
 func _input(event):
 	if event.is_action_pressed("ui_accept") and in_dialog and not auto_input:
@@ -123,7 +124,7 @@ func _input(event):
 			remove_cursor()
 			
 			print("adding back newline")
-			tb.bbcode_text += "\n"
+			tb.text += "\n"
 			
 #				if tb.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
 #					tb.bbcode_text = ""
@@ -146,7 +147,7 @@ func print_dialog(string):
 		$PrintTimer.stop()
 		$PrintTimer.start($PrintTimer.time_left + punctuation_delay)
 		print("insterted char: ", character)
-		tb.bbcode_text += character
+		tb.text += character
 	
 	
 	elif character == "\n" and not auto_input:
@@ -182,7 +183,7 @@ func print_dialog(string):
 		
 	else:
 		print("step " + str(step) + " : " + character)
-		tb.bbcode_text += character
+		tb.text += character
 		am.play("npc_dialog")
 
 
@@ -192,7 +193,7 @@ func exit():
 	if is_instance_valid(pc):
 		pc.get_node("PlayerCamera").position = Vector2.ZERO
 		#pc.enable()
-		yield(get_tree(), "idle_frame")
+		await get_tree().process_frame
 		pc.mm.change_state("run") #change to run so we don't continue a jump
 	queue_free()
 
@@ -215,12 +216,12 @@ func align_box():
 	for c in get_tree().get_nodes_in_group("Cameras"):
 		if c.current:
 			camera = c
-	var camera_center = camera.get_camera_screen_center()
+	var camera_center = camera.get_screen_center_position()
 
 	if pc_pos.y < camera_center.y + (viewport_size.y / 6): #bottom
-		rect_position.y = viewport_size.y - (rect_size.y + 16)
+		position.y = viewport_size.y - (size.y + 16)
 	else: #top
-		rect_position.y = 16
+		position.y = 16
 
 
 func flip_face(dir = "auto"):
@@ -243,6 +244,6 @@ func flip_face(dir = "auto"):
 func on_viewport_size_changed():
 	var viewport_size = get_tree().get_root().size / world.resolution_scale
 	#rect_size = get_tree().get_root().size / world.resolution_scale
-	rect_size.x = min(viewport_size.x, 400)
-	rect_position.x = (viewport_size.x - rect_size.x) /2
-	rect_position.y = viewport_size.y - 80
+	size.x = min(viewport_size.x, 400)
+	position.x = (viewport_size.x - size.x) /2
+	position.y = viewport_size.y - 80

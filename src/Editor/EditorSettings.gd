@@ -10,11 +10,10 @@ var default = {
 	"InspectorWindow": inspector_window,
 	}
 
-onready var editor = get_parent()
+@onready var editor = get_parent()
 
 func _ready():
-	var file = File.new()
-	if file.file_exists(SETTINGS_FILE):
+	if FileAccess.file_exists(SETTINGS_FILE):
 		load_settings()
 	else: 
 		save_defaults()
@@ -30,12 +29,12 @@ func load_settings():
 	
 	
 	var data1 = data["EditorWindow"]
-	editor.get_node("Main").rect_position = Vector2(data1[0], data1[1])
-	editor.get_node("Main").rect_size = Vector2(data1[2], data1[3])
+	editor.get_node("Main").position = Vector2(data1[0], data1[1])
+	editor.get_node("Main").size = Vector2(data1[2], data1[3])
 	
 	var data2 = data["InspectorWindow"]
-	editor.get_node("Secondary").rect_position = Vector2(data2[0], data2[1])
-	editor.get_node("Secondary").rect_size = Vector2(data2[2], data2[3])
+	editor.get_node("Secondary").position = Vector2(data2[0], data2[1])
+	editor.get_node("Secondary").size = Vector2(data2[2], data2[3])
 	
 
 #HELPERS
@@ -45,10 +44,9 @@ func save_defaults():
 
 
 func write_data(data):
-	var file = File.new()
-	var file_written = file.open(SETTINGS_FILE, File.WRITE)
-	if file_written == OK:
-		file.store_string(var2str(data))
+	var file = FileAccess.open(SETTINGS_FILE, FileAccess.WRITE)
+	if file:
+		file.store_string(var_to_str(data))
 		file.close()
 		print("settings data saved")
 	else:
@@ -57,12 +55,13 @@ func write_data(data):
 
 func read_data() -> Dictionary:
 	var data
-	var file = File.new()
-	if file.file_exists(SETTINGS_FILE):
-		var file_read = file.open(SETTINGS_FILE, File.READ)
-		if file_read == OK:
+	if FileAccess.file_exists(SETTINGS_FILE):
+		var file = FileAccess.open(SETTINGS_FILE, FileAccess.READ)
+		if file:
 			var text = file.get_as_text()
-			data = JSON.parse(text).result
+			var test_json_conv = JSON.new()
+			test_json_conv.parse(text)
+			data = test_json_conv.get_data()
 			file.close()
 	else: 
 		printerr("ERROR: could not load settings data")

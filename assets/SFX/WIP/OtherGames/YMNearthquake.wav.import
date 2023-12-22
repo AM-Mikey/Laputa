@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNearthquake.wav-de94801753c6637c3769beea6420bd1a.sample"
+type="AudioStreamWAV"
+uid="uid://djba37nlu0w0n"
+path="res://.godot/imported/YMNearthquake.wav-de94801753c6637c3769beea6420bd1a.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNearthquake.wav"
-dest_files=[ "res://.import/YMNearthquake.wav-de94801753c6637c3769beea6420bd1a.sample" ]
+dest_files=["res://.godot/imported/YMNearthquake.wav-de94801753c6637c3769beea6420bd1a.sample"]
 
 [params]
 

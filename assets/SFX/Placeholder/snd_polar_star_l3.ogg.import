@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/snd_polar_star_l3.ogg-b187113e04708b8b56355ba6a7d07d06.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cwy02cpqyoek0"
+path="res://.godot/imported/snd_polar_star_l3.ogg-b187113e04708b8b56355ba6a7d07d06.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/Placeholder/snd_polar_star_l3.ogg"
-dest_files=[ "res://.import/snd_polar_star_l3.ogg-b187113e04708b8b56355ba6a7d07d06.oggstr" ]
+dest_files=["res://.godot/imported/snd_polar_star_l3.ogg-b187113e04708b8b56355ba6a7d07d06.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

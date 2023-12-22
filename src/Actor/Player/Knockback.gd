@@ -1,9 +1,9 @@
 extends Node
 
 
-onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_parent().get_parent().get_parent()
-onready var mm = pc.get_node("MovementManager")
+@onready var world = get_tree().get_root().get_node("World")
+@onready var pc = get_parent().get_parent().get_parent()
+@onready var mm = pc.get_node("MovementManager")
 
 func state_process():
 	set_move_dir()
@@ -22,7 +22,12 @@ func state_process():
 
 
 	mm.velocity = get_move_velocity(mm.velocity, pc.move_dir)
-	var new_velocity = pc.move_and_slide_with_snap(mm.velocity, mm.snap_vector, mm.FLOOR_NORMAL, true)
+	pc.set_velocity(mm.velocity)
+	# TODOConverter3To4 looks that snap in Godot 4 is float, not vector like in Godot 3 - previous value `mm.snap_vector`
+	pc.set_up_direction(mm.FLOOR_NORMAL)
+	pc.set_floor_stop_on_slope_enabled(true)
+	pc.move_and_slide()
+	var new_velocity = pc.velocity
 		
 	if pc.is_on_wall():
 		new_velocity.y = max(mm.velocity.y, new_velocity.y)
@@ -31,8 +36,8 @@ func state_process():
 	
 	
 	
-	if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
-		mm.bonk("bonk")
+	#if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
+		#mm.bonk("head")
 
 
 #or Input.is_action_just_pressed("jump") and pc.is_on_floor():
@@ -52,7 +57,7 @@ func set_move_dir():
 
 func get_move_velocity(velocity, move_dir):
 	var out = velocity
-	var friction = false
+	var friction = false #TODO: why friction?
 
 	out.y += mm.gravity * get_physics_process_delta_time()
 	if move_dir.y < 0:

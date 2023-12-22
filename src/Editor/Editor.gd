@@ -40,10 +40,10 @@ var future_operations = [] #[[op][op][op]]
 var active_operation = [] #[[subop][subop][subop]]
 
 
-onready var w = get_tree().get_root().get_node("World")
-onready var ui = w.get_node("UILayer")
-onready var el = w.get_node("EditorLayer")
-onready var inspector = $Secondary/Inspector
+@onready var w = get_tree().get_root().get_node("World")
+@onready var ui = w.get_node("UILayer")
+@onready var el = w.get_node("EditorLayer")
+@onready var inspector = $Secondary/Inspector
 var tile_collection
 var actor_collection
 var prop_collection
@@ -55,11 +55,11 @@ var tile_map_cursor
 
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", Callable(self, "_on_viewport_size_changed"))
 	_on_viewport_size_changed()
-	connect("tile_collection_selected", inspector, "on_selected", ["tile_collection"])
-	connect("level_selected", inspector, "on_selected", ["level"])
-	el.add_child(EDITOR_CAMERA.instance())
+	connect("tile_collection_selected", Callable(inspector, "on_selected").bind("tile_collection"))
+	connect("level_selected", Callable(inspector, "on_selected").bind("level"))
+	el.add_child(EDITOR_CAMERA.instantiate())
 
 	
 	setup_level() #Call this every time the level is changed or reloaded
@@ -120,9 +120,9 @@ func setup_level_editor_layer(): #the layer for editor overlays that go over the
 	editor_layer.name = "Editor"
 	editor_layer.z_index = 8
 	w.current_level.add_child(editor_layer)
-	editor_level_limiter = LIMITER.instance()
+	editor_level_limiter = LIMITER.instantiate()
 	editor_layer.add_child(editor_level_limiter)
-	tile_map_cursor = TILE_MAP_CURSOR.instance()
+	tile_map_cursor = TILE_MAP_CURSOR.instantiate()
 	editor_layer.add_child(tile_map_cursor)
 
 
@@ -139,7 +139,7 @@ func exit():
 	hide_preview() #delete tile brush preview
 	editor_level_limiter.queue_free()
 	el.get_node("EditorCamera").queue_free()
-	ui.add_child(HUD.instance())
+	ui.add_child(HUD.instantiate())
 	w.get_node("Juniper").enable()
 	w.get_node("Juniper/PlayerCamera").current = true
 	for a in get_tree().get_nodes_in_group("Actors"):
@@ -159,7 +159,7 @@ func exit():
 
 ### PROCESS ###
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	set_menu_alpha()
 
 ### TILES
@@ -186,10 +186,10 @@ func _unhandled_input(event):
 	if event.is_action_released("editor_shift"): shift_held = false
 
 	if event is InputEventKey and event.is_pressed() and not event.is_echo() and ctrl_held:
-		if event.scancode == KEY_Z:
+		if event.keycode == KEY_Z:
 			if shift_held: redo()
 			else: undo()
-		if event.scancode == KEY_S:
+		if event.keycode == KEY_S:
 			emit_signal("level_saved")
 	
 	
@@ -217,7 +217,7 @@ func _unhandled_input(event):
 
 
 func do_entity_input(event):
-	yield(get_tree(), "idle_frame") #wait for new active to be set
+	await get_tree().process_frame #wait for new active to be set
 	
 	var mouse_pos = w.get_global_mouse_position() #Vector2(w.get_global_mouse_position().x, w.get_global_mouse_position().y + 8)
 	var grid_pos
@@ -281,7 +281,7 @@ func do_entity_input(event):
 	
 	#deleting
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
-		if event.scancode == KEY_DELETE: #or event.scancode == KEY_BACKSPACE or (event.scancode == KEY_X and not ctrl_held)
+		if event.keycode == KEY_DELETE: #or event.keycode == KEY_BACKSPACE or (event.keycode == KEY_X and not ctrl_held)
 			if inspector.active:
 				if not(inspector.active_type == "background" or inspector.active_type == "spawn_point"):
 					inspector.active.queue_free()
@@ -312,7 +312,7 @@ func do_tile_input(event):
 				set_tile_map_selection(mouse_start_pos, mouse_pos)
 #			if event.is_action_pressed("editor_rmb"):
 #				move_tile_map_selection("mou")
-		else: #not brush.empty(): #normal draw              #TODO:WHY
+		else: #not brush.is_empty(): #normal draw              #TODO:WHY
 			if shift_held: set_tool("tile", "line")
 			elif ctrl_held: set_tool("tile", "box")
 			else: 
@@ -357,7 +357,7 @@ func do_tile_input(event):
 				
 		if subtool != "select":
 			subtool = "paint"
-		if not active_operation.empty():
+		if not active_operation.is_empty():
 			past_operations.append(["set_cells", active_operation.duplicate()])
 			#print("active op: ", active_operation)
 			active_operation.clear()
@@ -420,8 +420,8 @@ func set_tile_map_selection(start_pos, end_pos):
 	tile_map_selection = Rect2(get_cell(start_pos), Vector2.ZERO)
 	tile_map_selection = tile_map_selection.expand(get_cell(end_pos))
 	tile_map_selection.size += Vector2.ONE
-	tile_map_cursor.rect_position = tile_map_selection.position * 16
-	tile_map_cursor.rect_size = tile_map_selection.size * 16
+	tile_map_cursor.position = tile_map_selection.position * 16
+	tile_map_cursor.size = tile_map_selection.size * 16
 	#print(tile_map_selection)
 
 func move_tile_map_selection(start_pos, end_pos):# TODO: make work with undo/redo
@@ -429,8 +429,8 @@ func move_tile_map_selection(start_pos, end_pos):# TODO: make work with undo/red
 	
 	var change = get_cell(end_pos) - get_cell(start_pos)
 	tile_map_selection.position += change
-	tile_map_cursor.rect_position = tile_map_selection.position * 16
-	tile_map_cursor.rect_size = tile_map_selection.size * 16
+	tile_map_cursor.position = tile_map_selection.position * 16
+	tile_map_cursor.size = tile_map_selection.size * 16
 
 	set_selected_tiles_from_dictionary(selected_tiles, change)
 
@@ -438,8 +438,8 @@ func del_tile_map_selection(): #TODO: test
 	var selected_tiles = get_selected_tiles_as_dictionary()
 	
 	for layer in selected_tiles:
-		for position in selected_tiles[layer]:
-			layer.set_cellv(position, -1)
+		for pos in selected_tiles[layer]:
+			layer.set_cellv(pos, -1)
 
 
 func get_selected_tiles_as_dictionary() -> Dictionary: #used for tile map selection
@@ -448,18 +448,18 @@ func get_selected_tiles_as_dictionary() -> Dictionary: #used for tile map select
 		var layer_tiles = {}
 		for row in tile_map_selection.size.y:
 			for column in tile_map_selection.size.x:
-				var position = tile_map_selection.position + Vector2(column, row)
-				layer_tiles[position] = layer.get_cellv(position)
+				var pos = tile_map_selection.position + Vector2(column, row)
+				layer_tiles[pos] = layer.get_cell_source_id(0, position)
 		selected_tiles[layer] = layer_tiles
 	return(selected_tiles)
 
 
 func set_selected_tiles_from_dictionary(selected_tiles, change): #used for tile map selection
 	for layer in selected_tiles:
-		for position in selected_tiles[layer]:
-			var map_position = position + change
-			var tile_id = selected_tiles[layer][position]
-			layer.set_cellv(position, -1)
+		for pos in selected_tiles[layer]:
+			var map_position = pos + change
+			var tile_id = selected_tiles[layer][pos]
+			layer.set_cellv(pos, -1)
 			layer.set_cellv(map_position, tile_id)
 #			if tile_id != -1:
 #				print("got tile")
@@ -549,16 +549,16 @@ func set_cell(cell: Vector2, tile: int, layer): #set one cell, one layer, one ti
 #			for l in tile_collection.get_children():
 #				if l is TileMap:
 #
-#					if l.get_cellv(cell) == tile: #if old tile == new tile
+#					if l.get_cell_source_id(0, cell) == tile: #if old tile == new tile
 #						pass
 #					else:
-#						old_tile_dic[l].append([cell, l.get_cellv(cell)])
+#						old_tile_dic[l].append([cell, l.get_cell_source_id(0, cell)])
 #						l.set_cellv(cell, tile)
 #		else: #not multi_eraser
-#			if layer.get_cellv(cell) == tile: #if old tile == new tile
+#			if layer.get_cell_source_id(0, cell) == tile: #if old tile == new tile
 #				pass
 #			else:
-#				old_tile_dic[layer].append([cell, layer.get_cellv(cell)])
+#				old_tile_dic[layer].append([cell, layer.get_cell_source_id(0, cell)])
 #				layer.set_cellv(cell, tile)
 #
 #	if traced:
@@ -574,27 +574,27 @@ func set_cells_dictionary(cells: Dictionary, brush: Dictionary): #ex: {layerobje
 	var brush_size = Vector2(0, 0)
 	
 	for layer in cells:
-		for position in cells[layer]:
-			if position.x < min_pos.x or (position.x == min_pos.x and position.y < min_pos.y):
-				position = min_pos
+		for pos in cells[layer]:
+			if pos.x < min_pos.x or (pos.x == min_pos.x and pos.y < min_pos.y):
+				pos = min_pos
 	
 	for layer in brush:
-		for position in brush[layer]:
-			if position.x > brush_size.x or (position.x == brush_size.x and position.y > brush_size.y):
-				position = brush_size
+		for pos in brush[layer]:
+			if pos.x > brush_size.x or (pos.x == brush_size.x and pos.y > brush_size.y):
+				pos = brush_size
 				
 	for layer in cells:
-		for position in cells[layer]:
+		for pos in cells[layer]:
 			
-			var brush_pos = (position - min_pos) % brush_size
+			var brush_pos = (pos - min_pos) % brush_size
 			var tile_id = brush[layer][brush_pos]
-			layer.set_cellv(position, tile_id)
+			layer.set_cellv(pos, tile_id)
 		
 	
 func set_cells_2d_array(cells: Dictionary, brush: Dictionary, traced = true):
 	var brush_size = get_brush_size()
 	for b_layer in brush:
-		if not brush[b_layer].empty(): #if layer is not empty
+		if not brush[b_layer].is_empty(): #if layer is not empty
 			var layer_id = b_layer
 			var layer = cells[layer_id]
 			for row in layer:
@@ -628,7 +628,7 @@ func set_cells_2d(cells: Array, brush: Array, traced = true): #There is no reaso
 				old_tile = {}
 				for l in tile_collection.get_children():
 					if l is TileMap and not l.is_in_group("Previews"):
-						var replaced_tile = l.get_cellv(cell) #get old tile
+						var replaced_tile = l.get_cell_source_id(0, cell) #get old tile
 						if replaced_tile != -1: #if this layer actually had tiles replaced
 							old_tile[l] = [cell, replaced_tile]
 							l.set_cellv(cell, tile) #set new tile (eraser == -1)
@@ -636,7 +636,7 @@ func set_cells_2d(cells: Array, brush: Array, traced = true): #There is no reaso
 
 			if auto_layer and not is_eraser: #if auto layer is on, still use the current layer as the eraser
 				layer = get_auto_layer(tile)
-				old_tile = layer.get_cellv(cell) #get old tile
+				old_tile = layer.get_cell_source_id(0, cell) #get old tile
 				layer.set_cellv(cell, tile) #set new tile
 
 
@@ -653,7 +653,7 @@ func set_cells_2d(cells: Array, brush: Array, traced = true): #There is no reaso
 
 
 func set_line(canvas: Array, brush: Array, traced = true):
-	if brush.empty():
+	if brush.is_empty():
 		return
 	var r_id = 0
 	var r_max = brush.size()
@@ -678,14 +678,14 @@ func set_line(canvas: Array, brush: Array, traced = true):
 							old_tile = {}
 							for l in tile_collection.get_children():
 								if l is TileMap and not l.is_in_group("Previews"):
-									var replaced_tile = l.get_cellv(cell + offset) #get old tile
+									var replaced_tile = l.get_cell_source_id(0, cell + offset) #get old tile
 									if replaced_tile != -1: #if this layer actually had tiles replaced
 										old_tile[l] = [cell + offset, replaced_tile] 
 									l.set_cellv(cell + offset, tile) #set_new_tile
 						
 						
 						else: #not eraser
-							old_tile = layer.get_cellv(cell + offset) #get_old_tile
+							old_tile = layer.get_cell_source_id(0, cell + offset) #get_old_tile
 							layer.set_cellv(cell + offset, tile)
 						
 						if traced:
@@ -718,14 +718,14 @@ func set_auto_tiles():
 		node.farfront = tile_collection.get_node("FarFront")
 		add_child(node)
 
-func set_entity(position, entity_path, entity_type, traced = true):
+func set_entity(pos, entity_path, entity_type, traced = true):
 	if entity_path == null:
 		printerr("ERROR: no enemy path in set_entity")
 	
-	var entity = load(entity_path).instance()
+	var entity = load(entity_path).instantiate()
 	if entity.has_method("disable"):
 		entity.disable()
-	entity.global_position = position
+	entity.global_position = pos
 	entity.input_pickable = true
 	
 	match entity_type:
@@ -744,9 +744,9 @@ func set_entity(position, entity_path, entity_type, traced = true):
 		emit_signal("entity_selected", entity, entity_type) #select new entity
 		past_operations.append(["set_entity",[position, entity_path, entity_type]])
 
-func del_entity(position, traced = true):
+func del_entity(pos, traced = true):
 		for e in get_tree().get_nodes_in_group("Entities"):
-			if is_entity_at_position(e, position):
+			if is_entity_at_position(e, pos):
 				e.queue_free()
 
 
@@ -810,11 +810,11 @@ func set_preview_line(cells: Array, tile_map):
 
 
 
-func preview_entity(position, entity_path, entity_type):
-	var preview = ENTITY_PREVIEW.instance()
+func preview_entity(pos, entity_path, entity_type):
+	var preview = ENTITY_PREVIEW.instantiate()
 	preview.entity_type = entity_type
 	preview.entity_path = entity_path
-	preview.global_position = position
+	preview.global_position = pos
 	match entity_type:
 		"enemy", "npc", "player", "boss", "pickup":
 			actor_collection.add_child(preview)
@@ -828,7 +828,7 @@ func preview_entity(position, entity_path, entity_type):
 
 func hide_preview():
 	for c in tile_collection.get_children():
-		if c is Sprite:
+		if c is Sprite2D:
 			c.queue_free()
 	for e in get_tree().get_nodes_in_group("Previews"):
 		e.queue_free()
@@ -840,7 +840,7 @@ func hide_preview():
 
 func get_cell(mouse_pos) -> Vector2:
 	var local_pos = tile_map.to_local(mouse_pos)
-	var map_pos = tile_map.world_to_map(local_pos)
+	var map_pos = tile_map.local_to_map(local_pos)
 	return map_pos
 
 func get_grid_pos(mouse_pos, mode = "course", exception = "none") -> Vector2:
@@ -850,9 +850,9 @@ func get_grid_pos(mouse_pos, mode = "course", exception = "none") -> Vector2:
 		step = 8
 		offset = Vector2(0, 0)
 	if exception == "trigger":
-		return Vector2(stepify(mouse_pos.x, step), stepify(mouse_pos.y, step))
+		return Vector2(snapped(mouse_pos.x, step), snapped(mouse_pos.y, step))
 	else:
-		return Vector2(stepify(mouse_pos.x - offset.x, step), stepify(mouse_pos.y - offset.y, step)) + offset
+		return Vector2(snapped(mouse_pos.x - offset.x, step), snapped(mouse_pos.y - offset.y, step)) + offset
 
 
 func get_centerbox(mouse_pos) -> Array: #2D Array #active tiles
@@ -867,7 +867,7 @@ func get_centerbox(mouse_pos) -> Array: #2D Array #active tiles
 		for cell in b.x:
 			var offset = Vector2(cell - center.x, row - center.y)
 			row_cells.append(center_cell + offset) #position of cell in map space
-		if not row_cells.empty():
+		if not row_cells.is_empty():
 			cells.append(row_cells)
 	return cells
 
@@ -1002,7 +1002,7 @@ func get_brush_size() -> Vector2:
 	return brush_size
 
 
-func get_brush_as_eraser(var null_erase = true) -> Array: #erase with null tiles by default
+func get_brush_as_eraser(null_erase = true) -> Array: #erase with null tiles by default
 	var eraser = []
 	for row in brush:
 		var eraser_row = []
@@ -1027,9 +1027,9 @@ func get_2d_array_from_Vector2_array(array) -> Array:
 	return new_array
 
 
-func is_entity_at_position(entity, position, forgiveness = 4):
+func is_entity_at_position(entity, pos, forgiveness = 4):
 	var out = false
-	if abs(position.x - entity.global_position.x) < forgiveness and abs(position.y - entity.global_position.y) < forgiveness:
+	if abs(pos.x - entity.global_position.x) < forgiveness and abs(pos.y - entity.global_position.y) < forgiveness:
 		if not entity.is_in_group("Previews"):
 			out = true
 	return out
@@ -1069,8 +1069,8 @@ func on_layer_changed(layer):
 ### UI ###
 func set_menu_alpha():
 	var mouse_pos = get_global_mouse_position()
-	var main_rect = Rect2($Main.rect_position, $Main.rect_size)
-	var secondary_rect = Rect2($Secondary.rect_position, $Secondary.rect_size)
+	var main_rect = Rect2($Main.position, $Main.size)
+	var secondary_rect = Rect2($Secondary.position, $Secondary.size)
 	if main_rect.has_point(mouse_pos):
 		$Main.modulate = Color(1, 1, 1, 1)
 	else:
@@ -1101,8 +1101,8 @@ func _on_Tiles_tile_transform_updated(tile_rotation_degrees, tile_scale_vector):
 ### MISC SIGNALS
 
 func _on_viewport_size_changed():
-	$Margin.rect_size = get_tree().get_root().size / w.get_node("EditorLayer").scale
-	rect_size = get_tree().get_root().size / w.get_node("EditorLayer").scale
+	$Margin.size = get_tree().get_root().size / w.get_node("EditorLayer").scale
+	size = get_tree().get_root().size / w.get_node("EditorLayer").scale
 	pass
 
 func on_tab_selected(tab_index): #tab buttons

@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/LSDritualshaking.ogg-2691e232e6f2dfd586c85b53d0d1d552.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ywar8m6mgbp4"
+path="res://.godot/imported/LSDritualshaking.ogg-2691e232e6f2dfd586c85b53d0d1d552.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/LSDritualshaking.ogg"
-dest_files=[ "res://.import/LSDritualshaking.ogg-2691e232e6f2dfd586c85b53d0d1d552.oggstr" ]
+dest_files=["res://.godot/imported/LSDritualshaking.ogg-2691e232e6f2dfd586c85b53d0d1d552.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

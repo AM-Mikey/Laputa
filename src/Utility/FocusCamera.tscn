@@ -1,9 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://inqdolo54sfv"]
 
-[ext_resource path="res://src/Utility/FocusCamera.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://src/Utility/FocusCamera.gd" id="1"]
 
 [node name="FocusCamera" type="Camera2D"]
-current = true
-zoom = Vector2( 0.25, 0.25 )
-smoothing_enabled = true
-script = ExtResource( 1 )
+zoom = Vector2(0.25, 0.25)
+position_smoothing_enabled = true
+script = ExtResource("1")

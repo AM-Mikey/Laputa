@@ -5,11 +5,11 @@ var player_targets = []
 var enemy_targets = []
 var bullet_targets = []
 
-export var speed = Vector2(5, 5)
-export var dir = Vector2.LEFT
+@export var speed = Vector2(5, 5)
+@export var dir = Vector2.LEFT
 
-export var active_time = 5.0
-export var wait_time = 5.0
+@export var active_time = 5.0
+@export var wait_time = 5.0
 
 var active = false
 
@@ -60,28 +60,26 @@ func add_windvelocity():
 
 
 func fade_out():
-	$Tween.interpolate_property($WindSound, "volume_db", 0, -80, 1.0, Tween.TRANS_SINE, Tween.EASE_IN, 0)
-	$Tween.start()
-
-func _on_Tween_tween_completed(object, key):
+	var tween = get_tree().create_tween()
+	tween.tween_property($WindSound, "volume_db", -80, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	await tween.finished
 	$WindSound.stop()
 	$WindSound.volume_db = 0
 
-
 func _on_Wind_body_entered(body):
-	if body.get_collision_layer_bit(0): #player
+	if body.get_collision_layer_value(1): #player
 		player_targets.append(body)
-	if body.get_collision_layer_bit(1): #enemy
+	if body.get_collision_layer_value(2): #enemy
 		enemy_targets.append(body)
-	if body.get_collision_layer_bit(6): #bullet foe
+	if body.get_collision_layer_value(7): #bullet foe
 		bullet_targets.append(body)
 
 func _on_Wind_body_exited(body):
-	if body.get_collision_layer_bit(0): #player
+	if body.get_collision_layer_value(1): #player
 		player_targets.erase(body)
-	if body.get_collision_layer_bit(1): #enemy
+	if body.get_collision_layer_value(2): #enemy
 		enemy_targets.erase(body)
-	if body.get_collision_layer_bit(6): #bullet foe
+	if body.get_collision_layer_value(7): #bullet foe
 		bullet_targets.erase(body)
 
 

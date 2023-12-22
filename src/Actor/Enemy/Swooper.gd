@@ -1,15 +1,15 @@
 extends Enemy
 
-export var dir = Vector2.LEFT
+@export var dir = Vector2.LEFT
 var safe_distance = 100
 
 
 var setup_complete = false
 
-export var swoop_height = 3
-export var swoop_distance = 5
+@export var swoop_height = 3
+@export var swoop_distance = 5
 
-onready var levels = get_tree().get_nodes_in_group("Levels")
+@onready var levels = get_tree().get_nodes_in_group("Levels")
 #onready var cl = get_parent().get_parent().get_node("CameraLimiter")
 
 func _ready():
@@ -38,7 +38,7 @@ func _physics_process(_delta):
 	if disabled or dead or not setup_complete:
 		return
 	get_parent().offset += speed.x/100
-	if get_parent().unit_offset == 1: #finished path
+	if get_parent().progress_ratio == 1: #finished path
 		protected = false
 
 func on_cue():
@@ -51,7 +51,7 @@ func make_path():
 	var path = Path2D.new()
 	var curve = Curve2D.new()
 	var path_follow = PathFollow2D.new()
-	var swooper = load("res://src/Actor/Enemy/Swooper.tscn").instance()
+	var swooper = load("res://src/Actor/Enemy/Swooper.tscn").instantiate()
 	
 	curve.add_point(Vector2.ZERO, Vector2.ZERO, Vector2(0, swoop_height * 16))
 	curve.add_point(Vector2(dir.x * swoop_distance * 16, 0), Vector2(0, swoop_height * 16), Vector2.ZERO)

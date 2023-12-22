@@ -14,16 +14,16 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.4 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [node name="PopupText" type="MarginContainer"]
-margin_top = 32.0
-margin_right = 480.0
-margin_bottom = 270.0
+offset_top = 32.0
+offset_right = 480.0
+offset_bottom = 270.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -31,9 +31,9 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-margin_left = 204.0
-margin_right = 275.0
-margin_bottom = 14.0
+offset_left = 204.0
+offset_right = 275.0
+offset_bottom = 14.0
 size_flags_horizontal = 4
 size_flags_vertical = 0
 text = "Popup Label"

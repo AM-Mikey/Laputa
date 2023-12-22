@@ -3,22 +3,22 @@ extends Enemy
 const SEED = preload("res://src/Bullet/Enemy/Seed.tscn")
 const WAYPOINT = preload("res://src/Utility/Waypoint.tscn")
 
-export var move_dir = Vector2.LEFT
-export var look_dir = Vector2.LEFT
+@export var move_dir = Vector2.LEFT
+@export var look_dir = Vector2.LEFT
 
-export var idle_max_time = 5.0
-export var walk_max_time = 10.0
-export var defend_time = 0.4
-
-
-
-export var cooldown_time = 1
-export var bullet_speed: int = 200
-export var bullet_damage: int = 2
+@export var idle_max_time = 5.0
+@export var walk_max_time = 10.0
+@export var defend_time = 0.4
 
 
-export var lock_distance = 128
-export var lock_tolerance = 16
+
+@export var cooldown_time = 1
+@export var bullet_speed: int = 200
+@export var bullet_damage: int = 2
+
+
+@export var lock_distance = 128
+@export var lock_tolerance = 16
 
 var target: Node
 var locked_on = false
@@ -26,7 +26,7 @@ var shooting = false
 
 var waypoint
 
-onready var ap = $AnimationPlayer
+@onready var ap = $AnimationPlayer
 
 
 
@@ -51,12 +51,12 @@ func enter_walk():
 	ap.play("Walk")
 	
 	match move_dir:
-		Vector2.LEFT: $Sprite.flip_h = false
-		Vector2.RIGHT: $Sprite.flip_h = true
+		Vector2.LEFT: $Sprite2D.flip_h = false
+		Vector2.RIGHT: $Sprite2D.flip_h = true
 	
 	rng.randomize()
 	$StateTimer.start(rng.randf_range(1.0, walk_max_time))
-	yield($StateTimer, "timeout")
+	await $StateTimer.timeout
 	change_state("idle")
 
 func do_walk():
@@ -65,18 +65,21 @@ func do_walk():
 	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
 		change_state("idle")
 	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
-		velocity = get_velocity(velocity, move_dir, speed)
-		velocity = move_and_slide(velocity, FLOOR_NORMAL)
+		velocity = calc_velocity(velocity, move_dir, speed)
+		set_velocity(velocity)
+		set_up_direction(FLOOR_NORMAL)
+		move_and_slide()
+		velocity = velocity
 
 
 func enter_idle():
 	rng.randomize()
 	ap.play("Idle")
 	match move_dir:
-		Vector2.LEFT: $Sprite.flip_h = false
-		Vector2.RIGHT: $Sprite.flip_h = true
+		Vector2.LEFT: $Sprite2D.flip_h = false
+		Vector2.RIGHT: $Sprite2D.flip_h = true
 	$StateTimer.start(rng.randf_range(1.0, idle_max_time))
-	yield($StateTimer, "timeout")
+	await $StateTimer.timeout
 	change_state("walk")
 
 
@@ -103,15 +106,18 @@ func do_aggro():
 		ap.play("Walk")
 
 #	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
-	velocity = get_velocity(velocity, move_dir, speed)
-	velocity = move_and_slide(velocity, FLOOR_NORMAL)
+	velocity = calc_velocity(velocity, move_dir, speed)
+	set_velocity(velocity)
+	set_up_direction(FLOOR_NORMAL)
+	move_and_slide()
+	velocity = velocity
 
 
 
 ### HELPERS ###
 
 func fire():
-	var bullet = SEED.instance()
+	var bullet = SEED.instantiate()
 	
 	bullet.damage = bullet_damage
 	bullet.speed = bullet_speed
@@ -124,7 +130,7 @@ func fire():
 
 func set_waypoint(target_dir: Vector2):
 	if waypoint: waypoint.queue_free()
-	waypoint = WAYPOINT.instance()
+	waypoint = WAYPOINT.instantiate()
 	waypoint.position = Vector2(pc.position.x + (lock_distance * target_dir.x), pc.position.y) #left or right of pc
 	waypoint.owner_id = id
 	waypoint.index = -1

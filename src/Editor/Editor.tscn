@@ -1,118 +1,110 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=15 format=3 uid="uid://b5eyeotyrei5i"]
 
-[ext_resource path="res://src/Editor/EditorTheme.tres" type="Theme" id=1]
-[ext_resource path="res://src/Editor/Editor.gd" type="Script" id=2]
-[ext_resource path="res://src/Editor/ResizeWindow.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Editor/Tiles.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Editor/TileSet.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/Editor/Levels.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/Editor/Inspector.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/Editor/Enemies.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/Editor/Props.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/Editor/NPCs.tscn" type="PackedScene" id=10]
-[ext_resource path="res://src/Editor/Triggers.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/Editor/TabButtons.gd" type="Script" id=12]
-[ext_resource path="res://src/Editor/Tooltip.tscn" type="PackedScene" id=13]
-[ext_resource path="res://src/Editor/EditorSettings.gd" type="Script" id=14]
+[ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1"]
+[ext_resource type="Script" path="res://src/Editor/Editor.gd" id="2"]
+[ext_resource type="PackedScene" path="res://src/Editor/ResizeWindow.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://src/Editor/Tiles.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://src/Editor/TileSet.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://src/Editor/Levels.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://src/Editor/Inspector.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://src/Editor/Enemies.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://src/Editor/Props.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://src/Editor/NPCs.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://src/Editor/Triggers.tscn" id="11"]
+[ext_resource type="Script" path="res://src/Editor/TabButtons.gd" id="12"]
+[ext_resource type="PackedScene" path="res://src/Editor/Tooltip.tscn" id="13"]
+[ext_resource type="Script" path="res://src/Editor/EditorSettings.gd" id="14"]
 
 [node name="Editor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -312.0
-margin_bottom = 90.0
+offset_right = -312.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
+theme = ExtResource("1")
+script = ExtResource("2")
 
 [node name="Margin" type="MarginContainer" parent="."]
-margin_right = 960.0
-margin_bottom = 448.0
+layout_mode = 0
+offset_right = 960.0
+offset_bottom = 448.0
 mouse_filter = 2
 
-[node name="Tooltip" parent="Margin" instance=ExtResource( 13 )]
-margin_right = 90.0
+[node name="Tooltip" parent="Margin" instance=ExtResource("13")]
+layout_mode = 2
 
-[node name="Secondary" parent="." instance=ExtResource( 3 )]
+[node name="Secondary" parent="." instance=ExtResource("3")]
+layout_mode = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 761.0
-margin_right = 968.0
-margin_bottom = 440.0
+offset_left = 761.0
+offset_right = 968.0
+offset_bottom = 440.0
 
-[node name="Inspector" parent="Secondary" instance=ExtResource( 7 )]
-margin_right = 207.0
-margin_bottom = 440.0
+[node name="Inspector" parent="Secondary" instance=ExtResource("7")]
+layout_mode = 2
 mouse_filter = 1
 
-[node name="Main" parent="." instance=ExtResource( 3 )]
+[node name="Main" parent="." instance=ExtResource("3")]
+layout_mode = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 250.0
-margin_bottom = 416.0
+offset_right = 250.0
+offset_bottom = 416.0
 mouse_filter = 1
 
 [node name="Tab" type="TabContainer" parent="Main"]
-margin_right = 250.0
-margin_bottom = 416.0
+layout_mode = 2
 mouse_filter = 2
 tabs_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Tiles" parent="Main/Tab" instance=ExtResource( 4 )]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 16.0
-margin_top = 16.0
-margin_right = -16.0
-margin_bottom = -16.0
+[node name="Tiles" parent="Main/Tab" instance=ExtResource("4")]
+layout_mode = 2
 
-[node name="TileSet" parent="Main/Tab" instance=ExtResource( 5 )]
+[node name="TileSet" parent="Main/Tab" instance=ExtResource("5")]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 16.0
-margin_right = -16.0
-margin_bottom = -16.0
+layout_mode = 2
 mouse_filter = 2
 
-[node name="Levels" parent="Main/Tab" instance=ExtResource( 6 )]
+[node name="Levels" parent="Main/Tab" instance=ExtResource("6")]
 visible = false
-margin_left = 16.0
-margin_right = -16.0
-margin_bottom = -16.0
+layout_mode = 2
 
-[node name="Enemies" parent="Main/Tab" instance=ExtResource( 8 )]
+[node name="Enemies" parent="Main/Tab" instance=ExtResource("8")]
 visible = false
-margin_left = 16.0
-margin_right = -16.0
-margin_bottom = -16.0
+layout_mode = 2
 
-[node name="NPCs" parent="Main/Tab" instance=ExtResource( 10 )]
+[node name="NPCs" parent="Main/Tab" instance=ExtResource("10")]
 visible = false
+layout_mode = 2
 
-[node name="Props" parent="Main/Tab" instance=ExtResource( 9 )]
+[node name="Props" parent="Main/Tab" instance=ExtResource("9")]
 visible = false
+layout_mode = 2
 
-[node name="Triggers" parent="Main/Tab" instance=ExtResource( 11 )]
+[node name="Triggers" parent="Main/Tab" instance=ExtResource("11")]
 visible = false
+layout_mode = 2
 
 [node name="TabButtons" type="Control" parent="Main"]
 show_behind_parent = true
-margin_right = 250.0
-margin_bottom = 416.0
+layout_mode = 2
 mouse_filter = 2
-script = ExtResource( 12 )
+script = ExtResource("12")
 
 [node name="VBox" type="HBoxContainer" parent="Main/TabButtons"]
-margin_top = -24.0
-margin_right = 256.0
-margin_bottom = 16.0
+layout_mode = 0
+offset_top = -24.0
+offset_right = 256.0
+offset_bottom = 16.0
 mouse_filter = 2
 
 [node name="EditorSettings" type="Node" parent="."]
-script = ExtResource( 14 )
+script = ExtResource("14")
 
 [connection signal="entity_selected" from="." to="Secondary/Inspector" method="on_selected"]
 [connection signal="level_saved" from="." to="Main/Tab/Levels" method="on_save"]

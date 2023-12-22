@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNdog.wav-6913b5ab6655a271d88a66b417cbd61e.sample"
+type="AudioStreamWAV"
+uid="uid://cku4y4h40uysq"
+path="res://.godot/imported/YMNdog.wav-6913b5ab6655a271d88a66b417cbd61e.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNdog.wav"
-dest_files=[ "res://.import/YMNdog.wav-6913b5ab6655a271d88a66b417cbd61e.sample" ]
+dest_files=["res://.godot/imported/YMNdog.wav-6913b5ab6655a271d88a66b417cbd61e.sample"]
 
 [params]
 

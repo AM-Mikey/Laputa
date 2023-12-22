@@ -34,4 +34,5 @@ func load_level():
 
 func activate():
 	var origin = pc.get_node("BulletOrigin").global_position
-	spawn_bullet(origin, pc.shoot_dir)
+	var bullet = spawn_bullet(origin, pc.shoot_dir)
+	bullet.instant_fizzle_check()

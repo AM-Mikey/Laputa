@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/JumpDry.ogg-2dc7437ad616fd2acfacd9e978bafd4e.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://iusxov88x370"
+path="res://.godot/imported/JumpDry.ogg-2dc7437ad616fd2acfacd9e978bafd4e.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/JumpDry.ogg"
-dest_files=[ "res://.import/JumpDry.ogg-2dc7437ad616fd2acfacd9e978bafd4e.oggstr" ]
+dest_files=["res://.godot/imported/JumpDry.ogg-2dc7437ad616fd2acfacd9e978bafd4e.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/snd_quote_hurt.ogg-6a60255915f54f8d67e087af3105a94f.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://buxhrlrlgmtjb"
+path="res://.godot/imported/snd_quote_hurt.ogg-6a60255915f54f8d67e087af3105a94f.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/Placeholder/snd_quote_hurt.ogg"
-dest_files=[ "res://.import/snd_quote_hurt.ogg-6a60255915f54f8d67e087af3105a94f.oggstr" ]
+dest_files=["res://.godot/imported/snd_quote_hurt.ogg-6a60255915f54f8d67e087af3105a94f.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

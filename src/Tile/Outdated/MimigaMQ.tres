@@ -1,10 +1,10 @@
 [gd_resource type="TileSet" load_steps=3 format=2]
 
 [sub_resource type="OccluderPolygon2D" id=1]
-polygon = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
+polygon = PackedVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
-points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
+points = PackedVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 
 [resource]
 0/name = "Mimiga.png 0"

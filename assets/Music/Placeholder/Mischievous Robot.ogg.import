@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/Mischievous Robot.ogg-9aa30bcbeb99b937ed6e8fa0c48400a3.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dpe5w3m2e6n8h"
+path="res://.godot/imported/Mischievous Robot.ogg-9aa30bcbeb99b937ed6e8fa0c48400a3.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/Music/Placeholder/Mischievous Robot.ogg"
-dest_files=[ "res://.import/Mischievous Robot.ogg-9aa30bcbeb99b937ed6e8fa0c48400a3.oggstr" ]
+dest_files=["res://.godot/imported/Mischievous Robot.ogg-9aa30bcbeb99b937ed6e8fa0c48400a3.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

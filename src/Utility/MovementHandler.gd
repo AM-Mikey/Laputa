@@ -3,11 +3,16 @@ extends Node2D
 
 
 func _physics_process(delta):
-	parent = get_parent() # just in case node hierarchy changes for some reason
+	var parent = get_parent() # just in case node hierarchy changes for some reason
 	
 	
-				velocity = get_move_velocity(velocity, move_dir, face_dir, is_jump_interrupted)
-			var new_velocity = move_and_slide_with_snap(velocity, snap_vector, FLOOR_NORMAL, true)
+	velocity = get_move_velocity(velocity, move_dir, face_dir, is_jump_interrupted)
+	set_velocity(velocity)
+	# TODOConverter3To4 looks that snap in Godot 4 is float, not vector like in Godot 3 - previous value `snap_vector`
+	set_up_direction(FLOOR_NORMAL)
+	set_floor_stop_on_slope_enabled(true)
+	move_and_slide()
+	var new_velocity = velocity
 
 
 func get_move_velocity(velocity, move_dir, face_dir, is_jump_interrupted) -> Vector2:
@@ -43,10 +48,10 @@ func get_move_velocity(velocity, move_dir, face_dir, is_jump_interrupted) -> Vec
 
 	if is_on_floor():
 		if friction == true:
-			out.x = lerp(out.x, 0, ground_cof)
+			out.x = lerp(out.x, 0.0, ground_cof)
 	else:
 		if friction == true:
-			out.x = lerp(out.x, 0, air_cof)
+			out.x = lerp(out.x, 0.0, air_cof)
 
 
 	if abs(out.x) < min_xvelocity:

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/blueangles.wav-bd4c34da2cceaa9b2319bb41da1002d8.sample"
+type="AudioStreamWAV"
+uid="uid://nokr3kmiaamg"
+path="res://.godot/imported/blueangles.wav-bd4c34da2cceaa9b2319bb41da1002d8.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/blueangles.wav"
-dest_files=[ "res://.import/blueangles.wav-bd4c34da2cceaa9b2319bb41da1002d8.sample" ]
+dest_files=["res://.godot/imported/blueangles.wav-bd4c34da2cceaa9b2319bb41da1002d8.sample"]
 
 [params]
 

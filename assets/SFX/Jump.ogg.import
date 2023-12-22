@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/Jump.ogg-cc9de6f3e9deb14ad614d6071cdfb059.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://8nogq0j2636q"
+path="res://.godot/imported/Jump.ogg-cc9de6f3e9deb14ad614d6071cdfb059.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/Jump.ogg"
-dest_files=[ "res://.import/Jump.ogg-cc9de6f3e9deb14ad614d6071cdfb059.oggstr" ]
+dest_files=["res://.godot/imported/Jump.ogg-cc9de6f3e9deb14ad614d6071cdfb059.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

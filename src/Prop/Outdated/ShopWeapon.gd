@@ -3,8 +3,8 @@ extends Area2D
 
 const TOOLTIP = preload("res://src/UI/ShopTooltip.tscn")
 
-export var gun_name: String
-export var price: int
+@export var gun_name: String
+@export var price: int
 
 var get_sound = load("res://assets/SFX/Placeholder/snd_get_item.ogg")
 var no_sound = load("res://assets/SFX/Placeholder/snd_quote_bonkhead.ogg")
@@ -15,7 +15,7 @@ var has_player_near = false
 var active_player = null
 var active_tooltip: Node
 
-onready var ui = get_tree().get_root().get_node("World/UILayer")
+@onready var ui = get_tree().get_root().get_node("World/UILayer")
 
 func _ready():
 	add_to_group("Containers")
@@ -24,7 +24,7 @@ func _ready():
 	
 	gun = load("res://src/Gun/%s" % gun_name + ".tres")
 	
-	$Sprite.texture = gun.icon_texture
+	$Sprite2D.texture = gun.icon_texture
 	$AnimationPlayer.play("DisplayPrice")
 
 func _on_ShopWeapon_body_entered(body):
@@ -42,7 +42,7 @@ func _on_ShopWeapon_body_exited(_body):
 		$AnimationPlayer.play("DisplayPrice")
 
 func display_tooltip():
-	var tooltip = TOOLTIP.instance()
+	var tooltip = TOOLTIP.instantiate()
 	tooltip.item_name = gun.display_name
 	tooltip.item_description = gun.description
 	tooltip.price = price

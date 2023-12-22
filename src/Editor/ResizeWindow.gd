@@ -1,4 +1,4 @@
-tool
+@tool
 extends MarginContainer
 
 var state = "idle"
@@ -6,17 +6,17 @@ var active_handle = null
 var drag_offset = Vector2.ZERO
 
 
-export var header_size = 0 setget on_header_size_changed
-export var bar_size = 12 setget on_bar_size_changed
+@export var header_size = 0: set = on_header_size_changed
+@export var bar_size = 12: set = on_bar_size_changed
 
 
 func _ready():
 	for h in $Handles/Top.get_children():
-			h.connect("button_down", self, "on_handle", [h])
+			h.connect("button_down", Callable(self, "on_handle").bind(h))
 	for h in $Handles/Mid.get_children():
-			h.connect("button_down", self, "on_handle", [h])
+			h.connect("button_down", Callable(self, "on_handle").bind(h))
 	for h in $Handles/Bottom.get_children():
-			h.connect("button_down", self, "on_handle", [h])
+			h.connect("button_down", Callable(self, "on_handle").bind(h))
 
 func _input(event):
 	if event.is_action_released("editor_lmb"):
@@ -26,44 +26,44 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		match state:
 			"drag":
-				rect_position = get_global_mouse_position() + drag_offset
+				position = get_global_mouse_position() + drag_offset
 			"resize":
 				var x = get_global_mouse_position().x + drag_offset.x
 				var y = get_global_mouse_position().y + drag_offset.y
 				
 				match active_handle.name:
 					"TopLeft":
-						margin_top = y - header_size
-						margin_left = x
+						offset_top = y - header_size
+						offset_left = x
 					"TopRight":
-						margin_top = y - header_size
-						margin_right = x + 4 #no idea why this is 4
+						offset_top = y - header_size
+						offset_right = x + 4 #no idea why this is 4
 					"BottomLeft":
-						margin_bottom = y + 4
-						margin_left = x
+						offset_bottom = y + 4
+						offset_left = x
 					"BottomRight":
-						margin_bottom = y + 4
-						margin_right = x + 4
+						offset_bottom = y + 4
+						offset_right = x + 4
 					"Top":
-						margin_top = y - header_size
+						offset_top = y - header_size
 					"Bottom":
-						margin_bottom = y + 4
+						offset_bottom = y + 4
 					"Left":
-						margin_left = x
+						offset_left = x
 					"Right":
-						margin_right = x + 4
+						offset_right = x + 4
 
 ###SIGNALS
 
 func on_header_size_changed(new):
 	header_size = new
-	$Handles/Header.rect_min_size.y = new
-	$Handles/Header/ReferenceRect.rect_size = $Handles/Header.rect_size
+	$Handles/Header.custom_minimum_size.y = new
+	$Handles/Header/ReferenceRect.size = $Handles/Header.size
 
 func on_bar_size_changed(new):
 	bar_size = new
-	$Handles/Mid/Bar.rect_min_size.y = new
-	$Handles/Mid/Bar/ReferenceRect.rect_size = $Handles/Mid/Bar.rect_size
+	$Handles/Mid/Bar.custom_minimum_size.y = new
+	$Handles/Mid/Bar/ReferenceRect.size = $Handles/Mid/Bar.size
 
 
 
@@ -72,7 +72,7 @@ func on_handle(handle):
 		print("handle grabbed")
 		state = "resize"
 		active_handle = handle
-		drag_offset = handle.rect_global_position - get_global_mouse_position()
+		drag_offset = handle.global_position - get_global_mouse_position()
 	else:
 		state = "drag"
-		drag_offset = rect_global_position - get_global_mouse_position()
+		drag_offset = global_position - get_global_mouse_position()

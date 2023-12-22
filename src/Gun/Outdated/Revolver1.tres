@@ -2,8 +2,8 @@
 
 [ext_resource path="res://assets/SFX/Placeholder/snd_polar_star_l1_2.ogg" type="AudioStream" id=1]
 [ext_resource path="res://src/Bullet/BulletRevolver1.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/Gun/Revolver.png" type="Texture" id=3]
-[ext_resource path="res://assets/Gun/RevolverIcon.png" type="Texture" id=4]
+[ext_resource path="res://assets/Gun/Revolver.png" type="Texture2D" id=3]
+[ext_resource path="res://assets/Gun/RevolverIcon.png" type="Texture2D" id=4]
 [ext_resource path="res://src/Gun/Outdated/Weapon.gd" type="Script" id=5]
 
 [resource]

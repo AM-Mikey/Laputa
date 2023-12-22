@@ -1,502 +1,489 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=52 format=3 uid="uid://bnwo7ae85qnwb"]
 
-[ext_resource path="res://src/Gun/Red7.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Actor/Player/PlayerCamera.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Gun/Revolver.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Gun/Shotgun.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/UI/Theme/LaputaTheme.tres" type="Theme" id=5]
-[ext_resource path="res://assets/Actor/Player/RunNew.png" type="Texture" id=6]
-[ext_resource path="res://src/Actor/Player/Knockback.gd" type="Script" id=7]
-[ext_resource path="res://src/Actor/Player/MoveTo.gd" type="Script" id=8]
-[ext_resource path="res://src/Actor/Player/Fly.gd" type="Script" id=9]
-[ext_resource path="res://src/Actor/Player/Ladder.gd" type="Script" id=10]
-[ext_resource path="res://src/Actor/Player/Disabled.gd" type="Script" id=11]
-[ext_resource path="res://src/Actor/Player/GunManager.gd" type="Script" id=12]
-[ext_resource path="res://src/Actor/Player/PlayerSprite.gd" type="Script" id=13]
-[ext_resource path="res://src/Actor/Player/Player.gd" type="Script" id=14]
-[ext_resource path="res://src/Actor/Player/MovementManager.gd" type="Script" id=15]
-[ext_resource path="res://src/Actor/Player/AnimationManager.gd" type="Script" id=16]
-[ext_resource path="res://src/Gun/GLauncher.tscn" type="PackedScene" id=17]
-[ext_resource path="res://assets/Actor/Player/Palette/Normal.png" type="Texture" id=18]
-[ext_resource path="res://assets/Actor/Player/AerialNew.png" type="Texture" id=19]
-[ext_resource path="res://assets/Actor/Player/CrouchRunNew.png" type="Texture" id=20]
-[ext_resource path="res://assets/Actor/Player/StandNew.png" type="Texture" id=21]
-[ext_resource path="res://assets/Actor/Player/Palette/Mono.png" type="Texture" id=22]
-[ext_resource path="res://assets/Actor/Player/BackRunNew.png" type="Texture" id=23]
-[ext_resource path="res://assets/Actor/Player/InspectNew.png" type="Texture" id=24]
-[ext_resource path="res://src/Actor/Player/Inspect.gd" type="Script" id=27]
-[ext_resource path="res://src/Gun/MPistol.tscn" type="PackedScene" id=28]
-[ext_resource path="res://src/Actor/Player/Jump.gd" type="Script" id=29]
-[ext_resource path="res://src/Actor/Player/Run.gd" type="Script" id=30]
-[ext_resource path="res://src/Actor/Player/LongJump.gd" type="Script" id=31]
-[ext_resource path="res://src/Actor/Player/Fall.gd" type="Script" id=32]
-[ext_resource path="res://src/Gun/Speeder.tscn" type="PackedScene" id=33]
-[ext_resource path="res://src/Gun/TurnstileJumper.tscn" type="PackedScene" id=34]
+[ext_resource type="PackedScene" uid="uid://cjueepke5w45c" path="res://src/Gun/Red7.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://brl16iyt5eq02" path="res://src/Actor/Player/PlayerCamera.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://byv37yjh2rp36" path="res://src/Gun/Revolver.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://0mxxcirrmb5d" path="res://src/Gun/Shotgun.tscn" id="4"]
+[ext_resource type="Theme" path="res://src/UI/Theme/LaputaTheme.tres" id="5"]
+[ext_resource type="Texture2D" uid="uid://bic1wg1jrbs4e" path="res://assets/Actor/Player/RunNew.png" id="6"]
+[ext_resource type="Script" path="res://src/Actor/Player/Knockback.gd" id="7"]
+[ext_resource type="Script" path="res://src/Actor/Player/MoveTo.gd" id="8"]
+[ext_resource type="Script" path="res://src/Actor/Player/Fly.gd" id="9"]
+[ext_resource type="Script" path="res://src/Actor/Player/Ladder.gd" id="10"]
+[ext_resource type="Script" path="res://src/Actor/Player/Disabled.gd" id="11"]
+[ext_resource type="Script" path="res://src/Actor/Player/GunManager.gd" id="12"]
+[ext_resource type="Script" path="res://src/Actor/Player/PlayerSprite.gd" id="13"]
+[ext_resource type="Script" path="res://src/Actor/Player/Player.gd" id="14"]
+[ext_resource type="Script" path="res://src/Actor/Player/MovementManager.gd" id="15"]
+[ext_resource type="Script" path="res://src/Actor/Player/AnimationManager.gd" id="16"]
+[ext_resource type="PackedScene" uid="uid://bqy18424skcwk" path="res://src/Gun/GLauncher.tscn" id="17"]
+[ext_resource type="Texture2D" uid="uid://b1s13taoyjq5p" path="res://assets/Actor/Player/AerialNew.png" id="19"]
+[ext_resource type="Texture2D" uid="uid://dmwmjc5ixibx7" path="res://assets/Actor/Player/CrouchRunNew.png" id="20"]
+[ext_resource type="Texture2D" uid="uid://cmrouhmpv6ald" path="res://assets/Actor/Player/StandNew.png" id="21"]
+[ext_resource type="Texture2D" uid="uid://07hp5gxc20wa" path="res://assets/Actor/Player/BackRunNew.png" id="23"]
+[ext_resource type="Texture2D" uid="uid://co5v1xjcy1nse" path="res://assets/Actor/Player/InspectNew.png" id="24"]
+[ext_resource type="Shader" path="res://src/Shader/JuniperRecolor.gdshader" id="24_s1pnb"]
+[ext_resource type="Texture2D" uid="uid://mkfrxk3djlu1" path="res://assets/Actor/Player/Palette/Normal.png" id="25_3o18d"]
+[ext_resource type="Texture2D" uid="uid://b6mfl184pisc1" path="res://assets/Actor/Player/Palette/Mono.png" id="26_m4i7s"]
+[ext_resource type="Script" path="res://src/Actor/Player/Inspect.gd" id="27"]
+[ext_resource type="PackedScene" uid="uid://diwpy822anfc4" path="res://src/Gun/MPistol.tscn" id="28"]
+[ext_resource type="Script" path="res://src/Actor/Player/Jump.gd" id="29"]
+[ext_resource type="Script" path="res://src/Actor/Player/Run.gd" id="30"]
+[ext_resource type="Script" path="res://src/Actor/Player/LongJump.gd" id="31"]
+[ext_resource type="Script" path="res://src/Actor/Player/Fall.gd" id="32"]
+[ext_resource type="PackedScene" uid="uid://cdgi2ibu56t2j" path="res://src/Gun/Speeder.tscn" id="33"]
+[ext_resource type="PackedScene" uid="uid://cq3m4fy6fnxfn" path="res://src/Gun/TurnstileJumper.tscn" id="34"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6, 7.5 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(12, 15)
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 10.5 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(16, 21)
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id="3"]
 custom_solver_bias = 0.395
-extents = Vector2( 6, 7.5 )
+size = Vector2(12, 15)
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 1, 1 )
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(2, 2)
 
-[sub_resource type="RectangleShape2D" id=63]
-extents = Vector2( 1, 1 )
+[sub_resource type="RectangleShape2D" id="63"]
+size = Vector2(2, 2)
 
-[sub_resource type="Shader" id=62]
-code = "shader_type canvas_item;
+[sub_resource type="ShaderMaterial" id="61"]
+shader = ExtResource("24_s1pnb")
+shader_parameter/screen_mode = false
+shader_parameter/num_colors = 16
+shader_parameter/precision = 0.0
+shader_parameter/palette_in = ExtResource("25_3o18d")
+shader_parameter/palette_out = ExtResource("26_m4i7s")
 
-uniform bool screen_mode = true;
-uniform int num_colors;
-uniform float precision : hint_range(0.0, 1.0, 0.1) = 0.1;
-
-uniform sampler2D palette_in;
-uniform sampler2D palette_out;
-
-vec4 swap_color(vec4 color) {
-	float inc = 1.0 / float(num_colors); 
-	for (float i = 0.0; i < 1.0; i += inc) {
-		vec2 uv = vec2(i, 0.0);
-		vec4 color_in = texture(palette_in, uv);
-		if (distance(color, color_in) <= precision) {
-			return texture(palette_out, uv);
-		}
-	}
-	return color;
-}
-
-void fragment() {
-	vec4 color = texture(TEXTURE, UV);
-	if (screen_mode) {
-		color = texture(SCREEN_TEXTURE, SCREEN_UV);
-	}
-	COLOR = swap_color(color);
-}"
-
-[sub_resource type="ShaderMaterial" id=61]
-shader = SubResource( 62 )
-shader_param/screen_mode = false
-shader_param/num_colors = 16
-shader_param/precision = 0.1
-shader_param/palette_in = ExtResource( 18 )
-shader_param/palette_out = ExtResource( 22 )
-
-[sub_resource type="Animation" id=53]
+[sub_resource type="Animation" id="53"]
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id=67]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_acjyt"]
+_data = {
+"FlashIframe": SubResource("53")
+}
+
+[sub_resource type="Animation" id="67"]
 resource_name = "aerial_fall"
 length = 0.2
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ ExtResource( 19 ) ]
+"values": [ExtResource("19")]
 }
 tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"values": [  ]
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:hframe")
-tracks/2/interp = 1
-tracks/2/loop_wrap = false
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ 3, 4 ]
+"values": [3, 4]
 }
 
-[sub_resource type="Animation" id=68]
+[sub_resource type="Animation" id="68"]
 resource_name = "aerial_rise"
 length = 0.2
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ ExtResource( 19 ) ]
+"values": [ExtResource("19")]
 }
 tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"values": [  ]
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:hframe")
-tracks/2/interp = 1
-tracks/2/loop_wrap = false
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ 0, 1 ]
+"values": [0, 1]
 }
 
-[sub_resource type="Animation" id=69]
+[sub_resource type="Animation" id="69"]
 resource_name = "aerial_top"
 length = 0.1
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ ExtResource( 19 ) ]
+"values": [ExtResource("19")]
 }
 tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"values": [  ]
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:hframe")
-tracks/2/interp = 1
-tracks/2/loop_wrap = false
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ 2 ]
+"values": [2]
 }
 
-[sub_resource type="Animation" id=70]
+[sub_resource type="Animation" id="70"]
 resource_name = "back_run"
 length = 1.2
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ ExtResource( 23 ) ]
+"values": [ExtResource("23")]
 }
 tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.3, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [  ],
-"method": "do_step"
+"times": PackedFloat32Array(0.3, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"do_step"
 }, {
-"args": [  ],
-"method": "do_step"
-} ]
+"args": [],
+"method": &"do_step"
+}]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:hframe")
-tracks/2/interp = 1
-tracks/2/loop_wrap = false
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 0, 11 ]
+"values": [0, 11]
 }
 
-[sub_resource type="Animation" id=64]
+[sub_resource type="Animation" id="64"]
 resource_name = "crouch_run"
 length = 1.2
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ ExtResource( 20 ) ]
+"values": [ExtResource("20")]
 }
 tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [  ],
-"method": "do_step"
+"times": PackedFloat32Array(0.1, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"do_step"
 }, {
-"args": [  ],
-"method": "do_step"
-} ]
+"args": [],
+"method": &"do_step"
+}]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:hframe")
-tracks/2/interp = 1
-tracks/2/loop_wrap = false
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 0, 11 ]
+"values": [0, 11]
 }
 
-[sub_resource type="Animation" id=71]
+[sub_resource type="Animation" id="71"]
 resource_name = "inspect"
 length = 1.6
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ ExtResource( 24 ) ]
+"values": [ExtResource("24")]
 }
 tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"values": [  ]
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:hframe")
-tracks/2/interp = 1
-tracks/2/loop_wrap = false
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5, 0.7, 0.9, 1.2, 1.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.5, 0.7, 0.9, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5 ]
+"values": [0, 1, 2, 3, 4, 5]
 }
 
-[sub_resource type="Animation" id=54]
+[sub_resource type="Animation" id="54"]
 resource_name = "run"
 length = 1.2
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ ExtResource( 6 ) ]
+"values": [ExtResource("6")]
 }
 tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [  ],
-"method": "do_step"
+"times": PackedFloat32Array(0.1, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"do_step"
 }, {
-"args": [  ],
-"method": "do_step"
-} ]
+"args": [],
+"method": &"do_step"
+}]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:hframe")
-tracks/2/interp = 1
-tracks/2/loop_wrap = false
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 0, 11 ]
+"values": [0, 11]
 }
 
-[sub_resource type="Animation" id=65]
+[sub_resource type="Animation" id="65"]
 resource_name = "stand"
 length = 1.6
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ ExtResource( 21 ) ]
+"values": [ExtResource("21")]
 }
 tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"values": [  ]
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:hframe")
-tracks/2/interp = 1
-tracks/2/loop_wrap = false
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 0, 6, 7, 0, 0, 1, 2, 3, 4, 5 ]
+"values": [0, 1, 2, 3, 4, 5, 0, 6, 7, 0, 0, 1, 2, 3, 4, 5]
 }
 
-[sub_resource type="CapsuleShape2D" id=72]
-radius = 8.0
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oo325"]
+_data = {
+"aerial_fall": SubResource("67"),
+"aerial_rise": SubResource("68"),
+"aerial_top": SubResource("69"),
+"back_run": SubResource("70"),
+"crouch_run": SubResource("64"),
+"inspect": SubResource("71"),
+"run": SubResource("54"),
+"stand": SubResource("65")
+}
+
+[sub_resource type="CapsuleShape2D" id="72"]
+radius = 1.0
 height = 2.0
 
-[node name="Juniper" type="KinematicBody2D" groups=["Players"]]
+[node name="Juniper" type="CharacterBody2D" groups=["Players"]]
 z_index = 1
 collision_mask = 520
-script = ExtResource( 14 )
+script = ExtResource("14")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-modulate = Color( 1, 1, 1, 0.4 )
+modulate = Color(1, 1, 1, 0.4)
 light_mask = 0
-position = Vector2( 0, -7.5 )
-shape = SubResource( 1 )
+position = Vector2(0, -7.5)
+shape = SubResource("1")
 
 [node name="MovementManager" type="Node2D" parent="."]
-script = ExtResource( 15 )
+script = ExtResource("15")
 
 [node name="States" type="Node2D" parent="MovementManager"]
 
 [node name="StateLabel" type="Label" parent="MovementManager/States"]
 visible = false
-margin_left = -21.1084
-margin_top = -34.0
-margin_right = 18.8916
-margin_bottom = -20.0
-theme = ExtResource( 5 )
-align = 1
+offset_left = -21.1084
+offset_top = -34.0
+offset_right = 18.8916
+offset_bottom = -20.0
+theme = ExtResource("5")
 
 [node name="Disabled" type="Node" parent="MovementManager/States"]
-script = ExtResource( 11 )
+script = ExtResource("11")
 
 [node name="Inspect" type="Node" parent="MovementManager/States"]
-script = ExtResource( 27 )
+script = ExtResource("27")
 
 [node name="Run" type="Node" parent="MovementManager/States"]
-script = ExtResource( 30 )
+script = ExtResource("30")
 
 [node name="Jump" type="Node" parent="MovementManager/States"]
-script = ExtResource( 29 )
+script = ExtResource("29")
 
 [node name="LongJump" type="Node" parent="MovementManager/States"]
-script = ExtResource( 31 )
+script = ExtResource("31")
 
 [node name="Fall" type="Node" parent="MovementManager/States"]
-script = ExtResource( 32 )
+script = ExtResource("32")
 
 [node name="Ladder" type="Node" parent="MovementManager/States"]
-script = ExtResource( 10 )
+script = ExtResource("10")
 
 [node name="Fly" type="Node" parent="MovementManager/States"]
-script = ExtResource( 9 )
+script = ExtResource("9")
 
 [node name="Knockback" type="Node" parent="MovementManager/States"]
-script = ExtResource( 7 )
+script = ExtResource("7")
 
 [node name="MoveTo" type="Node" parent="MovementManager/States"]
-script = ExtResource( 8 )
+script = ExtResource("8")
 
 [node name="MinDirTimer" type="Timer" parent="MovementManager"]
 one_shot = true
@@ -504,66 +491,66 @@ one_shot = true
 [node name="CoyoteTimer" type="Timer" parent="MovementManager"]
 one_shot = true
 
-[node name="BonkTimeout" type="Timer" parent="MovementManager"]
-wait_time = 0.4
-one_shot = true
-autostart = true
+[node name="PlayerCamera" parent="." instance=ExtResource("2")]
 
-[node name="PlayerCamera" parent="." instance=ExtResource( 2 )]
-
-[node name="BulletOrigin" type="Position2D" parent="."]
-visible = false
-position = Vector2( 0, -8 )
+[node name="BulletOrigin" type="Marker2D" parent="."]
+position = Vector2(0, -8)
 
 [node name="GunManager" type="Node2D" parent="."]
-script = ExtResource( 12 )
+script = ExtResource("12")
 
 [node name="CooldownTimer" type="Timer" parent="GunManager"]
 one_shot = true
 autostart = true
 
 [node name="Guns" type="Node2D" parent="GunManager"]
-position = Vector2( -7, -9 )
+position = Vector2(-7, -9)
 
-[node name="Revolver" parent="GunManager/Guns" instance=ExtResource( 3 )]
+[node name="Revolver" parent="GunManager/Guns" instance=ExtResource("3")]
 
-[node name="Shotgun" parent="GunManager/Guns" instance=ExtResource( 4 )]
+[node name="Shotgun" parent="GunManager/Guns" instance=ExtResource("4")]
+visible = false
 
-[node name="GLauncher" parent="GunManager/Guns" instance=ExtResource( 17 )]
+[node name="GLauncher" parent="GunManager/Guns" instance=ExtResource("17")]
+visible = false
 
-[node name="MPistol" parent="GunManager/Guns" instance=ExtResource( 28 )]
+[node name="MPistol" parent="GunManager/Guns" instance=ExtResource("28")]
+visible = false
 
-[node name="Speeder" parent="GunManager/Guns" instance=ExtResource( 33 )]
+[node name="Speeder" parent="GunManager/Guns" instance=ExtResource("33")]
+visible = false
 
-[node name="TurnstileJumper" parent="GunManager/Guns" instance=ExtResource( 34 )]
+[node name="TurnstileJumper" parent="GunManager/Guns" instance=ExtResource("34")]
+visible = false
 
-[node name="Red7" parent="GunManager/Guns" instance=ExtResource( 1 )]
+[node name="Red7" parent="GunManager/Guns" instance=ExtResource("1")]
+visible = false
 
 [node name="ItemDetector" type="Area2D" parent="."]
-modulate = Color( 0.117647, 1, 0, 0.2 )
+modulate = Color(0.117647, 1, 0, 0.2)
 show_behind_parent = true
-position = Vector2( 0, -2 )
 z_index = -1
+position = Vector2(0, -2)
 collision_layer = 0
 collision_mask = 7172
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemDetector"]
 light_mask = 0
-position = Vector2( 0, -7.5 )
-shape = SubResource( 2 )
+position = Vector2(0, -7.5)
+shape = SubResource("2")
 
 [node name="HurtDetector" type="Area2D" parent="."]
-modulate = Color( 0.992157, 0, 1, 0.282353 )
+modulate = Color(0.992157, 0, 1, 0.282353)
 show_behind_parent = true
-position = Vector2( 0, -2 )
 z_index = -1
+position = Vector2(0, -2)
 collision_layer = 0
 collision_mask = 8194
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtDetector"]
 light_mask = 0
-position = Vector2( 0, -5.5 )
-shape = SubResource( 3 )
+position = Vector2(0, -5.5)
+shape = SubResource("3")
 
 [node name="SSPDetector" type="Area2D" parent="."]
 z_index = -1
@@ -571,52 +558,51 @@ collision_layer = 0
 collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SSPDetector"]
-modulate = Color( 0, 0.462745, 0.0509804, 1 )
+modulate = Color(0, 0.462745, 0.0509804, 1)
 light_mask = 0
-position = Vector2( 0, 1 )
-shape = SubResource( 4 )
+position = Vector2(0, 1)
+shape = SubResource("4")
 
 [node name="CrouchDetector" type="Area2D" parent="."]
+position = Vector2(0, -2)
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CrouchDetector"]
-position = Vector2( 0, -16 )
-shape = SubResource( 63 )
+position = Vector2(0, -14)
+shape = SubResource("63")
 
 [node name="AnimationManager" type="Node" parent="."]
-script = ExtResource( 16 )
+script = ExtResource("16")
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 2
-material = SubResource( 61 )
-position = Vector2( 0, -16 )
-texture = ExtResource( 6 )
-hframes = 12
+material = SubResource("61")
+position = Vector2(0, -16)
+texture = ExtResource("21")
+hframes = 8
 vframes = 8
-script = ExtResource( 13 )
+frame = 5
+script = ExtResource("13")
 
 [node name="EffectPlayer" type="AnimationPlayer" parent="."]
-anims/FlashIframe = SubResource( 53 )
+libraries = {
+"": SubResource("AnimationLibrary_acjyt")
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/aerial_fall = SubResource( 67 )
-anims/aerial_rise = SubResource( 68 )
-anims/aerial_top = SubResource( 69 )
-anims/back_run = SubResource( 70 )
-anims/crouch_run = SubResource( 64 )
-anims/inspect = SubResource( 71 )
-anims/run = SubResource( 54 )
-anims/stand = SubResource( 65 )
+libraries = {
+"": SubResource("AnimationLibrary_oo325")
+}
 
-[node name="PhysicsBody" type="KinematicBody2D" parent="."]
+[node name="PhysicsBody3D" type="CharacterBody2D" parent="."]
 visible = false
 collision_layer = 32768
 collision_mask = 32768
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsBody"]
-position = Vector2( 0, -9 )
-shape = SubResource( 72 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsBody3D"]
+position = Vector2(0, -9)
+shape = SubResource("72")
 
 [connection signal="area_entered" from="ItemDetector" to="." method="_on_ItemDetector_area_entered"]
 [connection signal="area_entered" from="HurtDetector" to="." method="_on_HurtDetector_area_entered"]
@@ -628,4 +614,4 @@ shape = SubResource( 72 )
 [connection signal="body_exited" from="SSPDetector" to="." method="_on_SSPDetector_body_exited"]
 [connection signal="body_entered" from="CrouchDetector" to="MovementManager" method="_on_CrouchDetector_body_entered"]
 [connection signal="body_exited" from="CrouchDetector" to="MovementManager" method="_on_CrouchDetector_body_exited"]
-[connection signal="texture_changed" from="Sprite" to="Sprite" method="_on_Sprite_texture_changed"]
+[connection signal="texture_changed" from="Sprite2D" to="Sprite2D" method="_on_Sprite_texture_changed"]

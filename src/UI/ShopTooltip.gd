@@ -4,8 +4,8 @@ var price: int
 var item_name: String
 var item_description: String
 
-onready var name_label = $Panel/MarginContainer/VBoxContainer/ItemName 
-onready var description_label = $Panel/MarginContainer/VBoxContainer/ItemDescription
+@onready var name_label = $Panel/MarginContainer/VBoxContainer/ItemName 
+@onready var description_label = $Panel/MarginContainer/VBoxContainer/ItemDescription
 
 func _ready():
 	display_tooltip()

@@ -1,6 +1,6 @@
 extends Enemy
 
-export var move_dir = Vector2.LEFT
+@export var move_dir = Vector2.LEFT
 var idle_time = 2
 var fly_speed = Vector2(100, 100)
 
@@ -13,24 +13,27 @@ func _ready():
 func _physics_process(_delta):
 	if disabled or dead:
 		return
-	velocity = get_velocity(velocity, move_dir, speed)
-	velocity = move_and_slide(velocity, FLOOR_NORMAL)
+	velocity = calc_velocity(velocity, move_dir, speed)
+	set_velocity(velocity)
+	set_up_direction(FLOOR_NORMAL)
+	move_and_slide()
+	velocity = velocity
 	
 
 func enter_idle():
 	speed = Vector2.ZERO
 	$AnimationPlayer.play("Idle")
-	$Sprite.flip_h = false if move_dir.x > 0 else true
-	$Sprite.rotation_degrees = 90 if move_dir.x > 0 else -90
-	$Sprite.flip_v = true if move_dir.y < 0 else false #flip if down
-	yield(get_tree().create_timer(idle_time), "timeout")
+	$Sprite2D.flip_h = false if move_dir.x > 0 else true
+	$Sprite2D.rotation_degrees = 90 if move_dir.x > 0 else -90
+	$Sprite2D.flip_v = true if move_dir.y < 0 else false #flip if down
+	await get_tree().create_timer(idle_time).timeout
 	change_state("fly")
 
 func enter_fly():
 	speed = fly_speed
 	$AnimationPlayer.play("Fly")
-	$Sprite.rotation_degrees = 0
-	$Sprite.flip_h = true if move_dir.x > 0 else false #flip if right
+	$Sprite2D.rotation_degrees = 0
+	$Sprite2D.flip_h = true if move_dir.x > 0 else false #flip if right
 
 
 func do_fly():

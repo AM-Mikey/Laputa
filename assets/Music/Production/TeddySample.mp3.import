@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/TeddySample.mp3-5452114c991c87551aefad7cbc304e6f.mp3str"
+uid="uid://dk6sreyagqt7o"
+path="res://.godot/imported/TeddySample.mp3-5452114c991c87551aefad7cbc304e6f.mp3str"
 
 [deps]
 
 source_file="res://assets/Music/Production/TeddySample.mp3"
-dest_files=[ "res://.import/TeddySample.mp3-5452114c991c87551aefad7cbc304e6f.mp3str" ]
+dest_files=["res://.godot/imported/TeddySample.mp3-5452114c991c87551aefad7cbc304e6f.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

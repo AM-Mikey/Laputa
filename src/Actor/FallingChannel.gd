@@ -2,10 +2,10 @@ extends Actor
 
 var falling = false
 var camera_forgiveness_distance = 64
-export var wait_time = 0.8
-export var respawn_time = 4.0
+@export var wait_time = 0.8
+@export var respawn_time = 4.0
 
-onready var starting_position = position
+@onready var starting_position = position
 
 
 func _physics_process(_delta):
@@ -19,7 +19,10 @@ func _physics_process(_delta):
 
 	if falling:
 		velocity = calculate_movevelocity(velocity)
-		velocity = move_and_slide(velocity, FLOOR_NORMAL)
+		set_velocity(velocity)
+		set_up_direction(FLOOR_NORMAL)
+		move_and_slide()
+		velocity = velocity
 
 
 func calculate_movevelocity(linearvelocity: Vector2) -> Vector2:

@@ -1,12 +1,12 @@
 extends Node
 
-export var wind_time = 0.1
-export var invert_time = 0.1
-export var tiles1 = [
+@export var wind_time = 0.1
+@export var invert_time = 0.1
+@export var tiles1 = [
 	288, 289, 290, 291,
 	320, 321, 322, 323,
 	]
-export var tiles2 = [
+@export var tiles2 = [
 	304, 305, 306, 307,
 	336, 337, 338, 339
 ]
@@ -15,8 +15,8 @@ var state = 1
 var cycle_index = 0
 var cycle_length = 8
 
-onready var w = get_tree().get_root().get_node("World")
-onready var tile_collection = w.current_level.get_node("Tiles")
+@onready var w = get_tree().get_root().get_node("World")
+@onready var tile_collection = w.current_level.get_node("Tiles")
 
 
 func _ready():

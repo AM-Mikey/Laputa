@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNrobotlockedon.wav-a8bd32a50fe1342cdee63975c59f4f67.sample"
+type="AudioStreamWAV"
+uid="uid://dd6a6vetf8njr"
+path="res://.godot/imported/YMNrobotlockedon.wav-a8bd32a50fe1342cdee63975c59f4f67.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNrobotlockedon.wav"
-dest_files=[ "res://.import/YMNrobotlockedon.wav-a8bd32a50fe1342cdee63975c59f4f67.sample" ]
+dest_files=["res://.godot/imported/YMNrobotlockedon.wav-a8bd32a50fe1342cdee63975c59f4f67.sample"]
 
 [params]
 

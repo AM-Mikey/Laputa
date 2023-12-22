@@ -1,8 +1,8 @@
 extends Control
 
-onready var master_label = $MarginContainer/ScrollContainer/VBoxContainer/MasterLabel
-onready var music_label = $MarginContainer/ScrollContainer/VBoxContainer/MusicLabel
-onready var sfx_label = $MarginContainer/ScrollContainer/VBoxContainer/SFXLabel
+@onready var master_label = $MarginContainer/ScrollContainer/VBoxContainer/MasterLabel
+@onready var music_label = $MarginContainer/ScrollContainer/VBoxContainer/MusicLabel
+@onready var sfx_label = $MarginContainer/ScrollContainer/VBoxContainer/SFXLabel
 
 func _on_MasterSlider_value_changed(value):
 	var db = percent_to_db(value)

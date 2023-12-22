@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNgliderlaunch.wav-1b9ed27797e73e9017bdbd6d7feb32e3.sample"
+type="AudioStreamWAV"
+uid="uid://cw2y7xu0bedvb"
+path="res://.godot/imported/YMNgliderlaunch.wav-1b9ed27797e73e9017bdbd6d7feb32e3.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNgliderlaunch.wav"
-dest_files=[ "res://.import/YMNgliderlaunch.wav-1b9ed27797e73e9017bdbd6d7feb32e3.sample" ]
+dest_files=["res://.godot/imported/YMNgliderlaunch.wav-1b9ed27797e73e9017bdbd6d7feb32e3.sample"]
 
 [params]
 

@@ -5,12 +5,12 @@ const LEVEL = preload("res://src/UI/LevelSelect/LevelSelect.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 const TITLE = preload("res://src/UI/TitleScreen.tscn")
 
-onready var world = get_tree().get_root().get_node("World")
+@onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 	on_viewport_size_changed()
-	focus()
+	do_focus()
 
 func _input(event):
 	if event.is_action_pressed("pause") and get_tree().paused and not world.has_node("UILayer/Options"):
@@ -24,35 +24,35 @@ func unpause():
 	get_tree().paused = false
 	queue_free()
 
-func focus():
-	print("focused")
+func do_focus():
+	#print("focused")
 	$VBoxContainer/VBoxContainer/Return.grab_focus()
 
 func _on_Return_pressed():
 	unpause()
 
 func _on_Options_pressed():
-	var options = OPTIONS.instance()
+	var options = OPTIONS.instantiate()
 	get_parent().add_child(options)
 
 func _on_KeyGuide_pressed():
-	var key_guide = KEY_GUIDE.instance()
+	var key_guide = KEY_GUIDE.instantiate()
 	get_parent().add_child(key_guide)
-	key_guide.focus()
+	key_guide.do_focus()
 	
 
 func _on_Level_pressed():
-	var level = LEVEL.instance()
+	var level = LEVEL.instantiate()
 	get_parent().add_child(level)
 
 func _on_Quit_pressed():
-	var title = TITLE.instance()
+	var title = TITLE.instantiate()
 	if not world.has_node("UILayer/TitleScreen"):
 		world.get_node("UILayer").add_child(title)
 	queue_free()
 
 func on_viewport_size_changed():
-	rect_size = get_tree().get_root().size / world.resolution_scale
+	size = get_tree().get_root().size / world.resolution_scale
 
 
 

@@ -5,18 +5,18 @@ const AMMOCOUNT = preload("res://src/UI/HUD/AmmoCount.tscn")
 
 
 #onready var p = get_tree().get_root().get_node("World/Juniper")
-onready var world = get_tree().get_root().get_node("World")
+@onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 	on_viewport_size_changed()
 	
 	
 	if world.has_node("Juniper"):
 		var pc = world.get_node("Juniper")
-		pc.connect("hp_updated", self, "update_hp")
-		pc.connect("guns_updated", self, "update_guns")
-		pc.connect("total_xp_updated", self, "update_total_xp")
+		pc.connect("hp_updated", Callable(self, "update_hp"))
+		pc.connect("guns_updated", Callable(self, "update_guns"))
+		pc.connect("total_xp_updated", Callable(self, "update_total_xp"))
 		pc.setup_hud()
 		
 
@@ -25,16 +25,16 @@ func _process(_delta):
 	if world.has_node("Juniper"):
 		var pc = world.get_node("Juniper")
 		if pc.guns.get_child(0) != null: #TODO: make this independant
-			$CooldownBar/TextureProgress.visible = true
-			$CooldownBar/TextureProgress.value = 100 - ((pc.get_node("GunManager/CooldownTimer").time_left / pc.guns.get_child(0).cooldown_time) * 100)
-		else: $CooldownBar/TextureProgress.visible = false
+			$CooldownBar/TextureProgressBar.visible = true
+			$CooldownBar/TextureProgressBar.value = 100 - ((pc.get_node("GunManager/CooldownTimer").time_left / pc.guns.get_child(0).cooldown_time) * 100)
+		else: $CooldownBar/TextureProgressBar.visible = false
 
 func update_guns(guns):
 	for i in $Gun/HBox.get_children(): #clear old
 			i.queue_free()
 	for g in guns:
 		if guns.find(g) == 0: #check if front
-			var gun_icon = GUNICON.instance() #add the first icon
+			var gun_icon = GUNICON.instantiate() #add the first icon
 			gun_icon.texture = g["icon_texture"]
 			$Gun/HBox.add_child(gun_icon)
 			$Gun/HBox.move_child(gun_icon, 0)
@@ -42,7 +42,7 @@ func update_guns(guns):
 			update_xp(g.xp, g.max_xp, g.level, g.max_level)
 			update_ammo(g.ammo, g.max_ammo)
 		else: 
-			var gun_icon = GUNICON.instance() #add all other icons
+			var gun_icon = GUNICON.instantiate() #add all other icons
 			gun_icon.texture = g["texture"]
 			$Gun/HBox.add_child(gun_icon)
 
@@ -57,8 +57,8 @@ func update_hp(hp, max_hp):
 	
 	if hp < $HpBar/HpLost.value:
 		$AnimationPlayer.play("Flash")
-	$HpBar/LostTween.interpolate_property($HpBar/HpLost, "value", $HpBar/HpLost.value, hp, 0.4, Tween.TRANS_SINE, Tween.EASE_IN_OUT, 0.4)
-	$HpBar/LostTween.start()
+	var LostTween = get_tree().create_tween()
+	LostTween.tween_property($HpBar/HpLost, "value", hp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)# maybe do .set_delay(0.4)
 
 
 func display_hp_number(hp, max_hp):
@@ -115,7 +115,7 @@ func update_ammo(ammo, max_ammo):
 	if $Gun/HBox.has_node("AmmoCount"):
 			$Gun/HBox/AmmoCount.free()
 	if max_ammo != 0:
-		var ammo_count = AMMOCOUNT.instance()
+		var ammo_count = AMMOCOUNT.instantiate()
 		ammo_count.ammo = ammo
 		ammo_count.max_ammo = max_ammo
 		$Gun/HBox.add_child(ammo_count)
@@ -154,4 +154,4 @@ func update_total_xp(total_xp):
 
 
 func on_viewport_size_changed():
-	rect_size = get_tree().get_root().size / world.resolution_scale
+	size = get_tree().get_root().size / world.resolution_scale

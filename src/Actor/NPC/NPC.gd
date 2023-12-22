@@ -1,5 +1,6 @@
+@icon("res://assets/Icon/NPCIcon.png")
 extends Actor
-class_name NPC, "res://assets/Icon/NPCIcon.png"
+class_name NPC
 
 const DB = preload("res://src/Dialog/DialogBox.tscn")
 const STATE_LABEL = preload("res://src/Utility/StateLabel.tscn")
@@ -15,16 +16,16 @@ var disabled = false
 var move_dir = Vector2.LEFT
 var target_pos = null
 
-export var id: String
-export (String, FILE, "*.json") var dialog_json: String
-export var conversation: String
-export var has_face = false
-export var voiced = true
+@export var id: String
+@export_file("*.json") var dialog_json: String
+@export var conversation: String
+@export var has_face = false
+@export var voiced = true
 
 
 var camera_forgiveness = 16
 
-onready var pc = get_tree().get_root().get_node_or_null("World/Juniper")
+@onready var pc = get_tree().get_root().get_node_or_null("World/Juniper")
 
 func _ready():
 	add_to_group("NPCs")
@@ -63,7 +64,7 @@ func setup_states():
 	timer.name = "StateTimer"
 	add_child(timer)
 	
-	var label = STATE_LABEL.instance()
+	var label = STATE_LABEL.instantiate()
 	label.text = state
 	label.name = "StateLabel"
 	add_child(label)
@@ -98,7 +99,7 @@ func enter_walk():
 	rng.randomize()
 	change_animation("Walk")
 	$StateTimer.start(rng.randf_range(1.0, 10.0))
-	yield($StateTimer, "timeout")
+	await $StateTimer.timeout
 	change_state("wait")
 
 
@@ -108,8 +109,11 @@ func do_walk():
 	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
 		change_state("wait")
 	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
-		velocity = get_velocity()
-		velocity = move_and_slide(velocity, FLOOR_NORMAL)
+		velocity = calc_velocity()
+		set_velocity(velocity)
+		set_up_direction(FLOOR_NORMAL)
+		move_and_slide()
+		velocity = velocity
 	
 
 
@@ -117,7 +121,7 @@ func enter_wait():
 	rng.randomize()
 	change_animation("Idle", true)
 	$StateTimer.start(rng.randf_range(1.0, 5.0))
-	yield($StateTimer, "timeout")
+	await $StateTimer.timeout
 	change_state("walk")
 
 
@@ -126,7 +130,7 @@ func _physics_process(_delta):
 	if disabled:
 		return
 
-	$Sprite.flip_h = true if move_dir.x > 0 else false #set sprite to move_dir
+	$Sprite2D.flip_h = true if move_dir.x > 0 else false #set sprite to move_dir
 
 	if state != "":
 		do_state()
@@ -144,8 +148,8 @@ func enter_talk():
 	if world.has_node("UILayer/DialogBox"): #clear old dialog box if there is one
 		world.get_node("UILayer/DialogBox").exit()
 		
-	var dialog_box = DB.instance()
-	dialog_box.connect("dialog_finished", self, "on_dialog_finished")
+	var dialog_box = DB.instantiate()
+	dialog_box.connect("dialog_finished", Callable(self, "on_dialog_finished"))
 	get_tree().get_root().get_node("World/UILayer").add_child(dialog_box)
 	
 	var justification = "face"
@@ -182,7 +186,7 @@ func get_move_dir():
 	move_dir.x = sign(target_pos.x - global_position.x)
 
 
-func get_velocity(do_gravity = true) -> Vector2:
+func calc_velocity(do_gravity = true) -> Vector2:
 	var out: = velocity
 	out.x = speed.x * move_dir.x
 	if do_gravity:
@@ -224,7 +228,7 @@ func arrive_at_target():
 #func check_within_camera() -> bool:
 #	if pc:
 #		pc = get_tree().get_root().get_node_or_null("World/Juniper")
-#	var cam_pos = pc.get_node("PlayerCamera").get_camera_screen_center() #gets ONLY the player camera center with offset
+#	var cam_pos = pc.get_node("PlayerCamera").get_screen_center_position() #gets ONLY the player camera center with offset
 #	if cam_pos:
 #		return is_within_camera(cam_pos)
 #	else:

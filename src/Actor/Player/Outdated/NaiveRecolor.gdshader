@@ -1,9 +1,9 @@
 shader_type canvas_item;
 
-uniform vec4 old_eyes : hint_color;
-uniform vec4 new_eyes : hint_color;
-uniform vec4 old_color : hint_color;
-uniform vec4 new_color : hint_color;
+uniform vec4 old_eyes : source_color;
+uniform vec4 new_eyes : source_color;
+uniform vec4 old_color : source_color;
+uniform vec4 new_color : source_color;
 uniform float threshold = 0.7;
 
 void fragment(){

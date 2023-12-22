@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/bubble.wav-0c8afa00f749097d09f289eb053634d1.sample"
+type="AudioStreamWAV"
+uid="uid://bewpw782jhime"
+path="res://.godot/imported/bubble.wav-0c8afa00f749097d09f289eb053634d1.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/bubble.wav"
-dest_files=[ "res://.import/bubble.wav-0c8afa00f749097d09f289eb053634d1.sample" ]
+dest_files=["res://.godot/imported/bubble.wav-0c8afa00f749097d09f289eb053634d1.sample"]
 
 [params]
 

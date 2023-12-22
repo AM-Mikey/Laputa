@@ -18,7 +18,9 @@ func _ready():
 
 func _physics_process(_delta):
 	var velocity = getvelocity(speed, dir)
-	velocity = move_and_slide(velocity)
+	set_velocity(velocity)
+	move_and_slide()
+	velocity = velocity
 
 
 

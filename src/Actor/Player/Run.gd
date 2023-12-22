@@ -1,17 +1,22 @@
 extends Node
 
-onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_parent().get_parent().get_parent()
-onready var mm = pc.get_node("MovementManager")
-onready var sprite = pc.get_node("Sprite")
-onready var guns = pc.get_node("GunManager/Guns")
-onready var ap = pc.get_node("AnimationPlayer")
-onready var anim = pc.get_node("AnimationManager")
+@onready var world = get_tree().get_root().get_node("World")
+@onready var pc = get_parent().get_parent().get_parent()
+@onready var mm = pc.get_node("MovementManager")
+@onready var sprite = pc.get_node("Sprite2D")
+@onready var guns = pc.get_node("GunManager/Guns")
+@onready var ap = pc.get_node("AnimationPlayer")
+@onready var anim = pc.get_node("AnimationManager")
 
 func state_process():
 	set_player_directions()
-	mm.velocity = get_velocity()
-	var new_velocity = pc.move_and_slide_with_snap(mm.velocity, mm.snap_vector, mm.FLOOR_NORMAL, true)
+	mm.velocity = calc_velocity()
+	pc.set_velocity(mm.velocity)
+	# TODOConverter3To4 looks that snap in Godot 4 is float, not vector like in Godot 3 - previous value `mm.snap_vector`
+	pc.set_up_direction(mm.FLOOR_NORMAL)
+	pc.set_floor_stop_on_slope_enabled(true)
+	pc.move_and_slide()
+	var new_velocity = pc.velocity
 	if pc.is_on_wall():
 		new_velocity.y = max(mm.velocity.y, new_velocity.y)
 
@@ -65,7 +70,7 @@ func set_player_directions():
 
 
 
-func get_velocity():
+func calc_velocity():
 	var out = mm.velocity
 	var friction = false
 
@@ -77,7 +82,7 @@ func get_velocity():
 		friction = true
 
 	if friction:
-		out.x = lerp(out.x, 0, mm.ground_cof)
+		out.x = lerp(out.x, 0.0, mm.ground_cof)
 
 	if abs(out.x) < mm.min_x_velocity: #clamp velocity
 		out.x = 0
@@ -133,9 +138,9 @@ func animate():
 		guns.rotation_degrees = 0
 	
 	if animation == "run" or animation == "crouch_run" or animation == "back_run":
-		ap.playback_speed = max((abs(mm.velocity.x)/mm.speed.x) * 2, 0.1)
+		ap.speed_scale = max((abs(mm.velocity.x)/mm.speed.x) * 2, 0.1)
 	else:
-		ap.playback_speed = 1
+		ap.speed_scale = 1.0
 	
 	anim.set_gun_draw_index()
 	sprite.frame_coords.y = vframe

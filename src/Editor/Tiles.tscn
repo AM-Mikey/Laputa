@@ -4,18 +4,18 @@
 [ext_resource path="res://src/Editor/Tiles.gd" type="Script" id=2]
 [ext_resource path="res://src/Editor/EditorTheme.tres" type="Theme" id=3]
 [ext_resource path="res://src/UI/StyleBox/SteelRoundInset.tres" type="StyleBox" id=4]
-[ext_resource path="res://assets/Editor/RotateCC.png" type="Texture" id=5]
-[ext_resource path="res://assets/Editor/FlipH.png" type="Texture" id=6]
-[ext_resource path="res://assets/Editor/FlipV.png" type="Texture" id=7]
-[ext_resource path="res://assets/Editor/RotateC.png" type="Texture" id=8]
-[ext_resource path="res://assets/Editor/AutoLayerFalse.png" type="Texture" id=9]
-[ext_resource path="res://assets/Editor/MultiEraseFalse.png" type="Texture" id=10]
-[ext_resource path="res://assets/Editor/AutoTileFalse.png" type="Texture" id=11]
-[ext_resource path="res://assets/Editor/ModePaint.png" type="Texture" id=12]
+[ext_resource path="res://assets/Editor/RotateCC.png" type="Texture2D" id=5]
+[ext_resource path="res://assets/Editor/FlipH.png" type="Texture2D" id=6]
+[ext_resource path="res://assets/Editor/FlipV.png" type="Texture2D" id=7]
+[ext_resource path="res://assets/Editor/RotateC.png" type="Texture2D" id=8]
+[ext_resource path="res://assets/Editor/AutoLayerFalse.png" type="Texture2D" id=9]
+[ext_resource path="res://assets/Editor/MultiEraseFalse.png" type="Texture2D" id=10]
+[ext_resource path="res://assets/Editor/AutoTileFalse.png" type="Texture2D" id=11]
+[ext_resource path="res://assets/Editor/ModePaint.png" type="Texture2D" id=12]
 
 [node name="Tiles" type="MarginContainer"]
-margin_right = 480.0
-margin_bottom = 270.0
+offset_right = 480.0
+offset_bottom = 270.0
 mouse_filter = 2
 theme = ExtResource( 3 )
 script = ExtResource( 2 )
@@ -23,73 +23,73 @@ buttons = NodePath("VBox/Scroll/Buttons")
 cursor = NodePath("VBox/Scroll/Control/Cursor")
 
 [node name="VBox" type="VBoxContainer" parent="."]
-margin_right = 480.0
-margin_bottom = 270.0
+offset_right = 480.0
+offset_bottom = 270.0
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="VBox"]
-margin_right = 480.0
-margin_bottom = 4.0
+offset_right = 480.0
+offset_bottom = 4.0
 size_flags_vertical = 0
-custom_colors/font_color = Color( 0.878431, 0.784314, 0.345098, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+theme_override_colors/font_color = Color( 0.878431, 0.784314, 0.345098, 1 )
+theme_override_colors/font_shadow_color = Color( 0, 0, 0, 1 )
 text = "Tiles"
 align = 1
 
 [node name="HBox" type="HBoxContainer" parent="VBox"]
-margin_top = 8.0
-margin_right = 480.0
-margin_bottom = 40.0
+offset_top = 8.0
+offset_right = 480.0
+offset_bottom = 40.0
 mouse_filter = 2
 
 [node name="AutoLayerLabel" type="Label" parent="VBox/HBox"]
 visible = false
-margin_top = 14.0
-margin_right = 69.0
-margin_bottom = 18.0
+offset_top = 14.0
+offset_right = 69.0
+offset_bottom = 18.0
 text = "DrawOnAuto"
 
 [node name="AutoLayer" type="Button" parent="VBox/HBox"]
-margin_right = 32.0
-margin_bottom = 32.0
-hint_tooltip = "Auto-Select Drawing Layer"
+offset_right = 32.0
+offset_bottom = 32.0
+tooltip_text = "Auto-Select Drawing Layer"
 toggle_mode = true
 icon = ExtResource( 9 )
 
 [node name="MultiErase" type="Button" parent="VBox/HBox"]
-margin_left = 36.0
-margin_right = 68.0
-margin_bottom = 32.0
-hint_tooltip = "Erase On All Layers"
+offset_left = 36.0
+offset_right = 68.0
+offset_bottom = 32.0
+tooltip_text = "Erase On All Layers"
 toggle_mode = true
 icon = ExtResource( 10 )
 
 [node name="AutoTile" type="Button" parent="VBox/HBox"]
-margin_left = 72.0
-margin_right = 104.0
-margin_bottom = 32.0
-hint_tooltip = "Toggle AutoTile"
+offset_left = 72.0
+offset_right = 104.0
+offset_bottom = 32.0
+tooltip_text = "Toggle AutoTile"
 toggle_mode = true
 icon = ExtResource( 11 )
 
 [node name="Mode" type="Button" parent="VBox/HBox"]
-margin_left = 108.0
-margin_right = 140.0
-margin_bottom = 32.0
-hint_tooltip = "Toggle AutoTile"
+offset_left = 108.0
+offset_right = 140.0
+offset_bottom = 32.0
+tooltip_text = "Toggle AutoTile"
 toggle_mode = true
 icon = ExtResource( 12 )
 
 [node name="Options" type="HBoxContainer" parent="VBox"]
 visible = false
-margin_top = 44.0
-margin_right = 480.0
-margin_bottom = 76.0
+offset_top = 44.0
+offset_right = 480.0
+offset_bottom = 76.0
 
 [node name="FlipH" type="Button" parent="VBox/Options"]
-margin_right = 32.0
-margin_bottom = 32.0
-hint_tooltip = "Flip Horizontal"
+offset_right = 32.0
+offset_bottom = 32.0
+tooltip_text = "Flip Horizontal"
 size_flags_vertical = 0
 toggle_mode = true
 icon = ExtResource( 6 )
@@ -98,10 +98,10 @@ __meta__ = {
 }
 
 [node name="FlipV" type="Button" parent="VBox/Options"]
-margin_left = 36.0
-margin_right = 68.0
-margin_bottom = 32.0
-hint_tooltip = "Flip Vertical"
+offset_left = 36.0
+offset_right = 68.0
+offset_bottom = 32.0
+tooltip_text = "Flip Vertical"
 size_flags_vertical = 0
 toggle_mode = true
 icon = ExtResource( 7 )
@@ -110,10 +110,10 @@ __meta__ = {
 }
 
 [node name="RotateC" type="Button" parent="VBox/Options"]
-margin_left = 72.0
-margin_right = 104.0
-margin_bottom = 32.0
-hint_tooltip = "Rotate Clockwise"
+offset_left = 72.0
+offset_right = 104.0
+offset_bottom = 32.0
+tooltip_text = "Rotate Clockwise"
 size_flags_vertical = 0
 icon = ExtResource( 8 )
 __meta__ = {
@@ -121,10 +121,10 @@ __meta__ = {
 }
 
 [node name="RotateCC" type="Button" parent="VBox/Options"]
-margin_left = 108.0
-margin_right = 140.0
-margin_bottom = 32.0
-hint_tooltip = "Rotate Counterclockwise"
+offset_left = 108.0
+offset_right = 140.0
+offset_bottom = 32.0
+tooltip_text = "Rotate Counterclockwise"
 size_flags_vertical = 0
 icon = ExtResource( 5 )
 __meta__ = {
@@ -132,41 +132,41 @@ __meta__ = {
 }
 
 [node name="Scroll" type="ScrollContainer" parent="VBox"]
-margin_top = 44.0
-margin_right = 480.0
-margin_bottom = 270.0
+offset_top = 44.0
+offset_right = 480.0
+offset_bottom = 270.0
 mouse_filter = 2
 size_flags_vertical = 3
-custom_styles/bg = ExtResource( 4 )
+theme_override_styles/bg = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Buttons" type="VBoxContainer" parent="VBox/Scroll"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 472.0
-margin_bottom = 218.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 472.0
+offset_bottom = 218.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Control" type="Control" parent="VBox/Scroll"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 472.0
-margin_bottom = 218.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 472.0
+offset_bottom = 218.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Cursor" type="Panel" parent="VBox/Scroll/Control"]
 mouse_filter = 2
-custom_styles/panel = ExtResource( 1 )
+theme_override_styles/panel = ExtResource( 1 )
 
 [connection signal="toggled" from="VBox/HBox/AutoLayer" to="." method="_on_AutoLayer_toggled"]
 [connection signal="toggled" from="VBox/HBox/MultiErase" to="." method="_on_MultiErase_toggled"]

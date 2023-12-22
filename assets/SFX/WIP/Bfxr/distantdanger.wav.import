@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/distantdanger.wav-60e57d1f196fdb2e5ad69e8ee39982d5.sample"
+type="AudioStreamWAV"
+uid="uid://brpw0fyvxesr"
+path="res://.godot/imported/distantdanger.wav-60e57d1f196fdb2e5ad69e8ee39982d5.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/distantdanger.wav"
-dest_files=[ "res://.import/distantdanger.wav-60e57d1f196fdb2e5ad69e8ee39982d5.sample" ]
+dest_files=["res://.godot/imported/distantdanger.wav-60e57d1f196fdb2e5ad69e8ee39982d5.sample"]
 
 [params]
 

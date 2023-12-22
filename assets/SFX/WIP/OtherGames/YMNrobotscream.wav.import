@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNrobotscream.wav-a76cc0901d0045c2c7016bfba07523e9.sample"
+type="AudioStreamWAV"
+uid="uid://6e4p7mrf6mgd"
+path="res://.godot/imported/YMNrobotscream.wav-a76cc0901d0045c2c7016bfba07523e9.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNrobotscream.wav"
-dest_files=[ "res://.import/YMNrobotscream.wav-a76cc0901d0045c2c7016bfba07523e9.sample" ]
+dest_files=["res://.godot/imported/YMNrobotscream.wav-a76cc0901d0045c2c7016bfba07523e9.sample"]
 
 [params]
 

@@ -1,12 +1,12 @@
 extends Actor
 
 var direction
-export var bounciness: float = .75
-export var minimum_speed: float = .5
+@export var bounciness: float = .75
+@export var minimum_speed: float = .5
 var start_velocity
 
-export var rng_min_speed = 50
-export var rng_max_speed = 100
+@export var rng_min_speed = 50
+@export var rng_max_speed = 100
 
 var value: int
 
@@ -17,7 +17,7 @@ func _ready():
 	$DecayTimer.start(decay_time)
 	direction = randomize_direction()
 	speed = randomize_speed()
-	velocity = get_velocity(speed, direction)
+	velocity = calc_velocity(speed, direction)
 	start_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 
 	match value:
@@ -43,30 +43,28 @@ func _physics_process(delta):
 		var collision = move_and_collide(velocity * delta)
 		if collision:
 			velocity *= bounciness
-			velocity = velocity.bounce(collision.normal)
+			velocity = velocity.bounce(collision.get_normal())
 			#if $AnimationPlayer.is_playing():
-			am.play_pos("xp", self)
+			am.play("xp", self)
 			
 	velocity.y += gravity * get_physics_process_delta_time()
 
 	var ave_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
-	$AnimationPlayer.playback_speed = ave_velocity / start_velocity
+	$AnimationPlayer.speed_scale = ave_velocity / start_velocity
 	
-	if $AnimationPlayer.playback_speed > 1:
-		$AnimationPlayer.playback_speed = 1
-	if $AnimationPlayer.playback_speed < .1:
+	if $AnimationPlayer.speed_scale > 1:
+		$AnimationPlayer.speed_scale = 1
+	if $AnimationPlayer.speed_scale < .1:
 		$AnimationPlayer.stop()
 
 
 	
-func get_velocity(speed, scoped_direction) -> Vector2:
+func calc_velocity(speed, dir) -> Vector2:
 	var out = velocity
-	
-	out.x = speed.x * scoped_direction.x
+	out.x = speed.x * dir.x
 	out.y += gravity * get_physics_process_delta_time()
-	if scoped_direction.y == -1.0:
-		out.y = speed.y * scoped_direction.y
-
+	if dir.y == -1.0:
+		out.y = speed.y * dir.y
 	return out
 
 
@@ -81,9 +79,5 @@ func _on_PopTimer_timeout():
 		1: $AnimationPlayer.play("SmallPop")
 		5: $AnimationPlayer.play("MediumPop")
 		_: $AnimationPlayer.play("MediumPop")
-	yield($AnimationPlayer, "animation_finished")
+	await $AnimationPlayer.animation_finished
 	queue_free()
-
-
-func _on_Timer_timeout():
-	pass # Replace with function body.

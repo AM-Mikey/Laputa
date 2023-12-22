@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNwettock.WAV-4ecfd89c4f725190e2593e6212ff2bf2.sample"
+type="AudioStreamWAV"
+uid="uid://cwd0ktpgsc24l"
+path="res://.godot/imported/YMNwettock.WAV-4ecfd89c4f725190e2593e6212ff2bf2.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNwettock.WAV"
-dest_files=[ "res://.import/YMNwettock.WAV-4ecfd89c4f725190e2593e6212ff2bf2.sample" ]
+dest_files=["res://.godot/imported/YMNwettock.WAV-4ecfd89c4f725190e2593e6212ff2bf2.sample"]
 
 [params]
 

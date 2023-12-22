@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/HLhoundeye.wav-78d6fd60b5fcc547813609da4ca9f9dd.sample"
+type="AudioStreamWAV"
+uid="uid://b6vgwhmk37o7w"
+path="res://.godot/imported/HLhoundeye.wav-78d6fd60b5fcc547813609da4ca9f9dd.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/HLhoundeye.wav"
-dest_files=[ "res://.import/HLhoundeye.wav-78d6fd60b5fcc547813609da4ca9f9dd.sample" ]
+dest_files=["res://.godot/imported/HLhoundeye.wav-78d6fd60b5fcc547813609da4ca9f9dd.sample"]
 
 [params]
 

@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/NightSongSample.mp3-183734ec877e2776ea168522adb38764.mp3str"
+uid="uid://c6bv2t7dnwq3r"
+path="res://.godot/imported/NightSongSample.mp3-183734ec877e2776ea168522adb38764.mp3str"
 
 [deps]
 
 source_file="res://assets/Music/Production/NightSongSample.mp3"
-dest_files=[ "res://.import/NightSongSample.mp3-183734ec877e2776ea168522adb38764.mp3str" ]
+dest_files=["res://.godot/imported/NightSongSample.mp3-183734ec877e2776ea168522adb38764.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

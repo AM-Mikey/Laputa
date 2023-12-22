@@ -1,12 +1,12 @@
 extends Node
 
-onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_parent().get_parent().get_parent()
-onready var mm = pc.get_node("MovementManager")
-onready var sprite = pc.get_node("Sprite")
-onready var guns = pc.get_node("GunManager/Guns")
-onready var ap = pc.get_node("AnimationPlayer")
-onready var anim = pc.get_node("AnimationManager")
+@onready var world = get_tree().get_root().get_node("World")
+@onready var pc = get_parent().get_parent().get_parent()
+@onready var mm = pc.get_node("MovementManager")
+@onready var sprite = pc.get_node("Sprite2D")
+@onready var guns = pc.get_node("GunManager/Guns")
+@onready var ap = pc.get_node("AnimationPlayer")
+@onready var anim = pc.get_node("AnimationManager")
 
 func state_process():
 	#jump interrupt
@@ -17,8 +17,13 @@ func state_process():
 			is_jump_interrupted = true
 
 	set_player_directions()
-	mm.velocity = get_velocity(is_jump_interrupted)
-	var new_velocity = pc.move_and_slide_with_snap(mm.velocity, mm.snap_vector, mm.FLOOR_NORMAL, true)
+	mm.velocity = calc_velocity(is_jump_interrupted)
+	pc.set_velocity(mm.velocity)
+	# TODOConverter3To4 looks that snap in Godot 4 is float, not vector like in Godot 3 - previous value `mm.snap_vector`
+	pc.set_up_direction(mm.FLOOR_NORMAL)
+	pc.set_floor_stop_on_slope_enabled(true)
+	pc.move_and_slide()
+	var new_velocity = pc.velocity
 	if pc.is_on_wall():
 		new_velocity.y = max(mm.velocity.y, new_velocity.y)
 		
@@ -26,12 +31,12 @@ func state_process():
 	animate()
 
 
-	if pc.is_on_ceiling(): #and mm.bonk_timeout.time_left == 0:
-		mm.bonk("bonk")
+	#if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
+		#mm.bonk("head")  #TODO: fix multi bonks
 
 	if pc.is_on_floor(): #landed
 		mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
-		mm.bonk("Land")
+		#mm.bonk("feet")
 		mm.change_state("run")
 
 
@@ -75,7 +80,7 @@ func set_player_directions():
 
 
 
-func get_velocity(is_jump_interrupted):
+func calc_velocity(is_jump_interrupted):
 	var out = mm.velocity
 	var friction = false
 	
@@ -107,7 +112,7 @@ func get_velocity(is_jump_interrupted):
 			friction = true
 	
 	if friction:
-		out.x = lerp(out.x, 0, mm.air_cof)
+		out.x = lerp(out.x, 0.0, mm.air_cof)
 	
 	if abs(out.x) < mm.min_x_velocity: #clamp velocity
 		out.x = 0
@@ -128,7 +133,7 @@ func animate():
 	
 	if not ap.is_playing() or ap.current_animation != animation:
 		ap.play(animation)
-		ap.playback_speed = 1
+		ap.speed_scale = 1
 	
 	
 	var vframe: int

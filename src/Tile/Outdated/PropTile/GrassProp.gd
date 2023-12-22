@@ -2,13 +2,13 @@ extends TileMap
 
 const GRASS = preload("res://src/Prop/Grass.tscn")
 
-onready var props = get_parent().get_parent().get_node("Props")
+@onready var props = get_parent().get_parent().get_node("Props")
 
 func _ready():
 	var grass_tiles = get_used_cells_by_id(0)
 
 	for g in grass_tiles:
-		var grass = GRASS.instance()
+		var grass = GRASS.instantiate()
 		
 		match int(g.x) % 4:
 			1: grass.num = 1

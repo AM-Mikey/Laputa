@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/Tile/TriggerTile/LadderTrigger.png" type="Texture" id=1]
+[ext_resource path="res://assets/Tile/TriggerTile/LadderTrigger.png" type="Texture2D" id=1]
 [ext_resource path="res://src/Tile/Outdated/TriggerTile/LadderTrigger.gd" type="Script" id=2]
 
 

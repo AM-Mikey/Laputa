@@ -1,11 +1,11 @@
 extends Area2D
 
-export var owner_id: String
-export var index := 0
+@export var owner_id: String
+@export var index := 0
 
-onready var active_count = 0
+@onready var active_count = 0
 
-onready var w = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
 	add_to_group("Entities")
@@ -31,8 +31,8 @@ func on_editor_deselect():
 func set_color():
 	match active_count:
 		0: modulate = Color(1,1,1)
-		1: modulate = Color.red
-		2: modulate = Color.darkred
-		3: modulate = Color.darkmagenta
-		4: modulate = Color.darkblue
-		_: modulate = Color.black
+		1: modulate = Color.RED
+		2: modulate = Color.DARK_RED
+		3: modulate = Color.DARK_MAGENTA
+		4: modulate = Color.DARK_BLUE
+		_: modulate = Color.BLACK

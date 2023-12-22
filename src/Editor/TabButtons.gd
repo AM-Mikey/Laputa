@@ -4,13 +4,13 @@ const TAB_BUTTON = preload("res://src/Editor/Button/TabButton.tscn")
 
 var icons = load("res://assets/Editor/TabIcons.png")
 
-onready var editor = get_parent().get_parent()
-onready var tabs = get_parent().get_node("Tab").get_children()
+@onready var editor = get_parent().get_parent()
+@onready var tabs = get_parent().get_node("Tab").get_children()
 
 func _ready():
 	var index = 0
 	for t in tabs:
-		var button = TAB_BUTTON.instance()
+		var button = TAB_BUTTON.instantiate()
 		
 		var icon = AtlasTexture.new()
 		icon.atlas = icons
@@ -19,6 +19,6 @@ func _ready():
 		
 		button.tab_index = index
 		$VBox.add_child(button)
-		button.connect("tab_selected", editor, "on_tab_selected")
+		button.connect("tab_selected", Callable(editor, "on_tab_selected"))
 		index += 1
 		

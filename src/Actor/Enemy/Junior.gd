@@ -3,16 +3,16 @@ extends Enemy
 const BULLET = preload("res://src/Bullet/Enemy/Carbine.tscn")
 
 var starting_state = "walk"
-export var move_dir = Vector2.LEFT
-export var idle_max_time = 5.0
-export var walk_max_time = 10.0
-export var aim_time = 0.2
-export var reload_time = 2.0
+@export var move_dir = Vector2.LEFT
+@export var idle_max_time = 5.0
+@export var walk_max_time = 10.0
+@export var aim_time = 0.2
+@export var reload_time = 2.0
 
 var target: Node
 
-onready var ap = $AnimationPlayer
-onready var st = $StateTimer
+@onready var ap = $AnimationPlayer
+@onready var st = $StateTimer
 
 func setup():
 	change_state(starting_state)
@@ -45,20 +45,23 @@ func do_walk():
 	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
 		change_state("idle")
 	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
-		velocity = get_velocity(velocity, move_dir, speed)
-		velocity = move_and_slide(velocity, FLOOR_NORMAL)
+		velocity = calc_velocity(velocity, move_dir, speed)
+		set_velocity(velocity)
+		set_up_direction(FLOOR_NORMAL)
+		move_and_slide()
+		velocity = velocity
 
 func enter_aim():
-	velocity = Vector2(lerp(velocity.x, 0, 0.4), lerp(velocity.y, 0, 0.4))
+	velocity = Vector2(lerp(velocity.x, 0.0, 0.4), lerp(velocity.y, 0.0, 0.4))
 	ap.play("Aim")
-	yield(ap, "animation_finished")
+	await ap.animation_finished
 	st.start(aim_time)
-	yield(st,"timeout")
+	await st.timeout
 	change_state("shoot")
 
 func enter_shoot():
 	ap.play("Shoot")
-	var bullet = BULLET.instance()
+	var bullet = BULLET.instantiate()
 	bullet.position = $BulletOrigin.global_position
 	bullet.origin = bullet.position #TODO: WHY not just have it set origin on ready?
 	bullet.direction = move_dir
@@ -71,11 +74,11 @@ func enter_shoot():
 func do_flip_check():
 	match move_dir:
 		Vector2.LEFT: 
-			$Sprite.flip_h = false
+			$Sprite2D.flip_h = false
 			$PlayerDetector.scale.x = 1
 			$BulletOrigin.position = Vector2(-13, -13)
 		Vector2.RIGHT: 
-			$Sprite.flip_h = true
+			$Sprite2D.flip_h = true
 			$PlayerDetector.scale.x = -1
 			$BulletOrigin.position = Vector2(13, -13)
 
@@ -84,7 +87,7 @@ func do_flip_check():
 func _on_hit(_damage, blood_direction):
 	if sign(blood_direction.x) == sign(move_dir.x): #shot from behind
 		ap.play("Shock")
-		yield(ap, "animation_finished")
+		await ap.animation_finished
 		ap.play("Idle")
 		move_dir.x = move_dir.x * -1
 		do_flip_check()

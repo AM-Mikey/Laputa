@@ -3,10 +3,10 @@ extends Control
 var text
 var wait_time = 0.2
 
-onready var world = get_tree().get_root().get_node("World")
+@onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
+	var _err = get_tree().root.connect("size_changed", Callable(self, "_on_viewport_size_changed"))
 	_on_viewport_size_changed()
 	$Label.text = text
 	$Timer.start(wait_time)
@@ -17,11 +17,11 @@ func _on_Timer_timeout():
 
 func display_text():
 	$AnimationPlayer.play("Fade")
-	yield($AnimationPlayer, "animation_finished")
+	await $AnimationPlayer.animation_finished
 	queue_free()
 
 
 func _on_viewport_size_changed():
-	rect_size = get_tree().get_root().size / world.resolution_scale
+	size = get_tree().get_root().size / world.resolution_scale
 
 

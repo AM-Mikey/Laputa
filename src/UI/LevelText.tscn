@@ -14,14 +14,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 1.8, 2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.2, 1.8, 2 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [node name="LevelText" type="MarginContainer"]
-pause_mode = 2
+process_mode = 3
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -33,12 +33,12 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-margin_left = 153.0
-margin_right = 327.0
-margin_bottom = 14.0
+offset_left = 153.0
+offset_right = 327.0
+offset_bottom = 14.0
 size_flags_horizontal = 4
 size_flags_vertical = 0
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+theme_override_colors/font_outline_color = Color( 0, 0, 0, 1 )
 text = "ERROR: No Level Name Applied"
 __meta__ = {
 "_edit_use_anchors_": false

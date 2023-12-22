@@ -2,11 +2,11 @@ extends Control
 
 var animation: String
 
-onready var world = get_tree().get_root().get_node("World")
+@onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
 		print("playing in animation")
-		var _err = get_tree().root.connect("size_changed", self, "on_viewport_size_changed")
+		var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 		on_viewport_size_changed()
 		$AnimationPlayer.play(animation)
 	
@@ -32,4 +32,4 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 func on_viewport_size_changed():
 	var viewport_size = get_tree().get_root().size / world.resolution_scale
-	$MarginContainer.rect_size = viewport_size
+	$MarginContainer.size = viewport_size

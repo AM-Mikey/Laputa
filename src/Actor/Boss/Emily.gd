@@ -4,7 +4,7 @@ var max_x_speed = 100
 var jump_speed = 100
 
 
-export var idle_time = .5
+@export var idle_time = .5
 
 
 var move_dir = Vector2.ZERO
@@ -39,20 +39,20 @@ func _ready():
 func loop():
 	while hp > 0:
 		walk(Vector2.LEFT, 6)
-		yield(self, "idle")
-		yield(get_tree().create_timer(0.4), "timeout")
+		await self.idle
+		await get_tree().create_timer(0.4).timeout
 		
 		walk(Vector2.RIGHT, 6)
-		yield(self, "idle")
-		yield(get_tree().create_timer(0.4), "timeout")
+		await self.idle
+		await get_tree().create_timer(0.4).timeout
 		
 		charge(Vector2.LEFT)
-		yield(self, "idle")
-		yield(get_tree().create_timer(0.4), "timeout")
+		await self.idle
+		await get_tree().create_timer(0.4).timeout
 		
 		charge(Vector2.RIGHT)
-		yield(self, "idle")
-		yield(get_tree().create_timer(0.4), "timeout")
+		await self.idle
+		await get_tree().create_timer(0.4).timeout
 
 
 func walk(dir, dist):
@@ -64,7 +64,7 @@ func walk(dir, dist):
 func charge(dir):
 	print("charging")
 	move_dir = dir
-	yield(get_tree().create_timer(0.1), "timeout") #wait before declaring active state, so process doesn't catch the charge at 0 velocity
+	await get_tree().create_timer(0.1).timeout #wait before declaring active state, so process doesn't catch the charge at 0 velocity
 	active_state = "charge"
 
 func stop():
@@ -105,7 +105,11 @@ func _physics_process(delta):
 		
 	
 	velocity = calculate_movevelocity(velocity, move_dir)
-	velocity = move_and_slide(velocity, FLOOR_NORMAL, true)
+	set_velocity(velocity)
+	set_up_direction(FLOOR_NORMAL)
+	set_floor_stop_on_slope_enabled(true)
+	move_and_slide()
+	velocity = velocity
 
 
 
@@ -131,9 +135,9 @@ func calculate_movevelocity(linearvelocity: Vector2, move_dir) -> Vector2:
 
 	if is_on_floor():
 		if friction == true:
-			out.x = lerp(out.x, 0, ground_cof)
+			out.x = lerp(out.x, 0.0, ground_cof)
 	else:
 		if friction == true:
-			out.x = lerp(out.x, 0, air_cof)
+			out.x = lerp(out.x, 0.0, air_cof)
 		
 	return out

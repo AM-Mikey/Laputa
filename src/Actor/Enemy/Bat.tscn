@@ -1,109 +1,114 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=3 uid="uid://spx2ohg588ta"]
 
-[ext_resource path="res://src/Actor/Enemy/Bat.gd" type="Script" id=1]
-[ext_resource path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" type="AudioStream" id=2]
-[ext_resource path="res://assets/Actor/Enemy/Bat.png" type="Texture" id=3]
+[ext_resource type="Script" path="res://src/Actor/Enemy/Bat.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://cpbrsidi03i20" path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" id="2"]
+[ext_resource type="Texture2D" uid="uid://bufns1cnhgyw1" path="res://assets/Actor/Enemy/Bat.png" id="3"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6, 6 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(12, 12)
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id="6"]
 resource_name = "Flap"
 length = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ 0, 2, 1 ]
+"values": [0, 2, 1]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id="9"]
 resource_name = "FlapAggro"
 length = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ 3, 5, 4 ]
+"values": [3, 5, 4]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id="7"]
 resource_name = "Unflap"
 length = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ 1, 2, 0 ]
+"values": [1, 2, 0]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id="10"]
 resource_name = "UnflapAggro"
 length = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ 4, 5, 3 ]
+"values": [4, 5, 3]
 }
 
-[sub_resource type="CircleShape2D" id=8]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mr7me"]
+_data = {
+"Flap": SubResource("6"),
+"FlapAggro": SubResource("9"),
+"Unflap": SubResource("7"),
+"UnflapAggro": SubResource("10")
+}
+
+[sub_resource type="CircleShape2D" id="8"]
 radius = 50.0
 
-[node name="Bat" type="KinematicBody2D"]
+[node name="Bat" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 8
-script = ExtResource( 1 )
+script = ExtResource("1")
 debug = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 7.62939e-06, -3.8147e-06 )
-texture = ExtResource( 3 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(7.62939e-06, -3.8147e-06)
+texture = ExtResource("3")
 hframes = 3
 vframes = 2
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Flap = SubResource( 6 )
-anims/FlapAggro = SubResource( 9 )
-anims/Unflap = SubResource( 7 )
-anims/UnflapAggro = SubResource( 10 )
+libraries = {
+"": SubResource("AnimationLibrary_mr7me")
+}
 
 [node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 2 )
+stream = ExtResource("2")
 attenuation = 0.0583146
-bus = "SFX"
+bus = &"SFX"
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-enabled = true
-cast_to = Vector2( 50, 100 )
+target_position = Vector2(50, 100)
 collision_mask = 8
 collide_with_areas = true
 
@@ -111,7 +116,7 @@ collide_with_areas = true
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-shape = SubResource( 8 )
+shape = SubResource("8")
 
 [node name="BailTimer" type="Timer" parent="."]
 one_shot = true

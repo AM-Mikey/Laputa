@@ -1,7 +1,7 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-export var speed = Vector2(200, 100)
-export var dir = Vector2.RIGHT
+@export var speed = Vector2(200, 100)
+@export var dir = Vector2.RIGHT
 var safe_distance = 100
 
 #onready var levels = get_tree().get_nodes_in_group("Levels")

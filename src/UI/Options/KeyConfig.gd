@@ -12,12 +12,12 @@ var debug_actions = []
 
 var active_preset = 0
 
-export(NodePath) var buttons
-onready var p_button = get_node(buttons)
-export(NodePath) var focus
-export(NodePath) var preset_path
+@export var buttons: NodePath
+@onready var p_button = get_node(buttons)
+@export var ui_focus: NodePath
+@export var preset_path: NodePath
 
-onready var world = get_tree().get_root().get_node("World")
+@onready var world = get_tree().get_root().get_node("World")
 
 var preset_classic = {
 	"jump": KEY_X,
@@ -38,8 +38,8 @@ var preset_classic = {
 
 var preset_mouse = {
 	"jump": KEY_SPACE,
-	"fire_manual": BUTTON_LEFT,
-	"fire_automatic": BUTTON_RIGHT,
+	"fire_manual": MOUSE_BUTTON_LEFT,
+	"fire_automatic": MOUSE_BUTTON_RIGHT,
 	"move_left": KEY_A,
 	"move_right": KEY_D,
 	"look_up": KEY_W,
@@ -48,8 +48,8 @@ var preset_mouse = {
 	"ui_cancel": KEY_Q,
 	"inspect": KEY_E,
 	"inventory": KEY_TAB,
-	"gun_left": BUTTON_WHEEL_DOWN,
-	"gun_right": BUTTON_WHEEL_UP,
+	"gun_left": MOUSE_BUTTON_WHEEL_DOWN,
+	"gun_right": MOUSE_BUTTON_WHEEL_UP,
 	"pause": KEY_ESCAPE,
 }
 
@@ -82,7 +82,7 @@ func _ready():
 				buttons_normal.append(s)
 
 	for b in buttons_normal:
-		b.connect("pressed", self, "_mark_button", [b.get_parent().name])
+		b.connect("pressed", Callable(self, "_mark_button").bind(b.get_parent().name))
 		actions.append(b.get_parent().name)
 
 	_set_keys()
@@ -94,7 +94,7 @@ func _set_keys():
 		var button = p_button.get_node(str(j) + "/Button")
 		button.set_pressed(false)
 		
-		if InputMap.get_action_list(j).empty():
+		if InputMap.action_get_events(j).is_empty():
 			button.set_text("No Button!")
 			#button.set_pressed(false)
 			return
@@ -129,10 +129,10 @@ func _set_keys():
   
 func _get_first_valid_input(j):
 			var index = 0
-			var good_input = InputMap.get_action_list(j)[index]
-			while not good_input is InputEventKey and not good_input is InputEventMouseButton and index < InputMap.get_action_list(j).size() - 1:
+			var good_input = InputMap.action_get_events(j)[index]
+			while not good_input is InputEventKey and not good_input is InputEventMouseButton and index < InputMap.action_get_events(j).size() - 1:
 				index +=1
-				good_input = InputMap.get_action_list(j)[index]
+				good_input = InputMap.action_get_events(j)[index]
 			
 			if not good_input is InputEventKey and not good_input is InputEventMouseButton:
 				return null
@@ -165,12 +165,12 @@ func _input(event):
 		_change_key(event)
 		assignment_mode = false
 		
-		var accept_event = _get_first_valid_input("ui_accept") #prevent us from entering another assignment mode when event is accept_event
-		if event is InputEventKey and accept_event is InputEventKey:
-			if event.scancode == accept_event.scancode:
+		var accept_input_event = _get_first_valid_input("ui_accept") #prevent us from entering another assignment mode when event is accept_event
+		if event is InputEventKey and accept_input_event is InputEventKey:
+			if event.keycode == accept_input_event.keycode:
 				button_ignore = true
-		if event is InputEventMouseButton and accept_event is InputEventMouseButton:
-			if event.button_index == accept_event.button_index:
+		if event is InputEventMouseButton and accept_input_event is InputEventMouseButton:
+			if event.button_index == accept_input_event.button_index:
 				button_ignore = true
 
 
@@ -179,7 +179,7 @@ func _change_key(new_key):
 	get_node(preset_path).select(0)
 	
 	#Delete key of pressed button
-	if !InputMap.get_action_list(action_string).empty():
+	if !InputMap.action_get_events(action_string).is_empty():
 		var input = _get_first_valid_input(action_string)
 		if input != null:
 			InputMap.action_erase_event(action_string, input)
@@ -204,7 +204,7 @@ func _change_key(new_key):
 		"look_down": alias_action_string = "ui_down"
 
 	if alias_action_string != null:
-		if !InputMap.get_action_list(alias_action_string).empty():
+		if !InputMap.action_get_events(alias_action_string).is_empty():
 			var input = _get_first_valid_input(alias_action_string)
 			if input != null:
 				InputMap.action_erase_event(alias_action_string, input)
@@ -222,20 +222,19 @@ func save_input_map():
 	var input_actions = InputMap.get_actions()
 	for a in input_actions:
 		var inputs = []
-		for i in InputMap.get_action_list(a):
+		for i in InputMap.action_get_events(a):
 				if i is InputEventMouseButton:
 					inputs.append(["mouse", i.button_index])
 				if i is InputEventKey:
-					inputs.append(["key", i.scancode])
+					inputs.append(["key", i.keycode])
 				if i is InputEventJoypadButton:
 					inputs.append(["joy", i.button_index])
 		data[a] = inputs
 	
 	
-	var file = File.new()
-	var file_written = file.open(input_map_path, File.WRITE)
-	if file_written == OK:
-		file.store_string(var2str(data))
+	var file = FileAccess.open(input_map_path, FileAccess.WRITE)
+	if file:
+		file.store_string(var_to_str(data))
 		file.close()
 		print("input map data saved")
 	else:
@@ -244,13 +243,13 @@ func save_input_map():
 
 func load_input_map():
 	var data
-	
-	var file = File.new()
-	if file.file_exists(input_map_path):
-		var file_read = file.open(input_map_path, File.READ)
-		if file_read == OK:
+	if FileAccess.file_exists(input_map_path):
+		var file = FileAccess.open(input_map_path, FileAccess.READ)
+		if file:
 			var text = file.get_as_text()
-			data = JSON.parse(text).result
+			var test_json_conv = JSON.new()
+			test_json_conv.parse(text)
+			data = test_json_conv.get_data()
 			file.close()
 			
 			for a in data.keys():
@@ -263,7 +262,7 @@ func load_input_map():
 							new_input.set_button_index(i.back())
 						"key":
 							new_input = InputEventKey.new()
-							new_input.set_scancode(i.back())
+							new_input.set_keycode(i.back())
 						"joy":
 							new_input = InputEventJoypadButton.new()
 							new_input.set_button_index(i.back())
@@ -290,7 +289,7 @@ func _on_ConfirmationDialog_confirmed():
 func set_preset(preset):
 	for k in preset.keys():
 		#Delete key of pressed button
-		if !InputMap.get_action_list(k).empty():
+		if !InputMap.action_get_events(k).is_empty():
 			var old_input = _get_first_valid_input(k)
 			if old_input:
 				InputMap.action_erase_event(k, old_input)
@@ -302,7 +301,7 @@ func set_preset(preset):
 			new_input.button_index = preset[k]
 		else:
 			new_input = InputEventKey.new()
-			new_input.scancode = preset[k]
+			new_input.keycode = preset[k]
 		InputMap.action_add_event(k, new_input)
 	
 
@@ -315,7 +314,7 @@ func set_preset(preset):
 			"look_down": alias_action_string = "ui_down"
 			
 		if alias_action_string:
-			if !InputMap.get_action_list(alias_action_string).empty():
+			if !InputMap.action_get_events(alias_action_string).is_empty():
 				var old_input = _get_first_valid_input(alias_action_string)
 				if old_input:
 					InputMap.action_erase_event(alias_action_string, old_input)
@@ -330,10 +329,10 @@ func set_preset(preset):
 func _on_Return_pressed():
 	if world.has_node("UILayer/PauseMenu"):
 		world.get_node("UILayer/PauseMenu").visible = true
-		world.get_node("UILayer/PauseMenu").focus()
+		world.get_node("UILayer/PauseMenu").do_focus()
 	if world.has_node("UILayer/TitleScreen"):
 		world.get_node("UILayer/TitleScreen").visible = true
-		world.get_node("UILayer/TitleScreen").focus()
+		world.get_node("UILayer/TitleScreen").do_focus()
 		
 	if world.has_node("UILayer/Options"):
 		world.get_node("UILayer/Options").queue_free()
@@ -341,5 +340,5 @@ func _on_Return_pressed():
 		get_parent().queue_free()
 
 
-func focus():
-	get_node(focus).grab_focus()
+func do_focus():
+	get_node(ui_focus).grab_focus()

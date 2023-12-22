@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/V2shutter.ogg-6851c9e8202abeade3d1373a9d10e8be.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dnnnaslvwrttd"
+path="res://.godot/imported/V2shutter.ogg-6851c9e8202abeade3d1373a9d10e8be.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Raw/V2shutter.ogg"
-dest_files=[ "res://.import/V2shutter.ogg-6851c9e8202abeade3d1373a9d10e8be.oggstr" ]
+dest_files=["res://.godot/imported/V2shutter.ogg-6851c9e8202abeade3d1373a9d10e8be.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNsnore.WAV-c919d20f915836a78c73c677f598db32.sample"
+type="AudioStreamWAV"
+uid="uid://c81krjwsp81a0"
+path="res://.godot/imported/YMNsnore.WAV-c919d20f915836a78c73c677f598db32.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNsnore.WAV"
-dest_files=[ "res://.import/YMNsnore.WAV-c919d20f915836a78c73c677f598db32.sample" ]
+dest_files=["res://.godot/imported/YMNsnore.WAV-c919d20f915836a78c73c677f598db32.sample"]
 
 [params]
 

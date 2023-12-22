@@ -1,13 +1,13 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=2]
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://dbafhti4g7dp4"]
 
-[ext_resource path="res://assets/UI/StyleBox/LeatherLight.png" type="Texture" id=1]
+[ext_resource type="Texture2D" uid="uid://dr80xvy0gs6t8" path="res://assets/UI/StyleBox/LeatherLight.png" id="1"]
 
 [resource]
-texture = ExtResource( 1 )
-region_rect = Rect2( 0, 0, 16, 16 )
-margin_left = 5.0
-margin_right = 7.0
-margin_top = 5.0
-margin_bottom = 7.0
+texture = ExtResource("1")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 16, 16)

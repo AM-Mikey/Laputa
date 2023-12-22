@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/V2click.ogg-c8556dfbcf34ada875300a5315b2d1b7.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://chcagph4jnn1d"
+path="res://.godot/imported/V2click.ogg-c8556dfbcf34ada875300a5315b2d1b7.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Raw/V2click.ogg"
-dest_files=[ "res://.import/V2click.ogg-c8556dfbcf34ada875300a5315b2d1b7.oggstr" ]
+dest_files=["res://.godot/imported/V2click.ogg-c8556dfbcf34ada875300a5315b2d1b7.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

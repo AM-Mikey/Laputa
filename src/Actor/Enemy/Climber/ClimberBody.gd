@@ -9,7 +9,7 @@ func _ready():
 
 func _process(_delta):
 	if get_parent() != null:
-		$Sprite.rotation = 2 * PI - get_parent().rotation
+		$Sprite2D.rotation = 2 * PI - get_parent().rotation
 
 func die():
 	if not dead:
@@ -23,7 +23,7 @@ func die():
 		
 		pc.is_in_enemy = false #THIS IS A BAD WAY TO DO THIS if a player is in a different enemy when this one dies, they will be immune to that enemy
 		
-		var explosion = EXPLOSION.instance()
+		var explosion = EXPLOSION.instantiate()
 		get_tree().get_root().get_node("World/Front").add_child(explosion)
 		explosion.position = global_position
 		

@@ -1,13 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://dllnonvd2winm"]
 
-[ext_resource path="res://src/UI/Options/ActionOption.gd" type="Script" id=1]
-[ext_resource path="res://src/UI/Theme/OptionButtonSmall.tres" type="Theme" id=2]
+[ext_resource type="Script" path="res://src/UI/Options/ActionOption.gd" id="1"]
+[ext_resource type="Theme" path="res://src/UI/Theme/OptionButtonSmall.tres" id="2"]
 
 [node name="ActionOption" type="OptionButton"]
-margin_right = 14.0
-margin_bottom = 24.0
-theme = ExtResource( 2 )
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_right = 14.0
+offset_bottom = 24.0
+theme = ExtResource("2")
+script = ExtResource("1")

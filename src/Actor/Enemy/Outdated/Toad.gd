@@ -30,8 +30,11 @@ func _physics_process(delta):
 			move_dir = get_move_dir()
 			look_dir = Vector2(move_dir.x, 0)
 
-		velocity = get_movevelocity(velocity, move_dir, speed)
-		velocity = move_and_slide(velocity, FLOOR_NORMAL)
+		velocity = _calc_velocity(velocity, move_dir, speed)
+		set_velocity(velocity)
+		set_up_direction(FLOOR_NORMAL)
+		move_and_slide()
+		velocity = velocity
 		
 		animate()
 
@@ -44,7 +47,7 @@ func _on_PlayerDetector_body_exited(_body):
 func get_move_dir() -> Vector2:
 	return Vector2(sign(target.get_global_position().x - global_position.x), -1)
 
-func get_movevelocity(
+func _calc_velocity(
 		linearvelocity: Vector2,
 		move_direction: Vector2,
 		speed: Vector2
@@ -63,10 +66,10 @@ func get_movevelocity(
 
 	if is_on_floor():
 		if friction == true:
-			out.x = lerp(out.x, 0, ground_cof)
+			out.x = lerp(out.x, 0.0, ground_cof)
 	else:
 		if friction == true:
-			out.x = lerp(out.x, 0, air_cof)
+			out.x = lerp(out.x, 0.0, air_cof)
 	return out
 	
 

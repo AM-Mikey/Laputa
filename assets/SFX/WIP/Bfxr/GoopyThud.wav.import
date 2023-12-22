@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/GoopyThud.wav-6f7a6f794e1b5fb75de791e7e59556f5.sample"
+type="AudioStreamWAV"
+uid="uid://lgrayiysbx23"
+path="res://.godot/imported/GoopyThud.wav-6f7a6f794e1b5fb75de791e7e59556f5.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/GoopyThud.wav"
-dest_files=[ "res://.import/GoopyThud.wav-6f7a6f794e1b5fb75de791e7e59556f5.sample" ]
+dest_files=["res://.godot/imported/GoopyThud.wav-6f7a6f794e1b5fb75de791e7e59556f5.sample"]
 
 [params]
 

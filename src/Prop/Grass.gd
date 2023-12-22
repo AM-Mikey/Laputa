@@ -4,10 +4,10 @@ const HEART = preload("res://src/Actor/Pickup/Heart.tscn")
 const EXPERIENCE = preload("res://src/Actor/Pickup/Experience.tscn")
 const AMMO = preload("res://src/Actor/Pickup/Ammo.tscn")
 
-export var drop_chance = 0.1
-export var heart_chance = 1
-export var experience_chance = 1
-export var ammo_chance = 1
+@export var drop_chance = 0.1
+@export var heart_chance = 1
+@export var experience_chance = 1
+@export var ammo_chance = 1
 var rng = RandomNumberGenerator.new()
 
 var one = load("res://assets/Prop/Grass/Grass1.png")
@@ -21,7 +21,7 @@ var broken = false
 
 var wind_time = 2.4
 
-onready var player_actor = get_tree().get_root().get_node_or_null("World/Juniper")
+@onready var player_actor = get_tree().get_root().get_node_or_null("World/Juniper")
 
 func _ready():
 	$WindTimer.start(wind_time)
@@ -41,10 +41,10 @@ func _ready():
 			
 	
 	match num:
-		1: $Sprite.texture = one
-		2: $Sprite.texture = two
-		3: $Sprite.texture = three
-		4: $Sprite.texture = four
+		1: $Sprite2D.texture = one
+		2: $Sprite2D.texture = two
+		3: $Sprite2D.texture = three
+		4: $Sprite2D.texture = four
 	
 
 
@@ -84,9 +84,9 @@ func on_break(method):
 
 
 func do_break_drop():
-	var heart = HEART.instance()
-	var experience = EXPERIENCE.instance()
-	var ammo = AMMO.instance()
+	var heart = HEART.instantiate()
+	var experience = EXPERIENCE.instantiate()
+	var ammo = AMMO.instantiate()
 	
 	rng.randomize()
 	if drop_chance >= rng.randf():

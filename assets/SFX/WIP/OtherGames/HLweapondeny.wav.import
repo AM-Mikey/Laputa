@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/HLweapondeny.wav-d0e0effcc676ada08a94560609db970e.sample"
+type="AudioStreamWAV"
+uid="uid://y4r3sf7j6nm0"
+path="res://.godot/imported/HLweapondeny.wav-d0e0effcc676ada08a94560609db970e.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/HLweapondeny.wav"
-dest_files=[ "res://.import/HLweapondeny.wav-d0e0effcc676ada08a94560609db970e.sample" ]
+dest_files=["res://.godot/imported/HLweapondeny.wav-d0e0effcc676ada08a94560609db970e.sample"]
 
 [params]
 

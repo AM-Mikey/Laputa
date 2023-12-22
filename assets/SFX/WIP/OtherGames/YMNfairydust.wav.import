@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNfairydust.wav-ca14b03e82a3135b0885576aa93daea8.sample"
+type="AudioStreamWAV"
+uid="uid://bdf0fck5q5rmh"
+path="res://.godot/imported/YMNfairydust.wav-ca14b03e82a3135b0885576aa93daea8.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNfairydust.wav"
-dest_files=[ "res://.import/YMNfairydust.wav-ca14b03e82a3135b0885576aa93daea8.sample" ]
+dest_files=["res://.godot/imported/YMNfairydust.wav-ca14b03e82a3135b0885576aa93daea8.sample"]
 
 [params]
 

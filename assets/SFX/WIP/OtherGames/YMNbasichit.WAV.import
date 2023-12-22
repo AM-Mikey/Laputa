@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNbasichit.WAV-7b1ffa1c3d36511f08a7a241964f071c.sample"
+type="AudioStreamWAV"
+uid="uid://c2xkitw6rvx3b"
+path="res://.godot/imported/YMNbasichit.WAV-7b1ffa1c3d36511f08a7a241964f071c.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNbasichit.WAV"
-dest_files=[ "res://.import/YMNbasichit.WAV-7b1ffa1c3d36511f08a7a241964f071c.sample" ]
+dest_files=["res://.godot/imported/YMNbasichit.WAV-7b1ffa1c3d36511f08a7a241964f071c.sample"]
 
 [params]
 

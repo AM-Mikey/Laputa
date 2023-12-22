@@ -1,4 +1,4 @@
-[gd_scene format=2]
+[gd_scene format=3 uid="uid://5f0rh3vdufdg"]
 
 [node name="PosSFX" type="AudioStreamPlayer2D"]
-bus = "SFX"
+bus = &"SFX"

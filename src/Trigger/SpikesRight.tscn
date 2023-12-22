@@ -3,7 +3,7 @@
 [ext_resource path="res://src/Trigger/Spikes.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 6 )
+size = Vector2( 4, 6 )
 
 [node name="SpikesRight" type="Area2D"]
 collision_layer = 0

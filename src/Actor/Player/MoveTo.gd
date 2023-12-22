@@ -6,13 +6,13 @@ var jump_type
 
 
 
-onready var world = get_tree().get_root().get_node("World")
-onready var pc = get_parent().get_parent().get_parent()
-onready var mm = pc.get_node("MovementManager")
-onready var sprite = pc.get_node("Sprite")
-onready var guns = pc.get_node("GunManager/Guns")
-onready var ap = pc.get_node("AnimationPlayer")
-onready var anim = pc.get_node("AnimationManager")
+@onready var world = get_tree().get_root().get_node("World")
+@onready var pc = get_parent().get_parent().get_parent()
+@onready var mm = pc.get_node("MovementManager")
+@onready var sprite = pc.get_node("Sprite2D")
+@onready var guns = pc.get_node("GunManager/Guns")
+@onready var ap = pc.get_node("AnimationPlayer")
+@onready var anim = pc.get_node("AnimationManager")
 
 
 
@@ -20,8 +20,13 @@ func state_process():
 	pc.move_dir.x = sign(mm.move_target.x - pc.position.x) #get direction to move
 	pc.look_dir.x = pc.move_dir.x
 
-	mm.velocity = get_velocity()
-	var new_velocity = pc.move_and_slide_with_snap(mm.velocity, mm.snap_vector, mm.FLOOR_NORMAL, true)
+	mm.velocity = calc_velocity()
+	pc.set_velocity(mm.velocity)
+	# TODOConverter3To4 looks that snap in Godot 4 is float, not vector like in Godot 3 - previous value `mm.snap_vector`
+	pc.set_up_direction(mm.FLOOR_NORMAL)
+	pc.set_floor_stop_on_slope_enabled(true)
+	pc.move_and_slide()
+	var new_velocity = pc.velocity
 	if pc.is_on_wall():
 		new_velocity.y = max(mm.velocity.y, new_velocity.y)
 		
@@ -30,13 +35,13 @@ func state_process():
 
 
 #	if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
-#		mm.bonk("bonk")
+#		mm.bonk("head")
 
 #	if pc.is_on_floor():
 #		if mm.forgive_timer.time_left == 0:
 #			mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
 #			if mm.bonk_timeout.time_left == 0:
-#				mm.bonk("Land")
+#				mm.bonk("feet")
 #		mm.forgive_timer.start(mm.forgiveness_time)
 
 
@@ -52,7 +57,7 @@ func state_process():
 
 
 
-func get_velocity():
+func calc_velocity():
 	var out = mm.velocity
 	out.y += mm.gravity * get_physics_process_delta_time()
 	out.x = min(abs(out.x) + mm.acceleration, mm.speed.x) * pc.move_dir.x
@@ -89,9 +94,9 @@ func animate():
 	
 	
 	if animation == "run" or animation == "crouch_run":
-		ap.playback_speed = max((abs(mm.velocity.x)/mm.speed.x) * 2, 0.1)
+		ap.speed_scale = max((abs(mm.velocity.x)/mm.speed.x) * 2, 0.1)
 	else:
-		ap.playback_speed = 1
+		ap.speed_scale = 1
 	
 	anim.set_gun_draw_index()
 	sprite.frame_coords.y = vframe

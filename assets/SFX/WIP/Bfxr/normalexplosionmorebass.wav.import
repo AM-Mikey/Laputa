@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/normalexplosionmorebass.wav-608c2efd4b1ce8cc8cabad79d18dedaa.sample"
+type="AudioStreamWAV"
+uid="uid://d5rg1v8o0qia"
+path="res://.godot/imported/normalexplosionmorebass.wav-608c2efd4b1ce8cc8cabad79d18dedaa.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/normalexplosionmorebass.wav"
-dest_files=[ "res://.import/normalexplosionmorebass.wav-608c2efd4b1ce8cc8cabad79d18dedaa.sample" ]
+dest_files=["res://.godot/imported/normalexplosionmorebass.wav-608c2efd4b1ce8cc8cabad79d18dedaa.sample"]
 
 [params]
 

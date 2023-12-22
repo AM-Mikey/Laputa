@@ -1,31 +1,34 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://bf3lvcu6ts2nr"]
 
-[ext_resource path="res://assets/Gun/RevolverIcon.png" type="Texture" id=1]
-[ext_resource path="res://src/UI/HUD/GunIcon.gd" type="Script" id=2]
-[ext_resource path="res://assets/Gun/TurnstileJumperIcon.png" type="Texture" id=3]
-[ext_resource path="res://src/Shader/SimpleOutline.gdshader" type="Shader" id=4]
+[ext_resource type="Texture2D" uid="uid://cl7uidhdx20wc" path="res://assets/Gun/RevolverIcon.png" id="1"]
+[ext_resource type="Script" path="res://src/UI/HUD/GunIcon.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://vejpksdsg6hk" path="res://assets/Gun/TurnstileJumperIcon.png" id="3"]
+[ext_resource type="Shader" path="res://src/Shader/SimpleOutline.gdshader" id="4"]
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 4 )
-shader_param/color = Color( 1, 1, 1, 1 )
-shader_param/width = 1.0
-shader_param/pattern = 0
-shader_param/inside = false
-shader_param/add_margins = true
+[sub_resource type="ShaderMaterial" id="1"]
+shader = ExtResource("4")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [node name="WeaponIcon" type="TextureRect"]
-material = SubResource( 1 )
-margin_right = 40.0
-margin_bottom = 40.0
-texture = ExtResource( 3 )
-script = ExtResource( 2 )
+material = SubResource("1")
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3")
+stretch_mode = 2
+script = ExtResource("2")
 
 [node name="Shadow" type="TextureRect" parent="."]
 visible = false
-modulate = Color( 0, 0, 0, 1 )
+modulate = Color(0, 0, 0, 1)
 show_behind_parent = true
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 41.0
-margin_bottom = 41.0
-texture = ExtResource( 1 )
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 41.0
+offset_bottom = 41.0
+texture = ExtResource("1")
+stretch_mode = 2

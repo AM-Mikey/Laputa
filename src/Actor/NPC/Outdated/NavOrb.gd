@@ -13,7 +13,7 @@ var nav_point_index = 0
 
 var no_jump_time = 0.5
 
-onready var navigation = get_parent().get_parent().get_node("Tiles").get_node("Navigation2D")
+@onready var navigation = get_parent().get_parent().get_node("Tiles").get_node("Navigation2D")
 
 func _ready():
 	speed = Vector2(75, 75)
@@ -47,7 +47,7 @@ func get_next_nav_point():
 	
 	for t in get_tree().get_nodes_in_group("TargetVisuals"):
 		t.free()
-	var target_visual = TARGETVISUAL.instance()
+	var target_visual = TARGETVISUAL.instantiate()
 	target_visual.global_position = nav_point
 	get_tree().get_root().get_node("World/Front").add_child(target_visual)
 	
@@ -89,7 +89,7 @@ func _input(event):
 		
 		var new_path = navigation.get_simple_path(global_position, nav_final_point)
 		
-		var navigation_line = NAVIGATIONLINE.instance()
+		var navigation_line = NAVIGATIONLINE.instantiate()
 		#navigation_line.global_position = global_position
 		get_tree().get_root().get_node("World/Front").add_child(navigation_line)
 		

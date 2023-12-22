@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNalieninvasion.wav-2758cc576abaf135281a67023776abbf.sample"
+type="AudioStreamWAV"
+uid="uid://lmqm61fq4i1q"
+path="res://.godot/imported/YMNalieninvasion.wav-2758cc576abaf135281a67023776abbf.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNalieninvasion.wav"
-dest_files=[ "res://.import/YMNalieninvasion.wav-2758cc576abaf135281a67023776abbf.sample" ]
+dest_files=["res://.godot/imported/YMNalieninvasion.wav-2758cc576abaf135281a67023776abbf.sample"]
 
 [params]
 

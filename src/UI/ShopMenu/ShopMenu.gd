@@ -2,12 +2,12 @@ extends MarginContainer
 
 const CURSOR = preload("res://src/UI/ShopMenu/Cursor.tscn")
 
-export(NodePath) var items
+@export var items: NodePath
 
 func _ready():
-	focus()
+	do_focus()
 
-func focus():
+func do_focus():
 	get_node(items).get_child(0).grab_focus()
 #	cursor_select(0)
 #

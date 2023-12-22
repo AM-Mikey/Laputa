@@ -1,330 +1,220 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://bdt0hp441qxe3"]
 
-[ext_resource path="res://src/UI/Theme/InsetMenu.tres" type="Theme" id=1]
-[ext_resource path="res://src/UI/Options/ActionOption.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/UI/StyleBox/SteelBeveledDark.tres" type="StyleBox" id=3]
-[ext_resource path="res://src/UI/StyleBox/SteelCorner.tres" type="StyleBox" id=4]
-[ext_resource path="res://src/UI/Options/ControllerConfig.gd" type="Script" id=5]
-[ext_resource path="res://assets/UI/Settings/ControllerConfig/FrontBack.png" type="Texture" id=6]
-[ext_resource path="res://src/UI/StyleBox/SteelBeveled.tres" type="StyleBox" id=7]
-[ext_resource path="res://assets/UI/Settings/ControllerConfig/TopBack.png" type="Texture" id=14]
+[ext_resource type="Theme" path="res://src/UI/Theme/InsetMenu.tres" id="1"]
+[ext_resource type="PackedScene" uid="uid://dllnonvd2winm" path="res://src/UI/Options/ActionOption.tscn" id="2"]
+[ext_resource type="StyleBox" uid="uid://bqcnin0ya0s5l" path="res://src/UI/StyleBox/SteelCorner.tres" id="4"]
+[ext_resource type="Script" path="res://src/UI/Options/ControllerConfig.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://diafdejhbs5fg" path="res://assets/UI/Settings/ControllerConfig/FrontBack.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://ds8cfh1qceedo" path="res://assets/UI/Settings/ControllerConfig/TopBack.png" id="14"]
 
 [node name="ControllerConfig" type="MarginContainer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = 2.0
-theme = ExtResource( 1 )
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_bottom = 2.0
+theme = ExtResource("1")
+script = ExtResource("5")
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 480.0
-margin_bottom = 272.0
+layout_mode = 2
 
 [node name="Margin" type="MarginContainer" parent="."]
-margin_right = 480.0
-margin_bottom = 272.0
-custom_constants/margin_right = 4
-custom_constants/margin_top = 4
-custom_constants/margin_left = 4
-custom_constants/margin_bottom = 4
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
 [node name="Top" type="TextureRect" parent="Margin"]
-margin_left = 252.0
-margin_top = 4.0
-margin_right = 476.0
-margin_bottom = 84.0
+layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-texture = ExtResource( 14 )
+texture = ExtResource("14")
 
 [node name="Front" type="TextureRect" parent="Margin"]
-margin_left = 4.0
-margin_top = 124.0
-margin_right = 228.0
-margin_bottom = 268.0
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
-texture = ExtResource( 6 )
+texture = ExtResource("6")
 
 [node name="Sprites" type="VBoxContainer" parent="Margin"]
 visible = false
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 476.0
-margin_bottom = 268.0
+layout_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Margin/Sprites"]
-margin_left = 472.0
-margin_right = 472.0
+layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Margin/Sprites"]
-margin_top = 4.0
-margin_bottom = 4.0
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Controls" type="HBoxContainer" parent="Margin"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 476.0
-margin_bottom = 268.0
+layout_mode = 2
 
 [node name="Front" type="VBoxContainer" parent="Margin/Controls"]
-margin_right = 234.0
-margin_bottom = 264.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Margin/Controls/Front"]
-margin_right = 234.0
-margin_bottom = 77.0
+layout_mode = 2
 
 [node name="Dpad" type="VBoxContainer" parent="Margin/Controls/Front/HBoxContainer"]
 visible = false
-margin_left = 43.0
-margin_right = 75.0
-margin_bottom = 77.0
+layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="DpadUp" parent="Margin/Controls/Front/HBoxContainer/Dpad" instance=ExtResource( 2 )]
-margin_left = 9.0
-margin_right = 23.0
-margin_bottom = 23.0
+[node name="DpadUp" parent="Margin/Controls/Front/HBoxContainer/Dpad" instance=ExtResource("2")]
+layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="HBox" type="HBoxContainer" parent="Margin/Controls/Front/HBoxContainer/Dpad"]
-margin_top = 27.0
-margin_right = 32.0
-margin_bottom = 50.0
+layout_mode = 2
 
-[node name="DpadLeft" parent="Margin/Controls/Front/HBoxContainer/Dpad/HBox" instance=ExtResource( 2 )]
-margin_bottom = 23.0
+[node name="DpadLeft" parent="Margin/Controls/Front/HBoxContainer/Dpad/HBox" instance=ExtResource("2")]
+layout_mode = 2
 
-[node name="DpadRight" parent="Margin/Controls/Front/HBoxContainer/Dpad/HBox" instance=ExtResource( 2 )]
-margin_left = 18.0
-margin_right = 32.0
-margin_bottom = 23.0
+[node name="DpadRight" parent="Margin/Controls/Front/HBoxContainer/Dpad/HBox" instance=ExtResource("2")]
+layout_mode = 2
 
-[node name="DpadDown" parent="Margin/Controls/Front/HBoxContainer/Dpad" instance=ExtResource( 2 )]
-margin_left = 9.0
-margin_top = 54.0
-margin_right = 23.0
-margin_bottom = 77.0
+[node name="DpadDown" parent="Margin/Controls/Front/HBoxContainer/Dpad" instance=ExtResource("2")]
+layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="Menu" type="HBoxContainer" parent="Margin/Controls/Front/HBoxContainer"]
-margin_left = 41.0
-margin_top = 27.0
-margin_right = 73.0
-margin_bottom = 50.0
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 
-[node name="Select" parent="Margin/Controls/Front/HBoxContainer/Menu" instance=ExtResource( 2 )]
-margin_bottom = 23.0
+[node name="Select" parent="Margin/Controls/Front/HBoxContainer/Menu" instance=ExtResource("2")]
+layout_mode = 2
 
-[node name="Start" parent="Margin/Controls/Front/HBoxContainer/Menu" instance=ExtResource( 2 )]
-margin_left = 18.0
-margin_right = 32.0
-margin_bottom = 23.0
+[node name="Start" parent="Margin/Controls/Front/HBoxContainer/Menu" instance=ExtResource("2")]
+layout_mode = 2
 
 [node name="Face" type="VBoxContainer" parent="Margin/Controls/Front/HBoxContainer"]
-margin_left = 202.0
-margin_right = 234.0
-margin_bottom = 77.0
+layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="FaceUp" parent="Margin/Controls/Front/HBoxContainer/Face" instance=ExtResource( 2 )]
-margin_left = 9.0
-margin_right = 23.0
-margin_bottom = 23.0
+[node name="FaceUp" parent="Margin/Controls/Front/HBoxContainer/Face" instance=ExtResource("2")]
+layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="HBox" type="HBoxContainer" parent="Margin/Controls/Front/HBoxContainer/Face"]
-margin_top = 27.0
-margin_right = 32.0
-margin_bottom = 50.0
+layout_mode = 2
 
-[node name="FaceLeft" parent="Margin/Controls/Front/HBoxContainer/Face/HBox" instance=ExtResource( 2 )]
-margin_bottom = 23.0
+[node name="FaceLeft" parent="Margin/Controls/Front/HBoxContainer/Face/HBox" instance=ExtResource("2")]
+layout_mode = 2
 
-[node name="FaceRight" parent="Margin/Controls/Front/HBoxContainer/Face/HBox" instance=ExtResource( 2 )]
-margin_left = 18.0
-margin_right = 32.0
-margin_bottom = 23.0
+[node name="FaceRight" parent="Margin/Controls/Front/HBoxContainer/Face/HBox" instance=ExtResource("2")]
+layout_mode = 2
 
-[node name="FaceDown" parent="Margin/Controls/Front/HBoxContainer/Face" instance=ExtResource( 2 )]
-margin_left = 9.0
-margin_top = 54.0
-margin_right = 23.0
-margin_bottom = 77.0
+[node name="FaceDown" parent="Margin/Controls/Front/HBoxContainer/Face" instance=ExtResource("2")]
+layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="TextureRect" type="TextureRect" parent="Margin/Controls/Front"]
 visible = false
-margin_top = 84.0
-margin_right = 224.0
-margin_bottom = 228.0
+layout_mode = 2
 size_flags_vertical = 8
-texture = ExtResource( 6 )
+texture = ExtResource("6")
 
 [node name="Top" type="VBoxContainer" parent="Margin/Controls"]
-margin_left = 238.0
-margin_right = 472.0
-margin_bottom = 264.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Control" type="Control" parent="Margin/Controls/Top"]
-margin_right = 234.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 0, 80 )
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="Margin/Controls/Top"]
 visible = false
-margin_top = 132.0
-margin_right = 264.0
-margin_bottom = 212.0
+layout_mode = 2
 size_flags_vertical = 0
-texture = ExtResource( 14 )
+texture = ExtResource("14")
 
 [node name="Top" type="HBoxContainer" parent="Margin/Controls/Top"]
-margin_top = 84.0
-margin_right = 234.0
-margin_bottom = 134.0
+layout_mode = 2
 
 [node name="Left" type="VBoxContainer" parent="Margin/Controls/Top/Top"]
-margin_left = 30.0
-margin_right = 44.0
-margin_bottom = 50.0
+layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="L1" parent="Margin/Controls/Top/Top/Left" instance=ExtResource( 2 )]
-margin_bottom = 23.0
+[node name="L1" parent="Margin/Controls/Top/Top/Left" instance=ExtResource("2")]
+layout_mode = 2
 
-[node name="L2" parent="Margin/Controls/Top/Top/Left" instance=ExtResource( 2 )]
-margin_top = 27.0
-margin_bottom = 50.0
+[node name="L2" parent="Margin/Controls/Top/Top/Left" instance=ExtResource("2")]
+layout_mode = 2
 
 [node name="Stick" type="HBoxContainer" parent="Margin/Controls/Top/Top"]
-margin_left = 100.0
-margin_top = 13.0
-margin_right = 132.0
-margin_bottom = 36.0
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 
-[node name="L3" parent="Margin/Controls/Top/Top/Stick" instance=ExtResource( 2 )]
-margin_bottom = 23.0
+[node name="L3" parent="Margin/Controls/Top/Top/Stick" instance=ExtResource("2")]
+layout_mode = 2
 
-[node name="R3" parent="Margin/Controls/Top/Top/Stick" instance=ExtResource( 2 )]
-margin_left = 18.0
-margin_right = 32.0
-margin_bottom = 23.0
+[node name="R3" parent="Margin/Controls/Top/Top/Stick" instance=ExtResource("2")]
+layout_mode = 2
 
 [node name="Right" type="VBoxContainer" parent="Margin/Controls/Top/Top"]
-margin_left = 189.0
-margin_right = 203.0
-margin_bottom = 50.0
+layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="R1" parent="Margin/Controls/Top/Top/Right" instance=ExtResource( 2 )]
-margin_bottom = 23.0
+[node name="R1" parent="Margin/Controls/Top/Top/Right" instance=ExtResource("2")]
+layout_mode = 2
 
-[node name="R2" parent="Margin/Controls/Top/Top/Right" instance=ExtResource( 2 )]
-margin_top = 27.0
-margin_bottom = 50.0
+[node name="R2" parent="Margin/Controls/Top/Top/Right" instance=ExtResource("2")]
+layout_mode = 2
 
 [node name="Extra" type="HBoxContainer" parent="Margin/Controls/Top"]
-margin_top = 138.0
-margin_right = 234.0
-margin_bottom = 192.0
+layout_mode = 2
 
 [node name="MenuButtons" type="VBoxContainer" parent="Margin/Controls/Top/Extra"]
-margin_right = 72.0
-margin_bottom = 54.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="Margin/Controls/Top/Extra/MenuButtons"]
-margin_right = 72.0
-margin_bottom = 14.0
+layout_mode = 2
 text = "Select Style"
 
 [node name="OptionButton" type="OptionButton" parent="Margin/Controls/Top/Extra/MenuButtons"]
-margin_top = 18.0
-margin_right = 72.0
-margin_bottom = 54.0
+layout_mode = 2
 size_flags_horizontal = 3
-text = "Xbox"
-items = [ "Xbox", null, false, 0, null, "Nintendo", null, false, 1, null ]
-selected = 0
 
 [node name="MenuButtons3" type="VBoxContainer" parent="Margin/Controls/Top/Extra"]
-margin_left = 76.0
-margin_right = 140.0
-margin_bottom = 54.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="Margin/Controls/Top/Extra/MenuButtons3"]
-margin_right = 64.0
-margin_bottom = 14.0
+layout_mode = 2
 text = "Movement"
 
 [node name="OptionButton" type="OptionButton" parent="Margin/Controls/Top/Extra/MenuButtons3"]
-margin_top = 18.0
-margin_right = 64.0
-margin_bottom = 54.0
+layout_mode = 2
 size_flags_horizontal = 3
-text = "Either"
-items = [ "Either", null, false, 0, null, "Left Stick", null, false, 1, null, "Dpad", null, false, 2, null ]
-selected = 0
 
 [node name="Corner" type="Panel" parent="."]
-margin_left = 352.0
-margin_top = 224.0
-margin_right = 480.0
-margin_bottom = 272.0
-rect_min_size = Vector2( 128, 48 )
+custom_minimum_size = Vector2(128, 48)
+layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 10
-custom_styles/panel = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme_override_styles/panel = ExtResource("4")
 
 [node name="Margin" type="MarginContainer" parent="Corner"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 128.0
-margin_bottom = 48.0
-custom_constants/margin_right = 4
-custom_constants/margin_top = 4
-custom_constants/margin_left = 4
-custom_constants/margin_bottom = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 128.0
+offset_bottom = 48.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
 [node name="HBox" type="HBoxContainer" parent="Corner/Margin"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 116.0
-margin_bottom = 36.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Return" type="Button" parent="Corner/Margin/HBox"]
-margin_right = 55.0
-margin_bottom = 32.0
-custom_colors/font_color = Color( 0.968627, 0.886275, 0.717647, 1 )
-custom_styles/hover = ExtResource( 7 )
-custom_styles/focus = ExtResource( 7 )
-custom_styles/normal = ExtResource( 3 )
-text = "Return"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[connection signal="pressed" from="Corner/Margin/HBox/Return" to="." method="_on_Return_pressed"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.968627, 0.886275, 0.717647, 1)

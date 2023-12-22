@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/FFcarroar.ogg-67f8e35f00fb1838620b4e08ef1b0f4e.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://rrcw8crnn1it"
+path="res://.godot/imported/FFcarroar.ogg-67f8e35f00fb1838620b4e08ef1b0f4e.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/FFcarroar.ogg"
-dest_files=[ "res://.import/FFcarroar.ogg-67f8e35f00fb1838620b4e08ef1b0f4e.oggstr" ]
+dest_files=["res://.godot/imported/FFcarroar.ogg-67f8e35f00fb1838620b4e08ef1b0f4e.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

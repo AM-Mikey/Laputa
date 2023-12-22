@@ -1,6 +1,6 @@
 extends Bullet
 
-var texture: StreamTexture
+var texture: CompressedTexture2D
 var texture_index: int
 var collision_shape: RectangleShape2D
 
@@ -12,17 +12,13 @@ var touched_floor = false
 
 
 
-onready var w = get_tree().get_root().get_node("World")
-onready var pc = w.get_node("Juniper")
+@onready var w = get_tree().get_root().get_node("World")
+@onready var pc = w.get_node("Juniper")
 
 
 
 func _ready():
 	break_method = "cut"
-	default_area_collision = false
-	default_body_collision = false
-	default_clear = false
-	
 
 	velocity = get_initial_velocity()
 	start_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
@@ -42,15 +38,15 @@ func _physics_process(delta):
 		if collision:
 			if abs(velocity.y) > minimum_speed:
 				velocity *= bounciness
-				velocity = velocity.bounce(collision.normal)
-				am.play_pos("gun_star_bounce", self)
+				velocity = velocity.bounce(collision.get_normal())
+				am.play("gun_star_bounce", self)
 			else:
 				velocity = Vector2.ZERO
 	
 	
 	var avr_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
-	$AnimationPlayer.playback_speed = avr_velocity / start_velocity
-	if $AnimationPlayer.playback_speed < .1:
+	$AnimationPlayer.speed_scale = avr_velocity / start_velocity
+	if $AnimationPlayer.speed_scale < .1:
 		$AnimationPlayer.stop()
 
 
@@ -70,16 +66,20 @@ func get_initial_velocity() -> Vector2:
 
 ### SIGNALS ###
 
-func _on_CollisionDetector_body_entered(body):
-	if disabled: return
-	#enemy
-	if body.get_collision_layer_bit(1): 
-		if not touched_floor:
-			body.hit(damage, get_blood_dir(body))
-		else:
-			body.hit(damage/2, get_blood_dir(body))
-		queue_free()
+func _on_CollisionDetector_body_entered(body): #shadows
+	if disabled:
+		return
+	if not body is TileMap:
+		#enemy
+		if body.get_collision_layer_value(2): 
+			if not touched_floor:
+				body.hit(damage, get_blood_dir(body))
+			else:
+				body.hit(int(damage/2), get_blood_dir(body))
+			queue_free()
 
+func _on_CollisionDetector_area_entered(_area): #shadows
+	pass
 
 func _on_FizzleTimer_timeout():
-	fizzle("range")
+	do_fizzle("range")

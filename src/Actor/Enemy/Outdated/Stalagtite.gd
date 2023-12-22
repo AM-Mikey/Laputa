@@ -2,15 +2,15 @@ extends Enemy
 
 var target: Node
 
-export var look_dir: Vector2 = Vector2.LEFT
+@export var look_dir: Vector2 = Vector2.LEFT
 var move_dir: Vector2 = Vector2.UP #start moving upwards constantly
 
 var dropped = false
 var panic_run = false
 var touchdown = false
 
-export var base_damage = 2
-export var falling_damage = 4
+@export var base_damage = 2
+@export var falling_damage = 4
 
 func _ready():
 	hp = 2
@@ -28,15 +28,15 @@ func setup_collision():
 	if tilemap != null:
 		var target_pos = global_position
 		var local_pos = tilemap.to_local(target_pos)
-		var map_pos = tilemap.world_to_map(local_pos)
-		var target_cell = tilemap.get_cellv(map_pos)
+		var map_pos = tilemap.local_to_map(local_pos)
+		var target_cell = tilemap.get_cell_source_id(0, map_pos)
 		
 		var detector_length = 0
 		
 		while target_cell == -1:
 			detector_length += 1
 			map_pos.y += 1
-			target_cell = tilemap.get_cellv(map_pos)
+			target_cell = tilemap.get_cell_source_id(0, map_pos)
 				
 		$PlayerDetector.scale.y = detector_length
 		print("dl: ", detector_length)
@@ -46,13 +46,16 @@ func setup_collision():
 func _physics_process(_delta):
 	if not dead:
 		velocity = calculate_movevelocity(velocity, move_dir, speed)
-		velocity = move_and_slide(velocity, FLOOR_NORMAL)
+		set_velocity(velocity)
+		set_up_direction(FLOOR_NORMAL)
+		move_and_slide()
+		velocity = velocity
 		
 		if dropped == true:
 			if is_on_floor() and touchdown == false: #check to see if they've landed before
 				touchdown = true
 				$PlayerDetector.queue_free()
-				yield(get_tree().create_timer(0.01), "timeout") #delay to change damage back to base
+				await get_tree().create_timer(0.01).timeout #delay to change damage back to base
 				damage_on_contact = base_damage
 				
 				if look_dir == Vector2.LEFT:
@@ -60,7 +63,7 @@ func _physics_process(_delta):
 				elif look_dir == Vector2.RIGHT:
 					$AnimationPlayer.play("SquirmRight")
 				
-				yield($AnimationPlayer, "animation_finished")
+				await $AnimationPlayer.animation_finished
 				
 				panic_run = true
 				move_dir.x = look_dir.x

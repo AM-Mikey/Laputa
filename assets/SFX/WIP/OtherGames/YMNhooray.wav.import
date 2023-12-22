@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/YMNhooray.wav-987c8d729122766aa55fb1c38925970e.sample"
+type="AudioStreamWAV"
+uid="uid://bhrgjv8anj516"
+path="res://.godot/imported/YMNhooray.wav-987c8d729122766aa55fb1c38925970e.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/OtherGames/YMNhooray.wav"
-dest_files=[ "res://.import/YMNhooray.wav-987c8d729122766aa55fb1c38925970e.sample" ]
+dest_files=["res://.godot/imported/YMNhooray.wav-987c8d729122766aa55fb1c38925970e.sample"]
 
 [params]
 

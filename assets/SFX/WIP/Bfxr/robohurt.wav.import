@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/robohurt.wav-03b22fe52fc656b7decdfad035498e42.sample"
+type="AudioStreamWAV"
+uid="uid://25tf1p8bni3k"
+path="res://.godot/imported/robohurt.wav-03b22fe52fc656b7decdfad035498e42.sample"
 
 [deps]
 
 source_file="res://assets/SFX/WIP/Bfxr/robohurt.wav"
-dest_files=[ "res://.import/robohurt.wav-03b22fe52fc656b7decdfad035498e42.sample" ]
+dest_files=["res://.godot/imported/robohurt.wav-03b22fe52fc656b7decdfad035498e42.sample"]
 
 [params]
 
