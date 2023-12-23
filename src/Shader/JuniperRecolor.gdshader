@@ -26,4 +26,4 @@ void fragment() {
 		color = texture(SCREEN_TEXTURE, SCREEN_UV);
 	}
 	COLOR = swap_color(color);
-}
+	}

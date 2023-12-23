@@ -52,8 +52,7 @@ func animate():
 	var animation = "inspect"
 	
 	if not ap.is_playing() or ap.current_animation != animation:
-		ap.play(animation)
-		ap.speed_scale = 1
+		ap.play(animation, 0.0, 1.0)
 	
 	
 	var vframe: int

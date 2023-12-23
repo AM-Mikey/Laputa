@@ -91,7 +91,7 @@ func calc_velocity():
 
 
 func animate():
-	var blend_time = 0
+
 	
 	
 	var animation = "run"
@@ -102,15 +102,13 @@ func animate():
 	if pc.move_dir.x == 0: #abs(mm.velocity.x) < mm.min_x_velocity:
 		animation = "stand"
 
-
-	
+	var blend_time = 0.0
 	if not ap.is_playing() or ap.current_animation != animation:
-		for g in anim.blend_array:
-			if g.has(animation) and g.has(ap.current_animation):
-				print("blending")
+		for group in anim.blend_array:
+			if group.has(animation) and group.has(ap.current_animation):
+				print("blending animation")
 				blend_time = ap.current_animation_position #only blend certain animations
-		ap.play(animation)
-		ap.seek(blend_time)
+		ap.play(animation, blend_time, 1.0)
 
 	
 	

@@ -52,7 +52,7 @@ func change_animation(animation: String, random_start = false):
 		rng.randomize()
 		start_time = rng.randf_range(0, $AnimationPlayer.current_animation_length)
 	
-	$AnimationPlayer.seek(start_time, true)
+	$AnimationPlayer.seek(start_time)
 
 
 
