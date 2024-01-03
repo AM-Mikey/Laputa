@@ -42,13 +42,14 @@ func _physics_process(_delta):
 		$VBox/HBox/C1/A/Velocity.text = str("%4.f" % mm.velocity.x) + "," + str("%4.f" % mm.velocity.y)
 		$VBox/HBox/C1/A/Speed.text = str("%4.f" % mm.speed.x) + "," + str("%4.f" % mm.speed.y)
 		$VBox/HBox/C1/A/Gravity.text = str("%.f" % mm.gravity)
-		$VBox/HBox/C1/A/Pos.text = str("%4.3f" % pc.global_position.x) + "," + str("%4.3f" % pc.global_position.y)
+		$VBox/HBox/C1/A/Pos.text = str("%4.2f" % pc.global_position.x) + "," + str("%4.2f" % pc.global_position.y)
 		$VBox/HBox/C1/A/Animation.text = str(pc.get_node("AnimationPlayer").current_animation)
 		$VBox/HBox/C1/A/State.text = str(pc.get_node("MovementManager").current_state.name)
 
-		$VBox/HBox/C1/A/MoveDir.text = str("%2.f" % pc.move_dir.x) + "," + str("%2.f" % pc.move_dir.y)
-		$VBox/HBox/C1/A/FaceDir.text = str("%2.f" % pc.look_dir.x) + "," + str("%2.f" % pc.look_dir.y)
-		$VBox/HBox/C1/A/ShootDir.text = str("%2.f" % pc.shoot_dir.x) + "," + str("%2.f" % pc.shoot_dir.y)
+		$VBox/HBox/C1/A/MoveDir.text = str("%4.1f" % pc.move_dir.x) + "," + str("%4.1f" % pc.move_dir.y)
+		$VBox/HBox/C1/A/LookDir.text = str("%4d" % pc.look_dir.x) + "," + str("%4d" % pc.look_dir.y)
+		$VBox/HBox/C1/A/LockDir.text = str("%4d" % pc.direction_lock.x) + "," + str("%4d" % pc.direction_lock.y)
+		$VBox/HBox/C1/A/ShootDir.text = str("%4.1f" % pc.shoot_dir.x) + "," + str("%4.1f" % pc.shoot_dir.y)
 
 
 		$VBox/HBox/C2/A/CameraPos.text = str("%4.f" % pc.get_node("PlayerCamera").get_screen_center_position().x) + "," + str("%4.f" % pc.get_node("PlayerCamera").get_screen_center_position().y)
@@ -58,6 +59,7 @@ func _physics_process(_delta):
 		$VBox/HBox/C2/A/Invincible.text = str(pc.invincible)
 		#$VBox/HBox/C2/A/Inspect.text = str(pc.inspecting)
 		$VBox/HBox/C2/A/Floor.text = str(pc.is_on_floor())
+		$VBox/HBox/C2/A/Crouch.text = str(pc.is_crouching)
 		$VBox/HBox/C2/A/SSP.text = str(pc.is_on_ssp)
 		$VBox/HBox/C2/A/Water.text = str(pc.is_in_water)
 		
@@ -81,7 +83,7 @@ func on_audio_players_updated():
 	_clear_array(array)
 	for p in am.sfx_queue:
 		var label = Label.new()
-		label.text = p
+		label.text = p[1] #sfx name
 		array.add_child(label)
 
 

@@ -102,8 +102,8 @@ func get_origin() -> Vector2: #bullet comes from origin, aligned with the muzzle
 	var bullet_origin = pc.get_node("BulletOrigin").global_position
 	var out = $Muzzle.global_position
 	
-	if pc.shoot_dir.x != 0: #left or right
+	if pc.shoot_dir.x != 0.0: #left or right
 		out.x = bullet_origin.x
-	elif pc.shoot_dir.y != 0: #up or down
+	elif pc.shoot_dir.y != 0.0: #up or down
 		out.y = bullet_origin.y
 	return out

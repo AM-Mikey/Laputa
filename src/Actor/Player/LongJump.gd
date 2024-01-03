@@ -42,120 +42,120 @@ func state_process():
 
 
 func set_player_directions():
-	var input_dir: Vector2
-	match pc.controller_id:
-		#juniper
-		0: input_dir = Vector2(\
+	var input_dir = Vector2(\
 			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),\
 			Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
-		#sasuke
-		1: input_dir = Vector2(\
-			Input.get_action_strength("sasuke_right") - Input.get_action_strength("sasuke_left"),\
-			Input.get_action_strength("sasuke_down") - Input.get_action_strength("sasuke_up"))
 	
 	#get move dir
-	var out_y = 0.0
+	var out_y = 0
 	if mm.coyote_timer.time_left > 0:
 		mm.coyote_timer.stop()
-		out_y = -1.0
+		out_y = -1
 	if pc.is_on_floor():
-		out_y = -1.0
+		out_y = -1
 	pc.move_dir = Vector2(input_dir.x, out_y)
 	
 	#get look dir
-	if pc.move_dir.x != 0:
-		pc.look_dir = Vector2(pc.move_dir.x, input_dir.y)
+	if pc.move_dir.x != 0.0:
+		pc.look_dir = Vector2i(sign(pc.move_dir.x), input_dir.y)
 	else:
-		pc.look_dir = Vector2(pc.look_dir.x, input_dir.y)
-	if pc.direction_lock != Vector2.ZERO:
+		pc.look_dir = Vector2i(pc.look_dir.x, input_dir.y)
+	if pc.direction_lock != Vector2i.ZERO:
 		pc.look_dir = pc.direction_lock
 
 
 	#get shoot dir
 	if pc.is_on_ssp:
 		if pc.look_dir.y != 0: #up or down
-			pc.shoot_dir = Vector2(0, pc.look_dir.y)
+			pc.shoot_dir = Vector2(0.0, pc.look_dir.y)
 		else:
 			pc.shoot_dir = pc.look_dir
 
 
+func animate():
+	var animation: String
+	var reference_texture = preload("res://assets/Actor/Player/AerialNew.png")
+	var do_back = false
+	if pc.direction_lock != Vector2i.ZERO and pc.direction_lock.x != sign(pc.velocity.x) and abs(pc.velocity.x) > 0.1:
+		reference_texture = preload("res://assets/Actor/Player/BackAerialNew.png")
+		do_back = true
+	
+	if abs(mm.velocity.y) < 20:
+		animation = "back_aerial_top" if do_back else "aerial_top"
+	elif mm.velocity.y < 0:
+		animation = "back_aerial_rise" if do_back else "aerial_rise"
+	elif mm.velocity.y > 0:
+		animation = "back_aerial_fall" if do_back else "aerial_fall"
+
+	#for runtime, set the frame counts before the animation starts
+	sprite.hframes = int(reference_texture.get_width() / 32.0)
+	sprite.vframes = int(reference_texture.get_height() / 32.0)
+
+	#anim.set_gun_draw_index()
+	var vframe = get_vframe()
+	sprite.frame_coords.y = vframe
+	#guns.position = anim.get_gun_pos(animation, vframe, sprite.frame_coords.x) #changes the gun sprite every time animate is called
+	
+	if not ap.is_playing() or ap.current_animation != animation:
+		ap.stop()
+		ap.play(animation, 0.0, 1.0)
+
+
+
+### GETTERS ###
 
 func calc_velocity(is_jump_interrupted):
 	var out = mm.velocity
-	var friction = false
-	
+	#Y
 	out.y += mm.gravity * get_physics_process_delta_time()
-	if pc.move_dir.y < 0: #going up
+	if sign(pc.move_dir.y) == -1:
 		out.y = mm.speed.y * pc.move_dir.y
 	if is_jump_interrupted:
 		out.y += mm.gravity * get_physics_process_delta_time()
-	
-	
-	
-	if pc.move_dir.x != mm.jump_starting_move_dir_x: #if we turn around, cancel min_dir_timer
+	#X
+	if sign(pc.move_dir.x) != mm.jump_starting_move_dir_x: #if we turn around, cancel min_dir_timer
 		mm.min_dir_timer.stop()
 #	if pc.is_on_wall(): #TODO: consider stopping min dir if we hit a wall #there are other problems here, like the fact we dont drop vel if we hit a wall
 #		print("hit wall, cancelling")
 #		mm.min_dir_timer.stop()
-	
 	if not mm.min_dir_timer.is_stopped(): #still doing min direction time
 		out.x = mm.speed.x * mm.jump_starting_move_dir_x
-	
-	
 	else: #min direction time bypassed
-		if pc.move_dir.x != 0:
-			if pc.move_dir.x != mm.jump_starting_move_dir_x: #if we're not facing out start dir, slow down
+		if pc.move_dir.x != 0.0:
+			if sign(pc.move_dir.x) != mm.jump_starting_move_dir_x: #if we're not facing out start dir, slow down
 				out.x = min(abs(out.x) + mm.acceleration, (mm.speed.x * 0.5)) * pc.move_dir.x
 			else:
 				out.x = min(abs(out.x) + mm.acceleration, mm.speed.x) * pc.move_dir.x
 		else:
-			friction = true
-	
-	if friction:
-		out.x = lerp(out.x, 0.0, mm.air_cof)
-	
+			out.x = lerp(out.x, 0.0, mm.air_cof)
 	if abs(out.x) < mm.min_x_velocity: #clamp velocity
 		out.x = 0
 	return out
 
 
+func get_vframe() -> int:
+	var out = 0
+	match pc.look_dir.x:
+		-1:
+			out = 0
+			#guns.scale.x = 1.0
+		1:
+			out = 3
+			#guns.scale.x = -1.0
+	
+	if pc.shoot_dir.y < 0.0:
+			out += 1
+			#guns.rotation_degrees = 90.0 if guns.scale.x == 1.0 else -90.0
+	elif pc.shoot_dir.y > 0.0:
+			out += 2
+			#guns.rotation_degrees = -90.0 if guns.scale.x == 1.0 else 90.0
+	#elif pc.shoot_dir.y == 0.0:
+			#guns.rotation_degrees = 0
+	return out
 
 
-func animate():
-	var animation: String
-	
-	if abs(mm.velocity.y) < 20:
-		animation = "aerial_top"
-	elif mm.velocity.y < 0:
-		animation = "aerial_rise"
-	elif mm.velocity.y > 0:
-		animation = "aerial_fall"
-	
-	if not ap.is_playing() or ap.current_animation != animation:
-		ap.play(animation, 0.0, 1.0)
-	
-	
-	var vframe: int
-	if pc.look_dir.x < 0: #left
-		vframe = 0
-		guns.scale.x = 1
-	else: #right
-		vframe = 3
-		guns.scale.x = -1
-	
-	
-	if pc.shoot_dir.y < 0: #up
-		vframe += 1
-		guns.rotation_degrees = 90 if guns.scale.x == 1 else -90
-	elif pc.shoot_dir.y > 0: #down
-		vframe += 2
-		guns.rotation_degrees = -90 if guns.scale.x == 1 else 90
-	else:
-		guns.rotation_degrees = 0
-	
-	anim.set_gun_draw_index()
-	sprite.frame_coords.y = vframe
-	guns.position = anim.get_gun_pos(animation, vframe, sprite.frame_coords.x) #changes the gun sprite every time animate is called
+
+### STATE ###
 
 func enter():
 	pass

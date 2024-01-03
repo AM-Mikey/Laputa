@@ -31,41 +31,52 @@ func state_process():
 #		pc.mm.change_state(pc.mm.cached_state.name.to_lower())
 
 
+func animate():
+	var animation = "inspect"
+	var reference_texture = preload("res://assets/Actor/Player/InspectNew.png")
+	
+	#for runtime, set the frame counts before the animation starts
+	sprite.hframes = int(reference_texture.get_width() / 32.0)
+	sprite.vframes = int(reference_texture.get_height() / 32.0)
+
+	sprite.frame_coords.y = get_vframe()
+	if not ap.is_playing() or ap.current_animation != animation:
+		ap.stop()
+		ap.play(animation, 0.0, 1.0)
+
+
+
+### GETTERS ###
+
 func calc_velocity():
 	var out = mm.velocity
-	
+	#Y
 	out.y += mm.gravity * get_physics_process_delta_time()
-	
+	#X
 	if pc.is_on_floor():
 		out.x = lerp(out.x, 0.0, mm.ground_cof * 2)
 	else:
 		out.x = lerp(out.x, 0.0, mm.air_cof * 2)
-	
 	if abs(out.x) < mm.min_x_velocity: #clamp velocity
 		out.x = 0
-	
+	return out
+
+func get_vframe() -> int:
+	var out = 0
+	match pc.look_dir.x:
+		1:
+			out = 0
+			#guns.scale.x = 1
+		-1:
+			out = 1
+			#guns.scale.x = -1
 	return out
 
 
 
-func animate():
-	var animation = "inspect"
-	
-	if not ap.is_playing() or ap.current_animation != animation:
-		ap.play(animation, 0.0, 1.0)
-	
-	
-	var vframe: int
-	if pc.look_dir.x < 0: #left
-		vframe = 0
-	else: #right
-		vframe = 1
-
-	sprite.frame_coords.y = vframe
-
+### STATES ###
 
 func enter():
 	guns.visible = false
-	
 func exit():
 	guns.visible = true

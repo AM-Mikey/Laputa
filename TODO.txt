@@ -1,2 +1,20 @@
-fizzle on ssp
-fizzle thru ground (from bullet spawn point)
+configure tilemap layers
+turnstyle jumper fixes
+jump while crouch
+auto-jump
+fix land bonk
+fix shoot down on non-ssp
+
+animation:
+-backrun blending with run
+	>keeps going to stand pose on 0 speed
+	>even on blend you need to go to backframe = (12 - forwardframe)mod 12 to make it line up
+	
+-backrun crouch animations
+
+
+-adjust recent shot time
+	>jumping then insta shoot down
+-bug not triggering fall on fall
+	>when holding jump
+-lock dir locks shoot up/down direction

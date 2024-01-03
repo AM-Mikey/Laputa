@@ -21,25 +21,26 @@ func state_process():
 
 
 
+### GETTERS ###
 
 func get_move_velocity(velocity):
 	var out = velocity
-	
+	#Y
 	out.y += mm.gravity * get_physics_process_delta_time()
-	
+	#X
 	if pc.is_on_floor():
 		out.x = lerp(out.x, 0.0, mm.ground_cof * 2)
 	else:
 		out.x = lerp(out.x, 0.0, mm.air_cof * 2)
-	
 	if abs(out.x) < mm.min_x_velocity: #clamp velocity
 		out.x = 0
-		
 	return out
 
 
+
+### STATES ###
+
 func enter():
 	pass
-	
 func exit():
 	pass

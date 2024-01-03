@@ -24,8 +24,7 @@ func state_process():
 	animate()
 	
 	
-	if Input.is_action_pressed("jump") and pc.controller_id == 0 or\
-	Input.is_action_pressed("sasuke_jump") and pc.controller_id == 1:
+	if Input.is_action_pressed("jump"):
 		mm.jump()
 	
 	if not pc.is_on_floor() and not pc.is_in_coyote:
@@ -34,119 +33,122 @@ func state_process():
 
 
 func set_player_directions():
-	var input_dir: Vector2
-	match pc.controller_id:
-		#juniper
-		0: input_dir = Vector2(\
-			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),\
-			Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
-		#sasuke
-		1: input_dir = Vector2(\
-			Input.get_action_strength("sasuke_right") - Input.get_action_strength("sasuke_left"),\
-			Input.get_action_strength("sasuke_down") - Input.get_action_strength("sasuke_up"))
-	
+	var input_dir = Vector2(
+		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+
 	#get move_dir
 	pc.move_dir = Vector2(input_dir.x, 0)
 	
 	#get look_dir
 	if pc.move_dir.x != 0:
-		pc.look_dir = Vector2(pc.move_dir.x, input_dir.y)
+		pc.look_dir = Vector2i(sign(pc.move_dir.x), input_dir.y)
 	else:
-		pc.look_dir = Vector2(pc.look_dir.x, input_dir.y)
-	if pc.direction_lock != Vector2.ZERO:
+		pc.look_dir = Vector2i(pc.look_dir.x, input_dir.y)
+	if pc.direction_lock != Vector2i.ZERO:
 		pc.look_dir = pc.direction_lock
 	
 	#get shoot_dir
 	if pc.is_on_ssp:
 		if pc.look_dir.y != 0: #up or down
-			pc.shoot_dir = Vector2(0, pc.look_dir.y)
+			pc.shoot_dir = Vector2(0.0, pc.look_dir.y)
 		else:
 			pc.shoot_dir = pc.look_dir
 	else:
-		if pc.look_dir.y < 0: #up
-			pc.shoot_dir = Vector2(0, pc.look_dir.y) 
-		pc.shoot_dir = Vector2(pc.look_dir.x, min(pc.look_dir.y, 0)) #no look down
-
-
-
-
-func calc_velocity():
-	var out = mm.velocity
-	var friction = false
-
-	out.y += mm.gravity * get_physics_process_delta_time()
-
-	if pc.move_dir.x != 0:
-		out.x = min(abs(out.x) + mm.acceleration, mm.speed.x) * pc.move_dir.x
-	else:
-		friction = true
-
-	if friction:
-		out.x = lerp(out.x, 0.0, mm.ground_cof)
-
-	if abs(out.x) < mm.min_x_velocity: #clamp velocity
-		out.x = 0
-		
-	return out
+		if pc.look_dir.y == -1: #up
+			pc.shoot_dir = Vector2(0.0, pc.look_dir.y) 
+		pc.shoot_dir = Vector2(pc.look_dir.x, min(pc.look_dir.y, 0.0)) #no look down
 
 
 func animate():
-
-	
-	
 	var animation = "run"
-	if pc.direction_lock != Vector2.ZERO and pc.direction_lock.x != pc.move_dir.x:
+	var reference_texture = preload("res://assets/Actor/Player/RunNew.png")
+	if pc.direction_lock != Vector2i.ZERO and pc.direction_lock.x != sign(pc.move_dir.x):
 		animation = "back_run"
-	if pc.is_crouching:
-		animation = "crouch_run"
-	if pc.move_dir.x == 0: #abs(mm.velocity.x) < mm.min_x_velocity:
+		reference_texture = preload("res://assets/Actor/Player/BackRunNew.png")
+	if pc.move_dir.x == 0.0: #abs(mm.velocity.x) < mm.min_x_velocity:
 		animation = "stand"
+		reference_texture = preload("res://assets/Actor/Player/StandNew.png")
+	if pc.is_crouching:
+		if pc.move_dir.x == 0.0:
+			animation = "crouch"
+			reference_texture = preload("res://assets/Actor/Player/CrouchNew.png")
+		else:
+			animation = "crouch_run"
+			reference_texture = preload("res://assets/Actor/Player/CrouchRunNew.png")
+
+	#for runtime, set the frame counts before the animation starts
+	sprite.hframes = int(reference_texture.get_width() / 32.0)
+	sprite.vframes = int(reference_texture.get_height() / 32.0)
+
+	ap.speed_scale = 1.0
+	var do_blending = false
+	if animation == "run" or animation == "crouch_run" or animation == "back_run":
+		ap.speed_scale = max((abs(mm.velocity.x)/mm.speed.x) * 2, 0.1)
+		if ap.current_animation == "run" or ap.current_animation == "crouch_run" or ap.current_animation == "back_run":
+			do_blending = true
+
+	#anim.set_gun_draw_index()
+	var vframe = get_vframe()
+	sprite.frame_coords.y = vframe
+	#guns.position = anim.get_gun_pos(animation, vframe, sprite.frame_coords.x) #changes the gun sprite every time animate is called
+	
+
 
 	var blend_time = 0.0
 	if not ap.is_playing() or ap.current_animation != animation:
-		for group in anim.blend_array:
-			if group.has(animation) and group.has(ap.current_animation):
-				print("blending animation")
-				blend_time = ap.current_animation_position #only blend certain animations
+		if do_blending:
+			print("blending animation")
+			blend_time = ap.current_animation_position #only blend certain animations
+		ap.stop()
 		ap.play(animation, blend_time, 1.0)
-
+		if blend_time != 0.0:
+			ap.seek(blend_time, true)
 	
+	#await(get_tree().process_frame)
+	#set_gun_pos(Vector2(pc.look_dir.x, pc.shoot_dir.y))
+
+### GETTERS ###
+
+func calc_velocity():
+	var out = mm.velocity
+	#Y
+	out.y += mm.gravity * get_physics_process_delta_time()
+	#X
+	if pc.move_dir.x != 0.0:
+		out.x = min(abs(out.x) + mm.acceleration, mm.speed.x) * pc.move_dir.x
+	else: #friction slide
+		out.x = lerp(out.x, 0.0, mm.ground_cof)
+	if abs(out.x) < mm.min_x_velocity: #clamp velocity
+		out.x = 0
+	return out
+
+
+func get_vframe() -> int:
+	var out = 0
+	match pc.look_dir.x:
+		-1:
+			out = 0
+			#guns.scale.x = 1.0
+		1:
+			out = 4
+			#guns.scale.x = -1.0
 	
-	var vframe: int
-	if pc.look_dir.x < 0: #left
-		vframe = 0
-		guns.scale.x = 1
-	else: #right
-		vframe = 4
-		guns.scale.x = -1
-	
-	
-	if pc.shoot_dir.y < 0: #up
-		vframe += 1
-
-		guns.rotation_degrees = 90 if guns.scale.x == 1 else -90
-	elif pc.shoot_dir.y > 0: #down
-		vframe += 2
-
-		guns.rotation_degrees = -90 if guns.scale.x == 1 else 90
-	elif pc.shoot_dir.y == 0 and pc.look_dir.y > 0: #look down, don't shoot down
-		vframe += 3
-		guns.rotation_degrees = 0
-	else:
-		guns.rotation_degrees = 0
-	
-	if animation == "run" or animation == "crouch_run" or animation == "back_run":
-		ap.speed_scale = max((abs(mm.velocity.x)/mm.speed.x) * 2, 0.1)
-	else:
-		ap.speed_scale = 1.0
-	
-	anim.set_gun_draw_index()
-	sprite.frame_coords.y = vframe
-	guns.position = anim.get_gun_pos(animation, vframe, sprite.frame_coords.x) #changes the gun sprite every time animate is called
+	if pc.shoot_dir.y < 0.0:
+			out += 1
+			#guns.rotation_degrees = 90.0 if guns.scale.x == 1.0 else -90.0
+	elif pc.shoot_dir.y > 0.0:
+			out += 2
+			#guns.rotation_degrees = -90.0 if guns.scale.x == 1.0 else 90.0
+	elif pc.shoot_dir.y == 0.0:
+			if pc.look_dir.y == 1:
+				out += 3
+			#guns.rotation_degrees = 0
+	return out
 
 
 
-
+### STATE ###
 
 func enter():
 	pass

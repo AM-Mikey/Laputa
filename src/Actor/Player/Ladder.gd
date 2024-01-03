@@ -30,29 +30,28 @@ func state_process():
 
 
 
-func get_move_dir():
+### GETTERS ###
+
+func get_move_dir() -> Vector2:
 	return Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
 
-
-
-func calc_velocity():
+func calc_velocity() -> Vector2:
 	var out = mm.velocity
-	
+	#Y
 	out.y = pc.move_dir.y * mm.speed.y * 0.5
+	#X
 	out.x = 0
 	if Input.is_action_just_pressed("jump"):
 		mm.change_state("jump") #TODO fix
 		out.y = mm.speed.y * -1.0
-
 	if abs(out.x) < mm.min_x_velocity: out.x = 0 #clamp velocity
-		
 	return out
 
 
 
-
+### STATES ###
 
 func enter():
 	mm.snap_vector = Vector2.ZERO

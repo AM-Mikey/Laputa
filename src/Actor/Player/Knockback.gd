@@ -42,43 +42,32 @@ func state_process():
 
 #or Input.is_action_just_pressed("jump") and pc.is_on_floor():
 func set_move_dir():
-	var move_dir = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0)
-	if mm.coyote_timer.time_left > 0:
-		match pc.controller_id:
-			0: if Input.is_action_just_pressed("jump"):
-				move_dir = Vector2(move_dir.x, -1)
-			1: if Input.is_action_just_pressed("sasuke_jump"):
-				move_dir = Vector2(move_dir.x, -1)
-			
+	var move_dir = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0.0)
+	if mm.coyote_timer.time_left > 0.0 and Input.is_action_just_pressed("jump"):
+		move_dir = Vector2(move_dir.x, -1.0)
 	pc.move_dir = move_dir
 
 
 
+### GETTERS ###
 
 func get_move_velocity(velocity, move_dir):
 	var out = velocity
-	var friction = false #TODO: why friction?
-
+	#Y
 	out.y += mm.gravity * get_physics_process_delta_time()
-	if move_dir.y < 0:
+	if sign(move_dir.y) == -1:
 		out.y = mm.speed.y * pc.move_dir.y
-	
-#	if is_jump_interrupted:
-#		out.y += mm.gravity * get_physics_process_delta_time()
-
-	if move_dir.x != 0:
+	#X
+	if move_dir.x != 0.0:
 		out.x = min(abs(out.x) + mm.acceleration, mm.speed.x)
 		out.x *= pc.move_dir.x
-	else:
-		friction = true
-	
-	print(out)
 	return out
-	
 
+
+
+### STATES ###
 
 func enter():
 	pass
-	
 func exit():
 	pass

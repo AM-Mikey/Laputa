@@ -20,7 +20,6 @@ var total_xp: int = 0
 
 
 #STATES
-var direction_lock = Vector2.ZERO
 
 var invincible = false
 var disabled = true
@@ -41,9 +40,10 @@ var inventory: Array
 var topic_array: Array = ["child", "sasuke", "basil", "free_dialog"]
 
 
-var move_dir = Vector2.LEFT
-var look_dir = Vector2.LEFT
-var shoot_dir = Vector2.LEFT
+var move_dir := Vector2.LEFT
+var look_dir := Vector2i.LEFT
+var direction_lock := Vector2i.ZERO
+var shoot_dir := Vector2.LEFT
 
 
 
@@ -82,8 +82,9 @@ func move_to(pos):
 	mm.move_target = pos
 	mm.change_state("moveto")
 
-func do_step():
-	am.play("pc_step")
+func do_step(): #TODO: this is a failsafe, only works with run animations. for some reason it was playing twice on animation blend time
+	if $Sprite2D.frame_coords.x == 1 or $Sprite2D.frame_coords.x == 7:
+		am.play("pc_step")
 
 func hit(damage, knockback_direction):
 	if not disabled and not invincible:

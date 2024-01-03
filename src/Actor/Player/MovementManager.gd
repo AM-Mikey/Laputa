@@ -90,10 +90,7 @@ func _physics_process(_delta):
 
 		on_ceiling = false
 		
-	
 	current_state.state_process()
-	
-	#check_ssp()
 
 
 func check_ssp():
@@ -111,23 +108,15 @@ func check_ssp():
 
 func _input(event):
 	if not pc.disabled:
-		if pc.controller_id == 0: #juniper
-			if event.is_action_pressed("fire_automatic"):
-				pc.direction_lock = pc.look_dir
-			if event.is_action_released("fire_automatic"): 
-				pc.direction_lock = Vector2.ZERO
-		#if pc.controller_id == 1: #sasuke
-			#if event.is_action_pressed("sasuke_lock"):
-				#pc.direction_lock = pc.look_dir
-			#if event.is_action_released("sasuke_lock"): 
-				#pc.direction_lock = Vector2.ZERO
-
+		if event.is_action_pressed("fire_automatic"):
+			pc.direction_lock = pc.look_dir
+		if event.is_action_released("fire_automatic"): 
+			pc.direction_lock = Vector2i.ZERO
 
 
 func do_coyote_time():
 	$CoyoteTimer.start(coyote_time)
 	await $CoyoteTimer.timeout
-	print(current_state)
 	if not pc.is_on_floor() and current_state == states["run"]:
 		pc.is_in_coyote = false
 		change_state("fall")
@@ -143,7 +132,7 @@ func bonk(type, normal):
 
 
 func jump():
-	#if pc.is_crouching: return
+	if pc.is_crouching: return
 	
 	snap_vector = Vector2.ZERO
 	am.play("pc_jump")
@@ -151,13 +140,15 @@ func jump():
 	if abs(velocity.x) > speed.x * 0.95:
 		if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") and pc.controller_id == 0 or \
 		Input.is_action_pressed("sasuke_left") or Input.is_action_pressed("sasuke_right") and pc.controller_id == 1:
-			jump_starting_move_dir_x = pc.move_dir.x
+			jump_starting_move_dir_x = sign(pc.move_dir.x)
 			$MinDirTimer.start(minimum_direction_time)
 			change_state("longjump")
 	else:
 		change_state("jump")
 
-### SIGNALS
+
+
+### SIGNALS ###
 
 func _on_CrouchDetector_body_entered(_body):
 	pc.is_crouching = true
