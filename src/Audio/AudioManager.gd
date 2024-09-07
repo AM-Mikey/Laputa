@@ -23,6 +23,8 @@ signal players_updated
 	"break_block": preload("res://assets/SFX/Placeholder/snd_block_destroy.ogg"),
 	"break_grass": preload("res://assets/SFX/Placeholder/snd_explosion2.ogg"),
 	
+	"explode": preload("res://assets/SFX/Placeholder/snd_big_crash.ogg"),
+	
 	"save": preload("res://assets/SFX/Placeholder/snd_health_refill.ogg"),
 	
 	"pc_die": preload("res://assets/SFX/Placeholder/snd_quote_die.ogg"),
@@ -37,6 +39,7 @@ signal players_updated
 	"gun_pistol": preload("res://assets/SFX/Placeholder/snd_polar_star_l1_2.ogg"),
 	"gun_revolver": preload("res://assets/SFX/Placeholder/snd_polar_star_l3.ogg"),
 	"gun_shotgun": preload("res://assets/SFX/Placeholder/snd_missile_hit.ogg"),
+	"gun_sword": preload("res://assets/SFX/Placeholder/snd_ironh_shot_fly.ogg"),
 	"gun_grenade": preload("res://assets/SFX/Placeholder/snd_expl_small.ogg"),
 	"gun_grenade_bounce": preload("res://assets/SFX/Placeholder/snd_thud.ogg"),
 	"gun_star_bounce": preload("res://assets/SFX/Placeholder/snd_splash.ogg"),
@@ -174,7 +177,8 @@ func _add_player(type, audio_string, actor = null):
 		"pos":
 			player = POS_SFX_PLAYER.instantiate()
 			player.stream = sfx_dict[audio_string]
-			actor.add_child(player)
+			player.global_position = actor.global_position
+			add_child(player)
 			var queue_slot = [player, audio_string]
 			sfx_queue.append(queue_slot)
 		"interrupt":

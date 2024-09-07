@@ -13,8 +13,6 @@ gamemode = "pvp"
 start_level = ExtResource("2_v8433")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_offset = Vector2(608, 577.5)
-scroll_base_offset = Vector2(1600, 288)
 
 [node name="Back" type="Node2D" parent="."]
 scale = Vector2(4, 4)

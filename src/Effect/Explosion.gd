@@ -1,8 +1,7 @@
 extends Node2D
 
 func _ready():
-	$AudioStreamPlayer2D.play()
+	am.play("explosion", self)
 	$AnimationPlayer.play("Explosion")
-	#yield($AnimationPlayer, "animation_finished")
-	await $AudioStreamPlayer2D.finished
+	await $AnimationPlayer.animation_finished
 	queue_free()

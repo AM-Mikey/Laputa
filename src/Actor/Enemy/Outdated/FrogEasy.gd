@@ -32,12 +32,9 @@ func _physics_process(_delta):
 			look_dir = Vector2(move_dir.x, 0)
 
 		velocity = get_movevelocity(velocity, move_dir, speed)
-		set_velocity(velocity)
 		set_up_direction(FLOOR_NORMAL)
 		set_floor_stop_on_slope_enabled(true)
 		move_and_slide()
-		velocity = velocity
-		
 		animate()
 
 func _on_PlayerDetector_body_entered(body):

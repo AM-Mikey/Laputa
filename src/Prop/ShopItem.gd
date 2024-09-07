@@ -55,8 +55,8 @@ func display_tooltip():
 func _input(event):
 	if event.is_action_pressed("inspect") and has_player_near == true and active_player.disabled == false:
 		if used == false:
-			if active_player.total_xp >= price:
-				active_player.total_xp -= price
+			if active_player.money >= price:
+				active_player.money -= price
 				used = true
 				$AnimationPlayer.play("Used")
 				active_tooltip.queue_free()

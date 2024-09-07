@@ -18,7 +18,7 @@ var protected = false
 
 var hp: int
 var damage_on_contact: int
-
+var hurt_sound = "enemy_hurt" 
 var damagenum = null
 var damagenum_timer = null
 var damagenum_time: float = 0.5
@@ -67,16 +67,16 @@ func disable():
 func enable():
 	disabled = false
 
-
-func _physics_process(_delta):
+func _physics_process(delta):
 	if disabled or dead: return
-	
 	if state != "":
 		do_state()
 	if debug:
 		$StateLabel.text = state
+	_on_physics_process(delta)
 
-
+func _on_physics_process(delta): #for child
+	pass
 
 func exit():
 	if get_parent().get_parent() is Path2D:
@@ -84,9 +84,22 @@ func exit():
 	else:
 		queue_free()
 
-func calc_velocity(velocity: Vector2, move_dir, speed, do_gravity = true) -> Vector2:
+func calc_velocity(velocity: Vector2, move_dir, speed, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
 	var out: = velocity
-	out.x = speed.x * move_dir.x
+	#X
+	if do_acceleration:
+		if move_dir.x != 0:
+			out.x = min(abs(out.x) + acceleration, speed.x)
+			out.x *= move_dir.x
+		elif do_friction:
+			if is_on_floor():
+				out.x = lerp(out.x, 0.0, ground_cof)
+			else:
+				out.x = lerp(out.x, 0.0, air_cof)
+	else: #no acceleration
+		out.x = speed.x * move_dir.x
+	
+	#Y
 	if do_gravity:
 		out.y += gravity * get_physics_process_delta_time()
 		if move_dir.y < 0:
@@ -134,18 +147,13 @@ func hit(damage, blood_direction):
 	if hp <= 0:
 		die()
 	else:
-		am.play("enemy_hurt", self) #TODO: different hit sounds per enemy
+		am.play(hurt_sound, self)
 
-func _on_hit(damage, blood_direction): #For inhereted enemies to do something on hit
+func _on_hit(damage, blood_direction): #inhereted for enemies to do something on hit
 	pass
+
+
 ### DAMAGE NUMBER ###
-
-func setup_damagenum_timer():
-	damagenum_timer = Timer.new()
-	damagenum_timer.one_shot = true
-	damagenum_timer.connect("timeout", Callable(self, "_on_DamagenumTimer_timeout"))
-	add_child(damagenum_timer)
-
 
 func set_damagenum(damage):
 	if not damagenum: #if we dont already have a damage number create a new one
@@ -157,6 +165,11 @@ func set_damagenum(damage):
 		damagenum.value += damage
 		damagenum_timer.start(damagenum_timer.time_left)
 
+func setup_damagenum_timer():
+	damagenum_timer = Timer.new()
+	damagenum_timer.one_shot = true
+	damagenum_timer.connect("timeout", Callable(self, "_on_DamagenumTimer_timeout"))
+	add_child(damagenum_timer)
 
 func _on_DamagenumTimer_timeout():
 		damagenum.position = global_position

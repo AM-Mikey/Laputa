@@ -79,7 +79,7 @@ position = Vector2(0, 8)
 texture = ExtResource("2")
 hframes = 8
 vframes = 3
-frame = 23
+frame = 21
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

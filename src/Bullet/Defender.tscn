@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/Bullet/Defender.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bd1h41uc6n18t" path="res://assets/Bullet/BulletPistol.png" id="2"]
-[ext_resource type="PackedScene" path="res://src/Bullet/CollisionDetector.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/CollisionDetector.tscn" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 2)

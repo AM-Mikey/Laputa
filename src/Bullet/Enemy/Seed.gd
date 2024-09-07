@@ -16,11 +16,8 @@ func _ready():
 
 func _physics_process(delta):
 	if disabled: return
-	
 	velocity.y += gravity * delta
-	set_velocity(velocity)
 	move_and_slide()
-	velocity = velocity
 	
 	var current_velocity = abs(velocity.x) + abs(velocity.y) /2 #used to calculate animation slowdown
 	ap.speed_scale = current_velocity / start_velocity

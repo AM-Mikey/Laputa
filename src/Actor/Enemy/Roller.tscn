@@ -1,16 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7yhu5je8w1pf"]
+[gd_scene load_steps=6 format=3 uid="uid://c7yhu5je8w1pf"]
 
 [ext_resource type="Script" path="res://src/Actor/Enemy/Roller.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://b8jbm3e01232q" path="res://assets/Actor/Enemy/Roller.png" id="2"]
-[ext_resource type="AudioStream" uid="uid://j50erfbopolx" path="res://assets/SFX/Placeholder/snd_critter_jump.ogg" id="3"]
-[ext_resource type="AudioStream" uid="uid://cpbrsidi03i20" path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" id="4"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
-radius = 8.0
+radius = 7.5
 height = 16.0
 
 [sub_resource type="Animation" id="2"]
-resource_name = "RollLeft"
+resource_name = "Roll"
 length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
@@ -24,80 +22,29 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0, 7]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="3"]
-resource_name = "RollRight"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0, 7]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ms45c"]
 _data = {
-"RollLeft": SubResource("2"),
-"RollRight": SubResource("3")
+"Roll": SubResource("2")
 }
 
 [node name="Roller" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 520
+collision_mask = 522
 script = ExtResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -7.5)
+rotation = 1.5708
 shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
 texture = ExtResource("2")
 hframes = 8
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_ms45c")
 }
-
-[node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4")
-attenuation = 0.164938
-bus = &"SFX"
-
-[node name="PosRoll" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3")
-bus = &"SFX"

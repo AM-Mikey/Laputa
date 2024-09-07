@@ -11,7 +11,7 @@ func _ready():
 			am.play("bullet_clink")
 		"bullet":
 			ap.play("Circle")
-			am.play("")
+			#am.play("")
 		"range":
 			ap.play("Star")
 		"world": 

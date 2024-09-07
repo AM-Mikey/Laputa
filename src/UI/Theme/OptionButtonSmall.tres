@@ -1,18 +1,18 @@
-[gd_resource type="Theme" load_steps=6 format=2]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://byj0by3ej0vap"]
 
-[ext_resource path="res://src/UI/StyleBox/LeatherDark.tres" type="StyleBox" id=1]
-[ext_resource path="res://src/UI/Font/MomoButton.tres" type="FontFile" id=2]
-[ext_resource path="res://src/UI/StyleBox/Leather.tres" type="StyleBox" id=3]
-[ext_resource path="res://src/UI/StyleBox/LeatherLight.tres" type="StyleBox" id=4]
+[ext_resource type="StyleBox" uid="uid://nvs48gdh8bwm" path="res://src/UI/StyleBox/LeatherDark.tres" id="1"]
+[ext_resource type="StyleBox" uid="uid://ctw8lx7pcj6kl" path="res://src/UI/StyleBox/Leather.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://dbafhti4g7dp4" path="res://src/UI/StyleBox/LeatherLight.tres" id="4"]
+[ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momoextended.ttf" id="4_kdako"]
 
-[sub_resource type="ImageTexture" id=1]
+[sub_resource type="ImageTexture" id="1"]
 
 [resource]
-default_font = ExtResource( 2 )
-Button/colors/font_color = Color( 0.690196, 0.392157, 0.2, 1 )
+default_font = ExtResource("4_kdako")
+Button/colors/font_color = Color(0.690196, 0.392157, 0.2, 1)
 Button/styles/disabled = null
-Button/styles/hover = ExtResource( 4 )
-Button/styles/normal = ExtResource( 3 )
-Button/styles/pressed = ExtResource( 1 )
-OptionButton/icons/arrow = SubResource( 1 )
+Button/styles/hover = ExtResource("4")
+Button/styles/normal = ExtResource("3")
+Button/styles/pressed = ExtResource("1")
+OptionButton/icons/arrow = SubResource("1")
 PopupMenu/constants/vseparation = 12

@@ -29,17 +29,13 @@ func _ready():
 	cover()
 
 func _physics_process(_delta):
-	if disabled or dead:
-		return
+	if disabled or dead: return
 	if not is_on_floor():
 		move_dir.y = 0 #don't allow them to jump if they are midair
 	
 	velocity = calculate_movevelocity(velocity, move_dir, speed)
-	set_velocity(velocity)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
-	velocity = velocity
-
 	animate()
 
 func calculate_movevelocity(velocity: Vector2, move_dir, speed) -> Vector2:

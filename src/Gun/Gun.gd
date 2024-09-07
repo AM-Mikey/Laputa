@@ -9,17 +9,19 @@ const MUZZLE_FLASH = preload("res://src/Effect/MuzzleFlashEffect.tscn")
 var display_name: String = "Debug Gun"
 var description: String = "Debug Description"
 
-var texture: CompressedTexture2D = load("res://assets/Gun/Revolver.png")
+var texture: CompressedTexture2D = load("res://assets/Gun/Revolver.png") #unused
 var icon_texture: CompressedTexture2D = load("res://assets/Gun/RevolverIcon.png")
 var sfx: String = "gun_pistol"
 var bullet_scene: PackedScene = load("res://src/Bullet/BulletRevolver1.tscn")
 
 var damage: int = 1
 var f_range: int = 60
+var f_time: float
 var speed: int = 200
 
 var cooldown_time: float = 0.2
 var automatic: bool = false
+var do_muzzle_flash: bool = true
 var charging: bool = false
 var ammo: int = 0
 var max_ammo: int = 0
@@ -79,21 +81,23 @@ func deactivate_manual():
 func deactivate_auto():
 	pass
 
-func spawn_bullet(bullet_pos, shoot_dir) -> Node:
+func spawn_bullet(bullet_pos, shoot_dir, layer = world.get_node("Middle")) -> Node:
 	var bullet = bullet_scene.instantiate()
 	
 	bullet.damage = damage
 	bullet.f_range = f_range
+	bullet.f_time = f_time
 	bullet.speed = speed
-	bullet.position = bullet_pos
-	bullet.origin = bullet_pos
 	bullet.direction = shoot_dir
-	
-	world.get_node("Middle").add_child(bullet)
+	layer.add_child(bullet)
+	bullet.global_position = bullet_pos
+	bullet.origin = bullet_pos
+
 	am.play(sfx)
 	
-	var muzzle_flash = MUZZLE_FLASH.instantiate()
-	$Muzzle.add_child(muzzle_flash)
+	if do_muzzle_flash:
+		var muzzle_flash = MUZZLE_FLASH.instantiate()
+		$Muzzle.add_child(muzzle_flash)
 	return bullet
 
 ### GETTERS

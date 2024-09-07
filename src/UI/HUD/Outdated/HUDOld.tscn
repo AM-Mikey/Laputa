@@ -1,0 +1,281 @@
+[gd_scene load_steps=18 format=3 uid="uid://c21o81jxnc0mu"]
+
+[ext_resource type="Script" path="res://src/UI/HUD/Outdated/HUDOld.gd" id="1_gf6em"]
+[ext_resource type="Texture2D" uid="uid://do03ns87tmu82" path="res://assets/UI/HUD/Background.png" id="2_k1jua"]
+[ext_resource type="Texture2D" uid="uid://cn3hthxv2o1lq" path="res://assets/UI/HUD/HpLost.png" id="3_xjpel"]
+[ext_resource type="Texture2D" uid="uid://c2xhxpgm4yocx" path="res://assets/UI/HUD/HpLostCap.png" id="4_u163r"]
+[ext_resource type="Texture2D" uid="uid://4wopjt8nlvp1" path="res://assets/UI/HUD/HpProgress.png" id="5_7vjph"]
+[ext_resource type="Texture2D" uid="uid://c74tdbmtpnw3v" path="res://assets/UI/HUD/HpCap.png" id="6_fulj8"]
+[ext_resource type="Texture2D" uid="uid://c7wyw4y3jdl7j" path="res://assets/UI/NumberNew.png" id="7_d0h42"]
+[ext_resource type="Texture2D" uid="uid://nkjwbokhsfxc" path="res://assets/UI/HUD/XpProgress.png" id="8_2a6je"]
+[ext_resource type="Texture2D" uid="uid://bp2x66vhi4s1f" path="res://assets/UI/HUD/XpFlash.png" id="9_5l5qa"]
+[ext_resource type="Texture2D" uid="uid://dc056na67sdc5" path="res://assets/UI/HUD/XpMax.png" id="10_a22x2"]
+[ext_resource type="Texture2D" uid="uid://bqejmth0dsfvu" path="res://assets/UI/HUD/CooldownProgress.png" id="11_wkaou"]
+[ext_resource type="Texture2D" uid="uid://bua4vdl5ti3sm" path="res://assets/UI/HUD/GlassBars.png" id="12_vd2oc"]
+[ext_resource type="PackedScene" uid="uid://bf3lvcu6ts2nr" path="res://src/UI/HUD/GunIcon.tscn" id="13_0s8px"]
+[ext_resource type="Texture2D" uid="uid://2fp1scy7ajqk" path="res://assets/UI/NumberSmall.png" id="14_c857x"]
+
+[sub_resource type="Animation" id="1"]
+resource_name = "Flash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="2"]
+resource_name = "XpFlash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("XpBar/XpFlash:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7od58"]
+_data = {
+"Flash": SubResource("1"),
+"XpFlash": SubResource("2")
+}
+
+[node name="HUDOld" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 2.0
+mouse_filter = 2
+script = ExtResource("1_gf6em")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7od58")
+}
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(16, 32)
+texture = ExtResource("2_k1jua")
+centered = false
+
+[node name="HpBar" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HpLost" type="TextureProgressBar" parent="HpBar"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 35.0
+offset_right = 86.0
+offset_bottom = 39.0
+mouse_filter = 2
+value = 50.0
+texture_progress = ExtResource("3_xjpel")
+
+[node name="HpLostCap" type="Sprite2D" parent="HpBar/HpLost"]
+position = Vector2(19, 2)
+texture = ExtResource("4_u163r")
+
+[node name="HpProgress" type="TextureProgressBar" parent="HpBar"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 35.0
+offset_right = 86.0
+offset_bottom = 39.0
+mouse_filter = 2
+value = 50.0
+texture_progress = ExtResource("5_7vjph")
+
+[node name="HpCap" type="Sprite2D" parent="HpBar/HpProgress"]
+position = Vector2(19, 2)
+texture = ExtResource("6_fulj8")
+
+[node name="Num1" type="Sprite2D" parent="HpBar"]
+position = Vector2(28, 32)
+texture = ExtResource("7_d0h42")
+centered = false
+hframes = 11
+vframes = 6
+frame = 64
+
+[node name="Num2" type="Sprite2D" parent="HpBar"]
+position = Vector2(36, 32)
+texture = ExtResource("7_d0h42")
+centered = false
+hframes = 11
+vframes = 6
+frame = 64
+
+[node name="XpBar" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="XpProgress" type="TextureProgressBar" parent="XpBar"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 43.0
+offset_right = 83.0
+offset_bottom = 47.0
+mouse_filter = 2
+value = 100.0
+texture_progress = ExtResource("8_2a6je")
+
+[node name="XpFlash" type="Sprite2D" parent="XpBar"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(44, 43)
+texture = ExtResource("9_5l5qa")
+centered = false
+
+[node name="Num" type="Sprite2D" parent="XpBar"]
+position = Vector2(36, 44)
+texture = ExtResource("7_d0h42")
+hframes = 11
+vframes = 6
+frame = 56
+
+[node name="XpMax" type="Sprite2D" parent="XpBar"]
+visible = false
+position = Vector2(41, 42)
+texture = ExtResource("10_a22x2")
+centered = false
+
+[node name="CooldownBar" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CooldownBar"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 51.0
+offset_right = 78.0
+offset_bottom = 53.0
+mouse_filter = 2
+value = 100.0
+texture_progress = ExtResource("11_wkaou")
+
+[node name="GlassBars" type="Sprite2D" parent="."]
+position = Vector2(16, 32)
+texture = ExtResource("12_vd2oc")
+centered = false
+
+[node name="Gun" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBox" type="HBoxContainer" parent="Gun"]
+custom_minimum_size = Vector2(64, 16)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="WeaponIcon" parent="Gun/HBox" instance=ExtResource("13_0s8px")]
+visible = false
+layout_mode = 2
+
+[node name="AmmoCount" type="Control" parent="Gun/HBox"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Divider" type="Sprite2D" parent="Gun/HBox/AmmoCount"]
+position = Vector2(33, 5)
+texture = ExtResource("7_d0h42")
+centered = false
+offset = Vector2(-9, -5)
+hframes = 11
+vframes = 6
+frame = 21
+
+[node name="Divider2" type="Sprite2D" parent="Gun/HBox/AmmoCount/Divider"]
+position = Vector2(-8, 8)
+texture = ExtResource("7_d0h42")
+centered = false
+offset = Vector2(-9, -5)
+hframes = 11
+vframes = 6
+frame = 21
+
+[node name="Num1" type="Sprite2D" parent="Gun/HBox/AmmoCount"]
+position = Vector2(4, 4)
+texture = ExtResource("7_d0h42")
+hframes = 11
+vframes = 6
+frame = 1
+
+[node name="Num2" type="Sprite2D" parent="Gun/HBox/AmmoCount"]
+position = Vector2(12, 4)
+texture = ExtResource("7_d0h42")
+hframes = 11
+vframes = 6
+
+[node name="Num3" type="Sprite2D" parent="Gun/HBox/AmmoCount"]
+position = Vector2(20, 4)
+texture = ExtResource("7_d0h42")
+hframes = 11
+vframes = 6
+
+[node name="Num4" type="Sprite2D" parent="Gun/HBox/AmmoCount"]
+position = Vector2(28, 12)
+texture = ExtResource("7_d0h42")
+hframes = 11
+vframes = 6
+frame = 12
+
+[node name="Num5" type="Sprite2D" parent="Gun/HBox/AmmoCount"]
+position = Vector2(36, 12)
+texture = ExtResource("7_d0h42")
+hframes = 11
+vframes = 6
+frame = 11
+
+[node name="Num6" type="Sprite2D" parent="Gun/HBox/AmmoCount"]
+position = Vector2(44, 12)
+texture = ExtResource("7_d0h42")
+hframes = 11
+vframes = 6
+frame = 11
+
+[node name="MoneyCount" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Num1" type="Sprite2D" parent="MoneyCount"]
+position = Vector2(24, 51)
+texture = ExtResource("14_c857x")
+centered = false
+offset = Vector2(0, -1)
+hframes = 10
+vframes = 2
+frame = 10
+
+[node name="Num2" type="Sprite2D" parent="MoneyCount"]
+position = Vector2(28, 51)
+texture = ExtResource("14_c857x")
+centered = false
+offset = Vector2(0, -1)
+hframes = 10
+vframes = 2
+frame = 10
+
+[node name="Num3" type="Sprite2D" parent="MoneyCount"]
+position = Vector2(32, 51)
+texture = ExtResource("14_c857x")
+centered = false
+offset = Vector2(0, -1)
+hframes = 10
+vframes = 2
+frame = 10

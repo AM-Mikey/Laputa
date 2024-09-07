@@ -6,7 +6,6 @@ var dir = Vector2.DOWN
 
 func _ready():
 	speed = Vector2(10, 10)
-	
 	if value == 2:
 		$AnimationPlayer.play("Small")
 	elif value == 4:
@@ -17,21 +16,15 @@ func _ready():
 		printerr("ERROR: Heart given non-standard value")
 
 func _physics_process(_delta):
-	var velocity = getvelocity(speed, dir)
-	set_velocity(velocity)
+	velocity = calc_velocity(speed, dir)
 	move_and_slide()
-	velocity = velocity
 
-
-
-func getvelocity(speed, direction) -> Vector2:
+func calc_velocity(speed, direction) -> Vector2:
 	var out: = velocity
-	
 	out.x = speed.x * direction.x
 	out.y += gravity * get_physics_process_delta_time()
 	if direction.y == -1.0:
 		out.y = speed.y * direction.y
-
 	return out
 
 func _on_AnimationPlayer_animation_finished(_anim_name):

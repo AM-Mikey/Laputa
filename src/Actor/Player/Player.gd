@@ -7,16 +7,20 @@ class_name Player
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
 const DEATH_CAMERA = preload("res://src/Utility/DeathCamera.tscn")
 const DAMAGENUMBER = preload("res://src/Effect/DamageNumber.tscn")
+const EXPERIENCEGET = preload("res://src/Effect/ExperienceGet.tscn")
+const HEARTGET = preload("res://src/Effect/HeartGet.tscn")
+const AMMOGET = preload("res://src/Effect/AmmoGet.tscn")
 
 
 signal hp_updated(hp, max_hp)
-signal total_xp_updated(total_xp)
 signal guns_updated(guns)
+signal xp_updated(xp, max_xp, level, max_level)
+signal money_updated(money)
 
 
 @export var hp: int = 16
 @export var max_hp: int = 16
-var total_xp: int = 0
+@export var money: int = 0
 
 
 #STATES
@@ -28,7 +32,7 @@ var can_input = true
 
 #var is_on_conveyor = false
 var enemies_touching = []
-var is_on_ssp = true
+var is_on_ssp = false
 var is_crouching = false
 var is_in_water = false
 var is_in_coyote = false
@@ -58,6 +62,8 @@ func _ready():
 	connect_inventory()
 #	if weapon_array.front() != null: TODO:fix
 #		$WeaponSprite.texture = weapon_array.front().texture
+	await get_tree().process_frame
+	$SSPDetector.monitoring = true #patch, some weird bug detects ssp on startup
 
 
 func disable():
@@ -107,7 +113,7 @@ func hit(damage, knockback_direction):
 			if hp <= 0:
 				die()
 
-			var active_gun = $GunManager/Guns.get_child(0)
+			var active_gun = guns.get_child(0)
 			if active_gun != null:
 				active_gun.xp = active_gun.xp - (damage * 2)
 				
@@ -116,7 +122,7 @@ func hit(damage, knockback_direction):
 				if active_gun.xp < 0:
 					$GunManager.level_down(false)
 					
-				emit_signal("guns_updated", $GunManager/Guns.get_children())
+				emit_signal("guns_updated", guns.get_children())
 
 func do_iframes():
 	invincible = true
@@ -157,60 +163,63 @@ func die():
 
 
 
+### SIGNALS ###
 
-
-### SIGNALS
-
-func _on_SSPDetector_body_entered(_body):
+func _on_SSPDetector_body_entered(body):
 	is_on_ssp = true
 func _on_SSPDetector_body_exited(_body):
 	is_on_ssp = false
 
 func _on_ItemDetector_area_entered(area):
-	if not disabled:
-		
-		if area.get_collision_layer_value(11): #health
-			hp += area.get_parent().value
-			hp = min(hp, max_hp)
-			
-			am.play("get_hp")
-			emit_signal("hp_updated", hp, max_hp)
-			area.get_parent().queue_free()
-		
-		
-		if area.get_collision_layer_value(12): #xp
-			var active_gun = $GunManager/Guns.get_child(0)
-			
-			total_xp += area.get_parent().value
-			active_gun.xp += area.get_parent().value
-
-			if active_gun.xp >= active_gun.max_xp:
-				if active_gun.level == active_gun.max_level:
-					active_gun.xp = active_gun.max_xp
-					#TODO: Flash MAX on HUD
-				else:
-					$GunManager.level_up(false)
-
-			am.play("get_xp")
-			emit_signal("total_xp_updated", total_xp)
-			emit_signal("guns_updated", $GunManager/Guns.get_children())
-			area.get_parent().queue_free()
-
-		
-		if area.get_collision_layer_value(13): #ammo
-			for w in $GunManager/Guns.get_children():
-				if w.max_ammo != 0:
-					w.ammo += w.max_ammo * area.value #percent of max ammo
-					w.ammo = max(w.ammo, w.max_ammo)
-
-			am.play("get_ammo")
-			emit_signal("guns_updated", $GunManager/Guns.get_children())
-			area.queue_free()
+	if disabled: return
+	
+	if area.get_collision_layer_value(11): #health
+		hp += area.get_parent().value
+		hp = min(hp, max_hp)
+		am.play("get_hp")
+		var heart_get = HEARTGET.instantiate()
+		heart_get.position = area.get_parent().global_position
+		world.get_node("Front").add_child(heart_get)
+		emit_signal("hp_updated", hp, max_hp)
+		area.get_parent().queue_free()
+	
+	
+	if area.get_collision_layer_value(12): #xp
+		var experience_pickup = area.get_parent()
+		var active_gun = guns.get_child(0)
+		money += experience_pickup.value
+		active_gun.xp += experience_pickup.value
+		if active_gun.xp >= active_gun.max_xp:
+			if active_gun.level == active_gun.max_level:
+				active_gun.xp = active_gun.max_xp
+				#TODO: Flash MAX on HUD
+			else:
+				$GunManager.level_up(false)
+		am.play("get_xp")
+		var experience_get = EXPERIENCEGET.instantiate()
+		experience_get.position = experience_pickup.global_position
+		world.get_node("Front").add_child(experience_get)
+		emit_signal("money_updated", money)
+		emit_signal("guns_updated", guns.get_children())
+		experience_pickup.queue_free()
+	
+	
+	if area.get_collision_layer_value(13): #ammo
+		var ammo_pickup = area.get_parent()
+		for w in guns.get_children():
+			if w.max_ammo != 0:
+				w.ammo += int(w.max_ammo * ammo_pickup.value) #percent of max ammo
+				w.ammo = min(w.ammo, w.max_ammo)
+		am.play("get_ammo")
+		var ammo_get = AMMOGET.instantiate()
+		ammo_get.position = ammo_pickup.global_position
+		world.get_node("Front").add_child(ammo_get)
+		emit_signal("guns_updated", guns.get_children())
+		ammo_pickup.queue_free()
 
 func _on_HurtDetector_body_entered(body):
 	if not disabled and body.get_collision_layer_value(2): #enemy
 		enemies_touching.append(body)
-		
 		var damage = body.damage_on_contact
 		var knockback_direction = Vector2(sign(global_position.x - body.global_position.x), 0)
 		hit(damage, knockback_direction)
@@ -232,9 +241,11 @@ func update_inventory():
 	emit_signal("inventory_updated", inventory)
 
 func setup_hud():
+	var active_gun = guns.get_child(0)
 	emit_signal("hp_updated", hp, max_hp)
-	emit_signal("total_xp_updated", total_xp)
-	emit_signal("guns_updated", $GunManager/Guns.get_children())
+	emit_signal("guns_updated", guns.get_children())
+	emit_signal("xp_updated", active_gun.xp, active_gun.max_xp, active_gun.level, active_gun.max_level)
+	emit_signal("money_updated", money)
 
 
 func connect_inventory():

@@ -1,13 +1,12 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://davoljqg8uuys"]
 
-[ext_resource path="res://src/UI/Font/WelcomeBack.tres" type="FontFile" id=1]
+[ext_resource type="FontFile" path="res://src/UI/Font/WelcomeBack.tres" id="1"]
 
 [node name="StateLabel" type="Label"]
 offset_left = -20.0
 offset_top = -39.0
 offset_right = 20.0
 offset_bottom = -25.0
-theme_override_colors/font_shadow_color = Color( 0, 0, 0, 1 )
-theme_override_fonts/font = ExtResource( 1 )
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1")
 text = "Test"
-align = 1

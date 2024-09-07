@@ -46,13 +46,11 @@ func setup_collision():
 func _physics_process(_delta):
 	if not dead:
 		velocity = calculate_movevelocity(velocity, move_dir, speed)
-		set_velocity(velocity)
 		set_up_direction(FLOOR_NORMAL)
 		move_and_slide()
-		velocity = velocity
 		
-		if dropped == true:
-			if is_on_floor() and touchdown == false: #check to see if they've landed before
+		if dropped:
+			if is_on_floor() and not touchdown: #check to see if they've landed before
 				touchdown = true
 				$PlayerDetector.queue_free()
 				await get_tree().create_timer(0.01).timeout #delay to change damage back to base

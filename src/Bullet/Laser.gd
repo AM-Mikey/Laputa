@@ -15,11 +15,8 @@ func _ready():
 
 func _physics_process(_delta):
 	if disabled: return
-	
 	velocity = speed * direction
-	set_velocity(velocity)
 	move_and_slide()
-	velocity = velocity
 	if origin.distance_to(global_position) > f_range:
 		do_fizzle("range")
 

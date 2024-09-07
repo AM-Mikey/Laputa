@@ -213,7 +213,7 @@ func write_player_data_to_save():
 		"position" : pc.position,
 		"hp" : pc.hp,
 		"max_hp" : pc.max_hp,
-		"total_xp" : pc.total_xp,
+		"money" : pc.money,
 		"inventory" : pc.inventory,
 		"gun_data" : gun_data
 	}
@@ -235,7 +235,7 @@ func read_player_data_from_save():
 	pc.position = player_data["position"]
 	pc.hp = player_data["hp"]
 	pc.max_hp = player_data["max_hp"]
-	pc.total_xp = player_data["total_xp"]
+	pc.money = player_data["money"]
 	pc.inventory = player_data["inventory"]
 	
 	

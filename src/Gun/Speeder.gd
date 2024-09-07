@@ -19,18 +19,21 @@ func load_level():
 #			f_range = 60
 			speed = 120
 			max_xp = 10
+			f_time = 1.2
 		2:
-			bullet_scene = load("res://src/Bullet/BulletRevolver2.tscn")
-			damage = 2
+			bullet_scene = load("res://src/Bullet/Star2.tscn")
+			damage = 1
 #			f_range = 96
-			speed = 320
+			speed = 200
 			max_xp = 15
+			f_time = 1.5
 		3:
-			bullet_scene = load("res://src/Bullet/BulletRevolver3.tscn")
-			damage = 4
+			bullet_scene = load("res://src/Bullet/Star3.tscn")
+			damage = 2
 #			f_range = 128
-			speed = 384
+			speed = 240
 			max_xp = 20
+			f_time = 2.0
 
 func activate():
 	var origin = pc.get_node("BulletOrigin").global_position

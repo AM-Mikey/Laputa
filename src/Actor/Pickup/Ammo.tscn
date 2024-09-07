@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbqhqdaemjwc3"]
+[gd_scene load_steps=8 format=3 uid="uid://dbqhqdaemjwc3"]
 
 [ext_resource type="Script" path="res://src/Actor/Pickup/Ammo.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://74sgkj5lwh4t" path="res://assets/Actor/Pickup/Ammo.png" id="2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1dxo7"]
+size = Vector2(14, 12)
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
@@ -12,14 +15,14 @@ length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(2, 2), Vector2(1, 2), Vector2(2, 2), Vector2(0, 2), Vector2(2, 2), Vector2(1, 2), Vector2(2, 2), Vector2(0, 0)]
+"values": [Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(1, 2), Vector2(0, 2), Vector2(2, 2), Vector2(1, 2), Vector2(2, 2), Vector2(0, 2), Vector2(2, 2), Vector2(1, 2), Vector2(2, 2), Vector2i(1, 0)]
 }
 
 [sub_resource type="Animation" id="3"]
@@ -27,7 +30,7 @@ length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -43,27 +46,34 @@ _data = {
 "Small": SubResource("3")
 }
 
-[node name="Ammo" type="Area2D"]
-collision_layer = 4096
-collision_mask = 0
+[node name="Ammo" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 8
 script = ExtResource("1")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_1dxo7")
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 4096
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+modulate = Color(0.345098, 1, 0.0784314, 0.513726)
+show_behind_parent = true
+shape = SubResource("1")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -8)
 texture = ExtResource("2")
 hframes = 3
 vframes = 3
-frame = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-modulate = Color(0.345098, 1, 0.0784314, 0.513726)
-show_behind_parent = true
-position = Vector2(0, -8)
-shape = SubResource("1")
+frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../PlayerDetector")
 libraries = {
 "": SubResource("AnimationLibrary_nrd4w")
 }
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="PlayerDetector" method="_on_AnimationPlayer_animation_finished"]

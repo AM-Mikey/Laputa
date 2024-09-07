@@ -83,11 +83,9 @@ func _physics_process(_delta):
 
 	#snap_vector = ground_dir * SNAP_LENGTH
 	velocity = calculate_movevelocity(velocity, move_dir, ground_dir, speed)
-	set_velocity(velocity)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
 	#move_and_slide_with_snap(velocity, snap_vector, FLOOR_NORMAL, true)
-	
 	animate()
 
 func get_which_wall_collided():

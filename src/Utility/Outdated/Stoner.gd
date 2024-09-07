@@ -21,11 +21,8 @@ func _physics_process(delta):
 		move_dir.y = 0 #don't allow them to jump if they are midair
 	if not dead:
 		velocity = calculate_movevelocity(velocity, move_dir, speed)
-		set_velocity(velocity)
 		set_up_direction(FLOOR_NORMAL)
 		move_and_slide()
-		velocity = velocity
-		
 
 func calculate_movevelocity(velocity: Vector2, move_dir, speed) -> Vector2:
 	var out: = velocity

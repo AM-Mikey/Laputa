@@ -8,6 +8,8 @@ extends Node
 @onready var ap = pc.get_node("AnimationPlayer")
 @onready var anim = pc.get_node("AnimationManager")
 
+var saved_move_dir := Vector2.ZERO #for the 2 frame stand
+
 func state_process():
 	set_player_directions()
 	mm.velocity = calc_velocity()
@@ -38,26 +40,21 @@ func set_player_directions():
 		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
 
 	#get move_dir
-	pc.move_dir = Vector2(input_dir.x, 0)
+	pc.move_dir = Vector2(input_dir.x, 0.0)
 	
 	#get look_dir
-	if pc.move_dir.x != 0:
-		pc.look_dir = Vector2i(sign(pc.move_dir.x), input_dir.y)
-	else:
-		pc.look_dir = Vector2i(pc.look_dir.x, input_dir.y)
-	if pc.direction_lock != Vector2i.ZERO:
-		pc.look_dir = pc.direction_lock
+	var look_x = pc.look_dir.x
+	if pc.direction_lock != Vector2i.ZERO: #dir lock
+		look_x = pc.direction_lock.x
+	elif pc.move_dir.x != 0.0: #moving
+		look_x = sign(pc.move_dir.x)
+	pc.look_dir = Vector2i(look_x, input_dir.y)
 	
 	#get shoot_dir
-	if pc.is_on_ssp:
-		if pc.look_dir.y != 0: #up or down
-			pc.shoot_dir = Vector2(0.0, pc.look_dir.y)
-		else:
-			pc.shoot_dir = pc.look_dir
+	if pc.look_dir.y < 0.0 or (pc.look_dir.y > 0.0 and pc.is_on_ssp): #up/down
+		pc.shoot_dir = Vector2(0.0, pc.look_dir.y) 
 	else:
-		if pc.look_dir.y == -1: #up
-			pc.shoot_dir = Vector2(0.0, pc.look_dir.y) 
-		pc.shoot_dir = Vector2(pc.look_dir.x, min(pc.look_dir.y, 0.0)) #no look down
+		pc.shoot_dir = Vector2(pc.look_dir.x, 0.0) #no look down
 
 
 func animate():
@@ -66,11 +63,11 @@ func animate():
 	if pc.direction_lock != Vector2i.ZERO and pc.direction_lock.x != sign(pc.move_dir.x):
 		animation = "back_run"
 		reference_texture = preload("res://assets/Actor/Player/BackRunNew.png")
-	if pc.move_dir.x == 0.0: #abs(mm.velocity.x) < mm.min_x_velocity:
+	if pc.move_dir.x == 0.0 and saved_move_dir.x == 0.0: #abs(mm.velocity.x) < mm.min_x_velocity:
 		animation = "stand"
 		reference_texture = preload("res://assets/Actor/Player/StandNew.png")
 	if pc.is_crouching:
-		if pc.move_dir.x == 0.0:
+		if pc.move_dir.x == 0.0 and saved_move_dir.x == 0.0:
 			animation = "crouch"
 			reference_texture = preload("res://assets/Actor/Player/CrouchNew.png")
 		else:
@@ -99,14 +96,19 @@ func animate():
 	if not ap.is_playing() or ap.current_animation != animation:
 		if do_blending:
 			print("blending animation")
-			blend_time = ap.current_animation_position #only blend certain animations
+			if (ap.current_animation == "back_run" and animation == "run") or (ap.current_animation == "run" and animation == "back_run"):
+				var new_frame = ((12 - int(floor(ap.current_animation_position * 10))) % 12) + 1
+				blend_time = new_frame / 10.0
+				#print("blending run from: ",ap.current_animation_position, ", to: ", blend_time)
+			else:
+				blend_time = ap.current_animation_position #only blend certain animations
+			
 		ap.stop()
 		ap.play(animation, blend_time, 1.0)
 		if blend_time != 0.0:
 			ap.seek(blend_time, true)
 	
-	#await(get_tree().process_frame)
-	#set_gun_pos(Vector2(pc.look_dir.x, pc.shoot_dir.y))
+	saved_move_dir = pc.move_dir #for 2 frame stand
 
 ### GETTERS ###
 
@@ -127,23 +129,15 @@ func calc_velocity():
 func get_vframe() -> int:
 	var out = 0
 	match pc.look_dir.x:
-		-1:
-			out = 0
-			#guns.scale.x = 1.0
-		1:
-			out = 4
-			#guns.scale.x = -1.0
-	
+		-1: out = 0
+		1: out = 4
+
 	if pc.shoot_dir.y < 0.0:
-			out += 1
-			#guns.rotation_degrees = 90.0 if guns.scale.x == 1.0 else -90.0
+		out += 1
 	elif pc.shoot_dir.y > 0.0:
-			out += 2
-			#guns.rotation_degrees = -90.0 if guns.scale.x == 1.0 else 90.0
-	elif pc.shoot_dir.y == 0.0:
-			if pc.look_dir.y == 1:
-				out += 3
-			#guns.rotation_degrees = 0
+		out += 2
+	elif pc.shoot_dir.y == 0.0 and pc.look_dir.y == 1:
+		out += 3
 	return out
 
 

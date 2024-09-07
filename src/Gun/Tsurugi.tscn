@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://5orkim7sjfi7"]
+
+[ext_resource type="Script" path="res://src/Gun/Tsurugi.gd" id="1_40cej"]
+[ext_resource type="Texture2D" uid="uid://bkmtocyt76m15" path="res://assets/Gun/Tsurugi.png" id="2_d2e4q"]
+
+[node name="Tsurugi" type="Node2D"]
+script = ExtResource("1_40cej")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_d2e4q")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(-9, 0)

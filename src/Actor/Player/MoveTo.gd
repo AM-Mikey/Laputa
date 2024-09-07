@@ -105,23 +105,15 @@ func calc_velocity():
 func get_vframe() -> int:
 	var out = 0
 	match pc.look_dir.x:
-		-1:
-			out = 0
-			#guns.scale.x = 1.0
-		1:
-			out = 4
-			#guns.scale.x = -1.0
-	
+		-1: out = 0
+		1: out = 4
+
 	if pc.shoot_dir.y < 0.0:
-			out += 1
-			#guns.rotation_degrees = 90.0 if guns.scale.x == 1.0 else -90.0
+		out += 1
 	elif pc.shoot_dir.y > 0.0:
-			out += 2
-			#guns.rotation_degrees = -90.0 if guns.scale.x == 1.0 else 90.0
-	elif pc.shoot_dir.y == 0.0:
-			if pc.look_dir.y == 1:
-				out += 3
-			#guns.rotation_degrees = 0
+		out += 2
+	elif pc.shoot_dir.y == 0.0 and pc.look_dir.y == 1:
+		out += 3
 	return out
 
 

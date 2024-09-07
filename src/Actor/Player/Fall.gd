@@ -33,29 +33,27 @@ func state_process():
 		#mm.bonk("feet")
 		mm.change_state("run")
 
-
 func set_player_directions():
-	var input_dir = Vector2(\
-			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),\
-			Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+	var input_dir = Vector2(
+		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
 	
 	#get move dir
-	pc.move_dir = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0.0)
+	pc.move_dir = Vector2(input_dir.x, 0.0)
 	
 	#get look dir
-	if pc.move_dir.x != 0.0:
-		pc.look_dir = Vector2i(sign(pc.move_dir.x), input_dir.y)
-	else:
-		pc.look_dir = Vector2i(pc.look_dir.x, input_dir.y)
-	if pc.direction_lock != Vector2i.ZERO:
-		pc.look_dir = pc.direction_lock
+	var look_x = pc.look_dir.x
+	if pc.direction_lock != Vector2i.ZERO: #dir lock
+		look_x = pc.direction_lock.x
+	elif pc.move_dir.x != 0.0: #moving
+		look_x = sign(pc.move_dir.x)
+	pc.look_dir = Vector2i(look_x, input_dir.y)
 	
 	#get shoot dir
-	if pc.is_on_ssp:
-		if pc.look_dir.y != 0: #up or down
-			pc.shoot_dir = Vector2(0.0, pc.look_dir.y)
-		else:
-			pc.shoot_dir = pc.look_dir
+	if pc.look_dir.y != 0.0: #up/down
+		pc.shoot_dir = Vector2(0.0, pc.look_dir.y) 
+	else:
+		pc.shoot_dir = Vector2(pc.look_dir.x, 0.0)
 
 
 func animate():
@@ -107,21 +105,13 @@ func calc_velocity():
 func get_vframe() -> int:
 	var out = 0
 	match pc.look_dir.x:
-		-1:
-			out = 0
-			#guns.scale.x = 1.0
-		1:
-			out = 3
-			#guns.scale.x = -1.0
-	
+		-1: out = 0
+		1: out = 3
+
 	if pc.shoot_dir.y < 0.0:
-			out += 1
-			#guns.rotation_degrees = 90.0 if guns.scale.x == 1.0 else -90.0
+		out += 1
 	elif pc.shoot_dir.y > 0.0:
-			out += 2
-			#guns.rotation_degrees = -90.0 if guns.scale.x == 1.0 else 90.0
-	#elif pc.shoot_dir.y == 0.0:
-			#guns.rotation_degrees = 0
+		out += 2
 	return out
 
 

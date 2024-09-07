@@ -13,7 +13,7 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
-[node name="WeaponIcon" type="TextureRect"]
+[node name="GunIcon" type="TextureRect"]
 material = SubResource("1")
 offset_right = 40.0
 offset_bottom = 40.0

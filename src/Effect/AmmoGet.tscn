@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://da0cymtec7765"]
+
+[ext_resource type="Texture2D" uid="uid://bads2c6iwrr7y" path="res://assets/Effect/AmmoGet.png" id="1_q5wu8"]
+[ext_resource type="Script" path="res://src/Effect/BasicParticle.gd" id="2_xvh5a"]
+
+[sub_resource type="CanvasItemMaterial" id="1"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_uvlvd"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, -1.6938, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[node name="AmmoGet" type="CPUParticles2D"]
+light_mask = 2
+material = SubResource("1")
+amount = 1
+lifetime = 0.4
+texture = ExtResource("1_q5wu8")
+gravity = Vector2(0, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+anim_speed_curve = SubResource("Curve_uvlvd")
+script = ExtResource("2_xvh5a")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

@@ -1,4 +1,3 @@
-@tool
 extends Enemy
 
 var tx_toad = preload("res://assets/Actor/Enemy/Toad.png")
@@ -6,123 +5,91 @@ var tx_frog = preload("res://assets/Actor/Enemy/Frog.png")
 
 var target
 
-@export var jump_delay = 3
+@export var jump_delay = 3.0
+var croak_time = 1.0
 var move_dir = Vector2.ZERO
 var look_dir = Vector2.LEFT
 
 #enum Difficulty {easy, normal, hard}
 #export(Difficulty) var difficulty = Difficulty.normal setget _on_difficulty_changed
 
-func _ready():
+func setup():
+	change_state("idle")
 	damage_on_contact = 1
-	#_on_difficulty_changed(difficulty)
-	#gravity = 200
-	#pass
+	reward = 2
+	hp = 3
+	set_floor_stop_on_slope_enabled(true)
 
 
 
 
-func _physics_process(_delta):
-	if disabled or dead or Engine.is_editor_hint():
-		return
-		if not is_on_floor():
-			move_dir.y = 0 #don't allow them to jump if they are midair
-		
-		if $Timer.time_left != 0 and is_on_floor(): #don't allow them to move x if they are not jumping
-			move_dir.x = 0
-			if target != null: #get look direction when not jumping
-				look_dir = Vector2(get_move_dir().x, 0)
+func _on_physics_process(_delta):
+	if disabled or dead or Engine.is_editor_hint(): return
+	if not is_on_floor():
+		move_dir.y = 0 #don't allow them to jump if they are midair
 
-		if $Timer.time_left == 0 and target != null and is_on_floor():
-			$Timer.start(jump_delay)
-			am.play("enemy_jump", self)
-			move_dir = get_move_dir()
-			look_dir = Vector2(move_dir.x, 0)
+	velocity = calc_velocity(velocity, move_dir, speed)
+	move_and_slide()
+	animate()
 
-		velocity = get_move_velocity(velocity, move_dir, speed)
-		set_velocity(velocity)
-		set_up_direction(FLOOR_NORMAL)
-		set_floor_stop_on_slope_enabled(true)
-		move_and_slide()
-		velocity = velocity
-		
+### STATES ###
+
+func do_targeting():
+	if is_on_floor():
+		if $JumpTimer.time_left == 0.0:
+			change_state("jump")
+		else:
+			look_dir = Vector2(sign(target.get_global_position().x - global_position.x), 0)
+
+func enter_jump():
+	am.play("enemy_jump", self)
+	move_dir = Vector2(sign(target.get_global_position().x - global_position.x), -1)
+	look_dir = Vector2(move_dir.x, 0)
+
+func do_jump():
+	if is_on_floor():
+		move_dir = Vector2.ZERO
+		$AnimationPlayer.play("Stand")
+		$JumpTimer.start(jump_delay)
+		$CroakTimer.start(croak_time)
+		if target == null:
+			change_state("idle")
+		else:
+			change_state("targeting")
+
+### SFX ###
+
+func croak():
+	am.play("enemy_croak", self)
+
+
+func animate():
+	$Sprite2D.flip_h = true if look_dir.x > 0.0 else false
+	if is_on_floor():
+		pass
+	else:
+		if move_dir.y < 0:
+			$AnimationPlayer.play("Rise")
+		elif move_dir.y > 0:
+			$AnimationPlayer.play("Fall")
+
+
+### SIGNALS ###
 
 func _on_PlayerDetector_body_entered(body):
 	target = body
+	if state == "idle":
+		change_state("targeting")
 
 func _on_PlayerDetector_body_exited(_body):
 	target = null
+	if state == "targeting":
+		change_state("idle")
 
-func get_move_dir() -> Vector2:
-	return Vector2(sign(target.get_global_position().x - global_position.x), -1)
+func _on_croak_timer_timeout():
+	if state == "targeting":
+		$AnimationPlayer.play("Croak")
 
-func get_move_velocity(
-		linearvelocity: Vector2,
-		move_direction: Vector2,
-		speed: Vector2
-		) -> Vector2:
-	
-	var out: = linearvelocity
-	var friction = false
-	
-	if is_in_water: #this code has no acceleration
-		out.y += (gravity/2) * get_physics_process_delta_time()
-		if move_dir.y < 0:
-			out.y = (speed.y * 0.75) * move_dir.y
-		if move_dir.x != 0:
-			out.x = speed.x * move_direction.x
-		else:
-			friction = true
-	
-	else: #this code has no acceleration
-		out.y += gravity * get_physics_process_delta_time()
-		if move_dir.y < 0:
-			out.y = speed.y * move_dir.y
-		if move_dir.x != 0:
-			out.x = speed.x * move_direction.x
-		else:
-			friction = true
-
-
-	if is_on_floor():
-		if friction == true:
-			out.x = lerp(out.x, 0.0, ground_cof)
-	else:
-		if friction == true:
-			out.x = lerp(out.x, 0.0, air_cof)
-	return out
-
-
-
-func enter_smallhop():
-	pass
-
-
-#func animate():
-#	if look_dir == Vector2.LEFT:
-#		if is_on_floor():
-#			if not $Timer.is_stopped() and $Timer.time_left <= 0.8:
-#				$AnimationPlayer.play("CroakLeft")
-#			else:
-#				$AnimationPlayer.play("StandLeft")
-#		else:
-#			if move_dir.y < 0:
-#				$AnimationPlayer.play("RiseLeft")
-#			elif move_dir.y > 0:
-#				$AnimationPlayer.play("FallLeft")
-#
-#
-#	elif look_dir == Vector2.RIGHT:
-#		if is_on_floor():
-#			if not $Timer.is_stopped() and $Timer.time_left <= 0.8:
-#				$AnimationPlayer.play("CroakRight")
-#			else:
-#				$AnimationPlayer.play("StandRight")
-#		else:
-#			if move_dir.y < 0:
-#				$AnimationPlayer.play("RiseRight")
-#			elif move_dir.y > 0:
-#				$AnimationPlayer.play("FallRight")
 
 #func _on_difficulty_changed(new):
 #	difficulty = new
@@ -151,3 +118,6 @@ func enter_smallhop():
 #			$Sprite.modulate = Color(0, 0.976471, 1)
 #			$Sprite.texture = tx_frog
 #			speed = Vector2(12, 120)
+
+
+

@@ -6,7 +6,6 @@ var collision_shape: RectangleShape2D
 
 var minimum_speed: float = 6
 var bounciness = 1 #.6
-var fizzle_time = 12.0
 var start_velocity
 var touched_floor = false
 
@@ -18,6 +17,7 @@ var touched_floor = false
 
 
 func _ready():
+	$FizzleTimer.start(f_time)
 	break_method = "cut"
 
 	velocity = get_initial_velocity()

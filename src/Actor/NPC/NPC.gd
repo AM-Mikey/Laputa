@@ -110,10 +110,8 @@ func do_walk():
 		change_state("wait")
 	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
 		velocity = calc_velocity()
-		set_velocity(velocity)
 		set_up_direction(FLOOR_NORMAL)
 		move_and_slide()
-		velocity = velocity
 	
 
 

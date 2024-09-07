@@ -26,10 +26,8 @@ func _physics_process(delta):
 			move_dir = get_move_dir()
 
 		velocity = get_movevelocity(velocity, move_dir, speed)
-		set_velocity(velocity)
 		set_up_direction(FLOOR_NORMAL)
 		move_and_slide()
-		velocity = velocity
 
 
 

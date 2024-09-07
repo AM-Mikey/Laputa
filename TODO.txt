@@ -5,16 +5,60 @@ auto-jump
 fix land bonk
 fix shoot down on non-ssp
 
-animation:
--backrun blending with run
-	>keeps going to stand pose on 0 speed
-	>even on blend you need to go to backframe = (12 - forwardframe)mod 12 to make it line up
-	
+--- animation ---
 -backrun crouch animations
-
-
 -adjust recent shot time
 	>jumping then insta shoot down
 -bug not triggering fall on fall
 	>when holding jump
--lock dir locks shoot up/down direction
+-wall pushing/standing anim
+
+--- tilemap ---
+-fix ssp trigger on tilemap
+-mess with terrain
+
+--- enemy ---
+-enemy hurt sounds move to _on_hit
+-enemy scripts shadowing phys_process
+-figure out enemy look/move dir as float or int
+-junior state machine broke
+
+--- player ---
+-add 8dir gun
+	>flamethrower?
+-fix ladder
+-fix jump on holding jump button
+-add or fix bonk protection (move character or rounded hitbox)
+-fix footstep sound code
+
+
+--- pickup ---
+-add large xp
+-pop out faster & consistant
+
+
+--- gun ---
+fix large gun hand sprites
+
+
+--- hud ---
+flash max on max xp pickup
+make hud flash non-tween
+	-also player
+	-also xp
+	-also ammo
+clean up tres fonts (unneeded)
+weaponwheel
+
+make hp and xp bar fill up on game or level start (whatever is consistant)
+fix bar flash on gain xp
+
+--- effect ---
+land particle
+improve blood dir accuracy
+
+
+--- general ---
+set global color palettes for xp hp etc
+
+Last thing: updated xp colors

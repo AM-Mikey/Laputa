@@ -13,8 +13,8 @@ enum TileMode {BOTH, HORIZONTAL, VERTICAL, NONE}
 @export var focus: Focus
 @export var tile_mode: TileMode
 
-var layer_repeating_length := 4000
-var always_tile_far_layer = true
+var layer_repeating_length := 5000
+var always_tile_far_layer = false #DOES NOT WORK
 
 var w
 var camera
@@ -59,22 +59,26 @@ func setup_layers():
 		var layer = ParallaxLayer.new()
 		pb.add_child(layer)
 		
-		var motion_scale = (parallax_near - parallax_far) / layers * layer_id
+		var layer_scale_step = (parallax_near - parallax_far) / (layers - 1)
+		var motion_scale = (layer_scale_step * layer_id) + parallax_far
 		layer.motion_scale = Vector2(motion_scale, motion_scale)
 
 		var texture_rect = TextureRect.new()
-		texture_rect.expand = true
+		#texture_rect.expand = true
+		texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		texture_rect.stretch_mode = TextureRect.STRETCH_TILE
 		texture_rect.mouse_filter = MOUSE_FILTER_IGNORE
 
-#		var atlas_texture = AtlasTexture.new()
-#		atlas_texture.atlas = texture
+
 		var layer_height = int(texture.get_height() / float(layers))
 		var layer_y = layer_height * layer_id
-		var region = Rect2(0, layer_y, texture.get_width(), layer_height)
+		var region = Rect2i(0, layer_y, texture.get_width(), layer_height)
 		
-		var clipped_texture = ImageTexture.new()
-		clipped_texture.create_from_image(texture.get_image().get_region(region))
+		#this cannot be AtlasTexture due to bug https://github.com/godotengine/godot/issues/20472
+		var texture_as_image = texture.get_image().get_region(region)
+		var clipped_texture = ImageTexture.new().create_from_image(texture_as_image)
+		
+		
 		#clipped_texture.flags = 0 #turn off filtering #TODO: turn back on if backgrounds are blurry
 		texture_rect.texture = clipped_texture
 		
@@ -83,30 +87,33 @@ func setup_layers():
 		else:
 			set_tile_mode(texture_rect)
 		
-		texture_rect.global_position = texture_rect.size * -0.5
+		texture_rect.global_position = texture_rect.size * -0.5 #TODO:FIX
 		layer.add_child(texture_rect)
 		layer_id += 1
 
 
 func set_focus():
 	if not Engine.is_editor_hint():
-		var center = global_position + (size / 2)
-		var near_corner = global_position
-		var far_corner = global_position + size
+		var base_offset_x = ((-w.resolution_scale * global_position.x) + (size.x * w.resolution_scale) - get_viewport().size.x) / 2
+		var base_offset_y = ((-w.resolution_scale * global_position.y) + (size.y * w.resolution_scale) - get_viewport().size.y) / 2 
+		
+		var center = Vector2(base_offset_x, base_offset_y)
+		var near_corner = Vector2i.ZERO	#TODO:FIX
+		var far_corner = Vector2i(texture.get_width() * 2, texture.get_width() * -2) #both this and the last line had stops. i dont understand this right now so im leaving it
 		
 		match focus:
-			Focus.CENTER:
+			Focus.CENTER:	#TODO:FIX
 				pb.scroll_base_offset = center
 			Focus.TOP:
-				pb.scroll_base_offset = Vector2(center.x, 0)
-			Focus.ONE_QUARTER:
-				pb.scroll_base_offset = Vector2(center.x, near_corner.y + (size.y * .25))
-			Focus.THREE_QUARTERS:
-				pb.scroll_base_offset = Vector2(center.x, near_corner.y + (size.y * .75))
-			Focus.BOTTOM:
 				pb.scroll_base_offset = Vector2(center.x, far_corner.y)
-			
-		pb.scroll_base_offset *=  w.resolution_scale
+			Focus.ONE_QUARTER:
+				pb.scroll_base_offset = Vector2(center.x, far_corner.y + (texture.get_width() * 0.5))
+			Focus.THREE_QUARTERS:
+				pb.scroll_base_offset = Vector2(center.x, far_corner.y + (texture.get_width() * 1.5))
+			Focus.BOTTOM:
+				pb.scroll_base_offset = Vector2(center.x, near_corner.y)
+			#
+		##pb.scroll_base_offset /=  w.resolution_scale
 
 func set_tile_mode(texture_rect, mode := "auto"):
 	match mode:
@@ -115,15 +122,19 @@ func set_tile_mode(texture_rect, mode := "auto"):
 				TileMode.HORIZONTAL:
 					texture_rect.size.x = layer_repeating_length
 					texture_rect.size.y = texture_rect.texture.get_height()
+					#texture_rect.global_position = texture_rect.size * -0.5 #TODO:FIX
 				TileMode.VERTICAL:
 					texture_rect.size.x = texture_rect.texture.get_width()
 					texture_rect.size.y = layer_repeating_length
+					#texture_rect.global_position = texture_rect.size * -0.5
 				TileMode.BOTH:
 					texture_rect.size.x = layer_repeating_length
 					texture_rect.size.y = layer_repeating_length
+					#texture_rect.global_position = Vector2.ZERO #texture_rect.global_position = texture_rect.size * -0.5
 				TileMode.NONE:
 					texture_rect.size.x = texture_rect.texture.get_width()
 					texture_rect.size.y = texture_rect.texture.get_height()
+					#texture_rect.global_position = Vector2.ZERO #texture_rect.size * 0.5
 		"both":
 			texture_rect.size.x = layer_repeating_length
 			texture_rect.size.y = layer_repeating_length

@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://dvq6mimt4hrbt"]
 
-[ext_resource path="res://assets/Effect/SealDoor.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://cdin3g178npqw" path="res://assets/Effect/SealDoor.png" id="1"]
 
 [node name="SealDoor" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2( 0, -64 )
-texture = ExtResource( 1 )
+position = Vector2(0, -64)
+texture = ExtResource("1")

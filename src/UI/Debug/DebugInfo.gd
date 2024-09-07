@@ -35,8 +35,8 @@ func _physics_process(_delta):
 		
 
 		$VBox/HBox/C1/A/HP.text = str("%2.f" % pc.hp) + "/" + str("%2.f" % pc.max_hp)
-		$VBox/HBox/C1/A/TotalXP.text = str(pc.total_xp)
-		$VBox/HBox/C1/A/WeaponXP.text = str("%2.f" % active_gun.xp) + "/" + str("%2.f" % active_gun.max_xp)
+		$VBox/HBox/C1/A/Money.text = str(pc.money)
+		$VBox/HBox/C1/A/XP.text = str("%2.f" % active_gun.xp) + "/" + str("%2.f" % active_gun.max_xp)
 		$VBox/HBox/C1/A/WeaponCooldown.text = str("%2.2f" % pc.get_node("GunManager/CooldownTimer").time_left)
 		
 		$VBox/HBox/C1/A/Velocity.text = str("%4.f" % mm.velocity.x) + "," + str("%4.f" % mm.velocity.y)

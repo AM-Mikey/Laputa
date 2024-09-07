@@ -23,6 +23,7 @@ func load_level():
 		1:
 			bullet_scene = load("res://src/Bullet/Fan1.tscn")
 			clip_size = 3
+			damage = 1
 			f_range = 60
 			speed = 256
 			max_xp = 10

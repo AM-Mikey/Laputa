@@ -24,10 +24,8 @@ func _physics_process(_delta):
 	if disabled or dead:
 		return
 	velocity = calculate_move_velocity(velocity, move_dir, speed)
-	set_velocity(velocity)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
-	velocity = velocity
 
 
 func enter_hang():

@@ -11,13 +11,10 @@ func _ready():
 	damage_on_contact = 2
 
 func _physics_process(_delta):
-	if disabled or dead:
-		return
+	if disabled or dead: return
 	velocity = calc_velocity(velocity, move_dir, speed)
-	set_velocity(velocity)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
-	velocity = velocity
 	
 
 func enter_idle():

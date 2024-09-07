@@ -1,73 +1,74 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://2st5whfy4i8b"]
 
-[ext_resource path="res://assets/UI/NumberNew.png" type="Texture2D" id=1]
-[ext_resource path="res://src/UI/HUD/AmmoCount.gd" type="Script" id=2]
+[ext_resource type="Texture2D" uid="uid://c7wyw4y3jdl7j" path="res://assets/UI/NumberNew.png" id="1"]
+[ext_resource type="Script" path="res://src/UI/HUD/AmmoCount.gd" id="2"]
 
 [node name="AmmoCount" type="Control"]
+custom_minimum_size = Vector2(48, 16)
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -432.0
 offset_bottom = -254.0
-custom_minimum_size = Vector2( 48, 16 )
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2")
 
 [node name="Divider" type="Sprite2D" parent="."]
-position = Vector2( 33, 5 )
-texture = ExtResource( 1 )
+position = Vector2(33, 5)
+texture = ExtResource("1")
 centered = false
-offset = Vector2( -9, -5 )
+offset = Vector2(-9, -5)
 hframes = 11
 vframes = 6
 frame = 21
 
 [node name="Divider2" type="Sprite2D" parent="."]
-position = Vector2( 25, 13 )
-texture = ExtResource( 1 )
+position = Vector2(25, 13)
+texture = ExtResource("1")
 centered = false
-offset = Vector2( -9, -5 )
+offset = Vector2(-9, -5)
 hframes = 11
 vframes = 6
 frame = 21
 
 [node name="Num1" type="Sprite2D" parent="."]
-position = Vector2( 4, 4 )
-texture = ExtResource( 1 )
+position = Vector2(4, 4)
+texture = ExtResource("1")
 hframes = 11
 vframes = 6
 frame = 1
 
 [node name="Num2" type="Sprite2D" parent="."]
-position = Vector2( 12, 4 )
-texture = ExtResource( 1 )
+position = Vector2(12, 4)
+texture = ExtResource("1")
 hframes = 11
 vframes = 6
 
 [node name="Num3" type="Sprite2D" parent="."]
-position = Vector2( 20, 4 )
-texture = ExtResource( 1 )
+position = Vector2(20, 4)
+texture = ExtResource("1")
 hframes = 11
 vframes = 6
 
 [node name="Num4" type="Sprite2D" parent="."]
-position = Vector2( 28, 12 )
-texture = ExtResource( 1 )
+position = Vector2(28, 12)
+texture = ExtResource("1")
 hframes = 11
 vframes = 6
 frame = 12
 
 [node name="Num5" type="Sprite2D" parent="."]
-position = Vector2( 36, 12 )
-texture = ExtResource( 1 )
+position = Vector2(36, 12)
+texture = ExtResource("1")
 hframes = 11
 vframes = 6
 frame = 11
 
 [node name="Num6" type="Sprite2D" parent="."]
-position = Vector2( 44, 12 )
-texture = ExtResource( 1 )
+position = Vector2(44, 12)
+texture = ExtResource("1")
 hframes = 11
 vframes = 6
 frame = 11

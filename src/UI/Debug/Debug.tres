@@ -1,17 +1,10 @@
-[gd_resource type="Theme" load_steps=3 format=2]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://d2y1ya8pt8ye2"]
 
-[ext_resource path="res://src/UI/Font/Momo.tres" type="FontFile" id=1]
-[ext_resource path="res://src/UI/Debug/50PercentBlack.tres" type="StyleBox" id=2]
+[ext_resource type="StyleBox" path="res://src/UI/Debug/50PercentBlack.tres" id="2"]
+[ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momoextended.ttf" id="3_c4p6r"]
 
 [resource]
+default_font = ExtResource("3_c4p6r")
 HBoxContainer/constants/separation = 0
-Label/colors/font_color = Color( 1, 1, 1, 1 )
-Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
-Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
-Label/constants/line_spacing = 3
-Label/constants/shadow_as_outline = 0
-Label/constants/shadow_offset_x = 1
-Label/constants/shadow_offset_y = 1
-Label/fonts/font = ExtResource( 1 )
-Label/styles/normal = ExtResource( 2 )
+Label/styles/normal = ExtResource("2")
 VBoxContainer/constants/separation = 0

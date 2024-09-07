@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://2sgs4b0a04hd"]
+
+[ext_resource type="Texture2D" uid="uid://byoud7800466y" path="res://assets/Effect/ExperienceGet.png" id="1_yhchw"]
+[ext_resource type="Script" path="res://src/Effect/BasicParticle.gd" id="2_txres"]
+
+[sub_resource type="CanvasItemMaterial" id="1"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_uvlvd"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, -1.6938, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[node name="ExperienceGet" type="CPUParticles2D"]
+light_mask = 2
+material = SubResource("1")
+amount = 1
+lifetime = 0.4
+texture = ExtResource("1_yhchw")
+gravity = Vector2(0, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+anim_speed_curve = SubResource("Curve_uvlvd")
+script = ExtResource("2_txres")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

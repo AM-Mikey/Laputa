@@ -105,11 +105,9 @@ func _physics_process(delta):
 		
 	
 	velocity = calculate_movevelocity(velocity, move_dir)
-	set_velocity(velocity)
 	set_up_direction(FLOOR_NORMAL)
 	set_floor_stop_on_slope_enabled(true)
 	move_and_slide()
-	velocity = velocity
 
 
 

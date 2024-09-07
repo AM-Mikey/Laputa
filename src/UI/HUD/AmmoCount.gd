@@ -3,7 +3,12 @@ extends Control
 var ammo
 var max_ammo
 
-func _ready():
+func display_ammo():
+	if max_ammo == 0:
+		visible = false
+	else:
+		visible = true
+	
 	if ammo >= 0 and ammo < 10:
 		$Num1.visible = false
 		$Num2.visible = false
@@ -57,5 +62,6 @@ func _ready():
 		$Num4.frame_coords.x = 9
 		$Num5.frame_coords.x = 9
 		$Num6.frame_coords.x = 9
+		print("Warning: can't display ammo count higher than 999")
 	else:
 		printerr("ERROR: hud cannot display max ammo number with value: ", max_ammo)

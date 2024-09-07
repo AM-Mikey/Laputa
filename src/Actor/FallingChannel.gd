@@ -19,10 +19,8 @@ func _physics_process(_delta):
 
 	if falling:
 		velocity = calculate_movevelocity(velocity)
-		set_velocity(velocity)
 		set_up_direction(FLOOR_NORMAL)
 		move_and_slide()
-		velocity = velocity
 
 
 func calculate_movevelocity(linearvelocity: Vector2) -> Vector2:
