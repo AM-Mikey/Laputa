@@ -47,6 +47,7 @@ make hud flash non-tween
 	-also player
 	-also xp
 	-also ammo
+make transparency use canvasgroup
 clean up tres fonts (unneeded)
 weaponwheel
 
@@ -58,7 +59,13 @@ land particle
 improve blood dir accuracy
 
 
+--- ui ---
+font and theme standardization
+
 --- general ---
 set global color palettes for xp hp etc
 
 Last thing: updated xp colors
+
+FIX LEVEL EDITOR FOR IVAN
+level editor + debug tileset for level making

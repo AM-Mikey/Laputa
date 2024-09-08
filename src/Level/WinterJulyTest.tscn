@@ -4,12 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://src/Tile/Outdated/Layers/Collision.tscn" id="3"]
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="4"]
-[ext_resource type="PackedScene" path="res://src/Actor/Enemy/Trenchie.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://b06vi8xuugq3x" path="res://src/Actor/Enemy/Trenchie.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://src/Actor/Enemy/Fish/Fish.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://src/Trigger/KillBox.tscn" id="10"]
 [ext_resource type="PackedScene" path="res://src/Tile/Outdated/Layers/Front.tscn" id="11"]
 [ext_resource type="Texture2D" uid="uid://2mnimk4pr5i" path="res://assets/Background/bkMoon.png" id="13"]
-[ext_resource type="TileSet" path="res://src/Tile/Winter.tres" id="14"]
+[ext_resource type="TileSet" uid="uid://s0sx1q0huhys" path="res://src/Tile/OutdatedNewer/Winter.tres" id="14"]
 
 [node name="WinterJulyTest" type="Node2D"]
 script = ExtResource("4")

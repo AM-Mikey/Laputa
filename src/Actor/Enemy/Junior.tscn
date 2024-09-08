@@ -101,6 +101,7 @@ _data = {
 size = Vector2(96, 48)
 
 [node name="Junior" type="CharacterBody2D"]
+modulate = Color(1, 1, 1, 0.462745)
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("1")
@@ -111,6 +112,13 @@ shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
+texture = ExtResource("2")
+hframes = 4
+vframes = 5
+frame = 8
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(7, -15)
 texture = ExtResource("2")
 hframes = 4
 vframes = 5

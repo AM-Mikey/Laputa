@@ -21,12 +21,12 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("debug_editor"):
 		if el.has_node("Editor"):
-			editor_tab = el.get_node("Editor/Main/Tab").current_tab
+			editor_tab = el.get_node("Editor/Main/Win/Tab").current_tab
 			el.get_node("Editor").exit()
 		else:
 			print("showing level editor")
 			el.add_child(LEVEL_EDITOR.instantiate())
-			el.get_node("Editor/Main/Tab").current_tab = editor_tab
+			el.get_node("Editor/Main/Win/Tab").current_tab = editor_tab
 			el.get_node("Editor").on_tab_changed(editor_tab)
 	
 	if event.is_action_pressed("debug_print"):

@@ -13,11 +13,12 @@ var default = {
 @onready var editor = get_parent()
 
 func _ready():
-	if FileAccess.file_exists(SETTINGS_FILE):
-		load_settings()
-	else: 
-		save_defaults()
-		load_settings()
+	pass
+	#if FileAccess.file_exists(SETTINGS_FILE):
+		#load_settings()
+	#else: 
+		#save_defaults()
+		#load_settings()
 
 
 func save_editor_windows():
@@ -29,12 +30,12 @@ func load_settings():
 	
 	
 	var data1 = data["EditorWindow"]
-	editor.get_node("Main").position = Vector2(data1[0], data1[1])
-	editor.get_node("Main").size = Vector2(data1[2], data1[3])
+	editor.get_node("Main/Win").position = Vector2(data1[0], data1[1])
+	editor.get_node("Main/Win").size = Vector2(data1[2], data1[3])
 	
 	var data2 = data["InspectorWindow"]
-	editor.get_node("Secondary").position = Vector2(data2[0], data2[1])
-	editor.get_node("Secondary").size = Vector2(data2[2], data2[3])
+	editor.get_node("Secondary/Win").position = Vector2(data2[0], data2[1])
+	editor.get_node("Secondary/Win").size = Vector2(data2[2], data2[3])
 	
 
 #HELPERS

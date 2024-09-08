@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource path="res://src/Effect/Light/SunLight.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Background/LevelLimiter.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Editor/SpawnPoint.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Tile/Village.tres" type="TileSet" id=4]
-[ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
-[ext_resource path="res://assets/Background/SkyDemo.png" type="Texture2D" id=9]
+[ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="3"]
+[ext_resource type="TileSet" uid="uid://cgpbhmdgpp4bx" path="res://src/Tile/OutdatedNewer/Village.tres" id="4"]
+[ext_resource type="Script" path="res://src/Level/Level.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://dq2iro7mqv5lm" path="res://assets/Background/SkyDemo.png" id="9"]
 
 [node name="testlevel" type="Node2D"]
 script = ExtResource( 5 )

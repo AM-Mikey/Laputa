@@ -4,7 +4,7 @@ const TAB_BUTTON = preload("res://src/Editor/Button/TabButton.tscn")
 
 var icons = load("res://assets/Editor/TabIcons.png")
 
-@onready var editor = get_parent().get_parent()
+@onready var editor = get_parent().get_parent().get_parent()
 @onready var tabs = get_parent().get_node("Tab").get_children()
 
 func _ready():

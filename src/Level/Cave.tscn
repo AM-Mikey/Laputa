@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cw6pi1ga75u6o"]
 
-[ext_resource type="TileSet" uid="uid://cqb6cyvbio4wa" path="res://src/Tile/Temple.tres" id="1"]
+[ext_resource type="TileSet" uid="uid://cqb6cyvbio4wa" path="res://src/Tile/OutdatedNewer/Temple.tres" id="1"]
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="4"]

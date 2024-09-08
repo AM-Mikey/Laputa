@@ -23,10 +23,11 @@ func _unhandled_input(event):
 
 
 func _ready():
-	setup_enemies()
+	pass
+	#setup_levels()
 
 
-func setup_enemies():
+func setup_levels():
 	var index = 0
 	for l in find_level_scenes("res://src/Level/"):
 		

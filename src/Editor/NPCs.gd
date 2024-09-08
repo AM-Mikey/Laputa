@@ -7,10 +7,11 @@ signal npc_changed(npc_path)
 var npcs = {}
 var active_npc_path
 
-@onready var editor = get_parent().get_parent().get_parent()
+@onready var editor = get_parent().get_parent().get_parent().get_parent()
 
 func _ready():
-	setup_npcs()
+	pass
+	#setup_npcs()
 
 
 func setup_npcs():

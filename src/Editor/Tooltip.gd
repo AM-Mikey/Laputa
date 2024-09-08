@@ -6,7 +6,7 @@ extends MarginContainer
 func _process(_delta):
 	var mouse_pos = w.get_global_mouse_position()
 	var cell_pos = editor.get_cell(mouse_pos)
-	$HBox/Coordinates.text = String(cell_pos)
+	$HBox/Coordinates.text = str(cell_pos)
 
 
 	var tiles = []
@@ -15,4 +15,4 @@ func _process(_delta):
 			var tile = m.get_cell_source_id(0, cell_pos)
 			if tile != -1:
 					tiles.append(tile)
-	$HBox/Tile.text = tiles
+	$HBox/Tile.text = str(tiles)

@@ -1,27 +1,28 @@
-[gd_scene load_steps=15 format=3 uid="uid://b5eyeotyrei5i"]
+[gd_scene load_steps=16 format=3 uid="uid://b5eyeotyrei5i"]
 
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1"]
 [ext_resource type="Script" path="res://src/Editor/Editor.gd" id="2"]
-[ext_resource type="PackedScene" path="res://src/Editor/ResizeWindow.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://src/Editor/Tiles.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://src/Editor/TileSet.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://icj0ey5k5dwx" path="res://src/Editor/ResizeWindow.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://bg715nunngytq" path="res://src/Editor/Tiles.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://b06myq2bwfo7r" path="res://src/Editor/TileSet.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://src/Editor/Levels.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://src/Editor/Inspector.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://ctxo7a6euqnhd" path="res://src/Editor/Inspector.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://src/Editor/Enemies.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://src/Editor/Props.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://src/Editor/NPCs.tscn" id="10"]
-[ext_resource type="PackedScene" path="res://src/Editor/Triggers.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://36k868wp3ide" path="res://src/Editor/Triggers.tscn" id="11"]
 [ext_resource type="Script" path="res://src/Editor/TabButtons.gd" id="12"]
 [ext_resource type="PackedScene" path="res://src/Editor/Tooltip.tscn" id="13"]
 [ext_resource type="Script" path="res://src/Editor/EditorSettings.gd" id="14"]
+[ext_resource type="Script" path="res://src/Editor/TileMaster.gd" id="15_aiisb"]
 
 [node name="Editor" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -312.0
-offset_bottom = 90.0
+offset_right = 480.0
+offset_bottom = 242.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -31,85 +32,99 @@ script = ExtResource("2")
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 0
 offset_right = 960.0
-offset_bottom = 448.0
+offset_bottom = 512.0
 mouse_filter = 2
 
 [node name="Tooltip" parent="Margin" instance=ExtResource("13")]
 layout_mode = 2
 
-[node name="Secondary" parent="." instance=ExtResource("3")]
-layout_mode = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 761.0
-offset_right = 968.0
-offset_bottom = 440.0
+[node name="EditorSettings" type="Node" parent="."]
+script = ExtResource("14")
 
-[node name="Inspector" parent="Secondary" instance=ExtResource("7")]
-layout_mode = 2
-mouse_filter = 1
+[node name="TileMaster" type="Node" parent="."]
+script = ExtResource("15_aiisb")
 
-[node name="Main" parent="." instance=ExtResource("3")]
-layout_mode = 0
+[node name="Main" type="CanvasGroup" parent="."]
+self_modulate = Color(1, 1, 1, 0.282353)
+
+[node name="Win" parent="Main" instance=ExtResource("3")]
+use_parent_material = true
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_right = 250.0
 offset_bottom = 416.0
 mouse_filter = 1
 
-[node name="Tab" type="TabContainer" parent="Main"]
+[node name="Tab" type="TabContainer" parent="Main/Win"]
 layout_mode = 2
 mouse_filter = 2
 tabs_visible = false
 
-[node name="Tiles" parent="Main/Tab" instance=ExtResource("4")]
+[node name="Tiles" parent="Main/Win/Tab" instance=ExtResource("4")]
 layout_mode = 2
 
-[node name="TileSet" parent="Main/Tab" instance=ExtResource("5")]
+[node name="TileSet" parent="Main/Win/Tab" instance=ExtResource("5")]
 visible = false
+use_parent_material = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Levels" parent="Main/Tab" instance=ExtResource("6")]
+[node name="Levels" parent="Main/Win/Tab" instance=ExtResource("6")]
 visible = false
+use_parent_material = true
 layout_mode = 2
 
-[node name="Enemies" parent="Main/Tab" instance=ExtResource("8")]
+[node name="Enemies" parent="Main/Win/Tab" instance=ExtResource("8")]
 visible = false
+use_parent_material = true
 layout_mode = 2
 
-[node name="NPCs" parent="Main/Tab" instance=ExtResource("10")]
+[node name="NPCs" parent="Main/Win/Tab" instance=ExtResource("10")]
 visible = false
+use_parent_material = true
 layout_mode = 2
 
-[node name="Props" parent="Main/Tab" instance=ExtResource("9")]
+[node name="Props" parent="Main/Win/Tab" instance=ExtResource("9")]
 visible = false
+use_parent_material = true
 layout_mode = 2
 
-[node name="Triggers" parent="Main/Tab" instance=ExtResource("11")]
+[node name="Triggers" parent="Main/Win/Tab" instance=ExtResource("11")]
 visible = false
+use_parent_material = true
 layout_mode = 2
 
-[node name="TabButtons" type="Control" parent="Main"]
+[node name="TabButtons" type="Control" parent="Main/Win"]
 show_behind_parent = true
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("12")
 
-[node name="VBox" type="HBoxContainer" parent="Main/TabButtons"]
+[node name="VBox" type="HBoxContainer" parent="Main/Win/TabButtons"]
 layout_mode = 0
 offset_top = -24.0
 offset_right = 256.0
 offset_bottom = 16.0
 mouse_filter = 2
 
-[node name="EditorSettings" type="Node" parent="."]
-script = ExtResource("14")
+[node name="Secondary" type="CanvasGroup" parent="."]
 
-[connection signal="entity_selected" from="." to="Secondary/Inspector" method="on_selected"]
-[connection signal="level_saved" from="." to="Main/Tab/Levels" method="on_save"]
-[connection signal="mouse_entered" from="Secondary" to="Secondary" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Secondary" to="Secondary" method="_on_mouse_exited"]
-[connection signal="tab_changed" from="Main/Tab" to="." method="on_tab_changed"]
-[connection signal="terrain_toggled" from="Main/Tab/Tiles" to="." method="on_terrain_toggled"]
-[connection signal="tile_transform_updated" from="Main/Tab/Tiles" to="." method="_on_Tiles_tile_transform_updated"]
+[node name="Win" parent="Secondary" instance=ExtResource("3")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 761.0
+offset_right = 968.0
+offset_bottom = 440.0
+
+[node name="Inspector" parent="Secondary/Win" instance=ExtResource("7")]
+layout_mode = 2
+
+[connection signal="entity_selected" from="." to="Secondary/Win/Inspector" method="on_selected"]
+[connection signal="level_saved" from="." to="Main/Win/Tab/Levels" method="on_save"]
+[connection signal="tab_changed" from="Main/Win/Tab" to="." method="on_tab_changed"]
+[connection signal="terrain_toggled" from="Main/Win/Tab/Tiles" to="." method="on_terrain_toggled"]
+[connection signal="tile_transform_updated" from="Main/Win/Tab/Tiles" to="." method="_on_Tiles_tile_transform_updated"]
+[connection signal="mouse_entered" from="Secondary/Win" to="Secondary/Win" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Secondary/Win" to="Secondary/Win" method="_on_mouse_exited"]

@@ -1,173 +1,133 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://icj0ey5k5dwx"]
 
-[ext_resource path="res://src/Editor/ResizeWindow.gd" type="Script" id=1]
-[ext_resource path="res://src/Editor/EditorTheme.tres" type="Theme" id=2]
+[ext_resource type="Script" path="res://src/Editor/ResizeWindow.gd" id="1"]
+[ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="2"]
 
 [node name="ResizeWindow" type="MarginContainer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -224.0
 offset_bottom = 14.0
 mouse_filter = 2
-theme = ExtResource( 2 )
-script = ExtResource( 1 )
+theme = ExtResource("2")
+script = ExtResource("1")
 
 [node name="Handles" type="VBoxContainer" parent="."]
-offset_right = 256.0
-offset_bottom = 284.0
+layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="Header" type="Control" parent="Handles"]
-offset_right = 256.0
+layout_mode = 2
 mouse_filter = 2
 
 [node name="ReferenceRect" type="ReferenceRect" parent="Handles/Header"]
 visible = false
+layout_mode = 0
 offset_right = 256.0
 mouse_filter = 2
-border_color = Color( 0, 0, 0, 1 )
+border_color = Color(0, 0, 0, 1)
 editor_only = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Top" type="HBoxContainer" parent="Handles"]
-offset_right = 256.0
-offset_bottom = 4.0
-mouse_filter = 2
+layout_mode = 2
 size_flags_vertical = 0
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="TopLeft" type="TextureButton" parent="Handles/Top"]
-offset_right = 4.0
-offset_bottom = 4.0
-custom_minimum_size = Vector2( 4, 4 )
-mouse_filter = 1
-mouse_default_cursor_shape = 12
+custom_minimum_size = Vector2(4, 4)
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 12
 
 [node name="Top" type="TextureButton" parent="Handles/Top"]
-offset_left = 4.0
-offset_right = 252.0
-offset_bottom = 4.0
-custom_minimum_size = Vector2( 0, 4 )
-mouse_filter = 1
-mouse_default_cursor_shape = 9
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+mouse_filter = 1
+mouse_default_cursor_shape = 9
 
 [node name="TopRight" type="TextureButton" parent="Handles/Top"]
-offset_left = 252.0
-offset_right = 256.0
-offset_bottom = 4.0
-custom_minimum_size = Vector2( 4, 4 )
-mouse_filter = 1
-mouse_default_cursor_shape = 11
+custom_minimum_size = Vector2(4, 4)
+layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+mouse_filter = 1
+mouse_default_cursor_shape = 11
 
 [node name="Mid" type="HBoxContainer" parent="Handles"]
-offset_top = 4.0
-offset_right = 256.0
-offset_bottom = 280.0
-mouse_filter = 2
+layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="Left" type="TextureButton" parent="Handles/Mid"]
-offset_right = 4.0
-offset_bottom = 276.0
-custom_minimum_size = Vector2( 4, 0 )
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+size_flags_horizontal = 0
 mouse_filter = 1
 mouse_default_cursor_shape = 10
-size_flags_horizontal = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Bar" type="TextureButton" parent="Handles/Mid"]
-offset_left = 4.0
-offset_right = 252.0
-offset_bottom = 12.0
-custom_minimum_size = Vector2( 0, 12 )
-mouse_filter = 1
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 
 [node name="ReferenceRect" type="ReferenceRect" parent="Handles/Mid/Bar"]
 visible = false
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 0
 offset_right = 248.0
 offset_bottom = 12.0
-custom_minimum_size = Vector2( 0, 12 )
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Right" type="TextureButton" parent="Handles/Mid"]
-offset_left = 252.0
-offset_right = 256.0
-offset_bottom = 276.0
-custom_minimum_size = Vector2( 4, 0 )
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+size_flags_horizontal = 8
 mouse_filter = 1
 mouse_default_cursor_shape = 10
-size_flags_horizontal = 8
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Bottom" type="HBoxContainer" parent="Handles"]
-offset_top = 280.0
-offset_right = 256.0
-offset_bottom = 284.0
-custom_minimum_size = Vector2( 0, 4 )
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="BottomLeft" type="TextureButton" parent="Handles/Bottom"]
-offset_right = 4.0
-offset_bottom = 4.0
-custom_minimum_size = Vector2( 4, 4 )
-mouse_filter = 1
-mouse_default_cursor_shape = 11
+custom_minimum_size = Vector2(4, 4)
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+mouse_filter = 1
+mouse_default_cursor_shape = 11
 
 [node name="Bottom" type="TextureButton" parent="Handles/Bottom"]
-offset_left = 4.0
-offset_right = 252.0
-offset_bottom = 4.0
-custom_minimum_size = Vector2( 0, 4 )
-mouse_filter = 1
-mouse_default_cursor_shape = 9
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-__meta__ = {
-"_edit_use_anchors_": false
-}
+mouse_filter = 1
+mouse_default_cursor_shape = 9
 
 [node name="BottomRight" type="TextureButton" parent="Handles/Bottom"]
-offset_left = 252.0
-offset_right = 256.0
-offset_bottom = 4.0
-custom_minimum_size = Vector2( 4, 4 )
-mouse_filter = 1
-mouse_default_cursor_shape = 12
+custom_minimum_size = Vector2(4, 4)
+layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+mouse_filter = 1
+mouse_default_cursor_shape = 12
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
 visible = false
-offset_right = 256.0
-offset_bottom = 284.0
+layout_mode = 2
 mouse_filter = 2
-border_color = Color( 1, 1, 1, 1 )
+border_color = Color(1, 1, 1, 1)
 editor_only = false

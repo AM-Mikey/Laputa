@@ -8,10 +8,11 @@ var enemies = {}
 var active_enemy_path
 
 
-@onready var editor = get_parent().get_parent().get_parent()
+@onready var editor = get_parent().get_parent().get_parent().get_parent()
 
 func _ready():
-	setup_enemies()
+	pass
+	#setup_enemies()
 
 
 func setup_enemies():

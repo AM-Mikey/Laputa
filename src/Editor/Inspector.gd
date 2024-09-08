@@ -3,7 +3,7 @@ extends MarginContainer
 const PROPERTY_BUTTON = preload("res://src/Editor/Button/PropertyButton.tscn")
 const LAYER_BUTTON = preload("res://src/Editor/Button/LayerButton.tscn")
 
-@onready var editor = get_parent().get_parent()
+@onready var editor = get_parent().get_parent().get_parent()
 
 var active
 var active_type: String
@@ -99,6 +99,7 @@ func display_data():
 				if p["usage"] == 8199: #exported properties
 					create_button(p["name"], active.get(p["name"]), p["type"])
 		"tile_collection":
+			
 			#create_button("auto_select_layer", true, "bool")
 			var layers = []
 			for c in active.get_children():

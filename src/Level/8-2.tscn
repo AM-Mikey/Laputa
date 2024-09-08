@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://w1xtgbyshyd1" path="res://src/Utility/Outdated/CameraLimiter.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="4"]
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="5"]
-[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="6"]
+[ext_resource type="TileSet" uid="uid://cqgltkqu1pju7" path="res://src/Tile/Debug.tres" id="6"]
 [ext_resource type="PackedScene" path="res://src/Tile/Outdated/TriggerTile/LadderTrigger.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://src/Tile/Outdated/TriggerTile/WaterTrigger.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://src/Prop/LifeCapsule.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://b2jdho2mt8mfj" path="res://src/Prop/LifeCapsule.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://cnb1eoa5tek5k" path="res://src/Tile/Outdated/TriggerTile/StairsTrigger.tscn" id="13"]
 
 [node name="8-2" type="Node2D"]

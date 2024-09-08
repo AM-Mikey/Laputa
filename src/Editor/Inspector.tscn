@@ -1,98 +1,77 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://ctxo7a6euqnhd"]
 
-[ext_resource path="res://src/Editor/EditorTheme.tres" type="Theme" id=1]
-[ext_resource path="res://src/Editor/Inspector.gd" type="Script" id=2]
-[ext_resource path="res://src/UI/Font/Momo.tres" type="FontFile" id=3]
+[ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1"]
+[ext_resource type="Script" path="res://src/Editor/Inspector.gd" id="2"]
+[ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momoextended.ttf" id="3_x868a"]
 
 [node name="Inspector" type="MarginContainer"]
 offset_right = 415.0
 offset_bottom = 400.0
 mouse_filter = 2
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
+theme = ExtResource("1")
+script = ExtResource("2")
 
 [node name="Panel" type="Panel" parent="."]
-offset_right = 415.0
-offset_bottom = 400.0
+layout_mode = 2
 mouse_filter = 2
 
 [node name="Margin" type="MarginContainer" parent="."]
-offset_right = 415.0
-offset_bottom = 400.0
+layout_mode = 2
 mouse_filter = 2
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_top = 8
 theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="VBox" type="VBoxContainer" parent="Margin"]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 407.0
-offset_bottom = 392.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="Margin/VBox"]
-offset_right = 399.0
-offset_bottom = 4.0
+layout_mode = 2
 size_flags_vertical = 0
-theme_override_colors/font_color = Color( 0.878431, 0.784314, 0.345098, 1 )
-theme_override_colors/font_shadow_color = Color( 0, 0, 0, 1 )
-align = 1
+theme_override_colors/font_color = Color(0.878431, 0.784314, 0.345098, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 
 [node name="Scroll" type="ScrollContainer" parent="Margin/VBox"]
-offset_top = 8.0
-offset_right = 399.0
-offset_bottom = 365.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="VBox" type="VBoxContainer" parent="Margin/VBox/Scroll"]
-offset_right = 399.0
-mouse_filter = 2
+layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="HBox" type="HBoxContainer" parent="Margin/VBox"]
-offset_top = 369.0
-offset_right = 399.0
-offset_bottom = 384.0
+layout_mode = 2
 
 [node name="ToolLabel" type="Label" parent="Margin/VBox/HBox"]
-offset_right = 31.0
-offset_bottom = 15.0
-theme_override_colors/font_color = Color( 0.301961, 0.372549, 0.380392, 1 )
-theme_override_fonts/font = ExtResource( 3 )
+layout_mode = 2
+theme_override_colors/font_color = Color(0.301961, 0.372549, 0.380392, 1)
+theme_override_fonts/font = ExtResource("3_x868a")
 text = "TOOL:"
 
 [node name="Tool" type="Label" parent="Margin/VBox/HBox"]
-offset_left = 35.0
-offset_right = 83.0
-offset_bottom = 15.0
-custom_minimum_size = Vector2( 48, 0 )
-theme_override_colors/font_color = Color( 0.301961, 0.372549, 0.380392, 1 )
-theme_override_fonts/font = ExtResource( 3 )
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.301961, 0.372549, 0.380392, 1)
+theme_override_fonts/font = ExtResource("3_x868a")
 text = "Testing"
 clip_text = true
 
 [node name="SubtoolLabel" type="Label" parent="Margin/VBox/HBox"]
-offset_left = 87.0
-offset_right = 139.0
-offset_bottom = 15.0
-theme_override_colors/font_color = Color( 0.301961, 0.372549, 0.380392, 1 )
-theme_override_fonts/font = ExtResource( 3 )
+layout_mode = 2
+theme_override_colors/font_color = Color(0.301961, 0.372549, 0.380392, 1)
+theme_override_fonts/font = ExtResource("3_x868a")
 text = "SUBTOOL:"
 
 [node name="Subtool" type="Label" parent="Margin/VBox/HBox"]
-offset_left = 143.0
-offset_right = 191.0
-offset_bottom = 15.0
-custom_minimum_size = Vector2( 48, 0 )
-theme_override_colors/font_color = Color( 0.301961, 0.372549, 0.380392, 1 )
-theme_override_fonts/font = ExtResource( 3 )
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.301961, 0.372549, 0.380392, 1)
+theme_override_fonts/font = ExtResource("3_x868a")
 text = "Testing"
 
 [node name="FileDialog" type="FileDialog" parent="."]
-offset_right = 415.0
-offset_bottom = 400.0
-window_title = "Open a File"
-mode = 0
+size = Vector2i(338, 128)
 
 [connection signal="file_selected" from="FileDialog" to="." method="on_file_selected"]

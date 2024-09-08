@@ -1,6 +1,6 @@
-[gd_resource type="Theme" load_steps=28 format=3 uid="uid://deptsttubjnfv"]
+[gd_resource type="Theme" load_steps=29 format=3 uid="uid://deptsttubjnfv"]
 
-[ext_resource type="FontFile" path="res://src/UI/Font/WelcomeBack.tres" id="1"]
+[ext_resource type="FontFile" uid="uid://cf01li78xvnnu" path="res://src/UI/Font/WelcomeBack.tres" id="1"]
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://djsxt54vtaivl" path="res://src/UI/Slider/ScrollBarGrabber.tres" id="3"]
 [ext_resource type="StyleBox" uid="uid://bwe3j6hcp3u7j" path="res://src/UI/StyleBox/SteelBeveledLight.tres" id="4"]
@@ -13,6 +13,7 @@
 [ext_resource type="StyleBox" uid="uid://ot23c6kiunqk" path="res://src/UI/StyleBox/RustTabsDark.tres" id="11"]
 [ext_resource type="StyleBox" uid="uid://cb3gs2qq26l03" path="res://src/UI/StyleBox/RustTabsLight.tres" id="12"]
 [ext_resource type="StyleBox" uid="uid://4n3eltlwqyie" path="res://src/UI/StyleBox/PaperBorder.tres" id="13"]
+[ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="16_yxwjr"]
 [ext_resource type="FontFile" path="res://src/UI/Font/WelcomeBackButton.tres" id="21"]
 [ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="22"]
 
@@ -43,7 +44,7 @@ vertical = true
 [sub_resource type="StyleBoxEmpty" id="10"]
 
 [resource]
-default_font = ExtResource("1")
+default_font = ExtResource("16_yxwjr")
 Button/colors/font_color = Color(0.968627, 0.886275, 0.717647, 1)
 Button/constants/hseparation = 2
 Button/styles/disabled = ExtResource("4")

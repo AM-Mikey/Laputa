@@ -25,21 +25,21 @@ var selected_tile_region := Rect2(0, 0, 16, 16) #in texture space
 var tile_rotation_degrees: float = 0
 var tile_scale_vector := Vector2(1,1)
 
-@export var tile_separation: int = 1
+
 
 @export var buttons: NodePath
 @export var cursor: NodePath
 
-@onready var editor = get_parent().get_parent().get_parent()
+@onready var editor = get_parent().get_parent().get_parent().get_parent()
+@onready var tile_master = editor.get_node("TileMaster")
 @onready var auto_layer = $VBox/HBox/AutoLayer
 @onready var multi_erase = $VBox/HBox/MultiErase
 @onready var auto_tile = $VBox/HBox/AutoTile
 @onready var mode = $VBox/HBox/Mode
 
 
-
-func _ready():
-	setup_options()
+func setup_tiles():
+	tile_master.setup_tile_buttons(self, buttons)
 
 func setup_options(): #AutoLayer, Mode, Etc... TODO: use this if you need to set up defaults
 	auto_layer.button_pressed = editor.auto_layer
@@ -48,40 +48,13 @@ func setup_options(): #AutoLayer, Mode, Etc... TODO: use this if you need to set
 	#mode needs no default, always default to paint
 
 
-func setup_tile_set():
-	texture = editor.tile_set.tile_get_texture(editor.tile_set.get_tiles_ids().front())
-	columns = floor(texture.get_width()/16)
-	rows = floor(texture.get_height()/16)
-	setup_tile_buttons()
 
 
-func setup_tile_buttons():
-	for c in get_node(buttons).get_children(): #clear old rows
-		c.free()
-###
-	get_node(buttons).add_theme_constant_override("separation", tile_separation)
-	var r_id = 0
-	for r in rows:
-		var row = HBoxContainer.new()
-		row.add_theme_constant_override("separation", tile_separation)
-		#row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		get_node(buttons).add_child(row)
-		var c_id = 0
-		for c in columns:
-			var button = load("res://src/Editor/Button/TileButton.tscn").instantiate()
-			button.tile_set_position = Vector2(c_id*16, r_id*16)
-			row.add_child(button)
-			button.connect("mouse_entered", Callable(self, "hover_button").bind(button))
-			button.connect("mouse_exited", Callable(self, "unhover"))
-			c_id += 1
-		r_id += 1
-###
-	for i in editor.tile_set.get_tiles_ids():
-		var x_pos: int = floor(editor.tile_set.tile_get_region(i).position.x/16)
-		var y_pos: int = floor(editor.tile_set.tile_get_region(i).position.y/16)
-		var button = get_node(buttons).get_child(y_pos).get_child(x_pos)
-		button.id = i
-		button.texture = get_tile_as_texture(i)
+
+
+
+
+
 		
 
 func transform_buttons():
@@ -95,13 +68,6 @@ func transform_buttons():
 	emit_signal("tile_transform_updated")
 
 
-func get_tile_as_texture(id) -> Texture2D:
-	var tile_texture = AtlasTexture.new()
-	tile_texture.atlas = texture
-	tile_texture.region = editor.tile_set.tile_get_region(id)
-	return tile_texture
-
-
 
 func hover_button(button):
 	hovered_button = button
@@ -111,7 +77,7 @@ func unhover():
 
 func _input(event):
 	if event.is_action_pressed("editor_lmb") and hovered_button:
-		#print("started ", hovered_button.id)
+		print("started ", hovered_button.id)
 		selected_tile_region = Rect2(hovered_button.tile_set_position, Vector2(16, 16))
 		editor.brush.clear() #TODO: fix
 		print("clear")
@@ -139,7 +105,6 @@ func _input(event):
 
 func set_selection():
 	set_cursor()
-	print("oooo")
 	#appends to a 2D array in a dictionary
 	#{layer 1:
 	#[[1, 2, 3], 
@@ -177,13 +142,13 @@ func set_selection():
 
 
 func set_cursor():
-	var x_pos = selected_tile_region.position.x + (floor(selected_tile_region.position.x / 16) * tile_separation)
-	var y_pos = selected_tile_region.position.y + (floor(selected_tile_region.position.y / 16) * tile_separation)
+	var x_pos = selected_tile_region.position.x + (floor(selected_tile_region.position.x / 16) * tile_master.tile_separation)
+	var y_pos = selected_tile_region.position.y + (floor(selected_tile_region.position.y / 16) * tile_master.tile_separation)
 	get_node(cursor).position = Vector2(x_pos, y_pos) 
-	var x_size = selected_tile_region.size.x + (floor(selected_tile_region.size.x / 16) * tile_separation)
-	var y_size = selected_tile_region.size.y + (floor(selected_tile_region.size.y / 16) * tile_separation)
+	var x_size = selected_tile_region.size.x + (floor(selected_tile_region.size.x / 16) * tile_master.tile_separation)
+	var y_size = selected_tile_region.size.y + (floor(selected_tile_region.size.y / 16) * tile_master.tile_separation)
 	get_node(cursor).size = Vector2(x_size, y_size) 
-	
+
 
 ### SIGNALS ###
 
@@ -206,7 +171,7 @@ func _on_AutoTile_toggled(button_pressed):
 		auto_tile.icon = auto_tile_true
 	else:
 		auto_tile.icon = auto_tile_false
-	pass # Replace with function body.
+	pass # Replace with function body TODO: what??
 
 func _on_Mode_pressed():
 	if editor.active_tool == "tile":

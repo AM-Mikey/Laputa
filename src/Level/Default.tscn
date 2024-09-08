@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="3"]
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="8"]
-[ext_resource type="TileSet" uid="uid://cgpbhmdgpp4bx" path="res://src/Tile/Village.tres" id="9"]
+[ext_resource type="TileSet" uid="uid://cgpbhmdgpp4bx" path="res://src/Tile/OutdatedNewer/Village.tres" id="9"]
 [ext_resource type="Texture2D" uid="uid://dq2iro7mqv5lm" path="res://assets/Background/SkyDemo.png" id="11"]
 
 [node name="Default" type="Node2D"]

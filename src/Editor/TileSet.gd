@@ -1,5 +1,8 @@
 extends Control
 
+#TODO: remove redundancies between this and TILES. there should be a master for both of them
+
+
 #signal collision_updated(tile_id, shape) #moved to internal
 #signal tile_set_saved(path)
 #signal tile_set_loaded(path)
@@ -26,7 +29,6 @@ var brush_rotation_degrees = 0
 var brush_one_way = false
 
 
-@export var tile_separation: int = 1
 @export var normal_buttons: NodePath
 @export var collision_buttons: NodePath
 @export var normal_cursor: NodePath
@@ -34,56 +36,18 @@ var brush_one_way = false
 @export var brushes: NodePath
 
 @onready var w = get_tree().get_root().get_node("World")
-@onready var editor = get_parent().get_parent().get_parent()
+@onready var editor = get_parent().get_parent().get_parent().get_parent()
+@onready var tile_master = editor.get_node("TileMaster")
 
-
-func _ready():
-	setup_brushes()
 
 ### SETUP
 
 func setup_tile_set():
-	texture = editor.tile_set.tile_get_texture(0)
-	columns = int(texture.get_size().x/16)
-	rows = int(texture.get_size().y/16)
 	
-	setup_tile_buttons(normal_buttons)
-	setup_tile_buttons(collision_buttons)
-
-func setup_tile_buttons(parent):
-	for c in get_node(parent).get_children(): #clear old rows
-		c.free()
-###
-	get_node(parent).add_theme_constant_override("separation", tile_separation)
-	var r_id = 0
-	for r in rows:
-		var row = HBoxContainer.new()
-		row.add_theme_constant_override("separation", tile_separation)
-		#row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		get_node(parent).add_child(row)
-		var c_id = 0
-		for c in columns:
-			var button = load("res://src/Editor/Button/TileButton.tscn").instantiate()
-			button.tile_set_position = Vector2(c_id*16, r_id*16) 
-			row.add_child(button)
-			button.connect("mouse_entered", Callable(self, "hover_button").bind(button))
-			button.connect("mouse_exited", Callable(self, "unhover"))
-			c_id += 1
-		r_id += 1
-###
-	for i in editor.tile_set.get_tiles_ids():
-		var x_pos: int = floor(editor.tile_set.tile_get_region(i).position.x/16)
-		var y_pos: int = floor(editor.tile_set.tile_get_region(i).position.y/16)
-		var button = get_node(parent).get_child(y_pos).get_child(x_pos)
-		button.id = i
-		button.texture = get_tile_as_texture(i)
+	tile_master.setup_tile_buttons(self, normal_buttons)
+	tile_master.setup_tile_buttons(self, collision_buttons)
 
 
-func get_tile_as_texture(id) -> Texture2D:
-	var tile_texture = AtlasTexture.new()
-	tile_texture.atlas = texture
-	tile_texture.region = editor.tile_set.tile_get_region(id)
-	return tile_texture
 
 func setup_brushes():
 	for c in get_node(brushes).get_children():
@@ -221,12 +185,12 @@ func set_pixels(region: Rect2, pixels: Array):
 
 
 func set_cursor(region: Rect2):
-	var x_pos = region.position.x + (floor(region.position.x / 16) * tile_separation)
-	var y_pos = region.position.y + (floor(region.position.y / 16) * tile_separation)
+	var x_pos = region.position.x + (floor(region.position.x / 16) * tile_master.tile_separation)
+	var y_pos = region.position.y + (floor(region.position.y / 16) * tile_master.tile_separation)
 	get_node(normal_cursor).position = Vector2(x_pos, y_pos) 
 #	get_node(collision_cursor).rect_position = Vector2(x_pos, y_pos) 
-	var x_size = region.size.x + (floor(region.size.x / 16) * tile_separation)
-	var y_size = region.size.y + (floor(region.size.y / 16) * tile_separation)
+	var x_size = region.size.x + (floor(region.size.x / 16) * tile_master.tile_separation)
+	var y_size = region.size.y + (floor(region.size.y / 16) * tile_master.tile_separation)
 	get_node(normal_cursor).size = Vector2(x_size, y_size) 
 #	get_node(collision_cursor).rect_size = Vector2(x_size, y_size) 
 
@@ -370,7 +334,7 @@ func _on_Load_file_selected(path):
 func load_tile_set(path):
 	editor.tile_set = load(path)
 	
-	editor.get_node("Main/Tab/Tiles").setup_tile_set()
+	editor.get_node("Main/Win/Tab/Tiles").setup_tiles()
 	setup_tile_set()
 	
 	for c in editor.tile_collection.get_children():
@@ -406,7 +370,7 @@ func _on_New_file_selected(path):
 		editor.tile_set.tile_set_region(id, region)
 		id += 1
 
-	editor.get_node("Main/Tab/Tiles").setup_tile_set() #TODO: merge with save or load
+	editor.get_node("Main/Win/Tab/Tiles").setup_tiles() #TODO: merge with save or load
 	setup_tile_set()
 
 	for c in editor.tile_collection.get_children():

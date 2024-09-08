@@ -7,10 +7,11 @@ signal prop_changed(prop_path)
 var props = {}
 var active_prop_path
 
-@onready var editor = get_parent().get_parent().get_parent()
+@onready var editor = get_parent().get_parent().get_parent().get_parent()
 
 func _ready():
-	setup_props()
+	pass
+	#setup_props()
 
 
 func setup_props():

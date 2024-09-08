@@ -43,7 +43,8 @@ var active_operation = [] #[[subop][subop][subop]]
 @onready var w = get_tree().get_root().get_node("World")
 @onready var ui = w.get_node("UILayer")
 @onready var el = w.get_node("EditorLayer")
-@onready var inspector = $Secondary/Inspector
+@onready var inspector = $Secondary/Win/Inspector
+@onready var tile_master = $TileMaster
 var tile_collection
 var actor_collection
 var prop_collection
@@ -60,10 +61,9 @@ func _ready():
 	connect("tile_collection_selected", Callable(inspector, "on_selected").bind("tile_collection"))
 	connect("level_selected", Callable(inspector, "on_selected").bind("level"))
 	el.add_child(EDITOR_CAMERA.instantiate())
-
 	
 	setup_level() #Call this every time the level is changed or reloaded
-	#$Main.move_child($Main/Tab, 0) TODO: was supposed to make tabcontainer go behind resize controls, didnt work
+	#$Main/Win.move_child($Main/Win/Tab, 0) TODO: was supposed to make tabcontainer go behind resize controls, didnt work
 
 func setup_level(): #TODO: clear undo history
 	#emit_signal("level_selected", w.current_level)
@@ -80,8 +80,12 @@ func setup_level(): #TODO: clear undo history
 	
 	tile_map = tile_collection.get_child(0)
 	tile_set = w.current_level.tile_set
-	$Main/Tab/TileSet.load_tile_set(tile_set.resource_path)
+	tile_master.setup_tile_master()
+	$Main/Win/Tab/TileSet.load_tile_set(tile_set.resource_path)
 	
+
+
+
 	setup_level_editor_layer()
 	set_entities_pickable()
 	w.set_debug_visible(true)
@@ -93,7 +97,7 @@ func setup_level(): #TODO: clear undo history
 	for t in trigger_collection.get_children():
 		if t.has_node("TriggerController"):
 			t.get_node("TriggerController").enable()
-	
+	el.get_node("EditorCamera").make_current()
 	
 
 ### SETUP
@@ -141,7 +145,7 @@ func exit():
 	el.get_node("EditorCamera").queue_free()
 	ui.add_child(HUD.instantiate())
 	w.get_node("Juniper").enable()
-	w.get_node("Juniper/PlayerCamera").current = true
+	w.get_node("Juniper/PlayerCamera").enabled = true
 	for a in get_tree().get_nodes_in_group("Actors"):
 		if a.has_method("enable"):
 			a.enable()
@@ -240,13 +244,13 @@ func do_entity_input(event):
 		match subtool:
 			"enemy":
 				if not pos_has_enemy:
-					set_entity(grid_pos, $Main/Tab/Enemies.active_enemy_path, subtool) #subtool == "enemy"
+					set_entity(grid_pos, $Main/Win/Tab/Enemies.active_enemy_path, subtool) #subtool == "enemy"
 			"prop":
-				set_entity(grid_pos, $Main/Tab/Props.active_prop_path, subtool)
+				set_entity(grid_pos, $Main/Win/Tab/Props.active_prop_path, subtool)
 			"npc":
-				set_entity(grid_pos, $Main/Tab/NPCs.active_npc_path, subtool)
+				set_entity(grid_pos, $Main/Win/Tab/NPCs.active_npc_path, subtool)
 			"trigger":
-				set_entity(get_grid_pos(mouse_pos, "course", "trigger"), $Main/Tab/Triggers.active_trigger_path, subtool)
+				set_entity(get_grid_pos(mouse_pos, "course", "trigger"), $Main/Win/Tab/Triggers.active_trigger_path, subtool)
 			"noplace":
 				pass
 
@@ -267,13 +271,13 @@ func do_entity_input(event):
 		match subtool:
 			"enemy":
 				if not pos_has_enemy:
-					preview_entity(grid_pos, $Main/Tab/Enemies.active_enemy_path, subtool)
+					preview_entity(grid_pos, $Main/Win/Tab/Enemies.active_enemy_path, subtool)
 			"prop":
-				preview_entity(grid_pos, $Main/Tab/Props.active_prop_path, subtool)
+				preview_entity(grid_pos, $Main/Win/Tab/Props.active_prop_path, subtool)
 			"npc":
-				preview_entity(grid_pos, $Main/Tab/NPCs.active_npc_path, subtool)
+				preview_entity(grid_pos, $Main/Win/Tab/NPCs.active_npc_path, subtool)
 			"trigger":
-				preview_entity(get_grid_pos(mouse_pos, "course", "trigger"), $Main/Tab/Triggers.active_trigger_path, subtool)
+				preview_entity(get_grid_pos(mouse_pos, "course", "trigger"), $Main/Win/Tab/Triggers.active_trigger_path, subtool)
 			"grab":
 				inspector.active.global_position = grid_pos + grab_offset
 				if "home" in inspector.active:
@@ -292,79 +296,80 @@ func do_entity_input(event):
 
 
 func do_tile_input(event):
-	var mouse_pos = w.get_global_mouse_position()
-	
-	if lmb_held: pass #brush = brush
-	if rmb_held: pass#brush = get_brush_as_eraser()
-	
-	if event.is_action_pressed("debug_fly"):
-		print(active_operation)
-		if auto_tile:
-			print("auto tiling")
-			set_auto_tiles() #TODO: testing
-
-	
-	#pressing
-	if event.is_action_pressed("editor_rmb") or event.is_action_pressed("editor_lmb"):
-		mouse_start_pos = mouse_pos
-		if subtool == "select":
-			if event.is_action_pressed("editor_lmb"):
-				set_tile_map_selection(mouse_start_pos, mouse_pos)
-#			if event.is_action_pressed("editor_rmb"):
-#				move_tile_map_selection("mou")
-		else: #not brush.is_empty(): #normal draw              #TODO:WHY
-			if shift_held: set_tool("tile", "line")
-			elif ctrl_held: set_tool("tile", "box")
-			else: 
-				set_tool("tile", "paint")
-				set_cells_2d(get_centerbox(mouse_pos), brush) #TODO: on all layers
-	
-	#moving
-	if event is InputEventMouseMotion:
-		hide_preview()
-		match subtool:
-			"select":
-				if lmb_held:
-					set_tile_map_selection(mouse_start_pos, mouse_pos)
-			"line":
-				#preview_tiles(get_brush_origin_line(mouse_start_pos, mouse_pos), "line")
-				pass
-			"box":
-				pass
-				#preview_tiles(get_box_2d_array(mouse_start_pos, mouse_pos), "box")
-			"paint":
-				if lmb_held or rmb_held:
-					set_cells_2d(get_centerbox(mouse_pos), brush) #TODO: on all layers
-				else:
-					pass
-					#preview_tiles(get_centerbox(mouse_pos), "box")
-	
-	#releasing
-	if event.is_action_released("editor_lmb") and lmb_held or event.is_action_released("editor_rmb") and rmb_held:
-		match subtool:
-			"select":
-				if rmb_held:
-					move_tile_map_selection(mouse_start_pos, mouse_pos)
-			"line":
-				set_line(get_brush_origin_line(mouse_start_pos, mouse_pos), brush) #TODO: on all layers
-			"box":
-				if lmb_held:
-					set_cells_2d_array(get_box_2d_array(mouse_start_pos, mouse_pos), brush)
-				elif rmb_held:
-					pass
-					#set_cells_2d_array(get_box_2d_array(mouse_start_pos, mouse_pos), get_brush_as_eraser())
-					#set_cells_1d(get_box_1d(mouse_start_pos, mouse_pos), -1)
-				
-		if subtool != "select":
-			subtool = "paint"
-		if not active_operation.is_empty():
-			past_operations.append(["set_cells", active_operation.duplicate()])
-			#print("active op: ", active_operation)
-			active_operation.clear()
-		
-		if auto_tile:
-			print("auto tiling")
-			set_auto_tiles() #TODO: testing
+	pass
+	#var mouse_pos = w.get_global_mouse_position()
+	#
+	#if lmb_held: pass #brush = brush
+	#if rmb_held: pass#brush = get_brush_as_eraser()
+	#
+	#if event.is_action_pressed("debug_fly"):
+		#print(active_operation)
+		#if auto_tile:
+			#print("auto tiling")
+			#set_auto_tiles() #TODO: testing
+#
+	#
+	##pressing
+	#if event.is_action_pressed("editor_rmb") or event.is_action_pressed("editor_lmb"):
+		#mouse_start_pos = mouse_pos
+		#if subtool == "select":
+			#if event.is_action_pressed("editor_lmb"):
+				#set_tile_map_selection(mouse_start_pos, mouse_pos)
+##			if event.is_action_pressed("editor_rmb"):
+##				move_tile_map_selection("mou")
+		#else: #not brush.is_empty(): #normal draw              #TODO:WHY
+			#if shift_held: set_tool("tile", "line")
+			#elif ctrl_held: set_tool("tile", "box")
+			#else: 
+				#set_tool("tile", "paint")
+				#set_cells_2d(get_centerbox(mouse_pos), brush) #TODO: on all layers
+	#
+	##moving
+	#if event is InputEventMouseMotion:
+		#hide_preview()
+		#match subtool:
+			#"select":
+				#if lmb_held:
+					#set_tile_map_selection(mouse_start_pos, mouse_pos)
+			#"line":
+				##preview_tiles(get_brush_origin_line(mouse_start_pos, mouse_pos), "line")
+				#pass
+			#"box":
+				#pass
+				##preview_tiles(get_box_2d_array(mouse_start_pos, mouse_pos), "box")
+			#"paint":
+				#if lmb_held or rmb_held:
+					#set_cells_2d(get_centerbox(mouse_pos), brush) #TODO: on all layers
+				#else:
+					#pass
+					##preview_tiles(get_centerbox(mouse_pos), "box")
+	#
+	##releasing
+	#if event.is_action_released("editor_lmb") and lmb_held or event.is_action_released("editor_rmb") and rmb_held:
+		#match subtool:
+			#"select":
+				#if rmb_held:
+					#move_tile_map_selection(mouse_start_pos, mouse_pos)
+			#"line":
+				#set_line(get_brush_origin_line(mouse_start_pos, mouse_pos), brush) #TODO: on all layers
+			#"box":
+				#if lmb_held:
+					#set_cells_2d_array(get_box_2d_array(mouse_start_pos, mouse_pos), brush)
+				#elif rmb_held:
+					#pass
+					##set_cells_2d_array(get_box_2d_array(mouse_start_pos, mouse_pos), get_brush_as_eraser())
+					##set_cells_1d(get_box_1d(mouse_start_pos, mouse_pos), -1)
+				#
+		#if subtool != "select":
+			#subtool = "paint"
+		#if not active_operation.is_empty():
+			#past_operations.append(["set_cells", active_operation.duplicate()])
+			##print("active op: ", active_operation)
+			#active_operation.clear()
+		#
+		#if auto_tile:
+			#print("auto tiling")
+			#set_auto_tiles() #TODO: testing
 
 
 
@@ -1069,16 +1074,16 @@ func on_layer_changed(layer):
 ### UI ###
 func set_menu_alpha():
 	var mouse_pos = get_global_mouse_position()
-	var main_rect = Rect2($Main.position, $Main.size)
-	var secondary_rect = Rect2($Secondary.position, $Secondary.size)
+	var main_rect = Rect2($Main/Win.position, $Main/Win.size)
+	var secondary_rect = Rect2($Secondary/Win.position, $Secondary/Win.size)
 	if main_rect.has_point(mouse_pos):
-		$Main.modulate = Color(1, 1, 1, 1)
+		$Main.self_modulate = Color(1, 1, 1, 1)
 	else:
-		$Main.modulate = Color(1, 1, 1, 0.50)
+		$Main.self_modulate = Color(1, 1, 1, 0.50)
 	if secondary_rect.has_point(mouse_pos):
-		$Secondary.modulate = Color(1, 1, 1, 1)
+		$Secondary.self_modulate = Color(1, 1, 1, 1)
 	else:
-		$Secondary.modulate = Color(1, 1, 1, 0.50)
+		$Secondary.self_modulate = Color(1, 1, 1, 0.50)
 
 
 
@@ -1101,15 +1106,16 @@ func _on_Tiles_tile_transform_updated(tile_rotation_degrees, tile_scale_vector):
 ### MISC SIGNALS
 
 func _on_viewport_size_changed():
-	$Margin.size = get_tree().get_root().size / w.get_node("EditorLayer").scale
-	size = get_tree().get_root().size / w.get_node("EditorLayer").scale
-	pass
+	await get_tree().process_frame
+	#$Margin.size = get_tree().get_root().size / Vector2i(w.get_node("EditorLayer").scale)
+	$Margin.size = Vector2(get_tree().get_root().size) / Vector2(w.get_node("EditorLayer").scale)
+	#size = get_tree().get_root().size / Vector2i(w.get_node("EditorLayer").scale)
 
 func on_tab_selected(tab_index): #tab buttons
-	$Main/Tab.current_tab = tab_index
+	$Main/Win/Tab.current_tab = tab_index
 
 func on_tab_changed(tab):
-	match $Main/Tab.get_child(tab).name:
+	match $Main/Win/Tab.get_child(tab).name:
 		"Tiles": 
 			set_tool("tile")
 			set_entities_pickable(false)
@@ -1134,4 +1140,4 @@ func on_tab_changed(tab):
 			set_tool("entity", "trigger")
 			set_entities_pickable()
 		_:
-			print("WARNING: could not find tab with name: " + $Main/Tab.get_child(tab).name)
+			print("WARNING: could not find tab with name: " + $Main/Win/Tab.get_child(tab).name)

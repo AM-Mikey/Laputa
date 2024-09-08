@@ -7,10 +7,11 @@ signal trigger_changed(trigger_path)
 var triggers = {}
 var active_trigger_path
 
-@onready var editor = get_parent().get_parent().get_parent()
+@onready var editor = get_parent().get_parent().get_parent().get_parent()
 
 func _ready():
-	setup_triggers()
+	pass
+	#setup_triggers()
 
 
 func setup_triggers():
