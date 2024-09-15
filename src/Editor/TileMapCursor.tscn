@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c2tc5gjf6mbjh"]
 
-[ext_resource type="StyleBox" path="res://src/Editor/Cursor.tres" id="1"]
+[ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="1"]
 
 [node name="TileMapCursor" type="MarginContainer"]
 mouse_filter = 2

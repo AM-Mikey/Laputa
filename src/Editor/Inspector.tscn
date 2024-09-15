@@ -72,6 +72,6 @@ theme_override_fonts/font = ExtResource("3_x868a")
 text = "Testing"
 
 [node name="FileDialog" type="FileDialog" parent="."]
-size = Vector2i(338, 128)
+size = Vector2i(338, 154)
 
 [connection signal="file_selected" from="FileDialog" to="." method="on_file_selected"]

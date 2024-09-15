@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://bg715nunngytq"]
 
-[ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/Editor/Cursor.tres" id="1"]
+[ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="1"]
 [ext_resource type="Script" path="res://src/Editor/Tiles.gd" id="2"]
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="3"]
 [ext_resource type="Texture2D" uid="uid://g3pllgj0s6go" path="res://assets/Editor/RotateCC.png" id="5"]
@@ -20,6 +20,10 @@ theme = ExtResource("3")
 script = ExtResource("2")
 buttons = NodePath("VBox/Scroll/Buttons")
 cursor = NodePath("VBox/Scroll/Control/Cursor")
+auto_layer_disc = "Auto-Select Drawing Layer"
+multi_erase_disc = "Erase On All Layers"
+auto_tile_disc = "AutoTile"
+mode_disc = "Mode"
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -36,32 +40,24 @@ text = "Tiles"
 layout_mode = 2
 mouse_filter = 2
 
-[node name="AutoLayerLabel" type="Label" parent="VBox/HBox"]
-visible = false
-layout_mode = 2
-text = "DrawOnAuto"
-
 [node name="AutoLayer" type="Button" parent="VBox/HBox"]
 layout_mode = 2
-tooltip_text = "Auto-Select Drawing Layer"
 toggle_mode = true
 icon = ExtResource("9")
 
 [node name="MultiErase" type="Button" parent="VBox/HBox"]
 layout_mode = 2
-tooltip_text = "Erase On All Layers"
 toggle_mode = true
 icon = ExtResource("10")
 
 [node name="AutoTile" type="Button" parent="VBox/HBox"]
+visible = false
 layout_mode = 2
-tooltip_text = "Toggle AutoTile"
 toggle_mode = true
 icon = ExtResource("11")
 
 [node name="Mode" type="Button" parent="VBox/HBox"]
 layout_mode = 2
-tooltip_text = "Toggle AutoTile"
 toggle_mode = true
 icon = ExtResource("12")
 

@@ -1,13 +1,11 @@
 [gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://djnu2b18r7r1d"]
 
-[ext_resource type="Texture2D" uid="uid://kyifjvikqm12" path="res://assets/Editor/Cursor.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://kyifjvikqm12" path="res://assets/UI/StyleBox/Cursor.png" id="1_4uusu"]
 
 [resource]
-texture = ExtResource("1")
+texture = ExtResource("1_4uusu")
 texture_margin_left = 1.0
 texture_margin_top = 1.0
 texture_margin_right = 1.0
 texture_margin_bottom = 1.0
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
 region_rect = Rect2(0, 0, 8, 8)

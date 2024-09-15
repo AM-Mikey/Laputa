@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://b06myq2bwfo7r"]
 
-[ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/Editor/Cursor.tres" id="1"]
+[ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="1"]
 [ext_resource type="Script" path="res://src/Editor/TileSet.gd" id="2"]
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="3"]
 [ext_resource type="Texture2D" uid="uid://cshcc8rxeo4tb" path="res://assets/Editor/CollisionOneWay.png" id="5"]
@@ -15,7 +15,7 @@ offset_bottom = 288.0
 pivot_offset = Vector2(-408, -64)
 theme = ExtResource("3")
 script = ExtResource("2")
-normal_buttons = NodePath("VBox/Margin/Tab/Normal/Scroll/VBox")
+normal_buttons = NodePath("VBox/Margin/Tab/Normal/Scroll/Tiles")
 collision_buttons = NodePath("VBox/Margin/Tab/Collision/Scroll/Tiles")
 normal_cursor = NodePath("VBox/Margin/Tab/Normal/Scroll/Control/Cursor")
 brushes = NodePath("VBox/Margin/Tab/Collision/HBox/Scroll2/Brushes")
@@ -45,7 +45,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBox" type="VBoxContainer" parent="VBox/Margin/Tab/Normal/Scroll"]
+[node name="Tiles" type="VBoxContainer" parent="VBox/Margin/Tab/Normal/Scroll"]
 layout_mode = 2
 theme_override_constants/separation = 1
 

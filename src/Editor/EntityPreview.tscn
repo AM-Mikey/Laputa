@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://bgxnw8jjm0ueu"]
 
-[ext_resource path="res://src/Editor/EntityPreview.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://src/Editor/EntityPreview.gd" id="1"]
 
 [node name="EntityPreview" type="Node2D"]
-modulate = Color( 1, 1, 1, 0.5 )
-script = ExtResource( 1 )
+modulate = Color(1, 1, 1, 0.5)
+script = ExtResource("1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
-modulate = Color( 1, 1, 1, 0.294118 )
+modulate = Color(1, 1, 1, 0.294118)
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2

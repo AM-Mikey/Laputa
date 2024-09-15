@@ -44,18 +44,18 @@ func setup_tile_buttons(caller: Node, parent_path: NodePath):
 			row.add_child(button)
 			button.connect("mouse_entered", Callable(caller, "hover_button").bind(button))
 			button.connect("mouse_exited", Callable(caller, "unhover"))
-			
-			#button.connect("mouse_entered", Callable(self, "hover_button").bind(button)) OLD 3.0
-			#button.connect("mouse_exited", Callable(self, "unhover"))
+
 			c_id += 1
 		r_id += 1
 ###
 
 	var used_tile_coords = get_all_tile_coords()
 	for i in used_tile_coords:
-		var button = parent.get_child(i.y).get_child(i.x)
-		button.id = used_tile_coords.find(i) #could mess up if multiple tiles are made on the same coords
-		button.texture = get_tile_as_texture(i)
+		
+		var used_button = parent.get_child(i.y).get_child(i.x)
+		print("button: ", used_button)
+		#button.id = used_tile_coords.find(i) #could mess up if multiple tiles are made on the same coords
+		used_button.set("texture", get_tile_as_texture(i))
 
 
 

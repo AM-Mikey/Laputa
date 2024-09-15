@@ -420,4 +420,4 @@ func on_viewport_size_changed():
 	
 	ui.scale = Vector2(resolution_scale, resolution_scale)
 	back.scale = Vector2(resolution_scale, resolution_scale)
-	el.scale = Vector2(max(resolution_scale/2.0, 1), max(resolution_scale/2.0, 1))
+	el.scale = Vector2(max(floor(resolution_scale/2.0), 1), max(floor(resolution_scale/2.0), 1))

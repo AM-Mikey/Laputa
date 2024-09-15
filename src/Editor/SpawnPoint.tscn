@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dupeclhv77d6q" path="res://assets/Editor/SpawnPoint.png" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(6, 11)
+size = Vector2(12, 22)
 
 [node name="SpawnPoint" type="Area2D"]
 script = ExtResource("1")

@@ -38,12 +38,6 @@ mouse_filter = 2
 [node name="Tooltip" parent="Margin" instance=ExtResource("13")]
 layout_mode = 2
 
-[node name="EditorSettings" type="Node" parent="."]
-script = ExtResource("14")
-
-[node name="TileMaster" type="Node" parent="."]
-script = ExtResource("15_aiisb")
-
 [node name="Main" type="CanvasGroup" parent="."]
 self_modulate = Color(1, 1, 1, 0.282353)
 
@@ -120,6 +114,12 @@ offset_bottom = 440.0
 
 [node name="Inspector" parent="Secondary/Win" instance=ExtResource("7")]
 layout_mode = 2
+
+[node name="EditorSettings" type="Node" parent="."]
+script = ExtResource("14")
+
+[node name="TileMaster" type="Node" parent="."]
+script = ExtResource("15_aiisb")
 
 [connection signal="entity_selected" from="." to="Secondary/Win/Inspector" method="on_selected"]
 [connection signal="level_saved" from="." to="Main/Win/Tab/Levels" method="on_save"]
