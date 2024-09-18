@@ -41,8 +41,10 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="AutoLayer" type="Button" parent="VBox/HBox"]
+visible = false
 layout_mode = 2
 toggle_mode = true
+text = "OBSOLETE"
 icon = ExtResource("9")
 
 [node name="MultiErase" type="Button" parent="VBox/HBox"]
@@ -54,6 +56,7 @@ icon = ExtResource("10")
 visible = false
 layout_mode = 2
 toggle_mode = true
+text = "NOT IMPLEMENTED"
 icon = ExtResource("11")
 
 [node name="Mode" type="Button" parent="VBox/HBox"]

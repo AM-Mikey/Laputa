@@ -99,17 +99,9 @@ func display_data():
 				if p["usage"] == 8199: #exported properties
 					create_button(p["name"], active.get(p["name"]), p["type"])
 		"tile_collection":
-			
-			#create_button("auto_select_layer", true, "bool")
-			var layers = []
-			for c in active.get_children():
-				if c is TileMap:
-					layers.append(c)
-			
-			var id = 0
-			for layer in layers:
-				create_layer(layer, id)
-				id += 1
+			var tile_map = active.get_child(0)
+			for layer_id in tile_map.get_layers_count():
+				create_layer_button(layer_id)
 
 
 
@@ -217,11 +209,12 @@ func create_button(property, value, type = TYPE_NIL, enum_items = []):
 	button.connect("property_changed", Callable(self, "on_property_changed"))
 	button.connect("property_selected", Callable(self, "on_property_selected"))
 
-func create_layer(layer, id):
+func create_layer_button(layer_id):
 	var button = LAYER_BUTTON.instantiate()
-	button.layer = layer
-	if id == 0:
+	button.layer_id = layer_id
+	if layer_id == editor.active_tile_map_layer:
 		button.active = true
+	button.tile_map = editor.tile_map
 	$Margin/VBox/Scroll/VBox.add_child(button)
 	button.connect("layer_changed", Callable(editor, "on_layer_changed"))
 

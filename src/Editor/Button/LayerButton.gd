@@ -2,20 +2,26 @@ extends MarginContainer
 
 signal layer_changed(layer)
 
-var layer: TileMap
+var tile_map: Node
+var layer_id: int
 var active = false
 
 
 func _ready():
 	add_to_group("LayerButtons")
-	$HBox/LayerButton.text = layer.name
-	$HBox/VisButton.button_pressed = !layer.visible
+	$HBox/LayerButton.text = tile_map.get_layer_name(layer_id)
+	if tile_map.get_layer_modulate(layer_id) == Color.TRANSPARENT:
+		$HBox/VisButton.button_pressed = true
+	else:
+		$HBox/VisButton.button_pressed = false
 	$PanelActive.visible = active
 
 
 func _on_VisButton_toggled(button_pressed):
-	layer.visible = !button_pressed
-
+	if button_pressed:
+		tile_map.set_layer_modulate(layer_id, Color.TRANSPARENT)
+	else:
+		tile_map.set_layer_modulate(layer_id, Color.WHITE)
 
 func _on_EditButton_toggled(button_pressed):
 	pass
@@ -23,7 +29,7 @@ func _on_EditButton_toggled(button_pressed):
 
 func _on_LayerButton_pressed():
 	activate()
-	emit_signal("layer_changed", layer)
+	emit_signal("layer_changed", layer_id)
 
 
 func activate():

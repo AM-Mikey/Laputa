@@ -32,7 +32,7 @@ tile_mode = 0
 [node name="Tiles" type="Node2D" parent="."]
 light_mask = 8
 
-[node name="Tileset" type="TileMap" parent="Tiles"]
+[node name="TileMap" type="TileMap" parent="Tiles"]
 z_index = 1
 tile_set = ExtResource("2_s4ctt")
 format = 2

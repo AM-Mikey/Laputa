@@ -20,7 +20,7 @@ var columns: int
 var rows: int
 
 var hovered_button
-var selected_tile_region := Rect2(0, 0, 16, 16) #in texture space
+var selected_tile_region := Rect2i(0, 0, 16, 16) #in texture space
 #var selected_tiles = [] #2D array
 var tile_rotation_degrees: float = 0
 var tile_scale_vector := Vector2(1,1)
@@ -78,7 +78,7 @@ func unhover():
 func _input(event):
 	if event.is_action_pressed("editor_lmb") and hovered_button:
 		print("started selecting tile: ", hovered_button.tile_set_position)
-		selected_tile_region = Rect2(hovered_button.tile_set_position, Vector2(16, 16))
+		selected_tile_region = Rect2i(hovered_button.tile_set_position, Vector2(16, 16))
 		editor.brush = null
 		print("cleared brush")
 
@@ -98,7 +98,7 @@ func _input(event):
 			
 			selected_tile_region = selected_tile_region.expand(end_position + offset)
 			set_cursor()
-			editor.brush = selected_tile_region
+			editor.brush = Rect2i(selected_tile_region.position / 16, selected_tile_region.size / 16) #flatten to integers
 
 
 #func get_brush() -> Dictionary:

@@ -69,3 +69,15 @@ Last thing: fixed editor menu transparency
 
 FIX LEVEL EDITOR FOR IVAN
 level editor + debug tileset for level making
+
+--- editor ---
+
+- add stroke grouping, for easy undo
+- inspector window selection for erase layer
+- draw box
+- draw line
+
+	- bonus -
+	- centerbox tile from center or top right option
+	- decide if _on signals from different nodes are considered local or global (if they're children or not??)
+	- add lock button for layers? idk why youd need this..
