@@ -53,8 +53,7 @@ func setup_tile_buttons(caller: Node, parent_path: NodePath):
 	for i in used_tile_coords:
 		
 		var used_button = parent.get_child(i.y).get_child(i.x)
-		print("button: ", used_button)
-		#button.id = used_tile_coords.find(i) #could mess up if multiple tiles are made on the same coords
+		#print("button: ", used_button)
 		used_button.set("texture", get_tile_as_texture(i))
 
 

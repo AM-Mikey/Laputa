@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://brv1y06d1b34i"]
+
+[node name="PreviewTileMap" type="TileMap"]
+modulate = Color(1, 1, 1, 0.5)
+z_index = 999
+format = 2
+layer_0/name = "FarBack"
+layer_1/name = "Back"
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Front"
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "FarFront"
+layer_3/tile_data = PackedInt32Array()
