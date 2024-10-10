@@ -62,9 +62,9 @@ func stop_tween():
 func get_v_dir() -> int:
 	var dir = 0
 	if Input.is_action_pressed("look_up"):
-		dir += 1
-	if Input.is_action_pressed("look_down"):
 		dir -= 1
+	if Input.is_action_pressed("look_down"):
+		dir += 1
 	return dir
 
 ### TRIGGERS ###

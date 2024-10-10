@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://b5eyeotyrei5i"]
+[gd_scene load_steps=17 format=3 uid="uid://b5eyeotyrei5i"]
 
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1"]
 [ext_resource type="Script" path="res://src/Editor/Editor.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://icj0ey5k5dwx" path="res://src/Editor/ResizeWindow.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://bg715nunngytq" path="res://src/Editor/Tiles.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://cg3b2brx7kunj" path="res://src/Editor/Log.tscn" id="4_vdv4f"]
 [ext_resource type="PackedScene" uid="uid://b06myq2bwfo7r" path="res://src/Editor/TileSet.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://src/Editor/Levels.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://ctxo7a6euqnhd" path="res://src/Editor/Inspector.tscn" id="7"]
@@ -36,6 +37,9 @@ offset_bottom = 512.0
 mouse_filter = 2
 
 [node name="Tooltip" parent="Margin" instance=ExtResource("13")]
+layout_mode = 2
+
+[node name="Log" parent="Margin" instance=ExtResource("4_vdv4f")]
 layout_mode = 2
 
 [node name="Main" type="CanvasGroup" parent="."]

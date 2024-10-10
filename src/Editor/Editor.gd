@@ -22,6 +22,7 @@ var disabled = false
 
 var brush #Rect2i
 var tile_map_selection: Rect2i
+var tile_map_copy_buffer: Dictionary
 var active_tile_map_layer: int = 0
 var auto_layer = true
 var multi_erase = true
@@ -48,6 +49,7 @@ var active_operation = [] #[[subop][subop][subop]]
 @onready var el = w.get_node("EditorLayer")
 @onready var inspector = $Secondary/Win/Inspector
 @onready var tile_master = $TileMaster
+@onready var log = $Margin/Log
 var tile_collection
 var actor_collection
 var prop_collection
@@ -195,6 +197,11 @@ func _unhandled_input(event):
 	if event.is_action_released("editor_shift"): shift_held = false
 
 	if event is InputEventKey and event.is_pressed() and not event.is_echo() and ctrl_held:
+		if event.keycode == KEY_C:
+			copy_tile_map_selection()
+		if event.keycode == KEY_V:
+			var pos: Vector2i = get_cell(w.get_global_mouse_position())
+			paste_tiles_from_buffer(pos)
 		if event.keycode == KEY_Z:
 			if shift_held: redo()
 			else: undo()
@@ -230,8 +237,8 @@ func do_entity_input(event):
 	
 	var mouse_pos = w.get_global_mouse_position() #Vector2(w.get_global_mouse_position().x, w.get_global_mouse_position().y + 8)
 	var grid_pos
-	if shift_held: grid_pos = get_grid_pos(mouse_pos, "fine")
-	else: grid_pos = get_grid_pos(mouse_pos, "course")
+	#if shift_held: grid_pos = get_grid_pos(mouse_pos, "fine") #TODO: fix using get_cell()
+	#else: grid_pos = get_grid_pos(mouse_pos, "course")
 	
 	var pos_has_enemy = false
 	for e in get_tree().get_nodes_in_group("Enemies"):
@@ -255,7 +262,7 @@ func do_entity_input(event):
 			"npc":
 				set_entity(grid_pos, $Main/Win/Tab/NPCs.active_npc_path, subtool)
 			"trigger":
-				set_entity(get_grid_pos(mouse_pos, "course", "trigger"), $Main/Win/Tab/Triggers.active_trigger_path, subtool)
+				set_entity(grid_pos, $Main/Win/Tab/Triggers.active_trigger_path, subtool)
 			"noplace":
 				pass
 
@@ -282,7 +289,7 @@ func do_entity_input(event):
 			"npc":
 				preview_entity(grid_pos, $Main/Win/Tab/NPCs.active_npc_path, subtool)
 			"trigger":
-				preview_entity(get_grid_pos(mouse_pos, "course", "trigger"), $Main/Win/Tab/Triggers.active_trigger_path, subtool)
+				preview_entity(grid_pos, $Main/Win/Tab/Triggers.active_trigger_path, subtool)
 			"grab":
 				inspector.active.global_position = grid_pos + grab_offset
 				if "home" in inspector.active:
@@ -387,32 +394,32 @@ func do_tile_input(event):
 
 
 
-func do_grab_input(event):
-	var mouse_pos = Vector2(w.get_global_mouse_position().x, w.get_global_mouse_position().y - 8) #w.get_global_mouse_position() #
-	var grid_pos = get_grid_pos(mouse_pos, "fine")
-
-	#pressing
-#	if event.is_action_pressed("editor_rmb"):
-#		var selected = get_entity_at_pos(Vector2(grid_pos.x, grid_pos.y + 1))
-#		if selected:
-#			inspector.on_selected(selected, get_entity_type(selected))
-#		else:
-#			inspector.on_deselected()
-	
-	if event.is_action_pressed("editor_rmb") and inspector.active:
-		set_tool("grab", "hold")
-		grab_offset = inspector.active.position - grid_pos
-	
-#	if event.is_action_pressed("editor_rmb"):
-#		inspector.on_deselected()
-	
-	#releasing
-	if event.is_action_released("editor_rmb"):
-		set_tool("grab", "release")
-
-	#moving
-	if event is InputEventMouseMotion and subtool == "hold":
-		inspector.active.position = grid_pos + grab_offset
+#func do_grab_input(event): #OBSOLETE
+	#var mouse_pos = Vector2(w.get_global_mouse_position().x, w.get_global_mouse_position().y - 8) #w.get_global_mouse_position() #
+	#var grid_pos = get_grid_pos(mouse_pos, "fine")
+#
+	##pressing
+##	if event.is_action_pressed("editor_rmb"):
+##		var selected = get_entity_at_pos(Vector2(grid_pos.x, grid_pos.y + 1))
+##		if selected:
+##			inspector.on_selected(selected, get_entity_type(selected))
+##		else:
+##			inspector.on_deselected()
+	#
+	#if event.is_action_pressed("editor_rmb") and inspector.active:
+		#set_tool("grab", "hold")
+		#grab_offset = inspector.active.position - grid_pos
+	#
+##	if event.is_action_pressed("editor_rmb"):
+##		inspector.on_deselected()
+	#
+	##releasing
+	#if event.is_action_released("editor_rmb"):
+		#set_tool("grab", "release")
+#
+	##moving
+	#if event is InputEventMouseMotion and subtool == "hold":
+		#inspector.active.position = grid_pos + grab_offset
 
 #func get_entity_at_pos(position):
 #	for a in actor_collection.get_children():
@@ -444,6 +451,7 @@ func set_tile_map_selection(start_pos, end_pos):
 	#print(tile_map_selection)
 
 func move_tile_map_selection(start_pos, end_pos):# TODO: make work with undo/redo
+	log.display_message("moved tiles")
 	var selected_cells = get_selected_cells_as_dictionary()
 	
 	var change = get_cell(end_pos) - get_cell(start_pos)
@@ -451,17 +459,33 @@ func move_tile_map_selection(start_pos, end_pos):# TODO: make work with undo/red
 	tile_map_cursor.position = tile_map_selection.position * 16
 	tile_map_cursor.size = tile_map_selection.size * 16
 
-	move_selected_cells_from_dictionary(selected_cells, change)
-
-func del_tile_map_selection(): #TODO: test #outdated
-	var selected_cells = get_selected_cells_as_dictionary()
-	
 	for layer in selected_cells:
-		for pos in selected_cells[layer]:
-			layer.set_cellv(pos, -1)
+		for cell in selected_cells[layer]:
+			var old_tm_pos = cell[0]
+			var new_tm_pos = cell[0] + change
+			var ts_pos = cell[1]
+			tile_map.set_cell(layer, old_tm_pos, -1, ts_pos) #erase old
+			tile_map.set_cell(layer, new_tm_pos, 0, ts_pos)
+
+#func del_tile_map_selection(): #TODO: test #outdated
 
 
-func get_selected_cells_as_dictionary() -> Dictionary: #used for tile map selection
+func copy_tile_map_selection():
+	log.display_message("copied tiles")
+	tile_map_copy_buffer = get_selected_cells_as_dictionary("local_to_selection")
+
+func paste_tiles_from_buffer(pos):
+	log.display_message("pasted tiles")
+	for layer in tile_map_copy_buffer:
+		for cell in tile_map_copy_buffer[layer]:
+			var old_tm_pos = cell[0]
+			var new_tm_pos = cell[0] + pos
+			var ts_pos = cell[1]
+			#tile_map.set_cell(layer, old_tm_pos, -1, ts_pos) #erase old
+			tile_map.set_cell(layer, new_tm_pos, 0, ts_pos)
+	
+
+func get_selected_cells_as_dictionary(mode = "local_to_map") -> Dictionary: #used for tile map selection
 	#{"layer 1": [[tm_pos1, ts_pos1], [tm_pos2, ts_pos2]],
 	#"layer 2": ...}
 	var selected_cells = {}
@@ -472,20 +496,16 @@ func get_selected_cells_as_dictionary() -> Dictionary: #used for tile map select
 			for column in tile_map_selection.size.x:
 				var cell_pos = tile_map_selection.position + Vector2i(column, row)
 				var tile_pos = tile_map.get_cell_atlas_coords(layer, cell_pos)
+				if mode == "local_to_selection": #instead of local_to_map
+					cell_pos = Vector2i(column, row)
+				
 				layer_cells.append([cell_pos, tile_pos])
 	
 		selected_cells[layer] = layer_cells
 	return(selected_cells)
 
 
-func move_selected_cells_from_dictionary(selected_cells, change): #used for tile map selection
-	for layer in selected_cells:
-		for cell in selected_cells[layer]:
-			var old_cell_pos = cell[0]
-			var new_cell_pos = cell[0] + change
-			var tile_pos = cell[1]
-			tile_map.set_cell(layer, old_cell_pos, -1, tile_pos) #erase old
-			tile_map.set_cell(layer, new_cell_pos, 0, tile_pos)
+
 
 
 
@@ -685,7 +705,6 @@ func preview_move_tile_set_selection(start_pos, end_pos): #used for tile map sel
 
 
 func setup_preview_tile_map() -> Node:
-	print("setup")
 	for m in tile_collection.get_children():
 		if m.is_in_group("Previews"):
 			m.queue_free()
@@ -731,16 +750,16 @@ func get_cell(mouse_pos) -> Vector2i:
 	var map_pos = tile_map.local_to_map(local_pos)
 	return map_pos
 
-func get_grid_pos(mouse_pos, mode = "course", exception = "none") -> Vector2:
-	var step = 16
-	var offset = Vector2(8,0)
-	if mode == "fine":
-		step = 8
-		offset = Vector2(0, 0)
-	if exception == "trigger":
-		return Vector2(snapped(mouse_pos.x, step), snapped(mouse_pos.y, step))
-	else:
-		return Vector2(snapped(mouse_pos.x - offset.x, step), snapped(mouse_pos.y - offset.y, step)) + offset
+#func get_grid_pos(mouse_pos, mode = "course", exception = "none") -> Vector2: #OBSOLETE WHY WHY WHY
+	#var step = 16
+	#var offset = Vector2(8,0)
+	#if mode == "fine":
+		#step = 8
+		#offset = Vector2(0, 0)
+	#if exception == "trigger":
+		#return Vector2(snapped(mouse_pos.x, step), snapped(mouse_pos.y, step))
+	#else:
+		#return Vector2(snapped(mouse_pos.x - offset.x, step), snapped(mouse_pos.y - offset.y, step)) + offset
 
 
 func get_cells_centerbox(mouse_pos) -> Rect2i:

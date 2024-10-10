@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://djiht873be1ns"]
+
+[ext_resource type="Script" path="res://src/Editor/LogMessage.gd" id="1_2k5p7"]
+
+[node name="LogMessage" type="Label"]
+size_flags_horizontal = 4
+size_flags_vertical = 1
+text = "Example Message"
+script = ExtResource("1_2k5p7")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -43,7 +43,7 @@ func do_fizzle(type: String):
 	
 	fizzle.position = $End.global_position if has_node("End") else global_position
 	if instant_fizzle and not is_enemy_bullet:
-		#print("WARNING: Bullet instantly fizzled")
+		print("WARNING: Bullet instantly fizzled")
 		fizzle.position = world.get_node("Juniper").guns.get_child(0).get_node("Muzzle").global_position
 	queue_free()
 

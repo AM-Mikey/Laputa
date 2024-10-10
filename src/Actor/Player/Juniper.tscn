@@ -25,9 +25,9 @@
 [ext_resource type="PackedScene" uid="uid://5orkim7sjfi7" path="res://src/Gun/Tsurugi.tscn" id="24_0pdvi"]
 [ext_resource type="Shader" path="res://src/Shader/JuniperRecolor.gdshader" id="24_s1pnb"]
 [ext_resource type="Texture2D" uid="uid://mkfrxk3djlu1" path="res://assets/Actor/Player/Palette/Normal.png" id="25_3o18d"]
-[ext_resource type="Texture2D" uid="uid://b6mfl184pisc1" path="res://assets/Actor/Player/Palette/Mono.png" id="26_m4i7s"]
 [ext_resource type="Script" path="res://src/Actor/Player/Inspect.gd" id="27"]
 [ext_resource type="Texture2D" uid="uid://dbmfepg252o24" path="res://assets/Actor/Player/CrouchNew.png" id="27_26c0b"]
+[ext_resource type="Texture2D" uid="uid://3abc3ea7h2rn" path="res://assets/Actor/Player/Palette/OceanPink.png" id="27_i6e0s"]
 [ext_resource type="PackedScene" uid="uid://diwpy822anfc4" path="res://src/Gun/MPistol.tscn" id="28"]
 [ext_resource type="Script" path="res://src/Actor/Player/Jump.gd" id="29"]
 [ext_resource type="Script" path="res://src/Actor/Player/Run.gd" id="30"]
@@ -59,7 +59,7 @@ shader_parameter/screen_mode = false
 shader_parameter/num_colors = 16
 shader_parameter/precision = 0.0
 shader_parameter/palette_in = ExtResource("25_3o18d")
-shader_parameter/palette_out = ExtResource("26_m4i7s")
+shader_parameter/palette_out = ExtResource("27_i6e0s")
 
 [sub_resource type="Animation" id="53"]
 tracks/0/type = "value"
@@ -1632,7 +1632,7 @@ visible = false
 light_mask = 2
 material = SubResource("61")
 position = Vector2(0, -16)
-texture = ExtResource("6")
+texture = ExtResource("20")
 hframes = 12
 vframes = 8
 script = ExtResource("13")

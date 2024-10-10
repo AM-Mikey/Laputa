@@ -30,6 +30,8 @@ fix shoot down on non-ssp
 -fix jump on holding jump button
 -add or fix bonk protection (move character or rounded hitbox)
 -fix footstep sound code
+-enable peek down off of ledge using double SSP detectors
+-mario head shift on jump+bonk
 
 
 --- pickup ---
@@ -39,7 +41,6 @@ fix shoot down on non-ssp
 
 --- gun ---
 fix large gun hand sprites
-
 
 --- hud ---
 flash max on max xp pickup
@@ -65,7 +66,7 @@ font and theme standardization
 --- general ---
 set global color palettes for xp hp etc
 
-Last thing: fixed editor menu transparency
+
 
 FIX LEVEL EDITOR FOR IVAN
 level editor + debug tileset for level making
@@ -81,3 +82,8 @@ level editor + debug tileset for level making
 	- centerbox tile from center or top right option
 	- decide if _on signals from different nodes are considered local or global (if they're children or not??)
 	- add lock button for layers? idk why youd need this..
+	
+	
+
+
+Last thing: considered double SSP detectors
