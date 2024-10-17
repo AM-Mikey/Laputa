@@ -5,6 +5,10 @@ var value: float
 var dir = Vector2.DOWN
 
 func _ready():
+	add_to_group("Actors")
+	add_to_group("Entities")
+	home = global_position
+	
 	speed = Vector2(10, 10)
 	match value:
 		0.2: $AnimationPlayer.play("Small")

@@ -17,6 +17,7 @@ size = Vector2(22, 1)
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("2")
+editor_hidden = false
 
 [node name="Standable" type="CharacterBody2D" parent="."]
 collision_layer = 8

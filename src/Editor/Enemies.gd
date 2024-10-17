@@ -11,8 +11,7 @@ var active_enemy_path
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
 
 func _ready():
-	pass
-	#setup_enemies()
+	setup_enemies()
 
 
 func setup_enemies():
@@ -26,6 +25,7 @@ func setup_enemies():
 			var enemy_button = ENEMY_BUTTON.instantiate()
 			enemy_button.enemy_path = e
 			enemy_button.enemy_name = enemy.name
+			enemy_button.enemy_sprite = enemy.get_node("Sprite2D").texture
 			enemy_button.connect("enemy_changed", Callable(self, "change_enemy"))
 			if index == 0:
 				enemy_button.active = true
@@ -48,14 +48,14 @@ func find_enemy_scenes(path):
 			
 	return files
 
-func change_enemy(enemy_path):
+func change_enemy(enemy_path): #TODO: rework these buttons as images.
 	editor.set_tool("entity", "enemy")
 	active_enemy_path = enemy_path
 	for e in $VBox/Margin/Scroll/Buttons.get_children():
 		if e.enemy_path == active_enemy_path: #this is weird, we should have already done this. for extra security in case it was activated another way?
 			e.activate()
 	
-	emit_signal("enemy_changed", active_enemy_path)
+	emit_signal("enemy_changed", active_enemy_path) #why emit again???
 
 
 func unpick_enemy():

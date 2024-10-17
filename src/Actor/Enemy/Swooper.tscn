@@ -77,6 +77,7 @@ _data = {
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("2")
+editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("1")

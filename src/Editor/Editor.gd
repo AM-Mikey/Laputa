@@ -8,9 +8,10 @@ signal tile_collection_selected(tile_collection)
 
 signal level_saved()
 
-
+const ACTOR_SPAWN = preload("res://src/Editor/ActorSpawn.tscn")
+const ACTOR_SPAWN_PREVIEW = preload("res://src/Editor/ActorSpawnPreview.tscn")
 const EDITOR_CAMERA = preload("res://src/Editor/EditorCamera.tscn")
-const ENTITY_PREVIEW = preload("res://src/Editor/EntityPreview.tscn")
+#const ENTITY_PREVIEW = preload("res://src/Editor/EntityPreview.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const LAYER_BUTTON = preload("res://src/Editor/Button/LayerButton.tscn")
 const LIMITER = preload("res://src/Editor/EditorLevelLimiter.tscn")
@@ -59,6 +60,7 @@ var tile_set
 var editor_level_limiter
 var tile_map_cursor
 
+### SETUP ###
 
 func _ready():
 	var _err = get_tree().root.connect("size_changed", Callable(self, "_on_viewport_size_changed"))
@@ -72,13 +74,12 @@ func _ready():
 
 func setup_level(): #TODO: clear undo history
 	#emit_signal("level_selected", w.current_level)
-	#get_tree().paused = true
 	w.get_node("Juniper").disable()
 	ui.get_node("HUD").queue_free()
 	ui.visible = false
 	for a in get_tree().get_nodes_in_group("Actors"):
-		if a.has_method("disable"): #TODO TODO:, better way of doing this and resetting vars at the same time
-			a.disable()
+		a.queue_free()
+			
 	tile_collection = w.current_level.get_node("Tiles")
 	actor_collection = w.current_level.get_node("Actors")
 	prop_collection = w.current_level.get_node("Props")
@@ -89,14 +90,12 @@ func setup_level(): #TODO: clear undo history
 	tile_master.setup_tile_master()
 	$Main/Win/Tab/TileSet.load_tile_set(tile_set.resource_path)
 	
-
-
-
 	setup_level_editor_layer()
 	set_entities_pickable()
 	w.set_debug_visible(true)
-	move_actors_to_home()
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
+		s.visible = true
+	for s in get_tree().get_nodes_in_group("ActorSpawns"):
 		s.visible = true
 	for l in get_tree().get_nodes_in_group("SunLights"):
 		l.editor_enter()
@@ -106,14 +105,7 @@ func setup_level(): #TODO: clear undo history
 	el.get_node("EditorCamera").make_current()
 	
 
-### SETUP
-
-func move_actors_to_home():
-	for a in actor_collection.get_children():
-		a.global_position = a.home
-
-
-func set_entities_pickable(pickable = true):
+func set_entities_pickable(pickable = true): #TODO: unknown if this is still relevant
 	for a in actor_collection.get_children():
 		if not a.is_in_group("Previews"):
 			a.input_pickable = pickable
@@ -136,14 +128,12 @@ func setup_level_editor_layer(): #the layer for editor overlays that go over the
 	editor_layer.add_child(tile_map_cursor)
 
 
-###
 
 func load_editor_windows():
 	pass
 
 
 func exit():
-	#get_tree().paused = false
 	inspector.exit()
 	
 	hide_preview() #delete tile brush preview
@@ -153,14 +143,13 @@ func exit():
 	ui.visible = true
 	w.get_node("Juniper").enable()
 	w.get_node("Juniper/PlayerCamera").enabled = true
-	for a in get_tree().get_nodes_in_group("Actors"):
-		if a.has_method("enable"):
-			a.enable()
 	set_entities_pickable(false)
 	w.set_debug_visible(false)
-	move_actors_to_home()
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		s.visible = false
+	for a in get_tree().get_nodes_in_group("ActorSpawns"):
+		a.spawn()
+		a.visible = false
 	for l in get_tree().get_nodes_in_group("SunLights"):
 		l.editor_exit()
 	queue_free()
@@ -168,21 +157,25 @@ func exit():
 		if t.has_node("TriggerController"):
 			t.get_node("TriggerController").disable()
 
+
+
 ### PROCESS ###
 
 func _physics_process(_delta):
 	set_menu_alpha()
 
-### TILES
 
 
 
 
-func get_tile_texture(tile):
-	var tile_texture = AtlasTexture.new()
-	tile_texture.atlas = tile_set.tile_get_texture(tile)
-	tile_texture.region = tile_set.tile_get_region(tile)
-	return tile_texture
+
+### TILES ###
+#
+#func get_tile_texture(tile):
+	#var tile_texture = AtlasTexture.new()
+	#tile_texture.atlas = tile_set.tile_get_texture(tile)
+	#tile_texture.region = tile_set.tile_get_region(tile)
+	#return tile_texture
 
 
 ### INPUT ###
@@ -236,18 +229,16 @@ func do_entity_input(event):
 	await get_tree().process_frame #wait for new active to be set
 	
 	var mouse_pos = w.get_global_mouse_position() #Vector2(w.get_global_mouse_position().x, w.get_global_mouse_position().y + 8)
-	var grid_pos
-	#if shift_held: grid_pos = get_grid_pos(mouse_pos, "fine") #TODO: fix using get_cell()
-	#else: grid_pos = get_grid_pos(mouse_pos, "course")
+	var grid_pos = get_cell(mouse_pos)
 	
-	var pos_has_enemy = false
-	for e in get_tree().get_nodes_in_group("Enemies"):
-		if is_entity_at_position(e, grid_pos):
-			pos_has_enemy = true
-	var pos_has_prop = false
-	for p in get_tree().get_nodes_in_group("Props"):
-		if is_entity_at_position(p, grid_pos):
-			pos_has_enemy = true
+	#var pos_has_enemy = false #TODO: consider reenabling
+	#for e in get_tree().get_nodes_in_group("Enemies"):
+		#if is_entity_at_position(e, grid_pos):
+			#pos_has_enemy = true
+	#var pos_has_prop = false
+	#for p in get_tree().get_nodes_in_group("Props"):
+		#if is_entity_at_position(p, grid_pos):
+			#pos_has_enemy = true
 	
 	
 
@@ -255,14 +246,18 @@ func do_entity_input(event):
 	if event.is_action_pressed("editor_lmb"):
 		match subtool:
 			"enemy":
-				if not pos_has_enemy:
-					set_entity(grid_pos, $Main/Win/Tab/Enemies.active_enemy_path, subtool) #subtool == "enemy"
+				set_actor_spawn($Main/Win/Tab/Enemies.active_enemy_path, grid_pos)
+				#if not pos_has_enemy:
+					#set_entity(grid_pos, $Main/Win/Tab/Enemies.active_enemy_path, subtool) #subtool == "enemy"
 			"prop":
-				set_entity(grid_pos, $Main/Win/Tab/Props.active_prop_path, subtool)
+				pass
+				#set_entity(grid_pos, $Main/Win/Tab/Props.active_prop_path, subtool)
 			"npc":
-				set_entity(grid_pos, $Main/Win/Tab/NPCs.active_npc_path, subtool)
+				pass
+				#set_entity(grid_pos, $Main/Win/Tab/NPCs.active_npc_path, subtool)
 			"trigger":
-				set_entity(grid_pos, $Main/Win/Tab/Triggers.active_trigger_path, subtool)
+				pass
+				#set_entity(grid_pos, $Main/Win/Tab/Triggers.active_trigger_path, subtool)
 			"noplace":
 				pass
 
@@ -271,7 +266,7 @@ func do_entity_input(event):
 	if event.is_action_pressed("editor_rmb") and inspector.active and inspector.active_type != "background":
 		pre_grab_subtool = subtool
 		set_tool("entity", "grab")
-		grab_offset = inspector.active.global_position - grid_pos
+		grab_offset = inspector.active.global_position - mouse_pos
 
 	#releasing
 	if event.is_action_released("editor_rmb"):
@@ -282,18 +277,24 @@ func do_entity_input(event):
 		hide_preview()
 		match subtool:
 			"enemy":
-				if not pos_has_enemy:
-					preview_entity(grid_pos, $Main/Win/Tab/Enemies.active_enemy_path, subtool)
+				preview_actor_spawn($Main/Win/Tab/Enemies.active_enemy_path, grid_pos)
+				#if not pos_has_enemy:
+					#preview_entity(grid_pos, $Main/Win/Tab/Enemies.active_enemy_path, subtool)
+				
 			"prop":
-				preview_entity(grid_pos, $Main/Win/Tab/Props.active_prop_path, subtool)
+				pass
+				#preview_entity(grid_pos, $Main/Win/Tab/Props.active_prop_path, subtool)
 			"npc":
-				preview_entity(grid_pos, $Main/Win/Tab/NPCs.active_npc_path, subtool)
+				pass
+				#preview_entity(grid_pos, $Main/Win/Tab/NPCs.active_npc_path, subtool)
 			"trigger":
-				preview_entity(grid_pos, $Main/Win/Tab/Triggers.active_trigger_path, subtool)
+				pass
+				#preview_entity(grid_pos, $Main/Win/Tab/Triggers.active_trigger_path, subtool)
 			"grab":
-				inspector.active.global_position = grid_pos + grab_offset
-				if "home" in inspector.active:
-					inspector.active.home = inspector.active.global_position
+				if shift_held: inspector.active.global_position = Vector2(mouse_pos + grab_offset).snapped(Vector2(4,4))
+				else: inspector.active.global_position = Vector2(mouse_pos + grab_offset).snapped(Vector2(8,8))
+				#if "home" in inspector.active:
+					#inspector.active.home = inspector.active.global_position
 	
 	#deleting
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
@@ -310,13 +311,10 @@ func do_entity_input(event):
 func do_tile_input(event):
 	var mouse_pos = w.get_global_mouse_position()
 	
-	if lmb_held: pass #brush = brush
-	if rmb_held: pass#brush = get_brush_as_eraser()
-	
 	if event.is_action_pressed("debug_fly"):
 		print(active_operation)
-		if auto_tile:
-			print("auto tiling")
+		#if auto_tile:
+			#print("auto tiling")
 			#set_auto_tiles() #TODO: testing
 
 	
@@ -327,8 +325,6 @@ func do_tile_input(event):
 		if subtool == "select":
 			if event.is_action_pressed("editor_lmb"):
 				set_tile_map_selection(mouse_start_pos, mouse_pos)
-#			if event.is_action_pressed("editor_rmb"):
-#				move_tile_map_selection("mou")
 		elif brush: #normal draw
 			if shift_held: set_tool("tile", "line")
 			elif ctrl_held: set_tool("tile", "box")
@@ -388,38 +384,11 @@ func do_tile_input(event):
 			#print("active op: ", active_operation)
 			active_operation.clear()
 		
-		if auto_tile:
-			print("auto tiling")
+		#if auto_tile:
+			#print("auto tiling")
 			#set_auto_tiles() #TODO: testing
 
 
-
-#func do_grab_input(event): #OBSOLETE
-	#var mouse_pos = Vector2(w.get_global_mouse_position().x, w.get_global_mouse_position().y - 8) #w.get_global_mouse_position() #
-	#var grid_pos = get_grid_pos(mouse_pos, "fine")
-#
-	##pressing
-##	if event.is_action_pressed("editor_rmb"):
-##		var selected = get_entity_at_pos(Vector2(grid_pos.x, grid_pos.y + 1))
-##		if selected:
-##			inspector.on_selected(selected, get_entity_type(selected))
-##		else:
-##			inspector.on_deselected()
-	#
-	#if event.is_action_pressed("editor_rmb") and inspector.active:
-		#set_tool("grab", "hold")
-		#grab_offset = inspector.active.position - grid_pos
-	#
-##	if event.is_action_pressed("editor_rmb"):
-##		inspector.on_deselected()
-	#
-	##releasing
-	#if event.is_action_released("editor_rmb"):
-		#set_tool("grab", "release")
-#
-	##moving
-	#if event is InputEventMouseMotion and subtool == "hold":
-		#inspector.active.position = grid_pos + grab_offset
 
 #func get_entity_at_pos(position):
 #	for a in actor_collection.get_children():
@@ -431,7 +400,7 @@ func do_tile_input(event):
 #	return null
 
 func get_entity_type(entity: Node): #called by actor.gd
-	if entity.is_in_group("Enemies"): return "enemy"
+	if entity.is_in_group("ActorSpawns"): return "actor_spawn"
 	if entity.is_in_group("Props"): return "prop"
 	if entity.is_in_group("NPCs"): return "npc"
 	if entity.is_in_group("Triggers"): return "trigger"
@@ -439,8 +408,10 @@ func get_entity_type(entity: Node): #called by actor.gd
 	
 	printerr("ERROR: Could not get entity type of entity: " + entity.name)
 	return null
-	
-### OPERATIONS ###
+
+
+
+### TILES ###
 
 func set_tile_map_selection(start_pos, end_pos):
 	tile_map_selection = Rect2i(get_cell(start_pos), Vector2i.ZERO)
@@ -569,6 +540,8 @@ func redo():
 #	else:
 #		print("nothing left to redo!")
 
+
+
 func set_cell(cell: Vector2, tile: int, layer): #set one cell, one layer, one tile ##ONLY VIA UNDO/REDO
 	pass
 	#if tile == -2: #null
@@ -628,31 +601,41 @@ func set_cells_from_brush_origins(origins: Array, erase = false):
 		##node.farfront = tile_collection.get_node("FarFront")
 		#add_child(node)
 
-func set_entity(pos, entity_path, entity_type, traced = true):
-	if entity_path == null:
-		printerr("ERROR: no enemy path in set_entity")
+
+### ENTITIES ###
+
+func set_actor_spawn(actor_path, pos):
+	var actor_spawn = ACTOR_SPAWN.instantiate()
+	actor_spawn.actor_path = actor_path
+	actor_spawn.global_position = (pos * 16) + Vector2i(8, 16)
+	actor_collection.add_child(actor_spawn)
 	
-	var entity = load(entity_path).instantiate()
-	if entity.has_method("disable"):
-		entity.disable()
-	entity.global_position = pos
-	entity.input_pickable = true
-	
-	match entity_type:
-		"enemy", "npc", "player", "boss", "pickup":
-			actor_collection.add_child(entity)
-		"prop":
-			prop_collection.add_child(entity)
-		"trigger":
-			#entity = TRIGGER_CONTROLLER.instance()
-			trigger_collection.add_child(entity)
-		_:
-			printerr("ERROR: cannot find entity_type: " + entity_type)
-	
-	entity.owner = w.current_level
-	if traced:
-		emit_signal("entity_selected", entity, entity_type) #select new entity
-		past_operations.append(["set_entity",[position, entity_path, entity_type]])
+
+#func set_entity(pos, entity_path, entity_type, traced = true): #TODO: replace with custom per type, easier that way.
+	#if entity_path == null:
+		#printerr("ERROR: no enemy path in set_entity")
+	#
+	#var entity = load(entity_path).instantiate()
+	#if entity.has_method("disable"):
+		#entity.disable()
+	#entity.global_position = pos
+	#entity.input_pickable = true
+	#
+	#match entity_type:
+		#"enemy", "npc", "player", "boss", "pickup":
+			#actor_collection.add_child(entity)
+		#"prop":
+			#prop_collection.add_child(entity)
+		#"trigger":
+			##entity = TRIGGER_CONTROLLER.instance()
+			#trigger_collection.add_child(entity)
+		#_:
+			#printerr("ERROR: cannot find entity_type: " + entity_type)
+	#
+	#entity.owner = w.current_level
+	#if traced:
+		#emit_signal("entity_selected", entity, entity_type) #select new entity
+		#past_operations.append(["set_entity",[position, entity_path, entity_type]])
 
 func del_entity(pos, traced = true):
 		for e in get_tree().get_nodes_in_group("Entities"):
@@ -716,21 +699,26 @@ func setup_preview_tile_map() -> Node:
 	return preview_tile_map
 
 
+func preview_actor_spawn(actor_path, pos):
+	var preview = ACTOR_SPAWN_PREVIEW.instantiate()
+	preview.actor_path = actor_path
+	preview.global_position = (pos * 16) + Vector2i(8, 16)
+	actor_collection.add_child(preview)
 
-func preview_entity(pos, entity_path, entity_type):
-	var preview = ENTITY_PREVIEW.instantiate()
-	preview.entity_type = entity_type
-	preview.entity_path = entity_path
-	preview.global_position = pos
-	match entity_type:
-		"enemy", "npc", "player", "boss", "pickup":
-			actor_collection.add_child(preview)
-		"prop":
-			prop_collection.add_child(preview)
-		"trigger":
-			trigger_collection.add_child(preview)
-		_:
-			printerr("ERROR: cannot find entity_type: " + entity_type)
+#func preview_entity(pos, entity_path, entity_type):
+	#var preview = ENTITY_PREVIEW.instantiate()
+	#preview.entity_type = entity_type
+	#preview.entity_path = entity_path
+	#preview.global_position = pos
+	#match entity_type:
+		#"enemy", "npc", "player", "boss", "pickup":
+			#actor_collection.add_child(preview)
+		#"prop":
+			#prop_collection.add_child(preview)
+		#"trigger":
+			#trigger_collection.add_child(preview)
+		#_:
+			#printerr("ERROR: cannot find entity_type: " + entity_type)
 
 
 func hide_preview():
@@ -749,18 +737,6 @@ func get_cell(mouse_pos) -> Vector2i:
 	var local_pos = tile_map.to_local(mouse_pos)
 	var map_pos = tile_map.local_to_map(local_pos)
 	return map_pos
-
-#func get_grid_pos(mouse_pos, mode = "course", exception = "none") -> Vector2: #OBSOLETE WHY WHY WHY
-	#var step = 16
-	#var offset = Vector2(8,0)
-	#if mode == "fine":
-		#step = 8
-		#offset = Vector2(0, 0)
-	#if exception == "trigger":
-		#return Vector2(snapped(mouse_pos.x, step), snapped(mouse_pos.y, step))
-	#else:
-		#return Vector2(snapped(mouse_pos.x - offset.x, step), snapped(mouse_pos.y - offset.y, step)) + offset
-
 
 func get_cells_centerbox(mouse_pos) -> Rect2i:
 	var cells = Rect2i()
@@ -793,7 +769,6 @@ func get_cells_line_origins(start_pos, end_pos) -> Array:
 	var end = get_cell(end_pos)
 	var cb = get_cells_box(start_pos, end_pos)
 	var sign = Vector2i(sign(end_pos.x - start_pos.x), sign(end_pos.y - start_pos.y))
-
 	var min = cb.position
 	var max = cb.position + cb.size
 	var d = cb.size
@@ -833,22 +808,6 @@ func get_tile_map_layer(y_pos: int) -> int:
 
 
 
-
-
-#func get_2d_array_from_Vector2_array(array) -> Array: #obsolete
-	#var new_array = []
-	#var recorded_ys = []
-	#for i in array:
-		#if not recorded_ys.has(i.y):
-			#recorded_ys.append(i.y)
-			#var row = []
-			#row.append(i)
-			#new_array.append(row)
-		#else:
-			#new_array[recorded_ys.find(i.y)].append(i)
-	#return new_array
-
-
 func is_entity_at_position(entity, pos, forgiveness = 4):
 	var out = false
 	if abs(pos.x - entity.global_position.x) < forgiveness and abs(pos.y - entity.global_position.y) < forgiveness:
@@ -886,11 +845,6 @@ func set_menu_alpha():
 		$Secondary.self_modulate = Color(1, 1, 1, 1)
 	else:
 		$Secondary.self_modulate = Color(1, 1, 1, 0.50)
-
-
-
-
-### SIGNALS ###
 
 
 

@@ -4,7 +4,7 @@ extends Enemy
 
 var move_dir
 
-func _ready():
+func setup():
 	hp = 3
 	reward = 2
 	damage_on_contact = 2

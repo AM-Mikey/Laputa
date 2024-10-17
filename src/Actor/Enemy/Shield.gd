@@ -16,7 +16,7 @@ func setup():
 	damage_on_contact = 2
 	speed = Vector2(50, 50)
 
-func bb(state: bool):
+func bullet_block(state: bool):
 	bb.monitoring = state
 	bb.monitorable = state
 
@@ -31,11 +31,11 @@ func enter_walk():
 	match move_dir:
 		Vector2.LEFT: 
 			ap.play("WalkLeft")
-			bb(true)
+			bullet_block(true)
 			#collision_layer = 32 #shield
 		Vector2.RIGHT: 
 			ap.play("WalkRight")
-			bb(false)
+			bullet_block(false)
 			#collision_layer = 2 #enemy
 	
 	rng.randomize()
@@ -59,11 +59,11 @@ func enter_idle():
 	match move_dir:
 		Vector2.LEFT: 
 			ap.play("IdleLeft")
-			bb(true)
+			bullet_block(true)
 			#collision_layer = 32 #shield
 		Vector2.RIGHT:
 			ap.play("IdleRight")
-			bb(false)
+			bullet_block(false)
 			#collision_layer = 2 #enemy
 	$StateTimer.start(rng.randf_range(1.0, idle_max_time))
 	await $StateTimer.timeout
@@ -79,7 +79,6 @@ func enter_defend():
 ### SIGNALS ###
 
 func _on_BulletBlocker_body_entered(body):
-	print("dasasdasdas")
 	if body.get_collision_layer_value(7): #bullet
 		if move_dir == Vector2.LEFT:
 			change_state("defend")

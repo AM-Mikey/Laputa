@@ -15,7 +15,10 @@ var recent_damage_taken: int
 
 @onready var hud = get_tree().get_root().get_node("World/UILayer/HUD")
 
-#func _ready():
+func _ready():
+	add_to_group("Actors")
+	add_to_group("Entities")
+	home = global_position
 	#hud.get_node("Boss").visible = true
 	
 #	connect("setup_ui", hud, "_on_boss_setup_ui")

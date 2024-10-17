@@ -36,6 +36,8 @@ func on_selected(selection, selection_type):
 	match active_type:
 		"spawn_point":
 			editor.set_tool("entity", "noplace")
+		"actor_spawn":
+			editor.set_tool("entity", "noplace")
 		"light":
 			editor.set_tool("entity", "noplace")
 		_:

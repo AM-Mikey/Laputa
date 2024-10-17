@@ -14,6 +14,10 @@ var decay_time = 4.0
 var pop_time = 1.0
 
 func _ready():
+	add_to_group("Actors")
+	add_to_group("Entities")
+	home = global_position
+	
 	$DecayTimer.start(decay_time)
 	direction = randomize_direction()
 	speed = randomize_speed()

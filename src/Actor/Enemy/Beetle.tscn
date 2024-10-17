@@ -50,7 +50,7 @@ _data = {
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("3")
-editor_hidden = true
+editor_hidden = false
 speed = Vector2(150, 150)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

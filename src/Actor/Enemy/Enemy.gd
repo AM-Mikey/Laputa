@@ -38,6 +38,10 @@ var ammo_chance = 1
 
 
 func _ready():
+	add_to_group("Actors")
+	add_to_group("Entities")
+	home = global_position
+	
 	add_to_group("Enemies")
 	if disabled: return
 

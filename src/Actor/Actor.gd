@@ -5,7 +5,7 @@ class_name Actor
 const DAMAGENUMBER = preload("res://src/Effect/DamageNumber.tscn")
 const FLOOR_NORMAL: = Vector2.UP
 
-@export var editor_hidden = false
+@export var editor_hidden = true
 
 @export var speed: = Vector2(150, 350)
 var gravity: = 300
@@ -20,10 +20,8 @@ var home := Vector2(0, 0)
 var rng = RandomNumberGenerator.new()
 @onready var world = get_tree().get_root().get_node("World")
 
-func _ready():
-	add_to_group("Actors")
-	add_to_group("Entities")
-	home = global_position
+#do not _ready() as it will be shadowed
+
 
 func _input_event(viewport, event, shape_idx): #selecting in editor
 	var editor = world.get_node("EditorLayer/Editor")

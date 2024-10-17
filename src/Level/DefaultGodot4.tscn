@@ -7,9 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="5_sjslv"]
 [ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="6_mcn17"]
 [ext_resource type="PackedScene" uid="uid://dr1kk5b0rkos7" path="res://src/Actor/Enemy/Frog.tscn" id="7_77kbo"]
-[ext_resource type="PackedScene" uid="uid://c7yhu5je8w1pf" path="res://src/Actor/Enemy/Roller.tscn" id="8_jh1o0"]
 [ext_resource type="PackedScene" uid="uid://b06vi8xuugq3x" path="res://src/Actor/Enemy/Trenchie.tscn" id="8_lcwo6"]
 [ext_resource type="PackedScene" uid="uid://bdlb4ndh8yuh2" path="res://src/Actor/Enemy/Junior.tscn" id="9_00td7"]
+[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/ActorSpawn.tscn" id="11_24jje"]
 
 [node name="Default" type="Node2D"]
 script = ExtResource("1_4uhn8")
@@ -59,17 +59,12 @@ position = Vector2(-104, -64)
 [node name="Frog" parent="Actors" instance=ExtResource("7_77kbo")]
 position = Vector2(104, -96)
 
-[node name="Roller" parent="Actors" instance=ExtResource("8_jh1o0")]
-position = Vector2(216, 0)
-start_dir = Vector2(1, 0)
-
-[node name="Roller2" parent="Actors" instance=ExtResource("8_jh1o0")]
-position = Vector2(216, 96)
-start_dir = Vector2(1, 0)
-
 [node name="Junior" parent="Actors" instance=ExtResource("9_00td7")]
 position = Vector2(664, 0)
 debug = true
+
+[node name="ActorSpawn" parent="Actors" instance=ExtResource("11_24jje")]
+position = Vector2(216, -96)
 
 [node name="Triggers" type="Node2D" parent="."]
 

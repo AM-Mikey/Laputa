@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs5m8mi2rih5f"]
+
+[ext_resource type="Script" path="res://src/Editor/ActorSpawn.gd" id="1_aiqe7"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(12, 12)
+
+[node name="ActorSpawn" type="Area2D"]
+modulate = Color(1, 1, 1, 0.75)
+script = ExtResource("1_aiqe7")
+actor_path = "res://src/Actor/Enemy/Junior.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
