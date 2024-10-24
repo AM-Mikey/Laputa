@@ -14,10 +14,10 @@ func _ready():
 	align_enum_menu()
 
 	match property_type:
-		"bool", TYPE_BOOL:
+		"bool", Variant.Type.TYPE_BOOL:
 			$HBox/HBox/Bool.visible = true
 			$HBox/HBox/Bool.button_pressed = property_value
-		"color", TYPE_COLOR:
+		"color", Variant.Type.TYPE_COLOR:
 			$HBox/HBox/Color.visible = true
 			$HBox/HBox/Color.color = property_value
 		"enum":
@@ -25,13 +25,11 @@ func _ready():
 			for i in enum_items:
 				$HBox/HBox/Enum.add_item(i)
 			$HBox/HBox/Enum.select(property_value)
-
-
-		"int", TYPE_INT:
+		"int", Variant.Type.TYPE_INT:
 			$HBox/HBox/String.visible = true
 			if property_value != null: #"if property_value" doesn't trigger for value = 0
 				$HBox/HBox/String.text = String("%.f" % property_value)
-		"float", TYPE_FLOAT:
+		"float", Variant.Type.TYPE_FLOAT:
 			$HBox/HBox/String.visible = true
 			if property_value != null:
 				$HBox/HBox/String.text = str(property_value)
@@ -41,12 +39,12 @@ func _ready():
 			if property_value != null:
 				$HBox/HBox/Load.text = str(property_value)
 			
-		"string", TYPE_STRING:
+		"string", Variant.Type.TYPE_STRING:
 			$HBox/HBox/String.visible = true
 			if property_value != null:
 				$HBox/HBox/String.text = String(property_value)
 				
-		"vector2", TYPE_VECTOR2:
+		"vector2", Variant.Type.TYPE_VECTOR2:
 			$HBox/HBox/Vector2X.visible = true
 			$HBox/HBox/Vector2Y.visible = true
 			if property_value != null:

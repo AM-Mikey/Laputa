@@ -2,10 +2,11 @@ extends MarginContainer
 
 const PROPERTY_BUTTON = preload("res://src/Editor/Button/PropertyButton.tscn")
 const LAYER_BUTTON = preload("res://src/Editor/Button/LayerButton.tscn")
+const EXPORT = PropertyUsageFlags.PROPERTY_USAGE_SCRIPT_VARIABLE + PropertyUsageFlags.PROPERTY_USAGE_STORAGE + PropertyUsageFlags.PROPERTY_USAGE_EDITOR
 
 @onready var editor = get_parent().get_parent().get_parent()
 
-var active
+var active = null
 var active_type: String
 var active_property: String #only use for referencing file dialog's user
 
@@ -20,24 +21,21 @@ func exit():
 ### SELECTING
 
 func on_selected(selection, selection_type):
-	if selection.is_in_group("Previews"):
-		return
+	if selection.is_in_group("Previews"): return
 	
-	if active:
-		if active.has_method("on_editor_deselect"):
-			active.on_editor_deselect()
+	if active: #deselect old
+		if active.has_method("on_editor_deselect"): active.on_editor_deselect()
 	active = selection
 	active_type = selection_type
-	if active:
-		if active.has_method("on_editor_select"):
-			active.on_editor_select()
+	if active: #select new
+		if active.has_method("on_editor_select"): active.on_editor_select()
 	display_data()
 	
 	match active_type:
 		"spawn_point":
 			editor.set_tool("entity", "noplace")
-		"actor_spawn":
-			editor.set_tool("entity", "noplace")
+		#"actor_spawn": this just makes it so we cant place enemies. weird
+			#editor.set_tool("entity", "noplace")
 		"light":
 			editor.set_tool("entity", "noplace")
 		_:
@@ -45,8 +43,7 @@ func on_selected(selection, selection_type):
 
 func on_deselected():
 	if active:
-		if active.has_method("on_editor_deselect"):
-			active.on_editor_deselect()
+		if active.has_method("on_editor_deselect"): active.on_editor_deselect()
 	active = null
 	active_type = ""
 	active_property = ""
@@ -69,25 +66,27 @@ func display_data():
 			create_button("parallax_far", limiter.parallax_far, "float")
 			create_button("focus", limiter.focus, "enum", limiter.Focus.keys())
 			create_button("tile_mode", limiter.tile_mode, "enum", limiter.TileMode.keys())
-		"enemy":
-			#print(enemy.get_property_list())
-			for p in active.get_property_list():
-				if p["usage"] == 8199: #exported properties
-					create_button(p["name"], active.get(p["name"]), p["type"])
-		"npc":
-			for p in active.get_property_list():
-				if p["usage"] == 8199: #exported properties
-					create_button(p["name"], active.get(p["name"]), p["type"])
+		"actor_spawn":
+			for p in active.properties:
+				create_button(p, active.properties[p][0], get_property_type(active.properties[p][1]))
+		#"enemy": #replaced with actor spawn
+			#for p in active.get_property_list():
+				#if p["usage"] == EXPORT:
+					#create_button(p["name"], active.get(p["name"]), p["type"])
+		#"npc":
+			#for p in active.get_property_list():
+				#if p["usage"] == EXPORT:
+					#create_button(p["name"], active.get(p["name"]), p["type"])
 		"prop":
 			for p in active.get_property_list():
-				if p["usage"] == 8199: #exported properties
+				if p["usage"] == EXPORT:
 					create_button(p["name"], active.get(p["name"]), p["type"])
 		"trigger":
 			for p in active.get_property_list():
 				if p["name"] == "level": #a trigger wants to load a level path
 					create_button("level", active.get("level"), "load")
 				
-				elif p["usage"] == 8199: #exported properties
+				elif p["usage"] == EXPORT:
 					create_button(p["name"], active.get(p["name"]), p["type"])
 		"level":
 			create_button("level_name", active.level_name, "string")
@@ -98,12 +97,24 @@ func display_data():
 			create_button("conversation", active.conversation, "string")
 		"light":
 			for p in active.get_property_list():
-				if p["usage"] == 8199: #exported properties
+				if p["usage"] == EXPORT:
 					create_button(p["name"], active.get(p["name"]), p["type"])
 		"tile_collection":
 			var tile_map = active.get_child(0)
 			for layer_id in tile_map.get_layers_count():
 				create_layer_button(layer_id)
+
+func get_property_type(type_flag) -> String:
+	var out = ""
+	match type_flag:
+		Variant.Type.TYPE_BOOL: out = "bool"
+		Variant.Type.TYPE_COLOR: out = "color"
+		Variant.Type.TYPE_INT: out = "int"
+		Variant.Type.TYPE_FLOAT: out = "float"
+		Variant.Type.TYPE_STRING: out = "string"
+		Variant.Type.TYPE_VECTOR2: out = "vector2"
+	#TODO: add 	"enum" and "load"
+	return out
 
 
 
@@ -160,6 +171,9 @@ func on_property_changed(property_name, property_value):
 					active.level_limiter.set(property_name, load(property_value))
 					active.level_limiter.setup_layers()
 					active.level_limiter.set_focus()
+		"actor_spawn":
+			active.properties[property_name][0] = property_value
+			#active.set(properties[property_name][0], property_value/
 		"enemy":
 			active.set(property_name, property_value)
 			
@@ -182,7 +196,9 @@ func on_property_changed(property_name, property_value):
 		_:
 			active.set(property_name, property_value)
 	display_data() #to reload
-	print("Changed " + active_type + " " + active.name + "'s " + property_name + " to " + String(property_value))
+	
+	editor.log.lprint(str("Changed ", active_type, " ", active.name, "'s ", property_name, " to ", property_value))
+	print("Changed ", active_type, " ", active.name, "'s ", property_name, " to ", property_value)
 
 
 

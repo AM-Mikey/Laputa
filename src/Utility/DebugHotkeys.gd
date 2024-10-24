@@ -32,7 +32,7 @@ func _input(event):
 	if event.is_action_pressed("debug_print"):
 		debug_print()
 
-
+	
 	if event.is_action_pressed("debug_reload"):
 		if el.has_node("Editor"):
 			el.get_node("Editor").disabled = true
@@ -52,37 +52,38 @@ func _input(event):
 			print("quitting...")
 			get_tree().quit()
 
-
-	if event.is_action_pressed("debug_save"):
-		var popup = POPUP.instantiate()
-		popup.text = "quicksaved..."
-		ui.add_child(popup)
-		world.write_level_data_to_temp()
-		world.write_player_data_to_save()
-		world.copy_level_data_from_temp_to_save()
-
-
-	if event.is_action_pressed("debug_load"):
-		var popup = POPUP.instantiate()
-		popup.text = "loaded save"
-		ui.add_child(popup)
-		world.read_player_data_from_save()
-		world.read_level_data_from_save()
-		world.copy_level_data_from_save_to_temp()
-
-	if event.is_action_pressed("debug_shop"):
-		var shop_menu = SHOP_MENU.instantiate()
-		ui.add_child(shop_menu)
+	if not el.has_node("Editor"): #non-editor only commands
+		
+		if event.is_action_pressed("debug_save"):
+			var popup = POPUP.instantiate()
+			popup.text = "quicksaved..."
+			ui.add_child(popup)
+			world.write_level_data_to_temp()
+			world.write_player_data_to_save()
+			world.copy_level_data_from_temp_to_save()
 
 
-	if event.is_action_pressed("debug_fly"):
-		if world.has_node("Juniper"):
-			var pc = world.get_node("Juniper")
-			if pc.mm.current_state != pc.mm.states["fly"]:
-				pc.mm.cached_state = pc.mm.current_state
-				pc.mm.change_state("fly")
-			else:
-				pc.mm.change_state(pc.mm.cached_state.name.to_lower())
+		if event.is_action_pressed("debug_load"):
+			var popup = POPUP.instantiate()
+			popup.text = "loaded save"
+			ui.add_child(popup)
+			world.read_player_data_from_save()
+			world.read_level_data_from_save()
+			world.copy_level_data_from_save_to_temp()
+
+		if event.is_action_pressed("debug_shop"):
+			var shop_menu = SHOP_MENU.instantiate()
+			ui.add_child(shop_menu)
+
+
+		if event.is_action_pressed("debug_fly"):
+			if world.has_node("Juniper"):
+				var pc = world.get_node("Juniper")
+				if pc.mm.current_state != pc.mm.states["fly"]:
+					pc.mm.cached_state = pc.mm.current_state
+					pc.mm.change_state("fly")
+				else:
+					pc.mm.change_state(pc.mm.cached_state.name.to_lower())
 
 
 

@@ -2,7 +2,7 @@ extends Control
 
 #signal enemy_selected(enemy)
 #signal prop_selected(prop)
-signal entity_selected(entity, entity_type)
+#signal entity_selected(entity, entity_type)
 signal level_selected(level)
 signal tile_collection_selected(tile_collection)
 
@@ -55,6 +55,7 @@ var tile_collection
 var actor_collection
 var prop_collection
 var trigger_collection
+var spawn_collection
 var tile_map
 var tile_set
 var editor_level_limiter
@@ -84,6 +85,7 @@ func setup_level(): #TODO: clear undo history
 	actor_collection = w.current_level.get_node("Actors")
 	prop_collection = w.current_level.get_node("Props")
 	trigger_collection = w.current_level.get_node("Triggers")
+	spawn_collection = w.current_level.get_node("Spawns")
 	
 	tile_map = tile_collection.get_child(0)
 	tile_set = w.current_level.tile_set
@@ -91,12 +93,13 @@ func setup_level(): #TODO: clear undo history
 	$Main/Win/Tab/TileSet.load_tile_set(tile_set.resource_path)
 	
 	setup_level_editor_layer()
-	set_entities_pickable()
+	#set_entities_pickable()
 	w.set_debug_visible(true)
-	for s in get_tree().get_nodes_in_group("SpawnPoints"):
+	for s in get_tree().get_nodes_in_group("SpawnPoints"): #TODO: see if you can avoid this by calling a signal or something
 		s.visible = true
 	for s in get_tree().get_nodes_in_group("ActorSpawns"):
 		s.visible = true
+		s.input_pickable = true
 	for l in get_tree().get_nodes_in_group("SunLights"):
 		l.editor_enter()
 	for t in trigger_collection.get_children():
@@ -105,13 +108,13 @@ func setup_level(): #TODO: clear undo history
 	el.get_node("EditorCamera").make_current()
 	
 
-func set_entities_pickable(pickable = true): #TODO: unknown if this is still relevant
-	for a in actor_collection.get_children():
-		if not a.is_in_group("Previews"):
-			a.input_pickable = pickable
-	for p in prop_collection.get_children():
-		if not p.is_in_group("Previews"):
-			p.input_pickable = pickable
+#func set_entities_pickable(pickable = true): #TODO: this is still used, move away from this with the new dummy actorspawns
+	#for a in actor_collection.get_children():
+		#if not a.is_in_group("Previews"):
+			#a.input_pickable = pickable
+	#for p in prop_collection.get_children():
+		#if not p.is_in_group("Previews"):
+			#p.input_pickable = pickable
 #	for t in trigger_collection.get_children(): #TODO: turned this off as we move to trigger controller system. please turn this on for normal triggers
 #		if not t.is_in_group("Previews"):
 #			t.input_pickable = pickable
@@ -143,7 +146,7 @@ func exit():
 	ui.visible = true
 	w.get_node("Juniper").enable()
 	w.get_node("Juniper/PlayerCamera").enabled = true
-	set_entities_pickable(false)
+	#set_entities_pickable(false)
 	w.set_debug_visible(false)
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		s.visible = false
@@ -189,26 +192,40 @@ func _unhandled_input(event):
 	if event.is_action_pressed("editor_shift"): shift_held = true
 	if event.is_action_released("editor_shift"): shift_held = false
 
+
 	if event is InputEventKey and event.is_pressed() and not event.is_echo() and ctrl_held:
-		if event.keycode == KEY_C:
-			copy_tile_map_selection()
-		if event.keycode == KEY_V:
-			var pos: Vector2i = get_cell(w.get_global_mouse_position())
-			paste_tiles_from_buffer(pos)
-		if event.keycode == KEY_Z:
-			if shift_held: redo()
-			else: undo()
-		if event.keycode == KEY_S:
-			emit_signal("level_saved")
+		match event.keycode:
+			KEY_C:
+				copy_tile_map_selection()
+			KEY_V:
+				var pos: Vector2i = get_cell(w.get_global_mouse_position())
+				paste_tiles_from_buffer(pos)
+			KEY_Z:
+				if shift_held: redo()
+				else: undo()
+			KEY_S:
+				emit_signal("level_saved")
+
+
+	if event is InputEventKey and event.is_pressed() and not event.is_echo():
+		match event.keycode:
+			KEY_F1: on_tab_selected(0)
+			KEY_F2: on_tab_selected(1)
+			KEY_F3: on_tab_selected(2)
+			KEY_F4: on_tab_selected(3)
+			KEY_F5: on_tab_selected(4)
+			KEY_F6: on_tab_selected(5)
+			KEY_F7: on_tab_selected(6)
 	
 	
-	if event.is_action_pressed("editor_lmb"): #TODO: reenable ######################################
+	if event.is_action_pressed("editor_lmb"):
 		lmb_held = true
 		rmb_held = false #this might fuck things up for other tools
 		future_operations.clear()
 
 	if event.is_action_pressed("editor_rmb"):
 		rmb_held = true
+		inspector.on_deselected() #slight consequence is in inspector, unsaved values will reset on moving entity
 		#lmb_held = false #this might fuck things up for other tools
 		future_operations.clear()
 
@@ -399,15 +416,15 @@ func do_tile_input(event):
 #			return p
 #	return null
 
-func get_entity_type(entity: Node): #called by actor.gd
-	if entity.is_in_group("ActorSpawns"): return "actor_spawn"
-	if entity.is_in_group("Props"): return "prop"
-	if entity.is_in_group("NPCs"): return "npc"
-	if entity.is_in_group("Triggers"): return "trigger"
-	if entity.is_in_group("SpawnPoints"): return "spawn_point"
-	
-	printerr("ERROR: Could not get entity type of entity: " + entity.name)
-	return null
+#func get_entity_type(entity: Node): #called by actor.gd #TODO DONT DO THIS
+	#if entity.is_in_group("ActorSpawns"): return "actor_spawn"
+	#if entity.is_in_group("Props"): return "prop"
+	#if entity.is_in_group("NPCs"): return "npc"
+	#if entity.is_in_group("Triggers"): return "trigger"
+	#if entity.is_in_group("SpawnPoints"): return "spawn_point"
+	#
+	#printerr("ERROR: Could not get entity type of entity: " + entity.name)
+	#return null
 
 
 
@@ -422,7 +439,7 @@ func set_tile_map_selection(start_pos, end_pos):
 	#print(tile_map_selection)
 
 func move_tile_map_selection(start_pos, end_pos):# TODO: make work with undo/redo
-	log.display_message("moved tiles")
+	log.lprint("moved tiles")
 	var selected_cells = get_selected_cells_as_dictionary()
 	
 	var change = get_cell(end_pos) - get_cell(start_pos)
@@ -442,11 +459,11 @@ func move_tile_map_selection(start_pos, end_pos):# TODO: make work with undo/red
 
 
 func copy_tile_map_selection():
-	log.display_message("copied tiles")
+	log.lprint("copied tiles")
 	tile_map_copy_buffer = get_selected_cells_as_dictionary("local_to_selection")
 
 func paste_tiles_from_buffer(pos):
-	log.display_message("pasted tiles")
+	log.lprint("pasted tiles")
 	for layer in tile_map_copy_buffer:
 		for cell in tile_map_copy_buffer[layer]:
 			var old_tm_pos = cell[0]
@@ -608,7 +625,9 @@ func set_actor_spawn(actor_path, pos):
 	var actor_spawn = ACTOR_SPAWN.instantiate()
 	actor_spawn.actor_path = actor_path
 	actor_spawn.global_position = (pos * 16) + Vector2i(8, 16)
-	actor_collection.add_child(actor_spawn)
+	spawn_collection.add_child(actor_spawn)
+	actor_spawn.owner = w.current_level
+	inspector.on_selected(actor_spawn, "actor_spawn")
 	
 
 #func set_entity(pos, entity_path, entity_type, traced = true): #TODO: replace with custom per type, easier that way.
@@ -875,7 +894,7 @@ func on_tab_changed(tab):
 	match $Main/Win/Tab.get_child(tab).name:
 		"Tiles": 
 			set_tool("tile")
-			set_entities_pickable(false)
+			#set_entities_pickable(false)
 			inspector.on_deselected()
 			emit_signal("tile_collection_selected", w.current_level.get_node("Tiles"))
 		"TileSet":
@@ -886,15 +905,15 @@ func on_tab_changed(tab):
 		
 		"Enemies": 
 			set_tool("entity", "enemy")
-			set_entities_pickable()
+			#set_entities_pickable()
 		"Props":
 			set_tool("entity", "prop")
-			set_entities_pickable()
+			#set_entities_pickable()
 		"NPCs":
 			set_tool("entity", "npc")
-			set_entities_pickable()
+			#set_entities_pickable()
 		"Triggers":
 			set_tool("entity", "trigger")
-			set_entities_pickable()
+			#set_entities_pickable()
 		_:
 			print("WARNING: could not find tab with name: " + $Main/Win/Tab.get_child(tab).name)

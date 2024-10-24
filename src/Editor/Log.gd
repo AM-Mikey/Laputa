@@ -11,7 +11,7 @@ func _ready():
 	for c in $VBox.get_children():
 		c.queue_free()
 
-func display_message(message: String):
+func lprint(message: String):
 	var log_message = LOG_MESSAGE.instantiate()
 	log_message.text = message
 	$VBox.add_child(log_message)

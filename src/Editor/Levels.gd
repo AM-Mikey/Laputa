@@ -16,7 +16,7 @@ var ctrl_held := false
 @onready var el = w.get_node("EditorLayer")
 
 func _unhandled_input(event):
-	if event.is_action_pressed("editor_ctrl"): ctrl_held = true
+	if event.is_action_pressed("editor_ctrl"): ctrl_held = true #TODO: this is unused???
 
 
 
@@ -64,7 +64,7 @@ func change_level(path): #connected to level buttons
 
 ### BUTTON SIGNALS
 
-func on_save():
+func on_save(): #from editor
 	save_level(w.current_level, w.current_level.scene_file_path)
 
 func on_save_as():
@@ -113,20 +113,27 @@ func on_new_confirmed():
 ### SAVE/LOAD
 
 func save_level(level, path):
+	var log = el.get_node("Editor").log
+	el.get_node("Editor").inspector.on_deselected()
+	
 	level.name = path.get_file().get_basename()
 	level.level_name = path.get_file().get_basename() #TODO: add this to inspector
 	
 	if FileAccess.file_exists(path):
-		print("WARNING: Saved over File!")
+		log.lprint("Saved over File")
+		print("Saved over File")
 		
 	var packed_scene = PackedScene.new()
-	packed_scene.pack(level)
-	var err = ResourceSaver.save(path, packed_scene)
+	packed_scene.pack(level) 
+	var err = ResourceSaver.save(packed_scene, path)
 	
 	if err == OK:
-		print("Saved Level to: " + path)
+		log.lprint(str("Saved Level to:", path))
+		print("Saved Level to: ", path)
 		am.play("save")
-	else: printerr("ERROR: Could Not Save File")
+	else: 
+		log.lprint("ERROR: Could Not Save File")
+		printerr("ERROR: Could Not Save File")
 
 
 func load_level(path):

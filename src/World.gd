@@ -112,7 +112,12 @@ func _input(event):
 			
 			var pause_menu = PAUSEMENU.instantiate()
 			ui.add_child(pause_menu)
-			
+	
+	if event.is_action_pressed("window_maximize"):
+		if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_MAXIMIZED:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
+		else: 
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED) 
 
 ### LEVEL CHANGE ###
 

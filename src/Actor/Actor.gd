@@ -23,11 +23,11 @@ var rng = RandomNumberGenerator.new()
 #do not _ready() as it will be shadowed
 
 
-func _input_event(viewport, event, shape_idx): #selecting in editor
-	var editor = world.get_node("EditorLayer/Editor")
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
-		editor.inspector.on_selected(self, editor.get_entity_type(self))
-		#print("clicked on an actor")
+#func _input_event(viewport, event, shape_idx): #selecting in editor #OBSOLETE, actual actors no longer used in editor
+	#var editor = world.get_node("EditorLayer/Editor")
+	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
+		#editor.inspector.on_selected(self, editor.get_entity_type(self))
+		##print("clicked on an actor")
 
 
 func on_editor_select():

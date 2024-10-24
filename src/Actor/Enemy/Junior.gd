@@ -2,12 +2,12 @@ extends Enemy
 
 const BULLET = preload("res://src/Bullet/Enemy/Carbine.tscn")
 
-var starting_state = "walk"
-@export var move_dir = Vector2.LEFT
-@export var idle_max_time = 5.0
-@export var walk_max_time = 10.0
-@export var aim_time = 0.2
-@export var reload_time = 2.0
+var starting_state := "walk"
+@export var move_dir := Vector2.LEFT
+@export var idle_max_time := 5.0
+@export var walk_max_time := 10.0
+@export var aim_time := 0.2
+@export var reload_time := 2.0
 
 var target: Node
 

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bg715nunngytq" path="res://src/Editor/Tiles.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://cg3b2brx7kunj" path="res://src/Editor/Log.tscn" id="4_vdv4f"]
 [ext_resource type="PackedScene" uid="uid://b06myq2bwfo7r" path="res://src/Editor/TileSet.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://src/Editor/Levels.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://digbeuogn4h0f" path="res://src/Editor/Levels.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://ctxo7a6euqnhd" path="res://src/Editor/Inspector.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://cnho1sw0qp562" path="res://src/Editor/Enemies.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://src/Editor/Props.tscn" id="9"]
@@ -44,6 +44,7 @@ layout_mode = 2
 
 [node name="Main" type="CanvasGroup" parent="."]
 self_modulate = Color(1, 1, 1, 0.282353)
+position = Vector2(0, 24)
 
 [node name="Win" parent="Main" instance=ExtResource("3")]
 use_parent_material = true
@@ -107,6 +108,7 @@ offset_bottom = 16.0
 mouse_filter = 2
 
 [node name="Secondary" type="CanvasGroup" parent="."]
+position = Vector2(0, 24)
 
 [node name="Win" parent="Secondary" instance=ExtResource("3")]
 anchors_preset = 0
@@ -125,7 +127,6 @@ script = ExtResource("14")
 [node name="TileMaster" type="Node" parent="."]
 script = ExtResource("15_aiisb")
 
-[connection signal="entity_selected" from="." to="Secondary/Win/Inspector" method="on_selected"]
 [connection signal="level_saved" from="." to="Main/Win/Tab/Levels" method="on_save"]
 [connection signal="tab_changed" from="Main/Win/Tab" to="." method="on_tab_changed"]
 [connection signal="terrain_toggled" from="Main/Win/Tab/Tiles" to="." method="on_terrain_toggled"]
