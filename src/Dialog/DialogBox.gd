@@ -2,7 +2,7 @@ extends Control
 
 signal dialog_finished
 
-var text
+#var text
 
 @export var print_delay = 0.05
 @export var do_delay = true
@@ -27,38 +27,41 @@ func _ready():
 	on_viewport_size_changed()
 	tb.text = "\n" #""
 
-func print_sign():
-	face_container.free()
-	in_dialog = true
-	#tb.bbcode_text = "\n" + "[b][center]" + text
-	print(text)
-	#pc.disable()
-	pc.mm.cached_state = pc.mm.current_state
-	pc.mm.change_state("inspect")
-	dialog_loop()
-
-
-func print_flavor_text(justification := "no_face"):
-	in_dialog = true
-	print(text)
-	justify_text(justification)
-	align_box()
-	#pc.disable()
-	pc.mm.cached_state = pc.mm.current_state
-	pc.mm.change_state("inspect")
-	dialog_loop()
+#func print_sign():
+	#face_container.free()
+	#in_dialog = true
+	##tb.bbcode_text = "\n" + "[b][center]" + text
+	#print(text)
+	##pc.disable()
+	#pc.mm.cached_state = pc.mm.current_state
+	#pc.mm.change_state("inspect")
+	#dialog_loop()
+#
+#
+#func print_flavor_text(justification := "no_face"):
+	#in_dialog = true
+	#print(text)
+	#justify_text(justification)
+	#align_box()
+	##pc.disable()
+	#pc.mm.cached_state = pc.mm.current_state
+	#pc.mm.change_state("inspect")
+	#dialog_loop()
 
 
 func start_printing(dialog_json, conversation: String, justification := "no_face"):
 	current_dialog_json = dialog_json
 	in_dialog = true
 	
-	var dialog = load_dialog(dialog_json)
+	var dialog = load_dialog_json(dialog_json)
 	conversation = conversation.to_lower()
+	var text
+	
 	if not dialog.has(conversation): #null convo
 		text = "hey dummy, there's no conversation with the name: " + conversation
+		printerr("No conversation with the name: ", conversation)
 	else:
-		text = dialog[conversation].strip_edges().replace("\t", "") #strip edges to clean up first and last newlines ## remove tabulation
+		text = split_text(dialog[conversation])
 	
 	#print(text)
 	justify_text(justification)
@@ -66,31 +69,44 @@ func start_printing(dialog_json, conversation: String, justification := "no_face
 	#pc.disable()
 	pc.mm.cached_state = pc.mm.current_state
 	pc.mm.change_state("inspect")
-	dialog_loop()
+	#dialog_loop()
 
 
-func load_dialog(dialog_json) -> Dictionary: #loads json and converts it into a dictionary
+func load_dialog_json(dialog_json) -> Dictionary: #loads json and converts it into a dictionary
 	var file = FileAccess.open(dialog_json, FileAccess.READ)
-	
 	var loaded_text = file.get_as_text()
-	var test_json_conv = JSON.new()
-	test_json_conv.parse(loaded_text)
-	var loaded_dialog = test_json_conv.get_data()
-	return loaded_dialog
+	var json = JSON.new()
+	json.parse(loaded_text)
+	var out = json.get_data()
+	return out
 
 
-func dialog_loop():
-	if not busy:
-		while step < text.length(): #not completed: 
-			print_dialog(text)
-			step +=1
-			if do_delay:
-				if $PrintTimer.is_stopped():
-					$PrintTimer.start(print_delay)
-				await $PrintTimer.timeout
-			
-			if busy or not active:
-				break
+
+func split_text(text) -> Array:
+	var out = []
+	text = text.strip_edges().replace("\t", "") #remove first and last newlines, remove tabulation
+	
+	var regex = RegEx.new()
+	regex.compile(r'(*NOTEMPTY)(?=\/)(\S*)(?=\n|$| )|(?! )(.*?)(?= \/|\n|$)|(\n)') #took me so long to come up with, if a command doesnt register properly, check this in https://regex101.com/
+
+	
+	for result in regex.search_all(text):
+		out.push_back(result.get_string())
+	return out
+
+
+#func dialog_loop():
+	#if not busy:
+		#while step < text.length(): #not completed: 
+			#print_dialog(text)
+			#step +=1
+			#if do_delay:
+				#if $PrintTimer.is_stopped():
+					#$PrintTimer.start(print_delay)
+				#await $PrintTimer.timeout
+			#
+			#if busy or not active:
+				#break
 
 func flash_cursor():
 	await get_tree().create_timer(0.3).timeout
@@ -112,34 +128,32 @@ func remove_cursor():
 		removed_cursor.erase(cursor_position, 1)
 		tb.text = removed_cursor
 
-func _input(event):
-	if event.is_action_pressed("ui_accept") and in_dialog and not auto_input:
-		if step >= text.length():
-			print("reached end")
-			exit()
-		
-		if not active:
-			do_delay = true
-			active = true
-			remove_cursor()
-			
-			print("adding back newline")
-			tb.text += "\n"
-			
-#				if tb.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
-#					tb.bbcode_text = ""
-			dialog_loop()
-		
-		else: #active
-			do_delay = false
+#func _input(event):
+	#if event.is_action_pressed("ui_accept") and in_dialog and not auto_input:
+		#if step >= text.length():
+			#print("reached end")
+			#exit()
+		#
+		#if not active:
+			#do_delay = true
+			#active = true
+			#remove_cursor()
+			#
+			#print("adding back newline")
+			#tb.text += "\n"
+			#
+##				if tb.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
+##					tb.bbcode_text = ""
+			#dialog_loop()
+		#
+		#else: #active
+			#do_delay = false
 
 
 
 func print_dialog(string):
 #	if tb.get_line_count() == 4: #failsafe for if we overflow
 #		tb.remove_line(1)
-
-	
 	var character = string.substr(step, 1)
 	
 	if character == ",": #or character == "." or character == "?" or character == "!": ##leave out other punctuation since the pause after a line is bad UX
@@ -149,12 +163,10 @@ func print_dialog(string):
 		print("insterted char: ", character)
 		tb.text += character
 	
-	
 	elif character == "\n" and not auto_input:
 			print("skipping newline")
 			active = false
 			flash_cursor()
-	
 	
 	elif character == "/":
 		var command = string.substr(step+1, -1) #everything after the slash
@@ -212,10 +224,7 @@ func justify_text(justification: String):
 func align_box():
 	var viewport_size = get_tree().get_root().size / world.resolution_scale
 	var pc_pos = pc.global_position
-	var camera
-	for c in get_tree().get_nodes_in_group("Cameras"):
-		if c.current:
-			camera = c
+	var camera = get_viewport().get_camera_2d()
 	var camera_center = camera.get_screen_center_position()
 
 	if pc_pos.y < camera_center.y + (viewport_size.y / 6): #bottom

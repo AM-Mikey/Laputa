@@ -145,7 +145,6 @@ func _physics_process(_delta):
 
 func enter_talk():
 	orient()
-	#yield(get_tree().create_timer(.0001), "timeout") #why? #TODO
 	if world.has_node("UILayer/DialogBox"): #clear old dialog box if there is one
 		world.get_node("UILayer/DialogBox").exit()
 		

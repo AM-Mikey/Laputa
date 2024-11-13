@@ -50,7 +50,9 @@
 	"kermit":
 	"
 	/name,kermit I'm Kermit, I guess...
-	/flip,right didn't really get to choose the name, so I'm not too happy about that
+	/flip,right didn't really get to choose the name, so I'm not too happy about that /flip
+	/flip /h
+	/flip
 	",
 
 }

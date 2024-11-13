@@ -420,9 +420,19 @@ func on_viewport_size_changed():
 		resolution_scale = 2.0
 	elif viewport_size.y <= 945:
 		resolution_scale = 3.0
-	else:
+	elif viewport_size.y <= 1215:
 		resolution_scale = 4.0
+	elif viewport_size.y <= 1485:
+		resolution_scale = 5.0
+	elif viewport_size.y <= 1755:
+		resolution_scale = 6.0
+	elif viewport_size.y <= 2025:
+		resolution_scale = 7.0
+	else:
+		resolution_scale = 8.0
 	
 	ui.scale = Vector2(resolution_scale, resolution_scale)
 	back.scale = Vector2(resolution_scale, resolution_scale)
-	el.scale = Vector2(max(floor(resolution_scale/2.0), 1), max(floor(resolution_scale/2.0), 1))
+	var half_scale = max(ceil(resolution_scale/2.0), 1)
+	el.scale = Vector2(half_scale, half_scale)
+	$DebugLayer.scale = Vector2(half_scale, half_scale)

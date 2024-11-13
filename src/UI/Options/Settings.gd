@@ -48,7 +48,7 @@ func on_displaymode_changed(index: int):
 	match index:
 		0: #windowed
 			win.mode = Window.MODE_WINDOWED
-			win.size = Vector2i(960, 540)
+			win.size = Vector2i(1920, 1080) #TODO, change later on for smaller screens
 			win.move_to_center()
 			win.borderless = false
 		1: #borderless
@@ -63,24 +63,21 @@ func on_displaymode_changed(index: int):
 	print("display settings changed")
 	save_setting("DisplayMode", index)
 
-func on_resolutionscale_changed(index: int):
+func on_resolutionscale_changed(index: int): #not fully implemented
+	w.viewport_size_ignore = true
 	match index:
 		0:
 			w.viewport_size_ignore = false
 			#world._on_viewport_size_changed()
 			get_window().set_size(get_window().get_size()) #set window size so we can trigger _on_viewport_size_changed everywhere
-		1:
-			w.resolution_scale = 1.0
-			w.viewport_size_ignore = true
-		2:
-			w.resolution_scale = 2.0
-			w.viewport_size_ignore = true
-		3:
-			w.resolution_scale = 3.0
-			w.viewport_size_ignore = true
-		4:
-			w.resolution_scale = 4.0
-			w.viewport_size_ignore = true
+		1: w.resolution_scale = 1.0
+		2: w.resolution_scale = 2.0
+		3: w.resolution_scale = 3.0
+		4: w.resolution_scale = 4.0
+		5: w.resolution_scale = 5.0
+		6: w.resolution_scale = 6.0
+		7: w.resolution_scale = 7.0
+		8: w.resolution_scale = 8.0
 	
 	if w.has_node("TitleCam"):
 		w.get_node("TitleCam").zoom = Vector2(1 / w.resolution_scale, 1 / w.resolution_scale)
