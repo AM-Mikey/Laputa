@@ -1,4 +1,4 @@
-extends Node
+extends Node #TODO: this script needs major cleanup
 
 const YN = preload("res://src/Dialog/DialogYesNo.tscn")
 const TBOX = preload("res://src/Dialog/TopicBox.tscn")
@@ -8,21 +8,21 @@ const TBOX = preload("res://src/Dialog/TopicBox.tscn")
 @onready var db = get_parent()
 
 @onready var tb = db.get_node("Margin/HBox/RichTextBox")
-@onready var face_sprite = db.get_node("Margin/HBox/Face/Sprite2D")
+
 
 func parse_command(string):
 	var command = string.split(",", true, 1)
-	print("command: ", command)
+	print("command: ", string)
 	
 	var function = command[0]
 	var argument
 	if command.size() > 1:
 		argument = command[1]
 
-	print("function: ", function)
-	print("argument: ", argument)
+	#print("function: ", function)
+	#print("argument: ", argument)
 
-	match function:
+	match await function: #TODO: probably slow, replace this with something else
 		"face":#				/face, (sprite_name) 									changes face_sprite to the specified file
 			face(argument)
 		"flip_face":
@@ -31,16 +31,20 @@ func parse_command(string):
 			display_name(argument)
 		
 		"hide":#				/hide, (string: npc_id)									makes the npc with given id invisible
-			do_hide(argument)
-		"walk":#				/walk, (string: npc_id), (int: distance)				makes an npc walk a certain distance from their current pos
-			walk(argument)#																with negative being left and positive being right
+			set_visible(argument, false)
+		"unhide":
+			set_visible(argument, true)
+		"waypoint":#			/waypoint, (string: npc_id), (int: waypoint_index)
+			waypoint(argument)
+		#"walk":#				/walk, (string: npc_id), (int: distance)				makes an npc walk a certain distance from their current pos
+			#walk(argument)#																with negative being left and positive being right
 		"yn":
 			yes_no()
 		"/db":
 			end_branch()
 		
-		"lock":#																		disables and makes the player character invincible
-			pc.disable()
+		#"lock":#																		disables and makes the player character invincible
+			#pc.disable()
 		"focus":#					/focus, (string: npc_id)							focuses PlayerCamera on an npc, doesn't work indoors
 			focus(argument)
 		"unfocus":#																	returns camera focus to the pc
@@ -55,38 +59,43 @@ func parse_command(string):
 		"clear":#																		clears the text
 			tb.text = ""
 		"wait":#					/wait, (float: duration = 1.0)						clears text and hides db until duration
-			wait(argument)
-		
+			await wait(argument)
 		"auto":#																		blocks input and automatically progresses text
-			db.auto_input = true
-		"pass":#																		automatically progresses the next line
-			db.auto_input = true
-			await get_tree().create_timer(0.1).timeout #a bad way of doing this
-			db.auto_input = false
+			if argument == "on":
+				db.auto_input = true
+				db.do_delay = true
+			else:
+				db.auto_input = false
+		"skipinput":#																		automatically progresses the next line
+			skipinput()
 			
 		"tbox":
 			pc.disable()
 			world.get_node("UILayer").add_child(TBOX.instantiate())
+	
+	
 
 
-
-
-
-func seek(string):
-	print("seeking: ", string)
-	db.step = db.text.find(string, db.step)
+### COMMANDS ###
 
 func face(string):
+	var no_face_spacer = db.get_node("Margin/HBox/NoFaceSpacer")
+	var face_node = db.get_node("Margin/HBox/Face")
+	var face_sprite = face_node.get_node("Sprite2D")
+	
 	if string == "":
 		printerr("COMMAND ERROR: no npc given for /face")
 		return
 	var face = string.split(",", true, 1)
-	var id = face[0]
+	var id =  face[0]
 	var expression = 0
 	if face.size() > 1:
 		expression = int(face[1])
 	
-	face_sprite.texture = load("res://assets/UI/Face/%s" % id.capitalize() + ".png")
+	no_face_spacer.visible = false
+	face_node.visible = true
+	
+	face_sprite.texture = load("res://assets/UI/Face/%s.png" % id.capitalize())
 	face_sprite.hframes = face_sprite.texture.get_width() / 48
 	face_sprite.frame = expression
 	
@@ -102,7 +111,7 @@ func flip_face(arguement):
 func display_name(string):
 	tb.text = "" #clear text for new speaker
 	
-	var color = "white"
+	var color = "goldenrod"
 	var name_regex = RegEx.new()
 	name_regex.compile("\\[b]\\[color=" + color + "].*\\[/color]\\[/b]")
 	tb.text = name_regex.sub(tb.text, "")
@@ -114,46 +123,46 @@ func display_name(string):
 	var display_name = string.capitalize() + ": "
 	tb.text = "[b][color=" + color + "]" + display_name + "[/color][/b]" + tb.text
 	
-func do_hide(string):
-	if string == "":
-		printerr("COMMAND ERROR: no npc given for /hide")
-		return
-	var id = string.to_lower()
-	for n in get_tree().get_nodes_in_group("NPCs"):
-		if n.id == id:
-			n.visible = false
 	
-func do_unhide(string):
+func set_visible(string, visible):
 	if string == "":
-		printerr("COMMAND ERROR: no npc given for /unhide")
+		printerr("COMMAND ERROR: no npc given for /hide or /unhide")
 		return
 	var id = string.to_lower()
 	for n in get_tree().get_nodes_in_group("NPCs"):
 		if n.id == id:
-			n.visible = true
+			n.visible = visible
 
-func walk(string):
-	db.busy = true
-	
-	var walk = string.split(",", true, 1)
-	var id = walk[0]
-	var distance = int(walk[1])
-	
-	if walk[1] == null:
-		printerr("COMMAND ERROR: not enough arguments for /walk")
-		return
-	
+#func walk(string):
+	#db.busy = true
+	#
+	#var walk = string.split(",", true, 1)
+	#var id = walk[0]
+	#var distance = int(walk[1])
+	#
+	#if walk[1] == null:
+		#printerr("COMMAND ERROR: not enough arguments for /walk")
+		#return
+	#
+	#for n in get_tree().get_nodes_in_group("NPCs"):
+		#if n.id == id:
+			#n.target_pos = Vector2(n.global_position.x + (distance * 16), 0)
+			#print("npc target position: ", n.target_pos)
+			#
+			#if n.global_position.x < n.target_pos.x: #npc to the left of target
+				#n.move_dir = Vector2.RIGHT
+			#if n.global_position.x > n.target_pos.x: #npc to the right of target
+				#n.move_dir= Vector2.LEFT
+		#
+			#n.move_to_target_x()
+
+func waypoint(string):
+	var a = string.split(",")
+	var id = a[0]
+	var index = int(a[1])
 	for n in get_tree().get_nodes_in_group("NPCs"):
 		if n.id == id:
-			n.target_pos = Vector2(n.global_position.x + (distance * 16), 0)
-			print("npc target position: ", n.target_pos)
-			
-			if n.global_position.x < n.target_pos.x: #npc to the left of target
-				n.move_dir = Vector2.RIGHT
-			if n.global_position.x > n.target_pos.x: #npc to the right of target
-				n.move_dir= Vector2.LEFT
-		
-			n.move_to_target_x()
+			n.walk_to_waypoint(index)
 
 func yes_no():
 	db.busy = true
@@ -215,15 +224,21 @@ func flip(direction, string):
 		
 
 func wait(string):
-	var wait_time = float(string) if string != null and float(string) != 0 else 1.0
-	
-	db.visible = false
+	var wait_time = float(string) if string != null and float(string) > 0 else 1.0
 	db.busy = true
 	await get_tree().create_timer(wait_time).timeout
-	
-	db.visible = true
 	db.busy = false
-	tb.text = ""
-	db.dialog_loop()
-	print("finished waiting")
 
+func skipinput():
+	db.auto_input = true
+	db.do_delay = true
+	await get_tree().create_timer(0.1).timeout
+	db.auto_input = false
+
+
+
+### HELPERS ###
+
+func seek(string):
+	print("seeking: ", string)
+	db.step = db.text.find(string, db.step)

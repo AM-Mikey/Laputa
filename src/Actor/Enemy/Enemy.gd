@@ -63,9 +63,6 @@ func setup(): #EVERY ENEMY MUST HAVE
 
 
 func disable():
-#	if get("starting_state"):
-#		change_state(get("starting_state"))
-#	else: print("ERRRORRRRR NO STARTING STATE FOR ENEMY")
 	disabled = true
 
 func enable():

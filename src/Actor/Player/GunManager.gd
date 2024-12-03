@@ -13,6 +13,7 @@ func _ready():
 
 func _input(event):
 	if not pc.disabled and not disabled and $Guns.get_child_count() > 0:
+		if pc.mm.current_state == pc.mm.states["inspect"]: return
 		var active_gun = $Guns.get_child(0)
 		
 		if event.is_action_pressed("fire_manual"):

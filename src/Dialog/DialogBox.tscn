@@ -49,12 +49,14 @@ light_mask = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/line_separation = 1
 theme_override_fonts/normal_font = ExtResource("4_2s414")
 theme_override_fonts/bold_font = ExtResource("5")
 bbcode_enabled = true
-text = "asdasdasdasdddddddddddddddddddddddddddddddddddddddddd
-sdfdsfds
-sdfsdf"
+text = "asdasdasdasdddddddddddddddddddddddggggggggggggggggg
+sdfdsjjyfds
+sdfsdfll\\
+s"
 scroll_active = false
 scroll_following = true
 
@@ -63,3 +65,7 @@ script = ExtResource("6")
 
 [node name="PrintTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="FlashTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="FlashTimer" to="." method="_on_flash_timer_timeout"]

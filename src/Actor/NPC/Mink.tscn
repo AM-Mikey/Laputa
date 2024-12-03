@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bwmc03kthumv7"]
 
-[ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="1"]
+[ext_resource type="Script" path="res://src/Actor/NPC/Outdated/NPC.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://syhjudorscwo" path="res://assets/Actor/NPC/Mink.png" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]

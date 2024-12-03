@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" path="res://src/Trigger/KillBox.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://bwrxbo2wug6g1" path="res://src/Actor/Boss/Emily.tscn" id="2"]
-[ext_resource type="TileSet" uid="uid://cqgltkqu1pju7" path="res://src/Tile/Debug.tres" id="3"]
+[ext_resource type="TileSet" uid="uid://dpf0qbch10ic" path="res://src/Tile/Debug.tres" id="3"]
 [ext_resource type="PackedScene" path="res://src/Trigger/Door.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="5"]
-[ext_resource type="PackedScene" uid="uid://dvq6mimt4hrbt" path="res://src/Effect/SealDoor.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://dvq6mimt4hrbt" path="res://src/Effect/Outdated/SealDoor.tscn" id="6"]
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="7"]
 [ext_resource type="PackedScene" uid="uid://defadp8dyc6vc" path="res://src/Utility/LevelCamera.tscn" id="8"]
 

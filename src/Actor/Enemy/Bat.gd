@@ -1,6 +1,6 @@
 extends Enemy
 
-const WAYPOINT = preload("res://src/Utility/Waypoint.tscn")
+const WAYPOINT = preload("res://src/Utility/Waypoint.tscn") #TODO: clean up waypoint implementation to match NPC
 
 @export var move_dir = Vector2.ZERO
 @export var flap_time = 0.1
@@ -30,7 +30,6 @@ func setup():
 	reward = 2
 	damage_on_contact = 2
 	speed = Vector2(100, 50)
-	await get_tree().process_frame
 	find_waypoints()
 
 func find_waypoints():

@@ -87,7 +87,6 @@ func _physics_process(_delta):
 			bonk("head", ceiling_normal)
 		on_ceiling = true
 	else:
-
 		on_ceiling = false
 		
 	current_state.state_process()

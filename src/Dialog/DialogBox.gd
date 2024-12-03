@@ -2,23 +2,25 @@ extends Control
 
 signal dialog_finished
 
-#var text
-
 @export var print_delay = 0.05
 @export var do_delay = true
 @export var punctuation_delay = 0.3
-var in_dialog = false
-var active = true
-var busy = false
-var auto_input = false
 
+var busy = false #executing commands, ignore input
+var auto_input = false
+var active = false #actively printing
 var current_dialog_json
+var current_text_array
 var step: int = 0 #step in printing dialog
+
+var flash_original_text = ""
+enum {FLASH_NONE, FLASH_NORMAL, FLASH_END}
+var flash_type = FLASH_NONE
+var flash_step: int = 0
 
 @onready var tb = $Margin/HBox/RichTextBox
 @onready var face_container = $Margin/HBox/Face
 @onready var face_sprite = $Margin/HBox/Face/Sprite2D
-
 @onready var world = get_tree().get_root().get_node("World")
 @onready var pc = get_tree().get_root().get_node("World/Juniper")
 
@@ -26,10 +28,14 @@ func _ready():
 	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 	on_viewport_size_changed()
 	tb.text = "\n" #""
+	
+	for e in get_tree().get_nodes_in_group("Enemies"):
+		e.disable()
+
+
 
 #func print_sign():
 	#face_container.free()
-	#in_dialog = true
 	##tb.bbcode_text = "\n" + "[b][center]" + text
 	#print(text)
 	##pc.disable()
@@ -39,7 +45,6 @@ func _ready():
 #
 #
 #func print_flavor_text(justification := "no_face"):
-	#in_dialog = true
 	#print(text)
 	#justify_text(justification)
 	#align_box()
@@ -49,27 +54,22 @@ func _ready():
 	#dialog_loop()
 
 
-func start_printing(dialog_json, conversation: String, justification := "no_face"):
+func start_printing(dialog_json, conversation: String):
 	current_dialog_json = dialog_json
-	in_dialog = true
+	active = true
 	
 	var dialog = load_dialog_json(dialog_json)
 	conversation = conversation.to_lower()
-	var text
 	
 	if not dialog.has(conversation): #null convo
-		text = "hey dummy, there's no conversation with the name: " + conversation
 		printerr("No conversation with the name: ", conversation)
 	else:
-		text = split_text(dialog[conversation])
-	
-	#print(text)
-	justify_text(justification)
+		current_text_array = split_text(dialog[conversation]) #contains array of: command, newline as blank string, text string
 	align_box()
 	#pc.disable()
 	pc.mm.cached_state = pc.mm.current_state
 	pc.mm.change_state("inspect")
-	#dialog_loop()
+	run_text_array(current_text_array)
 
 
 func load_dialog_json(dialog_json) -> Dictionary: #loads json and converts it into a dictionary
@@ -82,144 +82,120 @@ func load_dialog_json(dialog_json) -> Dictionary: #loads json and converts it in
 
 
 
-func split_text(text) -> Array:
+func split_text(text) -> Array: #TODO: regex removes all spaces between commands, not just the first (i'm talking /face  about you) 
 	var out = []
 	text = text.strip_edges().replace("\t", "") #remove first and last newlines, remove tabulation
-	
 	var regex = RegEx.new()
 	regex.compile(r'(*NOTEMPTY)(?=\/)(\S*)(?=\n|$| )|(?! )(.*?)(?= \/|\n|$)|(\n)') #took me so long to come up with, if a command doesnt register properly, check this in https://regex101.com/
-
-	
 	for result in regex.search_all(text):
 		out.push_back(result.get_string())
 	return out
 
 
-#func dialog_loop():
-	#if not busy:
-		#while step < text.length(): #not completed: 
-			#print_dialog(text)
-			#step +=1
-			#if do_delay:
-				#if $PrintTimer.is_stopped():
-					#$PrintTimer.start(print_delay)
-				#await $PrintTimer.timeout
-			#
-			#if busy or not active:
-				#break
+func run_text_array(text_array):
+	if step == current_text_array.size():
+		#print("reached end")
+		active = false
+		flash_type = FLASH_END
+		flash_original_text = tb.text
+		$FlashTimer.start(0.1)
+		return
+	var string = text_array[step]
 
-func flash_cursor():
-	await get_tree().create_timer(0.3).timeout
-	var added_text = tb.text + "§"
-	var deleted_text = tb.text
-	
-	while not active:
-		tb.text = added_text
-		await get_tree().create_timer(0.3).timeout
-		if active:
-			break
-		tb.text = deleted_text
-		await get_tree().create_timer(0.3).timeout
-
-func remove_cursor():
-	var cursor_position = tb.text.rfind("§")
-	if cursor_position != -1:
-		var removed_cursor = tb.text
-		removed_cursor.erase(cursor_position, 1)
-		tb.text = removed_cursor
-
-#func _input(event):
-	#if event.is_action_pressed("ui_accept") and in_dialog and not auto_input:
-		#if step >= text.length():
-			#print("reached end")
-			#exit()
-		#
-		#if not active:
-			#do_delay = true
-			#active = true
-			#remove_cursor()
-			#
-			#print("adding back newline")
-			#tb.text += "\n"
-			#
-##				if tb.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
-##					tb.bbcode_text = ""
-			#dialog_loop()
-		#
-		#else: #active
-			#do_delay = false
-
-
-
-func print_dialog(string):
-#	if tb.get_line_count() == 4: #failsafe for if we overflow
-#		tb.remove_line(1)
-	var character = string.substr(step, 1)
-	
-	if character == ",": #or character == "." or character == "?" or character == "!": ##leave out other punctuation since the pause after a line is bad UX
-		print("pausing for punctuation")
-		$PrintTimer.stop()
-		$PrintTimer.start($PrintTimer.time_left + punctuation_delay)
-		print("insterted char: ", character)
-		tb.text += character
-	
-	elif character == "\n" and not auto_input:
-			print("skipping newline")
-			active = false
-			flash_cursor()
-	
-	elif character == "/":
-		var command = string.substr(step+1, -1) #everything after the slash
-		var first_space = 999
-		var first_newline = 999
-		var first_slash = 999
-		
-		if " " in command:
-			first_space = command.find(" ")
-		if "\n" in command:
-			first_newline = command.find("\n")
-		if "/" in command:
-			first_slash = command.find("/")
-
-
-		var first = min(min(first_space, first_newline), first_slash) #first command end character
-		command = command.left(first)
-		step += command.length()
-		if first == first_space: #skip space
-			step += 1
-		
-		print("doing command: ", command)
-		$CommandHandler.parse_command(command)
-		
-		
-		
+	if string.begins_with("/"):
+		#print("did command: ", string)
+		await $CommandHandler.parse_command(string.lstrip("/"))
+		step += 1
+		run_text_array(text_array)
+	elif string == "\n":
+		step += 1
+		if auto_input:
+			tb.text += "\n"
+			run_text_array(text_array)
+			return
+		active = false
+		flash_type = FLASH_NORMAL
+		flash_original_text = tb.text
+		$FlashTimer.start(0.3)
 	else:
-		print("step " + str(step) + " : " + character)
+		print(string)
+		await run_text_string(string)
+		step += 1
+		run_text_array(text_array)
+
+
+func run_text_string(string):
+	for character in string:
 		tb.text += character
 		am.play("npc_dialog")
+		if do_delay:
+			if character == ",": #or character == "." or character == "?" or character == "!": ##leave out other punctuation since the pause after a line is bad UX
+				await get_tree().create_timer(punctuation_delay).timeout
+			else:
+				await get_tree().create_timer(print_delay).timeout
+
+
+func _on_flash_timer_timeout():
+	if busy: return
+	if flash_type == FLASH_NORMAL:				#TODO: delete previous text after third line
+		if tb.text == flash_original_text:
+			tb.text += " §"#"[color=#ffffff40] [/color]"
+		else:
+			tb.text = flash_original_text
+	elif flash_type == FLASH_END:
+		match flash_step:
+			0:
+				tb.text = flash_original_text + "[color=goldenrod] |[/color]"
+				$FlashTimer.wait_time = 0.1
+			1:
+				tb.text = flash_original_text + "[color=goldenrod] \\[/color]"
+				$FlashTimer.wait_time = 0.075
+			2:
+				tb.text = flash_original_text + "[color=goldenrod] -[/color]"
+				$FlashTimer.wait_time = 0.1
+			3:
+				tb.text = flash_original_text + "[color=goldenrod] /[/color]"
+				$FlashTimer.wait_time = 0.2
+		flash_step = (flash_step + 1) % 4 #warning, this is never reset
+
+
+func _input(event):
+	if event.is_action_pressed("ui_accept")and not busy:
+		if not active:
+			if step == current_text_array.size():
+				exit()
+				return
+			if auto_input:
+				return
+			do_delay = true
+			active = true
+			$FlashTimer.stop()
+			tb.text = flash_original_text + "\n" #remove cursor, add back newline
+			run_text_array(current_text_array)
+		
+		elif not auto_input: #active
+			do_delay = false
 
 
 func exit():
-	print("ended dialog")
 	emit_signal("dialog_finished")
 	if is_instance_valid(pc):
-		pc.get_node("PlayerCamera").position = Vector2.ZERO
-		#pc.enable()
-		await get_tree().process_frame
 		pc.mm.change_state("run") #change to run so we don't continue a jump
+	for e in get_tree().get_nodes_in_group("Enemies"):
+		e.enable()
 	queue_free()
 
 ### HELPERS
 
 
-func justify_text(justification: String):
-	match justification:
-		"face":
-			$Margin/HBox/NoFaceSpacer.visible = false
-			$Margin/HBox/Face.visible = true
-		"no_face":
-			$Margin/HBox/NoFaceSpacer.visible = true
-			$Margin/HBox/Face.visible = false
+#func justify_text(justification: String): #depreciated
+	#match justification:
+		#"face":
+			#$Margin/HBox/NoFaceSpacer.visible = false
+			#$Margin/HBox/Face.visible = true
+		#"no_face":
+			#$Margin/HBox/NoFaceSpacer.visible = true
+			#$Margin/HBox/Face.visible = false
 
 func align_box():
 	var viewport_size = get_tree().get_root().size / world.resolution_scale
@@ -256,3 +232,5 @@ func on_viewport_size_changed():
 	size.x = min(viewport_size.x, 400)
 	position.x = (viewport_size.x - size.x) /2
 	position.y = viewport_size.y - 80
+
+

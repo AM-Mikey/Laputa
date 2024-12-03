@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cjhfly0ne70sh"]
 
-[ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="1"]
+[ext_resource type="Script" path="res://src/Actor/NPC/Outdated/NPC.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://do0o0lqb6igex" path="res://assets/Actor/NPC/Lucille.png" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]

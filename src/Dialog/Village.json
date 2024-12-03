@@ -49,10 +49,13 @@
 	
 	"kermit":
 	"
-	/name,kermit I'm Kermit, I guess...
-	/flip,right didn't really get to choose the name, so I'm not too happy about that /flip
-	/flip /h
-	/flip
+	/name,kermit /face,child I'm Kermit, I guess...
+	didn't really get to choose the name, so I'm not too happy about that
+	imtalkingsofasticantwaittomoveontothenextdialogbox /skipinput
+	seeicankeeptalkinguntilitoverflows
+	pause... /wait,3 ...for dramatic effect
+	walking to waypoint 0 /waypoint,child,0
+	walking to waypoint 1 /waypoint,child,1
 	",
 
 }

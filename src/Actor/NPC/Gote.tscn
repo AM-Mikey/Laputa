@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cy3jbokvh3olt"]
 
-[ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="1"]
+[ext_resource type="Script" path="res://src/Actor/NPC/Outdated/NPC.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://l1ngmx5ism7q" path="res://assets/Actor/NPC/Gote.png" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]

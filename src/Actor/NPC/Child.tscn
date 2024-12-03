@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ccvc6l4a3klis"]
 
 [ext_resource type="Texture2D" uid="uid://c0h0cekifebk3" path="res://assets/Actor/NPC/Child.png" id="1"]
-[ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="2"]
+[ext_resource type="Script" path="res://src/Actor/NPC/Outdated/NPC.gd" id="1_f4fw0"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 24)
@@ -34,7 +34,7 @@ _data = {
 [node name="Child" type="CharacterBody2D"]
 collision_layer = 128
 collision_mask = 8
-script = ExtResource("2")
+script = ExtResource("1_f4fw0")
 id = "child"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -73,5 +73,8 @@ target_position = Vector2(0, 8)
 collision_mask = 8
 collide_with_areas = true
 
+[node name="WaypointBailTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
+[connection signal="timeout" from="WaypointBailTimer" to="." method="_on_waypoint_bail_timer_timeout"]
