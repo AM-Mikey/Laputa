@@ -7,7 +7,6 @@ var level_name: String
 var active = false
 
 func _ready():
-	add_to_group("LevelButtons")
 	$HBox/Button.text = level_name
 	$PanelActive.visible = active
 

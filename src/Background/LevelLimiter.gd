@@ -32,9 +32,6 @@ func _ready():
 		$TextureRect.queue_free()
 		setup_layers()
 		set_focus()
-		
-	#add_to_group("CameraLimiters")
-
 	
 	if not camera:
 		camera = get_tree().get_root().get_node_or_null("World/Juniper/PlayerCamera")

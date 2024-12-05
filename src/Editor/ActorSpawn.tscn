@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(12, 12)
 
-[node name="ActorSpawn" type="Area2D"]
+[node name="ActorSpawn" type="Area2D" groups=["ActorSpawns", "Entities"]]
 modulate = Color(1, 1, 1, 0.75)
 script = ExtResource("1_aiqe7")
 actor_path = "res://src/Actor/Enemy/Junior.tscn"

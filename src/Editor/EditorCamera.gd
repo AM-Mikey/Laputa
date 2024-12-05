@@ -16,12 +16,14 @@ var zooms = [
 	2.0,
 	3.0,
 	4.0,
+	5.0,
+	6.0,
+	7.0,
+	8.0
 ]
 var mmb_held = false
 
 func _ready():
-	add_to_group("Cameras")
-	
 	zoom = Vector2(w.resolution_scale, w.resolution_scale)
 	current_zoom_index = zooms.find(w.resolution_scale)
 	global_position = w.get_node("Juniper/PlayerCamera").global_position 

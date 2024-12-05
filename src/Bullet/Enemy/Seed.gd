@@ -5,7 +5,6 @@ var start_velocity
 
 func _ready():
 	is_enemy_bullet = true
-	add_to_group("WindBullets")
 	ap.play("RotateLeft")
 	
 	velocity = get_initial_velocity()

@@ -43,7 +43,7 @@ _data = {
 "Used": SubResource("2")
 }
 
-[node name="LifeCapsule" type="Area2D"]
+[node name="LifeCapsule" type="Area2D" groups=["LimitedProps"]]
 collision_layer = 16
 script = ExtResource("2")
 

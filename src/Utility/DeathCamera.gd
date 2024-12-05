@@ -12,7 +12,6 @@ const BLACKBAR = preload("res://src/Utility/BlackBar.tscn")
 @onready var camera_pos = pc.get_node("PlayerCamera").get_screen_center_position()
 
 func _ready():
-	add_to_group("Cameras")
 	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed")) #TODO: err
 	on_viewport_size_changed()
 	

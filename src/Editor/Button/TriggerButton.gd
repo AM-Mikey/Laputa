@@ -7,7 +7,6 @@ var trigger_name: String
 var active = false
 
 func _ready():
-	add_to_group("TriggerButtons")
 	$HBox/Button.text = trigger_name
 	$PanelActive.visible = active
 

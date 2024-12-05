@@ -5,15 +5,9 @@
 [ext_resource type="Script" path="res://src/Editor/Button/EnemyButton.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://bufns1cnhgyw1" path="res://assets/Actor/Enemy/Bat.png" id="4_7l42t"]
 
-[node name="EnemyButton" type="MarginContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -5.0
-offset_right = -420.0
-offset_bottom = -241.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="EnemyButton" type="MarginContainer" groups=["EnemyButtons"]]
+offset_right = 60.0
+offset_bottom = 50.0
 theme = ExtResource("2")
 script = ExtResource("3")
 

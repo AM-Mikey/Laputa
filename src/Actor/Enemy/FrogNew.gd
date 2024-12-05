@@ -6,7 +6,6 @@ var tx_frog = preload("res://assets/Actor/Enemy/Frog.png")
 var target
 
 @export var jump_delay = 3.0
-@export var boogie = "time"
 var croak_time = 1.0
 var move_dir = Vector2.ZERO
 var look_dir = Vector2.LEFT

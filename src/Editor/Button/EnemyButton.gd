@@ -8,7 +8,6 @@ var enemy_sprite: Texture2D
 var active = false
 
 func _ready():
-	add_to_group("EnemyButtons")
 	$VBox/HBox/Label.text = enemy_name
 	$VBox/TextureRect.texture = enemy_sprite
 	$PanelActive.visible = active

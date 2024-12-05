@@ -8,7 +8,6 @@ extends Area2D
 @export var modulate_color = Color(0.5, 0.5, 0.5)
 
 func _ready():
-	add_to_group("SunLights")
 	editor_exit()
 	setup_colors()
 

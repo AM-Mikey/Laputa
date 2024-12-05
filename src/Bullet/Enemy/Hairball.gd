@@ -7,7 +7,6 @@ var start_velocity
 
 func _ready():
 	is_enemy_bullet = true
-	add_to_group("WindBullets")
 	ap.play("Rotate")
 	gravity *= .5
 	

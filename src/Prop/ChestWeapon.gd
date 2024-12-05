@@ -4,7 +4,6 @@ extends Prop
 var gun
 
 func _ready():
-	add_to_group("LimitedProps")
 	gun = load("res://src/Gun/%s" % gun_name + ".tres")
 
 func activate():

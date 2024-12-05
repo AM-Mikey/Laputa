@@ -264,14 +264,11 @@ func do_entity_input(event):
 		match subtool:
 			"enemy":
 				set_actor_spawn($Main/Win/Tab/Enemies.active_enemy_path, grid_pos)
-				#if not pos_has_enemy:
-					#set_entity(grid_pos, $Main/Win/Tab/Enemies.active_enemy_path, subtool) #subtool == "enemy"
 			"prop":
 				pass
 				#set_entity(grid_pos, $Main/Win/Tab/Props.active_prop_path, subtool)
 			"npc":
-				pass
-				#set_entity(grid_pos, $Main/Win/Tab/NPCs.active_npc_path, subtool)
+				set_actor_spawn($Main/Win/Tab/NPCs.active_npc_path, grid_pos)
 			"trigger":
 				pass
 				#set_entity(grid_pos, $Main/Win/Tab/Triggers.active_trigger_path, subtool)
@@ -295,15 +292,11 @@ func do_entity_input(event):
 		match subtool:
 			"enemy":
 				preview_actor_spawn($Main/Win/Tab/Enemies.active_enemy_path, grid_pos)
-				#if not pos_has_enemy:
-					#preview_entity(grid_pos, $Main/Win/Tab/Enemies.active_enemy_path, subtool)
-				
 			"prop":
 				pass
 				#preview_entity(grid_pos, $Main/Win/Tab/Props.active_prop_path, subtool)
 			"npc":
-				pass
-				#preview_entity(grid_pos, $Main/Win/Tab/NPCs.active_npc_path, subtool)
+				preview_actor_spawn($Main/Win/Tab/NPCs.active_npc_path, grid_pos)
 			"trigger":
 				pass
 				#preview_entity(grid_pos, $Main/Win/Tab/Triggers.active_trigger_path, subtool)
@@ -627,8 +620,8 @@ func set_actor_spawn(actor_path, pos):
 	actor_spawn.global_position = (pos * 16) + Vector2i(8, 16)
 	spawn_collection.add_child(actor_spawn)
 	actor_spawn.owner = w.current_level
+	actor_spawn.initialize()
 	inspector.on_selected(actor_spawn, "actor_spawn")
-	
 
 #func set_entity(pos, entity_path, entity_type, traced = true): #TODO: replace with custom per type, easier that way.
 	#if entity_path == null:

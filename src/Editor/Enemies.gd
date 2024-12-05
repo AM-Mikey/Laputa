@@ -48,14 +48,9 @@ func find_enemy_scenes(path):
 			
 	return files
 
-func change_enemy(enemy_path): #TODO: rework these buttons as images.
+func change_enemy(enemy_path):
 	editor.set_tool("entity", "enemy")
 	active_enemy_path = enemy_path
-	for e in $VBox/Margin/Scroll/Buttons.get_children():
-		if e.enemy_path == active_enemy_path: #this is weird, we should have already done this. for extra security in case it was activated another way?
-			e.activate()
-	
-	emit_signal("enemy_changed", active_enemy_path) #why emit again???
 
 
 func unpick_enemy():

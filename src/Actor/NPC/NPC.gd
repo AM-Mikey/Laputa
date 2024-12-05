@@ -36,10 +36,13 @@ var camera_forgiveness = 16
 @onready var pc = get_tree().get_root().get_node_or_null("World/Juniper")
 
 func _ready():
+	add_to_group("Actors")
+	add_to_group("Entities")
+	add_to_group("NPCs")
 	home = global_position
 	find_waypoints()
 	
-	#setup_states()
+	setup_states()
 	change_state(starting_state)
 
 
@@ -73,16 +76,16 @@ func change_animation(animation: String, random_start = false):
 
 ### STATE MACHINE ###
 
-#func setup_states(): #depreciated
-	#var timer = Timer.new()
-	#timer.one_shot = true
-	#timer.name = "StateTimer"
-	#add_child(timer)
-	#
-	#var label = STATE_LABEL.instantiate()
-	#label.text = state
-	#label.name = "StateLabel"
-	#add_child(label)
+func setup_states():
+	var timer = Timer.new()
+	timer.one_shot = true
+	timer.name = "StateTimer"
+	add_child(timer)
+	
+	var label = STATE_LABEL.instantiate()
+	label.text = state
+	label.name = "StateLabel"
+	add_child(label)
 	
 func do_state():
 	var do_method = "do_" + state

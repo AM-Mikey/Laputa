@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://dv211ut2ovt1m"]
 
-[ext_resource path="res://src/Utility/TriggerVisual.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://src/Utility/TriggerVisual.gd" id="1"]
 
-[node name="TriggerVisual" type="ColorRect"]
-modulate = Color( 1, 1, 1, 0.294118 )
+[node name="TriggerVisual" type="ColorRect" groups=["TriggerVisuals"]]
+modulate = Color(1, 1, 1, 0.294118)
 mouse_filter = 2
-color = Color( 1, 0, 0, 1 )
-script = ExtResource( 1 )
+color = Color(1, 0, 0, 1)
+script = ExtResource("1")

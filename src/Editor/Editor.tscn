@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ctxo7a6euqnhd" path="res://src/Editor/Inspector.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://cnho1sw0qp562" path="res://src/Editor/Enemies.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://src/Editor/Props.tscn" id="9"]
-[ext_resource type="PackedScene" path="res://src/Editor/NPCs.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://delujnbor6a2" path="res://src/Editor/NPCs.tscn" id="10"]
 [ext_resource type="PackedScene" uid="uid://36k868wp3ide" path="res://src/Editor/Triggers.tscn" id="11"]
 [ext_resource type="Script" path="res://src/Editor/TabButtons.gd" id="12"]
 [ext_resource type="PackedScene" path="res://src/Editor/Tooltip.tscn" id="13"]

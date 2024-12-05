@@ -1,8 +1,5 @@
 extends Prop
 
-func _ready():
-	add_to_group("LimitedProps")
-
 func activate():
 	expend_prop()
 	active_pc.max_hp +=2

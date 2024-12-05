@@ -1,18 +1,18 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://nngnj3o6yrw2"]
 
-[ext_resource path="res://src/Trigger/LoadZone.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://src/Trigger/LoadZone.gd" id="1"]
 
-[sub_resource type="RectangleShape2D" id=1]
-size = Vector2( 8, 8 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(8, 8)
 
-[node name="LoadZone" type="Area2D"]
+[node name="LoadZone" type="Area2D" groups=["LevelTriggers", "LoadZones"]]
 collision_layer = 0
-script = ExtResource( 1 )
-color = Color( 0, 0.4, 0, 1 )
+script = ExtResource("1")
+color = Color(0, 0.4, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 8, 8 )
-shape = SubResource( 1 )
+position = Vector2(8, 8)
+shape = SubResource("1")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

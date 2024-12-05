@@ -1,10 +1,12 @@
-[gd_resource type="Theme" load_steps=29 format=3 uid="uid://deptsttubjnfv"]
+[gd_resource type="Theme" load_steps=31 format=3 uid="uid://deptsttubjnfv"]
 
 [ext_resource type="FontFile" uid="uid://cf01li78xvnnu" path="res://src/UI/Font/WelcomeBack.tres" id="1"]
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://djsxt54vtaivl" path="res://src/UI/Slider/ScrollBarGrabber.tres" id="3"]
 [ext_resource type="StyleBox" uid="uid://bwe3j6hcp3u7j" path="res://src/UI/StyleBox/SteelBeveledLight.tres" id="4"]
+[ext_resource type="Texture2D" uid="uid://cohpys4cvsj5g" path="res://assets/UI/CheckYes.png" id="4_1yawo"]
 [ext_resource type="StyleBox" uid="uid://qim7rgmnpjii" path="res://src/UI/Slider/ScrollBarGrabberHighlight.tres" id="5"]
+[ext_resource type="Texture2D" uid="uid://fmthof6ks35b" path="res://assets/UI/CheckNo.png" id="5_iuojp"]
 [ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="6"]
 [ext_resource type="StyleBox" uid="uid://cl4yme0wtg3po" path="res://src/UI/Slider/Slider.tres" id="7"]
 [ext_resource type="StyleBox" uid="uid://dceypmylvy2ho" path="res://src/UI/StyleBox/StoneBeveled.tres" id="8"]
@@ -54,8 +56,8 @@ Button/styles/normal = ExtResource("6")
 Button/styles/pressed = ExtResource("4")
 CheckBox/colors/font_color = Color(0.968627, 0.886275, 0.717647, 1)
 CheckBox/fonts/font = ExtResource("21")
-CheckBox/icons/checked = null
-CheckBox/icons/unchecked = null
+CheckBox/icons/checked = ExtResource("4_1yawo")
+CheckBox/icons/unchecked = ExtResource("5_iuojp")
 CheckButton/colors/font_color = Color(0.88, 0.88, 0.88, 1)
 CheckButton/colors/font_color_disabled = Color(0.9, 0.9, 0.9, 0.2)
 CheckButton/colors/font_color_hover = Color(0.94, 0.94, 0.94, 1)

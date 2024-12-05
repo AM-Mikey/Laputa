@@ -7,7 +7,6 @@ var prop_name: String
 var active = false
 
 func _ready():
-	add_to_group("PropButtons")
 	$HBox/Button.text = prop_name
 	$PanelActive.visible = active
 

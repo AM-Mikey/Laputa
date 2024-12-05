@@ -7,11 +7,7 @@ extends Area2D
 
 @onready var world = get_tree().get_root().get_node("World")
 
-
-
 func _ready():
-	add_to_group("Entities")
-	add_to_group("ActorSpawns")
 	if actor_path == null:
 		printerr("ERROR: no actor chosen in ActorSpawn")
 		return
@@ -43,16 +39,17 @@ func _ready():
 		collision_shape = actor.get_node("Standable/CollisionShape2D")
 	$CollisionShape2D.shape = collision_shape.shape
 	$CollisionShape2D.position = collision_shape.position
-	
-	#properties
-	for p in actor.get_property_list():
-		if p["usage"] == 4102: #exported properties
-			properties[p["name"]] = [actor.get(p["name"]), p["type"]]
-	
+
 	if world.el.get_child_count() == 0: #not in editor
 		visible = false
 		input_pickable = false
 		spawn()
+
+func initialize(): #first time set up properties
+	var actor = load(actor_path).instantiate()
+	for p in actor.get_property_list():
+		if p["usage"] == 4102: #exported properties
+			properties[p["name"]] = [actor.get(p["name"]), p["type"]]
 
 func spawn():
 	if actor_path == null:
@@ -60,10 +57,8 @@ func spawn():
 		return
 	
 	var actor = load(actor_path).instantiate()
-	
 	for p in properties:
 		actor.set(p, properties[p][0])
-	
 	actor.name = name
 	actor.global_position = global_position
 	world.current_level.get_node("Actors").call_deferred("add_child", actor)

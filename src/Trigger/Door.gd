@@ -11,8 +11,6 @@ signal level_change(level, door_index)
 func _ready():
 	var _err = connect("level_change", Callable(w, "on_level_change")) #TODO a better way of not returning this
 	trigger_type = "door"
-	add_to_group("LevelTriggers")
-	add_to_group("Doors")
 
 
 func _on_body_entered(body):

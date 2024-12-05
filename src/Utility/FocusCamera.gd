@@ -11,7 +11,6 @@ var panning_down = false
 @onready var pc = get_tree().get_root().get_node("World/Juniper")
 
 func _ready():
-	add_to_group("Cameras")
 	get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 	on_viewport_size_changed()
 	

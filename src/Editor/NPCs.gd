@@ -10,8 +10,7 @@ var active_npc_path
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
 
 func _ready():
-	pass
-	#setup_npcs()
+	setup_npcs()
 
 
 func setup_npcs():
@@ -25,7 +24,8 @@ func setup_npcs():
 			var npc_button = NPC_BUTTON.instantiate()
 			npc_button.npc_path = p
 			npc_button.npc_name = npc.name
-			npc_button.connect("npc_changed", Callable(self, "on_npc_changed"))
+			npc_button.npc_sprite = npc.get_node("Sprite2D").texture
+			npc_button.connect("npc_changed", Callable(self, "change_npc"))
 			if index == 0:
 				npc_button.active = true
 				active_npc_path = p
@@ -49,13 +49,11 @@ func find_npc_scenes(path):
 			
 	return files
 
-### SIGNALS
-
-func on_npc_changed(npc_path):
+func change_npc(npc_path):
 	editor.set_tool("entity", "npc")
 	active_npc_path = npc_path
+
+func unpick_npc():
+	active_npc_path = null
 	for b in $VBox/Margin/Scroll/Buttons.get_children():
-		if b.npc_path == active_npc_path: #this is weird, we should have already done this. for extra security in case it was activated another way?
-			b.activate()
-	
-	emit_signal("npc_changed", npc_path)
+			b.deactivate()

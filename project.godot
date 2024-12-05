@@ -75,6 +75,10 @@ window/size/viewport_height=1080
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 
+[editor]
+
+naming/scene_name_casing=1
+
 [editor_plugins]
 
 enabled=PackedStringArray()

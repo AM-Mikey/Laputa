@@ -3,7 +3,6 @@ extends Node2D
 @export_file var actor_path
 
 func _ready():
-	add_to_group("Previews")
 	if actor_path == null:
 		printerr("ERROR: no actor chosen in ActorSpawnPreview")
 		return

@@ -22,4 +22,3 @@ func _ready():
 		add_child(sprite.duplicate())
 	
 	entity.queue_free()
-	add_to_group("Previews")

@@ -1,4 +1,4 @@
-extends Trigger
+extends Trigger #TODO: OUTDATED
 
 const DB = preload("res://src/Dialog/DialogBox.tscn")
 

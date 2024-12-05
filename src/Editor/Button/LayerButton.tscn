@@ -18,7 +18,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="3"]
 
-[node name="Layer" type="MarginContainer"]
+[node name="Layer" type="MarginContainer" groups=["LayerButtons"]]
 custom_minimum_size = Vector2(0, 32)
 offset_right = 256.0
 offset_bottom = 32.0

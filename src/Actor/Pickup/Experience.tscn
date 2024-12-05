@@ -241,7 +241,7 @@ _data = {
 "Steady": SubResource("14")
 }
 
-[node name="Experience" type="CharacterBody2D"]
+[node name="Experience" type="CharacterBody2D" groups=["Actors", "Entities"]]
 collision_layer = 0
 collision_mask = 520
 script = ExtResource("1")

@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://src/Editor/EditorCamera.gd" id="1"]
 
-[node name="EditorCamera" type="Camera2D"]
+[node name="EditorCamera" type="Camera2D" groups=["Cameras"]]
 script = ExtResource("1")

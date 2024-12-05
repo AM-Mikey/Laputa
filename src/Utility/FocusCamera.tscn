@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/Utility/FocusCamera.gd" id="1"]
 
-[node name="FocusCamera" type="Camera2D"]
+[node name="FocusCamera" type="Camera2D" groups=["Cameras"]]
 zoom = Vector2(0.25, 0.25)
 position_smoothing_enabled = true
 script = ExtResource("1")

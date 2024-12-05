@@ -8,7 +8,6 @@ var active = false
 
 
 func _ready():
-	add_to_group("LayerButtons")
 	$HBox/LayerButton.text = tile_map.get_layer_name(layer_id)
 	if tile_map.get_layer_modulate(layer_id) == Color.TRANSPARENT:
 		$HBox/VisButton.button_pressed = true

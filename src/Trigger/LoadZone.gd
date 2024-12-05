@@ -11,8 +11,6 @@ signal level_change(level, door_index)
 func _ready():
 	var _err = connect("level_change", Callable(w, "on_level_change"))
 	trigger_type = "load_zone"
-	add_to_group("LevelTriggers")
-	add_to_group("LoadZones")
 
 
 func _on_body_entered(body):

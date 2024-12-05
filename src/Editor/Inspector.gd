@@ -68,7 +68,7 @@ func display_data():
 			create_button("tile_mode", limiter.tile_mode, "enum", limiter.TileMode.keys())
 		"actor_spawn":
 			for p in active.properties:
-				create_button(p, active.properties[p][0], get_property_type(active.properties[p][1]))
+				create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
 		#"enemy": #replaced with actor spawn
 			#for p in active.get_property_list():
 				#if p["usage"] == EXPORT:
@@ -104,7 +104,7 @@ func display_data():
 			for layer_id in tile_map.get_layers_count():
 				create_layer_button(layer_id)
 
-func get_property_type(type_flag) -> String:
+func get_property_type(type_flag, is_load) -> String:
 	var out = ""
 	match type_flag:
 		Variant.Type.TYPE_BOOL: out = "bool"
@@ -142,7 +142,7 @@ func on_property_selected(property_name):
 					$FileDialog.current_dir = "res://assets/Music/"
 					$FileDialog.set_filters(PackedStringArray(["*.wav"]))
 					$FileDialog.popup()
-		"npc":
+		"actor_spawn":
 			match property_name:
 				"dialog_json":
 					$FileDialog.current_dir = "res://src/Dialog/"
@@ -174,8 +174,8 @@ func on_property_changed(property_name, property_value):
 		"actor_spawn":
 			active.properties[property_name][0] = property_value
 			#active.set(properties[property_name][0], property_value/
-		"enemy":
-			active.set(property_name, property_value)
+		#"enemy":
+			#active.set(property_name, property_value)
 			
 		"level":
 			match property_name:
@@ -188,8 +188,8 @@ func on_property_changed(property_name, property_value):
 		"light":
 			active.set(property_name, property_value)
 			active.setup_colors()
-		"npc":
-			active.set(property_name, property_value)
+		#"npc":
+			#active.set(property_name, property_value)
 		"trigger":
 			active.set(property_name, property_value)
 			active.visual.update()

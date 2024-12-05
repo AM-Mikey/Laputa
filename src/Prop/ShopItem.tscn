@@ -96,7 +96,7 @@ _data = {
 "Used": SubResource("4")
 }
 
-[node name="ShopItem" type="Area2D"]
+[node name="ShopItem" type="Area2D" groups=["Containers"]]
 script = ExtResource("2")
 
 [node name="MoneyNumber" parent="." instance=ExtResource("1")]
