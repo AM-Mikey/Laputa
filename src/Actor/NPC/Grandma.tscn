@@ -1,13 +1,13 @@
 [gd_scene load_steps=8 format=3 uid="uid://njldyp0qpt2d"]
 
-[ext_resource type="Script" path="res://src/Actor/NPC/Outdated/NPC.gd" id="1"]
+[ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="1_44woe"]
 [ext_resource type="Texture2D" uid="uid://cqmavyfej3a0j" path="res://assets/Actor/NPC/Grandma.png" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(16, 28)
+size = Vector2(16, 24)
 
-[sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(16, 28)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h82mk"]
+size = Vector2(16, 24)
 
 [sub_resource type="Animation" id="3"]
 resource_name = "Idle"
@@ -35,12 +35,12 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [8, 15]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ns6i0"]
@@ -52,11 +52,11 @@ _data = {
 [node name="Grandma" type="CharacterBody2D"]
 collision_layer = 128
 collision_mask = 8
-script = ExtResource("1")
+script = ExtResource("1_44woe")
 id = "grandma"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -14)
+position = Vector2(0, -12)
 shape = SubResource("1")
 
 [node name="PlayerDetector" type="Area2D" parent="."]
@@ -64,8 +64,8 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 modulate = Color(1, 1, 1, 0.172549)
-position = Vector2(0, -14)
-shape = SubResource("2")
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_h82mk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)

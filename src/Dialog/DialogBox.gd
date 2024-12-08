@@ -211,18 +211,19 @@ func align_box():
 
 func flip_face(dir = "auto"):
 	if dir == "auto":
-		var face_index = face_container.get_index()
-		match face_index:
+		match face_container.get_index():
 			0: dir = "right"
 			1: dir = "left"
 
 	match dir:
 		"left":
 			face_container.get_parent().move_child(face_container, 0)
-			face_sprite.scale.x = 1
+			#face_sprite.scale.x = 1
+			face_sprite.flip_h = false
 		"right":
 			face_container.get_parent().move_child(face_container, 1)
-			face_sprite.scale.x = -1
+			#face_sprite.scale.x = -1
+			face_sprite.flip_h = true
 
 ### SIGNALS
 

@@ -44,6 +44,9 @@ func animate():
 		ap.stop()
 		ap.play(animation, 0.0, 1.0)
 
+	var look_dir = sign(pc.global_position.x - pc.inspect_target.global_position.x)
+	sprite.flip_h = look_dir == 1
+
 
 
 ### GETTERS ###
@@ -80,3 +83,4 @@ func enter():
 	guns.visible = false
 func exit():
 	guns.visible = true
+	pc.inspect_target = null

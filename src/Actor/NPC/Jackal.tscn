@@ -1,16 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjhfly0ne70sh"]
+[gd_scene load_steps=8 format=3 uid="uid://cjeynec3jyiow"]
 
-[ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="1_q8vty"]
-[ext_resource type="Texture2D" uid="uid://do0o0lqb6igex" path="res://assets/Actor/NPC/Lucille.png" id="2"]
+[ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="1_1yqoc"]
+[ext_resource type="Texture2D" uid="uid://bjchl4yrrpvon" path="res://assets/Actor/NPC/Jackal.png" id="2_epwcv"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(16, 28)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5fxif"]
-size = Vector2(16, 28)
+size = Vector2(16, 24)
 
 [sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(16, 28)
+size = Vector2(16, 24)
 
 [sub_resource type="Animation" id="3"]
 resource_name = "Idle"
@@ -29,7 +26,7 @@ tracks/0/keys = {
 "values": [0, 1]
 }
 
-[sub_resource type="Animation" id="4"]
+[sub_resource type="Animation" id="Animation_u3sao"]
 resource_name = "Walk"
 length = 0.8
 loop_mode = 1
@@ -40,52 +37,46 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [4, 5, 6, 7]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pim0s"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jcqvx"]
 _data = {
 "Idle": SubResource("3"),
-"Walk": SubResource("4")
+"Walk": SubResource("Animation_u3sao")
 }
 
-[node name="Lucille" type="CharacterBody2D"]
+[node name="Jackal" type="CharacterBody2D"]
 collision_layer = 128
 collision_mask = 8
-script = ExtResource("1_q8vty")
-id = "lucille"
+script = ExtResource("1_1yqoc")
+id = "jackal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -14)
+position = Vector2(0, -12)
 shape = SubResource("1")
-
-[node name="PlayerDetector2" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector2"]
-modulate = Color(1, 1, 1, 0.172549)
-position = Vector2(0, -14)
-shape = SubResource("RectangleShape2D_5fxif")
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 modulate = Color(1, 1, 1, 0.172549)
-position = Vector2(0, -14)
+position = Vector2(0, -12)
 shape = SubResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
-texture = ExtResource("2")
+texture = ExtResource("2_epwcv")
 hframes = 4
+vframes = 2
+frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_pim0s")
+"": SubResource("AnimationLibrary_jcqvx")
 }
 
 [node name="FloorDetectorL" type="RayCast2D" parent="."]
@@ -99,3 +90,6 @@ position = Vector2(8, 0)
 target_position = Vector2(0, 8)
 collision_mask = 8
 collide_with_areas = true
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

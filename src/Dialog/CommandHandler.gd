@@ -25,7 +25,7 @@ func parse_command(string):
 	match await function: #TODO: probably slow, replace this with something else
 		"face":#				/face, (sprite_name) 									changes face_sprite to the specified file
 			face(argument)
-		"flip_face":
+		"flipface":#			/flipface, (string: direction)							flips the face sprite, to the opposite direction, or in a specified direction
 			flip_face(argument)
 		"name":#				/name, (string)											prints a name on the first line
 			display_name(argument)
@@ -34,29 +34,30 @@ func parse_command(string):
 			set_visible(argument, false)
 		"unhide":
 			set_visible(argument, true)
+		
 		"waypoint":#			/waypoint, (string: npc_id), (int: waypoint_index)
 			waypoint(argument)
 		#"walk":#				/walk, (string: npc_id), (int: distance)				makes an npc walk a certain distance from their current pos
 			#walk(argument)#																with negative being left and positive being right
-		"yn":
-			yes_no()
-		"/db":
-			end_branch()
-		
+		#"yn":
+			#yes_no()
+		#"/db":
+			#end_branch()
 		#"lock":#																		disables and makes the player character invincible
 			#pc.disable()
-		"focus":#					/focus, (string: npc_id)							focuses PlayerCamera on an npc, doesn't work indoors
-			focus(argument)
-		"unfocus":#																	returns camera focus to the pc
-			unfocus()
+		#"focus":#					/focus, (string: npc_id)							focuses PlayerCamera on an npc, doesn't work indoors
+			#focus(argument)
+		#"unfocus":#																		returns camera focus to the pc
+			#unfocus()
 		
-		"left":#																		faces an npc left
-			flip(Vector2.LEFT, argument)
-		"right":#																		faces an npc right
-			flip(Vector2.RIGHT, argument)
-
+		"lookat":#					/lookat, (string: npc_id), (string: target_npc_id) or ("player" or "pc")
+			lookat(argument)
+		"left":#					/left, (string: npc_id)								faces an npc left
+			flip("left", argument)
+		"right":#					/right, (string: npc_id)							faces an npc right
+			flip("right", argument)
 		
-		"clear":#																		clears the text
+		"clear":#																		clears the text		(use at start of text)
 			tb.text = ""
 		"wait":#					/wait, (float: duration = 1.0)						clears text and hides db until duration
 			await wait(argument)
@@ -69,9 +70,9 @@ func parse_command(string):
 		"skipinput":#																		automatically progresses the next line
 			skipinput()
 			
-		"tbox":
-			pc.disable()
-			world.get_node("UILayer").add_child(TBOX.instantiate())
+		#"tbox":
+			#pc.disable()
+			#world.get_node("UILayer").add_child(TBOX.instantiate())
 	
 	
 
@@ -210,18 +211,44 @@ func unfocus():
 
 func flip(direction, string):
 	var id = string.to_lower()
-
 	var found_npcs = 0
 	for n in get_tree().get_nodes_in_group("NPCs"):
 		if n.id == id:
 			found_npcs += 1
-			match direction:
-				Vector2.LEFT: n.get_node("Sprite2D").flip_h = false
-				Vector2.RIGHT: n.get_node("Sprite2D").flip_h = true
-
+			n.get_node("Sprite2D").flip_h = direction == "right"
 	if found_npcs == 0:
 		printerr("COMMAND ERROR: could not find NPC with id: " + id)
-		
+
+
+func lookat(string): #TODO: enable multiple lookers
+	var a = string.split(",")
+	var npc_id = a[0].to_lower()
+	var target_id = a[1].to_lower()
+	
+	var found_npcs = []
+	for n in get_tree().get_nodes_in_group("NPCs"):
+		if n.id == npc_id:
+			found_npcs.append(n)
+	if found_npcs.is_empty():
+		printerr("COMMAND ERROR: could not find NPC with id: " + npc_id)
+		return
+	
+	var found_target = Node
+	if target_id == "player" or target_id == "pc":
+		found_target = pc
+	else:
+		for n in get_tree().get_nodes_in_group("NPCs"):
+			if n.id == target_id:
+				found_target = n
+		if found_target == null:
+			printerr("COMMAND ERROR: could not find NPC with id: " + target_id)
+			return
+	
+	for n in found_npcs:
+		n.look_at_node(found_target)
+	
+
+
 
 func wait(string):
 	var wait_time = float(string) if string != null and float(string) > 0 else 1.0

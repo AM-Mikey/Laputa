@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://6qim1s2dmwdn"]
+[gd_scene load_steps=8 format=3 uid="uid://6qim1s2dmwdn"]
 
 [ext_resource type="Texture2D" uid="uid://cs746xmj3jqm8" path="res://assets/Actor/NPC/Sasuke.png" id="1"]
-[ext_resource type="Script" path="res://src/Actor/NPC/Outdated/NPC.gd" id="2"]
+[ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="1_ijejv"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 20)
@@ -26,15 +26,33 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3]
 }
 
+[sub_resource type="Animation" id="Animation_u3sao"]
+resource_name = "Walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jcqvx"]
 _data = {
-"Idle": SubResource("3")
+"Idle": SubResource("3"),
+"Walk": SubResource("Animation_u3sao")
 }
 
 [node name="Sasuke" type="CharacterBody2D"]
 collision_layer = 128
 collision_mask = 8
-script = ExtResource("2")
+script = ExtResource("1_ijejv")
 id = "sasuke"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

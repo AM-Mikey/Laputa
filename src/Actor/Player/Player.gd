@@ -28,7 +28,6 @@ signal money_updated(money)
 var invincible = false
 var disabled = true
 var can_input = true
-#var inspecting = false
 
 #var is_on_conveyor = false
 var enemies_touching = []
@@ -42,7 +41,7 @@ var dead = false
 
 var inventory: Array
 var topic_array: Array = ["child", "sasuke", "basil", "free_dialog"]
-
+var inspect_target: Node = null
 
 var move_dir := Vector2.LEFT
 var look_dir := Vector2i.LEFT

@@ -83,7 +83,7 @@ position = Vector2(-40, 0)
 script = ExtResource("11_j7x50")
 actor_path = "res://src/Actor/NPC/Child.tscn"
 properties = {
-"conversation": ["kermit", 4],
+"conversation": ["test2", 4],
 "dialog_json": ["res://src/Dialog/Village.json", 4],
 "editor_hidden": [false, 1],
 "id": ["child", 4],

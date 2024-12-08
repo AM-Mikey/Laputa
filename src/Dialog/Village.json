@@ -57,5 +57,18 @@
 	walking to waypoint 0 /waypoint,child,0
 	walking to waypoint 1 /waypoint,child,1
 	",
+	
+	"test2":
+	"
+	/name,kermit /face,child I'm Kermit, I guess...
+	didn't really get to choose the name, so I'm not too happy about that
+	/clear that should have cleared the text
+	/right,child this flipped me right
+	/left,child this flipped me left
+	looking at player /lookat,child,pc
+	looking at nun /lookat,child,nun
+	walking to waypoint 0 /waypoint,child,0
+	walking to waypoint 1 /waypoint,child,1
+	",
 
 }

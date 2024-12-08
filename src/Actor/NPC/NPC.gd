@@ -54,23 +54,22 @@ func enable():
 	
 func _physics_process(_delta):
 	if disabled: return
-	$Sprite2D.flip_h = true if move_dir.x > 0 else false #set sprite to move_dir
 	if state != "":
 		do_state()
 
 
 func change_animation(animation: String, random_start = false):
+	if animation == $AnimationPlayer.current_animation:
+		return
 	if not $AnimationPlayer.has_animation(animation):
 		print("WARNING: animation: " + animation + " not found on npc with name: " + name)
 	
-	$AnimationPlayer.play(animation)
 	var start_time = 0
-	
 	if random_start:
 		rng.randomize()
 		start_time = rng.randf_range(0, $AnimationPlayer.current_animation_length)
 	
-	$AnimationPlayer.seek(start_time)
+	$AnimationPlayer.play(animation, start_time)
 
 
 
@@ -114,6 +113,7 @@ func do_walkto():
 	change_animation("Walk")
 	var tx = target_waypoint.global_position.x
 	move_dir = Vector2(sign(tx - global_position.x), 0)
+	$Sprite2D.flip_h = true if move_dir.x > 0 else false #set sprite to move_dir
 	if abs(tx - global_position.x) < target_tolerance:
 		if dialog_box:
 			dialog_box.busy = false
@@ -124,21 +124,21 @@ func do_walkto():
 		move_and_slide()
 
 
-func enter_walk():
+func enter_wander():
+	change_animation("Walk")
 	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
 		move_dir = Vector2.RIGHT
 	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
 		move_dir = Vector2.LEFT
 	rng.randomize()
-	change_animation("Walk")
 	$StateTimer.start(rng.randf_range(1.0, 10.0))
 	await $StateTimer.timeout
 	change_state("wait")
 
-func do_walk():
-	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
-		change_state("wait")
-	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
+func do_wander():
+	$Sprite2D.flip_h = true if move_dir.x > 0 else false #set sprite to move_dir
+	if (not $FloorDetectorL.is_colliding() and move_dir.x < 0) \
+	or (not $FloorDetectorR.is_colliding() and move_dir.x > 0):
 		change_state("wait")
 	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
 		velocity = calc_velocity()
@@ -155,7 +155,9 @@ func enter_wait():
 
 
 func enter_talk():
-	orient_player()
+	change_animation("Idle") #might cause issues with idle animation restarting
+	look_at_node(pc)
+	pc.inspect_target = self
 	if get_tree().get_root().get_node("World/UILayer").has_node("DialogBox"):
 		pass
 	else:
@@ -174,8 +176,9 @@ func _input(event):
 		change_state("talk")
 
 
-func orient_player():
-	pc.look_dir.x = sign(pc.global_position.x - global_position.x)
+func look_at_node(node):
+	var look_dir = sign(node.global_position.x - global_position.x)
+	$Sprite2D.flip_h = look_dir == 1
 
 
 func calc_velocity(do_gravity = true) -> Vector2:
