@@ -15,7 +15,7 @@ var spent = false
 @onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
-	add_to_group("Props")
+	add_to_group("Props") #TODO: consider doing this in editor
 	add_to_group("Entities")
 
 func _on_body_entered(body):

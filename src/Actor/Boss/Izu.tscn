@@ -82,7 +82,7 @@ _data = {
 "Whip": SubResource("5")
 }
 
-[node name="Izu" type="CharacterBody2D"]
+[node name="Izu" type="CharacterBody2D" groups=["Actors", "Bosses", "Entities"]]
 script = ExtResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

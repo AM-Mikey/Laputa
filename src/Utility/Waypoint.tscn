@@ -7,6 +7,8 @@
 size = Vector2(8, 8)
 
 [node name="Waypoint" type="Area2D" groups=["Entities", "VisualUtilities", "Waypoints"]]
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

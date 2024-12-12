@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://bxe2memh6txr5"]
 
-[ext_resource type="Script" path="res://src/Actor/Enemy/BeetleYellow.gd" id="1"]
+[ext_resource type="Script" path="res://src/Actor/Enemy/Outdated/BeetleYellow.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cvqm30kgxlxvi" path="res://assets/Actor/Enemy/Bugger.png" id="2"]
 [ext_resource type="AudioStream" uid="uid://cpbrsidi03i20" path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" id="3"]
 [ext_resource type="Script" path="res://src/Actor/Enemy/BeetleYellow/YellowBeetleIdle.gd" id="4"]
 [ext_resource type="Script" path="res://src/Actor/Enemy/BeetleYellow/YellowBeetleAttack.gd" id="5"]
-[ext_resource type="Theme" path="res://src/UI/Theme/LaputaTheme.tres" id="6"]
+[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="6"]
 [ext_resource type="Script" path="res://src/Actor/Enemy/BeetleYellow/YellowBeetleReset.gd" id="7"]
 
 [sub_resource type="RectangleShape2D" id="1"]

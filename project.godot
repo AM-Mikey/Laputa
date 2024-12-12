@@ -418,6 +418,7 @@ window_maximize={
 2d_physics/layer_12="xp"
 2d_physics/layer_13="ammo"
 2d_physics/layer_14="kill"
+2d_physics/layer_15="editorselectable"
 2d_physics/layer_16="rigidbody"
 
 [rendering]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://davoljqg8uuys"]
 
-[ext_resource type="FontFile" path="res://src/UI/Font/WelcomeBack.tres" id="1"]
+[ext_resource type="FontFile" uid="uid://cf01li78xvnnu" path="res://src/UI/Font/WelcomeBack.tres" id="1"]
 
 [node name="StateLabel" type="Label"]
 offset_left = -20.0

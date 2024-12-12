@@ -73,7 +73,7 @@ _data = {
 "FlyRight": SubResource("3")
 }
 
-[node name="Ornithopter" type="CharacterBody2D"]
+[node name="Ornithopter" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("3")

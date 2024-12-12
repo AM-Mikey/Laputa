@@ -28,7 +28,7 @@ func _ready():
 		"int", Variant.Type.TYPE_INT:
 			$HBox/HBox/String.visible = true
 			if property_value != null: #"if property_value" doesn't trigger for value = 0
-				$HBox/HBox/String.text = String("%.f" % property_value)
+				$HBox/HBox/String.text = String("%.f" % int(property_value))
 		"float", Variant.Type.TYPE_FLOAT:
 			$HBox/HBox/String.visible = true
 			if property_value != null:

@@ -11,7 +11,7 @@ const DB = preload("res://src/Dialog/DialogBox.tscn")
 func _ready():
 	trigger_type = "dialog_cue"
 	if not repeatable:
-		add_to_group("LimitedTriggers")
+		add_to_group("LimitedTriggers") #TODO: consider doing this in editor
 
 func _on_body_entered(_body):
 	if not spent:

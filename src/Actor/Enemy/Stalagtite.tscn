@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://dvmfxj76jww0o"]
+[gd_scene load_steps=11 format=3 uid="uid://dvmfxj76jww0o"]
 
-[ext_resource type="AudioStream" uid="uid://cpbrsidi03i20" path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" id="1"]
 [ext_resource type="Texture2D" uid="uid://c1wouwbovbivr" path="res://assets/Actor/Enemy/Stalagtite.png" id="2"]
 [ext_resource type="Script" path="res://src/Actor/Enemy/Stalagtite.gd" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(14, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0pis"]
 size = Vector2(14, 16)
 
 [sub_resource type="Animation" id="2"]
@@ -36,6 +38,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="4"]
+resource_name = "Run"
 length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
@@ -53,45 +56,18 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/path = NodePath("CollisionShape2D:shape")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="5"]
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [8, 11]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"values": [SubResource("1")]
 }
 
 [sub_resource type="Animation" id="6"]
+resource_name = "Squirm"
 length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -104,84 +80,71 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [16, 23]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
-[sub_resource type="Animation" id="7"]
-length = 0.6
+[sub_resource type="Animation" id="Animation_57rfx"]
+resource_name = "Stake"
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = true
+tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [16, 23]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [true]
+"values": [12, 13, 12, 13, 12, 13, 14, 15]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6602m"]
 _data = {
 "HangActive": SubResource("2"),
 "HangIdle": SubResource("3"),
-"RunLeft": SubResource("4"),
-"RunRight": SubResource("5"),
-"SquirmLeft": SubResource("6"),
-"SquirmRight": SubResource("7")
+"Run": SubResource("4"),
+"Squirm": SubResource("6"),
+"Stake": SubResource("Animation_57rfx")
 }
 
-[node name="Stalagtite" type="CharacterBody2D"]
+[node name="Stalagtite" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("3")
+debug = true
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 shape = SubResource("1")
 
+[node name="Standable" type="CharacterBody2D" parent="."]
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Standable"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_o0pis")
+disabled = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_6602m")
 }
-
-[node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("1")
-bus = &"SFX"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
 texture = ExtResource("2")
 hframes = 8
 vframes = 3
-frame = 16
+frame = 15
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 1000)
 collision_mask = 9
 collide_with_areas = true
+
+[node name="StateTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="StateTimer" to="." method="_on_state_timer_timeout"]

@@ -38,20 +38,18 @@ var ammo_chance = 1
 
 
 func _ready():
-	add_to_group("Actors")
-	add_to_group("Entities")
 	home = global_position
 	
-	add_to_group("Enemies")
 	if disabled: return
-
-	if debug:
-		add_child(STATE_LABEL.instantiate())
 	
-	if not is_in_group("EnemyPreviews"):
-		await get_tree().process_frame
-		if state != "" and state != null: #TODO: this prevents enemies from starting in a state if we dont yield? we get ton of errors if we dont because we delete the enemy when moving it
-			change_state(state)
+	var state_label = STATE_LABEL.instantiate()
+	add_child(state_label)
+	state_label.visible = debug
+	
+	#if not is_in_group("EnemyPreviews"): #this was causing issues with waiting a frame for setup(), just start state in setup()
+		#await get_tree().process_frame
+		#if state != "" and state != null: #TODO: this prevents enemies from starting in a state if we dont yield? we get ton of errors if we dont because we delete the enemy when moving it
+			#change_state(state)
 	
 	if not w.get_node("EditorLayer").has_node("Editor"):
 		setup_damagenum_timer()
@@ -72,18 +70,18 @@ func _physics_process(delta):
 	if disabled or dead: return
 	if state != "":
 		do_state()
-	if debug:
-		$StateLabel.text = state
+	if has_node("StateLabel"):
+		get_node("StateLabel").text = state
 	_on_physics_process(delta)
 
 func _on_physics_process(delta): #for child
 	pass
 
-func exit():
-	if get_parent().get_parent() is Path2D:
-		get_parent().get_parent().queue_free()
-	else:
-		queue_free()
+#func exit():	#OBSOLETE
+	#if get_parent().get_parent() is Path2D:
+		#get_parent().get_parent().queue_free()
+	#else:
+		#queue_free()
 
 func calc_velocity(velocity: Vector2, move_dir, speed, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
 	var out: = velocity
@@ -191,7 +189,7 @@ func die():
 	var explosion = EXPLOSION.instantiate()
 	explosion.position = global_position
 	world.front.add_child(explosion)
-	exit()
+	queue_free()
 
 
 func do_death_drop():

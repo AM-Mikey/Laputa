@@ -58,10 +58,6 @@ var shoot_dir := Vector2.LEFT
 
 
 func _ready():
-	#add_to_group("Actors") we could declare these like all other actors... or just leave him out
-	#add_to_group("Entities")
-	#home = global_position
-	
 	connect_inventory()
 #	if weapon_array.front() != null: TODO:fix
 #		$WeaponSprite.texture = weapon_array.front().texture

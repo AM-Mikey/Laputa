@@ -49,7 +49,7 @@ _data = {
 "Walk": SubResource("4")
 }
 
-[node name="Dola" type="CharacterBody2D"]
+[node name="Dola" type="CharacterBody2D" groups=["Actors", "Entities", "NPCs"]]
 collision_layer = 128
 collision_mask = 8
 script = ExtResource("1_d2lhn")

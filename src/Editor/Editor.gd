@@ -100,6 +100,7 @@ func setup_level(): #TODO: clear undo history
 	for s in get_tree().get_nodes_in_group("ActorSpawns"):
 		s.visible = true
 		s.input_pickable = true
+		
 	for l in get_tree().get_nodes_in_group("SunLights"):
 		l.editor_enter()
 	for t in trigger_collection.get_children():
@@ -705,7 +706,6 @@ func setup_preview_tile_map() -> Node:
 			m.queue_free()
 	
 	var preview_tile_map = PREVIEW_TILE_MAP.instantiate()
-	preview_tile_map.add_to_group("Previews")
 	preview_tile_map.tile_set = tile_set
 	tile_collection.add_child(preview_tile_map)
 	return preview_tile_map

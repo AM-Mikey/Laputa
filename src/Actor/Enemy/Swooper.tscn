@@ -73,11 +73,10 @@ _data = {
 "FlyRight": SubResource("3")
 }
 
-[node name="Swooper" type="CharacterBody2D"]
+[node name="Swooper" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("2")
-editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("1")

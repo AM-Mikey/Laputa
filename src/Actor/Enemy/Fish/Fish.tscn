@@ -1,133 +1,146 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=3 uid="uid://crtxny1yjnkmi"]
 
-[ext_resource path="res://assets/Actor/Enemy/Fish.png" type="Texture2D" id=1]
-[ext_resource path="res://src/Actor/Enemy/Fish/Fish.gd" type="Script" id=2]
-[ext_resource path="res://src/Actor/Enemy/Fish/Idle.gd" type="Script" id=3]
-[ext_resource path="res://src/Actor/Enemy/Fish/Attack.gd" type="Script" id=4]
-[ext_resource path="res://src/UI/Theme/LaputaTheme.tres" type="Theme" id=5]
-[ext_resource path="res://src/Actor/Enemy/Fish/Fall.gd" type="Script" id=6]
-[ext_resource path="res://src/Actor/Enemy/Fish/Swim.gd" type="Script" id=7]
-[ext_resource path="res://src/Utility/StateMachine.tscn" type="PackedScene" id=8]
+[ext_resource type="Texture2D" uid="uid://bbu1jyosea4de" path="res://assets/Actor/Enemy/Fish.png" id="1"]
+[ext_resource type="Script" path="res://src/Actor/Enemy/Fish/Fish.gd" id="2"]
+[ext_resource type="Script" path="res://src/Actor/Enemy/Fish/Idle.gd" id="3"]
+[ext_resource type="Script" path="res://src/Actor/Enemy/Fish/Attack.gd" id="4"]
+[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="5"]
+[ext_resource type="Script" path="res://src/Actor/Enemy/Fish/Fall.gd" id="6"]
+[ext_resource type="Script" path="res://src/Actor/Enemy/Fish/Swim.gd" id="7"]
+[ext_resource type="PackedScene" uid="uid://qmvnhwivhm4j" path="res://src/Utility/StateMachine.tscn" id="8"]
 
-[sub_resource type="RectangleShape2D" id=5]
-size = Vector2( 4, 4 )
+[sub_resource type="RectangleShape2D" id="5"]
+size = Vector2(4, 4)
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id="1"]
 resource_name = "Fall"
 length = 0.1
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 12 ]
+"values": [12]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 resource_name = "Idle"
 length = 0.4
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.3 ),
-"transitions": PackedFloat32Array( 1, 1 ),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 0, 3 ]
+"values": [0, 3]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 resource_name = "Rise"
 length = 0.1
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 8 ]
+"values": [8]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id="4"]
 resource_name = "Target"
 length = 0.2
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.2 ),
-"transitions": PackedFloat32Array( 1, 1 ),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 4, 7 ]
+"values": [4, 7]
 }
 
-[node name="Fish" type="CharacterBody2D"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3s1p6"]
+_data = {
+"Fall": SubResource("1"),
+"Idle": SubResource("2"),
+"Rise": SubResource("3"),
+"Target": SubResource("4")
+}
+
+[node name="Fish" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 8
-script = ExtResource( 2 )
-speed = Vector2( 20, 150 )
+script = ExtResource("2")
 id = "0.5"
+speed = Vector2(20, 150)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 5 )
+shape = SubResource("5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2( -1, 1 )
-texture = ExtResource( 1 )
+scale = Vector2(-1, 1)
+texture = ExtResource("1")
 hframes = 4
 vframes = 4
 frame = 12
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Fall = SubResource( 1 )
-anims/Idle = SubResource( 2 )
-anims/Rise = SubResource( 3 )
-anims/Target = SubResource( 4 )
+libraries = {
+"": SubResource("AnimationLibrary_3s1p6")
+}
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-enabled = true
-target_position = Vector2( 0, -96 )
+target_position = Vector2(0, -96)
 collision_mask = 9
 collide_with_areas = true
 
-[node name="StateMachine" parent="." instance=ExtResource( 8 )]
+[node name="StateMachine" parent="." instance=ExtResource("8")]
 start_state = NodePath("Idle")
 
 [node name="Label" type="Label" parent="StateMachine"]
 offset_left = -16.0
 offset_top = -16.0
 offset_right = 16.0
-theme = ExtResource( 5 )
-align = 1
+theme = ExtResource("5")
 
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="Swim" type="Node" parent="StateMachine"]
-script = ExtResource( 7 )
+script = ExtResource("7")
 
 [node name="Attack" type="Node" parent="StateMachine"]
-script = ExtResource( 4 )
+script = ExtResource("4")
 
 [node name="Fall" type="Node" parent="StateMachine"]
-script = ExtResource( 6 )
+script = ExtResource("6")
 
 [node name="Tween" type="Tween" parent="StateMachine/Fall"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+script = null

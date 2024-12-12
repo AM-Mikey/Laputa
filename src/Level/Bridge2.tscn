@@ -12,12 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://xat01w4y42cx" path="res://src/Actor/Enemy/TogglerVertical.tscn" id="11"]
 [ext_resource type="PackedScene" path="res://src/Tile/Outdated/TriggerTile/LadderTrigger.tscn" id="12"]
 [ext_resource type="PackedScene" path="res://src/Actor/Enemy/Outdated/FrogEasy.tscn" id="13"]
-[ext_resource type="PackedScene" uid="uid://bxe2memh6txr5" path="res://src/Actor/Enemy/BeetleYellow.tscn" id="14"]
+[ext_resource type="PackedScene" uid="uid://bxe2memh6txr5" path="res://src/Actor/Enemy/Outdated/BeetleYellow.tscn" id="14"]
 [ext_resource type="PackedScene" path="res://src/Actor/Enemy/Outdated/BeetleGreen.tscn" id="15"]
-[ext_resource type="PackedScene" path="res://src/Actor/Enemy/Sentry.tscn" id="16"]
+[ext_resource type="PackedScene" uid="uid://dcctlg17v5oq0" path="res://src/Actor/Enemy/Sentry.tscn" id="16"]
 [ext_resource type="PackedScene" uid="uid://ckeh37ixn76w8" path="res://src/Actor/Enemy/Billy.tscn" id="17"]
 [ext_resource type="PackedScene" path="res://src/Tile/Outdated/PropTile/BreakableProp.tscn" id="19"]
-[ext_resource type="PackedScene" path="res://src/Trigger/LoadZone.tscn" id="20"]
+[ext_resource type="PackedScene" uid="uid://nngnj3o6yrw2" path="res://src/Trigger/LoadZone.tscn" id="20"]
 
 [node name="Bridge2" type="Node2D"]
 script = ExtResource("5")

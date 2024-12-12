@@ -1,26 +1,26 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://722wtgwc6c5p"]
 
-[ext_resource path="res://src/Actor/Enemy/Climber/ClimberBody.gd" type="Script" id=1]
-[ext_resource path="res://assets/Actor/Enemy/Climber.png" type="Texture2D" id=2]
-[ext_resource path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" type="AudioStream" id=3]
+[ext_resource type="Script" path="res://src/Actor/Enemy/Climber/ClimberBody.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dsb7pimaiub0y" path="res://assets/Actor/Enemy/Climber.png" id="2"]
+[ext_resource type="AudioStream" uid="uid://cpbrsidi03i20" path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" id="3"]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id="1"]
 radius = 8.0
 
-[node name="ClimberBody" type="CharacterBody2D"]
+[node name="ClimberBody" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 0
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource( 2 )
+texture = ExtResource("2")
 hframes = 8
 vframes = 2
 
 [node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource("3")
 attenuation = 0.058315
-bus = "SFX"
+bus = &"SFX"

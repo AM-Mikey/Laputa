@@ -99,7 +99,7 @@ _data = {
 "Stand": SubResource("9")
 }
 
-[node name="Frog" type="CharacterBody2D"]
+[node name="Frog" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("1")
@@ -127,7 +127,6 @@ position = Vector2(0, -8)
 texture = ExtResource("2")
 hframes = 4
 vframes = 2
-frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

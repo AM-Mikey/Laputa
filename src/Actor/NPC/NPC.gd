@@ -36,9 +36,6 @@ var camera_forgiveness = 16
 @onready var pc = get_tree().get_root().get_node_or_null("World/Juniper")
 
 func _ready():
-	add_to_group("Actors")
-	add_to_group("Entities")
-	add_to_group("NPCs")
 	home = global_position
 	find_waypoints()
 	

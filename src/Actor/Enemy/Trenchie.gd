@@ -16,7 +16,7 @@ var hiding = false
 var peeking = false
 
 
-func _ready():
+func setup():
 	hp = 4
 	damage_on_contact = 1
 	speed = Vector2(100, 200)

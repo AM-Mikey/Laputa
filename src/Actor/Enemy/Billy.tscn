@@ -131,7 +131,7 @@ _data = {
 "WalkShoot": SubResource("5")
 }
 
-[node name="Billy" type="CharacterBody2D"]
+[node name="Billy" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("1")

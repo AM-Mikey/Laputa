@@ -18,7 +18,7 @@ var spent = false
 
 
 func _ready():
-	add_to_group("Triggers")
+	add_to_group("Triggers") #TODO: consider doing this in editor
 	add_child(visual)
 	if w.get_node("EditorLayer").has_node("Editor"):
 		var controller = TRIGGER_CONTROLLER.instantiate()

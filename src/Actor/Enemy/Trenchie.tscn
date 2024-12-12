@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/Actor/Enemy/Trenchie.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://2j2flsg5b2p1" path="res://assets/Actor/Enemy/Trenchie.png" id="2"]
-[ext_resource type="PackedScene" path="res://src/Utility/StateMachine.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://qmvnhwivhm4j" path="res://src/Utility/StateMachine.tscn" id="3"]
 [ext_resource type="Script" path="res://src/Actor/Enemy/Trenchie/Jump.gd" id="4"]
 [ext_resource type="Script" path="res://src/Actor/Enemy/Trenchie/Idle.gd" id="5"]
 
@@ -311,11 +311,10 @@ _data = {
 "StandRight": SubResource("14")
 }
 
-[node name="Trenchie" type="CharacterBody2D"]
+[node name="Trenchie" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 10
 script = ExtResource("1")
-editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
