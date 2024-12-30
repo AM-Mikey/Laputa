@@ -35,7 +35,7 @@ func _ready():
 func _on_new():
 	queue_free()
 	
-	w.on_level_change(w.start_level, 0)
+	w.on_level_change(w.start_level.scene_file_path, 0)
 	w.add_child(JUNIPER.instantiate())
 	w.get_node("UILayer").add_child(HUD.instantiate())
 	

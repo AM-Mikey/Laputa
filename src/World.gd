@@ -30,8 +30,8 @@ var internal_version: String = get_internal_version()
 @export var show_state_labels = false ###############################################
 @export var gamemode = "story"
 
-@export var start_level: PackedScene
-@onready var current_level = start_level.instantiate() #assumes current level to start with, might cause issues down the line
+@export var start_level_path: String
+@onready var current_level = load(start_level_path).instantiate() #assumes current level to start with, might cause issues down the line
 @onready var ui = $UILayer
 @onready var el = $EditorLayer
 @onready var front = $Front
@@ -88,7 +88,7 @@ func set_debug_visible(vis = !debug_visible): #makes triggers and visutils visib
 	print("debug_visible == ", debug_visible)
 
 func skip_title():
-	on_level_change(start_level, 0)
+	on_level_change(start_level_path, 0)
 	add_child(JUNIPER.instantiate())
 	get_node("UILayer").add_child(HUD.instantiate())
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
@@ -121,7 +121,7 @@ func _input(event):
 
 ### LEVEL CHANGE ###
 
-func on_level_change(level, door_index):
+func on_level_change(level_path, door_index):
 	print("changing level...")
 	write_level_data_to_temp()
 	
@@ -131,12 +131,12 @@ func on_level_change(level, door_index):
 	clear_spawn_layers()
 	###
 	
-	var level_path = current_level.scene_file_path
+	var old_level_path = current_level.scene_file_path
 	current_level.queue_free()
 	
 	
 	await get_tree().process_frame #this gives time for juniper to spawn. this is neccesary
-	var next_level = level.instantiate()
+	var next_level = load(level_path).instantiate()
 	current_level = next_level #next level set so current level is never null
 	add_child(next_level)
 	
@@ -150,14 +150,12 @@ func on_level_change(level, door_index):
 		
 		var triggers = get_tree().get_nodes_in_group("LevelTriggers")
 		for t in triggers:
-			if t.level == level_path and t.door_index == door_index:
+			if t.level == old_level_path and t.door_index == door_index:
 				if t.is_in_group("LoadZones"):
 					$Juniper.position = t.position + (t.direction * -32)
-					#print("found a connected zone")
 					doors_found += 1
 				else:
 					$Juniper.position = t.position
-					#print("found a connected door")
 					doors_found += 1
 
 			if doors_found == 0:
@@ -234,7 +232,7 @@ func read_player_data_from_save():
 	var scoped_data = read_from_file(save_path)
 	var player_data = scoped_data["player_data"]
 	
-	on_level_change(load(player_data["current_level"]), null)
+	on_level_change(player_data["current_level"], null)
 	await get_tree().process_frame
 	
 	pc.position = player_data["position"]

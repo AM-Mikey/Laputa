@@ -3,6 +3,7 @@
 [ext_resource type="FontFile" uid="uid://cf01li78xvnnu" path="res://src/UI/Font/WelcomeBack.tres" id="1"]
 
 [node name="StateLabel" type="Label"]
+z_index = 50
 offset_left = -20.0
 offset_top = -39.0
 offset_right = 20.0

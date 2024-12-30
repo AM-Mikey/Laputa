@@ -96,14 +96,14 @@ func debug_print():
 #
 #
 func reload_level():
-	print("reloading level")
+	#print("reloading level")
 	if ui.has_node("PauseMenu"):
 		ui.get_node("PauseMenu").unpause()
 	
 	world.get_node("Juniper").free() #we free and respawn them so we have a clean slate when we load in
 	if ui.has_node("HUD"):
 		ui.get_node("HUD").free()
-	world.on_level_change(load(world.current_level.scene_file_path), 0)
+	world.on_level_change(world.current_level.scene_file_path, 0)
 
 
 	world.add_child(JUNIPER.instantiate())

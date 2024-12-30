@@ -144,7 +144,7 @@ func load_level(path):
 	
 	el.get_node("Editor").inspector.on_deselected()
 	
-	w.on_level_change(load(path), 0)
+	w.on_level_change(path, 0)
 
 	w.add_child(JUNIPER.instantiate())
 	ui.add_child(HUD.instantiate())

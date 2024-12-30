@@ -51,9 +51,8 @@ func _ready():
 		#if state != "" and state != null: #TODO: this prevents enemies from starting in a state if we dont yield? we get ton of errors if we dont because we delete the enemy when moving it
 			#change_state(state)
 	
-	if not w.get_node("EditorLayer").has_node("Editor"):
-		setup_damagenum_timer()
-		setup()
+	setup_damagenum_timer()
+	setup()
 
 func setup(): #EVERY ENEMY MUST HAVE
 	pass #to be determined in enemy script. 

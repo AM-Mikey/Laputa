@@ -12,6 +12,7 @@ var drop_damage: int
 var wait_time: float
 
 func setup():
+	print("doing setup")
 	match difficulty:
 		0: 
 			hp = 2
@@ -76,8 +77,8 @@ func enter_squirm():
 	$RayCast2D.queue_free()
 	damage_on_contact = base_damage
 	
-	$CollisionShape2D.shape.size = Vector2(14, 12)
-	$CollisionShape2D.position += Vector2(0, 2)
+	$CollisionShape2D.shape.size = Vector2(14, 14)
+	$CollisionShape2D.position += Vector2(0, 1)
 	
 	match difficulty:
 		1:

@@ -9,7 +9,7 @@ signal level_change(level, door_index)
 @export var locked = false
 
 func _ready():
-	var _err = connect("level_change", Callable(w, "on_level_change")) #TODO a better way of not returning this
+	var _err = connect("level_change", Callable(w, "on_level_change")) #TODO a better way of not returning this #w is no longer level, but path
 	trigger_type = "door"
 
 

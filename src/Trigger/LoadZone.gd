@@ -9,7 +9,7 @@ signal level_change(level, door_index)
 @export var direction = Vector2.RIGHT
 
 func _ready():
-	var _err = connect("level_change", Callable(w, "on_level_change"))
+	var _err = connect("level_change", Callable(w, "on_level_change")) #w is no longer level, but path
 	trigger_type = "load_zone"
 
 

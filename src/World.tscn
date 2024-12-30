@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgfegr33f6gus"]
+[gd_scene load_steps=2 format=3 uid="uid://bgfegr33f6gus"]
 
-[ext_resource type="PackedScene" uid="uid://b7ovji8nepkpe" path="res://src/Level/DefaultGodot4.tscn" id="2_v8433"]
 [ext_resource type="Script" path="res://src/World.gd" id="8"]
 
 [node name="World" type="Node2D"]
@@ -10,7 +9,7 @@ release_version = "1.8"
 do_skip_title = true
 debug_visible = true
 gamemode = "pvp"
-start_level = ExtResource("2_v8433")
+start_level_path = "res://src/Level/DefaultGodot4.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
