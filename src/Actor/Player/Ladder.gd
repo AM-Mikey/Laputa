@@ -43,7 +43,7 @@ func calc_velocity() -> Vector2:
 	out.y = pc.move_dir.y * mm.speed.y * 0.5
 	#X
 	out.x = 0
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump"): #TODO: BIG NONO WHY ARE YOU CHANGING STATE DURING A VELOCITY CALCULATION
 		mm.change_state("jump") #TODO fix
 		out.y = mm.speed.y * -1.0
 	if abs(out.x) < mm.min_x_velocity: out.x = 0 #clamp velocity

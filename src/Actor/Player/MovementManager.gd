@@ -10,6 +10,7 @@ const SNAP_LENGTH = 4.0
 var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
 var speed = Vector2(90, 180)
+var crouch_speed = 70.0
 var gravity = 300.0
 var velocity = Vector2.ZERO
 var acceleration = 2.0 #was 2.5, changed 10.26.22
@@ -69,6 +70,7 @@ func initialize_states():
 			states[c.name.to_lower()] = c
 	
 	change_state("run")
+	return
 
 
 
@@ -119,6 +121,7 @@ func do_coyote_time():
 	if not pc.is_on_floor() and current_state == states["run"]:
 		pc.is_in_coyote = false
 		change_state("fall")
+		return
 
 
 func bonk(type, normal):
@@ -131,7 +134,7 @@ func bonk(type, normal):
 
 
 func jump():
-	if pc.is_crouching: return
+	if pc.is_forced_crouching: return
 	
 	snap_vector = Vector2.ZERO
 	am.play("pc_jump")
@@ -142,15 +145,26 @@ func jump():
 			jump_starting_move_dir_x = sign(pc.move_dir.x)
 			$MinDirTimer.start(minimum_direction_time)
 			change_state("longjump")
+			return
 	else:
 		change_state("jump")
+		return
 
 
 
 ### SIGNALS ###
 
 func _on_CrouchDetector_body_entered(_body):
+	pc.is_forced_crouching = true
 	pc.is_crouching = true
+	if current_state != states["run"]: return
+	pc.get_node("CollisionShape2D").set_deferred("disabled", true)
+	pc.get_node("CrouchingCollision").set_deferred("disabled", false)
 
 func _on_CrouchDetector_body_exited(_body):
-	pc.is_crouching = false
+	pc.is_forced_crouching = false
+	if not Input.is_action_pressed("look_down"):
+		pc.is_crouching = false
+		if current_state != states["run"]: return
+		pc.get_node("CollisionShape2D").set_deferred("disabled", false)
+		pc.get_node("CrouchingCollision").set_deferred("disabled", true)

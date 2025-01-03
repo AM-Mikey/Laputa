@@ -24,6 +24,7 @@ var target_tolerance = 1
 var target_waypoint: Node
 var target_pos = null
 var bail_time = 6.0
+@export var walk_speed = Vector2(50, 50)
 
 @export var id: String
 @export_file("*.json") var dialog_json: String
@@ -39,8 +40,11 @@ func _ready():
 	home = global_position
 	find_waypoints()
 	
+	speed = Vector2.ZERO
+	
 	setup_states()
 	change_state(starting_state)
+	
 
 
 func disable():
@@ -53,6 +57,9 @@ func _physics_process(_delta):
 	if disabled: return
 	if state != "":
 		do_state()
+	
+	velocity = calc_velocity()
+	move_and_slide()
 
 
 func change_animation(animation: String, random_start = false):
@@ -108,21 +115,21 @@ func change_state(new):
 
 func do_walkto():
 	change_animation("Walk")
+	speed = walk_speed
 	var tx = target_waypoint.global_position.x
 	move_dir = Vector2(sign(tx - global_position.x), 0)
 	$Sprite2D.flip_h = true if move_dir.x > 0 else false #set sprite to move_dir
 	if abs(tx - global_position.x) < target_tolerance:
+		speed = Vector2.ZERO
 		if dialog_box:
 			dialog_box.busy = false
 		change_state(cached_state)
-	else: 
-		velocity = calc_velocity()
-		set_up_direction(FLOOR_NORMAL)
-		move_and_slide()
+		return
 
 
-func enter_wander():
+func enter_walk():
 	change_animation("Walk")
+	speed = walk_speed
 	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
 		move_dir = Vector2.RIGHT
 	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
@@ -131,28 +138,29 @@ func enter_wander():
 	$StateTimer.start(rng.randf_range(1.0, 10.0))
 	await $StateTimer.timeout
 	change_state("wait")
+	return
 
-func do_wander():
+func do_walk():
 	$Sprite2D.flip_h = true if move_dir.x > 0 else false #set sprite to move_dir
 	if (not $FloorDetectorL.is_colliding() and move_dir.x < 0) \
 	or (not $FloorDetectorR.is_colliding() and move_dir.x > 0):
 		change_state("wait")
-	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
-		velocity = calc_velocity()
-		set_up_direction(FLOOR_NORMAL)
-		move_and_slide()
+		return
 
 
 func enter_wait():
+	speed = Vector2.ZERO
 	rng.randomize()
 	change_animation("Idle", true)
 	$StateTimer.start(rng.randf_range(1.0, 5.0))
 	await $StateTimer.timeout
 	change_state("walk")
+	return
 
 
 func enter_talk():
 	change_animation("Idle") #might cause issues with idle animation restarting
+	speed = Vector2.ZERO
 	look_at_node(pc)
 	pc.inspect_target = self
 	if get_tree().get_root().get_node("World/UILayer").has_node("DialogBox"):
@@ -171,6 +179,7 @@ func _input(event):
 	and dialog_json != "" and conversation != "" and state != "talk":
 		predialog_state = state
 		change_state("talk")
+		return
 
 
 func look_at_node(node):
@@ -213,10 +222,10 @@ func get_next_waypoint() -> Node:
 func walk_to_waypoint(index):
 	set_target(waypoints[index])
 	cached_state = "talk"
-	change_state("walkto")
 	if dialog_box:
 		dialog_box.busy = true
-	
+	change_state("walkto")
+	return
 	
 
 

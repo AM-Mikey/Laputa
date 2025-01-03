@@ -10,6 +10,7 @@ func state_process():
 	
 	if em.velocity.y == 0:
 		sm.change_state("Active")
+		return
 
 
 func calc_velocity() -> Vector2:

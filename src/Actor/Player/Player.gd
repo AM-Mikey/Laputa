@@ -33,6 +33,7 @@ var can_input = true
 var enemies_touching = []
 var is_on_ssp = false
 var is_crouching = false
+var is_forced_crouching = false
 var is_in_water = false
 var is_in_coyote = false
 var dead = false
@@ -70,6 +71,7 @@ func disable():
 	can_input = false
 	invincible = true
 	mm.change_state("disabled")
+	return
 
 func enable():
 	disabled = false
@@ -77,8 +79,10 @@ func enable():
 	invincible = false
 	if mm.cached_state:
 		mm.change_state(mm.cached_state.name.to_lower())
+		return
 	else:
 		mm.change_state("run")
+		return
 
 
 ### ACTIONS
@@ -86,6 +90,7 @@ func enable():
 func move_to(pos):
 	mm.move_target = pos
 	mm.change_state("moveto")
+	return
 
 func do_step(): #TODO: this is a failsafe, only works with run animations. for some reason it was playing twice on animation blend time
 	if $Sprite2D.frame_coords.x == 1 or $Sprite2D.frame_coords.x == 7:
@@ -93,10 +98,6 @@ func do_step(): #TODO: this is a failsafe, only works with run animations. for s
 
 func hit(damage, knockback_direction):
 	if not disabled and not invincible:
-		if knockback_direction != Vector2.ZERO:
-			#print("Knockback in Dir: " + str(knockback_direction))
-			mm.snap_vector = Vector2.ZERO
-			mm.change_state("knockback")
 		if damage > 0:
 			hp -= damage
 			am.play("pc_hurt")
@@ -122,6 +123,10 @@ func hit(damage, knockback_direction):
 					$GunManager.level_down(false)
 					
 				emit_signal("guns_updated", guns.get_children())
+		if knockback_direction != Vector2.ZERO:
+			#print("Knockback in Dir: " + str(knockback_direction))
+			mm.snap_vector = Vector2.ZERO
+			mm.change_state("knockback")
 
 func do_iframes():
 	invincible = true
@@ -164,10 +169,16 @@ func die():
 
 ### SIGNALS ###
 
-func _on_SSPDetector_body_entered(body):
+func _on_SSPDetector_body_entered(_body):
 	is_on_ssp = true
+	if not $PushLeft.disabled: 
+		$PushLeft.set_deferred("disabled", true)
+		$PushRight.set_deferred("disabled", true)
 func _on_SSPDetector_body_exited(_body):
 	is_on_ssp = false
+	if $PushLeft.disabled: 
+		$PushLeft.set_deferred("disabled", false)
+		$PushRight.set_deferred("disabled", false)
 
 func _on_ItemDetector_area_entered(area):
 	if disabled: return

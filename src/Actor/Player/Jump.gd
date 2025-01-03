@@ -12,8 +12,7 @@ func state_process():
 	#jump interrupt
 	var is_jump_interrupted = false
 	if mm.velocity.y < 0.0:
-		if not Input.is_action_pressed("jump") and pc.controller_id == 0 or \
-		not Input.is_action_pressed("sasuke_jump") and pc.controller_id == 1:
+		if not Input.is_action_pressed("jump"):
 			is_jump_interrupted = true
 
 	set_player_directions()
@@ -38,6 +37,7 @@ func state_process():
 		mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
 		#mm.bonk("feet")
 		mm.change_state("run")
+		return
 
 func set_player_directions():
 	var input_dir = Vector2(
@@ -134,9 +134,23 @@ func get_vframe() -> int:
 
 
 
-### STATES ###
+### STATES ###			#TODO: juniper's hurtbox becomes much smaller when jumping
 
 func enter():
-	pass
+	pc.get_node("CollisionShape2D").set_deferred("disabled", true)
+	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
+	pc.get_node("PushLeft").set_deferred("disabled", false)
+	pc.get_node("PushRight").set_deferred("disabled", false)
+	pc.get_node("JumpCeiling").set_deferred("disabled", false)
+	pc.get_node("JumpFloor").set_deferred("disabled", false)
+	pc.get_node("SSPDetector/CollisionShape2D2").set_deferred("disabled", false)
+	
+
 func exit():
-	pass
+	pc.get_node("CollisionShape2D").set_deferred("disabled", false)
+	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
+	pc.get_node("PushLeft").set_deferred("disabled", true)
+	pc.get_node("PushRight").set_deferred("disabled", true)
+	pc.get_node("JumpCeiling").set_deferred("disabled", true)
+	pc.get_node("JumpFloor").set_deferred("disabled", true)
+	pc.get_node("SSPDetector/CollisionShape2D2").set_deferred("disabled", true)

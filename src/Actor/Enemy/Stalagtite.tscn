@@ -1,10 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvmfxj76jww0o"]
+[gd_scene load_steps=12 format=3 uid="uid://dvmfxj76jww0o"]
 
 [ext_resource type="Texture2D" uid="uid://c1wouwbovbivr" path="res://assets/Actor/Enemy/Stalagtite.png" id="2"]
 [ext_resource type="Script" path="res://src/Actor/Enemy/Stalagtite.gd" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(14, 16)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pbcgp"]
+radius = 4.0
+height = 14.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o0pis"]
 size = Vector2(14, 16)
@@ -118,6 +122,12 @@ editor_hidden = false
 position = Vector2(0, -8)
 shape = SubResource("1")
 
+[node name="GroundedCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_pbcgp")
+disabled = true
+
 [node name="Standable" type="CharacterBody2D" parent="."]
 collision_layer = 512
 collision_mask = 0
@@ -137,7 +147,7 @@ position = Vector2(0, -8)
 texture = ExtResource("2")
 hframes = 8
 vframes = 3
-frame = 15
+frame = 8
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 1000)

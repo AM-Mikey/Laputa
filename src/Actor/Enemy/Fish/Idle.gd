@@ -11,6 +11,7 @@ func state_process():
 		if collision.get_collision_layer_value(1): #player
 			print("got target")
 			sm.change_state("attack")
+			return
 
 func enter():
 	if em.can_move_x:

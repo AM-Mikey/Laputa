@@ -38,6 +38,7 @@ func state_process():
 		mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
 		#mm.bonk("feet")
 		mm.change_state("run")
+		return
 
 
 func set_player_directions():
@@ -147,6 +148,20 @@ func get_vframe() -> int:
 ### STATE ###
 
 func enter():
-	pass
+	pc.get_node("CollisionShape2D").set_deferred("disabled", true)
+	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
+	pc.get_node("PushLeft").set_deferred("disabled", false)
+	pc.get_node("PushRight").set_deferred("disabled", false)
+	pc.get_node("JumpCeiling").set_deferred("disabled", false)
+	pc.get_node("JumpFloor").set_deferred("disabled", false)
+	pc.get_node("SSPDetector/CollisionShape2D2").set_deferred("disabled", false)
+	
+
 func exit():
-	pass
+	pc.get_node("CollisionShape2D").set_deferred("disabled", false)
+	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
+	pc.get_node("PushLeft").set_deferred("disabled", true)
+	pc.get_node("PushRight").set_deferred("disabled", true)
+	pc.get_node("JumpCeiling").set_deferred("disabled", true)
+	pc.get_node("JumpFloor").set_deferred("disabled", true)
+	pc.get_node("SSPDetector/CollisionShape2D2").set_deferred("disabled", true)

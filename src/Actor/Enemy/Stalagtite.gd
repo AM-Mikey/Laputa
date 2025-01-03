@@ -1,5 +1,9 @@
 extends Enemy
 
+const TX_0 = preload("res://assets/Actor/Enemy/Stalagtite.png")
+const TX_1 = preload("res://assets/Actor/Enemy/Stalagtite1.png")
+const TX_2 = preload("res://assets/Actor/Enemy/Stalagtite2.png")
+
 var target: Node
 
 var move_dir = Vector2.ZERO
@@ -12,25 +16,26 @@ var drop_damage: int
 var wait_time: float
 
 func setup():
-	print("doing setup")
+	#print("doing setup")
 	match difficulty:
 		0: 
 			hp = 2
 			reward = 2
 			drop_damage = 4
 			wait_time = 0.5
-			$Sprite2D.self_modulate = Color.GREEN_YELLOW #replace with palette swap shader
+			$Sprite2D.texture = TX_0
 		1: 
 			hp = 2
 			reward = 2
 			drop_damage = 4
 			wait_time = 0.5
+			$Sprite2D.texture = TX_1
 		2:
 			hp = 3
 			reward = 4
 			drop_damage = 6
 			wait_time = 0.1
-			$Sprite2D.self_modulate = Color.RED
+			$Sprite2D.texture = TX_2
 	damage_on_contact = base_damage
 	speed = Vector2.ZERO
 	base_gravity = gravity
@@ -54,6 +59,7 @@ func do_hang():
 		if collider.get_collision_layer_value(1):
 			target = collider
 			change_state("hangactive")
+			return
 
 
 func enter_hangactive():
@@ -69,21 +75,22 @@ func do_drop():
 	if is_on_floor():
 		if difficulty == 0:
 			change_state("stake")
+			return
 		else:
 			change_state("squirm")
+			return
 
 
 func enter_squirm():
 	$RayCast2D.queue_free()
 	damage_on_contact = base_damage
 	
-	$CollisionShape2D.shape.size = Vector2(14, 14)
-	$CollisionShape2D.position += Vector2(0, 1)
+	$CollisionShape2D.set_deferred("disabled", true)
+	$GroundedCollision.set_deferred("disabled", false)
 	
 	match difficulty:
 		1:
-			rng.randomize()
-			move_dir = Vector2(sign(rng.randf_range(-1.0, 1.0)), 0) #random
+			move_dir = Vector2(sign(position.x - target.position.x), 0) #opposite direction of player
 		2:
 			move_dir = Vector2(sign(target.position.x - position.x), 0) #direction of player
 	match move_dir:

@@ -1,8 +1,7 @@
 extends Enemy
 
-var starting_state = "walk"
 @export var move_dir = Vector2.LEFT
-@export var idle_max_time = 5.0
+@export var wait_max_time = 5.0
 @export var walk_max_time = 10.0
 @export var defend_time = 0.4
 
@@ -10,11 +9,11 @@ var starting_state = "walk"
 @onready var bb = $BulletBlocker
 
 func setup():
-	change_state(starting_state)
 	hp = 6
 	reward = 2
 	damage_on_contact = 2
 	speed = Vector2(50, 50)
+	change_state("walk")
 
 func bullet_block(state: bool):
 	bb.monitoring = state
@@ -41,20 +40,20 @@ func enter_walk():
 	rng.randomize()
 	$StateTimer.start(rng.randf_range(1.0, walk_max_time))
 	await $StateTimer.timeout
-	change_state("idle")
+	change_state("wait")
 
 func do_walk():
-	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
-		change_state("idle")
-	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
-		change_state("idle")
+	if (not $FloorDetectorL.is_colliding() and move_dir.x < 0) \
+	or (not $FloorDetectorR.is_colliding() and move_dir.x > 0):
+		change_state("wait")
+		return
 	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
 		velocity = calc_velocity(velocity, move_dir, speed)
 		set_up_direction(FLOOR_NORMAL)
 		move_and_slide()
 
 
-func enter_idle():
+func enter_wait():
 	rng.randomize()
 	match move_dir:
 		Vector2.LEFT: 
@@ -65,7 +64,7 @@ func enter_idle():
 			ap.play("IdleRight")
 			bullet_block(false)
 			#collision_layer = 2 #enemy
-	$StateTimer.start(rng.randf_range(1.0, idle_max_time))
+	$StateTimer.start(rng.randf_range(1.0, wait_max_time))
 	await $StateTimer.timeout
 	change_state("walk")
 

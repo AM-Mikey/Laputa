@@ -37,3 +37,4 @@ func do_fly():
 	if (abs(velocity.x) < 1 and abs(move_dir.x) > 0) or (abs(velocity.y) < 1 and abs(move_dir.y) > 0): #speed in direction you were goin is 0
 		move_dir *= -1 #flip
 		change_state("idle")
+		return

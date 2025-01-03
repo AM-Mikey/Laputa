@@ -110,7 +110,7 @@ position = Vector2(0, -16)
 texture = ExtResource("3")
 hframes = 4
 vframes = 2
-frame = 5
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -118,7 +118,7 @@ libraries = {
 }
 
 [node name="FloorDetectorL" type="RayCast2D" parent="."]
-position = Vector2(-6, 0)
+position = Vector2(-7, 0)
 target_position = Vector2(0, 8)
 collision_mask = 8
 collide_with_areas = true

@@ -35,6 +35,7 @@ func do_idle():
 	var collision = $RayCast2D.get_collider()
 	if collision != null && collision.is_in_group("Players"): #todo check bit instead
 		change_state("attack")
+		return
 
 func enter_attack():
 	#beetle_actor.animated_sprite.playing = true
@@ -54,6 +55,7 @@ func do_attack():
 	if velocity == Vector2.ZERO:
 		#wall was hit
 		change_state("reset")
+		return
 	#once wall is hit change state to reset state
 
 func enter_reset():

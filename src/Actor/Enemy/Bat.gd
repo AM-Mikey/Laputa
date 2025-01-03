@@ -118,8 +118,10 @@ func enter_idle():
 func do_idle():
 	if can_flap and position.y > target_pos.y: #lower than target
 		change_state("flap")
+		return
 	if is_on_floor():
 		change_state("flap")
+		return
 
 func enter_flap():
 	#this isnt the best way to do this, but returns a good result.

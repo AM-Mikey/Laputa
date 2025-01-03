@@ -6,6 +6,7 @@ extends State
 func state_process():
 	if not ap.is_playing():
 		sm.change_state("Fall")
+		return
 	
 	
 	

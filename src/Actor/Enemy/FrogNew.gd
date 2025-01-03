@@ -38,6 +38,7 @@ func do_targeting():
 	if is_on_floor():
 		if $JumpTimer.time_left == 0.0:
 			change_state("jump")
+			return
 		else:
 			look_dir = Vector2(sign(target.get_global_position().x - global_position.x), 0)
 
@@ -54,8 +55,10 @@ func do_jump():
 		$CroakTimer.start(croak_time)
 		if target == null:
 			change_state("idle")
+			return
 		else:
 			change_state("targeting")
+			return
 
 ### SFX ###
 

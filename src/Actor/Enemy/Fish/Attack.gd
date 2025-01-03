@@ -9,6 +9,7 @@ extends State
 func state_process():
 	if em.position.y <= em.jump_pos.y:
 		sm.change_state("fall")
+		return
 
 	em.set_velocity(calc_velocity())
 	em.move_and_slide()

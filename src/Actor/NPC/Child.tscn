@@ -3,8 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://c0h0cekifebk3" path="res://assets/Actor/NPC/Child.png" id="1"]
 [ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="1_ag8g5"]
 
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(16, 24)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1e851"]
+radius = 6.0
+height = 24.0
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(16, 24)
@@ -59,7 +60,7 @@ speed = Vector2(100, 100)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12)
-shape = SubResource("1")
+shape = SubResource("CapsuleShape2D_1e851")
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0

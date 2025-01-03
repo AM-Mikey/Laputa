@@ -25,13 +25,17 @@ func get_move_dir() -> Vector2:
 ### STATES ###
 
 func enter():
-	pc.get_node("CollisionShape2D").disabled = true
+	pc.get_node("CollisionShape2D").set_deferred("disabled", true)
+	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
 	pc.get_node("HurtDetector").monitoring = false
 	pc.get_node("ItemDetector").monitoring = false
+	pc.get_node("CrouchDetector").monitoring = false
 
 func exit():
 	pc.is_in_water = false
 	mm.velocity = Vector2.ZERO
-	pc.get_node("CollisionShape2D").disabled = false
+	pc.get_node("CollisionShape2D").set_deferred("disabled", false)
+	pc.get_node("CrouchingCollision").set_deferred("disabled", false)
 	pc.get_node("HurtDetector").monitoring = true
 	pc.get_node("ItemDetector").monitoring = true
+	pc.get_node("CrouchDetector").monitoring = true

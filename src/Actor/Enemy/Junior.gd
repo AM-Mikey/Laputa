@@ -42,8 +42,10 @@ func enter_walk():
 func do_walk():
 	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
 		change_state("idle")
+		return
 	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
 		change_state("idle")
+		return
 	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
 		velocity = calc_velocity(velocity, move_dir, speed)
 		set_up_direction(FLOOR_NORMAL)

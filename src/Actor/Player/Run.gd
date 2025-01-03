@@ -24,15 +24,23 @@ func state_process():
 
 	mm.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
 	animate()
-	
-	
-	if Input.is_action_pressed("jump"):
-		mm.jump()
-	
+
+	if Input.is_action_pressed("look_down"):
+		pc.is_crouching = true
+		pc.get_node("CollisionShape2D").set_deferred("disabled", true)
+		pc.get_node("CrouchingCollision").set_deferred("disabled", false)
+	elif not pc.is_forced_crouching:
+		pc.is_crouching = false
+		pc.get_node("CollisionShape2D").set_deferred("disabled", false)
+		pc.get_node("CrouchingCollision").set_deferred("disabled", true)
+		
 	if not pc.is_on_floor() and not pc.is_in_coyote:
 		pc.is_in_coyote = true
 		mm.do_coyote_time()
 
+	if Input.is_action_pressed("jump"):
+		mm.jump()
+		return
 
 func set_player_directions():
 	var input_dir = Vector2(
@@ -118,7 +126,10 @@ func calc_velocity():
 	out.y += mm.gravity * get_physics_process_delta_time()
 	#X
 	if pc.move_dir.x != 0.0:
-		out.x = min(abs(out.x) + mm.acceleration, mm.speed.x) * pc.move_dir.x
+		if pc.is_crouching:
+			out.x = min(abs(out.x) + mm.acceleration, mm.crouch_speed) * pc.move_dir.x
+		else:
+			out.x = min(abs(out.x) + mm.acceleration, mm.speed.x) * pc.move_dir.x
 	else: #friction slide
 		out.x = lerp(out.x, 0.0, mm.ground_cof)
 	if abs(out.x) < mm.min_x_velocity: #clamp velocity

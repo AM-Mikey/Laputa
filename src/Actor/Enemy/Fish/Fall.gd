@@ -19,6 +19,7 @@ func state_process():
 
 		await tween.finished
 		sm.change_state("idle")
+		return
 
 	
 func calc_velocity() -> Vector2:

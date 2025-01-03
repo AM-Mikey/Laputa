@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="1_15sr2"]
 [ext_resource type="Texture2D" uid="uid://c2md3q8lfgcxy" path="res://assets/Actor/NPC/Nun.png" id="2"]
 
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(16, 28)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_boymr"]
+radius = 6.0
+height = 28.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ejmb6"]
 size = Vector2(16, 28)
@@ -58,7 +59,7 @@ editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -14)
-shape = SubResource("1")
+shape = SubResource("CapsuleShape2D_boymr")
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0
@@ -73,7 +74,6 @@ position = Vector2(0, -16)
 texture = ExtResource("2")
 hframes = 4
 vframes = 2
-frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -81,13 +81,13 @@ libraries = {
 }
 
 [node name="FloorDetectorL" type="RayCast2D" parent="."]
-position = Vector2(-8, 0)
-target_position = Vector2(0, 8)
+position = Vector2(-8, -16)
+target_position = Vector2(0, 24)
 collision_mask = 8
 collide_with_areas = true
 
 [node name="FloorDetectorR" type="RayCast2D" parent="."]
-position = Vector2(8, 0)
-target_position = Vector2(0, 8)
+position = Vector2(8, -16)
+target_position = Vector2(0, 24)
 collision_mask = 8
 collide_with_areas = true

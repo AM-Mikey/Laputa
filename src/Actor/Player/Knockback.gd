@@ -18,6 +18,7 @@ func state_process():
 		mm.knockback_velocity = Vector2.ZERO
 		#pc.knockback = false
 		mm.change_state(mm.cached_state.name.to_lower())
+		return
 
 
 
@@ -68,6 +69,20 @@ func get_move_velocity(velocity, move_dir):
 ### STATES ###
 
 func enter():
-	pass
+	pc.get_node("CollisionShape2D").set_deferred("disabled", true)
+	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
+	pc.get_node("PushLeft").set_deferred("disabled", false)
+	pc.get_node("PushRight").set_deferred("disabled", false)
+	pc.get_node("JumpCeiling").set_deferred("disabled", false)
+	pc.get_node("JumpFloor").set_deferred("disabled", false)
+	pc.get_node("SSPDetector/CollisionShape2D2").set_deferred("disabled", false)
+	
+
 func exit():
-	pass
+	pc.get_node("CollisionShape2D").set_deferred("disabled", false)
+	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
+	pc.get_node("PushLeft").set_deferred("disabled", true)
+	pc.get_node("PushRight").set_deferred("disabled", true)
+	pc.get_node("JumpCeiling").set_deferred("disabled", true)
+	pc.get_node("JumpFloor").set_deferred("disabled", true)
+	pc.get_node("SSPDetector/CollisionShape2D2").set_deferred("disabled", true)

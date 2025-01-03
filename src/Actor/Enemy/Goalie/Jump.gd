@@ -8,6 +8,7 @@ func state_process():
 #		ap.play("Fall")
 	if em.is_on_floor():
 		sm.change_state("Active")
+		return
 
 	em.set_velocity(calc_velocity())
 	em.move_and_slide()

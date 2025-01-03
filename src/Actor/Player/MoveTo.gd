@@ -53,6 +53,7 @@ func state_process():
 		#mm.change_state("run")
 		print("moveto state clear")
 		mm.change_state(mm.cached_state.name.to_lower())
+		return
 
 
 func animate():
