@@ -83,6 +83,30 @@ func _physics_process(_delta):
 	speed = Vector2(90, 180) if not get_parent().is_in_water else Vector2(60, 140)
 	gravity = 300.0 if not get_parent().is_in_water else 150.0
 	
+	#angled ceiling check
+	if current_state == states["jump"] \
+	or current_state == states["longjump"] \
+	or current_state == states["fall"] \
+	or current_state ==  states["knockback"]:
+		if pc.get_node("AngledCeilingDetector").get_collider():
+			var col_normal = pc.get_node("AngledCeilingDetector").get_collision_normal()
+			#print(col_normal)
+			if col_normal.x < 0.0:
+				#pc.get_node("PushLeft").set_deferred("disabled", true)
+				var truth = pc.get_node("CeilingBypass").is_colliding()
+				#print(truth)
+				if truth:
+					pc.get_node("PushRight").set_deferred("disabled", true)
+					print("COL OFF")
+				else:
+					pc.get_node("PushRight").set_deferred("disabled", false)
+					print("COL ON")
+			else:
+				#pc.get_node("PushLeft").set_deferred("disabled", false)	
+				pc.get_node("PushRight").set_deferred("disabled", false)
+				print("COL ON")
+			
+			
 	if pc.is_on_ceiling():
 		if not on_ceiling:
 			var ceiling_normal = pc.get_slide_collision(pc.get_slide_collision_count() - 1).get_normal()

@@ -1,30 +1,40 @@
-[gd_scene load_steps=9 format=3 uid="uid://booissmuuglih"]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="1_4uhn8"]
-[ext_resource type="TileSet" uid="uid://dpf0qbch10ic" path="res://src/Tile/Debug.tres" id="2_s4ctt"]
-[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
-[ext_resource type="Texture2D" uid="uid://u0arku8ueeeh" path="res://assets/Background/ParalaxTest3.png" id="4_ec3uo"]
-[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="5_sjslv"]
-[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/ActorSpawn.tscn" id="6_dcw0l"]
-[ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="6_mcn17"]
-[ext_resource type="PackedScene" uid="uid://dim3av368jfya" path="res://src/Utility/Waypoint.tscn" id="9_20ig1"]
+[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="2_s4ctt"]
+[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="4_8j87v"]
+[ext_resource type="Texture2D" path="res://assets/Background/ParalaxTest3.png" id="4_ec3uo"]
+[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="5_sjslv"]
+[ext_resource type="PackedScene" path="res://src/Editor/ActorSpawn.tscn" id="6_dcw0l"]
+[ext_resource type="PackedScene" path="res://src/Effect/Light/SunLight.tscn" id="6_mcn17"]
+[ext_resource type="Script" path="res://src/Effect/Light/SunLight.gd" id="7_xa0op"]
+[ext_resource type="PackedScene" path="res://src/Utility/Waypoint.tscn" id="9_20ig1"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="9_ntogj"]
+[ext_resource type="Script" path="res://src/Editor/ActorSpawn.gd" id="11_2a842"]
+[ext_resource type="Script" path="res://src/Utility/Waypoint.gd" id="13_4p20k"]
 
 [node name="DefaultGodot4" type="Node2D"]
 script = ExtResource("1_4uhn8")
+editor_hidden = false
 level_name = "DefaultGodot4"
+level_type = 0
 tile_set = ExtResource("2_s4ctt")
 music = "shop"
 dialog_json = "res://src/Dialog/Village.json"
 conversation = "cutscene_test"
 
-[node name="LevelLimiter" parent="." instance=ExtResource("3_t226a")]
+[node name="LevelLimiter" type="MarginContainer" parent="." instance=ExtResource("3_t226a")]
 offset_left = -112.0
 offset_top = -256.0
 offset_right = 704.0
 offset_bottom = 192.0
+mouse_filter = 2
+script = ExtResource("4_8j87v")
 texture = ExtResource("4_ec3uo")
 layers = 4
 parallax_near = 1.0
+parallax_far = 0.0
 focus = 2
 tile_mode = 0
 
@@ -43,7 +53,7 @@ layer_1/z_index = -1
 layer_1/tile_data = PackedInt32Array(-131056, 0, 4, -65520, 0, 5)
 layer_2/name = "Front"
 layer_2/z_index = 1
-layer_2/tile_data = PackedInt32Array(0, 0, 8, 1, 0, 8, 2, 0, 8, 3, 0, 8, 6, 0, 8, 7, 0, 8, 8, 0, 8, 12, 0, 8, 13, 0, 8, 14, 0, 8, 15, 0, 8, 16, 524288, 8, 17, 0, 8, 18, 0, 8, 19, 0, 8, 25, 0, 8, 26, 0, 8, 27, 0, 8, 28, 0, 8, 29, 0, 8, 30, 0, 8, -65510, 0, 8, -65509, 0, 8, -393202, 0, 8, -393203, 0, 8, -393210, 0, 8, -393211, 0, 8, -393212, 0, 8, -393213, 0, 8, -327677, 262144, 9, -327675, 262144, 11, -327676, 0, 8, -196590, 0, 9, -196589, 0, 9, -589806, 0, 8, -589805, 0, 8, -589804, 0, 8, -589803, 0, 8, -786411, 0, 8, -786415, 0, 8, -589799, 0, 8, -589798, 0, 8, -589797, 0, 8, -655333, 65536, 12, -720869, 0, 8, -786405, 0, 8, -589800, 0, 8, 65535, 0, 8, 65534, 0, 8, 65533, 0, 8, 65532, 0, 8, 65531, 0, 8, 65530, 0, 8, 65529, 0, 8, 131065, 0, 8, 131066, 0, 8, 131067, 0, 8, 131068, 0, 8, 131069, 0, 8, 131070, 0, 8, 131071, 0, 8, 196607, 0, 8, 196606, 0, 8, 196605, 0, 8, 196604, 0, 8, 196603, 0, 8, 196602, 0, 8, 196601, 0, 8, -7, 0, 8, -65543, 0, 8, -131079, 0, 8, -196615, 0, 8, -131061, 0, 8, -131062, 0, 8, -131063, 0, 8, -131064, 0, 8, -655336, 0, 8, -589802, 0, 8, 720896, 0, 8, 720897, 0, 8, 720898, 0, 8, 720899, 0, 8, 720900, 0, 8, 720901, 0, 8, 720902, 0, 8, 720903, 0, 8, 720904, 0, 8, 720905, 0, 8, 720906, 0, 8, 720907, 0, 8, 720908, 0, 8, 720909, 0, 8, 720910, 0, 8, 720911, 0, 8, 720912, 0, 8, 720913, 0, 8, 720914, 0, 8, 720915, 0, 8, 720916, 0, 8, 720917, 0, 8, 720918, 0, 8, 720919, 0, 8, 720920, 0, 8, 720921, 0, 8, 720922, 0, 8, 720923, 0, 8, 720924, 0, 8, 720925, 0, 8, 262169, 0, 8, 327705, 0, 8, 393241, 0, 8, 393240, 0, 8, 393239, 0, 8, 393238, 0, 8, 393237, 0, 8, 393236, 0, 8, 393235, 0, 8, 393234, 0, 8, 393233, 0, 8, 393232, 0, 8, 393231, 0, 8, 393230, 0, 8, 393229, 0, 8, 393228, 0, 8, 393227, 0, 8, 393226, 0, 8, 393225, 0, 8, 393224, 0, 8, 393223, 0, 8, 393222, 0, 8, 393221, 0, 8, 393220, 0, 8, 393219, 0, 8, 327683, 0, 8, 327682, 0, 8, 327681, 0, 8, 327680, 0, 8, 262144, 0, 8, 196608, 0, 8, 131072, 0, 8, 5, 0, 8, 196612, 0, 8, 196613, 0, 8, 36, 0, 8, 37, 0, 8, 38, 0, 8, 39, 0, 8, 40, 0, 8, 41, 0, 8, 42, 0, 8, 43, 0, 8, -65493, 0, 8, -131029, 0, 8, 35, 0, 8, 34, 0, 8, 33, 0, 8, 65566, 0, 8, 131102, 0, 8, 196638, 0, 8, 196639, 0, 8, 196640, 0, 8, 196641, 0, 8, 196642, 0, 8, 196643, 0, 8, 196644, 0, 8, 196645, 0, 8, 196646, 0, 8, 196647, 0, 8, 196648, 0, 8, 196649, 0, 8, 196650, 0, 8, 196651, 0, 8, 9, 0, 8, 10, 0, 8, 11, 0, 8, -196600, 131072, 10, -196599, 196608, 10, -196598, 262144, 10, -196597, 327680, 10, 327696, 131072, 10, 327697, 196608, 10, 327698, 262144, 10, 327699, 327680, 10, -65511, 262144, 8, -65508, 262144, 10, -65507, 327680, 10, -327674, 327680, 11, -65542, 458752, 8, -6, 458752, 9, -196588, 0, 9, -196587, 0, 9, -393218, 524288, 8, -262146, 524288, 8, -327679, 524288, 8, -458751, 524288, 8, -65497, 0, 8, -131033, 0, 8, -196569, 0, 8, -262143, 262144, 9, -196612, 196608, 11, -196611, 262144, 11, -196610, 327680, 11, -196613, 131072, 11, 65545, 393216, 10, 131081, 393216, 11, 196618, 393216, 10, 262154, 393216, 11, 262155, 0, 8, 196619, 0, 8, 131083, 0, 8, 65547, 0, 8, 65546, 0, 8, 131082, 0, 8, -196603, 0, 9, -196602, 0, 9)
+layer_2/tile_data = PackedInt32Array(0, 0, 8, 1, 0, 8, 2, 0, 8, 3, 0, 8, 6, 0, 8, 7, 0, 8, 8, 0, 8, 12, 0, 8, 13, 0, 8, 14, 0, 8, 15, 0, 8, 16, 524288, 8, 17, 0, 8, 18, 0, 8, 19, 0, 8, 25, 0, 8, 26, 0, 8, 27, 0, 8, 28, 0, 8, 29, 0, 8, 30, 0, 8, -65510, 0, 8, -65509, 0, 8, -393202, 0, 8, -393203, 0, 8, -393210, 0, 8, -393211, 0, 8, -393212, 0, 8, -327675, 262144, 11, -327676, 0, 8, -196590, 0, 9, -196589, 0, 9, -589806, 0, 8, -589805, 0, 8, -589804, 0, 8, -589803, 0, 8, -786411, 0, 8, -786415, 0, 8, -589799, 0, 8, -589798, 0, 8, -589797, 0, 8, -655333, 65536, 12, -720869, 0, 8, -786405, 0, 8, -589800, 0, 8, 65535, 0, 8, 65534, 0, 8, 65533, 0, 8, 65532, 0, 8, 65531, 0, 8, 65530, 0, 8, 65529, 0, 8, 131065, 0, 8, 131066, 0, 8, 131067, 0, 8, 131068, 0, 8, 131069, 0, 8, 131070, 0, 8, 131071, 0, 8, 196607, 0, 8, 196606, 0, 8, 196605, 0, 8, 196604, 0, 8, 196603, 0, 8, 196602, 0, 8, 196601, 0, 8, -7, 0, 8, -65543, 0, 8, -131079, 0, 8, -196615, 0, 8, -131061, 0, 8, -131062, 0, 8, -131063, 0, 8, -131064, 0, 8, -655336, 0, 8, -589802, 0, 8, 720896, 0, 8, 720897, 0, 8, 720898, 0, 8, 720899, 0, 8, 720900, 0, 8, 720901, 0, 8, 720902, 0, 8, 720903, 0, 8, 720904, 0, 8, 720905, 0, 8, 720906, 0, 8, 720907, 0, 8, 720908, 0, 8, 720909, 0, 8, 720910, 0, 8, 720911, 0, 8, 720912, 0, 8, 720913, 0, 8, 720914, 0, 8, 720915, 0, 8, 720916, 0, 8, 720917, 0, 8, 720918, 0, 8, 720919, 0, 8, 720920, 0, 8, 720921, 0, 8, 720922, 0, 8, 720923, 0, 8, 720924, 0, 8, 720925, 0, 8, 262169, 0, 8, 327705, 0, 8, 393241, 0, 8, 393240, 0, 8, 393239, 0, 8, 393238, 0, 8, 393237, 0, 8, 393236, 0, 8, 393235, 0, 8, 393234, 0, 8, 393233, 0, 8, 393232, 0, 8, 393231, 0, 8, 393230, 0, 8, 393229, 0, 8, 393228, 0, 8, 393227, 0, 8, 393226, 0, 8, 393225, 0, 8, 393224, 0, 8, 393223, 0, 8, 393222, 0, 8, 393221, 0, 8, 393220, 0, 8, 393219, 0, 8, 327683, 0, 8, 327682, 0, 8, 327681, 0, 8, 327680, 0, 8, 262144, 0, 8, 196608, 0, 8, 131072, 0, 8, 5, 0, 8, 196612, 0, 8, 196613, 0, 8, 36, 0, 8, 37, 0, 8, 38, 0, 8, 39, 0, 8, 40, 0, 8, 41, 0, 8, 42, 0, 8, 43, 0, 8, -65493, 0, 8, -131029, 0, 8, 35, 0, 8, 34, 0, 8, 33, 0, 8, 65566, 0, 8, 131102, 0, 8, 196638, 0, 8, 196639, 0, 8, 196640, 0, 8, 196641, 0, 8, 196642, 0, 8, 196643, 0, 8, 196644, 0, 8, 196645, 0, 8, 196646, 0, 8, 196647, 0, 8, 196648, 0, 8, 196649, 0, 8, 196650, 0, 8, 196651, 0, 8, 9, 0, 8, 10, 0, 8, 11, 0, 8, -196600, 131072, 10, -196599, 196608, 10, -196598, 262144, 10, -196597, 327680, 10, 327696, 131072, 10, 327697, 196608, 10, 327698, 262144, 10, 327699, 327680, 10, -65511, 262144, 8, -65508, 262144, 10, -65507, 327680, 10, -327674, 327680, 11, -6, 0, 8, -196588, 0, 9, -196587, 0, 9, -393218, 524288, 8, -262146, 524288, 8, -327679, 524288, 8, -458751, 524288, 8, -65497, 0, 8, -131033, 0, 8, -196569, 0, 8, -262143, 327680, 9, -196612, 196608, 11, -196611, 262144, 11, -196610, 327680, 11, -196613, 131072, 11, 65545, 393216, 10, 131081, 393216, 11, 196618, 393216, 10, 262154, 393216, 11, 262155, 0, 8, 196619, 0, 8, 131083, 0, 8, 65547, 0, 8, 65546, 0, 8, 131082, 0, 8, -196603, 0, 9, -196602, 0, 9, -196605, 262144, 9, -393184, 262144, 9, -393183, 0, 8, -393182, 0, 8, -393180, 0, 8, -393179, 0, 8, -393178, 0, 8, -393177, 327680, 9, -589789, 0, 8, -589788, 262144, 11, -589787, 327680, 11, -655324, 262144, 10, -655323, 327680, 10, -458714, 0, 8, -458713, 0, 8, -458715, 0, 8, -458716, 0, 8, -655325, 0, 8, -196568, 0, 8, -458720, 0, 8, -458719, 0, 8, -458718, 0, 8, -655326, 196608, 10, -589790, 196608, 11, -655327, 131072, 10, -589791, 131072, 11, -196578, 0, 8, -131042, 0, 8, -65506, 0, 8, -196577, 0, 8, -196576, 0, 8, -196575, 0, 8, -196574, 0, 8, -196573, 0, 8, -196572, 0, 8, -262114, 0, 8)
 layer_3/name = "FarFront"
 layer_3/z_index = 2
 layer_3/tile_data = PackedInt32Array(65535, 0, 12, 65534, 0, 12, -65534, 0, 12, -65533, 0, 12, -131069, 0, 12, -65531, 0, 12)
@@ -54,16 +64,29 @@ layer_3/tile_data = PackedInt32Array(65535, 0, 12, 65534, 0, 12, -65534, 0, 12, 
 
 [node name="Triggers" type="Node2D" parent="."]
 
-[node name="SunLight" parent="." instance=ExtResource("6_mcn17")]
+[node name="SunLight" type="Area2D" parent="." groups=["SunLights"] instance=ExtResource("6_mcn17")]
 position = Vector2(35, -198)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("7_xa0op")
+light_color = Color(0.5, 0.5, 0.5, 1)
+shadow_color = Color(0, 0, 0, 1)
+modulate_color = Color(0.5, 0.5, 0.5, 1)
 
 [node name="Spawns" type="Node2D" parent="."]
 
-[node name="SpawnPoint" parent="Spawns" instance=ExtResource("5_sjslv")]
+[node name="SpawnPoint" type="Area2D" parent="Spawns" groups=["SpawnPoints"] instance=ExtResource("5_sjslv")]
 position = Vector2(8, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("9_ntogj")
 
-[node name="Child" parent="Spawns" instance=ExtResource("6_dcw0l")]
+[node name="Child" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+modulate = Color(1, 1, 1, 0.75)
 position = Vector2(-40, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("11_2a842")
 actor_path = "res://src/Actor/NPC/Child.tscn"
 properties = {
 "conversation": ["test2", 4],
@@ -75,8 +98,12 @@ properties = {
 "voiced": [true, 1]
 }
 
-[node name="Beetle" parent="Spawns" instance=ExtResource("6_dcw0l")]
+[node name="Beetle" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+modulate = Color(1, 1, 1, 0.75)
 position = Vector2(-248, -112)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("11_2a842")
 actor_path = "res://src/Actor/Enemy/Beetle.tscn"
 properties = {
 "debug": [false, 1],
@@ -86,8 +113,12 @@ properties = {
 "speed": [Vector2(150, 150), 5]
 }
 
-[node name="Frog" parent="Spawns" instance=ExtResource("6_dcw0l")]
+[node name="Frog" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+modulate = Color(1, 1, 1, 0.75)
 position = Vector2(280, -192)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("11_2a842")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "debug": [true, 1],
@@ -97,8 +128,12 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Frog1" parent="Spawns" instance=ExtResource("6_dcw0l")]
+[node name="Frog1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+modulate = Color(1, 1, 1, 0.75)
 position = Vector2(104, -120)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("11_2a842")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "debug": [true, 1],
@@ -108,8 +143,12 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Nun" parent="Spawns" instance=ExtResource("6_dcw0l")]
+[node name="Nun" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+modulate = Color(1, 1, 1, 0.75)
 position = Vector2(296, 80)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("11_2a842")
 actor_path = "res://src/Actor/NPC/Nun.tscn"
 properties = {
 "conversation": ["", 4],
@@ -121,8 +160,12 @@ properties = {
 "voiced": [true, 1]
 }
 
-[node name="Stalagtite" parent="Spawns" instance=ExtResource("6_dcw0l")]
+[node name="Stalagtite" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+modulate = Color(1, 1, 1, 0.75)
 position = Vector2(328, -112)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("11_2a842")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "debug": [true, 1],
@@ -132,8 +175,12 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite1" parent="Spawns" instance=ExtResource("6_dcw0l")]
+[node name="Stalagtite1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+modulate = Color(1, 1, 1, 0.75)
 position = Vector2(360, -112)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("11_2a842")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "debug": [true, 1],
@@ -143,8 +190,12 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite2" parent="Spawns" instance=ExtResource("6_dcw0l")]
+[node name="Stalagtite2" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+modulate = Color(1, 1, 1, 0.75)
 position = Vector2(296, -112)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("11_2a842")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "debug": [true, 1],
@@ -154,8 +205,12 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Frog2" parent="Spawns" instance=ExtResource("6_dcw0l")]
+[node name="Frog2" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+modulate = Color(1, 1, 1, 0.75)
 position = Vector2(-24, -112)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("11_2a842")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "debug": [true, 1],
@@ -165,8 +220,12 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Sphagnum" parent="Spawns" instance=ExtResource("6_dcw0l")]
+[node name="Sphagnum" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+modulate = Color(1, 1, 1, 0.75)
 position = Vector2(24, -112)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("11_2a842")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "debug": [false, 1],
@@ -175,8 +234,12 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Shield" parent="Spawns" instance=ExtResource("6_dcw0l")]
+[node name="Shield" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+modulate = Color(1, 1, 1, 0.75)
 position = Vector2(216, 96)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("11_2a842")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "debug": [true, 1],
@@ -189,8 +252,13 @@ properties = {
 "walk_max_time": [10.0, 3]
 }
 
-[node name="Junior" parent="Spawns" instance=ExtResource("6_dcw0l")]
+[node name="Junior" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+modulate = Color(1, 1, 1, 0.75)
 position = Vector2(248, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("11_2a842")
+actor_path = "res://src/Actor/Enemy/Junior.tscn"
 properties = {
 "aim_time": [0.2, 3],
 "debug": [false, 1],
@@ -203,12 +271,19 @@ properties = {
 "walk_max_time": [10.0, 3]
 }
 
-[node name="Waypoint" parent="." instance=ExtResource("9_20ig1")]
+[node name="Waypoint" type="Area2D" parent="." groups=["Entities", "VisualUtilities", "Waypoints"] instance=ExtResource("9_20ig1")]
 modulate = Color(0.545098, 0, 0, 1)
 position = Vector2(-72, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("13_4p20k")
 owner_id = "child"
+index = 0
 
-[node name="Waypoint2" parent="." instance=ExtResource("9_20ig1")]
+[node name="Waypoint2" type="Area2D" parent="." groups=["Entities", "VisualUtilities", "Waypoints"] instance=ExtResource("9_20ig1")]
 position = Vector2(40, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("13_4p20k")
 owner_id = "child"
 index = 1

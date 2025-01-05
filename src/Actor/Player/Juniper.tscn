@@ -1497,8 +1497,19 @@ debug_color = Color(0.392157, 0, 0.705882, 0.392157)
 position = Vector2(2, -15)
 rotation = -1.57079
 shape = SubResource("SeparationRayShape2D_tvjg6")
-disabled = true
 debug_color = Color(0.392157, 0, 0.705882, 0.392157)
+
+[node name="AngledCeilingDetector" type="RayCast2D" parent="."]
+position = Vector2(6, 0)
+rotation = 3.14159
+target_position = Vector2(-8.86917e-05, 20)
+collision_mask = 8
+
+[node name="CeilingBypass" type="RayCast2D" parent="."]
+position = Vector2(2, -15)
+rotation = 3.14159
+target_position = Vector2(-4.88758e-05, 11)
+collision_mask = 8
 
 [node name="MovementManager" type="Node2D" parent="."]
 script = ExtResource("15")
@@ -1681,6 +1692,7 @@ visible = false
 [node name="Tsurugi" parent="GunManager/Guns" instance=ExtResource("24_0pdvi")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 light_mask = 2
 material = SubResource("61")
 position = Vector2(0, -16)

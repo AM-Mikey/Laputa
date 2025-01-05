@@ -243,6 +243,11 @@ func _on_HurtDetector_area_entered(area): #KILLBOX
 
 
 
+
+
+func _on_angled_ceiling_detector_body_shape_exited(body_rid, body, body_shape_index, local_shape_index):
+	pass # Replace with function body.
+
 ### MISC
 
 
@@ -263,3 +268,9 @@ func connect_inventory():
 	var item_menu = get_tree().get_root().get_node_or_null("World/UILayer/Inventory")
 	if item_menu:
 		var _err = connect("inventory_updated", Callable(item_menu, "_on_inventory_updated"))
+
+
+
+
+
+
