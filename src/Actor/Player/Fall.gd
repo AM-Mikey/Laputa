@@ -122,18 +122,11 @@ func get_vframe() -> int:
 func enter():
 	pc.get_node("CollisionShape2D").set_deferred("disabled", true)
 	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
-	pc.get_node("PushLeft").set_deferred("disabled", false)
-	pc.get_node("PushRight").set_deferred("disabled", false)
-	pc.get_node("JumpCeiling").set_deferred("disabled", false)
-	pc.get_node("JumpFloor").set_deferred("disabled", false)
+	pc.get_node("JumpCollision").set_deferred("disabled", false)
 	pc.get_node("SSPDetector/CollisionShape2D2").set_deferred("disabled", false)
-	
 
 func exit():
 	pc.get_node("CollisionShape2D").set_deferred("disabled", false)
 	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
-	pc.get_node("PushLeft").set_deferred("disabled", true)
-	pc.get_node("PushRight").set_deferred("disabled", true)
-	pc.get_node("JumpCeiling").set_deferred("disabled", true)
-	pc.get_node("JumpFloor").set_deferred("disabled", true)
+	pc.get_node("JumpCollision").set_deferred("disabled", true)
 	pc.get_node("SSPDetector/CollisionShape2D2").set_deferred("disabled", true)

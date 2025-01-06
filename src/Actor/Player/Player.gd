@@ -171,14 +171,14 @@ func die():
 
 func _on_SSPDetector_body_entered(_body):
 	is_on_ssp = true
-	if not $PushLeft.disabled: 
-		$PushLeft.set_deferred("disabled", true)
-		$PushRight.set_deferred("disabled", true)
+	#if not $PushLeft.disabled: 
+		#$PushLeft.set_deferred("disabled", true)
+		#$PushRight.set_deferred("disabled", true)
 func _on_SSPDetector_body_exited(_body):
 	is_on_ssp = false
-	if $PushLeft.disabled: 
-		$PushLeft.set_deferred("disabled", false)
-		$PushRight.set_deferred("disabled", false)
+	#if $PushLeft.disabled: 
+		#$PushLeft.set_deferred("disabled", false)
+		#$PushRight.set_deferred("disabled", false)
 
 func _on_ItemDetector_area_entered(area):
 	if disabled: return

@@ -62,51 +62,25 @@ func change_state(new_state: String, do_cache_state = true):
 
 
 
-
-
 func initialize_states():
 	for c in sp.get_children():
 		if c.get_class() == "Node":
 			states[c.name.to_lower()] = c
-	
 	change_state("run")
 	return
 
 
 
 func _physics_process(_delta):
+	if pc.disabled: return
 	if is_debug:
 		state_label.text = current_state.name.to_lower()
-	if pc.disabled: return
 	
 	#velocity += conveyor_speed
 	speed = Vector2(90, 180) if not get_parent().is_in_water else Vector2(60, 140)
 	gravity = 300.0 if not get_parent().is_in_water else 150.0
 	
-	#angled ceiling check
-	if current_state == states["jump"] \
-	or current_state == states["longjump"] \
-	or current_state == states["fall"] \
-	or current_state ==  states["knockback"]:
-		if pc.get_node("AngledCeilingDetector").get_collider():
-			var col_normal = pc.get_node("AngledCeilingDetector").get_collision_normal()
-			#print(col_normal)
-			if col_normal.x < 0.0:
-				#pc.get_node("PushLeft").set_deferred("disabled", true)
-				var truth = pc.get_node("CeilingBypass").is_colliding()
-				#print(truth)
-				if truth:
-					pc.get_node("PushRight").set_deferred("disabled", true)
-					print("COL OFF")
-				else:
-					pc.get_node("PushRight").set_deferred("disabled", false)
-					print("COL ON")
-			else:
-				#pc.get_node("PushLeft").set_deferred("disabled", false)	
-				pc.get_node("PushRight").set_deferred("disabled", false)
-				print("COL ON")
-			
-			
+	do_ceiling_push_check()
 	if pc.is_on_ceiling():
 		if not on_ceiling:
 			var ceiling_normal = pc.get_slide_collision(pc.get_slide_collision_count() - 1).get_normal()
@@ -116,6 +90,26 @@ func _physics_process(_delta):
 		on_ceiling = false
 		
 	current_state.state_process()
+
+
+
+func do_ceiling_push_check():
+	if current_state == states["jump"] \
+	or current_state == states["longjump"] \
+	or current_state == states["fall"] \
+	or current_state ==  states["knockback"]:
+		if pc.get_node("CeilingL").is_colliding() \
+		
+		and not pc.get_node("ClearenceLF").is_colliding() \
+		and pc.velocity.y < 0:
+			pc.global_position.x += 2.0 if not pc.get_node("ClearenceLH").is_colliding() else 4.0
+			pc.get_node("CollisionShape2D").set_deferred("disabled", false)
+		
+		elif pc.get_node("CeilingR").is_colliding() \
+		and not pc.get_node("ClearenceRF").is_colliding() \
+		and pc.velocity.y < 0:
+			pc.global_position.x -= 2.0 if not pc.get_node("ClearenceRH").is_colliding() else 4.0
+			pc.get_node("CollisionShape2D").set_deferred("disabled", false)
 
 
 func check_ssp():
