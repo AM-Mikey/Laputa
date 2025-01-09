@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=3 uid="uid://ds1ythga30lxc"]
+[gd_scene load_steps=7 format=3 uid="uid://ds1ythga30lxc"]
 
-[ext_resource type="AudioStream" uid="uid://cpbrsidi03i20" path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" id="1"]
 [ext_resource type="Script" path="res://src/Actor/Enemy/Swooper.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://j2gmpjjm1unr" path="res://assets/Actor/Enemy/Swooper.png" id="3"]
 
@@ -80,17 +79,32 @@ script = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 131072
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 262144
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3")
 hframes = 8
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_ublij")
 }
 
-[node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("1")
-bus = &"SFX"
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

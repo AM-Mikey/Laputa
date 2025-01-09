@@ -1519,6 +1519,22 @@ scale = Vector2(0.33, 1)
 target_position = Vector2(-6.67572e-05, 15)
 collision_mask = 8
 
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 65536
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+light_mask = 0
+position = Vector2(0, -7.5)
+shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+
+[node name="CrouchingCollision" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_43d2q")
+disabled = true
+debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+
 [node name="MovementManager" type="Node2D" parent="."]
 script = ExtResource("15")
 
@@ -1573,7 +1589,6 @@ one_shot = true
 position = Vector2(0, -8)
 
 [node name="ItemDetector" type="Area2D" parent="."]
-modulate = Color(0.117647, 1, 0, 0.2)
 show_behind_parent = true
 z_index = -1
 position = Vector2(0, -2)
@@ -1584,6 +1599,7 @@ collision_mask = 7172
 light_mask = 0
 position = Vector2(0, -7.5)
 shape = SubResource("2")
+debug_color = Color(0, 0.627451, 0.27451, 0.117647)
 
 [node name="HurtDetector" type="Area2D" parent="."]
 modulate = Color(0.992157, 0, 1, 0.282353)

@@ -83,8 +83,7 @@ func _on_screen_exit(): #TODO: bullets that start offscreen are not cleared
 	queue_free()
 
 func _on_CollisionDetector_body_entered(body):
-	if disabled:
-		return
+	if disabled: return
 	if body is TileMap:
 		if body.tile_set.get_physics_layer_collision_layer(0) == 8: #world (layer value)
 			do_fizzle("world")
@@ -93,11 +92,6 @@ func _on_CollisionDetector_body_entered(body):
 		#breakable
 		if body.get_collision_layer_value(9): 
 			on_break(break_method)
-		#enemy
-		elif body.get_collision_layer_value(2) and not is_enemy_bullet: 
-			#await get_tree().process_frame #TODO: why?
-			body.hit(damage, get_blood_dir(body))
-			queue_free()
 		#player
 		elif body.get_collision_layer_value(1) and is_enemy_bullet: 
 			body.hit(damage, get_blood_dir(body))
@@ -109,9 +103,13 @@ func _on_CollisionDetector_body_entered(body):
 
 #used for animated grass at the moment
 func _on_CollisionDetector_area_entered(area):
-	if disabled: pass
+	if disabled: return
 	
-	if area.get_collision_layer_value(9): #breakable
+	if area.get_collision_layer_value(18): #enemyhurt
+		print("ow")
+		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
+		queue_free()
+	elif area.get_collision_layer_value(9): #breakable
 		on_break(break_method)
 	elif area.get_collision_layer_value(4): #world
 		do_fizzle("world")

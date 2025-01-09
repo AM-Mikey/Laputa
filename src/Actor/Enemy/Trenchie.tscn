@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b06vi8xuugq3x"]
+[gd_scene load_steps=22 format=3 uid="uid://b06vi8xuugq3x"]
 
 [ext_resource type="Script" path="res://src/Actor/Enemy/Trenchie.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://2j2flsg5b2p1" path="res://assets/Actor/Enemy/Trenchie.png" id="2"]
@@ -7,6 +7,9 @@
 [ext_resource type="Script" path="res://src/Actor/Enemy/Trenchie/Idle.gd" id="5"]
 
 [sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s5m1v"]
 size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="2"]
@@ -319,32 +322,51 @@ script = ExtResource("1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 131072
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_s5m1v")
+debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 262144
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_s5m1v")
+debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
 
 [node name="HideDetector" type="Area2D" parent="."]
 collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HideDetector"]
-modulate = Color(0.188235, 0.537255, 0.529412, 0.603922)
 position = Vector2(0, -56)
 shape = SubResource("2")
+debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
 [node name="PeekDetector" type="Area2D" parent="."]
 collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PeekDetector"]
-modulate = Color(0.992157, 0.992157, 0.992157, 0.156863)
 shape = SubResource("3")
+debug_color = Color(0, 0.627451, 0.27451, 0.0392157)
 
 [node name="ShootDetector" type="Area2D" parent="."]
 collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShootDetector"]
-modulate = Color(0, 0.0156863, 0.937255, 0.392157)
 position = Vector2(0, -72)
 shape = SubResource("4")
+debug_color = Color(0, 0.627451, 0.27451, 0.156863)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
@@ -374,6 +396,8 @@ script = ExtResource("5")
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("4")
 
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="HideDetector" to="." method="_on_HideDetector_body_entered"]
 [connection signal="body_entered" from="PeekDetector" to="." method="_on_PeekDetector_body_entered"]
 [connection signal="body_exited" from="PeekDetector" to="." method="_on_PeekDetector_body_exited"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dvmfxj76jww0o"]
+[gd_scene load_steps=13 format=3 uid="uid://dvmfxj76jww0o"]
 
 [ext_resource type="Texture2D" uid="uid://c1wouwbovbivr" path="res://assets/Actor/Enemy/Stalagtite.png" id="2"]
 [ext_resource type="Script" path="res://src/Actor/Enemy/Stalagtite.gd" id="3"]
@@ -9,6 +9,9 @@ size = Vector2(14, 16)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pbcgp"]
 radius = 4.0
 height = 14.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n2kuq"]
+size = Vector2(14, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o0pis"]
 size = Vector2(14, 16)
@@ -128,6 +131,24 @@ rotation = -1.57079
 shape = SubResource("CapsuleShape2D_pbcgp")
 disabled = true
 
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 131072
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_n2kuq")
+debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 262144
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_n2kuq")
+debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+
 [node name="Standable" type="CharacterBody2D" parent="."]
 collision_layer = 512
 collision_mask = 0
@@ -157,4 +178,6 @@ collide_with_areas = true
 [node name="StateTimer" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="timeout" from="StateTimer" to="." method="_on_state_timer_timeout"]

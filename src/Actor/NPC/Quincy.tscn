@@ -82,11 +82,11 @@ libraries = {
 [node name="FloorDetectorL" type="RayCast2D" parent="."]
 position = Vector2(-8, 0)
 target_position = Vector2(0, 8)
-collision_mask = 8
+collision_mask = 520
 collide_with_areas = true
 
 [node name="FloorDetectorR" type="RayCast2D" parent="."]
 position = Vector2(8, 0)
 target_position = Vector2(0, 8)
-collision_mask = 8
+collision_mask = 520
 collide_with_areas = true

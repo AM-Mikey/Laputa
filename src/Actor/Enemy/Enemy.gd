@@ -243,3 +243,13 @@ func do_death_drop():
 			1,2: ammo.value = 0.2
 			3,4,5,6,7,8,9,10: ammo.value = 0.5
 		world.middle.add_child(ammo)
+
+
+
+### SIGNALS ###
+
+func _on_hitbox_area_entered(area):
+	area.get_parent().enemy_entered(self)
+
+func _on_hitbox_area_exited(area):
+	area.get_parent().enemy_exited(self)

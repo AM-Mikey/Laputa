@@ -1,11 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://spx2ohg588ta"]
+[gd_scene load_steps=10 format=3 uid="uid://spx2ohg588ta"]
 
 [ext_resource type="Script" path="res://src/Actor/Enemy/Bat.gd" id="1"]
-[ext_resource type="AudioStream" uid="uid://cpbrsidi03i20" path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" id="2"]
 [ext_resource type="Texture2D" uid="uid://bufns1cnhgyw1" path="res://assets/Actor/Enemy/Bat.png" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(12, 12)
+
+[sub_resource type="CircleShape2D" id="8"]
+radius = 50.0
 
 [sub_resource type="Animation" id="6"]
 resource_name = "Flap"
@@ -79,9 +81,6 @@ _data = {
 "UnflapAggro": SubResource("10")
 }
 
-[sub_resource type="CircleShape2D" id="8"]
-radius = 50.0
-
 [node name="Bat" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 8
@@ -91,6 +90,30 @@ editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 131072
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 262144
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("1")
+debug_color = Color(0, 0.627451, 0.27451, 0.156863)
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+shape = SubResource("8")
+debug_color = Color(0, 0.627451, 0.27451, 0.156863)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(7.62939e-06, -3.8147e-06)
@@ -103,25 +126,16 @@ libraries = {
 "": SubResource("AnimationLibrary_mr7me")
 }
 
-[node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2")
-attenuation = 0.0583146
-bus = &"SFX"
-
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(50, 100)
 collision_mask = 8
 collide_with_areas = true
 
-[node name="PlayerDetector" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-shape = SubResource("8")
-
 [node name="BailTimer" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
 [connection signal="timeout" from="BailTimer" to="." method="_on_BailTimer_timeout"]

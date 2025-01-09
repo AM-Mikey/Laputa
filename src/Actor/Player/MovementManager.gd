@@ -158,8 +158,7 @@ func jump():
 	am.play("pc_jump")
 	#Check if a running jump. since speed.x is max x velocity, only count as a running jump then
 	if abs(velocity.x) > speed.x * 0.95:
-		if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") and pc.controller_id == 0 or \
-		Input.is_action_pressed("sasuke_left") or Input.is_action_pressed("sasuke_right") and pc.controller_id == 1:
+		if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
 			jump_starting_move_dir_x = sign(pc.move_dir.x)
 			$MinDirTimer.start(minimum_direction_time)
 			change_state("longjump")
@@ -178,6 +177,8 @@ func _on_CrouchDetector_body_entered(_body):
 	if current_state != states["run"]: return
 	pc.get_node("CollisionShape2D").set_deferred("disabled", true)
 	pc.get_node("CrouchingCollision").set_deferred("disabled", false)
+	pc.get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", true)
+	pc.get_node("Hurtbox/CrouchingCollision").set_deferred("disabled", false)
 
 func _on_CrouchDetector_body_exited(_body):
 	pc.is_forced_crouching = false
@@ -186,3 +187,5 @@ func _on_CrouchDetector_body_exited(_body):
 		if current_state != states["run"]: return
 		pc.get_node("CollisionShape2D").set_deferred("disabled", false)
 		pc.get_node("CrouchingCollision").set_deferred("disabled", true)
+		pc.get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", false)
+		pc.get_node("Hurtbox/CrouchingCollision").set_deferred("disabled", true)

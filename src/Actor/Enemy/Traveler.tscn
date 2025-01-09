@@ -1,8 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://cpxljqxsxtowp"]
+[gd_scene load_steps=19 format=3 uid="uid://cpxljqxsxtowp"]
 
 [ext_resource type="Texture2D" uid="uid://b1jevd6gx1tgf" path="res://assets/Actor/Enemy/Traveler.png" id="1"]
 [ext_resource type="Script" path="res://src/Actor/Enemy/Traveler.gd" id="2"]
-[ext_resource type="AudioStream" uid="uid://cpbrsidi03i20" path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
@@ -605,6 +604,25 @@ script = ExtResource("2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 131072
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -8)
+shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 262144
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
@@ -618,7 +636,5 @@ libraries = {
 "": SubResource("AnimationLibrary_hcvux")
 }
 
-[node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3")
-attenuation = 0.058315
-bus = &"SFX"
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

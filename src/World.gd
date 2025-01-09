@@ -92,7 +92,7 @@ func skip_title():
 	add_child(JUNIPER.instantiate())
 	get_node("UILayer").add_child(HUD.instantiate())
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
-		$Juniper.position = s.global_position
+		$Juniper.position = s.global_position #TODO: consider using onready var path instead for better performance
 
 func _input(event):
 	if event.is_action_pressed("inventory") and has_node("Juniper"):

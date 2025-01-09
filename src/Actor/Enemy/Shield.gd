@@ -13,7 +13,6 @@ func setup():
 	reward = 2
 	damage_on_contact = 2
 	speed = Vector2(50, 50)
-	change_state("walk")
 
 func bullet_block(state: bool):
 	bb.monitoring = state
@@ -23,19 +22,10 @@ func bullet_block(state: bool):
 
 func enter_walk():
 	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
-		move_dir = Vector2.RIGHT
+		set_move_dir(Vector2.RIGHT)
 	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
-		move_dir = Vector2.LEFT
+		set_move_dir(Vector2.LEFT)
 	
-	match move_dir:
-		Vector2.LEFT: 
-			ap.play("WalkLeft")
-			bullet_block(true)
-			#collision_layer = 32 #shield
-		Vector2.RIGHT: 
-			ap.play("WalkRight")
-			bullet_block(false)
-			#collision_layer = 2 #enemy
 	
 	rng.randomize()
 	$StateTimer.start(rng.randf_range(1.0, walk_max_time))
@@ -47,25 +37,20 @@ func do_walk():
 	or (not $FloorDetectorR.is_colliding() and move_dir.x > 0):
 		change_state("wait")
 		return
-	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
-		velocity = calc_velocity(velocity, move_dir, speed)
-		set_up_direction(FLOOR_NORMAL)
-		move_and_slide()
+	if velocity.x == 0.0:
+		move_dir *= Vector2(-1,0)
+
+	velocity = calc_velocity(velocity, move_dir, speed)
+	move_and_slide()
+	
 
 
 func enter_wait():
+	set_move_dir(move_dir)
 	rng.randomize()
-	match move_dir:
-		Vector2.LEFT: 
-			ap.play("IdleLeft")
-			bullet_block(true)
-			#collision_layer = 32 #shield
-		Vector2.RIGHT:
-			ap.play("IdleRight")
-			bullet_block(false)
-			#collision_layer = 2 #enemy
 	$StateTimer.start(rng.randf_range(1.0, wait_max_time))
 	await $StateTimer.timeout
+	print("ok")
 	change_state("walk")
 
 
@@ -74,6 +59,20 @@ func enter_defend():
 	$StateTimer.start(defend_time)
 	await $StateTimer.timeout
 	change_state("walk")
+
+### HELPER ###
+
+func set_move_dir(dir):
+	move_dir = dir
+	match move_dir:
+		Vector2.LEFT: 
+			ap.play("WalkLeft")
+			bullet_block(true)
+		Vector2.RIGHT: 
+			ap.play("WalkRight")
+			bullet_block(false)
+
+
 
 ### SIGNALS ###
 

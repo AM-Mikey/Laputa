@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://vtjfl8beloqi"]
+[gd_scene load_steps=7 format=3 uid="uid://vtjfl8beloqi"]
 
 [ext_resource type="Texture2D" uid="uid://eg82riqnxr1v" path="res://assets/Actor/Enemy/Sphagnum.png" id="1"]
 [ext_resource type="Script" path="res://src/Actor/Enemy/Sphagnum.gd" id="2"]
-[ext_resource type="AudioStream" uid="uid://b3toi35k8trvt" path="res://assets/SFX/Placeholder/snd_jaws.ogg" id="3"]
 
 [sub_resource type="RectangleShape2D" id="3"]
 size = Vector2(16, 24)
@@ -55,6 +54,25 @@ editor_hidden = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12)
 shape = SubResource("3")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 131072
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -12)
+shape = SubResource("3")
+debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 262144
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -12)
+shape = SubResource("3")
+debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
@@ -67,6 +85,5 @@ libraries = {
 "": SubResource("AnimationLibrary_6376x")
 }
 
-[node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3")
-bus = &"SFX"
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

@@ -96,6 +96,15 @@ func do_step(): #TODO: this is a failsafe, only works with run animations. for s
 	if $Sprite2D.frame_coords.x == 1 or $Sprite2D.frame_coords.x == 7:
 		am.play("pc_step")
 
+func enemy_entered(enemy):
+	enemies_touching.append(enemy)
+	var damage = enemy.damage_on_contact
+	var knockback_direction = Vector2(sign(global_position.x - enemy.global_position.x), 0)
+	hit(damage, knockback_direction)
+
+func enemy_exited(enemy):
+	enemies_touching.erase(enemy)
+
 func hit(damage, knockback_direction):
 	if not disabled and not invincible:
 		if damage > 0:
@@ -227,19 +236,11 @@ func _on_ItemDetector_area_entered(area):
 		emit_signal("guns_updated", guns.get_children())
 		ammo_pickup.queue_free()
 
-func _on_HurtDetector_body_entered(body):
-	if not disabled and body.get_collision_layer_value(2): #enemy
-		enemies_touching.append(body)
-		var damage = body.damage_on_contact
-		var knockback_direction = Vector2(sign(global_position.x - body.global_position.x), 0)
-		hit(damage, knockback_direction)
 
-func _on_HurtDetector_body_exited(body):
-	enemies_touching.erase(body)
 
-func _on_HurtDetector_area_entered(area): #KILLBOX
-	if area.get_collision_layer_value(14): #kill
-		die()
+#func _on_HurtDetector_area_entered(area): #KILLBOX #TODO: reverse this!
+	#if area.get_collision_layer_value(14): #kill
+		#die()
 
 
 

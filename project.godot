@@ -417,9 +417,11 @@ window_maximize={
 2d_physics/layer_11="hp"
 2d_physics/layer_12="xp"
 2d_physics/layer_13="ammo"
-2d_physics/layer_14="kill"
 2d_physics/layer_15="editorselectable"
 2d_physics/layer_16="rigidbody"
+2d_physics/layer_17="playerhurt"
+2d_physics/layer_18="enemyhurt"
+2d_physics/layer_19="enemyhit"
 
 [rendering]
 

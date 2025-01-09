@@ -86,7 +86,7 @@ _data = {
 }
 
 [node name="Shield" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
-collision_layer = 2
+collision_layer = 514
 collision_mask = 8
 script = ExtResource("1")
 debug = true
@@ -96,21 +96,42 @@ editor_hidden = false
 collision_layer = 32
 collision_mask = 64
 input_pickable = false
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletBlocker"]
 position = Vector2(0, -7.5)
 shape = SubResource("10")
+disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7.5)
 shape = SubResource("1")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 131072
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -7.5)
+shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 262144
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -7.5)
+shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
 texture = ExtResource("3")
 hframes = 4
 vframes = 2
-frame = 1
+frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -118,15 +139,15 @@ libraries = {
 }
 
 [node name="FloorDetectorL" type="RayCast2D" parent="."]
-position = Vector2(-7, 0)
-target_position = Vector2(0, 8)
-collision_mask = 8
+position = Vector2(-7, -8)
+target_position = Vector2(0, 16)
+collision_mask = 520
 collide_with_areas = true
 
 [node name="FloorDetectorR" type="RayCast2D" parent="."]
-position = Vector2(7, 0)
-target_position = Vector2(0, 8)
-collision_mask = 8
+position = Vector2(7, -8)
+target_position = Vector2(0, 16)
+collision_mask = 520
 collide_with_areas = true
 
 [node name="StateTimer" type="Timer" parent="."]
@@ -134,3 +155,5 @@ one_shot = true
 
 [connection signal="area_entered" from="BulletBlocker" to="." method="_on_BulletBlocker_area_entered"]
 [connection signal="body_entered" from="BulletBlocker" to="." method="_on_BulletBlocker_body_entered"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

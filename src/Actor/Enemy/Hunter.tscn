@@ -1,9 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://bjtd1vhn348ut"]
+[gd_scene load_steps=14 format=3 uid="uid://bjtd1vhn348ut"]
 
 [ext_resource type="Script" path="res://src/Actor/Enemy/Hunter.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://o5oy446djmnx" path="res://assets/Actor/Enemy/Hunter.png" id="2"]
-[ext_resource type="AudioStream" uid="uid://kuobfcjv8sx6" path="res://assets/SFX/Placeholder/snd_em_fire.ogg" id="3"]
-[ext_resource type="AudioStream" uid="uid://cpbrsidi03i20" path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" id="4"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
@@ -255,15 +253,34 @@ editor_hidden = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 131072
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -8)
+shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 262144
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-modulate = Color(0, 0.0156863, 0.937255, 0.392157)
 position = Vector2(0, -32)
 shape = SubResource("2")
+debug_color = Color(0, 0.627451, 0.27451, 0.156863)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
@@ -277,17 +294,11 @@ libraries = {
 "": SubResource("AnimationLibrary_r1ad1")
 }
 
-[node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4")
-bus = &"SFX"
-
-[node name="PosFire" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3")
-bus = &"SFX"
-
 [node name="FireCooldown" type="Timer" parent="."]
 one_shot = true
 autostart = true
 
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
