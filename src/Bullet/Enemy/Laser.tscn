@@ -2,21 +2,22 @@
 
 [ext_resource type="Script" path="res://src/Bullet/Enemy/Laser.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://8jfd84h6yss6" path="res://assets/Bullet/Enemy/Laser.png" id="2"]
-[ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/CollisionDetector.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://d1oy3g4tudn3v" path="res://src/Bullet/Enemy/EnemyCollisionDetector.tscn" id="2_mu4xr"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(8, 1)
+size = Vector2(16, 2)
 
 [node name="Laser" type="CharacterBody2D"]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1")
 
-[node name="CollisionDetector" parent="." instance=ExtResource("3")]
+[node name="EnemyCollisionDetector" parent="." instance=ExtResource("2_mu4xr")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCollisionDetector"]
 position = Vector2(-8, 0)
 shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-8, 0)
@@ -25,5 +26,5 @@ texture = ExtResource("2")
 [node name="End" type="Marker2D" parent="."]
 position = Vector2(-16, 0)
 
-[connection signal="area_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
-[connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
+[connection signal="area_entered" from="EnemyCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
+[connection signal="body_entered" from="EnemyCollisionDetector" to="." method="_on_CollisionDetector_body_entered"]

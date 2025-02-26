@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bahi2ylohhlqn"]
 
 [ext_resource type="Script" path="res://src/Effect/Explosion.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://bvy565a64eprt" path="res://assets/Effect/Explosion.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bvy565a64eprt" path="res://assets/Effect/0Explosion.png" id="2"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "Explosion"

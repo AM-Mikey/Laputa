@@ -124,7 +124,7 @@ func fire():
 	bullet.direction = Vector2(look_dir.x /2 , -1) #Adjust this for angle
 
 	world.get_node("Middle").add_child(bullet)
-	am.play("enemy_shoot")
+	am.play("enemy_shoot", self)
 
 func set_waypoint(target_dir: Vector2):
 	if waypoint: waypoint.queue_free()

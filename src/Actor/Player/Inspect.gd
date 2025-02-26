@@ -44,9 +44,11 @@ func animate():
 		ap.stop()
 		ap.play(animation, 0.0, 1.0)
 
-	var look_dir = sign(pc.global_position.x - pc.inspect_target.global_position.x)
-	sprite.flip_h = look_dir == 1
-
+	var look_dir = sign(pc.inspect_target.global_position.x - pc.global_position.x)
+	if look_dir <= 0: #left
+		sprite.frame_coords.y = 0
+	else: #right
+		sprite.frame_coords.y = 1
 
 
 ### GETTERS ###

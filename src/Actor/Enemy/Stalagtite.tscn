@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dvmfxj76jww0o"]
+[gd_scene load_steps=14 format=3 uid="uid://dvmfxj76jww0o"]
 
 [ext_resource type="Texture2D" uid="uid://c1wouwbovbivr" path="res://assets/Actor/Enemy/Stalagtite.png" id="2"]
 [ext_resource type="Script" path="res://src/Actor/Enemy/Stalagtite.gd" id="3"]
@@ -9,6 +9,9 @@ size = Vector2(14, 16)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pbcgp"]
 radius = 4.0
 height = 14.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njk2w"]
+size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n2kuq"]
 size = Vector2(14, 8)
@@ -116,7 +119,7 @@ _data = {
 
 [node name="Stalagtite" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
-collision_mask = 8
+collision_mask = 520
 script = ExtResource("3")
 debug = true
 editor_hidden = false
@@ -136,9 +139,9 @@ collision_layer = 131072
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, -4)
-shape = SubResource("RectangleShape2D_n2kuq")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_njk2w")
+debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 262144
@@ -147,7 +150,7 @@ collision_mask = 65536
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_n2kuq")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="Standable" type="CharacterBody2D" parent="."]
 collision_layer = 512
@@ -157,6 +160,7 @@ collision_mask = 0
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_o0pis")
 disabled = true
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -172,7 +176,7 @@ frame = 8
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 1000)
-collision_mask = 9
+collision_mask = 521
 collide_with_areas = true
 
 [node name="StateTimer" type="Timer" parent="."]

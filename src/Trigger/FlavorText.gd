@@ -12,7 +12,7 @@ var db
 @onready var world = get_tree().get_root().get_node("World")
 
 func _on_Sign_body_entered(body):
-	active_pc = body
+	active_pc = body.get_parent()
 
 func _on_ExitDetector_body_exited(_body):
 	active_pc = null

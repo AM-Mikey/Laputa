@@ -1,7 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdlb4ndh8yuh2"]
+[gd_scene load_steps=12 format=3 uid="uid://bdlb4ndh8yuh2"]
 
 [ext_resource type="Script" path="res://src/Actor/Enemy/Junior.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dfq7titr5btw6" path="res://assets/Actor/Enemy/Junior.png" id="2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2oly5"]
+radius = 6.0
+height = 20.0
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(12, 20)
@@ -108,7 +112,7 @@ editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
-shape = SubResource("1")
+shape = SubResource("CapsuleShape2D_2oly5")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -118,7 +122,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -10)
 shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 262144
@@ -127,7 +131,7 @@ collision_mask = 65536
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -10)
 shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0
@@ -135,14 +139,14 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 position = Vector2(-48, -16)
 shape = SubResource("10")
-debug_color = Color(0, 0.627451, 0.27451, 0.156863)
+debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
 texture = ExtResource("2")
 hframes = 4
 vframes = 5
-frame = 8
+frame = 12
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

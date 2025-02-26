@@ -58,7 +58,7 @@ func _on_HideDetector_body_entered(body):
 		hide()
 
 func _on_PeekDetector_body_entered(body):
-	target = body
+	target = body.get_parent()
 	look_dir = Vector2(sign(target.global_position.x - global_position.x), 0)
 	peek()
 
@@ -68,7 +68,7 @@ func _on_PeekDetector_body_exited(_body):
 	hide()
 
 func _on_ShootDetector_body_entered(body):
-	target = body
+	target = body.get_parent()
 	look_dir = Vector2(sign(target.global_position.x - global_position.x), 0)
 	jump()
 

@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="1_wttd1"]
 [ext_resource type="Texture2D" uid="uid://l1ngmx5ism7q" path="res://assets/Actor/NPC/Gote.png" id="2"]
 
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(16, 24)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nv04k"]
+radius = 6.0
+height = 24.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mkhyr"]
 size = Vector2(16, 24)
@@ -54,10 +55,11 @@ collision_layer = 128
 collision_mask = 8
 script = ExtResource("1_wttd1")
 id = "gote"
+editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12)
-shape = SubResource("1")
+shape = SubResource("CapsuleShape2D_nv04k")
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0
@@ -70,7 +72,8 @@ shape = SubResource("RectangleShape2D_mkhyr")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
 texture = ExtResource("2")
-hframes = 2
+hframes = 4
+vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -78,13 +81,27 @@ libraries = {
 }
 
 [node name="FloorDetectorL" type="RayCast2D" parent="."]
-position = Vector2(-8, 0)
-target_position = Vector2(0, 8)
+position = Vector2(-8, -16)
+target_position = Vector2(0, 24)
 collision_mask = 520
 collide_with_areas = true
 
 [node name="FloorDetectorR" type="RayCast2D" parent="."]
-position = Vector2(8, 0)
-target_position = Vector2(0, 8)
+position = Vector2(8, -16)
+target_position = Vector2(0, 24)
+collision_mask = 520
+collide_with_areas = true
+
+[node name="WallDetectorR" type="RayCast2D" parent="."]
+position = Vector2(6, -7)
+rotation = -1.57079
+target_position = Vector2(0, 2)
+collision_mask = 520
+collide_with_areas = true
+
+[node name="WallDetectorL" type="RayCast2D" parent="."]
+position = Vector2(-6, -7)
+rotation = -4.71238
+target_position = Vector2(0, 2)
 collision_mask = 520
 collide_with_areas = true

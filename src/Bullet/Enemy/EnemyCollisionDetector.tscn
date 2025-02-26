@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://d1oy3g4tudn3v"]
+
+[node name="EnemyCollisionDetector" type="Area2D"]
+collision_layer = 8192
+collision_mask = 65832

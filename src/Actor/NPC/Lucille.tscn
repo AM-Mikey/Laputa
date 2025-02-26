@@ -1,16 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjhfly0ne70sh"]
+[gd_scene load_steps=8 format=3 uid="uid://cjhfly0ne70sh"]
 
 [ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="1_q8vty"]
 [ext_resource type="Texture2D" uid="uid://do0o0lqb6igex" path="res://assets/Actor/NPC/Lucille.png" id="2"]
 
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(16, 28)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5fxif"]
-size = Vector2(16, 28)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i8aj8"]
+radius = 6.0
+height = 26.0
 
 [sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(16, 28)
+size = Vector2(16, 26)
 
 [sub_resource type="Animation" id="3"]
 resource_name = "Idle"
@@ -57,31 +55,25 @@ collision_layer = 128
 collision_mask = 8
 script = ExtResource("1_q8vty")
 id = "lucille"
+editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -14)
-shape = SubResource("1")
-
-[node name="PlayerDetector2" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector2"]
-modulate = Color(1, 1, 1, 0.172549)
-position = Vector2(0, -14)
-shape = SubResource("RectangleShape2D_5fxif")
+position = Vector2(0, -13)
+shape = SubResource("CapsuleShape2D_i8aj8")
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 modulate = Color(1, 1, 1, 0.172549)
-position = Vector2(0, -14)
+position = Vector2(0, -13)
 shape = SubResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
 texture = ExtResource("2")
 hframes = 4
+vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -89,13 +81,27 @@ libraries = {
 }
 
 [node name="FloorDetectorL" type="RayCast2D" parent="."]
-position = Vector2(-8, 0)
-target_position = Vector2(0, 8)
+position = Vector2(-8, -16)
+target_position = Vector2(0, 24)
 collision_mask = 520
 collide_with_areas = true
 
 [node name="FloorDetectorR" type="RayCast2D" parent="."]
-position = Vector2(8, 0)
-target_position = Vector2(0, 8)
+position = Vector2(8, -16)
+target_position = Vector2(0, 24)
+collision_mask = 520
+collide_with_areas = true
+
+[node name="WallDetectorR" type="RayCast2D" parent="."]
+position = Vector2(6, -7)
+rotation = -1.57079
+target_position = Vector2(0, 2)
+collision_mask = 520
+collide_with_areas = true
+
+[node name="WallDetectorL" type="RayCast2D" parent="."]
+position = Vector2(-6, -7)
+rotation = -4.71238
+target_position = Vector2(0, 2)
 collision_mask = 520
 collide_with_areas = true

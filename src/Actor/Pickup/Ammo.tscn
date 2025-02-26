@@ -55,11 +55,11 @@ script = ExtResource("1")
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_1dxo7")
 
-[node name="PlayerDetector" type="Area2D" parent="."]
+[node name="CollectArea" type="Area2D" parent="."]
 collision_layer = 4096
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
 modulate = Color(0.345098, 1, 0.0784314, 0.513726)
 show_behind_parent = true
 shape = SubResource("1")
@@ -71,9 +71,9 @@ vframes = 3
 frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../PlayerDetector")
+root_node = NodePath("../CollectArea")
 libraries = {
 "": SubResource("AnimationLibrary_nrd4w")
 }
 
-[connection signal="animation_finished" from="AnimationPlayer" to="PlayerDetector" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="CollectArea" method="_on_AnimationPlayer_animation_finished"]

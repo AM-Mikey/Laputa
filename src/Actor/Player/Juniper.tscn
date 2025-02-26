@@ -37,6 +37,13 @@
 [ext_resource type="PackedScene" uid="uid://cq3m4fy6fnxfn" path="res://src/Gun/TurnstileJumper.tscn" id="34"]
 [ext_resource type="Texture2D" uid="uid://bggc4cn0y5fhq" path="res://assets/Actor/Player/BackAerialNew.png" id="34_85ix1"]
 
+[sub_resource type="CapsuleShape2D" id="72"]
+radius = 1.0
+height = 2.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oqo7c"]
+size = Vector2(12, 15)
+
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(12, 15)
 
@@ -45,10 +52,6 @@ size = Vector2(12, 8)
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(16, 21)
-
-[sub_resource type="RectangleShape2D" id="3"]
-custom_solver_bias = 0.395
-size = Vector2(12, 15)
 
 [sub_resource type="RectangleShape2D" id="4"]
 size = Vector2(2, 2)
@@ -1444,14 +1447,27 @@ _data = {
 "stand": SubResource("65")
 }
 
-[sub_resource type="CapsuleShape2D" id="72"]
-radius = 1.0
-height = 2.0
-
 [node name="Juniper" type="CharacterBody2D" groups=["Players"]]
 z_index = 1
+collision_layer = 0
 collision_mask = 520
 script = ExtResource("14")
+
+[node name="PhysicsLayerBody" type="CharacterBody2D" parent="."]
+collision_layer = 32768
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody"]
+position = Vector2(0, -9)
+shape = SubResource("72")
+
+[node name="PlayerLayerBody" type="CharacterBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerLayerBody"]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_oqo7c")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0
@@ -1585,9 +1601,6 @@ one_shot = true
 
 [node name="PlayerCamera" parent="." instance=ExtResource("2")]
 
-[node name="BulletOrigin" type="Marker2D" parent="."]
-position = Vector2(0, -8)
-
 [node name="ItemDetector" type="Area2D" parent="."]
 show_behind_parent = true
 z_index = -1
@@ -1600,19 +1613,6 @@ light_mask = 0
 position = Vector2(0, -7.5)
 shape = SubResource("2")
 debug_color = Color(0, 0.627451, 0.27451, 0.117647)
-
-[node name="HurtDetector" type="Area2D" parent="."]
-modulate = Color(0.992157, 0, 1, 0.282353)
-show_behind_parent = true
-z_index = -1
-position = Vector2(0, -2)
-collision_layer = 0
-collision_mask = 8194
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtDetector"]
-light_mask = 0
-position = Vector2(0, -5.5)
-shape = SubResource("3")
 
 [node name="SSPDetector" type="Area2D" parent="."]
 z_index = -1
@@ -1719,9 +1719,9 @@ visible = false
 light_mask = 2
 material = SubResource("61")
 position = Vector2(0, -16)
-texture = ExtResource("19")
-hframes = 5
-vframes = 6
+texture = ExtResource("24")
+hframes = 6
+vframes = 2
 script = ExtResource("13")
 
 [node name="EffectPlayer" type="AnimationPlayer" parent="."]
@@ -1734,19 +1734,10 @@ libraries = {
 "": SubResource("AnimationLibrary_oo325")
 }
 
-[node name="PhysicsBody3D" type="CharacterBody2D" parent="."]
-visible = false
-collision_layer = 32768
-collision_mask = 32768
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsBody3D"]
-position = Vector2(0, -9)
-shape = SubResource("72")
+[node name="BulletOrigin" type="Marker2D" parent="."]
+position = Vector2(0, -8)
 
 [connection signal="area_entered" from="ItemDetector" to="." method="_on_ItemDetector_area_entered"]
-[connection signal="area_entered" from="HurtDetector" to="." method="_on_HurtDetector_area_entered"]
-[connection signal="body_entered" from="HurtDetector" to="." method="_on_HurtDetector_body_entered"]
-[connection signal="body_exited" from="HurtDetector" to="." method="_on_HurtDetector_body_exited"]
 [connection signal="body_entered" from="SSPDetector" to="." method="_on_SSPDetector_body_entered"]
 [connection signal="body_exited" from="SSPDetector" to="." method="_on_SSPDetector_body_exited"]
 [connection signal="body_entered" from="CrouchDetector" to="MovementManager" method="_on_CrouchDetector_body_entered"]

@@ -70,5 +70,13 @@
 	walking to waypoint 0 /waypoint,child,0
 	walking to waypoint 1 /waypoint,child,1
 	",
+	
+	"simpletest":
+	"
+	this is a simple test
+	this is line 2
+	this is line 3
+	this is line 4
+	",
 
 }

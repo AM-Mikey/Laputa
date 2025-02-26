@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="1_gt62u"]
 [ext_resource type="Texture2D" uid="uid://c8m6g0gylx0hm" path="res://assets/Actor/NPC/Hermit.png" id="2"]
 
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(16, 28)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_28fta"]
+radius = 6.0
+height = 28.0
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(16, 28)
@@ -27,8 +28,8 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="5"]
-resource_name = "Notice"
-length = 0.4
+resource_name = "Talk"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -39,7 +40,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2]
+"values": [8]
 }
 
 [sub_resource type="Animation" id="4"]
@@ -62,7 +63,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aevyf"]
 _data = {
 "Idle": SubResource("3"),
-"Notice": SubResource("5"),
+"Talk": SubResource("5"),
 "Walk": SubResource("4")
 }
 
@@ -71,10 +72,11 @@ collision_layer = 128
 collision_mask = 8
 script = ExtResource("1_gt62u")
 id = "hermit"
+editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -14)
-shape = SubResource("1")
+shape = SubResource("CapsuleShape2D_28fta")
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0
@@ -88,8 +90,7 @@ shape = SubResource("2")
 position = Vector2(0, -16)
 texture = ExtResource("2")
 hframes = 4
-vframes = 2
-frame = 2
+vframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -97,14 +98,28 @@ libraries = {
 }
 
 [node name="FloorDetectorL" type="RayCast2D" parent="."]
-position = Vector2(-8, 0)
-target_position = Vector2(0, 8)
+position = Vector2(-8, -16)
+target_position = Vector2(0, 24)
 collision_mask = 520
 collide_with_areas = true
 
 [node name="FloorDetectorR" type="RayCast2D" parent="."]
-position = Vector2(8, 0)
-target_position = Vector2(0, 8)
+position = Vector2(8, -16)
+target_position = Vector2(0, 24)
+collision_mask = 520
+collide_with_areas = true
+
+[node name="WallDetectorR" type="RayCast2D" parent="."]
+position = Vector2(6, -7)
+rotation = -1.57079
+target_position = Vector2(0, 2)
+collision_mask = 520
+collide_with_areas = true
+
+[node name="WallDetectorL" type="RayCast2D" parent="."]
+position = Vector2(-6, -7)
+rotation = -4.71238
+target_position = Vector2(0, 2)
 collision_mask = 520
 collide_with_areas = true
 

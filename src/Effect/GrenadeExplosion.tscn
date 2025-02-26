@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource path="res://src/Effect/GrenadeExplosion.gd" type="Script" id=1]
-[ext_resource path="res://assets/Effect/GrenadeExplosion.png" type="Texture2D" id=2]
-[ext_resource path="res://assets/SFX/Placeholder/snd_big_crash.ogg" type="AudioStream" id=3]
+[ext_resource type="Script" path="res://src/Effect/GrenadeExplosion.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bouenluspymaw" path="res://assets/Effect/0GrenadeExplosion.png" id="2"]
+[ext_resource type="AudioStream" uid="uid://88muarxd303c" path="res://assets/SFX/Placeholder/snd_big_crash.ogg" id="3"]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Large"

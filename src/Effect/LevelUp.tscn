@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource path="res://src/Effect/LevelUp.gd" type="Script" id=1]
-[ext_resource path="res://assets/Effect/LevelUp.png" type="Texture2D" id=2]
+[ext_resource type="Script" path="res://src/Effect/LevelUp.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://c21j4bij77qxx" path="res://assets/Effect/0LevelUp.png" id="2"]
 
 [sub_resource type="Animation" id=1]
 length = 2.0

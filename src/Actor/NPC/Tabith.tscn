@@ -1,0 +1,112 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdf8dm56gc6bh"]
+
+[ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="1_m7ucc"]
+[ext_resource type="Texture2D" uid="uid://ce8140t6yt2xn" path="res://assets/Actor/NPC/Tabith.png" id="2_vtco3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_boymr"]
+radius = 6.0
+height = 28.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ejmb6"]
+size = Vector2(16, 28)
+
+[sub_resource type="Animation" id="3"]
+resource_name = "Idle"
+length = 3.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="4"]
+resource_name = "Walk"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ar2n2"]
+_data = {
+"Idle": SubResource("3"),
+"Walk": SubResource("4")
+}
+
+[node name="Tabith" type="CharacterBody2D" groups=["Actors", "Entities", "NPCs"]]
+collision_layer = 128
+collision_mask = 8
+script = ExtResource("1_m7ucc")
+starting_state = "walk"
+id = "tabith"
+editor_hidden = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("CapsuleShape2D_boymr")
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+modulate = Color(1, 1, 1, 0.172549)
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_ejmb6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("2_vtco3")
+hframes = 4
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ar2n2")
+}
+
+[node name="FloorDetectorL" type="RayCast2D" parent="."]
+position = Vector2(-8, -16)
+target_position = Vector2(0, 28)
+collision_mask = 520
+collide_with_areas = true
+
+[node name="FloorDetectorR" type="RayCast2D" parent="."]
+position = Vector2(8, -16)
+target_position = Vector2(0, 28)
+collision_mask = 520
+collide_with_areas = true
+
+[node name="WallDetectorR" type="RayCast2D" parent="."]
+position = Vector2(6, -7)
+rotation = -1.57079
+target_position = Vector2(0, 2)
+collision_mask = 520
+collide_with_areas = true
+
+[node name="WallDetectorL" type="RayCast2D" parent="."]
+position = Vector2(-6, -7)
+rotation = -4.71238
+target_position = Vector2(0, 2)
+collision_mask = 520
+collide_with_areas = true
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

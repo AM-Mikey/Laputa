@@ -11,3 +11,4 @@ offset_bottom = -25.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1")
 text = "Test"
+horizontal_alignment = 1

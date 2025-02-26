@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://botclre3ffxc4"]
-
-[node name="CollisionDetector" type="Area2D"]
-collision_layer = 64
-collision_mask = 196904

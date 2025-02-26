@@ -33,6 +33,7 @@ var active_tool = "tile"
 var subtool = "paint"
 var mouse_start_pos
 var grab_offset = Vector2()
+var pre_grab_tool: String
 var pre_grab_subtool: String
 var last_updated_cell: Vector2i #store for limiting updating cells on mousing over with a tool, i.e. painting
 var lmb_held = false
@@ -231,10 +232,12 @@ func _unhandled_input(event):
 		future_operations.clear()
 
 	#main part
+	await get_tree().process_frame #wait for new active to be set
 	match active_tool:
 		"tile": do_tile_input(event)
 		"entity": do_entity_input(event)
-
+	do_generic_input(event)
+	
 	#after, just so we can check held during main part
 	if event.is_action_released("editor_lmb"):
 		lmb_held = false
@@ -243,91 +246,11 @@ func _unhandled_input(event):
 
 
 
-func do_entity_input(event):
-	await get_tree().process_frame #wait for new active to be set
-	
-	var mouse_pos = w.get_global_mouse_position() #Vector2(w.get_global_mouse_position().x, w.get_global_mouse_position().y + 8)
-	var grid_pos = get_cell(mouse_pos)
-	
-	#var pos_has_enemy = false #TODO: consider reenabling
-	#for e in get_tree().get_nodes_in_group("Enemies"):
-		#if is_entity_at_position(e, grid_pos):
-			#pos_has_enemy = true
-	#var pos_has_prop = false
-	#for p in get_tree().get_nodes_in_group("Props"):
-		#if is_entity_at_position(p, grid_pos):
-			#pos_has_enemy = true
-	
-	
-
-	#placing
-	if event.is_action_pressed("editor_lmb"):
-		match subtool:
-			"enemy":
-				set_actor_spawn($Main/Win/Tab/Enemies.active_enemy_path, grid_pos)
-			"prop":
-				pass
-				#set_entity(grid_pos, $Main/Win/Tab/Props.active_prop_path, subtool)
-			"npc":
-				set_actor_spawn($Main/Win/Tab/NPCs.active_npc_path, grid_pos)
-			"trigger":
-				pass
-				#set_entity(grid_pos, $Main/Win/Tab/Triggers.active_trigger_path, subtool)
-			"noplace":
-				pass
-
-
-	#grabbing
-	if event.is_action_pressed("editor_rmb") and inspector.active and inspector.active_type != "background":
-		pre_grab_subtool = subtool
-		set_tool("entity", "grab")
-		grab_offset = inspector.active.global_position - mouse_pos
-
-	#releasing
-	if event.is_action_released("editor_rmb"):
-		set_tool("entity", pre_grab_subtool)
-
-	#moving
-	if event is InputEventMouseMotion:
-		hide_preview()
-		match subtool:
-			"enemy":
-				preview_actor_spawn($Main/Win/Tab/Enemies.active_enemy_path, grid_pos)
-			"prop":
-				pass
-				#preview_entity(grid_pos, $Main/Win/Tab/Props.active_prop_path, subtool)
-			"npc":
-				preview_actor_spawn($Main/Win/Tab/NPCs.active_npc_path, grid_pos)
-			"trigger":
-				pass
-				#preview_entity(grid_pos, $Main/Win/Tab/Triggers.active_trigger_path, subtool)
-			"grab":
-				if shift_held: inspector.active.global_position = Vector2(mouse_pos + grab_offset).snapped(Vector2(4,4))
-				else: inspector.active.global_position = Vector2(mouse_pos + grab_offset).snapped(Vector2(8,8))
-				#if "home" in inspector.active:
-					#inspector.active.home = inspector.active.global_position
-	
-	#deleting
-	if event is InputEventKey and event.is_pressed() and not event.is_echo():
-		if event.keycode == KEY_DELETE: #or event.keycode == KEY_BACKSPACE or (event.keycode == KEY_X and not ctrl_held)
-			if inspector.active:
-				if not(inspector.active_type == "background" or inspector.active_type == "spawn_point"):
-					inspector.active.queue_free()
-					inspector.on_deselected()
-
-
-
-
-
 func do_tile_input(event):
 	var mouse_pos = w.get_global_mouse_position()
 	
-	if event.is_action_pressed("debug_fly"):
-		print(active_operation)
-		#if auto_tile:
-			#print("auto tiling")
-			#set_auto_tiles() #TODO: testing
-
+	#if event.is_action_pressed("debug_fly"):
+		#print(active_operation)
 	
 	#pressing
 	if event.is_action_pressed("editor_rmb") or event.is_action_pressed("editor_lmb"):
@@ -344,6 +267,8 @@ func do_tile_input(event):
 				if event.is_action_pressed("editor_lmb"):
 					set_cells(get_cells_centerbox(mouse_pos))
 				elif event.is_action_pressed("editor_rmb"):
+					if inspector.active and inspector.active_type != "background":
+						return #don't erase a tile if we're selecting an entity
 					set_cells(get_cells_centerbox(mouse_pos), true)
 	
 	#moving
@@ -398,6 +323,69 @@ func do_tile_input(event):
 		#if auto_tile:
 			#print("auto tiling")
 			#set_auto_tiles() #TODO: testing
+
+
+
+func do_entity_input(event):
+	var mouse_pos = w.get_global_mouse_position() #Vector2(w.get_global_mouse_position().x, w.get_global_mouse_position().y + 8)
+	var grid_pos = get_cell(mouse_pos)
+
+	#placing
+	if event.is_action_pressed("editor_lmb"):
+		if grid_pos_has_entity(grid_pos):
+			am.play("ui_deny")
+			return
+		
+		match subtool:
+			"enemy":
+				set_actor_spawn($Main/Win/Tab/Enemies.active_enemy_path, grid_pos)
+			"prop":
+				pass
+			"npc":
+				set_actor_spawn($Main/Win/Tab/NPCs.active_npc_path, grid_pos)
+			"trigger":
+				pass
+			"noplace":
+				pass
+
+
+func do_generic_input(event):
+	var mouse_pos = w.get_global_mouse_position() #Vector2(w.get_global_mouse_position().x, w.get_global_mouse_position().y + 8)
+	var grid_pos = get_cell(mouse_pos)
+	
+	#grabbing entity
+	if event.is_action_pressed("editor_rmb") and inspector.active and inspector.active_type != "background":
+		pre_grab_tool = active_tool
+		pre_grab_subtool = subtool
+		set_tool("entity", "grab")
+		grab_offset = inspector.active.global_position - mouse_pos
+
+	#releasing entity
+	if event.is_action_released("editor_rmb") and inspector.active and inspector.active_type != "background":
+		set_tool(pre_grab_tool, pre_grab_subtool)
+
+	#moving entity
+	if event is InputEventMouseMotion:
+		hide_preview()
+		match subtool:
+			"enemy":
+				preview_actor_spawn($Main/Win/Tab/Enemies.active_enemy_path, grid_pos)
+			"prop":
+				pass
+			"npc":
+				preview_actor_spawn($Main/Win/Tab/NPCs.active_npc_path, grid_pos)
+			"trigger":
+				pass
+			"grab":
+				if shift_held: inspector.active.global_position = Vector2(mouse_pos + grab_offset).snapped(Vector2(4,4))
+				else: inspector.active.global_position = Vector2(mouse_pos + grab_offset).snapped(Vector2(8,8))
+	
+	#deleting entity
+	if event is InputEventKey and event.is_pressed() and not event.is_echo():
+		if event.keycode == KEY_DELETE and inspector.active:
+			if not(inspector.active_type == "background" or inspector.active_type == "spawn_point"):
+				inspector.active.queue_free()
+				inspector.on_deselected()
 
 
 
@@ -650,10 +638,14 @@ func set_actor_spawn(actor_path, pos):
 		#emit_signal("entity_selected", entity, entity_type) #select new entity
 		#past_operations.append(["set_entity",[position, entity_path, entity_type]])
 
-func del_entity(pos, traced = true):
-		for e in get_tree().get_nodes_in_group("Entities"):
-			if is_entity_at_position(e, pos):
-				e.queue_free()
+#func del_entity(pos, traced = true):
+	#var forgiveness = 4
+	#var selected_entities = []
+	#for a in get_tree().get_nodes_in_group("ActorSpawns"):
+		#selected_entities.append(a)
+	#for e in selected_entities:
+		#if abs(pos.x - e.global_position.x) < forgiveness and abs(pos.y - e.global_position.y) < forgiveness:
+			#e.queue_free()
 
 
 
@@ -715,7 +707,7 @@ func preview_actor_spawn(actor_path, pos):
 	var preview = ACTOR_SPAWN_PREVIEW.instantiate()
 	preview.actor_path = actor_path
 	preview.global_position = (pos * 16) + Vector2i(8, 16)
-	actor_collection.add_child(preview)
+	spawn_collection.add_child(preview)
 
 #func preview_entity(pos, entity_path, entity_type):
 	#var preview = ENTITY_PREVIEW.instantiate()
@@ -820,11 +812,15 @@ func get_tile_map_layer(y_pos: int) -> int:
 
 
 
-func is_entity_at_position(entity, pos, forgiveness = 4):
+func grid_pos_has_entity(grid_pos) -> bool: #TODO: add props
 	var out = false
-	if abs(pos.x - entity.global_position.x) < forgiveness and abs(pos.y - entity.global_position.y) < forgiveness:
-		if not entity.is_in_group("Previews"):
+	var selected_entities = []
+	for a in get_tree().get_nodes_in_group("ActorSpawns"):
+		selected_entities.append(a.get_node("CollisionShape2D"))
+	for e in selected_entities:
+		if get_cell(e.global_position) == grid_pos:
 			out = true
+			return out
 	return out
 
 
@@ -895,7 +891,6 @@ func on_tab_changed(tab):
 		"Levels":
 			set_tool("level")
 			emit_signal("level_selected", w.current_level)
-		
 		"Enemies": 
 			set_tool("entity", "enemy")
 			#set_entities_pickable()

@@ -77,7 +77,7 @@ func get_initial_velocity(scoped_projectile_speed, scoped_direction) -> Vector2:
 func _on_CollisionDetector_body_entered(body): #shadows
 	if disabled: return
 	#enemy
-	if body.get_collision_layer_value(2): 
+	if body.get_collision_layer_value(2):
 		if not touched_floor:
 			body.hit(damage, get_blood_dir(body))
 		else:
@@ -115,9 +115,9 @@ func _on_Timer_timeout():
 func _on_ExplosionDetector_body_entered(body):
 	if disabled: return
 	#player
-	if body.get_collision_layer_value(1): 
-		var knockback_direction = Vector2(sign(body.global_position.x - global_position.x), 0) #sign(body.global_position.y - global_position.y)
-		body.hit(int(damage/4.0), knockback_direction)
+	if body.get_collision_layer_value(1):
+		var knockback_direction = Vector2(sign(body.get_parent().global_position.x - global_position.x), 0) #sign(body.global_position.y - global_position.y)
+		body.get_parent().hit(int(damage/4.0), knockback_direction)
 	#enemy
 	elif body.get_collision_layer_value(2):
 		body.hit(int(damage/4.0), get_blood_dir(body))

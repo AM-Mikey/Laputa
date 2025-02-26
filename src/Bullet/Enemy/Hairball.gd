@@ -34,7 +34,3 @@ func calc_velocity(projectile_speed, direction) -> Vector2:
 	if direction.y < 0:
 		out.y = projectile_speed * direction.y
 	return out
-
-func on_break(method):
-	if disabled == false:
-		do_fizzle("bullet")

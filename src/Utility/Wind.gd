@@ -68,7 +68,7 @@ func fade_out():
 
 func _on_Wind_body_entered(body):
 	if body.get_collision_layer_value(1): #player
-		player_targets.append(body)
+		player_targets.append(body.get_parent())
 	if body.get_collision_layer_value(2): #enemy
 		enemy_targets.append(body)
 	if body.get_collision_layer_value(7): #bullet foe
@@ -76,7 +76,7 @@ func _on_Wind_body_entered(body):
 
 func _on_Wind_body_exited(body):
 	if body.get_collision_layer_value(1): #player
-		player_targets.erase(body)
+		player_targets.erase(body.get_parent())
 	if body.get_collision_layer_value(2): #enemy
 		enemy_targets.erase(body)
 	if body.get_collision_layer_value(7): #bullet foe

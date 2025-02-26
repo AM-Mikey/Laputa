@@ -5,7 +5,7 @@ func _ready():
 
 
 func _on_Ladder_body_entered(body):
-	active_bodies.append(body)
+	active_bodies.append(body.get_parent())
 
 func _on_Ladder_body_exited(body):
 	if not get_overlap(body):

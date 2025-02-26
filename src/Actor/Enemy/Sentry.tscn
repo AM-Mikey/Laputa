@@ -72,8 +72,9 @@ _data = {
 
 [node name="Sentry" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
-collision_mask = 522
+collision_mask = 520
 script = ExtResource("2")
+debug = true
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -88,7 +89,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -8)
 shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 262144
@@ -97,16 +98,15 @@ collision_mask = 65536
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -8)
 shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-modulate = Color(0.992157, 0.992157, 0.992157, 0.156863)
 shape = SubResource("2")
-debug_color = Color(0, 0.627451, 0.27451, 0.156863)
+debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
@@ -115,9 +115,8 @@ hframes = 8
 vframes = 2
 frame = 8
 
-[node name="FireCooldown" type="Timer" parent="."]
+[node name="StateTimer" type="Timer" parent="."]
 one_shot = true
-autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -128,3 +127,4 @@ libraries = {
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
+[connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]

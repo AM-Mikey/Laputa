@@ -242,13 +242,6 @@ func _on_ItemDetector_area_entered(area):
 	#if area.get_collision_layer_value(14): #kill
 		#die()
 
-
-
-
-
-func _on_angled_ceiling_detector_body_shape_exited(body_rid, body, body_shape_index, local_shape_index):
-	pass # Replace with function body.
-
 ### MISC
 
 

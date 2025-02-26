@@ -80,7 +80,7 @@ func animate():
 ### SIGNALS ###
 
 func _on_PlayerDetector_body_entered(body):
-	target = body
+	target = body.get_parent()
 	if state == "idle":
 		change_state("targeting")
 

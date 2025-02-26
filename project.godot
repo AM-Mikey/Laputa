@@ -70,13 +70,14 @@ WindowResizer="*res://addons/WindowResizer.gd"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 
 [editor]
 
+naming/default_signal_callback_name="_on_{NodeName}_{signal_name}"
 naming/scene_name_casing=1
 
 [editor_plugins]
@@ -417,6 +418,7 @@ window_maximize={
 2d_physics/layer_11="hp"
 2d_physics/layer_12="xp"
 2d_physics/layer_13="ammo"
+2d_physics/layer_14="enemybull"
 2d_physics/layer_15="editorselectable"
 2d_physics/layer_16="rigidbody"
 2d_physics/layer_17="playerhurt"

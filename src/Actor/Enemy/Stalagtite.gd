@@ -57,7 +57,7 @@ func do_hang():
 	if collider:
 		if collider is TileMap: return
 		if collider.get_collision_layer_value(1):
-			target = collider
+			target = collider.get_parent()
 			change_state("hangactive")
 			return
 

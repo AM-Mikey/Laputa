@@ -6,7 +6,7 @@ const DB = preload("res://src/Dialog/DialogBox.tscn")
 const STATE_LABEL = preload("res://src/Utility/StateLabel.tscn")
 
 var state: String #TODO: make npc states, player states and enemy states work the same
-@export var starting_state: String
+@export var starting_state := "idle"
 var cached_state: String
 var predialog_state: String
 
@@ -62,16 +62,16 @@ func _physics_process(_delta):
 	move_and_slide()
 
 
-func change_animation(animation: String, random_start = false):
+func change_animation(animation: String): #, random_start = false): TODO: random start doesnt work with discrete animations because we could randomly start inbetween changing frames, thus keeping the old animation going until we hit a keyframe
 	if animation == $AnimationPlayer.current_animation:
 		return
 	if not $AnimationPlayer.has_animation(animation):
 		print("WARNING: animation: " + animation + " not found on npc with name: " + name)
 	
 	var start_time = 0
-	if random_start:
-		rng.randomize()
-		start_time = rng.randf_range(0, $AnimationPlayer.current_animation_length)
+	#if random_start:
+		#rng.randomize()
+		#start_time = rng.randf_range(0, $AnimationPlayer.current_animation_length)
 	
 	$AnimationPlayer.play(animation, start_time)
 
@@ -137,31 +137,44 @@ func enter_walk():
 	rng.randomize()
 	$StateTimer.start(rng.randf_range(1.0, 10.0))
 	await $StateTimer.timeout
-	change_state("wait")
+	if state == "walk":
+		change_state("wait")
 	return
 
 func do_walk():
 	$Sprite2D.flip_h = true if move_dir.x > 0 else false #set sprite to move_dir
+	
 	if (not $FloorDetectorL.is_colliding() and move_dir.x < 0) \
 	or (not $FloorDetectorR.is_colliding() and move_dir.x > 0):
+		change_state("wait")
+		return
+	if $WallDetectorL.is_colliding() and move_dir.x < 0 \
+	or $WallDetectorR.is_colliding() and move_dir.x > 0:
+		$Sprite2D.flip_h = !$Sprite2D.flip_h
+		move_dir.x = move_dir.x * -1.0
 		change_state("wait")
 		return
 
 
 func enter_wait():
+	change_animation("Idle")
 	speed = Vector2.ZERO
 	rng.randomize()
-	change_animation("Idle", true)
 	$StateTimer.start(rng.randf_range(1.0, 5.0))
 	await $StateTimer.timeout
-	change_state("walk")
+	if state == "wait":
+		change_state("walk")
 	return
 
 
 func enter_talk():
-	change_animation("Idle") #might cause issues with idle animation restarting
+	if $AnimationPlayer.has_animation("Talk"):
+		change_animation("Talk") 
+	else:
+		change_animation("Idle") 
 	speed = Vector2.ZERO
 	look_at_node(pc)
+	
 	pc.inspect_target = self
 	if get_tree().get_root().get_node("World/UILayer").has_node("DialogBox"):
 		pass
@@ -232,12 +245,12 @@ func walk_to_waypoint(index):
 ### SIGNALS
 
 func _on_PlayerDetector_body_entered(body):
-	active_pc = body
+	active_pc = body.get_parent()
 	
 func _on_PlayerDetector_body_exited(_body):
 	active_pc = null
 
-func _on_waypoint_bail_timer_timeout():
+func _on_waypoint_bail_timer_timeout(): #TODO: consider reimplementing (ala child.tscn)
 	pass
 	#if disabled or waypoints.is_empty(): return
 	#set_target(get_next_waypoint())

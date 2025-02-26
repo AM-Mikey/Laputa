@@ -1,13 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://bohy43u6frlcy"]
+[gd_scene load_steps=11 format=3 uid="uid://bohy43u6frlcy"]
 
 [ext_resource type="Script" path="res://src/Actor/Enemy/Shield.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dkiev70oqmmm1" path="res://assets/Actor/Enemy/Shield.png" id="3"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1abx7"]
+radius = 7.0
+height = 16.0
+
 [sub_resource type="RectangleShape2D" id="10"]
-size = Vector2(16, 17)
+size = Vector2(7, 16)
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(14, 15)
+size = Vector2(14, 16)
 
 [sub_resource type="Animation" id="8"]
 resource_name = "IdleLeft"
@@ -86,45 +90,53 @@ _data = {
 }
 
 [node name="Shield" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
-collision_layer = 514
-collision_mask = 8
+collision_layer = 2
+collision_mask = 520
 script = ExtResource("1")
 debug = true
 editor_hidden = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_1abx7")
 
 [node name="BulletBlocker" type="Area2D" parent="."]
 collision_layer = 32
 collision_mask = 64
 input_pickable = false
-monitoring = false
-monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletBlocker"]
-position = Vector2(0, -7.5)
+[node name="Left" type="CollisionShape2D" parent="BulletBlocker"]
+position = Vector2(-3.5, -8)
 shape = SubResource("10")
-disabled = true
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -7.5)
-shape = SubResource("1")
+[node name="Right" type="CollisionShape2D" parent="BulletBlocker"]
+position = Vector2(3.5, -8)
+shape = SubResource("10")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, -7.5)
-shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+[node name="Left" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-3.5, -8)
+shape = SubResource("10")
+debug_color = Color(0, 1, 0, 0.235294)
+
+[node name="Right" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(3.5, -8)
+shape = SubResource("10")
+debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 262144
 collision_mask = 65536
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(0, -7.5)
+position = Vector2(0, -8)
 shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
@@ -139,12 +151,14 @@ libraries = {
 }
 
 [node name="FloorDetectorL" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(-7, -8)
 target_position = Vector2(0, 16)
 collision_mask = 520
 collide_with_areas = true
 
 [node name="FloorDetectorR" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(7, -8)
 target_position = Vector2(0, 16)
 collision_mask = 520

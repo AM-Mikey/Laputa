@@ -331,7 +331,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_s5m1v")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 262144
@@ -340,7 +340,7 @@ collision_mask = 65536
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_s5m1v")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="HideDetector" type="Area2D" parent="."]
 collision_layer = 0
@@ -366,7 +366,7 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShootDetector"]
 position = Vector2(0, -72)
 shape = SubResource("4")
-debug_color = Color(0, 0.627451, 0.27451, 0.156863)
+debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)

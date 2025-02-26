@@ -93,25 +93,30 @@ func _on_CollisionDetector_body_entered(body):
 		if body.get_collision_layer_value(9): 
 			on_break(break_method)
 		#player
-		elif body.get_collision_layer_value(1) and is_enemy_bullet: 
-			body.hit(damage, get_blood_dir(body))
+		elif body.get_collision_layer_value(1) and is_enemy_bullet:
+			body.get_parent().hit(damage, get_blood_dir(body))
 			queue_free()
 		#armor
 		elif body.get_collision_layer_value(6):
 			do_fizzle("armor")
 
 
-#used for animated grass at the moment
 func _on_CollisionDetector_area_entered(area):
 	if disabled: return
 	
 	if area.get_collision_layer_value(18): #enemyhurt
-		print("ow")
+		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
+		queue_free()
+	elif area.get_collision_layer_value(17): #playerhurt
 		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
 		queue_free()
 	elif area.get_collision_layer_value(9): #breakable
-		on_break(break_method)
+		area.get_parent().on_break(break_method)
+		#on_break(break_method) produced two fizzle particles so instead do:
+		queue_free()
 	elif area.get_collision_layer_value(4): #world
 		do_fizzle("world")
 	elif area.get_collision_layer_value(6): #armor
+		print("armor")
 		do_fizzle("armor")
+		

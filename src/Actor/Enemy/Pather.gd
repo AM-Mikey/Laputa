@@ -67,7 +67,7 @@ func _physics_process(delta):
 
 
 func on_crush_body_entered(body, dir):
-	t_body = body
+	t_body = body.get_parent()
 	t_dir = dir
 func on_crush_body_exited(body):
 	t_body = null

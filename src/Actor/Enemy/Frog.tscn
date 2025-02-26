@@ -1,7 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dr1kk5b0rkos7"]
+[gd_scene load_steps=12 format=3 uid="uid://dr1kk5b0rkos7"]
 
 [ext_resource type="Script" path="res://src/Actor/Enemy/Frog.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cimkcsmiyj0d8" path="res://assets/Actor/Enemy/Frog.png" id="2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qm1p1"]
+radius = 7.0
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(14, 14)
@@ -109,7 +112,7 @@ speed = Vector2(50, 100)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
-shape = SubResource("1")
+shape = SubResource("CircleShape2D_qm1p1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -119,7 +122,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -7)
 shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 262144
@@ -128,16 +131,16 @@ collision_mask = 65536
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -7)
 shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-modulate = Color(0, 0.627451, 0.27451, 0.156863)
 position = Vector2(0, -8)
 shape = SubResource("2")
+debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 4

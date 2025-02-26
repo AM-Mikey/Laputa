@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://brvh7gyxa1ru3"]
 
 [ext_resource type="Script" path="res://src/Effect/LevelDown.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://p3ef6y0ooe7e" path="res://assets/Effect/LevelDown.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://p3ef6y0ooe7e" path="res://assets/Effect/0LevelDown.png" id="2"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "LevelDown"

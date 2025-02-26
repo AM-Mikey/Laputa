@@ -2,21 +2,22 @@
 
 [ext_resource type="Texture2D" uid="uid://d27tf3k2og0is" path="res://assets/Bullet/Laser.png" id="1"]
 [ext_resource type="Script" path="res://src/Bullet/Laser.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/CollisionDetector.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(12, 1)
 
 [node name="Laser1" type="CharacterBody2D"]
-collision_layer = 64
+collision_layer = 0
 collision_mask = 0
 script = ExtResource("2")
 
-[node name="CollisionDetector" parent="." instance=ExtResource("3")]
+[node name="PlayerCollisionDetector" parent="." instance=ExtResource("3")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector"]
 position = Vector2(-6, 0.5)
 shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-8, 0)
@@ -37,6 +38,6 @@ one_shot = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
-[connection signal="area_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
-[connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
+[connection signal="area_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
+[connection signal="body_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

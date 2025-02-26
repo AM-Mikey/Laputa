@@ -13,10 +13,8 @@ func setup():
 	reward = 2
 	damage_on_contact = 2
 	speed = Vector2(50, 50)
+	change_state("wait")
 
-func bullet_block(state: bool):
-	bb.monitoring = state
-	bb.monitorable = state
 
 ### STATES ###
 
@@ -50,7 +48,6 @@ func enter_wait():
 	rng.randomize()
 	$StateTimer.start(rng.randf_range(1.0, wait_max_time))
 	await $StateTimer.timeout
-	print("ok")
 	change_state("walk")
 
 
@@ -67,10 +64,17 @@ func set_move_dir(dir):
 	match move_dir:
 		Vector2.LEFT: 
 			ap.play("WalkLeft")
-			bullet_block(true)
+			$BulletBlocker/Left.set_deferred("disabled", false)
+			$BulletBlocker/Right.set_deferred("disabled", true)
+			$Hurtbox/Left.set_deferred("disabled", true)
+			$Hurtbox/Right.set_deferred("disabled", false)
 		Vector2.RIGHT: 
 			ap.play("WalkRight")
-			bullet_block(false)
+			print("right")
+			$BulletBlocker/Left.set_deferred("disabled", true)
+			$BulletBlocker/Right.set_deferred("disabled", false)
+			$Hurtbox/Left.set_deferred("disabled", false)
+			$Hurtbox/Right.set_deferred("disabled", true)
 
 
 

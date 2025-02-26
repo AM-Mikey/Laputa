@@ -1,7 +1,6 @@
 extends Bullet
 
 
-
 func _ready():
 	speed = 64
 	f_range = 64

@@ -6,13 +6,13 @@ var move_dir: Vector2
 const HAIRBALL = preload("res://src/Bullet/Enemy/Hairball.tscn")
 
 @export var height_tolerance = 7
-@export var cooldown_time = 2
+@export var cooldown_time = 2.0
 @export var projectile_speed: int = 150
 @export var projectile_damage: int = 2
 
 
-@export var lock_distance = 128
-@export var lock_tolerance = 16
+#@export var shoot_distance = 128
+#@export var shoot_tolerance = 16
 
 var target: Node = null
 var locked_on = false
@@ -21,132 +21,69 @@ var locked_on = false
 var shooting = false
 
 
-func _ready():
+func setup():
+	change_state("idle")
 	hp = 4
 	damage_on_contact = 1
 	speed = Vector2(50, 200)
 	gravity = 250
-	
 	reward = 2
+
+
+### STATES ###
+
+func enter_target():
+	change_state("shoot")
+
+#func enter_target():
+	#var target_pos_x = target.global_position.x
+	#if global_position.x >= target_pos_x: #player to the left
+		#target_pos_x += shoot_distance
+		#look_dir = Vector2.LEFT
+	#else: #player to the right
+		#target_pos_x -= shoot_distance
+		#look_dir = Vector2.RIGHT
+	#
+	#if abs(global_position.x - target_pos_x) < shoot_tolerance:
+		#change_state("shoot")
+
+func enter_shoot():
+	prepare_bullet()
+	$StateTimer.start(cooldown_time)
 	
-	$FireCooldown.start(cooldown_time)
-	
-
-func _physics_process(delta):
-	if disabled or dead:
-		return
-	if locked_on:
-		distance_lock()
-		if move_dir.x == 0: #in position to hit
-			fire()
-	else:
-		move_dir.x = 0
-
-#	animate()
-
-
-
-func _on_PlayerDetector_body_entered(body):
-	target = body
-	locked_on = true
-
-func _on_PlayerDetector_body_exited(_body):
-	shooting = false
-	target = null
-	locked_on = false
 	
 
-func distance_lock():
-		var lock_pos_x = target.global_position.x
-		
-		if global_position.x - lock_pos_x > 0: #player to the left
-			lock_pos_x += lock_distance
-			look_dir = Vector2.LEFT
-		elif global_position.x - lock_pos_x < 0: #player to the right
-			lock_pos_x -= lock_distance
-			look_dir = Vector2.RIGHT
-			
-		move_dir.x = sign(lock_pos_x - global_position.x)
-		
-		#print("distance to lock pos: ", lock_pos_x - global_position.x)
-		
-		if abs(global_position.x - lock_pos_x) < lock_tolerance:
-			move_dir.x = 0
 
 
 
 
 
-func fire():
-	if not shooting:
-			shooting = true
-			if $FireCooldown.is_stopped():
-				while target != null:
-					$FireCooldown.start(cooldown_time)
-					
-#					if target.global_position < global_position: #player to the left
-#						#look_dir = Vector2.LEFT
-#					elif target.global_position > global_position: #player to the right
-#						#look_dir = Vector2.RIGHT
-						
-					$AnimationPlayer.play("ShootLeft")
-					await get_tree().create_timer(0.2).timeout #delay for animation sync
-					if target == null:
-						break
-					prepare_bullet()
-					await $FireCooldown.timeout
-			else: 
-				await $FireCooldown.timeout
-				fire()
 
 func prepare_bullet():
+	am.play("enemy_shoot", self)
 	var bullet = HAIRBALL.instantiate()
 	bullet.damage = projectile_damage
 	bullet.speed = projectile_speed
 	
 	bullet.position = Vector2($CollisionShape2D.global_position.x, $CollisionShape2D.global_position.y - height_tolerance)
-	bullet.direction = Vector2(look_dir.x /2 , -1) #Adjust this for angle
+	bullet.direction = Vector2(look_dir.x / 2.0, -1) #Adjust this for angle
 	
-	get_tree().get_current_scene().add_child(bullet)
-
-
-	$PosFire.play()
+	w.middle.add_child(bullet)
 
 
 
-
-#func animate():
-#	if look_dir == Vector2.LEFT:
-#		if locked_on:
-#			if move_dir.x != 0:
-#				$BodyPlayer.play("WalkLeft")
-#			else:
-#				$BodyPlayer.play("StandLeft")
-#		else:
-#			if is_on_floor():
-#				$BodyPlayer.play("StandLeft")
-##			else:
-##				if move_dir.y < 0:
-##					$BodyPlayer.play("RiseLeft")
-##				elif move_dir.y > 0:
-##					$BodyPlayer.play("FallLeft")
-#
-#	if look_dir == Vector2.RIGHT:
-#		if locked_on:
-#			if move_dir.x != 0:
-#				$BodyPlayer.play("WalkRight")
-#			else:
-#				$BodyPlayer.play("StandRight")
-#		else:
-#			if is_on_floor():
-#				$BodyPlayer.play("StandRight")
-##			else:
-##				if move_dir.y < 0:
-##					$BodyPlayer.play("RiseRight")
-##				elif move_dir.y > 0:
-##					$BodyPlayer.play("FallRight")
+### SIGNALS ###
 
 
 
+func _on_PlayerDetector_body_entered(body):
+	target = body.get_parent()
+	change_state("target")
 
+func _on_PlayerDetector_body_exited(_body):
+	target = null
+	change_state("idle")
 
+func _on_StateTimer_timeout():
+	if state == "shoot":
+		change_state("target")

@@ -6,7 +6,7 @@ func _ready():
 	trigger_type = "stairs"
 
 func _on_body_entered(body):
-	active_pc = body
+	active_pc = body.get_parent()
 	old_ground_cof = active_pc.get_node("MovementManager").ground_cof
 	active_pc.get_node("MovementManager").ground_cof = 1
 	

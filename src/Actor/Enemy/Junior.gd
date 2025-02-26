@@ -60,7 +60,7 @@ func enter_aim():
 	change_state("shoot")
 
 func enter_shoot():
-	ap.play("Shoot")
+	am.play("enemy_shoot", self)
 	var bullet = BULLET.instantiate()
 	bullet.position = $BulletOrigin.global_position
 	bullet.origin = bullet.position #TODO: WHY not just have it set origin on ready?
@@ -93,7 +93,7 @@ func _on_hit(_damage, blood_direction):
 		do_flip_check()
 
 func _on_PlayerDetector_body_entered(body):
-	target = body
+	target = body.get_parent()
 	if state != "shoot" and state != "aim":
 		change_state("aim")
 

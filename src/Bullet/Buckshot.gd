@@ -29,8 +29,8 @@ func _on_CollisionDetector_body_entered(body): #shadows parent
 			body.hit(damage, get_blood_dir(body))
 			queue_free()
 		#player
-		elif body.get_collision_layer_value(1) and is_enemy_bullet: 
-			body.hit(damage, get_blood_dir(body))
+		elif body.get_collision_layer_value(1) and is_enemy_bullet:
+			body.get_parent().hit(damage, get_blood_dir(body))
 		#armor #TODO:fix this interaction
 		elif body.get_collision_layer_value(6):
 			do_fizzle("armor")

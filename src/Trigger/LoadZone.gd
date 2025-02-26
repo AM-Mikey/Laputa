@@ -14,7 +14,7 @@ func _ready():
 
 
 func _on_body_entered(body):
-	active_pc = body
+	active_pc = body.get_parent()
 	enter_load_zone()
 func _on_body_exited(_body):
 	pass

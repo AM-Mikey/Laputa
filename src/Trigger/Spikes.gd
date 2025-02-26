@@ -3,7 +3,7 @@ extends Trigger
 var damage = 2
 
 func _on_body_entered(body):
-	active_pc = body
+	active_pc = body.get_parent()
 	_do_damage()
 
 func _on_body_exited(body):
