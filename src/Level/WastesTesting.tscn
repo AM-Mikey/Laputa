@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3edgtfqu8crn"]
+
+[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_gqwwp"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_3ucb2"]
+[ext_resource type="Texture2D" uid="uid://u0arku8ueeeh" path="res://assets/Background/ParalaxTest3.png" id="3_dxdiw"]
+[ext_resource type="TileSet" uid="uid://cmamrss3wupgb" path="res://src/Tile/Wastes3.tres" id="4_tdjow"]
+[ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="5_w8juu"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="6_8lqyu"]
+
+[node name="WastesTesting" type="Node2D"]
+script = ExtResource("1_gqwwp")
+level_name = "DefaultGodot4"
+music = "shop"
+dialog_json = "res://src/Dialog/Village.json"
+conversation = "cutscene_test"
+
+[node name="LevelLimiter" parent="." instance=ExtResource("2_3ucb2")]
+offset_top = -256.0
+offset_right = 704.0
+offset_bottom = 0.0
+texture = ExtResource("3_dxdiw")
+layers = 4
+parallax_near = 1.0
+focus = 2
+tile_mode = 0
+
+[node name="TileMap" type="TileMap" parent="."]
+z_index = 1
+tile_set = ExtResource("4_tdjow")
+format = 2
+layer_0/name = "FarBack"
+layer_0/z_index = -1
+layer_1/name = "Back"
+layer_1/z_index = -1
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Front"
+layer_2/z_index = 1
+layer_2/tile_data = PackedInt32Array(-458748, 0, 8, -458747, 0, 8, -458746, 0, 8, -458745, 0, 8, -458744, 0, 8, -458743, 0, 8, -458742, 0, 8, -458741, 0, 8, -458740, 0, 8, -458739, 0, 8, -458738, 0, 8, -458737, 0, 8, -458736, 0, 8, -458735, 0, 8, -458734, 0, 8, -458733, 0, 8, -458732, 0, 8, -458731, 0, 8, -458730, 0, 8, -458729, 0, 8, -458728, 0, 8, -458727, 0, 8, -458726, 0, 8, -458725, 0, 8, -524269, 0, 8, -524268, 0, 8, -524267, 0, 8, -524266, 0, 8)
+layer_3/name = "FarFront"
+layer_3/z_index = 2
+layer_3/tile_data = PackedInt32Array(-524284, 0, 12, -458748, 0, 13, -524283, 65536, 12, -458747, 65536, 13, -524282, 131072, 12, -458746, 131072, 13, -524281, 196608, 12, -458745, 196608, 13, -524280, 0, 12, -458744, 0, 13, -524279, 65536, 12, -458743, 65536, 13, -524278, 131072, 12, -458742, 131072, 13, -524277, 65536, 12, -458741, 65536, 13, -524275, 65536, 12, -458739, 65536, 13, -524274, 131072, 12, -458738, 131072, 13, -524273, 65536, 12, -458737, 65536, 13, -524272, 131072, 12, -458736, 131072, 13, -524271, 65536, 12, -458735, 65536, 13, -524270, 131072, 12, -458734, 131072, 13, -524269, 0, 13, -524268, 65536, 13, -589805, 0, 12, -589804, 65536, 12, -589803, 131072, 12, -524267, 131072, 13, -589802, 196608, 12, -524266, 196608, 13, -524265, 0, 12, -458729, 0, 13, -524264, 65536, 12, -458728, 65536, 13, -524263, 131072, 12, -458727, 131072, 13, -524262, 196608, 12, -458726, 196608, 13, -524276, 131072, 12, -458740, 131072, 13)
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="Actors" type="Node2D" parent="."]
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="SunLight" parent="." instance=ExtResource("5_w8juu")]
+position = Vector2(35, -198)
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="SpawnPoint" parent="Spawns" instance=ExtResource("6_8lqyu")]
+position = Vector2(264, -128)

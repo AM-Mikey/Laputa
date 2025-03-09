@@ -14,7 +14,8 @@ func _ready():
 	setup_enemies()
 
 
-func setup_enemies():
+func setup_enemies(): #TODO: connect this to editor instead of _ready
+	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
 	var index = 0
 	for e in find_enemy_scenes("res://src/Actor/Enemy/"):
 		
@@ -57,3 +58,8 @@ func unpick_enemy():
 	active_enemy_path = null
 	for e in $VBox/Margin/Scroll/Buttons.get_children():
 			e.deactivate()
+
+### SINGALS ###
+
+func on_tab_changed(tab_name):
+	pass

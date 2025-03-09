@@ -47,6 +47,7 @@ var brush_one_way = false
 ### SETUP
 
 func setup_tile_set():
+	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
 	tile_master.setup_tile_buttons(self, normal_buttons)
 	tile_master.setup_tile_buttons(self, collision_buttons)
 
@@ -101,21 +102,22 @@ func _input(event):
 			if event.is_action_pressed("editor_lmb"):
 				mc.display("grabclosed")
 				select_button(hovered_button)
-			if active_normal_mode == "remap":
-				if event.is_action_released("editor_lmb") and hovered_button:
+			
+			if event.is_action_released("editor_lmb") and hovered_button:
+				if hovered_button != active_button:
 					mc.display("grabopen")
-					if hovered_button != active_button:
+					if active_normal_mode == "remap":
 						remap_tiles(active_button, hovered_button)
-#			if event.is_action_pressed("editor_rmb"):
-#				swap_tile(active_tile, hovered_button)
-			#if event.is_action_pressed("editor_mmb"):
-					#if active_tile:
-						#remap_tiles(active_tile, hovered_button)
-		"collision":
-			if event.is_action_pressed("editor_lmb"):
-				set_collision(hovered_button)
-			if event.is_action_pressed("editor_rmb"):
-				erase_collision(hovered_button)
+					elif active_normal_mode == "swap":
+						var first_pos = Vector2i(active_button.tile_set_position / 16.0)
+						var second_pos = Vector2i(hovered_button.tile_set_position / 16.0)
+						swap_tiles(first_pos, second_pos)
+					
+		#"collision":
+			#if event.is_action_pressed("editor_lmb"):
+				#set_collision(hovered_button)
+			#if event.is_action_pressed("editor_rmb"):
+				#erase_collision(hovered_button)
 
 
 func select_button(button: Object):
@@ -124,17 +126,18 @@ func select_button(button: Object):
 	set_cursor(tile_region)
 
 
-#func swap_tile(: Object, second: Object): #repalces tile mapping without graphics
-	#var first_region = Rect2(first.tile_set_position, Vector2(16, 16))
-	#var second_region = 
-	#editor.tile_set.tile_set_region(first, second_region)
-	#editor.tile_set.tile_set_region(second, first_region)
+
 
 func remap_tiles(first: Object, second: Object):
 	var first_pos = Vector2i(first.tile_set_position / 16.0)
 	var second_pos = Vector2i(second.tile_set_position / 16.0)
-	var main_tile_set = w.current_level.get_node("TileMap").tile_set
+	swap_tiles(first_pos, second_pos)
+	swap_tileset_pixels(first_pos, second_pos)
+	active_button = second
 
+
+func swap_tiles(first_pos, second_pos):
+	var main_tile_set = w.current_level.get_node("TileMap").tile_set
 #1 create a list of all tilemaps that use this tileset
 	var levels = []
 	var dir = DirAccess.open("res://src/Level/")
@@ -144,7 +147,6 @@ func remap_tiles(first: Object, second: Object):
 			if f.get_extension() == "tscn":
 				levels.append(f)
 	else: printerr("ERROR: Could not load directory: res://src/Level/")
-
 #2 create a list of all cells that use first and second tiles
 	for l in levels:
 		var level_path = ("res://src/Level/" + l)
@@ -153,14 +155,10 @@ func remap_tiles(first: Object, second: Object):
 		var loaded_level = w.current_level if level_path == w.current_level.scene_file_path else load(level_path).instantiate()
 		var tile_map = loaded_level.get_node("TileMap")
 		if tile_map.tile_set == main_tile_set:
-			print("jackpot")
 			for layer in 4:
 				first_cell_positions.append_array(tile_map.get_used_cells_by_id(layer, -1, first_pos))
 				second_cell_positions.append_array(tile_map.get_used_cells_by_id(layer, -1, second_pos))
-
 #3 set the list of cells to the reverse tile
-			print(first_cell_positions)
-			print(second_cell_positions)
 			var first_tile_map_layer = get_tile_map_layer(first_pos.y)
 			var second_tile_map_layer = get_tile_map_layer(second_pos.y)
 			for cell in first_cell_positions:
@@ -170,15 +168,14 @@ func remap_tiles(first: Object, second: Object):
 				if !first_cell_positions.has(cell):
 					tile_map.set_cell(second_tile_map_layer, cell, -1) #erase
 				tile_map.set_cell(first_tile_map_layer, cell, 0, first_pos)
-			#tile_map.tile_set
-
 #4 save level
 			var packed_scene = PackedScene.new()
 			packed_scene.pack(loaded_level)
 			var err = ResourceSaver.save(packed_scene, "res://src/Level/" + l)
-	active_button = second
 
-#5 swap tileset pixels
+
+func swap_tileset_pixels(first_pos, second_pos):
+	var main_tile_set = w.current_level.get_node("TileMap").tile_set
 	var first_pixels = get_tile_as_pixels(first_pos)
 	var second_pixels = get_tile_as_pixels(second_pos)
 	set_pixels(first_pos, second_pixels)
@@ -193,7 +190,6 @@ func remap_tiles(first: Object, second: Object):
 func get_tile_as_pixels(tile_pos: Vector2i) -> Array: #2d
 	var texture = w.current_level.get_node("TileMap").tile_set.get_source(0).texture
 	var image = texture.get_image()
-	
 	var tile = []
 	var r_id = tile_pos.y * 16
 	for r in 16:
@@ -205,14 +201,12 @@ func get_tile_as_pixels(tile_pos: Vector2i) -> Array: #2d
 			p_id += 1
 		tile.append(row)
 		r_id += 1
-	
 	return tile
 
 
 func set_pixels(tile_pos: Vector2i, pixels: Array):
 	var texture = w.current_level.get_node("TileMap").tile_set.get_source(0).texture
 	var image = texture.get_image()
-	
 	var r_id = tile_pos.y * 16
 	for r in pixels:
 		var p_id = tile_pos.x * 16
@@ -220,7 +214,6 @@ func set_pixels(tile_pos: Vector2i, pixels: Array):
 			image.set_pixel(p_id, r_id, p)
 			p_id += 1
 		r_id += 1
-		
 	RenderingServer.texture_2d_update(texture.get_rid(), image, 0)
 
 
@@ -236,111 +229,119 @@ func set_cursor(region: Rect2):
 #	get_node(collision_cursor).rect_size = Vector2(x_size, y_size) 
 
 
-
-
-
-
-### COLLISION
-
-func on_brush_selected(brush):
-	for c in get_node(brushes).get_children():
-		if c.get_index() != brush:
-			c.button_pressed = false
-		else:
-			c.button_pressed = true
-			active_col_brush = c.get_index()
-
-var collision_dict = {
-	"square": [Vector2(0, 0), Vector2(16, 0), Vector2(16, 16), Vector2(0, 16)],
-	"slab": [Vector2(0, 8), Vector2(16, 8), Vector2(16, 16), Vector2(0, 16)],
-	"side_slab": [Vector2(8, 0), Vector2(16, 0), Vector2(16, 16), Vector2(8, 16)],
-	"slope": [Vector2(0, 16), Vector2(16, 0), Vector2(16, 16)],
-	"half_slope_a": [Vector2(0, 16), Vector2(16, 8), Vector2(16, 16)],
-	"half_slope_b": [Vector2(0, 8), Vector2(16, 0), Vector2(16, 16), Vector2(0, 16)],
-}
-
-
-func set_collision_icons():
-	var tiles = []
-	for r in get_node(collision_buttons).get_children():
-		#for t in r: #TODO: check, not sure but 4.1 changed this
-		tiles.append(r)
+### MISC ###
+func next_animation_frame(): #pack it up and replace with sprite sheet
+	var old_frame = w.current_level.get_node("TileMap").tile_set.get_source(0).texture
+	var new_frame_path: String
+	new_frame_path = String(old_frame.resource_path.left(-1) + str(int(old_frame.resource_path.right(1)) + 1)) #only works for 10 frames or less
+	if !ResourceLoader.exists(new_frame_path):
+		new_frame_path = String(old_frame.resource_path.left(-1) + "0")
 	
-	for t in tiles:
-		for i in t.get_children():
-			i.free()
+	var new_frame = load(new_frame_path)
+	w.current_level.get_node("TileMap").tile_set.get_source(0).texture = new_frame
 
-		var sprite = Sprite2D.new()
-		var texture = AtlasTexture.new()
-		texture.atlas = tx_col_brush
-		texture.region = Rect2(active_col_brush * 16, 32, 16, 16)
-		sprite.centered = false
-		sprite.texture = texture
-		
 #
-#		var collision = tile_set.tile_get_shape(c.id, 0)
-#		match Array(collision.shape.points): #turn into array so point order does not matter, sort pls
-#			collision_dict["square"]: pass
-#			collision_dict["half"]:
-#			collision_dict["slope"]:
-#			collision_dict["half_slope_a"]:
-#			collision_dict["half_slope_b"]:
-
-
-func set_collision(tile: int):
-	var tile_button
-	for r in get_node(collision_buttons).get_children():
-		for t in r.get_children():
-			if t.id == tile:
-				tile_button = t
-	for c in tile_button.get_children():
-		c.free()
-			
-	var sprite = Sprite2D.new()
-	var texture = AtlasTexture.new()
-	texture.atlas = tx_col_brush
-	texture.region = Rect2(active_col_brush * 16, 32, 16, 16)
-	sprite.centered = false
-	sprite.texture = texture
-	sprite.flip_h = brush_flip_h
-	sprite.flip_v = brush_flip_v
-	tile_button.add_child(sprite)
-
-
-	var shape = ConvexPolygonShape2D.new()
-	var points = []
-	match active_col_brush:
-		0: points = collision_dict["square"] 
-		1: points = collision_dict["half"]
-		2: points = collision_dict["slope"]
-		3: points = collision_dict["half_slope_a"]
-		4: points = collision_dict["half_slope_b"]
-		_: points = [Vector2.ZERO]
-	
-	var transformed = []
-	for p in points:
-		var x = 16 - p.x if brush_flip_h else p.x
-		var y = 16 - p.y if brush_flip_v else p.y
-		transformed.append(Vector2(x, y))
-		
-	shape.points = PackedVector2Array(transformed)
-
-	#emit_signal("collision_updated", tile, shape)
-	var transform = Transform2D.IDENTITY
-	w.current_level.get_node("TileMap").tile_set.tile_add_shape(tile, shape, transform)
-	w.current_level.get_node("TileMap").tile_set.tile_set_shape(tile, 0, shape)
-
-
-
-
-func erase_collision(tile: int):
-	var tile_button
-	for r in get_node(collision_buttons).get_children():
-		for t in r.get_children():
-			if t.id == tile:
-				tile_button = t
-	for c in tile_button.get_children():
-		c.free()
+#### COLLISION
+#
+#func on_brush_selected(brush):
+	#for c in get_node(brushes).get_children():
+		#if c.get_index() != brush:
+			#c.button_pressed = false
+		#else:
+			#c.button_pressed = true
+			#active_col_brush = c.get_index()
+#
+#var collision_dict = {
+	#"square": [Vector2(0, 0), Vector2(16, 0), Vector2(16, 16), Vector2(0, 16)],
+	#"slab": [Vector2(0, 8), Vector2(16, 8), Vector2(16, 16), Vector2(0, 16)],
+	#"side_slab": [Vector2(8, 0), Vector2(16, 0), Vector2(16, 16), Vector2(8, 16)],
+	#"slope": [Vector2(0, 16), Vector2(16, 0), Vector2(16, 16)],
+	#"half_slope_a": [Vector2(0, 16), Vector2(16, 8), Vector2(16, 16)],
+	#"half_slope_b": [Vector2(0, 8), Vector2(16, 0), Vector2(16, 16), Vector2(0, 16)],
+#}
+#
+#
+#func set_collision_icons():
+	#var tiles = []
+	#for r in get_node(collision_buttons).get_children():
+		##for t in r: #TODO: check, not sure but 4.1 changed this
+		#tiles.append(r)
+	#
+	#for t in tiles:
+		#for i in t.get_children():
+			#i.free()
+#
+		#var sprite = Sprite2D.new()
+		#var texture = AtlasTexture.new()
+		#texture.atlas = tx_col_brush
+		#texture.region = Rect2(active_col_brush * 16, 32, 16, 16)
+		#sprite.centered = false
+		#sprite.texture = texture
+		#
+##
+##		var collision = tile_set.tile_get_shape(c.id, 0)
+##		match Array(collision.shape.points): #turn into array so point order does not matter, sort pls
+##			collision_dict["square"]: pass
+##			collision_dict["half"]:
+##			collision_dict["slope"]:
+##			collision_dict["half_slope_a"]:
+##			collision_dict["half_slope_b"]:
+#
+#
+#func set_collision(tile: int):
+	#var tile_button
+	#for r in get_node(collision_buttons).get_children():
+		#for t in r.get_children():
+			#if t.id == tile:
+				#tile_button = t
+	#for c in tile_button.get_children():
+		#c.free()
+			#
+	#var sprite = Sprite2D.new()
+	#var texture = AtlasTexture.new()
+	#texture.atlas = tx_col_brush
+	#texture.region = Rect2(active_col_brush * 16, 32, 16, 16)
+	#sprite.centered = false
+	#sprite.texture = texture
+	#sprite.flip_h = brush_flip_h
+	#sprite.flip_v = brush_flip_v
+	#tile_button.add_child(sprite)
+#
+#
+	#var shape = ConvexPolygonShape2D.new()
+	#var points = []
+	#match active_col_brush:
+		#0: points = collision_dict["square"] 
+		#1: points = collision_dict["half"]
+		#2: points = collision_dict["slope"]
+		#3: points = collision_dict["half_slope_a"]
+		#4: points = collision_dict["half_slope_b"]
+		#_: points = [Vector2.ZERO]
+	#
+	#var transformed = []
+	#for p in points:
+		#var x = 16 - p.x if brush_flip_h else p.x
+		#var y = 16 - p.y if brush_flip_v else p.y
+		#transformed.append(Vector2(x, y))
+		#
+	#shape.points = PackedVector2Array(transformed)
+#
+	##emit_signal("collision_updated", tile, shape)
+	#var transform = Transform2D.IDENTITY
+	#w.current_level.get_node("TileMap").tile_set.tile_add_shape(tile, shape, transform)
+	#w.current_level.get_node("TileMap").tile_set.tile_set_shape(tile, 0, shape)
+#
+#
+#
+#
+#func erase_collision(tile: int):
+	#var tile_button
+	#for r in get_node(collision_buttons).get_children():
+		#for t in r.get_children():
+			#if t.id == tile:
+				#tile_button = t
+	#for c in tile_button.get_children():
+		#c.free()
 
 
 
@@ -419,7 +420,10 @@ func _on_New_file_selected(path):
 
 
 
-func on_tab_changed(tab):
+func on_tab_changed(tab_name):
+	pass
+
+func _on_subtab_changed(tab):
 	match tab:
 		0: active_tab = "normal"
 		1: active_tab = "collision"
@@ -462,3 +466,9 @@ func _on_Swap_toggled(toggled_on):
 	active_normal_mode = "swap"
 	remap_button.icon = tile_set_remap_false
 	swap_button.icon = tile_set_swap_true
+
+
+
+
+func _on_Animation_toggled(toggled_on):
+	next_animation_frame()

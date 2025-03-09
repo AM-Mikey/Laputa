@@ -9,25 +9,20 @@ signal level_changed(level_path)
 var levels = {}
 var active_level_path
 var default_level = "res://src/Level/Default.tscn"
-var ctrl_held := false
 
 @onready var w = get_tree().get_root().get_node("World")
 @onready var ui = w.get_node("UILayer")
 @onready var el = w.get_node("EditorLayer")
 
-func _unhandled_input(event):
-	if event.is_action_pressed("editor_ctrl"): ctrl_held = true #TODO: this is unused???
-
-
+@onready var editor = get_parent().get_parent().get_parent().get_parent()
 
 
 
 func _ready():
-	pass
-	#setup_levels()
+	setup_levels()
 
-
-func setup_levels():
+func setup_levels(): #TODO: connect this to editor instead of _ready
+	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
 	var index = 0
 	for l in find_level_scenes("res://src/Level/"):
 		
@@ -159,3 +154,7 @@ func load_level(path):
 
 
 
+### SIGNALS ###
+
+func on_tab_changed(tab_name):
+	pass

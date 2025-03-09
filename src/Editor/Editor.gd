@@ -7,6 +7,7 @@ signal level_selected(level)
 signal tile_map_selected(tile_map)
 
 signal level_saved()
+signal tab_changed(tab_name)
 
 const ACTOR_SPAWN = preload("res://src/Editor/ActorSpawn.tscn")
 const ACTOR_SPAWN_PREVIEW = preload("res://src/Editor/ActorSpawnPreview.tscn")
@@ -825,9 +826,7 @@ func set_tool(new_tool = "", new_subtool = ""):
 	#Cursors
 	if new_subtool == "paint":
 		mc.display("brush")
-		tile_map_selection = Rect2i(0,0,0,0)
-		tile_map_cursor.size = Vector2i.ZERO
-		tile_map_cursor.position = Vector2i.ZERO
+		clear_tile_map_cursor()
 	elif new_subtool == "select":
 		mc.display("grabopen")
 	elif new_subtool == "grab":
@@ -847,7 +846,10 @@ func set_tool(new_tool = "", new_subtool = ""):
 	
 	subtool = new_subtool
 
-
+func clear_tile_map_cursor():
+	tile_map_selection = Rect2i(0,0,0,0)
+	tile_map_cursor.size = Vector2i.ZERO
+	tile_map_cursor.position = Vector2i.ZERO
 
 ### UI ###
 func set_menu_alpha():
@@ -889,7 +891,10 @@ func on_tab_selected(tab_index): #tab buttons
 	$Main/Win/Tab.current_tab = tab_index
 
 func on_tab_changed(tab):
-	match $Main/Win/Tab.get_child(tab).name:
+	var tab_name = $Main/Win/Tab.get_child(tab).name
+	emit_signal("tab_changed", tab_name)
+	clear_tile_map_cursor()
+	match tab_name:
 		"Tiles": 
 			set_tool("tile")
 			#set_entities_pickable(false)

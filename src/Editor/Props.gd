@@ -9,12 +9,9 @@ var active_prop_path
 
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
 
-func _ready():
-	pass
-	#setup_props()
 
-
-func setup_props():
+func setup_props(): #TODO: connect this to editor
+	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
 	var index = 0
 	for p in find_prop_scenes("res://src/Prop/"):
 		
@@ -51,11 +48,13 @@ func find_prop_scenes(path):
 
 ### SIGNALS
 
+func on_tab_changed(tab_name):
+	pass
+
 func on_prop_changed(prop_path):
 	editor.set_tool("entity", "prop")
 	active_prop_path = prop_path
 	for b in $VBox/Margin/Scroll/Buttons.get_children():
 		if b.prop_path == active_prop_path: #this is weird, we should have already done this. for extra security in case it was activated another way?
 			b.activate()
-	
 	emit_signal("prop_changed", prop_path)

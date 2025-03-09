@@ -9,11 +9,13 @@ var active_npc_path
 
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
 
+
+
 func _ready():
 	setup_npcs()
 
-
-func setup_npcs():
+func setup_npcs(): #TODO: connect this to editor instead of _ready
+	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
 	var index = 0
 	for p in find_npc_scenes("res://src/Actor/NPC/"):
 		
@@ -57,3 +59,10 @@ func unpick_npc():
 	active_npc_path = null
 	for b in $VBox/Margin/Scroll/Buttons.get_children():
 			b.deactivate()
+
+
+
+### SINGALS ###
+
+func on_tab_changed(tab_name):
+	pass

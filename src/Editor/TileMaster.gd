@@ -64,8 +64,12 @@ func setup_tile_buttons(caller: Node, parent_path: NodePath):
 func get_all_tile_coords() -> Array[Vector2i]:
 	var coords: Array[Vector2i] = []
 	var tile_set = w.current_level.get_node("TileMap").tile_set
-	for i in tile_set.get_source(0).get_tiles_count():
-		coords.append(tile_set.get_source(0).get_tile_id(i))
+	#for i in tile_set.get_source(0).get_tiles_count(): #for only used tiles
+		#coords.append(tile_set.get_source(0).get_tile_id(i))
+	var size = (tile_set.get_source(0).texture.get_size()) / 16.0
+	for column in size.x:
+		for tile in size.y:
+			coords.append(Vector2i(column, tile))
 	return coords
 
 func get_tile_as_texture(coords: Vector2i) -> Texture2D:

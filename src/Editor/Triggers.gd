@@ -9,12 +9,9 @@ var active_trigger_path
 
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
 
-func _ready():
-	pass
-	#setup_triggers()
 
-
-func setup_triggers():
+func setup_triggers(): #TODO: connect this to editor
+	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
 	var index = 0
 	for p in find_trigger_scenes("res://src/Trigger/"):
 		
@@ -31,7 +28,7 @@ func setup_triggers():
 			active_trigger_path = p
 		$VBox/Margin/Scroll/Buttons.add_child(trigger_button)
 		index += 1
-		
+
 
 ### GETTERS
 
@@ -49,6 +46,7 @@ func find_trigger_scenes(path):
 			
 	return files
 
+
 ### SIGNALS
 
 func on_trigger_changed(trigger_path):
@@ -57,5 +55,7 @@ func on_trigger_changed(trigger_path):
 	for b in $VBox/Margin/Scroll/Buttons.get_children():
 		if b.trigger_path == active_trigger_path: #this is weird, we should have already done this. for extra security in case it was activated another way?
 			b.activate()
-	
 	emit_signal("trigger_changed", trigger_path)
+
+func on_tab_changed(tab_name):
+	pass
