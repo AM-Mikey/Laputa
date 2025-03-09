@@ -6,22 +6,23 @@ var rows: int
 
 @export var tile_separation: int = 1
 
+@onready var w = get_tree().get_root().get_node("World")
 @onready var editor = get_parent()
-@onready var tiles = editor.get_node("Main/Win/Tab/Tiles")
-@onready var tile_set = editor.get_node("Main/Win/Tab/TileSet")
+@onready var tiles_tab = editor.get_node("Main/Win/Tab/Tiles")
+@onready var tile_set_tab = editor.get_node("Main/Win/Tab/TileSet")
 
 
 
 ### SETUP ###
 func setup_tile_master():
-	texture = editor.tile_set.get_source(0).texture #return first tileset texture
+	texture = w.current_level.get_node("TileMap").tile_set.get_source(0).texture
 	columns = floor(texture.get_width()/16)
 	rows = floor(texture.get_height()/16)
 	
-	tiles.setup_options()
+	tiles_tab.setup_options()
 	#tiles.setup_tiles() already done in editor
 	
-	tile_set.setup_tile_set()
+	tile_set_tab.setup_tile_set()
 	#setup_brushes()
 
 
@@ -62,8 +63,9 @@ func setup_tile_buttons(caller: Node, parent_path: NodePath):
 
 func get_all_tile_coords() -> Array[Vector2i]:
 	var coords: Array[Vector2i] = []
-	for i in editor.tile_set.get_source(0).get_tiles_count():
-		coords.append(editor.tile_set.get_source(0).get_tile_id(i))
+	var tile_set = w.current_level.get_node("TileMap").tile_set
+	for i in tile_set.get_source(0).get_tiles_count():
+		coords.append(tile_set.get_source(0).get_tile_id(i))
 	return coords
 
 func get_tile_as_texture(coords: Vector2i) -> Texture2D:

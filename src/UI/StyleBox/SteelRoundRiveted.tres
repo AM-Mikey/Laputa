@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://deshi6r488bxi"]
+
+[ext_resource type="Texture2D" uid="uid://c0fi4aso0k07j" path="res://assets/UI/StyleBox/SteelRoundRiveted.png" id="1_v6nqe"]
+
+[resource]
+texture = ExtResource("1_v6nqe")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+region_rect = Rect2(0, 0, 48, 48)

@@ -99,8 +99,8 @@ func display_data():
 			for p in active.get_property_list():
 				if p["usage"] == EXPORT:
 					create_button(p["name"], active.get(p["name"]), p["type"])
-		"tile_collection":
-			var tile_map = active.get_child(0)
+		"tile_map":
+			var tile_map = active
 			for layer_id in tile_map.get_layers_count():
 				create_layer_button(layer_id)
 

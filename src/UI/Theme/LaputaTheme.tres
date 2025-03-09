@@ -1,11 +1,11 @@
 [gd_resource type="Theme" load_steps=21 format=3 uid="uid://45e84j2sj7w0"]
 
 [ext_resource type="StyleBox" uid="uid://cb3gs2qq26l03" path="res://src/UI/StyleBox/RustTabsLight.tres" id="1"]
-[ext_resource type="FontFile" path="res://src/UI/Font/WelcomeBack.tres" id="2"]
+[ext_resource type="FontFile" uid="uid://cf01li78xvnnu" path="res://src/UI/Font/WelcomeBack.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://cc3ivdery0b8x" path="res://src/UI/StyleBox/RustRound.tres" id="3"]
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="4"]
 [ext_resource type="StyleBox" uid="uid://cl4yme0wtg3po" path="res://src/UI/Slider/Slider.tres" id="6"]
-[ext_resource type="StyleBox" path="res://src/UI/CursorBox.tres" id="9"]
+[ext_resource type="StyleBox" path="res://src/UI/StyleBox/CursorBox.tres" id="9"]
 [ext_resource type="StyleBox" uid="uid://bwe3j6hcp3u7j" path="res://src/UI/StyleBox/SteelBeveledLight.tres" id="10"]
 [ext_resource type="StyleBox" uid="uid://ot23c6kiunqk" path="res://src/UI/StyleBox/RustTabsDark.tres" id="11"]
 [ext_resource type="StyleBox" uid="uid://djsxt54vtaivl" path="res://src/UI/Slider/ScrollBarGrabber.tres" id="13"]

@@ -1,11 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://b06myq2bwfo7r"]
+[gd_scene load_steps=9 format=3 uid="uid://b06myq2bwfo7r"]
 
 [ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="1"]
-[ext_resource type="Script" path="res://src/Editor/TileSet.gd" id="2_88yuq"]
+[ext_resource type="Script" path="res://src/Editor/TileSet.gd" id="2"]
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="3"]
-[ext_resource type="StyleBox" uid="uid://85vca5s565c4" path="res://src/UI/StyleBox/GridRoundInset.tres" id="3_rmr64"]
-[ext_resource type="Texture2D" path="res://assets/Editor/TileSetRemap.png" id="3_vup1v"]
-[ext_resource type="Texture2D" path="res://assets/Editor/TileSetSwap.png" id="4_s3r6t"]
 [ext_resource type="Texture2D" uid="uid://cshcc8rxeo4tb" path="res://assets/Editor/CollisionOneWay.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://cict30vmfp74a" path="res://assets/Editor/FlipH.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://cstc7bnjjx6t3" path="res://assets/Editor/FlipV.png" id="7"]
@@ -17,7 +14,7 @@ offset_right = 384.0
 offset_bottom = 288.0
 pivot_offset = Vector2(-408, -64)
 theme = ExtResource("3")
-script = ExtResource("2_88yuq")
+script = ExtResource("2")
 normal_buttons = NodePath("VBox/Margin/Tab/Normal/Scroll/Tiles")
 collision_buttons = NodePath("VBox/Margin/Tab/Collision/Scroll/Tiles")
 normal_cursor = NodePath("VBox/Margin/Tab/Normal/Scroll/Control/Cursor")
@@ -44,25 +41,9 @@ layout_mode = 2
 [node name="Normal" type="VBoxContainer" parent="VBox/Margin/Tab"]
 layout_mode = 2
 
-[node name="HBox" type="HBoxContainer" parent="VBox/Margin/Tab/Normal"]
-layout_mode = 2
-
-[node name="Remap" type="Button" parent="VBox/Margin/Tab/Normal/HBox"]
-layout_mode = 2
-tooltip_text = "Swap Positions of Tile in Tileset"
-toggle_mode = true
-icon = ExtResource("3_vup1v")
-
-[node name="Swap" type="Button" parent="VBox/Margin/Tab/Normal/HBox"]
-layout_mode = 2
-tooltip_text = "Swap Tiles in all Levels"
-toggle_mode = true
-icon = ExtResource("4_s3r6t")
-
 [node name="Scroll" type="ScrollContainer" parent="VBox/Margin/Tab/Normal"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("3_rmr64")
 
 [node name="Tiles" type="VBoxContainer" parent="VBox/Margin/Tab/Normal/Scroll"]
 layout_mode = 2
@@ -130,7 +111,6 @@ mouse_filter = 2
 [node name="Scroll" type="ScrollContainer" parent="VBox/Margin/Tab/Collision"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("3_rmr64")
 
 [node name="Tiles" type="VBoxContainer" parent="VBox/Margin/Tab/Collision/Scroll"]
 layout_mode = 2
@@ -191,8 +171,6 @@ filters = PackedStringArray("*.tres")
 filters = PackedStringArray("*.jpg", "*.bmp", "*.png")
 
 [connection signal="tab_changed" from="VBox/Margin/Tab" to="." method="on_tab_changed"]
-[connection signal="pressed" from="VBox/Margin/Tab/Normal/HBox/Remap" to="." method="_on_Remap_pressed"]
-[connection signal="toggled" from="VBox/Margin/Tab/Normal/HBox/Swap" to="." method="_on_Swap_toggled"]
 [connection signal="toggled" from="VBox/Margin/Tab/Collision/HBox/FlipH" to="." method="_on_FlipH_toggled"]
 [connection signal="toggled" from="VBox/Margin/Tab/Collision/HBox/FlipV" to="." method="_on_FlipV_toggled"]
 [connection signal="toggled" from="VBox/Margin/Tab/Collision/HBox/RotateC" to="." method="_on_RotateC_toggled"]

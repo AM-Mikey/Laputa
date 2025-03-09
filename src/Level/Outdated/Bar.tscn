@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://d1765d0qfnw6q"]
 
 [ext_resource type="PackedScene" path="res://src/Trigger/KillBox.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://src/Trigger/Door.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://c18gc2p5jqqid" path="res://src/Trigger/Door.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://src/Tile/Outdated/Layers/Outdated/Decortation.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="4"]
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="5"]

@@ -9,10 +9,6 @@ func _process(_delta):
 	$HBox/Coordinates.text = str(cell_pos)
 
 
-	var tiles = []
-	for m in editor.tile_collection.get_children():
-		if m is TileMap:
-			var tile = m.get_cell_source_id(0, cell_pos)
-			if tile != -1:
-					tiles.append(tile)
-	$HBox/Tile.text = str(tiles)
+	var tile = editor.tile_map.get_cell_source_id(0, cell_pos)
+	if tile != -1:
+		$HBox/Tile.text = str(tile)

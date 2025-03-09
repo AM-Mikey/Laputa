@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bg715nunngytq"]
+[gd_scene load_steps=13 format=3 uid="uid://bg715nunngytq"]
 
 [ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="1"]
 [ext_resource type="Script" path="res://src/Editor/Tiles.gd" id="2"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dsi2jppwl0wlt" path="res://assets/Editor/AutoLayerFalse.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://wf0dhqrmos7c" path="res://assets/Editor/MultiEraseFalse.png" id="10"]
 [ext_resource type="Texture2D" uid="uid://ymuckto7044j" path="res://assets/Editor/AutoTileFalse.png" id="11"]
+[ext_resource type="StyleBox" uid="uid://85vca5s565c4" path="res://src/UI/StyleBox/GridRoundInset.tres" id="11_ibnax"]
 [ext_resource type="Texture2D" uid="uid://ct5jgsuemvjmu" path="res://assets/Editor/ModePaint.png" id="12"]
 
 [node name="Tiles" type="MarginContainer"]
@@ -20,10 +21,6 @@ theme = ExtResource("3")
 script = ExtResource("2")
 buttons = NodePath("VBox/Scroll/Buttons")
 cursor = NodePath("VBox/Scroll/Control/Cursor")
-auto_layer_disc = "Auto-Select Drawing Layer"
-multi_erase_disc = "Erase On All Layers"
-auto_tile_disc = "AutoTile"
-mode_disc = "Mode"
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -98,6 +95,7 @@ icon = ExtResource("5")
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
+theme_override_styles/panel = ExtResource("11_ibnax")
 
 [node name="Buttons" type="VBoxContainer" parent="VBox/Scroll"]
 layout_mode = 2

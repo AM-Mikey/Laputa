@@ -82,8 +82,25 @@ level editor + debug tileset for level making
 	- centerbox tile from center or top right option
 	- decide if _on signals from different nodes are considered local or global (if they're children or not??)
 	- add lock button for layers? idk why youd need this..
-	
-	
 
 
-Last thing: considered double SSP detectors
+March 6 2025
+	
+	
+- bug: erase on single tile layer doesnt work
+
+--- tileset ---
+
+- disallow swap with empty
+- warn swap with different layer
+- add tile swap
+
+--- level ---
+
+- move old levels
+
+--- editor ---
+
+= add cursors to editor for different tool modes
+
+-consider adding ability to edit tileset not on current level

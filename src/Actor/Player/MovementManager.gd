@@ -114,15 +114,13 @@ func do_ceiling_push_check():
 
 func check_ssp():
 	if world.current_level != null:
-		if world.current_level.has_node("Tiles"):
-			for layer in world.current_level.get_node("Tiles").get_children():
-				if layer is TileMap:
-					var tile_pos = layer.local_to_map(Vector2(pc.position.x, pc.position.y + 8))
-					var tile = layer.get_cell_source_id(0, tile_pos)
-					if layer.tile_set.tile_get_shape_one_way(tile, 0):
-						print("player is on ssp"
-						)
-						pc.is_on_ssp = true
+		if world.current_level.has_node("TileMap"):
+			var tm = world.current_level.has_node("TileMap")
+			var tile_pos = tm.local_to_map(Vector2(pc.position.x, pc.position.y + 8))
+			var tile = tm.get_cell_source_id(0, tile_pos)
+			if tm.tile_set.tile_get_shape_one_way(tile, 0):
+				print("player is on ssp")
+				pc.is_on_ssp = true
 
 
 func _input(event):

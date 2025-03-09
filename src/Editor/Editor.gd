@@ -4,7 +4,7 @@ extends Control
 #signal prop_selected(prop)
 #signal entity_selected(entity, entity_type)
 signal level_selected(level)
-signal tile_collection_selected(tile_collection)
+signal tile_map_selected(tile_map)
 
 signal level_saved()
 
@@ -16,7 +16,7 @@ const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const LAYER_BUTTON = preload("res://src/Editor/Button/LayerButton.tscn")
 const LIMITER = preload("res://src/Editor/EditorLevelLimiter.tscn")
 const TILE_MAP_CURSOR = preload("res://src/Editor/TileMapCursor.tscn")
-const PREVIEW_TILE_MAP = preload("res://src/Editor/PreviewTileMap.tscn")
+const TILE_MAP_PREVIEW = preload("res://src/Editor/TileMapPreview.tscn")
 
 
 var disabled = false
@@ -52,13 +52,11 @@ var active_operation = [] #[[subop][subop][subop]]
 @onready var inspector = $Secondary/Win/Inspector
 @onready var tile_master = $TileMaster
 @onready var log = $Margin/Log
-var tile_collection
 var actor_collection
 var prop_collection
 var trigger_collection
 var spawn_collection
 var tile_map
-var tile_set
 var editor_level_limiter
 var tile_map_cursor
 
@@ -67,7 +65,7 @@ var tile_map_cursor
 func _ready():
 	var _err = get_tree().root.connect("size_changed", Callable(self, "_on_viewport_size_changed"))
 	_on_viewport_size_changed()
-	connect("tile_collection_selected", Callable(inspector, "on_selected").bind("tile_collection"))
+	connect("tile_map_selected", Callable(inspector, "on_selected").bind("tile_map"))
 	connect("level_selected", Callable(inspector, "on_selected").bind("level"))
 	el.add_child(EDITOR_CAMERA.instantiate())
 	
@@ -82,16 +80,14 @@ func setup_level(): #TODO: clear undo history
 	for a in get_tree().get_nodes_in_group("Actors"):
 		a.queue_free()
 			
-	tile_collection = w.current_level.get_node("Tiles")
 	actor_collection = w.current_level.get_node("Actors")
 	prop_collection = w.current_level.get_node("Props")
 	trigger_collection = w.current_level.get_node("Triggers")
 	spawn_collection = w.current_level.get_node("Spawns")
 	
-	tile_map = tile_collection.get_child(0)
-	tile_set = w.current_level.tile_set
+	tile_map = w.current_level.get_node("TileMap")
 	tile_master.setup_tile_master()
-	$Main/Win/Tab/TileSet.load_tile_set(tile_set.resource_path)
+	$Main/Win/Tab/TileSet.load_tile_set(tile_map.tile_set.resource_path)
 	
 	setup_level_editor_layer()
 	#set_entities_pickable()
@@ -141,7 +137,7 @@ func load_editor_windows():
 func exit():
 	inspector.exit()
 	
-	hide_preview() #delete tile brush preview
+	free_previews()
 	editor_level_limiter.queue_free()
 	el.get_node("EditorCamera").queue_free()
 	ui.add_child(HUD.instantiate())
@@ -248,10 +244,7 @@ func _unhandled_input(event):
 
 func do_tile_input(event):
 	var mouse_pos = w.get_global_mouse_position()
-	
-	#if event.is_action_pressed("debug_fly"):
-		#print(active_operation)
-	
+
 	#pressing
 	if event.is_action_pressed("editor_rmb") or event.is_action_pressed("editor_lmb"):
 		last_updated_cell = tile_map.local_to_map(tile_map.to_local(mouse_pos))
@@ -259,6 +252,8 @@ func do_tile_input(event):
 		if subtool == "select":
 			if event.is_action_pressed("editor_lmb"):
 				set_tile_map_selection(mouse_start_pos, mouse_pos)
+			if event.is_action_pressed("editor_rmb"):
+				mc.display("grabclosed")
 		elif brush: #normal draw
 			if shift_held: set_tool("tile", "line")
 			elif ctrl_held: set_tool("tile", "box")
@@ -270,13 +265,15 @@ func do_tile_input(event):
 					if inspector.active and inspector.active_type != "background":
 						return #don't erase a tile if we're selecting an entity
 					set_cells(get_cells_centerbox(mouse_pos), true)
+					mc.display("eraser")
 	
 	#moving
 	if event is InputEventMouseMotion:
 		var new_updated_cell = tile_map.local_to_map(tile_map.to_local(mouse_pos)) 
 		if new_updated_cell != last_updated_cell: #don't trigger if we haven't moved a cell over
+			print("moved a cell over")
 			last_updated_cell = new_updated_cell #update
-			hide_preview()
+			free_previews()
 			match subtool:
 				"select":
 					if lmb_held:
@@ -305,6 +302,7 @@ func do_tile_input(event):
 			"select":
 				if rmb_held:
 					move_tile_map_selection(mouse_start_pos, mouse_pos)
+					mc.display("grabopen")
 			"line":
 				set_cells_from_brush_origins(get_cells_line_origins(mouse_start_pos, mouse_pos))
 			"box":
@@ -313,16 +311,22 @@ func do_tile_input(event):
 				elif rmb_held:
 					set_cells(get_cells_box(mouse_start_pos, mouse_pos), true)
 				
-		if subtool != "select":
+		if subtool != "select": #why this way?
 			subtool = "paint"
+			if rmb_held:
+				mc.display("brush")
+			
 		if not active_operation.is_empty():
 			past_operations.append(["set_cells", active_operation.duplicate()])
 			#print("active op: ", active_operation)
 			active_operation.clear()
-		
 		#if auto_tile:
 			#print("auto tiling")
 			#set_auto_tiles() #TODO: testing
+		
+	#clearing tile
+	if event.is_action_pressed("editor_delete"):
+		erase_tile_map_selection()
 
 
 
@@ -366,13 +370,14 @@ func do_generic_input(event):
 
 	#moving entity
 	if event is InputEventMouseMotion:
-		hide_preview()
 		match subtool:
 			"enemy":
+				free_previews() #check that this doesnt clear on top of other inputs
 				preview_actor_spawn($Main/Win/Tab/Enemies.active_enemy_path, grid_pos)
 			"prop":
 				pass
 			"npc":
+				free_previews()
 				preview_actor_spawn($Main/Win/Tab/NPCs.active_npc_path, grid_pos)
 			"trigger":
 				pass
@@ -381,8 +386,8 @@ func do_generic_input(event):
 				else: inspector.active.global_position = Vector2(mouse_pos + grab_offset).snapped(Vector2(8,8))
 	
 	#deleting entity
-	if event is InputEventKey and event.is_pressed() and not event.is_echo():
-		if event.keycode == KEY_DELETE and inspector.active:
+	if event.is_action_pressed("editor_delete"):
+		if inspector.active:
 			if not(inspector.active_type == "background" or inspector.active_type == "spawn_point"):
 				inspector.active.queue_free()
 				inspector.on_deselected()
@@ -416,8 +421,8 @@ func set_tile_map_selection(start_pos, end_pos):
 	tile_map_selection = Rect2i(get_cell(start_pos), Vector2i.ZERO)
 	tile_map_selection = tile_map_selection.expand(get_cell(end_pos))
 	tile_map_selection.size += Vector2i.ONE
-	tile_map_cursor.position = tile_map_selection.position * 16
-	tile_map_cursor.size = tile_map_selection.size * 16
+	tile_map_cursor.position = (tile_map_selection.position * 16) - Vector2i(1, 1)
+	tile_map_cursor.size = (tile_map_selection.size * 16) + Vector2i(2, 2)
 	#print(tile_map_selection)
 
 func move_tile_map_selection(start_pos, end_pos):# TODO: make work with undo/redo
@@ -426,8 +431,8 @@ func move_tile_map_selection(start_pos, end_pos):# TODO: make work with undo/red
 	
 	var change = get_cell(end_pos) - get_cell(start_pos)
 	tile_map_selection.position += Vector2i(change)
-	tile_map_cursor.position = tile_map_selection.position * 16
-	tile_map_cursor.size = tile_map_selection.size * 16
+	tile_map_cursor.position = (tile_map_selection.position * 16) - Vector2i(1, 1)
+	tile_map_cursor.size = (tile_map_selection.size * 16) + Vector2i(2, 2)
 
 	for layer in selected_cells:
 		for cell in selected_cells[layer]:
@@ -437,7 +442,14 @@ func move_tile_map_selection(start_pos, end_pos):# TODO: make work with undo/red
 			tile_map.set_cell(layer, old_tm_pos, -1, ts_pos) #erase old
 			tile_map.set_cell(layer, new_tm_pos, 0, ts_pos)
 
-#func del_tile_map_selection(): #TODO: test #outdated
+func erase_tile_map_selection():
+	log.lprint("erased tiles")
+	var selected_cells = get_selected_cells_as_dictionary()
+	for layer in selected_cells:
+		for cell in selected_cells[layer]:
+			var tm_pos = cell[0]
+			var ts_pos = cell[1]
+			tile_map.set_cell(layer, tm_pos, -1, ts_pos)
 
 
 func copy_tile_map_selection():
@@ -587,19 +599,6 @@ func set_cells_from_brush_origins(origins: Array, erase = false):
 				else: tile_map.set_cell(tile_map_layer, tile_map_position, 0, tile_set_position) #draw
 
 
-#func set_auto_tiles():
-	#var script_path = "res://src/Tile/%s.gd"
-	#var auto_tile_script = load(script_path % tile_set.resource_path.get_file().trim_suffix(".tres")) #get tile set's name and find corresponding script
-	#var node = Node.new()
-	#
-	#if auto_tile_script:
-		#node.set_script(auto_tile_script)
-		##node.farback = tile_collection.get_node("FarBack") TODO: new layer system
-		##node.back = tile_collection.get_node("Back")
-		##node.front = tile_collection.get_node("Front")
-		##node.farfront = tile_collection.get_node("FarFront")
-		#add_child(node)
-
 
 ### ENTITIES ###
 
@@ -654,24 +653,24 @@ func set_actor_spawn(actor_path, pos):
 ### PREVIEW ###
 
 func preview_cells_box(cells: Rect2i):
-	var preview_tile_map = setup_preview_tile_map()
+	var tile_map_preview = setup_tile_map_preview()
 	
 	for row in cells.size.y:
 		for column in cells.size.x:
 			var tile_set_position = Vector2i(column % brush.size.x, row % brush.size.y) + brush.position
 			var tile_map_position = Vector2i(column, row) + cells.position
-			preview_tile_map.set_cell(0, tile_map_position, 0, tile_set_position) 
+			tile_map_preview.set_cell(0, tile_map_position, 0, tile_set_position) 
 
 
 func preview_cells_line(origins: Array):
-	var preview_tile_map = setup_preview_tile_map()
+	var tile_map_preview = setup_tile_map_preview()
 	
 	for origin in origins:
 		for column in brush.size.x:
 			for row in brush.size.y:
 				var tile_set_position = Vector2i(column % brush.size.x, row % brush.size.y) + brush.position
 				var tile_map_position = Vector2i(column, row) + origin
-				preview_tile_map.set_cell(0, tile_map_position, 0, tile_set_position) 
+				tile_map_preview.set_cell(0, tile_map_position, 0, tile_set_position) 
 
 
 func preview_move_tile_set_selection(start_pos, end_pos): #used for tile map selection
@@ -681,7 +680,7 @@ func preview_move_tile_set_selection(start_pos, end_pos): #used for tile map sel
 	#tile_map_cursor.position = tile_map_selection.position * 16
 	#tile_map_cursor.size = tile_map_selection.size * 16
 	
-	var preview_tile_map = setup_preview_tile_map()
+	var tile_map_preview = setup_tile_map_preview()
 	
 	for layer in selected_cells:
 		for cell in selected_cells[layer]:
@@ -689,18 +688,17 @@ func preview_move_tile_set_selection(start_pos, end_pos): #used for tile map sel
 			var new_cell_pos = cell[0] + change
 			var tile_pos = cell[1]
 			#preview_tile_map.set_cell(layer, old_cell_pos, -1, tile_pos) #erase old
-			preview_tile_map.set_cell(layer, new_cell_pos, 0, tile_pos)
+			tile_map_preview.set_cell(layer, new_cell_pos, 0, tile_pos)
 
 
-func setup_preview_tile_map() -> Node:
-	for m in tile_collection.get_children():
-		if m.is_in_group("Previews"):
-			m.queue_free()
+func setup_tile_map_preview() -> Node:
+	if w.current_level.has_node("TileMapPreview"):
+		w.current_level.get_node("TileMapPreview").queue_free()
 	
-	var preview_tile_map = PREVIEW_TILE_MAP.instantiate()
-	preview_tile_map.tile_set = tile_set
-	tile_collection.add_child(preview_tile_map)
-	return preview_tile_map
+	var tile_map_preview = TILE_MAP_PREVIEW.instantiate()
+	tile_map_preview.tile_set = w.current_level.get_node("TileMap").tile_set
+	w.current_level.add_child(tile_map_preview)
+	return tile_map_preview
 
 
 func preview_actor_spawn(actor_path, pos):
@@ -725,10 +723,7 @@ func preview_actor_spawn(actor_path, pos):
 			#printerr("ERROR: cannot find entity_type: " + entity_type)
 
 
-func hide_preview():
-	for c in tile_collection.get_children():
-		if c is Sprite2D:
-			c.queue_free()
+func free_previews():
 	for e in get_tree().get_nodes_in_group("Previews"):
 		e.queue_free()
 
@@ -827,7 +822,21 @@ func grid_pos_has_entity(grid_pos) -> bool: #TODO: add props
 ### HELPERS
 
 func set_tool(new_tool = "", new_subtool = ""):
-	hide_preview()
+	#Cursors
+	if new_subtool == "paint":
+		mc.display("brush")
+		tile_map_selection = Rect2i(0,0,0,0)
+		tile_map_cursor.size = Vector2i.ZERO
+		tile_map_cursor.position = Vector2i.ZERO
+	elif new_subtool == "select":
+		mc.display("grabopen")
+	elif new_subtool == "grab":
+		mc.display("grabclosed")
+	else:
+		mc.display("arrow")
+	
+	
+	free_previews()
 	active_tool = new_tool
 	if new_subtool == "":
 		match active_tool: #default subtools
@@ -885,7 +894,7 @@ func on_tab_changed(tab):
 			set_tool("tile")
 			#set_entities_pickable(false)
 			inspector.on_deselected()
-			emit_signal("tile_collection_selected", w.current_level.get_node("Tiles"))
+			emit_signal("tile_map_selected", w.current_level.get_node("TileMap"))
 		"TileSet":
 			set_tool("tile_set")
 		"Levels":

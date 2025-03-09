@@ -4,37 +4,41 @@ extends Control
 
 
 #signal collision_updated(tile_id, shape) #moved to internal
-#signal tile_set_saved(path)
-#signal tile_set_loaded(path)
 #signal image_loaded(path)
 
 var tx_col_brush = preload("res://assets/Editor/CollisionBrushes.png")
+var tile_set_remap_true = load("res://assets/Editor/TileSetRemapTrue.png")
+var tile_set_remap_false = load("res://assets/Editor/TileSetRemapFalse.png")
+var tile_set_swap_true = load("res://assets/Editor/TileSetSwapTrue.png")
+var tile_set_swap_false = load("res://assets/Editor/TileSetSwapFalse.png")
+
 
 var active_tab = "normal"
-var active_tile: int
+var active_button: Object
 
-#var tile_set
 var texture
 var columns
 var rows
 
-var hovered_tile
+var hovered_button
 #var selected_tile_region = Vector2.ZERO #Top Left ID, Bottom Right ID
 #var selected_tiles = []
+var active_normal_mode = "remap"
 var active_col_brush: int
+
 
 var brush_flip_h = false
 var brush_flip_v = false
 var brush_rotation_degrees = 0
 var brush_one_way = false
 
-
 @export var normal_buttons: NodePath
 @export var collision_buttons: NodePath
 @export var normal_cursor: NodePath
-#export(NodePath) var collision_cursor
 @export var brushes: NodePath
 
+@onready var remap_button = $VBox/Margin/Tab/Normal/HBox/Remap
+@onready var swap_button = $VBox/Margin/Tab/Normal/HBox/Swap
 @onready var w = get_tree().get_root().get_node("World")
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
 @onready var tile_master = editor.get_node("TileMaster")
@@ -43,7 +47,6 @@ var brush_one_way = false
 ### SETUP
 
 func setup_tile_set():
-	
 	tile_master.setup_tile_buttons(self, normal_buttons)
 	tile_master.setup_tile_buttons(self, collision_buttons)
 
@@ -83,104 +86,142 @@ func setup_brushes():
 
 ### SELECTING
 
-func hover_button(tile_button):
-	hovered_tile = tile_button.id
-
+func hover_button(button):
+	if mc.current_cursor == "arrow":
+		mc.display("grabopen")
+	hovered_button = button
 func unhover():
-	hovered_tile = null
+	mc.display("arrow")
+	hovered_button = null
 
 func _input(event):
-	if not hovered_tile: return
+	if not hovered_button: return
 	match active_tab:
 		"normal":
 			if event.is_action_pressed("editor_lmb"):
-				select_tile(hovered_tile)
+				mc.display("grabclosed")
+				select_button(hovered_button)
+			if active_normal_mode == "remap":
+				if event.is_action_released("editor_lmb") and hovered_button:
+					mc.display("grabopen")
+					if hovered_button != active_button:
+						remap_tiles(active_button, hovered_button)
 #			if event.is_action_pressed("editor_rmb"):
-#				swap_tile(active_tile, hovered_tile)
-			if event.is_action_pressed("editor_mmb"):
-					if active_tile:
-						move_tile(active_tile, hovered_tile)
+#				swap_tile(active_tile, hovered_button)
+			#if event.is_action_pressed("editor_mmb"):
+					#if active_tile:
+						#remap_tiles(active_tile, hovered_button)
 		"collision":
 			if event.is_action_pressed("editor_lmb"):
-				set_collision(hovered_tile)
+				set_collision(hovered_button)
 			if event.is_action_pressed("editor_rmb"):
-				erase_collision(hovered_tile)
+				erase_collision(hovered_button)
 
 
-func select_tile(tile: int):
-	active_tile = tile
-	var tile_region = editor.tile_set.tile_get_region(tile)
+func select_button(button: Object):
+	active_button = button
+	var tile_region = Rect2(button.tile_set_position, Vector2(16, 16))
 	set_cursor(tile_region)
 
 
-func swap_tile(first: int, second: int): #repalces tile mapping without graphics
-	var first_region = editor.tile_set.tile_get_region(first)
-	var second_region = editor.tile_set.tile_get_region(second)
-	editor.tile_set.tile_set_region(first, second_region)
-	editor.tile_set.tile_set_region(second, first_region)
+#func swap_tile(: Object, second: Object): #repalces tile mapping without graphics
+	#var first_region = Rect2(first.tile_set_position, Vector2(16, 16))
+	#var second_region = 
+	#editor.tile_set.tile_set_region(first, second_region)
+	#editor.tile_set.tile_set_region(second, first_region)
 
-func move_tile(first: int, second: int):
-	var first_region = editor.tile_set.tile_get_region(first)
-	var second_region = editor.tile_set.tile_get_region(second)
-	var first_pixels = get_tile_as_pixels(first_region)
-	var second_pixels = get_tile_as_pixels(second_region)
-	set_pixels(first_region, second_pixels)
-	set_pixels(second_region, first_pixels)
-	editor.tile_set.tile_set_region(first, second_region)
-	editor.tile_set.tile_set_region(second, first_region)
-	
-	var texture = editor.tile_set.tile_get_texture(editor.tile_set.get_tiles_ids().front())
+func remap_tiles(first: Object, second: Object):
+	var first_pos = Vector2i(first.tile_set_position / 16.0)
+	var second_pos = Vector2i(second.tile_set_position / 16.0)
+	var main_tile_set = w.current_level.get_node("TileMap").tile_set
+
+#1 create a list of all tilemaps that use this tileset
+	var levels = []
+	var dir = DirAccess.open("res://src/Level/")
+	if dir: 
+		var files = dir.get_files()
+		for f in files:
+			if f.get_extension() == "tscn":
+				levels.append(f)
+	else: printerr("ERROR: Could not load directory: res://src/Level/")
+
+#2 create a list of all cells that use first and second tiles
+	for l in levels:
+		var level_path = ("res://src/Level/" + l)
+		var first_cell_positions = []
+		var second_cell_positions = []
+		var loaded_level = w.current_level if level_path == w.current_level.scene_file_path else load(level_path).instantiate()
+		var tile_map = loaded_level.get_node("TileMap")
+		if tile_map.tile_set == main_tile_set:
+			print("jackpot")
+			for layer in 4:
+				first_cell_positions.append_array(tile_map.get_used_cells_by_id(layer, -1, first_pos))
+				second_cell_positions.append_array(tile_map.get_used_cells_by_id(layer, -1, second_pos))
+
+#3 set the list of cells to the reverse tile
+			print(first_cell_positions)
+			print(second_cell_positions)
+			var first_tile_map_layer = get_tile_map_layer(first_pos.y)
+			var second_tile_map_layer = get_tile_map_layer(second_pos.y)
+			for cell in first_cell_positions:
+				tile_map.set_cell(first_tile_map_layer, cell, -1) #erase
+				tile_map.set_cell(second_tile_map_layer, cell, 0, second_pos)
+			for cell in second_cell_positions:
+				if !first_cell_positions.has(cell):
+					tile_map.set_cell(second_tile_map_layer, cell, -1) #erase
+				tile_map.set_cell(first_tile_map_layer, cell, 0, first_pos)
+			#tile_map.tile_set
+
+#4 save level
+			var packed_scene = PackedScene.new()
+			packed_scene.pack(loaded_level)
+			var err = ResourceSaver.save(packed_scene, "res://src/Level/" + l)
+	active_button = second
+
+#5 swap tileset pixels
+	var first_pixels = get_tile_as_pixels(first_pos)
+	var second_pixels = get_tile_as_pixels(second_pos)
+	set_pixels(first_pos, second_pixels)
+	set_pixels(second_pos, first_pixels)
+	var texture = main_tile_set.get_source(0).texture
 	var path = texture.get_path()
-	var image = texture.get_data()
-	
+	var image = texture.get_image()
 	image.save_png(path)
-	emit_signal("tile_set_saved", editor.tile_set.get_path())
-	emit_signal("tile_set_loaded", editor.tile_set.get_path())
-	active_tile = second
+	w.current_level.get_node("TileMap").tile_set.get_source(0).set_texture(load(path))
 
 
-func get_tile_region(id):
-	editor.tile_set.tile_get_region(id)
-
-
-func get_tile_as_pixels(region: Rect2) -> Array: #2d
-	var texture = editor.tile_set.tile_get_texture(editor.tile_set.get_tiles_ids().front())
-	var image = texture.get_data()
+func get_tile_as_pixels(tile_pos: Vector2i) -> Array: #2d
+	var texture = w.current_level.get_node("TileMap").tile_set.get_source(0).texture
+	var image = texture.get_image()
 	
-	false # image.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var tile = []
-	var r_id = region.position.y
-	for r in region.size.y:
+	var r_id = tile_pos.y * 16
+	for r in 16:
 		var row = []
-		var p_id = region.position.x
-		for p in region.size.x:
+		var p_id = tile_pos.x * 16
+		for p in 16:
 			var pixel = image.get_pixel(p_id, r_id)
 			row.append(pixel)
 			p_id += 1
 		tile.append(row)
 		r_id += 1
 	
-	false # image.unlock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return tile
 
-func set_pixels(region: Rect2, pixels: Array):
-	#print("setting pixels in region: " + String(region))
-	var texture = editor.tile_set.tile_get_texture(editor.tile_set.get_tiles_ids().front())
-	var image = texture.get_data()
-	
-	false # image.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 
-	var r_id = region.position.y
+func set_pixels(tile_pos: Vector2i, pixels: Array):
+	var texture = w.current_level.get_node("TileMap").tile_set.get_source(0).texture
+	var image = texture.get_image()
+	
+	var r_id = tile_pos.y * 16
 	for r in pixels:
-		var p_id = region.position.x
+		var p_id = tile_pos.x * 16
 		for p in r:
 			image.set_pixel(p_id, r_id, p)
 			p_id += 1
 		r_id += 1
-	
-	false # image.unlock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+		
 	RenderingServer.texture_2d_update(texture.get_rid(), image, 0)
-
 
 
 
@@ -286,8 +327,8 @@ func set_collision(tile: int):
 
 	#emit_signal("collision_updated", tile, shape)
 	var transform = Transform2D.IDENTITY
-	editor.tile_set.tile_add_shape(tile, shape, transform)
-	editor.tile_set.tile_set_shape(tile, 0, shape)
+	w.current_level.get_node("TileMap").tile_set.tile_add_shape(tile, shape, transform)
+	w.current_level.get_node("TileMap").tile_set.tile_set_shape(tile, 0, shape)
 
 
 
@@ -301,6 +342,24 @@ func erase_collision(tile: int):
 	for c in tile_button.get_children():
 		c.free()
 
+
+
+### HELPER GETTERS ###
+
+func get_tile_map_layer(y_pos: int) -> int:
+	var tile_map_layer = 0
+	match y_pos:
+		0, 1, 2, 3: #FarBack
+			tile_map_layer = 0
+		4, 5, 6, 7: #Back
+			tile_map_layer = 1
+		8, 9, 10, 11: #Front
+			tile_map_layer = 2
+		12, 13, 14, 15: #FarFront
+			tile_map_layer = 3
+		_:
+			printerr("ERROR: Tile position is too large in y-axis to accurately determine its tile map layer, defaulting to 0")
+	return tile_map_layer
 
 
 
@@ -318,7 +377,6 @@ func _on_New_pressed():
 
 func _on_Save_confirmed():
 	var path = $Save.current_path
-	#emit_signal("tile_set_saved", path.get_basename() + ".tres")
 	var err = ResourceSaver.save(path.get_basename() + ".tres", editor.tile_set)
 	if err == OK:
 		print("tile set saved")
@@ -328,33 +386,21 @@ func _on_Save_confirmed():
 	
 	
 func _on_Load_file_selected(path):
-	#emit_signal("tile_set_loaded", path)
 	load_tile_set(path)
 
 func load_tile_set(path):
-	editor.tile_set = load(path)
-	
+	w.current_level.get_node("TileMap").tile_set = load(path)
 	editor.get_node("Main/Win/Tab/Tiles").setup_tiles()
 	setup_tile_set()
-	
-	for c in editor.tile_collection.get_children():
-		if c is TileMap:
-			c.tile_set = editor.tile_set
-	w.current_level.tile_set = editor.tile_set
-
 
 
 #func _on_Reload_pressed():
-#	emit_signal("tile_set_loaded", tile_set.get_path())
 #	var texture = tile_set.tile_get_texture(tile_set.get_tiles_ids().front())
 #	var image = texture.get_data()
 #	VisualServer.texture_set_data(texture.get_rid(), image)
 
 func _on_New_file_selected(path):
-	#emit_signal("image_loaded", path)
-	#editor.create_tile_set_from_texture(load(path))
-#func create_tile_set_from_texture(texture):
-	editor.tile_set = TileSet.new()
+	var tile_set = TileSet.new()
 	texture = load(path)
 	rows = int(texture.get_size().y/16)
 	var columns = int(texture.get_size().x/16)
@@ -364,19 +410,12 @@ func _on_New_file_selected(path):
 		var x_pos = (id % columns) * 16
 		var y_pos = floor(id / columns) * 16
 		var region = Rect2(x_pos, y_pos, 16, 16)
-
-		editor.tile_set.create_tile(id)
-		editor.tile_set.tile_set_texture(id, texture)
-		editor.tile_set.tile_set_region(id, region)
+		tile_set.create_tile(id)
+		tile_set.tile_set_texture(id, texture)
+		tile_set.tile_set_region(id, region)
 		id += 1
-
-	editor.get_node("Main/Win/Tab/Tiles").setup_tiles() #TODO: merge with save or load
-	setup_tile_set()
-
-	for c in editor.tile_collection.get_children():
-		if c is TileMap:
-			c.tile_set = editor.tile_set
-
+	
+	load_tile_set(path)
 
 
 
@@ -410,3 +449,16 @@ func _on_RotateCC_toggled(button_pressed):
 	else:
 		brush_rotation_degrees -= 90
 	setup_brushes()
+
+
+func _on_Remap_pressed():
+	$VBox/Margin/Tab/Normal/HBox/Swap.button_pressed = false
+	active_normal_mode = "remap"
+	remap_button.icon = tile_set_remap_true
+	swap_button.icon = tile_set_swap_false
+
+func _on_Swap_toggled(toggled_on):
+	$VBox/Margin/Tab/Normal/HBox/Remap.button_pressed = false
+	active_normal_mode = "swap"
+	remap_button.icon = tile_set_remap_false
+	swap_button.icon = tile_set_swap_true

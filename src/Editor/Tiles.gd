@@ -14,7 +14,6 @@ var auto_tile_false = load("res://assets/Editor/AutoTileFalse.png")
 var mode_paint = load("res://assets/Editor/ModePaint.png")
 var mode_select = load("res://assets/Editor/ModeSelect.png")
 
-#var tile_set 
 var texture
 var columns: int
 var rows: int
@@ -25,14 +24,15 @@ var selected_tile_region := Rect2i(0, 0, 16, 16) #in texture space
 var tile_rotation_degrees: float = 0
 var tile_scale_vector := Vector2(1,1)
 
+#tooltip discriptions
+var auto_layer_disc = "Auto-Select Drawing Layer"
+var multi_erase_disc = "Erase on All Layers"
+var auto_tile_disc = "Autotile"
+var mode_disc = "Mode"
 
 
 @export var buttons: NodePath
 @export var cursor: NodePath
-@export var auto_layer_disc: String
-@export var multi_erase_disc: String
-@export var auto_tile_disc: String
-@export var mode_disc: String
 
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
 @onready var tile_master = editor.get_node("TileMaster")

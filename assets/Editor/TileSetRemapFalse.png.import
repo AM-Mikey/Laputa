@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7tpf4w2ku2sp"
-path="res://.godot/imported/White.png-26bb01dcd5e1c9b9b49ccb520e3c2dbc.ctex"
+uid="uid://duoqsv4fuk3gk"
+path="res://.godot/imported/TileSetRemapFalse.png-15680b6973623000f7f6e04d94e45b5f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Cursor/White.png"
-dest_files=["res://.godot/imported/White.png-26bb01dcd5e1c9b9b49ccb520e3c2dbc.ctex"]
+source_file="res://assets/Editor/TileSetRemapFalse.png"
+dest_files=["res://.godot/imported/TileSetRemapFalse.png-15680b6973623000f7f6e04d94e45b5f.ctex"]
 
 [params]
 
