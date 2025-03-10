@@ -73,14 +73,13 @@ func _ready():
 	setup_level() #Call this every time the level is changed or reloaded
 	#$Main/Win.move_child($Main/Win/Tab, 0) TODO: was supposed to make tabcontainer go behind resize controls, didnt work
 
-func setup_level(): #TODO: clear undo history
+func setup_level(): #TODO: clear undo history	TODO: make this an editor_enter signal
 	#emit_signal("level_selected", w.current_level)
 	w.get_node("Juniper").disable()
 	ui.get_node("HUD").queue_free()
 	ui.visible = false
 	for a in get_tree().get_nodes_in_group("Actors"):
 		a.queue_free()
-			
 	actor_collection = w.current_level.get_node("Actors")
 	prop_collection = w.current_level.get_node("Props")
 	trigger_collection = w.current_level.get_node("Triggers")
@@ -89,6 +88,7 @@ func setup_level(): #TODO: clear undo history
 	tile_map = w.current_level.get_node("TileMap")
 	tile_master.setup_tile_master()
 	$Main/Win/Tab/TileSet.load_tile_set(tile_map.tile_set.resource_path)
+	w.current_level.tile_animator.editor_enter()
 	
 	setup_level_editor_layer()
 	#set_entities_pickable()
@@ -135,9 +135,9 @@ func load_editor_windows():
 	pass
 
 
-func exit():
+func exit():	#TODO: make this an editor_exit signal
 	inspector.exit()
-	
+	w.current_level.tile_animator.editor_exit()
 	free_previews()
 	editor_level_limiter.queue_free()
 	el.get_node("EditorCamera").queue_free()

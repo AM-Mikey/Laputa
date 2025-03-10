@@ -12,6 +12,7 @@ var tile_set_remap_false = load("res://assets/Editor/TileSetRemapFalse.png")
 var tile_set_swap_true = load("res://assets/Editor/TileSetSwapTrue.png")
 var tile_set_swap_false = load("res://assets/Editor/TileSetSwapFalse.png")
 
+var current_frame = 0
 
 var active_tab = "normal"
 var active_button: Object
@@ -231,14 +232,23 @@ func set_cursor(region: Rect2):
 
 ### MISC ###
 func next_animation_frame(): #pack it up and replace with sprite sheet
-	var old_frame = w.current_level.get_node("TileMap").tile_set.get_source(0).texture
-	var new_frame_path: String
-	new_frame_path = String(old_frame.resource_path.left(-1) + str(int(old_frame.resource_path.right(1)) + 1)) #only works for 10 frames or less
-	if !ResourceLoader.exists(new_frame_path):
-		new_frame_path = String(old_frame.resource_path.left(-1) + "0")
-	
-	var new_frame = load(new_frame_path)
-	w.current_level.get_node("TileMap").tile_set.get_source(0).texture = new_frame
+	var tile_map = w.current_level.get_node("TileMap")
+	if !tile_map.tile_set.has_source(1):
+		return
+	var max_frame = tile_map.tile_set.get_source_count() - 1
+	if current_frame == max_frame: current_frame = 0
+	else: current_frame += 1
+
+	var used_cells = []
+	for layer in 4:
+		for used_cell_pos in tile_map.get_used_cells(layer):
+			var atlas_coords = tile_map.get_cell_atlas_coords(layer, used_cell_pos)
+			var is_animated = tile_map.tile_set.get_source(1).has_tile(atlas_coords) #check for a second frame
+			var has_next_frame = tile_map.tile_set.get_source(current_frame).has_tile(atlas_coords) #check for next frame
+			if is_animated and has_next_frame:
+				tile_map.set_cell(layer, used_cell_pos, current_frame, atlas_coords)
+			elif is_animated:
+				tile_map.set_cell(layer, used_cell_pos, 0, atlas_coords)
 
 #
 #### COLLISION

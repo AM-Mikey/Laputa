@@ -103,16 +103,17 @@ March 6 2025
 --- editor ---
 
 -consider adding ability to edit tileset not on current level
-
 -after moving entity unable to use tile tool
-
+-editor enter and exit signals
 
 --- animated tileset ---
 
--using different texture files
 -make sure to account for remapping
--animate based on windanimator
--only include tiles that change on the next frame
+-new animation node per tileset, autoload it in on level
+-use files for organization
 
 
-last thing worked on, setting up animated tiles. new system will use spritesheets or different sources. cant create new sources during runtime
+3/9/25
+-last worked on animation, next step is to move the waterfall
+	to a higher layer and do so using a tile remapper that
+	accounts for animated tiles
