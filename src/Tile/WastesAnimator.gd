@@ -26,12 +26,13 @@ func setup_animation_groups():
 		for used_cell_pos in tile_map.get_used_cells(layer):
 			var atlas_coords = tile_map.get_cell_atlas_coords(layer, used_cell_pos)
 			var tile_data = tile_map.get_cell_tile_data(layer, used_cell_pos) #all frames need to be in the group
-			var animation_group = tile_data.get_custom_data("animation_group")
-			match animation_group:
-				"waterfall":
-					waterfall_tiles.append([layer, used_cell_pos, atlas_coords])
-				"grass":
-					grass_tiles.append([layer, used_cell_pos, atlas_coords])
+			if tile_data.has_custom_data("animation_group"):
+				var animation_group = tile_data.get_custom_data("animation_group")
+				match animation_group:
+					"waterfall":
+						waterfall_tiles.append([layer, used_cell_pos, atlas_coords])
+					"grass":
+						grass_tiles.append([layer, used_cell_pos, atlas_coords])
 
 
 func next_animation_frame(group):
