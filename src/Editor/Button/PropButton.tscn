@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://brrrka1ptx3y4"]
 
 [ext_resource type="StyleBox" uid="uid://c53b3p1k47jdu" path="res://src/UI/StyleBox/SteelRound.tres" id="1"]
-[ext_resource type="Script" path="res://src/Editor/Button/PropButton.gd" id="2"]
+[ext_resource type="Script" uid="uid://cqqo4ddydvfwm" path="res://src/Editor/Button/PropButton.gd" id="2"]
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="3"]
 
 [sub_resource type="StyleBoxEmpty" id="5"]

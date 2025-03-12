@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cdgi2ibu56t2j"]
 
-[ext_resource type="Script" path="res://src/Gun/Speeder.gd" id="1"]
+[ext_resource type="Script" uid="uid://crh6nuab7qxaq" path="res://src/Gun/Speeder.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://curoteu21cbu6" path="res://assets/Gun/Speeder.png" id="2"]
 
 [node name="Speeder" type="Node2D"]

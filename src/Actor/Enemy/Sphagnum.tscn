@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://vtjfl8beloqi"]
 
 [ext_resource type="Texture2D" uid="uid://eg82riqnxr1v" path="res://assets/Actor/Enemy/Sphagnum.png" id="1"]
-[ext_resource type="Script" path="res://src/Actor/Enemy/Sphagnum.gd" id="2"]
+[ext_resource type="Script" uid="uid://iyxvab6jtowu" path="res://src/Actor/Enemy/Sphagnum.gd" id="2"]
 
 [sub_resource type="RectangleShape2D" id="3"]
 size = Vector2(16, 24)
@@ -41,8 +41,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6376x"]
 _data = {
-"Alert": SubResource("2"),
-"Idle": SubResource("1")
+&"Alert": SubResource("2"),
+&"Idle": SubResource("1")
 }
 
 [node name="Sphagnum" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://clweqsl4ry3x7"]
 
-[ext_resource type="Script" path="res://src/Bullet/BulletRevolver.gd" id="1"]
+[ext_resource type="Script" uid="uid://c4fyyrhpqbl1u" path="res://src/Bullet/BulletRevolver.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bd1h41uc6n18t" path="res://assets/Bullet/BulletPistol.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="3"]
 

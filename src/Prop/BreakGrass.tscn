@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://1ueh3ffe5yrx"]
 
-[ext_resource type="Script" path="res://src/Prop/BreakGrass.gd" id="1"]
+[ext_resource type="Script" uid="uid://gi5tx43ejth4" path="res://src/Prop/BreakGrass.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://jjg0h23v4k70" path="res://assets/Prop/BreakGrass.png" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
@@ -51,9 +51,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4gvrb"]
 _data = {
-"Burn": SubResource("2"),
-"Cut": SubResource("3"),
-"Tall": SubResource("4")
+&"Burn": SubResource("2"),
+&"Cut": SubResource("3"),
+&"Tall": SubResource("4")
 }
 
 [node name="BreakGrass" type="StaticBody2D"]

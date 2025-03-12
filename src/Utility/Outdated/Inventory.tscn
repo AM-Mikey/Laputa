@@ -1,13 +1,12 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://cb706vgguoi3t"]
 
-[ext_resource path="res://src/Utility/Outdated/Inventory.gd" type="Script" id=1]
-
+[ext_resource type="Script" uid="uid://dmjvwn7yqiy3w" path="res://src/Utility/Outdated/Inventory.gd" id="1"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+script = ExtResource("1")
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bkn72s05jggwq"]
 
-[ext_resource type="Script" path="res://src/Bullet/Star.gd" id="1_1qp2b"]
+[ext_resource type="Script" uid="uid://ii3n548fd8d6" path="res://src/Bullet/Star.gd" id="1_1qp2b"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="2_1lxsx"]
 [ext_resource type="Texture2D" uid="uid://da323nnsbu3cg" path="res://assets/Bullet/Star.png" id="3_1w6uq"]
 
@@ -45,8 +45,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v0i8r"]
 _data = {
-"FlipLeft": SubResource("4"),
-"FlipRight": SubResource("5")
+&"FlipLeft": SubResource("4"),
+&"FlipRight": SubResource("5")
 }
 
 [node name="Star3" type="CharacterBody2D"]

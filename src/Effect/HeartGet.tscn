@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://10vayrpsi474"]
 
 [ext_resource type="Texture2D" uid="uid://wuy446n76ga3" path="res://assets/Effect/HeartGet.png" id="1_tchbq"]
-[ext_resource type="Script" path="res://src/Effect/BasicParticle.gd" id="2_lbjnp"]
+[ext_resource type="Script" uid="uid://cw1bcyj65k2dg" path="res://src/Effect/BasicParticle.gd" id="2_lbjnp"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 particles_animation = true
@@ -10,7 +10,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="Curve" id="Curve_uvlvd"]
-max_value = 2.0
+_limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 2), 0.0, -1.6938, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 metadata/_snap_enabled = true

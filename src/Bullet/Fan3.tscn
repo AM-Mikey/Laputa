@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://k852h8fel8oy"]
 
 [ext_resource type="Texture2D" uid="uid://dx7u3816jj4oq" path="res://assets/Bullet/Fan.png" id="1"]
-[ext_resource type="Script" path="res://src/Bullet/Fan.gd" id="2"]
+[ext_resource type="Script" uid="uid://dlgswnhbcopta" path="res://src/Bullet/Fan.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]

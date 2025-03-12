@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://bhdhqqa4pe6nr"]
 
-[ext_resource path="res://assets/Utility/Black.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://b3hnyxt5qixpm" path="res://assets/Utility/Black.png" id="1"]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 2.0
+[sub_resource type="CapsuleShape2D" id="1"]
+radius = 1.0
 height = 2.0
 
 [node name="RopePart" type="RigidBody2D"]
@@ -12,17 +12,17 @@ collision_mask = 32768
 angular_damp = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 3 )
-shape = SubResource( 1 )
+position = Vector2(0, 3)
+shape = SubResource("1")
 
 [node name="Joint3D" type="PinJoint2D" parent="."]
-position = Vector2( 0, 6 )
-scale = Vector2( 0.2, 0.2 )
+position = Vector2(0, 6)
+scale = Vector2(0.2, 0.2)
 node_a = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
-position = Vector2( 5.68434e-14, 0 )
-scale = Vector2( 1, 6 )
-texture = ExtResource( 1 )
+position = Vector2(5.68434e-14, 0)
+scale = Vector2(1, 6)
+texture = ExtResource("1")
 centered = false

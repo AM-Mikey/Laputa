@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bwmc03kthumv7"]
 
-[ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="1_arjde"]
+[ext_resource type="Script" uid="uid://b58ifwfgkr5v6" path="res://src/Actor/NPC/NPC.gd" id="1_arjde"]
 [ext_resource type="Texture2D" uid="uid://syhjudorscwo" path="res://assets/Actor/NPC/Mink.png" id="2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6ym3a"]
@@ -46,8 +46,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_75hsg"]
 _data = {
-"Idle": SubResource("3"),
-"Walk": SubResource("4")
+&"Idle": SubResource("3"),
+&"Walk": SubResource("4")
 }
 
 [node name="Mink" type="CharacterBody2D" groups=["Actors", "Entities", "NPCs"]]

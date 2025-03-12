@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cyy201xw8120x"]
 
-[ext_resource type="Script" path="res://src/Bullet/Enemy/Seed.gd" id="1"]
+[ext_resource type="Script" uid="uid://dui5vllutev51" path="res://src/Bullet/Enemy/Seed.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dkhsxpnntjtp7" path="res://assets/Bullet/Enemy/Seed.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://d1oy3g4tudn3v" path="res://src/Bullet/Enemy/EnemyCollisionDetector.tscn" id="2_ae4d7"]
 
@@ -26,7 +26,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0of4l"]
 _data = {
-"RotateLeft": SubResource("2")
+&"RotateLeft": SubResource("2")
 }
 
 [node name="Seed" type="CharacterBody2D" groups=["WindBullets"]]

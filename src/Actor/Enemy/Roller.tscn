@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c7yhu5je8w1pf"]
 
-[ext_resource type="Script" path="res://src/Actor/Enemy/Roller.gd" id="1"]
+[ext_resource type="Script" uid="uid://btmn4aedyq1op" path="res://src/Actor/Enemy/Roller.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://b8jbm3e01232q" path="res://assets/Actor/Enemy/Roller.png" id="2"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
@@ -32,7 +32,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ms45c"]
 _data = {
-"Roll": SubResource("2")
+&"Roll": SubResource("2")
 }
 
 [node name="Roller" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bahi2ylohhlqn"]
 
-[ext_resource type="Script" path="res://src/Effect/Explosion.gd" id="1"]
+[ext_resource type="Script" uid="uid://bjuwnjgwgsfwq" path="res://src/Effect/Explosion.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bvy565a64eprt" path="res://assets/Effect/0Explosion.png" id="2"]
 
 [sub_resource type="Animation" id="1"]
@@ -21,7 +21,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lq436"]
 _data = {
-"Explosion": SubResource("1")
+&"Explosion": SubResource("1")
 }
 
 [node name="Explosion" type="Node2D"]

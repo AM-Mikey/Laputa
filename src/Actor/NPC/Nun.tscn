@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dhxel27v32pi"]
 
-[ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="1_15sr2"]
+[ext_resource type="Script" uid="uid://b58ifwfgkr5v6" path="res://src/Actor/NPC/NPC.gd" id="1_15sr2"]
 [ext_resource type="Texture2D" uid="uid://c2md3q8lfgcxy" path="res://assets/Actor/NPC/Nun.png" id="2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_boymr"]
@@ -63,9 +63,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ar2n2"]
 _data = {
-"Idle": SubResource("3"),
-"Talk": SubResource("Animation_0t8fs"),
-"Walk": SubResource("4")
+&"Idle": SubResource("3"),
+&"Talk": SubResource("Animation_0t8fs"),
+&"Walk": SubResource("4")
 }
 
 [node name="Nun" type="CharacterBody2D" groups=["Actors", "Entities", "NPCs"]]

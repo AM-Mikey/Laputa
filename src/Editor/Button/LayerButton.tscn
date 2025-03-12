@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d3eadwdw70aq3" path="res://assets/Editor/EditTrue.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://bnr2ofk5mre6h" path="res://assets/Editor/VisFalse.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://b7fbr0e7mihkm" path="res://assets/Editor/VisTrue.png" id="6"]
-[ext_resource type="Script" path="res://src/Editor/Button/LayerButton.gd" id="7"]
+[ext_resource type="Script" uid="uid://dd0r3acg5fp3y" path="res://src/Editor/Button/LayerButton.gd" id="7"]
 
 [sub_resource type="StyleBoxEmpty" id="5"]
 

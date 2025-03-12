@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dgsxaluaknjbk"]
 
-[ext_resource type="Script" path="res://src/Bullet/GLauncher.gd" id="1"]
+[ext_resource type="Script" uid="uid://3bmujcg5fwtv" path="res://src/Bullet/GLauncher.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://b8hr08cetxnob" path="res://assets/Bullet/BulletGrenadeLauncher.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="3"]
 
@@ -49,8 +49,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_trxyl"]
 _data = {
-"FlipLeft": SubResource("4"),
-"FlipRight": SubResource("5")
+&"FlipLeft": SubResource("4"),
+&"FlipRight": SubResource("5")
 }
 
 [node name="GLauncher3" type="CharacterBody2D"]

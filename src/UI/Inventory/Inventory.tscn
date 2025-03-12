@@ -2,8 +2,8 @@
 
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="3"]
-[ext_resource type="FontFile" path="res://src/UI/Font/WelcomeBack.tres" id="5"]
-[ext_resource type="Script" path="res://src/UI/Inventory/Inventory.gd" id="6"]
+[ext_resource type="FontFile" uid="uid://cf01li78xvnnu" path="res://src/UI/Font/WelcomeBack.tres" id="5"]
+[ext_resource type="Script" uid="uid://dw8rl6uwhnt3l" path="res://src/UI/Inventory/Inventory.gd" id="6"]
 [ext_resource type="PackedScene" uid="uid://dbyknhh1oyx5i" path="res://src/UI/Inventory/WeaponWheel.tscn" id="7"]
 [ext_resource type="StyleBox" uid="uid://d20qvx0q5xflf" path="res://src/UI/StyleBox/RustTrimmedScrews.tres" id="8"]
 [ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momoextended.ttf" id="8_1e805"]

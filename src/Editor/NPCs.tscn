@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://delujnbor6a2"]
 
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1"]
-[ext_resource type="Script" path="res://src/Editor/NPCs.gd" id="2"]
+[ext_resource type="Script" uid="uid://bibv3hm6d5ye8" path="res://src/Editor/NPCs.gd" id="2"]
 
 [node name="NPCs" type="MarginContainer"]
 offset_right = 64.0

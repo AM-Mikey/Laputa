@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://rr0nr5s6motv"]
 
 [ext_resource type="Texture2D" uid="uid://ojidqq1xbafp" path="res://assets/Editor/TransformHandle.png" id="1"]
-[ext_resource type="Script" path="res://src/Editor/EditorLevelLimiter.gd" id="2"]
+[ext_resource type="Script" uid="uid://b474b81ribhxk" path="res://src/Editor/EditorLevelLimiter.gd" id="2"]
 [ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="2_as2bb"]
 
 [node name="EditorLevelLimiter" type="MarginContainer"]

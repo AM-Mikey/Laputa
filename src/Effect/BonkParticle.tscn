@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cm4gdf5214g6o"]
 
-[ext_resource type="Script" path="res://src/Effect/BonkParticle.gd" id="1"]
+[ext_resource type="Script" uid="uid://0t8pmagwe7ji" path="res://src/Effect/BonkParticle.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c0uvowge7tlu2" path="res://assets/Effect/Bonk.png" id="2"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
@@ -10,12 +10,12 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="Curve" id="2"]
-max_value = 100.0
+_limits = [0.0, 100.0, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 300.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="3"]
-max_value = 2.0
+_limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.6, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 

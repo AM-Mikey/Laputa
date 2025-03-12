@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cl3sa7nubis6p" path="res://assets/UI/Settings/KeyboardMouse.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://bmeh5rfp6bvek" path="res://assets/UI/Settings/KeyboardClassic.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://ccaq53m8l5g3c" path="res://assets/UI/Settings/KeyboardCustom.png" id="4"]
-[ext_resource type="Script" path="res://src/UI/Options/KeyConfig.gd" id="6"]
-[ext_resource type="FontFile" path="res://src/UI/Font/MomoNoSpacing.tres" id="8"]
+[ext_resource type="Script" uid="uid://cq6xxd8uisqit" path="res://src/UI/Options/KeyConfig.gd" id="6"]
+[ext_resource type="FontFile" uid="uid://ph5e7vu3daff" path="res://src/UI/Font/MomoNoSpacing.tres" id="8"]
 [ext_resource type="StyleBox" uid="uid://bqcnin0ya0s5l" path="res://src/UI/StyleBox/SteelCorner.tres" id="9"]
 
 [node name="KeyConfig" type="MarginContainer"]

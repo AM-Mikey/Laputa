@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://inqdolo54sfv"]
 
-[ext_resource type="Script" path="res://src/Utility/FocusCamera.gd" id="1"]
+[ext_resource type="Script" uid="uid://rfjb2od8irxi" path="res://src/Utility/FocusCamera.gd" id="1"]
 
 [node name="FocusCamera" type="Camera2D" groups=["Cameras"]]
 zoom = Vector2(0.25, 0.25)

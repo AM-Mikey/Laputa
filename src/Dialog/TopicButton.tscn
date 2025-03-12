@@ -1,16 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://bts5t63q0qdq4"]
 
-[ext_resource path="res://src/UI/Theme/LaputaTheme.tres" type="Theme" id=1]
-[ext_resource path="res://src/Dialog/TopicButton.gd" type="Script" id=2]
-
+[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="1"]
+[ext_resource type="Script" uid="uid://blb2gmhyj6wsy" path="res://src/Dialog/TopicButton.gd" id="2"]
 
 [node name="TopicButton" type="Button"]
 offset_right = 40.0
 offset_bottom = 14.0
-theme = ExtResource( 1 )
+theme = ExtResource("1")
 text = "Test Topic"
 flat = true
-script = ExtResource( 2 )
+script = ExtResource("2")
 __meta__ = {
 "_edit_use_anchors_": false
 }

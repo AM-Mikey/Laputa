@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bwrxbo2wug6g1"]
 
 [ext_resource type="Texture2D" uid="uid://b4mmpmspy26wb" path="res://assets/Actor/Boss/Emily.png" id="1"]
-[ext_resource type="Script" path="res://src/Actor/Boss/Emily.gd" id="2"]
+[ext_resource type="Script" uid="uid://buqhyfxa3j1bw" path="res://src/Actor/Boss/Emily.gd" id="2"]
 
 [sub_resource type="RectangleShape2D" id="4"]
 size = Vector2(40, 4)
@@ -42,8 +42,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w6fls"]
 _data = {
-"Idle": SubResource("2"),
-"Thrust": SubResource("3")
+&"Idle": SubResource("2"),
+&"Thrust": SubResource("3")
 }
 
 [node name="Emily" type="CharacterBody2D" groups=["Actors", "Bosses", "Entities"]]

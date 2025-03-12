@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dv211ut2ovt1m"]
 
-[ext_resource type="Script" path="res://src/Utility/TriggerVisual.gd" id="1"]
+[ext_resource type="Script" uid="uid://dso88ycvlfv1m" path="res://src/Utility/TriggerVisual.gd" id="1"]
 
 [node name="TriggerVisual" type="ColorRect" groups=["TriggerVisuals"]]
 modulate = Color(1, 1, 1, 0.294118)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://mb61dn8e5i58"]
 
 [ext_resource type="Texture2D" uid="uid://cl4o5t4sgdfhh" path="res://assets/Bullet/BulletTurnstileJumper.png" id="1"]
-[ext_resource type="Script" path="res://src/Bullet/TurnstileJumper.gd" id="2"]
+[ext_resource type="Script" uid="uid://bhh6wymtqa1if" path="res://src/Bullet/TurnstileJumper.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]

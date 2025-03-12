@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://digbeuogn4h0f"]
 
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1"]
-[ext_resource type="Script" path="res://src/Editor/Levels.gd" id="2"]
+[ext_resource type="Script" uid="uid://dg6cpxu85h3cg" path="res://src/Editor/Levels.gd" id="2"]
 
 [node name="Levels" type="MarginContainer"]
 anchors_preset = 15

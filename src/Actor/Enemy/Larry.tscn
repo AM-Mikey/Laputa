@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bl7qmtrrcpsqy"]
 
-[ext_resource type="Script" path="res://src/Actor/Enemy/Larry.gd" id="2"]
+[ext_resource type="Script" uid="uid://bkl387nkbn5p1" path="res://src/Actor/Enemy/Larry.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://42e5ficnc637" path="res://assets/Actor/Enemy/Larry.png" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
@@ -75,10 +75,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t5niq"]
 _data = {
-"IdleLeft": SubResource("2"),
-"IdleRight": SubResource("3"),
-"WalkLeft": SubResource("4"),
-"WalkRight": SubResource("5")
+&"IdleLeft": SubResource("2"),
+&"IdleRight": SubResource("3"),
+&"WalkLeft": SubResource("4"),
+&"WalkRight": SubResource("5")
 }
 
 [node name="Larry" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://byv37yjh2rp36"]
 
-[ext_resource type="Script" path="res://src/Gun/Revolver.gd" id="1"]
+[ext_resource type="Script" uid="uid://duqg6l28b37ie" path="res://src/Gun/Revolver.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dtdexbpc2hbtu" path="res://assets/Gun/Revolver.png" id="2"]
 
 [node name="Revolver" type="Node2D"]

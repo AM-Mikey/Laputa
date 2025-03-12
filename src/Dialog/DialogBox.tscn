@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://dmt6h4vj5irs3"]
 
-[ext_resource type="Script" path="res://src/Dialog/DialogBox.gd" id="1"]
+[ext_resource type="Script" uid="uid://dadxo4i123gxi" path="res://src/Dialog/DialogBox.gd" id="1"]
 [ext_resource type="StyleBox" uid="uid://cedutrf4qdb7q" path="res://src/UI/StyleBox/SteelRoundDark.tres" id="2"]
-[ext_resource type="Texture2D" uid="uid://cn84txin4yywk" path="res://assets/UI/Face/Izu.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://cn84txin4yywk" path="res://assets/Face/Izu.png" id="4"]
 [ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momoextended.ttf" id="4_2s414"]
 [ext_resource type="FontFile" uid="uid://cf01li78xvnnu" path="res://src/UI/Font/WelcomeBack.tres" id="5"]
-[ext_resource type="Script" path="res://src/Dialog/CommandHandler.gd" id="6"]
+[ext_resource type="Script" uid="uid://m5b2hs3sruoe" path="res://src/Dialog/CommandHandler.gd" id="6"]
 
 [node name="DialogBox" type="MarginContainer"]
 process_mode = 1

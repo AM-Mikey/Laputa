@@ -1,15 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://d04jwkrftpvt4"]
 
-[ext_resource path="res://src/Dialog/TopicBox.gd" type="Script" id=1]
-[ext_resource path="res://src/UI/StyleBox/ChromeRimmed.tres" type="StyleBox" id=2]
-[ext_resource path="res://assets/UI/Face/Recruit.png" type="Texture2D" id=3]
+[ext_resource type="Script" uid="uid://c1mleaw4rsb5o" path="res://src/Dialog/TopicBox.gd" id="1"]
+[ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="2"]
+
+[sub_resource type="Resource" id="Resource_xnmus"]
+metadata/__load_path__ = "res://assets/UI/Face/Recruit.png"
 
 [node name="TopicBox" type="MarginContainer"]
 process_mode = 1
 offset_right = 480.0
 offset_bottom = 64.0
 clip_contents = true
-script = ExtResource( 1 )
+script = ExtResource("1")
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -19,7 +21,7 @@ __meta__ = {
 [node name="Panel" type="Panel" parent="."]
 offset_right = 480.0
 offset_bottom = 64.0
-theme_override_styles/panel = ExtResource( 2 )
+theme_override_styles/panel = ExtResource("2")
 
 [node name="Margin" type="MarginContainer" parent="."]
 offset_right = 480.0
@@ -54,12 +56,12 @@ columns = 3
 offset_left = 416.0
 offset_right = 464.0
 offset_bottom = 48.0
-custom_minimum_size = Vector2( 48, 48 )
+custom_minimum_size = Vector2(48, 48)
 clip_contents = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Margin/HBox/Face"]
-position = Vector2( 48, 0 )
-texture = ExtResource( 3 )
+position = Vector2(48, 0)
+texture = SubResource("Resource_xnmus")
 centered = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

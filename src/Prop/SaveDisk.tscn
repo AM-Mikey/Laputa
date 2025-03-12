@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://eoah43mp5yo8"]
 
 [ext_resource type="Texture2D" uid="uid://b7puntitab4qd" path="res://assets/Prop/SaveDisk.png" id="1"]
-[ext_resource type="Script" path="res://src/Prop/SaveDisk.gd" id="3"]
+[ext_resource type="Script" uid="uid://bwn6q2qrnygr3" path="res://src/Prop/SaveDisk.gd" id="3"]
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(16, 16)
@@ -26,7 +26,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q8gjm"]
 _data = {
-"Spin": SubResource("1")
+&"Spin": SubResource("1")
 }
 
 [node name="SaveDisk" type="Area2D"]

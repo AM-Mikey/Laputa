@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://h5hb64t4jln0"]
 
-[ext_resource type="Script" path="res://src/Effect/Cloud.gd" id="1"]
+[ext_resource type="Script" uid="uid://kgd8y36wrult" path="res://src/Effect/Cloud.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c0a6vpq3axcbi" path="res://assets/Effect/CloudSmallKinematic.png" id="2"]
 
 [node name="CloudSmallKinematic" type="CharacterBody2D"]

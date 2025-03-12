@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://bdlb4ndh8yuh2"]
 
-[ext_resource type="Script" path="res://src/Actor/Enemy/Junior.gd" id="1"]
+[ext_resource type="Script" uid="uid://bc5jt2xwk1n7v" path="res://src/Actor/Enemy/Junior.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dfq7titr5btw6" path="res://assets/Actor/Enemy/Junior.png" id="2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2oly5"]
@@ -97,11 +97,11 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eq2gb"]
 _data = {
-"Aim": SubResource("6"),
-"Idle": SubResource("8"),
-"Shock": SubResource("11"),
-"Shoot": SubResource("7"),
-"Walk": SubResource("9")
+&"Aim": SubResource("6"),
+&"Idle": SubResource("8"),
+&"Shock": SubResource("11"),
+&"Shoot": SubResource("7"),
+&"Walk": SubResource("9")
 }
 
 [node name="Junior" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]

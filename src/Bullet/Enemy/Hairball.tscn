@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://fioqnyqjoqkt"]
 
-[ext_resource type="Script" path="res://src/Bullet/Enemy/Hairball.gd" id="1"]
+[ext_resource type="Script" uid="uid://db8sonshae0f5" path="res://src/Bullet/Enemy/Hairball.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bwidtesm4rihd" path="res://assets/Bullet/Enemy/Hairball.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://d1oy3g4tudn3v" path="res://src/Bullet/Enemy/EnemyCollisionDetector.tscn" id="2_ahdkj"]
 
@@ -27,7 +27,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mlsak"]
 _data = {
-"Rotate": SubResource("2")
+&"Rotate": SubResource("2")
 }
 
 [node name="Hairball" type="CharacterBody2D" groups=["WindBullets"]]

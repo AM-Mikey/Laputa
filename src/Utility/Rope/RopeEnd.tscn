@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://bo0d6bxicraaj"]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id="1"]
 radius = 2.0
 
 [node name="RopeEnd" type="RigidBody2D"]
@@ -10,10 +10,10 @@ mode = 1
 angular_damp = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 2 )
-shape = SubResource( 1 )
+position = Vector2(0, 2)
+shape = SubResource("1")
 
 [node name="Joint3D" type="PinJoint2D" parent="."]
-position = Vector2( 0, 4 )
-scale = Vector2( 0.2, 0.2 )
+position = Vector2(0, 4)
+scale = Vector2(0.2, 0.2)
 node_a = NodePath("..")

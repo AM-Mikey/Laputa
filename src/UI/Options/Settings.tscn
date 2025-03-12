@@ -4,7 +4,7 @@
 [ext_resource type="Theme" path="res://src/UI/Theme/InsetMenu.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://bqcnin0ya0s5l" path="res://src/UI/StyleBox/SteelCorner.tres" id="3"]
 [ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="4"]
-[ext_resource type="Script" path="res://src/UI/Options/Settings.gd" id="6"]
+[ext_resource type="Script" uid="uid://1yhihyfmaejt" path="res://src/UI/Options/Settings.gd" id="6"]
 
 [node name="Settings" type="MarginContainer"]
 anchors_preset = 15

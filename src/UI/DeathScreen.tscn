@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b3pn87gjg0qi"]
 
-[ext_resource type="Theme" path="res://src/UI/Theme/LaputaTheme.tres" id="1"]
-[ext_resource type="Script" path="res://src/UI/DeathScreen.gd" id="2"]
+[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="1"]
+[ext_resource type="Script" uid="uid://s12r4qhtyyy5" path="res://src/UI/DeathScreen.gd" id="2"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "In"
@@ -57,7 +57,7 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xys32"]
 _data = {
-"In": SubResource("1")
+&"In": SubResource("1")
 }
 
 [node name="DeathScreen" type="MarginContainer"]

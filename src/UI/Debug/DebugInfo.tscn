@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ylmoqwimv31g"]
 
-[ext_resource type="Script" path="res://src/UI/Debug/DebugInfo.gd" id="1"]
+[ext_resource type="Script" uid="uid://qayi8dq3f88s" path="res://src/UI/Debug/DebugInfo.gd" id="1"]
 [ext_resource type="Theme" uid="uid://d2y1ya8pt8ye2" path="res://src/UI/Debug/Debug.tres" id="2"]
 [ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momoextended.ttf" id="3_d57kx"]
 [ext_resource type="FontFile" uid="uid://dwxtgalfv3erc" path="res://assets/UI/Font/momomono.ttf" id="5_osv66"]

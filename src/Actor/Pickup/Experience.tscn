@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://bgnl3b3pqhfdb"]
 
-[ext_resource type="Script" path="res://src/Actor/Pickup/Experience.gd" id="1"]
+[ext_resource type="Script" uid="uid://bx12634rbo328" path="res://src/Actor/Pickup/Experience.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dumy0wfvyxqrq" path="res://assets/Actor/Pickup/Experience.png" id="2"]
 
 [sub_resource type="RectangleShape2D" id="8"]
@@ -195,12 +195,12 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sx6wo"]
 _data = {
-"MediumLeft": SubResource("3"),
-"MediumPop": SubResource("5"),
-"MediumRight": SubResource("7"),
-"SmallLeft": SubResource("9"),
-"SmallPop": SubResource("11"),
-"SmallRight": SubResource("12")
+&"MediumLeft": SubResource("3"),
+&"MediumPop": SubResource("5"),
+&"MediumRight": SubResource("7"),
+&"SmallLeft": SubResource("9"),
+&"SmallPop": SubResource("11"),
+&"SmallRight": SubResource("12")
 }
 
 [sub_resource type="Animation" id="13"]
@@ -237,8 +237,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2l5t1"]
 _data = {
-"Flash": SubResource("13"),
-"Steady": SubResource("14")
+&"Flash": SubResource("13"),
+&"Steady": SubResource("14")
 }
 
 [node name="Experience" type="CharacterBody2D" groups=["Actors", "Entities"]]

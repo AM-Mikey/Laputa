@@ -2,7 +2,7 @@
 
 [ext_resource type="StyleBox" uid="uid://c53b3p1k47jdu" path="res://src/UI/StyleBox/SteelRound.tres" id="1"]
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="2"]
-[ext_resource type="Script" path="res://src/Editor/Button/LevelButton.gd" id="3"]
+[ext_resource type="Script" uid="uid://c2yje638usi11" path="res://src/Editor/Button/LevelButton.gd" id="3"]
 
 [sub_resource type="StyleBoxEmpty" id="5"]
 

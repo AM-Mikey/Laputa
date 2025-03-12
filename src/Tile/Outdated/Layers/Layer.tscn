@@ -1,10 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://wwdcn3tsc3gc"]
 
-[ext_resource path="res://src/Tile/Outdated/Layers/Layer.gd" type="Script" id=1]
+[ext_resource type="Script" uid="uid://cexb22qcoqu8d" path="res://src/Tile/Outdated/Layers/Layer.gd" id="1"]
 
 [node name="Layer" type="TileMap"]
-cell_size = Vector2( 16, 16 )
+cell_size = Vector2(16, 16)
 collision_layer = 8
 collision_mask = 0
 format = 1
-script = ExtResource( 1 )
+script = ExtResource("1")

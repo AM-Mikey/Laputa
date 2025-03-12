@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dr1kk5b0rkos7"]
 
-[ext_resource type="Script" path="res://src/Actor/Enemy/Frog.gd" id="1"]
+[ext_resource type="Script" uid="uid://b80mj2pbqh664" path="res://src/Actor/Enemy/Frog.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cimkcsmiyj0d8" path="res://assets/Actor/Enemy/Frog.png" id="2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qm1p1"]
@@ -96,10 +96,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o6omx"]
 _data = {
-"Croak": SubResource("3"),
-"Fall": SubResource("5"),
-"Rise": SubResource("7"),
-"Stand": SubResource("9")
+&"Croak": SubResource("3"),
+&"Fall": SubResource("5"),
+&"Rise": SubResource("7"),
+&"Stand": SubResource("9")
 }
 
 [node name="Frog" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]

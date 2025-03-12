@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ba50qyqtosspf"]
 
-[ext_resource type="Script" path="res://src/Editor/TriggerController.gd" id="1"]
+[ext_resource type="Script" uid="uid://cq5eus6rnsk7y" path="res://src/Editor/TriggerController.gd" id="1"]
 
 [node name="TriggerController" type="MarginContainer"]
 offset_right = 128.0

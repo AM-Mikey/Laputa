@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dimvwe55gdonp"]
 
-[ext_resource type="Script" path="res://src/Effect/EnemyBloodEffect.gd" id="1"]
+[ext_resource type="Script" uid="uid://beflgm65edobo" path="res://src/Effect/EnemyBloodEffect.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://5v83nfkt22hq" path="res://assets/Effect/EnemyBloodParticle.png" id="2"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
@@ -10,12 +10,12 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="Curve" id="Curve_y1513"]
-max_value = 100.0
+_limits = [0.0, 100.0, 0.0, 1.0]
 _data = [Vector2(0, 100), 0.0, 7.95604, 0, 0, Vector2(1, 0), -296.039, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_vc0l4"]
-max_value = 2.0
+_limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 1.78022), 0.0, 0.0, 0, 0, Vector2(1, 1.56044), 0.0, 0.0, 0, 0]
 point_count = 2
 

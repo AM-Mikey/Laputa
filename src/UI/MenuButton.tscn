@@ -1,13 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://cocixd0n3hmcm"]
 
-[ext_resource path="res://src/UI/MenuButton.gd" type="Script" id=1]
+[ext_resource type="Script" uid="uid://die63ln2ee5ku" path="res://src/UI/MenuButton.gd" id="1"]
 
 [node name="MenuButton" type="Button"]
 offset_right = 12.0
 offset_bottom = 20.0
 size_flags_horizontal = 4
 action_mode = 0
-script = ExtResource( 1 )
+script = ExtResource("1")
 __meta__ = {
 "_edit_use_anchors_": false
 }

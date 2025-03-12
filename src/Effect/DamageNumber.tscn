@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://3krnqae68h4d"]
 
 [ext_resource type="Texture2D" uid="uid://c7wyw4y3jdl7j" path="res://assets/UI/NumberNew.png" id="1"]
-[ext_resource type="Script" path="res://src/Effect/DamageNumber.gd" id="2"]
+[ext_resource type="Script" uid="uid://drj33i4nu3wo" path="res://src/Effect/DamageNumber.gd" id="2"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "FloatUp"
@@ -32,7 +32,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_085d2"]
 _data = {
-"FloatUp": SubResource("1")
+&"FloatUp": SubResource("1")
 }
 
 [node name="DamageNumber" type="Node2D"]

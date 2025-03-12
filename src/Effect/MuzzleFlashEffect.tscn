@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://md7dnpwdqwak"]
 
 [ext_resource type="Texture2D" uid="uid://bb4su0xt2cbrl" path="res://assets/Effect/MuzzleFlash.png" id="1"]
-[ext_resource type="Script" path="res://src/Effect/MuzzleFlashEffect.gd" id="2"]
+[ext_resource type="Script" uid="uid://cggdvn0ib8y0c" path="res://src/Effect/MuzzleFlashEffect.gd" id="2"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "MuzzleFlash"
@@ -22,7 +22,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fme64"]
 _data = {
-"MuzzleFlash": SubResource("1")
+&"MuzzleFlash": SubResource("1")
 }
 
 [node name="MuzzleFlashEffect" type="Node2D"]

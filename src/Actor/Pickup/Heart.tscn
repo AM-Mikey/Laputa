@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://ca63y3kg5okvr"]
 
-[ext_resource type="Script" path="res://src/Actor/Pickup/Heart.gd" id="1"]
+[ext_resource type="Script" uid="uid://dfmy0bg0ed3a8" path="res://src/Actor/Pickup/Heart.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bdnfq6epbm4h" path="res://assets/Actor/Pickup/Heart.png" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
@@ -135,9 +135,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a8hkq"]
 _data = {
-"Large": SubResource("3"),
-"Medium": SubResource("5"),
-"Small": SubResource("7")
+&"Large": SubResource("3"),
+&"Medium": SubResource("5"),
+&"Small": SubResource("7")
 }
 
 [node name="Heart" type="CharacterBody2D" groups=["Actors", "Entities"]]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cnb1eoa5tek5k"]
 
-[ext_resource type="Script" path="res://src/Tile/Outdated/TriggerTile/StairsTrigger.gd" id="1"]
+[ext_resource type="Script" uid="uid://dcnglvk1s2oli" path="res://src/Tile/Outdated/TriggerTile/StairsTrigger.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c6u88sdhq1dn5" path="res://assets/Tile/TriggerTile/StairsTrigger.png" id="2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_26qao"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dmys2pcjcv13g"]
 
-[ext_resource type="Script" path="res://src/Bullet/Enemy/Carbine.gd" id="1"]
+[ext_resource type="Script" uid="uid://cmhgqtffagol3" path="res://src/Bullet/Enemy/Carbine.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cghrj2t5u5rt4" path="res://assets/Bullet/Enemy/Carbine.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://d1oy3g4tudn3v" path="res://src/Bullet/Enemy/EnemyCollisionDetector.tscn" id="3_qggel"]
 

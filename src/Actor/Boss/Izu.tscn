@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://yqqj1w2w44jx"]
 
-[ext_resource type="Script" path="res://src/Actor/Boss/Izu.gd" id="1"]
+[ext_resource type="Script" uid="uid://b2x6b7j4i7llw" path="res://src/Actor/Boss/Izu.gd" id="1"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(24, 24)
@@ -79,7 +79,7 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_15efg"]
 _data = {
-"Whip": SubResource("5")
+&"Whip": SubResource("5")
 }
 
 [node name="Izu" type="CharacterBody2D" groups=["Actors", "Bosses", "Entities"]]

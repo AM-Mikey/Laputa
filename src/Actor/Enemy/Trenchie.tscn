@@ -1,10 +1,10 @@
 [gd_scene load_steps=22 format=3 uid="uid://b06vi8xuugq3x"]
 
-[ext_resource type="Script" path="res://src/Actor/Enemy/Trenchie.gd" id="1"]
+[ext_resource type="Script" uid="uid://v81ewf55f1wu" path="res://src/Actor/Enemy/Trenchie.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://2j2flsg5b2p1" path="res://assets/Actor/Enemy/Trenchie.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://qmvnhwivhm4j" path="res://src/Utility/StateMachine.tscn" id="3"]
-[ext_resource type="Script" path="res://src/Actor/Enemy/Trenchie/Jump.gd" id="4"]
-[ext_resource type="Script" path="res://src/Actor/Enemy/Trenchie/Idle.gd" id="5"]
+[ext_resource type="Script" uid="uid://clammvss2dedd" path="res://src/Actor/Enemy/Trenchie/Jump.gd" id="4"]
+[ext_resource type="Script" uid="uid://dq8cd1rmdfo81" path="res://src/Actor/Enemy/Trenchie/Idle.gd" id="5"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
@@ -302,16 +302,16 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u10c2"]
 _data = {
-"Barrel": SubResource("5"),
-"BarrelPeekLeft": SubResource("6"),
-"BarrelPeekRight": SubResource("7"),
-"FallLeft": SubResource("8"),
-"FallRight": SubResource("9"),
-"RiseLeft": SubResource("10"),
-"RiseRight": SubResource("11"),
-"ShootRight": SubResource("12"),
-"StandLeft": SubResource("13"),
-"StandRight": SubResource("14")
+&"Barrel": SubResource("5"),
+&"BarrelPeekLeft": SubResource("6"),
+&"BarrelPeekRight": SubResource("7"),
+&"FallLeft": SubResource("8"),
+&"FallRight": SubResource("9"),
+&"RiseLeft": SubResource("10"),
+&"RiseRight": SubResource("11"),
+&"ShootRight": SubResource("12"),
+&"StandLeft": SubResource("13"),
+&"StandRight": SubResource("14")
 }
 
 [node name="Trenchie" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]

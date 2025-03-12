@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://bupqv3frreu87"]
 
-[ext_resource path="res://src/UI/Theme/LaputaTheme.tres" type="Theme" id=1]
-[ext_resource path="res://src/UI/LevelSelect/LevelSelect.gd" type="Script" id=2]
+[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="1"]
+[ext_resource type="Script" uid="uid://oqgpfw0wq5qk" path="res://src/UI/LevelSelect/LevelSelect.gd" id="2"]
 
 [node name="LevelSelect" type="MarginContainer"]
 offset_right = 480.0
 offset_bottom = 272.0
-theme = ExtResource( 1 )
+theme = ExtResource("1")
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_bottom = 8
-script = ExtResource( 2 )
+script = ExtResource("2")
 __meta__ = {
 "_edit_use_anchors_": false
 }

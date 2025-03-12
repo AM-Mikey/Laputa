@@ -1,6 +1,6 @@
 [gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://djsxt54vtaivl"]
 
-[ext_resource type="Texture2D" uid="uid://cu3d83k4pjun6" path="res://assets/UI/Slider/ScrollBarGrabber.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://b80nfu7y3whk1" path="res://assets/UI/Slider/ScrollBarGrabber.png" id="1"]
 
 [resource]
 texture = ExtResource("1")

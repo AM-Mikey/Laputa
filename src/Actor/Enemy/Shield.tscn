@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bohy43u6frlcy"]
 
-[ext_resource type="Script" path="res://src/Actor/Enemy/Shield.gd" id="1"]
+[ext_resource type="Script" uid="uid://cfowbliw450pc" path="res://src/Actor/Enemy/Shield.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dkiev70oqmmm1" path="res://assets/Actor/Enemy/Shield.png" id="3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1abx7"]
@@ -83,10 +83,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kfp7m"]
 _data = {
-"IdleLeft": SubResource("8"),
-"IdleRight": SubResource("9"),
-"WalkLeft": SubResource("6"),
-"WalkRight": SubResource("7")
+&"IdleLeft": SubResource("8"),
+&"IdleRight": SubResource("9"),
+&"WalkLeft": SubResource("6"),
+&"WalkRight": SubResource("7")
 }
 
 [node name="Shield" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]

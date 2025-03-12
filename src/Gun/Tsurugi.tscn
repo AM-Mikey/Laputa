@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://5orkim7sjfi7"]
 
-[ext_resource type="Script" path="res://src/Gun/Tsurugi.gd" id="1_40cej"]
+[ext_resource type="Script" uid="uid://dg2on0ly0e2sc" path="res://src/Gun/Tsurugi.gd" id="1_40cej"]
 [ext_resource type="Texture2D" uid="uid://bkmtocyt76m15" path="res://assets/Gun/Tsurugi.png" id="2_d2e4q"]
 
 [node name="Tsurugi" type="Node2D"]

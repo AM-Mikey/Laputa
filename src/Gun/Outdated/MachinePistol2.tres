@@ -1,20 +1,20 @@
-[gd_resource type="Resource" load_steps=6 format=2]
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://bfn3utj3ruyap"]
 
-[ext_resource path="res://assets/SFX/Placeholder/snd_polar_star_l1_2.ogg" type="AudioStream" id=1]
-[ext_resource path="res://src/Gun/Outdated/Weapon.gd" type="Script" id=2]
-[ext_resource path="res://src/Bullet/MPistol.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/Gun/MPistol.png" type="Texture2D" id=4]
-[ext_resource path="res://assets/Gun/MPistolIcon.png" type="Texture2D" id=5]
+[ext_resource type="AudioStream" uid="uid://b33dx0bdepvp2" path="res://assets/SFX/Placeholder/snd_polar_star_l1_2.ogg" id="1"]
+[ext_resource type="Script" uid="uid://qqislb6uulj1" path="res://src/Gun/Outdated/Weapon.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://dq8wg31diwfdy" path="res://src/Bullet/MPistol.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://jjyq7h7e0qih" path="res://assets/Gun/MPistol.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://p1k84i4nwdsn" path="res://assets/Gun/MPistolIcon.png" id="5"]
 
 [resource]
 resource_name = "MachinePistol2"
-script = ExtResource( 2 )
+script = ExtResource("2")
 display_name = "Machine Gun"
 description = "A swift and powerful automatic weapon. It runs out of ammo rather quickly."
-texture = ExtResource( 4 )
-icon_texture = ExtResource( 5 )
-audio_stream = ExtResource( 1 )
-bullet_scene = ExtResource( 3 )
+texture = ExtResource("4")
+icon_texture = ExtResource("5")
+audio_stream = ExtResource("1")
+bullet_scene = ExtResource("3")
 damage = 1
 projectile_range = 150
 projectile_speed = 400

@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://ckeh37ixn76w8"]
 
-[ext_resource type="Script" path="res://src/Actor/Enemy/Billy.gd" id="1"]
+[ext_resource type="Script" uid="uid://d7hgcoq0lmkd" path="res://src/Actor/Enemy/Billy.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dxp874vl8xdex" path="res://assets/Actor/Enemy/Billy.png" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
@@ -124,11 +124,11 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_afpet"]
 _data = {
-"Idle": SubResource("6"),
-"Jump": SubResource("3"),
-"StandShoot": SubResource("7"),
-"Walk": SubResource("4"),
-"WalkShoot": SubResource("5")
+&"Idle": SubResource("6"),
+&"Jump": SubResource("3"),
+&"StandShoot": SubResource("7"),
+&"Walk": SubResource("4"),
+&"WalkShoot": SubResource("5")
 }
 
 [node name="Billy" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]

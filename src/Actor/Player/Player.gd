@@ -262,9 +262,3 @@ func connect_inventory():
 	var item_menu = get_tree().get_root().get_node_or_null("World/UILayer/Inventory")
 	if item_menu:
 		var _err = connect("inventory_updated", Callable(item_menu, "_on_inventory_updated"))
-
-
-
-
-
-

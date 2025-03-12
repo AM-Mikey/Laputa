@@ -6,16 +6,16 @@
 [ext_resource type="PackedScene" uid="uid://0mxxcirrmb5d" path="res://src/Gun/Shotgun.tscn" id="4"]
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="5"]
 [ext_resource type="Texture2D" uid="uid://bic1wg1jrbs4e" path="res://assets/Actor/Player/RunNew.png" id="6"]
-[ext_resource type="Script" path="res://src/Actor/Player/Knockback.gd" id="7"]
-[ext_resource type="Script" path="res://src/Actor/Player/MoveTo.gd" id="8"]
-[ext_resource type="Script" path="res://src/Actor/Player/Fly.gd" id="9"]
-[ext_resource type="Script" path="res://src/Actor/Player/Ladder.gd" id="10"]
-[ext_resource type="Script" path="res://src/Actor/Player/Disabled.gd" id="11"]
-[ext_resource type="Script" path="res://src/Actor/Player/GunManager.gd" id="12"]
-[ext_resource type="Script" path="res://src/Actor/Player/PlayerSprite.gd" id="13"]
-[ext_resource type="Script" path="res://src/Actor/Player/Player.gd" id="14"]
-[ext_resource type="Script" path="res://src/Actor/Player/MovementManager.gd" id="15"]
-[ext_resource type="Script" path="res://src/Actor/Player/GunPos.gd" id="16_adexv"]
+[ext_resource type="Script" uid="uid://cmvookemw64ek" path="res://src/Actor/Player/Knockback.gd" id="7"]
+[ext_resource type="Script" uid="uid://cfqyaux4tco6h" path="res://src/Actor/Player/MoveTo.gd" id="8"]
+[ext_resource type="Script" uid="uid://bm7l4b74bslmm" path="res://src/Actor/Player/Fly.gd" id="9"]
+[ext_resource type="Script" uid="uid://c5umwov83kvyb" path="res://src/Actor/Player/Ladder.gd" id="10"]
+[ext_resource type="Script" uid="uid://dlkv1e7mfhdpt" path="res://src/Actor/Player/Disabled.gd" id="11"]
+[ext_resource type="Script" uid="uid://c3gbfbcwja8hd" path="res://src/Actor/Player/GunManager.gd" id="12"]
+[ext_resource type="Script" uid="uid://c4ogd5866m3uu" path="res://src/Actor/Player/PlayerSprite.gd" id="13"]
+[ext_resource type="Script" uid="uid://cqho5rvdldsw5" path="res://src/Actor/Player/Player.gd" id="14"]
+[ext_resource type="Script" uid="uid://cwfo2x3kl4tkp" path="res://src/Actor/Player/MovementManager.gd" id="15"]
+[ext_resource type="Script" uid="uid://5j8mlgvadx1f" path="res://src/Actor/Player/GunPos.gd" id="16_adexv"]
 [ext_resource type="PackedScene" uid="uid://bqy18424skcwk" path="res://src/Gun/GLauncher.tscn" id="17"]
 [ext_resource type="Texture2D" uid="uid://b1s13taoyjq5p" path="res://assets/Actor/Player/AerialNew.png" id="19"]
 [ext_resource type="Texture2D" uid="uid://dmwmjc5ixibx7" path="res://assets/Actor/Player/CrouchRunNew.png" id="20"]
@@ -23,16 +23,16 @@
 [ext_resource type="Texture2D" uid="uid://07hp5gxc20wa" path="res://assets/Actor/Player/BackRunNew.png" id="23"]
 [ext_resource type="Texture2D" uid="uid://co5v1xjcy1nse" path="res://assets/Actor/Player/InspectNew.png" id="24"]
 [ext_resource type="PackedScene" uid="uid://5orkim7sjfi7" path="res://src/Gun/Tsurugi.tscn" id="24_0pdvi"]
-[ext_resource type="Shader" path="res://src/Shader/JuniperRecolor.gdshader" id="24_s1pnb"]
+[ext_resource type="Shader" uid="uid://d4doa1vf12lkt" path="res://src/Shader/JuniperRecolor.gdshader" id="24_s1pnb"]
 [ext_resource type="Texture2D" uid="uid://mkfrxk3djlu1" path="res://assets/Actor/Player/Palette/Normal.png" id="25_3o18d"]
-[ext_resource type="Script" path="res://src/Actor/Player/Inspect.gd" id="27"]
+[ext_resource type="Script" uid="uid://cn112wea32cdx" path="res://src/Actor/Player/Inspect.gd" id="27"]
 [ext_resource type="Texture2D" uid="uid://dbmfepg252o24" path="res://assets/Actor/Player/CrouchNew.png" id="27_26c0b"]
 [ext_resource type="Texture2D" uid="uid://b6mfl184pisc1" path="res://assets/Actor/Player/Palette/Mono.png" id="27_cn5rl"]
 [ext_resource type="PackedScene" uid="uid://diwpy822anfc4" path="res://src/Gun/MPistol.tscn" id="28"]
-[ext_resource type="Script" path="res://src/Actor/Player/Jump.gd" id="29"]
-[ext_resource type="Script" path="res://src/Actor/Player/Run.gd" id="30"]
-[ext_resource type="Script" path="res://src/Actor/Player/LongJump.gd" id="31"]
-[ext_resource type="Script" path="res://src/Actor/Player/Fall.gd" id="32"]
+[ext_resource type="Script" uid="uid://cjgn7e5vfg20e" path="res://src/Actor/Player/Jump.gd" id="29"]
+[ext_resource type="Script" uid="uid://dtadf671wpvdq" path="res://src/Actor/Player/Run.gd" id="30"]
+[ext_resource type="Script" uid="uid://ctfm0sxptv68n" path="res://src/Actor/Player/LongJump.gd" id="31"]
+[ext_resource type="Script" uid="uid://c2muo3figyn1i" path="res://src/Actor/Player/Fall.gd" id="32"]
 [ext_resource type="PackedScene" uid="uid://cdgi2ibu56t2j" path="res://src/Gun/Speeder.tscn" id="33"]
 [ext_resource type="PackedScene" uid="uid://cq3m4fy6fnxfn" path="res://src/Gun/TurnstileJumper.tscn" id="34"]
 [ext_resource type="Texture2D" uid="uid://bggc4cn0y5fhq" path="res://assets/Actor/Player/BackAerialNew.png" id="34_85ix1"]
@@ -86,7 +86,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_acjyt"]
 _data = {
-"FlashIframe": SubResource("53")
+&"FlashIframe": SubResource("53")
 }
 
 [sub_resource type="Animation" id="Animation_kquyl"]
@@ -1432,19 +1432,19 @@ tracks/8/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oo325"]
 _data = {
-"RESET": SubResource("Animation_kquyl"),
-"aerial_fall": SubResource("67"),
-"aerial_rise": SubResource("68"),
-"aerial_top": SubResource("69"),
-"back_aerial_fall": SubResource("Animation_yq8yd"),
-"back_aerial_rise": SubResource("Animation_ma4qw"),
-"back_aerial_top": SubResource("Animation_psjxf"),
-"back_run": SubResource("70"),
-"crouch": SubResource("Animation_d83qu"),
-"crouch_run": SubResource("64"),
-"inspect": SubResource("71"),
-"run": SubResource("54"),
-"stand": SubResource("65")
+&"RESET": SubResource("Animation_kquyl"),
+&"aerial_fall": SubResource("67"),
+&"aerial_rise": SubResource("68"),
+&"aerial_top": SubResource("69"),
+&"back_aerial_fall": SubResource("Animation_yq8yd"),
+&"back_aerial_rise": SubResource("Animation_ma4qw"),
+&"back_aerial_top": SubResource("Animation_psjxf"),
+&"back_run": SubResource("70"),
+&"crouch": SubResource("Animation_d83qu"),
+&"crouch_run": SubResource("64"),
+&"inspect": SubResource("71"),
+&"run": SubResource("54"),
+&"stand": SubResource("65")
 }
 
 [node name="Juniper" type="CharacterBody2D" groups=["Players"]]

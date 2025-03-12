@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dim3av368jfya"]
 
-[ext_resource type="Script" path="res://src/Utility/Waypoint.gd" id="1"]
+[ext_resource type="Script" uid="uid://0l4a624mkqoj" path="res://src/Utility/Waypoint.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dsmy50efq1bj0" path="res://assets/Utility/Waypoint.png" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]

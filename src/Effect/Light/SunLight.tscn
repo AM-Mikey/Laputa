@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bbwmr0cmbastp"]
 
-[ext_resource type="Script" path="res://src/Effect/Light/SunLight.gd" id="1"]
+[ext_resource type="Script" uid="uid://i43kyg3iw4cu" path="res://src/Effect/Light/SunLight.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c6eiwwhgpql8e" path="res://assets/Effect/Light/White32.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://bqlqnbmkk0ewe" path="res://assets/Effect/Light/SunLightIcon.png" id="3"]
 

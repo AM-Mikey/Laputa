@@ -1,237 +1,237 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=15 format=3 uid="uid://b400oirlicpv6"]
 
-[ext_resource path="res://src/Effect/Transition/TransitionWipe.gd" type="Script" id=1]
-[ext_resource path="res://src/Effect/Transition/Wipe.tres" type="Material" id=2]
-[ext_resource path="res://assets/Effect/Transition/WipeRight.png" type="Texture2D" id=3]
-[ext_resource path="res://assets/Effect/Transition/WipeLeft.png" type="Texture2D" id=4]
-[ext_resource path="res://assets/Effect/Transition/WipeUp.png" type="Texture2D" id=5]
-[ext_resource path="res://assets/Effect/Transition/WipeDown.png" type="Texture2D" id=6]
+[ext_resource type="Script" uid="uid://daf4yjr7ytqkh" path="res://src/Effect/Transition/TransitionWipe.gd" id="1"]
+[ext_resource type="Material" path="res://src/Effect/Transition/Wipe.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://d3gg5gtck0v1w" path="res://assets/Effect/Transition/WipeRight.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://3ty0flhbnklo" path="res://assets/Effect/Transition/WipeLeft.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://cakoxkdpjggkh" path="res://assets/Effect/Transition/WipeUp.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://2rue8rto2pxl" path="res://assets/Effect/Transition/WipeDown.png" id="6"]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id="1"]
 resource_name = "WipeInDown"
 length = 0.4
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("MarginContainer/Wipe:material:shader_param/cutoff")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.4 ),
-"transitions": PackedFloat32Array( 2, 1 ),
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(2, 1),
 "update": 0,
-"values": [ 0.0, 1.0 ]
+"values": [0.0, 1.0]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("MarginContainer/Wipe:material:shader_param/mask")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ ExtResource( 6 ) ]
+"values": [ExtResource("6")]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 resource_name = "WipeInLeft"
 length = 0.4
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("MarginContainer/Wipe:material:shader_param/cutoff")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.4 ),
-"transitions": PackedFloat32Array( 2, 1 ),
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(2, 1),
 "update": 0,
-"values": [ 0.0, 1.0 ]
+"values": [0.0, 1.0]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("MarginContainer/Wipe:material:shader_param/mask")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ ExtResource( 4 ) ]
+"values": [ExtResource("4")]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 resource_name = "WipeInRight"
 length = 0.4
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("MarginContainer/Wipe:material:shader_param/cutoff")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.4 ),
-"transitions": PackedFloat32Array( 2, 1 ),
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(2, 1),
 "update": 0,
-"values": [ 0.0, 1.0 ]
+"values": [0.0, 1.0]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("MarginContainer/Wipe:material:shader_param/mask")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ ExtResource( 3 ) ]
+"values": [ExtResource("3")]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id="4"]
 resource_name = "WipeInUp"
 length = 0.4
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("MarginContainer/Wipe:material:shader_param/cutoff")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.4 ),
-"transitions": PackedFloat32Array( 2, 1 ),
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(2, 1),
 "update": 0,
-"values": [ 0.0, 1.0 ]
+"values": [0.0, 1.0]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("MarginContainer/Wipe:material:shader_param/mask")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ ExtResource( 5 ) ]
+"values": [ExtResource("5")]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id="5"]
 resource_name = "WipeOutDown"
 length = 0.4
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("MarginContainer/Wipe:material:shader_param/cutoff")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.4 ),
-"transitions": PackedFloat32Array( 2, 1 ),
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(2, 1),
 "update": 0,
-"values": [ 1.0, 0.0 ]
+"values": [1.0, 0.0]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("MarginContainer/Wipe:material:shader_param/mask")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ ExtResource( 5 ) ]
+"values": [ExtResource("5")]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id="6"]
 length = 0.4
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("MarginContainer/Wipe:material:shader_param/cutoff")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.4 ),
-"transitions": PackedFloat32Array( 2, 1 ),
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(2, 1),
 "update": 0,
-"values": [ 1.0, 0.0 ]
+"values": [1.0, 0.0]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("MarginContainer/Wipe:material:shader_param/mask")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ ExtResource( 3 ) ]
+"values": [ExtResource("3")]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id="7"]
 resource_name = "WipeOutRight"
 length = 0.4
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("MarginContainer/Wipe:material:shader_param/cutoff")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.4 ),
-"transitions": PackedFloat32Array( 2, 1 ),
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(2, 1),
 "update": 0,
-"values": [ 1.0, 0.0 ]
+"values": [1.0, 0.0]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("MarginContainer/Wipe:material:shader_param/mask")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ ExtResource( 4 ) ]
+"values": [ExtResource("4")]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id="8"]
 resource_name = "WipeOutUp"
 length = 0.4
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("MarginContainer/Wipe:material:shader_param/cutoff")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.4 ),
-"transitions": PackedFloat32Array( 2, 1 ),
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(2, 1),
 "update": 0,
-"values": [ 1.0, 0.0 ]
+"values": [1.0, 0.0]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("MarginContainer/Wipe:material:shader_param/mask")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ ExtResource( 6 ) ]
+"values": [ExtResource("6")]
 }
 
 [node name="TransitionWipe" type="Control"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_right = 288.0
@@ -241,19 +241,19 @@ __meta__ = {
 }
 
 [node name="Wipe" type="ColorRect" parent="MarginContainer"]
-material = ExtResource( 2 )
+material = ExtResource("2")
 offset_right = 288.0
 offset_bottom = 413.0
-color = Color( 0, 0, 0, 1 )
+color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/WipeInDown = SubResource( 1 )
-anims/WipeInLeft = SubResource( 2 )
-anims/WipeInRight = SubResource( 3 )
-anims/WipeInUp = SubResource( 4 )
-anims/WipeOutDown = SubResource( 5 )
-anims/WipeOutLeft = SubResource( 6 )
-anims/WipeOutRight = SubResource( 7 )
-anims/WipeOutUp = SubResource( 8 )
+anims/WipeInDown = SubResource("1")
+anims/WipeInLeft = SubResource("2")
+anims/WipeInRight = SubResource("3")
+anims/WipeInUp = SubResource("4")
+anims/WipeOutDown = SubResource("5")
+anims/WipeOutLeft = SubResource("6")
+anims/WipeOutRight = SubResource("7")
+anims/WipeOutUp = SubResource("8")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

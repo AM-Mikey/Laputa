@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://48iehgbyal5n" path="res://assets/Prop/FallingChannel.png" id="1"]
 [ext_resource type="AudioStream" uid="uid://5jk53spww0xa" path="res://assets/SFX/PlatformFall.ogg" id="2"]
-[ext_resource type="Script" path="res://src/Actor/FallingChannel.gd" id="3"]
+[ext_resource type="Script" uid="uid://e7nxm3kcynvl" path="res://src/Actor/FallingChannel.gd" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(32, 2)
@@ -44,8 +44,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ojjd8"]
 _data = {
-"Flash": SubResource("3"),
-"Shake": SubResource("4")
+&"Flash": SubResource("3"),
+&"Shake": SubResource("4")
 }
 
 [node name="FallingChannel" type="CharacterBody2D"]

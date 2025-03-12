@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cedgb08fkp6av"]
 
 [ext_resource type="Texture2D" uid="uid://dmcaw64yr8dm3" path="res://assets/Effect/Splash.png" id="1"]
-[ext_resource type="Script" path="res://src/Effect/Splash.gd" id="2"]
+[ext_resource type="Script" uid="uid://dw4anlvmhp12k" path="res://src/Effect/Splash.gd" id="2"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "Splash"
@@ -21,7 +21,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0bkjk"]
 _data = {
-"Splash": SubResource("1")
+&"Splash": SubResource("1")
 }
 
 [node name="Splash" type="Node2D"]

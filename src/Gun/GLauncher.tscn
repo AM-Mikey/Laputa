@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqy18424skcwk"]
 
-[ext_resource type="Script" path="res://src/Gun/GLauncher.gd" id="1"]
+[ext_resource type="Script" uid="uid://chx65a42yhp5e" path="res://src/Gun/GLauncher.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://60d7h1gue2ph" path="res://assets/Gun/GLauncher.png" id="2"]
 
 [node name="GLauncher" type="Node2D"]

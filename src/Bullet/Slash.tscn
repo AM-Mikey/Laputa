@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://d353fyt6rqq8w"]
 
-[ext_resource type="Script" path="res://src/Bullet/Slash.gd" id="1_pekmi"]
+[ext_resource type="Script" uid="uid://cr8dkgl8q6u1x" path="res://src/Bullet/Slash.gd" id="1_pekmi"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="2_v3tvm"]
 [ext_resource type="Texture2D" uid="uid://bdholqwikue0n" path="res://assets/Bullet/Slash.png" id="3_28v8h"]
 
@@ -26,7 +26,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lfpai"]
 _data = {
-"Slash": SubResource("Animation_jaw88")
+&"Slash": SubResource("Animation_jaw88")
 }
 
 [node name="Slash" type="CharacterBody2D"]

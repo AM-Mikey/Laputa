@@ -1,14 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://cif2bm47kbnl"]
 
-[sub_resource type="Curve2D" id=1]
+[sub_resource type="Curve2D" id="1"]
 _data = {
-"points": PackedVector2Array( 0, 0, 0, 0, -24, 40, 0, 0, 0, 0, -23.0154, -27.1475, 0, 0, 0, 0, 40, -27.1475, 0, 0, 0, 0, 40, 40, 0, 0, 0, 0, -24, 40 )
+"points": PackedVector2Array(0, 0, 0, 0, -24, 40, 0, 0, 0, 0, -23.0154, -27.1475, 0, 0, 0, 0, 40, -27.1475, 0, 0, 0, 0, 40, 40, 0, 0, 0, 0, -24, 40)
 }
+point_count = 5
 
 [node name="SimpleTrack" type="Path2D"]
-position = Vector2( -8, -8 )
-curve = SubResource( 1 )
+position = Vector2(-8, -8)
+curve = SubResource("1")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
-position = Vector2( -24, 40 )
+position = Vector2(-24, 40)
 rotate = false

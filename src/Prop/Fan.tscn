@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://d11mjw1kfmapi"]
 
 [ext_resource type="Texture2D" uid="uid://dhxy8j6e76eg8" path="res://assets/Prop/Fan.png" id="1"]
-[ext_resource type="Script" path="res://src/Prop/Fan.gd" id="2"]
+[ext_resource type="Script" uid="uid://ceam3wmge4fgc" path="res://src/Prop/Fan.gd" id="2"]
 [ext_resource type="AudioStream" uid="uid://cxgdthmm78g5k" path="res://assets/SFX/Placeholder/snd_switchweapon.ogg" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
@@ -26,7 +26,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_anuvr"]
 _data = {
-"Spin": SubResource("2")
+&"Spin": SubResource("2")
 }
 
 [node name="Fan" type="Area2D"]

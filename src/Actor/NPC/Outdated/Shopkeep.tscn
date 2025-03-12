@@ -1,43 +1,44 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://b3thhuwc113b7"]
 
-[ext_resource path="res://assets/Actor/NPC/Outdated/Shopkeep.png" type="Texture2D" id=1]
-[ext_resource path="res://src/Actor/NPC/Outdated/Shopkeep.gd" type="Script" id=2]
+[ext_resource type="Script" uid="uid://1eued3kqsdot" path="res://src/Actor/NPC/Outdated/Shopkeep.gd" id="2"]
 
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(8, 8)
 
-[sub_resource type="RectangleShape2D" id=1]
-size = Vector2( 8, 8 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(8, 16)
 
-[sub_resource type="RectangleShape2D" id=2]
-size = Vector2( 8, 16 )
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(24, 24)
 
-[sub_resource type="RectangleShape2D" id=3]
-size = Vector2( 24, 24 )
+[sub_resource type="Resource" id="Resource_rmweg"]
+metadata/__load_path__ = "res://assets/Actor/NPC/Outdated/Shopkeep.png"
 
 [node name="Shopkeep" type="CharacterBody2D"]
 collision_layer = 128
 collision_mask = 8
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-modulate = Color( 1, 1, 1, 0.172549 )
-position = Vector2( 0, 8 )
-shape = SubResource( 2 )
+modulate = Color(1, 1, 1, 0.172549)
+position = Vector2(0, 8)
+shape = SubResource("2")
 
 [node name="ExitDetector" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitDetector"]
-modulate = Color( 1, 1, 1, 0.109804 )
-shape = SubResource( 3 )
+modulate = Color(1, 1, 1, 0.109804)
+shape = SubResource("3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource( 1 )
+texture = SubResource("Resource_rmweg")
 hframes = 2
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]

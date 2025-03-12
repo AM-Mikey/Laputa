@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjueepke5w45c"]
 
-[ext_resource type="Script" path="res://src/Gun/Red7.gd" id="1"]
+[ext_resource type="Script" uid="uid://dckpwqwvk8ib2" path="res://src/Gun/Red7.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bfwhdpytgrv8k" path="res://assets/Gun/Red7.png" id="2"]
 
 [node name="Red7" type="Node2D"]

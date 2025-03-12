@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dbyknhh1oyx5i"]
 
-[ext_resource type="Script" path="res://src/UI/Inventory/WeaponWheel.gd" id="1"]
+[ext_resource type="Script" uid="uid://commiy0sjsrpv" path="res://src/UI/Inventory/WeaponWheel.gd" id="1"]
 
 [node name="WeaponWheel" type="Container"]
 anchors_preset = 15

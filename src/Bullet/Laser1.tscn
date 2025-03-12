@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dkic3dr6ls30i"]
 
 [ext_resource type="Texture2D" uid="uid://d27tf3k2og0is" path="res://assets/Bullet/Laser.png" id="1"]
-[ext_resource type="Script" path="res://src/Bullet/Laser.gd" id="2"]
+[ext_resource type="Script" uid="uid://2r0x7bnb6180" path="res://src/Bullet/Laser.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]

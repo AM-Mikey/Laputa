@@ -1,34 +1,35 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://b7u2yb44cbmw7"]
 
-[ext_resource path="res://assets/Actor/NPC/Outdated/Sue.png" type="Texture2D" id=1]
-[ext_resource path="res://src/Actor/NPC/Outdated/Sue.gd" type="Script" id=2]
+[ext_resource type="Script" uid="uid://4f2vv638p6s5" path="res://src/Actor/NPC/Outdated/Sue.gd" id="2"]
 
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(8, 7)
 
-[sub_resource type="RectangleShape2D" id=1]
-size = Vector2( 8, 7 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(8, 8)
 
-[sub_resource type="RectangleShape2D" id=2]
-size = Vector2( 8, 8 )
+[sub_resource type="Resource" id="Resource_qfwhh"]
+metadata/__load_path__ = "res://assets/Actor/NPC/Outdated/Sue.png"
 
 [node name="Sue" type="CharacterBody2D"]
 collision_layer = 128
 collision_mask = 8
-script = ExtResource( 2 )
+script = ExtResource("2")
 has_face = true
 dialog_json = "res://src/Dialog/demo_multiconvo.json"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-modulate = Color( 1, 1, 1, 0.172549 )
-shape = SubResource( 2 )
+modulate = Color(1, 1, 1, 0.172549)
+shape = SubResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource( 1 )
+texture = SubResource("Resource_qfwhh")
 hframes = 5
 vframes = 2
 

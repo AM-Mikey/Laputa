@@ -1,30 +1,40 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://w2tlvre8go2j"]
 
-[ext_resource type="Texture2D" path="res://assets/UI/HUD/BossOver.png" id="1"]
-[ext_resource type="Texture2D" path="res://assets/UI/HUD/BossLost.png" id="2"]
-[ext_resource type="Texture2D" path="res://assets/UI/HUD/BossCap.png" id="3"]
-[ext_resource type="Texture2D" path="res://assets/UI/HUD/BossBackground.png" id="4"]
-[ext_resource type="Texture2D" path="res://assets/UI/HUD/BossProgress.png" id="5"]
-[ext_resource type="Script" path="res://src/UI/BossBar/BossBar.gd" id="6"]
+[ext_resource type="Script" uid="uid://chny16ru8tj3q" path="res://src/UI/BossBar/BossBar.gd" id="6"]
+
+[sub_resource type="Resource" id="Resource_heyyh"]
+metadata/__load_path__ = "res://assets/UI/HUD/BossBackground.png"
+
+[sub_resource type="Resource" id="Resource_krke0"]
+metadata/__load_path__ = "res://assets/UI/HUD/BossLost.png"
+
+[sub_resource type="Resource" id="Resource_tbel6"]
+metadata/__load_path__ = "res://assets/UI/HUD/BossProgress.png"
+
+[sub_resource type="Resource" id="Resource_yx7kd"]
+metadata/__load_path__ = "res://assets/UI/HUD/BossOver.png"
+
+[sub_resource type="Resource" id="Resource_u5c7i"]
+metadata/__load_path__ = "res://assets/UI/HUD/BossCap.png"
 
 [node name="BossBar" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 6 )
+script = ExtResource("6")
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2( 256, 264 )
-texture = ExtResource( 4 )
+position = Vector2(256, 264)
+texture = SubResource("Resource_heyyh")
 centered = false
 
 [node name="HpLost" type="TextureProgressBar" parent="."]
 offset_right = 480.0
 offset_bottom = 270.0
 value = 57.0
-texture_progress = ExtResource( 2 )
+texture_progress = SubResource("Resource_krke0")
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -33,14 +43,14 @@ __meta__ = {
 offset_right = 480.0
 offset_bottom = 270.0
 value = 21.0
-texture_progress = ExtResource( 5 )
+texture_progress = SubResource("Resource_tbel6")
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="BossOver" type="Sprite2D" parent="."]
-position = Vector2( 64, 256 )
-texture = ExtResource( 1 )
+position = Vector2(64, 256)
+texture = SubResource("Resource_yx7kd")
 centered = false
 
 [node name="BossName" type="Label" parent="."]
@@ -60,6 +70,6 @@ __meta__ = {
 [node name="LostTween" type="Tween" parent="."]
 
 [node name="BossCap" type="Sprite2D" parent="."]
-position = Vector2( 197, 264 )
-texture = ExtResource( 3 )
+position = Vector2(197, 264)
+texture = SubResource("Resource_u5c7i")
 centered = false

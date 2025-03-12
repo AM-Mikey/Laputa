@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=6 format=3 uid="uid://culrdprps1bk6"]
 
 [ext_resource type="AudioStream" uid="uid://b33dx0bdepvp2" path="res://assets/SFX/Placeholder/snd_polar_star_l1_2.ogg" id="1"]
-[ext_resource type="Script" path="res://src/Gun/Outdated/Weapon.gd" id="2"]
+[ext_resource type="Script" uid="uid://qqislb6uulj1" path="res://src/Gun/Outdated/Weapon.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dq8wg31diwfdy" path="res://src/Bullet/MPistol.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://jjyq7h7e0qih" path="res://assets/Gun/MPistol.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://p1k84i4nwdsn" path="res://assets/Gun/MPistolIcon.png" id="5"]

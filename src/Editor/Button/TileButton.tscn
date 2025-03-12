@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c00kot8papwbn"]
 
-[ext_resource type="Script" path="res://src/Editor/Button/TileButton.gd" id="1"]
+[ext_resource type="Script" uid="uid://b1ryajev4g357" path="res://src/Editor/Button/TileButton.gd" id="1"]
 
 [node name="TileButton" type="TextureRect"]
 custom_minimum_size = Vector2(16, 16)

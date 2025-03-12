@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://bg715nunngytq"]
 
 [ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="1"]
-[ext_resource type="Script" path="res://src/Editor/Tiles.gd" id="2"]
+[ext_resource type="Script" uid="uid://ce2moo6lnjdkn" path="res://src/Editor/Tiles.gd" id="2"]
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="3"]
 [ext_resource type="Texture2D" uid="uid://g3pllgj0s6go" path="res://assets/Editor/RotateCC.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://cict30vmfp74a" path="res://assets/Editor/FlipH.png" id="6"]

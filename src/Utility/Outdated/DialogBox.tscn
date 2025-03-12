@@ -1,17 +1,24 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://brwsxsw3vt0au"]
 
-[ext_resource path="res://src/Utility/Outdated/DialogBox.gd" type="Script" id=1]
-[ext_resource path="res://addons/SyndiBox/syndibox.gd" type="Script" id=2]
-[ext_resource path="res://assets/UI/Face/Recruit.png" type="Texture2D" id=3]
-[ext_resource path="res://assets/UI/DialogBox.png" type="Texture2D" id=4]
-[ext_resource path="res://src/Utility/Outdated/DialogBranch.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/UI/Outdated/DialogTopic.tscn" type="PackedScene" id=6]
+[ext_resource type="Script" uid="uid://d1oujlk2gjxwx" path="res://src/Utility/Outdated/DialogBox.gd" id="1"]
+[ext_resource type="PackedScene" path="res://src/Utility/Outdated/DialogBranch.tscn" id="5"]
 
+[sub_resource type="Resource" id="Resource_efttx"]
+metadata/__load_path__ = "res://assets/UI/DialogBox.png"
+
+[sub_resource type="Resource" id="Resource_tui57"]
+metadata/__load_path__ = "res://assets/UI/Face/Recruit.png"
+
+[sub_resource type="Resource" id="Resource_qfpbl"]
+metadata/__load_path__ = "res://addons/SyndiBox/syndibox.gd"
+
+[sub_resource type="Resource" id="Resource_w3qqd"]
+metadata/__load_path__ = "res://src/UI/Outdated/DialogTopic.tscn"
 
 [node name="DialogBox" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+script = ExtResource("1")
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -21,8 +28,8 @@ offset_left = 64.0
 offset_top = 192.0
 offset_right = 448.0
 offset_bottom = 256.0
-texture = ExtResource( 4 )
-region_rect = Rect2( 0, 0, 48, 48 )
+texture = SubResource("Resource_efttx")
+region_rect = Rect2(0, 0, 48, 48)
 patch_margin_left = 8
 patch_margin_top = 8
 patch_margin_right = 8
@@ -32,17 +39,17 @@ __meta__ = {
 }
 
 [node name="Face" type="Sprite2D" parent="."]
-position = Vector2( 96, 224 )
-texture = ExtResource( 3 )
+position = Vector2(96, 224)
+texture = SubResource("Resource_tui57")
 
 [node name="SyndiBox" type="ReferenceRect" parent="."]
 offset_left = 136.0
 offset_top = 200.0
 offset_right = 433.0
 offset_bottom = 248.0
-custom_minimum_size = Vector2( 296, 48 )
-scale = Vector2( 0.997449, 1 )
-script = ExtResource( 2 )
+custom_minimum_size = Vector2(296, 48)
+scale = Vector2(0.997449, 1)
+script = SubResource("Resource_qfpbl")
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -73,10 +80,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DialogBranch" parent="." instance=ExtResource( 5 )]
+[node name="DialogBranch" parent="." instance=ExtResource("5")]
 visible = false
 
-[node name="DialogTopic" parent="." instance=ExtResource( 6 )]
+[node name="DialogTopic" parent="."]
 visible = false
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]

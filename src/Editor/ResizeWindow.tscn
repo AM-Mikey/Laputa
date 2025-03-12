@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://icj0ey5k5dwx"]
 
-[ext_resource type="Script" path="res://src/Editor/ResizeWindow.gd" id="1"]
+[ext_resource type="Script" uid="uid://cbdkfdve637yh" path="res://src/Editor/ResizeWindow.gd" id="1"]
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="2"]
 
 [node name="ResizeWindow" type="MarginContainer"]

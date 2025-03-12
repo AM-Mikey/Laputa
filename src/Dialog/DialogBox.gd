@@ -233,5 +233,3 @@ func on_viewport_size_changed():
 	size.x = min(viewport_size.x, 400)
 	position.x = (viewport_size.x - size.x) /2
 	position.y = viewport_size.y - 80
-
-

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://bqgris0ot3qgk"]
 
-[ext_resource path="res://src/UI/MoneyNumber.tscn" type="PackedScene" id=1]
+[ext_resource type="PackedScene" uid="uid://dnp411d6d8mqr" path="res://src/UI/MoneyNumber.tscn" id="1"]
 
 [node name="MoneyDisplay" type="Control"]
 anchor_right = 1.0
@@ -9,5 +9,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoneyNumber" parent="." instance=ExtResource( 1 )]
-position = Vector2( 472, 24 )
+[node name="MoneyNumber" parent="." instance=ExtResource("1")]
+position = Vector2(472, 24)

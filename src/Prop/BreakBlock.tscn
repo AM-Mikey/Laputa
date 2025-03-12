@@ -1,10 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://bo6wktdqx2md0"]
 
-[ext_resource type="Script" path="res://src/Prop/BreakBlock.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://c5dyq1ejtkdxs" path="res://assets/Prop/BreakBlock.png" id="2"]
+[ext_resource type="Script" uid="uid://dntcigk2jyejb" path="res://src/Prop/BreakBlock.gd" id="1"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
+
+[sub_resource type="Resource" id="Resource_ejag6"]
+metadata/__load_path__ = "res://assets/Prop/BreakBlock.png"
 
 [node name="BreakBlock" type="StaticBody2D"]
 collision_layer = 264
@@ -17,4 +19,4 @@ shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = ExtResource("2")
+texture = SubResource("Resource_ejag6")

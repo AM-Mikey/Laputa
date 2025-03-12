@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dcctlg17v5oq0"]
 
 [ext_resource type="Texture2D" uid="uid://bhkn70appytmn" path="res://assets/Actor/Enemy/Sentry.png" id="1"]
-[ext_resource type="Script" path="res://src/Actor/Enemy/Sentry.gd" id="2"]
+[ext_resource type="Script" uid="uid://dkmxqwtxwp02i" path="res://src/Actor/Enemy/Sentry.gd" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
@@ -66,8 +66,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_egxmn"]
 _data = {
-"ReloadLeft": SubResource("3"),
-"ShootLeft": SubResource("4")
+&"ReloadLeft": SubResource("3"),
+&"ShootLeft": SubResource("4")
 }
 
 [node name="Sentry" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]

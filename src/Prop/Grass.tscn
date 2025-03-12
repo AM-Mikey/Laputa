@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dhkku437g1x05"]
 
-[ext_resource type="Script" path="res://src/Prop/Grass.gd" id="1"]
+[ext_resource type="Script" uid="uid://w88v58m8yb1" path="res://src/Prop/Grass.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://cij24e3m17cej" path="res://assets/SFX/Placeholder/snd_splash.ogg" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
@@ -69,10 +69,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o8g61"]
 _data = {
-"Cut": SubResource("2"),
-"Rustle": SubResource("3"),
-"Unrustle": SubResource("4"),
-"Wind": SubResource("5")
+&"Cut": SubResource("2"),
+&"Rustle": SubResource("3"),
+&"Unrustle": SubResource("4"),
+&"Wind": SubResource("5")
 }
 
 [sub_resource type="RectangleShape2D" id="6"]

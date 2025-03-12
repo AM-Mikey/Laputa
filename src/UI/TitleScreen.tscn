@@ -1,10 +1,12 @@
 [gd_scene load_steps=6 format=3 uid="uid://driq444nxd8v8"]
 
-[ext_resource type="FontFile" path="res://src/UI/Font/Momo.tres" id="1"]
-[ext_resource type="Texture2D" uid="uid://dgmnv6hoo3avn" path="res://assets/UI/TitleScreen/TitleLogo.png" id="2"]
-[ext_resource type="Script" path="res://src/UI/TitleScreen.gd" id="3"]
-[ext_resource type="Theme" path="res://src/UI/Theme/Floating.tres" id="4"]
-[ext_resource type="PackedScene" path="res://src/UI/MenuButton.tscn" id="7"]
+[ext_resource type="FontFile" uid="uid://c2usuk2q82kno" path="res://src/UI/Font/Momo.tres" id="1"]
+[ext_resource type="Script" uid="uid://d3nbxvskm8eat" path="res://src/UI/TitleScreen.gd" id="3"]
+[ext_resource type="Theme" uid="uid://ouysr8x0xtu5" path="res://src/UI/Theme/Floating.tres" id="4"]
+[ext_resource type="PackedScene" uid="uid://cocixd0n3hmcm" path="res://src/UI/MenuButton.tscn" id="7"]
+
+[sub_resource type="Resource" id="Resource_f4kbc"]
+metadata/__load_path__ = "res://assets/UI/TitleScreen/TitleLogo.png"
 
 [node name="TitleScreen" type="MarginContainer"]
 offset_right = 576.0
@@ -30,7 +32,7 @@ layout_mode = 2
 
 [node name="Title" type="TextureRect" parent="VBox"]
 layout_mode = 2
-texture = ExtResource("2")
+texture = SubResource("Resource_f4kbc")
 stretch_mode = 4
 
 [node name="New" parent="VBox" instance=ExtResource("7")]

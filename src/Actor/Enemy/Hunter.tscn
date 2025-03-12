@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://bjtd1vhn348ut"]
 
-[ext_resource type="Script" path="res://src/Actor/Enemy/Hunter.gd" id="1"]
+[ext_resource type="Script" uid="uid://dbd6dq5j0qynd" path="res://src/Actor/Enemy/Hunter.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://o5oy446djmnx" path="res://assets/Actor/Enemy/Hunter.png" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
@@ -234,14 +234,14 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r1ad1"]
 _data = {
-"BlinkLeft": SubResource("3"),
-"BlinkRight": SubResource("4"),
-"ShootLeft": SubResource("5"),
-"ShootRight": SubResource("6"),
-"SniffLeft": SubResource("7"),
-"SniffRight": SubResource("8"),
-"WalkLeft": SubResource("9"),
-"WalkRight": SubResource("10")
+&"BlinkLeft": SubResource("3"),
+&"BlinkRight": SubResource("4"),
+&"ShootLeft": SubResource("5"),
+&"ShootRight": SubResource("6"),
+&"SniffLeft": SubResource("7"),
+&"SniffRight": SubResource("8"),
+&"WalkLeft": SubResource("9"),
+&"WalkRight": SubResource("10")
 }
 
 [node name="Hunter" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]

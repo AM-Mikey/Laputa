@@ -1,17 +1,18 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://b2d42eaq118pj"]
 
-[ext_resource path="res://assets/Bullet/Arrow.png" type="Texture2D" id=1]
+[sub_resource type="Resource" id="Resource_xp6f3"]
+metadata/__load_path__ = "res://assets/Bullet/Arrow.png"
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id="1"]
 
 [node name="EnemyArrow" type="Area2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource( 1 )
+texture = SubResource("Resource_xp6f3")
 hframes = 5
 frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

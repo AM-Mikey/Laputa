@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ci37blf03dbiw"]
 
 [ext_resource type="Texture2D" uid="uid://bbt42c2d6660n" path="res://assets/Bullet/BulletShotgun.png" id="1"]
-[ext_resource type="Script" path="res://src/Bullet/Buckshot.gd" id="2"]
+[ext_resource type="Script" uid="uid://cbaol2ugw4p6j" path="res://src/Bullet/Buckshot.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="3"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_e6qj8"]

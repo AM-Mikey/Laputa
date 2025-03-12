@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://spx2ohg588ta"]
 
-[ext_resource type="Script" path="res://src/Actor/Enemy/Bat.gd" id="1"]
+[ext_resource type="Script" uid="uid://bnlm023xutjf3" path="res://src/Actor/Enemy/Bat.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bufns1cnhgyw1" path="res://assets/Actor/Enemy/Bat.png" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
@@ -75,10 +75,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mr7me"]
 _data = {
-"Flap": SubResource("6"),
-"FlapAggro": SubResource("9"),
-"Unflap": SubResource("7"),
-"UnflapAggro": SubResource("10")
+&"Flap": SubResource("6"),
+&"FlapAggro": SubResource("9"),
+&"Unflap": SubResource("7"),
+&"UnflapAggro": SubResource("10")
 }
 
 [node name="Bat" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]

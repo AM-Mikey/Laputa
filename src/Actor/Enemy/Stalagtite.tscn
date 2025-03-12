@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://dvmfxj76jww0o"]
 
 [ext_resource type="Texture2D" uid="uid://c1wouwbovbivr" path="res://assets/Actor/Enemy/Stalagtite.png" id="2"]
-[ext_resource type="Script" path="res://src/Actor/Enemy/Stalagtite.gd" id="3"]
+[ext_resource type="Script" uid="uid://dutiad4j22gxd" path="res://src/Actor/Enemy/Stalagtite.gd" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(14, 16)
@@ -110,11 +110,11 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6602m"]
 _data = {
-"HangActive": SubResource("2"),
-"HangIdle": SubResource("3"),
-"Run": SubResource("4"),
-"Squirm": SubResource("6"),
-"Stake": SubResource("Animation_57rfx")
+&"HangActive": SubResource("2"),
+&"HangIdle": SubResource("3"),
+&"Run": SubResource("4"),
+&"Squirm": SubResource("6"),
+&"Stake": SubResource("Animation_57rfx")
 }
 
 [node name="Stalagtite" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]

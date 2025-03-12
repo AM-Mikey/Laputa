@@ -1,12 +1,8 @@
-[gd_resource type="Resource" load_steps=6 format=2]
+[gd_resource type="Resource" script_class="Background" load_steps=2 format=3 uid="uid://0gqct6g1dw74"]
 
-[ext_resource path="res://src/Background/Background.gd" type="Script" id=1]
-[ext_resource path="res://assets/Background/ParalaxTest1.png" type="Texture2D" id=2]
-[ext_resource path="res://assets/Background/ParalaxTest2.png" type="Texture2D" id=3]
-[ext_resource path="res://assets/Background/ParalaxTest3.png" type="Texture2D" id=4]
-[ext_resource path="res://assets/Background/ParalaxTest0.png" type="Texture2D" id=5]
+[ext_resource type="Script" uid="uid://ceqy767o44qkp" path="res://src/Background/Background.gd" id="1"]
 
 [resource]
-script = ExtResource( 1 )
-textures = [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ]
-motion_scales = [ Vector2( 0, 0 ), Vector2( 0.1, 0.1 ), Vector2( 0.2, 0.2 ), Vector2( 0.3, 0.3 ) ]
+script = ExtResource("1")
+textures = Array[Texture2D]([])
+motion_scales = Array[Vector2]([Vector2(0, 0), Vector2(0.1, 0.1), Vector2(0.2, 0.2), Vector2(0.3, 0.3)])

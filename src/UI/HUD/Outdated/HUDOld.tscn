@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://c21o81jxnc0mu"]
 
-[ext_resource type="Script" path="res://src/UI/HUD/Outdated/HUDOld.gd" id="1_gf6em"]
+[ext_resource type="Script" uid="uid://muqbm13m3vg5" path="res://src/UI/HUD/Outdated/HUDOld.gd" id="1_gf6em"]
 [ext_resource type="Texture2D" uid="uid://do03ns87tmu82" path="res://assets/UI/HUD/Background.png" id="2_k1jua"]
 [ext_resource type="Texture2D" uid="uid://cn3hthxv2o1lq" path="res://assets/UI/HUD/HpLost.png" id="3_xjpel"]
 [ext_resource type="Texture2D" uid="uid://c2xhxpgm4yocx" path="res://assets/UI/HUD/HpLostCap.png" id="4_u163r"]
@@ -48,8 +48,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7od58"]
 _data = {
-"Flash": SubResource("1"),
-"XpFlash": SubResource("2")
+&"Flash": SubResource("1"),
+&"XpFlash": SubResource("2")
 }
 
 [node name="HUDOld" type="MarginContainer"]

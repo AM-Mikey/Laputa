@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cdse2tgmre1x2"]
 
-[ext_resource type="Script" path="res://src/Effect/BulletFizzle.gd" id="1"]
+[ext_resource type="Script" uid="uid://ch00ka2pvq76p" path="res://src/Effect/BulletFizzle.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dv14kibpghcg6" path="res://assets/Effect/0BulletFizzle.png" id="2_7wxq1"]
 
 [sub_resource type="Animation" id="2"]
@@ -56,9 +56,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_30ak3"]
 _data = {
-"Circle": SubResource("2"),
-"Diamond": SubResource("3"),
-"Star": SubResource("1")
+&"Circle": SubResource("2"),
+&"Diamond": SubResource("3"),
+&"Star": SubResource("1")
 }
 
 [node name="BulletFizzle" type="Node2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://0mxxcirrmb5d"]
 
-[ext_resource type="Script" path="res://src/Gun/Shotgun.gd" id="1"]
+[ext_resource type="Script" uid="uid://d46gywlt6rij" path="res://src/Gun/Shotgun.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dih3rhnwuxjs1" path="res://assets/Gun/Blunderbuss.png" id="2"]
 
 [node name="Shotgun" type="Node2D"]

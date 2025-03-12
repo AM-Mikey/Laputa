@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://d3sw60ygo6bb6"]
 
 [ext_resource type="Texture2D" uid="uid://c7u8mwvcp2l6v" path="res://assets/Actor/Enemy/Toggler.png" id="2"]
-[ext_resource type="Script" path="res://src/Actor/Enemy/Beetle.gd" id="3"]
+[ext_resource type="Script" uid="uid://qcbiyidgaq45" path="res://src/Actor/Enemy/Beetle.gd" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(14, 8)
@@ -41,8 +41,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hpx8l"]
 _data = {
-"Fly": SubResource("2"),
-"Idle": SubResource("3")
+&"Fly": SubResource("2"),
+&"Idle": SubResource("3")
 }
 
 [node name="Beetle" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]

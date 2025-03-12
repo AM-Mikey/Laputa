@@ -1,11 +1,11 @@
 [gd_scene load_steps=24 format=3 uid="uid://dulcn8jx6cd3y"]
 
-[ext_resource type="Script" path="res://src/UI/HUD/HUD.gd" id="1"]
+[ext_resource type="Script" uid="uid://getspcndfk4e" path="res://src/UI/HUD/HUD.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c7wyw4y3jdl7j" path="res://assets/UI/NumberNew.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://do03ns87tmu82" path="res://assets/UI/HUD/Background.png" id="3"]
 [ext_resource type="PackedScene" uid="uid://2st5whfy4i8b" path="res://src/UI/HUD/AmmoCount.tscn" id="3_0touq"]
 [ext_resource type="Texture2D" uid="uid://4wopjt8nlvp1" path="res://assets/UI/HUD/HpProgress.png" id="4"]
-[ext_resource type="Shader" path="res://src/Shader/SimpleOutline.gdshader" id="4_7s250"]
+[ext_resource type="Shader" uid="uid://bfsl4o8u1wb4b" path="res://src/Shader/SimpleOutline.gdshader" id="4_7s250"]
 [ext_resource type="Texture2D" uid="uid://nkjwbokhsfxc" path="res://assets/UI/HUD/XpProgress.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://cg54u1k8whqg3" path="res://assets/Gun/TurnstileJumper.png" id="5_ovnkw"]
 [ext_resource type="Texture2D" uid="uid://bp2x66vhi4s1f" path="res://assets/UI/HUD/XpFlash.png" id="6"]
@@ -61,8 +61,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2a4ya"]
 _data = {
-"Flash": SubResource("Animation_4nlwx"),
-"XpFlash": SubResource("2")
+&"Flash": SubResource("Animation_4nlwx"),
+&"XpFlash": SubResource("2")
 }
 
 [node name="HUD" type="MarginContainer" node_paths=PackedStringArray("gun", "ao", "hp_node", "xp_node", "cd", "mon")]

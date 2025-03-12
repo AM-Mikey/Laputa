@@ -1,12 +1,16 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://bp03mq2av8dwh"]
 
-[ext_resource path="res://src/Item/Item.gd" type="Script" id=1]
-[ext_resource path="res://assets/Item/Fang.png" type="Texture2D" id=2]
+[ext_resource type="Script" uid="uid://dj0u1vtqimy4j" path="res://src/Item/Item.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://c256cy5lf35mq" path="res://assets/Item/Items.png" id="2_m1r7b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ij5ia"]
+atlas = ExtResource("2_m1r7b")
+region = Rect2(0, 0, 32, 16)
 
 [resource]
-script = ExtResource( 1 )
+script = ExtResource("1")
 item_name = "Fang"
 index = 0
-texture = ExtResource( 2 )
+texture = SubResource("AtlasTexture_ij5ia")
 description = "It's Just a fang"
 price = 0

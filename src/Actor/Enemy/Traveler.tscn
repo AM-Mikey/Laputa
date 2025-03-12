@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://cpxljqxsxtowp"]
 
 [ext_resource type="Texture2D" uid="uid://b1jevd6gx1tgf" path="res://assets/Actor/Enemy/Traveler.png" id="1"]
-[ext_resource type="Script" path="res://src/Actor/Enemy/Traveler.gd" id="2"]
+[ext_resource type="Script" uid="uid://cngyua4y4gerg" path="res://src/Actor/Enemy/Traveler.gd" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
@@ -580,20 +580,20 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hcvux"]
 _data = {
-"ClingDownCrawlLeft": SubResource("2"),
-"ClingDownCrawlRight": SubResource("3"),
-"ClingLeftCrawlDown": SubResource("4"),
-"ClingLeftCrawlUp": SubResource("5"),
-"ClingRightCrawlDown": SubResource("6"),
-"ClingRightCrawlUp": SubResource("7"),
-"ClingUpCrawlLeft": SubResource("8"),
-"ClingUpCrawlRight": SubResource("9"),
-"CornerDownLeft": SubResource("10"),
-"CornerDownRight": SubResource("11"),
-"CornerUpLeft": SubResource("12"),
-"CornerUpRight": SubResource("13"),
-"FlyLeft": SubResource("14"),
-"FlyRight": SubResource("15")
+&"ClingDownCrawlLeft": SubResource("2"),
+&"ClingDownCrawlRight": SubResource("3"),
+&"ClingLeftCrawlDown": SubResource("4"),
+&"ClingLeftCrawlUp": SubResource("5"),
+&"ClingRightCrawlDown": SubResource("6"),
+&"ClingRightCrawlUp": SubResource("7"),
+&"ClingUpCrawlLeft": SubResource("8"),
+&"ClingUpCrawlRight": SubResource("9"),
+&"CornerDownLeft": SubResource("10"),
+&"CornerDownRight": SubResource("11"),
+&"CornerUpLeft": SubResource("12"),
+&"CornerUpRight": SubResource("13"),
+&"FlyLeft": SubResource("14"),
+&"FlyRight": SubResource("15")
 }
 
 [node name="Traveler" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]

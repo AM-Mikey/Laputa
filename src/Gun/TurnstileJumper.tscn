@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cq3m4fy6fnxfn"]
 
-[ext_resource type="Script" path="res://src/Gun/TurnstileJumper.gd" id="1"]
+[ext_resource type="Script" uid="uid://dd0yoslo4r0rr" path="res://src/Gun/TurnstileJumper.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cg54u1k8whqg3" path="res://assets/Gun/TurnstileJumper.png" id="2"]
 
 [node name="TurnstileJumper" type="Node2D"]

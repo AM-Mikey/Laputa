@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dbqhqdaemjwc3"]
 
-[ext_resource type="Script" path="res://src/Actor/Pickup/Ammo.gd" id="1"]
+[ext_resource type="Script" uid="uid://dv66ctiwopo14" path="res://src/Actor/Pickup/Ammo.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://74sgkj5lwh4t" path="res://assets/Actor/Pickup/Ammo.png" id="2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1dxo7"]
@@ -42,8 +42,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nrd4w"]
 _data = {
-"Large": SubResource("2"),
-"Small": SubResource("3")
+&"Large": SubResource("2"),
+&"Small": SubResource("3")
 }
 
 [node name="Ammo" type="CharacterBody2D" groups=["Actors", "Entities"]]

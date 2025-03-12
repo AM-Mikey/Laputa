@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cnxjefcq6ft5m"]
 
-[ext_resource type="Script" path="res://src/Utility/Wind.gd" id="1"]
+[ext_resource type="Script" uid="uid://bndpeog5e2klp" path="res://src/Utility/Wind.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://sq0rxnbltiyq" path="res://assets/SFX/WindStereo.ogg" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ppj5pkmaf7pl"]
 
 [ext_resource type="Texture2D" uid="uid://dmfya5e64iar7" path="res://assets/Actor/Enemy/Crusher.png" id="1"]
-[ext_resource type="Script" path="res://src/Actor/Enemy/Pather.gd" id="2"]
+[ext_resource type="Script" uid="uid://cr7ar8gb71p18" path="res://src/Actor/Enemy/Pather.gd" id="2"]
 [ext_resource type="AudioStream" uid="uid://cpbrsidi03i20" path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" id="4"]
 
 [sub_resource type="RectangleShape2D" id="2"]

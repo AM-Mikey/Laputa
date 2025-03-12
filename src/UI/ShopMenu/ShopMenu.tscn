@@ -1,28 +1,28 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://cend0xs7705mn"]
 
-[ext_resource path="res://assets/UI/ShopMenu/BackgroundOrange.png" type="Texture2D" id=1]
-[ext_resource path="res://src/UI/ShopMenu/BackgroundShader.tres" type="Shader" id=2]
-[ext_resource path="res://src/UI/ShopMenu/ShopMenuItem.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/UI/Theme/LaputaThemeMenus.tres" type="Theme" id=4]
-[ext_resource path="res://src/Dialog/DialogBox.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/UI/Font/WelcomeBack2x.tres" type="FontFile" id=7]
-[ext_resource path="res://src/UI/ShopMenu/ShopMenu.gd" type="Script" id=8]
+[ext_resource type="Texture2D" uid="uid://dmrvtnf7ucs8j" path="res://assets/UI/ShopMenu/BackgroundOrange.png" id="1"]
+[ext_resource type="Shader" path="res://src/UI/ShopMenu/BackgroundShader.tres" id="2"]
+[ext_resource type="PackedScene" path="res://src/UI/ShopMenu/ShopMenuItem.tscn" id="3"]
+[ext_resource type="Theme" uid="uid://blqarblxvhp8o" path="res://src/UI/Theme/LaputaThemeMenus.tres" id="4"]
+[ext_resource type="PackedScene" uid="uid://dmt6h4vj5irs3" path="res://src/Dialog/DialogBox.tscn" id="6"]
+[ext_resource type="FontFile" path="res://src/UI/Font/WelcomeBack2x.tres" id="7"]
+[ext_resource type="Script" uid="uid://bc68ibro4vmk4" path="res://src/UI/ShopMenu/ShopMenu.gd" id="8"]
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 2 )
+[sub_resource type="ShaderMaterial" id="1"]
+shader = ExtResource("2")
 
 [node name="ShopMenu" type="MarginContainer"]
 offset_right = 480.0
 offset_bottom = 270.0
-theme = ExtResource( 4 )
-script = ExtResource( 8 )
+theme = ExtResource("4")
+script = ExtResource("8")
 items = NodePath("Margin/VBox/Margin/Grid")
 
 [node name="Background" type="TextureRect" parent="."]
-material = SubResource( 1 )
+material = SubResource("1")
 offset_right = 480.0
 offset_bottom = 270.0
-texture = ExtResource( 1 )
+texture = ExtResource("1")
 stretch_mode = 2
 
 [node name="Margin" type="MarginContainer" parent="."]
@@ -40,7 +40,7 @@ offset_bottom = 48.0
 [node name="Panel" type="Panel" parent="Margin/VBox/Top"]
 offset_right = 480.0
 offset_bottom = 48.0
-custom_minimum_size = Vector2( 0, 48 )
+custom_minimum_size = Vector2(0, 48)
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -78,7 +78,7 @@ offset_right = 313.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_fonts/font = ExtResource( 7 )
+theme_override_fonts/font = ExtResource("7")
 text = "LINEN"
 align = 1
 valign = 2
@@ -110,37 +110,37 @@ theme_override_constants/v_separation = 16
 theme_override_constants/h_separation = 16
 columns = 4
 
-[node name="ShopMenuItem" parent="Margin/VBox/Margin/Grid" instance=ExtResource( 3 )]
+[node name="ShopMenuItem" parent="Margin/VBox/Margin/Grid" instance=ExtResource("3")]
 
-[node name="ShopMenuItem2" parent="Margin/VBox/Margin/Grid" instance=ExtResource( 3 )]
+[node name="ShopMenuItem2" parent="Margin/VBox/Margin/Grid" instance=ExtResource("3")]
 offset_left = 64.0
 offset_right = 112.0
 
-[node name="ShopMenuItem3" parent="Margin/VBox/Margin/Grid" instance=ExtResource( 3 )]
+[node name="ShopMenuItem3" parent="Margin/VBox/Margin/Grid" instance=ExtResource("3")]
 offset_left = 128.0
 offset_right = 176.0
 
-[node name="ShopMenuItem4" parent="Margin/VBox/Margin/Grid" instance=ExtResource( 3 )]
+[node name="ShopMenuItem4" parent="Margin/VBox/Margin/Grid" instance=ExtResource("3")]
 offset_left = 192.0
 offset_right = 240.0
 
-[node name="ShopMenuItem5" parent="Margin/VBox/Margin/Grid" instance=ExtResource( 3 )]
+[node name="ShopMenuItem5" parent="Margin/VBox/Margin/Grid" instance=ExtResource("3")]
 offset_top = 64.0
 offset_bottom = 112.0
 
-[node name="ShopMenuItem6" parent="Margin/VBox/Margin/Grid" instance=ExtResource( 3 )]
+[node name="ShopMenuItem6" parent="Margin/VBox/Margin/Grid" instance=ExtResource("3")]
 offset_left = 64.0
 offset_top = 64.0
 offset_right = 112.0
 offset_bottom = 112.0
 
-[node name="ShopMenuItem7" parent="Margin/VBox/Margin/Grid" instance=ExtResource( 3 )]
+[node name="ShopMenuItem7" parent="Margin/VBox/Margin/Grid" instance=ExtResource("3")]
 offset_left = 128.0
 offset_top = 64.0
 offset_right = 176.0
 offset_bottom = 112.0
 
-[node name="ShopMenuItem8" parent="Margin/VBox/Margin/Grid" instance=ExtResource( 3 )]
+[node name="ShopMenuItem8" parent="Margin/VBox/Margin/Grid" instance=ExtResource("3")]
 offset_left = 192.0
 offset_top = 64.0
 offset_right = 240.0
@@ -151,4 +151,4 @@ offset_top = 206.0
 offset_right = 480.0
 offset_bottom = 270.0
 
-[node name="DialogBox" parent="Margin/VBox/Dialog" instance=ExtResource( 6 )]
+[node name="DialogBox" parent="Margin/VBox/Dialog" instance=ExtResource("6")]

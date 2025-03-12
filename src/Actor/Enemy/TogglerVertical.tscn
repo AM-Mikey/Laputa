@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://xat01w4y42cx"]
 
-[ext_resource type="Script" path="res://src/Actor/Enemy/TogglerVertical.gd" id="1"]
+[ext_resource type="Script" uid="uid://ceaexj8mtx4p6" path="res://src/Actor/Enemy/TogglerVertical.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c7u8mwvcp2l6v" path="res://assets/Actor/Enemy/Toggler.png" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
@@ -416,16 +416,16 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fikxx"]
 _data = {
-"ClingDownCrawlLeft": SubResource("2"),
-"ClingDownCrawlRight": SubResource("3"),
-"ClingLeftCrawlDown": SubResource("4"),
-"ClingLeftCrawlUp": SubResource("5"),
-"ClingRightCrawlDown": SubResource("6"),
-"ClingRightCrawlUp": SubResource("7"),
-"ClingUpCrawlLeft": SubResource("8"),
-"ClingUpCrawlRight": SubResource("9"),
-"FlyLeft": SubResource("10"),
-"FlyRight": SubResource("11")
+&"ClingDownCrawlLeft": SubResource("2"),
+&"ClingDownCrawlRight": SubResource("3"),
+&"ClingLeftCrawlDown": SubResource("4"),
+&"ClingLeftCrawlUp": SubResource("5"),
+&"ClingRightCrawlDown": SubResource("6"),
+&"ClingRightCrawlUp": SubResource("7"),
+&"ClingUpCrawlLeft": SubResource("8"),
+&"ClingUpCrawlRight": SubResource("9"),
+&"FlyLeft": SubResource("10"),
+&"FlyRight": SubResource("11")
 }
 
 [node name="TogglerVertical" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]

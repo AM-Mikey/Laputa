@@ -2,7 +2,7 @@
 
 [ext_resource type="StyleBox" uid="uid://c53b3p1k47jdu" path="res://src/UI/StyleBox/SteelRound.tres" id="1"]
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="2"]
-[ext_resource type="Script" path="res://src/Editor/Button/EnemyButton.gd" id="3"]
+[ext_resource type="Script" uid="uid://hmpjupmf4gfg" path="res://src/Editor/Button/EnemyButton.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://bufns1cnhgyw1" path="res://assets/Actor/Enemy/Bat.png" id="4_7l42t"]
 
 [node name="EnemyButton" type="MarginContainer" groups=["EnemyButtons"]]

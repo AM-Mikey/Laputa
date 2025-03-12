@@ -1,12 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://cm5f2aq7nngxx"]
 
 [ext_resource type="PackedScene" path="res://src/UI/MoneyNumber.tscn" id="1"]
-[ext_resource type="Script" path="res://src/Prop/ShopItem.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://i6nq1d5n310d" path="res://assets/Item/Necklace.png" id="3"]
+[ext_resource type="Script" uid="uid://c70o0iq5jxxfo" path="res://src/Prop/ShopItem.gd" id="2"]
 [ext_resource type="AudioStream" uid="uid://ciuq2urt4n7eb" path="res://assets/SFX/Placeholder/snd_get_item.ogg" id="4"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(32, 32)
+
+[sub_resource type="Resource" id="Resource_divro"]
+metadata/__load_path__ = "res://assets/Item/Necklace.png"
 
 [sub_resource type="Animation" id="2"]
 resource_name = "DisplayNoPrice"
@@ -91,9 +93,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e0fny"]
 _data = {
-"DisplayNoPrice": SubResource("2"),
-"DisplayPrice": SubResource("3"),
-"Used": SubResource("4")
+&"DisplayNoPrice": SubResource("2"),
+&"DisplayPrice": SubResource("3"),
+&"Used": SubResource("4")
 }
 
 [node name="ShopItem" type="Area2D" groups=["Containers"]]
@@ -108,7 +110,7 @@ shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -24)
-texture = ExtResource("3")
+texture = SubResource("Resource_divro")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

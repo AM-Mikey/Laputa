@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://bf3lvcu6ts2nr"]
 
 [ext_resource type="Texture2D" uid="uid://cl7uidhdx20wc" path="res://assets/Gun/RevolverIcon.png" id="1"]
-[ext_resource type="Script" path="res://src/UI/HUD/GunIcon.gd" id="2"]
+[ext_resource type="Script" uid="uid://ccuuukcluc13a" path="res://src/UI/HUD/GunIcon.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://vejpksdsg6hk" path="res://assets/Gun/TurnstileJumperIcon.png" id="3"]
-[ext_resource type="Shader" path="res://src/Shader/SimpleOutline.gdshader" id="4"]
+[ext_resource type="Shader" uid="uid://bfsl4o8u1wb4b" path="res://src/Shader/SimpleOutline.gdshader" id="4"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 shader = ExtResource("4")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cjeynec3jyiow"]
 
-[ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="1_1yqoc"]
+[ext_resource type="Script" uid="uid://b58ifwfgkr5v6" path="res://src/Actor/NPC/NPC.gd" id="1_1yqoc"]
 [ext_resource type="Texture2D" uid="uid://bjchl4yrrpvon" path="res://assets/Actor/NPC/Jackal.png" id="2_epwcv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vxum6"]
@@ -46,8 +46,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jcqvx"]
 _data = {
-"Idle": SubResource("3"),
-"Walk": SubResource("Animation_u3sao")
+&"Idle": SubResource("3"),
+&"Walk": SubResource("Animation_u3sao")
 }
 
 [node name="Jackal" type="CharacterBody2D" groups=["Actors", "Entities", "NPCs"]]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b04ds76b3exsg"]
 
-[ext_resource type="Script" path="res://src/Bullet/Enemy/Laser.gd" id="1"]
+[ext_resource type="Script" uid="uid://cj64qagj3b1jt" path="res://src/Bullet/Enemy/Laser.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://8jfd84h6yss6" path="res://assets/Bullet/Enemy/Laser.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://d1oy3g4tudn3v" path="res://src/Bullet/Enemy/EnemyCollisionDetector.tscn" id="2_mu4xr"]
 

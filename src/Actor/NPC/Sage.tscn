@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cmqg2sverldho"]
 
-[ext_resource type="Script" path="res://src/Actor/NPC/NPC.gd" id="1_ij50w"]
+[ext_resource type="Script" uid="uid://b58ifwfgkr5v6" path="res://src/Actor/NPC/NPC.gd" id="1_ij50w"]
 [ext_resource type="Texture2D" uid="uid://ctymput6hkrgb" path="res://assets/Actor/NPC/Sage.png" id="2_6hy7t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_huu36"]
@@ -46,8 +46,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wdfe3"]
 _data = {
-"Idle": SubResource("3"),
-"Walk": SubResource("4")
+&"Idle": SubResource("3"),
+&"Walk": SubResource("4")
 }
 
 [node name="Sage" type="CharacterBody2D" groups=["Actors", "Entities", "NPCs"]]

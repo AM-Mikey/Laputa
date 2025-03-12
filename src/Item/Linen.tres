@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://2a3f41pycu57"]
 
-[ext_resource type="Script" path="res://src/Item/Item.gd" id="2"]
+[ext_resource type="Script" uid="uid://dj0u1vtqimy4j" path="res://src/Item/Item.gd" id="2"]
 
 [sub_resource type="AtlasTexture" id="1"]
 region = Rect2(160, 0, 32, 16)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ds1ythga30lxc"]
 
-[ext_resource type="Script" path="res://src/Actor/Enemy/Swooper.gd" id="2"]
+[ext_resource type="Script" uid="uid://dg5gcniasbgdb" path="res://src/Actor/Enemy/Swooper.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://j2gmpjjm1unr" path="res://assets/Actor/Enemy/Swooper.png" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
@@ -68,8 +68,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ublij"]
 _data = {
-"FlyLeft": SubResource("2"),
-"FlyRight": SubResource("3")
+&"FlyLeft": SubResource("2"),
+&"FlyRight": SubResource("3")
 }
 
 [node name="Swooper" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
