@@ -105,6 +105,8 @@ March 6 2025
 -consider adding ability to edit tileset not on current level
 -after moving entity unable to use tile tool
 -editor enter and exit signals
+-switch cursor to arrow on exit
+-when tile is active, always make it active on editor when theres nothing else selected
 
 --- animated tileset ---
 
@@ -112,8 +114,11 @@ March 6 2025
 -new animation node per tileset, autoload it in on level
 -use files for organization
 
+--- ui --- 
+clean up ui asset files
 
-3/9/25
--last worked on animation, next step is to move the waterfall
-	to a higher layer and do so using a tile remapper that
-	accounts for animated tiles
+
+--- background ---
+check if we use background tres files
+clean up old backgrounds
+fix background height code

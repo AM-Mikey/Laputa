@@ -1,4 +1,4 @@
-@tool #TODO fix editor script errors
+#@tool #TODO fix editor script errors
 extends MarginContainer
 
 signal limit_camera(left, right, top, bottom)
@@ -51,13 +51,12 @@ func setup_layers():
 	for c in pb.get_children():
 		c.free()
 
-	var layer_id = 0
-	for i in layers:
+	for layer_index in layers:
 		var layer = ParallaxLayer.new()
 		pb.add_child(layer)
 		
 		var layer_scale_step = (parallax_near - parallax_far) / (layers - 1)
-		var motion_scale = (layer_scale_step * layer_id) + parallax_far
+		var motion_scale = (layer_scale_step * layer_index) + parallax_far
 		layer.motion_scale = Vector2(motion_scale, motion_scale)
 
 		var texture_rect = TextureRect.new()
@@ -68,49 +67,57 @@ func setup_layers():
 
 
 		var layer_height = int(texture.get_height() / float(layers))
-		var layer_y = layer_height * layer_id
+		var layer_y = layer_height * layer_index
+		#print(layer_y)
 		var region = Rect2i(0, layer_y, texture.get_width(), layer_height)
+		#print(region)
 		
 		#this cannot be AtlasTexture due to bug https://github.com/godotengine/godot/issues/20472
-		var texture_as_image = texture.get_image().get_region(region)
-		var clipped_texture = ImageTexture.new().create_from_image(texture_as_image)
+		var texture_as_image = texture.get_image()
+		var clipped_image = texture_as_image.get_region(region)
+		var clipped_texture = ImageTexture.create_from_image(clipped_image)
 		
-		
+		#get_parent().get_node("TextureRect2").texture = clipped_texture
 		#clipped_texture.flags = 0 #turn off filtering #TODO: turn back on if backgrounds are blurry
 		texture_rect.texture = clipped_texture
 		
-		if layer_id == 0 and always_tile_far_layer:
+		if layer_index == 0 and always_tile_far_layer:
 			set_tile_mode(texture_rect, "both")
 		else:
 			set_tile_mode(texture_rect)
 		
-		texture_rect.global_position = texture_rect.size * -0.5 #TODO:FIX
+		#texture_rect.global_position = texture_rect.size * -0.5 #TODO:FIX
 		layer.add_child(texture_rect)
-		layer_id += 1
+		#await get_tree().process_frame
 
 
 func set_focus():
-	if not Engine.is_editor_hint():
-		var base_offset_x = ((-w.resolution_scale * global_position.x) + (size.x * w.resolution_scale) - get_viewport().size.x) / 2
-		var base_offset_y = ((-w.resolution_scale * global_position.y) + (size.y * w.resolution_scale) - get_viewport().size.y) / 2 
-		
-		var center = Vector2(base_offset_x, base_offset_y)
-		var near_corner = Vector2i.ZERO	#TODO:FIX
-		var far_corner = Vector2i(texture.get_width() * 2, texture.get_width() * -2) #both this and the last line had stops. i dont understand this right now so im leaving it
-		
-		match focus:
-			Focus.CENTER:	#TODO:FIX
-				pb.scroll_base_offset = center
-			Focus.TOP:
-				pb.scroll_base_offset = Vector2(center.x, far_corner.y)
-			Focus.ONE_QUARTER:
-				pb.scroll_base_offset = Vector2(center.x, far_corner.y + (texture.get_width() * 0.5))
-			Focus.THREE_QUARTERS:
-				pb.scroll_base_offset = Vector2(center.x, far_corner.y + (texture.get_width() * 1.5))
-			Focus.BOTTOM:
-				pb.scroll_base_offset = Vector2(center.x, near_corner.y)
+	#if not Engine.is_editor_hint():
+		#var base_offset_x = ((-w.resolution_scale * global_position.x) + (size.x * w.resolution_scale) - get_viewport().size.x) / 2
+		#var base_offset_y = ((-w.resolution_scale * global_position.y) + (size.y * w.resolution_scale) - get_viewport().size.y) / 2 
+		#
+		#var center = Vector2(base_offset_x, base_offset_y)
+		#var near_corner = Vector2i.ZERO	#TODO:FIX
+		#var far_corner = Vector2i(texture.get_width() * 2, texture.get_width() * -2) #both this and the last line had stops. i dont understand this right now so im leaving it
+		#
+		#match focus:
+			#Focus.CENTER:	#TODO:FIX
+				#pb.scroll_base_offset = center
+			#Focus.TOP:
+				#pb.scroll_base_offset = Vector2(center.x, far_corner.y)
+			#Focus.ONE_QUARTER:
+				#pb.scroll_base_offset = Vector2(center.x, far_corner.y + (texture.get_width() * 0.5))
+			#Focus.THREE_QUARTERS:
+				#pb.scroll_base_offset = Vector2(center.x, far_corner.y + (texture.get_width() * 1.5))
+			#Focus.BOTTOM:
+				#pb.scroll_base_offset = Vector2(center.x, near_corner.y)
 			#
 		##pb.scroll_base_offset /=  w.resolution_scale
+		
+		var limiter_bottom = position.y + size.y
+		var texture_layer_height = int(texture.get_height() / float(layers))
+		pb.scroll_base_offset.y = (limiter_bottom - texture_layer_height) * w.resolution_scale
+		
 
 func set_tile_mode(texture_rect, mode := "auto"):
 	match mode:

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=32 format=3 uid="uid://deptsttubjnfv"]
+[gd_resource type="Theme" load_steps=31 format=3 uid="uid://deptsttubjnfv"]
 
 [ext_resource type="FontFile" uid="uid://cf01li78xvnnu" path="res://src/UI/Font/WelcomeBack.tres" id="1"]
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="2"]
@@ -15,7 +15,6 @@
 [ext_resource type="StyleBox" uid="uid://cb3gs2qq26l03" path="res://src/UI/StyleBox/RustTabsLight.tres" id="12"]
 [ext_resource type="StyleBox" uid="uid://4n3eltlwqyie" path="res://src/UI/StyleBox/PaperBorder.tres" id="13"]
 [ext_resource type="StyleBox" uid="uid://deshi6r488bxi" path="res://src/UI/StyleBox/SteelRoundRiveted.tres" id="14_a1ofe"]
-[ext_resource type="StyleBox" uid="uid://cql2au3d3637e" path="res://src/UI/StyleBox/SteelRoundInset.tres" id="14_hshpd"]
 [ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="16_yxwjr"]
 [ext_resource type="FontFile" path="res://src/UI/Font/WelcomeBackButton.tres" id="21"]
 [ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="22"]
@@ -111,14 +110,14 @@ OptionButton/fonts/font = ExtResource("1")
 OptionButton/icons/arrow = null
 Panel/styles/panel = ExtResource("10")
 PopupMenu/colors/font_color = Color(0.305882, 0.129412, 0.0823529, 1)
-PopupMenu/colors/font_color_hover = Color(0.521569, 0.282353, 0.156863, 1)
-PopupMenu/icons/checked = null
-PopupMenu/icons/radio_checked = null
-PopupMenu/icons/radio_unchecked = null
+PopupMenu/colors/font_disabled_color = Color(0.4, 0.4, 0.4, 0.8)
+PopupMenu/colors/font_hover_color = Color(0.521569, 0.282353, 0.156863, 1)
+PopupMenu/icons/radio_checked = ExtResource("4_1yawo")
+PopupMenu/icons/radio_checked_disabled = null
+PopupMenu/icons/radio_unchecked = ExtResource("5_iuojp")
 PopupMenu/icons/unchecked = null
 PopupMenu/styles/hover = SubResource("11")
 PopupMenu/styles/panel = ExtResource("13")
-ScrollContainer/styles/panel = ExtResource("14_hshpd")
 TabContainer/colors/font_color_bg = Color(0.403922, 0.286275, 0.262745, 1)
 TabContainer/colors/font_color_disabled = Color(0.403922, 0.286275, 0.262745, 1)
 TabContainer/colors/font_color_fg = Color(0.968627, 0.886275, 0.717647, 1)

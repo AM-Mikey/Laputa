@@ -12,8 +12,5 @@ visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1")
-expand = true
+expand_mode = 1
 stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
