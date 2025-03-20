@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwebgfvutvayo"]
+
+[ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1_81bhx"]
+[ext_resource type="Script" uid="uid://d4n4bqvrwa3wq" path="res://src/Editor/Button/SaveButton.gd" id="2_tv01m"]
+[ext_resource type="StyleBox" uid="uid://c5j6vtg2j4n1v" path="res://src/UI/StyleBox/RustRoundRiveted.tres" id="4_jqtk2"]
+
+[sub_resource type="StyleBoxEmpty" id="3"]
+
+[sub_resource type="StyleBoxEmpty" id="4"]
+
+[sub_resource type="StyleBoxEmpty" id="1"]
+
+[sub_resource type="StyleBoxEmpty" id="2"]
+
+[sub_resource type="StyleBoxEmpty" id="5"]
+
+[node name="SaveButton" type="MarginContainer" groups=["PropButtons"]]
+custom_minimum_size = Vector2(16, 16)
+offset_right = 128.0
+offset_bottom = 32.0
+theme = ExtResource("1_81bhx")
+script = ExtResource("2_tv01m")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("4_jqtk2")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="HBox"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("3")
+theme_override_styles/disabled = SubResource("4")
+theme_override_styles/hover = SubResource("1")
+theme_override_styles/pressed = SubResource("2")
+theme_override_styles/normal = SubResource("5")
+text = "Save"
+flat = true
+
+[node name="Spacer2" type="Control" parent="HBox"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="HBox/Button" to="." method="on_pressed"]

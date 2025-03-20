@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="Background" load_steps=2 format=3 uid="uid://b66xbugk5v6xo"]
-
-[ext_resource type="Script" uid="uid://ceqy767o44qkp" path="res://src/Background/Background.gd" id="1"]
-
-[resource]
-script = ExtResource("1")
-textures = Array[Texture2D]([])
-motion_scales = Array[Vector2]([Vector2(0, 0), Vector2(0.25, 0.25), Vector2(0.5, 0.5), Vector2(0.75, 0.75), Vector2(1, 1)])

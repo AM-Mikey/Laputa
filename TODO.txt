@@ -107,6 +107,7 @@ March 6 2025
 -editor enter and exit signals
 -switch cursor to arrow on exit
 -when tile is active, always make it active on editor when theres nothing else selected
+-inspector window scale better
 
 --- animated tileset ---
 
@@ -119,6 +120,4 @@ clean up ui asset files
 
 
 --- background ---
-check if we use background tres files
-clean up old backgrounds
-fix background height code
+done!?

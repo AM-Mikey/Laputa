@@ -10,7 +10,6 @@ var enum_items := []
 
 func _ready():
 	$HBox/Button.text = property_name
-	
 	align_enum_menu()
 
 	match property_type:
@@ -58,7 +57,6 @@ func _ready():
 
 func align_enum_menu():
 	#var menu = $Enum.get_popup()
-	
 	pass
 
 

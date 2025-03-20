@@ -1,12 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://btqnhfhcxtxvq"]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_gqwwp"]
-[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_3ucb2"]
-[ext_resource type="Texture2D" uid="uid://flsl5refgqw0" path="res://assets/Background/Mountains.png" id="4_h8r7x"]
-[ext_resource type="TileSet" uid="uid://dk5d0wtilabto" path="res://src/Tile/Wastes.tres" id="4_tdjow"]
-[ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="5_w8juu"]
-[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="6_8lqyu"]
-[ext_resource type="PackedScene" uid="uid://paaf68akbay4" path="res://src/Tile/WastesAnimator.tscn" id="7_2q2vd"]
+[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_gqwwp"]
+[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_3ucb2"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_ag25g"]
+[ext_resource type="Resource" path="res://src/Background/Underbrush.tres" id="4_hmghs"]
+[ext_resource type="TileSet" path="res://src/Tile/Wastes.tres" id="4_tdjow"]
+[ext_resource type="Texture2D" path="res://assets/Background/Underbrush.png" id="5_hmghs"]
+[ext_resource type="PackedScene" path="res://src/Effect/Light/SunLight.tscn" id="5_w8juu"]
+[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="6_8lqyu"]
+[ext_resource type="PackedScene" path="res://src/Tile/WastesAnimator.tscn" id="7_2q2vd"]
+[ext_resource type="Script" path="res://src/Effect/Light/SunLight.gd" id="8_iyha2"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="10_5x4fd"]
+[ext_resource type="Script" path="res://src/Tile/WastesAnimator.gd" id="12_37ldv"]
 
 [node name="WastesTesting" type="Node2D"]
 script = ExtResource("1_gqwwp")
@@ -16,14 +21,16 @@ dialog_json = "res://src/Dialog/Village.json"
 conversation = "cutscene_test"
 tile_animator_path = NodePath("WastesAnimator")
 
-[node name="LevelLimiter" parent="." instance=ExtResource("2_3ucb2")]
-offset_top = -560.0
+[node name="LevelLimiter" type="MarginContainer" parent="." instance=ExtResource("2_3ucb2")]
+offset_top = -272.0
 offset_right = 704.0
 offset_bottom = 272.0
-texture = ExtResource("4_h8r7x")
-layers = 4
+mouse_filter = 2
+script = ExtResource("3_ag25g")
+background_resource = ExtResource("4_hmghs")
+texture = ExtResource("5_hmghs")
 parallax_near = 1.0
-focus = 2
+focus = 4
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = 1
@@ -48,15 +55,22 @@ layer_3/tile_data = PackedInt32Array(-524284, 0, 12, -458748, 0, 13, -524283, 65
 
 [node name="Triggers" type="Node2D" parent="."]
 
-[node name="SunLight" parent="." instance=ExtResource("5_w8juu")]
+[node name="SunLight" type="Area2D" parent="." groups=["SunLights"] instance=ExtResource("5_w8juu")]
 position = Vector2(35, -198)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_iyha2")
 
 [node name="Spawns" type="Node2D" parent="."]
 
-[node name="SpawnPoint" parent="Spawns" instance=ExtResource("6_8lqyu")]
+[node name="SpawnPoint" type="Area2D" parent="Spawns" groups=["SpawnPoints"] instance=ExtResource("6_8lqyu")]
 position = Vector2(264, -128)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_5x4fd")
 
-[node name="WastesAnimator" parent="." instance=ExtResource("7_2q2vd")]
+[node name="WastesAnimator" type="Node2D" parent="." instance=ExtResource("7_2q2vd")]
+script = ExtResource("12_37ldv")
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 offset_top = -256.0

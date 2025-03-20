@@ -79,4 +79,9 @@ ok_button_text = "Open"
 file_mode = 0
 filters = PackedStringArray(".json")
 
+[node name="SaveDialog" type="FileDialog" parent="."]
+initial_position = 1
+size = Vector2i(400, 400)
+
 [connection signal="file_selected" from="FileDialog" to="." method="on_file_selected"]
+[connection signal="file_selected" from="SaveDialog" to="." method="_on_SaveDialog_file_selected"]

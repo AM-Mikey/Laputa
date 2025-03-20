@@ -1,4 +1,3 @@
-#@tool #TODO fix editor script errors
 extends MarginContainer
 
 signal limit_camera(left, right, top, bottom)
@@ -6,6 +5,8 @@ signal limit_camera(left, right, top, bottom)
 enum Focus {TOP, ONE_QUARTER, CENTER, THREE_QUARTERS, BOTTOM}
 enum TileMode {BOTH, HORIZONTAL, VERTICAL, NONE}
 
+@export var background_resource: Background:
+	set = set_background_resouce
 @export var texture: CompressedTexture2D
 @export var layers := 1
 @export var parallax_near := 0.8
@@ -16,24 +17,18 @@ enum TileMode {BOTH, HORIZONTAL, VERTICAL, NONE}
 var layer_repeating_length := 5000
 var always_tile_far_layer = false #DOES NOT WORK
 
-var w
-var camera
-var pb
+@onready var w = get_tree().get_root().get_node("World")
+@onready var camera = w.get_node("Juniper/PlayerCamera")
+@onready var pb = w.get_node("ParallaxBackground")
 
 
 
 func _ready():
-	if not Engine.is_editor_hint():
-		
-		w = get_tree().get_root().get_node("World")
-		camera = w.get_node("Juniper/PlayerCamera")
-		pb = w.get_node("ParallaxBackground")
-		
-		$TextureRect.queue_free()
-		setup_layers()
-		set_focus()
+	set_background_resouce(background_resource) #load the resouce on start
+	setup_layers()
+	set_focus()
 	
-	if not camera:
+	if not camera: #why? we already get camera?
 		camera = get_tree().get_root().get_node_or_null("World/Juniper/PlayerCamera")
 	if camera:
 		connect("limit_camera", Callable(camera, "_on_limit_camera"))
@@ -41,10 +36,15 @@ func _ready():
 	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 	on_viewport_size_changed()
 
-func _process(_delta):
-	if Engine.is_editor_hint():
-		$TextureRect.texture = texture #TODO: bad way of doing this, use setget instead
 
+func set_background_resouce(value): #note this goes through inspector on_changed code first, and then does setup_layers, setup_focus from there
+	background_resource = value
+	texture = value.texture
+	layers = value.layers
+	parallax_near = value.parallax_near
+	parallax_far = value.parallax_far
+	focus = value.focus
+	tile_mode = value.tile_mode
 
 
 func setup_layers():
@@ -55,12 +55,11 @@ func setup_layers():
 		var layer = ParallaxLayer.new()
 		pb.add_child(layer)
 		
-		var layer_scale_step = (parallax_near - parallax_far) / (layers - 1)
+		var layer_scale_step = (parallax_near - parallax_far) / (layers - 1) if layers != 1 else 1 #if 1 layer, set to 1
 		var motion_scale = (layer_scale_step * layer_index) + parallax_far
 		layer.motion_scale = Vector2(motion_scale, motion_scale)
 
 		var texture_rect = TextureRect.new()
-		#texture_rect.expand = true
 		texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		texture_rect.stretch_mode = TextureRect.STRETCH_TILE
 		texture_rect.mouse_filter = MOUSE_FILTER_IGNORE
@@ -77,7 +76,6 @@ func setup_layers():
 		var clipped_image = texture_as_image.get_region(region)
 		var clipped_texture = ImageTexture.create_from_image(clipped_image)
 		
-		#get_parent().get_node("TextureRect2").texture = clipped_texture
 		#clipped_texture.flags = 0 #turn off filtering #TODO: turn back on if backgrounds are blurry
 		texture_rect.texture = clipped_texture
 		
@@ -86,60 +84,47 @@ func setup_layers():
 		else:
 			set_tile_mode(texture_rect)
 		
-		#texture_rect.global_position = texture_rect.size * -0.5 #TODO:FIX
 		layer.add_child(texture_rect)
-		#await get_tree().process_frame
 
 
 func set_focus():
-	#if not Engine.is_editor_hint():
-		#var base_offset_x = ((-w.resolution_scale * global_position.x) + (size.x * w.resolution_scale) - get_viewport().size.x) / 2
-		#var base_offset_y = ((-w.resolution_scale * global_position.y) + (size.y * w.resolution_scale) - get_viewport().size.y) / 2 
-		#
-		#var center = Vector2(base_offset_x, base_offset_y)
-		#var near_corner = Vector2i.ZERO	#TODO:FIX
-		#var far_corner = Vector2i(texture.get_width() * 2, texture.get_width() * -2) #both this and the last line had stops. i dont understand this right now so im leaving it
-		#
-		#match focus:
-			#Focus.CENTER:	#TODO:FIX
-				#pb.scroll_base_offset = center
-			#Focus.TOP:
-				#pb.scroll_base_offset = Vector2(center.x, far_corner.y)
-			#Focus.ONE_QUARTER:
-				#pb.scroll_base_offset = Vector2(center.x, far_corner.y + (texture.get_width() * 0.5))
-			#Focus.THREE_QUARTERS:
-				#pb.scroll_base_offset = Vector2(center.x, far_corner.y + (texture.get_width() * 1.5))
-			#Focus.BOTTOM:
-				#pb.scroll_base_offset = Vector2(center.x, near_corner.y)
-			#
-		##pb.scroll_base_offset /=  w.resolution_scale
-		
-		var limiter_bottom = position.y + size.y
-		var texture_layer_height = int(texture.get_height() / float(layers))
-		pb.scroll_base_offset.y = (limiter_bottom - texture_layer_height) * w.resolution_scale
-		
+	var limiter_top = position.y
+	var limiter_one_quarter = position.y + (size.y * 0.25)
+	var limiter_center = position.y + (size.y * 0.5)
+	var limiter_three_quarters = position.y + (size.y * 0.75)
+	var limiter_bottom = position.y + size.y
+	var texture_layer_height = int(texture.get_height() / float(layers))
+	
+	match focus:
+		Focus.TOP:
+			pb.scroll_base_offset.y = limiter_top * w.resolution_scale
+		Focus.ONE_QUARTER:
+			pb.scroll_base_offset.y = (limiter_one_quarter - (texture_layer_height * 0.25)) * w.resolution_scale
+		Focus.CENTER:
+			pb.scroll_base_offset.y = (limiter_center - (texture_layer_height * 0.5)) * w.resolution_scale
+		Focus.THREE_QUARTERS:
+			pb.scroll_base_offset.y = (limiter_three_quarters - (texture_layer_height * 0.75)) * w.resolution_scale
+		Focus.BOTTOM:
+			pb.scroll_base_offset.y = (limiter_bottom - texture_layer_height) * w.resolution_scale
 
-func set_tile_mode(texture_rect, mode := "auto"):
+
+func set_tile_mode(texture_rect, mode := "auto"): #TODO: add other tile modes
 	match mode:
 		"auto":
 			match tile_mode:
 				TileMode.HORIZONTAL:
 					texture_rect.size.x = layer_repeating_length
 					texture_rect.size.y = texture_rect.texture.get_height()
-					#texture_rect.global_position = texture_rect.size * -0.5 #TODO:FIX
 				TileMode.VERTICAL:
 					texture_rect.size.x = texture_rect.texture.get_width()
 					texture_rect.size.y = layer_repeating_length
-					#texture_rect.global_position = texture_rect.size * -0.5
 				TileMode.BOTH:
 					texture_rect.size.x = layer_repeating_length
 					texture_rect.size.y = layer_repeating_length
-					#texture_rect.global_position = Vector2.ZERO #texture_rect.global_position = texture_rect.size * -0.5
 				TileMode.NONE:
 					texture_rect.size.x = texture_rect.texture.get_width()
 					texture_rect.size.y = texture_rect.texture.get_height()
-					#texture_rect.global_position = Vector2.ZERO #texture_rect.size * 0.5
-		"both":
+		"both": #for back layer
 			texture_rect.size.x = layer_repeating_length
 			texture_rect.size.y = layer_repeating_length
 

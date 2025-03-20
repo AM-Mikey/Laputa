@@ -1,0 +1,19 @@
+PNG with layers going from back to front in a vertical sprite sheet
+
+-farthest back layer will not move, farthest forward will move 1:1 with camera
+
+-background height will need to change based on the level it's in. Min height: 368px
+
+-for single-layer backgrounds (i.e. interiors) just create a single-layer background of any size and tile: both
+
+
+Focus:
+	-Top: Perfect for cave levels, closest layer sticks to top of level
+	
+	-OneQuarter: Only use for focus on something 1/4 of the way down the level.
+	
+	-Center: For empty skies or repeating patterns with something in the middle. 
+	
+	-ThreeQuarters: Only use for focus on something 3/4 of the way down the level.
+	
+	-Bottom: Perfect for outdoor levels, closest layer sticks to bottom of level

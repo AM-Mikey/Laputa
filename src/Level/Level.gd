@@ -37,7 +37,6 @@ func _ready():
 			am.play_music(music)
 
 
-
 func do_playerless_cutscene():
 	if w.has_node("UILayer/DialogBox"): #clear old dialog box if there is one
 		w.get_node("UILayer/DialogBox").stop_printing()

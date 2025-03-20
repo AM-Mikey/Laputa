@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Background" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/Background/Background.gd" id="1_2sbx0"]
+[ext_resource type="Texture2D" path="res://assets/Background/Underbrush.png" id="2_205a8"]
+
+[resource]
+script = ExtResource("1_2sbx0")
+texture = ExtResource("2_205a8")
+layers = 1
+parallax_near = 1.0
+parallax_far = 0.0
+focus = 4
+tile_mode = 0

@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://3vo6brfto85p"]
+
+[ext_resource type="Texture2D" uid="uid://dybr4fabyxhkv" path="res://assets/UI/StyleBox/RustRoundDarkRiveted.png" id="1_no2vd"]
+
+[resource]
+texture = ExtResource("1_no2vd")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(0, 0, 16, 16)

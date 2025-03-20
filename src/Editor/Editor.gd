@@ -272,7 +272,7 @@ func do_tile_input(event):
 	if event is InputEventMouseMotion:
 		var new_updated_cell = tile_map.local_to_map(tile_map.to_local(mouse_pos)) 
 		if new_updated_cell != last_updated_cell: #don't trigger if we haven't moved a cell over
-			print("moved a cell over")
+			#print("moved a cell over")
 			last_updated_cell = new_updated_cell #update
 			free_previews()
 			match subtool:
