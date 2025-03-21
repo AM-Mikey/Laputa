@@ -1,5 +1,5 @@
 extends Node
-class_name AutoTile, "res://assets/Icon/NPCIcon.png"
+class_name AutoTile#, "res://assets/Icon/NPCIcon.png"
 
 var farback = TileMap
 var back = TileMap

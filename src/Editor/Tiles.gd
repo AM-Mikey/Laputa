@@ -178,7 +178,7 @@ func _on_AutoTile_toggled(button_pressed):
 	else:
 		auto_tile.icon = auto_tile_false
 		auto_tile.tooltip_text = auto_tile_disc + ": Off"
-	pass # Replace with function body TODO: what??
+	editor.auto_tile = button_pressed
 
 func _on_Mode_pressed():
 	if editor.active_tool == "tile":

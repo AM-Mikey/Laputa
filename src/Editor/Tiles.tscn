@@ -50,10 +50,8 @@ toggle_mode = true
 icon = ExtResource("10")
 
 [node name="AutoTile" type="Button" parent="VBox/HBox"]
-visible = false
 layout_mode = 2
 toggle_mode = true
-text = "NOT IMPLEMENTED"
 icon = ExtResource("11")
 
 [node name="Mode" type="Button" parent="VBox/HBox"]

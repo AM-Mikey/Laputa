@@ -321,9 +321,6 @@ func do_tile_input(event):
 			past_operations.append(["set_cells", active_operation.duplicate()])
 			#print("active op: ", active_operation)
 			active_operation.clear()
-		#if auto_tile:
-			#print("auto tiling")
-			#set_auto_tiles() #TODO: testing
 		
 	#clearing tile
 	if event.is_action_pressed("editor_delete"):
@@ -568,16 +565,19 @@ func set_cells(cells: Rect2i, erase = false): #no need to pass brush since its g
 		for column in cells.size.x:
 			var tile_set_position = Vector2i(column % brush.size.x, row % brush.size.y) + brush.position
 			var tile_map_position = Vector2i(column, row) + cells.position
-			
 			tile_map_layer = get_tile_map_layer(tile_set_position.y)
 			
 			if erase:
 				if multi_erase: #erase on all layers
-					for l in tile_map.get_layers_count():
-						tile_map.set_cell(l, tile_map_position, -1, tile_set_position)
-				else: tile_map.set_cell(active_tile_map_layer, tile_map_position, -1, tile_set_position)
-			else: tile_map.set_cell(tile_map_layer, tile_map_position, 0, tile_set_position) #draw
-			#void set_cell(layer: int, coords: Vector2i, source_id: int = -1, atlas_coords: Vector2i = Vector2i(-1, -1), alternative_tile: int = 0) 
+					for layer in tile_map.get_layers_count():
+						tile_map.set_cell(layer, tile_map_position, -1, tile_set_position)
+				else: 
+					tile_map.set_cell(active_tile_map_layer, tile_map_position, -1, tile_set_position)
+			else:
+				tile_map.set_cell(tile_map_layer, tile_map_position, 0, tile_set_position) #draw
+				if auto_tile:
+					w.current_level.get_node("AutoTile").do_auto_tile(tile_map_position, tile_map_layer)
+				
 			#If source_id is set to -1, atlas_coords to Vector2i(-1, -1) or alternative_tile to -1, the cell will be erased. An erased cell gets all its identifiers automatically set to their respective invalid values, namely -1, Vector2i(-1, -1) and -1.
 
 
@@ -589,15 +589,16 @@ func set_cells_from_brush_origins(origins: Array, erase = false):
 			for row in brush.size.y:
 				var tile_set_position = Vector2i(column % brush.size.x, row % brush.size.y) + brush.position
 				var tile_map_position = Vector2i(column, row) + origin
-				
 				tile_map_layer = get_tile_map_layer(tile_set_position.y)
 				
 				if erase:
 					if multi_erase: #erase on all layers
-						for l in tile_map.get_layers_count():
-							tile_map.set_cell(l, tile_map_position, -1, tile_set_position)
-					else: tile_map.set_cell(active_tile_map_layer, tile_map_position, -1, tile_set_position)
-				else: tile_map.set_cell(tile_map_layer, tile_map_position, 0, tile_set_position) #draw
+						for layer in tile_map.get_layers_count():
+							tile_map.set_cell(layer, tile_map_position, -1, tile_set_position)
+					else:
+						tile_map.set_cell(active_tile_map_layer, tile_map_position, -1, tile_set_position)
+				else:
+					tile_map.set_cell(tile_map_layer, tile_map_position, 0, tile_set_position) #draw
 
 
 
