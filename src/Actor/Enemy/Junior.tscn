@@ -150,7 +150,7 @@ frame = 12
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_eq2gb")
+&"": SubResource("AnimationLibrary_eq2gb")
 }
 
 [node name="FloorDetectorL" type="RayCast2D" parent="."]

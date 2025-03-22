@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://paaf68akbay4"]
+[gd_scene load_steps=2 format=3 uid="uid://bkfpf8fg3xa0d"]
 
 [ext_resource type="Script" uid="uid://wftb1fa7j2ti" path="res://src/Tile/WastesAnimator.gd" id="1_6x7aa"]
 

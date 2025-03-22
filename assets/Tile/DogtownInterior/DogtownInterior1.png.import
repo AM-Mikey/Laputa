@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyty0dxjupbqh"
-path="res://.godot/imported/Wastes.png-4da6c1a0fc93e5dd6bba71bbe0af47f2.ctex"
+uid="uid://dug2xpm3piigb"
+path="res://.godot/imported/DogtownInterior1.png-ef37ae6d78bd242dc1115fea328fe4e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/Wastes.png"
-dest_files=["res://.godot/imported/Wastes.png-4da6c1a0fc93e5dd6bba71bbe0af47f2.ctex"]
+source_file="res://assets/Tile/DogtownInterior/DogtownInterior1.png"
+dest_files=["res://.godot/imported/DogtownInterior1.png-ef37ae6d78bd242dc1115fea328fe4e4.ctex"]
 
 [params]
 

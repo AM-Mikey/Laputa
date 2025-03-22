@@ -412,30 +412,13 @@ func on_viewport_size_changed():
 	var viewport_size = get_tree().get_root().size
 	
 	var tiles_visible_y = 15.0
-
 	var urs = viewport_size.y / (16.0 * tiles_visible_y)
 	if urs - floor(urs) == 0.5:
 		resolution_scale = floori(urs) #round 0.5 down
 	else:
 		resolution_scale = roundi(urs) #else round normally
-	#resolution_scale = 
-	#if viewport_size.y <= 405:
-		#resolution_scale = 1.0
-	#elif viewport_size.y <= 675: #480p -> 15 tiles
-		#resolution_scale = 2.0
-	#elif viewport_size.y <= 945: #720p -> 15 tiles
-		#resolution_scale = 3.0
-	#elif viewport_size.y <= 1215: #960p -> 15 tiles	841 - 1080
-		#resolution_scale = 4.0
-	#elif viewport_size.y <= 1485: #1200p -> 15 tiles
-		#resolution_scale = 5.0
-	#elif viewport_size.y <= 1755: #1440p -> 15 tiles
-		#resolution_scale = 6.0
-	#elif viewport_size.y <= 2025: #1680p -> 15 tiles
-		#resolution_scale = 7.0
-	#else:
-		#resolution_scale = 8.0 #1920p -> 15 tiles
-	
+
+
 	ui.scale = Vector2(resolution_scale, resolution_scale)
 	back.scale = Vector2(resolution_scale, resolution_scale)
 	var half_scale = max(ceil(resolution_scale/2.0), 1)

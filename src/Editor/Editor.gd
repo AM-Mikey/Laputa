@@ -88,7 +88,7 @@ func setup_level(): #TODO: clear undo history	TODO: make this an editor_enter si
 	tile_map = w.current_level.get_node("TileMap")
 	tile_master.setup_tile_master()
 	$Main/Win/Tab/TileSet.load_tile_set(tile_map.tile_set.resource_path)
-	w.current_level.tile_animator.editor_enter()
+	w.current_level.get_node("TileAnimator").editor_enter()
 	
 	setup_level_editor_layer()
 	#set_entities_pickable()
@@ -137,7 +137,7 @@ func load_editor_windows():
 
 func exit():	#TODO: make this an editor_exit signal
 	inspector.exit()
-	w.current_level.tile_animator.editor_exit()
+	w.current_level.get_node("TileAnimator").editor_exit()
 	free_previews()
 	editor_level_limiter.queue_free()
 	el.get_node("EditorCamera").queue_free()
@@ -575,7 +575,7 @@ func set_cells(cells: Rect2i, erase = false): #no need to pass brush since its g
 					tile_map.set_cell(active_tile_map_layer, tile_map_position, -1, tile_set_position)
 			else:
 				tile_map.set_cell(tile_map_layer, tile_map_position, 0, tile_set_position) #draw
-				if auto_tile:
+				if auto_tile and w.current_level.has_node("AutoTile"):
 					w.current_level.get_node("AutoTile").do_auto_tile(tile_map_position, tile_map_layer)
 				
 			#If source_id is set to -1, atlas_coords to Vector2i(-1, -1) or alternative_tile to -1, the cell will be erased. An erased cell gets all its identifiers automatically set to their respective invalid values, namely -1, Vector2i(-1, -1) and -1.

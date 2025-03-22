@@ -3,10 +3,10 @@ extends TileAnimator
 
 func setup():
 	frame_counts = {
-	"waterfall": 10,
-	"grass": 2,}
-	create_simple_timer("waterfall", 0.1)
-	create_simple_timer("grass", 1.0)
+	"flame": 4,
+	"light": 2,}
+	create_simple_timer("flame", 0.2)
+	create_simple_timer("light", 7.0)
 
 func editor_enter():
 	for timer in timers:

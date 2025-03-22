@@ -9,12 +9,10 @@ enum LevelType {NORMAL, PLAYERLESS_CUTSCENE}
 @export var music: String
 @export_file("*.json") var dialog_json: String
 @export var conversation: String
-@export var tile_animator_path: NodePath
 
 var time_created: Dictionary
 
 @onready var w = get_tree().get_root().get_node("World")
-@onready var tile_animator = get_node(tile_animator_path)
 
 
 func _ready():
