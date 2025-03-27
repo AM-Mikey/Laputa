@@ -22,14 +22,6 @@ theme_override_constants/separation = 0
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ReferenceRect" type="ReferenceRect" parent="Handles/Header"]
-visible = false
-layout_mode = 0
-offset_right = 256.0
-mouse_filter = 2
-border_color = Color(0, 0, 0, 1)
-editor_only = false
-
 [node name="Top" type="HBoxContainer" parent="Handles"]
 layout_mode = 2
 size_flags_vertical = 0
@@ -41,7 +33,6 @@ custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-mouse_filter = 1
 mouse_default_cursor_shape = 12
 
 [node name="Top" type="TextureButton" parent="Handles/Top"]
@@ -49,7 +40,6 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-mouse_filter = 1
 mouse_default_cursor_shape = 9
 
 [node name="TopRight" type="TextureButton" parent="Handles/Top"]
@@ -57,7 +47,6 @@ custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-mouse_filter = 1
 mouse_default_cursor_shape = 11
 
 [node name="Mid" type="HBoxContainer" parent="Handles"]
@@ -70,7 +59,6 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-mouse_filter = 1
 mouse_default_cursor_shape = 10
 
 [node name="Bar" type="TextureButton" parent="Handles/Mid"]
@@ -78,21 +66,11 @@ custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-mouse_filter = 1
-
-[node name="ReferenceRect" type="ReferenceRect" parent="Handles/Mid/Bar"]
-visible = false
-custom_minimum_size = Vector2(0, 12)
-layout_mode = 0
-offset_right = 248.0
-offset_bottom = 12.0
-mouse_filter = 2
 
 [node name="Right" type="TextureButton" parent="Handles/Mid"]
 custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-mouse_filter = 1
 mouse_default_cursor_shape = 10
 
 [node name="Bottom" type="HBoxContainer" parent="Handles"]
@@ -106,7 +84,6 @@ custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
-mouse_filter = 1
 mouse_default_cursor_shape = 11
 
 [node name="Bottom" type="TextureButton" parent="Handles/Bottom"]
@@ -114,7 +91,6 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-mouse_filter = 1
 mouse_default_cursor_shape = 9
 
 [node name="BottomRight" type="TextureButton" parent="Handles/Bottom"]
@@ -122,7 +98,6 @@ custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-mouse_filter = 1
 mouse_default_cursor_shape = 12
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]

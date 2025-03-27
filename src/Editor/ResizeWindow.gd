@@ -26,28 +26,31 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		match state:
 			"drag":
-				position = get_global_mouse_position() + drag_offset
+				position = Vector2( \
+				get_global_mouse_position().x + drag_offset.x, \
+				get_global_mouse_position().y + drag_offset.y - (bar_size * 2))
+				
 			"resize":
 				var x = get_global_mouse_position().x + drag_offset.x
 				var y = get_global_mouse_position().y + drag_offset.y
 				
 				match active_handle.name:
 					"TopLeft":
-						offset_top = y - header_size
+						offset_top = y - header_size - (bar_size * 2) #idk why the bar size
 						offset_left = x
 					"TopRight":
-						offset_top = y - header_size
-						offset_right = x + 4 #no idea why this is 4
+						offset_top = y - header_size - (bar_size * 2)
+						offset_right = x + 4 #4 because of the size of the buttons
 					"BottomLeft":
-						offset_bottom = y + 4
+						offset_bottom = y + 4 - (bar_size * 2) 
 						offset_left = x
 					"BottomRight":
-						offset_bottom = y + 4
+						offset_bottom = y + 4 - (bar_size * 2)
 						offset_right = x + 4
 					"Top":
-						offset_top = y - header_size
+						offset_top = y - header_size - (bar_size * 2)
 					"Bottom":
-						offset_bottom = y + 4
+						offset_bottom = y + 4 - (bar_size * 2)
 					"Left":
 						offset_left = x
 					"Right":

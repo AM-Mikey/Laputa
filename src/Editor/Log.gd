@@ -18,4 +18,4 @@ func lprint(message: String):
 
 func _process(delta):
 	if $VBox.get_child_count() > max_message_count:
-		$VBox.get_child(-1).queue_free()
+		$VBox.get_child(0).queue_free()

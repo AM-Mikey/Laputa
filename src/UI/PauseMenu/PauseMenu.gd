@@ -53,6 +53,3 @@ func _on_Quit_pressed():
 
 func on_viewport_size_changed():
 	size = get_tree().get_root().size / world.resolution_scale
-
-
-

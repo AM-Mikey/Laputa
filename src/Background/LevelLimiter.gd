@@ -16,26 +16,28 @@ enum TileMode {BOTH, HORIZONTAL, VERTICAL, NONE}
 
 var layer_repeating_length := 5000
 var always_tile_far_layer = false #DOES NOT WORK
+var camera: Node
 
 @onready var w = get_tree().get_root().get_node("World")
-@onready var camera = w.get_node("Juniper/PlayerCamera")
 @onready var pb = w.get_node("ParallaxBackground")
 
 
 
 func _ready():
+	setup()
+
+func setup():
 	set_background_resouce(background_resource) #load the resouce on start
 	setup_layers()
 	set_focus()
-	
-	if not camera: #why? we already get camera?
-		camera = get_tree().get_root().get_node_or_null("World/Juniper/PlayerCamera")
+	camera = get_viewport().get_camera_2d()
 	if camera:
-		connect("limit_camera", Callable(camera, "_on_limit_camera"))
-		
-	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
+		connect("limit_camera", Callable(camera, "on_limit_camera"))
+		if camera.name == "EditorCamera":
+			camera.connect("camera_zoom_changed", Callable(self, "on_camera_zoom_changed"))
+	get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 	on_viewport_size_changed()
-
+	
 
 func set_background_resouce(value): #note this goes through inspector on_changed code first, and then does setup_layers, setup_focus from there
 	background_resource = value
@@ -67,9 +69,7 @@ func setup_layers():
 
 		var layer_height = int(texture.get_height() / float(layers))
 		var layer_y = layer_height * layer_index
-		#print(layer_y)
 		var region = Rect2i(0, layer_y, texture.get_width(), layer_height)
-		#print(region)
 		
 		#this cannot be AtlasTexture due to bug https://github.com/godotengine/godot/issues/20472
 		var texture_as_image = texture.get_image()
@@ -87,7 +87,7 @@ func setup_layers():
 		layer.add_child(texture_rect)
 
 
-func set_focus():
+func set_focus(res_scale = w.resolution_scale):
 	var limiter_top = position.y
 	var limiter_one_quarter = position.y + (size.y * 0.25)
 	var limiter_center = position.y + (size.y * 0.5)
@@ -97,15 +97,15 @@ func set_focus():
 	
 	match focus:
 		Focus.TOP:
-			pb.scroll_base_offset.y = limiter_top * w.resolution_scale
+			pb.scroll_base_offset.y = limiter_top * res_scale
 		Focus.ONE_QUARTER:
-			pb.scroll_base_offset.y = (limiter_one_quarter - (texture_layer_height * 0.25)) * w.resolution_scale
+			pb.scroll_base_offset.y = (limiter_one_quarter - (texture_layer_height * 0.25)) * res_scale
 		Focus.CENTER:
-			pb.scroll_base_offset.y = (limiter_center - (texture_layer_height * 0.5)) * w.resolution_scale
+			pb.scroll_base_offset.y = (limiter_center - (texture_layer_height * 0.5)) * res_scale
 		Focus.THREE_QUARTERS:
-			pb.scroll_base_offset.y = (limiter_three_quarters - (texture_layer_height * 0.75)) * w.resolution_scale
+			pb.scroll_base_offset.y = (limiter_three_quarters - (texture_layer_height * 0.75)) * res_scale
 		Focus.BOTTOM:
-			pb.scroll_base_offset.y = (limiter_bottom - texture_layer_height) * w.resolution_scale
+			pb.scroll_base_offset.y = (limiter_bottom - texture_layer_height) * res_scale
 
 
 func set_tile_mode(texture_rect, mode := "auto"): #TODO: add other tile modes
@@ -131,3 +131,6 @@ func set_tile_mode(texture_rect, mode := "auto"): #TODO: add other tile modes
 func on_viewport_size_changed():
 	emit_signal("limit_camera", offset_left, offset_right, offset_top, offset_bottom)
 	set_focus()
+
+func on_camera_zoom_changed():
+	set_focus(camera.zoom.x)

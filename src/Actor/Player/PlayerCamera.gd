@@ -67,7 +67,7 @@ func get_v_dir() -> int:
 	return dir
 
 ### TRIGGERS ###
-func _on_limit_camera(left, right, top, bottom):
+func on_limit_camera(left, right, top, bottom):
 	var window_width = get_window().get_size().x
 	var window_height = get_window().get_size().y
 	
@@ -75,7 +75,7 @@ func _on_limit_camera(left, right, top, bottom):
 		b.free()
 	
 	if window_width > (right - left) * world.resolution_scale:
-		print("WARNING: window width larger than camera limit")
+		#print("WARNING: window width larger than camera limit")
 		var thickness = ((window_width / world.resolution_scale) - (right - left))/2
 		
 		spawn_black_bar("BarLeft", \
@@ -92,7 +92,7 @@ func _on_limit_camera(left, right, top, bottom):
 		limit_right = right
 	
 	if get_window().get_size().y > (bottom - top) * world.resolution_scale:
-		print("WARNING: window height larger than camera limit")
+		#print("WARNING: window height larger than camera limit")
 		var thickness = (window_height / world.resolution_scale - (bottom - top))/2
 		
 		spawn_black_bar("BarTop", \

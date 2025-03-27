@@ -1,16 +1,12 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=8 format=3 uid="uid://bo3uc4mqdw2nk"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_ris4u"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_wom3b"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_6cuym"]
-[ext_resource type="Texture2D" path="res://assets/Background/Mountains.png" id="3_ln0on"]
-[ext_resource type="Resource" path="res://src/Background/Mountains.tres" id="4_64d5n"]
-[ext_resource type="TileSet" path="res://src/Tile/DogtownInterior.tres" id="4_ris4u"]
-[ext_resource type="PackedScene" path="res://src/Effect/Light/SunLight.tscn" id="5_64d5n"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="6_v20vf"]
-[ext_resource type="Script" path="res://src/Tile/DogtownInteriorAnimator.gd" id="7_85c3g"]
-[ext_resource type="Script" path="res://src/Effect/Light/SunLight.gd" id="8_v20vf"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="10_0p40l"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_ris4u"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_wom3b"]
+[ext_resource type="Texture2D" uid="uid://flsl5refgqw0" path="res://assets/Background/Mountains.png" id="3_ln0on"]
+[ext_resource type="TileSet" uid="uid://j4ajqrgeit4t" path="res://src/Tile/DogtownInterior.tres" id="4_ris4u"]
+[ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="5_64d5n"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="6_v20vf"]
+[ext_resource type="Script" uid="uid://bkqwlyui5hbvy" path="res://src/Tile/DogtownInteriorAnimator.gd" id="7_85c3g"]
 
 [node name="DogtownInteriorTesting" type="Node2D"]
 script = ExtResource("1_ris4u")
@@ -19,17 +15,13 @@ music = "shop"
 dialog_json = "res://src/Dialog/Village.json"
 conversation = "cutscene_test"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." instance=ExtResource("2_wom3b")]
+[node name="LevelLimiter" parent="." instance=ExtResource("2_wom3b")]
 offset_top = -256.0
 offset_right = 464.0
-mouse_filter = 2
-script = ExtResource("3_6cuym")
-background_resource = ExtResource("4_64d5n")
 texture = ExtResource("3_ln0on")
 layers = 4
 parallax_near = 1.0
 focus = 4
-tile_mode = 1
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = 1
@@ -54,19 +46,13 @@ layer_3/tile_data = PackedInt32Array(-1048556, 65536, 12, -983020, 65536, 12)
 
 [node name="Triggers" type="Node2D" parent="."]
 
-[node name="SunLight" type="Area2D" parent="." groups=["SunLights"] instance=ExtResource("5_64d5n")]
+[node name="SunLight" parent="." instance=ExtResource("5_64d5n")]
 position = Vector2(35, -198)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_v20vf")
 
 [node name="Spawns" type="Node2D" parent="."]
 
-[node name="SpawnPoint" type="Area2D" parent="Spawns" groups=["SpawnPoints"] instance=ExtResource("6_v20vf")]
+[node name="SpawnPoint" parent="Spawns" instance=ExtResource("6_v20vf")]
 position = Vector2(144, -16)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_0p40l")
 
 [node name="TileAnimator" type="Node2D" parent="."]
 script = ExtResource("7_85c3g")

@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0r8ej4i5vqbw"]
+[gd_scene load_steps=9 format=3 uid="uid://b0r8ej4i5vqbw"]
 
-[ext_resource type="Theme" path="res://src/Editor/Button/TabButtonTheme.tres" id="1"]
 [ext_resource type="Texture2D" uid="uid://cjprmhkfjipnr" path="res://assets/Icon/NPCIcon.png" id="2"]
+[ext_resource type="StyleBox" uid="uid://di3gairwvjkcv" path="res://src/UI/StyleBox/LeatherTabDark.tres" id="2_654eg"]
+[ext_resource type="StyleBox" uid="uid://dk238f8wrq3j6" path="res://src/UI/StyleBox/LeatherTabLight.tres" id="2_co6ds"]
+[ext_resource type="StyleBox" uid="uid://qi65np6jn6mw" path="res://src/UI/StyleBox/LeatherTab.tres" id="2_gancx"]
 [ext_resource type="Script" uid="uid://dyay7cva5xv33" path="res://src/Editor/Button/TabButton.gd" id="3"]
 [ext_resource type="Shader" uid="uid://dero0bty7fsn4" path="res://src/Shader/SimpleRecolor.gdshader" id="4"]
 
@@ -14,14 +16,17 @@ shader = ExtResource("4")
 shader_parameter/color = Color(0.305882, 0.129412, 0.0823529, 1)
 
 [node name="TabButton" type="MarginContainer"]
-custom_minimum_size = Vector2(24, 32)
+custom_minimum_size = Vector2(32, 24)
 offset_right = 24.0
-offset_bottom = 32.0
+offset_bottom = 24.0
+size_flags_vertical = 8
 script = ExtResource("3")
 
 [node name="TabButton" type="Button" parent="."]
 layout_mode = 2
-theme = ExtResource("1")
+theme_override_styles/hover = ExtResource("2_co6ds")
+theme_override_styles/pressed = ExtResource("2_654eg")
+theme_override_styles/normal = ExtResource("2_gancx")
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 2

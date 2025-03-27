@@ -1726,12 +1726,12 @@ script = ExtResource("13")
 
 [node name="EffectPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_acjyt")
+&"": SubResource("AnimationLibrary_acjyt")
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_oo325")
+&"": SubResource("AnimationLibrary_oo325")
 }
 
 [node name="BulletOrigin" type="Marker2D" parent="."]

@@ -12,6 +12,7 @@ fix shoot down on non-ssp
 -bug not triggering fall on fall
 	>when holding jump
 -wall pushing/standing anim
+-stop ear flow animation when indoors
 
 --- tilemap ---
 -fix ssp trigger on tilemap
@@ -101,23 +102,50 @@ March 6 2025
 - move old levels
 
 --- editor ---
-
 -consider adding ability to edit tileset not on current level
--after moving entity unable to use tile tool
--editor enter and exit signals
--switch cursor to arrow on exit
--when tile is active, always make it active on editor when theres nothing else selected
--inspector window scale better
+-switch cursor to brush on start
+-set default positions/sizes for editor panels
 
 --- animated tileset ---
 
 -make sure to account for remapping
 -new animation node per tileset, autoload it in on level
--use files for organization
 
 --- ui --- 
 clean up ui asset files
 
 
 --- background ---
-done!?
+having a background smaller than camera size will reset to another camera size (square? taking horz?)
+
+
+--- autotile ---
+
+custom data for autotile group: i.e. dirt
+custom data for autotile position
+check if tile adjascent in same group
+
+for example: if no dirt beneath this tile, then set this tile to one of a few "bottom" tiles
+
+--- tile ---
+fix multi_erase defaulting on
+multi erase issues when off
+drawing box containing non-tiles will actually draw those non tiles instead of not doing so
+
+
+
+
+
+
+
+
+
+
+Dear Anne.
+I know this is not directly your choice but the expenses for this last visit are ludicrous. I cannot afford to pay this, even just for a yearly checkup. Why are Froedtert charging 3x the average price for a 99213 visit? 
+
+Froedtert Charged:
+260$ for a 99213 which should have cost 89$
+88$ for a G2211 which should have cost 16$
+273$ for Assay of Total Estradiol which should have cost 168$ in Wisconsin
+263$ for an Assay of Total Testosterone, which should have cost 152$ in Wisconsin

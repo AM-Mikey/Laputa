@@ -22,7 +22,7 @@ func focus_player():
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", player_pos, 4.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-func _on_limit_camera(left, right, top, bottom):
+func on_limit_camera(left, right, top, bottom):
 	var bars = get_tree().get_nodes_in_group("BlackBars")
 	for b in bars:
 		b.free()

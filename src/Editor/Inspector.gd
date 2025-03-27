@@ -32,15 +32,15 @@ func on_selected(selection, selection_type):
 		if active.has_method("on_editor_select"): active.on_editor_select()
 	display_data()
 	
-	match active_type:
-		"spawn_point":
-			editor.set_tool("entity", "noplace")
-		#"actor_spawn": this just makes it so we cant place enemies. weird
-			#editor.set_tool("entity", "noplace")
-		"light":
-			editor.set_tool("entity", "noplace")
-		_:
-			pass
+	#match active_type:
+		##"spawn_point":
+			##editor.set_tool("entity", "noplace")
+		###"actor_spawn": this just makes it so we cant place enemies. weird
+			###editor.set_tool("entity", "noplace")
+		##"light":
+			##editor.set_tool("entity", "noplace")
+		#_:
+			#pass
 
 func on_deselected():
 	if active:
@@ -49,6 +49,8 @@ func on_deselected():
 	active_type = ""
 	active_property = ""
 	clear_data()
+	if editor.get_node("Main/Win/Tab").current_tab == 0: #tiles
+		on_selected(editor.w.current_level.get_node("TileMap"), "tile_map")
 	
 
 ### DISPLAY DATA

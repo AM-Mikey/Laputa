@@ -78,16 +78,16 @@ func unhover():
 
 func _input(event):
 	if event.is_action_pressed("editor_lmb") and hovered_button:
-		print("started selecting tile: ", hovered_button.tile_set_position)
+		#print("started selecting tile: ", hovered_button.tile_set_position)
 		selected_tile_region = Rect2i(hovered_button.tile_set_position, Vector2(16, 16))
 		editor.brush = null
-		print("cleared brush")
+		#print("cleared brush")
 
 
 	if event.is_action_released("editor_lmb"):
 		await get_tree().process_frame
 		if hovered_button:
-			print("ended selecting tile: ", hovered_button.tile_set_position)
+			#print("ended selecting tile: ", hovered_button.tile_set_position)
 			var start_position = selected_tile_region.position
 			var end_position = hovered_button.tile_set_position
 			

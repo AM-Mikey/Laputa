@@ -4,7 +4,7 @@ extends Control
 #signal prop_selected(prop)
 #signal entity_selected(entity, entity_type)
 signal level_selected(level)
-signal tile_map_selected(tile_map)
+#signal tile_map_selected(tile_map)
 
 signal level_saved()
 signal tab_changed(tab_name)
@@ -66,7 +66,7 @@ var tile_map_cursor
 func _ready():
 	var _err = get_tree().root.connect("size_changed", Callable(self, "_on_viewport_size_changed"))
 	_on_viewport_size_changed()
-	connect("tile_map_selected", Callable(inspector, "on_selected").bind("tile_map"))
+	#connect("tile_map_selected", Callable(inspector, "on_selected").bind("tile_map"))
 	connect("level_selected", Callable(inspector, "on_selected").bind("level"))
 	el.add_child(EDITOR_CAMERA.instantiate())
 	
@@ -105,6 +105,7 @@ func setup_level(): #TODO: clear undo history	TODO: make this an editor_enter si
 		if t.has_node("TriggerController"):
 			t.get_node("TriggerController").enable()
 	el.get_node("EditorCamera").make_current()
+	w.current_level.get_node("LevelLimiter").setup() #must be after camera setup
 	
 
 #func set_entities_pickable(pickable = true): #TODO: this is still used, move away from this with the new dummy actorspawns
@@ -138,13 +139,17 @@ func load_editor_windows():
 func exit():	#TODO: make this an editor_exit signal
 	inspector.exit()
 	w.current_level.get_node("TileAnimator").editor_exit()
+	clear_tile_map_cursor()
 	free_previews()
 	editor_level_limiter.queue_free()
 	el.get_node("EditorCamera").queue_free()
 	ui.add_child(HUD.instantiate())
 	ui.visible = true
+	mc.display("arrow")
 	w.get_node("Juniper").enable()
 	w.get_node("Juniper/PlayerCamera").enabled = true
+	w.get_node("Juniper/PlayerCamera").make_current()
+	w.current_level.get_node("LevelLimiter").setup() #must be after camera setup
 	#set_entities_pickable(false)
 	w.set_debug_visible(false)
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
@@ -356,14 +361,18 @@ func do_generic_input(event):
 	var grid_pos = get_cell(mouse_pos)
 	
 	#grabbing entity
-	if event.is_action_pressed("editor_rmb") and inspector.active and inspector.active_type != "background":
+	if event.is_action_pressed("editor_rmb") and inspector.active:
+		match inspector.active_type:
+			"background", "tile_map": return
 		pre_grab_tool = active_tool
 		pre_grab_subtool = subtool
 		set_tool("entity", "grab")
 		grab_offset = inspector.active.global_position - mouse_pos
 
 	#releasing entity
-	if event.is_action_released("editor_rmb") and inspector.active and inspector.active_type != "background":
+	if event.is_action_released("editor_rmb") and inspector.active:
+		match inspector.active_type:
+			"background", "tile_map": return
 		set_tool(pre_grab_tool, pre_grab_subtool)
 
 	#moving entity
@@ -894,13 +903,17 @@ func on_tab_selected(tab_index): #tab buttons
 func on_tab_changed(tab):
 	var tab_name = $Main/Win/Tab.get_child(tab).name
 	emit_signal("tab_changed", tab_name)
+	
+	for c in $Main/Win/TabButtons/VBox.get_children():
+		c.size_flags_vertical = Control.SIZE_SHRINK_END
+	$Main/Win/TabButtons/VBox.get_child(tab).size_flags_vertical = Control.SIZE_FILL
 	clear_tile_map_cursor()
+	
 	match tab_name:
 		"Tiles": 
 			set_tool("tile")
 			#set_entities_pickable(false)
 			inspector.on_deselected()
-			emit_signal("tile_map_selected", w.current_level.get_node("TileMap"))
 		"TileSet":
 			set_tool("tile_set")
 		"Levels":

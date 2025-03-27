@@ -257,27 +257,6 @@ func set_cursor(region: Rect2):
 #	get_node(collision_cursor).rect_size = Vector2(x_size, y_size) 
 
 
-### MISC ###
-func next_animation_frame(): #pack it up and replace with sprite sheet
-	var tile_map = w.current_level.get_node("TileMap")
-	if !tile_map.tile_set.has_source(1):
-		return
-	var max_frame = tile_map.tile_set.get_source_count() - 1
-	if current_frame == max_frame: current_frame = 0
-	else: current_frame += 1
-
-	var used_cells = []
-	for layer in 4:
-		for used_cell_pos in tile_map.get_used_cells(layer):
-			var atlas_coords = tile_map.get_cell_atlas_coords(layer, used_cell_pos)
-			var is_animated = tile_map.tile_set.get_source(1).has_tile(atlas_coords) #check for a second frame
-			var has_next_frame = tile_map.tile_set.get_source(current_frame).has_tile(atlas_coords) #check for next frame
-			if is_animated and has_next_frame:
-				tile_map.set_cell(layer, used_cell_pos, current_frame, atlas_coords)
-			elif is_animated:
-				tile_map.set_cell(layer, used_cell_pos, 0, atlas_coords)
-
-#
 #### COLLISION
 #
 #func on_brush_selected(brush):
@@ -503,9 +482,3 @@ func _on_Swap_toggled(toggled_on):
 	active_normal_mode = "swap"
 	remap_button.icon = tile_set_remap_false
 	swap_button.icon = tile_set_swap_true
-
-
-
-
-func _on_Animation_toggled(toggled_on):
-	next_animation_frame()

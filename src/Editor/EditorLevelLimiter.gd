@@ -42,25 +42,25 @@ func _input(event):
 					offset_left = x
 				"TopRight":
 					offset_top = y
-					offset_right = x
+					offset_right = x + 16
 				"BottomLeft":
-					offset_bottom = y
+					offset_bottom = y + 16
 					offset_left = x
 				"BottomRight":
-					offset_bottom = y
-					offset_right = x
+					offset_bottom = y + 16
+					offset_right = x + 16
 				"Top":
 					offset_top = y
 				"Bottom":
-					offset_bottom = y
+					offset_bottom = y + 16
 				"Left":
 					offset_left = x
 				"Right":
-					offset_right = x
+					offset_right = x + 16
 			
 			level_limiter.global_position = $Margin/LevelRect.global_position
 			level_limiter.size = $Margin/LevelRect.size
-			level_limiter.on_viewport_size_changed()
+			level_limiter.on_camera_zoom_changed()
 		
 		if event.is_action_released("editor_lmb"):
 			state = "idle"

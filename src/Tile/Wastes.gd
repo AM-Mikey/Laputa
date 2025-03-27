@@ -35,7 +35,7 @@ func do_auto_tile(start_coords, start_layer):
 			
 			for i in active_tile_map_cells:
 				pattern_backdirt(start_layer, i)
-			print("a: ", active_tile_map_cells)
+			#print("a: ", active_tile_map_cells)
 			active_tile_map_cells = []
 
 
@@ -88,7 +88,8 @@ func pattern_backdirt(layer, coords):
 	var new_atlas_coords = dict["c"].pick_random() #default to center
 	match non_connections:
 		[N,S,W,E]:
-			print("single")
+			pass
+			#print("single")
 		[N,W]:
 			new_atlas_coords = dict["nw"].pick_random()
 		[N,E]:

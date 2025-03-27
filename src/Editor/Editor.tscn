@@ -44,14 +44,15 @@ layout_mode = 2
 
 [node name="Main" type="CanvasGroup" parent="."]
 self_modulate = Color(1, 1, 1, 0.282353)
-position = Vector2(0, 24)
+position = Vector2(0, 32)
 
 [node name="Win" parent="Main" instance=ExtResource("3")]
 use_parent_material = true
+custom_minimum_size = Vector2(248, 0)
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_right = 250.0
+offset_right = 248.0
 offset_bottom = 416.0
 mouse_filter = 1
 
@@ -110,20 +111,19 @@ script = ExtResource("12")
 
 [node name="VBox" type="HBoxContainer" parent="Main/Win/TabButtons"]
 layout_mode = 0
-offset_top = -24.0
+offset_top = -32.0
 offset_right = 256.0
-offset_bottom = 16.0
 mouse_filter = 2
 
 [node name="Secondary" type="CanvasGroup" parent="."]
-position = Vector2(0, 24)
+position = Vector2(0, 32)
 
 [node name="Win" parent="Secondary" instance=ExtResource("3")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 761.0
-offset_right = 968.0
+offset_right = 966.0
 offset_bottom = 440.0
 
 [node name="Inspector" parent="Secondary/Win" instance=ExtResource("7")]

@@ -19,7 +19,7 @@ func _ready():
 	#position = Vector2.ZERO
 
 
-func _on_limit_camera(left, right, top, bottom):
+func on_limit_camera(left, right, top, bottom):
 	var bars = get_tree().get_nodes_in_group("BlackBars")
 	for b in bars:
 		b.free()
