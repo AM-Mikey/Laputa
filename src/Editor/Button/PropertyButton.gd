@@ -31,7 +31,7 @@ func _ready():
 		"float", Variant.Type.TYPE_FLOAT:
 			$HBox/HBox/String.visible = true
 			if property_value != null:
-				$HBox/HBox/String.text = str(property_value)
+				$HBox/HBox/String.text = "%.3f" % property_value
 			
 		"load":
 			$HBox/HBox/Load.visible = true
@@ -47,8 +47,8 @@ func _ready():
 			$HBox/HBox/Vector2X.visible = true
 			$HBox/HBox/Vector2Y.visible = true
 			if property_value != null:
-				$HBox/HBox/Vector2X.text = str(property_value.x)
-				$HBox/HBox/Vector2Y.text = str(property_value.y)
+				$HBox/HBox/Vector2X.text = "%.3f" % property_value.x
+				$HBox/HBox/Vector2Y.text = "%.3f" % property_value.y
 				
 		_:
 			$HBox/HBox/String.visible = true

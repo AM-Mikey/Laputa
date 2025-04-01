@@ -20,7 +20,6 @@ offset_top = -256.0
 offset_right = 464.0
 texture = ExtResource("3_ln0on")
 layers = 4
-parallax_near = 1.0
 focus = 4
 
 [node name="TileMap" type="TileMap" parent="."]

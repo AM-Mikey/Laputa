@@ -131,6 +131,7 @@ for example: if no dirt beneath this tile, then set this tile to one of a few "b
 fix multi_erase defaulting on
 multi erase issues when off
 drawing box containing non-tiles will actually draw those non tiles instead of not doing so
+clicking outside tileset bounds crashes
 
 
 
@@ -140,12 +141,6 @@ drawing box containing non-tiles will actually draw those non tiles instead of n
 
 
 
+todo:
 
-Dear Anne.
-I know this is not directly your choice but the expenses for this last visit are ludicrous. I cannot afford to pay this, even just for a yearly checkup. Why are Froedtert charging 3x the average price for a 99213 visit? 
-
-Froedtert Charged:
-260$ for a 99213 which should have cost 89$
-88$ for a G2211 which should have cost 16$
-273$ for Assay of Total Estradiol which should have cost 168$ in Wisconsin
-263$ for an Assay of Total Testosterone, which should have cost 152$ in Wisconsin
+cleanup old background resources

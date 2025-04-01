@@ -4,18 +4,18 @@ signal limit_camera(left, right, top, bottom)
 
 enum Focus {TOP, ONE_QUARTER, CENTER, THREE_QUARTERS, BOTTOM}
 enum TileMode {BOTH, HORIZONTAL, VERTICAL, NONE}
+enum FarBackTileMode {DEFAULT, BOTH, HORIZONTAL, VERTICAL, NONE}
 
 @export var background_resource: Background:
 	set = set_background_resouce
 @export var texture: CompressedTexture2D
 @export var layers := 1
-@export var parallax_near := 0.8
-@export var parallax_far := 0.0
+@export var layer_scales: Array
 @export var focus: Focus
 @export var tile_mode: TileMode
+@export var far_back_tile_mode: FarBackTileMode
 
 var layer_repeating_length := 5000
-var always_tile_far_layer = false #DOES NOT WORK
 var camera: Node
 
 @onready var w = get_tree().get_root().get_node("World")
@@ -43,8 +43,7 @@ func set_background_resouce(value): #note this goes through inspector on_changed
 	background_resource = value
 	texture = value.texture
 	layers = value.layers
-	parallax_near = value.parallax_near
-	parallax_far = value.parallax_far
+	layer_scales = value.layer_scales
 	focus = value.focus
 	tile_mode = value.tile_mode
 
@@ -56,16 +55,12 @@ func setup_layers():
 	for layer_index in layers:
 		var layer = ParallaxLayer.new()
 		pb.add_child(layer)
-		
-		var layer_scale_step = (parallax_near - parallax_far) / (layers - 1) if layers != 1 else 1 #if 1 layer, set to 1
-		var motion_scale = (layer_scale_step * layer_index) + parallax_far
-		layer.motion_scale = Vector2(motion_scale, motion_scale)
+		layer.motion_scale = layer_scales[layer_index]
 
 		var texture_rect = TextureRect.new()
 		texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		texture_rect.stretch_mode = TextureRect.STRETCH_TILE
 		texture_rect.mouse_filter = MOUSE_FILTER_IGNORE
-
 
 		var layer_height = int(texture.get_height() / float(layers))
 		var layer_y = layer_height * layer_index
@@ -79,8 +74,18 @@ func setup_layers():
 		#clipped_texture.flags = 0 #turn off filtering #TODO: turn back on if backgrounds are blurry
 		texture_rect.texture = clipped_texture
 		
-		if layer_index == 0 and always_tile_far_layer:
-			set_tile_mode(texture_rect, "both")
+		if layer_index == 0:
+			match far_back_tile_mode:
+				FarBackTileMode.DEFAULT:
+					set_tile_mode(texture_rect)
+				FarBackTileMode.HORIZONTAL:
+					set_tile_mode(texture_rect, TileMode.HORIZONTAL)
+				FarBackTileMode.VERTICAL:
+					set_tile_mode(texture_rect, TileMode.VERTICAL)
+				FarBackTileMode.BOTH:
+					set_tile_mode(texture_rect, TileMode.BOTH)
+				FarBackTileMode.NONE:
+					set_tile_mode(texture_rect, TileMode.NONE)
 		else:
 			set_tile_mode(texture_rect)
 		
@@ -88,6 +93,9 @@ func setup_layers():
 
 
 func set_focus(res_scale = w.resolution_scale):
+	if camera:
+		if camera.name == "EditorCamera":
+			res_scale = camera.zoom.x
 	var limiter_top = position.y
 	var limiter_one_quarter = position.y + (size.y * 0.25)
 	var limiter_center = position.y + (size.y * 0.5)
@@ -108,29 +116,24 @@ func set_focus(res_scale = w.resolution_scale):
 			pb.scroll_base_offset.y = (limiter_bottom - texture_layer_height) * res_scale
 
 
-func set_tile_mode(texture_rect, mode := "auto"): #TODO: add other tile modes
+func set_tile_mode(texture_rect, mode = tile_mode):
 	match mode:
-		"auto":
-			match tile_mode:
-				TileMode.HORIZONTAL:
-					texture_rect.size.x = layer_repeating_length
-					texture_rect.size.y = texture_rect.texture.get_height()
-				TileMode.VERTICAL:
-					texture_rect.size.x = texture_rect.texture.get_width()
-					texture_rect.size.y = layer_repeating_length
-				TileMode.BOTH:
-					texture_rect.size.x = layer_repeating_length
-					texture_rect.size.y = layer_repeating_length
-				TileMode.NONE:
-					texture_rect.size.x = texture_rect.texture.get_width()
-					texture_rect.size.y = texture_rect.texture.get_height()
-		"both": #for back layer
+		TileMode.HORIZONTAL:
+			texture_rect.size.x = layer_repeating_length
+			texture_rect.size.y = texture_rect.texture.get_height()
+		TileMode.VERTICAL:
+			texture_rect.size.x = texture_rect.texture.get_width()
+			texture_rect.size.y = layer_repeating_length
+		TileMode.BOTH:
 			texture_rect.size.x = layer_repeating_length
 			texture_rect.size.y = layer_repeating_length
+		TileMode.NONE:
+			texture_rect.size.x = texture_rect.texture.get_width()
+			texture_rect.size.y = texture_rect.texture.get_height()
 
 func on_viewport_size_changed():
 	emit_signal("limit_camera", offset_left, offset_right, offset_top, offset_bottom)
 	set_focus()
 
 func on_camera_zoom_changed():
-	set_focus(camera.zoom.x)
+	set_focus()

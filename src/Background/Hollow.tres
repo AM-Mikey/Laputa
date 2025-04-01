@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Background" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/Background/Background.gd" id="1_mohb8"]
+[ext_resource type="Texture2D" path="res://assets/Background/Hollow.png" id="2_jtubr"]
+
+[resource]
+script = ExtResource("1_mohb8")
+texture = ExtResource("2_jtubr")
+layers = 3
+layer_scales = [Vector2(0, 0), Vector2(0.8, 0.8), Vector2(0.9, 0.9), Vector2(0.9, 0.9)]
+focus = 2
+tile_mode = 3
+far_back_tile_mode = 1

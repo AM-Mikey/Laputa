@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Background" load_steps=3 format=3 uid="uid://rgjc0w6hdd8h"]
+[gd_resource type="Resource" script_class="Background" load_steps=3 format=3 uid="uid://c8wjrm1mo1o02"]
 
 [ext_resource type="Script" uid="uid://ceqy767o44qkp" path="res://src/Background/Background.gd" id="1_avmm8"]
 [ext_resource type="Texture2D" uid="uid://flsl5refgqw0" path="res://assets/Background/Mountains.png" id="2_78o2l"]
@@ -7,8 +7,8 @@
 script = ExtResource("1_avmm8")
 texture = ExtResource("2_78o2l")
 layers = 4
-parallax_near = 1.0
-parallax_far = 0.0
-focus = 4
+layer_scales = [Vector2(0, 0), Vector2(0.1, 0.1), Vector2(0.7, 0.7), Vector2(0.9, 0.9)]
+focus = 2
 tile_mode = 1
+far_back_tile_mode = 0
 metadata/_custom_type_script = "uid://ceqy767o44qkp"

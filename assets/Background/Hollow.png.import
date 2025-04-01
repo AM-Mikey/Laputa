@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t1rh38gnefra"
-path="res://.godot/imported/TestBG2.png-2b64c7b92e21f1cf607d0f79cadb4871.ctex"
+uid="uid://cqivfbt1vri1k"
+path="res://.godot/imported/Hollow.png-eeb5f8051aef9becbb7e2f1d46109966.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Background/TestBG2.png"
-dest_files=["res://.godot/imported/TestBG2.png-2b64c7b92e21f1cf607d0f79cadb4871.ctex"]
+source_file="res://assets/Background/Hollow.png"
+dest_files=["res://.godot/imported/Hollow.png-eeb5f8051aef9becbb7e2f1d46109966.ctex"]
 
 [params]
 

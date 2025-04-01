@@ -23,7 +23,6 @@ offset_right = 704.0
 offset_bottom = 192.0
 texture = ExtResource("4_ec3uo")
 layers = 4
-parallax_near = 1.0
 focus = 2
 tile_mode = 0
 

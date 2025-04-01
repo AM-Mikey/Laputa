@@ -66,10 +66,11 @@ func display_data():
 			create_button("background_resource", limiter.background_resource.resource_path, "load")
 			create_button("texture", limiter.texture.resource_path, "load")
 			create_button("layers", limiter.layers, "int")
-			create_button("parallax_near", limiter.parallax_near, "float")
-			create_button("parallax_far", limiter.parallax_far, "float")
+			for l in limiter.layers:
+				create_button("layer_scales_%s"%l, limiter.layer_scales[l], "vector2")
 			create_button("focus", limiter.focus, "enum", limiter.Focus.keys())
 			create_button("tile_mode", limiter.tile_mode, "enum", limiter.TileMode.keys())
+			create_button("far_back_tile_mode", limiter.far_back_tile_mode, "enum", limiter.FarBackTileMode.keys())
 			create_save_button("background")
 		"actor_spawn":
 			for p in active.properties:
@@ -213,19 +214,23 @@ func on_property_changed(property_name, property_value):
 		"background":
 			match property_name:
 				"background_resource":
-					active.level_limiter.set(property_name, load(property_value))
+					active.level_limiter.set(property_name, ResourceLoader.load(property_value, "", 2)) #don't pull from cache
 					active.level_limiter.setup_layers()
 					active.level_limiter.set_focus()
 				"texture":
 					active.level_limiter.set(property_name, load(property_value))
 					active.level_limiter.setup_layers()
 					active.level_limiter.set_focus()
-				"offset_left", "offset_top", "offset_right", "offset_bottom":
-					pass
-				"layers", "parallax_near", "parallax_far", "focus", "tile_mode":
+				"layers", "focus", "tile_mode", "far_back_tile_mode":
 					active.level_limiter.set(property_name, property_value)
 					active.level_limiter.setup_layers()
 					active.level_limiter.set_focus()
+			if property_name.begins_with("layer_scales_"):
+				var layer_index = int(property_name.trim_prefix("layer_scales_"))
+				active.level_limiter.layer_scales[layer_index] = property_value
+				active.level_limiter.setup_layers()
+				active.level_limiter.set_focus()
+					
 		"actor_spawn":
 			active.properties[property_name][0] = property_value
 			#active.set(properties[property_name][0], property_value/
@@ -275,11 +280,11 @@ func _on_SaveDialog_file_selected(path: String):
 		var ll = editor.w.current_level.get_node("LevelLimiter")
 		new.texture = ll.texture
 		new.layers = ll.layers
-		new.parallax_near = ll.parallax_near
-		new.parallax_far = ll.parallax_far
+		new.layer_scales = ll.layer_scales
 		new.focus = ll.focus
 		new.tile_mode = ll.tile_mode
+		new.far_back_tile_mode = ll.far_back_tile_mode
 		ResourceSaver.save(new, path)
-		on_property_changed("background_resource", path)
 		editor.log.lprint(str("Saved Current Background Resource to: ", path))
 		print("Saved Current Background Resource to: ", path)
+		on_property_changed("background_resource", path)
