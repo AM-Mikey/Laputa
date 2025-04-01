@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Background" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/Background/Background.gd" id="1_e7r84"]
+[ext_resource type="Texture2D" path="res://assets/Background/TestBG2.png" id="2_38dbc"]
+
+[resource]
+script = ExtResource("1_e7r84")
+texture = ExtResource("2_38dbc")
+layers = 3
+parallax_near = 1.0
+parallax_far = 0.0
+focus = 4
+tile_mode = 1
