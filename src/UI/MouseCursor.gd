@@ -22,6 +22,8 @@ func _ready():
 	display("hsize", Input.CURSOR_HSIZE)
 	display("bdiagsize", Input.CURSOR_BDIAGSIZE)
 	display("fdiagsize", Input.CURSOR_FDIAGSIZE)
+	display("grabclosed", Input.CURSOR_DRAG)
+	display("grabopen", Input.CURSOR_MOVE)
 
 func display(string, shape = Input.CURSOR_ARROW):
 	current_cursor = string

@@ -16,6 +16,8 @@ func _ready():
 	$PanelActive.visible = active
 
 
+### SIGNALS ###
+
 func _on_VisButton_toggled(button_pressed):
 	if button_pressed:
 		tile_map.set_layer_modulate(layer_id, Color.TRANSPARENT)
@@ -27,13 +29,12 @@ func _on_EditButton_toggled(button_pressed):
 
 
 func _on_LayerButton_pressed():
-	activate()
 	emit_signal("layer_changed", layer_id)
 
-
-func activate():
-	for l in get_tree().get_nodes_in_group("LayerButtons"):
-		l.get_node("PanelActive").visible = false
-		l.active = false
-	active = true
-	$PanelActive.visible = true
+func on_layer_updated(active_tile_map_layer): #from editor, after changing layer
+	if active_tile_map_layer == layer_id:
+		active = true
+		$PanelActive.visible = true
+	else:
+		active = false
+		$PanelActive.visible = false

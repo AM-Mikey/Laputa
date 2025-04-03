@@ -16,7 +16,7 @@ shader = ExtResource("4")
 shader_parameter/color = Color(0.305882, 0.129412, 0.0823529, 1)
 
 [node name="TabButton" type="MarginContainer"]
-custom_minimum_size = Vector2(32, 24)
+custom_minimum_size = Vector2(24, 24)
 offset_right = 24.0
 offset_bottom = 24.0
 size_flags_vertical = 8

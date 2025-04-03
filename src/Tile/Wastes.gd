@@ -21,7 +21,6 @@ var active_tile_map_cells = []
 
 
 func do_auto_tile(start_coords, start_layer):
-	print("doing auto tile")
 	var data = tile_map.get_cell_tile_data(start_layer, start_coords)
 	var auto_tile_group = data.get_custom_data("auto_tile_group")
 	if auto_tile_group != "":

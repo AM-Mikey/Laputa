@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bg715nunngytq"]
+[gd_scene load_steps=12 format=3 uid="uid://bg715nunngytq"]
 
 [ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="1"]
 [ext_resource type="Script" uid="uid://ce2moo6lnjdkn" path="res://src/Editor/Tiles.gd" id="2"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://cict30vmfp74a" path="res://assets/Editor/FlipH.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://cstc7bnjjx6t3" path="res://assets/Editor/FlipV.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://b55osbff5svfn" path="res://assets/Editor/RotateC.png" id="8"]
-[ext_resource type="Texture2D" uid="uid://dsi2jppwl0wlt" path="res://assets/Editor/AutoLayerFalse.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://wf0dhqrmos7c" path="res://assets/Editor/MultiEraseFalse.png" id="10"]
 [ext_resource type="Texture2D" uid="uid://ymuckto7044j" path="res://assets/Editor/AutoTileFalse.png" id="11"]
 [ext_resource type="StyleBox" uid="uid://85vca5s565c4" path="res://src/UI/StyleBox/GridRoundInset.tres" id="11_ibnax"]
@@ -36,13 +35,6 @@ text = "Tiles"
 [node name="HBox" type="HBoxContainer" parent="VBox"]
 layout_mode = 2
 mouse_filter = 2
-
-[node name="AutoLayer" type="Button" parent="VBox/HBox"]
-visible = false
-layout_mode = 2
-toggle_mode = true
-text = "OBSOLETE"
-icon = ExtResource("9")
 
 [node name="MultiErase" type="Button" parent="VBox/HBox"]
 layout_mode = 2
@@ -99,7 +91,7 @@ theme_override_styles/panel = ExtResource("11_ibnax")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-mouse_filter = 2
+mouse_filter = 0
 theme_override_constants/separation = 0
 
 [node name="Control" type="Control" parent="VBox/Scroll"]
@@ -113,7 +105,6 @@ layout_mode = 0
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1")
 
-[connection signal="toggled" from="VBox/HBox/AutoLayer" to="." method="_on_AutoLayer_toggled"]
 [connection signal="toggled" from="VBox/HBox/MultiErase" to="." method="_on_MultiErase_toggled"]
 [connection signal="toggled" from="VBox/HBox/AutoTile" to="." method="_on_AutoTile_toggled"]
 [connection signal="pressed" from="VBox/HBox/Mode" to="." method="_on_Mode_pressed"]

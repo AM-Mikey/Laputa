@@ -66,6 +66,7 @@ custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_default_cursor_shape = 13
 
 [node name="Right" type="TextureButton" parent="Handles/Mid"]
 custom_minimum_size = Vector2(4, 0)

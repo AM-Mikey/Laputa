@@ -151,6 +151,7 @@ func create_layer_button(layer_id):
 	button.tile_map = editor.tile_map
 	$Margin/VBox/Scroll/VBox.add_child(button)
 	button.connect("layer_changed", Callable(editor, "on_layer_changed"))
+	editor.connect("layer_updated", Callable(button, "on_layer_updated"))
 
 func create_save_button(save_target):
 	var button = SAVE_BUTTON.instantiate()

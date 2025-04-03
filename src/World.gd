@@ -118,12 +118,6 @@ func _input(event):
 		else: 
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
-	if event.is_action_pressed("window_recording_size"):
-		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_MAXIMIZED:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		get_window().size = Vector2i(960, 540)
-		get_window().position = Vector2i(0,0)
-
 ### LEVEL CHANGE ###
 
 func on_level_change(level_path, door_index):

@@ -22,8 +22,6 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 480.0
-offset_bottom = 242.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -32,8 +30,8 @@ script = ExtResource("2")
 
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_right = 960.0
-offset_bottom = 512.0
+offset_right = 1280.0
+offset_bottom = 720.0
 mouse_filter = 2
 
 [node name="Tooltip" parent="Margin" instance=ExtResource("13")]
@@ -42,17 +40,48 @@ layout_mode = 2
 [node name="Log" parent="Margin" instance=ExtResource("4_vdv4f")]
 layout_mode = 2
 
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Spacer" type="Control" parent="Margin/VBox"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBox" type="HBoxContainer" parent="Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="MainSizeRef" type="Control" parent="Margin/VBox/HBox"]
+custom_minimum_size = Vector2(205, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+mouse_filter = 2
+
+[node name="SecondarySizeRef" type="Control" parent="Margin/VBox/HBox"]
+custom_minimum_size = Vector2(205, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+mouse_filter = 2
+
+[node name="Spacer2" type="Control" parent="Margin/VBox"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+mouse_filter = 2
+
 [node name="Main" type="CanvasGroup" parent="."]
 self_modulate = Color(1, 1, 1, 0.282353)
 position = Vector2(0, 32)
 
 [node name="Win" parent="Main" instance=ExtResource("3")]
 use_parent_material = true
-custom_minimum_size = Vector2(248, 0)
+custom_minimum_size = Vector2(208, 0)
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_right = 248.0
+offset_right = 192.0
 offset_bottom = 416.0
 mouse_filter = 1
 
@@ -110,10 +139,13 @@ mouse_filter = 2
 script = ExtResource("12")
 
 [node name="VBox" type="HBoxContainer" parent="Main/Win/TabButtons"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
 offset_top = -32.0
-offset_right = 256.0
+grow_horizontal = 2
 mouse_filter = 2
+alignment = 1
 
 [node name="Secondary" type="CanvasGroup" parent="."]
 position = Vector2(0, 32)

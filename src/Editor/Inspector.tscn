@@ -19,7 +19,7 @@ mouse_filter = 2
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
+theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
@@ -29,8 +29,10 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Margin/VBox"]
 layout_mode = 2
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_colors/font_color = Color(0.878431, 0.784314, 0.345098, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
 
 [node name="Scroll" type="ScrollContainer" parent="Margin/VBox"]
 layout_mode = 2

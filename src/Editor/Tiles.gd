@@ -5,8 +5,6 @@ signal tile_transform_updated(tile_rotation_degrees, tile_scale_vector)
 
 var icon = "res://assets/Icon/TileSetIcon.png"
 
-var auto_layer_true = load("res://assets/Editor/AutoLayerTrue.png")
-var auto_layer_false = load("res://assets/Editor/AutoLayerFalse.png")
 var multi_erase_true = load("res://assets/Editor/MultiEraseTrue.png")
 var multi_erase_false = load("res://assets/Editor/MultiEraseFalse.png")
 var auto_tile_true = load("res://assets/Editor/AutoTileTrue.png")
@@ -19,13 +17,11 @@ var columns: int
 var rows: int
 
 var hovered_button
-var selected_tile_region := Rect2i(0, 0, 16, 16) #in texture space
-#var selected_tiles = [] #2D array
+var brush_region := Rect2i(0, 0, 16, 16) #in texture space
 var tile_rotation_degrees: float = 0
 var tile_scale_vector := Vector2(1,1)
 
 #tooltip discriptions
-var auto_layer_disc = "Auto-Select Drawing Layer"
 var multi_erase_disc = "Erase on All Layers"
 var auto_tile_disc = "Autotile"
 var mode_disc = "Mode"
@@ -36,7 +32,6 @@ var mode_disc = "Mode"
 
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
 @onready var tile_master = editor.get_node("TileMaster")
-@onready var auto_layer = $VBox/HBox/AutoLayer
 @onready var multi_erase = $VBox/HBox/MultiErase
 @onready var auto_tile = $VBox/HBox/AutoTile
 @onready var mode = $VBox/HBox/Mode
@@ -47,11 +42,9 @@ func setup_tiles():
 	tile_master.setup_tile_buttons(self, buttons)
 
 func setup_options(): #AutoLayer, Mode, Etc... TODO: use this if you need to set up defaults
-	auto_layer.button_pressed = editor.auto_layer
 	multi_erase.button_pressed = editor.multi_erase
-	auto_tile.button_pressed = editor.auto_layer
+	auto_tile.button_pressed = editor.auto_tile
 	#mode needs no default, always default to paint
-	_on_AutoLayer_toggled(auto_layer.button_pressed)
 	_on_MultiErase_toggled(multi_erase.button_pressed)
 	_on_AutoTile_toggled(auto_tile.button_pressed)
 	mode.tooltip_text = mode_disc + ": Paint"
@@ -78,73 +71,43 @@ func unhover():
 
 func _input(event):
 	if event.is_action_pressed("editor_lmb") and hovered_button:
-		#print("started selecting tile: ", hovered_button.tile_set_position)
-		selected_tile_region = Rect2i(hovered_button.tile_set_position, Vector2(16, 16))
+		brush_region = Rect2i(hovered_button.tile_set_position / 16, Vector2(1, 1))
 		editor.brush = null
-		#print("cleared brush")
 
 
 	if event.is_action_released("editor_lmb"):
-		await get_tree().process_frame
+		await get_tree().process_frame #why?
 		if hovered_button:
-			#print("ended selecting tile: ", hovered_button.tile_set_position)
-			var start_position = selected_tile_region.position
-			var end_position = hovered_button.tile_set_position
+			var start_position = brush_region.position
+			var end_position = hovered_button.tile_set_position / 16
 			
-			var offset = Vector2.ZERO
 			if start_position.x <= end_position.x: #left to right
-				offset.x += 16
+				end_position.x += 1
 			if start_position.y <= end_position.y: #top to bottom
-				offset.y += 16
+				end_position.y += 1
 			
-			selected_tile_region = selected_tile_region.expand(end_position + offset)
+			brush_region = brush_region.expand(end_position)
+			var layer = floor(start_position.y / 4)
+			brush_region = clamp_brush_region(layer)
 			set_cursor()
-			editor.brush = Rect2i(selected_tile_region.position / 16, selected_tile_region.size / 16) #flatten to integers
+			editor.on_layer_changed(layer)
+			editor.brush = brush_region
 
 
-#func get_brush() -> Dictionary:
-	#var brush = {}
-	##creates a 2D array in a dictionary
-	##{layer 1:
-	##[[(0,0), (0,1), (0,2)], 
-	##[(1,0), (1,1), (1,2)]]}
-	#if editor.auto_layer:
-		## layer
-		#for layer in editor.tile_collection.get_children():
-			#brush[layer] = []
-			##row
-			#for row in get_node(buttons).get_children():
-				#var row_index = get_node(buttons).get_children().find(row) + 1
-				#var layer_index = brush.keys().find(layer) + 1
-				#if layer_index * 4 >= row_index and (layer_index - 1) * 4 < row_index:
-					#var row_selection = []
-					##column
-					#for button in row.get_children():
-						#if selected_tile_region.encloses(Rect2(button.tile_set_position, Vector2(16, 16))):
-							#row_selection.append(button.tile_set_position)
-					#if not row_selection.is_empty():
-						#brush[layer].append(row_selection)
-#
-	#else: #no auto_layer
-		#brush[editor.tile_map] = []
-		##row
-		#for row in get_node(buttons).get_children():
-			#var row_selection = []
-			##column
-			#for button in row.get_children():
-				#if selected_tile_region.encloses(Rect2(button.tile_set_position, Vector2(16, 16))):
-					#row_selection.append(button.tile_set_position)
-			#if not row_selection.is_empty():
-				#brush[editor.tile_map].append(row_selection)
-	#return brush
+func clamp_brush_region(layer) -> Rect2i:
+	var out = brush_region
+	
+	var clamp_region = Rect2i(0, layer * 4, 9999, 4)
+	out = out.intersection(clamp_region)
+	return out
 
 
 func set_cursor():
-	var x_pos = selected_tile_region.position.x + (floor(selected_tile_region.position.x / 16) * tile_master.tile_separation)
-	var y_pos = selected_tile_region.position.y + (floor(selected_tile_region.position.y / 16) * tile_master.tile_separation)
+	var x_pos = brush_region.position.x + (floor(brush_region.position.x * 16) * tile_master.tile_seperation)
+	var y_pos = brush_region.position.y + (floor(brush_region.position.y * 16) * tile_master.tile_seperation)
 	get_node(cursor).position = Vector2(x_pos, y_pos) 
-	var x_size = selected_tile_region.size.x + (floor(selected_tile_region.size.x / 16) * tile_master.tile_separation)
-	var y_size = selected_tile_region.size.y + (floor(selected_tile_region.size.y / 16) * tile_master.tile_separation)
+	var x_size = brush_region.size.x + (floor(brush_region.size.x * 16) * tile_master.tile_seperation)
+	var y_size = brush_region.size.y + (floor(brush_region.size.y * 16) * tile_master.tile_seperation)
 	get_node(cursor).size = Vector2(x_size, y_size) 
 
 
@@ -152,15 +115,6 @@ func set_cursor():
 
 func on_tab_changed(tab_name):
 	pass
-
-func _on_AutoLayer_toggled(button_pressed):
-	if button_pressed:
-		auto_layer.icon = auto_layer_true
-		auto_layer.tooltip_text = auto_layer_disc + ": On"
-	else:
-		auto_layer.icon = auto_layer_false
-		auto_layer.tooltip_text = auto_layer_disc + ": Off"
-	editor.auto_layer = button_pressed
 
 func _on_MultiErase_toggled(button_pressed):
 	if button_pressed:

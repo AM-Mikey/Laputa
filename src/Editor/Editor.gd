@@ -4,7 +4,7 @@ extends Control
 #signal prop_selected(prop)
 #signal entity_selected(entity, entity_type)
 signal level_selected(level)
-#signal tile_map_selected(tile_map)
+signal layer_updated(active_tile_map_layer)
 
 signal level_saved()
 signal tab_changed(tab_name)
@@ -26,8 +26,7 @@ var brush #Rect2i
 var tile_map_selection: Rect2i
 var tile_map_copy_buffer: Dictionary
 var active_tile_map_layer: int = 0
-var auto_layer = true
-var multi_erase = true
+var multi_erase = false
 var auto_tile = true
 
 var active_tool = "tile"
@@ -75,6 +74,7 @@ func _ready():
 
 func setup_level(): #TODO: clear undo history	TODO: make this an editor_enter signal
 	#emit_signal("level_selected", w.current_level)
+	setup_windows()
 	w.get_node("Juniper").disable()
 	ui.get_node("HUD").queue_free()
 	ui.visible = false
@@ -108,6 +108,13 @@ func setup_level(): #TODO: clear undo history	TODO: make this an editor_enter si
 	w.current_level.get_node("LevelLimiter").setup() #must be after camera setup
 	
 
+func setup_windows(): #the main and secondary editor windows
+	await get_tree().process_frame
+	$Main/Win.size = $Margin/VBox/HBox/MainSizeRef.size
+	$Main/Win.position = $Margin/VBox/HBox/MainSizeRef.position
+	$Secondary/Win.size.x = $Margin/VBox/HBox/SecondarySizeRef.size.x
+	$Secondary/Win.position = $Margin/VBox/HBox/SecondarySizeRef.position
+
 #func set_entities_pickable(pickable = true): #TODO: this is still used, move away from this with the new dummy actorspawns
 	#for a in actor_collection.get_children():
 		#if not a.is_in_group("Previews"):
@@ -132,11 +139,8 @@ func setup_level_editor_layer(): #the layer for editor overlays that go over the
 
 
 
-func load_editor_windows():
-	pass
 
-
-func exit():	#TODO: make this an editor_exit signal
+func exit():	#TODO: make this an editor_exit signal ## no? that just decentralizes and makes the order that this triggers in unclear. the order is important!
 	inspector.exit()
 	w.current_level.get_node("TileAnimator").editor_exit()
 	clear_tile_map_cursor()
@@ -268,7 +272,7 @@ func do_tile_input(event):
 				if event.is_action_pressed("editor_lmb"):
 					set_cells(get_cells_centerbox(mouse_pos))
 				elif event.is_action_pressed("editor_rmb"):
-					if inspector.active and inspector.active_type != "background":
+					if inspector.active and inspector.active_type != "background" and inspector.active_type != "tile_map":
 						return #don't erase a tile if we're selecting an entity
 					set_cells(get_cells_centerbox(mouse_pos), true)
 					mc.display("eraser")
@@ -583,10 +587,11 @@ func set_cells(cells: Rect2i, erase = false): #no need to pass brush since its g
 				else: 
 					tile_map.set_cell(active_tile_map_layer, tile_map_position, -1, tile_set_position)
 			else:
-				tile_map.set_cell(tile_map_layer, tile_map_position, 0, tile_set_position) #draw
-				if auto_tile and w.current_level.has_node("AutoTile"):
-					w.current_level.get_node("AutoTile").do_auto_tile(tile_map_position, tile_map_layer)
-				
+				if tile_map.tile_set.get_source(0).has_tile(tile_set_position):
+					tile_map.set_cell(tile_map_layer, tile_map_position, 0, tile_set_position) #draw
+					if auto_tile and w.current_level.has_node("AutoTile"):
+						w.current_level.get_node("AutoTile").do_auto_tile(tile_map_position, tile_map_layer)
+			
 			#If source_id is set to -1, atlas_coords to Vector2i(-1, -1) or alternative_tile to -1, the cell will be erased. An erased cell gets all its identifiers automatically set to their respective invalid values, namely -1, Vector2i(-1, -1) and -1.
 
 
@@ -885,17 +890,17 @@ func set_menu_alpha():
 func _on_Tiles_tile_transform_updated(tile_rotation_degrees, tile_scale_vector):
 	pass # Replace with function body. #TODO move to tiles code
 
-func on_layer_changed(layer_id):
+func on_layer_changed(layer_id): #from inspector
 	active_tile_map_layer = layer_id
+	emit_signal("layer_updated", active_tile_map_layer)
 
 
 ### MISC SIGNALS
 
 func _on_viewport_size_changed():
 	await get_tree().process_frame
-	#$Margin.size = get_tree().get_root().size / Vector2i(w.get_node("EditorLayer").scale)
 	$Margin.size = Vector2(get_tree().get_root().size) / Vector2(w.get_node("EditorLayer").scale)
-	#size = get_tree().get_root().size / Vector2i(w.get_node("EditorLayer").scale)
+	setup_windows()
 
 func on_tab_selected(tab_index): #tab buttons
 	$Main/Win/Tab.current_tab = tab_index

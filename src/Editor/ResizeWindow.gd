@@ -4,7 +4,7 @@ extends MarginContainer
 var state = "idle"
 var active_handle = null
 var drag_offset = Vector2.ZERO
-
+var cached_cursor: String
 
 @export var header_size = 0: set = on_header_size_changed
 @export var bar_size = 12: set = on_bar_size_changed
@@ -21,11 +21,13 @@ func _ready():
 func _input(event):
 	if event.is_action_released("editor_lmb"):
 		state = "idle"
+		$Handles/Mid/Bar.mouse_default_cursor_shape = CURSOR_MOVE
 		return
 	
 	if event is InputEventMouseMotion:
 		match state:
 			"drag":
+				$Handles/Mid/Bar.mouse_default_cursor_shape = CURSOR_DRAG
 				position = Vector2( \
 				get_global_mouse_position().x + drag_offset.x, \
 				get_global_mouse_position().y + drag_offset.y - (bar_size * 2))
