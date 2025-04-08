@@ -4,7 +4,7 @@ var texture
 var columns: int
 var rows: int
 
-@export var tile_seperation: int = 1
+@export var tile_separation: int = 1
 
 @onready var w = get_tree().get_root().get_node("World")
 @onready var editor = get_parent()
@@ -31,11 +31,11 @@ func setup_tile_buttons(caller: Node, parent_path: NodePath):
 	for c in parent.get_children(): #clear old rows
 		c.free()
 ###
-	parent.add_theme_constant_override("separation", tile_seperation)
+	parent.add_theme_constant_override("separation", tile_separation)
 	var r_id = 0
 	for r in rows:
 		var row = HBoxContainer.new()
-		row.add_theme_constant_override("separation", tile_seperation)
+		row.add_theme_constant_override("separation", tile_separation)
 		#row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		parent.add_child(row)
 		var c_id = 0

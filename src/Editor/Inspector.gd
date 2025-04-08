@@ -97,7 +97,7 @@ func display_data():
 		"level":
 			create_button("level_name", active.level_name, "string")
 			create_button("level_type", active.level_type, "enum", active.LevelType.keys())
-			create_button("tile_set", active.tile_set.resource_path, "load")
+			#create_button("tile_set", active.tile_set.resource_path, "load")
 			create_button("music", active.music, "load")
 			create_button("dialog_json", active.dialog_json, "load")
 			create_button("conversation", active.conversation, "string")

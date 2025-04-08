@@ -15,4 +15,5 @@ script = ExtResource("1")
 shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -999
 texture = ExtResource("2")

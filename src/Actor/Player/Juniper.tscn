@@ -1557,6 +1557,7 @@ script = ExtResource("15")
 [node name="States" type="Node2D" parent="MovementManager"]
 
 [node name="StateLabel" type="Label" parent="MovementManager/States"]
+visible = false
 offset_left = -21.1084
 offset_top = -34.0
 offset_right = 18.8916

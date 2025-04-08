@@ -136,7 +136,7 @@ func set_waypoint(target_dir: Vector2):
 
 ### SIGNALS ###
 
-func _on_PlayerDetector_body_entered(body):
+func _on_PlayerDetector_body_entered(_body):
 	$StateTimer.stop()
 	change_state("aggro")
 

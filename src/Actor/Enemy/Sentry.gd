@@ -77,7 +77,7 @@ func prepare_bullet():
 
 
 func _on_PlayerDetector_body_entered(body):
-	target = body.get_parent()
+	target = body.owner
 	change_state("target")
 
 func _on_PlayerDetector_body_exited(_body):

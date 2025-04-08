@@ -29,7 +29,7 @@ func calculate_movevelocity(linearvelocity: Vector2) -> Vector2:
 	return out
 
 
-func _on_PlayerDetector_body_entered(body):
+func _on_PlayerDetector_body_entered(_body):
 	$Timer.start(wait_time)
 	$AnimationPlayer.play("Shake")
 
@@ -44,4 +44,3 @@ func _on_Timer_timeout():
 		falling = false
 		position = starting_position
 		$AnimationPlayer.play("Flash")
-

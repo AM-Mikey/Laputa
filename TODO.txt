@@ -104,13 +104,12 @@ March 6 2025
 --- editor ---
 -consider adding ability to edit tileset not on current level
 -switch cursor to brush on start
--set default positions/sizes for editor panels
 -dont require enter on text input to apply, or make it more obvious
 
 --- animated tileset ---
 -make sure to account for remapping
 -new animation node per tileset, autoload it in on level
-sometimes erased tiles will return and be animated on certain frames
+sometimes erased tiles will return and be animated on certain frames (resolves on reload)
 
 --- ui --- 
 clean up ui asset files
@@ -130,3 +129,6 @@ add graphics to denote layer boundaries in tileset
 for example: if no dirt beneath this tile, then set this tile to one of a few "bottom" tiles
 
 --- tile ---
+
+--- enemy ---
+delete all enemy button
