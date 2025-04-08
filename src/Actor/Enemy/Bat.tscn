@@ -123,7 +123,7 @@ vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_mr7me")
+&"": SubResource("AnimationLibrary_mr7me")
 }
 
 [node name="RayCast2D" type="RayCast2D" parent="."]

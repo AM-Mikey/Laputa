@@ -291,7 +291,7 @@ frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_r1ad1")
+&"": SubResource("AnimationLibrary_r1ad1")
 }
 
 [node name="FireCooldown" type="Timer" parent="."]

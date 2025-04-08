@@ -59,6 +59,7 @@ signal players_updated
 	"enemy_croak": preload("res://assets/SFX/FrogCroak.ogg"),
 	"enemy_hurt": preload("res://assets/SFX/Placeholder/snd_enemy_hurt.ogg"),
 	"enemy_shoot": preload("res://assets/SFX/Placeholder/snd_em_fire.ogg"),
+	"enemy_tweet": preload("res://assets/SFX/bird.ogg"),
 	
 	"npc_dialog": preload("res://assets/SFX/Placeholder/snd_msg.ogg"),
 }

@@ -54,7 +54,7 @@ func calculate_movevelocity(velocity: Vector2, move_dir, speed) -> Vector2:
 	
 func _on_PlayerDetector_body_entered(body):
 	if not locked_on:
-		target = body.get_parent()
+		target = body.owner
 		locked_on = true
 		fire()
 		

@@ -36,7 +36,7 @@ func calculate_movevelocity(velocity: Vector2, move_dir, speed) -> Vector2:
 	
 func _on_PlayerDetector_body_entered(body):
 	if visible == true:
-		target = body
+		target = body.owner
 		jump()
 
 func jump():

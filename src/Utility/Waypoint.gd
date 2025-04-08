@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var owner_id: String
-@export var index := 0
+@export var index : int = 0
 
 var active_count = 0
 

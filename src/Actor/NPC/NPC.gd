@@ -245,7 +245,7 @@ func walk_to_waypoint(index):
 ### SIGNALS
 
 func _on_PlayerDetector_body_entered(body):
-	active_pc = body.get_parent()
+	active_pc = body.owner
 	
 func _on_PlayerDetector_body_exited(_body):
 	active_pc = null

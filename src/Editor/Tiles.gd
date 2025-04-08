@@ -103,11 +103,11 @@ func clamp_brush_region(layer) -> Rect2i:
 
 
 func set_cursor():
-	var x_pos = brush_region.position.x + (floor(brush_region.position.x * 16) * tile_master.tile_seperation)
-	var y_pos = brush_region.position.y + (floor(brush_region.position.y * 16) * tile_master.tile_seperation)
+	var x_pos = brush_region.position.x + (floor(brush_region.position.x * 16) * tile_master.tile_separation)
+	var y_pos = brush_region.position.y + (floor(brush_region.position.y * 16) * tile_master.tile_separation)
 	get_node(cursor).position = Vector2(x_pos, y_pos) 
-	var x_size = brush_region.size.x + (floor(brush_region.size.x * 16) * tile_master.tile_seperation)
-	var y_size = brush_region.size.y + (floor(brush_region.size.y * 16) * tile_master.tile_seperation)
+	var x_size = brush_region.size.x + (floor(brush_region.size.x * 16) * tile_master.tile_separation)
+	var y_size = brush_region.size.y + (floor(brush_region.size.y * 16) * tile_master.tile_separation)
 	get_node(cursor).size = Vector2(x_size, y_size) 
 
 

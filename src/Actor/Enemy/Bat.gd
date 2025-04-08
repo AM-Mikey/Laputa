@@ -136,7 +136,7 @@ func enter_flap():
 
 ### SIGNALS ###
 
-func _on_PlayerDetector_body_entered(body):
+func _on_PlayerDetector_body_entered(_body):
 	aggro = true
 	$RayCast2D.enabled = true
 

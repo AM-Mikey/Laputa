@@ -80,7 +80,7 @@ func animate():
 ### SIGNALS ###
 
 func _on_PlayerDetector_body_entered(body):
-	target = body.get_parent()
+	target = body.owner
 	if state == "idle":
 		change_state("targeting")
 
@@ -121,9 +121,3 @@ func _on_croak_timer_timeout():
 #			$Sprite.modulate = Color(0, 0.976471, 1)
 #			$Sprite.texture = tx_frog
 #			speed = Vector2(12, 120)
-
-
-
-
-
-
