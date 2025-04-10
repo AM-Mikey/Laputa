@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_gqwwp"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_3ucb2"]
-[ext_resource type="Resource" path="res://src/Background/Hollow.tres" id="4_hmghs"]
+[ext_resource type="Resource" path="res://src/Background/PurplePlains.tres" id="4_obofi"]
 [ext_resource type="TileSet" uid="uid://cpukgml8va738" path="res://src/Tile/Wastes.tres" id="4_tdjow"]
-[ext_resource type="Texture2D" uid="uid://cqivfbt1vri1k" path="res://assets/Background/Hollow.png" id="5_iyha2"]
+[ext_resource type="Texture2D" uid="uid://bkiy4yxc36pow" path="res://assets/Background/PurplePlains.png" id="5_57odi"]
 [ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="5_w8juu"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="6_8lqyu"]
 [ext_resource type="Script" uid="uid://brhels8sdivp3" path="res://src/Tile/Wastes.gd" id="9_633jl"]
@@ -24,11 +24,11 @@ offset_left = 32.0
 offset_top = -240.0
 offset_right = 1248.0
 offset_bottom = 272.0
-background_resource = ExtResource("4_hmghs")
-texture = ExtResource("5_iyha2")
-layers = 3
-layer_scales = [Vector2(0, 0), Vector2(0.8, 0.8), Vector2(0.9, 0.9), Vector2(0.9, 0.9)]
-focus = 2
+background_resource = ExtResource("4_obofi")
+texture = ExtResource("5_57odi")
+layers = 4
+layer_scales = [Vector2(0, 0), Vector2(0.5, 0.5), Vector2(0.7, 0.7), Vector2(0.9, 0.9)]
+focus = 4
 tile_mode = 3
 far_back_tile_mode = 1
 

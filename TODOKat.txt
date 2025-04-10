@@ -26,3 +26,12 @@ Focus:
 
 ---
 
+Colors: 
+First color for transparency
+Sprite > Color Mode > Index
+Unlock the pallete 
+
+Left click AND right click colors
+Color and eraser
+
+
