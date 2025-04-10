@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Background" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/Background/Background.gd" id="1_1ik2r"]
+[ext_resource type="Texture2D" path="res://assets/Background/PurplePlains.png" id="2_b1ckl"]
+
+[resource]
+script = ExtResource("1_1ik2r")
+texture = ExtResource("2_b1ckl")
+layers = 4
+layer_scales = [Vector2(0, 0), Vector2(0.4, 0.4), Vector2(0.6, 0.6), Vector2(0.9, 0.9)]
+focus = 4
+tile_mode = 3
+far_back_tile_mode = 1
