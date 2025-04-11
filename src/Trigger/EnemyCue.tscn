@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(8, 8)
 
-[node name="EnemyCue" type="Area2D"]
+[node name="EnemyCue" type="Area2D" groups=["Triggers"]]
 collision_layer = 0
 script = ExtResource("1")
 color = Color(1, 0, 0.666667, 1)

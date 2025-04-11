@@ -1,11 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://ba50qyqtosspf"]
+[gd_scene load_steps=2 format=3 uid="uid://ciahlvrcyq5yt"]
 
-[ext_resource type="Script" uid="uid://cq5eus6rnsk7y" path="res://src/Editor/TriggerController.gd" id="1"]
+[ext_resource type="Script" uid="uid://od834g8t6x33" path="res://src/Editor/TriggerSpawn.gd" id="1_iwm6m"]
 
-[node name="TriggerController" type="MarginContainer"]
+[node name="TriggerSpawn" type="MarginContainer" groups=["TriggerSpawns"]]
 offset_right = 128.0
 offset_bottom = 128.0
-script = ExtResource("1")
+mouse_filter = 2
+script = ExtResource("1_iwm6m")
 
 [node name="Handles" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -23,7 +24,6 @@ custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-mouse_filter = 1
 mouse_default_cursor_shape = 12
 
 [node name="Top" type="TextureButton" parent="Handles/Top"]
@@ -31,7 +31,6 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-mouse_filter = 1
 mouse_default_cursor_shape = 9
 
 [node name="TopRight" type="TextureButton" parent="Handles/Top"]
@@ -39,7 +38,6 @@ custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-mouse_filter = 1
 mouse_default_cursor_shape = 11
 
 [node name="Mid" type="HBoxContainer" parent="Handles"]
@@ -52,20 +50,17 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-mouse_filter = 1
 mouse_default_cursor_shape = 10
 
 [node name="Mid" type="TextureButton" parent="Handles/Mid"]
 layout_mode = 2
 size_flags_horizontal = 3
-mouse_filter = 1
 mouse_default_cursor_shape = 13
 
 [node name="Right" type="TextureButton" parent="Handles/Mid"]
 custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-mouse_filter = 1
 mouse_default_cursor_shape = 10
 
 [node name="Bottom" type="HBoxContainer" parent="Handles"]
@@ -79,7 +74,6 @@ custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
-mouse_filter = 1
 mouse_default_cursor_shape = 11
 
 [node name="Bottom" type="TextureButton" parent="Handles/Bottom"]
@@ -87,7 +81,6 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-mouse_filter = 1
 mouse_default_cursor_shape = 9
 
 [node name="BottomRight" type="TextureButton" parent="Handles/Bottom"]
@@ -95,11 +88,15 @@ custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-mouse_filter = 1
 mouse_default_cursor_shape = 12
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
-visible = false
 layout_mode = 2
 mouse_filter = 2
 editor_only = false
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0.0784314)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.333333, 1, 0, 1)

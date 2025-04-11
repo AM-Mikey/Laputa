@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://r7hhpkokeoo6"]
+[gd_scene load_steps=7 format=3 uid="uid://r7hhpkokeoo6"]
 
-[ext_resource type="Material" path="res://src/Effect/Transition/Iris.tres" id="1"]
+[ext_resource type="Material" uid="uid://cas2pc871q8xe" path="res://src/Effect/Transition/Iris.tres" id="1"]
 [ext_resource type="Script" uid="uid://21ej114g82qs" path="res://src/Effect/Transition/TransitionIris.gd" id="2"]
 
 [sub_resource type="Animation" id="1"]
@@ -9,12 +9,12 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/Iris:material:shader_param/cutoff")
+tracks/0/path = NodePath("MarginContainer/Iris:material:shader_parameter/cutoff")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(2, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
 }
@@ -24,41 +24,60 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/Iris:material:shader_param/cutoff")
+tracks/0/path = NodePath("MarginContainer/Iris:material:shader_parameter/cutoff")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(2, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.0]
 }
 
-[node name="TransitionIris" type="Control"]
-script = ExtResource("2")
-__meta__ = {
-"_edit_use_anchors_": false
+[sub_resource type="Animation" id="Animation_xwqiy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Iris:material:shader_parameter/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
 }
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xwqiy"]
+_data = {
+&"IrisContract": SubResource("1"),
+&"IrisExpand": SubResource("2"),
+&"RESET": SubResource("Animation_xwqiy")
+}
+
+[node name="TransitionIris" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("2")
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_right = 256.0
 offset_bottom = 256.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Iris" type="ColorRect" parent="MarginContainer"]
 material = ExtResource("1")
-offset_right = 256.0
-offset_bottom = 256.0
+layout_mode = 2
 color = Color(0, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/IrisContract = SubResource("1")
-anims/IrisExpand = SubResource("2")
+libraries = {
+&"": SubResource("AnimationLibrary_xwqiy")
+}
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -2,7 +2,7 @@ extends Trigger #TODO: OUTDATED
 
 const DB = preload("res://src/Dialog/DialogBox.tscn")
 
-@export (String, FILE, "*.json") var dialog_json: String
+#@export (String, FILE, "*.json") var dialog_json: String
 @export var conversation: String
 @export var repeatable = false
 

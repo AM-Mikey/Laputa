@@ -76,7 +76,7 @@ hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_sc2g8")
+&"": SubResource("AnimationLibrary_sc2g8")
 }
 
 [node name="FloorDetectorL" type="RayCast2D" parent="."]

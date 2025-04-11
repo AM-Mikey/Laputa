@@ -6,7 +6,6 @@ extends Node
 @onready var sprite = pc.get_node("Sprite2D")
 @onready var guns = pc.get_node("GunManager/Guns")
 @onready var ap = pc.get_node("AnimationPlayer")
-@onready var anim = pc.get_node("AnimationManager")
 
 var saved_move_dir := Vector2.ZERO #for the 2 frame stand
 
@@ -93,11 +92,8 @@ func animate():
 		if ap.current_animation == "run" or ap.current_animation == "crouch_run" or ap.current_animation == "back_run":
 			do_blending = true
 
-	#anim.set_gun_draw_index()
 	var vframe = get_vframe()
 	sprite.frame_coords.y = vframe
-	#guns.position = anim.get_gun_pos(animation, vframe, sprite.frame_coords.x) #changes the gun sprite every time animate is called
-	
 
 
 	var blend_time = 0.0

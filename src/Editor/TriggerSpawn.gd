@@ -1,17 +1,45 @@
 extends MarginContainer
 
-signal selected(node, type)
-
 var state = "idle"
 var active_handle = null
 var drag_offset = Vector2.ZERO
 
+@export_file var trigger_path
+@export var properties = {}
+
 @onready var world = get_tree().get_root().get_node("World")
-@onready var editor = world.get_node("EditorLayer/Editor")
 
 var buttons = []
 
 func _ready():
+	if trigger_path == null:
+		printerr("ERROR: no trigger chosen in TriggerSpawn")
+		return
+
+	#ColorRect
+	var trigger = load(trigger_path).instantiate()
+	$ColorRect.color = trigger.color
+	
+	#name
+	var index = 0
+	for a in get_tree().get_nodes_in_group("TriggerSpawns"):
+		if a == self: break
+		if a.trigger_path == trigger_path:
+			index +=1
+	if index == 0:
+		name = trigger.name
+	else:
+		name = str(trigger.name, index)
+	
+	#transform
+	#size = trigger.get_node("CollisionShape2D").shape.size
+	#global_position = trigger.get_node("CollisionShape2D").global_position
+
+	if world.el.get_child_count() == 0: #not in editor
+		visible = false
+		spawn()
+
+
 	for h in $Handles/Top.get_children():
 			h.connect("button_down", Callable(self, "on_handle").bind(h))
 			buttons.append(h)
@@ -21,15 +49,40 @@ func _ready():
 	for h in $Handles/Bottom.get_children():
 			h.connect("button_down", Callable(self, "on_handle").bind(h))
 			buttons.append(h)
-	connect("selected", Callable(editor.inspector, "on_selected"))
 
 
-func disable():
-	state = "disabled"
-	visible = false
-func enable():
-	state = "enabled"
-	visible = true
+
+func initialize(): #first time set up properties
+	var trigger = load(trigger_path).instantiate()
+	for p in trigger.get_property_list():
+		if p["usage"] == 4102: #exported properties
+			properties[p["name"]] = [trigger.get(p["name"]), p["type"]]
+
+func spawn():
+	if trigger_path == null:
+		printerr("ERROR: no trigger chosen in TriggerSpawn")
+		return
+	
+	var trigger = load(trigger_path).instantiate()
+	for p in properties:
+		trigger.set(p, properties[p][0])
+	trigger.name = name
+	trigger.global_position = global_position
+	var new_shape = RectangleShape2D.new()
+	new_shape.size = size
+	trigger.get_node("CollisionShape2D").shape = new_shape
+	trigger.get_node("CollisionShape2D").position = new_shape.size * 0.5
+	
+	world.current_level.get_node("Triggers").call_deferred("add_child", trigger)
+
+
+
+#func disable():
+	#state = "disabled"
+	#visible = false
+#func enable():
+	#state = "enabled"
+	#visible = true
 
 func _input(event):
 	if state == "disabled": return
@@ -46,7 +99,7 @@ func _input(event):
 		
 		match state:
 			"drag":
-				get_parent().position = Vector2(x, y)
+				position = Vector2(x, y)
 			"resize":
 				match active_handle.name:
 					"TopLeft":
@@ -69,24 +122,21 @@ func _input(event):
 						offset_left = x - parent_x
 					"Right":
 						offset_right = x - parent_x
-				
-				var col = get_parent().get_node("CollisionShape2D")
-				var parent = get_parent()
-				var new_shape = RectangleShape2D.new()
-				new_shape.size = size * 0.5
-				get_parent().get_node("CollisionShape2D").shape = new_shape
-				get_parent().get_node("CollisionShape2D").position = position + new_shape.size
-				
-				get_parent().visual.update()
 
 
 ### SIGNALS 
 
+func on_editor_select(): #when
+	modulate = Color(1,0,0,.75)
+
+func on_editor_deselect():
+	modulate = Color(1,1,1,.75)
+
+
 func on_handle(handle):
-	if state == "disabled": return
+	#if state == "disabled": return
 	
 	if handle.name != "Mid":
-		#print("handle grabbed")
 		state = "resize"
 		active_handle = handle
 		drag_offset = handle.global_position - get_global_mouse_position()
@@ -94,10 +144,7 @@ func on_handle(handle):
 		state = "drag"
 		drag_offset = get_parent().position - get_global_mouse_position()
 	emit_signal("selected", get_parent(), "trigger")
-
-
-func on_editor_select():
-	modulate = Color.RED
-
-func on_editor_deselect():
-	modulate = Color(1,1,1)
+	
+	
+	var inspector = world.get_node("EditorLayer/Editor").inspector
+	inspector.on_selected(self, "trigger_spawn")

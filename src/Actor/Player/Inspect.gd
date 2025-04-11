@@ -7,7 +7,6 @@ extends Node
 @onready var sprite = pc.get_node("Sprite2D")
 @onready var guns = pc.get_node("GunManager/Guns")
 @onready var ap = pc.get_node("AnimationPlayer")
-@onready var anim = pc.get_node("AnimationManager")
 
 
 func state_process():
@@ -85,4 +84,3 @@ func enter():
 	guns.visible = false
 func exit():
 	guns.visible = true
-	pc.inspect_target = null

@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(6, 4)
 
-[node name="SpikesDown" type="Area2D"]
+[node name="SpikesDown" type="Area2D" groups=["Triggers"]]
 collision_layer = 0
 script = ExtResource("1")
 

@@ -78,7 +78,7 @@ func get_internal_version() -> String:
 
 
 
-func set_debug_visible(vis = !debug_visible): #makes triggers and visutils visible
+func set_debug_visible(vis = !debug_visible): #makes triggers and visutils visible #TODO redo this system
 	debug_visible = vis
 	for t in get_tree().get_nodes_in_group("TriggerVisuals"):
 		t.visible = vis
@@ -151,10 +151,10 @@ func on_level_change(level_path, door_index):
 		for t in triggers:
 			if t.level == old_level_path and t.door_index == door_index:
 				if t.is_in_group("LoadZones"):
-					$Juniper.position = t.position + (t.direction * -32)
+					$Juniper.global_position = t.global_position + (t.direction * -32)
 					doors_found += 1
 				else:
-					$Juniper.position = t.position
+					$Juniper.global_position = t.global_position
 					doors_found += 1
 
 			if doors_found == 0:

@@ -231,7 +231,6 @@ func fade_music(duration = 1.0):
 		return
 	var player = music_queue.front()[0]
 	var tween = get_tree().create_tween()
-	add_child(tween)
 	tween.tween_property(player, "volume_db", -80, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	await tween.finished
 	_clear_player("music", music_queue.front())

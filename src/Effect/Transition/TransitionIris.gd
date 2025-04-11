@@ -25,7 +25,7 @@ func _physics_process(_delta):
 	var vp_size = get_tree().get_root().size / world.resolution_scale
 	
 	var cam = pc.get_node("PlayerCamera")
-	if not cam.current:
+	if not cam.enabled:
 		for l in get_tree().get_nodes_in_group("Levels"):
 			cam = l.get_node("LevelCamera")
 	

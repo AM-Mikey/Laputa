@@ -4,7 +4,7 @@
 
 [sub_resource type="RectangleShape2D" id="1"]
 
-[node name="KillBox" type="Area2D"]
+[node name="KillBox" type="Area2D" groups=["Triggers"]]
 collision_layer = 8192
 collision_mask = 0
 monitoring = false

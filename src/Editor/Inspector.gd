@@ -75,6 +75,9 @@ func display_data():
 		"actor_spawn":
 			for p in active.properties:
 				create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
+		"trigger_spawn":
+			for p in active.properties:
+				create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
 		#"enemy": #replaced with actor spawn
 			#for p in active.get_property_list():
 				#if p["usage"] == EXPORT:
@@ -234,10 +237,8 @@ func on_property_changed(property_name, property_value):
 					
 		"actor_spawn":
 			active.properties[property_name][0] = property_value
-			#active.set(properties[property_name][0], property_value/
-		#"enemy":
-			#active.set(property_name, property_value)
-			
+		"trigger_spawn":
+			active.properties[property_name][0] = property_value
 		"level":
 			match property_name:
 				"tile_set": 

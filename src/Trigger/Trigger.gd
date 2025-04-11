@@ -1,9 +1,8 @@
-@icon("res://assets/Icon/EnemyIcon.png")
+@icon("res://assets/Icon/TriggerIcon.png")
 extends Area2D
 class_name Trigger
 
 const TRIGGER_VISUAL = preload("res://src/Utility/TriggerVisual.tscn")
-const TRIGGER_CONTROLLER = preload("res://src/Editor/TriggerController.tscn")
 
 @export var editor_hidden = false
 @export var color = Color(1, 0, 0)
@@ -18,14 +17,8 @@ var spent = false
 
 
 func _ready():
-	add_to_group("Triggers") #TODO: consider doing this in editor
+	#add_to_group("Triggers") #TODO: consider doing this in editor
 	add_child(visual)
-	if w.get_node("EditorLayer").has_node("Editor"):
-		var controller = TRIGGER_CONTROLLER.instantiate()
-		var col = $CollisionShape2D
-		controller.position = col.position - col.shape.size
-		controller.size = col.shape.size * 2
-		add_child(controller)
 
 func get_overlap(body) -> bool:
 	var body_in_triggers = 0
@@ -69,4 +62,3 @@ func on_editor_select():
 
 func on_editor_deselect():
 	visual.self_modulate = Color(1,1,1)
-

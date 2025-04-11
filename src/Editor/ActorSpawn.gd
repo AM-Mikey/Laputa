@@ -1,7 +1,5 @@
 extends Area2D
 
-#signal selected(actor_spawn, type)
-
 @export_file var actor_path
 @export var properties = {}
 

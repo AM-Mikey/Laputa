@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dlao0vlw2igvt" path="res://src/Trigger/Stairs.gd" id="1"]
 
-[node name="Stairs" type="Area2D"]
+[node name="Stairs" type="Area2D" groups=["Triggers"]]
 collision_layer = 0
 script = ExtResource("1")
 color = Color(1, 0.494118, 0, 1)

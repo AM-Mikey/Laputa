@@ -12,7 +12,6 @@ var jump_type
 @onready var sprite = pc.get_node("Sprite2D")
 @onready var guns = pc.get_node("GunManager/Guns")
 @onready var ap = pc.get_node("AnimationPlayer")
-@onready var anim = pc.get_node("AnimationManager")
 
 
 
@@ -86,10 +85,10 @@ func animate():
 
 	var blend_time = 0.0
 	if not ap.is_playing() or ap.current_animation != animation:
-		for group in anim.blend_array:
-			if group.has(animation) and group.has(ap.current_animation):
-				print("blending animation")
-				blend_time = ap.current_animation_position #only blend certain animations
+		#for group in anim.blend_array: TODO: fix?
+			#if group.has(animation) and group.has(ap.current_animation):
+				#print("blending animation")
+				#blend_time = ap.current_animation_position #only blend certain animations
 		ap.stop()
 		ap.play(animation, blend_time, 1.0)
 

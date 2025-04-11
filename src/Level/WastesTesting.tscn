@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dlhrq7dgn15c7"]
+[gd_scene load_steps=13 format=3 uid="uid://dlhrq7dgn15c7"]
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_gqwwp"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_3ucb2"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="5_w8juu"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="6_8lqyu"]
 [ext_resource type="Script" uid="uid://brhels8sdivp3" path="res://src/Tile/Wastes.gd" id="9_633jl"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/TriggerSpawn.tscn" id="9_ag25g"]
 [ext_resource type="PackedScene" uid="uid://dim3av368jfya" path="res://src/Utility/Waypoint.tscn" id="10_htl27"]
 [ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/ActorSpawn.tscn" id="11_c6eqk"]
 [ext_resource type="Script" uid="uid://wftb1fa7j2ti" path="res://src/Tile/WastesAnimator.gd" id="12_obofi"]
@@ -54,6 +55,20 @@ layer_3/tile_data = PackedInt32Array(-524284, 0, 12, -524283, 65536, 12, -458747
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Triggers" type="Node2D" parent="."]
+
+[node name="Door" parent="Triggers" instance=ExtResource("9_ag25g")]
+modulate = Color(1, 1, 1, 0.75)
+offset_left = -16.0
+offset_top = 176.0
+offset_bottom = 208.0
+trigger_path = "res://src/Trigger/Door.tscn"
+properties = {
+"color": [Color(0, 0.4, 0, 1), 20],
+"door_index": [0, 2],
+"editor_hidden": [false, 1],
+"level": ["DogtownInteriorTesting", 4],
+"locked": [false, 1]
+}
 
 [node name="SunLight" parent="." instance=ExtResource("5_w8juu")]
 position = Vector2(48, -128)

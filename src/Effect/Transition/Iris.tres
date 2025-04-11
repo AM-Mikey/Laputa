@@ -1,9 +1,9 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cas2pc871q8xe"]
 
-[ext_resource path="res://src/Effect/Transition/Wipe.gdshader" type="Shader" id=1]
-[ext_resource path="res://assets/Effect/Transition/Iris.png" type="Texture2D" id=2]
+[ext_resource type="Shader" uid="uid://c8m7e6o15c30j" path="res://src/Effect/Transition/Wipe.gdshader" id="1"]
+[ext_resource type="Texture2D" uid="uid://en5f4el5kjn4" path="res://assets/Effect/Transition/Iris.png" id="2"]
 
 [resource]
-shader = ExtResource( 1 )
-shader_param/cutoff = 0.0
-shader_param/mask = ExtResource( 2 )
+shader = ExtResource("1")
+shader_parameter/cutoff = 1.0
+shader_parameter/mask = ExtResource("2")

@@ -18,6 +18,7 @@ const LAYER_BUTTON = preload("res://src/Editor/Button/LayerButton.tscn")
 const LIMITER = preload("res://src/Editor/EditorLevelLimiter.tscn")
 const TILE_MAP_CURSOR = preload("res://src/Editor/TileMapCursor.tscn")
 const TILE_MAP_PREVIEW = preload("res://src/Editor/TileMapPreview.tscn")
+const TRIGGER_SPAWN = preload("res://src/Editor/TriggerSpawn.tscn")
 
 
 var disabled = false
@@ -80,6 +81,8 @@ func setup_level(): #TODO: clear undo history	TODO: make this an editor_enter si
 	ui.visible = false
 	for a in get_tree().get_nodes_in_group("Actors"):
 		a.queue_free()
+	for t in get_tree().get_nodes_in_group("Triggers"):
+		t.queue_free()
 	actor_collection = w.current_level.get_node("Actors")
 	prop_collection = w.current_level.get_node("Props")
 	trigger_collection = w.current_level.get_node("Triggers")
@@ -92,16 +95,18 @@ func setup_level(): #TODO: clear undo history	TODO: make this an editor_enter si
 		w.current_level.get_node("TileAnimator").editor_enter()
 	
 	$Main/Win/Tab/Levels.setup_levels()
+	$Main/Win/Tab/Triggers.setup_triggers()
 	
 	setup_level_editor_layer()
 	#set_entities_pickable()
 	w.set_debug_visible(true)
 	for s in get_tree().get_nodes_in_group("SpawnPoints"): #TODO: see if you can avoid this by calling a signal or something
 		s.visible = true
-	for s in get_tree().get_nodes_in_group("ActorSpawns"):
-		s.visible = true
-		s.input_pickable = true
-		
+	for a in get_tree().get_nodes_in_group("ActorSpawns"):
+		a.visible = true
+		a.input_pickable = true
+	for t in get_tree().get_nodes_in_group("TriggerSpawns"):
+		t.visible = true
 	for l in get_tree().get_nodes_in_group("SunLights"):
 		l.editor_enter()
 	for t in trigger_collection.get_children():
@@ -165,6 +170,9 @@ func exit():	#TODO: make this an editor_exit signal ## no? that just decentraliz
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.spawn()
 		a.visible = false
+	for t in get_tree().get_nodes_in_group("TriggerSpawns"):
+		t.spawn()
+		t.visible = false
 	for l in get_tree().get_nodes_in_group("SunLights"):
 		l.editor_exit()
 	queue_free()
@@ -359,7 +367,7 @@ func do_entity_input(event):
 			"npc":
 				set_actor_spawn($Main/Win/Tab/NPCs.active_npc_path, grid_pos)
 			"trigger":
-				pass
+				set_trigger_spawn($Main/Win/Tab/Triggers.active_trigger_path, grid_pos)
 			"noplace":
 				pass
 
@@ -630,6 +638,17 @@ func set_actor_spawn(actor_path, pos):
 	actor_spawn.owner = w.current_level
 	actor_spawn.initialize()
 	inspector.on_selected(actor_spawn, "actor_spawn")
+
+func set_trigger_spawn(trigger_path, pos):
+	var trigger_spawn = TRIGGER_SPAWN.instantiate()
+	trigger_spawn.trigger_path = trigger_path
+	trigger_spawn.global_position = (pos * 16) + Vector2i(8, 16)
+	#entity.input_pickable = true
+	trigger_collection.add_child(trigger_spawn)
+	trigger_spawn.owner = w.current_level
+	trigger_spawn.initialize()
+	inspector.on_selected(trigger_spawn, "trigger_spawn")
+	
 
 #func set_entity(pos, entity_path, entity_type, traced = true): #TODO: replace with custom per type, easier that way.
 	#if entity_path == null:

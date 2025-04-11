@@ -17,6 +17,7 @@ func _on_body_entered(body):
 	active_pc = body.get_parent()
 func _on_body_exited(_body):
 	active_pc = null
+	
 
 
 func _input(event):
@@ -24,7 +25,6 @@ func _input(event):
 		if active_pc.is_on_floor() and active_pc.can_input:
 			if not locked:
 				enter_door()
-			
 			else:
 				if active_pc.inventory.has("Key"):
 					var index = active_pc.inventory.find("Key") #TODO: have door store a specific key
@@ -36,6 +36,7 @@ func _input(event):
 
 func enter_door():
 	active_pc.can_input = false
+	active_pc.inspect_target = self
 	active_pc.mm.change_state("inspect")
 	active_pc.move_to(position)
 	
@@ -49,7 +50,10 @@ func enter_door():
 	
 	await transition.get_node("AnimationPlayer").animation_finished
 	
-	print("door state start")
 	active_pc.mm.change_state("run")
 	active_pc.can_input = true
-	emit_signal("level_change", load(level), door_index)
+	var level_path = str("res://src/Level/" + level + ".tscn")
+	if !FileAccess.file_exists(level_path):
+		printerr("ERROR: No Level With Name: ", level)
+		return
+	emit_signal("level_change", level_path, door_index)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c5wmg8oa1iarw"]
 
-[ext_resource type="Script" uid="uid://5dya1pw3lcdv" path="res://src/Trigger/DialogCue.gd" id="1"]
+[ext_resource type="Script" uid="uid://5dya1pw3lcdv" path="res://src/Trigger/Outdated/DialogCue.gd" id="1"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(8, 8)

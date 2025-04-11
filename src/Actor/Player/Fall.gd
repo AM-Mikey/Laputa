@@ -6,7 +6,6 @@ extends Node
 @onready var sprite = pc.get_node("Sprite2D")
 @onready var guns = pc.get_node("GunManager/Guns")
 @onready var ap = pc.get_node("AnimationPlayer")
-@onready var anim = pc.get_node("AnimationManager")
 
 
 func state_process():
@@ -77,9 +76,7 @@ func animate():
 	sprite.vframes = int(reference_texture.get_height() / 32.0)
 	
 	var vframe = get_vframe()
-	#anim.set_gun_draw_index()
 	sprite.frame_coords.y = vframe
-	#guns.position = anim.get_gun_pos(animation, vframe, sprite.frame_coords.x) #changes the gun sprite every time animate is called
 
 	if not ap.is_playing() or ap.current_animation != animation:
 		ap.stop()

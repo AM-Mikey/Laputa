@@ -151,6 +151,13 @@ reimplement level music
 --- editor ---
 clean up all setup and exit code
 editor calls setup_level on change level, but does not exit or get removed
+stop adding TileMapCursor every time editor is opened
+fix editorlevellimiter not displaying blackbars on startup
 
 ---enemy ---
 update waypoint based enemies
+
+--- triggers --- 
+start from the ground up
+replace triggervisuals
+replace triggercontrollers in editor with triggerspawns

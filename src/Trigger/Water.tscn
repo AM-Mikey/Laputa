@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(8, 8)
 
-[node name="Water" type="Area2D"]
+[node name="Water" type="Area2D" groups=["Triggers"]]
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("1")
