@@ -4,7 +4,7 @@ const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const LEVEL_BUTTON = preload("res://src/Editor/Button/LevelButton.tscn")
 
-signal level_changed(level_path)
+signal level_selected(level_path)
 
 var levels = {}
 var active_level_path
@@ -18,11 +18,15 @@ var default_level = "res://src/Level/Default.tscn"
 
 
 
-func _ready():
-	setup_levels()
+#func _ready():
+	#setup_levels()
 
 func setup_levels(): #TODO: connect this to editor instead of _ready
 	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
+	
+	for c in $VBox/Margin/Scroll/Buttons.get_children():
+		c.queue_free()
+		
 	var index = 0
 	for l in find_level_scenes("res://src/Level/"):
 		
@@ -33,12 +37,13 @@ func setup_levels(): #TODO: connect this to editor instead of _ready
 			var level_button = LEVEL_BUTTON.instantiate()
 			level_button.level_path = l
 			level_button.level_name = level.name
-			level_button.connect("level_changed", Callable(self, "change_level"))
+			level_button.connect("level_selected", Callable(self, "select_level"))
 			if index == 0:
 				level_button.active = true
 				active_level_path = l
 			$VBox/Margin/Scroll/Buttons.add_child(level_button)
 			index += 1
+
 
 func find_level_scenes(path):
 	var files = []
@@ -54,10 +59,12 @@ func find_level_scenes(path):
 			
 	return files
 
-func change_level(path): #connected to level buttons
-	load_level(path)
 
 ### BUTTON SIGNALS
+
+func select_level(path): #connected to level buttons
+	print("pp")
+	active_level_path = path
 
 func on_save(): #from editor
 	save_level(w.current_level, w.current_level.scene_file_path)
@@ -67,18 +74,16 @@ func on_save_as():
 	$SaveDialog.popup()
 
 func on_load():
-	$LoadDialog.current_path = "res://src/level/"
-	$LoadDialog.popup()
+	load_level(active_level_path)
+	#$LoadDialog.current_path = "res://src/level/"
+	#$LoadDialog.popup()
 
 func on_new():
 	$NewDialog.current_path = "res://src/level/"
 	$NewDialog.popup()
 
 func _on_Default_pressed():
-	w.start_level = load(w.current_level.scene_file_path)
-	#am.play("save")
-
-
+	w.active_level_path = w.current_level.scene_file_path
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(w) #packing world is a bad idea, we need to be sure nothing else gets saved along with default level
 	var err = ResourceSaver.save(packed_scene, "res://src/World.tscn")
@@ -95,8 +100,8 @@ func on_save_confirmed():
 	var path = $SaveDialog.current_path.get_basename() + ".tscn"
 	save_level(level, path)
 
-func on_load_selected(path):
-	load_level(path)
+#func on_load_selected(path):
+	#load_level(path)
 
 func on_new_confirmed():
 	var level = load(default_level).instantiate()
@@ -150,7 +155,7 @@ func load_level(path):
 		w.get_node("Juniper").global_position = s.global_position
 
 	el.get_node("Editor").setup_level()
-	el.get_node("EditorCamera").current = true
+	el.get_node("EditorCamera").enabled = true
 
 
 

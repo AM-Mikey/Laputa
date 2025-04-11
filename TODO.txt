@@ -132,3 +132,25 @@ for example: if no dirt beneath this tile, then set this tile to one of a few "b
 
 --- enemy ---
 delete all enemy button
+
+--- player ---
+fix ssp detection on angles
+disable crouch on command
+edge animation on idle with long toe-hang
+capsule collision when not near edge?
+
+
+--- background for train ---
+long panoramic background that tiles horizontally and moves 
+closer scaled layers will move more from train movement
+
+--- levels ---
+reimplement level notes
+reimplement level music
+
+--- editor ---
+clean up all setup and exit code
+editor calls setup_level on change level, but does not exit or get removed
+
+---enemy ---
+update waypoint based enemies

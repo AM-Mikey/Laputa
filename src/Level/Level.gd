@@ -16,9 +16,7 @@ var time_created: Dictionary
 
 
 func _ready():
-	add_to_group("Levels") #TODO: consider doing this in editor
-	if Engine.is_editor_hint():
-		return
+	add_to_group("Levels")
 	
 	if has_node("Notes"):
 		get_node("Notes").visible = false

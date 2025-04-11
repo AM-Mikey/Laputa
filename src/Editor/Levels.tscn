@@ -43,7 +43,7 @@ alignment = 2
 
 [node name="Default" type="Button" parent="VBox/HBox"]
 layout_mode = 2
-text = "Default"
+text = "Set Starting Level"
 
 [node name="Save" type="Button" parent="VBox/HBox"]
 layout_mode = 2
@@ -58,6 +58,7 @@ layout_mode = 2
 text = "Load"
 
 [node name="New" type="Button" parent="VBox/HBox"]
+visible = false
 layout_mode = 2
 text = "New"
 

@@ -1,6 +1,6 @@
 extends MarginContainer
 
-signal level_changed(level_path)
+signal level_selected(level_path)
 
 var level_path: String
 var level_name: String
@@ -13,11 +13,11 @@ func _ready():
 
 func on_pressed():
 	activate()
-	emit_signal("level_changed", level_path)
+	emit_signal("level_selected", level_path)
 
 
 func activate():
-	for e in get_tree().get_nodes_in_group("EnemyButtons"):
+	for e in get_tree().get_nodes_in_group("LevelButtons"):
 		e.deactivate()
 	$PanelActive.visible = true
 	active = true

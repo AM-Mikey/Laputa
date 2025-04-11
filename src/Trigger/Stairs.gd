@@ -12,4 +12,3 @@ func _on_body_entered(body):
 	
 func _on_body_exited(_body):
 	active_pc.get_node("MovementManager").ground_cof = old_ground_cof
-

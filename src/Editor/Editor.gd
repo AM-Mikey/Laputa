@@ -88,7 +88,10 @@ func setup_level(): #TODO: clear undo history	TODO: make this an editor_enter si
 	tile_map = w.current_level.get_node("TileMap")
 	tile_master.setup_tile_master()
 	$Main/Win/Tab/TileSet.load_tile_set(tile_map.tile_set.resource_path)
-	w.current_level.get_node("TileAnimator").editor_enter()
+	if w.current_level.has_node("TileAnimator"):
+		w.current_level.get_node("TileAnimator").editor_enter()
+	
+	$Main/Win/Tab/Levels.setup_levels()
 	
 	setup_level_editor_layer()
 	#set_entities_pickable()
@@ -142,7 +145,8 @@ func setup_level_editor_layer(): #the layer for editor overlays that go over the
 
 func exit():	#TODO: make this an editor_exit signal ## no? that just decentralizes and makes the order that this triggers in unclear. the order is important!
 	inspector.exit()
-	w.current_level.get_node("TileAnimator").editor_exit()
+	if w.current_level.has_node("TileAnimator"):
+		w.current_level.get_node("TileAnimator").editor_exit()
 	clear_tile_map_cursor()
 	free_previews()
 	editor_level_limiter.queue_free()
