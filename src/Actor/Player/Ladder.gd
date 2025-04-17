@@ -21,8 +21,7 @@ func state_process():
 	
 	
 	if pc.is_on_floor() and not pc.is_on_ssp:
-		if Input.is_action_pressed("look_down") and pc.controller_id == 0 or\
-		Input.is_action_pressed("sasuke_down") and pc.controller_id == 1:
+		if Input.is_action_pressed("look_down"):
 			mm.change_state("run")
 
 	#if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:

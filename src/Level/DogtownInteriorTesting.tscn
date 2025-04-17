@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bo3uc4mqdw2nk"]
+[gd_scene load_steps=10 format=3 uid="uid://bo3uc4mqdw2nk"]
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_ris4u"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_wom3b"]
 [ext_resource type="Texture2D" uid="uid://flsl5refgqw0" path="res://assets/Background/Mountains.png" id="3_ln0on"]
+[ext_resource type="Resource" uid="uid://d2oc8cenc1gm4" path="res://src/Background/PurplePlains.tres" id="3_wom3b"]
 [ext_resource type="TileSet" uid="uid://j4ajqrgeit4t" path="res://src/Tile/DogtownInterior.tres" id="4_ris4u"]
 [ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="5_64d5n"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="6_v20vf"]
@@ -19,9 +20,9 @@ conversation = "cutscene_test"
 [node name="LevelLimiter" parent="." instance=ExtResource("2_wom3b")]
 offset_top = -256.0
 offset_right = 464.0
+background_resource = ExtResource("3_wom3b")
 texture = ExtResource("3_ln0on")
 layers = 4
-layer_scales = [Vector2(0, 0), Vector2(0.1, 0.1), Vector2(0.7, 0.7), Vector2(0.9, 0.9)]
 focus = 2
 tile_mode = 1
 

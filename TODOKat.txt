@@ -33,5 +33,3 @@ Unlock the pallete
 
 Left click AND right click colors
 Color and eraser
-
-

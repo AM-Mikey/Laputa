@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://od834g8t6x33" path="res://src/Editor/TriggerSpawn.gd" id="1_iwm6m"]
 
 [node name="TriggerSpawn" type="MarginContainer" groups=["TriggerSpawns"]]
-offset_right = 128.0
-offset_bottom = 128.0
+offset_right = 16.0
+offset_bottom = 16.0
 mouse_filter = 2
 script = ExtResource("1_iwm6m")
 
@@ -20,21 +20,21 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="TopLeft" type="TextureButton" parent="Handles/Top"]
-custom_minimum_size = Vector2(4, 4)
+custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_default_cursor_shape = 12
 
 [node name="Top" type="TextureButton" parent="Handles/Top"]
-custom_minimum_size = Vector2(0, 4)
+custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 mouse_default_cursor_shape = 9
 
 [node name="TopRight" type="TextureButton" parent="Handles/Top"]
-custom_minimum_size = Vector2(4, 4)
+custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
@@ -47,44 +47,45 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="Left" type="TextureButton" parent="Handles/Mid"]
-custom_minimum_size = Vector2(4, 0)
+custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_default_cursor_shape = 10
 
 [node name="Mid" type="TextureButton" parent="Handles/Mid"]
+custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 13
 
 [node name="Right" type="TextureButton" parent="Handles/Mid"]
-custom_minimum_size = Vector2(4, 0)
+custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 size_flags_horizontal = 8
 mouse_default_cursor_shape = 10
 
 [node name="Bottom" type="HBoxContainer" parent="Handles"]
-custom_minimum_size = Vector2(0, 4)
+custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="BottomLeft" type="TextureButton" parent="Handles/Bottom"]
-custom_minimum_size = Vector2(4, 4)
+custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 mouse_default_cursor_shape = 11
 
 [node name="Bottom" type="TextureButton" parent="Handles/Bottom"]
-custom_minimum_size = Vector2(0, 4)
+custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 mouse_default_cursor_shape = 9
 
 [node name="BottomRight" type="TextureButton" parent="Handles/Bottom"]
-custom_minimum_size = Vector2(4, 4)
+custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8

@@ -83,7 +83,7 @@ func on_new():
 	$NewDialog.popup()
 
 func _on_Default_pressed():
-	w.active_level_path = w.current_level.scene_file_path
+	w.start_level_path = w.current_level.scene_file_path
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(w) #packing world is a bad idea, we need to be sure nothing else gets saved along with default level
 	var err = ResourceSaver.save(packed_scene, "res://src/World.tscn")

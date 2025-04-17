@@ -1,13 +1,19 @@
-[gd_resource type="Resource" script_class="Background" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="Background" load_steps=3 format=3 uid="uid://d2oc8cenc1gm4"]
 
-[ext_resource type="Script" path="res://src/Background/Background.gd" id="1_1ik2r"]
-[ext_resource type="Texture2D" path="res://assets/Background/PurplePlains.png" id="2_b1ckl"]
+[ext_resource type="Script" uid="uid://ceqy767o44qkp" path="res://src/Background/Background.gd" id="1_1ik2r"]
+[ext_resource type="Texture2D" uid="uid://bkiy4yxc36pow" path="res://assets/Background/PurplePlains.png" id="2_b1ckl"]
 
 [resource]
 script = ExtResource("1_1ik2r")
 texture = ExtResource("2_b1ckl")
 layers = 4
-layer_scales = [Vector2(0, 0), Vector2(0.4, 0.4), Vector2(0.6, 0.6), Vector2(0.9, 0.9)]
+layer_scales = {
+0: Vector2(0, 0),
+1: Vector2(0.2, 0.2),
+2: Vector2(0.7, 0.7),
+3: Vector2(1, 1),
+4: Vector2(0.5, 0.5)
+}
 focus = 4
-tile_mode = 3
+tile_mode = 1
 far_back_tile_mode = 1

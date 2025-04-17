@@ -67,7 +67,10 @@ func display_data():
 			create_button("texture", limiter.texture.resource_path, "load")
 			create_button("layers", limiter.layers, "int")
 			for l in limiter.layers:
-				create_button("layer_scales_%s"%l, limiter.layer_scales[l], "vector2")
+				if limiter.layer_scales.has(l):
+					create_button("layer_scales_%s"%l, limiter.layer_scales[l], "vector2")
+				else:
+					create_button("layer_scales_%s"%l, Vector2.ZERO, "vector2")
 			create_button("focus", limiter.focus, "enum", limiter.Focus.keys())
 			create_button("tile_mode", limiter.tile_mode, "enum", limiter.TileMode.keys())
 			create_button("far_back_tile_mode", limiter.far_back_tile_mode, "enum", limiter.FarBackTileMode.keys())

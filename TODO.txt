@@ -162,3 +162,8 @@ start from the ground up
 replace triggervisuals
 replace triggercontrollers in editor with triggerspawns
 fix door position 
+fix moveto state
+
+--- background ---
+add height adjustment variable
+add scroll option using texture rect position

@@ -11,8 +11,7 @@ func state_process():
 	#jump interrupt
 	var is_jump_interrupted = false
 	if mm.velocity.y < 0.0:
-		if not Input.is_action_pressed("jump") and pc.controller_id == 0 or \
-		not Input.is_action_pressed("sasuke_jump") and pc.controller_id == 1:
+		if not Input.is_action_pressed("jump"):
 			is_jump_interrupted = true
 
 	set_player_directions()

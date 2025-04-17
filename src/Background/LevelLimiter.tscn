@@ -1,14 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://deyh6xyl8c6tr"]
+[gd_scene load_steps=2 format=3 uid="uid://deyh6xyl8c6tr"]
 
 [ext_resource type="Script" uid="uid://sw5a0ja4xk2f" path="res://src/Background/LevelLimiter.gd" id="1"]
-[ext_resource type="Resource" uid="uid://c8wjrm1mo1o02" path="res://src/Background/Mountains.tres" id="2_ufd2e"]
 
 [node name="LevelLimiter" type="MarginContainer"]
 offset_right = 476.0
 offset_bottom = 274.0
 mouse_filter = 2
 script = ExtResource("1")
-background_resource = ExtResource("2_ufd2e")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
 layout_mode = 2

@@ -9,11 +9,11 @@ release_version = "1.8"
 do_skip_title = true
 debug_visible = true
 gamemode = "pvp"
-start_level_path = "res://src/Level/DogtownInteriorTesting.tscn"
+start_level_path = "res://src/Level/WastesTesting.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_offset = Vector2(384, 1180)
-scroll_base_offset = Vector2(0, -988)
+scroll_base_offset = Vector2(0, -2572)
 
 [node name="Back" type="Node2D" parent="."]
 scale = Vector2(4, 4)

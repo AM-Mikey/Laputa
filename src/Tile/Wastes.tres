@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=21 format=3 uid="uid://cpukgml8va738"]
+[gd_resource type="TileSet" load_steps=21 format=3 uid="uid://cm4auuymtmne6"]
 
 [ext_resource type="Texture2D" uid="uid://clwgbhgjy4xub" path="res://assets/Tile/Wastes/Wastes0.png" id="1_huovy"]
 [ext_resource type="Texture2D" uid="uid://caj0qj1lcxpkr" path="res://assets/Tile/Wastes/Wastes1.png" id="2_ds6h0"]
@@ -234,21 +234,6 @@ texture = ExtResource("1_huovy")
 13:7/0 = 0
 14:7/0 = 0
 15:7/0 = 0
-11:14/0 = 0
-11:14/0/physics_layer_1/polygon_0/points = PackedVector2Array(0, 8, 8, 8, 8, 12, 0, 12)
-11:14/0/physics_layer_1/polygon_0/one_way = true
-12:14/0 = 0
-12:14/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 8, 8, 8, 8, 12, -8, 12)
-12:14/0/physics_layer_1/polygon_0/one_way = true
-13:14/0 = 0
-13:14/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 8, 8, 8, 8, 12, -8, 12)
-13:14/0/physics_layer_1/polygon_0/one_way = true
-14:14/0 = 0
-14:14/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 8, 8, 8, 8, 12, -8, 12)
-14:14/0/physics_layer_1/polygon_0/one_way = true
-15:14/0 = 0
-15:14/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 8, 0, 8, 0, 12, -8, 12)
-15:14/0/physics_layer_1/polygon_0/one_way = true
 13:4/0 = 0
 15:4/0 = 0
 11:4/0 = 0
@@ -306,6 +291,21 @@ texture = ExtResource("1_huovy")
 10:13/0 = 0
 11:13/0 = 0
 12:13/0 = 0
+14:10/0 = 0
+14:10/0/physics_layer_1/polygon_0/points = PackedVector2Array(0, 8, 8, 8, 8, 12, 0, 12)
+14:10/0/physics_layer_1/polygon_0/one_way = true
+15:10/0 = 0
+15:10/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 8, 8, 8, 8, 12, -8, 12)
+15:10/0/physics_layer_1/polygon_0/one_way = true
+16:10/0 = 0
+16:10/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 8, 8, 8, 8, 12, -8, 12)
+16:10/0/physics_layer_1/polygon_0/one_way = true
+17:10/0 = 0
+17:10/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 8, 8, 8, 8, 12, -8, 12)
+17:10/0/physics_layer_1/polygon_0/one_way = true
+18:10/0 = 0
+18:10/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 8, 0, 8, 0, 12, -8, 12)
+18:10/0/physics_layer_1/polygon_0/one_way = true
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gw5g2"]
 texture = ExtResource("2_ds6h0")

@@ -43,7 +43,8 @@ alignment = 2
 
 [node name="Default" type="Button" parent="VBox/HBox"]
 layout_mode = 2
-text = "Set Starting Level"
+text = "Current To 
+Start Level"
 
 [node name="Save" type="Button" parent="VBox/HBox"]
 layout_mode = 2

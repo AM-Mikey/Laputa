@@ -10,7 +10,7 @@ enum FarBackTileMode {DEFAULT, BOTH, HORIZONTAL, VERTICAL, NONE}
 	set = set_background_resouce
 @export var texture: CompressedTexture2D
 @export var layers := 1
-@export var layer_scales: Array
+@export var layer_scales: Dictionary
 @export var focus: Focus
 @export var tile_mode: TileMode
 @export var far_back_tile_mode: FarBackTileMode
@@ -55,7 +55,10 @@ func setup_layers():
 	for layer_index in layers:
 		var layer = ParallaxLayer.new()
 		pb.add_child(layer)
-		layer.motion_scale = layer_scales[layer_index]
+		if layer_scales.has(layer_index):
+			layer.motion_scale = layer_scales[layer_index]
+		else:
+			layer.motion_scale = Vector2.ZERO
 
 		var texture_rect = TextureRect.new()
 		texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -120,13 +123,17 @@ func set_tile_mode(texture_rect, mode = tile_mode):
 	match mode:
 		TileMode.HORIZONTAL:
 			texture_rect.size.x = layer_repeating_length
+			texture_rect.position.x = (layer_repeating_length / 2.0) * -1
 			texture_rect.size.y = texture_rect.texture.get_height()
 		TileMode.VERTICAL:
 			texture_rect.size.x = texture_rect.texture.get_width()
 			texture_rect.size.y = layer_repeating_length
+			texture_rect.position.y = (layer_repeating_length / 2.0) * -1
 		TileMode.BOTH:
 			texture_rect.size.x = layer_repeating_length
+			texture_rect.position.x = (layer_repeating_length / 2.0) * -1
 			texture_rect.size.y = layer_repeating_length
+			texture_rect.position.y = (layer_repeating_length / 2.0) * -1
 		TileMode.NONE:
 			texture_rect.size.x = texture_rect.texture.get_width()
 			texture_rect.size.y = texture_rect.texture.get_height()

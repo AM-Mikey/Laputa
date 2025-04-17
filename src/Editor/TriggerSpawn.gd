@@ -77,16 +77,7 @@ func spawn():
 
 
 
-#func disable():
-	#state = "disabled"
-	#visible = false
-#func enable():
-	#state = "enabled"
-	#visible = true
-
 func _input(event):
-	if state == "disabled": return
-	
 	if event.is_action_released("editor_lmb"):
 		state = "idle"
 		return
@@ -99,7 +90,8 @@ func _input(event):
 		
 		match state:
 			"drag":
-				position = Vector2(x, y)
+				var tile_map = world.current_level.get_node("TileMap")
+				global_position = Vector2(x, y)
 			"resize":
 				match active_handle.name:
 					"TopLeft":
@@ -134,15 +126,13 @@ func on_editor_deselect():
 
 
 func on_handle(handle):
-	#if state == "disabled": return
-	
 	if handle.name != "Mid":
 		state = "resize"
 		active_handle = handle
 		drag_offset = handle.global_position - get_global_mouse_position()
 	else:
 		state = "drag"
-		drag_offset = get_parent().position - get_global_mouse_position()
+		drag_offset = global_position - get_global_mouse_position()
 	emit_signal("selected", get_parent(), "trigger")
 	
 	
