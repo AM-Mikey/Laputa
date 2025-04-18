@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_ris4u"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_wom3b"]
-[ext_resource type="Texture2D" uid="uid://flsl5refgqw0" path="res://assets/Background/Mountains.png" id="3_ln0on"]
-[ext_resource type="Resource" uid="uid://d2oc8cenc1gm4" path="res://src/Background/PurplePlains.tres" id="3_wom3b"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_wom3b"]
 [ext_resource type="TileSet" uid="uid://j4ajqrgeit4t" path="res://src/Tile/DogtownInterior.tres" id="4_ris4u"]
+[ext_resource type="Texture2D" uid="uid://cb2wh1kjj4djx" path="res://assets/Background/TiledPlains.png" id="5_0p40l"]
 [ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="5_64d5n"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="6_v20vf"]
 [ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/TriggerSpawn.tscn" id="6_wom3b"]
@@ -21,9 +21,23 @@ conversation = "cutscene_test"
 offset_top = -256.0
 offset_right = 464.0
 background_resource = ExtResource("3_wom3b")
-texture = ExtResource("3_ln0on")
-layers = 4
-focus = 2
+texture = ExtResource("5_0p40l")
+layers = 5
+layer_scales = {
+0: Vector2(0, 0),
+1: Vector2(0.4, 0.4),
+2: Vector2(0.5, 0.6),
+3: Vector2(0.7, 0.7),
+4: Vector2(0.9, 0.9)
+}
+layer_height_offsets = {
+0: 0.0,
+1: -100.0,
+2: -50.0,
+3: 0.0,
+4: 0.0
+}
+focus = 4
 tile_mode = 1
 
 [node name="TileMap" type="TileMap" parent="."]

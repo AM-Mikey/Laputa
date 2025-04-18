@@ -1,13 +1,13 @@
 [gd_resource type="Theme" load_steps=21 format=3 uid="uid://45e84j2sj7w0"]
 
 [ext_resource type="StyleBox" uid="uid://cb3gs2qq26l03" path="res://src/UI/StyleBox/RustTabsLight.tres" id="1"]
-[ext_resource type="FontFile" uid="uid://cf01li78xvnnu" path="res://src/UI/Font/WelcomeBack.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://cc3ivdery0b8x" path="res://src/UI/StyleBox/RustRound.tres" id="3"]
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="4"]
 [ext_resource type="StyleBox" uid="uid://cl4yme0wtg3po" path="res://src/UI/Slider/Slider.tres" id="6"]
 [ext_resource type="StyleBox" path="res://src/UI/StyleBox/CursorBox.tres" id="9"]
 [ext_resource type="StyleBox" uid="uid://bwe3j6hcp3u7j" path="res://src/UI/StyleBox/SteelBeveledLight.tres" id="10"]
 [ext_resource type="StyleBox" uid="uid://ot23c6kiunqk" path="res://src/UI/StyleBox/RustTabsDark.tres" id="11"]
+[ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="11_ryfn6"]
 [ext_resource type="StyleBox" uid="uid://djsxt54vtaivl" path="res://src/UI/Slider/ScrollBarGrabber.tres" id="13"]
 [ext_resource type="StyleBox" uid="uid://qim7rgmnpjii" path="res://src/UI/Slider/ScrollBarGrabberHighlight.tres" id="14"]
 [ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="24"]
@@ -31,13 +31,12 @@
 [sub_resource type="StyleBoxEmpty" id="10"]
 
 [resource]
-default_font = ExtResource("2")
+default_font = ExtResource("11_ryfn6")
 Button/colors/font_color = Color(0.964706, 0.964706, 0.964706, 1)
 Button/colors/font_color_disabled = Color(0.901961, 0.901961, 0.901961, 0.2)
 Button/colors/font_color_hover = Color(1, 1, 1, 1)
 Button/colors/font_color_pressed = Color(1, 1, 1, 1)
 Button/constants/hseparation = 2
-Button/fonts/font = ExtResource("2")
 Button/styles/disabled = ExtResource("10")
 Button/styles/focus = ExtResource("10")
 Button/styles/hover = ExtResource("10")
@@ -50,7 +49,6 @@ CheckBox/colors/font_color_hover_pressed = Color(1, 1, 1, 1)
 CheckBox/colors/font_color_pressed = Color(1, 1, 1, 1)
 CheckBox/constants/check_vadjust = 0
 CheckBox/constants/hseparation = 4
-CheckBox/fonts/font = ExtResource("2")
 CheckBox/icons/checked = null
 CheckBox/icons/unchecked = null
 CheckButton/colors/font_color = Color(0.88, 0.88, 0.88, 1)
@@ -60,7 +58,6 @@ CheckButton/colors/font_color_hover_pressed = Color(1, 1, 1, 1)
 CheckButton/colors/font_color_pressed = Color(1, 1, 1, 1)
 CheckButton/constants/check_vadjust = 0
 CheckButton/constants/hseparation = 4
-CheckButton/fonts/font = ExtResource("2")
 CheckButton/icons/off = null
 CheckButton/icons/on = null
 CheckButton/styles/disabled = SubResource("2")
@@ -86,7 +83,6 @@ ItemList/constants/hseparation = 4
 ItemList/constants/icon_margin = 4
 ItemList/constants/line_separation = 2
 ItemList/constants/vseparation = 2
-ItemList/fonts/font = ExtResource("2")
 ItemList/styles/bg = ExtResource("4")
 ItemList/styles/bg_focus = ExtResource("4")
 Label/colors/font_color = Color(1, 1, 1, 1)
@@ -96,7 +92,6 @@ Label/constants/line_spacing = 3
 Label/constants/shadow_as_outline = 0
 Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
-Label/fonts/font = ExtResource("2")
 LineEdit/styles/focus = ExtResource("4")
 LineEdit/styles/normal = ExtResource("4")
 LineEdit/styles/read_only = ExtResource("4")
@@ -106,7 +101,6 @@ OptionButton/colors/font_color_hover = Color(0.2, 0.168627, 0.176471, 1)
 OptionButton/colors/font_color_pressed = Color(0.2, 0.168627, 0.176471, 1)
 OptionButton/constants/arrow_margin = 2
 OptionButton/constants/hseparation = 2
-OptionButton/fonts/font = ExtResource("2")
 OptionButton/icons/arrow = null
 Panel/styles/panel = ExtResource("3")
 TabContainer/colors/font_color_bg = Color(0.941176, 0.941176, 0.941176, 1)
@@ -117,7 +111,6 @@ TabContainer/constants/label_valign_bg = 2
 TabContainer/constants/label_valign_fg = 0
 TabContainer/constants/side_margin = 8
 TabContainer/constants/top_margin = 24
-TabContainer/fonts/font = ExtResource("2")
 TabContainer/styles/panel = ExtResource("3")
 TabContainer/styles/tab_bg = ExtResource("11")
 TabContainer/styles/tab_fg = ExtResource("1")

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_4uhn8"]
 [ext_resource type="TileSet" uid="uid://dpf0qbch10ic" path="res://src/Tile/Debug.tres" id="2_s4ctt"]
-[ext_resource type="Resource" uid="uid://d2oc8cenc1gm4" path="res://src/Background/PurplePlains.tres" id="3_abgb0"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_abgb0"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
-[ext_resource type="Texture2D" uid="uid://u0arku8ueeeh" path="res://assets/Background/ParalaxTest3.png" id="4_ec3uo"]
+[ext_resource type="Texture2D" uid="uid://cb2wh1kjj4djx" path="res://assets/Background/TiledPlains.png" id="5_njn3k"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="5_sjslv"]
 [ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/ActorSpawn.tscn" id="6_dcw0l"]
 [ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="6_mcn17"]
@@ -23,9 +23,24 @@ offset_top = -256.0
 offset_right = 704.0
 offset_bottom = 192.0
 background_resource = ExtResource("3_abgb0")
-texture = ExtResource("4_ec3uo")
-layers = 4
-focus = 2
+texture = ExtResource("5_njn3k")
+layers = 5
+layer_scales = {
+0: Vector2(0, 0),
+1: Vector2(0.4, 0.4),
+2: Vector2(0.5, 0.6),
+3: Vector2(0.7, 0.7),
+4: Vector2(0.9, 0.9)
+}
+layer_height_offsets = {
+0: 0.0,
+1: -100.0,
+2: -50.0,
+3: 0.0,
+4: 0.0
+}
+focus = 4
+tile_mode = 1
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = 1
@@ -68,17 +83,6 @@ properties = {
 "speed": [Vector2(100, 100), 5],
 "starting_state": ["", 4],
 "voiced": [true, 1]
-}
-
-[node name="Beetle" parent="Spawns" instance=ExtResource("6_dcw0l")]
-position = Vector2(-248, -112)
-actor_path = "res://src/Actor/Enemy/Beetle.tscn"
-properties = {
-"debug": [false, 1],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"move_dir": [Vector2(-1, 0), 5],
-"speed": [Vector2(150, 150), 5]
 }
 
 [node name="Frog" parent="Spawns" instance=ExtResource("6_dcw0l")]

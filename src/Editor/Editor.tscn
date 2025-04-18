@@ -61,7 +61,7 @@ size_flags_horizontal = 2
 mouse_filter = 2
 
 [node name="SecondarySizeRef" type="Control" parent="Margin/VBox/HBox"]
-custom_minimum_size = Vector2(205, 0)
+custom_minimum_size = Vector2(228, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 2

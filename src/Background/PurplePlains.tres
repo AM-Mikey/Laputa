@@ -14,6 +14,14 @@ layer_scales = {
 3: Vector2(1, 1),
 4: Vector2(0.5, 0.5)
 }
+layer_height_offsets = {
+0: 0.0,
+1: 0.0,
+2: 0.0,
+3: 0.0,
+4: 0.0
+}
+horizontal_speed = 0.0
 focus = 4
 tile_mode = 1
 far_back_tile_mode = 1

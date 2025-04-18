@@ -4,19 +4,22 @@ signal limit_camera(left, right, top, bottom)
 
 enum Focus {TOP, ONE_QUARTER, CENTER, THREE_QUARTERS, BOTTOM}
 enum TileMode {BOTH, HORIZONTAL, VERTICAL, NONE}
-enum FarBackTileMode {DEFAULT, BOTH, HORIZONTAL, VERTICAL, NONE}
+enum BackTileMode {DEFAULT, BOTH, HORIZONTAL, VERTICAL, NONE}
 
 @export var background_resource: Background:
 	set = set_background_resouce
 @export var texture: CompressedTexture2D
 @export var layers := 1
 @export var layer_scales: Dictionary
+@export var layer_height_offsets: Dictionary
+@export var horizontal_speed: float = 0.0
 @export var focus: Focus
 @export var tile_mode: TileMode
-@export var far_back_tile_mode: FarBackTileMode
+@export var back_tile_mode: BackTileMode
 
 var layer_repeating_length := 5000
 var camera: Node
+var texture_rects: Dictionary
 
 @onready var w = get_tree().get_root().get_node("World")
 @onready var pb = w.get_node("ParallaxBackground")
@@ -39,26 +42,38 @@ func setup():
 	on_viewport_size_changed()
 	
 
+func _physics_process(_delta):
+	
+	for t in texture_rects:
+		texture_rects[t].position.x += horizontal_speed * layer_scales[t].x
+		var texture_width = texture_rects[t].texture.get_width()
+		if texture_rects[t].position.x >= (layer_repeating_length * -0.5) + texture_width \
+		or texture_rects[t].position.x <= (layer_repeating_length * -0.5) - texture_width:
+			set_tile_mode(texture_rects[t]) #reset x position to start
+
 func set_background_resouce(value): #note this goes through inspector on_changed code first, and then does setup_layers, setup_focus from there
 	background_resource = value
 	texture = value.texture
 	layers = value.layers
 	layer_scales = value.layer_scales
+	layer_height_offsets = value.layer_height_offsets
+	horizontal_speed = value.horizontal_speed
 	focus = value.focus
 	tile_mode = value.tile_mode
+	back_tile_mode = value.back_tile_mode
 
 
 func setup_layers():
+	texture_rects.clear()
 	for c in pb.get_children():
 		c.free()
 
 	for layer_index in layers:
 		var layer = ParallaxLayer.new()
 		pb.add_child(layer)
-		if layer_scales.has(layer_index):
-			layer.motion_scale = layer_scales[layer_index]
-		else:
-			layer.motion_scale = Vector2.ZERO
+		
+		if layer_scales.has(layer_index): layer.motion_scale = layer_scales[layer_index]
+		else: layer.motion_scale = Vector2.ZERO
 
 		var texture_rect = TextureRect.new()
 		texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -78,20 +93,21 @@ func setup_layers():
 		texture_rect.texture = clipped_texture
 		
 		if layer_index == 0:
-			match far_back_tile_mode:
-				FarBackTileMode.DEFAULT:
+			match back_tile_mode:
+				BackTileMode.DEFAULT:
 					set_tile_mode(texture_rect)
-				FarBackTileMode.HORIZONTAL:
+				BackTileMode.HORIZONTAL:
 					set_tile_mode(texture_rect, TileMode.HORIZONTAL)
-				FarBackTileMode.VERTICAL:
+				BackTileMode.VERTICAL:
 					set_tile_mode(texture_rect, TileMode.VERTICAL)
-				FarBackTileMode.BOTH:
+				BackTileMode.BOTH:
 					set_tile_mode(texture_rect, TileMode.BOTH)
-				FarBackTileMode.NONE:
+				BackTileMode.NONE:
 					set_tile_mode(texture_rect, TileMode.NONE)
 		else:
 			set_tile_mode(texture_rect)
-		
+		texture_rect.position.y += layer_height_offsets[layer_index]
+		texture_rects[layer_index] = texture_rect
 		layer.add_child(texture_rect)
 
 
@@ -123,17 +139,17 @@ func set_tile_mode(texture_rect, mode = tile_mode):
 	match mode:
 		TileMode.HORIZONTAL:
 			texture_rect.size.x = layer_repeating_length
-			texture_rect.position.x = (layer_repeating_length / 2.0) * -1
+			texture_rect.position.x = layer_repeating_length * -0.5
 			texture_rect.size.y = texture_rect.texture.get_height()
 		TileMode.VERTICAL:
 			texture_rect.size.x = texture_rect.texture.get_width()
 			texture_rect.size.y = layer_repeating_length
-			texture_rect.position.y = (layer_repeating_length / 2.0) * -1
+			texture_rect.position.y = layer_repeating_length * -0.5
 		TileMode.BOTH:
 			texture_rect.size.x = layer_repeating_length
-			texture_rect.position.x = (layer_repeating_length / 2.0) * -1
+			texture_rect.position.x = layer_repeating_length * -0.5
 			texture_rect.size.y = layer_repeating_length
-			texture_rect.position.y = (layer_repeating_length / 2.0) * -1
+			texture_rect.position.y = layer_repeating_length * -0.5
 		TileMode.NONE:
 			texture_rect.size.x = texture_rect.texture.get_width()
 			texture_rect.size.y = texture_rect.texture.get_height()

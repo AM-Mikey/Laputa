@@ -1,12 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://driq444nxd8v8"]
+[gd_scene load_steps=5 format=3 uid="uid://driq444nxd8v8"]
 
-[ext_resource type="FontFile" uid="uid://c2usuk2q82kno" path="res://src/UI/Font/Momo.tres" id="1"]
 [ext_resource type="Script" uid="uid://d3nbxvskm8eat" path="res://src/UI/TitleScreen.gd" id="3"]
+[ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momo.ttf" id="3_f4kbc"]
 [ext_resource type="Theme" uid="uid://ouysr8x0xtu5" path="res://src/UI/Theme/Floating.tres" id="4"]
 [ext_resource type="PackedScene" uid="uid://cocixd0n3hmcm" path="res://src/UI/MenuButton.tscn" id="7"]
-
-[sub_resource type="Resource" id="Resource_f4kbc"]
-metadata/__load_path__ = "res://assets/UI/TitleScreen/TitleLogo.png"
 
 [node name="TitleScreen" type="MarginContainer"]
 offset_right = 576.0
@@ -24,7 +21,7 @@ size_flags_vertical = 8
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("1")
+theme_override_fonts/font = ExtResource("3_f4kbc")
 text = "Version:"
 
 [node name="VBox" type="VBoxContainer" parent="."]
@@ -32,7 +29,6 @@ layout_mode = 2
 
 [node name="Title" type="TextureRect" parent="VBox"]
 layout_mode = 2
-texture = SubResource("Resource_f4kbc")
 stretch_mode = 4
 
 [node name="New" parent="VBox" instance=ExtResource("7")]

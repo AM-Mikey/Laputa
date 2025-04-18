@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://bji3j7jm2votc"]
+[gd_scene load_steps=17 format=3 uid="uid://bji3j7jm2votc"]
 
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1"]
 [ext_resource type="StyleBox" uid="uid://c53b3p1k47jdu" path="res://src/UI/StyleBox/SteelRound.tres" id="2"]
 [ext_resource type="Script" uid="uid://dhuooyagsaocp" path="res://src/Editor/Button/PropertyButton.gd" id="3"]
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="4"]
+[ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momo.ttf" id="4_sdg3t"]
 
 [sub_resource type="StyleBoxEmpty" id="3"]
 
@@ -53,6 +54,7 @@ mouse_filter = 2
 
 [node name="Button" type="Button" parent="HBox"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_sdg3t")
 theme_override_styles/focus = SubResource("3")
 theme_override_styles/disabled = SubResource("4")
 theme_override_styles/hover = SubResource("1")
@@ -64,6 +66,7 @@ flat = true
 [node name="HBox" type="HBoxContainer" parent="HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
+alignment = 2
 
 [node name="Bool" type="CheckBox" parent="HBox/HBox"]
 visible = false
@@ -102,6 +105,7 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 1
+theme_override_fonts/font = ExtResource("4_sdg3t")
 theme_override_styles/focus = ExtResource("4")
 theme_override_styles/disabled = ExtResource("4")
 theme_override_styles/hover = ExtResource("4")
@@ -112,8 +116,30 @@ theme_override_styles/normal = ExtResource("4")
 visible = false
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("4_sdg3t")
+text = "fffttttt"
+placeholder_text = "Null"
+alignment = 2
+deselect_on_focus_loss_enabled = false
+
+[node name="Int" type="LineEdit" parent="HBox/HBox"]
+visible = false
+layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 1
+theme_override_fonts/font = ExtResource("4_sdg3t")
+placeholder_text = "Null"
+alignment = 2
+deselect_on_focus_loss_enabled = false
+
+[node name="Float" type="LineEdit" parent="HBox/HBox"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 10
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("4_sdg3t")
 placeholder_text = "Null"
 alignment = 2
 deselect_on_focus_loss_enabled = false
@@ -123,6 +149,7 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
+theme_override_fonts/font = ExtResource("4_sdg3t")
 placeholder_text = "Null"
 alignment = 2
 editable = false
@@ -130,17 +157,18 @@ editable = false
 [node name="Vector2X" type="LineEdit" parent="HBox/HBox"]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 8
 mouse_filter = 1
+theme_override_fonts/font = ExtResource("4_sdg3t")
 placeholder_text = "Null"
 alignment = 2
 
 [node name="Vector2Y" type="LineEdit" parent="HBox/HBox"]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 8
 mouse_filter = 1
-placeholder_text = "Null"
+theme_override_fonts/font = ExtResource("4_sdg3t")
 alignment = 2
 
 [node name="Spacer2" type="Control" parent="HBox"]
@@ -153,6 +181,8 @@ mouse_filter = 2
 [connection signal="popup_closed" from="HBox/HBox/Color" to="." method="on_color_changed"]
 [connection signal="item_selected" from="HBox/HBox/Enum" to="." method="on_enum_selected"]
 [connection signal="text_submitted" from="HBox/HBox/String" to="." method="_on_String_text_entered"]
+[connection signal="text_submitted" from="HBox/HBox/Int" to="." method="_on_int_text_submitted"]
+[connection signal="text_submitted" from="HBox/HBox/Float" to="." method="_on_float_text_entered"]
 [connection signal="text_submitted" from="HBox/HBox/Load" to="." method="on_text_entered"]
 [connection signal="text_submitted" from="HBox/HBox/Vector2X" to="." method="on_vector2x_entered"]
 [connection signal="text_submitted" from="HBox/HBox/Vector2Y" to="." method="on_vector2y_entered"]

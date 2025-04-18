@@ -67,13 +67,15 @@ func display_data():
 			create_button("texture", limiter.texture.resource_path, "load")
 			create_button("layers", limiter.layers, "int")
 			for l in limiter.layers:
-				if limiter.layer_scales.has(l):
-					create_button("layer_scales_%s"%l, limiter.layer_scales[l], "vector2")
-				else:
-					create_button("layer_scales_%s"%l, Vector2.ZERO, "vector2")
+				if limiter.layer_scales.has(l): create_button("layer_scales_%s"%l, limiter.layer_scales[l], "vector2")
+				else: create_button("layer_scales_%s"%l, Vector2.ZERO, "vector2")
+			for l in limiter.layers:
+				if limiter.layer_scales.has(l): create_button("layer_height_offsets_%s"%l, limiter.layer_height_offsets[l], "float")
+				else: create_button("layer_height_offsets_%s"%l, Vector2.ZERO, "float")
+			create_button("horizontal_speed", limiter.horizontal_speed, "float")
 			create_button("focus", limiter.focus, "enum", limiter.Focus.keys())
 			create_button("tile_mode", limiter.tile_mode, "enum", limiter.TileMode.keys())
-			create_button("far_back_tile_mode", limiter.far_back_tile_mode, "enum", limiter.FarBackTileMode.keys())
+			create_button("back_tile_mode", limiter.back_tile_mode, "enum", limiter.BackTileMode.keys())
 			create_save_button("background")
 		"actor_spawn":
 			for p in active.properties:
@@ -228,7 +230,7 @@ func on_property_changed(property_name, property_value):
 					active.level_limiter.set(property_name, load(property_value))
 					active.level_limiter.setup_layers()
 					active.level_limiter.set_focus()
-				"layers", "focus", "tile_mode", "far_back_tile_mode":
+				"layers", "focus", "tile_mode", "back_tile_mode", "horizontal_speed":
 					active.level_limiter.set(property_name, property_value)
 					active.level_limiter.setup_layers()
 					active.level_limiter.set_focus()
@@ -237,7 +239,12 @@ func on_property_changed(property_name, property_value):
 				active.level_limiter.layer_scales[layer_index] = property_value
 				active.level_limiter.setup_layers()
 				active.level_limiter.set_focus()
-					
+			if property_name.begins_with("layer_height_offsets_"):
+				var layer_index = int(property_name.trim_prefix("layer_height_offsets_"))
+				active.level_limiter.layer_height_offsets[layer_index] = property_value
+				active.level_limiter.setup_layers()
+				active.level_limiter.set_focus()
+
 		"actor_spawn":
 			active.properties[property_name][0] = property_value
 		"trigger_spawn":
@@ -286,9 +293,11 @@ func _on_SaveDialog_file_selected(path: String):
 		new.texture = ll.texture
 		new.layers = ll.layers
 		new.layer_scales = ll.layer_scales
+		new.layer_height_offsets = ll.layer_height_offsets
+		new.horizontal_speed = ll.horizontal_speed
 		new.focus = ll.focus
 		new.tile_mode = ll.tile_mode
-		new.far_back_tile_mode = ll.far_back_tile_mode
+		new.back_tile_mode = ll.back_tile_mode
 		ResourceSaver.save(new, path)
 		editor.log.lprint(str("Saved Current Background Resource to: ", path))
 		print("Saved Current Background Resource to: ", path)

@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://dqramyf8aeeyv"]
 
-[ext_resource type="Theme" path="res://src/UI/Theme/InsetMenu.tres" id="1"]
+[ext_resource type="Theme" uid="uid://c1np2xna4dogr" path="res://src/UI/Theme/InsetMenu.tres" id="1"]
 [ext_resource type="Texture2D" uid="uid://cl3sa7nubis6p" path="res://assets/UI/Settings/KeyboardMouse.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://bmeh5rfp6bvek" path="res://assets/UI/Settings/KeyboardClassic.png" id="3"]
+[ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momo.ttf" id="3_vje3i"]
 [ext_resource type="Texture2D" uid="uid://ccaq53m8l5g3c" path="res://assets/UI/Settings/KeyboardCustom.png" id="4"]
 [ext_resource type="Script" uid="uid://cq6xxd8uisqit" path="res://src/UI/Options/KeyConfig.gd" id="6"]
-[ext_resource type="FontFile" uid="uid://ph5e7vu3daff" path="res://src/UI/Font/MomoNoSpacing.tres" id="8"]
 [ext_resource type="StyleBox" uid="uid://bqcnin0ya0s5l" path="res://src/UI/StyleBox/SteelCorner.tres" id="9"]
 
 [node name="KeyConfig" type="MarginContainer"]
@@ -61,7 +61,7 @@ toggle_mode = true
 
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/jump"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
+theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Jump"
 
 [node name="fire_manual" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
@@ -74,7 +74,7 @@ toggle_mode = true
 
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/fire_manual"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
+theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Manual Fire"
 
 [node name="fire_automatic" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
@@ -87,7 +87,7 @@ toggle_mode = true
 
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/fire_automatic"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
+theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Automatic Fire / Direction Lock"
 
 [node name="move_left" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
@@ -100,7 +100,7 @@ toggle_mode = true
 
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/move_left"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
+theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Move Left"
 
 [node name="move_right" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
@@ -113,7 +113,7 @@ toggle_mode = true
 
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/move_right"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
+theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Move Right"
 
 [node name="look_up" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
@@ -126,7 +126,7 @@ toggle_mode = true
 
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/look_up"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
+theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Look Up"
 
 [node name="look_down" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
@@ -139,7 +139,7 @@ toggle_mode = true
 
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/look_down"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
+theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Look Down"
 
 [node name="ui_accept" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
@@ -152,7 +152,7 @@ toggle_mode = true
 
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/ui_accept"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
+theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Menu Accept"
 
 [node name="ui_cancel" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
@@ -165,7 +165,7 @@ toggle_mode = true
 
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/ui_cancel"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
+theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Menu Cancel"
 
 [node name="inspect" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
@@ -178,7 +178,7 @@ toggle_mode = true
 
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/inspect"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
+theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Inspect"
 
 [node name="inventory" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
@@ -191,7 +191,7 @@ toggle_mode = true
 
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/inventory"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
+theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Inventory"
 
 [node name="gun_left" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
@@ -204,7 +204,7 @@ toggle_mode = true
 
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/gun_left"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
+theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Next Gun"
 
 [node name="gun_right" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
@@ -217,7 +217,7 @@ toggle_mode = true
 
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/gun_right"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
+theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Previous Gun"
 
 [node name="pause" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
@@ -230,7 +230,7 @@ toggle_mode = true
 
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/pause"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
+theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Pause"
 
 [node name="Settings" type="VBoxContainer" parent="Margin/HBox"]

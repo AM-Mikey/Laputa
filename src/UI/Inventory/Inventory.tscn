@@ -2,11 +2,11 @@
 
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="3"]
-[ext_resource type="FontFile" uid="uid://cf01li78xvnnu" path="res://src/UI/Font/WelcomeBack.tres" id="5"]
 [ext_resource type="Script" uid="uid://dw8rl6uwhnt3l" path="res://src/UI/Inventory/Inventory.gd" id="6"]
 [ext_resource type="PackedScene" uid="uid://dbyknhh1oyx5i" path="res://src/UI/Inventory/WeaponWheel.tscn" id="7"]
+[ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="7_y7abv"]
 [ext_resource type="StyleBox" uid="uid://d20qvx0q5xflf" path="res://src/UI/StyleBox/RustTrimmedScrews.tres" id="8"]
-[ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momoextended.ttf" id="8_1e805"]
+[ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momo.ttf" id="8_1e805"]
 [ext_resource type="StyleBox" uid="uid://dceypmylvy2ho" path="res://src/UI/StyleBox/StoneBeveled.tres" id="9"]
 
 [node name="Inventory" type="MarginContainer"]
@@ -101,7 +101,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_colors/font_shadow_color = Color(0.113725, 0.156863, 0.227451, 1)
-theme_override_fonts/font = ExtResource("5")
+theme_override_fonts/font = ExtResource("7_y7abv")
 text = "Tasty Treat"
 
 [node name="Body" type="Label" parent="MarginContainer/VBoxContainer/Description/MarginContainer/VBoxContainer"]

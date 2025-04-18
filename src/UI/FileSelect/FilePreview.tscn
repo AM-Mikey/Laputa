@@ -3,9 +3,9 @@
 [ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="1"]
 [ext_resource type="Texture2D" uid="uid://becycyqrw4heh" path="res://assets/Icon/GameIcon.png" id="2"]
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="3"]
-[ext_resource type="FontFile" uid="uid://c2usuk2q82kno" path="res://src/UI/Font/Momo.tres" id="4"]
 [ext_resource type="Texture2D" uid="uid://p42f67tuxymb" path="res://assets/UI/FileSelect/HpIcon.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://cjfpnens1b2im" path="res://assets/UI/FileSelect/XpIcon.png" id="6"]
+[ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momo.ttf" id="7_tg7ve"]
 [ext_resource type="PackedScene" uid="uid://bf3lvcu6ts2nr" path="res://src/UI/HUD/GunIcon.tscn" id="17"]
 
 [node name="FilePreview" type="MarginContainer"]
@@ -108,7 +108,7 @@ layout_mode = 2
 
 [node name="Label2" type="Label" parent="Margin/HBox/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4")
+theme_override_fonts/font = ExtResource("7_tg7ve")
 text = "Sanctuary"
 
 [node name="VBox2" type="VBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer/HBoxContainer"]

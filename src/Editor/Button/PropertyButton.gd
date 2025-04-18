@@ -25,13 +25,13 @@ func _ready():
 				$HBox/HBox/Enum.add_item(i)
 			$HBox/HBox/Enum.select(property_value)
 		"int", Variant.Type.TYPE_INT:
-			$HBox/HBox/String.visible = true
+			$HBox/HBox/Int.visible = true
 			if property_value != null: #"if property_value" doesn't trigger for value = 0
-				$HBox/HBox/String.text = String("%.f" % int(property_value))
+				$HBox/HBox/Int.text = "%d" % int(property_value)
 		"float", Variant.Type.TYPE_FLOAT:
-			$HBox/HBox/String.visible = true
+			$HBox/HBox/Float.visible = true
 			if property_value != null:
-				$HBox/HBox/String.text = "%.3f" % property_value
+				$HBox/HBox/Float.text = "%.*f" % [step_decimals(snapped(float(property_value), 0.001)), float(property_value)]
 			
 		"load":
 			$HBox/HBox/Load.visible = true
@@ -47,9 +47,8 @@ func _ready():
 			$HBox/HBox/Vector2X.visible = true
 			$HBox/HBox/Vector2Y.visible = true
 			if property_value != null:
-				$HBox/HBox/Vector2X.text = "%.3f" % property_value.x
-				$HBox/HBox/Vector2Y.text = "%.3f" % property_value.y
-				
+				$HBox/HBox/Vector2X.text = "%.*f" % [step_decimals(snapped(float(property_value.x), 0.001)), float(property_value.x)]
+				$HBox/HBox/Vector2Y.text = "%.*f" % [step_decimals(snapped(float(property_value.y), 0.001)), float(property_value.y)]
 		_:
 			$HBox/HBox/String.visible = true
 			if property_value != null:
@@ -74,7 +73,6 @@ func _on_String_text_entered(new_text):
 	emit_signal("property_changed", property_name, property_value)
 
 func on_bool_toggled(button_pressed):
-	#am.play("ui_accept")
 	property_value = button_pressed
 	emit_signal("property_changed", property_name, property_value)
 
@@ -83,15 +81,19 @@ func on_color_changed():
 	emit_signal("property_changed", property_name, property_value)
 
 func on_enum_selected(index):
-	#am.play("ui_accept")
 	property_value = index
 	emit_signal("property_changed", property_name, property_value)
 
+func _on_int_text_submitted(new_text):
+	property_value= float(new_text)
+	emit_signal("property_changed", property_name, property_value)
+func _on_float_text_entered(new_text):
+	property_value= float(new_text)
+	emit_signal("property_changed", property_name, property_value)
+
 func on_vector2x_entered(new_text):
-	#am.play("ui_accept")
 	property_value.x = float(new_text)
 	emit_signal("property_changed", property_name, property_value)
 func on_vector2y_entered(new_text):
-	#am.play("ui_accept")
 	property_value.y = float(new_text)
 	emit_signal("property_changed", property_name, property_value)

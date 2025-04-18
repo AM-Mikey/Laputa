@@ -1,6 +1,5 @@
-[gd_resource type="Theme" load_steps=31 format=3 uid="uid://deptsttubjnfv"]
+[gd_resource type="Theme" load_steps=30 format=3 uid="uid://deptsttubjnfv"]
 
-[ext_resource type="FontFile" uid="uid://cf01li78xvnnu" path="res://src/UI/Font/WelcomeBack.tres" id="1"]
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://djsxt54vtaivl" path="res://src/UI/Slider/ScrollBarGrabber.tres" id="3"]
 [ext_resource type="StyleBox" uid="uid://bwe3j6hcp3u7j" path="res://src/UI/StyleBox/SteelBeveledLight.tres" id="4"]
@@ -13,10 +12,10 @@
 [ext_resource type="StyleBox" uid="uid://cedutrf4qdb7q" path="res://src/UI/StyleBox/SteelRoundDark.tres" id="10"]
 [ext_resource type="StyleBox" uid="uid://ot23c6kiunqk" path="res://src/UI/StyleBox/RustTabsDark.tres" id="11"]
 [ext_resource type="StyleBox" uid="uid://cb3gs2qq26l03" path="res://src/UI/StyleBox/RustTabsLight.tres" id="12"]
+[ext_resource type="Texture2D" uid="uid://ba4mjche6bhat" path="res://assets/UI/Button/OptionArrow.png" id="12_6v7jy"]
 [ext_resource type="StyleBox" uid="uid://4n3eltlwqyie" path="res://src/UI/StyleBox/PaperBorder.tres" id="13"]
 [ext_resource type="StyleBox" uid="uid://deshi6r488bxi" path="res://src/UI/StyleBox/SteelRoundRiveted.tres" id="14_a1ofe"]
 [ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="16_yxwjr"]
-[ext_resource type="FontFile" path="res://src/UI/Font/WelcomeBackButton.tres" id="21"]
 [ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="22"]
 
 [sub_resource type="StyleBoxEmpty" id="13"]
@@ -55,7 +54,6 @@ Button/styles/hover = ExtResource("4")
 Button/styles/normal = ExtResource("6")
 Button/styles/pressed = ExtResource("4")
 CheckBox/colors/font_color = Color(0.968627, 0.886275, 0.717647, 1)
-CheckBox/fonts/font = ExtResource("21")
 CheckBox/icons/checked = ExtResource("4_1yawo")
 CheckBox/icons/unchecked = ExtResource("5_iuojp")
 CheckButton/colors/font_color = Color(0.88, 0.88, 0.88, 1)
@@ -65,7 +63,6 @@ CheckButton/colors/font_color_hover_pressed = Color(1, 1, 1, 1)
 CheckButton/colors/font_color_pressed = Color(1, 1, 1, 1)
 CheckButton/constants/check_vadjust = 0
 CheckButton/constants/hseparation = 4
-CheckButton/fonts/font = ExtResource("1")
 CheckButton/icons/off = null
 CheckButton/icons/on = null
 CheckButton/styles/disabled = SubResource("2")
@@ -91,7 +88,6 @@ ItemList/constants/hseparation = 4
 ItemList/constants/icon_margin = 4
 ItemList/constants/line_separation = 2
 ItemList/constants/vseparation = 2
-ItemList/fonts/font = ExtResource("1")
 ItemList/styles/panel = ExtResource("2")
 Label/colors/font_color = Color(0.968627, 0.886275, 0.717647, 1)
 Label/colors/font_color_shadow = Color(0.0352941, 0.0431373, 0.101961, 1)
@@ -99,15 +95,13 @@ Label/constants/line_spacing = 3
 Label/constants/shadow_as_outline = 0
 Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
-Label/fonts/font = ExtResource("21")
-LineEdit/constants/minimum_spaces = 4
+LineEdit/constants/minimum_character_width = 3
 LineEdit/styles/focus = ExtResource("2")
 LineEdit/styles/normal = ExtResource("2")
 LineEdit/styles/read_only = ExtResource("2")
 OptionButton/constants/arrow_margin = 2
 OptionButton/constants/hseparation = 2
-OptionButton/fonts/font = ExtResource("1")
-OptionButton/icons/arrow = null
+OptionButton/icons/arrow = ExtResource("12_6v7jy")
 Panel/styles/panel = ExtResource("10")
 PopupMenu/colors/font_color = Color(0.305882, 0.129412, 0.0823529, 1)
 PopupMenu/colors/font_disabled_color = Color(0.4, 0.4, 0.4, 0.8)

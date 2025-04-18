@@ -1,16 +1,15 @@
-[gd_resource type="Theme" load_steps=24 format=3 uid="uid://ouysr8x0xtu5"]
+[gd_resource type="Theme" load_steps=23 format=3 uid="uid://ouysr8x0xtu5"]
 
-[ext_resource type="FontFile" uid="uid://cf01li78xvnnu" path="res://src/UI/Font/WelcomeBack.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="4"]
 [ext_resource type="Texture2D" uid="uid://ba4mjche6bhat" path="res://assets/UI/Button/OptionArrow.png" id="5"]
 [ext_resource type="StyleBox" uid="uid://cl4yme0wtg3po" path="res://src/UI/Slider/Slider.tres" id="6"]
 [ext_resource type="Texture2D" uid="uid://bh5618vuv7rqh" path="res://assets/UI/Slider/SliderGrabber.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://bht7kghp51wa" path="res://assets/UI/Slider/SliderTick.png" id="8"]
 [ext_resource type="StyleBox" path="res://src/UI/StyleBox/CursorBox.tres" id="9"]
-[ext_resource type="FontFile" path="res://src/UI/Font/WelcomeBackButton.tres" id="10"]
 [ext_resource type="StyleBox" uid="uid://djsxt54vtaivl" path="res://src/UI/Slider/ScrollBarGrabber.tres" id="13"]
 [ext_resource type="StyleBox" uid="uid://qim7rgmnpjii" path="res://src/UI/Slider/ScrollBarGrabberHighlight.tres" id="14"]
 [ext_resource type="Texture2D" uid="uid://dmw1vfsm1h4yx" path="res://assets/UI/Slider/ScrollBarGrabberHighlight.png" id="15"]
+[ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="15_q1gxp"]
 [ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="16"]
 [ext_resource type="Texture2D" uid="uid://cu4qudjqpkt75" path="res://assets/UI/Slider/Slider.png" id="17"]
 [ext_resource type="Texture2D" uid="uid://bl1htelnmympq" path="res://assets/UI/Slider/SliderGrabberHighlight.png" id="18"]
@@ -32,14 +31,13 @@
 [sub_resource type="StyleBoxEmpty" id="8"]
 
 [resource]
-default_font = ExtResource("2")
+default_font = ExtResource("15_q1gxp")
 Button/colors/font_color = Color(0.784314, 0.784314, 0.639216, 1)
 Button/colors/font_color_disabled = Color(0.403922, 0.286275, 0.262745, 1)
 Button/colors/font_color_focus = Color(0.964706, 0.964706, 0.964706, 1)
 Button/colors/font_color_hover = Color(0.964706, 0.964706, 0.964706, 1)
 Button/colors/font_color_pressed = Color(0.0352941, 0.0431373, 0.101961, 1)
 Button/constants/hseparation = 2
-Button/fonts/font = ExtResource("10")
 Button/styles/disabled = ExtResource("16")
 Button/styles/focus = ExtResource("16")
 Button/styles/hover = ExtResource("16")
@@ -52,7 +50,6 @@ CheckBox/colors/font_color_hover_pressed = Color(1, 1, 1, 1)
 CheckBox/colors/font_color_pressed = Color(1, 1, 1, 1)
 CheckBox/constants/check_vadjust = 0
 CheckBox/constants/hseparation = 4
-CheckBox/fonts/font = ExtResource("2")
 CheckBox/icons/checked = ExtResource("15")
 CheckBox/icons/unchecked = ExtResource("17")
 CheckButton/colors/font_color = Color(0.88, 0.88, 0.88, 1)
@@ -62,7 +59,6 @@ CheckButton/colors/font_color_hover_pressed = Color(1, 1, 1, 1)
 CheckButton/colors/font_color_pressed = Color(1, 1, 1, 1)
 CheckButton/constants/check_vadjust = 0
 CheckButton/constants/hseparation = 4
-CheckButton/fonts/font = ExtResource("2")
 CheckButton/icons/off = ExtResource("20")
 CheckButton/icons/on = ExtResource("19")
 CheckButton/styles/disabled = SubResource("2")
@@ -88,7 +84,6 @@ ItemList/constants/hseparation = 4
 ItemList/constants/icon_margin = 4
 ItemList/constants/line_separation = 2
 ItemList/constants/vseparation = 2
-ItemList/fonts/font = ExtResource("2")
 ItemList/styles/bg = ExtResource("4")
 ItemList/styles/bg_focus = ExtResource("4")
 Label/colors/font_color = Color(1, 1, 1, 1)
@@ -98,7 +93,6 @@ Label/constants/line_spacing = 3
 Label/constants/shadow_as_outline = 0
 Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
-Label/fonts/font = ExtResource("2")
 LineEdit/styles/focus = ExtResource("4")
 LineEdit/styles/normal = ExtResource("4")
 LineEdit/styles/read_only = ExtResource("4")
@@ -108,5 +102,4 @@ OptionButton/colors/font_color_hover = Color(0.2, 0.168627, 0.176471, 1)
 OptionButton/colors/font_color_pressed = Color(0.2, 0.168627, 0.176471, 1)
 OptionButton/constants/arrow_margin = 2
 OptionButton/constants/hseparation = 2
-OptionButton/fonts/font = ExtResource("2")
 OptionButton/icons/arrow = ExtResource("5")

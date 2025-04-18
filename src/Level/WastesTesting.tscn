@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_gqwwp"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_3ucb2"]
-[ext_resource type="Resource" uid="uid://b0k685fso6ys3" path="res://src/Background/TiledPlains.tres" id="4_c6eqk"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="4_c6eqk"]
 [ext_resource type="TileSet" uid="uid://cm4auuymtmne6" path="res://src/Tile/Wastes.tres" id="4_tdjow"]
 [ext_resource type="Texture2D" uid="uid://cb2wh1kjj4djx" path="res://assets/Background/TiledPlains.png" id="5_tj576"]
 [ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="5_w8juu"]
@@ -35,9 +35,15 @@ layer_scales = {
 3: Vector2(0.8, 0.8),
 4: Vector2(1, 1)
 }
+layer_height_offsets = {
+0: 0.0,
+1: 0.0,
+2: 0.0,
+3: 0.0,
+4: 0.0
+}
 focus = 3
 tile_mode = 1
-far_back_tile_mode = 1
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = 1

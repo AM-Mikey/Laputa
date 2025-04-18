@@ -120,7 +120,7 @@ func setup_windows(): #the main and secondary editor windows
 	await get_tree().process_frame
 	$Main/Win.size = $Margin/VBox/HBox/MainSizeRef.size
 	$Main/Win.position = $Margin/VBox/HBox/MainSizeRef.position
-	$Secondary/Win.size.x = $Margin/VBox/HBox/SecondarySizeRef.size.x
+	$Secondary/Win.size = $Margin/VBox/HBox/SecondarySizeRef.size
 	$Secondary/Win.position = $Margin/VBox/HBox/SecondarySizeRef.position
 
 #func set_entities_pickable(pickable = true): #TODO: this is still used, move away from this with the new dummy actorspawns
