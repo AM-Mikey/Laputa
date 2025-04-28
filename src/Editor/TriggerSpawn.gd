@@ -19,27 +19,21 @@ func _ready():
 	#ColorRect
 	var trigger = load(trigger_path).instantiate()
 	$ColorRect.color = trigger.color
-	
 	#name
 	var index = 0
 	for a in get_tree().get_nodes_in_group("TriggerSpawns"):
 		if a == self: break
 		if a.trigger_path == trigger_path:
 			index +=1
-	if index == 0:
-		name = trigger.name
-	else:
-		name = str(trigger.name, index)
-	
+	if index == 0: name = trigger.name
+	else: name = str(trigger.name, index)
 	#transform
-	#size = trigger.get_node("CollisionShape2D").shape.size
+	size = trigger.get_node("CollisionShape2D").shape.size
 	#global_position = trigger.get_node("CollisionShape2D").global_position
-
+	
 	if world.el.get_child_count() == 0: #not in editor
 		visible = false
 		spawn()
-
-
 	for h in $Handles/Top.get_children():
 			h.connect("button_down", Callable(self, "on_handle").bind(h))
 			buttons.append(h)
@@ -82,8 +76,8 @@ func _input(event):
 		state = "idle"
 		return
 	if event is InputEventMouseMotion and state != "idle": #dragging or resizing
-		var x = snapped(get_global_mouse_position().x + drag_offset.x, 16)
-		var y = snapped(get_global_mouse_position().y + drag_offset.y, 16)
+		var x = snapped(get_global_mouse_position().x + drag_offset.x, 8)
+		var y = snapped(get_global_mouse_position().y + drag_offset.y, 8)
 		
 		var parent_x = get_parent().position.x
 		var parent_y = get_parent().position.y

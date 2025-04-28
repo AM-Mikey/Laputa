@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://od834g8t6x33" path="res://src/Editor/TriggerSpawn.gd" id="1_iwm6m"]
 
 [node name="TriggerSpawn" type="MarginContainer" groups=["TriggerSpawns"]]
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_right = 16.0
 offset_bottom = 16.0
 mouse_filter = 2

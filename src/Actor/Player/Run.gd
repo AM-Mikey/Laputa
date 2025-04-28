@@ -24,7 +24,7 @@ func state_process():
 	mm.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
 	animate()
 
-	if Input.is_action_pressed("look_down"):
+	if Input.is_action_pressed("look_down") and pc.can_input:
 		pc.is_crouching = true
 		pc.get_node("CollisionShape2D").set_deferred("disabled", true)
 		pc.get_node("CrouchingCollision").set_deferred("disabled", false)
@@ -37,15 +37,17 @@ func state_process():
 		pc.is_in_coyote = true
 		mm.do_coyote_time()
 
-	if Input.is_action_pressed("jump"):
+	if Input.is_action_pressed("jump") and pc.can_input:
 		mm.jump()
 		return
 
 func set_player_directions():
-	var input_dir = Vector2(
+	var input_dir = Vector2.ZERO
+	if pc.can_input: 
+		input_dir = Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
-
+		
 	#get move_dir
 	pc.move_dir = Vector2(input_dir.x, 0.0)
 	

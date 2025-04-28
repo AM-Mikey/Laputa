@@ -190,9 +190,10 @@ func enter_talk():
 func _input(event):
 	if event.is_action_pressed("inspect") and active_pc \
 	and dialog_json != "" and conversation != "" and state != "talk":
-		predialog_state = state
-		change_state("talk")
-		return
+		if active_pc.can_input:
+			predialog_state = state
+			change_state("talk")
+			return
 
 
 func look_at_node(node):

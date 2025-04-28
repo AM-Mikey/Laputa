@@ -28,7 +28,7 @@ func find_waypoints():
 
 
 func _on_physics_process(_delta):
-	if disabled or dead or Engine.is_editor_hint(): return
+	if disabled or dead: return
 	velocity = calc_velocity(velocity, move_dir, speed)
 	move_and_slide()
 	animate()

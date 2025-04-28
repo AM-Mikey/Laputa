@@ -28,7 +28,7 @@ func _on_ExitDetector_body_exited(_body):
 func _input(event):
 	if not reading:
 		if event.is_action_pressed("inspect") and active_pc != null:
-			if not active_pc.disabled:
+			if not active_pc.disabled and active_pc.can_input:
 				reading = true
 				
 				if world.has_node("UILayer/DialogBox"): #clear old dialog box if there is one

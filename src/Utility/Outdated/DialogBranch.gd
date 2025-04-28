@@ -49,6 +49,3 @@ func _on_Ask_pressed():
 func _on_button_focus_entered():
 	$Audio.stream = move_sound
 	$Audio.play()
-
-
-

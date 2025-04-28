@@ -160,7 +160,7 @@ func _on_flash_timer_timeout():
 
 
 func _input(event):
-	if event.is_action_pressed("ui_accept")and not busy:
+	if event.is_action_pressed("ui_accept")and not busy: #bypass can_input
 		if not active:
 			if step == current_text_array.size():
 				exit()

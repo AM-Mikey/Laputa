@@ -50,15 +50,15 @@ func expend_trigger():
 
 ### EDITOR
 
-func _input_event(viewport, event, shape_idx): #selecting in editor
-	var editor = w.get_node("EditorLayer/Editor")
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
-		editor.inspector.on_selected(self, "trigger")
-		#print("clicked on a trigger")
-
-
-func on_editor_select():
-	visual.self_modulate = Color(2,2,2)
-
-func on_editor_deselect():
-	visual.self_modulate = Color(1,1,1)
+#func _input_event(viewport, event, shape_idx): #selecting in editor
+	#var editor = w.get_node("EditorLayer/Editor")
+	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
+		#editor.inspector.on_selected(self, "trigger")
+		##print("clicked on a trigger")
+#
+#
+#func on_editor_select():
+	#visual.self_modulate = Color(2,2,2)
+#
+#func on_editor_deselect():
+	#visual.self_modulate = Color(1,1,1)

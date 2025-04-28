@@ -25,14 +25,14 @@ func _on_body_exited(_body):
 
 func _input(event):
 	if event.is_action_pressed("inspect") and not spent and active_pc != null: 
-		if not active_pc.disabled:
+		if not active_pc.disabled and active_pc.can_input:
 			activate()
 
 func activate():
 	pass
 
-func _input_event(viewport, event, shape_idx): #selecting in editor
-	var editor = w.get_node("EditorLayer/Editor")
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
-		editor.inspector.on_selected(self, "prop")
-		#print("clicked on a prop")
+#func _input_event(viewport, event, shape_idx): #selecting in editor
+	#var editor = w.get_node("EditorLayer/Editor")
+	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
+		#editor.inspector.on_selected(self, "prop")
+		##print("clicked on a prop")

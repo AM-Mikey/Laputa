@@ -87,7 +87,7 @@ func set_debug_visible(vis = !debug_visible): #makes triggers and visutils visib
 	print("debug_visible == ", debug_visible)
 
 func skip_title():
-	on_level_change(start_level_path, 0)
+	#on_level_change(start_level_path, 0) #TODO: create a custom function to set up level first time. we lose some things by not doing on_level_change
 	add_child(JUNIPER.instantiate())
 	get_node("UILayer").add_child(HUD.instantiate())
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
@@ -95,7 +95,7 @@ func skip_title():
 
 func _input(event):
 	if event.is_action_pressed("inventory") and has_node("Juniper"):
-		if not ui.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled:
+		if not ui.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled and $Juniper.can_input:
 			var inventory = INVENTORY.instantiate()
 			ui.add_child(inventory)
 
@@ -132,29 +132,34 @@ func on_level_change(level_path, door_index):
 	
 	var old_level_path = current_level.scene_file_path
 	current_level.queue_free()
+	await get_tree().process_frame #this gives time for juniper to spawn on start
 	
-	
-	await get_tree().process_frame #this gives time for juniper to spawn. this is neccesary
 	var next_level = load(level_path).instantiate()
 	current_level = next_level #next level set so current level is never null
 	add_child(next_level)
 	
-	if next_level.level_type == next_level.LevelType.NORMAL:
-		if has_node("Juniper"):
+	if has_node("Juniper"):
+		#$Juniper.mm.change_state("run") #already doing this in door script????
+		if next_level.level_type == next_level.LevelType.NORMAL:
 			$Juniper/PlayerCamera.position_smoothing_enabled = false
 			$Juniper/PlayerCamera.enabled = not next_level.has_node("LevelCamera") #turn off camera if level has one already
+			
 			
 		#### get the door with the right index
 		var doors_found = 0
 		
+		await get_tree().process_frame #give time for triggers to load
 		var triggers = get_tree().get_nodes_in_group("LevelTriggers")
 		for t in triggers:
-			if t.level == old_level_path and t.door_index == door_index:
+			var old_level_name = old_level_path.trim_prefix("res://src/Level/").trim_suffix(".tscn")
+			if t.level == old_level_name and t.door_index == door_index:
 				if t.is_in_group("LoadZones"):
-					$Juniper.global_position = t.global_position + (t.direction * -32)
+					var size = t.get_node("CollisionShape2D").shape.size
+					$Juniper.global_position = t.global_position + Vector2((t.direction.x * -32), size.y)#
 					doors_found += 1
-				else:
-					$Juniper.global_position = t.global_position
+				else: #door
+					var size = t.get_node("CollisionShape2D").shape.size
+					$Juniper.global_position = t.global_position + Vector2(size.x * 0.5, size.y)
 					doors_found += 1
 
 			if doors_found == 0:
@@ -166,16 +171,16 @@ func on_level_change(level_path, door_index):
 		if ui.has_node("TransitionWipe"): #LOADZONES
 			await get_tree().create_timer(0.8).timeout
 			$UILayer/TransitionWipe.play_out_animation()
+			await get_tree().create_timer(0.2).timeout #wait for a bit of the animation to finish
+			$Juniper.can_input = true
 
 		elif ui.has_node("TransitionIris"): #DOORS
 			await get_tree().create_timer(0.4).timeout
 			$UILayer/TransitionIris.play_out_animation()
+			await get_tree().create_timer(0.2).timeout #wait for a bit of the animation to finish
+			$Juniper.can_input = true
 
 		display_level_text(next_level)
-		
-		if not $EditorLayer.has_node("Editor"): #TODO: this was causing issues with june enabling on editor load level (should stay in editor and stay disabled)
-			for pc in get_tree().get_nodes_in_group("Players"):
-				pc.enable()
 		
 		#enable smoothing after a bit
 		await get_tree().create_timer(0.01).timeout

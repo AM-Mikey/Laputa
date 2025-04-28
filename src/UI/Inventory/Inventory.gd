@@ -1,7 +1,6 @@
 extends Control
 
 var player_inventory: Array
-var disabled = true
 
 @onready var world = get_tree().get_root().get_node("World")
 @onready var pc = get_tree().get_root().get_node("World/Juniper")
@@ -18,14 +17,12 @@ func _ready():
 		enter()
 
 func _input(event):
-	if event.is_action_pressed("inventory") and not disabled:
+	if event.is_action_pressed("inventory") and pc.can_input:
 		exit()
 
 func enter():
 	get_tree().paused = true
 	hud.visible = false
-	await get_tree().process_frame
-	disabled = false
 
 func exit():
 	get_tree().paused = false

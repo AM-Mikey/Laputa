@@ -12,7 +12,7 @@ var touched_floor = false
 
 @onready var pc = get_tree().get_root().get_node("World/Juniper")
 @onready var pc_on_floor = pc.is_on_floor()
-@onready var pc_held_down = Input.is_action_pressed("look_down")
+@onready var pc_held_down = Input.is_action_pressed("look_down") and pc.can_input
 
 
 
@@ -31,22 +31,22 @@ func _ready():
 
 
 func _physics_process(delta):
-	if not disabled:
-		velocity.y += gravity * delta
-		
-		if velocity.x < 0:
-			$AnimationPlayer.play("FlipLeft")
+	if disabled: return
+	velocity.y += gravity * delta
+	
+	if velocity.x < 0:
+		$AnimationPlayer.play("FlipLeft")
+	else:
+		$AnimationPlayer.play("FlipRight")
+	
+	var collision = move_and_collide(velocity * delta)
+	if collision:
+		if abs(velocity.y) > minimum_speed:
+			velocity *= bounciness
+			velocity = velocity.bounce(collision.get_normal())
+			am.play("gun_grenade_bounce", self)
 		else:
-			$AnimationPlayer.play("FlipRight")
-		
-		var collision = move_and_collide(velocity * delta)
-		if collision:
-			if abs(velocity.y) > minimum_speed:
-				velocity *= bounciness
-				velocity = velocity.bounce(collision.get_normal())
-				am.play("gun_grenade_bounce", self)
-			else:
-				velocity = Vector2.ZERO
+			velocity = Vector2.ZERO
 	
 	var avr_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 	$AnimationPlayer.speed_scale = avr_velocity / start_velocity

@@ -24,7 +24,7 @@ func state_process():
 		new_velocity.y = max(mm.velocity.y, new_velocity.y)
 	
 	
-#	if Input.is_action_pressed("move_left") \
+#	if Input.is_action_pressed("move_left") \ #exit early
 #	or Input.is_action_pressed("move_right") \
 #	or Input.is_action_pressed("jump"):
 #		pc.mm.change_state(pc.mm.cached_state.name.to_lower())
@@ -38,16 +38,13 @@ func animate():
 	sprite.hframes = int(reference_texture.get_width() / 32.0)
 	sprite.vframes = int(reference_texture.get_height() / 32.0)
 
+	#if pc.inspect_target: #consider reenabling for signs, otherwise this is redundant
+		#pc.look_dir = sign(pc.inspect_target.global_position.x - pc.global_position.x)
 	sprite.frame_coords.y = get_vframe()
 	if not ap.is_playing() or ap.current_animation != animation:
 		ap.stop()
 		ap.play(animation, 0.0, 1.0)
 
-	var look_dir = sign(pc.inspect_target.global_position.x - pc.global_position.x)
-	if look_dir <= 0: #left
-		sprite.frame_coords.y = 0
-	else: #right
-		sprite.frame_coords.y = 1
 
 
 ### GETTERS ###

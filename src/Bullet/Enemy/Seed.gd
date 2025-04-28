@@ -32,4 +32,3 @@ func get_initial_velocity() -> Vector2:
 	speed * direction.x,\
 	speed * direction.y)
 	return out
-

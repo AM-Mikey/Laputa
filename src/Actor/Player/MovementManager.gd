@@ -125,9 +125,9 @@ func check_ssp():
 
 func _input(event):
 	if not pc.disabled:
-		if event.is_action_pressed("fire_automatic"):
+		if event.is_action_pressed("fire_automatic") and pc.can_input:
 			pc.direction_lock = pc.look_dir
-		if event.is_action_released("fire_automatic"): 
+		if event.is_action_released("fire_automatic"): #bypass can_input 
 			pc.direction_lock = Vector2i.ZERO
 
 
@@ -155,7 +155,7 @@ func jump():
 	snap_vector = Vector2.ZERO
 	am.play("pc_jump")
 	#Check if a running jump. since speed.x is max x velocity, only count as a running jump then
-	if abs(velocity.x) > speed.x * 0.95:
+	if abs(velocity.x) > speed.x * 0.95 and pc.can_input:
 		if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
 			jump_starting_move_dir_x = sign(pc.move_dir.x)
 			$MinDirTimer.start(minimum_direction_time)
@@ -180,7 +180,7 @@ func _on_CrouchDetector_body_entered(_body):
 
 func _on_CrouchDetector_body_exited(_body):
 	pc.is_forced_crouching = false
-	if not Input.is_action_pressed("look_down"):
+	if not Input.is_action_pressed("look_down") and pc.can_input:
 		pc.is_crouching = false
 		if current_state != states["run"]: return
 		pc.get_node("CollisionShape2D").set_deferred("disabled", false)

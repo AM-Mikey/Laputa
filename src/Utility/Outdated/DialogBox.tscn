@@ -1,7 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://brwsxsw3vt0au"]
 
 [ext_resource type="Script" uid="uid://d1oujlk2gjxwx" path="res://src/Utility/Outdated/DialogBox.gd" id="1"]
-[ext_resource type="PackedScene" path="res://src/Utility/Outdated/DialogBranch.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://cbw6ulhuyuapb" path="res://src/Utility/Outdated/DialogBranch.tscn" id="5"]
+
 
 [sub_resource type="Resource" id="Resource_efttx"]
 metadata/__load_path__ = "res://assets/UI/DialogBox.png"

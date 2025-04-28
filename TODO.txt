@@ -128,8 +128,6 @@ add graphics to denote layer boundaries in tileset
 
 for example: if no dirt beneath this tile, then set this tile to one of a few "bottom" tiles
 
---- tile ---
-
 --- enemy ---
 delete all enemy button
 
@@ -152,22 +150,28 @@ reimplement level music
 clean up all setup and exit code
 editor calls setup_level on change level, but does not exit or get removed
 stop adding TileMapCursor every time editor is opened
-fix editorlevellimiter not displaying blackbars on startup (switch to level camera? idk
 
 ---enemy ---
 update waypoint based enemies
 
 --- triggers --- 
-start from the ground up
 replace triggervisuals
-replace triggercontrollers in editor with triggerspawns
-fix door position 
-fix moveto state
+prepare text-based triggers to work with new dialog nodes
 
 --- propertybutton ---
 clean up signals and names
 force update on edit instead of enter
 
-
 ---themes---
 clean up unused themes
+
+---doors---
+remove spawns layer from levels if not neccesary
+
+--- player ---
+migrate disabled code to can_input
+clean up enemy, npc, misc disable code
+
+--- level ---
+fix first time level loading with a custom function
+	fix editorlevellimiter not displaying blackbars on startup (switch to level camera? idk

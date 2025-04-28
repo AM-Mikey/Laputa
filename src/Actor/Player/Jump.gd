@@ -11,7 +11,7 @@ func state_process():
 	#jump interrupt
 	var is_jump_interrupted = false
 	if mm.velocity.y < 0.0:
-		if not Input.is_action_pressed("jump"):
+		if not Input.is_action_pressed("jump") and pc.can_input:
 			is_jump_interrupted = true
 
 	set_player_directions()
@@ -35,14 +35,16 @@ func state_process():
 	if pc.is_on_floor(): #landed
 		mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
 		#mm.bonk("feet")
+		print("changing from jump to run")
 		mm.change_state("run")
 		return
 
 func set_player_directions():
-	var input_dir = Vector2(
+	var input_dir = Vector2.ZERO
+	if pc.can_input: 
+		input_dir = Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
-	
 	#get move dir
 	var move_y = 0.0
 	if mm.coyote_timer.time_left > 0.0:

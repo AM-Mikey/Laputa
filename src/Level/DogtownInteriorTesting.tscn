@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cb2wh1kjj4djx" path="res://assets/Background/TiledPlains.png" id="5_0p40l"]
 [ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="5_64d5n"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="6_v20vf"]
-[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/TriggerSpawn.tscn" id="6_wom3b"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/TriggerSpawn.tscn" id="7_0p40l"]
 [ext_resource type="Script" uid="uid://bkqwlyui5hbvy" path="res://src/Tile/DogtownInteriorAnimator.gd" id="7_85c3g"]
 
 [node name="DogtownInteriorTesting" type="Node2D"]
@@ -63,7 +63,7 @@ layer_3/tile_data = PackedInt32Array(-1048556, 65536, 12, -983020, 65536, 12)
 
 [node name="Triggers" type="Node2D" parent="."]
 
-[node name="Door" parent="Triggers" instance=ExtResource("6_wom3b")]
+[node name="Door" parent="Triggers" instance=ExtResource("7_0p40l")]
 modulate = Color(1, 1, 1, 0.75)
 offset_left = 16.0
 offset_top = -48.0

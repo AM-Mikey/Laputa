@@ -26,29 +26,27 @@ func _ready():
 
 
 func _physics_process(delta):
-	if not disabled:
-		velocity.y += gravity * delta
-		
-		if velocity.x > 0:
-			$AnimationPlayer.play("FlipLeft")
-		else:
-			$AnimationPlayer.play("FlipRight")
-		
-		var collision = move_and_collide(velocity * delta)
-		if collision:
-			if abs(velocity.y) > minimum_speed:
-				velocity *= bounciness
-				velocity = velocity.bounce(collision.get_normal())
-				am.play("gun_star_bounce", self)
-			else:
-				velocity = Vector2.ZERO
+	if disabled: return
+	velocity.y += gravity * delta
 	
+	if velocity.x > 0:
+		$AnimationPlayer.play("FlipLeft")
+	else:
+		$AnimationPlayer.play("FlipRight")
+	
+	var collision = move_and_collide(velocity * delta)
+	if collision:
+		if abs(velocity.y) > minimum_speed:
+			velocity *= bounciness
+			velocity = velocity.bounce(collision.get_normal())
+			am.play("gun_star_bounce", self)
+		else:
+			velocity = Vector2.ZERO
 	
 	var avr_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 	$AnimationPlayer.speed_scale = avr_velocity / start_velocity
 	if $AnimationPlayer.speed_scale < .1:
 		$AnimationPlayer.stop()
-
 
 
 
@@ -67,8 +65,7 @@ func get_initial_velocity() -> Vector2:
 ### SIGNALS ###
 
 func _on_CollisionDetector_body_entered(body): #shadows
-	if disabled:
-		return
+	if disabled: return
 	if not body is TileMap:
 		#enemy
 		if body.get_collision_layer_value(2): 

@@ -224,6 +224,7 @@ func on_property_changed(property_name, property_value):
 			match property_name:
 				"background_resource":
 					active.level_limiter.set(property_name, ResourceLoader.load(property_value, "", 2)) #don't pull from cache
+					active.level_limiter.setup_background_resource()
 					active.level_limiter.setup_layers()
 					active.level_limiter.set_focus()
 				"texture":

@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://d2wqxefaewuxm"]
+[gd_scene load_steps=13 format=3 uid="uid://d2wqxefaewuxm"]
 
-[ext_resource type="Theme" path="res://src/UI/Theme/InsetMenu.tres" id="1"]
-[ext_resource type="Script" uid="uid://rb8u66djacvf" path="res://src/UI/Options/ControllerConfig.gd" id="5"]
+[ext_resource type="Theme" uid="uid://c1np2xna4dogr" path="res://src/UI/Theme/InsetMenu.tres" id="1"]
 [ext_resource type="Texture2D" uid="uid://diafdejhbs5fg" path="res://assets/UI/Settings/ControllerConfig/FrontBack.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://byplrgt06jox5" path="res://assets/UI/Settings/ControllerConfig/CompassBack.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://qut4yvt4bmsh" path="res://assets/UI/Settings/ControllerConfig/FaceButton.png" id="8"]
@@ -15,21 +14,19 @@
 [ext_resource type="Texture2D" uid="uid://ba7bibf835xw0" path="res://assets/UI/Settings/ControllerConfig/CompassFront.png" id="16"]
 
 [node name="ControllerConfig" type="MarginContainer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource("1")
-script = ExtResource("5")
 
 [node name="Panel" type="Panel" parent="."]
-offset_right = 480.0
-offset_bottom = 270.0
+layout_mode = 2
 
 [node name="Margin" type="MarginContainer" parent="."]
-offset_right = 480.0
-offset_bottom = 270.0
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_top = 4
+layout_mode = 2
 theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
 [node name="Lines" type="Node2D" parent="Margin"]
@@ -37,142 +34,91 @@ visible = false
 position = Vector2(-21, -36)
 
 [node name="Scroll" type="ScrollContainer" parent="Margin"]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 476.0
-offset_bottom = 266.0
+layout_mode = 2
 follow_focus = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Margin/Scroll"]
-offset_right = 292.0
-offset_bottom = 284.0
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Margin/Scroll/VBoxContainer"]
-offset_right = 292.0
-offset_bottom = 244.0
+layout_mode = 2
 alignment = 1
 
 [node name="Left" type="VBoxContainer" parent="Margin/Scroll/VBoxContainer/HBoxContainer"]
-offset_right = 30.0
-offset_bottom = 244.0
+layout_mode = 2
 
 [node name="L2" type="OptionButton" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Left"]
-offset_right = 30.0
-offset_bottom = 36.0
+layout_mode = 2
 
 [node name="L1" type="OptionButton" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Left"]
-offset_top = 40.0
-offset_right = 30.0
-offset_bottom = 76.0
+layout_mode = 2
 
 [node name="Center" type="VBoxContainer" parent="Margin/Scroll/VBoxContainer/HBoxContainer"]
-offset_left = 34.0
-offset_right = 258.0
-offset_bottom = 244.0
+layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="Top" type="CenterContainer" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center"]
-offset_right = 224.0
-offset_bottom = 80.0
 custom_minimum_size = Vector2(224, 80)
+layout_mode = 2
 
 [node name="TopBack" type="TextureRect" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top"]
-offset_right = 224.0
-offset_bottom = 80.0
+layout_mode = 2
 texture = ExtResource("14")
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GridContainer" type="GridContainer" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top"]
-offset_left = 48.0
-offset_top = 18.0
-offset_right = 176.0
-offset_bottom = 62.0
 custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
 columns = 2
 
 [node name="TriggerLeft" type="Control" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer"]
-offset_right = 124.0
-offset_bottom = 26.0
 custom_minimum_size = Vector2(124, 26)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer/TriggerLeft"]
 texture = ExtResource("15")
 hframes = 2
 
 [node name="TriggerRight" type="Control" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer"]
-offset_left = 128.0
-offset_right = 128.0
-offset_bottom = 26.0
-grow_vertical = 0
-__meta__ = {
-"_edit_use_anchors_": true
-}
+layout_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer/TriggerRight"]
 texture = ExtResource("15")
 hframes = 2
 
 [node name="BumperLeft" type="Control" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer"]
-offset_top = 30.0
-offset_right = 124.0
-offset_bottom = 30.0
 custom_minimum_size = Vector2(124, 0)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer/BumperLeft"]
 texture = ExtResource("11")
 hframes = 2
 
 [node name="BumperRight" type="Control" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer"]
-offset_left = 128.0
-offset_top = 30.0
-offset_right = 128.0
-offset_bottom = 30.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Top/GridContainer/BumperRight"]
 texture = ExtResource("11")
 hframes = 2
 
 [node name="Front" type="CenterContainer" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center"]
-offset_top = 80.0
-offset_right = 224.0
-offset_bottom = 224.0
+layout_mode = 2
 
 [node name="FrontBack" type="TextureRect" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front"]
-offset_right = 224.0
-offset_bottom = 144.0
+layout_mode = 2
 texture = ExtResource("6")
 stretch_mode = 4
 
 [node name="VboxContainer" type="VBoxContainer" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front"]
-offset_left = 24.0
-offset_top = 24.0
-offset_right = 200.0
-offset_bottom = 119.0
 custom_minimum_size = Vector2(176, 95)
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer"]
-offset_right = 176.0
-offset_bottom = 35.0
 custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
 
 [node name="Compass" type="Control" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer"]
-offset_right = 68.0
-offset_bottom = 35.0
 custom_minimum_size = Vector2(68, 10)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Back" type="Sprite2D" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Compass"]
 texture = ExtResource("7")
@@ -190,10 +136,8 @@ texture = ExtResource("16")
 centered = false
 
 [node name="ScrewLeft" type="Control" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer"]
-offset_left = 72.0
-offset_right = 100.0
-offset_bottom = 35.0
 custom_minimum_size = Vector2(28, 10)
+layout_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/ScrewLeft"]
 texture = ExtResource("13")
@@ -201,10 +145,8 @@ offset = Vector2(0, 20)
 hframes = 4
 
 [node name="ScrewRight" type="Control" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer"]
-offset_left = 104.0
-offset_right = 124.0
-offset_bottom = 35.0
 custom_minimum_size = Vector2(20, 10)
+layout_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/ScrewRight"]
 texture = ExtResource("12")
@@ -212,20 +154,13 @@ offset = Vector2(0, 20)
 hframes = 4
 
 [node name="Face" type="VBoxContainer" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer"]
-offset_left = 128.0
-offset_right = 168.0
-offset_bottom = 35.0
 custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
 
 [node name="FaceButtonTop" type="Control" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face"]
-offset_left = 16.0
-offset_right = 40.0
-offset_bottom = 12.0
 custom_minimum_size = Vector2(24, 12)
+layout_mode = 2
 size_flags_horizontal = 8
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Sprite2D" type="Sprite2D" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/FaceButtonTop"]
 texture = ExtResource("8")
@@ -233,20 +168,11 @@ centered = false
 hframes = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face"]
-offset_top = 16.0
-offset_right = 40.0
-offset_bottom = 28.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="FaceButtonLeft" type="Control" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/HBoxContainer"]
-offset_right = 28.0
-offset_bottom = 12.0
 custom_minimum_size = Vector2(28, 12)
-__meta__ = {
-"_edit_use_anchors_": true
-}
+layout_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/HBoxContainer/FaceButtonLeft"]
 texture = ExtResource("8")
@@ -254,12 +180,7 @@ centered = false
 hframes = 2
 
 [node name="FaceButtonRight" type="Control" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/HBoxContainer"]
-offset_left = 32.0
-offset_right = 32.0
-offset_bottom = 12.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/HBoxContainer/FaceButtonRight"]
 texture = ExtResource("8")
@@ -267,11 +188,8 @@ centered = false
 hframes = 2
 
 [node name="FaceButtonBottom" type="Control" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face"]
-offset_left = 16.0
-offset_top = 32.0
-offset_right = 40.0
-offset_bottom = 32.0
 custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
 size_flags_horizontal = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer/Face/FaceButtonBottom"]
@@ -280,15 +198,12 @@ centered = false
 hframes = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer"]
-offset_top = 39.0
-offset_right = 176.0
-offset_bottom = 39.0
+layout_mode = 2
 alignment = 2
 
 [node name="StickLeft" type="Control" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer2"]
-offset_left = 39.0
-offset_right = 99.0
 custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer2/StickLeft"]
 texture = ExtResource("9")
@@ -296,9 +211,8 @@ centered = false
 hframes = 2
 
 [node name="StickRight" type="Control" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer2"]
-offset_left = 103.0
-offset_right = 176.0
 custom_minimum_size = Vector2(73, 0)
+layout_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Center/Front/VboxContainer/HBoxContainer2/StickRight"]
 texture = ExtResource("9")
@@ -306,123 +220,69 @@ centered = false
 hframes = 2
 
 [node name="Right" type="VBoxContainer" parent="Margin/Scroll/VBoxContainer/HBoxContainer"]
-offset_left = 262.0
-offset_right = 292.0
-offset_bottom = 244.0
+layout_mode = 2
 
 [node name="R2" type="OptionButton" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Right"]
-offset_right = 30.0
-offset_bottom = 36.0
+layout_mode = 2
 
 [node name="R1" type="OptionButton" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Right"]
-offset_top = 40.0
-offset_right = 30.0
-offset_bottom = 76.0
+layout_mode = 2
 
 [node name="HSeperator" type="HSeparator" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Right"]
-offset_top = 80.0
-offset_right = 30.0
-offset_bottom = 84.0
+layout_mode = 2
 
 [node name="Face" type="VBoxContainer" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Right"]
-offset_top = 88.0
-offset_right = 30.0
-offset_bottom = 244.0
+layout_mode = 2
 
 [node name="Top" type="OptionButton" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Right/Face"]
-offset_right = 30.0
-offset_bottom = 36.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Left" type="OptionButton" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Right/Face"]
-offset_top = 40.0
-offset_right = 30.0
-offset_bottom = 76.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Right" type="OptionButton" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Right/Face"]
-offset_top = 80.0
-offset_right = 30.0
-offset_bottom = 116.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Bottom" type="OptionButton" parent="Margin/Scroll/VBoxContainer/HBoxContainer/Right/Face"]
-offset_top = 120.0
-offset_right = 30.0
-offset_bottom = 156.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Margin/Scroll/VBoxContainer"]
-offset_top = 248.0
-offset_right = 292.0
-offset_bottom = 284.0
+layout_mode = 2
 alignment = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="L3" type="OptionButton" parent="Margin/Scroll/VBoxContainer/HBoxContainer2"]
-offset_left = 41.0
-offset_right = 71.0
-offset_bottom = 36.0
+layout_mode = 2
 
 [node name="Select" type="OptionButton" parent="Margin/Scroll/VBoxContainer/HBoxContainer2"]
-offset_left = 75.0
-offset_right = 105.0
-offset_bottom = 36.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Start" type="OptionButton" parent="Margin/Scroll/VBoxContainer/HBoxContainer2"]
-offset_left = 109.0
-offset_right = 139.0
-offset_bottom = 36.0
+layout_mode = 2
 
 [node name="R3" type="OptionButton" parent="Margin/Scroll/VBoxContainer/HBoxContainer2"]
-offset_left = 143.0
-offset_right = 173.0
-offset_bottom = 36.0
+layout_mode = 2
 
 [node name="AnalogDisable2" type="CheckButton" parent="Margin/Scroll/VBoxContainer/HBoxContainer2"]
 visible = false
-offset_right = 137.0
-offset_bottom = 48.0
+layout_mode = 2
 text = "Disable Analog"
 
 [node name="DpadDisable2" type="CheckButton" parent="Margin/Scroll/VBoxContainer/HBoxContainer2"]
 visible = false
-offset_left = 141.0
-offset_right = 273.0
-offset_bottom = 48.0
+layout_mode = 2
 text = "Disable D-Pad"
 
 [node name="AcceptButton" type="OptionButton" parent="Margin/Scroll/VBoxContainer/HBoxContainer2"]
 visible = false
-offset_left = 277.0
-offset_right = 390.0
-offset_bottom = 24.0
-text = "Accept Button"
+layout_mode = 2
 
 [node name="Default" type="Button" parent="Margin/Scroll/VBoxContainer/HBoxContainer2"]
-offset_left = 177.0
-offset_right = 237.0
-offset_bottom = 36.0
+layout_mode = 2
 theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "Defaults"
 
 [node name="Return" type="Button" parent="Margin/Scroll/VBoxContainer/HBoxContainer2"]
-offset_left = 241.0
-offset_right = 292.0
-offset_bottom = 36.0
+layout_mode = 2
 theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "Return"
 

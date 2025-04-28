@@ -3,7 +3,7 @@ extends Node
 const LEVELUP = preload("res://src/Effect/LevelUp.tscn")
 const LEVELDOWN = preload("res://src/Effect/LevelDown.tscn")
 
-var disabled = false
+var disabled = false #this is only because of a func in pc.ladder?
 
 @onready var world = get_tree().get_root().get_node("World")
 @onready var pc = get_parent()
@@ -12,7 +12,7 @@ func _ready():
 	set_guns_visible()
 
 func _input(event):
-	if not pc.disabled and not disabled and $Guns.get_child_count() > 0:
+	if not pc.disabled and not disabled and pc.can_input and $Guns.get_child_count() > 0:
 		if pc.mm.current_state == pc.mm.states["inspect"]: return
 		var active_gun = $Guns.get_child(0)
 		

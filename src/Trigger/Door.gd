@@ -17,7 +17,6 @@ func _on_body_entered(body):
 	active_pc = body.get_parent()
 func _on_body_exited(_body):
 	active_pc = null
-	
 
 
 func _input(event):
@@ -38,7 +37,7 @@ func enter_door():
 	active_pc.can_input = false
 	active_pc.inspect_target = self
 	active_pc.mm.change_state("inspect")
-	active_pc.move_to(position)
+	active_pc.move_to(global_position + Vector2($CollisionShape2D.shape.size.x * 0.5, $CollisionShape2D.shape.size.y))
 	
 	am.play("door")
 	am.fade_music()
@@ -51,7 +50,6 @@ func enter_door():
 	await transition.get_node("AnimationPlayer").animation_finished
 	
 	active_pc.mm.change_state("run")
-	active_pc.can_input = true
 	var level_path = str("res://src/Level/" + level + ".tscn")
 	if !FileAccess.file_exists(level_path):
 		printerr("ERROR: No Level With Name: ", level)

@@ -56,6 +56,7 @@ func _physics_process(_delta):
 		$VBox/HBox/C2/A/CameraOffset.text = str("%+0.2f" % pc.get_node("PlayerCamera").drag_horizontal_offset) + "," + str("%+0.2f" % pc.get_node("PlayerCamera").drag_vertical_offset)
 
 		$VBox/HBox/C2/A/Disabled.text = str(pc.disabled)
+		$VBox/HBox/C2/A/CanInput.text = str(pc.can_input)
 		$VBox/HBox/C2/A/Invincible.text = str(pc.invincible)
 		#$VBox/HBox/C2/A/Inspect.text = str(pc.inspecting)
 		$VBox/HBox/C2/A/Floor.text = str(pc.is_on_floor())

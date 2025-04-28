@@ -16,8 +16,8 @@ var jump_type
 
 
 func state_process():
-	pc.move_dir.x = mm.move_target.x - pc.position.x #get direction to move
-	pc.look_dir.x = sign(pc.move_dir.x)
+	pc.move_dir.x = sign(mm.move_target.x - pc.position.x) #get direction to move
+	pc.look_dir.x = pc.move_dir.x
 
 	mm.velocity = calc_velocity()
 	pc.set_velocity(mm.velocity)
@@ -46,11 +46,8 @@ func state_process():
 
 	if abs(mm.move_target.x - pc.position.x) < 1: #when within one pixel
 		pc.move_dir.x = 0.0
-#		if pc.disabled:
-#			mm.change_state("disabled")
-#		else:
-		#mm.change_state("run")
-		print("moveto state clear")
+
+		print("moveto state clear, setting to: ", mm.cached_state.name)
 		mm.change_state(mm.cached_state.name.to_lower())
 		return
 

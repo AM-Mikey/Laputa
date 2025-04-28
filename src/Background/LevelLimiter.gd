@@ -6,8 +6,8 @@ enum Focus {TOP, ONE_QUARTER, CENTER, THREE_QUARTERS, BOTTOM}
 enum TileMode {BOTH, HORIZONTAL, VERTICAL, NONE}
 enum BackTileMode {DEFAULT, BOTH, HORIZONTAL, VERTICAL, NONE}
 
-@export var background_resource: Background:
-	set = set_background_resouce
+@export var background_resource: Background
+	#set = set_background_resouce
 @export var texture: CompressedTexture2D
 @export var layers := 1
 @export var layer_scales: Dictionary
@@ -24,13 +24,16 @@ var texture_rects: Dictionary
 @onready var w = get_tree().get_root().get_node("World")
 @onready var pb = w.get_node("ParallaxBackground")
 
-
+#func set_background_resouce(value): #note this goes through inspector on_changed code
+	#background_resource = value
+	#print("set background resource")
 
 func _ready():
+	print("doing ready")
 	setup()
-
+	
 func setup():
-	set_background_resouce(background_resource) #load the resouce on start
+	setup_background_resource()
 	setup_layers()
 	set_focus()
 	camera = get_viewport().get_camera_2d()
@@ -43,7 +46,6 @@ func setup():
 	
 
 func _physics_process(_delta):
-	
 	for t in texture_rects:
 		texture_rects[t].position.x += horizontal_speed * layer_scales[t].x
 		var texture_width = texture_rects[t].texture.get_width()
@@ -51,17 +53,19 @@ func _physics_process(_delta):
 		or texture_rects[t].position.x <= (layer_repeating_length * -0.5) - texture_width:
 			set_tile_mode(texture_rects[t]) #reset x position to start
 
-func set_background_resouce(value): #note this goes through inspector on_changed code first, and then does setup_layers, setup_focus from there
-	background_resource = value
-	texture = value.texture
-	layers = value.layers
-	layer_scales = value.layer_scales
-	layer_height_offsets = value.layer_height_offsets
-	horizontal_speed = value.horizontal_speed
-	focus = value.focus
-	tile_mode = value.tile_mode
-	back_tile_mode = value.back_tile_mode
-
+func setup_background_resource():
+	#background_resource.texture.emit_changed()
+	texture = background_resource.texture
+	layers = background_resource.layers
+	layer_scales = background_resource.layer_scales
+	layer_height_offsets = background_resource.layer_height_offsets
+	horizontal_speed = background_resource.horizontal_speed
+	var focus_index = background_resource.focus
+	focus = Focus[Focus.find_key(focus_index)]
+	var tile_mode_index = background_resource.tile_mode
+	tile_mode = TileMode[TileMode.find_key(tile_mode_index)]
+	var back_tile_mode_index = background_resource.back_tile_mode
+	back_tile_mode = BackTileMode[BackTileMode.find_key(back_tile_mode_index)]
 
 func setup_layers():
 	texture_rects.clear()
@@ -69,6 +73,7 @@ func setup_layers():
 		c.free()
 
 	for layer_index in layers:
+		print("did layer", layer_index)
 		var layer = ParallaxLayer.new()
 		pb.add_child(layer)
 		
@@ -83,11 +88,16 @@ func setup_layers():
 		var layer_height = int(texture.get_height() / float(layers))
 		var layer_y = layer_height * layer_index
 		var region = Rect2i(0, layer_y, texture.get_width(), layer_height)
+		print(region)
 		
 		#this cannot be AtlasTexture due to bug https://github.com/godotengine/godot/issues/20472
 		var texture_as_image = texture.get_image()
 		var clipped_image = texture_as_image.get_region(region)
 		var clipped_texture = ImageTexture.create_from_image(clipped_image)
+		
+		#var test = Sprite2D.new()
+		#test.texture = clipped_texture
+		#w.front.add_child(test)
 		
 		#clipped_texture.flags = 0 #turn off filtering #TODO: turn back on if backgrounds are blurry
 		texture_rect.texture = clipped_texture

@@ -5,5 +5,5 @@
 
 [resource]
 shader = ExtResource("1")
-shader_parameter/cutoff = 1.0
+shader_parameter/cutoff = 0.0
 shader_parameter/mask = ExtResource("2")

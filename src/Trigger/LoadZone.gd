@@ -20,11 +20,13 @@ func _on_body_exited(_body):
 	pass
 
 
-func enter_load_zone():
-	active_pc.disable()
+func enter_load_zone(): #see if you need the inspect state
+	active_pc.can_input = false
+	print("doing moveto")
 	active_pc.move_to(Vector2((position.x + (direction.x * 16)), position.y)) #active_pc.move_to(position)
 	
 	am.play("door")
+	am.fade_music()
 	
 	var transition = TRANSITION.instantiate()
 	match direction:
@@ -38,4 +40,10 @@ func enter_load_zone():
 	w.get_node("UILayer").add_child(transition)
 
 	await transition.get_node("AnimationPlayer").animation_finished
-	emit_signal("level_change", load(level), door_index)
+	
+	active_pc.mm.change_state("run")
+	var level_path = str("res://src/Level/" + level + ".tscn")
+	if !FileAccess.file_exists(level_path):
+		printerr("ERROR: No Level With Name: ", level)
+		return
+	emit_signal("level_change", level_path, door_index)

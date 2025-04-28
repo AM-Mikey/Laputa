@@ -8,6 +8,7 @@ size = Vector2(5, 8)
 [node name="Ladder" type="Area2D" groups=["Triggers"]]
 collision_layer = 0
 script = ExtResource("1")
+editor_hidden = true
 color = Color(1, 0.494118, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

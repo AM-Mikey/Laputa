@@ -13,15 +13,9 @@ var default_level = "res://src/Level/Default.tscn"
 @onready var w = get_tree().get_root().get_node("World")
 @onready var ui = w.get_node("UILayer")
 @onready var el = w.get_node("EditorLayer")
-
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
 
-
-
-#func _ready():
-	#setup_levels()
-
-func setup_levels(): #TODO: connect this to editor instead of _ready
+func setup_levels():
 	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
 	
 	for c in $VBox/Margin/Scroll/Buttons.get_children():

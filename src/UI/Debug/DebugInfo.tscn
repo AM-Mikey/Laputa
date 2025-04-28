@@ -362,6 +362,12 @@ theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Disabl: "
 
+[node name="CanInput" type="Label" parent="VBox/HBox/C2/Q"]
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_fonts/font = ExtResource("3_d57kx")
+text = "Input:"
+
 [node name="Invincible" type="Label" parent="VBox/HBox/C2/Q"]
 layout_mode = 2
 theme = ExtResource("2")
@@ -454,6 +460,12 @@ theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("5_osv66")
 
 [node name="Disabled" type="Label" parent="VBox/HBox/C2/A"]
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_fonts/font = ExtResource("3_d57kx")
+text = "-"
+
+[node name="CanInput" type="Label" parent="VBox/HBox/C2/A"]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")

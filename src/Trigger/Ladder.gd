@@ -15,7 +15,7 @@ func _on_Ladder_body_exited(body):
 
 func _physics_process(delta):
 	for b in active_bodies:
-		if not b.mm.current_state == b.mm.states["ladder"]:
+		if not b.mm.current_state == b.mm.states["ladder"] and b.can_input:
 			if Input.is_action_just_pressed("look_up") \
 			or Input.is_action_just_pressed("look_down") and not b.is_on_floor() \
 			or Input.is_action_just_pressed("look_down") and b.is_on_ssp:

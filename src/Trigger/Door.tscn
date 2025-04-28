@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://jaabhrcn20y5" path="res://src/Trigger/Door.gd" id="1"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(8, 16)
+size = Vector2(16, 32)
 
 [node name="Door" type="Area2D" groups=["Doors", "LevelTriggers", "Triggers"]]
 collision_layer = 0
@@ -11,7 +11,7 @@ script = ExtResource("1")
 color = Color(0, 0.4, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(4, 8)
+position = Vector2(8, 16)
 shape = SubResource("1")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

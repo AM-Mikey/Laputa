@@ -30,11 +30,14 @@ func state_process():
 	if pc.is_on_floor(): #landed
 		mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
 		#mm.bonk("feet")
+		print("changing from fall to run")
 		mm.change_state("run")
 		return
 
 func set_player_directions():
-	var input_dir = Vector2(
+	var input_dir = Vector2.ZERO
+	if pc.can_input: 
+		input_dir = Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
 	

@@ -11,7 +11,7 @@ func activate():
 	expend_prop()
 	am.play("chest")
 	am.play_interrupt("get_item")
-	active_pc.disable()
+	active_pc.can_input = false
 	active_pc.inventory.append(held_item)
 	active_pc.update_inventory()
 	print("added item '", held_item, "' to inventory")
@@ -21,4 +21,4 @@ func expend_prop():
 	$AnimationPlayer.play("Used")
 
 func on_interrupt_finished():
-	active_pc.enable()
+	active_pc.can_input = true

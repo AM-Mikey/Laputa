@@ -18,7 +18,9 @@ func play_out_animation():
 func _on_AnimationPlayer_animation_finished(anim_name):
 	match anim_name:
 		"IrisContract": animation = "IrisExpand"
-		"IrisExpand": queue_free()
+		"IrisExpand": 
+			print("free iris from itself")
+			queue_free()
 
 
 func _physics_process(_delta):
@@ -34,6 +36,5 @@ func _physics_process(_delta):
 	var max_dist_from_vp = max(abs(player_pos_from_cam_center.x) + vp_size.x / 2, abs(player_pos_from_cam_center.y) + vp_size.y / 2)
 	var nearest_multiple = ceil((max_dist_from_vp * 2) / 256) * 256 #round up to nearest 256 multiple
 	$MarginContainer.size = Vector2(nearest_multiple, nearest_multiple)
-	
 	$MarginContainer.position = Vector2(vp_size.x - $MarginContainer.size.x, vp_size.y - $MarginContainer.size.y) / 2
 	$MarginContainer.position += player_pos_from_cam_center

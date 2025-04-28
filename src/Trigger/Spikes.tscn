@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://htwosg6x78qv"]
 
-[ext_resource type="Script" uid="uid://biqlm4sxmcc78" path="res://src/Trigger/Spikes.gd" id="1"]
+[ext_resource type="Script" uid="uid://biqlm4sxmcc78" path="res://src/Trigger/Spikes.gd" id="1_hun72"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(6, 4)
+size = Vector2(8, 8)
 
-[node name="SpikesDown" type="Area2D" groups=["Triggers"]]
+[node name="Spikes" type="Area2D" groups=["Triggers"]]
 collision_layer = 0
-script = ExtResource("1")
+script = ExtResource("1_hun72")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8, 12)
+position = Vector2(4, 4)
 shape = SubResource("1")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
