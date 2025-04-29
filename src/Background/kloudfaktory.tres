@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Background" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/Background/Background.gd" id="1_j2wkn"]
+[ext_resource type="Texture2D" path="res://assets/Background/CloudFactoryTest.png" id="2_52mui"]
+
+[resource]
+script = ExtResource("1_j2wkn")
+texture = ExtResource("2_52mui")
+layers = 3
+layer_scales = {
+0: Vector2(0.2, 0.2),
+1: Vector2(0.4, 0.4),
+2: Vector2(0.5, 0.6),
+3: Vector2(0.7, 0.7),
+4: Vector2(0.9, 0.9)
+}
+layer_height_offsets = {
+0: 0.0,
+1: 0.0,
+2: 0.0,
+3: 0.0,
+4: 0.0
+}
+horizontal_speed = 0.0
+focus = 4
+tile_mode = 1
+back_tile_mode = 1

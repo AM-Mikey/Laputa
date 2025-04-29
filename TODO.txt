@@ -175,3 +175,7 @@ clean up enemy, npc, misc disable code
 --- level ---
 fix first time level loading with a custom function
 	fix editorlevellimiter not displaying blackbars on startup (switch to level camera? idk
+
+-- background ---
+
+c counts as cancel in ui code. we cant type in c in savedialogs

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_gqwwp"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_3ucb2"]
-[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="4_c6eqk"]
+[ext_resource type="Resource" path="res://src/Background/kloudfaktory.tres" id="4_c6eqk"]
 [ext_resource type="TileSet" uid="uid://cm4auuymtmne6" path="res://src/Tile/Wastes.tres" id="4_tdjow"]
-[ext_resource type="Texture2D" uid="uid://cb2wh1kjj4djx" path="res://assets/Background/TiledPlains.png" id="5_tj576"]
+[ext_resource type="Texture2D" uid="uid://blm6jvrpoeuir" path="res://assets/Background/CloudFactoryTest.png" id="5_c6eqk"]
 [ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="5_w8juu"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="6_8lqyu"]
 [ext_resource type="Script" uid="uid://brhels8sdivp3" path="res://src/Tile/Wastes.gd" id="9_633jl"]
@@ -22,12 +22,12 @@ conversation = "cutscene_test"
 
 [node name="LevelLimiter" parent="." instance=ExtResource("2_3ucb2")]
 offset_left = -352.0
-offset_top = -240.0
+offset_top = -1024.0
 offset_right = 1248.0
 offset_bottom = 272.0
 background_resource = ExtResource("4_c6eqk")
-texture = ExtResource("5_tj576")
-layers = 5
+texture = ExtResource("5_c6eqk")
+layers = 3
 layer_scales = {
 0: Vector2(0, 0),
 1: Vector2(0.4, 0.4),
@@ -37,13 +37,14 @@ layer_scales = {
 }
 layer_height_offsets = {
 0: 0.0,
-1: -100.0,
-2: -50.0,
+1: 0.0,
+2: 0.0,
 3: 0.0,
 4: 0.0
 }
 focus = 4
 tile_mode = 1
+back_tile_mode = 4
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = 1
