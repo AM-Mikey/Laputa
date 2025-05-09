@@ -70,7 +70,6 @@ func set_move_dir(dir):
 			$Hurtbox/Right.set_deferred("disabled", false)
 		Vector2.RIGHT: 
 			ap.play("WalkRight")
-			print("right")
 			$BulletBlocker/Left.set_deferred("disabled", true)
 			$BulletBlocker/Right.set_deferred("disabled", false)
 			$Hurtbox/Left.set_deferred("disabled", false)

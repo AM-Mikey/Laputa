@@ -6,6 +6,7 @@ var drag_offset = Vector2.ZERO
 
 @export_file var trigger_path
 @export var properties = {}
+@export var size_is_default = true
 
 @onready var world = get_tree().get_root().get_node("World")
 
@@ -28,7 +29,9 @@ func _ready():
 	if index == 0: name = trigger.name
 	else: name = str(trigger.name, index)
 	#transform
-	size = trigger.get_node("CollisionShape2D").shape.size
+	if size_is_default:
+		size = trigger.get_node("CollisionShape2D").shape.size
+		size_is_default = false
 	#global_position = trigger.get_node("CollisionShape2D").global_position
 	
 	if world.el.get_child_count() == 0: #not in editor
@@ -51,7 +54,9 @@ func initialize(): #first time set up properties
 	for p in trigger.get_property_list():
 		if p["usage"] == 4102: #exported properties
 			properties[p["name"]] = [trigger.get(p["name"]), p["type"]]
-
+		elif p["usage"] == 69638: #exported property enums
+			properties[p["name"]] = [trigger.get(p["name"]), p["type"]]
+		
 func spawn():
 	if trigger_path == null:
 		printerr("ERROR: no trigger chosen in TriggerSpawn")

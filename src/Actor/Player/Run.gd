@@ -101,7 +101,7 @@ func animate():
 	var blend_time = 0.0
 	if not ap.is_playing() or ap.current_animation != animation:
 		if do_blending:
-			print("blending animation")
+			#print("blending animation")
 			if (ap.current_animation == "back_run" and animation == "run") or (ap.current_animation == "run" and animation == "back_run"):
 				var new_frame = ((12 - int(floor(ap.current_animation_position * 10))) % 12) + 1
 				blend_time = new_frame / 10.0

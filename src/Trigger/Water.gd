@@ -1,13 +1,28 @@
 extends Trigger
 
+const BUBBLEEMITTER = preload("res://src/Effect/BubbleEmitter.tscn")
+
+var bubble_emitters = {}
+
 func _ready():
 	trigger_type = "water"
 
 func _on_Water_body_entered(body):
-	active_bodies.append(body.get_parent())
+	var target
+	if body.get_collision_layer_value(1):
+		target = body.get_parent()
+	elif body.get_collision_layer_value(2):
+		target = body
+	
+	active_bodies.append(target)
 
-	if not body.get_parent().is_in_water:
-		body.get_parent().is_in_water = true
+	if not target.is_in_water:
+		target.is_in_water = true
+		
+		var be = BUBBLEEMITTER.instantiate()
+		be.position = Vector2(0, -8)
+		bubble_emitters[target] = be
+		target.add_child(be)
 		
 		var splash = load("res://src/Effect/Splash.tscn").instantiate()
 		splash.position.x = body.global_position.x
@@ -16,6 +31,14 @@ func _on_Water_body_entered(body):
 
 
 func _on_Water_body_exited(body):
+	var target
+	if body.get_collision_layer_value(1):
+		target = body.get_parent()
+	elif body.get_collision_layer_value(2):
+		target = body
+
 	if not get_overlap(body):
-		body.is_in_water = false
+		target.is_in_water = false
+		bubble_emitters[target].queue_free()
+		bubble_emitters.erase(target)
 	active_bodies.erase(body)

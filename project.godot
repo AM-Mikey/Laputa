@@ -60,7 +60,7 @@ config/name="Laputa"
 run/main_scene="res://src/World.tscn"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.4")
-config/icon="res://assets/UI/Face/Recruit.png"
+config/icon="uid://b42so8fnnp3uq"
 
 [autoload]
 
@@ -390,6 +390,7 @@ editor_delete={
 2d_physics/layer_17="playerhurt"
 2d_physics/layer_18="enemyhurt"
 2d_physics/layer_19="enemyhit"
+2d_physics/layer_21="water"
 
 [rendering]
 

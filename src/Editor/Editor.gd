@@ -73,7 +73,7 @@ func _ready():
 	setup_level() #Call this every time the level is changed or reloaded
 	#$Main/Win.move_child($Main/Win/Tab, 0) TODO: was supposed to make tabcontainer go behind resize controls, didnt work
 
-func setup_level(): #TODO: clear undo history	TODO: make this an editor_enter signal
+func setup_level(): #TODO: clear undo history
 	#emit_signal("level_selected", w.current_level)
 	setup_windows()
 	w.get_node("Juniper").disable()
@@ -99,7 +99,6 @@ func setup_level(): #TODO: clear undo history	TODO: make this an editor_enter si
 	
 	setup_level_editor_layer()
 	#set_entities_pickable()
-	w.set_debug_visible(true)
 	for s in get_tree().get_nodes_in_group("SpawnPoints"): #TODO: see if you can avoid this by calling a signal or something
 		s.visible = true
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
@@ -164,7 +163,6 @@ func exit():	#TODO: make this an editor_exit signal ## no? that just decentraliz
 	w.get_node("Juniper/PlayerCamera").make_current()
 	w.current_level.get_node("LevelLimiter").setup() #must be after camera setup
 	#set_entities_pickable(false)
-	w.set_debug_visible(false)
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		s.visible = false
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):

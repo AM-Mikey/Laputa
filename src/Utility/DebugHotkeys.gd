@@ -7,11 +7,11 @@ const LEVEL_EDITOR = preload("res://src/Editor/Editor.tscn")
 const POPUP = preload("res://src/UI/PopupText.tscn")
 const SHOP_MENU = preload("res://src/UI/ShopMenu/ShopMenu.tscn")
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 @onready
-var ui = world.get_node("UILayer")
-@onready var el = world.get_node("EditorLayer")
-@onready var dl = world.get_node("DebugLayer")
+var ui = w.get_node("UILayer")
+@onready var el = w.get_node("EditorLayer")
+@onready var dl = w.get_node("DebugLayer")
 
 var editor_tab = 0 #to save when we re-enter the editor
 
@@ -44,7 +44,7 @@ func _input(event):
 
 
 	if event.is_action_pressed("debug_triggers"):
-		world.set_debug_visible()
+		w.set_debug_visible()
 
 
 	if event.is_action_pressed("debug_quit"):
@@ -57,18 +57,18 @@ func _input(event):
 			var popup = POPUP.instantiate()
 			popup.text = "quicksaved..."
 			ui.add_child(popup)
-			world.write_level_data_to_temp()
-			world.write_player_data_to_save()
-			world.copy_level_data_from_temp_to_save()
+			w.write_level_data_to_temp()
+			w.write_player_data_to_save()
+			w.copy_level_data_from_temp_to_save()
 
 
 		if event.is_action_pressed("debug_load"):
 			var popup = POPUP.instantiate()
 			popup.text = "loaded save"
 			ui.add_child(popup)
-			world.read_player_data_from_save()
-			world.read_level_data_from_save()
-			world.copy_level_data_from_save_to_temp()
+			w.read_player_data_from_save()
+			w.read_level_data_from_save()
+			w.copy_level_data_from_save_to_temp()
 
 		if event.is_action_pressed("debug_shop"):
 			var shop_menu = SHOP_MENU.instantiate()
@@ -76,8 +76,8 @@ func _input(event):
 
 
 		if event.is_action_pressed("debug_fly"):
-			if world.has_node("Juniper"):
-				var pc = world.get_node("Juniper")
+			if w.has_node("Juniper"):
+				var pc = w.get_node("Juniper")
 				if pc.mm.current_state != pc.mm.states["fly"]:
 					pc.mm.cached_state = pc.mm.current_state
 					pc.mm.change_state("fly")
@@ -95,20 +95,8 @@ func debug_print():
 #
 #
 func reload_level():
-	#print("reloading level")
-	if ui.has_node("PauseMenu"):
-		ui.get_node("PauseMenu").unpause()
-	
-	world.get_node("Juniper").free() #we free and respawn them so we have a clean slate when we load in
-	if ui.has_node("HUD"):
-		ui.get_node("HUD").free()
-	world.on_level_change(world.current_level.scene_file_path, 0)
-
-
-	world.add_child(JUNIPER.instantiate())
-	ui.add_child(HUD.instantiate())
-
-	await get_tree().process_frame
-
-	for s in get_tree().get_nodes_in_group("SpawnPoints"):
-		world.get_node("Juniper").global_position = s.global_position
+	print("reloading level")
+	if ui.has_node("PauseMenu"): ui.get_node("PauseMenu").unpause()
+	if w.has_node("Juniper"): w.get_node("Juniper").free()
+	if ui.has_node("HUD"): ui.get_node("HUD").free()
+	w.change_level_via_code(w.current_level)

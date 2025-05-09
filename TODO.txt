@@ -69,7 +69,6 @@ set global color palettes for xp hp etc
 
 
 
-FIX LEVEL EDITOR FOR IVAN
 level editor + debug tileset for level making
 
 --- editor ---
@@ -136,6 +135,7 @@ fix ssp detection on angles
 disable crouch on command
 edge animation on idle with long toe-hang
 capsule collision when not near edge?
+blend frames for direction, crouch changes
 
 
 --- background for train ---
@@ -150,6 +150,7 @@ reimplement level music
 clean up all setup and exit code
 editor calls setup_level on change level, but does not exit or get removed
 stop adding TileMapCursor every time editor is opened
+pressing x somehow counts as clicking handles on resizable boxes?
 
 ---enemy ---
 update waypoint based enemies
@@ -171,11 +172,45 @@ remove spawns layer from levels if not neccesary
 --- player ---
 migrate disabled code to can_input
 clean up enemy, npc, misc disable code
+death on leave level via bottom
+X				terminal velocity
+add state for starting level(?)
+default state is inspect?? why
 
 --- level ---
-fix first time level loading with a custom function
-	fix editorlevellimiter not displaying blackbars on startup (switch to level camera? idk
+x				fix first time level loading with a custom function
+X				fix editorlevellimiter not displaying blackbars on startup (switch to level camera? idk
+X				focus camera on juniper on load via level editor
+fix level preview on main menu
+update non-skip menu code
+fix save/load
+fix playerless cutscene levels
 
 -- background ---
 
-c counts as cancel in ui code. we cant type in c in savedialogs
+x				c counts as cancel in ui code. we cant type in c in savedialogs
+we have to save as resource to save our changes to bk!!
+tile map background enum changes
+animated bk not working in editor
+back_tile_mode repeat not long enough for ultrawide
+add layer horizontal offsets (for if we want the layer to start earlier because it doesnt tile)
+
+---triggers---
+spawn preview
+stop adding more triggers on level reload
+X			flying into level causes effect to never end
+
+
+X			trigger color fix
+editor select trigger color fix
+
+---Effect---
+X			bubble effect on juniper
+first time load wipe in(?)
+
+---world---
+X			window divide by 0 on height == 0
+
+---INSPECTOR---
+clean up button order on background
+background button for loading is fucked. try making it up to spec with string etc

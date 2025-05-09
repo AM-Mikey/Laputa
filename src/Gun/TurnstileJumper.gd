@@ -46,7 +46,7 @@ func load_level():
 
 func activate():
 	$ChargeTimer.start(max_time)
-	print("start_charge", max_time)
+	#print("start_charge", max_time)
 	
 
 func deactivate_manual():

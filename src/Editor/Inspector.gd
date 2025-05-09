@@ -26,6 +26,9 @@ func on_selected(selection, selection_type):
 	
 	if active: #deselect old
 		if active.has_method("on_editor_deselect"): active.on_editor_deselect()
+		for c in $Margin/VBox/Scroll/VBox.get_children():
+			if c.is_in_group("PropertyButtons"):
+				c.disabled = true
 	active = selection
 	active_type = selection_type
 	if active: #select new
@@ -45,6 +48,9 @@ func on_selected(selection, selection_type):
 func on_deselected():
 	if active:
 		if active.has_method("on_editor_deselect"): active.on_editor_deselect()
+		for c in $Margin/VBox/Scroll/VBox.get_children():
+			if c.is_in_group("PropertyButtons"):
+				c.disabled = true
 	active = null
 	active_type = ""
 	active_property = ""
@@ -82,7 +88,11 @@ func display_data():
 				create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
 		"trigger_spawn":
 			for p in active.properties:
-				create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
+				if p == "direction":
+					create_button("direction", active.properties[p][0], "enum", load(active.trigger_path).instantiate().Direction.keys())
+				else:
+					create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
+				
 		#"enemy": #replaced with actor spawn
 			#for p in active.get_property_list():
 				#if p["usage"] == EXPORT:
@@ -147,7 +157,7 @@ func create_button(property, value, type = TYPE_NIL, enum_items = []):
 	button.property_value = value
 	button.property_type = type
 	button.enum_items = enum_items
-	$Margin/VBox/Scroll/VBox.add_child(button)
+	$Margin/VBox/Scroll/VBox.add_child.call_deferred(button)
 	button.connect("property_changed", Callable(self, "on_property_changed"))
 	button.connect("property_selected", Callable(self, "on_property_selected"))
 
@@ -268,8 +278,8 @@ func on_property_changed(property_name, property_value):
 			active.visual.update()
 		_:
 			active.set(property_name, property_value)
-	display_data() #to reload
 	
+	display_data() #to reload
 	editor.log.lprint(str("Changed ", active_type, " ", active.name, "'s ", property_name, " to ", property_value))
 	print("Changed ", active_type, " ", active.name, "'s ", property_name, " to ", property_value)
 

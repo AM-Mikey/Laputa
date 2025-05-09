@@ -47,7 +47,7 @@ func state_process():
 	if abs(mm.move_target.x - pc.position.x) < 1: #when within one pixel
 		pc.move_dir.x = 0.0
 
-		print("moveto state clear, setting to: ", mm.cached_state.name)
+		#print("moveto state clear, setting to: ", mm.cached_state.name)
 		mm.change_state(mm.cached_state.name.to_lower())
 		return
 

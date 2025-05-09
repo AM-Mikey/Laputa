@@ -68,7 +68,7 @@ theme = ExtResource("1")
 script = ExtResource("2")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0)
+modulate = Color(1, 1, 1, 0.156863)
 layout_mode = 2
 color = Color(0, 0, 0, 1)
 
@@ -77,12 +77,11 @@ layout_mode = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="VBox"]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 text = "You are Dead"
+horizontal_alignment = 1
 
 [node name="HBox" type="HBoxContainer" parent="VBox"]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 alignment = 1
 
@@ -96,7 +95,7 @@ text = "Quit"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_xys32")
+&"": SubResource("AnimationLibrary_xys32")
 }
 
 [connection signal="pressed" from="VBox/HBox/Continue" to="." method="_on_Continue_pressed"]

@@ -16,6 +16,7 @@
 offset_right = 384.0
 offset_bottom = 288.0
 pivot_offset = Vector2(-408, -64)
+mouse_filter = 0
 theme = ExtResource("3")
 script = ExtResource("2_88yuq")
 normal_buttons = NodePath("VBox/Margin/Tab/Normal/Scroll/Tiles")

@@ -29,7 +29,6 @@ var texture_rects: Dictionary
 	#print("set background resource")
 
 func _ready():
-	print("doing ready")
 	setup()
 	
 func setup():
@@ -46,12 +45,13 @@ func setup():
 	
 
 func _physics_process(_delta):
-	for t in texture_rects:
-		texture_rects[t].position.x += horizontal_speed * layer_scales[t].x
-		var texture_width = texture_rects[t].texture.get_width()
-		if texture_rects[t].position.x >= (layer_repeating_length * -0.5) + texture_width \
-		or texture_rects[t].position.x <= (layer_repeating_length * -0.5) - texture_width:
-			set_tile_mode(texture_rects[t]) #reset x position to start
+	pass #TODO: fix animated bk not working in editor
+	#for t in texture_rects:
+		#texture_rects[t].position.x += horizontal_speed * layer_scales[t].x
+		#var texture_width = texture_rects[t].texture.get_width()
+		#if texture_rects[t].position.x >= (layer_repeating_length * -0.5) + texture_width \
+		#or texture_rects[t].position.x <= (layer_repeating_length * -0.5) - texture_width:
+			#set_tile_mode(texture_rects[t]) #reset x position to start
 
 func setup_background_resource():
 	#background_resource.texture.emit_changed()
@@ -73,7 +73,6 @@ func setup_layers():
 		c.free()
 
 	for layer_index in layers:
-		print("did layer", layer_index)
 		var layer = ParallaxLayer.new()
 		pb.add_child(layer)
 		
@@ -88,7 +87,6 @@ func setup_layers():
 		var layer_height = int(texture.get_height() / float(layers))
 		var layer_y = layer_height * layer_index
 		var region = Rect2i(0, layer_y, texture.get_width(), layer_height)
-		print(region)
 		
 		#this cannot be AtlasTexture due to bug https://github.com/godotengine/godot/issues/20472
 		var texture_as_image = texture.get_image()

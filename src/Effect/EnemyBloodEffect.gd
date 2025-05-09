@@ -7,7 +7,7 @@ func _ready():
 	for p in get_children():
 		p.emitting = false
 	await get_tree().create_timer(.001).timeout #delay so blood direction is set properly
-	print(direction)
+	#print(direction)
 	for p in get_children():
 		p.direction = direction
 		p.one_shot = true

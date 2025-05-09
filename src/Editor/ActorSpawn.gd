@@ -10,6 +10,13 @@ func _ready():
 		printerr("ERROR: no actor chosen in ActorSpawn")
 		return
 	
+	#groups
+	if actor_path.begins_with("res://src/Actor/NPC/"):
+		add_to_group("NPCSpawns")
+	elif actor_path.begins_with("res://src/Actor/Enemy/"):
+		add_to_group("EnemySpawns")
+	
+	
 	#sprite
 	var actor = load(actor_path).instantiate()
 	$Sprite2D.texture = actor.get_node("Sprite2D").texture

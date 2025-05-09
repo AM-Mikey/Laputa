@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0i32ehy7tfaa"]
+
+[ext_resource type="Script" uid="uid://d1db0ci1ekkmx" path="res://src/Effect/BubbleEmitter.gd" id="1_sk1ok"]
+
+[node name="BubbleEmitter" type="Node2D"]
+script = ExtResource("1_sk1ok")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -13,7 +13,7 @@ var homing_camera = false
 @export var h_pan_distance = 2.0
 @export var v_pan_distance = 2.0
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 @onready var pc = get_parent()
 @onready var mm = pc.get_node("MovementManager")
 var h_tween: Tween
@@ -40,14 +40,14 @@ func _physics_process(_delta):
 ### MAIN ###
 
 func pan_vertical(dir):
-	var dist = v_pan_distance / world.resolution_scale
+	var dist = v_pan_distance / w.resolution_scale
 	if v_tween:
 		v_tween.kill()
 	v_tween = create_tween()
 	v_tween.tween_property(self, "drag_vertical_offset", dir * dist, v_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(v_pan_delay)
 
 func pan_horizontal(dir):
-	var dist = h_pan_distance / world.resolution_scale
+	var dist = h_pan_distance / w.resolution_scale
 	if h_tween:
 		h_tween.kill()
 	h_tween = create_tween()
@@ -73,9 +73,9 @@ func on_limit_camera(left, right, top, bottom):
 	for b in get_tree().get_nodes_in_group("BlackBars"):
 		b.free()
 	
-	if window_width > (right - left) * world.resolution_scale:
+	if window_width > (right - left) * w.resolution_scale:
 		#print("WARNING: window width larger than camera limit")
-		var thickness = ((window_width / world.resolution_scale) - (right - left))/2
+		var thickness = ((window_width / w.resolution_scale) - (right - left))/2
 		
 		spawn_black_bar("BarLeft", \
 		Vector2(thickness, window_height), \
@@ -90,9 +90,9 @@ func on_limit_camera(left, right, top, bottom):
 		limit_left = left
 		limit_right = right
 	
-	if get_window().get_size().y > (bottom - top) * world.resolution_scale:
+	if get_window().get_size().y > (bottom - top) * w.resolution_scale:
 		#print("WARNING: window height larger than camera limit")
-		var thickness = (window_height / world.resolution_scale - (bottom - top))/2
+		var thickness = (window_height / w.resolution_scale - (bottom - top))/2
 		
 		spawn_black_bar("BarTop", \
 		Vector2(window_width, thickness), \
@@ -108,7 +108,7 @@ func on_limit_camera(left, right, top, bottom):
 		limit_bottom = bottom
 
 func spawn_black_bar(bar_name, size, bar_position):
-		var ui = world.get_node("UILayer")
+		var ui = w.get_node("UILayer")
 		var bar = BLACKBAR.instantiate()
 		bar.name = bar_name
 		bar.size = size
@@ -118,4 +118,4 @@ func spawn_black_bar(bar_name, size, bar_position):
 
 
 func on_viewport_size_changed():
-	zoom = Vector2(world.resolution_scale, world.resolution_scale)
+	zoom = Vector2(w.resolution_scale, w.resolution_scale)

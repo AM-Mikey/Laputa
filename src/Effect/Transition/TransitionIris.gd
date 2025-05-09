@@ -19,7 +19,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	match anim_name:
 		"IrisContract": animation = "IrisExpand"
 		"IrisExpand": 
-			print("free iris from itself")
+			#print("free iris from itself")
 			queue_free()
 
 

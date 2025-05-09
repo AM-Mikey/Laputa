@@ -4,12 +4,14 @@ const TRANSITION = preload("res://src/Effect/Transition/TransitionWipe.tscn")
 
 signal level_change(level, door_index)
 
+enum Direction {LEFT, RIGHT, UP, DOWN}
+
 @export var level: String
 @export var door_index: int = 0
-@export var direction = Vector2.RIGHT
+@export var direction: Direction = Direction.RIGHT
 
 func _ready():
-	var _err = connect("level_change", Callable(w, "on_level_change")) #w is no longer level, but path
+	var _err = connect("level_change", Callable(w, "change_level_via_trigger"))
 	trigger_type = "load_zone"
 
 
@@ -22,18 +24,27 @@ func _on_body_exited(_body):
 
 func enter_load_zone(): #see if you need the inspect state
 	active_pc.can_input = false
-	print("doing moveto")
-	active_pc.move_to(Vector2((position.x + (direction.x * 16)), position.y)) #active_pc.move_to(position)
+	match direction:
+		Direction.LEFT:
+			active_pc.move_to(Vector2(position.x - 16, position.y))
+		Direction.RIGHT:
+			active_pc.move_to(Vector2(position.x + 16, position.y))
+		Direction.UP:
+			pass
+		Direction.DOWN:
+			pass
+	
+	
 	
 	am.play("door")
 	am.fade_music()
 	
 	var transition = TRANSITION.instantiate()
 	match direction:
-		Vector2.LEFT: transition.animation = "WipeInLeft"
-		Vector2.RIGHT: transition.animation = "WipeInRight"
-		Vector2.UP: transition.animation = "WipeInUp"
-		Vector2.DOWN: transition.animation = "WipeInDown"
+		Direction.LEFT: transition.animation = "WipeInLeft"
+		Direction.RIGHT: transition.animation = "WipeInRight"
+		Direction.UP: transition.animation = "WipeInUp"
+		Direction.DOWN: transition.animation = "WipeInDown"
 
 	if w.get_node("UILayer").has_node("TransitionWipe"):
 		w.get_node("UILayer/TransitionWipe").free()

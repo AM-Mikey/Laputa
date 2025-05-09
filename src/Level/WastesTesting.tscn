@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_gqwwp"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_3ucb2"]
-[ext_resource type="Resource" path="res://src/Background/kloudfaktory.tres" id="4_c6eqk"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="4_c6eqk"]
 [ext_resource type="TileSet" uid="uid://cm4auuymtmne6" path="res://src/Tile/Wastes.tres" id="4_tdjow"]
-[ext_resource type="Texture2D" uid="uid://blm6jvrpoeuir" path="res://assets/Background/CloudFactoryTest.png" id="5_c6eqk"]
+[ext_resource type="Texture2D" uid="uid://cb2wh1kjj4djx" path="res://assets/Background/TiledPlains.png" id="5_tj576"]
 [ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="5_w8juu"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="6_8lqyu"]
 [ext_resource type="Script" uid="uid://brhels8sdivp3" path="res://src/Tile/Wastes.gd" id="9_633jl"]
@@ -21,13 +21,13 @@ dialog_json = "res://src/Dialog/Village.json"
 conversation = "cutscene_test"
 
 [node name="LevelLimiter" parent="." instance=ExtResource("2_3ucb2")]
-offset_left = -352.0
-offset_top = -1024.0
-offset_right = 1248.0
+offset_left = -128.0
+offset_top = -336.0
+offset_right = 1280.0
 offset_bottom = 272.0
 background_resource = ExtResource("4_c6eqk")
-texture = ExtResource("5_c6eqk")
-layers = 3
+texture = ExtResource("5_tj576")
+layers = 5
 layer_scales = {
 0: Vector2(0, 0),
 1: Vector2(0.4, 0.4),
@@ -37,14 +37,13 @@ layer_scales = {
 }
 layer_height_offsets = {
 0: 0.0,
-1: 0.0,
-2: 0.0,
+1: -100.0,
+2: -50.0,
 3: 0.0,
 4: 0.0
 }
 focus = 4
 tile_mode = 1
-back_tile_mode = 4
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = 1
@@ -78,52 +77,57 @@ offset_bottom = 208.0
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
-"door_index": [0, 2],
+"door_index": [3, 2],
 "editor_hidden": [false, 1],
 "level": ["DogtownInteriorTesting", 4],
 "locked": [false, 1]
 }
-
-[node name="LoadZone" parent="Triggers" instance=ExtResource("9_ag25g")]
-modulate = Color(1, 1, 1, 0.75)
-offset_left = 1248.0
-offset_top = -240.0
-offset_right = 1264.0
-offset_bottom = -224.0
-trigger_path = "res://src/Trigger/LoadZone.tscn"
-properties = {
-"color": [Color(0, 0.4, 0, 1), 20],
-"direction": [Vector2(1, 0), 5],
-"door_index": [0, 2],
-"editor_hidden": [false, 1],
-"level": ["DefaultGodot4", 4]
-}
+size_is_default = false
 
 [node name="Spikes" parent="Triggers" instance=ExtResource("9_ag25g")]
 modulate = Color(1, 1, 1, 0.75)
-offset_left = 272.0
-offset_top = 128.0
-offset_right = 280.0
-offset_bottom = 136.0
+offset_left = 288.0
+offset_top = 160.0
+offset_right = 304.0
+offset_bottom = 176.0
 trigger_path = "res://src/Trigger/Spikes.tscn"
 properties = {
 "color": [Color(1, 0, 0, 1), 20],
 "editor_hidden": [false, 1]
 }
+size_is_default = false
 
-[node name="Door1" parent="Triggers" instance=ExtResource("9_ag25g")]
+[node name="LoadZone" parent="Triggers" instance=ExtResource("9_ag25g")]
 modulate = Color(1, 1, 1, 0.75)
-offset_left = 928.0
-offset_top = -32.0
-offset_right = 944.0
-trigger_path = "res://src/Trigger/Door.tscn"
+offset_left = 1136.0
+offset_top = 224.0
+offset_right = 1168.0
+offset_bottom = 240.0
+trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
+"direction": [3, 2],
+"door_index": [0, 2],
+"editor_hidden": [false, 1],
+"level": ["DefaultGodot4", 4]
+}
+size_is_default = false
+
+[node name="LoadZone1" parent="Triggers" instance=ExtResource("9_ag25g")]
+modulate = Color(1, 1, 1, 0.75)
+offset_left = 1280.0
+offset_top = -336.0
+offset_right = 1296.0
+offset_bottom = 224.0
+trigger_path = "res://src/Trigger/LoadZone.tscn"
+properties = {
+"color": [Color(0, 0.4, 0, 1), 20],
+"direction": [1, 2],
 "door_index": [1.0, 2],
 "editor_hidden": [false, 1],
-"level": ["", 4],
-"locked": [false, 1]
+"level": ["DefaultGodot4", 4]
 }
+size_is_default = false
 
 [node name="SunLight" parent="." instance=ExtResource("5_w8juu")]
 position = Vector2(88, -128)

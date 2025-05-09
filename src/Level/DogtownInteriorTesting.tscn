@@ -72,7 +72,7 @@ offset_bottom = -16.0
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
-"door_index": [0, 2],
+"door_index": [3, 2],
 "editor_hidden": [false, 1],
 "level": ["WastesTesting", 4],
 "locked": [false, 1]

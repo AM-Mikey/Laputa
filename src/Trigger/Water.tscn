@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://b7n2ctrbbq4kn" path="res://src/Trigger/Water.gd" id="1"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(8, 8)
+size = Vector2(16, 16)
 
 [node name="Water" type="Area2D" groups=["Triggers"]]
-collision_layer = 0
+collision_layer = 1048576
 collision_mask = 3
 script = ExtResource("1")
 color = Color(0, 0, 0.701961, 1)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://bji3j7jm2votc"]
+[gd_scene load_steps=18 format=3 uid="uid://bji3j7jm2votc"]
 
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1"]
 [ext_resource type="StyleBox" uid="uid://c53b3p1k47jdu" path="res://src/UI/StyleBox/SteelRound.tres" id="2"]
 [ext_resource type="Script" uid="uid://dhuooyagsaocp" path="res://src/Editor/Button/PropertyButton.gd" id="3"]
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="4"]
 [ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momo.ttf" id="4_sdg3t"]
+[ext_resource type="Script" uid="uid://q2r8s3f687q7" path="res://src/Editor/LineEditOverride.gd" id="6_yjys0"]
 
 [sub_resource type="StyleBoxEmpty" id="3"]
 
@@ -28,7 +29,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="11"]
 
-[node name="PropertyButton" type="MarginContainer"]
+[node name="PropertyButton" type="MarginContainer" groups=["PropertyButtons"]]
 clip_contents = true
 offset_right = 248.0
 offset_bottom = 32.0
@@ -123,6 +124,7 @@ text = "fffttttt"
 placeholder_text = "Null"
 alignment = 2
 deselect_on_focus_loss_enabled = false
+script = ExtResource("6_yjys0")
 
 [node name="Int" type="LineEdit" parent="HBox/HBox"]
 visible = false
@@ -133,6 +135,7 @@ theme_override_fonts/font = ExtResource("4_sdg3t")
 placeholder_text = "Null"
 alignment = 2
 deselect_on_focus_loss_enabled = false
+script = ExtResource("6_yjys0")
 
 [node name="Float" type="LineEdit" parent="HBox/HBox"]
 visible = false
@@ -143,6 +146,7 @@ theme_override_fonts/font = ExtResource("4_sdg3t")
 placeholder_text = "Null"
 alignment = 2
 deselect_on_focus_loss_enabled = false
+script = ExtResource("6_yjys0")
 
 [node name="Load" type="LineEdit" parent="HBox/HBox"]
 visible = false
@@ -153,6 +157,7 @@ theme_override_fonts/font = ExtResource("4_sdg3t")
 placeholder_text = "Null"
 alignment = 2
 editable = false
+script = ExtResource("6_yjys0")
 
 [node name="Vector2X" type="LineEdit" parent="HBox/HBox"]
 visible = false
@@ -162,6 +167,7 @@ mouse_filter = 1
 theme_override_fonts/font = ExtResource("4_sdg3t")
 placeholder_text = "Null"
 alignment = 2
+script = ExtResource("6_yjys0")
 
 [node name="Vector2Y" type="LineEdit" parent="HBox/HBox"]
 visible = false
@@ -170,6 +176,7 @@ size_flags_horizontal = 8
 mouse_filter = 1
 theme_override_fonts/font = ExtResource("4_sdg3t")
 alignment = 2
+script = ExtResource("6_yjys0")
 
 [node name="Spacer2" type="Control" parent="HBox"]
 custom_minimum_size = Vector2(8, 0)
@@ -180,9 +187,15 @@ mouse_filter = 2
 [connection signal="toggled" from="HBox/HBox/Bool" to="." method="on_bool_toggled"]
 [connection signal="popup_closed" from="HBox/HBox/Color" to="." method="on_color_changed"]
 [connection signal="item_selected" from="HBox/HBox/Enum" to="." method="on_enum_selected"]
-[connection signal="text_submitted" from="HBox/HBox/String" to="." method="_on_String_text_entered"]
-[connection signal="text_submitted" from="HBox/HBox/Int" to="." method="_on_int_text_submitted"]
-[connection signal="text_submitted" from="HBox/HBox/Float" to="." method="_on_float_text_entered"]
-[connection signal="text_submitted" from="HBox/HBox/Load" to="." method="on_text_entered"]
-[connection signal="text_submitted" from="HBox/HBox/Vector2X" to="." method="on_vector2x_entered"]
-[connection signal="text_submitted" from="HBox/HBox/Vector2Y" to="." method="on_vector2y_entered"]
+[connection signal="focus_exited" from="HBox/HBox/String" to="." method="_on_string_complete"]
+[connection signal="text_submitted" from="HBox/HBox/String" to="." method="_on_string_complete"]
+[connection signal="focus_exited" from="HBox/HBox/Int" to="." method="_on_int_complete"]
+[connection signal="text_submitted" from="HBox/HBox/Int" to="." method="_on_int_complete"]
+[connection signal="focus_exited" from="HBox/HBox/Float" to="." method="_on_float_complete"]
+[connection signal="text_submitted" from="HBox/HBox/Float" to="." method="_on_float_complete"]
+[connection signal="focus_exited" from="HBox/HBox/Load" to="." method="_on_string_complete"]
+[connection signal="text_submitted" from="HBox/HBox/Load" to="." method="_on_string_complete"]
+[connection signal="focus_exited" from="HBox/HBox/Vector2X" to="." method="_on_vector2x_complete"]
+[connection signal="text_submitted" from="HBox/HBox/Vector2X" to="." method="_on_vector2x_complete"]
+[connection signal="focus_exited" from="HBox/HBox/Vector2Y" to="." method="_on_vector2y_complete"]
+[connection signal="text_submitted" from="HBox/HBox/Vector2Y" to="." method="_on_vector2y_complete"]

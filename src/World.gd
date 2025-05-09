@@ -41,14 +41,13 @@ func _ready():
 	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 	on_viewport_size_changed()
 	
-	if not do_skip_title:
+	if not do_skip_title: #TODO: update this
 		ui.add_child(TITLE.instantiate())
 		add_child(TITLECAM.instantiate())
-		add_child(current_level)
+		first_time_level_setup()
 	else:
-		add_child(current_level)
-		skip_title()
-	
+		first_time_level_setup()
+
 	load_options()
 
 
@@ -78,20 +77,14 @@ func get_internal_version() -> String:
 
 
 
-func set_debug_visible(vis = !debug_visible): #makes triggers and visutils visible #TODO redo this system
-	debug_visible = vis
-	for t in get_tree().get_nodes_in_group("TriggerVisuals"):
-		t.visible = vis
-	for u in get_tree().get_nodes_in_group("VisualUtilities"):
-		u.visible = vis
-	print("debug_visible == ", debug_visible)
+#func set_debug_visible(vis = !debug_visible): #makes triggers and visutils visible #TODO redo this system
+	#debug_visible = vis
+	#for t in get_tree().get_nodes_in_group("TriggerVisuals"):
+		#t.visible = vis
+	#for u in get_tree().get_nodes_in_group("VisualUtilities"):
+		#u.visible = vis
+	#print("debug_visible == ", debug_visible)
 
-func skip_title():
-	#on_level_change(start_level_path, 0) #TODO: create a custom function to set up level first time. we lose some things by not doing on_level_change
-	add_child(JUNIPER.instantiate())
-	get_node("UILayer").add_child(HUD.instantiate())
-	for s in get_tree().get_nodes_in_group("SpawnPoints"):
-		$Juniper.position = s.global_position #TODO: consider using onready var path instead for better performance
 
 func _input(event):
 	if event.is_action_pressed("inventory") and has_node("Juniper"):
@@ -120,74 +113,126 @@ func _input(event):
 
 ### LEVEL CHANGE ###
 
-func on_level_change(level_path, door_index):
-	print("changing level...")
-	write_level_data_to_temp()
+func first_time_level_setup():
+	print("first time level setup")
+	add_child(JUNIPER.instantiate())
+	$Juniper/PlayerCamera.position_smoothing_enabled = false
+	ui.add_child(HUD.instantiate())
 	
-	### Clean up stuff we don't need
-	if ui.has_node("DialogBox"):
-		$UILayer/DialogBox.stop_printing()
+	current_level = load(start_level_path).instantiate()
+	add_child(current_level)
+	for s in get_tree().get_nodes_in_group("SpawnPoints"):
+		$Juniper.global_position = s.global_position
+	
+	match current_level.level_type:
+		current_level.LevelType.NORMAL:
+			if current_level.has_node("LevelCamera"):
+				$Juniper/PlayerCamera.enabled = false
+			else:
+				$Juniper/PlayerCamera.enabled = true
+		current_level.LevelType.PLAYERLESS_CUTSCENE:
+			$Juniper.queue_free()
+			$UILayer/HUD.queue_free()
+	
+	#wipe would go here if we want one
+	display_level_text(current_level)
+	read_level_data_from_temp()
+	await get_tree().process_frame
+	$Juniper/PlayerCamera.position_smoothing_enabled = true
+
+
+func change_level_via_code(level_path):
+	print("changing level via code...")
+	if ui.has_node("DialogBox"): $UILayer/DialogBox.stop_printing()
 	clear_spawn_layers()
-	###
+	current_level.queue_free()
+	await get_tree().process_frame
+
+	add_child(JUNIPER.instantiate())
+	$Juniper/PlayerCamera.position_smoothing_enabled = false
+	ui.add_child(HUD.instantiate())
 	
+	current_level = load(level_path).instantiate()
+	add_child(current_level)
+	for s in get_tree().get_nodes_in_group("SpawnPoints"):
+		$Juniper.global_position = s.global_position
+	
+	match current_level.level_type:
+		current_level.LevelType.NORMAL:
+			if current_level.has_node("LevelCamera"):
+				$Juniper/PlayerCamera.enabled = false
+			else:
+				$Juniper/PlayerCamera.enabled = true
+		current_level.LevelType.PLAYERLESS_CUTSCENE:
+			$Juniper.queue_free()
+			$UILayer/HUD.queue_free()
+	
+	#wipe would go here if we want one
+	display_level_text(current_level)
+	read_level_data_from_temp()
+	await get_tree().process_frame
+	$Juniper/PlayerCamera.position_smoothing_enabled = true
+
+
+func change_level_via_trigger(level_path, door_index):
+	print("changing level via trigger...")
+	write_level_data_to_temp()
+	if ui.has_node("DialogBox"): $UILayer/DialogBox.stop_printing()
+	clear_spawn_layers()
 	var old_level_path = current_level.scene_file_path
 	current_level.queue_free()
-	await get_tree().process_frame #this gives time for juniper to spawn on start
+	await get_tree().process_frame
 	
-	var next_level = load(level_path).instantiate()
-	current_level = next_level #next level set so current level is never null
-	add_child(next_level)
+	current_level = load(level_path).instantiate()
+	add_child(current_level)
 	
-	if has_node("Juniper"):
-		#$Juniper.mm.change_state("run") #already doing this in door script????
-		if next_level.level_type == next_level.LevelType.NORMAL:
-			$Juniper/PlayerCamera.position_smoothing_enabled = false
-			$Juniper/PlayerCamera.enabled = not next_level.has_node("LevelCamera") #turn off camera if level has one already
-			
-			
-		#### get the door with the right index
-		var doors_found = 0
-		
-		await get_tree().process_frame #give time for triggers to load
-		var triggers = get_tree().get_nodes_in_group("LevelTriggers")
-		for t in triggers:
-			var old_level_name = old_level_path.trim_prefix("res://src/Level/").trim_suffix(".tscn")
-			if t.level == old_level_name and t.door_index == door_index:
-				if t.is_in_group("LoadZones"):
-					var size = t.get_node("CollisionShape2D").shape.size
-					$Juniper.global_position = t.global_position + Vector2((t.direction.x * -32), size.y)#
-					doors_found += 1
-				else: #door
-					var size = t.get_node("CollisionShape2D").shape.size
-					$Juniper.global_position = t.global_position + Vector2(size.x * 0.5, size.y)
-					doors_found += 1
-
-			if doors_found == 0:
-				printerr("ERROR: could not find door with right index")
-			if doors_found > 1:
-				printerr("ERROR: more than one door with same index")
-		
-		###transition out
-		if ui.has_node("TransitionWipe"): #LOADZONES
-			await get_tree().create_timer(0.8).timeout
-			$UILayer/TransitionWipe.play_out_animation()
-			await get_tree().create_timer(0.2).timeout #wait for a bit of the animation to finish
-			$Juniper.can_input = true
-
-		elif ui.has_node("TransitionIris"): #DOORS
-			await get_tree().create_timer(0.4).timeout
-			$UILayer/TransitionIris.play_out_animation()
-			await get_tree().create_timer(0.2).timeout #wait for a bit of the animation to finish
-			$Juniper.can_input = true
-
-		display_level_text(next_level)
-		
-		#enable smoothing after a bit
-		await get_tree().create_timer(0.01).timeout
-		$Juniper/PlayerCamera.position_smoothing_enabled = true
+	if current_level.level_type == current_level.LevelType.NORMAL:
+		$Juniper/PlayerCamera.position_smoothing_enabled = false
+		$Juniper/PlayerCamera.enabled = not current_level.has_node("LevelCamera") #turn off camera if level has one already
 	
-	if next_level.level_type == next_level.LevelType.PLAYERLESS_CUTSCENE:#############################################
-		#TODO: right now juniper isn't unloaded between levels unless we're using level buttons or starting
+	#### get the door with the right index
+	var doors_found = 0
+	await get_tree().process_frame #give time for triggers to load
+	var triggers = get_tree().get_nodes_in_group("LevelTriggers")
+	for t in triggers:
+		var old_level_name = old_level_path.trim_prefix("res://src/Level/").trim_suffix(".tscn")
+		if t.level == old_level_name and t.door_index == door_index:
+			doors_found += 1
+			var size = t.get_node("CollisionShape2D").shape.size
+			if t.is_in_group("LoadZones"):
+				match t.direction:
+					t.Direction.LEFT: $Juniper.global_position = t.global_position + Vector2(32, size.y)
+					t.Direction.RIGHT: $Juniper.global_position = t.global_position + Vector2(-32, size.y)
+					t.Direction.UP: $Juniper.global_position = t.global_position + Vector2((size.x * 0.5), -32)
+					t.Direction.DOWN: $Juniper.global_position = t.global_position + Vector2((size.x * 0.5), 32)
+					_: printerr("ERROR: Invalid direction on Load Zone")
+			elif t.is_in_group("Doors"):
+				$Juniper.global_position = t.global_position + Vector2(size.x * 0.5, size.y)
+		
+		if doors_found == 0:
+			printerr("ERROR: could not find door with right index")
+		if doors_found > 1:
+			printerr("ERROR: more than one door with same index")
+	
+	###transition out
+	if ui.has_node("TransitionWipe"): #LOADZONES
+		await get_tree().create_timer(0.8).timeout
+		$UILayer/TransitionWipe.play_out_animation()
+		await get_tree().create_timer(0.2).timeout #wait for a bit of the animation to finish
+		$Juniper.can_input = true
+
+	elif ui.has_node("TransitionIris"): #DOORS
+		await get_tree().create_timer(0.4).timeout
+		$UILayer/TransitionIris.play_out_animation()
+		await get_tree().create_timer(0.2).timeout #wait for a bit of the animation to finish
+		$Juniper.can_input = true
+
+	display_level_text(current_level)
+	#await get_tree().create_timer(0.01).timeout
+	$Juniper/PlayerCamera.position_smoothing_enabled = true
+	
+	if current_level.level_type == current_level.LevelType.PLAYERLESS_CUTSCENE:
+		#TODO: right now juniper isn't unloaded between levels
 		$Juniper.queue_free()
 		$UILayer/HUD.queue_free()
 	
@@ -236,7 +281,7 @@ func read_player_data_from_save():
 	var scoped_data = read_from_file(save_path)
 	var player_data = scoped_data["player_data"]
 	
-	on_level_change(player_data["current_level"], null)
+	change_level_via_code(player_data["current_level"])
 	await get_tree().process_frame
 	
 	pc.position = player_data["position"]
@@ -422,6 +467,8 @@ func on_viewport_size_changed():
 		resolution_scale = floori(urs) #round 0.5 down
 	else:
 		resolution_scale = roundi(urs) #else round normally
+	if resolution_scale == 0: 
+		resolution_scale = 0.0001 #div by 0 protection
 
 
 	ui.scale = Vector2(resolution_scale, resolution_scale)

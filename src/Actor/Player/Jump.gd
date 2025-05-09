@@ -35,7 +35,7 @@ func state_process():
 	if pc.is_on_floor(): #landed
 		mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
 		#mm.bonk("feet")
-		print("changing from jump to run")
+		#print("changing from jump to run")
 		mm.change_state("run")
 		return
 

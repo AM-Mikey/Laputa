@@ -25,6 +25,7 @@ var coyote_time = 0.05
 @export var minimum_direction_time = 1.0 #cave story forces you to jump a certain x distance when going max speed before jumping
 var jump_starting_move_dir_x: int
 @export var min_x_velocity = 0.01 #0.001
+var terminal_velocity = 500
 
 var knockback_direction: Vector2
 @export var knockback_speed = Vector2(40, 100) #(80, 180)
@@ -80,6 +81,8 @@ func _physics_process(_delta):
 	speed = Vector2(90, 180) if not get_parent().is_in_water else Vector2(60, 140)
 	gravity = 300.0 if not get_parent().is_in_water else 150.0
 	
+	do_camera_bounds_check()
+	
 	do_ceiling_push_check()
 	if pc.is_on_ceiling():
 		if not on_ceiling:
@@ -91,7 +94,15 @@ func _physics_process(_delta):
 		
 	current_state.state_process()
 
-
+func do_camera_bounds_check():
+	if current_state == states["fly"]: return
+	if world.current_level == null: return
+	var ll = world.current_level.get_node("LevelLimiter")
+	var bottom_distance = ll.position.y + ll.size.y
+	var forgiveness = 64
+	if pc.position.y > bottom_distance + forgiveness:
+		if pc.die_from_falling:
+			pc.die()
 
 func do_ceiling_push_check():
 	if current_state == states["jump"] \
@@ -113,14 +124,14 @@ func do_ceiling_push_check():
 
 
 func check_ssp():
-	if world.current_level != null:
-		if world.current_level.has_node("TileMap"):
-			var tm = world.current_level.has_node("TileMap")
-			var tile_pos = tm.local_to_map(Vector2(pc.position.x, pc.position.y + 8))
-			var tile = tm.get_cell_source_id(0, tile_pos)
-			if tm.tile_set.tile_get_shape_one_way(tile, 0):
-				print("player is on ssp")
-				pc.is_on_ssp = true
+	if world.current_level == null: return
+	if world.current_level.has_node("TileMap"):
+		var tm = world.current_level.has_node("TileMap")
+		var tile_pos = tm.local_to_map(Vector2(pc.position.x, pc.position.y + 8))
+		var tile = tm.get_cell_source_id(0, tile_pos)
+		if tm.tile_set.tile_get_shape_one_way(tile, 0):
+			print("player is on ssp")
+			pc.is_on_ssp = true
 
 
 func _input(event):

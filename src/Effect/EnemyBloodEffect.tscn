@@ -27,9 +27,9 @@ direction = Vector2(1, 0)
 [node name="1" type="CPUParticles2D" parent="."]
 material = SubResource("1")
 amount = 1
+texture = ExtResource("2")
 lifetime = 0.5
 explosiveness = 0.5
-texture = ExtResource("2")
 spread = 67.5
 gravity = Vector2(0, -9.8)
 initial_velocity_min = 32.0
@@ -46,9 +46,9 @@ anim_speed_curve = SubResource("Curve_vc0l4")
 [node name="2" type="CPUParticles2D" parent="."]
 material = SubResource("1")
 amount = 1
+texture = ExtResource("2")
 lifetime = 0.5
 explosiveness = 0.5
-texture = ExtResource("2")
 spread = 67.5
 gravity = Vector2(0, -9.8)
 initial_velocity_min = 32.0
@@ -65,9 +65,9 @@ anim_speed_curve = SubResource("Curve_vc0l4")
 [node name="3" type="CPUParticles2D" parent="."]
 material = SubResource("1")
 amount = 1
+texture = ExtResource("2")
 lifetime = 0.5
 explosiveness = 0.5
-texture = ExtResource("2")
 spread = 67.5
 gravity = Vector2(0, -9.8)
 initial_velocity_min = 32.0
@@ -84,9 +84,9 @@ anim_speed_curve = SubResource("Curve_vc0l4")
 [node name="4" type="CPUParticles2D" parent="."]
 material = SubResource("1")
 amount = 1
+texture = ExtResource("2")
 lifetime = 0.5
 explosiveness = 0.5
-texture = ExtResource("2")
 spread = 67.5
 gravity = Vector2(0, -9.8)
 initial_velocity_min = 32.0
@@ -103,9 +103,9 @@ anim_speed_curve = SubResource("Curve_vc0l4")
 [node name="5" type="CPUParticles2D" parent="."]
 material = SubResource("1")
 amount = 1
+texture = ExtResource("2")
 lifetime = 0.5
 explosiveness = 0.5
-texture = ExtResource("2")
 spread = 67.5
 gravity = Vector2(0, -9.8)
 initial_velocity_min = 32.0
@@ -122,9 +122,9 @@ anim_speed_curve = SubResource("Curve_vc0l4")
 [node name="6" type="CPUParticles2D" parent="."]
 material = SubResource("1")
 amount = 1
+texture = ExtResource("2")
 lifetime = 0.5
 explosiveness = 0.5
-texture = ExtResource("2")
 spread = 67.5
 gravity = Vector2(0, -9.8)
 initial_velocity_min = 32.0

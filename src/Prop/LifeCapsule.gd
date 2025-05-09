@@ -6,7 +6,7 @@ func activate():
 	active_pc.hp = active_pc.max_hp
 	active_pc.emit_signal("hp_updated", active_pc.hp, active_pc.max_hp)
 	am.play("hp_refill") #TODO: insert jingle
-	print("got life capsule")
+	#print("got life capsule")
 
 func expend_prop():
 	spent = true

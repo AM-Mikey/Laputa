@@ -92,7 +92,7 @@ func on_resolutionscale_changed(index: int): #not fully implemented
 
 func on_mastervolume_changed(value):
 	var db = get_percent_as_db(value)
-	print(db)
+	#print(db)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),db)
 	if not w.get_node("UILayer/Options").hidden and after_ready:
 		am.play("sound_test", null, "master") #play on master

@@ -20,7 +20,7 @@ func state_process():
 	if pc.is_on_wall():
 		new_velocity.y = max(mm.velocity.y, new_velocity.y)
 		
-	mm.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
+	mm.velocity.y = min(mm.terminal_velocity, new_velocity.y) #only set y portion because we're doing move and slide with snap
 	animate()
 	
 	
@@ -30,7 +30,7 @@ func state_process():
 	if pc.is_on_floor(): #landed
 		mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
 		#mm.bonk("feet")
-		print("changing from fall to run")
+		#print("changing from fall to run")
 		mm.change_state("run")
 		return
 

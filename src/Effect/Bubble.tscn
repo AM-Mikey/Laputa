@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://chw87ulbrrop7"]
+
+[ext_resource type="Script" uid="uid://be7coeqpmy853" path="res://src/Effect/Bubble.gd" id="1_8yk57"]
+[ext_resource type="Texture2D" uid="uid://c4ff62ywkcohl" path="res://assets/Effect/Bubble.png" id="1_ct7te"]
+[ext_resource type="Texture2D" uid="uid://d12pmmdt64yki" path="res://assets/Effect/BubblePop.png" id="3_0q5kn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8yk57"]
+size = Vector2(5, 5)
+
+[sub_resource type="CanvasItemMaterial" id="1"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_uvlvd"]
+_limits = [0.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 5), 0.0, 3.02856e-06, 0, 0, Vector2(1, 1), -4.0, 0.0, 1, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rr2fc"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_hq2em"]
+_limits = [0.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 2.02247), 0.0, 2.60597e-06, 0, 0, Vector2(1, 0.842697), -2.80899, 0.0, 0, 0]
+point_count = 2
+
+[node name="Bubble" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+velocity = Vector2(0, -7627.23)
+script = ExtResource("1_8yk57")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1048576
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_8yk57")
+
+[node name="Bubble" type="CPUParticles2D" parent="."]
+light_mask = 2
+material = SubResource("1")
+amount = 1
+texture = ExtResource("1_ct7te")
+lifetime = 2.0
+local_coords = true
+gravity = Vector2(0, 0)
+anim_speed_min = 0.8
+anim_speed_max = 1.2
+anim_speed_curve = SubResource("Curve_uvlvd")
+
+[node name="BubblePop" type="CPUParticles2D" parent="."]
+visible = false
+light_mask = 2
+material = SubResource("CanvasItemMaterial_rr2fc")
+amount = 1
+texture = ExtResource("3_0q5kn")
+lifetime = 0.4
+gravity = Vector2(0, 0)
+anim_speed_min = 0.8
+anim_speed_max = 1.2
+anim_speed_curve = SubResource("Curve_hq2em")
+
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_exited"]
+[connection signal="finished" from="BubblePop" to="." method="_on_bubble_pop_finished"]

@@ -17,7 +17,7 @@ func state_process():
 	if abs(mm.knockback_velocity.x) < 1:
 		mm.knockback_velocity = Vector2.ZERO
 		#pc.knockback = false
-		print("changing from kb to cached")
+		#print("changing from kb to cached")
 		mm.change_state(mm.cached_state.name.to_lower())
 		return
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctxo7a6euqnhd"]
+[gd_scene load_steps=5 format=3 uid="uid://ctxo7a6euqnhd"]
 
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1"]
 [ext_resource type="Script" uid="uid://ul3hypjc8cyj" path="res://src/Editor/Inspector.gd" id="2"]
 [ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momo.ttf" id="3_x868a"]
+[ext_resource type="Script" uid="uid://6ci8g1yjeufc" path="res://src/Editor/FileDialogOverride.gd" id="4_b2bhf"]
 
 [node name="Inspector" type="MarginContainer"]
 offset_right = 415.0
@@ -25,6 +26,7 @@ theme_override_constants/margin_bottom = 8
 
 [node name="VBox" type="VBoxContainer" parent="Margin"]
 layout_mode = 2
+mouse_filter = 0
 
 [node name="Label" type="Label" parent="Margin/VBox"]
 layout_mode = 2
@@ -80,10 +82,12 @@ size = Vector2i(400, 400)
 ok_button_text = "Open"
 file_mode = 0
 filters = PackedStringArray(".json")
+script = ExtResource("4_b2bhf")
 
 [node name="SaveDialog" type="FileDialog" parent="."]
 initial_position = 1
 size = Vector2i(400, 400)
+script = ExtResource("4_b2bhf")
 
 [connection signal="file_selected" from="FileDialog" to="." method="on_file_selected"]
 [connection signal="file_selected" from="SaveDialog" to="." method="_on_SaveDialog_file_selected"]

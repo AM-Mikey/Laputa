@@ -15,7 +15,7 @@
 [node name="Tiles" type="MarginContainer"]
 offset_right = 480.0
 offset_bottom = 270.0
-mouse_filter = 2
+mouse_filter = 0
 theme = ExtResource("3")
 script = ExtResource("2")
 buttons = NodePath("VBox/Scroll/Buttons")

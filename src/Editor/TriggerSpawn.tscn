@@ -94,12 +94,13 @@ size_flags_vertical = 8
 mouse_default_cursor_shape = 12
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 editor_only = false
 
 [node name="ColorRect" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0.0784314)
+modulate = Color(1, 1, 1, 0.25098)
 layout_mode = 2
 mouse_filter = 2
 color = Color(0.333333, 1, 0, 1)

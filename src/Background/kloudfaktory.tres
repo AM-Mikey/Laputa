@@ -22,6 +22,6 @@ layer_height_offsets = {
 4: 0.0
 }
 horizontal_speed = 0.0
-focus = 4
+focus = 2
 tile_mode = 1
-back_tile_mode = 1
+back_tile_mode = 2

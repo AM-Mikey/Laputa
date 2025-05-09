@@ -28,6 +28,7 @@ signal money_updated(money)
 var invincible = false
 var disabled = false
 var can_input = true
+@export var die_from_falling = true
 
 #var is_on_conveyor = false
 var enemies_touching = []
@@ -78,7 +79,7 @@ func enable():
 	can_input = true
 	invincible = false
 	if mm.cached_state:
-		print("change state via player enable to cached state")
+		#print("change state via player enable to cached state")
 		mm.change_state(mm.cached_state.name.to_lower())
 		return
 	else:

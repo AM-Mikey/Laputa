@@ -35,5 +35,5 @@ frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_fme64")
+&"": SubResource("AnimationLibrary_fme64")
 }

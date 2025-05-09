@@ -57,7 +57,6 @@ func find_level_scenes(path):
 ### BUTTON SIGNALS
 
 func select_level(path): #connected to level buttons
-	print("pp")
 	active_level_path = path
 
 func on_save(): #from editor
@@ -131,25 +130,17 @@ func save_level(level, path):
 
 
 func load_level(path):
-	if w.has_node("Juniper"): w.get_node("Juniper").free() #we free and respawn them so we have a clean slate when we load in
+	if w.has_node("Juniper"): w.get_node("Juniper").free()
 	if ui.has_node("HUD"): ui.get_node("HUD").free()
 	if ui.has_node("TitleScreen"): ui.get_node("TitleScreen").queue_free()
 	if ui.has_node("PauseMenu"): ui.get_node("PauseMenu").unpause()
-	
 	el.get_node("Editor").inspector.on_deselected()
 	
-	w.on_level_change(path, 0)
-
-	w.add_child(JUNIPER.instantiate())
-	ui.add_child(HUD.instantiate())
-	
+	w.change_level_via_code(path)
 	await get_tree().process_frame
-	
-	for s in get_tree().get_nodes_in_group("SpawnPoints"):
-		w.get_node("Juniper").global_position = s.global_position
-
 	el.get_node("Editor").setup_level()
 	el.get_node("EditorCamera").enabled = true
+	el.get_node("EditorCamera").global_position = w.get_node("Juniper").global_position
 
 
 

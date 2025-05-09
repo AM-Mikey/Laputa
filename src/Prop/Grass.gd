@@ -90,7 +90,7 @@ func do_break_drop():
 	
 	rng.randomize()
 	if drop_chance >= rng.randf():
-		print("grass dropped item")
+		#print("grass dropped item")
 		
 		var player_needs_ammo = false
 		if player_actor == null:
