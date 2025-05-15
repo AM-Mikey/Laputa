@@ -1,0 +1,3 @@
+#vehicle #place 
+
+The makeshift homes of the [[Lost Boys]]. Boys stay on the legged platform known as Kiwi, girls stay in the steel dome known as Mother. Both of these parts are combined to make a working mech in the [[Ravine]] section of the game to run up the walls and escape said ravine. Before the group can get the combined tank up to speed, [[Alexander]] ambushes them and a battle ensues on the bridge of the tank.

@@ -1,0 +1,3 @@
+#concept #proposed #group
+
+In between the era of [[Laputans]] and [[Colonists]] on [[Island of Laputa|Laputa]], there was another group that came to laputa, and waged war over the island. These inhabitants had already developed a technological industry similar to the one occuring on the surface during the events of the game. It was during the time of these inhabitants that [[Kiwi and Mother]] were used, and the [[Ravine]] opened up.

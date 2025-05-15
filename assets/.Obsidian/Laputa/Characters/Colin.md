@@ -1,0 +1,3 @@
+#character #hero #ravine #boss
+
+The self-styled shariff and leader of the [[Lost Boys]]. When [[Juniper]] and the group fall into the [[Ravine]], he holds them captive because they're adults, and can't be allowed to tell the group what to do. He steals all of Juniper's weapons, forcing him to start from nothing. Slowly, by doing missions for him, Juniper gains Colin's trust. This culminates in Colin challenging Juniper to a duel, the winner becoming the Lost Boys new leader. After losing, Colin returns Juniper's weapons and agrees to go along with the group's plan of fixing [[Kiwi and Mother]] to escape.

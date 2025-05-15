@@ -1,0 +1,2 @@
+#object
+The main crown or crystal or orb that is stolen by [[Juniper]] and the [[Sky Pirates]] during the [[Train]] heist segment. This object was originally on its way to be delivered to [[Capital City]] for the crowning ceremony of [[King Davey]]. After the Capital City section of the game, Davey is able to recover the McGuffin and uses it to summon the [[Tower of Babel]].

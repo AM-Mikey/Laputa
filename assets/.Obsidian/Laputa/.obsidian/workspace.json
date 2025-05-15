@@ -1,0 +1,226 @@
+{
+  "main": {
+    "id": "01a9ac98bd9d8f69",
+    "type": "split",
+    "children": [
+      {
+        "id": "f8cbbec6d568959c",
+        "type": "tabs",
+        "dimension": 33.24873096446701,
+        "children": [
+          {
+            "id": "fd4f00696d9a397d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Characters/Laputa's Former King.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Laputa's Former King"
+            }
+          }
+        ]
+      },
+      {
+        "id": "f00468223e4d7550",
+        "type": "tabs",
+        "dimension": 66.75126903553299,
+        "children": [
+          {
+            "id": "716f7f890990af0d",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "graph",
+              "state": {},
+              "pinned": true,
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "83ad27bcc7312c30",
+    "type": "split",
+    "children": [
+      {
+        "id": "e54dff3e53762d9f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c4162b8fb4d8e453",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "b959b6b4e7f5fe09",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "3276e7836c89b4e2",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "32d3595ad9a623f8",
+    "type": "split",
+    "children": [
+      {
+        "id": "d93da85bb0444db3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "250bcefc60dcbe67",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "f1aefcd8df866317",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "abcc0cdc0f15c969",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "7f0d02cf2088d1ac",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "fd4f00696d9a397d",
+  "lastOpenFiles": [
+    "Characters/Alexander.md",
+    "Concepts/Humans and Beastfolk.md",
+    "Characters/Sage.md",
+    "Concepts/Gender.md",
+    "Concepts/Cloud Curtain.md",
+    "Concepts/Great Plague.md",
+    "Concepts/Religion.md",
+    "Characters/Rosemary.md",
+    "Groups/Corp..md",
+    "Groups/Dogtown Residents.md",
+    "Ethnicity.md",
+    "Groups/Sky Pirates.md",
+    "Groups/Untitled.md",
+    "Objects/Vehicles/Train.md",
+    "Characters/Scrum.md",
+    "Objects/Vehicles/The Zephyr.md",
+    "Objects/Vehicles/Sushi.md",
+    "The World/Areas/Desert Town.md",
+    "The World/Areas/Cloud Factory.md",
+    "The World/Subareas/Laserlight.md",
+    "Characters/King Davey.md",
+    "Characters/Treasure Hunter.md",
+    "Characters/Spirit of the Island.md",
+    "Characters/Emily.md",
+    "Characters/Colin.md",
+    "Characters/Dola.md",
+    "The World/Subareas",
+    "Objects",
+    "Objects/Vehicles",
+    "Groups/Untitled",
+    "The World",
+    "Concepts",
+    "Characters",
+    "Groups",
+    "The World/Areas"
+  ]
+}
