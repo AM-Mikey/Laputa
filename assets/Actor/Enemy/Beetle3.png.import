@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1jevd6gx1tgf"
-path="res://.godot/imported/Traveler.png-9b3343d596f51eb78f4bb88f95af7d88.ctex"
+uid="uid://7fxhhw8ymwee"
+path="res://.godot/imported/Beetle3.png-8dd9d4a9338a1e0bfe661def8a7959bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Enemy/Traveler.png"
-dest_files=["res://.godot/imported/Traveler.png-9b3343d596f51eb78f4bb88f95af7d88.ctex"]
+source_file="res://assets/Actor/Enemy/Beetle3.png"
+dest_files=["res://.godot/imported/Beetle3.png-8dd9d4a9338a1e0bfe661def8a7959bd.ctex"]
 
 [params]
 

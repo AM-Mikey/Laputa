@@ -7,17 +7,19 @@ var waiting = false
 @export var wait_time = 1.0
 
 
-func _ready():
+func setup():
+	change_state("idle")
 	hp = 2
 	damage_on_contact = 2
 	speed = Vector2(100, 100)
 	move_dir = starting_direction
 	look_dir = starting_direction
 	acceleration = 25
-
 	reward = 2
 
-	
+### STATES ###
+
+
 func _physics_process(_delta):
 	if disabled or dead: return
 	velocity = calculate_move_velocity(velocity, move_dir, speed)
@@ -61,7 +63,4 @@ func calculate_move_velocity(
 	
 func animate():
 	if not is_on_floor() and not is_on_ceiling():
-		if move_dir == Vector2.UP:
-			$AnimationPlayer.play("FlyLeft")
-		if move_dir == Vector2.DOWN:
-			$AnimationPlayer.play("FlyLeft")
+		$AnimationPlayer.play("Fly")

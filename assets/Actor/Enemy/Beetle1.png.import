@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvqm30kgxlxvi"
-path="res://.godot/imported/Bugger.png-6e0ba7de7e48dc3abb83c202f7915fc8.ctex"
+uid="uid://w22ysrusit58"
+path="res://.godot/imported/Beetle1.png-bcf76dc93bdc6883acf3248ca4f257c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Enemy/Bugger.png"
-dest_files=["res://.godot/imported/Bugger.png-6e0ba7de7e48dc3abb83c202f7915fc8.ctex"]
+source_file="res://assets/Actor/Enemy/Beetle1.png"
+dest_files=["res://.godot/imported/Beetle1.png-bcf76dc93bdc6883acf3248ca4f257c7.ctex"]
 
 [params]
 

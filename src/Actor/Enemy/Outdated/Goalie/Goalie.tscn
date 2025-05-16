@@ -1,14 +1,14 @@
 [gd_scene load_steps=20 format=3 uid="uid://c0y3jsegk3330"]
 
 [ext_resource type="Texture2D" uid="uid://clhrvetw6ax6h" path="res://assets/Actor/Enemy/Goalie.png" id="1"]
-[ext_resource type="Script" uid="uid://d3h7pxwy2if6w" path="res://src/Actor/Enemy/Goalie/Idle.gd" id="2"]
+[ext_resource type="Script" uid="uid://d3h7pxwy2if6w" path="res://src/Actor/Enemy/Outdated/Goalie/Idle.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://qmvnhwivhm4j" path="res://src/Utility/StateMachine.tscn" id="3"]
-[ext_resource type="Script" uid="uid://cgnp13s3abode" path="res://src/Actor/Enemy/Goalie/Goalie.gd" id="4"]
-[ext_resource type="Script" uid="uid://bwhf0ctg8u5ho" path="res://src/Actor/Enemy/Goalie/Rise.gd" id="5"]
-[ext_resource type="Script" uid="uid://c758j64luap4" path="res://src/Actor/Enemy/Goalie/Active.gd" id="6"]
+[ext_resource type="Script" uid="uid://cgnp13s3abode" path="res://src/Actor/Enemy/Outdated/Goalie/Goalie.gd" id="4"]
+[ext_resource type="Script" uid="uid://bwhf0ctg8u5ho" path="res://src/Actor/Enemy/Outdated/Goalie/Rise.gd" id="5"]
+[ext_resource type="Script" uid="uid://c758j64luap4" path="res://src/Actor/Enemy/Outdated/Goalie/Active.gd" id="6"]
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="7"]
-[ext_resource type="Script" uid="uid://bk8sni4bohh65" path="res://src/Actor/Enemy/Goalie/Kick.gd" id="8"]
-[ext_resource type="Script" uid="uid://cdeed6oueu0d1" path="res://src/Actor/Enemy/Goalie/Fall.gd" id="9"]
+[ext_resource type="Script" uid="uid://bk8sni4bohh65" path="res://src/Actor/Enemy/Outdated/Goalie/Kick.gd" id="8"]
+[ext_resource type="Script" uid="uid://cdeed6oueu0d1" path="res://src/Actor/Enemy/Outdated/Goalie/Fall.gd" id="9"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(8, 8)

@@ -134,6 +134,7 @@ shape = SubResource("1")
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="PlayerDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 monitorable = false
 

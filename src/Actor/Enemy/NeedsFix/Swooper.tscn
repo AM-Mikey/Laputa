@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dphx5itcoj1wr"]
+[gd_scene load_steps=7 format=3 uid="uid://ds1ythga30lxc"]
 
-[ext_resource type="Texture2D" uid="uid://08od13wukqd7" path="res://assets/Actor/Enemy/Ornithopter.png" id="2"]
-[ext_resource type="Script" uid="uid://b4dp4p1y5pmt" path="res://src/Actor/Enemy/Ornithopter.gd" id="3"]
+[ext_resource type="Script" uid="uid://dg5gcniasbgdb" path="res://src/Actor/Enemy/NeedsFix/Swooper.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://j2gmpjjm1unr" path="res://assets/Actor/Enemy/Swooper.png" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(32, 18)
@@ -66,17 +66,16 @@ tracks/1/keys = {
 "values": [true]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jjdxu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ublij"]
 _data = {
 &"FlyLeft": SubResource("2"),
 &"FlyRight": SubResource("3")
 }
 
-[node name="Ornithopter" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+[node name="Swooper" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("3")
-editor_hidden = false
+script = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("1")
@@ -88,7 +87,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 262144
@@ -96,18 +95,16 @@ collision_mask = 65536
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2")
+texture = ExtResource("3")
 hframes = 8
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_jjdxu")
+&"": SubResource("AnimationLibrary_ublij")
 }
 
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dv4ukm08akmrb"]
 
-[ext_resource type="PackedScene" uid="uid://722wtgwc6c5p" path="res://src/Actor/Enemy/Climber/ClimberBody.tscn" id="1"]
-[ext_resource type="Script" uid="uid://jrjkbbbc0tx1" path="res://src/Actor/Enemy/Climber/ClimberManager.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://722wtgwc6c5p" path="res://src/Actor/Enemy/Outdated/Climber/ClimberBody.tscn" id="1"]
+[ext_resource type="Script" uid="uid://jrjkbbbc0tx1" path="res://src/Actor/Enemy/Outdated/Climber/ClimberManager.gd" id="2"]
 
 [node name="ClimberManager2" type="Node2D" groups=["Actors", "Enemies", "Entities"]]
 script = ExtResource("2")

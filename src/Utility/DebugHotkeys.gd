@@ -99,4 +99,4 @@ func reload_level():
 	if ui.has_node("PauseMenu"): ui.get_node("PauseMenu").unpause()
 	if w.has_node("Juniper"): w.get_node("Juniper").free()
 	if ui.has_node("HUD"): ui.get_node("HUD").free()
-	w.change_level_via_code(w.current_level)
+	w.change_level_via_code(w.current_level.scene_file_path)

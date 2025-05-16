@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bg4lsri7kp7fw"]
+[gd_scene load_steps=7 format=3 uid="uid://ppj5pkmaf7pl"]
 
 [ext_resource type="Texture2D" uid="uid://dmfya5e64iar7" path="res://assets/Actor/Enemy/Crusher.png" id="1"]
-[ext_resource type="Script" uid="uid://b1w4ji0d60ww0" path="res://src/Actor/Enemy/Crusher.gd" id="2"]
+[ext_resource type="Script" uid="uid://cr7ar8gb71p18" path="res://src/Actor/Enemy/NeedsFix/Pather.gd" id="2"]
+[ext_resource type="AudioStream" uid="uid://cpbrsidi03i20" path="res://assets/SFX/Placeholder/snd_enemy_hurt.ogg" id="4"]
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(32, 14)
@@ -12,11 +13,10 @@ size = Vector2(22, 1)
 [sub_resource type="RectangleShape2D" id="4"]
 size = Vector2(22, 1)
 
-[node name="Crusher" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+[node name="Pather" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("2")
-amplitude_h = 64.0
 editor_hidden = false
 
 [node name="Standable" type="CharacterBody2D" parent="."]
@@ -45,6 +45,11 @@ shape = SubResource("4")
 light_mask = 4
 texture = ExtResource("1")
 hframes = 5
+
+[node name="PosHurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4")
+attenuation = 0.164938
+bus = &"SFX"
 
 [connection signal="body_entered" from="CrushDown" to="." method="on_crush_body_entered" binds= ["down"]]
 [connection signal="body_exited" from="CrushDown" to="." method="on_crush_body_exited"]

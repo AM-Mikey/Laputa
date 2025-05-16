@@ -135,4 +135,3 @@ func animate():
 				$AnimationPlayer.play("ClingDownCrawlLeft")
 			if move_dir == Vector2.RIGHT:
 				$AnimationPlayer.play("ClingDownCrawlRight")
-

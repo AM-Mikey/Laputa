@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7u8mwvcp2l6v"
-path="res://.godot/imported/Toggler.png-7e6c05ce8bdab380dd7555cdab9bd47d.ctex"
+uid="uid://ddaew12v1ku8o"
+path="res://.godot/imported/Beetle.png-dee412766ba6b12123564e0080cf3525.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Enemy/Toggler.png"
-dest_files=["res://.godot/imported/Toggler.png-7e6c05ce8bdab380dd7555cdab9bd47d.ctex"]
+source_file="res://assets/Actor/Enemy/Beetle.png"
+dest_files=["res://.godot/imported/Beetle.png-dee412766ba6b12123564e0080cf3525.ctex"]
 
 [params]
 

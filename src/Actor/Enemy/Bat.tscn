@@ -1,7 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://spx2ohg588ta"]
+[gd_scene load_steps=11 format=3 uid="uid://spx2ohg588ta"]
 
 [ext_resource type="Script" uid="uid://bnlm023xutjf3" path="res://src/Actor/Enemy/Bat.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bufns1cnhgyw1" path="res://assets/Actor/Enemy/Bat.png" id="3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sje0e"]
+radius = 6.0
+height = 12.0
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(12, 12)
@@ -89,7 +93,7 @@ debug = true
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("1")
+shape = SubResource("CapsuleShape2D_sje0e")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -98,7 +102,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 262144
@@ -106,14 +110,14 @@ collision_mask = 65536
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("1")
-debug_color = Color(0, 0.627451, 0.27451, 0.156863)
+debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 shape = SubResource("8")
-debug_color = Color(0, 0.627451, 0.27451, 0.156863)
+debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(7.62939e-06, -3.8147e-06)

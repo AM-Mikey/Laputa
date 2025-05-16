@@ -1,12 +1,12 @@
 [gd_scene load_steps=15 format=3 uid="uid://crtxny1yjnkmi"]
 
 [ext_resource type="Texture2D" uid="uid://bbu1jyosea4de" path="res://assets/Actor/Enemy/Fish.png" id="1"]
-[ext_resource type="Script" uid="uid://ddxy1osfjb432" path="res://src/Actor/Enemy/Fish/Fish.gd" id="2"]
-[ext_resource type="Script" uid="uid://f3j1idg16dr0" path="res://src/Actor/Enemy/Fish/Idle.gd" id="3"]
-[ext_resource type="Script" uid="uid://5si1ouivktcq" path="res://src/Actor/Enemy/Fish/Attack.gd" id="4"]
+[ext_resource type="Script" uid="uid://ddxy1osfjb432" path="res://src/Actor/Enemy/Outdated/Fish/Fish.gd" id="2"]
+[ext_resource type="Script" uid="uid://f3j1idg16dr0" path="res://src/Actor/Enemy/Outdated/Fish/Idle.gd" id="3"]
+[ext_resource type="Script" uid="uid://5si1ouivktcq" path="res://src/Actor/Enemy/Outdated/Fish/Attack.gd" id="4"]
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="5"]
-[ext_resource type="Script" uid="uid://cdevxkqwx005a" path="res://src/Actor/Enemy/Fish/Fall.gd" id="6"]
-[ext_resource type="Script" uid="uid://bat4sn1l7tdkt" path="res://src/Actor/Enemy/Fish/Swim.gd" id="7"]
+[ext_resource type="Script" uid="uid://cdevxkqwx005a" path="res://src/Actor/Enemy/Outdated/Fish/Fall.gd" id="6"]
+[ext_resource type="Script" uid="uid://bat4sn1l7tdkt" path="res://src/Actor/Enemy/Outdated/Fish/Swim.gd" id="7"]
 [ext_resource type="PackedScene" uid="uid://qmvnhwivhm4j" path="res://src/Utility/StateMachine.tscn" id="8"]
 
 [sub_resource type="RectangleShape2D" id="5"]

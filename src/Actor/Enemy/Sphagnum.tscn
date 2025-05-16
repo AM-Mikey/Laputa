@@ -79,10 +79,11 @@ position = Vector2(0, -16)
 texture = ExtResource("1")
 hframes = 6
 vframes = 2
+frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_6376x")
+&"": SubResource("AnimationLibrary_6376x")
 }
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

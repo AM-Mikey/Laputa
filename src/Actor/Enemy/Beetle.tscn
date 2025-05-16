@@ -1,10 +1,71 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3sw60ygo6bb6"]
+[gd_scene load_steps=19 format=3 uid="uid://d3sw60ygo6bb6"]
 
-[ext_resource type="Texture2D" uid="uid://c7u8mwvcp2l6v" path="res://assets/Actor/Enemy/Toggler.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://ddaew12v1ku8o" path="res://assets/Actor/Enemy/Beetle.png" id="2_7vcwk"]
 [ext_resource type="Script" uid="uid://qcbiyidgaq45" path="res://src/Actor/Enemy/Beetle.gd" id="3"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7vcwk"]
+radius = 4.5
+height = 14.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4id4"]
+radius = 4.5
+height = 14.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qsmhk"]
+radius = 7.5
+height = 15.0
+
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(14, 8)
+size = Vector2(14, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8fv4h"]
+size = Vector2(14, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjd7u"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4id4"]
+size = Vector2(12, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c4c1t"]
+size = Vector2(12, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t75oa"]
+size = Vector2(14, 14)
+
+[sub_resource type="Animation" id="Animation_qsmhk"]
+resource_name = "Crawl"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_fjd7u"]
+resource_name = "CrawlDiagonal"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
 
 [sub_resource type="Animation" id="2"]
 resource_name = "Fly"
@@ -39,10 +100,46 @@ tracks/0/keys = {
 "values": [1]
 }
 
+[sub_resource type="Animation" id="Animation_7vcwk"]
+resource_name = "IdleDiagonal"
+length = 0.1
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_8fv4h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hpx8l"]
 _data = {
+&"Crawl": SubResource("Animation_qsmhk"),
+&"CrawlDiagonal": SubResource("Animation_fjd7u"),
 &"Fly": SubResource("2"),
-&"Idle": SubResource("3")
+&"Idle": SubResource("3"),
+&"IdleDiagonal": SubResource("Animation_7vcwk"),
+&"RESET": SubResource("Animation_8fv4h")
 }
 
 [node name="Beetle" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
@@ -52,40 +149,91 @@ script = ExtResource("3")
 editor_hidden = false
 speed = Vector2(150, 150)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
-shape = SubResource("1")
+[node name="Crawl" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4.5)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_7vcwk")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="CrawlDiagonal" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-2, -6)
+rotation = -0.785397
+shape = SubResource("CapsuleShape2D_g4id4")
+disabled = true
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="Fly" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -8.5)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_qsmhk")
+disabled = true
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, -4)
+[node name="Crawl" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -5)
 shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(0, 1, 0, 0.235294)
+
+[node name="CrawlDiagonal" type="CollisionShape2D" parent="Hurtbox"]
+visible = false
+position = Vector2(-2, -6)
+rotation = 0.785397
+shape = SubResource("RectangleShape2D_8fv4h")
+disabled = true
+debug_color = Color(0, 1, 0, 0.235294)
+
+[node name="Fly" type="CollisionShape2D" parent="Hurtbox"]
+visible = false
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_fjd7u")
+disabled = true
+debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 262144
 collision_mask = 65536
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(0, -4)
-shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+[node name="Crawl" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_g4id4")
+debug_color = Color(1, 0, 0, 0.235294)
+
+[node name="CrawlDiagonal" type="CollisionShape2D" parent="Hitbox"]
+visible = false
+position = Vector2(-2, -6)
+rotation = 0.785397
+shape = SubResource("RectangleShape2D_c4c1t")
+disabled = true
+debug_color = Color(1, 0, 0, 0.235294)
+
+[node name="Fly" type="CollisionShape2D" parent="Hitbox"]
+visible = false
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_t75oa")
+disabled = true
+debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = ExtResource("2")
+texture = ExtResource("2_7vcwk")
 hframes = 2
-vframes = 2
-frame = 2
+vframes = 3
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_hpx8l")
 }
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-6, -8.5)
+target_position = Vector2(-10, 0)
+collision_mask = 8
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

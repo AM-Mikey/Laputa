@@ -1,7 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bjtd1vhn348ut"]
+[gd_scene load_steps=15 format=3 uid="uid://bjtd1vhn348ut"]
 
 [ext_resource type="Script" uid="uid://dbd6dq5j0qynd" path="res://src/Actor/Enemy/Hunter.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://o5oy446djmnx" path="res://assets/Actor/Enemy/Hunter.png" id="2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oyqcp"]
+radius = 8.0
+height = 16.0
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
@@ -252,7 +256,7 @@ editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
-shape = SubResource("1")
+shape = SubResource("CapsuleShape2D_oyqcp")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -262,7 +266,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -8)
 shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 262144
@@ -271,7 +275,7 @@ collision_mask = 65536
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -8)
 shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0

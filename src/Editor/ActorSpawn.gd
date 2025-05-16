@@ -40,8 +40,10 @@ func _ready():
 	var collision_shape
 	if actor.has_node("CollisionShape2D"):
 		collision_shape = actor.get_node("CollisionShape2D")
-	elif actor.has_hode("Standable"):
+	elif actor.has_node("Standable"):
 		collision_shape = actor.get_node("Standable/CollisionShape2D")
+	else:
+		collision_shape = actor.get_child(0)
 	$CollisionShape2D.shape = collision_shape.shape
 	$CollisionShape2D.position = collision_shape.position
 

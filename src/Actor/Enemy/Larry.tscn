@@ -1,7 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bl7qmtrrcpsqy"]
+[gd_scene load_steps=10 format=3 uid="uid://bl7qmtrrcpsqy"]
 
 [ext_resource type="Script" uid="uid://bkl387nkbn5p1" path="res://src/Actor/Enemy/Larry.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://42e5ficnc637" path="res://assets/Actor/Enemy/Larry.png" id="3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vpjct"]
+radius = 5.0
+height = 10.0
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(10, 10)
@@ -89,7 +93,7 @@ editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
-shape = SubResource("1")
+shape = SubResource("CapsuleShape2D_vpjct")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -99,7 +103,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -5)
 shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 262144
@@ -108,7 +112,7 @@ collision_mask = 65536
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -5)
 shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
@@ -118,7 +122,7 @@ vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_t5niq")
+&"": SubResource("AnimationLibrary_t5niq")
 }
 
 [node name="Timer" type="Timer" parent="."]
