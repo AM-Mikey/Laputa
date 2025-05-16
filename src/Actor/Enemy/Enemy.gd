@@ -176,18 +176,21 @@ func _on_DamagenumTimer_timeout():
 
 ### DEATH ###
 
-func die():
+func die(quietly = false):
 	if dead: return
 	dead = true
-	do_death_drop()
-	damagenum_timer.stop()
-	_on_DamagenumTimer_timeout()
-	if not pc:
+	
+	if damagenum:
+		damagenum_timer.stop()
+		_on_DamagenumTimer_timeout()
+	if !pc:
 		pc = get_tree().get_root().get_node_or_null("World/Juniper")
-		pc.enemies_touched.erase(self)
-	var explosion = EXPLOSION.instantiate()
-	explosion.position = global_position
-	world.front.add_child(explosion)
+	pc.enemies_touching.erase(self)
+	if !quietly:
+		do_death_drop()
+		var explosion = EXPLOSION.instantiate()
+		explosion.position = global_position
+		world.front.add_child(explosion)
 	queue_free()
 
 

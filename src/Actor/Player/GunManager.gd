@@ -85,11 +85,11 @@ func level_down(debug):
 
 func disable():
 	disabled = true
-	pc.get_node("GunSprite").visible = false
+	pc.get_node("GunManager").visible = false
 
 func enable():
 	disabled = false
-	pc.get_node("GunSprite").visible = true
+	pc.get_node("GunManager").visible = true
 
 
 ### HELPERS

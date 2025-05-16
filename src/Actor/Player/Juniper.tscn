@@ -1,11 +1,10 @@
-[gd_scene load_steps=62 format=3 uid="uid://bnwo7ae85qnwb"]
+[gd_scene load_steps=64 format=3 uid="uid://bnwo7ae85qnwb"]
 
 [ext_resource type="PackedScene" uid="uid://cjueepke5w45c" path="res://src/Gun/Red7.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://brl16iyt5eq02" path="res://src/Actor/Player/PlayerCamera.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://byv37yjh2rp36" path="res://src/Gun/Revolver.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://0mxxcirrmb5d" path="res://src/Gun/Shotgun.tscn" id="4"]
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="5"]
-[ext_resource type="Texture2D" uid="uid://bic1wg1jrbs4e" path="res://assets/Actor/Player/RunNew.png" id="6"]
 [ext_resource type="Script" uid="uid://cmvookemw64ek" path="res://src/Actor/Player/Knockback.gd" id="7"]
 [ext_resource type="Script" uid="uid://cfqyaux4tco6h" path="res://src/Actor/Player/MoveTo.gd" id="8"]
 [ext_resource type="Script" uid="uid://bm7l4b74bslmm" path="res://src/Actor/Player/Fly.gd" id="9"]
@@ -17,25 +16,27 @@
 [ext_resource type="Script" uid="uid://cwfo2x3kl4tkp" path="res://src/Actor/Player/MovementManager.gd" id="15"]
 [ext_resource type="Script" uid="uid://5j8mlgvadx1f" path="res://src/Actor/Player/GunPos.gd" id="16_adexv"]
 [ext_resource type="PackedScene" uid="uid://bqy18424skcwk" path="res://src/Gun/GLauncher.tscn" id="17"]
-[ext_resource type="Texture2D" uid="uid://b1s13taoyjq5p" path="res://assets/Actor/Player/AerialNew.png" id="19"]
-[ext_resource type="Texture2D" uid="uid://dmwmjc5ixibx7" path="res://assets/Actor/Player/CrouchRunNew.png" id="20"]
-[ext_resource type="Texture2D" uid="uid://cmrouhmpv6ald" path="res://assets/Actor/Player/StandNew.png" id="21"]
-[ext_resource type="Texture2D" uid="uid://07hp5gxc20wa" path="res://assets/Actor/Player/BackRunNew.png" id="23"]
-[ext_resource type="Texture2D" uid="uid://co5v1xjcy1nse" path="res://assets/Actor/Player/InspectNew.png" id="24"]
 [ext_resource type="PackedScene" uid="uid://5orkim7sjfi7" path="res://src/Gun/Tsurugi.tscn" id="24_0pdvi"]
 [ext_resource type="Shader" uid="uid://d4doa1vf12lkt" path="res://src/Shader/JuniperRecolor.gdshader" id="24_s1pnb"]
 [ext_resource type="Texture2D" uid="uid://mkfrxk3djlu1" path="res://assets/Actor/Player/Palette/Normal.png" id="25_3o18d"]
 [ext_resource type="Script" uid="uid://cn112wea32cdx" path="res://src/Actor/Player/Inspect.gd" id="27"]
-[ext_resource type="Texture2D" uid="uid://dbmfepg252o24" path="res://assets/Actor/Player/CrouchNew.png" id="27_26c0b"]
 [ext_resource type="Texture2D" uid="uid://b6mfl184pisc1" path="res://assets/Actor/Player/Palette/Mono.png" id="27_cn5rl"]
 [ext_resource type="PackedScene" uid="uid://diwpy822anfc4" path="res://src/Gun/MPistol.tscn" id="28"]
 [ext_resource type="Script" uid="uid://cjgn7e5vfg20e" path="res://src/Actor/Player/Jump.gd" id="29"]
 [ext_resource type="Script" uid="uid://dtadf671wpvdq" path="res://src/Actor/Player/Run.gd" id="30"]
+[ext_resource type="Texture2D" uid="uid://cw8igq2ymupx3" path="res://assets/Actor/Player/Aerial.png" id="30_ypuil"]
 [ext_resource type="Script" uid="uid://ctfm0sxptv68n" path="res://src/Actor/Player/LongJump.gd" id="31"]
+[ext_resource type="Texture2D" uid="uid://dxsgd516bqad" path="res://assets/Actor/Player/BackAerial.png" id="31_cd6iy"]
 [ext_resource type="Script" uid="uid://c2muo3figyn1i" path="res://src/Actor/Player/Fall.gd" id="32"]
+[ext_resource type="Texture2D" uid="uid://bvoixqk72iq1" path="res://assets/Actor/Player/BackRun.png" id="32_6evun"]
 [ext_resource type="PackedScene" uid="uid://cdgi2ibu56t2j" path="res://src/Gun/Speeder.tscn" id="33"]
+[ext_resource type="Texture2D" uid="uid://u06a3oag5sp" path="res://assets/Actor/Player/Crouch.png" id="33_id2yr"]
 [ext_resource type="PackedScene" uid="uid://cq3m4fy6fnxfn" path="res://src/Gun/TurnstileJumper.tscn" id="34"]
-[ext_resource type="Texture2D" uid="uid://bggc4cn0y5fhq" path="res://assets/Actor/Player/BackAerialNew.png" id="34_85ix1"]
+[ext_resource type="Texture2D" uid="uid://dc3xb5g5j5sp3" path="res://assets/Actor/Player/CrouchRun.png" id="34_rnx3q"]
+[ext_resource type="Texture2D" uid="uid://ci35k5na5fqvi" path="res://assets/Actor/Player/Inspect.png" id="35_k4kr4"]
+[ext_resource type="Texture2D" uid="uid://deqx8xlersln5" path="res://assets/Actor/Player/Run.png" id="36_yworh"]
+[ext_resource type="Texture2D" uid="uid://bd5ps1x0fytpk" path="res://assets/Actor/Player/Stand.png" id="37_s2uer"]
+[ext_resource type="Texture2D" uid="uid://b0htixedn5uoe" path="res://assets/Actor/Player/Climb.png" id="37_ypuil"]
 
 [sub_resource type="CapsuleShape2D" id="72"]
 radius = 1.0
@@ -163,6 +164,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector2(0, -6)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:texture")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("36_yworh")]
+}
 
 [sub_resource type="Animation" id="67"]
 resource_name = "aerial_fall"
@@ -178,7 +191,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("19")]
+"values": [ExtResource("30_ypuil")]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -290,7 +303,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("19")]
+"values": [ExtResource("30_ypuil")]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -402,7 +415,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("19")]
+"values": [ExtResource("30_ypuil")]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -514,7 +527,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("34_85ix1")]
+"values": [ExtResource("31_cd6iy")]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -626,7 +639,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("34_85ix1")]
+"values": [ExtResource("31_cd6iy")]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -726,7 +739,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("34_85ix1")]
+"values": [ExtResource("31_cd6iy")]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -816,6 +829,7 @@ tracks/7/keys = {
 resource_name = "back_run"
 length = 1.2
 loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -823,10 +837,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("23")]
+"values": [ExtResource("32_6evun"), ExtResource("32_6evun"), ExtResource("32_6evun"), ExtResource("32_6evun"), ExtResource("32_6evun"), ExtResource("32_6evun"), ExtResource("32_6evun"), ExtResource("32_6evun"), ExtResource("32_6evun"), ExtResource("32_6evun"), ExtResource("32_6evun"), ExtResource("32_6evun")]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -944,7 +958,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("27_26c0b")]
+"values": [ExtResource("33_id2yr")]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -1056,7 +1070,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("20"), ExtResource("20"), ExtResource("20"), ExtResource("20"), ExtResource("20"), ExtResource("20"), ExtResource("20"), ExtResource("20"), ExtResource("20"), ExtResource("20"), ExtResource("20"), ExtResource("20")]
+"values": [ExtResource("34_rnx3q"), ExtResource("34_rnx3q"), ExtResource("34_rnx3q"), ExtResource("34_rnx3q"), ExtResource("34_rnx3q"), ExtResource("34_rnx3q"), ExtResource("34_rnx3q"), ExtResource("34_rnx3q"), ExtResource("34_rnx3q"), ExtResource("34_rnx3q"), ExtResource("34_rnx3q"), ExtResource("34_rnx3q")]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -1174,7 +1188,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("24")]
+"values": [ExtResource("35_k4kr4")]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -1214,7 +1228,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("6"), ExtResource("6"), ExtResource("6"), ExtResource("6"), ExtResource("6"), ExtResource("6"), ExtResource("6"), ExtResource("6"), ExtResource("6"), ExtResource("6"), ExtResource("6"), ExtResource("6")]
+"values": [ExtResource("36_yworh"), ExtResource("36_yworh"), ExtResource("36_yworh"), ExtResource("36_yworh"), ExtResource("36_yworh"), ExtResource("36_yworh"), ExtResource("36_yworh"), ExtResource("36_yworh"), ExtResource("36_yworh"), ExtResource("36_yworh"), ExtResource("36_yworh"), ExtResource("36_yworh")]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -1332,7 +1346,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("21")]
+"values": [ExtResource("37_s2uer")]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -1430,6 +1444,124 @@ tracks/8/keys = {
 "values": [Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7)]
 }
 
+[sub_resource type="Animation" id="Animation_cd6iy"]
+resource_name = "climb"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("37_ypuil")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"do_step"
+}, {
+"args": [],
+"method": &"do_step"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GunManager/GunPosLeft:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GunManager/GunPosRight:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GunManager/GunPosLeftUp:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GunManager/GunPosLeftDown:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GunManager/GunPosRightUp:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("GunManager/GunPosRightDown:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oo325"]
 _data = {
 &"RESET": SubResource("Animation_kquyl"),
@@ -1440,6 +1572,7 @@ _data = {
 &"back_aerial_rise": SubResource("Animation_ma4qw"),
 &"back_aerial_top": SubResource("Animation_psjxf"),
 &"back_run": SubResource("70"),
+&"climb": SubResource("Animation_cd6iy"),
 &"crouch": SubResource("Animation_d83qu"),
 &"crouch_run": SubResource("64"),
 &"inspect": SubResource("71"),
@@ -1719,9 +1852,9 @@ visible = false
 light_mask = 2
 material = SubResource("61")
 position = Vector2(0, -16)
-texture = ExtResource("24")
-hframes = 6
-vframes = 2
+texture = ExtResource("36_yworh")
+hframes = 12
+vframes = 8
 script = ExtResource("13")
 
 [node name="EffectPlayer" type="AnimationPlayer" parent="."]

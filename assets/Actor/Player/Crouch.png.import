@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmrouhmpv6ald"
-path="res://.godot/imported/StandNew.png-73e5b9565856e74ec8934c7dcd60f6c1.ctex"
+uid="uid://u06a3oag5sp"
+path="res://.godot/imported/Crouch.png-9a0fb770fb2c56d249eff5a0b67f278d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Player/StandNew.png"
-dest_files=["res://.godot/imported/StandNew.png-73e5b9565856e74ec8934c7dcd60f6c1.ctex"]
+source_file="res://assets/Actor/Player/Crouch.png"
+dest_files=["res://.godot/imported/Crouch.png-9a0fb770fb2c56d249eff5a0b67f278d.ctex"]
 
 [params]
 

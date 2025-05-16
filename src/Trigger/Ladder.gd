@@ -9,8 +9,8 @@ func _on_Ladder_body_entered(body):
 
 func _on_Ladder_body_exited(body):
 	if not get_overlap(body):
-		body.mm.change_state(body.mm.states["normal"])
-	active_bodies.erase(body)
+		body.get_parent().mm.change_state("run")
+	active_bodies.erase(body.get_parent())
 
 
 func _physics_process(delta):

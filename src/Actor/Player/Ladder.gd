@@ -5,6 +5,8 @@ extends Node
 @onready var pc = get_parent().get_parent().get_parent()
 @onready var mm = pc.get_node("MovementManager")
 @onready var gm = pc.get_node("GunManager")
+@onready var sprite = pc.get_node("Sprite2D")
+@onready var ap = pc.get_node("AnimationPlayer")
 
 func state_process():
 	pc.move_dir = get_move_dir()
@@ -15,17 +17,27 @@ func state_process():
 	pc.set_floor_stop_on_slope_enabled(true)
 	pc.move_and_slide()
 	var new_velocity = pc.velocity
-	
 	mm.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
-	
-	
-	
 	if pc.is_on_floor() and not pc.is_on_ssp:
 		if Input.is_action_pressed("look_down") and pc.can_input:
 			mm.change_state("run")
-
 	#if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
 		#mm.bonk("head")  #TODO: fix multi bonks
+	animate()
+
+
+func animate():
+	var animation = "climb"
+	var reference_texture = preload("res://assets/Actor/Player/Climb.png")
+	
+	#for runtime, set the frame counts before the animation starts
+	sprite.hframes = int(reference_texture.get_width() / 32.0)
+	sprite.vframes = int(reference_texture.get_height() / 32.0)
+
+	sprite.frame_coords.y = get_vframe()
+	if not ap.is_playing() or ap.current_animation != animation:
+		ap.stop()
+		ap.play(animation, 0.0, 1.0)
 
 
 
@@ -49,6 +61,13 @@ func calc_velocity() -> Vector2:
 		mm.change_state("jump") #TODO fix
 		out.y = mm.speed.y * -1.0
 	if abs(out.x) < mm.min_x_velocity: out.x = 0 #clamp velocity
+	return out
+
+func get_vframe() -> int:
+	var out = 0
+	match pc.look_dir.x:
+		-1: out = 0
+		1: out = 1
 	return out
 
 

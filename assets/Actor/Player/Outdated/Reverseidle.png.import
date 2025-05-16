@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bggc4cn0y5fhq"
-path="res://.godot/imported/BackAerialNew.png-054d2a3a2568da4fa73d09081dc8d39d.ctex"
+uid="uid://drf4unw5l1yhw"
+path="res://.godot/imported/Reverseidle.png-f7772986420d4b210a7c9b24bd087f87.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Player/BackAerialNew.png"
-dest_files=["res://.godot/imported/BackAerialNew.png-054d2a3a2568da4fa73d09081dc8d39d.ctex"]
+source_file="res://assets/Actor/Player/Outdated/Reverseidle.png"
+dest_files=["res://.godot/imported/Reverseidle.png-f7772986420d4b210a7c9b24bd087f87.ctex"]
 
 [params]
 

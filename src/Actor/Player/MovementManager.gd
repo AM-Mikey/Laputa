@@ -81,8 +81,6 @@ func _physics_process(_delta):
 	speed = Vector2(90, 180) if not get_parent().is_in_water else Vector2(60, 140)
 	gravity = 300.0 if not get_parent().is_in_water else 150.0
 	
-	do_camera_bounds_check()
-	
 	do_ceiling_push_check()
 	if pc.is_on_ceiling():
 		if not on_ceiling:
@@ -94,15 +92,6 @@ func _physics_process(_delta):
 		
 	current_state.state_process()
 
-func do_camera_bounds_check():
-	if current_state == states["fly"]: return
-	if world.current_level == null: return
-	var ll = world.current_level.get_node("LevelLimiter")
-	var bottom_distance = ll.position.y + ll.size.y
-	var forgiveness = 64
-	if pc.position.y > bottom_distance + forgiveness:
-		if pc.die_from_falling:
-			pc.die()
 
 func do_ceiling_push_check():
 	if current_state == states["jump"] \

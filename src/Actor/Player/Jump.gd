@@ -71,10 +71,10 @@ func set_player_directions():
 
 func animate():
 	var animation: String
-	var reference_texture = preload("res://assets/Actor/Player/AerialNew.png")
+	var reference_texture = preload("res://assets/Actor/Player/Aerial.png")
 	var do_back = false
 	if pc.direction_lock != Vector2i.ZERO and pc.direction_lock.x != sign(pc.velocity.x) and abs(pc.velocity.x) > 0.1:
-		reference_texture = preload("res://assets/Actor/Player/BackAerialNew.png")
+		reference_texture = preload("res://assets/Actor/Player/BackAerial.png")
 		do_back = true
 	
 	if abs(mm.velocity.y) < 20:

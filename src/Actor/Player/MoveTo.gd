@@ -54,16 +54,16 @@ func state_process():
 
 func animate():
 	var animation = "run"
-	var reference_texture = preload("res://assets/Actor/Player/RunNew.png")
+	var reference_texture = preload("res://assets/Actor/Player/Run.png")
 	if pc.direction_lock != Vector2i.ZERO and pc.direction_lock.x != sign(pc.move_dir.x):
 		animation = "back_run"
-		reference_texture = preload("res://assets/Actor/Player/BackRunNew.png")
+		reference_texture = preload("res://assets/Actor/Player/BackRun.png")
 	if pc.is_crouching:
 		animation = "crouch_run"
-		reference_texture = preload("res://assets/Actor/Player/CrouchRunNew.png")
+		reference_texture = preload("res://assets/Actor/Player/CrouchRun.png")
 	if pc.move_dir.x == 0.0: #abs(mm.velocity.x) < mm.min_x_velocity:
 		animation = "stand"
-		reference_texture = preload("res://assets/Actor/Player/StandNew.png")
+		reference_texture = preload("res://assets/Actor/Player/Stand.png")
 
 	#for runtime, set the frame counts before the animation starts
 	sprite.hframes = int(reference_texture.get_width() / 32.0)

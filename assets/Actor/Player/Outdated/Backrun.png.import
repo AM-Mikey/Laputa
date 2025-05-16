@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://07hp5gxc20wa"
-path="res://.godot/imported/BackRunNew.png-6a584e9ce211de72e53e6fee89eeed39.ctex"
+uid="uid://bxs6fwuy7tj5v"
+path="res://.godot/imported/Backrun.png-201daeac55132ae460879769ba9a420f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Player/BackRunNew.png"
-dest_files=["res://.godot/imported/BackRunNew.png-6a584e9ce211de72e53e6fee89eeed39.ctex"]
+source_file="res://assets/Actor/Player/Outdated/Backrun.png"
+dest_files=["res://.godot/imported/Backrun.png-201daeac55132ae460879769ba9a420f.ctex"]
 
 [params]
 

@@ -32,7 +32,7 @@ func state_process():
 
 func animate():
 	var animation = "inspect"
-	var reference_texture = preload("res://assets/Actor/Player/InspectNew.png")
+	var reference_texture = preload("res://assets/Actor/Player/Inspect.png")
 	
 	#for runtime, set the frame counts before the animation starts
 	sprite.hframes = int(reference_texture.get_width() / 32.0)

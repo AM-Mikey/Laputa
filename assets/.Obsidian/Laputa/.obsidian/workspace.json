@@ -14,12 +14,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Objects/Vehicles/Zephyr.md",
+                "file": "Characters/Emily.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Zephyr"
+              "title": "Emily"
             }
           }
         ]
@@ -187,7 +187,17 @@
   },
   "active": "716f7f890990af0d",
   "lastOpenFiles": [
+    "Characters/Emily.md",
+    "Characters/Fuuka.md",
+    "Characters/Junior.md",
+    "Characters/Juniper.md",
+    "Characters/Rosemary.md",
+    "Groups/Laputans.md",
+    "Groups/Lost Boys.md",
     "Objects/Vehicles/Zephyr.md",
+    "Characters/Alexander.md",
+    "Groups/Winter Town Residents.md",
+    "Characters/Scrum.md",
     "The World/Areas/Cloud Factory.md",
     "Objects/Machine.md",
     "The World/Island of Laputa.md",
@@ -203,16 +213,6 @@
     "Groups/Dogtown Residents.md",
     "Concepts/Cloud Curtain.md",
     "Concepts/Endings.md",
-    "Concepts/Gender.md",
-    "Concepts/Great Plague.md",
-    "Concepts/History of Laputa.md",
-    "Groups/Laputans.md",
-    "Concepts/Resistance.md",
-    "Concepts/Religion.md",
-    "The World/Areas/Heart of the Island.md",
-    "Concepts/Humans and Beastfolk.md",
-    "Characters/Sage.md",
-    "Characters/Parsley and Thyme.md",
     "The World/Subareas",
     "Objects",
     "Objects/Vehicles",

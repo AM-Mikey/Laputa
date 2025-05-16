@@ -376,6 +376,8 @@ func copy_level_data_from_temp_to_save():
 
 func read_level_data_from_temp():
 	var scoped_data = read_from_file(temp_path)
+	if scoped_data == null:
+		return
 	if scoped_data["level_data"].has(current_level.name): #if it finds level data for this level
 		var current_level_data = scoped_data["level_data"][current_level.name]
 

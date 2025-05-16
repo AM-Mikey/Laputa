@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1s13taoyjq5p"
-path="res://.godot/imported/AerialNew.png-61386fc3fa424ad5d23296fa58756e99.ctex"
+uid="uid://dxsgd516bqad"
+path="res://.godot/imported/BackAerial.png-9775b85111051824618d98d008648c95.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Player/AerialNew.png"
-dest_files=["res://.godot/imported/AerialNew.png-61386fc3fa424ad5d23296fa58756e99.ctex"]
+source_file="res://assets/Actor/Player/BackAerial.png"
+dest_files=["res://.godot/imported/BackAerial.png-9775b85111051824618d98d008648c95.ctex"]
 
 [params]
 
