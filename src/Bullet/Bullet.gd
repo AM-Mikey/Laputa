@@ -64,7 +64,12 @@ func get_rot(dir) -> float:
 
 func get_blood_dir(body) -> Vector2: #TODO this update changed knockback dir calculation, try calculating seperately
 	var out: Vector2
-	var body_center = body.get_node("CollisionShape2D").global_position
+	var collision_shape
+	if body.has_node("CollisionShape2D"): 
+		collision_shape = body.get_node("CollisionShape2D")
+	else:
+		collision_shape = body.get_child(0)
+	var body_center = collision_shape.global_position
 	
 	out = Vector2(
 		(body_center.x - global_position.x),

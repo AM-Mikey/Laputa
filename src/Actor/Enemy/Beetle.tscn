@@ -12,8 +12,8 @@ radius = 4.5
 height = 14.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qsmhk"]
-radius = 7.5
-height = 15.0
+radius = 8.0
+height = 16.0
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(14, 10)
@@ -146,17 +146,17 @@ _data = {
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("3")
+debug = true
 editor_hidden = false
 speed = Vector2(150, 150)
 
 [node name="Crawl" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4.5)
-rotation = -1.57079
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_7vcwk")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="CrawlDiagonal" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-2, -6)
 rotation = -0.785397
 shape = SubResource("CapsuleShape2D_g4id4")
@@ -164,7 +164,7 @@ disabled = true
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Fly" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -8.5)
+position = Vector2(0, -8)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_qsmhk")
 disabled = true
@@ -180,7 +180,6 @@ shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="CrawlDiagonal" type="CollisionShape2D" parent="Hurtbox"]
-visible = false
 position = Vector2(-2, -6)
 rotation = 0.785397
 shape = SubResource("RectangleShape2D_8fv4h")
@@ -188,7 +187,6 @@ disabled = true
 debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Fly" type="CollisionShape2D" parent="Hurtbox"]
-visible = false
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_fjd7u")
 disabled = true
@@ -204,7 +202,6 @@ shape = SubResource("RectangleShape2D_g4id4")
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="CrawlDiagonal" type="CollisionShape2D" parent="Hitbox"]
-visible = false
 position = Vector2(-2, -6)
 rotation = 0.785397
 shape = SubResource("RectangleShape2D_c4c1t")
@@ -212,7 +209,6 @@ disabled = true
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="Fly" type="CollisionShape2D" parent="Hitbox"]
-visible = false
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_t75oa")
 disabled = true
@@ -230,10 +226,28 @@ libraries = {
 &"": SubResource("AnimationLibrary_hpx8l")
 }
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(-6, -8.5)
-target_position = Vector2(-10, 0)
+[node name="RightCast" type="RayCast2D" parent="."]
+position = Vector2(-8, -8)
+target_position = Vector2(-1, 0)
 collision_mask = 8
+
+[node name="LeftCast" type="RayCast2D" parent="."]
+position = Vector2(8, -8)
+target_position = Vector2(1, 0)
+collision_mask = 8
+
+[node name="UpCast" type="RayCast2D" parent="."]
+position = Vector2(0, -16)
+target_position = Vector2(0, -1)
+collision_mask = 8
+
+[node name="DownCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 1)
+collision_mask = 8
+
+[node name="Pivot" type="Marker2D" parent="."]
+position = Vector2(0, -8)
+gizmo_extents = 1.0
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
