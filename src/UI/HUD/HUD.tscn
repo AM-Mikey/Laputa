@@ -328,5 +328,5 @@ centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_2a4ya")
+&"": SubResource("AnimationLibrary_2a4ya")
 }

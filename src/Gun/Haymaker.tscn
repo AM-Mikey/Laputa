@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cf0a8svjkbgqq"]
+
+[ext_resource type="Script" uid="uid://iicpt7jbxacv" path="res://src/Gun/Haymaker.gd" id="1_qpb67"]
+[ext_resource type="Texture2D" uid="uid://vrw2rfirp35p" path="res://assets/Gun/Haymaker.png" id="2_qpb67"]
+
+[node name="Haymaker" type="Node2D"]
+script = ExtResource("1_qpb67")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_qpb67")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(-8, -1)
+
+[node name="Lifetime" type="Timer" parent="."]
