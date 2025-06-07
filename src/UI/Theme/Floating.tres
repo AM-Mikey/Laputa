@@ -1,11 +1,10 @@
-[gd_resource type="Theme" load_steps=23 format=3 uid="uid://ouysr8x0xtu5"]
+[gd_resource type="Theme" load_steps=17 format=3 uid="uid://ouysr8x0xtu5"]
 
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="4"]
-[ext_resource type="Texture2D" uid="uid://ba4mjche6bhat" path="res://assets/UI/Button/OptionArrow.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://ba4mjche6bhat" path="res://assets/UI/Button/Outdated/OptionArrow.png" id="5"]
 [ext_resource type="StyleBox" uid="uid://cl4yme0wtg3po" path="res://src/UI/Slider/Slider.tres" id="6"]
 [ext_resource type="Texture2D" uid="uid://bh5618vuv7rqh" path="res://assets/UI/Slider/SliderGrabber.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://bht7kghp51wa" path="res://assets/UI/Slider/SliderTick.png" id="8"]
-[ext_resource type="StyleBox" path="res://src/UI/StyleBox/CursorBox.tres" id="9"]
 [ext_resource type="StyleBox" uid="uid://djsxt54vtaivl" path="res://src/UI/Slider/ScrollBarGrabber.tres" id="13"]
 [ext_resource type="StyleBox" uid="uid://qim7rgmnpjii" path="res://src/UI/Slider/ScrollBarGrabberHighlight.tres" id="14"]
 [ext_resource type="Texture2D" uid="uid://dmw1vfsm1h4yx" path="res://assets/UI/Slider/ScrollBarGrabberHighlight.png" id="15"]
@@ -13,18 +12,8 @@
 [ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="16"]
 [ext_resource type="Texture2D" uid="uid://cu4qudjqpkt75" path="res://assets/UI/Slider/Slider.png" id="17"]
 [ext_resource type="Texture2D" uid="uid://bl1htelnmympq" path="res://assets/UI/Slider/SliderGrabberHighlight.png" id="18"]
-[ext_resource type="Texture2D" uid="uid://b45net78dvvix" path="res://assets/UI/Button/CheckYes.png" id="19"]
-[ext_resource type="Texture2D" uid="uid://w0w1ohkjh6b4" path="res://assets/UI/Button/CheckNo.png" id="20"]
-
-[sub_resource type="StyleBoxEmpty" id="2"]
-
-[sub_resource type="StyleBoxEmpty" id="3"]
-
-[sub_resource type="StyleBoxEmpty" id="4"]
-
-[sub_resource type="StyleBoxEmpty" id="5"]
-
-[sub_resource type="StyleBoxEmpty" id="6"]
+[ext_resource type="Texture2D" uid="uid://b45net78dvvix" path="res://assets/UI/Button/Outdated/CheckYes.png" id="19"]
+[ext_resource type="Texture2D" uid="uid://w0w1ohkjh6b4" path="res://assets/UI/Button/Outdated/CheckNo.png" id="20"]
 
 [sub_resource type="StyleBoxEmpty" id="7"]
 
@@ -61,12 +50,6 @@ CheckButton/constants/check_vadjust = 0
 CheckButton/constants/hseparation = 4
 CheckButton/icons/off = ExtResource("20")
 CheckButton/icons/on = ExtResource("19")
-CheckButton/styles/disabled = SubResource("2")
-CheckButton/styles/focus = ExtResource("9")
-CheckButton/styles/hover = SubResource("3")
-CheckButton/styles/hover_pressed = SubResource("4")
-CheckButton/styles/normal = SubResource("5")
-CheckButton/styles/pressed = SubResource("6")
 HScrollBar/styles/grabber = ExtResource("13")
 HScrollBar/styles/grabber_highlight = ExtResource("14")
 HScrollBar/styles/grabber_pressed = ExtResource("14")

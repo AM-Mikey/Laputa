@@ -930,6 +930,7 @@ func on_tab_changed(tab):
 	var tab_name = $Main/Win/Tab.get_child(tab).name
 	emit_signal("tab_changed", tab_name)
 	
+	if $Main/Win/TabButtons/VBox.get_child_count() == 0: return #not ready to start
 	for c in $Main/Win/TabButtons/VBox.get_children():
 		c.size_flags_vertical = Control.SIZE_SHRINK_END
 	$Main/Win/TabButtons/VBox.get_child(tab).size_flags_vertical = Control.SIZE_FILL

@@ -1,9 +1,8 @@
-[gd_resource type="Theme" load_steps=22 format=3 uid="uid://blqarblxvhp8o"]
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://blqarblxvhp8o"]
 
 [ext_resource type="StyleBox" uid="uid://cedutrf4qdb7q" path="res://src/UI/StyleBox/SteelRoundDark.tres" id="1"]
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="4"]
 [ext_resource type="StyleBox" uid="uid://cl4yme0wtg3po" path="res://src/UI/Slider/Slider.tres" id="6"]
-[ext_resource type="StyleBox" path="res://src/UI/StyleBox/CursorBox.tres" id="9"]
 [ext_resource type="StyleBox" uid="uid://bwe3j6hcp3u7j" path="res://src/UI/StyleBox/SteelBeveledLight.tres" id="10"]
 [ext_resource type="StyleBox" uid="uid://c53b3p1k47jdu" path="res://src/UI/StyleBox/SteelRound.tres" id="10_hy40i"]
 [ext_resource type="StyleBox" uid="uid://cb3gs2qq26l03" path="res://src/UI/StyleBox/RustTabsLight.tres" id="11"]
@@ -13,23 +12,9 @@
 [ext_resource type="StyleBox" uid="uid://qim7rgmnpjii" path="res://src/UI/Slider/ScrollBarGrabberHighlight.tres" id="14"]
 [ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="24"]
 
-[sub_resource type="StyleBoxEmpty" id="2"]
-
 [sub_resource type="StyleBoxEmpty" id="3"]
 
-[sub_resource type="StyleBoxEmpty" id="4"]
-
-[sub_resource type="StyleBoxEmpty" id="5"]
-
 [sub_resource type="StyleBoxEmpty" id="6"]
-
-[sub_resource type="StyleBoxEmpty" id="7"]
-
-[sub_resource type="StyleBoxEmpty" id="8"]
-
-[sub_resource type="StyleBoxEmpty" id="9"]
-
-[sub_resource type="StyleBoxEmpty" id="10"]
 
 [resource]
 default_font = ExtResource("13_0dgj4")
@@ -58,11 +43,7 @@ CheckButton/constants/check_vadjust = 0
 CheckButton/constants/hseparation = 4
 CheckButton/icons/off = null
 CheckButton/icons/on = null
-CheckButton/styles/disabled = SubResource("2")
-CheckButton/styles/focus = ExtResource("9")
 CheckButton/styles/hover = SubResource("3")
-CheckButton/styles/hover_pressed = SubResource("4")
-CheckButton/styles/normal = SubResource("5")
 CheckButton/styles/pressed = SubResource("6")
 HScrollBar/styles/grabber = ExtResource("13")
 HScrollBar/styles/grabber_highlight = ExtResource("14")
@@ -71,8 +52,6 @@ HScrollBar/styles/scroll = ExtResource("6")
 HSlider/icons/grabber = null
 HSlider/icons/grabber_highlight = null
 HSlider/icons/tick = null
-HSlider/styles/grabber_area = SubResource("7")
-HSlider/styles/grabber_area_highlight = SubResource("8")
 HSlider/styles/slider = ExtResource("6")
 ItemList/colors/font_color = Color(1, 1, 1, 1)
 ItemList/colors/font_color_selected = Color(1, 1, 1, 1)
@@ -114,6 +93,4 @@ VScrollBar/styles/grabber_highlight = ExtResource("14")
 VScrollBar/styles/grabber_pressed = ExtResource("14")
 VScrollBar/styles/scroll = ExtResource("6")
 VSlider/icons/grabber = null
-VSlider/styles/grabber_area = SubResource("9")
-VSlider/styles/grabber_area_highlight = SubResource("10")
 VSlider/styles/slider = ExtResource("6")

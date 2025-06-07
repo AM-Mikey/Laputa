@@ -75,8 +75,24 @@ func _on_CollisionDetector_body_entered(body): #shadows
 				body.hit(int(damage/2), get_blood_dir(body))
 			queue_free()
 
-func _on_CollisionDetector_area_entered(_area): #shadows
-	pass
+func _on_CollisionDetector_area_entered(area): #shadows
+	if disabled: return
+	
+	if area.get_collision_layer_value(18): #enemyhurt
+		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
+		queue_free()
+	elif area.get_collision_layer_value(17): #playerhurt
+		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
+		queue_free()
+	elif area.get_collision_layer_value(9): #breakable
+		area.get_parent().on_break(break_method)
+		#on_break(break_method) produced two fizzle particles so instead do:
+		queue_free()
+	elif area.get_collision_layer_value(4): #world
+		do_fizzle("world")
+	elif area.get_collision_layer_value(6): #armor
+		print("armor")
+		do_fizzle("armor")
 
 func _on_FizzleTimer_timeout():
 	do_fizzle("range")

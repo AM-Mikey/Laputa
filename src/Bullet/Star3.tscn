@@ -77,7 +77,7 @@ frame = 11
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_v0i8r")
+&"": SubResource("AnimationLibrary_v0i8r")
 }
 
 [node name="FizzleTimer" type="Timer" parent="."]

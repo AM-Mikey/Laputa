@@ -13,8 +13,8 @@ const AMMOGET = preload("res://src/Effect/AmmoGet.tscn")
 
 
 signal hp_updated(hp, max_hp)
-signal guns_updated(guns)
-signal xp_updated(xp, max_xp, level, max_level)
+signal guns_updated(guns, cause, do_xp_flash)
+signal xp_updated(xp, max_xp, level, max_level, do_xp_flash)
 signal money_updated(money)
 
 
@@ -221,7 +221,7 @@ func _on_ItemDetector_area_entered(area):
 		experience_get.position = experience_pickup.global_position
 		world.get_node("Front").add_child(experience_get)
 		emit_signal("money_updated", money)
-		emit_signal("guns_updated", guns.get_children())
+		emit_signal("guns_updated", guns.get_children(), "xp", true)
 		experience_pickup.queue_free()
 	
 	

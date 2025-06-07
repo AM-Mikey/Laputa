@@ -1,6 +1,7 @@
 extends Control
 
 const GUNICON = preload("res://src/UI/HUD/GunIcon.tscn")
+const UI_BULLET_FLY = preload("res://src/Effect/UIBulletFly.tscn")
 
 #onready var pc = get_tree().get_root().get_node("World/Juniper")
 @onready var world = get_tree().get_root().get_node("World")
@@ -10,6 +11,7 @@ const GUNICON = preload("res://src/UI/HUD/GunIcon.tscn")
 @export var hp_node: Node
 @export var xp_node: Node
 @export var cd: Node
+@export var ammo: Node
 @export var mon: Node
 
 @onready var ao_1 = ao.get_node("Num1")
@@ -37,9 +39,15 @@ const GUNICON = preload("res://src/UI/HUD/GunIcon.tscn")
 @onready var cd_progress = cd.get_node("Progress")
 @onready var cd_progress_cap = cd_progress.get_node("Cap")
 
+@onready var ammo_top_animator = ammo.get_node("TopAnimator")
+@onready var ammo_bottom_animator = ammo.get_node("BottomAnimator")
+@onready var ammo_fly = ammo.get_node("Fly")
+
 @onready var mon_1 = mon.get_node("Num1")
 @onready var mon_2 = mon.get_node("Num2")
 @onready var mon_3 = mon.get_node("Num3")
+
+var WheelVisible = false
 
 func _ready():
 	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
@@ -66,20 +74,118 @@ func _process(_delta):
 			set_cap_pos(cd_progress, 37, cd_progress_cap)
 		else: cd_progress.visible = false
 
-func update_guns(guns):
+func update_guns(guns, cause = "default", do_xp_flash = false):
 	var hbox = gun.get_node("HBox")
 	var main_icon = gun.get_node("GunIcon")
 	for i in hbox.get_children():
 		i.queue_free()
+	
+	if cause == "shiftleft":
+		display_weapon_wheel(guns, "CCW")
+	if cause == "shiftright":
+		display_weapon_wheel(guns, "CW")
+	
 	for g in guns:
 		if guns.find(g) == 0: #main gun
 			main_icon.texture = g["icon_texture"]
-			update_xp(g.xp, g.max_xp, g.level, g.max_level)
-			update_ammo(g.ammo, g.max_ammo)
-		else: 
-			var gun_icon = GUNICON.instantiate() #all other
-			gun_icon.texture = g["texture"]
-			hbox.add_child(gun_icon)
+			update_xp(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash)
+			#update_ammo(g.ammo, g.max_ammo)
+		#else: 
+			#var gun_icon = GUNICON.instantiate() #all other
+			#gun_icon.texture = g["texture"]
+			#hbox.add_child(gun_icon)
+	if cause == "fire":
+		var pc = world.get_node("Juniper")
+		var speed: float = 0.8 / pc.guns.get_child(0).cooldown_time
+		#print(speed)
+		ammo_animate("reset")
+		ammo_top_animator.play("BulletShoot", -1.0, speed)
+		await ammo_top_animator.animation_finished
+		ammo_animate("reload")
+		var ui_bullet_fly = UI_BULLET_FLY.instantiate()
+		ammo_fly.add_child(ui_bullet_fly)
+
+func display_weapon_wheel(guns, rot_dir: String):
+	if not WheelVisible:
+		WheelVisible = true
+		$HBox/Gun/WeaponWheelTiltAnimator.play("TiltIn", -1, 3.0)
+	$HBox/Gun/WeaponWheelTiltAnimator/Timer.start(1.0)
+	
+	match rot_dir:
+		"CW":
+				$HBox/Gun/WeaponWheelAnimator.play("CW", -1, 4.0)
+				$HBox/Gun/WeaponWheel/Bullet1/Gun.texture = guns[0].icon_texture
+				$HBox/Gun/WeaponWheel/Bullet2/Gun.texture = guns[1].icon_small_texture
+				$HBox/Gun/WeaponWheel/Bullet3/Gun.texture = guns[2].icon_small_texture
+				$HBox/Gun/WeaponWheel/Bullet5/Gun.texture = guns[-2].icon_small_texture
+				$HBox/Gun/WeaponWheel/Bullet6/Gun.texture = guns[-1].icon_small_texture
+		"CCW":
+				$HBox/Gun/WeaponWheelAnimator.play("CCW", -1, 4.0)
+				#await get_tree().create_timer(0.8) #i still dont know why but i dont ask questions
+				$HBox/Gun/WeaponWheel/Bullet1/Gun.texture = guns[0].icon_texture
+				$HBox/Gun/WeaponWheel/Bullet2/Gun.texture = guns[1].icon_small_texture
+				$HBox/Gun/WeaponWheel/Bullet3/Gun.texture = guns[2].icon_small_texture
+				$HBox/Gun/WeaponWheel/Bullet5/Gun.texture = guns[-2].icon_small_texture
+				$HBox/Gun/WeaponWheel/Bullet6/Gun.texture = guns[-1].icon_small_texture
+	
+
+
+			
+func _on_Timer_timeout():
+	WheelVisible = false
+	$HBox/Gun/WeaponWheelTiltAnimator.play("TiltOut", -1, 3.0)
+	
+
+#func display_guns():
+	#$HBox/Gun/Sprite2D
+
+func ammo_animate(animation):
+	var pc = world.get_node("Juniper")
+	var speed: float = 0.8 / pc.guns.get_child(0).cooldown_time
+	
+	if pc.guns.get_child(0).max_ammo != 0:
+		if pc.guns.get_child(0).ammo == 0:
+			if animation == "reload":
+				ammo_bottom_animator.play("BulletReload0", -1.0, speed)
+			elif animation == "reset":
+				ammo_bottom_animator.play("Reset1")
+		else:
+			var ammo_percentage: float = float(pc.guns.get_child(0).ammo) / float(pc.guns.get_child(0).max_ammo)
+			if ammo_percentage > 0.833:
+				if animation == "reload":
+					ammo_bottom_animator.play("BulletReload6", -1.0, speed)
+				elif animation == "reset":
+					ammo_bottom_animator.play("Reset6")
+			elif ammo_percentage > 0.667:
+				if animation == "reload":
+					ammo_bottom_animator.play("BulletReload5", -1.0, speed)
+				elif animation == "reset":
+					ammo_bottom_animator.play("Reset5")
+			elif ammo_percentage > 0.5:
+				if animation == "reload":
+					ammo_bottom_animator.play("BulletReload4", -1.0, speed)
+				elif animation == "reset":
+					ammo_bottom_animator.play("Reset4")
+			elif ammo_percentage > 0.333:
+				if animation == "reload":
+					ammo_bottom_animator.play("BulletReload3", -1.0, speed)
+				elif animation == "reset":
+					ammo_bottom_animator.play("Reset3")
+			elif ammo_percentage > 0.167:
+				if animation == "reload":
+					ammo_bottom_animator.play("BulletReload2", -1.0, speed)
+				elif animation == "reset":
+					ammo_bottom_animator.play("Reset2")
+			else:
+				if animation == "reload":
+					ammo_bottom_animator.play("BulletReload1", -1.0, speed)
+				elif animation == "reset":
+					ammo_bottom_animator.play("Reset1")
+	else:
+		if animation == "reload":
+			ammo_bottom_animator.play("BulletReload6", -1.0, speed)
+		elif animation == "reset":
+			ammo_bottom_animator.play("Reset6")
 
 func update_hp(hp, max_hp):
 	hp_progress.value = hp
@@ -126,11 +232,11 @@ func display_hp_number(hp, max_hp):
 		hp_1.frame_coords.y = 5
 		hp_2.frame_coords.y = 5
 
-func update_xp(xp, max_xp, level, max_level):
+func update_xp(xp, max_xp, level, max_level, do_xp_flash = false):
 	modulate = Color(1, 1, 1) #to prevent flash animation from stopping on a transparent frame
 	xp_num.frame_coords.x = level
-#	if flash:
-#		$AnimationPlayer.play("XpFlash")
+	if do_xp_flash:
+		$AnimationPlayer.play("XpFlash")
 	xp_progress.value = xp
 	xp_progress.max_value = max_xp
 	xp_lost.max_value = max_xp
@@ -151,9 +257,10 @@ func update_xp(xp, max_xp, level, max_level):
 
 
 func update_ammo(have, maximum):
-		ao.ammo = have
-		ao.max_ammo = maximum
-		ao.display_ammo()
+	pass
+		#ao.ammo = have
+		#ao.max_ammo = maximum
+		#ao.display_ammo()
 
 
 func update_money(money):

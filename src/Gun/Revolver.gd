@@ -3,8 +3,8 @@ extends Gun
 func _ready(): #since preload, this happens on game start
 	display_name = "Revolver"
 	description = "Your first weapon."
-#	texture = load("res://assets/Gun/Revolver.png")
 	icon_texture = load("res://assets/Gun/RevolverIcon.png")
+	icon_small_texture = load("res://assets/Gun/RevolverIconSmall.png")
 	sfx = "gun_pistol"
 	cooldown_time = 0.1
 	automatic = false

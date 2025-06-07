@@ -46,7 +46,7 @@ hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_0of4l")
+&"": SubResource("AnimationLibrary_0of4l")
 }
 
 [connection signal="area_entered" from="EnemyCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c2ys5t223s3h0"]
 
 [ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momo.ttf" id="1_2d4mj"]
-[ext_resource type="StyleBox" path="res://src/UI/StyleBox/CursorBox.tres" id="2"]
+[ext_resource type="StyleBox" path="res://src/UI/StyleBox/need/CursorBox.tres" id="2"]
 [ext_resource type="Script" uid="uid://cu0bod0qocr6b" path="res://src/UI/LevelSelect/LevelButton.gd" id="3"]
 
 [sub_resource type="StyleBoxEmpty" id="3"]

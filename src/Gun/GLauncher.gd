@@ -3,8 +3,8 @@ extends Gun
 func _ready():
 	display_name = "Grenade Launcher"
 	description = "Packs a punch."
-	texture = load("res://assets/Gun/GLauncher.png")
 	icon_texture = load("res://assets/Gun/GLauncherIcon.png")
+	icon_small_texture = load("res://assets/Gun/GLauncherIconSmall.png")
 	sfx = "gun_grenade"
 	automatic = false
 	ammo = 10

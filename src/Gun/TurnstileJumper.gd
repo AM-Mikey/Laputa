@@ -7,8 +7,8 @@ var max_time: float
 func _ready():
 	display_name = "Turnstile Jumper"
 	description = "A powerful pistol once wielded by a lone cowboy."
-	texture = load("res://assets/Gun/TurnstileJumper.png")
 	icon_texture = load("res://assets/Gun/TurnstileJumperIcon.png")
+	icon_small_texture = load("res://assets/Gun/TurnstileJumperIconSmall.png")
 	sfx = "gun_revolver"
 	automatic = false
 	charging = true

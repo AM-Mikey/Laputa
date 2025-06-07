@@ -10,7 +10,6 @@
 [resource]
 default_font = ExtResource("4_kdako")
 Button/colors/font_color = Color(0.690196, 0.392157, 0.2, 1)
-Button/styles/disabled = null
 Button/styles/hover = ExtResource("4")
 Button/styles/normal = ExtResource("3")
 Button/styles/pressed = ExtResource("1")

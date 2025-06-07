@@ -5,6 +5,7 @@ var value: int
 var dir = Vector2.DOWN
 
 func _ready():
+	gravity = 100
 	home = global_position
 	
 	speed = Vector2(10, 10)

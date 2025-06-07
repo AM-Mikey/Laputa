@@ -163,23 +163,6 @@ properties = {
 }
 size_is_default = false
 
-[node name="KillBox" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
-offset_left = 192.0
-offset_top = -64.0
-offset_right = 256.0
-offset_bottom = 16.0
-mouse_filter = 2
-script = ExtResource("8_v7nqo")
-trigger_path = "res://src/Trigger/KillBox.tscn"
-properties = {
-"color": [Color(1, 0, 0, 1), 20],
-"editor_hidden": [false, 1]
-}
-size_is_default = false
-
 [node name="SunLight" type="Area2D" parent="." groups=["SunLights"] instance=ExtResource("6_mcn17")]
 position = Vector2(35, -198)
 collision_layer = 16384

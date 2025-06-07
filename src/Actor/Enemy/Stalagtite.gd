@@ -73,7 +73,7 @@ func enter_drop():
 
 func do_drop():
 	if is_on_floor():
-		if difficulty == 0:
+		if difficulty == 0: #purple
 			change_state("stake")
 			return
 		else:
@@ -116,10 +116,15 @@ func do_run():
 
 func enter_stake():
 	$AnimationPlayer.play("Stake")
+	await get_tree().process_frame
+	$CollisionShape2D.set_deferred("disabled", true) #so it doesn't see itself
 	$Standable/CollisionShape2D.set_deferred("disabled", false)
 	
 
 func calculate_move_velocity(velocity: Vector2, move_dir, speed) -> Vector2:
+	if state == "stake":
+		return Vector2.ZERO
+		
 	var out: = velocity
 	out.x = speed.x * move_dir.x
 	out.y += gravity * get_physics_process_delta_time()

@@ -3,8 +3,8 @@ extends Gun
 func _ready():
 	display_name = "Tsurugi"
 	description = "An ancient sword that deals heavy blows and short range."
-	texture = load("res://assets/Gun/Tsurugi.png")
 	icon_texture = load("res://assets/Gun/TsurugiIcon.png")
+	#icon_small_texture = load("res://assets/Gun/TsurugiIconSmall.png") #needed
 	sfx = "gun_sword"
 	cooldown_time = 0.2
 	automatic = false

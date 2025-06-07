@@ -9,8 +9,8 @@ const MUZZLE_FLASH = preload("res://src/Effect/MuzzleFlashEffect.tscn")
 var display_name: String = "Debug Gun"
 var description: String = "Debug Description"
 
-var texture: CompressedTexture2D = load("res://assets/Gun/Revolver.png") #unused
 var icon_texture: CompressedTexture2D = load("res://assets/Gun/RevolverIcon.png")
+var icon_small_texture: CompressedTexture2D = load("res://assets/Gun/RevolverIconSmall.png")
 var sfx: String = "gun_pistol"
 var bullet_scene: PackedScene = load("res://src/Bullet/BulletRevolver1.tscn")
 
@@ -48,7 +48,7 @@ func fire(type):
 		if max_ammo == 0 or ammo != 0:
 			if max_ammo != 0:
 				ammo -= 1
-			pc.emit_signal("guns_updated", pc.get_node("GunManager/Guns").get_children())
+			pc.emit_signal("guns_updated", pc.get_node("GunManager/Guns").get_children(), "fire")
 			activate()
 		else:
 			print("out of ammo")

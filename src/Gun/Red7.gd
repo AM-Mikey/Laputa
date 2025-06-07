@@ -9,8 +9,9 @@ var fire_time = 0.1
 func _ready():
 	display_name = "Red 7"
 	description = "Fires in bursts of Seven. Looks like some kind of prototype."
-#	texture = load("res://assets/Gun/Revolver.png")
 	icon_texture = load("res://assets/Gun/Red7Icon.png")
+	icon_small_texture = load("res://assets/Gun/Red7IconSmall.png")
+	
 	sfx = "gun_pistol"
 	cooldown_time = 0.1
 	automatic = true

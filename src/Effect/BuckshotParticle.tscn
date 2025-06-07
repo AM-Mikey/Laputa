@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://catdmr4lstwgp"]
+
+[ext_resource type="Texture2D" uid="uid://bbt42c2d6660n" path="res://assets/Bullet/BulletShotgun.png" id="1_qhghx"]
+[ext_resource type="Texture2D" uid="uid://c0uvowge7tlu2" path="res://assets/Effect/Bonk.png" id="2_ed4gp"]
+
+[sub_resource type="CanvasItemMaterial" id="1"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="2"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 100), 140.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="3"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1.95506), 0.0, 0.0, 0, 0, Vector2(1, 0.966292), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="BuckshotParticle" type="Node2D"]
+light_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.293)
+position = Vector2(25, 0)
+rotation = 3.14159
+texture = ExtResource("1_qhghx")
+
+[node name="Left" type="CPUParticles2D" parent="."]
+light_mask = 2
+material = SubResource("1")
+amount = 12
+texture = ExtResource("2_ed4gp")
+lifetime = 0.4
+explosiveness = 1.0
+spread = 20.0
+gravity = Vector2(0, 100)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+damping_min = 10.0
+damping_max = 10.0
+damping_curve = SubResource("2")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+anim_speed_curve = SubResource("3")

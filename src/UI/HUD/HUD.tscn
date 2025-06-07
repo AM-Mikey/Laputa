@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dulcn8jx6cd3y"]
+[gd_scene load_steps=61 format=3 uid="uid://dulcn8jx6cd3y"]
 
 [ext_resource type="Script" uid="uid://getspcndfk4e" path="res://src/UI/HUD/HUD.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c7wyw4y3jdl7j" path="res://assets/UI/NumberNew.png" id="2"]
@@ -18,7 +18,706 @@
 [ext_resource type="Texture2D" uid="uid://bghy607xwl5iy" path="res://assets/UI/HUD/XpCap.png" id="13_kgt4n"]
 [ext_resource type="Texture2D" uid="uid://2fp1scy7ajqk" path="res://assets/UI/NumberSmall.png" id="14"]
 [ext_resource type="Texture2D" uid="uid://c2xhxpgm4yocx" path="res://assets/UI/HUD/HpLostCap.png" id="15"]
+[ext_resource type="Texture2D" uid="uid://ioyoa6s1nd8k" path="res://assets/UI/HUD/AmmoBack.png" id="16_xjeta"]
+[ext_resource type="Texture2D" uid="uid://dx0ik613p1n7k" path="res://assets/UI/HUD/AmmoBullets.png" id="17_g36jn"]
 [ext_resource type="Texture2D" uid="uid://c643uge81sfaw" path="res://assets/UI/HUD/CooldownCap.png" id="17_iwa0c"]
+[ext_resource type="Texture2D" uid="uid://iaear02sxjij" path="res://assets/UI/HUD/WeaponWheel.png" id="19_g36jn"]
+[ext_resource type="Texture2D" uid="uid://xdyjjbvv4pjx" path="res://assets/UI/HUD/Bullet.png" id="20_rfbaj"]
+[ext_resource type="Texture2D" uid="uid://s3vaw1gr2atc" path="res://assets/Gun/MPistolIconSmall.png" id="21_1f167"]
+[ext_resource type="Shader" uid="uid://c8nu6mhx6pu3j" path="res://src/Shader/SimpleOutlineWeaponWheel.gdshader" id="21_n4pkm"]
+[ext_resource type="Texture2D" uid="uid://cl1nlp1q780sk" path="res://assets/UI/HUD/rotatetemplate.png" id="26_8nsof"]
+
+[sub_resource type="Animation" id="Animation_rfbaj"]
+resource_name = "BulletShoot"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletTop:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 7]
+}
+
+[sub_resource type="Animation" id="Animation_1f167"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletTop:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletBottom:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8nsof"]
+_data = {
+&"BulletShoot": SubResource("Animation_rfbaj"),
+&"RESET": SubResource("Animation_1f167")
+}
+
+[sub_resource type="Animation" id="Animation_56u4y"]
+resource_name = "BulletReload0"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletBottom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
+[sub_resource type="Animation" id="Animation_vg0wx"]
+resource_name = "BulletReload1"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletBottom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [49, 50, 51, 52, 53]
+}
+
+[sub_resource type="Animation" id="Animation_lv56q"]
+resource_name = "BulletReload2"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletBottom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [40, 41, 42, 43, 44]
+}
+
+[sub_resource type="Animation" id="Animation_eexsr"]
+resource_name = "BulletReload3"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletBottom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [32, 33, 34, 35, 36]
+}
+
+[sub_resource type="Animation" id="Animation_vpvr1"]
+resource_name = "BulletReload4"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletBottom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28]
+}
+
+[sub_resource type="Animation" id="Animation_8nsof"]
+resource_name = "BulletReload5"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletBottom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_n4pkm"]
+resource_name = "BulletReload6"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletBottom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12]
+}
+
+[sub_resource type="Animation" id="Animation_wl4dw"]
+resource_name = "Reset1"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletBottom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [49]
+}
+
+[sub_resource type="Animation" id="Animation_ekbwr"]
+resource_name = "Reset2"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletBottom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [40]
+}
+
+[sub_resource type="Animation" id="Animation_qy20o"]
+resource_name = "Reset3"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletBottom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [32]
+}
+
+[sub_resource type="Animation" id="Animation_woocf"]
+resource_name = "Reset4"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletBottom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [24]
+}
+
+[sub_resource type="Animation" id="Animation_5xqj1"]
+resource_name = "Reset5"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletBottom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+
+[sub_resource type="Animation" id="Animation_g36jn"]
+resource_name = "Reset6"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletBottom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xjeta"]
+_data = {
+&"BulletReload0": SubResource("Animation_56u4y"),
+&"BulletReload1": SubResource("Animation_vg0wx"),
+&"BulletReload2": SubResource("Animation_lv56q"),
+&"BulletReload3": SubResource("Animation_eexsr"),
+&"BulletReload4": SubResource("Animation_vpvr1"),
+&"BulletReload5": SubResource("Animation_8nsof"),
+&"BulletReload6": SubResource("Animation_n4pkm"),
+&"RESET": SubResource("Animation_1f167"),
+&"Reset1": SubResource("Animation_wl4dw"),
+&"Reset2": SubResource("Animation_ekbwr"),
+&"Reset3": SubResource("Animation_qy20o"),
+&"Reset4": SubResource("Animation_woocf"),
+&"Reset5": SubResource("Animation_5xqj1"),
+&"Reset6": SubResource("Animation_g36jn")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8nsof"]
+shader = ExtResource("21_n4pkm")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lv56q"]
+shader = ExtResource("21_n4pkm")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n4pkm"]
+shader = ExtResource("21_n4pkm")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vpvr1"]
+shader = ExtResource("21_n4pkm")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vg0wx"]
+shader = ExtResource("21_n4pkm")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eexsr"]
+shader = ExtResource("21_n4pkm")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="Animation" id="Animation_jwksl"]
+resource_name = "CCW"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponWheel:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(5.96046e-08, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponWheel/Bullet1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-16, -21), Vector2(-19, -19), Vector2(-21, -16), Vector2(-22, -13), Vector2(-24, -10), Vector2(-25, -7), Vector2(-26, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponWheel/Bullet2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-25, 3), Vector2(-25, 7), Vector2(-24, 10), Vector2(-22, 13), Vector2(-21, 16), Vector2(-19, 19), Vector2(-13, 22)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponWheel/Bullet3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-10, 24), Vector2(-7, 25), Vector2(-3, 25), Vector2(0, 26), Vector2(3, 25), Vector2(7, 25), Vector2(13, 22)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponWheel/Bullet4:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(16, 21), Vector2(19, 19), Vector2(21, 16), Vector2(22, 13), Vector2(24, 10), Vector2(25, 7), Vector2(26, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponWheel/Bullet5:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(25, -3), Vector2(25, -7), Vector2(24, -10), Vector2(22, -13), Vector2(21, -16), Vector2(19, -19), Vector2(13, -22)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WeaponWheel/Bullet6:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(10, -24), Vector2(7, -25), Vector2(3, -25), Vector2(0, -26), Vector2(-3, -25), Vector2(-7, -25), Vector2(-13, -22)]
+}
+
+[sub_resource type="Animation" id="Animation_v6ruf"]
+resource_name = "CW"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponWheel:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 5, 4, 3, 2, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponWheel/Bullet1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-19, 19), Vector2(-21, 16), Vector2(-22, 13), Vector2(-24, 10), Vector2(-25, 7), Vector2(-25, 3), Vector2(-26, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponWheel/Bullet2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(7, 25), Vector2(3, 25), Vector2(0, 26), Vector2(-3, 25), Vector2(-7, 25), Vector2(-10, 24), Vector2(-13, 22)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponWheel/Bullet3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(25, 7), Vector2(24, 10), Vector2(22, 13), Vector2(21, 16), Vector2(19, 19), Vector2(16, 21), Vector2(13, 22)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponWheel/Bullet4:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(19, -19), Vector2(21, -16), Vector2(22, -13), Vector2(24, -10), Vector2(25, -7), Vector2(25, -3), Vector2(26, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponWheel/Bullet5:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-7, -25), Vector2(-3, -25), Vector2(0, -26), Vector2(3, -25), Vector2(7, -25), Vector2(10, -24), Vector2(13, -22)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WeaponWheel/Bullet6:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-25, -7), Vector2(-24, -10), Vector2(-22, -13), Vector2(-21, -16), Vector2(-19, -19), Vector2(-16, -21), Vector2(-13, -22)]
+}
+
+[sub_resource type="Animation" id="Animation_arwx5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponWheel:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponWheel/Bullet1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(420, 164)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponWheel/Bullet2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(433, 186)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponWheel/Bullet3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(459, 186)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponWheel/Bullet4:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(472, 164)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponWheel/Bullet5:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(459, 142)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WeaponWheel/Bullet6:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(433, 142)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WeaponWheel:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(446, 164)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("WeaponWheel:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mudxy"]
+_data = {
+&"CCW": SubResource("Animation_jwksl"),
+&"CW": SubResource("Animation_v6ruf"),
+&"RESET": SubResource("Animation_arwx5")
+}
+
+[sub_resource type="Animation" id="Animation_ice8w"]
+resource_name = "TiltIn"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponWheel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(510, 100), Vector2(484, 106), Vector2(462, 116), Vector2(452, 138), Vector2(446, 164)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponWheel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_mudxy"]
+resource_name = "TiltOut"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponWheel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(446, 164), Vector2(452, 138), Vector2(462, 116), Vector2(484, 106), Vector2(510, 100)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponWheel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4, 0.4001, 0.4002),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vpvr1"]
+_data = {
+&"RESET": SubResource("Animation_arwx5"),
+&"TiltIn": SubResource("Animation_ice8w"),
+&"TiltOut": SubResource("Animation_mudxy")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4y4ox"]
 shader = ExtResource("4_7s250")
@@ -49,7 +748,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("VBox/Base/Xp/Flash:modulate")
+tracks/0/path = NodePath("HBox/Base/Xp/Flash:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -65,40 +764,323 @@ _data = {
 &"XpFlash": SubResource("2")
 }
 
-[node name="HUD" type="MarginContainer" node_paths=PackedStringArray("gun", "ao", "hp_node", "xp_node", "cd", "mon")]
+[node name="HUD" type="MarginContainer" node_paths=PackedStringArray("gun", "ao", "hp_node", "xp_node", "cd", "ammo", "mon")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 script = ExtResource("1")
-gun = NodePath("VBox/Gun")
-ao = NodePath("VBox/Gun/AmmoCount")
-hp_node = NodePath("VBox/Base/Hp")
-xp_node = NodePath("VBox/Base/Xp")
-cd = NodePath("VBox/Base/Cooldown")
-mon = NodePath("VBox/Base/Money")
+gun = NodePath("HBox/Gun")
+ao = NodePath("HBox/Gun/AmmoCount")
+hp_node = NodePath("HBox/Base/Hp")
+xp_node = NodePath("HBox/Base/Xp")
+cd = NodePath("HBox/Base/Cooldown")
+ammo = NodePath("HBox/Base/Ammo")
+mon = NodePath("HBox/Base/Money")
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="HBox" type="Control" parent="."]
 layout_mode = 2
+size_flags_vertical = 0
 
-[node name="Gun" type="Control" parent="VBox"]
-custom_minimum_size = Vector2(0, 24)
+[node name="Base" type="Control" parent="HBox"]
 layout_mode = 2
+anchors_preset = 0
+offset_bottom = 24.0
+
+[node name="Back" type="Sprite2D" parent="HBox/Base"]
+texture = ExtResource("3")
+centered = false
+
+[node name="Hp" type="Control" parent="HBox/Base"]
+layout_mode = 2
+anchors_preset = 0
+offset_bottom = 24.0
 mouse_filter = 2
 
-[node name="GunIcon" parent="VBox/Gun" instance=ExtResource("11")]
+[node name="Lost" type="TextureProgressBar" parent="HBox/Base/Hp"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 48.0
-offset_bottom = 48.0
+offset_left = 32.0
+offset_top = 3.0
+offset_right = 70.0
+offset_bottom = 7.0
+mouse_filter = 2
+value = 50.0
+texture_progress = ExtResource("7")
 
-[node name="AmmoCount" parent="VBox/Gun" instance=ExtResource("3_0touq")]
+[node name="Cap" type="Sprite2D" parent="HBox/Base/Hp/Lost"]
+position = Vector2(19, 2)
+texture = ExtResource("15")
+
+[node name="Progress" type="TextureProgressBar" parent="HBox/Base/Hp"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 3.0
+offset_right = 70.0
+offset_bottom = 7.0
+mouse_filter = 2
+value = 50.0
+texture_progress = ExtResource("4")
+
+[node name="Cap" type="Sprite2D" parent="HBox/Base/Hp/Progress"]
+position = Vector2(19, 2)
+texture = ExtResource("10")
+
+[node name="Num1" type="Sprite2D" parent="HBox/Base/Hp"]
+position = Vector2(12, 0)
+texture = ExtResource("2")
+centered = false
+hframes = 11
+vframes = 6
+frame = 64
+
+[node name="Num2" type="Sprite2D" parent="HBox/Base/Hp"]
+position = Vector2(20, 0)
+texture = ExtResource("2")
+centered = false
+hframes = 11
+vframes = 6
+frame = 64
+
+[node name="Xp" type="Control" parent="HBox/Base"]
+layout_mode = 2
+anchors_preset = 0
+offset_bottom = 24.0
+mouse_filter = 2
+
+[node name="Lost" type="TextureProgressBar" parent="HBox/Base/Xp"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 11.0
+offset_right = 66.0
+offset_bottom = 15.0
+mouse_filter = 2
+value = 50.0
+texture_progress = ExtResource("7")
+
+[node name="Cap" type="Sprite2D" parent="HBox/Base/Xp/Lost"]
+position = Vector2(19, 2)
+texture = ExtResource("15")
+
+[node name="Progress" type="TextureProgressBar" parent="HBox/Base/Xp"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 11.0
+offset_right = 66.0
+offset_bottom = 15.0
+mouse_filter = 2
+value = 50.0
+texture_progress = ExtResource("5")
+
+[node name="Cap" type="Sprite2D" parent="HBox/Base/Xp/Progress"]
+position = Vector2(19, 2)
+texture = ExtResource("13_kgt4n")
+
+[node name="Flash" type="Sprite2D" parent="HBox/Base/Xp"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(28, 11)
+texture = ExtResource("6")
+centered = false
+
+[node name="Num" type="Sprite2D" parent="HBox/Base/Xp"]
+position = Vector2(20, 12)
+texture = ExtResource("2")
+hframes = 11
+vframes = 6
+frame = 56
+
+[node name="Max" type="Sprite2D" parent="HBox/Base/Xp"]
+visible = false
+z_index = 1
+position = Vector2(25, 10)
+texture = ExtResource("13")
+centered = false
+
+[node name="Cooldown" type="Control" parent="HBox/Base"]
+layout_mode = 2
+anchors_preset = 0
+offset_bottom = 24.0
+mouse_filter = 2
+
+[node name="Progress" type="TextureProgressBar" parent="HBox/Base/Cooldown"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 19.0
+offset_right = 62.0
+offset_bottom = 21.0
+mouse_filter = 2
+value = 50.0
+texture_progress = ExtResource("8")
+
+[node name="Cap" type="Sprite2D" parent="HBox/Base/Cooldown/Progress"]
+position = Vector2(18.5, 1)
+texture = ExtResource("17_iwa0c")
+
+[node name="Money" type="Control" parent="HBox/Base"]
+layout_mode = 2
+anchors_preset = 0
+offset_bottom = 24.0
+mouse_filter = 2
+
+[node name="Num1" type="Sprite2D" parent="HBox/Base/Money"]
+position = Vector2(8, 19)
+texture = ExtResource("14")
+centered = false
+offset = Vector2(0, -1)
+hframes = 10
+vframes = 2
+frame = 10
+
+[node name="Num2" type="Sprite2D" parent="HBox/Base/Money"]
+position = Vector2(12, 19)
+texture = ExtResource("14")
+centered = false
+offset = Vector2(0, -1)
+hframes = 10
+vframes = 2
+frame = 10
+
+[node name="Num3" type="Sprite2D" parent="HBox/Base/Money"]
+position = Vector2(16, 19)
+texture = ExtResource("14")
+centered = false
+offset = Vector2(0, -1)
+hframes = 10
+vframes = 2
+frame = 10
+
+[node name="Front" type="Sprite2D" parent="HBox/Base"]
+texture = ExtResource("9")
+centered = false
+
+[node name="Ammo" type="Control" parent="HBox/Base"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Back" type="Sprite2D" parent="HBox/Base/Ammo"]
+position = Vector2(83, 6)
+texture = ExtResource("16_xjeta")
+
+[node name="BulletTop" type="Sprite2D" parent="HBox/Base/Ammo"]
+position = Vector2(83, 6)
+texture = ExtResource("17_g36jn")
+hframes = 8
+vframes = 7
+frame = 2
+
+[node name="BulletBottom" type="Sprite2D" parent="HBox/Base/Ammo"]
+position = Vector2(83, 6)
+texture = ExtResource("17_g36jn")
+hframes = 8
+vframes = 7
+frame = 11
+
+[node name="TopAnimator" type="AnimationPlayer" parent="HBox/Base/Ammo"]
+libraries = {
+&"": SubResource("AnimationLibrary_8nsof")
+}
+
+[node name="BottomAnimator" type="AnimationPlayer" parent="HBox/Base/Ammo"]
+libraries = {
+&"": SubResource("AnimationLibrary_xjeta")
+}
+
+[node name="Fly" type="Marker2D" parent="HBox/Base/Ammo"]
+position = Vector2(67, -18)
+
+[node name="Gun" type="Control" parent="HBox"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 4.0
+offset_right = 4.0
+offset_bottom = 24.0
+mouse_filter = 2
+
+[node name="GunIcon" parent="HBox/Gun" instance=ExtResource("11")]
+visible = false
+layout_mode = 0
+offset_left = 380.0
+offset_top = 216.0
+offset_right = 420.0
+offset_bottom = 256.0
+
+[node name="WeaponWheel" type="Sprite2D" parent="HBox/Gun"]
+visible = false
+position = Vector2(446, 164)
+texture = ExtResource("19_g36jn")
+hframes = 8
+
+[node name="Bullet1" type="Sprite2D" parent="HBox/Gun/WeaponWheel"]
+position = Vector2(420, 164)
+texture = ExtResource("20_rfbaj")
+
+[node name="Gun" type="Sprite2D" parent="HBox/Gun/WeaponWheel/Bullet1"]
+material = SubResource("ShaderMaterial_8nsof")
+texture = ExtResource("21_1f167")
+
+[node name="Bullet2" type="Sprite2D" parent="HBox/Gun/WeaponWheel"]
+position = Vector2(433, 186)
+texture = ExtResource("20_rfbaj")
+
+[node name="Gun" type="Sprite2D" parent="HBox/Gun/WeaponWheel/Bullet2"]
+material = SubResource("ShaderMaterial_lv56q")
+texture = ExtResource("21_1f167")
+
+[node name="Bullet3" type="Sprite2D" parent="HBox/Gun/WeaponWheel"]
+position = Vector2(459, 186)
+texture = ExtResource("20_rfbaj")
+
+[node name="Gun" type="Sprite2D" parent="HBox/Gun/WeaponWheel/Bullet3"]
+material = SubResource("ShaderMaterial_n4pkm")
+texture = ExtResource("21_1f167")
+
+[node name="Bullet4" type="Sprite2D" parent="HBox/Gun/WeaponWheel"]
+position = Vector2(472, 164)
+texture = ExtResource("20_rfbaj")
+
+[node name="Gun" type="Sprite2D" parent="HBox/Gun/WeaponWheel/Bullet4"]
+material = SubResource("ShaderMaterial_vpvr1")
+texture = ExtResource("21_1f167")
+
+[node name="Bullet5" type="Sprite2D" parent="HBox/Gun/WeaponWheel"]
+position = Vector2(459, 142)
+texture = ExtResource("20_rfbaj")
+
+[node name="Gun" type="Sprite2D" parent="HBox/Gun/WeaponWheel/Bullet5"]
+material = SubResource("ShaderMaterial_vg0wx")
+texture = ExtResource("21_1f167")
+
+[node name="Bullet6" type="Sprite2D" parent="HBox/Gun/WeaponWheel"]
+position = Vector2(433, 142)
+texture = ExtResource("20_rfbaj")
+
+[node name="Gun" type="Sprite2D" parent="HBox/Gun/WeaponWheel/Bullet6"]
+material = SubResource("ShaderMaterial_eexsr")
+texture = ExtResource("21_1f167")
+
+[node name="WeaponWheelAnimator" type="AnimationPlayer" parent="HBox/Gun"]
+libraries = {
+&"": SubResource("AnimationLibrary_mudxy")
+}
+
+[node name="WeaponWheelTiltAnimator" type="AnimationPlayer" parent="HBox/Gun"]
+libraries = {
+&"": SubResource("AnimationLibrary_vpvr1")
+}
+
+[node name="Timer" type="Timer" parent="HBox/Gun/WeaponWheelTiltAnimator"]
+one_shot = true
+
+[node name="AmmoCount" parent="HBox/Gun" instance=ExtResource("3_0touq")]
+visible = false
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -109,7 +1091,8 @@ offset_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="HBox" type="HBoxContainer" parent="VBox/Gun"]
+[node name="HBox" type="HBoxContainer" parent="HBox/Gun"]
+visible = false
 layout_mode = 0
 offset_left = 104.0
 offset_top = 8.0
@@ -117,216 +1100,54 @@ offset_right = 260.0
 offset_bottom = 24.0
 mouse_filter = 2
 
-[node name="Placeholder" type="TextureRect" parent="VBox/Gun/HBox"]
+[node name="Placeholder" type="TextureRect" parent="HBox/Gun/HBox"]
 material = SubResource("ShaderMaterial_4y4ox")
 layout_mode = 2
 texture = ExtResource("5_ovnkw")
 
-[node name="Placeholder2" type="TextureRect" parent="VBox/Gun/HBox"]
+[node name="Placeholder2" type="TextureRect" parent="HBox/Gun/HBox"]
 material = SubResource("ShaderMaterial_4y4ox")
 layout_mode = 2
 texture = ExtResource("5_ovnkw")
 
-[node name="Placeholder3" type="TextureRect" parent="VBox/Gun/HBox"]
+[node name="Placeholder3" type="TextureRect" parent="HBox/Gun/HBox"]
 material = SubResource("ShaderMaterial_4y4ox")
 layout_mode = 2
 texture = ExtResource("5_ovnkw")
 
-[node name="Placeholder4" type="TextureRect" parent="VBox/Gun/HBox"]
+[node name="Placeholder4" type="TextureRect" parent="HBox/Gun/HBox"]
 material = SubResource("ShaderMaterial_4y4ox")
 layout_mode = 2
 texture = ExtResource("5_ovnkw")
 
-[node name="Placeholder5" type="TextureRect" parent="VBox/Gun/HBox"]
+[node name="Placeholder5" type="TextureRect" parent="HBox/Gun/HBox"]
 material = SubResource("ShaderMaterial_4y4ox")
 layout_mode = 2
 texture = ExtResource("5_ovnkw")
 
-[node name="Placeholder6" type="TextureRect" parent="VBox/Gun/HBox"]
+[node name="Placeholder6" type="TextureRect" parent="HBox/Gun/HBox"]
 material = SubResource("ShaderMaterial_4y4ox")
 layout_mode = 2
 texture = ExtResource("5_ovnkw")
 
-[node name="Placeholder7" type="TextureRect" parent="VBox/Gun/HBox"]
+[node name="Placeholder7" type="TextureRect" parent="HBox/Gun/HBox"]
 material = SubResource("ShaderMaterial_4y4ox")
 layout_mode = 2
 texture = ExtResource("5_ovnkw")
 
-[node name="Placeholder8" type="TextureRect" parent="VBox/Gun/HBox"]
+[node name="Placeholder8" type="TextureRect" parent="HBox/Gun/HBox"]
 material = SubResource("ShaderMaterial_4y4ox")
 layout_mode = 2
 texture = ExtResource("5_ovnkw")
 
-[node name="Base" type="Control" parent="VBox"]
-layout_mode = 2
-
-[node name="Back" type="Sprite2D" parent="VBox/Base"]
-texture = ExtResource("3")
-centered = false
-
-[node name="Hp" type="Control" parent="VBox/Base"]
-anchors_preset = 0
-offset_right = 480.0
-offset_bottom = 272.0
-mouse_filter = 2
-
-[node name="Lost" type="TextureProgressBar" parent="VBox/Base/Hp"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 3.0
-offset_right = 70.0
-offset_bottom = 7.0
-mouse_filter = 2
-value = 50.0
-texture_progress = ExtResource("7")
-
-[node name="Cap" type="Sprite2D" parent="VBox/Base/Hp/Lost"]
-position = Vector2(19, 2)
-texture = ExtResource("15")
-
-[node name="Progress" type="TextureProgressBar" parent="VBox/Base/Hp"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 3.0
-offset_right = 70.0
-offset_bottom = 7.0
-mouse_filter = 2
-value = 50.0
-texture_progress = ExtResource("4")
-
-[node name="Cap" type="Sprite2D" parent="VBox/Base/Hp/Progress"]
-position = Vector2(19, 2)
-texture = ExtResource("10")
-
-[node name="Num1" type="Sprite2D" parent="VBox/Base/Hp"]
-position = Vector2(12, 0)
-texture = ExtResource("2")
-centered = false
-hframes = 11
-vframes = 6
-frame = 64
-
-[node name="Num2" type="Sprite2D" parent="VBox/Base/Hp"]
-position = Vector2(20, 0)
-texture = ExtResource("2")
-centered = false
-hframes = 11
-vframes = 6
-frame = 64
-
-[node name="Xp" type="Control" parent="VBox/Base"]
-anchors_preset = 0
-offset_right = 480.0
-offset_bottom = 272.0
-mouse_filter = 2
-
-[node name="Lost" type="TextureProgressBar" parent="VBox/Base/Xp"]
-layout_mode = 0
-offset_left = 28.0
-offset_top = 11.0
-offset_right = 66.0
-offset_bottom = 15.0
-mouse_filter = 2
-value = 50.0
-texture_progress = ExtResource("7")
-
-[node name="Cap" type="Sprite2D" parent="VBox/Base/Xp/Lost"]
-position = Vector2(19, 2)
-texture = ExtResource("15")
-
-[node name="Progress" type="TextureProgressBar" parent="VBox/Base/Xp"]
-layout_mode = 0
-offset_left = 28.0
-offset_top = 11.0
-offset_right = 66.0
-offset_bottom = 15.0
-mouse_filter = 2
-value = 50.0
-texture_progress = ExtResource("5")
-
-[node name="Cap" type="Sprite2D" parent="VBox/Base/Xp/Progress"]
-position = Vector2(19, 2)
-texture = ExtResource("13_kgt4n")
-
-[node name="Flash" type="Sprite2D" parent="VBox/Base/Xp"]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(28, 11)
-texture = ExtResource("6")
-centered = false
-
-[node name="Num" type="Sprite2D" parent="VBox/Base/Xp"]
-position = Vector2(20, 12)
-texture = ExtResource("2")
-hframes = 11
-vframes = 6
-frame = 56
-
-[node name="Max" type="Sprite2D" parent="VBox/Base/Xp"]
+[node name="Sprite2D" type="Sprite2D" parent="HBox/Gun"]
 visible = false
-z_index = 1
-position = Vector2(25, 10)
-texture = ExtResource("13")
-centered = false
-
-[node name="Cooldown" type="Control" parent="VBox/Base"]
-anchors_preset = 0
-offset_right = 480.0
-offset_bottom = 272.0
-mouse_filter = 2
-
-[node name="Progress" type="TextureProgressBar" parent="VBox/Base/Cooldown"]
-layout_mode = 0
-offset_left = 25.0
-offset_top = 19.0
-offset_right = 62.0
-offset_bottom = 21.0
-mouse_filter = 2
-value = 50.0
-texture_progress = ExtResource("8")
-
-[node name="Cap" type="Sprite2D" parent="VBox/Base/Cooldown/Progress"]
-position = Vector2(18.5, 1)
-texture = ExtResource("17_iwa0c")
-
-[node name="Money" type="Control" parent="VBox/Base"]
-anchors_preset = 0
-offset_left = -1.0
-offset_right = 479.0
-offset_bottom = 272.0
-mouse_filter = 2
-
-[node name="Num1" type="Sprite2D" parent="VBox/Base/Money"]
-position = Vector2(8, 19)
-texture = ExtResource("14")
-centered = false
-offset = Vector2(0, -1)
-hframes = 10
-vframes = 2
-frame = 10
-
-[node name="Num2" type="Sprite2D" parent="VBox/Base/Money"]
-position = Vector2(12, 19)
-texture = ExtResource("14")
-centered = false
-offset = Vector2(0, -1)
-hframes = 10
-vframes = 2
-frame = 10
-
-[node name="Num3" type="Sprite2D" parent="VBox/Base/Money"]
-position = Vector2(16, 19)
-texture = ExtResource("14")
-centered = false
-offset = Vector2(0, -1)
-hframes = 10
-vframes = 2
-frame = 10
-
-[node name="Front" type="Sprite2D" parent="VBox/Base"]
-texture = ExtResource("9")
-centered = false
+position = Vector2(478, 196)
+texture = ExtResource("26_8nsof")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_2a4ya")
 }
+
+[connection signal="timeout" from="HBox/Gun/WeaponWheelTiltAnimator/Timer" to="." method="_on_Timer_timeout"]

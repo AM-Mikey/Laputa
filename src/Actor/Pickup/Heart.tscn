@@ -141,9 +141,10 @@ _data = {
 }
 
 [node name="Heart" type="CharacterBody2D" groups=["Actors", "Entities"]]
-collision_layer = 0
+collision_layer = 1024
 collision_mask = 8
 script = ExtResource("1")
+speed = Vector2(0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -0.5)
@@ -178,7 +179,7 @@ frame = 9
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_a8hkq")
+&"": SubResource("AnimationLibrary_a8hkq")
 }
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -44,15 +44,17 @@ func shift_gun(direction):
 		"left":
 			var child_to_move = $Guns.get_child($Guns.get_child_count() - 1)
 			$Guns.move_child(child_to_move, 0)
+			pc.emit_signal("guns_updated", $Guns.get_children(), "shiftleft")
 		"right":
 			var child_to_move = $Guns.get_child(0)
 			$Guns.move_child(child_to_move, $Guns.get_child_count() - 1)
+			pc.emit_signal("guns_updated", $Guns.get_children(), "shiftright")
 	
 	set_guns_visible()
 	
 	
 	pc.emit_signal("guns_updated", $Guns.get_children())
-	pc.emit_signal("xp_updated", $Guns.get_child(0).xp, $Guns.get_child(0).max_xp, $Guns.get_child(0).level, $Guns.get_child(0).max_level)
+	#pc.emit_signal("xp_updated", $Guns.get_child(0).xp, $Guns.get_child(0).max_xp, $Guns.get_child(0).level, $Guns.get_child(0).max_level)
 	am.play("gun_shift")
 
 
