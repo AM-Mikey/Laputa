@@ -60,8 +60,11 @@ signal players_updated
 	"enemy_hurt": preload("res://assets/SFX/Placeholder/snd_enemy_hurt.ogg"),
 	"enemy_shoot": preload("res://assets/SFX/Placeholder/snd_em_fire.ogg"),
 	"enemy_tweet": preload("res://assets/SFX/bird.ogg"),
+	#"enemy_buzz":
 	
 	"npc_dialog": preload("res://assets/SFX/Placeholder/snd_msg.ogg"),
+	
+	"effect_pop": preload("res://assets/SFX/PopSmall.ogg"),
 }
 
 @export var music_dict: Dictionary = {
@@ -70,16 +73,21 @@ signal players_updated
 	"get_hp": preload("res://assets/Music/Placeholder/Get Heart Tank!.ogg"), #TODO: rename
 	"gameover": preload("res://assets/Music/Placeholder/Gameover.ogg"),
 	"victory": preload("res://assets/Music/Placeholder/Victory!.ogg"),
-	
 	"none": preload("res://assets/Music/Placeholder/XXXX.ogg"),
-	
 	"village": preload("res://assets/Music/Placeholder/Mimiga Town.ogg"),
 	"access": preload("res://assets/Music/Placeholder/Access.ogg"),
 	"safety": preload("res://assets/Music/Placeholder/Safety.ogg"),
-	
 	"theme": preload("res://assets/Music/Placeholder/laputaintro.ogg"),
+	
 	"shop": preload("res://assets/Music/PhiDelta_Shop.wav"),
-	"shop_intro": preload("res://assets/Music/PhiDelta_Shop_Intro.wav")
+	"shop_intro": preload("res://assets/Music/PhiDelta_Shop_Intro.wav"),
+	"dogtown_day": preload("res://assets/Music/59Squared_DogtownDay.wav"),
+	"dogtown_night": preload("res://assets/Music/59Squared_DogtownNight.wav"),
+	"title": preload("res://assets/Music/59Squared_Title.wav"),
+	"train_intro": preload("res://assets/Music/59Squared_Train_Intro.wav"),
+	"train": preload("res://assets/Music/59Squared_Train_Loop.wav")
+	
+	
 }
 
 
@@ -207,7 +215,7 @@ func _clear_player(type, queue_slot):
 			music_queue.erase(queue_slot)
 		"interrupt":
 			interrupt_queue.erase(queue_slot)
-	#queue_slot[0].queue_free() #player
+	queue_slot[0].queue_free() #player
 	emit_signal("players_updated")
 
 ### CONTROLS ###

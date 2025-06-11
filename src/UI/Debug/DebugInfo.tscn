@@ -62,6 +62,15 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
 text = "GUNS"
 
+[node name="Music" type="VBoxContainer" parent="VBox/General/Arrays"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="VBox/General/Arrays/Music"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
+text = "MUSIC"
+
 [node name="Sfx" type="VBoxContainer" parent="VBox/General/Arrays"]
 layout_mode = 2
 mouse_filter = 2
@@ -70,15 +79,6 @@ mouse_filter = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
 text = "SFX"
-
-[node name="Music" type="VBoxContainer" parent="VBox/General/Arrays"]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="VBox/General/Arrays/Music"]
-layout_mode = 2
-text = "Music"
 
 [node name="Inventory" type="VBoxContainer" parent="VBox/General/Arrays"]
 visible = false

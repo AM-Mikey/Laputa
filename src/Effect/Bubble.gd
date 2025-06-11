@@ -8,6 +8,7 @@ func _physics_process(_delta):
 
 func _on_area_exited(area):
 		$Bubble.visible = false
+		am.play("effect_pop", self)
 		$BubblePop.visible = true
 		$BubblePop.one_shot = true
 		$BubblePop.emitting = true

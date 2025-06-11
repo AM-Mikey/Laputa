@@ -80,12 +80,19 @@ func on_guns_updated(guns):
 		array.add_child(label)
 
 func on_audio_players_updated():
-	var array = $VBox/General/Arrays/Sfx
-	_clear_array(array)
+	var sfx_array = $VBox/General/Arrays/Sfx
+	var music_array = $VBox/General/Arrays/Music
+	_clear_array(sfx_array)
+	_clear_array(music_array)
 	for p in am.sfx_queue:
 		var label = Label.new()
 		label.text = p[1] #sfx name
-		array.add_child(label)
+		sfx_array.add_child(label)
+	for p in am.music_queue:
+		var label = Label.new()
+		label.text = p[1] #music name
+		music_array.add_child(label)
+		
 
 
 func _clear_array(array):

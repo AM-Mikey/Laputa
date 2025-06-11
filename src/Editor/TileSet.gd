@@ -197,7 +197,7 @@ func swap_tileset_coordinates(first_pos, second_pos):
 				main_tile_set.get_source(f).move_tile_in_atlas(first_pos, buffer_pos)
 				main_tile_set.get_source(f).move_tile_in_atlas(second_pos, first_pos)
 				main_tile_set.get_source(f).move_tile_in_atlas(buffer_pos, second_pos)
-	var err = ResourceSaver.save(main_tile_set, "res://src/Tile/Wastes.tres")
+	var err = ResourceSaver.save(main_tile_set, main_tile_set.resource_path)
 
 
 func swap_tileset_pixels(first_pos, second_pos):

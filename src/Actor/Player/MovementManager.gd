@@ -2,6 +2,7 @@ extends Node2D
 
 
 const BONK: = preload("res://src/Effect/BonkParticle.tscn")
+const LAND: = preload("res://src/Effect/LandParticle.tscn")
 
 const FLOOR_NORMAL: = Vector2.UP
 const SNAP_DIRECTION = Vector2.DOWN
@@ -85,7 +86,7 @@ func _physics_process(_delta):
 	if pc.is_on_ceiling():
 		if not on_ceiling:
 			var ceiling_normal = pc.get_slide_collision(pc.get_slide_collision_count() - 1).get_normal()
-			bonk("head", ceiling_normal)
+			bonk(ceiling_normal)
 		on_ceiling = true
 	else:
 		on_ceiling = false
@@ -134,20 +135,23 @@ func _input(event):
 func do_coyote_time():
 	$CoyoteTimer.start(coyote_time)
 	await $CoyoteTimer.timeout
+	pc.is_in_coyote = false
 	if not pc.is_on_floor() and current_state == states["run"]:
-		pc.is_in_coyote = false
 		change_state("fall")
 		return
 
 
-func bonk(type, normal):
+func bonk(normal):
 	var effect = BONK.instantiate()
 	effect.position = pc.position
-	effect.type = type
 	effect.normal = normal
 	world.get_node("Front").add_child(effect)
 
-
+func land():
+	if pc.is_in_water: return
+	var effect = LAND.instantiate()
+	effect.position = pc.position
+	world.get_node("Front").add_child(effect)
 
 func jump():
 	if pc.is_forced_crouching: return

@@ -32,7 +32,7 @@ func state_process():
 		pc.is_crouching = false
 		pc.get_node("CollisionShape2D").set_deferred("disabled", false)
 		pc.get_node("CrouchingCollision").set_deferred("disabled", true)
-		
+	
 	if not pc.is_on_floor() and not pc.is_in_coyote:
 		pc.is_in_coyote = true
 		mm.do_coyote_time()

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_gqwwp"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_3ucb2"]
 [ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="4_c6eqk"]
-[ext_resource type="TileSet" uid="uid://cm4auuymtmne6" path="res://src/Tile/Wastes.tres" id="4_tdjow"]
+[ext_resource type="TileSet" uid="uid://8pqxsepnlqih" path="res://src/Tile/Wastes.tres" id="4_tdjow"]
 [ext_resource type="Texture2D" uid="uid://cb2wh1kjj4djx" path="res://assets/Background/TiledPlains.png" id="5_tj576"]
 [ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="5_w8juu"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="6_8lqyu"]
@@ -16,7 +16,7 @@
 [node name="WastesTesting" type="Node2D"]
 script = ExtResource("1_gqwwp")
 level_name = "WastesTesting"
-music = "shop"
+music = "dogtown_day"
 dialog_json = "res://src/Dialog/Village.json"
 conversation = "cutscene_test"
 

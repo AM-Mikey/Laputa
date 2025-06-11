@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://kcw3pix825mn"]
+
+[ext_resource type="Script" uid="uid://c8shp001ux0x5" path="res://src/Effect/LandParticle.gd" id="1_pyihj"]
+[ext_resource type="Texture2D" uid="uid://bnh31gdq0gim4" path="res://assets/Effect/Land.png" id="2_pyihj"]
+
+[sub_resource type="Animation" id="Animation_d7nyn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_arm4s"]
+resource_name = "Land"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ljblv"]
+_data = {
+&"Land": SubResource("Animation_arm4s"),
+&"RESET": SubResource("Animation_d7nyn")
+}
+
+[node name="LandParticle" type="Node2D"]
+light_mask = 2
+script = ExtResource("1_pyihj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_pyihj")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ljblv")
+}

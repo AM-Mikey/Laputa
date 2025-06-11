@@ -226,13 +226,33 @@ libraries = {
 &"": SubResource("AnimationLibrary_hpx8l")
 }
 
-[node name="RightCast" type="RayCast2D" parent="."]
+[node name="LeftCast" type="RayCast2D" parent="."]
 position = Vector2(-8, -8)
 target_position = Vector2(-1, 0)
 collision_mask = 8
 
-[node name="LeftCast" type="RayCast2D" parent="."]
+[node name="LeftCastU" type="RayCast2D" parent="."]
+position = Vector2(-8, -16)
+target_position = Vector2(-1, 0)
+collision_mask = 8
+
+[node name="LeftCastD" type="RayCast2D" parent="."]
+position = Vector2(-8, 0)
+target_position = Vector2(-1, 0)
+collision_mask = 8
+
+[node name="RightCast" type="RayCast2D" parent="."]
 position = Vector2(8, -8)
+target_position = Vector2(1, 0)
+collision_mask = 8
+
+[node name="RightCastU" type="RayCast2D" parent="."]
+position = Vector2(8, -16)
+target_position = Vector2(1, 0)
+collision_mask = 8
+
+[node name="RightCastD" type="RayCast2D" parent="."]
+position = Vector2(8, 0)
 target_position = Vector2(1, 0)
 collision_mask = 8
 
@@ -241,13 +261,52 @@ position = Vector2(0, -16)
 target_position = Vector2(0, -1)
 collision_mask = 8
 
+[node name="UpCastL" type="RayCast2D" parent="."]
+position = Vector2(-8, -16)
+target_position = Vector2(0, -1)
+collision_mask = 8
+
+[node name="UpCastR" type="RayCast2D" parent="."]
+position = Vector2(8, -16)
+target_position = Vector2(0, -1)
+collision_mask = 8
+
 [node name="DownCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 1)
+collision_mask = 8
+
+[node name="DownCastL" type="RayCast2D" parent="."]
+position = Vector2(-8, 0)
+target_position = Vector2(0, 1)
+collision_mask = 8
+
+[node name="DownCastR" type="RayCast2D" parent="."]
+position = Vector2(8, 0)
 target_position = Vector2(0, 1)
 collision_mask = 8
 
 [node name="Pivot" type="Marker2D" parent="."]
 position = Vector2(0, -8)
 gizmo_extents = 1.0
+
+[node name="PlayerLeftCast" type="RayCast2D" parent="."]
+position = Vector2(-8, -8)
+target_position = Vector2(-100, 0)
+collision_mask = 9
+
+[node name="PlayerRightCast" type="RayCast2D" parent="."]
+position = Vector2(8, -8)
+target_position = Vector2(100, 0)
+collision_mask = 9
+
+[node name="PlayerDownCast" type="RayCast2D" parent="."]
+position = Vector2(0, -16)
+target_position = Vector2(0, -100)
+collision_mask = 9
+
+[node name="PlayerUpCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 100)
+collision_mask = 9
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

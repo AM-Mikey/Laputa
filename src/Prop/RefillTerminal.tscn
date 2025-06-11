@@ -1,13 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://vmeytj0j6nm4"]
 
 [ext_resource type="Script" uid="uid://bar2epwbuic8c" path="res://src/Prop/RefillTerminal.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://dgktewce5k5jw" path="res://assets/Prop/0RefillTerminal.png" id="2_5osfq"]
 [ext_resource type="PackedScene" uid="uid://dr3fm60tuskyu" path="res://src/Audio/SFX.tscn" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
-
-[sub_resource type="Resource" id="Resource_4yonj"]
-metadata/__load_path__ = "res://assets/Prop/RefillTerminal.png"
 
 [sub_resource type="Animation" id="2"]
 length = 3.0
@@ -57,16 +55,15 @@ shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = SubResource("Resource_4yonj")
+texture = ExtResource("2_5osfq")
 hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_4ne20")
+&"": SubResource("AnimationLibrary_4ne20")
 }
 
 [node name="SFX" parent="." instance=ExtResource("3")]
-bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_RefillTerminal_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_RefillTerminal_body_exited"]

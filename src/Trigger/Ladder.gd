@@ -9,7 +9,8 @@ func _on_Ladder_body_entered(body):
 
 func _on_Ladder_body_exited(body):
 	if not get_overlap(body):
-		body.get_parent().mm.change_state("run")
+		if body.get_parent().mm.current_state == body.get_parent().mm.states["ladder"]:
+			body.get_parent().mm.change_state("run")
 	active_bodies.erase(body.get_parent())
 
 

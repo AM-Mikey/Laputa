@@ -21,8 +21,6 @@ func state_process():
 	if pc.is_on_floor() and not pc.is_on_ssp:
 		if Input.is_action_pressed("look_down") and pc.can_input:
 			mm.change_state("run")
-	#if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
-		#mm.bonk("head")  #TODO: fix multi bonks
 	animate()
 
 

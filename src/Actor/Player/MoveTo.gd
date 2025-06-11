@@ -32,18 +32,6 @@ func state_process():
 	mm.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
 	animate()
 
-
-#	if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
-#		mm.bonk("head")
-
-#	if pc.is_on_floor():
-#		if mm.forgive_timer.time_left == 0:
-#			mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
-#			if mm.bonk_timeout.time_left == 0:
-#				mm.bonk("feet")
-#		mm.forgive_timer.start(mm.forgiveness_time)
-
-
 	if abs(mm.move_target.x - pc.position.x) < 1: #when within one pixel
 		pc.move_dir.x = 0.0
 

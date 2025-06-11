@@ -35,12 +35,6 @@ func state_process():
 		new_velocity.y = max(mm.velocity.y, new_velocity.y)
 		
 	mm.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
-	
-	
-	
-	#if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
-		#mm.bonk("head")
-
 
 func set_move_dir():
 	var move_dir = Vector2.ZERO

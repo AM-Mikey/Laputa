@@ -1,12 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2jdho2mt8mfj"]
+[gd_scene load_steps=6 format=3 uid="uid://b2jdho2mt8mfj"]
 
 [ext_resource type="Script" uid="uid://ccd38yxcijdkm" path="res://src/Prop/LifeCapsule.gd" id="2"]
 
 [sub_resource type="RectangleShape2D" id="3"]
 size = Vector2(16, 16)
-
-[sub_resource type="Resource" id="Resource_pp62r"]
-metadata/__load_path__ = "res://assets/Prop/LifeCapsule.png"
 
 [sub_resource type="Animation" id="1"]
 resource_name = "Flash"
@@ -56,12 +53,11 @@ shape = SubResource("3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = SubResource("Resource_pp62r")
 hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_stpll")
+&"": SubResource("AnimationLibrary_stpll")
 }
 autoplay = "Flash"
 

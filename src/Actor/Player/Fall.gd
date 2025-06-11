@@ -22,15 +22,9 @@ func state_process():
 		
 	mm.velocity.y = min(mm.terminal_velocity, new_velocity.y) #only set y portion because we're doing move and slide with snap
 	animate()
-	
-	
-	#if pc.is_on_ceiling() and mm.bonk_timeout.time_left == 0:
-		#mm.bonk("head")
 
 	if pc.is_on_floor(): #landed
 		mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
-		#mm.bonk("feet")
-		#print("changing from fall to run")
 		mm.change_state("run")
 		return
 
@@ -126,6 +120,7 @@ func enter():
 	pc.get_node("SSPDetector/CollisionShape2D2").set_deferred("disabled", false)
 
 func exit():
+	pc.mm.land()
 	pc.get_node("CollisionShape2D").set_deferred("disabled", false)
 	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
 	pc.get_node("JumpCollision").set_deferred("disabled", true)
