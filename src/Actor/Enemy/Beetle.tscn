@@ -12,8 +12,8 @@ radius = 4.5
 height = 14.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qsmhk"]
-radius = 8.0
-height = 16.0
+radius = 7.0
+height = 15.0
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(14, 10)
@@ -227,62 +227,64 @@ libraries = {
 }
 
 [node name="LeftCast" type="RayCast2D" parent="."]
-position = Vector2(-8, -8)
-target_position = Vector2(-1, 0)
+position = Vector2(-7, -8)
+target_position = Vector2(-2, 0)
 collision_mask = 8
 
 [node name="LeftCastU" type="RayCast2D" parent="."]
-position = Vector2(-8, -16)
-target_position = Vector2(-1, 0)
+position = Vector2(-7, -16)
+target_position = Vector2(-2, 0)
 collision_mask = 8
 
 [node name="LeftCastD" type="RayCast2D" parent="."]
-position = Vector2(-8, 0)
-target_position = Vector2(-1, 0)
+position = Vector2(-7, 0)
+target_position = Vector2(-2, 0)
 collision_mask = 8
 
 [node name="RightCast" type="RayCast2D" parent="."]
-position = Vector2(8, -8)
-target_position = Vector2(1, 0)
+position = Vector2(7, -8)
+target_position = Vector2(2, 0)
 collision_mask = 8
 
 [node name="RightCastU" type="RayCast2D" parent="."]
-position = Vector2(8, -16)
-target_position = Vector2(1, 0)
+position = Vector2(7, -16)
+target_position = Vector2(2, 0)
 collision_mask = 8
 
 [node name="RightCastD" type="RayCast2D" parent="."]
-position = Vector2(8, 0)
-target_position = Vector2(1, 0)
+position = Vector2(7, 0)
+target_position = Vector2(2, 0)
 collision_mask = 8
 
 [node name="UpCast" type="RayCast2D" parent="."]
-position = Vector2(0, -16)
-target_position = Vector2(0, -1)
+position = Vector2(0, -15)
+target_position = Vector2(0, -2)
 collision_mask = 8
 
 [node name="UpCastL" type="RayCast2D" parent="."]
-position = Vector2(-8, -16)
-target_position = Vector2(0, -1)
+position = Vector2(-8, -15)
+target_position = Vector2(0, -2)
 collision_mask = 8
 
 [node name="UpCastR" type="RayCast2D" parent="."]
-position = Vector2(8, -16)
-target_position = Vector2(0, -1)
+position = Vector2(8, -15)
+target_position = Vector2(0, -2)
 collision_mask = 8
 
 [node name="DownCast" type="RayCast2D" parent="."]
-target_position = Vector2(0, 1)
+position = Vector2(0, -1)
+target_position = Vector2(0, 2)
 collision_mask = 8
+collide_with_areas = true
 
 [node name="DownCastL" type="RayCast2D" parent="."]
-position = Vector2(-8, 0)
-target_position = Vector2(0, 1)
+position = Vector2(-8, -1)
+target_position = Vector2(0, 2)
 collision_mask = 8
 
 [node name="DownCastR" type="RayCast2D" parent="."]
-position = Vector2(8, 0)
-target_position = Vector2(0, 1)
+position = Vector2(8, -1)
+target_position = Vector2(0, 2)
 collision_mask = 8
 
 [node name="Pivot" type="Marker2D" parent="."]
@@ -299,14 +301,39 @@ position = Vector2(8, -8)
 target_position = Vector2(100, 0)
 collision_mask = 9
 
-[node name="PlayerDownCast" type="RayCast2D" parent="."]
+[node name="PlayerUpCast" type="RayCast2D" parent="."]
 position = Vector2(0, -16)
 target_position = Vector2(0, -100)
 collision_mask = 9
 
-[node name="PlayerUpCast" type="RayCast2D" parent="."]
+[node name="PlayerDownCast" type="RayCast2D" parent="."]
 target_position = Vector2(0, 100)
 collision_mask = 9
+
+[node name="WorldLeftCast" type="RayCast2D" parent="."]
+position = Vector2(-8, -8)
+target_position = Vector2(-200, 0)
+collision_mask = 8
+
+[node name="WorldRightCast" type="RayCast2D" parent="."]
+position = Vector2(8, -8)
+target_position = Vector2(200, 0)
+collision_mask = 8
+
+[node name="WorldUpCast" type="RayCast2D" parent="."]
+position = Vector2(0, -16)
+target_position = Vector2(0, -200)
+collision_mask = 8
+
+[node name="WorldDownCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 200)
+collision_mask = 8
+
+[node name="FlyCooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="FlipCooldown" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

@@ -26,7 +26,7 @@ func _physics_process(_delta):
 	$VBox/General/Screen.text = str(get_window().get_size().x) + "x" + str(get_window().get_size().y)
 	
 	
-	if is_instance_valid(world.get_node("Juniper")):
+	if is_instance_valid(world.get_node("Juniper")): #TODO: invalid upon death
 		var pc = world.get_node("Juniper")
 		var mm = pc.get_node("MovementManager")
 		var active_gun = null
