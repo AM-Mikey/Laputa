@@ -123,7 +123,6 @@ func do_idlescan():
 
 func enter_fly():
 	$FlyCooldown.start(fly_cooldown_time)
-	print(move_dir)
 	match move_dir.x:
 		-1.0: $Sprite2D.flip_h = false
 		1.0: $Sprite2D.flip_h = true
@@ -252,10 +251,8 @@ func get_crawl_sprite(): #TODO fix
 		Vector2.LEFT:
 			$Sprite2D.rotation_degrees = 90
 			if move_dir == Vector2.UP:
-				print("up")
 				$Sprite2D.flip_h = false
 			elif move_dir == Vector2.DOWN:
-				print("down")
 				$Sprite2D.flip_h = true
 		Vector2.RIGHT:
 			$Sprite2D.rotation_degrees = 270

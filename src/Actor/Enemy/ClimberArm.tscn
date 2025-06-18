@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://bd7eb5fja305a"]
+
+[ext_resource type="Script" uid="uid://y6ak7rqu8052" path="res://src/Actor/Enemy/ClimberArm.gd" id="1_61cwp"]
+[ext_resource type="Texture2D" uid="uid://dsb7pimaiub0y" path="res://assets/Actor/Enemy/Climber.png" id="2_7tnkt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qm1p1"]
+radius = 3.0
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lodrl"]
+size = Vector2(6, 6)
+
+[sub_resource type="CanvasItemMaterial" id="11"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o6omx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_61cwp"]
+radius = 3.0
+
+[node name="ClimberArm" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+collision_layer = 2
+collision_mask = 520
+script = ExtResource("1_61cwp")
+metadata/_custom_type_script = "uid://clpkxqaavntw4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qm1p1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(0, 7)
+collision_layer = 131072
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -7)
+shape = SubResource("1")
+debug_color = Color(0, 1, 0, 0.235294)
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 262144
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_lodrl")
+debug_color = Color(1, 0, 0, 0.235294)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 4
+material = SubResource("11")
+texture = ExtResource("2_7tnkt")
+hframes = 8
+vframes = 2
+frame = 9
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_o6omx")
+}
+
+[node name="WorldDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 520
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldDetector"]
+shape = SubResource("CircleShape2D_61cwp")
+debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
