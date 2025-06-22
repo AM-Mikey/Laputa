@@ -12,7 +12,7 @@ var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
 var speed = Vector2(90, 180)
 var crouch_speed = 70.0
-var gravity = 300.0
+var gravity = 300.0 #this is different from actor.gravity
 var velocity = Vector2.ZERO
 var acceleration = 2.0 #was 2.5, changed 10.26.22
 var ground_cof = 0.1

@@ -9,7 +9,7 @@ func _ready():
 	sfx = "gun_pistol"
 	bullet_scene = load("res://src/Bullet/MPistol.tscn")
 	automatic = true
-	ammo = 200
+	ammo = 30
 	max_level = 3
 	load_level()
 
@@ -20,7 +20,7 @@ func load_level():
 			f_range = 150
 			speed = 400
 			cooldown_time = 0.2
-			max_ammo = 200
+			max_ammo = 30
 			max_xp = 20
 		2:
 
@@ -28,13 +28,13 @@ func load_level():
 			f_range = 150
 			speed = 400
 			cooldown_time = 0.15
-			max_ammo = 250
+			max_ammo = 50
 			max_xp = 20
 		3:
 			damage = 2
 			speed = 400
 			cooldown_time = 0.15
-			max_ammo = 250
+			max_ammo = 70
 			max_xp = 10
 
 func activate():

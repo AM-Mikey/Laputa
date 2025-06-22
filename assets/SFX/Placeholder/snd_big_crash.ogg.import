@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/snd_big_crash.ogg-7eb621af7cef18f862155373750
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

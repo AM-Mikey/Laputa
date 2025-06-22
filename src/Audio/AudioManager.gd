@@ -55,6 +55,7 @@ signal players_updated
 	
 	"level_up": preload("res://assets/SFX/Placeholder/snd_level_up.ogg"),
 	
+	"enemy_die": preload("res://assets/SFX/Placeholder/snd_little_crash.ogg"),
 	"enemy_jump": preload("res://assets/SFX/Placeholder/snd_critter_jump.ogg"),
 	"enemy_croak": preload("res://assets/SFX/FrogCroak.ogg"),
 	"enemy_hurt": preload("res://assets/SFX/Placeholder/snd_enemy_hurt.ogg"),

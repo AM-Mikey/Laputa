@@ -1,10 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dol3v8dg0drgu"]
+[gd_scene load_steps=9 format=3 uid="uid://dol3v8dg0drgu"]
 
 [ext_resource type="Script" uid="uid://c2bm3y56ilkuj" path="res://src/Actor/Enemy/Climber.gd" id="1_7gha7"]
 [ext_resource type="Texture2D" uid="uid://dsb7pimaiub0y" path="res://assets/Actor/Enemy/Climber.png" id="2_u0hs7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qm1p1"]
-radius = 8.01561
+radius = 7.5
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
@@ -16,9 +16,12 @@ size = Vector2(14, 14)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o6omx"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7gha7"]
+size = Vector2(16, 0.5)
+
 [node name="Climber" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
-collision_mask = 520
+collision_mask = 0
 script = ExtResource("1_7gha7")
 debug = true
 editor_hidden = false
@@ -63,9 +66,15 @@ one_shot = true
 
 [node name="Arms" type="Node2D" parent="."]
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-modulate = Color(0, 0, 64.641, 1)
-texture = ExtResource("2_u0hs7")
-hframes = 8
-vframes = 2
-frame = 14
+[node name="GroundDetector" type="Area2D" parent="."]
+position = Vector2(0, 8)
+collision_layer = 0
+collision_mask = 520
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetector"]
+position = Vector2(0, -0.25)
+shape = SubResource("RectangleShape2D_7gha7")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="body_entered" from="GroundDetector" to="." method="_on_GroundDetector_body_entered"]

@@ -18,7 +18,10 @@ var protected = false
 
 var hp: int
 var damage_on_contact: int
-var hurt_sound = "enemy_hurt" 
+var enemy_damage_on_contact: int
+var hit_enemies_on_contact = false
+var hurt_sound = "enemy_hurt"
+var die_sound = "enemy_die" 
 var damagenum = null
 var damagenum_timer = null
 var damagenum_time: float = 0.5
@@ -187,6 +190,7 @@ func die(quietly = false):
 		pc = get_tree().get_root().get_node_or_null("World/Juniper")
 	pc.enemies_touching.erase(self)
 	if !quietly:
+		am.play(die_sound, self)
 		do_death_routine()
 		do_death_drop()
 		var explosion = EXPLOSION.instantiate()
@@ -218,7 +222,7 @@ func do_death_drop():
 	var drop = rng.randf_range(0, total_chance)
 	
 	if drop <= heart_chance: # drop hp
-		heart.position = position
+		heart.position = global_position
 		match reward:
 			1,2: heart.value = 2
 			3,4,5: heart.value = 4
@@ -239,12 +243,12 @@ func do_death_drop():
 		while loop_times > 0:
 			var experience = EXPERIENCE.instantiate()
 			experience.value = value
-			experience.position = position
+			experience.position = global_position
 			world.middle.add_child(experience)
 			loop_times -= 1
 
 	else: #drop ammo
-		ammo.position = position
+		ammo.position = global_position
 		match reward:
 			1,2: ammo.value = 0.2
 			3,4,5,6,7,8,9,10: ammo.value = 0.5
@@ -255,7 +259,16 @@ func do_death_drop():
 ### SIGNALS ###
 
 func _on_hitbox_area_entered(area):
-	area.get_parent().enemy_entered(self)
+	if area.get_collision_layer_value(17): #playerhurt
+		area.get_parent().enemy_entered(self)
+	elif area.get_collision_layer_value(18) and hit_enemies_on_contact == true: #do they need iframes?
+		if area.get_parent() != self:
+			var enemy_damage = damage_on_contact
+			if enemy_damage_on_contact:
+				enemy_damage = enemy_damage_on_contact
+			area.get_parent().hit(enemy_damage, Vector2(area.global_position - global_position).normalized())
 
 func _on_hitbox_area_exited(area):
-	area.get_parent().enemy_exited(self)
+	if area.get_collision_layer_value(17): #playerhurt
+		area.get_parent().enemy_exited(self)
+	#elif area.get_collision_layer(18) and hit_enemies_on_contact == true:

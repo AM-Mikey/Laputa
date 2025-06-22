@@ -37,6 +37,7 @@ func setup():
 			wait_time = 0.1
 			$Sprite2D.texture = TX_2
 	damage_on_contact = base_damage
+	enemy_damage_on_contact = 999
 	speed = Vector2.ZERO
 	base_gravity = gravity
 	gravity = 0
@@ -69,6 +70,7 @@ func enter_hangactive():
 
 func enter_drop():
 	gravity = base_gravity
+	hit_enemies_on_contact = true
 	damage_on_contact = drop_damage
 
 func do_drop():
@@ -80,6 +82,8 @@ func do_drop():
 			change_state("squirm")
 			return
 
+func exit_drop():
+	hit_enemies_on_contact = false
 
 func enter_squirm():
 	$RayCast2D.queue_free()
