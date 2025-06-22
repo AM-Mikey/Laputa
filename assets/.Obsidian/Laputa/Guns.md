@@ -7,3 +7,4 @@ Speeder -> No ref
 Haymaker -> Silenced Ruger 22
 Blunderbus ->
 Tsurugi -> Iron sword (japanese)
+??? -> ZB47

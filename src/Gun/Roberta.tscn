@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn8xosty72skm"]
+
+[ext_resource type="Script" uid="uid://dil1obbbs3kmr" path="res://src/Gun/Roberta.gd" id="1_jcfyy"]
+[ext_resource type="Texture2D" uid="uid://ctcy7ibj173p5" path="res://assets/Gun/Roberta.png" id="2_jcfyy"]
+
+[node name="Roberta" type="Node2D"]
+script = ExtResource("1_jcfyy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_jcfyy")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(-7, -1)

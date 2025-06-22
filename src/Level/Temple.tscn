@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://8qpwe0pcud22"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_4uhn8"]
-[ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_abgb0"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_c0ys6"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
-[ext_resource type="TileSet" path="res://src/Tile/Temple.tres" id="5_j20xi"]
-[ext_resource type="Texture2D" path="res://assets/Background/TiledPlains.png" id="5_njn3k"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_4uhn8"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_abgb0"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
+[ext_resource type="TileSet" uid="uid://hyq6f5pg0oh8" path="res://src/Tile/Temple.tres" id="5_j20xi"]
+[ext_resource type="Texture2D" uid="uid://cb2wh1kjj4djx" path="res://assets/Background/TiledPlains.png" id="5_njn3k"]
 
 [node name="Temple" type="Node2D"]
 script = ExtResource("1_4uhn8")
@@ -14,13 +13,11 @@ music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 conversation = "cutscene_test"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." instance=ExtResource("3_t226a")]
+[node name="LevelLimiter" parent="." instance=ExtResource("3_t226a")]
 offset_left = -256.0
 offset_top = -256.0
 offset_right = 1088.0
 offset_bottom = 352.0
-mouse_filter = 2
-script = ExtResource("3_c0ys6")
 background_resource = ExtResource("3_abgb0")
 texture = ExtResource("5_njn3k")
 layers = 5

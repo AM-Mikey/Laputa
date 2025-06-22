@@ -187,12 +187,15 @@ func die(quietly = false):
 		pc = get_tree().get_root().get_node_or_null("World/Juniper")
 	pc.enemies_touching.erase(self)
 	if !quietly:
+		do_death_routine()
 		do_death_drop()
 		var explosion = EXPLOSION.instantiate()
 		explosion.position = global_position
 		world.front.add_child(explosion)
 	queue_free()
 
+func do_death_routine(): #shadow this for individual enemies ##note this doesnt wait for the function to finish, so anything that requires await will be cut short
+	pass
 
 func do_death_drop():
 	if reward == 0:return
