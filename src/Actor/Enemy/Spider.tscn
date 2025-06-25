@@ -1,16 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://ced57a1w0tgdk"]
+[gd_scene load_steps=9 format=3 uid="uid://ced57a1w0tgdk"]
 
 [ext_resource type="Script" uid="uid://d2yv8egvqk153" path="res://src/Actor/Enemy/Spider.gd" id="1_shhv2"]
 [ext_resource type="Texture2D" uid="uid://bwimmhc71ip4k" path="res://assets/Actor/Enemy/SpiderBody.png" id="2_impgl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qm1p1"]
-radius = 4.5
+radius = 7.5
 
 [sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shhv2"]
 size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(144, 112)
+size = Vector2(48, 48)
 
 [sub_resource type="CanvasItemMaterial" id="11"]
 
@@ -22,7 +25,6 @@ collision_mask = 520
 script = ExtResource("1_shhv2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2.5)
 shape = SubResource("CircleShape2D_qm1p1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
@@ -36,12 +38,19 @@ position = Vector2(0, -7)
 shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 262144
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_shhv2")
+debug_color = Color(1, 0, 0, 0.235294)
+
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-position = Vector2(0, -8)
 shape = SubResource("2")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
@@ -54,6 +63,8 @@ texture = ExtResource("2_impgl")
 libraries = {
 &"": SubResource("AnimationLibrary_o6omx")
 }
+
+[node name="StateTimer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

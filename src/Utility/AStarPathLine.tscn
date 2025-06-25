@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dnxgr4c1h81sw"]
+
+[node name="AStarPathLine" type="Line2D" groups=["AStarPathLines"]]
+width = 1.0
+default_color = Color(1, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
