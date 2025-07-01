@@ -1,5 +1,7 @@
 #character #villain #laputan #boss
 
+![[Pasted image 20250625181739.png]]
+
 Emily is one of the bodyguards assigned to protect [[King Davey]]. She is a [[Laputans|Laputan]], like [[Alexander]]. She is mostly silent and always seems to have pissed-off expression. She has a strong sense of justice and will fight until death to protect the [[Laputan Crown|King]].
 
 #### Personality

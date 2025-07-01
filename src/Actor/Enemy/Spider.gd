@@ -38,7 +38,7 @@ func setup_a_star():
 	var tile_map = w.current_level.get_node("TileMap")
 	a_star_grid.region = tile_map.get_used_rect()
 	a_star_grid.cell_size = Vector2(16, 16)
-	a_star_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	a_star_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES  
 	a_star_grid.offset = Vector2(8, 8)
 	a_star_grid.update()
 	

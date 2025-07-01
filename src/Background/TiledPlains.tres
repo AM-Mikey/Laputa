@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Background" load_steps=3 format=3 uid="uid://551crugmnes0"]
 
 [ext_resource type="Script" uid="uid://ceqy767o44qkp" path="res://src/Background/Background.gd" id="1_kvovw"]
-[ext_resource type="Texture2D" uid="uid://cb2wh1kjj4djx" path="res://assets/Background/TiledPlains.png" id="2_ayba2"]
+[ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="2_kvovw"]
 
 [resource]
 script = ExtResource("1_kvovw")
-texture = ExtResource("2_ayba2")
+texture = ExtResource("2_kvovw")
 layers = 5
 layer_scales = {
 0: Vector2(0, 0),

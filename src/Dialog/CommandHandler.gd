@@ -96,7 +96,7 @@ func face(string):
 	no_face_spacer.visible = false
 	face_node.visible = true
 	
-	face_sprite.texture = load("res://assets/UI/Face/%s.png" % id.capitalize())
+	face_sprite.texture = load("res://assets/Face/%s.png" % id.capitalize())
 	face_sprite.hframes = face_sprite.texture.get_width() / 48
 	face_sprite.frame = expression
 	
@@ -244,7 +244,7 @@ func lookat(string): #TODO: enable multiple lookers
 			printerr("COMMAND ERROR: could not find NPC with id: " + target_id)
 			return
 	
-	for n in found_npcs:
+	for n in found_npcs: #only looks at last n
 		n.look_at_node(found_target)
 	
 
