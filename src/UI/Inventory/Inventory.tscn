@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dbyknhh1oyx5i" path="res://src/UI/Inventory/WeaponWheel.tscn" id="7"]
 [ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="7_y7abv"]
 [ext_resource type="StyleBox" uid="uid://d20qvx0q5xflf" path="res://src/UI/StyleBox/RustTrimmedScrews.tres" id="8"]
-[ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momo.ttf" id="8_1e805"]
+[ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="8_1e805"]
 [ext_resource type="StyleBox" uid="uid://dceypmylvy2ho" path="res://src/UI/StyleBox/StoneBeveled.tres" id="9"]
 
 [node name="Inventory" type="MarginContainer"]

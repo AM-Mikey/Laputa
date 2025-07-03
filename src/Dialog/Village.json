@@ -67,7 +67,8 @@
 	/left,child this flipped me left
 	looking at player /lookat,child,pc
 	looking at nun /lookat,child,nun
-	walking to waypoint 0 /waypoint,child,0
+	/clear /name,juniper /face,juniper ...
+	/clear /name,kermit /face,child walking to waypoint 0 /waypoint,child,0
 	walking to waypoint 1 /waypoint,child,1
 	",
 	

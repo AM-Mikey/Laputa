@@ -4,6 +4,7 @@
 
 [node name="PlayerCamera" type="Camera2D" groups=["Cameras"]]
 position = Vector2(0, -16)
+process_callback = 0
 limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("1")

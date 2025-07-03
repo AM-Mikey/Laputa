@@ -1,13 +1,12 @@
 extends Node #TODO: this script needs major cleanup
 
 const YN = preload("res://src/Dialog/DialogYesNo.tscn")
-const TBOX = preload("res://src/Dialog/TopicBox.tscn")
+const dlOX = preload("res://src/Dialog/TopicBox.tscn")
 
 @onready var world = get_tree().get_root().get_node("World")
 @onready var pc = get_tree().get_root().get_node("World/Juniper")
 @onready var db = get_parent()
-
-@onready var tb = db.get_node("Margin/HBox/RichTextBox")
+@onready var dl = db.get_node("DialogLabel")
 
 
 func parse_command(string):
@@ -23,13 +22,26 @@ func parse_command(string):
 	#print("argument: ", argument)
 
 	match await function: #TODO: probably slow, replace this with something else
-		"face":#				/face, (sprite_name) 									changes face_sprite to the specified file
+		#/face, (sprite_name)
+		#changes face_sprite to the specified file
+		"face":
 			face(argument)
-		"flipface":#			/flipface, (string: direction)							flips the face sprite, to the opposite direction, or in a specified direction
+		#/flipface, (string: direction)
+		#flips the face sprite, to the opposite direction, or in a specified direction
+		"flipface":
 			flip_face(argument)
-		"name":#				/name, (string)											prints a name on the first line
-			display_name(argument)
-		
+		#/name, (string)
+		"name":
+			if argument == "":
+				printerr("COMMAND ERROR: no npc given for /name")
+				return
+			db.display_name(argument)
+		"hidename":
+			db.hide_name()
+		"newchar": #/newchar, (face), (name)
+			var a = string.split(",")
+			face(a[0].to_lower())
+			db.display_name( a[1].to_lower())
 		"hide":#				/hide, (string: npc_id)									makes the npc with given id invisible
 			set_visible(argument, false)
 		"unhide":
@@ -58,7 +70,7 @@ func parse_command(string):
 			flip("right", argument)
 		
 		"clear":#																		clears the text		(use at start of text)
-			tb.text = ""
+			dl.text = ""
 		"wait":#					/wait, (float: duration = 1.0)						clears text and hides db until duration
 			await wait(argument)
 		"auto":#																		blocks input and automatically progresses text
@@ -70,9 +82,9 @@ func parse_command(string):
 		"skipinput":#																		automatically progresses the next line
 			skipinput()
 			
-		#"tbox":
+		#"dlox":
 			#pc.disable()
-			#world.get_node("UILayer").add_child(TBOX.instantiate())
+			#world.get_node("UILayer").add_child(dlOX.instantiate())
 	
 	
 
@@ -80,8 +92,7 @@ func parse_command(string):
 ### COMMANDS ###
 
 func face(string):
-	var no_face_spacer = db.get_node("Margin/HBox/NoFaceSpacer")
-	var face_node = db.get_node("Margin/HBox/Face")
+	var face_node = db.get_node("Face")
 	var face_sprite = face_node.get_node("Sprite2D")
 	
 	if string == "":
@@ -93,15 +104,16 @@ func face(string):
 	if face.size() > 1:
 		expression = int(face[1])
 	
-	no_face_spacer.visible = false
 	face_node.visible = true
 	
 	face_sprite.texture = load("res://assets/Face/%s.png" % id.capitalize())
 	face_sprite.hframes = face_sprite.texture.get_width() / 48
 	face_sprite.frame = expression
 	
+	face_sprite.position.x = -48
 	var tween = get_tree().create_tween()
 	tween.tween_property(face_sprite, "position", Vector2.ZERO, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
 
 func flip_face(arguement):
 	if not arguement:
@@ -109,22 +121,7 @@ func flip_face(arguement):
 	else:
 		db.flip_face(arguement)
 
-func display_name(string):
-	tb.text = "" #clear text for new speaker
-	
-	var color = "goldenrod"
-	var name_regex = RegEx.new()
-	name_regex.compile("\\[b]\\[color=" + color + "].*\\[/color]\\[/b]")
-	tb.text = name_regex.sub(tb.text, "")
 
-	if string == "":
-		printerr("COMMAND ERROR: no npc given for /name")
-		return
-	
-	var display_name = string.capitalize() + ": "
-	tb.text = "[b][color=" + color + "]" + display_name + "[/color][/b]" + tb.text
-	
-	
 func set_visible(string, visible):
 	if string == "":
 		printerr("COMMAND ERROR: no npc given for /hide or /unhide")
@@ -178,10 +175,10 @@ func on_select_branch(branch):
 		seek("/" + branch)
 		
 	print("adding extra newline") #inserting newlines like this bypasses the input_event() line check, so add that code here
-	tb.text += "\n"
+	dl.text += "\n"
 	db.busy = false
-	if tb.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
-		tb.text = ""
+	if dl.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
+		dl.text = ""
 	db.dialog_loop()
 
 
@@ -189,7 +186,7 @@ func end_branch():
 	db.active = false
 	db.flash_cursor()
 	print("adding back newline")
-	tb.text += "\n"
+	dl.text += "\n"
 	seek("/m")
 	db.step -= 3 #5 it changed #WHY WHY WHY WHY WHY #this is probably the cause of the step number going out of sync
 	#we should hope to eliminate steps alltogether

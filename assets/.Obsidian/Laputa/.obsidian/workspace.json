@@ -14,12 +14,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Groups/Corp..md",
+                "file": "Characters/Basil.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Corp."
+              "title": "Basil"
             }
           }
         ]
@@ -47,16 +47,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Concepts/Timeline of Events Before Laputa.md",
+                "file": "Objects/Machine.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Timeline of Events Before Laputa"
+              "title": "Machine"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -200,35 +199,35 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "0b2f6be5223829c1",
+  "active": "716f7f890990af0d",
   "lastOpenFiles": [
-    "Characters/Parsley and Thyme.md",
+    "Characters/Basil.md",
     "Characters/King Davey.md",
-    "Characters/Colin.md",
-    "Characters/Fuuka.md",
-    "Characters/Laputa's Former King.md",
-    "Concepts/Ethnicity.md",
-    "The World/Monsters and Animals.md",
-    "The World/Dinero.md",
-    "The World/Island of Laputa.md",
-    "Groups/Night Parade.md",
-    "Characters/Treasure Hunter.md",
-    "Concepts/Mon.md",
-    "Concepts/Cloud Curtain.md",
+    "Objects/Vehicles/Sushi.md",
+    "Objects/Vehicles/Train.md",
+    "Characters/Scrum.md",
+    "Characters/Rosemary.md",
+    "Objects/McGuffin.md",
+    "The World/Areas/Capital City.md",
+    "Characters/Sage.md",
     "Groups/Dogtown Residents.md",
-    "Groups/Colonists.md",
-    "Concepts/Timeline of Events Before Laputa.md",
-    "Concepts/Second Inhabitants.md",
+    "Groups/Night Parade.md",
+    "Objects/Vehicles/Zephyr.md",
+    "The World/Island of Laputa.md",
+    "Groups/Laputans.md",
+    "Concepts/Laputan Crown.md",
+    "The World/Areas/Wastes.md",
+    "Characters/Alexander.md",
     "Concepts/Resistance.md",
-    "Concepts/Religion.md",
-    "Concepts/Life on Laputa.md",
-    "Groups/Sky Pirates.md",
-    "Groups/Winter Town Residents.md",
+    "Characters/Juniper.md",
+    "The World/Areas/Dogtown.md",
+    "Objects/Vehicles/Jalopy.md",
+    "The World/Areas/Ravine.md",
+    "Pirates.md",
     "The World/Areas/Ancient Ruins.md",
-    "Guns.md",
+    "Concepts/Gender.md",
+    "Objects/Machine.md",
     "Aseprite_ujhX9SUnNc.png",
-    "Groups/LZH Firearms Co..md",
-    "Groups/Lost Boys.md",
     "Pasted image 20250625183949.png",
     "Aseprite_EEozVk20AW.png",
     "Pasted image 20250625183436.png",

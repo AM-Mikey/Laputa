@@ -18,19 +18,21 @@ enum {FLASH_NONE, FLASH_NORMAL, FLASH_END}
 var flash_type = FLASH_NONE
 var flash_step: int = 0
 
-@onready var tb = $Margin/HBox/RichTextBox
-@onready var face_container = $Margin/HBox/Face
-@onready var face_sprite = $Margin/HBox/Face/Sprite2D
-@onready var world = get_tree().get_root().get_node("World")
+@onready var tb = $DialogLabel
+@onready var face_container = $Face
+@onready var face_sprite = $Face/Sprite2D
+@onready var w = get_tree().get_root().get_node("World")
 @onready var pc = get_tree().get_root().get_node("World/Juniper")
 
 func _ready():
 	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 	on_viewport_size_changed()
-	tb.text = "\n" #""
+	tb.text = "" # "\n" if only one line
 	
 	for e in get_tree().get_nodes_in_group("Enemies"):
 		e.disable()
+	
+	hide_name()
 
 
 
@@ -145,16 +147,16 @@ func _on_flash_timer_timeout():
 	elif flash_type == FLASH_END:
 		match flash_step:
 			0:
-				tb.text = flash_original_text + "[color=goldenrod] |[/color]"
+				tb.text = flash_original_text + "[color=goldenrod] ¤[/color]"
 				$FlashTimer.wait_time = 0.1
 			1:
-				tb.text = flash_original_text + "[color=goldenrod] \\[/color]"
+				tb.text = flash_original_text + "[color=goldenrod] €[/color]"
 				$FlashTimer.wait_time = 0.075
 			2:
-				tb.text = flash_original_text + "[color=goldenrod] -[/color]"
+				tb.text = flash_original_text + "[color=goldenrod] £[/color]"
 				$FlashTimer.wait_time = 0.1
 			3:
-				tb.text = flash_original_text + "[color=goldenrod] /[/color]"
+				tb.text = flash_original_text + "[color=goldenrod] ¢[/color]"
 				$FlashTimer.wait_time = 0.2
 		flash_step = (flash_step + 1) % 4 #warning, this is never reset
 
@@ -183,6 +185,8 @@ func exit():
 		pc.mm.change_state("run") #change to run so we don't continue a jump
 	for e in get_tree().get_nodes_in_group("Enemies"):
 		e.enable()
+	if w.ui.has_node("HUD"):
+			w.ui.get_node("HUD").visible = true
 	queue_free()
 
 ### HELPERS
@@ -198,7 +202,7 @@ func exit():
 			#$Margin/HBox/Face.visible = false
 
 func align_box():
-	var viewport_size = get_tree().get_root().size / world.resolution_scale
+	var viewport_size = get_tree().get_root().size / w.resolution_scale
 	var pc_pos = pc.global_position
 	var camera = get_viewport().get_camera_2d()
 	var camera_center = camera.get_screen_center_position()
@@ -207,7 +211,25 @@ func align_box():
 		position.y = viewport_size.y - (size.y + 16)
 	else: #top
 		position.y = 16
+		if w.ui.has_node("HUD"):
+			w.ui.get_node("HUD").visible = false
 
+
+func display_name(name: String):
+	$NamePanel.visible = true
+	$NameShadow.visible = true
+	$HBox/NameLabel.visible = true
+	$NameShadow.global_position = $HBox/NameLabel.global_position - Vector2.ONE
+	$HBox/NameLabel.text = name.capitalize()
+	$NameShadow.text = name.capitalize()
+	await get_tree().create_timer(0.01).timeout
+	$NameShadow.size = $HBox/NameLabel.size
+	$NamePanel.size.x = $HBox/NameLabel.size.x + 19
+
+func hide_name():
+	$NamePanel.visible = false
+	$NameShadow.visible = false
+	$HBox/NameLabel.visible = false
 
 func flip_face(dir = "auto"):
 	if dir == "auto":
@@ -228,8 +250,8 @@ func flip_face(dir = "auto"):
 ### SIGNALS
 
 func on_viewport_size_changed():
-	var viewport_size = get_tree().get_root().size / world.resolution_scale
-	#rect_size = get_tree().get_root().size / world.resolution_scale
+	var viewport_size = get_tree().get_root().size / w.resolution_scale
+	#rect_size = get_tree().get_root().size / w.resolution_scale
 	size.x = min(viewport_size.x, 400)
 	position.x = (viewport_size.x - size.x) /2
 	position.y = viewport_size.y - 80

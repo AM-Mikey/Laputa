@@ -178,17 +178,14 @@ add state for starting level(?)
 default state is inspect?? why
 
 --- level ---
-x				fix first time level loading with a custom function
-X				fix editorlevellimiter not displaying blackbars on startup (switch to level camera? idk
-X				focus camera on juniper on load via level editor
-fix level preview on main menu
-update non-skip menu code
+fix level preview on main menu and update non-skip menu code
 fix save/load
 fix playerless cutscene levels
 
+first time setup without save data crashes the game on world -> read level from temp()
+
 -- background ---
 
-x				c counts as cancel in ui code. we cant type in c in savedialogs
 we have to save as resource to save our changes to bk!!
 tile map background enum changes
 animated bk not working in editor
@@ -198,19 +195,44 @@ add layer horizontal offsets (for if we want the layer to start earlier because 
 ---triggers---
 spawn preview
 stop adding more triggers on level reload
-X			flying into level causes effect to never end
-
-
-X			trigger color fix
 editor select trigger color fix
+enable shooting on ladders
+ladder climb animation
+drop through semisolid platform if there is a ladder
 
 ---Effect---
-X			bubble effect on juniper
+bubble sfx
 first time load wipe in(?)
+level up/down graphics
+out of ammo animation
+explosion effect
+differentiate player and enemy damage numbers
 
----world---
-X			window divide by 0 on height == 0
 
 ---INSPECTOR---
 clean up button order on background
 background button for loading is fucked. try making it up to spec with string etc
+
+
+---enemy---
+update any enemy that's x or y size is 16px to be smaller to fit through gaps
+change enemy collision shapes on animate?
+enemy grab region is crazy small on toggler
+animate climber and change sprite based on level
+
+
+---bullet---
+clarify SSP bullet bounce behavior
+
+--gun--
+restore ammo on level up
+blunderbuss buckshot sprites/particles and icon
+guns with stocks need proper sprite support.
+	this would require an arm layer or something specific
+
+--editor---x
+reload wastes.tscn
+
+
+--text--
+animation finished (use characters, cent, pound, euro, circle with x,

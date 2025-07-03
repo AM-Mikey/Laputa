@@ -1,0 +1,6 @@
+You can "bowl" grenades by holding <down> when you fire them. Grenades that touch the ground do less damage, but bowling makes it easier to aim!
+
+The auto-fire button, <Z>, will also lock your orientation when firing non-automatic guns.
+
+Purple Stalagtites make for good platforms. Blue and Red? Not so much.
+
