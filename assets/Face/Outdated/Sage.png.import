@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://eou2attg2l87"
-path="res://.godot/imported/YellowRobot.png-521ed3c94e9b7ad887d795aa43aa7be8.ctex"
+uid="uid://cxkmkqp3m2ub4"
+path="res://.godot/imported/Sage.png-7199d0e13d616a9758fd2b81789a34e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Face/YellowRobot.png"
-dest_files=["res://.godot/imported/YellowRobot.png-521ed3c94e9b7ad887d795aa43aa7be8.ctex"]
+source_file="res://assets/Face/Outdated/Sage.png"
+dest_files=["res://.godot/imported/Sage.png-7199d0e13d616a9758fd2b81789a34e2.ctex"]
 
 [params]
 

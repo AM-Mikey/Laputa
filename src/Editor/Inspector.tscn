@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1"]
 [ext_resource type="Script" uid="uid://ul3hypjc8cyj" path="res://src/Editor/Inspector.gd" id="2"]
-[ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momo.ttf" id="3_x868a"]
+[ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="3_x868a"]
 [ext_resource type="Script" uid="uid://6ci8g1yjeufc" path="res://src/Editor/FileDialogOverride.gd" id="4_b2bhf"]
 
 [node name="Inspector" type="MarginContainer"]

@@ -101,7 +101,10 @@ func do_step(): #TODO: this is a failsafe, only works with run animations. for s
 func enemy_entered(enemy):
 	enemies_touching.append(enemy)
 	var damage = enemy.damage_on_contact
-	var knockback_direction = Vector2(sign(global_position.x - enemy.global_position.x), 0)
+	var touching_distance = abs((global_position.x /16.0) - (enemy.global_position.x /16.0)) #this calculation returns a number between -1 and 1 based on how many tiles they are away
+	var touching_dir = sign(global_position.x - enemy.global_position.x)
+	var knockback_direction = Vector2((min(touching_distance, 1) * touching_dir), 0) #note this will always return the max direction for enemies of size greater than one tile.
+	#print("kb: ", knockback_direction)
 	hit(damage, knockback_direction)
 
 func enemy_exited(enemy):
@@ -136,6 +139,7 @@ func hit(damage, knockback_direction):
 				emit_signal("guns_updated", guns.get_children())
 		if knockback_direction != Vector2.ZERO:
 			#print("Knockback in Dir: " + str(knockback_direction))
+			mm.knockback_direction = knockback_direction
 			mm.snap_vector = Vector2.ZERO
 			mm.change_state("knockback")
 

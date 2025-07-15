@@ -41,6 +41,7 @@ _data = {
 }
 
 [node name="TransitionIris" type="Control"]
+z_index = 999
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("2")

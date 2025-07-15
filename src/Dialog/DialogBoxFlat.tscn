@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://chovtnq41hj0x"]
+
+[ext_resource type="Script" uid="uid://c530126qg741" path="res://src/Dialog/DialogBoxFlat.gd" id="1_p8fvl"]
+[ext_resource type="Texture2D" path="res://assets/UI/DialogBox/Dialog.png" id="2_b12kt"]
+[ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="6_70f3s"]
+[ext_resource type="FontFile" uid="uid://bwfshb35302x4" path="res://assets/UI/Font/momobold.ttf" id="7_cqh8o"]
+[ext_resource type="Script" uid="uid://m5b2hs3sruoe" path="res://src/Dialog/CommandHandler.gd" id="8_mrm64"]
+
+[node name="DialogBoxFlat" type="Control" groups=["DialogBoxes"]]
+process_mode = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 78.0
+mouse_filter = 1
+script = ExtResource("1_p8fvl")
+
+[node name="Dialog" type="Sprite2D" parent="."]
+position = Vector2(192, -57)
+texture = ExtResource("2_b12kt")
+
+[node name="DialogLabel" type="RichTextLabel" parent="."]
+light_mask = 2
+layout_mode = 2
+offset_left = 36.0
+offset_top = 8.0
+offset_right = 356.0
+offset_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+theme_override_constants/line_separation = 1
+theme_override_fonts/normal_font = ExtResource("6_70f3s")
+theme_override_fonts/bold_font = ExtResource("7_cqh8o")
+bbcode_enabled = true
+text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+scroll_active = false
+scroll_following = true
+
+[node name="CommandHandler" type="Node" parent="."]
+script = ExtResource("8_mrm64")
+
+[node name="PrintTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="FlashTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="FlashTimer" to="." method="_on_flash_timer_timeout"]

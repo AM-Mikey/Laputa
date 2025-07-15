@@ -90,6 +90,8 @@ func display_data():
 			for p in active.properties:
 				if p == "direction":
 					create_button("direction", active.properties[p][0], "enum", load(active.trigger_path).instantiate().Direction.keys())
+				elif p == "text":
+					create_button("text", active.properties[p][0], "multiline")
 				else:
 					create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
 				
@@ -105,13 +107,12 @@ func display_data():
 			for p in active.get_property_list():
 				if p["usage"] == EXPORT:
 					create_button(p["name"], active.get(p["name"]), p["type"])
-		"trigger":
-			for p in active.get_property_list():
-				if p["name"] == "level": #a trigger wants to load a level path
-					create_button("level", active.get("level"), "load")
-				
-				elif p["usage"] == EXPORT:
-					create_button(p["name"], active.get(p["name"]), p["type"])
+		#"trigger": should never be just trigger
+			#for p in active.get_property_list():
+				#if p["name"] == "level": #a trigger wants to load a level path
+					#create_button("level", active.get("level"), "load")
+				#elif p["usage"] == EXPORT:
+					#create_button(p["name"], active.get(p["name"]), p["type"])
 		"level":
 			create_button("level_name", active.level_name, "string")
 			create_button("level_type", active.level_type, "enum", active.LevelType.keys())

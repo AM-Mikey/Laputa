@@ -38,8 +38,8 @@ func animate():
 	sprite.hframes = int(reference_texture.get_width() / 32.0)
 	sprite.vframes = int(reference_texture.get_height() / 32.0)
 
-	#if pc.inspect_target: #consider reenabling for signs, otherwise this is redundant
-		#pc.look_dir = sign(pc.inspect_target.global_position.x - pc.global_position.x)
+	if pc.inspect_target:
+		pc.look_dir.x = sign(pc.global_position.x - pc.inspect_target.global_position.x)
 	sprite.frame_coords.y = get_vframe()
 	if not ap.is_playing() or ap.current_animation != animation:
 		ap.stop()

@@ -1,12 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bex7srafeqqi"]
+[gd_scene load_steps=3 format=3 uid="uid://bex7srafeqqi"]
 
 [ext_resource type="Script" uid="uid://cqrjnoxqsf03b" path="res://src/Trigger/Sign.gd" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(8, 8)
-
-[sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(24, 24)
+size = Vector2(16, 16)
 
 [node name="Sign" type="Area2D" groups=["Triggers"]]
 collision_layer = 0
@@ -19,14 +16,5 @@ show_behind_parent = true
 position = Vector2(8, 8)
 shape = SubResource("1")
 
-[node name="ExitDetector" type="Area2D" parent="."]
-position = Vector2(8, 8)
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitDetector"]
-modulate = Color(1, 1, 1, 0.239216)
-show_behind_parent = true
-shape = SubResource("2")
-
-[connection signal="body_entered" from="." to="." method="_on_Sign_body_entered"]
-[connection signal="body_exited" from="ExitDetector" to="." method="_on_ExitDetector_body_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

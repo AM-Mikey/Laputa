@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcle47bril6o7"
-path="res://.godot/imported/SageB.png-31ce7498916ed2ec9d48df8eb52c6c9c.ctex"
+uid="uid://bop2h5gbsjigc"
+path="res://.godot/imported/Mechanic.png-a0032bd185c364c84c953ddd5c6ef73d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Face/SageB.png"
-dest_files=["res://.godot/imported/SageB.png-31ce7498916ed2ec9d48df8eb52c6c9c.ctex"]
+source_file="res://assets/Face/Outdated/Mechanic.png"
+dest_files=["res://.godot/imported/Mechanic.png-a0032bd185c364c84c953ddd5c6ef73d.ctex"]
 
 [params]
 

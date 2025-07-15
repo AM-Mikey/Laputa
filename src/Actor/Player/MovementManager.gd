@@ -18,6 +18,15 @@ var acceleration = 2.0 #was 2.5, changed 10.26.22
 var ground_cof = 0.1
 var air_cof = 0.00
 
+
+###@export var speed: = Vector2(150, 350) TODO:MERGE THESE
+###var gravity: = 300
+###var _velocity: = Vector2.ZERO #TODO: consider merging with built in vel
+###var acceleration = 50
+##var ground_cof = 0.2
+##var air_cof = 0.05
+
+
 #var conveyor_speed = Vector2.ZERO
 
 var on_ceiling = false

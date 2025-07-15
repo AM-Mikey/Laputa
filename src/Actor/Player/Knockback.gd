@@ -12,6 +12,7 @@ func state_process():
 		mm.velocity.y = mm.knockback_velocity.y #set knockback y to this ONCE
 
 	mm.velocity.x += mm.knockback_velocity.x
+	mm.velocity.x = min(abs(mm.velocity.x), mm.speed.x) * sign(mm.velocity.x)
 	mm.knockback_velocity.x *= 0.5 #next frame it falls off
 
 	if abs(mm.knockback_velocity.x) < 1:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bop2h5gbsjigc"
-path="res://.godot/imported/Mechanic.png-ba12ff52cd2fb43feb16ab5c9b441c7a.ctex"
+uid="uid://c7swp4yjswsx5"
+path="res://.godot/imported/Dialog.png-d1f134ed79b7b857bcfee81c481dac82.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Face/Mechanic.png"
-dest_files=["res://.godot/imported/Mechanic.png-ba12ff52cd2fb43feb16ab5c9b441c7a.ctex"]
+source_file="res://assets/Dialog/Dialog.png"
+dest_files=["res://.godot/imported/Dialog.png-d1f134ed79b7b857bcfee81c481dac82.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cend0xs7705mn"]
 
-[ext_resource type="Texture2D" uid="uid://dmrvtnf7ucs8j" path="res://assets/UI/ShopMenu/BackgroundOrange.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://dmrvtnf7ucs8j" path="res://assets/UI/ShopMenu/Outdated/BackgroundOrange.png" id="1"]
 [ext_resource type="Shader" path="res://src/UI/ShopMenu/BackgroundShader.tres" id="2"]
 [ext_resource type="PackedScene" uid="uid://f2iylls2xinv" path="res://src/UI/ShopMenu/ShopMenuItem.tscn" id="3"]
 [ext_resource type="Theme" uid="uid://blqarblxvhp8o" path="res://src/UI/Theme/LaputaThemeMenus.tres" id="4"]

@@ -7,8 +7,16 @@ var property_name: String
 var property_value
 var property_type
 var enum_items := []
-var disabled = false
+var disabled = false #TODO: when is this used?
 
+var enabled_controls = []
+var is_mouse_entered = false
+
+func _input(event: InputEvent):
+	if event.is_action_pressed("editor_lmb") and !is_mouse_entered:
+		for i in enabled_controls:
+			if i.has_focus():
+				i.release_focus()
 
 func _ready():
 	$HBox/Button.text = property_name
@@ -16,47 +24,56 @@ func _ready():
 
 	match property_type:
 		"bool", Variant.Type.TYPE_BOOL:
-			$HBox/HBox/Bool.visible = true
+			enabled_controls.append($HBox/HBox/Bool)
 			$HBox/HBox/Bool.button_pressed = property_value
 		"color", Variant.Type.TYPE_COLOR:
-			$HBox/HBox/Color.visible = true
+			enabled_controls.append($HBox/HBox/Color)
 			$HBox/HBox/Color.color = property_value
 		"enum":
-			$HBox/HBox/Enum.visible = true
+			enabled_controls.append($HBox/HBox/Enum)
 			for i in enum_items:
 				$HBox/HBox/Enum.add_item(i)
 			$HBox/HBox/Enum.select(property_value)
+		
 		"int", Variant.Type.TYPE_INT:
-			$HBox/HBox/Int.visible = true
+			enabled_controls.append($HBox/HBox/Int)
 			if property_value != null: #"if property_value" doesn't trigger for value = 0
 				$HBox/HBox/Int.text = "%d" % int(property_value)
 		"float", Variant.Type.TYPE_FLOAT:
-			$HBox/HBox/Float.visible = true
+			enabled_controls.append($HBox/HBox/Float)
 			if property_value != null:
 				$HBox/HBox/Float.text = "%.*f" % [get_decimal_digits(snapped(float(property_value), 0.001)), float(property_value)]
-			
 		"load":
-			$HBox/HBox/Load.visible = true
+			enabled_controls.append($HBox/HBox/Load)
 			if property_value != null:
 				$HBox/HBox/Load.text = str(property_value)
-			
 		"string", Variant.Type.TYPE_STRING:
-			$HBox/HBox/String.visible = true
+			enabled_controls.append($HBox/HBox/String)
 			if property_value != null:
 				$HBox/HBox/String.text = String(property_value)
-				
+		"multiline":
+			enabled_controls.append($HBox/HBox/Multiline)
+			custom_minimum_size.y = 128
+			if property_value != null:
+				$HBox/HBox/Multiline.text = String(property_value)
+		
 		"vector2", Variant.Type.TYPE_VECTOR2: #unused as we split this
-			$HBox/HBox/Vector2X.visible = true
-			$HBox/HBox/Vector2Y.visible = true
+			enabled_controls.append($HBox/HBox/Vector2X)
+			enabled_controls.append($HBox/HBox/Vector2Y)
 			if property_value != null:
 				$HBox/HBox/Vector2X.text = "%.*f" % [get_decimal_digits(snapped(float(property_value.x), 0.001)), float(property_value.x)]
 				$HBox/HBox/Vector2Y.text = "%.*f" % [get_decimal_digits(snapped(float(property_value.y), 0.001)), float(property_value.y)]
 		_:
-			$HBox/HBox/String.visible = true
+			enabled_controls.append($HBox/HBox/String)
 			if property_value != null:
 				$HBox/HBox/String.text = str(property_value)
+	
+	for i in enabled_controls:
+		i.visible = true
+		i.connect("mouse_entered", Callable(self, "_on_mouse_entered"))
+		i.connect("mouse_exited", Callable(self, "_on_mouse_exited"))
 
-func align_enum_menu():
+func align_enum_menu(): ##TODO:why?
 	#var menu = $Enum.get_popup()
 	pass
 
@@ -69,6 +86,11 @@ func get_decimal_digits(number) -> int: #Search Labs (Google) spat this out whol
 		return 0
 
 ### SIGNALS
+
+func _on_mouse_entered():
+	is_mouse_entered = true
+func _on_mouse_exited():
+	is_mouse_entered = false
 
 func on_pressed():
 	#print("button_pressed")
@@ -91,6 +113,11 @@ func _on_string_complete(_value = 0):
 	#$HBox/HBox/String.release_focus()
 		property_value = $HBox/HBox/String.text
 		emit_signal("property_changed", property_name, property_value)
+func _on_multiline_complete(_value = 0):
+	if property_value != $HBox/HBox/Multiline.text and !disabled:
+		property_value = $HBox/HBox/Multiline.text
+		emit_signal("property_changed", property_name, property_value)
+
 func _on_int_complete(_value = 0):
 	if property_value != int($HBox/HBox/Int.text) and !disabled:
 		property_value = int($HBox/HBox/Int.text)

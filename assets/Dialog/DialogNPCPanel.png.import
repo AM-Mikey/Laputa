@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2ih0rkxs8hcf"
-path="res://.godot/imported/progression.png-2c4f6cc752f9b16637fad27f50a459db.ctex"
+uid="uid://dic7u16psrtwn"
+path="res://.godot/imported/DialogNPCPanel.png-3df33908860b4bce6cba4c46b0b7f839.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Face/progression.png"
-dest_files=["res://.godot/imported/progression.png-2c4f6cc752f9b16637fad27f50a459db.ctex"]
+source_file="res://assets/Dialog/DialogNPCPanel.png"
+dest_files=["res://.godot/imported/DialogNPCPanel.png-3df33908860b4bce6cba4c46b0b7f839.ctex"]
 
 [params]
 

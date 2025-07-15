@@ -197,8 +197,9 @@ spawn preview
 stop adding more triggers on level reload
 editor select trigger color fix
 enable shooting on ladders
-ladder climb animation
+force drop off ladders on damage
 drop through semisolid platform if there is a ladder
+door transition glitches if done too fast
 
 ---Effect---
 bubble sfx
@@ -236,3 +237,32 @@ reload wastes.tscn
 
 --text--
 animation finished (use characters, cent, pound, euro, circle with x,
+unable to run commands at end of line
+reimplement text choices
+draw juniper responce choice
+topic system
+flavor text 
+signs
+merge npc and sign dialog
+text slide up transition in
+dialog box shake effect
+
+---juniper---
+
+BIG NEWS merge mm. vars and actor vars!!!!!!!!!!!
+satisfying combos
+
+---shop---
+cash register sound on purchase
+
+
+---trigger
+
+trigger sizes change on signs on load
+sign spawns weird
+
+---inspector
+accept line on deselect
+control c doesnt work?
+doesnt clear if selected is the same type (two doors)
+property order is alphabetical on load?

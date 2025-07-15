@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://by1dhcfov2rfm"
-path="res://.godot/imported/Fluffy.png-f52713e24572da1c5d69c3e6b9c0e7ce.ctex"
+uid="uid://eou2attg2l87"
+path="res://.godot/imported/YellowRobot.png-f28d51ffa067bb91128578648ec89a5e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Face/Fluffy.png"
-dest_files=["res://.godot/imported/Fluffy.png-f52713e24572da1c5d69c3e6b9c0e7ce.ctex"]
+source_file="res://assets/Face/Outdated/YellowRobot.png"
+dest_files=["res://.godot/imported/YellowRobot.png-f28d51ffa067bb91128578648ec89a5e.ctex"]
 
 [params]
 

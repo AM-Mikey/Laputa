@@ -4,12 +4,14 @@ const TRANSITION = preload("res://src/Effect/Transition/TransitionIris.tscn")
 
 signal level_change(level, door_index)
 
+@export var same_level := false
 @export var level: String
 @export var door_index: int = 0
+@export var same_level_next_index: int = 0
 @export var locked = false
 
 func _ready():
-	var _err = connect("level_change", Callable(w, "change_level"))
+	var _err = connect("level_change", Callable(w, "change_level_via_trigger"))
 	trigger_type = "door"
 
 
@@ -50,8 +52,12 @@ func enter_door():
 	await transition.get_node("AnimationPlayer").animation_finished
 	
 	active_pc.mm.change_state("run")
-	var level_path = str("res://src/Level/" + level + ".tscn")
-	if !FileAccess.file_exists(level_path):
-		printerr("ERROR: No Level With Name: ", level)
-		return
-	emit_signal("level_change", level_path, door_index)
+	
+	if same_level:
+		emit_signal("level_change", w.current_level.scene_file_path, same_level_next_index)
+	else:
+		var level_path = str("res://src/Level/" + level + ".tscn")
+		if !FileAccess.file_exists(level_path):
+			printerr("ERROR: No Level With Name: ", level)
+			return
+		emit_signal("level_change", level_path, door_index)

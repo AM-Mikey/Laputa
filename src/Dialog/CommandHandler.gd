@@ -40,8 +40,9 @@ func parse_command(string):
 			db.hide_name()
 		"newchar": #/newchar, (face), (name)
 			var a = string.split(",")
-			face(a[0].to_lower())
-			db.display_name( a[1].to_lower())
+			dl.text = ""
+			face(a[1].to_lower())
+			db.display_name( a[2].to_lower())
 		"hide":#				/hide, (string: npc_id)									makes the npc with given id invisible
 			set_visible(argument, false)
 		"unhide":
@@ -49,6 +50,23 @@ func parse_command(string):
 		
 		"waypoint":#			/waypoint, (string: npc_id), (int: waypoint_index)
 			waypoint(argument)
+		"impactline": #adds a center line for impact
+			dl.text += "\n"
+			#dl.horizontal_alignment = 1 #center
+		"b":
+			dl.text += "[b]"
+		"ub": #doesnt work at end of line
+			dl.text += "[/b]"
+		"knockpc":
+			var a = string.split(",")
+			dl.text = ""
+			match a[1]:
+				"left": pc.mm.knockback_direction = Vector2.LEFT
+				"right": pc.mm.knockback_direction = Vector2.RIGHT
+			pc.mm.knockback_speed = Vector2(25, 40)
+			pc.mm.snap_vector = Vector2.ZERO
+			pc.mm.change_state("knockback")
+		
 		#"walk":#				/walk, (string: npc_id), (int: distance)				makes an npc walk a certain distance from their current pos
 			#walk(argument)#																with negative being left and positive being right
 		#"yn":

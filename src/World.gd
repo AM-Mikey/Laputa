@@ -196,7 +196,15 @@ func change_level_via_trigger(level_path, door_index):
 	var triggers = get_tree().get_nodes_in_group("LevelTriggers")
 	for t in triggers:
 		var old_level_name = old_level_path.trim_prefix("res://src/Level/").trim_suffix(".tscn")
+		
+		var do_door_check = false
+		if t.is_in_group("Doors"):
+			if t.same_level and t.door_index == door_index:
+				do_door_check = true
 		if t.level == old_level_name and t.door_index == door_index:
+			do_door_check = true
+			
+		if do_door_check:
 			doors_found += 1
 			var size = t.get_node("CollisionShape2D").shape.size
 			if t.is_in_group("LoadZones"):
@@ -209,6 +217,7 @@ func change_level_via_trigger(level_path, door_index):
 			elif t.is_in_group("Doors"):
 				$Juniper.global_position = t.global_position + Vector2(size.x * 0.5, size.y)
 		
+		#print("doors: ", doors_found)
 		if doors_found == 0:
 			printerr("ERROR: could not find door with right index")
 		if doors_found > 1:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c04tf3btpaitf"
-path="res://.godot/imported/Sage.png-ee094346efa6f226ca9e8b690c70e78e.ctex"
+uid="uid://by1dhcfov2rfm"
+path="res://.godot/imported/Fluffy.png-bbeaa7e575190dd17a7bcc4c621f0093.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Face/Sage.png"
-dest_files=["res://.godot/imported/Sage.png-ee094346efa6f226ca9e8b690c70e78e.ctex"]
+source_file="res://assets/Face/Outdated/Fluffy.png"
+dest_files=["res://.godot/imported/Fluffy.png-bbeaa7e575190dd17a7bcc4c621f0093.ctex"]
 
 [params]
 

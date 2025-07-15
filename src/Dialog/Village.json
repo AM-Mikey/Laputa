@@ -60,16 +60,20 @@
 	
 	"test2":
 	"
-	/name,kermit /face,child I'm Kermit, I guess...
+	/newchar,child,kermit I'm Kermit, I guess...
 	didn't really get to choose the name, so I'm not too happy about that
 	/clear that should have cleared the text
 	/right,child this flipped me right
-	/left,child this flipped me left
-	looking at player /lookat,child,pc
 	looking at nun /lookat,child,nun
-	/clear /name,juniper /face,juniper ...
-	/clear /name,kermit /face,child walking to waypoint 0 /waypoint,child,0
+	/newchar,juniper,juniper ...
+	/newchar,child,kermit /knockpc,right /impactline /b ARE YOU LISTENING TO ME? /ub ah
+	walking to waypoint 0 /waypoint,child,0
 	walking to waypoint 1 /waypoint,child,1
+	",
+	
+	"test3":
+	"
+	testing
 	",
 	
 	"simpletest":
@@ -80,4 +84,4 @@
 	this is line 4
 	",
 
-}
+}   

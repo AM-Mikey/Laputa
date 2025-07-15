@@ -176,7 +176,7 @@ func enter_talk():
 	look_at_node(pc)
 	
 	pc.inspect_target = self
-	if get_tree().get_root().get_node("World/UILayer").has_node("DialogBox"):
+	if get_tree().get_nodes_in_group("DialogBoxes") != []:
 		pass
 	else:
 		dialog_box = DB.instantiate()

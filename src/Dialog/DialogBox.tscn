@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmt6h4vj5irs3"]
+[gd_scene load_steps=11 format=3 uid="uid://dmt6h4vj5irs3"]
 
 [ext_resource type="Script" uid="uid://dadxo4i123gxi" path="res://src/Dialog/DialogBox.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://d4bad5funlqa2" path="res://assets/UI/DialogBox/DialogNPC.png" id="2_i4ul4"]
+[ext_resource type="Texture2D" uid="uid://c1f0r66kayepy" path="res://assets/Dialog/DialogNPC.png" id="2_f46i3"]
 [ext_resource type="Texture2D" uid="uid://che6fhlvarswb" path="res://assets/Dialog/NamePanel.png" id="3_f46i3"]
+[ext_resource type="Texture2D" uid="uid://dic7u16psrtwn" path="res://assets/Dialog/DialogNPCPanel.png" id="3_p6mm4"]
 [ext_resource type="Texture2D" uid="uid://cn84txin4yywk" path="res://assets/Face/Izu.png" id="4"]
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="4_2s414"]
 [ext_resource type="FontFile" uid="uid://bwfshb35302x4" path="res://assets/UI/Font/momobold.ttf" id="4_52hu8"]
@@ -16,18 +17,25 @@ texture_margin_right = 10.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="DialogBox" type="Control"]
+[node name="DialogBox" type="Control" groups=["DialogBoxes"]]
 process_mode = 1
 layout_mode = 3
 anchors_preset = 0
 offset_right = 480.0
 offset_bottom = 78.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 mouse_filter = 1
 script = ExtResource("1")
 
 [node name="DialogNPC" type="Sprite2D" parent="."]
 position = Vector2(200, -43)
-texture = ExtResource("2_i4ul4")
+texture = ExtResource("2_f46i3")
+
+[node name="DialogNPCPanel" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.85)
+position = Vector2(200, -43)
+texture = ExtResource("3_p6mm4")
 
 [node name="NamePanel" type="Panel" parent="."]
 layout_mode = 0

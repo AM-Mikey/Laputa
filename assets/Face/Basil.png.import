@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4bad5funlqa2"
-path="res://.godot/imported/DialogNPC.png-43b609c663e4635847dc841f71ac13d4.ctex"
+uid="uid://7e8qhdr3awj"
+path="res://.godot/imported/Basil.png-5c624b80adedfc9cb5da60fc7a5616f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/DialogBox/DialogNPC.png"
-dest_files=["res://.godot/imported/DialogNPC.png-43b609c663e4635847dc841f71ac13d4.ctex"]
+source_file="res://assets/Face/Basil.png"
+dest_files=["res://.godot/imported/Basil.png-5c624b80adedfc9cb5da60fc7a5616f9.ctex"]
 
 [params]
 

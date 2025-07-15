@@ -12,6 +12,7 @@ var active = false #actively printing
 var current_dialog_json
 var current_text_array
 var step: int = 0 #step in printing dialog
+var is_sign = false
 
 var flash_original_text = ""
 enum {FLASH_NONE, FLASH_NORMAL, FLASH_END}
@@ -19,8 +20,6 @@ var flash_type = FLASH_NONE
 var flash_step: int = 0
 
 @onready var tb = $DialogLabel
-@onready var face_container = $Face
-@onready var face_sprite = $Face/Sprite2D
 @onready var w = get_tree().get_root().get_node("World")
 @onready var pc = get_tree().get_root().get_node("World/Juniper")
 
@@ -32,21 +31,31 @@ func _ready():
 	
 	for e in get_tree().get_nodes_in_group("Enemies"):
 		e.disable()
-	
-	hide_name()
 
 
 func start_printing(dialog_json, conversation: String):
 	current_dialog_json = dialog_json
 	active = true
-	
 	var dialog = load_dialog_json(dialog_json)
 	conversation = conversation.to_lower()
-	
 	if not dialog.has(conversation): #null convo
 		printerr("No conversation with the name: ", conversation)
 	else:
 		current_text_array = split_text(dialog[conversation]) #contains array of: command, newline as blank string, text string
+	align_box()
+	#pc.disable()
+	pc.mm.cached_state = pc.mm.current_state
+	pc.mm.change_state("inspect")
+	run_text_array(current_text_array)
+
+
+func start_printing_sign(text: String):
+	active = true
+	do_delay = false
+	auto_input = true
+	is_sign = true
+	tb.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	current_text_array = split_text(text) #contains array of: command, newline as blank string, text string
 	align_box()
 	#pc.disable()
 	pc.mm.cached_state = pc.mm.current_state
@@ -65,7 +74,8 @@ func load_dialog_json(dialog_json) -> Dictionary: #loads json and converts it in
 
 func split_text(text) -> Array: #TODO: regex removes all spaces between commands, not just the first (i'm talking /face  about you) 
 	var out = []
-	text = text.strip_edges().replace("\t", "") #remove first and last newlines, remove tabulation
+	if !is_sign:
+		text = text.strip_edges().replace("\t", "") #remove first and last newlines, remove tabulation
 	var regex = RegEx.new()
 	regex.compile(r'(*NOTEMPTY)(?=\/)(\S*)(?=\n|$| )|(?! )(.*?)(?= \/|\n|$)|(\n)') #took me so long to come up with, if a command doesnt register properly, check this in https://regex101.com/
 	for result in regex.search_all(text):
@@ -77,13 +87,13 @@ func run_text_array(text_array):
 	if step == current_text_array.size():
 		#print("reached end")
 		active = false
-		flash_type = FLASH_END
-		flash_original_text = tb.text
-		$FlashTimer.start(0.1)
+		if !is_sign:
+			flash_type = FLASH_END
+			flash_original_text = tb.text
+			$FlashTimer.start(0.1)
 		return
 	var string = text_array[step]
 	if string.begins_with("/"):
-		#print("did command: ", string)
 		await $CommandHandler.parse_command(string.lstrip("/"))
 		step += 1
 		run_text_array(text_array)
@@ -94,9 +104,10 @@ func run_text_array(text_array):
 			run_text_array(text_array)
 			return
 		active = false
-		flash_type = FLASH_NORMAL
-		flash_original_text = tb.text
-		$FlashTimer.start(0.3)
+		if !is_sign:
+			flash_type = FLASH_NORMAL
+			flash_original_text = tb.text
+			$FlashTimer.start(0.3)
 	else:
 		print(string)
 		await run_text_string(string)
@@ -154,7 +165,6 @@ func _input(event):
 			run_text_array(current_text_array)
 		
 		elif not auto_input: #active
-			print("ssssss")
 			do_delay = false
 
 
@@ -178,56 +188,12 @@ func align_box():
 	var camera = get_viewport().get_camera_2d()
 	var camera_center = camera.get_screen_center_position()
 
-
-	var tween = create_tween()
-	var tween2 = create_tween()
 	if pc_pos.y < camera_center.y + (viewport_size.y / 6): #bottom
-		position.y = viewport_size.y
-		tween.tween_property(self, "position", Vector2(position.x, viewport_size.y - (size.y + 16)), 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-		modulate = Color.TRANSPARENT
-		tween2.tween_property(self, "modulate", Color.WHITE, 0.1)
-	
+		position.y = viewport_size.y - (size.y + 16)
 	else: #top
-		position.y = 0 - size.y
-		tween.tween_property(self, "position", Vector2(position.x, 16), 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-		modulate = Color.TRANSPARENT
-		tween2.tween_property(self, "modulate", Color.WHITE, 0.1)
+		position.y = 16
 		if w.ui.has_node("HUD"):
 			w.ui.get_node("HUD").visible = false
-
-
-func display_name(name: String):
-	$NamePanel.visible = true
-	$NameShadow.visible = true
-	$HBox/NameLabel.visible = true
-	$NameShadow.global_position = $HBox/NameLabel.global_position - Vector2.ONE
-	$HBox/NameLabel.text = name.capitalize()
-	$NameShadow.text = name.capitalize()
-	await get_tree().create_timer(0.01).timeout
-	$NameShadow.size = $HBox/NameLabel.size
-	$NamePanel.size.x = $HBox/NameLabel.size.x + 19
-
-func hide_name():
-	$NamePanel.visible = false
-	$NameShadow.visible = false
-	$HBox/NameLabel.visible = false
-
-func flip_face(dir = "auto"):
-	if dir == "auto":
-		match face_container.get_index():
-			0: dir = "right"
-			1: dir = "left"
-	match dir:
-		"left":
-			face_container.get_parent().move_child(face_container, 0)
-			#face_sprite.scale.x = 1
-			face_sprite.flip_h = false
-		"right":
-			face_container.get_parent().move_child(face_container, 1)
-			#face_sprite.scale.x = -1
-			face_sprite.flip_h = true
-
-
 
 ### SIGNALS
 
