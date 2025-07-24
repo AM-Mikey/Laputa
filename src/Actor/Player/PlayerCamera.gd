@@ -31,7 +31,7 @@ func _physics_process(_delta):
 	if h_tween: #TODO: this should only run if h_tween is running
 		h_tween.set_speed_scale(max(abs(mm.velocity.x)/mm.speed.x, h_pan_min_speed))
 	
-	if not pc.disabled and pc.can_input:
+	if !pc.disabled and pc.can_input and !pc.mm.current_state == pc.mm.states["inspect"]:
 		if Input.is_action_just_pressed("look_up") or Input.is_action_just_pressed("look_down") \
 		or Input.is_action_just_released("look_up") or Input.is_action_just_released("look_down"):
 				pan_vertical(get_v_dir())

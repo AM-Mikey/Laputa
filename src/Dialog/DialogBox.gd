@@ -154,7 +154,6 @@ func _input(event):
 			run_text_array(current_text_array)
 		
 		elif not auto_input: #active
-			print("ssssss")
 			do_delay = false
 
 
@@ -164,6 +163,7 @@ func exit():
 		pc.mm.change_state("run") #change to run so we don't continue a jump
 	for e in get_tree().get_nodes_in_group("Enemies"):
 		e.enable()
+	await align_out()
 	if w.ui.has_node("HUD"):
 			w.ui.get_node("HUD").visible = true
 	queue_free()
@@ -194,6 +194,28 @@ func align_box():
 		tween2.tween_property(self, "modulate", Color.WHITE, 0.1)
 		if w.ui.has_node("HUD"):
 			w.ui.get_node("HUD").visible = false
+
+func align_out():
+	var viewport_size = get_tree().get_root().size / w.resolution_scale
+	var pc_pos = pc.global_position
+	var camera = get_viewport().get_camera_2d()
+	var camera_center = camera.get_screen_center_position()
+
+	var tween = create_tween()
+	var tween2 = create_tween()
+	if pc_pos.y < camera_center.y + (viewport_size.y / 6): #bottom
+		position.y = viewport_size.y - (size.y + 16)
+		tween.tween_property(self, "position", Vector2(position.x, viewport_size.y), 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		modulate = Color.WHITE
+		tween2.tween_property(self, "modulate", Color.TRANSPARENT, 0.1)
+		await tween.finished
+	
+	else: #top
+		position.y = 16
+		tween.tween_property(self, "position", Vector2(position.x, 0 - size.y), 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		modulate = Color.WHITE
+		tween2.tween_property(self, "modulate", Color.TRANSPARENT, 0.1)
+		await tween.finished
 
 
 func display_name(name: String):

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://chovtnq41hj0x"]
+[gd_scene load_steps=7 format=3 uid="uid://chovtnq41hj0x"]
 
 [ext_resource type="Script" uid="uid://c530126qg741" path="res://src/Dialog/DialogBoxFlat.gd" id="1_p8fvl"]
-[ext_resource type="Texture2D" path="res://assets/UI/DialogBox/Dialog.png" id="2_b12kt"]
+[ext_resource type="Texture2D" uid="uid://c7swp4yjswsx5" path="res://assets/Dialog/Dialog.png" id="2_20l81"]
+[ext_resource type="Texture2D" uid="uid://ulkepy7djoku" path="res://assets/Dialog/DialogPanel.png" id="3_62ew8"]
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="6_70f3s"]
 [ext_resource type="FontFile" uid="uid://bwfshb35302x4" path="res://assets/UI/Font/momobold.ttf" id="7_cqh8o"]
 [ext_resource type="Script" uid="uid://m5b2hs3sruoe" path="res://src/Dialog/CommandHandler.gd" id="8_mrm64"]
@@ -17,7 +18,12 @@ script = ExtResource("1_p8fvl")
 
 [node name="Dialog" type="Sprite2D" parent="."]
 position = Vector2(192, -57)
-texture = ExtResource("2_b12kt")
+texture = ExtResource("2_20l81")
+
+[node name="DialogPanel" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.85)
+position = Vector2(192, -57)
+texture = ExtResource("3_62ew8")
 
 [node name="DialogLabel" type="RichTextLabel" parent="."]
 light_mask = 2

@@ -13,6 +13,7 @@ var current_dialog_json
 var current_text_array
 var step: int = 0 #step in printing dialog
 var is_sign = false
+var is_flavor = false
 
 var flash_original_text = ""
 enum {FLASH_NONE, FLASH_NORMAL, FLASH_END}
@@ -55,6 +56,17 @@ func start_printing_sign(text: String):
 	auto_input = true
 	is_sign = true
 	tb.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	current_text_array = split_text(text) #contains array of: command, newline as blank string, text string
+	align_box()
+	#pc.disable()
+	pc.mm.cached_state = pc.mm.current_state
+	pc.mm.change_state("inspect")
+	run_text_array(current_text_array)
+
+
+func start_printing_flavor_text(text: String):
+	active = true
+	is_flavor = true
 	current_text_array = split_text(text) #contains array of: command, newline as blank string, text string
 	align_box()
 	#pc.disable()
