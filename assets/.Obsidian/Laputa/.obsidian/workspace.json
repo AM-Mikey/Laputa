@@ -14,12 +14,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Characters/Basil.md",
+                "file": "Characters/Juniper.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Basil"
+              "title": "Juniper"
             }
           }
         ]
@@ -199,8 +199,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "716f7f890990af0d",
+  "active": "fd4f00696d9a397d",
   "lastOpenFiles": [
+    "Characters/Dola.md",
+    "Concepts/Timeline of Events Before Laputa.md",
+    "Concepts/Resistance.md",
+    "Groups/Laputans.md",
+    "Groups/Night Parade.md",
+    "Characters/Alexander.md",
+    "Characters/Juniper.md",
+    "The World/Dinero.md",
+    "Concepts/Humans and Beastfolk.md",
     "Characters/Basil.md",
     "Characters/King Davey.md",
     "Objects/Vehicles/Sushi.md",
@@ -211,22 +220,13 @@
     "The World/Areas/Capital City.md",
     "Characters/Sage.md",
     "Groups/Dogtown Residents.md",
-    "Groups/Night Parade.md",
     "Objects/Vehicles/Zephyr.md",
     "The World/Island of Laputa.md",
-    "Groups/Laputans.md",
     "Concepts/Laputan Crown.md",
     "The World/Areas/Wastes.md",
-    "Characters/Alexander.md",
-    "Concepts/Resistance.md",
-    "Characters/Juniper.md",
     "The World/Areas/Dogtown.md",
     "Objects/Vehicles/Jalopy.md",
     "The World/Areas/Ravine.md",
-    "Pirates.md",
-    "The World/Areas/Ancient Ruins.md",
-    "Concepts/Gender.md",
-    "Objects/Machine.md",
     "Aseprite_ujhX9SUnNc.png",
     "Pasted image 20250625183949.png",
     "Aseprite_EEozVk20AW.png",

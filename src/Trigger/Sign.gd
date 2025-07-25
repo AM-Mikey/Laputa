@@ -1,6 +1,6 @@
 extends Trigger
 
-const DB = preload("res://src/Dialog/DialogBoxFlat.tscn")
+const DB = preload("res://src/Dialog/DialogBox.tscn")
 
 var reading = false
 

@@ -156,8 +156,7 @@ trigger_path = "res://src/Trigger/Sign.tscn"
 properties = {
 "color": [Color(0.901961, 0.74902, 0, 1), 20],
 "editor_hidden": [true, 1],
-"text": ["
-Welcome to the Debug Level!
+"text": ["Welcome to the Debug Level!
 batsdsfdsdfsdsd
 ", 4]
 }

@@ -1,7 +1,5 @@
 extends Control
 
-const OPTION = preload("res://src/Dialog/Option.tscn")
-
 var options = ["Yes", "No", "Option Three", "Option Four", "Option Five", "Option Six"]
 
 var selected_option = 0

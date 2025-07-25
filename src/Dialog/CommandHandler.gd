@@ -1,12 +1,12 @@
 extends Node #TODO: this script needs major cleanup
 
 const YN = preload("res://src/Dialog/DialogYesNo.tscn")
-const dlOX = preload("res://src/Dialog/TopicBox.tscn")
+const dbOX = preload("res://src/Dialog/TopicBox.tscn")
 
 @onready var world = get_tree().get_root().get_node("World")
 @onready var pc = get_tree().get_root().get_node("World/Juniper")
 @onready var db = get_parent()
-@onready var dl = db.get_node("DialogLabel")
+
 
 
 func parse_command(string):
@@ -40,7 +40,7 @@ func parse_command(string):
 			db.hide_name()
 		"newchar": #/newchar, (face), (name)
 			var a = string.split(",")
-			dl.text = ""
+			db.dl.text = ""
 			face(a[1].to_lower())
 			db.display_name( a[2].to_lower())
 		"hide":#				/hide, (string: npc_id)									makes the npc with given id invisible
@@ -51,15 +51,15 @@ func parse_command(string):
 		"waypoint":#			/waypoint, (string: npc_id), (int: waypoint_index)
 			waypoint(argument)
 		"impactline": #adds a center line for impact
-			dl.text += "\n"
+			db.dl.text += "\n"
 			#dl.horizontal_alignment = 1 #center
 		"b":
-			dl.text += "[b]"
+			db.dl.text += "[b]"
 		"ub": #doesnt work at end of line
-			dl.text += "[/b]"
+			db.dl.text += "[/b]"
 		"knockpc":
 			var a = string.split(",")
-			dl.text = ""
+			db.dl.text = ""
 			match a[1]:
 				"left": pc.mm.knockback_direction = Vector2.LEFT
 				"right": pc.mm.knockback_direction = Vector2.RIGHT
@@ -69,12 +69,10 @@ func parse_command(string):
 		
 		#"walk":#				/walk, (string: npc_id), (int: distance)				makes an npc walk a certain distance from their current pos
 			#walk(argument)#																with negative being left and positive being right
-		#"yn":
-			#yes_no()
+		"yn":
+			yes_no()
 		#"/db":
 			#end_branch()
-		#"lock":#																		disables and makes the player character invincible
-			#pc.disable()
 		#"focus":#					/focus, (string: npc_id)							focuses PlayerCamera on an npc, doesn't work indoors
 			#focus(argument)
 		#"unfocus":#																		returns camera focus to the pc
@@ -88,7 +86,7 @@ func parse_command(string):
 			flip("right", argument)
 		
 		"clear":#																		clears the text		(use at start of text)
-			dl.text = ""
+			db.dl.text = ""
 		"wait":#					/wait, (float: duration = 1.0)						clears text and hides db until duration
 			await wait(argument)
 		"auto":#																		blocks input and automatically progresses text
@@ -100,9 +98,9 @@ func parse_command(string):
 		"skipinput":#																		automatically progresses the next line
 			skipinput()
 			
-		#"dlox":
+		#"dbox":
 			#pc.disable()
-			#world.get_node("UILayer").add_child(dlOX.instantiate())
+			#world.get_node("UILayer").add_child(dbOX.instantiate())
 	
 	
 
@@ -193,10 +191,10 @@ func on_select_branch(branch):
 		seek("/" + branch)
 		
 	print("adding extra newline") #inserting newlines like this bypasses the input_event() line check, so add that code here
-	dl.text += "\n"
+	db.text += "\n"
 	db.busy = false
-	if dl.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
-		dl.text = ""
+	if db.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
+		db.text = ""
 	db.dialog_loop()
 
 
@@ -204,7 +202,7 @@ func end_branch():
 	db.active = false
 	db.flash_cursor()
 	print("adding back newline")
-	dl.text += "\n"
+	db.text += "\n"
 	seek("/m")
 	db.step -= 3 #5 it changed #WHY WHY WHY WHY WHY #this is probably the cause of the step number going out of sync
 	#we should hope to eliminate steps alltogether

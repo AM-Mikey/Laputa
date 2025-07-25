@@ -12,15 +12,16 @@ var active = false #actively printing
 var current_dialog_json
 var current_text_array
 var step: int = 0 #step in printing dialog
+var is_sign = false
+var is_flavor = false
 
 var flash_original_text = ""
 enum {FLASH_NONE, FLASH_NORMAL, FLASH_END}
 var flash_type = FLASH_NONE
 var flash_step: int = 0
+var dl: Node
 
-@onready var tb = $DialogLabel
-@onready var face_container = $Face
-@onready var face_sprite = $Face/Sprite2D
+
 @onready var w = get_tree().get_root().get_node("World")
 @onready var pc = get_tree().get_root().get_node("World/Juniper")
 
@@ -28,18 +29,24 @@ var flash_step: int = 0
 func _ready():
 	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
 	on_viewport_size_changed()
-	tb.text = "" # "\n" if only one line
 	
 	for e in get_tree().get_nodes_in_group("Enemies"):
 		e.disable()
 	
-	hide_name()
+	$NPC.visible = false
+	$Flat.visible = false
+	$Response.visible = false
+	$Name.visible = false
+	$Face.visible = false
+	$Options.visible = false
 
 
 func start_printing(dialog_json, conversation: String):
+	$NPC.visible = true
+	dl = $NPC/DialogNPC
+	dl.text = ""
 	current_dialog_json = dialog_json
 	active = true
-	
 	var dialog = load_dialog_json(dialog_json)
 	conversation = conversation.to_lower()
 	
@@ -49,6 +56,35 @@ func start_printing(dialog_json, conversation: String):
 		current_text_array = split_text(dialog[conversation]) #contains array of: command, newline as blank string, text string
 	align_box()
 	#pc.disable()
+	pc.mm.cached_state = pc.mm.current_state
+	pc.mm.change_state("inspect")
+	run_text_array(current_text_array)
+
+
+func start_printing_sign(text: String):
+	$Flat.visible = true
+	dl = $Flat/DialogFlat
+	dl.text = ""
+	dl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	active = true
+	do_delay = false
+	auto_input = true
+	is_sign = true
+	current_text_array = split_text(text) #contains array of: command, newline as blank string, text string
+	align_box()
+	pc.mm.cached_state = pc.mm.current_state
+	pc.mm.change_state("inspect")
+	run_text_array(current_text_array)
+
+
+func start_printing_flavor_text(text: String):
+	$Flat.visible = true
+	dl = $Flat/DialogFlat
+	dl.text = ""
+	active = true
+	is_flavor = true
+	current_text_array = split_text(text) #contains array of: command, newline as blank string, text string
+	align_box()
 	pc.mm.cached_state = pc.mm.current_state
 	pc.mm.change_state("inspect")
 	run_text_array(current_text_array)
@@ -65,7 +101,8 @@ func load_dialog_json(dialog_json) -> Dictionary: #loads json and converts it in
 
 func split_text(text) -> Array: #TODO: regex removes all spaces between commands, not just the first (i'm talking /face  about you) 
 	var out = []
-	text = text.strip_edges().replace("\t", "") #remove first and last newlines, remove tabulation
+	if !is_sign:
+		text = text.strip_edges().replace("\t", "") #remove first and last newlines, remove tabulation
 	var regex = RegEx.new()
 	regex.compile(r'(*NOTEMPTY)(?=\/)(\S*)(?=\n|$| )|(?! )(.*?)(?= \/|\n|$)|(\n)') #took me so long to come up with, if a command doesnt register properly, check this in https://regex101.com/
 	for result in regex.search_all(text):
@@ -77,9 +114,10 @@ func run_text_array(text_array):
 	if step == current_text_array.size():
 		#print("reached end")
 		active = false
-		flash_type = FLASH_END
-		flash_original_text = tb.text
-		$FlashTimer.start(0.1)
+		if !is_sign:
+			flash_type = FLASH_END
+			flash_original_text = dl.text
+			$FlashTimer.start(0.1)
 		return
 	var string = text_array[step]
 	if string.begins_with("/"):
@@ -90,13 +128,14 @@ func run_text_array(text_array):
 	elif string == "\n":
 		step += 1
 		if auto_input:
-			tb.text += "\n"
+			dl.text += "\n"
 			run_text_array(text_array)
 			return
 		active = false
-		flash_type = FLASH_NORMAL
-		flash_original_text = tb.text
-		$FlashTimer.start(0.3)
+		if !is_sign:
+			flash_type = FLASH_NORMAL
+			flash_original_text = dl.text
+			$FlashTimer.start(0.3)
 	else:
 		print(string)
 		await run_text_string(string)
@@ -106,7 +145,7 @@ func run_text_array(text_array):
 
 func run_text_string(string):
 	for character in string:
-		tb.text += character
+		dl.text += character
 		if do_delay:
 			am.play("npc_dialog")
 			if character == ",": #or character == "." or character == "?" or character == "!": ##leave out other punctuation since the pause after a line is bad UX
@@ -118,23 +157,23 @@ func run_text_string(string):
 func _on_flash_timer_timeout():
 	if busy: return
 	if flash_type == FLASH_NORMAL:				#TODO: delete previous text after third line
-		if tb.text == flash_original_text:
-			tb.text += " §"#"[color=#ffffff40] [/color]"
+		if dl.text == flash_original_text:
+			dl.text += " §"#"[color=#ffffff40] [/color]"
 		else:
-			tb.text = flash_original_text
+			dl.text = flash_original_text
 	elif flash_type == FLASH_END:
 		match flash_step:
 			0:
-				tb.text = flash_original_text + "[color=goldenrod] ¤[/color]"
+				dl.text = flash_original_text + "[color=goldenrod] ¤[/color]"
 				$FlashTimer.wait_time = 0.1
 			1:
-				tb.text = flash_original_text + "[color=goldenrod] €[/color]"
+				dl.text = flash_original_text + "[color=goldenrod] €[/color]"
 				$FlashTimer.wait_time = 0.075
 			2:
-				tb.text = flash_original_text + "[color=goldenrod] £[/color]"
+				dl.text = flash_original_text + "[color=goldenrod] £[/color]"
 				$FlashTimer.wait_time = 0.1
 			3:
-				tb.text = flash_original_text + "[color=goldenrod] ¢[/color]"
+				dl.text = flash_original_text + "[color=goldenrod] ¢[/color]"
 				$FlashTimer.wait_time = 0.2
 		flash_step = (flash_step + 1) % 4 #warning, this is never reset
 
@@ -150,7 +189,7 @@ func _input(event):
 			do_delay = true
 			active = true
 			$FlashTimer.stop()
-			tb.text = flash_original_text + "\n" #remove cursor, add back newline
+			dl.text = flash_original_text + "\n" #remove cursor, add back newline
 			run_text_array(current_text_array)
 		
 		elif not auto_input: #active
@@ -219,35 +258,30 @@ func align_out():
 
 
 func display_name(name: String):
-	$NamePanel.visible = true
-	$NameShadow.visible = true
-	$HBox/NameLabel.visible = true
-	$NameShadow.global_position = $HBox/NameLabel.global_position - Vector2.ONE
-	$HBox/NameLabel.text = name.capitalize()
-	$NameShadow.text = name.capitalize()
+	$Name.visible = false
+	$Name/Shadow.global_position = $Name/HBox/Label.global_position - Vector2.ONE
+	$Name/HBox/Label.text = name.capitalize()
+	$Name/Shadow.text = name.capitalize()
 	await get_tree().create_timer(0.01).timeout
-	$NameShadow.size = $HBox/NameLabel.size
-	$NamePanel.size.x = $HBox/NameLabel.size.x + 19
+	$Name/Shadow.size = $Name/HBox/Label.size
+	$Name/Panel.size.x = $Name/HBox/Label.size.x + 19
 
 func hide_name():
-	$NamePanel.visible = false
-	$NameShadow.visible = false
-	$HBox/NameLabel.visible = false
+	$Name.visible = false
+
 
 func flip_face(dir = "auto"):
 	if dir == "auto":
-		match face_container.get_index():
+		match $Face.get_index():
 			0: dir = "right"
 			1: dir = "left"
 	match dir:
 		"left":
-			face_container.get_parent().move_child(face_container, 0)
-			#face_sprite.scale.x = 1
-			face_sprite.flip_h = false
+			$Face.get_parent().move_child($Face, 0)
+			$Face/Sprite2D.flip_h = false
 		"right":
-			face_container.get_parent().move_child(face_container, 1)
-			#face_sprite.scale.x = -1
-			face_sprite.flip_h = true
+			$Face.get_parent().move_child($Face, 1)
+			$Face/Sprite2D.flip_h = true
 
 
 
