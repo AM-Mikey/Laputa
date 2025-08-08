@@ -1,8 +1,5 @@
 extends Node #TODO: this script needs major cleanup
 
-const YN = preload("res://src/Dialog/DialogYesNo.tscn")
-const dbOX = preload("res://src/Dialog/TopicBox.tscn")
-
 @onready var world = get_tree().get_root().get_node("World")
 @onready var pc = get_tree().get_root().get_node("World/Juniper")
 @onready var db = get_parent()
@@ -97,12 +94,6 @@ func parse_command(string):
 				db.auto_input = false
 		"skipinput":#																		automatically progresses the next line
 			skipinput()
-			
-		#"dbox":
-			#pc.disable()
-			#world.get_node("UILayer").add_child(dbOX.instantiate())
-	
-	
 
 
 ### COMMANDS ###
@@ -179,23 +170,22 @@ func waypoint(string):
 			n.walk_to_waypoint(index)
 
 func yes_no():
-	db.busy = true
-	var yn = YN.instantiate()
-	add_child(yn)
-	
-	yn.get_node("MarginContainer/HBoxContainer/Yes").connect("pressed", Callable(self, "on_select_branch").bind("dba"))
-	yn.get_node("MarginContainer/HBoxContainer/No").connect("pressed", Callable(self, "on_select_branch").bind("dbb"))
+	db.get_node("Options").options = ["Yes", "No"]
+	db.get_node("Options").display_options()
+	db.dl = db.get_node("Response/DialogResponse")
+	db.dl.text = ""
 
 func on_select_branch(branch):
+	#db.get_node("Options").hide_options()
 	if branch != null:
-		seek("/" + branch)
+		seek(String("/db," + str(branch)))
 		
-	print("adding extra newline") #inserting newlines like this bypasses the input_event() line check, so add that code here
-	db.text += "\n"
-	db.busy = false
-	if db.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
-		db.text = ""
-	db.dialog_loop()
+	#print("adding extra newline") #inserting newlines like this bypasses the input_event() line check, so add that code here
+	#db.text += "\n"
+	#db.busy = false
+	#if db.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
+		#db.text = ""
+	#db.run_text_array(current_text_array)
 
 
 func end_branch():
@@ -281,4 +271,13 @@ func skipinput():
 
 func seek(string):
 	print("seeking: ", string)
-	db.step = db.text.find(string, db.step)
+	print(db.current_text_array)
+	var found = false
+	for i in db.current_text_array:
+		if i == string:
+			found = true
+			print(db.current_text_array.find(i))
+			db.step = db.current_text_array.find(i)
+			db.run_text_array(db.current_text_array)
+	if !found:
+		printerr("ERROR: Branch " + string + " Not Found")

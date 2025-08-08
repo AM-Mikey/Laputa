@@ -71,17 +71,13 @@
 	walking to waypoint 1 /waypoint,child,1
 	",
 	
-	"test3":
+	"branchtest":
 	"
-	testing
-	",
-	
-	"simpletest":
-	"
-	this is a simple test
-	this is line 2
-	this is line 3
-	this is line 4
+	/newchar,basil,basil Yawn, this is a test of the yes or no system.
+	/yn After this message, select yes or no.
+	/db,0 You picked yes./udb
+	/db,1 You picked no./udb
+	/m Now the dialog branches are merged.
 	",
 
 }   

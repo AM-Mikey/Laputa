@@ -3,8 +3,17 @@ extends Control
 var options = ["Yes", "No", "Option Three", "Option Four", "Option Five", "Option Six"]
 
 var selected_option = 0
+var is_displaying = false
 
 func _ready():
+	pass
+	#display_options()
+	
+func display_options():
+	print("displaying options")
+	get_parent().get_node("AnimationPlayer").play("ResponseEnter")
+	get_parent().get_node("Response").visible = true
+	visible = true
 	$Four.visible = false
 	$Three.visible = false
 	$Two.visible = false
@@ -34,15 +43,24 @@ func _ready():
 		printerr("ERROR: OPTION COUNT ==: ", options.size())
 
 
-
 func _input(event):
-	if $AnimationPlayer.is_playing():
-		return
 	if event.is_action_pressed("ui_up"):
 		option_up()
 	if event.is_action_pressed("ui_down"):
 		option_down()
+	if event.is_action_pressed("ui_accept") and is_displaying:
+		hide_options()
 
+
+func hide_options():
+	get_parent().dl = get_parent().get_node("NPC/DialogNPC")
+	get_parent().dl.text = ""
+	get_parent().flash_original_text = ""
+	get_parent().should_stop = true
+	get_parent().get_node("AnimationPlayer").play("ResponseExit")
+	await get_tree().process_frame
+	is_displaying = false
+	get_parent().get_node("CommandHandler").on_select_branch(selected_option)
 
 ### HELPER ###
 
@@ -145,9 +163,13 @@ func up_label_swap():
 
 ### SIGNALS ###
 
-func _on_AnimationPlayer_animation_finished(anim_name: StringName) -> void:
-	await get_tree().create_timer(0.1).timeout
+func _on_AnimationPlayer_animation_finished(anim_name: StringName):
 	if Input.is_action_pressed("ui_up"):
 		option_up()
 	if Input.is_action_pressed("ui_down"):
 		option_down()
+
+
+func _on_MainAnimationPlayer_animation_finished(anim_name: StringName):
+	if anim_name == "ResponseEnter":
+		is_displaying = true

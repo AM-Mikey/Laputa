@@ -7,6 +7,7 @@ signal dialog_finished
 @export var punctuation_delay = 0.3
 
 var busy = false #executing commands, ignore input
+var should_stop = false #stop printing early
 var auto_input = false
 var active = false #actively printing
 var current_dialog_json
@@ -145,6 +146,9 @@ func run_text_array(text_array):
 
 func run_text_string(string):
 	for character in string:
+		if should_stop:
+			should_stop = false
+			return
 		dl.text += character
 		if do_delay:
 			am.play("npc_dialog")
@@ -180,6 +184,7 @@ func _on_flash_timer_timeout():
 
 func _input(event):
 	if event.is_action_pressed("ui_accept") and not busy: #bypass can_input
+		if $Options.is_displaying: return #so it doesn't input
 		if not active:
 			if step == current_text_array.size():
 				exit()
