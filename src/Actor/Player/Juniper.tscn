@@ -1729,9 +1729,11 @@ script = ExtResource("7")
 script = ExtResource("8")
 
 [node name="MinDirTimer" type="Timer" parent="MovementManager"]
+process_callback = 0
 one_shot = true
 
 [node name="CoyoteTimer" type="Timer" parent="MovementManager"]
+process_callback = 0
 one_shot = true
 
 [node name="PlayerCamera" parent="." instance=ExtResource("2")]
