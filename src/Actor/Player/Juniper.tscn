@@ -29,7 +29,7 @@
 [ext_resource type="Script" uid="uid://ctfm0sxptv68n" path="res://src/Actor/Player/LongJump.gd" id="31"]
 [ext_resource type="Texture2D" uid="uid://dxsgd516bqad" path="res://assets/Actor/Player/BackAerial.png" id="31_cd6iy"]
 [ext_resource type="Script" uid="uid://c2muo3figyn1i" path="res://src/Actor/Player/Fall.gd" id="32"]
-[ext_resource type="Texture2D" uid="uid://bvoixqk72iq1" path="res://assets/Actor/Player/BackRun.png" id="32_6evun"]
+[ext_resource type="Texture2D" uid="uid://bvoixqk72iq1" path="res://assets/Actor/Player/Backrun.png" id="32_6evun"]
 [ext_resource type="PackedScene" uid="uid://cdgi2ibu56t2j" path="res://src/Gun/Speeder.tscn" id="33"]
 [ext_resource type="Texture2D" uid="uid://u06a3oag5sp" path="res://assets/Actor/Player/Crouch.png" id="33_id2yr"]
 [ext_resource type="PackedScene" uid="uid://cq3m4fy6fnxfn" path="res://src/Gun/TurnstileJumper.tscn" id="34"]
@@ -1691,7 +1691,6 @@ script = ExtResource("15")
 [node name="States" type="Node2D" parent="MovementManager"]
 
 [node name="StateLabel" type="Label" parent="MovementManager/States"]
-visible = false
 offset_left = -21.1084
 offset_top = -34.0
 offset_right = 18.8916
@@ -1876,6 +1875,7 @@ libraries = {
 [node name="BulletOrigin" type="Marker2D" parent="."]
 position = Vector2(0, -8)
 
+[connection signal="timeout" from="MovementManager/CoyoteTimer" to="MovementManager" method="_on_CoyoteTimer_timeout"]
 [connection signal="area_entered" from="ItemDetector" to="." method="_on_ItemDetector_area_entered"]
 [connection signal="body_entered" from="SSPDetector" to="." method="_on_SSPDetector_body_entered"]
 [connection signal="body_exited" from="SSPDetector" to="." method="_on_SSPDetector_body_exited"]

@@ -31,7 +31,7 @@ var air_cof = 0.00
 
 var on_ceiling = false
 
-var coyote_time = 0.05
+@export var coyote_time = 0.2
 @export var minimum_direction_time = 1.0 #cave story forces you to jump a certain x distance when going max speed before jumping
 var jump_starting_move_dir_x: int
 @export var min_x_velocity = 0.01 #0.001
@@ -57,7 +57,7 @@ var is_debug = true
 @onready var state_label = get_node("States/StateLabel")
 @onready var sp = get_node("States")
 
-@onready var coyote_timer = get_node("CoyoteTimer")
+@onready var coyote_timer: Timer = get_node("CoyoteTimer")
 @onready var min_dir_timer = get_node("MinDirTimer")
 
 func _ready():
@@ -142,12 +142,8 @@ func _input(event):
 
 
 func do_coyote_time():
-	$CoyoteTimer.start(coyote_time)
-	await $CoyoteTimer.timeout
-	pc.is_in_coyote = false
-	if not pc.is_on_floor() and current_state == states["run"]:
-		change_state("fall")
-		return
+	coyote_timer.stop()
+	coyote_timer.start(coyote_time)
 
 
 func bonk(normal):
@@ -157,6 +153,7 @@ func bonk(normal):
 	world.get_node("Front").add_child(effect)
 
 func land():
+	pc.is_in_coyote = false
 	if pc.is_in_water: return
 	var effect = LAND.instantiate()
 	effect.position = pc.position
@@ -200,3 +197,11 @@ func _on_CrouchDetector_body_exited(_body):
 		pc.get_node("CrouchingCollision").set_deferred("disabled", true)
 		pc.get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", false)
 		pc.get_node("Hurtbox/CrouchingCollision").set_deferred("disabled", true)
+
+
+func _on_CoyoteTimer_timeout() -> void:
+	if not pc.is_in_coyote:
+		return
+	pc.is_in_coyote = false
+	if not pc.is_on_floor() and current_state == states["run"]:
+		change_state("fall")
