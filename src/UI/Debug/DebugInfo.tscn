@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://qayi8dq3f88s" path="res://src/UI/Debug/DebugInfo.gd" id="1"]
 [ext_resource type="Theme" uid="uid://d2y1ya8pt8ye2" path="res://src/UI/Debug/Debug.tres" id="2"]
-[ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momo.ttf" id="3_d57kx"]
+[ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="3_d57kx"]
 [ext_resource type="FontFile" uid="uid://dwxtgalfv3erc" path="res://assets/UI/Font/momomono.ttf" id="5_osv66"]
 
 [node name="DebugInfo" type="MarginContainer"]
@@ -387,6 +387,12 @@ theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Floor: "
 
+[node name="Wall" type="Label" parent="VBox/HBox/C2/Q"]
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_fonts/font = ExtResource("3_d57kx")
+text = "Wall:"
+
 [node name="Crouch" type="Label" parent="VBox/HBox/C2/Q"]
 layout_mode = 2
 theme = ExtResource("2")
@@ -485,6 +491,12 @@ theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
 [node name="Floor" type="Label" parent="VBox/HBox/C2/A"]
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_fonts/font = ExtResource("3_d57kx")
+text = "-"
+
+[node name="Wall" type="Label" parent="VBox/HBox/C2/A"]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")

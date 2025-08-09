@@ -16,6 +16,7 @@ func state_process(_delta):
 
 	set_player_directions()
 	pc.velocity = calc_velocity(is_jump_interrupted)
+
 	pc.move_and_slide()
 	var new_velocity = pc.velocity
 	if pc.is_on_wall():

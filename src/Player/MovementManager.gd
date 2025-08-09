@@ -1,6 +1,5 @@
 extends Node2D
 
-
 const BONK: = preload("res://src/Effect/BonkParticle.tscn")
 const LAND: = preload("res://src/Effect/LandParticle.tscn")
 
@@ -170,13 +169,13 @@ func _on_CrouchDetector_body_entered(_body):
 
 func _on_CrouchDetector_body_exited(_body):
 	pc.is_forced_crouching = false
-	if not Input.is_action_pressed("look_down") and pc.can_input:
-		pc.is_crouching = false
-		if current_state != states["run"]: return
-		pc.get_node("CollisionShape2D").set_deferred("disabled", false)
-		pc.get_node("CrouchingCollision").set_deferred("disabled", true)
-		pc.get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", false)
-		pc.get_node("Hurtbox/CrouchingCollision").set_deferred("disabled", true)
+	#if not Input.is_action_pressed("look_down") and pc.can_input: for if we have manual crouching
+	pc.is_crouching = false
+	if current_state != states["run"]: return
+	pc.get_node("CollisionShape2D").set_deferred("disabled", false)
+	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
+	pc.get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", false)
+	pc.get_node("Hurtbox/CrouchingCollision").set_deferred("disabled", true)
 
 
 func _on_CoyoteTimer_timeout():

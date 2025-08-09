@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://bnwo7ae85qnwb"]
+[gd_scene load_steps=69 format=3 uid="uid://bnwo7ae85qnwb"]
 
 [ext_resource type="PackedScene" uid="uid://cjueepke5w45c" path="res://src/Gun/Red7.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://brl16iyt5eq02" path="res://src/Player/PlayerCamera.tscn" id="2"]
@@ -38,6 +38,8 @@
 [ext_resource type="Texture2D" uid="uid://deqx8xlersln5" path="res://assets/Player/Run.png" id="36_yworh"]
 [ext_resource type="Texture2D" uid="uid://bd5ps1x0fytpk" path="res://assets/Player/Stand.png" id="37_s2uer"]
 [ext_resource type="Texture2D" uid="uid://b0htixedn5uoe" path="res://assets/Player/Climb.png" id="37_ypuil"]
+[ext_resource type="Texture2D" uid="uid://bwawj81eo66dq" path="res://assets/Player/Edge.png" id="39_7xwcc"]
+[ext_resource type="Texture2D" uid="uid://bahds7qxev8i8" path="res://assets/Player/Push.png" id="40_hx2t8"]
 
 [sub_resource type="CapsuleShape2D" id="72"]
 radius = 1.0
@@ -176,6 +178,18 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("36_yworh")]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite2D:hframe")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="67"]
@@ -1293,6 +1307,33 @@ tracks/8/keys = {
 "values": [Vector2(3, -4), Vector2(3, -3), Vector2(3, -4), Vector2(3, -4), Vector2(3, -5), Vector2(3, -5), Vector2(3, -4), Vector2(3, -3), Vector2(3, -4), Vector2(3, -4), Vector2(3, -5), Vector2(3, -5)]
 }
 
+[sub_resource type="Animation" id="Animation_hx2t8"]
+resource_name = "edge"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("39_7xwcc")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframe")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="71"]
 resource_name = "inspect"
 length = 1.6
@@ -1331,6 +1372,108 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_cdcbg"]
+resource_name = "push"
+length = 1.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("40_hx2t8"), ExtResource("40_hx2t8"), ExtResource("40_hx2t8"), ExtResource("40_hx2t8"), ExtResource("40_hx2t8"), ExtResource("40_hx2t8"), ExtResource("40_hx2t8"), ExtResource("40_hx2t8"), ExtResource("40_hx2t8"), ExtResource("40_hx2t8"), ExtResource("40_hx2t8"), ExtResource("40_hx2t8"), ExtResource("40_hx2t8"), ExtResource("40_hx2t8"), ExtResource("40_hx2t8"), ExtResource("40_hx2t8")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframe")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 0, 6, 7, 0, 0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GunManager/GunPosLeft:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-3, -10), Vector2(-3, -10), Vector2(-3, -10), Vector2(-3, -10), Vector2(-3, -10), Vector2(-3, -10), Vector2(-3, -10), Vector2(-3, -10), Vector2(-3, -10), Vector2(-3, -10), Vector2(-3, -10), Vector2(-3, -10), Vector2(-3, -10), Vector2(-3, -10), Vector2(-3, -10), Vector2(-3, -10)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GunManager/GunPosLeftUp:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-4, -14), Vector2(-4, -14), Vector2(-4, -14), Vector2(-4, -14), Vector2(-4, -14), Vector2(-4, -14), Vector2(-4, -14), Vector2(-4, -14), Vector2(-4, -14), Vector2(-4, -14), Vector2(-4, -14), Vector2(-4, -14), Vector2(-4, -14), Vector2(-4, -14), Vector2(-4, -14), Vector2(-4, -14)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GunManager/GunPosLeftDown:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-3, -8), Vector2(-3, -8), Vector2(-3, -8), Vector2(-3, -8), Vector2(-3, -8), Vector2(-3, -8), Vector2(-3, -8), Vector2(-3, -8), Vector2(-3, -8), Vector2(-3, -8), Vector2(-3, -8), Vector2(-3, -8), Vector2(-3, -8), Vector2(-3, -8), Vector2(-3, -8), Vector2(-3, -8)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GunManager/GunPosRight:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GunManager/GunPosRightUp:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, -12), Vector2(0, -12), Vector2(0, -12), Vector2(0, -12), Vector2(0, -12), Vector2(0, -12), Vector2(0, -12), Vector2(0, -12), Vector2(0, -12), Vector2(0, -12), Vector2(0, -12), Vector2(0, -12), Vector2(0, -12), Vector2(0, -12), Vector2(0, -12), Vector2(0, -12)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GunManager/GunPosRightDown:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7)]
 }
 
 [sub_resource type="Animation" id="54"]
@@ -1462,10 +1605,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("37_s2uer")]
+"values": [ExtResource("37_s2uer"), ExtResource("37_s2uer"), ExtResource("37_s2uer"), ExtResource("37_s2uer"), ExtResource("37_s2uer"), ExtResource("37_s2uer"), ExtResource("37_s2uer"), ExtResource("37_s2uer"), ExtResource("37_s2uer"), ExtResource("37_s2uer"), ExtResource("37_s2uer"), ExtResource("37_s2uer"), ExtResource("37_s2uer"), ExtResource("37_s2uer"), ExtResource("37_s2uer"), ExtResource("37_s2uer")]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -1576,7 +1719,9 @@ _data = {
 &"climb": SubResource("Animation_cd6iy"),
 &"crouch": SubResource("Animation_d83qu"),
 &"crouch_run": SubResource("64"),
+&"edge": SubResource("Animation_hx2t8"),
 &"inspect": SubResource("71"),
+&"push": SubResource("Animation_cdcbg"),
 &"run": SubResource("54"),
 &"stand": SubResource("65")
 }
@@ -1668,6 +1813,11 @@ rotation = 3.14159
 scale = Vector2(0.33, 1)
 target_position = Vector2(-6.67572e-05, 15)
 collision_mask = 8
+
+[node name="Edge" type="RayCast2D" parent="."]
+target_position = Vector2(0, 2)
+collision_mask = 520
+collide_with_areas = true
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 65536
@@ -1827,7 +1977,9 @@ one_shot = true
 autostart = true
 
 [node name="Guns" type="Node2D" parent="GunManager"]
-position = Vector2(-3, -11)
+position = Vector2(3, -6)
+rotation = 1.5708
+scale = Vector2(-1, 1)
 
 [node name="Revolver" parent="GunManager/Guns" instance=ExtResource("3")]
 
@@ -1850,8 +2002,10 @@ visible = false
 visible = false
 
 [node name="Tsurugi" parent="GunManager/Guns" instance=ExtResource("24_0pdvi")]
+visible = false
 
 [node name="Roberta" parent="GunManager/Guns" instance=ExtResource("25_cd6iy")]
+visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 2
@@ -1860,6 +2014,7 @@ position = Vector2(0, -16)
 texture = ExtResource("36_yworh")
 hframes = 12
 vframes = 8
+frame = 72
 script = ExtResource("13")
 
 [node name="EffectPlayer" type="AnimationPlayer" parent="."]
