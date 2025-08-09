@@ -112,6 +112,7 @@ func split_text(text) -> Array: #TODO: regex removes all spaces between commands
 
 
 func run_text_array(text_array):
+	print("step: ", step)
 	if step == current_text_array.size():
 		#print("reached end")
 		active = false

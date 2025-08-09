@@ -241,7 +241,7 @@ position = Vector2(-56, -64)
 position = Vector2(-40, 0)
 actor_path = "res://src/Actor/NPC/Child.tscn"
 properties = {
-"conversation": ["branchtest", 4],
+"conversation": ["test2", 4],
 "dialog_json": ["res://src/Dialog/Village.json", 4],
 "editor_hidden": [false, 1],
 "id": ["child", 4],
@@ -492,7 +492,21 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
+[node name="Beetle1" parent="Spawns" instance=ExtResource("6_dcw0l")]
+position = Vector2(744, -16)
+actor_path = "res://src/Actor/Enemy/Beetle.tscn"
+properties = {
+"crawl_start_dir": [Vector2(0, 0), 5],
+"debug": [true, 1],
+"difficulty": [0, 2],
+"editor_hidden": [false, 1],
+"id": ["", 4],
+"speed": [Vector2(150, 150), 5],
+"wall_dir": [Vector2(-1, 0), 5]
+}
+
 [node name="Waypoint" parent="." instance=ExtResource("9_20ig1")]
+modulate = Color(1, 0, 0, 1)
 position = Vector2(-72, 0)
 owner_id = "child"
 
