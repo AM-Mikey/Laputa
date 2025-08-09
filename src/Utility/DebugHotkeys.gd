@@ -2,7 +2,7 @@ extends Node
 
 const DEBUG_INFO = preload("res://src/UI/Debug/DebugInfo.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
-const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
+const JUNIPER = preload("res://src/Player/Juniper.tscn")
 const LEVEL_EDITOR = preload("res://src/Editor/Editor.tscn")
 const POPUP = preload("res://src/UI/PopupText.tscn")
 const SHOP_MENU = preload("res://src/UI/ShopMenu/ShopMenu.tscn")

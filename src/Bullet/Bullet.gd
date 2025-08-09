@@ -13,7 +13,6 @@ var f_range
 var f_time
 var speed
 var origin = Vector2.ZERO
-#var _velocity = Vector2.ZERO
 var direction = Vector2.ZERO
 var instant_fizzle = true
 

@@ -1,6 +1,6 @@
 extends MarginContainer
 
-const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
+const JUNIPER = preload("res://src/Player/Juniper.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const LEVEL_BUTTON = preload("res://src/Editor/Button/LevelButton.tscn")
 

@@ -81,5 +81,3 @@ func _on_Wind_body_exited(body):
 		enemy_targets.erase(body)
 	if body.get_collision_layer_value(7): #bullet foe
 		bullet_targets.erase(body)
-
-

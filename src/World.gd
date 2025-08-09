@@ -7,7 +7,7 @@ const LEVEL_TEXT = preload("res://src/UI/LevelText.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 const PAUSEMENU = preload("res://src/UI/PauseMenu/PauseMenu.tscn")
 #const POPUP = preload("res://src/UI/PopupText.tscn")
-const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
+const JUNIPER = preload("res://src/Player/Juniper.tscn")
 const TITLE = preload("res://src/UI/TitleScreen.tscn")
 const TITLECAM = preload("res://src/Utility/TitleCam.tscn")
 

@@ -247,11 +247,6 @@ merge npc and sign dialog
 text slide up transition in
 dialog box shake effect
 
----juniper---
-
-BIG NEWS merge mm. vars and actor vars!!!!!!!!!!!
-satisfying combos
-
 ---shop---
 cash register sound on purchase
 
@@ -266,3 +261,9 @@ accept line on deselect
 control c doesnt work?
 doesnt clear if selected is the same type (two doors)
 property order is alphabetical on load?
+
+---juniper---
+satisfying combos(?)
+fix fake jump after falling off platform (sound but no movement)
+not actually entering knockback state when knockback. investigate this
+bonking on angled ceilings gives us velocity, only while stationary. investigate if this is good or not

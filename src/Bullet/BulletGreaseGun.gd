@@ -22,16 +22,16 @@ func _ready():
 	match direction:
 		Vector2.LEFT:
 			#global_position.y += spread_distance
-			pc.mm.velocity.x += recoil_velocity
+			pc.velocity.x += recoil_velocity
 		Vector2.RIGHT:
 			#global_position.y += spread_distance
-			pc.mm.velocity.x -= recoil_velocity
+			pc.velocity.x -= recoil_velocity
 		Vector2.UP:
 			#global_position.x += spread_distance
-			pc.mm.velocity.y += recoil_velocity
+			pc.velocity.y += recoil_velocity
 		Vector2.DOWN:
 			#global_position.x += spread_distance
-			pc.mm.velocity.y -= recoil_velocity
+			pc.velocity.y -= recoil_velocity
 	
 	setup_vis_notifier()
 

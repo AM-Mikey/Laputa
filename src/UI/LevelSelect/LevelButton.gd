@@ -1,6 +1,6 @@
 extends Control
 
-const JUNIPER = preload("res://src/Actor/Player/Juniper.tscn")
+const JUNIPER = preload("res://src/Player/Juniper.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 
 

@@ -9,7 +9,6 @@ const FLOOR_NORMAL: = Vector2.UP
 
 @export var speed: = Vector2(150, 350)
 var gravity: = 300
-var _velocity: = Vector2.ZERO #TODO: consider merging with built in vel
 var acceleration = 50
 var ground_cof = 0.2
 var air_cof = 0.05
