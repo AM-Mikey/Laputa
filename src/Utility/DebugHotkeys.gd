@@ -85,6 +85,13 @@ func _input(event):
 					pc.mm.change_state(pc.mm.cached_state.name.to_lower())
 
 
+		if event.is_action_pressed("debug_slowmode"):
+			if Engine.time_scale != 0.5:
+				Engine.time_scale = 0.5
+			else:
+				Engine.time_scale = 1.0
+
+
 
 func debug_print():
 	if not dl.has_node("DebugInfo"):
