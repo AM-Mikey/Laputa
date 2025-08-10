@@ -63,22 +63,42 @@ func set_player_directions():
 	
 
 func animate():
+	pc.get_node("Sprite2D").position = Vector2i(0.0, -16.0)
 	var animation = "run"
 	var reference_texture = preload("res://assets/Player/Run.png")
+	
+	var absolute_left = pc.get_node("AbsoluteLeft").get_collider()
+	var absolute_right = pc.get_node("AbsoluteRight").get_collider()
+	var stand_close_left = pc.get_node("StandCloseLeft").get_collider()
+	var stand_close_right = pc.get_node("StandCloseRight").get_collider()
+	var edge_left = pc.get_node("EdgeLeft").get_collider()
+	var edge_right = pc.get_node("EdgeRight").get_collider()
+	var slight_slope_left = pc.get_node("SlightSlopeLeft").get_collider()
+	var slight_slope_right = pc.get_node("SlightSlopeRight").get_collider()
+	
+	
 	if pc.direction_lock != Vector2i.ZERO and pc.direction_lock.x != sign(pc.move_dir.x):
 		animation = "back_run"
 		reference_texture = preload("res://assets/Player/BackRun.png")
-	if pc.move_dir.x == 0.0 and saved_move_dir.x == 0.0:
-		if (!pc.get_node("EdgeLeft").get_collider() and pc.get_node("AbsoluteRight").get_collider() and pc.look_dir.x == 1.0) or (!pc.get_node("EdgeRight").get_collider() and pc.get_node("AbsoluteLeft").get_collider() and pc.look_dir.x == -1.0):
+	if pc.move_dir.x == 0.0 and saved_move_dir.x == 0.0: #standing
+		if (!absolute_left and absolute_right and slight_slope_left) or (!absolute_right and absolute_left and slight_slope_right):
+			pc.get_node("Sprite2D").position = Vector2i(0.0, -12.0)
+			if (!absolute_left and pc.look_dir.x == 1.0) or (!absolute_right and pc.look_dir.x == -1.0):
+				animation = "slight_up_slope"
+				reference_texture = preload("res://assets/Player/SlightUpSlope.png")
+			else:
+				animation = "slight_down_slope"
+				reference_texture = preload("res://assets/Player/SlightDownSlope.png")
+		elif (!edge_left and absolute_right and pc.look_dir.x == 1.0) or (!edge_right and absolute_left and pc.look_dir.x == -1.0):
 			animation = "edge_turn"
 			reference_texture = preload("res://assets/Player/EdgeTurn.png")
-		elif (!pc.get_node("StandCloseLeft").get_collider() and pc.get_node("AbsoluteRight").get_collider() and pc.look_dir.x == 1.0) or (!pc.get_node("StandCloseRight").get_collider() and pc.get_node("AbsoluteLeft").get_collider() and pc.look_dir.x == -1.0):
+		elif (!stand_close_left and absolute_right and pc.look_dir.x == 1.0) or (!stand_close_right and edge_left and pc.look_dir.x == -1.0):
 			animation = "edge_turn"
 			reference_texture = preload("res://assets/Player/EdgeTurn.png")
-		elif (!pc.get_node("EdgeLeft").get_collider() and pc.look_dir.x == -1.0) or (!pc.get_node("EdgeRight").get_collider() and pc.look_dir.x == 1.0):
+		elif (!edge_left and pc.look_dir.x == -1.0) or (!edge_right and pc.look_dir.x == 1.0):
 			animation = "edge"
 			reference_texture = preload("res://assets/Player/Edge.png")
-		elif (!pc.get_node("StandCloseLeft").get_collider() and pc.look_dir.x == -1.0) or (!pc.get_node("StandCloseRight").get_collider() and pc.look_dir.x == 1.0):
+		elif (!stand_close_left and pc.look_dir.x == -1.0) or (!stand_close_right and pc.look_dir.x == 1.0):
 			animation = "stand_close"
 			reference_texture = preload("res://assets/Player/StandClose.png")
 		else:
@@ -105,12 +125,16 @@ func animate():
 
 	ap.speed_scale = 1.0
 	var do_blending = false
-	if animation == "run" or animation == "crouch_run" or animation == "back_run":
+	
+	var run_group = ["run", "crouch_run", "back_run"]
+	var stand_group = ["stand", "stand_close", "push", "crouch", "edge_turn", "slight_up_slope", "slight_down_slope"]
+	
+	if run_group.has(animation):
 		ap.speed_scale = max((abs(pc.velocity.x)/mm.speed.x) * 2, 0.1)
-		if ap.current_animation == "run" or ap.current_animation == "crouch_run" or ap.current_animation == "back_run":
+		if run_group.has(ap.current_animation):
 			do_blending = true
-	if animation == "stand" or animation == "stand_close" or animation == "push" or animation == "crouch" or animation == "edge_turn":
-		if ap.current_animation == "stand" or ap.current_animation == "stand_close" or ap.current_animation == "push" or ap.current_animation == "crouch" or ap.current_animation == "edge_turn":
+	if stand_group.has(animation):
+		if stand_group.has(ap.current_animation):
 			do_blending = true
 
 	var vframe = get_vframe()

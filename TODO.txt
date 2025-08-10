@@ -2,6 +2,7 @@ Reviewed and accurate as of 8/9/25
 
 --- General ---
 -clean up [var disabled] in various scripts 
+-subpixel jittering on characterbodies (especially juniper)
 
 --- Level ---
 -convert Tilemap to tilemaplayer (low priority)
@@ -34,6 +35,7 @@ Reviewed and accurate as of 8/9/25
 -update chasing enemies to use a_star system spider uses
 -update any enemy that's x or y size is 16px to be smaller to fit through gaps
 -consider changing enemy collision shapes on animate?
+-attached stalagtites sometimes dont do damage when swiped from the side
 	>- Climber -<
 		-possible to shoot so multiple arms fall, and the head with continue to rotate without arms
 		-add animation
@@ -109,6 +111,7 @@ Reviewed and accurate as of 8/9/25
 -fix shoot down on ssp (the ssp detection is bad, we need like a raycast from the muzzle)
 -migrate disabled code to can_input (consider not using disabled anymore)
 -juniper's default state is inspect? check if this causes issues
+-for edge and edge_turn animations, juniper's collisionshapes are innacurate. consider at least updating his hurtbox
 
 	>- Animation -<
 		-knockback hurt animation?
