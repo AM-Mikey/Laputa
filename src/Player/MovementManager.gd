@@ -18,7 +18,7 @@ var gravity = 300.0
 var terminal_velocity = 500.0
 var on_ceiling = false
 
-@export var coyote_time = 0.2
+@export var coyote_time = 0.05 #0.05
 @export var minimum_direction_time = 1.0 #cave story forces you to jump a certain x distance when going max speed before jumping
 var jump_starting_move_dir_x: int
 @export var min_x_velocity = 0.01 #0.001

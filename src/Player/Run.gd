@@ -51,11 +51,17 @@ func set_player_directions():
 		look_x = sign(pc.move_dir.x)
 	pc.look_dir = Vector2i(look_x, input_dir.y)
 	#get shoot_dir
-	if pc.look_dir.y < 0.0 or (pc.look_dir.y > 0.0 and pc.is_on_ssp): #up/down
+	var shoot_vertically = false
+	if pc.look_dir.y < 0.0 or (pc.look_dir.y > 0.0 and pc.is_on_ssp):
+		shoot_vertically = true
+	if (!pc.get_node("EdgeLeft").get_collider() and pc.get_node("AbsoluteRight").get_collider() and pc.look_dir.x == -1.0 and pc.look_dir.y != 0) or (!pc.get_node("EdgeRight").get_collider() and pc.get_node("AbsoluteLeft").get_collider() and pc.look_dir.x == 1.0 and pc.look_dir.y != 0):
+		if !pc.is_crouching:
+			shoot_vertically = true
+	if shoot_vertically: 
 		pc.shoot_dir = Vector2(0.0, pc.look_dir.y) 
-	else:
-		pc.shoot_dir = Vector2(pc.look_dir.x, 0.0) #no look down
-
+	else: 
+		pc.shoot_dir = Vector2(pc.look_dir.x, 0.0)
+	
 
 func animate():
 	var animation = "run"
@@ -64,12 +70,21 @@ func animate():
 		animation = "back_run"
 		reference_texture = preload("res://assets/Player/BackRun.png")
 	if pc.move_dir.x == 0.0 and saved_move_dir.x == 0.0:
-		if pc.get_node("Edge").get_collider():
-			animation = "stand"
-			reference_texture = preload("res://assets/Player/Stand.png")
-		else:
+		if (!pc.get_node("EdgeLeft").get_collider() and pc.get_node("AbsoluteRight").get_collider() and pc.look_dir.x == 1.0) or (!pc.get_node("EdgeRight").get_collider() and pc.get_node("AbsoluteLeft").get_collider() and pc.look_dir.x == -1.0):
+			animation = "edge_turn"
+			reference_texture = preload("res://assets/Player/EdgeTurn.png")
+		elif (!pc.get_node("StandCloseLeft").get_collider() and pc.get_node("AbsoluteRight").get_collider() and pc.look_dir.x == 1.0) or (!pc.get_node("StandCloseRight").get_collider() and pc.get_node("AbsoluteLeft").get_collider() and pc.look_dir.x == -1.0):
+			animation = "edge_turn"
+			reference_texture = preload("res://assets/Player/EdgeTurn.png")
+		elif (!pc.get_node("EdgeLeft").get_collider() and pc.look_dir.x == -1.0) or (!pc.get_node("EdgeRight").get_collider() and pc.look_dir.x == 1.0):
 			animation = "edge"
 			reference_texture = preload("res://assets/Player/Edge.png")
+		elif (!pc.get_node("StandCloseLeft").get_collider() and pc.look_dir.x == -1.0) or (!pc.get_node("StandCloseRight").get_collider() and pc.look_dir.x == 1.0):
+			animation = "stand_close"
+			reference_texture = preload("res://assets/Player/StandClose.png")
+		else:
+			animation = "stand"
+			reference_texture = preload("res://assets/Player/Stand.png")
 	elif abs(pc.velocity.x) <= 5.0 and pc.is_on_floor():
 		animation = "push"
 		reference_texture = preload("res://assets/Player/Push.png")
@@ -95,8 +110,8 @@ func animate():
 		ap.speed_scale = max((abs(pc.velocity.x)/mm.speed.x) * 2, 0.1)
 		if ap.current_animation == "run" or ap.current_animation == "crouch_run" or ap.current_animation == "back_run":
 			do_blending = true
-	if animation == "stand" or animation == "push" or animation == "crouch":
-		if ap.current_animation == "stand" or ap.current_animation == "push" or ap.current_animation == "crouch":
+	if animation == "stand" or animation == "stand_close" or animation == "push" or animation == "crouch" or animation == "edge_turn":
+		if ap.current_animation == "stand" or ap.current_animation == "stand_close" or ap.current_animation == "push" or ap.current_animation == "crouch" or ap.current_animation == "edge_turn":
 			do_blending = true
 
 	var vframe = get_vframe()
@@ -144,16 +159,24 @@ func calc_velocity():
 
 func get_vframe() -> int:
 	var out = 0
-	match pc.look_dir.x:
-		-1: out = 0
-		1: out = 4
-
-	if pc.shoot_dir.y < 0.0:
-		out += 1
-	elif pc.shoot_dir.y > 0.0:
-		out += 2
-	elif pc.shoot_dir.y == 0.0 and pc.look_dir.y == 1:
-		out += 3
+	if sprite.vframes == 8:
+		match pc.look_dir.x:
+			-1: out = 0
+			1: out = 4
+		if pc.shoot_dir.y < 0.0:
+			out += 1
+		elif pc.shoot_dir.y > 0.0:
+			out += 2
+		elif pc.shoot_dir.y == 0.0 and pc.look_dir.y == 1:
+			out += 3
+	if sprite.vframes == 6:
+		match pc.look_dir.x:
+			-1: out = 0
+			1: out = 3
+		if pc.shoot_dir.y < 0.0:
+			out += 1
+		elif pc.shoot_dir.y > 0.0:
+			out += 2
 	return out
 
 
