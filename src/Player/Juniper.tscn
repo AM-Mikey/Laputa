@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://bnwo7ae85qnwb"]
+[gd_scene load_steps=72 format=3 uid="uid://bnwo7ae85qnwb"]
 
 [ext_resource type="PackedScene" uid="uid://cjueepke5w45c" path="res://src/Gun/Red7.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://brl16iyt5eq02" path="res://src/Player/PlayerCamera.tscn" id="2"]
@@ -32,7 +32,6 @@
 [ext_resource type="Texture2D" uid="uid://bvoixqk72iq1" path="res://assets/Player/BackRun.png" id="32_6evun"]
 [ext_resource type="PackedScene" uid="uid://cdgi2ibu56t2j" path="res://src/Gun/Speeder.tscn" id="33"]
 [ext_resource type="Texture2D" uid="uid://u06a3oag5sp" path="res://assets/Player/Crouch.png" id="33_id2yr"]
-[ext_resource type="PackedScene" uid="uid://cq3m4fy6fnxfn" path="res://src/Gun/TurnstileJumper.tscn" id="34"]
 [ext_resource type="Texture2D" uid="uid://dc3xb5g5j5sp3" path="res://assets/Player/CrouchRun.png" id="34_rnx3q"]
 [ext_resource type="Texture2D" uid="uid://ci35k5na5fqvi" path="res://assets/Player/Inspect.png" id="35_k4kr4"]
 [ext_resource type="Texture2D" uid="uid://deqx8xlersln5" path="res://assets/Player/Run.png" id="36_yworh"]
@@ -2316,9 +2315,6 @@ visible = false
 visible = false
 
 [node name="Speeder" parent="GunManager/Guns" instance=ExtResource("33")]
-visible = false
-
-[node name="TurnstileJumper" parent="GunManager/Guns" instance=ExtResource("34")]
 visible = false
 
 [node name="Red7" parent="GunManager/Guns" instance=ExtResource("1")]

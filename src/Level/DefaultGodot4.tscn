@@ -1,21 +1,15 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=11 format=3 uid="uid://dx3c37i6yrl3c"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_4uhn8"]
-[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="2_s4ctt"]
-[ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_abgb0"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_yl2sd"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="5_sjslv"]
-[ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="5_v7nqo"]
-[ext_resource type="PackedScene" path="res://src/Editor/ActorSpawn.tscn" id="6_dcw0l"]
-[ext_resource type="PackedScene" path="res://src/Effect/Light/SunLight.tscn" id="6_mcn17"]
-[ext_resource type="PackedScene" path="res://src/Editor/TriggerSpawn.tscn" id="7_v7nqo"]
-[ext_resource type="Script" path="res://src/Editor/TriggerSpawn.gd" id="8_v7nqo"]
-[ext_resource type="PackedScene" path="res://src/Utility/Waypoint.tscn" id="9_20ig1"]
-[ext_resource type="Script" path="res://src/Effect/Light/SunLight.gd" id="10_c0l8s"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="12_jjgiq"]
-[ext_resource type="Script" path="res://src/Editor/ActorSpawn.gd" id="14_j7c6d"]
-[ext_resource type="Script" path="res://src/Utility/Waypoint.gd" id="16_ug36o"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_4uhn8"]
+[ext_resource type="TileSet" uid="uid://bihl36hcu8vku" path="res://src/Tile/Debug.tres" id="2_s4ctt"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_abgb0"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="5_sjslv"]
+[ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="5_v7nqo"]
+[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/ActorSpawn.tscn" id="6_dcw0l"]
+[ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="6_mcn17"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/TriggerSpawn.tscn" id="7_v7nqo"]
+[ext_resource type="PackedScene" uid="uid://dim3av368jfya" path="res://src/Utility/Waypoint.tscn" id="9_20ig1"]
 
 [node name="DefaultGodot4" type="Node2D"]
 script = ExtResource("1_4uhn8")
@@ -24,13 +18,11 @@ music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 conversation = "cutscene_test"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." instance=ExtResource("3_t226a")]
+[node name="LevelLimiter" parent="." instance=ExtResource("3_t226a")]
 offset_left = -256.0
 offset_top = -256.0
 offset_right = 1088.0
 offset_bottom = 192.0
-mouse_filter = 2
-script = ExtResource("3_yl2sd")
 background_resource = ExtResource("3_abgb0")
 texture = ExtResource("5_v7nqo")
 layers = 5
@@ -74,16 +66,12 @@ layer_3/tile_data = PackedInt32Array(65523, 196608, 13, 65524, 196608, 13, 65525
 
 [node name="Triggers" type="Node2D" parent="."]
 
-[node name="LoadZone" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="LoadZone" parent="Triggers" instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = -256.0
 offset_top = -256.0
 offset_right = -96.0
 offset_bottom = -240.0
-mouse_filter = 2
-script = ExtResource("8_v7nqo")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -94,16 +82,12 @@ properties = {
 }
 size_is_default = false
 
-[node name="LoadZone1" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="LoadZone1" parent="Triggers" instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = -272.0
 offset_top = -256.0
 offset_right = -256.0
 offset_bottom = -64.0
-mouse_filter = 2
-script = ExtResource("8_v7nqo")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -114,16 +98,11 @@ properties = {
 }
 size_is_default = false
 
-[node name="Spikes" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Spikes" parent="Triggers" instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = -208.0
 offset_top = 8.0
 offset_right = -144.0
-offset_bottom = 16.0
-mouse_filter = 2
-script = ExtResource("8_v7nqo")
 trigger_path = "res://src/Trigger/Spikes.tscn"
 properties = {
 "color": [Color(1, 0, 0, 1), 20],
@@ -131,16 +110,12 @@ properties = {
 }
 size_is_default = false
 
-[node name="Water" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Water" parent="Triggers" instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = -240.0
 offset_top = 80.0
 offset_right = -112.0
 offset_bottom = 176.0
-mouse_filter = 2
-script = ExtResource("8_v7nqo")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20],
@@ -148,15 +123,11 @@ properties = {
 }
 size_is_default = false
 
-[node name="Ladder" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Ladder" parent="Triggers" instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 336.0
 offset_right = 352.0
 offset_bottom = 96.0
-mouse_filter = 2
-script = ExtResource("8_v7nqo")
 trigger_path = "res://src/Trigger/Ladder.tscn"
 properties = {
 "color": [Color(1, 0.494118, 0, 1), 20],
@@ -164,16 +135,11 @@ properties = {
 }
 size_is_default = false
 
-[node name="Spikes1" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Spikes1" parent="Triggers" instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 288.0
 offset_top = -8.0
 offset_right = 304.0
-offset_bottom = 16.0
-mouse_filter = 2
-script = ExtResource("8_v7nqo")
 trigger_path = "res://src/Trigger/Spikes.tscn"
 properties = {
 "color": [Color(1, 0, 0, 1), 20],
@@ -181,16 +147,11 @@ properties = {
 }
 size_is_default = false
 
-[node name="Sign" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Sign" parent="Triggers" instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 96.0
 offset_top = -16.0
 offset_right = 112.0
-offset_bottom = 16.0
-mouse_filter = 2
-script = ExtResource("8_v7nqo")
 trigger_path = "res://src/Trigger/Sign.tscn"
 properties = {
 "color": [Color(0.901961, 0.74902, 0, 1), 20],
@@ -201,16 +162,12 @@ batsdsfdsdfsdsd
 }
 size_is_default = false
 
-[node name="Door" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Door" parent="Triggers" instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 80.0
 offset_top = 144.0
 offset_right = 96.0
 offset_bottom = 176.0
-mouse_filter = 2
-script = ExtResource("8_v7nqo")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -223,16 +180,12 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door1" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Door1" parent="Triggers" instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 144.0
 offset_top = 144.0
 offset_right = 160.0
 offset_bottom = 176.0
-mouse_filter = 2
-script = ExtResource("8_v7nqo")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -245,16 +198,12 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door2" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Door2" parent="Triggers" instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 256.0
 offset_top = 144.0
 offset_right = 272.0
 offset_bottom = 176.0
-mouse_filter = 2
-script = ExtResource("8_v7nqo")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -267,16 +216,11 @@ properties = {
 }
 size_is_default = false
 
-[node name="FlavorText" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="FlavorText" parent="Triggers" instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 48.0
 offset_top = -16.0
 offset_right = 64.0
-offset_bottom = 16.0
-mouse_filter = 2
-script = ExtResource("8_v7nqo")
 trigger_path = "res://src/Trigger/FlavorText.tscn"
 properties = {
 "color": [Color(0.901961, 0.74902, 0, 1), 20],
@@ -285,27 +229,16 @@ properties = {
 }
 size_is_default = false
 
-[node name="SunLight" type="Area2D" parent="." groups=["SunLights"] instance=ExtResource("6_mcn17")]
+[node name="SunLight" parent="." instance=ExtResource("6_mcn17")]
 position = Vector2(35, -198)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_c0l8s")
 
 [node name="Spawns" type="Node2D" parent="."]
 
-[node name="SpawnPoint" type="Area2D" parent="Spawns" groups=["SpawnPoints"] instance=ExtResource("5_sjslv")]
+[node name="SpawnPoint" parent="Spawns" instance=ExtResource("5_sjslv")]
 position = Vector2(-56, -64)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_jjgiq")
 
-[node name="Child" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Child" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(-40, 0)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/NPC/Child.tscn"
 properties = {
 "conversation": ["test2", 4],
@@ -317,13 +250,8 @@ properties = {
 "voiced": [true, 1]
 }
 
-[node name="Frog" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Frog" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(280, -192)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "debug": [true, 1],
@@ -333,13 +261,8 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Nun" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Nun" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(336, 176)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/NPC/Nun.tscn"
 properties = {
 "conversation": ["simpletest", 4],
@@ -351,13 +274,8 @@ properties = {
 "voiced": [true, 1]
 }
 
-[node name="Stalagtite" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Stalagtite" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(328, -112)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "debug": [true, 1],
@@ -367,13 +285,8 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Stalagtite1" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(360, -112)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "debug": [true, 1],
@@ -383,13 +296,8 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite2" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Stalagtite2" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(296, -112)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "debug": [true, 1],
@@ -399,13 +307,8 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Frog1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Frog1" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(-248, 80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "debug": [true, 1],
@@ -415,13 +318,8 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Sphagnum" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Sphagnum" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(-24, -112)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "debug": [false, 1],
@@ -430,13 +328,8 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Shield" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Shield" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(144, 96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "debug": [true, 1],
@@ -449,14 +342,8 @@ properties = {
 "walk_max_time": [10.0, 3]
 }
 
-[node name="Junior" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Junior" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(208, 48)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
-actor_path = "res://src/Actor/Enemy/Junior.tscn"
 properties = {
 "aim_time": [0.2, 3],
 "debug": [false, 1],
@@ -469,13 +356,8 @@ properties = {
 "walk_max_time": [10.0, 3]
 }
 
-[node name="Stalagtite3" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Stalagtite3" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(232, -72)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "debug": [true, 1],
@@ -485,13 +367,8 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sentry" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Sentry" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(392, 96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "cooldown_time": [4.0, 3],
@@ -507,13 +384,8 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sentry1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Sentry1" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(520, -112)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "cooldown_time": [4.0, 3],
@@ -529,13 +401,8 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Frog2" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Frog2" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(264, 0)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "debug": [false, 1],
@@ -545,13 +412,8 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Tabith" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Tabith" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(232, 96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/NPC/Tabith.tscn"
 properties = {
 "conversation": ["", 4],
@@ -564,13 +426,8 @@ properties = {
 "walk_speed": [Vector2(50, 50), 5]
 }
 
-[node name="Sage" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Sage" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(216, 176)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/NPC/Sage.tscn"
 properties = {
 "conversation": ["", 4],
@@ -583,13 +440,8 @@ properties = {
 "walk_speed": [Vector2(50, 50), 5]
 }
 
-[node name="Sage1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Sage1" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(328, 96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/NPC/Sage.tscn"
 properties = {
 "conversation": ["", 4],
@@ -602,13 +454,8 @@ properties = {
 "walk_speed": [Vector2(50, 50), 5]
 }
 
-[node name="Frog3" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Frog3" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(-8, 160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "debug": [true, 1],
@@ -618,13 +465,8 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Beetle" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Beetle" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(-168, -112)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/Enemy/Beetle.tscn"
 properties = {
 "crawl_start_dir": [Vector2(0, 1), 5],
@@ -636,13 +478,8 @@ properties = {
 "wall_dir": [Vector2(-1, 0), 5]
 }
 
-[node name="Climber" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Climber" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(160, -168)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/Enemy/Climber.tscn"
 properties = {
 "arm_angle_speed": [0.01, 3],
@@ -655,13 +492,8 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Beetle1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Beetle1" parent="Spawns" instance=ExtResource("6_dcw0l")]
 position = Vector2(744, -16)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_j7c6d")
 actor_path = "res://src/Actor/Enemy/Beetle.tscn"
 properties = {
 "crawl_start_dir": [Vector2(0, 0), 5],
@@ -673,19 +505,13 @@ properties = {
 "wall_dir": [Vector2(-1, 0), 5]
 }
 
-[node name="Waypoint" type="Area2D" parent="." groups=["Entities", "VisualUtilities", "Waypoints"] instance=ExtResource("9_20ig1")]
+[node name="Waypoint" parent="." instance=ExtResource("9_20ig1")]
 modulate = Color(1, 0, 0, 1)
 position = Vector2(-72, 0)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_ug36o")
 owner_id = "child"
 
-[node name="Waypoint2" type="Area2D" parent="." groups=["Entities", "VisualUtilities", "Waypoints"] instance=ExtResource("9_20ig1")]
+[node name="Waypoint2" parent="." instance=ExtResource("9_20ig1")]
 modulate = Color(1, 0, 0, 1)
 position = Vector2(40, 0)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_ug36o")
 owner_id = "child"
 index = 1

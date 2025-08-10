@@ -1,38 +1,42 @@
-configure tilemap layers
-turnstyle jumper fixes
-jump while crouch
-auto-jump
-fix land bonk
-fix shoot down on non-ssp
+Reviewed and accurate as of 8/9/25
+
+--- General ---
+-clean up [var disabled] in various scripts 
+
+--- Level ---
+-convert Tilemap to tilemaplayer (low priority)
+-remove "spawns" layer from levels and make more accurate layers to place different spawns
+-add playerless cutscene levels
+	>-- tilemap --<
+	-finish implementing custom terrain tile system
+
+--- Background ---
+-having a background smaller than camera size will reset to another camera size (square? taking horz?) (unconfirmed)
+-fix background scroll
+-add backgrounds
+-we have to save as resource to save our changes to bk!!
+-animated bk not working in editor
+-back_tile_mode repeat not long enough for ultrawide
+-add layer horizontal offsets (for if we want the layer to start earlier because it doesnt tile)
 
 --- animation ---
--backrun crouch animations
--adjust recent shot time
-	>jumping then insta shoot down
--bug not triggering fall on fall
-	>when holding jump
--wall pushing/standing anim
--stop ear flow animation when indoors
-
---- tilemap ---
--fix ssp trigger on tilemap
--mess with terrain
+-add backrun crouch animations (low priority)
+-add stand animation without wind for indoors
+-adjust recent shot time (?)
+	>jumping then insta shoot down (?)
+	
 
 --- enemy ---
--enemy hurt sounds move to _on_hit
--enemy scripts shadowing phys_process
--figure out enemy look/move dir as float or int
--junior state machine broke
-
---- player ---
--add 8dir gun
-	>flamethrower?
--fix ladder
--fix jump on holding jump button
--add or fix bonk protection (move character or rounded hitbox)
--fix footstep sound code
--enable peek down off of ledge using double SSP detectors
--mario head shift on jump+bonk
+-move hurt sounds to _on_hit() per enemy for custom sounds
+-check to make sure enemy scripts arent shadowing phys_process and instead use _on_physics_process
+-fix junior's state machine
+-update waypoint based enemies to the new waypoint system npcs use
+-update chasing enemies to use a_star system spider uses
+-update any enemy that's x or y size is 16px to be smaller to fit through gaps
+-consider changing enemy collision shapes on animate?
+	>- Climber -<
+		-possible to shoot so multiple arms fall, and the head with continue to rotate without arms
+		-add animation
 
 
 --- pickup ---
@@ -40,230 +44,126 @@ fix shoot down on non-ssp
 -pop out faster & consistant
 
 
---- gun ---
-fix large gun hand sprites
+--- Editor ---
+-check cases where saving does not save level
+-clean up all setup and exit code
+-editor calls setup_level on change level, but does not exit or get removed
+-pressing x somehow counts as clicking handles on resizable boxes?
+-reimplement level notes
+-fix grab regions on enemies/npcs
 
---- hud ---
-flash max on max xp pickup
-make hud flash non-tween
-	-also player
-	-also xp
-	-also ammo
-make transparency use canvasgroup
-clean up tres fonts (unneeded)
-weaponwheel
+	>- Tile -<
+		- add stroke grouping, to start implementing undo/redo (low priority)
+		- erase on line doesnt seem to work
 
-make hp and xp bar fill up on game or level start (whatever is consistant)
-fix bar flash on gain xp
+	>- Tileset -<
+		-test swap position and swap tiles options (warning destructive!)
 
---- effect ---
-land particle
-improve blood dir accuracy
-
-
---- ui ---
-font and theme standardization
-
---- general ---
-set global color palettes for xp hp etc
-
-
-
-level editor + debug tileset for level making
-
---- editor ---
-
-- add stroke grouping, for easy undo
-- inspector window selection for erase layer
-- draw box
-- draw line
-
-	- bonus -
-	- centerbox tile from center or top right option
-	- decide if _on signals from different nodes are considered local or global (if they're children or not??)
-	- add lock button for layers? idk why youd need this..
+	>- Enemy -<
+		-add delete all enemy spawns button
+		-enemy spawners do not have their properties updated when their enemy scripts are changed (MAJOR)
+	>- Triggers -<
+		-add spawn preview
+		-color of trigger spawn will not update on inspector change
+	>- Inspector -<
+		-editorlevellimiter load button (background_resouce) is likely bugged
+		-add control c/v support
+		-change property order from alphabetical to order in script
+		
 
 
-March 6 2025
+
+--- Effect ---
+-improve blood spurt dir accuracy
+-door transition glitches if done too fast
+-add first time load wipe in(?)
+-add level up/down graphics
+-add out of ammo animation
+-add explosion effect
+-differentiate player and enemy damage numbers
+
+--- Gun ---
+-long term problem with gun sprites with stocks, should they go over or under juniper?
+-finish work on turnstyle jumper
+-grenades sometimes crash the game with collisions
+-consider restoring ammo on level up
+
+--- Bullet ---
+- blunderbuss finish transfer to buckshot sprites/particles and icon
+- standardize which bullets bounce on SSP
+
+
+
+--- Player ---
+-add 8dir gun
+	>flamethrower?
+-fix ladder state generally
+-fix footstep sound code triggering when it's not supposed to
+-check analog controller compatability
+-adjust xp loss on hit
+- consider switching to capsule collision when not near edge?
+-plan if satisfying movement combos can be added
+-fix fake jump after falling off platform (sound but no movement)
+-not actually entering knockback state when knockback. investigate this
+-bonking on angled ceilings gives us velocity, only while stationary. investigate if this is good or not
+-fix shoot down on ssp (the ssp detection is bad, we need like a raycast from the muzzle)
+-migrate disabled code to can_input (consider not using disabled anymore)
+-juniper's default state is inspect? check if this causes issues
+
+	>- Animation -<
+		-knockback hurt animation?
+		-bonk animation?
+		-turn around animation?
+		-almost everything needs blend frames
+		-slope 1:2 1:1 2:1 stand animations
+
+
+
+--- Tile ---
+	>- Animation System -<
+		-make sure animation accounts for remapping tiles in editor>tileset
+		-new animation node per tileset, autoload it in on level(?)
+		-fix erased tiles sometimes returning and be animated on certain frames (resolves on reload)
+	>- Autotile -<
+		-finish implementing
+
+--- Trigger ---
+-fix trigger sizes changing on signs on load
+-sign spawns weird, check others
+-prevent spikes from triggering on the side (could shrink them)
+-enable shooting on ladders
+-consider force drop off ladders on damage
+-allow drop through semisolid platform if there is a ladder
+
+
+--- UI ---
+-fix level preview on main menu and update non-titlescreen-skip menu code
+-update themes, move them and remove unused ones
 	
-	
-- bug: erase on single tile layer doesnt work
-
---- tileset ---
-
-- disallow swap with empty
-- warn swap with different layer
-- add tile swap
-- fix one pixel off tile cursor
-
---- level ---
-
-- move old levels
-
---- editor ---
--consider adding ability to edit tileset not on current level
--switch cursor to brush on start
--dont require enter on text input to apply, or make it more obvious
-
---- animated tileset ---
--make sure to account for remapping
--new animation node per tileset, autoload it in on level
-sometimes erased tiles will return and be animated on certain frames (resolves on reload)
-
---- ui --- 
-clean up ui asset files
+	>-- hud --<
+	-hud seems to break size on run in game. it does not in windowed/fullscreen. this is probably a conflict with out window resizer in world
+	-flash max on max xp pickup
+	-make transparency use canvasgroup, so its all transparent at once
+	-weaponwheel fixes
+	-make hp and xp bar do a fill up animation on game or level start (to be consistant with recharge bar)
 
 
---- background ---
-having a background smaller than camera size will reset to another camera size (square? taking horz?)
+
+--- Save/Load ---
+-complete overhaul
+-first time setup without save data crashes the game on world -> read level from temp()
+-crash on player restarting after death (doesnt load)
 
 
---- autotile ---
-autotile in it's own parent script
-custom data for autotile group: i.e. dirt
-custom data for autotile position
-check if tile adjascent in same group
-add graphics to denote layer boundaries in tileset
-
-for example: if no dirt beneath this tile, then set this tile to one of a few "bottom" tiles
-
---- enemy ---
-delete all enemy button
-
---- player ---
-fix ssp detection on angles
-disable crouch on command
-edge animation on idle with long toe-hang
-capsule collision when not near edge?
-blend frames for direction, crouch changes
 
 
---- background for train ---
-long panoramic background that tiles horizontally and moves 
-closer scaled layers will move more from train movement
-
---- levels ---
-reimplement level notes
-reimplement level music
-
---- editor ---
-clean up all setup and exit code
-editor calls setup_level on change level, but does not exit or get removed
-stop adding TileMapCursor every time editor is opened
-pressing x somehow counts as clicking handles on resizable boxes?
-
----enemy ---
-update waypoint based enemies
-
---- triggers --- 
-replace triggervisuals
-prepare text-based triggers to work with new dialog nodes
-
---- propertybutton ---
-clean up signals and names
-force update on edit instead of enter
-
----themes---
-clean up unused themes
-
----doors---
-remove spawns layer from levels if not neccesary
-
---- player ---
-migrate disabled code to can_input
-clean up enemy, npc, misc disable code
-death on leave level via bottom
-X				terminal velocity
-add state for starting level(?)
-default state is inspect?? why
-
---- level ---
-fix level preview on main menu and update non-skip menu code
-fix save/load
-fix playerless cutscene levels
-
-first time setup without save data crashes the game on world -> read level from temp()
-
--- background ---
-
-we have to save as resource to save our changes to bk!!
-tile map background enum changes
-animated bk not working in editor
-back_tile_mode repeat not long enough for ultrawide
-add layer horizontal offsets (for if we want the layer to start earlier because it doesnt tile)
-
----triggers---
-spawn preview
-stop adding more triggers on level reload
-editor select trigger color fix
-enable shooting on ladders
-force drop off ladders on damage
-drop through semisolid platform if there is a ladder
-door transition glitches if done too fast
-
----Effect---
-bubble sfx
-first time load wipe in(?)
-level up/down graphics
-out of ammo animation
-explosion effect
-differentiate player and enemy damage numbers
 
 
----INSPECTOR---
-clean up button order on background
-background button for loading is fucked. try making it up to spec with string etc
 
-
----enemy---
-update any enemy that's x or y size is 16px to be smaller to fit through gaps
-change enemy collision shapes on animate?
-enemy grab region is crazy small on toggler
-animate climber and change sprite based on level
-
-
----bullet---
-clarify SSP bullet bounce behavior
-
---gun--
-restore ammo on level up
-blunderbuss buckshot sprites/particles and icon
-guns with stocks need proper sprite support.
-	this would require an arm layer or something specific
-
---editor---x
-reload wastes.tscn
-
+Luka's Current Goals
 
 --text--
-animation finished (use characters, cent, pound, euro, circle with x,
 unable to run commands at end of line
 reimplement text choices
 draw juniper responce choice
-topic system
-flavor text 
-signs
-merge npc and sign dialog
-text slide up transition in
 dialog box shake effect
-
----shop---
-cash register sound on purchase
-
-
----trigger
-
-trigger sizes change on signs on load
-sign spawns weird
-
----inspector
-accept line on deselect
-control c doesnt work?
-doesnt clear if selected is the same type (two doors)
-property order is alphabetical on load?
-
----juniper---
-satisfying combos(?)
-fix fake jump after falling off platform (sound but no movement)
-not actually entering knockback state when knockback. investigate this
-bonking on angled ceilings gives us velocity, only while stationary. investigate if this is good or not

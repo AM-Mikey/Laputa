@@ -55,8 +55,7 @@ func set_player_directions():
 	if pc.look_dir.y < 0.0 or (pc.look_dir.y > 0.0 and pc.is_on_ssp):
 		shoot_vertically = true
 	if (!pc.get_node("EdgeLeft").get_collider() and pc.get_node("AbsoluteRight").get_collider() and pc.look_dir.x == -1.0 and pc.look_dir.y != 0) or (!pc.get_node("EdgeRight").get_collider() and pc.get_node("AbsoluteLeft").get_collider() and pc.look_dir.x == 1.0 and pc.look_dir.y != 0):
-		if !pc.is_crouching:
-			shoot_vertically = true
+		shoot_vertically = true
 	if shoot_vertically: 
 		pc.shoot_dir = Vector2(0.0, pc.look_dir.y) 
 	else: 
