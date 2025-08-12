@@ -2,7 +2,7 @@
 extends Sprite2D
 
 @export var hframe: int: set = on_hframe_changed
-
+var gun_pos_offset: Vector2 = Vector2.ZERO
 
 func on_hframe_changed(new_hframe):
 	frame_coords.x = new_hframe
@@ -92,6 +92,8 @@ func set_gun_pos():
 				guns.scale.x = -1.0
 				guns.rotation_degrees = 90.0
 				gun_index = 1
+	
+	guns.global_position += gun_pos_offset
 	
 	if not Engine.is_editor_hint():
 		gun_index += get_index()

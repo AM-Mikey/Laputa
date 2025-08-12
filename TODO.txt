@@ -170,3 +170,31 @@ unable to run commands at end of line
 reimplement text choices
 draw juniper responce choice
 dialog box shake effect
+
+--animation--
+2:1 slope slide animation
+jumiper's starting animation seems to be edge?
+
+grabbing an enemy in editor can get the editor stuck in selecting and not go back to tile mode until the tab is clicked
+upgrade ssp shoot check to raycast
+juniper's gun pos doesnt change when going from one of the edge animations (try left facing) to a jump (try right facing)
+lower other boxes along with just the sprite
+
+add logic to use edge animations at the peak of a "mountain" shape
+
+add animation for when jumping up to a platform edge (opposite edge animation)
+remove run frame in between edge and edge turn (by adding raycasts)
+recovering from edge turn animation earlier on platform
+REQUIRED - add a second set of checks for slopes (halfway) so that it doesnt mistake leaning off the edge onto a half slab as a slope
+
+
+--juniper physics --
+falling into a \| shaped pit causes our velocity to build infinitely
+
+juniper set all states to 
+	pc.floor_max_angle = 0.8
+	pc.safe_margin = 0.008 #IMPORTANT this still causes safe margin floating at 3x res. setting it to 0.0001 fixes but that breaks all physics. consider if anything else can fix the jitter as well
+								#SOLUTION snap juniper to ground so that he scales properly with world
+	consider adding snap to ground so we dont fall when going downhill 45*
+
+MAJOR - update all characterbodies to safe_margin of around 0.008  to prevent pixel jitter (and monitor if this changes anything)

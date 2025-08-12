@@ -8,15 +8,15 @@ extends Node
 @onready var ap = pc.get_node("AnimationPlayer")
 
 var saved_move_dir := Vector2.ZERO #for the 2 frame stand
+#var previous_tick_was_on_wall = false
 
 func state_process(_delta):
 	set_player_directions()
 	pc.velocity = calc_velocity()
+	#if pc.is_on_wall(): #dont move into wall
+		#if (pc.get_wall_normal() == Vector2.RIGHT and pc.move_dir.x < 0.0) or (pc.get_wall_normal() == Vector2.LEFT and pc.move_dir.x > 0.0):
+			#pc.velocity.x = 0.0
 	pc.move_and_slide()
-	var new_velocity = pc.velocity
-	if pc.is_on_wall(): #doesnt work while walking on ground
-		new_velocity.y = max(pc.velocity.y, new_velocity.y)
-	pc.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
 	animate()
 
 	#if Input.is_action_pressed("look_down") and pc.can_input: manual crouch
@@ -63,7 +63,8 @@ func set_player_directions():
 	
 
 func animate():
-	pc.get_node("Sprite2D").position = Vector2i(0.0, -16.0)
+	sprite.position = Vector2i(0.0, -16.0)
+	sprite.gun_pos_offset = Vector2.ZERO
 	var animation = "run"
 	var reference_texture = preload("res://assets/Player/Run.png")
 	
@@ -75,20 +76,34 @@ func animate():
 	var edge_right = pc.get_node("EdgeRight").get_collider()
 	var slight_slope_left = pc.get_node("SlightSlopeLeft").get_collider()
 	var slight_slope_right = pc.get_node("SlightSlopeRight").get_collider()
+	var slope_left = pc.get_node("SlopeLeft").get_collider()
+	var slope_right = pc.get_node("SlopeRight").get_collider()
+	
+
 	
 	
 	if pc.direction_lock != Vector2i.ZERO and pc.direction_lock.x != sign(pc.move_dir.x):
 		animation = "back_run"
 		reference_texture = preload("res://assets/Player/BackRun.png")
 	if pc.move_dir.x == 0.0 and saved_move_dir.x == 0.0: #standing
+		
 		if (!absolute_left and absolute_right and slight_slope_left) or (!absolute_right and absolute_left and slight_slope_right):
-			pc.get_node("Sprite2D").position = Vector2i(0.0, -12.0)
+			sprite.position = Vector2i(0.0, -12.0)
 			if (!absolute_left and pc.look_dir.x == 1.0) or (!absolute_right and pc.look_dir.x == -1.0):
 				animation = "slight_up_slope"
 				reference_texture = preload("res://assets/Player/SlightUpSlope.png")
 			else:
 				animation = "slight_down_slope"
 				reference_texture = preload("res://assets/Player/SlightDownSlope.png")
+		elif (!absolute_left and absolute_right and slope_left) or (!absolute_right and absolute_left and slope_right):
+			if (!absolute_left and pc.look_dir.x == 1.0) or (!absolute_right and pc.look_dir.x == -1.0):
+				sprite.position = Vector2i(0.0, -7.0)
+				animation = "up_slope"
+				reference_texture = preload("res://assets/Player/UpSlope.png")
+			else:
+				sprite.position = Vector2i(0.0, -9.0)
+				animation = "down_slope"
+				reference_texture = preload("res://assets/Player/DownSlope.png")
 		elif (!edge_left and absolute_right and pc.look_dir.x == 1.0) or (!edge_right and absolute_left and pc.look_dir.x == -1.0):
 			animation = "edge_turn"
 			reference_texture = preload("res://assets/Player/EdgeTurn.png")
@@ -104,9 +119,17 @@ func animate():
 		else:
 			animation = "stand"
 			reference_texture = preload("res://assets/Player/Stand.png")
-	elif abs(pc.velocity.x) <= 5.0 and pc.is_on_floor():
+	elif pc.is_on_wall(): #TODO: this triggers on 45* slopes
 		animation = "push"
 		reference_texture = preload("res://assets/Player/Push.png")
+	else: #running
+		if (!absolute_left and absolute_right and slight_slope_left) or (!absolute_right and absolute_left and slight_slope_right): #run on slight slope
+			sprite.position = Vector2i(0.0, -13.0)
+			sprite.gun_pos_offset = Vector2(0, 3)
+		elif (!absolute_left and absolute_right and slope_left) or (!absolute_right and absolute_left and slope_right): #run on slope
+			sprite.position = Vector2i(0.0, -12.0)
+			sprite.gun_pos_offset = Vector2(0, 4)
+	
 	
 	if pc.is_crouching:
 		if pc.move_dir.x == 0.0 and saved_move_dir.x == 0.0:
@@ -127,7 +150,7 @@ func animate():
 	var do_blending = false
 	
 	var run_group = ["run", "crouch_run", "back_run"]
-	var stand_group = ["stand", "stand_close", "push", "crouch", "edge_turn", "slight_up_slope", "slight_down_slope"]
+	var stand_group = ["stand", "stand_close", "push", "crouch", "edge_turn", "up_slope", "down_slope", "slight_up_slope", "slight_down_slope"]
 	
 	if run_group.has(animation):
 		ap.speed_scale = max((abs(pc.velocity.x)/mm.speed.x) * 2, 0.1)
@@ -209,5 +232,7 @@ func get_vframe() -> int:
 func enter():
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
+	pc.floor_max_angle = 0.8 #well over 45degrees so we can have a lower safe_margin
+	pc.safe_margin = 0.008 #may cause issues this low
 func exit():
 	pass
