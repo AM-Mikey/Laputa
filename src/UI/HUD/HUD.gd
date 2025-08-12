@@ -47,6 +47,12 @@ const UI_BULLET_FLY = preload("res://src/Effect/UIBulletFly.tscn")
 @onready var mon_2 = mon.get_node("Num2")
 @onready var mon_3 = mon.get_node("Num3")
 
+@onready var weapon_wheel = gun.get_node("%WeaponWheel")
+@onready var weapon_wheel_animator = gun.get_node("%WeaponWheelAnimator")
+@onready var weapon_wheel_tilt_animator = gun.get_node("%WeaponWheelTiltAnimator")
+
+@onready var animation_player = %AnimationPlayer
+
 var WheelVisible = false
 
 func _ready():
@@ -55,10 +61,10 @@ func _ready():
 	
 	if world.has_node("Juniper"):
 		var pc = world.get_node("Juniper")
-		pc.connect("hp_updated", Callable(self, "update_hp"))
-		pc.connect("guns_updated", Callable(self, "update_guns"))
-		pc.connect("xp_updated", Callable(self, "update_xp"))
-		pc.connect("money_updated", Callable(self, "update_money"))
+		pc.hp_updated.connect(update_hp)
+		pc.guns_updated.connect(update_guns)
+		pc.xp_updated.connect(update_xp)
+		pc.money_updated.connect(update_money)
 		pc.setup_hud()
 		setup_lost_bars(pc.hp, pc.guns.get_child(0).xp)
 
@@ -75,10 +81,7 @@ func _process(_delta):
 		else: cd_progress.visible = false
 
 func update_guns(guns, cause = "default", do_xp_flash = false):
-	var hbox = gun.get_node("HBox")
 	var main_icon = gun.get_node("GunIcon")
-	for i in hbox.get_children():
-		i.queue_free()
 	
 	if cause == "shiftleft":
 		display_weapon_wheel(guns, "CCW")
@@ -108,32 +111,32 @@ func update_guns(guns, cause = "default", do_xp_flash = false):
 func display_weapon_wheel(guns, rot_dir: String):
 	if not WheelVisible:
 		WheelVisible = true
-		$HBox/Gun/WeaponWheelTiltAnimator.play("TiltIn", -1, 3.0)
-	$HBox/Gun/WeaponWheelTiltAnimator/Timer.start(1.0)
+		weapon_wheel_tilt_animator.play("TiltIn", -1, 3.0)
+	weapon_wheel_tilt_animator.get_node("Timer").start(1.0)
 	
 	match rot_dir:
 		"CW":
-				$HBox/Gun/WeaponWheelAnimator.play("CW", -1, 4.0)
-				$HBox/Gun/WeaponWheel/Bullet1/Gun.texture = guns[0].icon_texture
-				$HBox/Gun/WeaponWheel/Bullet2/Gun.texture = guns[1].icon_small_texture
-				$HBox/Gun/WeaponWheel/Bullet3/Gun.texture = guns[2].icon_small_texture
-				$HBox/Gun/WeaponWheel/Bullet5/Gun.texture = guns[-2].icon_small_texture
-				$HBox/Gun/WeaponWheel/Bullet6/Gun.texture = guns[-1].icon_small_texture
+				weapon_wheel_animator.play("CW", -1, 4.0)
+				weapon_wheel.get_node("Bullet1/Gun").texture = guns[0].icon_texture
+				weapon_wheel.get_node("Bullet2/Gun").texture = guns[1].icon_small_texture
+				weapon_wheel.get_node("Bullet3/Gun").texture = guns[2].icon_small_texture
+				weapon_wheel.get_node("Bullet5/Gun").texture = guns[-2].icon_small_texture
+				weapon_wheel.get_node("Bullet6/Gun").texture = guns[-1].icon_small_texture
 		"CCW":
-				$HBox/Gun/WeaponWheelAnimator.play("CCW", -1, 4.0)
+				weapon_wheel_animator.play("CCW", -1, 4.0)
 				#await get_tree().create_timer(0.8) #i still dont know why but i dont ask questions
-				$HBox/Gun/WeaponWheel/Bullet1/Gun.texture = guns[0].icon_texture
-				$HBox/Gun/WeaponWheel/Bullet2/Gun.texture = guns[1].icon_small_texture
-				$HBox/Gun/WeaponWheel/Bullet3/Gun.texture = guns[2].icon_small_texture
-				$HBox/Gun/WeaponWheel/Bullet5/Gun.texture = guns[-2].icon_small_texture
-				$HBox/Gun/WeaponWheel/Bullet6/Gun.texture = guns[-1].icon_small_texture
+				weapon_wheel.get_node("Bullet1/Gun").texture = guns[0].icon_texture
+				weapon_wheel.get_node("Bullet2/Gun").texture = guns[1].icon_small_texture
+				weapon_wheel.get_node("Bullet3/Gun").texture = guns[2].icon_small_texture
+				weapon_wheel.get_node("Bullet5/Gun").texture = guns[-2].icon_small_texture
+				weapon_wheel.get_node("Bullet6/Gun").texture = guns[-1].icon_small_texture
 	
 
 
 			
 func _on_Timer_timeout():
 	WheelVisible = false
-	$HBox/Gun/WeaponWheelTiltAnimator.play("TiltOut", -1, 3.0)
+	weapon_wheel_tilt_animator.play("TiltOut", -1, 3.0)
 	
 
 #func display_guns():
@@ -196,7 +199,7 @@ func update_hp(hp, max_hp):
 	
 	
 	if hp < hp_lost.value:
-		$AnimationPlayer.play("Flash")
+		animation_player.play("Flash")
 		var tween = get_tree().create_tween()
 		tween.tween_property(hp_lost, "value", hp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
 	else: #increasing, just set it
@@ -236,7 +239,7 @@ func update_xp(xp, max_xp, level, max_level, do_xp_flash = false):
 	modulate = Color(1, 1, 1) #to prevent flash animation from stopping on a transparent frame
 	xp_num.frame_coords.x = level
 	if do_xp_flash:
-		$AnimationPlayer.play("XpFlash")
+		animation_player.play("XpFlash")
 	xp_progress.value = xp
 	xp_progress.max_value = max_xp
 	xp_lost.max_value = max_xp
