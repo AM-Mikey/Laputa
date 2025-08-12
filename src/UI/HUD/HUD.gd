@@ -302,3 +302,4 @@ func setup_lost_bars(hp, xp): #needs to be done so that update can tell that it'
 
 func on_viewport_size_changed():
 	size = get_tree().get_root().size / world.resolution_scale
+	position = Vector2(0, 0)
