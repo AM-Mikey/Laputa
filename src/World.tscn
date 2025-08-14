@@ -27,8 +27,6 @@ z_index = 1
 [node name="UILayer" type="CanvasLayer" parent="."]
 process_mode = 3
 layer = 2
-scale = Vector2(2, 2)
-transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="EditorLayer" type="CanvasLayer" parent="."]
 layer = 3
