@@ -44,17 +44,19 @@ func setup():
 	on_viewport_size_changed()
 	
 
-func _physics_process(_delta):
-	pass #TODO: fix animated bk not working in editor
-	#for t in texture_rects:
-		#texture_rects[t].position.x += horizontal_speed * layer_scales[t].x
-		#var texture_width = texture_rects[t].texture.get_width()
-		#if texture_rects[t].position.x >= (layer_repeating_length * -0.5) + texture_width \
-		#or texture_rects[t].position.x <= (layer_repeating_length * -0.5) - texture_width:
-			#set_tile_mode(texture_rects[t]) #reset x position to start
+func _process(delta):
+	var desired_fps = 60
+	var variance = delta*desired_fps
+	for t in texture_rects:
+		texture_rects[t].position.x += horizontal_speed * variance * layer_scales[t].x
+		var texture_width = texture_rects[t].texture.get_width()
+		if texture_rects[t].position.x >= (layer_repeating_length * -0.5) + texture_width \
+		or texture_rects[t].position.x <= (layer_repeating_length * -0.5) - texture_width:
+			set_tile_mode(texture_rects[t]) #reset x position to start
 
 func setup_background_resource():
 	#background_resource.texture.emit_changed()
+	# TODO: This ignores overrides set directly on the LevelLimiter
 	texture = background_resource.texture
 	layers = background_resource.layers
 	layer_scales = background_resource.layer_scales
