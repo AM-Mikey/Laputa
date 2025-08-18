@@ -104,11 +104,11 @@ func on_new_confirmed():
 
 
 ### SAVE/LOAD
-
 func save_level(level, path):
 	var log = el.get_node("Editor").log
 	el.get_node("Editor").inspector.on_deselected()
 	
+	level.save_changes()
 	level.name = path.get_file().get_basename()
 	level.level_name = path.get_file().get_basename() #TODO: add this to inspector
 	
