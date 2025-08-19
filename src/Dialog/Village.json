@@ -75,9 +75,38 @@
 	"
 	/newchar,basil,basil Yawn, this is a test of the yes or no system.
 	/yn After this message, select yes or no.
-	/db,0 You picked yes./udb
-	/db,1 You picked no./udb
+	You picked yes.
+	You picked no.
+	Now the dialog branches are merged.
+	",
+
+	"branchtest2":
+	"
+	/newchar,basil,basil Yawn, this is a test of the yes or no system.
+	/yn After this message, select yes or no.
+	/db,0 You picked yes. /udb
+	/db,1 You picked no. /udb
 	/m Now the dialog branches are merged.
 	",
 
+	"branchtest3":
+	"
+	/newchar,basil,basil Yawn, this is a test of the options system.
+	/options,Option_A,Option_B,Option_C After this message, select an option.
+	/db,0 You picked OptionA. /udb
+	/db,1 You picked OptionB. /udb
+	/db,2 You picked OptionC. /udb
+	/m Now the dialog branches are merged.
+	",
+
+	"branchtest4":
+	"
+	/newchar,basil,basil Yawn, this is a test of the topic system.
+	/topics,sasuke,cheese,basil,general After this message, select an option.
+	/db,0 You picked Sasuke. /udb
+	/db,1 You picked Cheese. /udb
+	/db,2 You picked Basil! That's me. /udb
+	/db,3 Here's the news of the day. /udb
+	/m Now the dialog branches are merged.
+	",
 }   

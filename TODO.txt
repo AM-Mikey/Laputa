@@ -3,6 +3,7 @@ Reviewed and accurate as of 8/9/25
 --- General ---
 -clean up [var disabled] in various scripts 
 -subpixel jittering on characterbodies (especially juniper)
+-consider using typed variables (:=) to improve performance and reduce confusion
 
 --- Level ---
 -convert Tilemap to tilemaplayer (low priority)
@@ -147,7 +148,7 @@ Reviewed and accurate as of 8/9/25
 	-hud seems to break size on run in game. it does not in windowed/fullscreen. this is probably a conflict with out window resizer in world
 	-flash max on max xp pickup
 	-make transparency use canvasgroup, so its all transparent at once
-	-weaponwheel fixes
+	-weaponwheel fixeswhe
 	-make hp and xp bar do a fill up animation on game or level start (to be consistant with recharge bar)
 
 
@@ -198,3 +199,12 @@ juniper set all states to
 	consider adding snap to ground so we dont fall when going downhill 45*
 
 MAJOR - update all characterbodies to safe_margin of around 0.008  to prevent pixel jitter (and monitor if this changes anything)
+
+
+
+
+sometimes the yn or option dialog gets cut off when speeding dialog ahead
+
+consider having unknown topics greyed out so that players are incentivised to go collect them in the world
+green text that adds topics to juniper's topic array
+consider when the topic prompt happens, if there's a generic dialog

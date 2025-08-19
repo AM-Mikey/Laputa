@@ -68,8 +68,12 @@ func parse_command(string):
 			#walk(argument)#																with negative being left and positive being right
 		"yn":
 			yes_no()
-		#"/db":
-			#end_branch()
+		"udb":
+			end_branch()
+		"options":
+			options(argument)
+		"topics":
+			topics(argument)
 		#"focus":#					/focus, (string: npc_id)							focuses PlayerCamera on an npc, doesn't work indoors
 			#focus(argument)
 		#"unfocus":#																		returns camera focus to the pc
@@ -93,7 +97,8 @@ func parse_command(string):
 			else:
 				db.auto_input = false
 		"skipinput":#																		automatically progresses the next line
-			skipinput()
+			pass
+			#skipinput()
 
 
 ### COMMANDS ###
@@ -174,28 +179,65 @@ func yes_no():
 	db.get_node("Options").display_options()
 	db.dl = db.get_node("Response/DialogResponse")
 	db.dl.text = ""
+	if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
+		db.get_node("Options").exit_action = "options"
+
+func options(string):
+	var a = string.split(",")
+	var capitalized_array = []
+	for s in a:
+		var capitalized = s.capitalize()
+		capitalized_array.append(capitalized)
+	db.get_node("Options").options = capitalized_array
+	db.get_node("Options").display_options()
+	db.dl = db.get_node("Response/DialogResponse")
+	db.dl.text = ""
+	if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
+		db.get_node("Options").exit_action = "options"
+
+func topics(argument):
+	var npc_topics = argument.split(",")
+	
+	var cap_pc_topics = []
+	for topic in pc.topic_array:
+		cap_pc_topics.append(topic.capitalize())
+
+	var cap_npc_topics = []
+	for topic in npc_topics:
+		cap_npc_topics.append(topic.capitalize())
+
+	var final_topics = []
+	var final_ids = []
+	for npc_topic in cap_npc_topics:
+		for pc_topic in cap_pc_topics:
+			if npc_topic == pc_topic:
+				final_topics.append(npc_topic)
+
+	for topic in final_topics:
+		final_ids.append(cap_npc_topics.find(topic))
+
+	db.get_node("Options").options = final_topics
+	db.get_node("Options").ids = final_ids
+	db.get_node("Options").display_options()
+	db.dl = db.get_node("Response/DialogResponse")
+	db.dl.text = ""
+	if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
+		db.get_node("Options").exit_action = "topics"
 
 func on_select_branch(branch):
-	#db.get_node("Options").hide_options()
 	if branch != null:
-		seek(String("/db," + str(branch)))
-		
-	#print("adding extra newline") #inserting newlines like this bypasses the input_event() line check, so add that code here
-	#db.text += "\n"
-	#db.busy = false
-	#if db.get_line_count() > 3: #was greater than or equal to, made starting on line 3 impossible
-		#db.text = ""
-	#db.run_text_array(current_text_array)
-
+		var seek_target = String("/db," + str(branch))
+		seek(seek_target)
 
 func end_branch():
-	db.active = false
-	db.flash_cursor()
-	print("adding back newline")
-	db.text += "\n"
-	seek("/m")
-	db.step -= 3 #5 it changed #WHY WHY WHY WHY WHY #this is probably the cause of the step number going out of sync
-	#we should hope to eliminate steps alltogether
+	db.awaiting_merge = true
+	#db.active = false
+	db.flash_type = db.FLASH_NORMAL
+	db.flash_original_text = db.dl.text
+	db.get_node("FlashTimer").start(0.3)
+	#print("adding back newline")
+	#db.step -= 3 #5 it changed #WHY WHY WHY WHY WHY #this is probably the cause of the step number going out of sync
+	##we should hope to eliminate steps alltogether
 
 
 func focus(string):
@@ -259,25 +301,25 @@ func wait(string):
 	await get_tree().create_timer(wait_time).timeout
 	db.busy = false
 
-func skipinput():
-	db.auto_input = true
-	db.do_delay = true
-	await get_tree().create_timer(0.1).timeout
-	db.auto_input = false
+#func skipinput():
+	#db.auto_input = true
+	#db.do_delay = true
+	#await get_tree().create_timer(0.1).timeout
+	#db.auto_input = false
 
 
 
 ### HELPERS ###
 
-func seek(string):
+func seek(string, do_nl = false):
 	print("seeking: ", string)
-	print(db.current_text_array)
+	#print(db.current_text_array)
 	var found = false
 	for i in db.current_text_array:
 		if i == string:
 			found = true
 			print(db.current_text_array.find(i))
-			db.step = db.current_text_array.find(i)
-			db.run_text_array(db.current_text_array)
+			db.step = db.current_text_array.find(i) #to skip the null /db command
+			db.progress_text(do_nl)
 	if !found:
 		printerr("ERROR: Branch " + string + " Not Found")

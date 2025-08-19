@@ -41,7 +41,7 @@ var dead = false
 
 
 var inventory: Array
-var topic_array: Array = ["child", "sasuke", "basil", "free_dialog"]
+var topic_array: Array = ["child", "sasuke", "basil", "general"]
 var inspect_target: Node = null
 
 var move_dir := Vector2.LEFT

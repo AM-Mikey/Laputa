@@ -241,7 +241,7 @@ position = Vector2(-56, -64)
 position = Vector2(-40, 0)
 actor_path = "res://src/Actor/NPC/Child.tscn"
 properties = {
-"conversation": ["test2", 4],
+"conversation": ["branchtest4", 4],
 "dialog_json": ["res://src/Dialog/Village.json", 4],
 "editor_hidden": [false, 1],
 "id": ["child", 4],
@@ -506,7 +506,7 @@ properties = {
 }
 
 [node name="Waypoint" parent="." instance=ExtResource("9_20ig1")]
-modulate = Color(0.545098, 0, 0, 1)
+modulate = Color(1, 0, 0, 1)
 position = Vector2(-72, 0)
 owner_id = "child"
 

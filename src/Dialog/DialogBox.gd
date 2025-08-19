@@ -7,7 +7,7 @@ signal dialog_finished
 @export var punctuation_delay = 0.3
 
 var busy = false #executing commands, ignore input
-var should_stop = false #stop printing early
+var awaiting_merge = false
 var auto_input = false
 var active = false #actively printing
 var current_dialog_json
@@ -112,7 +112,6 @@ func split_text(text) -> Array: #TODO: regex removes all spaces between commands
 
 
 func run_text_array(text_array):
-	print("step: ", step)
 	if step == current_text_array.size():
 		#print("reached end")
 		active = false
@@ -126,14 +125,16 @@ func run_text_array(text_array):
 		#print("did command: ", string)
 		await $CommandHandler.parse_command(string.lstrip("/"))
 		step += 1
+		print("step: ", step)
 		run_text_array(text_array)
 	elif string == "\n":
 		step += 1
+		print("step: ", step)
 		if auto_input:
 			dl.text += "\n"
 			run_text_array(text_array)
 			return
-		active = false
+		active = false #otherwise it sets active == false and ends the loop
 		if !is_sign:
 			flash_type = FLASH_NORMAL
 			flash_original_text = dl.text
@@ -142,14 +143,12 @@ func run_text_array(text_array):
 		print(string)
 		await run_text_string(string)
 		step += 1
+		print("step: ", step)
 		run_text_array(text_array)
 
 
 func run_text_string(string):
 	for character in string:
-		if should_stop:
-			should_stop = false
-			return
 		dl.text += character
 		if do_delay:
 			am.play("npc_dialog")
@@ -186,20 +185,30 @@ func _on_flash_timer_timeout():
 func _input(event):
 	if event.is_action_pressed("ui_accept") and not busy: #bypass can_input
 		if $Options.is_displaying: return #so it doesn't input
-		if not active:
-			if step == current_text_array.size():
-				exit()
-				return
-			if auto_input:
-				return
-			do_delay = true
-			active = true
-			$FlashTimer.stop()
-			dl.text = flash_original_text + "\n" #remove cursor, add back newline
-			run_text_array(current_text_array)
-		
-		elif not auto_input: #active
-			do_delay = false
+		if awaiting_merge:
+			awaiting_merge = false
+			$CommandHandler.seek("/m", true)
+		elif auto_input:
+			return
+		elif active: #if already active, speed text up
+			do_delay = false 
+		else:
+			progress_text()
+
+
+func progress_text(with_newline = true):
+	if step == current_text_array.size():
+		exit()
+		return
+	do_delay = true
+	active = true
+	$FlashTimer.stop()
+	if with_newline:
+		dl.text = flash_original_text + "\n" #remove cursor, add back newline
+	else:
+		dl.text = flash_original_text
+	run_text_array(current_text_array)
+
 
 
 func exit():
