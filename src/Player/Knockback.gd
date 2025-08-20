@@ -35,7 +35,7 @@ func set_move_dir():
 	var move_dir = Vector2.ZERO
 	if pc.can_input:
 		move_dir= Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0.0)
-		if mm.coyote_timer.time_left > 0.0 and Input.is_action_just_pressed("jump"):
+		if not mm.coyote_timer.is_stopped() and Input.is_action_just_pressed("jump"):
 			move_dir = Vector2(move_dir.x, -1.0)
 	pc.move_dir = move_dir
 
