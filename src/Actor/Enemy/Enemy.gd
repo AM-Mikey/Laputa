@@ -189,7 +189,8 @@ func die(quietly = false):
 		_on_DamagenumTimer_timeout()
 	if !pc:
 		pc = get_tree().get_root().get_node_or_null("World/Juniper")
-	pc.enemies_touching.erase(self)
+	if pc:
+		pc.enemies_touching.erase(self)
 	if !quietly:
 		am.play(die_sound, self)
 		do_death_routine()

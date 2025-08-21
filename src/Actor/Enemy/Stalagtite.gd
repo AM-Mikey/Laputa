@@ -92,11 +92,15 @@ func enter_squirm():
 	$CollisionShape2D.set_deferred("disabled", true)
 	$GroundedCollision.set_deferred("disabled", false)
 	
-	match difficulty:
-		1:
-			move_dir = Vector2(sign(position.x - target.position.x), 0) #opposite direction of player
-		2:
-			move_dir = Vector2(sign(target.position.x - position.x), 0) #direction of player
+	if target:
+		match difficulty:
+			1:
+				move_dir = Vector2(sign(position.x - target.position.x), 0) #opposite direction of player
+			2:
+				move_dir = Vector2(sign(target.position.x - position.x), 0) #direction of player
+	else:
+		# Randomize direction if no target exists
+		move_dir = Vector2([-1.0, 1.0].get(randi_range(0, 1)), 0)
 	match move_dir:
 		Vector2.LEFT: $Sprite2D.flip_h = false
 		Vector2.RIGHT: $Sprite2D.flip_h = true

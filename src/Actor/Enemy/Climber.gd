@@ -64,6 +64,8 @@ func do_rotate():
 
 func do_chase():
 	hp = 1
+	if not pc:
+		return
 	var player_vector = (pc.global_position - global_position).normalized()
 	velocity = calc_velocity(velocity, player_vector, speed)
 	move_and_slide()
