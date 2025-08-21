@@ -47,8 +47,6 @@ func _on_new():
 func _on_load():
 	queue_free()
 	
-	w.add_child(JUNIPER.instantiate())
-	w.get_node("UILayer").add_child(HUD.instantiate())
 	w.read_player_data_from_save()
 	w.read_level_data_from_save()
 	w.copy_level_data_from_save_to_temp()
