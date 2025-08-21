@@ -16,8 +16,6 @@ func state_process(_delta):
 
 	set_player_directions()
 	pc.velocity = calc_velocity(is_jump_interrupted)
-	pc.set_up_direction(mm.FLOOR_NORMAL)
-	pc.set_floor_stop_on_slope_enabled(true)
 	pc.move_and_slide()
 	var new_velocity = pc.velocity
 	if pc.is_on_wall():
@@ -26,11 +24,13 @@ func state_process(_delta):
 	pc.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
 	animate()
 
+	# We only set move_dir.y to jump for a single frame
+	pc.move_dir.y = 0.0
+
 	if pc.is_on_floor(): #landed
 		mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
 		mm.change_state("run")
 		return
-
 
 func set_player_directions():
 	var input_dir = Vector2.ZERO
@@ -40,13 +40,7 @@ func set_player_directions():
 		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
 	
 	#get move dir
-	var move_y = 0.0
-	if mm.coyote_timer.time_left > 0.0:
-		mm.coyote_timer.stop()
-		move_y = -1.0
-	if pc.is_on_floor():
-		move_y = -1.0
-	pc.move_dir = Vector2(input_dir.x, move_y)
+	pc.move_dir = Vector2(input_dir.x, pc.move_dir.y)
 	
 	#get look_dir
 	var look_x = pc.look_dir.x
@@ -78,13 +72,14 @@ func animate():
 	elif pc.velocity.y > 0:
 		animation = "back_aerial_fall" if do_back else "aerial_fall"
 
+
 	#for runtime, set the frame counts before the animation starts
 	sprite.hframes = int(reference_texture.get_width() / 32.0)
 	sprite.vframes = int(reference_texture.get_height() / 32.0)
-
+	
 	var vframe = get_vframe()
 	sprite.frame_coords.y = vframe
-
+	
 	if not ap.is_playing() or ap.current_animation != animation:
 		ap.stop()
 		ap.play(animation, 0.0, 1.0)
@@ -136,13 +131,20 @@ func get_vframe() -> int:
 
 
 
-### STATE ###
+### STATES ###			#TODO: juniper's hurtbox becomes much smaller when jumping
 
 func enter():
 	pc.get_node("CollisionShape2D").set_deferred("disabled", true)
 	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
 	pc.get_node("JumpCollision").set_deferred("disabled", false)
 	pc.get_node("SSPDetector/CollisionShape2D2").set_deferred("disabled", false)
+	pc.set_up_direction(mm.FLOOR_NORMAL)
+	pc.set_floor_stop_on_slope_enabled(true)
+	pc.mm.snap_vector = Vector2.ZERO
+	# Set the player's move dir to -1.0 to indicate a jump.
+	# It will be reset on next physics frame
+	pc.move_dir.y = -1.0
+	am.play("pc_jump")
 
 func exit():
 	pc.mm.land()

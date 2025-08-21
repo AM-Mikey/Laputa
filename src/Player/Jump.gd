@@ -16,7 +16,6 @@ func state_process(_delta):
 
 	set_player_directions()
 	pc.velocity = calc_velocity(is_jump_interrupted)
-
 	pc.move_and_slide()
 	var new_velocity = pc.velocity
 	if pc.is_on_wall():
@@ -24,6 +23,9 @@ func state_process(_delta):
 		
 	pc.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
 	animate()
+
+	# We only set move_dir.y to jump for a single frame
+	pc.move_dir.y = 0.0
 
 	if pc.is_on_floor(): #landed
 		mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
@@ -36,14 +38,9 @@ func set_player_directions():
 		input_dir = Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+	
 	#get move dir
-	var move_y = 0.0
-	if mm.coyote_timer.time_left > 0.0:
-		mm.coyote_timer.stop()
-		move_y = -1.0
-	if pc.is_on_floor():
-		move_y = -1.0
-	pc.move_dir = Vector2(input_dir.x, move_y)
+	pc.move_dir = Vector2(input_dir.x, pc.move_dir.y)
 	
 	#get look_dir
 	var look_x = pc.look_dir.x
@@ -93,7 +90,6 @@ func animate():
 
 func calc_velocity(is_jump_interrupted):
 	var out = pc.velocity
-	var friction = false
 	#Y
 	out.y += mm.gravity * get_physics_process_delta_time()
 	if sign(pc.move_dir.y) == -1:
@@ -133,6 +129,11 @@ func enter():
 	pc.get_node("SSPDetector/CollisionShape2D2").set_deferred("disabled", false)
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
+	pc.mm.snap_vector = Vector2.ZERO
+	# Set the player's move dir to -1.0 to indicate a jump.
+	# It will be reset on next physics frame
+	pc.move_dir.y = -1.0
+	am.play("pc_jump")
 
 func exit():
 	pc.mm.land()
