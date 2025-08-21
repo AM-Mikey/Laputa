@@ -31,19 +31,13 @@ func do_focus():
 
 func _on_Continue_pressed():
 	visible = false
-	
-	
-	w.add_child(JUNIPER.instantiate())
-	w.get_node("UILayer").add_child(HUD.instantiate())
-	
+	w.get_node("DeathCamera").queue_free()
+
 	w.read_player_data_from_save()
 	w.read_level_data_from_save()
 	w.copy_level_data_from_save_to_temp()
 	
-	
-	#w.get_node("DeathCam").queue_free()
 	queue_free()
-	
 
 
 func _on_Quit_pressed():

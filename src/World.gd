@@ -284,15 +284,18 @@ func write_player_data_to_save():
 
 
 func read_player_data_from_save():
-	var pc = $Juniper
-	var guns = pc.guns
-	
 	var scoped_data = read_from_file(save_path)
 	var player_data = scoped_data["player_data"]
+	
+	if $Juniper:
+		$Juniper.queue_free()
+		$UILayer/HUD.queue_free()
 	
 	change_level_via_code(player_data["current_level"])
 	await get_tree().process_frame
 	
+	var pc = $Juniper
+	var guns = pc.guns
 	pc.position = player_data["position"]
 	pc.hp = player_data["hp"]
 	pc.max_hp = player_data["max_hp"]

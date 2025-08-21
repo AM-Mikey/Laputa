@@ -25,19 +25,10 @@ func _on_LevelButton_pressed():
 	if world.has_node("UILayer/HUD"):
 		world.get_node("UILayer/HUD").free()
 	
-	world.on_level_change(level, -1)
+	world.change_level_via_code(level)
 	
 	if world.has_node("UILayer/TitleScreen"):
 		world.get_node("UILayer/TitleScreen").queue_free()
 	if world.has_node("UILayer/PauseMenu"):
 		world.get_node("UILayer/PauseMenu").unpause()
-
-	world.add_child(JUNIPER.instantiate())
-	world.get_node("UILayer").add_child(HUD.instantiate())
-	
-	await get_tree().process_frame
-	
-	for s in get_tree().get_nodes_in_group("SpawnPoints"):
-		world.get_node("Juniper").global_position = s.global_position
-	
 	world.get_node("UILayer/LevelSelect").queue_free()
