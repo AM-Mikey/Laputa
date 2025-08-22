@@ -96,17 +96,19 @@
 	/db,0 You picked OptionA. /udb
 	/db,1 You picked OptionB. /udb
 	/db,2 You picked OptionC. /udb
-	/m Now the dialog branches are merged.
+	/m Now the dialog branches are merged. 
 	",
 
 	"branchtest4":
 	"
-	/newchar,basil,basil Yawn, this is a test of the topic system.
-	/topics,sasuke,cheese,basil,general After this message, select an option.
+	/newchar,basil,basil Yawn, this is a /b test /ub of the /t,topic_system topic /ut system.
+	/topics,sasuke,cheese,basil,topic_system,general After this message, select an option.
 	/db,0 You picked Sasuke. /udb
 	/db,1 You picked Cheese. /udb
 	/db,2 You picked Basil! That's me. /udb
-	/db,3 Here's the news of the day. /udb
+	/db,3 What's the topic system?
+	it's what's allowing you to talk to me about a variety of topics. /udb
+	/db,4 Here's the news of the day. /udb
 	/m Now the dialog branches are merged.
 	",
 }   

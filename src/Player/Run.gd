@@ -8,6 +8,7 @@ extends Node
 @onready var ap = pc.get_node("AnimationPlayer")
 
 var saved_move_dir := Vector2.ZERO #for the 2 frame stand
+var do_edge_turn: bool
 #var previous_tick_was_on_wall = false
 
 func state_process(_delta):
@@ -87,7 +88,13 @@ func animate():
 		reference_texture = preload("res://assets/Player/BackRun.png")
 	if pc.move_dir.x == 0.0 and saved_move_dir.x == 0.0: #standing
 		
-		if (!absolute_left and absolute_right and slight_slope_left) or (!absolute_right and absolute_left and slight_slope_right):
+		if (!absolute_left and !absolute_right): #only a middle colliding
+				do_edge_turn = false
+				sprite.position = Vector2i(0.0, -15.0) #1 down
+				animation = "stand_peak"
+				reference_texture = preload("res://assets/Player/StandPeak.png")
+		elif (!absolute_left and absolute_right and slight_slope_left) or (!absolute_right and absolute_left and slight_slope_right):
+			do_edge_turn = false
 			sprite.position = Vector2i(0.0, -12.0)
 			if (!absolute_left and pc.look_dir.x == 1.0) or (!absolute_right and pc.look_dir.x == -1.0):
 				animation = "slight_up_slope"
@@ -96,6 +103,7 @@ func animate():
 				animation = "slight_down_slope"
 				reference_texture = preload("res://assets/Player/SlightDownSlope.png")
 		elif (!absolute_left and absolute_right and slope_left) or (!absolute_right and absolute_left and slope_right):
+			do_edge_turn = false
 			if (!absolute_left and pc.look_dir.x == 1.0) or (!absolute_right and pc.look_dir.x == -1.0):
 				sprite.position = Vector2i(0.0, -7.0)
 				animation = "up_slope"
@@ -105,18 +113,25 @@ func animate():
 				animation = "down_slope"
 				reference_texture = preload("res://assets/Player/DownSlope.png")
 		elif (!edge_left and absolute_right and pc.look_dir.x == 1.0) or (!edge_right and absolute_left and pc.look_dir.x == -1.0):
-			animation = "edge_turn"
-			reference_texture = preload("res://assets/Player/EdgeTurn.png")
+			if do_edge_turn:
+				animation = "edge_turn"
+				reference_texture = preload("res://assets/Player/EdgeTurn.png")
+			else:
+				animation = "edge_front"
+				reference_texture = preload("res://assets/Player/EdgeFront.png")
 		elif (!stand_close_left and absolute_right and pc.look_dir.x == 1.0) or (!stand_close_right and edge_left and pc.look_dir.x == -1.0):
-			animation = "edge_turn"
-			reference_texture = preload("res://assets/Player/EdgeTurn.png")
+			animation = "stand_peak"
+			reference_texture = preload("res://assets/Player/StandPeak.png")
 		elif (!edge_left and pc.look_dir.x == -1.0) or (!edge_right and pc.look_dir.x == 1.0):
+			do_edge_turn = true
 			animation = "edge"
 			reference_texture = preload("res://assets/Player/Edge.png")
 		elif (!stand_close_left and pc.look_dir.x == -1.0) or (!stand_close_right and pc.look_dir.x == 1.0):
+			do_edge_turn = false
 			animation = "stand_close"
 			reference_texture = preload("res://assets/Player/StandClose.png")
 		else:
+			do_edge_turn = false
 			animation = "stand"
 			reference_texture = preload("res://assets/Player/Stand.png")
 	elif pc.is_on_wall(): #TODO: this triggers on 45* slopes
@@ -150,7 +165,8 @@ func animate():
 	var do_blending = false
 	
 	var run_group = ["run", "crouch_run", "back_run"]
-	var stand_group = ["stand", "stand_close", "push", "crouch", "edge_turn", "up_slope", "down_slope", "slight_up_slope", "slight_down_slope"]
+	#var edge_group = ["edge", "edge_front"]
+	var stand_group = ["stand", "stand_close", "push", "crouch", "edge_turn", "up_slope", "down_slope", "slight_up_slope", "slight_down_slope", "stand_peak"]
 	
 	if run_group.has(animation):
 		ap.speed_scale = max((abs(pc.velocity.x)/mm.speed.x) * 2, 0.1)
@@ -234,5 +250,6 @@ func enter():
 	pc.set_floor_stop_on_slope_enabled(true)
 	pc.floor_max_angle = 0.8 #well over 45degrees so we can have a lower safe_margin
 	pc.safe_margin = 0.008 #may cause issues this low
+	do_edge_turn = false
 func exit():
 	pass

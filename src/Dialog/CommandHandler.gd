@@ -51,9 +51,9 @@ func parse_command(string):
 			db.dl.text += "\n"
 			#dl.horizontal_alignment = 1 #center
 		"b":
-			db.dl.text += "[b]"
+			db.dl.text += " [b]"
 		"ub": #doesnt work at end of line
-			db.dl.text += "[/b]"
+			db.dl.text += "[/b] "
 		"knockpc":
 			var a = string.split(",")
 			db.dl.text = ""
@@ -74,6 +74,13 @@ func parse_command(string):
 			options(argument)
 		"topics":
 			topics(argument)
+		
+		"t": 
+			db.dl.text += " [b][color=#f3b131]" #bright gold
+			if !pc.topic_array.has(argument):
+				pc.topic_array.append(argument)
+		"ut":
+			db.dl.text += "[/color][/b] "
 		#"focus":#					/focus, (string: npc_id)							focuses PlayerCamera on an npc, doesn't work indoors
 			#focus(argument)
 		#"unfocus":#																		returns camera focus to the pc
@@ -174,71 +181,6 @@ func waypoint(string):
 		if n.id == id:
 			n.walk_to_waypoint(index)
 
-func yes_no():
-	db.get_node("Options").options = ["Yes", "No"]
-	db.get_node("Options").display_options()
-	db.dl = db.get_node("Response/DialogResponse")
-	db.dl.text = ""
-	if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
-		db.get_node("Options").exit_action = "options"
-
-func options(string):
-	var a = string.split(",")
-	var capitalized_array = []
-	for s in a:
-		var capitalized = s.capitalize()
-		capitalized_array.append(capitalized)
-	db.get_node("Options").options = capitalized_array
-	db.get_node("Options").display_options()
-	db.dl = db.get_node("Response/DialogResponse")
-	db.dl.text = ""
-	if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
-		db.get_node("Options").exit_action = "options"
-
-func topics(argument):
-	var npc_topics = argument.split(",")
-	
-	var cap_pc_topics = []
-	for topic in pc.topic_array:
-		cap_pc_topics.append(topic.capitalize())
-
-	var cap_npc_topics = []
-	for topic in npc_topics:
-		cap_npc_topics.append(topic.capitalize())
-
-	var final_topics = []
-	var final_ids = []
-	for npc_topic in cap_npc_topics:
-		for pc_topic in cap_pc_topics:
-			if npc_topic == pc_topic:
-				final_topics.append(npc_topic)
-
-	for topic in final_topics:
-		final_ids.append(cap_npc_topics.find(topic))
-
-	db.get_node("Options").options = final_topics
-	db.get_node("Options").ids = final_ids
-	db.get_node("Options").display_options()
-	db.dl = db.get_node("Response/DialogResponse")
-	db.dl.text = ""
-	if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
-		db.get_node("Options").exit_action = "topics"
-
-func on_select_branch(branch):
-	if branch != null:
-		var seek_target = String("/db," + str(branch))
-		seek(seek_target)
-
-func end_branch():
-	db.awaiting_merge = true
-	#db.active = false
-	db.flash_type = db.FLASH_NORMAL
-	db.flash_original_text = db.dl.text
-	db.get_node("FlashTimer").start(0.3)
-	#print("adding back newline")
-	#db.step -= 3 #5 it changed #WHY WHY WHY WHY WHY #this is probably the cause of the step number going out of sync
-	##we should hope to eliminate steps alltogether
-
 
 func focus(string):
 	if string == "":
@@ -309,7 +251,68 @@ func wait(string):
 
 
 
-### HELPERS ###
+### BRANCHING ###
+
+func yes_no():
+	db.get_node("Options").options = ["Yes", "No"]
+	db.get_node("Options").display_options()
+	db.dl = db.get_node("Response/DialogResponse")
+	db.dl.text = ""
+	if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
+		db.get_node("Options").exit_action = "options"
+
+func options(string):
+	var a = string.split(",")
+	var capitalized_array = []
+	for s in a:
+		var capitalized = s.capitalize()
+		capitalized_array.append(capitalized)
+	db.get_node("Options").options = capitalized_array
+	db.get_node("Options").display_options()
+	db.dl = db.get_node("Response/DialogResponse")
+	db.dl.text = ""
+	if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
+		db.get_node("Options").exit_action = "options"
+
+func topics(argument):
+	var npc_topics = argument.split(",")
+	var cap_pc_topics = []
+	for topic in pc.topic_array:
+		cap_pc_topics.append(topic.capitalize())
+	var cap_npc_topics = []
+	for topic in npc_topics:
+		cap_npc_topics.append(topic.capitalize())
+	var final_topics = []
+	var final_ids = []
+	for npc_topic in cap_npc_topics:
+		for pc_topic in cap_pc_topics:
+			if npc_topic == pc_topic:
+				final_topics.append(npc_topic)
+	for topic in final_topics:
+		final_ids.append(cap_npc_topics.find(topic))
+
+	db.get_node("Options").options = final_topics
+	db.get_node("Options").ids = final_ids
+	db.get_node("Options").display_options()
+	db.dl = db.get_node("Response/DialogResponse")
+	db.dl.text = ""
+	if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
+		db.get_node("Options").exit_action = "topics"
+
+
+func on_select_branch(branch):
+	if branch != null:
+		var seek_target = String("/db," + str(branch))
+		seek(seek_target)
+
+
+func end_branch():
+	db.awaiting_merge = true
+	db.flash_type = db.FLASH_NORMAL
+	db.flash_original_text = db.dl.text
+	db.get_node("FlashTimer").start(0.3)
+
+
 
 func seek(string, do_nl = false):
 	print("seeking: ", string)

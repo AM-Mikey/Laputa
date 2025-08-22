@@ -201,10 +201,15 @@ juniper set all states to
 MAJOR - update all characterbodies to safe_margin of around 0.008  to prevent pixel jitter (and monitor if this changes anything)
 
 
-
-
 sometimes the yn or option dialog gets cut off when speeding dialog ahead
-
 consider having unknown topics greyed out so that players are incentivised to go collect them in the world
-green text that adds topics to juniper's topic array
-consider when the topic prompt happens, if there's a generic dialog
+
+
+juniper animation ---
+move arm gun up for left stand animations
+move shoot right up slope gun so it doesnt instafizzle on slight slope
+
+-observe +tweak hitbox changes
+-observe save/load and identify issues
+-reconsider pc -> get_pc_or_null()
+-consider autoload for saveload code 
