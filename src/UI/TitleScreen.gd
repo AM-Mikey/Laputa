@@ -47,9 +47,9 @@ func _on_new():
 func _on_load():
 	queue_free()
 	
-	w.read_player_data_from_save()
-	w.read_level_data_from_save()
-	w.copy_level_data_from_save_to_temp()
+	SaveSystem.read_player_data_from_save()
+	SaveSystem.read_level_data_from_save(w.current_level)
+	SaveSystem.copy_level_data_from_save_to_temp()
 
 
 func _on_options():

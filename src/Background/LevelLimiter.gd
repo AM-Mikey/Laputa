@@ -48,6 +48,7 @@ func _process(delta):
 	var desired_fps = 60
 	var variance = delta*desired_fps
 	for t in texture_rects:
+		if !is_instance_valid(texture_rects[t]): return
 		texture_rects[t].position.x += horizontal_speed * variance * layer_scales[t].x
 		var texture_width = texture_rects[t].texture.get_width()
 		if texture_rects[t].position.x >= (layer_repeating_length * -0.5) + texture_width \

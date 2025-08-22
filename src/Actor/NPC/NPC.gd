@@ -34,7 +34,7 @@ var bail_time = 6.0
 
 var camera_forgiveness = 16
 
-@onready var pc = get_tree().get_root().get_node_or_null("World/Juniper")
+#@onready var pc = get_tree().get_root().get_node_or_null("World/Juniper")
 
 func _ready():
 	home = global_position
@@ -173,9 +173,9 @@ func enter_talk():
 	else:
 		change_animation("Idle") 
 	speed = Vector2.ZERO
-	look_at_node(pc)
+	look_at_node(f.pc())
 	
-	pc.inspect_target = self
+	f.pc().inspect_target = self
 	if get_tree().get_nodes_in_group("DialogBoxes") != []:
 		pass
 	else:

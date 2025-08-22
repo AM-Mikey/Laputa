@@ -213,3 +213,13 @@ move shoot right up slope gun so it doesnt instafizzle on slight slope
 -observe save/load and identify issues
 -reconsider pc -> get_pc_or_null()
 -consider autoload for saveload code 
+
+
+### SAVELOAD ###
+-entering a door can sometimes cause a flash of black, where the effect isn't properly loading in
+-rename settings and options to be more clear
+-settings save/load update code (have it write if there is no file to read from)
+-settings is writing data many more times than it needs to. have it wait until all data is collected
+-all of juniper's guns show on load
+
+-reimplement limited triggers (consider adding trigger amount of times possible)

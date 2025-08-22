@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b1vehxtueux4l"]
 
 [ext_resource type="StyleBox" uid="uid://dj8k7ro8dbrl3" path="res://src/UI/StyleBox/PaperSwatch.tres" id="1"]
-[ext_resource type="Theme" path="res://src/UI/Theme/InsetMenu.tres" id="2"]
+[ext_resource type="Theme" uid="uid://c1np2xna4dogr" path="res://src/UI/Theme/InsetMenu.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://bqcnin0ya0s5l" path="res://src/UI/StyleBox/SteelCorner.tres" id="3"]
 [ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="4"]
 [ext_resource type="Script" uid="uid://1yhihyfmaejt" path="res://src/UI/Options/Settings.gd" id="6"]

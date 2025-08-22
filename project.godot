@@ -66,8 +66,9 @@ config/icon="uid://b42so8fnnp3uq"
 
 am="*res://src/Audio/AudioManager.gd"
 DebugHotkeys="*res://src/Utility/DebugHotkeys.gd"
-WindowResizer="*res://addons/WindowResizer.gd"
 mc="*res://src/UI/MouseCursor.gd"
+SaveSystem="*res://src/Utility/SaveSystem.gd"
+f="*res://src/Utility/Finder.gd"
 
 [display]
 

@@ -171,12 +171,12 @@ offset_bottom = 176.0
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
-"door_index": [0, 2],
+"door_index": [10, 2],
 "editor_hidden": [false, 1],
 "level": ["", 4],
 "locked": [false, 1],
 "same_level": [true, 1],
-"same_level_next_index": [1, 2]
+"same_level_next_index": [11, 2]
 }
 size_is_default = false
 
@@ -189,12 +189,12 @@ offset_bottom = 176.0
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
-"door_index": [1, 2],
+"door_index": [11, 2],
 "editor_hidden": [false, 1],
 "level": ["", 4],
 "locked": [false, 1],
 "same_level": [true, 1],
-"same_level_next_index": [2, 2]
+"same_level_next_index": [12, 2]
 }
 size_is_default = false
 
@@ -207,12 +207,12 @@ offset_bottom = 176.0
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
-"door_index": [2, 2],
+"door_index": [12, 2],
 "editor_hidden": [false, 1],
 "level": ["", 4],
 "locked": [false, 1],
 "same_level": [true, 1],
-"same_level_next_index": [0, 2]
+"same_level_next_index": [10, 2]
 }
 size_is_default = false
 

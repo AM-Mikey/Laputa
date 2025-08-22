@@ -109,7 +109,6 @@ func land():
 func jump():
 	if pc.is_forced_crouching: return
 	snap_vector = Vector2.ZERO
-	am.play("pc_jump")
 	#Check if a running jump. since speed.x is max x velocity, only count as a running jump then
 	if abs(pc.velocity.x) > speed.x * 0.95 and pc.can_input:
 		if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):

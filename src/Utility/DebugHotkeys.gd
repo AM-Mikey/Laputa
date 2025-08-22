@@ -57,18 +57,18 @@ func _input(event):
 			var popup = POPUP.instantiate()
 			popup.text = "quicksaved..."
 			ui.add_child(popup)
-			w.write_level_data_to_temp()
-			w.write_player_data_to_save()
-			w.copy_level_data_from_temp_to_save()
+			SaveSystem.write_level_data_to_temp(w.current_level)
+			SaveSystem.write_player_data_to_save(w.current_level)
+			SaveSystem.copy_level_data_from_temp_to_save()
 
 
 		if event.is_action_pressed("debug_load"):
 			var popup = POPUP.instantiate()
 			popup.text = "loaded save"
 			ui.add_child(popup)
-			w.read_player_data_from_save()
-			w.read_level_data_from_save()
-			w.copy_level_data_from_save_to_temp()
+			SaveSystem.read_player_data_from_save()
+			SaveSystem.read_level_data_from_save(w.current_level)
+			SaveSystem.copy_level_data_from_save_to_temp()
 
 		if event.is_action_pressed("debug_shop"):
 			var shop_menu = SHOP_MENU.instantiate()
