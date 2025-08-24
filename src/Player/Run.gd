@@ -20,14 +20,6 @@ func state_process(_delta):
 	pc.move_and_slide()
 	animate()
 
-	#if Input.is_action_pressed("look_down") and pc.can_input: manual crouch
-		#pc.is_crouching = true
-		#pc.get_node("CollisionShape2D").set_deferred("disabled", true)
-		#pc.get_node("CrouchingCollision").set_deferred("disabled", false)
-	#elif not pc.is_forced_crouching:
-		#pc.is_crouching = false
-		#pc.get_node("CollisionShape2D").set_deferred("disabled", false)
-		#pc.get_node("CrouchingCollision").set_deferred("disabled", true)
 	
 	if not pc.is_on_floor() and not pc.is_in_coyote:
 		pc.is_in_coyote = true
@@ -252,4 +244,4 @@ func enter():
 	pc.safe_margin = 0.008 #may cause issues this low
 	do_edge_turn = false
 func exit():
-	pass
+	sprite.position = Vector2i(0.0, -16.0)
