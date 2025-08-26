@@ -44,6 +44,14 @@ func _ready():
 
 	SaveSystem.load_options()
 
+	# Grab the default viewport width and height
+	var width = ProjectSettings.get_setting("display/window/size/viewport_width")
+	var height = ProjectSettings.get_setting("display/window/size/viewport_height")
+
+	# Apply them to the root window as the minimum size
+	var main_window = get_tree().get_root()
+	main_window.set_min_size(Vector2i(width, height))
+
 
 
 func get_internal_version() -> String:
@@ -264,7 +272,6 @@ func clear_spawn_layers():
 func on_viewport_size_changed():
 	if viewport_size_ignore:
 		return
-	print("viewport size changed")
 	var viewport_size = get_tree().get_root().size
 	
 	var tiles_visible_y = 15.0
@@ -273,9 +280,7 @@ func on_viewport_size_changed():
 		resolution_scale = floori(urs) #round 0.5 down
 	else:
 		resolution_scale = roundi(urs) #else round normally
-	if resolution_scale == 0: 
-		resolution_scale = 0.0001 #div by 0 protection
-
+	resolution_scale = max(resolution_scale, 1)
 
 	ui.scale = Vector2(resolution_scale, resolution_scale)
 	back.scale = Vector2(resolution_scale, resolution_scale)
