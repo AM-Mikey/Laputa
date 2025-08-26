@@ -16,7 +16,6 @@ scroll_offset = Vector2(1184, 796)
 scroll_base_offset = Vector2(0, -2892)
 
 [node name="Back" type="Node2D" parent="."]
-scale = Vector2(4, 4)
 
 [node name="Middle" type="Node2D" parent="."]
 z_index = 1
@@ -28,15 +27,9 @@ z_index = 1
 process_mode = 3
 layer = 2
 visible = false
-scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 0, 0)
 
 [node name="EditorLayer" type="CanvasLayer" parent="."]
 layer = 3
-scale = Vector2(2, 2)
-transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="DebugLayer" type="CanvasLayer" parent="."]
 layer = 4
-scale = Vector2(2, 2)
-transform = Transform2D(2, 0, 0, 2, 0, 0)

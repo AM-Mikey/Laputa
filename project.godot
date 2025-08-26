@@ -72,8 +72,8 @@ f="*res://src/Utility/Finder.gd"
 
 [display]
 
-window/size/viewport_width=960
-window/size/viewport_height=540
+window/size/viewport_width=480
+window/size/viewport_height=270
 
 [editor]
 
