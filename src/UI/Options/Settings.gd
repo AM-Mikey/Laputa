@@ -48,7 +48,6 @@ func on_displaymode_changed(index: int):
 	match index:
 		0: #windowed
 			win.mode = Window.MODE_WINDOWED
-			win.size = Vector2i(1920, 1080) #TODO, change later on for smaller screens
 			win.move_to_center()
 			win.borderless = false
 		1: #borderless
