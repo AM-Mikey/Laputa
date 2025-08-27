@@ -26,7 +26,6 @@ z_index = 1
 [node name="UILayer" type="CanvasLayer" parent="."]
 process_mode = 3
 layer = 2
-visible = false
 
 [node name="EditorLayer" type="CanvasLayer" parent="."]
 layer = 3

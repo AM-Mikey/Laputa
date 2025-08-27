@@ -336,12 +336,6 @@ texture = ExtResource("1_uxqps")
 15:8/0 = 0
 14:9/0 = 0
 15:9/0 = 0
-19:12/0 = 0
-19:12/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
-19:12/0/physics_layer_1/polygon_0/one_way = true
-20:12/0 = 0
-20:12/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
-20:12/0/physics_layer_1/polygon_0/one_way = true
 
 [resource]
 physics_layer_0/collision_layer = 8
