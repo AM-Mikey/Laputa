@@ -1,5 +1,5 @@
 @icon("res://assets/Icon/PropIcon.png")
-extends Node2D
+extends CharacterBody2D
 class_name Prop
 
 var sfx_ammo_refill = load("res://assets/SFX/placeholder/snd_get_missile.ogg")

@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_4qvu0"]
 [ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="4_3og66"]
 [ext_resource type="TileSet" uid="uid://bgrifkxiitl3h" path="res://src/Tile/DogtownExterior.tres" id="5_0ewrk"]
-[ext_resource type="PackedScene" uid="uid://dvy1sppkb6tx" path="res://src/Actor/Lilypad.tscn" id="6_6s35s"]
+[ext_resource type="PackedScene" uid="uid://dvy1sppkb6tx" path="res://src/Prop/Lilypad.tscn" id="6_6s35s"]
 [ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/TriggerSpawn.tscn" id="7_4qvu0"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="7_anwej"]
 [ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="7_t8fqs"]

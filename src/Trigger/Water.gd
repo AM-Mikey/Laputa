@@ -24,7 +24,6 @@ func _on_Water_body_entered(body):
 		target.is_in_water = true
 		if do_bubbles:
 			var be = BUBBLEEMITTER.instantiate()
-			be.position = Vector2(0, -8)
 			bubble_emitters[target] = be
 			target.add_child(be)
 		

@@ -231,3 +231,11 @@ various glitches when moving up and down slopes, when going from edge to backedg
 #dogtown
 
 make lilypad into prop
+make ssp raycast
+
+migrate other nodes to use f.pc()
+
+add prop spawns
+migrate prop to characterbody2d
+
+move spawns from spawns to individual spawn layers

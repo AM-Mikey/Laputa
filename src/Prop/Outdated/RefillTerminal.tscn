@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://vmeytj0j6nm4"]
+
+[ext_resource type="Script" uid="uid://bar2epwbuic8c" path="res://src/Prop/Outdated/RefillTerminal.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://dgktewce5k5jw" path="res://assets/Prop/0RefillTerminal.png" id="2_5osfq"]
+[ext_resource type="PackedScene" uid="uid://dr3fm60tuskyu" path="res://src/Audio/SFX.tscn" id="3"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="2"]
+length = 3.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.45, 0.5, 0.55, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(1, 0)]
+}
+
+[sub_resource type="Animation" id="3"]
+length = 3.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.05, 1.1, 1.15, 1.2, 1.25, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ne20"]
+_data = {
+&"FlickerOff": SubResource("2"),
+&"FlickerOn": SubResource("3")
+}
+
+[node name="RefillTerminal" type="Area2D"]
+collision_layer = 16
+script = ExtResource("2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_5osfq")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_4ne20")
+}
+
+[node name="SFX" parent="." instance=ExtResource("3")]
+
+[connection signal="body_entered" from="." to="." method="_on_RefillTerminal_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_RefillTerminal_body_exited"]

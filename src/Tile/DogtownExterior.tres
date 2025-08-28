@@ -352,6 +352,7 @@ texture = ExtResource("1_uxqps")
 4:11/0 = 0
 4:11/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, 8, -8, 8)
 4:11/0/physics_layer_1/polygon_0/one_way = true
+4:11/0/physics_layer_1/polygon_0/one_way_margin = 0.0
 16:8/0 = 0
 16:8/0/physics_layer_1/polygon_0/points = PackedVector2Array(0, 8, 8, 8, 8, 12, 0, 12)
 16:8/0/physics_layer_1/polygon_0/one_way = true

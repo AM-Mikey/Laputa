@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvy1sppkb6tx"]
+
+[ext_resource type="Script" uid="uid://b4obj4ymt6374" path="res://src/Prop/Lilypad.gd" id="1_kblue"]
+[ext_resource type="Texture2D" uid="uid://c67neolw1exkr" path="res://assets/Prop/Lilypad.png" id="2_xqncc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tv77v"]
+size = Vector2(16, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r01ty"]
+size = Vector2(16, 1)
+
+[node name="Lilypad" type="CharacterBody2D"]
+collision_layer = 512
+collision_mask = 0
+script = ExtResource("1_kblue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 1.5)
+shape = SubResource("RectangleShape2D_tv77v")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 2
+texture = ExtResource("2_xqncc")
+centered = false
+hframes = 2
+
+[node name="CBDetector" type="Area2D" parent="."]
+position = Vector2(0, -1)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CBDetector"]
+position = Vector2(8, 0.5)
+shape = SubResource("RectangleShape2D_r01ty")
+
+[connection signal="body_entered" from="CBDetector" to="." method="_on_CbDetector_body_entered"]
+[connection signal="body_exited" from="CBDetector" to="." method="_on_CbDetector_body_exited"]

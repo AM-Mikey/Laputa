@@ -1,12 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0i32ehy7tfaa"]
+[gd_scene load_steps=3 format=3 uid="uid://c0i32ehy7tfaa"]
 
 [ext_resource type="Script" uid="uid://d1db0ci1ekkmx" path="res://src/Effect/BubbleEmitter.gd" id="1_sk1ok"]
 
-[node name="BubbleEmitter" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sk1ok"]
+size = Vector2(8, 8)
+
+[node name="BubbleEmitter" type="Area2D"]
+collision_layer = 0
+collision_mask = 1048576
 script = ExtResource("1_sk1ok")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 4.0
 autostart = true
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_sk1ok")
+debug_color = Color(0, 0.501961, 1, 0.501961)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
