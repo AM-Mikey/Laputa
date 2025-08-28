@@ -39,8 +39,8 @@ func do_fizzle(type: String):
 	var fizzle = FIZZLE.instantiate()
 	fizzle.type = type.to_lower()
 	world.get_node("Middle").add_child(fizzle)
-	
 	fizzle.position = $End.global_position if has_node("End") else global_position
+	fizzle.play()
 	if instant_fizzle and not is_enemy_bullet:
 		print("WARNING: Bullet instantly fizzled")
 		fizzle.position = world.get_node("Juniper").guns.get_child(0).get_node("Muzzle").global_position

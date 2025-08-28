@@ -4,7 +4,7 @@ var type = "range"
 
 @onready var ap = $AnimationPlayer
 
-func _ready():
+func play():
 	match type:
 		"armor": 
 			ap.play("Diamond")
