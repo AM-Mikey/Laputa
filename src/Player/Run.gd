@@ -9,14 +9,22 @@ extends Node
 
 var saved_move_dir := Vector2.ZERO #for the 2 frame stand
 var do_edge_turn: bool
-#var previous_tick_was_on_wall = false
+var push_left_wall := false
+var push_right_wall := false
 
 func state_process(_delta):
 	set_player_directions()
 	pc.velocity = calc_velocity()
-	#if pc.is_on_wall(): #dont move into wall
-		#if (pc.get_wall_normal() == Vector2.RIGHT and pc.move_dir.x < 0.0) or (pc.get_wall_normal() == Vector2.LEFT and pc.move_dir.x > 0.0):
-			#pc.velocity.x = 0.0
+	
+	if pc.get_node("WallLB").is_colliding() or pc.get_node("WallLT").is_colliding():
+		push_left_wall = true
+		pc.velocity.x = max(pc.velocity.x, 0)
+	else: push_left_wall = false
+	if pc.get_node("WallRB").is_colliding() or pc.get_node("WallRT").is_colliding():
+		push_right_wall = true
+		pc.velocity.x = min(pc.velocity.x, 0)
+	else: push_right_wall = false
+	
 	pc.move_and_slide()
 	animate()
 
@@ -126,7 +134,7 @@ func animate():
 			do_edge_turn = false
 			animation = "stand"
 			reference_texture = preload("res://assets/Player/Stand.png")
-	elif pc.is_on_wall(): #TODO: this triggers on 45* slopes
+	elif push_left_wall or push_right_wall:
 		animation = "push"
 		reference_texture = preload("res://assets/Player/Push.png")
 	else: #running
@@ -237,9 +245,10 @@ func get_vframe() -> int:
 
 ### STATE ###
 
-func enter():
+func enter(): #TODO: consider setting these back after exiting or just set these on setup
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
+	pc.floor_snap_length = 8.0
 	pc.floor_max_angle = 0.8 #well over 45degrees so we can have a lower safe_margin
 	pc.safe_margin = 0.008 #may cause issues this low
 	do_edge_turn = false

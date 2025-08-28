@@ -388,6 +388,7 @@ theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Floor: "
 
 [node name="Wall" type="Label" parent="VBox/HBox/C2/Q"]
+visible = false
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
@@ -497,6 +498,7 @@ theme_override_fonts/font = ExtResource("3_d57kx")
 text = "-"
 
 [node name="Wall" type="Label" parent="VBox/HBox/C2/A"]
+visible = false
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")

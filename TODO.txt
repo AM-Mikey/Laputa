@@ -228,3 +228,6 @@ various glitches when moving up and down slopes, when going from edge to backedg
 
 
 
+#dogtown
+
+make lilypad into prop

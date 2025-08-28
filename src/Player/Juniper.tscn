@@ -2700,6 +2700,30 @@ scale = Vector2(0.33, 1)
 target_position = Vector2(-6.67572e-05, 15)
 collision_mask = 8
 
+[node name="WallLB" type="RayCast2D" parent="."]
+modulate = Color(1, 1, 1, 0.501961)
+position = Vector2(-6, -1)
+target_position = Vector2(-1, 1.19209e-07)
+collision_mask = 8
+
+[node name="WallLT" type="RayCast2D" parent="."]
+modulate = Color(1, 1, 1, 0.501961)
+position = Vector2(-6, -15)
+target_position = Vector2(-1, 0)
+collision_mask = 8
+
+[node name="WallRB" type="RayCast2D" parent="."]
+modulate = Color(1, 1, 1, 0.501961)
+position = Vector2(6, -1)
+target_position = Vector2(1, 0)
+collision_mask = 8
+
+[node name="WallRT" type="RayCast2D" parent="."]
+modulate = Color(1, 1, 1, 0.501961)
+position = Vector2(6, -15)
+target_position = Vector2(1, 0)
+collision_mask = 8
+
 [node name="ClearenceLH" type="RayCast2D" parent="."]
 modulate = Color(1, 1, 1, 0.501961)
 position = Vector2(-4, -15)
