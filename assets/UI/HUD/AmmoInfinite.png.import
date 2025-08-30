@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddtpv7rrk0bpj"
-path="res://.godot/imported/0Explosionai.png-8a3d7c7d68fa17ec2e1db25e5c2ab5c1.ctex"
+uid="uid://c3h6bt077sxci"
+path="res://.godot/imported/AmmoInfinite.png-d4f4413caf825cef50d1fa10fcf8c9c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Effect/0Explosionai.png"
-dest_files=["res://.godot/imported/0Explosionai.png-8a3d7c7d68fa17ec2e1db25e5c2ab5c1.ctex"]
+source_file="res://assets/UI/HUD/AmmoInfinite.png"
+dest_files=["res://.godot/imported/AmmoInfinite.png-d4f4413caf825cef50d1fa10fcf8c9c2.ctex"]
 
 [params]
 

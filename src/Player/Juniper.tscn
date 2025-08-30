@@ -3013,7 +3013,7 @@ one_shot = true
 autostart = true
 
 [node name="Guns" type="Node2D" parent="GunManager"]
-position = Vector2(-3, -11)
+position = Vector2(-7, -13)
 
 [node name="Revolver" parent="GunManager/Guns" instance=ExtResource("3")]
 

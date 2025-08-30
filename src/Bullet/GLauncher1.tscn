@@ -4,12 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://b8hr08cetxnob" path="res://assets/Bullet/BulletGrenadeLauncher.png" id="2"]
 [ext_resource type="Script" uid="uid://3bmujcg5fwtv" path="res://src/Bullet/GLauncher.gd" id="3"]
 
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(10, 10)
+[sub_resource type="CircleShape2D" id="CircleShape2D_mnhdy"]
+radius = 5.09902
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2ij0i"]
-radius = 5.0
-height = 10.0
+radius = 6.0
+height = 12.0
 
 [sub_resource type="CircleShape2D" id="3"]
 radius = 32.0
@@ -59,7 +59,7 @@ collision_mask = 8
 script = ExtResource("3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("1")
+shape = SubResource("CircleShape2D_mnhdy")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="PlayerCollisionDetector" parent="." instance=ExtResource("1")]

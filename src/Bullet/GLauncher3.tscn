@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(16, 16)
+size = Vector2(12, 9)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3padu"]
 radius = 8.0
@@ -59,6 +59,7 @@ collision_mask = 8
 script = ExtResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
 shape = SubResource("1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
@@ -83,7 +84,7 @@ position = Vector2(0, 8)
 texture = ExtResource("2")
 hframes = 8
 vframes = 3
-frame = 21
+frame = 23
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
@@ -94,6 +95,5 @@ libraries = {
 }
 
 [connection signal="area_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
-[connection signal="body_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
-[connection signal="body_entered" from="ExplosionDetector" to="." method="_on_ExplosionDetector_body_entered"]
+[connection signal="body_entered" from="ExplosionDetector" to="." method="_on_CollisionDetector_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://dulcn8jx6cd3y"]
+[gd_scene load_steps=61 format=3 uid="uid://dulcn8jx6cd3y"]
 
 [ext_resource type="Script" uid="uid://getspcndfk4e" path="res://src/UI/HUD/HUD.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c7wyw4y3jdl7j" path="res://assets/UI/NumberNew.png" id="2"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://ioyoa6s1nd8k" path="res://assets/UI/HUD/AmmoBack.png" id="16_xjeta"]
 [ext_resource type="Texture2D" uid="uid://dx0ik613p1n7k" path="res://assets/UI/HUD/AmmoBullets.png" id="17_g36jn"]
 [ext_resource type="Texture2D" uid="uid://c643uge81sfaw" path="res://assets/UI/HUD/CooldownCap.png" id="17_iwa0c"]
+[ext_resource type="Texture2D" uid="uid://c3h6bt077sxci" path="res://assets/UI/HUD/AmmoInfinite.png" id="18_1f167"]
 [ext_resource type="Texture2D" uid="uid://iaear02sxjij" path="res://assets/UI/HUD/WeaponWheel.png" id="19_g36jn"]
 [ext_resource type="Texture2D" uid="uid://xdyjjbvv4pjx" path="res://assets/UI/HUD/Bullet.png" id="20_rfbaj"]
 [ext_resource type="Texture2D" uid="uid://s3vaw1gr2atc" path="res://assets/Gun/MPistolIconSmall.png" id="21_1f167"]
@@ -26,7 +27,7 @@
 
 [sub_resource type="Animation" id="Animation_rfbaj"]
 resource_name = "BulletShoot"
-length = 0.3
+length = 0.2
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -35,10 +36,22 @@ tracks/0/path = NodePath("BulletTop:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 7]
+"values": [1, 2, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletTop:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_g36jn")]
 }
 
 [sub_resource type="Animation" id="Animation_1f167"]
@@ -53,7 +66,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2]
+"values": [7]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -67,10 +80,64 @@ tracks/1/keys = {
 "update": 1,
 "values": [11]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BulletBottom:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_g36jn")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BulletTop:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_g36jn")]
+}
+
+[sub_resource type="Animation" id="Animation_262s4"]
+resource_name = "BulletShootInfinite"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletTop:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletTop:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("18_1f167")]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8nsof"]
 _data = {
 &"BulletShoot": SubResource("Animation_rfbaj"),
+&"BulletShootInfinite": SubResource("Animation_262s4"),
 &"RESET": SubResource("Animation_1f167")
 }
 
@@ -90,6 +157,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [7]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletBottom:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_g36jn")]
+}
 
 [sub_resource type="Animation" id="Animation_vg0wx"]
 resource_name = "BulletReload1"
@@ -105,7 +184,19 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [49, 50, 51, 52, 53]
+"values": [48, 49, 50, 51, 52]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletBottom:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_g36jn")]
 }
 
 [sub_resource type="Animation" id="Animation_lv56q"]
@@ -124,6 +215,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [40, 41, 42, 43, 44]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletBottom:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_g36jn")]
+}
 
 [sub_resource type="Animation" id="Animation_eexsr"]
 resource_name = "BulletReload3"
@@ -140,6 +243,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [32, 33, 34, 35, 36]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletBottom:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_g36jn")]
 }
 
 [sub_resource type="Animation" id="Animation_vpvr1"]
@@ -158,6 +273,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [24, 25, 26, 27, 28]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletBottom:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_g36jn")]
+}
 
 [sub_resource type="Animation" id="Animation_8nsof"]
 resource_name = "BulletReload5"
@@ -175,22 +302,17 @@ tracks/0/keys = {
 "update": 1,
 "values": [16, 17, 18, 19, 20]
 }
-
-[sub_resource type="Animation" id="Animation_n4pkm"]
-resource_name = "BulletReload6"
-length = 0.5
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BulletBottom:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletBottom:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [8, 9, 10, 11, 12]
+"values": [ExtResource("17_g36jn")]
 }
 
 [sub_resource type="Animation" id="Animation_wl4dw"]
@@ -206,7 +328,19 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [49]
+"values": [48]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletBottom:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_g36jn")]
 }
 
 [sub_resource type="Animation" id="Animation_ekbwr"]
@@ -224,6 +358,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [40]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletBottom:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_g36jn")]
+}
 
 [sub_resource type="Animation" id="Animation_qy20o"]
 resource_name = "Reset3"
@@ -239,6 +385,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [32]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletBottom:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_g36jn")]
 }
 
 [sub_resource type="Animation" id="Animation_woocf"]
@@ -256,6 +414,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [24]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletBottom:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_g36jn")]
+}
 
 [sub_resource type="Animation" id="Animation_5xqj1"]
 resource_name = "Reset5"
@@ -271,6 +441,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [16]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletBottom:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_g36jn")]
 }
 
 [sub_resource type="Animation" id="Animation_g36jn"]
@@ -288,6 +470,104 @@ tracks/0/keys = {
 "update": 1,
 "values": [8]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletBottom:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_g36jn")]
+}
+
+[sub_resource type="Animation" id="Animation_qv7xy"]
+resource_name = "ResetInfinite"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletBottom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletBottom:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("18_1f167")]
+}
+
+[sub_resource type="Animation" id="Animation_n4pkm"]
+resource_name = "BulletReloadInfinite"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletBottom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletBottom:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("18_1f167")]
+}
+
+[sub_resource type="Animation" id="Animation_82j2f"]
+resource_name = "BulletReload6"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletBottom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletBottom:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_g36jn")]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xjeta"]
 _data = {
@@ -297,14 +577,16 @@ _data = {
 &"BulletReload3": SubResource("Animation_eexsr"),
 &"BulletReload4": SubResource("Animation_vpvr1"),
 &"BulletReload5": SubResource("Animation_8nsof"),
-&"BulletReload6": SubResource("Animation_n4pkm"),
+&"BulletReload6": SubResource("Animation_82j2f"),
+&"BulletReloadInfinite": SubResource("Animation_n4pkm"),
 &"RESET": SubResource("Animation_1f167"),
 &"Reset1": SubResource("Animation_wl4dw"),
 &"Reset2": SubResource("Animation_ekbwr"),
 &"Reset3": SubResource("Animation_qy20o"),
 &"Reset4": SubResource("Animation_woocf"),
 &"Reset5": SubResource("Animation_5xqj1"),
-&"Reset6": SubResource("Animation_g36jn")
+&"Reset6": SubResource("Animation_g36jn"),
+&"ResetInfinite": SubResource("Animation_qv7xy")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8nsof"]
@@ -957,7 +1239,7 @@ position = Vector2(83, 6)
 texture = ExtResource("17_g36jn")
 hframes = 8
 vframes = 7
-frame = 2
+frame = 7
 
 [node name="BulletBottom" type="Sprite2D" parent="Base/Ammo"]
 position = Vector2(83, 6)

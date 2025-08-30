@@ -1,7 +1,7 @@
 extends Control
 
 const GUNICON = preload("res://src/UI/HUD/GunIcon.tscn")
-const UI_BULLET_FLY = preload("res://src/Effect/UIBulletFly.tscn")
+const UI_BULLET_FLY = preload("res://src/UI/HUD/UIBulletFly.tscn")
 
 #onready var pc = get_tree().get_root().get_node("World/Juniper")
 @onready var world = get_tree().get_root().get_node("World")
@@ -100,12 +100,16 @@ func update_guns(guns, cause = "default", do_xp_flash = false):
 	if cause == "fire":
 		var pc = world.get_node("Juniper")
 		var speed: float = 0.8 / pc.guns.get_child(0).cooldown_time
-		#print(speed)
+		var is_infinite: bool = pc.guns.get_child(0).max_ammo == 0
 		ammo_animate("reset")
-		ammo_top_animator.play("BulletShoot", -1.0, speed)
+		
+		if is_infinite: ammo_top_animator.play("BulletShootInfinite", -1.0, speed)
+		else: ammo_top_animator.play("BulletShoot", -1.0, speed)
 		await ammo_top_animator.animation_finished
-		ammo_animate("reload")
+		
+		ammo_animate("reload") #TODO: timing issues with this
 		var ui_bullet_fly = UI_BULLET_FLY.instantiate()
+		ui_bullet_fly.is_infinite = is_infinite
 		ammo_fly.add_child(ui_bullet_fly)
 
 func display_weapon_wheel(guns, rot_dir: String):
@@ -186,9 +190,9 @@ func ammo_animate(animation):
 					ammo_bottom_animator.play("Reset1")
 	else:
 		if animation == "reload":
-			ammo_bottom_animator.play("BulletReload6", -1.0, speed)
+			ammo_bottom_animator.play("BulletReloadInfinite", -1.0, speed)
 		elif animation == "reset":
-			ammo_bottom_animator.play("Reset6")
+			ammo_bottom_animator.play("ResetInfinite")
 
 func update_hp(hp, max_hp):
 	hp_progress.value = hp
