@@ -25,5 +25,5 @@ void fragment() {
 	if (screen_mode) {
 		color = texture(SCREEN_TEXTURE, SCREEN_UV);
 	}
-	COLOR = swap_color(color);
+	COLOR = swap_color(color) * COLOR.a;
 	}
