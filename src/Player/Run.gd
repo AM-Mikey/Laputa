@@ -208,11 +208,17 @@ func calc_velocity():
 	out.y += mm.gravity * get_physics_process_delta_time()
 	#X
 	if pc.move_dir.x != 0.0:
+		var max_speed = mm.speed.x
 		if pc.is_crouching:
-			out.x = min(abs(out.x) + mm.acceleration, mm.crouch_speed) * pc.move_dir.x
-		else:
-			out.x = min(abs(out.x) + mm.acceleration, mm.speed.x) * pc.move_dir.x
-	else: #friction slide
+			max_speed = mm.crouch_speed
+		var value = out.x + mm.acceleration * pc.move_dir.x
+		# Make sure the acceleration does not surpass max speed
+		out.x = clampf(value, -max_speed, max_speed)
+	# ground friction kicks in if you let go of a directional key
+	# or push the opposite direciton key
+	if pc.move_dir.x == 0.0 or \
+	   pc.move_dir.x > 0.0 and out.x < 0.0 or \
+	   pc.move_dir.x < 0.0 and out.x > 0.0:
 		out.x = lerp(out.x, 0.0, mm.ground_cof)
 	if abs(out.x) < mm.min_x_velocity: #clamp velocity
 		out.x = 0

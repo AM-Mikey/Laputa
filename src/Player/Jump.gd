@@ -7,21 +7,17 @@ extends Node
 @onready var guns = pc.get_node("GunManager/Guns")
 @onready var ap = pc.get_node("AnimationPlayer")
 
+var holding_jump = true
+
 func state_process(_delta):
-	#jump interrupt
-	var is_jump_interrupted = false
-	if pc.velocity.y < 0.0:
-		if not Input.is_action_pressed("jump") and pc.can_input:
-			is_jump_interrupted = true
+	# Jump holding
+	if pc.can_input and not Input.is_action_pressed("jump"):
+		holding_jump = false
 
 	set_player_directions()
-	pc.velocity = calc_velocity(is_jump_interrupted)
+	pc.velocity = calc_velocity()
 	pc.move_and_slide()
-	var new_velocity = pc.velocity
-	if pc.is_on_wall():
-		new_velocity.y = max(pc.velocity.y, new_velocity.y)
-		
-	pc.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
+
 	animate()
 
 	# We only set move_dir.y to jump for a single frame
@@ -88,17 +84,22 @@ func animate():
 
 ### GETTERS ###
 
-func calc_velocity(is_jump_interrupted):
+func calc_velocity():
 	var out = pc.velocity
 	#Y
-	out.y += mm.gravity * get_physics_process_delta_time()
+	# The player's move dir is vertically up. This happens only for a single frame
 	if sign(pc.move_dir.y) == -1:
 		out.y = mm.speed.y * pc.move_dir.y
-	if is_jump_interrupted:
+	# Otherwise, perform gravity calculations
+	else:
 		out.y += mm.gravity * get_physics_process_delta_time()
+		if not holding_jump and pc.velocity.y < 0.0:
+			out.y *= 0.9
 	#X
 	if pc.move_dir.x != 0.0:
-		out.x = min(abs(out.x) + mm.acceleration, mm.speed.x) * pc.move_dir.x
+		var value = out.x + mm.acceleration * pc.move_dir.x
+		# Make sure the acceleration does not surpass max speed
+		out.x = clampf(value, -mm.speed.x, mm.speed.x)
 	else: #air friction slide
 		out.x = lerp(out.x, 0.0, mm.air_cof)
 	if abs(out.x) < mm.min_x_velocity: #clamp velocity
@@ -130,10 +131,12 @@ func enter():
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
 	pc.mm.snap_vector = Vector2.ZERO
-	# Set the player's move dir to -1.0 to indicate a jump.
-	# It will be reset on next physics frame
-	pc.move_dir.y = -1.0
-	am.play("pc_jump")
+	holding_jump = pc.can_input and Input.is_action_pressed("jump")
+	if holding_jump:
+		# Set the player's move dir to -1.0 to indicate a jump.
+		# It will be reset on next physics frame
+		pc.move_dir.y = -1.0
+		am.play("pc_jump")
 
 func exit():
 	pc.mm.land()

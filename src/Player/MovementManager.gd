@@ -100,6 +100,7 @@ func bonk(normal):
 	world.get_node("Front").add_child(effect)
 
 func land():
+	am.play("pc_land")
 	pc.is_in_coyote = false
 	if pc.is_in_water: return
 	var effect = LAND.instantiate()
@@ -109,16 +110,14 @@ func land():
 func jump():
 	if pc.is_forced_crouching: return
 	snap_vector = Vector2.ZERO
-	#Check if a running jump. since speed.x is max x velocity, only count as a running jump then
-	if abs(pc.velocity.x) > speed.x * 0.95 and pc.can_input:
-		if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
-			jump_starting_move_dir_x = sign(pc.move_dir.x)
-			$MinDirTimer.start(minimum_direction_time)
-			change_state("longjump")
-			return
-	else:
-		change_state("jump")
-		return
+	change_state("jump")
+	# Coyote Time debug
+	if not pc.is_on_floor():
+		am.play("gun_sword")
+
+		var effect = LAND.instantiate()
+		effect.position = pc.position
+		world.get_node("Front").add_child(effect)
 
 
 
@@ -182,4 +181,4 @@ func _on_CoyoteTimer_timeout():
 		return
 	pc.is_in_coyote = false
 	if not pc.is_on_floor() and current_state == states["run"]:
-		change_state("fall")
+		change_state("jump")
