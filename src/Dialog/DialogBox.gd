@@ -188,8 +188,6 @@ func _input(event):
 		if awaiting_merge:
 			awaiting_merge = false
 			$CommandHandler.seek("/m", true)
-		elif auto_input:
-			return
 		elif active: #if already active, speed text up
 			do_delay = false 
 		else:

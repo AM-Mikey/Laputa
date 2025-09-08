@@ -130,6 +130,10 @@ func select_button(button: Object):
 
 
 func remap_tiles(first: Object, second: Object):
+	if not first:
+		return
+	if not second:
+		return
 	var first_pos = Vector2i(first.tile_set_position / 16.0)
 	var second_pos = Vector2i(second.tile_set_position / 16.0)
 	swap_tiles(first_pos, second_pos)

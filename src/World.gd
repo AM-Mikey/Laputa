@@ -146,11 +146,11 @@ func first_time_level_setup():
 
 func change_level_via_code(level_path):
 	print("changing level via code...")
-	if ui.has_node("DialogBox"): $UILayer/DialogBox.stop_printing()
+	if ui.has_node("DialogBox"): $UILayer/DialogBox.exit()
 	clear_spawn_layers()
 	current_level.queue_free()
+	current_level = null
 	await get_tree().process_frame
-
 	add_child(JUNIPER.instantiate())
 	$Juniper/PlayerCamera.position_smoothing_enabled = false
 	ui.add_child(HUD.instantiate())
@@ -184,8 +184,8 @@ func change_level_via_trigger(level_path, door_index):
 	clear_spawn_layers()
 	var old_level_path = current_level.scene_file_path
 	current_level.queue_free()
+	current_level = null
 	await get_tree().process_frame
-	
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
 	

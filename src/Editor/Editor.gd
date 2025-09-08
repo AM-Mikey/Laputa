@@ -61,6 +61,9 @@ var tile_map
 var editor_level_limiter
 var tile_map_cursor
 
+# Blacklist of node types the editor delete should be unable to destroy
+var editor_delete_blacklist = ["background", "spawnpoint", "tile_map"]
+
 ### SETUP ###
 
 func _ready():
@@ -409,7 +412,7 @@ func do_generic_input(event):
 	#deleting entity
 	if event.is_action_pressed("editor_delete"):
 		if inspector.active:
-			if not(inspector.active_type == "background" or inspector.active_type == "spawn_point"):
+			if inspector.active_type not in editor_delete_blacklist:
 				inspector.active.queue_free()
 				inspector.on_deselected()
 
