@@ -82,6 +82,8 @@ shader_parameter/palette_in = ExtResource("25_3o18d")
 shader_parameter/palette_out = ExtResource("27_cn5rl")
 
 [sub_resource type="Animation" id="53"]
+length = 0.2
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -89,10 +91,10 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_acjyt"]
@@ -3013,7 +3015,7 @@ one_shot = true
 autostart = true
 
 [node name="Guns" type="Node2D" parent="GunManager"]
-position = Vector2(-7, -13)
+position = Vector2(-3, -11)
 
 [node name="Revolver" parent="GunManager/Guns" instance=ExtResource("3")]
 
@@ -3060,6 +3062,10 @@ libraries = {
 [node name="BulletOrigin" type="Marker2D" parent="."]
 position = Vector2(0, -8)
 
+[node name="IframeTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+
 [connection signal="timeout" from="MovementManager/CoyoteTimer" to="MovementManager" method="_on_CoyoteTimer_timeout"]
 [connection signal="area_entered" from="ItemDetector" to="." method="_on_ItemDetector_area_entered"]
 [connection signal="body_entered" from="SSPDetector" to="." method="_on_SSPDetector_body_entered"]
@@ -3067,3 +3073,4 @@ position = Vector2(0, -8)
 [connection signal="body_entered" from="CrouchDetector" to="MovementManager" method="_on_CrouchDetector_body_entered"]
 [connection signal="body_exited" from="CrouchDetector" to="MovementManager" method="_on_CrouchDetector_body_exited"]
 [connection signal="texture_changed" from="Sprite2D" to="Sprite2D" method="_on_Sprite_texture_changed"]
+[connection signal="timeout" from="IframeTimer" to="." method="_on_IframeTimer_timeout"]

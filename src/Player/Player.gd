@@ -20,7 +20,7 @@ signal money_updated(money)
 @export var hp: int = 16
 @export var max_hp: int = 16
 @export var money: int = 0
-
+@export var iframe_time: float = 1.5
 
 #STATES
 
@@ -56,7 +56,7 @@ var shoot_dir := Vector2.LEFT
 @onready var mm = get_node("MovementManager")
 @onready var gm = get_node("GunManager")
 @onready var guns = get_node("GunManager/Guns")
-
+@onready var iframe_timer = %IframeTimer
 
 func _ready():
 	connect_inventory()
@@ -145,10 +145,8 @@ func hit(damage, knockback_direction):
 func do_iframes():
 	invincible = true
 	$EffectPlayer.play("FlashIframe")
-	await $EffectPlayer.animation_finished
-	invincible = false
-	if not enemies_touching.is_empty():
-		hit_again()
+	iframe_timer.start(iframe_time)
+
 
 func hit_again(): #TODO: prioritize this for all forms of damage, not just enemies
 	var toughest_enemy
@@ -182,6 +180,11 @@ func die():
 
 
 ### SIGNALS ###
+func _on_IframeTimer_timeout() -> void:
+	invincible = false
+	$EffectPlayer.stop()
+	if not enemies_touching.is_empty():
+		hit_again()
 
 func _on_SSPDetector_body_entered(_body):
 	is_on_ssp = true
