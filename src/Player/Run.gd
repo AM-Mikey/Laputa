@@ -211,6 +211,10 @@ func calc_velocity():
 		var max_speed = mm.speed.x
 		if pc.is_crouching:
 			max_speed = mm.crouch_speed
+
+		if pc.move_dir.x != sign(pc.move_dir.x):
+			out.x = 0.0
+
 		var value = out.x + mm.acceleration * pc.move_dir.x
 		# Make sure the acceleration does not surpass max speed
 		out.x = clampf(value, -max_speed, max_speed)
