@@ -215,10 +215,7 @@ func calc_velocity():
 		# Make sure the acceleration does not surpass max speed
 		out.x = clampf(value, -max_speed, max_speed)
 	# ground friction kicks in if you let go of a directional key
-	# or push the opposite direciton key
-	if pc.move_dir.x == 0.0 or \
-	   pc.move_dir.x > 0.0 and out.x < 0.0 or \
-	   pc.move_dir.x < 0.0 and out.x > 0.0:
+	else:
 		out.x = lerp(out.x, 0.0, mm.ground_cof)
 	if abs(out.x) < mm.min_x_velocity: #clamp velocity
 		out.x = 0
