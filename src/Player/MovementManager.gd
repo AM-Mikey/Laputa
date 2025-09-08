@@ -30,7 +30,7 @@ var jump_starting_move_dir_x: int
 
 
 var knockback_direction: Vector2
-@export var knockback_speed = Vector2(40, 100) #(80, 180)
+@export var knockback_speed = Vector2(40, 80) #(80, 180)
 var knockback_velocity = Vector2.ZERO
 
 var move_target = Vector2.ZERO
