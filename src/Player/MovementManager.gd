@@ -11,17 +11,17 @@ var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
 var speed = Vector2(0, 0)
 var crouch_speed = 70.0
-var acceleration = 3.0
-var ground_cof = 0.1
+var acceleration = 10.0
+var ground_cof = 0.2
 var air_cof = 0.00
-var gravity = 300.0
+var gravity = 0.0
 var terminal_velocity = 500.0
 var on_ceiling = false
 
-@export var base_speed = Vector2(90, 120)
+@export var base_speed = Vector2(90, 140)
 @export var water_speed = Vector2(60, 90)
-@export var base_gravity = 150
-@export var water_gravity = 75
+@export var base_gravity = 300
+@export var water_gravity = 150
 
 @export var coyote_time = 0.05 #0.05
 @export var minimum_direction_time = 1.0 #cave story forces you to jump a certain x distance when going max speed before jumping
