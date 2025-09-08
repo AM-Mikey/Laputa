@@ -9,14 +9,19 @@ const SNAP_LENGTH = 4.0
 
 var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
-var speed = Vector2(90, 180)
+var speed = Vector2(0, 0)
 var crouch_speed = 70.0
-var acceleration = 2.0 #was 2.5, changed 10.26.22
+var acceleration = 3.0
 var ground_cof = 0.1
 var air_cof = 0.00
 var gravity = 300.0
 var terminal_velocity = 500.0
 var on_ceiling = false
+
+@export var base_speed = Vector2(90, 120)
+@export var water_speed = Vector2(60, 90)
+@export var base_gravity = 150
+@export var water_gravity = 75
 
 @export var coyote_time = 0.05 #0.05
 @export var minimum_direction_time = 1.0 #cave story forces you to jump a certain x distance when going max speed before jumping
@@ -69,8 +74,8 @@ func _physics_process(_delta):
 	if pc.disabled: return
 	if is_debug:
 		state_label.text = current_state.name.to_lower()
-	speed = Vector2(90, 180) if not get_parent().is_in_water else Vector2(60, 140)
-	gravity = 300.0 if not get_parent().is_in_water else 150.0
+	speed = base_speed if not get_parent().is_in_water else water_speed
+	gravity = base_gravity if not get_parent().is_in_water else water_gravity
 	do_ceiling_push_check()
 	if pc.is_on_ceiling():
 		if not on_ceiling:
