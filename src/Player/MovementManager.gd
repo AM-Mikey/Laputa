@@ -20,8 +20,8 @@ var on_ceiling = false
 
 @export var base_speed = Vector2(90, 140)
 @export var water_speed = Vector2(60, 90)
-@export var base_gravity = 300
-@export var water_gravity = 150
+@export var base_gravity = 200
+@export var water_gravity = 100
 
 @export var coyote_time = 0.05 #0.05
 @export var minimum_direction_time = 1.0 #cave story forces you to jump a certain x distance when going max speed before jumping
