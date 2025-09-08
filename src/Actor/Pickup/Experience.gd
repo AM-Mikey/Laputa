@@ -2,16 +2,17 @@ extends Actor
 
 var direction
 @export var bounciness: float = .75
+@export var friction: float = .9
 @export var minimum_speed: float = .5
 var start_velocity
 
-@export var rng_min_speed = 50
-@export var rng_max_speed = 100
+@export var rng_min_speed = Vector2(30, 30)
+@export var rng_max_speed = Vector2(50, 90)
 
 var value: int
 
-var decay_time = 4.0
-var pop_time = 1.0
+var decay_time = 5.0
+var pop_time = 3.0
 
 func _ready():
 	home = global_position
@@ -38,13 +39,14 @@ func randomize_direction():
 	
 func randomize_speed():
 	rng.randomize()
-	return Vector2(rng.randf_range(rng_min_speed, rng_max_speed),rng.randf_range(rng_min_speed, rng_max_speed))
+	return Vector2(rng.randf_range(rng_min_speed.x, rng_max_speed.x),rng.randf_range(rng_min_speed.y, rng_max_speed.y))
 
 func _physics_process(delta):
 	if abs(velocity.x) > minimum_speed and abs(velocity.y) > minimum_speed:
 		var collision = move_and_collide(velocity * delta)
 		if collision:
 			velocity *= bounciness
+			velocity.x *= friction
 			velocity = velocity.bounce(collision.get_normal())
 			#if $AnimationPlayer.is_playing():
 			am.play("xp", self)
