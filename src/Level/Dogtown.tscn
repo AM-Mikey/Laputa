@@ -68,12 +68,12 @@ velocity = Vector2(0, -0.413574)
 
 [node name="Lilypad2" parent="Props" instance=ExtResource("6_6s35s")]
 position = Vector2(1312, 592)
-velocity = Vector2(0, -0.415771)
+velocity = Vector2(0, -0.408447)
 sprite = 1
 
 [node name="Lilypad3" parent="Props" instance=ExtResource("6_6s35s")]
 position = Vector2(1392, 592)
-velocity = Vector2(0, -0.415771)
+velocity = Vector2(0, -0.408447)
 sprite = 1
 
 [node name="Actors" type="Node2D" parent="."]

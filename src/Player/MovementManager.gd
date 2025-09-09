@@ -17,6 +17,7 @@ var air_cof = 0.02
 var gravity = 0.0
 var terminal_velocity = 500.0
 var on_ceiling = false
+@export var debug = true
 
 @export var base_speed = Vector2(90, 170)
 @export var water_speed = Vector2(60, 140)
@@ -118,9 +119,8 @@ func jump():
 	snap_vector = Vector2.ZERO
 	change_state("jump")
 	# Coyote Time debug
-	if not pc.is_on_floor():
+	if not pc.is_on_floor() and debug:
 		am.play("gun_sword")
-
 		var effect = LAND.instantiate()
 		effect.position = pc.position
 		world.get_node("Front").add_child(effect)
@@ -133,30 +133,31 @@ func do_ceiling_push_check():
 	if current_state == states["jump"] \
 	or current_state == states["longjump"] \
 	or current_state == states["fall"] \
-	or current_state ==  states["knockback"]:
+	or current_state == states["knockback"]:
 		if pc.get_node("CeilingL").is_colliding() \
-		
 		and not pc.get_node("ClearenceLF").is_colliding() \
-		and pc.velocity.y < 0:
+		and pc.velocity.y < 0 \
+		and not pc.move_dir.x < 0:
 			pc.global_position.x += 2.0 if not pc.get_node("ClearenceLH").is_colliding() else 4.0
 			pc.get_node("CollisionShape2D").set_deferred("disabled", false)
 		
 		elif pc.get_node("CeilingR").is_colliding() \
 		and not pc.get_node("ClearenceRF").is_colliding() \
-		and pc.velocity.y < 0:
+		and pc.velocity.y < 0 \
+		and not pc.move_dir.x > 0:
 			pc.global_position.x -= 2.0 if not pc.get_node("ClearenceRH").is_colliding() else 4.0
 			pc.get_node("CollisionShape2D").set_deferred("disabled", false)
 
 
-func check_ssp():
-	if world.current_level == null: return
-	if world.current_level.has_node("TileMap"):
-		var tm = world.current_level.has_node("TileMap")
-		var tile_pos = tm.local_to_map(Vector2(pc.position.x, pc.position.y + 8))
-		var tile = tm.get_cell_source_id(0, tile_pos)
-		if tm.tile_set.tile_get_shape_one_way(tile, 0):
-			#print("player is on ssp")
-			pc.is_on_ssp = true
+#func check_ssp(): #UNUSED
+	#if world.current_level == null: return
+	#if world.current_level.has_node("TileMap"):
+		#var tm = world.current_level.has_node("TileMap")
+		#var tile_pos = tm.local_to_map(Vector2(pc.position.x, pc.position.y + 8))
+		#var tile = tm.get_cell_source_id(0, tile_pos)
+		#if tm.tile_set.tile_get_shape_one_way(tile, 0):
+			##print("player is on ssp")
+			#pc.is_on_ssp = true
 
 
 func disable_collision_shapes(array):

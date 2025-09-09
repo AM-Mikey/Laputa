@@ -53,15 +53,28 @@ func set_player_directions():
 	pc.look_dir = Vector2i(look_x, input_dir.y)
 	#get shoot_dir
 	var shoot_vertically = false
-	if pc.look_dir.y < 0.0 or (pc.look_dir.y > 0.0 and pc.is_on_ssp):
+	if pc.look_dir.y < 0.0 or (pc.look_dir.y > 0.0 and check_ssp()):
 		shoot_vertically = true
-	if (!pc.get_node("EdgeLeft").get_collider() and pc.get_node("AbsoluteRight").get_collider() and pc.look_dir.x == -1.0 and pc.look_dir.y != 0) or (!pc.get_node("EdgeRight").get_collider() and pc.get_node("AbsoluteLeft").get_collider() and pc.look_dir.x == 1.0 and pc.look_dir.y != 0):
-		shoot_vertically = true
+	#if (!pc.get_node("EdgeLeft").get_collider() and pc.get_node("AbsoluteRight").get_collider() and pc.look_dir.x == -1.0 and pc.look_dir.y != 0) or (!pc.get_node("EdgeRight").get_collider() and pc.get_node("AbsoluteLeft").get_collider() and pc.look_dir.x == 1.0 and pc.look_dir.y != 0):
+		#shoot_vertically = true
 	if shoot_vertically: 
 		pc.shoot_dir = Vector2(0.0, pc.look_dir.y) 
 	else: 
 		pc.shoot_dir = Vector2(pc.look_dir.x, 0.0)
-	
+
+
+func check_ssp() -> bool: #not the only thing that determines if can shoot down
+	var out = false
+	var SSP_raycast = pc.get_node("GunManager/SSP")
+	match pc.look_dir.x:
+		-1: SSP_raycast.global_position = pc.get_node("GunManager/GunPosLeftDown").global_position
+		1: SSP_raycast.global_position = pc.get_node("GunManager/GunPosRightDown").global_position
+	var length = abs(SSP_raycast.position.y) + 12
+	SSP_raycast.target_position = Vector2(0.0, length)
+	if !SSP_raycast.is_colliding():
+		out = true
+	print("PPPOASPDFOIASPOID", out)
+	return out
 
 func animate():
 	sprite.position = Vector2i(0.0, -16.0)

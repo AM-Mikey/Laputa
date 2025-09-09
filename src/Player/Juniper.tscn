@@ -2673,6 +2673,7 @@ collision_mask = 32768
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody"]
 position = Vector2(0, -9)
 shape = SubResource("72")
+debug_color = Color(0, 0.6, 0.701961, 0.392157)
 
 [node name="PlayerLayerBody" type="CharacterBody2D" parent="."]
 collision_mask = 0
@@ -2680,23 +2681,27 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerLayerBody"]
 position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_6utdb")
-debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+debug_color = Color(0, 0.588235, 0.705882, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0
+z_index = 1
 position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_us632")
-debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+debug_color = Color(0, 0.588235, 0.705882, 0.501961)
 
 [node name="CrouchingCollision" type="CollisionShape2D" parent="."]
 visible = false
+z_index = 1
 position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_804ka")
 disabled = true
-debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+debug_color = Color(0, 0.588235, 0.705882, 0.501961)
 
 [node name="JumpCollision" type="CollisionPolygon2D" parent="."]
-modulate = Color(1, 1, 1, 0.196078)
+visible = false
+modulate = Color(1, 1, 1, 0.501961)
+z_index = 1
 position = Vector2(-6, 0)
 polygon = PackedVector2Array(0, 0, 12, 0, 12, -1, 8, -15, 4, -15, 0, -1)
 disabled = true
@@ -2948,20 +2953,20 @@ debug_color = Color(0, 0.627451, 0.27451, 0)
 [node name="SSPDetector" type="Area2D" parent="."]
 z_index = -1
 collision_layer = 0
-collision_mask = 512
+collision_mask = 0
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SSPDetector"]
 light_mask = 0
 position = Vector2(0, 1)
 shape = SubResource("4")
-debug_color = Color(0, 0.235294, 0, 0.392157)
+debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="SSPDetector"]
 position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_exru4")
 disabled = true
-debug_color = Color(0, 0.235294, 0, 0.392157)
+debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
 [node name="CrouchDetector" type="Area2D" parent="."]
 position = Vector2(0, -2)
@@ -2971,6 +2976,7 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CrouchDetector"]
 position = Vector2(0, -14)
 shape = SubResource("63")
+debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
 [node name="GunManager" type="Node2D" parent="."]
 script = ExtResource("12")
@@ -3016,6 +3022,10 @@ z_index = 5
 position = Vector2(3, -6)
 gizmo_extents = 1.0
 script = ExtResource("16_adexv")
+
+[node name="SSP" type="RayCast2D" parent="GunManager"]
+target_position = Vector2(0, 16)
+collision_mask = 8
 
 [node name="CooldownTimer" type="Timer" parent="GunManager"]
 one_shot = true

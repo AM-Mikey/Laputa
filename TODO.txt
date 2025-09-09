@@ -239,3 +239,40 @@ add prop spawns
 migrate prop to characterbody2d
 
 move spawns from spawns to individual spawn layers
+
+rename bullets
+
+
+
+
+PHYSICS CHANGES TO JUNIPER
+
+																						-evaluate jump height changes -> done
+																						-evaluate cof changes -> 0.15
+
+-evaluate acceleration changes -tbd, only feels good with these air cof settings
+
+
+																						-evaluate turnaround speed changes -> approved
+																						-evaluate air cof -> verified 0.02
+																						-make push out code not trigger on left or right being held
+-edit heart and ammo time pop
+-enemy knockback evaluation
+																						-evaluate iframe time -> verified 1.5
+																						-evaluate jump min height -> good
+-evaluate min direction removal -tbd, this allows much more air maneuvering
+-evaluate other code changes
+																						-evaluate coyote time sound and migrate to debug or is_debug
+																						-change collision box to be smaller on bottom corners
+																						-evaluate ceiling angles
+																						-evaluate camera smoothing speed -> good
+
+
+- 45 degree slope push bug
+																						-write extra code to snap juniper to the nearest 0.00 height
+																						-ssp raycast detection
+-add debug levelup multiplier rate feature
+-evaluate controller/analog input
+-cleanup longjump
+-45* ceiling slope bug
+-tear out and replace previous ssp detection code
