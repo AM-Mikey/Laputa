@@ -85,6 +85,7 @@ func _physics_process(_delta):
 	else:
 		on_ceiling = false
 	current_state.state_process(_delta)
+	align_to_proper_y()
 
 
 func _input(event):
@@ -167,6 +168,12 @@ func enable_collision_shapes(array):
 	for shape in array:
 		shape.set_deferred("disabled", false)
 		shape.visible = true
+
+
+func align_to_proper_y():
+	var abs_offset = abs(pc.position.y - round(pc.position.y))
+	if 0.0 < abs_offset and abs_offset < 0.1:
+		pc.position.y = round(pc.position.y)
 
 
 
