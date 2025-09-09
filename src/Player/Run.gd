@@ -26,8 +26,9 @@ func state_process(_delta):
 	else: push_right_wall = false
 	
 	pc.move_and_slide()
+	align_to_proper_y()
 	animate()
-
+	
 	
 	if not pc.is_on_floor() and not pc.is_in_coyote:
 		pc.is_in_coyote = true
@@ -248,8 +249,16 @@ func get_vframe() -> int:
 			out += 2
 	return out
 
+### HELPERS ###
 
-
+func align_to_proper_y():
+	#print("ASSS")
+	#TODO: only works with full tiles, not halves
+	var abs_offset = abs(pc.position.y - round(pc.position.y))
+	if 0.0 < abs_offset and abs_offset < 0.1:
+		print("DICK")
+		pc.position.y = round(pc.position.y)
+	
 ### STATE ###
 
 func enter(): #TODO: consider setting these back after exiting or just set these on setup
@@ -259,5 +268,6 @@ func enter(): #TODO: consider setting these back after exiting or just set these
 	pc.floor_max_angle = 0.8 #well over 45degrees so we can have a lower safe_margin
 	pc.safe_margin = 0.008 #may cause issues this low
 	do_edge_turn = false
+	align_to_proper_y()
 func exit():
 	sprite.position = Vector2i(0.0, -16.0)

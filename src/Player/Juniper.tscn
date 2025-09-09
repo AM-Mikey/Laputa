@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://bnwo7ae85qnwb"]
+[gd_scene load_steps=86 format=3 uid="uid://bnwo7ae85qnwb"]
 
 [ext_resource type="PackedScene" uid="uid://cjueepke5w45c" path="res://src/Gun/Red7.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://brl16iyt5eq02" path="res://src/Player/PlayerCamera.tscn" id="2"]
@@ -52,14 +52,20 @@
 radius = 1.0
 height = 2.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oqo7c"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6utdb"]
 size = Vector2(12, 15)
 
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(12, 13)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_us632"]
+size = Vector2(12, 14)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_43d2q"]
-size = Vector2(12, 6)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_804ka"]
+size = Vector2(12, 7)
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(12, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7jab8"]
+size = Vector2(12, 7)
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(16, 21)
@@ -2673,18 +2679,19 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerLayerBody"]
 position = Vector2(0, -7.5)
-shape = SubResource("RectangleShape2D_oqo7c")
+shape = SubResource("RectangleShape2D_6utdb")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0
-position = Vector2(0, -7.5)
-shape = SubResource("1")
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_us632")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="CrouchingCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
-shape = SubResource("RectangleShape2D_43d2q")
+visible = false
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_804ka")
 disabled = true
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
@@ -2869,7 +2876,7 @@ debug_color = Color(0, 1, 0, 0.235294)
 [node name="CrouchingCollision" type="CollisionShape2D" parent="Hurtbox"]
 visible = false
 position = Vector2(0, -5)
-shape = SubResource("RectangleShape2D_43d2q")
+shape = SubResource("RectangleShape2D_7jab8")
 disabled = true
 debug_color = Color(0, 1, 0, 0.235294)
 
