@@ -149,17 +149,6 @@ func do_ceiling_push_check():
 			pc.get_node("CollisionShape2D").set_deferred("disabled", false)
 
 
-#func check_ssp(): #UNUSED
-	#if world.current_level == null: return
-	#if world.current_level.has_node("TileMap"):
-		#var tm = world.current_level.has_node("TileMap")
-		#var tile_pos = tm.local_to_map(Vector2(pc.position.x, pc.position.y + 8))
-		#var tile = tm.get_cell_source_id(0, tile_pos)
-		#if tm.tile_set.tile_get_shape_one_way(tile, 0):
-			##print("player is on ssp")
-			#pc.is_on_ssp = true
-
-
 func disable_collision_shapes(array):
 	for shape in array:
 		shape.set_deferred("disabled", true)

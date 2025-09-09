@@ -3023,7 +3023,8 @@ position = Vector2(3, -6)
 gizmo_extents = 1.0
 script = ExtResource("16_adexv")
 
-[node name="SSP" type="RayCast2D" parent="GunManager"]
+[node name="ShootDown" type="RayCast2D" parent="GunManager"]
+visible = false
 target_position = Vector2(0, 16)
 collision_mask = 8
 

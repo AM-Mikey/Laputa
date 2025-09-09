@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dkp8k2tq8hhvq"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
+[ext_resource type="Script" path="res://src/World.gd" id="8"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("8")
@@ -9,11 +9,11 @@ release_version = "1.8"
 do_skip_title = true
 debug_visible = true
 gamemode = "pvp"
-start_level_path = "res://src/Level/Dogtown.tscn"
+start_level_path = "res://src/Level/PlaytestZone.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_offset = Vector2(-5184, -1343.5)
-scroll_base_offset = Vector2(0, 244)
+scroll_offset = Vector2(32, 416.5)
+scroll_base_offset = Vector2(0, -652)
 
 [node name="Back" type="Node2D" parent="."]
 scale = Vector2(4, 4)
@@ -40,3 +40,5 @@ transform = Transform2D(2, 0, 0, 2, 0, 0)
 layer = 4
 scale = Vector2(2, 2)
 transform = Transform2D(2, 0, 0, 2, 0, 0)
+
+[connection signal="level_saved" from="EditorLayer/Editor" to="EditorLayer/Editor/Main/Win/Tab/Levels" method="on_save"]
