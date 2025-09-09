@@ -23,17 +23,22 @@ func get_move_dir() -> Vector2: #bypass can_input
 
 func enter():
 	pc.invincible = true
-	pc.get_node("CollisionShape2D").set_deferred("disabled", true)
-	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
+	var disable = [
+		pc.get_node("CollisionShape2D"),
+		pc.get_node("CrouchingCollision")]
+	mm.disable_collision_shapes(disable)
 	pc.get_node("CrouchDetector").monitoring = false
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
+
 
 func exit():
 	pc.is_in_water = false
 	pc.invincible = false
 	pc.velocity = Vector2.ZERO
-	pc.get_node("CollisionShape2D").set_deferred("disabled", false)
-	pc.get_node("CrouchingCollision").set_deferred("disabled", false)
+	var enable = [
+		pc.get_node("CollisionShape2D"),
+		pc.get_node("CrouchingCollision")]
+	mm.enable_collision_shapes(enable)
 	pc.get_node("ItemDetector").monitoring = true
 	pc.get_node("CrouchDetector").monitoring = true

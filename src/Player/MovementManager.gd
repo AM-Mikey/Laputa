@@ -158,6 +158,17 @@ func check_ssp():
 			pc.is_on_ssp = true
 
 
+func disable_collision_shapes(array):
+	for shape in array:
+		shape.set_deferred("disabled", true)
+		shape.visible = false
+
+func enable_collision_shapes(array):
+	for shape in array:
+		shape.set_deferred("disabled", false)
+		shape.visible = true
+
+
 
 ### SIGNALS ###
 
@@ -165,10 +176,16 @@ func _on_CrouchDetector_body_entered(_body):
 	pc.is_forced_crouching = true
 	pc.is_crouching = true
 	if current_state != states["run"]: return
-	pc.get_node("CollisionShape2D").set_deferred("disabled", true)
-	pc.get_node("CrouchingCollision").set_deferred("disabled", false)
-	pc.get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", true)
-	pc.get_node("Hurtbox/CrouchingCollision").set_deferred("disabled", false)
+	
+	var disable = [
+		pc.get_node("CollisionShape2D"),
+		pc.get_node("Hurtbox/CollisionShape2D")]
+	var enable = [
+		pc.get_node("CrouchingCollision"),
+		pc.get_node("Hurtbox/CrouchingCollision")]
+	disable_collision_shapes(disable)
+	enable_collision_shapes(enable)
+	
 
 func _on_CrouchDetector_body_exited(_body):
 	pc.is_forced_crouching = false

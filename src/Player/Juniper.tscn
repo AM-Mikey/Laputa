@@ -56,10 +56,10 @@ height = 2.0
 size = Vector2(12, 15)
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(12, 15)
+size = Vector2(12, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43d2q"]
-size = Vector2(12, 8)
+size = Vector2(12, 6)
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(16, 21)
@@ -2862,15 +2862,16 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 light_mask = 0
-position = Vector2(0, -7.5)
+position = Vector2(0, -8.5)
 shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="CrouchingCollision" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, -4)
+visible = false
+position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_43d2q")
 disabled = true
-debug_color = Color(0, 0.588235, 0.705882, 0.0392157)
+debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="MovementManager" type="Node2D" parent="."]
 script = ExtResource("15")
@@ -2878,7 +2879,6 @@ script = ExtResource("15")
 [node name="States" type="Node2D" parent="MovementManager"]
 
 [node name="StateLabel" type="Label" parent="MovementManager/States"]
-visible = false
 offset_left = -21.1084
 offset_top = -34.0
 offset_right = 18.8916
@@ -2936,7 +2936,7 @@ collision_mask = 7172
 light_mask = 0
 position = Vector2(0, -7.5)
 shape = SubResource("2")
-debug_color = Color(0, 0.627451, 0.27451, 0.117647)
+debug_color = Color(0, 0.627451, 0.27451, 0)
 
 [node name="SSPDetector" type="Area2D" parent="."]
 z_index = -1
