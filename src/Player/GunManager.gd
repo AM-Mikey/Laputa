@@ -12,7 +12,7 @@ func _ready():
 	set_guns_visible()
 
 func _input(event):
-	if not pc.disabled and not disabled and pc.can_input and $Guns.get_child_count() > 0:
+	if not pc.disabled and !disabled and pc.can_input and $Guns.get_child_count() > 0:
 		if pc.mm.current_state == pc.mm.states["inspect"]: return
 		var active_gun = $Guns.get_child(0)
 		
@@ -85,10 +85,10 @@ func level_down(debug):
 
 
 
-func disable():
+func disable(): #Unused
 	disabled = true
 	pc.get_node("GunManager").visible = false
-
+#
 func enable():
 	disabled = false
 	pc.get_node("GunManager").visible = true

@@ -125,14 +125,17 @@ func jump():
 		effect.position = pc.position
 		world.get_node("Front").add_child(effect)
 
-
+func drop():
+	$States/Jump.is_dropping = true
+	change_state("jump")
+	pc.set_collision_mask_value(10, false)
+	await get_tree().create_timer(0.1).timeout
+	pc.set_collision_mask_value(10, true)
 
 ### HELPERS ###
 
 func do_ceiling_push_check():
 	if current_state == states["jump"] \
-	or current_state == states["longjump"] \
-	or current_state == states["fall"] \
 	or current_state == states["knockback"]:
 		if pc.get_node("CeilingL").is_colliding() \
 		and not pc.get_node("ClearenceLF").is_colliding() \

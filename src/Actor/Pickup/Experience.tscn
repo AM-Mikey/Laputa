@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bx12634rbo328" path="res://src/Actor/Pickup/Experience.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dumy0wfvyxqrq" path="res://assets/Actor/Pickup/Experience.png" id="2"]
 
-[sub_resource type="RectangleShape2D" id="10"]
-size = Vector2(6, 6)
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(10, 10)
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(16, 16)
@@ -40,9 +40,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [SubResource("1")]
 }
-
-[sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(10, 10)
 
 [sub_resource type="Animation" id="5"]
 resource_name = "MediumPop"
@@ -135,6 +132,9 @@ tracks/1/keys = {
 "update": 1,
 "values": [SubResource("8")]
 }
+
+[sub_resource type="RectangleShape2D" id="10"]
+size = Vector2(6, 6)
 
 [sub_resource type="Animation" id="11"]
 resource_name = "SmallPop"
@@ -247,7 +247,7 @@ collision_mask = 8
 script = ExtResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("10")
+shape = SubResource("4")
 
 [node name="CollectArea" type="Area2D" parent="."]
 collision_layer = 2048
@@ -261,7 +261,7 @@ shape = SubResource("2")
 texture = ExtResource("2")
 hframes = 5
 vframes = 3
-frame = 4
+frame = 9
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

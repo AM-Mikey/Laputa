@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://bnwo7ae85qnwb"]
+[gd_scene load_steps=84 format=3 uid="uid://bnwo7ae85qnwb"]
 
 [ext_resource type="PackedScene" uid="uid://cjueepke5w45c" path="res://src/Gun/Red7.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://brl16iyt5eq02" path="res://src/Player/PlayerCamera.tscn" id="2"]
@@ -26,9 +26,7 @@
 [ext_resource type="Script" uid="uid://cjgn7e5vfg20e" path="res://src/Player/Jump.gd" id="29"]
 [ext_resource type="Script" uid="uid://dtadf671wpvdq" path="res://src/Player/Run.gd" id="30"]
 [ext_resource type="Texture2D" uid="uid://cw8igq2ymupx3" path="res://assets/Player/Aerial.png" id="30_ypuil"]
-[ext_resource type="Script" uid="uid://ctfm0sxptv68n" path="res://src/Player/LongJump.gd" id="31"]
 [ext_resource type="Texture2D" uid="uid://dxsgd516bqad" path="res://assets/Player/BackAerial.png" id="31_cd6iy"]
-[ext_resource type="Script" uid="uid://c2muo3figyn1i" path="res://src/Player/Fall.gd" id="32"]
 [ext_resource type="Texture2D" uid="uid://bvoixqk72iq1" path="res://assets/Player/BackRun.png" id="32_6evun"]
 [ext_resource type="PackedScene" uid="uid://cdgi2ibu56t2j" path="res://src/Gun/Speeder.tscn" id="33"]
 [ext_resource type="Texture2D" uid="uid://u06a3oag5sp" path="res://assets/Player/Crouch.png" id="33_id2yr"]
@@ -71,7 +69,7 @@ size = Vector2(12, 7)
 size = Vector2(16, 21)
 
 [sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(2, 2)
+size = Vector2(12, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exru4"]
 size = Vector2(12, 4)
@@ -2909,12 +2907,6 @@ script = ExtResource("30")
 [node name="Jump" type="Node" parent="MovementManager/States"]
 script = ExtResource("29")
 
-[node name="LongJump" type="Node" parent="MovementManager/States"]
-script = ExtResource("31")
-
-[node name="Fall" type="Node" parent="MovementManager/States"]
-script = ExtResource("32")
-
 [node name="Ladder" type="Node" parent="MovementManager/States"]
 script = ExtResource("10")
 
@@ -2953,12 +2945,11 @@ debug_color = Color(0, 0.627451, 0.27451, 0)
 [node name="SSPDetector" type="Area2D" parent="."]
 z_index = -1
 collision_layer = 0
-collision_mask = 0
-monitoring = false
+collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SSPDetector"]
 light_mask = 0
-position = Vector2(0, 1)
+position = Vector2(0, 0.5)
 shape = SubResource("4")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
@@ -2966,6 +2957,17 @@ debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_exru4")
 disabled = true
+debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
+
+[node name="SSPWorldDetector" type="Area2D" parent="."]
+z_index = -1
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SSPWorldDetector"]
+light_mask = 0
+position = Vector2(0, 0.5)
+shape = SubResource("4")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
 [node name="CrouchDetector" type="Area2D" parent="."]
@@ -3088,6 +3090,8 @@ wait_time = 2.0
 [connection signal="area_entered" from="ItemDetector" to="." method="_on_ItemDetector_area_entered"]
 [connection signal="body_entered" from="SSPDetector" to="." method="_on_SSPDetector_body_entered"]
 [connection signal="body_exited" from="SSPDetector" to="." method="_on_SSPDetector_body_exited"]
+[connection signal="body_entered" from="SSPWorldDetector" to="." method="_on_SSPWorldDetector_body_entered"]
+[connection signal="body_exited" from="SSPWorldDetector" to="." method="_on_SSPWorldDetector_body_exited"]
 [connection signal="body_entered" from="CrouchDetector" to="MovementManager" method="_on_CrouchDetector_body_entered"]
 [connection signal="body_exited" from="CrouchDetector" to="MovementManager" method="_on_CrouchDetector_body_exited"]
 [connection signal="texture_changed" from="Sprite2D" to="Sprite2D" method="_on_Sprite_texture_changed"]

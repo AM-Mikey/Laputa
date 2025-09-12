@@ -8,6 +8,7 @@ extends Node
 @onready var ap = pc.get_node("AnimationPlayer")
 
 var holding_jump = true
+var is_dropping = false
 
 func state_process(_delta):
 	# Jump holding
@@ -17,7 +18,7 @@ func state_process(_delta):
 	set_player_directions()
 	pc.velocity = calc_velocity()
 	pc.move_and_slide()
-
+	pc.velocity.y = min(mm.terminal_velocity, pc.velocity.y)
 	animate()
 
 	# We only set move_dir.y to jump for a single frame
@@ -136,7 +137,7 @@ func enter():
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
 	pc.mm.snap_vector = Vector2.ZERO
-	holding_jump = pc.can_input and Input.is_action_pressed("jump")
+	holding_jump = pc.can_input and Input.is_action_pressed("jump") and !is_dropping
 	if holding_jump:
 		# Set the player's move dir to -1.0 to indicate a jump.
 		# It will be reset on next physics frame
@@ -152,3 +153,4 @@ func exit():
 	var enable = [pc.get_node("CollisionShape2D")]
 	mm.disable_collision_shapes(disable)
 	mm.enable_collision_shapes(enable)
+	is_dropping = false

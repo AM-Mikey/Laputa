@@ -82,7 +82,8 @@ func _input(event):
 					pc.mm.cached_state = pc.mm.current_state
 					pc.mm.change_state("fly")
 				else:
-					pc.mm.change_state(pc.mm.cached_state.name.to_lower())
+					pc.mm.change_state("jump")
+					#pc.mm.change_state(pc.mm.cached_state.name.to_lower()) #gave errors
 
 
 		if event.is_action_pressed("debug_slowmode"):

@@ -32,6 +32,7 @@ var can_input = true
 #var is_on_conveyor = false
 var enemies_touching = []
 var is_on_ssp = false
+var deny_ssp = false
 var is_crouching = false
 var is_forced_crouching = false
 var is_in_water = false
@@ -63,7 +64,7 @@ func _ready():
 #	if weapon_array.front() != null: TODO:fix
 #		$WeaponSprite.texture = weapon_array.front().texture
 	await get_tree().process_frame
-	$SSPDetector.monitoring = true #patch, some weird bug detects ssp on startup
+	#$SSPDetector.monitoring = true #patch, some weird bug detects ssp on startup
 
 
 func disable():
@@ -186,16 +187,22 @@ func _on_IframeTimer_timeout() -> void:
 	if not enemies_touching.is_empty():
 		hit_again()
 
-func _on_SSPDetector_body_entered(_body):
-	is_on_ssp = true
-	#if not $PushLeft.disabled: 
-		#$PushLeft.set_deferred("disabled", true)
-		#$PushRight.set_deferred("disabled", true)
-func _on_SSPDetector_body_exited(_body):
+
+func _on_SSPDetector_body_entered(body):
+	if not deny_ssp:
+		is_on_ssp = true
+
+func _on_SSPDetector_body_exited(body):
 	is_on_ssp = false
-	#if $PushLeft.disabled: 
-		#$PushLeft.set_deferred("disabled", false)
-		#$PushRight.set_deferred("disabled", false)
+
+func _on_SSPWorldDetector_body_entered(body: Node2D):
+	deny_ssp = true
+
+func _on_SSPWorldDetector_body_exited(body: Node2D):
+	deny_ssp = false
+	if $SSPDetector.has_overlapping_bodies():
+		is_on_ssp = true
+
 
 func _on_ItemDetector_area_entered(area):
 	if disabled: return

@@ -11,6 +11,7 @@ var saved_move_dir := Vector2.ZERO #for the 2 frame stand
 var do_edge_turn: bool
 var push_left_wall := false
 var push_right_wall := false
+var is_dropping = false
 
 func state_process(_delta):
 	set_player_directions()
@@ -32,9 +33,14 @@ func state_process(_delta):
 	if not pc.is_on_floor() and not pc.is_in_coyote:
 		pc.is_in_coyote = true
 		mm.do_coyote_time()
-	if Input.is_action_pressed("jump") and pc.can_input:
+	if Input.is_action_just_pressed("jump") and Input.is_action_pressed("look_down") and pc.is_on_ssp and pc.can_input:
+		is_dropping = true
+		mm.drop()
+		return
+	elif Input.is_action_pressed("jump") and !is_dropping and pc.can_input:
 		mm.jump()
 		return
+
 
 func set_player_directions():
 	var input_dir = Vector2.ZERO
@@ -275,3 +281,4 @@ func enter(): #TODO: consider setting these back after exiting or just set these
 	do_edge_turn = false
 func exit():
 	sprite.position = Vector2i(0.0, -16.0)
+	is_dropping = false

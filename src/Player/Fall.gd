@@ -15,7 +15,7 @@ func state_process(_delta):
 	pc.set_floor_stop_on_slope_enabled(true)
 	pc.move_and_slide()
 	var new_velocity = pc.velocity
-	if pc.is_on_wall():
+	if pc.is_on_wall(): #TODO migrate?
 		new_velocity.y = max(pc.velocity.y, new_velocity.y)
 		
 	pc.velocity.y = min(mm.terminal_velocity, new_velocity.y) #only set y portion because we're doing move and slide with snap
