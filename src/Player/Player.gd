@@ -7,6 +7,7 @@ const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
 const DEATH_CAMERA = preload("res://src/Utility/DeathCamera.tscn")
 const DAMAGENUMBER = preload("res://src/Effect/DamageNumber.tscn")
 const EXPERIENCEGET = preload("res://src/Effect/ExperienceGet.tscn")
+const EXPERIENCE_NUMBER = preload("res://src/Effect/ExperienceNumber.tscn")
 const HEARTGET = preload("res://src/Effect/HeartGet.tscn")
 const AMMOGET = preload("res://src/Effect/AmmoGet.tscn")
 
@@ -44,12 +45,12 @@ var dead = false
 var inventory: Array
 var topic_array: Array = ["child", "sasuke", "basil", "general"]
 var inspect_target: Node = null
+var experience_number: Node = null
 
 var move_dir := Vector2.LEFT
 var look_dir := Vector2i.LEFT
 var direction_lock := Vector2i.ZERO
 var shoot_dir := Vector2.LEFT
-
 
 
 @onready var world = get_tree().get_root().get_node("World")
@@ -233,6 +234,17 @@ func _on_ItemDetector_area_entered(area):
 		var experience_get = EXPERIENCEGET.instantiate()
 		experience_get.position = experience_pickup.global_position
 		world.get_node("Front").add_child(experience_get)
+		
+		if experience_number == null:
+			experience_number = EXPERIENCE_NUMBER.instantiate()
+			experience_number.value = experience_pickup.value
+			experience_number.position.y -= 16
+			add_child(experience_number)
+		else:
+			experience_number.value += experience_pickup.value
+			experience_number.display_number()
+			experience_number.get_node("Timer").start(experience_number.combo_time)
+		
 		emit_signal("money_updated", money)
 		emit_signal("guns_updated", guns.get_children(), "xp", true)
 		experience_pickup.queue_free()
