@@ -232,22 +232,25 @@ func do_death_drop():
 		world.middle.add_child(heart)
 	
 	elif drop > heart_chance and drop <= heart_chance + experience_chance: #drop xp
-		var loop_times = 1
-		var value = 1
+		var values = [1]
 		
 		match reward:
 			1: pass
-			2: loop_times = 2
-			3: loop_times = 3
-			4: loop_times = 4
-			5: value = 5
+			2: values = [1,1]
+			3: values = [1,1,1]
+			4: values = [1,1,1,1]
+			5: values = [5]
+			6: values = [5,1]
+			7: values = [5,1,1]
+			8: values = [5,1,1,1]
+			9: values = [5,1,1,1,1]
+			10: values = [10]
 		
-		while loop_times > 0:
+		for v in values:
 			var experience = EXPERIENCE.instantiate()
-			experience.value = value
+			experience.value = v
 			experience.position = global_position
 			world.middle.add_child(experience)
-			loop_times -= 1
 
 	else: #drop ammo
 		ammo.position = global_position
