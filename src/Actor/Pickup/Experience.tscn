@@ -1,7 +1,8 @@
-[gd_scene load_steps=33 format=3 uid="uid://bgnl3b3pqhfdb"]
+[gd_scene load_steps=34 format=3 uid="uid://bgnl3b3pqhfdb"]
 
 [ext_resource type="Script" uid="uid://bx12634rbo328" path="res://src/Actor/Pickup/Experience.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dumy0wfvyxqrq" path="res://assets/Actor/Pickup/Experience.png" id="2"]
+[ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="3_cd5ih"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cd5ih"]
 size = Vector2(10, 10)
@@ -718,6 +719,14 @@ one_shot = true
 [node name="FlashTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = -22.0
+offset_top = -31.0
+offset_right = 18.0
+offset_bottom = -8.0
+theme_override_fonts/font = ExtResource("3_cd5ih")
+text = "asd"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]

@@ -15,6 +15,7 @@ var normal_time = 5.0
 var end_time = 3.0
 var state = "normal"
 var did_first_frame = false
+var did_second_frame = false
 
 func _ready():
 	home = global_position
@@ -22,7 +23,6 @@ func _ready():
 	direction = randomize_direction()
 	speed = randomize_speed()
 	velocity = calc_starting_velocity(speed, direction)
-	start_velocity = (abs(velocity.x) + abs(velocity.y)) / 2.0 #used to calculate animation slowdown
 	match value:
 		1:
 			if velocity.x < 0: $AnimationPlayer.play("SmallLeft")
@@ -63,13 +63,16 @@ func _physics_process(delta):
 			if i == 0: #only one collision per frame
 				am.play("xp", self)
 	
-
-
-	var ave_velocity = (abs(velocity.x) + abs(velocity.y)) / 2.0 #used to calculate animation slowdown
+	if did_first_frame and !did_second_frame:
+		did_second_frame = true
+		start_velocity = (abs(velocity.x) + abs(velocity.y)) #used to calculate animation slowdown
+	
+	var ave_velocity = (abs(velocity.x) + abs(velocity.y)) #used to calculate animation slowdown
 	if $AnimationPlayer.current_animation == "SmallPop" or $AnimationPlayer.current_animation == "MediumPop" or $AnimationPlayer.current_animation == "LargePop":
 		$AnimationPlayer.speed_scale = 1
 	else: 
 		$AnimationPlayer.speed_scale = ave_velocity / start_velocity
+		$Label.text = "%.3f" % $AnimationPlayer.speed_scale
 		if $AnimationPlayer.speed_scale > 1:
 			$AnimationPlayer.speed_scale = 1
 
@@ -83,7 +86,7 @@ func calc_starting_velocity(speed, dir) -> Vector2:
 
 
 func _on_FlashTimer_timeout():
-	var start_time = $AnimationPlayer.current_animation_position
+	var start_time = fposmod(snappedf($AnimationPlayer.current_animation_position, 0.001), 0.4)
 	match state:
 		"normal":
 			match $AnimationPlayer.current_animation:
@@ -112,7 +115,6 @@ func _on_FlashTimer_timeout():
 				"LargeRightFlash":
 					animate("LargeRight", start_time)
 		"end":
-			print("is end")
 			match $AnimationPlayer.current_animation:
 				"SmallLeft":
 					animate("SmallLeftFlash", start_time)
@@ -120,9 +122,7 @@ func _on_FlashTimer_timeout():
 					animate("SmallRightFlash", start_time)
 				"SmallLeftFlash":
 					animate("SmallLeftEnd", start_time)
-					print("okleft")
 				"SmallRightFlash":
-					print("ok")
 					animate("SmallRightEnd", start_time)
 				"SmallLeftEnd":
 					animate("SmallLeftFlash", start_time)
