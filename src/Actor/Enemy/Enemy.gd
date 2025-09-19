@@ -2,7 +2,6 @@
 extends Actor
 class_name Enemy
 
-#const DAMAGENUMBER = preload("res://src/Effect/DamageNumber.tscn")
 const AMMO = preload("res://src/Actor/Pickup/Ammo.tscn")
 const BLOOD = preload("res://src/Effect/EnemyBloodEffect.tscn")
 const EXPERIENCE = preload("res://src/Actor/Pickup/Experience.tscn")
@@ -22,9 +21,7 @@ var enemy_damage_on_contact: int
 var hit_enemies_on_contact = false
 var hurt_sound = "enemy_hurt"
 var die_sound = "enemy_die" 
-var damagenum = null
-var damagenum_timer = null
-var damagenum_time: float = 0.5
+var damage_number = null
 
 @export var id: String
 
@@ -55,7 +52,6 @@ func _ready():
 		#if state != "" and state != null: #TODO: this prevents enemies from starting in a state if we dont yield? we get ton of errors if we dont because we delete the enemy when moving it
 			#change_state(state)
 	
-	setup_damagenum_timer()
 	setup()
 
 func setup(): #EVERY ENEMY MUST HAVE
@@ -141,7 +137,7 @@ func hit(damage, blood_direction):
 	hp -= damage
 	var blood = BLOOD.instantiate()
 	get_tree().get_root().get_node("World/Front").add_child(blood)
-	blood.global_position = global_position
+	blood.global_position = $Sprite2D.global_position #more accurate for visual
 	blood.direction = blood_direction
 
 	set_damagenum(damage)
@@ -158,35 +154,25 @@ func _on_hit(damage, blood_direction): #inhereted for enemies to do something on
 ### DAMAGE NUMBER ###
 
 func set_damagenum(damage):
-	if not damagenum: #if we dont already have a damage number create a new one
-		damagenum = DAMAGENUMBER.instantiate() #this node is an orphan, it's not able to actually do this, i dont think TODO: fix
-		setup_damagenum_timer()
-		damagenum.value = damage
-		damagenum_timer.start(damagenum_time)
+	var y_offset = $CollisionShape2D.shape.get_rect().position.y - 8
+	
+	if damage_number == null:
+		damage_number = DAMAGE_NUMBER.instantiate()
+		damage_number.value = damage
+		damage_number.position = global_position
+		damage_number.position.y += y_offset
+		get_tree().get_root().get_node("World/Front").add_child(damage_number)
 	else: #add time and add values
-		damagenum.value += damage
-		damagenum_timer.start(damagenum_timer.time_left)
+		damage_number.value += damage
+		damage_number.display_number()
+		damage_number.get_node("Timer").start(damage_number.combo_time)
 
-func setup_damagenum_timer():
-	damagenum_timer = Timer.new()
-	damagenum_timer.one_shot = true
-	damagenum_timer.connect("timeout", Callable(self, "_on_DamagenumTimer_timeout"))
-	add_child(damagenum_timer)
-
-func _on_DamagenumTimer_timeout():
-		damagenum.position = global_position
-		world.front.add_child(damagenum)
-		damagenum = null
 
 ### DEATH ###
 
 func die(quietly = false):
 	if dead: return
 	dead = true
-	
-	if damagenum:
-		damagenum_timer.stop()
-		_on_DamagenumTimer_timeout()
 	if !pc:
 		pc = get_tree().get_root().get_node_or_null("World/Juniper")
 	if pc:
@@ -196,7 +182,7 @@ func die(quietly = false):
 		do_death_routine()
 		do_death_drop()
 		var explosion = EXPLOSION.instantiate()
-		explosion.position = global_position
+		explosion.position = $Sprite2D.global_position #more accurate for visual
 		world.front.add_child(explosion)
 	queue_free()
 

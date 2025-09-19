@@ -5,12 +5,12 @@ class_name Player
 #const POPUP = preload("res://src/UI/PopupText.tscn")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
 const DEATH_CAMERA = preload("res://src/Utility/DeathCamera.tscn")
-const DAMAGENUMBER = preload("res://src/Effect/DamageNumber.tscn")
 const EXPERIENCEGET = preload("res://src/Effect/ExperienceGet.tscn")
-const EXPERIENCE_NUMBER = preload("res://src/Effect/ExperienceNumber.tscn")
 const HEARTGET = preload("res://src/Effect/HeartGet.tscn")
 const AMMOGET = preload("res://src/Effect/AmmoGet.tscn")
-
+const PLAYER_DAMAGE_NUMBER = preload("res://src/Effect/PlayerDamageNumber.tscn")
+const EXPERIENCE_NUMBER = preload("res://src/Effect/ExperienceNumber.tscn")
+const HEART_NUMBER = preload("res://src/Effect/HeartNumber.tscn")
 
 signal hp_updated(hp, max_hp)
 signal guns_updated(guns, cause, do_xp_flash)
@@ -46,6 +46,8 @@ var inventory: Array
 var topic_array: Array = ["child", "sasuke", "basil", "general"]
 var inspect_target: Node = null
 var experience_number: Node = null
+var damage_number: Node = null
+var heart_number: Node = null
 
 var move_dir := Vector2.LEFT
 var look_dir := Vector2i.LEFT
@@ -117,32 +119,48 @@ func hit(damage, knockback_direction):
 			hp -= damage
 			am.play("pc_hurt")
 			emit_signal("hp_updated", hp, max_hp)
-			###DamageNumber
-			var damagenum = DAMAGENUMBER.instantiate()
-			damagenum.position = global_position
-			damagenum.value = damage
-			get_tree().get_root().get_node("World/Front").add_child(damagenum)
-			###
-			do_iframes()
-
-			if hp <= 0:
-				die()
-
+			
+			if experience_number != null: experience_number.queue_free()
+			if heart_number != null: heart_number.queue_free()
+			if damage_number == null: #no damage_number
+				damage_number = PLAYER_DAMAGE_NUMBER.instantiate()
+				damage_number.value = damage
+				if hp <= 0:
+					damage_number.position = global_position
+					damage_number.position.y -= 16
+					get_tree().get_root().get_node("World/Front").add_child(damage_number)
+					die()
+				else:
+					damage_number.position.y -= 16
+					add_child(damage_number)
+					do_iframes()
+			else: #already have a damage_number
+				damage_number.value += damage
+				damage_number.display_number()
+				damage_number.get_node("Timer").start(damage_number.combo_time)
+				do_iframes()
+				if hp <= 0:
+					damage_number.position = global_position
+					damage_number.position.y -= 16
+					damage_number.reparent(get_tree().get_root().get_node("World/Front"))
+					die()
+			
+			
 			var active_gun = guns.get_child(0)
 			if active_gun != null:
 				active_gun.xp = active_gun.xp - (damage * 2)
-				
 				if active_gun.level == 1:
 					active_gun.xp = max(active_gun.xp, 0)
 				if active_gun.xp < 0:
 					$GunManager.level_down(false)
-					
 				emit_signal("guns_updated", guns.get_children())
+		
 		if knockback_direction != Vector2.ZERO:
 			#print("Knockback in Dir: " + str(knockback_direction))
 			mm.knockback_direction = knockback_direction
 			mm.snap_vector = Vector2.ZERO
 			mm.change_state("knockback")
+
 
 func do_iframes():
 	invincible = true
@@ -209,14 +227,30 @@ func _on_ItemDetector_area_entered(area):
 	if disabled: return
 	
 	if area.get_collision_layer_value(11): #health
-		hp += area.get_parent().value
+		var heart_pickup = area.get_parent()
+		var hp_before = hp
+		hp += heart_pickup.value
 		hp = min(hp, max_hp)
 		am.play("get_hp")
 		var heart_get = HEARTGET.instantiate()
-		heart_get.position = area.get_parent().global_position
+		heart_get.position = heart_pickup.global_position
+		
+		if hp - hp_before > 0: #health gained
+			if damage_number != null: damage_number.queue_free()
+			if experience_number != null: experience_number.queue_free()
+			if heart_number == null:
+				heart_number = HEART_NUMBER.instantiate()
+				heart_number.value = hp - hp_before
+				heart_number.position.y -= 16
+				add_child(heart_number)
+			else:
+				heart_number.value += hp - hp_before
+				heart_number.display_number()
+				heart_number.get_node("Timer").start(heart_number.combo_time)
+		
 		world.get_node("Front").add_child(heart_get)
 		emit_signal("hp_updated", hp, max_hp)
-		area.get_parent().queue_free()
+		heart_pickup.queue_free()
 	
 	
 	if area.get_collision_layer_value(12): #xp
@@ -235,6 +269,8 @@ func _on_ItemDetector_area_entered(area):
 		experience_get.position = experience_pickup.global_position
 		world.get_node("Front").add_child(experience_get)
 		
+		if damage_number != null: damage_number.queue_free()
+		if heart_number != null: heart_number.queue_free()
 		if experience_number == null:
 			experience_number = EXPERIENCE_NUMBER.instantiate()
 			experience_number.value = experience_pickup.value

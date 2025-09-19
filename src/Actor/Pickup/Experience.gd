@@ -6,23 +6,23 @@ var direction
 @export var minimum_speed: float = 8.0
 var start_velocity
 
-@export var rng_min_speed = Vector2(30, 30)
-@export var rng_max_speed = Vector2(50, 90)
+@export var rng_min_speed = Vector2(30, 60)
+@export var rng_max_speed = Vector2(60, 120)
 
 var value: int
 
 var normal_time = 5.0
 var end_time = 3.0
 var state = "normal"
+var did_first_frame = false
 
 func _ready():
 	home = global_position
 	$StateTimer.start(normal_time)
 	direction = randomize_direction()
 	speed = randomize_speed()
-	velocity = calc_velocity(speed, direction)
+	velocity = calc_starting_velocity(speed, direction)
 	start_velocity = (abs(velocity.x) + abs(velocity.y)) / 2.0 #used to calculate animation slowdown
-
 	match value:
 		1:
 			if velocity.x < 0: $AnimationPlayer.play("SmallLeft")
@@ -43,6 +43,9 @@ func randomize_speed():
 	return Vector2(rng.randf_range(rng_min_speed.x, rng_max_speed.x),rng.randf_range(rng_min_speed.y, rng_max_speed.y))
 
 func _physics_process(delta):
+	if !did_first_frame:
+		did_first_frame = true
+		return
 	velocity.y += gravity * delta
 	var prev_velocity = velocity
 	move_and_slide()
@@ -57,7 +60,9 @@ func _physics_process(delta):
 		if abs(velocity.x) < minimum_speed: #this could cause a midair freeze
 			velocity.x = 0
 		if abs(velocity.y) > minimum_speed or abs(velocity.x) > minimum_speed:
-			am.play("xp", self)
+			if i == 0: #only one collision per frame
+				am.play("xp", self)
+	
 
 
 	var ave_velocity = (abs(velocity.x) + abs(velocity.y)) / 2.0 #used to calculate animation slowdown
@@ -70,12 +75,10 @@ func _physics_process(delta):
 
 
 	
-func calc_velocity(speed, dir) -> Vector2:
+func calc_starting_velocity(speed, dir) -> Vector2:
 	var out = velocity
 	out.x = speed.x * dir.x
-	out.y += gravity * get_physics_process_delta_time()
-	if dir.y == -1.0:
-		out.y = speed.y * dir.y
+	out.y = speed.y * dir.y
 	return out
 
 

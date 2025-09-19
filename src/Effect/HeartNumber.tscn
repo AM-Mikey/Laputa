@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ii4a8ih108u2"]
+[gd_scene load_steps=6 format=3 uid="uid://dtusk5opbhd8q"]
 
-[ext_resource type="Script" uid="uid://drj33i4nu3wo" path="res://src/Effect/DisplayNumber.gd" id="1_gqp5h"]
-[ext_resource type="Texture2D" uid="uid://c7wyw4y3jdl7j" path="res://assets/UI/NumberNew.png" id="2_crl7u"]
+[ext_resource type="Script" uid="uid://drj33i4nu3wo" path="res://src/Effect/DisplayNumber.gd" id="1_mwpof"]
+[ext_resource type="Texture2D" uid="uid://c7wyw4y3jdl7j" path="res://assets/UI/NumberNew.png" id="2_cr4qo"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "FloatIn"
@@ -65,11 +65,11 @@ _data = {
 &"FloatOut": SubResource("Animation_gqp5h")
 }
 
-[node name="ExperienceNumber" type="Node2D"]
+[node name="HeartNumber" type="Node2D"]
 z_index = 5
 z_as_relative = false
-script = ExtResource("1_gqp5h")
-type = 3
+script = ExtResource("1_mwpof")
+type = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -77,34 +77,35 @@ libraries = {
 }
 
 [node name="Layer" type="Node2D" parent="."]
+position = Vector2(0, -8)
 
 [node name="Sign" type="Sprite2D" parent="Layer"]
 position = Vector2(-4, 0)
-texture = ExtResource("2_crl7u")
+texture = ExtResource("2_cr4qo")
 hframes = 11
 vframes = 6
-frame = 43
+frame = 10
 
 [node name="Num1" type="Sprite2D" parent="Layer"]
 position = Vector2(5, 0)
-texture = ExtResource("2_crl7u")
+texture = ExtResource("2_cr4qo")
 hframes = 11
 vframes = 6
-frame = 42
+frame = 9
 
 [node name="Num2" type="Sprite2D" parent="Layer"]
 position = Vector2(14, 0)
-texture = ExtResource("2_crl7u")
+texture = ExtResource("2_cr4qo")
 hframes = 11
 vframes = 6
-frame = 42
+frame = 9
 
 [node name="Num3" type="Sprite2D" parent="Layer"]
 position = Vector2(23, 0)
-texture = ExtResource("2_crl7u")
+texture = ExtResource("2_cr4qo")
 hframes = 11
 vframes = 6
-frame = 42
+frame = 9
 
 [node name="Timer" type="Timer" parent="."]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://bnwo7ae85qnwb"]
+[gd_scene load_steps=85 format=3 uid="uid://bnwo7ae85qnwb"]
 
 [ext_resource type="PackedScene" uid="uid://cjueepke5w45c" path="res://src/Gun/Red7.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://brl16iyt5eq02" path="res://src/Player/PlayerCamera.tscn" id="2"]
@@ -91,19 +91,59 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
+tracks/0/path = NodePath("Sprite2D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1.07177, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GunManager/Guns:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_ph1p6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GunManager/Guns:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_acjyt"]
 _data = {
-&"FlashIframe": SubResource("53")
+&"FlashIframe": SubResource("53"),
+&"RESET": SubResource("Animation_ph1p6")
 }
 
 [sub_resource type="Animation" id="Animation_kquyl"]
@@ -2714,7 +2754,7 @@ collision_mask = 8
 
 [node name="WallLB" type="RayCast2D" parent="."]
 modulate = Color(1, 1, 1, 0.501961)
-position = Vector2(-6, -1)
+position = Vector2(-6, -2)
 target_position = Vector2(-1, 1.19209e-07)
 collision_mask = 8
 
@@ -2726,7 +2766,7 @@ collision_mask = 8
 
 [node name="WallRB" type="RayCast2D" parent="."]
 modulate = Color(1, 1, 1, 0.501961)
-position = Vector2(6, -1)
+position = Vector2(6, -2)
 target_position = Vector2(1, 0)
 collision_mask = 8
 
@@ -2889,6 +2929,7 @@ script = ExtResource("15")
 [node name="States" type="Node2D" parent="MovementManager"]
 
 [node name="StateLabel" type="Label" parent="MovementManager/States"]
+visible = false
 offset_left = -21.1084
 offset_top = -34.0
 offset_right = 18.8916
