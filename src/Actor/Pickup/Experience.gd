@@ -72,7 +72,6 @@ func _physics_process(delta):
 		$AnimationPlayer.speed_scale = 1
 	else: 
 		$AnimationPlayer.speed_scale = ave_velocity / start_velocity
-		$Label.text = "%.3f" % $AnimationPlayer.speed_scale
 		if $AnimationPlayer.speed_scale > 1:
 			$AnimationPlayer.speed_scale = 1
 
