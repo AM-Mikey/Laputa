@@ -296,7 +296,7 @@ func _on_ItemDetector_area_entered(area):
 		var ammo_get = AMMOGET.instantiate()
 		ammo_get.position = ammo_pickup.global_position
 		world.get_node("Front").add_child(ammo_get)
-		emit_signal("guns_updated", guns.get_children())
+		emit_signal("guns_updated", guns.get_children(), "getammo")
 		ammo_pickup.queue_free()
 
 
