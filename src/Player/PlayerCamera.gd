@@ -98,23 +98,22 @@ func on_limit_camera(left, right, top, bottom):
 		Vector2(window_width, thickness), \
 		Vector2.ZERO)
 		spawn_black_bar("BarBottom", \
-		Vector2(window_width, thickness), \
-		Vector2(0, (bottom - top) + thickness))
+		Vector2(window_width, thickness + 16), \
+		Vector2(0, (bottom - top) + thickness))  #16 for overscan safety
 		
 		limit_top = top - thickness
-		limit_bottom = bottom  + thickness
+		limit_bottom = bottom + thickness
 	else:
 		limit_top = top
 		limit_bottom = bottom
 
 func spawn_black_bar(bar_name, size, bar_position):
-		var ui = w.get_node("UILayer")
 		var bar = BLACKBAR.instantiate()
 		bar.name = bar_name
 		bar.size = size
 		bar.position = bar_position
-		ui.add_child(bar)
-		ui.move_child(bar, 0)
+		w.bl.add_child(bar)
+		w.bl.move_child(bar, 0)
 
 
 func on_viewport_size_changed():

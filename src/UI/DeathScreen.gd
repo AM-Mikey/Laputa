@@ -7,7 +7,7 @@ const TITLESCREEN = preload("res://src/UI/TitleScreen.tscn")
 
 @onready var w = get_tree().get_root().get_node("World")
 @onready var pc = get_tree().get_root().get_node("World/Juniper")
-@onready var hud = get_tree().get_root().get_node("World/UILayer/HUD")
+@onready var hud = get_tree().get_root().get_node("World/UILayer/UIGroup/HUD")
 
 func _ready():
 	visible = false

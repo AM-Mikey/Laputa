@@ -34,10 +34,10 @@ func _ready(): #TODO: update load and save to new file
 
 
 func _on_Return_pressed():
-	if world.has_node("UILayer/PauseMenu"):
-		world.get_node("UILayer/PauseMenu").do_focus()
-	if world.has_node("UILayer/TitleScreen"):
-		world.get_node("UILayer/TitleScreen").do_focus()
+	if world.has_node("UILayer/UIGroup/PauseMenu"):
+		world.get_node("UILayer/UIGroup/PauseMenu").do_focus()
+	if world.has_node("UILayer/UIGroup/TitleScreen"):
+		world.get_node("UILayer/UIGroup/TitleScreen").do_focus()
 	queue_free()
 
 func on_viewport_size_changed():

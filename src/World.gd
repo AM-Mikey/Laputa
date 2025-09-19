@@ -26,7 +26,10 @@ var internal_version: String = get_internal_version()
 @export var start_level_path: String
 @onready var current_level = load(start_level_path).instantiate() #assumes current level to start with, might cause issues down the line
 @onready var ui = $UILayer
+@onready var uig = $UILayer/UIGroup
 @onready var el = $EditorLayer
+@onready var dl = $DebugLayer
+@onready var bl = $BlackoutLayer
 @onready var front = $Front
 @onready var middle = $Middle
 @onready var back = $Back
@@ -36,7 +39,7 @@ func _ready():
 	on_viewport_size_changed()
 	
 	if not do_skip_title: #TODO: update this
-		ui.add_child(TITLE.instantiate())
+		uig.add_child(TITLE.instantiate())
 		add_child(TITLECAM.instantiate())
 		first_time_level_setup()
 	else:
@@ -90,22 +93,22 @@ func get_internal_version() -> String:
 
 func _input(event):
 	if event.is_action_pressed("inventory") and has_node("Juniper"):
-		if not ui.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled and $Juniper.can_input:
+		if not uig.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled and $Juniper.can_input:
 			var inventory = INVENTORY.instantiate()
-			ui.add_child(inventory)
+			uig.add_child(inventory)
 
 
-	if event.is_action_pressed("pause") and not ui.has_node("TitleScreen"):
-		if not ui.has_node("PauseMenu") and not get_tree().paused:
+	if event.is_action_pressed("pause") and not uig.has_node("TitleScreen"):
+		if not uig.has_node("PauseMenu") and not get_tree().paused:
 			get_tree().paused = true
 			
-			if ui.has_node("HUD"):
-				$UILayer/HUD.visible = false
-			if ui.has_node("DialogBox"):
-				$UILayer/DialogBox.visible = false
+			if uig.has_node("HUD"):
+				$UILayer/UIGroup/HUD.visible = false
+			if uig.has_node("DialogBox"):
+				$UILayer/UIGroup/DialogBox.visible = false
 			
 			var pause_menu = PAUSEMENU.instantiate()
-			ui.add_child(pause_menu)
+			uig.add_child(pause_menu)
 	
 	if event.is_action_pressed("window_maximize"):
 		if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_MAXIMIZED:
@@ -120,7 +123,7 @@ func first_time_level_setup():
 	print("first time level setup")
 	add_child(JUNIPER.instantiate())
 	$Juniper/PlayerCamera.position_smoothing_enabled = false
-	ui.add_child(HUD.instantiate())
+	uig.add_child(HUD.instantiate())
 	
 	current_level = load(start_level_path).instantiate()
 	add_child(current_level)
@@ -135,7 +138,7 @@ func first_time_level_setup():
 				$Juniper/PlayerCamera.enabled = true
 		current_level.LevelType.PLAYERLESS_CUTSCENE:
 			$Juniper.queue_free()
-			$UILayer/HUD.queue_free()
+			$UILayer/UIGroup/HUD.queue_free()
 	
 	#wipe would go here if we want one
 	display_level_text(current_level)
@@ -146,14 +149,14 @@ func first_time_level_setup():
 
 func change_level_via_code(level_path):
 	print("changing level via code...")
-	if ui.has_node("DialogBox"): $UILayer/DialogBox.exit()
+	if uig.has_node("DialogBox"): $UILayer/UIGroup/DialogBox.exit()
 	clear_spawn_layers()
 	current_level.queue_free()
 	current_level = null
 	await get_tree().process_frame
 	add_child(JUNIPER.instantiate())
 	$Juniper/PlayerCamera.position_smoothing_enabled = false
-	ui.add_child(HUD.instantiate())
+	uig.add_child(HUD.instantiate())
 	
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
@@ -168,7 +171,7 @@ func change_level_via_code(level_path):
 				$Juniper/PlayerCamera.enabled = true
 		current_level.LevelType.PLAYERLESS_CUTSCENE:
 			$Juniper.queue_free()
-			$UILayer/HUD.queue_free()
+			$UILayer/UIGroup/HUD.queue_free()
 	
 	#wipe would go here if we want one
 	display_level_text(current_level)
@@ -180,7 +183,7 @@ func change_level_via_code(level_path):
 func change_level_via_trigger(level_path, door_index):
 	print("changing level via trigger...")
 	SaveSystem.write_level_data_to_temp(current_level)
-	if ui.has_node("DialogBox"): $UILayer/DialogBox.stop_printing()
+	if uig.has_node("DialogBox"): $UILayer/UIGroup/DialogBox.stop_printing()
 	clear_spawn_layers()
 	var old_level_path = current_level.scene_file_path
 	current_level.queue_free()
@@ -227,15 +230,15 @@ func change_level_via_trigger(level_path, door_index):
 			printerr("ERROR: more than one door with same index")
 	
 	###transition out
-	if ui.has_node("TransitionWipe"): #LOADZONES
+	if bl.has_node("TransitionWipe"): #LOADZONES
 		await get_tree().create_timer(0.8).timeout
-		$UILayer/TransitionWipe.play_out_animation()
+		$BlackoutLayer/TransitionWipe.play_out_animation()
 		await get_tree().create_timer(0.2).timeout #wait for a bit of the animation to finish
 		$Juniper.can_input = true
 
-	elif ui.has_node("TransitionIris"): #DOORS
+	elif bl.has_node("TransitionIris"): #DOORS
 		await get_tree().create_timer(0.4).timeout
-		$UILayer/TransitionIris.play_out_animation()
+		$BlackoutLayer/TransitionIris.play_out_animation()
 		await get_tree().create_timer(0.2).timeout #wait for a bit of the animation to finish
 		$Juniper.can_input = true
 
@@ -246,16 +249,16 @@ func change_level_via_trigger(level_path, door_index):
 	if current_level.level_type == current_level.LevelType.PLAYERLESS_CUTSCENE:
 		#TODO: right now juniper isn't unloaded between levels
 		$Juniper.queue_free()
-		$UILayer/HUD.queue_free()
+		$UILayer/UIGroup/HUD.queue_free()
 	
 	SaveSystem.read_level_data_from_temp(current_level)
 
 func display_level_text(level):
-	if ui.has_node("LevelText"):
-		$UILayer/LevelText.free()
+	if uig.has_node("LevelText"):
+		$UILayer/UIGroup/LevelText.free()
 	var level_text = LEVEL_TEXT.instantiate()
 	level_text.text = level.name #TODO: in final version switch this to display name
-	ui.add_child(level_text)
+	uig.add_child(level_text)
 
 
 
@@ -284,6 +287,7 @@ func on_viewport_size_changed():
 
 	ui.scale = Vector2(resolution_scale, resolution_scale)
 	back.scale = Vector2(resolution_scale, resolution_scale)
+	bl.scale = Vector2(resolution_scale, resolution_scale)
 	var half_scale = max(ceil(resolution_scale/2.0), 1)
 	el.scale = Vector2(half_scale, half_scale)
 	$DebugLayer.scale = Vector2(half_scale, half_scale)

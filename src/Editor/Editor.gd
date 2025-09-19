@@ -48,8 +48,6 @@ var active_operation = [] #[[subop][subop][subop]]
 
 
 @onready var w = get_tree().get_root().get_node("World")
-@onready var ui = w.get_node("UILayer")
-@onready var el = w.get_node("EditorLayer")
 @onready var inspector = $Secondary/Win/Inspector
 @onready var tile_master = $TileMaster
 @onready var log = $Margin/Log
@@ -71,7 +69,7 @@ func _ready():
 	_on_viewport_size_changed()
 	#connect("tile_map_selected", Callable(inspector, "on_selected").bind("tile_map"))
 	connect("level_selected", Callable(inspector, "on_selected").bind("level"))
-	el.add_child(EDITOR_CAMERA.instantiate())
+	w.el.add_child(EDITOR_CAMERA.instantiate())
 	
 	setup_level() #Call this every time the level is changed or reloaded
 	#$Main/Win.move_child($Main/Win/Tab, 0) TODO: was supposed to make tabcontainer go behind resize controls, didnt work
@@ -80,8 +78,9 @@ func setup_level(): #TODO: clear undo history
 	#emit_signal("level_selected", w.current_level)
 	setup_windows()
 	w.get_node("Juniper").disable()
-	ui.get_node("HUD").queue_free()
-	ui.visible = false
+	w.uig.get_node("HUD").queue_free()
+	w.uig.visible = false
+	w.bl.visible = false
 	for a in get_tree().get_nodes_in_group("Actors"):
 		a.queue_free()
 	for t in get_tree().get_nodes_in_group("Triggers"):
@@ -114,7 +113,7 @@ func setup_level(): #TODO: clear undo history
 	for t in trigger_collection.get_children():
 		if t.has_node("TriggerController"):
 			t.get_node("TriggerController").enable()
-	el.get_node("EditorCamera").make_current()
+	w.el.get_node("EditorCamera").make_current()
 	w.current_level.get_node("LevelLimiter").setup() #must be after camera setup
 	
 
@@ -157,9 +156,10 @@ func exit():	#TODO: make this an editor_exit signal ## no? that just decentraliz
 	clear_tile_map_cursor()
 	free_previews()
 	editor_level_limiter.queue_free()
-	el.get_node("EditorCamera").queue_free()
-	ui.add_child(HUD.instantiate())
-	ui.visible = true
+	w.el.get_node("EditorCamera").queue_free()
+	w.uig.add_child(HUD.instantiate())
+	w.uig.visible = true
+	w.bl.visible = true
 	mc.display("arrow")
 	w.get_node("Juniper").enable()
 	w.get_node("Juniper/PlayerCamera").enabled = true

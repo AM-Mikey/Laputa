@@ -45,9 +45,9 @@ func enter_door():
 	am.fade_music()
 	
 	var transition = TRANSITION.instantiate()
-	if w.get_node("UILayer").has_node("TransitionIris"):
-		w.get_node("UILayer/TransitionIris").free()
-	w.get_node("UILayer").add_child(transition)
+	if w.bl.has_node("TransitionIris"):
+		w.bl.get_node("BlackoutLayer/TransitionIris").free()
+	w.bl.add_child(transition)
 	
 	await transition.get_node("AnimationPlayer").animation_finished
 	

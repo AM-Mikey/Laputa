@@ -27,7 +27,7 @@ func _ready():
 
 	if not am.music_queue.is_empty():
 		await am.fadeout_finished
-	if not w.has_node("UILayer/TitleScreen"):
+	if not w.has_node("UILayer/UIGroup/TitleScreen"):
 		if music == "":
 			pass
 		else:
@@ -35,12 +35,12 @@ func _ready():
 
 
 func do_playerless_cutscene():
-	if w.has_node("UILayer/DialogBox"): #clear old dialog box if there is one
-		w.get_node("UILayer/DialogBox").stop_printing()
+	if w.has_node("UILayer/UIGroup/DialogBox"): #clear old dialog box if there is one
+		w.get_node("UILayer/UIGroup/DialogBox").stop_printing()
 	
 	var dialog_box = DB.instantiate()
 	dialog_box.connect("dialog_finished", Callable(self, "on_dialog_finished"))
-	get_tree().get_root().get_node("World/UILayer").add_child(dialog_box)
+	get_tree().get_root().get_node("World/UIGroup/UILayer").add_child(dialog_box)
 	dialog_box.start_printing(dialog_json, conversation)
 	print("starting conversation")
 

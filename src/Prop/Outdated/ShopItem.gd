@@ -15,7 +15,6 @@ var active_item
 var active_player = null
 var active_tooltip: Node
 
-@onready var ui = get_tree().get_root().get_node("World/UILayer")
 
 func _ready():
 	$MoneyNumber.value = price

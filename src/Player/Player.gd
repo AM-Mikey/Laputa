@@ -192,9 +192,9 @@ func die():
 		explosion.position = global_position
 		world.get_node("Front").add_child(explosion)
 		
-		world.get_node("UILayer").add_child(load("res://src/UI/DeathScreen.tscn").instantiate())
-		if world.has_node("UILayer/HUD"):
-			world.get_node("UILayer/HUD").free()
+		world.uig.add_child(load("res://src/UI/DeathScreen.tscn").instantiate())
+		if world.has_node("UILayer/UIGroup/HUD"):
+			world.get_node("UILayer/UIGroup/HUD").free()
 		queue_free()
 
 
@@ -322,6 +322,6 @@ func setup_hud():
 
 func connect_inventory():
 	#if this is always null when ready is called does it do anything? why do we have this?
-	var item_menu = get_tree().get_root().get_node_or_null("World/UILayer/Inventory")
+	var item_menu = get_tree().get_root().get_node_or_null("World/UILayer/UIGroup/Inventory")
 	if item_menu:
 		var _err = connect("inventory_updated", Callable(item_menu, "_on_inventory_updated"))

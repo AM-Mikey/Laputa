@@ -46,9 +46,9 @@ func enter_load_zone(): #see if you need the inspect state
 		Direction.UP: transition.animation = "WipeInUp"
 		Direction.DOWN: transition.animation = "WipeInDown"
 
-	if w.get_node("UILayer").has_node("TransitionWipe"):
-		w.get_node("UILayer/TransitionWipe").free()
-	w.get_node("UILayer").add_child(transition)
+	if w.bl.has_node("TransitionWipe"):
+		w.get_node("BlackoutLayer/TransitionWipe").free()
+	w.bl.add_child(transition)
 
 	await transition.get_node("AnimationPlayer").animation_finished
 	
