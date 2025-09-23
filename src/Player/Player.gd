@@ -136,8 +136,7 @@ func hit(damage, knockback_direction):
 					do_iframes()
 			else: #already have a damage_number
 				damage_number.value += damage
-				damage_number.display_number()
-				damage_number.get_node("Timer").start(damage_number.combo_time)
+				damage_number.reset()
 				do_iframes()
 				if hp <= 0:
 					damage_number.position = global_position
@@ -245,8 +244,7 @@ func _on_ItemDetector_area_entered(area):
 				add_child(heart_number)
 			else:
 				heart_number.value += hp - hp_before
-				heart_number.display_number()
-				heart_number.get_node("Timer").start(heart_number.combo_time)
+				heart_number.reset()
 		
 		world.get_node("Front").add_child(heart_get)
 		emit_signal("hp_updated", hp, max_hp)
@@ -278,8 +276,7 @@ func _on_ItemDetector_area_entered(area):
 			add_child(experience_number)
 		else:
 			experience_number.value += experience_pickup.value
-			experience_number.display_number()
-			experience_number.get_node("Timer").start(experience_number.combo_time)
+			experience_number.reset()
 		
 		emit_signal("money_updated", money)
 		emit_signal("guns_updated", guns.get_children(), "xp", true)

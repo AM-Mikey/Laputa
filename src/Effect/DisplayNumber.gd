@@ -24,7 +24,14 @@ func _ready():
 	display_number()
 	$AnimationPlayer.play("FloatIn")
 	$Timer.start(combo_time)
+
+func reset():
+	display_number()
+	$AnimationPlayer.play("FloatOut")
+	$AnimationPlayer.stop()
+	$Timer.start(combo_time)
 	
+
 func display_number():
 	if value >= 0 and value < 10:
 		$Layer/Num1.frame_coords.x = value

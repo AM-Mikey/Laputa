@@ -164,8 +164,7 @@ func set_damagenum(damage):
 		get_tree().get_root().get_node("World/Front").add_child(damage_number)
 	else: #add time and add values
 		damage_number.value += damage
-		damage_number.display_number()
-		damage_number.get_node("Timer").start(damage_number.combo_time)
+		damage_number.reset()
 
 
 ### DEATH ###
