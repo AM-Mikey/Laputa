@@ -11,6 +11,7 @@ var saved_move_dir := Vector2.ZERO #for the 2 frame stand
 var do_edge_turn: bool
 var push_left_wall := false
 var push_right_wall := false
+var is_dropping = false
 
 func state_process(_delta):
 	set_player_directions()
@@ -27,14 +28,19 @@ func state_process(_delta):
 	
 	pc.move_and_slide()
 	animate()
-
+	
 	
 	if not pc.is_on_floor() and not pc.is_in_coyote:
 		pc.is_in_coyote = true
 		mm.do_coyote_time()
-	if Input.is_action_pressed("jump") and pc.can_input:
+	if Input.is_action_just_pressed("jump") and Input.is_action_pressed("look_down") and pc.is_on_ssp and pc.can_input:
+		is_dropping = true
+		mm.drop()
+		return
+	elif Input.is_action_pressed("jump") and !is_dropping and pc.can_input:
 		mm.jump()
 		return
+
 
 func set_player_directions():
 	var input_dir = Vector2.ZERO
@@ -53,15 +59,29 @@ func set_player_directions():
 	pc.look_dir = Vector2i(look_x, input_dir.y)
 	#get shoot_dir
 	var shoot_vertically = false
-	if pc.look_dir.y < 0.0 or (pc.look_dir.y > 0.0 and pc.is_on_ssp):
+	if pc.look_dir.y < 0.0:
 		shoot_vertically = true
-	if (!pc.get_node("EdgeLeft").get_collider() and pc.get_node("AbsoluteRight").get_collider() and pc.look_dir.x == -1.0 and pc.look_dir.y != 0) or (!pc.get_node("EdgeRight").get_collider() and pc.get_node("AbsoluteLeft").get_collider() and pc.look_dir.x == 1.0 and pc.look_dir.y != 0):
-		shoot_vertically = true
+	if pc.look_dir.y > 0.0:
+		if check_shoot_down():
+			shoot_vertically = true
+	
 	if shoot_vertically: 
 		pc.shoot_dir = Vector2(0.0, pc.look_dir.y) 
 	else: 
 		pc.shoot_dir = Vector2(pc.look_dir.x, 0.0)
-	
+
+
+func check_shoot_down() -> bool:
+	var out = false
+	var shoot_down_raycast = pc.get_node("GunManager/ShootDown")
+	match pc.look_dir.x:
+		-1: shoot_down_raycast.global_position = pc.get_node("GunManager/GunPosLeftDown").global_position
+		1: shoot_down_raycast.global_position = pc.get_node("GunManager/GunPosRightDown").global_position
+	var length = abs(shoot_down_raycast.position.y) + 12
+	shoot_down_raycast.target_position = Vector2(0.0, length)
+	if !shoot_down_raycast.is_colliding():
+		out = true
+	return out
 
 func animate():
 	sprite.position = Vector2i(0.0, -16.0)
@@ -208,11 +228,18 @@ func calc_velocity():
 	out.y += mm.gravity * get_physics_process_delta_time()
 	#X
 	if pc.move_dir.x != 0.0:
+		var max_speed = mm.speed.x
 		if pc.is_crouching:
-			out.x = min(abs(out.x) + mm.acceleration, mm.crouch_speed) * pc.move_dir.x
-		else:
-			out.x = min(abs(out.x) + mm.acceleration, mm.speed.x) * pc.move_dir.x
-	else: #friction slide
+			max_speed = mm.crouch_speed
+
+		if pc.move_dir.x != sign(out.x):
+			out.x = 0.0
+
+		var value = out.x + mm.acceleration * pc.move_dir.x
+		# Make sure the acceleration does not surpass max speed
+		out.x = clampf(value, -max_speed, max_speed)
+	# ground friction kicks in if you let go of a directional key
+	else:
 		out.x = lerp(out.x, 0.0, mm.ground_cof)
 	if abs(out.x) < mm.min_x_velocity: #clamp velocity
 		out.x = 0
@@ -254,3 +281,4 @@ func enter(): #TODO: consider setting these back after exiting or just set these
 	do_edge_turn = false
 func exit():
 	sprite.position = Vector2i(0.0, -16.0)
+	is_dropping = false

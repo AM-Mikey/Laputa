@@ -216,8 +216,8 @@ func exit():
 	for e in get_tree().get_nodes_in_group("Enemies"):
 		e.enable()
 	await align_out()
-	if w.ui.has_node("HUD"):
-			w.ui.get_node("HUD").visible = true
+	if w.uig.has_node("HUD"):
+			w.uig.get_node("HUD").visible = true
 	queue_free()
 
 
@@ -244,8 +244,8 @@ func align_box():
 		tween.tween_property(self, "position", Vector2(position.x, 16), 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 		modulate = Color.TRANSPARENT
 		tween2.tween_property(self, "modulate", Color.WHITE, 0.1)
-		if w.ui.has_node("HUD"):
-			w.ui.get_node("HUD").visible = false
+		if w.uig.has_node("HUD"):
+			w.uig.get_node("HUD").visible = false
 
 func align_out():
 	var viewport_size = get_tree().get_root().size / w.resolution_scale

@@ -39,12 +39,12 @@ func add_button(topic):
 		button.grab_focus()
 	
 func on_button_pressed(topic):
-	var db = world.get_node("UILayer/DialogBox")
+	var db = world.get_node("UILayer/UIGroup/DialogBox")
 	var dialog_json = db.current_dialog_json
 	db.stop_printing()
 	
 	var new_db = dialog_box.instantiate()
-	world.get_node("UILayer").add_child(new_db)
+	world.uig.add_child(new_db)
 	new_db.start_printing(dialog_json, topic)
 	
 	self.queue_free()

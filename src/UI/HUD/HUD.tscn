@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://dulcn8jx6cd3y"]
+[gd_scene load_steps=60 format=3 uid="uid://dulcn8jx6cd3y"]
 
 [ext_resource type="Script" uid="uid://getspcndfk4e" path="res://src/UI/HUD/HUD.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c7wyw4y3jdl7j" path="res://assets/UI/NumberNew.png" id="2"]
@@ -998,21 +998,6 @@ _data = {
 &"TiltOut": SubResource("Animation_mudxy")
 }
 
-[sub_resource type="Animation" id="Animation_4nlwx"]
-resource_name = "Flash"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="Animation" id="2"]
 resource_name = "XpFlash"
 length = 0.2
@@ -1031,18 +1016,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2a4ya"]
 _data = {
-&"Flash": SubResource("Animation_4nlwx"),
 &"XpFlash": SubResource("2")
 }
 
 [node name="HUD" type="Control" node_paths=PackedStringArray("gun", "ao", "hp_node", "xp_node", "cd", "ammo", "mon")]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+anchors_preset = 0
 script = ExtResource("1")
 gun = NodePath("Gun")
 ao = NodePath("Gun/AmmoCount")
@@ -1053,7 +1032,7 @@ ammo = NodePath("Base/Ammo")
 mon = NodePath("Base/Money")
 
 [node name="Base" type="Control" parent="."]
-layout_mode = 2
+layout_mode = 3
 anchors_preset = 0
 offset_left = 16.0
 offset_top = 16.0

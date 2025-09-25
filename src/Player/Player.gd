@@ -5,11 +5,12 @@ class_name Player
 #const POPUP = preload("res://src/UI/PopupText.tscn")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
 const DEATH_CAMERA = preload("res://src/Utility/DeathCamera.tscn")
-const DAMAGENUMBER = preload("res://src/Effect/DamageNumber.tscn")
 const EXPERIENCEGET = preload("res://src/Effect/ExperienceGet.tscn")
 const HEARTGET = preload("res://src/Effect/HeartGet.tscn")
 const AMMOGET = preload("res://src/Effect/AmmoGet.tscn")
-
+const PLAYER_DAMAGE_NUMBER = preload("res://src/Effect/PlayerDamageNumber.tscn")
+const EXPERIENCE_NUMBER = preload("res://src/Effect/ExperienceNumber.tscn")
+const HEART_NUMBER = preload("res://src/Effect/HeartNumber.tscn")
 
 signal hp_updated(hp, max_hp)
 signal guns_updated(guns, cause, do_xp_flash)
@@ -20,7 +21,7 @@ signal money_updated(money)
 @export var hp: int = 16
 @export var max_hp: int = 16
 @export var money: int = 0
-
+@export var iframe_time: float = 1.5
 
 #STATES
 
@@ -32,6 +33,7 @@ var can_input = true
 #var is_on_conveyor = false
 var enemies_touching = []
 var is_on_ssp = false
+var deny_ssp = false
 var is_crouching = false
 var is_forced_crouching = false
 var is_in_water = false
@@ -43,6 +45,9 @@ var dead = false
 var inventory: Array
 var topic_array: Array = ["child", "sasuke", "basil", "general"]
 var inspect_target: Node = null
+var experience_number: Node = null
+var damage_number: Node = null
+var heart_number: Node = null
 
 var move_dir := Vector2.LEFT
 var look_dir := Vector2i.LEFT
@@ -50,20 +55,19 @@ var direction_lock := Vector2i.ZERO
 var shoot_dir := Vector2.LEFT
 
 
-
 @onready var world = get_tree().get_root().get_node("World")
 @onready var HUD
 @onready var mm = get_node("MovementManager")
 @onready var gm = get_node("GunManager")
 @onready var guns = get_node("GunManager/Guns")
-
+@onready var iframe_timer = %IframeTimer
 
 func _ready():
 	connect_inventory()
 #	if weapon_array.front() != null: TODO:fix
 #		$WeaponSprite.texture = weapon_array.front().texture
 	await get_tree().process_frame
-	$SSPDetector.monitoring = true #patch, some weird bug detects ssp on startup
+	#$SSPDetector.monitoring = true #patch, some weird bug detects ssp on startup
 
 
 func disable():
@@ -115,40 +119,53 @@ func hit(damage, knockback_direction):
 			hp -= damage
 			am.play("pc_hurt")
 			emit_signal("hp_updated", hp, max_hp)
-			###DamageNumber
-			var damagenum = DAMAGENUMBER.instantiate()
-			damagenum.position = global_position
-			damagenum.value = damage
-			get_tree().get_root().get_node("World/Front").add_child(damagenum)
-			###
-			do_iframes()
-
-			if hp <= 0:
-				die()
-
+			
+			if experience_number != null: experience_number.queue_free()
+			if heart_number != null: heart_number.queue_free()
+			if damage_number == null: #no damage_number
+				damage_number = PLAYER_DAMAGE_NUMBER.instantiate()
+				damage_number.value = damage
+				if hp <= 0:
+					damage_number.position = global_position
+					damage_number.position.y -= 16
+					get_tree().get_root().get_node("World/Front").add_child(damage_number)
+					die()
+				else:
+					damage_number.position.y -= 16
+					add_child(damage_number)
+					do_iframes()
+			else: #already have a damage_number
+				damage_number.value += damage
+				damage_number.reset()
+				do_iframes()
+				if hp <= 0:
+					damage_number.position = global_position
+					damage_number.position.y -= 16
+					damage_number.reparent(get_tree().get_root().get_node("World/Front"))
+					die()
+			
+			
 			var active_gun = guns.get_child(0)
 			if active_gun != null:
 				active_gun.xp = active_gun.xp - (damage * 2)
-				
 				if active_gun.level == 1:
 					active_gun.xp = max(active_gun.xp, 0)
 				if active_gun.xp < 0:
 					$GunManager.level_down(false)
-					
 				emit_signal("guns_updated", guns.get_children())
+		
 		if knockback_direction != Vector2.ZERO:
 			#print("Knockback in Dir: " + str(knockback_direction))
 			mm.knockback_direction = knockback_direction
 			mm.snap_vector = Vector2.ZERO
 			mm.change_state("knockback")
 
+
 func do_iframes():
 	invincible = true
 	$EffectPlayer.play("FlashIframe")
-	await $EffectPlayer.animation_finished
-	invincible = false
-	if not enemies_touching.is_empty():
-		hit_again()
+	iframe_timer.start(iframe_time)
+
 
 func hit_again(): #TODO: prioritize this for all forms of damage, not just enemies
 	var toughest_enemy
@@ -174,38 +191,64 @@ func die():
 		explosion.position = global_position
 		world.get_node("Front").add_child(explosion)
 		
-		world.get_node("UILayer").add_child(load("res://src/UI/DeathScreen.tscn").instantiate())
-		if world.has_node("UILayer/HUD"):
-			world.get_node("UILayer/HUD").free()
+		world.uig.add_child(load("res://src/UI/DeathScreen.tscn").instantiate())
+		if world.has_node("UILayer/UIGroup/HUD"):
+			world.get_node("UILayer/UIGroup/HUD").free()
 		queue_free()
 
 
 
 ### SIGNALS ###
+func _on_IframeTimer_timeout() -> void:
+	invincible = false
+	$EffectPlayer.stop()
+	if not enemies_touching.is_empty():
+		hit_again()
 
-func _on_SSPDetector_body_entered(_body):
-	is_on_ssp = true
-	#if not $PushLeft.disabled: 
-		#$PushLeft.set_deferred("disabled", true)
-		#$PushRight.set_deferred("disabled", true)
-func _on_SSPDetector_body_exited(_body):
+
+func _on_SSPDetector_body_entered(body):
+	if not deny_ssp:
+		is_on_ssp = true
+
+func _on_SSPDetector_body_exited(body):
 	is_on_ssp = false
-	#if $PushLeft.disabled: 
-		#$PushLeft.set_deferred("disabled", false)
-		#$PushRight.set_deferred("disabled", false)
+
+func _on_SSPWorldDetector_body_entered(body: Node2D):
+	deny_ssp = true
+
+func _on_SSPWorldDetector_body_exited(body: Node2D):
+	deny_ssp = false
+	if $SSPDetector.has_overlapping_bodies():
+		is_on_ssp = true
+
 
 func _on_ItemDetector_area_entered(area):
 	if disabled: return
 	
 	if area.get_collision_layer_value(11): #health
-		hp += area.get_parent().value
+		var heart_pickup = area.get_parent()
+		var hp_before = hp
+		hp += heart_pickup.value
 		hp = min(hp, max_hp)
 		am.play("get_hp")
 		var heart_get = HEARTGET.instantiate()
-		heart_get.position = area.get_parent().global_position
+		heart_get.position = heart_pickup.global_position
+		
+		if hp - hp_before > 0: #health gained
+			if damage_number != null: damage_number.queue_free()
+			if experience_number != null: experience_number.queue_free()
+			if heart_number == null:
+				heart_number = HEART_NUMBER.instantiate()
+				heart_number.value = hp - hp_before
+				heart_number.position.y -= 16
+				add_child(heart_number)
+			else:
+				heart_number.value += hp - hp_before
+				heart_number.reset()
+		
 		world.get_node("Front").add_child(heart_get)
 		emit_signal("hp_updated", hp, max_hp)
-		area.get_parent().queue_free()
+		heart_pickup.queue_free()
 	
 	
 	if area.get_collision_layer_value(12): #xp
@@ -223,6 +266,18 @@ func _on_ItemDetector_area_entered(area):
 		var experience_get = EXPERIENCEGET.instantiate()
 		experience_get.position = experience_pickup.global_position
 		world.get_node("Front").add_child(experience_get)
+		
+		if damage_number != null: damage_number.queue_free()
+		if heart_number != null: heart_number.queue_free()
+		if experience_number == null:
+			experience_number = EXPERIENCE_NUMBER.instantiate()
+			experience_number.value = experience_pickup.value
+			experience_number.position.y -= 16
+			add_child(experience_number)
+		else:
+			experience_number.value += experience_pickup.value
+			experience_number.reset()
+		
 		emit_signal("money_updated", money)
 		emit_signal("guns_updated", guns.get_children(), "xp", true)
 		experience_pickup.queue_free()
@@ -238,7 +293,7 @@ func _on_ItemDetector_area_entered(area):
 		var ammo_get = AMMOGET.instantiate()
 		ammo_get.position = ammo_pickup.global_position
 		world.get_node("Front").add_child(ammo_get)
-		emit_signal("guns_updated", guns.get_children())
+		emit_signal("guns_updated", guns.get_children(), "getammo")
 		ammo_pickup.queue_free()
 
 
@@ -264,6 +319,6 @@ func setup_hud():
 
 func connect_inventory():
 	#if this is always null when ready is called does it do anything? why do we have this?
-	var item_menu = get_tree().get_root().get_node_or_null("World/UILayer/Inventory")
+	var item_menu = get_tree().get_root().get_node_or_null("World/UILayer/UIGroup/Inventory")
 	if item_menu:
 		var _err = connect("inventory_updated", Callable(item_menu, "_on_inventory_updated"))

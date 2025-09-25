@@ -2,7 +2,7 @@
 extends CharacterBody2D
 class_name Actor
 
-const DAMAGENUMBER = preload("res://src/Effect/DamageNumber.tscn")
+const DAMAGE_NUMBER = preload("res://src/Effect/EnemyDamageNumber.tscn")
 const FLOOR_NORMAL: = Vector2.UP
 
 @export var editor_hidden = true

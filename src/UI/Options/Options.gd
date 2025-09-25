@@ -11,8 +11,8 @@ func _ready():
 		visible = false
 	else:
 		tabs.get_node("Settings").do_focus()
-		if world.has_node("UILayer/TitleScreen"):
-			world.get_node("UILayer/TitleScreen").visible = false
+		if world.has_node("UILayer/UIGroup/TitleScreen"):
+			world.get_node("UILayer/UIGroup/TitleScreen").visible = false
 		var _err = get_tree().root.connect("size_changed", Callable(self, "_on_viewport_size_changed"))
 		_on_viewport_size_changed()
 
@@ -43,11 +43,11 @@ func _input(event):
 
 
 func _on_Return_pressed():
-	if world.has_node("UILayer/PauseMenu"):
-		world.get_node("UILayer/PauseMenu").visible = true
-		world.get_node("UILayer/PauseMenu").do_focus()
-	if world.has_node("UILayer/TitleScreen"):
-		world.get_node("UILayer/TitleScreen").visible = true
-		world.get_node("UILayer/TitleScreen").do_focus()
+	if world.has_node("UILayer/UIGroup/PauseMenu"):
+		world.get_node("UILayer/UIGroup/PauseMenu").visible = true
+		world.get_node("UILayer/UIGroup/PauseMenu").do_focus()
+	if world.has_node("UILayer/UIGroup/TitleScreen"):
+		world.get_node("UILayer/UIGroup/TitleScreen").visible = true
+		world.get_node("UILayer/UIGroup/TitleScreen").do_focus()
 		
 	queue_free()

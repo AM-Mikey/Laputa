@@ -1,6 +1,5 @@
 extends Node2D
 
-const BONK: = preload("res://src/Effect/BonkParticle.tscn")
 const LAND: = preload("res://src/Effect/LandParticle.tscn")
 
 const FLOOR_NORMAL: = Vector2.UP
@@ -9,14 +8,20 @@ const SNAP_LENGTH = 4.0
 
 var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
-var speed = Vector2(90, 180)
+var speed = Vector2(0, 0)
 var crouch_speed = 70.0
-var acceleration = 2.0 #was 2.5, changed 10.26.22
-var ground_cof = 0.1
-var air_cof = 0.00
-var gravity = 300.0
+var acceleration = 10.0
+var ground_cof = 0.15
+var air_cof = 0.02
+var gravity = 0.0
 var terminal_velocity = 500.0
-var on_ceiling = false
+var did_ceiling_step = false
+@export var debug = true
+
+@export var base_speed = Vector2(90, 170)
+@export var water_speed = Vector2(60, 140)
+@export var base_gravity = 300
+@export var water_gravity = 150
 
 @export var coyote_time = 0.05 #0.05
 @export var minimum_direction_time = 1.0 #cave story forces you to jump a certain x distance when going max speed before jumping
@@ -25,13 +30,12 @@ var jump_starting_move_dir_x: int
 
 
 var knockback_direction: Vector2
-@export var knockback_speed = Vector2(40, 100) #(80, 180)
+@export var knockback_speed = Vector2(40, 80) #(80, 180)
 var knockback_velocity = Vector2.ZERO
 
 var move_target = Vector2.ZERO
 
 var starting_direction #for acceleration
-var bonk_distance = 4 #this was for corner clipping
 
 var states = {}
 var current_state: Node
@@ -69,17 +73,11 @@ func _physics_process(_delta):
 	if pc.disabled: return
 	if is_debug:
 		state_label.text = current_state.name.to_lower()
-	speed = Vector2(90, 180) if not get_parent().is_in_water else Vector2(60, 140)
-	gravity = 300.0 if not get_parent().is_in_water else 150.0
+	speed = base_speed if not get_parent().is_in_water else water_speed
+	gravity = base_gravity if not get_parent().is_in_water else water_gravity
 	do_ceiling_push_check()
-	if pc.is_on_ceiling():
-		if not on_ceiling:
-			var ceiling_normal = pc.get_slide_collision(pc.get_slide_collision_count() - 1).get_normal()
-			bonk(ceiling_normal)
-		on_ceiling = true
-	else:
-		on_ceiling = false
 	current_state.state_process(_delta)
+	align_to_proper_y()
 
 
 func _input(event):
@@ -93,13 +91,8 @@ func do_coyote_time():
 	coyote_timer.stop()
 	coyote_timer.start(coyote_time)
 
-func bonk(normal):
-	var effect = BONK.instantiate()
-	effect.position = pc.position
-	effect.normal = normal
-	world.get_node("Front").add_child(effect)
-
 func land():
+	am.play("pc_land")
 	pc.is_in_coyote = false
 	if pc.is_in_water: return
 	var effect = LAND.instantiate()
@@ -109,49 +102,56 @@ func land():
 func jump():
 	if pc.is_forced_crouching: return
 	snap_vector = Vector2.ZERO
-	#Check if a running jump. since speed.x is max x velocity, only count as a running jump then
-	if abs(pc.velocity.x) > speed.x * 0.95 and pc.can_input:
-		if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
-			jump_starting_move_dir_x = sign(pc.move_dir.x)
-			$MinDirTimer.start(minimum_direction_time)
-			change_state("longjump")
-			return
-	else:
-		change_state("jump")
-		return
+	change_state("jump")
+	# Coyote Time debug
+	if not pc.is_on_floor() and debug:
+		am.play("gun_sword")
+		var effect = LAND.instantiate()
+		effect.position = pc.position
+		world.get_node("Front").add_child(effect)
 
-
+func drop():
+	$States/Jump.is_dropping = true
+	change_state("jump")
+	pc.set_collision_mask_value(10, false)
+	await get_tree().create_timer(0.1).timeout
+	pc.set_collision_mask_value(10, true)
 
 ### HELPERS ###
 
 func do_ceiling_push_check():
 	if current_state == states["jump"] \
-	or current_state == states["longjump"] \
-	or current_state == states["fall"] \
-	or current_state ==  states["knockback"]:
+	or current_state == states["knockback"]:
 		if pc.get_node("CeilingL").is_colliding() \
-		
 		and not pc.get_node("ClearenceLF").is_colliding() \
-		and pc.velocity.y < 0:
+		and pc.velocity.y < 0 \
+		and not pc.move_dir.x < 0:
 			pc.global_position.x += 2.0 if not pc.get_node("ClearenceLH").is_colliding() else 4.0
 			pc.get_node("CollisionShape2D").set_deferred("disabled", false)
 		
 		elif pc.get_node("CeilingR").is_colliding() \
 		and not pc.get_node("ClearenceRF").is_colliding() \
-		and pc.velocity.y < 0:
+		and pc.velocity.y < 0 \
+		and not pc.move_dir.x > 0:
 			pc.global_position.x -= 2.0 if not pc.get_node("ClearenceRH").is_colliding() else 4.0
 			pc.get_node("CollisionShape2D").set_deferred("disabled", false)
 
 
-func check_ssp():
-	if world.current_level == null: return
-	if world.current_level.has_node("TileMap"):
-		var tm = world.current_level.has_node("TileMap")
-		var tile_pos = tm.local_to_map(Vector2(pc.position.x, pc.position.y + 8))
-		var tile = tm.get_cell_source_id(0, tile_pos)
-		if tm.tile_set.tile_get_shape_one_way(tile, 0):
-			#print("player is on ssp")
-			pc.is_on_ssp = true
+func disable_collision_shapes(array):
+	for shape in array:
+		shape.set_deferred("disabled", true)
+		shape.visible = false
+
+func enable_collision_shapes(array):
+	for shape in array:
+		shape.set_deferred("disabled", false)
+		shape.visible = true
+
+
+func align_to_proper_y():
+	var abs_offset = abs(pc.position.y - round(pc.position.y))
+	if 0.0 < abs_offset and abs_offset < 0.1:
+		pc.position.y = round(pc.position.y)
 
 
 
@@ -161,10 +161,16 @@ func _on_CrouchDetector_body_entered(_body):
 	pc.is_forced_crouching = true
 	pc.is_crouching = true
 	if current_state != states["run"]: return
-	pc.get_node("CollisionShape2D").set_deferred("disabled", true)
-	pc.get_node("CrouchingCollision").set_deferred("disabled", false)
-	pc.get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", true)
-	pc.get_node("Hurtbox/CrouchingCollision").set_deferred("disabled", false)
+	
+	var disable = [
+		pc.get_node("CollisionShape2D"),
+		pc.get_node("Hurtbox/CollisionShape2D")]
+	var enable = [
+		pc.get_node("CrouchingCollision"),
+		pc.get_node("Hurtbox/CrouchingCollision")]
+	disable_collision_shapes(disable)
+	enable_collision_shapes(enable)
+	
 
 func _on_CrouchDetector_body_exited(_body):
 	pc.is_forced_crouching = false
@@ -182,4 +188,4 @@ func _on_CoyoteTimer_timeout():
 		return
 	pc.is_in_coyote = false
 	if not pc.is_on_floor() and current_state == states["run"]:
-		change_state("fall")
+		change_state("jump")

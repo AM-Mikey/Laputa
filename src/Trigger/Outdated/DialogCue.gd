@@ -17,10 +17,10 @@ func _on_body_entered(_body):
 	if not spent:
 		expend_trigger()
 		
-		if world.has_node("UILayer/DialogBox"):
-			world.get_node("UILayer/DialogBox").stop_printing()
+		if world.has_node("UILayer/UIGroup/DialogBox"):
+			world.get_node("UILayer/UIGroup/DialogBox").stop_printing()
 			
 		var dialog_box = DB.instantiate()
-		get_tree().get_root().get_node("World/UILayer").add_child(dialog_box)
+		get_tree().get_root().get_node("World/UILayer/UIGroup").add_child(dialog_box)
 		dialog_box.start_printing(dialog_json, conversation)
 		print("starting conversation")

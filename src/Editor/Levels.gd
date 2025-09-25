@@ -11,8 +11,6 @@ var active_level_path
 var default_level = "res://src/Level/Default.tscn"
 
 @onready var w = get_tree().get_root().get_node("World")
-@onready var ui = w.get_node("UILayer")
-@onready var el = w.get_node("EditorLayer")
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
 
 func setup_levels():
@@ -105,8 +103,8 @@ func on_new_confirmed():
 
 ### SAVE/LOAD
 func save_level(level, path):
-	var log = el.get_node("Editor").log
-	el.get_node("Editor").inspector.on_deselected()
+	var log = w.el.get_node("Editor").log
+	w.el.get_node("Editor").inspector.on_deselected()
 	
 	level.save_changes()
 	level.name = path.get_file().get_basename()
@@ -131,16 +129,16 @@ func save_level(level, path):
 
 func load_level(path):
 	if w.has_node("Juniper"): w.get_node("Juniper").free()
-	if ui.has_node("HUD"): ui.get_node("HUD").free()
-	if ui.has_node("TitleScreen"): ui.get_node("TitleScreen").queue_free()
-	if ui.has_node("PauseMenu"): ui.get_node("PauseMenu").unpause()
-	el.get_node("Editor").inspector.on_deselected()
+	if w.uig.has_node("HUD"): w.uig.get_node("HUD").free()
+	if w.uig.has_node("TitleScreen"): w.uig.get_node("TitleScreen").queue_free()
+	if w.uig.has_node("PauseMenu"): w.uig.get_node("PauseMenu").unpause()
+	w.el.get_node("Editor").inspector.on_deselected()
 	
 	w.change_level_via_code(path)
 	await get_tree().process_frame
-	el.get_node("Editor").setup_level()
-	el.get_node("EditorCamera").enabled = true
-	el.get_node("EditorCamera").global_position = w.get_node("Juniper").global_position
+	w.el.get_node("Editor").setup_level()
+	w.el.get_node("EditorCamera").enabled = true
+	w.el.get_node("EditorCamera").global_position = w.get_node("Juniper").global_position
 
 
 

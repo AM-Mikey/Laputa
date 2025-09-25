@@ -26,7 +26,7 @@ func _input(event):
 					
 				db = DB.instantiate()
 				db.connect("dialog_finished", Callable(self, "on_dialog_finished"))
-				get_tree().get_root().get_node("World/UILayer").add_child(db)
+				get_tree().get_root().get_node("World/UILayer/UIGroup").add_child(db)
 				db.start_printing_flavor_text(text)
 
 

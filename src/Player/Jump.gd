@@ -1,5 +1,7 @@
 extends Node
 
+const BONK: = preload("res://src/Effect/BonkParticle.tscn")
+
 @onready var world = get_tree().get_root().get_node("World")
 @onready var pc = get_parent().get_parent().get_parent()
 @onready var mm = pc.get_node("MovementManager")
@@ -7,25 +9,28 @@ extends Node
 @onready var guns = pc.get_node("GunManager/Guns")
 @onready var ap = pc.get_node("AnimationPlayer")
 
+var holding_jump = true
+var is_dropping = false
+var did_bonk = false
+
 func state_process(_delta):
-	#jump interrupt
-	var is_jump_interrupted = false
-	if pc.velocity.y < 0.0:
-		if not Input.is_action_pressed("jump") and pc.can_input:
-			is_jump_interrupted = true
+	# Jump holding
+	if pc.can_input and not Input.is_action_pressed("jump"):
+		holding_jump = false
 
 	set_player_directions()
-	pc.velocity = calc_velocity(is_jump_interrupted)
+	pc.velocity = calc_velocity()
 	pc.move_and_slide()
-	var new_velocity = pc.velocity
-	if pc.is_on_wall():
-		new_velocity.y = max(pc.velocity.y, new_velocity.y)
-		
-	pc.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
+	pc.velocity.y = min(mm.terminal_velocity, pc.velocity.y)
 	animate()
-
 	# We only set move_dir.y to jump for a single frame
 	pc.move_dir.y = 0.0
+
+	if pc.is_on_ceiling(): #bonk check
+		if !did_bonk:
+			var ceiling_normal = pc.get_slide_collision(pc.get_slide_collision_count() - 1).get_normal()
+			bonk(ceiling_normal)
+			did_bonk = true
 
 	if pc.is_on_floor(): #landed
 		mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
@@ -84,21 +89,31 @@ func animate():
 		ap.stop()
 		ap.play(animation, 0.0, 1.0)
 
-
+func bonk(normal):
+	print("bonk")
+	var effect = BONK.instantiate()
+	effect.position = pc.position
+	effect.normal = normal
+	world.get_node("Front").add_child(effect)
 
 ### GETTERS ###
 
-func calc_velocity(is_jump_interrupted):
+func calc_velocity():
 	var out = pc.velocity
 	#Y
-	out.y += mm.gravity * get_physics_process_delta_time()
+	# The player's move dir is vertically up. This happens only for a single frame
 	if sign(pc.move_dir.y) == -1:
 		out.y = mm.speed.y * pc.move_dir.y
-	if is_jump_interrupted:
+	# Otherwise, perform gravity calculations
+	else:
 		out.y += mm.gravity * get_physics_process_delta_time()
+		if not holding_jump and pc.velocity.y < 0.0:
+			out.y *= 0.9
 	#X
 	if pc.move_dir.x != 0.0:
-		out.x = min(abs(out.x) + mm.acceleration, mm.speed.x) * pc.move_dir.x
+		var value = out.x + mm.acceleration * pc.move_dir.x
+		# Make sure the acceleration does not surpass max speed
+		out.x = clampf(value, -mm.speed.x, mm.speed.x)
 	else: #air friction slide
 		out.x = lerp(out.x, 0.0, mm.air_cof)
 	if abs(out.x) < mm.min_x_velocity: #clamp velocity
@@ -123,21 +138,33 @@ func get_vframe() -> int:
 ### STATES ###			#TODO: juniper's hurtbox becomes much smaller when jumping
 
 func enter():
-	pc.get_node("CollisionShape2D").set_deferred("disabled", true)
-	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
-	pc.get_node("JumpCollision").set_deferred("disabled", false)
-	pc.get_node("SSPDetector/CollisionShape2D2").set_deferred("disabled", false)
+	var disable = [
+		pc.get_node("CollisionShape2D"),
+		pc.get_node("CrouchingCollision")]
+	var enable = [
+		pc.get_node("JumpCollision"),
+		pc.get_node("SSPDetector/CollisionShape2D2")]
+	mm.disable_collision_shapes(disable)
+	mm.enable_collision_shapes(enable)
+	
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
 	pc.mm.snap_vector = Vector2.ZERO
-	# Set the player's move dir to -1.0 to indicate a jump.
-	# It will be reset on next physics frame
-	pc.move_dir.y = -1.0
-	am.play("pc_jump")
+	holding_jump = pc.can_input and Input.is_action_pressed("jump") and !is_dropping
+	if holding_jump:
+		# Set the player's move dir to -1.0 to indicate a jump.
+		# It will be reset on next physics frame
+		pc.move_dir.y = -1.0
+		am.play("pc_jump")
+	did_bonk = false
 
 func exit():
 	pc.mm.land()
-	pc.get_node("CollisionShape2D").set_deferred("disabled", false)
-	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
-	pc.get_node("JumpCollision").set_deferred("disabled", true)
-	pc.get_node("SSPDetector/CollisionShape2D2").set_deferred("disabled", true)
+	var disable = [
+		pc.get_node("CrouchingCollision"),
+		pc.get_node("JumpCollision"),
+		pc.get_node("SSPDetector/CollisionShape2D2")]
+	var enable = [pc.get_node("CollisionShape2D")]
+	mm.disable_collision_shapes(disable)
+	mm.enable_collision_shapes(enable)
+	is_dropping = false

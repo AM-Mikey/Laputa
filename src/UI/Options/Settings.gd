@@ -93,7 +93,7 @@ func on_mastervolume_changed(value):
 	var db = get_percent_as_db(value)
 	#print(db)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),db)
-	if not w.get_node("UILayer/Options").hidden and after_ready:
+	if not w.get_node("UILayer/UIGroup/Options").hidden and after_ready:
 		am.play("sound_test", null, "master") #play on master
 	mastervolume.get_node("Label").text = "Master Volume: Muted" if value == 0 else "Master Volume: " + str(value) + "0 %"
 	save_setting("MasterVolume", value)
@@ -101,7 +101,7 @@ func on_mastervolume_changed(value):
 func on_musicvolume_changed(value):
 	var db = get_percent_as_db(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),db)
-	if not w.get_node("UILayer/Options").hidden and after_ready:
+	if not w.get_node("UILayer/UIGroup/Options").hidden and after_ready:
 		am.play_sfx("sound_test")
 	musicvolume.get_node("Label").text = "Music Volume: Muted" if value == 0 else "Music Volume: " + str(value) + "0 %"
 	save_setting("MusicVolume", value)
@@ -109,22 +109,22 @@ func on_musicvolume_changed(value):
 func on_sfxvolume_changed(value):
 	var db = get_percent_as_db(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),db)
-	if not w.get_node("UILayer/Options").hidden and after_ready:
+	if not w.get_node("UILayer/UIGroup/Options").hidden and after_ready:
 		am.play("sound_test")
 	sfxvolume.get_node("Label").text = "SFX Volume: Muted" if value == 0 else "SFX Volume: " + str(value) + "0 %"
 	save_setting("SFXVolume", value)
 
 
 func on_return():
-	if w.has_node("UILayer/PauseMenu"):
-		w.get_node("UILayer/PauseMenu").visible = true
-		w.get_node("UILayer/PauseMenu").do_focus()
-	if w.has_node("UILayer/TitleScreen"):
-		w.get_node("UILayer/TitleScreen").visible = true
-		w.get_node("UILayer/TitleScreen").do_focus()
+	if w.has_node("UILayer/UIGroup/PauseMenu"):
+		w.get_node("UILayer/UIGroup/PauseMenu").visible = true
+		w.get_node("UILayer/UIGroup/PauseMenu").do_focus()
+	if w.has_node("UILayer/UIGroup/TitleScreen"):
+		w.get_node("UILayer/UIGroup/TitleScreen").visible = true
+		w.get_node("UILayer/UIGroup/TitleScreen").do_focus()
 		
-	if w.has_node("UILayer/Options"):
-		w.get_node("UILayer/Options").queue_free()
+	if w.has_node("UILayer/UIGroup/Options"):
+		w.get_node("UILayer/UIGroup/Options").queue_free()
 	else:
 		get_parent().queue_free()
 

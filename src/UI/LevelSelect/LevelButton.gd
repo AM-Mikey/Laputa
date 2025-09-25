@@ -22,13 +22,13 @@ func _ready():
 func _on_LevelButton_pressed():
 	if world.has_node("Juniper"):
 		world.get_node("Juniper").free() #we free and respawn them so we have a clean slate when we load in
-	if world.has_node("UILayer/HUD"):
-		world.get_node("UILayer/HUD").free()
+	if world.has_node("UILayer/UIGroup/HUD"):
+		world.get_node("UILayer/UIGroup/HUD").free()
 	
 	world.change_level_via_code(level)
 	
-	if world.has_node("UILayer/TitleScreen"):
-		world.get_node("UILayer/TitleScreen").queue_free()
-	if world.has_node("UILayer/PauseMenu"):
-		world.get_node("UILayer/PauseMenu").unpause()
-	world.get_node("UILayer/LevelSelect").queue_free()
+	if world.has_node("UILayer/UIGroup/TitleScreen"):
+		world.get_node("UILayer/UIGroup/TitleScreen").queue_free()
+	if world.has_node("UILayer/UIGroup/PauseMenu"):
+		world.get_node("UILayer/UIGroup/PauseMenu").unpause()
+	world.get_node("UILayer/UIGroup/LevelSelect").queue_free()

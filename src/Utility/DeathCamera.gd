@@ -38,15 +38,15 @@ func on_limit_camera(left, right, top, bottom):
 		var left_pillar = BLACKBAR.instantiate()
 		left_pillar.name = "BlackBarLeft"
 		left_pillar.size = Vector2(extra_margin, get_window().get_size().y)
-		world.get_node("UILayer").add_child(left_pillar)
-		world.get_node("UILayer").move_child(left_pillar, 0)
+		world.bl.add_child(left_pillar)
+		world.bl.move_child(left_pillar, 0)
 		
 		var right_pillar = BLACKBAR.instantiate()
 		right_pillar.name = "BlackBarRight"
 		right_pillar.size = Vector2(extra_margin, get_window().get_size().y)
 		right_pillar.position = Vector2((right - left) + extra_margin, 0)
-		world.get_node("UILayer").add_child(right_pillar)
-		world.get_node("UILayer").move_child(right_pillar, 0)
+		world.bl.add_child(right_pillar)
+		world.bl.move_child(right_pillar, 0)
 		
 	else:
 		limit_left = left
@@ -61,15 +61,15 @@ func on_limit_camera(left, right, top, bottom):
 		var top_pillar = BLACKBAR.instantiate()
 		top_pillar.name = "BlackBarTop"
 		top_pillar.size = Vector2(get_window().get_size().x, extra_margin)
-		world.get_node("UILayer").add_child(top_pillar)
-		world.get_node("UILayer").move_child(top_pillar, 0)
+		world.bl.add_child(top_pillar)
+		world.bl.move_child(top_pillar, 0)
 		
 		var bottom_pillar = BLACKBAR.instantiate()
 		bottom_pillar.name = "BlackBarRight"
-		bottom_pillar.size = Vector2(get_window().get_size().x, extra_margin)
+		bottom_pillar.size = Vector2(get_window().get_size().x, extra_margin + 16) #16 for overscan safety
 		bottom_pillar.position = Vector2(0, (bottom - top) + extra_margin)
-		world.get_node("UILayer").add_child(bottom_pillar)
-		world.get_node("UILayer").move_child(bottom_pillar, 0)
+		world.bl.add_child(bottom_pillar)
+		world.bl.move_child(bottom_pillar, 0)
 	
 	else:
 		limit_top = top

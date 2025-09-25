@@ -181,7 +181,7 @@ func enter_talk():
 	else:
 		dialog_box = DB.instantiate()
 		dialog_box.connect("dialog_finished", Callable(self, "on_dialog_finished"))
-		get_tree().get_root().get_node("World/UILayer").add_child(dialog_box)
+		get_tree().get_root().get_node("World/UILayer/UIGroup").add_child(dialog_box)
 		dialog_box.start_printing(dialog_json, conversation)
 
 

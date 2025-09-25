@@ -13,14 +13,14 @@ func _ready():
 	do_focus()
 
 func _input(event):
-	if event.is_action_pressed("pause") and get_tree().paused and not world.has_node("UILayer/Options"):
+	if event.is_action_pressed("pause") and get_tree().paused and not world.has_node("UILayer/UIGroup/Options"):
 		unpause()
 
 func unpause():
-	if world.has_node("UILayer/HUD"):
-		world.get_node("UILayer/HUD").visible = true
-	if world.has_node("UILayer/DialogBox"):
-		world.get_node("UILayer/DialogBox").visible = true
+	if world.has_node("UILayer/UIGroup/HUD"):
+		world.get_node("UILayer/UIGroup/HUD").visible = true
+	if world.has_node("UILayer/UIGroup/DialogBox"):
+		world.get_node("UILayer/UIGroup/DialogBox").visible = true
 	get_tree().paused = false
 	queue_free()
 
@@ -47,8 +47,8 @@ func _on_Level_pressed():
 
 func _on_Quit_pressed():
 	var title = TITLE.instantiate()
-	if not world.has_node("UILayer/TitleScreen"):
-		world.get_node("UILayer").add_child(title)
+	if not world.has_node("UILayer/UIGroup/TitleScreen"):
+		world.get_node("UILayer/UIGroup").add_child(title)
 	queue_free()
 
 func on_viewport_size_changed():

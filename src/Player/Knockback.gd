@@ -60,15 +60,23 @@ func get_move_velocity(velocity, move_dir):
 ### STATES ###
 
 func enter():
-	pc.get_node("CollisionShape2D").set_deferred("disabled", true)
-	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
-	pc.get_node("JumpCollision").set_deferred("disabled", false)
-	pc.get_node("SSPDetector/CollisionShape2D2").set_deferred("disabled", false)
+	var disable = [
+		pc.get_node("CollisionShape2D"),
+		pc.get_node("CrouchingCollision")]
+	var enable = [
+		pc.get_node("JumpCollision"),
+		pc.get_node("SSPDetector/CollisionShape2D2")]
+	mm.disable_collision_shapes(disable)
+	mm.enable_collision_shapes(enable)
+	
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
 
 func exit():
-	pc.get_node("CollisionShape2D").set_deferred("disabled", false)
-	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
-	pc.get_node("JumpCollision").set_deferred("disabled", true)
-	pc.get_node("SSPDetector/CollisionShape2D2").set_deferred("disabled", true)
+	var disable = [
+		pc.get_node("CrouchingCollision"),
+		pc.get_node("JumpCollision"),
+		pc.get_node("SSPDetector/CollisionShape2D2")]
+	var enable = [pc.get_node("CollisionShape2D")]
+	mm.disable_collision_shapes(disable)
+	mm.enable_collision_shapes(enable)

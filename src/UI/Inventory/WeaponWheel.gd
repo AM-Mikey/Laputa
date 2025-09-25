@@ -12,7 +12,7 @@ extends Container
 
 @onready var pc = get_tree().get_root().get_node("World/Juniper")
 
-@onready var inventory = get_tree().get_root().get_node("World/UILayer/Inventory")
+@onready var inventory = get_tree().get_root().get_node("World/UILayer/UIGroup/Inventory")
 
 func _ready():
 	#clear all children

@@ -7,10 +7,10 @@ func _ready():
 	on_viewport_size_changed()
 
 func _on_return():
-	if w.has_node("UILayer/PauseMenu"):
-		w.get_node("UILayer/PauseMenu").do_focus()
-	if w.has_node("UILayer/TitleScreen"):
-		w.get_node("UILayer/TitleScreen").do_focus()
+	if w.has_node("UILayer/UIGroup/PauseMenu"):
+		w.get_node("UILayer/UIGroup/PauseMenu").do_focus()
+	if w.has_node("UILayer/UIGroup/TitleScreen"):
+		w.get_node("UILayer/UIGroup/TitleScreen").do_focus()
 	queue_free()
 
 func on_viewport_size_changed():

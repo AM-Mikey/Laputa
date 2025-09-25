@@ -49,8 +49,8 @@ func read_player_data_from_save():
 	
 	if f.pc(): #TODO: something strange about the timing of loading in juniper, consider moving that code here instead of the awaits
 		f.pc().free()
-		if w.ui.has_node("HUD"):
-			w.ui.get_node("HUD").queue_free()
+		if w.uig.has_node("HUD"):
+			w.uig.get_node("HUD").queue_free()
 	
 	w.change_level_via_code(player_data["current_level"])
 	await get_tree().process_frame
@@ -208,7 +208,7 @@ func write_to_file(file_path, written_data):
 func load_options():
 	var options = OPTIONS.instantiate()
 	options.ishidden = true
-	w.ui.add_child(options)
+	w.uig.add_child(options)
 	options.tabs.get_node("Settings").load_settings()
 	options.tabs.get_node("KeyConfig").load_input_map()
 	await get_tree().process_frame

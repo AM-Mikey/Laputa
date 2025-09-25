@@ -157,15 +157,15 @@ func _on_Default_pressed():
 
 
 func _on_Return_pressed():
-	if world.has_node("UILayer/PauseMenu"):
-		world.get_node("UILayer/PauseMenu").visible = true
-		world.get_node("UILayer/PauseMenu").do_focus()
-	if world.has_node("UILayer/TitleScreen"):
-		world.get_node("UILayer/TitleScreen").visible = true
-		world.get_node("UILayer/TitleScreen").do_focus()
+	if world.has_node("UILayer/UIGroup/PauseMenu"):
+		world.get_node("UILayer/UIGroup/PauseMenu").visible = true
+		world.get_node("UILayer/UIGroup/PauseMenu").do_focus()
+	if world.has_node("UILayer/UIGroup/TitleScreen"):
+		world.get_node("UILayer/UIGroup/TitleScreen").visible = true
+		world.get_node("UILayer/UIGroup/TitleScreen").do_focus()
 		
-	if world.has_node("UILayer/Options"):
-		world.get_node("UILayer/Options").queue_free()
+	if world.has_node("UILayer/UIGroup/Options"):
+		world.get_node("UILayer/UIGroup/Options").queue_free()
 	else:
 		get_parent().queue_free()
 

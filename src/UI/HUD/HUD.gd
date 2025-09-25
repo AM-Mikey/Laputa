@@ -85,8 +85,10 @@ func update_guns(guns, cause = "default", do_xp_flash = false):
 	
 	if cause == "shiftleft":
 		display_weapon_wheel(guns, "CCW")
+		ammo_animate("reload", 5.0)
 	if cause == "shiftright":
 		display_weapon_wheel(guns, "CW")
+		ammo_animate("reload", 5.0)
 	
 	for g in guns:
 		if guns.find(g) == 0: #main gun
@@ -111,6 +113,8 @@ func update_guns(guns, cause = "default", do_xp_flash = false):
 		var ui_bullet_fly = UI_BULLET_FLY.instantiate()
 		ui_bullet_fly.is_infinite = is_infinite
 		ammo_fly.add_child(ui_bullet_fly)
+	if cause == "getammo":
+		ammo_animate("reload", 5.0)
 
 func display_weapon_wheel(guns, rot_dir: String):
 	if not WheelVisible:
@@ -146,9 +150,10 @@ func _on_Timer_timeout():
 #func display_guns():
 	#$HBox/Gun/Sprite2D
 
-func ammo_animate(animation):
+func ammo_animate(animation, speed: float = -1):
 	var pc = world.get_node("Juniper")
-	var speed: float = 0.8 / pc.guns.get_child(0).cooldown_time
+	if speed == -1:
+		speed = 0.8 / pc.guns.get_child(0).cooldown_time
 	
 	if pc.guns.get_child(0).max_ammo != 0:
 		if pc.guns.get_child(0).ammo == 0:
@@ -195,6 +200,7 @@ func ammo_animate(animation):
 			ammo_bottom_animator.play("ResetInfinite")
 
 func update_hp(hp, max_hp):
+	var pc = world.get_node("Juniper")
 	hp_progress.value = hp
 	display_hp_number(hp, max_hp)
 	hp_progress.max_value = max_hp
@@ -203,9 +209,12 @@ func update_hp(hp, max_hp):
 	
 	
 	if hp < hp_lost.value:
-		animation_player.play("Flash")
-		var tween = get_tree().create_tween()
-		tween.tween_property(hp_lost, "value", hp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
+		if hp > 0:
+			get_parent().get_node("AnimationPlayer").play("flash")
+			var tween = get_tree().create_tween()
+			tween.tween_property(hp_lost, "value", hp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
+			await get_tree().create_timer(pc.iframe_time).timeout
+			get_parent().get_node("AnimationPlayer").stop()
 	else: #increasing, just set it
 		hp_lost.value = hp
 
@@ -263,7 +272,7 @@ func update_xp(xp, max_xp, level, max_level, do_xp_flash = false):
 		xp_max.visible = false
 
 
-func update_ammo(have, maximum):
+func update_ammo(have, maximum): #TODO: do we use this?
 	pass
 		#ao.ammo = have
 		#ao.max_ammo = maximum
