@@ -1,6 +1,5 @@
 extends Node2D
 
-const BONK: = preload("res://src/Effect/BonkParticle.tscn")
 const LAND: = preload("res://src/Effect/LandParticle.tscn")
 
 const FLOOR_NORMAL: = Vector2.UP
@@ -16,7 +15,7 @@ var ground_cof = 0.15
 var air_cof = 0.02
 var gravity = 0.0
 var terminal_velocity = 500.0
-var on_ceiling = false
+var did_ceiling_step = false
 @export var debug = true
 
 @export var base_speed = Vector2(90, 170)
@@ -37,7 +36,6 @@ var knockback_velocity = Vector2.ZERO
 var move_target = Vector2.ZERO
 
 var starting_direction #for acceleration
-var bonk_distance = 4 #this was for corner clipping
 
 var states = {}
 var current_state: Node
@@ -78,13 +76,6 @@ func _physics_process(_delta):
 	speed = base_speed if not get_parent().is_in_water else water_speed
 	gravity = base_gravity if not get_parent().is_in_water else water_gravity
 	do_ceiling_push_check()
-	if pc.is_on_ceiling():
-		if not on_ceiling:
-			var ceiling_normal = pc.get_slide_collision(pc.get_slide_collision_count() - 1).get_normal()
-			bonk(ceiling_normal)
-		on_ceiling = true
-	else:
-		on_ceiling = false
 	current_state.state_process(_delta)
 	align_to_proper_y()
 
@@ -99,12 +90,6 @@ func _input(event):
 func do_coyote_time():
 	coyote_timer.stop()
 	coyote_timer.start(coyote_time)
-
-func bonk(normal):
-	var effect = BONK.instantiate()
-	effect.position = pc.position
-	effect.normal = normal
-	world.get_node("Front").add_child(effect)
 
 func land():
 	am.play("pc_land")

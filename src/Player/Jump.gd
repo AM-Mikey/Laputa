@@ -1,5 +1,7 @@
 extends Node
 
+const BONK: = preload("res://src/Effect/BonkParticle.tscn")
+
 @onready var world = get_tree().get_root().get_node("World")
 @onready var pc = get_parent().get_parent().get_parent()
 @onready var mm = pc.get_node("MovementManager")
@@ -9,6 +11,7 @@ extends Node
 
 var holding_jump = true
 var is_dropping = false
+var did_bonk = false
 
 func state_process(_delta):
 	# Jump holding
@@ -20,9 +23,14 @@ func state_process(_delta):
 	pc.move_and_slide()
 	pc.velocity.y = min(mm.terminal_velocity, pc.velocity.y)
 	animate()
-
 	# We only set move_dir.y to jump for a single frame
 	pc.move_dir.y = 0.0
+
+	if pc.is_on_ceiling(): #bonk check
+		if !did_bonk:
+			var ceiling_normal = pc.get_slide_collision(pc.get_slide_collision_count() - 1).get_normal()
+			bonk(ceiling_normal)
+			did_bonk = true
 
 	if pc.is_on_floor(): #landed
 		mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
@@ -81,7 +89,12 @@ func animate():
 		ap.stop()
 		ap.play(animation, 0.0, 1.0)
 
-
+func bonk(normal):
+	print("bonk")
+	var effect = BONK.instantiate()
+	effect.position = pc.position
+	effect.normal = normal
+	world.get_node("Front").add_child(effect)
 
 ### GETTERS ###
 
@@ -143,6 +156,7 @@ func enter():
 		# It will be reset on next physics frame
 		pc.move_dir.y = -1.0
 		am.play("pc_jump")
+	did_bonk = false
 
 func exit():
 	pc.mm.land()
