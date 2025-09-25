@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2ys5t223s3h0"]
+[gd_scene load_steps=7 format=3 uid="uid://c2ys5t223s3h0"]
 
-[ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momo.ttf" id="1_2d4mj"]
-[ext_resource type="StyleBox" path="res://src/UI/StyleBox/need/CursorBox.tres" id="2"]
+[ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="1_2d4mj"]
 [ext_resource type="Script" uid="uid://cu0bod0qocr6b" path="res://src/UI/LevelSelect/LevelButton.gd" id="3"]
 
 [sub_resource type="StyleBoxEmpty" id="3"]
@@ -20,7 +19,6 @@ theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_2d4mj")
-theme_override_styles/focus = ExtResource("2")
 theme_override_styles/disabled = SubResource("3")
 theme_override_styles/hover = SubResource("1")
 theme_override_styles/pressed = SubResource("2")

@@ -1,21 +1,15 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=11 format=3 uid="uid://e2v03v6rdajs"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_6s35s"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_i4wap"]
-[ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_4qvu0"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_t8fqs"]
-[ext_resource type="TileSet" path="res://src/Tile/DogtownExterior.tres" id="5_0ewrk"]
-[ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="5_q8lop"]
-[ext_resource type="PackedScene" path="res://src/Prop/Lilypad.tscn" id="6_6s35s"]
-[ext_resource type="PackedScene" path="res://src/Editor/TriggerSpawn.tscn" id="7_4qvu0"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="7_anwej"]
-[ext_resource type="PackedScene" path="res://src/Effect/Light/SunLight.tscn" id="7_t8fqs"]
-[ext_resource type="Script" path="res://src/Prop/Lilypad.gd" id="8_ho0nu"]
-[ext_resource type="Script" path="res://src/Editor/TriggerSpawn.gd" id="10_aqway"]
-[ext_resource type="Script" path="res://src/Effect/Light/SunLight.gd" id="12_vbnr3"]
-[ext_resource type="PackedScene" path="res://src/Editor/ActorSpawn.tscn" id="13_b7ing"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="14_6grhi"]
-[ext_resource type="Script" path="res://src/Editor/ActorSpawn.gd" id="16_2xpek"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_6s35s"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_i4wap"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_4qvu0"]
+[ext_resource type="TileSet" uid="uid://bgrifkxiitl3h" path="res://src/Tile/DogtownExterior.tres" id="5_0ewrk"]
+[ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="5_q8lop"]
+[ext_resource type="PackedScene" uid="uid://dvy1sppkb6tx" path="res://src/Prop/Lilypad.tscn" id="6_6s35s"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/TriggerSpawn.tscn" id="7_4qvu0"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="7_anwej"]
+[ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="7_t8fqs"]
+[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/ActorSpawn.tscn" id="13_b7ing"]
 
 [node name="Dogtown" type="Node2D"]
 script = ExtResource("1_6s35s")
@@ -24,13 +18,11 @@ music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 conversation = "cutscene_test"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." instance=ExtResource("2_i4wap")]
+[node name="LevelLimiter" parent="." instance=ExtResource("2_i4wap")]
 offset_left = 816.0
 offset_top = -176.0
 offset_right = 1824.0
 offset_bottom = 752.0
-mouse_filter = 2
-script = ExtResource("3_t8fqs")
 background_resource = ExtResource("3_4qvu0")
 texture = ExtResource("5_q8lop")
 layers = 5
@@ -70,43 +62,30 @@ layer_3/tile_data = PackedInt32Array(2031708, 1441792, 12, 2031709, 1507328, 12,
 
 [node name="Props" type="Node2D" parent="."]
 
-[node name="Lilypad" type="CharacterBody2D" parent="Props" instance=ExtResource("6_6s35s")]
+[node name="Lilypad" parent="Props" instance=ExtResource("6_6s35s")]
 position = Vector2(1352, 592)
-collision_layer = 512
-collision_mask = 0
 velocity = Vector2(0, -0.408691)
-script = ExtResource("8_ho0nu")
 
-[node name="Lilypad2" type="CharacterBody2D" parent="Props" instance=ExtResource("6_6s35s")]
+[node name="Lilypad2" parent="Props" instance=ExtResource("6_6s35s")]
 position = Vector2(1312, 597.331)
-collision_layer = 512
-collision_mask = 0
 velocity = Vector2(0, -0.415771)
-script = ExtResource("8_ho0nu")
 sprite = 1
 
-[node name="Lilypad3" type="CharacterBody2D" parent="Props" instance=ExtResource("6_6s35s")]
+[node name="Lilypad3" parent="Props" instance=ExtResource("6_6s35s")]
 position = Vector2(1392, 597.331)
-collision_layer = 512
-collision_mask = 0
 velocity = Vector2(0, -0.415771)
-script = ExtResource("8_ho0nu")
 sprite = 1
 
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Triggers" type="Node2D" parent="."]
 
-[node name="Water" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_4qvu0")]
+[node name="Water" parent="Triggers" instance=ExtResource("7_4qvu0")]
 modulate = Color(1, 1, 1, 0.75)
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 1168.0
 offset_top = 592.0
 offset_right = 1504.0
 offset_bottom = 640.0
-mouse_filter = 2
-script = ExtResource("10_aqway")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20],
@@ -114,16 +93,12 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_4qvu0")]
+[node name="Door" parent="Triggers" instance=ExtResource("7_4qvu0")]
 modulate = Color(1, 1, 1, 0.75)
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 1792.0
 offset_top = 128.0
 offset_right = 1808.0
 offset_bottom = 160.0
-mouse_filter = 2
-script = ExtResource("10_aqway")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -136,27 +111,16 @@ properties = {
 }
 size_is_default = false
 
-[node name="SunLight" type="Area2D" parent="." groups=["SunLights"] instance=ExtResource("7_t8fqs")]
+[node name="SunLight" parent="." instance=ExtResource("7_t8fqs")]
 position = Vector2(128, -216)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_vbnr3")
 
 [node name="Spawns" type="Node2D" parent="."]
 
-[node name="SpawnPoint" type="Area2D" parent="Spawns" groups=["SpawnPoints"] instance=ExtResource("7_anwej")]
+[node name="SpawnPoint" parent="Spawns" instance=ExtResource("7_anwej")]
 position = Vector2(1536, 480)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_6grhi")
 
-[node name="Frog" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_b7ing")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Frog" parent="Spawns" instance=ExtResource("13_b7ing")]
 position = Vector2(1320, 592)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_2xpek")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "debug": [true, 1],
@@ -166,13 +130,8 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Frog1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_b7ing")]
-modulate = Color(1, 1, 1, 0.75)
-z_index = 999
+[node name="Frog1" parent="Spawns" instance=ExtResource("13_b7ing")]
 position = Vector2(1400, 592)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_2xpek")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "debug": [true, 1],
