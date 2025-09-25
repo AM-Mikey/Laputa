@@ -59,7 +59,7 @@ instance_dock/scenes=[{
 config/name="Laputa"
 run/main_scene="res://src/World.tscn"
 config/use_custom_user_dir=true
-config/features=PackedStringArray("4.4")
+config/features=PackedStringArray("4.5")
 config/icon="uid://b42so8fnnp3uq"
 
 [autoload]
