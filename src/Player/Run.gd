@@ -101,7 +101,14 @@ func animate():
 	var slope_right = pc.get_node("SlopeRight").get_collider()
 	
 
-	
+	#var edge_connections = ["edge_turn", "run"]
+	#var edge_turn_connections = ["edge", "run"]
+	var connected_animations = {
+		"edge": ["edge_turn", "run"],
+		"edge_turn": ["edge", "run"],
+		"edge_front": ["edge", "run"],
+		"push": ["stand", "up_slope", "down_slope", "slight_up_slope", "slight_down_slope"],
+	}
 	
 	if pc.direction_lock != Vector2i.ZERO and pc.direction_lock.x != sign(pc.move_dir.x):
 		animation = "back_run"
