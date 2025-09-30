@@ -27,8 +27,8 @@ func _on_LevelButton_pressed():
 	
 	world.change_level_via_code(level)
 	
-	if world.has_node("UILayer/UIGroup/TitleScreen"):
-		world.get_node("UILayer/UIGroup/TitleScreen").queue_free()
-	if world.has_node("UILayer/UIGroup/PauseMenu"):
-		world.get_node("UILayer/UIGroup/PauseMenu").unpause()
-	world.get_node("UILayer/UIGroup/LevelSelect").queue_free()
+	if world.has_node("MenuLayer/TitleScreen"):
+		world.get_node("MenuLayer/TitleScreen").queue_free()
+	if world.has_node("MenuLayer/PauseMenu"):
+		world.get_node("MenuLayer/PauseMenu").unpause()
+	world.get_node("MenuLayer/LevelSelect").queue_free()

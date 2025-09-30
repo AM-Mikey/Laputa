@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://c1np2xna4dogr" path="res://src/UI/Theme/InsetMenu.tres" id="1"]
 [ext_resource type="Texture2D" uid="uid://cl3sa7nubis6p" path="res://assets/UI/Settings/KeyboardMouse.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://bmeh5rfp6bvek" path="res://assets/UI/Settings/KeyboardClassic.png" id="3"]
-[ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momo.ttf" id="3_vje3i"]
+[ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="3_vje3i"]
 [ext_resource type="Texture2D" uid="uid://ccaq53m8l5g3c" path="res://assets/UI/Settings/KeyboardCustom.png" id="4"]
 [ext_resource type="Script" uid="uid://cq6xxd8uisqit" path="res://src/UI/Options/KeyConfig.gd" id="6"]
 [ext_resource type="StyleBox" uid="uid://bqcnin0ya0s5l" path="res://src/UI/StyleBox/SteelCorner.tres" id="9"]
@@ -12,6 +12,9 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -160.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(-576, -72)
 theme = ExtResource("1")
 script = ExtResource("6")

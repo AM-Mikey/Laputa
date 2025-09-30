@@ -11,21 +11,17 @@ func _ready():
 		visible = false
 	else:
 		tabs.get_node("Settings").do_focus()
-		if world.has_node("UILayer/UIGroup/TitleScreen"):
-			world.get_node("UILayer/UIGroup/TitleScreen").visible = false
-		var _err = get_tree().root.connect("size_changed", Callable(self, "_on_viewport_size_changed"))
-		_on_viewport_size_changed()
+		if world.has_node("MenuLayer/TitleScreen"):
+			world.get_node("MenuLayer/TitleScreen").visible = false
+		if world.has_node("MenuLayer/PauseMenu"):
+			world.get_node("MenuLayer/PauseMenu").visible = false
+		%TabContainer.set_tab_title(0, "Main")
+		%TabContainer.set_tab_title(1, "Keyboard")
+		%TabContainer.set_tab_title(2, "Controller")
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
 
 
-func _on_viewport_size_changed():
-	size = get_tree().get_root().size / world.resolution_scale
-
-
-func _on_TabContainer_tab_changed(tab):
-	match tab:
-		0: tabs.get_node("Settings").do_focus()
-		1: tabs.get_node("KeyConfig").do_focus()
-		2: tabs.get_node("ControllerConfig").do_focus()
 
 func _input(event):
 	if event.is_action_pressed("gun_left"):
@@ -41,13 +37,22 @@ func _input(event):
 			tabs.current_tab += 1
 
 
+### SIGNALS ###
+
+func _on_TabContainer_tab_changed(tab):
+	match tab:
+		0: tabs.get_node("Settings").do_focus()
+		1: tabs.get_node("KeyConfig").do_focus()
+		2: tabs.get_node("ControllerConfig").do_focus()
 
 func _on_Return_pressed():
-	if world.has_node("UILayer/UIGroup/PauseMenu"):
-		world.get_node("UILayer/UIGroup/PauseMenu").visible = true
-		world.get_node("UILayer/UIGroup/PauseMenu").do_focus()
-	if world.has_node("UILayer/UIGroup/TitleScreen"):
-		world.get_node("UILayer/UIGroup/TitleScreen").visible = true
-		world.get_node("UILayer/UIGroup/TitleScreen").do_focus()
-		
+	if world.has_node("MenuLayer/PauseMenu"):
+		world.get_node("MenuLayer/PauseMenu").visible = true
+		world.get_node("MenuLayer/PauseMenu").do_focus()
+	if world.has_node("MenuLayer/TitleScreen"):
+		world.get_node("MenuLayer/TitleScreen").visible = true
+		world.get_node("MenuLayer/TitleScreen").do_focus()
 	queue_free()
+
+func _resolution_scale_changed(resolution_scale):
+	size = get_tree().get_root().size / resolution_scale

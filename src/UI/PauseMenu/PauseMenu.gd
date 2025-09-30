@@ -1,55 +1,57 @@
 extends Control
 
 const KEY_GUIDE = preload("res://src/UI/KeyGuide.tscn")
-const LEVEL = preload("res://src/UI/LevelSelect/LevelSelect.tscn")
+const LEVEL_SELECT = preload("res://src/UI/LevelSelect/LevelSelect.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 const TITLE = preload("res://src/UI/TitleScreen.tscn")
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
-	on_viewport_size_changed()
 	do_focus()
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
+
+
 
 func _input(event):
-	if event.is_action_pressed("pause") and get_tree().paused and not world.has_node("UILayer/UIGroup/Options"):
+	if event.is_action_pressed("pause") and get_tree().paused and not w.has_node("MenuLayer/Options"):
 		unpause()
 
+func do_focus():
+	$VBoxContainer/VBoxContainer/Return.grab_focus()
+
 func unpause():
-	if world.has_node("UILayer/UIGroup/HUD"):
-		world.get_node("UILayer/UIGroup/HUD").visible = true
-	if world.has_node("UILayer/UIGroup/DialogBox"):
-		world.get_node("UILayer/UIGroup/DialogBox").visible = true
+	w.ui.visible = true
 	get_tree().paused = false
 	queue_free()
 
-func do_focus():
-	#print("focused")
-	$VBoxContainer/VBoxContainer/Return.grab_focus()
+
+
+### SIGNALS ###
 
 func _on_Return_pressed():
 	unpause()
 
 func _on_Options_pressed():
 	var options = OPTIONS.instantiate()
-	get_parent().add_child(options)
+	w.ml.add_child(options)
 
 func _on_KeyGuide_pressed():
 	var key_guide = KEY_GUIDE.instantiate()
-	get_parent().add_child(key_guide)
+	w.ml.add_child(key_guide)
 	key_guide.do_focus()
 	
 
 func _on_Level_pressed():
-	var level = LEVEL.instantiate()
-	get_parent().add_child(level)
+	var level_select = LEVEL_SELECT.instantiate()
+	w.ml.add_child(level_select)
 
 func _on_Quit_pressed():
 	var title = TITLE.instantiate()
-	if not world.has_node("UILayer/UIGroup/TitleScreen"):
-		world.get_node("UILayer/UIGroup").add_child(title)
+	if not w.ml.has_node("TitleScreen"):
+		w.ml.add_child(title)
 	queue_free()
 
-func on_viewport_size_changed():
-	size = get_tree().get_root().size / world.resolution_scale
+func _resolution_scale_changed(resolution_scale):
+	size = get_tree().get_root().size / resolution_scale

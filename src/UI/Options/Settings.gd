@@ -62,38 +62,38 @@ func on_displaymode_changed(index: int):
 	print("display settings changed")
 	save_setting("DisplayMode", index)
 
-func on_resolutionscale_changed(index: int): #not fully implemented
-	w.viewport_size_ignore = true
-	match index:
-		0:
-			w.viewport_size_ignore = false
-			#world._on_viewport_size_changed()
-			get_window().set_size(get_window().get_size()) #set window size so we can trigger _on_viewport_size_changed everywhere
-		1: w.resolution_scale = 1.0
-		2: w.resolution_scale = 2.0
-		3: w.resolution_scale = 3.0
-		4: w.resolution_scale = 4.0
-		5: w.resolution_scale = 5.0
-		6: w.resolution_scale = 6.0
-		7: w.resolution_scale = 7.0
-		8: w.resolution_scale = 8.0
+#func on_resolutionscale_changed(index: int): #not fully implemented
+	#w.viewport_size_ignore = true
+	#match index:
+		#0:
+			#w.viewport_size_ignore = false
+			##world._on_viewport_size_changed()
+			#get_window().set_size(get_window().get_size()) #set window size so we can trigger _on_viewport_size_changed everywhere
+		#1: w.resolution_scale = 1.0
+		#2: w.resolution_scale = 2.0
+		#3: w.resolution_scale = 3.0
+		#4: w.resolution_scale = 4.0
+		#5: w.resolution_scale = 5.0
+		#6: w.resolution_scale = 6.0
+		#7: w.resolution_scale = 7.0
+		#8: w.resolution_scale = 8.0
 	
-	if w.has_node("TitleCam"):
-		w.get_node("TitleCam").zoom = Vector2(1 / w.resolution_scale, 1 / w.resolution_scale)
-	#world.get_node("UILayer").scale = Vector2(world.resolution_scale, world.resolution_scale)
-	#TODO: make sure this carrys over for playercamera
-	if get_tree().get_nodes_in_group("CameraLimiters").size() != 0:
-		for c in get_tree().get_nodes_in_group("CameraLimiters"):
-			c._on_viewport_size_changed()
-	
-	save_setting("ResolutionScale", index)
+	#if w.has_node("TitleCam"):
+		#w.get_node("TitleCam").zoom = Vector2(1 / w.resolution_scale, 1 / w.resolution_scale)
+	##world.get_node("UILayer").scale = Vector2(world.resolution_scale, world.resolution_scale)
+	##TODO: make sure this carrys over for playercamera
+	#if get_tree().get_nodes_in_group("CameraLimiters").size() != 0:
+		#for c in get_tree().get_nodes_in_group("CameraLimiters"):
+			#c._on_viewport_size_changed()
+	#
+	#save_setting("ResolutionScale", index)
 
 
 func on_mastervolume_changed(value):
 	var db = get_percent_as_db(value)
 	#print(db)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),db)
-	if not w.get_node("UILayer/UIGroup/Options").hidden and after_ready:
+	if not w.get_node("MenuLayer/Options").hidden and after_ready:
 		am.play("sound_test", null, "master") #play on master
 	mastervolume.get_node("Label").text = "Master Volume: Muted" if value == 0 else "Master Volume: " + str(value) + "0 %"
 	save_setting("MasterVolume", value)
@@ -101,7 +101,7 @@ func on_mastervolume_changed(value):
 func on_musicvolume_changed(value):
 	var db = get_percent_as_db(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),db)
-	if not w.get_node("UILayer/UIGroup/Options").hidden and after_ready:
+	if not w.get_node("MenuLayer/Options").hidden and after_ready:
 		am.play_sfx("sound_test")
 	musicvolume.get_node("Label").text = "Music Volume: Muted" if value == 0 else "Music Volume: " + str(value) + "0 %"
 	save_setting("MusicVolume", value)
@@ -109,22 +109,22 @@ func on_musicvolume_changed(value):
 func on_sfxvolume_changed(value):
 	var db = get_percent_as_db(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),db)
-	if not w.get_node("UILayer/UIGroup/Options").hidden and after_ready:
+	if not w.get_node("MenuLayer/Options").hidden and after_ready:
 		am.play("sound_test")
 	sfxvolume.get_node("Label").text = "SFX Volume: Muted" if value == 0 else "SFX Volume: " + str(value) + "0 %"
 	save_setting("SFXVolume", value)
 
 
 func on_return():
-	if w.has_node("UILayer/UIGroup/PauseMenu"):
-		w.get_node("UILayer/UIGroup/PauseMenu").visible = true
-		w.get_node("UILayer/UIGroup/PauseMenu").do_focus()
-	if w.has_node("UILayer/UIGroup/TitleScreen"):
-		w.get_node("UILayer/UIGroup/TitleScreen").visible = true
-		w.get_node("UILayer/UIGroup/TitleScreen").do_focus()
+	if w.has_node("MenuLayer/PauseMenu"):
+		w.get_node("MenuLayer/PauseMenu").visible = true
+		w.get_node("MenuLayer/PauseMenu").do_focus()
+	if w.has_node("MenuLayer/TitleScreen"):
+		w.get_node("MenuLayer/TitleScreen").visible = true
+		w.get_node("MenuLayer/TitleScreen").do_focus()
 		
-	if w.has_node("UILayer/UIGroup/Options"):
-		w.get_node("UILayer/UIGroup/Options").queue_free()
+	if w.has_node("MenuLayer/Options"):
+		w.get_node("MenuLayer/Options").queue_free()
 	else:
 		get_parent().queue_free()
 
@@ -185,8 +185,8 @@ func load_settings():
 	
 	displaymode.selected = data["DisplayMode"]
 	on_displaymode_changed(data["DisplayMode"])
-	resolutionscale.selected = data["ResolutionScale"]
-	on_resolutionscale_changed(data["ResolutionScale"])
+	#resolutionscale.selected = data["ResolutionScale"]
+	#on_resolutionscale_changed(data["ResolutionScale"])
 	
 	mouselock.button_pressed = data["MouseLock"]
 	on_mouselock(data["MouseLock"])

@@ -65,12 +65,12 @@ var editor_delete_blacklist = ["background", "spawnpoint", "tile_map"]
 ### SETUP ###
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", Callable(self, "_on_viewport_size_changed"))
-	_on_viewport_size_changed()
 	#connect("tile_map_selected", Callable(inspector, "on_selected").bind("tile_map"))
 	connect("level_selected", Callable(inspector, "on_selected").bind("level"))
 	w.el.add_child(EDITOR_CAMERA.instantiate())
 	
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
 	setup_level() #Call this every time the level is changed or reloaded
 	#$Main/Win.move_child($Main/Win/Tab, 0) TODO: was supposed to make tabcontainer go behind resize controls, didnt work
 
@@ -921,11 +921,6 @@ func on_layer_changed(layer_id): #from inspector
 
 ### MISC SIGNALS
 
-func _on_viewport_size_changed():
-	await get_tree().process_frame
-	$Margin.size = Vector2(get_tree().get_root().size) / Vector2(w.get_node("EditorLayer").scale)
-	setup_windows()
-
 func on_tab_selected(tab_index): #tab buttons
 	$Main/Win/Tab.current_tab = tab_index
 
@@ -963,3 +958,8 @@ func on_tab_changed(tab):
 			#set_entities_pickable()
 		_:
 			print("WARNING: could not find tab with name: " + $Main/Win/Tab.get_child(tab).name)
+
+func _resolution_scale_changed(_resolution_scale):
+	await get_tree().process_frame
+	$Margin.size = Vector2(get_tree().get_root().size) / Vector2(w.el.scale)
+	setup_windows()

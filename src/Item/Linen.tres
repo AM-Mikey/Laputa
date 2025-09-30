@@ -11,4 +11,3 @@ item_name = "Linen"
 index = 5
 texture = SubResource("1")
 description = "A small bauble shaped like an ox."
-price = 0

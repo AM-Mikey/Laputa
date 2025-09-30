@@ -4,8 +4,8 @@ extends Control
 @onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
-	on_viewport_size_changed()
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
 	
 	if is_instance_valid(world.get_node("Juniper")):
 		var pc = world.get_node("Juniper")
@@ -102,5 +102,8 @@ func _clear_array(array):
 			c.queue_free()
 
 
-func on_viewport_size_changed():
-	size = get_tree().get_root().size / Vector2i(world.get_node("DebugLayer").scale)
+
+### SIGNALS ###
+
+func _resolution_scale_changed(_resolution_scale):
+	size = get_tree().get_root().size / Vector2i(world.dl.scale)

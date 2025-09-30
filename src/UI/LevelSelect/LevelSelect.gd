@@ -5,8 +5,8 @@ const LEVELBUTTON = preload("res://src/UI//LevelSelect/LevelButton.tscn")
 @onready var world = get_tree().get_root().get_node("World")
 
 func _ready(): #TODO: update load and save to new file
-	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
-	on_viewport_size_changed()
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
 	
 	var nones = []
 	
@@ -33,12 +33,15 @@ func _ready(): #TODO: update load and save to new file
 	first_button.grab_focus()
 
 
+
+### SIGNALS ###
+
 func _on_Return_pressed():
-	if world.has_node("UILayer/UIGroup/PauseMenu"):
-		world.get_node("UILayer/UIGroup/PauseMenu").do_focus()
-	if world.has_node("UILayer/UIGroup/TitleScreen"):
-		world.get_node("UILayer/UIGroup/TitleScreen").do_focus()
+	if world.has_node("MenuLayer/PauseMenu"):
+		world.get_node("MenuLayer/PauseMenu").do_focus()
+	if world.has_node("MenuLayer/TitleScreen"):
+		world.get_node("MenuLayer/TitleScreen").do_focus()
 	queue_free()
 
-func on_viewport_size_changed():
-	size = get_tree().get_root().size / world.resolution_scale
+func _resolution_scale_changed(resolution_scale):
+	size = get_tree().get_root().size / resolution_scale

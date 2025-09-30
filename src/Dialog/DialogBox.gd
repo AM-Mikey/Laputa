@@ -28,9 +28,6 @@ var dl: Node
 
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
-	on_viewport_size_changed()
-	
 	for e in get_tree().get_nodes_in_group("Enemies"):
 		e.disable()
 	
@@ -41,6 +38,8 @@ func _ready():
 	$Face.visible = false
 	$Options.visible = false
 
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
 
 func start_printing(dialog_json, conversation: String):
 	$NPC.visible = true
@@ -225,7 +224,7 @@ func exit():
 ### HELPERS
 
 func align_box():
-	var viewport_size = get_tree().get_root().size / w.resolution_scale
+	var viewport_size = get_tree().get_root().size / vs.resolution_scale
 	var pc_pos = pc.global_position
 	var camera = get_viewport().get_camera_2d()
 	var camera_center = camera.get_screen_center_position()
@@ -248,7 +247,7 @@ func align_box():
 			w.uig.get_node("HUD").visible = false
 
 func align_out():
-	var viewport_size = get_tree().get_root().size / w.resolution_scale
+	var viewport_size = get_tree().get_root().size / vs.resolution_scale
 	var pc_pos = pc.global_position
 	var camera = get_viewport().get_camera_2d()
 	var camera_center = camera.get_screen_center_position()
@@ -298,11 +297,10 @@ func flip_face(dir = "auto"):
 
 
 
-### SIGNALS
+### SIGNALS ###
 
-func on_viewport_size_changed():
-	var viewport_size = get_tree().get_root().size / w.resolution_scale
-	#rect_size = get_tree().get_root().size / w.resolution_scale
+func _resolution_scale_changed(resolution_scale):
+	var viewport_size = get_tree().get_root().size / resolution_scale
 	size.x = min(viewport_size.x, 400)
-	position.x = (viewport_size.x - size.x) /2
+	position.x = (viewport_size.x - size.x) / 2.0
 	position.y = viewport_size.y - 80

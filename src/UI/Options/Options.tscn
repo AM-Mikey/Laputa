@@ -7,15 +7,14 @@
 [ext_resource type="Script" uid="uid://0ac4soyfj6f0" path="res://src/UI/Options/Options.gd" id="5"]
 [ext_resource type="Texture2D" uid="uid://87tihquqgyim" path="res://assets/UI/ArrowRight.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://b2gn2gqrhri0q" path="res://assets/UI/ArrowLeft.png" id="7"]
-[ext_resource type="PackedScene" path="res://src/UI/MenuButton.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://cocixd0n3hmcm" path="res://src/UI/MenuButton.tscn" id="8"]
 
 [node name="Options" type="MarginContainer"]
 clip_contents = true
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 42.0
-offset_bottom = 32.0
+offset_right = 480.0
+offset_bottom = 270.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("3")
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
@@ -37,21 +36,26 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer2"]
+unique_name_in_owner = true
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
+current_tab = 0
 
 [node name="Settings" parent="VBoxContainer2/TabContainer" instance=ExtResource("1")]
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="KeyConfig" parent="VBoxContainer2/TabContainer" instance=ExtResource("2")]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="ControllerConfig" parent="VBoxContainer2/TabContainer" instance=ExtResource("4")]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="Return" parent="VBoxContainer2" instance=ExtResource("8")]
 layout_mode = 2

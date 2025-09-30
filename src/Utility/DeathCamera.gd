@@ -12,10 +12,9 @@ const BLACKBAR = preload("res://src/Utility/BlackBar.tscn")
 @onready var camera_pos = pc.get_node("PlayerCamera").get_screen_center_position()
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed")) #TODO: err
-	on_viewport_size_changed()
-	
 	global_position = camera_pos
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
 
 
 func focus_player():
@@ -77,5 +76,5 @@ func on_limit_camera(left, right, top, bottom):
 
 
 
-func on_viewport_size_changed():
-	zoom = Vector2(world.resolution_scale, world.resolution_scale)
+func _resolution_scale_changed(resolution_scale):
+	zoom = Vector2(resolution_scale, resolution_scale)

@@ -22,6 +22,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "--Paused--"
+horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

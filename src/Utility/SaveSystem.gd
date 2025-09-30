@@ -208,7 +208,7 @@ func write_to_file(file_path, written_data):
 func load_options():
 	var options = OPTIONS.instantiate()
 	options.ishidden = true
-	w.uig.add_child(options)
+	w.ml.add_child(options)
 	options.tabs.get_node("Settings").load_settings()
 	options.tabs.get_node("KeyConfig").load_input_map()
 	await get_tree().process_frame

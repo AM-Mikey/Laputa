@@ -40,9 +40,8 @@ func setup():
 		connect("limit_camera", Callable(camera, "on_limit_camera"))
 		if camera.name == "EditorCamera":
 			camera.connect("camera_zoom_changed", Callable(self, "on_camera_zoom_changed"))
-	get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
-	on_viewport_size_changed()
-	
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
 
 func _process(delta):
 	var desired_fps = 60
@@ -122,7 +121,7 @@ func setup_layers():
 		layer.add_child(texture_rect)
 
 
-func set_focus(res_scale = w.resolution_scale):
+func set_focus(res_scale = vs.resolution_scale):
 	if camera:
 		if camera.name == "EditorCamera":
 			res_scale = camera.zoom.x
@@ -165,9 +164,9 @@ func set_tile_mode(texture_rect, mode = tile_mode):
 			texture_rect.size.x = texture_rect.texture.get_width()
 			texture_rect.size.y = texture_rect.texture.get_height()
 
-func on_viewport_size_changed():
-	emit_signal("limit_camera", offset_left, offset_right, offset_top, offset_bottom)
+func on_camera_zoom_changed():
 	set_focus()
 
-func on_camera_zoom_changed():
+func _resolution_scale_changed(_resolution_scale):
+	emit_signal("limit_camera", offset_left, offset_right, offset_top, offset_bottom)
 	set_focus()

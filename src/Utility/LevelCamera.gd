@@ -3,9 +3,9 @@ extends Camera2D
 @onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
-	on_viewport_size_changed()
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
 	
 	
-func on_viewport_size_changed():
-	zoom = Vector2(world.resolution_scale, world.resolution_scale)
+func _resolution_scale_changed(resolution_scale):
+	zoom = Vector2(resolution_scale, resolution_scale)

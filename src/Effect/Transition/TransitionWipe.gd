@@ -5,14 +5,14 @@ var animation: String
 @onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-		print("playing in animation")
-		var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
-		on_viewport_size_changed()
-		$AnimationPlayer.play(animation)
+	#print("playing in animation")
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
+	$AnimationPlayer.play(animation)
 	
 	
 func play_out_animation():
-	print("playing out animation")
+	#print("playing out animation")
 	$AnimationPlayer.play(animation)
 	
 
@@ -30,6 +30,6 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		"WipeOutDown": queue_free()
 
 
-func on_viewport_size_changed():
-	var viewport_size = get_tree().get_root().size / world.resolution_scale
+func _resolution_scale_changed(resolution_scale):
+	var viewport_size = get_tree().get_root().size / resolution_scale
 	$MarginContainer.size = viewport_size

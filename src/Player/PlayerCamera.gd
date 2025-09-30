@@ -20,8 +20,8 @@ var h_tween: Tween
 var v_tween: Tween
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
-	on_viewport_size_changed()
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
 
 func _physics_process(_delta):
 	if h_dir != pc.look_dir.x:
@@ -40,14 +40,14 @@ func _physics_process(_delta):
 ### MAIN ###
 
 func pan_vertical(dir):
-	var dist = v_pan_distance / w.resolution_scale
+	var dist = v_pan_distance / vs.resolution_scale
 	if v_tween:
 		v_tween.kill()
 	v_tween = create_tween()
 	v_tween.tween_property(self, "drag_vertical_offset", dir * dist, v_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(v_pan_delay)
 
 func pan_horizontal(dir):
-	var dist = h_pan_distance / w.resolution_scale
+	var dist = h_pan_distance / vs.resolution_scale
 	if h_tween:
 		h_tween.kill()
 	h_tween = create_tween()
@@ -73,9 +73,9 @@ func on_limit_camera(left, right, top, bottom):
 	for b in get_tree().get_nodes_in_group("BlackBars"):
 		b.free()
 	
-	if window_width > (right - left) * w.resolution_scale:
+	if window_width > (right - left) * vs.resolution_scale:
 		#print("WARNING: window width larger than camera limit")
-		var thickness = ((window_width / w.resolution_scale) - (right - left))/2
+		var thickness = ((window_width / vs.resolution_scale) - (right - left))/2
 		
 		spawn_black_bar("BarLeft", \
 		Vector2(thickness, window_height), \
@@ -90,9 +90,9 @@ func on_limit_camera(left, right, top, bottom):
 		limit_left = left
 		limit_right = right
 	
-	if get_window().get_size().y > (bottom - top) * w.resolution_scale:
+	if get_window().get_size().y > (bottom - top) * vs.resolution_scale:
 		#print("WARNING: window height larger than camera limit")
-		var thickness = (window_height / w.resolution_scale - (bottom - top))/2
+		var thickness = (window_height / vs.resolution_scale - (bottom - top))/2
 		
 		spawn_black_bar("BarTop", \
 		Vector2(window_width, thickness), \
@@ -116,5 +116,8 @@ func spawn_black_bar(bar_name, size, bar_position):
 		w.bl.move_child(bar, 0)
 
 
-func on_viewport_size_changed():
-	zoom = Vector2(w.resolution_scale, w.resolution_scale)
+
+### SIGNALS ###
+
+func _resolution_scale_changed(resolution_scale):
+	zoom = Vector2(resolution_scale, resolution_scale)

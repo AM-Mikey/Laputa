@@ -6,12 +6,15 @@ var wait_time = 0.2
 @onready var world = get_tree().get_root().get_node("World")
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", Callable(self, "_on_viewport_size_changed"))
-	_on_viewport_size_changed()
 	$Label.text = text
 	$Timer.start(wait_time)
-	
-	
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
+
+
+
+### SIGNALS ###
+
 func _on_Timer_timeout():
 	display_text()
 
@@ -20,8 +23,5 @@ func display_text():
 	await $AnimationPlayer.animation_finished
 	queue_free()
 
-
-func _on_viewport_size_changed():
-	size = get_tree().get_root().size / world.resolution_scale
-
-
+func _resolution_scale_changed(resolution_scale):
+	size = get_tree().get_root().size / resolution_scale

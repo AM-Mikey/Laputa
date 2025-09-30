@@ -4,11 +4,12 @@ extends MarginContainer
 
 
 func _ready():
-		var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
-		on_viewport_size_changed()
-	
-	
-	
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
 
-func on_viewport_size_changed():
-	size = get_tree().get_root().size / world.resolution_scale
+
+
+### SIGNALS ###
+
+func _resolution_scale_changed(resolution_scale):
+	size = get_tree().get_root().size / resolution_scale

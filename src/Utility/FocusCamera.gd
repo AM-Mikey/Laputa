@@ -11,12 +11,9 @@ var panning_down = false
 @onready var pc = get_tree().get_root().get_node("World/Juniper")
 
 func _ready():
-	get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
-	on_viewport_size_changed()
-	
 	global_position = pc.global_position
-	await get_tree().create_timer(1.0).timeout
-	#position = Vector2.ZERO
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
 
 
 func on_limit_camera(left, right, top, bottom):
@@ -25,7 +22,7 @@ func on_limit_camera(left, right, top, bottom):
 		b.free()
 	
 	
-	if  get_window().get_size().x > (right - left) * world.resolution_scale:
+	if get_window().get_size().x > (right - left) * world.resolution_scale:
 		print("WARNING: window width larger than camera limit")
 		var extra_margin = ((get_window().get_size().x / world.resolution_scale) - (right - left))/2
 		
@@ -74,5 +71,7 @@ func on_limit_camera(left, right, top, bottom):
 
 
 
-func on_viewport_size_changed():
-	zoom = Vector2(world.resolution_scale, world.resolution_scale)
+### SIGNALS ###
+
+func _resolution_scale_changed(resolution_scale):
+	zoom = Vector2(resolution_scale, resolution_scale)

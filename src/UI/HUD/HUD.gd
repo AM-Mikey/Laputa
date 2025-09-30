@@ -56,9 +56,6 @@ const UI_BULLET_FLY = preload("res://src/UI/HUD/UIBulletFly.tscn")
 var WheelVisible = false
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
-	on_viewport_size_changed()
-	
 	if world.has_node("Juniper"):
 		var pc = world.get_node("Juniper")
 		pc.hp_updated.connect(update_hp)
@@ -67,6 +64,8 @@ func _ready():
 		pc.money_updated.connect(update_money)
 		pc.setup_hud()
 		setup_lost_bars(pc.hp, pc.guns.get_child(0).xp)
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
 
 func _process(_delta):
 	set_cap_pos(hp_lost, 38, hp_lost_cap)
@@ -316,6 +315,10 @@ func setup_lost_bars(hp, xp): #needs to be done so that update can tell that it'
 	xp_lost.value = xp
 	#set_cap_pos(xp_lost, 38, xp_lost_cap)
 
-func on_viewport_size_changed():
-	size = get_tree().get_root().size / world.resolution_scale
+
+
+### SIGNALS ###
+
+func _resolution_scale_changed(resolution_scale):
+	size = get_tree().get_root().size / resolution_scale
 	position = Vector2(0, 0)

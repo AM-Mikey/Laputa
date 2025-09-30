@@ -11,10 +11,6 @@ const JUNIPER = preload("res://src/Player/Juniper.tscn")
 const TITLE = preload("res://src/UI/TitleScreen.tscn")
 const TITLECAM = preload("res://src/Utility/TitleCam.tscn")
 
-var resolution_scale = 4.0
-var viewport_size_ignore = false
-
-
 @export var development_stage: String = "Alpha"
 var internal_version: String = get_internal_version()
 @export var release_version: String
@@ -30,16 +26,14 @@ var internal_version: String = get_internal_version()
 @onready var el = $EditorLayer
 @onready var dl = $DebugLayer
 @onready var bl = $BlackoutLayer
+@onready var ml = $MenuLayer
 @onready var front = $Front
 @onready var middle = $Middle
 @onready var back = $Back
 
 func _ready():
-	var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
-	on_viewport_size_changed()
-	
 	if not do_skip_title: #TODO: update this
-		uig.add_child(TITLE.instantiate())
+		ml.add_child(TITLE.instantiate())
 		add_child(TITLECAM.instantiate())
 		first_time_level_setup()
 	else:
@@ -54,6 +48,9 @@ func _ready():
 	# Apply them to the root window as the minimum size
 	var main_window = get_tree().get_root()
 	main_window.set_min_size(Vector2i(width, height))
+	
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
 
 
 
@@ -98,17 +95,12 @@ func _input(event):
 			uig.add_child(inventory)
 
 
-	if event.is_action_pressed("pause") and not uig.has_node("TitleScreen"):
-		if not uig.has_node("PauseMenu") and not get_tree().paused:
+	if event.is_action_pressed("pause") and not ml.has_node("TitleScreen"):
+		if not ml.has_node("PauseMenu") and not get_tree().paused:
 			get_tree().paused = true
-			
-			if uig.has_node("HUD"):
-				$UILayer/UIGroup/HUD.visible = false
-			if uig.has_node("DialogBox"):
-				$UILayer/UIGroup/DialogBox.visible = false
-			
+			ui.visible = false
 			var pause_menu = PAUSEMENU.instantiate()
-			uig.add_child(pause_menu)
+			ml.add_child(pause_menu)
 	
 	if event.is_action_pressed("window_maximize"):
 		if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_MAXIMIZED:
@@ -270,24 +262,12 @@ func clear_spawn_layers():
 	for c in front.get_children():
 		c.free()
 
+### SIGNALS ###
 
-
-func on_viewport_size_changed():
-	if viewport_size_ignore:
-		return
-	var viewport_size = get_tree().get_root().size
-	
-	var tiles_visible_y = 15.0
-	var urs = viewport_size.y / (16.0 * tiles_visible_y)
-	if urs - floor(urs) == 0.5:
-		resolution_scale = floori(urs) #round 0.5 down
-	else:
-		resolution_scale = roundi(urs) #else round normally
-	resolution_scale = max(resolution_scale, 1)
-
+func _resolution_scale_changed(resolution_scale):
 	ui.scale = Vector2(resolution_scale, resolution_scale)
 	back.scale = Vector2(resolution_scale, resolution_scale)
 	bl.scale = Vector2(resolution_scale, resolution_scale)
 	var half_scale = max(ceil(resolution_scale/2.0), 1)
 	el.scale = Vector2(half_scale, half_scale)
-	$DebugLayer.scale = Vector2(half_scale, half_scale)
+	dl.scale = Vector2(half_scale, half_scale)

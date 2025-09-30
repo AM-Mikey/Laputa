@@ -12,9 +12,9 @@ var player_inventory: Array
 
 
 func _ready():
-		var _err = get_tree().root.connect("size_changed", Callable(self, "on_viewport_size_changed"))
-		on_viewport_size_changed()
-		enter()
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
+	enter()
 
 func _input(event):
 	if event.is_action_pressed("inventory") and pc.can_input:
@@ -49,13 +49,17 @@ func _on_Items_item_activated(index):
 		var item = load(item_path)
 		body.text = item.description
 
-func on_viewport_size_changed():
-	var viewport_size = get_tree().get_root().size / world.resolution_scale
+
+
+### SIGNALS ###
+
+func _resolution_scale_changed(resolution_scale):
+	var viewport_size = get_tree().get_root().size / resolution_scale
 	var target_width = 400
 	
 	if target_width > viewport_size.x:
 		size.x = viewport_size.x
 	else:
 		size.x = target_width
-		position.x = (viewport_size.x - target_width) /2
+		position.x = (viewport_size.x - target_width) / 2.0
 	size.y = viewport_size.y

@@ -4,14 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://dllnonvd2winm" path="res://src/UI/Options/ActionOption.tscn" id="2"]
 [ext_resource type="StyleBox" uid="uid://bqcnin0ya0s5l" path="res://src/UI/StyleBox/SteelCorner.tres" id="4"]
 [ext_resource type="Script" uid="uid://rb8u66djacvf" path="res://src/UI/Options/ControllerConfig.gd" id="5"]
-[ext_resource type="Texture2D" uid="uid://diafdejhbs5fg" path="res://assets/UI/Settings/ControllerConfig/FrontBack.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://ds8cfh1qceedo" path="res://assets/UI/Settings/ControllerConfig/TopBack.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://diafdejhbs5fg" path="res://assets/UI/Settings/Outdated/ControllerConfig/FrontBack.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://ds8cfh1qceedo" path="res://assets/UI/Settings/Outdated/ControllerConfig/TopBack.png" id="14"]
 
 [node name="ControllerConfig" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -160.0
 offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1")
 script = ExtResource("5")
 
