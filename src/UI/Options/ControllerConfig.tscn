@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdt0hp441qxe3"]
+[gd_scene load_steps=8 format=3 uid="uid://bdt0hp441qxe3"]
 
 [ext_resource type="Theme" uid="uid://c1np2xna4dogr" path="res://src/UI/Theme/InsetMenu.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://dllnonvd2winm" path="res://src/UI/Options/ActionOption.tscn" id="2"]
 [ext_resource type="StyleBox" uid="uid://bqcnin0ya0s5l" path="res://src/UI/StyleBox/SteelCorner.tres" id="4"]
 [ext_resource type="Script" uid="uid://rb8u66djacvf" path="res://src/UI/Options/ControllerConfig.gd" id="5"]
 [ext_resource type="Texture2D" uid="uid://diafdejhbs5fg" path="res://assets/UI/Settings/Outdated/ControllerConfig/FrontBack.png" id="6"]
+[ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="7_nyot8"]
 [ext_resource type="Texture2D" uid="uid://ds8cfh1qceedo" path="res://assets/UI/Settings/Outdated/ControllerConfig/TopBack.png" id="14"]
 
 [node name="ControllerConfig" type="MarginContainer"]
@@ -197,7 +198,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Corner" type="Panel" parent="."]
-custom_minimum_size = Vector2(128, 48)
+custom_minimum_size = Vector2(124, 44)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 10
@@ -217,6 +218,19 @@ theme_override_constants/margin_bottom = 4
 [node name="HBox" type="HBoxContainer" parent="Corner/Margin"]
 layout_mode = 2
 
+[node name="Reset" type="Button" parent="Corner/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.8, 0.168627, 0.168627, 1)
+theme_override_styles/normal = ExtResource("7_nyot8")
+text = "Reset"
+
 [node name="Return" type="Button" parent="Corner/Margin/HBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.968627, 0.886275, 0.717647, 1)
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.84313726, 0.68235296, 0.53333336, 1)
+theme_override_styles/normal = ExtResource("7_nyot8")
+text = "Return"
+
+[connection signal="pressed" from="Corner/Margin/HBox/Reset" to="." method="on_reset"]
+[connection signal="pressed" from="Corner/Margin/HBox/Return" to="." method="on_return"]

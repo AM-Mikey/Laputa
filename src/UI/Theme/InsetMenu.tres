@@ -77,6 +77,7 @@ ItemList/constants/line_separation = 2
 ItemList/constants/vseparation = 2
 ItemList/styles/bg = ExtResource("4")
 ItemList/styles/bg_focus = ExtResource("4")
+ItemList/styles/panel = ExtResource("4")
 ItemList/styles/selected = ExtResource("29")
 ItemList/styles/selected_focus = ExtResource("28")
 Label/colors/font_color = Color(0.843137, 0.682353, 0.533333, 1)

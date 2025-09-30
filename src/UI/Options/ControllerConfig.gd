@@ -1,7 +1,7 @@
 extends Control
 
 var input_map_path = "user://inputmap.json"
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 var compass_distance = 8
 
@@ -143,31 +143,12 @@ func _setup_action_options():
 #		printerr("ERROR: could not load input map data")
 
 
-
-
-
-
-
-func _on_Default_pressed():
+func on_reset():
 	pass # Replace with function body.
 
 
-
-
-
-
-func _on_Return_pressed():
-	if world.has_node("MenuLayer/PauseMenu"):
-		world.get_node("MenuLayer/PauseMenu").visible = true
-		world.get_node("MenuLayer/PauseMenu").do_focus()
-	if world.has_node("MenuLayer/TitleScreen"):
-		world.get_node("MenuLayer/TitleScreen").visible = true
-		world.get_node("MenuLayer/TitleScreen").do_focus()
-		
-	if world.has_node("MenuLayer/Options"):
-		world.get_node("MenuLayer/Options").queue_free()
-	else:
-		get_parent().queue_free()
+func on_return():
+	w.get_node("MenuLayer/Options").exit()
 
 
 

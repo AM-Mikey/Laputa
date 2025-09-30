@@ -256,6 +256,9 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
 
+[node name="Control" type="Control" parent="Margin/HBox"]
+layout_mode = 2
+
 [node name="Presets" type="VBoxContainer" parent="Margin/HBox"]
 layout_mode = 2
 
@@ -265,11 +268,11 @@ size_flags_horizontal = 3
 text = "Presets:"
 
 [node name="ItemList" type="ItemList" parent="Margin/HBox/Presets"]
-custom_minimum_size = Vector2(128, 0)
+custom_minimum_size = Vector2(111, 0)
 layout_mode = 2
 size_flags_vertical = 3
+allow_search = false
 item_count = 4
-same_column_width = true
 icon_mode = 0
 item_0/text = "Custom"
 item_0/icon = ExtResource("4")
@@ -280,11 +283,11 @@ item_2/icon = ExtResource("2")
 item_3/text = "Left Hand (Keys)"
 
 [node name="Control" type="Control" parent="Margin/HBox/Presets"]
-custom_minimum_size = Vector2(0, 42)
+custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 
 [node name="Corner" type="Panel" parent="."]
-custom_minimum_size = Vector2(128, 48)
+custom_minimum_size = Vector2(124, 44)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 10
@@ -294,7 +297,7 @@ theme_override_styles/panel = ExtResource("9")
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 126.0
+offset_right = 128.0
 offset_bottom = 48.0
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
