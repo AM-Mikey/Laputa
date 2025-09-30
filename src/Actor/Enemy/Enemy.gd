@@ -214,7 +214,7 @@ func do_death_drop():
 			1,2: heart.value = 2
 			3,4,5: heart.value = 4
 			6,7,8,9,10 : heart.value = 8
-		world.middle.add_child(heart)
+		world.middle.call_deferred("add_child", heart)
 	
 	elif drop > heart_chance and drop <= heart_chance + experience_chance: #drop xp
 		var values = [1]
@@ -235,14 +235,14 @@ func do_death_drop():
 			var experience = EXPERIENCE.instantiate()
 			experience.value = v
 			experience.position = global_position
-			world.middle.add_child(experience)
+			world.middle.call_deferred("add_child", experience)
 
 	else: #drop ammo
 		ammo.position = global_position
 		match reward:
 			1,2: ammo.value = 0.2
 			3,4,5,6,7,8,9,10: ammo.value = 0.5
-		world.middle.add_child(ammo)
+		world.middle.call_deferred("add_child", ammo)
 
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dyl8fvraxwivv"]
+[gd_scene load_steps=8 format=3 uid="uid://dyl8fvraxwivv"]
 
 [ext_resource type="PackedScene" uid="uid://b1vehxtueux4l" path="res://src/UI/Options/Settings.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://dqramyf8aeeyv" path="res://src/UI/Options/KeyConfig.tscn" id="2"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://0ac4soyfj6f0" path="res://src/UI/Options/Options.gd" id="5"]
 [ext_resource type="Texture2D" uid="uid://87tihquqgyim" path="res://assets/UI/ArrowRight.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://b2gn2gqrhri0q" path="res://assets/UI/ArrowLeft.png" id="7"]
-[ext_resource type="PackedScene" uid="uid://cocixd0n3hmcm" path="res://src/UI/MenuButton.tscn" id="8"]
 
 [node name="Options" type="MarginContainer"]
 clip_contents = true
@@ -57,11 +56,6 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="Return" parent="VBoxContainer2" instance=ExtResource("8")]
-layout_mode = 2
-size_flags_horizontal = 12
-text = "Return"
-
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 0
@@ -83,4 +77,3 @@ mouse_filter = 2
 texture = ExtResource("6")
 
 [connection signal="tab_changed" from="VBoxContainer2/TabContainer" to="." method="_on_TabContainer_tab_changed"]
-[connection signal="pressed" from="VBoxContainer2/Return" to="." method="_on_Return_pressed"]

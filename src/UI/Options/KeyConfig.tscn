@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqramyf8aeeyv"]
+[gd_scene load_steps=9 format=3 uid="uid://dqramyf8aeeyv"]
 
 [ext_resource type="Theme" uid="uid://c1np2xna4dogr" path="res://src/UI/Theme/InsetMenu.tres" id="1"]
 [ext_resource type="Texture2D" uid="uid://cl3sa7nubis6p" path="res://assets/UI/Settings/KeyboardMouse.png" id="2"]
@@ -6,13 +6,13 @@
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="3_vje3i"]
 [ext_resource type="Texture2D" uid="uid://ccaq53m8l5g3c" path="res://assets/UI/Settings/KeyboardCustom.png" id="4"]
 [ext_resource type="Script" uid="uid://cq6xxd8uisqit" path="res://src/UI/Options/KeyConfig.gd" id="6"]
+[ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="8_rkq2i"]
 [ext_resource type="StyleBox" uid="uid://bqcnin0ya0s5l" path="res://src/UI/StyleBox/SteelCorner.tres" id="9"]
 
 [node name="KeyConfig" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -160.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(-576, -72)
@@ -294,7 +294,7 @@ theme_override_styles/panel = ExtResource("9")
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 128.0
+offset_right = 126.0
 offset_bottom = 48.0
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
@@ -304,6 +304,19 @@ theme_override_constants/margin_bottom = 4
 [node name="HBox" type="HBoxContainer" parent="Corner/Margin"]
 layout_mode = 2
 
+[node name="Reset" type="Button" parent="Corner/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.8, 0.168627, 0.168627, 1)
+theme_override_styles/normal = ExtResource("8_rkq2i")
+text = "Reset"
+
 [node name="Return" type="Button" parent="Corner/Margin/HBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.968627, 0.886275, 0.717647, 1)
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.84313726, 0.68235296, 0.53333336, 1)
+theme_override_styles/normal = ExtResource("8_rkq2i")
+text = "Return"
+
+[connection signal="pressed" from="Corner/Margin/HBox/Reset" to="." method="on_reset"]
+[connection signal="pressed" from="Corner/Margin/HBox/Return" to="." method="on_return"]

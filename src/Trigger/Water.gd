@@ -25,7 +25,7 @@ func _on_Water_body_entered(body):
 		if do_bubbles:
 			var be = BUBBLEEMITTER.instantiate()
 			bubble_emitters[target] = be
-			target.add_child(be)
+			target.call_deferred("add_child", be)
 		
 		var splash = load("res://src/Effect/Splash.tscn").instantiate()
 		splash.position.x = body.global_position.x

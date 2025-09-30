@@ -19,7 +19,8 @@ var default = {
 	"ResolutionScale": 0,
 	"MouseLock": false,
 	}
-var after_ready = false
+var after_ready = false #so we don't trigger a change when loading settings
+var ignore_display_mode = false #so we don't reset the display mode during the options opening mid-game
 
 @onready var w = get_tree().get_root().get_node("World")
 
@@ -59,8 +60,9 @@ func on_displaymode_changed(index: int):
 		3: #maximized
 			win.mode = Window.MODE_MAXIMIZED #TODO: if win is unmaximized, this setting doesnt change
 			win.borderless = false
-	print("display settings changed")
-	save_setting("DisplayMode", index)
+	if after_ready and !w.get_node("MenuLayer/Options").ishidden:
+		print("saving display mode")
+		save_setting("DisplayMode", index)
 
 #func on_resolutionscale_changed(index: int): #not fully implemented
 	#w.viewport_size_ignore = true
@@ -93,52 +95,34 @@ func on_mastervolume_changed(value):
 	var db = get_percent_as_db(value)
 	#print(db)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),db)
-	if not w.get_node("MenuLayer/Options").hidden and after_ready:
+	mastervolume.get_node("Label").text = "Master Volume: Muted" if value == 0 else "Master Volume: %.f" % (value * 10) + "%"
+	if after_ready and !w.get_node("MenuLayer/Options").ishidden:
 		am.play("sound_test", null, "master") #play on master
-	mastervolume.get_node("Label").text = "Master Volume: Muted" if value == 0 else "Master Volume: " + str(value) + "0 %"
-	save_setting("MasterVolume", value)
+		print("saving mv")
+		save_setting("MasterVolume", value)
 
 func on_musicvolume_changed(value):
 	var db = get_percent_as_db(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),db)
-	if not w.get_node("MenuLayer/Options").hidden and after_ready:
-		am.play_sfx("sound_test")
-	musicvolume.get_node("Label").text = "Music Volume: Muted" if value == 0 else "Music Volume: " + str(value) + "0 %"
-	save_setting("MusicVolume", value)
+	musicvolume.get_node("Label").text = "Music Volume: Muted" if value == 0 else "Music Volume: %.f" % (value * 10) + "%"
+	if after_ready and !w.get_node("MenuLayer/Options").ishidden:
+		am.play("sound_test")
+		save_setting("MusicVolume", value)
 
 func on_sfxvolume_changed(value):
 	var db = get_percent_as_db(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),db)
-	if not w.get_node("MenuLayer/Options").hidden and after_ready:
+	sfxvolume.get_node("Label").text = "SFX Volume: Muted" if value == 0 else "SFX Volume: %.f" % (value * 10) + "%"
+	if after_ready and !w.get_node("MenuLayer/Options").ishidden:
 		am.play("sound_test")
-	sfxvolume.get_node("Label").text = "SFX Volume: Muted" if value == 0 else "SFX Volume: " + str(value) + "0 %"
-	save_setting("SFXVolume", value)
+		save_setting("SFXVolume", value)
 
-
-func on_return():
-	if w.has_node("MenuLayer/PauseMenu"):
-		w.get_node("MenuLayer/PauseMenu").visible = true
-		w.get_node("MenuLayer/PauseMenu").do_focus()
-	if w.has_node("MenuLayer/TitleScreen"):
-		w.get_node("MenuLayer/TitleScreen").visible = true
-		w.get_node("MenuLayer/TitleScreen").do_focus()
-		
-	if w.has_node("MenuLayer/Options"):
-		w.get_node("MenuLayer/Options").queue_free()
-	else:
-		get_parent().queue_free()
-
-
-
-
-func on_reset():
-	save_defaults()
-	load_settings()
 
 func on_mouselock(value):
 	if value: Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	else: Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	save_setting("MouseLock", value)
+	if after_ready and !w.get_node("MenuLayer/Options").ishidden:
+		save_setting("MouseLock", value)
 
 func on_deletesave():
 	var files = []
@@ -159,8 +143,10 @@ func on_deletesave():
 	on_reset()
 	deletesave.text = "Done"
 
+
 func on_scrollbar_changed():
 	scroll.get_v_scroll_bar().size.y = scroll.size.y - 48
+
 
 
 ### SAVE/LOAD
@@ -169,11 +155,13 @@ func save_defaults():
 	write_data(default)
 
 func save_setting(setting, setting_value):
+	print("saving setting: ", setting)
 	var data = read_data()
 	data[setting] = setting_value
 	write_data(data)
 
 func load_settings():
+	print("loading settings")
 	var data = read_data()
 	
 	mastervolume.get_node("Slider").value = data["MasterVolume"]
@@ -197,7 +185,6 @@ func write_data(data):
 	if file:
 		file.store_string(var_to_str(data))
 		file.close()
-		print("settings data saved")
 	else:
 		printerr("ERROR: settings data could not be saved!")
 
@@ -214,6 +201,21 @@ func read_data() -> Dictionary:
 	else: 
 		printerr("ERROR: could not load settings data")
 	return data
+
+
+
+### MENU ###
+
+func do_focus():
+	mastervolume.get_node("Slider").grab_focus()
+
+func on_reset():
+	save_defaults()
+	load_settings()
+
+func on_return():
+	w.get_node("MenuLayer/Options").exit()
+
 
 
 ### HELPER GETTERS
@@ -246,9 +248,3 @@ func get_percent_as_db(value) -> float:
 		_: db = 0
 		
 	return db
-
-
-### MISC
-
-func do_focus():
-	mastervolume.get_node("Slider").grab_focus()

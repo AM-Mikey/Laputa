@@ -10,7 +10,6 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -160.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -174,7 +173,7 @@ theme_override_styles/panel = ExtResource("3")
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 128.0
+offset_right = 126.0
 offset_bottom = 48.0
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
@@ -186,13 +185,22 @@ layout_mode = 2
 
 [node name="Reset" type="Button" parent="Corner/Margin/HBox"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.8, 0.168627, 0.168627, 1)
 theme_override_styles/normal = ExtResource("4")
 text = "Reset"
+
+[node name="Return" type="Button" parent="Corner/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.84313726, 0.68235296, 0.53333336, 1)
+theme_override_styles/normal = ExtResource("4")
+text = "Return"
 
 [connection signal="value_changed" from="Margin/Scroll/VBox/MasterVolume/Slider" to="." method="on_mastervolume_changed"]
 [connection signal="value_changed" from="Margin/Scroll/VBox/MusicVolume/Slider" to="." method="on_musicvolume_changed"]
 [connection signal="value_changed" from="Margin/Scroll/VBox/SFXVolume/Slider" to="." method="on_sfxvolume_changed"]
 [connection signal="item_selected" from="Margin/Scroll/VBox/DisplayMode/OptionButton" to="." method="on_displaymode_changed"]
 [connection signal="item_selected" from="Margin/Scroll/VBox/ResolutionScale/OptionButton" to="." method="on_resolutionscale_changed"]
+[connection signal="pressed" from="Corner/Margin/HBox/Reset" to="." method="on_reset"]
+[connection signal="pressed" from="Corner/Margin/HBox/Return" to="." method="on_return"]

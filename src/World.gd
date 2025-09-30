@@ -271,3 +271,4 @@ func _resolution_scale_changed(resolution_scale):
 	var half_scale = max(ceil(resolution_scale/2.0), 1)
 	el.scale = Vector2(half_scale, half_scale)
 	dl.scale = Vector2(half_scale, half_scale)
+	ml.scale = Vector2(vs.menu_resolution_scale, vs.menu_resolution_scale)

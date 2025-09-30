@@ -17,7 +17,7 @@ var active_preset = 0
 @export var ui_focus: NodePath
 @export var preset_path: NodePath
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 var preset_classic = {
 	"jump": KEY_X,
@@ -326,18 +326,13 @@ func set_preset(preset):
 
 
 
-func _on_Return_pressed():
-	if world.has_node("MenuLayer/PauseMenu"):
-		world.get_node("MenuLayer/PauseMenu").visible = true
-		world.get_node("MenuLayer/PauseMenu").do_focus()
-	if world.has_node("MenuLayer/TitleScreen"):
-		world.get_node("MenuLayer/TitleScreen").visible = true
-		world.get_node("MenuLayer/TitleScreen").do_focus()
-		
-	if world.has_node("MenuLayer/Options"):
-		world.get_node("MenuLayer/Options").queue_free()
-	else:
-		get_parent().queue_free()
+### MENU ###
+
+func on_reset():
+	set_preset(1)
+
+func on_return():
+	w.get_node("MenuLayer/Options").exit()
 
 
 func do_focus():
