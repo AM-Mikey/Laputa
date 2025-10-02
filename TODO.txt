@@ -276,3 +276,25 @@ PHYSICS CHANGES TO JUNIPER
 -cleanup longjump
 -45* ceiling slope bug
 -tear out and replace previous ssp detection code
+
+
+-animation code updates
+
+-need system to move to different animation based on previous animations + conditions
+-has system to control which animations sync (groups)
+-need system to insert transition animations (while keeping animation group sync)
+-sort out edge cases and where new animations are needed
+-sort out height setting
+-fix false raycast detection from world by using a raycast start point air check
+
+
+
+
+
+-clean up options ui look
+-keyconfig doesnt work
+-controllerconfig doesnt work
+
+project settings should represent the player's chosen input map? or what? resolve this conflict
+
+
