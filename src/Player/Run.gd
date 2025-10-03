@@ -7,7 +7,7 @@ extends Node
 @onready var guns = pc.get_node("GunManager/Guns")
 @onready var ap = pc.get_node("AnimationPlayer")
 
-var saved_move_dir := Vector2.ZERO #for the 2 frame stand
+#var saved_move_dir := Vector2.ZERO #for the 2 frame stand
 var do_edge_turn: bool
 var push_left_wall := false
 var push_right_wall := false
@@ -17,11 +17,15 @@ func state_process(_delta):
 	set_player_directions()
 	pc.velocity = calc_velocity()
 	
-	if pc.get_node("WallLB").is_colliding() or pc.get_node("WallLT").is_colliding():
+	if Input.is_action_just_pressed("debug_testbutton"):
+		print(pc.get_node("SlopeRightTester").get_collider())
+	
+	if (pc.get_node("WallLB").is_colliding() or pc.get_node("WallLT").is_colliding()) and pc.move_dir.x < 0:
 		push_left_wall = true
 		pc.velocity.x = max(pc.velocity.x, 0)
-	else: push_left_wall = false
-	if pc.get_node("WallRB").is_colliding() or pc.get_node("WallRT").is_colliding():
+	else:
+		push_left_wall = false
+	if (pc.get_node("WallRB").is_colliding() or pc.get_node("WallRT").is_colliding()) and pc.move_dir.x > 0:
 		push_right_wall = true
 		pc.velocity.x = min(pc.velocity.x, 0)
 	else: push_right_wall = false
@@ -84,8 +88,6 @@ func check_shoot_down() -> bool:
 	return out
 
 func animate():
-	#sprite.position = Vector2i(0.0, -16.0)
-	#sprite.gun_pos_offset = Vector2.ZERO
 	var animation = []
 	#var reference_texture
 	
@@ -95,10 +97,10 @@ func animate():
 	var stand_close_right = pc.get_node("StandCloseRight").get_collider()
 	var edge_left = pc.get_node("EdgeLeft").get_collider()
 	var edge_right = pc.get_node("EdgeRight").get_collider()
-	var slight_slope_left = pc.get_node("SlightSlopeLeft").get_collider()
-	var slight_slope_right = pc.get_node("SlightSlopeRight").get_collider()
-	var slope_left = pc.get_node("SlopeLeft").get_collider()
-	var slope_right = pc.get_node("SlopeRight").get_collider()
+	var slight_slope_left = pc.get_node("SlightSlopeLeft").get_collider() and !pc.get_node("SlightSlopeLeftTester").is_colliding()
+	var slight_slope_right = pc.get_node("SlightSlopeRight").get_collider() and !pc.get_node("SlightSlopeRightTester").is_colliding()
+	var slope_left = pc.get_node("SlopeLeft").get_collider() and !pc.get_node("SlopeLeftTester").is_colliding()
+	var slope_right = pc.get_node("SlopeRight").get_collider() and !pc.get_node("SlopeRightTester").is_colliding()
 	
 
 	#var edge_connections = ["edge_turn", "run"]
@@ -114,8 +116,12 @@ func animate():
 	var look_left = pc.look_dir.x == -1.0
 	var look_right = pc.look_dir.x == 1.0
 	
-	var edge_condition = (!absolute_left and !edge_left and !slight_slope_right and !slope_right and absolute_right and look_left) or (absolute_left and !slope_left and !slight_slope_left and !edge_right and !absolute_left and look_right)
-	var stand_condition = (stand_close_left and absolute_right and look_left) or (absolute_left and stand_close_right and look_right) or (absolute_left and edge_right and look_left) or (edge_left and absolute_right and look_right)
+	var edge_condition = (!absolute_left and !edge_left and !slight_slope_right and !slope_right and absolute_right and look_left) or (absolute_left and !slope_left and !slight_slope_left and !edge_right and !absolute_right and look_right)
+	var edge_front_condition = ((absolute_left and !slope_left and !slight_slope_left and !edge_right and !absolute_right and look_left) or (!absolute_left and !edge_left and !slight_slope_right and !slope_right and absolute_right and look_right)) and !do_edge_turn
+	var edge_turn_condition =  ((absolute_left and !slope_left and !slight_slope_left and !edge_right and !absolute_right and look_left) or (!absolute_left and !edge_left and !slight_slope_right and !slope_right and absolute_right and look_right)) and do_edge_turn
+	var stand_condition = ((stand_close_left and absolute_right and look_left) or (absolute_left and stand_close_right and look_right) or (absolute_left and edge_right and look_left) or (edge_left and absolute_right and look_right)) and !pc.is_crouching
+	var crouch_condition = ((stand_close_left and absolute_right and look_left) or (absolute_left and stand_close_right and look_right) or (absolute_left and edge_right and look_left) or (edge_left and absolute_right and look_right)) and pc.is_crouching
+	var stand_close_condition = ((edge_left and !stand_close_left and look_left) or (edge_right and !stand_close_right and look_right)) and !pc.is_crouching
 	
 	var slight_up_condition = (absolute_left and slight_slope_left and !edge_left and !absolute_right and look_left) or (!absolute_left and !edge_right and slight_slope_right and absolute_right and look_right)
 	var slight_down_condition = (!absolute_left and !edge_right and slight_slope_right and absolute_right and look_left) or (absolute_left and slight_slope_left and !edge_left and !absolute_right and look_right)
@@ -126,51 +132,128 @@ func animate():
 		"edge":
 			if edge_condition:
 				animation.append("edge")
-			if (!edge_right and absolute_left and look_left) or (!edge_left and absolute_right and look_right):
+			if edge_front_condition:
+				animation.append("edge_front")
+			if edge_turn_condition:
 				animation.append("edge_turn")
-			if (edge_left and !stand_close_left and look_left) or (edge_right and !stand_close_right and look_right):
+			if stand_close_condition:
 				animation.append("stand_close")
 			
 			if pc.move_dir.x != 0.0 and animation == []: #last case
-				animation.append("run")
+				if pc.is_crouching:
+					animation.append("crouch_run")
+				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+					animation.append("back_run")
+				else:
+					animation.append("run")
+			
+
+		"edge_front":
+			if edge_condition:
+				animation.append("edge")
+			if edge_turn_condition or edge_front_condition:
+				animation.append("edge_front")
+			if stand_close_condition:
+				animation.append("stand_close")
+			if stand_close_left and stand_close_right and !pc.is_crouching: #exception to condition
+				animation.append("stand")
+			if stand_close_left and stand_close_right and pc.is_crouching: #exception to condition
+				animation.append("crouch")
 
 		"edge_turn":
 			if edge_condition:
 				animation.append("edge")
-			if (!stand_close_right and absolute_left and look_left) or (!stand_close_left and absolute_right and look_right):
+			if edge_turn_condition or edge_front_condition:
 				animation.append("edge_turn")
-			if (edge_left and !stand_close_left and look_left) or (edge_right and !stand_close_right and look_right):
+			if stand_close_condition:
 				animation.append("stand_close")
-			if stand_close_left and stand_close_right: #exception to condition
+			if stand_close_left and stand_close_right and !pc.is_crouching: #exception to condition
 				animation.append("stand")
-			
+			if stand_close_left and stand_close_right and pc.is_crouching: #exception to condition
+				animation.append("crouch")
 			
 			if pc.move_dir.x != 0.0 and animation == []: #last case
-				animation.append("run")
+				if pc.is_crouching:
+					animation.append("crouch_run")
+				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+					animation.append("back_run")
+				else:
+					animation.append("run")
+		
 		"stand":
-			if (edge_left and !stand_close_left and look_left) or (edge_right and !stand_close_right and look_right):
+			if stand_close_condition:
 				animation.append("stand_close")
 			
 			if pc.move_dir.x != 0.0 and animation == []: #last case... add room for velocity 
 				if push_left_wall or push_right_wall:
 					animation.append("push")
 				else:
-					animation.append("run")
+					if pc.is_crouching:
+						animation.append("crouch_run")
+					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+						animation.append("back_run")
+					else:
+						animation.append("run")
+			elif pc.move_dir.x == 0.0 and animation == []: #last case number 2
+				if pc.is_crouching:
+					animation.append("crouch")
+				else:
+					animation.append("stand")
+		
+		"crouch":
+			if stand_close_condition:
+				animation.append("stand_close")
+			if pc.move_dir.x != 0.0 and animation == []: #last case... add room for velocity 
+				if push_left_wall or push_right_wall:
+					animation.append("push")
+				else:
+					if pc.is_crouching:
+						animation.append("crouch_run")
+					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+						animation.append("back_run")
+					else:
+						animation.append("run")
+			elif pc.move_dir.x == 0.0 and animation == []: #last case number 2
+				if pc.is_crouching:
+					animation.append("crouch")
+				else:
+					animation.append("stand")
 		
 		"stand_close":
 			if stand_condition:
 				animation.append("stand") #TODO: when this goes to stand it goes right to run next frame if turn to make this happen, before returning to stand.
-			if (edge_left and !stand_close_left and look_left) or (edge_right and !stand_close_right and look_right):
+			if (edge_left and !stand_close_left and look_left) or (edge_right and !stand_close_right and look_right): #exception
 				animation.append("stand_close")
 			if edge_condition:
 				animation.append("edge")
 			
 			if pc.move_dir.x != 0.0 and animation == []: #last case
-				animation.append("run")
+				if pc.is_crouching:
+					animation.append("crouch_run")
+				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+					animation.append("back_run")
+				else:
+					animation.append("run")
+			elif pc.move_dir.x == 0.0 and animation == []: #last case number 2
+				if pc.is_crouching:
+					animation.append("crouch")
+				else:
+					animation.append("stand_close")
 		
 		"push":
 			if pc.move_dir.x == 0.0: #not moving
-				animation.append("stand")
+				if !pc.is_crouching:
+					animation.append("stand")
+				else:
+					animation.append("crouch")
+			else:
+				if !push_left_wall and !push_right_wall:
+					if pc.is_crouching:
+						animation.append("crouch_run")
+					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+						animation.append("back_run")
+					else:
+						animation.append("run")
 	
 		"run":
 			if pc.move_dir.x == 0.0: #not moving
@@ -178,8 +261,14 @@ func animate():
 					animation.append("stand_close")
 				if edge_condition:
 					animation.append("edge")
+				if edge_front_condition:
+					animation.append("edge_front")
+				if edge_turn_condition:
+					animation.append("edge_turn")
 				if stand_condition:
 					animation.append("stand")
+				if crouch_condition:
+					animation.append("crouch")
 				if !absolute_left and !absolute_right:
 					animation.append("stand_peak")
 				if slight_up_condition:
@@ -202,58 +291,225 @@ func animate():
 						animation.append("down_push")
 					else:
 						animation.append("push")
-		
+				else:
+					if pc.is_crouching:
+						animation.append("crouch_run")
+					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+						animation.append("back_run")
+					else:
+						animation.append("run")
+	
+		"back_run":
+			if pc.move_dir.x == 0.0: #not moving
+				if (edge_left and absolute_right and !stand_close_left and look_left) or (absolute_left and edge_right and !stand_close_right and look_right):
+					animation.append("stand_close")
+				if edge_condition:
+					animation.append("edge")
+				if edge_front_condition:
+					animation.append("edge_front")
+				if edge_turn_condition:
+					animation.append("edge_turn")
+				if stand_condition:
+					animation.append("stand")
+				if crouch_condition:
+					animation.append("crouch")
+				if !absolute_left and !absolute_right:
+					animation.append("stand_peak")
+				if slight_up_condition:
+					animation.append("slight_up_slope")
+				if slight_down_condition:
+					animation.append("slight_down_slope")
+				if up_condition:
+					animation.append("up_slope")
+				if down_condition:
+					animation.append("down_slope")
+			else:
+				if push_left_wall or push_right_wall:
+					if slight_up_condition:
+						animation.append("slight_up_push")
+					elif slight_down_condition:
+						animation.append("slight_down_push")
+					elif up_condition:
+						animation.append("up_push")
+					elif down_condition:
+						animation.append("down_push")
+					else:
+						animation.append("push")
+				else:
+					if pc.is_crouching:
+						animation.append("crouch_run")
+					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+						animation.append("back_run")
+					else:
+						animation.append("run")
+	
+		"crouch_run":
+			if pc.move_dir.x == 0.0: #not moving
+				if (edge_left and absolute_right and !stand_close_left and look_left) or (absolute_left and edge_right and !stand_close_right and look_right):
+					animation.append("stand_close")
+				if edge_condition:
+					animation.append("edge")
+				if edge_front_condition:
+					animation.append("edge_front")
+				if edge_turn_condition:
+					animation.append("edge_turn")
+				if stand_condition:
+					animation.append("stand")
+				if crouch_condition:
+					animation.append("crouch")
+				if !absolute_left and !absolute_right:
+					animation.append("stand_peak")
+				if slight_up_condition:
+					animation.append("slight_up_slope")
+				if slight_down_condition:
+					animation.append("slight_down_slope")
+				if up_condition:
+					animation.append("up_slope")
+				if down_condition:
+					animation.append("down_slope")
+			else:
+				if push_left_wall or push_right_wall:
+					if slight_up_condition:
+						animation.append("slight_up_push")
+					elif slight_down_condition:
+						animation.append("slight_down_push")
+					elif up_condition:
+						animation.append("up_push")
+					elif down_condition:
+						animation.append("down_push")
+					else:
+						animation.append("push")
+				else:
+					if pc.is_crouching:
+						animation.append("crouch_run")
+					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+						animation.append("back_run")
+					else:
+						animation.append("run")
+	
 		"stand_peak":
 			if pc.move_dir.x != 0.0 and animation == []: #last case
-				animation.append("run")
+				if pc.is_crouching:
+					animation.append("crouch_run")
+				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+					animation.append("back_run")
+				else:
+					animation.append("run")
 		
 		"slight_up_slope":
+			if edge_condition:
+				animation.append("edge")
+			if edge_turn_condition:
+				animation.append("edge_turn")
 			if pc.move_dir.x != 0.0 and animation == []: #last case
 				if push_left_wall or push_right_wall:
 					animation.append("slight_up_push")
 				else:
-					animation.append("run")
+					if pc.is_crouching:
+						animation.append("crouch_run")
+					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+						animation.append("back_run")
+					else:
+						animation.append("run")
 		
 		"slight_down_slope":
+			if edge_condition:
+				animation.append("edge")
+			if edge_turn_condition:
+				animation.append("edge_turn")
 			if pc.move_dir.x != 0.0 and animation == []: #last case
 				if push_left_wall or push_right_wall:
 					animation.append("slight_down_push")
 				else:
-					animation.append("run")
+					if pc.is_crouching:
+						animation.append("crouch_run")
+					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+						animation.append("back_run")
+					else:
+						animation.append("run")
 		
 		"up_slope":
+			if edge_condition:
+				animation.append("edge")
+			if edge_turn_condition:
+				animation.append("edge_turn")
 			if pc.move_dir.x != 0.0 and animation == []: #last case
 				if push_left_wall or push_right_wall:
 					animation.append("up_push")
 				else:
-					animation.append("run")
+					if pc.is_crouching:
+						animation.append("crouch_run")
+					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+						animation.append("back_run")
+					else:
+						animation.append("run")
 		
 		"down_slope":
+			if edge_condition:
+				animation.append("edge")
+			if edge_turn_condition:
+				animation.append("edge_turn")
 			if pc.move_dir.x != 0.0 and animation == []: #last case
 				if push_left_wall or push_right_wall:
 					animation.append("down_push")
 				else:
-					animation.append("run")
+					if pc.is_crouching:
+						animation.append("crouch_run")
+					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+						animation.append("back_run")
+					else:
+						animation.append("run")
 
 		"slight_up_push":
 			if pc.move_dir.x == 0.0: #not moving
 				animation.append("slight_up_slope")
+			else:
+				if !push_left_wall and !push_right_wall:
+					if pc.is_crouching:
+						animation.append("crouch_run")
+					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+						animation.append("back_run")
+					else:
+						animation.append("run")
 		
 		"slight_down_push":
 			if pc.move_dir.x == 0.0: #not moving
 				animation.append("slight_down_slope")
+			else:
+				if !push_left_wall and !push_right_wall:
+					if pc.is_crouching:
+						animation.append("crouch_run")
+					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+						animation.append("back_run")
+					else:
+						animation.append("run")
 
 		"up_push":
 			if pc.move_dir.x == 0.0: #not moving
 				animation.append("up_slope")
-		
+			else:
+				if !push_left_wall and !push_right_wall:
+					if pc.is_crouching:
+						animation.append("crouch_run")
+					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+						animation.append("back_run")
+					else:
+						animation.append("run")
+
 		"down_push":
 			if pc.move_dir.x == 0.0: #not moving
 				animation.append("down_slope")
+			else:
+				if pc.is_crouching:
+					animation.append("crouch_run")
+				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+					animation.append("back_run")
+				else:
+					animation.append("run")
 	
 	#if pc.direction_lock != Vector2i.ZERO and pc.direction_lock.x != sign(pc.move_dir.x):
 		#animation = "back_run"
-		#reference_texture = preload("res://assets/Player/BackRun.png")
+		#reference_texture = preload("res://assets/Player/back_run.png")
 	#if pc.move_dir.x == 0.0 and saved_move_dir.x == 0.0: #standing
 		#
 		#if (!absolute_left and !absolute_right): #only a middle colliding
@@ -325,19 +581,45 @@ func animate():
 			#animation = "crouch_run"
 			#reference_texture = preload("res://assets/Player/CrouchRun.png")
 
-
 	if animation.is_empty():
 		play_animation(ap.current_animation)
+		if ap.current_animation == "edge":
+			do_edge_turn = true
+		else:
+			do_edge_turn = false
+		
+		if ap.current_animation == "run" or ap.current_animation == "back_run":
+			var is_slight_slope = slight_up_condition or slight_down_condition
+			var is_slope = up_condition or down_condition
+			do_run_animation_offset(is_slight_slope, is_slope)
+		else:
+			sprite.gun_pos_offset = Vector2.ZERO
+			do_animation_sprite_offset(ap.current_animation)
 		return
+	
 	if animation.size() != 1:
 		printerr("ERROR: CONFLICT SETTING RUN ANIMATION FROM ", ap.current_animation, " to ", animation)
 		return
 	#if animation[0] == ap.current_animation:
 		#return
-	do_animation_sprite_offset(animation[0])
+	
+	if animation[0] == "edge":
+		do_edge_turn = true
+	else:
+		do_edge_turn = false
+	
+	if animation[0] == "run" or animation[0] == "back_run":
+		var is_slight_slope = slight_up_condition or slight_down_condition
+		var is_slope = up_condition or down_condition
+		do_run_animation_offset(is_slight_slope, is_slope)
+	else:
+		sprite.gun_pos_offset = Vector2.ZERO
+		do_animation_sprite_offset(animation[0])
+	
+	
 	play_animation(animation[0])
 	
-	saved_move_dir = pc.move_dir #for 2 frame stand
+	#saved_move_dir = pc.move_dir #for 2 frame stand
 
 func do_animation_sprite_offset(animation):
 	var offsets = {
@@ -356,6 +638,24 @@ func do_animation_sprite_offset(animation):
 		sprite.position += offsets[animation]
 
 
+
+func do_run_animation_offset(is_slight_slope, is_slope):
+	var run_offsets = {
+		"is_slight_slope": Vector2(0, 3),
+		"is_slope": Vector2(0, 4),
+	}
+	var offset:= Vector2.ZERO
+	if is_slight_slope:
+		offset = run_offsets["is_slight_slope"]
+	elif is_slope:
+		offset = run_offsets["is_slope"]
+	sprite.position = Vector2i(0.0, -16.0)
+	sprite.position += offset
+	sprite.gun_pos_offset = offset
+	
+	
+
+
 func play_animation(animation):
 	#for runtime, set the frame counts before the animation starts
 	var reference_texture = load("res://assets/Player/" + animation.to_pascal_case() + ".png")
@@ -365,7 +665,7 @@ func play_animation(animation):
 	var do_blending = false
 	
 	var run_group = ["run", "crouch_run", "back_run"]
-	#var edge_group = ["edge", "edge_front"]
+	#var edge_group = ["edge", "edge_front"] #dont blend these
 	var stand_group = ["stand", "stand_close", "push", "crouch", "edge_turn", "up_slope", "down_slope", "slight_up_slope", "slight_down_slope", "stand_peak"]
 	
 	if run_group.has(animation):
