@@ -1,0 +1,196 @@
+[gd_scene load_steps=20 format=3 uid="uid://c0y3jsegk3330"]
+
+[ext_resource type="Texture2D" uid="uid://clhrvetw6ax6h" path="res://assets/Actor/Enemy/Goalie.png" id="1"]
+[ext_resource type="Script" uid="uid://d3h7pxwy2if6w" path="res://src/Actor/Enemy/Outdated/Goalie/Idle.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://qmvnhwivhm4j" path="res://src/Utility/StateMachine.tscn" id="3"]
+[ext_resource type="Script" uid="uid://cgnp13s3abode" path="res://src/Actor/Enemy/Outdated/Goalie/Goalie.gd" id="4"]
+[ext_resource type="Script" uid="uid://bwhf0ctg8u5ho" path="res://src/Actor/Enemy/Outdated/Goalie/Rise.gd" id="5"]
+[ext_resource type="Script" uid="uid://c758j64luap4" path="res://src/Actor/Enemy/Outdated/Goalie/Active.gd" id="6"]
+[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="7"]
+[ext_resource type="Script" uid="uid://bk8sni4bohh65" path="res://src/Actor/Enemy/Outdated/Goalie/Kick.gd" id="8"]
+[ext_resource type="Script" uid="uid://cdeed6oueu0d1" path="res://src/Actor/Enemy/Outdated/Goalie/Fall.gd" id="9"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="10"]
+size = Vector2(16, 8)
+
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(128, 64)
+
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(96, 40)
+
+[sub_resource type="Animation" id="5"]
+resource_name = "Active"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="Animation" id="6"]
+resource_name = "Fall"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [8, 9]
+}
+
+[sub_resource type="Animation" id="7"]
+resource_name = "Idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="8"]
+resource_name = "Kick"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 7]
+}
+
+[sub_resource type="Animation" id="9"]
+resource_name = "Rise"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g0tk0"]
+_data = {
+&"Active": SubResource("5"),
+&"Fall": SubResource("6"),
+&"Idle": SubResource("7"),
+&"Kick": SubResource("8"),
+&"Rise": SubResource("9")
+}
+
+[node name="Goalie" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+collision_layer = 2
+collision_mask = 8
+script = ExtResource("4")
+speed = Vector2(100, 200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("1")
+
+[node name="KickDectector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KickDectector"]
+position = Vector2(-8, -8)
+shape = SubResource("10")
+
+[node name="ActiveDetector" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActiveDetector"]
+modulate = Color(0.992157, 0.992157, 0.992157, 0.156863)
+position = Vector2(0, -64)
+shape = SubResource("3")
+
+[node name="JumpDetector" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpDetector"]
+modulate = Color(0, 0.0156863, 0.937255, 0.392157)
+position = Vector2(0, -72)
+shape = SubResource("4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1")
+hframes = 2
+vframes = 5
+frame = 6
+
+[node name="FireCooldown" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="StateMachine" parent="." instance=ExtResource("3")]
+
+[node name="Label" type="Label" parent="StateMachine"]
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = -16.0
+theme = ExtResource("7")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("2")
+
+[node name="Active" type="Node" parent="StateMachine"]
+script = ExtResource("6")
+
+[node name="Rise" type="Node" parent="StateMachine"]
+script = ExtResource("5")
+
+[node name="Kick" type="Node" parent="StateMachine"]
+script = ExtResource("8")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("9")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g0tk0")
+}
+
+[connection signal="body_entered" from="KickDectector" to="." method="_on_KickDectector_body_entered"]
+[connection signal="body_entered" from="ActiveDetector" to="." method="_on_ActiveDetector_body_entered"]
+[connection signal="body_exited" from="ActiveDetector" to="." method="_on_ActiveDetector_body_exited"]
+[connection signal="body_entered" from="JumpDetector" to="." method="_on_JumpDetector_body_entered"]

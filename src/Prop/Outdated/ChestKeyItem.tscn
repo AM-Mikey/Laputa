@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://bedbx1wsm7g0j"]
+
+[ext_resource type="Script" uid="uid://nlae4x8toysd" path="res://src/Prop/Outdated/ChestKeyItem.gd" id="2"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 16)
+
+[sub_resource type="Resource" id="Resource_0wr36"]
+metadata/__load_path__ = "res://assets/Prop/Chest.png"
+
+[sub_resource type="Animation" id="2"]
+resource_name = "Shine"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 0, 0, 1, 2, 0]
+}
+
+[sub_resource type="Animation" id="3"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v2wcl"]
+_data = {
+&"Shine": SubResource("2"),
+&"Used": SubResource("3")
+}
+
+[node name="Chest" type="Area2D" groups=["LimitedProps"]]
+script = ExtResource("2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = SubResource("Resource_0wr36")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_v2wcl")
+}
+autoplay = "Shine"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

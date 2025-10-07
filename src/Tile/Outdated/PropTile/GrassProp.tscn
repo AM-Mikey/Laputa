@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://bobk02abpvqe7"]
+
+[ext_resource type="Texture2D" uid="uid://dx7ierggn1adt" path="res://assets/Tile/PropTile/GrassProp.png" id="1"]
+[ext_resource type="Script" uid="uid://r85yblauggo6" path="res://src/Tile/Outdated/PropTile/GrassProp.gd" id="2"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bufi6"]
+texture = ExtResource("1")
+texture_region_size = Vector2i(16, 32)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[sub_resource type="TileSet" id="1"]
+tile_size = Vector2i(16, 32)
+sources/0 = SubResource("TileSetAtlasSource_bufi6")
+
+[node name="GrassProp" type="TileMap"]
+tile_set = SubResource("1")
+cell_size = Vector2(16, 16)
+collision_layer = 0
+collision_mask = 0
+format = 1
+script = ExtResource("2")

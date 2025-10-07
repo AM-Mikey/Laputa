@@ -1,0 +1,125 @@
+[gd_scene load_steps=10 format=3 uid="uid://cm5f2aq7nngxx"]
+
+[ext_resource type="PackedScene" uid="uid://dnp411d6d8mqr" path="res://src/UI/MoneyNumber.tscn" id="1"]
+[ext_resource type="Script" uid="uid://c70o0iq5jxxfo" path="res://src/Prop/Outdated/ShopItem.gd" id="2"]
+[ext_resource type="AudioStream" uid="uid://ciuq2urt4n7eb" path="res://assets/SFX/Placeholder/snd_get_item.ogg" id="4"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(32, 32)
+
+[sub_resource type="Resource" id="Resource_divro"]
+metadata/__load_path__ = "res://assets/Item/Necklace.png"
+
+[sub_resource type="Animation" id="2"]
+resource_name = "DisplayNoPrice"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MoneyNumber:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="3"]
+resource_name = "DisplayPrice"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MoneyNumber:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="4"]
+resource_name = "Used"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MoneyNumber:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e0fny"]
+_data = {
+&"DisplayNoPrice": SubResource("2"),
+&"DisplayPrice": SubResource("3"),
+&"Used": SubResource("4")
+}
+
+[node name="ShopItem" type="Area2D" groups=["Containers"]]
+script = ExtResource("2")
+
+[node name="MoneyNumber" parent="." instance=ExtResource("1")]
+position = Vector2(0, -40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+texture = SubResource("Resource_divro")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_e0fny")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4")
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="_on_ShopItem_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_ShopItem_body_exited"]

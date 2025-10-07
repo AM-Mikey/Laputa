@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyev11w3iwrq7"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l7oq5"]
+
+[sub_resource type="TileSet" id="2"]
+sources/0 = SubResource("TileSetAtlasSource_l7oq5")
+
+[node name="Navigation" type="TileMap"]
+tile_set = SubResource("2")
+cell_size = Vector2(16, 16)
+format = 1

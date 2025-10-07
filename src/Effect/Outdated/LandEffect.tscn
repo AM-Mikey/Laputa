@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://x1vbmf7hyq2g"]
+
+[ext_resource type="Script" uid="uid://oh2nvxa45xe3" path="res://src/Effect/Outdated/LandEffect.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bnh31gdq0gim4" path="res://assets/Effect/Land.png" id="2"]
+
+[sub_resource type="Animation" id="1"]
+resource_name = "Land"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [0, 3]
+}
+
+[node name="LandEffect" type="Node2D"]
+script = ExtResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2")
+hframes = 4
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Land = SubResource("1")

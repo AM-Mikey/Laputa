@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://1lcw35654gnj"]
+
+[ext_resource type="Texture2D" uid="uid://jjyq7h7e0qih" path="res://assets/Gun/MPistol.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://p1k84i4nwdsn" path="res://assets/Gun/MPistolIcon.png" id="2"]
+[ext_resource type="AudioStream" uid="uid://b33dx0bdepvp2" path="res://assets/SFX/Placeholder/snd_polar_star_l1_2.ogg" id="3"]
+[ext_resource type="Script" uid="uid://qqislb6uulj1" path="res://src/Gun/Outdated/Weapon.gd" id="4"]
+[ext_resource type="PackedScene" uid="uid://bhva2utltbwbv" path="res://src/Bullet/BulletGreaseGun.tscn" id="5"]
+
+[resource]
+resource_name = "MachinePistol1"
+script = ExtResource("4")
+display_name = "Grease Gun"
+description = "debug"
+texture = ExtResource("1")
+icon_texture = ExtResource("2")
+audio_stream = ExtResource("3")
+bullet_scene = ExtResource("5")
+damage = 1
+projectile_range = 150
+projectile_speed = 400
+cooldown_time = 0.2
+automatic = true
+needs_ammo = false
+ammo = 0
+max_ammo = 0
+xp = 0
+max_xp = 20
+level = 1
+max_level = 1

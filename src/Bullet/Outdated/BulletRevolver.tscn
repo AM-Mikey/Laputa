@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://fot8gfqtpq7f"]
+
+[ext_resource type="Script" uid="uid://c4fyyrhpqbl1u" path="res://src/Bullet/BulletRevolver.gd" id="1"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(1, 8)
+
+[sub_resource type="Resource" id="Resource_q58aa"]
+metadata/__load_path__ = "res://assets/Bullet/BulletPolarStar.png"
+
+[node name="BulletPolarStar" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1")
+
+[node name="CollisionDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
+position = Vector2(0, 8)
+shape = SubResource("1")
+
+[node name="End" type="Marker2D" parent="."]
+position = Vector2(0, 16)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+position = Vector2(4.76837e-07, 8)
+scale = Vector2(0.1, 0.8)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 8)
+texture = SubResource("Resource_q58aa")
+hframes = 3
+
+[connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]

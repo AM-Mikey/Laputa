@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://eoah43mp5yo8"]
+
+[ext_resource type="Texture2D" uid="uid://b7puntitab4qd" path="res://assets/Prop/SaveDisk.png" id="1"]
+[ext_resource type="Script" uid="uid://bwn6q2qrnygr3" path="res://src/Prop/Outdated/SaveDisk.gd" id="3"]
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="1"]
+resource_name = "Spin"
+length = 1.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 27]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q8gjm"]
+_data = {
+&"Spin": SubResource("1")
+}
+
+[node name="SaveDisk" type="Area2D"]
+collision_layer = 0
+script = ExtResource("3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1")
+hframes = 28
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_q8gjm")
+}
+autoplay = "Spin"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

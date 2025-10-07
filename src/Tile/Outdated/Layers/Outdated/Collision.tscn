@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://o643wvddf4k4"]
+
+[node name="Collision" type="TileMap"]
+cell_size = Vector2(16, 16)
+collision_layer = 8
+collision_mask = 0
+format = 1
