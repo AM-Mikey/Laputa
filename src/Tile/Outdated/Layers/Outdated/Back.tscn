@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://ggybs3bw4ip0"]
-
-[node name="Back" type="TileMap"]
-cell_size = Vector2(16, 16)
-collision_layer = 0
-collision_mask = 0
-format = 1
