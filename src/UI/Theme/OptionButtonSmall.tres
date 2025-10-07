@@ -3,7 +3,7 @@
 [ext_resource type="StyleBox" uid="uid://nvs48gdh8bwm" path="res://src/UI/StyleBox/LeatherDark.tres" id="1"]
 [ext_resource type="StyleBox" uid="uid://ctw8lx7pcj6kl" path="res://src/UI/StyleBox/Leather.tres" id="3"]
 [ext_resource type="StyleBox" uid="uid://dbafhti4g7dp4" path="res://src/UI/StyleBox/LeatherLight.tres" id="4"]
-[ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momo.ttf" id="4_kdako"]
+[ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="4_kdako"]
 
 [sub_resource type="ImageTexture" id="1"]
 
