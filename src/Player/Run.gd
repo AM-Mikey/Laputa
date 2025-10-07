@@ -128,6 +128,11 @@ func animate():
 	var up_condition = (absolute_left and slope_left and !edge_left and !absolute_right and look_left) or (!absolute_left and !edge_right and slope_right and absolute_right and look_right)
 	var down_condition = (!absolute_left and !edge_right and slope_right and absolute_right and look_left) or (absolute_left and slope_left and !edge_left and !absolute_right and look_right)
 	
+	#slope crouch prevention
+	if slight_up_condition or slight_down_condition or up_condition or down_condition:
+		pc.forbid_crouching = true
+	else: pc.forbid_crouching = false
+	
 	match ap.current_animation: #do not use elif here
 		"edge":
 			if edge_condition:

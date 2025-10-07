@@ -100,7 +100,7 @@ func land():
 	world.get_node("Front").add_child(effect)
 	
 func jump():
-	if pc.is_forced_crouching: return
+	if pc.is_crouching: return
 	snap_vector = Vector2.ZERO
 	change_state("jump")
 	# Coyote Time debug
@@ -158,29 +158,28 @@ func align_to_proper_y():
 ### SIGNALS ###
 
 func _on_CrouchDetector_body_entered(_body):
-	pc.is_forced_crouching = true
-	pc.is_crouching = true
-	if current_state != states["run"]: return
-	
-	var disable = [
-		pc.get_node("CollisionShape2D"),
-		pc.get_node("Hurtbox/CollisionShape2D")]
-	var enable = [
-		pc.get_node("CrouchingCollision"),
-		pc.get_node("Hurtbox/CrouchingCollision")]
-	disable_collision_shapes(disable)
-	enable_collision_shapes(enable)
+	if !pc.forbid_crouching:
+		pc.is_crouching = true
+		if current_state != states["run"]: return
+		
+		var disable = [
+			pc.get_node("CollisionShape2D"),
+			pc.get_node("Hurtbox/CollisionShape2D")]
+		var enable = [
+			pc.get_node("CrouchingCollision"),
+			pc.get_node("Hurtbox/CrouchingCollision")]
+		disable_collision_shapes(disable)
+		enable_collision_shapes(enable)
 	
 
 func _on_CrouchDetector_body_exited(_body):
-	pc.is_forced_crouching = false
-	#if not Input.is_action_pressed("look_down") and pc.can_input: for if we have manual crouching
-	pc.is_crouching = false
-	if current_state != states["run"]: return
-	pc.get_node("CollisionShape2D").set_deferred("disabled", false)
-	pc.get_node("CrouchingCollision").set_deferred("disabled", true)
-	pc.get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", false)
-	pc.get_node("Hurtbox/CrouchingCollision").set_deferred("disabled", true)
+	if pc.is_crouching:
+		pc.is_crouching = false
+		if current_state != states["run"]: return
+		pc.get_node("CollisionShape2D").set_deferred("disabled", false)
+		pc.get_node("CrouchingCollision").set_deferred("disabled", true)
+		pc.get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", false)
+		pc.get_node("Hurtbox/CrouchingCollision").set_deferred("disabled", true)
 
 
 func _on_CoyoteTimer_timeout():
