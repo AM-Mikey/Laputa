@@ -97,13 +97,24 @@ func animate(delta):
 	var stand_close_right = pc.get_node("StandCloseRight").get_collider()
 	var edge_left = pc.get_node("EdgeLeft").get_collider()
 	var edge_right = pc.get_node("EdgeRight").get_collider()
-	var slight_slope_left = pc.get_node("SlightSlopeLeft").get_collider() and !pc.get_node("SlightSlopeLeftTester").is_colliding()
-	var slight_slope_right = pc.get_node("SlightSlopeRight").get_collider() and !pc.get_node("SlightSlopeRightTester").is_colliding()
 	var slope_left = pc.get_node("SlopeLeft").get_collider() and !pc.get_node("SlopeLeftTester").is_colliding()
 	var slope_right = pc.get_node("SlopeRight").get_collider() and !pc.get_node("SlopeRightTester").is_colliding()
+	
+	#var right_edge_falls = pc.get_node("RightEdgeFalls").get_collider()
+	#var left_edge_falls = pc.get_node("LeftEdgeFalls").get_collider()
+
 	var edge_is_slope = pc.get_node("EdgeIsSlope").get_collider()
 	var edge_is_slight_slope = pc.get_node("EdgeIsSlightSlope").get_collider()
 	
+	
+	### part 2, combining these for conditions always grouped together
+
+	var ssl_par = pc.get_node("SlightSlopeLeft") #left/right refers to slope start point not look dir
+	var slight_up_slope_left = pc.get_node("AbsoluteLeft").is_colliding() && ssl_par.get_node("A").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterA").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
+	var slight_down_slope_left = pc.get_node("AbsoluteLeft").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
+	ssl_par = pc.get_node("SlightSlopeRight")
+	var slight_up_slope_right = pc.get_node("AbsoluteRight").is_colliding() && ssl_par.get_node("A").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterA").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
+	var slight_down_slope_right = pc.get_node("AbsoluteRight").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
 
 	#var edge_connections = ["edge_turn", "run"]
 	#var edge_turn_connections = ["edge", "run"]
@@ -118,28 +129,40 @@ func animate(delta):
 	var look_left = pc.look_dir.x == -1.0
 	var look_right = pc.look_dir.x == 1.0
 	
+			#"edge": ((!absolute_left and !edge_left and !slope_right and absolute_right and look_left && !left_edge_falls) \
+				#or (absolute_left and !slope_left and !edge_right and !absolute_right and look_right && !right_edge_falls)) && !edge_is_slight_slope,
+		#"edge_front": ((absolute_left and !slope_left and !edge_right and !absolute_right and look_left && !right_edge_falls) \
+				#or (!absolute_left and !edge_left and !slope_right and absolute_right and look_right && !left_edge_falls)) && !do_edge_turn && !edge_is_slight_slope,
+		#"edge_turn": ((absolute_left and !slope_left and !edge_right and !absolute_right and look_left && !right_edge_falls) \
+				#or (!absolute_left and !edge_left and !slope_right and absolute_right and look_right && !left_edge_falls)) && do_edge_turn && !edge_is_slight_slope,
+	
+	
+	
 	var conditions = {
-		"edge": ((!absolute_left and !edge_left and !slight_slope_right and !slope_right and absolute_right and look_left) or (absolute_left and !slope_left and !slight_slope_left and !edge_right and !absolute_right and look_right)) and !edge_is_slope,
-		"edge_front": ((absolute_left and !slope_left and !slight_slope_left and !edge_right and !absolute_right and look_left) or (!absolute_left and !edge_left and !slight_slope_right and !slope_right and absolute_right and look_right)) and !do_edge_turn and !edge_is_slope,
-		"edge_turn": ((absolute_left and !slope_left and !slight_slope_left and !edge_right and !absolute_right and look_left) or (!absolute_left and !edge_left and !slight_slope_right and !slope_right and absolute_right and look_right)) and do_edge_turn and !edge_is_slope,
+		"edge": ((!absolute_left and !edge_left and !slope_right and absolute_right and look_left && !slight_down_slope_right) \
+				or (absolute_left and !slope_left and !edge_right and !absolute_right and look_right && !slight_down_slope_left)),
+		"edge_front": ((absolute_left and !slope_left and !edge_right and !absolute_right and look_left && !slight_up_slope_left) \
+				or (!absolute_left and !edge_left and !slope_right and absolute_right and look_right && !slight_up_slope_right)) && !do_edge_turn  && !edge_is_slope,
+		"edge_turn": ((absolute_left and !slope_left and !edge_right and !absolute_right and look_left && !slight_up_slope_left) \
+				or (!absolute_left and !edge_left and !slope_right and absolute_right and look_right && !slight_up_slope_right)) && do_edge_turn  && !edge_is_slope,
 		"stand": \
-			(stand_close_left and stand_close_right and look_left) or (stand_close_left and stand_close_right and look_right) \
-			#or (absolute_left and edge_right and look_left) or (edge_left and absolute_right and look_right)) \
-			and !pc.is_crouching,
+			(stand_close_left and edge_right and look_left) or (edge_left and stand_close_right and look_right) and !pc.is_crouching,
 		"crouch": ((stand_close_left and absolute_right and look_left) or (absolute_left and stand_close_right and look_right) or (absolute_left and edge_right and look_left) or (edge_left and absolute_right and look_right)) and pc.is_crouching,
 		"stand_close": ((edge_left and !stand_close_left and look_left) or (edge_right and !stand_close_right and look_right)) and !pc.is_crouching,
 		"stand_close_run_exception": (edge_left and absolute_right and !stand_close_left and look_left) or (absolute_left and edge_right and !stand_close_right and look_right),
-		"slight_up": ((absolute_left and !stand_close_left and slight_slope_left and !edge_left and !absolute_right and look_left) or (!absolute_left and !edge_right and slight_slope_right and !stand_close_right and absolute_right and look_right)), #and edge_is_slight_slope,
-		"slight_down": (!absolute_left and !edge_right and slight_slope_right and absolute_right and look_left) or (absolute_left and slight_slope_left and !edge_left and !absolute_right and look_right),
+		
+		"slight_up_slope": (slight_up_slope_left && look_left) || (slight_up_slope_right && look_right),
+		"slight_down_slope": (slight_down_slope_right && look_left) || (slight_down_slope_left && look_right),
 		"up": (absolute_left and slope_left and !edge_left and !absolute_right and look_left) or (!absolute_left and !edge_right and slope_right and absolute_right and look_right),
 		"down": (!absolute_left and !edge_right and slope_right and absolute_right and look_left) or (absolute_left and slope_left and !edge_left and !absolute_right and look_right),
-		"stand_to_up": ((absolute_left and !slope_left and !stand_close_right and look_left) or (!stand_close_left and !slope_right and stand_close_right and look_right)), #and edge_is_slope and !edge_is_slight_slope,
+		"stand_to_up_slope": ((absolute_left and !slope_left and !stand_close_right and look_left) \
+					or (!stand_close_left and !slope_right and stand_close_right and look_right)) && edge_is_slope
 	}
 
 	
 	
 	#slope crouch prevention
-	if conditions["slight_up"] or conditions["slight_down"] or conditions["up"] or conditions["down"]:
+	if conditions["slight_up_slope"] or conditions["slight_down_slope"] or conditions["up"] or conditions["down"]:
 		pc.forbid_crouching = true
 	else: pc.forbid_crouching = false
 	
@@ -153,6 +176,8 @@ func animate(delta):
 				animation.append("edge_turn")
 			if conditions["stand_close"]:
 				animation.append("stand_close")
+			if conditions["slight_down_slope"]:
+				animation.append("slight_down_slope")
 			
 			if pc.move_dir.x != 0.0 and animation == []: #last case
 				if pc.is_crouching:
@@ -174,6 +199,8 @@ func animate(delta):
 				animation.append("stand")
 			if stand_close_left and stand_close_right and pc.is_crouching: #exception to condition
 				animation.append("crouch")
+			if conditions["slight_up_slope"]:
+				animation.append("slight_up_slope")
 
 		"edge_turn":
 			if conditions["edge"]:
@@ -186,6 +213,8 @@ func animate(delta):
 				animation.append("stand")
 			if stand_close_left and stand_close_right and pc.is_crouching: #exception to condition
 				animation.append("crouch")
+			if conditions["slight_up_slope"]:
+				animation.append("slight_up_slope")
 			
 			if pc.move_dir.x != 0.0 and animation == []: #last case
 				if pc.is_crouching:
@@ -326,7 +355,7 @@ func animate(delta):
 				animation.append("edge")
 			if conditions["edge_turn"]:
 				animation.append("edge_turn")
-			if conditions["stand_to_up"]:
+			if conditions["stand_to_up_slope"]:
 				animation.append("stand_to_up_slope")
 			if pc.move_dir.x != 0.0 and animation == []: #last case
 				if push_left_wall or push_right_wall:
@@ -406,7 +435,7 @@ func animate(delta):
 			if pc.move_dir.x == 0.0: #not moving
 				if conditions["stand"]:
 					animation.append("stand")
-				if conditions["stand_to_up"]:
+				if conditions["stand_to_up_slope"]:
 					animation.append("stand_to_up_slope")
 			else:
 				if pc.is_crouching:
@@ -461,21 +490,21 @@ func run_tree(conditions) -> Array:
 			out.append("crouch")
 		#if !absolute_left and !absolute_right:
 			#out.append("stand_peak")
-		#if conditions["slight_up"]:
-			#out.append("slight_up_slope")
-		#if conditions["slight_down"]:
-			#out.append("slight_down_slope")
+		if conditions["slight_up_slope"]:
+			out.append("slight_up_slope")
+		if conditions["slight_down_slope"]:
+			out.append("slight_down_slope")
 		if conditions["up"]:
 			out.append("up_slope")
 		if conditions["down"]:
 			out.append("down_slope")
-		if conditions["stand_to_up"]:
+		if conditions["stand_to_up_slope"]:
 			out.append("stand_to_up_slope")
 	else:
 		if push_left_wall or push_right_wall:
-			if conditions["slight_up"]:
+			if conditions["slight_up_slope"]:
 				out.append("slight_up_push")
-			elif conditions["slight_down"]:
+			elif conditions["slight_down_slope"]:
 				out.append("slight_down_push")
 			elif conditions["up"]:
 				out.append("up_push")
@@ -497,7 +526,7 @@ func run_tree(conditions) -> Array:
 
 func check_if_offset(animation, conditions, delta):
 	if animation == "run" or animation == "back_run":
-		var is_slight_slope = conditions["slight_up"] or conditions["slight_down"]
+		var is_slight_slope = conditions["slight_up_slope"] or conditions["slight_down_slope"]
 		var is_slope = conditions["up"] or conditions["down"]
 		do_run_animation_offset(is_slight_slope, is_slope, delta)
 	else:
@@ -520,7 +549,7 @@ func do_animation_sprite_offset(animation, delta):
 	
 	if offsets.has(animation): #only works if these lerp animations can't become eachother as we never reset sprite.position
 		if offsets[animation] is Array:
-			var t = calc_stand_to_slope_lerp_delta()
+			var t = calc_stand_to_slope_lerp_delta(Vector2(pc.look_dir.x, 0))
 			var translation = offsets[animation][0].lerp(offsets[animation][1], t) #interpolated
 			var final_position = Vector2(0, -16) + translation
 			var speed = 20.0
@@ -550,39 +579,33 @@ func do_run_animation_offset(is_slight_slope, is_slope, delta):
 	sprite.gun_pos_offset = sprite.position - Vector2(0, -16)
 
 
-func calc_stand_to_slope_lerp_delta() -> float: #try with half of these since we can lerp
+func calc_stand_to_slope_lerp_delta(direction) -> float: #try with half of these since we can lerp
 	var out = 0.0
 	var par = pc.get_node("StandToSlopeLerpDelta")
-	if par.get_node("5").is_colliding(): out = 0.05
-	if par.get_node("10").is_colliding(): out = 0.1
-	if par.get_node("15").is_colliding(): out = 0.15
-	if par.get_node("20").is_colliding(): out = 0.2
-	if par.get_node("25").is_colliding(): out = 0.25
-	if par.get_node("30").is_colliding(): out = 0.3
-	if par.get_node("35").is_colliding(): out = 0.35
-	if par.get_node("40").is_colliding(): out = 0.4
-	if par.get_node("45").is_colliding(): out = 0.45
-	if par.get_node("50").is_colliding(): out = 0.5
-	if par.get_node("55").is_colliding(): out = 0.55
-	if par.get_node("60").is_colliding(): out = 0.6
-	if par.get_node("65").is_colliding(): out = 0.65
-	if par.get_node("70").is_colliding(): out = 0.7
-	if par.get_node("75").is_colliding(): out = 0.75
-	if par.get_node("80").is_colliding(): out = 0.8
-	if par.get_node("85").is_colliding(): out = 0.85
-	if par.get_node("90").is_colliding(): out = 0.9
-	if par.get_node("95").is_colliding(): out = 0.95
-	if par.get_node("100").is_colliding(): out = 1.0
 	
 	
-	
-	
-	
-	
-	
-	
-	
-
+	if direction == Vector2.LEFT:
+		if par.get_node("A").is_colliding(): out = 0.1
+		if par.get_node("B").is_colliding(): out = 0.2
+		if par.get_node("C").is_colliding(): out = 0.3
+		if par.get_node("D").is_colliding(): out = 0.4
+		if par.get_node("E").is_colliding(): out = 0.5
+		if par.get_node("F").is_colliding(): out = 0.6
+		if par.get_node("G").is_colliding(): out = 0.7
+		if par.get_node("H").is_colliding(): out = 0.8
+		if par.get_node("I").is_colliding(): out = 0.9
+		if par.get_node("J").is_colliding(): out = 1.0
+	elif direction == Vector2.RIGHT:
+		if par.get_node("K").is_colliding(): out = 0.1
+		if par.get_node("J").is_colliding(): out = 0.2
+		if par.get_node("I").is_colliding(): out = 0.3
+		if par.get_node("H").is_colliding(): out = 0.4
+		if par.get_node("G").is_colliding(): out = 0.5
+		if par.get_node("F").is_colliding(): out = 0.6
+		if par.get_node("E").is_colliding(): out = 0.7
+		if par.get_node("D").is_colliding(): out = 0.8
+		if par.get_node("C").is_colliding(): out = 0.9
+		if par.get_node("B").is_colliding(): out = 1.0
 	return out
 
 func play_animation(animation):
@@ -595,7 +618,7 @@ func play_animation(animation):
 	
 	var run_group = ["run", "crouch_run", "back_run"]
 	#var edge_group = ["edge", "edge_front"] #dont blend these
-	var stand_group = ["stand", "stand_close", "push", "crouch", "edge_turn", "up_slope", "down_slope", "slight_up_slope", "slight_down_slope", "stand_peak"]
+	var stand_group = ["stand", "stand_close", "push", "crouch", "edge_turn", "up_slope", "down_slope", "slight_up_slope", "slight_down_slope", "stand_peak", "stand_to_up_slope"]
 	
 	if run_group.has(animation):
 		ap.speed_scale = max((abs(pc.velocity.x)/mm.speed.x) * 2.0, 0.1)
