@@ -91,96 +91,108 @@ func animate(delta):
 	var animation = []
 	#var reference_texture
 	
-	var absolute_left = pc.get_node("AbsoluteLeft").get_collider()
-	var absolute_right = pc.get_node("AbsoluteRight").get_collider()
-	var almost_absolute_left = pc.get_node("AlmostAbsoluteLeft").get_collider()
-	var almost_absolute_right = pc.get_node("AlmostAbsoluteRight").get_collider()
-	var stand_close_left = pc.get_node("StandCloseLeft").get_collider()
-	var stand_close_right = pc.get_node("StandCloseRight").get_collider()
-	var edge_left = pc.get_node("EdgeLeft").get_collider()
-	var edge_right = pc.get_node("EdgeRight").get_collider()
-	#var slope_left = pc.get_node("SlopeLeft").get_collider() and !pc.get_node("SlopeLeftTester").is_colliding()
-	#var slope_right = pc.get_node("SlopeRight").get_collider() and !pc.get_node("SlopeRightTester").is_colliding()
-	
-	#var right_edge_falls = pc.get_node("RightEdgeFalls").get_collider()
-	#var left_edge_falls = pc.get_node("LeftEdgeFalls").get_collider()
-
-	var left_edge_is_slope = pc.get_node("LeftEdgeIsSlope").get_collider()
-	var left_edge_is_slight_slope = pc.get_node("LeftEdgeIsSlightSlope").get_collider()
-	var right_edge_is_slope = pc.get_node("RightEdgeIsSlope").get_collider()
-	var right_edge_is_slight_slope = pc.get_node("RightEdgeIsSlightSlope").get_collider()
+	var absolute_left = pc.get_node("AbsoluteLeft").is_colliding()
+	var absolute_right = pc.get_node("AbsoluteRight").is_colliding()
+	#var almost_absolute_left = pc.get_node("AlmostAbsoluteLeft").is_colliding()
+	#var almost_absolute_right = pc.get_node("AlmostAbsoluteRight").is_colliding()
+	var stand_close_left = pc.get_node("StandCloseLeft").is_colliding()
+	var stand_close_right = pc.get_node("StandCloseRight").is_colliding()
+	var edge_left = pc.get_node("EdgeLeft").is_colliding()
+	var edge_right = pc.get_node("EdgeRight").is_colliding()
+	var left_edge_is_slope = pc.get_node("LeftEdgeIsSlope").is_colliding()
+	#var left_edge_is_slight_slope = pc.get_node("LeftEdgeIsSlightSlope").is_colliding()
+	var right_edge_is_slope = pc.get_node("RightEdgeIsSlope").is_colliding()
+	#var right_edge_is_slight_slope = pc.get_node("RightEdgeIsSlightSlope").is_colliding()
 	
 	
 	### part 2, combining these for conditions always grouped together
 
-	var ssl_par = pc.get_node("SlightSlopeLeft") #left/right refers to slope start point not look dir
-	var slight_up_slope_left = pc.get_node("AbsoluteLeft").is_colliding() && ssl_par.get_node("A").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterA").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
-	var slight_down_slope_left = pc.get_node("AbsoluteLeft").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
-	ssl_par = pc.get_node("SlightSlopeRight")
-	var slight_up_slope_right = pc.get_node("AbsoluteRight").is_colliding() && ssl_par.get_node("A").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterA").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
-	var slight_down_slope_right = pc.get_node("AbsoluteRight").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
-	ssl_par = pc.get_node("SlopeLeft")
-	var up_slope_left = pc.get_node("AbsoluteLeft").is_colliding() && ssl_par.get_node("A").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterA").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
-	var down_slope_left = pc.get_node("AbsoluteLeft").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
-	ssl_par = pc.get_node("SlopeRight")
-	var up_slope_right = pc.get_node("AbsoluteRight").is_colliding() && ssl_par.get_node("A").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterA").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
-	var down_slope_right = pc.get_node("AbsoluteRight").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
+	#var ssl_par = pc.get_node("SlightSlopeLeft") #left/right refers to slope start point not look dir
+	#var slight_slope_left = pc.get_node("AbsoluteLeft").is_colliding() && ssl_par.get_node("A").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterA").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
+	#ssl_par = pc.get_node("SlightSlopeRight")
+	#var slight_slope_right = pc.get_node("AbsoluteRight").is_colliding() && ssl_par.get_node("A").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterA").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
+	#ssl_par = pc.get_node("SlopeLeft")
+	#var slope_left = pc.get_node("AbsoluteLeft").is_colliding() && ssl_par.get_node("A").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterA").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
+	#ssl_par = pc.get_node("SlopeRight")
+	#var slope_right = pc.get_node("AbsoluteRight").is_colliding() && ssl_par.get_node("A").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterA").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
 
-	#var edge_connections = ["edge_turn", "run"]
-	#var edge_turn_connections = ["edge", "run"]
-	#var connected_animations = {
-		#"edge": ["edge_turn", "run"],
-		#"edge_turn": ["edge", "run"],
-		#"edge_front": ["edge", "run"],
-		#"push": ["stand", "up_slope", "down_slope", "slight_up_slope", "slight_down_slope"],
-	#}
-	
 	
 	var look_left = pc.look_dir.x == -1.0
 	var look_right = pc.look_dir.x == 1.0
+
+	#var normal = pc.get_node("LeftNormalFinder").get_collision_normal()
+	#print(normal)
 	
-			#"edge": ((!absolute_left and !edge_left and !slope_right and absolute_right and look_left && !left_edge_falls) \
-				#or (absolute_left and !slope_left and !edge_right and !absolute_right and look_right && !right_edge_falls)) && !edge_is_slight_slope,
-		#"edge_front": ((absolute_left and !slope_left and !edge_right and !absolute_right and look_left && !right_edge_falls) \
-				#or (!absolute_left and !edge_left and !slope_right and absolute_right and look_right && !left_edge_falls)) && !do_edge_turn && !edge_is_slight_slope,
-		#"edge_turn": ((absolute_left and !slope_left and !edge_right and !absolute_right and look_left && !right_edge_falls) \
-				#or (!absolute_left and !edge_left and !slope_right and absolute_right and look_right && !left_edge_falls)) && do_edge_turn && !edge_is_slight_slope,
+	var vector_slope_tolerance = Vector2(0.1, 0.1)
+	var left_normal = pc.get_node("LeftNormalFinder").get_collision_normal()
+	var right_normal = pc.get_node("RightNormalFinder").get_collision_normal()
+
+	var left_negative_slope = abs(left_normal - Vector2(0.7, -0.7)) < vector_slope_tolerance #45 deg
+	var left_positive_slope = abs(left_normal - Vector2(-0.7, -0.7)) < vector_slope_tolerance #45 deg
+	var left_slight_negative_slope = abs(left_normal - Vector2(0.45, -0.89)) < vector_slope_tolerance #22.5 deg
+	var left_slight_positive_slope = abs(left_normal - Vector2(-0.45, -0.89)) < vector_slope_tolerance #22.5 deg
+	var left_no_slope = abs(left_normal - Vector2(0.0, -1.0)) < vector_slope_tolerance #0 deg
+	var left_walkable_negative_slope = left_negative_slope || left_slight_negative_slope
+	var left_walkable_positive_slope = left_positive_slope || left_slight_negative_slope
 	
 	
+	var right_negative_slope = abs(right_normal - Vector2(0.7, -0.7)) < vector_slope_tolerance #45 deg
+	var right_positive_slope = abs(right_normal - Vector2(-0.7, -0.7)) < vector_slope_tolerance #45 deg
+	var right_slight_negative_slope = abs(right_normal - Vector2(0.45, -0.89)) < vector_slope_tolerance #22.5 deg
+	var right_slight_positive_slope= abs(right_normal - Vector2(-0.45, -0.89)) < vector_slope_tolerance #22.5 deg
+	var right_no_slope = abs(right_normal - Vector2(0.0, -1.0)) < vector_slope_tolerance #0 deg
+	var right_walkable_negative_slope = right_negative_slope || right_slight_negative_slope
+	var right_walkable_positive_slope = right_positive_slope || right_slight_positive_slope
 	
 	var conditions = {
 		"edge": 
-			((!absolute_left and !edge_left and !down_slope_right and absolute_right and look_left && !slight_down_slope_right) \
-			or (absolute_left and !down_slope_left and !edge_right and !absolute_right and look_right && !slight_down_slope_left)),
+			((!absolute_left && !edge_left && absolute_right && look_left && !left_walkable_positive_slope && !left_edge_is_slope) || \
+			(absolute_left && !edge_right && !absolute_right && look_right && !right_walkable_negative_slope && !right_edge_is_slope)),
 		"edge_front": 
-			((absolute_left and !up_slope_left and !edge_right and !absolute_right and look_left && !slight_up_slope_left && !right_edge_is_slope) \
-			or (!absolute_left and !edge_left and !up_slope_right and absolute_right and look_right && !slight_up_slope_right && !left_edge_is_slope)) && !do_edge_turn,
+			((absolute_left && !edge_right && !absolute_right && look_left && !right_walkable_negative_slope && !right_edge_is_slope) || \
+			(!absolute_left && !edge_left && absolute_right && look_right && !left_walkable_positive_slope && !left_edge_is_slope)) && !do_edge_turn,
 		"edge_turn": 
-			((absolute_left and !up_slope_left and !edge_right and !absolute_right and look_left && !slight_up_slope_left && !right_edge_is_slope) \
-			or (!absolute_left and !edge_left and !up_slope_right and absolute_right and look_right && !slight_up_slope_right && !left_edge_is_slope)) && do_edge_turn,
+			((absolute_left && !edge_right && !absolute_right && look_left && !right_walkable_negative_slope && !right_edge_is_slope) || \
+			(!absolute_left && !edge_left && absolute_right && look_right && !left_walkable_positive_slope && !left_edge_is_slope)) && do_edge_turn,
 		"stand":
-			(stand_close_left and edge_left and edge_right and stand_close_right and look_left) or \
-			(stand_close_left and edge_left and edge_right and stand_close_right and look_right) and !pc.is_crouching,
-		"crouch": ((stand_close_left and absolute_right and look_left) or (absolute_left and stand_close_right and look_right) or (absolute_left and edge_right and look_left) or (edge_left and absolute_right and look_right)) and pc.is_crouching,
+			(stand_close_left && edge_left && edge_right && stand_close_right && !pc.is_crouching),
+		"crouch": 
+			((stand_close_left and absolute_right and look_left) or (absolute_left and stand_close_right and look_right) or (absolute_left and edge_right and look_left) or (edge_left and absolute_right and look_right)) and pc.is_crouching,
 		"stand_close": 
-			((edge_left && !stand_close_left && look_left && !down_slope_right && !slight_down_slope_right) || \
-			(edge_right && !stand_close_right && look_right && !down_slope_left && !slight_down_slope_left)) && !pc.is_crouching,
+			((edge_left && !stand_close_left && look_left && right_no_slope) || \
+			(edge_right && !stand_close_right && look_right && left_no_slope)) && !pc.is_crouching,
 		"stand_close_reverse": 
-			((stand_close_left and edge_right and !stand_close_right and look_left) or \
-			(!stand_close_left and edge_left and stand_close_right and look_right)) and !pc.is_crouching,
+			((stand_close_left && edge_right && !stand_close_right && look_left && left_no_slope) || \
+			(!stand_close_left && edge_left && stand_close_right && look_right && right_no_slope)) && !pc.is_crouching,
 		
-		"slight_up_slope": (slight_up_slope_left && look_left) || (slight_up_slope_right && look_right),
-		"slight_down_slope": (slight_down_slope_right && look_left) || (slight_down_slope_left && look_right),
-		"up_slope": (up_slope_left && look_left) || (up_slope_right && look_right), #(absolute_left and slope_left and !edge_left and !absolute_right and look_left) or (!absolute_left and !edge_right and slope_right and absolute_right and look_right),
-		"down_slope": (down_slope_right && look_left) || (down_slope_left && look_right), #(!absolute_left and !edge_right and slope_right and absolute_right and look_left) or (absolute_left and slope_left and !edge_left and !absolute_right and look_right),
+		"slight_up_slope":
+			(left_slight_negative_slope && right_slight_negative_slope && look_left) || \
+			(left_slight_positive_slope && right_slight_positive_slope && look_right),
+		"slight_down_slope":
+			(left_slight_positive_slope && right_slight_positive_slope && look_left) || \
+			(left_slight_negative_slope && right_slight_negative_slope && look_right),
+		"up_slope":
+			(left_negative_slope && right_negative_slope && look_left) || \
+			(left_positive_slope && right_positive_slope && look_right),
+		"down_slope": 
+			(left_positive_slope && right_positive_slope && look_left) || \
+			(left_negative_slope && right_negative_slope && look_right),
+		
 		"up_slope_to_stand": 
-			((absolute_left && almost_absolute_left && !slight_up_slope_left && !up_slope_left and !edge_right and look_left && right_edge_is_slope) \
-			or (!edge_left and !up_slope_right && !slight_up_slope_right && almost_absolute_right && absolute_right and look_right && left_edge_is_slope)) ,
+			((left_no_slope && right_walkable_negative_slope && look_left && !edge_right) || \
+			(left_walkable_positive_slope && right_no_slope && look_right && !edge_left)),
 		"stand_to_up_slope":
-			((absolute_left && !almost_absolute_left && !edge_left && !slight_up_slope_left && !up_slope_left && look_left && right_edge_is_slope) \
-			|| (!up_slope_right && !slight_up_slope_right && !edge_right && !almost_absolute_right && absolute_right && look_right && left_edge_is_slope)),
+			((left_walkable_negative_slope && right_no_slope && look_left && !absolute_right) || \
+			(left_no_slope && right_walkable_positive_slope && look_right && !absolute_left)),
+		"stand_to_down_slope":
+			((left_walkable_positive_slope && right_no_slope && look_left && !edge_left) || \
+			(left_no_slope && right_walkable_negative_slope && look_right && !edge_right)),
+		"down_slope_to_stand":
+			((left_no_slope && right_walkable_positive_slope && look_left && !absolute_left) || \
+			(left_walkable_negative_slope && right_no_slope && look_right && !absolute_right)),
+		"peak":
+			(left_walkable_positive_slope && right_walkable_negative_slope)
 	}
-
 	
 	
 	#slope crouch prevention
@@ -257,6 +269,10 @@ func animate(delta):
 				animation.append("stand_close_reverse")
 			if conditions["stand_to_up_slope"]:
 				animation.append("stand_to_up_slope")
+			if conditions["stand_to_down_slope"]:
+				animation.append("stand_to_down_slope")
+			if conditions["down_slope_to_stand"]:
+				animation.append("down_slope_to_stand")
 			if pc.move_dir.x != 0.0 and animation == []: #last case... add room for velocity 
 				if push_left_wall or push_right_wall:
 					animation.append("push")
@@ -301,6 +317,8 @@ func animate(delta):
 				animation.append("stand_close_reverse")
 			if conditions["edge"]:
 				animation.append("edge")
+			if conditions["stand_to_down_slope"]:
+				animation.append("stand_to_down_slope")
 			
 			if pc.move_dir.x != 0.0 and animation == []: #last case
 				if pc.is_crouching:
@@ -326,6 +344,8 @@ func animate(delta):
 				animation.append("edge_front")
 			if conditions["up_slope_to_stand"]:
 				animation.append("up_slope_to_stand")
+			if conditions["down_slope_to_stand"]:
+				animation.append("down_slope_to_stand")
 			
 			if pc.move_dir.x != 0.0 and animation == []: #last case
 				if pc.is_crouching:
@@ -379,6 +399,8 @@ func animate(delta):
 				animation.append("edge")
 			if conditions["edge_turn"]:
 				animation.append("edge_turn")
+			if conditions["peak"]:
+				animation.append("peak")
 			if pc.move_dir.x != 0.0 and animation == []: #last case
 				if push_left_wall or push_right_wall:
 					animation.append("slight_up_push")
@@ -413,6 +435,10 @@ func animate(delta):
 				animation.append("edge_turn")
 			if conditions["up_slope_to_stand"]:
 				animation.append("up_slope_to_stand")
+			if conditions["stand_to_up_slope"]:
+				animation.append("stand_to_up_slope")
+			if conditions["peak"]:
+				animation.append("peak")
 			if pc.move_dir.x != 0.0 and animation == []: #last case
 				if push_left_wall or push_right_wall:
 					animation.append("up_push")
@@ -429,6 +455,10 @@ func animate(delta):
 				animation.append("edge")
 			if conditions["edge_turn"]:
 				animation.append("edge_turn")
+			if conditions["down_slope_to_stand"]:
+				animation.append("down_slope_to_stand")
+			if conditions["stand_to_down_slope"]:
+				animation.append("stand_to_down_slope")
 			if pc.move_dir.x != 0.0 and animation == []: #last case
 				if push_left_wall or push_right_wall:
 					animation.append("down_push")
@@ -491,8 +521,12 @@ func animate(delta):
 			if pc.move_dir.x == 0.0: #not moving
 				if conditions["stand"]:
 					animation.append("stand")
+				if conditions["stand_close_reverse"]:
+					animation.append("stand_close_reverse")
 				if conditions["up_slope_to_stand"]:
 					animation.append("up_slope_to_stand")
+				if conditions["up_slope"]:
+					animation.append("up_slope")
 			else:
 				if pc.is_crouching:
 					animation.append("crouch_run")
@@ -509,6 +543,57 @@ func animate(delta):
 					animation.append("stand_to_up_slope")
 				if conditions["up_slope"]:
 					animation.append("up_slope")
+			else:
+				if pc.is_crouching:
+					animation.append("crouch_run")
+				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+					animation.append("back_run")
+				else:
+					animation.append("run")
+		
+		"stand_to_down_slope":
+			if pc.move_dir.x == 0.0: #not moving
+				if conditions["stand"]:
+					animation.append("stand")
+				if conditions["stand_close"]:
+					animation.append("stand_close")
+				if conditions["stand_to_down_slope"]:
+					animation.append("stand_to_down_slope")
+				if conditions["down_slope"]:
+					animation.append("down_slope")
+			else:
+				if pc.is_crouching:
+					animation.append("crouch_run")
+				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+					animation.append("back_run")
+				else:
+					animation.append("run")
+		
+		
+		"down_slope_to_stand":
+			if pc.move_dir.x == 0.0: #not moving
+				if conditions["stand"]:
+					animation.append("stand")
+				if conditions["stand_close"]:
+					animation.append("stand_close")
+				if conditions["down_slope_to_stand"]:
+					animation.append("down_slope_to_stand")
+				if conditions["down_slope"]:
+					animation.append("down_slope")
+			else:
+				if pc.is_crouching:
+					animation.append("crouch_run")
+				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+					animation.append("back_run")
+				else:
+					animation.append("run")
+
+		"peak":
+			if pc.move_dir.x == 0.0: #not moving
+				if conditions["down_slope"]:
+					animation.append("down_slope")
+				if conditions["slight_down_slope"]:
+					animation.append("slight_down_slope")
 			else:
 				if pc.is_crouching:
 					animation.append("crouch_run")
@@ -576,6 +661,12 @@ func run_tree(conditions) -> Array:
 			out.append("up_slope_to_stand")
 		if conditions["stand_to_up_slope"]:
 			out.append("stand_to_up_slope")
+		if conditions["stand_to_down_slope"]:
+			out.append("stand_to_down_slope")
+		if conditions["down_slope_to_stand"]:
+			out.append("down_slope_to_stand")
+		if conditions["peak"]:
+			out.append("peak")
 	else:
 		if push_left_wall or push_right_wall:
 			if conditions["slight_up_slope"]:
@@ -620,8 +711,10 @@ func do_animation_sprite_offset(animation, delta):
 		"slight_down_push": Vector2(0, 6),
 		"up_push": Vector2(0, 9),
 		"down_push": Vector2(0, 8),
-		"up_slope_to_stand": [Vector2(0, 9), Vector2(0, -1)],
-		"stand_to_up_slope": [Vector2(0, 10), Vector2(0, 0)],
+		"up_slope_to_stand": [Vector2(0, 9), Vector2(0, 1)],
+		"stand_to_up_slope": [Vector2(0, 10), Vector2(-3, 0)],
+		"stand_to_down_slope": [Vector2(0, 8), Vector2(0, 3)],
+		"down_slope_to_stand": [Vector2(0, 8), Vector2(-2, 2)],
 	}
 	
 	if offsets.has(animation): #only works if these lerp animations can't become eachother as we never reset sprite.position
@@ -631,6 +724,10 @@ func do_animation_sprite_offset(animation, delta):
 				t = calc_up_slope_to_stand_lerp_delta(Vector2(pc.look_dir.x, 0))
 			if animation == "stand_to_up_slope":
 				t = calc_stand_to_up_slope_lerp_delta()
+			if animation == "stand_to_down_slope":
+				t = calc_stand_to_down_slope_lerp_delta(Vector2(pc.look_dir.x, 0))
+			if animation == "down_slope_to_stand":
+				t = calc_down_slope_to_stand_lerp_delta()
 			var translation = offsets[animation][0].lerp(offsets[animation][1], t) #interpolated
 			var final_position = Vector2(0, -16) + translation
 			var speed = 30.0
@@ -660,42 +757,83 @@ func do_run_animation_offset(is_slight_slope, is_slope, delta):
 	sprite.gun_pos_offset = sprite.position - Vector2(0, -16)
 
 
-func calc_up_slope_to_stand_lerp_delta(direction) -> float:
+func calc_up_slope_to_stand_lerp_delta(direction) -> float: #TODO check and fix so all detections are possible
 	var out = 0.0
 	var par = pc.get_node("UpSlopeToStandLerpDelta")
 	if direction == Vector2.LEFT:
-		if par.get_node("A").is_colliding(): out = 0.1
-		if par.get_node("B").is_colliding(): out = 0.2
-		if par.get_node("C").is_colliding(): out = 0.3
-		if par.get_node("D").is_colliding(): out = 0.4
-		if par.get_node("E").is_colliding(): out = 0.5
-		if par.get_node("F").is_colliding(): out = 0.6
-		if par.get_node("G").is_colliding(): out = 0.7
-		if par.get_node("H").is_colliding(): out = 0.8
-		if par.get_node("I").is_colliding(): out = 0.9
-		if par.get_node("J").is_colliding(): out = 1.0
+		if par.get_node("A").is_colliding(): out = 0.0
+		if par.get_node("B").is_colliding(): out = 0.166
+		if par.get_node("C").is_colliding(): out = 0.333
+		if par.get_node("D").is_colliding(): out = 0.5
+		if par.get_node("E").is_colliding(): out = 0.666
+		if par.get_node("F").is_colliding(): out = 0.833
+		if par.get_node("G").is_colliding(): out = 1.0 #probably not possible
 	elif direction == Vector2.RIGHT:
-		if par.get_node("K").is_colliding(): out = 0.1
-		if par.get_node("J").is_colliding(): out = 0.2
-		if par.get_node("I").is_colliding(): out = 0.3
-		if par.get_node("H").is_colliding(): out = 0.4
-		if par.get_node("G").is_colliding(): out = 0.5
-		if par.get_node("F").is_colliding(): out = 0.6
-		if par.get_node("E").is_colliding(): out = 0.7
-		if par.get_node("D").is_colliding(): out = 0.8
-		if par.get_node("C").is_colliding(): out = 0.9
-		if par.get_node("B").is_colliding(): out = 1.0
+		if par.get_node("K").is_colliding(): out = 0.0
+		if par.get_node("J").is_colliding(): out = 0.166
+		if par.get_node("I").is_colliding(): out = 0.333
+		if par.get_node("H").is_colliding(): out = 0.5
+		if par.get_node("G").is_colliding(): out = 0.666
+		if par.get_node("F").is_colliding(): out = 0.833
+		if par.get_node("E").is_colliding(): out = 1.0 #probably not possible
 	return out
 
 func calc_stand_to_up_slope_lerp_delta() -> float:
 	var out = 0.0
 	var par = pc.get_node("SlopeToUpSlopeLerpDelta")
-	if par.get_node("G").is_colliding(): out = 0.125
-	if par.get_node("F").is_colliding(): out = 0.25
-	if par.get_node("E").is_colliding(): out = 0.375
-	if par.get_node("D").is_colliding(): out = 0.5
-	if par.get_node("C").is_colliding(): out = 0.625
-	if par.get_node("B").is_colliding(): out = 0.75
+	if par.get_node("N").is_colliding(): out = 0.07
+	if par.get_node("M").is_colliding(): out = 0.14
+	if par.get_node("L").is_colliding(): out = 0.21
+	if par.get_node("K").is_colliding(): out = 0.28
+	if par.get_node("J").is_colliding(): out = 0.35
+	if par.get_node("I").is_colliding(): out = 0.42
+	if par.get_node("H").is_colliding(): out = 0.49
+	if par.get_node("G").is_colliding(): out = 0.56
+	if par.get_node("F").is_colliding(): out = 0.63
+	if par.get_node("E").is_colliding(): out = 0.7
+	if par.get_node("D").is_colliding(): out = 0.77
+	if par.get_node("C").is_colliding(): out = 0.84
+	if par.get_node("B").is_colliding(): out = 0.91
+	if par.get_node("A").is_colliding(): out = 1.0
+	return out
+
+func calc_stand_to_down_slope_lerp_delta(direction) -> float:
+	var out = 0.0
+	var par = pc.get_node("UpSlopeToStandLerpDelta")
+	if direction == Vector2.RIGHT:
+		if par.get_node("A").is_colliding(): out = 0.0
+		if par.get_node("B").is_colliding(): out = 0.166
+		if par.get_node("C").is_colliding(): out = 0.333
+		if par.get_node("D").is_colliding(): out = 0.5
+		if par.get_node("E").is_colliding(): out = 0.666
+		if par.get_node("F").is_colliding(): out = 0.833
+		if par.get_node("G").is_colliding(): out = 1.0 #probably not possible
+	elif direction == Vector2.LEFT:
+		if par.get_node("K").is_colliding(): out = 0.0
+		if par.get_node("J").is_colliding(): out = 0.166
+		if par.get_node("I").is_colliding(): out = 0.333
+		if par.get_node("H").is_colliding(): out = 0.5
+		if par.get_node("G").is_colliding(): out = 0.666
+		if par.get_node("F").is_colliding(): out = 0.833
+		if par.get_node("E").is_colliding(): out = 1.0 #probably not possible
+	return out
+
+func calc_down_slope_to_stand_lerp_delta() -> float:
+	var out = 0.0
+	var par = pc.get_node("SlopeToUpSlopeLerpDelta")
+	if par.get_node("N").is_colliding(): out = 0.07
+	if par.get_node("M").is_colliding(): out = 0.14
+	if par.get_node("L").is_colliding(): out = 0.21
+	if par.get_node("K").is_colliding(): out = 0.28
+	if par.get_node("J").is_colliding(): out = 0.35
+	if par.get_node("I").is_colliding(): out = 0.42
+	if par.get_node("H").is_colliding(): out = 0.49
+	if par.get_node("G").is_colliding(): out = 0.56
+	if par.get_node("F").is_colliding(): out = 0.63
+	if par.get_node("E").is_colliding(): out = 0.7
+	if par.get_node("D").is_colliding(): out = 0.77
+	if par.get_node("C").is_colliding(): out = 0.84
+	if par.get_node("B").is_colliding(): out = 0.91
 	if par.get_node("A").is_colliding(): out = 1.0
 	return out
 
@@ -733,7 +871,6 @@ func play_animation(animation):
 				#print("blending run from: ",ap.current_animation_position, ", to: ", blend_time)
 			else:
 				blend_time = ap.current_animation_position #only blend certain animations
-			
 		ap.stop()
 		ap.play(animation, blend_time, 1.0)
 		if blend_time != 0.0:
@@ -798,11 +935,12 @@ func get_vframe() -> int:
 func enter(): #TODO: consider setting these back after exiting or just set these on setup
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
-	pc.floor_snap_length = 8.0
+	pc.floor_snap_length = 7.9
 	pc.floor_max_angle = 0.8 #well over 45degrees so we can have a lower safe_margin
 	pc.safe_margin = 0.008 #may cause issues this low
 	do_edge_turn = false
 	play_animation("run")
 func exit():
 	sprite.position = Vector2i(0.0, -16.0)
+	sprite.gun_pos_offset = Vector2i(0.0, 0.0)
 	is_dropping = false

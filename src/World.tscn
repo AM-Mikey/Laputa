@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkp8k2tq8hhvq"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
+[ext_resource type="Script" path="res://src/World.gd" id="8"]
 
 [sub_resource type="Animation" id="Animation_x6ej7"]
 length = 0.001
@@ -50,8 +50,8 @@ gamemode = "pvp"
 start_level_path = "res://src/Level/PlaytestZone.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_offset = Vector2(32, 416.5)
-scroll_base_offset = Vector2(0, -652)
+scroll_offset = Vector2(32, -63.5)
+scroll_base_offset = Vector2(0, -140)
 
 [node name="Back" type="Node2D" parent="."]
 scale = Vector2(4, 4)
@@ -85,6 +85,7 @@ scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
 [node name="UIGroup" type="CanvasGroup" parent="UILayer"]
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UILayer/UIGroup"]
 root_node = NodePath("../..")
@@ -94,5 +95,8 @@ libraries = {
 
 [node name="BlackoutLayer" type="CanvasLayer" parent="."]
 process_mode = 3
+visible = false
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
+
+[connection signal="level_saved" from="EditorLayer/Editor" to="EditorLayer/Editor/Main/Win/Tab/Levels" method="on_save"]

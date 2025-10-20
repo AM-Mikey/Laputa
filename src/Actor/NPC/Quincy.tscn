@@ -77,7 +77,7 @@ frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_4xy4o")
+&"": SubResource("AnimationLibrary_4xy4o")
 }
 
 [node name="FloorDetectorL" type="RayCast2D" parent="."]
