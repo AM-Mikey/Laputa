@@ -892,7 +892,7 @@ func calc_velocity():
 		if pc.is_crouching:
 			max_speed = mm.crouch_speed
 
-		if pc.move_dir.x != sign(out.x):
+		if sign(pc.move_dir.x) != sign(out.x):
 			out.x = 0.0
 
 		var value = out.x + mm.acceleration * pc.move_dir.x
