@@ -209,11 +209,9 @@ func check_dat_file_presence(filename:String) -> void:
 	var userfile_path = "user://" + filename + ".dat"
 	
 	if FileAccess.file_exists(userfile_path):
-		print ("exists, don't do rest of func for " + filename )
 		return
 	else:
 		DirAccess.copy_absolute(defaultfile_path,userfile_path)
-		print ("this wont work right")
 
 
 ### OPTIONS ###
