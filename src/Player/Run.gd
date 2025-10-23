@@ -877,9 +877,6 @@ func play_animation(animation):
 			ap.seek(blend_time, true)
 
 
-
-
-
 ### GETTERS ###
 
 func calc_velocity():
@@ -889,10 +886,14 @@ func calc_velocity():
 	#X
 	if pc.move_dir.x != 0.0:
 		var max_speed = mm.speed.x
+		#cap max_speed by how hard you pressed your analog stick in X axis
+		if abs(pc.move_dir.x) <= 0.85: #makes inputs close to 1.0 equal to 1.0, analog otherwise
+			max_speed *= abs(pc.move_dir.x)
+		
 		if pc.is_crouching:
 			max_speed = mm.crouch_speed
 
-		if pc.move_dir.x != sign(out.x):
+		if sign(pc.move_dir.x) != sign(out.x):
 			out.x = 0.0
 
 		var value = out.x + mm.acceleration * pc.move_dir.x
