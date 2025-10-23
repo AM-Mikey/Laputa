@@ -344,7 +344,16 @@ MAJOR CODE AREAS:
 Run animation detection:
 
 -fix animation conflicts
--valley trigger (use peak or custom animaiton)
 -peak animation height
--cleanup unused sensors
--function for animation checking and appending
+-rename lerp containers
+-crouch detection check
+-test animations not appending themselves
+-check gun positions
+-peak and slope edge conflicts
+-peak to edge (exception) or new animation, or shift x position to match peak position
+test slightslope transition animations
+update animation groups
+expand valley detection by adding raycasts for it only
+upslope off the edge proper detection
+peak and valley gun position
+slightslope detection needs to have custom half sized raycasts, also custom height adjustment

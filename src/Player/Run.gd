@@ -88,13 +88,15 @@ func check_shoot_down() -> bool:
 	return out
 
 func animate(delta):
-	var animation = []
+	var next_animations = []
 	#var reference_texture
 	
 	var absolute_left = pc.get_node("AbsoluteLeft").is_colliding()
 	var absolute_right = pc.get_node("AbsoluteRight").is_colliding()
-	#var almost_absolute_left = pc.get_node("AlmostAbsoluteLeft").is_colliding()
-	#var almost_absolute_right = pc.get_node("AlmostAbsoluteRight").is_colliding()
+	var valley_left = pc.get_node("ValleyLeft").is_colliding()
+	var valley_right = pc.get_node("ValleyRight").is_colliding()
+	var peak_left = pc.get_node("PeakLeft").is_colliding()
+	var peak_right = pc.get_node("PeakRight").is_colliding()
 	var stand_close_left = pc.get_node("StandCloseLeft").is_colliding()
 	var stand_close_right = pc.get_node("StandCloseRight").is_colliding()
 	var edge_left = pc.get_node("EdgeLeft").is_colliding()
@@ -105,27 +107,14 @@ func animate(delta):
 	#var right_edge_is_slight_slope = pc.get_node("RightEdgeIsSlightSlope").is_colliding()
 	
 	
-	### part 2, combining these for conditions always grouped together
-
-	#var ssl_par = pc.get_node("SlightSlopeLeft") #left/right refers to slope start point not look dir
-	#var slight_slope_left = pc.get_node("AbsoluteLeft").is_colliding() && ssl_par.get_node("A").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterA").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
-	#ssl_par = pc.get_node("SlightSlopeRight")
-	#var slight_slope_right = pc.get_node("AbsoluteRight").is_colliding() && ssl_par.get_node("A").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterA").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
-	#ssl_par = pc.get_node("SlopeLeft")
-	#var slope_left = pc.get_node("AbsoluteLeft").is_colliding() && ssl_par.get_node("A").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterA").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
-	#ssl_par = pc.get_node("SlopeRight")
-	#var slope_right = pc.get_node("AbsoluteRight").is_colliding() && ssl_par.get_node("A").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterA").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
-
 	
 	var look_left = pc.look_dir.x == -1.0
 	var look_right = pc.look_dir.x == 1.0
-
-	#var normal = pc.get_node("LeftNormalFinder").get_collision_normal()
-	#print(normal)
 	
 	var vector_slope_tolerance = Vector2(0.1, 0.1)
 	var left_normal = pc.get_node("LeftNormalFinder").get_collision_normal()
 	var right_normal = pc.get_node("RightNormalFinder").get_collision_normal()
+
 
 	var left_negative_slope = abs(left_normal - Vector2(0.7, -0.7)) < vector_slope_tolerance #45 deg
 	var left_positive_slope = abs(left_normal - Vector2(-0.7, -0.7)) < vector_slope_tolerance #45 deg
@@ -133,16 +122,19 @@ func animate(delta):
 	var left_slight_positive_slope = abs(left_normal - Vector2(-0.45, -0.89)) < vector_slope_tolerance #22.5 deg
 	var left_no_slope = abs(left_normal - Vector2(0.0, -1.0)) < vector_slope_tolerance #0 deg
 	var left_walkable_negative_slope = left_negative_slope || left_slight_negative_slope
-	var left_walkable_positive_slope = left_positive_slope || left_slight_negative_slope
+	var left_walkable_positive_slope = left_positive_slope || left_slight_positive_slope
 	
+	#print(left_walkable_positive_slope)
 	
 	var right_negative_slope = abs(right_normal - Vector2(0.7, -0.7)) < vector_slope_tolerance #45 deg
 	var right_positive_slope = abs(right_normal - Vector2(-0.7, -0.7)) < vector_slope_tolerance #45 deg
 	var right_slight_negative_slope = abs(right_normal - Vector2(0.45, -0.89)) < vector_slope_tolerance #22.5 deg
-	var right_slight_positive_slope= abs(right_normal - Vector2(-0.45, -0.89)) < vector_slope_tolerance #22.5 deg
+	var right_slight_positive_slope = abs(right_normal - Vector2(-0.45, -0.89)) < vector_slope_tolerance #22.5 deg
 	var right_no_slope = abs(right_normal - Vector2(0.0, -1.0)) < vector_slope_tolerance #0 deg
 	var right_walkable_negative_slope = right_negative_slope || right_slight_negative_slope
 	var right_walkable_positive_slope = right_positive_slope || right_slight_positive_slope
+	
+	
 	
 	var conditions = {
 		"edge": 
@@ -155,7 +147,9 @@ func animate(delta):
 			((absolute_left && !edge_right && !absolute_right && look_left && !right_walkable_negative_slope && !right_edge_is_slope) || \
 			(!absolute_left && !edge_left && absolute_right && look_right && !left_walkable_positive_slope && !left_edge_is_slope)) && do_edge_turn,
 		"stand":
-			(stand_close_left && edge_left && edge_right && stand_close_right && !pc.is_crouching),
+			((stand_close_left && edge_left && edge_right && stand_close_right && !pc.is_crouching)),# || \
+			#(left_walkable_negative_slope && right_walkable_positive_slope && !absolute_right) || \
+			#(left_walkable_negative_slope && right_walkable_positive_slope && !absolute_left)), #last two are to walk when we would valley with only one absolute touching
 		"crouch": 
 			((stand_close_left and absolute_right and look_left) or (absolute_left and stand_close_right and look_right) or (absolute_left and edge_right and look_left) or (edge_left and absolute_right and look_right)) and pc.is_crouching,
 		"stand_close": 
@@ -164,26 +158,40 @@ func animate(delta):
 		"stand_close_reverse": 
 			((stand_close_left && edge_right && !stand_close_right && look_left && left_no_slope) || \
 			(!stand_close_left && edge_left && stand_close_right && look_right && right_no_slope)) && !pc.is_crouching,
-		
 		"slight_up_slope":
 			(left_slight_negative_slope && right_slight_negative_slope && look_left) || \
-			(left_slight_positive_slope && right_slight_positive_slope && look_right),
+			(left_slight_positive_slope && right_slight_positive_slope && look_right) || \
+			(left_slight_negative_slope && right_walkable_positive_slope && look_left && !valley_right) || \
+			(left_walkable_negative_slope && right_slight_positive_slope && look_right && !valley_left) || \
+			(left_walkable_positive_slope && right_slight_negative_slope && look_left && peak_left && !peak_left) || \
+			(left_slight_positive_slope && right_walkable_negative_slope && look_right && peak_right && !peak_right), #2 for valley 2 for peak
 		"slight_down_slope":
 			(left_slight_positive_slope && right_slight_positive_slope && look_left) || \
-			(left_slight_negative_slope && right_slight_negative_slope && look_right),
+			(left_slight_negative_slope && right_slight_negative_slope && look_right) || \
+			(left_walkable_negative_slope && right_slight_positive_slope && look_left && !valley_left) || \
+			(left_slight_negative_slope && right_walkable_positive_slope && look_right && !valley_right) || \
+			(left_walkable_positive_slope && right_slight_negative_slope && look_left && peak_right && !peak_left) || \
+			(left_slight_positive_slope && right_walkable_negative_slope && look_right && peak_left && !peak_right), #2 for valley 2 for peak
 		"up_slope":
 			(left_negative_slope && right_negative_slope && look_left) || \
-			(left_positive_slope && right_positive_slope && look_right),
+			(left_positive_slope && right_positive_slope && look_right) || \
+			(left_negative_slope && right_walkable_positive_slope && look_left && !valley_right) || \
+			(left_walkable_negative_slope && right_positive_slope && look_right && !valley_left) || \
+			(left_walkable_positive_slope && right_negative_slope && look_left && peak_left) || \
+			(left_positive_slope && right_walkable_negative_slope && look_right && peak_right), #2 for valley 2 for peak
 		"down_slope": 
 			(left_positive_slope && right_positive_slope && look_left) || \
-			(left_negative_slope && right_negative_slope && look_right),
-		
+			(left_negative_slope && right_negative_slope && look_right) || \
+			(left_walkable_negative_slope && right_positive_slope && look_left && !valley_left) || \
+			(left_negative_slope && right_walkable_positive_slope && look_right && !valley_right) || \
+			(left_walkable_positive_slope && right_negative_slope && look_left && peak_right) || \
+			(left_positive_slope && right_walkable_negative_slope && look_right && peak_left), #2 for valley 2 for peak
 		"up_slope_to_stand": 
 			((left_no_slope && right_walkable_negative_slope && look_left && !edge_right) || \
 			(left_walkable_positive_slope && right_no_slope && look_right && !edge_left)),
 		"stand_to_up_slope":
 			((left_walkable_negative_slope && right_no_slope && look_left && !absolute_right) || \
-			(left_no_slope && right_walkable_positive_slope && look_right && !absolute_left)),
+			(left_no_slope  && right_walkable_positive_slope && look_right && !absolute_left)),
 		"stand_to_down_slope":
 			((left_walkable_positive_slope && right_no_slope && look_left && !edge_left) || \
 			(left_no_slope && right_walkable_negative_slope && look_right && !edge_right)),
@@ -191,7 +199,9 @@ func animate(delta):
 			((left_no_slope && right_walkable_positive_slope && look_left && !absolute_left) || \
 			(left_walkable_negative_slope && right_no_slope && look_right && !absolute_right)),
 		"peak":
-			(left_walkable_positive_slope && right_walkable_negative_slope)
+			left_walkable_positive_slope && right_walkable_negative_slope && ((!peak_left && !peak_right) || (peak_left && peak_right)),
+		"valley":
+			left_walkable_negative_slope && right_walkable_positive_slope && valley_left && valley_right
 	}
 	
 	
@@ -202,407 +212,184 @@ func animate(delta):
 	
 	match ap.current_animation: #do not use elif here
 		"edge":
-			if conditions["edge"]:
-				animation.append("edge")
-			if conditions["edge_front"]:
-				animation.append("edge_front")
-			if conditions["edge_turn"]:
-				animation.append("edge_turn")
-			if conditions["stand_close"]:
-				animation.append("stand_close")
-			if conditions["slight_down_slope"]:
-				animation.append("slight_down_slope")
-			
-			if pc.move_dir.x != 0.0 and animation == []: #last case
-				if pc.is_crouching:
-					animation.append("crouch_run")
-				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-					animation.append("back_run")
-				else:
-					animation.append("run")
-			
+			next_animations = check_and_append_animations(["edge", "edge_front", "edge_turn", "stand_close", "slight_down_slope"], conditions, next_animations)
+			if pc.move_dir.x != 0.0 and next_animations == []: #last case
+				next_animations = check_and_append_moving_animations(next_animations)
 
 		"edge_front":
-			if conditions["edge"]:
-				animation.append("edge")
+			next_animations = check_and_append_animations(["edge", "stand_close", "stand_close_reverse", "slight_up_slope"], conditions, next_animations)
 			if conditions["edge_turn"] or conditions["edge_front"]:
-				animation.append("edge_front")
-			if conditions["stand_close"]:
-				animation.append("stand_close")
-			if conditions["stand_close_reverse"]:
-				animation.append("stand_close_reverse")
+				next_animations.append("edge_front")
 			if stand_close_left and stand_close_right and !pc.is_crouching: #exception to condition
-				animation.append("stand")
+				next_animations.append("stand")
 			if stand_close_left and stand_close_right and pc.is_crouching: #exception to condition
-				animation.append("crouch")
-			if conditions["slight_up_slope"]:
-				animation.append("slight_up_slope")
+				next_animations.append("crouch")
+			if pc.move_dir.x != 0.0 and next_animations == []: #last case
+				next_animations = check_and_append_moving_animations(next_animations)
 
 		"edge_turn":
-			if conditions["edge"]:
-				animation.append("edge")
+			next_animations = check_and_append_animations(["edge", "stand_close", "stand_close_reverse", "slight_up_slope"], conditions, next_animations)
 			if conditions["edge_turn"] or conditions["edge_front"]:
-				animation.append("edge_turn")
-			if conditions["stand_close"]:
-				animation.append("stand_close")
-			if conditions["stand_close_reverse"]:
-				animation.append("stand_close_reverse")
+				next_animations.append("edge_turn")
 			if stand_close_left and stand_close_right and !pc.is_crouching: #exception to condition
-				animation.append("stand")
+				next_animations.append("stand")
 			if stand_close_left and stand_close_right and pc.is_crouching: #exception to condition
-				animation.append("crouch")
-			if conditions["slight_up_slope"]:
-				animation.append("slight_up_slope")
-			
-			if pc.move_dir.x != 0.0 and animation == []: #last case
-				if pc.is_crouching:
-					animation.append("crouch_run")
-				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-					animation.append("back_run")
-				else:
-					animation.append("run")
+				next_animations.append("crouch")
+			if pc.move_dir.x != 0.0 and next_animations == []: #last case
+				next_animations = check_and_append_moving_animations(next_animations)
 		
 		"stand":
-			if conditions["stand_close"]:
-				animation.append("stand_close")
-			if conditions["stand_close_reverse"]:
-				animation.append("stand_close_reverse")
-			if conditions["stand_to_up_slope"]:
-				animation.append("stand_to_up_slope")
-			if conditions["stand_to_down_slope"]:
-				animation.append("stand_to_down_slope")
-			if conditions["down_slope_to_stand"]:
-				animation.append("down_slope_to_stand")
-			if pc.move_dir.x != 0.0 and animation == []: #last case... add room for velocity 
+			next_animations = check_and_append_animations(["stand_close", "stand_close_reverse", "up_slope_to_stand", "stand_to_up_slope", "stand_to_down_slope", "down_slope_to_stand"], conditions, next_animations)
+			if pc.move_dir.x != 0.0 and next_animations == []: #last case... add room for velocity 
 				if push_left_wall or push_right_wall:
-					animation.append("push")
+					next_animations.append("push")
 				else:
-					if pc.is_crouching:
-						animation.append("crouch_run")
-					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-						animation.append("back_run")
-					else:
-						animation.append("run")
-			elif pc.move_dir.x == 0.0 and animation == []: #last case number 2
+					next_animations = check_and_append_moving_animations(next_animations)
+			elif pc.move_dir.x == 0.0 and next_animations == []: #last case number 2
 				if pc.is_crouching:
-					animation.append("crouch")
+					next_animations.append("crouch")
 				else:
-					animation.append("stand")
+					next_animations.append("stand")
 		
 		"crouch":
-			if conditions["stand_close"]:
-				animation.append("stand_close")
-			if pc.move_dir.x != 0.0 and animation == []: #last case... add room for velocity 
+			next_animations = check_and_append_animations(["stand_close"], conditions, next_animations)
+			if pc.move_dir.x != 0.0 and next_animations == []: #last case... add room for velocity 
 				if push_left_wall or push_right_wall:
-					animation.append("push")
+					next_animations.append("push")
 				else:
-					if pc.is_crouching:
-						animation.append("crouch_run")
-					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-						animation.append("back_run")
-					else:
-						animation.append("run")
-			elif pc.move_dir.x == 0.0 and animation == []: #last case number 2
+					next_animations = check_and_append_moving_animations(next_animations)
+			elif pc.move_dir.x == 0.0 and next_animations == []: #last case number 2
 				if pc.is_crouching:
-					animation.append("crouch")
+					next_animations.append("crouch")
 				else:
-					animation.append("stand")
+					next_animations.append("stand")
 		
-		"stand_close":
-			if conditions["stand"]:
-				animation.append("stand") #TODO: when this goes to stand it goes right to run next frame if turn to make this happen, before returning to stand.
-			if conditions["stand_close"]:
-				animation.append("stand_close")
-			if conditions["stand_close_reverse"]:
-				animation.append("stand_close_reverse")
-			if conditions["edge"]:
-				animation.append("edge")
-			if conditions["stand_to_down_slope"]:
-				animation.append("stand_to_down_slope")
-			
-			if pc.move_dir.x != 0.0 and animation == []: #last case
-				if pc.is_crouching:
-					animation.append("crouch_run")
-				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-					animation.append("back_run")
-				else:
-					animation.append("run")
-			elif pc.move_dir.x == 0.0 and animation == []: #last case number 2
-				if pc.is_crouching:
-					animation.append("crouch")
-				else:
-					animation.append("stand_close")
-	
-		"stand_close_reverse":
-			if conditions["stand"]:
-				animation.append("stand") #TODO: when this goes to stand it goes right to run next frame if turn to make this happen, before returning to stand.
-			if conditions["stand_close"]:
-				animation.append("stand_close")
-			if conditions["stand_close_reverse"]:
-				animation.append("stand_close_reverse")
-			if conditions["edge_front"]:
-				animation.append("edge_front")
-			if conditions["up_slope_to_stand"]:
-				animation.append("up_slope_to_stand")
-			if conditions["down_slope_to_stand"]:
-				animation.append("down_slope_to_stand")
-			
-			if pc.move_dir.x != 0.0 and animation == []: #last case
-				if pc.is_crouching:
-					animation.append("crouch_run")
-				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-					animation.append("back_run")
-				else:
-					animation.append("run")
-			elif pc.move_dir.x == 0.0 and animation == []: #last case number 2
-				if pc.is_crouching:
-					animation.append("crouch")
-				else:
-					animation.append("stand_close_reverse")
-
 		"push":
 			if pc.move_dir.x == 0.0: #not moving
 				if !pc.is_crouching:
-					animation.append("stand")
+					next_animations.append("stand")
 				else:
-					animation.append("crouch")
-			else:
-				if !push_left_wall and !push_right_wall:
-					if pc.is_crouching:
-						animation.append("crouch_run")
-					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-						animation.append("back_run")
-					else:
-						animation.append("run")
-	
+					next_animations.append("crouch")
+			elif !push_left_wall and !push_right_wall:
+				next_animations = check_and_append_moving_animations(next_animations)
+		
+		
 		"run":
-			animation = run_tree(conditions)
+			next_animations = run_tree(conditions)
 	
 		"back_run":
-			animation = run_tree(conditions)
+			next_animations = run_tree(conditions)
 	
 		"crouch_run": 
-			animation = run_tree(conditions)
-
-	
-		"stand_peak":
-			if pc.move_dir.x != 0.0 and animation == []: #last case
-				if pc.is_crouching:
-					animation.append("crouch_run")
-				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-					animation.append("back_run")
-				else:
-					animation.append("run")
+			next_animations = run_tree(conditions)
 		
-		"slight_up_slope":
-			if conditions["edge"]:
-				animation.append("edge")
-			if conditions["edge_turn"]:
-				animation.append("edge_turn")
-			if conditions["peak"]:
-				animation.append("peak")
-			if pc.move_dir.x != 0.0 and animation == []: #last case
-				if push_left_wall or push_right_wall:
-					animation.append("slight_up_push")
+		
+		
+		"stand_close":
+			next_animations = check_and_append_animations(["stand", "stand_close", "edge", "stand_to_down_slope"], conditions, next_animations)
+			if pc.move_dir.x != 0.0 and next_animations == []: #last case
+				next_animations = check_and_append_moving_animations(next_animations)
+			elif pc.move_dir.x == 0.0 and next_animations == []: #last case number 2
+				if pc.is_crouching:
+					next_animations.append("crouch")
 				else:
-					if pc.is_crouching:
-						animation.append("crouch_run")
-					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-						animation.append("back_run")
-					else:
-						animation.append("run")
+					next_animations.append("stand_close")
+	
+		"stand_close_reverse":
+			next_animations = check_and_append_animations(["stand", "stand_close_reverse", "edge_front", "up_slope_to_stand",], conditions, next_animations)
+			if pc.move_dir.x != 0.0 and next_animations == []: #last case
+				next_animations = check_and_append_moving_animations(next_animations)
+			elif pc.move_dir.x == 0.0 and next_animations == []: #last case number 2
+				if pc.is_crouching:
+					next_animations.append("crouch")
+				else:
+					next_animations.append("stand_close_reverse")
+
+
+		"slight_up_slope":
+			next_animations = check_and_append_animations(["edge", "edge_turn", "up_slope_to_stand", "stand_to_up_slope", "peak"], conditions, next_animations)
+			if pc.move_dir.x != 0.0 and next_animations == []: #last case
+				if push_left_wall or push_right_wall:
+					next_animations.append("slight_up_push")
+				else:
+					next_animations = check_and_append_moving_animations(next_animations)
 		
 		"slight_down_slope":
-			if conditions["edge"]:
-				animation.append("edge")
-			if conditions["edge_turn"]:
-				animation.append("edge_turn")
-			if pc.move_dir.x != 0.0 and animation == []: #last case
+			next_animations = check_and_append_animations(["edge", "edge_turn", "stand_to_down_slope", "down_slope_to_stand", "peak", "valley"], conditions, next_animations)
+			if pc.move_dir.x != 0.0 and next_animations == []: #last case
 				if push_left_wall or push_right_wall:
-					animation.append("slight_down_push")
+					next_animations.append("slight_down_push")
 				else:
-					if pc.is_crouching:
-						animation.append("crouch_run")
-					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-						animation.append("back_run")
-					else:
-						animation.append("run")
+					next_animations = check_and_append_moving_animations(next_animations)
 		
 		"up_slope":
-			if conditions["edge"]:
-				animation.append("edge")
-			if conditions["edge_turn"]:
-				animation.append("edge_turn")
-			if conditions["up_slope_to_stand"]:
-				animation.append("up_slope_to_stand")
-			if conditions["stand_to_up_slope"]:
-				animation.append("stand_to_up_slope")
-			if conditions["peak"]:
-				animation.append("peak")
-			if pc.move_dir.x != 0.0 and animation == []: #last case
+			next_animations = check_and_append_animations(["edge", "edge_turn", "up_slope_to_stand", "stand_to_up_slope", "peak"], conditions, next_animations)
+			if pc.move_dir.x != 0.0 and next_animations == []: #last case
 				if push_left_wall or push_right_wall:
-					animation.append("up_push")
+					next_animations.append("up_push")
 				else:
-					if pc.is_crouching:
-						animation.append("crouch_run")
-					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-						animation.append("back_run")
-					else:
-						animation.append("run")
+					next_animations = check_and_append_moving_animations(next_animations)
 		
 		"down_slope":
-			if conditions["edge"]:
-				animation.append("edge")
-			if conditions["edge_turn"]:
-				animation.append("edge_turn")
-			if conditions["down_slope_to_stand"]:
-				animation.append("down_slope_to_stand")
-			if conditions["stand_to_down_slope"]:
-				animation.append("stand_to_down_slope")
-			if pc.move_dir.x != 0.0 and animation == []: #last case
+			next_animations = check_and_append_animations(["edge", "edge_turn", "stand_to_down_slope", "down_slope_to_stand", "peak", "valley"], conditions, next_animations)
+			if pc.move_dir.x != 0.0 and next_animations == []: #last case
 				if push_left_wall or push_right_wall:
-					animation.append("down_push")
+					next_animations.append("down_push")
 				else:
-					if pc.is_crouching:
-						animation.append("crouch_run")
-					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-						animation.append("back_run")
-					else:
-						animation.append("run")
-
+					next_animations = check_and_append_moving_animations(next_animations)
+				
+		"up_slope_to_stand":
+			if pc.move_dir.x == 0.0: next_animations = check_and_append_animations(["stand", "stand_close_reverse", "up_slope_to_stand", "up_slope"], conditions, next_animations)
+			else: next_animations = check_and_append_moving_animations(next_animations)
+		
+		"stand_to_up_slope":
+			if pc.move_dir.x == 0.0: next_animations = check_and_append_animations(["stand", "stand_to_up_slope", "up_slope"], conditions, next_animations)
+			else: next_animations = check_and_append_moving_animations(next_animations)
+		
+		"stand_to_down_slope":
+			if pc.move_dir.x == 0.0: next_animations = check_and_append_animations(["stand", "stand_close", "stand_to_down_slope", "down_slope"], conditions, next_animations)
+			else: next_animations = check_and_append_moving_animations(next_animations)
+		
+		"down_slope_to_stand":
+			if pc.move_dir.x == 0.0: next_animations = check_and_append_animations(["stand", "down_slope_to_stand", "down_slope"], conditions, next_animations)
+			else: next_animations = check_and_append_moving_animations(next_animations)
+		
+		"peak":
+			if pc.move_dir.x == 0.0: next_animations = check_and_append_animations(["down_slope", "slight_down_slope"], conditions, next_animations)
+			else: next_animations = check_and_append_moving_animations(next_animations)
+		
+		"valley":
+			if pc.move_dir.x == 0.0: next_animations = check_and_append_animations(["up_slope", "slight_up_slope"], conditions, next_animations)
+			else: next_animations = check_and_append_moving_animations(next_animations)
+		
+		
+		
 		"slight_up_push":
 			if pc.move_dir.x == 0.0: #not moving
-				animation.append("slight_up_slope")
-			else:
-				if !push_left_wall and !push_right_wall:
-					if pc.is_crouching:
-						animation.append("crouch_run")
-					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-						animation.append("back_run")
-					else:
-						animation.append("run")
+				next_animations.append("slight_up_slope")
+			elif !push_left_wall and !push_right_wall:
+				next_animations = check_and_append_moving_animations(next_animations)
 		
 		"slight_down_push":
 			if pc.move_dir.x == 0.0: #not moving
-				animation.append("slight_down_slope")
-			else:
-				if !push_left_wall and !push_right_wall:
-					if pc.is_crouching:
-						animation.append("crouch_run")
-					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-						animation.append("back_run")
-					else:
-						animation.append("run")
+				next_animations.append("slight_down_slope")
+			elif !push_left_wall and !push_right_wall:
+				next_animations = check_and_append_moving_animations(next_animations)
 
 		"up_push":
 			if pc.move_dir.x == 0.0: #not moving
-				animation.append("up_slope")
-			else:
-				if !push_left_wall and !push_right_wall:
-					if pc.is_crouching:
-						animation.append("crouch_run")
-					elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-						animation.append("back_run")
-					else:
-						animation.append("run")
+				next_animations.append("up_slope")
+			elif !push_left_wall and !push_right_wall:
+				next_animations = check_and_append_moving_animations(next_animations)
 
 		"down_push":
 			if pc.move_dir.x == 0.0: #not moving
-				animation.append("down_slope")
-			else:
-				if pc.is_crouching:
-					animation.append("crouch_run")
-				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-					animation.append("back_run")
-				else:
-					animation.append("run")
-		
-		"up_slope_to_stand":
-			if pc.move_dir.x == 0.0: #not moving
-				if conditions["stand"]:
-					animation.append("stand")
-				if conditions["stand_close_reverse"]:
-					animation.append("stand_close_reverse")
-				if conditions["up_slope_to_stand"]:
-					animation.append("up_slope_to_stand")
-				if conditions["up_slope"]:
-					animation.append("up_slope")
-			else:
-				if pc.is_crouching:
-					animation.append("crouch_run")
-				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-					animation.append("back_run")
-				else:
-					animation.append("run")
-		
-		"stand_to_up_slope":
-			if pc.move_dir.x == 0.0: #not moving
-				if conditions["stand"]:
-					animation.append("stand")
-				if conditions["stand_to_up_slope"]:
-					animation.append("stand_to_up_slope")
-				if conditions["up_slope"]:
-					animation.append("up_slope")
-			else:
-				if pc.is_crouching:
-					animation.append("crouch_run")
-				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-					animation.append("back_run")
-				else:
-					animation.append("run")
-		
-		"stand_to_down_slope":
-			if pc.move_dir.x == 0.0: #not moving
-				if conditions["stand"]:
-					animation.append("stand")
-				if conditions["stand_close"]:
-					animation.append("stand_close")
-				if conditions["stand_to_down_slope"]:
-					animation.append("stand_to_down_slope")
-				if conditions["down_slope"]:
-					animation.append("down_slope")
-			else:
-				if pc.is_crouching:
-					animation.append("crouch_run")
-				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-					animation.append("back_run")
-				else:
-					animation.append("run")
-		
-		
-		"down_slope_to_stand":
-			if pc.move_dir.x == 0.0: #not moving
-				if conditions["stand"]:
-					animation.append("stand")
-				if conditions["stand_close"]:
-					animation.append("stand_close")
-				if conditions["down_slope_to_stand"]:
-					animation.append("down_slope_to_stand")
-				if conditions["down_slope"]:
-					animation.append("down_slope")
-			else:
-				if pc.is_crouching:
-					animation.append("crouch_run")
-				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-					animation.append("back_run")
-				else:
-					animation.append("run")
+				next_animations.append("down_slope")
+			elif !push_left_wall and !push_right_wall:
+				next_animations = check_and_append_moving_animations(next_animations)
 
-		"peak":
-			if pc.move_dir.x == 0.0: #not moving
-				if conditions["down_slope"]:
-					animation.append("down_slope")
-				if conditions["slight_down_slope"]:
-					animation.append("slight_down_slope")
-			else:
-				if pc.is_crouching:
-					animation.append("crouch_run")
-				elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-					animation.append("back_run")
-				else:
-					animation.append("run")
 
-	if animation.is_empty():
+	if next_animations.is_empty():
 		play_animation(ap.current_animation)
 		if ap.current_animation == "edge":
 			do_edge_turn = true
@@ -612,19 +399,19 @@ func animate(delta):
 		check_if_offset(ap.current_animation, conditions, delta)
 		return
 	
-	if animation.size() != 1:
-		printerr("ERROR: CONFLICT SETTING RUN ANIMATION FROM ", ap.current_animation, " to ", animation)
+	if next_animations.size() != 1:
+		printerr("ERROR: CONFLICT SETTING RUN ANIMATION FROM ", ap.current_animation, " to ", next_animations)
 		return
-	#if animation[0] == ap.current_animation:
+	#if next_animations[0] == ap.current_animation:
 		#return
 	
-	if animation[0] == "edge":
+	if next_animations[0] == "edge":
 		do_edge_turn = true
 	else:
 		do_edge_turn = false
 	
-	check_if_offset(animation[0], conditions, delta)
-	play_animation(animation[0])
+	check_if_offset(next_animations[0], conditions, delta)
+	play_animation(next_animations[0])
 	
 	#saved_move_dir = pc.move_dir #for 2 frame stand
 
@@ -633,40 +420,9 @@ func animate(delta):
 func run_tree(conditions) -> Array:
 	var out = []
 	if pc.move_dir.x == 0.0: #not moving
-		if conditions["stand_close"]:
-			out.append("stand_close")
-		if conditions["stand_close_reverse"]:
-			out.append("stand_close_reverse")
-		if conditions["edge"]:
-			out.append("edge")
-		if conditions["edge_front"]:
-			out.append("edge_front")
-		if conditions["edge_turn"]:
-			out.append("edge_turn")
-		if conditions["stand"]:
-			out.append("stand")
-		if conditions["crouch"]:
-			out.append("crouch")
-		#if !absolute_left and !absolute_right:
-			#out.append("stand_peak")
-		if conditions["slight_up_slope"]:
-			out.append("slight_up_slope")
-		if conditions["slight_down_slope"]:
-			out.append("slight_down_slope")
-		if conditions["up_slope"]:
-			out.append("up_slope")
-		if conditions["down_slope"]:
-			out.append("down_slope")
-		if conditions["up_slope_to_stand"]:
-			out.append("up_slope_to_stand")
-		if conditions["stand_to_up_slope"]:
-			out.append("stand_to_up_slope")
-		if conditions["stand_to_down_slope"]:
-			out.append("stand_to_down_slope")
-		if conditions["down_slope_to_stand"]:
-			out.append("down_slope_to_stand")
-		if conditions["peak"]:
-			out.append("peak")
+		out = check_and_append_animations(["edge", "edge_front", "edge_turn", "stand", "crouch", "stand_close", "stand_close_reverse", \
+		"slight_up_slope", "slight_down_slope", "up_slope", "down_slope", "up_slope_to_stand", "stand_to_up_slope", "stand_to_down_slope", "down_slope_to_stand", \
+		"peak", "valley"], conditions, out)
 	else:
 		if push_left_wall or push_right_wall:
 			if conditions["slight_up_slope"]:
@@ -680,15 +436,25 @@ func run_tree(conditions) -> Array:
 			else:
 				out.append("push")
 		else:
-			if pc.is_crouching:
-				out.append("crouch_run")
-			elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
-				out.append("back_run")
-			else:
-				out.append("run")
+			out = check_and_append_moving_animations(out)
 	return out
 
+func check_and_append_animations(animations: Array, conditions: Dictionary, next_animations: Array) -> Array: #only works if condition has same name as animation
+	var out = next_animations
+	for a in animations:
+		if conditions[a]:
+			out.append(a)
+	return out
 
+func check_and_append_moving_animations(next_animations: Array) -> Array:
+	var out = next_animations
+	if pc.is_crouching:
+		out.append("crouch_run")
+	elif sign(pc.look_dir.x) != sign(pc.move_dir.x):
+		out.append("back_run")
+	else:
+		out.append("run")
+	return out
 
 
 func check_if_offset(animation, conditions, delta):
@@ -715,6 +481,8 @@ func do_animation_sprite_offset(animation, delta):
 		"stand_to_up_slope": [Vector2(0, 10), Vector2(-3, 0)],
 		"stand_to_down_slope": [Vector2(0, 8), Vector2(0, 3)],
 		"down_slope_to_stand": [Vector2(0, 8), Vector2(-2, 2)],
+		"peak": Vector2(0, 6),
+		"valley": Vector2(0, 6),
 	}
 	
 	if offsets.has(animation): #only works if these lerp animations can't become eachother as we never reset sprite.position

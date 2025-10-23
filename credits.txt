@@ -1,17 +1,18 @@
 
 LukaLop: Lead Designer, programmer, artist, etc
 
-Developer: CrystalWarrior
+Developers: CrystalWarrior, Soru, HiloNero 
 Additional Backgrounds: Katt
 Additional Concept Art, Additional Character Design: Daedily
 Lead Composer: FiveNineSquared
 Additional Tracks: Curelapse, PhiDelta
+Bat Sprites: Yobonnie
 
 
 Special Thanks: Zoe B. Yobonnie, Ashford G., Parzivail, Chandler (Dancing Jackal)
 
 Also Thanks To: Godot and godot discord
 
-Inspired by the works of: Disuke Amaya, Hayao Miyazaki, Edward Hopper, Taracod, Shaun Tan, Ashley Wood, Yoshitaka Amano, Roger Dean, Honda Souichi
+Inspired by the works of: Daisuke Amaya, Hayao Miyazaki, Edward Hopper, Taracod, Shaun Tan, Ashley Wood, Yoshitaka Amano, Roger Dean, Honda Souichi
 
 And all the friends in the Laputa Dev server and those who caught the development streams
