@@ -64,7 +64,7 @@ height = 2.0
 size = Vector2(12, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_us632"]
-size = Vector2(12, 14)
+size = Vector2(12, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_804ka"]
 size = Vector2(12, 7)
@@ -85,7 +85,7 @@ size = Vector2(12, 1)
 size = Vector2(12, 4)
 
 [sub_resource type="RectangleShape2D" id="63"]
-size = Vector2(4, 2)
+size = Vector2(6, 2)
 
 [sub_resource type="ShaderMaterial" id="61"]
 shader = ExtResource("24_s1pnb")
@@ -1613,7 +1613,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13)]
+"values": [Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -1625,7 +1625,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16)]
+"values": [Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -1637,7 +1637,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7)]
+"values": [Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -1649,7 +1649,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10)]
+"values": [Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -1661,7 +1661,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16)]
+"values": [Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -1673,7 +1673,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7)]
+"values": [Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9)]
 }
 
 [sub_resource type="Animation" id="Animation_hx2t8"]
@@ -3787,7 +3787,7 @@ debug_color = Color(0, 0.588235, 0.705882, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0
 z_index = 1
-position = Vector2(0, -7)
+position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_us632")
 debug_color = Color(0, 0.588235, 0.705882, 0.501961)
 
@@ -3902,6 +3902,14 @@ target_position = Vector2(0, 5)
 collision_mask = 520
 collide_with_areas = true
 
+[node name="SlightSlopePeakLeft" type="RayCast2D" parent="."]
+z_index = 16
+position = Vector2(-6, 0)
+scale = Vector2(0.10890001, 1)
+target_position = Vector2(0, 2)
+collision_mask = 520
+collide_with_areas = true
+
 [node name="StandCloseLeft" type="RayCast2D" parent="."]
 z_index = 16
 position = Vector2(-4, -0.5)
@@ -3943,6 +3951,14 @@ z_index = 16
 position = Vector2(6.0000005, -0.5)
 scale = Vector2(0.33, 1)
 target_position = Vector2(0, 5)
+collision_mask = 520
+collide_with_areas = true
+
+[node name="SlightSlopePeakRight" type="RayCast2D" parent="."]
+z_index = 16
+position = Vector2(6.0000005, -0.5)
+scale = Vector2(0.33, 1)
+target_position = Vector2(0, 2)
 collision_mask = 520
 collide_with_areas = true
 
@@ -4093,7 +4109,6 @@ collision_mask = 520
 collide_with_areas = true
 
 [node name="SlopeToUpSlopeLerpDelta" type="Node2D" parent="."]
-visible = false
 
 [node name="A" type="RayCast2D" parent="SlopeToUpSlopeLerpDelta"]
 modulate = Color(0, 0, 0, 1)
@@ -4286,6 +4301,7 @@ shape = SubResource("2")
 debug_color = Color(0, 0.627451, 0.27451, 0)
 
 [node name="SSPDetector" type="Area2D" parent="."]
+visible = false
 z_index = -1
 collision_layer = 0
 collision_mask = 512
@@ -4314,6 +4330,7 @@ shape = SubResource("4")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
 [node name="CrouchDetector" type="Area2D" parent="."]
+z_index = 1
 position = Vector2(0, -2)
 collision_layer = 0
 collision_mask = 8
