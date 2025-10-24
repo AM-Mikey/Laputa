@@ -325,18 +325,23 @@ MAJOR CODE AREAS:
 
 Run animation detection:
 
--rename lerp containers
+-upslope on valley gun position +2
 -allow peak on uneven peak surface
 -allow valley on uneven surface (including 2:1)
--check that lerp deltas are all possible
--crouch detection check
+-reverse dir lock push exception
 -test animations not appending themselves
--peak and slope edge conflicts
--peak to edge (exception) or new animation, or shift x position to match peak position
+
+
+-upslope to edge height adjust
+-slight upslope to edge height adjust
+-2:1 peak animation
+
+-air to downslope xpos adjust
+-air to upslope adjust
+
 test slightslope transition animations
+-rename left edge is slope to left edge is solid/detector
 update animation groups
-expand valley detection by adding raycasts for it only
-upslope off the edge proper detection
 slightslope detection needs to have custom half sized raycasts, also custom height adjustment
 
 

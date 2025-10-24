@@ -4017,10 +4017,10 @@ target_position = Vector2(0, 13)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="UpSlopeToStandLerpDelta" type="Node2D" parent="."]
+[node name="LerpDeltaHorizontal" type="Node2D" parent="."]
 visible = false
 
-[node name="A" type="RayCast2D" parent="UpSlopeToStandLerpDelta"]
+[node name="A" type="RayCast2D" parent="LerpDeltaHorizontal"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(-5, -0.5)
@@ -4028,7 +4028,7 @@ target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="B" type="RayCast2D" parent="UpSlopeToStandLerpDelta"]
+[node name="B" type="RayCast2D" parent="LerpDeltaHorizontal"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(-4, -0.5)
@@ -4036,7 +4036,7 @@ target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="C" type="RayCast2D" parent="UpSlopeToStandLerpDelta"]
+[node name="C" type="RayCast2D" parent="LerpDeltaHorizontal"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(-3, -0.5)
@@ -4044,7 +4044,7 @@ target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="D" type="RayCast2D" parent="UpSlopeToStandLerpDelta"]
+[node name="D" type="RayCast2D" parent="LerpDeltaHorizontal"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(-2, -0.5)
@@ -4052,7 +4052,7 @@ target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="E" type="RayCast2D" parent="UpSlopeToStandLerpDelta"]
+[node name="E" type="RayCast2D" parent="LerpDeltaHorizontal"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(-1, -0.5)
@@ -4060,7 +4060,7 @@ target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="F" type="RayCast2D" parent="UpSlopeToStandLerpDelta"]
+[node name="F" type="RayCast2D" parent="LerpDeltaHorizontal"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(0, -0.5)
@@ -4068,7 +4068,7 @@ target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="G" type="RayCast2D" parent="UpSlopeToStandLerpDelta"]
+[node name="G" type="RayCast2D" parent="LerpDeltaHorizontal"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(1, -0.5)
@@ -4076,7 +4076,7 @@ target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="H" type="RayCast2D" parent="UpSlopeToStandLerpDelta"]
+[node name="H" type="RayCast2D" parent="LerpDeltaHorizontal"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(2, -0.5)
@@ -4084,7 +4084,7 @@ target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="I" type="RayCast2D" parent="UpSlopeToStandLerpDelta"]
+[node name="I" type="RayCast2D" parent="LerpDeltaHorizontal"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(3, -0.5)
@@ -4092,7 +4092,7 @@ target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="J" type="RayCast2D" parent="UpSlopeToStandLerpDelta"]
+[node name="J" type="RayCast2D" parent="LerpDeltaHorizontal"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(4, -0.5)
@@ -4100,7 +4100,7 @@ target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="K" type="RayCast2D" parent="UpSlopeToStandLerpDelta"]
+[node name="K" type="RayCast2D" parent="LerpDeltaHorizontal"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(5, -0.5)
@@ -4108,9 +4108,10 @@ target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="SlopeToUpSlopeLerpDelta" type="Node2D" parent="."]
+[node name="LerpDeltaVertical" type="Node2D" parent="."]
+visible = false
 
-[node name="A" type="RayCast2D" parent="SlopeToUpSlopeLerpDelta"]
+[node name="A" type="RayCast2D" parent="LerpDeltaVertical"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(0, -0.5)
@@ -4118,7 +4119,7 @@ target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="B" type="RayCast2D" parent="SlopeToUpSlopeLerpDelta"]
+[node name="B" type="RayCast2D" parent="LerpDeltaVertical"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(0, -0.5)
@@ -4126,7 +4127,7 @@ target_position = Vector2(0, 1.5)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="C" type="RayCast2D" parent="SlopeToUpSlopeLerpDelta"]
+[node name="C" type="RayCast2D" parent="LerpDeltaVertical"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(0, -0.5)
@@ -4134,7 +4135,7 @@ target_position = Vector2(0, 2)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="D" type="RayCast2D" parent="SlopeToUpSlopeLerpDelta"]
+[node name="D" type="RayCast2D" parent="LerpDeltaVertical"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(0, -0.5)
@@ -4142,7 +4143,7 @@ target_position = Vector2(0, 2.5)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="E" type="RayCast2D" parent="SlopeToUpSlopeLerpDelta"]
+[node name="E" type="RayCast2D" parent="LerpDeltaVertical"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(0, -0.5)
@@ -4150,7 +4151,7 @@ target_position = Vector2(0, 3)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="F" type="RayCast2D" parent="SlopeToUpSlopeLerpDelta"]
+[node name="F" type="RayCast2D" parent="LerpDeltaVertical"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(0, -0.5)
@@ -4158,7 +4159,7 @@ target_position = Vector2(0, 3.5)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="G" type="RayCast2D" parent="SlopeToUpSlopeLerpDelta"]
+[node name="G" type="RayCast2D" parent="LerpDeltaVertical"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(0, -0.5)
@@ -4166,7 +4167,7 @@ target_position = Vector2(0, 4)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="H" type="RayCast2D" parent="SlopeToUpSlopeLerpDelta"]
+[node name="H" type="RayCast2D" parent="LerpDeltaVertical"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(0, -0.5)
@@ -4174,7 +4175,7 @@ target_position = Vector2(0, 4.5)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="I" type="RayCast2D" parent="SlopeToUpSlopeLerpDelta"]
+[node name="I" type="RayCast2D" parent="LerpDeltaVertical"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(0, -0.5)
@@ -4182,7 +4183,7 @@ target_position = Vector2(0, 5)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="J" type="RayCast2D" parent="SlopeToUpSlopeLerpDelta"]
+[node name="J" type="RayCast2D" parent="LerpDeltaVertical"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(0, -0.5)
@@ -4190,7 +4191,7 @@ target_position = Vector2(0, 5.5)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="K" type="RayCast2D" parent="SlopeToUpSlopeLerpDelta"]
+[node name="K" type="RayCast2D" parent="LerpDeltaVertical"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(0, -0.5)
@@ -4198,7 +4199,7 @@ target_position = Vector2(0, 6)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="L" type="RayCast2D" parent="SlopeToUpSlopeLerpDelta"]
+[node name="L" type="RayCast2D" parent="LerpDeltaVertical"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(0, -0.5)
@@ -4206,7 +4207,7 @@ target_position = Vector2(0, 6.5)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="M" type="RayCast2D" parent="SlopeToUpSlopeLerpDelta"]
+[node name="M" type="RayCast2D" parent="LerpDeltaVertical"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(0, -0.5)
@@ -4214,7 +4215,7 @@ target_position = Vector2(0, 7)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="N" type="RayCast2D" parent="SlopeToUpSlopeLerpDelta"]
+[node name="N" type="RayCast2D" parent="LerpDeltaVertical"]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(0, -0.5)
