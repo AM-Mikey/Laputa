@@ -116,9 +116,11 @@ func first_time_level_setup():
 	add_child(JUNIPER.instantiate())
 	$Juniper/PlayerCamera.position_smoothing_enabled = false
 	uig.add_child(HUD.instantiate())
-	
+	print ("world's start level path is " + start_level_path)
 	current_level = load(start_level_path).instantiate()
 	add_child(current_level)
+	print ("first time level setup current_level print:")
+	print (current_level)
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		$Juniper.global_position = s.global_position
 	
@@ -143,15 +145,20 @@ func change_level_via_code(level_path):
 	print("changing level via code...")
 	if uig.has_node("DialogBox"): $UILayer/UIGroup/DialogBox.exit()
 	clear_spawn_layers()
+	print ("PRE FREEING W'S CURRENT_LEVEL")
 	current_level.queue_free()
+	print ("W'S CURRENT LEVEL FREED")
+
 	current_level = null
-	await get_tree().process_frame
+	#await get_tree().process_frame
 	add_child(JUNIPER.instantiate())
 	$Juniper/PlayerCamera.position_smoothing_enabled = false
 	uig.add_child(HUD.instantiate())
 	
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
+	print ("CHILD ADDED, WHO?")
+	print (current_level)
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		$Juniper.global_position = s.global_position
 	
