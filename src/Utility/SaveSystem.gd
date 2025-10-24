@@ -45,6 +45,7 @@ func write_player_data_to_save(current_level):
 
 func read_player_data_from_save():
 	var scoped_data = read_from_file(save_path)
+	
 	var player_data = scoped_data["player_data"]
 	
 	if f.pc(): #TODO: something strange about the timing of loading in juniper, consider moving that code here instead of the awaits
@@ -167,6 +168,12 @@ func read_level_data_from_temp(current_level):
 
 func read_level_data_from_save(current_level):
 	var scoped_data = read_from_file(save_path)
+	print ("scoped data:")
+	print (scoped_data)
+	print ("scoped data's level data:")
+	print (scoped_data['level_data'])
+	print (scoped_data['level_data'].has(current_level.name)) 
+
 	if !scoped_data["level_data"].has(current_level.name):
 		print("no previous level data in save")
 		return
@@ -188,8 +195,10 @@ func read_from_file(file_path):
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	if file:
 		read_data = file.get_var()
+		print("READ FROM FILE SUCCESS")
+		print (read_data)
 	else:
-		printerr("ERROR: cannot read file at: " + file_path)
+		print("ERROR: cannot read file at: " + file_path)
 	return read_data
 
 
