@@ -892,7 +892,7 @@ func calc_velocity():
 	if pc.move_dir.x != 0.0:
 		var max_speed = mm.speed.x
 		#cap max_speed by how hard you pressed your analog stick in X axis
-		if abs(pc.move_dir.x) <= 0.85: #makes inputs close to 1.0 equal to 1.0, analog otherwise
+		if abs(pc.move_dir.x) <= inp.Y_axis_shoot_deadzone: #makes inputs close to 1.0 equal to 1.0, analog otherwise
 			max_speed *= abs(pc.move_dir.x)
 		
 		if pc.is_crouching:

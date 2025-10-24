@@ -2,6 +2,7 @@
 extends Node
 
 var Y_axis_shoot_deadzone:float = 0.25
+var X_axis_1clamp_zone:float = 0.75 #values after this will equal to 1.0 in running/drifting
 
 var pressbuffer:int = 4
 
