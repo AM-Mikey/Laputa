@@ -60,7 +60,10 @@ func set_player_directions():
 		look_x = pc.direction_lock.x
 	elif pc.move_dir.x != 0.0: #moving
 		look_x = sign(pc.move_dir.x)
-	pc.look_dir = Vector2i(look_x, input_dir.y)
+	pc.look_dir = Vector2i(look_x, 0)
+	if abs(input_dir.y) >= inp.Y_axis_shoot_deadzone:
+		pc.look_dir.y = sign(input_dir.y)
+	
 	#get shoot_dir
 	var shoot_vertically = false
 	if pc.look_dir.y < 0.0:
@@ -73,6 +76,8 @@ func set_player_directions():
 		pc.shoot_dir = Vector2(0.0, pc.look_dir.y) 
 	else: 
 		pc.shoot_dir = Vector2(pc.look_dir.x, 0.0)
+
+	print (input_dir)
 
 
 func check_shoot_down() -> bool:

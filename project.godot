@@ -70,6 +70,7 @@ mc="*res://src/UI/MouseCursor.gd"
 SaveSystem="*res://src/Utility/SaveSystem.gd"
 f="*res://src/Utility/Finder.gd"
 vs="*res://src/Utility/ViewportScaler.gd"
+inp="*res://src/Utility/InputSystem.gd"
 
 [display]
 
