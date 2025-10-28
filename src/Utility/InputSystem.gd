@@ -1,30 +1,40 @@
 #Skeleton of an input system to be filled with real systems later
 extends Node
+var analogstick:Vector2 = Vector2(0,0)
+
+
+var Xaxis_deadzone:float = 0.2 #general deadzone
+var Yaxis_deadzone:float = 0.2 #general deadzone
 
 var Y_axis_shoot_deadzone:float = 0.25
-var X_axis_1clamp_zone:float = 0.75 #values after this will equal to 1.0 in running/drifting
 
+
+var X_axis_1clamp_zone:float = 0.75 #values after this will equal to 1.0 in running/drifting
 var pressbuffer:int = 4
 
 
-func inputpressed(button:String,custombuffer:int=pressbuffer,deadzone_min:float=0.8) -> bool:
-	#replace with real buffer check later
-	if Input.get_action_strength(button) >= deadzone_min and Input.is_action_just_pressed(button):
-		return true
-	return false
+func rawstick() -> Vector2:
+	var outputX:float = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	var outputY:float = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
+	return Vector2(outputX,outputY)
 
-func inputheld(button:String,deadzone_min:float=0.8,below:int=900000000,above:int=0) -> bool: #button held. pretty simple
-	#replace with real buffer check
-	if Input.get_action_strength(button) >= deadzone_min:
-		return true
-	return false
+func stick_deadzone(stick:Vector2,deadzoneX:float=Xaxis_deadzone,deadzoneY:float=Yaxis_deadzone) -> Vector2:
+	var result:Vector2 = stick
+	if abs(result.x) < deadzoneX: result.x = 0.0
+	if abs(result.y) < deadzoneY: result.y = 0.0
+	return result
 
 
+
+
+
+
+
+
+##process
+func _physics_process(delta):
+	analogstick = stick_deadzone(rawstick())
 
 
 
 ##Presets
-
-func check_gunaim(button) -> bool:
-	inputheld(button,Y_axis_shoot_deadzone)
-	return false
