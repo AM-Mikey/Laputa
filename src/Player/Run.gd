@@ -53,6 +53,7 @@ func set_player_directions():
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
 	#get move_dir
+	print (input_dir)
 	pc.move_dir = Vector2(input_dir.x, 0.0)
 	#get look_dir
 	var look_x = pc.look_dir.x
