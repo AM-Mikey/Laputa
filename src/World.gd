@@ -145,7 +145,7 @@ func change_level_via_code(level_path):
 	clear_spawn_layers()
 	current_level.queue_free()
 	current_level = null
-	await get_tree().process_frame
+
 	add_child(JUNIPER.instantiate())
 	$Juniper/PlayerCamera.position_smoothing_enabled = false
 	uig.add_child(HUD.instantiate())
