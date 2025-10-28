@@ -61,7 +61,6 @@ func set_player_directions():
 	else:
 		pc.shoot_dir = Vector2(pc.look_dir.x, 0.0)
 
-	print (input_dir)
 
 
 

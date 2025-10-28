@@ -50,7 +50,6 @@ func set_player_directions():
 	var input_dir:Vector2 = Vector2(0.0,0.0)
 	if pc.can_input: input_dir = inp.analogstick 
 	#get move_dir
-	print (input_dir)
 	pc.move_dir = Vector2(input_dir.x, 0.0)
 	#get look_dir
 	var look_x = pc.look_dir.x
