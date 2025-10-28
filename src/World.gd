@@ -150,7 +150,7 @@ func change_level_via_code(level_path):
 	print ("W'S CURRENT LEVEL FREED")
 
 	current_level = null
-	#await get_tree().process_frame
+	await get_tree().process_frame
 	add_child(JUNIPER.instantiate())
 	$Juniper/PlayerCamera.position_smoothing_enabled = false
 	uig.add_child(HUD.instantiate())
