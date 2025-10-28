@@ -40,6 +40,11 @@ func _input(event):
 ### METHODS
 
 func shift_gun(direction):
+	# Stop the active gun from erroneously firing when it's no longer active
+	var active_gun = $Guns.get_child(0)
+	active_gun.release_manual_fire()
+	active_gun.release_auto_fire()
+
 	match direction:
 		"left":
 			var child_to_move = $Guns.get_child($Guns.get_child_count() - 1)
@@ -56,6 +61,13 @@ func shift_gun(direction):
 	pc.emit_signal("guns_updated", $Guns.get_children())
 	#pc.emit_signal("xp_updated", $Guns.get_child(0).xp, $Guns.get_child(0).max_xp, $Guns.get_child(0).level, $Guns.get_child(0).max_level)
 	am.play("gun_shift")
+	
+	# The new active gun should continue firing even when we swap between guns
+	active_gun = $Guns.get_child(0)
+	if Input.is_action_pressed("fire_manual"):
+		active_gun.fire("manual")
+	if Input.is_action_pressed("fire_automatic") and active_gun.automatic:
+		active_gun.fire("automatic")
 
 
 
