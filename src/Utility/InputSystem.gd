@@ -5,11 +5,11 @@ var analogstick:Vector2 = Vector2(0,0)
 
 var Xaxis_deadzone:float = 0.2 #general deadzone
 var Yaxis_deadzone:float = 0.2 #general deadzone
+var Xaxis_clampzone:float = 0.75 #everything after this input is turned into 1.0
 
 var Y_axis_shoot_deadzone:float = 0.25
 
 
-var X_axis_1clamp_zone:float = 0.75 #values after this will equal to 1.0 in running/drifting
 var pressbuffer:int = 4
 
 
@@ -24,7 +24,11 @@ func stick_deadzone(stick:Vector2,deadzoneX:float=Xaxis_deadzone,deadzoneY:float
 	if abs(result.y) < deadzoneY: result.y = 0.0
 	return result
 
-
+func stick_clampzoneX(stick:Vector2,clampX:float=Xaxis_clampzone) -> Vector2:
+	var result:Vector2 = stick
+	if abs(result.x) >= clampX:
+		result.x = sign(result.x)
+	return result
 
 
 
@@ -33,8 +37,8 @@ func stick_deadzone(stick:Vector2,deadzoneX:float=Xaxis_deadzone,deadzoneY:float
 
 ##process
 func _physics_process(delta):
-	analogstick = stick_deadzone(rawstick())
-
+	analogstick = stick_clampzoneX( stick_deadzone(rawstick()) )
+	print (analogstick)
 
 
 ##Presets
