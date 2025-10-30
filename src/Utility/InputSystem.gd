@@ -5,7 +5,7 @@ var analogstick:Vector2 = Vector2(0,0)
 
 var Xaxis_deadzone:float = 0.2 #general deadzone
 var Yaxis_deadzone:float = 0.2 #general deadzone
-var Xaxis_clampzone:float = 0.75 #everything after this input is turned into 1.0
+var Xaxis_clampzone:float = 0.85 #everything after this input is turned into 1.0
 
 var Y_axis_shoot_deadzone:float = 0.25
 
@@ -38,7 +38,7 @@ func stick_clampzoneX(stick:Vector2,clampX:float=Xaxis_clampzone) -> Vector2:
 ##process
 func _physics_process(delta):
 	analogstick = stick_clampzoneX( stick_deadzone(rawstick()) )
-	print (analogstick)
+	#print (analogstick)
 
 
 ##Presets
