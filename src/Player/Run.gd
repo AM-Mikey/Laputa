@@ -886,7 +886,6 @@ func calc_velocity():
 	out.y += mm.gravity * get_physics_process_delta_time()
 	#X
 	if pc.move_dir.x != 0.0:
-		print (pc.move_dir)
 		var max_speed = mm.speed.x
 		#cap max_speed by how hard you pressed your analog stick in X axis
 		if abs(pc.move_dir.x) <= inp.Xaxis_clampzone: #makes inputs close to 1.0 equal to 1.0, analog otherwise
