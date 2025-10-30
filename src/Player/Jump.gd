@@ -39,10 +39,7 @@ func state_process(_delta):
 
 func set_player_directions():
 	var input_dir = Vector2.ZERO
-	if pc.can_input: 
-		input_dir = Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+	if pc.can_input: input_dir = inp.analogstick
 	
 	#get move dir
 	pc.move_dir = Vector2(input_dir.x, pc.move_dir.y)
@@ -53,13 +50,18 @@ func set_player_directions():
 		look_x = pc.direction_lock.x
 	elif pc.move_dir.x != 0.0: #moving
 		look_x = sign(pc.move_dir.x)
-	pc.look_dir = Vector2i(look_x, input_dir.y)
+	pc.look_dir = Vector2i(look_x, 0)
+	if abs(input_dir.y) >= inp.Y_axis_shoot_deadzone:
+		pc.look_dir.y = sign(input_dir.y)
+
 	
 	#get shoot dir
 	if pc.look_dir.y != 0.0: #up/down
 		pc.shoot_dir = Vector2(0.0, pc.look_dir.y) 
 	else:
 		pc.shoot_dir = Vector2(pc.look_dir.x, 0.0)
+
+
 
 
 func animate():
