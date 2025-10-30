@@ -66,9 +66,9 @@ func writebuffer() -> void:
 
 
 
-func inputpressed(inp,custombuffer=pressbuffer,prevstate='') -> bool: 
+func pressed(button,custombuffer=pressbuffer,prevstate='') -> bool: 
 	for x in buffer:
-		if x[0] == inp:
+		if x[0] == button:
 			if x[2] <= custombuffer:
 				x[2] = custombuffer
 				return true 
@@ -84,4 +84,5 @@ func _physics_process(delta):
 
 	writebuffer()
 
+	print (buffer)
 ##Presets
