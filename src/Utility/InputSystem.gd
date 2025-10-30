@@ -83,6 +83,4 @@ func _physics_process(delta):
 	analogstick = stick_clampzoneX( stick_deadzone(rawstick()) )
 
 	writebuffer()
-
-	print (buffer)
 ##Presets
