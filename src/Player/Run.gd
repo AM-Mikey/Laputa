@@ -37,13 +37,16 @@ func state_process(delta):
 	if not pc.is_on_floor() and not pc.is_in_coyote:
 		pc.is_in_coyote = true
 		mm.do_coyote_time()
-	if Input.is_action_just_pressed("jump") and Input.is_action_pressed("look_down") and pc.is_on_ssp and pc.can_input:
+	if inp.pressed("jump") and Input.is_action_pressed("look_down") and pc.is_on_ssp and pc.can_input:
 		is_dropping = true
 		mm.drop()
-		return
-	elif Input.is_action_pressed("jump") and !is_dropping and pc.can_input:
-		mm.jump()
-		return
+		return #is this needed?
+	elif !is_dropping and pc.can_input:
+		if inp.pressed("jump"):
+			mm.jump()
+		elif inp.buttonconfig.holdjumping:
+			if inp.held("jump"):
+				mm.jump()
 
 
 func set_player_directions():

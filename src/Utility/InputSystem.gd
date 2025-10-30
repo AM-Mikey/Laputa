@@ -1,5 +1,10 @@
-#Skeleton of an input system to be filled with real systems later
+
 extends Node
+var buttonconfig:Dictionary = {
+	holdjumping = true,
+	buttons = {},
+	
+	}
 
 			#STICK
 var analogstick:Vector2 = Vector2(0,0)
@@ -34,8 +39,8 @@ func stick_clampzoneX(stick:Vector2,clampX:float=Xaxis_clampzone) -> Vector2:
 var buffer:Array=[
 	["look_up",0,9000,9000],
 	["look_down",0,9000,9000],
-	["look_left",0,9000,9000],
-	["look_right",0,9000,9000],
+	["move_left",0,9000,9000],
+	["move_right",0,9000,9000],
 	["jump",0,9000,9000],
 	["fire_manual",0,9000,9000],
 	["fire_automatic",0,9000,9000],
@@ -76,7 +81,12 @@ func pressed(button,custombuffer=pressbuffer,prevstate='') -> bool:
 	print ("INPUT NOT FOUND IN BUFFER")
 	return false
 
-
+func held(button,below=900000000,above=0): #button held. pretty simple
+	for x in buffer:
+		if x[0] == button:
+			if x[1] > above and x[1] <= below:
+				return true
+			else: return false
 
 ##process
 func _physics_process(delta):
