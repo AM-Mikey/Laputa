@@ -23,7 +23,7 @@ func exit():
 
 func on_selected(selection, selection_type):
 	if selection.is_in_group("Previews"): return
-	
+
 	if active: #deselect old
 		if active.has_method("on_editor_deselect"): active.on_editor_deselect()
 		for c in $Margin/VBox/Scroll/VBox.get_children():
@@ -34,7 +34,7 @@ func on_selected(selection, selection_type):
 	if active: #select new
 		if active.has_method("on_editor_select"): active.on_editor_select()
 	display_data()
-	
+
 	#match active_type:
 		##"spawn_point":
 			##editor.set_tool("entity", "noplace")
@@ -56,15 +56,15 @@ func on_deselected():
 	active_property = ""
 	clear_data()
 	if editor.get_node("Main/Win/Tab").current_tab == 0: #tiles
-		on_selected(editor.w.current_level.get_node("TileMap"), "tile_map")
-	
+		on_selected(editor.w.current_level.get_node("TileMap").get_node("Front"), "tile_map")
+
 
 ### DISPLAY DATA
 
 func display_data():
 	clear_data()
 	$Margin/VBox/Label.text = active.name
-	
+
 	match active_type:
 		"background":
 			var level_rect = active.get_node("Margin/LevelRect")
@@ -94,7 +94,7 @@ func display_data():
 					create_button("text", active.properties[p][0], "multiline")
 				else:
 					create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
-				
+
 		#"enemy": #replaced with actor spawn
 			#for p in active.get_property_list():
 				#if p["usage"] == EXPORT:
@@ -125,8 +125,7 @@ func display_data():
 				if p["usage"] == EXPORT:
 					create_button(p["name"], active.get(p["name"]), p["type"])
 		"tile_map":
-			var tile_map = active
-			for layer_id in tile_map.get_layers_count():
+			for layer_id in range(0, get_child_count()):
 				create_layer_button(layer_id)
 
 func get_property_type(type_flag, is_load) -> String:
@@ -199,7 +198,7 @@ func on_property_selected(property_name):
 					$FileDialog.current_dir = "res://assets/Background/"
 					$FileDialog.set_filters(PackedStringArray(["*.png"]))
 					$FileDialog.popup()
-		
+
 		"level":
 			match property_name:
 				"tile_set":
@@ -263,7 +262,7 @@ func on_property_changed(property_name, property_value):
 			active.properties[property_name][0] = property_value
 		"level":
 			match property_name:
-				"tile_set": 
+				"tile_set":
 					active.set(property_name, load(property_value))
 					editor.on_TileSet_tile_set_loaded(property_value)
 					editor.on_TileSet_tile_set_loaded(property_value)
@@ -279,7 +278,7 @@ func on_property_changed(property_name, property_value):
 			active.visual.update()
 		_:
 			active.set(property_name, property_value)
-	
+
 	display_data() #to reload
 	editor.log.lprint(str("Changed ", active_type, " ", active.name, "'s ", property_name, " to ", property_value))
 	print("Changed ", active_type, " ", active.name, "'s ", property_name, " to ", property_value)

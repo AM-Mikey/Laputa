@@ -14,11 +14,11 @@ var drag_offset = Vector2.ZERO
 func _ready():
 	position = level_limiter.position - Vector2(16,16)
 	size = level_limiter.size + Vector2(32,32)
-	
+
 	for c in get_children():
 		if c is TextureButton:
 			c.connect("button_down", Callable(self, "on_handle").bind(c))
-	
+
 	connect("selected", Callable(editor.inspector, "on_selected"))
 
 
@@ -35,7 +35,7 @@ func _input(event):
 		if event is InputEventMouseMotion:
 			var x = snapped(get_global_mouse_position().x + drag_offset.x, 16)
 			var y = snapped(get_global_mouse_position().y + drag_offset.y, 16)
-			
+
 			match active_handle.name:
 				"TopLeft":
 					offset_top = y
@@ -57,11 +57,11 @@ func _input(event):
 					offset_left = x
 				"Right":
 					offset_right = x + 16
-			
+
 			level_limiter.global_position = $Margin/LevelRect.global_position
 			level_limiter.size = $Margin/LevelRect.size
 			level_limiter.on_camera_zoom_changed()
-		
+
 		if event.is_action_released("editor_lmb"):
 			state = "idle"
 

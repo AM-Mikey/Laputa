@@ -80,12 +80,12 @@ func _input(event):
 		if hovered_button:
 			var start_position = brush_region.position
 			var end_position = hovered_button.tile_set_position / 16
-			
+
 			if start_position.x <= end_position.x: #left to right
 				end_position.x += 1
 			if start_position.y <= end_position.y: #top to bottom
 				end_position.y += 1
-			
+
 			brush_region = brush_region.expand(end_position)
 			var layer = floor(start_position.y / 4)
 			brush_region = clamp_brush_region(layer)
@@ -96,7 +96,7 @@ func _input(event):
 
 func clamp_brush_region(layer) -> Rect2i:
 	var out = brush_region
-	
+
 	var clamp_region = Rect2i(0, layer * 4, 9999, 4)
 	out = out.intersection(clamp_region)
 	return out
@@ -105,10 +105,10 @@ func clamp_brush_region(layer) -> Rect2i:
 func set_cursor():
 	var x_pos = brush_region.position.x + (floor(brush_region.position.x * 16) * tile_master.tile_separation)
 	var y_pos = brush_region.position.y + (floor(brush_region.position.y * 16) * tile_master.tile_separation)
-	get_node(cursor).position = Vector2(x_pos, y_pos) 
+	get_node(cursor).position = Vector2(x_pos, y_pos)
 	var x_size = brush_region.size.x + (floor(brush_region.size.x * 16) * tile_master.tile_separation)
 	var y_size = brush_region.size.y + (floor(brush_region.size.y * 16) * tile_master.tile_separation)
-	get_node(cursor).size = Vector2(x_size, y_size) 
+	get_node(cursor).size = Vector2(x_size, y_size)
 
 
 ### SIGNALS ###

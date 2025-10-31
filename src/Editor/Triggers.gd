@@ -14,11 +14,11 @@ func setup_triggers(): #TODO: connect this to editor
 	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
 	var index = 0
 	for p in find_trigger_scenes("res://src/Trigger/"):
-		
+
 		var trigger = load(p).instantiate()
-		
+
 		triggers[trigger.name] = trigger
-		
+
 		var trigger_button = TRIGGER_BUTTON.instantiate()
 		trigger_button.trigger_path = p
 		trigger_button.trigger_name = trigger.name
@@ -43,7 +43,7 @@ func find_trigger_scenes(path):
 			break
 		if file.ends_with(".tscn"):
 			files.append(path + file)
-			
+
 	return files
 
 

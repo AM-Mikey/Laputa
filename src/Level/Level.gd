@@ -21,7 +21,7 @@ func _ready():
 	if has_node("Notes"):
 		get_node("Notes").visible = false
 	setup_kill_box()
-		
+
 	if level_type == LevelType.PLAYERLESS_CUTSCENE:
 		do_playerless_cutscene()
 
@@ -37,7 +37,7 @@ func _ready():
 func do_playerless_cutscene():
 	if w.has_node("UILayer/UIGroup/DialogBox"): #clear old dialog box if there is one
 		w.get_node("UILayer/UIGroup/DialogBox").stop_printing()
-	
+
 	var dialog_box = DB.instantiate()
 	dialog_box.connect("dialog_finished", Callable(self, "on_dialog_finished"))
 	get_tree().get_root().get_node("World/UIGroup/UILayer").add_child(dialog_box)

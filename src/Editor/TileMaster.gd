@@ -15,13 +15,13 @@ var rows: int
 
 ### SETUP ###
 func setup_tile_master():
-	texture = w.current_level.get_node("TileMap").tile_set.get_source(0).texture
+	texture = w.current_level.get_node("TileMap").get_node("Front").tile_set.get_source(0).texture
 	columns = floor(texture.get_width()/16)
 	rows = floor(texture.get_height()/16)
-	
+
 	tiles_tab.setup_options()
 	#tiles.setup_tiles() already done in editor
-	
+
 	tile_set_tab.setup_tile_set()
 	#setup_brushes()
 
@@ -52,7 +52,7 @@ func setup_tile_buttons(caller: Node, parent_path: NodePath):
 
 	var used_tile_coords = get_all_tile_coords()
 	for i in used_tile_coords:
-		
+
 		var used_button = parent.get_child(i.y).get_child(i.x)
 		#print("button: ", used_button)
 		used_button.set("texture", get_tile_as_texture(i))
@@ -63,7 +63,7 @@ func setup_tile_buttons(caller: Node, parent_path: NodePath):
 
 func get_all_tile_coords() -> Array[Vector2i]:
 	var coords: Array[Vector2i] = []
-	var tile_set = w.current_level.get_node("TileMap").tile_set
+	var tile_set = w.current_level.get_node("TileMap").get_node("Front").tile_set
 	#for i in tile_set.get_source(0).get_tiles_count(): #for only used tiles
 		#coords.append(tile_set.get_source(0).get_tile_id(i))
 	var size = (tile_set.get_source(0).texture.get_size()) / 16.0

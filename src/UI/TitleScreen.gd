@@ -19,7 +19,7 @@ func _ready():
 										#LOAD BUTTON STUFF
 	if not FileAccess.file_exists(SaveSystem.save_path):
 		$VBox/Load.queue_free()
-	
+
 	####
 	am.play_music("theme")
 	await get_tree().process_frame
@@ -41,11 +41,11 @@ func do_focus():
 
 func _on_new():
 	queue_free()
-	
+
 	w.on_level_change(w.start_level.scence_file_path, -1)
 	w.add_child(JUNIPER.instantiate())
 	w.get_node("UILayer/UIGroup").add_child(HUD.instantiate())
-	
+
 	var spawn_points = get_tree().get_nodes_in_group("SpawnPoints")
 	for s in spawn_points:
 		w.get_node("Juniper").position = s.global_position

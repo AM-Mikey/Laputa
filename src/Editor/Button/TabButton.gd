@@ -45,4 +45,3 @@ func set_collection_visibility(visible):
 				a.visible = visible
 		5: cl.get_node("Props").visible = visible
 		6: cl.get_node("Triggers").visible = visible
-	

@@ -9,6 +9,6 @@ func _process(_delta):
 	$HBox/Coordinates.text = str(cell_pos)
 
 
-	var tile = editor.tile_map.get_cell_source_id(0, cell_pos)
+	var tile = editor.tile_map.get_child(0).get_cell_source_id(cell_pos)
 	if tile != -1:
 		$HBox/Tile.text = str(tile)

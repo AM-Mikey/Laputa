@@ -33,7 +33,7 @@ func _ready():
 		size = trigger.get_node("CollisionShape2D").shape.size
 		size_is_default = false
 	#global_position = trigger.get_node("CollisionShape2D").global_position
-	
+
 	if world.el.get_child_count() == 0: #not in editor
 		visible = false
 		spawn()
@@ -56,12 +56,12 @@ func initialize(): #first time set up properties
 			properties[p["name"]] = [trigger.get(p["name"]), p["type"]]
 		elif p["usage"] == 69638: #exported property enums
 			properties[p["name"]] = [trigger.get(p["name"]), p["type"]]
-		
+
 func spawn():
 	if trigger_path == null:
 		printerr("ERROR: no trigger chosen in TriggerSpawn")
 		return
-	
+
 	var trigger = load(trigger_path).instantiate()
 	for p in properties:
 		trigger.set(p, properties[p][0])
@@ -71,7 +71,7 @@ func spawn():
 	new_shape.size = size
 	trigger.get_node("CollisionShape2D").shape = new_shape
 	trigger.get_node("CollisionShape2D").position = new_shape.size * 0.5
-	
+
 	world.current_level.get_node("Triggers").call_deferred("add_child", trigger)
 
 
@@ -83,10 +83,10 @@ func _input(event):
 	if event is InputEventMouseMotion and state != "idle": #dragging or resizing
 		var x = snapped(get_global_mouse_position().x + drag_offset.x, 8)
 		var y = snapped(get_global_mouse_position().y + drag_offset.y, 8)
-		
+
 		var parent_x = get_parent().position.x
 		var parent_y = get_parent().position.y
-		
+
 		match state:
 			"drag":
 				var tile_map = world.current_level.get_node("TileMap")
@@ -115,7 +115,7 @@ func _input(event):
 						offset_right = x - parent_x
 
 
-### SIGNALS 
+### SIGNALS
 
 func on_editor_select(): #when
 	modulate = Color(1,0,0,.75)
@@ -133,7 +133,7 @@ func on_handle(handle):
 		state = "drag"
 		drag_offset = global_position - get_global_mouse_position()
 	emit_signal("selected", get_parent(), "trigger")
-	
-	
+
+
 	var inspector = world.get_node("EditorLayer/Editor").inspector
 	inspector.on_selected(self, "trigger_spawn")

@@ -20,14 +20,14 @@ var collision_shape_data: Dictionary
 func setup():
 	gravity = 0
 	match difficulty:
-		0: 
+		0:
 			hp = 2
 			reward = 1
 			damage_on_contact = 1
 			idle_time = 2.0
 			$Sprite2D.texture = TX_0
 			change_state("idle")
-		1: 
+		1:
 			hp = 2
 			reward = 2
 			damage_on_contact = 2
@@ -115,7 +115,7 @@ func do_idlescan():
 			collider = $PlayerUpCast.get_collider()
 
 	if collider:
-		if collider is TileMap:
+		if collider is TileMapLayer:
 			return
 		if $FlyCooldown.is_stopped():
 			change_state("fly")
@@ -139,7 +139,7 @@ func do_fly():
 		Vector2.RIGHT: collider = $RightCast.get_collider()
 		Vector2.UP: collider = $UpCast.get_collider()
 		Vector2.DOWN: collider = $DownCast.get_collider()
-	
+
 	if collider:
 		match difficulty:
 			0:
@@ -174,7 +174,7 @@ func do_platformcrawl():
 	var edge_collider
 	var player_collider
 	var world_collider
-	
+
 
 	match move_dir:
 		Vector2.LEFT:
@@ -185,7 +185,7 @@ func do_platformcrawl():
 			wall_collider = $UpCast.get_collider()
 		Vector2.DOWN:
 			wall_collider = $DownCast.get_collider()
-	
+
 	match wall_dir:
 		Vector2.LEFT:
 			if move_dir == Vector2.UP:
@@ -215,7 +215,7 @@ func do_platformcrawl():
 				edge_collider = $DownCastR.get_collider()
 			player_collider = $PlayerUpCast.get_collider()
 			world_collider = $WorldUpCast.get_collider()
-	
+
 	if wall_collider: #flip from wall
 		#print("flipwall")
 		if $FlipCooldown.is_stopped():
@@ -232,7 +232,7 @@ func do_platformcrawl():
 		else:
 			speed = Vector2.ZERO #prevent from walking off edge
 	if player_collider:
-		if player_collider is TileMap:
+		if player_collider is TileMapLayer:
 			return
 		if world_collider:
 			#print("gotplayer")
@@ -292,9 +292,9 @@ func set_collision_shapes():
 	for key in collision_shape_data.keys():
 		get_node(key).visible = false
 		get_node(key).disabled = true
-	
+
 	var new_shape_rot = -90 + rad_to_deg(wall_dir.angle()) #90 * move_dir.x
-	
+
 	match state:
 		"idle", "crawl", "platformcrawl", "idlescan":
 			for i in collision_shape_data:
