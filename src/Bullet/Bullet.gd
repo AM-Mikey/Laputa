@@ -42,11 +42,25 @@ func do_fizzle(type: String):
 	fizzle.position = $End.global_position if has_node("End") else global_position
 	fizzle.play()
 	if instant_fizzle and not is_enemy_bullet:
-		print("WARNING: Bullet instantly fizzled")
-		fizzle.position = world.get_node("Juniper").guns.get_child(0).get_node("Muzzle").global_position
+		var gun = world.get_node("Juniper").guns.get_child(0)
+		var gun_center = gun.global_position
+		var space_state = get_world_2d().direct_space_state
+		# use global coordinates, not local to node
+		var query = PhysicsRayQueryParameters2D.create(gun_center, fizzle.position)
+		# Bullet should have its collison mask set accurately to what it intends to collide with
+		# collision mask: World (bit 3), Armor (bit 5), Breakable (bit 8)
+		# This is done so the raycast doesn't collide with the player or anything else!
+		query.collision_mask = 1<<3 | 1<<5 | 1<<8
+		# If the raycast appears already inside another body (e.g. a block), we should still consider it,
+		# otherwise the fizzle will appear incorrectly on the other side of the block
+		query.hit_from_inside = true
+		var result = space_state.intersect_ray(query)
+		if result:
+			fizzle.position = result.position
 	queue_free()
 
 func instant_fizzle_check():
+	instant_fizzle = true
 	visible = false
 	await get_tree().physics_frame
 	await get_tree().physics_frame

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsjh5nurjfifx"
-path="res://.godot/imported/StandPeak.png-74eb233c95a17192b9b4ad2e55e3f0f1.ctex"
+uid="uid://bmongaecnluww"
+path="res://.godot/imported/Peak.png-bbc2f26e06ea1963ee105643104ee348.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Player/StandPeak.png"
-dest_files=["res://.godot/imported/StandPeak.png-74eb233c95a17192b9b4ad2e55e3f0f1.ctex"]
+source_file="res://assets/Player/Peak.png"
+dest_files=["res://.godot/imported/Peak.png-bbc2f26e06ea1963ee105643104ee348.ctex"]
 
 [params]
 

@@ -1,15 +1,15 @@
-[gd_resource type="TileSet" load_steps=21 format=3 uid="uid://cm4auuymtmne6"]
+[gd_resource type="TileSet" load_steps=21 format=3]
 
-[ext_resource type="Texture2D" uid="uid://clwgbhgjy4xub" path="res://assets/Tile/Wastes/Wastes0.png" id="1_huovy"]
-[ext_resource type="Texture2D" uid="uid://caj0qj1lcxpkr" path="res://assets/Tile/Wastes/Wastes1.png" id="2_ds6h0"]
-[ext_resource type="Texture2D" uid="uid://bdemfwq0wwnni" path="res://assets/Tile/Wastes/Wastes2.png" id="3_i2hor"]
-[ext_resource type="Texture2D" uid="uid://ddmpf6rskdour" path="res://assets/Tile/Wastes/Wastes3.png" id="4_h784c"]
-[ext_resource type="Texture2D" uid="uid://c1k080hh22j0b" path="res://assets/Tile/Wastes/Wastes4.png" id="5_0v5un"]
-[ext_resource type="Texture2D" uid="uid://c1ignh7848fc2" path="res://assets/Tile/Wastes/Wastes5.png" id="6_118ku"]
-[ext_resource type="Texture2D" uid="uid://buahcatvh43qo" path="res://assets/Tile/Wastes/Wastes6.png" id="7_jhap7"]
-[ext_resource type="Texture2D" uid="uid://bywdtqvs0mmm0" path="res://assets/Tile/Wastes/Wastes7.png" id="8_g8o2m"]
-[ext_resource type="Texture2D" uid="uid://bgfaefcywcdrm" path="res://assets/Tile/Wastes/Wastes8.png" id="9_ue1mp"]
-[ext_resource type="Texture2D" uid="uid://c138wwwpswikl" path="res://assets/Tile/Wastes/Wastes9.png" id="10_pai51"]
+[ext_resource type="Texture2D" path="res://assets/Tile/Wastes/Wastes0.png" id="1_huovy"]
+[ext_resource type="Texture2D" path="res://assets/Tile/Wastes/Wastes1.png" id="2_ds6h0"]
+[ext_resource type="Texture2D" path="res://assets/Tile/Wastes/Wastes2.png" id="3_i2hor"]
+[ext_resource type="Texture2D" path="res://assets/Tile/Wastes/Wastes3.png" id="4_h784c"]
+[ext_resource type="Texture2D" path="res://assets/Tile/Wastes/Wastes4.png" id="5_0v5un"]
+[ext_resource type="Texture2D" path="res://assets/Tile/Wastes/Wastes5.png" id="6_118ku"]
+[ext_resource type="Texture2D" path="res://assets/Tile/Wastes/Wastes6.png" id="7_jhap7"]
+[ext_resource type="Texture2D" path="res://assets/Tile/Wastes/Wastes7.png" id="8_g8o2m"]
+[ext_resource type="Texture2D" path="res://assets/Tile/Wastes/Wastes8.png" id="9_ue1mp"]
+[ext_resource type="Texture2D" path="res://assets/Tile/Wastes/Wastes9.png" id="10_pai51"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3yayp"]
 texture = ExtResource("1_huovy")
@@ -291,9 +291,6 @@ texture = ExtResource("1_huovy")
 10:13/0 = 0
 11:13/0 = 0
 12:13/0 = 0
-14:10/0 = 0
-14:10/0/physics_layer_1/polygon_0/points = PackedVector2Array(0, 8, 8, 8, 8, 12, 0, 12)
-14:10/0/physics_layer_1/polygon_0/one_way = true
 15:10/0 = 0
 15:10/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 8, 8, 8, 8, 12, -8, 12)
 15:10/0/physics_layer_1/polygon_0/one_way = true
@@ -306,6 +303,9 @@ texture = ExtResource("1_huovy")
 18:10/0 = 0
 18:10/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 8, 0, 8, 0, 12, -8, 12)
 18:10/0/physics_layer_1/polygon_0/one_way = true
+14:10/0 = 0
+14:10/0/physics_layer_1/polygon_0/points = PackedVector2Array(0, 8, 8, 8, 8, 12, 0, 12)
+14:10/0/physics_layer_1/polygon_0/one_way = true
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gw5g2"]
 texture = ExtResource("2_ds6h0")

@@ -17,7 +17,7 @@ func _ready():
 	else:
 		$VersionLabel.text = "Internal Version: " + w.development_stage + "-" + w.internal_version
 										#LOAD BUTTON STUFF
-	if not FileAccess.file_exists(w.save_path):
+	if not FileAccess.file_exists(SaveSystem.save_path):
 		$VBox/Load.queue_free()
 
 	####

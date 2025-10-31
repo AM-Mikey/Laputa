@@ -286,9 +286,19 @@ PHYSICS CHANGES TO JUNIPER
 -sort out edge cases and where new animations are needed
 -sort out height setting
 -fix false raycast detection from world by using a raycast start point air check
+-fix push slightslope -> slightslope
+
+-transition upslope, upslightslope -> frontedge, edgeturn
+-transition edge -> downslope, downslightslope
+-transition frontedge, edgeturn -> stand
+-
 
 
+-trans stand, all slopes -> run
 
+run to run on slope with 0 run animation offset has a sudden jump (see C:\Users\Luka\Documents\ShareX\Screenshots\2025-10\TabTip_Rc8s8MIQeT.mp4)
+
+get peak animation working, slightslopeup-> nothing, slightslopeup -> slightslopedown, slopeup -> slopedown in terms of geometry
 
 
 -clean up options ui look
@@ -298,3 +308,43 @@ PHYSICS CHANGES TO JUNIPER
 project settings should represent the player's chosen input map? or what? resolve this conflict
 
 
+NEEDED ANIMATIONS:
+
+-forbid crouch while on slope, simplifies some issues
+
+
+
+MAJOR CODE AREAS:
+
++ Enemy base code
+	- Individual enemies
+++ Pickups
+- NPC base code
+-- Boss code (not started)
+-- Vehicle code (not started)
++ Audio System
+~ Parallax Backgrounds
++ Bullet Base code
+~ Dialog code
+~ Level editor (major area)
+~ Individual effects
++ Gun base code
+- Items (collectables for story prog) and Inventory
++ Player physics and statemachine
+~ Player animation (my current focus)
+- Props (ingame visual + code bundles)
+- Tile Animation (started)
+~ Tilemap (needs conversion to tilemaplayers)
+~ Triggers (invisible zones with code)
+~ UI coding (leave this mostly to me or crystalwarrior)
+
+
+
+
+Run animation detection:
+
+-fix animation conflicts
+-valley trigger (use peak or custom animaiton)
+-peak animation height
+-cleanup unused sensors
+-function for animation checking and appending
