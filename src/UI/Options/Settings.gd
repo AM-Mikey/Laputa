@@ -92,30 +92,30 @@ func on_displaymode_changed(index: int):
 
 
 func on_mastervolume_changed(value):
-	var db = get_percent_as_db(value)
-	#print(db)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),db)
-	mastervolume.get_node("Label").text = "Master Volume: Muted" if value == 0 else "Master Volume: %.f" % (value * 10) + "%"
-	if after_ready and !w.get_node("MenuLayer/Options").ishidden:
-		am.play("sound_test", null, "master") #play on master
-		print("saving mv")
-		save_setting("MasterVolume", value)
+	change_bus_volume(value,"Master")
 
 func on_musicvolume_changed(value):
-	var db = get_percent_as_db(value)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),db)
-	musicvolume.get_node("Label").text = "Music Volume: Muted" if value == 0 else "Music Volume: %.f" % (value * 10) + "%"
-	if after_ready and !w.get_node("MenuLayer/Options").ishidden:
-		am.play("sound_test")
-		save_setting("MusicVolume", value)
+	change_bus_volume(value,"Music")
 
 func on_sfxvolume_changed(value):
+	change_bus_volume(value,"SFX")
+
+
+func change_bus_volume(value,busname:String):
+	var slidernode = get_node("Margin/Scroll/VBox/" + busname + "Volume")
 	var db = get_percent_as_db(value)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),db)
-	sfxvolume.get_node("Label").text = "SFX Volume: Muted" if value == 0 else "SFX Volume: %.f" % (value * 10) + "%"
+	if value == 0:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index(busname),true)
+		slidernode.get_node("Label").text = "SFX Volume: Muted"
+	else:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index(busname),false)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(busname),db)
+		slidernode.get_node("Label").text = "SFX Volume: %.f" % (value * 10) + "%"
 	if after_ready and !w.get_node("MenuLayer/Options").ishidden:
 		am.play("sound_test")
-		save_setting("SFXVolume", value)
+		save_setting(busname + "Volume", value)
+
+
 
 
 func on_mouselock(value):
