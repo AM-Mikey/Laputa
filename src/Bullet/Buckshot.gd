@@ -15,16 +15,16 @@ func _on_CollisionDetector_body_entered(body): #shadows parent
 	#do not stop on enemy
 	if disabled:
 		return
-	if body is TileMap:
+	if body is TileMapLayer:
 		pass
 		#if body.tile_set.get_physics_layer_collision_layer(0) == 8: #world (layer value)
 			#do_fizzle("world")
 	else:
 		#breakable
-		if body.get_collision_layer_value(9): 
+		if body.get_collision_layer_value(9):
 			on_break(break_method)
 		#enemy
-		elif body.get_collision_layer_value(2) and not is_enemy_bullet: 
+		elif body.get_collision_layer_value(2) and not is_enemy_bullet:
 			#await get_tree().process_frame
 			body.hit(damage, get_blood_dir(body))
 			queue_free()
