@@ -85,7 +85,6 @@ scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
 [node name="UIGroup" type="CanvasGroup" parent="UILayer"]
-visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UILayer/UIGroup"]
 root_node = NodePath("../..")

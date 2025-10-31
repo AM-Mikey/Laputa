@@ -34,6 +34,9 @@ func stick_clampzoneX(stick:Vector2,clampX:float=Xaxis_clampzone) -> Vector2:
 
 			#####BUFFER
 
+var inputstrength:float = 0.5 #for assigning buttons to analog sticks
+var pressbuffer:int = 4
+var releasebuffer:int = 1
 
 ##A button needs to be added to this to be bufferable
 var buffer:Array=[
@@ -48,8 +51,7 @@ var buffer:Array=[
 	["inventory",0,9000,9000],
 	]
 
-var inputstrength:float = 0.5 #for assigning buttons to analog sticks
-var pressbuffer:int = 4
+
 
 func base_inputheld(button:String) -> bool:
 	if Input.get_action_strength(button) >= inputstrength:
@@ -71,7 +73,7 @@ func writebuffer() -> void:
 
 
 
-func pressed(button,custombuffer=pressbuffer,prevstate='') -> bool: 
+func pressed(button,custombuffer=pressbuffer) -> bool: 
 	for x in buffer:
 		if x[0] == button:
 			if x[2] <= custombuffer:
@@ -81,13 +83,23 @@ func pressed(button,custombuffer=pressbuffer,prevstate='') -> bool:
 	print ("INPUT NOT FOUND IN BUFFER")
 	return false
 
-func held(button,below=900000000,above=0): #button held. pretty simple
+func held(button,below=900000000,above=0) -> bool: #button held. pretty simple
 	for x in buffer:
 		if x[0] == button:
 			if x[1] > above and x[1] <= below:
 				return true
 			else: return false
+	return false
 
+func released(button:String,custombuffer:int=releasebuffer) -> bool:
+	for x in buffer:
+		if x[0] == button:
+			if x[3] <= custombuffer:
+				x[2] = custombuffer
+				return true 
+			else: return false #could be removed? 
+	return false
+	
 ##process
 func _physics_process(delta):
 	analogstick = stick_clampzoneX( stick_deadzone(rawstick()) )
