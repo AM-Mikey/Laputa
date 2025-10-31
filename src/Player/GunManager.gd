@@ -11,35 +11,43 @@ var disabled = false #this is only because of a func in pc.ladder?
 func _ready():
 	set_guns_visible()
 
-func _input(event):
-	if not pc.disabled and !disabled and pc.can_input and $Guns.get_child_count() > 0:
-		if pc.mm.current_state == pc.mm.states["inspect"]: return
-		var active_gun = $Guns.get_child(0)
-		
-		if event.is_action_pressed("fire_manual"):
-			active_gun.fire("manual")
-		if event.is_action_pressed("fire_automatic") and active_gun.automatic:
-			active_gun.fire("automatic")
-		if event.is_action_released("fire_manual"):
-			active_gun.release_manual_fire()
-		if event.is_action_released("fire_automatic"):
-			active_gun.release_auto_fire()
+func _process(_delta: float) -> void:
+	if not can_shoot():
+		return
+	var active_gun = $Guns.get_child(0)
+	
+	if Input.is_action_just_pressed("fire_manual"):
+		active_gun.fire("manual")
+	if Input.is_action_pressed("fire_automatic") and active_gun.automatic:
+		active_gun.fire("automatic")
+	if Input.is_action_just_released("fire_manual"):
+		active_gun.release_manual_fire()
+	if Input.is_action_just_released("fire_automatic"):
+		active_gun.release_auto_fire()
 
-		if $Guns.get_child_count() > 1: #only swap if more than one gun
-			if event.is_action_pressed("gun_left"):
-				shift_gun("left")
-			if event.is_action_pressed("gun_right"):
-				shift_gun("right")
+	if $Guns.get_child_count() > 1: #only swap if more than one gun
+		if Input.is_action_just_pressed("gun_left"):
+			shift_gun("left")
+		if Input.is_action_just_pressed("gun_right"):
+			shift_gun("right")
 
-		if event.is_action_pressed("debug_level_up") and active_gun.level < active_gun.max_level:
-				level_up(true)
-		if event.is_action_pressed("debug_level_down") and active_gun.level != 1:
-				level_down(true)
+	if Input.is_action_just_pressed("debug_level_up") and active_gun.level < active_gun.max_level:
+			level_up(true)
+	if Input.is_action_just_pressed("debug_level_down") and active_gun.level != 1:
+			level_down(true)
 
+
+func can_shoot() -> bool:
+	return not pc.disabled and !disabled and pc.can_input and $Guns.get_child_count() > 0 and pc.mm.current_state != pc.mm.states["inspect"]
 
 ### METHODS
 
 func shift_gun(direction):
+	# Stop the active gun from erroneously firing when it's no longer active
+	var active_gun = $Guns.get_child(0)
+	active_gun.release_manual_fire()
+	active_gun.release_auto_fire()
+
 	match direction:
 		"left":
 			var child_to_move = $Guns.get_child($Guns.get_child_count() - 1)
@@ -56,6 +64,13 @@ func shift_gun(direction):
 	pc.emit_signal("guns_updated", $Guns.get_children())
 	#pc.emit_signal("xp_updated", $Guns.get_child(0).xp, $Guns.get_child(0).max_xp, $Guns.get_child(0).level, $Guns.get_child(0).max_level)
 	am.play("gun_shift")
+	
+	# The new active gun should continue firing even when we swap between guns
+	active_gun = $Guns.get_child(0)
+	if Input.is_action_pressed("fire_manual"):
+		active_gun.fire("manual")
+	if Input.is_action_pressed("fire_automatic") and active_gun.automatic:
+		active_gun.fire("automatic")
 
 
 

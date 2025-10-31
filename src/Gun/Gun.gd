@@ -31,19 +31,12 @@ var max_xp: int = 20
 var max_level: int = 1
 @export var level: int = 1
 
-
-var trigger_held = false
-
 @onready var world = get_tree().get_root().get_node("World")
 @onready var pc = get_parent().get_parent().get_parent()
 @onready var cd = pc.get_node("GunManager/CooldownTimer")
 
 
-
-
 func fire(type):
-	trigger_held = true
-	
 	if cd.time_left == 0:
 		if max_ammo == 0 or ammo != 0:
 			if max_ammo != 0:
@@ -56,21 +49,14 @@ func fire(type):
 
 		if not charging:
 			cd.start(cooldown_time)
-		
-		if type == "automatic":
-			await cd.timeout
-			if trigger_held:
-				fire("automatic")
 
 
 func release_manual_fire():
-	trigger_held = false
 	if charging:
 		cd.start(cooldown_time)
 	deactivate_manual()
 	
 func release_auto_fire():
-	trigger_held = false
 	deactivate_auto()
 
 
