@@ -100,10 +100,10 @@ func on_musicvolume_changed(value):
 func on_sfxvolume_changed(value):
 	change_bus_volume(value,"SFX")
 
-
 func change_bus_volume(value,busname:String):
 	var slidernode = get_node("Margin/Scroll/VBox/" + busname + "Volume")
-	var db = get_percent_as_db(value)
+	var db = linear_to_db(value/10.0)
+	print (db)
 	if value == 0:
 		AudioServer.set_bus_mute(AudioServer.get_bus_index(busname),true)
 		slidernode.get_node("Label").text = "SFX Volume: Muted"
@@ -215,36 +215,3 @@ func on_reset():
 
 func on_return():
 	w.get_node("MenuLayer/Options").exit()
-
-
-
-### HELPER GETTERS
-
-func get_percent_as_db(value) -> float:
-	value = int(value)
-	var db: float
-	match value:
-		0: db = -80
-		1: db = -20
-		2: db = -13.9794
-		3: db = -10.4576
-		4: db = -7.9588
-		5: db = -6.0206
-		6: db = -4.4370 
-		7: db = -3.0980
-		8: db = -1.9382 
-		9: db = -0.9151
-		10: db = 0
-		11: db = 0.8279 
-		12: db = 1.5836 
-		13: db = 2.2789
-		14: db = 2.9226
-		15: db = 3.5218
-		16: db = 4.0824
-		17: db = 4.6090
-		18: db = 5.1055
-		19: db = 5.5751 
-		20: db = 6.0206
-		_: db = 0
-		
-	return db
