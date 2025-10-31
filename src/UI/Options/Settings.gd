@@ -110,7 +110,7 @@ func change_bus_volume(value,busname:String):
 	else:
 		AudioServer.set_bus_mute(AudioServer.get_bus_index(busname),false)
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(busname),db)
-		slidernode.get_node("Label").text = "SFX Volume: %.f" % (value * 10) + "%"
+		slidernode.get_node("Label").text = busname + " Volume: %.f" % (value * 10) + "%"
 	if after_ready and !w.get_node("MenuLayer/Options").ishidden:
 		am.play("sound_test")
 		save_setting(busname + "Volume", value)
