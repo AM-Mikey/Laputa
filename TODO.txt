@@ -330,20 +330,21 @@ Run animation detection:
 -allow valley on uneven surface (including 2:1)
 -reverse dir lock push exception
 -test animations not appending themselves
+-downslope to edge front (moving backwards) horz pos interpolate
+-valley to upslope height adjust
 
 
--upslope to edge height adjust
--slight upslope to edge height adjust
+
+
+Main list: go down from here \/
+
+convert calc_slight_slope_to_peak_lerp_delta and calc_slope_to_peak_lerp_delta to new sys
+add slight_up_slope_on_valley
+add slight_down_slope_on_valley
+add down_slope_on_valley
+
+-rename left edge is slope to left edge is solid/detector
+-crouch is sometimes triggered, sometimes not triggered, and sometimes triggered but doesnt change hitbox
+-update animation groups
 -2:1 peak animation
 
--air to downslope xpos adjust
--air to upslope adjust
-
-test slightslope transition animations
--rename left edge is slope to left edge is solid/detector
-update animation groups
-slightslope detection needs to have custom half sized raycasts, also custom height adjustment
-
-
-crouch is sometimes triggered, sometimes not triggered, and sometimes triggered but doesnt change hitbox
-FIX THIS
