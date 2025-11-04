@@ -30,7 +30,7 @@ func _physics_process(_delta):
 
 	if h_tween: #TODO: this should only run if h_tween is running
 		h_tween.set_speed_scale(max(abs(pc.velocity.x)/mm.speed.x, h_pan_min_speed))
-	
+
 	if !pc.disabled and pc.can_input and !pc.mm.current_state == pc.mm.states["inspect"]:
 		if Input.is_action_just_pressed("look_up") or Input.is_action_just_pressed("look_down") \
 		or Input.is_action_just_released("look_up") or Input.is_action_just_released("look_down"):
@@ -69,38 +69,38 @@ func get_v_dir() -> int:
 func on_limit_camera(left, right, top, bottom):
 	var window_width = get_window().get_size().x
 	var window_height = get_window().get_size().y
-	
+
 	for b in get_tree().get_nodes_in_group("BlackBars"):
 		b.free()
-	
+
 	if window_width > (right - left) * vs.resolution_scale:
 		#print("WARNING: window width larger than camera limit")
 		var thickness = ((window_width / vs.resolution_scale) - (right - left))/2
-		
+
 		spawn_black_bar("BarLeft", \
 		Vector2(thickness, window_height), \
 		Vector2.ZERO)
 		spawn_black_bar("BarRight", \
 		Vector2(thickness, window_height), \
 		Vector2((right - left) + thickness, 0))
-		
+
 		limit_left = left - thickness
 		limit_right = right + thickness
 	else:
 		limit_left = left
 		limit_right = right
-	
+
 	if get_window().get_size().y > (bottom - top) * vs.resolution_scale:
 		#print("WARNING: window height larger than camera limit")
 		var thickness = (window_height / vs.resolution_scale - (bottom - top))/2
-		
+
 		spawn_black_bar("BarTop", \
 		Vector2(window_width, thickness), \
 		Vector2.ZERO)
 		spawn_black_bar("BarBottom", \
 		Vector2(window_width, thickness + 16), \
 		Vector2(0, (bottom - top) + thickness))  #16 for overscan safety
-		
+
 		limit_top = top - thickness
 		limit_bottom = bottom + thickness
 	else:
