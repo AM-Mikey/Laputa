@@ -9,14 +9,14 @@ func _ready():
 	if actor_path == null:
 		printerr("ERROR: no actor chosen in ActorSpawn")
 		return
-
+	
 	#groups
 	if actor_path.begins_with("res://src/Actor/NPC/"):
 		add_to_group("NPCSpawns")
 	elif actor_path.begins_with("res://src/Actor/Enemy/"):
 		add_to_group("EnemySpawns")
-
-
+	
+	
 	#sprite
 	var actor = load(actor_path).instantiate()
 	$Sprite2D.texture = actor.get_node("Sprite2D").texture
@@ -24,7 +24,7 @@ func _ready():
 	$Sprite2D.vframes = actor.get_node("Sprite2D").vframes
 	$Sprite2D.frame = actor.get_node("Sprite2D").frame
 	$Sprite2D.position = actor.get_node("Sprite2D").position
-
+	
 	#name
 	var index = 0
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
@@ -35,7 +35,7 @@ func _ready():
 		name = actor.name
 	else:
 		name = str(actor.name, index)
-
+	
 	#collision shape
 	var collision_shape
 	if actor.has_node("CollisionShape2D"):
@@ -62,7 +62,7 @@ func spawn():
 	if actor_path == null:
 		printerr("ERROR: no actor chosen in ActorSpawn")
 		return
-
+	
 	var actor = load(actor_path).instantiate()
 	for p in properties:
 		actor.set(p, properties[p][0])

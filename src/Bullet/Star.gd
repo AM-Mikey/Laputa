@@ -22,18 +22,18 @@ func _ready():
 
 	velocity = get_initial_velocity()
 	start_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
-
+	
 
 
 func _physics_process(delta):
 	if disabled: return
 	velocity.y += gravity * delta
-
+	
 	if velocity.x > 0:
 		$AnimationPlayer.play("FlipLeft")
 	else:
 		$AnimationPlayer.play("FlipRight")
-
+	
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		if abs(velocity.y) > minimum_speed:
@@ -42,7 +42,7 @@ func _physics_process(delta):
 			am.play("gun_star_bounce", self)
 		else:
 			velocity = Vector2.ZERO
-
+	
 	var avr_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 	$AnimationPlayer.speed_scale = avr_velocity / start_velocity
 	if $AnimationPlayer.speed_scale < .1:
@@ -55,7 +55,7 @@ func get_initial_velocity() -> Vector2:
 
 	out.x = speed * direction.x
 	out.y = speed * direction.y
-
+	
 	out.y -= 80 #give us some ups to start with
 
 	return out
@@ -66,9 +66,9 @@ func get_initial_velocity() -> Vector2:
 
 func _on_CollisionDetector_body_entered(body): #shadows
 	if disabled: return
-	if not body is TileMapLayer:
+	if not body is TileMap:
 		#enemy
-		if body.get_collision_layer_value(2):
+		if body.get_collision_layer_value(2): 
 			if not touched_floor:
 				body.hit(damage, get_blood_dir(body))
 			else:
@@ -77,7 +77,7 @@ func _on_CollisionDetector_body_entered(body): #shadows
 
 func _on_CollisionDetector_area_entered(area): #shadows
 	if disabled: return
-
+	
 	if area.get_collision_layer_value(18): #enemyhurt
 		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
 		queue_free()

@@ -14,7 +14,7 @@ func _ready():
 	setup()
 
 func setup_animation_groups():
-	var source = tile_map.get_child(0).tile_set.get_source(0)
+	var source = tile_map.tile_set.get_source(0)
 	for column in source.texture_region_size.x:
 		for row in source.texture_region_size.y:
 			if source.get_tile_at_coords(Vector2i(column, row)) != Vector2i(-1, -1):
@@ -26,12 +26,11 @@ func setup_animation_groups():
 							groups[animation_group] = []
 						if !current_frames.has(animation_group):
 							current_frames[animation_group] = 0
-
-	for layer in tile_map.get_child_count():
-		var tile_map_layer_current: TileMapLayer = tile_map.get_child(layer)
-		for used_cell_pos in tile_map_layer_current.get_used_cells():
-			var atlas_coords = tile_map_layer_current.get_cell_atlas_coords(used_cell_pos)
-			var tile_data = tile_map_layer_current.get_cell_tile_data(used_cell_pos) #all frames need to be in the group
+	
+	for layer in 4:
+		for used_cell_pos in tile_map.get_used_cells(layer):
+			var atlas_coords = tile_map.get_cell_atlas_coords(layer, used_cell_pos)
+			var tile_data = tile_map.get_cell_tile_data(layer, used_cell_pos) #all frames need to be in the group
 			if tile_data.has_custom_data("animation_group"):
 				var animation_group = tile_data.get_custom_data("animation_group")
 				if animation_group != "":
@@ -46,22 +45,20 @@ func next_animation_frame(group, group_name):
 		current_frames[group_name] = 0
 	else:
 		current_frames[group_name] += 1
-
+	
 	for tile in group:
-		var tile_map_layer_current: TileMapLayer = tile_map.get_child(tile[0])
-		tile_map_layer_current.set_cell(tile[1], current_frames[group_name], tile[2])
+		tile_map.set_cell(tile[0], tile[1], current_frames[group_name], tile[2])
 
 
 func reset_animation():
 	for group_name in current_frames.keys():
 		current_frames[group_name] = 0
-	for layer in tile_map.get_child_count():
-		var tile_map_layer_current: TileMapLayer = tile_map.get_child(layer)
-		for used_cell_pos in tile_map_layer_current.get_used_cells():
-			var atlas_coords = tile_map_layer_current.get_cell_atlas_coords(used_cell_pos)
-			var is_animated = tile_map_layer_current.tile_set.get_source(1).has_tile(atlas_coords) #check for a second frame
+	for layer in 4:
+		for used_cell_pos in tile_map.get_used_cells(layer):
+			var atlas_coords = tile_map.get_cell_atlas_coords(layer, used_cell_pos)
+			var is_animated = tile_map.tile_set.get_source(1).has_tile(atlas_coords) #check for a second frame
 			if is_animated:
-				tile_map_layer_current.set_cell(used_cell_pos, 0, atlas_coords)
+				tile_map.set_cell(layer, used_cell_pos, 0, atlas_coords)
 
 func create_simple_timer(group: String, time: float):
 	timers[group] = Timer.new()

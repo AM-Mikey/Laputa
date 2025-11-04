@@ -15,17 +15,17 @@ var default_level = "res://src/Level/Default.tscn"
 
 func setup_levels():
 	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
-
+	
 	for c in $VBox/Margin/Scroll/Buttons.get_children():
 		c.queue_free()
-
+		
 	var index = 0
 	for l in find_level_scenes("res://src/Level/"):
-
+		
 		var level = load(l).instantiate()
 		if not level.editor_hidden:
 			levels[level.name] = level
-
+			
 			var level_button = LEVEL_BUTTON.instantiate()
 			level_button.level_path = l
 			level_button.level_name = level.name
@@ -48,7 +48,7 @@ func find_level_scenes(path):
 			break
 		if file.ends_with(".tscn"):
 			files.append(path + file)
-
+			
 	return files
 
 
@@ -78,7 +78,7 @@ func _on_Default_pressed():
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(w) #packing world is a bad idea, we need to be sure nothing else gets saved along with default level
 	var err = ResourceSaver.save(packed_scene, "res://src/World.tscn")
-
+	
 	if err == OK:
 		print("Saved Default Level as: " + w.current_level.scene_file_path)
 		am.play("save")
@@ -105,24 +105,24 @@ func on_new_confirmed():
 func save_level(level, path):
 	var log = w.el.get_node("Editor").log
 	w.el.get_node("Editor").inspector.on_deselected()
-
+	
 	level.save_changes()
 	level.name = path.get_file().get_basename()
 	level.level_name = path.get_file().get_basename() #TODO: add this to inspector
-
+	
 	if FileAccess.file_exists(path):
 		log.lprint("Saved over File")
 		print("Saved over File")
-
+		
 	var packed_scene = PackedScene.new()
-	packed_scene.pack(level)
+	packed_scene.pack(level) 
 	var err = ResourceSaver.save(packed_scene, path)
-
+	
 	if err == OK:
 		log.lprint(str("Saved Level to:", path))
 		print("Saved Level to: ", path)
 		am.play("save")
-	else:
+	else: 
 		log.lprint("ERROR: Could Not Save File")
 		printerr("ERROR: Could Not Save File")
 
@@ -133,7 +133,7 @@ func load_level(path):
 	if w.ml.has_node("TitleScreen"): w.ml.get_node("TitleScreen").queue_free()
 	if w.ml.has_node("PauseMenu"): w.ml.get_node("PauseMenu").unpause()
 	w.el.get_node("Editor").inspector.on_deselected()
-
+	
 	w.change_level_via_code(path)
 	await get_tree().process_frame
 	w.el.get_node("Editor").setup_level()

@@ -18,13 +18,13 @@ var wait_time: float
 func setup():
 	#print("doing setup")
 	match difficulty:
-		0:
+		0: 
 			hp = 2
 			reward = 2
 			drop_damage = 4
 			wait_time = 0.5
 			$Sprite2D.texture = TX_0
-		1:
+		1: 
 			hp = 2
 			reward = 2
 			drop_damage = 4
@@ -56,7 +56,7 @@ func enter_hang():
 func do_hang():
 	var collider = $RayCast2D.get_collider()
 	if collider:
-		if collider is TileMapLayer: return
+		if collider is TileMap: return
 		if collider.get_collision_layer_value(1):
 			target = collider.get_parent()
 			change_state("hangactive")
@@ -88,10 +88,10 @@ func exit_drop():
 func enter_squirm():
 	$RayCast2D.queue_free()
 	damage_on_contact = base_damage
-
+	
 	$CollisionShape2D.set_deferred("disabled", true)
 	$GroundedCollision.set_deferred("disabled", false)
-
+	
 	if target:
 		match difficulty:
 			1:
@@ -117,7 +117,7 @@ func do_run():
 	match move_dir:
 		Vector2.LEFT: $Sprite2D.flip_h = false
 		Vector2.RIGHT: $Sprite2D.flip_h = true
-
+			
 	if is_on_wall():
 			move_dir.x *= -1
 
@@ -127,12 +127,12 @@ func enter_stake():
 	await get_tree().process_frame
 	$CollisionShape2D.set_deferred("disabled", true) #so it doesn't see itself
 	$Standable/CollisionShape2D.set_deferred("disabled", false)
-
+	
 
 func calculate_move_velocity(velocity: Vector2, move_dir, speed) -> Vector2:
 	if state == "stake":
 		return Vector2.ZERO
-
+		
 	var out: = velocity
 	out.x = speed.x * move_dir.x
 	out.y += gravity * get_physics_process_delta_time()

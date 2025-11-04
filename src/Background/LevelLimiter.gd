@@ -30,7 +30,7 @@ var texture_rects: Dictionary
 
 func _ready():
 	setup()
-
+	
 func setup():
 	setup_background_resource()
 	setup_layers()
@@ -77,7 +77,7 @@ func setup_layers():
 	for layer_index in layers:
 		var layer = ParallaxLayer.new()
 		pb.add_child(layer)
-
+		
 		if layer_scales.has(layer_index): layer.motion_scale = layer_scales[layer_index]
 		else: layer.motion_scale = Vector2.ZERO
 
@@ -89,19 +89,19 @@ func setup_layers():
 		var layer_height = int(texture.get_height() / float(layers))
 		var layer_y = layer_height * layer_index
 		var region = Rect2i(0, layer_y, texture.get_width(), layer_height)
-
+		
 		#this cannot be AtlasTexture due to bug https://github.com/godotengine/godot/issues/20472
 		var texture_as_image = texture.get_image()
 		var clipped_image = texture_as_image.get_region(region)
 		var clipped_texture = ImageTexture.create_from_image(clipped_image)
-
+		
 		#var test = Sprite2D.new()
 		#test.texture = clipped_texture
 		#w.front.add_child(test)
-
+		
 		#clipped_texture.flags = 0 #turn off filtering #TODO: turn back on if backgrounds are blurry
 		texture_rect.texture = clipped_texture
-
+		
 		if layer_index == 0:
 			match back_tile_mode:
 				BackTileMode.DEFAULT:
@@ -131,7 +131,7 @@ func set_focus(res_scale = vs.resolution_scale):
 	var limiter_three_quarters = position.y + (size.y * 0.75)
 	var limiter_bottom = position.y + size.y
 	var texture_layer_height = int(texture.get_height() / float(layers))
-
+	
 	match focus:
 		Focus.TOP:
 			pb.scroll_base_offset.y = limiter_top * res_scale

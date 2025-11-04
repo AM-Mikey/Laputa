@@ -1,10 +1,10 @@
 extends Node
 class_name AutoTile#, "res://assets/Icon/NPCIcon.png"
 
-var farback = TileMapLayer
-var back = TileMapLayer
-var front = TileMapLayer
-var farfront = TileMapLayer
+var farback = TileMap
+var back = TileMap
+var front = TileMap
+var farfront = TileMap
 var current_layer
 
 const NW = Vector2(-1,-1)
@@ -35,9 +35,9 @@ func get_pattern_ids(pattern) -> Array:
 
 
 func is_npt(cell, pattern, layer = current_layer) -> bool: #if non-pattern tile
-	var tile = layer.get_cell_source_id(cell)
+	var tile = layer.get_cell_source_id(0, cell)
 	return not(get_pattern_ids(pattern).has(tile))
 
 func is_tile(cell, subpattern, layer = current_layer) -> bool: #if tile matches subpattern
-	var tile = layer.get_cell_source_id(cell)
+	var tile = layer.get_cell_source_id(0, cell)
 	return subpattern.has(tile)
