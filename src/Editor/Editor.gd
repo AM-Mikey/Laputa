@@ -68,7 +68,7 @@ func _ready():
 	#connect("tile_map_selected", Callable(inspector, "on_selected").bind("tile_map"))
 	connect("level_selected", Callable(inspector, "on_selected").bind("level"))
 	w.el.add_child(EDITOR_CAMERA.instantiate())
-	
+
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 	setup_level() #Call this every time the level is changed or reloaded
@@ -89,16 +89,16 @@ func setup_level(): #TODO: clear undo history
 	prop_collection = w.current_level.get_node("Props")
 	trigger_collection = w.current_level.get_node("Triggers")
 	spawn_collection = w.current_level.get_node("Spawns")
-	
+
 	tile_map = w.current_level.get_node("TileMap")
 	tile_master.setup_tile_master()
 	$Main/Win/Tab/TileSet.load_tile_set(tile_map.tile_set.resource_path)
 	if w.current_level.has_node("TileAnimator"):
 		w.current_level.get_node("TileAnimator").editor_enter()
-	
+
 	$Main/Win/Tab/Levels.setup_levels()
 	$Main/Win/Tab/Triggers.setup_triggers()
-	
+
 	setup_level_editor_layer()
 	#set_entities_pickable()
 	for s in get_tree().get_nodes_in_group("SpawnPoints"): #TODO: see if you can avoid this by calling a signal or something
@@ -115,7 +115,7 @@ func setup_level(): #TODO: clear undo history
 			t.get_node("TriggerController").enable()
 	w.el.get_node("EditorCamera").make_current()
 	w.current_level.get_node("LevelLimiter").setup() #must be after camera setup
-	
+
 
 func setup_windows(): #the main and secondary editor windows
 	await get_tree().process_frame
@@ -207,7 +207,7 @@ func _physics_process(_delta):
 func _unhandled_input(event):
 	if disabled:
 		return
-	
+
 	if event.is_action_pressed("editor_ctrl"): ctrl_held = true
 	if event.is_action_released("editor_ctrl"): ctrl_held = false
 	if event.is_action_pressed("editor_shift"): shift_held = true
@@ -237,8 +237,8 @@ func _unhandled_input(event):
 			KEY_F5: on_tab_selected(4)
 			KEY_F6: on_tab_selected(5)
 			KEY_F7: on_tab_selected(6)
-	
-	
+
+
 	if event.is_action_pressed("editor_lmb"):
 		lmb_held = true
 		rmb_held = false #this might fuck things up for other tools
@@ -256,7 +256,7 @@ func _unhandled_input(event):
 		"tile": do_tile_input(event)
 		"entity": do_entity_input(event)
 	do_generic_input(event)
-	
+
 	#after, just so we can check held during main part
 	if event.is_action_released("editor_lmb"):
 		lmb_held = false
@@ -280,7 +280,7 @@ func do_tile_input(event):
 		elif brush: #normal draw
 			if shift_held: set_tool("tile", "line")
 			elif ctrl_held: set_tool("tile", "box")
-			else: 
+			else:
 				set_tool("tile", "paint")
 				if event.is_action_pressed("editor_lmb"):
 					set_cells(get_cells_centerbox(mouse_pos))
@@ -289,10 +289,10 @@ func do_tile_input(event):
 						return #don't erase a tile if we're selecting an entity
 					set_cells(get_cells_centerbox(mouse_pos), true)
 					mc.display("eraser")
-	
+
 	#moving
 	if event is InputEventMouseMotion:
-		var new_updated_cell = tile_map.local_to_map(tile_map.to_local(mouse_pos)) 
+		var new_updated_cell = tile_map.local_to_map(tile_map.to_local(mouse_pos))
 		if new_updated_cell != last_updated_cell: #don't trigger if we haven't moved a cell over
 			#print("moved a cell over")
 			last_updated_cell = new_updated_cell #update
@@ -317,7 +317,7 @@ func do_tile_input(event):
 						set_cells(get_cells_centerbox(mouse_pos), true)
 					else:
 						preview_cells_box(get_cells_centerbox(mouse_pos))
-	
+
 	#releasing
 	if event.is_action_released("editor_lmb") and lmb_held or event.is_action_released("editor_rmb") and rmb_held:
 		last_updated_cell = Vector2i.ZERO
@@ -333,17 +333,17 @@ func do_tile_input(event):
 					set_cells(get_cells_box(mouse_start_pos, mouse_pos))
 				elif rmb_held:
 					set_cells(get_cells_box(mouse_start_pos, mouse_pos), true)
-				
+
 		if subtool != "select": #why this way?
 			subtool = "paint"
 			if rmb_held:
 				mc.display("brush")
-			
+
 		if not active_operation.is_empty():
 			past_operations.append(["set_cells", active_operation.duplicate()])
 			#print("active op: ", active_operation)
 			active_operation.clear()
-		
+
 	#clearing tile
 	if event.is_action_pressed("editor_delete"):
 		erase_tile_map_selection()
@@ -359,7 +359,7 @@ func do_entity_input(event):
 		if grid_pos_has_entity(grid_pos):
 			am.play("ui_deny")
 			return
-		
+
 		match subtool:
 			"enemy":
 				set_actor_spawn($Main/Win/Tab/Enemies.active_enemy_path, grid_pos)
@@ -376,7 +376,7 @@ func do_entity_input(event):
 func do_generic_input(event):
 	var mouse_pos = w.get_global_mouse_position() #Vector2(w.get_global_mouse_position().x, w.get_global_mouse_position().y + 8)
 	var grid_pos = get_cell(mouse_pos)
-	
+
 	#grabbing entity
 	if event.is_action_pressed("editor_rmb") and inspector.active:
 		match inspector.active_type:
@@ -408,7 +408,7 @@ func do_generic_input(event):
 			"grab":
 				if shift_held: inspector.active.global_position = Vector2(mouse_pos + grab_offset).snapped(Vector2(4,4))
 				else: inspector.active.global_position = Vector2(mouse_pos + grab_offset).snapped(Vector2(8,8))
-	
+
 	#deleting entity
 	if event.is_action_pressed("editor_delete"):
 		if inspector.active:
@@ -452,7 +452,7 @@ func set_tile_map_selection(start_pos, end_pos):
 func move_tile_map_selection(start_pos, end_pos):# TODO: make work with undo/redo
 	log.lprint("moved tiles")
 	var selected_cells = get_selected_cells_as_dictionary()
-	
+
 	var change = get_cell(end_pos) - get_cell(start_pos)
 	tile_map_selection.position += Vector2i(change)
 	tile_map_cursor.position = (tile_map_selection.position * 16) - Vector2i(1, 1)
@@ -489,13 +489,13 @@ func paste_tiles_from_buffer(pos):
 			var ts_pos = cell[1]
 			#tile_map.set_cell(layer, old_tm_pos, -1, ts_pos) #erase old
 			tile_map.set_cell(layer, new_tm_pos, 0, ts_pos)
-	
+
 
 func get_selected_cells_as_dictionary(mode = "local_to_map") -> Dictionary: #used for tile map selection
 	#{"layer 1": [[tm_pos1, ts_pos1], [tm_pos2, ts_pos2]],
 	#"layer 2": ...}
 	var selected_cells = {}
-	
+
 	for layer in tile_map.get_layers_count():
 		var layer_cells = []
 		for row in tile_map_selection.size.y:
@@ -504,9 +504,9 @@ func get_selected_cells_as_dictionary(mode = "local_to_map") -> Dictionary: #use
 				var tile_pos = tile_map.get_cell_atlas_coords(layer, cell_pos)
 				if mode == "local_to_selection": #instead of local_to_map
 					cell_pos = Vector2i(column, row)
-				
+
 				layer_cells.append([cell_pos, tile_pos])
-	
+
 		selected_cells[layer] = layer_cells
 	return(selected_cells)
 
@@ -592,19 +592,19 @@ func set_cells(cells: Rect2i, erase = false): #no need to pass brush since its g
 			var tile_set_position = Vector2i(column % brush.size.x, row % brush.size.y) + brush.position
 			var tile_map_position = Vector2i(column, row) + cells.position
 			tile_map_layer = get_tile_map_layer(tile_set_position.y)
-			
+
 			if erase:
 				if multi_erase: #erase on all layers
 					for layer in tile_map.get_layers_count():
 						tile_map.set_cell(layer, tile_map_position, -1, tile_set_position)
-				else: 
+				else:
 					tile_map.set_cell(active_tile_map_layer, tile_map_position, -1, tile_set_position)
 			else:
 				if tile_map.tile_set.get_source(0).has_tile(tile_set_position):
 					tile_map.set_cell(tile_map_layer, tile_map_position, 0, tile_set_position) #draw
 					if auto_tile and w.current_level.has_node("AutoTile"):
 						w.current_level.get_node("AutoTile").do_auto_tile(tile_map_position, tile_map_layer)
-			
+
 			#If source_id is set to -1, atlas_coords to Vector2i(-1, -1) or alternative_tile to -1, the cell will be erased. An erased cell gets all its identifiers automatically set to their respective invalid values, namely -1, Vector2i(-1, -1) and -1.
 
 
@@ -617,7 +617,7 @@ func set_cells_from_brush_origins(origins: Array, erase = false):
 				var tile_set_position = Vector2i(column % brush.size.x, row % brush.size.y) + brush.position
 				var tile_map_position = Vector2i(column, row) + origin
 				tile_map_layer = get_tile_map_layer(tile_set_position.y)
-				
+
 				if erase:
 					if multi_erase: #erase on all layers
 						for layer in tile_map.get_layers_count():
@@ -649,7 +649,7 @@ func set_trigger_spawn(trigger_path, pos):
 	trigger_spawn.owner = w.current_level
 	trigger_spawn.initialize()
 	inspector.on_selected(trigger_spawn, "trigger_spawn")
-	
+
 
 #func set_entity(pos, entity_path, entity_type, traced = true): #TODO: replace with custom per type, easier that way.
 	#if entity_path == null:
@@ -694,23 +694,23 @@ func set_trigger_spawn(trigger_path, pos):
 
 func preview_cells_box(cells: Rect2i):
 	var tile_map_preview = setup_tile_map_preview()
-	
+
 	for row in cells.size.y:
 		for column in cells.size.x:
 			var tile_set_position = Vector2i(column % brush.size.x, row % brush.size.y) + brush.position
 			var tile_map_position = Vector2i(column, row) + cells.position
-			tile_map_preview.set_cell(0, tile_map_position, 0, tile_set_position) 
+			tile_map_preview.set_cell(0, tile_map_position, 0, tile_set_position)
 
 
 func preview_cells_line(origins: Array):
 	var tile_map_preview = setup_tile_map_preview()
-	
+
 	for origin in origins:
 		for column in brush.size.x:
 			for row in brush.size.y:
 				var tile_set_position = Vector2i(column % brush.size.x, row % brush.size.y) + brush.position
 				var tile_map_position = Vector2i(column, row) + origin
-				tile_map_preview.set_cell(0, tile_map_position, 0, tile_set_position) 
+				tile_map_preview.set_cell(0, tile_map_position, 0, tile_set_position)
 
 
 func preview_move_tile_set_selection(start_pos, end_pos): #used for tile map selection
@@ -719,9 +719,9 @@ func preview_move_tile_set_selection(start_pos, end_pos): #used for tile map sel
 	#tile_map_selection.position += Vector2i(change)
 	#tile_map_cursor.position = tile_map_selection.position * 16
 	#tile_map_cursor.size = tile_map_selection.size * 16
-	
+
 	var tile_map_preview = setup_tile_map_preview()
-	
+
 	for layer in selected_cells:
 		for cell in selected_cells[layer]:
 			var old_cell_pos = cell[0]
@@ -734,7 +734,7 @@ func preview_move_tile_set_selection(start_pos, end_pos): #used for tile map sel
 func setup_tile_map_preview() -> Node:
 	if w.current_level.has_node("TileMapPreview"):
 		w.current_level.get_node("TileMapPreview").queue_free()
-	
+
 	var tile_map_preview = TILE_MAP_PREVIEW.instantiate()
 	tile_map_preview.tile_set = w.current_level.get_node("TileMap").tile_set
 	w.current_level.add_child(tile_map_preview)
@@ -794,11 +794,11 @@ func get_cells_box(start_pos, end_pos) -> Rect2i:
 		Vector2i(min(start.x, end.x), \
 		min(start.y, end.y)),
 		Vector2i.ONE)
-		
+
 	cells = cells.expand( \
 	Vector2i(max(start.x+1, end.x+1), \
 	max(start.y+1, end.y+1)))
-	
+
 	return cells
 
 
@@ -811,19 +811,19 @@ func get_cells_line_origins(start_pos, end_pos) -> Array:
 	var min = cb.position
 	var max = cb.position + cb.size
 	var d = cb.size
-	
+
 	if d.x >= (brush.size.x/brush.size.y) * d.y:
 		for column in range(min.x, max.x):
 			if column % brush.size.x == 0: #is origin of a brush
 				var row = round((d.y * ((column * sign.y) - (start.x * sign.y)) / (d.x * sign.x)) + start.y)
 				origins.append(Vector2i(column, row))
-	
+
 	else: #tall
 		for row in range(min.y, max.y):
 			if row % brush.size.y == 0: #is origin of a brush
 				var column = round((d.x * ((row * sign.x) - (start.y * sign.x)) / (d.y * sign.y)) + start.x)
 				origins.append(Vector2i(column, row))
-	
+
 	return origins
 
 
@@ -872,8 +872,8 @@ func set_tool(new_tool = "", new_subtool = ""):
 		mc.display("grabclosed")
 	else:
 		mc.display("arrow")
-	
-	
+
+
 	free_previews()
 	active_tool = new_tool
 	if new_subtool == "":
@@ -882,7 +882,7 @@ func set_tool(new_tool = "", new_subtool = ""):
 			"grab": new_subtool = "hold"
 			"enemy": new_subtool = "place"
 			_: new_subtool = ""
-	
+
 	subtool = new_subtool
 
 func clear_tile_map_cursor():
@@ -927,15 +927,15 @@ func on_tab_selected(tab_index): #tab buttons
 func on_tab_changed(tab):
 	var tab_name = $Main/Win/Tab.get_child(tab).name
 	emit_signal("tab_changed", tab_name)
-	
+
 	if $Main/Win/TabButtons/VBox.get_child_count() == 0: return #not ready to start
 	for c in $Main/Win/TabButtons/VBox.get_children():
 		c.size_flags_vertical = Control.SIZE_SHRINK_END
 	$Main/Win/TabButtons/VBox.get_child(tab).size_flags_vertical = Control.SIZE_FILL
 	clear_tile_map_cursor()
-	
+
 	match tab_name:
-		"Tiles": 
+		"Tiles":
 			set_tool("tile")
 			#set_entities_pickable(false)
 			inspector.on_deselected()
@@ -944,7 +944,7 @@ func on_tab_changed(tab):
 		"Levels":
 			set_tool("level")
 			emit_signal("level_selected", w.current_level)
-		"Enemies": 
+		"Enemies":
 			set_tool("entity", "enemy")
 			#set_entities_pickable()
 		"Props":

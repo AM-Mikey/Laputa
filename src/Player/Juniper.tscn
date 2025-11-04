@@ -1573,6 +1573,108 @@ tracks/7/keys = {
 "values": [Vector2(0, -2), Vector2(0, -2), Vector2(0, -2), Vector2(0, -2), Vector2(0, -2), Vector2(0, -2), Vector2(0, -2), Vector2(0, -2), Vector2(0, -2), Vector2(0, -2), Vector2(0, -2), Vector2(0, -2), Vector2(0, -2), Vector2(0, -2), Vector2(0, -2), Vector2(0, -2)]
 }
 
+[sub_resource type="Animation" id="Animation_oh11f"]
+resource_name = "down_slope_to_stand"
+length = 1.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframe")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 0, 6, 7, 0, 0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GunManager/GunPosLeft:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GunManager/GunPosLeftUp:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GunManager/GunPosLeftDown:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GunManager/GunPosRight:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GunManager/GunPosRightUp:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GunManager/GunPosRightDown:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7)]
+}
+
 [sub_resource type="Animation" id="Animation_hx2t8"]
 resource_name = "edge"
 length = 1.6
@@ -1917,6 +2019,119 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_804ka"]
+resource_name = "peak"
+length = 1.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 0, 6, 7, 0, 0, 1, 2, 3, 4, 5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GunManager/GunPosLeft:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GunManager/GunPosLeftUp:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GunManager/GunPosLeftDown:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GunManager/GunPosRight:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GunManager/GunPosRightUp:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("GunManager/GunPosRightDown:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7)]
 }
 
 [sub_resource type="Animation" id="Animation_cdcbg"]
@@ -2884,6 +3099,108 @@ tracks/8/keys = {
 "values": [Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7)]
 }
 
+[sub_resource type="Animation" id="Animation_eus2x"]
+resource_name = "stand_to_down_slope"
+length = 1.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframe")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 0, 6, 7, 0, 0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GunManager/GunPosLeft:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GunManager/GunPosLeftUp:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GunManager/GunPosLeftDown:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GunManager/GunPosRight:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GunManager/GunPosRightUp:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GunManager/GunPosRightDown:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9)]
+}
+
 [sub_resource type="Animation" id="Animation_v6qwc"]
 resource_name = "stand_to_up_slope"
 length = 1.6
@@ -3290,323 +3607,6 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9)]
-}
-
-[sub_resource type="Animation" id="Animation_eus2x"]
-resource_name = "stand_to_down_slope"
-length = 1.6
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n"), ExtResource("52_p4m8n")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframe")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 0, 6, 7, 0, 0, 1, 2, 3, 4, 5]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("GunManager/GunPosLeft:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15), Vector2(-7, -15)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("GunManager/GunPosLeftUp:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18), Vector2(-3, -18)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("GunManager/GunPosLeftDown:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("GunManager/GunPosRight:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12), Vector2(1, -12)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("GunManager/GunPosRightUp:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18), Vector2(-1, -18)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("GunManager/GunPosRightDown:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9), Vector2(0, -9)]
-}
-
-[sub_resource type="Animation" id="Animation_oh11f"]
-resource_name = "down_slope_to_stand"
-length = 1.6
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey"), ExtResource("53_l3dey")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframe")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 0, 6, 7, 0, 0, 1, 2, 3, 4, 5]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("GunManager/GunPosLeft:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13), Vector2(-7, -13)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("GunManager/GunPosLeftUp:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16), Vector2(-3, -16)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("GunManager/GunPosLeftDown:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("GunManager/GunPosRight:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10), Vector2(1, -10)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("GunManager/GunPosRightUp:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16), Vector2(-1, -16)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("GunManager/GunPosRightDown:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7), Vector2(0, -7)]
-}
-
-[sub_resource type="Animation" id="Animation_804ka"]
-resource_name = "peak"
-length = 1.6
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey"), ExtResource("54_l3dey")]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"values": []
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:hframe")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 0, 6, 7, 0, 0, 1, 2, 3, 4, 5]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("GunManager/GunPosLeft:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13), Vector2(-8, -13)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("GunManager/GunPosLeftUp:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16), Vector2(-4, -16)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("GunManager/GunPosLeftDown:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7), Vector2(-6, -7)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("GunManager/GunPosRight:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10), Vector2(2, -10)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("GunManager/GunPosRightUp:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16), Vector2(0, -16)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("GunManager/GunPosRightDown:position")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7), Vector2(1, -7)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oo325"]
@@ -4300,6 +4300,7 @@ process_callback = 0
 one_shot = true
 
 [node name="PlayerCamera" parent="." instance=ExtResource("2")]
+drag_horizontal_offset = 1.0
 
 [node name="ItemDetector" type="Area2D" parent="."]
 show_behind_parent = true
@@ -4435,7 +4436,8 @@ visible = false
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 2
 material = SubResource("61")
-position = Vector2(0, -16)
+position = Vector2(6.5, -21.5)
+scale = Vector2(1.40625, 1.34375)
 texture = ExtResource("36_yworh")
 hframes = 12
 vframes = 8

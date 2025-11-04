@@ -26,7 +26,7 @@ func setup_animation_groups():
 							groups[animation_group] = []
 						if !current_frames.has(animation_group):
 							current_frames[animation_group] = 0
-	
+
 	for layer in 4:
 		for used_cell_pos in tile_map.get_used_cells(layer):
 			var atlas_coords = tile_map.get_cell_atlas_coords(layer, used_cell_pos)
@@ -45,7 +45,7 @@ func next_animation_frame(group, group_name):
 		current_frames[group_name] = 0
 	else:
 		current_frames[group_name] += 1
-	
+
 	for tile in group:
 		tile_map.set_cell(tile[0], tile[1], current_frames[group_name], tile[2])
 
