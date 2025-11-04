@@ -119,7 +119,7 @@ func hit(damage, knockback_direction):
 			hp -= damage
 			am.play("pc_hurt")
 			emit_signal("hp_updated", hp, max_hp)
-
+			
 			if experience_number != null: experience_number.queue_free()
 			if heart_number != null: heart_number.queue_free()
 			if damage_number == null: #no damage_number
@@ -143,8 +143,8 @@ func hit(damage, knockback_direction):
 					damage_number.position.y -= 16
 					damage_number.reparent(get_tree().get_root().get_node("World/Front"))
 					die()
-
-
+			
+			
 			var active_gun = guns.get_child(0)
 			if active_gun != null:
 				active_gun.xp = active_gun.xp - (damage * 2)
@@ -153,7 +153,7 @@ func hit(damage, knockback_direction):
 				if active_gun.xp < 0:
 					$GunManager.level_down(false)
 				emit_signal("guns_updated", guns.get_children())
-
+		
 		if knockback_direction != Vector2.ZERO:
 			#print("Knockback in Dir: " + str(knockback_direction))
 			mm.knockback_direction = knockback_direction
@@ -170,7 +170,7 @@ func do_iframes():
 func hit_again(): #TODO: prioritize this for all forms of damage, not just enemies
 	var toughest_enemy
 	var toughtest_damage = 0
-
+	
 	for e in enemies_touching:
 		if e.damage_on_contact >= toughtest_damage:
 			toughest_enemy = e
@@ -186,11 +186,11 @@ func die():
 		disabled = true
 		world.add_child(DEATH_CAMERA.instantiate())
 		visible = false
-
+		
 		var explosion = EXPLOSION.instantiate()
 		explosion.position = global_position
 		world.get_node("Front").add_child(explosion)
-
+		
 		world.uig.add_child(load("res://src/UI/DeathScreen.tscn").instantiate())
 		if world.has_node("UILayer/UIGroup/HUD"):
 			world.get_node("UILayer/UIGroup/HUD").free()
@@ -224,7 +224,7 @@ func _on_SSPWorldDetector_body_exited(body: Node2D):
 
 func _on_ItemDetector_area_entered(area):
 	if disabled: return
-
+	
 	if area.get_collision_layer_value(11): #health
 		var heart_pickup = area.get_parent()
 		var hp_before = hp
@@ -233,7 +233,7 @@ func _on_ItemDetector_area_entered(area):
 		am.play("get_hp")
 		var heart_get = HEARTGET.instantiate()
 		heart_get.position = heart_pickup.global_position
-
+		
 		if hp - hp_before > 0: #health gained
 			if damage_number != null: damage_number.queue_free()
 			if experience_number != null: experience_number.queue_free()
@@ -245,12 +245,12 @@ func _on_ItemDetector_area_entered(area):
 			else:
 				heart_number.value += hp - hp_before
 				heart_number.reset()
-
+		
 		world.get_node("Front").add_child(heart_get)
 		emit_signal("hp_updated", hp, max_hp)
 		heart_pickup.queue_free()
-
-
+	
+	
 	if area.get_collision_layer_value(12): #xp
 		var experience_pickup = area.get_parent()
 		var active_gun = guns.get_child(0)
@@ -266,7 +266,7 @@ func _on_ItemDetector_area_entered(area):
 		var experience_get = EXPERIENCEGET.instantiate()
 		experience_get.position = experience_pickup.global_position
 		world.get_node("Front").add_child(experience_get)
-
+		
 		if damage_number != null: damage_number.queue_free()
 		if heart_number != null: heart_number.queue_free()
 		if experience_number == null:
@@ -277,12 +277,12 @@ func _on_ItemDetector_area_entered(area):
 		else:
 			experience_number.value += experience_pickup.value
 			experience_number.reset()
-
+		
 		emit_signal("money_updated", money)
 		emit_signal("guns_updated", guns.get_children(), "xp", true)
 		experience_pickup.queue_free()
-
-
+	
+	
 	if area.get_collision_layer_value(13): #ammo
 		var ammo_pickup = area.get_parent()
 		for w in guns.get_children():
@@ -305,7 +305,7 @@ func _on_ItemDetector_area_entered(area):
 ### MISC
 
 
-#TODO: clean these up and get rid of them
+#TODO: clean these up and get rid of them 
 func update_inventory():
 	emit_signal("inventory_updated", inventory)
 
