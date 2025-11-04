@@ -145,7 +145,7 @@ func remap_tiles(first: Object, second: Object):
 
 
 func swap_tiles(first_pos, second_pos): #warning, this is sensative to tile_set source id #. all sources should have ids going from 0-x
-	var main_tile_set = w.current_level.get_node("TileMap").tile_set
+	var main_tile_set = w.current_level.get_node("TileMap").get_node("Front").tile_set
 #1 create a list of all tilemaps that use this tileset
 	var levels = []
 	var dir = DirAccess.open("res://src/Level/")
@@ -162,20 +162,23 @@ func swap_tiles(first_pos, second_pos): #warning, this is sensative to tile_set 
 		var second_cell_positions = []
 		var loaded_level = w.current_level if level_path == w.current_level.scene_file_path else load(level_path).instantiate()
 		var tile_map = loaded_level.get_node("TileMap")
-		if tile_map.tile_set == main_tile_set:
-			for layer in 4:
-				first_cell_positions.append_array(tile_map.get_used_cells_by_id(layer, -1, first_pos))
-				second_cell_positions.append_array(tile_map.get_used_cells_by_id(layer, -1, second_pos))
+		if tile_map.get_child(0).tile_set == main_tile_set:
+			for layer in tile_map.get_child_count():
+				var tile_map_layer: TileMapLayer = tile_map.get_child(layer)
+				first_cell_positions.append_array(tile_map_layer.get_used_cells_by_id(-1, first_pos))
+				second_cell_positions.append_array(tile_map_layer.get_used_cells_by_id(-1, second_pos))
 #3 set the list of cells to the reverse tile
-			var first_tile_map_layer = get_tile_map_layer(first_pos.y)
-			var second_tile_map_layer = get_tile_map_layer(second_pos.y)
+			var first_tile_map_layer_id: int = get_tile_map_layer(first_pos.y)
+			var first_tile_map_layer: TileMapLayer = tile_map.get_child(first_tile_map_layer_id)
+			var second_tile_map_layer_id: int = get_tile_map_layer(second_pos.y)
+			var second_tile_map_layer: TileMapLayer = tile_map.get_child(second_tile_map_layer_id)
 			for cell in first_cell_positions:
-				tile_map.set_cell(first_tile_map_layer, cell, -1) #erase
-				tile_map.set_cell(second_tile_map_layer, cell, 0, second_pos)
+				first_tile_map_layer.set_cell(cell, -1) #erase
+				second_tile_map_layer.set_cell(cell, 0, second_pos)
 			for cell in second_cell_positions:
 				if !first_cell_positions.has(cell):
-					tile_map.set_cell(second_tile_map_layer, cell, -1) #erase
-				tile_map.set_cell(first_tile_map_layer, cell, 0, first_pos)
+					second_tile_map_layer.set_cell(cell, -1) #erase
+				first_tile_map_layer.set_cell(cell, 0, first_pos)
 #4 save level
 			var packed_scene = PackedScene.new()
 			packed_scene.pack(loaded_level)
@@ -183,7 +186,7 @@ func swap_tiles(first_pos, second_pos): #warning, this is sensative to tile_set 
 
 
 func swap_tileset_coordinates(first_pos, second_pos):
-	var main_tile_set = w.current_level.get_node("TileMap").tile_set
+	var main_tile_set = w.current_level.get_node("TileMap").get_node("Front").tile_set
 	var animation_frames = main_tile_set.get_source_count()
 	for f in animation_frames:
 		var atlas_source = main_tile_set.get_source(f)
@@ -205,7 +208,7 @@ func swap_tileset_coordinates(first_pos, second_pos):
 
 
 func swap_tileset_pixels(first_pos, second_pos):
-	var main_tile_set = w.current_level.get_node("TileMap").tile_set
+	var main_tile_set = w.current_level.get_node("TileMap").get_node("Front").tile_set
 	var animation_frames = main_tile_set.get_source_count()
 	for f in animation_frames:
 		var first_pixels = get_tile_as_pixels(first_pos, f)
@@ -216,11 +219,11 @@ func swap_tileset_pixels(first_pos, second_pos):
 		var path = texture.get_path()
 		var image = texture.get_image()
 		image.save_png(path)
-		w.current_level.get_node("TileMap").tile_set.get_source(f).set_texture(load(path))
+		w.current_level.get_node("TileMap").get_node("Front").tile_set.get_source(f).set_texture(load(path))
 
 
 func get_tile_as_pixels(tile_pos: Vector2i, source: int) -> Array: #2d
-	var texture = w.current_level.get_node("TileMap").tile_set.get_source(source).texture
+	var texture = w.current_level.get_node("TileMap").get_node("Front").tile_set.get_source(source).texture
 	var image = texture.get_image()
 	var tile = []
 	var r_id = tile_pos.y * 16
@@ -237,7 +240,7 @@ func get_tile_as_pixels(tile_pos: Vector2i, source: int) -> Array: #2d
 
 
 func set_pixels(tile_pos: Vector2i, pixels: Array, source: int):
-	var texture = w.current_level.get_node("TileMap").tile_set.get_source(source).texture
+	var texture = w.current_level.get_node("TileMap").get_node("Front").tile_set.get_source(source).texture
 	var image = texture.get_image()
 	var r_id = tile_pos.y * 16
 	for r in pixels:
@@ -410,7 +413,7 @@ func _on_Load_file_selected(path):
 	load_tile_set(path)
 
 func load_tile_set(path):
-	w.current_level.get_node("TileMap").tile_set = load(path)
+	w.current_level.get_node("TileMap").get_node("Front").tile_set = load(path)
 	editor.get_node("Main/Win/Tab/Tiles").setup_tiles()
 	setup_tile_set()
 

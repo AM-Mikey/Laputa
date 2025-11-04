@@ -102,11 +102,11 @@ func _on_screen_exit(): #TODO: bullets that start offscreen are not cleared
 
 func _on_CollisionDetector_body_entered(body):
 	if disabled: return
-	if body is TileMap:
+	if body is TileMapLayer:
 		if body.tile_set.get_physics_layer_collision_layer(0) == 8: #world (layer value)
 			do_fizzle("world")
 
-	else: #not tilemap
+	else: #not TileMapLayer
 		#breakable
 		if body.get_collision_layer_value(9):
 			on_break(break_method)

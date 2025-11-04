@@ -56,7 +56,7 @@ func enter_hang():
 func do_hang():
 	var collider = $RayCast2D.get_collider()
 	if collider:
-		if collider is TileMap: return
+		if collider is TileMapLayer: return
 		if collider.get_collision_layer_value(1):
 			target = collider.get_parent()
 			change_state("hangactive")

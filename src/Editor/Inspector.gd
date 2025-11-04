@@ -56,7 +56,7 @@ func on_deselected():
 	active_property = ""
 	clear_data()
 	if editor.get_node("Main/Win/Tab").current_tab == 0: #tiles
-		on_selected(editor.w.current_level.get_node("TileMap"), "tile_map")
+		on_selected(editor.w.current_level.get_node("TileMap").get_node("Front"), "tile_map")
 
 
 ### DISPLAY DATA
@@ -125,8 +125,7 @@ func display_data():
 				if p["usage"] == EXPORT:
 					create_button(p["name"], active.get(p["name"]), p["type"])
 		"tile_map":
-			var tile_map = active
-			for layer_id in tile_map.get_layers_count():
+			for layer_id in range(0, get_child_count()):
 				create_layer_button(layer_id)
 
 func get_property_type(type_flag, is_load) -> String:

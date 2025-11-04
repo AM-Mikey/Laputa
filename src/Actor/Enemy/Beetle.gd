@@ -115,7 +115,7 @@ func do_idlescan():
 			collider = $PlayerUpCast.get_collider()
 
 	if collider:
-		if collider is TileMap:
+		if collider is TileMapLayer:
 			return
 		if $FlyCooldown.is_stopped():
 			change_state("fly")
@@ -232,7 +232,7 @@ func do_platformcrawl():
 		else:
 			speed = Vector2.ZERO #prevent from walking off edge
 	if player_collider:
-		if player_collider is TileMap:
+		if player_collider is TileMapLayer:
 			return
 		if world_collider:
 			#print("gotplayer")

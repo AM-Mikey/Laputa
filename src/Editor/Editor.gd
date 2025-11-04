@@ -92,7 +92,7 @@ func setup_level(): #TODO: clear undo history
 
 	tile_map = w.current_level.get_node("TileMap")
 	tile_master.setup_tile_master()
-	$Main/Win/Tab/TileSet.load_tile_set(tile_map.tile_set.resource_path)
+	$Main/Win/Tab/TileSet.load_tile_set(tile_map.get_child(0).tile_set.resource_path)
 	if w.current_level.has_node("TileAnimator"):
 		w.current_level.get_node("TileAnimator").editor_enter()
 
@@ -267,10 +267,11 @@ func _unhandled_input(event):
 
 func do_tile_input(event):
 	var mouse_pos = w.get_global_mouse_position()
-
+	var tile_map_layer: TileMapLayer = tile_map.get_child(0)
 	#pressing
 	if event.is_action_pressed("editor_rmb") or event.is_action_pressed("editor_lmb"):
-		last_updated_cell = tile_map.local_to_map(tile_map.to_local(mouse_pos))
+
+		last_updated_cell = tile_map_layer.local_to_map(tile_map_layer.to_local(mouse_pos))
 		mouse_start_pos = mouse_pos
 		if subtool == "select":
 			if event.is_action_pressed("editor_lmb"):
@@ -292,7 +293,7 @@ func do_tile_input(event):
 
 	#moving
 	if event is InputEventMouseMotion:
-		var new_updated_cell = tile_map.local_to_map(tile_map.to_local(mouse_pos))
+		var new_updated_cell = tile_map_layer.local_to_map(tile_map_layer.to_local(mouse_pos))
 		if new_updated_cell != last_updated_cell: #don't trigger if we haven't moved a cell over
 			#print("moved a cell over")
 			last_updated_cell = new_updated_cell #update
@@ -459,21 +460,23 @@ func move_tile_map_selection(start_pos, end_pos):# TODO: make work with undo/red
 	tile_map_cursor.size = (tile_map_selection.size * 16) + Vector2i(2, 2)
 
 	for layer in selected_cells:
+		var tile_map_layer_current: TileMapLayer = tile_map.get_child(layer)
 		for cell in selected_cells[layer]:
 			var old_tm_pos = cell[0]
 			var new_tm_pos = cell[0] + change
 			var ts_pos = cell[1]
-			tile_map.set_cell(layer, old_tm_pos, -1, ts_pos) #erase old
-			tile_map.set_cell(layer, new_tm_pos, 0, ts_pos)
+			tile_map_layer_current.set_cell(old_tm_pos, -1, ts_pos) #erase old
+			tile_map_layer_current.set_cell(new_tm_pos, 0, ts_pos)
 
 func erase_tile_map_selection():
 	log.lprint("erased tiles")
 	var selected_cells = get_selected_cells_as_dictionary()
 	for layer in selected_cells:
+		var tile_map_layer_current: TileMapLayer = tile_map.get_child(layer)
 		for cell in selected_cells[layer]:
 			var tm_pos = cell[0]
 			var ts_pos = cell[1]
-			tile_map.set_cell(layer, tm_pos, -1, ts_pos)
+			tile_map_layer_current.set_cell(tm_pos, -1, ts_pos)
 
 
 func copy_tile_map_selection():
@@ -483,12 +486,13 @@ func copy_tile_map_selection():
 func paste_tiles_from_buffer(pos):
 	log.lprint("pasted tiles")
 	for layer in tile_map_copy_buffer:
+		var tile_map_layer_current: TileMapLayer = tile_map.get_child(layer)
 		for cell in tile_map_copy_buffer[layer]:
 			var old_tm_pos = cell[0]
 			var new_tm_pos = cell[0] + pos
 			var ts_pos = cell[1]
 			#tile_map.set_cell(layer, old_tm_pos, -1, ts_pos) #erase old
-			tile_map.set_cell(layer, new_tm_pos, 0, ts_pos)
+			tile_map_layer_current.set_cell(new_tm_pos, 0, ts_pos)
 
 
 func get_selected_cells_as_dictionary(mode = "local_to_map") -> Dictionary: #used for tile map selection
@@ -496,12 +500,13 @@ func get_selected_cells_as_dictionary(mode = "local_to_map") -> Dictionary: #use
 	#"layer 2": ...}
 	var selected_cells = {}
 
-	for layer in tile_map.get_layers_count():
+	for layer in tile_map.get_child_count():
 		var layer_cells = []
+		var tile_map_layer_current: TileMapLayer = tile_map.get_child(layer)
 		for row in tile_map_selection.size.y:
 			for column in tile_map_selection.size.x:
 				var cell_pos = tile_map_selection.position + Vector2i(column, row)
-				var tile_pos = tile_map.get_cell_atlas_coords(layer, cell_pos)
+				var tile_pos = tile_map_layer_current.get_cell_atlas_coords(cell_pos)
 				if mode == "local_to_selection": #instead of local_to_map
 					cell_pos = Vector2i(column, row)
 
@@ -586,46 +591,48 @@ func set_cell(cell: Vector2, tile: int, layer): #set one cell, one layer, one ti
 
 
 func set_cells(cells: Rect2i, erase = false): #no need to pass brush since its global
-	var tile_map_layer: int
 	for row in cells.size.y:
 		for column in cells.size.x:
 			var tile_set_position = Vector2i(column % brush.size.x, row % brush.size.y) + brush.position
 			var tile_map_position = Vector2i(column, row) + cells.position
-			tile_map_layer = get_tile_map_layer(tile_set_position.y)
+			var tile_map_layer_id = get_tile_map_layer(tile_set_position.y)
 
 			if erase:
 				if multi_erase: #erase on all layers
-					for layer in tile_map.get_layers_count():
-						tile_map.set_cell(layer, tile_map_position, -1, tile_set_position)
+					for tile_map_layer: TileMapLayer in tile_map.get_children():
+						tile_map_layer.set_cell(tile_map_position, -1, tile_set_position)
 				else:
-					tile_map.set_cell(active_tile_map_layer, tile_map_position, -1, tile_set_position)
+					var tile_map_layer_current = tile_map.get_child(active_tile_map_layer)
+					tile_map_layer_current.set_cell(tile_map_position, -1, tile_set_position)
 			else:
-				if tile_map.tile_set.get_source(0).has_tile(tile_set_position):
-					tile_map.set_cell(tile_map_layer, tile_map_position, 0, tile_set_position) #draw
+				if tile_map.get_child(0).tile_set.get_source(0).has_tile(tile_set_position):
+					var tile_map_layer_current: TileMapLayer = tile_map.get_child(tile_map_layer_id)
+					tile_map_layer_current.set_cell(tile_map_position, 0, tile_set_position) #draw
 					if auto_tile and w.current_level.has_node("AutoTile"):
-						w.current_level.get_node("AutoTile").do_auto_tile(tile_map_position, tile_map_layer)
+						w.current_level.get_node("AutoTile").do_auto_tile(tile_map_position, tile_map_layer_id)
 
 			#If source_id is set to -1, atlas_coords to Vector2i(-1, -1) or alternative_tile to -1, the cell will be erased. An erased cell gets all its identifiers automatically set to their respective invalid values, namely -1, Vector2i(-1, -1) and -1.
 
 
 
 func set_cells_from_brush_origins(origins: Array, erase = false):
-	var tile_map_layer: int
 	for origin in origins:
 		for column in brush.size.x:
 			for row in brush.size.y:
 				var tile_set_position = Vector2i(column % brush.size.x, row % brush.size.y) + brush.position
 				var tile_map_position = Vector2i(column, row) + origin
-				tile_map_layer = get_tile_map_layer(tile_set_position.y)
 
 				if erase:
 					if multi_erase: #erase on all layers
-						for layer in tile_map.get_layers_count():
-							tile_map.set_cell(layer, tile_map_position, -1, tile_set_position)
+						for tile_map_layer: TileMapLayer in tile_map.get_children():
+							tile_map_layer.set_cell(tile_map_position, -1, tile_set_position)
 					else:
-						tile_map.set_cell(active_tile_map_layer, tile_map_position, -1, tile_set_position)
+						var tile_map_layer_current: TileMapLayer = tile_map.get_child(active_tile_map_layer)
+						tile_map_layer_current.set_cell(tile_map_position, -1, tile_set_position)
 				else:
-					tile_map.set_cell(tile_map_layer, tile_map_position, 0, tile_set_position) #draw
+					var tile_map_layer_id: int = get_tile_map_layer(tile_set_position.y)
+					var tile_map_layer_current: TileMapLayer = tile_map.get_child(tile_map_layer_id)
+					tile_map_layer_current.set_cell(tile_map_position, 0, tile_set_position) #draw
 
 
 
@@ -736,7 +743,7 @@ func setup_tile_map_preview() -> Node:
 		w.current_level.get_node("TileMapPreview").queue_free()
 
 	var tile_map_preview = TILE_MAP_PREVIEW.instantiate()
-	tile_map_preview.tile_set = w.current_level.get_node("TileMap").tile_set
+	tile_map_preview.tile_set = w.current_level.get_node("TileMap").get_node("Front").tile_set
 	w.current_level.add_child(tile_map_preview)
 	return tile_map_preview
 
@@ -773,8 +780,8 @@ func free_previews():
 
 
 func get_cell(mouse_pos) -> Vector2i:
-	var local_pos = tile_map.to_local(mouse_pos)
-	var map_pos = tile_map.local_to_map(local_pos)
+	var local_pos = tile_map.get_child(0).to_local(mouse_pos)
+	var map_pos = tile_map.get_child(0).local_to_map(local_pos)
 	return map_pos
 
 func get_cells_centerbox(mouse_pos) -> Rect2i:

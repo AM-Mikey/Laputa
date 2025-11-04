@@ -72,7 +72,7 @@ func get_initial_velocity(scoped_projectile_speed, scoped_direction) -> Vector2:
 ### SIGNALS ###
 
 func _on_CollisionDetector_body_entered(body):
-	if body is TileMap:
+	if body is TileMapLayer:
 		if body.tile_set.get_physics_layer_collision_layer(0) == 8: #world (layer value)
 			touched_floor = true
 
