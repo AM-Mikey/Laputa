@@ -15,21 +15,21 @@ PNG with layers going from back to front in a vertical sprite sheet
 
 Focus:
 	-Top: Perfect for cave levels, closest layer sticks to top of level
-	
+
 	-OneQuarter: Only use for focus on something 1/4 of the way down the level.
-	
-	-Center: For empty skies or repeating patterns with something in the middle. 
-	
+
+	-Center: For empty skies or repeating patterns with something in the middle.
+
 	-ThreeQuarters: Only use for focus on something 3/4 of the way down the level.
-	
+
 	-Bottom: Perfect for outdoor levels, closest layer sticks to bottom of level
 
 ---
 
-Colors: 
+Colors:
 First color for transparency
 Sprite > Color Mode > Index
-Unlock the pallete 
+Unlock the pallete
 
 Left click AND right click colors
 Color and eraser

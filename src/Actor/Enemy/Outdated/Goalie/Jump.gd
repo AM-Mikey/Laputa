@@ -17,11 +17,11 @@ func state_process():
 
 func calc_velocity() -> Vector2:
 	var out = em.velocity
-	
+
 	out.y += em.gravity * get_physics_process_delta_time()
 	if em.move_dir.y < 0:
 		out.y = em.speed.y
-	
+
 	return out
 
 func enter():

@@ -30,7 +30,7 @@ var dl: Node
 func _ready():
 	for e in get_tree().get_nodes_in_group("Enemies"):
 		e.disable()
-	
+
 	$NPC.visible = false
 	$Flat.visible = false
 	$Response.visible = false
@@ -49,7 +49,7 @@ func start_printing(dialog_json, conversation: String):
 	active = true
 	var dialog = load_dialog_json(dialog_json)
 	conversation = conversation.to_lower()
-	
+
 	if not dialog.has(conversation): #null convo
 		printerr("No conversation with the name: ", conversation)
 	else:
@@ -99,7 +99,7 @@ func load_dialog_json(dialog_json) -> Dictionary: #loads json and converts it in
 	return out
 
 
-func split_text(text) -> Array: #TODO: regex removes all spaces between commands, not just the first (i'm talking /face  about you) 
+func split_text(text) -> Array: #TODO: regex removes all spaces between commands, not just the first (i'm talking /face  about you)
 	var out = []
 	if !is_sign:
 		text = text.strip_edges().replace("\t", "") #remove first and last newlines, remove tabulation
@@ -188,7 +188,7 @@ func _input(event):
 			awaiting_merge = false
 			$CommandHandler.seek("/m", true)
 		elif active: #if already active, speed text up
-			do_delay = false 
+			do_delay = false
 		else:
 			progress_text()
 
@@ -237,7 +237,7 @@ func align_box():
 		tween.tween_property(self, "position", Vector2(position.x, viewport_size.y - (size.y + 16)), 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 		modulate = Color.TRANSPARENT
 		tween2.tween_property(self, "modulate", Color.WHITE, 0.1)
-	
+
 	else: #top
 		position.y = 0 - size.y
 		tween.tween_property(self, "position", Vector2(position.x, 16), 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
@@ -260,7 +260,7 @@ func align_out():
 		modulate = Color.WHITE
 		tween2.tween_property(self, "modulate", Color.TRANSPARENT, 0.1)
 		await tween.finished
-	
+
 	else: #top
 		position.y = 16
 		tween.tween_property(self, "position", Vector2(position.x, 0 - size.y), 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)

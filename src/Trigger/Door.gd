@@ -40,19 +40,19 @@ func enter_door():
 	active_pc.inspect_target = self
 	active_pc.mm.change_state("inspect")
 	active_pc.move_to(global_position + Vector2($CollisionShape2D.shape.size.x * 0.5, $CollisionShape2D.shape.size.y))
-	
+
 	am.play("door")
 	am.fade_music()
-	
+
 	var transition = TRANSITION.instantiate()
 	if w.bl.has_node("TransitionIris"):
 		w.bl.get_node("BlackoutLayer/TransitionIris").free()
 	w.bl.add_child(transition)
-	
+
 	await transition.get_node("AnimationPlayer").animation_finished
-	
+
 	active_pc.mm.change_state("run")
-	
+
 	if same_level:
 		emit_signal("level_change", w.current_level.scene_file_path, same_level_next_index)
 	else:

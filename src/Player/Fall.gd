@@ -17,7 +17,7 @@ func state_process(_delta):
 	var new_velocity = pc.velocity
 	if pc.is_on_wall(): #TODO migrate?
 		new_velocity.y = max(pc.velocity.y, new_velocity.y)
-		
+
 	pc.velocity.y = min(mm.terminal_velocity, new_velocity.y) #only set y portion because we're doing move and slide with snap
 	animate()
 
@@ -28,14 +28,14 @@ func state_process(_delta):
 
 func set_player_directions():
 	var input_dir = Vector2.ZERO
-	if pc.can_input: 
+	if pc.can_input:
 		input_dir = Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
-	
+
 	#get move dir
 	pc.move_dir = Vector2(input_dir.x, 0.0)
-	
+
 	#get look dir
 	var look_x = pc.look_dir.x
 	if pc.direction_lock != Vector2i.ZERO: #dir lock
@@ -43,10 +43,10 @@ func set_player_directions():
 	elif pc.move_dir.x != 0.0: #moving
 		look_x = sign(pc.move_dir.x)
 	pc.look_dir = Vector2i(look_x, input_dir.y)
-	
+
 	#get shoot dir
 	if pc.look_dir.y != 0.0: #up/down
-		pc.shoot_dir = Vector2(0.0, pc.look_dir.y) 
+		pc.shoot_dir = Vector2(0.0, pc.look_dir.y)
 	else:
 		pc.shoot_dir = Vector2(pc.look_dir.x, 0.0)
 
@@ -58,18 +58,18 @@ func animate():
 	if pc.direction_lock != Vector2i.ZERO and pc.direction_lock.x != sign(pc.velocity.x) and abs(pc.velocity.x) > 0.1:
 		reference_texture = preload("res://assets/Player/BackAerial.png")
 		do_back = true
-	
+
 	if abs(pc.velocity.y) < 20:
 		animation = "back_aerial_top" if do_back else "aerial_top"
 	elif pc.velocity.y < 0:
 		animation = "back_aerial_rise" if do_back else "aerial_rise"
 	elif pc.velocity.y > 0:
 		animation = "back_aerial_fall" if do_back else "aerial_fall"
-	
+
 	#for runtime, set the frame counts before the animation starts
 	sprite.hframes = int(reference_texture.get_width() / 32.0)
 	sprite.vframes = int(reference_texture.get_height() / 32.0)
-	
+
 	var vframe = get_vframe()
 	sprite.frame_coords.y = vframe
 

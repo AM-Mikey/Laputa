@@ -17,10 +17,10 @@ func get_overlap(body) -> bool:
 	for t in get_tree().get_nodes_in_group("Triggers"):
 		if t.active_bodies.has(body) and t.trigger_type == trigger_type:
 			body_in_triggers += 1
-	
-	if body_in_triggers > 1: 
+
+	if body_in_triggers > 1:
 		return true
-	else: 
+	else:
 		return false
 
 

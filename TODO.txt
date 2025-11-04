@@ -1,7 +1,7 @@
 Reviewed and accurate as of 8/9/25
 
 --- General ---
--clean up [var disabled] in various scripts 
+-clean up [var disabled] in various scripts
 -subpixel jittering on characterbodies (especially juniper)
 -consider using typed variables (:=) to improve performance and reduce confusion
 
@@ -22,7 +22,7 @@ Reviewed and accurate as of 8/9/25
 -add stand animation without wind for indoors
 -adjust recent shot time (?)
 	>jumping then insta shoot down (?)
-	
+
 
 --- enemy ---
 -move hurt sounds to _on_hit() per enemy for custom sounds
@@ -65,7 +65,7 @@ Reviewed and accurate as of 8/9/25
 		-editorlevellimiter load button (background_resouce) is likely bugged
 		-add control c/v support
 		-change property order from alphabetical to order in script
-		
+
 
 
 
@@ -128,7 +128,7 @@ Reviewed and accurate as of 8/9/25
 --- UI ---
 -fix level preview on main menu and update non-titlescreen-skip menu code
 -update themes, move them and remove unused ones
-	
+
 	>-- hud --<
 	-hud seems to break size on run in game. it does not in windowed/fullscreen. this is probably a conflict with out window resizer in world
 	-flash max on max xp pickup
@@ -174,7 +174,7 @@ REQUIRED - add a second set of checks for slopes (halfway) so that it doesnt mis
 --juniper physics --
 falling into a \| shaped pit causes our velocity to build infinitely
 
-juniper set all states to 
+juniper set all states to
 	pc.floor_max_angle = 0.8
 	pc.safe_margin = 0.008 #IMPORTANT this still causes safe margin floating at 3x res. setting it to 0.0001 fixes but that breaks all physics. consider if anything else can fix the jitter as well
 								#SOLUTION snap juniper to ground so that he scales properly with world
@@ -194,7 +194,7 @@ move shoot right up slope gun so it doesnt instafizzle on slight slope
 -observe +tweak hitbox changes
 -observe save/load and identify issues
 -reconsider pc -> get_pc_or_null()
--consider autoload for saveload code 
+-consider autoload for saveload code
 -half walls tend to cause issues with push
 -moving from 45 to slightslo
 
@@ -335,4 +335,6 @@ Crouch Triggering:
 
 
 Transition frame Candidates:
+
 	- up_slope -> edge_front
+

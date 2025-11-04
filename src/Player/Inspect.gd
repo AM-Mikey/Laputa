@@ -17,7 +17,7 @@ func state_process(_delta):
 	animate()
 	if pc.is_on_wall():
 		new_velocity.y = max(pc.velocity.y, new_velocity.y)
-	
+
 #	if Input.is_action_pressed("move_left") \ #exit early
 #	or Input.is_action_pressed("move_right") \
 #	or Input.is_action_pressed("jump"):
@@ -27,7 +27,7 @@ func state_process(_delta):
 func animate():
 	var animation = "inspect"
 	var reference_texture = preload("res://assets/Player/Inspect.png")
-	
+
 	#for runtime, set the frame counts before the animation starts
 	sprite.hframes = int(reference_texture.get_width() / 32.0)
 	sprite.vframes = int(reference_texture.get_height() / 32.0)

@@ -1,7 +1,8 @@
 
 LukaLop: Lead Designer, programmer, artist, etc
 
-Developers: CrystalWarrior, Soru, HiloNero 
+Developers: CrystalWarrior, SanpoNeko, Soru
+Programming Assistance: Neropatti, Parzivail
 Additional Backgrounds: Katt
 Additional Concept Art, Additional Character Design: Daedily
 Lead Composer: FiveNineSquared
@@ -9,7 +10,7 @@ Additional Tracks: Curelapse, PhiDelta
 Bat Sprites: Yobonnie
 
 
-Special Thanks: Zoe B. Yobonnie, Ashford G., Parzivail, Chandler (Dancing Jackal)
+Special Thanks: Zoe B. Yobonnie, Ashford G., Chandler (Dancing Jackal)
 
 Also Thanks To: Godot and godot discord
 

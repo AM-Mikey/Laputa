@@ -31,19 +31,12 @@ var max_xp: int = 20
 var max_level: int = 1
 @export var level: int = 1
 
-
-var trigger_held = false
-
 @onready var world = get_tree().get_root().get_node("World")
 @onready var pc = get_parent().get_parent().get_parent()
 @onready var cd = pc.get_node("GunManager/CooldownTimer")
 
 
-
-
 func fire(type):
-	trigger_held = true
-	
 	if cd.time_left == 0:
 		if max_ammo == 0 or ammo != 0:
 			if max_ammo != 0:
@@ -56,21 +49,14 @@ func fire(type):
 
 		if not charging:
 			cd.start(cooldown_time)
-		
-		if type == "automatic":
-			await cd.timeout
-			if trigger_held:
-				fire("automatic")
 
 
 func release_manual_fire():
-	trigger_held = false
 	if charging:
 		cd.start(cooldown_time)
 	deactivate_manual()
-	
+
 func release_auto_fire():
-	trigger_held = false
 	deactivate_auto()
 
 
@@ -83,7 +69,7 @@ func deactivate_auto():
 
 func spawn_bullet(bullet_pos, shoot_dir, layer = world.get_node("Middle")) -> Node:
 	var bullet = bullet_scene.instantiate()
-	
+
 	bullet.damage = damage
 	bullet.f_range = f_range
 	bullet.f_time = f_time
@@ -94,7 +80,7 @@ func spawn_bullet(bullet_pos, shoot_dir, layer = world.get_node("Middle")) -> No
 	bullet.origin = bullet_pos
 
 	am.play(sfx)
-	
+
 	if do_muzzle_flash:
 		var muzzle_flash = MUZZLE_FLASH.instantiate()
 		$Muzzle.add_child(muzzle_flash)
@@ -105,7 +91,7 @@ func spawn_bullet(bullet_pos, shoot_dir, layer = world.get_node("Middle")) -> No
 func get_origin() -> Vector2: #bullet comes from origin, aligned with the muzzle position
 	var bullet_origin = pc.get_node("BulletOrigin").global_position
 	var out = $Muzzle.global_position
-	
+
 	if pc.shoot_dir.x != 0.0: #left or right
 		out.x = bullet_origin.x
 	elif pc.shoot_dir.y != 0.0: #up or down

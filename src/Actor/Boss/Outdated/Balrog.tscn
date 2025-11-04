@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b8c6wcf4e6tyd"]
 
-[ext_resource type="Script" uid="uid://domj0hgqsijfc" path="res://src/Actor/Boss/Balrog.gd" id="1"]
+[ext_resource type="Script" uid="uid://domj0hgqsijfc" path="res://src/Actor/Boss/Outdated/Balrog.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cur1rj7plr5is" path="res://assets/Actor/Boss/Balrog.png" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]

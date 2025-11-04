@@ -8,15 +8,15 @@
 [ext_resource type="Texture2D" uid="uid://b7fbr0e7mihkm" path="res://assets/Editor/VisTrue.png" id="6"]
 [ext_resource type="Script" uid="uid://dd0r3acg5fp3y" path="res://src/Editor/Button/LayerButton.gd" id="7"]
 
-[sub_resource type="StyleBoxEmpty" id="3"]
-
-[sub_resource type="StyleBoxEmpty" id="4"]
-
-[sub_resource type="StyleBoxEmpty" id="1"]
+[sub_resource type="StyleBoxEmpty" id="5"]
 
 [sub_resource type="StyleBoxEmpty" id="2"]
 
-[sub_resource type="StyleBoxEmpty" id="5"]
+[sub_resource type="StyleBoxEmpty" id="1"]
+
+[sub_resource type="StyleBoxEmpty" id="4"]
+
+[sub_resource type="StyleBoxEmpty" id="3"]
 
 [node name="Layer" type="MarginContainer" groups=["LayerButtons"]]
 custom_minimum_size = Vector2(0, 32)
@@ -50,11 +50,11 @@ mouse_filter = 2
 [node name="LayerButton" type="Button" parent="HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/focus = SubResource("3")
-theme_override_styles/disabled = SubResource("4")
-theme_override_styles/hover = SubResource("1")
-theme_override_styles/pressed = SubResource("2")
 theme_override_styles/normal = SubResource("5")
+theme_override_styles/pressed = SubResource("2")
+theme_override_styles/hover = SubResource("1")
+theme_override_styles/disabled = SubResource("4")
+theme_override_styles/focus = SubResource("3")
 text = "Layer 1"
 flat = true
 

@@ -12,7 +12,7 @@ func _ready():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var spread_distance = int(rng.randf_range(max_spread_distance * -1, max_spread_distance))
-	
+
 	rotation_degrees = get_rot(direction)
 	setup_vis_notifier()
 

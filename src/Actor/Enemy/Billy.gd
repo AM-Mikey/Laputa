@@ -47,13 +47,13 @@ func enter_walk():
 		move_dir = Vector2.RIGHT
 	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
 		move_dir = Vector2.LEFT
-	
+
 	ap.play("Walk")
-	
+
 	match move_dir:
 		Vector2.LEFT: $Sprite2D.flip_h = false
 		Vector2.RIGHT: $Sprite2D.flip_h = true
-	
+
 	rng.randomize()
 	$StateTimer.start(rng.randf_range(1.0, walk_max_time))
 	await $StateTimer.timeout
@@ -91,10 +91,10 @@ func do_aggro():
 		var target_dir = Vector2(sign(position.x - pc.position.x), 0)
 		look_dir = target_dir * -1
 		set_waypoint(target_dir)
-	#this isnt the best way to do this, but returns a good result. 
+	#this isnt the best way to do this, but returns a good result.
 	#right now this cuts off move_dir when it's more than a block away (to -1 or 1)
 	#the small adjustment when less than that is why we don't just use sign()
-	var x_dir = clamp((waypoint.position.x - position.x)/16, -1, 1) 
+	var x_dir = clamp((waypoint.position.x - position.x)/16, -1, 1)
 	move_dir = Vector2(lerp(move_dir.x, x_dir, 0.2), 0)
 
 	if abs(position.x - waypoint.position.x) < lock_tolerance:
@@ -116,7 +116,7 @@ func do_aggro():
 
 func fire():
 	var bullet = SEED.instantiate()
-	
+
 	bullet.damage = bullet_damage
 	bullet.speed = bullet_speed
 	bullet.position = $BulletOrigin.global_position

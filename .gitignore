@@ -1,6 +1,7 @@
 # My ignores
 .DS_Store
 .vscode/
+assets/.Obsidian/Laputa/.obsidian
 
 # Plugin Specific ignores
 default_env.tres

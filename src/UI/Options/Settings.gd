@@ -36,9 +36,9 @@ var ignore_display_mode = false #so we don't reset the display mode during the o
 func _ready():
 	if FileAccess.file_exists(settings_path):
 		load_settings()
-	else: 
+	else:
 		save_defaults()
-	
+
 	scroll.get_v_scroll_bar().connect("item_rect_changed", Callable(self, "on_scrollbar_changed"))
 	after_ready = true
 
@@ -79,7 +79,7 @@ func on_displaymode_changed(index: int):
 		#6: w.resolution_scale = 6.0
 		#7: w.resolution_scale = 7.0
 		#8: w.resolution_scale = 8.0
-	
+
 	#if w.has_node("TitleCam"):
 		#w.get_node("TitleCam").zoom = Vector2(1 / w.resolution_scale, 1 / w.resolution_scale)
 	##world.get_node("UILayer").scale = Vector2(world.resolution_scale, world.resolution_scale)
@@ -92,30 +92,30 @@ func on_displaymode_changed(index: int):
 
 
 func on_mastervolume_changed(value):
-	var db = get_percent_as_db(value)
-	#print(db)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),db)
-	mastervolume.get_node("Label").text = "Master Volume: Muted" if value == 0 else "Master Volume: %.f" % (value * 10) + "%"
-	if after_ready and !w.get_node("MenuLayer/Options").ishidden:
-		am.play("sound_test", null, "master") #play on master
-		print("saving mv")
-		save_setting("MasterVolume", value)
+	change_bus_volume(value,"Master")
 
 func on_musicvolume_changed(value):
-	var db = get_percent_as_db(value)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),db)
-	musicvolume.get_node("Label").text = "Music Volume: Muted" if value == 0 else "Music Volume: %.f" % (value * 10) + "%"
-	if after_ready and !w.get_node("MenuLayer/Options").ishidden:
-		am.play("sound_test")
-		save_setting("MusicVolume", value)
+	change_bus_volume(value,"Music")
 
 func on_sfxvolume_changed(value):
-	var db = get_percent_as_db(value)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),db)
-	sfxvolume.get_node("Label").text = "SFX Volume: Muted" if value == 0 else "SFX Volume: %.f" % (value * 10) + "%"
+	change_bus_volume(value,"SFX")
+
+func change_bus_volume(value,busname:String):
+	var slidernode = get_node("Margin/Scroll/VBox/" + busname + "Volume")
+	var db = linear_to_db(value/10.0)
+	print (db)
+	if value == 0:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index(busname),true)
+		slidernode.get_node("Label").text = "SFX Volume: Muted"
+	else:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index(busname),false)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(busname),db)
+		slidernode.get_node("Label").text = busname + " Volume: %.f" % (value * 10) + "%"
 	if after_ready and !w.get_node("MenuLayer/Options").ishidden:
 		am.play("sound_test")
-		save_setting("SFXVolume", value)
+		save_setting(busname + "Volume", value)
+
+
 
 
 func on_mouselock(value):
@@ -134,12 +134,12 @@ func on_deletesave():
 			break
 		elif not file.begins_with("."):
 			files.append(file)
-	
+
 	for f in files:
 		if f.get_extension() == "dat" or f.get_extension() == "json":
 			dir.remove("user://%s" % f)
 			print("removed file: " + "user://%s" % f)
-	
+
 	on_reset()
 	deletesave.text = "Done"
 
@@ -163,19 +163,19 @@ func save_setting(setting, setting_value):
 func load_settings():
 	print("loading settings")
 	var data = read_data()
-	
+
 	mastervolume.get_node("Slider").value = data["MasterVolume"]
 	on_mastervolume_changed(data["MasterVolume"])
 	musicvolume.get_node("Slider").value = data["MusicVolume"]
 	on_musicvolume_changed(data["MusicVolume"])
 	sfxvolume.get_node("Slider").value = data["SFXVolume"]
 	on_sfxvolume_changed(data["SFXVolume"])
-	
+
 	displaymode.selected = data["DisplayMode"]
 	on_displaymode_changed(data["DisplayMode"])
 	#resolutionscale.selected = data["ResolutionScale"]
 	#on_resolutionscale_changed(data["ResolutionScale"])
-	
+
 	mouselock.button_pressed = data["MouseLock"]
 	on_mouselock(data["MouseLock"])
 
@@ -198,7 +198,7 @@ func read_data() -> Dictionary:
 			test_json_conv.parse(text)
 			data = test_json_conv.get_data()
 			file.close()
-	else: 
+	else:
 		printerr("ERROR: could not load settings data")
 	return data
 
@@ -215,36 +215,3 @@ func on_reset():
 
 func on_return():
 	w.get_node("MenuLayer/Options").exit()
-
-
-
-### HELPER GETTERS
-
-func get_percent_as_db(value) -> float:
-	value = int(value)
-	var db: float
-	match value:
-		0: db = -80
-		1: db = -20
-		2: db = -13.9794
-		3: db = -10.4576
-		4: db = -7.9588
-		5: db = -6.0206
-		6: db = -4.4370 
-		7: db = -3.0980
-		8: db = -1.9382 
-		9: db = -0.9151
-		10: db = 0
-		11: db = 0.8279 
-		12: db = 1.5836 
-		13: db = 2.2789
-		14: db = 2.9226
-		15: db = 3.5218
-		16: db = 4.0824
-		17: db = 4.6090
-		18: db = 5.1055
-		19: db = 5.5751 
-		20: db = 6.0206
-		_: db = 0
-		
-	return db

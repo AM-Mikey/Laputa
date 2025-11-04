@@ -9,7 +9,7 @@ extends Node #TODO: this script needs major cleanup
 func parse_command(string):
 	var command = string.split(",", true, 1)
 	print("command: ", string)
-	
+
 	var function = command[0]
 	var argument
 	if command.size() > 1:
@@ -44,7 +44,7 @@ func parse_command(string):
 			set_visible(argument, false)
 		"unhide":
 			set_visible(argument, true)
-		
+
 		"waypoint":#			/waypoint, (string: npc_id), (int: waypoint_index)
 			waypoint(argument)
 		"impactline": #adds a center line for impact
@@ -63,7 +63,7 @@ func parse_command(string):
 			pc.mm.knockback_speed = Vector2(25, 40)
 			pc.mm.snap_vector = Vector2.ZERO
 			pc.mm.change_state("knockback")
-		
+
 		#"walk":#				/walk, (string: npc_id), (int: distance)				makes an npc walk a certain distance from their current pos
 			#walk(argument)#																with negative being left and positive being right
 		"yn":
@@ -74,8 +74,8 @@ func parse_command(string):
 			options(argument)
 		"topics":
 			topics(argument)
-		
-		"t": 
+
+		"t":
 			db.dl.text += " [b][color=#f3b131]" #bright gold
 			if !pc.topic_array.has(argument):
 				pc.topic_array.append(argument)
@@ -85,14 +85,14 @@ func parse_command(string):
 			#focus(argument)
 		#"unfocus":#																		returns camera focus to the pc
 			#unfocus()
-		
+
 		"lookat":#					/lookat, (string: npc_id), (string: target_npc_id) or ("player" or "pc")
 			lookat(argument)
 		"left":#					/left, (string: npc_id)								faces an npc left
 			flip("left", argument)
 		"right":#					/right, (string: npc_id)							faces an npc right
 			flip("right", argument)
-		
+
 		"clear":#																		clears the text		(use at start of text)
 			db.dl.text = ""
 		"wait":#					/wait, (float: duration = 1.0)						clears text and hides db until duration
@@ -113,7 +113,7 @@ func parse_command(string):
 func face(string):
 	var face_node = db.get_node("Face")
 	var face_sprite = face_node.get_node("Sprite2D")
-	
+
 	if string == "":
 		printerr("COMMAND ERROR: no npc given for /face")
 		return
@@ -122,13 +122,13 @@ func face(string):
 	var expression = 0
 	if face.size() > 1:
 		expression = int(face[1])
-	
+
 	face_node.visible = true
-	
+
 	face_sprite.texture = load("res://assets/Face/%s.png" % id.capitalize())
 	face_sprite.hframes = face_sprite.texture.get_width() / 48
 	face_sprite.frame = expression
-	
+
 	face_sprite.position.x = -48
 	var tween = get_tree().create_tween()
 	tween.tween_property(face_sprite, "position", Vector2.ZERO, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
@@ -211,7 +211,7 @@ func lookat(string): #TODO: enable multiple lookers
 	var a = string.split(",")
 	var npc_id = a[0].to_lower()
 	var target_id = a[1].to_lower()
-	
+
 	var found_npcs = []
 	for n in get_tree().get_nodes_in_group("NPCs"):
 		if n.id == npc_id:
@@ -219,7 +219,7 @@ func lookat(string): #TODO: enable multiple lookers
 	if found_npcs.is_empty():
 		printerr("COMMAND ERROR: could not find NPC with id: " + npc_id)
 		return
-	
+
 	var found_target = Node
 	if target_id == "player" or target_id == "pc":
 		found_target = pc
@@ -230,10 +230,10 @@ func lookat(string): #TODO: enable multiple lookers
 		if found_target == null:
 			printerr("COMMAND ERROR: could not find NPC with id: " + target_id)
 			return
-	
+
 	for n in found_npcs: #only looks at last n
 		n.look_at_node(found_target)
-	
+
 
 
 

@@ -30,7 +30,7 @@ func reset():
 	$AnimationPlayer.play("FloatOut")
 	$AnimationPlayer.stop()
 	$Timer.start(combo_time)
-	
+
 
 func display_number():
 	if value >= 0 and value < 10:

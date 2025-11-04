@@ -57,11 +57,11 @@ func _on_physics_process(_delta):
 	velocity = calc_velocity(velocity, move_dir, speed)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
-	
+
 	if aggro:
 		var player_from_self = pc.position - position
 		$RayCast2D.target_position = player_from_self
-		
+
 		if $RayCast2D.get_collider() == null:
 			if aggro_waypoint:
 				aggro_waypoint.queue_free()
@@ -73,8 +73,8 @@ func _on_physics_process(_delta):
 			world.current_level.add_child(waypoint)
 			aggro_waypoint = waypoint
 			set_target(-1)
-			
-	
+
+
 	if target:
 		if abs(target_pos.x - position.x) < target_tolerance and abs(target_pos.y - position.y) < target_tolerance:
 			if not waypoints.is_empty(): #no target
@@ -83,12 +83,12 @@ func _on_physics_process(_delta):
 
 func get_next_index(last_index) -> int:
 	var next_index
-	
+
 	if last_index == -1:
 		aggro_waypoint.queue_free()
 		aggro_waypoint = null
 		next_index = start_waypoint
-	
+
 	else: #normal
 		var indexes = waypoints.keys()
 		var array_pos = indexes.find(last_index)
@@ -96,7 +96,7 @@ func get_next_index(last_index) -> int:
 			next_index = indexes[array_pos + 1]
 		else:
 			next_index = indexes.front()
-	
+
 	return next_index
 
 
@@ -104,12 +104,12 @@ func get_next_index(last_index) -> int:
 
 func enter_idle():
 	can_flap = false
-	#this isnt the best way to do this, but returns a good result. 
+	#this isnt the best way to do this, but returns a good result.
 	#right now this cuts off move_dir when it's more than a block away (to -1 or 1)
 	#the small adjustment when less than that is why we don't just use sign()
 	var x_dir = clamp((target_pos.x - position.x)/16, -1, 1)
 	move_dir = Vector2(lerp(move_dir.x, x_dir, 0.2), 0)
-		
+
 	$Sprite2D.flip_h = x_dir > 0
 	ap.play("UnflapAggro") if aggro_waypoint else ap.play("Unflap")
 	await get_tree().create_timer(idle_time).timeout
@@ -127,7 +127,7 @@ func enter_flap():
 	#this isnt the best way to do this, but returns a good result.
 	var x_dir = clamp((target_pos.x - position.x)/16, -1, 1)
 	move_dir = Vector2(lerp(move_dir.x, x_dir, 0.2), -1)
-		
+
 	$Sprite2D.flip_h = x_dir > 0
 	ap.play("FlapAggro") if aggro_waypoint else ap.play("Flap")
 	await get_tree().create_timer(flap_time).timeout

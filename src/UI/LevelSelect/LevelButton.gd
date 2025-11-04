@@ -16,7 +16,7 @@ func _ready():
 		self.set("theme_override_colors/font_color", Color(0.8, 0.4, 0.4))
 	if level.find("/Village") != -1:
 		self.set("theme_override_colors/font_color", Color(0.534375, 0.8, 0.4))
-	
+
 
 
 func _on_LevelButton_pressed():
@@ -24,9 +24,9 @@ func _on_LevelButton_pressed():
 		world.get_node("Juniper").free() #we free and respawn them so we have a clean slate when we load in
 	if world.has_node("UILayer/UIGroup/HUD"):
 		world.get_node("UILayer/UIGroup/HUD").free()
-	
+
 	world.change_level_via_code(level)
-	
+
 	if world.has_node("MenuLayer/TitleScreen"):
 		world.get_node("MenuLayer/TitleScreen").queue_free()
 	if world.has_node("MenuLayer/PauseMenu"):

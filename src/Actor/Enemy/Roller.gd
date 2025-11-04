@@ -14,9 +14,9 @@ func setup():
 	move_dir = start_dir
 	set_up_direction(FLOOR_NORMAL)
 	animate()
-	
-	
-	
+
+
+
 func _on_physics_process(_delta):
 	if disabled or dead: return
 	velocity = calc_velocity(velocity, move_dir, speed)

@@ -9,7 +9,7 @@ const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
 const HEART = preload("res://src/Actor/Pickup/Heart.tscn")
 const STATE_LABEL = preload("res://src/Utility/StateLabel.tscn")
 
-var state: String 
+var state: String
 
 var disabled = false
 var protected = false
@@ -20,7 +20,7 @@ var damage_on_contact: int
 var enemy_damage_on_contact: int
 var hit_enemies_on_contact = false
 var hurt_sound = "enemy_hurt"
-var die_sound = "enemy_die" 
+var die_sound = "enemy_die"
 var damage_number = null
 
 @export var id: String
@@ -39,23 +39,23 @@ var ammo_chance = 1
 
 func _ready():
 	home = global_position
-	
+
 	if disabled: return
-	
+
 	var state_label = STATE_LABEL.instantiate()
 	add_child(state_label)
 	state_label.visible = debug
 	safe_margin = 0.001
-	
+
 	#if not is_in_group("EnemyPreviews"): #this was causing issues with waiting a frame for setup(), just start state in setup()
 		#await get_tree().process_frame
 		#if state != "" and state != null: #TODO: this prevents enemies from starting in a state if we dont yield? we get ton of errors if we dont because we delete the enemy when moving it
 			#change_state(state)
-	
+
 	setup()
 
 func setup(): #EVERY ENEMY MUST HAVE
-	pass #to be determined in enemy script. 
+	pass #to be determined in enemy script.
 
 
 
@@ -96,7 +96,7 @@ func calc_velocity(velocity: Vector2, move_dir, speed, do_gravity = true, do_acc
 				out.x = lerp(out.x, 0.0, air_cof)
 	else: #no acceleration
 		out.x = speed.x * move_dir.x
-	
+
 	#Y
 	if do_gravity:
 		out.y += gravity * get_physics_process_delta_time()
@@ -141,7 +141,7 @@ func hit(damage, blood_direction):
 	blood.direction = blood_direction
 
 	set_damagenum(damage)
-	
+
 	if hp <= 0:
 		die()
 	else:
@@ -155,7 +155,7 @@ func _on_hit(damage, blood_direction): #inhereted for enemies to do something on
 
 func set_damagenum(damage):
 	var y_offset = $CollisionShape2D.shape.get_rect().position.y - 8
-	
+
 	if damage_number == null:
 		damage_number = DAMAGE_NUMBER.instantiate()
 		damage_number.value = damage
@@ -190,10 +190,10 @@ func do_death_routine(): #shadow this for individual enemies ##note this doesnt 
 
 func do_death_drop():
 	if reward == 0:return
-	
+
 	var heart = HEART.instantiate()
 	var ammo = AMMO.instantiate()
-	
+
 	#ammo chance
 	var player_needs_ammo = false
 	for w in pc.get_node("GunManager/Guns").get_children():
@@ -201,13 +201,13 @@ func do_death_drop():
 			player_needs_ammo = true
 	if not player_needs_ammo:
 		ammo_chance = 0
-	
+
 
 
 	var total_chance = heart_chance + experience_chance + ammo_chance
 	rng.randomize()
 	var drop = rng.randf_range(0, total_chance)
-	
+
 	if drop <= heart_chance: # drop hp
 		heart.position = global_position
 		match reward:
@@ -215,10 +215,10 @@ func do_death_drop():
 			3,4,5: heart.value = 4
 			6,7,8,9,10 : heart.value = 8
 		world.middle.call_deferred("add_child", heart)
-	
+
 	elif drop > heart_chance and drop <= heart_chance + experience_chance: #drop xp
 		var values = [1]
-		
+
 		match reward:
 			1: pass
 			2: values = [1,1]
@@ -230,7 +230,7 @@ func do_death_drop():
 			8: values = [5,1,1,1]
 			9: values = [5,1,1,1,1]
 			10: values = [10]
-		
+
 		for v in values:
 			var experience = EXPERIENCE.instantiate()
 			experience.value = v

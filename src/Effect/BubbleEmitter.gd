@@ -13,7 +13,7 @@ func _ready(): #only intended for enemy, but works on player for now
 	$CollisionShape2D.position = get_parent().get_node("CollisionShape2D").position
 	$CollisionShape2D.position.y -= (enemy_bounding_rect.size.y * 0.5) + 1 #should put this one above the enemy
 	bubble_offset = Vector2(0, enemy_bounding_rect.size.y * -0.5)
-	
+
 func _on_timer_timeout():
 	if fully_submerged:
 		var bubble = BUBBLE.instantiate()

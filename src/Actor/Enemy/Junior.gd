@@ -73,11 +73,11 @@ func enter_shoot():
 
 func do_flip_check():
 	match move_dir:
-		Vector2.LEFT: 
+		Vector2.LEFT:
 			$Sprite2D.flip_h = false
 			$PlayerDetector.scale.x = 1
 			$BulletOrigin.position = Vector2(-13, -13)
-		Vector2.RIGHT: 
+		Vector2.RIGHT:
 			$Sprite2D.flip_h = true
 			$PlayerDetector.scale.x = -1
 			$BulletOrigin.position = Vector2(13, -13)

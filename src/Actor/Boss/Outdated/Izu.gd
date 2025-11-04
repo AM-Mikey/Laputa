@@ -6,5 +6,3 @@ func _ready():
 
 func whip(): #different actions have different functions
 	pass
-
-

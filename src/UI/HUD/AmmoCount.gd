@@ -8,7 +8,7 @@ func display_ammo():
 		visible = false
 	else:
 		visible = true
-	
+
 	if ammo >= 0 and ammo < 10:
 		$Num1.visible = false
 		$Num2.visible = false

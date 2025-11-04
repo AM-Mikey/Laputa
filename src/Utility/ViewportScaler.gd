@@ -19,8 +19,8 @@ func _viewport_size_changed():
 	else:
 		resolution_scale = roundi(urs) #else round normally
 	resolution_scale = max(resolution_scale, 1)
-	
-	
+
+
 	var tiles_visible_x = 30.0
 	var menu_urs = viewport_size.x / (16.0 * tiles_visible_x)
 	if menu_urs - floor(menu_urs) == 0.5:
@@ -28,5 +28,5 @@ func _viewport_size_changed():
 	else:
 		menu_resolution_scale = roundi(menu_urs) #else round normally
 	menu_resolution_scale = max(menu_resolution_scale, 1)
-	
+
 	emit_signal("scale_changed", resolution_scale)

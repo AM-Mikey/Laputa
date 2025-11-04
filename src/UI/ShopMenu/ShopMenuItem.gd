@@ -18,9 +18,9 @@ func on_item_changed(new):
 
 func _on_ShopMenuItem_resized():
 	var sp = get_node(sprite)
-	
+
 	sp.position = size / 2
-	
+
 	if size.x >= 96 and size.y >= 64:
 		sp.scale = Vector2(4,4)
 	elif size.x >= 72 and size.y >= 48:

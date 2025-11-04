@@ -6,7 +6,7 @@ func _ready():
 	var _err = am.connect("interrupt_finished", Callable(self, "on_interrupt_finished"))
 	if not held_item:
 		expend_prop()
-	
+
 func activate():
 	expend_prop()
 	am.play("chest")

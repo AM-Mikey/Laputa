@@ -14,11 +14,11 @@ func setup_props(): #TODO: connect this to editor
 	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
 	var index = 0
 	for p in find_prop_scenes("res://src/Prop/"):
-		
+
 		var prop = load(p).instantiate()
 		if not prop.editor_hidden:
 			props[prop.name] = prop
-			
+
 			var prop_button = PROP_BUTTON.instantiate()
 			prop_button.prop_path = p
 			prop_button.prop_name = prop.name
@@ -28,7 +28,7 @@ func setup_props(): #TODO: connect this to editor
 				active_prop_path = p
 			$VBox/Margin/Scroll/Buttons.add_child(prop_button)
 			index += 1
-		
+
 
 ### GETTERS
 
@@ -43,7 +43,7 @@ func find_prop_scenes(path):
 			break
 		if file.ends_with(".tscn"):
 				files.append(path + file)
-			
+
 	return files
 
 ### SIGNALS

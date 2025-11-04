@@ -41,7 +41,7 @@ func _on_KeyGuide_pressed():
 	var key_guide = KEY_GUIDE.instantiate()
 	w.ml.add_child(key_guide)
 	key_guide.do_focus()
-	
+
 
 func _on_Level_pressed():
 	var level_select = LEVEL_SELECT.instantiate()

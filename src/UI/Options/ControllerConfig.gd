@@ -50,9 +50,9 @@ func _ready():
 func _setup_action_options():
 	for o in action_options:
 		#print(o.name)
-		
+
 #		var found_action
-		
+
 		for a in InputMap.get_actions():
 			if a in action_dict.keys():
 				for e in InputMap.action_get_events(a):
@@ -139,7 +139,7 @@ func _setup_action_options():
 #
 #					InputMap.action_add_event(a, new_input)
 #
-#	else: 
+#	else:
 #		printerr("ERROR: could not load input map data")
 
 

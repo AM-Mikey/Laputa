@@ -5,7 +5,7 @@ extends Camera2D
 func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
-	
-	
+
+
 func _resolution_scale_changed(resolution_scale):
 	zoom = Vector2(resolution_scale, resolution_scale)

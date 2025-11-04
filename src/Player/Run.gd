@@ -16,7 +16,7 @@ var is_dropping = false
 func state_process(delta):
 	set_player_directions()
 	pc.velocity = calc_velocity()
-	
+
 	if (pc.get_node("WallLB").is_colliding() or pc.get_node("WallLT").is_colliding()) and pc.move_dir.x < 0:
 		push_left_wall = true
 		pc.velocity.x = max(pc.velocity.x, 0)
@@ -26,29 +26,35 @@ func state_process(delta):
 		push_right_wall = true
 		pc.velocity.x = min(pc.velocity.x, 0)
 	else: push_right_wall = false
-	
+
 	pc.move_and_slide()
 	animate(delta)
-	
-	
+
+
 	if not pc.is_on_floor() and not pc.is_in_coyote:
 		pc.is_in_coyote = true
 		mm.do_coyote_time()
-	if Input.is_action_just_pressed("jump") and Input.is_action_pressed("look_down") and pc.is_on_ssp and pc.can_input:
+
+	jump_processing()
+
+##Processes jumps and platform drops
+func jump_processing():
+	if inp.pressed("jump") and Input.is_action_pressed("look_down") and pc.is_on_ssp and pc.can_input:
 		is_dropping = true
 		mm.drop()
-		return
-	elif Input.is_action_pressed("jump") and !is_dropping and pc.can_input:
-		mm.jump()
-		return
+		return #is this needed?
+	elif !is_dropping and pc.can_input:
+		if inp.pressed("jump"):
+			mm.jump()
+		elif inp.buttonconfig.holdjumping:
+			if inp.held("jump"):
+				mm.jump()
+
 
 
 func set_player_directions():
-	var input_dir = Vector2.ZERO
-	if pc.can_input: 
-		input_dir = Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+	var input_dir:Vector2 = Vector2(0.0,0.0)
+	if pc.can_input: input_dir = inp.analogstick
 	#get move_dir
 	pc.move_dir = Vector2(input_dir.x, 0.0)
 	#get look_dir
@@ -57,7 +63,10 @@ func set_player_directions():
 		look_x = pc.direction_lock.x
 	elif pc.move_dir.x != 0.0: #moving
 		look_x = sign(pc.move_dir.x)
-	pc.look_dir = Vector2i(look_x, input_dir.y)
+	pc.look_dir = Vector2i(look_x, 0)
+	if abs(input_dir.y) >= inp.Y_axis_shoot_deadzone:
+		pc.look_dir.y = sign(input_dir.y)
+
 	#get shoot_dir
 	var shoot_vertically = false
 	if pc.look_dir.y < 0.0:
@@ -65,11 +74,12 @@ func set_player_directions():
 	if pc.look_dir.y > 0.0:
 		if check_shoot_down():
 			shoot_vertically = true
-	
-	if shoot_vertically: 
-		pc.shoot_dir = Vector2(0.0, pc.look_dir.y) 
-	else: 
+
+	if shoot_vertically:
+		pc.shoot_dir = Vector2(0.0, pc.look_dir.y)
+	else:
 		pc.shoot_dir = Vector2(pc.look_dir.x, 0.0)
+
 
 
 func check_shoot_down() -> bool:
@@ -91,7 +101,7 @@ func check_shoot_down() -> bool:
 func animate(delta):
 	var next_animations = []
 	#var reference_texture
-	
+
 	var absolute_left = pc.get_node("AbsoluteLeft").is_colliding()
 	var absolute_right = pc.get_node("AbsoluteRight").is_colliding()
 	var valley_left = pc.get_node("ValleyLeft").is_colliding()
@@ -175,7 +185,7 @@ func animate(delta):
 		"stand_close": 
 			((edge_left && !stand_close_left && look_left && right_no_slope) || \
 			(edge_right && !stand_close_right && look_right && left_no_slope)) && !pc.is_crouching,
-		"stand_close_reverse": 
+		"stand_close_reverse":
 			((stand_close_left && edge_right && !stand_close_right && look_left && left_no_slope) || \
 			(!stand_close_left && edge_left && stand_close_right && look_right && right_no_slope)) && !pc.is_crouching,
 		"slight_up_slope":
@@ -311,7 +321,7 @@ func animate(delta):
 	if conditions["slight_up_slope"] or conditions["slight_down_slope"] or conditions["up_slope"] or conditions["down_slope"]:
 		pc.forbid_crouching = true
 	else: pc.forbid_crouching = false
-	
+
 	match ap.current_animation: #do not use elif here
 		"edge":
 			next_animations = check_and_append_animations(["edge", "edge_front", "edge_turn", "stand_close", "up_slope", "down_slope", "slight_up_slope", "slight_down_slope"], conditions, next_animations)
@@ -779,7 +789,7 @@ func play_animation(animation):
 	sprite.vframes = int(reference_texture.get_height() / 32.0)
 	ap.speed_scale = 1.0
 	var do_blending = false
-	
+
 	var run_group = ["run", "crouch_run", "back_run"]
 	#var edge_group = ["edge", "edge_front"] #dont blend these
 	var stand_group = ["edge_turn", "stand", "crouch", "stand_close", "stand_close_reverse", "slight_up_slope", "slight_down_slope", "up_slope", "down_slope", "up_slope_to_stand", "stand_to_up_slope", "stand_to_down_slope", "down_slope_to_stnad", "peak", "valley", "push", "slight_up_push", "slight_down_push", "up_push", "down_push"]
@@ -812,9 +822,6 @@ func play_animation(animation):
 			ap.seek(blend_time, true)
 
 
-
-
-
 ### GETTERS ###
 
 func calc_velocity():
@@ -824,15 +831,20 @@ func calc_velocity():
 	#X
 	if pc.move_dir.x != 0.0:
 		var max_speed = mm.speed.x
+		#cap max_speed by how hard you pressed your analog stick in X axis
+		if abs(pc.move_dir.x) <= inp.Xaxis_clampzone: #makes inputs close to 1.0 equal to 1.0, analog otherwise
+			max_speed *= abs(pc.move_dir.x)
+
 		if pc.is_crouching:
 			max_speed = mm.crouch_speed
 
-		if pc.move_dir.x != sign(out.x):
+		if sign(pc.move_dir.x) != sign(out.x):
 			out.x = 0.0
 
 		var value = out.x + mm.acceleration * pc.move_dir.x
 		# Make sure the acceleration does not surpass max speed
 		out.x = clampf(value, -max_speed, max_speed)
+
 	# ground friction kicks in if you let go of a directional key
 	else:
 		out.x = lerp(out.x, 0.0, mm.ground_cof)

@@ -34,7 +34,7 @@ func _ready():
 			for i in enum_items:
 				$HBox/HBox/Enum.add_item(i)
 			$HBox/HBox/Enum.select(property_value)
-		
+
 		"int", Variant.Type.TYPE_INT:
 			enabled_controls.append($HBox/HBox/Int)
 			if property_value != null: #"if property_value" doesn't trigger for value = 0
@@ -56,7 +56,7 @@ func _ready():
 			custom_minimum_size.y = 128
 			if property_value != null:
 				$HBox/HBox/Multiline.text = String(property_value)
-		
+
 		"vector2", Variant.Type.TYPE_VECTOR2: #unused as we split this
 			enabled_controls.append($HBox/HBox/Vector2X)
 			enabled_controls.append($HBox/HBox/Vector2Y)
@@ -67,7 +67,7 @@ func _ready():
 			enabled_controls.append($HBox/HBox/String)
 			if property_value != null:
 				$HBox/HBox/String.text = str(property_value)
-	
+
 	for i in enabled_controls:
 		i.visible = true
 		i.connect("mouse_entered", Callable(self, "_on_mouse_entered"))

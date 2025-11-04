@@ -24,7 +24,7 @@ func _on_body_exited(_body):
 	active_pc = null
 
 func _input(event):
-	if event.is_action_pressed("inspect") and not spent and active_pc != null: 
+	if event.is_action_pressed("inspect") and not spent and active_pc != null:
 		if not active_pc.disabled and active_pc.can_input:
 			activate()
 

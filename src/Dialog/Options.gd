@@ -13,7 +13,7 @@ var exit_action = "continue"
 func _ready():
 	pass
 	#display_options()
-	
+
 func display_options():
 	print("displaying options")
 	get_parent().get_node("AnimationPlayer").play("ResponseEnter")
@@ -22,7 +22,7 @@ func display_options():
 	$Four.visible = false
 	$Three.visible = false
 	$Two.visible = false
-	
+
 	if options.size() > 4:
 		$Up.visible = true
 		$Down.visible = true
@@ -70,7 +70,7 @@ func hide_options():
 	#print("cleared dl")
 	get_parent().get_node("AnimationPlayer").play("ResponseExit")
 	await get_parent().get_node("AnimationPlayer").animation_finished
-	
+
 	match exit_action:
 		"continue":
 			get_parent().progress_text(false)
@@ -99,12 +99,12 @@ func option_up():
 			match selected_option:
 				optionsminustwo: $AnimationPlayer.play("FourForthToThird")
 				optionsminusthree: $AnimationPlayer.play("FourThirdToSecond")
-				_: 
+				_:
 					if selected_option == 0:
 						$AnimationPlayer.play("FourSecondToFirst")
 					else:
 						$AnimationPlayer.play("FourScrollUp")
-	
+
 	elif options.size() == 3:
 		if selected_option == 0:
 			selected_option = 2
@@ -114,7 +114,7 @@ func option_up():
 			match selected_option:
 				1: $AnimationPlayer.play("ThreeThirdToSecond")
 				0: $AnimationPlayer.play("ThreeSecondToFirst")
-	
+
 	elif options.size() == 2:
 		if selected_option == 0:
 			selected_option = 1
@@ -140,12 +140,12 @@ func option_down():
 			match selected_option:
 				1: $AnimationPlayer.play("FourFirstToSecond")
 				2: $AnimationPlayer.play("FourSecondToThird")
-				_: 
+				_:
 					if selected_option == options.size() - 1:
 						$AnimationPlayer.play("FourThirdToForth")
 					else:
 						$AnimationPlayer.play("FourScrollDown")
-	
+
 	elif options.size() == 3:
 		if selected_option == 2:
 			selected_option = 0
@@ -155,7 +155,7 @@ func option_down():
 			match selected_option:
 				1: $AnimationPlayer.play("ThreeFirstToSecond")
 				2: $AnimationPlayer.play("ThreeSecondToThird")
-	
+
 	elif options.size() == 2:
 		if selected_option == 0:
 			selected_option = 1

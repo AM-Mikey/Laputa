@@ -6,7 +6,7 @@ var type = "range"
 
 func play():
 	match type:
-		"armor": 
+		"armor":
 			ap.play("Diamond")
 			am.play("bullet_clink", self)
 		"bullet":
@@ -14,7 +14,7 @@ func play():
 			#am.play("")
 		"range":
 			ap.play("Star")
-		"world": 
+		"world":
 			ap.play("Diamond")
 			am.play("bullet_thud", self)
 

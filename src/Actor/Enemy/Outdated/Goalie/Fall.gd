@@ -7,7 +7,7 @@ func state_process():
 	em.set_velocity(calc_velocity())
 	em.move_and_slide()
 	em.velocity = em.velocity
-	
+
 	if em.velocity.y == 0:
 		sm.change_state("Active")
 		return

@@ -29,23 +29,23 @@ func _physics_process(delta):
 			$Timer.start(active_time)
 			$WindSound.play()
 			$ColorRect.visible = true
-	
+
 	remove_invalid_targets()
 	if active:
 		add_windvelocity()
 
 func remove_invalid_targets():
 	for p in player_targets:
-		if p == null: 
+		if p == null:
 			player_targets.erase(p)
-	
+
 	for e in enemy_targets:
-		if e != null: 
-			if e.dead: 
+		if e != null:
+			if e.dead:
 				enemy_targets.erase(e)
 		else:
 			enemy_targets.erase(e)
-	
+
 	for b in bullet_targets:
 		if b == null:
 			bullet_targets.erase(b)

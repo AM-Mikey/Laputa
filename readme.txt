@@ -9,5 +9,5 @@ Close to the Heart
 At the center of the island is a dense forest known as “The Heart” Many explorers have gone in, never to be seen again. It’s rumored that at the core of this forest is whatever keeps the island afloat, or temples filled with boundless treasure.
 
 Plundered Goods
-Early exploration and settlement of Laputa was spurred on by the promise of vast wealth to be acquired there. During the first expedition, treasure-seekers found storehouses full of gold and silver, as well as fine goods and other artifacts found within the island’s ancient structures. 
+Early exploration and settlement of Laputa was spurred on by the promise of vast wealth to be acquired there. During the first expedition, treasure-seekers found storehouses full of gold and silver, as well as fine goods and other artifacts found within the island’s ancient structures.
 It was later found out that the island itself is rich with veins of ore and mineral, and so much of Laputa’s export has been of these precious resources.

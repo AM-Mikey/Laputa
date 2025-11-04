@@ -16,9 +16,9 @@ var segments = []
 func _ready():
 	start_pos = $StartPos.position
 	end_pos = $EndPos.position
-	
+
 	var rope_angle = (end_pos - start_pos).angle() - PI/2
-	
+
 	var start = END.instantiate()
 	start.position = start_pos
 	add_child(start)
@@ -29,22 +29,22 @@ func _ready():
 		var part = PART.instantiate()
 		add_child(part)
 		segments.append(part)
-	
-	
+
+
 	var end = END.instantiate()
 	end.position = end_pos
 	add_child(end)
 	segments.append(end)
 
-	
+
 	for s in segments:
 		var id = segments.find(s)
 		s.rotation = rope_angle
-		
+
 		var joint = s.get_node("Joint3D")
 		joint.softness = softness
 		joint.bias = bias
-		
+
 		if s == start:
 			pass
 		elif s == end:
@@ -71,5 +71,5 @@ func draw_rope():
 	var points: PackedVector2Array
 	for s in segments:
 		points.append(s.position)
-	
+
 	$Line2D.points = points

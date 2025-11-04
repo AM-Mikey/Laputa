@@ -23,8 +23,8 @@ func enter_walk():
 		set_move_dir(Vector2.RIGHT)
 	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
 		set_move_dir(Vector2.LEFT)
-	
-	
+
+
 	rng.randomize()
 	$StateTimer.start(rng.randf_range(1.0, walk_max_time))
 	await $StateTimer.timeout
@@ -40,7 +40,7 @@ func do_walk():
 
 	velocity = calc_velocity(velocity, move_dir, speed)
 	move_and_slide()
-	
+
 
 
 func enter_wait():
@@ -62,13 +62,13 @@ func enter_defend():
 func set_move_dir(dir):
 	move_dir = dir
 	match move_dir:
-		Vector2.LEFT: 
+		Vector2.LEFT:
 			ap.play("WalkLeft")
 			$BulletBlocker/Left.set_deferred("disabled", false)
 			$BulletBlocker/Right.set_deferred("disabled", true)
 			$Hurtbox/Left.set_deferred("disabled", true)
 			$Hurtbox/Right.set_deferred("disabled", false)
-		Vector2.RIGHT: 
+		Vector2.RIGHT:
 			ap.play("WalkRight")
 			$BulletBlocker/Left.set_deferred("disabled", true)
 			$BulletBlocker/Right.set_deferred("disabled", false)

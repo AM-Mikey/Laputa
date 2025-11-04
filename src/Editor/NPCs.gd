@@ -18,11 +18,11 @@ func setup_npcs(): #TODO: connect this to editor instead of _ready
 	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
 	var index = 0
 	for p in find_npc_scenes("res://src/Actor/NPC/"):
-		
+
 		var npc = load(p).instantiate()
 		if not npc.editor_hidden:
 			npcs[npc.name] = npc
-			
+
 			var npc_button = NPC_BUTTON.instantiate()
 			npc_button.npc_path = p
 			npc_button.npc_name = npc.name
@@ -48,7 +48,7 @@ func find_npc_scenes(path):
 			break
 		if file.ends_with(".tscn"):
 			files.append(path + file)
-			
+
 	return files
 
 func change_npc(npc_path):

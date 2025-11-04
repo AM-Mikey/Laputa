@@ -3,4 +3,3 @@ You can "bowl" grenades by holding <down> when you fire them. Grenades that touc
 The auto-fire button, <Z>, will also lock your orientation when firing non-automatic guns.
 
 Purple Stalagtites make for good platforms. Blue and Red? Not so much.
-

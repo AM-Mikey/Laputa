@@ -19,7 +19,7 @@ var active_tooltip: Node
 func _ready():
 	$MoneyNumber.value = price
 	$MoneyNumber.display_number()
-	
+
 	var item_path = "res://src/Item/%s" % item_name + ".tres"
 	var item = load(item_path)
 	active_item = item

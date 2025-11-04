@@ -22,11 +22,11 @@ func _ready():
 	damage_on_contact = 1
 	speed = Vector2(80, 100)
 	gravity = 250
-	
+
 	reward = 4
-	
+
 	$FireCooldown.start(cooldown_time)
-	
+
 	#wander()
 
 func _physics_process(_delta):
@@ -44,31 +44,31 @@ func _physics_process(_delta):
 
 func calculate_movevelocity(velocity: Vector2, move_dir, speed) -> Vector2:
 	var out: = velocity
-	
+
 	out.x = speed.x * move_dir.x
 	out.y += gravity * get_physics_process_delta_time()
 	if move_dir.y < 0:
 		out.y = speed.y * move_dir.y
 
 	return out
-	
+
 func _on_PlayerDetector_body_entered(body):
 	if not locked_on:
 		target = body.owner
 		locked_on = true
 		fire()
-		
+
 func _on_PlayerDetector_body_exited(_body):
 	locked_on = false
 	search()
-	
+
 func wander():
 	shooting = false
 	while target == null:
 		var dir = Vector2(sign(rng.randf_range(-1,1)), 0)
 		move_dir = dir
 		look_dir = dir
-		
+
 		await get_tree().create_timer(walk_time).timeout
 		move_dir = Vector2.ZERO
 		if look_dir == Vector2.LEFT:
@@ -96,7 +96,7 @@ func fire():
 				await $FireCooldown.timeout
 				if not locked_on:
 					break
-		else: 
+		else:
 			await $FireCooldown.timeout
 			fire()
 
@@ -106,7 +106,7 @@ func search():
 		var dir = Vector2(sign(target.global_position.x - global_position.x), 0)
 		move_dir = dir
 		look_dir = dir
-		
+
 		await get_tree().create_timer(walk_time).timeout
 		move_dir = Vector2.ZERO
 		if look_dir == Vector2.LEFT:
@@ -114,13 +114,13 @@ func search():
 		elif look_dir == Vector2.RIGHT:
 			$AnimationPlayer.play("SniffRight")
 		await $AnimationPlayer.animation_finished
-	
+
 
 func prepare_bullet():
 	#print("hunter fired bullet")
 	var bullet = BULLET.instantiate()
 	get_tree().get_current_scene().add_child(bullet)
-	
+
 	bullet.position = Vector2($CollisionShape2D.global_position.x, $CollisionShape2D.global_position.y + bullet_height_adjustment)
 	bullet.direction = look_dir
 	bullet.origin = global_position

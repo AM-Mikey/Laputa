@@ -16,27 +16,27 @@ func _ready():
 	pass
 	#if FileAccess.file_exists(SETTINGS_FILE):
 		#load_settings()
-	#else: 
+	#else:
 		#save_defaults()
 		#load_settings()
 
 
 func save_editor_windows():
 	pass
-	
+
 
 func load_settings():
 	var data = read_data()
-	
-	
+
+
 	var data1 = data["EditorWindow"]
 	editor.get_node("Main/Win").position = Vector2(data1[0], data1[1])
 	editor.get_node("Main/Win").size = Vector2(data1[2], data1[3])
-	
+
 	var data2 = data["InspectorWindow"]
 	editor.get_node("Secondary/Win").position = Vector2(data2[0], data2[1])
 	editor.get_node("Secondary/Win").size = Vector2(data2[2], data2[3])
-	
+
 
 #HELPERS
 
@@ -64,6 +64,6 @@ func read_data() -> Dictionary:
 			test_json_conv.parse(text)
 			data = test_json_conv.get_data()
 			file.close()
-	else: 
+	else:
 		printerr("ERROR: could not load settings data")
 	return data

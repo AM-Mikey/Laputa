@@ -41,20 +41,20 @@ func on_jump_height_changed(new):
 func on_x_min_changed(new):
 	x_min = new
 	update_path_lines()
-	
+
 func on_x_max_changed(new):
 	x_max = new
 	update_path_lines()
-	
+
 func update_path_lines():
 	#if Engine.editor_hint or debug:
 	for c in get_children():
 		if c.name == "VPath" or c.name == "HPath": c.free()
-	
+
 	var vline = PATH_LINE.instantiate()
 	vline.name = "VPath"
 	vline.default_color = Color.LIGHT_GREEN
-	if Engine.is_editor_hint(): 
+	if Engine.is_editor_hint():
 		vline.add_point(Vector2.ZERO)
 		vline.add_point(Vector2(0, jump_height * -16))
 		add_child(vline)
@@ -63,13 +63,13 @@ func update_path_lines():
 		vline.add_point(position)
 		vline.add_point(jump_pos)
 		world.front.add_child(vline)
-	
+
 	$RayCast2D.target_position = Vector2(0, jump_height * -16)
 
 	var hline = PATH_LINE.instantiate()
 	hline.name = "HPath"
 	hline.default_color = Color.RED
-	if Engine.is_editor_hint(): 
+	if Engine.is_editor_hint():
 		hline.add_point(Vector2(x_min * 16,0))
 		hline.add_point(Vector2(x_max * 16,0))
 		add_child(hline)

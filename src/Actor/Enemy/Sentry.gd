@@ -50,8 +50,8 @@ func enter_target():
 func enter_shoot():
 	prepare_bullet()
 	$StateTimer.start(cooldown_time)
-	
-	
+
+
 
 
 
@@ -64,10 +64,10 @@ func prepare_bullet():
 	var bullet = HAIRBALL.instantiate()
 	bullet.damage = projectile_damage
 	bullet.speed = projectile_speed
-	
+
 	bullet.position = Vector2($CollisionShape2D.global_position.x, $CollisionShape2D.global_position.y - height_tolerance)
 	bullet.direction = Vector2(look_dir.x / 2.0, -1) #Adjust this for angle
-	
+
 	w.middle.add_child(bullet)
 
 

@@ -17,9 +17,8 @@ func _on_Cursor_resized():
 	var r = size.x
 	var t = 0
 	var b = size.y
-	
+
 	$TL.position = Vector2(l, t)
 	$TR.position = Vector2(r, t)
 	$BL.position = Vector2(l, b)
 	$BR.position = Vector2(r, b)
- 

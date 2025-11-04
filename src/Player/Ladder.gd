@@ -22,18 +22,18 @@ func state_process(_delta):
 
 func set_player_directions():
 	var input_dir = Vector2.ZERO
-	if pc.can_input: 
+	if pc.can_input:
 		input_dir = Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
-	
+
 	pc.move_dir = Vector2(input_dir)
-	
+
 	if pc.move_dir.x != 0.0:
 		pc.look_dir.x = sign(pc.move_dir.x)
 	if pc.move_dir.y != 0.0:
 		pc.look_dir.y = sign(pc.move_dir.y)
-	
+
 	if input_dir.y == 0:
 		pc.shoot_dir = Vector2(pc.look_dir.x, 0)
 	else:
@@ -84,7 +84,7 @@ func enter():
 	gm.disable() #TODO: why?????
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
-	
+
 func exit():
 	pc.set_collision_mask_value(10, true) #ssp
 	gm.enable()

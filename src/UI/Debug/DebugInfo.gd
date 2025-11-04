@@ -6,13 +6,13 @@ extends Control
 func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
-	
+
 	if is_instance_valid(world.get_node("Juniper")):
 		var pc = world.get_node("Juniper")
 		pc.connect("guns_updated", Callable(self, "on_guns_updated"))
 		am.connect("players_updated", Callable(self, "on_audio_players_updated"))
 		on_guns_updated(pc.guns.get_children())
-	
+
 	if world.is_release:
 		$VBox/General/Label.text = "Laputa " + world.internal_version + " (" + world.release_version+ ")"
 	else:
@@ -22,23 +22,23 @@ func _ready():
 
 func _physics_process(_delta):
 	get_parent().move_child(self, get_parent().get_child_count() - 1)
-	$VBox/General/FPS.text = str(Engine.get_frames_per_second()) + " fps" 
+	$VBox/General/FPS.text = str(Engine.get_frames_per_second()) + " fps"
 	$VBox/General/Screen.text = str(get_window().get_size().x) + "x" + str(get_window().get_size().y)
-	
-	
+
+
 	if is_instance_valid(world.get_node("Juniper")): #TODO: invalid upon death
 		var pc = world.get_node("Juniper")
 		var mm = pc.get_node("MovementManager")
 		var active_gun = null
 		if pc.guns.get_child(0) != null:
-			active_gun = pc.guns.get_child(0) 
-		
+			active_gun = pc.guns.get_child(0)
+
 
 		$VBox/HBox/C1/A/HP.text = str("%2.f" % pc.hp) + "/" + str("%2.f" % pc.max_hp)
 		$VBox/HBox/C1/A/Money.text = str(pc.money)
 		$VBox/HBox/C1/A/XP.text = str("%2.f" % active_gun.xp) + "/" + str("%2.f" % active_gun.max_xp)
 		$VBox/HBox/C1/A/WeaponCooldown.text = str("%2.2f" % pc.get_node("GunManager/CooldownTimer").time_left)
-		
+
 		$VBox/HBox/C1/A/Velocity.text = str("%4.f" % pc.velocity.x) + "," + str("%4.f" % pc.velocity.y)
 		$VBox/HBox/C1/A/Speed.text = str("%4.f" % mm.speed.x) + "," + str("%4.f" % mm.speed.y)
 		$VBox/HBox/C1/A/Gravity.text = str("%.f" % pc.mm.gravity)
@@ -64,7 +64,7 @@ func _physics_process(_delta):
 		$VBox/HBox/C2/A/Crouch.text = str(pc.is_crouching)
 		$VBox/HBox/C2/A/SSP.text = str(pc.is_on_ssp)
 		$VBox/HBox/C2/A/Water.text = str(pc.is_in_water)
-		
+
 		$VBox/HBox/C2/A/Front.text = str(world.get_node("Front").get_child_count())
 		$VBox/HBox/C2/A/Middle.text = str(world.get_node("Middle").get_child_count())
 		$VBox/HBox/C2/A/Back.text = str(world.get_node("Back").get_child_count())
@@ -93,7 +93,7 @@ func on_audio_players_updated():
 		var label = Label.new()
 		label.text = p[1] #music name
 		music_array.add_child(label)
-		
+
 
 
 func _clear_array(array):
