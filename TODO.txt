@@ -335,4 +335,6 @@ Crouch Triggering:
 
 
 Transition frame Candidates:
+
 	- up_slope -> edge_front
+

@@ -158,6 +158,7 @@ func align_to_proper_y():
 ### SIGNALS ###
 
 func _on_CrouchDetector_body_entered(_body):
+	print("ss")
 	if !pc.forbid_crouching:
 		pc.is_crouching = true
 		if current_state != states["run"]: return
