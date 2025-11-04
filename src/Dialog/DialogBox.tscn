@@ -4804,12 +4804,8 @@ mouse_filter = 1
 script = ExtResource("1")
 
 [node name="Flat" type="Control" parent="."]
+visible = false
 anchors_preset = 0
-
-[node name="Blur" type="Polygon2D" parent="Flat"]
-material = SubResource("ShaderMaterial_js7dk")
-position = Vector2(400, -86)
-polygon = PackedVector2Array(-336, 101, -21, 101, -19, 102, -18, 103, -17, 105, -17, 110, -41, 158, -42, 159, -43, 161, -44, 162, -46, 163, -347, 163, -349, 162, -350, 161, -351, 159, -352, 157, -353, 154, -354, 152, -355, 151, -355, 101)
 
 [node name="Dialog" type="Sprite2D" parent="Flat"]
 position = Vector2(192, -43)
@@ -4822,7 +4818,7 @@ texture = ExtResource("3_irc2v")
 
 [node name="DialogFlat" type="RichTextLabel" parent="Flat"]
 light_mask = 2
-layout_mode = 0
+layout_mode = 2
 offset_left = 38.0
 offset_top = 22.0
 offset_right = 346.0
@@ -4839,7 +4835,6 @@ scroll_active = false
 scroll_following = true
 
 [node name="NPC" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 
 [node name="Blur" type="Polygon2D" parent="NPC"]
@@ -4858,7 +4853,7 @@ texture = ExtResource("3_p6mm4")
 
 [node name="DialogNPC" type="RichTextLabel" parent="NPC"]
 light_mask = 2
-layout_mode = 0
+layout_mode = 2
 offset_left = 72.0
 offset_top = 22.0
 offset_right = 380.0
@@ -4875,7 +4870,6 @@ scroll_active = false
 scroll_following = true
 
 [node name="Response" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 
 [node name="Blur" type="Polygon2D" parent="Response"]
@@ -4938,7 +4932,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_pjhkh")
 [node name="Shadow" type="RichTextLabel" parent="Name"]
 light_mask = 2
 material = SubResource("ShaderMaterial_qf68d")
-layout_mode = 0
+layout_mode = 2
 offset_left = 71.0
 offset_right = 130.0
 offset_bottom = 15.0
@@ -4999,7 +4993,8 @@ one_shot = true
 
 [node name="Options" type="Control" parent="."]
 anchors_preset = 0
-offset_right = 40.0
+offset_left = -12.0
+offset_right = 28.0
 offset_bottom = 40.0
 script = ExtResource("15_6fcua")
 

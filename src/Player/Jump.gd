@@ -100,6 +100,7 @@ func bonk(normal):
 
 func calc_velocity():
 	var out = pc.velocity
+	#Y
 	# The player's move dir is vertically up. This happens only for a single frame
 	if sign(pc.move_dir.y) == -1:
 		out.y = mm.speed.y * pc.move_dir.y
@@ -111,12 +112,8 @@ func calc_velocity():
 	#X
 	if pc.move_dir.x != 0.0:
 		var value = out.x + mm.acceleration * pc.move_dir.x
-		var max_speed:float = mm.speed.x
-		#analog speed cap
-		if abs(pc.move_dir.x) <= 0.85: # everything above 0.85 registers as 1.0 (full press)
-			max_speed *= abs(pc.move_dir.x)
 		# Make sure the acceleration does not surpass max speed
-		out.x = clampf(value, -max_speed, max_speed)
+		out.x = clampf(value, -mm.speed.x, mm.speed.x)
 	else: #air friction slide
 		out.x = lerp(out.x, 0.0, mm.air_cof)
 	if abs(out.x) < mm.min_x_velocity: #clamp velocity

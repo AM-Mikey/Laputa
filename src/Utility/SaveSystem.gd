@@ -142,9 +142,8 @@ func copy_level_data_from_temp_to_save():
 ### LOAD ###
 
 func read_level_data_from_temp(current_level):
-	check_dat_file_presence("save")
-	check_dat_file_presence("temp")
 	var scoped_data = read_from_file(temp_path)
+	#if scoped_data == null: #this shouldnt hit, i think we can remove
 		#return
 	if !scoped_data["level_data"].has(current_level.name):
 		print("no previous level data in temp")
@@ -163,6 +162,7 @@ func read_level_data_from_temp(current_level):
 				if saved["spent"]:
 					current.expend_trigger()
 	print("level data loaded from temp")
+
 
 
 func read_level_data_from_save(current_level):
@@ -201,17 +201,6 @@ func write_to_file(file_path, written_data):
 	else:
 		printerr("ERROR: cannot write data to " + file_path)
 
-
-##checks if the given file exists, if not duplicate from res://defaults/
-func check_dat_file_presence(filename:String) -> void:
-		#temp file
-	var defaultfile_path = "res://defaults/" + filename + ".dat"
-	var userfile_path = "user://" + filename + ".dat"
-
-	if FileAccess.file_exists(userfile_path):
-		return
-	else:
-		DirAccess.copy_absolute(defaultfile_path,userfile_path)
 
 
 ### OPTIONS ###
