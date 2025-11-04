@@ -11,7 +11,7 @@ func _ready():
 	description = "Fires in bursts of Seven. Looks like some kind of prototype."
 	icon_texture = load("res://assets/Gun/Red7Icon.png")
 	icon_small_texture = load("res://assets/Gun/Red7IconSmall.png")
-	
+
 	sfx = "gun_pistol"
 	cooldown_time = 0.1
 	automatic = true
@@ -47,14 +47,14 @@ func load_level():
 func activate():
 	var bullet = spawn_bullet(get_origin(), pc.shoot_dir)
 	bullet.instant_fizzle_check()
-	
+
 	cooldown_time = fire_time
 	clip -= 1
 	if clip == 0:
 		reload()
 	else:
 		$AutoReload.start(reload_time)
-	
+
 
 func reload():
 	clip = clip_size

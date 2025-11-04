@@ -25,10 +25,10 @@ func state_process(_delta):
 	pc.velocity = get_move_velocity(pc.velocity, pc.move_dir)
 	pc.move_and_slide()
 	var new_velocity = pc.velocity
-		
+
 	if pc.is_on_wall():
 		new_velocity.y = max(pc.velocity.y, new_velocity.y)
-		
+
 	pc.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
 
 func set_move_dir():
@@ -68,7 +68,7 @@ func enter():
 		pc.get_node("SSPDetector/CollisionShape2D2")]
 	mm.disable_collision_shapes(disable)
 	mm.enable_collision_shapes(enable)
-	
+
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
 

@@ -29,8 +29,8 @@ var mmb_held = false
 func _ready():
 	zoom = Vector2(vs.resolution_scale, vs.resolution_scale)
 	current_zoom_index = zooms.find(float(vs.resolution_scale))
-	global_position = w.get_node("Juniper/PlayerCamera").global_position 
-	
+	global_position = w.get_node("Juniper/PlayerCamera").global_position
+
 func _input(event):
 	if event.is_action_pressed("editor_mmb"):
 		mmb_held = true
@@ -47,7 +47,7 @@ func _unhandled_input(event):
 			current_zoom_index += 1
 		if event.is_action_pressed("editor_scroll_down") and current_zoom_index > 0:
 			current_zoom_index -= 1
-		
+
 		zoom = Vector2(zooms[current_zoom_index], zooms[current_zoom_index])
 		global_position += (-0.5 * get_viewport().size + get_viewport().get_mouse_position()) * ((1/zooms[old_zoom_index]) - (1/zooms[current_zoom_index]))
 		emit_signal("camera_zoom_changed")

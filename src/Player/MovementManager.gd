@@ -84,7 +84,7 @@ func _input(event):
 	if not pc.disabled:
 		if event.is_action_pressed("fire_automatic") and pc.can_input:
 			pc.direction_lock = pc.look_dir
-		if event.is_action_released("fire_automatic"): #bypass can_input 
+		if event.is_action_released("fire_automatic"): #bypass can_input
 			pc.direction_lock = Vector2i.ZERO
 
 func do_coyote_time():
@@ -98,7 +98,7 @@ func land():
 	var effect = LAND.instantiate()
 	effect.position = pc.position
 	world.get_node("Front").add_child(effect)
-	
+
 func jump():
 	if pc.is_crouching: return
 	snap_vector = Vector2.ZERO
@@ -128,7 +128,7 @@ func do_ceiling_push_check():
 		and not pc.move_dir.x < 0:
 			pc.global_position.x += 2.0 if not pc.get_node("ClearenceLH").is_colliding() else 4.0
 			pc.get_node("CollisionShape2D").set_deferred("disabled", false)
-		
+
 		elif pc.get_node("CeilingR").is_colliding() \
 		and not pc.get_node("ClearenceRF").is_colliding() \
 		and pc.velocity.y < 0 \
@@ -161,7 +161,7 @@ func _on_CrouchDetector_body_entered(_body):
 	if !pc.forbid_crouching:
 		pc.is_crouching = true
 		if current_state != states["run"]: return
-		
+
 		var disable = [
 			pc.get_node("CollisionShape2D"),
 			pc.get_node("Hurtbox/CollisionShape2D")]
@@ -170,7 +170,7 @@ func _on_CrouchDetector_body_entered(_body):
 			pc.get_node("Hurtbox/CrouchingCollision")]
 		disable_collision_shapes(disable)
 		enable_collision_shapes(enable)
-	
+
 
 func _on_CrouchDetector_body_exited(_body):
 	if pc.is_crouching:

@@ -21,15 +21,15 @@ func state_process():
 		sm.change_state("idle")
 		return
 
-	
+
 func calc_velocity() -> Vector2:
 	var out = em.velocity
-	
+
 
 	if not em.is_in_water:
 		out.y += em.gravity * get_physics_process_delta_time()
 
-	
+
 	return out
 
 func enter():

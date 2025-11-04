@@ -57,26 +57,26 @@ func setup_tile_set():
 func setup_brushes():
 	for c in get_node(brushes).get_children():
 		c.free()
-	
+
 	var brush_count = int(tx_col_brush.get_size().x / 16)
 	var brush_id = 0
 	for i in brush_count:
 		var button = TextureButton.new()
-		
+
 		var tx_normal = AtlasTexture.new()
 		tx_normal.atlas = tx_col_brush
 		tx_normal.region = Rect2(brush_id * 16, 0, 16, 16)
 		var tx_pressed = AtlasTexture.new()
 		tx_pressed.atlas = tx_col_brush
 		tx_pressed.region = Rect2(brush_id * 16, 16, 16, 16)
-		
+
 		button.texture_normal = tx_normal
 		button.texture_pressed = tx_pressed
 		button.rotation = brush_rotation_degrees
 		button.flip_h = brush_flip_h
 		button.flip_v = brush_flip_v
-		
-		
+
+
 		button.toggle_mode = true
 		button.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
 		button.connect("pressed", Callable(self, "on_brush_selected").bind(i))
@@ -103,7 +103,7 @@ func _input(event):
 			if event.is_action_pressed("editor_lmb"):
 				mc.display("grabclosed")
 				select_button(hovered_button)
-			
+
 			if event.is_action_released("editor_lmb") and hovered_button:
 				if hovered_button != active_button:
 					mc.display("grabopen")
@@ -113,7 +113,7 @@ func _input(event):
 						var first_pos = Vector2i(active_button.tile_set_position / 16.0)
 						var second_pos = Vector2i(hovered_button.tile_set_position / 16.0)
 						swap_tiles(first_pos, second_pos)
-					
+
 		#"collision":
 			#if event.is_action_pressed("editor_lmb"):
 				#set_collision(hovered_button)
@@ -149,7 +149,7 @@ func swap_tiles(first_pos, second_pos): #warning, this is sensative to tile_set 
 #1 create a list of all tilemaps that use this tileset
 	var levels = []
 	var dir = DirAccess.open("res://src/Level/")
-	if dir: 
+	if dir:
 		var files = dir.get_files()
 		for f in files:
 			if f.get_extension() == "tscn":
@@ -253,12 +253,12 @@ func set_pixels(tile_pos: Vector2i, pixels: Array, source: int):
 func set_cursor(region: Rect2):
 	var x_pos = region.position.x + (floor(region.position.x / 16) * tile_master.tile_separation)
 	var y_pos = region.position.y + (floor(region.position.y / 16) * tile_master.tile_separation)
-	get_node(normal_cursor).position = Vector2(x_pos, y_pos) 
-#	get_node(collision_cursor).rect_position = Vector2(x_pos, y_pos) 
+	get_node(normal_cursor).position = Vector2(x_pos, y_pos)
+#	get_node(collision_cursor).rect_position = Vector2(x_pos, y_pos)
 	var x_size = region.size.x + (floor(region.size.x / 16) * tile_master.tile_separation)
 	var y_size = region.size.y + (floor(region.size.y / 16) * tile_master.tile_separation)
-	get_node(normal_cursor).size = Vector2(x_size, y_size) 
-#	get_node(collision_cursor).rect_size = Vector2(x_size, y_size) 
+	get_node(normal_cursor).size = Vector2(x_size, y_size)
+#	get_node(collision_cursor).rect_size = Vector2(x_size, y_size)
 
 
 #### COLLISION
@@ -331,7 +331,7 @@ func set_cursor(region: Rect2):
 	#var shape = ConvexPolygonShape2D.new()
 	#var points = []
 	#match active_col_brush:
-		#0: points = collision_dict["square"] 
+		#0: points = collision_dict["square"]
 		#1: points = collision_dict["half"]
 		#2: points = collision_dict["slope"]
 		#3: points = collision_dict["half_slope_a"]
@@ -404,8 +404,8 @@ func _on_Save_confirmed():
 	else:
 		printerr("ERROR: tile set not saved!")
 	load_tile_set(path)
-	
-	
+
+
 func _on_Load_file_selected(path):
 	load_tile_set(path)
 
@@ -435,7 +435,7 @@ func _on_New_file_selected(path):
 		tile_set.tile_set_texture(id, texture)
 		tile_set.tile_set_region(id, region)
 		id += 1
-	
+
 	load_tile_set(path)
 
 

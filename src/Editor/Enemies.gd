@@ -18,11 +18,11 @@ func setup_enemies(): #TODO: connect this to editor instead of _ready
 	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
 	var index = 0
 	for e in find_enemy_scenes("res://src/Actor/Enemy/"):
-		
+
 		var enemy = load(e).instantiate()
 		if not enemy.editor_hidden:
 			enemies[enemy.name] = enemy
-			
+
 			var enemy_button = ENEMY_BUTTON.instantiate()
 			enemy_button.enemy_path = e
 			enemy_button.enemy_name = enemy.name
@@ -46,7 +46,7 @@ func find_enemy_scenes(path):
 			break
 		if file.ends_with(".tscn"):
 			files.append(path + file)
-			
+
 	return files
 
 func change_enemy(enemy_path):

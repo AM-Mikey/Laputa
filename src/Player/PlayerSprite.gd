@@ -18,16 +18,16 @@ func set_gun_pos():
 	var guns = get_parent().get_node("GunManager/Guns")
 	if guns == null:
 		return
-	
+
 	var left = get_parent().get_node("GunManager/GunPosLeft")
 	var left_up = get_parent().get_node("GunManager/GunPosLeftUp")
 	var left_down = get_parent().get_node("GunManager/GunPosLeftDown")
 	var right = get_parent().get_node("GunManager/GunPosRight")
 	var right_up = get_parent().get_node("GunManager/GunPosRightUp")
 	var right_down = get_parent().get_node("GunManager/GunPosRightDown")
-	
+
 	var gun_index = 0
-	
+
 	if vframes == 8:
 		match frame_coords.y:
 			0,3:
@@ -92,9 +92,9 @@ func set_gun_pos():
 				guns.scale.x = -1.0
 				guns.rotation_degrees = 90.0
 				gun_index = 1
-	
+
 	guns.global_position += gun_pos_offset
-	
+
 	if not Engine.is_editor_hint():
 		gun_index += get_index()
 		get_parent().move_child.call_deferred(gun_manager, gun_index)

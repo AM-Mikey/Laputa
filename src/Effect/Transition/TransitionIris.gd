@@ -8,8 +8,8 @@ var animation = "IrisContract"
 func _ready():
 		print("playing in animation")
 		$AnimationPlayer.play(animation)
-	
-	
+
+
 func play_out_animation():
 	print("playing out animation")
 	$AnimationPlayer.play(animation)
@@ -18,20 +18,20 @@ func play_out_animation():
 func _on_AnimationPlayer_animation_finished(anim_name):
 	match anim_name:
 		"IrisContract": animation = "IrisExpand"
-		"IrisExpand": 
+		"IrisExpand":
 			#print("free iris from itself")
 			queue_free()
 
 
 func _physics_process(_delta):
 	var vp_size = get_tree().get_root().size / world.resolution_scale
-	
+
 	var cam = pc.get_node("PlayerCamera")
 	if not cam.enabled:
 		for l in get_tree().get_nodes_in_group("Levels"):
 			cam = l.get_node("LevelCamera")
-	
-	
+
+
 	var player_pos_from_cam_center = Vector2(pc.position.x, pc.position.y - 16) - cam.get_screen_center_position()
 	var max_dist_from_vp = max(abs(player_pos_from_cam_center.x) + vp_size.x / 2, abs(player_pos_from_cam_center.y) + vp_size.y / 2)
 	var nearest_multiple = ceil((max_dist_from_vp * 2) / 256) * 256 #round up to nearest 256 multiple

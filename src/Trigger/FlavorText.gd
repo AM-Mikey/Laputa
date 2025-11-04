@@ -23,7 +23,7 @@ func _input(event):
 				reading = true
 				for i in get_tree().get_nodes_in_group("DialogBoxes"): #exit old
 					i.exit()
-					
+
 				db = DB.instantiate()
 				db.connect("dialog_finished", Callable(self, "on_dialog_finished"))
 				get_tree().get_root().get_node("World/UILayer/UIGroup").add_child(db)

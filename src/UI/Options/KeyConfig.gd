@@ -74,7 +74,7 @@ var preset_onehand = {
 func _ready():
 	get_node(preset_path).select(0)
 	var buttons_normal = []
-	
+
 	for c in p_button.get_children():
 		var subchildren = c.get_children()
 		for s in subchildren:
@@ -93,12 +93,12 @@ func _set_keys():
 	for j in actions:
 		var button = p_button.get_node(str(j) + "/Button")
 		button.set_pressed(false)
-		
+
 		if InputMap.action_get_events(j).is_empty():
 			button.set_text("No Button!")
 			#button.set_pressed(false)
 			return
-		
+
 		var input = _get_first_valid_input(j)
 		if input != null:
 			if input is InputEventKey:
@@ -116,7 +116,7 @@ func _set_keys():
 					8: mouse_index = "M4"
 					9: mouse_index = "M5"
 				button.set_text(mouse_index)
-			
+
 #			print("/////////////")
 #			print ("input" + str(input))
 #			print(_get_first_valid_input("ui_accept"))
@@ -126,14 +126,14 @@ func _set_keys():
 #			button.set_pressed(false)
 
 
-  
+
 func _get_first_valid_input(j):
 			var index = 0
 			var good_input = InputMap.action_get_events(j)[index]
 			while not good_input is InputEventKey and not good_input is InputEventMouseButton and index < InputMap.action_get_events(j).size() - 1:
 				index +=1
 				good_input = InputMap.action_get_events(j)[index]
-			
+
 			if not good_input is InputEventKey and not good_input is InputEventMouseButton:
 				return null
 			else:
@@ -144,15 +144,15 @@ func _get_first_valid_input(j):
 func _mark_button(string):
 	if button_ignore:
 		button_ignore = false
-		
+
 		for j in actions:
 			if j == string:
 				p_button.get_node(str(j) + "/Button").set_pressed(false)
-		
+
 	else:
 		assignment_mode = true
 		action_string = string
-		
+
 		for j in actions:
 			if j != string:
 				p_button.get_node(str(j) + "/Button").set_pressed(false)
@@ -164,7 +164,7 @@ func _input(event):
 		print("second_input")
 		_change_key(event)
 		assignment_mode = false
-		
+
 		var accept_input_event = _get_first_valid_input("ui_accept") #prevent us from entering another assignment mode when event is accept_event
 		if event is InputEventKey and accept_input_event is InputEventKey:
 			if event.keycode == accept_input_event.keycode:
@@ -177,24 +177,24 @@ func _input(event):
 
 func _change_key(new_key):
 	get_node(preset_path).select(0)
-	
+
 	#Delete key of pressed button
 	if !InputMap.action_get_events(action_string).is_empty():
 		var input = _get_first_valid_input(action_string)
 		if input != null:
 			InputMap.action_erase_event(action_string, input)
-	
+
 	#Check if new key was assigned somewhere 		#pass for now
 #	var all_actions = actions + debug_actions
 #	for i in all_actions:
 #		if InputMap.action_has_event(i, new_key):
 #			InputMap.action_erase_event(i, new_key)
-			
-			
+
+
 	#Add new Key
 	InputMap.action_add_event(action_string, new_key)
-	
-	
+
+
 	#alias action
 	var alias_action_string
 	match action_string:
@@ -209,9 +209,9 @@ func _change_key(new_key):
 			if input != null:
 				InputMap.action_erase_event(alias_action_string, input)
 		InputMap.action_add_event(alias_action_string, new_key)
-	
+
 	###
-	
+
 	save_input_map()
 	_set_keys()
 
@@ -230,8 +230,8 @@ func save_input_map():
 				if i is InputEventJoypadButton:
 					inputs.append(["joy", i.button_index])
 		data[a] = inputs
-	
-	
+
+
 	var file = FileAccess.open(input_map_path, FileAccess.WRITE)
 	if file:
 		file.store_string(var_to_str(data))
@@ -251,7 +251,7 @@ func load_input_map():
 			test_json_conv.parse(text)
 			data = test_json_conv.get_data()
 			file.close()
-			
+
 			for a in data.keys():
 				InputMap.action_erase_events(a)
 				for i in data[a]:
@@ -269,7 +269,7 @@ func load_input_map():
 
 					InputMap.action_add_event(a, new_input)
 
-	else: 
+	else:
 		printerr("ERROR: could not load input map data")
 
 
@@ -303,7 +303,7 @@ func set_preset(preset):
 			new_input = InputEventKey.new()
 			new_input.keycode = preset[k]
 		InputMap.action_add_event(k, new_input)
-	
+
 
 		#Alias action
 		var alias_action_string
@@ -312,15 +312,15 @@ func set_preset(preset):
 			"move_right": alias_action_string = "ui_right"
 			"look_up": alias_action_string = "ui_up"
 			"look_down": alias_action_string = "ui_down"
-			
+
 		if alias_action_string:
 			if !InputMap.action_get_events(alias_action_string).is_empty():
 				var old_input = _get_first_valid_input(alias_action_string)
 				if old_input:
 					InputMap.action_erase_event(alias_action_string, old_input)
 			InputMap.action_add_event(alias_action_string, new_input)
-	
-	
+
+
 	save_input_map()
 	_set_keys()
 

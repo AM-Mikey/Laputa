@@ -47,7 +47,7 @@ func do_flee():
 	speed = Vector2( \
 	min(8.0 * abs(distance_from_waypoint.x), max_speed.x), \
 	min(8.0 * abs(distance_from_waypoint.y), max_speed.y))
-	
+
 	if waypoint_tolerance >= abs(distance_from_waypoint.x) and waypoint_tolerance >= abs(distance_from_waypoint.y):
 		move_dir = Vector2.ZERO
 		change_state("idle")

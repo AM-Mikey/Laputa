@@ -9,20 +9,20 @@ extends Enemy
 func _ready():
 	disabled = true
 	visible = false
-	
+
 	hp = 3
 	damage_on_contact = 2
 	speed = Vector2(100, 100)
 	acceleration = 25
-	
+
 	reward = 2
 
-	
+
 	if dir == Vector2.LEFT:
 		$AnimationPlayer.play("FlyLeft")
 	if dir == Vector2.RIGHT:
 		$AnimationPlayer.play("FlyRight")
-	
+
 func _physics_process(delta):
 	if disabled or dead:
 		return

@@ -36,9 +36,9 @@ var ignore_display_mode = false #so we don't reset the display mode during the o
 func _ready():
 	if FileAccess.file_exists(settings_path):
 		load_settings()
-	else: 
+	else:
 		save_defaults()
-	
+
 	scroll.get_v_scroll_bar().connect("item_rect_changed", Callable(self, "on_scrollbar_changed"))
 	after_ready = true
 
@@ -79,7 +79,7 @@ func on_displaymode_changed(index: int):
 		#6: w.resolution_scale = 6.0
 		#7: w.resolution_scale = 7.0
 		#8: w.resolution_scale = 8.0
-	
+
 	#if w.has_node("TitleCam"):
 		#w.get_node("TitleCam").zoom = Vector2(1 / w.resolution_scale, 1 / w.resolution_scale)
 	##world.get_node("UILayer").scale = Vector2(world.resolution_scale, world.resolution_scale)
@@ -134,12 +134,12 @@ func on_deletesave():
 			break
 		elif not file.begins_with("."):
 			files.append(file)
-	
+
 	for f in files:
 		if f.get_extension() == "dat" or f.get_extension() == "json":
 			dir.remove("user://%s" % f)
 			print("removed file: " + "user://%s" % f)
-	
+
 	on_reset()
 	deletesave.text = "Done"
 
@@ -163,19 +163,19 @@ func save_setting(setting, setting_value):
 func load_settings():
 	print("loading settings")
 	var data = read_data()
-	
+
 	mastervolume.get_node("Slider").value = data["MasterVolume"]
 	on_mastervolume_changed(data["MasterVolume"])
 	musicvolume.get_node("Slider").value = data["MusicVolume"]
 	on_musicvolume_changed(data["MusicVolume"])
 	sfxvolume.get_node("Slider").value = data["SFXVolume"]
 	on_sfxvolume_changed(data["SFXVolume"])
-	
+
 	displaymode.selected = data["DisplayMode"]
 	on_displaymode_changed(data["DisplayMode"])
 	#resolutionscale.selected = data["ResolutionScale"]
 	#on_resolutionscale_changed(data["ResolutionScale"])
-	
+
 	mouselock.button_pressed = data["MouseLock"]
 	on_mouselock(data["MouseLock"])
 
@@ -198,7 +198,7 @@ func read_data() -> Dictionary:
 			test_json_conv.parse(text)
 			data = test_json_conv.get_data()
 			file.close()
-	else: 
+	else:
 		printerr("ERROR: could not load settings data")
 	return data
 

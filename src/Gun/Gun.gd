@@ -55,7 +55,7 @@ func release_manual_fire():
 	if charging:
 		cd.start(cooldown_time)
 	deactivate_manual()
-	
+
 func release_auto_fire():
 	deactivate_auto()
 
@@ -69,7 +69,7 @@ func deactivate_auto():
 
 func spawn_bullet(bullet_pos, shoot_dir, layer = world.get_node("Middle")) -> Node:
 	var bullet = bullet_scene.instantiate()
-	
+
 	bullet.damage = damage
 	bullet.f_range = f_range
 	bullet.f_time = f_time
@@ -80,7 +80,7 @@ func spawn_bullet(bullet_pos, shoot_dir, layer = world.get_node("Middle")) -> No
 	bullet.origin = bullet_pos
 
 	am.play(sfx)
-	
+
 	if do_muzzle_flash:
 		var muzzle_flash = MUZZLE_FLASH.instantiate()
 		$Muzzle.add_child(muzzle_flash)
@@ -91,7 +91,7 @@ func spawn_bullet(bullet_pos, shoot_dir, layer = world.get_node("Middle")) -> No
 func get_origin() -> Vector2: #bullet comes from origin, aligned with the muzzle position
 	var bullet_origin = pc.get_node("BulletOrigin").global_position
 	var out = $Muzzle.global_position
-	
+
 	if pc.shoot_dir.x != 0.0: #left or right
 		out.x = bullet_origin.x
 	elif pc.shoot_dir.y != 0.0: #up or down

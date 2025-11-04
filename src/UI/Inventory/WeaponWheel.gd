@@ -17,9 +17,9 @@ extends Container
 func _ready():
 	#clear all children
 	var weapon_sprites = get_children()
-	for s in weapon_sprites: 
+	for s in weapon_sprites:
 		s.free()
-		
+
 	await get_tree().process_frame
 
 	for g in pc.guns.get_children():
@@ -27,13 +27,13 @@ func _ready():
 		add_child(sprite)
 		sprite.texture = g.icon_texture
 		sprite.name = g.name
-		
+
 		if pc.guns.get_children().find(g) == 0:
 			sprite.scale = highlighted_scale
 			inventory.header.text = g.display_name
 			inventory.body.text = g.description
-			
-	
+
+
 	timer_half.start(0.000001) #just so it sets z indexes
 	cycle_delay = 0.001
 	place_buttons()
@@ -45,10 +45,10 @@ func _input(event):
 		return
 	var gun_count = pc.guns.get_child_count()
 	if (event.is_action_pressed("gun_left") and timer.time_left == 0) or (event.is_action_pressed("gun_right") and timer.time_left == 0):
-		
+
 		var old_child = get_child(0)
-		var gun_to_move 
-		
+		var gun_to_move
+
 		if event.is_action_pressed("gun_left"):
 			gun_to_move = pc.guns.get_child(gun_count - 1)
 			pc.guns.move_child(gun_to_move, 0)
@@ -57,14 +57,14 @@ func _input(event):
 			gun_to_move = pc.guns.get_child(0)
 			pc.guns.move_child(gun_to_move, gun_count - 1)
 			move_child(get_child(0), gun_count - 1)
-		
+
 		var active_child = get_child(0)
 		timer.start(cycle_delay)
 		timer_half.start(cycle_delay / 2.0)
 		place_buttons()
 		inventory.header.text = pc.guns.get_child(0).display_name
 		inventory.body.text = pc.guns.get_child(0).description
-		
+
 		var tween = get_tree().create_tween()
 		tween.tween_property(old_child, "scale", Vector2.ONE, cycle_delay).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		var tween2 = get_tree().create_tween()
@@ -82,7 +82,7 @@ func place_buttons():
 		var pre_circle_pos = Vector2(weapon_radius, 0).rotated(angle)
 		var circle_pos = Vector2(pre_circle_pos.x, (pre_circle_pos.y * height_modifier))
 		order_z_index(s, angle)
-		
+
 		var tween = get_tree().create_tween()
 		tween.tween_property(s, "position", circle_pos, cycle_delay).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		#sprite.position = circle_pos
@@ -91,7 +91,7 @@ func place_buttons():
 
 func order_z_index(sprite, angle): #prepared to handle 8 guns
 	await timer_half.timeout #wait for halfcycle to change z-index
-	
+
 	if angle == starting_radians: #zero
 		sprite.set_z_index(5)
 		#sprite.modulate = Color(1, 1, 1)

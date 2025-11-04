@@ -1,9 +1,10 @@
+extends Node2D
 
 extends Node
 var buttonconfig:Dictionary = {
 	holdjumping = true,
 	buttons = {},
-	
+
 	}
 
 			#STICK
@@ -73,12 +74,12 @@ func writebuffer() -> void:
 
 
 
-func pressed(button,custombuffer=pressbuffer) -> bool: 
+func pressed(button,custombuffer=pressbuffer) -> bool:
 	for x in buffer:
 		if x[0] == button:
 			if x[2] <= custombuffer:
 				x[2] = custombuffer
-				return true 
+				return true
 			else: return false
 	print ("INPUT NOT FOUND IN BUFFER")
 	return false
@@ -96,10 +97,10 @@ func released(button:String,custombuffer:int=releasebuffer) -> bool:
 		if x[0] == button:
 			if x[3] <= custombuffer:
 				x[2] = custombuffer
-				return true 
-			else: return false #could be removed? 
+				return true
+			else: return false #could be removed?
 	return false
-	
+
 ##process
 func _physics_process(delta):
 	analogstick = stick_clampzoneX( stick_deadzone(rawstick()) )

@@ -16,10 +16,10 @@ var is_dropping = false
 func state_process(delta):
 	set_player_directions()
 	pc.velocity = calc_velocity()
-	
+
 	if Input.is_action_just_pressed("debug_testbutton"):
 		print(pc.get_node("SlopeRightTester").get_collider())
-	
+
 	if (pc.get_node("WallLB").is_colliding() or pc.get_node("WallLT").is_colliding()) and pc.move_dir.x < 0:
 		push_left_wall = true
 		pc.velocity.x = max(pc.velocity.x, 0)
@@ -29,11 +29,11 @@ func state_process(delta):
 		push_right_wall = true
 		pc.velocity.x = min(pc.velocity.x, 0)
 	else: push_right_wall = false
-	
+
 	pc.move_and_slide()
 	animate(delta)
-	
-	
+
+
 	if not pc.is_on_floor() and not pc.is_in_coyote:
 		pc.is_in_coyote = true
 		mm.do_coyote_time()
@@ -52,12 +52,12 @@ func jump_processing():
 		elif inp.buttonconfig.holdjumping:
 			if inp.held("jump"):
 				mm.jump()
-				
+
 
 
 func set_player_directions():
 	var input_dir:Vector2 = Vector2(0.0,0.0)
-	if pc.can_input: input_dir = inp.analogstick 
+	if pc.can_input: input_dir = inp.analogstick
 	#get move_dir
 	pc.move_dir = Vector2(input_dir.x, 0.0)
 	#get look_dir
@@ -69,7 +69,7 @@ func set_player_directions():
 	pc.look_dir = Vector2i(look_x, 0)
 	if abs(input_dir.y) >= inp.Y_axis_shoot_deadzone:
 		pc.look_dir.y = sign(input_dir.y)
-	
+
 	#get shoot_dir
 	var shoot_vertically = false
 	if pc.look_dir.y < 0.0:
@@ -77,10 +77,10 @@ func set_player_directions():
 	if pc.look_dir.y > 0.0:
 		if check_shoot_down():
 			shoot_vertically = true
-	
-	if shoot_vertically: 
-		pc.shoot_dir = Vector2(0.0, pc.look_dir.y) 
-	else: 
+
+	if shoot_vertically:
+		pc.shoot_dir = Vector2(0.0, pc.look_dir.y)
+	else:
 		pc.shoot_dir = Vector2(pc.look_dir.x, 0.0)
 
 
@@ -100,7 +100,7 @@ func check_shoot_down() -> bool:
 func animate(delta):
 	var animation = []
 	#var reference_texture
-	
+
 	var absolute_left = pc.get_node("AbsoluteLeft").is_colliding()
 	var absolute_right = pc.get_node("AbsoluteRight").is_colliding()
 	#var almost_absolute_left = pc.get_node("AlmostAbsoluteLeft").is_colliding()
@@ -113,8 +113,8 @@ func animate(delta):
 	#var left_edge_is_slight_slope = pc.get_node("LeftEdgeIsSlightSlope").is_colliding()
 	var right_edge_is_slope = pc.get_node("RightEdgeIsSlope").is_colliding()
 	#var right_edge_is_slight_slope = pc.get_node("RightEdgeIsSlightSlope").is_colliding()
-	
-	
+
+
 	### part 2, combining these for conditions always grouped together
 
 	#var ssl_par = pc.get_node("SlightSlopeLeft") #left/right refers to slope start point not look dir
@@ -126,13 +126,13 @@ func animate(delta):
 	#ssl_par = pc.get_node("SlopeRight")
 	#var slope_right = pc.get_node("AbsoluteRight").is_colliding() && ssl_par.get_node("A").is_colliding() && ssl_par.get_node("B").is_colliding() && !ssl_par.get_node("TesterA").is_colliding() && !ssl_par.get_node("TesterB").is_colliding()
 
-	
+
 	var look_left = pc.look_dir.x == -1.0
 	var look_right = pc.look_dir.x == 1.0
 
 	#var normal = pc.get_node("LeftNormalFinder").get_collision_normal()
 	#print(normal)
-	
+
 	var vector_slope_tolerance = Vector2(0.1, 0.1)
 	var left_normal = pc.get_node("LeftNormalFinder").get_collision_normal()
 	var right_normal = pc.get_node("RightNormalFinder").get_collision_normal()
@@ -144,8 +144,8 @@ func animate(delta):
 	var left_no_slope = abs(left_normal - Vector2(0.0, -1.0)) < vector_slope_tolerance #0 deg
 	var left_walkable_negative_slope = left_negative_slope || left_slight_negative_slope
 	var left_walkable_positive_slope = left_positive_slope || left_slight_negative_slope
-	
-	
+
+
 	var right_negative_slope = abs(right_normal - Vector2(0.7, -0.7)) < vector_slope_tolerance #45 deg
 	var right_positive_slope = abs(right_normal - Vector2(-0.7, -0.7)) < vector_slope_tolerance #45 deg
 	var right_slight_negative_slope = abs(right_normal - Vector2(0.45, -0.89)) < vector_slope_tolerance #22.5 deg
@@ -153,28 +153,28 @@ func animate(delta):
 	var right_no_slope = abs(right_normal - Vector2(0.0, -1.0)) < vector_slope_tolerance #0 deg
 	var right_walkable_negative_slope = right_negative_slope || right_slight_negative_slope
 	var right_walkable_positive_slope = right_positive_slope || right_slight_positive_slope
-	
+
 	var conditions = {
-		"edge": 
+		"edge":
 			((!absolute_left && !edge_left && absolute_right && look_left && !left_walkable_positive_slope && !left_edge_is_slope) || \
 			(absolute_left && !edge_right && !absolute_right && look_right && !right_walkable_negative_slope && !right_edge_is_slope)),
-		"edge_front": 
+		"edge_front":
 			((absolute_left && !edge_right && !absolute_right && look_left && !right_walkable_negative_slope && !right_edge_is_slope) || \
 			(!absolute_left && !edge_left && absolute_right && look_right && !left_walkable_positive_slope && !left_edge_is_slope)) && !do_edge_turn,
-		"edge_turn": 
+		"edge_turn":
 			((absolute_left && !edge_right && !absolute_right && look_left && !right_walkable_negative_slope && !right_edge_is_slope) || \
 			(!absolute_left && !edge_left && absolute_right && look_right && !left_walkable_positive_slope && !left_edge_is_slope)) && do_edge_turn,
 		"stand":
 			(stand_close_left && edge_left && edge_right && stand_close_right && !pc.is_crouching),
-		"crouch": 
+		"crouch":
 			((stand_close_left and absolute_right and look_left) or (absolute_left and stand_close_right and look_right) or (absolute_left and edge_right and look_left) or (edge_left and absolute_right and look_right)) and pc.is_crouching,
-		"stand_close": 
+		"stand_close":
 			((edge_left && !stand_close_left && look_left && right_no_slope) || \
 			(edge_right && !stand_close_right && look_right && left_no_slope)) && !pc.is_crouching,
-		"stand_close_reverse": 
+		"stand_close_reverse":
 			((stand_close_left && edge_right && !stand_close_right && look_left && left_no_slope) || \
 			(!stand_close_left && edge_left && stand_close_right && look_right && right_no_slope)) && !pc.is_crouching,
-		
+
 		"slight_up_slope":
 			(left_slight_negative_slope && right_slight_negative_slope && look_left) || \
 			(left_slight_positive_slope && right_slight_positive_slope && look_right),
@@ -184,11 +184,11 @@ func animate(delta):
 		"up_slope":
 			(left_negative_slope && right_negative_slope && look_left) || \
 			(left_positive_slope && right_positive_slope && look_right),
-		"down_slope": 
+		"down_slope":
 			(left_positive_slope && right_positive_slope && look_left) || \
 			(left_negative_slope && right_negative_slope && look_right),
-		
-		"up_slope_to_stand": 
+
+		"up_slope_to_stand":
 			((left_no_slope && right_walkable_negative_slope && look_left && !edge_right) || \
 			(left_walkable_positive_slope && right_no_slope && look_right && !edge_left)),
 		"stand_to_up_slope":
@@ -203,13 +203,13 @@ func animate(delta):
 		"peak":
 			(left_walkable_positive_slope && right_walkable_negative_slope)
 	}
-	
-	
+
+
 	#slope crouch prevention
 	if conditions["slight_up_slope"] or conditions["slight_down_slope"] or conditions["up_slope"] or conditions["down_slope"]:
 		pc.forbid_crouching = true
 	else: pc.forbid_crouching = false
-	
+
 	match ap.current_animation: #do not use elif here
 		"edge":
 			if conditions["edge"]:
@@ -222,7 +222,7 @@ func animate(delta):
 				animation.append("stand_close")
 			if conditions["slight_down_slope"]:
 				animation.append("slight_down_slope")
-			
+
 			if pc.move_dir.x != 0.0 and animation == []: #last case
 				if pc.is_crouching:
 					animation.append("crouch_run")
@@ -230,7 +230,7 @@ func animate(delta):
 					animation.append("back_run")
 				else:
 					animation.append("run")
-			
+
 
 		"edge_front":
 			if conditions["edge"]:
@@ -263,7 +263,7 @@ func animate(delta):
 				animation.append("crouch")
 			if conditions["slight_up_slope"]:
 				animation.append("slight_up_slope")
-			
+
 			if pc.move_dir.x != 0.0 and animation == []: #last case
 				if pc.is_crouching:
 					animation.append("crouch_run")
@@ -271,7 +271,7 @@ func animate(delta):
 					animation.append("back_run")
 				else:
 					animation.append("run")
-		
+
 		"stand":
 			if conditions["stand_close"]:
 				animation.append("stand_close")
@@ -283,7 +283,7 @@ func animate(delta):
 				animation.append("stand_to_down_slope")
 			if conditions["down_slope_to_stand"]:
 				animation.append("down_slope_to_stand")
-			if pc.move_dir.x != 0.0 and animation == []: #last case... add room for velocity 
+			if pc.move_dir.x != 0.0 and animation == []: #last case... add room for velocity
 				if push_left_wall or push_right_wall:
 					animation.append("push")
 				else:
@@ -298,11 +298,11 @@ func animate(delta):
 					animation.append("crouch")
 				else:
 					animation.append("stand")
-		
+
 		"crouch":
 			if conditions["stand_close"]:
 				animation.append("stand_close")
-			if pc.move_dir.x != 0.0 and animation == []: #last case... add room for velocity 
+			if pc.move_dir.x != 0.0 and animation == []: #last case... add room for velocity
 				if push_left_wall or push_right_wall:
 					animation.append("push")
 				else:
@@ -317,7 +317,7 @@ func animate(delta):
 					animation.append("crouch")
 				else:
 					animation.append("stand")
-		
+
 		"stand_close":
 			if conditions["stand"]:
 				animation.append("stand") #TODO: when this goes to stand it goes right to run next frame if turn to make this happen, before returning to stand.
@@ -329,7 +329,7 @@ func animate(delta):
 				animation.append("edge")
 			if conditions["stand_to_down_slope"]:
 				animation.append("stand_to_down_slope")
-			
+
 			if pc.move_dir.x != 0.0 and animation == []: #last case
 				if pc.is_crouching:
 					animation.append("crouch_run")
@@ -342,7 +342,7 @@ func animate(delta):
 					animation.append("crouch")
 				else:
 					animation.append("stand_close")
-	
+
 		"stand_close_reverse":
 			if conditions["stand"]:
 				animation.append("stand") #TODO: when this goes to stand it goes right to run next frame if turn to make this happen, before returning to stand.
@@ -356,7 +356,7 @@ func animate(delta):
 				animation.append("up_slope_to_stand")
 			if conditions["down_slope_to_stand"]:
 				animation.append("down_slope_to_stand")
-			
+
 			if pc.move_dir.x != 0.0 and animation == []: #last case
 				if pc.is_crouching:
 					animation.append("crouch_run")
@@ -384,17 +384,17 @@ func animate(delta):
 						animation.append("back_run")
 					else:
 						animation.append("run")
-	
+
 		"run":
 			animation = run_tree(conditions)
-	
+
 		"back_run":
 			animation = run_tree(conditions)
-	
-		"crouch_run": 
+
+		"crouch_run":
 			animation = run_tree(conditions)
 
-	
+
 		"stand_peak":
 			if pc.move_dir.x != 0.0 and animation == []: #last case
 				if pc.is_crouching:
@@ -403,7 +403,7 @@ func animate(delta):
 					animation.append("back_run")
 				else:
 					animation.append("run")
-		
+
 		"slight_up_slope":
 			if conditions["edge"]:
 				animation.append("edge")
@@ -421,7 +421,7 @@ func animate(delta):
 						animation.append("back_run")
 					else:
 						animation.append("run")
-		
+
 		"slight_down_slope":
 			if conditions["edge"]:
 				animation.append("edge")
@@ -437,7 +437,7 @@ func animate(delta):
 						animation.append("back_run")
 					else:
 						animation.append("run")
-		
+
 		"up_slope":
 			if conditions["edge"]:
 				animation.append("edge")
@@ -459,7 +459,7 @@ func animate(delta):
 						animation.append("back_run")
 					else:
 						animation.append("run")
-		
+
 		"down_slope":
 			if conditions["edge"]:
 				animation.append("edge")
@@ -491,7 +491,7 @@ func animate(delta):
 						animation.append("back_run")
 					else:
 						animation.append("run")
-		
+
 		"slight_down_push":
 			if pc.move_dir.x == 0.0: #not moving
 				animation.append("slight_down_slope")
@@ -526,7 +526,7 @@ func animate(delta):
 					animation.append("back_run")
 				else:
 					animation.append("run")
-		
+
 		"up_slope_to_stand":
 			if pc.move_dir.x == 0.0: #not moving
 				if conditions["stand"]:
@@ -544,7 +544,7 @@ func animate(delta):
 					animation.append("back_run")
 				else:
 					animation.append("run")
-		
+
 		"stand_to_up_slope":
 			if pc.move_dir.x == 0.0: #not moving
 				if conditions["stand"]:
@@ -560,7 +560,7 @@ func animate(delta):
 					animation.append("back_run")
 				else:
 					animation.append("run")
-		
+
 		"stand_to_down_slope":
 			if pc.move_dir.x == 0.0: #not moving
 				if conditions["stand"]:
@@ -578,8 +578,8 @@ func animate(delta):
 					animation.append("back_run")
 				else:
 					animation.append("run")
-		
-		
+
+
 		"down_slope_to_stand":
 			if pc.move_dir.x == 0.0: #not moving
 				if conditions["stand"]:
@@ -618,24 +618,24 @@ func animate(delta):
 			do_edge_turn = true
 		else:
 			do_edge_turn = false
-		
+
 		check_if_offset(ap.current_animation, conditions, delta)
 		return
-	
+
 	if animation.size() != 1:
 		printerr("ERROR: CONFLICT SETTING RUN ANIMATION FROM ", ap.current_animation, " to ", animation)
 		return
 	#if animation[0] == ap.current_animation:
 		#return
-	
+
 	if animation[0] == "edge":
 		do_edge_turn = true
 	else:
 		do_edge_turn = false
-	
+
 	check_if_offset(animation[0], conditions, delta)
 	play_animation(animation[0])
-	
+
 	#saved_move_dir = pc.move_dir #for 2 frame stand
 
 ### ANIMATION TREES ###
@@ -726,7 +726,7 @@ func do_animation_sprite_offset(animation, delta):
 		"stand_to_down_slope": [Vector2(0, 8), Vector2(0, 3)],
 		"down_slope_to_stand": [Vector2(0, 8), Vector2(-2, 2)],
 	}
-	
+
 	if offsets.has(animation): #only works if these lerp animations can't become eachother as we never reset sprite.position
 		if offsets[animation] is Array:
 			var t
@@ -854,11 +854,11 @@ func play_animation(animation):
 	sprite.vframes = int(reference_texture.get_height() / 32.0)
 	ap.speed_scale = 1.0
 	var do_blending = false
-	
+
 	var run_group = ["run", "crouch_run", "back_run"]
 	#var edge_group = ["edge", "edge_front"] #dont blend these
 	var stand_group = ["stand", "stand_close", "push", "crouch", "edge_turn", "up_slope", "down_slope", "slight_up_slope", "slight_down_slope", "stand_peak", "up_slope_to_stand"]
-	
+
 	if run_group.has(animation):
 		ap.speed_scale = max((abs(pc.velocity.x)/mm.speed.x) * 2.0, 0.1)
 		if run_group.has(ap.current_animation):
@@ -899,7 +899,7 @@ func calc_velocity():
 		#cap max_speed by how hard you pressed your analog stick in X axis
 		if abs(pc.move_dir.x) <= inp.Xaxis_clampzone: #makes inputs close to 1.0 equal to 1.0, analog otherwise
 			max_speed *= abs(pc.move_dir.x)
-			
+
 		if pc.is_crouching:
 			max_speed = mm.crouch_speed
 
@@ -909,7 +909,7 @@ func calc_velocity():
 		var value = out.x + mm.acceleration * pc.move_dir.x
 		# Make sure the acceleration does not surpass max speed
 		out.x = clampf(value, -max_speed, max_speed)
-		
+
 	# ground friction kicks in if you let go of a directional key
 	else:
 		out.x = lerp(out.x, 0.0, mm.ground_cof)

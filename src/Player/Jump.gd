@@ -40,10 +40,10 @@ func state_process(_delta):
 func set_player_directions():
 	var input_dir = Vector2.ZERO
 	if pc.can_input: input_dir = inp.analogstick
-	
+
 	#get move dir
 	pc.move_dir = Vector2(input_dir.x, pc.move_dir.y)
-	
+
 	#get look_dir
 	var look_x = pc.look_dir.x
 	if pc.direction_lock != Vector2i.ZERO: #dir lock
@@ -54,10 +54,10 @@ func set_player_directions():
 	if abs(input_dir.y) >= inp.Y_axis_shoot_deadzone:
 		pc.look_dir.y = sign(input_dir.y)
 
-	
+
 	#get shoot dir
 	if pc.look_dir.y != 0.0: #up/down
-		pc.shoot_dir = Vector2(0.0, pc.look_dir.y) 
+		pc.shoot_dir = Vector2(0.0, pc.look_dir.y)
 	else:
 		pc.shoot_dir = Vector2(pc.look_dir.x, 0.0)
 
@@ -71,7 +71,7 @@ func animate():
 	if pc.direction_lock != Vector2i.ZERO and pc.direction_lock.x != sign(pc.velocity.x) and abs(pc.velocity.x) > 0.1:
 		reference_texture = preload("res://assets/Player/BackAerial.png")
 		do_back = true
-	
+
 	if abs(pc.velocity.y) < 20:
 		animation = "back_aerial_top" if do_back else "aerial_top"
 	elif pc.velocity.y < 0:
@@ -83,10 +83,10 @@ func animate():
 	#for runtime, set the frame counts before the animation starts
 	sprite.hframes = int(reference_texture.get_width() / 32.0)
 	sprite.vframes = int(reference_texture.get_height() / 32.0)
-	
+
 	var vframe = get_vframe()
 	sprite.frame_coords.y = vframe
-	
+
 	if not ap.is_playing() or ap.current_animation != animation:
 		ap.stop()
 		ap.play(animation, 0.0, 1.0)
@@ -151,7 +151,7 @@ func enter():
 		pc.get_node("SSPDetector/CollisionShape2D2")]
 	mm.disable_collision_shapes(disable)
 	mm.enable_collision_shapes(enable)
-	
+
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
 	pc.mm.snap_vector = Vector2.ZERO

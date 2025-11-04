@@ -34,14 +34,14 @@ func setup_a_star():
 			l.queue_free()
 	a_star_line = A_STAR_PATH_LINE.instantiate()
 	a_star_grid = AStarGrid2D.new()
-	
+
 	var tile_map = w.current_level.get_node("TileMap")
 	a_star_grid.region = tile_map.get_used_rect()
 	a_star_grid.cell_size = Vector2(16, 16)
-	a_star_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES  
+	a_star_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
 	a_star_grid.offset = Vector2(8, 8)
 	a_star_grid.update()
-	
+
 	#use this to destinguish which points are solid, based on collision
 	var tiles_with_collision = []
 	var source = tile_map.tile_set.get_source(0)
@@ -52,7 +52,7 @@ func setup_a_star():
 				if tile_data.get_collision_polygons_count(0) != 0: #there is collision on layer 0
 					tiles_with_collision.append(Vector2i(column, row))
 	for layer in 4:
-		for cell in tile_map.get_used_cells(layer): 
+		for cell in tile_map.get_used_cells(layer):
 			var tile = tile_map.get_cell_atlas_coords(layer, cell)
 			if tiles_with_collision.has(tile):
 				#var sprite = Sprite2D.new()
@@ -91,7 +91,7 @@ func do_chase(): #goes to point 1 first btw
 	find_path()
 	if path.size() < 2: return
 	if abs(global_position.x - path[current_point].x) < point_tolerance \
-	and abs(global_position.y - path[current_point].y) < point_tolerance: 
+	and abs(global_position.y - path[current_point].y) < point_tolerance:
 		if current_point + 1 < path.size():
 			current_point += 1
 		else: #last point

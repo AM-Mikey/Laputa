@@ -23,7 +23,7 @@ func state_process(_delta):
 	var new_velocity = pc.velocity
 	if pc.is_on_wall():
 		new_velocity.y = max(pc.velocity.y, new_velocity.y)
-		
+
 	pc.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
 	animate()
 

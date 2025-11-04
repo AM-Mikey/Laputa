@@ -25,7 +25,7 @@ func load_level():
 			speed = 0
 			max_xp = 10
 			cooldown_time = 0.4
-			
+
 			duration = 0.1
 			max_length = 128
 			max_time = 2.0
@@ -47,7 +47,7 @@ func load_level():
 func activate():
 	$ChargeTimer.start(max_time)
 	#print("start_charge", max_time)
-	
+
 
 func deactivate_manual():
 	var origin = pc.get_node("BulletOrigin").global_position

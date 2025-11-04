@@ -33,12 +33,12 @@ func enter_load_zone(): #see if you need the inspect state
 			pass
 		Direction.DOWN:
 			pass
-	
-	
-	
+
+
+
 	am.play("door")
 	am.fade_music()
-	
+
 	var transition = TRANSITION.instantiate()
 	match direction:
 		Direction.LEFT: transition.animation = "WipeInLeft"
@@ -51,7 +51,7 @@ func enter_load_zone(): #see if you need the inspect state
 	w.bl.add_child(transition)
 
 	await transition.get_node("AnimationPlayer").animation_finished
-	
+
 	active_pc.mm.change_state("run")
 	var level_path = str("res://src/Level/" + level + ".tscn")
 	if !FileAccess.file_exists(level_path):

@@ -18,6 +18,6 @@ func enter():
 		sm.change_state("swim")
 	else:
 		get_parent().get_parent().get_node("AnimationPlayer").play("Idle")
-	
+
 func exit():
 	pass

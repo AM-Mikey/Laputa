@@ -17,7 +17,7 @@ func _ready():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var spread_distance = int(rng.randf_range(max_spread_distance * -1, max_spread_distance))
-	
+
 	rotation_degrees = get_rot(direction)
 	match direction:
 		Vector2.LEFT:
@@ -32,7 +32,7 @@ func _ready():
 		Vector2.DOWN:
 			#global_position.x += spread_distance
 			pc.velocity.y -= recoil_velocity
-	
+
 	setup_vis_notifier()
 
 func _physics_process(_delta):

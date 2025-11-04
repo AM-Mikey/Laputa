@@ -18,7 +18,7 @@ var recent_damage_taken: int
 func _ready():
 	home = global_position
 	#hud.get_node("Boss").visible = true
-	
+
 #	connect("setup_ui", hud, "_on_boss_setup_ui")
 #	connect("health_updated", hud, "_on_boss_health_updated")
 
@@ -32,9 +32,9 @@ func hit(damage, blood_direction):
 	blood.global_position = global_position
 	blood.direction = blood_direction
 	#print(blood_direction)
-	
+
 	#if timer.is_stopped(): #if the reset time is over, then set recent damage to 0
-		
+
 	#timer.start(damagenum_reset_time) # and restart timer again either way
 	recent_damage_taken += damage
 	if hp <= 0:

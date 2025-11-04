@@ -3,7 +3,7 @@ extends Gun
 func _ready():
 	display_name = "Speeder"
 	description = "A swift weapon that shoots stars."
-	
+
 	icon_texture = load("res://assets/Gun/SpeederIcon.png")
 	icon_small_texture = load("res://assets/Gun/SpeederIconSmall.png")
 	sfx = "gun_pistol"

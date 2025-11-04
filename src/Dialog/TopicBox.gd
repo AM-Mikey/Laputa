@@ -19,7 +19,7 @@ const TOPIC_BUTTON = preload("res://src/Dialog/TopicButton.tscn")
 func _ready():
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "offset_bottom", 64, 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	
+
 	await tween.finished
 	$Margin.visible = true
 	var tween2 = get_tree().create_tween()
@@ -34,17 +34,17 @@ func add_button(topic):
 	button.text = topic
 	button.connect("pressed", Callable(self, "on_button_pressed").bind(topic))
 	button_path.add_child(button)
-	
+
 	if topic == pc.topic_array.front():
 		button.grab_focus()
-	
+
 func on_button_pressed(topic):
 	var db = world.get_node("UILayer/UIGroup/DialogBox")
 	var dialog_json = db.current_dialog_json
 	db.stop_printing()
-	
+
 	var new_db = dialog_box.instantiate()
 	world.uig.add_child(new_db)
 	new_db.start_printing(dialog_json, topic)
-	
+
 	self.queue_free()

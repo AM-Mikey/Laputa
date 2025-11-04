@@ -6,11 +6,7 @@ Reviewed and accurate as of 8/9/25
 -consider using typed variables (:=) to improve performance and reduce confusion
 
 --- Level ---
--convert Tilemap to tilemaplayer (low priority)
--remove "spawns" layer from levels and make more accurate layers to place different spawns
--add playerless cutscene levels
-	>-- tilemap --<
-	-finish implementing custom terrain tile system
+
 
 --- Background ---
 -having a background smaller than camera size will reset to another camera size (square? taking horz?) (unconfirmed)
@@ -43,8 +39,6 @@ Reviewed and accurate as of 8/9/25
 
 
 --- pickup ---
--add large xp
--pop out faster & consistant
 
 
 --- Editor ---
@@ -57,7 +51,6 @@ Reviewed and accurate as of 8/9/25
 
 	>- Tile -<
 		- add stroke grouping, to start implementing undo/redo (low priority)
-		- erase on line doesnt seem to work
 
 	>- Tileset -<
 		-test swap position and swap tiles options (warning destructive!)
@@ -77,8 +70,6 @@ Reviewed and accurate as of 8/9/25
 
 
 --- Effect ---
--improve blood spurt dir accuracy
--door transition glitches if done too fast
 -add first time load wipe in(?)
 -add level up/down graphics
 -add out of ammo animation
@@ -102,16 +93,10 @@ Reviewed and accurate as of 8/9/25
 	>flamethrower?
 -fix ladder state generally
 -fix footstep sound code triggering when it's not supposed to
--check analog controller compatability
--adjust xp loss on hit
-- consider switching to capsule collision when not near edge?
 -plan if satisfying movement combos can be added
--fix fake jump after falling off platform (sound but no movement)
 -not actually entering knockback state when knockback. investigate this
 -bonking on angled ceilings gives us velocity, only while stationary. investigate if this is good or not
--fix shoot down on ssp (the ssp detection is bad, we need like a raycast from the muzzle)
 -migrate disabled code to can_input (consider not using disabled anymore)
--juniper's default state is inspect? check if this causes issues
 -for edge and edge_turn animations, juniper's collisionshapes are innacurate. consider at least updating his hurtbox
 
 	>- Animation -<
@@ -154,9 +139,6 @@ Reviewed and accurate as of 8/9/25
 
 
 --- Save/Load ---
--complete overhaul
--first time setup without save data crashes the game on world -> read level from temp()
--crash on player restarting after death (doesnt load)
 
 
 
@@ -341,10 +323,16 @@ MAJOR CODE AREAS:
 
 
 
-Run animation detection:
+Run animation fixes:
+	- fix peak where at least half is a 2:1 slope
+	- fix valley where at least half is a 2:1 slope
+	- don't push when holding direction lock the opposite direction to the push
 
--fix animation conflicts
--valley trigger (use peak or custom animaiton)
--peak animation height
--cleanup unused sensors
--function for animation checking and appending
+
+
+Crouch Triggering:
+	- crouch is sometimes triggered, sometimes not triggered, and sometimes triggered but doesnt change hitbox
+
+
+Transition frame Candidates:
+	- up_slope -> edge_front

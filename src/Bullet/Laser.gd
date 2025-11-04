@@ -22,12 +22,12 @@ func _physics_process(_delta):
 
 ### HELPERS ###
 
-func update_length(): 
+func update_length():
 	var col_shape = $CollisionDetector/CollisionShape2D.shape
 	col_shape.size.x += length
 	$CollisionDetector/CollisionShape2D.shape = col_shape
 	$CollisionDetector/CollisionShape2D.position.x -= length /2
-	
+
 	$ColorRect.offset_left -= length
 	$End.position.x -= length
 

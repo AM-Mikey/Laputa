@@ -5,7 +5,7 @@ func _ready():
 
 func _on_body_entered(body): #note this currently only kills players and enemies
 	print("killbox found body")
-	if body.get_collision_layer_value(1): 
+	if body.get_collision_layer_value(1):
 			var pc = body.get_parent()
 			if !pc.die_from_falling or pc.mm.current_state == pc.mm.states["fly"]:
 				return

@@ -1,3 +1,4 @@
+extends Node2D
 extends Path2D
 
 @export var direction = "cw"
@@ -17,5 +18,3 @@ func _ready():
 
 func _process(delta):
 	$PathFollow2D.offset += speed
-	
-	

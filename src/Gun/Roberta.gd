@@ -5,7 +5,7 @@ func _ready():
 	description = "A swift and powerful SMG. It stores ammo in its stock."
 	icon_texture = load("res://assets/Gun/RobertaIcon.png")
 	icon_small_texture = load("res://assets/Gun/RobertaIconSmall.png")
-	
+
 	sfx = "gun_pistol"
 	bullet_scene = load("res://src/Bullet/MPistol.tscn")
 	automatic = true

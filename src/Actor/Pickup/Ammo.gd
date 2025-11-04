@@ -8,7 +8,7 @@ var state = "normal"
 
 func _ready():
 	home = global_position
-	
+
 	speed = Vector2(10, 10)
 	match value:
 		0.2: $AnimationPlayer.play("Small")

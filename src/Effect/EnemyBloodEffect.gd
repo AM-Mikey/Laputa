@@ -12,6 +12,6 @@ func _ready():
 		p.direction = direction
 		p.one_shot = true
 		p.restart()
-		
+
 	await get_tree().create_timer(1.0).timeout #hard cutoff
 	queue_free()

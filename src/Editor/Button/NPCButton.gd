@@ -26,4 +26,3 @@ func deactivate():
 func _on_button_pressed():
 	activate()
 	emit_signal("npc_changed", npc_path)
-	

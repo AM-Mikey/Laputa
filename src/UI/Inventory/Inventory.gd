@@ -44,7 +44,7 @@ func _on_inventory_updated(inventory):
 
 
 func _on_Items_item_activated(index):
-		var item_name = player_inventory[index] 
+		var item_name = player_inventory[index]
 		var item_path = "res://src/Item/%s" % item_name + ".tres"
 		var item = load(item_path)
 		body.text = item.description
@@ -56,7 +56,7 @@ func _on_Items_item_activated(index):
 func _resolution_scale_changed(resolution_scale):
 	var viewport_size = get_tree().get_root().size / resolution_scale
 	var target_width = 400
-	
+
 	if target_width > viewport_size.x:
 		size.x = viewport_size.x
 	else:

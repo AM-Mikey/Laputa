@@ -16,9 +16,9 @@ func _ready():
 	move_dir = Vector2(sign(rng.randf_range(-1, 1)), 0)
 	idle_time = rng.randf_range(0.5, 2)
 	active_time = rng.randf_range(2, 4)
-	
+
 	$Timer.wait_time = active_time
-	
+
 func _physics_process(delta):
 	if disabled or dead:
 		return
@@ -26,7 +26,7 @@ func _physics_process(delta):
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
 	animate(move_dir)
-	
+
 	if is_on_wall():
 		if idle == false:
 			move_dir *= -1
@@ -36,7 +36,7 @@ func wait(move_dir):
 	var old_speed = speed
 	speed = Vector2.ZERO
 	$Timer.start(idle_time)
-	
+
 	if move_dir.x != 0:
 		move_dir.x *= -1
 		if move_dir.x == -1:
@@ -54,7 +54,7 @@ func wait(move_dir):
 func calculate_movevelocity(linearvelocity: Vector2, move_direction: Vector2, speed: Vector2) -> Vector2:
 	var out: = linearvelocity
 	var friction = false
-	
+
 	out.y += gravity * get_physics_process_delta_time()
 	if move_dir.y < 0:
 		out.y = speed.y * move_dir.y

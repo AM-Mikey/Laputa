@@ -78,12 +78,12 @@ func get_rot(dir) -> float:
 func get_blood_dir(body) -> Vector2: #TODO this update changed knockback dir calculation, try calculating seperately
 	var out: Vector2
 	var collision_shape
-	if body.has_node("CollisionShape2D"): 
+	if body.has_node("CollisionShape2D"):
 		collision_shape = body.get_node("CollisionShape2D")
 	else:
 		collision_shape = body.get_child(0)
 	var body_center = collision_shape.global_position
-	
+
 	out = Vector2(
 		(body_center.x - global_position.x),
 		(body_center.y - global_position.y)).normalized()
@@ -105,10 +105,10 @@ func _on_CollisionDetector_body_entered(body):
 	if body is TileMap:
 		if body.tile_set.get_physics_layer_collision_layer(0) == 8: #world (layer value)
 			do_fizzle("world")
-	
+
 	else: #not tilemap
 		#breakable
-		if body.get_collision_layer_value(9): 
+		if body.get_collision_layer_value(9):
 			on_break(break_method)
 		#player
 		elif body.get_collision_layer_value(1) and is_enemy_bullet:
@@ -121,7 +121,7 @@ func _on_CollisionDetector_body_entered(body):
 
 func _on_CollisionDetector_area_entered(area):
 	if disabled: return
-	
+
 	if area.get_collision_layer_value(18): #enemyhurt
 		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
 		queue_free()
@@ -137,4 +137,3 @@ func _on_CollisionDetector_area_entered(area):
 	elif area.get_collision_layer_value(6): #armor
 		print("armor")
 		do_fizzle("armor")
-		

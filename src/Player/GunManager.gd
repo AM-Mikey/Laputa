@@ -15,7 +15,7 @@ func _process(_delta: float) -> void:
 	if not can_shoot():
 		return
 	var active_gun = $Guns.get_child(0)
-	
+
 	if Input.is_action_just_pressed("fire_manual"):
 		active_gun.fire("manual")
 	if Input.is_action_pressed("fire_automatic") and active_gun.automatic:
@@ -57,14 +57,14 @@ func shift_gun(direction):
 			var child_to_move = $Guns.get_child(0)
 			$Guns.move_child(child_to_move, $Guns.get_child_count() - 1)
 			pc.emit_signal("guns_updated", $Guns.get_children(), "shiftright")
-	
+
 	set_guns_visible()
-	
-	
+
+
 	pc.emit_signal("guns_updated", $Guns.get_children())
 	#pc.emit_signal("xp_updated", $Guns.get_child(0).xp, $Guns.get_child(0).max_xp, $Guns.get_child(0).level, $Guns.get_child(0).max_level)
 	am.play("gun_shift")
-	
+
 	# The new active gun should continue firing even when we swap between guns
 	active_gun = $Guns.get_child(0)
 	if Input.is_action_pressed("fire_manual"):

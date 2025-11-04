@@ -21,18 +21,18 @@ func setup():
 	damage_on_contact = 1
 	speed = Vector2(100, 200)
 	gravity = 250
-	
+
 	reward = 3
-	
+
 	$FireCooldown.start(cooldown_time)
-	
+
 	cover()
 
 func _physics_process(_delta):
 	if disabled or dead: return
 	if not is_on_floor():
 		move_dir.y = 0 #don't allow them to jump if they are midair
-	
+
 	velocity = calculate_movevelocity(velocity, move_dir, speed)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
@@ -40,14 +40,14 @@ func _physics_process(_delta):
 
 func calculate_movevelocity(velocity: Vector2, move_dir, speed) -> Vector2:
 	var out: = velocity
-	
+
 	out.x = speed.x * move_dir.x
 	out.y += gravity * get_physics_process_delta_time()
 	if move_dir.y < 0:
 		out.y = speed.y * move_dir.y
 
 	return out
-	
+
 
 func _on_HideDetector_body_entered(body):
 	if cover_blown:
@@ -77,12 +77,12 @@ func peek():
 	peeking = true
 	hiding = false
 	shooting = false
-	
+
 func cover():
 	hiding = true
 	peeking = false
 	shooting = false
-	
+
 
 func jump():
 	cover_blown = true
@@ -109,13 +109,13 @@ func fire():
 						break
 					prepare_bullet()
 					await $FireCooldown.timeout
-			else: 
+			else:
 				await $FireCooldown.timeout
 				fire()
 func prepare_bullet():
 	var bullet = BULLET.instantiate()
 	get_tree().get_current_scene().add_child(bullet)
-	
+
 	bullet.position = Vector2($CollisionShape2D.global_position.x, $CollisionShape2D.global_position.y - height_tolerance)
 	bullet.direction = look_dir
 	bullet.origin = global_position
@@ -145,7 +145,7 @@ func animate():
 					$AnimationPlayer.play("RiseLeft")
 				elif move_dir.y > 0:
 					$AnimationPlayer.play("FallLeft")
-				
+
 	if look_dir == Vector2.RIGHT:
 		if not cover_blown:
 			if hiding:

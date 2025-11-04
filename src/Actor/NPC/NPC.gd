@@ -39,25 +39,25 @@ var camera_forgiveness = 16
 func _ready():
 	home = global_position
 	find_waypoints()
-	
+
 	speed = Vector2.ZERO
-	
+
 	setup_states()
 	change_state(starting_state)
-	
+
 
 
 func disable():
 	disabled = true
-	
+
 func enable():
 	disabled = false
-	
+
 func _physics_process(_delta):
 	if disabled: return
 	if state != "":
 		do_state()
-	
+
 	velocity = calc_velocity()
 	move_and_slide()
 
@@ -67,12 +67,12 @@ func change_animation(animation: String): #, random_start = false): TODO: random
 		return
 	if not $AnimationPlayer.has_animation(animation):
 		print("WARNING: animation: " + animation + " not found on npc with name: " + name)
-	
+
 	var start_time = 0
 	#if random_start:
 		#rng.randomize()
 		#start_time = rng.randf_range(0, $AnimationPlayer.current_animation_length)
-	
+
 	$AnimationPlayer.play(animation, start_time)
 
 
@@ -84,12 +84,12 @@ func setup_states():
 	timer.one_shot = true
 	timer.name = "StateTimer"
 	add_child(timer)
-	
+
 	var label = STATE_LABEL.instantiate()
 	label.text = state
 	label.name = "StateLabel"
 	add_child(label)
-	
+
 func do_state():
 	var do_method = "do_" + state
 	if has_method(do_method):
@@ -143,7 +143,7 @@ func enter_walk():
 
 func do_walk():
 	$Sprite2D.flip_h = true if move_dir.x > 0 else false #set sprite to move_dir
-	
+
 	if (not $FloorDetectorL.is_colliding() and move_dir.x < 0) \
 	or (not $FloorDetectorR.is_colliding() and move_dir.x > 0):
 		change_state("wait")
@@ -169,12 +169,12 @@ func enter_wait():
 
 func enter_talk():
 	if $AnimationPlayer.has_animation("Talk"):
-		change_animation("Talk") 
+		change_animation("Talk")
 	else:
-		change_animation("Idle") 
+		change_animation("Idle")
 	speed = Vector2.ZERO
 	look_at_node(f.pc())
-	
+
 	f.pc().inspect_target = self
 	if get_tree().get_nodes_in_group("DialogBoxes") != []:
 		pass
@@ -240,14 +240,14 @@ func walk_to_waypoint(index):
 		dialog_box.busy = true
 	change_state("walkto")
 	return
-	
+
 
 
 ### SIGNALS
 
 func _on_PlayerDetector_body_entered(body):
 	active_pc = body.owner
-	
+
 func _on_PlayerDetector_body_exited(_body):
 	active_pc = null
 

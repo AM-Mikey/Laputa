@@ -25,7 +25,7 @@ func setup():
 
 func setup_arms(): #index 0 is always to the left side, consider that when flipping, THIS IS ALSO USED IN ROTATE CODE
 	var arm_index = 0
-	
+
 	for n in arm_count:
 		var arm = ARM.instantiate()
 		$Arms.add_child(arm)
@@ -33,7 +33,7 @@ func setup_arms(): #index 0 is always to the left side, consider that when flipp
 		arm.get_node("Label").text = str(arm_index)
 		arm.get_node("WorldDetector").connect("body_entered", Callable(self, "on_arm_body_entered").bind(arm))
 		arm.position = Vector2(arm_radius, 0).rotated((get_arm_angular_distance() * arm.index) + PI) #add pi to the rotation to add 180 degrees since it wont work otherwise
-		
+
 		if arm_index == 0:
 			pivot = arm
 			pivot_pos = arm.global_position
@@ -58,7 +58,7 @@ func do_rotate():
 	if climb_dir == "cw": rotation_cycle += arm_angle_speed
 	elif climb_dir == "ccw": rotation_cycle -= arm_angle_speed
 	global_position = pivot_pos + Vector2(cos(rotation_cycle), sin(rotation_cycle)) * arm_radius
-	
+
 	for arm in $Arms.get_children():
 		arm.position = Vector2(arm_radius, 0).rotated(get_arm_angular_distance() * arm.index + rotation_cycle + fmod(2 * PI - (PI * (2.0 * pivot_index / arm_count + 1)), 2 * PI))
 
@@ -92,13 +92,13 @@ func on_arm_body_entered(_body, arm):
 	pivot = arm
 	pivot_pos = arm.global_position
 	pivot_index = arm.index
-	
+
 	var arm_index_difference = fposmod(old_pivot_index - pivot_index, arm_count)
 	rotation_cycle -= (2 * PI / arm_count) * arm_index_difference
 
 
 func _on_GroundDetector_body_entered(_body):
 	if state == "fall":
-		for a in $Arms.get_children(): 
+		for a in $Arms.get_children():
 			a.die()
 		change_state("chase")

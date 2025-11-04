@@ -1,3 +1,4 @@
+extends Node2D
 extends Area2D
 
 @export var owner_id: String

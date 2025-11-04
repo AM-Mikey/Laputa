@@ -17,7 +17,7 @@ func _on_Water_body_entered(body):
 	elif body.get_collision_layer_value(11) or body.get_collision_layer_value(12) or body.get_collision_layer_value(13):
 		target = body
 		do_bubbles = false
-	
+
 	active_bodies.append(target)
 
 	if not target.is_in_water:
@@ -26,7 +26,7 @@ func _on_Water_body_entered(body):
 			var be = BUBBLEEMITTER.instantiate()
 			bubble_emitters[target] = be
 			target.call_deferred("add_child", be)
-		
+
 		var splash = load("res://src/Effect/Splash.tscn").instantiate()
 		splash.position.x = body.global_position.x
 		splash.position.y = global_position.y - 4

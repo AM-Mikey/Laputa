@@ -23,7 +23,7 @@ func _input(event):
 		state = "idle"
 		$Handles/Mid/Bar.mouse_default_cursor_shape = CURSOR_MOVE
 		return
-	
+
 	if event is InputEventMouseMotion:
 		match state:
 			"drag":
@@ -31,11 +31,11 @@ func _input(event):
 				position = Vector2( \
 				get_global_mouse_position().x + drag_offset.x, \
 				get_global_mouse_position().y + drag_offset.y - (bar_size * 2))
-				
+
 			"resize":
 				var x = get_global_mouse_position().x + drag_offset.x
 				var y = get_global_mouse_position().y + drag_offset.y
-				
+
 				match active_handle.name:
 					"TopLeft":
 						offset_top = y - header_size - (bar_size * 2) #idk why the bar size
@@ -44,7 +44,7 @@ func _input(event):
 						offset_top = y - header_size - (bar_size * 2)
 						offset_right = x + 4 #4 because of the size of the buttons
 					"BottomLeft":
-						offset_bottom = y + 4 - (bar_size * 2) 
+						offset_bottom = y + 4 - (bar_size * 2)
 						offset_left = x
 					"BottomRight":
 						offset_bottom = y + 4 - (bar_size * 2)

@@ -9,12 +9,12 @@ func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 	$AnimationPlayer.play(animation)
-	
-	
+
+
 func play_out_animation():
 	#print("playing out animation")
 	$AnimationPlayer.play(animation)
-	
+
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
@@ -23,7 +23,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		"WipeInRight": animation = "WipeOutRight" #$AnimationPlayer.play("WipeOutRight")
 		"WipeInUp": animation = "WipeOutUp" #$AnimationPlayer.play("WipeOutUp")
 		"WipeInDown": animation = "WipeOutDown" #$AnimationPlayer.play("WipeOutDown")
-		
+
 		"WipeOutLeft": queue_free()
 		"WipeOutRight": queue_free()
 		"WipeOutUp": queue_free()

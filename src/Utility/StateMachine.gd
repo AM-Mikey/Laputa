@@ -1,4 +1,5 @@
 extends Node2D
+extends Node2D
 
 @export var start_state: NodePath
 var current_state
@@ -14,7 +15,7 @@ func _physics_process(_delta):
 
 func initialize_states():
 	var new_state = get_node_or_null(start_state)
-	if new_state: 
+	if new_state:
 		change_state(new_state.name)
 	else:
 		change_state(get_child(1).name) #first after label

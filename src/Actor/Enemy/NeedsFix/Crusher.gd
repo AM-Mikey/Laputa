@@ -22,11 +22,11 @@ func _ready():
 
 func on_amplitude_v_changed(new_amplitude):
 	amplitude_v = new_amplitude
-	
+
 	if Engine.is_editor_hint():
 		for c in get_children():
 			if c.name == "PathV": c.free()
-			
+
 		var line = PATH_LINE.instantiate()
 		line.add_point(Vector2(0, new_amplitude * -1))
 		line.add_point(Vector2(0, new_amplitude))
@@ -36,11 +36,11 @@ func on_amplitude_v_changed(new_amplitude):
 
 func on_amplitude_h_changed(new_amplitude):
 	amplitude_h = new_amplitude
-	
+
 	if Engine.is_editor_hint():
 		for c in get_children():
 			if c.name == "PathH": c.free()
-				
+
 		var line = PATH_LINE.instantiate()
 		line.add_point(Vector2(new_amplitude * -1, 0))
 		line.add_point(Vector2(new_amplitude, 0 ))
@@ -58,10 +58,10 @@ func _physics_process(delta):
 		time += delta * frequency
 		position.x = center_pos.x + sin(time) * amplitude_h
 		position.y = center_pos.y + cos(time) * amplitude_v
-		
+
 		if t_body != null and crushing:
 			crush_check()
-			
+
 		animate()
 
 
@@ -88,11 +88,11 @@ func animate():
 		$Sprite2D.frame = 1
 	elif global_position.x > center_pos.x + (amplitude_h * .75):
 		$Sprite2D.frame = 2
-	
+
 	elif global_position.y < center_pos.y - (amplitude_v * .75):
 		$Sprite2D.frame = 3
 	elif global_position.y > center_pos.y + (amplitude_v * .75):
 		$Sprite2D.frame = 4
-	
+
 	else:
 		$Sprite2D.frame = 0

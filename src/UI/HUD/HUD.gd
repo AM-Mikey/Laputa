@@ -70,7 +70,7 @@ func _ready():
 func _process(_delta):
 	set_cap_pos(hp_lost, 38, hp_lost_cap)
 	set_cap_pos(xp_lost, 38, xp_lost_cap)
-	
+
 	if world.has_node("Juniper"):
 		var pc = world.get_node("Juniper")
 		if pc.guns.get_child(0) != null: #TODO: make this connected via signal
@@ -81,20 +81,20 @@ func _process(_delta):
 
 func update_guns(guns, cause = "default", do_xp_flash = false):
 	var main_icon = gun.get_node("GunIcon")
-	
+
 	if cause == "shiftleft":
 		display_weapon_wheel(guns, "CCW")
 		ammo_animate("reload", 5.0)
 	if cause == "shiftright":
 		display_weapon_wheel(guns, "CW")
 		ammo_animate("reload", 5.0)
-	
+
 	for g in guns:
 		if guns.find(g) == 0: #main gun
 			main_icon.texture = g["icon_texture"]
 			update_xp(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash)
 			#update_ammo(g.ammo, g.max_ammo)
-		#else: 
+		#else:
 			#var gun_icon = GUNICON.instantiate() #all other
 			#gun_icon.texture = g["texture"]
 			#hbox.add_child(gun_icon)
@@ -103,11 +103,11 @@ func update_guns(guns, cause = "default", do_xp_flash = false):
 		var speed: float = 0.8 / pc.guns.get_child(0).cooldown_time
 		var is_infinite: bool = pc.guns.get_child(0).max_ammo == 0
 		ammo_animate("reset")
-		
+
 		if is_infinite: ammo_top_animator.play("BulletShootInfinite", -1.0, speed)
 		else: ammo_top_animator.play("BulletShoot", -1.0, speed)
 		await ammo_top_animator.animation_finished
-		
+
 		ammo_animate("reload") #TODO: timing issues with this
 		var ui_bullet_fly = UI_BULLET_FLY.instantiate()
 		ui_bullet_fly.is_infinite = is_infinite
@@ -120,7 +120,7 @@ func display_weapon_wheel(guns, rot_dir: String):
 		WheelVisible = true
 		weapon_wheel_tilt_animator.play("TiltIn", -1, 3.0)
 	weapon_wheel_tilt_animator.get_node("Timer").start(1.0)
-	
+
 	match rot_dir:
 		"CW":
 				weapon_wheel_animator.play("CW", -1, 4.0)
@@ -137,14 +137,14 @@ func display_weapon_wheel(guns, rot_dir: String):
 				weapon_wheel.get_node("Bullet3/Gun").texture = guns[2].icon_small_texture
 				weapon_wheel.get_node("Bullet5/Gun").texture = guns[-2].icon_small_texture
 				weapon_wheel.get_node("Bullet6/Gun").texture = guns[-1].icon_small_texture
-	
 
 
-			
+
+
 func _on_Timer_timeout():
 	WheelVisible = false
 	weapon_wheel_tilt_animator.play("TiltOut", -1, 3.0)
-	
+
 
 #func display_guns():
 	#$HBox/Gun/Sprite2D
@@ -153,7 +153,7 @@ func ammo_animate(animation, speed: float = -1):
 	var pc = world.get_node("Juniper")
 	if speed == -1:
 		speed = 0.8 / pc.guns.get_child(0).cooldown_time
-	
+
 	if pc.guns.get_child(0).max_ammo != 0:
 		if pc.guns.get_child(0).ammo == 0:
 			if animation == "reload":
@@ -205,8 +205,8 @@ func update_hp(hp, max_hp):
 	hp_progress.max_value = max_hp
 	hp_lost.max_value = max_hp
 	set_cap_pos(hp_progress, 38, hp_progress_cap)
-	
-	
+
+
 	if hp < hp_lost.value:
 		if hp > 0:
 			get_parent().get_node("AnimationPlayer").play("flash")
@@ -236,7 +236,7 @@ func display_hp_number(hp, max_hp):
 		print("Warning: over 99 life cannot be displayed!")
 	else:
 		printerr("ERROR: hud cannot display hp number")
-		
+
 	if float(hp) / float(max_hp) <= .20: #less than 10% make red
 		hp_1.frame_coords.y = 2
 		hp_2.frame_coords.y = 2
@@ -282,7 +282,7 @@ func update_money(money):
 	mon_1.visible = true
 	mon_2.visible = true
 	mon_3.visible = true
-	
+
 	if money >= 0 and money < 10:
 		mon_1.visible = false
 		mon_2.visible = false
