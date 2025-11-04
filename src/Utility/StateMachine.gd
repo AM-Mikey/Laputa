@@ -1,5 +1,4 @@
 extends Node2D
-extends Node2D
 
 @export var start_state: NodePath
 var current_state

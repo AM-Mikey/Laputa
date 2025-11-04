@@ -1,5 +1,3 @@
-extends Node2D
-
 extends Node
 var buttonconfig:Dictionary = {
 	holdjumping = true,

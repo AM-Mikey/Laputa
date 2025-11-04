@@ -1,4 +1,3 @@
-extends Node2D
 extends Camera2D
 
 

@@ -1,4 +1,3 @@
-extends Node2D
 extends Node
 
 signal scale_changed(resolution_scale)

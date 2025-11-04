@@ -1,4 +1,3 @@
-extends Node2D
 extends Node
 
 const DEBUG_INFO = preload("res://src/UI/Debug/DebugInfo.tscn")

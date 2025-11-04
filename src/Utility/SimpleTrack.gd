@@ -1,4 +1,3 @@
-extends Node2D
 extends Path2D
 
 @export var direction = "cw"
