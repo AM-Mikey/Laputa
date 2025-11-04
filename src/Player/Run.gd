@@ -37,21 +37,27 @@ func state_process(delta):
 	if not pc.is_on_floor() and not pc.is_in_coyote:
 		pc.is_in_coyote = true
 		mm.do_coyote_time()
-	if Input.is_action_just_pressed("jump") and Input.is_action_pressed("look_down") and pc.is_on_ssp and pc.can_input:
+
+	jump_processing()
+
+##Processes jumps and platform drops
+func jump_processing():
+	if inp.pressed("jump") and Input.is_action_pressed("look_down") and pc.is_on_ssp and pc.can_input:
 		is_dropping = true
 		mm.drop()
-		return
-	elif Input.is_action_pressed("jump") and !is_dropping and pc.can_input:
-		mm.jump()
-		return
+		return #is this needed?
+	elif !is_dropping and pc.can_input:
+		if inp.pressed("jump"):
+			mm.jump()
+		elif inp.buttonconfig.holdjumping:
+			if inp.held("jump"):
+				mm.jump()
+				
 
 
 func set_player_directions():
-	var input_dir = Vector2.ZERO
-	if pc.can_input: 
-		input_dir = Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+	var input_dir:Vector2 = Vector2(0.0,0.0)
+	if pc.can_input: input_dir = inp.analogstick 
 	#get move_dir
 	pc.move_dir = Vector2(input_dir.x, 0.0)
 	#get look_dir
@@ -60,7 +66,10 @@ func set_player_directions():
 		look_x = pc.direction_lock.x
 	elif pc.move_dir.x != 0.0: #moving
 		look_x = sign(pc.move_dir.x)
-	pc.look_dir = Vector2i(look_x, input_dir.y)
+	pc.look_dir = Vector2i(look_x, 0)
+	if abs(input_dir.y) >= inp.Y_axis_shoot_deadzone:
+		pc.look_dir.y = sign(input_dir.y)
+	
 	#get shoot_dir
 	var shoot_vertically = false
 	if pc.look_dir.y < 0.0:
@@ -73,6 +82,7 @@ func set_player_directions():
 		pc.shoot_dir = Vector2(0.0, pc.look_dir.y) 
 	else: 
 		pc.shoot_dir = Vector2(pc.look_dir.x, 0.0)
+
 
 
 func check_shoot_down() -> bool:
@@ -887,9 +897,9 @@ func calc_velocity():
 	if pc.move_dir.x != 0.0:
 		var max_speed = mm.speed.x
 		#cap max_speed by how hard you pressed your analog stick in X axis
-		if abs(pc.move_dir.x) <= 0.85: #makes inputs close to 1.0 equal to 1.0, analog otherwise
+		if abs(pc.move_dir.x) <= inp.Xaxis_clampzone: #makes inputs close to 1.0 equal to 1.0, analog otherwise
 			max_speed *= abs(pc.move_dir.x)
-		
+			
 		if pc.is_crouching:
 			max_speed = mm.crouch_speed
 
@@ -899,6 +909,7 @@ func calc_velocity():
 		var value = out.x + mm.acceleration * pc.move_dir.x
 		# Make sure the acceleration does not surpass max speed
 		out.x = clampf(value, -max_speed, max_speed)
+		
 	# ground friction kicks in if you let go of a directional key
 	else:
 		out.x = lerp(out.x, 0.0, mm.ground_cof)
