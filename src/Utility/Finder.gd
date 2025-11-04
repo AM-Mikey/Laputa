@@ -1,4 +1,3 @@
-extends Node2D
 extends Node
 
 func pc():

@@ -1,4 +1,3 @@
-extends Node2D
 extends Camera2D
 
 @onready var world = get_tree().get_root().get_node("World")

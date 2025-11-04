@@ -21,7 +21,7 @@ var active_tile_map_cells = []
 
 
 func do_auto_tile(start_coords, start_layer):
-	var data = tile_map.get_cell_tile_data(start_layer, start_coords)
+	var data = tile_map.get_child(start_layer).get_cell_tile_data(start_coords)
 	var auto_tile_group = data.get_custom_data("auto_tile_group")
 	if auto_tile_group != "":
 		if auto_tile_group == "backdirt":
@@ -59,9 +59,10 @@ func find_all_connected_cells(coords, layer, group) -> Array:
 		coords + S,
 		coords + SE]
 
+	var tile_map_layer: TileMapLayer = tile_map.get_child(layer)
 	for neighbor in neighbors:
-		if tile_map.get_cell_atlas_coords(layer, neighbor) != Vector2i(-1, -1): #cell is filled
-			var neighbor_data = tile_map.get_cell_tile_data(layer, neighbor)
+		if tile_map_layer.get_cell_atlas_coords(neighbor) != Vector2i(-1, -1): #cell is filled
+			var neighbor_data = tile_map_layer.get_cell_tile_data(neighbor)
 			if neighbor_data.get_custom_data("auto_tile_group") == group:
 				out.append(neighbor)
 	return out
@@ -107,7 +108,8 @@ func pattern_backdirt(layer, coords):
 			new_atlas_coords = dict["e"].pick_random()
 
 
-	tile_map.set_cell(layer, coords, 0, new_atlas_coords)
+	var tile_map_layer: TileMapLayer = tile_map.get_child(layer)
+	tile_map_layer.set_cell(coords, 0, new_atlas_coords)
 
 
 
@@ -116,7 +118,7 @@ func pattern_backdirt(layer, coords):
 func get_auto_tile_directions(auto_tile_group) -> Dictionary:
 	var out = {}
 	out["all"] = [] #all tiles in group
-	var source = tile_map.tile_set.get_source(0)
+	var source = tile_map.get_child(0).tile_set.get_source(0)
 
 	for x in source.texture_region_size.x:
 		for y in source.texture_region_size.y:
@@ -136,7 +138,8 @@ func get_auto_tile_directions(auto_tile_group) -> Dictionary:
 
 
 func is_group_in_direction(group, layer, coords, direction) -> bool:
-	var cell_atlas_coords = tile_map.get_cell_atlas_coords(layer, coords + direction)
+	var tile_map_layer: TileMapLayer = tile_map.get_child(layer)
+	var cell_atlas_coords = tile_map_layer.get_cell_atlas_coords(coords + direction)
 	if group.has(cell_atlas_coords):
 		return true
 	else:

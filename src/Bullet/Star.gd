@@ -66,7 +66,7 @@ func get_initial_velocity() -> Vector2:
 
 func _on_CollisionDetector_body_entered(body): #shadows
 	if disabled: return
-	if not body is TileMap:
+	if not body is TileMapLayer:
 		#enemy
 		if body.get_collision_layer_value(2):
 			if not touched_floor:

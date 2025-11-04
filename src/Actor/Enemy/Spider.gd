@@ -51,9 +51,9 @@ func setup_a_star():
 				var tile_data = source.get_tile_data(Vector2i(column, row), 0)
 				if tile_data.get_collision_polygons_count(0) != 0: #there is collision on layer 0
 					tiles_with_collision.append(Vector2i(column, row))
-	for layer in 4:
-		for cell in tile_map.get_used_cells(layer):
-			var tile = tile_map.get_cell_atlas_coords(layer, cell)
+	for tile_map_layer: TileMapLayer in tile_map.get_children():
+		for cell in tile_map_layer.get_used_cells():
+			var tile = tile_map_layer.get_cell_atlas_coords(cell)
 			if tiles_with_collision.has(tile):
 				#var sprite = Sprite2D.new()
 				#sprite.texture = load("res://assets/Icon/EnemyIcon.png")

@@ -1,5 +1,4 @@
 extends Node2D
-extends Node2D
 
 
 var player_targets = []
