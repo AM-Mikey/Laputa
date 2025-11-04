@@ -3969,7 +3969,7 @@ target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="RightEdgeIsSlope" type="RayCast2D" parent="."]
+[node name="RightEdgeIsWorld" type="RayCast2D" parent="."]
 z_index = 16
 position = Vector2(1, -0.5)
 scale = Vector2(0.1, 1)
@@ -3977,27 +3977,11 @@ target_position = Vector2(0, 7.75)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="RightEdgeIsSlightSlope" type="RayCast2D" parent="."]
-z_index = 16
-position = Vector2(-1, -0.5)
-scale = Vector2(0.2, 1)
-target_position = Vector2(0, 3.75)
-collision_mask = 520
-collide_with_areas = true
-
-[node name="LeftEdgeIsSlope" type="RayCast2D" parent="."]
+[node name="LeftEdgeIsWorld" type="RayCast2D" parent="."]
 z_index = 16
 position = Vector2(-1, -0.5)
 scale = Vector2(0.1, 1)
 target_position = Vector2(0, 7.75)
-collision_mask = 520
-collide_with_areas = true
-
-[node name="LeftEdgeIsSlightSlope" type="RayCast2D" parent="."]
-z_index = 16
-position = Vector2(1, -0.5)
-scale = Vector2(0.2, 1)
-target_position = Vector2(0, 3.75)
 collision_mask = 520
 collide_with_areas = true
 

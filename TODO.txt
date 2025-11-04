@@ -323,28 +323,16 @@ MAJOR CODE AREAS:
 
 
 
-Run animation detection:
-
--upslope on valley gun position +2
--allow peak on uneven peak surface
--allow valley on uneven surface (including 2:1)
--reverse dir lock push exception
--test animations not appending themselves
--downslope to edge front (moving backwards) horz pos interpolate
--valley to upslope height adjust
+Run animation fixes:
+	- fix peak where at least half is a 2:1 slope
+	- fix valley where at least half is a 2:1 slope
+	- don't push when holding direction lock the opposite direction to the push
 
 
 
+Crouch Triggering:
+	- crouch is sometimes triggered, sometimes not triggered, and sometimes triggered but doesnt change hitbox
 
-Main list: go down from here \/
 
-convert calc_slight_slope_to_peak_lerp_delta and calc_slope_to_peak_lerp_delta to new sys
-add slight_up_slope_on_valley
-add slight_down_slope_on_valley
-add down_slope_on_valley
-
--rename left edge is slope to left edge is solid/detector
--crouch is sometimes triggered, sometimes not triggered, and sometimes triggered but doesnt change hitbox
--update animation groups
--2:1 peak animation
-
+Transition frame Candidates:
+	- up_slope -> edge_front

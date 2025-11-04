@@ -104,10 +104,8 @@ func animate(delta):
 	var stand_close_right = pc.get_node("StandCloseRight").is_colliding()
 	var edge_left = pc.get_node("EdgeLeft").is_colliding()
 	var edge_right = pc.get_node("EdgeRight").is_colliding()
-	var left_edge_is_slope = pc.get_node("LeftEdgeIsSlope").is_colliding()
-	#var left_edge_is_slight_slope = pc.get_node("LeftEdgeIsSlightSlope").is_colliding()
-	var right_edge_is_slope = pc.get_node("RightEdgeIsSlope").is_colliding()
-	#var right_edge_is_slight_slope = pc.get_node("RightEdgeIsSlightSlope").is_colliding()
+	var left_edge_is_world = pc.get_node("LeftEdgeIsWorld").is_colliding()
+	var right_edge_is_world = pc.get_node("RightEdgeIsWorld").is_colliding()
 	
 	var look_left = pc.look_dir.x == -1.0
 	var look_right = pc.look_dir.x == 1.0
@@ -156,20 +154,20 @@ func animate(delta):
 	
 	var conditions = {
 		"edge": 
-			(!absolute_left && !edge_left && absolute_right && look_left && !left_walkable_positive_slope && !left_edge_is_slope) || \
-			(absolute_left && !edge_right && !absolute_right && look_right && !right_walkable_negative_slope && !right_edge_is_slope) || \
-			(!left_edge_is_slope && right_walkable_negative_slope && look_left) || \
-			(left_walkable_positive_slope && !right_edge_is_slope && look_right),
+			(!absolute_left && !edge_left && absolute_right && look_left && !left_walkable_positive_slope && !left_edge_is_world) || \
+			(absolute_left && !edge_right && !absolute_right && look_right && !right_walkable_negative_slope && !right_edge_is_world) || \
+			(!left_edge_is_world && right_walkable_negative_slope && look_left) || \
+			(left_walkable_positive_slope && !right_edge_is_world && look_right),
 		"edge_front": 
-			((absolute_left && !edge_right && !absolute_right && look_left && !right_walkable_negative_slope && !right_edge_is_slope) || \
-			(!absolute_left && !edge_left && absolute_right && look_right && !left_walkable_positive_slope && !left_edge_is_slope) || \
-			(left_walkable_positive_slope && !right_edge_is_slope && look_left) || \
-			(!left_edge_is_slope && right_walkable_negative_slope && look_right)) && !do_edge_turn,
+			((absolute_left && !edge_right && !absolute_right && look_left && !right_walkable_negative_slope && !right_edge_is_world) || \
+			(!absolute_left && !edge_left && absolute_right && look_right && !left_walkable_positive_slope && !left_edge_is_world) || \
+			(left_walkable_positive_slope && !right_edge_is_world && look_left) || \
+			(!left_edge_is_world && right_walkable_negative_slope && look_right)) && !do_edge_turn,
 		"edge_turn": 
-			((absolute_left && !edge_right && !absolute_right && look_left && !right_walkable_negative_slope && !right_edge_is_slope) || \
-			(!absolute_left && !edge_left && absolute_right && look_right && !left_walkable_positive_slope && !left_edge_is_slope) || \
-			(left_walkable_positive_slope && !right_edge_is_slope && look_left) || \
-			(!left_edge_is_slope && right_walkable_negative_slope && look_right)) && do_edge_turn,
+			((absolute_left && !edge_right && !absolute_right && look_left && !right_walkable_negative_slope && !right_edge_is_world) || \
+			(!absolute_left && !edge_left && absolute_right && look_right && !left_walkable_positive_slope && !left_edge_is_world) || \
+			(left_walkable_positive_slope && !right_edge_is_world && look_left) || \
+			(!left_edge_is_world && right_walkable_negative_slope && look_right)) && do_edge_turn,
 		"stand":
 			(stand_close_left && edge_left && edge_right && stand_close_right && !pc.is_crouching),
 		"crouch": 
@@ -183,10 +181,10 @@ func animate(delta):
 		"slight_up_slope":
 			(left_slight_negative_slope && right_slight_negative_slope && look_left) || \
 			(left_slight_positive_slope && right_slight_positive_slope && look_right) || \
-			(left_nothing && left_edge_is_slope && right_slight_negative_slope && look_left) || \
-			(left_slight_positive_slope && right_edge_is_slope && right_nothing && look_right) || \
-			(left_slight_negative_slope && right_edge_is_slope && right_nothing && look_left) || \
-			(right_slight_positive_slope && left_edge_is_slope && left_nothing && look_right) || \
+			(left_nothing && left_edge_is_world && right_slight_negative_slope && look_left) || \
+			(left_slight_positive_slope && right_edge_is_world && right_nothing && look_right) || \
+			(left_slight_negative_slope && right_edge_is_world && right_nothing && look_left) || \
+			(right_slight_positive_slope && left_edge_is_world && left_nothing && look_right) || \
 			(left_slight_negative_slope && right_walkable_positive_slope && look_left && !valley_right) || \
 			(left_walkable_negative_slope && right_slight_positive_slope && look_right && !valley_left) || \
 			(left_walkable_positive_slope && right_slight_negative_slope && look_left && slight_slope_peak_left && !slight_slope_peak_right) || \
@@ -194,10 +192,10 @@ func animate(delta):
 		"slight_down_slope":
 			(left_slight_positive_slope && right_slight_positive_slope && look_left) || \
 			(left_slight_negative_slope && right_slight_negative_slope && look_right) || \
-			(left_nothing && left_edge_is_slope && right_slight_positive_slope && look_left) || \
-			(left_nothing && left_edge_is_slope && right_slight_negative_slope && look_right) || \
-			(left_slight_negative_slope && right_edge_is_slope && right_nothing && look_right) || \
-			(left_slight_positive_slope && right_edge_is_slope && right_nothing && look_left) || \
+			(left_nothing && left_edge_is_world && right_slight_positive_slope && look_left) || \
+			(left_nothing && left_edge_is_world && right_slight_negative_slope && look_right) || \
+			(left_slight_negative_slope && right_edge_is_world && right_nothing && look_right) || \
+			(left_slight_positive_slope && right_edge_is_world && right_nothing && look_left) || \
 			(left_walkable_negative_slope && right_slight_positive_slope && look_left && !valley_left) || \
 			(left_slight_negative_slope && right_walkable_positive_slope && look_right && !valley_right) || \
 			(left_walkable_positive_slope && right_slight_negative_slope && look_left && slight_slope_peak_right && !slight_slope_peak_left) || \
@@ -205,10 +203,10 @@ func animate(delta):
 		"up_slope":
 			(left_negative_slope && right_negative_slope && look_left) || \
 			(left_positive_slope && right_positive_slope && look_right) || \
-			(left_nothing && left_edge_is_slope && right_negative_slope && look_left) || \
-			(left_positive_slope && right_edge_is_slope && right_nothing && look_right) || \
-			(left_negative_slope && right_edge_is_slope && right_nothing && look_left) || \
-			(right_positive_slope && left_edge_is_slope && left_nothing && look_right) || \
+			(left_nothing && left_edge_is_world && right_negative_slope && look_left) || \
+			(left_positive_slope && right_edge_is_world && right_nothing && look_right) || \
+			(left_negative_slope && right_edge_is_world && right_nothing && look_left) || \
+			(right_positive_slope && left_edge_is_world && left_nothing && look_right) || \
 			(left_negative_slope && right_walkable_positive_slope && look_left && !valley_right) || \
 			(left_walkable_negative_slope && right_positive_slope && look_right && !valley_left) || \
 			(left_walkable_positive_slope && right_negative_slope && look_left && peak_left) || \
@@ -216,10 +214,10 @@ func animate(delta):
 		"down_slope": 
 			(left_positive_slope && right_positive_slope && look_left) || \
 			(left_negative_slope && right_negative_slope && look_right) || \
-			(left_nothing && left_edge_is_slope && right_positive_slope && look_left) || \
-			(left_negative_slope && right_edge_is_slope && right_nothing && look_right) || \
-			(left_negative_slope && right_edge_is_slope && right_nothing && look_right) || \
-			(left_positive_slope && right_edge_is_slope && right_nothing && look_left) || \
+			(left_nothing && left_edge_is_world && right_positive_slope && look_left) || \
+			(left_negative_slope && right_edge_is_world && right_nothing && look_right) || \
+			(left_negative_slope && right_edge_is_world && right_nothing && look_right) || \
+			(left_positive_slope && right_edge_is_world && right_nothing && look_left) || \
 			(left_walkable_negative_slope && right_positive_slope && look_left && !valley_left) || \
 			(left_negative_slope && right_walkable_positive_slope && look_right && !valley_right) || \
 			(left_walkable_positive_slope && right_negative_slope && look_left && peak_right) || \
@@ -301,11 +299,11 @@ func animate(delta):
 			#(left_negative_slope && right_edge_is_slope && right_nothing && look_left) || \
 			#(right_positive_slope && left_edge_is_slope && left_nothing && look_right),
 		"edge_on_any_up_slope":
-			(!left_edge_is_slope && right_walkable_negative_slope && look_left) || \
-			(left_walkable_positive_slope && !right_edge_is_slope && look_right),
+			(!left_edge_is_world && right_walkable_negative_slope && look_left) || \
+			(left_walkable_positive_slope && !right_edge_is_world && look_right),
 		"edge_front_or_turn_on_any_down_slope":
-			(left_walkable_positive_slope && !right_edge_is_slope && look_left) || \
-			(!left_edge_is_slope && right_walkable_negative_slope && look_right),
+			(left_walkable_positive_slope && !right_edge_is_world && look_left) || \
+			(!left_edge_is_world && right_walkable_negative_slope && look_right),
 			
 	}
 	
@@ -784,7 +782,7 @@ func play_animation(animation):
 	
 	var run_group = ["run", "crouch_run", "back_run"]
 	#var edge_group = ["edge", "edge_front"] #dont blend these
-	var stand_group = ["stand", "stand_close", "push", "crouch", "edge_turn", "up_slope", "down_slope", "slight_up_slope", "slight_down_slope", "stand_peak", "up_slope_to_stand"]
+	var stand_group = ["edge_turn", "stand", "crouch", "stand_close", "stand_close_reverse", "slight_up_slope", "slight_down_slope", "up_slope", "down_slope", "up_slope_to_stand", "stand_to_up_slope", "stand_to_down_slope", "down_slope_to_stnad", "peak", "valley", "push", "slight_up_push", "slight_down_push", "up_push", "down_push"]
 	
 	if run_group.has(animation):
 		ap.speed_scale = max((abs(pc.velocity.x)/mm.speed.x) * 2.0, 0.1)
