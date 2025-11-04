@@ -167,7 +167,6 @@ func read_level_data_from_temp(current_level):
 
 func read_level_data_from_save(current_level):
 	var scoped_data = read_from_file(save_path)
-extends Node2D
 	if !scoped_data["level_data"].has(current_level.name):
 		print("no previous level data in save")
 		return
