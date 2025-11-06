@@ -18,7 +18,7 @@ func _on_body_exited(_body):
 func _input(event):
 	if not reading:
 		if event.is_action_pressed("inspect") and active_pc != null:
-			if not active_pc.disabled and active_pc.can_input:
+			if not active_pc.disabled and active_pc.can_input and active_pc.mm.current_state == active_pc.mm.states["run"]:
 				active_pc.inspect_target = $CollisionShape2D
 				reading = true
 				for i in get_tree().get_nodes_in_group("DialogBoxes"): #exit old

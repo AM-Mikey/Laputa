@@ -30,7 +30,6 @@ func state_process(delta):
 	pc.move_and_slide()
 	animate(delta)
 
-
 	if not pc.is_on_floor() and not pc.is_in_coyote:
 		pc.is_in_coyote = true
 		mm.do_coyote_time()
@@ -39,16 +38,19 @@ func state_process(delta):
 
 ##Processes jumps and platform drops
 func jump_processing():
+	if world.has_node("UILayer/UIGroup/DialogBox"):
+		if !world.get_node("UILayer/UIGroup/DialogBox").is_exiting:
+			return #prevent the jump while db exists and is not exiting, this does allow holdjumping, though
+
 	if inp.pressed("jump") and Input.is_action_pressed("look_down") and pc.is_on_ssp and pc.can_input:
 		is_dropping = true
 		mm.drop()
-		return #is this needed?
 	elif !is_dropping and pc.can_input:
 		if inp.pressed("jump"):
 			mm.jump()
-		elif inp.buttonconfig.holdjumping:
-			if inp.held("jump"):
-				mm.jump()
+	elif inp.buttonconfig.holdjumping:
+		if inp.held("jump"):
+			mm.jump()
 
 
 
@@ -116,12 +118,12 @@ func animate(delta):
 	var edge_right = pc.get_node("EdgeRight").is_colliding()
 	var left_edge_is_world = pc.get_node("LeftEdgeIsWorld").is_colliding()
 	var right_edge_is_world = pc.get_node("RightEdgeIsWorld").is_colliding()
-	
+
 	var look_left = pc.look_dir.x == -1.0
 	var look_right = pc.look_dir.x == 1.0
-	
+
 	var vector_slope_tolerance = Vector2(0.1, 0.1)
-	
+
 	var left_normal = Vector2.ZERO
 	var right_normal = Vector2.ZERO
 	var left_negative_slope := false
@@ -138,7 +140,7 @@ func animate(delta):
 	var right_no_slope := false
 	var right_walkable_negative_slope := false
 	var right_walkable_positive_slope := false
-	
+
 	if pc.get_node("LeftNormalFinder").is_colliding():
 		left_normal = pc.get_node("LeftNormalFinder").get_collision_normal()
 		left_negative_slope = abs(left_normal - Vector2(0.7, -0.7)) < vector_slope_tolerance #45 deg
@@ -148,7 +150,7 @@ func animate(delta):
 		left_no_slope = abs(left_normal - Vector2(0.0, -1.0)) < vector_slope_tolerance #0 deg
 		left_walkable_negative_slope = left_negative_slope || left_slight_negative_slope
 		left_walkable_positive_slope = left_positive_slope || left_slight_positive_slope
-	
+
 	if pc.get_node("RightNormalFinder").is_colliding():
 		right_normal = pc.get_node("RightNormalFinder").get_collision_normal()
 		right_negative_slope = abs(right_normal - Vector2(0.7, -0.7)) < vector_slope_tolerance #45 deg
@@ -161,28 +163,28 @@ func animate(delta):
 
 	var left_nothing = left_normal == Vector2(0, 0) #air
 	var right_nothing = right_normal == Vector2(0, 0) #air
-	
+
 	var conditions = {
-		"edge": 
+		"edge":
 			(!absolute_left && !edge_left && absolute_right && look_left && !left_walkable_positive_slope && !left_edge_is_world) || \
 			(absolute_left && !edge_right && !absolute_right && look_right && !right_walkable_negative_slope && !right_edge_is_world) || \
 			(!left_edge_is_world && right_walkable_negative_slope && look_left) || \
 			(left_walkable_positive_slope && !right_edge_is_world && look_right),
-		"edge_front": 
+		"edge_front":
 			((absolute_left && !edge_right && !absolute_right && look_left && !right_walkable_negative_slope && !right_edge_is_world) || \
 			(!absolute_left && !edge_left && absolute_right && look_right && !left_walkable_positive_slope && !left_edge_is_world) || \
 			(left_walkable_positive_slope && !right_edge_is_world && look_left) || \
 			(!left_edge_is_world && right_walkable_negative_slope && look_right)) && !do_edge_turn,
-		"edge_turn": 
+		"edge_turn":
 			((absolute_left && !edge_right && !absolute_right && look_left && !right_walkable_negative_slope && !right_edge_is_world) || \
 			(!absolute_left && !edge_left && absolute_right && look_right && !left_walkable_positive_slope && !left_edge_is_world) || \
 			(left_walkable_positive_slope && !right_edge_is_world && look_left) || \
 			(!left_edge_is_world && right_walkable_negative_slope && look_right)) && do_edge_turn,
 		"stand":
 			(stand_close_left && edge_left && edge_right && stand_close_right && !pc.is_crouching),
-		"crouch": 
+		"crouch":
 			pc.is_crouching,
-		"stand_close": 
+		"stand_close":
 			((edge_left && !stand_close_left && look_left && right_no_slope) || \
 			(edge_right && !stand_close_right && look_right && left_no_slope)) && !pc.is_crouching,
 		"stand_close_reverse":
@@ -221,7 +223,7 @@ func animate(delta):
 			(left_walkable_negative_slope && right_positive_slope && look_right && !valley_left) || \
 			(left_walkable_positive_slope && right_negative_slope && look_left && peak_left) || \
 			(left_positive_slope && right_walkable_negative_slope && look_right && peak_right), #2 for upslope into air #2 for upslope from air #2 for valley 2 for peak
-		"down_slope": 
+		"down_slope":
 			(left_positive_slope && right_positive_slope && look_left) || \
 			(left_negative_slope && right_negative_slope && look_right) || \
 			(left_nothing && left_edge_is_world && right_positive_slope && look_left) || \
@@ -232,7 +234,7 @@ func animate(delta):
 			(left_negative_slope && right_walkable_positive_slope && look_right && !valley_right) || \
 			(left_walkable_positive_slope && right_negative_slope && look_left && peak_right) || \
 			(left_positive_slope && right_walkable_negative_slope && look_right && peak_left), #2 for downslope into air #2 downwslope from air #2 for valley 2 for peak
-		"up_slope_to_stand": 
+		"up_slope_to_stand":
 			((left_no_slope && right_walkable_negative_slope && look_left && !edge_right) || \
 			(left_walkable_positive_slope && right_no_slope && look_right && !edge_left)),
 		"stand_to_up_slope":
@@ -249,7 +251,7 @@ func animate(delta):
 		"valley":
 			left_walkable_negative_slope && right_walkable_positive_slope && valley_left && valley_right
 	}
-	
+
 	var special_transition_conditions = {
 		"stand_to_up_slope":
 			(left_negative_slope && right_no_slope && look_left && !absolute_right) || \
@@ -263,10 +265,10 @@ func animate(delta):
 		"slight_down_slope_to_stand":
 			(left_no_slope && right_slight_positive_slope && look_left && !absolute_left) || \
 			(left_slight_negative_slope && right_no_slope && look_right && !absolute_right),
-		"up_slope_to_stand": 
+		"up_slope_to_stand":
 			(left_no_slope && right_negative_slope && look_left && !edge_right) || \
 			(left_positive_slope && right_no_slope && look_right && !edge_left),
-		"slight_up_slope_to_stand": 
+		"slight_up_slope_to_stand":
 			(left_no_slope && right_slight_negative_slope && look_left && !edge_right) || \
 			(left_slight_positive_slope && right_no_slope && look_right && !edge_left),
 		"stand_to_down_slope":
@@ -275,7 +277,7 @@ func animate(delta):
 		"stand_to_slight_down_slope":
 			(left_slight_positive_slope && right_no_slope && look_left && !edge_left) || \
 			(left_no_slope && right_slight_negative_slope && look_right && !edge_right),
-		
+
 		"up_slope_to_peak":
 			(left_walkable_positive_slope && right_negative_slope && look_left && peak_left) || \
 			(left_positive_slope && right_walkable_negative_slope && look_right && peak_right),
@@ -288,7 +290,7 @@ func animate(delta):
 		"peak_to_slight_down_slope":
 			(left_walkable_positive_slope && right_slight_negative_slope && look_left && slight_slope_peak_right && !slight_slope_peak_left) || \
 			(left_slight_positive_slope && right_walkable_negative_slope && look_right && slight_slope_peak_left && !slight_slope_peak_right),
-		
+
 		"valley_to_up_slope":
 			(left_negative_slope && right_walkable_positive_slope && look_left && !valley_right) || \
 			(left_walkable_negative_slope && right_positive_slope && look_right && !valley_left),
@@ -314,9 +316,9 @@ func animate(delta):
 		"edge_front_or_turn_on_any_down_slope":
 			(left_walkable_positive_slope && !right_edge_is_world && look_left) || \
 			(!left_edge_is_world && right_walkable_negative_slope && look_right),
-			
+
 	}
-	
+
 	#slope crouch prevention
 	if conditions["slight_up_slope"] or conditions["slight_down_slope"] or conditions["up_slope"] or conditions["down_slope"]:
 		pc.forbid_crouching = true
@@ -349,10 +351,10 @@ func animate(delta):
 				next_animations.append("crouch")
 			if pc.move_dir.x != 0.0 and next_animations == []: #last case
 				next_animations = check_and_append_moving_animations(next_animations)
-		
+
 		"stand":
 			next_animations = check_and_append_animations(["stand_close", "stand_close_reverse", "up_slope_to_stand", "stand_to_up_slope", "stand_to_down_slope", "down_slope_to_stand"], conditions, next_animations)
-			if pc.move_dir.x != 0.0 and next_animations == []: #last case... add room for velocity 
+			if pc.move_dir.x != 0.0 and next_animations == []: #last case... add room for velocity
 				if push_left_wall or push_right_wall:
 					next_animations.append("push")
 				else:
@@ -362,10 +364,10 @@ func animate(delta):
 					next_animations.append("crouch")
 				else:
 					next_animations.append("stand")
-		
+
 		"crouch":
 			next_animations = check_and_append_animations(["stand_close"], conditions, next_animations)
-			if pc.move_dir.x != 0.0 and next_animations == []: #last case... add room for velocity 
+			if pc.move_dir.x != 0.0 and next_animations == []: #last case... add room for velocity
 				if push_left_wall or push_right_wall:
 					next_animations.append("push")
 				else:
@@ -375,7 +377,7 @@ func animate(delta):
 					next_animations.append("crouch")
 				else:
 					next_animations.append("stand")
-		
+
 		"push":
 			if pc.move_dir.x == 0.0: #not moving
 				if !pc.is_crouching:
@@ -384,19 +386,19 @@ func animate(delta):
 					next_animations.append("crouch")
 			elif !push_left_wall and !push_right_wall:
 				next_animations = check_and_append_moving_animations(next_animations)
-		
-		
+
+
 		"run":
 			next_animations = run_tree(conditions)
-	
+
 		"back_run":
 			next_animations = run_tree(conditions)
-	
-		"crouch_run": 
+
+		"crouch_run":
 			next_animations = run_tree(conditions)
-		
-		
-		
+
+
+
 		"stand_close":
 			next_animations = check_and_append_animations(["stand", "stand_close", "edge", "edge_front", "edge_turn", "stand_to_down_slope"], conditions, next_animations)
 			if pc.move_dir.x != 0.0 and next_animations == []: #last case
@@ -406,7 +408,7 @@ func animate(delta):
 					next_animations.append("crouch")
 				else:
 					next_animations.append("stand_close")
-	
+
 		"stand_close_reverse":
 			next_animations = check_and_append_animations(["stand", "stand_close_reverse", "edge", "edge_front", "edge_turn", "up_slope_to_stand"], conditions, next_animations)
 			if pc.move_dir.x != 0.0 and next_animations == []: #last case
@@ -425,7 +427,7 @@ func animate(delta):
 					next_animations.append("slight_up_push")
 				else:
 					next_animations = check_and_append_moving_animations(next_animations)
-		
+
 		"slight_down_slope":
 			next_animations = check_and_append_animations(["edge", "edge_front", "edge_turn", "stand_to_down_slope", "down_slope_to_stand", "peak", "valley"], conditions, next_animations)
 			if pc.move_dir.x != 0.0 and next_animations == []: #last case
@@ -433,7 +435,7 @@ func animate(delta):
 					next_animations.append("slight_down_push")
 				else:
 					next_animations = check_and_append_moving_animations(next_animations)
-		
+
 		"up_slope":
 			next_animations = check_and_append_animations(["edge", "edge_front", "edge_turn", "up_slope_to_stand", "stand_to_up_slope", "peak", "valley"], conditions, next_animations)
 			if pc.move_dir.x != 0.0 and next_animations == []: #last case
@@ -441,7 +443,7 @@ func animate(delta):
 					next_animations.append("up_push")
 				else:
 					next_animations = check_and_append_moving_animations(next_animations)
-		
+
 		"down_slope":
 			next_animations = check_and_append_animations(["edge", "edge_front", "edge_turn", "stand_to_down_slope", "down_slope_to_stand", "peak", "valley"], conditions, next_animations)
 			if pc.move_dir.x != 0.0 and next_animations == []: #last case
@@ -449,39 +451,39 @@ func animate(delta):
 					next_animations.append("down_push")
 				else:
 					next_animations = check_and_append_moving_animations(next_animations)
-				
+
 		"up_slope_to_stand":
 			if pc.move_dir.x == 0.0: next_animations = check_and_append_animations(["stand", "stand_close_reverse", "up_slope_to_stand", "slight_up_slope", "up_slope"], conditions, next_animations)
 			else: next_animations = check_and_append_moving_animations(next_animations)
-		
+
 		"stand_to_up_slope":
 			if pc.move_dir.x == 0.0: next_animations = check_and_append_animations(["stand", "stand_to_up_slope", "slight_up_slope", "up_slope"], conditions, next_animations)
 			else: next_animations = check_and_append_moving_animations(next_animations)
-		
+
 		"stand_to_down_slope":
 			if pc.move_dir.x == 0.0: next_animations = check_and_append_animations(["stand", "stand_close", "stand_to_down_slope", "slight_down_slope", "down_slope"], conditions, next_animations)
 			else: next_animations = check_and_append_moving_animations(next_animations)
-		
+
 		"down_slope_to_stand":
 			if pc.move_dir.x == 0.0: next_animations = check_and_append_animations(["stand", "down_slope_to_stand", "slight_down_slope", "down_slope"], conditions, next_animations)
 			else: next_animations = check_and_append_moving_animations(next_animations)
-		
+
 		"peak":
 			if pc.move_dir.x == 0.0: next_animations = check_and_append_animations(["slight_up_slope", "up_slope", "slight_down_slope", "down_slope"], conditions, next_animations)
 			else: next_animations = check_and_append_moving_animations(next_animations)
-		
+
 		"valley":
 			if pc.move_dir.x == 0.0: next_animations = check_and_append_animations(["slight_up_slope", "up_slope", "slight_down_slope", "down_slope"], conditions, next_animations)
 			else: next_animations = check_and_append_moving_animations(next_animations)
-		
-		
-		
+
+
+
 		"slight_up_push":
 			if pc.move_dir.x == 0.0: #not moving
 				next_animations.append("slight_up_slope")
 			elif !push_left_wall and !push_right_wall:
 				next_animations = check_and_append_moving_animations(next_animations)
-		
+
 		"slight_down_push":
 			if pc.move_dir.x == 0.0: #not moving
 				next_animations.append("slight_down_slope")
@@ -507,24 +509,24 @@ func animate(delta):
 			do_edge_turn = true
 		else:
 			do_edge_turn = false
-		
+
 		check_if_offset(ap.current_animation, conditions, special_transition_conditions, delta)
 		return
-	
+
 	if next_animations.size() != 1:
 		printerr("ERROR: CONFLICT SETTING RUN ANIMATION FROM ", ap.current_animation, " to ", next_animations)
 		return
 	#if next_animations[0] == ap.current_animation:
 		#return
-	
+
 	if next_animations[0] == "edge":
 		do_edge_turn = true
 	else:
 		do_edge_turn = false
-	
+
 	check_if_offset(next_animations[0], conditions, special_transition_conditions, delta)
 	play_animation(next_animations[0])
-	
+
 	#saved_move_dir = pc.move_dir #for 2 frame stand
 
 ### ANIMATION TREES ###
@@ -590,7 +592,7 @@ func do_animation_sprite_offset(animation, special_transition_conditions, delta)
 		"up_push": Vector2(0, 9),
 		"down_push": Vector2(0, 8),
 	}
-	
+
 	var special_transition_offsets = {
 		"stand_to_up_slope": [Vector2(3, 0), Vector2(0, 7)],
 		"stand_to_slight_up_slope": [Vector2(4, 1), Vector2(0, 3)],
@@ -600,29 +602,29 @@ func do_animation_sprite_offset(animation, special_transition_conditions, delta)
 		"slight_up_slope_to_stand": [Vector2(0, 5), Vector2(0, 2)],
 		"stand_to_down_slope": [Vector2(0, 4), Vector2(0, 7)],
 		"stand_to_slight_down_slope": [Vector2(0, 4), Vector2(0, 7)],
-		
+
 		"up_slope_to_peak": [Vector2(0, 9), Vector2(0, 5)],
 		"slight_up_slope_to_peak": [Vector2(0, 4), Vector2(0, 2)],
 		"peak_to_down_slope": [Vector2(0, 3), Vector2(0, 7)],
 		"peak_to_slight_down_slope": [Vector2(0, 2), Vector2(0, 4)],
-		
+
 		"valley_to_up_slope": [Vector2(0, 9), Vector2(2, 7)],
 		"valley_to_slight_up_slope": [Vector2(0, 4), Vector2(0, 4)],
 		"down_slope_to_valley": [Vector2(-2, 5), Vector2(0, 7)],
 		"slight_down_slope_to_valley": [Vector2(0, 4), Vector2(0, 4)],
-		
+
 		#"up_slope_on_edge": [Vector2(0, 7), Vector2(0, 0)],
 		#"up_slope_on_edge_front": [Vector2(0, 0), Vector2(0, 0)],
 		"edge_on_any_up_slope": [Vector2(0, 0), Vector2(0, 7)],
 		"edge_front_or_turn_on_any_down_slope": [Vector2(0, 0), Vector2(0, 5)]
 	}
-	
-	
-	
+
+
+
 	var do_special_transition = false
 	for c in special_transition_conditions:
 		if special_transition_conditions[c]: do_special_transition = true
-	
+
 	#special conditions
 	if do_special_transition:
 		for c in special_transition_conditions: #warning, this has no protection for if there are multiple of these triggered
@@ -654,7 +656,7 @@ func do_animation_sprite_offset(animation, special_transition_conditions, delta)
 					"stand_to_slight_down_slope":
 						t = calc_lerp_delta_center(0.5, 6.5)
 						gun_extra_offset = Vector2(0, 16)
-					
+
 					"up_slope_to_peak":
 						t = calc_lerp_delta_center(6.5, 2.0)
 						gun_extra_offset = Vector2(0, 7)
@@ -667,7 +669,7 @@ func do_animation_sprite_offset(animation, special_transition_conditions, delta)
 					"peak_to_slight_down_slope":
 						t = calc_lerp_delta_center(1.5, 3.5)
 						gun_extra_offset = Vector2(0, 12)
-					
+
 					"valley_to_up_slope":
 						t = calc_lerp_delta_side(Vector2(pc.look_dir.x, 0), 12.5, 3.0)
 						gun_extra_offset = Vector2(0, 7)
@@ -680,7 +682,7 @@ func do_animation_sprite_offset(animation, special_transition_conditions, delta)
 					"slight_down_slope_to_valley":
 						t = calc_lerp_delta_side(Vector2(pc.look_dir.x * -1.0, 0), 3, 12.5)
 						gun_extra_offset = Vector2(0, 12)
-					
+
 					#"up_slope_on_edge":
 						#print("over_edge")
 						#t = calc_slope_to_peak_lerp_delta()
@@ -695,7 +697,7 @@ func do_animation_sprite_offset(animation, special_transition_conditions, delta)
 					"edge_front_or_turn_on_any_down_slope":
 						t = calc_edge_front_or_turn_on_any_slope_lerp_delta(Vector2(pc.look_dir.x, 0))
 						gun_extra_offset = Vector2(0, 16)
-				
+
 				var p0 = Vector2(special_transition_offsets[c][0].x * pc.look_dir.x, special_transition_offsets[c][0].y)
 				var p1 = Vector2(special_transition_offsets[c][1].x * pc.look_dir.x, special_transition_offsets[c][1].y)
 				var translation = p0.lerp(p1, t) #interpolated
@@ -703,8 +705,8 @@ func do_animation_sprite_offset(animation, special_transition_conditions, delta)
 				#var speed = 30.0
 				sprite.position = final_position #sprite.position.lerp(final_position, delta * speed)
 				sprite.gun_pos_offset = sprite.position + gun_extra_offset
-	
-	
+
+
 	#normal conditions
 	elif offsets.has(animation): #only works if these lerp animations can't become eachother as we never reset sprite.position
 		#if offsets[animation] is Array: #never an array!
@@ -793,7 +795,7 @@ func play_animation(animation):
 	var run_group = ["run", "crouch_run", "back_run"]
 	#var edge_group = ["edge", "edge_front"] #dont blend these
 	var stand_group = ["edge_turn", "stand", "crouch", "stand_close", "stand_close_reverse", "slight_up_slope", "slight_down_slope", "up_slope", "down_slope", "up_slope_to_stand", "stand_to_up_slope", "stand_to_down_slope", "down_slope_to_stnad", "peak", "valley", "push", "slight_up_push", "slight_down_push", "up_push", "down_push"]
-	
+
 	if run_group.has(animation):
 		ap.speed_scale = max((abs(pc.velocity.x)/mm.speed.x) * 2.0, 0.1)
 		if run_group.has(ap.current_animation):

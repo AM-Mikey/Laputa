@@ -15,6 +15,7 @@ var current_text_array
 var step: int = 0 #step in printing dialog
 var is_sign = false
 var is_flavor = false
+var is_exiting = false
 
 var flash_original_text = ""
 enum {FLASH_NONE, FLASH_NORMAL, FLASH_END}
@@ -104,13 +105,18 @@ func split_text(text) -> Array: #TODO: regex removes all spaces between commands
 	if !is_sign:
 		text = text.strip_edges().replace("\t", "") #remove first and last newlines, remove tabulation
 	var regex = RegEx.new()
-	regex.compile(r'(*NOTEMPTY)(?=\/)(\S*)(?=\n|$| )|(?! )(.*?)(?= \/|\n|$)|(\n)') #took me so long to come up with, if a command doesnt register properly, check this in https://regex101.com/
+	regex.compile(r'(*NOTEMPTY)(?=\/)(\S*)(?=\r?\n|$| )|(?! )(.*?)(?= \/|\r?\n|$)|(\r?\n)') #new vers, gets rid of \r for some reason but it works for us anyways
+	#regex.compile(r'(*NOTEMPTY)(?=\/)(\S*)(?=\n|$| )|(?! )(.*?)(?= \/|\n|$)|(\n)') #took me so long to come up with, if a command doesnt register properly, check this in https://regex101.com/
 	for result in regex.search_all(text):
 		out.push_back(result.get_string())
+	#var out_escaped = [] #keep these lines for testing
+	#for group in out:
+		#out_escaped.append(group.c_escape())
+	#print("stop here")
 	return out
 
 
-func run_text_array(text_array):
+func run_text_array(text_array, from_input := false): #step is always the next step ready to do, not the one just done
 	if step == current_text_array.size():
 		#print("reached end")
 		active = false
@@ -120,24 +126,27 @@ func run_text_array(text_array):
 			$FlashTimer.start(0.1)
 		return
 	var string = text_array[step]
+
 	if string.begins_with("/"):
 		#print("did command: ", string)
 		await $CommandHandler.parse_command(string.lstrip("/"))
 		step += 1
 		print("step: ", step)
 		run_text_array(text_array)
-	elif string == "\n":
-		step += 1
-		print("step: ", step)
-		if auto_input:
-			dl.text += "\n"
+
+	elif string == "\n" or string == "\r\n" or string == "":
+		if auto_input or from_input:
+			#dl.text += "\n" #we don't do this because progress_text does this
+			step += 1
+			print("step: ", step)
 			run_text_array(text_array)
-			return
-		active = false #otherwise it sets active == false and ends the loop
-		if !is_sign:
-			flash_type = FLASH_NORMAL
-			flash_original_text = dl.text
-			$FlashTimer.start(0.3)
+		else:
+			active = false #otherwise it sets active == false and ends the loop
+			if !is_sign:
+				flash_type = FLASH_NORMAL
+				flash_original_text = dl.text
+				$FlashTimer.start(0.3)
+
 	else:
 		print(string)
 		await run_text_string(string)
@@ -204,11 +213,13 @@ func progress_text(with_newline = true):
 		dl.text = flash_original_text + "\n" #remove cursor, add back newline
 	else:
 		dl.text = flash_original_text
-	run_text_array(current_text_array)
+	run_text_array(current_text_array, true)
 
 
 
 func exit():
+	if is_exiting: return
+	is_exiting = true
 	emit_signal("dialog_finished")
 	if is_instance_valid(pc):
 		pc.mm.change_state("run") #change to run so we don't continue a jump

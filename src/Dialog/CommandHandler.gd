@@ -307,6 +307,7 @@ func on_select_branch(branch):
 
 
 func end_branch():
+	print("ending branch")
 	db.awaiting_merge = true
 	db.flash_type = db.FLASH_NORMAL
 	db.flash_original_text = db.dl.text
