@@ -47,11 +47,11 @@ release_version = "1.8"
 do_skip_title = true
 debug_visible = true
 gamemode = "pvp"
-start_level_path = "res://src/Level/PlaytestZone.tscn"
+start_level_path = "res://src/Level/DefaultGodot4.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_offset = Vector2(32, -63.5)
-scroll_base_offset = Vector2(0, -140)
+scroll_offset = Vector2(919.05493, 832.5)
+scroll_base_offset = Vector2(0, -2892)
 
 [node name="Back" type="Node2D" parent="."]
 scale = Vector2(4, 4)

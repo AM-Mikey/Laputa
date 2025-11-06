@@ -1,10 +1,10 @@
 {
-	"child": 
+	"child":
 	"
 	/face,child /name,child What do you want, outsider?
 	My dad can kick your ass, so don't piss me off
 	",
-	
+
 	"sasuke":
 	"
 	/face,sasuke /name,sasuke Managing the windmill is tough work! /pass
@@ -39,14 +39,14 @@
 	You can access the shop by jumping up here!
 	/unfocus See ya around!
 	",
-	
+
 	"cutscene_test":
 	"
 	/name,quincy Here's an example of a cutscene
 	/name,fuuka It can go on without the player even in the scene!
 	for some reason text-commands mess up on the last line so here's one without any!
 	",
-	
+
 	"kermit":
 	"
 	/name,kermit /face,child I'm Kermit, I guess...
@@ -57,7 +57,7 @@
 	walking to waypoint 0 /waypoint,child,0
 	walking to waypoint 1 /waypoint,child,1
 	",
-	
+
 	"test2":
 	"
 	/newchar,child,kermit I'm Kermit, I guess...
@@ -70,7 +70,7 @@
 	walking to waypoint 0 /waypoint,child,0
 	walking to waypoint 1 /waypoint,child,1
 	",
-	
+
 	"branchtest":
 	"
 	/newchar,basil,basil Yawn, this is a test of the yes or no system.
@@ -96,12 +96,13 @@
 	/db,0 You picked OptionA. /udb
 	/db,1 You picked OptionB. /udb
 	/db,2 You picked OptionC. /udb
-	/m Now the dialog branches are merged. 
+	/m Now the dialog branches are merged.
 	",
 
 	"branchtest4":
 	"
-	/newchar,basil,basil Yawn, this is a /b test /ub of the /t,topic_system topic /ut system.
+	/newchar,basil,basil Oh, hello there.
+	this is a /b test /ub of the /t,topic_system topic /ut system.
 	/topics,sasuke,cheese,basil,topic_system,general After this message, select an option.
 	/db,0 You picked Sasuke. /udb
 	/db,1 You picked Cheese. /udb
@@ -111,4 +112,4 @@
 	/db,4 Here's the news of the day. /udb
 	/m Now the dialog branches are merged.
 	",
-}   
+}

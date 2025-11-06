@@ -141,7 +141,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Water1" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Water" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -158,7 +158,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Ladder1" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Ladder" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -191,7 +191,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Sign1" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Sign" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -211,7 +211,7 @@ batsdsfdsdfsdsd
 }
 size_is_default = false
 
-[node name="Door3" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Door" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -233,7 +233,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door4" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Door1" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -255,7 +255,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door5" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Door2" type="MarginContainer" parent="Triggers" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -327,7 +327,7 @@ properties = {
 "voiced": [true, 1]
 }
 
-[node name="Frog15" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Frog" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(280, -192)
@@ -361,7 +361,7 @@ properties = {
 "voiced": [true, 1]
 }
 
-[node name="Stalagtite26" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Stalagtite" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(328, -112)
@@ -377,7 +377,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite27" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Stalagtite1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(360, -112)
@@ -393,7 +393,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite28" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Stalagtite2" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(296, -112)
@@ -409,7 +409,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Frog16" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Frog1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(-248, 80)
@@ -425,7 +425,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Sphagnum16" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Sphagnum" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(-24, -112)
@@ -479,7 +479,7 @@ properties = {
 "walk_max_time": [10.0, 3]
 }
 
-[node name="Stalagtite29" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Stalagtite3" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(280, -168)
@@ -539,7 +539,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Frog17" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Frog2" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(392, 0)
@@ -612,7 +612,7 @@ properties = {
 "walk_speed": [Vector2(50, 50), 5]
 }
 
-[node name="Frog18" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Frog3" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(-8, 160)
@@ -684,7 +684,7 @@ properties = {
 }
 
 [node name="Waypoint" type="Area2D" parent="." groups=["Entities", "VisualUtilities", "Waypoints"] instance=ExtResource("9_20ig1")]
-modulate = Color(0, 0, 0, 1)
+modulate = Color(1, 0, 0, 1)
 position = Vector2(-72, 0)
 collision_layer = 16384
 collision_mask = 0
