@@ -39,10 +39,10 @@ func state_process(delta):
 
 ##Processes jumps and platform drops
 func jump_processing():
+	if world.has_node("UILayer/UIGroup/DialogBox"): return #prevent the jump after finishing dialog, this does allow it when held, though
 	if inp.pressed("jump") and Input.is_action_pressed("look_down") and pc.is_on_ssp and pc.can_input:
 		is_dropping = true
 		mm.drop()
-		return #is this needed?
 	elif !is_dropping and pc.can_input:
 		if inp.pressed("jump"):
 			mm.jump()

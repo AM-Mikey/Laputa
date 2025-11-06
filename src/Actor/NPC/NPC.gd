@@ -189,7 +189,7 @@ func enter_talk():
 
 func _input(event):
 	if event.is_action_pressed("inspect") and active_pc \
-	and dialog_json != "" and conversation != "" and state != "talk":
+	and dialog_json != "" and conversation != "" and state != "talk" and active_pc.mm.current_state == active_pc.mm.states["run"]:
 		if active_pc.can_input:
 			predialog_state = state
 			change_state("talk")
