@@ -229,7 +229,7 @@ func save_input_map():
 					inputs.append(["key", i.keycode])
 				if i is InputEventJoypadButton:
 					inputs.append(["joy", i.button_index])
-		data[a] = inputs
+		data[String(a)] = inputs
 
 
 	var file = FileAccess.open(input_map_path, FileAccess.WRITE)

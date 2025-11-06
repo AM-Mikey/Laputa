@@ -338,3 +338,22 @@ Transition frame Candidates:
 
 	- up_slope -> edge_front
 
+
+
+
+
+Dialog CHANGES
+
+-talk animations for npcs
+
+
+
+
+Input Map Changes
+
+ -configure presets & reset
+ -make presets as files
+ -update preset graphics
+ -prevent mapping keys to same buttons
+ -to keep consistancy with game behavior, we need to lock down menu accept, menu cancel, inspect to their associated buttons
+ 
