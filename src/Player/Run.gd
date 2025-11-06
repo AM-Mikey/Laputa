@@ -30,7 +30,6 @@ func state_process(delta):
 	pc.move_and_slide()
 	animate(delta)
 
-
 	if not pc.is_on_floor() and not pc.is_in_coyote:
 		pc.is_in_coyote = true
 		mm.do_coyote_time()
@@ -39,16 +38,19 @@ func state_process(delta):
 
 ##Processes jumps and platform drops
 func jump_processing():
-	if world.has_node("UILayer/UIGroup/DialogBox"): return #prevent the jump after finishing dialog, this does allow it when held, though
+	if world.has_node("UILayer/UIGroup/DialogBox"):
+		if !world.get_node("UILayer/UIGroup/DialogBox").is_exiting:
+			return #prevent the jump while db exists and is not exiting, this does allow holdjumping, though
+
 	if inp.pressed("jump") and Input.is_action_pressed("look_down") and pc.is_on_ssp and pc.can_input:
 		is_dropping = true
 		mm.drop()
 	elif !is_dropping and pc.can_input:
 		if inp.pressed("jump"):
 			mm.jump()
-		elif inp.buttonconfig.holdjumping:
-			if inp.held("jump"):
-				mm.jump()
+	elif inp.buttonconfig.holdjumping:
+		if inp.held("jump"):
+			mm.jump()
 
 
 

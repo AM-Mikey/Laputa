@@ -15,6 +15,7 @@ var current_text_array
 var step: int = 0 #step in printing dialog
 var is_sign = false
 var is_flavor = false
+var is_exiting = false
 
 var flash_original_text = ""
 enum {FLASH_NONE, FLASH_NORMAL, FLASH_END}
@@ -217,6 +218,8 @@ func progress_text(with_newline = true):
 
 
 func exit():
+	if is_exiting: return
+	is_exiting = true
 	emit_signal("dialog_finished")
 	if is_instance_valid(pc):
 		pc.mm.change_state("run") #change to run so we don't continue a jump
