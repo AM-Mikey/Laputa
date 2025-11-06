@@ -6,15 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://ba4mjche6bhat" path="res://assets/UI/Button/Outdated/OptionArrow.png" id="5"]
 [ext_resource type="StyleBox" uid="uid://cl4yme0wtg3po" path="res://src/UI/Slider/Slider.tres" id="6"]
 [ext_resource type="Texture2D" uid="uid://bh5618vuv7rqh" path="res://assets/UI/Slider/SliderGrabber.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://chyy7atco4qcp" path="res://assets/UI/Slider/Grabber.png" id="8"]
 [ext_resource type="StyleBox" uid="uid://bwe3j6hcp3u7j" path="res://src/UI/StyleBox/SteelBeveledLight.tres" id="10"]
 [ext_resource type="StyleBox" uid="uid://cb3gs2qq26l03" path="res://src/UI/StyleBox/RustTabsLight.tres" id="11"]
 [ext_resource type="StyleBox" uid="uid://ot23c6kiunqk" path="res://src/UI/StyleBox/RustTabsDark.tres" id="12"]
 [ext_resource type="StyleBox" uid="uid://djsxt54vtaivl" path="res://src/UI/Slider/ScrollBarGrabber.tres" id="13"]
 [ext_resource type="StyleBox" uid="uid://qim7rgmnpjii" path="res://src/UI/Slider/ScrollBarGrabberHighlight.tres" id="14"]
-[ext_resource type="Texture2D" uid="uid://dmw1vfsm1h4yx" path="res://assets/UI/Slider/ScrollBarGrabberHighlight.png" id="15"]
+[ext_resource type="Texture2D" uid="uid://bht7kghp51wa" path="res://assets/UI/Slider/SliderTick.png" id="14_ao67j"]
+[ext_resource type="StyleBox" uid="uid://b63vgk5a7tw0q" path="res://src/UI/Slider/SliderGrabberArea.tres" id="15_low3n"]
 [ext_resource type="StyleBox" uid="uid://nvs48gdh8bwm" path="res://src/UI/StyleBox/LeatherDark.tres" id="16"]
-[ext_resource type="Texture2D" uid="uid://cu4qudjqpkt75" path="res://assets/UI/Slider/Slider.png" id="17"]
+[ext_resource type="StyleBox" uid="uid://g2yej05lk4sl" path="res://src/UI/Slider/SliderGrabberAreaHighlight.tres" id="16_b27pm"]
 [ext_resource type="Texture2D" uid="uid://bl1htelnmympq" path="res://assets/UI/Slider/SliderGrabberHighlight.png" id="18"]
 [ext_resource type="Texture2D" uid="uid://b45net78dvvix" path="res://assets/UI/Button/Outdated/CheckYes.png" id="19"]
 [ext_resource type="Texture2D" uid="uid://w0w1ohkjh6b4" path="res://assets/UI/Button/Outdated/CheckNo.png" id="20"]
@@ -43,15 +43,16 @@ Button/styles/focus = SubResource("12")
 Button/styles/hover = ExtResource("1")
 Button/styles/normal = ExtResource("21")
 Button/styles/pressed = ExtResource("16")
-CheckBox/colors/font_color = Color(0.88, 0.88, 0.88, 1)
+CheckBox/colors/font_color = Color(0.40784314, 0.007843138, 0.06666667, 1)
 CheckBox/colors/font_color_disabled = Color(0.9, 0.9, 0.9, 0.2)
 CheckBox/colors/font_color_hover = Color(0.94, 0.94, 0.94, 1)
 CheckBox/colors/font_color_hover_pressed = Color(1, 1, 1, 1)
 CheckBox/colors/font_color_pressed = Color(1, 1, 1, 1)
 CheckBox/constants/check_vadjust = 0
 CheckBox/constants/hseparation = 4
-CheckBox/icons/checked = ExtResource("15")
-CheckBox/icons/unchecked = ExtResource("17")
+CheckBox/icons/checked = ExtResource("22")
+CheckBox/icons/unchecked = ExtResource("23")
+CheckBox/styles/normal = ExtResource("25")
 CheckButton/colors/font_color = Color(0.88, 0.88, 0.88, 1)
 CheckButton/colors/font_color_disabled = Color(0.9, 0.9, 0.9, 0.2)
 CheckButton/colors/font_color_hover = Color(0.94, 0.94, 0.94, 1)
@@ -65,8 +66,11 @@ HScrollBar/styles/grabber = ExtResource("13")
 HScrollBar/styles/grabber_highlight = ExtResource("14")
 HScrollBar/styles/grabber_pressed = ExtResource("14")
 HScrollBar/styles/scroll = ExtResource("6")
-HSlider/icons/grabber = ExtResource("8")
+HSlider/icons/grabber = ExtResource("7")
 HSlider/icons/grabber_highlight = ExtResource("18")
+HSlider/icons/tick = ExtResource("14_ao67j")
+HSlider/styles/grabber_area = ExtResource("15_low3n")
+HSlider/styles/grabber_area_highlight = ExtResource("16_b27pm")
 HSlider/styles/slider = ExtResource("6")
 ItemList/colors/font_color = Color(0.968627, 0.886275, 0.717647, 1)
 ItemList/colors/font_color_selected = Color(0.882353, 0.882353, 0.882353, 1)
@@ -117,4 +121,7 @@ VScrollBar/styles/grabber_highlight = ExtResource("14")
 VScrollBar/styles/grabber_pressed = ExtResource("14")
 VScrollBar/styles/scroll = ExtResource("6")
 VSlider/icons/grabber = ExtResource("7")
+VSlider/icons/grabber_highlight = ExtResource("18")
+VSlider/styles/grabber_area = ExtResource("15_low3n")
+VSlider/styles/grabber_area_highlight = ExtResource("16_b27pm")
 VSlider/styles/slider = ExtResource("6")

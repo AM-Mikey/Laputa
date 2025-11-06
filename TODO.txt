@@ -356,4 +356,4 @@ Input Map Changes
  -update preset graphics
  -prevent mapping keys to same buttons
  -to keep consistancy with game behavior, we need to lock down menu accept, menu cancel, inspect to their associated buttons
- 
+ -jump on hold setting

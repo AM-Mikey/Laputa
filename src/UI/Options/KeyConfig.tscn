@@ -65,7 +65,7 @@ toggle_mode = true
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/jump"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
-text = "Jump"
+text = "Jump / Menu Accept"
 
 [node name="fire_manual" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
 layout_mode = 2
@@ -78,7 +78,7 @@ toggle_mode = true
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/fire_manual"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
-text = "Manual Fire"
+text = "Manual Fire / Menu Cancel"
 
 [node name="fire_automatic" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
 layout_mode = 2
@@ -143,59 +143,7 @@ toggle_mode = true
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/look_down"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
-text = "Look Down"
-
-[node name="ui_accept" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/ui_accept"]
-layout_mode = 2
-toggle_mode = true
-
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/ui_accept"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_vje3i")
-text = "Menu Accept"
-
-[node name="ui_cancel" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/ui_cancel"]
-layout_mode = 2
-toggle_mode = true
-
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/ui_cancel"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_vje3i")
-text = "Menu Cancel"
-
-[node name="inspect" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/inspect"]
-layout_mode = 2
-toggle_mode = true
-
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/inspect"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_vje3i")
-text = "Inspect"
-
-[node name="inventory" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/inventory"]
-layout_mode = 2
-toggle_mode = true
-
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/inventory"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_vje3i")
-text = "Inventory"
+text = "Look Down / Inspect"
 
 [node name="gun_left" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
 layout_mode = 2
@@ -223,6 +171,19 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Previous Gun"
 
+[node name="inventory" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/inventory"]
+layout_mode = 2
+toggle_mode = true
+
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/inventory"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vje3i")
+text = "Inventory"
+
 [node name="pause" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -237,24 +198,25 @@ theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Pause"
 
 [node name="Settings" type="VBoxContainer" parent="Margin/HBox"]
-visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Margin/HBox/Settings"]
 layout_mode = 2
 text = "Settings:"
 
-[node name="Mouse" type="VBoxContainer" parent="Margin/HBox/Settings"]
+[node name="JumpOnHold" type="VBoxContainer" parent="Margin/HBox/Settings"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/HBox/Settings/Mouse"]
+[node name="Label" type="Label" parent="Margin/HBox/Settings/JumpOnHold"]
+visible = false
 layout_mode = 2
-text = "Allow Mouse"
+text = "Jump on Hold"
 
-[node name="Button" type="CheckButton" parent="Margin/HBox/Settings/Mouse"]
+[node name="Button" type="CheckBox" parent="Margin/HBox/Settings/JumpOnHold"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
+text = "Jump on Hold"
 
 [node name="Control" type="Control" parent="Margin/HBox"]
 layout_mode = 2

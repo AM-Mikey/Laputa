@@ -1,0 +1,13 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://b63vgk5a7tw0q"]
+
+[ext_resource type="Texture2D" uid="uid://cmbf4cgwf2d5i" path="res://assets/UI/Slider/GrabberArea.png" id="1_lf45h"]
+
+[resource]
+texture = ExtResource("1_lf45h")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 4, 4)
