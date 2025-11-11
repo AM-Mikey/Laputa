@@ -27,9 +27,9 @@ func on_limit_camera(left, right, top, bottom):
 		b.free()
 
 
-	if  get_window().get_size().x > (right - left) * world.resolution_scale:
+	if  get_window().get_size().x > (right - left) * vs.resolution_scale:
 		print("WARNING: window width larger than camera limit")
-		var extra_margin = ((get_window().get_size().x / world.resolution_scale) - (right - left))/2
+		var extra_margin = ((get_window().get_size().x / vs.resolution_scale) - (right - left))/2
 
 		limit_left = left - extra_margin
 		limit_right = right + extra_margin
@@ -51,7 +51,7 @@ func on_limit_camera(left, right, top, bottom):
 		limit_left = left
 		limit_right = right
 
-	if get_window().get_size().y > (bottom - top) * world.resolution_scale:
+	if get_window().get_size().y > (bottom - top) * vs.resolution_scale:
 		print("WARNING: window height larger than camera limit")
 		var extra_margin = (get_window().get_size().y - (bottom - top))/2
 		limit_top = top - extra_margin
