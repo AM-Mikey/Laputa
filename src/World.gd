@@ -146,6 +146,8 @@ func change_level_via_code(level_path):
 	current_level.queue_free()
 	current_level = null
 
+	if (get_node_or_null("Juniper")):
+		$Juniper.free()
 	add_child(JUNIPER.instantiate())
 	$Juniper/PlayerCamera.position_smoothing_enabled = false
 	uig.add_child(HUD.instantiate())
