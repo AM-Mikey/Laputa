@@ -94,6 +94,5 @@ libraries = {
 
 [node name="BlackoutLayer" type="CanvasLayer" parent="."]
 process_mode = 3
-visible = false
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
