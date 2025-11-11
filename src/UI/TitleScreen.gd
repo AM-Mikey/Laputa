@@ -42,13 +42,8 @@ func do_focus():
 func _on_new():
 	queue_free()
 
-	w.on_level_change(w.start_level.scence_file_path, -1)
-	w.add_child(JUNIPER.instantiate())
-	w.get_node("UILayer/UIGroup").add_child(HUD.instantiate())
-
-	var spawn_points = get_tree().get_nodes_in_group("SpawnPoints")
-	for s in spawn_points:
-		w.get_node("Juniper").position = s.global_position
+	get_tree().paused = false
+	w.change_level_via_code(w.start_level_path)
 
 func _on_load():
 	queue_free()
