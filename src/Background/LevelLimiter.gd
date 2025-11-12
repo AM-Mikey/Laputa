@@ -18,7 +18,7 @@ enum BackTileMode {DEFAULT, BOTH, HORIZONTAL, VERTICAL, NONE}
 @export var back_tile_mode: BackTileMode
 
 var layer_repeating_length := 5000
-var camera: Node
+var camera: Camera2D
 var texture_rects: Dictionary
 
 @onready var w = get_tree().get_root().get_node("World")
@@ -32,10 +32,22 @@ func _ready():
 	setup()
 
 func setup():
+	#Only setup after other thing in scene tree have already finished initialized
+	await(get_tree().process_frame)
+	camera = get_viewport().get_camera_2d()
+	#This manual check happen because Juniper get deleted and respawned in 1 frame when changing scene
+	#causing Godot to may fail to recognize the PlayerCamera.
+	if (camera == null):
+		var player_camera: Camera2D = w.get_node_or_null("Juniper/PlayerCamera")
+		if (player_camera and player_camera.enabled):
+			camera = player_camera
+			camera.make_current()
+
 	setup_background_resource()
 	setup_layers()
 	set_focus()
-	camera = get_viewport().get_camera_2d()
+
+	#Wait for the entire tree done initializing to have a proper camera
 	if camera:
 		connect("limit_camera", Callable(camera, "on_limit_camera"))
 		if camera.name == "EditorCamera":
