@@ -81,6 +81,12 @@ func _input(event):
 					pc.mm.change_state("jump")
 					#pc.mm.change_state(pc.mm.cached_state.name.to_lower()) #gave errors
 
+		if event.is_action_pressed("debug_killbind"):
+			if w.has_node("Juniper"):
+				var pc = w.get_node("Juniper")
+				if !pc.die_from_falling or pc.mm.current_state == pc.mm.states["fly"]:
+					return
+				pc.die()
 
 		if event.is_action_pressed("debug_slowmode"):
 			if Engine.time_scale != 0.5:
