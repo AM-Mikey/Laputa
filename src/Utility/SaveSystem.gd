@@ -74,6 +74,7 @@ func read_player_data_from_save():
 		guns.add_child(gun_scene.instantiate())
 
 	for g in guns.get_children():
+		g.visible = (g == guns.get_child(0))
 		g.level = player_data["gun_data"][g.name]["level"]
 		g.xp = player_data["gun_data"][g.name]["xp"]
 		if g.max_ammo != 0:
