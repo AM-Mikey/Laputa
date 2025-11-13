@@ -154,8 +154,7 @@ func _on_hit(damage, blood_direction): #inhereted for enemies to do something on
 ### DAMAGE NUMBER ###
 
 func set_damagenum(damage):
-	var sprite_rect: Rect2 = $Sprite2D.get_rect()
-	var y_offset = sprite_rect.position.y - 4
+	var y_offset = $Sprite2D.get_rect().position.y - 2
 
 	if damage_number == null:
 		damage_number = DAMAGE_NUMBER.instantiate()
