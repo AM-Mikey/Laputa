@@ -829,7 +829,8 @@ func play_animation(animation):
 func calc_velocity():
 	var out = pc.velocity
 	#Y
-	out.y += mm.gravity * get_physics_process_delta_time()
+	if (!pc.is_on_floor()):
+		out.y += mm.gravity * get_physics_process_delta_time()
 	#X
 	if pc.move_dir.x != 0.0:
 		var max_speed = mm.speed.x
@@ -852,6 +853,7 @@ func calc_velocity():
 		out.x = lerp(out.x, 0.0, mm.ground_cof)
 	if abs(out.x) < mm.min_x_velocity: #clamp velocity
 		out.x = 0
+	print(out)
 	return out
 
 
