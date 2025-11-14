@@ -113,6 +113,8 @@ func _input(event):
 
 func first_time_level_setup():
 	print("first time level setup")
+	$UILayer/UIGroup/AnimationPlayer.stop()
+
 	add_child(JUNIPER.instantiate())
 	$Juniper/PlayerCamera.position_smoothing_enabled = false
 	uig.add_child(HUD.instantiate())
@@ -143,6 +145,7 @@ func change_level_via_code(level_path):
 	print("changing level via code...")
 	if uig.has_node("DialogBox"): $UILayer/UIGroup/DialogBox.exit()
 	clear_spawn_layers()
+	$UILayer/UIGroup/AnimationPlayer.stop()
 	current_level.queue_free()
 	current_level = null
 
@@ -176,6 +179,7 @@ func change_level_via_trigger(level_path, door_index):
 	print("changing level via trigger...")
 	SaveSystem.write_level_data_to_temp(current_level)
 	if uig.has_node("DialogBox"): $UILayer/UIGroup/DialogBox.stop_printing()
+	$UILayer/UIGroup/AnimationPlayer.stop()
 	clear_spawn_layers()
 	var old_level_path = current_level.scene_file_path
 	current_level.queue_free()
