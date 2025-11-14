@@ -853,7 +853,6 @@ func calc_velocity():
 		out.x = lerp(out.x, 0.0, mm.ground_cof)
 	if abs(out.x) < mm.min_x_velocity: #clamp velocity
 		out.x = 0
-	print(out)
 	return out
 
 
