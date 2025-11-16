@@ -1,9 +1,8 @@
 extends Node
-var buttonconfig:Dictionary = {
-	holdjumping = true,
-	buttons = {},
 
-	}
+			#SETTINGS
+var holdjumping: = true
+
 
 			#STICK
 var analogstick:Vector2 = Vector2(0,0)
