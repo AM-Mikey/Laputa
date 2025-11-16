@@ -16,6 +16,7 @@ signal hp_updated(hp, max_hp)
 signal guns_updated(guns, cause, do_xp_flash)
 signal xp_updated(xp, max_xp, level, max_level, do_xp_flash)
 signal money_updated(money)
+signal invincibility_end()
 
 
 @export var hp: int = 16
@@ -119,7 +120,6 @@ func hit(damage, knockback_direction):
 			hp -= damage
 			am.play("pc_hurt")
 			emit_signal("hp_updated", hp, max_hp)
-
 			if experience_number != null: experience_number.queue_free()
 			if heart_number != null: heart_number.queue_free()
 			if damage_number == null: #no damage_number
@@ -201,6 +201,7 @@ func die():
 ### SIGNALS ###
 func _on_IframeTimer_timeout() -> void:
 	invincible = false
+	emit_signal("invincibility_end")
 	$EffectPlayer.stop()
 	if not enemies_touching.is_empty():
 		hit_again()
