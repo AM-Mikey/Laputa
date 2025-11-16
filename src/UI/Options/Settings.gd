@@ -183,8 +183,7 @@ func load_settings():
 	
 	#input
 	if data.has("holdjumping"):
-		pass
-
+		inp.holdjumping = data['holdjumping']
 
 func write_data(data):
 	var file = FileAccess.open(settings_path, FileAccess.WRITE)

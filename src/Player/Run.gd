@@ -49,7 +49,6 @@ func jump_processing():
 		if inp.pressed("jump"):
 			mm.jump()
 		elif inp.holdjumping:
-			print ("elif inp holdjumping")
 			if inp.held("jump"):
 				mm.jump()
 
