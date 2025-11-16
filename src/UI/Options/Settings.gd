@@ -18,6 +18,9 @@ var default = {
 	"DisplayMode": 3,
 	"ResolutionScale": 0,
 	"MouseLock": false,
+	
+	#input
+	"holdjumping": true,
 	}
 var after_ready = false #so we don't trigger a change when loading settings
 var ignore_display_mode = false #so we don't reset the display mode during the options opening mid-game
@@ -103,7 +106,6 @@ func on_sfxvolume_changed(value):
 func change_bus_volume(value,busname:String):
 	var slidernode = get_node("Margin/Scroll/VBox/" + busname + "Volume")
 	var db = linear_to_db(value/10.0)
-	print (db)
 	if value == 0:
 		AudioServer.set_bus_mute(AudioServer.get_bus_index(busname),true)
 		slidernode.get_node("Label").text = "SFX Volume: Muted"
@@ -178,7 +180,10 @@ func load_settings():
 
 	mouselock.button_pressed = data["MouseLock"]
 	on_mouselock(data["MouseLock"])
-
+	
+	#input
+	if data.has("holdjumping"):
+		inp.holdjumping = data['holdjumping']
 
 func write_data(data):
 	var file = FileAccess.open(settings_path, FileAccess.WRITE)
