@@ -209,11 +209,11 @@ func update_hp(hp, max_hp):
 
 	if hp < hp_lost.value:
 		if hp > 0:
-			get_parent().get_node("AnimationPlayer").play("flash")
+			$AnimationPlayerHp.play("HpFlash")
 			var tween = get_tree().create_tween()
 			tween.tween_property(hp_lost, "value", hp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
 			await get_tree().create_timer(pc.iframe_time).timeout
-			get_parent().get_node("AnimationPlayer").stop()
+			$AnimationPlayerHp.stop()
 	else: #increasing, just set it
 		hp_lost.value = hp
 
