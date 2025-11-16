@@ -62,6 +62,7 @@ func _ready():
 		pc.guns_updated.connect(update_guns)
 		pc.xp_updated.connect(update_xp)
 		pc.money_updated.connect(update_money)
+		pc.invincibility_end.connect(update_hpflash)
 		pc.setup_hud()
 		setup_lost_bars(pc.hp, pc.guns.get_child(0).xp)
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
@@ -209,11 +210,10 @@ func update_hp(hp, max_hp):
 
 	if hp < hp_lost.value:
 		if hp > 0:
+			$AnimationPlayerHp.stop()
 			$AnimationPlayerHp.play("HpFlash")
 			var tween = get_tree().create_tween()
 			tween.tween_property(hp_lost, "value", hp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
-			await get_tree().create_timer(pc.iframe_time).timeout
-			$AnimationPlayerHp.stop()
 	else: #increasing, just set it
 		hp_lost.value = hp
 
@@ -302,6 +302,9 @@ func update_money(money):
 		print("WARNING: hud cannot display money higher than 999")
 	else:
 		printerr("ERROR: hud cannot display money value of: " + money)
+
+func update_hpflash():
+	$AnimationPlayerHp.stop()
 
 ### HELPER ###
 
