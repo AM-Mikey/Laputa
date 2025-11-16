@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdt0hp441qxe3"]
+[gd_scene load_steps=10 format=3 uid="uid://bdt0hp441qxe3"]
 
 [ext_resource type="Theme" uid="uid://c1np2xna4dogr" path="res://src/UI/Theme/InsetMenu.tres" id="1"]
-[ext_resource type="PackedScene" uid="uid://dllnonvd2winm" path="res://src/UI/Options/ActionOption.tscn" id="2"]
 [ext_resource type="StyleBox" uid="uid://bqcnin0ya0s5l" path="res://src/UI/StyleBox/SteelCorner.tres" id="4"]
+[ext_resource type="Texture2D" uid="uid://cb0gck5i2tl5r" path="res://assets/UI/Settings/ControllerFrontBase.png" id="4_nyot8"]
 [ext_resource type="Script" uid="uid://rb8u66djacvf" path="res://src/UI/Options/ControllerConfig.gd" id="5"]
-[ext_resource type="Texture2D" uid="uid://diafdejhbs5fg" path="res://assets/UI/Settings/Outdated/ControllerConfig/FrontBack.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://cxiylnvmsr6q1" path="res://assets/UI/Settings/ControllerFaceButton.png" id="5_4ypbq"]
+[ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="5_ripyc"]
+[ext_resource type="Texture2D" uid="uid://dmepnvo4rwqfg" path="res://assets/UI/Settings/ControllerDPad.png" id="6_ripyc"]
 [ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="7_nyot8"]
 [ext_resource type="Texture2D" uid="uid://ds8cfh1qceedo" path="res://assets/UI/Settings/Outdated/ControllerConfig/TopBack.png" id="14"]
 
@@ -21,6 +23,41 @@ script = ExtResource("5")
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2
 
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 2
+
+[node name="Top" type="TextureRect" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = ExtResource("14")
+
+[node name="HBox2" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HBox2"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+
+[node name="Front" type="TextureRect" parent="HBox2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("4_nyot8")
+
+[node name="FaceButtonLeft" type="Sprite2D" parent="HBox2/Front"]
+position = Vector2(150, 39)
+texture = ExtResource("5_4ypbq")
+centered = false
+hframes = 2
+
+[node name="DPad" type="Sprite2D" parent="HBox2/Front"]
+position = Vector2(31, 31)
+texture = ExtResource("6_ripyc")
+centered = false
+hframes = 9
+
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 2
 theme_override_constants/margin_left = 4
@@ -28,174 +65,147 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Top" type="TextureRect" parent="Margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-texture = ExtResource("14")
-
-[node name="Front" type="TextureRect" parent="Margin"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-texture = ExtResource("6")
-
-[node name="Sprites" type="VBoxContainer" parent="Margin"]
-visible = false
+[node name="HBox" type="HBoxContainer" parent="Margin"]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/Sprites"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/Sprites"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="Controls" type="HBoxContainer" parent="Margin"]
-layout_mode = 2
-
-[node name="Front" type="VBoxContainer" parent="Margin/Controls"]
+[node name="Controls" type="VBoxContainer" parent="Margin/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/Controls/Front"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls"]
 layout_mode = 2
+size_flags_horizontal = 3
+text = "Controls:"
 
-[node name="Dpad" type="VBoxContainer" parent="Margin/Controls/Front/HBoxContainer"]
-visible = false
+[node name="Scroll" type="ScrollContainer" parent="Margin/HBox/Controls"]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_vertical = 3
+follow_focus = true
 
-[node name="DpadUp" parent="Margin/Controls/Front/HBoxContainer/Dpad" instance=ExtResource("2")]
+[node name="VBox" type="VBoxContainer" parent="Margin/HBox/Controls/Scroll"]
 layout_mode = 2
-size_flags_horizontal = 4
+theme_override_constants/separation = 4
 
-[node name="HBox" type="HBoxContainer" parent="Margin/Controls/Front/HBoxContainer/Dpad"]
-layout_mode = 2
-
-[node name="DpadLeft" parent="Margin/Controls/Front/HBoxContainer/Dpad/HBox" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="DpadRight" parent="Margin/Controls/Front/HBoxContainer/Dpad/HBox" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="DpadDown" parent="Margin/Controls/Front/HBoxContainer/Dpad" instance=ExtResource("2")]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Menu" type="HBoxContainer" parent="Margin/Controls/Front/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="Select" parent="Margin/Controls/Front/HBoxContainer/Menu" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="Start" parent="Margin/Controls/Front/HBoxContainer/Menu" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="Face" type="VBoxContainer" parent="Margin/Controls/Front/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 10
-
-[node name="FaceUp" parent="Margin/Controls/Front/HBoxContainer/Face" instance=ExtResource("2")]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="HBox" type="HBoxContainer" parent="Margin/Controls/Front/HBoxContainer/Face"]
-layout_mode = 2
-
-[node name="FaceLeft" parent="Margin/Controls/Front/HBoxContainer/Face/HBox" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="FaceRight" parent="Margin/Controls/Front/HBoxContainer/Face/HBox" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="FaceDown" parent="Margin/Controls/Front/HBoxContainer/Face" instance=ExtResource("2")]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="TextureRect" type="TextureRect" parent="Margin/Controls/Front"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 8
-texture = ExtResource("6")
-
-[node name="Top" type="VBoxContainer" parent="Margin/Controls"]
+[node name="jump" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control" type="Control" parent="Margin/Controls/Top"]
-custom_minimum_size = Vector2(0, 80)
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/jump"]
+layout_mode = 2
+toggle_mode = true
+
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/jump"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_ripyc")
+text = "Jump / Menu Accept"
+
+[node name="fire_manual" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/fire_manual"]
+layout_mode = 2
+toggle_mode = true
+
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/fire_manual"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_ripyc")
+text = "Manual Fire / Menu Cancel"
+
+[node name="fire_automatic" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/fire_automatic"]
+layout_mode = 2
+toggle_mode = true
+
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/fire_automatic"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_ripyc")
+text = "Automatic Fire / Direction Lock"
+
+[node name="gun_left" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/gun_left"]
+layout_mode = 2
+toggle_mode = true
+
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/gun_left"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_ripyc")
+text = "Next Gun"
+
+[node name="gun_right" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/gun_right"]
+layout_mode = 2
+toggle_mode = true
+
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/gun_right"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_ripyc")
+text = "Previous Gun"
+
+[node name="inventory" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/inventory"]
+layout_mode = 2
+toggle_mode = true
+
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/inventory"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_ripyc")
+text = "Inventory"
+
+[node name="pause" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/pause"]
+layout_mode = 2
+toggle_mode = true
+
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/pause"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_ripyc")
+text = "Pause"
+
+[node name="Settings" type="VBoxContainer" parent="Margin/HBox"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Margin/HBox/Settings"]
+layout_mode = 2
+text = "Settings:"
+
+[node name="JumpOnHold" type="VBoxContainer" parent="Margin/HBox/Settings"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Margin/Controls/Top"]
-visible = false
+[node name="Button" type="CheckBox" parent="Margin/HBox/Settings/JumpOnHold"]
 layout_mode = 2
+size_flags_horizontal = 6
 size_flags_vertical = 0
-texture = ExtResource("14")
+text = "Jump on Hold"
 
-[node name="Top" type="HBoxContainer" parent="Margin/Controls/Top"]
+[node name="DisableAnalog" type="VBoxContainer" parent="Margin/HBox/Settings"]
 layout_mode = 2
 
-[node name="Left" type="VBoxContainer" parent="Margin/Controls/Top/Top"]
-layout_mode = 2
-size_flags_horizontal = 6
-
-[node name="L1" parent="Margin/Controls/Top/Top/Left" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="L2" parent="Margin/Controls/Top/Top/Left" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="Stick" type="HBoxContainer" parent="Margin/Controls/Top/Top"]
+[node name="Button" type="CheckBox" parent="Margin/HBox/Settings/DisableAnalog"]
 layout_mode = 2
 size_flags_horizontal = 6
-size_flags_vertical = 4
+size_flags_vertical = 0
+text = "Disable Analog"
 
-[node name="L3" parent="Margin/Controls/Top/Top/Stick" instance=ExtResource("2")]
+[node name="Control" type="Control" parent="Margin/HBox/Settings"]
+custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
-
-[node name="R3" parent="Margin/Controls/Top/Top/Stick" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="Right" type="VBoxContainer" parent="Margin/Controls/Top/Top"]
-layout_mode = 2
-size_flags_horizontal = 6
-
-[node name="R1" parent="Margin/Controls/Top/Top/Right" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="R2" parent="Margin/Controls/Top/Top/Right" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="Extra" type="HBoxContainer" parent="Margin/Controls/Top"]
-layout_mode = 2
-
-[node name="MenuButtons" type="VBoxContainer" parent="Margin/Controls/Top/Extra"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Margin/Controls/Top/Extra/MenuButtons"]
-layout_mode = 2
-text = "Select Style"
-
-[node name="OptionButton" type="OptionButton" parent="Margin/Controls/Top/Extra/MenuButtons"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MenuButtons3" type="VBoxContainer" parent="Margin/Controls/Top/Extra"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Margin/Controls/Top/Extra/MenuButtons3"]
-layout_mode = 2
-text = "Movement"
-
-[node name="OptionButton" type="OptionButton" parent="Margin/Controls/Top/Extra/MenuButtons3"]
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="Corner" type="Panel" parent="."]
 custom_minimum_size = Vector2(124, 44)
