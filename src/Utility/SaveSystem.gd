@@ -57,6 +57,7 @@ func read_player_data_from_save():
 
 	var pc = f.pc()
 	var guns = pc.guns
+	pc.get_node("PlayerCamera").position_smoothing_enabled = false
 	pc.position = player_data["position"]
 	pc.hp = player_data["hp"]
 	pc.max_hp = player_data["max_hp"]
@@ -84,6 +85,9 @@ func read_player_data_from_save():
 	pc.emit_signal("guns_updated", guns.get_children())
 	pc.update_inventory()
 	print("player data loaded")
+
+	await (get_tree().process_frame)
+	pc.get_node("PlayerCamera").position_smoothing_enabled = true
 
 
 
