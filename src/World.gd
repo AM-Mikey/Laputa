@@ -135,6 +135,8 @@ func first_time_level_setup():
 	#wipe would go here if we want one
 	display_level_text(current_level)
 	SaveSystem.read_level_data_from_temp(current_level)
+
+	await(get_tree().process_frame)
 	$Juniper/PlayerCamera.position_smoothing_enabled = true
 
 
