@@ -72,7 +72,15 @@ tile_set = ExtResource("4_ris4u")
 
 [node name="Triggers" type="Node2D" parent="."]
 
-[node name="Door" parent="Triggers" instance=ExtResource("7_0p40l")]
+[node name="SunLight" parent="." instance=ExtResource("5_64d5n")]
+position = Vector2(35, -198)
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="SpawnPoint" parent="Spawns" instance=ExtResource("6_v20vf")]
+position = Vector2(144, -16)
+
+[node name="Door" parent="Spawns" instance=ExtResource("7_0p40l")]
 modulate = Color(1, 1, 1, 0.75)
 offset_left = 16.0
 offset_top = -48.0
@@ -86,14 +94,6 @@ properties = {
 "level": ["WastesTesting", 4],
 "locked": [false, 1]
 }
-
-[node name="SunLight" parent="." instance=ExtResource("5_64d5n")]
-position = Vector2(35, -198)
-
-[node name="Spawns" type="Node2D" parent="."]
-
-[node name="SpawnPoint" parent="Spawns" instance=ExtResource("6_v20vf")]
-position = Vector2(144, -16)
 
 [node name="TileAnimator" type="Node2D" parent="."]
 script = ExtResource("7_85c3g")

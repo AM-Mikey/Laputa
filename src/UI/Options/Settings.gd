@@ -18,7 +18,7 @@ var default = {
 	"DisplayMode": 3,
 	"ResolutionScale": 0,
 	"MouseLock": false,
-	
+
 	#input
 	"holdjumping": true,
 	}
@@ -180,7 +180,7 @@ func load_settings():
 
 	mouselock.button_pressed = data["MouseLock"]
 	on_mouselock(data["MouseLock"])
-	
+
 	#input
 	if data.has("holdjumping"):
 		inp.holdjumping = data['holdjumping']

@@ -72,7 +72,12 @@ tile_set = ExtResource("5_kbt1g")
 
 [node name="Triggers" type="Node2D" parent="."]
 
-[node name="Door" parent="Triggers" instance=ExtResource("7_orb5h")]
+[node name="SunLight" parent="." instance=ExtResource("8_fxtnk")]
+position = Vector2(128, -216)
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="Door" parent="Spawns" instance=ExtResource("7_orb5h")]
 modulate = Color(1, 1, 1, 0.75)
 offset_left = -112.0
 offset_top = -32.0
@@ -88,8 +93,3 @@ properties = {
 "same_level_next_index": [0, 2]
 }
 size_is_default = false
-
-[node name="SunLight" parent="." instance=ExtResource("8_fxtnk")]
-position = Vector2(128, -216)
-
-[node name="Spawns" type="Node2D" parent="."]

@@ -89,37 +89,6 @@ sprite = 1
 
 [node name="Triggers" type="Node2D" parent="."]
 
-[node name="Water" parent="Triggers" instance=ExtResource("7_4qvu0")]
-modulate = Color(1, 1, 1, 0.75)
-offset_left = 1168.0
-offset_top = 592.0
-offset_right = 1504.0
-offset_bottom = 640.0
-trigger_path = "res://src/Trigger/Water.tscn"
-properties = {
-"color": [Color(0, 0, 0.701961, 1), 20],
-"editor_hidden": [false, 1]
-}
-size_is_default = false
-
-[node name="Door" parent="Triggers" instance=ExtResource("7_4qvu0")]
-modulate = Color(1, 1, 1, 0.75)
-offset_left = 1792.0
-offset_top = 128.0
-offset_right = 1808.0
-offset_bottom = 160.0
-trigger_path = "res://src/Trigger/Door.tscn"
-properties = {
-"color": [Color(0, 0.4, 0, 1), 20],
-"door_index": [0, 2],
-"editor_hidden": [false, 1],
-"level": ["DogtownEast", 4],
-"locked": [false, 1],
-"same_level": [false, 1],
-"same_level_next_index": [0, 2]
-}
-size_is_default = false
-
 [node name="SunLight" parent="." instance=ExtResource("7_t8fqs")]
 position = Vector2(128, -216)
 
@@ -149,3 +118,34 @@ properties = {
 "jump_delay": [3.0, 3],
 "speed": [Vector2(50, 100), 5]
 }
+
+[node name="Water" parent="Spawns" instance=ExtResource("7_4qvu0")]
+modulate = Color(1, 1, 1, 0.75)
+offset_left = 1168.0
+offset_top = 592.0
+offset_right = 1504.0
+offset_bottom = 640.0
+trigger_path = "res://src/Trigger/Water.tscn"
+properties = {
+"color": [Color(0, 0, 0.701961, 1), 20],
+"editor_hidden": [false, 1]
+}
+size_is_default = false
+
+[node name="Door" parent="Spawns" instance=ExtResource("7_4qvu0")]
+modulate = Color(1, 1, 1, 0.75)
+offset_left = 1792.0
+offset_top = 128.0
+offset_right = 1808.0
+offset_bottom = 160.0
+trigger_path = "res://src/Trigger/Door.tscn"
+properties = {
+"color": [Color(0, 0.4, 0, 1), 20],
+"door_index": [0, 2],
+"editor_hidden": [false, 1],
+"level": ["DogtownEast", 4],
+"locked": [false, 1],
+"same_level": [false, 1],
+"same_level_next_index": [0, 2]
+}
+size_is_default = false
