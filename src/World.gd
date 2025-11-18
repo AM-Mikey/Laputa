@@ -149,8 +149,18 @@ func change_level_via_code(level_path):
 	if (get_node_or_null("Juniper")):
 		$Juniper.free()
 	add_child(JUNIPER.instantiate())
-	$Juniper/PlayerCamera.position_smoothing_enabled = false
+
+	if uig.has_node("DialogBox"):
+		$UILayer/UIGroup/DialogBox.stop_printing()
+
+	if ml.has_node("PauseMenu"):
+		ml.get_node("PauseMenu").unpause()
+
+	if (uig.get_node_or_null("HUD")):
+		uig.get_node("HUD").free()
 	uig.add_child(HUD.instantiate())
+
+	$Juniper/PlayerCamera.position_smoothing_enabled = false
 
 	current_level = load(level_path).instantiate()
 	add_child(current_level)

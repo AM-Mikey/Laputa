@@ -44,8 +44,7 @@ func _on_new():
 
 	get_tree().paused = false
 	w.ui.visible = true
-	if w.uig.has_node("HUD"):
-		w.uig.get_node("HUD").free()
+
 	w.change_level_via_code(w.start_level_path)
 
 
@@ -54,8 +53,6 @@ func _on_load():
 
 	get_tree().paused = false
 	w.ui.visible = true
-	if w.uig.has_node("HUD"):
-		w.uig.get_node("HUD").free()
 
 	SaveSystem.read_player_data_from_save()
 	SaveSystem.read_level_data_from_save(w.current_level)
