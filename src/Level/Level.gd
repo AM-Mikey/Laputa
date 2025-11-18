@@ -36,7 +36,7 @@ func _ready():
 
 func do_playerless_cutscene():
 	if w.has_node("UILayer/UIGroup/DialogBox"): #clear old dialog box if there is one
-		w.get_node("UILayer/UIGroup/DialogBox").stop_printing()
+		w.get_node("UILayer/UIGroup/DialogBox").exit()
 
 	var dialog_box = DB.instantiate()
 	dialog_box.connect("dialog_finished", Callable(self, "on_dialog_finished"))

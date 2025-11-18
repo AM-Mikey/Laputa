@@ -151,7 +151,7 @@ func change_level_via_code(level_path):
 	add_child(JUNIPER.instantiate())
 
 	if uig.has_node("DialogBox"):
-		$UILayer/UIGroup/DialogBox.stop_printing()
+		$UILayer/UIGroup/DialogBox.exit()
 
 	if ml.has_node("PauseMenu"):
 		ml.get_node("PauseMenu").unpause()
@@ -185,7 +185,7 @@ func change_level_via_code(level_path):
 func change_level_via_trigger(level_path, door_index):
 	print("changing level via trigger...")
 	SaveSystem.write_level_data_to_temp(current_level)
-	if uig.has_node("DialogBox"): $UILayer/UIGroup/DialogBox.stop_printing()
+	if uig.has_node("DialogBox"): $UILayer/UIGroup/DialogBox.exit()
 	clear_spawn_layers()
 	var old_level_path = current_level.scene_file_path
 	current_level.queue_free()
