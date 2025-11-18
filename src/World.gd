@@ -135,7 +135,8 @@ func first_time_level_setup():
 	#wipe would go here if we want one
 	display_level_text(current_level)
 	SaveSystem.read_level_data_from_temp(current_level)
-	await get_tree().process_frame
+
+	await(get_tree().process_frame)
 	$Juniper/PlayerCamera.position_smoothing_enabled = true
 
 
@@ -171,6 +172,9 @@ func change_level_via_code(level_path):
 	display_level_text(current_level)
 	SaveSystem.read_level_data_from_temp(current_level)
 
+	await(get_tree().process_frame)
+	$Juniper/PlayerCamera.position_smoothing_enabled = true
+
 
 func change_level_via_trigger(level_path, door_index):
 	print("changing level via trigger...")
@@ -180,6 +184,7 @@ func change_level_via_trigger(level_path, door_index):
 	var old_level_path = current_level.scene_file_path
 	current_level.queue_free()
 	current_level = null
+
 	await get_tree().process_frame
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
