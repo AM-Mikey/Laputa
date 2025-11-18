@@ -112,14 +112,27 @@ func enter_squirm():
 func enter_run():
 	speed = Vector2(100, 100)
 	$AnimationPlayer.play("Run")
+	$WallDetection.enabled = true
 
 func do_run():
 	match move_dir:
-		Vector2.LEFT: $Sprite2D.flip_h = false
-		Vector2.RIGHT: $Sprite2D.flip_h = true
+		Vector2.LEFT:
+			$Sprite2D.flip_h = false
+			$WallDetection.target_position = Vector2(-8.0, 0.0)
+		Vector2.RIGHT:
+			$Sprite2D.flip_h = true
+			$WallDetection.target_position = Vector2(8.0, 0.0)
 
-	if is_on_wall():
-			move_dir.x *= -1
+	#var collision: KinematicCollision2D = move_and_collide(velocity * get_physics_process_delta_time(), true)
+	#if collision:
+		#var collision_angle: float = $GroundedCollision.global_position.angle_to_point(collision.get_position())
+		#print("Collided: ", collision_angle, " with: ", collision.get_collider().name)
+		#if (collision_angle in [0, PI, -PI]):
+			#move_dir.x *= -1
+
+	if ($WallDetection.is_colliding()):
+		print("A")
+		move_dir.x *= -1
 
 
 func enter_stake():
