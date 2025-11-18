@@ -241,7 +241,7 @@ func save_input_map():
 		printerr("ERROR: input map data could not be saved!")
 
 
-func load_input_map():
+func load_input_map(): #called on savesystem load options #TODO: migrate to Inputconfig script
 	var data
 	if FileAccess.file_exists(input_map_path):
 		var file = FileAccess.open(input_map_path, FileAccess.READ)

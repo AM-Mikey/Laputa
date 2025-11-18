@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtk7s7dg2tgto"
-path="res://.godot/imported/ScrewRight.png-a2fba659d8fbb7b8ed1db672770dbe69.ctex"
+uid="uid://dmukppxf0fs14"
+path="res://.godot/imported/Stick.png-df03b55d190f4c05e73bb02a8e222747.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Settings/Outdated/ControllerConfig/ScrewRight.png"
-dest_files=["res://.godot/imported/ScrewRight.png-a2fba659d8fbb7b8ed1db672770dbe69.ctex"]
+source_file="res://assets/UI/Options/Outdated/ControllerConfig/Stick.png"
+dest_files=["res://.godot/imported/Stick.png-df03b55d190f4c05e73bb02a8e222747.ctex"]
 
 [params]
 

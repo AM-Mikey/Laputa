@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://dqramyf8aeeyv"]
 
 [ext_resource type="Theme" uid="uid://c1np2xna4dogr" path="res://src/UI/Theme/InsetMenu.tres" id="1"]
-[ext_resource type="Texture2D" uid="uid://cl3sa7nubis6p" path="res://assets/UI/Settings/KeyboardMouse.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://bmeh5rfp6bvek" path="res://assets/UI/Settings/KeyboardClassic.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://cl3sa7nubis6p" path="res://assets/UI/Options/KeyboardMouse.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bmeh5rfp6bvek" path="res://assets/UI/Options/KeyboardClassic.png" id="3"]
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="3_vje3i"]
-[ext_resource type="Texture2D" uid="uid://ccaq53m8l5g3c" path="res://assets/UI/Settings/KeyboardCustom.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://ccaq53m8l5g3c" path="res://assets/UI/Options/KeyboardCustom.png" id="4"]
 [ext_resource type="Script" uid="uid://cq6xxd8uisqit" path="res://src/UI/Options/KeyConfig.gd" id="6"]
 [ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="8_rkq2i"]
 [ext_resource type="StyleBox" uid="uid://bqcnin0ya0s5l" path="res://src/UI/StyleBox/SteelCorner.tres" id="9"]
@@ -65,7 +65,7 @@ toggle_mode = true
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/jump"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
-text = "Jump / Menu Accept"
+text = "Jump / Accept"
 
 [node name="fire_manual" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
 layout_mode = 2
@@ -78,7 +78,7 @@ toggle_mode = true
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/fire_manual"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
-text = "Manual Fire / Menu Cancel"
+text = "Manual Fire / Cancel"
 
 [node name="fire_automatic" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
 layout_mode = 2
@@ -91,7 +91,7 @@ toggle_mode = true
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/fire_automatic"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
-text = "Automatic Fire / Direction Lock"
+text = "Automatic Fire / Lock Direction"
 
 [node name="move_left" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
 layout_mode = 2
@@ -156,7 +156,7 @@ toggle_mode = true
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/gun_left"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
-text = "Next Gun"
+text = "Previous Gun"
 
 [node name="gun_right" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
 layout_mode = 2
@@ -169,7 +169,7 @@ toggle_mode = true
 [node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/gun_right"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
-text = "Previous Gun"
+text = "Next Gun"
 
 [node name="inventory" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
 layout_mode = 2

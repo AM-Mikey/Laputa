@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ba7bibf835xw0"
-path="res://.godot/imported/CompassFront.png-6faaa68b1958f99c72a9a0836975324e.ctex"
+uid="uid://bx4l2ys7ondt6"
+path="res://.godot/imported/ButtonPromptFloating.png-a2cf435c9c166ff7055d7d05afeaf9a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Settings/Outdated/ControllerConfig/CompassFront.png"
-dest_files=["res://.godot/imported/CompassFront.png-6faaa68b1958f99c72a9a0836975324e.ctex"]
+source_file="res://assets/UI/ButtonPromptFloating.png"
+dest_files=["res://.godot/imported/ButtonPromptFloating.png-a2cf435c9c166ff7055d7d05afeaf9a7.ctex"]
 
 [params]
 

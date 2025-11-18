@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ds8cfh1qceedo"
-path="res://.godot/imported/TopBack.png-2591386bb0f0a29d8aa9c09f876e7792.ctex"
+uid="uid://cb0gck5i2tl5r"
+path="res://.godot/imported/ControllerFrontBase.png-5a11b3947bd41b6371aaaeaaaeb5e056.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Settings/Outdated/ControllerConfig/TopBack.png"
-dest_files=["res://.godot/imported/TopBack.png-2591386bb0f0a29d8aa9c09f876e7792.ctex"]
+source_file="res://assets/UI/Options/ControllerFrontBase.png"
+dest_files=["res://.godot/imported/ControllerFrontBase.png-5a11b3947bd41b6371aaaeaaaeb5e056.ctex"]
 
 [params]
 

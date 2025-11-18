@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmepnvo4rwqfg"
-path="res://.godot/imported/ControllerDPad.png-b1f37081797a1b058ad17599699c12bd.ctex"
+uid="uid://ba7bibf835xw0"
+path="res://.godot/imported/CompassFront.png-aae5b5a2ae65fb4d378e814880416fc1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Settings/ControllerDPad.png"
-dest_files=["res://.godot/imported/ControllerDPad.png-b1f37081797a1b058ad17599699c12bd.ctex"]
+source_file="res://assets/UI/Options/Outdated/ControllerConfig/CompassFront.png"
+dest_files=["res://.godot/imported/CompassFront.png-aae5b5a2ae65fb4d378e814880416fc1.ctex"]
 
 [params]
 

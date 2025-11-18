@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qut4yvt4bmsh"
-path="res://.godot/imported/FaceButton.png-2668abb68f879c6afe9331c5b79deac4.ctex"
+uid="uid://bmeh5rfp6bvek"
+path="res://.godot/imported/KeyboardClassic.png-84eb0844c1d069faf1d4d5dd1e597a67.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Settings/Outdated/ControllerConfig/FaceButton.png"
-dest_files=["res://.godot/imported/FaceButton.png-2668abb68f879c6afe9331c5b79deac4.ctex"]
+source_file="res://assets/UI/Options/KeyboardClassic.png"
+dest_files=["res://.godot/imported/KeyboardClassic.png-84eb0844c1d069faf1d4d5dd1e597a67.ctex"]
 
 [params]
 

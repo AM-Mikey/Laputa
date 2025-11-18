@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmd0ieaei5ijl"
-path="res://.godot/imported/ControllerFaceButtonPressed.png-972df532eaf739932841a95a0e35c1c4.ctex"
+uid="uid://cl3sa7nubis6p"
+path="res://.godot/imported/KeyboardMouse.png-fb60189f74511a84cda56a4e6eb276c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Settings/ControllerFaceButtonPressed.png"
-dest_files=["res://.godot/imported/ControllerFaceButtonPressed.png-972df532eaf739932841a95a0e35c1c4.ctex"]
+source_file="res://assets/UI/Options/KeyboardMouse.png"
+dest_files=["res://.godot/imported/KeyboardMouse.png-fb60189f74511a84cda56a4e6eb276c6.ctex"]
 
 [params]
 

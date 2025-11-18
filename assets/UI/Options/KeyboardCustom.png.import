@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0b70r4r6cbfg"
-path="res://.godot/imported/Bumper.png-dc03a8841b2785a7eaf9217928b0a0de.ctex"
+uid="uid://ccaq53m8l5g3c"
+path="res://.godot/imported/KeyboardCustom.png-42cd45609fd5cf17b2346bc7f91b4334.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Settings/Outdated/ControllerConfig/Bumper.png"
-dest_files=["res://.godot/imported/Bumper.png-dc03a8841b2785a7eaf9217928b0a0de.ctex"]
+source_file="res://assets/UI/Options/KeyboardCustom.png"
+dest_files=["res://.godot/imported/KeyboardCustom.png-42cd45609fd5cf17b2346bc7f91b4334.ctex"]
 
 [params]
 

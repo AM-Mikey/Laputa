@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1hbg5l37b2fg"
-path="res://.godot/imported/ControllerRecolorl1.png-72f0e8c4329cffde15476d1c316022b7.ctex"
+uid="uid://fyfjvkym1wf6"
+path="res://.godot/imported/Suede.png-c4d65db3c3b680cdf3a3b65166b97333.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Settings/Outdated/ControllerRecolorl1.png"
-dest_files=["res://.godot/imported/ControllerRecolorl1.png-72f0e8c4329cffde15476d1c316022b7.ctex"]
+source_file="res://assets/UI/StyleBox/Suede.png"
+dest_files=["res://.godot/imported/Suede.png-c4d65db3c3b680cdf3a3b65166b97333.ctex"]
 
 [params]
 

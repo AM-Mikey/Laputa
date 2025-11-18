@@ -1,14 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://bdt0hp441qxe3"]
+[gd_scene load_steps=12 format=3 uid="uid://bdt0hp441qxe3"]
 
 [ext_resource type="Theme" uid="uid://c1np2xna4dogr" path="res://src/UI/Theme/InsetMenu.tres" id="1"]
 [ext_resource type="StyleBox" uid="uid://bqcnin0ya0s5l" path="res://src/UI/StyleBox/SteelCorner.tres" id="4"]
-[ext_resource type="Texture2D" uid="uid://cb0gck5i2tl5r" path="res://assets/UI/Settings/ControllerFrontBase.png" id="4_nyot8"]
+[ext_resource type="Texture2D" uid="uid://cb0gck5i2tl5r" path="res://assets/UI/Options/ControllerFrontBase.png" id="4_nyot8"]
 [ext_resource type="Script" uid="uid://rb8u66djacvf" path="res://src/UI/Options/ControllerConfig.gd" id="5"]
-[ext_resource type="Texture2D" uid="uid://cxiylnvmsr6q1" path="res://assets/UI/Settings/ControllerFaceButton.png" id="5_4ypbq"]
+[ext_resource type="Texture2D" uid="uid://cxiylnvmsr6q1" path="res://assets/UI/Options/ControllerFaceButton.png" id="5_4ypbq"]
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="5_ripyc"]
-[ext_resource type="Texture2D" uid="uid://dmepnvo4rwqfg" path="res://assets/UI/Settings/ControllerDPad.png" id="6_ripyc"]
+[ext_resource type="Texture2D" uid="uid://dmepnvo4rwqfg" path="res://assets/UI/Options/ControllerDPad.png" id="6_ripyc"]
+[ext_resource type="StyleBox" uid="uid://c1fw52k8vfcy6" path="res://src/UI/StyleBox/Suede.tres" id="7_g1lek"]
 [ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="7_nyot8"]
-[ext_resource type="Texture2D" uid="uid://ds8cfh1qceedo" path="res://assets/UI/Settings/Outdated/ControllerConfig/TopBack.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://djgp08m0d01u1" path="res://assets/Icon/BossIcon.png" id="9_srj3u"]
+[ext_resource type="Texture2D" uid="uid://ds8cfh1qceedo" path="res://assets/UI/Options/Outdated/ControllerConfig/TopBack.png" id="14"]
 
 [node name="ControllerConfig" type="MarginContainer"]
 anchors_preset = 15
@@ -86,96 +88,257 @@ follow_focus = true
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="jump" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+[node name="jump" type="Control" parent="Margin/HBox/Controls/Scroll/VBox"]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/jump"]
-layout_mode = 2
-toggle_mode = true
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/VBox/jump"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_top = 8.0
+offset_right = 118.0
+offset_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("7_g1lek")
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/jump"]
-layout_mode = 2
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/jump/Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 110.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.843137, 0.682353, 0.533333, 1)
+theme_override_colors/font_shadow_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("5_ripyc")
-text = "Jump / Menu Accept"
+text = "Jump / Accept"
 
-[node name="fire_manual" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+[node name="JumpButton" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/jump"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 0
+offset_right = 28.0
+offset_bottom = 28.0
+toggle_mode = true
+icon = ExtResource("9_srj3u")
+
+[node name="fire_manual" type="Control" parent="Margin/HBox/Controls/Scroll/VBox"]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/fire_manual"]
-layout_mode = 2
-toggle_mode = true
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/VBox/fire_manual"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_top = 8.0
+offset_right = 148.0
+offset_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("7_g1lek")
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/fire_manual"]
-layout_mode = 2
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/fire_manual/Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 110.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.843137, 0.682353, 0.533333, 1)
+theme_override_colors/font_shadow_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("5_ripyc")
-text = "Manual Fire / Menu Cancel"
+text = "Manual Fire / Cancel"
 
-[node name="fire_automatic" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+[node name="FireManualButton" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/fire_manual"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 0
+offset_right = 28.0
+offset_bottom = 28.0
+toggle_mode = true
+icon = ExtResource("9_srj3u")
+
+[node name="fire_automatic" type="Control" parent="Margin/HBox/Controls/Scroll/VBox"]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/fire_automatic"]
-layout_mode = 2
-toggle_mode = true
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/VBox/fire_automatic"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_top = 8.0
+offset_right = 201.0
+offset_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("7_g1lek")
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/fire_automatic"]
-layout_mode = 2
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/fire_automatic/Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 110.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.843137, 0.682353, 0.533333, 1)
+theme_override_colors/font_shadow_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("5_ripyc")
-text = "Automatic Fire / Direction Lock"
+text = "Automatic Fire / Lock Direction"
 
-[node name="gun_left" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+[node name="FireAutomaticButton" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/fire_automatic"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 0
+offset_right = 28.0
+offset_bottom = 28.0
+toggle_mode = true
+icon = ExtResource("9_srj3u")
+
+[node name="gun_left" type="Control" parent="Margin/HBox/Controls/Scroll/VBox"]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/gun_left"]
-layout_mode = 2
-toggle_mode = true
-
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/gun_left"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("5_ripyc")
-text = "Next Gun"
-
-[node name="gun_right" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
-layout_mode = 2
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/VBox/gun_left"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_top = 8.0
+offset_right = 108.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("7_g1lek")
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/gun_right"]
-layout_mode = 2
-toggle_mode = true
-
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/gun_right"]
-layout_mode = 2
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/gun_left/Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 110.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.843137, 0.682353, 0.533333, 1)
+theme_override_colors/font_shadow_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("5_ripyc")
 text = "Previous Gun"
 
-[node name="inventory" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+[node name="GunLeftButton" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/gun_left"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 0
+offset_right = 28.0
+offset_bottom = 28.0
+toggle_mode = true
+icon = ExtResource("9_srj3u")
+
+[node name="gun_right" type="Control" parent="Margin/HBox/Controls/Scroll/VBox"]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/inventory"]
-layout_mode = 2
-toggle_mode = true
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/VBox/gun_right"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_top = 8.0
+offset_right = 88.0
+offset_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("7_g1lek")
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/inventory"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/gun_right/Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 110.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.843137, 0.682353, 0.533333, 1)
+theme_override_colors/font_shadow_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_ripyc")
+text = "Next Gun"
+
+[node name="GunRightButton" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/gun_right"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 0
+offset_right = 28.0
+offset_bottom = 28.0
+toggle_mode = true
+icon = ExtResource("9_srj3u")
+
+[node name="inventory" type="Control" parent="Margin/HBox/Controls/Scroll/VBox"]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/VBox/inventory"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_top = 8.0
+offset_right = 89.0
+offset_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("7_g1lek")
+
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/inventory/Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 110.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.843137, 0.682353, 0.533333, 1)
+theme_override_colors/font_shadow_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("5_ripyc")
 text = "Inventory"
 
-[node name="pause" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+[node name="InventoryButton" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/inventory"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 0
+offset_right = 28.0
+offset_bottom = 28.0
+toggle_mode = true
+icon = ExtResource("9_srj3u")
+
+[node name="pause" type="Control" parent="Margin/HBox/Controls/Scroll/VBox"]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/pause"]
-layout_mode = 2
-toggle_mode = true
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/VBox/pause"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_top = 8.0
+offset_right = 70.0
+offset_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("7_g1lek")
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/pause"]
-layout_mode = 2
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/pause/Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 110.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.843137, 0.682353, 0.533333, 1)
+theme_override_colors/font_shadow_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("5_ripyc")
 text = "Pause"
+
+[node name="PauseButton" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/pause"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 0
+offset_right = 28.0
+offset_bottom = 28.0
+toggle_mode = true
+icon = ExtResource("9_srj3u")
 
 [node name="Settings" type="VBoxContainer" parent="Margin/HBox"]
 layout_mode = 2
@@ -202,6 +365,26 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
 text = "Disable Analog"
+
+[node name="TooltipIconType" type="VBoxContainer" parent="Margin/HBox/Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/HBox/Settings/TooltipIconType"]
+layout_mode = 2
+text = "Tooltip Icons"
+
+[node name="OptionButton" type="OptionButton" parent="Margin/HBox/Settings/TooltipIconType"]
+layout_mode = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "Generic"
+popup/item_0/id = 0
+popup/item_1/text = "Nintendo"
+popup/item_1/id = 1
+popup/item_2/text = "XBox"
+popup/item_2/id = 2
+popup/item_3/text = "Playstation"
+popup/item_3/id = 3
 
 [node name="Control" type="Control" parent="Margin/HBox/Settings"]
 custom_minimum_size = Vector2(0, 36)

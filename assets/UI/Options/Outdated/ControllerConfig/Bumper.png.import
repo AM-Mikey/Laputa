@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb0gck5i2tl5r"
-path="res://.godot/imported/ControllerFrontBase.png-4ad7d5856eb7fff92c22334d78dee58e.ctex"
+uid="uid://b0b70r4r6cbfg"
+path="res://.godot/imported/Bumper.png-9c63f4dcab897e46df9dbbfb81cd58dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Settings/ControllerFrontBase.png"
-dest_files=["res://.godot/imported/ControllerFrontBase.png-4ad7d5856eb7fff92c22334d78dee58e.ctex"]
+source_file="res://assets/UI/Options/Outdated/ControllerConfig/Bumper.png"
+dest_files=["res://.godot/imported/Bumper.png-9c63f4dcab897e46df9dbbfb81cd58dc.ctex"]
 
 [params]
 

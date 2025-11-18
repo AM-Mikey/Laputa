@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cc36evn003gu7"
-path="res://.godot/imported/CompassCrosshair.png-570a0f3dd30fb144c29276169b472afa.ctex"
+uid="uid://cmd0ieaei5ijl"
+path="res://.godot/imported/ControllerFaceButtonPressed.png-6cc746c935c2e5641b7e7e83391c2435.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Settings/Outdated/ControllerConfig/CompassCrosshair.png"
-dest_files=["res://.godot/imported/CompassCrosshair.png-570a0f3dd30fb144c29276169b472afa.ctex"]
+source_file="res://assets/UI/Options/ControllerFaceButtonPressed.png"
+dest_files=["res://.godot/imported/ControllerFaceButtonPressed.png-6cc746c935c2e5641b7e7e83391c2435.ctex"]
 
 [params]
 

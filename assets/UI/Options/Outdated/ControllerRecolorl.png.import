@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ddp3ytq0lskqi"
-path="res://.godot/imported/ControllerRecolorl.png-e77ccdd37a36f56cba8198cc3551ea2b.ctex"
+path="res://.godot/imported/ControllerRecolorl.png-9802557debb4b7ae52a2249131fc23d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Settings/Outdated/ControllerRecolorl.png"
-dest_files=["res://.godot/imported/ControllerRecolorl.png-e77ccdd37a36f56cba8198cc3551ea2b.ctex"]
+source_file="res://assets/UI/Options/Outdated/ControllerRecolorl.png"
+dest_files=["res://.godot/imported/ControllerRecolorl.png-9802557debb4b7ae52a2249131fc23d7.ctex"]
 
 [params]
 
