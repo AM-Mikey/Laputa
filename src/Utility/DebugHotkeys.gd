@@ -106,6 +106,4 @@ func debug_print():
 #
 func reload_level():
 	print("reloading level")
-	if w.ml.has_node("PauseMenu"): w.ml.get_node("PauseMenu").unpause()
-	if w.uig.has_node("HUD"): w.uig.get_node("HUD").free()
 	w.change_level_via_code(w.current_level.scene_file_path)

@@ -41,7 +41,7 @@ func add_button(topic):
 func on_button_pressed(topic):
 	var db = world.get_node("UILayer/UIGroup/DialogBox")
 	var dialog_json = db.current_dialog_json
-	db.stop_printing()
+	db.exit()
 
 	var new_db = dialog_box.instantiate()
 	world.uig.add_child(new_db)
