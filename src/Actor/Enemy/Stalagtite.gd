@@ -114,8 +114,6 @@ func enter_run():
 	$AnimationPlayer.play("Run")
 	$WallDetection.enabled = true
 
-
-
 func do_run():
 	match move_dir:
 		Vector2.LEFT:
