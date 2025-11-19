@@ -12,7 +12,7 @@ func _on_Water_body_entered(body):
 	var target
 	if body.get_collision_layer_value(1):
 		target = body.get_parent()
-	elif body.get_collision_layer_value(2):
+	elif body.get_collision_layer_value(2) or body.get_collision_layer_value(8):
 		target = body
 	elif body.get_collision_layer_value(11) or body.get_collision_layer_value(12) or body.get_collision_layer_value(13):
 		target = body
@@ -37,7 +37,7 @@ func _on_Water_body_exited(body):
 	var target
 	if body.get_collision_layer_value(1):
 		target = body.get_parent()
-	elif body.get_collision_layer_value(2):
+	elif body.get_collision_layer_value(2) or body.get_collision_layer_value(8):
 		target = body
 	elif body.get_collision_layer_value(11) or body.get_collision_layer_value(12) or body.get_collision_layer_value(13):
 		target = body
