@@ -154,12 +154,10 @@ func _on_hit(damage, blood_direction): #inhereted for enemies to do something on
 ### DAMAGE NUMBER ###
 
 func set_damagenum(damage):
-	var enabled_col_shapes = []
-	for c in get_children():
-		if c is CollisionShape2D or c is CollisionPolygon2D:
-			if c.disabled == false:
-				enabled_col_shapes.append(c)
-	var good_collision_shape = enabled_col_shapes.front()
+	# Get an enabled col shape from the enemy, return the first collision shape if none found.
+	var col_shapes: Array = get_children().filter(func (ele): return ele is CollisionShape2D or ele is CollisionPolygon2D)
+	var enabled_col_shapes = col_shapes.filter(func (ele): return ele.disabled == false)
+	var good_collision_shape = enabled_col_shapes.front() if !enabled_col_shapes.is_empty() else col_shapes.front()
 	var y_offset = good_collision_shape.shape.get_rect().position.y - (good_collision_shape.shape.get_rect().size.y / 2.0) #Warning! this assumes that the rect2 is always centered
 
 	if damage_number == null:
