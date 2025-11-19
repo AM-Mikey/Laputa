@@ -9,11 +9,14 @@ var target: Node
 var move_dir = Vector2.ZERO
 @export var difficulty:= 1
 
-var base_gravity: int
-
 var base_damage = 2
 var drop_damage: int
 var wait_time: float
+
+func set_is_in_water(val):
+	if (state not in ["hang", "hangactive"]):
+		super.set_is_in_water(val)
+	is_in_water = val
 
 func setup():
 	#print("doing setup")
@@ -39,7 +42,6 @@ func setup():
 	damage_on_contact = base_damage
 	enemy_damage_on_contact = 999
 	speed = Vector2.ZERO
-	base_gravity = gravity
 	gravity = 0
 	change_state("hang")
 
@@ -69,7 +71,7 @@ func enter_hangactive():
 
 
 func enter_drop():
-	gravity = base_gravity
+	gravity = base_gravity if !is_in_water else water_gravity
 	hit_enemies_on_contact = true
 	damage_on_contact = drop_damage
 
