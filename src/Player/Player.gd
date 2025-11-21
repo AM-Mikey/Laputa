@@ -37,7 +37,11 @@ var is_on_ssp = false
 var deny_ssp = false
 var is_crouching = false
 var forbid_crouching = false
-var is_in_water = false
+var is_in_water = false:
+	set(val):
+		if (is_in_water != val):
+			am.underwater_attenuate(val)
+		is_in_water = val
 var is_in_coyote = false
 var dead = false
 @export var controller_id: int = 0

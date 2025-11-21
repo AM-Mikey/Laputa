@@ -220,7 +220,6 @@ func _clear_player(type, queue_slot):
 	emit_signal("players_updated")
 
 ### CONTROLS ###
-
 func stop_sfx():
 	for s in sfx_queue:
 		s[0].queue_free()
@@ -244,6 +243,15 @@ func fade_music(duration = 1.0):
 	await tween.finished
 	_clear_player("music", music_queue.front())
 	emit_signal("fadeout_finished")
+
+var attenuate_music: bool = false
+func underwater_attenuate(val: bool):
+	var audio_bus_music_idx: int = AudioServer.get_bus_index("Music")
+	var audio_bus_sfx_idx: int = AudioServer.get_bus_index("SFX")
+	AudioServer.set_bus_effect_enabled(audio_bus_music_idx, 0, val and attenuate_music) #LowPassFilter
+	AudioServer.set_bus_effect_enabled(audio_bus_music_idx, 1, val and attenuate_music) #Reverb
+	AudioServer.set_bus_effect_enabled(audio_bus_sfx_idx, 0, val) #LowPassFilter
+	AudioServer.set_bus_effect_enabled(audio_bus_sfx_idx, 1, val) #Reverb
 
 
 ### GETTERS ###
