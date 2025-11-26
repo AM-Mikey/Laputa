@@ -213,7 +213,7 @@ func set_action_button_icons():
 
 func set_action_button_icon_to_texture(data, action, button):
 	for i in data[action]:
-		if i[0] == "joy": #is a joystick input
+		if i[0] == "joy" || i[0] == "joy_analog": #is a joystick input
 			var icon_texture = AtlasTexture.new()
 			icon_texture.atlas = BUTTON_PROMPT_FLOATING
 			icon_texture.region = Rect2(input_icon_order.find(int(i[1])) * 16, 0, 16, 16)

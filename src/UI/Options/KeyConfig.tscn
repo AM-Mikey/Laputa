@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqramyf8aeeyv"]
+[gd_scene load_steps=10 format=3 uid="uid://dqramyf8aeeyv"]
 
 [ext_resource type="Theme" uid="uid://c1np2xna4dogr" path="res://src/UI/Theme/InsetMenu.tres" id="1"]
 [ext_resource type="Texture2D" uid="uid://cl3sa7nubis6p" path="res://assets/UI/Options/KeyboardMouse.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://bmeh5rfp6bvek" path="res://assets/UI/Options/KeyboardClassic.png" id="3"]
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="3_vje3i"]
 [ext_resource type="Texture2D" uid="uid://ccaq53m8l5g3c" path="res://assets/UI/Options/KeyboardCustom.png" id="4"]
+[ext_resource type="StyleBox" uid="uid://ctelsgqgr2kkg" path="res://src/UI/StyleBox/PaperDark.tres" id="4_0kqnp"]
 [ext_resource type="Script" uid="uid://cq6xxd8uisqit" path="res://src/UI/Options/KeyConfig.gd" id="6"]
 [ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="8_rkq2i"]
 [ext_resource type="StyleBox" uid="uid://bqcnin0ya0s5l" path="res://src/UI/StyleBox/SteelCorner.tres" id="9"]
@@ -18,8 +19,7 @@ grow_vertical = 2
 pivot_offset = Vector2(-576, -72)
 theme = ExtResource("1")
 script = ExtResource("6")
-buttons = NodePath("Margin/HBox/Controls/Scroll/VBox")
-ui_focus = NodePath("Margin/HBox/Controls/Scroll/VBox/jump")
+ui_focus = NodePath("Margin/HBox/Controls/Scroll/ActionSelections/jump")
 preset_path = NodePath("Margin/HBox/Presets/ItemList")
 
 [node name="Panel" type="Panel" parent="."]
@@ -50,149 +50,161 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 follow_focus = true
 
-[node name="VBox" type="VBoxContainer" parent="Margin/HBox/Controls/Scroll"]
+[node name="ActionSelections" type="VBoxContainer" parent="Margin/HBox/Controls/Scroll"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="jump" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+[node name="jump" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/jump"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/jump"]
 layout_mode = 2
 toggle_mode = true
+text = "A"
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/jump"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/jump"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Jump / Accept"
 
-[node name="fire_manual" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+[node name="fire_manual" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/fire_manual"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_manual"]
 layout_mode = 2
 toggle_mode = true
+text = "A"
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/fire_manual"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_manual"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
-text = "Manual Fire / Cancel"
+text = "Fire / Cancel"
 
-[node name="fire_automatic" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+[node name="fire_automatic" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/fire_automatic"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_automatic"]
 layout_mode = 2
 toggle_mode = true
+text = "A"
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/fire_automatic"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_automatic"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
-text = "Automatic Fire / Lock Direction"
+text = "Auto-Fire / Lock Direction"
 
-[node name="move_left" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+[node name="move_left" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/move_left"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/move_left"]
 layout_mode = 2
 toggle_mode = true
+text = "A"
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/move_left"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/move_left"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Move Left"
 
-[node name="move_right" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+[node name="move_right" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/move_right"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/move_right"]
 layout_mode = 2
 toggle_mode = true
+text = "A"
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/move_right"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/move_right"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Move Right"
 
-[node name="look_up" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+[node name="look_up" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/look_up"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/look_up"]
 layout_mode = 2
 toggle_mode = true
+text = "A"
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/look_up"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/look_up"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Look Up"
 
-[node name="look_down" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+[node name="look_down" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/look_down"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/look_down"]
 layout_mode = 2
 toggle_mode = true
+text = "A"
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/look_down"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/look_down"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Look Down / Inspect"
 
-[node name="gun_left" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+[node name="gun_left" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/gun_left"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_left"]
 layout_mode = 2
 toggle_mode = true
+text = "A"
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/gun_left"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_left"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Previous Gun"
 
-[node name="gun_right" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+[node name="gun_right" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/gun_right"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_right"]
 layout_mode = 2
 toggle_mode = true
+text = "A"
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/gun_right"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_right"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Next Gun"
 
-[node name="inventory" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+[node name="inventory" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/inventory"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/inventory"]
 layout_mode = 2
 toggle_mode = true
+text = "A"
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/inventory"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/inventory"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Inventory"
 
-[node name="pause" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/VBox"]
+[node name="pause" type="HBoxContainer" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/VBox/pause"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/pause"]
 layout_mode = 2
 toggle_mode = true
+text = "A"
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/VBox/pause"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/pause"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Pause"
@@ -216,7 +228,34 @@ text = "Jump on Hold"
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
+text = "Auto-jump while
+holding jump"
+
+[node name="MouseAsKey" type="VBoxContainer" parent="Margin/HBox/Settings"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Margin/HBox/Settings/MouseAsKey"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_0kqnp")
+
+[node name="Label" type="Label" parent="Margin/HBox/Settings/MouseAsKey/Panel"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 126.0
+offset_bottom = 21.0
 text = "Jump on Hold"
+
+[node name="Button" type="CheckBox" parent="Margin/HBox/Settings/MouseAsKey"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 0
+text = "Use mouse as
+keyboard input
+(this option
+disables mouse
+navigation)"
 
 [node name="Control" type="Control" parent="Margin/HBox"]
 layout_mode = 2
@@ -257,10 +296,10 @@ theme_override_styles/panel = ExtResource("9")
 
 [node name="Margin" type="MarginContainer" parent="Corner"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 128.0
-offset_bottom = 48.0
+offset_left = -34.0
+offset_top = 4.0
+offset_right = 124.0
+offset_bottom = 44.0
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
@@ -268,6 +307,14 @@ theme_override_constants/margin_bottom = 4
 
 [node name="HBox" type="HBoxContainer" parent="Corner/Margin"]
 layout_mode = 2
+alignment = 2
+
+[node name="Confirm" type="Button" parent="Corner/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.8, 0.168627, 0.168627, 1)
+theme_override_styles/normal = ExtResource("8_rkq2i")
+text = "Confirm"
 
 [node name="Reset" type="Button" parent="Corner/Margin/HBox"]
 layout_mode = 2
@@ -283,5 +330,6 @@ theme_override_colors/font_color = Color(0.84313726, 0.68235296, 0.53333336, 1)
 theme_override_styles/normal = ExtResource("8_rkq2i")
 text = "Return"
 
+[connection signal="pressed" from="Corner/Margin/HBox/Confirm" to="." method="on_confirm"]
 [connection signal="pressed" from="Corner/Margin/HBox/Reset" to="." method="on_reset"]
 [connection signal="pressed" from="Corner/Margin/HBox/Return" to="." method="on_return"]
