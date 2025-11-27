@@ -4,12 +4,11 @@ const CONTROLLERCONFIG = preload("res://src/UI/Options/ControllerConfig.tscn")
 
 var input_map_path = "user://inputmap.json"
 
-#var assignment_mode = false
 var ignore_button_press = false
 var current_listening_action = null
 var action_buttons = {}
-#var debug_actions = []
-
+var action_button_panel_default_widths = {}
+var action_button_panel_tween_time = 0.1
 var button_text_color_temp = Color(0.988, 0.22, 0.22)
 
 #note, combination inputs are not remapped using this system, such as ui_text_caret_word_left
@@ -108,14 +107,34 @@ var active_preset = 0
 
 func _ready():
 	for action_box in %ActionSelections.get_children():
-		action_buttons[action_box.name] = action_box.get_child(0)
+		action_buttons[action_box.name] = action_box.get_child(1)
 	for b in action_buttons.values():
 		b.connect("pressed", Callable(self, "input_button_pressed").bind(b))
-
-	temp_action_keyboard_input
-
+		b.connect("focus_entered", Callable(self, "input_button_focus_entered").bind(b))
+		b.connect("focus_exited", Callable(self, "input_button_focus_exited").bind(b))
 
 	set_button_text()
+	setup_action_button_panels()
+
+
+
+### ANIMATION ###
+
+func setup_action_button_panels():
+	for action_box in %ActionSelections.get_children():
+		var panel = action_box.get_child(0)
+		action_button_panel_default_widths[action_box.name] = panel.size.x
+		panel.size.x = 0
+
+func tween_in_button_panel(panel):
+	var tween = create_tween()
+	tween.tween_property(panel, "size", Vector2(action_button_panel_default_widths[panel.get_parent().name], panel.size.y), action_button_panel_tween_time)
+	tween.play()
+
+func tween_out_button_panel(panel):
+	var tween = create_tween()
+	tween.tween_property(panel, "size", Vector2(0.0, panel.size.y), action_button_panel_tween_time)
+	tween.play()
 
 
 
@@ -209,9 +228,10 @@ func set_button_text(temp = false):
 		if InputMap.action_get_events(action).is_empty():
 			button.set_text("No Button!")
 		elif input != null:
+			var new_text: String
 			match input[0]:
 				"key":
-					button.text = OS.get_keycode_string(input[1])
+					new_text = OS.get_keycode_string(input[1])
 				"mouse":
 					var mouse_button_string
 					match input[1]:
@@ -224,7 +244,10 @@ func set_button_text(temp = false):
 						7: mouse_button_string = "MWHEELRIGHT"
 						8: mouse_button_string = "M4"
 						9: mouse_button_string = "M5"
-					button.text = mouse_button_string
+					new_text = mouse_button_string
+			if new_text.length() > 6:
+				new_text = new_text.left(4) + "..."
+			button.text = new_text
 
 
 
@@ -398,6 +421,12 @@ func load_input_map(): #called on savesystem load options #TODO: migrate to Inpu
 
 
 ### SIGNALS ###
+
+func input_button_focus_entered(button):
+	tween_in_button_panel(button.get_parent().get_child(0))
+
+func input_button_focus_exited(button):
+	tween_out_button_panel(button.get_parent().get_child(0))
 
 func on_confirm():
 	am.play("ui_save")

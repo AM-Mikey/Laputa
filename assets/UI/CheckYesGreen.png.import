@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmd0ieaei5ijl"
-path="res://.godot/imported/ControllerFaceButtonPressed.png-6cc746c935c2e5641b7e7e83391c2435.ctex"
+uid="uid://bsfme8butft3o"
+path="res://.godot/imported/CheckYesGreen.png-c8ec7520e0b4b8af34aea5070275e58f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Options/ControllerFaceButtonPressed.png"
-dest_files=["res://.godot/imported/ControllerFaceButtonPressed.png-6cc746c935c2e5641b7e7e83391c2435.ctex"]
+source_file="res://assets/UI/CheckYesGreen.png"
+dest_files=["res://.godot/imported/CheckYesGreen.png-c8ec7520e0b4b8af34aea5070275e58f.ctex"]
 
 [params]
 

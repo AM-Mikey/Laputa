@@ -62,16 +62,6 @@ config/use_custom_user_dir=true
 config/features=PackedStringArray("4.5")
 config/icon="uid://b42so8fnnp3uq"
 
-[autoload]
-
-am="*res://src/Audio/AudioManager.gd"
-DebugHotkeys="*res://src/Utility/DebugHotkeys.gd"
-mc="*res://src/UI/MouseCursor.gd"
-SaveSystem="*res://src/Utility/SaveSystem.gd"
-f="*res://src/Utility/Finder.gd"
-vs="*res://src/Utility/ViewportScaler.gd"
-inp="*res://src/Utility/InputSystem.gd"
-
 [display]
 
 window/size/viewport_width=480

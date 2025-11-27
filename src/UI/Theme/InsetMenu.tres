@@ -1,10 +1,14 @@
-[gd_resource type="Theme" load_steps=29 format=3 uid="uid://c1np2xna4dogr"]
+[gd_resource type="Theme" load_steps=32 format=3 uid="uid://c1np2xna4dogr"]
 
 [ext_resource type="StyleBox" uid="uid://dbafhti4g7dp4" path="res://src/UI/StyleBox/LeatherLight.tres" id="1"]
-[ext_resource type="StyleBox" uid="uid://dceypmylvy2ho" path="res://src/UI/StyleBox/StoneBeveled.tres" id="3"]
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="4"]
+[ext_resource type="Texture2D" uid="uid://bsfme8butft3o" path="res://assets/UI/CheckYesGreen.png" id="4_prda7"]
+[ext_resource type="Texture2D" uid="uid://3prtiyxbv40q" path="res://assets/UI/CheckNoGreen.png" id="5_f6tep"]
 [ext_resource type="StyleBox" uid="uid://cl4yme0wtg3po" path="res://src/UI/Slider/Slider.tres" id="6"]
+[ext_resource type="StyleBox" uid="uid://cedgt8u8aawp3" path="res://src/UI/StyleBox/PaperGreen.tres" id="6_x5ve2"]
 [ext_resource type="Texture2D" uid="uid://bh5618vuv7rqh" path="res://assets/UI/Slider/SliderGrabber.png" id="7"]
+[ext_resource type="StyleBox" uid="uid://ctelsgqgr2kkg" path="res://src/UI/StyleBox/PaperGreenDark.tres" id="7_b27pm"]
+[ext_resource type="StyleBox" uid="uid://b4l7d2bk4tp4" path="res://src/UI/StyleBox/PaperGreenLight.tres" id="8_dt1pc"]
 [ext_resource type="StyleBox" uid="uid://bwe3j6hcp3u7j" path="res://src/UI/StyleBox/SteelBeveledLight.tres" id="10"]
 [ext_resource type="StyleBox" uid="uid://cb3gs2qq26l03" path="res://src/UI/StyleBox/RustTabsLight.tres" id="11"]
 [ext_resource type="StyleBox" uid="uid://ot23c6kiunqk" path="res://src/UI/StyleBox/RustTabsDark.tres" id="12"]
@@ -19,13 +23,12 @@
 [ext_resource type="Texture2D" uid="uid://w0w1ohkjh6b4" path="res://assets/UI/Button/Outdated/CheckNo.png" id="20"]
 [ext_resource type="StyleBox" uid="uid://ctw8lx7pcj6kl" path="res://src/UI/StyleBox/Leather.tres" id="21"]
 [ext_resource type="Texture2D" uid="uid://c8h4uacgruxtt" path="res://assets/UI/OptionArrowLeather.png" id="21_low3n"]
-[ext_resource type="Texture2D" uid="uid://cohpys4cvsj5g" path="res://assets/UI/CheckYes.png" id="22"]
-[ext_resource type="Texture2D" uid="uid://fmthof6ks35b" path="res://assets/UI/CheckNo.png" id="23"]
 [ext_resource type="StyleBox" uid="uid://dj8k7ro8dbrl3" path="res://src/UI/StyleBox/PaperSwatch.tres" id="24"]
 [ext_resource type="StyleBox" uid="uid://hshjid5k85su" path="res://src/UI/StyleBox/Paper.tres" id="25"]
 [ext_resource type="StyleBox" uid="uid://cql2au3d3637e" path="res://src/UI/StyleBox/SteelRoundInset.tres" id="27"]
 [ext_resource type="StyleBox" uid="uid://crpllugm6uknp" path="res://src/UI/StyleBox/SelectedLight.tres" id="28"]
 [ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="28_b27pm"]
+[ext_resource type="StyleBox" uid="uid://c53b3p1k47jdu" path="res://src/UI/StyleBox/SteelRound.tres" id="28_f6tep"]
 [ext_resource type="StyleBox" uid="uid://brcoinunoig2o" path="res://src/UI/StyleBox/Selected.tres" id="29"]
 
 [sub_resource type="StyleBoxEmpty" id="12"]
@@ -43,16 +46,20 @@ Button/styles/focus = SubResource("12")
 Button/styles/hover = ExtResource("1")
 Button/styles/normal = ExtResource("21")
 Button/styles/pressed = ExtResource("16")
-CheckBox/colors/font_color = Color(0.40784314, 0.007843138, 0.06666667, 1)
-CheckBox/colors/font_color_disabled = Color(0.9, 0.9, 0.9, 0.2)
-CheckBox/colors/font_color_hover = Color(0.94, 0.94, 0.94, 1)
-CheckBox/colors/font_color_hover_pressed = Color(1, 1, 1, 1)
-CheckBox/colors/font_color_pressed = Color(1, 1, 1, 1)
+CheckBox/colors/font_color = Color(0.11372549, 0.15686275, 0.22745098, 1)
+CheckBox/colors/font_focus_color = Color(0.96862745, 0.8862745, 0.7176471, 1)
+CheckBox/colors/font_hover_color = Color(0.96862745, 0.8862745, 0.7176471, 1)
+CheckBox/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+CheckBox/colors/font_pressed_color = Color(1, 1, 1, 1)
 CheckBox/constants/check_vadjust = 0
 CheckBox/constants/hseparation = 4
-CheckBox/icons/checked = ExtResource("22")
-CheckBox/icons/unchecked = ExtResource("23")
-CheckBox/styles/normal = ExtResource("25")
+CheckBox/icons/checked = ExtResource("4_prda7")
+CheckBox/icons/unchecked = ExtResource("5_f6tep")
+CheckBox/styles/focus = ExtResource("6_x5ve2")
+CheckBox/styles/hover = ExtResource("6_x5ve2")
+CheckBox/styles/hover_pressed = ExtResource("6_x5ve2")
+CheckBox/styles/normal = ExtResource("7_b27pm")
+CheckBox/styles/pressed = ExtResource("7_b27pm")
 CheckButton/colors/font_color = Color(0.88, 0.88, 0.88, 1)
 CheckButton/colors/font_color_disabled = Color(0.9, 0.9, 0.9, 0.2)
 CheckButton/colors/font_color_hover = Color(0.94, 0.94, 0.94, 1)
@@ -99,22 +106,27 @@ OptionButton/constants/arrow_margin = 2
 OptionButton/icons/arrow = ExtResource("21_low3n")
 Panel/styles/panel = ExtResource("27")
 PopupMenu/colors/font_color = Color(0.462745, 0.486275, 0.431373, 1)
-PopupMenu/colors/font_color_hover = Color(0.505882, 0.0980392, 0.0980392, 1)
-PopupMenu/icons/radio_checked = ExtResource("22")
-PopupMenu/icons/radio_unchecked = ExtResource("23")
-PopupMenu/styles/hover = ExtResource("28")
+PopupMenu/colors/font_hover_color = Color(0.3019608, 0.37254903, 0.38039216, 1)
+PopupMenu/constants/canvas_item_default_texture_filter = 0
+PopupMenu/constants/close_h_offset = 0
+PopupMenu/icons/radio_checked = ExtResource("4_prda7")
+PopupMenu/icons/radio_unchecked = ExtResource("5_f6tep")
+PopupMenu/styles/hover = ExtResource("8_dt1pc")
 PopupMenu/styles/panel = ExtResource("25")
-TabContainer/colors/font_color_bg = Color(0.403922, 0.286275, 0.262745, 1)
-TabContainer/colors/font_color_disabled = Color(0.403922, 0.286275, 0.262745, 1)
-TabContainer/colors/font_color_fg = Color(0.968627, 0.886275, 0.717647, 1)
-TabContainer/styles/panel = ExtResource("3")
-TabContainer/styles/tab_bg = ExtResource("12")
-TabContainer/styles/tab_disabled = ExtResource("12")
-TabContainer/styles/tab_fg = ExtResource("11")
+TabContainer/colors/font_hovered_color = Color(0.6313726, 0.4862745, 0.4, 1)
+TabContainer/colors/font_selected_color = Color(0.84313726, 0.68235296, 0.53333336, 1)
+TabContainer/colors/font_unselected_color = Color(0.40392157, 0.28627452, 0.2627451, 1)
+TabContainer/styles/panel = ExtResource("28_f6tep")
+TabContainer/styles/tab_focus = ExtResource("11")
+TabContainer/styles/tab_hovered = ExtResource("12")
+TabContainer/styles/tab_selected = ExtResource("11")
+TabContainer/styles/tab_unselected = ExtResource("12")
 TextEdit/styles/completion = ExtResource("4")
 TextEdit/styles/focus = ExtResource("4")
 TextEdit/styles/normal = ExtResource("4")
 TextEdit/styles/read_only = ExtResource("4")
+TooltipLabel/colors/font_color = Color(0.40784314, 0.007843138, 0.06666667, 1)
+TooltipPanel/styles/panel = ExtResource("25")
 Tree/styles/bg = ExtResource("24")
 VScrollBar/styles/grabber = ExtResource("13")
 VScrollBar/styles/grabber_highlight = ExtResource("14")

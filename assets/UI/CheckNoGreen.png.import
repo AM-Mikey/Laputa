@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dftjbik80u3ma"
-path="res://.godot/imported/PaperDark.png-7a19726ab4384da39bdd0acc235b5977.ctex"
+uid="uid://3prtiyxbv40q"
+path="res://.godot/imported/CheckNoGreen.png-74fcc47b17da14c7615dbda4c5b1f7fa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/StyleBox/PaperDark.png"
-dest_files=["res://.godot/imported/PaperDark.png-7a19726ab4384da39bdd0acc235b5977.ctex"]
+source_file="res://assets/UI/CheckNoGreen.png"
+dest_files=["res://.godot/imported/CheckNoGreen.png-74fcc47b17da14c7615dbda4c5b1f7fa.ctex"]
 
 [params]
 

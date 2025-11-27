@@ -40,6 +40,8 @@ func _ready():
 		save_defaults()
 
 	scroll.get_v_scroll_bar().connect("item_rect_changed", Callable(self, "on_scrollbar_changed"))
+	var display_mode_popup_menu = %DisplayMode.get_node("OptionButton").get_child(0, true) #needed for any popup menus
+	display_mode_popup_menu.canvas_item_default_texture_filter = 0 #nearest
 	after_ready = true
 
 ### SIGNALS
@@ -101,12 +103,20 @@ func on_sfxvolume_changed(value):
 	change_bus_volume(value,"SFX")
 
 func change_bus_volume(value,busname:String):
-	var slidernode = get_node("Margin/Scroll/VBox/" + busname + "Volume")
+	var slidernode
+	match busname:
+		"Master":
+			slidernode = %MasterVolume
+		"Music":
+			slidernode = %MusicVolume
+		"SFX":
+			slidernode = %SFXVolume
+
 	var db = linear_to_db(value/10.0)
 	print (db)
 	if value == 0:
 		AudioServer.set_bus_mute(AudioServer.get_bus_index(busname),true)
-		slidernode.get_node("Label").text = "SFX Volume: Muted"
+		slidernode.get_node("Label").text = busname + "Volume: Muted"
 	else:
 		AudioServer.set_bus_mute(AudioServer.get_bus_index(busname),false)
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(busname),db)

@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://cb2b6a1h21g75"]
+
+[ext_resource type="Texture2D" uid="uid://cb0gck5i2tl5r" path="res://assets/UI/Options/ControllerFrontBase.png" id="1_651sm"]
+[ext_resource type="Script" uid="uid://csxs2rxv6umrd" path="res://src/UI/Options/ControllerFront.gd" id="2_rwmif"]
+[ext_resource type="Texture2D" uid="uid://cxiylnvmsr6q1" path="res://assets/UI/Options/ControllerFaceButton.png" id="2_udymj"]
+[ext_resource type="Texture2D" uid="uid://dmepnvo4rwqfg" path="res://assets/UI/Options/ControllerDPad.png" id="3_rwmif"]
+[ext_resource type="Texture2D" uid="uid://dxt1h84of0m5f" path="res://assets/UI/Options/ControllerStick.png" id="5_6g673"]
+
+[node name="ControllerFront" type="TextureRect"]
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("1_651sm")
+script = ExtResource("2_rwmif")
+
+[node name="FaceButtonLeft" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(150, 39)
+texture = ExtResource("2_udymj")
+centered = false
+hframes = 2
+
+[node name="FaceButtonRight" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(182, 39)
+texture = ExtResource("2_udymj")
+centered = false
+hframes = 2
+
+[node name="FaceButtonUp" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(166, 23)
+texture = ExtResource("2_udymj")
+centered = false
+hframes = 2
+
+[node name="FaceButtonDown" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(166, 55)
+texture = ExtResource("2_udymj")
+centered = false
+hframes = 2
+
+[node name="DPad" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(31, 31)
+texture = ExtResource("3_rwmif")
+centered = false
+hframes = 9
+
+[node name="StickLeft" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(80, 80)
+texture = ExtResource("5_6g673")
+hframes = 13
+
+[node name="StickRight" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(144, 80)
+texture = ExtResource("5_6g673")
+hframes = 13
