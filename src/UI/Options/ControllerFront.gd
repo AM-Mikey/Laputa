@@ -22,6 +22,10 @@ func _input(event):
 				%FaceButtonDown.frame = button_frame
 			JOY_BUTTON_DPAD_LEFT, JOY_BUTTON_DPAD_RIGHT, JOY_BUTTON_DPAD_UP, JOY_BUTTON_DPAD_DOWN:
 				display_d_pad()
+			JOY_BUTTON_BACK:
+				%Select.frame = button_frame
+			JOY_BUTTON_START:
+				%Start.frame = button_frame
 	if event is InputEventJoypadMotion:
 		match event.axis:
 			JOY_AXIS_LEFT_X, JOY_AXIS_LEFT_Y: display_stick(%StickLeft)

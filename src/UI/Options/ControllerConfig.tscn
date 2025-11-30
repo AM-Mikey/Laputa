@@ -1,6 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bdt0hp441qxe3"]
 
 [ext_resource type="Theme" uid="uid://c1np2xna4dogr" path="res://src/UI/Theme/InsetMenu.tres" id="1"]
+[ext_resource type="PackedScene" uid="uid://c8est8qh3g3tb" path="res://src/UI/Options/ControllerTop.tscn" id="3_4ypbq"]
 [ext_resource type="StyleBox" uid="uid://bqcnin0ya0s5l" path="res://src/UI/StyleBox/SteelCorner.tres" id="4"]
 [ext_resource type="PackedScene" uid="uid://cb2b6a1h21g75" path="res://src/UI/Options/ControllerFront.tscn" id="4_4ypbq"]
 [ext_resource type="Script" uid="uid://rb8u66djacvf" path="res://src/UI/Options/ControllerConfig.gd" id="5"]
@@ -8,7 +9,6 @@
 [ext_resource type="StyleBox" uid="uid://c1fw52k8vfcy6" path="res://src/UI/StyleBox/Suede.tres" id="7_g1lek"]
 [ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="7_nyot8"]
 [ext_resource type="Texture2D" uid="uid://djgp08m0d01u1" path="res://assets/Icon/BossIcon.png" id="9_srj3u"]
-[ext_resource type="Texture2D" uid="uid://ds8cfh1qceedo" path="res://assets/UI/Options/Outdated/ControllerConfig/TopBack.png" id="14"]
 
 [node name="ControllerConfig" type="MarginContainer"]
 anchors_preset = 15
@@ -27,11 +27,12 @@ layout_mode = 2
 layout_mode = 2
 alignment = 2
 
-[node name="Top" type="TextureRect" parent="HBox"]
+[node name="ControllerTop" parent="HBox" instance=ExtResource("3_4ypbq")]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-texture = ExtResource("14")
+
+[node name="Control" type="Control" parent="HBox"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
 
 [node name="HBox2" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -40,7 +41,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 
-[node name="Front" parent="HBox2" instance=ExtResource("4_4ypbq")]
+[node name="ControllerFront" parent="HBox2" instance=ExtResource("4_4ypbq")]
 layout_mode = 2
 
 [node name="Margin" type="MarginContainer" parent="."]
