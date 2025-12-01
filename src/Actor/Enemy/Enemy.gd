@@ -22,6 +22,7 @@ var hit_enemies_on_contact = false
 var hurt_sound = "enemy_hurt"
 var die_sound = "enemy_die"
 var damage_number = null
+var just_spawned = true
 
 @export var id: String
 
@@ -53,6 +54,9 @@ func _ready():
 			#change_state(state)
 
 	setup()
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	just_spawned = false
 
 func setup(): #EVERY ENEMY MUST HAVE
 	pass #to be determined in enemy script.
@@ -84,10 +88,13 @@ func _on_physics_process(delta): #for child
 
 func calc_velocity(velocity: Vector2, move_dir, speed, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
 	var out: = velocity
+	var fractional_speed = speed
+	if is_in_water:
+		fractional_speed = speed * Vector2(0.666, 0.666)
 	#X
 	if do_acceleration:
 		if move_dir.x != 0:
-			out.x = min(abs(out.x) + acceleration, speed.x)
+			out.x = min(abs(out.x) + acceleration, fractional_speed.x)
 			out.x *= move_dir.x
 		elif do_friction:
 			if is_on_floor():
@@ -95,15 +102,15 @@ func calc_velocity(velocity: Vector2, move_dir, speed, do_gravity = true, do_acc
 			else:
 				out.x = lerp(out.x, 0.0, air_cof)
 	else: #no acceleration
-		out.x = speed.x * move_dir.x
+		out.x = fractional_speed.x * move_dir.x
 
 	#Y
 	if do_gravity:
 		out.y += gravity * get_physics_process_delta_time()
 		if move_dir.y < 0:
-			out.y = speed.y * move_dir.y
+			out.y = fractional_speed.y * move_dir.y
 	else:
-		out.y = speed.y * move_dir.y
+		out.y = fractional_speed.y * move_dir.y
 	return out
 
 

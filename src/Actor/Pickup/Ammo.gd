@@ -5,6 +5,7 @@ var dir = Vector2.DOWN
 var normal_time = 2.0
 var end_time = 1.0
 var state = "normal"
+var just_spawned = true
 
 func _ready():
 	home = global_position
@@ -15,6 +16,9 @@ func _ready():
 		0.5: $AnimationPlayer.play("Large")
 		_: printerr("ERROR: Ammo given non-standard value")
 	$Timer.start(normal_time)
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	just_spawned = false
 
 func _physics_process(_delta):
 	velocity = calc_velocity(speed, dir)
@@ -22,10 +26,14 @@ func _physics_process(_delta):
 
 func calc_velocity(speed, direction) -> Vector2:
 	var out: = velocity
-	out.x = speed.x * direction.x
+	var fractional_speed = speed
+	if is_in_water:
+		fractional_speed = speed * Vector2(0.666, 0.666)
+
+	out.x = fractional_speed.x * direction.x
 	out.y += gravity * get_physics_process_delta_time()
 	if direction.y == -1.0:
-		out.y = speed.y * direction.y
+		out.y = fractional_speed.y * direction.y
 	return out
 
 func _on_Timer_timeout():
