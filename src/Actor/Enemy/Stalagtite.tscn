@@ -197,10 +197,16 @@ target_position = Vector2(0, 1000)
 collision_mask = 521
 collide_with_areas = true
 
-[node name="WallDetection" type="RayCast2D" parent="."]
+[node name="WallRight" type="RayCast2D" parent="."]
 position = Vector2(0, -4)
 enabled = false
 target_position = Vector2(9, 0)
+collision_mask = 520
+
+[node name="WallLeft" type="RayCast2D" parent="."]
+position = Vector2(0, -4)
+enabled = false
+target_position = Vector2(-9, 0)
 collision_mask = 520
 
 [node name="StateTimer" type="Timer" parent="."]

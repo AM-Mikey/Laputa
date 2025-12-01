@@ -112,19 +112,23 @@ func enter_squirm():
 func enter_run():
 	speed = Vector2(100, 100)
 	$AnimationPlayer.play("Run")
-	$WallDetection.enabled = true
+	$WallRight.enabled = true
+	$WallLeft.enabled = true
 
 func do_run():
 	match move_dir:
 		Vector2.LEFT:
 			$Sprite2D.flip_h = false
-			$WallDetection.set_deferred("target_position", Vector2(-9.0, 0.0))
+			if ($WallRight.is_colliding()):
+				move_dir.x *= -1
 		Vector2.RIGHT:
+			if ($WallLeft.is_colliding()):
+				move_dir.x *= -1
 			$Sprite2D.flip_h = true
-			$WallDetection.set_deferred("target_position", Vector2(9.0, 0.0))
 
-	if ($WallDetection.is_colliding()):
-		move_dir.x *= -1
+func exit_run():
+	$WallRight.enabled = false
+	$WallLeft.enabled = false
 
 
 func enter_stake():
