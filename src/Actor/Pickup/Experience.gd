@@ -16,6 +16,7 @@ var end_time = 3.0
 var state = "normal"
 var did_first_frame = false
 var did_second_frame = false
+var just_spawned = true
 
 func _ready():
 	home = global_position
@@ -33,6 +34,9 @@ func _ready():
 		10:
 			if velocity.x < 0: $AnimationPlayer.play("LargeLeft")
 			else: $AnimationPlayer.play("LargeRight")
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	just_spawned = false
 
 func randomize_direction():
 	rng.randomize()

@@ -17,6 +17,7 @@ var branch: String = ""
 var active_pc = null
 var disabled = false
 var move_dir = Vector2.LEFT
+var just_spawned = true
 
 var waypoints = {}
 #var current_waypoint := 0
@@ -44,6 +45,9 @@ func _ready():
 
 	setup_states()
 	change_state(starting_state)
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	just_spawned = false
 
 
 
@@ -203,13 +207,16 @@ func look_at_node(node):
 
 func calc_velocity(do_gravity = true) -> Vector2:
 	var out: = velocity
-	out.x = speed.x * move_dir.x
+	var fractional_speed = speed
+	if is_in_water:
+		fractional_speed = speed * Vector2(0.666, 0.666)
+	out.x = fractional_speed.x * move_dir.x
 	if do_gravity:
 		out.y += gravity * get_physics_process_delta_time()
 		if move_dir.y < 0:
-			out.y = speed.y * move_dir.y
+			out.y = fractional_speed.y * move_dir.y
 	else:
-		out.y = speed.y * move_dir.y
+		out.y = fractional_speed.y * move_dir.y
 	return out
 
 
