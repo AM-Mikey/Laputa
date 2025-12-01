@@ -23,6 +23,8 @@ func _ready():
 	####
 	am.play_music("theme")
 	await get_tree().process_frame
+	if w.uig.has_node("HUD"):
+		w.uig.get_node("HUD").free()
 	do_focus()
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
@@ -44,7 +46,6 @@ func _on_new():
 
 	get_tree().paused = false
 	w.ui.visible = true
-
 	w.change_level_via_code(w.start_level_path)
 
 
