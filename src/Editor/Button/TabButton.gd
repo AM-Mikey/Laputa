@@ -44,4 +44,6 @@ func set_collection_visibility(visible):
 			if a.is_in_group("NPCSpawns"):
 				a.visible = visible
 		5: cl.get_node("Props").visible = visible
-		6: cl.get_node("Triggers").visible = visible
+		6: for a in cl.get_node("Spawns").get_children():
+			if a.is_in_group("TriggerSpawns"):
+				a.visible = visible
