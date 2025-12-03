@@ -42,7 +42,7 @@ func setup():
 
 ### STATES ###
 
-func enter_walk():
+func enter_walk(_last_state):
 	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
 		move_dir = Vector2.RIGHT
 	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
@@ -72,7 +72,7 @@ func do_walk():
 		move_and_slide()
 
 
-func enter_idle():
+func enter_idle(_last_state):
 	rng.randomize()
 	ap.play("Idle")
 	match move_dir:
@@ -83,7 +83,7 @@ func enter_idle():
 	change_state("walk")
 
 
-func enter_aggro():
+func enter_aggro(_last_state):
 	pass
 
 func do_aggro():

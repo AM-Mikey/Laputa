@@ -52,7 +52,7 @@ func _on_physics_process(_delta):
 	move_and_slide()
 
 
-func enter_hang():
+func enter_hang(_last_state):
 	$AnimationPlayer.play("HangIdle")
 
 func do_hang():
@@ -65,12 +65,12 @@ func do_hang():
 			return
 
 
-func enter_hangactive():
+func enter_hangactive(_last_state):
 	$AnimationPlayer.play("HangActive")
 	$StateTimer.start(wait_time)
 
 
-func enter_drop():
+func enter_drop(_last_state):
 	gravity = base_gravity if !is_in_water else water_gravity
 	hit_enemies_on_contact = true
 	damage_on_contact = drop_damage
@@ -84,10 +84,10 @@ func do_drop():
 			change_state("squirm")
 			return
 
-func exit_drop():
+func exit_drop(_next_state):
 	hit_enemies_on_contact = false
 
-func enter_squirm():
+func enter_squirm(_last_state):
 	$RayCast2D.queue_free()
 	damage_on_contact = base_damage
 
@@ -111,7 +111,7 @@ func enter_squirm():
 	change_state("run")
 
 
-func enter_run():
+func enter_run(_last_state):
 	speed = Vector2(100, 100)
 	$AnimationPlayer.play("Run")
 	$WallRight.enabled = true
@@ -128,12 +128,12 @@ func do_run():
 				move_dir.x *= -1
 			$Sprite2D.flip_h = true
 
-func exit_run():
+func exit_run(_next_state):
 	$WallRight.enabled = false
 	$WallLeft.enabled = false
 
 
-func enter_stake():
+func enter_stake(_last_state):
 	$AnimationPlayer.play("Stake")
 	await get_tree().process_frame
 	$CollisionShape2D.set_deferred("disabled", true) #so it doesn't see itself

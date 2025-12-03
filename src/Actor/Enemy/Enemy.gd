@@ -125,15 +125,17 @@ func do_state():
 
 func change_state(new):
 	if disabled: return
+	var last_state = state
+	var next_state = new
 	if has_node("StateTimer"): #this prevents previous states using the same timer from triggering things
 		get_node("StateTimer").stop()
 	var exit_method = "exit_" + state
 	if has_method(exit_method):
-		call(exit_method)
+		call(exit_method, next_state)
 	state = new
 	var enter_method = "enter_" + state
 	if has_method(enter_method):
-		call(enter_method)
+		call(enter_method, last_state)
 
 
 

@@ -100,15 +100,17 @@ func do_state():
 		call(do_method)
 
 func change_state(new):
+	var last_state = state
+	var next_state = new
 	if state:
 		var exit_method = "exit_" + state
 		if has_method(exit_method):
-			call(exit_method)
+			call(exit_method, next_state)
 	state = new
 	$StateLabel.text = state
 	var enter_method = "enter_" + state
 	if has_method(enter_method):
-		call(enter_method)
+		call(enter_method, last_state)
 
 
 ### STATES ###
@@ -131,7 +133,7 @@ func do_walkto():
 		return
 
 
-func enter_walk():
+func enter_walk(_last_state):
 	change_animation("Walk")
 	speed = walk_speed
 	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
@@ -160,7 +162,7 @@ func do_walk():
 		return
 
 
-func enter_wait():
+func enter_wait(_last_state):
 	change_animation("Idle")
 	speed = Vector2.ZERO
 	rng.randomize()
@@ -171,7 +173,7 @@ func enter_wait():
 	return
 
 
-func enter_talk():
+func enter_talk(_last_state):
 	if $AnimationPlayer.has_animation("Talk"):
 		change_animation("Talk")
 	else:

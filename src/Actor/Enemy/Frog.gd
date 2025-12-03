@@ -42,7 +42,7 @@ func do_targeting():
 		else:
 			look_dir = Vector2(sign(target.get_global_position().x - global_position.x), 0)
 
-func enter_jump():
+func enter_jump(_last_state):
 	am.play("enemy_jump", self)
 	move_dir = Vector2(sign(target.get_global_position().x - global_position.x), -1)
 	look_dir = Vector2(move_dir.x, 0)
