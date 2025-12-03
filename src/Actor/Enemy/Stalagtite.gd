@@ -47,7 +47,10 @@ func setup():
 
 
 func _on_physics_process(_delta):
-	velocity = calculate_move_velocity(velocity, move_dir, speed)
+	if state == "stake":
+		velocity = Vector2.ZERO
+	else:
+		velocity = calc_velocity(velocity, move_dir, speed)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
 
@@ -121,11 +124,11 @@ func do_run():
 	match move_dir:
 		Vector2.LEFT:
 			$Sprite2D.flip_h = false
-			if ($WallRight.is_colliding()):
-				move_dir.x *= -1
-		Vector2.RIGHT:
 			if ($WallLeft.is_colliding()):
-				move_dir.x *= -1
+				move_dir = Vector2.RIGHT
+		Vector2.RIGHT:
+			if ($WallRight.is_colliding()):
+				move_dir = Vector2.LEFT
 			$Sprite2D.flip_h = true
 
 func exit_run(_next_state):
@@ -138,18 +141,6 @@ func enter_stake(_last_state):
 	await get_tree().process_frame
 	$CollisionShape2D.set_deferred("disabled", true) #so it doesn't see itself
 	$Standable/CollisionShape2D.set_deferred("disabled", false)
-
-
-func calculate_move_velocity(velocity: Vector2, move_dir, speed) -> Vector2:
-	if state == "stake":
-		return Vector2.ZERO
-
-	var out: = velocity
-	out.x = speed.x * move_dir.x
-	out.y += gravity * get_physics_process_delta_time()
-	if move_dir.y < 0:
-		out.y = speed.y * move_dir.y
-	return out
 
 
 ### SIGNALS ###

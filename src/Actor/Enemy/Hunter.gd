@@ -37,20 +37,11 @@ func _physics_process(_delta):
 				move_dir.x *= -1
 
 
-	velocity = calculate_movevelocity(velocity, move_dir, speed)
+	velocity = calc_velocity(velocity, move_dir, speed)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
 	animate()
 
-func calculate_movevelocity(velocity: Vector2, move_dir, speed) -> Vector2:
-	var out: = velocity
-
-	out.x = speed.x * move_dir.x
-	out.y += gravity * get_physics_process_delta_time()
-	if move_dir.y < 0:
-		out.y = speed.y * move_dir.y
-
-	return out
 
 func _on_PlayerDetector_body_entered(body):
 	if not locked_on:

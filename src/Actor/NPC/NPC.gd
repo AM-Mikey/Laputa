@@ -136,9 +136,9 @@ func do_walkto():
 func enter_walk(_last_state):
 	change_animation("Walk")
 	speed = walk_speed
-	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
+	if not $FloorL.is_colliding() and move_dir.x < 0:
 		move_dir = Vector2.RIGHT
-	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
+	if not $FloorR.is_colliding() and move_dir.x > 0:
 		move_dir = Vector2.LEFT
 	rng.randomize()
 	$StateTimer.start(rng.randf_range(1.0, 10.0))
@@ -150,12 +150,12 @@ func enter_walk(_last_state):
 func do_walk():
 	$Sprite2D.flip_h = true if move_dir.x > 0 else false #set sprite to move_dir
 
-	if (not $FloorDetectorL.is_colliding() and move_dir.x < 0) \
-	or (not $FloorDetectorR.is_colliding() and move_dir.x > 0):
+	if (not $FloorL.is_colliding() and move_dir.x < 0) \
+	or (not $FloorR.is_colliding() and move_dir.x > 0):
 		change_state("wait")
 		return
-	if $WallDetectorL.is_colliding() and move_dir.x < 0 \
-	or $WallDetectorR.is_colliding() and move_dir.x > 0:
+	if ($WallLB.is_colliding() || $WallLT.is_colliding()) and move_dir.x < 0 \
+	or ($WallRB.is_colliding() || $WallRT.is_colliding()) and move_dir.x > 0:
 		$Sprite2D.flip_h = !$Sprite2D.flip_h
 		move_dir.x = move_dir.x * -1.0
 		change_state("wait")
@@ -173,7 +173,7 @@ func enter_wait(_last_state):
 	return
 
 
-func enter_talk(_last_state):
+func enter_talk():
 	if $AnimationPlayer.has_animation("Talk"):
 		change_animation("Talk")
 	else:

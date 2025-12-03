@@ -69,7 +69,7 @@ tile_set = ExtResource("2_s4ctt")
 [node name="Front" type="TileMapLayer" parent="TileMap"]
 z_index = 1
 use_parent_material = true
-tile_map_data = PackedByteArray("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AAAqAAsAAAAAAAgAAAApAAsAAAAAAAgAAAAoAAsAAAAAAAgAAAAnAAsAAAAAAAgAAAAQAAAAAAAGAAgAAAD+//n/AAAGAAgAAAD+//v/AAAGAAgAAAABAPv/AAAGAAgAAAABAPn/AAAGAAgAAAAgAAgAAAAGAAgAAAAgAAkAAAAGAAgAAAAfAAkAAAAGAAgAAAAfAAgAAAAGAAgAAAAjAAMAAAAAAAgAAAAkAAMAAAAAAAgAAAAeAAMAAAAAAAgAAAAfAAMAAAAAAAgAAAD4//z/AAAAAAgAAAD3//z/AAAAAAgAAAD2//z/AAAAAAgAAADy//z/AAAAAAgAAADx//z/AAAAAAgAAADw//z/AAAAAAgAAADv//z/AAAAAAgAAADz/wEAAAAAAAgAAAD0/wEAAAAAAAgAAAD1/wEAAAAAAAgAAAD2/wEAAAAAAAgAAADw/wsAAAAAAAgAAADx/wsAAAAAAAgAAADy/wsAAAAAAAgAAADz/wsAAAAAAAgAAAD0/wsAAAAAAAgAAAD1/wsAAAAAAAgAAAD2/wsAAAAAAAgAAAD3/wsAAAAAAAgAAAD4/wsAAAAAAAgAAAD5/wsAAAAAAAgAAAD5/woAAAAAAAgAAAD5/wkAAAAAAAgAAAD5/wgAAAAAAAgAAAD5/wcAAAAAAAgAAAD5/wYAAAAAAAgAAAD5/wUAAAAAAAgAAAD6/wsAAAAAAAgAAAD7/wsAAAAAAAgAAAD8/wsAAAAAAAgAAAD9/wsAAAAAAAgAAAD+/wsAAAAAAAgAAADw/wUAAAAAAAgAAADw/wYAAAAAAAgAAADw/wcAAAAAAAgAAADw/wgAAAAAAAgAAADw/wkAAAAAAAgAAADw/woAAAAAAAgAAADz/wgAAAAAAAgAAAD2/wgAAAAAAAgAAAD6/wgAAAAGAAgAAAD1//n/AAAAAAgAAAD2//n/AAAAAAgAAAD3//n/AAAAAAgAAAD4//n/AAAAAAgAAAD5//n/AAAAAAgAAAD9//n/AAAAAAgAAAAvAAMAAAAAAAgAAAAwAAMAAAAAAAgAAAAxAAMAAAAAAAgAAAAyAAMAAAAAAAgAAAAzAAMAAAAAAAgAAAA0AAMAAAAAAAgAAAA1AAMAAAAAAAgAAAA2AAMAAAAAAAgAAAA3AAMAAAAAAAgAAAA4AAMAAAAAAAgAAAA5AAMAAAAAAAgA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")
+tile_map_data = PackedByteArray("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AAAqAAsAAAAAAAgAAAApAAsAAAAAAAgAAAAoAAsAAAAAAAgAAAAnAAsAAAAAAAgAAAAQAAAAAAAGAAgAAAD+//n/AAAGAAgAAAD+//v/AAAGAAgAAAABAPv/AAAGAAgAAAABAPn/AAAGAAgAAAAgAAgAAAAGAAgAAAAgAAkAAAAGAAgAAAAfAAkAAAAGAAgAAAAfAAgAAAAGAAgAAAAjAAMAAAAAAAgAAAAkAAMAAAAAAAgAAAAeAAMAAAAAAAgAAAAfAAMAAAAAAAgAAAD4//z/AAAAAAgAAAD3//z/AAAAAAgAAAD2//z/AAAAAAgAAADy//z/AAAAAAgAAADx//z/AAAAAAgAAADw//z/AAAAAAgAAADv//z/AAAAAAgAAADz/wEAAAAAAAgAAAD0/wEAAAAAAAgAAAD1/wEAAAAAAAgAAAD2/wEAAAAAAAgAAADw/wsAAAAAAAgAAADx/wsAAAAAAAgAAADy/wsAAAAAAAgAAADz/wsAAAAAAAgAAAD0/wsAAAAAAAgAAAD1/wsAAAAAAAgAAAD2/wsAAAAAAAgAAAD3/wsAAAAAAAgAAAD4/wsAAAAAAAgAAAD5/wsAAAAAAAgAAAD5/woAAAAAAAgAAAD5/wkAAAAAAAgAAAD5/wgAAAAAAAgAAAD5/wcAAAAAAAgAAAD5/wYAAAAAAAgAAAD5/wUAAAAAAAgAAAD6/wsAAAAAAAgAAAD7/wsAAAAAAAgAAAD8/wsAAAAAAAgAAAD9/wsAAAAAAAgAAAD+/wsAAAAAAAgAAADw/wUAAAAAAAgAAADw/wYAAAAAAAgAAADw/wcAAAAAAAgAAADw/wgAAAAAAAgAAADw/wkAAAAAAAgAAADw/woAAAAAAAgAAADz/wgAAAAAAAgAAAD2/wgAAAAAAAgAAAD6/wgAAAAGAAgAAAD1//n/AAAAAAgAAAD2//n/AAAAAAgAAAD3//n/AAAAAAgAAAD4//n/AAAAAAgAAAD5//n/AAAAAAgAAAD9//n/AAAAAAgAAAAvAAMAAAAAAAgAAAAwAAMAAAAAAAgAAAAxAAMAAAAAAAgAAAAyAAMAAAAAAAgAAAAzAAMAAAAAAAgAAAA0AAMAAAAAAAgAAAA1AAMAAAAAAAgAAAA2AAMAAAAAAAgAAAA3AAMAAAAAAAgAAAA4AAMAAAAAAAgAAAA5AAMAAAAAAAgA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")
 tile_set = ExtResource("2_s4ctt")
 
 [node name="FarFront" type="TileMapLayer" parent="TileMap"]
@@ -99,7 +99,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("10_c0l8s")
 
-[node name="Child1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Child" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(-40, 0)
@@ -117,7 +117,7 @@ properties = {
 "voiced": [true, 1]
 }
 
-[node name="Frog4" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Frog" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(280, -192)
@@ -133,7 +133,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Nun1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Nun" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(336, 176)
@@ -151,7 +151,7 @@ properties = {
 "voiced": [true, 1]
 }
 
-[node name="Stalagtite5" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Stalagtite" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(328, -112)
@@ -167,7 +167,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite6" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Stalagtite1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(360, -112)
@@ -183,7 +183,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite7" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Stalagtite2" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(296, -112)
@@ -199,7 +199,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Frog5" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Frog1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(-248, 80)
@@ -215,7 +215,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Sphagnum1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Sphagnum" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(-24, -112)
@@ -230,7 +230,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Shield1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Shield" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(144, 96)
@@ -249,7 +249,7 @@ properties = {
 "walk_max_time": [10.0, 3]
 }
 
-[node name="Junior1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Junior" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(208, 48)
@@ -269,7 +269,7 @@ properties = {
 "walk_max_time": [10.0, 3]
 }
 
-[node name="Stalagtite8" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Stalagtite3" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(280, -168)
@@ -285,7 +285,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sentry2" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Sentry" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(392, 96)
@@ -307,7 +307,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sentry3" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Sentry1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(520, -112)
@@ -329,7 +329,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Frog6" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Frog2" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(392, 0)
@@ -345,7 +345,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Tabith2" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Tabith" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(232, 96)
@@ -364,7 +364,7 @@ properties = {
 "walk_speed": [Vector2(50, 50), 5]
 }
 
-[node name="Sage2" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Sage" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(216, 176)
@@ -383,7 +383,7 @@ properties = {
 "walk_speed": [Vector2(50, 50), 5]
 }
 
-[node name="Sage3" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Sage1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(328, 96)
@@ -402,7 +402,7 @@ properties = {
 "walk_speed": [Vector2(50, 50), 5]
 }
 
-[node name="Frog7" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Frog3" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(-8, 160)
@@ -418,7 +418,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Beetle2" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Beetle" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(-168, -112)
@@ -436,7 +436,7 @@ properties = {
 "wall_dir": [Vector2(-1, 0), 5]
 }
 
-[node name="Climber1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Climber" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(160, -168)
@@ -455,7 +455,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Beetle3" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Beetle1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(744, -16)
@@ -473,7 +473,7 @@ properties = {
 "wall_dir": [Vector2(-1, 0), 5]
 }
 
-[node name="LoadZone2" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="LoadZone" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -493,7 +493,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="LoadZone3" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="LoadZone1" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -513,7 +513,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Spikes2" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Spikes" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -530,7 +530,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Water1" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Water" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -547,7 +547,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Ladder1" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Ladder" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -563,7 +563,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Spikes3" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Spikes1" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -580,7 +580,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Sign1" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Sign" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -600,7 +600,7 @@ batsdsfdsdfsdsd
 }
 size_is_default = false
 
-[node name="Door3" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Door" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -622,7 +622,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door4" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Door1" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -644,7 +644,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door5" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Door2" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -666,7 +666,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="FlavorText1" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="FlavorText" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -684,7 +684,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Stalagtite9" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Stalagtite4" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(-168, 48)
@@ -702,7 +702,7 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Tabith3" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Tabith1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(-168, 176)
