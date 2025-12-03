@@ -54,12 +54,14 @@ unique_name_in_owner = true
 position = Vector2(80, 80)
 texture = ExtResource("5_6g673")
 hframes = 13
+vframes = 2
 
 [node name="StickRight" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(144, 80)
 texture = ExtResource("5_6g673")
 hframes = 13
+vframes = 2
 
 [node name="Select" type="Sprite2D" parent="."]
 unique_name_in_owner = true

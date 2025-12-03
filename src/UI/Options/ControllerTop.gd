@@ -28,7 +28,7 @@ func display_trigger(trigger):
 		"TriggerRight":
 			strength = Input.get_joy_axis(0, JOY_AXIS_TRIGGER_RIGHT)
 
-	if strength > 0.75:
+	if strength > 0.95:
 		trigger.frame = 1
 	else:
 		trigger.frame = 0

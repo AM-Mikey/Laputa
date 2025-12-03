@@ -3,10 +3,17 @@ extends Control
 const BUTTON_PROMPT_FLOATING = preload("res://assets/UI/ButtonPromptFloating.png")
 
 var input_map_path = "user://inputmap.json"
+
+var ignore_button_press = false
+var current_listening_action = null
+var action_buttons = {}
+var action_button_panel_default_widths = {}
+var action_button_panel_tween_time = 0.1
+var button_text_color_temp = Color(0.988, 0.22, 0.22)
+
+@export var ui_focus: NodePath
+
 @onready var w = get_tree().get_root().get_node("World")
-
-var compass_distance = 8
-
 @onready var action_options = get_tree().get_nodes_in_group("ActionOptions")
 
 #var action_dict = {
@@ -179,6 +186,24 @@ func _ready():
 
 
 
+### ANIMATION ###
+
+func setup_action_button_panels():
+	for action_box in %ActionSelections.get_children():
+		var panel = action_box.get_child(0)
+		action_button_panel_default_widths[action_box.name] = panel.size.x
+		panel.size.x = 0
+
+func tween_in_button_panel(panel):
+	var tween = create_tween()
+	tween.tween_property(panel, "size", Vector2(action_button_panel_default_widths[panel.get_parent().name], panel.size.y), action_button_panel_tween_time)
+	tween.play()
+
+func tween_out_button_panel(panel):
+	var tween = create_tween()
+	tween.tween_property(panel, "size", Vector2(0.0, panel.size.y), action_button_panel_tween_time)
+	tween.play()
+
 
 func set_action_button_icons():
 	var data
@@ -219,17 +244,26 @@ func set_action_button_icon_to_texture(data, action, button):
 			icon_texture.region = Rect2(input_icon_order.find(int(i[1])) * 16, 0, 16, 16)
 			button.icon = icon_texture
 
+### SIGNALS ###
 
-func on_reset():
-	pass # Replace with function body.
+func input_button_focus_entered(button):
+	tween_in_button_panel(button.get_parent().get_child(0))
 
+func input_button_focus_exited(button):
+	tween_out_button_panel(button.get_parent().get_child(0))
+
+#func on_confirm():
+	#am.play("ui_save")
+	#confirm_action_controller_input()
+
+#func on_reset():
+	#set_preset(1)
 
 func on_return():
 	w.get_node("MenuLayer/Options").exit()
 
-
+### UI ###
 
 func do_focus():
 	pass
-	print("TODO: controller config is not focusing, why?")
-	#op_l2.grab_focus()
+	#get_node(ui_focus).grab_focus()

@@ -1,7 +1,7 @@
 extends TextureRect
 
-@onready var stick_left_home_pos = %StickLeft.global_position
-@onready var stick_right_home_pos = %StickRight.global_position
+@onready var stick_left_home_pos = %StickLeft.position
+@onready var stick_right_home_pos = %StickRight.position
 
 #func _physics_process(_delta):
 	#
@@ -26,6 +26,11 @@ func _input(event):
 				%Select.frame = button_frame
 			JOY_BUTTON_START:
 				%Start.frame = button_frame
+			JOY_BUTTON_LEFT_STICK:
+				display_stick(%StickLeft)
+			JOY_BUTTON_RIGHT_STICK:
+				display_stick(%StickRight)
+
 	if event is InputEventJoypadMotion:
 		match event.axis:
 			JOY_AXIS_LEFT_X, JOY_AXIS_LEFT_Y: display_stick(%StickLeft)
@@ -61,15 +66,20 @@ func display_stick(stick):
 	var stick_home_pos: Vector2
 	var strength_x = 0.0
 	var strength_y = 0.0
+	var clicked = 0
 	match stick.name:
 		"StickLeft":
 			strength_x = Input.get_joy_axis(0, JOY_AXIS_LEFT_X)
 			strength_y = Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)
 			stick_home_pos = stick_left_home_pos
+			if Input.is_joy_button_pressed(0, JOY_BUTTON_LEFT_STICK):
+				clicked = 1
 		"StickRight":
 			strength_x = Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
 			strength_y = Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
 			stick_home_pos = stick_right_home_pos
+			if Input.is_joy_button_pressed(0, JOY_BUTTON_RIGHT_STICK):
+				clicked = 1
 
 	var dir = Vector2(strength_x, strength_y)
 	var deg = rad_to_deg(fposmod(dir.rotated(0.5 * PI).angle(), 2 * PI))
@@ -100,8 +110,18 @@ func display_stick(stick):
 			stick_frame = 11
 		elif (deg >= 315 && deg < 345):
 			stick_frame = 12
-		stick.frame = stick_frame
+		stick.frame_coords = Vector2i(stick_frame, clicked)
 		stick.position = stick_home_pos
 	else:
-		stick.frame = 0
+		stick.frame_coords = Vector2i(0, clicked)
 		stick.position = stick_home_pos + Vector2(strength_x * 8, strength_y * 8)
+
+
+
+### SIGNALS ###
+
+#func input_button_focus_entered(button):
+	#tween_in_button_panel(button.get_parent().get_child(0))
+#
+#func input_button_focus_exited(button):
+	#tween_out_button_panel(button.get_parent().get_child(0))
