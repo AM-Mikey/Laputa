@@ -1,260 +1,123 @@
 extends Control
 
-const BUTTON_PROMPT_FLOATING = preload("res://assets/UI/ButtonPromptFloating.png")
+#const BUTTON_PROMPT_FLOATING = preload("res://assets/UI/ButtonPromptFloating.png")
 
 var input_map_path = "user://inputmap.json"
 
-var ignore_button_press = false
-var current_listening_action = null
-var action_buttons = {}
-var action_button_panel_default_widths = {}
-var action_button_panel_tween_time = 0.1
-var button_text_color_temp = Color(0.988, 0.22, 0.22)
+
+var input_icon_joy = {
+	JOY_BUTTON_Y: 0,
+	JOY_BUTTON_B: 1,
+	JOY_BUTTON_A: 2,
+	JOY_BUTTON_X: 3,
+	JOY_BUTTON_LEFT_SHOULDER: 6,
+	JOY_BUTTON_RIGHT_SHOULDER: 7,
+	JOY_BUTTON_BACK: 8,
+	JOY_BUTTON_START: 9,
+	JOY_BUTTON_LEFT_STICK: 10,
+	JOY_BUTTON_RIGHT_STICK:11,
+	JOY_BUTTON_DPAD_UP: 12,
+	JOY_BUTTON_DPAD_DOWN: 13,
+	JOY_BUTTON_DPAD_LEFT: 14,
+	JOY_BUTTON_DPAD_RIGHT: 15,
+}
+
+var input_icon_joy_analog = {
+	JOY_AXIS_TRIGGER_LEFT: 4,
+	JOY_AXIS_TRIGGER_RIGHT: 5,
+	JOY_AXIS_LEFT_X: 16,
+	JOY_AXIS_LEFT_Y: 17,
+	JOY_AXIS_RIGHT_X: 18,
+	JOY_AXIS_RIGHT_Y: 19,
+}
 
 @export var ui_focus: NodePath
 
 @onready var w = get_tree().get_root().get_node("World")
-@onready var action_options = get_tree().get_nodes_in_group("ActionOptions")
-
-#var action_dict = {
-	#"": "None",
-	#"jump": "Jump",
-	#"fire_manual": "Fire",
-	#"fire_automatic": "Autofire",
-	#"inspect": "Inspect",
-	#"inventory": "Inventory",
-	#"gun_left": "Next Gun",
-	#"gun_right": "Last Gun",
-	#"pause": "Pause",
-#}
-#
-#var button_dict = {
-	#"DpadUp": JOY_BUTTON_DPAD_UP,
-	#"DpadLeft": JOY_BUTTON_DPAD_LEFT,
-	#"DpadRight": JOY_BUTTON_DPAD_RIGHT,
-	#"DpadDown": JOY_BUTTON_DPAD_DOWN,
-	#"Select": JOY_BUTTON_BACK,
-	#"Start": JOY_BUTTON_START,
-	#"FaceUp": JOY_BUTTON_Y,
-	#"FaceLeft": JOY_BUTTON_X,
-	#"FaceRight": JOY_BUTTON_B,
-	#"FaceDown": JOY_BUTTON_A,
-	#"L1": JOY_BUTTON_LEFT_SHOULDER,
-	#"L2": JOY_AXIS_TRIGGER_LEFT,
-	#"L3": JOY_BUTTON_LEFT_STICK,
-	#"R1": JOY_BUTTON_RIGHT_SHOULDER,
-	#"R2": JOY_AXIS_TRIGGER_RIGHT,
-	#"R3": JOY_BUTTON_RIGHT_STICK,
-	#}
-
-var input_icon_order = [
-	JOY_BUTTON_Y,
-	JOY_BUTTON_B,
-	JOY_BUTTON_A,
-	JOY_BUTTON_X,
-	JOY_AXIS_TRIGGER_LEFT,
-	JOY_AXIS_TRIGGER_RIGHT,
-	JOY_BUTTON_LEFT_SHOULDER,
-	JOY_BUTTON_RIGHT_SHOULDER,
-	JOY_BUTTON_BACK,
-	JOY_BUTTON_START,
-	JOY_BUTTON_LEFT_STICK,
-	JOY_BUTTON_RIGHT_STICK,
-]
-
-
-
-
-
-
-
-
+@onready var rm = $RemapManager
+@onready var action_selections = %ActionSelections
 
 
 
 
 
 func _ready():
+	for action_box in %ActionSelections.get_children():
+		rm.action_buttons[action_box.name] = action_box.get_child(1)
+	for b in rm.action_buttons.values():
+		b.connect("pressed", Callable(self, "input_button_pressed").bind(b))
+		b.connect("focus_entered", Callable(self, "input_button_focus_entered").bind(b))
+		b.connect("focus_exited", Callable(self, "input_button_focus_exited").bind(b))
 	set_action_button_icons()
-
-#func _ready():
-	#for o in action_options:
-		#for a in action_dict:
-			#o.add_item(action_dict[a])
-##			if o.get_signal_list().size() == 0:
-			##o.connect("item_selected", self, "_set_button_action", [o.name])
-	#_setup_action_options()
-#
-#
-#func _setup_action_options():
-	#for o in action_options:
-		##print(o.name)
-#
-##		var found_action
-#
-		#for a in InputMap.get_actions():
-			#if a in action_dict.keys():
-				#for e in InputMap.action_get_events(a):
-					#if e is InputEventJoypadButton:
-##						print("e.button_index : " + str(e.button_index))
-##						print("button_dict[o.name] : " + str(button_dict[o.name]))
-						#if e.button_index == button_dict[o.name]:
-							##print("YAHOO: " + o.name)
-							#o.modulate = Color.AQUA
-							#o.select(action_dict.keys().find(a))
-##							o.selected = action_dict.keys().find(a)
-
-#		if found_action != null:
-#			o.select(action_dict.keys().find(found_action))
-#		else:
-#			o.select(0) #"None"
-
-#func _set_button_action (action_index, button_name):
-#	var action = action_dict[action_dict.keys()[action_index]]
-#	var event = InputEventJoypadButton.new()
-#	event.set_button_index(button_dict[button_name])
-#
-#	#erase all other events that are the same button
-#	for a in InputMap.get_actions():
-#		if InputMap.action_has_event(a, event):
-#			InputMap.action_erase_event(a,event)
-#
-#	#add the new event
-#	if action != null:
-#		InputMap.action_add_event(action, event)
-#	save_input_map()
-
-#func save_input_map():
-#	var data = {}
-#	var input_actions = InputMap.get_actions()
-#	for a in input_actions:
-#		var inputs = []
-#		for i in InputMap.get_action_list(a):
-#				if i is InputEventMouseButton:
-#					inputs.append(["mouse", i.button_index])
-#				if i is InputEventKey:
-#					inputs.append(["key", i.scancode])
-#				if i is InputEventJoypadButton:
-#					inputs.append(["joy", i.button_index])
-#		data[a] = inputs
-#
-#
-#	var file = File.new()
-#	var file_written = file.open(input_map_path, File.WRITE)
-#	if file_written == OK:
-#		#file.store_var(data)
-#		file.store_string(var2str(data))
-#		file.close()
-#		print("input map data saved")
-#	else:
-#		printerr("ERROR: input map data could not be saved!")
+	rm.setup_action_button_panels()
+	check_disable_analog()
 
 
+func check_disable_analog():
+	var input_left = InputEventJoypadMotion.new()
+	input_left.axis = JOY_AXIS_LEFT_X
+	input_left.axis_value = -1.0
+	%DisableAnalog.get_node("Button").button_pressed = InputMap.action_has_event("move_left", input_left)
 
-#func load_input_map(): #called on save system load options
-	#var data
-	#if !FileAccess.file_exists(input_map_path):
-		#printerr("ERROR: could not load input map data")
-		#return
-	#var file = FileAccess.open(input_map_path, FileAccess.READ)
-	#if !file:
-		#return
-	#var text = file.get_as_text()
-	#var test_json_conv = JSON.new()
-	#test_json_conv.parse(text)
-	#data = test_json_conv.get_data()
-	#file.close()
-#
-	#set_button_icons(data)
-#
-	#for a in data.keys():
-		#InputMap.action_erase_events(a) #does this overwrite all events period?
-		#for i in data[a]:
-			#var new_input
-			#match i.front():
-				#"mouse":
-					#new_input = InputEventMouseButton.new()
-					#new_input.set_button_index(i.back())
-				#"key":
-					#new_input = InputEventKey.new()
-					#new_input.set_keycode(i.back())
-				#"joy":
-					#new_input = InputEventJoypadButton.new()
-					#new_input.set_button_index(i.back())
-#
-			#InputMap.action_add_event(a, new_input)
+
+### CHANGING ACTION INPUT ###
+
+func input_button_pressed(button):
+	rm.current_listening_action = rm.action_buttons.find_key(button)
+	for i in rm.action_buttons.values(): #deselect all other buttons
+		if i != button:
+			i.set_pressed(false)
+
+
+func _input(event):
+	if (event is InputEventJoypadButton || event is InputEventJoypadMotion) && rm.current_listening_action != null:
+		get_viewport().set_input_as_handled()
+		rm.set_temp_action_input(event, "controller")
+		rm.current_listening_action = null
 
 
 
 ### ANIMATION ###
 
-func setup_action_button_panels():
-	for action_box in %ActionSelections.get_children():
-		var panel = action_box.get_child(0)
-		action_button_panel_default_widths[action_box.name] = panel.size.x
-		panel.size.x = 0
+func set_action_button_icons(temp = false): #needs default
+	if temp:
+		var active_button = rm.action_buttons[rm.current_listening_action]
+		rm.action_button_is_red.append(active_button)
 
-func tween_in_button_panel(panel):
-	var tween = create_tween()
-	tween.tween_property(panel, "size", Vector2(action_button_panel_default_widths[panel.get_parent().name], panel.size.y), action_button_panel_tween_time)
-	tween.play()
+	for button in rm.action_buttons.values():
+		if !temp:
+			rm.action_button_is_red.erase(button)
 
-func tween_out_button_panel(panel):
-	var tween = create_tween()
-	tween.tween_property(panel, "size", Vector2(0.0, panel.size.y), action_button_panel_tween_time)
-	tween.play()
+		var action = rm.action_buttons.find_key(button)
+		var input = rm.temp_action_controller_input[action] if temp else rm.convert_input_event_to_array(rm.get_action_input_event(action, "controller"))
 
+		if input != null:
+			button.icon = get_button_texture_atlas(input, rm.action_button_is_red.has(button))
 
-func set_action_button_icons():
-	var data
-	if !FileAccess.file_exists(input_map_path):
-		printerr("ERROR: could not load input map data")
-		return
-	var file = FileAccess.open(input_map_path, FileAccess.READ)
-	if !file:
-		return
-	var text = file.get_as_text()
-	var test_json_conv = JSON.new()
-	test_json_conv.parse(text)
-	data = test_json_conv.get_data()
-	file.close()
-
-	for action in data.keys():
-		match action:
-			"jump":
-				set_action_button_icon_to_texture(data, action, %JumpButton)
-			"fire_manual":
-				set_action_button_icon_to_texture(data, action, %FireManualButton)
-			"fire_automatic":
-				set_action_button_icon_to_texture(data, action, %FireAutomaticButton)
-			"gun_left":
-				set_action_button_icon_to_texture(data, action, %GunLeftButton)
-			"gun_right":
-				set_action_button_icon_to_texture(data, action, %GunRightButton)
-			"inventory":
-				set_action_button_icon_to_texture(data, action, %InventoryButton)
-			"pause":
-				set_action_button_icon_to_texture(data, action, %PauseButton)
-
-func set_action_button_icon_to_texture(data, action, button):
-	for i in data[action]:
-		if i[0] == "joy" || i[0] == "joy_analog": #is a joystick input
-			var icon_texture = AtlasTexture.new()
-			icon_texture.atlas = BUTTON_PROMPT_FLOATING
-			icon_texture.region = Rect2(input_icon_order.find(int(i[1])) * 16, 0, 16, 16)
-			button.icon = icon_texture
+func get_button_texture_atlas(input, is_active) -> AtlasTexture:
+	var out = AtlasTexture.new()
+	if is_active:
+		out.atlas = load("res://assets/UI/ButtonPromptFloatingRed.png")
+	else:
+		out.atlas = load("res://assets/UI/ButtonPromptFloating.png")
+	match input[0]:
+		"joy":
+			out.region = Rect2(input_icon_joy[int(input[1])] * 16, 0, 16, 16)
+		"joy_analog":
+			out.region = Rect2(input_icon_joy_analog[int(input[1])] * 16, 0, 16, 16)
+	return out
 
 ### SIGNALS ###
 
 func input_button_focus_entered(button):
-	tween_in_button_panel(button.get_parent().get_child(0))
+	rm.tween_in_button_panel(button.get_parent().get_child(0))
 
 func input_button_focus_exited(button):
-	tween_out_button_panel(button.get_parent().get_child(0))
+	rm.tween_out_button_panel(button.get_parent().get_child(0))
 
-#func on_confirm():
-	#am.play("ui_save")
-	#confirm_action_controller_input()
+func on_confirm():
+	am.play("save")
+	rm.confirm_action_input("controller")
 
 #func on_reset():
 	#set_preset(1)
@@ -267,3 +130,31 @@ func on_return():
 func do_focus():
 	pass
 	#get_node(ui_focus).grab_focus()
+
+### SETTINGS ###
+
+func on_disable_analog(toggled_on: bool):
+	var input_left = InputEventJoypadMotion.new()
+	input_left.axis = JOY_AXIS_LEFT_X
+	input_left.axis_value = -1.0
+	var input_right = InputEventJoypadMotion.new()
+	input_right.axis = JOY_AXIS_LEFT_X
+	input_right.axis_value = 1.0
+	var input_up = InputEventJoypadMotion.new()
+	input_up.axis = JOY_AXIS_LEFT_Y
+	input_up.axis_value = -1.0
+	var input_down = InputEventJoypadMotion.new()
+	input_down.axis = JOY_AXIS_LEFT_Y
+	input_down.axis_value = 1.0
+
+	if toggled_on:
+		InputMap.action_add_event("move_left", input_left)
+		InputMap.action_add_event("move_right", input_right)
+		InputMap.action_add_event("look_up", input_up)
+		InputMap.action_add_event("look_down", input_down)
+	else:
+		InputMap.action_erase_event("move_left", input_left)
+		InputMap.action_erase_event("move_right", input_right)
+		InputMap.action_erase_event("look_up", input_up)
+		InputMap.action_erase_event("look_down", input_down)
+	rm.save_input_map()

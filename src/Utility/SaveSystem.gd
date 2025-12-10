@@ -221,7 +221,7 @@ func load_options():
 	options.ishidden = true
 	w.ml.add_child(options)
 	options.tabs.get_node("Settings").load_settings()
-	options.tabs.get_node("KeyConfig").load_input_map() #TODO: migrate to Inputconfig script
+	options.tabs.get_node("KeyConfig").rm.load_input_map() #TODO: migrate to Inputconfig script
 	#options.tabs.get_node("ControllerConfig").load_input_map()
 	await get_tree().process_frame
 	options.queue_free()

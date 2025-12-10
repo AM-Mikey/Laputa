@@ -1,3 +1,4 @@
+
 #concept 
 
 Religion is nondescript in the game, it's assumed that there is one major religion practiced on the island that is similar to Catholicism, although others are likely practiced due to Laputa's [[Ethnicity|cultural]] makeup.

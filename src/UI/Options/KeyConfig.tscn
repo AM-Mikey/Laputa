@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dqramyf8aeeyv"]
+[gd_scene load_steps=11 format=3 uid="uid://dqramyf8aeeyv"]
 
 [ext_resource type="Theme" uid="uid://c1np2xna4dogr" path="res://src/UI/Theme/InsetMenu.tres" id="1"]
 [ext_resource type="Texture2D" uid="uid://cl3sa7nubis6p" path="res://assets/UI/Options/KeyboardMouse.png" id="2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cq6xxd8uisqit" path="res://src/UI/Options/KeyConfig.gd" id="6"]
 [ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="8_rkq2i"]
 [ext_resource type="StyleBox" uid="uid://bqcnin0ya0s5l" path="res://src/UI/StyleBox/SteelCorner.tres" id="9"]
+[ext_resource type="Script" uid="uid://be36ht814bo00" path="res://src/UI/Options/RemapManager.gd" id="10_enb1l"]
 
 [node name="KeyConfig" type="MarginContainer"]
 anchors_preset = 15
@@ -533,6 +534,9 @@ size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.84313726, 0.68235296, 0.53333336, 1)
 theme_override_styles/normal = ExtResource("8_rkq2i")
 text = "Return"
+
+[node name="RemapManager" type="Node" parent="."]
+script = ExtResource("10_enb1l")
 
 [connection signal="pressed" from="Corner/Margin/HBox/Confirm" to="." method="on_confirm"]
 [connection signal="pressed" from="Corner/Margin/HBox/Reset" to="." method="on_reset"]
