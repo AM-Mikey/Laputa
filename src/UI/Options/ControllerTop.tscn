@@ -1,11 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8est8qh3g3tb"]
+[gd_scene load_steps=9 format=3 uid="uid://c8est8qh3g3tb"]
 
+[ext_resource type="Shader" uid="uid://bfsl4o8u1wb4b" path="res://src/Shader/SimpleOutline.gdshader" id="1_5occd"]
 [ext_resource type="Texture2D" uid="uid://dtmsiuqoht74n" path="res://assets/UI/Options/ControllerTopBase.png" id="1_61gyg"]
 [ext_resource type="Script" uid="uid://ckeh62yx0nbbg" path="res://src/UI/Options/ControllerTop.gd" id="2_x4h6g"]
 [ext_resource type="Texture2D" uid="uid://krsx756lvkat" path="res://assets/UI/Options/ControllerTrigger.png" id="3_5occd"]
+[ext_resource type="Shader" uid="uid://dero0bty7fsn4" path="res://src/Shader/SimpleRecolor.gdshader" id="3_x4h6g"]
 [ext_resource type="Texture2D" uid="uid://dhd6sn33su77h" path="res://assets/UI/Options/ControllerBumper.png" id="4_xiov6"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xiov6"]
+shader = ExtResource("1_5occd")
+shader_parameter/color = Color(0.03529412, 0.043137256, 0.101960786, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5occd"]
+shader = ExtResource("3_x4h6g")
+shader_parameter/color = Color(0.03529412, 0.043137256, 0.101960786, 1)
+
 [node name="ControllerTop" type="TextureRect"]
+material = SubResource("ShaderMaterial_xiov6")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,6 +31,17 @@ grow_vertical = 2
 texture = ExtResource("1_61gyg")
 stretch_mode = 2
 script = ExtResource("2_x4h6g")
+
+[node name="Shadow" type="TextureRect" parent="."]
+visible = false
+show_behind_parent = true
+material = SubResource("ShaderMaterial_5occd")
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 248.0
+offset_bottom = 104.0
+texture = ExtResource("1_61gyg")
 
 [node name="TriggerLeft" type="Sprite2D" parent="."]
 unique_name_in_owner = true

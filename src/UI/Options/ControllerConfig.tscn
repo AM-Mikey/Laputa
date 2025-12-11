@@ -26,31 +26,35 @@ layout_mode = 2
 
 [node name="HBox" type="HBoxContainer" parent="."]
 layout_mode = 2
-alignment = 2
+alignment = 1
 
 [node name="ControllerTop" parent="HBox" instance=ExtResource("3_4ypbq")]
+layout_direction = 1
 layout_mode = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Control" type="Control" parent="HBox"]
-custom_minimum_size = Vector2(64, 0)
+visible = false
+custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 
 [node name="HBox2" type="HBoxContainer" parent="."]
 layout_mode = 2
-
-[node name="Control" type="Control" parent="HBox2"]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 2
+alignment = 1
 
 [node name="ControllerFront" parent="HBox2" instance=ExtResource("4_4ypbq")]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HBox2"]
+visible = false
+custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 2
 theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
+theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
 
 [node name="HBox" type="HBoxContainer" parent="Margin"]
 layout_mode = 2
@@ -60,6 +64,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="Margin/HBox/Controls"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Controls:"
@@ -72,7 +77,7 @@ follow_focus = true
 [node name="ActionSelections" type="VBoxContainer" parent="Margin/HBox/Controls/Scroll"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 2
 
 [node name="jump" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
 custom_minimum_size = Vector2(0, 28)
@@ -109,6 +114,7 @@ offset_right = 28.0
 offset_bottom = 28.0
 toggle_mode = true
 icon = ExtResource("9_srj3u")
+icon_alignment = 1
 
 [node name="fire_manual" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
 custom_minimum_size = Vector2(0, 28)
@@ -334,49 +340,74 @@ icon_alignment = 1
 
 [node name="Settings" type="VBoxContainer" parent="Margin/HBox"]
 layout_mode = 2
+size_flags_horizontal = 10
 alignment = 2
 
 [node name="Label" type="Label" parent="Margin/HBox/Settings"]
+visible = false
 layout_mode = 2
 text = "Settings:"
 
-[node name="JumpOnHold" type="VBoxContainer" parent="Margin/HBox/Settings"]
+[node name="JumpOnHold" type="Control" parent="Margin/HBox/Settings"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 
-[node name="Button" type="CheckBox" parent="Margin/HBox/Settings/JumpOnHold"]
-layout_mode = 2
-size_flags_horizontal = 6
+[node name="CheckBox" type="CheckBox" parent="Margin/HBox/Settings/JumpOnHold"]
+layout_mode = 0
+offset_right = 112.0
+offset_bottom = 29.0
 size_flags_vertical = 0
 text = "Jump on Hold"
+alignment = 1
 
-[node name="DisableAnalog" type="VBoxContainer" parent="Margin/HBox/Settings"]
+[node name="DisableAnalog" type="Control" parent="Margin/HBox/Settings"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 
-[node name="Button" type="CheckBox" parent="Margin/HBox/Settings/DisableAnalog"]
-layout_mode = 2
-size_flags_horizontal = 6
+[node name="CheckBox" type="CheckBox" parent="Margin/HBox/Settings/DisableAnalog"]
+layout_mode = 0
+offset_right = 112.0
+offset_bottom = 29.0
 size_flags_vertical = 0
-text = "Analog Movement"
+text = "Analog Move"
+alignment = 1
 
-[node name="AllowDpadMapping" type="VBoxContainer" parent="Margin/HBox/Settings"]
+[node name="AllowDpadMapping" type="Control" parent="Margin/HBox/Settings"]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 
-[node name="Button" type="CheckBox" parent="Margin/HBox/Settings/AllowDpadMapping"]
-layout_mode = 2
-size_flags_horizontal = 6
+[node name="CheckBox" type="CheckBox" parent="Margin/HBox/Settings/AllowDpadMapping"]
+layout_mode = 0
+offset_right = 112.0
+offset_bottom = 29.0
 size_flags_vertical = 0
-text = "Allow Map to Dpad"
+text = "D-pad Move"
+alignment = 1
 
-[node name="TooltipIconType" type="VBoxContainer" parent="Margin/HBox/Settings"]
+[node name="Panel" type="Panel" parent="Margin/HBox/Settings/AllowDpadMapping"]
+layout_mode = 0
+offset_top = 33.0
+offset_right = 112.0
+offset_bottom = 33.0
+
+[node name="TooltipIconType" type="Control" parent="Margin/HBox/Settings"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Margin/HBox/Settings/TooltipIconType"]
-layout_mode = 2
+layout_mode = 0
+offset_right = 112.0
+offset_bottom = 14.0
 text = "Tooltip Icons"
 
 [node name="OptionButton" type="OptionButton" parent="Margin/HBox/Settings/TooltipIconType"]
-layout_mode = 2
+layout_mode = 0
+offset_top = 18.0
+offset_right = 112.0
+offset_bottom = 41.0
 selected = 0
 item_count = 4
 popup/item_0/text = "Generic"
@@ -389,7 +420,7 @@ popup/item_3/text = "Playstation"
 popup/item_3/id = 3
 
 [node name="Control" type="Control" parent="Margin/HBox/Settings"]
-custom_minimum_size = Vector2(0, 36)
+custom_minimum_size = Vector2(112, 36)
 layout_mode = 2
 
 [node name="Corner" type="Panel" parent="."]
@@ -418,14 +449,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.8, 0.168627, 0.168627, 1)
 theme_override_styles/normal = ExtResource("7_nyot8")
-text = "Confirm"
+text = "Cfm"
 
 [node name="Reset" type="Button" parent="Corner/Margin/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.8, 0.168627, 0.168627, 1)
 theme_override_styles/normal = ExtResource("7_nyot8")
-text = "Reset"
+text = "Res"
 
 [node name="Return" type="Button" parent="Corner/Margin/HBox"]
 layout_mode = 2
@@ -435,9 +466,12 @@ theme_override_styles/normal = ExtResource("7_nyot8")
 text = "Return"
 
 [node name="RemapManager" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("10_ripyc")
 
-[connection signal="toggled" from="Margin/HBox/Settings/DisableAnalog/Button" to="." method="on_disable_analog"]
+[connection signal="toggled" from="Margin/HBox/Settings/JumpOnHold/CheckBox" to="." method="on_jump_on_hold_toggled"]
+[connection signal="toggled" from="Margin/HBox/Settings/DisableAnalog/CheckBox" to="." method="on_disable_analog"]
+[connection signal="item_selected" from="Margin/HBox/Settings/TooltipIconType/OptionButton" to="." method="on_tooltip_icon_type_selected"]
 [connection signal="pressed" from="Corner/Margin/HBox/Confirm" to="." method="on_confirm"]
 [connection signal="pressed" from="Corner/Margin/HBox/Reset" to="." method="on_reset"]
 [connection signal="pressed" from="Corner/Margin/HBox/Return" to="." method="on_return"]

@@ -65,12 +65,9 @@ func set_temp_action_input(event, device_type):
 			temp_action_input = temp_action_keyboard_input
 		"controller":
 			temp_action_input = temp_action_controller_input
-	var main_action_first_inputs := []
-	for main_action in action_groups.keys():
-		main_action_first_inputs.append(convert_input_event_to_array(get_action_input_event(main_action, "controller")))
 
-	#check duplicate in temp or InputMap
-	if temp_action_input.values().has(input_array) || main_action_first_inputs.has(input_array):
+	#check duplicate in temp (no need to check InputMap, temp already copies this)
+	if temp_action_input.values().has(input_array):
 		am.play("ui_deny")
 		action_buttons[current_listening_action].set_pressed(false)
 		current_listening_action = null

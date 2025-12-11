@@ -3,7 +3,9 @@ extends Control
 #const BUTTON_PROMPT_FLOATING = preload("res://assets/UI/ButtonPromptFloating.png")
 
 var input_map_path = "user://inputmap.json"
-
+enum TooltipIconType {GENERIC, NINTENDO, XBOX, PLAYSTATION}
+var tooltip_icon_type : TooltipIconType
+var after_settings_ready = false #dont set settings unless this is true
 
 var input_icon_joy = {
 	JOY_BUTTON_Y: 0,
@@ -34,10 +36,11 @@ var input_icon_joy_analog = {
 @export var ui_focus: NodePath
 
 @onready var w = get_tree().get_root().get_node("World")
-@onready var rm = $RemapManager
+@onready var settings = get_parent().get_node("Settings")
+@onready var rm = %RemapManager
 @onready var action_selections = %ActionSelections
-
-
+@onready var tooltip_icon_type_node = %TooltipIconType
+@onready var jump_on_hold_node = %JumpOnHold
 
 
 
@@ -51,13 +54,15 @@ func _ready():
 	set_action_button_icons()
 	rm.setup_action_button_panels()
 	check_disable_analog()
+	var display_mode_popup_menu = %TooltipIconType.get_node("OptionButton").get_child(0, true) #needed for any popup menus
+	display_mode_popup_menu.canvas_item_default_texture_filter = 0 #nearest
 
 
-func check_disable_analog():
+func check_disable_analog(): #TODO: save this!
 	var input_left = InputEventJoypadMotion.new()
 	input_left.axis = JOY_AXIS_LEFT_X
 	input_left.axis_value = -1.0
-	%DisableAnalog.get_node("Button").button_pressed = InputMap.action_has_event("move_left", input_left)
+	%DisableAnalog.get_node("CheckBox").button_pressed = InputMap.action_has_event("move_left", input_left)
 
 
 ### CHANGING ACTION INPUT ###
@@ -79,7 +84,7 @@ func _input(event):
 
 ### ANIMATION ###
 
-func set_action_button_icons(temp = false): #needs default
+func set_action_button_icons(temp = false):
 	if temp:
 		var active_button = rm.action_buttons[rm.current_listening_action]
 		rm.action_button_is_red.append(active_button)
@@ -96,15 +101,16 @@ func set_action_button_icons(temp = false): #needs default
 
 func get_button_texture_atlas(input, is_active) -> AtlasTexture:
 	var out = AtlasTexture.new()
+	var y_pos = tooltip_icon_type * 16
 	if is_active:
 		out.atlas = load("res://assets/UI/ButtonPromptFloatingRed.png")
 	else:
 		out.atlas = load("res://assets/UI/ButtonPromptFloating.png")
 	match input[0]:
 		"joy":
-			out.region = Rect2(input_icon_joy[int(input[1])] * 16, 0, 16, 16)
+			out.region = Rect2(input_icon_joy[int(input[1])] * 16, y_pos, 16, 16)
 		"joy_analog":
-			out.region = Rect2(input_icon_joy_analog[int(input[1])] * 16, 0, 16, 16)
+			out.region = Rect2(input_icon_joy_analog[int(input[1])] * 16, y_pos, 16, 16)
 	return out
 
 ### SIGNALS ###
@@ -158,3 +164,24 @@ func on_disable_analog(toggled_on: bool):
 		InputMap.action_erase_event("look_up", input_up)
 		InputMap.action_erase_event("look_down", input_down)
 	rm.save_input_map()
+
+func on_tooltip_icon_type_selected(index: int):
+	match index:
+		0:
+			tooltip_icon_type = TooltipIconType.GENERIC
+		1:
+			tooltip_icon_type = TooltipIconType.NINTENDO
+		2:
+			tooltip_icon_type = TooltipIconType.XBOX
+		3:
+			tooltip_icon_type = TooltipIconType.PLAYSTATION
+
+	if after_settings_ready and !w.get_node("MenuLayer/Options").ishidden:
+		set_action_button_icons(false)
+		settings.save_setting("TooltipIconType", index)
+
+
+func on_jump_on_hold_toggled(toggled_on: bool):
+	if after_settings_ready and !w.get_node("MenuLayer/Options").ishidden:
+		inp.buttonconfig.holdjumping = toggled_on
+		settings.save_setting("JumpOnHold", toggled_on)

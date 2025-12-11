@@ -1,8 +1,7 @@
 extends Node
-var buttonconfig:Dictionary = {
-	holdjumping = true,
+var buttonconfig := {
+	holdjumping = false,
 	buttons = {},
-
 	}
 
 			#STICK

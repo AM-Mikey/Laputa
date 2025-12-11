@@ -18,11 +18,14 @@ var default = {
 	"DisplayMode": 3,
 	"ResolutionScale": 0,
 	"MouseLock": false,
+	"TooltipIconType": 0,
+	"JumpOnHold": false,
 	}
 var after_ready = false #so we don't trigger a change when loading settings
 var ignore_display_mode = false #so we don't reset the display mode during the options opening mid-game
 
 @onready var w = get_tree().get_root().get_node("World")
+@onready var controller_config = get_parent().get_node("ControllerConfig")
 
 @onready var mastervolume = get_node(mastervolume_path)
 @onready var sfxvolume = get_node(sfxvolume_path)
@@ -43,6 +46,7 @@ func _ready():
 	var display_mode_popup_menu = %DisplayMode.get_node("OptionButton").get_child(0, true) #needed for any popup menus
 	display_mode_popup_menu.canvas_item_default_texture_filter = 0 #nearest
 	after_ready = true
+	controller_config.after_settings_ready = true
 
 ### SIGNALS
 
@@ -188,6 +192,13 @@ func load_settings():
 
 	mouselock.button_pressed = data["MouseLock"]
 	on_mouselock(data["MouseLock"])
+
+	await get_tree().process_frame
+	controller_config.tooltip_icon_type_node.get_node("OptionButton").selected = data["TooltipIconType"]
+	controller_config.on_tooltip_icon_type_selected(data["TooltipIconType"])
+
+	controller_config.jump_on_hold_node.get_node("CheckBox").button_pressed = (data["JumpOnHold"])
+	controller_config.on_jump_on_hold_toggled(data["JumpOnHold"])
 
 
 func write_data(data):
