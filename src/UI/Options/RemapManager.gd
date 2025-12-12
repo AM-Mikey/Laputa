@@ -77,8 +77,10 @@ func set_temp_action_input(event, device_type):
 		match device_type:
 			"keyboard":
 				p.set_button_text(true)
+				action_buttons[current_listening_action].set_pressed(false)
 			"controller":
 				p.set_action_button_icons(true)
+				action_buttons[current_listening_action].set_pressed(false)
 
 
 

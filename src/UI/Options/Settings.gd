@@ -120,7 +120,7 @@ func change_bus_volume(value,busname:String):
 	print (db)
 	if value == 0:
 		AudioServer.set_bus_mute(AudioServer.get_bus_index(busname),true)
-		slidernode.get_node("Label").text = busname + "Volume: Muted"
+		slidernode.get_node("Label").text = busname + " Volume: Muted"
 	else:
 		AudioServer.set_bus_mute(AudioServer.get_bus_index(busname),false)
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(busname),db)

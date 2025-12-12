@@ -54,15 +54,21 @@ func _ready():
 	set_action_button_icons()
 	rm.setup_action_button_panels()
 	check_disable_analog()
+	check_disable_d_pad()
 	var display_mode_popup_menu = %TooltipIconType.get_node("OptionButton").get_child(0, true) #needed for any popup menus
 	display_mode_popup_menu.canvas_item_default_texture_filter = 0 #nearest
 
 
-func check_disable_analog(): #TODO: save this!
+func check_disable_analog():
 	var input_left = InputEventJoypadMotion.new()
 	input_left.axis = JOY_AXIS_LEFT_X
 	input_left.axis_value = -1.0
 	%DisableAnalog.get_node("CheckBox").button_pressed = InputMap.action_has_event("move_left", input_left)
+
+func check_disable_d_pad():
+	var input_left = InputEventJoypadButton.new()
+	input_left.button_index = JOY_BUTTON_DPAD_LEFT
+	%DisableDPad.get_node("CheckBox").button_pressed = InputMap.action_has_event("move_left", input_left)
 
 
 ### CHANGING ACTION INPUT ###
@@ -152,6 +158,29 @@ func on_disable_analog(toggled_on: bool):
 	var input_down = InputEventJoypadMotion.new()
 	input_down.axis = JOY_AXIS_LEFT_Y
 	input_down.axis_value = 1.0
+
+	if toggled_on:
+		InputMap.action_add_event("move_left", input_left)
+		InputMap.action_add_event("move_right", input_right)
+		InputMap.action_add_event("look_up", input_up)
+		InputMap.action_add_event("look_down", input_down)
+	else:
+		InputMap.action_erase_event("move_left", input_left)
+		InputMap.action_erase_event("move_right", input_right)
+		InputMap.action_erase_event("look_up", input_up)
+		InputMap.action_erase_event("look_down", input_down)
+	rm.save_input_map()
+
+
+func on_disable_d_pad(toggled_on: bool):
+	var input_left = InputEventJoypadButton.new()
+	input_left.button_index = JOY_BUTTON_DPAD_LEFT
+	var input_right = InputEventJoypadButton.new()
+	input_right.button_index = JOY_BUTTON_DPAD_RIGHT
+	var input_up = InputEventJoypadButton.new()
+	input_up.button_index = JOY_BUTTON_DPAD_UP
+	var input_down = InputEventJoypadButton.new()
+	input_down.button_index = JOY_BUTTON_DPAD_DOWN
 
 	if toggled_on:
 		InputMap.action_add_event("move_left", input_left)
