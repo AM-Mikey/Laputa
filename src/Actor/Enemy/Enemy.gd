@@ -33,7 +33,7 @@ var ammo_chance = 1
 
 
 @onready var w = get_tree().get_root().get_node("World")
-@onready var pc = get_tree().get_root().get_node_or_null("World/Juniper")
+@onready var pc = f.pc()
 
 
 

@@ -56,8 +56,8 @@ const UI_BULLET_FLY = preload("res://src/UI/HUD/UIBulletFly.tscn")
 var WheelVisible = false
 
 func _ready():
-	if world.has_node("Juniper"):
-		var pc = world.get_node("Juniper")
+	if f.pc():
+		var pc = f.pc()
 		pc.hp_updated.connect(update_hp)
 		pc.guns_updated.connect(update_guns)
 		pc.xp_updated.connect(update_xp)
@@ -200,7 +200,7 @@ func ammo_animate(animation, speed: float = -1):
 			ammo_bottom_animator.play("ResetInfinite")
 
 func update_hp(hp, max_hp):
-	var pc = world.get_node("Juniper")
+	var pc = f.pc()
 	hp_progress.value = hp
 	display_hp_number(hp, max_hp)
 	hp_progress.max_value = max_hp

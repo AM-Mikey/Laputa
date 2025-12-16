@@ -8,7 +8,7 @@ var panning_up = false
 var panning_down = false
 
 @onready var world = get_tree().get_root().get_node("World")
-@onready var pc = get_tree().get_root().get_node("World/Juniper")
+@onready var pc = f.pc()
 
 func _ready():
 	global_position = pc.global_position

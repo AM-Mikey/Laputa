@@ -1,7 +1,7 @@
 extends Node #TODO: this script needs major cleanup
 
 @onready var world = get_tree().get_root().get_node("World")
-@onready var pc = get_tree().get_root().get_node("World/Juniper")
+@onready var pc = f.pc()
 @onready var db = get_parent()
 
 

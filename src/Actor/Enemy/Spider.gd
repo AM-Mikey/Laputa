@@ -65,7 +65,7 @@ func setup_a_star():
 
 func find_path():
 	var self_node_position = Vector2i((global_position + Vector2(-8, -8)).snapped(Vector2(16, 16)) / 16.0)
-	var pc_node_position = Vector2i((pc.global_position + Vector2(-8, -16)).snapped(Vector2(16, 16)) / 16.0) #an extra (0,-8) to get center mass on juniper
+	var pc_node_position = Vector2i((f.pc().global_position + Vector2(-8, -16)).snapped(Vector2(16, 16)) / 16.0) #an extra (0,-8) to get center mass on juniper
 	path = a_star_grid.get_point_path(self_node_position, pc_node_position)
 	a_star_line.points = path
 	current_point = 1

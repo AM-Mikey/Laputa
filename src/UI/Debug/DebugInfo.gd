@@ -7,8 +7,8 @@ func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 
-	if is_instance_valid(world.get_node("Juniper")):
-		var pc = world.get_node("Juniper")
+	if f.pc():
+		var pc = f.pc()
 		pc.connect("guns_updated", Callable(self, "on_guns_updated"))
 		am.connect("players_updated", Callable(self, "on_audio_players_updated"))
 		on_guns_updated(pc.guns.get_children())
@@ -26,8 +26,8 @@ func _physics_process(_delta):
 	$VBox/General/Screen.text = str(get_window().get_size().x) + "x" + str(get_window().get_size().y)
 
 
-	if is_instance_valid(world.get_node("Juniper")): #TODO: invalid upon death
-		var pc = world.get_node("Juniper")
+	if (f.pc()):
+		var pc = f.pc()
 		var mm = pc.get_node("MovementManager")
 		var active_gun = null
 		if pc.guns.get_child(0) != null:

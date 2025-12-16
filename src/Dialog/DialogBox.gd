@@ -25,7 +25,7 @@ var dl: Node
 
 
 @onready var w = get_tree().get_root().get_node("World")
-@onready var pc = get_tree().get_root().get_node("World/Juniper")
+@onready var pc = f.pc()
 
 
 func _ready():

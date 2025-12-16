@@ -68,8 +68,8 @@ func _input(event):
 
 
 		if event.is_action_pressed("debug_fly"):
-			if w.has_node("Juniper"):
-				var pc = w.get_node("Juniper")
+			if f.pc():
+				var pc = f.pc()
 				if pc.mm.current_state != pc.mm.states["fly"]:
 					pc.mm.cached_state = pc.mm.current_state
 					pc.mm.change_state("fly")
@@ -78,8 +78,8 @@ func _input(event):
 					#pc.mm.change_state(pc.mm.cached_state.name.to_lower()) #gave errors
 
 		if event.is_action_pressed("debug_killbind"):
-			if w.has_node("Juniper"):
-				var pc = w.get_node("Juniper")
+			if f.pc():
+				var pc = f.pc()
 				if !pc.die_from_falling or pc.mm.current_state == pc.mm.states["fly"]:
 					return
 				pc.die()
