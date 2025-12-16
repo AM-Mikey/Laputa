@@ -186,7 +186,7 @@ func die(quietly = false):
 	if dead: return
 	dead = true
 	if !pc:
-		pc = get_tree().get_root().get_node_or_null("World/Juniper")
+		pc = f.pc()
 	if pc:
 		pc.enemies_touching.erase(self)
 	if !quietly:
