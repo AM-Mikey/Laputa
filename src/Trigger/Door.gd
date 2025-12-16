@@ -46,7 +46,7 @@ func enter_door():
 
 	var transition = TRANSITION.instantiate()
 	if w.bl.has_node("TransitionIris"):
-		w.bl.get_node("BlackoutLayer/TransitionIris").free()
+		w.bl.get_node("TransitionIris").free()
 	w.bl.add_child(transition)
 
 	await transition.get_node("AnimationPlayer").animation_finished

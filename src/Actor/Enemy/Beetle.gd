@@ -63,7 +63,7 @@ func _on_physics_process(_delta):
 
 ### STATES ###
 
-func enter_idle(): #level 0
+func enter_idle(_last_state): #level 0
 	move_dir = wall_dir * -1
 	match wall_dir:
 		Vector2.LEFT: #face up
@@ -84,7 +84,7 @@ func enter_idle(): #level 0
 	change_state("fly")
 
 
-func enter_idlescan(): #level 1
+func enter_idlescan(_last_state): #level 1
 	move_dir = wall_dir * -1
 	match wall_dir:
 		Vector2.LEFT: #face up
@@ -121,7 +121,7 @@ func do_idlescan():
 			change_state("fly")
 			return
 
-func enter_fly():
+func enter_fly(_last_state):
 	$FlyCooldown.start(fly_cooldown_time)
 	match move_dir.x:
 		-1.0: $Sprite2D.flip_h = false
@@ -155,7 +155,7 @@ func do_fly():
 				change_state("platformcrawl")
 				return
 
-func enter_platformcrawl(): #level 2
+func enter_platformcrawl(_last_state): #level 2
 	if not doing_crawl_start_dir:
 		var random_sign_float: float = 1 - 2 * (randi() % 2)
 		if wall_dir == Vector2.LEFT or wall_dir == Vector2.RIGHT:

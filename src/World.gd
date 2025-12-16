@@ -135,7 +135,8 @@ func first_time_level_setup():
 	#wipe would go here if we want one
 	display_level_text(current_level)
 	SaveSystem.read_level_data_from_temp(current_level)
-	await get_tree().process_frame
+
+	await(get_tree().process_frame)
 	$Juniper/PlayerCamera.position_smoothing_enabled = true
 
 
@@ -146,9 +147,21 @@ func change_level_via_code(level_path):
 	current_level.queue_free()
 	current_level = null
 
+	if (get_node_or_null("Juniper")):
+		$Juniper.free()
 	add_child(JUNIPER.instantiate())
-	$Juniper/PlayerCamera.position_smoothing_enabled = false
+
+	if uig.has_node("DialogBox"):
+		$UILayer/UIGroup/DialogBox.exit()
+
+	if ml.has_node("PauseMenu"):
+		ml.get_node("PauseMenu").unpause()
+
+	if (uig.get_node_or_null("HUD")):
+		uig.get_node("HUD").free()
 	uig.add_child(HUD.instantiate())
+
+	$Juniper/PlayerCamera.position_smoothing_enabled = false
 
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
@@ -168,18 +181,20 @@ func change_level_via_code(level_path):
 	#wipe would go here if we want one
 	display_level_text(current_level)
 	SaveSystem.read_level_data_from_temp(current_level)
-	await get_tree().process_frame
+
+	await(get_tree().process_frame)
 	$Juniper/PlayerCamera.position_smoothing_enabled = true
 
 
 func change_level_via_trigger(level_path, door_index):
 	print("changing level via trigger...")
 	SaveSystem.write_level_data_to_temp(current_level)
-	if uig.has_node("DialogBox"): $UILayer/UIGroup/DialogBox.stop_printing()
+	if uig.has_node("DialogBox"): $UILayer/UIGroup/DialogBox.exit()
 	clear_spawn_layers()
 	var old_level_path = current_level.scene_file_path
 	current_level.queue_free()
 	current_level = null
+
 	await get_tree().process_frame
 	current_level = load(level_path).instantiate()
 	add_child(current_level)

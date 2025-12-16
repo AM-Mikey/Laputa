@@ -16,6 +16,7 @@ signal hp_updated(hp, max_hp)
 signal guns_updated(guns, cause, do_xp_flash)
 signal xp_updated(xp, max_xp, level, max_level, do_xp_flash)
 signal money_updated(money)
+signal invincibility_end()
 
 
 @export var hp: int = 16
@@ -36,7 +37,11 @@ var is_on_ssp = false
 var deny_ssp = false
 var is_crouching = false
 var forbid_crouching = false
-var is_in_water = false
+var is_in_water = false:
+	set(val):
+		if (is_in_water != val):
+			am.underwater_attenuate(val)
+		is_in_water = val
 var is_in_coyote = false
 var dead = false
 @export var controller_id: int = 0
@@ -119,7 +124,6 @@ func hit(damage, knockback_direction):
 			hp -= damage
 			am.play("pc_hurt")
 			emit_signal("hp_updated", hp, max_hp)
-
 			if experience_number != null: experience_number.queue_free()
 			if heart_number != null: heart_number.queue_free()
 			if damage_number == null: #no damage_number
@@ -127,11 +131,11 @@ func hit(damage, knockback_direction):
 				damage_number.value = damage
 				if hp <= 0:
 					damage_number.position = global_position
-					damage_number.position.y -= 16
+					damage_number.position.y -= 18
 					get_tree().get_root().get_node("World/Front").add_child(damage_number)
 					die()
 				else:
-					damage_number.position.y -= 16
+					damage_number.position.y -= 18
 					add_child(damage_number)
 					do_iframes()
 			else: #already have a damage_number
@@ -140,7 +144,7 @@ func hit(damage, knockback_direction):
 				do_iframes()
 				if hp <= 0:
 					damage_number.position = global_position
-					damage_number.position.y -= 16
+					damage_number.position.y -= 18
 					damage_number.reparent(get_tree().get_root().get_node("World/Front"))
 					die()
 
@@ -201,6 +205,7 @@ func die():
 ### SIGNALS ###
 func _on_IframeTimer_timeout() -> void:
 	invincible = false
+	emit_signal("invincibility_end")
 	$EffectPlayer.stop()
 	if not enemies_touching.is_empty():
 		hit_again()
@@ -240,7 +245,7 @@ func _on_ItemDetector_area_entered(area):
 			if heart_number == null:
 				heart_number = HEART_NUMBER.instantiate()
 				heart_number.value = hp - hp_before
-				heart_number.position.y -= 16
+				heart_number.position.y -= 18
 				add_child(heart_number)
 			else:
 				heart_number.value += hp - hp_before
@@ -272,7 +277,7 @@ func _on_ItemDetector_area_entered(area):
 		if experience_number == null:
 			experience_number = EXPERIENCE_NUMBER.instantiate()
 			experience_number.value = experience_pickup.value
-			experience_number.position.y -= 16
+			experience_number.position.y -= 18
 			add_child(experience_number)
 		else:
 			experience_number.value += experience_pickup.value

@@ -25,13 +25,13 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_js7dk"]
 shader = ExtResource("4_4nt3f")
-shader_parameter/blur_amount = 2.0
+shader_parameter/blur_amount = 1.0000001424999998
 shader_parameter/mix_amount = 0.0
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xbdvf"]
 shader = ExtResource("4_4nt3f")
-shader_parameter/blur_amount = 2.0
+shader_parameter/blur_amount = 1.0000001424999998
 shader_parameter/mix_amount = 0.0
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
@@ -4807,9 +4807,10 @@ script = ExtResource("1")
 anchors_preset = 0
 
 [node name="Blur" type="Polygon2D" parent="Flat"]
+z_index = -1
 material = SubResource("ShaderMaterial_js7dk")
 position = Vector2(400, -86)
-polygon = PackedVector2Array(-336, 101, -21, 101, -19, 102, -18, 103, -17, 105, -17, 110, -41, 158, -42, 159, -43, 161, -44, 162, -46, 163, -347, 163, -349, 162, -350, 161, -351, 159, -352, 157, -353, 154, -354, 152, -355, 151, -355, 101)
+polygon = PackedVector2Array(-370, 101, -21, 101, -19, 102, -18, 103, -17, 105, -17, 110, -41, 158, -42, 159, -43, 161, -44, 162, -46, 163, -395, 163, -397, 162, -398, 161, -399, 159, -399, 154, -375, 106, -374, 105, -373, 103, -372, 102)
 
 [node name="Dialog" type="Sprite2D" parent="Flat"]
 position = Vector2(192, -43)
@@ -4843,6 +4844,7 @@ visible = false
 anchors_preset = 0
 
 [node name="Blur" type="Polygon2D" parent="NPC"]
+z_index = -1
 material = SubResource("ShaderMaterial_js7dk")
 position = Vector2(400, -86)
 polygon = PackedVector2Array(-336, 101, 3, 101, 5, 102, 6, 103, 7, 105, 7, 110, -17, 158, -18, 159, -19, 161, -20, 162, -22, 163, -347, 163, -349, 162, -350, 161, -351, 159, -352, 157, -353, 154, -354, 152, -355, 151, -355, 101)
@@ -4879,11 +4881,13 @@ visible = false
 anchors_preset = 0
 
 [node name="Blur" type="Polygon2D" parent="Response"]
+z_index = -1
 material = SubResource("ShaderMaterial_js7dk")
 position = Vector2(200, -43)
 polygon = PackedVector2Array(-136, 58, 65, 58, 66, 59, 68, 63, 69, 66, 70, 71, 71, 79, 71, 99, 70, 107, 69, 112, 68, 115, 66, 119, 65, 120, -147, 120, -149, 119, -150, 118, -152, 114, -153, 111, -154, 109, -155, 108, -155, 58)
 
 [node name="Blur2" type="Polygon2D" parent="Response"]
+z_index = -1
 material = SubResource("ShaderMaterial_xbdvf")
 position = Vector2(200, -43)
 polygon = PackedVector2Array(127, 58, 138, 58, 138, 120, 127, 120, 126, 119, 124, 115, 123, 112, 122, 107, 121, 99, 121, 79, 122, 71, 123, 66, 124, 63, 126, 59)

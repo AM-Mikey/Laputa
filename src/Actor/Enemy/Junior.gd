@@ -23,13 +23,13 @@ func setup():
 
 ### STATES ###
 
-func enter_idle():
+func enter_idle(_last_state):
 	do_flip_check()
 	ap.play("Idle")
 	rng.randomize()
 	st.start(rng.randf_range(1.0, idle_max_time))
 
-func enter_walk():
+func enter_walk(_last_state):
 	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
 		move_dir = Vector2.RIGHT
 	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
@@ -51,7 +51,7 @@ func do_walk():
 		set_up_direction(FLOOR_NORMAL)
 		move_and_slide()
 
-func enter_aim():
+func enter_aim(_last_state):
 	velocity = Vector2(lerp(velocity.x, 0.0, 0.4), lerp(velocity.y, 0.0, 0.4))
 	ap.play("Aim")
 	await ap.animation_finished
@@ -59,7 +59,7 @@ func enter_aim():
 	await st.timeout
 	change_state("shoot")
 
-func enter_shoot():
+func enter_shoot(_last_state):
 	am.play("enemy_shoot", self)
 	var bullet = BULLET.instantiate()
 	bullet.position = $BulletOrigin.global_position

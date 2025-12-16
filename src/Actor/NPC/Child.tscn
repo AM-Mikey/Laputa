@@ -79,34 +79,45 @@ frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_bdv0m")
+&"": SubResource("AnimationLibrary_bdv0m")
 }
 
-[node name="FloorDetectorL" type="RayCast2D" parent="."]
+[node name="WaypointBailTimer" type="Timer" parent="."]
+
+[node name="FloorL" type="RayCast2D" parent="."]
 position = Vector2(-8, -16)
 target_position = Vector2(0, 24)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="FloorDetectorR" type="RayCast2D" parent="."]
+[node name="FloorR" type="RayCast2D" parent="."]
 position = Vector2(8, -16)
 target_position = Vector2(0, 24)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="WaypointBailTimer" type="Timer" parent="."]
-
-[node name="WallDetectorR" type="RayCast2D" parent="."]
+[node name="WallRB" type="RayCast2D" parent="."]
 position = Vector2(6, -7)
-rotation = -1.57079
-target_position = Vector2(0, 2)
+target_position = Vector2(2, 0)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="WallDetectorL" type="RayCast2D" parent="."]
+[node name="WallRT" type="RayCast2D" parent="."]
+position = Vector2(6, -17)
+rotation = 1.5322363e-05
+target_position = Vector2(2, -3.1471252e-05)
+collision_mask = 520
+collide_with_areas = true
+
+[node name="WallLB" type="RayCast2D" parent="."]
 position = Vector2(-6, -7)
-rotation = -4.71238
-target_position = Vector2(0, 2)
+target_position = Vector2(-2, 0)
+collision_mask = 520
+collide_with_areas = true
+
+[node name="WallLT" type="RayCast2D" parent="."]
+position = Vector2(-6, -17)
+target_position = Vector2(-2, 0)
 collision_mask = 520
 collide_with_areas = true
 

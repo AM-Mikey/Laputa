@@ -101,7 +101,8 @@
 
 	"branchtest4":
 	"
-	/newchar,basil,basil Yawn, this is a /b test /ub of the /t,topic_system topic /ut system.
+	/newchar,basil,basil Oh, hello there.
+	this is a /b test /ub of the /t,topic_system topic /ut system.
 	/topics,sasuke,cheese,basil,topic_system,general After this message, select an option.
 	/db,0 You picked Sasuke. /udb
 	/db,1 You picked Cheese. /udb

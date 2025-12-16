@@ -652,7 +652,7 @@ func set_trigger_spawn(trigger_path, pos):
 	trigger_spawn.trigger_path = trigger_path
 	trigger_spawn.global_position = (pos * 16) + Vector2i(8, 16)
 	#entity.input_pickable = true
-	trigger_collection.add_child(trigger_spawn)
+	spawn_collection.add_child(trigger_spawn)
 	trigger_spawn.owner = w.current_level
 	trigger_spawn.initialize()
 	inspector.on_selected(trigger_spawn, "trigger_spawn")

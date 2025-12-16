@@ -18,7 +18,7 @@ func setup():
 
 ### STATES ###
 
-func enter_walk():
+func enter_walk(_last_state):
 	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
 		set_move_dir(Vector2.RIGHT)
 	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
@@ -43,7 +43,7 @@ func do_walk():
 
 
 
-func enter_wait():
+func enter_wait(_last_state):
 	set_move_dir(move_dir)
 	rng.randomize()
 	$StateTimer.start(rng.randf_range(1.0, wait_max_time))
@@ -51,7 +51,7 @@ func enter_wait():
 	change_state("walk")
 
 
-func enter_defend():
+func enter_defend(_last_state):
 	ap.play("IdleLeft")
 	$StateTimer.start(defend_time)
 	await $StateTimer.timeout

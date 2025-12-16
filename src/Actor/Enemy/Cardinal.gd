@@ -35,7 +35,7 @@ func _on_physics_process(_delta):
 
 ### STATES ###
 
-func enter_flee():
+func enter_flee(_last_state):
 	current_waypoint_id += 1
 	if current_waypoint_id >= waypoints.size():
 		current_waypoint_id = 0

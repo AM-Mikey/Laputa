@@ -9,11 +9,14 @@ var target: Node
 var move_dir = Vector2.ZERO
 @export var difficulty:= 1
 
-var base_gravity: int
-
 var base_damage = 2
 var drop_damage: int
 var wait_time: float
+
+func set_is_in_water(val):
+	if (state not in ["hang", "hangactive"]):
+		super.set_is_in_water(val)
+	is_in_water = val
 
 func setup():
 	#print("doing setup")
@@ -39,18 +42,20 @@ func setup():
 	damage_on_contact = base_damage
 	enemy_damage_on_contact = 999
 	speed = Vector2.ZERO
-	base_gravity = gravity
 	gravity = 0
 	change_state("hang")
 
 
 func _on_physics_process(_delta):
-	velocity = calculate_move_velocity(velocity, move_dir, speed)
+	if state == "stake":
+		velocity = Vector2.ZERO
+	else:
+		velocity = calc_velocity(velocity, move_dir, speed)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
 
 
-func enter_hang():
+func enter_hang(_last_state):
 	$AnimationPlayer.play("HangIdle")
 
 func do_hang():
@@ -63,13 +68,13 @@ func do_hang():
 			return
 
 
-func enter_hangactive():
+func enter_hangactive(_last_state):
 	$AnimationPlayer.play("HangActive")
 	$StateTimer.start(wait_time)
 
 
-func enter_drop():
-	gravity = base_gravity
+func enter_drop(_last_state):
+	gravity = base_gravity if !is_in_water else water_gravity
 	hit_enemies_on_contact = true
 	damage_on_contact = drop_damage
 
@@ -82,10 +87,10 @@ func do_drop():
 			change_state("squirm")
 			return
 
-func exit_drop():
+func exit_drop(_next_state):
 	hit_enemies_on_contact = false
 
-func enter_squirm():
+func enter_squirm(_last_state):
 	$RayCast2D.queue_free()
 	damage_on_contact = base_damage
 
@@ -109,36 +114,33 @@ func enter_squirm():
 	change_state("run")
 
 
-func enter_run():
+func enter_run(_last_state):
 	speed = Vector2(100, 100)
 	$AnimationPlayer.play("Run")
+	$WallRight.enabled = true
+	$WallLeft.enabled = true
 
 func do_run():
 	match move_dir:
-		Vector2.LEFT: $Sprite2D.flip_h = false
-		Vector2.RIGHT: $Sprite2D.flip_h = true
+		Vector2.LEFT:
+			$Sprite2D.flip_h = false
+			if ($WallLeft.is_colliding()):
+				move_dir = Vector2.RIGHT
+		Vector2.RIGHT:
+			if ($WallRight.is_colliding()):
+				move_dir = Vector2.LEFT
+			$Sprite2D.flip_h = true
 
-	if is_on_wall():
-			move_dir.x *= -1
+func exit_run(_next_state):
+	$WallRight.enabled = false
+	$WallLeft.enabled = false
 
 
-func enter_stake():
+func enter_stake(_last_state):
 	$AnimationPlayer.play("Stake")
 	await get_tree().process_frame
 	$CollisionShape2D.set_deferred("disabled", true) #so it doesn't see itself
 	$Standable/CollisionShape2D.set_deferred("disabled", false)
-
-
-func calculate_move_velocity(velocity: Vector2, move_dir, speed) -> Vector2:
-	if state == "stake":
-		return Vector2.ZERO
-
-	var out: = velocity
-	out.x = speed.x * move_dir.x
-	out.y += gravity * get_physics_process_delta_time()
-	if move_dir.y < 0:
-		out.y = speed.y * move_dir.y
-	return out
 
 
 ### SIGNALS ###

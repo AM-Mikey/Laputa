@@ -17,6 +17,7 @@ var branch: String = ""
 var active_pc = null
 var disabled = false
 var move_dir = Vector2.LEFT
+var just_spawned = true
 
 var waypoints = {}
 #var current_waypoint := 0
@@ -44,6 +45,9 @@ func _ready():
 
 	setup_states()
 	change_state(starting_state)
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	just_spawned = false
 
 
 
@@ -96,15 +100,17 @@ func do_state():
 		call(do_method)
 
 func change_state(new):
+	var last_state = state
+	var next_state = new
 	if state:
 		var exit_method = "exit_" + state
 		if has_method(exit_method):
-			call(exit_method)
+			call(exit_method, next_state)
 	state = new
 	$StateLabel.text = state
 	var enter_method = "enter_" + state
 	if has_method(enter_method):
-		call(enter_method)
+		call(enter_method, last_state)
 
 
 ### STATES ###
@@ -127,12 +133,12 @@ func do_walkto():
 		return
 
 
-func enter_walk():
+func enter_walk(_last_state):
 	change_animation("Walk")
 	speed = walk_speed
-	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
+	if not $FloorL.is_colliding() and move_dir.x < 0:
 		move_dir = Vector2.RIGHT
-	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
+	if not $FloorR.is_colliding() and move_dir.x > 0:
 		move_dir = Vector2.LEFT
 	rng.randomize()
 	$StateTimer.start(rng.randf_range(1.0, 10.0))
@@ -144,19 +150,19 @@ func enter_walk():
 func do_walk():
 	$Sprite2D.flip_h = true if move_dir.x > 0 else false #set sprite to move_dir
 
-	if (not $FloorDetectorL.is_colliding() and move_dir.x < 0) \
-	or (not $FloorDetectorR.is_colliding() and move_dir.x > 0):
+	if (not $FloorL.is_colliding() and move_dir.x < 0) \
+	or (not $FloorR.is_colliding() and move_dir.x > 0):
 		change_state("wait")
 		return
-	if $WallDetectorL.is_colliding() and move_dir.x < 0 \
-	or $WallDetectorR.is_colliding() and move_dir.x > 0:
+	if ($WallLB.is_colliding() || $WallLT.is_colliding()) and move_dir.x < 0 \
+	or ($WallRB.is_colliding() || $WallRT.is_colliding()) and move_dir.x > 0:
 		$Sprite2D.flip_h = !$Sprite2D.flip_h
 		move_dir.x = move_dir.x * -1.0
 		change_state("wait")
 		return
 
 
-func enter_wait():
+func enter_wait(_last_state):
 	change_animation("Idle")
 	speed = Vector2.ZERO
 	rng.randomize()
@@ -189,7 +195,7 @@ func enter_talk():
 
 func _input(event):
 	if event.is_action_pressed("inspect") and active_pc \
-	and dialog_json != "" and conversation != "" and state != "talk":
+	and dialog_json != "" and conversation != "" and state != "talk" and active_pc.mm.current_state == active_pc.mm.states["run"]:
 		if active_pc.can_input:
 			predialog_state = state
 			change_state("talk")
@@ -203,13 +209,16 @@ func look_at_node(node):
 
 func calc_velocity(do_gravity = true) -> Vector2:
 	var out: = velocity
-	out.x = speed.x * move_dir.x
+	var fractional_speed = speed
+	if is_in_water:
+		fractional_speed = speed * Vector2(0.666, 0.666)
+	out.x = fractional_speed.x * move_dir.x
 	if do_gravity:
 		out.y += gravity * get_physics_process_delta_time()
 		if move_dir.y < 0:
-			out.y = speed.y * move_dir.y
+			out.y = fractional_speed.y * move_dir.y
 	else:
-		out.y = speed.y * move_dir.y
+		out.y = fractional_speed.y * move_dir.y
 	return out
 
 

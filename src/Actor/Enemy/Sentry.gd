@@ -32,7 +32,7 @@ func setup():
 
 ### STATES ###
 
-func enter_target():
+func enter_target(_last_state):
 	change_state("shoot")
 
 #func enter_target():
@@ -47,7 +47,7 @@ func enter_target():
 	#if abs(global_position.x - target_pos_x) < shoot_tolerance:
 		#change_state("shoot")
 
-func enter_shoot():
+func enter_shoot(_last_state):
 	prepare_bullet()
 	$StateTimer.start(cooldown_time)
 

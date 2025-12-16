@@ -74,7 +74,7 @@ func do_fall():
 	velocity = calc_velocity(velocity, Vector2(0,0), speed, true)
 	move_and_slide()
 
-func exit_fall():
+func exit_fall(_next_state):
 	velocity = Vector2.ZERO
 
 ### HELPERS ###

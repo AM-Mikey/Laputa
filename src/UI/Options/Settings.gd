@@ -121,7 +121,6 @@ func change_bus_volume(value,busname:String):
 			slidernode = %SFXVolume
 
 	var db = linear_to_db(value/10.0)
-	print (db)
 	if value == 0:
 		AudioServer.set_bus_mute(AudioServer.get_bus_index(busname),true)
 		slidernode.get_node("Label").text = busname + " Volume: Muted"
