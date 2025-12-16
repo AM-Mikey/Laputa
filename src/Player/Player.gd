@@ -37,11 +37,7 @@ var is_on_ssp = false
 var deny_ssp = false
 var is_crouching = false
 var forbid_crouching = false
-var is_in_water = false:
-	set(val):
-		if (is_in_water != val):
-			am.underwater_attenuate(val)
-		is_in_water = val
+var is_in_water = false
 var is_in_coyote = false
 var dead = false
 @export var controller_id: int = 0
@@ -58,6 +54,16 @@ var move_dir := Vector2.LEFT
 var look_dir := Vector2i.LEFT
 var direction_lock := Vector2i.ZERO
 var shoot_dir := Vector2.LEFT
+
+enum SoundProfile {NORMAL, UNDERWATER}
+var sound_profile = SoundProfile.NORMAL:
+	set(val):
+		sound_profile = val
+		if (sound_profile == SoundProfile.UNDERWATER):
+			am.underwater_attenuate(true)
+		else:
+			am.underwater_attenuate(false)
+
 
 
 @onready var world = get_tree().get_root().get_node("World")
@@ -301,6 +307,12 @@ func _on_ItemDetector_area_entered(area):
 		emit_signal("guns_updated", guns.get_children(), "getammo")
 		ammo_pickup.queue_free()
 
+
+func _on_Ear_area_entered(area):
+	sound_profile = SoundProfile.UNDERWATER
+
+func _on_Ear_area_exited(area):
+	sound_profile = SoundProfile.NORMAL
 
 
 #func _on_HurtDetector_area_entered(area): #KILLBOX #TODO: reverse this!

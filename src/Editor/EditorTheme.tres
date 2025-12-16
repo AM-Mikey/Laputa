@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=19 format=3 uid="uid://deptsttubjnfv"]
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://deptsttubjnfv"]
 
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://djsxt54vtaivl" path="res://src/UI/Slider/ScrollBarGrabber.tres" id="3"]
@@ -9,7 +9,6 @@
 [ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="6"]
 [ext_resource type="StyleBox" uid="uid://cl4yme0wtg3po" path="res://src/UI/Slider/Slider.tres" id="7"]
 [ext_resource type="StyleBox" uid="uid://cedutrf4qdb7q" path="res://src/UI/StyleBox/SteelRoundDark.tres" id="10"]
-[ext_resource type="Texture2D" uid="uid://87tihquqgyim" path="res://assets/UI/ArrowRight.png" id="10_kfgfc"]
 [ext_resource type="StyleBox" uid="uid://ot23c6kiunqk" path="res://src/UI/StyleBox/RustTabsDark.tres" id="11"]
 [ext_resource type="StyleBox" uid="uid://cb3gs2qq26l03" path="res://src/UI/StyleBox/RustTabsLight.tres" id="12"]
 [ext_resource type="StyleBox" uid="uid://4n3eltlwqyie" path="res://src/UI/StyleBox/PaperBorder.tres" id="13"]
@@ -67,7 +66,7 @@ LineEdit/styles/normal = ExtResource("2")
 LineEdit/styles/read_only = ExtResource("2")
 OptionButton/constants/arrow_margin = 2
 OptionButton/constants/hseparation = 2
-OptionButton/icons/arrow = ExtResource("10_kfgfc")
+OptionButton/icons/arrow = null
 Panel/styles/panel = ExtResource("10")
 PopupMenu/colors/font_color = Color(0.305882, 0.129412, 0.0823529, 1)
 PopupMenu/colors/font_disabled_color = Color(0.4, 0.4, 0.4, 0.8)

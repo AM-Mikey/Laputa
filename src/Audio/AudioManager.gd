@@ -104,6 +104,9 @@ var music_queue = []
 @export var interrupt_player_max = 1
 var interrupt_queue = []
 
+@export var attenuate_music: bool = false
+
+
 
 func play(sfx_string: String, actor = null, bus = null):
 	if _check_sfx(sfx_string):
@@ -244,14 +247,13 @@ func fade_music(duration = 1.0):
 	_clear_player("music", music_queue.front())
 	emit_signal("fadeout_finished")
 
-var attenuate_music: bool = false
-func underwater_attenuate(val: bool):
+func underwater_attenuate(do_attenuate: bool):
 	var audio_bus_music_idx: int = AudioServer.get_bus_index("Music")
 	var audio_bus_sfx_idx: int = AudioServer.get_bus_index("SFX")
-	AudioServer.set_bus_effect_enabled(audio_bus_music_idx, 0, val and attenuate_music) #LowPassFilter
-	AudioServer.set_bus_effect_enabled(audio_bus_music_idx, 1, val and attenuate_music) #Reverb
-	AudioServer.set_bus_effect_enabled(audio_bus_sfx_idx, 0, val) #LowPassFilter
-	AudioServer.set_bus_effect_enabled(audio_bus_sfx_idx, 1, val) #Reverb
+	AudioServer.set_bus_effect_enabled(audio_bus_music_idx, 0, do_attenuate and attenuate_music) #LowPassFilter
+	AudioServer.set_bus_effect_enabled(audio_bus_music_idx, 1, do_attenuate and attenuate_music) #Reverb
+	AudioServer.set_bus_effect_enabled(audio_bus_sfx_idx, 0, do_attenuate) #LowPassFilter
+	AudioServer.set_bus_effect_enabled(audio_bus_sfx_idx, 1, do_attenuate) #Reverb
 
 
 ### GETTERS ###

@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://bnwo7ae85qnwb"]
+[gd_scene load_steps=106 format=3 uid="uid://bnwo7ae85qnwb"]
 
 [ext_resource type="PackedScene" uid="uid://cjueepke5w45c" path="res://src/Gun/Red7.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://brl16iyt5eq02" path="res://src/Player/PlayerCamera.tscn" id="2"]
@@ -86,6 +86,9 @@ size = Vector2(12, 4)
 
 [sub_resource type="RectangleShape2D" id="63"]
 size = Vector2(6, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6qwc"]
+size = Vector2(0.9861107, 1)
 
 [sub_resource type="ShaderMaterial" id="61"]
 shader = ExtResource("24_s1pnb")
@@ -4143,6 +4146,14 @@ position = Vector2(0, -14)
 shape = SubResource("63")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
+[node name="Ear" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1048576
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ear"]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_v6qwc")
+
 [node name="GunManager" type="Node2D" parent="."]
 script = ExtResource("12")
 
@@ -4257,5 +4268,7 @@ wait_time = 2.0
 [connection signal="body_exited" from="SSPWorldDetector" to="." method="_on_SSPWorldDetector_body_exited"]
 [connection signal="body_entered" from="CrouchDetector" to="MovementManager" method="_on_CrouchDetector_body_entered"]
 [connection signal="body_exited" from="CrouchDetector" to="MovementManager" method="_on_CrouchDetector_body_exited"]
+[connection signal="area_entered" from="Ear" to="." method="_on_Ear_area_entered"]
+[connection signal="area_exited" from="Ear" to="." method="_on_Ear_area_exited"]
 [connection signal="texture_changed" from="Sprite2D" to="Sprite2D" method="_on_Sprite_texture_changed"]
 [connection signal="timeout" from="IframeTimer" to="." method="_on_IframeTimer_timeout"]

@@ -48,7 +48,7 @@ func jump_processing():
 	elif !is_dropping and pc.can_input:
 		if inp.pressed("jump"):
 			mm.jump()
-		elif inp.holdjumping:
+		elif inp.buttonconfig.holdjumping:
 			if inp.held("jump"):
 				mm.jump()
 
