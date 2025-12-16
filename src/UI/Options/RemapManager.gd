@@ -1,6 +1,7 @@
 extends Node
 
 var input_map_path = "user://inputmap.json"
+var default_input_map_path = "user://inputmapdefault.json"
 
 var action_buttons = {}
 var action_button_is_red = []
@@ -28,33 +29,14 @@ var action_groups = {
 	}
 
 @onready var p = get_parent()
-@onready var temp_action_keyboard_input = {
-	"move_left": convert_input_event_to_array(get_action_input_event("move_left", "keyboard")),
-	"move_right": convert_input_event_to_array(get_action_input_event("move_right", "keyboard")),
-	"look_up": convert_input_event_to_array(get_action_input_event("look_up", "keyboard")),
-	"look_down": convert_input_event_to_array(get_action_input_event("look_down", "keyboard")),
-	"jump": convert_input_event_to_array(get_action_input_event("jump", "keyboard")),
-	"fire_manual": convert_input_event_to_array(get_action_input_event("fire_manual", "keyboard")),
-	"fire_automatic": convert_input_event_to_array(get_action_input_event("fire_automatic", "keyboard")),
-	"gun_right": convert_input_event_to_array(get_action_input_event("gun_right", "keyboard")),
-	"gun_left": convert_input_event_to_array(get_action_input_event("gun_left", "keyboard")),
-	"inventory": convert_input_event_to_array(get_action_input_event("inventory", "keyboard")),
-	"pause": convert_input_event_to_array(get_action_input_event("pause", "keyboard")),
-	}
-@onready var temp_action_controller_input = {
-	"move_left": convert_input_event_to_array(get_action_input_event("move_left", "controller")),
-	"move_right": convert_input_event_to_array(get_action_input_event("move_right", "controller")),
-	"look_up": convert_input_event_to_array(get_action_input_event("look_up", "controller")),
-	"look_down": convert_input_event_to_array(get_action_input_event("look_down", "controller")),
-	"jump": convert_input_event_to_array(get_action_input_event("jump", "controller")),
-	"fire_manual": convert_input_event_to_array(get_action_input_event("fire_manual", "controller")),
-	"fire_automatic": convert_input_event_to_array(get_action_input_event("fire_automatic", "controller")),
-	"gun_right": convert_input_event_to_array(get_action_input_event("gun_right", "controller")),
-	"gun_left": convert_input_event_to_array(get_action_input_event("gun_left", "controller")),
-	"inventory": convert_input_event_to_array(get_action_input_event("inventory", "controller")),
-	"pause": convert_input_event_to_array(get_action_input_event("pause", "controller")),
-	}
+var temp_action_keyboard_input = {}
+var temp_action_controller_input = {}
 
+
+
+func _ready():
+	save_input_map(default_input_map_path)
+	reset_temp_action_input()
 
 
 func set_temp_action_input(event, device_type):
@@ -82,6 +64,34 @@ func set_temp_action_input(event, device_type):
 				p.set_action_button_icons(true)
 				action_buttons[current_listening_action].set_pressed(false)
 
+
+func reset_temp_action_input():
+	temp_action_keyboard_input = {
+	"move_left": convert_input_event_to_array(get_action_input_event("move_left", "keyboard")),
+	"move_right": convert_input_event_to_array(get_action_input_event("move_right", "keyboard")),
+	"look_up": convert_input_event_to_array(get_action_input_event("look_up", "keyboard")),
+	"look_down": convert_input_event_to_array(get_action_input_event("look_down", "keyboard")),
+	"jump": convert_input_event_to_array(get_action_input_event("jump", "keyboard")),
+	"fire_manual": convert_input_event_to_array(get_action_input_event("fire_manual", "keyboard")),
+	"fire_automatic": convert_input_event_to_array(get_action_input_event("fire_automatic", "keyboard")),
+	"gun_right": convert_input_event_to_array(get_action_input_event("gun_right", "keyboard")),
+	"gun_left": convert_input_event_to_array(get_action_input_event("gun_left", "keyboard")),
+	"inventory": convert_input_event_to_array(get_action_input_event("inventory", "keyboard")),
+	"pause": convert_input_event_to_array(get_action_input_event("pause", "keyboard"))
+	}
+	temp_action_controller_input = {
+	"move_left": convert_input_event_to_array(get_action_input_event("move_left", "controller")),
+	"move_right": convert_input_event_to_array(get_action_input_event("move_right", "controller")),
+	"look_up": convert_input_event_to_array(get_action_input_event("look_up", "controller")),
+	"look_down": convert_input_event_to_array(get_action_input_event("look_down", "controller")),
+	"jump": convert_input_event_to_array(get_action_input_event("jump", "controller")),
+	"fire_manual": convert_input_event_to_array(get_action_input_event("fire_manual", "controller")),
+	"fire_automatic": convert_input_event_to_array(get_action_input_event("fire_automatic", "controller")),
+	"gun_right": convert_input_event_to_array(get_action_input_event("gun_right", "controller")),
+	"gun_left": convert_input_event_to_array(get_action_input_event("gun_left", "controller")),
+	"inventory": convert_input_event_to_array(get_action_input_event("inventory", "controller")),
+	"pause": convert_input_event_to_array(get_action_input_event("pause", "controller")),
+	}
 
 
 func confirm_action_input(device_type):
@@ -133,7 +143,7 @@ func tween_out_button_panel(panel):
 
 ### SAVE/LOAD ###
 
-func save_input_map():
+func save_input_map(path = input_map_path):
 	var data = {}
 	var input_actions = InputMap.get_actions()
 	for a in input_actions:
@@ -150,7 +160,7 @@ func save_input_map():
 		data[String(a)] = inputs
 
 
-	var file = FileAccess.open(input_map_path, FileAccess.WRITE)
+	var file = FileAccess.open(path, FileAccess.WRITE)
 	if file:
 		file.store_string(var_to_str(data))
 		file.close()
@@ -159,10 +169,10 @@ func save_input_map():
 		printerr("ERROR: input map data could not be saved!")
 
 
-func load_input_map(): #called on savesystem load options #TODO: migrate to Inputconfig script
+func load_input_map(path = input_map_path): #called on savesystem load options #TODO: migrate to Inputconfig script
 	var data
-	if FileAccess.file_exists(input_map_path):
-		var file = FileAccess.open(input_map_path, FileAccess.READ)
+	if FileAccess.file_exists(path):
+		var file = FileAccess.open(path, FileAccess.READ)
 		if file:
 			var text = file.get_as_text()
 			var test_json_conv = JSON.new()

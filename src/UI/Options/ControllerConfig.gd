@@ -2,7 +2,6 @@ extends Control
 
 #const BUTTON_PROMPT_FLOATING = preload("res://assets/UI/ButtonPromptFloating.png")
 
-var input_map_path = "user://inputmap.json"
 enum TooltipIconType {GENERIC, NINTENDO, XBOX, PLAYSTATION}
 var tooltip_icon_type : TooltipIconType
 var after_settings_ready = false #dont set settings unless this is true
@@ -41,6 +40,7 @@ var input_icon_joy_analog = {
 @onready var action_selections = %ActionSelections
 @onready var tooltip_icon_type_node = %TooltipIconType
 @onready var jump_on_hold_node = %JumpOnHold
+@onready var return_node = %Return
 
 
 
@@ -131,8 +131,13 @@ func on_confirm():
 	am.play("save")
 	rm.confirm_action_input("controller")
 
-#func on_reset():
-	#set_preset(1)
+func on_reset():
+	var dir = DirAccess.open("user://")
+	dir.remove("user://inputmap.json")
+	rm.load_input_map(rm.default_input_map_path)
+	rm.save_input_map(rm.input_map_path)
+	rm.reset_temp_action_input()
+	set_action_button_icons()
 
 func on_return():
 	w.get_node("MenuLayer/Options").exit()
@@ -140,8 +145,7 @@ func on_return():
 ### UI ###
 
 func do_focus():
-	pass
-	#get_node(ui_focus).grab_focus()
+	get_node(ui_focus).grab_focus()
 
 ### SETTINGS ###
 
@@ -214,3 +218,7 @@ func on_jump_on_hold_toggled(toggled_on: bool):
 	if after_settings_ready and !w.get_node("MenuLayer/Options").ishidden:
 		inp.buttonconfig.holdjumping = toggled_on
 		settings.save_setting("JumpOnHold", toggled_on)
+		settings.key_config.match_jump_on_hold_toggled(toggled_on)
+
+func match_jump_on_hold_toggled(toggled_on: bool):
+	%JumpOnHold.get_child(0).set_pressed_no_signal(toggled_on)

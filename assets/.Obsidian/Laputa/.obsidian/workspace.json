@@ -49,9 +49,21 @@
               "icon": "lucide-file",
               "title": "Religion"
             }
+          },
+          {
+            "id": "8e79af8c8cf32a05",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.10.6"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.10.6"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       },
       {
         "id": "f00468223e4d7550",
@@ -230,7 +242,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "680a833611f90e85",
+  "active": "8e79af8c8cf32a05",
   "lastOpenFiles": [
     "Concepts/Life on Laputa.md",
     "Concepts/Laputan Revolution.md",

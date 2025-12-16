@@ -26,6 +26,8 @@ var ignore_display_mode = false #so we don't reset the display mode during the o
 
 @onready var w = get_tree().get_root().get_node("World")
 @onready var controller_config = get_parent().get_node("ControllerConfig")
+@onready var key_config = get_parent().get_node("KeyConfig")
+
 
 @onready var mastervolume = get_node(mastervolume_path)
 @onready var sfxvolume = get_node(sfxvolume_path)
@@ -35,6 +37,7 @@ var ignore_display_mode = false #so we don't reset the display mode during the o
 @onready var mouselock = get_node(mouselock_path)
 @onready var deletesave = get_node(deletesave_path)
 @onready var scroll = get_node(scroll_path)
+@onready var return_node = %Return
 
 func _ready():
 	if FileAccess.file_exists(settings_path):
@@ -47,6 +50,7 @@ func _ready():
 	display_mode_popup_menu.canvas_item_default_texture_filter = 0 #nearest
 	after_ready = true
 	controller_config.after_settings_ready = true
+	key_config.after_settings_ready = true
 
 ### SIGNALS
 
@@ -196,8 +200,7 @@ func load_settings():
 	await get_tree().process_frame
 	controller_config.tooltip_icon_type_node.get_node("OptionButton").selected = data["TooltipIconType"]
 	controller_config.on_tooltip_icon_type_selected(data["TooltipIconType"])
-
-	controller_config.jump_on_hold_node.get_node("CheckBox").button_pressed = (data["JumpOnHold"])
+	controller_config.jump_on_hold_node.get_node("CheckBox").button_pressed = (data["JumpOnHold"]) #by allowing a signal here, it will automatically go to keyconfig's button as well
 	controller_config.on_jump_on_hold_toggled(data["JumpOnHold"])
 
 

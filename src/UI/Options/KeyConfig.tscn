@@ -28,7 +28,7 @@ grow_vertical = 2
 pivot_offset = Vector2(-576, -72)
 theme = ExtResource("1")
 script = ExtResource("6")
-ui_focus = NodePath("Margin/HBox/Controls/Scroll/ActionSelections/jump")
+ui_focus = NodePath("Margin/HBox/Controls/Scroll/ActionSelections/jump/Button")
 preset_path = NodePath("Margin/HBox/Presets/ItemList")
 metadata/_edit_vertical_guides_ = [24.0]
 
@@ -97,6 +97,7 @@ layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
 size_flags_vertical = 0
+focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
@@ -131,6 +132,7 @@ vertical_alignment = 1
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
+focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
@@ -165,6 +167,7 @@ vertical_alignment = 1
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
+focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
@@ -199,6 +202,7 @@ vertical_alignment = 1
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
+focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
@@ -233,6 +237,7 @@ vertical_alignment = 1
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
+focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
@@ -267,6 +272,7 @@ vertical_alignment = 1
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
+focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
@@ -301,6 +307,7 @@ vertical_alignment = 1
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
+focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
@@ -335,6 +342,7 @@ vertical_alignment = 1
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
+focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
@@ -369,6 +377,7 @@ vertical_alignment = 1
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
+focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
@@ -403,6 +412,7 @@ vertical_alignment = 1
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
+focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "TAB"
 
@@ -439,6 +449,7 @@ layout_mode = 0
 offset_right = 15.0
 offset_bottom = 23.0
 size_flags_vertical = 0
+focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "ESCAPE"
 
@@ -455,11 +466,15 @@ layout_mode = 2
 layout_mode = 2
 text = "Settings:"
 
-[node name="AutoJump" type="CheckBox" parent="Margin/HBox/Settings"]
+[node name="JumpOnHold" type="CheckBox" parent="Margin/HBox/Settings"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
-text = "Auto-Jump "
+tooltip_text = "Forces a Jump when landing with the jump button held"
+focus_neighbor_left = NodePath("../../Controls/Scroll/ActionSelections/jump/Button")
+focus_neighbor_bottom = NodePath("../../../../Corner/Margin/HBox/Confirm")
+text = "Jump on Hold"
 
 [node name="MouseAsKey" type="CheckBox" parent="Margin/HBox/Settings"]
 visible = false
@@ -474,6 +489,7 @@ keyboard input"
 layout_mode = 2
 
 [node name="Presets" type="VBoxContainer" parent="Margin/HBox"]
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Margin/HBox/Presets"]
@@ -533,6 +549,7 @@ custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 tooltip_text = "Confirm Mapping"
+focus_neighbor_left = NodePath("../../../../Margin/HBox/Controls/Scroll/ActionSelections/jump/Button")
 theme_override_styles/normal = ExtResource("8_rkq2i")
 theme_override_styles/pressed = ExtResource("11_7xtym")
 theme_override_styles/hover = ExtResource("10_0gwgh")
@@ -546,7 +563,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_horizontal = 2
-tooltip_text = "Reset Mapping"
+tooltip_text = "Reset Mapping (Keyboard and Controller)"
 theme_override_colors/font_color = Color(0.8, 0.168627, 0.168627, 1)
 theme_override_styles/normal = ExtResource("8_rkq2i")
 theme_override_styles/pressed = ExtResource("11_7xtym")
@@ -574,6 +591,7 @@ icon_alignment = 1
 [node name="RemapManager" type="Node" parent="."]
 script = ExtResource("10_enb1l")
 
+[connection signal="toggled" from="Margin/HBox/Settings/JumpOnHold" to="." method="on_jump_on_hold_toggled"]
 [connection signal="pressed" from="Corner/Margin/HBox/Confirm" to="." method="on_confirm"]
 [connection signal="pressed" from="Corner/Margin/HBox/Reset" to="." method="on_reset"]
 [connection signal="pressed" from="Corner/Margin/HBox/Return" to="." method="on_return"]

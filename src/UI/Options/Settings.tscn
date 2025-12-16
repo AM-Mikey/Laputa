@@ -24,7 +24,7 @@ sfxvolume_path = NodePath("Margin/Scroll/VBox/HBox/VBoxContainer/SFXVolume")
 musicvolume_path = NodePath("Margin/Scroll/VBox/HBox/VBoxContainer/MusicVolume")
 displaymode_path = NodePath("Margin/Scroll/VBox/DisplayMode/OptionButton")
 resolutionscale_path = NodePath("Margin/Scroll/VBox/ResolutionScale/OptionButton")
-mouselock_path = NodePath("Margin/Scroll/VBox/MouseLock/OptionButton")
+mouselock_path = NodePath("Margin/Scroll/VBox/MouseLock/CheckButton")
 deletesave_path = NodePath("Margin/Scroll/VBox/DeleteSave/Button")
 scroll_path = NodePath("Margin/Scroll")
 
@@ -186,7 +186,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Mouse Lock"
 
-[node name="OptionButton" type="CheckButton" parent="Margin/Scroll/VBox/MouseLock"]
+[node name="CheckButton" type="CheckButton" parent="Margin/Scroll/VBox/MouseLock"]
 layout_mode = 2
 size_flags_horizontal = 2
 
@@ -197,7 +197,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Margin/Scroll/VBox/DeleteSave"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Delete all Data (Debug)"
+text = "Delete ALL Data (Debug)"
 
 [node name="Button" type="Button" parent="Margin/Scroll/VBox/DeleteSave"]
 layout_mode = 2
@@ -227,6 +227,7 @@ theme_override_constants/separation = 8
 [node name="Reset" type="Button" parent="Corner/Margin/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Reset Settings"
 theme_override_colors/font_color = Color(0.8, 0.168627, 0.168627, 1)
 theme_override_styles/normal = ExtResource("4")
 theme_override_styles/pressed = ExtResource("6_f78j0")
@@ -236,6 +237,7 @@ theme_override_styles/focus = ExtResource("8_0e0rm")
 text = "Reset"
 
 [node name="Return" type="Button" parent="Corner/Margin/HBox"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -253,5 +255,6 @@ icon_alignment = 1
 [connection signal="value_changed" from="Margin/Scroll/VBox/HBox/VBoxContainer/SFXVolume/Slider" to="." method="on_sfxvolume_changed"]
 [connection signal="item_selected" from="Margin/Scroll/VBox/DisplayMode/OptionButton" to="." method="on_displaymode_changed"]
 [connection signal="item_selected" from="Margin/Scroll/VBox/ResolutionScale/OptionButton" to="." method="on_resolutionscale_changed"]
+[connection signal="toggled" from="Margin/Scroll/VBox/MouseLock/CheckButton" to="." method="on_mouselock"]
 [connection signal="pressed" from="Corner/Margin/HBox/Reset" to="." method="on_reset"]
 [connection signal="pressed" from="Corner/Margin/HBox/Return" to="." method="on_return"]
