@@ -173,7 +173,7 @@ func enter_wait(_last_state):
 	return
 
 
-func enter_talk():
+func enter_talk(_last_state):
 	if $AnimationPlayer.has_animation("Talk"):
 		change_animation("Talk")
 	else:
