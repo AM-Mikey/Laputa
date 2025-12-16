@@ -12,6 +12,7 @@ var move_dir = Vector2.ZERO
 var base_damage = 2
 var drop_damage: int
 var wait_time: float
+var ternminal_drop_velocity: float = 320.0
 
 func set_is_in_water(val):
 	if (state not in ["hang", "hangactive"]):
@@ -51,6 +52,7 @@ func _on_physics_process(_delta):
 		velocity = Vector2.ZERO
 	else:
 		velocity = calc_velocity(velocity, move_dir, speed)
+	velocity.y = min(velocity.y, ternminal_drop_velocity)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
 
