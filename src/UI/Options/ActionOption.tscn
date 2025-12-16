@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dllnonvd2winm"]
-
-[ext_resource type="Theme" uid="uid://byj0by3ej0vap" path="res://src/UI/Theme/OptionButtonSmall.tres" id="2"]
-
-[node name="ActionOption" type="OptionButton" groups=["ActionOptions"]]
-offset_right = 14.0
-offset_bottom = 24.0
-theme = ExtResource("2")

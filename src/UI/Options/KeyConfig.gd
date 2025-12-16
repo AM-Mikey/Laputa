@@ -1,339 +1,207 @@
 extends Control
 
-const CONTROLLERCONFIG = preload("res://src/UI/Options/ControllerConfig.tscn")
+var after_settings_ready = false #dont set settings unless this is true
 
-var input_map_path = "user://inputmap.json"
-
-var assignment_mode = false
-var button_ignore = false
-var action_string
-var actions = []
-var debug_actions = []
-
-var active_preset = 0
-
-@export var buttons: NodePath
-@onready var p_button = get_node(buttons)
 @export var ui_focus: NodePath
 @export var preset_path: NodePath
 
 @onready var w = get_tree().get_root().get_node("World")
+@onready var settings = get_parent().get_node("Settings")
+@onready var rm = $RemapManager
+@onready var action_selections = %ActionSelections
+@onready var return_node = %Return
 
-var preset_classic = {
-	"jump": KEY_X,
-	"fire_manual": KEY_C,
-	"fire_automatic": KEY_Z,
-	"move_left": KEY_LEFT,
-	"move_right": KEY_RIGHT,
-	"look_up": KEY_UP,
-	"look_down": KEY_DOWN,
-	"ui_accept": KEY_X,
-	"ui_cancel": KEY_C,
-	"inspect": KEY_DOWN,
-	"inventory": KEY_Q,
-	"gun_left": KEY_A,
-	"gun_right": KEY_S,
-	"pause": KEY_ESCAPE,
-}
 
-var preset_mouse = {
-	"jump": KEY_SPACE,
-	"fire_manual": MOUSE_BUTTON_LEFT,
-	"fire_automatic": MOUSE_BUTTON_RIGHT,
-	"move_left": KEY_A,
-	"move_right": KEY_D,
-	"look_up": KEY_W,
-	"look_down": KEY_S,
-	"ui_accept": KEY_E,
-	"ui_cancel": KEY_Q,
-	"inspect": KEY_E,
-	"inventory": KEY_TAB,
-	"gun_left": MOUSE_BUTTON_WHEEL_DOWN,
-	"gun_right": MOUSE_BUTTON_WHEEL_UP,
-	"pause": KEY_ESCAPE,
-}
-
-var preset_onehand = {
-	"jump": KEY_SHIFT,
-	"fire_manual": KEY_SPACE,
-	"fire_automatic": KEY_ALT,
-	"move_left": KEY_A,
-	"move_right": KEY_D,
-	"look_up": KEY_W,
-	"look_down": KEY_S,
-	"ui_accept": KEY_SPACE,
-	"ui_cancel": KEY_ESCAPE,
-	"inspect": KEY_S,
-	"inventory": KEY_TAB,
-	"gun_left": KEY_Q,
-	"gun_right": KEY_E,
-	"pause": KEY_ESCAPE,
-}
-
+#TODO: continue transferring things over to RemapManager
 
 func _ready():
-	get_node(preset_path).select(0)
-	var buttons_normal = []
-
-	for c in p_button.get_children():
-		var subchildren = c.get_children()
-		for s in subchildren:
-			if s is Button:
-				buttons_normal.append(s)
-
-	for b in buttons_normal:
-		b.connect("pressed", Callable(self, "_mark_button").bind(b.get_parent().name))
-		actions.append(b.get_parent().name)
-
-	_set_keys()
+	for action_box in %ActionSelections.get_children():
+		rm.action_buttons[action_box.name] = action_box.get_child(1)
+	for b in rm.action_buttons.values():
+		b.connect("pressed", Callable(self, "input_button_pressed").bind(b))
+		b.connect("focus_entered", Callable(self, "input_button_focus_entered").bind(b))
+		b.connect("focus_exited", Callable(self, "input_button_focus_exited").bind(b))
+	set_button_text()
+	rm.setup_action_button_panels()
 
 
 
-func _set_keys():
-	for j in actions:
-		var button = p_button.get_node(str(j) + "/Button")
-		button.set_pressed(false)
+### CHANGING ACTION INPUT ###
 
-		if InputMap.action_get_events(j).is_empty():
-			button.set_text("No Button!")
-			#button.set_pressed(false)
-			return
-
-		var input = _get_first_valid_input(j)
-		if input != null:
-			if input is InputEventKey:
-				button.set_text(input.as_text())
-			elif input is InputEventMouseButton:
-				var mouse_index
-				match input.button_index:
-					1: mouse_index = "LMB"
-					2: mouse_index = "RMB"
-					3: mouse_index = "MMB"
-					4: mouse_index = "MWHEELUP"
-					5: mouse_index = "MWHEELDOWN"
-					6: mouse_index = "MWHEELLEFT"
-					7: mouse_index = "MWHEELRIGHT"
-					8: mouse_index = "M4"
-					9: mouse_index = "M5"
-				button.set_text(mouse_index)
-
-#			print("/////////////")
-#			print ("input" + str(input))
-#			print(_get_first_valid_input("ui_accept"))
-#			if input == _get_first_valid_input("ui_accept"): #toggle off the button if we're not pressing our ui_accept
-#				print("bingo")
-##			else:
-#			button.set_pressed(false)
-
-
-
-func _get_first_valid_input(j):
-			var index = 0
-			var good_input = InputMap.action_get_events(j)[index]
-			while not good_input is InputEventKey and not good_input is InputEventMouseButton and index < InputMap.action_get_events(j).size() - 1:
-				index +=1
-				good_input = InputMap.action_get_events(j)[index]
-
-			if not good_input is InputEventKey and not good_input is InputEventMouseButton:
-				return null
-			else:
-				return good_input
-
-
-
-func _mark_button(string):
-	if button_ignore:
-		button_ignore = false
-
-		for j in actions:
-			if j == string:
-				p_button.get_node(str(j) + "/Button").set_pressed(false)
-
-	else:
-		assignment_mode = true
-		action_string = string
-
-		for j in actions:
-			if j != string:
-				p_button.get_node(str(j) + "/Button").set_pressed(false)
-
+func input_button_pressed(button): #test this ignore
+	rm.current_listening_action = rm.action_buttons.find_key(button)
+	#if ignore_button_press:
+		#ignore_button_press = false
+		#button.set_pressed(false)
+	#else:
+	for i in rm.action_buttons.values(): #deselect all other buttons
+		if i != button:
+			i.set_pressed(false)
 
 
 func _input(event):
-	if (event is InputEventKey or event is InputEventMouseButton) and assignment_mode:
-		print("second_input")
-		_change_key(event)
-		assignment_mode = false
+	if (event is InputEventKey) and rm.current_listening_action != null: #or event is InputEventMouseButton #TODO implement mouseaskey
+		get_viewport().set_input_as_handled()
+		rm.set_temp_action_input(event, "keyboard")
+		rm.current_listening_action = null
 
-		var accept_input_event = _get_first_valid_input("ui_accept") #prevent us from entering another assignment mode when event is accept_event
-		if event is InputEventKey and accept_input_event is InputEventKey:
-			if event.keycode == accept_input_event.keycode:
-				button_ignore = true
-		if event is InputEventMouseButton and accept_input_event is InputEventMouseButton:
-			if event.button_index == accept_input_event.button_index:
-				button_ignore = true
-
-
-
-func _change_key(new_key):
-	get_node(preset_path).select(0)
-
-	#Delete key of pressed button
-	if !InputMap.action_get_events(action_string).is_empty():
-		var input = _get_first_valid_input(action_string)
-		if input != null:
-			InputMap.action_erase_event(action_string, input)
-
-	#Check if new key was assigned somewhere 		#pass for now
-#	var all_actions = actions + debug_actions
-#	for i in all_actions:
-#		if InputMap.action_has_event(i, new_key):
-#			InputMap.action_erase_event(i, new_key)
+		#non issue, buttons only work on click right now
+		#var accept_input_event = _get_first_valid_input("ui_accept") #prevent us from entering another assignment mode when event is accept_event
+		#if event is InputEventKey and accept_input_event is InputEventKey:
+			#if event.keycode == accept_input_event.keycode:
+				#ignore_button_press = true
+		#if event is InputEventMouseButton and accept_input_event is InputEventMouseButton:
+			#if event.button_index == accept_input_event.button_index:
+				#ignore_button_press = true
 
 
-	#Add new Key
-	InputMap.action_add_event(action_string, new_key)
+func set_button_text(temp = false):
+	if temp:
+		var active_button = rm.action_buttons[rm.current_listening_action]
+		active_button.add_theme_color_override("font_color", rm.button_text_color_temp)
+		active_button.add_theme_color_override("font_focus_color", rm.button_text_color_temp)
+		active_button.add_theme_color_override("font_pressed_color", rm.button_text_color_temp)
+		active_button.add_theme_color_override("font_hover_color", rm.button_text_color_temp)
+		active_button.add_theme_color_override("font_hover_pressed_color", rm.button_text_color_temp)
 
+	for button in rm.action_buttons.values():
+		if !temp:
+			button.remove_theme_color_override("font_color")
+			button.remove_theme_color_override("font_focus_color")
+			button.remove_theme_color_override("font_pressed_color")
+			button.remove_theme_color_override("font_hover_color")
+			button.remove_theme_color_override("font_hover_pressed_color")
 
-	#alias action
-	var alias_action_string
-	match action_string:
-		"move_left": alias_action_string = "ui_left"
-		"move_right": alias_action_string = "ui_right"
-		"look_up": alias_action_string = "ui_up"
-		"look_down": alias_action_string = "ui_down"
-
-	if alias_action_string != null:
-		if !InputMap.action_get_events(alias_action_string).is_empty():
-			var input = _get_first_valid_input(alias_action_string)
-			if input != null:
-				InputMap.action_erase_event(alias_action_string, input)
-		InputMap.action_add_event(alias_action_string, new_key)
-
-	###
-
-	save_input_map()
-	_set_keys()
-
-
-
-func save_input_map():
-	var data = {}
-	var input_actions = InputMap.get_actions()
-	for a in input_actions:
-		var inputs = []
-		for i in InputMap.action_get_events(a):
-				if i is InputEventMouseButton:
-					inputs.append(["mouse", i.button_index])
-				if i is InputEventKey:
-					inputs.append(["key", i.keycode])
-				if i is InputEventJoypadButton:
-					inputs.append(["joy", i.button_index])
-		data[a] = inputs
-
-
-	var file = FileAccess.open(input_map_path, FileAccess.WRITE)
-	if file:
-		file.store_string(var_to_str(data))
-		file.close()
-		print("input map data saved")
-	else:
-		printerr("ERROR: input map data could not be saved!")
-
-
-func load_input_map():
-	var data
-	if FileAccess.file_exists(input_map_path):
-		var file = FileAccess.open(input_map_path, FileAccess.READ)
-		if file:
-			var text = file.get_as_text()
-			var test_json_conv = JSON.new()
-			test_json_conv.parse(text)
-			data = test_json_conv.get_data()
-			file.close()
-
-			for a in data.keys():
-				InputMap.action_erase_events(a)
-				for i in data[a]:
-					var new_input
-					match i.front():
-						"mouse":
-							new_input = InputEventMouseButton.new()
-							new_input.set_button_index(i.back())
-						"key":
-							new_input = InputEventKey.new()
-							new_input.set_keycode(i.back())
-						"joy":
-							new_input = InputEventJoypadButton.new()
-							new_input.set_button_index(i.back())
-
-					InputMap.action_add_event(a, new_input)
-
-	else:
-		printerr("ERROR: could not load input map data")
-
-
-func _on_preset_selected(index):
-	get_node(preset_path).select(active_preset)
-	if index != 0:
-		active_preset = index
-		$ConfirmationDialog.popup()
-
-func _on_ConfirmationDialog_confirmed():
-	get_node(preset_path).select(active_preset)
-	match active_preset:
-		1: set_preset(preset_classic)
-		2: set_preset(preset_mouse)
-		3: set_preset(preset_onehand)
-
-func set_preset(preset):
-	for k in preset.keys():
-		#Delete key of pressed button
-		if !InputMap.action_get_events(k).is_empty():
-			var old_input = _get_first_valid_input(k)
-			if old_input:
-				InputMap.action_erase_event(k, old_input)
-
-		#Add new key
-		var new_input
-		if preset[k] <= 10: #TODO: not a great way to determine if a key enum is a key or mouse
-			new_input = InputEventMouseButton.new()
-			new_input.button_index = preset[k]
+		var action = rm.action_buttons.find_key(button)
+		var input
+		if temp:
+			input = rm.temp_action_keyboard_input[action]
 		else:
-			new_input = InputEventKey.new()
-			new_input.keycode = preset[k]
-		InputMap.action_add_event(k, new_input)
+			input = rm.convert_input_event_to_array(rm.get_action_input_event(action, "keyboard"))
+
+		if InputMap.action_get_events(action).is_empty():
+			button.set_text("No Button!")
+		elif input != null:
+			var new_text: String
+			match input[0]:
+				"key":
+					new_text = OS.get_keycode_string(input[1])
+				"mouse":
+					var mouse_button_string
+					match input[1]:
+						1: mouse_button_string = "LMB"
+						2: mouse_button_string = "RMB"
+						3: mouse_button_string = "MMB"
+						4: mouse_button_string = "MWHEELUP"
+						5: mouse_button_string = "MWHEELDOWN"
+						6: mouse_button_string = "MWHEELLEFT"
+						7: mouse_button_string = "MWHEELRIGHT"
+						8: mouse_button_string = "M4"
+						9: mouse_button_string = "M5"
+					new_text = mouse_button_string
+			if new_text.length() > 6:
+				new_text = new_text.left(4) + "..."
+			button.text = new_text
 
 
-		#Alias action
-		var alias_action_string
-		match k:
-			"move_left": alias_action_string = "ui_left"
-			"move_right": alias_action_string = "ui_right"
-			"look_up": alias_action_string = "ui_up"
-			"look_down": alias_action_string = "ui_down"
-
-		if alias_action_string:
-			if !InputMap.action_get_events(alias_action_string).is_empty():
-				var old_input = _get_first_valid_input(alias_action_string)
-				if old_input:
-					InputMap.action_erase_event(alias_action_string, old_input)
-			InputMap.action_add_event(alias_action_string, new_input)
-
-
-	save_input_map()
-	_set_keys()
 
 
 
-### MENU ###
+
+
+
+
+
+#func _on_preset_selected(index):
+	#get_node(preset_path).select(active_preset)
+	#if index != 0:
+		#active_preset = index
+		#$ConfirmationDialog.popup()
+
+#func _on_ConfirmationDialog_confirmed():
+	#get_node(preset_path).select(active_preset)
+	#match active_preset:
+		#1: set_preset(preset_classic)
+		#2: set_preset(preset_mouse)
+		#3: set_preset(preset_onehand)
+
+#func set_preset(preset):
+	#for k in preset.keys():
+		##Delete key of pressed button
+		#if !InputMap.action_get_events(k).is_empty():
+			#var old_input = _get_first_valid_input(k)
+			#if old_input:
+				#InputMap.action_erase_event(k, old_input)
+#
+		##Add new key
+		#var new_input
+		#if preset[k] <= 10: #TODO: not a great way to determine if a key enum is a key or mouse
+			#new_input = InputEventMouseButton.new()
+			#new_input.button_index = preset[k]
+		#else:
+			#new_input = InputEventKey.new()
+			#new_input.keycode = preset[k]
+		#InputMap.action_add_event(k, new_input)
+#
+#
+		##Alias action
+		#var alias_action_string
+		#match k:
+			#"move_left": alias_action_string = "ui_left"
+			#"move_right": alias_action_string = "ui_right"
+			#"look_up": alias_action_string = "ui_up"
+			#"look_down": alias_action_string = "ui_down"
+#
+		#if alias_action_string:
+			#if !InputMap.action_get_events(alias_action_string).is_empty():
+				#var old_input = _get_first_valid_input(alias_action_string)
+				#if old_input:
+					#InputMap.action_erase_event(alias_action_string, old_input)
+			#InputMap.action_add_event(alias_action_string, new_input)
+#
+#
+	#save_input_map()
+	#_set_keys()
+
+
+
+### SIGNALS ###
+
+func input_button_focus_entered(button):
+	rm.tween_in_button_panel(button.get_parent().get_child(0))
+
+func input_button_focus_exited(button):
+	rm.tween_out_button_panel(button.get_parent().get_child(0))
+
+func on_confirm():
+	am.play("save")
+	rm.confirm_action_input("keyboard")
 
 func on_reset():
-	set_preset(1)
+	var dir = DirAccess.open("user://")
+	dir.remove("user://inputmap.json")
+	rm.load_input_map(rm.default_input_map_path)
+	rm.save_input_map(rm.input_map_path)
+	rm.reset_temp_action_input()
+	set_button_text()
+
+
 
 func on_return():
 	w.get_node("MenuLayer/Options").exit()
 
+### UI ###
 
 func do_focus():
+	print("k")
 	get_node(ui_focus).grab_focus()
+
+
+func on_jump_on_hold_toggled(toggled_on: bool):
+	if after_settings_ready and !w.get_node("MenuLayer/Options").ishidden:
+		inp.buttonconfig.holdjumping = toggled_on
+		settings.save_setting("JumpOnHold", toggled_on)
+		settings.controller_config.match_jump_on_hold_toggled(toggled_on)
+
+func match_jump_on_hold_toggled(toggled_on: bool):
+	%JumpOnHold.set_pressed_no_signal(toggled_on)

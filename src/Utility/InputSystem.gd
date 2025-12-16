@@ -1,8 +1,8 @@
 extends Node
-
-			#SETTINGS
-var holdjumping: = true
-
+var buttonconfig := {
+	holdjumping = false,
+	buttons = {},
+	}
 
 			#STICK
 var analogstick:Vector2 = Vector2(0,0)

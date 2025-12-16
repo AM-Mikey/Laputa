@@ -18,14 +18,16 @@ var default = {
 	"DisplayMode": 3,
 	"ResolutionScale": 0,
 	"MouseLock": false,
-
-	#input
-	"holdjumping": true,
+	"TooltipIconType": 0,
+	"JumpOnHold": false,
 	}
 var after_ready = false #so we don't trigger a change when loading settings
 var ignore_display_mode = false #so we don't reset the display mode during the options opening mid-game
 
 @onready var w = get_tree().get_root().get_node("World")
+@onready var controller_config = get_parent().get_node("ControllerConfig")
+@onready var key_config = get_parent().get_node("KeyConfig")
+
 
 @onready var mastervolume = get_node(mastervolume_path)
 @onready var sfxvolume = get_node(sfxvolume_path)
@@ -35,6 +37,7 @@ var ignore_display_mode = false #so we don't reset the display mode during the o
 @onready var mouselock = get_node(mouselock_path)
 @onready var deletesave = get_node(deletesave_path)
 @onready var scroll = get_node(scroll_path)
+@onready var return_node = %Return
 
 func _ready():
 	if FileAccess.file_exists(settings_path):
@@ -43,7 +46,11 @@ func _ready():
 		save_defaults()
 
 	scroll.get_v_scroll_bar().connect("item_rect_changed", Callable(self, "on_scrollbar_changed"))
+	var display_mode_popup_menu = %DisplayMode.get_node("OptionButton").get_child(0, true) #needed for any popup menus
+	display_mode_popup_menu.canvas_item_default_texture_filter = 0 #nearest
 	after_ready = true
+	controller_config.after_settings_ready = true
+	key_config.after_settings_ready = true
 
 ### SIGNALS
 
@@ -104,11 +111,19 @@ func on_sfxvolume_changed(value):
 	change_bus_volume(value,"SFX")
 
 func change_bus_volume(value,busname:String):
-	var slidernode = get_node("Margin/Scroll/VBox/" + busname + "Volume")
+	var slidernode
+	match busname:
+		"Master":
+			slidernode = %MasterVolume
+		"Music":
+			slidernode = %MusicVolume
+		"SFX":
+			slidernode = %SFXVolume
+
 	var db = linear_to_db(value/10.0)
 	if value == 0:
 		AudioServer.set_bus_mute(AudioServer.get_bus_index(busname),true)
-		slidernode.get_node("Label").text = "SFX Volume: Muted"
+		slidernode.get_node("Label").text = busname + " Volume: Muted"
 	else:
 		AudioServer.set_bus_mute(AudioServer.get_bus_index(busname),false)
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(busname),db)
@@ -181,9 +196,12 @@ func load_settings():
 	mouselock.button_pressed = data["MouseLock"]
 	on_mouselock(data["MouseLock"])
 
-	#input
-	if data.has("holdjumping"):
-		inp.holdjumping = data['holdjumping']
+	await get_tree().process_frame
+	controller_config.tooltip_icon_type_node.get_node("OptionButton").selected = data["TooltipIconType"]
+	controller_config.on_tooltip_icon_type_selected(data["TooltipIconType"])
+	controller_config.jump_on_hold_node.get_node("CheckBox").button_pressed = (data["JumpOnHold"]) #by allowing a signal here, it will automatically go to keyconfig's button as well
+	controller_config.on_jump_on_hold_toggled(data["JumpOnHold"])
+
 
 func write_data(data):
 	var file = FileAccess.open(settings_path, FileAccess.WRITE)

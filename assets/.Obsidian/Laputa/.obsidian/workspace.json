@@ -35,27 +35,41 @@
               "icon": "lucide-file",
               "title": "Juniper"
             }
+          },
+          {
+            "id": "680a833611f90e85",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Concepts/Religion.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Religion"
+            }
+          },
+          {
+            "id": "8e79af8c8cf32a05",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.10.6"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.10.6"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       },
       {
         "id": "f00468223e4d7550",
         "type": "tabs",
         "dimension": 66.75126903553299,
         "children": [
-          {
-            "id": "716f7f890990af0d",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "graph",
-              "state": {},
-              "pinned": true,
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
-            }
-          },
           {
             "id": "0b2f6be5223829c1",
             "type": "leaf",
@@ -69,8 +83,21 @@
               "icon": "lucide-file",
               "title": "Machine"
             }
+          },
+          {
+            "id": "716f7f890990af0d",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "graph",
+              "state": {},
+              "pinned": true,
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -215,40 +242,40 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e8e9d350e2bb8079",
+  "active": "8e79af8c8cf32a05",
   "lastOpenFiles": [
-    "The World/Island of Laputa.md",
+    "Concepts/Life on Laputa.md",
+    "Concepts/Laputan Revolution.md",
+    "Concepts/Laputan Crown.md",
+    "Concepts/Ethnicity.md",
+    "Concepts/Cloud Curtain.md",
+    "Characters/Alexander.md",
+    "Characters/Basil.md",
+    "Characters/Colin.md",
+    "Characters/Dola.md",
+    "Characters/Emily.md",
+    "Characters/Fuuka.md",
     "Characters/Junior.md",
     "Characters/Juniper.md",
     "Characters/King Davey.md",
     "Characters/Laputa's Former King.md",
     "Characters/Parsley and Thyme.md",
-    "Characters/Colin.md",
-    "Characters/Dola.md",
-    "Characters/Fuuka.md",
-    "Objects/Vehicles/Jalopy.md",
-    "Objects/Vehicles/Zephyr.md",
-    "Objects/McGuffin.md",
-    "Objects/Untitled.md",
-    "The World/Surface.md",
+    "Characters/Treasure Hunter.md",
+    "Characters/Spirit of the Island.md",
+    "Characters/Scrum.md",
+    "Characters/Sage.md",
+    "Groups/Dogtown Residents.md",
+    "Groups/Corp..md",
+    "Groups/Laputans.md",
+    "Groups/Lost Boys.md",
+    "Concepts/History of Laputa.md",
+    "Concepts/Humans and Beastfolk.md",
     "Aseprite_8jemaKX0FE.png",
     "Aseprite_EEozVk20AW.png",
     "Aseprite_ujhX9SUnNc.png",
-    "Guns.md",
     "Pasted image 20250625181112.png",
     "Pasted image 20250625181516.png",
     "Pasted image 20250625181354.png",
-    "Objects/Vehicles/Sushi.md",
-    "Groups/Laputans.md",
-    "Concepts/Laputan Crown.md",
-    "Concepts/Great Plague.md",
-    "Characters/Alexander.md",
-    "The World/Areas/Ravine.md",
-    "Concepts/Second Inhabitants.md",
-    "Groups/Colonists.md",
-    "Objects/Machine.md",
-    "Groups/Sky Pirates.md",
-    "Concepts/Life on Laputa.md",
     "Pasted image 20250625183949.png",
     "Pasted image 20250625183436.png",
     "Pasted image 20250625182127.png",

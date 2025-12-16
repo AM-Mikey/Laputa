@@ -337,3 +337,54 @@ Crouch Triggering:
 Transition frame Candidates:
 
 	- up_slope -> edge_front
+
+
+
+
+
+Dialog CHANGES
+
+-talk animations for npcs
+
+
+
+
+Input Map Changes
+
+ -configure presets & reset
+ -make presets as files
+ -update preset graphics
+ -prevent mapping keys to same buttons
+ -to keep consistancy with game behavior, we need to lock down menu accept, menu cancel, inspect to their associated buttons
+ -jump on hold setting
+
+
+
+Remapping TODO:
+
+adjust deadzone when adding new inputs. it seems like 0.5 for digital and 0.0 for analog because we do deadzone for analog internally
+kb inputs via mouse
+	-prevent same input multiple actions
+		-define important actions that are not doubled
+		-combination inputs like ui_text_carat_left are unnaccounted for as they won't be used in game anyways
+		-define actions that are doubled from important ones (i.e. ui inputs)
+		-fix reset
+		-fix presets
+	-add confirm to replace old inputmap with new inputmap
+
+
+kb inputs via controller
+controller inputs via mouse
+controller inputs via controller
+check controller axis is done properly
+check l2 and r2 analog work properly (since it goes from 0 to 1 not -1 to 1)
+make sure controller or kb input doesnt conflict with window focus
+
+
+allow dpad to be remapped, but must be disabled
+allow left stick to be remapped, but must be disabled
+analog stick mapping seems to hate Y axis
+red does not clear on confirm on controller
+add clear button to input maps
+
+make ui accept and deny rebind after confirm on controller

@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1vehxtueux4l"]
+[gd_scene load_steps=10 format=3 uid="uid://b1vehxtueux4l"]
 
 [ext_resource type="StyleBox" uid="uid://dj8k7ro8dbrl3" path="res://src/UI/StyleBox/PaperSwatch.tres" id="1"]
 [ext_resource type="Theme" uid="uid://c1np2xna4dogr" path="res://src/UI/Theme/InsetMenu.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://bqcnin0ya0s5l" path="res://src/UI/StyleBox/SteelCorner.tres" id="3"]
 [ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="4"]
 [ext_resource type="Script" uid="uid://1yhihyfmaejt" path="res://src/UI/Options/Settings.gd" id="6"]
+[ext_resource type="Texture2D" uid="uid://bdy1084g0hduo" path="res://assets/UI/Options/IconReturn.png" id="6_3leul"]
+[ext_resource type="StyleBox" uid="uid://dmed1456ischp" path="res://src/UI/StyleBox/SteelBeveledDarkInverted.tres" id="6_f78j0"]
+[ext_resource type="StyleBox" uid="uid://cyudviigyrkx2" path="res://src/UI/StyleBox/SteelBeveled.tres" id="7_yuarh"]
+[ext_resource type="StyleBox" uid="uid://bwe3j6hcp3u7j" path="res://src/UI/StyleBox/SteelBeveledLight.tres" id="8_0e0rm"]
 
 [node name="Settings" type="MarginContainer"]
 anchors_preset = 15
@@ -16,11 +20,11 @@ grow_vertical = 2
 theme = ExtResource("2")
 script = ExtResource("6")
 mastervolume_path = NodePath("Margin/Scroll/VBox/MasterVolume")
-sfxvolume_path = NodePath("Margin/Scroll/VBox/SFXVolume")
-musicvolume_path = NodePath("Margin/Scroll/VBox/MusicVolume")
+sfxvolume_path = NodePath("Margin/Scroll/VBox/HBox/VBoxContainer/SFXVolume")
+musicvolume_path = NodePath("Margin/Scroll/VBox/HBox/VBoxContainer/MusicVolume")
 displaymode_path = NodePath("Margin/Scroll/VBox/DisplayMode/OptionButton")
 resolutionscale_path = NodePath("Margin/Scroll/VBox/ResolutionScale/OptionButton")
-mouselock_path = NodePath("Margin/Scroll/VBox/MouseLock/OptionButton")
+mouselock_path = NodePath("Margin/Scroll/VBox/MouseLock/CheckButton")
 deletesave_path = NodePath("Margin/Scroll/VBox/DeleteSave/Button")
 scroll_path = NodePath("Margin/Scroll")
 
@@ -29,8 +33,10 @@ layout_mode = 2
 
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_right = 16
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="Scroll" type="ScrollContainer" parent="Margin"]
 layout_mode = 2
@@ -40,9 +46,22 @@ follow_focus = true
 [node name="VBox" type="VBoxContainer" parent="Margin/Scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 2
 alignment = 1
 
+[node name="Label" type="Label" parent="Margin/Scroll/VBox"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Settings:"
+
+[node name="Control" type="Control" parent="Margin/Scroll/VBox"]
+visible = false
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
 [node name="MasterVolume" type="VBoxContainer" parent="Margin/Scroll/VBox"]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Margin/Scroll/VBox/MasterVolume"]
@@ -59,34 +78,43 @@ scrollable = false
 tick_count = 21
 ticks_on_borders = true
 
-[node name="MusicVolume" type="HBoxContainer" parent="Margin/Scroll/VBox"]
+[node name="HBox" type="HBoxContainer" parent="Margin/Scroll/VBox"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/Scroll/VBox/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Margin/Scroll/VBox/MusicVolume"]
+[node name="MusicVolume" type="VBoxContainer" parent="Margin/Scroll/VBox/HBox/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Margin/Scroll/VBox/HBox/VBoxContainer/MusicVolume"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Music Volume: 100%"
 
-[node name="Slider" type="HSlider" parent="Margin/Scroll/VBox/MusicVolume"]
+[node name="Slider" type="HSlider" parent="Margin/Scroll/VBox/HBox/VBoxContainer/MusicVolume"]
 layout_mode = 2
-size_flags_horizontal = 7
+size_flags_horizontal = 3
 max_value = 10.0
 value = 10.0
 scrollable = false
 tick_count = 11
 ticks_on_borders = true
 
-[node name="SFXVolume" type="HBoxContainer" parent="Margin/Scroll/VBox"]
+[node name="SFXVolume" type="VBoxContainer" parent="Margin/Scroll/VBox/HBox/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Margin/Scroll/VBox/SFXVolume"]
+[node name="Label" type="Label" parent="Margin/Scroll/VBox/HBox/VBoxContainer/SFXVolume"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SFX Volume: 100%"
 
-[node name="Slider" type="HSlider" parent="Margin/Scroll/VBox/SFXVolume"]
+[node name="Slider" type="HSlider" parent="Margin/Scroll/VBox/HBox/VBoxContainer/SFXVolume"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 10.0
@@ -95,7 +123,18 @@ scrollable = false
 tick_count = 11
 ticks_on_borders = true
 
+[node name="Control" type="Control" parent="Margin/Scroll/VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control2" type="Control" parent="Margin/Scroll/VBox"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
 [node name="DisplayMode" type="HBoxContainer" parent="Margin/Scroll/VBox"]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Margin/Scroll/VBox/DisplayMode"]
@@ -118,6 +157,7 @@ popup/item_3/id = 3
 
 [node name="ResolutionScale" type="HBoxContainer" parent="Margin/Scroll/VBox"]
 visible = false
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Margin/Scroll/VBox/ResolutionScale"]
@@ -138,6 +178,7 @@ theme_override_styles/panel = ExtResource("1")
 layout_mode = 2
 
 [node name="MouseLock" type="HBoxContainer" parent="Margin/Scroll/VBox"]
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Margin/Scroll/VBox/MouseLock"]
@@ -145,17 +186,18 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Mouse Lock"
 
-[node name="OptionButton" type="CheckButton" parent="Margin/Scroll/VBox/MouseLock"]
+[node name="CheckButton" type="CheckButton" parent="Margin/Scroll/VBox/MouseLock"]
 layout_mode = 2
 size_flags_horizontal = 2
 
 [node name="DeleteSave" type="HBoxContainer" parent="Margin/Scroll/VBox"]
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Margin/Scroll/VBox/DeleteSave"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Delete all Data (Debug)"
+text = "Delete ALL Data (Debug)"
 
 [node name="Button" type="Button" parent="Margin/Scroll/VBox/DeleteSave"]
 layout_mode = 2
@@ -173,34 +215,46 @@ theme_override_styles/panel = ExtResource("3")
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 128.0
-offset_bottom = 48.0
+offset_right = 124.0
+offset_bottom = 44.0
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
 
 [node name="HBox" type="HBoxContainer" parent="Corner/Margin"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="Reset" type="Button" parent="Corner/Margin/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Reset Settings"
 theme_override_colors/font_color = Color(0.8, 0.168627, 0.168627, 1)
 theme_override_styles/normal = ExtResource("4")
+theme_override_styles/pressed = ExtResource("6_f78j0")
+theme_override_styles/hover = ExtResource("7_yuarh")
+theme_override_styles/hover_pressed = ExtResource("6_f78j0")
+theme_override_styles/focus = ExtResource("8_0e0rm")
 text = "Reset"
 
 [node name="Return" type="Button" parent="Corner/Margin/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0.84313726, 0.68235296, 0.53333336, 1)
 theme_override_styles/normal = ExtResource("4")
-text = "Return"
+theme_override_styles/pressed = ExtResource("6_f78j0")
+theme_override_styles/hover = ExtResource("7_yuarh")
+theme_override_styles/hover_pressed = ExtResource("6_f78j0")
+theme_override_styles/focus = ExtResource("8_0e0rm")
+icon = ExtResource("6_3leul")
+icon_alignment = 1
 
 [connection signal="value_changed" from="Margin/Scroll/VBox/MasterVolume/Slider" to="." method="on_mastervolume_changed"]
-[connection signal="value_changed" from="Margin/Scroll/VBox/MusicVolume/Slider" to="." method="on_musicvolume_changed"]
-[connection signal="value_changed" from="Margin/Scroll/VBox/SFXVolume/Slider" to="." method="on_sfxvolume_changed"]
+[connection signal="value_changed" from="Margin/Scroll/VBox/HBox/VBoxContainer/MusicVolume/Slider" to="." method="on_musicvolume_changed"]
+[connection signal="value_changed" from="Margin/Scroll/VBox/HBox/VBoxContainer/SFXVolume/Slider" to="." method="on_sfxvolume_changed"]
 [connection signal="item_selected" from="Margin/Scroll/VBox/DisplayMode/OptionButton" to="." method="on_displaymode_changed"]
 [connection signal="item_selected" from="Margin/Scroll/VBox/ResolutionScale/OptionButton" to="." method="on_resolutionscale_changed"]
+[connection signal="toggled" from="Margin/Scroll/VBox/MouseLock/CheckButton" to="." method="on_mouselock"]
 [connection signal="pressed" from="Corner/Margin/HBox/Reset" to="." method="on_reset"]
 [connection signal="pressed" from="Corner/Margin/HBox/Return" to="." method="on_return"]

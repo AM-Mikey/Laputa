@@ -1,0 +1,13 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cedgt8u8aawp3"]
+
+[ext_resource type="Texture2D" uid="uid://dpcfyrvq036q2" path="res://assets/UI/StyleBox/PaperGreen.png" id="1_kt4dd"]
+
+[resource]
+texture = ExtResource("1_kt4dd")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(0, 0, 16, 16)

@@ -66,10 +66,6 @@ func _input(event):
 			SaveSystem.read_level_data_from_save(w.current_level)
 			SaveSystem.copy_level_data_from_save_to_temp()
 
-		if event.is_action_pressed("debug_shop"):
-			var shop_menu = SHOP_MENU.instantiate()
-			w.uig.add_child(shop_menu)
-
 
 		if event.is_action_pressed("debug_fly"):
 			if w.has_node("Juniper"):

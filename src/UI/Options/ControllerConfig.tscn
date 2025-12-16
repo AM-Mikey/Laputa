@@ -1,12 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdt0hp441qxe3"]
+[gd_scene load_steps=18 format=3 uid="uid://bdt0hp441qxe3"]
 
 [ext_resource type="Theme" uid="uid://c1np2xna4dogr" path="res://src/UI/Theme/InsetMenu.tres" id="1"]
-[ext_resource type="PackedScene" uid="uid://dllnonvd2winm" path="res://src/UI/Options/ActionOption.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://c8est8qh3g3tb" path="res://src/UI/Options/ControllerTop.tscn" id="3_4ypbq"]
 [ext_resource type="StyleBox" uid="uid://bqcnin0ya0s5l" path="res://src/UI/StyleBox/SteelCorner.tres" id="4"]
+[ext_resource type="PackedScene" uid="uid://cb2b6a1h21g75" path="res://src/UI/Options/ControllerFront.tscn" id="4_4ypbq"]
 [ext_resource type="Script" uid="uid://rb8u66djacvf" path="res://src/UI/Options/ControllerConfig.gd" id="5"]
-[ext_resource type="Texture2D" uid="uid://diafdejhbs5fg" path="res://assets/UI/Settings/Outdated/ControllerConfig/FrontBack.png" id="6"]
+[ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="5_ripyc"]
+[ext_resource type="StyleBox" uid="uid://c1fw52k8vfcy6" path="res://src/UI/StyleBox/Suede.tres" id="7_g1lek"]
 [ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="7_nyot8"]
-[ext_resource type="Texture2D" uid="uid://ds8cfh1qceedo" path="res://assets/UI/Settings/Outdated/ControllerConfig/TopBack.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://djgp08m0d01u1" path="res://assets/Icon/BossIcon.png" id="9_srj3u"]
+[ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="9_yltrd"]
+[ext_resource type="Texture2D" uid="uid://bdy1084g0hduo" path="res://assets/UI/Options/IconReturn.png" id="10_g1lek"]
+[ext_resource type="Texture2D" uid="uid://b6myyl33gn7fw" path="res://assets/UI/Options/IconConfirm.png" id="10_oju5a"]
+[ext_resource type="Script" uid="uid://be36ht814bo00" path="res://src/UI/Options/RemapManager.gd" id="10_ripyc"]
+[ext_resource type="Texture2D" uid="uid://1kxm2qe3r0oi" path="res://assets/UI/Options/IconReset.png" id="10_srj3u"]
+[ext_resource type="StyleBox" uid="uid://dmed1456ischp" path="res://src/UI/StyleBox/SteelBeveledDarkInverted.tres" id="11_8q2eq"]
+[ext_resource type="StyleBox" uid="uid://cyudviigyrkx2" path="res://src/UI/StyleBox/SteelBeveled.tres" id="12_ts718"]
+[ext_resource type="StyleBox" uid="uid://bwe3j6hcp3u7j" path="res://src/UI/StyleBox/SteelBeveledLight.tres" id="13_bv31o"]
 
 [node name="ControllerConfig" type="MarginContainer"]
 anchors_preset = 15
@@ -17,185 +27,425 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1")
 script = ExtResource("5")
+ui_focus = NodePath("Margin/HBox/Controls/Scroll/ActionSelections/jump/JumpButton")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2
 
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="ControllerTop" parent="HBox" instance=ExtResource("3_4ypbq")]
+layout_direction = 1
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="Control" parent="HBox"]
+visible = false
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+
+[node name="HBox2" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="ControllerFront" parent="HBox2" instance=ExtResource("4_4ypbq")]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HBox2"]
+visible = false
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 4
+theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
+theme_override_constants/margin_right = 8
 
-[node name="Top" type="TextureRect" parent="Margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-texture = ExtResource("14")
-
-[node name="Front" type="TextureRect" parent="Margin"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-texture = ExtResource("6")
-
-[node name="Sprites" type="VBoxContainer" parent="Margin"]
-visible = false
+[node name="HBox" type="HBoxContainer" parent="Margin"]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/Sprites"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/Sprites"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="Controls" type="HBoxContainer" parent="Margin"]
-layout_mode = 2
-
-[node name="Front" type="VBoxContainer" parent="Margin/Controls"]
+[node name="Controls" type="VBoxContainer" parent="Margin/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/Controls/Front"]
-layout_mode = 2
-
-[node name="Dpad" type="VBoxContainer" parent="Margin/Controls/Front/HBoxContainer"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls"]
 visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Controls:"
+
+[node name="Scroll" type="ScrollContainer" parent="Margin/HBox/Controls"]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="ActionSelections" type="VBoxContainer" parent="Margin/HBox/Controls/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="jump" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/jump"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_top = 8.0
+offset_right = 118.0
+offset_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("7_g1lek")
+
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/jump/Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 110.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.843137, 0.682353, 0.533333, 1)
+theme_override_colors/font_shadow_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_ripyc")
+text = "Jump / Accept"
+
+[node name="JumpButton" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/jump"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 0
+offset_right = 28.0
+offset_bottom = 28.0
+focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold/CheckBox")
+toggle_mode = true
+icon = ExtResource("9_srj3u")
+icon_alignment = 1
+
+[node name="fire_manual" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_manual"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_top = 8.0
+offset_right = 107.0
+offset_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("7_g1lek")
+
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_manual/Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 110.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.843137, 0.682353, 0.533333, 1)
+theme_override_colors/font_shadow_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_ripyc")
+text = "Fire / Cancel"
+
+[node name="FireManualButton" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_manual"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 0
+offset_right = 28.0
+offset_bottom = 28.0
+focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold/CheckBox")
+toggle_mode = true
+icon = ExtResource("9_srj3u")
+icon_alignment = 1
+
+[node name="fire_automatic" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_automatic"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_top = 8.0
+offset_right = 175.0
+offset_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("7_g1lek")
+
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_automatic/Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 110.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.843137, 0.682353, 0.533333, 1)
+theme_override_colors/font_shadow_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_ripyc")
+text = "Auto-Fire / Lock Direction"
+
+[node name="FireAutomaticButton" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_automatic"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 0
+offset_right = 28.0
+offset_bottom = 28.0
+focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold/CheckBox")
+toggle_mode = true
+icon = ExtResource("9_srj3u")
+icon_alignment = 1
+
+[node name="gun_left" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_left"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_top = 8.0
+offset_right = 108.0
+offset_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("7_g1lek")
+
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_left/Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 110.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.843137, 0.682353, 0.533333, 1)
+theme_override_colors/font_shadow_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_ripyc")
+text = "Previous Gun"
+
+[node name="GunLeftButton" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_left"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 0
+offset_right = 28.0
+offset_bottom = 28.0
+toggle_mode = true
+icon = ExtResource("9_srj3u")
+icon_alignment = 1
+
+[node name="gun_right" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_right"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_top = 8.0
+offset_right = 88.0
+offset_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("7_g1lek")
+
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_right/Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 110.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.843137, 0.682353, 0.533333, 1)
+theme_override_colors/font_shadow_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_ripyc")
+text = "Next Gun"
+
+[node name="GunRightButton" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_right"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 0
+offset_right = 28.0
+offset_bottom = 28.0
+focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold/CheckBox")
+toggle_mode = true
+icon = ExtResource("9_srj3u")
+icon_alignment = 1
+
+[node name="inventory" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/inventory"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_top = 8.0
+offset_right = 89.0
+offset_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("7_g1lek")
+
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/inventory/Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 110.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.843137, 0.682353, 0.533333, 1)
+theme_override_colors/font_shadow_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_ripyc")
+text = "Inventory"
+
+[node name="InventoryButton" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/inventory"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 0
+offset_right = 28.0
+offset_bottom = 28.0
+focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold/CheckBox")
+toggle_mode = true
+icon = ExtResource("9_srj3u")
+icon_alignment = 1
+
+[node name="pause" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/pause"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_top = 8.0
+offset_right = 70.0
+offset_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("7_g1lek")
+
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/pause/Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 110.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.843137, 0.682353, 0.533333, 1)
+theme_override_colors/font_shadow_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_ripyc")
+text = "Pause"
+
+[node name="PauseButton" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/pause"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 0
+offset_right = 28.0
+offset_bottom = 28.0
+focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold/CheckBox")
+toggle_mode = true
+icon = ExtResource("9_srj3u")
+icon_alignment = 1
+
+[node name="Settings" type="VBoxContainer" parent="Margin/HBox"]
 layout_mode = 2
 size_flags_horizontal = 10
+alignment = 2
 
-[node name="DpadUp" parent="Margin/Controls/Front/HBoxContainer/Dpad" instance=ExtResource("2")]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="HBox" type="HBoxContainer" parent="Margin/Controls/Front/HBoxContainer/Dpad"]
-layout_mode = 2
-
-[node name="DpadLeft" parent="Margin/Controls/Front/HBoxContainer/Dpad/HBox" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="DpadRight" parent="Margin/Controls/Front/HBoxContainer/Dpad/HBox" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="DpadDown" parent="Margin/Controls/Front/HBoxContainer/Dpad" instance=ExtResource("2")]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Menu" type="HBoxContainer" parent="Margin/Controls/Front/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="Select" parent="Margin/Controls/Front/HBoxContainer/Menu" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="Start" parent="Margin/Controls/Front/HBoxContainer/Menu" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="Face" type="VBoxContainer" parent="Margin/Controls/Front/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 10
-
-[node name="FaceUp" parent="Margin/Controls/Front/HBoxContainer/Face" instance=ExtResource("2")]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="HBox" type="HBoxContainer" parent="Margin/Controls/Front/HBoxContainer/Face"]
-layout_mode = 2
-
-[node name="FaceLeft" parent="Margin/Controls/Front/HBoxContainer/Face/HBox" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="FaceRight" parent="Margin/Controls/Front/HBoxContainer/Face/HBox" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="FaceDown" parent="Margin/Controls/Front/HBoxContainer/Face" instance=ExtResource("2")]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="TextureRect" type="TextureRect" parent="Margin/Controls/Front"]
+[node name="Label" type="Label" parent="Margin/HBox/Settings"]
 visible = false
 layout_mode = 2
-size_flags_vertical = 8
-texture = ExtResource("6")
+text = "Settings:"
 
-[node name="Top" type="VBoxContainer" parent="Margin/Controls"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control" type="Control" parent="Margin/Controls/Top"]
-custom_minimum_size = Vector2(0, 80)
+[node name="JumpOnHold" type="Control" parent="Margin/HBox/Settings"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Margin/Controls/Top"]
-visible = false
-layout_mode = 2
+[node name="CheckBox" type="CheckBox" parent="Margin/HBox/Settings/JumpOnHold"]
+layout_mode = 0
+offset_right = 112.0
+offset_bottom = 29.0
 size_flags_vertical = 0
-texture = ExtResource("14")
+tooltip_text = "Forces a Jump when landing with the jump button held"
+focus_neighbor_left = NodePath("../../../Controls/Scroll/ActionSelections/jump/JumpButton")
+text = "Jump on Hold"
+alignment = 1
 
-[node name="Top" type="HBoxContainer" parent="Margin/Controls/Top"]
+[node name="DisableAnalog" type="Control" parent="Margin/HBox/Settings"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 
-[node name="Left" type="VBoxContainer" parent="Margin/Controls/Top/Top"]
-layout_mode = 2
-size_flags_horizontal = 6
+[node name="CheckBox" type="CheckBox" parent="Margin/HBox/Settings/DisableAnalog"]
+layout_mode = 0
+offset_right = 112.0
+offset_bottom = 29.0
+size_flags_vertical = 0
+tooltip_text = "Enable/disable the left analog stick"
+focus_neighbor_left = NodePath("../../../Controls/Scroll/ActionSelections/jump/JumpButton")
+text = "Analog Move"
+alignment = 1
 
-[node name="L1" parent="Margin/Controls/Top/Top/Left" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="L2" parent="Margin/Controls/Top/Top/Left" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="Stick" type="HBoxContainer" parent="Margin/Controls/Top/Top"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="L3" parent="Margin/Controls/Top/Top/Stick" instance=ExtResource("2")]
+[node name="DisableDPad" type="Control" parent="Margin/HBox/Settings"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 
-[node name="R3" parent="Margin/Controls/Top/Top/Stick" instance=ExtResource("2")]
+[node name="CheckBox" type="CheckBox" parent="Margin/HBox/Settings/DisableDPad"]
+layout_mode = 0
+offset_right = 112.0
+offset_bottom = 29.0
+size_flags_vertical = 0
+tooltip_text = "Enable/disable the left analog stick"
+focus_neighbor_left = NodePath("../../../Controls/Scroll/ActionSelections/jump/JumpButton")
+text = "D-pad Move"
+alignment = 1
+
+[node name="Panel" type="Panel" parent="Margin/HBox/Settings/DisableDPad"]
+layout_mode = 0
+offset_top = 33.0
+offset_right = 112.0
+offset_bottom = 33.0
+
+[node name="TooltipIconType" type="Control" parent="Margin/HBox/Settings"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 
-[node name="Right" type="VBoxContainer" parent="Margin/Controls/Top/Top"]
-layout_mode = 2
-size_flags_horizontal = 6
+[node name="Label" type="Label" parent="Margin/HBox/Settings/TooltipIconType"]
+layout_mode = 0
+offset_right = 112.0
+offset_bottom = 14.0
+text = "Tooltip Icons"
 
-[node name="R1" parent="Margin/Controls/Top/Top/Right" instance=ExtResource("2")]
-layout_mode = 2
+[node name="OptionButton" type="OptionButton" parent="Margin/HBox/Settings/TooltipIconType"]
+layout_mode = 0
+offset_top = 18.0
+offset_right = 112.0
+offset_bottom = 41.0
+tooltip_text = "Change which icons are used for buttons"
+focus_neighbor_left = NodePath("../../../Controls/Scroll/ActionSelections/jump/JumpButton")
+focus_neighbor_bottom = NodePath("../../../../../Corner/Margin/HBox/Confirm")
+selected = 0
+item_count = 4
+popup/item_0/text = "Generic"
+popup/item_0/id = 0
+popup/item_1/text = "Nintendo"
+popup/item_1/id = 1
+popup/item_2/text = "XBox"
+popup/item_2/id = 2
+popup/item_3/text = "Playstation"
+popup/item_3/id = 3
 
-[node name="R2" parent="Margin/Controls/Top/Top/Right" instance=ExtResource("2")]
+[node name="Control" type="Control" parent="Margin/HBox/Settings"]
+custom_minimum_size = Vector2(112, 36)
 layout_mode = 2
-
-[node name="Extra" type="HBoxContainer" parent="Margin/Controls/Top"]
-layout_mode = 2
-
-[node name="MenuButtons" type="VBoxContainer" parent="Margin/Controls/Top/Extra"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Margin/Controls/Top/Extra/MenuButtons"]
-layout_mode = 2
-text = "Select Style"
-
-[node name="OptionButton" type="OptionButton" parent="Margin/Controls/Top/Extra/MenuButtons"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MenuButtons3" type="VBoxContainer" parent="Margin/Controls/Top/Extra"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Margin/Controls/Top/Extra/MenuButtons3"]
-layout_mode = 2
-text = "Movement"
-
-[node name="OptionButton" type="OptionButton" parent="Margin/Controls/Top/Extra/MenuButtons3"]
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="Corner" type="Panel" parent="."]
 custom_minimum_size = Vector2(124, 44)
@@ -204,33 +454,78 @@ size_flags_horizontal = 10
 size_flags_vertical = 10
 theme_override_styles/panel = ExtResource("4")
 
+[node name="Panel" type="Panel" parent="Corner"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 84.0
+offset_bottom = 44.0
+theme_override_styles/panel = ExtResource("9_yltrd")
+
 [node name="Margin" type="MarginContainer" parent="Corner"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 128.0
-offset_bottom = 48.0
+offset_right = 124.0
+offset_bottom = 44.0
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
 
 [node name="HBox" type="HBoxContainer" parent="Corner/Margin"]
 layout_mode = 2
 
-[node name="Reset" type="Button" parent="Corner/Margin/HBox"]
+[node name="Confirm" type="Button" parent="Corner/Margin/HBox"]
+custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 2
+tooltip_text = "Confirm Mapping"
+focus_neighbor_left = NodePath("../../../../Margin/HBox/Controls/Scroll/ActionSelections/jump/JumpButton")
 theme_override_colors/font_color = Color(0.8, 0.168627, 0.168627, 1)
 theme_override_styles/normal = ExtResource("7_nyot8")
-text = "Reset"
+theme_override_styles/pressed = ExtResource("11_8q2eq")
+theme_override_styles/hover = ExtResource("12_ts718")
+theme_override_styles/hover_pressed = ExtResource("11_8q2eq")
+theme_override_styles/focus = ExtResource("13_bv31o")
+icon = ExtResource("10_oju5a")
+icon_alignment = 1
+
+[node name="Reset" type="Button" parent="Corner/Margin/HBox"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+tooltip_text = "Reset Mapping (Keyboard and Controller)"
+theme_override_colors/font_color = Color(0.8, 0.168627, 0.168627, 1)
+theme_override_styles/normal = ExtResource("7_nyot8")
+theme_override_styles/pressed = ExtResource("11_8q2eq")
+theme_override_styles/hover = ExtResource("12_ts718")
+theme_override_styles/hover_pressed = ExtResource("11_8q2eq")
+theme_override_styles/focus = ExtResource("13_bv31o")
+icon = ExtResource("10_srj3u")
+icon_alignment = 1
 
 [node name="Return" type="Button" parent="Corner/Margin/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
+tooltip_text = "Return to Menu"
 theme_override_colors/font_color = Color(0.84313726, 0.68235296, 0.53333336, 1)
 theme_override_styles/normal = ExtResource("7_nyot8")
-text = "Return"
+theme_override_styles/pressed = ExtResource("11_8q2eq")
+theme_override_styles/hover = ExtResource("12_ts718")
+theme_override_styles/hover_pressed = ExtResource("11_8q2eq")
+theme_override_styles/focus = ExtResource("13_bv31o")
+icon = ExtResource("10_g1lek")
+icon_alignment = 1
 
+[node name="RemapManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("10_ripyc")
+
+[connection signal="toggled" from="Margin/HBox/Settings/JumpOnHold/CheckBox" to="." method="on_jump_on_hold_toggled"]
+[connection signal="toggled" from="Margin/HBox/Settings/DisableAnalog/CheckBox" to="." method="on_disable_analog"]
+[connection signal="toggled" from="Margin/HBox/Settings/DisableDPad/CheckBox" to="." method="on_disable_d_pad"]
+[connection signal="item_selected" from="Margin/HBox/Settings/TooltipIconType/OptionButton" to="." method="on_tooltip_icon_type_selected"]
+[connection signal="pressed" from="Corner/Margin/HBox/Confirm" to="." method="on_confirm"]
 [connection signal="pressed" from="Corner/Margin/HBox/Reset" to="." method="on_reset"]
 [connection signal="pressed" from="Corner/Margin/HBox/Return" to="." method="on_return"]
