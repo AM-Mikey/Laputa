@@ -20,7 +20,7 @@ var a_star_grid
 func setup():
 	reward = 5
 	hp = 8
-	speed = Vector2(100, 100)
+	speed = Vector2(60, 60)
 	setup_a_star()
 	change_state("chase")
 #
@@ -36,7 +36,9 @@ func setup_a_star():
 	a_star_grid = AStarGrid2D.new()
 
 	var tile_map = w.current_level.get_node("TileMap")
-	a_star_grid.region = tile_map.get_used_rect()
+	var used_region = Rect2(Vector2i(w.current_level.get_node("LevelLimiter").global_position / 16.0), Vector2i(w.current_level.get_node("LevelLimiter").size / 16.0))
+
+	a_star_grid.region = used_region
 	a_star_grid.cell_size = Vector2(16, 16)
 	a_star_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
 	a_star_grid.offset = Vector2(8, 8)
@@ -44,7 +46,7 @@ func setup_a_star():
 
 	#use this to destinguish which points are solid, based on collision
 	var tiles_with_collision = []
-	var source = tile_map.tile_set.get_source(0)
+	var source = tile_map.get_child(0).tile_set.get_source(0)
 	for column in source.texture_region_size.x:
 		for row in source.texture_region_size.y:
 			if source.get_tile_at_coords(Vector2i(column, row)) != Vector2i(-1, -1):
@@ -55,15 +57,18 @@ func setup_a_star():
 		for cell in tile_map_layer.get_used_cells():
 			var tile = tile_map_layer.get_cell_atlas_coords(cell)
 			if tiles_with_collision.has(tile):
-				#var sprite = Sprite2D.new()
-				#sprite.texture = load("res://assets/Icon/EnemyIcon.png")
-				#sprite.position = (cell * 16) + Vector2i(8,8)
-				#sprite.z_index = 999
-				#w.add_child(sprite)
+
+				var sprite = Sprite2D.new()
+				sprite.texture = load("res://assets/Icon/EnemyIcon.png")
+				sprite.position = (cell * 16) + Vector2i(8,8)
+				sprite.z_index = 999
+				w.add_child(sprite)
+
 				a_star_grid.set_point_solid(cell, true)
 				a_star_grid.update()
 
 func find_path():
+	if !pc: return
 	var self_node_position = Vector2i((global_position + Vector2(-8, -8)).snapped(Vector2(16, 16)) / 16.0)
 	var pc_node_position = Vector2i((pc.global_position + Vector2(-8, -16)).snapped(Vector2(16, 16)) / 16.0) #an extra (0,-8) to get center mass on juniper
 	path = a_star_grid.get_point_path(self_node_position, pc_node_position)
