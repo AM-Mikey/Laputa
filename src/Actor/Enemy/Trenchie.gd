@@ -33,20 +33,11 @@ func _physics_process(_delta):
 	if not is_on_floor():
 		move_dir.y = 0 #don't allow them to jump if they are midair
 
-	velocity = calculate_movevelocity(velocity, move_dir, speed)
+	velocity = calc_velocity(move_dir)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
 	animate()
 
-func calculate_movevelocity(velocity: Vector2, move_dir, speed) -> Vector2:
-	var out: = velocity
-
-	out.x = speed.x * move_dir.x
-	out.y += gravity * get_physics_process_delta_time()
-	if move_dir.y < 0:
-		out.y = speed.y * move_dir.y
-
-	return out
 
 
 func _on_HideDetector_body_entered(body):

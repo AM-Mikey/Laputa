@@ -48,7 +48,7 @@ func find_prop_scenes(path):
 
 ### SIGNALS
 
-func on_tab_changed(tab_name):
+func on_tab_changed(_tab_name):
 	pass
 
 func on_prop_changed(prop_path):

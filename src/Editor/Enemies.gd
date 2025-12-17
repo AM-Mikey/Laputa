@@ -2,7 +2,7 @@ extends MarginContainer
 
 const ENEMY_BUTTON = preload("res://src/Editor/Button/EnemyButton.tscn")
 
-signal enemy_changed(enemy_path)
+signal enemy_changed(enemy_path) #never used
 
 var enemies = {}
 var active_enemy_path
@@ -61,5 +61,5 @@ func unpick_enemy():
 
 ### SINGALS ###
 
-func on_tab_changed(tab_name):
+func on_tab_changed(_tab_name):
 	pass

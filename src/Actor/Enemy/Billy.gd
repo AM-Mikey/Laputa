@@ -67,7 +67,7 @@ func do_walk():
 		change_state("idle")
 		return
 	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
-		velocity = calc_velocity(velocity, move_dir, speed)
+		velocity = calc_velocity(move_dir)
 		set_up_direction(FLOOR_NORMAL)
 		move_and_slide()
 
@@ -106,7 +106,7 @@ func do_aggro():
 		ap.play("Walk")
 
 #	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
-	velocity = calc_velocity(velocity, move_dir, speed)
+	velocity = calc_velocity(move_dir)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
 

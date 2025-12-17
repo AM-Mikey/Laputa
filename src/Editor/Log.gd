@@ -16,6 +16,6 @@ func lprint(message: String):
 	log_message.text = message
 	$VBox.add_child(log_message)
 
-func _process(delta):
+func _process(_delta):
 	if $VBox.get_child_count() > max_message_count:
 		$VBox.get_child(0).queue_free()

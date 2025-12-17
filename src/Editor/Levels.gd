@@ -4,7 +4,7 @@ const JUNIPER = preload("res://src/Player/Juniper.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const LEVEL_BUTTON = preload("res://src/Editor/Button/LevelButton.tscn")
 
-signal level_selected(level_path)
+signal level_selected(level_path) #never used
 
 var levels = {}
 var active_level_path
@@ -144,5 +144,5 @@ func load_level(path):
 
 ### SIGNALS ###
 
-func on_tab_changed(tab_name):
+func on_tab_changed(_tab_name):
 	pass

@@ -5,7 +5,7 @@ const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const INVENTORY = preload("res://src/UI/Inventory/Inventory.tscn")
 const LEVEL_TEXT = preload("res://src/UI/LevelText.tscn")
 
-const PAUSEMENU = preload("res://src/UI/PauseMenu/PauseMenu.tscn")
+const PAUSEMENU = preload("res://src/UI/PauseMenu.tscn")
 #const POPUP = preload("res://src/UI/PopupText.tscn")
 const JUNIPER = preload("res://src/Player/Juniper.tscn")
 const TITLE = preload("res://src/UI/TitleScreen.tscn")

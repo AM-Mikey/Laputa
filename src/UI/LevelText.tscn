@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://3gqty0yt41gb"]
+[gd_scene load_steps=5 format=3 uid="uid://3gqty0yt41gb"]
 
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="1"]
 [ext_resource type="Script" uid="uid://bnm3nr0yvwfl7" path="res://src/UI/LevelText.gd" id="2"]
@@ -19,32 +19,32 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qwep8"]
+_data = {
+&"Fade": SubResource("1")
+}
+
 [node name="LevelText" type="MarginContainer"]
 process_mode = 3
 modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 theme = ExtResource("1")
 script = ExtResource("2")
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="."]
-offset_left = 153.0
-offset_right = 327.0
-offset_bottom = 14.0
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "ERROR: No Level Name Applied"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Fade = SubResource("1")
+libraries = {
+&"": SubResource("AnimationLibrary_qwep8")
+}
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

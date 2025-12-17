@@ -580,7 +580,7 @@ func check_if_offset(animation, conditions, special_transition_conditions, delta
 		sprite.gun_pos_offset = Vector2.ZERO
 		do_animation_sprite_offset(animation, special_transition_conditions, delta)
 
-func do_animation_sprite_offset(animation, special_transition_conditions, delta):
+func do_animation_sprite_offset(animation, special_transition_conditions, _delta):
 	var offsets = {
 		"stand_peak": Vector2(0, 1),
 		"slight_up_slope": Vector2(0, 4),

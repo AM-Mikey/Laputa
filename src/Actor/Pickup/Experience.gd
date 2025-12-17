@@ -23,7 +23,7 @@ func _ready():
 	$StateTimer.start(normal_time)
 	direction = randomize_direction()
 	speed = randomize_speed()
-	velocity = calc_starting_velocity(speed, direction)
+	velocity = calc_starting_velocity(direction)
 	match value:
 		1:
 			if velocity.x < 0: $AnimationPlayer.play("SmallLeft")
@@ -81,7 +81,7 @@ func _physics_process(delta):
 
 
 
-func calc_starting_velocity(speed, dir) -> Vector2:
+func calc_starting_velocity(dir) -> Vector2:
 	var out = velocity
 	out.x = speed.x * dir.x
 	out.y = speed.y * dir.y

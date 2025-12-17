@@ -200,7 +200,6 @@ func ammo_animate(animation, speed: float = -1):
 			ammo_bottom_animator.play("ResetInfinite")
 
 func update_hp(hp, max_hp):
-	var pc = world.get_node("Juniper")
 	hp_progress.value = hp
 	display_hp_number(hp, max_hp)
 	hp_progress.max_value = max_hp
@@ -271,7 +270,7 @@ func update_xp(xp, max_xp, level, max_level, do_xp_flash = false):
 		xp_max.visible = false
 
 
-func update_ammo(have, maximum): #TODO: do we use this?
+func update_ammo(_have, _maximum): #TODO: do we use this?
 	pass
 		#ao.ammo = have
 		#ao.max_ammo = maximum
@@ -323,5 +322,4 @@ func setup_lost_bars(hp, xp): #needs to be done so that update can tell that it'
 ### SIGNALS ###
 
 func _resolution_scale_changed(resolution_scale):
-	size = get_tree().get_root().size / resolution_scale
-	position = Vector2(0, 0)
+	set_deferred("size", get_tree().get_root().size / resolution_scale)

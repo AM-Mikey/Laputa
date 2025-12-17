@@ -1,6 +1,6 @@
 extends Control
 
-signal terrain_toggled(toggled)
+#signal terrain_toggled(toggled) #unused
 signal tile_transform_updated(tile_rotation_degrees, tile_scale_vector)
 
 var icon = "res://assets/Icon/TileSetIcon.png"
@@ -113,7 +113,7 @@ func set_cursor():
 
 ### SIGNALS ###
 
-func on_tab_changed(tab_name):
+func on_tab_changed(_tab_name):
 	pass
 
 func _on_MultiErase_toggled(button_pressed):

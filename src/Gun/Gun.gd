@@ -36,7 +36,7 @@ var max_level: int = 1
 @onready var cd = pc.get_node("GunManager/CooldownTimer")
 
 
-func fire(type):
+func fire(_type):
 	if cd.time_left == 0:
 		if max_ammo == 0 or ammo != 0:
 			if max_ammo != 0:

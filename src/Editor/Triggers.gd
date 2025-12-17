@@ -57,5 +57,5 @@ func on_trigger_changed(trigger_path):
 			b.activate()
 	emit_signal("trigger_changed", trigger_path)
 
-func on_tab_changed(tab_name):
+func on_tab_changed(_tab_name):
 	pass

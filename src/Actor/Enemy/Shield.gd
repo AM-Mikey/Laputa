@@ -38,7 +38,7 @@ func do_walk():
 	if velocity.x == 0.0:
 		move_dir *= Vector2(-1,0)
 
-	velocity = calc_velocity(velocity, move_dir, speed)
+	velocity = calc_velocity(move_dir)
 	move_and_slide()
 
 

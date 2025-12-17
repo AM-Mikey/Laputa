@@ -28,7 +28,7 @@ func _on_physics_process(_delta):
 	if not is_on_floor():
 		move_dir.y = 0 #don't allow them to jump if they are midair
 
-	velocity = calc_velocity(velocity, move_dir, speed)
+	velocity = calc_velocity(move_dir)
 	move_and_slide()
 	animate()
 

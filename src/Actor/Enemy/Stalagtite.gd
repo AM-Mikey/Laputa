@@ -51,7 +51,7 @@ func _on_physics_process(_delta):
 	if state == "stake":
 		velocity = Vector2.ZERO
 	else:
-		velocity = calc_velocity(velocity, move_dir, speed)
+		velocity = calc_velocity(move_dir)
 	velocity.y = min(velocity.y, ternminal_drop_velocity)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
@@ -127,12 +127,10 @@ func do_run():
 		Vector2.LEFT:
 			$Sprite2D.flip_h = false
 			if ($WallLeft.is_colliding()):
-				print("hitleft")
 				move_dir = Vector2.RIGHT
 		Vector2.RIGHT:
 			$Sprite2D.flip_h = true
 			if ($WallRight.is_colliding()):
-				print("hitright")
 				move_dir = Vector2.LEFT
 
 

@@ -21,9 +21,9 @@ func _on_timer_timeout():
 		w.front.add_child(bubble)
 
 
-func _on_area_entered(area: Area2D):
+func _on_area_entered(_area: Area2D):
 	fully_submerged = true
 
 
-func _on_area_exited(area: Area2D):
+func _on_area_exited(_area: Area2D):
 	fully_submerged = false

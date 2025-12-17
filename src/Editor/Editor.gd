@@ -488,7 +488,7 @@ func paste_tiles_from_buffer(pos):
 	for layer in tile_map_copy_buffer:
 		var tile_map_layer_current: TileMapLayer = tile_map.get_child(layer)
 		for cell in tile_map_copy_buffer[layer]:
-			var old_tm_pos = cell[0]
+			#var old_tm_pos = cell[0]
 			var new_tm_pos = cell[0] + pos
 			var ts_pos = cell[1]
 			#tile_map.set_cell(layer, old_tm_pos, -1, ts_pos) #erase old
@@ -582,7 +582,7 @@ func redo():
 
 
 
-func set_cell(cell: Vector2, tile: int, layer): #set one cell, one layer, one tile ##ONLY VIA UNDO/REDO
+func set_cell(_cell: Vector2, _tile: int, _layer): #set one cell, one layer, one tile ##ONLY VIA UNDO/REDO
 	pass
 	#if tile == -2: #null
 		#return
@@ -731,7 +731,7 @@ func preview_move_tile_set_selection(start_pos, end_pos): #used for tile map sel
 
 	for layer in selected_cells:
 		for cell in selected_cells[layer]:
-			var old_cell_pos = cell[0]
+			#var old_cell_pos = cell[0]
 			var new_cell_pos = cell[0] + change
 			var tile_pos = cell[1]
 			#preview_tile_map.set_cell(layer, old_cell_pos, -1, tile_pos) #erase old
@@ -812,7 +812,7 @@ func get_cells_box(start_pos, end_pos) -> Rect2i:
 func get_cells_line_origins(start_pos, end_pos) -> Array:
 	var origins = []
 	var start = get_cell(start_pos)
-	var end = get_cell(end_pos)
+	#var end = get_cell(end_pos)
 	var cb = get_cells_box(start_pos, end_pos)
 	var sign = Vector2i(sign(end_pos.x - start_pos.x), sign(end_pos.y - start_pos.y))
 	var min = cb.position
@@ -918,7 +918,7 @@ func set_menu_alpha():
 #func on_terrain_toggled(toggle): #DEBUG
 #	create_tile_set_from_texture(load("res://assets/Tile/VillageTerrain.png"))
 
-func _on_Tiles_tile_transform_updated(tile_rotation_degrees, tile_scale_vector):
+func _on_Tiles_tile_transform_updated(_tile_rotation_degrees, _tile_scale_vector):
 	pass # Replace with function body. #TODO move to tiles code
 
 func on_layer_changed(layer_id): #from inspector
@@ -967,6 +967,6 @@ func on_tab_changed(tab):
 			print("WARNING: could not find tab with name: " + $Main/Win/Tab.get_child(tab).name)
 
 func _resolution_scale_changed(_resolution_scale):
-	await get_tree().process_frame
+	await get_tree().process_frame #idk why
 	$Margin.size = Vector2(get_tree().get_root().size) / Vector2(w.el.scale)
 	setup_windows()

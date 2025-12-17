@@ -98,7 +98,7 @@ func do_chase(): #goes to point 1 first btw
 			return
 	else:
 		move_dir = (path[current_point] - global_position).normalized()
-		velocity = calc_velocity(velocity, move_dir, speed, false)
+		velocity = calc_velocity(move_dir, false)
 		move_and_slide()
 
 ### SIGNALS ###

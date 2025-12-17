@@ -44,4 +44,4 @@ func _on_Quit_pressed():
 	w.get_node("UILayer").add_child(TITLESCREEN.instantiate())
 
 func _resolution_scale_changed(resolution_scale):
-	size = get_tree().get_root().size / resolution_scale
+	set_deferred("size", get_tree().get_root().size / resolution_scale)

@@ -33,9 +33,9 @@ func setup():
 	find_waypoints()
 
 func find_waypoints():
-	for w in get_tree().get_nodes_in_group("Waypoints"):
-		if w.owner_id == id and w.index != -1: #dont include the aggro waypoint
-			waypoints[w.index] = w
+	for wp in get_tree().get_nodes_in_group("Waypoints"):
+		if wp.owner_id == id and wp.index != -1: #dont include the aggro waypoint
+			waypoints[wp.index] = wp
 	if not waypoints.is_empty():
 		set_target(start_waypoint)
 
@@ -54,7 +54,7 @@ func set_target(index: int):
 
 func _on_physics_process(_delta):
 	if disabled or dead: return
-	velocity = calc_velocity(velocity, move_dir, speed)
+	velocity = calc_velocity(move_dir)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
 
@@ -146,7 +146,7 @@ func _on_PlayerDetector_body_entered(_body):
 	aggro = true
 	$RayCast2D.enabled = true
 
-func _on_PlayerDetector_body_exited(body):
+func _on_PlayerDetector_body_exited(_body):
 	aggro = false
 	$RayCast2D.enabled = false
 

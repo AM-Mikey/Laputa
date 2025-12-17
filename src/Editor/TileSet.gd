@@ -48,7 +48,7 @@ var brush_one_way = false
 ### SETUP
 
 func setup_tile_set():
-	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
+	#editor.connect("tab_changed", Callable(self, "on_tab_changed")) already connected
 	tile_master.setup_tile_buttons(self, normal_buttons)
 	tile_master.setup_tile_buttons(self, collision_buttons)
 
@@ -182,7 +182,7 @@ func swap_tiles(first_pos, second_pos): #warning, this is sensative to tile_set 
 #4 save level
 			var packed_scene = PackedScene.new()
 			packed_scene.pack(loaded_level)
-			var err = ResourceSaver.save(packed_scene, "res://src/Level/" + l)
+			var _err = ResourceSaver.save(packed_scene, "res://src/Level/" + l)
 
 
 func swap_tileset_coordinates(first_pos, second_pos):
@@ -190,21 +190,21 @@ func swap_tileset_coordinates(first_pos, second_pos):
 	var animation_frames = main_tile_set.get_source_count()
 	for f in animation_frames:
 		var atlas_source = main_tile_set.get_source(f)
-		if main_tile_set.get_source(f).has_tile(first_pos):
-			if main_tile_set.get_source(f).has_room_for_tile(second_pos, Vector2i.ONE, 0, Vector2i.ZERO, 1): #swap first with blank tile
-				main_tile_set.get_source(f).move_tile_in_atlas(first_pos, second_pos)
+		if atlas_source.has_tile(first_pos):
+			if atlas_source.has_room_for_tile(second_pos, Vector2i.ONE, 0, Vector2i.ZERO, 1): #swap first with blank tile
+				atlas_source.move_tile_in_atlas(first_pos, second_pos)
 			else: #swap first with filled tile
 				var buffer_pos: Vector2i #first empty tile
-				var source_size = main_tile_set.get_source(f).texture_region_size / 16.0
+				var source_size = atlas_source.texture_region_size / 16.0
 				for column in source_size.x:
 					for row in column:
-						if main_tile_set.get_source(f).get_tile_at_coords(Vector2i(column, row)) == -1:
+						if atlas_source.get_tile_at_coords(Vector2i(column, row)) == -1:
 							buffer_pos = Vector2i(column, row)
 							break
-				main_tile_set.get_source(f).move_tile_in_atlas(first_pos, buffer_pos)
-				main_tile_set.get_source(f).move_tile_in_atlas(second_pos, first_pos)
-				main_tile_set.get_source(f).move_tile_in_atlas(buffer_pos, second_pos)
-	var err = ResourceSaver.save(main_tile_set, main_tile_set.resource_path)
+				atlas_source.move_tile_in_atlas(first_pos, buffer_pos)
+				atlas_source.move_tile_in_atlas(second_pos, first_pos)
+				atlas_source.move_tile_in_atlas(buffer_pos, second_pos)
+	var _err = ResourceSaver.save(main_tile_set, main_tile_set.resource_path)
 
 
 func swap_tileset_pixels(first_pos, second_pos):
@@ -215,16 +215,16 @@ func swap_tileset_pixels(first_pos, second_pos):
 		var second_pixels = get_tile_as_pixels(second_pos, f)
 		set_pixels(first_pos, second_pixels, f)
 		set_pixels(second_pos, first_pixels, f)
-		var texture = main_tile_set.get_source(f).texture
-		var path = texture.get_path()
-		var image = texture.get_image()
+		var new_texture = main_tile_set.get_source(f).texture
+		var path = new_texture.get_path()
+		var image = new_texture.get_image()
 		image.save_png(path)
 		w.current_level.get_node("TileMap").get_node("Front").tile_set.get_source(f).set_texture(load(path))
 
 
 func get_tile_as_pixels(tile_pos: Vector2i, source: int) -> Array: #2d
-	var texture = w.current_level.get_node("TileMap").get_node("Front").tile_set.get_source(source).texture
-	var image = texture.get_image()
+	var new_texture = w.current_level.get_node("TileMap").get_node("Front").tile_set.get_source(source).texture
+	var image = new_texture.get_image()
 	var tile = []
 	var r_id = tile_pos.y * 16
 	for r in 16:
@@ -240,8 +240,8 @@ func get_tile_as_pixels(tile_pos: Vector2i, source: int) -> Array: #2d
 
 
 func set_pixels(tile_pos: Vector2i, pixels: Array, source: int):
-	var texture = w.current_level.get_node("TileMap").get_node("Front").tile_set.get_source(source).texture
-	var image = texture.get_image()
+	var new_texture = w.current_level.get_node("TileMap").get_node("Front").tile_set.get_source(source).texture
+	var image = new_texture.get_image()
 	var r_id = tile_pos.y * 16
 	for r in pixels:
 		var p_id = tile_pos.x * 16
@@ -249,7 +249,7 @@ func set_pixels(tile_pos: Vector2i, pixels: Array, source: int):
 			image.set_pixel(p_id, r_id, p)
 			p_id += 1
 		r_id += 1
-	RenderingServer.texture_2d_update(texture.get_rid(), image, 0)
+	RenderingServer.texture_2d_update(new_texture.get_rid(), image, 0)
 
 
 
@@ -427,7 +427,7 @@ func _on_New_file_selected(path):
 	var tile_set = TileSet.new()
 	texture = load(path)
 	rows = int(texture.get_size().y/16)
-	var columns = int(texture.get_size().x/16)
+	var columns = int(texture.get_size().x / 16.0)
 
 	var id = 0
 	while id < rows * columns:
@@ -443,7 +443,7 @@ func _on_New_file_selected(path):
 
 
 
-func on_tab_changed(tab_name):
+func on_tab_changed(_tab_name):
 	pass
 
 func _on_subtab_changed(tab):
@@ -463,14 +463,14 @@ func _on_FlipH_toggled(button_pressed):
 	brush_flip_h = button_pressed
 	setup_brushes()
 
-func _on_RotateC_toggled(button_pressed):
+func _on_RotateC_toggled(_button_pressed):
 	if brush_rotation_degrees == 270:
 		brush_rotation_degrees = 0
 	else:
 		brush_rotation_degrees += 90
 	setup_brushes()
 
-func _on_RotateCC_toggled(button_pressed):
+func _on_RotateCC_toggled(_button_pressed):
 	if brush_rotation_degrees == 0:
 		brush_rotation_degrees = 270
 	else:
@@ -484,7 +484,7 @@ func _on_Remap_pressed():
 	remap_button.icon = tile_set_remap_true
 	swap_button.icon = tile_set_swap_false
 
-func _on_Swap_toggled(toggled_on):
+func _on_Swap_toggled(_toggled_on):
 	$VBox/Margin/Tab/Normal/HBox/Remap.button_pressed = false
 	active_normal_mode = "swap"
 	remap_button.icon = tile_set_remap_false

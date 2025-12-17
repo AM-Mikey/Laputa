@@ -47,7 +47,7 @@ func do_walk():
 		change_state("idle")
 		return
 	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
-		velocity = calc_velocity(velocity, move_dir, speed)
+		velocity = calc_velocity(move_dir)
 		set_up_direction(FLOOR_NORMAL)
 		move_and_slide()
 
@@ -98,7 +98,7 @@ func _on_PlayerDetector_body_entered(body):
 		change_state("aim")
 
 
-func _on_PlayerDetector_body_exited(body):
+func _on_PlayerDetector_body_exited(_body):
 	target = null
 
 

@@ -67,11 +67,11 @@ func do_chase():
 	if not pc:
 		return
 	var player_vector = (pc.global_position - global_position).normalized()
-	velocity = calc_velocity(velocity, player_vector, speed)
+	velocity = calc_velocity(player_vector)
 	move_and_slide()
 
 func do_fall():
-	velocity = calc_velocity(velocity, Vector2(0,0), speed, true)
+	velocity = calc_velocity(Vector2(0,0), true)
 	move_and_slide()
 
 func exit_fall(_next_state):

@@ -217,17 +217,17 @@ func _on_IframeTimer_timeout() -> void:
 		hit_again()
 
 
-func _on_SSPDetector_body_entered(body):
+func _on_SSPDetector_body_entered(_body):
 	if not deny_ssp:
 		is_on_ssp = true
 
-func _on_SSPDetector_body_exited(body):
+func _on_SSPDetector_body_exited(_body):
 	is_on_ssp = false
 
-func _on_SSPWorldDetector_body_entered(body: Node2D):
+func _on_SSPWorldDetector_body_entered(_body):
 	deny_ssp = true
 
-func _on_SSPWorldDetector_body_exited(body: Node2D):
+func _on_SSPWorldDetector_body_exited(_body):
 	deny_ssp = false
 	if $SSPDetector.has_overlapping_bodies():
 		is_on_ssp = true
@@ -308,10 +308,10 @@ func _on_ItemDetector_area_entered(area):
 		ammo_pickup.queue_free()
 
 
-func _on_Ear_area_entered(area):
+func _on_Ear_area_entered(_area):
 	sound_profile = SoundProfile.UNDERWATER
 
-func _on_Ear_area_exited(area):
+func _on_Ear_area_exited(_area):
 	sound_profile = SoundProfile.NORMAL
 
 
