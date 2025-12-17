@@ -209,9 +209,10 @@ func do_death_drop():
 
 	#ammo chance
 	var player_needs_ammo = false
-	for w in pc.get_node("GunManager/Guns").get_children():
-		if w.ammo < w.max_ammo:
-			player_needs_ammo = true
+	if (f.pc()):
+		for w in f.pc().get_node("GunManager/Guns").get_children():
+			if w.ammo < w.max_ammo:
+				player_needs_ammo = true
 	if not player_needs_ammo:
 		ammo_chance = 0
 
