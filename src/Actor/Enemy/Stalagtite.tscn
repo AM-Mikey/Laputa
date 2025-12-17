@@ -200,18 +200,21 @@ collide_with_areas = true
 [node name="WallRight" type="RayCast2D" parent="."]
 position = Vector2(0, -8)
 enabled = false
-target_position = Vector2(8, 0)
+target_position = Vector2(9, 0)
 collision_mask = 520
 
 [node name="WallLeft" type="RayCast2D" parent="."]
 position = Vector2(0, -8)
 enabled = false
-target_position = Vector2(-8, 0)
+target_position = Vector2(-9, 0)
 collision_mask = 520
 
 [node name="StateTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="WallReflectGraceTimer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="timeout" from="StateTimer" to="." method="_on_state_timer_timeout"]
+[connection signal="timeout" from="WallReflectGraceTimer" to="." method="_on_wall_reflect_grace_timer_timeout"]
