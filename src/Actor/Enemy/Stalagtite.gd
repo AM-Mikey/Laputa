@@ -7,7 +7,7 @@ const TX_2 = preload("res://assets/Actor/Enemy/Stalagtite2.png")
 var target: Node
 
 var move_dir = Vector2.ZERO
-@export var difficulty:= 1
+@export var difficulty := 1
 
 var base_damage = 2
 var drop_damage: int
@@ -127,11 +127,14 @@ func do_run():
 		Vector2.LEFT:
 			$Sprite2D.flip_h = false
 			if ($WallLeft.is_colliding()):
+				print("hitleft")
 				move_dir = Vector2.RIGHT
 		Vector2.RIGHT:
-			if ($WallRight.is_colliding()):
-				move_dir = Vector2.LEFT
 			$Sprite2D.flip_h = true
+			if ($WallRight.is_colliding()):
+				print("hitright")
+				move_dir = Vector2.LEFT
+
 
 func exit_run(_next_state):
 	$WallRight.enabled = false
@@ -150,3 +153,7 @@ func enter_stake(_last_state):
 func _on_state_timer_timeout():
 	if state == "hangactive":
 		change_state("drop")
+
+
+func _on_wall_reflect_grace_timer_timeout() -> void:
+	can_reflect = true
