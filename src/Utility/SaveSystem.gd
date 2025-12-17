@@ -87,7 +87,7 @@ func read_player_data_from_save():
 	pc.update_inventory()
 	print("player data loaded")
 
-	await (get_tree().process_frame)
+	await get_tree().process_frame
 	pc.get_node("PlayerCamera").position_smoothing_enabled = true
 
 

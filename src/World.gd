@@ -182,7 +182,7 @@ func change_level_via_code(level_path):
 	display_level_text(current_level)
 	SaveSystem.read_level_data_from_temp(current_level)
 
-	await(get_tree().process_frame)
+	await get_tree().process_frame
 	$Juniper/PlayerCamera.position_smoothing_enabled = true
 
 
@@ -199,9 +199,7 @@ func change_level_via_trigger(level_path, door_index):
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
 
-	if current_level.level_type == current_level.LevelType.NORMAL:
-		$Juniper/PlayerCamera.position_smoothing_enabled = false
-		$Juniper/PlayerCamera.enabled = not current_level.has_node("LevelCamera") #turn off camera if level has one already
+	$Juniper/PlayerCamera.position_smoothing_enabled = false
 
 	#### get the door with the right index
 	var doors_found = 0

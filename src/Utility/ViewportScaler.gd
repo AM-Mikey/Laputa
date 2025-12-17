@@ -11,6 +11,10 @@ func _ready():
 	_viewport_size_changed()
 
 func _viewport_size_changed():
+	var camera = get_viewport().get_camera_2d()
+	if camera:
+		camera.position_smoothing_enabled = false
+
 	var viewport_size = get_tree().get_root().size
 	var tiles_visible_y = 15.0
 	var urs = viewport_size.y / (16.0 * tiles_visible_y)
@@ -30,3 +34,6 @@ func _viewport_size_changed():
 	menu_resolution_scale = max(menu_resolution_scale, 1)
 
 	emit_signal("scale_changed", resolution_scale)
+	await get_tree().process_frame
+	if camera:
+		camera.position_smoothing_enabled = true
