@@ -194,8 +194,8 @@ func enter_talk(_last_state):
 ### MISC
 
 func _input(event):
-	if event.is_action_pressed("inspect") and active_pc \
-	and dialog_json != "" and conversation != "" and state != "talk" and active_pc.mm.current_state == active_pc.mm.states["run"]:
+	if event.is_action_pressed("inspect") && active_pc \
+	&& dialog_json != "" && conversation != "" && state != "talk" && active_pc.mm.current_state == active_pc.mm.states["run"]:
 		if active_pc.can_input:
 			predialog_state = state
 			change_state("talk")
