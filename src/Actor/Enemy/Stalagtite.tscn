@@ -139,13 +139,8 @@ _data = {
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("3")
-difficulty = null
 debug = true
-id = null
 editor_hidden = false
-speed = null
-base_gravity = null
-water_gravity = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)

@@ -68,7 +68,7 @@ func prepare_bullet():
 	bullet.position = Vector2($CollisionShape2D.global_position.x, $CollisionShape2D.global_position.y - height_tolerance)
 	bullet.direction = Vector2(look_dir.x / 2.0, -1) #Adjust this for angle
 
-	call_deferred(w.middle.add_child(bullet))
+	w.middle.add_child(bullet)
 
 
 
