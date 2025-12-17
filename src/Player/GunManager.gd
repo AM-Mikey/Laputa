@@ -60,8 +60,6 @@ func shift_gun(direction):
 
 	set_guns_visible()
 
-
-	pc.emit_signal("guns_updated", $Guns.get_children())
 	#pc.emit_signal("xp_updated", $Guns.get_child(0).xp, $Guns.get_child(0).max_xp, $Guns.get_child(0).level, $Guns.get_child(0).max_level)
 	am.play("gun_shift")
 

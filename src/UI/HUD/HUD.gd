@@ -71,6 +71,7 @@ func _ready():
 func _process(_delta):
 	set_cap_pos(hp_lost, 38, hp_lost_cap)
 	set_cap_pos(xp_lost, 38, xp_lost_cap)
+	set_cap_pos(xp_progress, 38, xp_progress_cap)
 
 	if world.has_node("Juniper"):
 		var pc = world.get_node("Juniper")
@@ -81,7 +82,7 @@ func _process(_delta):
 		else: cd_progress.visible = false
 
 func update_guns(guns, cause = "default", do_xp_flash = false):
-	var main_icon = gun.get_node("GunIcon")
+	#var main_icon = gun.get_node("GunIcon")
 
 	if cause == "shiftleft":
 		display_weapon_wheel(guns, "CCW")
@@ -92,13 +93,14 @@ func update_guns(guns, cause = "default", do_xp_flash = false):
 
 	for g in guns:
 		if guns.find(g) == 0: #main gun
-			main_icon.texture = g["icon_texture"]
-			update_xp(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash)
-			#update_ammo(g.ammo, g.max_ammo)
+			#main_icon.texture = g["icon_texture"]s
+			update_xp(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash, cause in ["shiftleft", "shiftright"])
+			#update_ammo(g.ammo, g.max_ammo)a
 		#else:
 			#var gun_icon = GUNICON.instantiate() #all other
 			#gun_icon.texture = g["texture"]
 			#hbox.add_child(gun_icon)
+
 	if cause == "fire":
 		var pc = world.get_node("Juniper")
 		var speed: float = 0.8 / pc.guns.get_child(0).cooldown_time
@@ -246,28 +248,43 @@ func display_hp_number(hp, max_hp):
 		hp_1.frame_coords.y = 5
 		hp_2.frame_coords.y = 5
 
-func update_xp(xp, max_xp, level, max_level, do_xp_flash = false):
+
+var xp_progress_tween: Tween
+var xp_lost_tween: Tween
+func update_xp(xp, max_xp, level, max_level, do_xp_flash = false, switch_gun = false):
 	modulate = Color(1, 1, 1) #to prevent flash animation from stopping on a transparent frame
 	xp_num.frame_coords.x = level
 	if do_xp_flash:
 		animation_player.play("XpFlash")
-	xp_progress.value = xp
+	if (!switch_gun):
+		xp_progress.value = xp
+	else:
+		xp_progress.value = xp_progress.value / xp_progress.max_value * max_xp
 	xp_progress.max_value = max_xp
 	xp_lost.max_value = max_xp
-	set_cap_pos(xp_progress, 38, xp_progress_cap)
 
-	if xp < xp_lost.value:
-		var tween = get_tree().create_tween()
-		tween.tween_property(xp_lost, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
-	else: #increasing, just set it
-		xp_lost.value = xp
-
-	if xp == max_xp and level == max_level:
-		xp_progress.visible = false
-		xp_max.visible = true
+	if (!switch_gun):
+		if xp < xp_lost.value:
+			if (xp_lost_tween):
+				xp_lost_tween.kill()
+			xp_lost_tween = get_tree().create_tween()
+			xp_lost_tween.tween_property(xp_lost, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
+		else: #increasing, just set it
+			xp_lost.value = xp
 	else:
-		xp_progress.visible = true
-		xp_max.visible = false
+		if (xp_max.visible):
+			xp_progress.value = xp_progress.max_value
+		if (xp < xp_lost.value):
+			xp_lost.value = xp
+		if (xp_progress_tween):
+			xp_progress_tween.kill()
+		xp_progress_tween = get_tree().create_tween()
+		xp_progress_tween.set_parallel()
+		xp_progress_tween.tween_property(xp_progress, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	xp_progress.visible = !(xp == max_xp and level == max_level)
+	xp_max.visible = (xp == max_xp and level == max_level)
+
 
 
 func update_ammo(_have, _maximum): #TODO: do we use this?

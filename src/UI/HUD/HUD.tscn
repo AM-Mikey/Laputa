@@ -1142,6 +1142,7 @@ offset_top = 11.0
 offset_right = 66.0
 offset_bottom = 15.0
 mouse_filter = 2
+step = 0.1
 value = 50.0
 texture_progress = ExtResource("7")
 
@@ -1156,6 +1157,7 @@ offset_top = 11.0
 offset_right = 66.0
 offset_bottom = 15.0
 mouse_filter = 2
+step = 0.1
 value = 50.0
 texture_progress = ExtResource("5")
 
