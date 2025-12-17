@@ -3,7 +3,7 @@ extends Control
 const GUNICON = preload("res://src/UI/HUD/GunIcon.tscn")
 const UI_BULLET_FLY = preload("res://src/UI/HUD/UIBulletFly.tscn")
 
-#onready var pc = get_tree().get_root().get_node("World/Juniper")
+#onready var pc = f.pc()
 @onready var world = get_tree().get_root().get_node("World")
 
 @export var gun: Node

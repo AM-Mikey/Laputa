@@ -35,7 +35,7 @@ var bail_time = 6.0
 
 var camera_forgiveness = 16
 
-#@onready var pc = get_tree().get_root().get_node_or_null("World/Juniper")
+#@onready var pc = f.pc()
 
 func _ready():
 	home = global_position
