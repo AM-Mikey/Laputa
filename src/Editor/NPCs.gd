@@ -2,7 +2,7 @@ extends MarginContainer
 
 const NPC_BUTTON = preload("res://src/Editor/Button/NPCButton.tscn")
 
-signal npc_changed(npc_path)
+signal npc_changed(npc_path) #never used
 
 var npcs = {}
 var active_npc_path
@@ -64,5 +64,5 @@ func unpick_npc():
 
 ### SINGALS ###
 
-func on_tab_changed(tab_name):
+func on_tab_changed(_tab_name):
 	pass

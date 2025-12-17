@@ -7,11 +7,12 @@ const TX_2 = preload("res://assets/Actor/Enemy/Stalagtite2.png")
 var target: Node
 
 var move_dir = Vector2.ZERO
-@export var difficulty:= 1
+@export var difficulty := 1
 
 var base_damage = 2
 var drop_damage: int
 var wait_time: float
+var ternminal_drop_velocity: float = 320.0
 
 func set_is_in_water(val):
 	if (state not in ["hang", "hangactive"]):
@@ -50,7 +51,8 @@ func _on_physics_process(_delta):
 	if state == "stake":
 		velocity = Vector2.ZERO
 	else:
-		velocity = calc_velocity(velocity, move_dir, speed)
+		velocity = calc_velocity(move_dir)
+	velocity.y = min(velocity.y, ternminal_drop_velocity)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
 
@@ -127,9 +129,10 @@ func do_run():
 			if ($WallLeft.is_colliding()):
 				move_dir = Vector2.RIGHT
 		Vector2.RIGHT:
+			$Sprite2D.flip_h = true
 			if ($WallRight.is_colliding()):
 				move_dir = Vector2.LEFT
-			$Sprite2D.flip_h = true
+
 
 func exit_run(_next_state):
 	$WallRight.enabled = false

@@ -19,19 +19,19 @@ func _ready():
 
 	$Timer.wait_time = active_time
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if disabled or dead:
 		return
-	velocity = calc_velocity(velocity, move_dir, speed)
+	velocity = calc_velocity(move_dir)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
-	animate(move_dir)
+	animate()
 
 	if is_on_wall():
 		if idle == false:
 			move_dir *= -1
 
-func wait(move_dir):
+func wait():
 	idle = true
 	var old_speed = speed
 	speed = Vector2.ZERO
@@ -52,7 +52,7 @@ func wait(move_dir):
 	$Timer.start(active_time)
 
 
-func animate(move_dir):
+func animate():
 	if speed != Vector2.ZERO:
 		if move_dir == Vector2.LEFT:
 			$AnimationPlayer.play("WalkLeft")
@@ -62,4 +62,4 @@ func animate(move_dir):
 
 func _on_Timer_timeout():
 	if idle != true:
-		wait(move_dir)
+		wait()

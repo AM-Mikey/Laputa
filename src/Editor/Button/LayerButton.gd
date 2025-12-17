@@ -24,7 +24,7 @@ func _on_VisButton_toggled(button_pressed):
 	else:
 		tile_map.get_child(layer_id).self_modulate = Color.WHITE
 
-func _on_EditButton_toggled(button_pressed):
+func _on_EditButton_toggled(_button_pressed):
 	pass
 
 

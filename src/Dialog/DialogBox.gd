@@ -51,8 +51,10 @@ func start_printing(dialog_json, conversation: String):
 	var dialog = load_dialog_json(dialog_json)
 	conversation = conversation.to_lower()
 
-	if not dialog.has(conversation): #null convo
-		printerr("No conversation with the name: ", conversation)
+	if !dialog.has(conversation): #null convo
+		printerr("ERROR: No conversation in file: ", dialog_json, " with name: ", conversation)
+		exit()
+		return
 	else:
 		current_text_array = split_text(dialog[conversation]) #contains array of: command, newline as blank string, text string
 	align_box()

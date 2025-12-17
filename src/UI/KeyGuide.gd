@@ -21,4 +21,4 @@ func _on_return():
 	queue_free()
 
 func _resolution_scale_changed(resolution_scale):
-	size = get_tree().get_root().size / resolution_scale
+	set_deferred("size", get_tree().get_root().size / resolution_scale)

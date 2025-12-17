@@ -77,7 +77,7 @@ func _physics_process(delta):
 		get_node("StateLabel").text = state
 	_on_physics_process(delta)
 
-func _on_physics_process(delta): #for child
+func _on_physics_process(_delta): #for child
 	pass
 
 #func exit():	#OBSOLETE
@@ -86,7 +86,7 @@ func _on_physics_process(delta): #for child
 	#else:
 		#queue_free()
 
-func calc_velocity(velocity: Vector2, move_dir, speed, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
+func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
 	var out: = velocity
 	var fractional_speed = speed
 	if is_in_water:
@@ -156,7 +156,7 @@ func hit(damage, blood_direction):
 	else:
 		am.play(hurt_sound, self)
 
-func _on_hit(damage, blood_direction): #inhereted for enemies to do something on hit
+func _on_hit(_damage, _blood_direction): #inhereted for enemies to do something on hit
 	pass
 
 

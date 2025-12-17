@@ -106,4 +106,4 @@ func _clear_array(array):
 ### SIGNALS ###
 
 func _resolution_scale_changed(_resolution_scale):
-	size = get_tree().get_root().size / Vector2i(world.dl.scale)
+	set_deferred("size", get_tree().get_root().size / Vector2i(world.dl.scale))

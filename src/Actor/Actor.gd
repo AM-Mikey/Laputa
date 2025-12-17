@@ -8,7 +8,7 @@ const FLOOR_NORMAL: = Vector2.UP
 @export var editor_hidden = true
 
 @export var speed: = Vector2(150, 350)
-var gravity: = 300
+var gravity := 300.0
 @export var base_gravity: float = 300.0
 @export var water_gravity: float = 150.0
 var acceleration = 50

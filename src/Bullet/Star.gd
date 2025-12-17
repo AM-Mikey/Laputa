@@ -72,7 +72,7 @@ func _on_CollisionDetector_body_entered(body): #shadows
 			if not touched_floor:
 				body.hit(damage, get_blood_dir(body))
 			else:
-				body.hit(int(damage/2), get_blood_dir(body))
+				body.hit(int(damage / 2.0), get_blood_dir(body))
 			queue_free()
 
 func _on_CollisionDetector_area_entered(area): #shadows

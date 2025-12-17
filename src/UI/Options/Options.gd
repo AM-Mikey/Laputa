@@ -138,4 +138,4 @@ func _on_TabContainer_tab_changed(tab):
 		2: %ControllerConfig.do_focus()
 
 func _resolution_scale_changed(_resolution_scale):
-	size = get_tree().get_root().size / vs.menu_resolution_scale
+	set_deferred("size", get_tree().get_root().size / vs.menu_resolution_scale)

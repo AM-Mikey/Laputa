@@ -10,7 +10,7 @@ func _ready():
 	ap.play("Rotate")
 	gravity *= .5
 
-	velocity = calc_velocity(speed, direction)
+	velocity = calc_velocity(speed)
 	start_velocity = abs(velocity.x) + abs(velocity.y) / 2.0 #used to calculate animation slowdown
 	setup_vis_notifier()
 
@@ -26,7 +26,7 @@ func _physics_process(delta):
 		ap.stop()
 
 
-func calc_velocity(projectile_speed, direction) -> Vector2:
+func calc_velocity(projectile_speed) -> Vector2:
 	var out = velocity
 	out.x = projectile_speed * direction.x
 	out.y += gravity * get_physics_process_delta_time()

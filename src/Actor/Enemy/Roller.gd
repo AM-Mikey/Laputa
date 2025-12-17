@@ -19,7 +19,7 @@ func setup():
 
 func _on_physics_process(_delta):
 	if disabled or dead: return
-	velocity = calc_velocity(velocity, move_dir, speed)
+	velocity = calc_velocity(move_dir)
 	move_and_slide()
 
 	if is_on_wall():

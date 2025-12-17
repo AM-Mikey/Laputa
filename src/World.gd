@@ -5,7 +5,7 @@ const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const INVENTORY = preload("res://src/UI/Inventory/Inventory.tscn")
 const LEVEL_TEXT = preload("res://src/UI/LevelText.tscn")
 
-const PAUSEMENU = preload("res://src/UI/PauseMenu/PauseMenu.tscn")
+const PAUSEMENU = preload("res://src/UI/PauseMenu.tscn")
 #const POPUP = preload("res://src/UI/PopupText.tscn")
 const JUNIPER = preload("res://src/Player/Juniper.tscn")
 const TITLE = preload("res://src/UI/TitleScreen.tscn")
@@ -182,7 +182,7 @@ func change_level_via_code(level_path):
 	display_level_text(current_level)
 	SaveSystem.read_level_data_from_temp(current_level)
 
-	await(get_tree().process_frame)
+	await get_tree().process_frame
 	$Juniper/PlayerCamera.position_smoothing_enabled = true
 
 
@@ -199,9 +199,7 @@ func change_level_via_trigger(level_path, door_index):
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
 
-	if current_level.level_type == current_level.LevelType.NORMAL:
-		$Juniper/PlayerCamera.position_smoothing_enabled = false
-		$Juniper/PlayerCamera.enabled = not current_level.has_node("LevelCamera") #turn off camera if level has one already
+	$Juniper/PlayerCamera.position_smoothing_enabled = false
 
 	#### get the door with the right index
 	var doors_found = 0

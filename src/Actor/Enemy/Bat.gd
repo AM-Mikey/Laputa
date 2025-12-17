@@ -33,9 +33,9 @@ func setup():
 	find_waypoints()
 
 func find_waypoints():
-	for w in get_tree().get_nodes_in_group("Waypoints"):
-		if w.owner_id == id and w.index != -1: #dont include the aggro waypoint
-			waypoints[w.index] = w
+	for wp in get_tree().get_nodes_in_group("Waypoints"):
+		if wp.owner_id == id and wp.index != -1: #dont include the aggro waypoint
+			waypoints[wp.index] = wp
 	if not waypoints.is_empty():
 		set_target(start_waypoint)
 
@@ -54,7 +54,7 @@ func set_target(index: int):
 
 func _on_physics_process(_delta):
 	if disabled or dead: return
-	velocity = calc_velocity(velocity, move_dir, speed)
+	velocity = calc_velocity(move_dir)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
 
@@ -102,16 +102,19 @@ func get_next_index(last_index) -> int:
 
 ### STATES ###
 
-func enter_idle():
+func enter_idle(_last_state):
 	can_flap = false
 	#this isnt the best way to do this, but returns a good result.
 	#right now this cuts off move_dir when it's more than a block away (to -1 or 1)
 	#the small adjustment when less than that is why we don't just use sign()
-	var x_dir = clamp((target_pos.x - position.x)/16, -1, 1)
+	var x_dir: float = clamp((target_pos.x - position.x)/16.0, -1.0, 1.0)
 	move_dir = Vector2(lerp(move_dir.x, x_dir, 0.2), 0)
 
 	$Sprite2D.flip_h = x_dir > 0
-	ap.play("UnflapAggro") if aggro_waypoint else ap.play("Unflap")
+	if (aggro_waypoint):
+		ap.play("UnflapAggro")
+	else:
+		ap.play("Unflap")
 	await get_tree().create_timer(idle_time).timeout
 	can_flap = true
 
@@ -123,13 +126,16 @@ func do_idle():
 		change_state("flap")
 		return
 
-func enter_flap():
+func enter_flap(_last_state):
 	#this isnt the best way to do this, but returns a good result.
-	var x_dir = clamp((target_pos.x - position.x)/16, -1, 1)
+	var x_dir: float = clamp((target_pos.x - position.x)/16.0, -1.0, 1.0)
 	move_dir = Vector2(lerp(move_dir.x, x_dir, 0.2), -1)
 
 	$Sprite2D.flip_h = x_dir > 0
-	ap.play("FlapAggro") if aggro_waypoint else ap.play("Flap")
+	if (aggro_waypoint):
+		ap.play("FlapAggro")
+	else:
+		ap.play("Flap")
 	await get_tree().create_timer(flap_time).timeout
 	change_state("idle")
 
@@ -140,7 +146,7 @@ func _on_PlayerDetector_body_entered(_body):
 	aggro = true
 	$RayCast2D.enabled = true
 
-func _on_PlayerDetector_body_exited(body):
+func _on_PlayerDetector_body_exited(_body):
 	aggro = false
 	$RayCast2D.enabled = false
 

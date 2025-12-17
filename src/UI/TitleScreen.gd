@@ -72,4 +72,4 @@ func _on_keyguide():
 	get_parent().add_child(KEY_GUIDE.instantiate())
 
 func _resolution_scale_changed(_resolution_scale):
-	size = get_tree().get_root().size / vs.menu_resolution_scale
+	set_deferred("size", get_tree().get_root().size / vs.menu_resolution_scale)

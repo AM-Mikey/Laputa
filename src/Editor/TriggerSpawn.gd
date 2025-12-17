@@ -89,7 +89,7 @@ func _input(event):
 
 		match state:
 			"drag":
-				var tile_map = world.current_level.get_node("TileMap")
+				#var tile_map = world.current_level.get_node("TileMap")
 				global_position = Vector2(x, y)
 			"resize":
 				match active_handle.name:

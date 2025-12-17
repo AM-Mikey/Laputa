@@ -21,10 +21,10 @@ func _ready():
 	just_spawned = false
 
 func _physics_process(_delta):
-	velocity = calc_velocity(speed, dir)
+	velocity = calc_velocity(dir)
 	move_and_slide()
 
-func calc_velocity(speed, direction) -> Vector2:
+func calc_velocity(direction) -> Vector2:
 	var out: = velocity
 	var fractional_speed = speed
 	if is_in_water:

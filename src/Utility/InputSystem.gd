@@ -99,7 +99,7 @@ func released(button:String,custombuffer:int=releasebuffer) -> bool:
 	return false
 
 ##process
-func _physics_process(delta):
+func _physics_process(_delta):
 	analogstick = stick_clampzoneX( stick_deadzone(rawstick()) )
 
 	writebuffer()

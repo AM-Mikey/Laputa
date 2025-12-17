@@ -6,10 +6,10 @@ func _on_body_entered(body):
 	active_pc = body.get_parent()
 	_do_damage()
 
-func _on_body_exited(body):
+func _on_body_exited(_body):
 	active_pc = null
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if active_pc != null:
 		if not active_pc.invincible:
 			_do_damage()

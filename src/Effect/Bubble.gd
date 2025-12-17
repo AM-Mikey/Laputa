@@ -6,7 +6,7 @@ func _physics_process(_delta):
 		velocity.y = -50
 		move_and_slide()
 
-func _on_area_exited(area):
+func _on_area_exited(_area):
 		$Bubble.visible = false
 		am.play("effect_pop", self)
 		$BubblePop.visible = true

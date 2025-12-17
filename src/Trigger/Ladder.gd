@@ -14,7 +14,7 @@ func _on_Ladder_body_exited(body):
 	active_bodies.erase(body.get_parent())
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	for b in active_bodies:
 		if not b.mm.current_state == b.mm.states["ladder"] and b.can_input:
 			if Input.is_action_just_pressed("look_up") \

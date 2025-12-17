@@ -20,16 +20,16 @@ func setup():
 	find_waypoints()
 
 func find_waypoints():
-	for w in get_tree().get_nodes_in_group("Waypoints"):
-		if w.owner_id == id:
-			waypoints[w.index] = w
+	for wp in get_tree().get_nodes_in_group("Waypoints"):
+		if wp.owner_id == id:
+			waypoints[wp.index] = wp
 
 
 
 
 func _on_physics_process(_delta):
 	if disabled or dead: return
-	velocity = calc_velocity(velocity, move_dir, speed)
+	velocity = calc_velocity(move_dir)
 	move_and_slide()
 	animate()
 

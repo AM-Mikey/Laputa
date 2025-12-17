@@ -12,7 +12,7 @@ var active_type: String
 var active_property: String #only use for referencing file dialog's user
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	display_tool_labels()
 
 func exit():
@@ -67,7 +67,7 @@ func display_data():
 
 	match active_type:
 		"background":
-			var level_rect = active.get_node("Margin/LevelRect")
+			#var level_rect = active.get_node("Margin/LevelRect") #never used
 			var limiter = active.level_limiter
 			create_button("background_resource", limiter.background_resource.resource_path, "load")
 			create_button("texture", limiter.texture.resource_path, "load")
@@ -128,7 +128,7 @@ func display_data():
 			for layer_id in range(0, get_child_count()):
 				create_layer_button(layer_id)
 
-func get_property_type(type_flag, is_load) -> String:
+func get_property_type(type_flag, _is_load) -> String:
 	var out = ""
 	match type_flag:
 		Variant.Type.TYPE_BOOL: out = "bool"
@@ -233,7 +233,7 @@ func on_property_changed(property_name, property_value):
 		"background":
 			match property_name:
 				"background_resource":
-					active.level_limiter.set(property_name, ResourceLoader.load(property_value, "", 2)) #don't pull from cache
+					active.level_limiter.set(property_name, ResourceLoader.load(property_value, "", ResourceLoader.CACHE_MODE_REPLACE)) #don't pull from cache
 					active.level_limiter.setup_background_resource()
 					active.level_limiter.setup_layers()
 					active.level_limiter.set_focus()
