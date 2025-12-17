@@ -139,8 +139,13 @@ _data = {
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("3")
+difficulty = null
 debug = true
+id = null
 editor_hidden = false
+speed = null
+base_gravity = null
+water_gravity = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
@@ -212,9 +217,6 @@ collision_mask = 520
 [node name="StateTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="WallReflectGraceTimer" type="Timer" parent="."]
-
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="timeout" from="StateTimer" to="." method="_on_state_timer_timeout"]
-[connection signal="timeout" from="WallReflectGraceTimer" to="." method="_on_wall_reflect_grace_timer_timeout"]

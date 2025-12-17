@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_wom3b"]
 [ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_wom3b"]
 [ext_resource type="TileSet" uid="uid://j4ajqrgeit4t" path="res://src/Tile/DogtownInterior.tres" id="4_ris4u"]
-[ext_resource type="Texture2D" uid="uid://cb2wh1kjj4djx" path="res://assets/Background/TiledPlains.png" id="5_0p40l"]
+[ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="5_0p40l"]
 [ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="5_64d5n"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="6_v20vf"]
 [ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/TriggerSpawn.tscn" id="7_0p40l"]
@@ -20,6 +20,7 @@ conversation = "cutscene_test"
 [node name="LevelLimiter" parent="." instance=ExtResource("2_wom3b")]
 offset_top = -256.0
 offset_right = 464.0
+offset_bottom = 0.0
 background_resource = ExtResource("3_wom3b")
 texture = ExtResource("5_0p40l")
 layers = 5
@@ -80,7 +81,7 @@ position = Vector2(35, -198)
 [node name="SpawnPoint" parent="Spawns" instance=ExtResource("6_v20vf")]
 position = Vector2(144, -16)
 
-[node name="Door" parent="Spawns" instance=ExtResource("7_0p40l")]
+[node name="Door3" parent="Spawns" instance=ExtResource("7_0p40l")]
 modulate = Color(1, 1, 1, 0.75)
 offset_left = 16.0
 offset_top = -48.0
@@ -94,6 +95,7 @@ properties = {
 "level": ["WastesTesting", 4],
 "locked": [false, 1]
 }
+size_is_default = false
 
 [node name="TileAnimator" type="Node2D" parent="."]
 script = ExtResource("7_85c3g")

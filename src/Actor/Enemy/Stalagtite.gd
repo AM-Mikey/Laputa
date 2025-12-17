@@ -153,7 +153,3 @@ func enter_stake(_last_state):
 func _on_state_timer_timeout():
 	if state == "hangactive":
 		change_state("drop")
-
-
-func _on_wall_reflect_grace_timer_timeout() -> void:
-	can_reflect = true
