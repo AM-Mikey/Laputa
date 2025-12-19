@@ -329,7 +329,7 @@ func update_inventory():
 func setup_hud():
 	var active_gun = guns.get_child(0)
 	emit_signal("hp_updated", hp, max_hp)
-	emit_signal("guns_updated", guns.get_children())
+	emit_signal("guns_updated", guns.get_children(), "setup")
 	emit_signal("xp_updated", active_gun.xp, active_gun.max_xp, active_gun.level, active_gun.max_level)
 	emit_signal("money_updated", money)
 

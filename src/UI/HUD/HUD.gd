@@ -56,6 +56,9 @@ const UI_BULLET_FLY = preload("res://src/UI/HUD/UIBulletFly.tscn")
 var WheelVisible = false
 
 func _ready():
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
+
 	if world.has_node("Juniper"):
 		var pc = world.get_node("Juniper")
 		pc.hp_updated.connect(update_hp)
@@ -64,10 +67,6 @@ func _ready():
 		pc.money_updated.connect(update_money)
 		pc.invincibility_end.connect(update_hpflash)
 		pc.setup_hud()
-
-		call_deferred("setup_bars", pc.hp, pc.max_hp, pc.guns.get_child(0).xp, pc.guns.get_child(0).max_xp, pc.guns.get_child(0).name)
-	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
-	_resolution_scale_changed(vs.resolution_scale)
 
 func _process(_delta):
 	if world.has_node("Juniper"):
@@ -80,6 +79,9 @@ func _process(_delta):
 
 func update_guns(guns, cause = "default", do_xp_flash = false):
 	#var main_icon = gun.get_node("GunIcon")
+
+	if cause == "setup": #Have to do this because guns are only properly setup here to get data. If in ready(), have to wait 2 frames
+		setup_bars(f.pc().hp, f.pc().max_hp, guns[0].xp, guns[0].max_xp)
 
 	if cause == "shiftleft":
 		display_weapon_wheel(guns, "CCW")
@@ -258,7 +260,7 @@ func update_xp(xp: float, max_xp: float, level: int, max_level: int, do_xp_flash
 	xp_lost.max_value = max_xp
 
 	if (cause in ["shiftleft", "shiftright"]):
-		if (xp_max.visible):
+		if (xp_max.visible): # Set the animation's start to 100 if the prev gun was at max xp
 			xp_progress.value = xp_progress.max_value
 		else:
 			xp_progress.value = old_progress_value / old_progress_max_value * max_xp
@@ -325,7 +327,7 @@ func set_cap_pos(bar, length, cap) -> void:
 	cap.position.x = float(length) * bar.value / bar.max_value
 	cap.visible = false if bar.value == 0 else true
 
-func setup_bars(hp: float, max_hp: float, xp: float, max_xp: float, gun_name: String) -> void:
+func setup_bars(hp: float, max_hp: float, xp: float, max_xp: float) -> void:
 	hp_progress.max_value = max_hp
 	hp_progress.value = hp
 	set_cap_pos(hp_progress, hp_progress.size.x, hp_progress_cap)
@@ -339,7 +341,6 @@ func setup_bars(hp: float, max_hp: float, xp: float, max_xp: float, gun_name: St
 	xp_lost.max_value = max_xp
 	xp_lost.value = xp
 	set_cap_pos(xp_lost, xp_lost.size.x, xp_lost_cap)
-	print(xp_lost.value, " / ", xp_lost.max_value)
 
 	set_cap_pos(cd_progress, cd_progress.size.x, cd_progress_cap)
 
