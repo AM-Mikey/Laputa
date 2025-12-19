@@ -326,12 +326,10 @@ func update_hpflash():
 ### HELPER ###
 
 func set_cap_pos(bar, length, cap) -> void:
-	cap.position.x = float(length) * bar.value / bar.max_value
+	cap.position.x = length * bar.value / bar.max_value
 	cap.visible = false if bar.value == 0 else true
 
 func setup_bars(hp: float, max_hp: float, xp: float, max_xp: float) -> void:
-	print("BBB: ", xp, " ", max_xp)
-
 	hp_progress.max_value = max_hp
 	hp_progress.value = hp
 	set_cap_pos(hp_progress, hp_progress.size.x, hp_progress_cap)
