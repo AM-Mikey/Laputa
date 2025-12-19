@@ -64,22 +64,19 @@ func _ready():
 		pc.money_updated.connect(update_money)
 		pc.invincibility_end.connect(update_hpflash)
 		pc.setup_hud()
-		setup_lost_bars(pc.hp, pc.guns.get_child(0).xp)
+
+		call_deferred("setup_bars", pc.hp, pc.max_hp, pc.guns.get_child(0).xp, pc.guns.get_child(0).max_xp, pc.guns.get_child(0).name)
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 
 func _process(_delta):
-	set_cap_pos(hp_lost, 38, hp_lost_cap)
-	set_cap_pos(xp_lost, 38, xp_lost_cap)
-	set_cap_pos(xp_progress, 38, xp_progress_cap)
-
 	if world.has_node("Juniper"):
 		var pc = world.get_node("Juniper")
 		if pc.guns.get_child(0) != null: #TODO: make this connected via signal
 			cd_progress.visible = true
 			cd_progress.value = 100 - ((pc.get_node("GunManager/CooldownTimer").time_left / pc.guns.get_child(0).cooldown_time) * 100)
-			set_cap_pos(cd_progress, 37, cd_progress_cap)
 		else: cd_progress.visible = false
+
 
 func update_guns(guns, cause = "default", do_xp_flash = false):
 	#var main_icon = gun.get_node("GunIcon")
@@ -206,8 +203,6 @@ func update_hp(hp, max_hp):
 	display_hp_number(hp, max_hp)
 	hp_progress.max_value = max_hp
 	hp_lost.max_value = max_hp
-	set_cap_pos(hp_progress, 38, hp_progress_cap)
-
 
 	if hp < hp_lost.value:
 		if hp > 0:
@@ -251,21 +246,22 @@ func display_hp_number(hp, max_hp):
 
 var xp_progress_tween: Tween
 var xp_lost_tween: Tween
-func update_xp(xp, max_xp, level, max_level, do_xp_flash = false, cause: String = "default"):
+func update_xp(xp: float, max_xp: float, level: int, max_level: int, do_xp_flash = false, cause: String = "default") -> void:
 	modulate = Color(1, 1, 1) #to prevent flash animation from stopping on a transparent frame
 	xp_num.frame_coords.x = level
+	var old_progress_max_value: float = xp_progress.max_value
+	var old_progress_value: float = xp_progress.value
 	if do_xp_flash:
 		animation_player.play("XpFlash")
-	if (cause not in ["shiftleft", "shiftright"]):
-		xp_progress.value = xp
-	else:
-		xp_progress.value = xp_progress.value / xp_progress.max_value * max_xp
+	xp_progress.value = xp
 	xp_progress.max_value = max_xp
 	xp_lost.max_value = max_xp
 
 	if (cause in ["shiftleft", "shiftright"]):
 		if (xp_max.visible):
 			xp_progress.value = xp_progress.max_value
+		else:
+			xp_progress.value = old_progress_value / old_progress_max_value * max_xp
 		if (xp < xp_lost.value):
 			xp_lost.value = xp
 		if (xp_progress_tween):
@@ -325,15 +321,27 @@ func update_hpflash():
 
 ### HELPER ###
 
-func set_cap_pos(bar, length, cap):
-	cap.position.x = length * bar.value / bar.max_value
+func set_cap_pos(bar, length, cap) -> void:
+	cap.position.x = float(length) * bar.value / bar.max_value
 	cap.visible = false if bar.value == 0 else true
 
-func setup_lost_bars(hp, xp): #needs to be done so that update can tell that it's decreased
+func setup_bars(hp: float, max_hp: float, xp: float, max_xp: float, gun_name: String) -> void:
+	hp_progress.max_value = max_hp
+	hp_progress.value = hp
+	set_cap_pos(hp_progress, hp_progress.size.x, hp_progress_cap)
+	hp_lost.max_value = max_hp
 	hp_lost.value = hp
-	#set_cap_pos(hp_lost, 38, hp_lost_cap) #already on _process()
+	set_cap_pos(hp_lost, hp_lost.size.x, hp_lost_cap)
+
+	xp_progress.max_value = max_xp
+	xp_progress.value = xp
+	set_cap_pos(xp_progress, xp_progress.size.x, xp_progress_cap)
+	xp_lost.max_value = max_xp
 	xp_lost.value = xp
-	#set_cap_pos(xp_lost, 38, xp_lost_cap)
+	set_cap_pos(xp_lost, xp_lost.size.x, xp_lost_cap)
+	print(xp_lost.value, " / ", xp_lost.max_value)
+
+	set_cap_pos(cd_progress, cd_progress.size.x, cd_progress_cap)
 
 
 
@@ -341,3 +349,18 @@ func setup_lost_bars(hp, xp): #needs to be done so that update can tell that it'
 
 func _resolution_scale_changed(resolution_scale):
 	set_deferred("size", get_tree().get_root().size / resolution_scale)
+
+func _on_hp_progress_value_changed(_value: float) -> void:
+	set_cap_pos(hp_progress, hp_progress.size.x, hp_progress_cap)
+
+func _on_hp_lost_value_changed(_value: float) -> void:
+	set_cap_pos(hp_lost, hp_lost.size.x, hp_lost_cap)
+
+func _on_xp_progress_value_changed(_value: float) -> void:
+	set_cap_pos(xp_progress, xp_progress.size.x, xp_progress_cap)
+
+func _on_xp_lost_value_changed(_value: float) -> void:
+	set_cap_pos(xp_lost, xp_lost.size.x, xp_lost_cap)
+
+func _on_cooldown_progress_value_changed(value: float) -> void:
+	set_cap_pos(cd_progress, cd_progress.size.x, cd_progress_cap)

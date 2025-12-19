@@ -1093,6 +1093,7 @@ offset_top = 3.0
 offset_right = 70.0
 offset_bottom = 7.0
 mouse_filter = 2
+step = 0.1
 value = 50.0
 texture_progress = ExtResource("7")
 
@@ -1107,6 +1108,7 @@ offset_top = 3.0
 offset_right = 70.0
 offset_bottom = 7.0
 mouse_filter = 2
+step = 0.1
 value = 50.0
 texture_progress = ExtResource("4")
 
@@ -1143,14 +1145,16 @@ offset_right = 66.0
 offset_bottom = 15.0
 mouse_filter = 2
 step = 0.1
-value = 50.0
+value = 75.0
+nine_patch_stretch = true
 texture_progress = ExtResource("7")
 
 [node name="Cap" type="Sprite2D" parent="Base/Xp/Lost"]
-position = Vector2(19, 2)
+position = Vector2(28.5, 2)
 texture = ExtResource("15")
 
 [node name="Progress" type="TextureProgressBar" parent="Base/Xp"]
+visible = false
 layout_mode = 0
 offset_left = 28.0
 offset_top = 11.0
@@ -1197,6 +1201,7 @@ offset_top = 19.0
 offset_right = 62.0
 offset_bottom = 21.0
 mouse_filter = 2
+step = 0.1
 value = 50.0
 texture_progress = ExtResource("8")
 
@@ -1407,4 +1412,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_ufagq")
 }
 
+[connection signal="value_changed" from="Base/Hp/Lost" to="." method="_on_hp_lost_value_changed"]
+[connection signal="value_changed" from="Base/Hp/Progress" to="." method="_on_hp_progress_value_changed"]
+[connection signal="value_changed" from="Base/Xp/Lost" to="." method="_on_xp_lost_value_changed"]
+[connection signal="value_changed" from="Base/Xp/Progress" to="." method="_on_xp_progress_value_changed"]
+[connection signal="value_changed" from="Base/Cooldown/Progress" to="." method="_on_cooldown_progress_value_changed"]
 [connection signal="timeout" from="Gun/WeaponWheelTiltAnimator/Timer" to="." method="_on_Timer_timeout"]
