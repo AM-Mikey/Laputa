@@ -94,7 +94,7 @@ func update_guns(guns, cause = "default", do_xp_flash = false):
 	for g in guns:
 		if guns.find(g) == 0: #main gun
 			#main_icon.texture = g["icon_texture"]s
-			update_xp(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash, cause in ["shiftleft", "shiftright"])
+			update_xp(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash, cause)
 			#update_ammo(g.ammo, g.max_ammo)a
 		#else:
 			#var gun_icon = GUNICON.instantiate() #all other
@@ -251,27 +251,19 @@ func display_hp_number(hp, max_hp):
 
 var xp_progress_tween: Tween
 var xp_lost_tween: Tween
-func update_xp(xp, max_xp, level, max_level, do_xp_flash = false, switch_gun = false):
+func update_xp(xp, max_xp, level, max_level, do_xp_flash = false, cause: String = "default"):
 	modulate = Color(1, 1, 1) #to prevent flash animation from stopping on a transparent frame
 	xp_num.frame_coords.x = level
 	if do_xp_flash:
 		animation_player.play("XpFlash")
-	if (!switch_gun):
+	if (cause not in ["shiftleft", "shiftright"]):
 		xp_progress.value = xp
 	else:
 		xp_progress.value = xp_progress.value / xp_progress.max_value * max_xp
 	xp_progress.max_value = max_xp
 	xp_lost.max_value = max_xp
 
-	if (!switch_gun):
-		if xp < xp_lost.value:
-			if (xp_lost_tween):
-				xp_lost_tween.kill()
-			xp_lost_tween = get_tree().create_tween()
-			xp_lost_tween.tween_property(xp_lost, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
-		else: #increasing, just set it
-			xp_lost.value = xp
-	else:
+	if (cause in ["shiftleft", "shiftright"]):
 		if (xp_max.visible):
 			xp_progress.value = xp_progress.max_value
 		if (xp < xp_lost.value):
@@ -279,8 +271,17 @@ func update_xp(xp, max_xp, level, max_level, do_xp_flash = false, switch_gun = f
 		if (xp_progress_tween):
 			xp_progress_tween.kill()
 		xp_progress_tween = get_tree().create_tween()
-		xp_progress_tween.set_parallel()
 		xp_progress_tween.tween_property(xp_progress, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	elif (cause == "levelup"):
+		xp_lost.value = xp
+	else:
+		if xp < xp_lost.value:
+			if (xp_lost_tween):
+				xp_lost_tween.kill()
+			xp_lost_tween = get_tree().create_tween()
+			xp_lost_tween.tween_property(xp_lost, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
+		else: #increasing, just set it
+			xp_lost.value = xp
 
 	xp_progress.visible = !(xp == max_xp and level == max_level)
 	xp_max.visible = (xp == max_xp and level == max_level)
