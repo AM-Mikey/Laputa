@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://ced57a1w0tgdk"]
+[gd_scene load_steps=13 format=3 uid="uid://ced57a1w0tgdk"]
 
 [ext_resource type="Script" uid="uid://d2yv8egvqk153" path="res://src/Actor/Enemy/Spider.gd" id="1_shhv2"]
 [ext_resource type="Texture2D" uid="uid://bwimmhc71ip4k" path="res://assets/Actor/Enemy/SpiderBody.png" id="2_impgl"]
+[ext_resource type="Texture2D" uid="uid://b7fbr0e7mihkm" path="res://assets/Editor/VisTrue.png" id="3_impgl"]
+[ext_resource type="Texture2D" uid="uid://cjfpnens1b2im" path="res://assets/UI/FileSelect/XpIcon.png" id="4_jm4eq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qm1p1"]
 radius = 7.5
@@ -18,6 +20,12 @@ size = Vector2(48, 48)
 [sub_resource type="CanvasItemMaterial" id="11"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o6omx"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_impgl"]
+points = PackedVector2Array(0, 0, 120, -16, 120, -64, 80, -112, 8, -112)
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_jm4eq"]
+points = PackedVector2Array(-112, -16, 0, 0, -8, -112, -72, -112, -120, -72)
 
 [node name="Spider" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
@@ -68,5 +76,45 @@ libraries = {
 
 [node name="StateTimer" type="Timer" parent="."]
 
+[node name="LegVisNW" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.78431374)
+z_index = 999
+texture = ExtResource("3_impgl")
+
+[node name="LegVisNE" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.78431374)
+z_index = 999
+texture = ExtResource("3_impgl")
+
+[node name="LegSectorNE" type="CollisionShape2D" parent="."]
+shape = SubResource("ConvexPolygonShape2D_impgl")
+disabled = true
+
+[node name="LegSectorNW" type="CollisionShape2D" parent="."]
+shape = SubResource("ConvexPolygonShape2D_jm4eq")
+disabled = true
+
+[node name="LegNW" type="Line2D" parent="."]
+width = 2.0
+default_color = Color(1, 0.5, 0.5, 1)
+
+[node name="LegNE" type="Line2D" parent="."]
+width = 2.0
+default_color = Color(0.5, 0.66666675, 1, 1)
+
+[node name="LegRestNE" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.78431374)
+z_index = 999
+texture = ExtResource("4_jm4eq")
+
+[node name="LegRestNW" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.78431374)
+z_index = 999
+texture = ExtResource("4_jm4eq")
+
+[node name="NorthLegCooldown" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
+[connection signal="timeout" from="NorthLegCooldown" to="." method="_on_NorthLegCooldown_timeout"]

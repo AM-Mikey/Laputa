@@ -16,6 +16,18 @@ var point_tolerance = 1
 var a_star_line
 var a_star_grid
 
+var nw_leg_target := Vector2.INF
+var nw_leg_rest_position := Vector2.INF
+var nw_leg_position := Vector2.INF
+
+var ne_leg_target := Vector2.INF
+var ne_leg_rest_position := Vector2.INF
+var ne_leg_position := Vector2.INF
+
+var leg_step_distance = 32.0
+var leg_speed = 15.0
+var leg_cooldown = 0.2
+var north_legs_enabled = true
 
 func setup():
 	reward = 5
@@ -23,10 +35,68 @@ func setup():
 	speed = Vector2(60, 60)
 	setup_a_star()
 	change_state("chase")
-#
+
+func _on_physics_process(delta):
+	var nearest_ne = get_nearest_point_collision($LegSectorNE)
+	if nearest_ne != Vector2.INF:
+		ne_leg_target = nearest_ne
+
+	var nearest_nw = get_nearest_point_collision($LegSectorNW)
+	if nearest_nw != Vector2.INF:
+		nw_leg_target = nearest_nw
+
+
+	if north_legs_enabled:
+		var can_west_step = false
+		var can_east_step = false
+
+		if nw_leg_target != Vector2.INF && nw_leg_rest_position.distance_to(nw_leg_target) > leg_step_distance:
+			can_west_step = true
+		if ne_leg_target != Vector2.INF && ne_leg_rest_position.distance_to(ne_leg_target) > leg_step_distance:
+			can_east_step = true
+
+		if can_west_step and !can_east_step:
+			print("west_step")
+			nw_leg_rest_position = nw_leg_target
+		elif can_east_step and !can_west_step:
+			print("east_step")
+			ne_leg_rest_position = ne_leg_target
+		elif can_west_step and can_east_step:
+			if nw_leg_rest_position.distance_to(nw_leg_target) > ne_leg_rest_position.distance_to(ne_leg_target):
+				print("west_step")
+				nw_leg_rest_position = nw_leg_target
+			else:
+				print("east_step")
+				ne_leg_rest_position = ne_leg_target
+
+
+		north_legs_enabled = false
+		$NorthLegCooldown.start(leg_cooldown)
+
+	if ne_leg_position == Vector2.INF:
+		ne_leg_position = ne_leg_target
+	else:
+		ne_leg_position = ne_leg_position.lerp(ne_leg_rest_position, delta * leg_speed)
+
+	if nw_leg_position == Vector2.INF:
+		nw_leg_position = nw_leg_target
+	else:
+		nw_leg_position = nw_leg_position.lerp(nw_leg_rest_position, delta * leg_speed)
+
+	$LegRestNE.global_position = ne_leg_rest_position
+	$LegRestNW.global_position = nw_leg_rest_position
+	update_legs()
+
+
 #func _input(event: InputEvent) -> void:
-	#if event.is_action_pressed("debug_level_up"):
-		#setup_a_star()
+	#if event.is_action_pressed("debug_testbutton"):
+		#var nearest = get_nearest_point_collision()
+		#if nearest != Vector2.INF:
+			#nw_leg_target = nearest
+			#draw_leg()
+		#else:
+			#undraw_leg()
+
 
 func setup_a_star():
 	for l in w.front.get_children():
@@ -58,11 +128,11 @@ func setup_a_star():
 			var tile = tile_map_layer.get_cell_atlas_coords(cell)
 			if tiles_with_collision.has(tile):
 
-				var sprite = Sprite2D.new()
-				sprite.texture = load("res://assets/Icon/EnemyIcon.png")
-				sprite.position = (cell * 16) + Vector2i(8,8)
-				sprite.z_index = 999
-				w.add_child(sprite)
+				#var sprite = Sprite2D.new()
+				#sprite.texture = load("res://assets/Icon/EnemyIcon.png")
+				#sprite.position = (cell * 16) + Vector2i(8,8)
+				#sprite.z_index = 999
+				#w.add_child(sprite)
 
 				a_star_grid.set_point_solid(cell, true)
 				a_star_grid.update()
@@ -106,6 +176,63 @@ func do_chase(): #goes to point 1 first btw
 		velocity = calc_velocity(move_dir, false)
 		move_and_slide()
 
+### HELPERS ###
+
+func get_nearest_point_collision(sector = $LegSectorNW) -> Vector2:
+	var closest_point := Vector2.ZERO
+	var closest_distance := INF
+	var space := get_world_2d().direct_space_state
+
+	sector.scale = Vector2.ZERO
+	while closest_distance == INF and sector.scale.x < 1.0:
+		var params := PhysicsShapeQueryParameters2D.new()
+		params.shape = sector.shape
+		params.transform = sector.global_transform
+		params.collide_with_areas = false
+		params.collide_with_bodies = true
+		params.collision_mask = 8 #just world
+		var points: Array[Vector2] = []
+
+		for l in w.current_level.get_node("TileMap").get_children(): #for all layers
+			points.append_array(space.collide_shape(params, 32))
+
+		for p in points:
+			var distance := p.distance_squared_to(global_position)
+			if distance < closest_distance:
+				closest_distance = distance
+				closest_point = p
+
+		sector.scale += Vector2(0.01, 0.01) #if this lags increase the scale by more
+
+	if closest_distance == INF: # If nothing intersected
+		return Vector2.INF
+	match sector.name:
+		"LegSectorNW":
+			$LegVisNW.global_position = closest_point
+		"LegSectorNE":
+			$LegVisNE.global_position = closest_point
+
+
+	return closest_point
+
+
+#func update_leg_position(target):
+	#match target:
+		#nw_leg_target:
+			#nw_leg_position = nw_leg_target
+		#ne_leg_target:
+			#ne_leg_position = ne_leg_target
+
+func update_legs():
+	if nw_leg_position != Vector2.INF:
+		$LegNW.points = [Vector2.ZERO, to_local(nw_leg_position)]
+	if ne_leg_position != Vector2.INF:
+		$LegNE.points = [Vector2.ZERO, to_local(ne_leg_position)]
+
+func undraw_leg(leg = $LegNW):
+	leg.points = []
+
+
 ### SIGNALS ###
 
 func _on_PlayerDetector_body_entered(body):
@@ -115,3 +242,7 @@ func _on_PlayerDetector_body_entered(body):
 
 func _on_PlayerDetector_body_exited(_body):
 	target = null
+
+
+func _on_NorthLegCooldown_timeout():
+	north_legs_enabled = true
