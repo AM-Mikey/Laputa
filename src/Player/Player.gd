@@ -162,7 +162,7 @@ func hit(damage, knockback_direction):
 					active_gun.xp = max(active_gun.xp, 0)
 				if active_gun.xp < 0:
 					$GunManager.level_down(false)
-				emit_signal("guns_updated", guns.get_children())
+				emit_signal("guns_updated", guns.get_children(), "takedamage")
 
 		if knockback_direction != Vector2.ZERO:
 			#print("Knockback in Dir: " + str(knockback_direction))

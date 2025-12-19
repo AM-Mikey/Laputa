@@ -93,7 +93,8 @@ func update_guns(guns, cause = "default", do_xp_flash = false):
 	for g in guns:
 		if guns.find(g) == 0: #main gun
 			#main_icon.texture = g["icon_texture"]s
-			update_xp(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash, cause)
+			if (cause not in ["fire", "get_ammo"]):
+				update_xp(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash, cause)
 			#update_ammo(g.ammo, g.max_ammo)a
 		#else:
 			#var gun_icon = GUNICON.instantiate() #all other
@@ -246,8 +247,7 @@ func display_hp_number(hp, max_hp):
 		hp_2.frame_coords.y = 5
 
 
-var xp_progress_tween: Tween
-var xp_lost_tween: Tween
+var xp_tween: Tween
 func update_xp(xp: float, max_xp: float, level: int, max_level: int, do_xp_flash = false, cause: String = "default") -> void:
 	modulate = Color(1, 1, 1) #to prevent flash animation from stopping on a transparent frame
 	xp_num.frame_coords.x = level
@@ -255,29 +255,31 @@ func update_xp(xp: float, max_xp: float, level: int, max_level: int, do_xp_flash
 	var old_progress_value: float = xp_progress.value
 	if do_xp_flash:
 		animation_player.play("XpFlash")
-	xp_progress.value = xp
 	xp_progress.max_value = max_xp
+	xp_progress.value = xp
 	xp_lost.max_value = max_xp
+
+	if (xp_tween):
+		xp_tween.kill()
 
 	if (cause in ["shiftleft", "shiftright"]):
 		if (xp_max.visible): # Set the animation's start to 100 if the prev gun was at max xp
 			xp_progress.value = xp_progress.max_value
 		else:
 			xp_progress.value = old_progress_value / old_progress_max_value * max_xp
-		if (xp < xp_lost.value):
+		if (xp < xp_lost.value / old_progress_max_value * max_xp):
 			xp_lost.value = xp
-		if (xp_progress_tween):
-			xp_progress_tween.kill()
-		xp_progress_tween = get_tree().create_tween()
-		xp_progress_tween.tween_property(xp_progress, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		xp_tween = get_tree().create_tween().set_parallel()
+		xp_tween.tween_property(xp_progress, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		xp_tween.tween_property(xp_lost, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	elif (cause == "levelup"):
 		xp_lost.value = xp
 	else:
+		if (cause == "leveldown"):
+			xp_lost.value = xp_lost.max_value
 		if xp < xp_lost.value:
-			if (xp_lost_tween):
-				xp_lost_tween.kill()
-			xp_lost_tween = get_tree().create_tween()
-			xp_lost_tween.tween_property(xp_lost, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
+			xp_tween = get_tree().create_tween()
+			xp_tween.tween_property(xp_lost, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
 		else: #increasing, just set it
 			xp_lost.value = xp
 
@@ -328,6 +330,8 @@ func set_cap_pos(bar, length, cap) -> void:
 	cap.visible = false if bar.value == 0 else true
 
 func setup_bars(hp: float, max_hp: float, xp: float, max_xp: float) -> void:
+	print("BBB: ", xp, " ", max_xp)
+
 	hp_progress.max_value = max_hp
 	hp_progress.value = hp
 	set_cap_pos(hp_progress, hp_progress.size.x, hp_progress_cap)
