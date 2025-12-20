@@ -74,32 +74,6 @@ func on_displaymode_changed(index: int):
 		print("saving display mode")
 		save_setting("DisplayMode", index)
 
-#func on_resolutionscale_changed(index: int): #not fully implemented
-	#w.viewport_size_ignore = true
-	#match index:
-		#0:
-			#w.viewport_size_ignore = false
-			##world._on_viewport_size_changed()
-			#get_window().set_size(get_window().get_size()) #set window size so we can trigger _on_viewport_size_changed everywhere
-		#1: w.resolution_scale = 1.0
-		#2: w.resolution_scale = 2.0
-		#3: w.resolution_scale = 3.0
-		#4: w.resolution_scale = 4.0
-		#5: w.resolution_scale = 5.0
-		#6: w.resolution_scale = 6.0
-		#7: w.resolution_scale = 7.0
-		#8: w.resolution_scale = 8.0
-
-	#if w.has_node("TitleCam"):
-		#w.get_node("TitleCam").zoom = Vector2(1 / w.resolution_scale, 1 / w.resolution_scale)
-	##world.get_node("UILayer").scale = Vector2(world.resolution_scale, world.resolution_scale)
-	##TODO: make sure this carrys over for playercamera
-	#if get_tree().get_nodes_in_group("CameraLimiters").size() != 0:
-		#for c in get_tree().get_nodes_in_group("CameraLimiters"):
-			#c._on_viewport_size_changed()
-	#
-	#save_setting("ResolutionScale", index)
-
 
 func on_mastervolume_changed(value):
 	change_bus_volume(value,"Master")

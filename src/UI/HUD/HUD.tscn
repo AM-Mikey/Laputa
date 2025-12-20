@@ -1058,7 +1058,7 @@ _data = {
 &"RESET": SubResource("Animation_ufagq")
 }
 
-[node name="HUD" type="Control" node_paths=PackedStringArray("gun", "ao", "hp_node", "xp_node", "cd", "ammo", "mon")]
+[node name="HUD" type="Control" node_paths=PackedStringArray("gun", "ao", "hp_node", "xp_node", "cd", "ammo", "mon") groups=["HUDs"]]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1")

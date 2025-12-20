@@ -4,7 +4,6 @@ var player_inventory: Array
 
 @onready var world = get_tree().get_root().get_node("World")
 @onready var pc = get_tree().get_root().get_node("World/Juniper")
-@onready var hud = get_parent().get_node("HUD")
 @onready var items = $MarginContainer/VBoxContainer/Items/ItemList
 @onready var weapon_wheel = $MarginContainer/VBoxContainer/Weapons/MarginContainer/WeaponWheel
 @onready var header = $MarginContainer/VBoxContainer/Description/MarginContainer/VBoxContainer/Header
@@ -22,11 +21,11 @@ func _input(event):
 
 func enter():
 	get_tree().paused = true
-	hud.visible = false
+	f.hud().visible = false
 
 func exit():
 	get_tree().paused = false
-	hud.visible = true
+	f.hud().visible = true
 	pc.emit_signal("guns_updated", pc.guns.get_children())
 	queue_free()
 

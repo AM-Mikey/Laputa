@@ -4,7 +4,7 @@ const GUNICON = preload("res://src/UI/HUD/GunIcon.tscn")
 const UI_BULLET_FLY = preload("res://src/UI/HUD/UIBulletFly.tscn")
 
 #onready var pc = get_tree().get_root().get_node("World/Juniper")
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 @export var gun: Node
 @export var ao: Node
@@ -59,8 +59,8 @@ func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 
-	if world.has_node("Juniper"):
-		var pc = world.get_node("Juniper")
+	if w.has_node("Juniper"):
+		var pc = w.get_node("Juniper")
 		pc.hp_updated.connect(update_hp)
 		pc.guns_updated.connect(update_guns)
 		pc.xp_updated.connect(update_xp)
@@ -69,8 +69,8 @@ func _ready():
 		pc.setup_hud()
 
 func _process(_delta):
-	if world.has_node("Juniper"):
-		var pc = world.get_node("Juniper")
+	if w.has_node("Juniper"):
+		var pc = w.get_node("Juniper")
 		if pc.guns.get_child(0) != null: #TODO: make this connected via signal
 			cd_progress.visible = true
 			cd_progress.value = 100 - ((pc.get_node("GunManager/CooldownTimer").time_left / pc.guns.get_child(0).cooldown_time) * 100)
@@ -102,7 +102,7 @@ func update_guns(guns, cause = "default", do_xp_flash = false):
 			#hbox.add_child(gun_icon)
 
 	if cause == "fire":
-		var pc = world.get_node("Juniper")
+		var pc = w.get_node("Juniper")
 		var speed: float = 0.8 / pc.guns.get_child(0).cooldown_time
 		var is_infinite: bool = pc.guns.get_child(0).max_ammo == 0
 		ammo_animate("reset")
@@ -117,6 +117,7 @@ func update_guns(guns, cause = "default", do_xp_flash = false):
 		ammo_fly.add_child(ui_bullet_fly)
 	if cause == "getammo":
 		ammo_animate("reload", 5.0)
+
 
 func display_weapon_wheel(guns, rot_dir: String):
 	if not WheelVisible:
@@ -153,7 +154,7 @@ func _on_Timer_timeout():
 	#$HBox/Gun/Sprite2D
 
 func ammo_animate(animation, speed: float = -1):
-	var pc = world.get_node("Juniper")
+	var pc = w.get_node("Juniper")
 	if speed == -1:
 		speed = 0.8 / pc.guns.get_child(0).cooldown_time
 
@@ -209,8 +210,8 @@ func update_hp(hp, max_hp):
 
 	if hp < hp_lost.value:
 		if hp > 0:
-			$AnimationPlayerHp.stop()
-			$AnimationPlayerHp.play("HpFlash")
+			w.get_node("HUDLayer/HUDAnimator").stop()
+			w.get_node("HUDLayer/HUDAnimator").play("Flash")
 			var tween = get_tree().create_tween()
 			tween.tween_property(hp_lost, "value", hp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
 	else: #increasing, just set it
@@ -321,7 +322,7 @@ func update_money(money):
 		printerr("ERROR: hud cannot display money value of: " + money)
 
 func update_hpflash():
-	$AnimationPlayerHp.stop()
+	w.get_node("HUDLayer/HUDAnimator").stop()
 
 ### HELPER ###
 

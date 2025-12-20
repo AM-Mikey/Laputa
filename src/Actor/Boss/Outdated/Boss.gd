@@ -13,7 +13,6 @@ var max_hp: int
 var damage_on_contact: int
 var recent_damage_taken: int
 
-@onready var hud = get_tree().get_root().get_node("World/UILayer/HUD")
 
 func _ready():
 	home = global_position
@@ -42,5 +41,5 @@ func hit(damage, blood_direction):
 
 
 func die():
-	#hud.get_node("Boss").visible = false
+	#f.hud().get_node("Boss").visible = false
 	queue_free()

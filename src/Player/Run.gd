@@ -38,8 +38,8 @@ func state_process(delta):
 
 ##Processes jumps and platform drops
 func jump_processing():
-	if world.has_node("UILayer/UIGroup/DialogBox"):
-		if !world.get_node("UILayer/UIGroup/DialogBox").is_exiting:
+	if world.has_node("UILayer/DialogBox"):
+		if !world.get_node("UILayer/DialogBox").is_exiting:
 			return #prevent the jump while db exists and is not exiting, this does allow holdjumping, though
 
 	if inp.pressed("jump") and Input.is_action_pressed("look_down") and pc.is_on_ssp and pc.can_input:

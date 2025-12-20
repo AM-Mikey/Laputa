@@ -49,8 +49,8 @@ func read_player_data_from_save():
 
 	if f.pc(): #TODO: something strange about the timing of loading in juniper, consider moving that code here instead of the awaits
 		f.pc().free()
-		if w.uig.has_node("HUD"):
-			w.uig.get_node("HUD").queue_free()
+		if f.hud():
+			f.hud().queue_free()
 
 	w.change_level_via_code(player_data["current_level"])
 	await get_tree().process_frame

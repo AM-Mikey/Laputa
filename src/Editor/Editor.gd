@@ -78,8 +78,8 @@ func setup_level(): #TODO: clear undo history
 	#emit_signal("level_selected", w.current_level)
 	setup_windows()
 	w.get_node("Juniper").disable()
-	w.uig.get_node("HUD").queue_free()
-	w.uig.visible = false
+	f.hud().queue_free()
+	w.ui.visible = false
 	w.bl.visible = false
 	for a in get_tree().get_nodes_in_group("Actors"):
 		a.queue_free()
@@ -157,8 +157,8 @@ func exit():	#TODO: make this an editor_exit signal ## no? that just decentraliz
 	free_previews()
 	editor_level_limiter.queue_free()
 	w.el.get_node("EditorCamera").queue_free()
-	w.uig.add_child(HUD.instantiate())
-	w.uig.visible = true
+	w.get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
+	w.ui.visible = true
 	w.bl.visible = true
 	mc.display("arrow")
 	w.get_node("Juniper").enable()
