@@ -6,7 +6,7 @@ const BLACKBAR = preload("res://src/Utility/BlackBar.tscn")
 
 
 @onready var world = get_tree().get_root().get_node("World")
-@onready var pc = get_tree().get_root().get_node("World/Juniper")
+@onready var pc = f.pc()
 
 @onready var player_pos = pc.global_position
 @onready var camera_pos = pc.get_node("PlayerCamera").get_screen_center_position()

@@ -3,7 +3,7 @@ extends Control
 const GUNICON = preload("res://src/UI/HUD/GunIcon.tscn")
 const UI_BULLET_FLY = preload("res://src/UI/HUD/UIBulletFly.tscn")
 
-#onready var pc = get_tree().get_root().get_node("World/Juniper")
+#onready var pc = f.pc()
 @onready var world = get_tree().get_root().get_node("World")
 
 @export var gun: Node
@@ -56,8 +56,8 @@ const UI_BULLET_FLY = preload("res://src/UI/HUD/UIBulletFly.tscn")
 var WheelVisible = false
 
 func _ready():
-	if world.has_node("Juniper"):
-		var pc = world.get_node("Juniper")
+	if f.pc():
+		var pc = f.pc()
 		pc.hp_updated.connect(update_hp)
 		pc.guns_updated.connect(update_guns)
 		pc.xp_updated.connect(update_xp)
@@ -72,8 +72,8 @@ func _process(_delta):
 	set_cap_pos(hp_lost, 38, hp_lost_cap)
 	set_cap_pos(xp_lost, 38, xp_lost_cap)
 
-	if world.has_node("Juniper"):
-		var pc = world.get_node("Juniper")
+	if f.pc():
+		var pc = f.pc()
 		if pc.guns.get_child(0) != null: #TODO: make this connected via signal
 			cd_progress.visible = true
 			cd_progress.value = 100 - ((pc.get_node("GunManager/CooldownTimer").time_left / pc.guns.get_child(0).cooldown_time) * 100)
@@ -100,7 +100,7 @@ func update_guns(guns, cause = "default", do_xp_flash = false):
 			#gun_icon.texture = g["texture"]
 			#hbox.add_child(gun_icon)
 	if cause == "fire":
-		var pc = world.get_node("Juniper")
+		var pc = f.pc()
 		var speed: float = 0.8 / pc.guns.get_child(0).cooldown_time
 		var is_infinite: bool = pc.guns.get_child(0).max_ammo == 0
 		ammo_animate("reset")
@@ -151,7 +151,7 @@ func _on_Timer_timeout():
 	#$HBox/Gun/Sprite2D
 
 func ammo_animate(animation, speed: float = -1):
-	var pc = world.get_node("Juniper")
+	var pc = f.pc()
 	if speed == -1:
 		speed = 0.8 / pc.guns.get_child(0).cooldown_time
 
@@ -200,6 +200,7 @@ func ammo_animate(animation, speed: float = -1):
 			ammo_bottom_animator.play("ResetInfinite")
 
 func update_hp(hp, max_hp):
+	var pc = f.pc()
 	hp_progress.value = hp
 	display_hp_number(hp, max_hp)
 	hp_progress.max_value = max_hp

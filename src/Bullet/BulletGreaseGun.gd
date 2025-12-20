@@ -9,7 +9,7 @@ var projectile_range: int
 var max_spread_distance = 7
 var recoil_velocity = 40
 
-@onready var pc = get_tree().get_root().get_node("World/Juniper")
+@onready var pc = f.pc()
 
 
 

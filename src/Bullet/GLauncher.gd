@@ -10,7 +10,7 @@ var explosion_time = 2.5
 var start_velocity
 var touched_floor = false
 
-@onready var pc = get_tree().get_root().get_node("World/Juniper")
+@onready var pc = f.pc()
 @onready var pc_on_floor = pc.is_on_floor()
 @onready var pc_held_down = Input.is_action_pressed("look_down") and pc.can_input
 

@@ -33,7 +33,7 @@ var ammo_chance = 1
 
 
 @onready var w = get_tree().get_root().get_node("World")
-@onready var pc = get_tree().get_root().get_node_or_null("World/Juniper")
+@onready var pc = f.pc()
 
 
 
@@ -186,7 +186,7 @@ func die(quietly = false):
 	if dead: return
 	dead = true
 	if !pc:
-		pc = get_tree().get_root().get_node_or_null("World/Juniper")
+		pc = f.pc()
 	if pc:
 		pc.enemies_touching.erase(self)
 	if !quietly:
@@ -209,9 +209,10 @@ func do_death_drop():
 
 	#ammo chance
 	var player_needs_ammo = false
-	for g in pc.get_node("GunManager/Guns").get_children():
-		if g.ammo < g.max_ammo:
-			player_needs_ammo = true
+	if (f.pc()):
+		for w in f.pc().get_node("GunManager/Guns").get_children():
+			if w.ammo < w.max_ammo:
+				player_needs_ammo = true
 	if not player_needs_ammo:
 		ammo_chance = 0
 

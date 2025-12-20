@@ -10,7 +10,7 @@ extends Container
 @onready var timer = get_parent().get_parent().get_node("CycleDelay")
 @onready var timer_half = get_parent().get_parent().get_node("HalfCycle")
 
-@onready var pc = get_tree().get_root().get_node("World/Juniper")
+@onready var pc = f.pc()
 
 @onready var inventory = get_tree().get_root().get_node("World/UILayer/UIGroup/Inventory")
 
