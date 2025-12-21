@@ -270,6 +270,8 @@ func update_xp(xp: float, max_xp: float, level: int, max_level: int, do_xp_flash
 			xp_progress.value = old_progress_value / old_progress_max_value * max_xp
 		if (xp < xp_lost.value / old_progress_max_value * max_xp):
 			xp_lost.value = xp
+		else:
+			xp_lost.value = xp_lost.value / old_progress_max_value * max_xp
 		xp_tween = get_tree().create_tween().set_parallel()
 		xp_tween.tween_property(xp_progress, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		xp_tween.tween_property(xp_lost, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
