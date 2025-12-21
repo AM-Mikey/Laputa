@@ -4028,6 +4028,34 @@ target_position = Vector2(0, 13)
 collision_mask = 520
 collide_with_areas = true
 
+[node name="LeftJumpGroundFinder" type="RayCast2D" parent="."]
+z_index = 16
+position = Vector2(-8, -1)
+target_position = Vector2(0, 3)
+collision_mask = 520
+collide_with_areas = true
+
+[node name="RightJumpGroundFinder" type="RayCast2D" parent="."]
+z_index = 16
+position = Vector2(7, -1)
+target_position = Vector2(0, 3)
+collision_mask = 520
+collide_with_areas = true
+
+[node name="LeftJumpBonkFinder" type="RayCast2D" parent="."]
+z_index = 16
+position = Vector2(-6.5, -11)
+target_position = Vector2(0, -4)
+collision_mask = 520
+collide_with_areas = true
+
+[node name="RightJumpBonkFinder" type="RayCast2D" parent="."]
+z_index = 16
+position = Vector2(6.5, -11)
+target_position = Vector2(0, -4)
+collision_mask = 520
+collide_with_areas = true
+
 [node name="Hurtbox" type="Area2D" parent="."]
 visible = false
 collision_layer = 65536
