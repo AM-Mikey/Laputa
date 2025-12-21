@@ -76,7 +76,6 @@ func level_up(debug):
 	var current_gun = $Guns.get_child(0)
 	var last_max_xp = current_gun.max_xp
 	current_gun.level += 1
-	current_gun.load_level()
 	current_gun.xp = 0 if debug else current_gun.xp - last_max_xp
 	get_parent().emit_signal("guns_updated", $Guns.get_children(), "levelup")
 
@@ -88,7 +87,6 @@ func level_up(debug):
 func level_down(debug):
 	var current_gun = $Guns.get_child(0)
 	current_gun.level -= 1
-	current_gun.load_level()
 	current_gun.xp = 0 if debug else current_gun.xp + current_gun.max_xp
 	get_parent().emit_signal("guns_updated", $Guns.get_children(), "leveldown")
 
