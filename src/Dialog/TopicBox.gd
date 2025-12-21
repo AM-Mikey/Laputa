@@ -14,7 +14,7 @@ const TOPIC_BUTTON = preload("res://src/Dialog/TopicButton.tscn")
 @onready var face_sprite = $Margin/HBox/Face/Sprite2D
 
 @onready var world = get_tree().get_root().get_node("World")
-@onready var pc = get_tree().get_root().get_node("World/Juniper")
+@onready var pc = f.pc()
 
 func _ready():
 	var tween = get_tree().create_tween()

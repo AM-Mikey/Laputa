@@ -3,7 +3,8 @@ extends Control
 var player_inventory: Array
 
 @onready var world = get_tree().get_root().get_node("World")
-@onready var pc = get_tree().get_root().get_node("World/Juniper")
+@onready var pc = f.pc()
+@onready var hud = get_parent().get_node("HUD")
 @onready var items = $MarginContainer/VBoxContainer/Items/ItemList
 @onready var weapon_wheel = $MarginContainer/VBoxContainer/Weapons/MarginContainer/WeaponWheel
 @onready var header = $MarginContainer/VBoxContainer/Description/MarginContainer/VBoxContainer/Header

@@ -3,8 +3,8 @@ extends Control
 const GUNICON = preload("res://src/UI/HUD/GunIcon.tscn")
 const UI_BULLET_FLY = preload("res://src/UI/HUD/UIBulletFly.tscn")
 
-#onready var pc = get_tree().get_root().get_node("World/Juniper")
-@onready var w = get_tree().get_root().get_node("World")
+#onready var pc = f.pc()
+@onready var world = get_tree().get_root().get_node("World")
 
 @export var gun: Node
 @export var ao: Node
@@ -56,21 +56,20 @@ const UI_BULLET_FLY = preload("res://src/UI/HUD/UIBulletFly.tscn")
 var WheelVisible = false
 
 func _ready():
-	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
-	_resolution_scale_changed(vs.resolution_scale)
-
-	if w.has_node("Juniper"):
-		var pc = w.get_node("Juniper")
+	if f.pc():
+		var pc = f.pc()
 		pc.hp_updated.connect(update_hp)
 		pc.guns_updated.connect(update_guns)
 		pc.xp_updated.connect(update_xp)
 		pc.money_updated.connect(update_money)
 		pc.invincibility_end.connect(update_hpflash)
 		pc.setup_hud()
+ vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+ _resolution_scale_changed(vs.resolution_scale)
 
 func _process(_delta):
-	if w.has_node("Juniper"):
-		var pc = w.get_node("Juniper")
+	if f.pc():
+		var pc = f.pc()
 		if pc.guns.get_child(0) != null: #TODO: make this connected via signal
 			cd_progress.visible = true
 			cd_progress.value = 100 - ((pc.get_node("GunManager/CooldownTimer").time_left / pc.guns.get_child(0).cooldown_time) * 100)
@@ -102,7 +101,7 @@ func update_guns(guns, cause = "default", do_xp_flash = false):
 			#hbox.add_child(gun_icon)
 
 	if cause == "fire":
-		var pc = w.get_node("Juniper")
+		var pc = f.pc()
 		var speed: float = 0.8 / pc.guns.get_child(0).cooldown_time
 		var is_infinite: bool = pc.guns.get_child(0).max_ammo == 0
 		ammo_animate("reset")
@@ -154,7 +153,7 @@ func _on_Timer_timeout():
 	#$HBox/Gun/Sprite2D
 
 func ammo_animate(animation, speed: float = -1):
-	var pc = w.get_node("Juniper")
+	var pc = f.pc()
 	if speed == -1:
 		speed = 0.8 / pc.guns.get_child(0).cooldown_time
 

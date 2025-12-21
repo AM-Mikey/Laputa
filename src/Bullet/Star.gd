@@ -12,7 +12,7 @@ var touched_floor = false
 
 
 @onready var w = get_tree().get_root().get_node("World")
-@onready var pc = w.get_node("Juniper")
+@onready var pc = f.pc()
 
 
 
