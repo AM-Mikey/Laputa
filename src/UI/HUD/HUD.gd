@@ -33,7 +33,7 @@ const UI_BULLET_FLY = preload("res://src/UI/HUD/UIBulletFly.tscn")
 @onready var xp_progress = xp_node.get_node("Progress")
 @onready var xp_progress_cap = xp_progress.get_node("Cap")
 @onready var xp_flash = xp_node.get_node("Flash")
-@onready var xp_max = xp_node.get_node("Max")
+@onready var xp_max = get_node("Base/Front/XpMax")
 @onready var xp_num = xp_node.get_node("Num")
 
 @onready var cd_progress = cd.get_node("Progress")

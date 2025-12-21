@@ -1181,13 +1181,6 @@ hframes = 11
 vframes = 6
 frame = 56
 
-[node name="Max" type="Sprite2D" parent="Base/Xp"]
-visible = false
-z_index = 1
-position = Vector2(25, 10)
-texture = ExtResource("13")
-centered = false
-
 [node name="Cooldown" type="Control" parent="Base"]
 anchors_preset = 0
 offset_bottom = 24.0
@@ -1242,6 +1235,12 @@ frame = 10
 
 [node name="Front" type="Sprite2D" parent="Base"]
 texture = ExtResource("9")
+centered = false
+
+[node name="XpMax" type="Sprite2D" parent="Base/Front"]
+visible = false
+position = Vector2(25, 10)
+texture = ExtResource("13")
 centered = false
 
 [node name="Ammo" type="Control" parent="Base"]
