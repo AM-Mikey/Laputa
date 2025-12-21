@@ -13,10 +13,25 @@ var holding_jump = true
 var is_dropping = false
 var did_bonk = false
 
+var jump_time : int = 0
+
 func state_process(_delta):
+	jump_time += 1
 	# Jump holding
 	if pc.can_input and not Input.is_action_pressed("jump"):
 		holding_jump = false
+
+	var squeezing_into_a_corridor : bool
+	if pc.move_dir.x == 0 || pc.velocity.y > -0.1 || jump_time <= 3:
+		squeezing_into_a_corridor = false
+	elif pc.move_dir.x < 0:
+		squeezing_into_a_corridor = pc.get_node("LeftJumpGroundFinder").is_colliding() && pc.get_node("LeftJumpBonkFinder").is_colliding()
+	else:
+		squeezing_into_a_corridor = pc.get_node("RightJumpGroundFinder").is_colliding() && pc.get_node("RightJumpBonkFinder").is_colliding()
+
+	if squeezing_into_a_corridor:
+		pc.velocity.y = maxf(pc.velocity.y, 0.1)
+		print("Corridor squeezing ate the vertical velocity!")
 
 	set_player_directions()
 	pc.velocity = calc_velocity()
@@ -143,6 +158,7 @@ func get_vframe() -> int:
 ### STATES ###			#TODO: juniper's hurtbox becomes much smaller when jumping
 
 func enter():
+	jump_time = 0
 	var disable = [
 		pc.get_node("CollisionShape2D"),
 		pc.get_node("CrouchingCollision")]
