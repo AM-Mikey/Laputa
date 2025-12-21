@@ -723,17 +723,17 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Spider" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Octopus" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
-position = Vector2(200, -400)
+position = Vector2(200, -368)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_jjgiq")
-actor_path = "res://src/Actor/Enemy/Spider.tscn"
+actor_path = "res://src/Actor/Enemy/Octopus.tscn"
 properties = {
 "base_gravity": [300.0, 3],
-"debug": [false, 1],
+"debug": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -741,7 +741,7 @@ properties = {
 }
 
 [node name="Waypoint" type="Area2D" parent="." groups=["Entities", "VisualUtilities", "Waypoints"] instance=ExtResource("9_20ig1")]
-modulate = Color(0.54509807, 0, 0, 1)
+modulate = Color(1, 0, 0, 1)
 position = Vector2(-72, 0)
 collision_layer = 16384
 collision_mask = 0
