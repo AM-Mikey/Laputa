@@ -64,8 +64,8 @@ func _ready():
 		pc.money_updated.connect(update_money)
 		pc.invincibility_end.connect(update_hpflash)
 		pc.setup_hud()
- vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
- _resolution_scale_changed(vs.resolution_scale)
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
 
 func _process(_delta):
 	if f.pc():
@@ -212,8 +212,8 @@ func update_hp(hp: int, max_hp: int, cause: String) -> void:
 	else:
 		if hp < hp_lost.value:
 			if hp > 0:
-				w.get_node("HUDLayer/HUDAnimator").stop()
-				w.get_node("HUDLayer/HUDAnimator").play("Flash")
+				world.get_node("HUDLayer/HUDAnimator").stop()
+				world.get_node("HUDLayer/HUDAnimator").play("Flash")
 				var tween = get_tree().create_tween()
 				tween.tween_property(hp_lost, "value", hp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
 		else: #increasing, just set it
@@ -326,7 +326,7 @@ func update_money(money):
 		printerr("ERROR: hud cannot display money value of: " + money)
 
 func update_hpflash():
-	w.get_node("HUDLayer/HUDAnimator").stop()
+	world.get_node("HUDLayer/HUDAnimator").stop()
 
 ### HELPER ###
 
