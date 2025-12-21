@@ -207,7 +207,7 @@ func update_hp(hp: int, max_hp: int, cause: String) -> void:
 	hp_progress.max_value = max_hp
 	hp_lost.max_value = max_hp
 
-	if (cause in ["setup", "save"]):
+	if (cause in ["setup", "load_game"]):
 		hp_lost.value = hp
 	else:
 		if hp < hp_lost.value:
@@ -301,6 +301,7 @@ func update_ammo(_have, _maximum): #TODO: do we use this?
 
 
 func update_money(money):
+	print("Money: ", money)
 	mon_1.visible = true
 	mon_2.visible = true
 	mon_3.visible = true
