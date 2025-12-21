@@ -81,7 +81,7 @@ func read_player_data_from_save():
 		if g.max_ammo != 0:
 			g.ammo = player_data["gun_data"][g.name]["ammo"]
 
-	pc.emit_signal("hp_updated", pc.hp, pc.max_hp)
+	pc.emit_signal("hp_updated", pc.hp, pc.max_hp, "save")
 	pc.emit_signal("invincibility_end")
 	pc.emit_signal("guns_updated", guns.get_children())
 	pc.update_inventory()

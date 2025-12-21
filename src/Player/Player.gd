@@ -12,7 +12,7 @@ const PLAYER_DAMAGE_NUMBER = preload("res://src/Effect/PlayerDamageNumber.tscn")
 const EXPERIENCE_NUMBER = preload("res://src/Effect/ExperienceNumber.tscn")
 const HEART_NUMBER = preload("res://src/Effect/HeartNumber.tscn")
 
-signal hp_updated(hp, max_hp)
+signal hp_updated(hp, max_hp, cause)
 signal guns_updated(guns, cause, do_xp_flash)
 signal xp_updated(xp, max_xp, level, max_level, do_xp_flash)
 signal money_updated(money)
@@ -129,7 +129,7 @@ func hit(damage, knockback_direction):
 		if damage > 0:
 			hp -= damage
 			am.play("pc_hurt")
-			emit_signal("hp_updated", hp, max_hp)
+			emit_signal("hp_updated", hp, max_hp, "take_damage")
 			if experience_number != null: experience_number.queue_free()
 			if heart_number != null: heart_number.queue_free()
 			if damage_number == null: #no damage_number
@@ -258,7 +258,7 @@ func _on_ItemDetector_area_entered(area):
 				heart_number.reset()
 
 		world.get_node("Front").add_child(heart_get)
-		emit_signal("hp_updated", hp, max_hp)
+		emit_signal("hp_updated", hp, max_hp, "hp_pickup")
 		heart_pickup.queue_free()
 
 
@@ -328,7 +328,7 @@ func update_inventory():
 
 func setup_hud():
 	var active_gun = guns.get_child(0)
-	emit_signal("hp_updated", hp, max_hp)
+	emit_signal("hp_updated", hp, max_hp, "setup")
 	emit_signal("guns_updated", guns.get_children(), "setup")
 	emit_signal("xp_updated", active_gun.xp, active_gun.max_xp, active_gun.level, active_gun.max_level)
 	emit_signal("money_updated", money)

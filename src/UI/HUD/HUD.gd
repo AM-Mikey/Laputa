@@ -202,20 +202,23 @@ func ammo_animate(animation, speed: float = -1):
 		elif animation == "reset":
 			ammo_bottom_animator.play("ResetInfinite")
 
-func update_hp(hp, max_hp):
+func update_hp(hp: int, max_hp: int, cause: String) -> void:
 	hp_progress.value = hp
 	display_hp_number(hp, max_hp)
 	hp_progress.max_value = max_hp
 	hp_lost.max_value = max_hp
 
-	if hp < hp_lost.value:
-		if hp > 0:
-			w.get_node("HUDLayer/HUDAnimator").stop()
-			w.get_node("HUDLayer/HUDAnimator").play("Flash")
-			var tween = get_tree().create_tween()
-			tween.tween_property(hp_lost, "value", hp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
-	else: #increasing, just set it
+	if (cause in ["setup", "save"]):
 		hp_lost.value = hp
+	else:
+		if hp < hp_lost.value:
+			if hp > 0:
+				w.get_node("HUDLayer/HUDAnimator").stop()
+				w.get_node("HUDLayer/HUDAnimator").play("Flash")
+				var tween = get_tree().create_tween()
+				tween.tween_property(hp_lost, "value", hp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
+		else: #increasing, just set it
+			hp_lost.value = hp
 
 
 func display_hp_number(hp, max_hp):
