@@ -64,6 +64,7 @@ func _ready():
 		pc.money_updated.connect(update_money)
 		pc.invincibility_end.connect(update_hpflash)
 		pc.setup_hud()
+		setup_bars(pc.hp, pc.max_hp, pc.guns.get_child(0).xp, pc.guns.get_child(0).max_xp)
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 
@@ -79,8 +80,8 @@ func _process(_delta):
 func update_guns(guns, cause = "default", do_xp_flash = false):
 	#var main_icon = gun.get_node("GunIcon")
 
-	if cause == "setup": #Have to do this because guns are only properly setup here to get data. If in ready(), have to wait 2 frames
-		setup_bars(f.pc().hp, f.pc().max_hp, guns[0].xp, guns[0].max_xp)
+	if cause == "load_game":
+		ammo_animate("reload")
 
 	if cause == "shiftleft":
 		display_weapon_wheel(guns, "CCW")
