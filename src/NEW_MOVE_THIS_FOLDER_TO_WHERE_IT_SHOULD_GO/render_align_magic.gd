@@ -5,7 +5,7 @@ extends Control
 @onready var base_position: Node2D = %"base position"
 
 func _viewport_size_changed():
-	sub_viewport.size = get_viewport().size
+	sub_viewport.size = get_viewport().size + Vector2i(20,20)
 
 func _ready() -> void:
 	var _err = get_tree().root.connect("size_changed", Callable(self, "_viewport_size_changed"))
