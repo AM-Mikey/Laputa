@@ -5,4 +5,4 @@ extends Node2D
 func _process(_delta: float) -> void:
 	var offset := self.global_position.round() - self.global_position
 	child.position = offset
-	$"../../..".position = offset * 4 - Vector2(10,10)
+	$"../../..".position = offset * vs.resolution_scale - Vector2(10,10)
