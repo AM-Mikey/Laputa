@@ -81,8 +81,7 @@ func update_guns(guns, cause = "default", do_xp_flash = false):
 	#var main_icon = gun.get_node("GunIcon")
 
 	if cause == "load_game":
-		ammo_animate("reload")
-
+		ammo_animate("reload", 3.0)
 	if cause == "shiftleft":
 		display_weapon_wheel(guns, "CCW")
 		ammo_animate("reload", 5.0)
@@ -131,14 +130,15 @@ func display_weapon_wheel(guns, rot_dir: String):
 				weapon_wheel.get_node("Bullet1/Gun").texture = guns[0].icon_texture
 				weapon_wheel.get_node("Bullet2/Gun").texture = guns[1].icon_small_texture
 				weapon_wheel.get_node("Bullet3/Gun").texture = guns[2].icon_small_texture
+				weapon_wheel.get_node("Bullet4/Gun").texture = guns[-3].icon_small_texture
 				weapon_wheel.get_node("Bullet5/Gun").texture = guns[-2].icon_small_texture
 				weapon_wheel.get_node("Bullet6/Gun").texture = guns[-1].icon_small_texture
 		"CCW":
 				weapon_wheel_animator.play("CCW", -1, 4.0)
-				#await get_tree().create_timer(0.8) #i still dont know why but i dont ask questions
 				weapon_wheel.get_node("Bullet1/Gun").texture = guns[0].icon_texture
 				weapon_wheel.get_node("Bullet2/Gun").texture = guns[1].icon_small_texture
 				weapon_wheel.get_node("Bullet3/Gun").texture = guns[2].icon_small_texture
+				weapon_wheel.get_node("Bullet4/Gun").texture = guns[-3].icon_small_texture
 				weapon_wheel.get_node("Bullet5/Gun").texture = guns[-2].icon_small_texture
 				weapon_wheel.get_node("Bullet6/Gun").texture = guns[-1].icon_small_texture
 
