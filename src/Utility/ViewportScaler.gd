@@ -15,8 +15,6 @@ func _viewport_size_changed():
 	#if camera:
 		#camera.position_smoothing_enabled = false
 
-	RenderAlignMagic.sub_viewport.size = get_viewport().size
-
 	var viewport_size = get_tree().get_root().size
 	var tiles_visible_y = 15.0
 	var urs = viewport_size.y / (16.0 * tiles_visible_y)
