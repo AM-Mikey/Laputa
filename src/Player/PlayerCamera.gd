@@ -1,8 +1,6 @@
-extends Node2D
+extends Camera2D
 
 const BLACKBAR = preload("res://src/Utility/BlackBar.tscn")
-@onready var camera: Camera2D = RenderAlignMagic.camera
-@onready var offset: Node2D = RenderAlignMagic.offset
 
 var h_dir = -1
 var homing_camera = false
@@ -25,10 +23,6 @@ func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 
-func _process(_delta: float) -> void:
-	RenderAlignMagic.base_position.global_position = self.global_position
-	%Camera2D.position = Vector2(100000, 100000)
-
 func _physics_process(_delta):
 	if h_dir != pc.look_dir.x:
 		h_dir = pc.look_dir.x
@@ -46,18 +40,18 @@ func _physics_process(_delta):
 ### MAIN ###
 
 func pan_vertical(dir):
-	var dist = (v_pan_distance / vs.resolution_scale) * (270.0 / 2.0)
+	var dist = v_pan_distance / vs.resolution_scale
 	if v_tween:
 		v_tween.kill()
 	v_tween = create_tween()
-	v_tween.tween_property(offset, "position:y", dir * dist, v_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(v_pan_delay)
+	v_tween.tween_property(self, "drag_vertical_offset", dir * dist, v_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(v_pan_delay)
 
 func pan_horizontal(dir):
-	var dist = (h_pan_distance / vs.resolution_scale) * (480.0 / 2.0)
+	var dist = h_pan_distance / vs.resolution_scale
 	if h_tween:
 		h_tween.kill()
 	h_tween = create_tween()
-	h_tween.tween_property(offset, "position:x", dir * dist, h_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(h_pan_delay)
+	h_tween.tween_property(self, "drag_horizontal_offset", dir * dist, h_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(h_pan_delay)
 
 func stop_tween():
 	h_tween.kill()
@@ -90,11 +84,11 @@ func on_limit_camera(left, right, top, bottom):
 		Vector2(thickness, window_height), \
 		Vector2((right - left) + thickness, 0))
 
-		camera.limit_left = left - thickness
-		camera.limit_right = right + thickness
+		limit_left = left - thickness
+		limit_right = right + thickness
 	else:
-		camera.limit_left = left
-		camera.limit_right = right
+		limit_left = left
+		limit_right = right
 
 	if get_window().get_size().y > (bottom - top) * vs.resolution_scale:
 		#print("WARNING: window height larger than camera limit")
@@ -107,11 +101,11 @@ func on_limit_camera(left, right, top, bottom):
 		Vector2(window_width, thickness + 16), \
 		Vector2(0, (bottom - top) + thickness))  #16 for overscan safety
 
-		camera.limit_top = top - thickness
-		camera.limit_bottom = bottom + thickness
+		limit_top = top - thickness
+		limit_bottom = bottom + thickness
 	else:
-		camera.limit_top = top
-		camera.limit_bottom = bottom
+		limit_top = top
+		limit_bottom = bottom
 
 func spawn_black_bar(bar_name, size, bar_position):
 		var bar = BLACKBAR.instantiate()
@@ -126,4 +120,4 @@ func spawn_black_bar(bar_name, size, bar_position):
 ### SIGNALS ###
 
 func _resolution_scale_changed(resolution_scale):
-	camera.zoom = Vector2(resolution_scale, resolution_scale)
+	zoom = Vector2(resolution_scale, resolution_scale)
