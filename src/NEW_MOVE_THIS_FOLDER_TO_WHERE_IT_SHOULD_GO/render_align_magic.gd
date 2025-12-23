@@ -14,7 +14,7 @@ func _ready() -> void:
 	get_viewport().canvas_cull_mask = 1
 	sub_viewport.canvas_cull_mask = 2
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var active_cam := get_viewport().get_camera_2d()
 	base_position.global_position = active_cam.get_screen_center_position()
 	camera.zoom = active_cam.zoom

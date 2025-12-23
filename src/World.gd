@@ -34,6 +34,7 @@ var internal_version: String = get_internal_version()
 func child_layer_set(c: Node):
 	if c == self:
 		return
+	print(c)
 	c.child_entered_tree.connect(child_layer_set)
 	if c is CanvasItem:
 		c.visibility_layer = 2
