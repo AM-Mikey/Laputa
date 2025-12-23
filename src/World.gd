@@ -31,7 +31,23 @@ var internal_version: String = get_internal_version()
 @onready var middle = $Middle
 @onready var back = $Back
 
+func child_layer_set(c: Node):
+	if c == self:
+		return
+	print(c)
+	c.child_entered_tree.connect(child_layer_set)
+	if c is CanvasItem:
+		c.visibility_layer = 2
+
 func _ready():
+
+	self.visibility_layer = 2
+	self.child_entered_tree.connect(child_layer_set)
+	for node: Node in [front, middle, back]:
+		if node is CanvasItem:
+			node.visibility_layer = 2
+		node.child_entered_tree.connect(child_layer_set)
+
 	if not do_skip_title: #TODO: update this
 		ml.add_child(TITLE.instantiate())
 		add_child(TITLECAM.instantiate())
