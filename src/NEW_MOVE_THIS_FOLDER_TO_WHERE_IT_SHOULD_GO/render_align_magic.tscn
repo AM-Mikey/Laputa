@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://5iamg3dn2key"]
+
+[ext_resource type="Script" uid="uid://y1dudl2wg4ui" path="res://src/NEW_MOVE_THIS_FOLDER_TO_WHERE_IT_SHOULD_GO/render_align_magic.gd" id="1_waqyo"]
+[ext_resource type="Script" uid="uid://dgmq3eqt3wg32" path="res://src/NEW_MOVE_THIS_FOLDER_TO_WHERE_IT_SHOULD_GO/rounder.gd" id="2_8aqwj"]
+
+[node name="RenderAlignMagic" type="Control"]
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_waqyo")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+unique_name_in_owner = true
+handle_input_locally = false
+size = Vector2i(480, 270)
+render_target_update_mode = 4
+
+[node name="rounder" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+script = ExtResource("2_8aqwj")
+
+[node name="Camera2D" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport/rounder"]
+unique_name_in_owner = true

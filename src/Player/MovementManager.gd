@@ -149,9 +149,10 @@ func enable_collision_shapes(array):
 
 
 func align_to_proper_y():
-	var abs_offset = abs(pc.position.y - round(pc.position.y))
-	if 0.0 < abs_offset and abs_offset < 0.1:
-		pc.position.y = round(pc.position.y)
+	pass
+	#var abs_offset = abs(pc.position.y - round(pc.position.y))
+	#if 0.0 < abs_offset and abs_offset < 0.1:
+		#pc.position.y = round(pc.position.y)
 
 
 

@@ -12,8 +12,8 @@ func _ready():
 
 func _viewport_size_changed():
 	var camera = get_viewport().get_camera_2d()
-	if camera:
-		camera.position_smoothing_enabled = false
+	#if camera:
+		#camera.position_smoothing_enabled = false
 
 	var viewport_size = get_tree().get_root().size
 	var tiles_visible_y = 15.0
@@ -35,5 +35,5 @@ func _viewport_size_changed():
 
 	emit_signal("scale_changed", resolution_scale)
 	await get_tree().process_frame
-	if camera:
-		camera.position_smoothing_enabled = true
+	#if camera:
+		#camera.position_smoothing_enabled = true

@@ -25,7 +25,10 @@ func _input(event):
 			w.el.get_node("Editor/Main/Win/Tab").current_tab = editor_tab
 			w.el.get_node("Editor").on_tab_changed(editor_tab)
 
-	if event.is_action_pressed("debug_print"):
+	
+
+	if event.is_action_pressed("debug_print") or (event.as_text() == "7" and event.is_pressed()):
+		print("WHAT")
 		debug_print()
 
 

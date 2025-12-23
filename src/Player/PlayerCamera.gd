@@ -1,6 +1,8 @@
-extends Camera2D
+extends Node2D
 
 const BLACKBAR = preload("res://src/Utility/BlackBar.tscn")
+@onready var camera: Camera2D = %Camera2D
+@onready var rounder: Node2D = %rounder
 
 var h_dir = -1
 var homing_camera = false
@@ -40,18 +42,18 @@ func _physics_process(_delta):
 ### MAIN ###
 
 func pan_vertical(dir):
-	var dist = v_pan_distance / vs.resolution_scale
+	var dist = (v_pan_distance / vs.resolution_scale) * (270.0 / 2.0)
 	if v_tween:
 		v_tween.kill()
 	v_tween = create_tween()
-	v_tween.tween_property(self, "drag_vertical_offset", dir * dist, v_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(v_pan_delay)
+	v_tween.tween_property(rounder, "position:y", dir * dist, v_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(v_pan_delay)
 
 func pan_horizontal(dir):
-	var dist = h_pan_distance / vs.resolution_scale
+	var dist = (h_pan_distance / vs.resolution_scale) * (480.0 / 2.0)
 	if h_tween:
 		h_tween.kill()
 	h_tween = create_tween()
-	h_tween.tween_property(self, "drag_horizontal_offset", dir * dist, h_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(h_pan_delay)
+	h_tween.tween_property(rounder, "position:x", dir * dist, h_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(h_pan_delay)
 
 func stop_tween():
 	h_tween.kill()
@@ -84,11 +86,11 @@ func on_limit_camera(left, right, top, bottom):
 		Vector2(thickness, window_height), \
 		Vector2((right - left) + thickness, 0))
 
-		limit_left = left - thickness
-		limit_right = right + thickness
+		camera.limit_left = left - thickness
+		camera.limit_right = right + thickness
 	else:
-		limit_left = left
-		limit_right = right
+		camera.limit_left = left
+		camera.limit_right = right
 
 	if get_window().get_size().y > (bottom - top) * vs.resolution_scale:
 		#print("WARNING: window height larger than camera limit")
@@ -101,11 +103,11 @@ func on_limit_camera(left, right, top, bottom):
 		Vector2(window_width, thickness + 16), \
 		Vector2(0, (bottom - top) + thickness))  #16 for overscan safety
 
-		limit_top = top - thickness
-		limit_bottom = bottom + thickness
+		camera.limit_top = top - thickness
+		camera.limit_bottom = bottom + thickness
 	else:
-		limit_top = top
-		limit_bottom = bottom
+		camera.limit_top = top
+		camera.limit_bottom = bottom
 
 func spawn_black_bar(bar_name, size, bar_position):
 		var bar = BLACKBAR.instantiate()
@@ -120,4 +122,4 @@ func spawn_black_bar(bar_name, size, bar_position):
 ### SIGNALS ###
 
 func _resolution_scale_changed(resolution_scale):
-	zoom = Vector2(resolution_scale, resolution_scale)
+	camera.zoom = Vector2(resolution_scale, resolution_scale)

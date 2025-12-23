@@ -88,7 +88,7 @@ func read_player_data_from_save():
 	print("player data loaded")
 
 	await get_tree().process_frame
-	pc.get_node("PlayerCamera").position_smoothing_enabled = true
+	#pc.get_node("PlayerCamera").position_smoothing_enabled = true
 
 
 
