@@ -79,21 +79,23 @@ func _process(_delta):
 
 func update_guns(guns, cause = "default", do_xp_flash = false):
 	#var main_icon = gun.get_node("GunIcon")
-
 	if cause == "load_game":
 		ammo_animate("reload", 3.0)
-	if cause == "shiftleft":
+
+	if cause == "shift_left":
 		display_weapon_wheel(guns, "CCW")
 		ammo_animate("reload", 5.0)
-	if cause == "shiftright":
+	elif cause == "shift_right":
 		display_weapon_wheel(guns, "CW")
 		ammo_animate("reload", 5.0)
 
-	for g in guns:
-		if guns.find(g) == 0: #main gun
+	if (cause not in ["fire", "get_ammo"]):
+		var g: Gun = guns[0]
+		update_xp(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash, cause)
+
+	#for g in guns:
+		#if guns.find(g) == 0: #main gun
 			#main_icon.texture = g["icon_texture"]s
-			if (cause not in ["fire", "get_ammo"]):
-				update_xp(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash, cause)
 			#update_ammo(g.ammo, g.max_ammo)a
 		#else:
 			#var gun_icon = GUNICON.instantiate() #all other
@@ -114,7 +116,7 @@ func update_guns(guns, cause = "default", do_xp_flash = false):
 		var ui_bullet_fly = UI_BULLET_FLY.instantiate()
 		ui_bullet_fly.is_infinite = is_infinite
 		ammo_fly.add_child(ui_bullet_fly)
-	if cause == "getammo":
+	if cause == "get_ammo":
 		ammo_animate("reload", 5.0)
 
 
@@ -208,7 +210,7 @@ func update_hp(hp: int, max_hp: int, cause: String) -> void:
 	hp_progress.max_value = max_hp
 	hp_lost.max_value = max_hp
 
-	if (cause in ["setup", "load_game"]):
+	if (cause in ["set_up", "load_game"]):
 		hp_lost.value = hp
 	else:
 		if hp < hp_lost.value:
@@ -266,7 +268,7 @@ func update_xp(xp: float, max_xp: float, level: int, max_level: int, do_xp_flash
 	if (xp_tween):
 		xp_tween.kill()
 
-	if (cause in ["shiftleft", "shiftright"]):
+	if (cause in ["shift_left", "shift_right"]):
 		if (xp_max.visible): # Set the animation's start to 100 if the prev gun was at max xp
 			xp_progress.value = xp_progress.max_value
 		else:
@@ -278,10 +280,10 @@ func update_xp(xp: float, max_xp: float, level: int, max_level: int, do_xp_flash
 		xp_tween = get_tree().create_tween().set_parallel()
 		xp_tween.tween_property(xp_progress, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		xp_tween.tween_property(xp_lost, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	elif (cause == "levelup"):
+	elif (cause == "level_up"):
 		xp_lost.value = xp
 	else:
-		if (cause == "leveldown"):
+		if (cause == "level_down"):
 			xp_lost.value = xp_lost.max_value
 		if xp < xp_lost.value:
 			xp_tween = get_tree().create_tween()
