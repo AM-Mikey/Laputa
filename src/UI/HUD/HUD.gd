@@ -302,7 +302,6 @@ func update_ammo(_have, _maximum): #TODO: do we use this?
 
 
 func update_money(money):
-	print("Money: ", money)
 	mon_1.visible = true
 	mon_2.visible = true
 	mon_3.visible = true
