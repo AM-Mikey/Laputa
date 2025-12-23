@@ -114,7 +114,7 @@ func _input(event):
 func first_time_level_setup():
 	print("first time level setup")
 	add_child(JUNIPER.instantiate())
-	#$Juniper/PlayerCamera.position_smoothing_enabled = false
+	$Juniper/PlayerCamera.position_smoothing_enabled = false
 	uig.add_child(HUD.instantiate())
 
 	current_level = load(start_level_path).instantiate()
@@ -137,8 +137,8 @@ func first_time_level_setup():
 	display_level_text(current_level)
 	SaveSystem.read_level_data_from_temp(current_level)
 
-	#await(get_tree().process_frame)
-	#$Juniper/PlayerCamera.position_smoothing_enabled = true
+	await(get_tree().process_frame)
+	$Juniper/PlayerCamera.position_smoothing_enabled = true
 
 
 func change_level_via_code(level_path):
@@ -184,7 +184,7 @@ func change_level_via_code(level_path):
 	SaveSystem.read_level_data_from_temp(current_level)
 
 	await get_tree().process_frame
-	#$Juniper/PlayerCamera.position_smoothing_enabled = true
+	$Juniper/PlayerCamera.position_smoothing_enabled = true
 
 
 func change_level_via_trigger(level_path, door_index):
@@ -249,8 +249,8 @@ func change_level_via_trigger(level_path, door_index):
 		$Juniper.can_input = true
 
 	display_level_text(current_level)
-	#await get_tree().create_timer(0.01).timeout
-	#$Juniper/PlayerCamera.position_smoothing_enabled = true
+	await get_tree().create_timer(0.01).timeout
+	$Juniper/PlayerCamera.position_smoothing_enabled = true
 
 	if current_level.level_type == current_level.LevelType.PLAYERLESS_CUTSCENE:
 		#TODO: right now juniper isn't unloaded between levels
