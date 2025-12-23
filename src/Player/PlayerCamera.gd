@@ -2,7 +2,7 @@ extends Node2D
 
 const BLACKBAR = preload("res://src/Utility/BlackBar.tscn")
 @onready var camera: Camera2D = RenderAlignMagic.camera
-@onready var rounder: Node2D = RenderAlignMagic.rounder
+@onready var offset: Node2D = RenderAlignMagic.offset
 
 var h_dir = -1
 var homing_camera = false
@@ -50,14 +50,14 @@ func pan_vertical(dir):
 	if v_tween:
 		v_tween.kill()
 	v_tween = create_tween()
-	v_tween.tween_property(rounder, "position:y", dir * dist, v_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(v_pan_delay)
+	v_tween.tween_property(offset, "position:y", dir * dist, v_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(v_pan_delay)
 
 func pan_horizontal(dir):
 	var dist = (h_pan_distance / vs.resolution_scale) * (480.0 / 2.0)
 	if h_tween:
 		h_tween.kill()
 	h_tween = create_tween()
-	h_tween.tween_property(rounder, "position:x", dir * dist, h_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(h_pan_delay)
+	h_tween.tween_property(offset, "position:x", dir * dist, h_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(h_pan_delay)
 
 func stop_tween():
 	h_tween.kill()

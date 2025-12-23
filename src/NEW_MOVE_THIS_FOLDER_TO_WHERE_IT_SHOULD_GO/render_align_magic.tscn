@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://5iamg3dn2key"]
+[gd_scene load_steps=4 format=3 uid="uid://5iamg3dn2key"]
 
 [ext_resource type="Script" uid="uid://y1dudl2wg4ui" path="res://src/NEW_MOVE_THIS_FOLDER_TO_WHERE_IT_SHOULD_GO/render_align_magic.gd" id="1_waqyo"]
 [ext_resource type="Script" uid="uid://dgmq3eqt3wg32" path="res://src/NEW_MOVE_THIS_FOLDER_TO_WHERE_IT_SHOULD_GO/rounder.gd" id="2_8aqwj"]
+[ext_resource type="Script" uid="uid://sqvxmeuvlnvv" path="res://src/NEW_MOVE_THIS_FOLDER_TO_WHERE_IT_SHOULD_GO/smoother.gd" id="3_gddhe"]
 
 [node name="RenderAlignMagic" type="Control"]
 z_index = 100
@@ -34,11 +35,20 @@ render_target_update_mode = 4
 [node name="base position" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
 
-[node name="rounder" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport/base position"]
+[node name="offset" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport/base position"]
+unique_name_in_owner = true
+
+[node name="smoother" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport/base position/offset" node_paths=PackedStringArray("follower")]
+script = ExtResource("3_gddhe")
+follower = NodePath("../../../base 2")
+
+[node name="base 2" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+
+[node name="rounder" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport/base 2"]
 unique_name_in_owner = true
 script = ExtResource("2_8aqwj")
 
-[node name="Camera2D" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport/base position/rounder"]
+[node name="Camera2D" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport/base 2/rounder"]
 unique_name_in_owner = true
 
 [node name="fake bg" type="TextureRect" parent="CanvasLayer"]
