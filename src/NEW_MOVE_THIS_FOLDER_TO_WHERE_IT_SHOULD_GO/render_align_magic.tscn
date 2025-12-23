@@ -16,6 +16,7 @@ script = ExtResource("1_waqyo")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,12 +25,22 @@ grow_vertical = 2
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
 unique_name_in_owner = true
+transparent_bg = true
 handle_input_locally = false
+canvas_item_default_texture_filter = 0
 size = Vector2i(480, 270)
 render_target_update_mode = 4
 
-[node name="rounder" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+[node name="base position" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+
+[node name="rounder" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport/base position"]
+unique_name_in_owner = true
 script = ExtResource("2_8aqwj")
 
-[node name="Camera2D" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport/rounder"]
+[node name="Camera2D" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport/base position/rounder"]
 unique_name_in_owner = true
+
+[node name="fake bg" type="TextureRect" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0

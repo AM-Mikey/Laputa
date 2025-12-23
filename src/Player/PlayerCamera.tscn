@@ -6,10 +6,7 @@
 position = Vector2(0, -16)
 script = ExtResource("1")
 
-[node name="rounder" type="Node2D" parent="."]
-unique_name_in_owner = true
-
-[node name="Camera2D" type="Camera2D" parent="rounder"]
+[node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
 limit_enabled = false
 editor_draw_drag_margin = true

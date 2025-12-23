@@ -1,8 +1,8 @@
 extends Node2D
 
 const BLACKBAR = preload("res://src/Utility/BlackBar.tscn")
-@onready var camera: Camera2D = %Camera2D
-@onready var rounder: Node2D = %rounder
+@onready var camera: Camera2D = RenderAlignMagic.camera
+@onready var rounder: Node2D = RenderAlignMagic.rounder
 
 var h_dir = -1
 var homing_camera = false
@@ -24,6 +24,10 @@ var v_tween: Tween
 func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
+
+func _process(_delta: float) -> void:
+	RenderAlignMagic.base_position.global_position = self.global_position
+	%Camera2D.position = Vector2(100000, 100000)
 
 func _physics_process(_delta):
 	if h_dir != pc.look_dir.x:

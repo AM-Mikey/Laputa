@@ -64,6 +64,7 @@ config/icon="uid://b42so8fnnp3uq"
 
 [autoload]
 
+RenderAlignMagic="*res://src/NEW_MOVE_THIS_FOLDER_TO_WHERE_IT_SHOULD_GO/render_align_magic.tscn"
 am="*res://src/Audio/AudioManager.gd"
 DebugHotkeys="*res://src/Utility/DebugHotkeys.gd"
 mc="*res://src/UI/MouseCursor.gd"
@@ -71,7 +72,6 @@ SaveSystem="*res://src/Utility/SaveSystem.gd"
 f="*res://src/Utility/Finder.gd"
 vs="*res://src/Utility/ViewportScaler.gd"
 inp="*res://src/Utility/InputSystem.gd"
-RenderAlignMagic="*res://src/NEW_MOVE_THIS_FOLDER_TO_WHERE_IT_SHOULD_GO/render_align_magic.tscn"
 
 [display]
 
