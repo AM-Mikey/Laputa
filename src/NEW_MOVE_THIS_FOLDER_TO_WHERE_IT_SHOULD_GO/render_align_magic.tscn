@@ -17,7 +17,6 @@ script = ExtResource("1_waqyo")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
-visibility_layer = 2
 texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0

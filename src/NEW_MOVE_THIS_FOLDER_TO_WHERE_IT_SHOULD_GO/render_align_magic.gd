@@ -11,8 +11,8 @@ func _ready() -> void:
 	var _err = get_tree().root.connect("size_changed", Callable(self, "_viewport_size_changed"))
 	_viewport_size_changed()
 	sub_viewport.world_2d = get_world_2d()
-	get_viewport().canvas_cull_mask = 2
-	sub_viewport.canvas_cull_mask = 1
+	get_viewport().canvas_cull_mask = 1
+	sub_viewport.canvas_cull_mask = 2
 
 func _process(_delta: float) -> void:
 	var active_cam := get_viewport().get_camera_2d()

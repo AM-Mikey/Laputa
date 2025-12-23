@@ -31,7 +31,18 @@ var internal_version: String = get_internal_version()
 @onready var middle = $Middle
 @onready var back = $Back
 
+func child_layer_set(c: Node):
+	if c == self:
+		return
+	c.child_entered_tree.connect(child_layer_set)
+	if c is CanvasItem:
+		c.visibility_layer = 2
+
 func _ready():
+	
+	self.visibility_layer = 2
+	self.child_entered_tree.connect(child_layer_set)
+	
 	if not do_skip_title: #TODO: update this
 		ml.add_child(TITLE.instantiate())
 		add_child(TITLECAM.instantiate())
@@ -48,9 +59,6 @@ func _ready():
 	# Apply them to the root window as the minimum size
 	var main_window = get_tree().get_root()
 	main_window.set_min_size(Vector2i(width, height))
-
-	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
-	_resolution_scale_changed(vs.resolution_scale)
 
 
 
@@ -124,11 +132,10 @@ func first_time_level_setup():
 
 	match current_level.level_type:
 		current_level.LevelType.NORMAL:
-			pass
-			#if current_level.has_node("LevelCamera"):
-				#$Juniper/PlayerCamera.enabled = false
-			#else:
-				#$Juniper/PlayerCamera.enabled = true
+			if current_level.has_node("LevelCamera"):
+				$Juniper/PlayerCamera.enabled = false
+			else:
+				$Juniper/PlayerCamera.enabled = true
 		current_level.LevelType.PLAYERLESS_CUTSCENE:
 			$Juniper.queue_free()
 			$UILayer/UIGroup/HUD.queue_free()
