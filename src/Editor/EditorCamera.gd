@@ -29,7 +29,7 @@ var mmb_held = false
 func _ready():
 	zoom = Vector2(vs.resolution_scale, vs.resolution_scale)
 	current_zoom_index = zooms.find(float(vs.resolution_scale))
-	global_position = w.get_node("Juniper/PlayerCamera").global_position
+	global_position = f.pc().get_node("PlayerCamera").global_position
 
 func _input(event):
 	if event.is_action_pressed("editor_mmb"):

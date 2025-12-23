@@ -77,7 +77,7 @@ func _ready():
 func setup_level(): #TODO: clear undo history
 	#emit_signal("level_selected", w.current_level)
 	setup_windows()
-	w.get_node("Juniper").disable()
+	f.pc().disable()
 	f.hud().queue_free()
 	w.ui.visible = false
 	w.bl.visible = false
@@ -161,9 +161,9 @@ func exit():	#TODO: make this an editor_exit signal ## no? that just decentraliz
 	w.ui.visible = true
 	w.bl.visible = true
 	mc.display("arrow")
-	w.get_node("Juniper").enable()
-	w.get_node("Juniper/PlayerCamera").enabled = true
-	w.get_node("Juniper/PlayerCamera").make_current()
+	f.pc().enable()
+	f.pc().get_node("PlayerCamera").enabled = true
+	f.pc().get_node("PlayerCamera").make_current()
 	w.current_level.get_node("LevelLimiter").setup() #must be after camera setup
 	#set_entities_pickable(false)
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
