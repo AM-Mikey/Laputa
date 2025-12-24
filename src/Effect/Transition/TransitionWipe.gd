@@ -31,5 +31,5 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _resolution_scale_changed(resolution_scale):
-	var viewport_size = get_tree().get_root().size / resolution_scale
+	var viewport_size = RenderAlign.sub_viewport.size / resolution_scale
 	$MarginContainer.size = viewport_size
