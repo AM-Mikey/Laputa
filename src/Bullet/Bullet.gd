@@ -42,7 +42,7 @@ func do_fizzle(type: String):
 	fizzle.position = $End.global_position if has_node("End") else global_position
 	fizzle.play()
 	if instant_fizzle and not is_enemy_bullet:
-		var gun = world.get_node("Juniper").guns.get_child(0)
+		var gun = f.pc().guns.get_child(0)
 		var gun_center = gun.global_position
 		var space_state = get_world_2d().direct_space_state
 		# use global coordinates, not local to node

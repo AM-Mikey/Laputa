@@ -12,7 +12,7 @@ const TITLESCREEN = preload("res://src/UI/TitleScreen.tscn")
 func _ready():
 	visible = false
 	am.play("pc_die")
-	hud.visible = false
+	f.hud().visible = false
 	#TODO: wait and fix camera
 	do_focus()
 	visible = true

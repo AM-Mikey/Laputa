@@ -128,8 +128,8 @@ func save_level(level, path):
 
 
 func load_level(path):
-	if w.has_node("Juniper"): w.get_node("Juniper").free()
-	if w.uig.has_node("HUD"): w.uig.get_node("HUD").free()
+	if w.has_node("Juniper"): f.pc().free()
+	if f.hud(): f.hud().free()
 	if w.ml.has_node("TitleScreen"): w.ml.get_node("TitleScreen").queue_free()
 	if w.ml.has_node("PauseMenu"): w.ml.get_node("PauseMenu").unpause()
 	w.el.get_node("Editor").inspector.on_deselected()
@@ -138,7 +138,7 @@ func load_level(path):
 	await get_tree().process_frame
 	w.el.get_node("Editor").setup_level()
 	w.el.get_node("EditorCamera").enabled = true
-	w.el.get_node("EditorCamera").global_position = w.get_node("Juniper").global_position
+	w.el.get_node("EditorCamera").global_position = f.pc().global_position
 
 
 

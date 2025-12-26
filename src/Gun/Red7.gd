@@ -17,10 +17,10 @@ func _ready():
 	automatic = true
 	max_ammo = 0
 	max_level = 3
-	load_level()
+	set_level(level)
 
-func load_level():
-	match level:
+func _set_level(val: int) -> void:
+	match val:
 		1:
 			bullet_scene = load("res://src/Bullet/Fan1.tscn")
 			clip_size = 3

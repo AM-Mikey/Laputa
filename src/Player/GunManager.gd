@@ -52,16 +52,14 @@ func shift_gun(direction):
 		"left":
 			var child_to_move = $Guns.get_child($Guns.get_child_count() - 1)
 			$Guns.move_child(child_to_move, 0)
-			pc.emit_signal("guns_updated", $Guns.get_children(), "shiftleft")
+			pc.emit_signal("guns_updated", $Guns.get_children(), "shift_left")
 		"right":
 			var child_to_move = $Guns.get_child(0)
 			$Guns.move_child(child_to_move, $Guns.get_child_count() - 1)
-			pc.emit_signal("guns_updated", $Guns.get_children(), "shiftright")
+			pc.emit_signal("guns_updated", $Guns.get_children(), "shift_right")
 
 	set_guns_visible()
 
-
-	pc.emit_signal("guns_updated", $Guns.get_children())
 	#pc.emit_signal("xp_updated", $Guns.get_child(0).xp, $Guns.get_child(0).max_xp, $Guns.get_child(0).level, $Guns.get_child(0).max_level)
 	am.play("gun_shift")
 
@@ -78,9 +76,8 @@ func level_up(debug):
 	var current_gun = $Guns.get_child(0)
 	var last_max_xp = current_gun.max_xp
 	current_gun.level += 1
-	current_gun.load_level()
 	current_gun.xp = 0 if debug else current_gun.xp - last_max_xp
-	get_parent().emit_signal("guns_updated", $Guns.get_children())
+	get_parent().emit_signal("guns_updated", $Guns.get_children(), "level_up")
 
 	var effect = LEVELUP.instantiate()
 	world.get_node("Front").add_child(effect)
@@ -90,9 +87,8 @@ func level_up(debug):
 func level_down(debug):
 	var current_gun = $Guns.get_child(0)
 	current_gun.level -= 1
-	current_gun.load_level()
 	current_gun.xp = 0 if debug else current_gun.xp + current_gun.max_xp
-	get_parent().emit_signal("guns_updated", $Guns.get_children())
+	get_parent().emit_signal("guns_updated", $Guns.get_children(), "level_down")
 
 	var effect = LEVELDOWN.instantiate()
 	world.get_node("Front").add_child(effect)

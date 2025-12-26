@@ -9,10 +9,10 @@ func _ready():
 	automatic = false
 	ammo = 10
 	max_level = 3
-	load_level()
+	set_level(level)
 
-func load_level():
-	match level:
+func _set_level(val: int) -> void:
+	match val:
 		1:
 			bullet_scene = load("res://src/Bullet/GLauncher1.tscn")
 			damage = 4

@@ -22,7 +22,7 @@ var internal_version: String = get_internal_version()
 @export var start_level_path: String
 @onready var current_level = load(start_level_path).instantiate() #assumes current level to start with, might cause issues down the line
 @onready var ui = $UILayer
-@onready var uig = $UILayer/UIGroup
+@onready var hl = $HUDLayer
 @onready var el = $EditorLayer
 @onready var dl = $DebugLayer
 @onready var bl = $BlackoutLayer
@@ -51,7 +51,6 @@ func _ready():
 
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
-
 
 
 func get_internal_version() -> String:
@@ -90,9 +89,9 @@ func get_internal_version() -> String:
 
 func _input(event):
 	if event.is_action_pressed("inventory") and has_node("Juniper"):
-		if not uig.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled and $Juniper.can_input:
+		if not ui.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled and $Juniper.can_input:
 			var inventory = INVENTORY.instantiate()
-			uig.add_child(inventory)
+			ui.add_child(inventory)
 
 
 	if event.is_action_pressed("pause") and not ml.has_node("TitleScreen"):
@@ -114,35 +113,38 @@ func _input(event):
 func first_time_level_setup():
 	print("first time level setup")
 	add_child(JUNIPER.instantiate())
-	$Juniper/PlayerCamera.position_smoothing_enabled = false
-	uig.add_child(HUD.instantiate())
+	var pc = f.pc()
+	var player_camera = pc.get_node("PlayerCamera")
+	player_camera.position_smoothing_enabled = false
+	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 
 	current_level = load(start_level_path).instantiate()
 	add_child(current_level)
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
-		$Juniper.global_position = s.global_position
+		pc.global_position = s.global_position
 
 	match current_level.level_type:
 		current_level.LevelType.NORMAL:
 			if current_level.has_node("LevelCamera"):
-				$Juniper/PlayerCamera.enabled = false
+				player_camera.enabled = false
 			else:
-				$Juniper/PlayerCamera.enabled = true
+				player_camera.enabled = true
 		current_level.LevelType.PLAYERLESS_CUTSCENE:
-			$Juniper.queue_free()
-			$UILayer/UIGroup/HUD.queue_free()
+			pc.queue_free()
+			f.hud().queue_free()
 
 	#wipe would go here if we want one
 	display_level_text(current_level)
 	SaveSystem.read_level_data_from_temp(current_level)
 
 	await(get_tree().process_frame)
-	$Juniper/PlayerCamera.position_smoothing_enabled = true
+	player_camera.position_smoothing_enabled = true
 
 
 func change_level_via_code(level_path):
 	print("changing level via code...")
-	if uig.has_node("DialogBox"): $UILayer/UIGroup/DialogBox.exit()
+	if ui.has_node("DialogBox"): $UILayer/DialogBox.exit()
+	if f.hud(): $HUDLayer/HUDAnimator.play("RESET")
 	clear_spawn_layers()
 	current_level.queue_free()
 	current_level = null
@@ -151,15 +153,12 @@ func change_level_via_code(level_path):
 		$Juniper.free()
 	add_child(JUNIPER.instantiate())
 
-	if uig.has_node("DialogBox"):
-		$UILayer/UIGroup/DialogBox.exit()
-
 	if ml.has_node("PauseMenu"):
 		ml.get_node("PauseMenu").unpause()
 
-	if (uig.get_node_or_null("HUD")):
-		uig.get_node("HUD").free()
-	uig.add_child(HUD.instantiate())
+	if f.hud():
+		f.hud().free()
+	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 
 	$Juniper/PlayerCamera.position_smoothing_enabled = false
 
@@ -176,7 +175,7 @@ func change_level_via_code(level_path):
 				$Juniper/PlayerCamera.enabled = true
 		current_level.LevelType.PLAYERLESS_CUTSCENE:
 			$Juniper.queue_free()
-			$UILayer/UIGroup/HUD.queue_free()
+			f.hud().queue_free()
 
 	#wipe would go here if we want one
 	display_level_text(current_level)
@@ -189,7 +188,8 @@ func change_level_via_code(level_path):
 func change_level_via_trigger(level_path, door_index):
 	print("changing level via trigger...")
 	SaveSystem.write_level_data_to_temp(current_level)
-	if uig.has_node("DialogBox"): $UILayer/UIGroup/DialogBox.exit()
+	if ui.has_node("DialogBox"): $UILayer/DialogBox.exit()
+	if f.hud(): $HUDLayer/HUDAnimator.play("RESET")
 	clear_spawn_layers()
 	var old_level_path = current_level.scene_file_path
 	current_level.queue_free()
@@ -254,16 +254,16 @@ func change_level_via_trigger(level_path, door_index):
 	if current_level.level_type == current_level.LevelType.PLAYERLESS_CUTSCENE:
 		#TODO: right now juniper isn't unloaded between levels
 		$Juniper.queue_free()
-		$UILayer/UIGroup/HUD.queue_free()
+		f.hud().queue_free()
 
 	SaveSystem.read_level_data_from_temp(current_level)
 
 func display_level_text(level):
-	if uig.has_node("LevelText"):
-		$UILayer/UIGroup/LevelText.free()
+	if ui.has_node("LevelText"):
+		$UILayer/LevelText.free()
 	var level_text = LEVEL_TEXT.instantiate()
 	level_text.text = level.name #TODO: in final version switch this to display name
-	uig.add_child(level_text)
+	ui.add_child(level_text)
 
 
 
@@ -279,6 +279,7 @@ func clear_spawn_layers():
 
 func _resolution_scale_changed(resolution_scale):
 	ui.scale = Vector2(resolution_scale, resolution_scale)
+	hl.scale = Vector2(resolution_scale, resolution_scale)
 	back.scale = Vector2(resolution_scale, resolution_scale)
 	bl.scale = Vector2(resolution_scale, resolution_scale)
 	var half_scale = max(ceil(resolution_scale/2.0), 1)

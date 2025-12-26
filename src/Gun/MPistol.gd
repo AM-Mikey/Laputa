@@ -11,10 +11,10 @@ func _ready():
 	automatic = true
 	ammo = 30
 	max_level = 3
-	load_level()
+	set_level(level)
 
-func load_level():
-	match level:
+func _set_level(val: int) -> void:
+	match val:
 		1:
 			damage = 1
 			f_range = 150

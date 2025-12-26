@@ -29,12 +29,18 @@ var max_ammo: int = 0
 var xp: int = 0
 var max_xp: int = 20
 var max_level: int = 1
-@export var level: int = 1
+@export var level: int = 1: set = set_level
 
 @onready var world = get_tree().get_root().get_node("World")
 @onready var pc = get_parent().get_parent().get_parent()
 @onready var cd = pc.get_node("GunManager/CooldownTimer")
 
+func set_level(val: int) -> void:
+	_set_level(val)
+	level = val
+
+func _set_level(_val: int) -> void: #Virtual funciton for derived classes
+	pass
 
 func fire(_type):
 	if cd.time_left == 0:

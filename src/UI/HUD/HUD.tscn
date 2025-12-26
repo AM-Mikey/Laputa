@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://dulcn8jx6cd3y"]
+[gd_scene load_steps=60 format=3 uid="uid://dulcn8jx6cd3y"]
 
 [ext_resource type="Script" uid="uid://getspcndfk4e" path="res://src/UI/HUD/HUD.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c7wyw4y3jdl7j" path="res://assets/UI/NumberNew.png" id="2"]
@@ -23,7 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://iaear02sxjij" path="res://assets/UI/HUD/WeaponWheel.png" id="19_g36jn"]
 [ext_resource type="Texture2D" uid="uid://xdyjjbvv4pjx" path="res://assets/UI/HUD/Bullet.png" id="20_rfbaj"]
 [ext_resource type="Texture2D" uid="uid://s3vaw1gr2atc" path="res://assets/Gun/MPistolIconSmall.png" id="21_1f167"]
-[ext_resource type="Shader" uid="uid://c8nu6mhx6pu3j" path="res://src/Shader/SimpleOutlineWeaponWheel.gdshader" id="21_n4pkm"]
+[ext_resource type="Shader" path="res://src/Shader/SimpleOutlineWeaponWheel.gdshader" id="21_n4pkm"]
 
 [sub_resource type="Animation" id="Animation_rfbaj"]
 resource_name = "BulletShoot"
@@ -648,7 +648,7 @@ tracks/0/path = NodePath("WheelPivot/WeaponWheel:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(5.96046e-08, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"times": PackedFloat32Array(0, 0.09754821, 0.2, 0.3, 0.4, 0.5, 0.59759504),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [1, 2, 3, 4, 5, 6, 0]
@@ -1019,46 +1019,7 @@ _data = {
 &"XpFlash": SubResource("2")
 }
 
-[sub_resource type="Animation" id="Animation_jqh7y"]
-resource_name = "HpFlash"
-length = 0.20000334
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Base:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_ufagq"]
-resource_name = "RESET"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Base:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ufagq"]
-_data = {
-&"HpFlash": SubResource("Animation_jqh7y"),
-&"RESET": SubResource("Animation_ufagq")
-}
-
-[node name="HUD" type="Control" node_paths=PackedStringArray("gun", "ao", "hp_node", "xp_node", "cd", "ammo", "mon")]
+[node name="HUD" type="Control" node_paths=PackedStringArray("gun", "ao", "hp_node", "xp_node", "cd", "ammo", "mon") groups=["HUDs"]]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1")
@@ -1093,6 +1054,7 @@ offset_top = 3.0
 offset_right = 70.0
 offset_bottom = 7.0
 mouse_filter = 2
+step = 0.1
 value = 50.0
 texture_progress = ExtResource("7")
 
@@ -1107,6 +1069,7 @@ offset_top = 3.0
 offset_right = 70.0
 offset_bottom = 7.0
 mouse_filter = 2
+step = 0.1
 value = 50.0
 texture_progress = ExtResource("4")
 
@@ -1142,7 +1105,9 @@ offset_top = 11.0
 offset_right = 66.0
 offset_bottom = 15.0
 mouse_filter = 2
+step = 0.1
 value = 50.0
+nine_patch_stretch = true
 texture_progress = ExtResource("7")
 
 [node name="Cap" type="Sprite2D" parent="Base/Xp/Lost"]
@@ -1156,6 +1121,7 @@ offset_top = 11.0
 offset_right = 66.0
 offset_bottom = 15.0
 mouse_filter = 2
+step = 0.1
 value = 50.0
 texture_progress = ExtResource("5")
 
@@ -1176,13 +1142,6 @@ hframes = 11
 vframes = 6
 frame = 56
 
-[node name="Max" type="Sprite2D" parent="Base/Xp"]
-visible = false
-z_index = 1
-position = Vector2(25, 10)
-texture = ExtResource("13")
-centered = false
-
 [node name="Cooldown" type="Control" parent="Base"]
 anchors_preset = 0
 offset_bottom = 24.0
@@ -1195,6 +1154,7 @@ offset_top = 19.0
 offset_right = 62.0
 offset_bottom = 21.0
 mouse_filter = 2
+step = 0.1
 value = 50.0
 texture_progress = ExtResource("8")
 
@@ -1236,6 +1196,12 @@ frame = 10
 
 [node name="Front" type="Sprite2D" parent="Base"]
 texture = ExtResource("9")
+centered = false
+
+[node name="XpMax" type="Sprite2D" parent="Base/Front"]
+visible = false
+position = Vector2(25, 10)
+texture = ExtResource("13")
 centered = false
 
 [node name="Ammo" type="Control" parent="Base"]
@@ -1400,9 +1366,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_2a4ya")
 }
 
-[node name="AnimationPlayerHp" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ufagq")
-}
-
+[connection signal="value_changed" from="Base/Hp/Lost" to="." method="_on_hp_lost_value_changed"]
+[connection signal="value_changed" from="Base/Hp/Progress" to="." method="_on_hp_progress_value_changed"]
+[connection signal="value_changed" from="Base/Xp/Lost" to="." method="_on_xp_lost_value_changed"]
+[connection signal="value_changed" from="Base/Xp/Progress" to="." method="_on_xp_progress_value_changed"]
+[connection signal="value_changed" from="Base/Cooldown/Progress" to="." method="_on_cooldown_progress_value_changed"]
 [connection signal="timeout" from="Gun/WeaponWheelTiltAnimator/Timer" to="." method="_on_Timer_timeout"]
