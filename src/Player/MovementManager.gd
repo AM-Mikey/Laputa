@@ -77,7 +77,6 @@ func _physics_process(_delta):
 	gravity = base_gravity if not get_parent().is_in_water else water_gravity
 	do_ceiling_push_check()
 	current_state.state_process(_delta)
-	align_to_proper_y()
 
 
 func _input(event):
@@ -148,10 +147,6 @@ func enable_collision_shapes(array):
 		shape.visible = true
 
 
-func align_to_proper_y():
-	var abs_offset = abs(pc.position.y - round(pc.position.y))
-	if 0.0 < abs_offset and abs_offset < 0.1:
-		pc.position.y = round(pc.position.y)
 
 
 

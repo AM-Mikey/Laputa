@@ -24,7 +24,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _physics_process(_delta):
-	var vp_size = get_tree().get_root().size / vs.resolution_scale
+	var vp_size = RenderAlign.sub_viewport.size / vs.resolution_scale
 
 	var cam = pc.get_node("PlayerCamera")
 	if not cam.enabled:
