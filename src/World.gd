@@ -53,7 +53,6 @@ func _ready():
 	_resolution_scale_changed(vs.resolution_scale)
 
 
-
 func get_internal_version() -> String:
 	var current_date = Time.get_date_dict_from_system()
 	var years_since = current_date["year"] - 2021
@@ -145,6 +144,7 @@ func first_time_level_setup():
 func change_level_via_code(level_path):
 	print("changing level via code...")
 	if ui.has_node("DialogBox"): $UILayer/DialogBox.exit()
+	if f.hud(): $HUDLayer/HUDAnimator.play("RESET")
 	clear_spawn_layers()
 	current_level.queue_free()
 	current_level = null
@@ -152,9 +152,6 @@ func change_level_via_code(level_path):
 	if (get_node_or_null("Juniper")):
 		$Juniper.free()
 	add_child(JUNIPER.instantiate())
-
-	if ui.has_node("DialogBox"):
-		$UILayer/DialogBox.exit()
 
 	if ml.has_node("PauseMenu"):
 		ml.get_node("PauseMenu").unpause()
@@ -192,6 +189,7 @@ func change_level_via_trigger(level_path, door_index):
 	print("changing level via trigger...")
 	SaveSystem.write_level_data_to_temp(current_level)
 	if ui.has_node("DialogBox"): $UILayer/DialogBox.exit()
+	if f.hud(): $HUDLayer/HUDAnimator.play("RESET")
 	clear_spawn_layers()
 	var old_level_path = current_level.scene_file_path
 	current_level.queue_free()
