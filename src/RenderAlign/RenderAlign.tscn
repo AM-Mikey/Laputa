@@ -41,7 +41,3 @@ script = ExtResource("2_6g3t1")
 [node name="Camera2D" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport/base position/rounder"]
 unique_name_in_owner = true
 process_callback = 0
-
-[node name="fake bg" type="TextureRect" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
