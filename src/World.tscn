@@ -60,7 +60,7 @@ scale = Vector2(4, 4)
 z_index = 1
 
 [node name="Front" type="Node2D" parent="."]
-z_index = 1
+z_index = 2
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 process_mode = 3
