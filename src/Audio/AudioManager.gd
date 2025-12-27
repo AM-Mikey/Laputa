@@ -47,6 +47,7 @@ signal players_updated
 	"bullet_thud": preload("res://assets/SFX/Placeholder/snd_shot_hit.ogg"),
 	"bullet_clink": preload("res://assets/SFX/Placeholder/snd_shot_bounce.ogg"),
 	"bullet_destroy" : preload("res://assets/SFX/Placeholder/snd_expl_small.ogg"),
+	"bullet_birdshot_bounce": preload("res://assets/SFX/Placeholder/snd_spur_charge2.ogg"),
 
 	"get_hp": preload("res://assets/SFX/Placeholder/snd_health_refill.ogg"),
 	"xp": preload("res://assets/SFX/Placeholder/snd_xp_bounce.ogg"),
@@ -265,7 +266,7 @@ func _check_sfx(sfx_string) -> bool:
 
 	if remove_recent_duplicate_sfx:
 		if sfx_recent.has(sfx_string):
-			print("WARNING: SFX already playing! Removed SFX with name: " + sfx_string)
+			#print("WARNING: SFX already playing! Removed SFX with name: " + sfx_string)
 			return false
 		else:
 			_do_recent_time(sfx_string)

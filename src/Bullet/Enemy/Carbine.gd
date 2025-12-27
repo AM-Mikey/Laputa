@@ -6,7 +6,6 @@ func _ready():
 	damage = 4
 	speed = 128
 	f_range = 64
-	is_enemy_bullet = true
 	rotation_degrees = get_rot(direction)
 	setup_vis_notifier()
 

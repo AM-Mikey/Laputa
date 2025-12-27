@@ -144,7 +144,7 @@ func first_time_level_setup():
 func change_level_via_code(level_path):
 	print("changing level via code...")
 	if ui.has_node("DialogBox"): $UILayer/DialogBox.exit()
-	if f.hud(): $HUDLayer/HUDAnimator.play("RESET")
+	$HUDLayer/HUDAnimator.play("RESET")
 	clear_spawn_layers()
 	current_level.queue_free()
 	current_level = null
@@ -189,7 +189,7 @@ func change_level_via_trigger(level_path, door_index):
 	print("changing level via trigger...")
 	SaveSystem.write_level_data_to_temp(current_level)
 	if ui.has_node("DialogBox"): $UILayer/DialogBox.exit()
-	if f.hud(): $HUDLayer/HUDAnimator.play("RESET")
+	$HUDLayer/HUDAnimator.play("RESET")
 	clear_spawn_layers()
 	var old_level_path = current_level.scene_file_path
 	current_level.queue_free()
