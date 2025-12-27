@@ -43,3 +43,4 @@ script = ExtResource("2_6g3t1")
 [node name="Camera2D" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport/BasePosition/Rounder"]
 unique_name_in_owner = true
 process_callback = 0
+limit_enabled = false
