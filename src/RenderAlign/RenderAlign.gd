@@ -14,6 +14,8 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	var active_cam := get_viewport().get_camera_2d()
+	if active_cam == null:
+		return
 	base_position.global_position = active_cam.get_screen_center_position()
 	camera.zoom = active_cam.zoom
 
