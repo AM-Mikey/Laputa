@@ -24,12 +24,12 @@ func _on_CollisionDetector_body_entered(body): #shadows parent
 		if body.get_collision_layer_value(9):
 			on_break(break_method)
 		#enemy
-		elif body.get_collision_layer_value(2) and not is_enemy_bullet:
+		elif body.get_collision_layer_value(2):
 			#await get_tree().process_frame
 			body.hit(damage, get_blood_dir(body))
 			queue_free()
 		#player
-		elif body.get_collision_layer_value(1) and is_enemy_bullet:
+		elif body.get_collision_layer_value(1):
 			body.get_parent().hit(damage, get_blood_dir(body))
 		#armor #TODO:fix this interaction
 		elif body.get_collision_layer_value(6):
