@@ -31,15 +31,9 @@ var internal_version: String = get_internal_version()
 @onready var middle = $Middle
 @onready var back = $Back
 
-func child_layer_set(c: Node):
-	if c == self:
-		return
-	c.child_entered_tree.connect(child_layer_set)
-	if c is CanvasItem:
-		c.visibility_layer = 2
+
 
 func _ready():
-
 	self.visibility_layer = 2
 	self.child_entered_tree.connect(child_layer_set)
 	for node: Node in [front, middle, back]:
@@ -67,6 +61,13 @@ func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 
+
+func child_layer_set(c: Node): #set the visibility layer of all children to layer 2 so that they're rendered by the subviewport
+	if c == self:
+		return
+	c.child_entered_tree.connect(child_layer_set)
+	if c is CanvasItem:
+		c.visibility_layer = 2
 
 
 func get_internal_version() -> String:
