@@ -24,4 +24,5 @@ func _physics_process(_delta: float) -> void:
 ### SIGNALS ###
 
 func _resolution_scale_changed(_resolution_scale):
-	sub_viewport.size = get_viewport().size + Vector2i(20,20)
+	var base_size : Vector2i = get_viewport().size
+	sub_viewport.size = base_size.snappedi(2) + Vector2i(20,20)
