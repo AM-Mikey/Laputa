@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cxspdb8eq5n0h" path="res://src/Player/PlayerCamera.gd" id="1"]
 
-[node name="PlayerCamera" type="Camera2D" groups=["Cameras"]]
+[node name="PlayerCamera" type="Camera2D" groups=["Cameras", "PlayerCameras"]]
 position = Vector2(0, -16)
 process_callback = 0
 limit_smoothed = true
