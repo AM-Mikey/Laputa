@@ -5,7 +5,7 @@ extends Control
 
 func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
-	_resolution_scale_changed(vs.resolution_scale)
+	
 
 	if f.pc():
 		var pc = f.pc()
@@ -17,7 +17,7 @@ func _ready():
 		$VBox/General/Label.text = "Laputa " + world.internal_version + " (" + world.release_version+ ")"
 	else:
 		$VBox/General/Label.text = "Laputa " + world.internal_version + " (" + world.development_stage+ ")"
-
+	_resolution_scale_changed(vs.resolution_scale)
 
 
 func _physics_process(_delta):
@@ -106,4 +106,4 @@ func _clear_array(array):
 ### SIGNALS ###
 
 func _resolution_scale_changed(_resolution_scale):
-	set_deferred("size", get_tree().get_root().size / Vector2i(world.dl.scale))
+	size = get_tree().get_root().size / Vector2i(world.dl.scale)

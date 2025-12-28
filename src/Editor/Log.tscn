@@ -2,8 +2,9 @@
 
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1_c8n05"]
 [ext_resource type="Script" uid="uid://ctinosf7ix4f4" path="res://src/Editor/Log.gd" id="2_gcgq7"]
-[ext_resource type="StyleBox" path="res://src/UI/Debug/50PercentBlack.tres" id="3_n6cuh"]
+[ext_resource type="StyleBox" path="res://src/UI/DebugInfo/50PercentBlack.tres" id="3_n6cuh"]
 [ext_resource type="PackedScene" uid="uid://djiht873be1ns" path="res://src/Editor/LogMessage.tscn" id="4_je7v1"]
+
 
 [node name="Log" type="MarginContainer"]
 offset_top = 432.0

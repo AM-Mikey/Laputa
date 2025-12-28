@@ -2,8 +2,9 @@ extends Node
 
 signal scale_changed(resolution_scale)
 
-var resolution_scale:= 4.0
-var menu_resolution_scale:= 4.0
+var resolution_scale := 4.0
+var menu_resolution_scale := 4.0
+var debug_resolution_scale := 1.0
 
 
 func _ready():
