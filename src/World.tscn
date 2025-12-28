@@ -1,6 +1,44 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvulncgotfe6a"]
+[gd_scene load_steps=5 format=3 uid="uid://dvulncgotfe6a"]
 
 [ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
+
+[sub_resource type="Animation" id="Animation_qbf6s"]
+resource_name = "Flash"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HUDGroup:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_x6ej7"]
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HUDGroup:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e2u31"]
+_data = {
+&"Flash": SubResource("Animation_qbf6s"),
+&"RESET": SubResource("Animation_x6ej7")
+}
 
 [node name="World" type="Node2D"]
 script = ExtResource("8")
@@ -22,7 +60,7 @@ scale = Vector2(4, 4)
 z_index = 1
 
 [node name="Front" type="Node2D" parent="."]
-z_index = 1
+z_index = 2
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -46,7 +84,19 @@ layer = 2
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
-[node name="UIGroup" type="CanvasGroup" parent="UILayer"]
+[node name="HUDLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 2
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+
+[node name="HUDGroup" type="CanvasGroup" parent="HUDLayer"]
+
+[node name="HUDAnimator" type="AnimationPlayer" parent="HUDLayer"]
+libraries = {
+&"": SubResource("AnimationLibrary_e2u31")
+}
+autoplay = "RESET"
 
 [node name="BlackoutLayer" type="CanvasLayer" parent="."]
 process_mode = 3

@@ -4,7 +4,6 @@ var start_velocity
 @onready var ap = $AnimationPlayer
 
 func _ready():
-	is_enemy_bullet = true
 	ap.play("RotateLeft")
 
 	velocity = get_initial_velocity()

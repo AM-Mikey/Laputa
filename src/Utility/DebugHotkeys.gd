@@ -1,6 +1,6 @@
 extends Node
 
-const DEBUG_INFO = preload("res://src/UI/Debug/DebugInfo.tscn")
+const DEBUG_INFO = preload("res://src/UI/DebugInfo/DebugInfo.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const JUNIPER = preload("res://src/Player/Juniper.tscn")
 const LEVEL_EDITOR = preload("res://src/Editor/Editor.tscn")
@@ -52,7 +52,7 @@ func _input(event):
 		if event.is_action_pressed("debug_save"):
 			var popup = POPUP.instantiate()
 			popup.text = "quicksaved..."
-			w.uig.add_child(popup)
+			w.ui.add_child(popup)
 			SaveSystem.write_level_data_to_temp(w.current_level)
 			SaveSystem.write_player_data_to_save(w.current_level)
 			SaveSystem.copy_level_data_from_temp_to_save()
@@ -61,7 +61,7 @@ func _input(event):
 		if event.is_action_pressed("debug_load"):
 			var popup = POPUP.instantiate()
 			popup.text = "loaded save"
-			w.uig.add_child(popup)
+			w.ui.add_child(popup)
 			SaveSystem.read_player_data_from_save()
 			SaveSystem.read_level_data_from_save(w.current_level)
 			SaveSystem.copy_level_data_from_save_to_temp()

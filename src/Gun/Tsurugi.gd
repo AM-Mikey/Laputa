@@ -11,10 +11,10 @@ func _ready():
 	do_muzzle_flash = false
 	max_ammo = 0
 	max_level = 1
-	load_level()
+	set_level(level)
 
-func load_level():
-	match level:
+func _set_level(val: int) -> void:
+	match val:
 		1:
 			bullet_scene = load("res://src/Bullet/Slash.tscn")
 			speed = 120

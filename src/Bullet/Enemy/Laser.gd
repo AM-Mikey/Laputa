@@ -4,7 +4,6 @@ extends Bullet
 func _ready():
 	speed = 64
 	f_range = 64
-	is_enemy_bullet = true
 	rotation_degrees = get_rot(direction)
 	setup_vis_notifier()
 

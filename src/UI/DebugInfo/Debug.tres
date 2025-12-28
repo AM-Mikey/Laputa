@@ -1,7 +1,8 @@
 [gd_resource type="Theme" load_steps=3 format=3 uid="uid://d2y1ya8pt8ye2"]
 
-[ext_resource type="StyleBox" path="res://src/UI/Debug/50PercentBlack.tres" id="2"]
-[ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momo.ttf" id="3_c4p6r"]
+[ext_resource type="StyleBox" path="res://src/UI/DebugInfo/50PercentBlack.tres" id="2"]
+[ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="3_c4p6r"]
+
 
 [resource]
 default_font = ExtResource("3_c4p6r")

@@ -12,9 +12,9 @@ const PLAYER_DAMAGE_NUMBER = preload("res://src/Effect/PlayerDamageNumber.tscn")
 const EXPERIENCE_NUMBER = preload("res://src/Effect/ExperienceNumber.tscn")
 const HEART_NUMBER = preload("res://src/Effect/HeartNumber.tscn")
 
-signal hp_updated(hp, max_hp)
+signal hp_updated(hp, max_hp, cause)
 signal guns_updated(guns, cause, do_xp_flash)
-signal xp_updated(xp, max_xp, level, max_level, do_xp_flash)
+signal xp_updated(xp, max_xp, level, max_level, do_xp_flash, cause)
 signal money_updated(money)
 signal invincibility_end()
 
@@ -129,7 +129,7 @@ func hit(damage, knockback_direction):
 		if damage > 0:
 			hp -= damage
 			am.play("pc_hurt")
-			emit_signal("hp_updated", hp, max_hp)
+			emit_signal("hp_updated", hp, max_hp, "take_damage")
 			if experience_number != null: experience_number.queue_free()
 			if heart_number != null: heart_number.queue_free()
 			if damage_number == null: #no damage_number
@@ -162,7 +162,7 @@ func hit(damage, knockback_direction):
 					active_gun.xp = max(active_gun.xp, 0)
 				if active_gun.xp < 0:
 					$GunManager.level_down(false)
-				emit_signal("guns_updated", guns.get_children())
+				emit_signal("guns_updated", guns.get_children(), "take_damage")
 
 		if knockback_direction != Vector2.ZERO:
 			#print("Knockback in Dir: " + str(knockback_direction))
@@ -201,9 +201,9 @@ func die():
 		explosion.position = global_position
 		world.get_node("Front").add_child(explosion)
 
-		world.uig.add_child(load("res://src/UI/DeathScreen.tscn").instantiate())
-		if world.has_node("UILayer/UIGroup/HUD"):
-			world.get_node("UILayer/UIGroup/HUD").free()
+		world.ui.add_child(load("res://src/UI/DeathScreen.tscn").instantiate())
+		if f.hud():
+			f.hud().free()
 		queue_free()
 
 
@@ -258,7 +258,7 @@ func _on_ItemDetector_area_entered(area):
 				heart_number.reset()
 
 		world.get_node("Front").add_child(heart_get)
-		emit_signal("hp_updated", hp, max_hp)
+		emit_signal("hp_updated", hp, max_hp, "hp_pickup")
 		heart_pickup.queue_free()
 
 
@@ -304,7 +304,7 @@ func _on_ItemDetector_area_entered(area):
 		var ammo_get = AMMOGET.instantiate()
 		ammo_get.position = ammo_pickup.global_position
 		world.get_node("Front").add_child(ammo_get)
-		emit_signal("guns_updated", guns.get_children(), "getammo")
+		emit_signal("guns_updated", guns.get_children(), "get_ammo")
 		ammo_pickup.queue_free()
 
 
@@ -327,15 +327,13 @@ func update_inventory():
 	emit_signal("inventory_updated", inventory)
 
 func setup_hud():
-	var active_gun = guns.get_child(0)
-	emit_signal("hp_updated", hp, max_hp)
-	emit_signal("guns_updated", guns.get_children())
-	emit_signal("xp_updated", active_gun.xp, active_gun.max_xp, active_gun.level, active_gun.max_level)
+	emit_signal("hp_updated", hp, max_hp, "set_up")
+	emit_signal("guns_updated", guns.get_children(), "set_up")
 	emit_signal("money_updated", money)
 
 
 func connect_inventory():
 	#if this is always null when ready is called does it do anything? why do we have this?
-	var item_menu = get_tree().get_root().get_node_or_null("World/UILayer/UIGroup/Inventory")
+	var item_menu = get_tree().get_root().get_node_or_null("World/UILayer/Inventory")
 	if item_menu:
 		var _err = connect("inventory_updated", Callable(item_menu, "_on_inventory_updated"))

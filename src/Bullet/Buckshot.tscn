@@ -18,6 +18,7 @@ script = ExtResource("2")
 shape = SubResource("ConvexPolygonShape2D_e6qj8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.21568628)
 position = Vector2(-24, 0)
 texture = ExtResource("1")
 

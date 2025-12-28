@@ -22,11 +22,11 @@ func _input(event):
 
 func enter():
 	get_tree().paused = true
-	hud.visible = false
+	f.hud().visible = false
 
 func exit():
 	get_tree().paused = false
-	hud.visible = true
+	f.hud().visible = true
 	pc.emit_signal("guns_updated", pc.guns.get_children())
 	queue_free()
 

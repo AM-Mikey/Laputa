@@ -35,7 +35,6 @@ func _on_Water_body_entered(body):
 			target.call_deferred("add_child", be)
 
 		if !splash_targets.has(target):
-			print(target)
 			splash_targets.append(target)
 			var splash = load("res://src/Effect/Splash.tscn").instantiate()
 			splash.position.x = body.global_position.x
@@ -61,6 +60,5 @@ func _on_Water_body_exited(body):
 			bubble_emitters.erase(target)
 		await get_tree().physics_frame
 		if splash_targets.has(target):
-			print("erase", target)
 			splash_targets.erase(target)
 	active_bodies.erase(body)

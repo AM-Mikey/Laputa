@@ -20,10 +20,10 @@ func _ready():
 
 
 func _on_LevelButton_pressed():
-	if world.has_node("Juniper"):
-		world.get_node("Juniper").free() #we free and respawn them so we have a clean slate when we load in
-	if world.has_node("UILayer/UIGroup/HUD"):
-		world.get_node("UILayer/UIGroup/HUD").free()
+	if f.pc():
+		f.pc().free() #we free and respawn them so we have a clean slate when we load in
+	if f.hud():
+		f.hud().free()
 
 	world.change_level_via_code(level)
 

@@ -12,15 +12,15 @@ var damage = 0
 var f_range
 var f_time
 var speed
+var spread_degrees
 var origin = Vector2.ZERO
 var direction = Vector2.ZERO
 var instant_fizzle = true
 
 var break_method = "cut"
-var is_enemy_bullet = false
 
 @onready var world = get_tree().get_root().get_node("World")
-
+@onready var rng = RandomNumberGenerator.new()
 
 
 ### HELPERS ###
@@ -41,8 +41,8 @@ func do_fizzle(type: String):
 	world.get_node("Middle").add_child(fizzle)
 	fizzle.position = $End.global_position if has_node("End") else global_position
 	fizzle.play()
-	if instant_fizzle and not is_enemy_bullet:
-		var gun = world.get_node("Juniper").guns.get_child(0)
+	if instant_fizzle:
+		var gun = f.pc().guns.get_child(0)
 		var gun_center = gun.global_position
 		var space_state = get_world_2d().direct_space_state
 		# use global coordinates, not local to node
@@ -110,10 +110,6 @@ func _on_CollisionDetector_body_entered(body):
 		#breakable
 		if body.get_collision_layer_value(9):
 			on_break(break_method)
-		#player
-		elif body.get_collision_layer_value(1) and is_enemy_bullet:
-			body.get_parent().hit(damage, get_blood_dir(body))
-			queue_free()
 		#armor
 		elif body.get_collision_layer_value(6):
 			do_fizzle("armor")

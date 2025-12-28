@@ -49,8 +49,8 @@ func read_player_data_from_save():
 
 	if f.pc(): #TODO: something strange about the timing of loading in juniper, consider moving that code here instead of the awaits
 		f.pc().free()
-		if w.uig.has_node("HUD"):
-			w.uig.get_node("HUD").queue_free()
+		if f.hud():
+			f.hud().queue_free()
 
 	w.change_level_via_code(player_data["current_level"])
 	await get_tree().process_frame
@@ -81,10 +81,11 @@ func read_player_data_from_save():
 		if g.max_ammo != 0:
 			g.ammo = player_data["gun_data"][g.name]["ammo"]
 
-	pc.emit_signal("hp_updated", pc.hp, pc.max_hp)
-	pc.emit_signal("invincibility_end")
-	pc.emit_signal("guns_updated", guns.get_children())
+	pc.emit_signal("hp_updated", pc.hp, pc.max_hp, "load_game")
+	pc.emit_signal("guns_updated", guns.get_children(), "load_game")
+	pc.emit_signal("money_updated", pc.money)
 	pc.update_inventory()
+	pc.emit_signal("invincibility_end")
 	print("player data loaded")
 
 	await get_tree().process_frame

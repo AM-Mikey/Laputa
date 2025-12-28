@@ -33,7 +33,7 @@ const UI_BULLET_FLY = preload("res://src/UI/HUD/UIBulletFly.tscn")
 @onready var xp_progress = xp_node.get_node("Progress")
 @onready var xp_progress_cap = xp_progress.get_node("Cap")
 @onready var xp_flash = xp_node.get_node("Flash")
-@onready var xp_max = xp_node.get_node("Max")
+@onready var xp_max = get_node("Base/Front/XpMax")
 @onready var xp_num = xp_node.get_node("Num")
 
 @onready var cd_progress = cd.get_node("Progress")
@@ -64,41 +64,44 @@ func _ready():
 		pc.money_updated.connect(update_money)
 		pc.invincibility_end.connect(update_hpflash)
 		pc.setup_hud()
-		setup_lost_bars(pc.hp, pc.guns.get_child(0).xp)
+		setup_bars(pc.hp, pc.max_hp, pc.guns.get_child(0).xp, pc.guns.get_child(0).max_xp)
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 
 func _process(_delta):
-	set_cap_pos(hp_lost, 38, hp_lost_cap)
-	set_cap_pos(xp_lost, 38, xp_lost_cap)
-
 	if f.pc():
 		var pc = f.pc()
 		if pc.guns.get_child(0) != null: #TODO: make this connected via signal
 			cd_progress.visible = true
 			cd_progress.value = 100 - ((pc.get_node("GunManager/CooldownTimer").time_left / pc.guns.get_child(0).cooldown_time) * 100)
-			set_cap_pos(cd_progress, 37, cd_progress_cap)
 		else: cd_progress.visible = false
 
-func update_guns(guns, cause = "default", do_xp_flash = false):
-	var main_icon = gun.get_node("GunIcon")
 
-	if cause == "shiftleft":
+func update_guns(guns, cause = "default", do_xp_flash = false):
+	#var main_icon = gun.get_node("GunIcon")
+	if cause == "load_game":
+		ammo_animate("reload", 3.0)
+
+	if cause == "shift_left":
 		display_weapon_wheel(guns, "CCW")
 		ammo_animate("reload", 5.0)
-	if cause == "shiftright":
+	elif cause == "shift_right":
 		display_weapon_wheel(guns, "CW")
 		ammo_animate("reload", 5.0)
 
-	for g in guns:
-		if guns.find(g) == 0: #main gun
-			main_icon.texture = g["icon_texture"]
-			update_xp(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash)
-			#update_ammo(g.ammo, g.max_ammo)
+	if (cause not in ["fire", "get_ammo"]):
+		var g: Gun = guns[0]
+		update_xp(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash, cause)
+
+	#for g in guns:
+		#if guns.find(g) == 0: #main gun
+			#main_icon.texture = g["icon_texture"]s
+			#update_ammo(g.ammo, g.max_ammo)a
 		#else:
 			#var gun_icon = GUNICON.instantiate() #all other
 			#gun_icon.texture = g["texture"]
 			#hbox.add_child(gun_icon)
+
 	if cause == "fire":
 		var pc = f.pc()
 		var speed: float = 0.8 / pc.guns.get_child(0).cooldown_time
@@ -113,8 +116,9 @@ func update_guns(guns, cause = "default", do_xp_flash = false):
 		var ui_bullet_fly = UI_BULLET_FLY.instantiate()
 		ui_bullet_fly.is_infinite = is_infinite
 		ammo_fly.add_child(ui_bullet_fly)
-	if cause == "getammo":
+	if cause == "get_ammo":
 		ammo_animate("reload", 5.0)
+
 
 func display_weapon_wheel(guns, rot_dir: String):
 	if not WheelVisible:
@@ -128,14 +132,15 @@ func display_weapon_wheel(guns, rot_dir: String):
 				weapon_wheel.get_node("Bullet1/Gun").texture = guns[0].icon_texture
 				weapon_wheel.get_node("Bullet2/Gun").texture = guns[1].icon_small_texture
 				weapon_wheel.get_node("Bullet3/Gun").texture = guns[2].icon_small_texture
+				weapon_wheel.get_node("Bullet4/Gun").texture = guns[-3].icon_small_texture
 				weapon_wheel.get_node("Bullet5/Gun").texture = guns[-2].icon_small_texture
 				weapon_wheel.get_node("Bullet6/Gun").texture = guns[-1].icon_small_texture
 		"CCW":
 				weapon_wheel_animator.play("CCW", -1, 4.0)
-				#await get_tree().create_timer(0.8) #i still dont know why but i dont ask questions
 				weapon_wheel.get_node("Bullet1/Gun").texture = guns[0].icon_texture
 				weapon_wheel.get_node("Bullet2/Gun").texture = guns[1].icon_small_texture
 				weapon_wheel.get_node("Bullet3/Gun").texture = guns[2].icon_small_texture
+				weapon_wheel.get_node("Bullet4/Gun").texture = guns[-3].icon_small_texture
 				weapon_wheel.get_node("Bullet5/Gun").texture = guns[-2].icon_small_texture
 				weapon_wheel.get_node("Bullet6/Gun").texture = guns[-1].icon_small_texture
 
@@ -199,23 +204,23 @@ func ammo_animate(animation, speed: float = -1):
 		elif animation == "reset":
 			ammo_bottom_animator.play("ResetInfinite")
 
-func update_hp(hp, max_hp):
-	var pc = f.pc()
+func update_hp(hp: int, max_hp: int, cause: String) -> void:
 	hp_progress.value = hp
 	display_hp_number(hp, max_hp)
 	hp_progress.max_value = max_hp
 	hp_lost.max_value = max_hp
-	set_cap_pos(hp_progress, 38, hp_progress_cap)
 
-
-	if hp < hp_lost.value:
-		if hp > 0:
-			$AnimationPlayerHp.stop()
-			$AnimationPlayerHp.play("HpFlash")
-			var tween = get_tree().create_tween()
-			tween.tween_property(hp_lost, "value", hp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
-	else: #increasing, just set it
+	if (cause in ["set_up", "load_game"]):
 		hp_lost.value = hp
+	else:
+		if hp < hp_lost.value:
+			if hp > 0:
+				world.get_node("HUDLayer/HUDAnimator").stop()
+				world.get_node("HUDLayer/HUDAnimator").play("Flash")
+				var tween = get_tree().create_tween()
+				tween.tween_property(hp_lost, "value", hp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
+		else: #increasing, just set it
+			hp_lost.value = hp
 
 
 func display_hp_number(hp, max_hp):
@@ -247,28 +252,48 @@ func display_hp_number(hp, max_hp):
 		hp_1.frame_coords.y = 5
 		hp_2.frame_coords.y = 5
 
-func update_xp(xp, max_xp, level, max_level, do_xp_flash = false):
+
+var xp_tween: Tween
+func update_xp(xp: float, max_xp: float, level: int, max_level: int, do_xp_flash = false, cause: String = "default") -> void:
 	modulate = Color(1, 1, 1) #to prevent flash animation from stopping on a transparent frame
 	xp_num.frame_coords.x = level
+	var old_progress_max_value: float = xp_progress.max_value
+	var old_progress_value: float = xp_progress.value
 	if do_xp_flash:
 		animation_player.play("XpFlash")
-	xp_progress.value = xp
 	xp_progress.max_value = max_xp
+	xp_progress.value = xp
 	xp_lost.max_value = max_xp
-	set_cap_pos(xp_progress, 38, xp_progress_cap)
 
-	if xp < xp_lost.value:
-		var tween = get_tree().create_tween()
-		tween.tween_property(xp_lost, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
-	else: #increasing, just set it
+	if (xp_tween):
+		xp_tween.kill()
+
+	if (cause in ["shift_left", "shift_right"]):
+		if (xp_max.visible): # Set the animation's start to 100 if the prev gun was at max xp
+			xp_progress.value = xp_progress.max_value
+		else:
+			xp_progress.value = old_progress_value / old_progress_max_value * max_xp
+		if (xp < xp_lost.value / old_progress_max_value * max_xp):
+			xp_lost.value = xp
+		else:
+			xp_lost.value = xp_lost.value / old_progress_max_value * max_xp
+		xp_tween = get_tree().create_tween().set_parallel()
+		xp_tween.tween_property(xp_progress, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		xp_tween.tween_property(xp_lost, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	elif (cause == "level_up"):
 		xp_lost.value = xp
-
-	if xp == max_xp and level == max_level:
-		xp_progress.visible = false
-		xp_max.visible = true
 	else:
-		xp_progress.visible = true
-		xp_max.visible = false
+		if (cause == "level_down"):
+			xp_lost.value = xp_lost.max_value
+		if xp < xp_lost.value:
+			xp_tween = get_tree().create_tween()
+			xp_tween.tween_property(xp_lost, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
+		else: #increasing, just set it
+			xp_lost.value = xp
+
+	xp_progress.visible = !(xp == max_xp and level == max_level)
+	xp_max.visible = (xp == max_xp and level == max_level)
+
 
 
 func update_ammo(_have, _maximum): #TODO: do we use this?
@@ -304,19 +329,30 @@ func update_money(money):
 		printerr("ERROR: hud cannot display money value of: " + money)
 
 func update_hpflash():
-	$AnimationPlayerHp.stop()
+	world.get_node("HUDLayer/HUDAnimator").stop()
 
 ### HELPER ###
 
-func set_cap_pos(bar, length, cap):
+func set_cap_pos(bar, length, cap) -> void:
 	cap.position.x = length * bar.value / bar.max_value
 	cap.visible = false if bar.value == 0 else true
 
-func setup_lost_bars(hp, xp): #needs to be done so that update can tell that it's decreased
+func setup_bars(hp: float, max_hp: float, xp: float, max_xp: float) -> void:
+	hp_progress.max_value = max_hp
+	hp_progress.value = hp
+	set_cap_pos(hp_progress, hp_progress.size.x, hp_progress_cap)
+	hp_lost.max_value = max_hp
 	hp_lost.value = hp
-	#set_cap_pos(hp_lost, 38, hp_lost_cap) #already on _process()
+	set_cap_pos(hp_lost, hp_lost.size.x, hp_lost_cap)
+
+	xp_progress.max_value = max_xp
+	xp_progress.value = xp
+	set_cap_pos(xp_progress, xp_progress.size.x, xp_progress_cap)
+	xp_lost.max_value = max_xp
 	xp_lost.value = xp
-	#set_cap_pos(xp_lost, 38, xp_lost_cap)
+	set_cap_pos(xp_lost, xp_lost.size.x, xp_lost_cap)
+
+	set_cap_pos(cd_progress, cd_progress.size.x, cd_progress_cap)
 
 
 
@@ -324,3 +360,18 @@ func setup_lost_bars(hp, xp): #needs to be done so that update can tell that it'
 
 func _resolution_scale_changed(resolution_scale):
 	set_deferred("size", get_tree().get_root().size / resolution_scale)
+
+func _on_hp_progress_value_changed(_value: float) -> void:
+	set_cap_pos(hp_progress, hp_progress.size.x, hp_progress_cap)
+
+func _on_hp_lost_value_changed(_value: float) -> void:
+	set_cap_pos(hp_lost, hp_lost.size.x, hp_lost_cap)
+
+func _on_xp_progress_value_changed(_value: float) -> void:
+	set_cap_pos(xp_progress, xp_progress.size.x, xp_progress_cap)
+
+func _on_xp_lost_value_changed(_value: float) -> void:
+	set_cap_pos(xp_lost, xp_lost.size.x, xp_lost_cap)
+
+func _on_cooldown_progress_value_changed(value: float) -> void:
+	set_cap_pos(cd_progress, cd_progress.size.x, cd_progress_cap)
