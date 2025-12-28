@@ -22,15 +22,15 @@ func _set_level(val: int) -> void:
 	match val:
 		1:
 			bullets_per_activate = 4
-			speed = 256
+			speed = 512
 			max_xp = 10
 		2:
 			bullets_per_activate = 8
-			speed = 320
+			speed = 640
 			max_xp = 15
 		3:
 			bullets_per_activate = 16
-			speed = 384
+			speed = 748
 			max_xp = 20
 
 func activate():

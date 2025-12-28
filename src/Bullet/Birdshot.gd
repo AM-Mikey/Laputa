@@ -4,7 +4,7 @@ var initial_velocity
 var cool_speed_percent := 0.25
 var free_speed := 8.0
 var bounciness := 0.6
-var air_cof := 0.05
+var air_cof := 0.10
 var cool_time := 0.5
 var free_time := 3.0
 var cool := false
