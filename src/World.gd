@@ -297,7 +297,6 @@ func clear_spawn_layers():
 func _resolution_scale_changed(resolution_scale):
 	ui.scale = Vector2(resolution_scale, resolution_scale)
 	hl.scale = Vector2(resolution_scale, resolution_scale)
-	back.scale = Vector2(resolution_scale, resolution_scale)
 	bl.scale = Vector2(resolution_scale, resolution_scale)
 	var half_scale = max(ceil(resolution_scale/2.0), 1)
 	el.scale = Vector2(half_scale, half_scale)

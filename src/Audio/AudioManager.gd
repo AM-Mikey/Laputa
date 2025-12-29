@@ -19,7 +19,9 @@ signal players_updated
 	"click": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
 	"ammo_refill": preload("res://assets/SFX/Placeholder/snd_get_missile.ogg"),
 	"chest": preload("res://assets/SFX/Placeholder/snd_chest_open.ogg"),
-
+	
+	"prop_deny": preload("res://assets/SFX/Placeholder/snd_quote_bonkhead.ogg"),
+	"prop_sparkle": preload("res://assets/SFX/Placeholder/24.mp3"),
 	"block_break": preload("res://assets/SFX/Placeholder/snd_block_destroy.ogg"),
 	"block_thud": preload("res://assets/SFX/Placeholder/snd_quake.ogg"),
 	
@@ -111,13 +113,13 @@ var interrupt_queue = []
 
 
 
-func play(sfx_string: String, actor = null, bus = null):
+func play(sfx_string: String, actor = null, bus = null, volume = 1.0):
 	if _check_sfx(sfx_string):
 		var player
 		if actor == null: #non-positional
-			player = _add_player("sfx", sfx_string)
+			player = _add_player("sfx", sfx_string, null, volume)
 		else: #positional
-			player = _add_player("pos", sfx_string, actor)
+			player = _add_player("pos", sfx_string, actor, volume)
 
 		if sfx_queue.size() > sfx_player_max:
 			print("WARNING: Too many SFX players! Removed first player")
@@ -181,18 +183,20 @@ func play_interrupt(music_string):
 
 ### ADD AND REMOVE ###
 
-func _add_player(type, audio_string, actor = null):
+func _add_player(type, audio_string, actor = null, volume = 1.0):
 	var player
 	match type:
 		"sfx":
 			player = SFX_PLAYER.instantiate()
 			player.stream = sfx_dict[audio_string]
+			player.volume_db = linear_to_db(volume)
 			add_child(player)
 			var queue_slot = [player, audio_string]
 			sfx_queue.append(queue_slot)
 		"pos":
 			player = POS_SFX_PLAYER.instantiate()
 			player.stream = sfx_dict[audio_string]
+			player.volume_db = linear_to_db(volume)
 			player.global_position = actor.global_position
 			add_child(player)
 			var queue_slot = [player, audio_string]
@@ -200,15 +204,18 @@ func _add_player(type, audio_string, actor = null):
 		"interrupt":
 			player = MUSIC_PLAYER.instantiate()
 			player.stream = music_dict[audio_string]
+			player.volume_db = linear_to_db(volume)
 			add_child(player)
 			var queue_slot = [player, audio_string]
 			interrupt_queue.append(queue_slot)
 		"music":
 			player = MUSIC_PLAYER.instantiate()
 			player.stream = music_dict[audio_string]
+			player.volume_db = linear_to_db(volume)
 			add_child(player)
 			var queue_slot = [player, audio_string]
 			music_queue.append(queue_slot)
+	
 	player.play()
 	emit_signal("players_updated")
 	return player

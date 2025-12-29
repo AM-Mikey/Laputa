@@ -772,25 +772,6 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog4" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(168, -272)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_jjgiq")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
 [node name="Frog5" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -882,6 +863,45 @@ prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
 "crush_players": [false, 1],
+"editor_hidden": [false, 1]
+}
+
+[node name="AmmoRefill" type="Area2D" parent="Spawns" groups=["Entities", "PropSpawns"] instance=ExtResource("15_c0l8s")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(120, -272)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_jjgiq")
+prop_path = "res://src/Prop/AmmoRefill.tscn"
+properties = {
+"editor_hidden": [false, 1]
+}
+
+[node name="AmmoRefill1" type="Area2D" parent="Spawns" groups=["Entities", "PropSpawns"] instance=ExtResource("15_c0l8s")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(136, -352)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_jjgiq")
+prop_path = "res://src/Prop/AmmoRefill.tscn"
+properties = {
+"editor_hidden": [false, 1]
+}
+
+[node name="SaveDisk" type="Area2D" parent="Spawns" groups=["Entities", "PropSpawns"] instance=ExtResource("15_c0l8s")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(168, -344)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_jjgiq")
+prop_path = "res://src/Prop/SaveDisk.tscn"
+properties = {
 "editor_hidden": [false, 1]
 }
 

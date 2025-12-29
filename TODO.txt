@@ -388,3 +388,14 @@ red does not clear on confirm on controller
 add clear button to input maps
 
 make ui accept and deny rebind after confirm on controller
+
+
+
+PROPS TODO:
+
+add number that shows the level of actorspawns that are enemies
+fix filedialog override and lineeditoverride to be updated with whichever the ui accept cancel is etc
+add debug print show cursor position in tile and exact position
+trigger spawn previews
+prop spawn previews
+move actors over to EditorArea

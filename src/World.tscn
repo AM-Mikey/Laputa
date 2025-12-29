@@ -54,7 +54,6 @@ scroll_offset = Vector2(919.05493, 832.5)
 scroll_base_offset = Vector2(0, -2892)
 
 [node name="Back" type="Node2D" parent="."]
-scale = Vector2(4, 4)
 
 [node name="Middle" type="Node2D" parent="."]
 z_index = 1

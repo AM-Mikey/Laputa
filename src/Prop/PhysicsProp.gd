@@ -2,9 +2,6 @@
 extends RigidBody2D
 class_name PhysicsProp
 
-var active_pc = null
-var prop_type = ""
-var spent = false
 var rng = RandomNumberGenerator.new()
 var base_gravity_scale := 1.0
 var water_gravity_scale := 0.5
@@ -21,19 +18,6 @@ func _ready():
 func setup(): #for children
 	pass
 
-func _input(event):
-	if event.is_action_pressed("inspect") and !spent and !active_pc == null:
-		if !active_pc.disabled && active_pc.can_input:
-			activate()
-
-func activate(): #for children
-	pass
-
 func set_is_in_water(val):
 	gravity_scale = base_gravity_scale if !val else water_gravity_scale
 	is_in_water = val
-
-func _on_body_entered(body):
-	active_pc = body.get_parent()
-func _on_body_exited(_body):
-	active_pc = null
