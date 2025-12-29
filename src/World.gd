@@ -255,13 +255,13 @@ func change_level_via_trigger(level_path, door_index):
 	if bl.has_node("TransitionWipe"): #LOADZONES
 		await get_tree().create_timer(0.8).timeout
 		$BlackoutLayer/TransitionWipe.play_out_animation()
-		await get_tree().create_timer(0.2).timeout #wait for a bit of the animation to finish
+		await $BlackoutLayer/TransitionWipe.tree_exiting #wait for a bit of the animation to finish
 		$Juniper.can_input = true
 
 	elif bl.has_node("TransitionIris"): #DOORS
 		await get_tree().create_timer(0.4).timeout
 		$BlackoutLayer/TransitionIris.play_out_animation()
-		await get_tree().create_timer(0.2).timeout #wait for a bit of the animation to finish
+		await $BlackoutLayer/TransitionIris.tree_exiting #wait for a bit of the animation to finish
 		$Juniper.can_input = true
 
 	display_level_text(current_level)
