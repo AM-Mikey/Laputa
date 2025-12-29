@@ -111,7 +111,7 @@ func get_vframe() -> int:
 
 ### STATES ###
 
-func enter():
+func enter(_prev_state: String) -> void:
 	var disable = [
 		pc.get_node("CollisionShape2D"),
 		pc.get_node("CrouchingCollision")]
@@ -122,7 +122,7 @@ func enter():
 	mm.enable_collision_shapes(enable)
 
 
-func exit():
+func exit(_next_state: String) -> void:
 	pc.mm.land()
 	var disable = [
 		pc.get_node("CrouchingCollision"),

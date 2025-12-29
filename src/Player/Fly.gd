@@ -21,7 +21,7 @@ func get_move_dir() -> Vector2: #bypass can_input
 
 ### STATES ###
 
-func enter():
+func enter(_prev_state: String) -> void:
 	pc.invincible = true
 	var disable = [
 		pc.get_node("CollisionShape2D"),
@@ -32,7 +32,7 @@ func enter():
 	pc.set_floor_stop_on_slope_enabled(true)
 
 
-func exit():
+func exit(_next_state: String) -> void:
 	pc.is_in_water = false
 	pc.invincible = false
 	pc.velocity = Vector2.ZERO

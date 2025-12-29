@@ -882,7 +882,7 @@ func get_vframe() -> int:
 
 ### STATE ###
 
-func enter(): #TODO: consider setting these back after exiting or just set these on setup
+func enter(_prev_state: String) -> void: #TODO: consider setting these back after exiting or just set these on setup
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
 	pc.floor_snap_length = 7.9
@@ -890,7 +890,8 @@ func enter(): #TODO: consider setting these back after exiting or just set these
 	pc.safe_margin = 0.008 #may cause issues this low
 	do_edge_turn = false
 	play_animation("run")
-func exit():
+
+func exit(_next_state: String) -> void:
 	sprite.position = Vector2i(0.0, -16.0)
 	sprite.gun_pos_offset = Vector2i(0.0, 0.0)
 	is_dropping = false

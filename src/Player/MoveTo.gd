@@ -100,10 +100,11 @@ func get_vframe() -> int:
 
 ### STATE ###
 
-func enter():
+func enter(_prev_state: String) -> void:
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
-func exit():
+
+func exit(_next_state: String) -> void:
 	pc.move_dir.x = 0.0
 	pc.velocity = Vector2.ZERO
 	mm.move_target = Vector2.ZERO

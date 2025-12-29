@@ -133,7 +133,7 @@ func get_vframe() -> int:
 
 ### STATES ###			#TODO: juniper's hurtbox becomes much smaller when jumping
 
-func enter():
+func enter(_prev_state: String) -> void:
 	var disable = [
 		pc.get_node("CollisionShape2D"),
 		pc.get_node("CrouchingCollision")]
@@ -151,7 +151,7 @@ func enter():
 	pc.move_dir.y = -1.0
 	am.play("pc_jump")
 
-func exit():
+func exit(_next_state: String) -> void:
 	pc.mm.land()
 	var disable = [
 		pc.get_node("CrouchingCollision"),

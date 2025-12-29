@@ -17,6 +17,7 @@ func state_process(_delta):
 	if pc.is_on_floor() and not pc.is_on_ssp:
 		if Input.is_action_pressed("look_down") and pc.can_input:
 			mm.change_state("run")
+			return
 	animate()
 
 
@@ -78,13 +79,15 @@ func get_vframe() -> int:
 
 ### STATES ###
 
-func enter():
+func enter(_prev_state: String) -> void:
 	mm.snap_vector = Vector2.ZERO
+	sprite.position = Vector2(0.0, -8.0)
 	pc.set_collision_mask_value(10, false) #ssp
-	gm.disable() #TODO: why?????
+	gm.disable() #TODO: why????? A: Not allowing player to shoot on ladder is intentional
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
 
-func exit():
+func exit(_next_state: String) -> void:
 	pc.set_collision_mask_value(10, true) #ssp
+	sprite.position = Vector2(0.0, -16.0)
 	gm.enable()

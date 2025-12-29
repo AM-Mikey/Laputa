@@ -165,10 +165,11 @@ func hit(damage, knockback_direction):
 				emit_signal("guns_updated", guns.get_children(), "take_damage")
 
 		if knockback_direction != Vector2.ZERO:
-			#print("Knockback in Dir: " + str(knockback_direction))
-			mm.knockback_direction = knockback_direction
-			mm.snap_vector = Vector2.ZERO
-			mm.change_state("knockback")
+			if (mm.current_state.name.to_lower() != "ladder"):
+				#print("Knockback in Dir: " + str(knockback_direction))
+				mm.knockback_direction = knockback_direction
+				mm.snap_vector = Vector2.ZERO
+				mm.change_state("knockback")
 
 
 func do_iframes():

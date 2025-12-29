@@ -59,7 +59,7 @@ func get_move_velocity(velocity, move_dir):
 
 ### STATES ###
 
-func enter():
+func enter(_prev_state: String) -> void:
 	var disable = [
 		pc.get_node("CollisionShape2D"),
 		pc.get_node("CrouchingCollision")]
@@ -72,7 +72,7 @@ func enter():
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
 
-func exit():
+func exit(_next_state: String) -> void:
 	var disable = [
 		pc.get_node("CrouchingCollision"),
 		pc.get_node("JumpCollision"),
