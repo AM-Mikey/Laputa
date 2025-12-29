@@ -5,12 +5,7 @@ class_name Actor
 const DAMAGE_NUMBER = preload("res://src/Effect/EnemyDamageNumber.tscn")
 const FLOOR_NORMAL: = Vector2.UP
 
-@export var editor_hidden = true
-
-@export var speed: = Vector2(150, 350)
 var gravity := 300.0
-@export var base_gravity: float = 300.0
-@export var water_gravity: float = 150.0
 var acceleration = 50
 var ground_cof = 0.2
 var air_cof = 0.05
@@ -19,6 +14,12 @@ var dead = false
 var is_in_water = false: set = set_is_in_water
 var home := Vector2(0, 0)
 var rng = RandomNumberGenerator.new()
+
+@export var base_gravity: float = 300.0
+@export var water_gravity: float = 150.0
+@export var speed: = Vector2(150, 350)
+@export var editor_hidden = true
+
 @onready var world = get_tree().get_root().get_node("World")
 
 func set_is_in_water(val):

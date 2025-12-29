@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bufns1cnhgyw1" path="res://assets/Actor/Enemy/Bat.png" id="4_7l42t"]
 
 [node name="EnemyButton" type="MarginContainer" groups=["EnemyButtons"]]
-offset_right = 60.0
+offset_right = 44.0
 offset_bottom = 50.0
 theme = ExtResource("2")
 script = ExtResource("3")
@@ -16,6 +16,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="PanelActive" type="Panel" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1")
@@ -27,21 +28,21 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Spacer" type="Control" parent="VBox/HBox"]
-custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="VBox/HBox"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 text = "Enemy"
 
 [node name="Spacer2" type="Control" parent="VBox/HBox"]
-custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBox"]
+unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2

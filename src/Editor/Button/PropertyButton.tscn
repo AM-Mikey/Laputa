@@ -7,27 +7,27 @@
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="4_sdg3t"]
 [ext_resource type="Script" uid="uid://q2r8s3f687q7" path="res://src/Editor/LineEditOverride.gd" id="6_yjys0"]
 
-[sub_resource type="StyleBoxEmpty" id="3"]
-
-[sub_resource type="StyleBoxEmpty" id="4"]
-
-[sub_resource type="StyleBoxEmpty" id="1"]
+[sub_resource type="StyleBoxEmpty" id="5"]
 
 [sub_resource type="StyleBoxEmpty" id="2"]
 
-[sub_resource type="StyleBoxEmpty" id="5"]
+[sub_resource type="StyleBoxEmpty" id="1"]
 
-[sub_resource type="StyleBoxEmpty" id="8"]
+[sub_resource type="StyleBoxEmpty" id="4"]
 
-[sub_resource type="StyleBoxEmpty" id="9"]
+[sub_resource type="StyleBoxEmpty" id="3"]
 
-[sub_resource type="StyleBoxEmpty" id="10"]
-
-[sub_resource type="StyleBoxEmpty" id="6"]
+[sub_resource type="StyleBoxEmpty" id="11"]
 
 [sub_resource type="StyleBoxEmpty" id="7"]
 
-[sub_resource type="StyleBoxEmpty" id="11"]
+[sub_resource type="StyleBoxEmpty" id="6"]
+
+[sub_resource type="StyleBoxEmpty" id="10"]
+
+[sub_resource type="StyleBoxEmpty" id="9"]
+
+[sub_resource type="StyleBoxEmpty" id="8"]
 
 [node name="PropertyButton" type="MarginContainer" groups=["PropertyButtons"]]
 clip_contents = true
@@ -54,13 +54,14 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Button" type="Button" parent="HBox"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_sdg3t")
-theme_override_styles/focus = SubResource("3")
-theme_override_styles/disabled = SubResource("4")
-theme_override_styles/hover = SubResource("1")
-theme_override_styles/pressed = SubResource("2")
 theme_override_styles/normal = SubResource("5")
+theme_override_styles/pressed = SubResource("2")
+theme_override_styles/hover = SubResource("1")
+theme_override_styles/disabled = SubResource("4")
+theme_override_styles/focus = SubResource("3")
 text = "Property"
 flat = true
 
@@ -70,15 +71,16 @@ size_flags_horizontal = 3
 alignment = 2
 
 [node name="Bool" type="CheckBox" parent="HBox/HBox"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 mouse_filter = 1
-theme_override_styles/focus = SubResource("8")
-theme_override_styles/disabled = SubResource("9")
-theme_override_styles/hover_pressed = SubResource("10")
-theme_override_styles/hover = SubResource("6")
-theme_override_styles/pressed = SubResource("7")
 theme_override_styles/normal = SubResource("11")
+theme_override_styles/pressed = SubResource("7")
+theme_override_styles/hover = SubResource("6")
+theme_override_styles/hover_pressed = SubResource("10")
+theme_override_styles/disabled = SubResource("9")
+theme_override_styles/focus = SubResource("8")
 
 [node name="Panel" type="Panel" parent="HBox/HBox/Bool"]
 show_behind_parent = true
@@ -91,29 +93,32 @@ mouse_filter = 2
 theme_override_styles/panel = ExtResource("4")
 
 [node name="Color" type="ColorPickerButton" parent="HBox/HBox"]
+unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_horizontal = 10
-theme_override_styles/focus = ExtResource("4")
-theme_override_styles/disabled = ExtResource("4")
-theme_override_styles/hover = ExtResource("4")
-theme_override_styles/pressed = ExtResource("4")
 theme_override_styles/normal = ExtResource("4")
+theme_override_styles/pressed = ExtResource("4")
+theme_override_styles/hover = ExtResource("4")
+theme_override_styles/disabled = ExtResource("4")
+theme_override_styles/focus = ExtResource("4")
 
 [node name="Enum" type="OptionButton" parent="HBox/HBox"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 1
 theme_override_fonts/font = ExtResource("4_sdg3t")
-theme_override_styles/focus = ExtResource("4")
-theme_override_styles/disabled = ExtResource("4")
-theme_override_styles/hover = ExtResource("4")
-theme_override_styles/pressed = ExtResource("4")
 theme_override_styles/normal = ExtResource("4")
+theme_override_styles/pressed = ExtResource("4")
+theme_override_styles/hover = ExtResource("4")
+theme_override_styles/disabled = ExtResource("4")
+theme_override_styles/focus = ExtResource("4")
 
 [node name="String" type="LineEdit" parent="HBox/HBox"]
+unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
@@ -126,6 +131,7 @@ deselect_on_focus_loss_enabled = false
 script = ExtResource("6_yjys0")
 
 [node name="Multiline" type="TextEdit" parent="HBox/HBox"]
+unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
@@ -136,6 +142,7 @@ placeholder_text = "Null"
 deselect_on_focus_loss_enabled = false
 
 [node name="Int" type="LineEdit" parent="HBox/HBox"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 10
@@ -147,6 +154,7 @@ deselect_on_focus_loss_enabled = false
 script = ExtResource("6_yjys0")
 
 [node name="Float" type="LineEdit" parent="HBox/HBox"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 10
@@ -158,6 +166,7 @@ deselect_on_focus_loss_enabled = false
 script = ExtResource("6_yjys0")
 
 [node name="Load" type="LineEdit" parent="HBox/HBox"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -169,6 +178,7 @@ editable = false
 script = ExtResource("6_yjys0")
 
 [node name="Vector2X" type="LineEdit" parent="HBox/HBox"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 8
@@ -179,6 +189,7 @@ alignment = 2
 script = ExtResource("6_yjys0")
 
 [node name="Vector2Y" type="LineEdit" parent="HBox/HBox"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 8

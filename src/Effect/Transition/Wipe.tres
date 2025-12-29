@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://2rue8rto2pxl" path="res://assets/Effect/Transition/WipeDown.png" id="1"]
 [ext_resource type="Shader" uid="uid://c8m7e6o15c30j" path="res://src/Effect/Transition/Wipe.gdshader" id="2"]
 
+
 [resource]
 shader = ExtResource("2")
 shader_parameter/cutoff = 0.0

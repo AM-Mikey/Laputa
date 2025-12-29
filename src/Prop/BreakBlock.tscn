@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://bo6wktdqx2md0"]
+
+[ext_resource type="Script" uid="uid://dntcigk2jyejb" path="res://src/Prop/BreakBlock.gd" id="1_ejag6"]
+[ext_resource type="Texture2D" uid="uid://cj748gt2c20yk" path="res://assets/Prop/BreakBlock.png" id="2_0cau2"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xkehe"]
+size = Vector2(17, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xavsd"]
+size = Vector2(14, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0cau2"]
+size = Vector2(16, 16)
+
+[node name="BreakBlock" type="RigidBody2D" groups=["Entities", "PhysicsProps", "Props"]]
+collision_layer = 24
+collision_mask = 520
+can_sleep = false
+lock_rotation = true
+freeze_mode = 1
+script = ExtResource("1_ejag6")
+metadata/_custom_type_script = "uid://dgt1xd0pgkr67"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0cau2")
+centered = false
+hframes = 3
+
+[node name="BreakArea" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakArea"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_xkehe")
+
+[node name="CrushDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrushDetector"]
+position = Vector2(8, 16.5)
+shape = SubResource("RectangleShape2D_xavsd")
+
+[node name="EditorArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_0cau2")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[node name="GroundLeft" type="RayCast2D" parent="."]
+position = Vector2(1, 16.5)
+target_position = Vector2(0, 0.5)
+collision_mask = 520
+hit_from_inside = true
+
+[node name="GroundRight" type="RayCast2D" parent="."]
+position = Vector2(15, 16.5)
+target_position = Vector2(0, 0.5)
+collision_mask = 520
+hit_from_inside = true
+
+[connection signal="body_entered" from="CrushDetector" to="." method="_on_CrushDetector_body_entered"]

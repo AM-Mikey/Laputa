@@ -10,8 +10,8 @@ var active_prop_path
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
 
 
-func setup_props(): #TODO: connect this to editor
-	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
+func setup_props():
+	editor.connect("tab_changed", Callable(self, "_on_tab_changed"))
 	var index = 0
 	for p in find_prop_scenes("res://src/Prop/"):
 
@@ -22,7 +22,8 @@ func setup_props(): #TODO: connect this to editor
 			var prop_button = PROP_BUTTON.instantiate()
 			prop_button.prop_path = p
 			prop_button.prop_name = prop.name
-			prop_button.connect("prop_changed", Callable(self, "on_prop_changed"))
+			prop_button.prop_sprite = prop.get_node("Sprite2D").texture
+			prop_button.connect("prop_changed", Callable(self, "_on_prop_changed"))
 			if index == 0:
 				prop_button.active = true
 				active_prop_path = p
@@ -30,28 +31,32 @@ func setup_props(): #TODO: connect this to editor
 			index += 1
 
 
-### GETTERS
+func unpick_prop():
+	active_prop_path = null
+	for b in $VBox/Margin/Scroll/Buttons.get_children():
+			b.deactivate()
+
 
 func find_prop_scenes(path):
 	var files = []
 	var dir = DirAccess.open(path)
 	dir.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
-
 	while true:
 		var file = dir.get_next()
 		if file == "":
 			break
 		if file.ends_with(".tscn"):
 				files.append(path + file)
-
 	return files
 
-### SIGNALS
+
+
+### SIGNALS ###
 
 func on_tab_changed(_tab_name):
 	pass
 
-func on_prop_changed(prop_path):
+func _on_prop_changed(prop_path):
 	editor.set_tool("entity", "prop")
 	active_prop_path = prop_path
 	for b in $VBox/Margin/Scroll/Buttons.get_children():

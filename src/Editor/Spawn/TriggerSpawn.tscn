@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ciahlvrcyq5yt"]
 
-[ext_resource type="Script" uid="uid://od834g8t6x33" path="res://src/Editor/TriggerSpawn.gd" id="1_iwm6m"]
+[ext_resource type="Script" uid="uid://od834g8t6x33" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="1_iwm6m"]
 
 [node name="TriggerSpawn" type="MarginContainer" groups=["TriggerSpawns"]]
 z_index = 999

@@ -18,7 +18,7 @@ func _on_Water_body_entered(body):
 	elif body.get_collision_layer_value(2) or body.get_collision_layer_value(8):
 		target = body
 		target.velocity *= velocity_dropoff
-	elif body.get_collision_layer_value(11) or body.get_collision_layer_value(12) or body.get_collision_layer_value(13):
+	elif body.get_collision_layer_value(5) or body.get_collision_layer_value(11) or body.get_collision_layer_value(12) or body.get_collision_layer_value(13):
 		target = body
 		target.velocity *= velocity_dropoff
 		do_bubbles = false
@@ -49,7 +49,7 @@ func _on_Water_body_exited(body):
 		target = body.get_parent()
 	elif body.get_collision_layer_value(2) or body.get_collision_layer_value(8):
 		target = body
-	elif body.get_collision_layer_value(11) or body.get_collision_layer_value(12) or body.get_collision_layer_value(13):
+	elif body.get_collision_layer_value(5) or body.get_collision_layer_value(11) or body.get_collision_layer_value(12) or body.get_collision_layer_value(13):
 		target = body
 		do_bubbles = false
 

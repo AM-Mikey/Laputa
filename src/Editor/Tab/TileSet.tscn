@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://b06myq2bwfo7r"]
 
 [ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="1"]
-[ext_resource type="Script" uid="uid://b05wwtabfmwos" path="res://src/Editor/TileSet.gd" id="2_88yuq"]
+[ext_resource type="Script" uid="uid://b05wwtabfmwos" path="res://src/Editor/Tab/TileSet.gd" id="2_88yuq"]
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="3"]
 [ext_resource type="Texture2D" uid="uid://duoqsv4fuk3gk" path="res://assets/Editor/TileSetRemapFalse.png" id="3_0qnfu"]
 [ext_resource type="StyleBox" uid="uid://85vca5s565c4" path="res://src/UI/StyleBox/GridRoundInset.tres" id="3_rmr64"]

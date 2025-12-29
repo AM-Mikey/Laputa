@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgxnw8jjm0ueu"]
+[gd_scene load_steps=2 format=3 uid="uid://bqqcw567bq0ot"]
 
-[ext_resource type="Script" uid="uid://c7dct6ib02iu" path="res://src/Editor/EntityPreview.gd" id="1"]
+[ext_resource type="Script" uid="uid://c7dct6ib02iu" path="res://src/Editor/Preview/EntityPreview.gd" id="1"]
 
 [node name="EntityPreview" type="Node2D" groups=["Previews"]]
 modulate = Color(1, 1, 1, 0.5)

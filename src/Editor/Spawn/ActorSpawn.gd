@@ -3,7 +3,7 @@ extends Area2D
 @export_file var actor_path
 @export var properties = {}
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
 	if actor_path == null:
@@ -47,7 +47,7 @@ func _ready():
 	$CollisionShape2D.shape = collision_shape.shape
 	$CollisionShape2D.position = collision_shape.position
 
-	if world.el.get_child_count() == 0: #not in editor
+	if w.el.get_child_count() == 0: #not in editor
 		visible = false
 		input_pickable = false
 		spawn()
@@ -68,7 +68,7 @@ func spawn():
 		actor.set(p, properties[p][0])
 	actor.name = name
 	actor.global_position = global_position
-	world.current_level.get_node("Actors").call_deferred("add_child", actor)
+	w.current_level.get_node("Actors").call_deferred("add_child", actor)
 
 
 
@@ -85,6 +85,6 @@ func on_editor_deselect():
 	#emit_signal("selected", self, "actor_spawn")
 
 func _input_event(_viewport, event, _shape_idx): #selecting in editor
-	var inspector = world.get_node("EditorLayer/Editor").inspector
+	var inspector = w.get_node("EditorLayer/Editor").inspector
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
 		inspector.on_selected(self, "actor_spawn")

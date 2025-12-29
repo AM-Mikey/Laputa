@@ -20,7 +20,9 @@ signal players_updated
 	"ammo_refill": preload("res://assets/SFX/Placeholder/snd_get_missile.ogg"),
 	"chest": preload("res://assets/SFX/Placeholder/snd_chest_open.ogg"),
 
-	"break_block": preload("res://assets/SFX/Placeholder/snd_block_destroy.ogg"),
+	"block_break": preload("res://assets/SFX/Placeholder/snd_block_destroy.ogg"),
+	"block_thud": preload("res://assets/SFX/Placeholder/snd_quake.ogg"),
+	
 	"break_grass": preload("res://assets/SFX/Placeholder/snd_explosion2.ogg"),
 
 	"explode": preload("res://assets/SFX/Placeholder/snd_big_crash.ogg"),

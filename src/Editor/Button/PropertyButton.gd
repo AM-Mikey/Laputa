@@ -19,54 +19,54 @@ func _input(event: InputEvent):
 				i.release_focus()
 
 func _ready():
-	$HBox/Button.text = property_name
+	%Button.text = property_name
 	align_enum_menu()
 
 	match property_type:
 		"bool", Variant.Type.TYPE_BOOL:
-			enabled_controls.append($HBox/HBox/Bool)
-			$HBox/HBox/Bool.button_pressed = property_value
+			enabled_controls.append(%Bool)
+			%Bool.button_pressed = property_value
 		"color", Variant.Type.TYPE_COLOR:
-			enabled_controls.append($HBox/HBox/Color)
-			$HBox/HBox/Color.color = property_value
+			enabled_controls.append(%Color)
+			%Color.color = property_value
 		"enum":
-			enabled_controls.append($HBox/HBox/Enum)
+			enabled_controls.append(%Enum)
 			for i in enum_items:
-				$HBox/HBox/Enum.add_item(i)
-			$HBox/HBox/Enum.select(property_value)
+				%Enum.add_item(i)
+			%Enum.select(property_value)
 
 		"int", Variant.Type.TYPE_INT:
-			enabled_controls.append($HBox/HBox/Int)
+			enabled_controls.append(%Int)
 			if property_value != null: #"if property_value" doesn't trigger for value = 0
-				$HBox/HBox/Int.text = "%d" % int(property_value)
+				%Int.text = "%d" % int(property_value)
 		"float", Variant.Type.TYPE_FLOAT:
-			enabled_controls.append($HBox/HBox/Float)
+			enabled_controls.append(%Float)
 			if property_value != null:
-				$HBox/HBox/Float.text = "%.*f" % [get_decimal_digits(snapped(float(property_value), 0.001)), float(property_value)]
+				%Float.text = "%.*f" % [get_decimal_digits(snapped(float(property_value), 0.001)), float(property_value)]
 		"load":
-			enabled_controls.append($HBox/HBox/Load)
+			enabled_controls.append(%Load)
 			if property_value != null:
-				$HBox/HBox/Load.text = str(property_value)
+				%Load.text = str(property_value)
 		"string", Variant.Type.TYPE_STRING:
-			enabled_controls.append($HBox/HBox/String)
+			enabled_controls.append(%String)
 			if property_value != null:
-				$HBox/HBox/String.text = String(property_value)
+				%String.text = String(property_value)
 		"multiline":
-			enabled_controls.append($HBox/HBox/Multiline)
+			enabled_controls.append(%Multiline)
 			custom_minimum_size.y = 128
 			if property_value != null:
-				$HBox/HBox/Multiline.text = String(property_value)
+				%Multiline.text = String(property_value)
 
 		"vector2", Variant.Type.TYPE_VECTOR2: #unused as we split this
-			enabled_controls.append($HBox/HBox/Vector2X)
-			enabled_controls.append($HBox/HBox/Vector2Y)
+			enabled_controls.append(%Vector2X)
+			enabled_controls.append(%Vector2Y)
 			if property_value != null:
-				$HBox/HBox/Vector2X.text = "%.*f" % [get_decimal_digits(snapped(float(property_value.x), 0.001)), float(property_value.x)]
-				$HBox/HBox/Vector2Y.text = "%.*f" % [get_decimal_digits(snapped(float(property_value.y), 0.001)), float(property_value.y)]
+				%Vector2X.text = "%.*f" % [get_decimal_digits(snapped(float(property_value.x), 0.001)), float(property_value.x)]
+				%Vector2Y.text = "%.*f" % [get_decimal_digits(snapped(float(property_value.y), 0.001)), float(property_value.y)]
 		_:
-			enabled_controls.append($HBox/HBox/String)
+			enabled_controls.append(%String)
 			if property_value != null:
-				$HBox/HBox/String.text = str(property_value)
+				%String.text = str(property_value)
 
 	for i in enabled_controls:
 		i.visible = true
@@ -101,39 +101,39 @@ func on_bool_toggled(button_pressed):
 		property_value = button_pressed
 		emit_signal("property_changed", property_name, property_value)
 func on_color_changed():
-	if property_value != $HBox/HBox/Color.color and !disabled:
-		property_value = $HBox/HBox/Color.color
+	if property_value != %Color.color and !disabled:
+		property_value = %Color.color
 		emit_signal("property_changed", property_name, property_value)
 func on_enum_selected(index):
 	property_value = index
 	emit_signal("property_changed", property_name, property_value)
 
 func _on_string_complete(_value = 0):
-	if property_value != $HBox/HBox/String.text and !disabled:
+	if property_value != %String.text and !disabled:
 	#$HBox/HBox/String.release_focus()
-		property_value = $HBox/HBox/String.text
+		property_value = %String.text
 		emit_signal("property_changed", property_name, property_value)
 func _on_multiline_complete(_value = 0):
-	if property_value != $HBox/HBox/Multiline.text and !disabled:
-		property_value = $HBox/HBox/Multiline.text
+	if property_value != %Multiline.text and !disabled:
+		property_value = %Multiline.text
 		emit_signal("property_changed", property_name, property_value)
 
 func _on_int_complete(_value = 0):
-	if property_value != int($HBox/HBox/Int.text) and !disabled:
-		property_value = int($HBox/HBox/Int.text)
+	if property_value != int(%Int.text) and !disabled:
+		property_value = int(%Int.text)
 		emit_signal("property_changed", property_name, property_value)
 func _on_float_complete(_value = 0):
-	if compare_floats(property_value, float($HBox/HBox/Float.text)) and !disabled:
-		property_value = float($HBox/HBox/Float.text)
+	if compare_floats(property_value, float(%Float.text)) and !disabled:
+		property_value = float(%Float.text)
 		emit_signal("property_changed", property_name, property_value)
 
 func _on_vector2x_complete(_value = 0):
-	if compare_floats(property_value.x, float($HBox/HBox/Vector2X.text)) and !disabled:
-		property_value.x = float($HBox/HBox/Vector2X.text)
+	if compare_floats(property_value.x, float(%Vector2X.text)) and !disabled:
+		property_value.x = float(%Vector2X.text)
 		emit_signal("property_changed", property_name, property_value)
 func _on_vector2y_complete(_value = 0):
-	if compare_floats(property_value.y, float($HBox/HBox/Vector2Y.text)) and !disabled:
-		property_value.y = float($HBox/HBox/Vector2Y.text)
+	if compare_floats(property_value.y, float(%Vector2Y.text)) and !disabled:
+		property_value.y = float(%Vector2Y.text)
 		emit_signal("property_changed", property_name, property_value)
 
 func compare_floats(float1, float2) -> bool:
