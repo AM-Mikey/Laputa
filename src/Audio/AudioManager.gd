@@ -22,6 +22,7 @@ signal players_updated
 	
 	"prop_deny": preload("res://assets/SFX/Placeholder/snd_quote_bonkhead.ogg"),
 	"prop_sparkle": preload("res://assets/SFX/Placeholder/24.mp3"),
+	"prop_click": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
 	"block_break": preload("res://assets/SFX/Placeholder/snd_block_destroy.ogg"),
 	"block_thud": preload("res://assets/SFX/Placeholder/snd_quake.ogg"),
 	

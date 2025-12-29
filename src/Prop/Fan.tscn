@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://d11mjw1kfmapi"]
+
+[ext_resource type="Texture2D" uid="uid://dhxy8j6e76eg8" path="res://assets/Prop/Outdated/Fan.png" id="1"]
+[ext_resource type="Script" uid="uid://ceam3wmge4fgc" path="res://src/Prop/Fan.gd" id="2"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 24)
+
+[sub_resource type="Animation" id="2"]
+resource_name = "Spin"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_hr2ib"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_anuvr"]
+_data = {
+&"RESET": SubResource("Animation_hr2ib"),
+&"Spin": SubResource("2")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hr2ib"]
+size = Vector2(16, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lc2t6"]
+size = Vector2(16, 16)
+
+[node name="Fan" type="CharacterBody2D" groups=["Entities", "Props"]]
+collision_layer = 16
+script = ExtResource("2")
+metadata/_custom_type_script = "uid://dkko72kbbon8e"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 12)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 0
+texture = ExtResource("1")
+centered = false
+hframes = 8
+frame = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_anuvr")
+}
+autoplay = "Spin"
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2(8, 12)
+shape = SubResource("RectangleShape2D_hr2ib")
+
+[node name="EditorArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_lc2t6")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

@@ -91,10 +91,6 @@ enabled=PackedStringArray()
 
 auto_complete=false
 
-[global_group]
-
-HUDs=""
-
 [importer_defaults]
 
 texture={

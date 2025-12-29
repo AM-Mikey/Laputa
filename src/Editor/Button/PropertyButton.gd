@@ -12,6 +12,18 @@ var disabled = false #TODO: when is this used?
 var enabled_controls = []
 var is_mouse_entered = false
 
+@onready var button = %Button
+@onready var button_bool = %Bool
+@onready var button_color = %Color
+@onready var button_enum = %Enum
+@onready var button_int = %Int
+@onready var button_float = %Float
+@onready var button_load = %Load
+@onready var button_string = %String
+@onready var button_multiline = %Multiline
+@onready var button_vector2X = %Vector2x
+@onready var button_vector2Y = %Vector2y
+
 func _input(event: InputEvent):
 	if event.is_action_pressed("editor_lmb") and !is_mouse_entered:
 		for i in enabled_controls:
@@ -19,54 +31,54 @@ func _input(event: InputEvent):
 				i.release_focus()
 
 func _ready():
-	%Button.text = property_name
+	button.text = property_name
 	align_enum_menu()
 
 	match property_type:
 		"bool", Variant.Type.TYPE_BOOL:
-			enabled_controls.append(%Bool)
-			%Bool.button_pressed = property_value
+			enabled_controls.append(button_bool)
+			button_bool.button_pressed = property_value
 		"color", Variant.Type.TYPE_COLOR:
-			enabled_controls.append(%Color)
-			%Color.color = property_value
+			enabled_controls.append(button_color)
+			button_color.color = property_value
 		"enum":
-			enabled_controls.append(%Enum)
+			enabled_controls.append(button_enum)
 			for i in enum_items:
-				%Enum.add_item(i)
-			%Enum.select(property_value)
+				button_enum.add_item(i)
+			button_enum.select(property_value)
 
 		"int", Variant.Type.TYPE_INT:
-			enabled_controls.append(%Int)
+			enabled_controls.append(button_int)
 			if property_value != null: #"if property_value" doesn't trigger for value = 0
-				%Int.text = "%d" % int(property_value)
+				button_int.text = "%d" % int(property_value)
 		"float", Variant.Type.TYPE_FLOAT:
-			enabled_controls.append(%Float)
+			enabled_controls.append(button_float)
 			if property_value != null:
-				%Float.text = "%.*f" % [get_decimal_digits(snapped(float(property_value), 0.001)), float(property_value)]
+				button_float.text = "%.*f" % [get_decimal_digits(snapped(float(property_value), 0.001)), float(property_value)]
 		"load":
-			enabled_controls.append(%Load)
+			enabled_controls.append(button_load)
 			if property_value != null:
-				%Load.text = str(property_value)
+				button_load.text = str(property_value)
 		"string", Variant.Type.TYPE_STRING:
-			enabled_controls.append(%String)
+			enabled_controls.append(button_string)
 			if property_value != null:
-				%String.text = String(property_value)
+				button_string.text = String(property_value)
 		"multiline":
-			enabled_controls.append(%Multiline)
+			enabled_controls.append(button_multiline)
 			custom_minimum_size.y = 128
 			if property_value != null:
-				%Multiline.text = String(property_value)
+				button_multiline.text = String(property_value)
 
 		"vector2", Variant.Type.TYPE_VECTOR2: #unused as we split this
-			enabled_controls.append(%Vector2X)
-			enabled_controls.append(%Vector2Y)
+			enabled_controls.append(button_vector2X)
+			enabled_controls.append(button_vector2Y)
 			if property_value != null:
-				%Vector2X.text = "%.*f" % [get_decimal_digits(snapped(float(property_value.x), 0.001)), float(property_value.x)]
-				%Vector2Y.text = "%.*f" % [get_decimal_digits(snapped(float(property_value.y), 0.001)), float(property_value.y)]
+				button_vector2X.text = "%.*f" % [get_decimal_digits(snapped(float(property_value.x), 0.001)), float(property_value.x)]
+				button_vector2Y.text = "%.*f" % [get_decimal_digits(snapped(float(property_value.y), 0.001)), float(property_value.y)]
 		_:
-			enabled_controls.append(%String)
+			enabled_controls.append(button_string)
 			if property_value != null:
-				%String.text = str(property_value)
+				button_string.text = str(property_value)
 
 	for i in enabled_controls:
 		i.visible = true
@@ -101,39 +113,39 @@ func on_bool_toggled(button_pressed):
 		property_value = button_pressed
 		emit_signal("property_changed", property_name, property_value)
 func on_color_changed():
-	if property_value != %Color.color and !disabled:
-		property_value = %Color.color
+	if property_value != button_color.color and !disabled:
+		property_value = button_color.color
 		emit_signal("property_changed", property_name, property_value)
 func on_enum_selected(index):
 	property_value = index
 	emit_signal("property_changed", property_name, property_value)
 
 func _on_string_complete(_value = 0):
-	if property_value != %String.text and !disabled:
+	if property_value != button_string.text and !disabled:
 	#$HBox/HBox/String.release_focus()
-		property_value = %String.text
+		property_value = button_string.text
 		emit_signal("property_changed", property_name, property_value)
 func _on_multiline_complete(_value = 0):
-	if property_value != %Multiline.text and !disabled:
-		property_value = %Multiline.text
+	if property_value != button_multiline.text and !disabled:
+		property_value = button_multiline.text
 		emit_signal("property_changed", property_name, property_value)
 
 func _on_int_complete(_value = 0):
-	if property_value != int(%Int.text) and !disabled:
-		property_value = int(%Int.text)
+	if property_value != int(button_int.text) and !disabled:
+		property_value = int(button_int.text)
 		emit_signal("property_changed", property_name, property_value)
 func _on_float_complete(_value = 0):
-	if compare_floats(property_value, float(%Float.text)) and !disabled:
-		property_value = float(%Float.text)
+	if compare_floats(property_value, float(button_float.text)) and !disabled:
+		property_value = float(button_float.text)
 		emit_signal("property_changed", property_name, property_value)
 
 func _on_vector2x_complete(_value = 0):
-	if compare_floats(property_value.x, float(%Vector2X.text)) and !disabled:
-		property_value.x = float(%Vector2X.text)
+	if compare_floats(property_value.x, float(button_vector2X.text)) and !disabled:
+		property_value.x = float(button_vector2X.text)
 		emit_signal("property_changed", property_name, property_value)
 func _on_vector2y_complete(_value = 0):
-	if compare_floats(property_value.y, float(%Vector2Y.text)) and !disabled:
-		property_value.y = float(%Vector2Y.text)
+	if compare_floats(property_value.y, float(button_vector2Y.text)) and !disabled:
+		property_value.y = float(button_vector2Y.text)
 		emit_signal("property_changed", property_name, property_value)
 
 func compare_floats(float1, float2) -> bool:
