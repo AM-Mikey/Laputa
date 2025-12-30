@@ -264,7 +264,8 @@ func change_level_via_trigger(level_path, door_index):
 		await $BlackoutLayer/TransitionIris.tree_exiting #wait for a bit of the animation to finish
 		$Juniper.can_input = true
 
-	display_level_text(current_level)
+	if (old_level_path != level_path):
+		display_level_text(current_level)
 	#await get_tree().create_timer(0.01).timeout
 	$Juniper/PlayerCamera.position_smoothing_enabled = true
 
