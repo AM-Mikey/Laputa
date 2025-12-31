@@ -33,7 +33,7 @@ func _input(event):
 			if !p.disabled && p.can_input && p.mm.current_state == p.mm.states["run"]:
 				var previous_look_dir = p.look_dir
 				p.mm.change_state("inspect")
-				p.look_dir = Vector2(sign(p.global_position.x - global_position.x), 0.0)
+				p.look_dir = Vector2(sign(p.global_position.x - $CollisionShape2D.global_position.x), 0.0)
 				activate()
 				await get_tree().create_timer(inspect_time).timeout
 				p.mm.change_state("run")

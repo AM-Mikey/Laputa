@@ -1240,6 +1240,14 @@ libraries = {
 [node name="Fly" type="Marker2D" parent="Base/Ammo"]
 position = Vector2(67, -18)
 
+[node name="GunIcon" parent="Base" instance=ExtResource("11")]
+visible = false
+layout_mode = 0
+offset_left = 98.0
+offset_top = 6.0
+offset_right = 138.0
+offset_bottom = 46.0
+
 [node name="Gun" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 3
@@ -1252,14 +1260,6 @@ grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 mouse_filter = 2
-
-[node name="GunIcon" parent="Gun" instance=ExtResource("11")]
-visible = false
-layout_mode = 0
-offset_left = -109.0
-offset_top = -65.0
-offset_right = -69.0
-offset_bottom = -25.0
 
 [node name="WheelPivot" type="Control" parent="Gun"]
 layout_mode = 1

@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://1j3e4dgg6gv3"]
+
+[ext_resource type="Script" uid="uid://bq7j4yi4xlvbs" path="res://src/Prop/ChestWeapon.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://bjwvnd0w6cx4x" path="res://assets/Prop/ChestWeapon.png" id="2_f6n5n"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(24, 16)
+
+[sub_resource type="Animation" id="2"]
+resource_name = "Shine"
+length = 2.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 0]
+}
+
+[sub_resource type="Animation" id="3"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s4csk"]
+_data = {
+&"Shine": SubResource("2"),
+&"Used": SubResource("3")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0jpg"]
+size = Vector2(24, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6n5n"]
+size = Vector2(32, 16)
+
+[node name="ChestWeapon" type="RigidBody2D" groups=["LimitedProps"]]
+collision_layer = 16
+collision_mask = 8
+can_sleep = false
+freeze_mode = 1
+script = ExtResource("2")
+metadata/_custom_type_script = "uid://dgt1xd0pgkr67"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 8)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_f6n5n")
+centered = false
+hframes = 9
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_s4csk")
+}
+autoplay = "Shine"
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2(16, 8)
+shape = SubResource("RectangleShape2D_v0jpg")
+
+[node name="EditorArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+position = Vector2(16, 8)
+shape = SubResource("RectangleShape2D_f6n5n")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

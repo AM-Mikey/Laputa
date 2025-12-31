@@ -3,6 +3,7 @@ extends RigidBody2D
 class_name PhysicsProp
 
 var rng = RandomNumberGenerator.new()
+var inspect_time = 0.2
 var base_gravity_scale := 1.0
 var water_gravity_scale := 0.5
 
