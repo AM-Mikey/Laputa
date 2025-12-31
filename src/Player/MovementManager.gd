@@ -76,6 +76,7 @@ func _physics_process(_delta):
 	speed = base_speed if not get_parent().is_in_water else water_speed
 	gravity = base_gravity if not get_parent().is_in_water else water_gravity
 	do_ceiling_push_check()
+	pc.is_on_ssp = get_is_on_ssp()
 	current_state.state_process(_delta)
 
 
@@ -134,6 +135,21 @@ func do_ceiling_push_check():
 		and not pc.move_dir.x > 0:
 			pc.global_position.x -= 2.0 if not pc.get_node("ClearenceRH").is_colliding() else 4.0
 			pc.get_node("CollisionShape2D").set_deferred("disabled", false)
+
+
+func get_is_on_ssp() -> bool:
+	var out = false
+	var p = pc.get_node("SSPCasts")
+	if p.get_node("SSPLeft").is_colliding() || p.get_node("SSPRight").is_colliding():
+		if !p.get_node("WorldLeft").is_colliding() && !p.get_node("WorldRight").is_colliding():
+			out = true
+	#elif p.get_node("SSPLeft").is_colliding():
+		#if !p.get_node("WorldLeft").is_colliding() and !p.get_node("WorldRight").is_colliding():
+			#out = true
+	#elif p.get_node("SSPRight").is_colliding():
+		#if !p.get_node("WorldLeft").is_colliding() and !p.get_node("WorldRight").is_colliding():
+			#out = true
+	return out
 
 
 func disable_collision_shapes(array):
