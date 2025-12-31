@@ -6,8 +6,8 @@ var animation = "IrisContract"
 @onready var pc = f.pc()
 
 func _ready():
-		print("playing in animation")
-		$AnimationPlayer.play(animation)
+	print("playing in animation")
+	$AnimationPlayer.play(animation)
 
 
 func play_out_animation():

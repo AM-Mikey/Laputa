@@ -157,14 +157,13 @@ func get_vframe() -> int:
 
 ### STATES ###			#TODO: juniper's hurtbox becomes much smaller when jumping
 
-func enter():
+func enter(_prev_state: String) -> void:
 	jump_time = 0
 	var disable = [
 		pc.get_node("CollisionShape2D"),
 		pc.get_node("CrouchingCollision")]
 	var enable = [
-		pc.get_node("JumpCollision"),
-		pc.get_node("SSPDetector/CollisionShape2D2")]
+		pc.get_node("JumpCollision")]
 	mm.disable_collision_shapes(disable)
 	mm.enable_collision_shapes(enable)
 
@@ -179,12 +178,12 @@ func enter():
 		am.play("pc_jump")
 	did_bonk = false
 
-func exit():
-	pc.mm.land()
+func exit(next_state: String) -> void:
+	if (next_state in ["run"]):
+		pc.mm.land()
 	var disable = [
 		pc.get_node("CrouchingCollision"),
-		pc.get_node("JumpCollision"),
-		pc.get_node("SSPDetector/CollisionShape2D2")]
+		pc.get_node("JumpCollision")]
 	var enable = [pc.get_node("CollisionShape2D")]
 	mm.disable_collision_shapes(disable)
 	mm.enable_collision_shapes(enable)

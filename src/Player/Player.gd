@@ -34,7 +34,6 @@ var can_input = true
 #var is_on_conveyor = false
 var enemies_touching = []
 var is_on_ssp = false
-var deny_ssp = false
 var is_crouching = false
 var forbid_crouching = false
 var is_in_water = false
@@ -65,7 +64,6 @@ var sound_profile = SoundProfile.NORMAL:
 			am.underwater_attenuate(false)
 
 
-
 @onready var world = get_tree().get_root().get_node("World")
 @onready var HUD
 @onready var mm = get_node("MovementManager")
@@ -73,12 +71,9 @@ var sound_profile = SoundProfile.NORMAL:
 @onready var guns = get_node("GunManager/Guns")
 @onready var iframe_timer = %IframeTimer
 
+
 func _ready():
 	connect_inventory()
-#	if weapon_array.front() != null: TODO:fix
-#		$WeaponSprite.texture = weapon_array.front().texture
-	await get_tree().process_frame
-	#$SSPDetector.monitoring = true #patch, some weird bug detects ssp on startup
 
 
 func disable():
@@ -101,16 +96,18 @@ func enable():
 		return
 
 
-### ACTIONS
+### ACTIONS ###
 
 func move_to(pos):
 	mm.move_target = pos
 	mm.change_state("moveto")
 	return
 
+
 func do_step(): #TODO: this is a failsafe, only works with run animations. for some reason it was playing twice on animation blend time
 	if $Sprite2D.frame_coords.x == 1 or $Sprite2D.frame_coords.x == 7:
 		am.play("pc_step")
+
 
 func enemy_entered(enemy):
 	enemies_touching.append(enemy)
@@ -121,8 +118,10 @@ func enemy_entered(enemy):
 	#print("kb: ", knockback_direction)
 	hit(damage, knockback_direction)
 
+
 func enemy_exited(enemy):
 	enemies_touching.erase(enemy)
+
 
 func hit(damage, knockback_direction):
 	if not disabled and not invincible:
@@ -165,10 +164,11 @@ func hit(damage, knockback_direction):
 				emit_signal("guns_updated", guns.get_children(), "take_damage")
 
 		if knockback_direction != Vector2.ZERO:
-			#print("Knockback in Dir: " + str(knockback_direction))
-			mm.knockback_direction = knockback_direction
-			mm.snap_vector = Vector2.ZERO
-			mm.change_state("knockback")
+			if (mm.current_state.name.to_lower() != "ladder"):
+				#print("Knockback in Dir: " + str(knockback_direction))
+				mm.knockback_direction = knockback_direction
+				mm.snap_vector = Vector2.ZERO
+				mm.change_state("knockback")
 
 
 func do_iframes():
@@ -209,28 +209,13 @@ func die():
 
 
 ### SIGNALS ###
+
 func _on_IframeTimer_timeout() -> void:
 	invincible = false
 	emit_signal("invincibility_end")
 	$EffectPlayer.stop()
 	if not enemies_touching.is_empty():
 		hit_again()
-
-
-func _on_SSPDetector_body_entered(_body):
-	if not deny_ssp:
-		is_on_ssp = true
-
-func _on_SSPDetector_body_exited(_body):
-	is_on_ssp = false
-
-func _on_SSPWorldDetector_body_entered(_body):
-	deny_ssp = true
-
-func _on_SSPWorldDetector_body_exited(_body):
-	deny_ssp = false
-	if $SSPDetector.has_overlapping_bodies():
-		is_on_ssp = true
 
 
 func _on_ItemDetector_area_entered(area):
@@ -315,12 +300,8 @@ func _on_Ear_area_exited(_area):
 	sound_profile = SoundProfile.NORMAL
 
 
-#func _on_HurtDetector_area_entered(area): #KILLBOX #TODO: reverse this!
-	#if area.get_collision_layer_value(14): #kill
-		#die()
 
 ### MISC
-
 
 #TODO: clean these up and get rid of them
 func update_inventory():

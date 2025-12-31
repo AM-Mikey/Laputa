@@ -80,12 +80,6 @@ func _physics_process(delta):
 func _on_physics_process(_delta): #for child
 	pass
 
-#func exit():	#OBSOLETE
-	#if get_parent().get_parent() is Path2D:
-		#get_parent().get_parent().queue_free()
-	#else:
-		#queue_free()
-
 func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
 	var out: = velocity
 	var fractional_speed = speed

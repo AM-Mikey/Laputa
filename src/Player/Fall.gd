@@ -111,23 +111,21 @@ func get_vframe() -> int:
 
 ### STATES ###
 
-func enter():
+func enter(_prev_state: String) -> void:
 	var disable = [
 		pc.get_node("CollisionShape2D"),
 		pc.get_node("CrouchingCollision")]
 	var enable = [
-		pc.get_node("JumpCollision"),
-		pc.get_node("SSPDetector/CollisionShape2D2")]
+		pc.get_node("JumpCollision")]
 	mm.disable_collision_shapes(disable)
 	mm.enable_collision_shapes(enable)
 
 
-func exit():
+func exit(_next_state: String) -> void:
 	pc.mm.land()
 	var disable = [
 		pc.get_node("CrouchingCollision"),
-		pc.get_node("JumpCollision"),
-		pc.get_node("SSPDetector/CollisionShape2D2")]
+		pc.get_node("JumpCollision")]
 	var enable = [pc.get_node("CollisionShape2D")]
 	mm.disable_collision_shapes(disable)
 	mm.enable_collision_shapes(enable)
