@@ -151,7 +151,7 @@ func exit():	#TODO: make this an editor_exit signal ## no? that just decentraliz
 	inspector.exit()
 	if w.current_level.has_node("TileAnimator"):
 		w.current_level.get_node("TileAnimator").editor_exit()
-	clear_tile_map_cursor()
+	tile_map_cursor.queue_free()
 	free_previews()
 	editor_level_limiter.queue_free()
 	w.el.get_node("EditorCamera").queue_free()
@@ -866,7 +866,7 @@ func set_tool(new_tool = "", new_subtool = ""):
 
 	subtool = new_subtool
 
-func clear_tile_map_cursor():
+func clear_tile_map_cursor(): #Warning: it still exists after!
 	tile_map_selection = Rect2i(0,0,0,0)
 	tile_map_cursor.size = Vector2i.ZERO
 	tile_map_cursor.position = Vector2i.ZERO

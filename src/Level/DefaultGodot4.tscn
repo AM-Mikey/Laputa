@@ -3,21 +3,21 @@
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="1_4uhn8"]
 [ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="2_s4ctt"]
 [ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_abgb0"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_c0l8s"]
 [ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_yl2sd"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="5_sjslv"]
 [ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="5_v7nqo"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="6_dcw0l"]
 [ext_resource type="PackedScene" path="res://src/Effect/Light/SunLight.tscn" id="6_mcn17"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_v7nqo"]
-[ext_resource type="Script" path="res://src/Effect/Light/SunLight.gd" id="8_v7nqo"]
+[ext_resource type="Script" path="res://src/Effect/Light/SunLight.gd" id="8_jjgiq"]
 [ext_resource type="PackedScene" path="res://src/Utility/Waypoint.tscn" id="9_20ig1"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="10_c0l8s"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_jjgiq"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="14_j7c6d"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="10_j7c6d"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_ug36o"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="14_lw0ap"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="15_c0l8s"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="16_jjgiq"]
-[ext_resource type="Script" path="res://src/Utility/Waypoint.gd" id="16_ug36o"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="16_wcveo"]
+[ext_resource type="Script" path="res://src/Utility/Waypoint.gd" id="18_hahi5"]
 
 [node name="DefaultGodot4" type="Node2D"]
 visibility_layer = 2
@@ -34,7 +34,7 @@ offset_top = -512.0
 offset_right = 1088.0
 offset_bottom = 192.0
 mouse_filter = 2
-script = ExtResource("3_yl2sd")
+script = ExtResource("3_c0l8s")
 background_resource = ExtResource("3_abgb0")
 texture = ExtResource("5_v7nqo")
 layers = 5
@@ -102,7 +102,7 @@ visibility_layer = 2
 position = Vector2(35, -198)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_v7nqo")
+script = ExtResource("8_jjgiq")
 
 [node name="Spawns" type="Node2D" parent="."]
 visibility_layer = 2
@@ -112,7 +112,7 @@ visibility_layer = 2
 position = Vector2(296, -256)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_c0l8s")
+script = ExtResource("10_j7c6d")
 
 [node name="Child" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
@@ -121,7 +121,7 @@ z_index = 999
 position = Vector2(-40, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/NPC/Child.tscn"
 properties = {
 "conversation": ["branchtest4", 4],
@@ -140,7 +140,7 @@ z_index = 999
 position = Vector2(280, -192)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "debug": [true, 1],
@@ -157,7 +157,7 @@ z_index = 999
 position = Vector2(336, 176)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/NPC/Nun.tscn"
 properties = {
 "conversation": ["simpletest", 4],
@@ -176,7 +176,7 @@ z_index = 999
 position = Vector2(328, -112)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "debug": [true, 1],
@@ -193,7 +193,7 @@ z_index = 999
 position = Vector2(360, -112)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "debug": [true, 1],
@@ -210,7 +210,7 @@ z_index = 999
 position = Vector2(296, -112)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "debug": [true, 1],
@@ -227,7 +227,7 @@ z_index = 999
 position = Vector2(-248, 80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "debug": [true, 1],
@@ -244,7 +244,7 @@ z_index = 999
 position = Vector2(-24, -112)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "debug": [false, 1],
@@ -260,7 +260,7 @@ z_index = 999
 position = Vector2(144, 96)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "debug": [true, 1],
@@ -280,7 +280,7 @@ z_index = 999
 position = Vector2(208, 48)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Junior.tscn"
 properties = {
 "aim_time": [0.2, 3],
@@ -301,7 +301,7 @@ z_index = 999
 position = Vector2(280, -168)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "debug": [true, 1],
@@ -318,7 +318,7 @@ z_index = 999
 position = Vector2(392, 96)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "cooldown_time": [4.0, 3],
@@ -341,7 +341,7 @@ z_index = 999
 position = Vector2(520, -112)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "cooldown_time": [4.0, 3],
@@ -364,7 +364,7 @@ z_index = 999
 position = Vector2(392, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "debug": [false, 1],
@@ -381,7 +381,7 @@ z_index = 999
 position = Vector2(232, 96)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/NPC/Tabith.tscn"
 properties = {
 "conversation": ["", 4],
@@ -401,7 +401,7 @@ z_index = 999
 position = Vector2(216, 176)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/NPC/Sage.tscn"
 properties = {
 "conversation": ["", 4],
@@ -421,7 +421,7 @@ z_index = 999
 position = Vector2(328, 96)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/NPC/Sage.tscn"
 properties = {
 "conversation": ["", 4],
@@ -441,7 +441,7 @@ z_index = 999
 position = Vector2(-8, 160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "debug": [true, 1],
@@ -458,7 +458,7 @@ z_index = 999
 position = Vector2(-168, -112)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Beetle.tscn"
 properties = {
 "crawl_start_dir": [Vector2(0, 1), 5],
@@ -477,7 +477,7 @@ z_index = 999
 position = Vector2(160, -168)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Climber.tscn"
 properties = {
 "arm_angle_speed": [0.01, 3],
@@ -497,7 +497,7 @@ z_index = 999
 position = Vector2(744, -16)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Beetle.tscn"
 properties = {
 "crawl_start_dir": [Vector2(0, 0), 5],
@@ -519,7 +519,7 @@ offset_top = -528.0
 offset_right = -96.0
 offset_bottom = -512.0
 mouse_filter = 2
-script = ExtResource("14_j7c6d")
+script = ExtResource("14_lw0ap")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -540,7 +540,7 @@ offset_top = -256.0
 offset_right = -256.0
 offset_bottom = -64.0
 mouse_filter = 2
-script = ExtResource("14_j7c6d")
+script = ExtResource("14_lw0ap")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -561,7 +561,7 @@ offset_top = 8.0
 offset_right = -144.0
 offset_bottom = 16.0
 mouse_filter = 2
-script = ExtResource("14_j7c6d")
+script = ExtResource("14_lw0ap")
 trigger_path = "res://src/Trigger/Spikes.tscn"
 properties = {
 "color": [Color(1, 0, 0, 1), 20],
@@ -579,7 +579,7 @@ offset_top = 80.0
 offset_right = -112.0
 offset_bottom = 176.0
 mouse_filter = 2
-script = ExtResource("14_j7c6d")
+script = ExtResource("14_lw0ap")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20],
@@ -596,7 +596,7 @@ offset_left = 336.0
 offset_right = 352.0
 offset_bottom = 96.0
 mouse_filter = 2
-script = ExtResource("14_j7c6d")
+script = ExtResource("14_lw0ap")
 trigger_path = "res://src/Trigger/Ladder.tscn"
 properties = {
 "color": [Color(1, 0.494118, 0, 1), 20],
@@ -614,7 +614,7 @@ offset_top = -8.0
 offset_right = 304.0
 offset_bottom = 16.0
 mouse_filter = 2
-script = ExtResource("14_j7c6d")
+script = ExtResource("14_lw0ap")
 trigger_path = "res://src/Trigger/Spikes.tscn"
 properties = {
 "color": [Color(1, 0, 0, 1), 20],
@@ -632,7 +632,7 @@ offset_top = -16.0
 offset_right = 112.0
 offset_bottom = 16.0
 mouse_filter = 2
-script = ExtResource("14_j7c6d")
+script = ExtResource("14_lw0ap")
 trigger_path = "res://src/Trigger/Sign.tscn"
 properties = {
 "color": [Color(0.901961, 0.74902, 0, 1), 20],
@@ -653,7 +653,7 @@ offset_top = 144.0
 offset_right = 96.0
 offset_bottom = 176.0
 mouse_filter = 2
-script = ExtResource("14_j7c6d")
+script = ExtResource("14_lw0ap")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -676,7 +676,7 @@ offset_top = 144.0
 offset_right = 160.0
 offset_bottom = 176.0
 mouse_filter = 2
-script = ExtResource("14_j7c6d")
+script = ExtResource("14_lw0ap")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -699,7 +699,7 @@ offset_top = 144.0
 offset_right = 272.0
 offset_bottom = 176.0
 mouse_filter = 2
-script = ExtResource("14_j7c6d")
+script = ExtResource("14_lw0ap")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -722,7 +722,7 @@ offset_top = -16.0
 offset_right = 64.0
 offset_bottom = 16.0
 mouse_filter = 2
-script = ExtResource("14_j7c6d")
+script = ExtResource("14_lw0ap")
 trigger_path = "res://src/Trigger/FlavorText.tscn"
 properties = {
 "color": [Color(0.901961, 0.74902, 0, 1), 20],
@@ -738,7 +738,7 @@ z_index = 999
 position = Vector2(-168, 48)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -757,7 +757,7 @@ z_index = 999
 position = Vector2(-168, 176)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/NPC/Tabith.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -779,7 +779,7 @@ z_index = 999
 position = Vector2(40, -272)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_jjgiq")
+script = ExtResource("12_ug36o")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -798,7 +798,7 @@ z_index = 999
 position = Vector2(8, -304)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_jjgiq")
+script = ExtResource("16_wcveo")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -813,7 +813,7 @@ z_index = 999
 position = Vector2(8, -320)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_jjgiq")
+script = ExtResource("16_wcveo")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -828,7 +828,7 @@ z_index = 999
 position = Vector2(32, -320)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_jjgiq")
+script = ExtResource("16_wcveo")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -843,7 +843,7 @@ z_index = 999
 position = Vector2(48, -320)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_jjgiq")
+script = ExtResource("16_wcveo")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -858,7 +858,7 @@ z_index = 999
 position = Vector2(40, -304)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_jjgiq")
+script = ExtResource("16_wcveo")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -873,7 +873,7 @@ z_index = 999
 position = Vector2(112, -272)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_jjgiq")
+script = ExtResource("16_wcveo")
 prop_path = "res://src/Prop/AmmoRefill.tscn"
 properties = {
 "editor_hidden": [false, 1]
@@ -886,7 +886,7 @@ z_index = 999
 position = Vector2(168, -344)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_jjgiq")
+script = ExtResource("16_wcveo")
 prop_path = "res://src/Prop/SaveDisk.tscn"
 properties = {
 "editor_hidden": [false, 1]
@@ -899,7 +899,7 @@ z_index = 999
 position = Vector2(192, -272)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_jjgiq")
+script = ExtResource("16_wcveo")
 prop_path = "res://src/Prop/Fan.tscn"
 properties = {
 "editor_hidden": [false, 1],
@@ -913,26 +913,47 @@ z_index = 999
 position = Vector2(208, -272)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_jjgiq")
+script = ExtResource("16_wcveo")
 prop_path = "res://src/Prop/Fan.tscn"
 properties = {
 "editor_hidden": [false, 1],
 "style": [1, 2]
 }
 
+[node name="Basil" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(56, -112)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_ug36o")
+actor_path = "res://src/Actor/NPC/Basil.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"conversation": ["branchtest4", 4],
+"dialog_json": ["res://src/Dialog/Village.json", 4],
+"editor_hidden": [false, 1],
+"id": ["basil", 4],
+"speed": [Vector2(150, 350), 5],
+"starting_state": ["idle", 4],
+"voiced": [true, 1],
+"walk_speed": [Vector2(50, 50), 5],
+"water_gravity": [150.0, 3]
+}
+
 [node name="ChestWeapon" type="Area2D" parent="Spawns" groups=["Entities", "PropSpawns"] instance=ExtResource("15_c0l8s")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(128, -272)
+position = Vector2(136, -272)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_jjgiq")
+script = ExtResource("16_wcveo")
 prop_path = "res://src/Prop/ChestWeapon.tscn"
 properties = {
 "editor_hidden": [false, 1],
-"gun_name": ["revolver", 4],
-"used": [false, 1]
+"gun_name": ["revolver", 4]
 }
 
 [node name="Waypoint" type="Area2D" parent="." groups=["Entities", "VisualUtilities", "Waypoints"] instance=ExtResource("9_20ig1")]
@@ -941,7 +962,7 @@ visibility_layer = 2
 position = Vector2(-72, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_ug36o")
+script = ExtResource("18_hahi5")
 owner_id = "child"
 
 [node name="Waypoint2" type="Area2D" parent="." groups=["Entities", "VisualUtilities", "Waypoints"] instance=ExtResource("9_20ig1")]
@@ -950,6 +971,6 @@ visibility_layer = 2
 position = Vector2(40, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_ug36o")
+script = ExtResource("18_hahi5")
 owner_id = "child"
 index = 1

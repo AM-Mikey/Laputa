@@ -44,6 +44,8 @@ func can_shoot() -> bool:
 
 func shift_gun(direction):
 	# Stop the active gun from erroneously firing when it's no longer active
+	if $Guns.get_child_count() < 2: #no guns to swap, bozo!
+		return
 	var active_gun = $Guns.get_child(0)
 	active_gun.release_manual_fire()
 	active_gun.release_auto_fire()

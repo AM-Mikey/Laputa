@@ -6,6 +6,7 @@ var rng = RandomNumberGenerator.new()
 var inspect_time = 0.2
 var base_gravity_scale := 1.0
 var water_gravity_scale := 0.5
+var spent = false
 
 var is_in_water = false: set = set_is_in_water
 

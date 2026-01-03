@@ -46,7 +46,7 @@ func _on_new():
 
 	get_tree().paused = false
 	w.ui.visible = true
-	w.change_level_via_code(w.start_level_path)
+	w.change_level_via_code(w.start_level_path, false)
 
 
 func _on_load():

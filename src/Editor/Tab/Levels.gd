@@ -84,8 +84,8 @@ func load_level(path):
 	if w.ml.has_node("TitleScreen"): w.ml.get_node("TitleScreen").queue_free()
 	if w.ml.has_node("PauseMenu"): w.ml.get_node("PauseMenu").unpause()
 	w.el.get_node("Editor").inspector.on_deselected()
-	
-	w.change_level_via_code(path)
+
+	w.change_level_via_code(path, true)
 	await get_tree().process_frame
 	w.el.get_node("Editor").setup_level()
 	w.el.get_node("EditorCamera").enabled = true

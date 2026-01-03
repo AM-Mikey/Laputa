@@ -25,5 +25,4 @@ func get_overlap(body) -> bool:
 
 
 func expend_trigger():
-	spent = true
 	visible = false

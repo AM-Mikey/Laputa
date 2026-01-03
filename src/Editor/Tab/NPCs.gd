@@ -23,7 +23,7 @@ func setup_npcs():
 			npc_button.npc_path = p
 			npc_button.npc_name = npc.name
 			npc_button.npc_sprite = npc.get_node("Sprite2D").texture
-			npc_button.connect("npc_changed", Callable(self, "on_npc_changed"))
+			npc_button.connect("npc_changed", Callable(self, "_on_npc_changed"))
 			if index == 0:
 				npc_button.active = true
 				active_npc_path = p

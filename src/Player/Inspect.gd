@@ -33,7 +33,7 @@ func animate():
 	sprite.vframes = int(reference_texture.get_height() / 32.0)
 
 	if pc.inspect_target:
-		pc.look_dir.x = sign(pc.global_position.x - pc.inspect_target.global_position.x)
+		pc.look_dir.x = sign(pc.inspect_target.global_position.x - pc.global_position.x)
 	sprite.frame_coords.y = get_vframe()
 	if not ap.is_playing() or ap.current_animation != animation:
 		ap.stop()
@@ -59,12 +59,10 @@ func calc_velocity():
 func get_vframe() -> int:
 	var out = 0
 	match pc.look_dir.x:
-		1:
-			out = 0
-			#guns.scale.x = 1
 		-1:
+			out = 0
+		1:
 			out = 1
-			#guns.scale.x = -1
 	return out
 
 

@@ -21,8 +21,8 @@ var is_mouse_entered = false
 @onready var button_load = %Load
 @onready var button_string = %String
 @onready var button_multiline = %Multiline
-@onready var button_vector2X = %Vector2x
-@onready var button_vector2Y = %Vector2y
+@onready var button_vector2X = %Vector2X
+@onready var button_vector2Y = %Vector2Y
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("editor_lmb") and !is_mouse_entered:

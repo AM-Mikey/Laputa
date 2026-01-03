@@ -1,8 +1,6 @@
-[gd_scene load_steps=106 format=3 uid="uid://bnwo7ae85qnwb"]
+[gd_scene load_steps=100 format=3 uid="uid://bnwo7ae85qnwb"]
 
-[ext_resource type="PackedScene" uid="uid://cjueepke5w45c" path="res://src/Gun/Red7.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://brl16iyt5eq02" path="res://src/Player/PlayerCamera.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://byv37yjh2rp36" path="res://src/Gun/Revolver.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://0mxxcirrmb5d" path="res://src/Gun/Shotgun.tscn" id="4"]
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="5"]
 [ext_resource type="Script" uid="uid://cmvookemw64ek" path="res://src/Player/Knockback.gd" id="7"]
@@ -15,20 +13,16 @@
 [ext_resource type="Script" uid="uid://cqho5rvdldsw5" path="res://src/Player/Player.gd" id="14"]
 [ext_resource type="Script" uid="uid://cwfo2x3kl4tkp" path="res://src/Player/MovementManager.gd" id="15"]
 [ext_resource type="Script" uid="uid://5j8mlgvadx1f" path="res://src/Player/GunPos.gd" id="16_adexv"]
-[ext_resource type="PackedScene" uid="uid://bqy18424skcwk" path="res://src/Gun/GLauncher.tscn" id="17"]
-[ext_resource type="PackedScene" uid="uid://5orkim7sjfi7" path="res://src/Gun/Tsurugi.tscn" id="24_0pdvi"]
 [ext_resource type="Shader" uid="uid://d4doa1vf12lkt" path="res://src/Shader/JuniperRecolor.gdshader" id="24_s1pnb"]
 [ext_resource type="Texture2D" uid="uid://mkfrxk3djlu1" path="res://assets/Player/Palette/Normal.png" id="25_3o18d"]
-[ext_resource type="PackedScene" path="res://src/Gun/Roberta.tscn" id="25_cd6iy"]
+[ext_resource type="PackedScene" uid="uid://bn8xosty72skm" path="res://src/Gun/Roberta.tscn" id="25_cd6iy"]
 [ext_resource type="Script" uid="uid://cn112wea32cdx" path="res://src/Player/Inspect.gd" id="27"]
 [ext_resource type="Texture2D" uid="uid://b6mfl184pisc1" path="res://assets/Player/Palette/Mono.png" id="27_cn5rl"]
-[ext_resource type="PackedScene" uid="uid://diwpy822anfc4" path="res://src/Gun/MPistol.tscn" id="28"]
 [ext_resource type="Script" uid="uid://cjgn7e5vfg20e" path="res://src/Player/Jump.gd" id="29"]
 [ext_resource type="Script" uid="uid://dtadf671wpvdq" path="res://src/Player/Run.gd" id="30"]
 [ext_resource type="Texture2D" uid="uid://cw8igq2ymupx3" path="res://assets/Player/Aerial.png" id="30_ypuil"]
 [ext_resource type="Texture2D" uid="uid://dxsgd516bqad" path="res://assets/Player/BackAerial.png" id="31_cd6iy"]
 [ext_resource type="Texture2D" uid="uid://bvoixqk72iq1" path="res://assets/Player/BackRun.png" id="32_6evun"]
-[ext_resource type="PackedScene" uid="uid://cdgi2ibu56t2j" path="res://src/Gun/Speeder.tscn" id="33"]
 [ext_resource type="Texture2D" uid="uid://u06a3oag5sp" path="res://assets/Player/Crouch.png" id="33_id2yr"]
 [ext_resource type="Texture2D" uid="uid://dc3xb5g5j5sp3" path="res://assets/Player/CrouchRun.png" id="34_rnx3q"]
 [ext_resource type="Texture2D" uid="uid://ci35k5na5fqvi" path="res://assets/Player/Inspect.png" id="35_k4kr4"]
@@ -4239,28 +4233,9 @@ autostart = true
 [node name="Guns" type="Node2D" parent="GunManager"]
 position = Vector2(-3, -11)
 
-[node name="Revolver" parent="GunManager/Guns" instance=ExtResource("3")]
+[node name="Roberta" parent="GunManager/Guns" instance=ExtResource("25_cd6iy")]
 
 [node name="Shotgun" parent="GunManager/Guns" instance=ExtResource("4")]
-visible = false
-
-[node name="GLauncher" parent="GunManager/Guns" instance=ExtResource("17")]
-visible = false
-
-[node name="MPistol" parent="GunManager/Guns" instance=ExtResource("28")]
-visible = false
-
-[node name="Speeder" parent="GunManager/Guns" instance=ExtResource("33")]
-visible = false
-
-[node name="Red7" parent="GunManager/Guns" instance=ExtResource("1")]
-visible = false
-
-[node name="Tsurugi" parent="GunManager/Guns" instance=ExtResource("24_0pdvi")]
-visible = false
-
-[node name="Roberta" parent="GunManager/Guns" instance=ExtResource("25_cd6iy")]
-visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 2

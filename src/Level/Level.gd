@@ -53,7 +53,6 @@ func setup_kill_box():
 	kill_box.get_node("CollisionShape2D").position = Vector2.ZERO
 	kill_box.get_node("CollisionShape2D").shape.size = Vector2(ll.size.x, 16)
 	$Triggers.add_child(kill_box)
-	print("added kb")
 
 func exit_level():
 	queue_free()

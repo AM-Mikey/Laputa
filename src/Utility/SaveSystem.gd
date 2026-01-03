@@ -52,7 +52,7 @@ func read_player_data_from_save():
 		if f.hud():
 			f.hud().queue_free()
 
-	w.change_level_via_code(player_data["current_level"])
+	w.change_level_via_code(player_data["current_level"], true)
 	await get_tree().process_frame
 
 	var pc = f.pc()
@@ -97,7 +97,7 @@ func write_level_data_to_temp(current_level):
 	var limited_props = []
 	for p in get_tree().get_nodes_in_group("LimitedProps"):
 		var scoped_data = {
-			"position" : p.position,
+			"name" : p.name,
 			"spent" : p.spent
 			}
 		limited_props.append(scoped_data)
@@ -105,12 +105,12 @@ func write_level_data_to_temp(current_level):
 	var limited_triggers = []
 	for t in get_tree().get_nodes_in_group("LimitedTriggers"):
 		var scoped_data = {
-			"position" : t.position,
+			"name" : t.name,
 			"spent" : t.spent
 			}
 		limited_triggers.append(scoped_data)
 
-	data["level_data"][current_level.name] = {
+	data["level_data"][current_level.level_name] = {
 		"limited_props": limited_props,
 		"limited_triggers": limited_triggers
 	}
@@ -153,37 +153,23 @@ func read_level_data_from_temp(current_level):
 	check_dat_file_presence("temp")
 	var scoped_data = read_from_file(temp_path)
 		#return
-	if !scoped_data["level_data"].has(current_level.name):
+	if !scoped_data["level_data"].has(current_level.level_name):
 		print("no previous level data in temp")
 		return
-	var current_level_data = scoped_data["level_data"][current_level.name]
-
-	for saved in current_level_data["limited_props"]:
-		for current in get_tree().get_nodes_in_group("LimitedProps"):
-			if saved["position"] == current.position:
-				if saved["spent"]:
-					current.expend_prop()
-
-	for saved in current_level_data["limited_triggers"]:
-		for current in get_tree().get_nodes_in_group("LimitedTriggers"):
-			if saved["position"] == current.position:
-				if saved["spent"]:
-					current.expend_trigger()
+	var current_level_data = scoped_data["level_data"][current_level.level_name]
+	set_props_spent(current_level_data["limited_props"])
+	set_triggers_spent(current_level_data["limited_triggers"])
 	print("level data loaded from temp")
 
 
 func read_level_data_from_save(current_level):
 	var scoped_data = read_from_file(save_path)
-	if !scoped_data["level_data"].has(current_level.name):
+	if !scoped_data["level_data"].has(current_level.level_name):
 		print("no previous level data in save")
 		return
-	var current_level_data = scoped_data["level_data"][current_level.name]
-
-	for saved in current_level_data["limited_props"]: #TODO props not currently used
-		for current in get_tree().get_nodes_in_group("LimitedProps"):
-			if saved["position"] == current.position:
-				if saved["spent"]:
-					current.expend_prop()
+	var current_level_data = scoped_data["level_data"][current_level.level_name]
+	set_props_spent(current_level_data["limited_props"])
+	set_triggers_spent(current_level_data["limited_triggers"])
 	print("level data loaded from save")
 
 
@@ -219,6 +205,27 @@ func check_dat_file_presence(filename:String) -> void:
 		return
 	else:
 		DirAccess.copy_absolute(defaultfile_path,userfile_path)
+
+
+func set_props_spent(limited_props):
+	await get_tree().create_timer(0.01).timeout #wait for props to spawn
+	for saved in limited_props:
+		for current in get_tree().get_nodes_in_group("LimitedProps"):
+			if saved["name"] == current.name:
+				if saved["spent"]:
+					current.spent = true
+					current.expend_prop()
+
+func set_triggers_spent(limited_triggers):
+	await get_tree().create_timer(0.01).timeout #wait for triggers to spawn
+	for saved in limited_triggers:
+		for current in get_tree().get_nodes_in_group("LimitedTriggers"):
+			if saved["name"] == current.name:
+				if saved["spent"]:
+					await get_tree().process_frame
+					current.spent = true
+					current.expend_trigger()
+
 
 
 ### OPTIONS ###

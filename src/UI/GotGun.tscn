@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://5mtqachsa33l"]
 
-[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="1_dfcpv"]
-[ext_resource type="Script" uid="uid://drepx1vui3j57" path="res://src/UI/GotWeapon.gd" id="1_pcnba"]
-[ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="3_v2c3i"]
-[ext_resource type="Texture2D" uid="uid://cl7uidhdx20wc" path="res://assets/Gun/RevolverIcon.png" id="4_wm7dd"]
-[ext_resource type="Shader" uid="uid://dero0bty7fsn4" path="res://src/Shader/SimpleRecolor.gdshader" id="5_17ptf"]
+[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="1_ni4hj"]
+[ext_resource type="Script" uid="uid://drepx1vui3j57" path="res://src/UI/GotGun.gd" id="2_yjbs5"]
+[ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="3_y1xgp"]
+[ext_resource type="Texture2D" uid="uid://cl7uidhdx20wc" path="res://assets/Gun/RevolverIcon.png" id="4_y4u7r"]
+[ext_resource type="Shader" uid="uid://dero0bty7fsn4" path="res://src/Shader/SimpleRecolor.gdshader" id="5_jarfr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lva65"]
-shader = ExtResource("5_17ptf")
+shader = ExtResource("5_jarfr")
 shader_parameter/color = Color(1, 0.81, 0.8131666, 1)
 
 [sub_resource type="Animation" id="Animation_v2c3i"]
@@ -102,18 +102,18 @@ _data = {
 &"RESET": SubResource("Animation_wm7dd")
 }
 
-[node name="GotWeapon" type="MarginContainer"]
+[node name="GotGun" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_dfcpv")
+theme = ExtResource("1_ni4hj")
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
-script = ExtResource("1_pcnba")
+script = ExtResource("2_yjbs5")
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -140,7 +140,7 @@ offset_left = 140.0
 offset_top = 61.0
 offset_right = 198.0
 offset_bottom = 97.0
-theme_override_styles/panel = ExtResource("3_v2c3i")
+theme_override_styles/panel = ExtResource("3_y1xgp")
 
 [node name="TextureRect" type="TextureRect" parent="Control/Panel"]
 layout_mode = 0
@@ -148,7 +148,7 @@ offset_left = -23.0
 offset_top = -14.0
 offset_right = 83.0
 offset_bottom = 50.0
-texture = ExtResource("4_wm7dd")
+texture = ExtResource("4_y4u7r")
 expand_mode = 2
 stretch_mode = 3
 
@@ -160,7 +160,7 @@ offset_left = 1.0
 offset_top = 1.0
 offset_right = 107.0
 offset_bottom = 65.0
-texture = ExtResource("4_wm7dd")
+texture = ExtResource("4_y4u7r")
 expand_mode = 2
 stretch_mode = 3
 

@@ -58,11 +58,11 @@ var WheelVisible = false
 func _ready():
 	if f.pc():
 		var pc = f.pc()
-		pc.hp_updated.connect(update_hp)
-		pc.guns_updated.connect(update_guns)
-		pc.xp_updated.connect(update_xp)
-		pc.money_updated.connect(update_money)
-		pc.invincibility_end.connect(update_hpflash)
+		pc.hp_updated.connect(_on_hp_updated)
+		pc.guns_updated.connect(_on_guns_updated)
+		pc.xp_updated.connect(_on_xp_updated)
+		pc.money_updated.connect(_on_money_updated)
+		pc.invincibility_end.connect(_on_invincibility_ended)
 		pc.setup_hud()
 		setup_bars(pc.hp, pc.max_hp, pc.guns.get_child(0).xp, pc.guns.get_child(0).max_xp)
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
@@ -77,9 +77,9 @@ func _process(_delta):
 		else: cd_progress.visible = false
 
 
-func update_guns(guns, cause = "default", do_xp_flash = false):
+func _on_guns_updated(guns, cause = "default", do_xp_flash = false):
 	#var main_icon = gun.get_node("GunIcon")
-	if cause == "load_game":
+	if cause in ["load_game", "get_gun"]:
 		ammo_animate("reload", 3.0)
 
 	if cause == "shift_left":
@@ -91,7 +91,7 @@ func update_guns(guns, cause = "default", do_xp_flash = false):
 
 	if (cause not in ["fire", "get_ammo"]):
 		var g: Gun = guns[0]
-		update_xp(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash, cause)
+		_on_xp_updated(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash, cause)
 
 	#for g in guns:
 		#if guns.find(g) == 0: #main gun
@@ -131,18 +131,26 @@ func display_weapon_wheel(guns, rot_dir: String):
 				weapon_wheel_animator.play("CW", -1, 4.0)
 				weapon_wheel.get_node("Bullet1/Gun").texture = guns[0].icon_texture
 				weapon_wheel.get_node("Bullet2/Gun").texture = guns[1].icon_small_texture
-				weapon_wheel.get_node("Bullet3/Gun").texture = guns[2].icon_small_texture
-				weapon_wheel.get_node("Bullet4/Gun").texture = guns[-3].icon_small_texture
-				weapon_wheel.get_node("Bullet5/Gun").texture = guns[-2].icon_small_texture
-				weapon_wheel.get_node("Bullet6/Gun").texture = guns[-1].icon_small_texture
+				if guns.size() >= 3:
+					weapon_wheel.get_node("Bullet3/Gun").texture = guns[2].icon_small_texture
+				if guns.size() >= 4:
+					weapon_wheel.get_node("Bullet4/Gun").texture = guns[-3].icon_small_texture
+				if guns[-2]:
+					weapon_wheel.get_node("Bullet5/Gun").texture = guns[-2].icon_small_texture
+				if guns[-1]:
+					weapon_wheel.get_node("Bullet6/Gun").texture = guns[-1].icon_small_texture
 		"CCW":
 				weapon_wheel_animator.play("CCW", -1, 4.0)
 				weapon_wheel.get_node("Bullet1/Gun").texture = guns[0].icon_texture
 				weapon_wheel.get_node("Bullet2/Gun").texture = guns[1].icon_small_texture
-				weapon_wheel.get_node("Bullet3/Gun").texture = guns[2].icon_small_texture
-				weapon_wheel.get_node("Bullet4/Gun").texture = guns[-3].icon_small_texture
-				weapon_wheel.get_node("Bullet5/Gun").texture = guns[-2].icon_small_texture
-				weapon_wheel.get_node("Bullet6/Gun").texture = guns[-1].icon_small_texture
+				if guns.size() >= 3:
+					weapon_wheel.get_node("Bullet3/Gun").texture = guns[2].icon_small_texture
+				if guns.size() >= 4:
+					weapon_wheel.get_node("Bullet4/Gun").texture = guns[-3].icon_small_texture
+				if guns[-2]:
+					weapon_wheel.get_node("Bullet5/Gun").texture = guns[-2].icon_small_texture
+				if guns[-1]:
+					weapon_wheel.get_node("Bullet6/Gun").texture = guns[-1].icon_small_texture
 
 
 
@@ -204,7 +212,7 @@ func ammo_animate(animation, speed: float = -1):
 		elif animation == "reset":
 			ammo_bottom_animator.play("ResetInfinite")
 
-func update_hp(hp: int, max_hp: int, cause: String) -> void:
+func _on_hp_updated(hp: int, max_hp: int, cause: String) -> void:
 	hp_progress.value = hp
 	display_hp_number(hp, max_hp)
 	hp_progress.max_value = max_hp
@@ -254,7 +262,9 @@ func display_hp_number(hp, max_hp):
 
 
 var xp_tween: Tween
-func update_xp(xp: float, max_xp: float, level: int, max_level: int, do_xp_flash = false, cause: String = "default") -> void:
+
+
+func _on_xp_updated(xp: float, max_xp: float, level: int, max_level: int, do_xp_flash = false, cause: String = "default") -> void:
 	modulate = Color(1, 1, 1) #to prevent flash animation from stopping on a transparent frame
 	xp_num.frame_coords.x = level
 	var old_progress_max_value: float = xp_progress.max_value
@@ -296,14 +306,14 @@ func update_xp(xp: float, max_xp: float, level: int, max_level: int, do_xp_flash
 
 
 
-func update_ammo(_have, _maximum): #TODO: do we use this?
+func _on_ammo_updated(_have, _maximum): #TODO: do we use this?
 	pass
 		#ao.ammo = have
 		#ao.max_ammo = maximum
 		#ao.display_ammo()
 
 
-func update_money(money):
+func _on_money_updated(money):
 	mon_1.visible = true
 	mon_2.visible = true
 	mon_3.visible = true
@@ -328,7 +338,7 @@ func update_money(money):
 	else:
 		printerr("ERROR: hud cannot display money value of: " + money)
 
-func update_hpflash():
+func _on_invincibility_ended():
 	world.get_node("HUDLayer/HUDAnimator").stop()
 
 ### HELPER ###

@@ -25,7 +25,7 @@ func _on_LevelButton_pressed():
 	if f.hud():
 		f.hud().free()
 
-	world.change_level_via_code(level)
+	world.change_level_via_code(level, false)
 
 	if world.has_node("MenuLayer/TitleScreen"):
 		world.get_node("MenuLayer/TitleScreen").queue_free()

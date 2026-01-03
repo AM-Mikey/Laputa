@@ -18,14 +18,14 @@ signal players_updated
 	"locked": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
 	"click": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
 	"ammo_refill": preload("res://assets/SFX/Placeholder/snd_get_missile.ogg"),
-	
+
 	"prop_deny": preload("res://assets/SFX/Placeholder/snd_quote_bonkhead.ogg"),
 	"prop_sparkle": preload("res://assets/SFX/Placeholder/24.mp3"),
 	"prop_click": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
 	"block_break": preload("res://assets/SFX/Placeholder/snd_block_destroy.ogg"),
 	"block_thud": preload("res://assets/SFX/Placeholder/snd_quake.ogg"),
 	"chest_open": preload("res://assets/SFX/Placeholder/snd_chest_open.ogg"),
-	
+
 	"break_grass": preload("res://assets/SFX/Placeholder/snd_explosion2.ogg"),
 
 	"explode": preload("res://assets/SFX/Placeholder/snd_big_crash.ogg"),
@@ -217,7 +217,7 @@ func _add_player(type, audio_string, actor = null, volume = 1.0):
 			add_child(player)
 			var queue_slot = [player, audio_string]
 			music_queue.append(queue_slot)
-	
+
 	player.play()
 	emit_signal("players_updated")
 	return player

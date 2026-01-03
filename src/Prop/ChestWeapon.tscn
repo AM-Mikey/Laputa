@@ -50,10 +50,11 @@ size = Vector2(24, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f6n5n"]
 size = Vector2(32, 16)
 
-[node name="ChestWeapon" type="RigidBody2D" groups=["LimitedProps"]]
+[node name="ChestWeapon" type="RigidBody2D" groups=["LimitedProps", "PhysicsProps", "Props"]]
 collision_layer = 16
 collision_mask = 8
 can_sleep = false
+lock_rotation = true
 freeze_mode = 1
 script = ExtResource("2")
 metadata/_custom_type_script = "uid://dgt1xd0pgkr67"

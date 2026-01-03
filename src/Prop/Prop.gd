@@ -10,6 +10,7 @@ var sfx_chest = load("res://assets/SFX/placeholder/snd_chest_open.ogg")
 var active_players := []
 var rng = RandomNumberGenerator.new()
 var inspect_time = 0.2
+var spent = false
 #var gravity = 300.0
 
 #var is_in_water = false: set = set_is_in_water
@@ -17,6 +18,7 @@ var inspect_time = 0.2
 #@export var base_gravity: float = 300.0
 #@export var water_gravity: float = 150.0
 @export var editor_hidden = false
+
 
 @onready var w = get_tree().get_root().get_node("World")
 

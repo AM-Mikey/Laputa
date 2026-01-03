@@ -31,3 +31,5 @@ anim_speed_min = 1.0
 anim_speed_max = 1.0
 anim_speed_curve = SubResource("Curve_uvlvd")
 script = ExtResource("2_cder7")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

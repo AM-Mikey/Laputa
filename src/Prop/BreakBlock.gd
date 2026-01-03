@@ -24,7 +24,7 @@ func on_break(method = "cut"):
 	var explosion = EXPLOSION.instantiate()
 	explosion.global_position = global_position + Vector2(8.0, 8.0)
 	w.front.add_child(explosion)
-	
+
 	if $GroundLeft.is_colliding() && $GroundRight.is_colliding():
 		match method:
 			"cut":
@@ -46,8 +46,8 @@ func _physics_process(delta):
 			is_grounded = false
 	else:
 		is_grounded = true
-	
-	
+
+
 	if !($GroundLeft.is_colliding() || $GroundRight.is_colliding()) && broken:
 		$Sprite2D.visible = false
 	if linear_velocity.length_squared() > 1.0 && !broken && !crush_targets.is_empty():
