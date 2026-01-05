@@ -16,6 +16,7 @@ var spinup_spin_time = 0.5
 var tween
 
 func setup():
+	inspect_time = 1.0
 	base_gravity_scale = 0.5
 	water_gravity_scale = 0.5
 	gravity_scale = base_gravity_scale
@@ -23,8 +24,14 @@ func setup():
 func _input(event):
 	if event.is_action_pressed("inspect") && !active_players.is_empty():
 		for p in active_players:
-			if !p.disabled && p.can_input:
+			if !p.disabled && p.can_input && p.mm.current_state == p.mm.states["run"]:
+				var previous_look_dir = p.look_dir
+				p.mm.change_state("inspect")
+				p.inspect_target = $CollisionShape2D
 				activate()
+				await get_tree().create_timer(inspect_time).timeout
+				p.mm.change_state("run")
+				p.look_dir = previous_look_dir
 
 func _physics_process(_delta):
 	if $Ground.is_colliding():

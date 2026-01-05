@@ -18,6 +18,7 @@ signal players_updated
 	"locked": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
 	"click": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
 	"ammo_refill": preload("res://assets/SFX/Placeholder/snd_get_missile.ogg"),
+	"hp_refill": preload("res://assets/SFX/Placeholder/snd_health_refill.ogg"),
 
 	"prop_deny": preload("res://assets/SFX/Placeholder/snd_quote_bonkhead.ogg"),
 	"prop_sparkle": preload("res://assets/SFX/Placeholder/24.mp3"),

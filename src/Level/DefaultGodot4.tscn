@@ -883,7 +883,7 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(168, -344)
+position = Vector2(256, -360)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("16_wcveo")
@@ -946,7 +946,7 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(136, -272)
+position = Vector2(128, -272)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("16_wcveo")
@@ -954,6 +954,19 @@ prop_path = "res://src/Prop/ChestWeapon.tscn"
 properties = {
 "editor_hidden": [false, 1],
 "gun_name": ["revolver", 4]
+}
+
+[node name="RefillTerminal" type="Area2D" parent="Spawns" groups=["Entities", "PropSpawns"] instance=ExtResource("15_c0l8s")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(160, -288)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_wcveo")
+prop_path = "res://src/Prop/HealthRefill.tscn"
+properties = {
+"editor_hidden": [false, 1]
 }
 
 [node name="Waypoint" type="Area2D" parent="." groups=["Entities", "VisualUtilities", "Waypoints"] instance=ExtResource("9_20ig1")]

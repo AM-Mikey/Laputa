@@ -1,0 +1,199 @@
+[gd_scene load_steps=7 format=3 uid="uid://cv2curt45vlab"]
+
+[ext_resource type="Script" uid="uid://dx5l6p7c3ejl5" path="res://src/Effect/GetMax.gd" id="1_gpb4v"]
+[ext_resource type="Texture2D" uid="uid://wuy446n76ga3" path="res://assets/Effect/HeartGet.png" id="2_gpb4v"]
+
+[sub_resource type="CanvasItemMaterial" id="1"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_peurh"]
+_limits = [0.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 27.505627, 0, 0, Vector2(0.2, 3), 0.0, 0.0, 0, 0, Vector2(0.5, 0), -0.011184411, -0.011184411, 0, 0, Vector2(1, 0), -0.7837093, 0.0, 0, 0]
+point_count = 4
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_6mxog"]
+offsets = PackedFloat32Array(0, 0.25, 0.5833333)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
+
+[sub_resource type="Curve" id="Curve_uvlvd"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 3.7321355, 0, 0, Vector2(1, 2), 0.20224713, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[node name="AmmoGetMax" type="Node2D"]
+script = ExtResource("1_gpb4v")
+
+[node name="TopLeft" type="CPUParticles2D" parent="."]
+light_mask = 2
+material = SubResource("1")
+amount = 1
+texture = ExtResource("2_gpb4v")
+direction = Vector2(-1, -1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0
+orbit_velocity_curve = SubResource("Curve_peurh")
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+color_ramp = SubResource("Gradient_6mxog")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+anim_speed_curve = SubResource("Curve_uvlvd")
+
+[node name="TopRight" type="CPUParticles2D" parent="."]
+light_mask = 2
+material = SubResource("1")
+amount = 1
+texture = ExtResource("2_gpb4v")
+direction = Vector2(1, -1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0
+orbit_velocity_curve = SubResource("Curve_peurh")
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+color_ramp = SubResource("Gradient_6mxog")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+anim_speed_curve = SubResource("Curve_uvlvd")
+
+[node name="BottomLeft" type="CPUParticles2D" parent="."]
+light_mask = 2
+material = SubResource("1")
+amount = 1
+texture = ExtResource("2_gpb4v")
+direction = Vector2(-1, 1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0
+orbit_velocity_curve = SubResource("Curve_peurh")
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+color_ramp = SubResource("Gradient_6mxog")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+anim_speed_curve = SubResource("Curve_uvlvd")
+
+[node name="BottomRight" type="CPUParticles2D" parent="."]
+light_mask = 2
+material = SubResource("1")
+amount = 1
+texture = ExtResource("2_gpb4v")
+direction = Vector2(1, 1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0
+orbit_velocity_curve = SubResource("Curve_peurh")
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+color_ramp = SubResource("Gradient_6mxog")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+anim_speed_curve = SubResource("Curve_uvlvd")
+
+[node name="Top" type="CPUParticles2D" parent="."]
+light_mask = 2
+material = SubResource("1")
+amount = 1
+texture = ExtResource("2_gpb4v")
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0
+orbit_velocity_curve = SubResource("Curve_peurh")
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+color_ramp = SubResource("Gradient_6mxog")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+anim_speed_curve = SubResource("Curve_uvlvd")
+
+[node name="Right" type="CPUParticles2D" parent="."]
+light_mask = 2
+material = SubResource("1")
+amount = 1
+texture = ExtResource("2_gpb4v")
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0
+orbit_velocity_curve = SubResource("Curve_peurh")
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+color_ramp = SubResource("Gradient_6mxog")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+anim_speed_curve = SubResource("Curve_uvlvd")
+
+[node name="Bottom" type="CPUParticles2D" parent="."]
+light_mask = 2
+material = SubResource("1")
+amount = 1
+texture = ExtResource("2_gpb4v")
+direction = Vector2(0, 1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0
+orbit_velocity_curve = SubResource("Curve_peurh")
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+color_ramp = SubResource("Gradient_6mxog")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+anim_speed_curve = SubResource("Curve_uvlvd")
+
+[node name="Left" type="CPUParticles2D" parent="."]
+light_mask = 2
+material = SubResource("1")
+amount = 1
+texture = ExtResource("2_gpb4v")
+direction = Vector2(-1, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0
+orbit_velocity_curve = SubResource("Curve_peurh")
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+color_ramp = SubResource("Gradient_6mxog")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+anim_speed_curve = SubResource("Curve_uvlvd")
+
+[connection signal="finished" from="TopLeft" to="TopLeft" method="_on_finished"]
+[connection signal="finished" from="TopRight" to="TopRight" method="_on_finished"]
+[connection signal="finished" from="BottomLeft" to="BottomLeft" method="_on_finished"]
+[connection signal="finished" from="BottomRight" to="BottomRight" method="_on_finished"]
+[connection signal="finished" from="Top" to="Top" method="_on_finished"]
+[connection signal="finished" from="Right" to="Right" method="_on_finished"]
+[connection signal="finished" from="Bottom" to="Bottom" method="_on_finished"]
+[connection signal="finished" from="Left" to="." method="_on_Left_finished"]
