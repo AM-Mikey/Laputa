@@ -32,7 +32,6 @@ func on_break(method = "cut"):
 			"burn":
 				$Sprite2D.frame = 2
 	else:
-		print("ground not colliding")
 		$Sprite2D.visible = false
 
 

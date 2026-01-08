@@ -6,7 +6,7 @@
       {
         "id": "f8cbbec6d568959c",
         "type": "tabs",
-        "dimension": 33.24873096446701,
+        "dimension": 36.10406091370558,
         "children": [
           {
             "id": "fd4f00696d9a397d",
@@ -56,12 +56,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Guns.md",
+                "file": "The World/Dinero.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Guns"
+              "title": "Dinero"
             }
           }
         ],
@@ -70,7 +70,7 @@
       {
         "id": "f00468223e4d7550",
         "type": "tabs",
-        "dimension": 66.75126903553299,
+        "dimension": 63.89593908629442,
         "children": [
           {
             "id": "0b2f6be5223829c1",
@@ -246,11 +246,15 @@
   },
   "active": "716f7f890990af0d",
   "lastOpenFiles": [
-    "Guns.md",
-    "Concepts/Timeline of Events Before Laputa.md",
-    "Concepts/Life on Laputa.md",
-    "Pirates.md",
     "The World/Dinero.md",
+    "Groups/Laputans.md",
+    "Concepts/Timeline of Events Before Laputa.md",
+    "The World/Monsters and Animals.md",
+    "Concepts/Religion.md",
+    "Concepts/Life on Laputa.md",
+    "The World/Island of Laputa.md",
+    "Guns.md",
+    "Pirates.md",
     "The World/Areas/Ancient Ruins.md",
     "hidden knowledge.md",
     "Concepts/Davey's Secret Knowledge.md",
@@ -267,11 +271,7 @@
     "Concepts/Second Inhabitants.md",
     "Concepts/Laputan Crown.md",
     "Characters/Spirit of the Island.md",
-    "The World/Island of Laputa.md",
     "Concepts/Cloud Curtain.md",
-    "Groups/Laputans.md",
-    "Concepts/Laputan Revolution.md",
-    "Characters/Alexander.md",
     "Aseprite_8jemaKX0FE.png",
     "Aseprite_EEozVk20AW.png",
     "Aseprite_ujhX9SUnNc.png",

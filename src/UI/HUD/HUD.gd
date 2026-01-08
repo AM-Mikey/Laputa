@@ -212,13 +212,23 @@ func ammo_animate(animation, speed: float = -1):
 		elif animation == "reset":
 			ammo_bottom_animator.play("ResetInfinite")
 
+
+
 func _on_hp_updated(hp: int, max_hp: int, cause: String) -> void:
-	hp_progress.value = hp
-	display_hp_number(hp, max_hp)
 	hp_progress.max_value = max_hp
 	hp_lost.max_value = max_hp
+	hp_progress.value = hp
+	display_hp_number(hp, max_hp)
 
-	if (cause in ["set_up", "load_game"]):
+	if cause in ["hp_upgrade"]:
+		$AnimationPlayer.play("HPFlash")
+		hp_progress.value = 0
+		hp_lost.value = 0
+		var tween = get_tree().create_tween()
+		tween.tween_property(hp_progress, "value", hp, 1.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.6)
+		await tween.finished
+		hp_lost.value = hp
+	elif cause in ["set_up", "load_game"]:
 		hp_lost.value = hp
 	else:
 		if hp < hp_lost.value:

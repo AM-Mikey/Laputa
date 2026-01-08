@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://eoah43mp5yo8"]
 
-[ext_resource type="Script" path="res://src/Prop/SaveDisk.gd" id="1_prrpi"]
+[ext_resource type="Script" uid="uid://bwn6q2qrnygr3" path="res://src/Prop/SaveDisk.gd" id="1_prrpi"]
 [ext_resource type="Texture2D" uid="uid://b7puntitab4qd" path="res://assets/Prop/Outdated/SaveDisk.png" id="2_w3a02"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_prrpi"]

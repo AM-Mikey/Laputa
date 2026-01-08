@@ -4120,7 +4120,7 @@ show_behind_parent = true
 z_index = -1
 position = Vector2(0, -2)
 collision_layer = 0
-collision_mask = 7172
+collision_mask = 1028
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemDetector"]
 light_mask = 0

@@ -452,7 +452,7 @@ _data = {
 &"SmallPop": SubResource("Animation_c7rvj")
 }
 
-[node name="Heart" type="CharacterBody2D" groups=["Actors", "Entities"]]
+[node name="Heart" type="CharacterBody2D" groups=["Actors", "Entities", "HeartPickups", "Pickups"]]
 collision_layer = 1024
 collision_mask = 8
 script = ExtResource("1")

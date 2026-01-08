@@ -24,3 +24,6 @@ Most domestic animals on Laputa are raised for food production, some species suc
 A common suggestion, originally seriously discussed, which then fell out of popularity is the theory that the ancestors of beastfolk are the animals they resemble. This comparison is easy to make and harder to disprove. People who subscribe to this theory either see beastfolk evolving from animals independently as a result of interbreeding with humans. In modern times, the theory is considered debunked, as it is now known that Beastfolk are members of a single species with many varieties. Despite this, academics on the surface (by whom Davey was tought) have recently revived the theory to justify Anti-Human discrimination.
 
 It is considered extremely offensive to suggest this theory to a beastfolk, and they are often discriminatorily called "animals". It is not as offensive to call a beastfolk by the animal the resemble, i.e: "cat", though this too can be used derogatorily. 
+
+#### Birds
+Bird species play a particularly important role in ancient Laputan culture, as they are the only species that can migrate between the island and the surface world. Because of this, they're seen as something like messengers who can transcend and carry messages between this world and the next.

@@ -26,6 +26,7 @@ signal players_updated
 	"block_break": preload("res://assets/SFX/Placeholder/snd_block_destroy.ogg"),
 	"block_thud": preload("res://assets/SFX/Placeholder/snd_quake.ogg"),
 	"chest_open": preload("res://assets/SFX/Placeholder/snd_chest_open.ogg"),
+	"health_upgrade_break": preload("res://assets/SFX/PotterySmash.ogg"),
 
 	"break_grass": preload("res://assets/SFX/Placeholder/snd_explosion2.ogg"),
 
@@ -78,7 +79,7 @@ signal players_updated
 @export var music_dict: Dictionary = {
 	"sound_test": preload("res://assets/SFX/Placeholder/snd_menu_move.ogg"),
 	"get_item": preload("res://assets/Music/Placeholder/Got Item!.ogg"),
-	"get_hp": preload("res://assets/Music/Placeholder/Get Heart Tank!.ogg"), #TODO: rename
+	"get_health_upgrade": preload("res://assets/Music/Placeholder/Get Heart Tank!.ogg"), #TODO: rename
 	"gameover": preload("res://assets/Music/Placeholder/Gameover.ogg"),
 	"victory": preload("res://assets/Music/Placeholder/Victory!.ogg"),
 	"none": preload("res://assets/Music/Placeholder/XXXX.ogg"),

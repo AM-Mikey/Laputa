@@ -1,0 +1,144 @@
+[gd_scene load_steps=10 format=3 uid="uid://bd5k3mvyjd4o3"]
+
+[ext_resource type="Script" uid="uid://g2t00yd70k1r" path="res://src/Prop/HealthUpgrade.gd" id="1_qjrat"]
+[ext_resource type="Texture2D" uid="uid://dd540emlb0j4l" path="res://assets/Prop/HealthUpgrade.png" id="2_cwhvm"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_7pk14"]
+resource_name = "Shine"
+length = 2.0
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45, 0.525, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0), Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mdqcn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xynpo"]
+resource_name = "Break"
+length = 0.825
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.225, 0.275, 0.325, 0.375, 0.425, 0.475, 0.525, 0.575, 0.625, 0.675, 0.725, 0.775),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1), Vector2i(6, 1), Vector2i(7, 1), Vector2i(8, 1), Vector2i(9, 1), Vector2i(10, 1), Vector2i(11, 1), Vector2i(12, 1), Vector2i(13, 1), Vector2i(14, 1), Vector2i(15, 1), Vector2i(16, 1), Vector2i(18, 1), Vector2i(19, 1), Vector2i(20, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.825),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_crystal"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_klyv7"]
+_data = {
+&"Break": SubResource("Animation_xynpo"),
+&"RESET": SubResource("Animation_mdqcn"),
+&"Shine": SubResource("Animation_7pk14")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xkehe"]
+size = Vector2(17, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0cau2"]
+size = Vector2(16, 16)
+
+[node name="HealthUpgrade" type="RigidBody2D" groups=["Entities", "LimitedProps", "PhysicsProps", "Props"]]
+collision_layer = 16
+collision_mask = 520
+can_sleep = false
+lock_rotation = true
+freeze_mode = 1
+script = ExtResource("1_qjrat")
+metadata/_custom_type_script = "uid://dgt1xd0pgkr67"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-32, -16)
+texture = ExtResource("2_cwhvm")
+centered = false
+hframes = 21
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_klyv7")
+}
+autoplay = "Shine"
+
+[node name="CrystalPos" type="Marker2D" parent="."]
+position = Vector2(8, -1)
+
+[node name="BreakArea" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakArea"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_xkehe")
+
+[node name="EditorArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_0cau2")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[node name="GroundLeft" type="RayCast2D" parent="."]
+position = Vector2(1, 16.5)
+target_position = Vector2(0, 0.5)
+collision_mask = 520
+hit_from_inside = true
+
+[node name="GroundRight" type="RayCast2D" parent="."]
+position = Vector2(15, 16.5)
+target_position = Vector2(0, 0.5)
+collision_mask = 520
+hit_from_inside = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
