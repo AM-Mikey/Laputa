@@ -118,6 +118,9 @@ func animate(delta):
 	var edge_right = pc.get_node("EdgeRight").is_colliding()
 	var left_edge_is_world = pc.get_node("LeftEdgeIsWorld").is_colliding()
 	var right_edge_is_world = pc.get_node("RightEdgeIsWorld").is_colliding()
+	#print(absolute_left, " | ", absolute_right, " | ", valley_left," | ", valley_right, " | ", peak_left, \
+	#" ||| ", peak_right, " | ", slight_slope_peak_left, " | ", slight_slope_peak_right, " | ", stand_close_left, " | ", stand_close_right,\
+	#" ||| ", edge_left, " | ", edge_right, " | ", left_edge_is_world, " | ", right_edge_is_world)
 
 	var look_left = pc.look_dir.x == -1.0
 	var look_right = pc.look_dir.x == 1.0
@@ -163,6 +166,11 @@ func animate(delta):
 
 	var left_nothing = left_normal == Vector2(0, 0) #air
 	var right_nothing = right_normal == Vector2(0, 0) #air
+
+	#print(left_negative_slope, " | ", left_positive_slope, " | ", left_slight_negative_slope," | ", left_slight_positive_slope, " | ", left_no_slope, \
+	#" ||| ", left_walkable_negative_slope, " | ", left_walkable_positive_slope, " | ", right_negative_slope, " | ", right_positive_slope, " | ", right_slight_negative_slope,\
+	#" ||| ", right_slight_positive_slope, " | ", right_no_slope, " | ", right_walkable_negative_slope, " | ", right_walkable_positive_slope)
+
 
 	var conditions = {
 		"edge":
@@ -353,7 +361,10 @@ func animate(delta):
 				next_animations = check_and_append_moving_animations(next_animations)
 
 		"stand":
-			next_animations = check_and_append_animations(["stand_close", "stand_close_reverse", "up_slope_to_stand", "stand_to_up_slope", "stand_to_down_slope", "down_slope_to_stand"], conditions, next_animations)
+			next_animations = check_and_append_animations(["edge", "edge_front", "edge_turn", "crouch", "stand_close", "stand_close_reverse", \
+														"slight_up_slope", "slight_down_slope", "up_slope", "down_slope", "up_slope_to_stand", "stand_to_up_slope", "stand_to_down_slope", "down_slope_to_stand", \
+														"peak", "valley"], conditions, next_animations)
+			#next_animations = check_and_append_animations(["stand_close", "stand_close_reverse", "up_slope_to_stand", "stand_to_up_slope", "stand_to_down_slope", "down_slope_to_stand"], conditions, next_animations)
 			if pc.move_dir.x != 0.0 and next_animations == []: #last case... add room for velocity
 				if push_left_wall or push_right_wall:
 					next_animations.append("push")
@@ -502,6 +513,7 @@ func animate(delta):
 			elif !push_left_wall and !push_right_wall:
 				next_animations = check_and_append_moving_animations(next_animations)
 
+	#print(ap.current_animation, " -> ", next_animations)
 
 	if next_animations.is_empty():
 		play_animation(ap.current_animation)
