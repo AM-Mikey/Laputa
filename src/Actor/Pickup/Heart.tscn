@@ -3,11 +3,14 @@
 [ext_resource type="Script" uid="uid://dfmy0bg0ed3a8" path="res://src/Actor/Pickup/Heart.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bdnfq6epbm4h" path="res://assets/Actor/Pickup/Heart.png" id="2"]
 
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(13, 11)
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(11, 9)
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(13, 11)
 
 [sub_resource type="Animation" id="3"]
 resource_name = "Large"
@@ -144,9 +147,6 @@ tracks/3/keys = {
 "method": &"clear"
 }]
 }
-
-[sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(11, 9)
 
 [sub_resource type="Animation" id="5"]
 length = 0.2
@@ -453,14 +453,14 @@ _data = {
 }
 
 [node name="Heart" type="CharacterBody2D" groups=["Actors", "Entities", "HeartPickups", "Pickups"]]
-collision_layer = 1024
+collision_layer = 0
 collision_mask = 8
 script = ExtResource("1")
 speed = Vector2(0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -0.5)
-shape = SubResource("1")
+shape = SubResource("4")
 
 [node name="CollectArea" type="Area2D" parent="."]
 position = Vector2(0, 8)
@@ -479,7 +479,7 @@ texture = ExtResource("2")
 centered = false
 hframes = 3
 vframes = 4
-frame = 9
+frame = 6
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-8, -8)

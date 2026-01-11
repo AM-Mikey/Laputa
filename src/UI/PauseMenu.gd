@@ -11,27 +11,33 @@ func _ready():
 	do_focus()
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
+	enter()
 
 
 
 func _input(event):
 	if event.is_action_pressed("pause") and get_tree().paused and not w.has_node("MenuLayer/Options"):
-		unpause()
+		exit()
 
 func do_focus():
 	$VBoxContainer/VBoxContainer/Return.grab_focus()
 
-func unpause():
-	w.ui.visible = true
+
+func enter():
+	get_tree().paused = true
+	w.hl.visible = false
+	w.ui.visible = false
+
+func exit():
 	get_tree().paused = false
+	w.ui.visible = true
+	w.hl.visible = true
 	queue_free()
-
-
 
 ### SIGNALS ###
 
 func _on_Return_pressed():
-	unpause()
+	exit()
 
 func _on_Options_pressed():
 	var options = OPTIONS.instantiate()

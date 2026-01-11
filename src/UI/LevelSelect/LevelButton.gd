@@ -30,5 +30,5 @@ func _on_LevelButton_pressed():
 	if world.has_node("MenuLayer/TitleScreen"):
 		world.get_node("MenuLayer/TitleScreen").queue_free()
 	if world.has_node("MenuLayer/PauseMenu"):
-		world.get_node("MenuLayer/PauseMenu").unpause()
+		world.get_node("MenuLayer/PauseMenu").exit()
 	world.get_node("MenuLayer/LevelSelect").queue_free()

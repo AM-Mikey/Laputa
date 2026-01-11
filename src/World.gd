@@ -27,6 +27,7 @@ var internal_version: String = get_internal_version()
 @onready var dl = $DebugLayer
 @onready var bl = $BlackoutLayer
 @onready var ml = $MenuLayer
+@onready var il = $InventoryLayer
 @onready var front = $Front
 @onready var middle = $Middle
 @onready var back = $Back
@@ -106,17 +107,13 @@ func get_internal_version() -> String:
 
 func _input(event):
 	if event.is_action_pressed("inventory") and has_node("Juniper"):
-		if not ui.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled and $Juniper.can_input:
-			var inventory = INVENTORY.instantiate()
-			ui.add_child(inventory)
+		if not il.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled and $Juniper.can_input:
+			il.add_child(INVENTORY.instantiate())
 
 
 	if event.is_action_pressed("pause") and not ml.has_node("TitleScreen"):
 		if not ml.has_node("PauseMenu") and not get_tree().paused:
-			get_tree().paused = true
-			ui.visible = false
-			var pause_menu = PAUSEMENU.instantiate()
-			ml.add_child(pause_menu)
+			ml.add_child(PAUSEMENU.instantiate())
 
 	if event.is_action_pressed("window_maximize"):
 		if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_MAXIMIZED:
@@ -170,7 +167,7 @@ func change_level_via_code(level_path, use_save_data):
 	add_child(JUNIPER.instantiate())
 
 	if ml.has_node("PauseMenu"):
-		ml.get_node("PauseMenu").unpause()
+		ml.get_node("PauseMenu").exit()
 
 	if f.hud():
 		f.hud().free()
@@ -302,3 +299,4 @@ func _resolution_scale_changed(resolution_scale):
 	el.scale = Vector2(half_scale, half_scale)
 	dl.scale = Vector2(half_scale, half_scale)
 	ml.scale = Vector2(vs.menu_resolution_scale, vs.menu_resolution_scale)
+	il.scale = Vector2(vs.inventory_resolution_scale, vs.inventory_resolution_scale)

@@ -60,9 +60,9 @@ func _input(event):
 				active_tooltip.queue_free()
 				$AudioStreamPlayer.stream = get_sound
 				$AudioStreamPlayer.play()
-				active_player.inventory.append(item_name)
-				print("added item '", item_name, "' to inventory")
-				active_player.update_inventory()
+				active_player.item_array.append(item_name)
+				print("added item '", item_name, "' to item_array")
+				active_player.update_item_array()
 			else:
 				print("not enough money")
 				$AudioStreamPlayer.stream = no_sound

@@ -101,3 +101,5 @@ autoplay = "RESET"
 process_mode = 3
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
+
+[node name="InventoryLayer" type="CanvasLayer" parent="."]

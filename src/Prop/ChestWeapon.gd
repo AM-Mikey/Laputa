@@ -51,9 +51,9 @@ func activate(player):
 			player.get_node("GunManager/Guns").move_child(gun, 0)
 			player.emit_signal("guns_updated", player.guns.get_children(), "get_gun")
 			player.gm.set_guns_visible()
-			print("added gun '", gun_name, "' to inventory")
+			print("added gun '", gun_name, "' to guns")
 		else:
-			print("WARNING: Gun: ", gun_name, " already in inventory, ignoring")
+			print("WARNING: Gun: ", gun_name, " already in guns, ignoring")
 	else:
 		printerr("ERROR: INVALID GUN: ", gun_name)
 

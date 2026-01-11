@@ -1,34 +1,44 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7ilah41ye7yl"]
+[gd_scene load_steps=15 format=3 uid="uid://b7ilah41ye7yl"]
 
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="3"]
+[ext_resource type="Shader" uid="uid://d3lkwynjfk4hg" path="res://src/Shader/SimpleBlur.gdshader" id="3_4pdh5"]
+[ext_resource type="StyleBox" uid="uid://deshi6r488bxi" path="res://src/UI/StyleBox/SteelRoundRiveted.tres" id="4_1ly47"]
 [ext_resource type="Script" uid="uid://dw8rl6uwhnt3l" path="res://src/UI/Inventory/Inventory.gd" id="6"]
+[ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="6_4pdh5"]
+[ext_resource type="Texture2D" uid="uid://m5cabpidxb4v" path="res://assets/UI/Inventory/Shadow.png" id="6_l1q3b"]
+[ext_resource type="Texture2D" uid="uid://k8gtyy865rl0" path="res://assets/Gun/Red7Icon.png" id="6_n1xmo"]
 [ext_resource type="PackedScene" uid="uid://dbyknhh1oyx5i" path="res://src/UI/Inventory/WeaponWheel.tscn" id="7"]
 [ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="7_y7abv"]
 [ext_resource type="StyleBox" uid="uid://d20qvx0q5xflf" path="res://src/UI/StyleBox/RustTrimmedScrews.tres" id="8"]
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="8_1e805"]
-[ext_resource type="StyleBox" uid="uid://dceypmylvy2ho" path="res://src/UI/StyleBox/StoneBeveled.tres" id="9"]
 
-[node name="Inventory" type="MarginContainer"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l1q3b"]
+shader = ExtResource("3_4pdh5")
+shader_parameter/blur_amount = 2.0000001899999997
+shader_parameter/mix_amount = 0.0
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l1q3b"]
+
+[node name="Inventory" type="CenterContainer"]
 process_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -80.0
-offset_bottom = 2.0
-size_flags_horizontal = 0
+offset_right = 480.0
+offset_bottom = 272.0
 theme = ExtResource("2")
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
 script = ExtResource("6")
 
+[node name="Blur" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_l1q3b")
+polygon = PackedVector2Array(0, 0, 480, 0, 480, 270, 0, 270)
+
 [node name="Background" type="Panel" parent="."]
+custom_minimum_size = Vector2(288, 232)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("8")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(288, 232)
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 8
@@ -37,15 +47,26 @@ theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 8
 
 [node name="Weapons" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/Weapons"]
 layout_mode = 2
-theme_override_styles/panel = ExtResource("9")
+theme_override_styles/panel = ExtResource("4_1ly47")
+
+[node name="Node2D" type="Node2D" parent="MarginContainer/VBoxContainer/Weapons"]
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Weapons/Node2D"]
+offset_left = 29.0
+offset_top = 28.0
+offset_right = 211.0
+offset_bottom = 53.0
+texture = ExtResource("6_l1q3b")
+expand_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Weapons"]
 layout_mode = 2
@@ -55,30 +76,57 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="WeaponWheel" parent="MarginContainer/VBoxContainer/Weapons/MarginContainer" instance=ExtResource("7")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 height_modifier = 0.1
 
-[node name="CycleDelay" type="Timer" parent="MarginContainer/VBoxContainer/Weapons"]
-one_shot = true
-autostart = true
-
-[node name="HalfCycle" type="Timer" parent="MarginContainer/VBoxContainer/Weapons"]
-one_shot = true
-autostart = true
-
 [node name="Items" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 0
 
-[node name="ItemList" type="ItemList" parent="MarginContainer/VBoxContainer/Items"]
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/Items"]
 layout_mode = 2
-max_columns = 4
+theme_override_styles/panel = ExtResource("6_4pdh5")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Items"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 4
+
+[node name="ItemList" type="ItemList" parent="MarginContainer/VBoxContainer/Items/MarginContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/line_separation = 0
+theme_override_constants/icon_margin = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_l1q3b")
+allow_search = false
+item_count = 7
+max_columns = 2
+fixed_column_width = 32
 fixed_icon_size = Vector2i(32, 16)
+item_0/icon = ExtResource("6_n1xmo")
+item_1/icon = ExtResource("6_n1xmo")
+item_2/icon = ExtResource("6_n1xmo")
+item_3/icon = ExtResource("6_n1xmo")
+item_4/icon = ExtResource("6_n1xmo")
+item_5/icon = ExtResource("6_n1xmo")
+item_6/icon = ExtResource("6_n1xmo")
 
 [node name="Description" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -88,15 +136,17 @@ theme_override_styles/panel = ExtResource("3")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Description"]
 layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Description/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 2
 
 [node name="Header" type="Label" parent="MarginContainer/VBoxContainer/Description/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -105,11 +155,14 @@ theme_override_fonts/font = ExtResource("7_y7abv")
 text = "Tasty Treat"
 
 [node name="Body" type="Label" parent="MarginContainer/VBoxContainer/Description/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 1
+size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.784314, 0.784314, 0.639216, 1)
 theme_override_colors/font_shadow_color = Color(0.113725, 0.156863, 0.227451, 1)
 theme_override_fonts/font = ExtResource("8_1e805")
-text = "Chocolate covered mushrooms? Wow!"
+text = "Chocolate covered mushrooms? Wow! df
+xcv sdfsdfsdf sdfsdfsdf sdfsdf sdfsdf sdfsdf"
+autowrap_mode = 3
 
-[connection signal="item_activated" from="MarginContainer/VBoxContainer/Items/ItemList" to="." method="_on_Items_item_activated"]
+[connection signal="item_activated" from="MarginContainer/VBoxContainer/Items/MarginContainer/ItemList" to="." method="_on_Items_item_activated"]

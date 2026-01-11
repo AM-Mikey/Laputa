@@ -12,9 +12,9 @@ func activate():
 	am.play("chest")
 	am.play_interrupt("get_item")
 	active_pc.can_input = false
-	active_pc.inventory.append(held_item)
-	active_pc.update_inventory()
-	print("added item '", held_item, "' to inventory")
+	active_pc.item_array.append(held_item)
+	#active_pc.update_inventory()
+	print("added item '", held_item, "' to item_array")
 
 func expend_prop():
 	spent = true

@@ -44,7 +44,7 @@ var dead = false
 @export var controller_id: int = 0
 
 
-var inventory: Array
+var item_array: Array
 var topic_array: Array = ["child", "sasuke", "basil", "general"]
 var inspect_target: Node = null
 var experience_number: Node = null
@@ -241,7 +241,7 @@ func _on_ItemDetector_area_entered(area):
 		var pickup = area.get_parent()
 
 
-		if pickup.is_in_group("HeartPickup"):
+		if pickup.is_in_group("HeartPickups"):
 			var hp_before = hp
 			hp += pickup.value
 			hp = min(hp, max_hp)
@@ -332,8 +332,8 @@ func _on_Ear_area_exited(_area):
 
 
 #TODO: clean these up and get rid of them ##why?
-func update_inventory():
-	emit_signal("inventory_updated", inventory)
+func update_item_array():
+	emit_signal("item_array_updated", item_array)
 
 func setup_hud():
 	emit_signal("hp_updated", hp, max_hp, "set_up")

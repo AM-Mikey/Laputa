@@ -34,7 +34,7 @@ func write_player_data_to_save(current_level):
 		"hp" : pc.hp,
 		"max_hp" : pc.max_hp,
 		"money" : pc.money,
-		"inventory" : pc.inventory,
+		"item_array" : pc.item_array,
 		"gun_data" : gun_data
 	}
 
@@ -62,7 +62,7 @@ func read_player_data_from_save():
 	pc.hp = player_data["hp"]
 	pc.max_hp = player_data["max_hp"]
 	pc.money = player_data["money"]
-	pc.inventory = player_data["inventory"]
+	pc.item_array = player_data["item_array"]
 
 	for g in guns.get_children():
 		g.free()
@@ -84,7 +84,7 @@ func read_player_data_from_save():
 	pc.emit_signal("hp_updated", pc.hp, pc.max_hp, "load_game")
 	pc.emit_signal("guns_updated", guns.get_children(), "load_game")
 	pc.emit_signal("money_updated", pc.money)
-	pc.update_inventory()
+	#pc.update_inventory()
 	pc.emit_signal("invincibility_end")
 	print("player data loaded")
 

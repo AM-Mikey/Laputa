@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://bnwo7ae85qnwb"]
+[gd_scene load_steps=104 format=3 uid="uid://bnwo7ae85qnwb"]
 
 [ext_resource type="PackedScene" uid="uid://brl16iyt5eq02" path="res://src/Player/PlayerCamera.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://0mxxcirrmb5d" path="res://src/Gun/Shotgun.tscn" id="4"]
@@ -13,6 +13,10 @@
 [ext_resource type="Script" uid="uid://cqho5rvdldsw5" path="res://src/Player/Player.gd" id="14"]
 [ext_resource type="Script" uid="uid://cwfo2x3kl4tkp" path="res://src/Player/MovementManager.gd" id="15"]
 [ext_resource type="Script" uid="uid://5j8mlgvadx1f" path="res://src/Player/GunPos.gd" id="16_adexv"]
+[ext_resource type="PackedScene" uid="uid://diwpy822anfc4" path="res://src/Gun/MPistol.tscn" id="17_p4m8n"]
+[ext_resource type="PackedScene" uid="uid://cjueepke5w45c" path="res://src/Gun/Red7.tscn" id="18_l3dey"]
+[ext_resource type="PackedScene" uid="uid://byv37yjh2rp36" path="res://src/Gun/Revolver.tscn" id="19_v6qwc"]
+[ext_resource type="PackedScene" uid="uid://5orkim7sjfi7" path="res://src/Gun/Tsurugi.tscn" id="20_x1gsf"]
 [ext_resource type="Shader" uid="uid://d4doa1vf12lkt" path="res://src/Shader/JuniperRecolor.gdshader" id="24_s1pnb"]
 [ext_resource type="Texture2D" uid="uid://mkfrxk3djlu1" path="res://assets/Player/Palette/Normal.png" id="25_3o18d"]
 [ext_resource type="PackedScene" uid="uid://bn8xosty72skm" path="res://src/Gun/Roberta.tscn" id="25_cd6iy"]
@@ -4236,6 +4240,14 @@ position = Vector2(-3, -11)
 [node name="Roberta" parent="GunManager/Guns" instance=ExtResource("25_cd6iy")]
 
 [node name="Shotgun" parent="GunManager/Guns" instance=ExtResource("4")]
+
+[node name="MPistol" parent="GunManager/Guns" instance=ExtResource("17_p4m8n")]
+
+[node name="Red7" parent="GunManager/Guns" instance=ExtResource("18_l3dey")]
+
+[node name="Revolver" parent="GunManager/Guns" instance=ExtResource("19_v6qwc")]
+
+[node name="Tsurugi" parent="GunManager/Guns" instance=ExtResource("20_x1gsf")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 2

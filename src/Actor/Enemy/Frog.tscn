@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dr1kk5b0rkos7"]
+[gd_scene load_steps=13 format=3 uid="uid://dr1kk5b0rkos7"]
 
 [ext_resource type="Script" uid="uid://b80mj2pbqh664" path="res://src/Actor/Enemy/Frog.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cimkcsmiyj0d8" path="res://assets/Actor/Enemy/Frog.png" id="2"]
@@ -7,6 +7,9 @@
 radius = 7.0
 
 [sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h82ma"]
 size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="2"]
@@ -107,8 +110,8 @@ collision_layer = 2
 collision_mask = 520
 script = ExtResource("1")
 debug = true
-editor_hidden = false
 speed = Vector2(50, 100)
+editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
@@ -130,7 +133,7 @@ collision_mask = 65536
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -7)
-shape = SubResource("1")
+shape = SubResource("RectangleShape2D_h82ma")
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="PlayerDetector" type="Area2D" parent="."]
@@ -150,6 +153,7 @@ position = Vector2(0, -8)
 texture = ExtResource("2")
 hframes = 4
 vframes = 2
+frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

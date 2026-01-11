@@ -82,7 +82,7 @@ func load_level(path):
 	if f.pc: f.pc().free()
 	if f.hud(): f.hud().free()
 	if w.ml.has_node("TitleScreen"): w.ml.get_node("TitleScreen").queue_free()
-	if w.ml.has_node("PauseMenu"): w.ml.get_node("PauseMenu").unpause()
+	if w.ml.has_node("PauseMenu"): w.ml.get_node("PauseMenu").exit()
 	w.el.get_node("Editor").inspector.on_deselected()
 
 	w.change_level_via_code(path, true)
