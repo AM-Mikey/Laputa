@@ -900,8 +900,9 @@ func clear_tile_map_cursor():
 ### UI ###
 func set_menu_alpha():
 	var mouse_pos = get_global_mouse_position()
-	var main_rect = Rect2($Main/Win.position, $Main/Win.size)
-	var secondary_rect = Rect2($Secondary/Win.position, $Secondary/Win.size)
+	var main_rect := Rect2($Main/Win.global_position, $Main/Win.size)
+	main_rect = main_rect.grow_side(SIDE_TOP, $Main/Win/TabButtons/VBox.size.y)
+	var secondary_rect := Rect2($Secondary/Win.global_position, $Secondary/Win.size)
 	if main_rect.has_point(mouse_pos):
 		$Main.self_modulate = Color(1, 1, 1, 1)
 	else:
