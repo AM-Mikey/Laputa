@@ -114,9 +114,7 @@ func jump():
 func drop():
 	$States/Jump.is_dropping = true
 	change_state("jump")
-	pc.set_collision_mask_value(10, false)
-	await get_tree().create_timer(0.1).timeout
-	pc.set_collision_mask_value(10, true)
+	pc.global_position.y += 1
 
 ### HELPERS ###
 
