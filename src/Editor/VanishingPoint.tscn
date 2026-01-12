@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dovj8uq00xato"]
+
+[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VanishingPoint.gd" id="1_6byqu"]
+[ext_resource type="Texture2D" uid="uid://bv4mdd2d4bysf" path="res://assets/Editor/VanishingPoint.png" id="2_os2xy"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 16)
+
+[node name="VanishingPoint" type="Area2D" groups=["VanishingPoints"]]
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("1_6byqu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_os2xy")
+centered = false
