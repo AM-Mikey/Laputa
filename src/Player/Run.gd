@@ -31,7 +31,6 @@ func state_process(delta):
 	animate(delta)
 
 	if not pc.is_on_floor() and not pc.is_in_coyote:
-		pc.is_in_coyote = true
 		mm.do_coyote_time()
 
 	jump_processing()
@@ -841,8 +840,8 @@ func play_animation(animation):
 func calc_velocity():
 	var out = pc.velocity
 	#Y
-	if (!pc.is_on_floor()):
-		out.y += mm.gravity * get_physics_process_delta_time()
+	#Have to *2.0 to remove a bug where Juniper can walk across 1 tile gap between SSP platforms
+	out.y += mm.base_gravity * 2.0 * get_physics_process_delta_time()
 	#X
 	if pc.move_dir.x != 0.0:
 		var max_speed = mm.speed.x
@@ -904,6 +903,9 @@ func enter(_prev_state: String) -> void: #TODO: consider setting these back afte
 	play_animation("run")
 
 func exit(_next_state: String) -> void:
+	#pc.velocity.y = 0
+	pc.is_in_coyote = false
+	mm.coyote_timer.stop()
 	sprite.position = Vector2i(0.0, -16.0)
 	sprite.gun_pos_offset = Vector2i(0.0, 0.0)
 	is_dropping = false

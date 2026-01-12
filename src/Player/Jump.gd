@@ -35,8 +35,8 @@ func state_process(_delta):
 
 	set_player_directions()
 	pc.velocity = calc_velocity()
-	pc.move_and_slide()
 	pc.velocity.y = min(mm.terminal_velocity, pc.velocity.y)
+	pc.move_and_slide()
 	animate()
 	# We only set move_dir.y to jump for a single frame
 	pc.move_dir.y = 0.0

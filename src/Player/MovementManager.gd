@@ -88,6 +88,7 @@ func _input(event):
 			pc.direction_lock = Vector2i.ZERO
 
 func do_coyote_time():
+	pc.is_in_coyote = true
 	coyote_timer.stop()
 	coyote_timer.start(coyote_time)
 
