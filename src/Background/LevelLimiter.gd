@@ -45,7 +45,8 @@ func setup():
 
 	setup_background_resource()
 	setup_layers()
-	set_focus()
+	set_tile_mode()
+	#set_focus()
 
 	#Wait for the entire tree done initializing to have a proper camera
 	if camera:
@@ -57,7 +58,7 @@ func setup():
 
 func _process(delta):
 	var desired_fps = 60
-	var variance = delta*desired_fps
+	var variance = delta * desired_fps
 	#for t in texture_rects:
 		#if !is_instance_valid(texture_rects[t]): return
 		#texture_rects[t].position.x += horizontal_speed * variance * layer_scales[t].x
@@ -135,19 +136,20 @@ func setup_layers():
 	set_tile_mode()
 
 
-func set_focus(res_scale = vs.resolution_scale):
-	print("sad")
-	var vanishing_point: Node
-	var vanishing_point_count = 0
-	for v in get_tree().get_nodes_in_group("VanishingPoints"):
-		vanishing_point = v
-		vanishing_point_count += 1
-	if vanishing_point_count == 0:
-		printerr("ERROR: LEVEL HAS NO VANISHING POINT FOR PARALLAX BACKGROUND")
-	elif vanishing_point_count > 1:
-		printerr("ERROR: LEVEL HAS MORE THAN ONE VANISHING POINT FOR PARALLAX BACKGROUND")
+#func set_focus(res_scale = vs.resolution_scale):
+	#print("sad")
+	#var vanishing_point: Node
+	#var vanishing_point_count = 0
+	#for v in get_tree().get_nodes_in_group("VanishingPoints"):
+		#vanishing_point = v
+		#vanishing_point_count += 1
+	#if vanishing_point_count == 0:
+		#printerr("ERROR: LEVEL HAS NO VANISHING POINT FOR PARALLAX BACKGROUND")
+	#elif vanishing_point_count > 1:
+		#printerr("ERROR: LEVEL HAS MORE THAN ONE VANISHING POINT FOR PARALLAX BACKGROUND")
 
 	#var texture_layer_height = int(texture.get_height() / float(layers))
+	#pb.scroll_base_offset.x = (vanishing_point.global_position.x) * res_scale
 	#pb.scroll_base_offset.y = (vanishing_point.global_position.y - texture_layer_height) * res_scale
 
 
@@ -175,19 +177,40 @@ func set_focus(res_scale = vs.resolution_scale):
 
 
 func set_tile_mode(): #change so we center around the tile #texture_rect, mode = tile_mode
+	var vanishing_point: Node
+	var vanishing_point_count = 0
+	for v in get_tree().get_nodes_in_group("VanishingPoints"):
+		vanishing_point = v
+		vanishing_point_count += 1
+	if vanishing_point_count == 0:
+		printerr("ERROR: LEVEL HAS NO VANISHING POINT FOR PARALLAX BACKGROUND")
+	elif vanishing_point_count > 1:
+		printerr("ERROR: LEVEL HAS MORE THAN ONE VANISHING POINT FOR PARALLAX BACKGROUND")
+
+	var texture_rect_example = pb.get_child(0).get_child(0)
+	var texture_size = Vector2(texture_rect_example.texture.get_width(), texture_rect_example.texture.get_height())
+	var viewport_rect = get_viewport_rect()
+	var scale_zero_motion_offset = ((viewport_rect.size / vs.resolution_scale) - texture_size) * 0.5
+	var scale_one_motion_offset = vanishing_point.global_position - (texture_size * 0.5) #global_position + (size - texture_size) * 0.5 level center
+
+	vanishing_point.get_node("BackgroundOutline").custom_minimum_size = texture_size
+
 	for layer in pb.get_children():
 		var texture_rect = layer.get_child(0)
-		var texture_size = Vector2(texture_rect.texture.get_width(), texture_rect.texture.get_height())
+
 		texture_rect.size.x = texture_size.x
 		texture_rect.size.y = texture_size.y
-		var viewport_rect = get_viewport_rect()
-		var scale_zero_motion_offset = ((viewport_rect.size / vs.resolution_scale) - texture_size) * 0.5
-		var scale_one_motion_offset = global_position + (size - texture_size) * 0.5
+
 
 		if layer.motion_scale == Vector2.ZERO:
 			layer.motion_offset = scale_zero_motion_offset
-		if layer.motion_scale == Vector2.ONE:
+		elif layer.motion_scale == Vector2.ONE:
 			layer.motion_offset = scale_one_motion_offset
+		else:
+			var factor_x = layer.motion_scale.x
+			var factor_y = layer.motion_scale.y
+			layer.motion_offset.x = lerp(scale_zero_motion_offset.x, scale_one_motion_offset.x, factor_x)
+			layer.motion_offset.y = lerp(scale_zero_motion_offset.y, scale_one_motion_offset.y, factor_y)
 	#layer.motion_offset.x = texture_size.x - size.x
 	#layer.motion_offset.y = texture_size.y - size.y
 	#match mode:
@@ -209,9 +232,9 @@ func set_tile_mode(): #change so we center around the tile #texture_rect, mode =
 			#texture_rect.size.y = texture_rect.texture.get_height()
 
 func on_camera_zoom_changed():
-	set_focus()
+	set_tile_mode()
 
 func _resolution_scale_changed(_resolution_scale):
 	emit_signal("limit_camera", offset_left, offset_right, offset_top, offset_bottom)
-	set_focus()
+	#set_focus()
 	set_tile_mode()

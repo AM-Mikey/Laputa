@@ -29,7 +29,7 @@ conversation = "cutscene_test"
 visibility_layer = 2
 offset_left = -1600.0
 offset_right = 1232.0
-offset_bottom = 1232.0
+offset_bottom = 816.0
 mouse_filter = 2
 script = ExtResource("3_xh0hp")
 background_resource = ExtResource("4_nycf8")
@@ -101,7 +101,8 @@ script = ExtResource("8_145lf")
 
 [node name="VanishingPoint" type="Area2D" parent="." groups=["VanishingPoints"] instance=ExtResource("7_k54l0")]
 visibility_layer = 2
-position = Vector2(224, 168)
+z_index = 999
+position = Vector2(-104, 184)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("10_8ue5j")
@@ -111,7 +112,7 @@ visibility_layer = 2
 
 [node name="SpawnPoint" type="Area2D" parent="Spawns" groups=["SpawnPoints"] instance=ExtResource("11_fxdom")]
 visibility_layer = 2
-position = Vector2(232, 24)
+position = Vector2(232, 32)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_vw0qr")
@@ -1333,9 +1334,9 @@ modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
-offset_left = 304.0
+offset_left = 312.0
 offset_top = 72.0
-offset_right = 320.0
+offset_right = 328.0
 offset_bottom = 88.0
 mouse_filter = 2
 script = ExtResource("16_gjgdo")

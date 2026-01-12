@@ -1,20 +1,39 @@
-[gd_scene load_steps=4 format=3 uid="uid://dovj8uq00xato"]
+[gd_scene load_steps=5 format=3 uid="uid://dovj8uq00xato"]
 
 [ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VanishingPoint.gd" id="1_6byqu"]
 [ext_resource type="Texture2D" uid="uid://bv4mdd2d4bysf" path="res://assets/Editor/VanishingPoint.png" id="2_os2xy"]
+[ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="3_os2xy"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
 
 [node name="VanishingPoint" type="Area2D" groups=["VanishingPoints"]]
+z_index = 999
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("1_6byqu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8, 8)
 shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8, -8)
 texture = ExtResource("2_os2xy")
 centered = false
+
+[node name="BackgroundOutline" type="Panel" parent="."]
+modulate = Color(0, 1, 1, 0.5019608)
+custom_minimum_size = Vector2(200, 200)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -33.0
+offset_right = 33.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_os2xy")

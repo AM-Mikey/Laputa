@@ -10,11 +10,12 @@ func _ready():
 ### SIGNALS
 
 func on_editor_select():
-	modulate = Color.RED
+	self_modulate = Color.RED
+	$BackgroundOutline.modulate = Color(0.0, 1.0, 1.0, 1.0)
 
 func on_editor_deselect():
-	modulate = Color(1,1,1)
-
+	self_modulate = Color(1,1,1)
+	$BackgroundOutline.modulate = Color(0.0, 1.0, 1.0, 0.5)
 
 func on_pressed():
 	emit_signal("selected", self, "vanishing_point")
