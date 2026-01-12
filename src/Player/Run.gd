@@ -841,7 +841,8 @@ func calc_velocity():
 	var out = pc.velocity
 	#Y
 	#Have to *2.0 to remove a bug where Juniper can walk across 1 tile gap between SSP platforms
-	out.y += mm.base_gravity * 2.0 * get_physics_process_delta_time()
+	if (not pc.is_on_floor()):
+		out.y += mm.gravity * get_physics_process_delta_time()
 	#X
 	if pc.move_dir.x != 0.0:
 		var max_speed = mm.speed.x

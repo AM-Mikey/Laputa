@@ -196,5 +196,6 @@ func _on_CoyoteTimer_timeout():
 	if not pc.is_in_coyote:
 		return
 	pc.is_in_coyote = false
+	pc.global_position.y += 1
 	if not pc.is_on_floor() and current_state == states["run"]:
 		change_state("jump")
