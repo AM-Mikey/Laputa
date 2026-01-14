@@ -186,8 +186,10 @@ func get_vanishing_point() -> Node:
 		vanishing_point_count += 1
 	if vanishing_point_count == 0:
 		printerr("ERROR: LEVEL HAS NO VANISHING POINT FOR PARALLAX BACKGROUND")
+		return null
 	elif vanishing_point_count > 1:
 		printerr("ERROR: LEVEL HAS MORE THAN ONE VANISHING POINT FOR PARALLAX BACKGROUND")
+		return null
 	return out
 
 ### SIGNALS ###
