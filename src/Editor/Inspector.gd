@@ -79,9 +79,8 @@ func display_data():
 				if limiter.layer_scales.has(l): create_button("layer_height_offsets_%s"%l, limiter.layer_height_offsets[l], "float")
 				else: create_button("layer_height_offsets_%s"%l, Vector2.ZERO, "float")
 			create_button("horizontal_speed", limiter.horizontal_speed, "float")
-			create_button("focus", limiter.focus, "enum", limiter.Focus.keys())
 			create_button("tile_mode", limiter.tile_mode, "enum", limiter.TileMode.keys())
-			create_button("back_tile_mode", limiter.back_tile_mode, "enum", limiter.BackTileMode.keys())
+			create_button("back_tile_mode", limiter.back_tile_mode, "enum", limiter.TileMode.keys())
 			create_save_button("background")
 		"actor_spawn":
 			for p in active.properties:
@@ -236,25 +235,23 @@ func on_property_changed(property_name, property_value):
 					active.level_limiter.set(property_name, ResourceLoader.load(property_value, "", ResourceLoader.CACHE_MODE_REPLACE)) #don't pull from cache
 					active.level_limiter.setup_background_resource()
 					active.level_limiter.setup_layers()
-					active.level_limiter.set_focus()
 				"texture":
 					active.level_limiter.set(property_name, load(property_value))
 					active.level_limiter.setup_layers()
-					active.level_limiter.set_focus()
-				"layers", "focus", "tile_mode", "back_tile_mode", "horizontal_speed":
+				"layers":
 					active.level_limiter.set(property_name, property_value)
 					active.level_limiter.setup_layers()
-					active.level_limiter.set_focus()
+				"layers", "tile_mode", "back_tile_mode", "horizontal_speed":
+					active.level_limiter.set(property_name, property_value)
+					active.level_limiter.setup_layers()
 			if property_name.begins_with("layer_scales_"):
 				var layer_index = int(property_name.trim_prefix("layer_scales_"))
 				active.level_limiter.layer_scales[layer_index] = property_value
 				active.level_limiter.setup_layers()
-				active.level_limiter.set_focus()
 			if property_name.begins_with("layer_height_offsets_"):
 				var layer_index = int(property_name.trim_prefix("layer_height_offsets_"))
 				active.level_limiter.layer_height_offsets[layer_index] = property_value
 				active.level_limiter.setup_layers()
-				active.level_limiter.set_focus()
 
 		"actor_spawn":
 			active.properties[property_name][0] = property_value
@@ -306,7 +303,6 @@ func _on_SaveDialog_file_selected(path: String):
 		new.layer_scales = ll.layer_scales
 		new.layer_height_offsets = ll.layer_height_offsets
 		new.horizontal_speed = ll.horizontal_speed
-		new.focus = ll.focus
 		new.tile_mode = ll.tile_mode
 		new.back_tile_mode = ll.back_tile_mode
 		ResourceSaver.save(new, path)

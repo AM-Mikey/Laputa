@@ -5,7 +5,7 @@ extends Control
 
 func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
-	
+
 
 	if f.pc():
 		var pc = f.pc()

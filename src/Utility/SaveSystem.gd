@@ -47,11 +47,6 @@ func read_player_data_from_save():
 	var scoped_data = read_from_file(save_path)
 	var player_data = scoped_data["player_data"]
 
-	if f.pc(): #TODO: something strange about the timing of loading in juniper, consider moving that code here instead of the awaits
-		f.pc().free()
-		if f.hud():
-			f.hud().queue_free()
-
 	w.change_level_via_code(player_data["current_level"])
 	await get_tree().process_frame
 

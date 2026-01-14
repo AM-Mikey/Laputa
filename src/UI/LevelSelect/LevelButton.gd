@@ -20,15 +20,4 @@ func _ready():
 
 
 func _on_LevelButton_pressed():
-	if f.pc():
-		f.pc().free() #we free and respawn them so we have a clean slate when we load in
-	if f.hud():
-		f.hud().free()
-
 	world.change_level_via_code(level)
-
-	if world.has_node("MenuLayer/TitleScreen"):
-		world.get_node("MenuLayer/TitleScreen").queue_free()
-	if world.has_node("MenuLayer/PauseMenu"):
-		world.get_node("MenuLayer/PauseMenu").unpause()
-	world.get_node("MenuLayer/LevelSelect").queue_free()

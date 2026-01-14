@@ -103,6 +103,8 @@ func setup_level(): #TODO: clear undo history
 	#set_entities_pickable()
 	for s in get_tree().get_nodes_in_group("SpawnPoints"): #TODO: see if you can avoid this by calling a signal or something
 		s.visible = true
+	for v in get_tree().get_nodes_in_group("VanishingPoints"):
+		v.visible = true
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.visible = true
 		a.input_pickable = true
@@ -168,6 +170,8 @@ func exit():	#TODO: make this an editor_exit signal ## no? that just decentraliz
 	#set_entities_pickable(false)
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		s.visible = false
+	for v in get_tree().get_nodes_in_group("VanishingPoints"):
+		v.visible = false
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.spawn()
 		a.visible = false
