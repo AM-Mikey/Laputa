@@ -65,6 +65,5 @@ func save_changes():
 	ll.background_resource.layer_scales = ll.layer_scales
 	ll.background_resource.layer_height_offsets = ll.layer_height_offsets
 	ll.background_resource.horizontal_speed = ll.horizontal_speed
-	ll.background_resource.focus = ll.focus
 	ll.background_resource.tile_mode = ll.tile_mode
 	ll.background_resource.back_tile_mode = ll.back_tile_mode
