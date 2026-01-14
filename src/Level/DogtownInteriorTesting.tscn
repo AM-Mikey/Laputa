@@ -1,20 +1,15 @@
-[gd_scene load_steps=16 format=4]
+[gd_scene load_steps=11 format=4 uid="uid://bo3uc4mqdw2nk"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_ris4u"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_wom3b"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_acr3c"]
-[ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_wom3b"]
-[ext_resource type="TileSet" path="res://src/Tile/DogtownInterior.tres" id="4_ris4u"]
-[ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="5_0p40l"]
-[ext_resource type="PackedScene" path="res://src/Effect/Light/SunLight.tscn" id="5_64d5n"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="6_v20vf"]
-[ext_resource type="PackedScene" path="res://src/Editor/TriggerSpawn.tscn" id="7_0p40l"]
-[ext_resource type="Script" path="res://src/Tile/DogtownInteriorAnimator.gd" id="7_85c3g"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="8_uwfxm"]
-[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="9_ln0on"]
-[ext_resource type="Script" path="res://src/Editor/TriggerSpawn.gd" id="10_byxhc"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="13_3x46j"]
-[ext_resource type="Script" path="res://src/Effect/Light/SunLight.gd" id="15_c1rcd"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_ris4u"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_wom3b"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_wom3b"]
+[ext_resource type="TileSet" uid="uid://j4ajqrgeit4t" path="res://src/Tile/DogtownInterior.tres" id="4_ris4u"]
+[ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="5_0p40l"]
+[ext_resource type="PackedScene" uid="uid://bbwmr0cmbastp" path="res://src/Effect/Light/SunLight.tscn" id="5_64d5n"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="6_v20vf"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/TriggerSpawn.tscn" id="7_0p40l"]
+[ext_resource type="Script" uid="uid://bkqwlyui5hbvy" path="res://src/Tile/DogtownInteriorAnimator.gd" id="7_85c3g"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="9_ln0on"]
 
 [node name="DogtownInteriorTesting" type="Node2D"]
 visibility_layer = 2
@@ -24,12 +19,10 @@ music = "shop"
 dialog_json = "res://src/Dialog/Village.json"
 conversation = "cutscene_test"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." instance=ExtResource("2_wom3b")]
+[node name="LevelLimiter" parent="." instance=ExtResource("2_wom3b")]
 visibility_layer = 2
 offset_top = -256.0
 offset_right = 464.0
-mouse_filter = 2
-script = ExtResource("3_acr3c")
 background_resource = ExtResource("3_wom3b")
 texture = ExtResource("5_0p40l")
 layers = 5
@@ -92,24 +85,13 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="."]
 visibility_layer = 2
 
-[node name="SpawnPoint" type="Area2D" parent="Spawns" groups=["SpawnPoints"] instance=ExtResource("6_v20vf")]
-visibility_layer = 2
-position = Vector2(144, -16)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_uwfxm")
-
-[node name="Door1" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_0p40l")]
+[node name="Door1" parent="Spawns" instance=ExtResource("7_0p40l")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 16.0
 offset_top = -48.0
 offset_right = 32.0
 offset_bottom = -16.0
-mouse_filter = 2
-script = ExtResource("10_byxhc")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -124,17 +106,14 @@ size_is_default = false
 visibility_layer = 2
 script = ExtResource("7_85c3g")
 
-[node name="VanishingPoint" type="Area2D" parent="." groups=["VanishingPoints"] instance=ExtResource("9_ln0on")]
+[node name="VanishingPoint" parent="." instance=ExtResource("9_ln0on")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(200, -136)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("13_3x46j")
 
-[node name="SunLight" type="Area2D" parent="." groups=["SunLights"] instance=ExtResource("5_64d5n")]
+[node name="SunLight" parent="." instance=ExtResource("5_64d5n")]
 visibility_layer = 2
 position = Vector2(35, -198)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("15_c1rcd")
+
+[node name="SpawnPoint" parent="." instance=ExtResource("6_v20vf")]
+visibility_layer = 2
+position = Vector2(144, -16)

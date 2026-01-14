@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://8qpwe0pcud22"]
+[gd_scene load_steps=8 format=4 uid="uid://8qpwe0pcud22"]
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_4uhn8"]
 [ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_abgb0"]
@@ -6,6 +6,7 @@
 [ext_resource type="TileSet" uid="uid://hyq6f5pg0oh8" path="res://src/Tile/Temple.tres" id="5_j20xi"]
 [ext_resource type="Texture2D" uid="uid://cb2wh1kjj4djx" path="res://assets/Background/TiledPlains.png" id="5_njn3k"]
 [ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="6_c0ys6"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="7_06iwr"]
 
 [node name="Temple" type="Node2D"]
 script = ExtResource("1_4uhn8")
@@ -74,3 +75,7 @@ tile_set = ExtResource("5_j20xi")
 [node name="VanishingPoint" parent="." instance=ExtResource("6_c0ys6")]
 visibility_layer = 2
 position = Vector2(200, 8)
+
+[node name="SpawnPoint" parent="." instance=ExtResource("7_06iwr")]
+visibility_layer = 2
+position = Vector2(152, 32)

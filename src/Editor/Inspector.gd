@@ -235,25 +235,23 @@ func on_property_changed(property_name, property_value):
 					active.level_limiter.set(property_name, ResourceLoader.load(property_value, "", ResourceLoader.CACHE_MODE_REPLACE)) #don't pull from cache
 					active.level_limiter.setup_background_resource()
 					active.level_limiter.setup_layers()
-					active.level_limiter.update_layers()
 				"texture":
 					active.level_limiter.set(property_name, load(property_value))
 					active.level_limiter.setup_layers()
-					active.level_limiter.update_layers()
+				"layers":
+					active.level_limiter.set(property_name, property_value)
+					active.level_limiter.setup_layers()
 				"layers", "tile_mode", "back_tile_mode", "horizontal_speed":
 					active.level_limiter.set(property_name, property_value)
 					active.level_limiter.setup_layers()
-					active.level_limiter.update_layers()
 			if property_name.begins_with("layer_scales_"):
 				var layer_index = int(property_name.trim_prefix("layer_scales_"))
 				active.level_limiter.layer_scales[layer_index] = property_value
 				active.level_limiter.setup_layers()
-				active.level_limiter.update_layers()
 			if property_name.begins_with("layer_height_offsets_"):
 				var layer_index = int(property_name.trim_prefix("layer_height_offsets_"))
 				active.level_limiter.layer_height_offsets[layer_index] = property_value
 				active.level_limiter.setup_layers()
-				active.level_limiter.update_layers()
 
 		"actor_spawn":
 			active.properties[property_name][0] = property_value

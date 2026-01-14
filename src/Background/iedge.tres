@@ -19,7 +19,7 @@ layer_height_offsets = {
 1: 0.0,
 2: 0.0,
 3: 0.0,
-4: 0.0
+4: 6.0
 }
 horizontal_speed = 1.0
 tile_mode = 1

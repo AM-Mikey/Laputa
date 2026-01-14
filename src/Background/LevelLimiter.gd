@@ -111,6 +111,9 @@ func setup_layers():
 		texture_rect.texture = clipped_texture
 
 		layer.add_child(texture_rect)
+
+		if !background_resource.layer_height_offsets.has(layer_index): #if we just added a layer
+			layer_height_offsets[layer_index] = 0.0
 	update_layers()
 
 
