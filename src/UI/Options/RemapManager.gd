@@ -28,6 +28,15 @@ var action_groups = {
 	"pause": []
 	}
 
+var remapped_ui_actions : Array [String] = [
+	"ui_accept",
+	"ui_cancel",
+	"ui_left",
+	"ui_right",
+	"ui_down",
+	"ui_up",
+]
+
 @onready var p = get_parent()
 var temp_action_keyboard_input = {}
 var temp_action_controller_input = {}
@@ -147,6 +156,9 @@ func save_input_map(path = input_map_path):
 	var data = {}
 	var input_actions = InputMap.get_actions()
 	for a in input_actions:
+		if a.begins_with("ui_"):
+			if remapped_ui_actions.has(a) == false:
+				continue
 		var inputs = []
 		for i in InputMap.action_get_events(a): #TODO: disallow controller inputs while in keyboard config #convert to use the converter
 				if i is InputEventMouseButton:
