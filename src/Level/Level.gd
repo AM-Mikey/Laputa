@@ -33,6 +33,81 @@ func _ready():
 		else:
 			am.play_music(music)
 
+	merge_one_way_ssp_tile()
+
+func merge_one_way_ssp_tile() -> void:
+	# Generate merged ssp tilemap geometry (Assuming geometry does not have hole when merged)
+	var TileTransformRadian: Dictionary = {
+		0: 0,
+		TileSetAtlasSource.TRANSFORM_TRANSPOSE | TileSetAtlasSource.TRANSFORM_FLIP_H: PI / 2,
+		TileSetAtlasSource.TRANSFORM_FLIP_H | TileSetAtlasSource.TRANSFORM_FLIP_V: PI,
+		TileSetAtlasSource.TRANSFORM_TRANSPOSE | TileSetAtlasSource.TRANSFORM_FLIP_V: 3 * PI / 4,
+	}
+
+
+	var used_tiles_ssp_collision: Array[PackedVector2Array] = []
+	for layer: TileMapLayer in $TileMap.get_children():
+		var cell_size: Vector2i = layer.tile_set.tile_size
+		for cell in layer.get_used_cells():
+			var cell_data: TileData = layer.get_cell_tile_data(cell)
+			var number_of_cell_polygon: int = cell_data.get_collision_polygons_count(1)
+			if number_of_cell_polygon > 0:
+				var rotated_flag: int = layer.get_cell_alternative_tile(cell) & (TileSetAtlasSource.TRANSFORM_TRANSPOSE | TileSetAtlasSource.TRANSFORM_FLIP_H | TileSetAtlasSource.TRANSFORM_FLIP_V)
+				for p_idx in range(number_of_cell_polygon):
+					if (cell_data.is_collision_polygon_one_way(1, p_idx)):
+						var cell_polygon: PackedVector2Array = cell_data.get_collision_polygon_points(1, p_idx)
+						var transformed_polygon: PackedVector2Array = []
+						if (TileTransformRadian.has(rotated_flag)):
+							var rotated_radian: float = TileTransformRadian[rotated_flag]
+							for point in cell_polygon:
+								transformed_polygon.append(point.rotated(rotated_radian) + (Vector2(cell) + Vector2.ONE / 2) * Vector2(cell_size))
+						else:
+							var flipped_normal = Vector2.ONE
+							match rotated_flag:
+								TileSetAtlasSource.TRANSFORM_FLIP_H:
+									flipped_normal = Vector2(-1, 1)
+								TileSetAtlasSource.TRANSFORM_FLIP_V:
+									flipped_normal = Vector2(1, -1)
+								TileSetAtlasSource.TRANSFORM_TRANSPOSE:
+									flipped_normal = Vector2(-1, -1)
+							for point in cell_polygon:
+								transformed_polygon.append(point * flipped_normal + (Vector2(cell) + Vector2.ONE / 2) * Vector2(cell_size))
+						used_tiles_ssp_collision.append(transformed_polygon)
+
+	var merged_polygon: Array[PackedVector2Array] = []
+	var old_size: int = used_tiles_ssp_collision.size() + 1
+	while (old_size > used_tiles_ssp_collision.size()):
+		old_size = used_tiles_ssp_collision.size()
+		var polygon_a = used_tiles_ssp_collision.pop_back()
+		var polygon_b = used_tiles_ssp_collision.pop_back()
+		merged_polygon.append_array(Geometry2D.merge_polygons(polygon_a, polygon_b))
+		while (used_tiles_ssp_collision.size() > 0):
+			var new_polygon_in_merge = true
+			for i in range(merged_polygon.size()):
+				polygon_a = merged_polygon[i]
+				polygon_b = used_tiles_ssp_collision[used_tiles_ssp_collision.size() - 1]
+				var res_polygon = Geometry2D.merge_polygons(polygon_a, polygon_b)
+				if (res_polygon.size() == 1):
+					merged_polygon[i] = res_polygon[0]
+					used_tiles_ssp_collision.pop_back()
+					new_polygon_in_merge = false
+					break
+			if (new_polygon_in_merge):
+				merged_polygon.append(used_tiles_ssp_collision.pop_back())
+		used_tiles_ssp_collision = merged_polygon
+		merged_polygon = []
+
+	var static_body: StaticBody2D = StaticBody2D.new()
+	static_body.collision_layer = 0
+	static_body.set_collision_layer_value(10, true)
+	$Triggers.add_child(static_body)
+
+	for polygon in used_tiles_ssp_collision:
+		var polygon_node: CollisionPolygon2D = CollisionPolygon2D.new()
+		polygon_node.polygon = polygon
+		polygon_node.one_way_collision = true
+		static_body.add_child(polygon_node)
+
 
 func do_playerless_cutscene():
 	if w.has_node("UILayer/DialogBox"): #clear old dialog box if there is one

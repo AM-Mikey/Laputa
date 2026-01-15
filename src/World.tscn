@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://cklvdb1b8j72j"]
 
-[ext_resource type="Script" path="res://src/World.gd" id="8"]
+[ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
 
 [sub_resource type="Animation" id="Animation_qbf6s"]
 resource_name = "Flash"
@@ -48,7 +48,7 @@ release_version = "1.8"
 do_skip_title = true
 debug_visible = true
 gamemode = "pvp"
-start_level_path = "res://src/Level/PlaytestZone.tscn"
+start_level_path = "res://src/Level/DogtownInteriorTesting.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_offset = Vector2(-2382.596, -661.4701)
@@ -109,5 +109,3 @@ layer = 3
 visible = false
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
-
-[connection signal="level_saved" from="EditorLayer/Editor" to="EditorLayer/Editor/Main/Win/Tab/Levels" method="on_save"]

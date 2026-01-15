@@ -114,7 +114,7 @@ func jump():
 func drop():
 	$States/Jump.is_dropping = true
 	change_state("jump")
-	pc.global_position.y += 1
+	pc.global_position.y += 2
 
 ### HELPERS ###
 
