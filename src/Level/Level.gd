@@ -50,6 +50,8 @@ func merge_one_way_ssp_tile() -> void:
 		var cell_size: Vector2i = layer.tile_set.tile_size
 		for cell in layer.get_used_cells():
 			var cell_data: TileData = layer.get_cell_tile_data(cell)
+			if not (cell_data):
+				break
 			var number_of_cell_polygon: int = cell_data.get_collision_polygons_count(1)
 			if number_of_cell_polygon > 0:
 				var rotated_flag: int = layer.get_cell_alternative_tile(cell) & (TileSetAtlasSource.TRANSFORM_TRANSPOSE | TileSetAtlasSource.TRANSFORM_FLIP_H | TileSetAtlasSource.TRANSFORM_FLIP_V)
@@ -78,6 +80,8 @@ func merge_one_way_ssp_tile() -> void:
 	var old_size: int = used_tiles_ssp_collision.size() + 1
 	while (old_size > used_tiles_ssp_collision.size()):
 		old_size = used_tiles_ssp_collision.size()
+		if (used_tiles_ssp_collision.size() < 2):
+			break
 		var polygon_a = used_tiles_ssp_collision.pop_back()
 		var polygon_b = used_tiles_ssp_collision.pop_back()
 		merged_polygon.append_array(Geometry2D.merge_polygons(polygon_a, polygon_b))
