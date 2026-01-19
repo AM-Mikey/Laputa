@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_igv6g")
 texture = ExtResource("2_3m0i0")
-layers = 4
+layers = 5
 layer_scales = {
 0: Vector2(0, 0),
 1: Vector2(0.4, 0.4),
@@ -21,6 +21,5 @@ layer_height_offsets = {
 3: 0.0,
 4: 6.0
 }
-horizontal_speed = 1.0
 tile_mode = 1
 back_tile_mode = 1

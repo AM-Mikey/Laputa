@@ -34,7 +34,7 @@ mouse_filter = 2
 script = ExtResource("3_xh0hp")
 background_resource = ExtResource("4_nycf8")
 texture = ExtResource("5_4fkdy")
-layers = 4
+layers = 5
 layer_scales = {
 0: Vector2(0, 0),
 1: Vector2(0.4, 0.4),
@@ -49,7 +49,6 @@ layer_height_offsets = {
 3: 0.0,
 4: 6.0
 }
-horizontal_speed = 1.0
 tile_mode = 1
 back_tile_mode = 1
 
@@ -118,7 +117,7 @@ script = ExtResource("12_vw0qr")
 [node name="Spawns" type="Node2D" parent="."]
 visibility_layer = 2
 
-[node name="Frog15" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Frog" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -135,7 +134,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Frog16" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Frog1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -152,7 +151,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Frog17" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Frog2" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -169,7 +168,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Frog18" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Frog3" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -186,7 +185,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Stalagtite26" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -203,7 +202,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite27" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -220,7 +219,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite28" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite2" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -237,7 +236,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sphagnum19" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -253,7 +252,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sphagnum20" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -269,7 +268,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Frog19" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Frog4" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -286,7 +285,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Frog20" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Frog5" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -303,7 +302,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Frog21" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Frog6" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -320,7 +319,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Stalagtite29" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite3" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -337,7 +336,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sphagnum21" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum2" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -353,7 +352,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sphagnum22" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum3" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -369,7 +368,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sphagnum23" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum4" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -385,7 +384,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sphagnum24" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum5" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -401,7 +400,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sphagnum25" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum6" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -417,7 +416,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sphagnum26" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum7" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -433,7 +432,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sphagnum27" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum8" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -449,7 +448,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite30" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite4" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -466,7 +465,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite31" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite5" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -483,7 +482,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sphagnum28" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum9" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -499,7 +498,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sphagnum29" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum10" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -515,7 +514,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Frog22" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Frog7" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -532,7 +531,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Frog23" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Frog8" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -549,7 +548,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Frog24" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Frog9" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -566,7 +565,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Frog25" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Frog10" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -583,7 +582,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Frog26" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Frog11" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -600,7 +599,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Stalagtite32" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite6" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -617,7 +616,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite33" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite7" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -634,7 +633,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite34" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite8" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -651,7 +650,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite35" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite9" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -668,7 +667,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite36" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite10" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -685,7 +684,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite37" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite11" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -702,7 +701,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite38" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite12" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -719,7 +718,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite39" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite13" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -736,7 +735,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite40" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite14" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -753,7 +752,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite41" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite15" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -770,7 +769,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite42" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite16" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -787,7 +786,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite43" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite17" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -804,7 +803,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite44" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite18" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -821,7 +820,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite45" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite19" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -838,7 +837,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite46" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite20" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -855,7 +854,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite47" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite21" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -872,7 +871,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Frog27" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Frog12" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -889,7 +888,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Sphagnum30" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum11" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -905,7 +904,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sphagnum31" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum12" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -921,7 +920,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sphagnum32" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum13" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -937,7 +936,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sphagnum33" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum14" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -953,7 +952,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite48" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite22" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -970,7 +969,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite49" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite23" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -987,7 +986,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sphagnum34" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum15" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1003,7 +1002,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Frog28" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Frog13" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1020,7 +1019,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Stalagtite50" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite24" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1037,7 +1036,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite51" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Stalagtite25" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1054,7 +1053,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Frog29" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Frog14" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1071,7 +1070,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Sphagnum35" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum16" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1087,7 +1086,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sphagnum36" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum17" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1103,7 +1102,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sphagnum37" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Sphagnum18" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1119,7 +1118,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Water1" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
+[node name="Water" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1137,7 +1136,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Sign3" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
+[node name="Sign" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1156,7 +1155,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="KillBox1" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
+[node name="KillBox" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1194,7 +1193,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door2" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
+[node name="Door" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1217,7 +1216,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Ladder5" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
+[node name="Ladder" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1235,7 +1234,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Ladder6" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
+[node name="Ladder1" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1253,7 +1252,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Ladder7" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
+[node name="Ladder2" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1271,7 +1270,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Ladder8" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
+[node name="Ladder3" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1289,7 +1288,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Ladder9" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
+[node name="Ladder4" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1307,7 +1306,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door3" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
+[node name="Door1" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1330,7 +1329,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Sign4" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
+[node name="Sign1" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_vbo15")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999

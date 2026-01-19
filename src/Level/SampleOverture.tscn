@@ -1,0 +1,188 @@
+[gd_scene load_steps=18 format=4]
+
+[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_rdedw"]
+[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_d8p0d"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_05klb"]
+[ext_resource type="Resource" path="res://src/Background/iedge.tres" id="4_kl0df"]
+[ext_resource type="TileSet" path="res://src/Tile/WastesRecolor.tres" id="5_7isqy"]
+[ext_resource type="Texture2D" path="res://assets/Background/IslandEdge.png" id="5_f3nxu"]
+[ext_resource type="PackedScene" path="res://src/Editor/TriggerSpawn.tscn" id="7_f3nxu"]
+[ext_resource type="Script" path="res://src/Editor/TriggerSpawn.gd" id="8_kl0df"]
+[ext_resource type="Script" path="res://src/Tile/Wastes.gd" id="9_3nr78"]
+[ext_resource type="PackedScene" path="res://src/Utility/Waypoint.tscn" id="10_0qu1u"]
+[ext_resource type="PackedScene" path="res://src/Effect/Light/SunLight.tscn" id="11_bcryd"]
+[ext_resource type="Script" path="res://src/Utility/Waypoint.gd" id="11_f3nxu"]
+[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="12_h5t0g"]
+[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="13_ebry3"]
+[ext_resource type="Script" path="res://src/Effect/Light/SunLight.gd" id="13_u3ixf"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="15_3nr78"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="17_0qu1u"]
+
+[node name="SampleOverture" type="Node2D"]
+visibility_layer = 2
+script = ExtResource("1_rdedw")
+level_name = "SampleOverture"
+music = "dogtown_day"
+dialog_json = "res://src/Dialog/Village.json"
+conversation = "cutscene_test"
+
+[node name="LevelLimiter" type="MarginContainer" parent="." instance=ExtResource("2_d8p0d")]
+visibility_layer = 2
+offset_right = 480.0
+offset_bottom = 272.0
+mouse_filter = 2
+script = ExtResource("3_05klb")
+background_resource = ExtResource("4_kl0df")
+texture = ExtResource("5_f3nxu")
+layers = 5
+layer_scales = {
+0: Vector2(0, 0),
+1: Vector2(0.4, 0.4),
+2: Vector2(0.7, 0.7),
+3: Vector2(1, 1),
+4: Vector2(0.9, 0.9)
+}
+layer_height_offsets = {
+0: 0.0,
+1: 0.0,
+2: 0.0,
+3: 0.0,
+4: 6.0
+}
+tile_mode = 1
+back_tile_mode = 1
+
+[node name="TileMap" type="Node2D" parent="."]
+visibility_layer = 2
+
+[node name="FarBack" type="TileMapLayer" parent="TileMap"]
+visibility_layer = 2
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAIAAAAWAA8AAAAAAAIAAAAXAA8AAAAAAAIAAAAXABAAAAAAAAIAAAAYAA8AAAAAAAIAAAAWABAAAAAAAAIAAAAYABAAAAAAAAIAAAAVAA8AAAACAAEAAAAWAA4AAAACAAEAAAAXAA4AAAABAAEAAAAYAA4AAAADAAEAAAAZAA8AAAAAAAIAAAAZABAAAAAEAAAAAAAVABAAAAAAAAIAAAAZABEAAAADAAIAAAAYABEAAAADAAAAAAAXABEAAAACAAAAAAAWABEAAAACAAAAAAAVABEAAAADAAAAAAARABEAAAADAAAAAAAQABEAAAACAAIAAAAQABAAAAACAAEAAAARABAAAAAAAAIAAAARAA8AAAACAAEAAAASAA8AAAADAAEAAAASABAAAAAAAAIAAAASABEAAAADAAAAAAAUABAAAAAAAAEAAAATABAAAAABAAEAAAATABEAAAADAAAAAAAUABEAAAACAAAAAAAZAA4AAAAAAAIAAAAZAA0AAAAAAAIAAAAYAA0AAAAFAAEAAAAYAAwAAAAFAAAAAAAYAAsAAAACAAEAAAAZAAsAAAABAAEAAAAaAAsAAAADAAEAAAAaAAwAAAAEAAEAAAAaAA0AAAAEAAEAAAAZAAwAAAAAAAIAAAAGAAwAAAAFAAIAAAAHAAwAAAAGAAIAAAAGAA0AAAAFAAMAAAAHAA0AAAAGAAMAAAAGAAoAAAAFAAIAAAAHAAoAAAAGAAIAAAAGAAsAAAAFAAMAAAAHAAsAAAAGAAMAAAAGAAgAAAAFAAIAAAAHAAgAAAAGAAIAAAAGAAkAAAAFAAMAAAAHAAkAAAAGAAMAAAAGAAcAAAAFAAMAAAAHAAcAAAAGAAMAAAA=")
+tile_set = ExtResource("5_7isqy")
+
+[node name="Back" type="TileMapLayer" parent="TileMap"]
+visibility_layer = 2
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAANAAwAAAACAAQAAAAOAAwAAAADAAQAAAAPAAwAAAAEAAQAAAANAA0AAAACAAUAAAAOAA0AAAADAAUAAAAPAA0AAAAEAAUAAAAUAAoAAAABAAQAAAAUAAsAAAABAAUAAAAUAAwAAAABAAYAAAAUAA0AAAABAAcAAAAIAAwAAAAGAAYAAAAJAAwAAAAHAAYAAAAIAA0AAAAGAAcAAAAJAA0AAAAHAAcAAAAZAAwAAAAFAAYAAAAZAA0AAAAFAAcAAAA=")
+tile_set = ExtResource("5_7isqy")
+
+[node name="Front" type="TileMapLayer" parent="TileMap"]
+visibility_layer = 2
+z_index = 1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAdABAAAAAAAAgAAAAAABAAAAAAAAgAAAABABAAAAABAAgAAAACAA8AAAABAAgAAAADAA8AAAACAAgAAAAEAA8AAAAAAAgAAAAFAA8AAAAAAAgAAAAGAA8AAAAAAAgAAAAHAA8AAAAAAAgAAAAHAA4AAAAAAAgAAAAIAA4AAAAAAAgAAAAJAA4AAAAAAAgAAAABAA8AAAAAAAgAAAAJAA8AAAAAAAgAAAALAA8AAAAAAAgAAAAMAA8AAAABAAgAAAANAA8AAAACAAgAAAAOAA8AAAABAAgAAAAPAA8AAAAAAAgAAAAQAA8AAAAAAAgAAAARAA8AAAAAAAgAAAASAA8AAAAAAAgAAAATAA8AAAAAAAgAAAAUAA8AAAABAAgAAAAVAA8AAAACAAgAAAAAAA4AAAAAAAgAAAABAA4AAAAAAAgAAAACAA4AAAAAAAgAAAADAA4AAAAAAAgAAAAEAA4AAAAAAAgAAAAFAA4AAAAAAAgAAAAGAA4AAAAAAAgAAAAKAA4AAAAAAAgAAAALAA4AAAAAAAgAAAAMAA4AAAAAAAgAAAANAA4AAAAAAAgAAAAOAA4AAAAAAAgAAAAPAA4AAAAAAAgAAAAQAA4AAAAAAAgAAAARAA4AAAAAAAgAAAASAA4AAAAAAAgAAAATAA4AAAAAAAgAAAAUAA4AAAAAAAgAAAAVAA4AAAAAAAgAAAAWAA4AAAAAAAgAAAAXAA4AAAAFAAgAAAAYAA4AAAAAAAgAAAAZAA4AAAAAAAgAAAAaAA4AAAAAAAgAAAAbAA4AAAAAAAgAAAAcAA4AAAAAAAgAAAAdAA4AAAAAAAgAAAAAAA8AAAAAAAgAAAAIAA8AAAAAAAgAAAAKAA8AAAAAAAgAAAAZAA8AAAAAAAgAAAAaAA8AAAAAAAgAAAAbAA8AAAAAAAgAAAAcAA8AAAACAAgAAAAdAA8AAAABAAgAAAACABAAAAAAAAgAAAADABAAAAAAAAgAAAAEABAAAAAAAAgAAAAFABAAAAAAAAgAAAAGABAAAAAAAAgAAAAHABAAAAAAAAgAAAAIABAAAAABAAgAAAAJABAAAAACAAgAAAAKABAAAAAAAAgAAAALABAAAAAAAAgAAAAMABAAAAAAAAgAAAANABAAAAAAAAgAAAAOABAAAAAAAAgAAAAPABAAAAAAAAgAAAAQABAAAAAAAAgAAAASABAAAAAAAAgAAAATABAAAAAAAAgAAAAUABAAAAAAAAgAAAAVABAAAAAEAAkAAAAZABAAAAAAAAgAAAAaABAAAAAAAAgAAAAbABAAAAAAAAgAAAAcABAAAAAAAAgAAAARABAAAAABAAkAAAAWAA8AAAAEAAkAAAAXAA8AAAAFAAkAAAAYAA8AAAAHAAkAAAAZAAsAAAACAAoAAAAEAA0AAAAAAAgAAAAEAAwAAAAAAAgAAAAEAAsAAAAAAAgAAAAEAAoAAAABAAgAAAAEAAkAAAAAAAgAAAAEAAgAAAAAAAgAAAAEAAcAAAAAAAgAAAAFAAcAAAAAAAgAAAAFAAgAAAAAAAgAAAAFAAkAAAABAAgAAAAFAAoAAAAAAAgAAAAFAAsAAAABAAgAAAAFAAwAAAAAAAgAAAAFAA0AAAAAAAgAAAA=")
+tile_set = ExtResource("5_7isqy")
+
+[node name="FarFront" type="TileMapLayer" parent="TileMap"]
+visibility_layer = 2
+z_index = 2
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAA0AAAABAAwAAAABAA0AAAACAAwAAAACAA0AAAABAAwAAAADAA0AAAACAAwAAAAEAA0AAAABAAwAAAAFAA0AAAACAAwAAAAGAA0AAAABAAwAAAAHAA0AAAACAAwAAAAIAA0AAAABAAwAAAAJAA0AAAACAAwAAAAKAA0AAAABAAwAAAALAA0AAAACAAwAAAAMAA0AAAABAAwAAAANAA0AAAACAAwAAAAOAA0AAAABAAwAAAAPAA0AAAACAAwAAAAAAA4AAAABAA0AAAABAA4AAAACAA0AAAACAA4AAAABAA0AAAADAA4AAAACAA0AAAAEAA4AAAABAA0AAAAFAA4AAAACAA0AAAAGAA4AAAABAA0AAAAHAA4AAAACAA0AAAAIAA4AAAABAA0AAAAJAA4AAAACAA0AAAAKAA4AAAABAA0AAAALAA4AAAACAA0AAAAMAA4AAAABAA0AAAANAA4AAAACAA0AAAAOAA4AAAABAA0AAAAPAA4AAAACAA0AAAAQAA0AAAABAAwAAAARAA0AAAACAAwAAAASAA0AAAABAAwAAAATAA0AAAACAAwAAAAUAA0AAAABAAwAAAAVAA0AAAACAAwAAAAWAA0AAAABAAwAAAAQAA4AAAABAA0AAAARAA4AAAACAA0AAAASAA4AAAABAA0AAAATAA4AAAACAA0AAAAUAA4AAAABAA0AAAAVAA4AAAACAA0AAAAWAA4AAAABAA0AAAAXAA0AAAABAAwAAAAYAA0AAAACAAwAAAAZAA0AAAABAAwAAAAaAA0AAAACAAwAAAAbAA0AAAABAAwAAAAcAA0AAAACAAwAAAAdAA0AAAABAAwAAAAXAA4AAAABAA0AAAAYAA4AAAACAA0AAAAZAA4AAAABAA0AAAAaAA4AAAACAA0AAAAbAA4AAAABAA0AAAAcAA4AAAACAA0AAAAdAA4AAAABAA0AAAAYAAoAAAAAAAwAAAAYAAsAAAAAAA0AAAAZAAoAAAABAAwAAAAZAAsAAAABAA0AAAAaAAoAAAADAAwAAAAaAAsAAAADAA0AAAAZAAwAAAAGAAwAAAADAAYAAAAAAAwAAAAEAAYAAAABAAwAAAAFAAYAAAACAAwAAAAGAAYAAAACAAwAAAADAAcAAAAAAA0AAAAEAAcAAAABAA0AAAAFAAcAAAACAA0AAAAGAAcAAAACAA0AAAAIAAYAAAADAAwAAAAIAAcAAAADAA0AAAAHAAYAAAACAAwAAAAHAAcAAAACAA0AAAA=")
+tile_set = ExtResource("5_7isqy")
+
+[node name="Props" type="Node2D" parent="."]
+visible = false
+visibility_layer = 2
+
+[node name="Actors" type="Node2D" parent="."]
+visibility_layer = 2
+
+[node name="Triggers" type="Node2D" parent="."]
+visibility_layer = 2
+
+[node name="Spawns" type="Node2D" parent="."]
+visibility_layer = 2
+
+[node name="Door" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_f3nxu")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
+offset_left = -80.0
+offset_top = 176.0
+offset_right = -64.0
+offset_bottom = 208.0
+mouse_filter = 2
+script = ExtResource("8_kl0df")
+
+[node name="Spikes" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_f3nxu")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
+offset_left = 288.0
+offset_top = 160.0
+offset_right = 304.0
+offset_bottom = 176.0
+mouse_filter = 2
+script = ExtResource("8_kl0df")
+
+[node name="LoadZone" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_f3nxu")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
+offset_left = 1136.0
+offset_top = 224.0
+offset_right = 1168.0
+offset_bottom = 240.0
+mouse_filter = 2
+script = ExtResource("8_kl0df")
+
+[node name="LoadZone1" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_f3nxu")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
+offset_left = 1280.0
+offset_top = -336.0
+offset_right = 1296.0
+offset_bottom = 224.0
+mouse_filter = 2
+script = ExtResource("8_kl0df")
+
+[node name="AutoTile" type="Node2D" parent="."]
+visibility_layer = 2
+script = ExtResource("9_3nr78")
+
+[node name="Waypoint" type="Area2D" parent="." groups=["Entities", "VisualUtilities", "Waypoints"] instance=ExtResource("10_0qu1u")]
+visibility_layer = 2
+position = Vector2(664, 40)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("11_f3nxu")
+owner_id = "bird1"
+
+[node name="Waypoint2" type="Area2D" parent="." groups=["Entities", "VisualUtilities", "Waypoints"] instance=ExtResource("10_0qu1u")]
+visibility_layer = 2
+position = Vector2(848, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("11_f3nxu")
+owner_id = "bird1"
+index = 1
+
+[node name="SunLight" type="Area2D" parent="." groups=["SunLights"] instance=ExtResource("11_bcryd")]
+visibility_layer = 2
+position = Vector2(88, -128)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("13_u3ixf")
+
+[node name="VanishingPoint" type="Area2D" parent="." groups=["VanishingPoints"] instance=ExtResource("12_h5t0g")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(232, 144)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("15_3nr78")
+
+[node name="SpawnPoint" type="Area2D" parent="." groups=["SpawnPoints"] instance=ExtResource("13_ebry3")]
+visibility_layer = 2
+position = Vector2(288, 224)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("17_0qu1u")
