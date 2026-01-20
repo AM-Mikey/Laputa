@@ -1,16 +1,10 @@
-[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://cp6yxrcme45e1"]
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cp6yxrcme45e1"]
 
 [ext_resource type="Script" uid="uid://dj0u1vtqimy4j" path="res://src/Item/Item.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://c256cy5lf35mq" path="res://assets/Item/Items.png" id="2_2e2td"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3lv6l"]
-atlas = ExtResource("2_2e2td")
-region = Rect2(0, 0, 32, 16)
+[ext_resource type="Texture2D" uid="uid://cbxijdkxuta1e" path="res://assets/Item/Key.png" id="2_2e2td"]
 
 [resource]
 script = ExtResource("1")
 item_name = "Key"
-index = 0
-texture = SubResource("AtlasTexture_3lv6l")
-description = "It's just a key"
-price = 0
+texture = ExtResource("2_2e2td")
+description = "It's just a key."

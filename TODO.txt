@@ -399,3 +399,27 @@ add debug print show cursor position in tile and exact position
 trigger spawn previews
 prop spawn previews
 move actors over to EditorArea
+chestweapon sparkles
+only allow one prop when investigating(?)
+
+add gun get screen
+add item get screen
+clean up inventory
+make max gun count six
+make gun locker prop
+
+
+fix save load to go off of name
+fix level name when instantiating level
+check if save data is valid for version of level, maybe
+
+look into why game creates save file when changing level
+
+
+#new
+add bg visibility
+
+
+next todo:
+add items
+add secondary tab inventory: quests, dialog topics, then topic descriptions

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b7ilah41ye7yl"]
+[gd_scene load_steps=16 format=3 uid="uid://b7ilah41ye7yl"]
 
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="3"]
@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="7_y7abv"]
 [ext_resource type="StyleBox" uid="uid://d20qvx0q5xflf" path="res://src/UI/StyleBox/RustTrimmedScrews.tres" id="8"]
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="8_1e805"]
+[ext_resource type="StyleBox" uid="uid://b2eysynpuqm3n" path="res://src/UI/StyleBox/RustTabs.tres" id="13_4huqx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l1q3b"]
 shader = ExtResource("3_4pdh5")
@@ -24,7 +25,7 @@ shader_parameter/color_over = Color(0, 0, 0, 1)
 [node name="Inventory" type="CenterContainer"]
 process_mode = 3
 offset_right = 480.0
-offset_bottom = 272.0
+offset_bottom = 270.0
 theme = ExtResource("2")
 script = ExtResource("6")
 
@@ -32,35 +33,82 @@ script = ExtResource("6")
 material = SubResource("ShaderMaterial_l1q3b")
 polygon = PackedVector2Array(0, 0, 480, 0, 480, 270, 0, 270)
 
-[node name="Background" type="Panel" parent="."]
+[node name="VBox" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(288, 248)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="VBox/HBox"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="InventoryButton" type="Button" parent="VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = ExtResource("13_4huqx")
+text = "Inventory"
+
+[node name="Control2" type="Control" parent="VBox/HBox"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+
+[node name="MissionButton" type="Button" parent="VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = ExtResource("13_4huqx")
+text = "Mission"
+
+[node name="Control3" type="Control" parent="VBox/HBox"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+
+[node name="MapButton" type="Button" parent="VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = ExtResource("13_4huqx")
+text = "Map"
+
+[node name="Control4" type="Control" parent="VBox/HBox"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Background" type="Panel" parent="VBox"]
 custom_minimum_size = Vector2(288, 232)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("8")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Inventory" type="MarginContainer" parent="VBox/Background"]
+visible = false
 custom_minimum_size = Vector2(288, 232)
-layout_mode = 2
+layout_mode = 0
+offset_right = 288.0
+offset_bottom = 232.0
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBox" type="VBoxContainer" parent="VBox/Background/Inventory"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Weapons" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Weapons" type="MarginContainer" parent="VBox/Background/Inventory/VBox"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/Weapons"]
+[node name="Panel" type="Panel" parent="VBox/Background/Inventory/VBox/Weapons"]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_1ly47")
 
-[node name="Node2D" type="Node2D" parent="MarginContainer/VBoxContainer/Weapons"]
+[node name="Node2D" type="Node2D" parent="VBox/Background/Inventory/VBox/Weapons"]
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Weapons/Node2D"]
+[node name="TextureRect" type="TextureRect" parent="VBox/Background/Inventory/VBox/Weapons/Node2D"]
 offset_left = 29.0
 offset_top = 28.0
 offset_right = 211.0
@@ -68,21 +116,21 @@ offset_bottom = 53.0
 texture = ExtResource("6_l1q3b")
 expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Weapons"]
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Inventory/VBox/Weapons"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="WeaponWheel" parent="MarginContainer/VBoxContainer/Weapons/MarginContainer" instance=ExtResource("7")]
+[node name="WeaponWheel" parent="VBox/Background/Inventory/VBox/Weapons/MarginContainer" instance=ExtResource("7")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 height_modifier = 0.1
 
-[node name="Items" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Items" type="MarginContainer" parent="VBox/Background/Inventory/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -92,18 +140,18 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 0
 
-[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/Items"]
+[node name="Panel" type="Panel" parent="VBox/Background/Inventory/VBox/Items"]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("6_4pdh5")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Items"]
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Inventory/VBox/Items"]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 4
 
-[node name="ItemList" type="ItemList" parent="MarginContainer/VBoxContainer/Items/MarginContainer"]
+[node name="ItemList" type="ItemList" parent="VBox/Background/Inventory/VBox/Items/MarginContainer"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_constants/h_separation = 0
@@ -125,27 +173,27 @@ item_4/icon = ExtResource("6_n1xmo")
 item_5/icon = ExtResource("6_n1xmo")
 item_6/icon = ExtResource("6_n1xmo")
 
-[node name="Description" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Description" type="MarginContainer" parent="VBox/Background/Inventory/VBox"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/Description"]
+[node name="Panel" type="Panel" parent="VBox/Background/Inventory/VBox/Description"]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("3")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Description"]
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Inventory/VBox/Description"]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Description/MarginContainer"]
+[node name="VBox" type="VBoxContainer" parent="VBox/Background/Inventory/VBox/Description/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="Header" type="Label" parent="MarginContainer/VBoxContainer/Description/MarginContainer/VBoxContainer"]
+[node name="Header" type="Label" parent="VBox/Background/Inventory/VBox/Description/MarginContainer/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -154,15 +202,157 @@ theme_override_colors/font_shadow_color = Color(0.113725, 0.156863, 0.227451, 1)
 theme_override_fonts/font = ExtResource("7_y7abv")
 text = "Tasty Treat"
 
-[node name="Body" type="Label" parent="MarginContainer/VBoxContainer/Description/MarginContainer/VBoxContainer"]
+[node name="Body" type="Label" parent="VBox/Background/Inventory/VBox/Description/MarginContainer/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.784314, 0.784314, 0.639216, 1)
 theme_override_colors/font_shadow_color = Color(0.113725, 0.156863, 0.227451, 1)
 theme_override_fonts/font = ExtResource("8_1e805")
-text = "Chocolate covered mushrooms? Wow! df
+text = "Chocolate covered mushrooms? 
 xcv sdfsdfsdf sdfsdfsdf sdfsdf sdfsdf sdfsdf"
 autowrap_mode = 3
 
-[connection signal="item_activated" from="MarginContainer/VBoxContainer/Items/MarginContainer/ItemList" to="." method="_on_Items_item_activated"]
+[node name="Mission" type="MarginContainer" parent="VBox/Background"]
+visible = false
+custom_minimum_size = Vector2(288, 232)
+layout_mode = 0
+offset_right = 288.0
+offset_bottom = 232.0
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 8
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Background/Mission"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Weapons" type="MarginContainer" parent="VBox/Background/Mission/VBox"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBox/Weapons"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Weapons/Panel"]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 64.0
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Background/Mission/VBox/Weapons/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Body" type="Label" parent="VBox/Background/Mission/VBox/Weapons/Panel/MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.784314, 0.784314, 0.639216, 1)
+theme_override_colors/font_shadow_color = Color(0.113725, 0.156863, 0.227451, 1)
+theme_override_fonts/font = ExtResource("8_1e805")
+text = "Current Mission:
+Explore the area"
+autowrap_mode = 3
+
+[node name="Items" type="MarginContainer" parent="VBox/Background/Mission/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBox/Items"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("6_4pdh5")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Items"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 4
+
+[node name="ItemList" type="ItemList" parent="VBox/Background/Mission/VBox/Items/MarginContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/line_separation = 0
+theme_override_constants/icon_margin = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_l1q3b")
+allow_search = false
+item_count = 3
+max_columns = 2
+fixed_column_width = 32
+fixed_icon_size = Vector2i(32, 16)
+item_0/text = "Testing"
+item_1/text = "Item2"
+item_2/text = "Beef"
+
+[node name="Description" type="MarginContainer" parent="VBox/Background/Mission/VBox"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBox/Description"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Description"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Background/Mission/VBox/Description/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Body" type="Label" parent="VBox/Background/Mission/VBox/Description/MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.784314, 0.784314, 0.639216, 1)
+theme_override_colors/font_shadow_color = Color(0.113725, 0.156863, 0.227451, 1)
+theme_override_fonts/font = ExtResource("8_1e805")
+text = "Here's a full overview description of the given topic."
+autowrap_mode = 3
+
+[node name="Map" type="MarginContainer" parent="VBox/Background"]
+visible = false
+custom_minimum_size = Vector2(288, 232)
+layout_mode = 0
+offset_right = 288.0
+offset_bottom = 232.0
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 8
+
+[node name="ColorRect" type="ColorRect" parent="VBox/Background/Map"]
+layout_mode = 2
+color = Color(4.5724212e-07, 0.32200053, 0.35008585, 1)
+
+[node name="Control" type="Node2D" parent="."]
+visible = false
+position = Vector2(120, 11)
+
+[node name="Input" type="Button" parent="Control"]
+offset_left = -18.0
+offset_top = -12.0
+offset_right = 18.0
+offset_bottom = 12.0
+text = "Test"
+flat = true
+
+[connection signal="item_activated" from="VBox/Background/Inventory/VBox/Items/MarginContainer/ItemList" to="." method="_on_Items_item_activated"]
+[connection signal="item_activated" from="VBox/Background/Mission/VBox/Items/MarginContainer/ItemList" to="." method="_on_Items_item_activated"]

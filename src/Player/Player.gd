@@ -44,8 +44,8 @@ var dead = false
 @export var controller_id: int = 0
 
 
-var item_array: Array
-var topic_array: Array = ["child", "sasuke", "basil", "general"]
+var item_array: Array[Item]
+var topic_array: Array[String] = ["child", "sasuke", "basil", "general"]
 var inspect_target: Node = null
 var experience_number: Node = null
 var damage_number: Node = null
@@ -332,7 +332,7 @@ func _on_Ear_area_exited(_area):
 
 
 #TODO: clean these up and get rid of them ##why?
-func update_item_array():
+func update_item_array(): #TODO: when is this used?
 	emit_signal("item_array_updated", item_array)
 
 func setup_hud():

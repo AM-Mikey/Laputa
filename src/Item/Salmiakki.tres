@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cr6wy23axeoj1"]
+
+[ext_resource type="Script" uid="uid://dj0u1vtqimy4j" path="res://src/Item/Item.gd" id="1_anps7"]
+[ext_resource type="Texture2D" uid="uid://dml1i4m4ybgs3" path="res://assets/Item/Salmiakki.png" id="2_camek"]
+
+[resource]
+script = ExtResource("1_anps7")
+item_name = "Salmiakki"
+texture = ExtResource("2_camek")
+description = "A salty treat."
+metadata/_custom_type_script = "uid://dj0u1vtqimy4j"
