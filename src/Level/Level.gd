@@ -61,25 +61,24 @@ func merge_one_way_ssp_tile() -> void:
 			if number_of_cell_polygon > 0:
 				var rotated_flag: int = layer.get_cell_alternative_tile(cell) & (TileSetAtlasSource.TRANSFORM_TRANSPOSE | TileSetAtlasSource.TRANSFORM_FLIP_H | TileSetAtlasSource.TRANSFORM_FLIP_V)
 				for p_idx in range(number_of_cell_polygon):
-					if (cell_data.is_collision_polygon_one_way(1, p_idx)):
-						var cell_polygon: PackedVector2Array = cell_data.get_collision_polygon_points(1, p_idx)
-						var transformed_polygon: PackedVector2Array = []
-						if (TileTransformRadian.has(rotated_flag)):
-							var rotated_radian: float = TileTransformRadian[rotated_flag]
-							for point in cell_polygon:
-								transformed_polygon.append(point.rotated(rotated_radian) + (Vector2(cell) + Vector2.ONE / 2) * Vector2(cell_size))
-						else:
-							var flipped_normal = Vector2.ONE
-							match rotated_flag:
-								TileSetAtlasSource.TRANSFORM_FLIP_H:
-									flipped_normal = Vector2(-1, 1)
-								TileSetAtlasSource.TRANSFORM_FLIP_V:
-									flipped_normal = Vector2(1, -1)
-								TileSetAtlasSource.TRANSFORM_TRANSPOSE:
-									flipped_normal = Vector2(-1, -1)
-							for point in cell_polygon:
-								transformed_polygon.append(point * flipped_normal + (Vector2(cell) + Vector2.ONE / 2) * Vector2(cell_size))
-						used_tiles_ssp_collision.append(transformed_polygon)
+					var cell_polygon: PackedVector2Array = cell_data.get_collision_polygon_points(1, p_idx)
+					var transformed_polygon: PackedVector2Array = []
+					if (TileTransformRadian.has(rotated_flag)):
+						var rotated_radian: float = TileTransformRadian[rotated_flag]
+						for point in cell_polygon:
+							transformed_polygon.append(point.rotated(rotated_radian) + (Vector2(cell) + Vector2.ONE / 2) * Vector2(cell_size))
+					else:
+						var flipped_normal = Vector2.ONE
+						match rotated_flag:
+							TileSetAtlasSource.TRANSFORM_FLIP_H:
+								flipped_normal = Vector2(-1, 1)
+							TileSetAtlasSource.TRANSFORM_FLIP_V:
+								flipped_normal = Vector2(1, -1)
+							TileSetAtlasSource.TRANSFORM_TRANSPOSE:
+								flipped_normal = Vector2(-1, -1)
+						for point in cell_polygon:
+							transformed_polygon.append(point * flipped_normal + (Vector2(cell) + Vector2.ONE / 2) * Vector2(cell_size))
+					used_tiles_ssp_collision.append(transformed_polygon)
 
 	var merged_polygon: Array[PackedVector2Array] = []
 	var old_size: int = used_tiles_ssp_collision.size() + 1
