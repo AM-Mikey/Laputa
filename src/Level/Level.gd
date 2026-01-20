@@ -25,15 +25,16 @@ func _ready():
 	if level_type == LevelType.PLAYERLESS_CUTSCENE:
 		do_playerless_cutscene()
 
+	merge_one_way_ssp_tile()
+
 	if not am.music_queue.is_empty():
+		am.fade_music()
 		await am.fadeout_finished
 	if not w.has_node("UILayer/TitleScreen"):
 		if music == "":
 			pass
 		else:
 			am.play_music(music)
-
-	merge_one_way_ssp_tile()
 
 func merge_one_way_ssp_tile() -> void:
 	# Generate merged ssp tilemap geometry (Assuming geometry does not have hole when merged)
@@ -102,6 +103,7 @@ func merge_one_way_ssp_tile() -> void:
 		merged_polygon = []
 
 	var static_body: StaticBody2D = StaticBody2D.new()
+	static_body.name = "SSP"
 	static_body.collision_layer = 0
 	static_body.set_collision_layer_value(10, true)
 	$Triggers.add_child(static_body)

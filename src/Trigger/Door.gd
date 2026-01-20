@@ -42,7 +42,6 @@ func enter_door():
 	active_pc.move_to(global_position + Vector2($CollisionShape2D.shape.size.x * 0.5, $CollisionShape2D.shape.size.y))
 
 	am.play("door")
-	am.fade_music()
 
 	var transition = TRANSITION.instantiate()
 	if w.bl.has_node("TransitionIris"):
