@@ -37,6 +37,8 @@ func _ready():
 			am.play_music(music)
 
 func merge_one_way_ssp_tile() -> void:
+	for i in $TileMap.get_children():
+		i.fix_invalid_tiles()
 	for child in $Triggers.get_children():
 		if (child is StaticBody2D):
 			child.queue_free()

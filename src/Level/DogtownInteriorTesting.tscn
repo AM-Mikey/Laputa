@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bo3uc4mqdw2nk"]
+[gd_scene load_steps=12 format=4 uid="uid://bo3uc4mqdw2nk"]
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_ris4u"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_wom3b"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="6_v20vf"]
 [ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/TriggerSpawn.tscn" id="7_0p40l"]
 [ext_resource type="Script" uid="uid://bkqwlyui5hbvy" path="res://src/Tile/DogtownInteriorAnimator.gd" id="7_85c3g"]
+[ext_resource type="Script" uid="uid://od834g8t6x33" path="res://src/Editor/TriggerSpawn.gd" id="8_uwfxm"]
 [ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="9_ln0on"]
 
 [node name="DogtownInteriorTesting" type="Node2D"]
@@ -56,7 +57,7 @@ tile_set = ExtResource("4_ris4u")
 visibility_layer = 2
 z_index = -1
 use_parent_material = true
-tile_map_data = PackedByteArray("AAAGAPX/AAAIAAQAAAAHAPX/AAAJAAQAAAAIAPX/AAAKAAQAAAAGAPb/AAAIAAUAAAAHAPb/AAAJAAUAAAAIAPb/AAAKAAUAAAAUAP7/AAALAAcAAAANAPz/AAALAAQAAAAOAPz/AAAMAAQAAAAPAPz/AAANAAQAAAANAP3/AAALAAUAAAAOAP3/AAAMAAUAAAAPAP3/AAANAAUAAAANAP7/AAALAAYAAAAOAP7/AAAMAAYAAAAPAP7/AAANAAYAAAAQAP7/AAAGAAUAAAARAP7/AAAHAAUAAAABAP3/AAACAAQAAAABAP7/AAACAAUAAAAFAP7/AAAVAAQAAAAEAP7/AAAUAAQAAAAFAP3/AAAPAAYAAAA=")
+tile_map_data = PackedByteArray("AAAGAPX/AAAIAAQAAAAHAPX/AAAJAAQAAAAIAPX/AAAKAAQAAAAGAPb/AAAIAAUAAAAHAPb/AAAJAAUAAAAIAPb/AAAKAAUAAAAUAP7/AAALAAcAAAANAPz/AAAFAAcAAAAOAPz/AAAMAAQAAAAPAPz/AAANAAQAAAANAP3/AAALAAUAAAAOAP3/AAAMAAUAAAAPAP3/AAANAAUAAAANAP7/AAALAAYAAAAOAP7/AAAMAAYAAAAPAP7/AAANAAYAAAAQAP7/AAAGAAUAAAARAP7/AAAHAAUAAAABAP3/AAACAAQAAAABAP7/AAACAAUAAAAFAP7/AAAVAAQAAAAEAP7/AAAUAAQAAAAFAP3/AAAPAAYAAAAJAP7/AAADAAcAAAAKAP7/AAAEAAcAAAALAP7/AAAFAAcAAAAKAP3/AAADAAcAAAALAP3/AAAEAAcAAAAMAP3/AAAFAAcAAAALAPz/AAADAAcAAAAMAPz/AAAEAAcAAAAMAPv/AAADAAcAAAANAPv/AAAEAAcAAAAOAPv/AAAFAAcAAAA=")
 tile_set = ExtResource("4_ris4u")
 
 [node name="Front" type="TileMapLayer" parent="TileMap"]
@@ -92,6 +93,7 @@ offset_left = 16.0
 offset_top = -48.0
 offset_right = 32.0
 offset_bottom = -16.0
+script = ExtResource("8_uwfxm")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],

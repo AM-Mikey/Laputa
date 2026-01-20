@@ -196,6 +196,7 @@ func _on_CoyoteTimer_timeout():
 	if not pc.is_in_coyote:
 		return
 	pc.is_in_coyote = false
-	pc.global_position.y += 1
+	pc.position.y += 1
+	pc.velocity.y += 20 #prevent us from walking across 1 tile gaps
 	if not pc.is_on_floor() and current_state == states["run"]:
 		change_state("jump")
