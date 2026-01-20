@@ -48,11 +48,10 @@ release_version = "1.8"
 do_skip_title = true
 debug_visible = true
 gamemode = "pvp"
-start_level_path = "res://src/Level/DefaultGodot4.tscn"
+start_level_path = "res://src/Level/SampleOverture.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_offset = Vector2(-2382.596, -661.4701)
-scroll_base_offset = Vector2(0, -140)
+scroll_offset = Vector2(-248.9999, 639.20496)
 
 [node name="Back" type="Node2D" parent="."]
 visibility_layer = 2

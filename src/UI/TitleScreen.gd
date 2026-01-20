@@ -42,19 +42,10 @@ func do_focus():
 ### SIGNALS ###
 
 func _on_new():
-	queue_free()
-
-	get_tree().paused = false
-	w.ui.visible = true
 	w.change_level_via_code(w.start_level_path)
 
 
 func _on_load():
-	queue_free()
-
-	get_tree().paused = false
-	w.ui.visible = true
-
 	SaveSystem.read_player_data_from_save()
 	SaveSystem.read_level_data_from_save(w.current_level)
 	SaveSystem.copy_level_data_from_save_to_temp()

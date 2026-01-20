@@ -22,11 +22,11 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	if velocity.y < 0.0: #going up
 		velocity.y = lerp(velocity.y, 0.0, air_cof)
-	
+
 	if velocity.length() < initial_velocity.length() * cool_speed_percent:
 		cool = true
 		$AnimationPlayer.play("Cool")
-	
+
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		cool = true
