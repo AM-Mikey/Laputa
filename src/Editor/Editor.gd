@@ -153,6 +153,7 @@ func exit():	#TODO: make this an editor_exit signal ## no? that just decentraliz
 	inspector.exit()
 	if w.current_level.has_node("TileAnimator"):
 		w.current_level.get_node("TileAnimator").editor_exit()
+	w.current_level.merge_one_way_ssp_tile()
 	clear_tile_map_cursor()
 	free_previews()
 	editor_level_limiter.queue_free()

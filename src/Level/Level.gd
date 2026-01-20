@@ -37,6 +37,10 @@ func _ready():
 			am.play_music(music)
 
 func merge_one_way_ssp_tile() -> void:
+	for child in $Triggers.get_children():
+		if (child is StaticBody2D):
+			child.queue_free()
+
 	# Generate merged ssp tilemap geometry (Assuming geometry does not have hole when merged)
 	var TileTransformRadian: Dictionary = {
 		0: 0,
