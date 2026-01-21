@@ -25,6 +25,8 @@ func _ready():
 	if level_type == LevelType.PLAYERLESS_CUTSCENE:
 		do_playerless_cutscene()
 
+	for i in $TileMap.get_children():
+		i.fix_invalid_tiles()
 	merge_one_way_ssp_tile()
 
 	if not am.music_queue.is_empty():
@@ -37,8 +39,6 @@ func _ready():
 			am.play_music(music)
 
 func merge_one_way_ssp_tile() -> void:
-	for i in $TileMap.get_children():
-		i.fix_invalid_tiles()
 	for child in $Triggers.get_children():
 		if (child is StaticBody2D):
 			child.queue_free()
