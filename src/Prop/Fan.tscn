@@ -1,7 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://d11mjw1kfmapi"]
 
-[ext_resource type="Texture2D" uid="uid://dhxy8j6e76eg8" path="res://assets/Prop/Outdated/Fan.png" id="1"]
-[ext_resource type="Script" uid="uid://ceam3wmge4fgc" path="res://src/Prop/Fan.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://dwj3t63digskb" path="res://assets/Prop/Fan.png" id="1"]
+[ext_resource type="Script" path="res://src/Prop/Fan.gd" id="2"]
+
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 24)

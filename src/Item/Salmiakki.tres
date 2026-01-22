@@ -7,5 +7,5 @@
 script = ExtResource("1_anps7")
 item_name = "Salmiakki"
 texture = ExtResource("2_camek")
-description = "A salty treat."
+description = "A salty treat. Each bite dries out your mouth."
 metadata/_custom_type_script = "uid://dj0u1vtqimy4j"

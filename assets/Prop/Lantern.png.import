@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://du7xmbjepw5fu"
-path="res://.godot/imported/AmmoRefill.png-deb22bb68ef331aa83abf9cfe72a49ae.ctex"
+uid="uid://61dsqlrafjlj"
+path="res://.godot/imported/Lantern.png-dec6c0ec5ff68e147a06a8734a866c35.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Prop/Outdated/AmmoRefill.png"
-dest_files=["res://.godot/imported/AmmoRefill.png-deb22bb68ef331aa83abf9cfe72a49ae.ctex"]
+source_file="res://assets/Prop/Lantern.png"
+dest_files=["res://.godot/imported/Lantern.png-dec6c0ec5ff68e147a06a8734a866c35.ctex"]
 
 [params]
 

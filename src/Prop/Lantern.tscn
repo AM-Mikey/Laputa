@@ -1,7 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bvvxaveawy1n7"]
+[gd_scene load_steps=10 format=3 uid="uid://bvvxaveawy1n7"]
 
-[ext_resource type="Script" uid="uid://bel8i5oa8s60p" path="res://src/Prop/Outdated/Lantern.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://ckd0cibuyuodb" path="res://assets/Prop/Outdated/Lantern.png" id="2"]
+[ext_resource type="Script" uid="uid://bel8i5oa8s60p" path="res://src/Prop/Lantern.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://61dsqlrafjlj" path="res://assets/Prop/Lantern.png" id="2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ly3he"]
+size = Vector2(16, 16)
 
 [sub_resource type="Animation" id="Animation_7a8mr"]
 resource_name = "Off"
@@ -65,8 +68,15 @@ size = Vector2(16, 24)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7a8mr"]
 size = Vector2(16, 16)
 
-[node name="Lantern" type="Node2D"]
+[node name="Lantern" type="CharacterBody2D" groups=["Entities", "Props"]]
+collision_layer = 16
+collision_mask = 0
 script = ExtResource("1")
+metadata/_custom_type_script = "uid://dkko72kbbon8e"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_ly3he")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2")
@@ -94,3 +104,6 @@ collision_mask = 0
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_7a8mr")
 debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

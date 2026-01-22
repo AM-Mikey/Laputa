@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1q3c8sscuh0k"
-path="res://.godot/imported/0Spikes.png-e77522cd72a04b0ac2abc4f58674ba57.ctex"
+uid="uid://d2ynj2q4m0tn6"
+path="res://.godot/imported/AmmoRefill.png-864fa834d310703ed7c66ca401f9c733.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Prop/Outdated/0Spikes.png"
-dest_files=["res://.godot/imported/0Spikes.png-e77522cd72a04b0ac2abc4f58674ba57.ctex"]
+source_file="res://assets/Prop/AmmoRefill.png"
+dest_files=["res://.godot/imported/AmmoRefill.png-864fa834d310703ed7c66ca401f9c733.ctex"]
 
 [params]
 

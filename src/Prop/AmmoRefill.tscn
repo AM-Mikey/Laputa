@@ -1,7 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://blp6rh8sgbjxg"]
 
-[ext_resource type="Texture2D" uid="uid://du7xmbjepw5fu" path="res://assets/Prop/Outdated/AmmoRefill.png" id="1"]
-[ext_resource type="Script" uid="uid://cx2fi2uiooeam" path="res://src/Prop/AmmoRefill.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://d2ynj2q4m0tn6" path="res://assets/Prop/AmmoRefill.png" id="1"]
+[ext_resource type="Script" path="res://src/Prop/AmmoRefill.gd" id="2"]
+
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)

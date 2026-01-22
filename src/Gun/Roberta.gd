@@ -2,7 +2,7 @@ extends Gun
 
 func _ready():
 	display_name = "Roberta"
-	description = "A swift and powerful SMG. It stores ammo in its stock."
+	description = "Provides reliable rapid fire. Its large ammo capacity is stored in its stock."
 	icon_texture = load("res://assets/Gun/RobertaIcon.png")
 	icon_small_texture = load("res://assets/Gun/RobertaIconSmall.png")
 

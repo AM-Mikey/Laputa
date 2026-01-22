@@ -1,0 +1,108 @@
+[gd_scene load_steps=10 format=3 uid="uid://bpiw0v4011n6y"]
+
+[ext_resource type="Script" uid="uid://bpv44v42v3lnl" path="res://src/Prop/Lamp.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://ds388lgxdr4w2" path="res://assets/Prop/Lamp.png" id="2_qexbl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xowu8"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_7a8mr"]
+resource_name = "Off"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_2dbik"]
+resource_name = "On"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_jksfg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qexbl"]
+_data = {
+&"Off": SubResource("Animation_7a8mr"),
+&"On": SubResource("Animation_2dbik"),
+&"RESET": SubResource("Animation_jksfg")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qexbl"]
+size = Vector2(16, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_egoxq"]
+size = Vector2(16, 16)
+
+[node name="Lamp" type="CharacterBody2D" groups=["Entities", "Props"]]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("2")
+metadata/_custom_type_script = "uid://dkko72kbbon8e"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_xowu8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_qexbl")
+centered = false
+hframes = 2
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qexbl")
+}
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2(8, 12)
+shape = SubResource("RectangleShape2D_qexbl")
+
+[node name="EditorArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_egoxq")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

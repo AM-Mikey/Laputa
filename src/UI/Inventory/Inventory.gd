@@ -17,10 +17,25 @@ func _input(event):
 		exit()
 
 
+func display_items():
+	var pc = f.pc()
+	for i in pc.item_array:
+		print("s")
+		var texture = i.texture
+		%ItemList.add_icon_item(texture)
+
+
+func display_topics():
+	var pc = f.pc()
+	for t in pc.topic_array:
+		%TopicList.add_item(t)
+
 func enter():
 	get_tree().paused = true
 	w.hl.visible = false
 	w.ui.visible = false
+	display_items()
+	display_topics()
 
 func exit():
 	get_tree().paused = false
@@ -31,10 +46,11 @@ func exit():
 	queue_free()
 
 
+
 ### SIGNALS
 
-func _on_inventory_updated(inventory):
-	pass
+#func _on_inventory_updated(inventory):
+	#pass
 	#if not inventory.is_empty():
 		#player_inventory = inventory
 		#var item_name = player_inventory[-1]
@@ -44,8 +60,8 @@ func _on_inventory_updated(inventory):
 		#body.text = item.description
 
 
-func _on_Items_item_activated(index):
-	pass
+#func _on_Items_item_activated(index):
+	#pass
 		#var item_name = player_inventory[index]
 		#var item_path = "res://src/Item/%s" % item_name + ".tres"
 		#var item = load(item_path)
@@ -54,18 +70,6 @@ func _on_Items_item_activated(index):
 
 
 ### SIGNALS ###
-
-func _resolution_scale_changed(_resolution_scale):
-	var inventory_size = get_tree().get_root().size / vs.inventory_resolution_scale
-	set_deferred("size", inventory_size)
-
-	var polygon_points = [
-		Vector2(0,0),
-		Vector2(inventory_size.x, 0),
-		inventory_size,
-		Vector2(0, inventory_size.y),
-		]
-	$Blur.polygon = PackedVector2Array(polygon_points)
 
 
 func _on_tab_toggled(toggled_on: bool, tab: String):
@@ -97,3 +101,22 @@ func _on_tab_toggled(toggled_on: bool, tab: String):
 				%Inventory.visible = false
 				%Mission.visible = false
 				%Map.visible = true
+
+
+func _on_ItemList_item_selected(index: int):
+	var pc = f.pc()
+	%InventoryHeader.text = pc.item_array[index].item_name
+	%InventoryBody.text = pc.item_array[index].description
+
+
+func _resolution_scale_changed(_resolution_scale):
+	var inventory_size = get_tree().get_root().size / vs.inventory_resolution_scale
+	set_deferred("size", inventory_size)
+
+	var polygon_points = [
+		Vector2(0,0),
+		Vector2(inventory_size.x, 0),
+		inventory_size,
+		Vector2(0, inventory_size.y),
+		]
+	$Blur.polygon = PackedVector2Array(polygon_points)

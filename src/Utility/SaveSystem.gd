@@ -19,6 +19,7 @@ func write_player_data_to_save(current_level):
 	var pc = f.pc()
 	var guns = pc.guns
 	var gun_data = {}
+	var item_data = []
 
 	for g in guns.get_children():
 		gun_data[g.name] = {
@@ -28,14 +29,17 @@ func write_player_data_to_save(current_level):
 		if g.max_ammo != 0:
 			gun_data[g.name]["ammo"] = g.ammo
 
+	for i in pc.item_array:
+		item_data.append(i.item_name)
+
 	data["player_data"] = {
 		"current_level" : current_level.scene_file_path,
 		"position" : pc.position,
 		"hp" : pc.hp,
 		"max_hp" : pc.max_hp,
 		"money" : pc.money,
-		"item_array" : pc.item_array,
-		"gun_data" : gun_data
+		"gun_data" : gun_data,
+		"item_data" : item_data,
 	}
 
 	write_to_file(save_path, data)
@@ -62,7 +66,12 @@ func read_player_data_from_save():
 	pc.hp = player_data["hp"]
 	pc.max_hp = player_data["max_hp"]
 	pc.money = player_data["money"]
-	pc.item_array = player_data["item_array"]
+
+	pc.item_array.clear()
+	for i in player_data["item_data"]:
+		var item_resource = load("res://src/Item/%s.tres" % i)
+		pc.item_array.append(item_resource)
+
 
 	for g in guns.get_children():
 		g.free()

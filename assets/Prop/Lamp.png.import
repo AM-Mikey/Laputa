@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7puntitab4qd"
-path="res://.godot/imported/SaveDisk.png-7a764395c9cd3f7e5e3d9d2c753c9b42.ctex"
+uid="uid://ds388lgxdr4w2"
+path="res://.godot/imported/Lamp.png-492b8b97c08306a67c532e925de6724d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Prop/Outdated/SaveDisk.png"
-dest_files=["res://.godot/imported/SaveDisk.png-7a764395c9cd3f7e5e3d9d2c753c9b42.ctex"]
+source_file="res://assets/Prop/Lamp.png"
+dest_files=["res://.godot/imported/Lamp.png-492b8b97c08306a67c532e925de6724d.ctex"]
 
 [params]
 

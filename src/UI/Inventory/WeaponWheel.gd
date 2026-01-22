@@ -30,8 +30,8 @@ func _ready():
 
 		if pc.guns.get_children().find(g) == 0: #gun 0 is big
 			sprite.scale = highlighted_scale
-			inventory.header.text = g.display_name
-			inventory.body.text = g.description
+			%InventoryHeader.text = g.display_name
+			%InventoryBody.text = g.description
 
 	place_buttons()
 	finished_ready = true
@@ -62,8 +62,8 @@ func _input(event):
 		timer.start(cycle_time)
 		timer_half.start(cycle_time / 2.0)
 		place_buttons()
-		inventory.header.text = pc.guns.get_child(0).display_name
-		inventory.body.text = pc.guns.get_child(0).description
+		%InventoryHeader.text = pc.guns.get_child(0).display_name
+		%InventoryBody.text = pc.guns.get_child(0).description
 
 		var tween = create_tween()
 		tween.tween_property(old_child, "scale", Vector2.ONE, cycle_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
