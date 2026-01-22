@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://5orkim7sjfi7" path="res://src/Gun/Tsurugi.tscn" id="24_0pdvi"]
 [ext_resource type="Shader" uid="uid://d4doa1vf12lkt" path="res://src/Shader/JuniperRecolor.gdshader" id="24_s1pnb"]
 [ext_resource type="Texture2D" uid="uid://mkfrxk3djlu1" path="res://assets/Player/Palette/Normal.png" id="25_3o18d"]
-[ext_resource type="PackedScene" path="res://src/Gun/Roberta.tscn" id="25_cd6iy"]
+[ext_resource type="PackedScene" uid="uid://bn8xosty72skm" path="res://src/Gun/Roberta.tscn" id="25_cd6iy"]
 [ext_resource type="Texture2D" uid="uid://cy6xxav2e0h3c" path="res://assets/Player/Palette/MonoHighContrast.png" id="25_v6qwc"]
 [ext_resource type="Script" uid="uid://cn112wea32cdx" path="res://src/Player/Inspect.gd" id="27"]
 [ext_resource type="PackedScene" uid="uid://diwpy822anfc4" path="res://src/Gun/MPistol.tscn" id="28"]
@@ -1021,8 +1021,9 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_cd6iy"]
 resource_name = "climb"
-length = 0.8
+length = 0.2
 loop_mode = 1
+step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1030,10 +1031,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.024999999, 0.049999997, 0.075, 0.099999994, 0.125, 0.15, 0.17500001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("37_ypuil")]
+"values": [ExtResource("37_ypuil"), ExtResource("37_ypuil"), ExtResource("37_ypuil"), ExtResource("37_ypuil"), ExtResource("37_ypuil"), ExtResource("37_ypuil"), ExtResource("37_ypuil"), ExtResource("37_ypuil")]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -1042,7 +1043,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.099999994),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -1059,7 +1060,7 @@ tracks/2/path = NodePath("Sprite2D:hframe")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"times": PackedFloat32Array(0, 0.024999999, 0.049999997, 0.075, 0.099999994, 0.125, 0.15, 0.17500001),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
