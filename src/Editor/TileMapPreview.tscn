@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://brv1y06d1b34i"]
+[gd_scene load_steps=0 format=3 uid="uid://brv1y06d1b34i"]
 
 [node name="TileMapPreview" type="TileMap" groups=["Previews"]]
 modulate = Color(1, 1, 1, 0.5)

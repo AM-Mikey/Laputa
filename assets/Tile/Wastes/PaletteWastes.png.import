@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crpqcdqyj84dj"
-path="res://.godot/imported/WastesTestColor9.png-cc9fdadaacf1f6d8fe351a4e55ddd084.ctex"
+uid="uid://cc6egc4pm0tkk"
+path="res://.godot/imported/PaletteWastes.png-aea7e63062fa3fafd116e70cdbf1e242.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/Wastes/WastesTestColor9.png"
-dest_files=["res://.godot/imported/WastesTestColor9.png-cc9fdadaacf1f6d8fe351a4e55ddd084.ctex"]
+source_file="res://assets/Tile/Wastes/PaletteWastes.png"
+dest_files=["res://.godot/imported/PaletteWastes.png-aea7e63062fa3fafd116e70cdbf1e242.ctex"]
 
 [params]
 
