@@ -1,13 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://b7ilah41ye7yl"]
+[gd_scene load_steps=19 format=3 uid="uid://b7ilah41ye7yl"]
 
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="3"]
 [ext_resource type="Shader" uid="uid://d3lkwynjfk4hg" path="res://src/Shader/SimpleBlur.gdshader" id="3_4pdh5"]
 [ext_resource type="StyleBox" uid="uid://deshi6r488bxi" path="res://src/UI/StyleBox/SteelRoundRiveted.tres" id="4_1ly47"]
+[ext_resource type="StyleBox" uid="uid://ot23c6kiunqk" path="res://src/UI/StyleBox/RustTabsDark.tres" id="4_2n62p"]
 [ext_resource type="Script" uid="uid://dw8rl6uwhnt3l" path="res://src/UI/Inventory/Inventory.gd" id="6"]
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="6_4pdh5"]
 [ext_resource type="Texture2D" uid="uid://m5cabpidxb4v" path="res://assets/UI/Inventory/Shadow.png" id="6_l1q3b"]
 [ext_resource type="Texture2D" uid="uid://k8gtyy865rl0" path="res://assets/Gun/Red7Icon.png" id="6_n1xmo"]
+[ext_resource type="StyleBox" uid="uid://cb3gs2qq26l03" path="res://src/UI/StyleBox/RustTabsLight.tres" id="6_vxl58"]
 [ext_resource type="PackedScene" uid="uid://dbyknhh1oyx5i" path="res://src/UI/Inventory/WeaponWheel.tscn" id="7"]
 [ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="7_y7abv"]
 [ext_resource type="StyleBox" uid="uid://d20qvx0q5xflf" path="res://src/UI/StyleBox/RustTrimmedScrews.tres" id="8"]
@@ -19,6 +21,8 @@ shader = ExtResource("3_4pdh5")
 shader_parameter/blur_amount = 2.0000001899999997
 shader_parameter/mix_amount = 0.0
 shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eo4w6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l1q3b"]
 
@@ -48,9 +52,20 @@ custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
 [node name="InventoryButton" type="Button" parent="VBox/HBox"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/normal = ExtResource("13_4huqx")
+theme_override_colors/font_color = Color(0.6313726, 0.4862745, 0.4, 1)
+theme_override_colors/font_pressed_color = Color(0.96862745, 0.8862745, 0.7176471, 1)
+theme_override_colors/font_hover_color = Color(0.84313726, 0.68235296, 0.53333336, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = ExtResource("4_2n62p")
+theme_override_styles/pressed = ExtResource("13_4huqx")
+theme_override_styles/hover = ExtResource("13_4huqx")
+theme_override_styles/hover_pressed = ExtResource("6_vxl58")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_eo4w6")
+toggle_mode = true
+button_pressed = true
 text = "Inventory"
 
 [node name="Control2" type="Control" parent="VBox/HBox"]
@@ -58,9 +73,19 @@ custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 
 [node name="MissionButton" type="Button" parent="VBox/HBox"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/normal = ExtResource("13_4huqx")
+theme_override_colors/font_color = Color(0.6313726, 0.4862745, 0.4, 1)
+theme_override_colors/font_pressed_color = Color(0.96862745, 0.8862745, 0.7176471, 1)
+theme_override_colors/font_hover_color = Color(0.84313726, 0.68235296, 0.53333336, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = ExtResource("4_2n62p")
+theme_override_styles/pressed = ExtResource("13_4huqx")
+theme_override_styles/hover = ExtResource("13_4huqx")
+theme_override_styles/hover_pressed = ExtResource("6_vxl58")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_eo4w6")
+toggle_mode = true
 text = "Mission"
 
 [node name="Control3" type="Control" parent="VBox/HBox"]
@@ -68,9 +93,19 @@ custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 
 [node name="MapButton" type="Button" parent="VBox/HBox"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/normal = ExtResource("13_4huqx")
+theme_override_colors/font_color = Color(0.6313726, 0.4862745, 0.4, 1)
+theme_override_colors/font_pressed_color = Color(0.96862745, 0.8862745, 0.7176471, 1)
+theme_override_colors/font_hover_color = Color(0.84313726, 0.68235296, 0.53333336, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = ExtResource("4_2n62p")
+theme_override_styles/pressed = ExtResource("13_4huqx")
+theme_override_styles/hover = ExtResource("13_4huqx")
+theme_override_styles/hover_pressed = ExtResource("6_vxl58")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_eo4w6")
+toggle_mode = true
 text = "Map"
 
 [node name="Control4" type="Control" parent="VBox/HBox"]
@@ -83,7 +118,7 @@ layout_mode = 2
 theme_override_styles/panel = ExtResource("8")
 
 [node name="Inventory" type="MarginContainer" parent="VBox/Background"]
-visible = false
+unique_name_in_owner = true
 custom_minimum_size = Vector2(288, 232)
 layout_mode = 0
 offset_right = 288.0
@@ -214,6 +249,7 @@ xcv sdfsdfsdf sdfsdfsdf sdfsdf sdfsdf sdfsdf"
 autowrap_mode = 3
 
 [node name="Mission" type="MarginContainer" parent="VBox/Background"]
+unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(288, 232)
 layout_mode = 0
@@ -328,6 +364,7 @@ text = "Here's a full overview description of the given topic."
 autowrap_mode = 3
 
 [node name="Map" type="MarginContainer" parent="VBox/Background"]
+unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(288, 232)
 layout_mode = 0
@@ -354,5 +391,8 @@ offset_bottom = 12.0
 text = "Test"
 flat = true
 
+[connection signal="toggled" from="VBox/HBox/InventoryButton" to="." method="_on_tab_toggled" binds= ["inventory"]]
+[connection signal="toggled" from="VBox/HBox/MissionButton" to="." method="_on_tab_toggled" binds= ["mission"]]
+[connection signal="toggled" from="VBox/HBox/MapButton" to="." method="_on_tab_toggled" binds= ["map"]]
 [connection signal="item_activated" from="VBox/Background/Inventory/VBox/Items/MarginContainer/ItemList" to="." method="_on_Items_item_activated"]
 [connection signal="item_activated" from="VBox/Background/Mission/VBox/Items/MarginContainer/ItemList" to="." method="_on_Items_item_activated"]

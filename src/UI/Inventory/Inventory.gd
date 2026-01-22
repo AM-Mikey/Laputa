@@ -16,6 +16,7 @@ func _input(event):
 	if event.is_action_pressed("inventory") and f.pc().can_input:
 		exit()
 
+
 func enter():
 	get_tree().paused = true
 	w.hl.visible = false
@@ -65,3 +66,34 @@ func _resolution_scale_changed(_resolution_scale):
 		Vector2(0, inventory_size.y),
 		]
 	$Blur.polygon = PackedVector2Array(polygon_points)
+
+
+func _on_tab_toggled(toggled_on: bool, tab: String):
+	if !toggled_on:
+		match tab:
+			"inventory":
+				%InventoryButton.set_pressed_no_signal(true)
+			"mission":
+				%MissionButton.set_pressed_no_signal(true)
+			"map":
+				%MapButton.set_pressed_no_signal(true)
+	else:
+		match tab:
+			"inventory":
+				%MissionButton.set_pressed_no_signal(false)
+				%MapButton.set_pressed_no_signal(false)
+				%Inventory.visible = true
+				%Mission.visible = false
+				%Map.visible = false
+			"mission":
+				%InventoryButton.set_pressed_no_signal(false)
+				%MapButton.set_pressed_no_signal(false)
+				%Inventory.visible = false
+				%Mission.visible = true
+				%Map.visible = false
+			"map":
+				%InventoryButton.set_pressed_no_signal(false)
+				%MissionButton.set_pressed_no_signal(false)
+				%Inventory.visible = false
+				%Mission.visible = false
+				%Map.visible = true
