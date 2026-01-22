@@ -20,4 +20,4 @@ func _ready():
 
 
 func _on_LevelButton_pressed():
-	world.change_level_via_code(level)
+	world.change_level_via_code(level, false)

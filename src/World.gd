@@ -133,8 +133,8 @@ func change_level_via_code(level_path, use_save_data):
 
 	if has_node("MenuLayer/TitleScreen"):
 		get_node("MenuLayer/TitleScreen").queue_free()
-	if has_node("MenuLayer/PauseMenu"):
-		get_node("MenuLayer/PauseMenu").unpause()
+	if ml.has_node("PauseMenu"):
+		ml.get_node("PauseMenu").exit()
 	if has_node("MenuLayer/LevelSelect"):
 		get_node("MenuLayer/LevelSelect").queue_free()
 	if ui.has_node("DialogBox"):

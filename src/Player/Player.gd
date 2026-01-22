@@ -73,10 +73,6 @@ var sound_profile = SoundProfile.NORMAL:
 @onready var iframe_timer = %IframeTimer
 
 
-func _ready():
-	connect_inventory()
-
-
 func disable():
 	disabled = true
 	can_input = false
@@ -316,17 +312,7 @@ func _on_Ear_area_exited(_area):
 
 ### MISC
 
-func update_inventory():
-	emit_signal("inventory_updated", inventory)
-
 func setup_hud():
 	emit_signal("hp_updated", hp, max_hp, "set_up")
 	emit_signal("guns_updated", guns.get_children(), "set_up")
 	emit_signal("money_updated", money)
-
-
-func connect_inventory():
-	#if this is always null when ready is called does it do anything? why do we have this?
-	var item_menu = get_tree().get_root().get_node_or_null("World/UILayer/Inventory")
-	if item_menu:
-		var _err = connect("inventory_updated", Callable(item_menu, "_on_inventory_updated"))
