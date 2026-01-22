@@ -14,10 +14,15 @@ func state_process(_delta):
 	pc.move_and_slide()
 	var new_velocity = pc.velocity
 	pc.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
+
 	if pc.is_on_floor() and not pc.is_on_ssp:
 		if Input.is_action_pressed("look_down") and pc.can_input:
 			mm.change_state("run")
 			return
+	if Input.is_action_just_pressed("jump") and pc.can_input:
+		mm.change_state("jump")
+		return
+
 	animate()
 
 
@@ -51,7 +56,7 @@ func animate():
 	if not ap.is_playing() or ap.current_animation != animation:
 		ap.stop()
 		ap.play(animation, 0.0, 1.0)
-
+	ap.speed_scale = pc.velocity.y / mm.ladder_speed * -1.0
 
 
 ### GETTERS ###
@@ -59,12 +64,9 @@ func animate():
 func calc_velocity() -> Vector2:
 	var out = pc.velocity
 	#Y
-	out.y = pc.move_dir.y * mm.speed.y * 0.5
+	out.y = pc.move_dir.y * mm.ladder_speed
 	#X
 	out.x = 0
-	if Input.is_action_just_pressed("jump") and pc.can_input: #TODO: BIG NONO WHY ARE YOU CHANGING STATE DURING A VELOCITY CALCULATION
-		mm.change_state("jump") #TODO fix
-		out.y = mm.speed.y * -1.0
 	if abs(out.x) < mm.min_x_velocity: out.x = 0 #clamp velocity
 	return out
 
@@ -80,6 +82,7 @@ func get_vframe() -> int:
 ### STATES ###
 
 func enter(_prev_state: String) -> void:
+	animate()
 	mm.snap_vector = Vector2.ZERO
 	sprite.position = Vector2(0.0, -8.0)
 	pc.set_collision_mask_value(10, false) #ssp
@@ -88,6 +91,7 @@ func enter(_prev_state: String) -> void:
 	pc.set_floor_stop_on_slope_enabled(true)
 
 func exit(_next_state: String) -> void:
+	pc.global_position.y -= 1 # Accounting for a bug where jp can phase through a ssp platform when
 	pc.set_collision_mask_value(10, true) #ssp
 	sprite.position = Vector2(0.0, -16.0)
 	gm.enable()
