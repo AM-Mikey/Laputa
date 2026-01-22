@@ -89,6 +89,7 @@ func _input(event):
 			pc.direction_lock = Vector2i.ZERO
 
 func do_coyote_time():
+	pc.is_in_coyote = true
 	coyote_timer.stop()
 	coyote_timer.start(coyote_time)
 
@@ -114,9 +115,7 @@ func jump():
 func drop():
 	$States/Jump.is_dropping = true
 	change_state("jump")
-	pc.set_collision_mask_value(10, false)
-	await get_tree().create_timer(0.1).timeout
-	pc.set_collision_mask_value(10, true)
+	pc.global_position.y += 2
 
 ### HELPERS ###
 
@@ -198,5 +197,7 @@ func _on_CoyoteTimer_timeout():
 	if not pc.is_in_coyote:
 		return
 	pc.is_in_coyote = false
+	pc.position.y += 1
+	pc.velocity.y += 20 #prevent us from walking across 1 tile gaps
 	if not pc.is_on_floor() and current_state == states["run"]:
 		change_state("jump")

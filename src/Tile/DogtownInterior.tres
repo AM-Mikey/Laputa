@@ -114,9 +114,8 @@ texture = ExtResource("1_dalpj")
 2:7/0 = 0
 2:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:7/0 = 0
-4:7/0 = 0
-4:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, 8, 8, 8, -8)
 5:7/0 = 0
+5:7/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 8, 4, 4, 8, -8, -8, -8)
 6:7/0 = 0
 11:7/0 = 0
 11:7/0/custom_data_0 = "flame"
@@ -216,6 +215,8 @@ texture = ExtResource("1_dalpj")
 11:2/0 = 0
 12:2/0 = 0
 13:2/0 = 0
+4:7/0 = 0
+4:7/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 8, 8, -8, 8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o4j7k"]
 texture = ExtResource("2_5428t")
@@ -242,7 +243,7 @@ texture = ExtResource("4_6pm2x")
 [resource]
 physics_layer_0/collision_layer = 8
 physics_layer_0/collision_mask = 0
-physics_layer_1/collision_layer = 512
+physics_layer_1/collision_layer = 0
 physics_layer_1/collision_mask = 0
 custom_data_layer_0/name = "animation_group"
 custom_data_layer_0/type = 4

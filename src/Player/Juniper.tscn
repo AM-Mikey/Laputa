@@ -4041,14 +4041,14 @@ collide_with_areas = true
 z_index = 16
 position = Vector2(-6.5, -11)
 target_position = Vector2(0, -4)
-collision_mask = 520
+collision_mask = 8
 collide_with_areas = true
 
 [node name="RightJumpBonkFinder" type="RayCast2D" parent="."]
 z_index = 16
 position = Vector2(6.5, -11)
 target_position = Vector2(0, -4)
-collision_mask = 520
+collision_mask = 8
 collide_with_areas = true
 
 [node name="SSPCasts" type="Node2D" parent="."]
