@@ -10,6 +10,7 @@ var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
 var speed = Vector2(0, 0)
 var crouch_speed = 70.0
+var ladder_speed = 90.0
 var acceleration = 10.0
 var ground_cof = 0.15
 var air_cof = 0.02
@@ -64,9 +65,9 @@ func initialize_states():
 func change_state(new_state: String, do_cache_state = true):
 	if current_state:
 		if do_cache_state: cached_state = current_state
-		current_state.exit()
+		current_state.exit(new_state)
 	current_state = states[new_state]
-	current_state.enter()
+	current_state.enter(current_state.name.to_lower())
 
 
 func _physics_process(_delta):
@@ -76,6 +77,7 @@ func _physics_process(_delta):
 	speed = base_speed if not get_parent().is_in_water else water_speed
 	gravity = base_gravity if not get_parent().is_in_water else water_gravity
 	do_ceiling_push_check()
+	pc.is_on_ssp = get_is_on_ssp()
 	current_state.state_process(_delta)
 
 
@@ -87,6 +89,7 @@ func _input(event):
 			pc.direction_lock = Vector2i.ZERO
 
 func do_coyote_time():
+	pc.is_in_coyote = true
 	coyote_timer.stop()
 	coyote_timer.start(coyote_time)
 
@@ -112,9 +115,7 @@ func jump():
 func drop():
 	$States/Jump.is_dropping = true
 	change_state("jump")
-	pc.set_collision_mask_value(10, false)
-	await get_tree().create_timer(0.1).timeout
-	pc.set_collision_mask_value(10, true)
+	pc.global_position.y += 2
 
 ### HELPERS ###
 
@@ -134,6 +135,21 @@ func do_ceiling_push_check():
 		and not pc.move_dir.x > 0:
 			pc.global_position.x -= 2.0 if not pc.get_node("ClearenceRH").is_colliding() else 4.0
 			pc.get_node("CollisionShape2D").set_deferred("disabled", false)
+
+
+func get_is_on_ssp() -> bool:
+	var out = false
+	var p = pc.get_node("SSPCasts")
+	if p.get_node("SSPLeft").is_colliding() || p.get_node("SSPRight").is_colliding():
+		if !p.get_node("WorldLeft").is_colliding() && !p.get_node("WorldRight").is_colliding():
+			out = true
+	#elif p.get_node("SSPLeft").is_colliding():
+		#if !p.get_node("WorldLeft").is_colliding() and !p.get_node("WorldRight").is_colliding():
+			#out = true
+	#elif p.get_node("SSPRight").is_colliding():
+		#if !p.get_node("WorldLeft").is_colliding() and !p.get_node("WorldRight").is_colliding():
+			#out = true
+	return out
 
 
 func disable_collision_shapes(array):
@@ -181,5 +197,7 @@ func _on_CoyoteTimer_timeout():
 	if not pc.is_in_coyote:
 		return
 	pc.is_in_coyote = false
+	pc.position.y += 1
+	pc.velocity.y += 20 #prevent us from walking across 1 tile gaps
 	if not pc.is_on_floor() and current_state == states["run"]:
 		change_state("jump")

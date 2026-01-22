@@ -6,6 +6,7 @@ var start_velocity
 
 
 func _ready():
+	is_enemy_bullet = true
 	ap.play("Rotate")
 	gravity *= .5
 

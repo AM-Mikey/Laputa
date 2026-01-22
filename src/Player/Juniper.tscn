@@ -20,8 +20,10 @@
 [ext_resource type="Shader" uid="uid://d4doa1vf12lkt" path="res://src/Shader/JuniperRecolor.gdshader" id="24_s1pnb"]
 [ext_resource type="Texture2D" uid="uid://mkfrxk3djlu1" path="res://assets/Player/Palette/Normal.png" id="25_3o18d"]
 [ext_resource type="PackedScene" uid="uid://bn8xosty72skm" path="res://src/Gun/Roberta.tscn" id="25_cd6iy"]
+[ext_resource type="Texture2D" uid="uid://b6mfl184pisc1" path="res://assets/Player/Palette/Mono.png" id="25_v6qwc"]
 [ext_resource type="Script" uid="uid://cn112wea32cdx" path="res://src/Player/Inspect.gd" id="27"]
 [ext_resource type="Texture2D" uid="uid://b6mfl184pisc1" path="res://assets/Player/Palette/Mono.png" id="27_cn5rl"]
+[ext_resource type="PackedScene" uid="uid://diwpy822anfc4" path="res://src/Gun/MPistol.tscn" id="28"]
 [ext_resource type="Script" uid="uid://cjgn7e5vfg20e" path="res://src/Player/Jump.gd" id="29"]
 [ext_resource type="Script" uid="uid://dtadf671wpvdq" path="res://src/Player/Run.gd" id="30"]
 [ext_resource type="Texture2D" uid="uid://cw8igq2ymupx3" path="res://assets/Player/Aerial.png" id="30_ypuil"]
@@ -76,12 +78,6 @@ size = Vector2(12, 7)
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(16, 21)
 
-[sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(12, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_exru4"]
-size = Vector2(12, 4)
-
 [sub_resource type="RectangleShape2D" id="63"]
 size = Vector2(6, 2)
 
@@ -94,7 +90,7 @@ shader_parameter/screen_mode = false
 shader_parameter/num_colors = 16
 shader_parameter/precision = 0.0
 shader_parameter/palette_in = ExtResource("25_3o18d")
-shader_parameter/palette_out = ExtResource("27_cn5rl")
+shader_parameter/palette_out = ExtResource("25_v6qwc")
 
 [sub_resource type="Animation" id="53"]
 length = 0.2
@@ -1025,8 +1021,9 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_cd6iy"]
 resource_name = "climb"
-length = 0.8
+length = 0.2
 loop_mode = 1
+step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1034,10 +1031,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.024999999, 0.049999997, 0.075, 0.099999994, 0.125, 0.15, 0.17500001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("37_ypuil")]
+"values": [ExtResource("37_ypuil"), ExtResource("37_ypuil"), ExtResource("37_ypuil"), ExtResource("37_ypuil"), ExtResource("37_ypuil"), ExtResource("37_ypuil"), ExtResource("37_ypuil"), ExtResource("37_ypuil")]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -1046,7 +1043,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.099999994),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -1063,7 +1060,7 @@ tracks/2/path = NodePath("Sprite2D:hframe")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"times": PackedFloat32Array(0, 0.024999999, 0.049999997, 0.075, 0.099999994, 0.125, 0.15, 0.17500001),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
@@ -4044,15 +4041,37 @@ collide_with_areas = true
 z_index = 16
 position = Vector2(-6.5, -11)
 target_position = Vector2(0, -4)
-collision_mask = 520
+collision_mask = 8
 collide_with_areas = true
 
 [node name="RightJumpBonkFinder" type="RayCast2D" parent="."]
 z_index = 16
 position = Vector2(6.5, -11)
 target_position = Vector2(0, -4)
-collision_mask = 520
+collision_mask = 8
 collide_with_areas = true
+
+[node name="SSPCasts" type="Node2D" parent="."]
+
+[node name="SSPLeft" type="RayCast2D" parent="SSPCasts"]
+position = Vector2(-6, 0)
+target_position = Vector2(0, 1)
+collision_mask = 512
+
+[node name="SSPRight" type="RayCast2D" parent="SSPCasts"]
+position = Vector2(6, 0)
+target_position = Vector2(0, 1)
+collision_mask = 512
+
+[node name="WorldLeft" type="RayCast2D" parent="SSPCasts"]
+position = Vector2(-6, 0)
+target_position = Vector2(0, 1)
+collision_mask = 8
+
+[node name="WorldRight" type="RayCast2D" parent="SSPCasts"]
+position = Vector2(6, 0)
+target_position = Vector2(0, 1)
+collision_mask = 8
 
 [node name="Hurtbox" type="Area2D" parent="."]
 visible = false
@@ -4132,36 +4151,8 @@ position = Vector2(0, -7.5)
 shape = SubResource("2")
 debug_color = Color(0, 0.627451, 0.27451, 0)
 
-[node name="SSPDetector" type="Area2D" parent="."]
-visible = false
-z_index = -1
-collision_layer = 0
-collision_mask = 512
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SSPDetector"]
-light_mask = 0
-position = Vector2(0, 0.5)
-shape = SubResource("4")
-debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="SSPDetector"]
-position = Vector2(0, -15)
-shape = SubResource("RectangleShape2D_exru4")
-disabled = true
-debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
-
-[node name="SSPWorldDetector" type="Area2D" parent="."]
-z_index = -1
-collision_layer = 0
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SSPWorldDetector"]
-light_mask = 0
-position = Vector2(0, 0.5)
-shape = SubResource("4")
-debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
-
 [node name="CrouchDetector" type="Area2D" parent="."]
+visible = false
 z_index = 1
 position = Vector2(0, -2)
 collision_layer = 0
@@ -4277,10 +4268,6 @@ wait_time = 2.0
 
 [connection signal="timeout" from="MovementManager/CoyoteTimer" to="MovementManager" method="_on_CoyoteTimer_timeout"]
 [connection signal="area_entered" from="ItemDetector" to="." method="_on_ItemDetector_area_entered"]
-[connection signal="body_entered" from="SSPDetector" to="." method="_on_SSPDetector_body_entered"]
-[connection signal="body_exited" from="SSPDetector" to="." method="_on_SSPDetector_body_exited"]
-[connection signal="body_entered" from="SSPWorldDetector" to="." method="_on_SSPWorldDetector_body_entered"]
-[connection signal="body_exited" from="SSPWorldDetector" to="." method="_on_SSPWorldDetector_body_exited"]
 [connection signal="body_entered" from="CrouchDetector" to="MovementManager" method="_on_CrouchDetector_body_entered"]
 [connection signal="body_exited" from="CrouchDetector" to="MovementManager" method="_on_CrouchDetector_body_exited"]
 [connection signal="area_entered" from="Ear" to="." method="_on_Ear_area_entered"]

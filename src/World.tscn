@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvulncgotfe6a"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
+[ext_resource type="Script" path="res://src/World.gd" id="8"]
 
 [sub_resource type="Animation" id="Animation_qbf6s"]
 resource_name = "Flash"
@@ -41,24 +41,28 @@ _data = {
 }
 
 [node name="World" type="Node2D"]
+visibility_layer = 2
 script = ExtResource("8")
 development_stage = "alpha"
 release_version = "1.8"
 do_skip_title = true
 debug_visible = true
 gamemode = "pvp"
-start_level_path = "res://src/Level/DefaultGodot4.tscn"
+start_level_path = "res://src/Level/PlaytestZone.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_offset = Vector2(919.05493, 832.5)
-scroll_base_offset = Vector2(0, -2892)
+scroll_offset = Vector2(32, -222.25714)
 
 [node name="Back" type="Node2D" parent="."]
+visibility_layer = 2
+scale = Vector2(4, 4)
 
 [node name="Middle" type="Node2D" parent="."]
+visibility_layer = 2
 z_index = 1
 
 [node name="Front" type="Node2D" parent="."]
+visibility_layer = 2
 z_index = 2
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
@@ -80,6 +84,7 @@ transform = Transform2D(2, 0, 0, 2, 0, 0)
 [node name="UILayer" type="CanvasLayer" parent="."]
 process_mode = 3
 layer = 2
+visible = false
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
@@ -99,7 +104,11 @@ autoplay = "RESET"
 
 [node name="BlackoutLayer" type="CanvasLayer" parent="."]
 process_mode = 3
+layer = 3
+visible = false
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
+
 [node name="InventoryLayer" type="CanvasLayer" parent="."]
+[connection signal="level_saved" from="EditorLayer/Editor" to="EditorLayer/Editor/Main/Win/Tab/Levels" method="on_save"]

@@ -26,17 +26,13 @@ func _input(event):
 			w.el.get_node("Editor").on_tab_changed(editor_tab)
 
 	if event.is_action_pressed("debug_print"):
+		if w.el.has_node("Editor"): return
 		debug_print()
 
 
 	if event.is_action_pressed("debug_reload"):
-		if w.el.has_node("Editor"):
-			w.el.get_node("Editor").disabled = true
+		if w.el.has_node("Editor"): return
 		reload_level()
-		await get_tree().process_frame
-		if w.el.has_node("Editor"):
-			w.el.get_node("Editor").setup_level()
-			w.el.get_node("Editor").disabled = false
 
 
 	if event.is_action_pressed("debug_triggers"):

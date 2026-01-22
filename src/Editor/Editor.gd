@@ -108,6 +108,8 @@ func setup_level(): #TODO: clear undo history
 	setup_level_editor_layer()
 	for s in get_tree().get_nodes_in_group("SpawnPoints"): #TODO: see if you can avoid this by calling a signal or something
 		s.visible = true
+	for v in get_tree().get_nodes_in_group("VanishingPoints"):
+		v.visible = true
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.visible = true
 		a.input_pickable = true
@@ -152,6 +154,7 @@ func exit():	#TODO: make this an editor_exit signal ## no? that just decentraliz
 	if w.current_level.has_node("TileAnimator"):
 		w.current_level.get_node("TileAnimator").editor_exit()
 	tile_map_cursor.queue_free()
+	w.current_level.merge_one_way_ssp_tile()
 	free_previews()
 	editor_level_limiter.queue_free()
 	w.el.get_node("EditorCamera").queue_free()
@@ -166,6 +169,8 @@ func exit():	#TODO: make this an editor_exit signal ## no? that just decentraliz
 	#set_entities_pickable(false)
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		s.visible = false
+	for v in get_tree().get_nodes_in_group("VanishingPoints"):
+		v.visible = false
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.spawn()
 		a.visible = false
@@ -874,8 +879,9 @@ func clear_tile_map_cursor(): #Warning: it still exists after!
 ### UI ###
 func set_menu_alpha():
 	var mouse_pos = get_global_mouse_position()
-	var main_rect = Rect2($Main/Win.position, $Main/Win.size)
-	var secondary_rect = Rect2($Secondary/Win.position, $Secondary/Win.size)
+	var main_rect := Rect2($Main/Win.global_position, $Main/Win.size)
+	main_rect = main_rect.grow_side(SIDE_TOP, $Main/Win/TabButtons/VBox.size.y)
+	var secondary_rect := Rect2($Secondary/Win.global_position, $Secondary/Win.size)
 	if main_rect.has_point(mouse_pos):
 		$Main.self_modulate = Color(1, 1, 1, 1)
 	else:

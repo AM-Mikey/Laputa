@@ -420,7 +420,7 @@ texture = ExtResource("10_pai51")
 [resource]
 physics_layer_0/collision_layer = 8
 physics_layer_0/collision_mask = 0
-physics_layer_1/collision_layer = 512
+physics_layer_1/collision_layer = 0
 physics_layer_1/collision_mask = 0
 custom_data_layer_0/name = "animation_group"
 custom_data_layer_0/type = 4

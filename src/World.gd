@@ -71,31 +71,6 @@ func child_layer_set(c: Node): #set the visibility layer of all children to laye
 		c.visibility_layer = 2
 
 
-func get_internal_version() -> String:
-	var current_date = Time.get_date_dict_from_system()
-	var years_since = current_date["year"] - 2021
-	var months_since = current_date["month"] - 3
-	var days_since = current_date["day"] - 18
-
-	months_since += 12 * years_since
-
-	if days_since < 0:
-
-		var days_last_month
-		match current_date["month"]:
-			1, 2, 4, 6, 8, 9, 11:
-				days_last_month = 31
-			3:
-				days_last_month = 28
-			5, 7, 10, 12:
-				days_last_month = 30
-
-		return(str(months_since -1) + "m" + str(days_last_month + days_since) + "d")
-	else:
-		return(str(months_since) + "m" + str(days_since) + "d")
-
-
-
 #func set_debug_visible(vis = !debug_visible): #makes triggers and visutils visible #TODO redo this system
 	#debug_visible = vis
 	#for t in get_tree().get_nodes_in_group("TriggerVisuals"):
@@ -134,8 +109,7 @@ func first_time_level_setup():
 
 	current_level = load(start_level_path).instantiate()
 	add_child(current_level)
-	for s in get_tree().get_nodes_in_group("SpawnPoints"):
-		pc.global_position = s.global_position
+	pc.global_position = get_spawn_point().global_position
 
 	match current_level.level_type:
 		current_level.LevelType.NORMAL:
@@ -156,24 +130,26 @@ func first_time_level_setup():
 
 func change_level_via_code(level_path, use_save_data):
 	print("changing level via code...")
-	if ui.has_node("DialogBox"): $UILayer/DialogBox.exit()
-	$HUDLayer/HUDAnimator.play("RESET")
+
+	if has_node("MenuLayer/TitleScreen"):
+		get_node("MenuLayer/TitleScreen").queue_free()
+	if has_node("MenuLayer/PauseMenu"):
+		get_node("MenuLayer/PauseMenu").unpause()
+	if has_node("MenuLayer/LevelSelect"):
+		get_node("MenuLayer/LevelSelect").queue_free()
+	if ui.has_node("DialogBox"):
+		$UILayer/DialogBox.exit()
+	if f.hud():
+		$HUDLayer/HUDAnimator.play("RESET")
+		f.hud().free()
 	clear_spawn_layers()
 	current_level.free()
 	current_level = null
-
-	if (get_node_or_null("Juniper")):
+	if f.pc() != null:
 		$Juniper.free()
 	add_child(JUNIPER.instantiate())
-
-	if ml.has_node("PauseMenu"):
-		ml.get_node("PauseMenu").exit()
-
-	if f.hud():
-		f.hud().free()
-	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
-
 	$Juniper/PlayerCamera.position_smoothing_enabled = false
+	$Juniper.velocity = Vector2.ZERO
 
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
@@ -182,13 +158,13 @@ func change_level_via_code(level_path, use_save_data):
 
 	match current_level.level_type:
 		current_level.LevelType.NORMAL:
+			get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 			if current_level.has_node("LevelCamera"):
 				$Juniper/PlayerCamera.enabled = false
 			else:
 				$Juniper/PlayerCamera.enabled = true
 		current_level.LevelType.PLAYERLESS_CUTSCENE:
-			$Juniper.queue_free()
-			f.hud().queue_free()
+			$Juniper.visible = false
 
 	#wipe would go here if we want one
 	display_level_text(current_level)
@@ -252,16 +228,17 @@ func change_level_via_trigger(level_path, door_index):
 	if bl.has_node("TransitionWipe"): #LOADZONES
 		await get_tree().create_timer(0.8).timeout
 		$BlackoutLayer/TransitionWipe.play_out_animation()
-		await get_tree().create_timer(0.2).timeout #wait for a bit of the animation to finish
+		await $BlackoutLayer/TransitionWipe.tree_exiting #wait for a bit of the animation to finish
 		$Juniper.can_input = true
 
 	elif bl.has_node("TransitionIris"): #DOORS
 		await get_tree().create_timer(0.4).timeout
 		$BlackoutLayer/TransitionIris.play_out_animation()
-		await get_tree().create_timer(0.2).timeout #wait for a bit of the animation to finish
+		await $BlackoutLayer/TransitionIris.tree_exiting #wait for a bit of the animation to finish
 		$Juniper.can_input = true
 
-	display_level_text(current_level)
+	if (old_level_path != level_path):
+		display_level_text(current_level)
 	#await get_tree().create_timer(0.01).timeout
 	$Juniper/PlayerCamera.position_smoothing_enabled = true
 
@@ -288,6 +265,47 @@ func clear_spawn_layers():
 		c.free()
 	for c in front.get_children():
 		c.free()
+
+
+
+### GETTERS ###
+
+func get_internal_version() -> String:
+	var current_date = Time.get_date_dict_from_system()
+	var years_since = current_date["year"] - 2021
+	var months_since = current_date["month"] - 3
+	var days_since = current_date["day"] - 18
+
+	months_since += 12 * years_since
+	if days_since < 0:
+		var days_last_month
+		match current_date["month"]:
+			1, 2, 4, 6, 8, 9, 11:
+				days_last_month = 31
+			3:
+				days_last_month = 28
+			5, 7, 10, 12:
+				days_last_month = 30
+		return(str(months_since -1) + "m" + str(days_last_month + days_since) + "d")
+	else:
+		return(str(months_since) + "m" + str(days_since) + "d")
+
+
+func get_spawn_point() -> Node:
+	var out
+	var spawn_point_count = 0
+	for s in get_tree().get_nodes_in_group("SpawnPoints"):
+		out = s
+		spawn_point_count += 1
+	if spawn_point_count == 0:
+		printerr("ERROR: LEVEL HAS NO SPAWN POINT FOR PC")
+		return null
+	elif spawn_point_count > 1:
+		printerr("ERROR: LEVEL HAS MORE THAN ONE SPAWN POINT FOR PC")
+		return null
+	return out
+
+
 
 ### SIGNALS ###
 

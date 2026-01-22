@@ -35,9 +35,7 @@ func enter_load_zone(): #see if you need the inspect state
 			pass
 
 
-
 	am.play("door")
-	am.fade_music()
 
 	var transition = TRANSITION.instantiate()
 	match direction:

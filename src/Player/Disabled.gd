@@ -34,8 +34,9 @@ func get_move_velocity(velocity):
 
 ### STATES ###
 
-func enter():
+func enter(_prev_state: String) -> void:
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
-func exit():
+
+func exit(_next_state: String) -> void:
 	pass
