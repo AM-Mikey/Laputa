@@ -88,6 +88,7 @@ func enter(_prev_state: String) -> void:
 	pc.set_floor_stop_on_slope_enabled(true)
 
 func exit(_next_state: String) -> void:
+	pc.global_position.y -= 1 # Accounting for a bug where jp can phase through a ssp platform when
 	pc.set_collision_mask_value(10, true) #ssp
 	sprite.position = Vector2(0.0, -16.0)
 	gm.enable()
