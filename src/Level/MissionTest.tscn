@@ -1,0 +1,193 @@
+[gd_scene load_steps=13 format=4]
+
+[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_53evh"]
+[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_72to3"]
+[ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_8qmvv"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_15oll"]
+[ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="4_leir5"]
+[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_5uu0q"]
+[ext_resource type="PackedScene" path="res://src/Editor/ActorSpawn.tscn" id="7_72to3"]
+[ext_resource type="Script" path="res://src/Editor/ActorSpawn.gd" id="8_8qmvv"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="8_53evh"]
+[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="9_if8wo"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="10_72to3"]
+[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="10_h4mej"]
+
+[node name="MissionTest" type="Node2D"]
+visibility_layer = 2
+script = ExtResource("1_53evh")
+level_name = "MissionTest"
+music = "train"
+dialog_json = "res://src/Dialog/Village.json"
+conversation = "cutscene_test"
+
+[node name="LevelLimiter" type="MarginContainer" parent="." instance=ExtResource("2_72to3")]
+visibility_layer = 2
+offset_left = 16.0
+offset_top = 32.0
+offset_right = 576.0
+offset_bottom = 304.0
+mouse_filter = 2
+script = ExtResource("3_15oll")
+background_resource = ExtResource("3_8qmvv")
+texture = ExtResource("4_leir5")
+layers = 5
+layer_scales = {
+0: Vector2(0, 0),
+1: Vector2(0.4, 0.4),
+2: Vector2(0.5, 0.6),
+3: Vector2(0.7, 0.7),
+4: Vector2(0.9, 0.9)
+}
+layer_height_offsets = {
+0: 0.0,
+1: -100.0,
+2: -50.0,
+3: 0.0,
+4: 0.0
+}
+tile_mode = 1
+
+[node name="TileMap" type="Node2D" parent="."]
+visibility_layer = 2
+z_index = 1
+
+[node name="FarBack" type="TileMapLayer" parent="TileMap"]
+visibility_layer = 2
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("5_5uu0q")
+
+[node name="Back" type="TileMapLayer" parent="TileMap"]
+visibility_layer = 2
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("5_5uu0q")
+
+[node name="Front" type="TileMapLayer" parent="TileMap"]
+visibility_layer = 2
+z_index = 1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAABAAIAAAAAAAgAAAABAAMAAAAAAAgAAAABAAQAAAAAAAgAAAABAAYAAAAAAAgAAAABAAUAAAAAAAgAAAABAAcAAAAAAAgAAAABAAgAAAAAAAgAAAABAAkAAAAAAAgAAAABAAoAAAAAAAgAAAABAAsAAAAAAAgAAAABAAwAAAAAAAgAAAABAA0AAAAAAAgAAAABAA4AAAAAAAgAAAABAA8AAAAAAAgAAAABABAAAAAAAAgAAAABABEAAAAAAAgAAAABABIAAAAAAAgAAAACABIAAAAAAAgAAAADABIAAAAAAAgAAAAEABIAAAAAAAgAAAAFABIAAAAAAAgAAAAGABIAAAAAAAgAAAAHABIAAAAAAAgAAAAIABIAAAAAAAgAAAAJABIAAAAAAAgAAAAKABIAAAAAAAgAAAALABIAAAAAAAgAAAAMABIAAAAAAAgAAAANABIAAAAAAAgAAAAOABIAAAAAAAgAAAAPABIAAAAAAAgAAAAQABIAAAAAAAgAAAARABIAAAAAAAgAAAASABIAAAAAAAgAAAATABIAAAAAAAgAAAAUABIAAAAAAAgAAAAVABIAAAAAAAgAAAAWABIAAAAAAAgAAAAXABIAAAAAAAgAAAAYABIAAAAAAAgAAAAZABIAAAAAAAgAAAAaABIAAAAAAAgAAAAbABIAAAAAAAgAAAAcABIAAAAAAAgAAAAdABIAAAAAAAgAAAAeABIAAAAAAAgAAAAfABIAAAAAAAgAAAAgABIAAAAAAAgAAAAhABIAAAAAAAgAAAAiABIAAAAAAAgAAAAjABIAAAAAAAgAAAA=")
+tile_set = ExtResource("5_5uu0q")
+
+[node name="FarFront" type="TileMapLayer" parent="TileMap"]
+visibility_layer = 2
+z_index = 2
+use_parent_material = true
+tile_set = ExtResource("5_5uu0q")
+
+[node name="Props" type="Node2D" parent="."]
+visibility_layer = 2
+
+[node name="Actors" type="Node2D" parent="."]
+visibility_layer = 2
+
+[node name="Triggers" type="Node2D" parent="."]
+visibility_layer = 2
+
+[node name="Spawns" type="Node2D" parent="."]
+visibility_layer = 2
+
+[node name="Grandma" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("7_72to3")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(88, 288)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_8qmvv")
+actor_path = "res://src/Actor/NPC/Grandma.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"conversation": ["", 4],
+"dialog_json": ["", 4],
+"editor_hidden": [false, 1],
+"id": ["grandma", 4],
+"speed": [Vector2(150, 350), 5],
+"starting_state": ["idle", 4],
+"voiced": [true, 1],
+"walk_speed": [Vector2(50, 50), 5],
+"water_gravity": [150.0, 3]
+}
+
+[node name="Hermit" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("7_72to3")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(152, 288)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_8qmvv")
+actor_path = "res://src/Actor/NPC/Hermit.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"conversation": ["", 4],
+"dialog_json": ["", 4],
+"editor_hidden": [false, 1],
+"id": ["hermit", 4],
+"speed": [Vector2(150, 350), 5],
+"starting_state": ["idle", 4],
+"voiced": [true, 1],
+"walk_speed": [Vector2(50, 50), 5],
+"water_gravity": [150.0, 3]
+}
+
+[node name="Lucille" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("7_72to3")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(216, 288)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_8qmvv")
+actor_path = "res://src/Actor/NPC/Lucille.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"conversation": ["", 4],
+"dialog_json": ["", 4],
+"editor_hidden": [false, 1],
+"id": ["lucille", 4],
+"speed": [Vector2(150, 350), 5],
+"starting_state": ["idle", 4],
+"voiced": [true, 1],
+"walk_speed": [Vector2(50, 50), 5],
+"water_gravity": [150.0, 3]
+}
+
+[node name="Nun" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("7_72to3")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(280, 288)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_8qmvv")
+actor_path = "res://src/Actor/NPC/Nun.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"conversation": ["", 4],
+"dialog_json": ["", 4],
+"editor_hidden": [false, 1],
+"id": ["nun", 4],
+"speed": [Vector2(150, 350), 5],
+"starting_state": ["walk", 4],
+"voiced": [true, 1],
+"walk_speed": [Vector2(50, 50), 5],
+"water_gravity": [150.0, 3]
+}
+
+[node name="VanishingPoint" type="Area2D" parent="." groups=["VanishingPoints"] instance=ExtResource("9_if8wo")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(232, 88)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_53evh")
+
+[node name="SpawnPoint" type="Area2D" parent="." groups=["SpawnPoints"] instance=ExtResource("10_h4mej")]
+visibility_layer = 2
+position = Vector2(328, 288)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_72to3")
