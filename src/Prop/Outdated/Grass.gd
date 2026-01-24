@@ -8,7 +8,6 @@ const AMMO = preload("res://src/Actor/Pickup/Ammo.tscn")
 @export var heart_chance = 1
 @export var experience_chance = 1
 @export var ammo_chance = 1
-var rng = RandomNumberGenerator.new()
 
 var one = load("res://assets/Prop/Grass/Grass1.png")
 var two = load("res://assets/Prop/Grass/Grass2.png")
