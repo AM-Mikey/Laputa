@@ -1,0 +1,62 @@
+{
+	"npc_dialog_updates": {
+		"npc_a": {
+			"talk_npc_a": "a_s0",
+			"talk_npc_b": "a_s1",
+			"talk_npc_c": "a_s2",
+			"talk_npc_d": "a_s3",
+			"celebrate": "a_s4",
+		},
+		"npc_b": {
+			"talk_npc_a": "b_s0",
+			"talk_npc_b": "b_s1",
+			"talk_npc_c": "b_s2",
+			"talk_npc_d": "b_s3",
+			"celebrate": "b_s4",
+		},
+		"npc_c": {
+			"talk_npc_a": "c_s0",
+			"talk_npc_b": "c_s1",
+			"talk_npc_c": "c_s2",
+			"talk_npc_d": "c_s3",
+			"celebrate": "c_s4",
+		},
+		"npc_d": {
+			"talk_npc_a": "d_s0",
+			"talk_npc_b": "d_s1",
+			"talk_npc_c": "d_s2",
+			"talk_npc_d": "d_s3",
+			"celebrate": "d_s4",
+		},
+	},
+	"enemy_allow_spawn":{
+		"frog_a": {
+			"talk_npc_a": true,
+			"talk_npc_b": false,
+			"talk_npc_c": false,
+			"talk_npc_d": false,
+			"celebrate": true,
+		},
+		"frog_b": {
+			"talk_npc_a": false,
+			"talk_npc_b": true,
+			"talk_npc_c": false,
+			"talk_npc_d": false,
+			"celebrate": true,
+		},
+		"frog_c": {
+			"talk_npc_a": false,
+			"talk_npc_b": false,
+			"talk_npc_c": true,
+			"talk_npc_d": false,
+			"celebrate": true,
+		},
+		"frog_d": {
+			"talk_npc_a": false,
+			"talk_npc_b": false,
+			"talk_npc_c": false,
+			"talk_npc_d": true,
+			"celebrate": true,
+		},
+	},
+}

@@ -6,7 +6,6 @@ const DB = preload("res://src/Dialog/DialogBox.tscn")
 const STATE_LABEL = preload("res://src/Utility/StateLabel.tscn")
 
 var state: String #TODO: make npc states, player states and enemy states work the same
-@export var starting_state := "idle"
 var cached_state: String
 var predialog_state: String
 
@@ -25,12 +24,13 @@ var target_tolerance = 1
 var target_waypoint: Node
 var target_pos = null
 var bail_time = 6.0
-@export var walk_speed = Vector2(50, 50)
 
-@export var id: String
+@export var starting_state := "idle"
+@export var walk_speed = Vector2(50, 50)
 @export_file("*.json") var dialog_json: String
 @export var conversation: String
 @export var voiced = true
+@export var id: String
 
 
 var camera_forgiveness = 16

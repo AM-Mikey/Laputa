@@ -11,6 +11,7 @@ var spent = false
 var is_in_water = false: set = set_is_in_water
 
 @export var editor_hidden = false
+@export var id: String
 
 @onready var w = get_tree().get_root().get_node("World")
 

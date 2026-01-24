@@ -1,5 +1,7 @@
 extends Area2D
 
+var allow_spawn := true
+
 @export_file var actor_path
 @export var properties = {}
 
@@ -55,10 +57,26 @@ func _ready():
 func initialize(): #first time set up properties
 	var actor = load(actor_path).instantiate()
 	for p in actor.get_property_list():
-		if p["usage"] == 4102: #exported properties
+		if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
 			properties[p["name"]] = [actor.get(p["name"]), p["type"]]
+	actor.free()
+
+func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
+	var old_properties = properties
+	properties = {}
+	var actor = load(actor_path).instantiate()
+	for p in actor.get_property_list():
+		if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
+			if old_properties.has(p["name"]):
+				properties[p["name"]] = old_properties[p["name"]]
+			else:
+				properties[p["name"]] = [actor.get(p["name"]), p["type"]]
+	actor.free()
 
 func spawn():
+	await get_tree().process_frame #wait to set allow_spawn
+	if allow_spawn == false:
+		return
 	if actor_path == null:
 		printerr("ERROR: no actor chosen in ActorSpawn")
 		return

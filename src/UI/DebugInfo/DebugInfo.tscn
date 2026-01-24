@@ -438,6 +438,19 @@ theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Back: "
 
+[node name="Mission" type="Label" parent="VBox/HBox/C2/Q"]
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_fonts/font = ExtResource("3_d57kx")
+text = "MSN"
+
+[node name="Main" type="Label" parent="VBox/HBox/C2/Q"]
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_fonts/font = ExtResource("3_d57kx")
+text = "Main: "
+
 [node name="A" type="VBoxContainer" parent="VBox/HBox/C2"]
 layout_mode = 2
 mouse_filter = 2
@@ -545,4 +558,16 @@ text = "-"
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
+text = "-"
+
+[node name="Mission" type="Label" parent="VBox/HBox/C2/A"]
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_fonts/font = ExtResource("5_osv66")
+
+[node name="Main" type="Label" parent="VBox/HBox/C2/A"]
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_fonts/font = ExtResource("3_d57kx")
 text = "-"

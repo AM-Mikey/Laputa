@@ -18,9 +18,11 @@ var spent = false
 #@export var base_gravity: float = 300.0
 #@export var water_gravity: float = 150.0
 @export var editor_hidden = false
-
+@export var id: String
 
 @onready var w = get_tree().get_root().get_node("World")
+
+
 
 func _ready():
 	#safe_margin = 0.001

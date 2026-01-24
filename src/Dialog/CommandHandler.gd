@@ -39,7 +39,7 @@ func parse_command(string):
 			var a = string.split(",")
 			db.dl.text = ""
 			face(a[1].to_lower())
-			db.display_name( a[2].to_lower())
+			db.display_name(a[2].to_lower())
 		"hide":#				/hide, (string: npc_id)									makes the npc with given id invisible
 			set_visible(argument, false)
 		"unhide":
@@ -66,6 +66,8 @@ func parse_command(string):
 
 		#"walk":#				/walk, (string: npc_id), (int: distance)				makes an npc walk a certain distance from their current pos
 			#walk(argument)#																with negative being left and positive being right
+
+		### Dialog Branching
 		"yn":
 			yes_no()
 		"udb":
@@ -74,13 +76,20 @@ func parse_command(string):
 			options(argument)
 		"topics":
 			topics(argument)
-
 		"t":
 			db.dl.text += " [b][color=#f3b131]" #bright gold
 			if !pc.topic_array.has(argument):
 				pc.topic_array.append(argument)
 		"ut":
 			db.dl.text += "[/color][/b] "
+
+		### Missions
+		"progress_main_mission":
+			ms.progress_main_mission()
+		"seek_main_mission":
+			ms.seek_main_misssion(argument)
+
+
 		#"focus":#					/focus, (string: npc_id)							focuses PlayerCamera on an npc, doesn't work indoors
 			#focus(argument)
 		#"unfocus":#																		returns camera focus to the pc

@@ -109,6 +109,7 @@ func first_time_level_setup():
 
 	current_level = load(start_level_path).instantiate()
 	add_child(current_level)
+	ms.setup_level_via_main_mission()
 	pc.global_position = get_spawn_point().global_position
 
 	match current_level.level_type:
@@ -153,6 +154,7 @@ func change_level_via_code(level_path, use_save_data):
 
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
+	ms.setup_level_via_main_mission()
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		$Juniper.global_position = s.global_position
 
@@ -188,6 +190,7 @@ func change_level_via_trigger(level_path, door_index):
 	await get_tree().process_frame
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
+	ms.setup_level_via_main_mission()
 
 	$Juniper/PlayerCamera.position_smoothing_enabled = false
 
@@ -224,6 +227,9 @@ func change_level_via_trigger(level_path, door_index):
 		if doors_found > 1:
 			printerr("ERROR: more than one door with same index")
 
+	SaveSystem.read_level_data_from_temp(current_level)
+
+
 	###transition out
 	if bl.has_node("TransitionWipe"): #LOADZONES
 		await get_tree().create_timer(0.8).timeout
@@ -242,12 +248,15 @@ func change_level_via_trigger(level_path, door_index):
 	#await get_tree().create_timer(0.01).timeout
 	$Juniper/PlayerCamera.position_smoothing_enabled = true
 
-	if current_level.level_type == current_level.LevelType.PLAYERLESS_CUTSCENE:
+	if current_level.level_type == current_level.LevelType.PLAYERLESS_CUTSCENE: #TODO: change how these work
 		#TODO: right now juniper isn't unloaded between levels
 		$Juniper.queue_free()
 		f.hud().queue_free()
 
-	SaveSystem.read_level_data_from_temp(current_level)
+
+
+
+
 
 func display_level_text(level):
 	if ui.has_node("LevelText"):

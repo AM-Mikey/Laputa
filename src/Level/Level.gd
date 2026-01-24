@@ -7,9 +7,10 @@ enum LevelType {NORMAL, PLAYERLESS_CUTSCENE}
 @export var editor_hidden = false
 @export var level_name: String
 @export var level_type: LevelType
+@export_file("*.json") var main_mission_level_update: String
 @export var music: String
 @export_file("*.json") var dialog_json: String
-@export var conversation: String
+@export var conversation_on_enter: String
 
 var time_created: Dictionary
 
@@ -21,6 +22,7 @@ func _ready():
 	if has_node("Notes"):
 		get_node("Notes").visible = false
 	setup_kill_box()
+
 
 	if level_type == LevelType.PLAYERLESS_CUTSCENE:
 		do_playerless_cutscene()
@@ -127,8 +129,11 @@ func do_playerless_cutscene():
 	var dialog_box = DB.instantiate()
 	dialog_box.connect("dialog_finished", Callable(self, "on_dialog_finished"))
 	get_tree().get_root().get_node("World/UILayer").add_child(dialog_box)
-	dialog_box.start_printing(dialog_json, conversation)
+	dialog_box.start_printing(dialog_json, conversation_on_enter)
 	print("starting conversation")
+
+func update_level_via_main_mission(stage: int):
+	pass
 
 func setup_kill_box():
 	var kill_box = KILL_BOX.instantiate()

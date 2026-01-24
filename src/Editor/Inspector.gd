@@ -84,7 +84,10 @@ func display_data():
 			create_save_button("background")
 		"actor_spawn":
 			for p in active.properties:
-				create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
+				if p == "dialog_json":
+					create_button("dialog_json", active.properties[p][0], "load")
+				else:
+					create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
 		"trigger_spawn":
 			for p in active.properties:
 				if p == "direction":
@@ -118,7 +121,7 @@ func display_data():
 			#create_button("tile_set", active.tile_set.resource_path, "load")
 			create_button("music", active.music, "load")
 			create_button("dialog_json", active.dialog_json, "load")
-			create_button("conversation", active.conversation, "string")
+			create_button("conversation_on_enter", active.conversation_on_enter, "string")
 		"light":
 			for p in active.get_property_list():
 				if p["usage"] == EXPORT:
