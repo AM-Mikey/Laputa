@@ -1,0 +1,114 @@
+[gd_scene load_steps=12 format=3 uid="uid://bg715nunngytq"]
+
+[ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="1"]
+[ext_resource type="Script" uid="uid://ce2moo6lnjdkn" path="res://src/Editor/Tab/Tiles.gd" id="2"]
+[ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="3"]
+[ext_resource type="Texture2D" uid="uid://g3pllgj0s6go" path="res://assets/Editor/RotateCC.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://cict30vmfp74a" path="res://assets/Editor/FlipH.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://cstc7bnjjx6t3" path="res://assets/Editor/FlipV.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://b55osbff5svfn" path="res://assets/Editor/RotateC.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://wf0dhqrmos7c" path="res://assets/Editor/MultiEraseFalse.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://ymuckto7044j" path="res://assets/Editor/AutoTileFalse.png" id="11"]
+[ext_resource type="StyleBox" uid="uid://85vca5s565c4" path="res://src/UI/StyleBox/GridRoundInset.tres" id="11_ibnax"]
+[ext_resource type="Texture2D" uid="uid://ct5jgsuemvjmu" path="res://assets/Editor/ModePaint.png" id="12"]
+
+[node name="Tiles" type="MarginContainer"]
+offset_right = 480.0
+offset_bottom = 270.0
+mouse_filter = 0
+theme = ExtResource("3")
+script = ExtResource("2")
+buttons = NodePath("VBox/Scroll/Buttons")
+cursor = NodePath("VBox/Scroll/Control/Cursor")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.878431, 0.784314, 0.345098, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Tiles"
+
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MultiErase" type="Button" parent="VBox/HBox"]
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("10")
+
+[node name="AutoTile" type="Button" parent="VBox/HBox"]
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("11")
+
+[node name="Mode" type="Button" parent="VBox/HBox"]
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("12")
+
+[node name="Options" type="HBoxContainer" parent="VBox"]
+visible = false
+layout_mode = 2
+
+[node name="FlipH" type="Button" parent="VBox/Options"]
+layout_mode = 2
+size_flags_vertical = 0
+tooltip_text = "Flip Horizontal"
+toggle_mode = true
+icon = ExtResource("6")
+
+[node name="FlipV" type="Button" parent="VBox/Options"]
+layout_mode = 2
+size_flags_vertical = 0
+tooltip_text = "Flip Vertical"
+toggle_mode = true
+icon = ExtResource("7")
+
+[node name="RotateC" type="Button" parent="VBox/Options"]
+layout_mode = 2
+size_flags_vertical = 0
+tooltip_text = "Rotate Clockwise"
+icon = ExtResource("8")
+
+[node name="RotateCC" type="Button" parent="VBox/Options"]
+layout_mode = 2
+size_flags_vertical = 0
+tooltip_text = "Rotate Counterclockwise"
+icon = ExtResource("5")
+
+[node name="Scroll" type="ScrollContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("11_ibnax")
+
+[node name="Buttons" type="VBoxContainer" parent="VBox/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 0
+theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="VBox/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Cursor" type="Panel" parent="VBox/Scroll/Control"]
+layout_mode = 0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1")
+
+[connection signal="toggled" from="VBox/HBox/MultiErase" to="." method="_on_MultiErase_toggled"]
+[connection signal="toggled" from="VBox/HBox/AutoTile" to="." method="_on_AutoTile_toggled"]
+[connection signal="pressed" from="VBox/HBox/Mode" to="." method="_on_Mode_pressed"]
+[connection signal="toggled" from="VBox/Options/FlipH" to="." method="_on_FlipH_toggled"]
+[connection signal="toggled" from="VBox/Options/FlipV" to="." method="_on_FlipV_toggled"]
+[connection signal="pressed" from="VBox/Options/RotateC" to="." method="_on_RotateC_pressed"]
+[connection signal="pressed" from="VBox/Options/RotateCC" to="." method="_on_RotateCC_pressed"]

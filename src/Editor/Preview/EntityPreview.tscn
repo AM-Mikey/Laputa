@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqqcw567bq0ot"]
+
+[ext_resource type="Script" uid="uid://c7dct6ib02iu" path="res://src/Editor/Preview/EntityPreview.gd" id="1"]
+
+[node name="EntityPreview" type="Node2D" groups=["Previews"]]
+modulate = Color(1, 1, 1, 0.5)
+script = ExtResource("1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0.294118)
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2

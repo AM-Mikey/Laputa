@@ -121,7 +121,7 @@ func prepare_bullet():
 		bullet.rotation_degrees = 180
 	bullet.damage = bullet_damage
 	fire_bullet(bullet)
-	$PosFire.play()
+	#$PosFire.play()
 
 func fire_bullet(bullet):
 	bullet.velocity.x = projectile_speed * get_physics_process_delta_time() * sign(bullet.direction.x)

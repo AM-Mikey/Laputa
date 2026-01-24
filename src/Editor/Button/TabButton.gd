@@ -10,9 +10,9 @@ var enabled = true
 @onready var cl = w.current_level
 
 func _ready():
-	$VBox/TextureRect.texture = icon
-	$VBox/TextureRect/Shadow.texture = icon
-	$VBox/TextureRect/Highlight.texture = icon
+	%TextureRect.texture = icon
+	%Shadow.texture = icon
+	%Highlight.texture = icon
 
 
 func on_pressed():
@@ -21,13 +21,13 @@ func on_pressed():
 func _on_gui_input(event: InputEvent):
 	if event.is_action_pressed("editor_rmb"):
 		if enabled:
-			$TabButton.disabled = true
-			$VBox/TextureRect.self_modulate = Color.TRANSPARENT
+			%TabButton.disabled = true
+			%TextureRect.self_modulate = Color.TRANSPARENT
 			enabled = false
 			set_collection_visibility(false)
 		else:
-			$TabButton.disabled = false
-			$VBox/TextureRect.self_modulate = Color.WHITE
+			%TabButton.disabled = false
+			%TextureRect.self_modulate = Color.WHITE
 			enabled = true
 			set_collection_visibility(true)
 

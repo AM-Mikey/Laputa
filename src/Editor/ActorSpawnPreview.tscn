@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bor4s16rrdlxh"]
-
-[ext_resource type="Script" uid="uid://clvvy7mrb0jmi" path="res://src/Editor/ActorSpawnPreview.gd" id="1_l3p8o"]
-
-[node name="ActorSpawnPreview" type="Node2D" groups=["Previews"]]
-modulate = Color(1, 1, 1, 0.75)
-script = ExtResource("1_l3p8o")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]

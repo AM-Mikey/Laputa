@@ -3,6 +3,7 @@
 [ext_resource type="Material" uid="uid://cas2pc871q8xe" path="res://src/Effect/Transition/Iris.tres" id="1"]
 [ext_resource type="Script" uid="uid://21ej114g82qs" path="res://src/Effect/Transition/TransitionIris.gd" id="2"]
 
+
 [sub_resource type="Animation" id="1"]
 resource_name = "IrisContract"
 length = 0.4

@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://begsayt1f6ent"]
+
+[ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1_cvkxp"]
+[ext_resource type="Script" uid="uid://bxc4vbs8xsju3" path="res://src/Editor/InfoBox.gd" id="2_vsxnd"]
+[ext_resource type="StyleBox" path="res://src/UI/DebugInfo/50PercentBlack.tres" id="3_ww1pr"]
+
+[node name="InfoBox" type="MarginContainer"]
+custom_minimum_size = Vector2(48, 16)
+offset_top = 432.0
+offset_right = 48.0
+offset_bottom = 448.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 2
+theme = ExtResource("1_cvkxp")
+script = ExtResource("2_vsxnd")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_ww1pr")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Coordinates" type="Label" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+text = "-, -"
+
+[node name="Tile" type="Label" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.639216, 0.14902, 0.14902, 1)
+text = "-"
+
+[node name="StrokeSize" type="Label" parent="HBox"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.666667, 0.690196, 0.592157, 1)
+text = "[5, 40]"

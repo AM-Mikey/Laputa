@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cakoxkdpjggkh" path="res://assets/Effect/Transition/WipeUp.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://2rue8rto2pxl" path="res://assets/Effect/Transition/WipeDown.png" id="6"]
 
+
 [sub_resource type="Animation" id="1"]
 resource_name = "WipeInDown"
 length = 0.4

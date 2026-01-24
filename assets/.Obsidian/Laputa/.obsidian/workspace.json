@@ -6,7 +6,7 @@
       {
         "id": "f8cbbec6d568959c",
         "type": "tabs",
-        "dimension": 33.24873096446701,
+        "dimension": 36.10406091370558,
         "children": [
           {
             "id": "fd4f00696d9a397d",
@@ -54,12 +54,14 @@
             "id": "8e79af8c8cf32a05",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.10.6"
+                "file": "The World/Dinero.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.10.6"
+              "icon": "lucide-file",
+              "title": "Dinero"
             }
           }
         ],
@@ -68,7 +70,7 @@
       {
         "id": "f00468223e4d7550",
         "type": "tabs",
-        "dimension": 66.75126903553299,
+        "dimension": 63.89593908629442,
         "children": [
           {
             "id": "0b2f6be5223829c1",
@@ -242,34 +244,34 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "8e79af8c8cf32a05",
+  "active": "716f7f890990af0d",
   "lastOpenFiles": [
-    "Concepts/Life on Laputa.md",
-    "Concepts/Laputan Revolution.md",
-    "Concepts/Laputan Crown.md",
-    "Concepts/Ethnicity.md",
-    "Concepts/Cloud Curtain.md",
-    "Characters/Alexander.md",
-    "Characters/Basil.md",
-    "Characters/Colin.md",
-    "Characters/Dola.md",
-    "Characters/Emily.md",
-    "Characters/Fuuka.md",
-    "Characters/Junior.md",
-    "Characters/Juniper.md",
-    "Characters/King Davey.md",
-    "Characters/Laputa's Former King.md",
-    "Characters/Parsley and Thyme.md",
-    "Characters/Treasure Hunter.md",
-    "Characters/Spirit of the Island.md",
-    "Characters/Scrum.md",
-    "Characters/Sage.md",
-    "Groups/Dogtown Residents.md",
-    "Groups/Corp..md",
+    "The World/Dinero.md",
     "Groups/Laputans.md",
-    "Groups/Lost Boys.md",
+    "Concepts/Timeline of Events Before Laputa.md",
+    "The World/Monsters and Animals.md",
+    "Concepts/Religion.md",
+    "Concepts/Life on Laputa.md",
+    "The World/Island of Laputa.md",
+    "Guns.md",
+    "Pirates.md",
+    "The World/Areas/Ancient Ruins.md",
+    "hidden knowledge.md",
+    "Concepts/Davey's Secret Knowledge.md",
+    "Groups/Corp..md",
+    "Groups/Colonists.md",
+    "Characters/Junior.md",
+    "Concepts/Endings.md",
+    "Concepts/Ethnicity.md",
+    "Concepts/Gender.md",
+    "Concepts/Great Plague.md",
     "Concepts/History of Laputa.md",
-    "Concepts/Humans and Beastfolk.md",
+    "Characters/Rosemary.md",
+    "Characters/Scrum.md",
+    "Concepts/Second Inhabitants.md",
+    "Concepts/Laputan Crown.md",
+    "Characters/Spirit of the Island.md",
+    "Concepts/Cloud Curtain.md",
     "Aseprite_8jemaKX0FE.png",
     "Aseprite_EEozVk20AW.png",
     "Aseprite_ujhX9SUnNc.png",

@@ -27,9 +27,9 @@ func _input(event):
 			if not locked:
 				enter_door()
 			else:
-				if active_pc.inventory.has("Key"):
-					var index = active_pc.inventory.find("Key") #TODO: have door store a specific key
-					active_pc.inventory.remove(index)
+				if active_pc.item_array.has("Key"):
+					var index = active_pc.item_array.find("Key") #TODO: have door store a specific key
+					active_pc.item_array.remove(index)
 					enter_door()
 				else:
 					am.play("locked")

@@ -24,6 +24,7 @@ size_flags_vertical = 8
 script = ExtResource("3")
 
 [node name="TabButton" type="Button" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = ExtResource("2_gancx")
 theme_override_styles/pressed = ExtResource("2_654eg")
@@ -40,11 +41,13 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBox"]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2")
 
 [node name="Highlight" type="TextureRect" parent="VBox/TextureRect"]
+unique_name_in_owner = true
 show_behind_parent = true
 material = SubResource("5")
 layout_mode = 0
@@ -57,6 +60,7 @@ mouse_filter = 2
 texture = ExtResource("2")
 
 [node name="Shadow" type="TextureRect" parent="VBox/TextureRect"]
+unique_name_in_owner = true
 show_behind_parent = true
 material = SubResource("4")
 layout_mode = 0

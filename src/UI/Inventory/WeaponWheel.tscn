@@ -12,3 +12,11 @@ offset_right = -280.0
 offset_bottom = -152.0
 script = ExtResource("1")
 height_modifier = 0.25
+
+[node name="CycleDelay" type="Timer" parent="."]
+one_shot = true
+
+[node name="HalfCycle" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sprites" type="Node2D" parent="."]

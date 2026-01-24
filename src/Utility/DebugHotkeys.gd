@@ -98,4 +98,4 @@ func debug_print():
 #
 func reload_level():
 	print("reloading level")
-	w.change_level_via_code(w.current_level.scene_file_path)
+	w.change_level_via_code(w.current_level.scene_file_path, false)

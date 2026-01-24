@@ -1,0 +1,216 @@
+[gd_scene load_steps=12 format=3 uid="uid://b06myq2bwfo7r"]
+
+[ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="1"]
+[ext_resource type="Script" uid="uid://b05wwtabfmwos" path="res://src/Editor/Tab/TileSet.gd" id="2_88yuq"]
+[ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="3"]
+[ext_resource type="Texture2D" uid="uid://duoqsv4fuk3gk" path="res://assets/Editor/TileSetRemapFalse.png" id="3_0qnfu"]
+[ext_resource type="StyleBox" uid="uid://85vca5s565c4" path="res://src/UI/StyleBox/GridRoundInset.tres" id="3_rmr64"]
+[ext_resource type="Texture2D" uid="uid://blg5mbf55uvli" path="res://assets/Editor/TileSetSwapFalse.png" id="4_ualav"]
+[ext_resource type="Texture2D" uid="uid://cshcc8rxeo4tb" path="res://assets/Editor/CollisionOneWay.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://cict30vmfp74a" path="res://assets/Editor/FlipH.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://cstc7bnjjx6t3" path="res://assets/Editor/FlipV.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://g3pllgj0s6go" path="res://assets/Editor/RotateCC.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://b55osbff5svfn" path="res://assets/Editor/RotateC.png" id="9"]
+
+[node name="TileSet" type="MarginContainer"]
+offset_right = 384.0
+offset_bottom = 288.0
+pivot_offset = Vector2(-408, -64)
+mouse_filter = 0
+theme = ExtResource("3")
+script = ExtResource("2_88yuq")
+normal_buttons = NodePath("VBox/Margin/Tab/Normal/Scroll/Tiles")
+collision_buttons = NodePath("VBox/Margin/Tab/Collision/Scroll/Tiles")
+normal_cursor = NodePath("VBox/Margin/Tab/Normal/Scroll/Control/Cursor")
+brushes = NodePath("VBox/Margin/Tab/Collision/HBox/Scroll2/Brushes")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.878431, 0.784314, 0.345098, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "TileSet"
+
+[node name="Margin" type="MarginContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Tab" type="TabContainer" parent="VBox/Margin"]
+layout_mode = 2
+current_tab = 0
+tabs_visible = false
+
+[node name="Normal" type="VBoxContainer" parent="VBox/Margin/Tab"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="HBox" type="HBoxContainer" parent="VBox/Margin/Tab/Normal"]
+layout_mode = 2
+
+[node name="Remap" type="Button" parent="VBox/Margin/Tab/Normal/HBox"]
+layout_mode = 2
+tooltip_text = "Swap Positions of Tile in Tileset
+WARNING: Avoid Swapping With Different Layers"
+toggle_mode = true
+icon = ExtResource("3_0qnfu")
+
+[node name="Swap" type="Button" parent="VBox/Margin/Tab/Normal/HBox"]
+layout_mode = 2
+tooltip_text = "Swap Tiles in all Levels
+WARNING: Avoid Swapping With Different Layers"
+toggle_mode = true
+icon = ExtResource("4_ualav")
+
+[node name="Scroll" type="ScrollContainer" parent="VBox/Margin/Tab/Normal"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("3_rmr64")
+
+[node name="Tiles" type="VBoxContainer" parent="VBox/Margin/Tab/Normal/Scroll"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Control" type="Control" parent="VBox/Margin/Tab/Normal/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Cursor" type="Panel" parent="VBox/Margin/Tab/Normal/Scroll/Control"]
+layout_mode = 0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1")
+
+[node name="Spacer" type="Control" parent="VBox/Margin/Tab/Normal"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+
+[node name="Collision" type="VBoxContainer" parent="VBox/Margin/Tab"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="HBox" type="HBoxContainer" parent="VBox/Margin/Tab/Collision"]
+layout_mode = 2
+
+[node name="FlipH" type="Button" parent="VBox/Margin/Tab/Collision/HBox"]
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("6")
+
+[node name="FlipV" type="Button" parent="VBox/Margin/Tab/Collision/HBox"]
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("7")
+
+[node name="RotateC" type="Button" parent="VBox/Margin/Tab/Collision/HBox"]
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("9")
+
+[node name="RotateCC" type="Button" parent="VBox/Margin/Tab/Collision/HBox"]
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("8")
+
+[node name="OneWay" type="Button" parent="VBox/Margin/Tab/Collision/HBox"]
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("5")
+
+[node name="Scroll2" type="ScrollContainer" parent="VBox/Margin/Tab/Collision/HBox"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Brushes" type="HBoxContainer" parent="VBox/Margin/Tab/Collision/HBox/Scroll2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Scroll" type="ScrollContainer" parent="VBox/Margin/Tab/Collision"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("3_rmr64")
+
+[node name="Tiles" type="VBoxContainer" parent="VBox/Margin/Tab/Collision/Scroll"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Control" type="Control" parent="VBox/Margin/Tab/Collision/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Cursor" type="Panel" parent="VBox/Margin/Tab/Collision/Scroll/Control"]
+layout_mode = 0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1")
+
+[node name="Spacer" type="Control" parent="VBox/Margin/Tab/Collision"]
+visible = false
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="VBox/Margin"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBox" type="HBoxContainer" parent="VBox/Margin/Margin"]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 2
+
+[node name="Save" type="Button" parent="VBox/Margin/Margin/HBox"]
+layout_mode = 2
+text = "Save As"
+
+[node name="Load" type="Button" parent="VBox/Margin/Margin/HBox"]
+layout_mode = 2
+text = "Load"
+
+[node name="Reload" type="Button" parent="VBox/Margin/Margin/HBox"]
+visible = false
+layout_mode = 2
+text = "Reload"
+
+[node name="New" type="Button" parent="VBox/Margin/Margin/HBox"]
+layout_mode = 2
+text = "New From Image"
+
+[node name="Save" type="FileDialog" parent="."]
+filters = PackedStringArray("*.tres")
+
+[node name="Load" type="FileDialog" parent="."]
+filters = PackedStringArray("*.tres")
+
+[node name="New" type="FileDialog" parent="."]
+filters = PackedStringArray("*.jpg", "*.bmp", "*.png")
+
+[connection signal="tab_changed" from="VBox/Margin/Tab" to="." method="_on_subtab_changed"]
+[connection signal="pressed" from="VBox/Margin/Tab/Normal/HBox/Remap" to="." method="_on_Remap_pressed"]
+[connection signal="toggled" from="VBox/Margin/Tab/Normal/HBox/Swap" to="." method="_on_Swap_toggled"]
+[connection signal="toggled" from="VBox/Margin/Tab/Collision/HBox/FlipH" to="." method="_on_FlipH_toggled"]
+[connection signal="toggled" from="VBox/Margin/Tab/Collision/HBox/FlipV" to="." method="_on_FlipV_toggled"]
+[connection signal="toggled" from="VBox/Margin/Tab/Collision/HBox/RotateC" to="." method="_on_RotateC_toggled"]
+[connection signal="toggled" from="VBox/Margin/Tab/Collision/HBox/RotateCC" to="." method="_on_RotateCC_toggled"]
+[connection signal="toggled" from="VBox/Margin/Tab/Collision/HBox/OneWay" to="." method="_on_OneWay_toggled"]
+[connection signal="pressed" from="VBox/Margin/Margin/HBox/Save" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="VBox/Margin/Margin/HBox/Load" to="." method="_on_Load_pressed"]
+[connection signal="pressed" from="VBox/Margin/Margin/HBox/Reload" to="." method="_on_Reload_pressed"]
+[connection signal="pressed" from="VBox/Margin/Margin/HBox/New" to="." method="_on_New_pressed"]
+[connection signal="confirmed" from="Save" to="." method="_on_Save_confirmed"]
+[connection signal="file_selected" from="Load" to="." method="_on_Load_file_selected"]
+[connection signal="file_selected" from="New" to="." method="_on_New_file_selected"]

@@ -9,17 +9,18 @@ signal layer_updated(active_tile_map_layer)
 signal level_saved()
 signal tab_changed(tab_name)
 
-const ACTOR_SPAWN = preload("res://src/Editor/ActorSpawn.tscn")
-const ACTOR_SPAWN_PREVIEW = preload("res://src/Editor/ActorSpawnPreview.tscn")
+
+
 const EDITOR_CAMERA = preload("res://src/Editor/EditorCamera.tscn")
-#const ENTITY_PREVIEW = preload("res://src/Editor/EntityPreview.tscn")
-const HUD = preload("res://src/UI/HUD/HUD.tscn")
-const LAYER_BUTTON = preload("res://src/Editor/Button/LayerButton.tscn")
 const LIMITER = preload("res://src/Editor/EditorLevelLimiter.tscn")
 const TILE_MAP_CURSOR = preload("res://src/Editor/TileMapCursor.tscn")
-const TILE_MAP_PREVIEW = preload("res://src/Editor/TileMapPreview.tscn")
-const TRIGGER_SPAWN = preload("res://src/Editor/TriggerSpawn.tscn")
-
+const LAYER_BUTTON = preload("res://src/Editor/Button/LayerButton.tscn")
+const HUD = preload("res://src/UI/HUD/HUD.tscn")
+const ACTOR_SPAWN = preload("res://src/Editor/Spawn/ActorSpawn.tscn")
+const PROP_SPAWN = preload("res://src/Editor/Spawn/PropSpawn.tscn")
+const TRIGGER_SPAWN = preload("res://src/Editor/Spawn/TriggerSpawn.tscn")
+const TILE_MAP_PREVIEW = preload("res://src/Editor/Preview/TileMapPreview.tscn")
+const ACTOR_SPAWN_PREVIEW = preload("res://src/Editor/Preview/ActorSpawnPreview.tscn")
 
 var disabled = false
 
@@ -60,7 +61,7 @@ var editor_level_limiter
 var tile_map_cursor
 
 # Blacklist of node types the editor delete should be unable to destroy
-var editor_delete_blacklist = ["background", "spawnpoint", "tile_map"]
+var editor_delete_blacklist = ["background", "spawn_point", "tile_map"]
 
 ### SETUP ###
 
@@ -83,6 +84,8 @@ func setup_level(): #TODO: clear undo history
 	w.bl.visible = false
 	for a in get_tree().get_nodes_in_group("Actors"):
 		a.queue_free()
+	for p in get_tree().get_nodes_in_group("Props"):
+		p.queue_free()
 	for t in get_tree().get_nodes_in_group("Triggers"):
 		t.queue_free()
 	actor_collection = w.current_level.get_node("Actors")
@@ -97,10 +100,12 @@ func setup_level(): #TODO: clear undo history
 		w.current_level.get_node("TileAnimator").editor_enter()
 
 	$Main/Win/Tab/Levels.setup_levels()
+	$Main/Win/Tab/Enemies.setup_enemies()
+	$Main/Win/Tab/NPCs.setup_npcs()
+	$Main/Win/Tab/Props.setup_props()
 	$Main/Win/Tab/Triggers.setup_triggers()
 
 	setup_level_editor_layer()
-	#set_entities_pickable()
 	for s in get_tree().get_nodes_in_group("SpawnPoints"): #TODO: see if you can avoid this by calling a signal or something
 		s.visible = true
 	for v in get_tree().get_nodes_in_group("VanishingPoints"):
@@ -108,6 +113,9 @@ func setup_level(): #TODO: clear undo history
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.visible = true
 		a.input_pickable = true
+	for p in get_tree().get_nodes_in_group("PropSpawns"):
+		p.visible = true
+		p.input_pickable = true
 	for t in get_tree().get_nodes_in_group("TriggerSpawns"):
 		t.visible = true
 	for l in get_tree().get_nodes_in_group("SunLights"):
@@ -126,16 +134,6 @@ func setup_windows(): #the main and secondary editor windows
 	$Secondary/Win.size = $Margin/VBox/HBox/SecondarySizeRef.size
 	$Secondary/Win.position = $Margin/VBox/HBox/SecondarySizeRef.position
 
-#func set_entities_pickable(pickable = true): #TODO: this is still used, move away from this with the new dummy actorspawns
-	#for a in actor_collection.get_children():
-		#if not a.is_in_group("Previews"):
-			#a.input_pickable = pickable
-	#for p in prop_collection.get_children():
-		#if not p.is_in_group("Previews"):
-			#p.input_pickable = pickable
-#	for t in trigger_collection.get_children(): #TODO: turned this off as we move to trigger controller system. please turn this on for normal triggers
-#		if not t.is_in_group("Previews"):
-#			t.input_pickable = pickable
 
 
 func setup_level_editor_layer(): #the layer for editor overlays that go over the level
@@ -155,8 +153,8 @@ func exit():	#TODO: make this an editor_exit signal ## no? that just decentraliz
 	inspector.exit()
 	if w.current_level.has_node("TileAnimator"):
 		w.current_level.get_node("TileAnimator").editor_exit()
+	tile_map_cursor.queue_free()
 	w.current_level.merge_one_way_ssp_tile()
-	clear_tile_map_cursor()
 	free_previews()
 	editor_level_limiter.queue_free()
 	w.el.get_node("EditorCamera").queue_free()
@@ -176,6 +174,9 @@ func exit():	#TODO: make this an editor_exit signal ## no? that just decentraliz
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.spawn()
 		a.visible = false
+	for p in get_tree().get_nodes_in_group("PropSpawns"):
+		p.spawn()
+		p.visible = false
 	for t in get_tree().get_nodes_in_group("TriggerSpawns"):
 		t.spawn()
 		t.visible = false
@@ -369,10 +370,10 @@ func do_entity_input(event):
 		match subtool:
 			"enemy":
 				set_actor_spawn($Main/Win/Tab/Enemies.active_enemy_path, grid_pos)
-			"prop":
-				pass
 			"npc":
 				set_actor_spawn($Main/Win/Tab/NPCs.active_npc_path, grid_pos)
+			"prop":
+				set_prop_spawn($Main/Win/Tab/Props.active_prop_path, grid_pos)
 			"trigger":
 				set_trigger_spawn($Main/Win/Tab/Triggers.active_trigger_path, grid_pos)
 			"noplace":
@@ -405,12 +406,12 @@ func do_generic_input(event):
 				free_previews() #check that this doesnt clear on top of other inputs
 				preview_actor_spawn($Main/Win/Tab/Enemies.active_enemy_path, grid_pos)
 			"prop":
-				pass
+				pass #TODO
 			"npc":
 				free_previews()
 				preview_actor_spawn($Main/Win/Tab/NPCs.active_npc_path, grid_pos)
 			"trigger":
-				pass
+				pass #TODO
 			"grab":
 				if shift_held: inspector.active.global_position = Vector2(mouse_pos + grab_offset).snapped(Vector2(4,4))
 				else: inspector.active.global_position = Vector2(mouse_pos + grab_offset).snapped(Vector2(8,8))
@@ -418,7 +419,7 @@ func do_generic_input(event):
 	#deleting entity
 	if event.is_action_pressed("editor_delete"):
 		if inspector.active:
-			if inspector.active_type not in editor_delete_blacklist:
+			if !editor_delete_blacklist.has(inspector.active_type):
 				inspector.active.queue_free()
 				inspector.on_deselected()
 
@@ -652,6 +653,15 @@ func set_actor_spawn(actor_path, pos):
 	actor_spawn.initialize()
 	inspector.on_selected(actor_spawn, "actor_spawn")
 
+func set_prop_spawn(prop_path, pos):
+	var prop_spawn = PROP_SPAWN.instantiate()
+	prop_spawn.prop_path = prop_path
+	prop_spawn.global_position = (pos * 16) + Vector2i(8, 16)
+	spawn_collection.add_child(prop_spawn)
+	prop_spawn.owner = w.current_level
+	prop_spawn.initialize()
+	inspector.on_selected(prop_spawn, "prop_spawn")
+
 func set_trigger_spawn(trigger_path, pos):
 	var trigger_spawn = TRIGGER_SPAWN.instantiate()
 	trigger_spawn.trigger_path = trigger_path
@@ -661,44 +671,6 @@ func set_trigger_spawn(trigger_path, pos):
 	trigger_spawn.owner = w.current_level
 	trigger_spawn.initialize()
 	inspector.on_selected(trigger_spawn, "trigger_spawn")
-
-
-#func set_entity(pos, entity_path, entity_type, traced = true): #TODO: replace with custom per type, easier that way.
-	#if entity_path == null:
-		#printerr("ERROR: no enemy path in set_entity")
-	#
-	#var entity = load(entity_path).instantiate()
-	#if entity.has_method("disable"):
-		#entity.disable()
-	#entity.global_position = pos
-	#entity.input_pickable = true
-	#
-	#match entity_type:
-		#"enemy", "npc", "player", "boss", "pickup":
-			#actor_collection.add_child(entity)
-		#"prop":
-			#prop_collection.add_child(entity)
-		#"trigger":
-			##entity = TRIGGER_CONTROLLER.instance()
-			#trigger_collection.add_child(entity)
-		#_:
-			#printerr("ERROR: cannot find entity_type: " + entity_type)
-	#
-	#entity.owner = w.current_level
-	#if traced:
-		#emit_signal("entity_selected", entity, entity_type) #select new entity
-		#past_operations.append(["set_entity",[position, entity_path, entity_type]])
-
-#func del_entity(pos, traced = true):
-	#var forgiveness = 4
-	#var selected_entities = []
-	#for a in get_tree().get_nodes_in_group("ActorSpawns"):
-		#selected_entities.append(a)
-	#for e in selected_entities:
-		#if abs(pos.x - e.global_position.x) < forgiveness and abs(pos.y - e.global_position.y) < forgiveness:
-			#e.queue_free()
-
-
 
 
 
@@ -864,6 +836,8 @@ func grid_pos_has_entity(grid_pos) -> bool: #TODO: add props
 	var selected_entities = []
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		selected_entities.append(a.get_node("CollisionShape2D"))
+	#for p in get_tree().get_nodes_in_group("PropSpawns"): #didnt work
+		#selected_entities.append(p.get_node("EditorArea/CollisionShape2D"))
 	for e in selected_entities:
 		if get_cell(e.global_position) == grid_pos:
 			out = true
@@ -897,7 +871,7 @@ func set_tool(new_tool = "", new_subtool = ""):
 
 	subtool = new_subtool
 
-func clear_tile_map_cursor():
+func clear_tile_map_cursor(): #Warning: it still exists after!
 	tile_map_selection = Rect2i(0,0,0,0)
 	tile_map_cursor.size = Vector2i.ZERO
 	tile_map_cursor.position = Vector2i.ZERO

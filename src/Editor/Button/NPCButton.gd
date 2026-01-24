@@ -8,18 +8,18 @@ var npc_sprite: Texture2D
 var active = false
 
 func _ready():
-	$VBox/HBox/Label.text = npc_name
-	$VBox/TextureRect.texture = npc_sprite
-	$PanelActive.visible = active
+	%Label.text = npc_name
+	%TextureRect.texture = npc_sprite
+	%PanelActive.visible = active
 
 func activate():
 	for e in get_tree().get_nodes_in_group("NPCButtons"):
 		e.deactivate()
-	$PanelActive.visible = true
+	%PanelActive.visible = true
 	active = true
 
 func deactivate():
-	$PanelActive.visible = false
+	%PanelActive.visible = false
 	active = false
 
 

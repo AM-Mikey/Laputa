@@ -8,7 +8,7 @@ var fire_time = 0.1
 
 func _ready():
 	display_name = "Red 7"
-	description = "Fires in bursts of Seven. Looks like some kind of prototype."
+	description = "Fires in bursts of up to Seven. Looks like some kind of prototype."
 	icon_texture = load("res://assets/Gun/Red7Icon.png")
 	icon_small_texture = load("res://assets/Gun/Red7IconSmall.png")
 

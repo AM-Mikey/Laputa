@@ -3,113 +3,110 @@ extends Container
 @export var weapon_radius = 100
 @export var height_modifier = .5
 @export var starting_radians = 0.5 * PI
-@export var cycle_delay = 0.6
+@export var cycle_time = 0.6
 @export var highlighted_scale = Vector2(2,2)
 #export var texture_size = Vector2(16, 32)
+var finished_ready = false
+var has_placed_buttons = false
 
-@onready var timer = get_parent().get_parent().get_node("CycleDelay")
-@onready var timer_half = get_parent().get_parent().get_node("HalfCycle")
-
+@onready var timer = $CycleDelay
+@onready var timer_half = $HalfCycle
 @onready var pc = f.pc()
+@onready var inventory = owner
 
-@onready var inventory = get_tree().get_root().get_node("World/UILayer/Inventory")
 
 func _ready():
-	#clear all children
-	var weapon_sprites = get_children()
-	for s in weapon_sprites:
-		s.free()
-
 	await get_tree().process_frame
+	#clear all children
+	for s in $Sprites.get_children():
+		s.free()
 
 	for g in pc.guns.get_children():
 		var sprite = Sprite2D.new()
-		add_child(sprite)
+		$Sprites.add_child(sprite)
+		#sprite.process_mode = Node.PROCESS_MODE_ALWAYS
 		sprite.texture = g.icon_texture
 		sprite.name = g.name
 
-		if pc.guns.get_children().find(g) == 0:
+		if pc.guns.get_children().find(g) == 0: #gun 0 is big
 			sprite.scale = highlighted_scale
-			inventory.header.text = g.display_name
-			inventory.body.text = g.description
+			%InventoryHeader.text = g.display_name
+			%InventoryBody.text = g.description
 
-
-	timer_half.start(0.000001) #just so it sets z indexes
-	cycle_delay = 0.001
 	place_buttons()
-	cycle_delay = 0.6 #reset so the first one doesnt tween
+	finished_ready = true
 
+
+func _physics_process(_delta):
+	if finished_ready:
+		order_z_index()
 
 func _input(event):
 	if pc.disabled or not pc.can_input:
 		return
 	var gun_count = pc.guns.get_child_count()
-	if (event.is_action_pressed("gun_left") and timer.time_left == 0) or (event.is_action_pressed("gun_right") and timer.time_left == 0):
-
-		var old_child = get_child(0)
+	if (event.is_action_pressed("gun_left") || event.is_action_pressed("gun_right")) && timer.time_left == 0: # and timer.time_left == 0)
+		var old_child = $Sprites.get_child(0)
 		var gun_to_move
 
 		if event.is_action_pressed("gun_left"):
 			gun_to_move = pc.guns.get_child(gun_count - 1)
 			pc.guns.move_child(gun_to_move, 0)
-			move_child(get_child(gun_count - 1), 0)
+			$Sprites.move_child($Sprites.get_child(gun_count - 1), 0)
 		elif event.is_action_pressed("gun_right"):
 			gun_to_move = pc.guns.get_child(0)
 			pc.guns.move_child(gun_to_move, gun_count - 1)
-			move_child(get_child(0), gun_count - 1)
+			$Sprites.move_child($Sprites.get_child(0), gun_count - 1)
 
-		var active_child = get_child(0)
-		timer.start(cycle_delay)
-		timer_half.start(cycle_delay / 2.0)
+		var active_child = $Sprites.get_child(0)
+		timer.start(cycle_time)
+		timer_half.start(cycle_time / 2.0)
 		place_buttons()
-		inventory.header.text = pc.guns.get_child(0).display_name
-		inventory.body.text = pc.guns.get_child(0).description
+		%InventoryHeader.text = pc.guns.get_child(0).display_name
+		%InventoryBody.text = pc.guns.get_child(0).description
 
-		var tween = get_tree().create_tween()
-		tween.tween_property(old_child, "scale", Vector2.ONE, cycle_delay).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		var tween2 = get_tree().create_tween()
-		tween2.tween_property(active_child, "scale", highlighted_scale, cycle_delay).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		var tween = create_tween()
+		tween.tween_property(old_child, "scale", Vector2.ONE, cycle_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		var tween2 = create_tween()
+		tween2.tween_property(active_child, "scale", highlighted_scale, cycle_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 
 func place_buttons():
-	var weapon_sprites = get_children()
-	if weapon_sprites.size() == 0:
+	var sprites = $Sprites.get_children()
+	if sprites.size() == 0:
 		return
-	var angle_offset = (-2*PI)/weapon_sprites.size() #in degrees
-	var angle = starting_radians #in radians
+	var angle_offset = (-2*PI)/sprites.size() #in degrees
 
-	for s in weapon_sprites:
+	for s in sprites:
+		var index = $Sprites.get_children().find(s)
+		var angle = starting_radians + (angle_offset * index) #in radians
 		var pre_circle_pos = Vector2(weapon_radius, 0).rotated(angle)
 		var circle_pos = Vector2(pre_circle_pos.x, (pre_circle_pos.y * height_modifier))
-		order_z_index(s, angle)
+		if !has_placed_buttons:
+			s.position = circle_pos
+		else:
+			var tween = create_tween()
+			tween.tween_property(s, "position", circle_pos, cycle_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	has_placed_buttons = true
 
-		var tween = get_tree().create_tween()
-		tween.tween_property(s, "position", circle_pos, cycle_delay).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		#sprite.position = circle_pos
-		angle += angle_offset
 
+func order_z_index():
+	var sprites = $Sprites.get_children()
+	var y_positions = {} # position: [nodes]
+	for s in sprites:
+		var rounded_y_pos = round(s.position.y) #this decreases accuracy
+		if !y_positions.has(rounded_y_pos):
+			y_positions[rounded_y_pos] = [s]
+		else:
+			y_positions[rounded_y_pos].append(s)
 
-func order_z_index(sprite, angle): #prepared to handle 8 guns
-	await timer_half.timeout #wait for halfcycle to change z-index
-
-	if angle == starting_radians: #zero
-		sprite.set_z_index(5)
-		#sprite.modulate = Color(1, 1, 1)
-	elif angle > starting_radians and angle < starting_radians + .5*PI: #between zero and 1q
-		sprite.set_z_index(4)
-		#sprite.modulate = Color(0.75, 0.75, 0.75)
-	elif angle > starting_radians + .5*PI and angle < starting_radians + 1*PI: #between 1q and half
-		sprite.set_z_index(2)
-		#sprite.modulate = Color(0.33, 0.33, 0.33)
-	elif angle == starting_radians + 1*PI: #half
-		sprite.set_z_index(1)
-		#sprite.modulate = Color(0.25, 0.25, 0.25)
-	elif angle > starting_radians + 1*PI and angle < starting_radians + 1.5*PI: #between half and 2q
-		sprite.set_z_index(2)
-		#sprite.modulate = Color(0.33, 0.33, 0.33)
-	elif angle > starting_radians + 1.5*PI and angle < starting_radians + 2*PI: #between 2q and zero
-		sprite.set_z_index(4)
-		#sprite.modulate = Color(0.75, 0.75, 0.75)
-	else: #1q or 2q
-		sprite.set_z_index(3)
-		#sprite.modulate = Color(0.5, 0.5, 0.5)
+	var index = 0.0
+	y_positions.sort()
+	for key in y_positions:
+		for value in y_positions[key]:
+			if value is Array:
+				for node in value:
+					node.z_index = index
+			else:
+				value.z_index = index
+		index += 1

@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://vmeytj0j6nm4"]
+
+[ext_resource type="Script" uid="uid://bar2epwbuic8c" path="res://src/Prop/HealthRefill.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://c4tl7ra4xgllg" path="res://assets/Prop/HealthRefill.png" id="2_i4kpw"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(22, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4kpw"]
+size = Vector2(22, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uiv56"]
+size = Vector2(32, 16)
+
+[node name="RefillTerminal" type="RigidBody2D"]
+collision_layer = 16
+collision_mask = 520
+script = ExtResource("2")
+metadata/_custom_type_script = "uid://dgt1xd0pgkr67"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 8)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_i4kpw")
+centered = false
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2(16, 8)
+shape = SubResource("RectangleShape2D_i4kpw")
+
+[node name="EditorArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+position = Vector2(16, 8)
+shape = SubResource("RectangleShape2D_uiv56")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

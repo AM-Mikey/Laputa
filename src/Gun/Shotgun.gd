@@ -3,7 +3,7 @@ extends Gun
 
 func _ready():
 	display_name = "Shotgun"
-	description = "INDEV, shoot in a cone at instant speed"
+	description = "Fires a cluster of birdshot. Get close for max effect."
 	icon_texture = load("res://assets/Gun/Blunderbuss.png") #need
 	icon_small_texture = load("res://assets/Gun/Blunderbuss.png") #need
 	sfx = "gun_shotgun"

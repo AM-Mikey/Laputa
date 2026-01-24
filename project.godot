@@ -403,9 +403,7 @@ debug_testbutton={
 2d_physics/layer_8="npc"
 2d_physics/layer_9="breakable"
 2d_physics/layer_10="ssp"
-2d_physics/layer_11="hp"
-2d_physics/layer_12="xp"
-2d_physics/layer_13="ammo"
+2d_physics/layer_11="pickup"
 2d_physics/layer_14="enemybull"
 2d_physics/layer_15="editorselectable"
 2d_physics/layer_16="rigidbody"
@@ -413,6 +411,11 @@ debug_testbutton={
 2d_physics/layer_18="enemyhurt"
 2d_physics/layer_19="enemyhit"
 2d_physics/layer_21="water"
+
+[physics]
+
+2d/default_gravity=300.0
+2d/solver/contact_max_allowed_penetration=0.08
 
 [rendering]
 

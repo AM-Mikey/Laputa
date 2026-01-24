@@ -9,9 +9,9 @@ func _ready():
 
 	if f.pc():
 		var pc = f.pc()
-		pc.connect("guns_updated", Callable(self, "on_guns_updated"))
-		am.connect("players_updated", Callable(self, "on_audio_players_updated"))
-		on_guns_updated(pc.guns.get_children())
+		pc.connect("guns_updated", Callable(self, "_on_guns_updated"))
+		am.connect("players_updated", Callable(self, "_on_audio_players_updated"))
+		_on_guns_updated(pc.guns.get_children())
 
 	if world.is_release:
 		$VBox/General/Label.text = "Laputa " + world.internal_version + " (" + world.release_version+ ")"
@@ -72,7 +72,7 @@ func _physics_process(_delta):
 
 
 
-func on_guns_updated(guns):
+func _on_guns_updated(guns):
 	var array = $VBox/General/Arrays/Guns
 	_clear_array(array)
 	for g in guns:
@@ -80,7 +80,7 @@ func on_guns_updated(guns):
 		label.text = g.name
 		array.add_child(label)
 
-func on_audio_players_updated():
+func _on_audio_players_updated():
 	var sfx_array = $VBox/General/Arrays/Sfx
 	var music_array = $VBox/General/Arrays/Music
 	_clear_array(sfx_array)

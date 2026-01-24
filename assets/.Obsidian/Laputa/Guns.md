@@ -1,4 +1,5 @@
 
+Real life references:
 Revolver -> Webley-Kaufman
 Turnstile Jumper ->
 Red 7 -> Mauser (Red 9)

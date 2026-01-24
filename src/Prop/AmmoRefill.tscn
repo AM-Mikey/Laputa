@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://blp6rh8sgbjxg"]
+
+[ext_resource type="Texture2D" uid="uid://d2ynj2q4m0tn6" path="res://assets/Prop/AmmoRefill.png" id="1"]
+[ext_resource type="Script" path="res://src/Prop/AmmoRefill.gd" id="2"]
+
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mudbb"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6lfp"]
+size = Vector2(16, 16)
+
+[node name="AmmoRefill" type="RigidBody2D" groups=["Entities", "PhysicsProps", "Props"]]
+collision_layer = 16
+collision_mask = 520
+can_sleep = false
+lock_rotation = true
+freeze_mode = 1
+script = ExtResource("2")
+metadata/_custom_type_script = "uid://dgt1xd0pgkr67"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1")
+centered = false
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_mudbb")
+
+[node name="EditorArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_q6lfp")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

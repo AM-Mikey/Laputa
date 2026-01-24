@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvescyhdhfa0y"]
+
+[ext_resource type="Texture2D" uid="uid://bilxkgk0hcfkf" path="res://assets/Effect/Sparkle.png" id="1_3c7xh"]
+[ext_resource type="Script" uid="uid://cw1bcyj65k2dg" path="res://src/Effect/BasicParticle.gd" id="2_cder7"]
+
+[sub_resource type="CanvasItemMaterial" id="1"]
+particles_animation = true
+particles_anim_h_frames = 9
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_uvlvd"]
+_limits = [0.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 3.02856e-06, 0, 0, Vector2(1, 1), 0.0, 0.0, 1, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[node name="Sparkle" type="CPUParticles2D"]
+material = SubResource("1")
+emitting = false
+amount = 2
+texture = ExtResource("1_3c7xh")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.75
+local_coords = true
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 50.0
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+anim_speed_curve = SubResource("Curve_uvlvd")
+script = ExtResource("2_cder7")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

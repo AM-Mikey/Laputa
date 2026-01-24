@@ -1,15 +1,18 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://45e84j2sj7w0"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://45e84j2sj7w0"]
 
 [ext_resource type="StyleBox" uid="uid://cb3gs2qq26l03" path="res://src/UI/StyleBox/RustTabsLight.tres" id="1"]
 [ext_resource type="StyleBox" uid="uid://cc3ivdery0b8x" path="res://src/UI/StyleBox/RustRound.tres" id="3"]
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="4"]
 [ext_resource type="StyleBox" uid="uid://cl4yme0wtg3po" path="res://src/UI/Slider/Slider.tres" id="6"]
 [ext_resource type="StyleBox" uid="uid://bwe3j6hcp3u7j" path="res://src/UI/StyleBox/SteelBeveledLight.tres" id="10"]
+[ext_resource type="StyleBox" uid="uid://b2eysynpuqm3n" path="res://src/UI/StyleBox/RustTabs.tres" id="10_kp8hw"]
 [ext_resource type="StyleBox" uid="uid://ot23c6kiunqk" path="res://src/UI/StyleBox/RustTabsDark.tres" id="11"]
 [ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="11_ryfn6"]
 [ext_resource type="StyleBox" uid="uid://djsxt54vtaivl" path="res://src/UI/Slider/ScrollBarGrabber.tres" id="13"]
 [ext_resource type="StyleBox" uid="uid://qim7rgmnpjii" path="res://src/UI/Slider/ScrollBarGrabberHighlight.tres" id="14"]
 [ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="24"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ryfn6"]
 
 [sub_resource type="StyleBoxEmpty" id="9"]
 
@@ -80,17 +83,16 @@ OptionButton/constants/arrow_margin = 2
 OptionButton/constants/hseparation = 2
 OptionButton/icons/arrow = null
 Panel/styles/panel = ExtResource("3")
-TabContainer/colors/font_color_bg = Color(0.941176, 0.941176, 0.941176, 1)
-TabContainer/colors/font_color_disabled = Color(0.9, 0.9, 0.9, 0.2)
-TabContainer/colors/font_color_fg = Color(0.941176, 0.941176, 0.941176, 1)
 TabContainer/constants/hseparation = 4
 TabContainer/constants/label_valign_bg = 2
 TabContainer/constants/label_valign_fg = 0
 TabContainer/constants/side_margin = 8
 TabContainer/constants/top_margin = 24
-TabContainer/styles/panel = ExtResource("3")
-TabContainer/styles/tab_bg = ExtResource("11")
-TabContainer/styles/tab_fg = ExtResource("1")
+TabContainer/styles/panel = SubResource("StyleBoxEmpty_ryfn6")
+TabContainer/styles/tab_focus = ExtResource("1")
+TabContainer/styles/tab_hovered = ExtResource("1")
+TabContainer/styles/tab_selected = ExtResource("10_kp8hw")
+TabContainer/styles/tab_unselected = ExtResource("11")
 TextEdit/styles/completion = ExtResource("4")
 TextEdit/styles/focus = ExtResource("4")
 TextEdit/styles/normal = ExtResource("4")

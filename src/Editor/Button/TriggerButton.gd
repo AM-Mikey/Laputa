@@ -7,8 +7,8 @@ var trigger_name: String
 var active = false
 
 func _ready():
-	$HBox/Button.text = trigger_name
-	$PanelActive.visible = active
+	%Button.text = trigger_name
+	%PanelActive.visible = active
 
 
 func on_pressed():
@@ -19,9 +19,9 @@ func on_pressed():
 func activate():
 	for e in get_tree().get_nodes_in_group("TriggerButtons"):
 		e.deactivate()
-	$PanelActive.visible = true
+	%PanelActive.visible = true
 	active = true
 
 func deactivate():
-	$PanelActive.visible = false
+	%PanelActive.visible = false
 	active = false

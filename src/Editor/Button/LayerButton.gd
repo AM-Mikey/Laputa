@@ -8,12 +8,12 @@ var active = false
 
 
 func _ready():
-	$HBox/LayerButton.text = tile_map.get_child(layer_id).name
+	%LayerButton.text = tile_map.get_child(layer_id).name
 	if tile_map.get_child(layer_id).self_modulate == Color.TRANSPARENT:
-		$HBox/VisButton.button_pressed = true
+		%VisButton.button_pressed = true
 	else:
-		$HBox/VisButton.button_pressed = false
-	$PanelActive.visible = active
+		%VisButton.button_pressed = false
+	%PanelActive.visible = active
 
 
 ### SIGNALS ###
@@ -34,7 +34,7 @@ func _on_LayerButton_pressed():
 func on_layer_updated(active_tile_map_layer): #from editor, after changing layer
 	if active_tile_map_layer == layer_id:
 		active = true
-		$PanelActive.visible = true
+		%PanelActive.visible = true
 	else:
 		active = false
-		$PanelActive.visible = false
+		%PanelActive.visible = false

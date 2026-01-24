@@ -5,9 +5,10 @@ class_name Player
 #const POPUP = preload("res://src/UI/PopupText.tscn")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
 const DEATH_CAMERA = preload("res://src/Utility/DeathCamera.tscn")
-const EXPERIENCEGET = preload("res://src/Effect/ExperienceGet.tscn")
-const HEARTGET = preload("res://src/Effect/HeartGet.tscn")
-const AMMOGET = preload("res://src/Effect/AmmoGet.tscn")
+const EXPERIENCE_GET = preload("res://src/Effect/ExperienceGet.tscn")
+const HEART_GET = preload("res://src/Effect/HeartGet.tscn")
+const HEART_GET_MAX = preload("res://src/Effect/HeartGetMax.tscn")
+const AMMO_GET = preload("res://src/Effect/AmmoGet.tscn")
 const PLAYER_DAMAGE_NUMBER = preload("res://src/Effect/PlayerDamageNumber.tscn")
 const EXPERIENCE_NUMBER = preload("res://src/Effect/ExperienceNumber.tscn")
 const HEART_NUMBER = preload("res://src/Effect/HeartNumber.tscn")
@@ -42,8 +43,8 @@ var dead = false
 @export var controller_id: int = 0
 
 
-var inventory: Array
-var topic_array: Array = ["child", "sasuke", "basil", "general"]
+var item_array: Array[Item]
+var topic_array: Array[String] = ["child", "sasuke", "basil", "general"]
 var inspect_target: Node = null
 var experience_number: Node = null
 var damage_number: Node = null
@@ -64,16 +65,12 @@ var sound_profile = SoundProfile.NORMAL:
 			am.underwater_attenuate(false)
 
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 @onready var HUD
 @onready var mm = get_node("MovementManager")
 @onready var gm = get_node("GunManager")
 @onready var guns = get_node("GunManager/Guns")
 @onready var iframe_timer = %IframeTimer
-
-
-func _ready():
-	connect_inventory()
 
 
 func disable():
@@ -194,14 +191,14 @@ func die():
 	if not dead:
 		dead = true
 		disabled = true
-		world.add_child(DEATH_CAMERA.instantiate())
+		w.add_child(DEATH_CAMERA.instantiate())
 		visible = false
 
 		var explosion = EXPLOSION.instantiate()
 		explosion.position = global_position
-		world.get_node("Front").add_child(explosion)
+		w.get_node("Front").add_child(explosion)
 
-		world.ui.add_child(load("res://src/UI/DeathScreen.tscn").instantiate())
+		w.ui.add_child(load("res://src/UI/DeathScreen.tscn").instantiate())
 		if f.hud():
 			f.hud().free()
 		queue_free()
@@ -221,76 +218,88 @@ func _on_IframeTimer_timeout() -> void:
 func _on_ItemDetector_area_entered(area):
 	if disabled: return
 
-	if area.get_collision_layer_value(11): #health
-		var heart_pickup = area.get_parent()
-		var hp_before = hp
-		hp += heart_pickup.value
-		hp = min(hp, max_hp)
-		am.play("get_hp")
-		var heart_get = HEARTGET.instantiate()
-		heart_get.position = heart_pickup.global_position
+	if area.get_collision_layer_value(11): #pickup
+		var pickup = area.get_parent()
 
-		if hp - hp_before > 0: #health gained
+
+		if pickup.is_in_group("HeartPickups"):
+			var hp_before = hp
+			hp += pickup.value
+			hp = min(hp, max_hp)
+			am.play("get_hp")
+			var heart_get = HEART_GET.instantiate()
+			heart_get.position = pickup.global_position
+
+			if hp - hp_before > 0: #health gained
+				if damage_number != null: damage_number.queue_free()
+				if experience_number != null: experience_number.queue_free()
+				if heart_number == null:
+					heart_number = HEART_NUMBER.instantiate()
+					heart_number.value = hp - hp_before
+					heart_number.position.y -= 18
+					add_child(heart_number)
+				else:
+					heart_number.value += hp - hp_before
+					heart_number.reset()
+
+			w.get_node("Front").add_child(heart_get)
+			emit_signal("hp_updated", hp, max_hp, "hp_pickup")
+			pickup.queue_free()
+
+
+		elif pickup.is_in_group("HealthUpgradeCrystalPickups"):
+			max_hp += pickup.value
+			hp = max_hp
+			am.play_interrupt("get_health_upgrade")
+			var heart_get_max = HEART_GET_MAX.instantiate()
+			heart_get_max.position = pickup.global_position
+			w.get_node("Front").add_child(heart_get_max)
+			emit_signal("hp_updated", hp, max_hp, "hp_upgrade")
+			pickup.exit()
+
+
+		elif pickup.is_in_group("ExperiencePickups"):
+			var active_gun = guns.get_child(0)
+			money += pickup.value
+			active_gun.xp += pickup.value
+			if active_gun.xp >= active_gun.max_xp:
+				if active_gun.level == active_gun.max_level:
+					active_gun.xp = active_gun.max_xp
+					#TODO: Flash MAX on HUD
+				else:
+					$GunManager.level_up(false)
+			am.play("get_xp")
+			var experience_get = EXPERIENCE_GET.instantiate()
+			experience_get.position = pickup.global_position
+			w.get_node("Front").add_child(experience_get)
+
 			if damage_number != null: damage_number.queue_free()
-			if experience_number != null: experience_number.queue_free()
-			if heart_number == null:
-				heart_number = HEART_NUMBER.instantiate()
-				heart_number.value = hp - hp_before
-				heart_number.position.y -= 18
-				add_child(heart_number)
+			if heart_number != null: heart_number.queue_free()
+			if experience_number == null:
+				experience_number = EXPERIENCE_NUMBER.instantiate()
+				experience_number.value = pickup.value
+				experience_number.position.y -= 18
+				add_child(experience_number)
 			else:
-				heart_number.value += hp - hp_before
-				heart_number.reset()
+				experience_number.value += pickup.value
+				experience_number.reset()
 
-		world.get_node("Front").add_child(heart_get)
-		emit_signal("hp_updated", hp, max_hp, "hp_pickup")
-		heart_pickup.queue_free()
-
-
-	if area.get_collision_layer_value(12): #xp
-		var experience_pickup = area.get_parent()
-		var active_gun = guns.get_child(0)
-		money += experience_pickup.value
-		active_gun.xp += experience_pickup.value
-		if active_gun.xp >= active_gun.max_xp:
-			if active_gun.level == active_gun.max_level:
-				active_gun.xp = active_gun.max_xp
-				#TODO: Flash MAX on HUD
-			else:
-				$GunManager.level_up(false)
-		am.play("get_xp")
-		var experience_get = EXPERIENCEGET.instantiate()
-		experience_get.position = experience_pickup.global_position
-		world.get_node("Front").add_child(experience_get)
-
-		if damage_number != null: damage_number.queue_free()
-		if heart_number != null: heart_number.queue_free()
-		if experience_number == null:
-			experience_number = EXPERIENCE_NUMBER.instantiate()
-			experience_number.value = experience_pickup.value
-			experience_number.position.y -= 18
-			add_child(experience_number)
-		else:
-			experience_number.value += experience_pickup.value
-			experience_number.reset()
-
-		emit_signal("money_updated", money)
-		emit_signal("guns_updated", guns.get_children(), "xp", true)
-		experience_pickup.queue_free()
+			emit_signal("money_updated", money)
+			emit_signal("guns_updated", guns.get_children(), "xp", true)
+			pickup.queue_free()
 
 
-	if area.get_collision_layer_value(13): #ammo
-		var ammo_pickup = area.get_parent()
-		for w in guns.get_children():
-			if w.max_ammo != 0:
-				w.ammo += int(w.max_ammo * ammo_pickup.value) #percent of max ammo
-				w.ammo = min(w.ammo, w.max_ammo)
-		am.play("get_ammo")
-		var ammo_get = AMMOGET.instantiate()
-		ammo_get.position = ammo_pickup.global_position
-		world.get_node("Front").add_child(ammo_get)
-		emit_signal("guns_updated", guns.get_children(), "get_ammo")
-		ammo_pickup.queue_free()
+		elif pickup.is_in_group("AmmoPickups"):
+			for w in guns.get_children():
+				if w.max_ammo != 0:
+					w.ammo += int(w.max_ammo * pickup.value) #percent of max ammo
+					w.ammo = min(w.ammo, w.max_ammo)
+			am.play("get_ammo")
+			var ammo_get = AMMO_GET.instantiate()
+			ammo_get.position = pickup.global_position
+			w.get_node("Front").add_child(ammo_get)
+			emit_signal("guns_updated", guns.get_children(), "get_ammo")
+			pickup.queue_free()
 
 
 func _on_Ear_area_entered(_area):
@@ -303,18 +312,7 @@ func _on_Ear_area_exited(_area):
 
 ### MISC
 
-#TODO: clean these up and get rid of them
-func update_inventory():
-	emit_signal("inventory_updated", inventory)
-
 func setup_hud():
 	emit_signal("hp_updated", hp, max_hp, "set_up")
 	emit_signal("guns_updated", guns.get_children(), "set_up")
 	emit_signal("money_updated", money)
-
-
-func connect_inventory():
-	#if this is always null when ready is called does it do anything? why do we have this?
-	var item_menu = get_tree().get_root().get_node_or_null("World/UILayer/Inventory")
-	if item_menu:
-		var _err = connect("inventory_updated", Callable(item_menu, "_on_inventory_updated"))

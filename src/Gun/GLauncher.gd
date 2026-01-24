@@ -2,7 +2,7 @@ extends Gun
 
 func _ready():
 	display_name = "Grenade Launcher"
-	description = "Packs a punch."
+	description = "Packs a punch. Hold down for a more direct arc. Extra damage if grenades don't bounce"
 	icon_texture = load("res://assets/Gun/GLauncherIcon.png")
 	icon_small_texture = load("res://assets/Gun/GLauncherIconSmall.png")
 	sfx = "gun_grenade"
