@@ -56,12 +56,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "The World/Dinero.md",
+                "file": "Groups/Dogtown Residents.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Dinero"
+              "title": "Dogtown Residents"
             }
           }
         ],
@@ -244,8 +244,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "716f7f890990af0d",
+  "active": "8e79af8c8cf32a05",
   "lastOpenFiles": [
+    "Groups/Corp..md",
+    "Groups/Colonists.md",
+    "Groups/Capital City Residents.md",
     "The World/Dinero.md",
     "Groups/Laputans.md",
     "Concepts/Timeline of Events Before Laputa.md",
@@ -258,8 +261,6 @@
     "The World/Areas/Ancient Ruins.md",
     "hidden knowledge.md",
     "Concepts/Davey's Secret Knowledge.md",
-    "Groups/Corp..md",
-    "Groups/Colonists.md",
     "Characters/Junior.md",
     "Concepts/Endings.md",
     "Concepts/Ethnicity.md",
@@ -271,7 +272,6 @@
     "Concepts/Second Inhabitants.md",
     "Concepts/Laputan Crown.md",
     "Characters/Spirit of the Island.md",
-    "Concepts/Cloud Curtain.md",
     "Aseprite_8jemaKX0FE.png",
     "Aseprite_EEozVk20AW.png",
     "Aseprite_ujhX9SUnNc.png",
