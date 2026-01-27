@@ -37,6 +37,8 @@ func do_auto_tile(start_coords, start_layer):
 				pattern_backdirt(start_layer, i)
 			#print("a: ", active_tile_map_cells)
 			active_tile_map_cells = []
+		else:
+			get_auto_tile_directions(auto_tile_group)
 
 
 func find_cells_recursive(coords_array, layer, group):
@@ -132,12 +134,16 @@ func get_auto_tile_directions(auto_tile_group) -> Dictionary:
 					if auto_tile_group == tile_data.get_custom_data("auto_tile_group"): #the right group
 						if tile_data.has_custom_data("auto_tile_direction"):
 							out["all"].append(coords)
-							var auto_tile_direction = tile_data.get_custom_data("auto_tile_direction")
+							var auto_tile_directions: String = tile_data.get_custom_data("auto_tile_direction")
 							# TODO: Separate on commas and append to all the directions
-							if out.has(auto_tile_direction):
-								out[auto_tile_direction].append(coords)
-							else:
-								out[auto_tile_direction] = [coords]
+							var directions = auto_tile_directions.split(",")
+							print("YEAH")
+							for auto_tile_direction in directions:
+								print(auto_tile_direction)
+								if out.has(auto_tile_direction):
+									out[auto_tile_direction].append(coords)
+								else:
+									out[auto_tile_direction] = [coords]
 	return out
 
 
