@@ -28,6 +28,7 @@ func do_auto_tile(start_coords, start_layer):
 			var group = "backdirt"
 
 			var connected_cells = find_all_connected_cells(start_coords, start_layer, group)
+			print(connected_cells)
 			active_tile_map_cells.append(start_coords)
 			if !connected_cells.is_empty():
 				find_cells_recursive(connected_cells, start_layer, group)
@@ -90,6 +91,8 @@ func pattern_backdirt(layer, coords):
 		[N,S,W,E]:
 			pass
 			#print("single")
+			# TODO: Make this handle empty connection groups..?
+			# Or then just require the tileset editor to put "north" as also "north-west" and "north-east"...
 		[N,W]:
 			new_atlas_coords = dict["nw"].pick_random()
 		[N,E]:
@@ -130,6 +133,7 @@ func get_auto_tile_directions(auto_tile_group) -> Dictionary:
 						if tile_data.has_custom_data("auto_tile_direction"):
 							out["all"].append(coords)
 							var auto_tile_direction = tile_data.get_custom_data("auto_tile_direction")
+							# TODO: Separate on commas and append to all the directions
 							if out.has(auto_tile_direction):
 								out[auto_tile_direction].append(coords)
 							else:
