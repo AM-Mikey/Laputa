@@ -4,6 +4,7 @@ class_name Trigger
 
 @export var editor_hidden = false
 @export var color = Color(1, 0, 0)
+@export var id: String
 
 var active_pc = null
 var active_bodies = []

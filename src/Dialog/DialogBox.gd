@@ -283,7 +283,7 @@ func align_out():
 
 
 func display_name(name: String):
-	$Name.visible = false
+	$Name.visible = true
 	$Name/Shadow.global_position = $Name/HBox/Label.global_position - Vector2.ONE
 	$Name/HBox/Label.text = name.capitalize()
 	$Name/Shadow.text = name.capitalize()

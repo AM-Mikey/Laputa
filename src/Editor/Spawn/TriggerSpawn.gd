@@ -1,5 +1,6 @@
 extends MarginContainer
 
+var allow_spawn := true
 var state = "idle"
 var active_handle = null
 var drag_offset = Vector2.ZERO
@@ -56,8 +57,23 @@ func initialize(): #first time set up properties
 			properties[p["name"]] = [trigger.get(p["name"]), p["type"]]
 		elif p["usage"] == 69638: #exported property enums
 			properties[p["name"]] = [trigger.get(p["name"]), p["type"]]
+	trigger.free()
+
+func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
+	var old_properties = properties
+	properties = {}
+	var trigger = load(trigger_path).instantiate()
+	for p in trigger.get_property_list():
+		if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
+			if old_properties.has(p["name"]):
+				properties[p["name"]] = old_properties[p["name"]]
+			else:
+				properties[p["name"]] = [trigger.get(p["name"]), p["type"]]
+	trigger.free()
 
 func spawn():
+	await get_tree().process_frame #wait to set allow_spawn
+	if !allow_spawn: return
 	if trigger_path == null:
 		printerr("ERROR: no trigger chosen in TriggerSpawn")
 		return

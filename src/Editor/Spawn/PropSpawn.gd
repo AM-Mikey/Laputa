@@ -1,5 +1,6 @@
 extends Area2D
 
+var allow_spawn := true
 var physics_prop_spawn_distance = 0.001
 
 @export_file var prop_path
@@ -49,10 +50,25 @@ func _ready():
 func initialize(): #first time set up properties
 	var prop = load(prop_path).instantiate()
 	for p in prop.get_property_list():
-		if p["usage"] == 4102: #exported properties
+		if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
 			properties[p["name"]] = [prop.get(p["name"]), p["type"]]
+	prop.free()
+
+func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
+	var old_properties = properties
+	properties = {}
+	var prop = load(prop_path).instantiate()
+	for p in prop.get_property_list():
+		if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
+			if old_properties.has(p["name"]):
+				properties[p["name"]] = old_properties[p["name"]]
+			else:
+				properties[p["name"]] = [prop.get(p["name"]), p["type"]]
+	prop.free()
 
 func spawn():
+	await get_tree().process_frame #wait to set allow_spawn
+	if !allow_spawn: return
 	if prop_path == null:
 		printerr("ERROR: no prop chosen in PropSpawn")
 		return

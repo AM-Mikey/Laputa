@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://eoah43mp5yo8"]
+[gd_scene format=3 uid="uid://eoah43mp5yo8"]
 
-[ext_resource type="Script" path="res://src/Prop/SaveDisk.gd" id="1_prrpi"]
+[ext_resource type="Script" uid="uid://bwn6q2qrnygr3" path="res://src/Prop/SaveDisk.gd" id="1_prrpi"]
 [ext_resource type="Texture2D" uid="uid://16nu4i3wsr5s" path="res://assets/Prop/SaveDisk.png" id="2_w3a02"]
-
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_prrpi"]
 bounce = 0.6
@@ -39,7 +38,7 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w3a02"]
 size = Vector2(16, 16)
 
-[node name="SaveDisk" type="RigidBody2D" groups=["Entities", "PhysicsProps", "Props"]]
+[node name="SaveDisk" type="RigidBody2D" unique_id=1743818005 groups=["Entities", "PhysicsProps", "Props"]]
 collision_layer = 16
 collision_mask = 520
 physics_material_override = SubResource("PhysicsMaterial_prrpi")
@@ -48,44 +47,42 @@ lock_rotation = true
 freeze_mode = 1
 script = ExtResource("1_prrpi")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=926717291]
 position = Vector2(8, 8)
 shape = SubResource("2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1502130820]
 texture = ExtResource("2_w3a02")
 centered = false
 hframes = 28
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_q8gjm")
-}
-autoplay = "Spin"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=696711313]
+libraries/ = SubResource("AnimationLibrary_q8gjm")
+autoplay = &"Spin"
 
-[node name="PlayerDetector" type="Area2D" parent="."]
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=1702649960]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=1997650291]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_prrpi")
 
-[node name="EditorArea" type="Area2D" parent="."]
+[node name="EditorArea" type="Area2D" parent="." unique_id=292916011]
 collision_layer = 0
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea" unique_id=911765077]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_w3a02")
 debug_color = Color(0, 0.6, 0.69803923, 0)
 
-[node name="Ground" type="RayCast2D" parent="."]
+[node name="Ground" type="RayCast2D" parent="." unique_id=1137589056]
 position = Vector2(8, 16)
 target_position = Vector2(0, 1)
 collision_mask = 520
 hit_from_inside = true
 
-[node name="SparklePos" type="Marker2D" parent="."]
+[node name="SparklePos" type="Marker2D" parent="." unique_id=688820344]
 position = Vector2(8, 16)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]

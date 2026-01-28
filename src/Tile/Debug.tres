@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dct5q86qhnom8"]
+[gd_resource type="TileSet" format=3 uid="uid://dct5q86qhnom8"]
 
 [ext_resource type="Texture2D" uid="uid://dbvybliwplsbt" path="res://assets/Tile/Debug.png" id="1"]
 

@@ -6,7 +6,7 @@ signal level_change(level, door_index)
 
 enum Direction {LEFT, RIGHT, UP, DOWN}
 
-@export var level: String
+@export_file("*.tscn") var level: String
 @export var door_index: int = 0
 @export var direction: Direction = Direction.RIGHT
 
@@ -51,8 +51,8 @@ func enter_load_zone(): #see if you need the inspect state
 	await transition.get_node("AnimationPlayer").animation_finished
 
 	active_pc.mm.change_state("run")
-	var level_path = str("res://src/Level/" + level + ".tscn")
-	if !FileAccess.file_exists(level_path):
-		printerr("ERROR: No Level With Name: ", level)
-		return
-	emit_signal("level_change", level_path, door_index)
+	#var level_path = str("res://src/Level/" + level + ".tscn")
+	#if !FileAccess.file_exists(level_path):
+		#printerr("ERROR: No Level With Name: ", level)
+		#return
+	emit_signal("level_change", level, door_index)
