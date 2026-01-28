@@ -24,9 +24,11 @@ func _ready():
 		get_node("Notes").visible = false
 	setup_kill_box()
 
-
-	if level_type == LevelType.PLAYERLESS_CUTSCENE:
-		do_playerless_cutscene()
+	if conversation_on_enter:
+		if level_type == LevelType.PLAYERLESS_CUTSCENE:
+			do_conversation_on_enter(true)
+		else:
+			do_conversation_on_enter(false)
 
 	for i in $TileMap.get_children():
 		i.fix_invalid_tiles()
@@ -123,7 +125,8 @@ func merge_one_way_ssp_tile() -> void:
 		static_body.add_child(polygon_node)
 
 
-func do_playerless_cutscene():
+func do_conversation_on_enter(hide_player = false): #TODO: implement the player hidden + switch camera option
+	await get_tree().process_frame
 	if w.has_node("UILayer/DialogBox"): #clear old dialog box if there is one
 		w.get_node("UILayer/DialogBox").exit()
 
@@ -131,10 +134,7 @@ func do_playerless_cutscene():
 	dialog_box.connect("dialog_finished", Callable(self, "on_dialog_finished"))
 	get_tree().get_root().get_node("World/UILayer").add_child(dialog_box)
 	dialog_box.start_printing(dialog_json, conversation_on_enter)
-	print("starting conversation")
 
-func update_level_via_main_mission(stage: int):
-	pass
 
 func setup_kill_box():
 	var kill_box = KILL_BOX.instantiate()

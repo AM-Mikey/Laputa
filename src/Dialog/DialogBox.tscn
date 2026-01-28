@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://dmt6h4vj5irs3"]
+[gd_scene format=3 uid="uid://dmt6h4vj5irs3"]
 
 [ext_resource type="Script" uid="uid://dadxo4i123gxi" path="res://src/Dialog/DialogBox.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c7swp4yjswsx5" path="res://assets/Dialog/Dialog.png" id="2_a6pxh"]
@@ -4792,7 +4792,7 @@ _data = {
 &"ResponseExit": SubResource("Animation_yx40r")
 }
 
-[node name="DialogBox" type="Control" groups=["DialogBoxes"]]
+[node name="DialogBox" type="Control" unique_id=1750378332 groups=["DialogBoxes"]]
 process_mode = 1
 layout_mode = 3
 anchors_preset = 0
@@ -4803,25 +4803,25 @@ size_flags_vertical = 0
 mouse_filter = 1
 script = ExtResource("1")
 
-[node name="Flat" type="Control" parent="."]
+[node name="Flat" type="Control" parent="." unique_id=1739004173]
 anchors_preset = 0
 
-[node name="Blur" type="Polygon2D" parent="Flat"]
+[node name="Blur" type="Polygon2D" parent="Flat" unique_id=2015097307]
 z_index = -1
 material = SubResource("ShaderMaterial_js7dk")
 position = Vector2(400, -86)
 polygon = PackedVector2Array(-370, 101, -21, 101, -19, 102, -18, 103, -17, 105, -17, 110, -41, 158, -42, 159, -43, 161, -44, 162, -46, 163, -395, 163, -397, 162, -398, 161, -399, 159, -399, 154, -375, 106, -374, 105, -373, 103, -372, 102)
 
-[node name="Dialog" type="Sprite2D" parent="Flat"]
+[node name="Dialog" type="Sprite2D" parent="Flat" unique_id=2066378263]
 position = Vector2(192, -43)
 texture = ExtResource("2_a6pxh")
 
-[node name="DialogPanel" type="Sprite2D" parent="Flat"]
+[node name="DialogPanel" type="Sprite2D" parent="Flat" unique_id=2088603311]
 modulate = Color(1, 1, 1, 0.85)
 position = Vector2(192, -43)
 texture = ExtResource("3_irc2v")
 
-[node name="DialogFlat" type="RichTextLabel" parent="Flat"]
+[node name="DialogFlat" type="RichTextLabel" parent="Flat" unique_id=2035403117]
 light_mask = 2
 layout_mode = 0
 offset_left = 38.0
@@ -4839,26 +4839,26 @@ text = "Lorem Ipsum is simply dummy text of the printing and typesetting industr
 scroll_active = false
 scroll_following = true
 
-[node name="NPC" type="Control" parent="."]
+[node name="NPC" type="Control" parent="." unique_id=231870637]
 visible = false
 anchors_preset = 0
 
-[node name="Blur" type="Polygon2D" parent="NPC"]
+[node name="Blur" type="Polygon2D" parent="NPC" unique_id=1739696838]
 z_index = -1
 material = SubResource("ShaderMaterial_js7dk")
 position = Vector2(400, -86)
 polygon = PackedVector2Array(-336, 101, 3, 101, 5, 102, 6, 103, 7, 105, 7, 110, -17, 158, -18, 159, -19, 161, -20, 162, -22, 163, -347, 163, -349, 162, -350, 161, -351, 159, -352, 157, -353, 154, -354, 152, -355, 151, -355, 101)
 
-[node name="Edge" type="Sprite2D" parent="NPC"]
+[node name="Edge" type="Sprite2D" parent="NPC" unique_id=965333611]
 position = Vector2(200, -43)
 texture = ExtResource("2_f46i3")
 
-[node name="Panel" type="Sprite2D" parent="NPC"]
+[node name="Panel" type="Sprite2D" parent="NPC" unique_id=1410700595]
 modulate = Color(1, 1, 1, 0.85)
 position = Vector2(200, -43)
 texture = ExtResource("3_p6mm4")
 
-[node name="DialogNPC" type="RichTextLabel" parent="NPC"]
+[node name="DialogNPC" type="RichTextLabel" parent="NPC" unique_id=1978948795]
 light_mask = 2
 layout_mode = 0
 offset_left = 72.0
@@ -4876,38 +4876,38 @@ text = "Lorem Ipsum is simply dummy text of the printing and typesetting industr
 scroll_active = false
 scroll_following = true
 
-[node name="Response" type="Control" parent="."]
+[node name="Response" type="Control" parent="." unique_id=1643388423]
 visible = false
 anchors_preset = 0
 
-[node name="Blur" type="Polygon2D" parent="Response"]
+[node name="Blur" type="Polygon2D" parent="Response" unique_id=336552230]
 z_index = -1
 material = SubResource("ShaderMaterial_js7dk")
 position = Vector2(200, -43)
 polygon = PackedVector2Array(-136, 58, 65, 58, 66, 59, 68, 63, 69, 66, 70, 71, 71, 79, 71, 99, 70, 107, 69, 112, 68, 115, 66, 119, 65, 120, -147, 120, -149, 119, -150, 118, -152, 114, -153, 111, -154, 109, -155, 108, -155, 58)
 
-[node name="Blur2" type="Polygon2D" parent="Response"]
+[node name="Blur2" type="Polygon2D" parent="Response" unique_id=296157009]
 z_index = -1
 material = SubResource("ShaderMaterial_xbdvf")
 position = Vector2(200, -43)
 polygon = PackedVector2Array(127, 58, 138, 58, 138, 120, 127, 120, 126, 119, 124, 115, 123, 112, 122, 107, 121, 99, 121, 79, 122, 71, 123, 66, 124, 63, 126, 59)
 
-[node name="Edge" type="Sprite2D" parent="Response"]
+[node name="Edge" type="Sprite2D" parent="Response" unique_id=623918750]
 position = Vector2(200, -43)
 texture = ExtResource("9_a6pxh")
 hframes = 10
 
-[node name="Panel" type="Sprite2D" parent="Response"]
+[node name="Panel" type="Sprite2D" parent="Response" unique_id=1706319221]
 modulate = Color(1, 1, 1, 0.8)
 position = Vector2(200, -43)
 texture = ExtResource("10_irc2v")
 hframes = 10
 
-[node name="Juniper" type="Sprite2D" parent="Response"]
+[node name="Juniper" type="Sprite2D" parent="Response" unique_id=1164739876]
 position = Vector2(368, 46)
 texture = ExtResource("10_js7dk")
 
-[node name="DialogResponse" type="RichTextLabel" parent="Response"]
+[node name="DialogResponse" type="RichTextLabel" parent="Response" unique_id=1729740370]
 light_mask = 2
 layout_mode = 0
 offset_left = 72.0
@@ -4925,13 +4925,13 @@ text = "Lorem Ipsum is simply dummy text of the printing and typesetting industr
 scroll_active = false
 scroll_following = true
 
-[node name="Name" type="Control" parent="."]
+[node name="Name" type="Control" parent="." unique_id=219904090]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Panel" type="Panel" parent="Name"]
+[node name="Panel" type="Panel" parent="Name" unique_id=1911530544]
 layout_mode = 0
 offset_left = 63.0
 offset_top = 2.0
@@ -4939,7 +4939,7 @@ offset_right = 144.0
 offset_bottom = 14.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_pjhkh")
 
-[node name="Shadow" type="RichTextLabel" parent="Name"]
+[node name="Shadow" type="RichTextLabel" parent="Name" unique_id=175816964]
 light_mask = 2
 material = SubResource("ShaderMaterial_qf68d")
 layout_mode = 0
@@ -4958,14 +4958,14 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="HBox" type="HBoxContainer" parent="Name"]
+[node name="HBox" type="HBoxContainer" parent="Name" unique_id=998673318]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 1.0
 offset_right = 384.0
 offset_bottom = 16.0
 
-[node name="Label" type="RichTextLabel" parent="Name/HBox"]
+[node name="Label" type="RichTextLabel" parent="Name/HBox" unique_id=396727781]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -4979,7 +4979,7 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Face" type="Control" parent="."]
+[node name="Face" type="Control" parent="." unique_id=1581205440]
 visible = false
 clip_contents = true
 anchors_preset = 0
@@ -4989,38 +4989,38 @@ offset_right = 56.0
 offset_bottom = 56.0
 mouse_filter = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="Face"]
+[node name="Sprite2D" type="Sprite2D" parent="Face" unique_id=1322914896]
 texture = ExtResource("4")
 centered = false
 
-[node name="CommandHandler" type="Node" parent="."]
+[node name="CommandHandler" type="Node" parent="." unique_id=231903863]
 script = ExtResource("6")
 
-[node name="PrintTimer" type="Timer" parent="."]
+[node name="PrintTimer" type="Timer" parent="." unique_id=485781854]
 one_shot = true
 
-[node name="FlashTimer" type="Timer" parent="."]
+[node name="FlashTimer" type="Timer" parent="." unique_id=810114501]
 
-[node name="Options" type="Control" parent="."]
+[node name="Options" type="Control" parent="." unique_id=965386542]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("15_6fcua")
 
-[node name="Four" type="Control" parent="Options"]
+[node name="Four" type="Control" parent="Options" unique_id=263342721]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="First" type="Sprite2D" parent="Options/Four"]
+[node name="First" type="Sprite2D" parent="Options/Four" unique_id=1720368179]
 position = Vector2(236, 15)
 texture = ExtResource("17_nftl0")
 centered = false
 hframes = 8
 frame = 1
 
-[node name="Label" type="Label" parent="Options/Four/First"]
+[node name="Label" type="Label" parent="Options/Four/First" unique_id=807219484]
 material = SubResource("ShaderMaterial_a6pxh")
 offset_left = 4.0
 offset_top = 2.0
@@ -5031,14 +5031,14 @@ theme_override_fonts/font = ExtResource("4_p6mm4")
 text = "Test Option"
 horizontal_alignment = 1
 
-[node name="Second" type="Sprite2D" parent="Options/Four"]
+[node name="Second" type="Sprite2D" parent="Options/Four" unique_id=313461621]
 position = Vector2(244, 29)
 texture = ExtResource("17_nftl0")
 centered = false
 hframes = 8
 frame = 2
 
-[node name="Label" type="Label" parent="Options/Four/Second"]
+[node name="Label" type="Label" parent="Options/Four/Second" unique_id=22604825]
 offset_left = 4.0
 offset_top = 2.0
 offset_right = 80.0
@@ -5048,14 +5048,14 @@ theme_override_fonts/font = ExtResource("4_p6mm4")
 text = "Test Option"
 horizontal_alignment = 1
 
-[node name="Third" type="Sprite2D" parent="Options/Four"]
+[node name="Third" type="Sprite2D" parent="Options/Four" unique_id=1819379853]
 position = Vector2(244, 43)
 texture = ExtResource("17_nftl0")
 centered = false
 hframes = 8
 frame = 4
 
-[node name="Label" type="Label" parent="Options/Four/Third"]
+[node name="Label" type="Label" parent="Options/Four/Third" unique_id=538892685]
 offset_left = 4.0
 offset_top = 2.0
 offset_right = 80.0
@@ -5065,14 +5065,14 @@ theme_override_fonts/font = ExtResource("4_p6mm4")
 text = "Test Option"
 horizontal_alignment = 1
 
-[node name="Forth" type="Sprite2D" parent="Options/Four"]
+[node name="Forth" type="Sprite2D" parent="Options/Four" unique_id=800251447]
 position = Vector2(248, 57)
 texture = ExtResource("17_nftl0")
 centered = false
 hframes = 8
 frame = 6
 
-[node name="Label" type="Label" parent="Options/Four/Forth"]
+[node name="Label" type="Label" parent="Options/Four/Forth" unique_id=258390260]
 offset_left = 4.0
 offset_top = 2.0
 offset_right = 80.0
@@ -5082,20 +5082,20 @@ theme_override_fonts/font = ExtResource("4_p6mm4")
 text = "Test Option"
 horizontal_alignment = 1
 
-[node name="Three" type="Control" parent="Options"]
+[node name="Three" type="Control" parent="Options" unique_id=276201789]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="First" type="Sprite2D" parent="Options/Three"]
+[node name="First" type="Sprite2D" parent="Options/Three" unique_id=748742998]
 position = Vector2(236, 19)
 texture = ExtResource("17_6fcua")
 centered = false
 hframes = 6
 frame = 1
 
-[node name="Label" type="Label" parent="Options/Three/First"]
+[node name="Label" type="Label" parent="Options/Three/First" unique_id=1898515613]
 material = SubResource("ShaderMaterial_a6pxh")
 offset_left = 4.0
 offset_top = 2.0
@@ -5106,14 +5106,14 @@ theme_override_fonts/font = ExtResource("4_p6mm4")
 text = "Test Option"
 horizontal_alignment = 1
 
-[node name="Second" type="Sprite2D" parent="Options/Three"]
+[node name="Second" type="Sprite2D" parent="Options/Three" unique_id=1426940662]
 position = Vector2(240, 36)
 texture = ExtResource("17_6fcua")
 centered = false
 hframes = 6
 frame = 2
 
-[node name="Label" type="Label" parent="Options/Three/Second"]
+[node name="Label" type="Label" parent="Options/Three/Second" unique_id=1363819442]
 offset_left = 4.0
 offset_top = 2.0
 offset_right = 80.0
@@ -5123,14 +5123,14 @@ theme_override_fonts/font = ExtResource("4_p6mm4")
 text = "Test Option"
 horizontal_alignment = 1
 
-[node name="Third" type="Sprite2D" parent="Options/Three"]
+[node name="Third" type="Sprite2D" parent="Options/Three" unique_id=1250993174]
 position = Vector2(248, 53)
 texture = ExtResource("17_6fcua")
 centered = false
 hframes = 6
 frame = 4
 
-[node name="Label" type="Label" parent="Options/Three/Third"]
+[node name="Label" type="Label" parent="Options/Three/Third" unique_id=515121656]
 offset_left = 4.0
 offset_top = 2.0
 offset_right = 80.0
@@ -5140,19 +5140,19 @@ theme_override_fonts/font = ExtResource("4_p6mm4")
 text = "Test Option"
 horizontal_alignment = 1
 
-[node name="Two" type="Control" parent="Options"]
+[node name="Two" type="Control" parent="Options" unique_id=242399864]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="First" type="Sprite2D" parent="Options/Two"]
+[node name="First" type="Sprite2D" parent="Options/Two" unique_id=1766944154]
 position = Vector2(232, 26)
 texture = ExtResource("18_esgl1")
 centered = false
 hframes = 4
 frame = 1
 
-[node name="Label" type="Label" parent="Options/Two/First"]
+[node name="Label" type="Label" parent="Options/Two/First" unique_id=692582482]
 material = SubResource("ShaderMaterial_a6pxh")
 offset_left = 4.0
 offset_top = 2.0
@@ -5164,14 +5164,14 @@ text = "Test Option"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Second" type="Sprite2D" parent="Options/Two"]
+[node name="Second" type="Sprite2D" parent="Options/Two" unique_id=217755776]
 position = Vector2(248, 47)
 texture = ExtResource("18_esgl1")
 centered = false
 hframes = 4
 frame = 2
 
-[node name="Label" type="Label" parent="Options/Two/Second"]
+[node name="Label" type="Label" parent="Options/Two/Second" unique_id=858282275]
 offset_left = 4.0
 offset_top = 2.0
 offset_right = 80.0
@@ -5181,32 +5181,28 @@ theme_override_fonts/font = ExtResource("4_p6mm4")
 text = "Test Option"
 horizontal_alignment = 1
 
-[node name="Up" type="Sprite2D" parent="Options"]
+[node name="Up" type="Sprite2D" parent="Options" unique_id=363389466]
 visible = false
 position = Vector2(286, 12)
 texture = ExtResource("18_nftl0")
 centered = false
 hframes = 2
 
-[node name="Down" type="Sprite2D" parent="Options"]
+[node name="Down" type="Sprite2D" parent="Options" unique_id=102091792]
 visible = false
 position = Vector2(286, 75)
 texture = ExtResource("19_esgl1")
 centered = false
 hframes = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Options"]
-libraries = {
-&"": SubResource("AnimationLibrary_cgs1x")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Options" unique_id=1940039705]
+libraries/ = SubResource("AnimationLibrary_cgs1x")
 
-[node name="UpDownTimer" type="Timer" parent="Options"]
+[node name="UpDownTimer" type="Timer" parent="Options" unique_id=1750810383]
 one_shot = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_6fx66")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=499589477]
+libraries/ = SubResource("AnimationLibrary_6fx66")
 
 [connection signal="timeout" from="FlashTimer" to="." method="_on_flash_timer_timeout"]
 [connection signal="animation_finished" from="Options/AnimationPlayer" to="Options" method="_on_AnimationPlayer_animation_finished"]

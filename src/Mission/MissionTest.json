@@ -65,4 +65,11 @@
 			"talk_npc_d": [32,0],
 		},
 	},
+	"level_conversation_on_enter":{
+		"talk_npc_a": "cutscene_talk_npc_a",
+		"talk_npc_b": "cutscene_talk_npc_b",
+		"talk_npc_c": "cutscene_talk_npc_c",
+		"talk_npc_d": "cutscene_talk_npc_d",
+		"celebrate": "cutscene_celebrate",
+	},
 }

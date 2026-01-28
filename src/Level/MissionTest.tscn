@@ -1,38 +1,31 @@
-[gd_scene format=4]
+[gd_scene format=4 uid="uid://d32ixmoch3w5j"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_53evh"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_72to3"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_1n8rj"]
-[ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_8qmvv"]
-[ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="4_leir5"]
-[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_5uu0q"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="7_72to3"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_sexp1"]
-[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="9_if8wo"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="9_leir5"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="10_8jk8i"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="10_h4mej"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="11_1n8rj"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="12_if8wo"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="14_h4mej"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="16_gby2n"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_53evh"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_72to3"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_8qmvv"]
+[ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="4_leir5"]
+[ext_resource type="TileSet" uid="uid://dct5q86qhnom8" path="res://src/Tile/Debug.tres" id="5_5uu0q"]
+[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="7_72to3"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="9_if8wo"]
+[ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="9_leir5"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="10_h4mej"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="11_1n8rj"]
 
 [node name="MissionTest" type="Node2D" unique_id=734148647]
 visibility_layer = 2
 script = ExtResource("1_53evh")
 level_name = "MissionTest"
 dialog_json = "res://src/Dialog/MissionTest.json"
+conversation_on_enter = "cutscene_talk_npc_a"
 main_mission_level_update = "res://src/Mission/MissionTest.json"
 debug_main_mission_stage = "talk_npc_a"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1355825292 instance=ExtResource("2_72to3")]
+[node name="LevelLimiter" parent="." unique_id=1355825292 instance=ExtResource("2_72to3")]
 visibility_layer = 2
 offset_left = 16.0
 offset_top = 32.0
 offset_right = 576.0
 offset_bottom = 304.0
-mouse_filter = 2
-script = ExtResource("3_1n8rj")
 background_resource = ExtResource("3_8qmvv")
 texture = ExtResource("4_leir5")
 layers = 5
@@ -94,14 +87,9 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=1116492951]
 visibility_layer = 2
 
-[node name="Nun" type="Area2D" parent="Spawns" unique_id=1776323782 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_72to3")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Nun" parent="Spawns" unique_id=1776323782 instance=ExtResource("7_72to3")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(304, 288)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_sexp1")
 actor_path = "res://src/Actor/NPC/Nun.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -116,14 +104,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Tabith" type="Area2D" parent="Spawns" unique_id=1167471834 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_72to3")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Tabith" parent="Spawns" unique_id=1167471834 instance=ExtResource("7_72to3")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(64, 288)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_sexp1")
 actor_path = "res://src/Actor/NPC/Tabith.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -138,14 +121,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sage" type="Area2D" parent="Spawns" unique_id=757585549 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_72to3")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sage" parent="Spawns" unique_id=757585549 instance=ExtResource("7_72to3")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(144, 288)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_sexp1")
 actor_path = "res://src/Actor/NPC/Sage.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -160,14 +138,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Basil" type="Area2D" parent="Spawns" unique_id=282322422 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_72to3")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Basil" parent="Spawns" unique_id=282322422 instance=ExtResource("7_72to3")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(232, 288)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_sexp1")
 actor_path = "res://src/Actor/NPC/Basil.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -182,14 +155,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="ChestItem" type="Area2D" parent="Spawns" unique_id=201010743 groups=["Entities", "PropSpawns"] instance=ExtResource("9_leir5")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="ChestItem" parent="Spawns" unique_id=201010743 instance=ExtResource("9_leir5")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(360, 272)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_8jk8i")
 prop_path = "res://src/Prop/ChestItem.tscn"
 properties = {
 "editor_hidden": [false, 1],
@@ -197,14 +165,9 @@ properties = {
 "id": ["", 4]
 }
 
-[node name="BreakBlock" type="Area2D" parent="Spawns" unique_id=40938396 groups=["Entities", "PropSpawns"] instance=ExtResource("9_leir5")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock" parent="Spawns" unique_id=40938396 instance=ExtResource("9_leir5")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(32, 208)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_8jk8i")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -213,14 +176,9 @@ properties = {
 "id": ["box_a", 4]
 }
 
-[node name="BreakBlock1" type="Area2D" parent="Spawns" unique_id=914819466 groups=["Entities", "PropSpawns"] instance=ExtResource("9_leir5")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock1" parent="Spawns" unique_id=914819466 instance=ExtResource("9_leir5")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(112, 208)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_8jk8i")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -229,14 +187,9 @@ properties = {
 "id": ["box_b", 4]
 }
 
-[node name="BreakBlock2" type="Area2D" parent="Spawns" unique_id=1933557594 groups=["Entities", "PropSpawns"] instance=ExtResource("9_leir5")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock2" parent="Spawns" unique_id=1933557594 instance=ExtResource("9_leir5")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(192, 208)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_8jk8i")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -245,14 +198,9 @@ properties = {
 "id": ["box_c", 4]
 }
 
-[node name="BreakBlock3" type="Area2D" parent="Spawns" unique_id=1524820434 groups=["Entities", "PropSpawns"] instance=ExtResource("9_leir5")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock3" parent="Spawns" unique_id=1524820434 instance=ExtResource("9_leir5")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(272, 208)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_8jk8i")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -261,14 +209,9 @@ properties = {
 "id": ["box_d", 4]
 }
 
-[node name="Frog" type="Area2D" parent="Spawns" unique_id=901092885 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_72to3")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog" parent="Spawns" unique_id=901092885 instance=ExtResource("7_72to3")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(40, 176)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_sexp1")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -280,14 +223,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog1" type="Area2D" parent="Spawns" unique_id=521528727 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_72to3")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog1" parent="Spawns" unique_id=521528727 instance=ExtResource("7_72to3")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(120, 176)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_sexp1")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -299,14 +237,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog2" type="Area2D" parent="Spawns" unique_id=57133467 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_72to3")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog2" parent="Spawns" unique_id=57133467 instance=ExtResource("7_72to3")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(200, 176)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_sexp1")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -318,14 +251,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog3" type="Area2D" parent="Spawns" unique_id=103008614 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_72to3")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog3" parent="Spawns" unique_id=103008614 instance=ExtResource("7_72to3")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(280, 176)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_sexp1")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -337,17 +265,13 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Door" type="MarginContainer" parent="Spawns" unique_id=2122957837 groups=["TriggerSpawns"] instance=ExtResource("11_1n8rj")]
+[node name="Door" parent="Spawns" unique_id=2122957837 instance=ExtResource("11_1n8rj")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 32.0
 offset_top = 96.0
 offset_right = 48.0
 offset_bottom = 128.0
-mouse_filter = 2
-script = ExtResource("12_if8wo")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -361,17 +285,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door1" type="MarginContainer" parent="Spawns" unique_id=12704265 groups=["TriggerSpawns"] instance=ExtResource("11_1n8rj")]
+[node name="Door1" parent="Spawns" unique_id=12704265 instance=ExtResource("11_1n8rj")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 112.0
 offset_top = 96.0
 offset_right = 128.0
 offset_bottom = 128.0
-mouse_filter = 2
-script = ExtResource("12_if8wo")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -385,17 +305,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door2" type="MarginContainer" parent="Spawns" unique_id=1077282901 groups=["TriggerSpawns"] instance=ExtResource("11_1n8rj")]
+[node name="Door2" parent="Spawns" unique_id=1077282901 instance=ExtResource("11_1n8rj")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 192.0
 offset_top = 96.0
 offset_right = 208.0
 offset_bottom = 128.0
-mouse_filter = 2
-script = ExtResource("12_if8wo")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -409,17 +325,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door3" type="MarginContainer" parent="Spawns" unique_id=1453521036 groups=["TriggerSpawns"] instance=ExtResource("11_1n8rj")]
+[node name="Door3" parent="Spawns" unique_id=1453521036 instance=ExtResource("11_1n8rj")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 272.0
 offset_top = 96.0
 offset_right = 288.0
 offset_bottom = 128.0
-mouse_filter = 2
-script = ExtResource("12_if8wo")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -433,17 +345,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door4" type="MarginContainer" parent="Spawns" unique_id=1797776311 groups=["TriggerSpawns"] instance=ExtResource("11_1n8rj")]
+[node name="Door4" parent="Spawns" unique_id=1797776311 instance=ExtResource("11_1n8rj")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 400.0
 offset_top = 256.0
 offset_right = 416.0
 offset_bottom = 288.0
-mouse_filter = 2
-script = ExtResource("12_if8wo")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -457,17 +365,10 @@ properties = {
 }
 size_is_default = false
 
-[node name="VanishingPoint" type="Area2D" parent="." unique_id=9884164 groups=["VanishingPoints"] instance=ExtResource("9_if8wo")]
+[node name="VanishingPoint" parent="." unique_id=9884164 instance=ExtResource("9_if8wo")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(296, -152)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_h4mej")
 
-[node name="SpawnPoint" type="Area2D" parent="." unique_id=422711910 groups=["SpawnPoints"] instance=ExtResource("10_h4mej")]
+[node name="SpawnPoint" parent="." unique_id=422711910 instance=ExtResource("10_h4mej")]
 visibility_layer = 2
 position = Vector2(184, 288)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_gby2n")

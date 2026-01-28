@@ -120,4 +120,30 @@
 	"
 	/newchar,basil,NPC_D Congrats! You reached Stage celebrate!
 	",
+	
+	"cutscene_talk_npc_a":
+	"
+	welcome to the mission system demo!
+	",
+	
+	"cutscene_talk_npc_b":
+	"
+	welcome back! you need to talk to npc b!
+	",
+
+	"cutscene_talk_npc_c":
+	"
+	welcome back! you need to talk to npc c!
+	",
+
+	"cutscene_talk_npc_d":
+	"
+	welcome back! you need to talk to npc d!
+	",
+	
+	"cutscene_celebrate":
+	"
+	you finished all there is to see!
+	",
+
 }

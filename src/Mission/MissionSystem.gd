@@ -93,11 +93,11 @@ func update_level_via_main_mission(): #while already in level
 			if n.id == id:
 				n.conversation = data["npc_dialog_updates"][id][main_mission_stage]
 
+
+
 func setup_level_via_main_mission(): #on level enter
 	var json = load(w.current_level.main_mission_level_update)
 	var data = json.get_data()
-
-
 
 #allow_spawn
 	var enemy_allow_spawn_dict = get_matching_entities_values(data, "enemy_allow_spawn", "EnemySpawns", true)
@@ -142,10 +142,17 @@ func setup_level_via_main_mission(): #on level enter
 		k.allow_spawn += array_to_vector2(trigger_spawn_position_offset_dict[k])
 
 #npc_dialog_updates
-	for id in data["npc_dialog_updates"]:
-		for n in get_tree().get_nodes_in_group("NPCSpawns"):
-			if n.properties["id"][0] == id:
-				n.properties["conversation"][0] = data["npc_dialog_updates"][id][main_mission_stage]
+	if data.has("npc_dialog_updates"):
+		for id in data["npc_dialog_updates"]:
+			for n in get_tree().get_nodes_in_group("NPCSpawns"):
+				if n.properties["id"][0] == id:
+					n.properties["conversation"][0] = data["npc_dialog_updates"][id][main_mission_stage]
+
+#level_conversation_on_enter
+	if data.has("level_conversation_on_enter"):
+		for stage in data["level_conversation_on_enter"]:
+			if stage == main_mission_stage:
+				w.current_level.conversation_on_enter = data["level_conversation_on_enter"][stage]
 
 
 
