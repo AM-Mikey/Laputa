@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bgrifkxiitl3h"]
+[gd_resource type="TileSet" format=3 uid="uid://bgrifkxiitl3h"]
 
 [ext_resource type="Texture2D" uid="uid://whbm1xewuawf" path="res://assets/Tile/DogtownExterior/DogtownExterior0.png" id="1_uxqps"]
 
