@@ -154,12 +154,16 @@ func get_matching_entities_values(data, data_key, group, is_spawn) -> Dictionary
 	if data.has(data_key):
 		for id in data[data_key]:
 			for n in get_tree().get_nodes_in_group(group):
+				var correct_id = false
 				if is_spawn:
-					if n.properties["id"][0] == id:
-						out[n] = data[data_key][id][main_mission_stage]
+					if n.properties["id"][0] == id: correct_id = true
 				else:
-					if n.id == id:
+					if n.id == id: correct_id = true
+				if correct_id:
+					if data[data_key][id].has(main_mission_stage):
 						out[n] = data[data_key][id][main_mission_stage]
+					elif data[data_key][id].has("any"):
+						out[n] = data[data_key][id]["any"]
 	return out
 
 func array_to_vector2(array) -> Vector2:
