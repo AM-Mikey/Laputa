@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsjpymr2sylbl"]
+[gd_scene format=3 uid="uid://bsjpymr2sylbl"]
 
 [ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
 
@@ -40,7 +40,7 @@ _data = {
 &"RESET": SubResource("Animation_x6ej7")
 }
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" unique_id=1498046973]
 visibility_layer = 2
 script = ExtResource("8")
 development_stage = "alpha"
@@ -50,63 +50,59 @@ debug_visible = true
 gamemode = "pvp"
 start_level_path = "res://src/Level/PlaytestZone.tscn"
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=912648782]
 scroll_offset = Vector2(32, -222.25714)
 
-[node name="Back" type="Node2D" parent="."]
+[node name="Back" type="Node2D" parent="." unique_id=1451941770]
 visibility_layer = 2
 scale = Vector2(4, 4)
 
-[node name="Middle" type="Node2D" parent="."]
+[node name="Middle" type="Node2D" parent="." unique_id=906505202]
 visibility_layer = 2
 z_index = 1
 
-[node name="Front" type="Node2D" parent="."]
+[node name="Front" type="Node2D" parent="." unique_id=448726191]
 visibility_layer = 2
 z_index = 2
 
-[node name="MenuLayer" type="CanvasLayer" parent="."]
+[node name="InventoryLayer" type="CanvasLayer" parent="." unique_id=1283144760]
+
+[node name="BlackoutLayer" type="CanvasLayer" parent="." unique_id=1856051554]
 process_mode = 3
-layer = 5
+layer = 2
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
-[node name="DebugLayer" type="CanvasLayer" parent="."]
+[node name="HUDLayer" type="CanvasLayer" parent="." unique_id=345291776]
+process_mode = 3
+layer = 3
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+
+[node name="HUDGroup" type="CanvasGroup" parent="HUDLayer" unique_id=37916589]
+
+[node name="HUDAnimator" type="AnimationPlayer" parent="HUDLayer" unique_id=56331353]
+libraries/ = SubResource("AnimationLibrary_e2u31")
+autoplay = &"RESET"
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=1389692242]
+process_mode = 3
 layer = 4
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+
+[node name="EditorLayer" type="CanvasLayer" parent="." unique_id=1207639602]
+layer = 5
 scale = Vector2(2, 2)
 transform = Transform2D(2, 0, 0, 2, 0, 0)
 
-[node name="EditorLayer" type="CanvasLayer" parent="."]
-layer = 3
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=1159031028]
+layer = 6
 scale = Vector2(2, 2)
 transform = Transform2D(2, 0, 0, 2, 0, 0)
 
-[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="MenuLayer" type="CanvasLayer" parent="." unique_id=2033685382]
 process_mode = 3
-layer = 2
-visible = false
+layer = 7
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
-
-[node name="HUDLayer" type="CanvasLayer" parent="."]
-process_mode = 3
-layer = 2
-scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 0, 0)
-
-[node name="HUDGroup" type="CanvasGroup" parent="HUDLayer"]
-
-[node name="HUDAnimator" type="AnimationPlayer" parent="HUDLayer"]
-libraries = {
-&"": SubResource("AnimationLibrary_e2u31")
-}
-autoplay = "RESET"
-
-[node name="BlackoutLayer" type="CanvasLayer" parent="."]
-process_mode = 3
-layer = 3
-visible = false
-scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 0, 0)
-
-[node name="InventoryLayer" type="CanvasLayer" parent="."]
