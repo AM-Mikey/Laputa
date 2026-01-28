@@ -196,18 +196,19 @@ func do_death_routine(): #shadow this for individual enemies ##note this doesnt 
 	pass
 
 func do_death_drop():
-	if reward == 0:return
+	if reward == 0: return
 
 	var heart = HEART.instantiate()
 	var ammo = AMMO.instantiate()
 
 	#ammo chance
 	var player_needs_ammo = false
-	if (f.pc()):
-		for w in f.pc().get_node("GunManager/Guns").get_children():
-			if w.ammo < w.max_ammo:
+	if f.pc():
+		for g in f.pc().get_node("GunManager/Guns").get_children():
+			if g.ammo < g.max_ammo:
 				player_needs_ammo = true
-	if not player_needs_ammo:
+	if not player_needs_ammo: #doing it like this allows the xp_chance to stay the same
+		heart_chance += ammo_chance
 		ammo_chance = 0
 
 
