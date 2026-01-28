@@ -2,7 +2,6 @@ extends Trigger
 
 signal cue
 
-@export var id: String
 
 func _on_EnemyCue_body_entered(_body):
 	var enemies = get_tree().get_nodes_in_group("Enemies")

@@ -69,6 +69,8 @@ func _physics_process(_delta):
 		$VBox/HBox/C2/A/Middle.text = str(world.get_node("Middle").get_child_count())
 		$VBox/HBox/C2/A/Back.text = str(world.get_node("Back").get_child_count())
 
+		$VBox/HBox/C2/A/Main.text = str(ms.main_mission_stage)
+
 
 
 

@@ -1,16 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://c18gc2p5jqqid"]
+[gd_scene format=3 uid="uid://c18gc2p5jqqid"]
 
 [ext_resource type="Script" uid="uid://jaabhrcn20y5" path="res://src/Trigger/Door.gd" id="1"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 32)
 
-[node name="Door" type="Area2D" groups=["Doors", "LevelTriggers", "Triggers"]]
+[node name="Door" type="Area2D" unique_id=996687710 groups=["Doors", "LevelTriggers", "Triggers"]]
 collision_layer = 0
 script = ExtResource("1")
 color = Color(0, 0.4, 0, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2084038406]
 position = Vector2(8, 16)
 shape = SubResource("1")
 

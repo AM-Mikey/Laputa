@@ -113,11 +113,14 @@ func setup_level(): #TODO: clear undo history
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.visible = true
 		a.input_pickable = true
+		a.reinitialize()
 	for p in get_tree().get_nodes_in_group("PropSpawns"):
 		p.visible = true
 		p.input_pickable = true
+		p.reinitialize()
 	for t in get_tree().get_nodes_in_group("TriggerSpawns"):
 		t.visible = true
+		t.reinitialize()
 	for l in get_tree().get_nodes_in_group("SunLights"):
 		l.editor_enter()
 	for t in trigger_collection.get_children():

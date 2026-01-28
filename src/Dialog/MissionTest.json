@@ -1,0 +1,123 @@
+{
+	"a_s0":
+	"
+	/newchar,basil,NPC_A Main mission:
+	This progressed your mission stage /progress_main_mission
+	",
+	
+	"a_s1":
+	"
+	/newchar,basil,NPC_A Your Stage is talk_npc_b
+	I'm denying your progress. Talk to NPC B
+	",
+	
+	"a_s2":
+	"
+	/newchar,basil,NPC_A Your Stage is talk_npc_c
+	I'm denying your progress. Talk to NPC C
+	",
+
+	"a_s3":
+	"
+	/newchar,basil,NPC_A Your Stage is talk_npc_d
+	I'm denying your progress. Talk to NPC D
+	",
+	
+	"a_s4":
+	"
+	/newchar,basil,NPC_A Congrats! You reached Stage celebrate!
+	",
+	
+	
+	
+	"b_s0":
+	"
+	/newchar,basil,NPC_B Your Stage is talk_npc_a
+	I'm denying your progress. Talk to NPC A
+	",
+	
+	"b_s1":
+	"
+	/newchar,basil,NPC_B Main mission:
+	This progressed your mission stage /progress_main_mission
+	",
+	
+	"b_s2":
+	"
+	/newchar,basil,NPC_B Your Stage is talk_npc_c
+	I'm denying your progress. Talk to NPC C
+	",
+
+	"b_s3":
+	"
+	/newchar,basil,NPC_B Your Stage is talk_npc_d
+	I'm denying your progress. Talk to NPC D
+	",
+	
+	"b_s4":
+	"
+	/newchar,basil,NPC_B Congrats! You reached Stage celebrate!
+	",
+
+
+
+	"c_s0":
+	"
+	/newchar,basil,NPC_C Your Stage is talk_npc_a
+	I'm denying your progress. Talk to NPC A
+	",
+	
+	"c_s1":
+	"
+	/newchar,basil,NPC_C Your Stage is talk_npc_b
+	I'm denying your progress. Talk to NPC B
+	",
+	
+	"c_s2":
+	"
+	/newchar,basil,NPC_C Main mission:
+	This progressed your mission stage /progress_main_mission
+	",
+
+	"c_s3":
+	"
+	/newchar,basil,NPC_C Your Stage is talk_npc_d
+	I'm denying your progress. Talk to NPC D
+	",
+	
+	"c_s4":
+	"
+	/newchar,basil,NPC_C Congrats! You reached Stage celebrate!
+	",
+	
+	
+	
+	"d_s0":
+	"
+	/newchar,basil,NPC_D Your Stage is talk_npc_a
+	I'm denying your progress. Talk to NPC A
+	",
+	
+	"d_s1":
+	"
+	/newchar,basil,NPC_D Your Stage is talk_npc_b
+	I'm denying your progress. Talk to NPC B
+	",
+	
+	"d_s2":
+	"
+	/newchar,basil,NPC_D Your Stage is talk_npc_c
+	I'm denying your progress. Talk to NPC C
+	",
+
+	"d_s3":
+	"
+	/newchar,basil,NPC_D Main mission:
+	This progressed your mission stage /progress_main_mission
+	",
+	
+	"d_s4":
+	"
+	/newchar,basil,NPC_D Congrats! You reached Stage celebrate!
+	",
+}

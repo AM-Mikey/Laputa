@@ -5,15 +5,16 @@ const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 var save_path = "user://save.dat"
 var temp_path = "user://temp.dat"
 var data = {
-	 "player_data" : {},
-	"level_data" : {}
+	"player_data" : {},
+	"level_data" : {},
+	"mission_data" : {},
 	}
 
 @onready var w = get_tree().get_root().get_node("World")
 
 
 
-### SAVE/LOAD ###
+### SAVE ###
 
 func write_player_data_to_save(current_level):
 	var pc = f.pc()
@@ -46,6 +47,71 @@ func write_player_data_to_save(current_level):
 	print("player data written to save")
 
 
+
+
+func write_level_data_to_temp(current_level):
+	var limited_props = []
+	for p in get_tree().get_nodes_in_group("LimitedProps"):
+		var scoped_data = {
+			"name" : p.name,
+			"spent" : p.spent
+			}
+		limited_props.append(scoped_data)
+
+	var limited_triggers = []
+	for t in get_tree().get_nodes_in_group("LimitedTriggers"):
+		var scoped_data = {
+			"name" : t.name,
+			"spent" : t.spent
+			}
+		limited_triggers.append(scoped_data)
+
+	data["level_data"][current_level.level_name] = {
+		"limited_props": limited_props,
+		"limited_triggers": limited_triggers
+	}
+	write_to_file(temp_path, data)
+	print("level data saved to temp")
+
+
+
+func write_mission_data_to_save():
+	data["mission_data"] = {
+		"main_mission_stage" : ms.main_mission_stage,
+		}
+	write_to_file(save_path, data)
+	print("mission data written to save")
+
+
+### COPY ###
+
+func copy_level_data_from_save_to_temp():
+	var save_data = read_from_file(save_path)
+	if !save_data.has("level_data"):
+		print("no level data to copy from save to temp")
+		return
+	var scoped_data = {}
+	scoped_data["level_data"] = save_data["level_data"]
+	write_to_file(temp_path, scoped_data)
+	print("level data copied from save to temp")
+
+
+
+func copy_level_data_from_temp_to_save():
+	var temp_data = read_from_file(temp_path)
+	var save_data = read_from_file(save_path)
+	if !temp_data.has("level_data"):
+		print("no level data to copy from temp to save")
+		return
+	var scoped_data = {}
+	scoped_data["player_data"] = save_data["player_data"]
+	scoped_data["level_data"] = temp_data["level_data"]
+	write_to_file(save_path, scoped_data)
+	print("level data copied from temp to save")
+
+
+
+### LOAD ###
 
 func read_player_data_from_save():
 	var scoped_data = read_from_file(save_path)
@@ -97,61 +163,6 @@ func read_player_data_from_save():
 
 
 
-func write_level_data_to_temp(current_level):
-	var limited_props = []
-	for p in get_tree().get_nodes_in_group("LimitedProps"):
-		var scoped_data = {
-			"name" : p.name,
-			"spent" : p.spent
-			}
-		limited_props.append(scoped_data)
-
-	var limited_triggers = []
-	for t in get_tree().get_nodes_in_group("LimitedTriggers"):
-		var scoped_data = {
-			"name" : t.name,
-			"spent" : t.spent
-			}
-		limited_triggers.append(scoped_data)
-
-	data["level_data"][current_level.level_name] = {
-		"limited_props": limited_props,
-		"limited_triggers": limited_triggers
-	}
-	write_to_file(temp_path, data)
-	print("level data saved to temp")
-
-
-
-### COPY ###
-
-func copy_level_data_from_save_to_temp():
-	var save_data = read_from_file(save_path)
-	if !save_data.has("level_data"):
-		print("no level data to copy from save to temp")
-		return
-	var scoped_data = {}
-	scoped_data["level_data"] = save_data["level_data"]
-	write_to_file(temp_path, scoped_data)
-	print("level data copied from save to temp")
-
-
-func copy_level_data_from_temp_to_save():
-	var temp_data = read_from_file(temp_path)
-	var save_data = read_from_file(save_path)
-	if !temp_data.has("level_data"):
-		print("no level data to copy from temp to save")
-		return
-	var scoped_data = {}
-	scoped_data["player_data"] = save_data["player_data"]
-	scoped_data["level_data"] = temp_data["level_data"]
-	write_to_file(save_path, scoped_data)
-	print("level data copied from temp to save")
-
-
-
-### LOAD ###
-
 func read_level_data_from_temp(current_level):
 	check_dat_file_presence("save")
 	check_dat_file_presence("temp")
@@ -166,6 +177,7 @@ func read_level_data_from_temp(current_level):
 	print("level data loaded from temp")
 
 
+
 func read_level_data_from_save(current_level):
 	var scoped_data = read_from_file(save_path)
 	if !scoped_data["level_data"].has(current_level.level_name):
@@ -175,6 +187,13 @@ func read_level_data_from_save(current_level):
 	set_props_spent(current_level_data["limited_props"])
 	set_triggers_spent(current_level_data["limited_triggers"])
 	print("level data loaded from save")
+
+
+
+func read_mission_data_from_save():
+	var scoped_data = read_from_file(save_path)
+	ms.main_mission_stage = scoped_data["main_mission_stage"]
+	print("mission data loaded from save")
 
 
 

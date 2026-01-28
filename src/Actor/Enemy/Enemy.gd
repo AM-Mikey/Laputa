@@ -13,7 +13,6 @@ var state: String
 
 var disabled = false
 var protected = false
-@export var debug = false
 
 var hp: int
 var damage_on_contact: int
@@ -24,17 +23,16 @@ var die_sound = "enemy_die"
 var damage_number = null
 var just_spawned = true
 
-@export var id: String
-
 var reward = 1
 var heart_chance = 1
 var experience_chance = 3
 var ammo_chance = 1
 
+@export var debug = false
+@export var id: String
 
 @onready var w = get_tree().get_root().get_node("World")
 @onready var pc = f.pc()
-
 
 
 
@@ -179,10 +177,7 @@ func set_damagenum(damage):
 func die(quietly = false):
 	if dead: return
 	dead = true
-	if !pc:
-		pc = f.pc()
-	if pc:
-		pc.enemies_touching.erase(self)
+	f.pc().enemies_touching.erase(self)
 	if !quietly:
 		am.play(die_sound, self)
 		do_death_routine()
