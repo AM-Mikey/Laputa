@@ -86,7 +86,7 @@ func _input(event):
 			il.add_child(INVENTORY.instantiate())
 
 
-	if event.is_action_pressed("pause") and not ml.has_node("TitleScreen"):
+	if event.is_action_pressed("pause") && !ml.has_node("TitleScreen") && !el.has_node("Editor"):
 		if not ml.has_node("PauseMenu") and not get_tree().paused:
 			ml.add_child(PAUSEMENU.instantiate())
 
@@ -104,12 +104,14 @@ func first_time_level_setup():
 	add_child(JUNIPER.instantiate())
 	var pc = f.pc()
 	var player_camera = pc.get_node("PlayerCamera")
-	player_camera.position_smoothing_enabled = false
+	#player_camera.position_smoothing_enabled = false
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 
 	current_level = load(start_level_path).instantiate()
 	add_child(current_level)
-	ms.setup_level_via_main_mission()
+	ms.main_mission_stage = current_level.debug_main_mission_stage
+	if current_level.main_mission_level_update:
+		ms.setup_level_via_main_mission()
 	pc.global_position = get_spawn_point().global_position
 
 	match current_level.level_type:
@@ -122,11 +124,12 @@ func first_time_level_setup():
 			pc.queue_free()
 			f.hud().queue_free()
 
+
 	#wipe would go here if we want one
 	display_level_text(current_level)
 
-	await(get_tree().process_frame)
-	player_camera.position_smoothing_enabled = true
+	await get_tree().process_frame
+	#player_camera.position_smoothing_enabled = true
 
 
 func change_level_via_code(level_path, use_save_data):
@@ -154,7 +157,10 @@ func change_level_via_code(level_path, use_save_data):
 
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
-	ms.setup_level_via_main_mission()
+	if !use_save_data:
+		ms.main_mission_stage = current_level.debug_main_mission_stage
+	if current_level.main_mission_level_update:
+		ms.setup_level_via_main_mission()
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		$Juniper.global_position = s.global_position
 
@@ -174,6 +180,7 @@ func change_level_via_code(level_path, use_save_data):
 		SaveSystem.read_level_data_from_temp(current_level)
 
 	await get_tree().process_frame
+	await get_tree().process_frame
 	$Juniper/PlayerCamera.position_smoothing_enabled = true
 
 
@@ -190,8 +197,8 @@ func change_level_via_trigger(level_path, door_index):
 	await get_tree().process_frame
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
-	ms.setup_level_via_main_mission()
-
+	if current_level.main_mission_level_update:
+		ms.setup_level_via_main_mission()
 	$Juniper/PlayerCamera.position_smoothing_enabled = false
 
 	#### get the door with the right index
@@ -228,7 +235,6 @@ func change_level_via_trigger(level_path, door_index):
 			printerr("ERROR: more than one door with same index")
 
 	SaveSystem.read_level_data_from_temp(current_level)
-
 
 	###transition out
 	if bl.has_node("TransitionWipe"): #LOADZONES

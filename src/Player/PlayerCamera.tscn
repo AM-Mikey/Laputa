@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://brl16iyt5eq02"]
+[gd_scene format=3 uid="uid://brl16iyt5eq02"]
 
 [ext_resource type="Script" uid="uid://cxspdb8eq5n0h" path="res://src/Player/PlayerCamera.gd" id="1"]
 
-[node name="PlayerCamera" type="Camera2D" groups=["Cameras", "PlayerCameras"]]
+[node name="PlayerCamera" type="Camera2D" unique_id=1936706909 groups=["Cameras", "PlayerCameras"]]
 position = Vector2(0, -16)
 process_callback = 0
 limit_smoothed = true

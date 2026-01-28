@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://c5aj6gsmdwabf"]
+[gd_scene format=3 uid="uid://tepwyieuangy"]
 
-[node name="PlayerCameraDummy" type="Node2D"]
+[node name="PlayerCameraDummy" type="Node2D" unique_id=2065001330]
 
-[node name="ReferenceRect" type="ReferenceRect" parent="."]
+[node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=354282688]
 offset_left = -256.0
 offset_top = -144.0
 offset_right = 256.0

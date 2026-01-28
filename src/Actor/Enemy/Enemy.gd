@@ -177,10 +177,7 @@ func set_damagenum(damage):
 func die(quietly = false):
 	if dead: return
 	dead = true
-	if !pc:
-		pc = f.pc()
-	if pc:
-		pc.enemies_touching.erase(self)
+	f.pc().enemies_touching.erase(self)
 	if !quietly:
 		am.play(die_sound, self)
 		do_death_routine()

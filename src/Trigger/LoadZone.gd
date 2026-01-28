@@ -6,7 +6,7 @@ signal level_change(level, door_index)
 
 enum Direction {LEFT, RIGHT, UP, DOWN}
 
-@export var level: String
+@export_file("*.tscn") var level: String
 @export var door_index: int = 0
 @export var direction: Direction = Direction.RIGHT
 

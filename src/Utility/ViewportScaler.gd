@@ -35,6 +35,7 @@ func _viewport_size_changed():
 
 	emit_signal("scale_changed", resolution_scale)
 	await get_tree().process_frame
+	await get_tree().process_frame
 	if camera:
 		if camera.is_in_group("PlayerCameras"):
 			camera.position_smoothing_enabled = true

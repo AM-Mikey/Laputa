@@ -75,8 +75,7 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 
 func spawn():
 	await get_tree().process_frame #wait to set allow_spawn
-	if allow_spawn == false:
-		return
+	if !allow_spawn: return
 	if actor_path == null:
 		printerr("ERROR: no actor chosen in ActorSpawn")
 		return

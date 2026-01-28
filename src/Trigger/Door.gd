@@ -5,7 +5,7 @@ const TRANSITION = preload("res://src/Effect/Transition/TransitionIris.tscn")
 signal level_change(level, door_index)
 
 @export var same_level := false
-@export var level: String
+@export_file("*.tscn") var level: String
 @export var door_index: int = 0
 @export var same_level_next_index: int = 0
 @export var locked = false

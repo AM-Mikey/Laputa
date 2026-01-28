@@ -59,4 +59,34 @@
 			"celebrate": true,
 		},
 	},
+	"prop_runtime_position_offset":{
+		"box_a": {
+			"talk_npc_a": [32,0],
+			"talk_npc_b": [0,0],
+			"talk_npc_c": [0,0],
+			"talk_npc_d": [0,0],
+			"celebrate": [0,0],
+		},
+		"box_b": {
+			"talk_npc_a": [0,0],
+			"talk_npc_b": [32,0],
+			"talk_npc_c": [0,0],
+			"talk_npc_d": [0,0],
+			"celebrate": [0,0],
+		},
+		"box_c": {
+			"talk_npc_a": [0,0],
+			"talk_npc_b": [0,0],
+			"talk_npc_c": [32,0],
+			"talk_npc_d": [0,0],
+			"celebrate": [0,0],
+		},
+		"box_d": {
+			"talk_npc_a": [0,0],
+			"talk_npc_b": [0,0],
+			"talk_npc_c": [0,0],
+			"talk_npc_d": [32,0],
+			"celebrate": [0,0],
+		},
+	},
 }

@@ -221,7 +221,7 @@ func on_property_selected(property_name):
 					$FileDialog.current_dir = "res://src/Dialog/"
 					$FileDialog.set_filters(PackedStringArray(["*.json"]))
 					$FileDialog.popup()
-		"trigger":
+		"trigger_spawn":
 			match property_name:
 				"level":
 					$FileDialog.current_dir = "res://src/Level/"
