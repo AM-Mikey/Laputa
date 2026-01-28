@@ -41,8 +41,6 @@ func exit():
 	get_tree().paused = false
 	w.hl.visible = true
 	w.ui.visible = true
-	var pc = f.pc()
-	pc.emit_signal("guns_updated", pc.guns.get_children())
 	queue_free()
 
 

@@ -41,6 +41,7 @@ func setup(): #pass to class child
 	pass
 
 func next_animation_frame(group, group_name):
+	await get_tree().physics_frame
 	var max_frame = frame_counts[group_name] - 1
 	if current_frames[group_name] == max_frame:
 		current_frames[group_name] = 0

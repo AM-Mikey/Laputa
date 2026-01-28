@@ -66,6 +66,10 @@ config/use_custom_user_dir=true
 config/features=PackedStringArray("4.6")
 config/icon="uid://b42so8fnnp3uq"
 
+[audio]
+
+buses/default_bus_layout="uid://c2jgypabye4cc"
+
 [autoload]
 
 am="*res://src/Audio/AudioManager.gd"
@@ -394,10 +398,8 @@ debug_testbutton={
 
 [layer_names]
 
-2d_render/layer_1="default"
-2d_render/layer_2="player"
-2d_render/layer_3="enemy"
-2d_render/layer_4="world"
+2d_render/layer_1="nonrenderaligned"
+2d_render/layer_2="renderaligned"
 2d_physics/layer_1="player"
 2d_physics/layer_2="enemy"
 2d_physics/layer_3="item"

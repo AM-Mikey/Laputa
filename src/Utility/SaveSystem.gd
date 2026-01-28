@@ -117,7 +117,7 @@ func read_player_data_from_save():
 	var scoped_data = read_from_file(save_path)
 	var player_data = scoped_data["player_data"]
 
-	w.change_level_via_code(player_data["current_level"])
+	w.change_level_via_code(player_data["current_level"], true)
 	await get_tree().process_frame
 
 	var pc = f.pc()
