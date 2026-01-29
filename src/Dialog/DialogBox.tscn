@@ -4804,6 +4804,7 @@ mouse_filter = 1
 script = ExtResource("1")
 
 [node name="Flat" type="Control" parent="." unique_id=1739004173]
+visible = false
 anchors_preset = 0
 
 [node name="Blur" type="Polygon2D" parent="Flat" unique_id=2015097307]
@@ -4840,7 +4841,6 @@ scroll_active = false
 scroll_following = true
 
 [node name="NPC" type="Control" parent="." unique_id=231870637]
-visible = false
 anchors_preset = 0
 
 [node name="Blur" type="Polygon2D" parent="NPC" unique_id=1739696838]
@@ -5002,6 +5002,7 @@ one_shot = true
 [node name="FlashTimer" type="Timer" parent="." unique_id=810114501]
 
 [node name="Options" type="Control" parent="." unique_id=965386542]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0

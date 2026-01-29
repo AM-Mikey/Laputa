@@ -66,7 +66,6 @@ var sound_profile = SoundProfile.NORMAL:
 
 
 @onready var w = get_tree().get_root().get_node("World")
-@onready var HUD
 @onready var mm = get_node("MovementManager")
 @onready var gm = get_node("GunManager")
 @onready var guns = get_node("GunManager/Guns")

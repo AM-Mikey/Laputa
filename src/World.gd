@@ -103,33 +103,24 @@ func first_time_level_setup():
 	add_child(JUNIPER.instantiate())
 	var pc = f.pc()
 	var player_camera = pc.get_node("PlayerCamera")
-	#player_camera.position_smoothing_enabled = false
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 
 	current_level = load(start_level_path).instantiate()
 	add_child(current_level)
-	ms.main_mission_stage = current_level.debug_main_mission_stage
+	if current_level.debug_main_mission_stage:
+		ms.main_mission_stage = current_level.debug_main_mission_stage
 	if current_level.main_mission_level_update:
 		ms.setup_level_via_main_mission()
 	pc.global_position = get_spawn_point().global_position
 
-	match current_level.level_type:
-		current_level.LevelType.NORMAL:
-			if current_level.has_node("LevelCamera"):
-				player_camera.enabled = false
-			else:
-				player_camera.enabled = true
-		current_level.LevelType.PLAYERLESS_CUTSCENE:
-			pc.queue_free()
-			f.hud().queue_free()
-
+	if current_level.has_node("LevelCamera"):
+		player_camera.enabled = false
+	else:
+		player_camera.enabled = true
 
 	#wipe would go here if we want one
 	display_level_text(current_level)
-
-	await get_tree().process_frame
-	#player_camera.position_smoothing_enabled = true
-
+	run_conversation_on_enter(current_level)
 
 func change_level_via_code(level_path, use_save_data):
 	print("changing level via code...")
@@ -140,8 +131,7 @@ func change_level_via_code(level_path, use_save_data):
 		ml.get_node("PauseMenu").exit()
 	if has_node("MenuLayer/LevelSelect"):
 		get_node("MenuLayer/LevelSelect").queue_free()
-	if ui.has_node("DialogBox"):
-		$UILayer/DialogBox.exit()
+	if ui.has_node("DialogBox"): await $UILayer/DialogBox.exit()
 	if f.hud():
 		$HUDLayer/HUDAnimator.play("RESET")
 		f.hud().free()
@@ -153,28 +143,27 @@ func change_level_via_code(level_path, use_save_data):
 	add_child(JUNIPER.instantiate())
 	$Juniper/PlayerCamera.position_smoothing_enabled = false
 	$Juniper.velocity = Vector2.ZERO
+	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
 	if !use_save_data:
-		ms.main_mission_stage = current_level.debug_main_mission_stage
+		if current_level.debug_main_mission_stage:
+			ms.main_mission_stage = current_level.debug_main_mission_stage
 	if current_level.main_mission_level_update:
 		ms.setup_level_via_main_mission()
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		$Juniper.global_position = s.global_position
 
-	match current_level.level_type:
-		current_level.LevelType.NORMAL:
-			get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
-			if current_level.has_node("LevelCamera"):
-				$Juniper/PlayerCamera.enabled = false
-			else:
-				$Juniper/PlayerCamera.enabled = true
-		current_level.LevelType.PLAYERLESS_CUTSCENE:
-			$Juniper.visible = false
+
+	if current_level.has_node("LevelCamera"):
+		$Juniper/PlayerCamera.enabled = false
+	else:
+		$Juniper/PlayerCamera.enabled = true
 
 	#wipe would go here if we want one
 	display_level_text(current_level)
+	run_conversation_on_enter(current_level)
 	if use_save_data:
 		SaveSystem.read_level_data_from_temp(current_level)
 
@@ -186,14 +175,15 @@ func change_level_via_code(level_path, use_save_data):
 func change_level_via_trigger(level_path, door_index):
 	print("changing level via trigger...")
 	SaveSystem.write_level_data_to_temp(current_level)
-	if ui.has_node("DialogBox"): $UILayer/DialogBox.exit()
-	$HUDLayer/HUDAnimator.play("RESET")
+	if ui.has_node("DialogBox"): await $UILayer/DialogBox.exit()
+	if f.hud():
+		$HUDLayer/HUDAnimator.play("RESET")
 	clear_spawn_layers()
 	var old_level_path = current_level.scene_file_path
 	current_level.free()
 	current_level = null
 
-	await get_tree().process_frame
+	#await get_tree().process_frame
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
 	if current_level.main_mission_level_update:
@@ -203,15 +193,14 @@ func change_level_via_trigger(level_path, door_index):
 	#### get the door with the right index
 	var doors_found = 0
 	await get_tree().process_frame #give time for triggers to load
+	await get_tree().process_frame
 	var triggers = get_tree().get_nodes_in_group("LevelTriggers")
 	for t in triggers:
-		var old_level_name = old_level_path.trim_prefix("res://src/Level/").trim_suffix(".tscn")
-
 		var do_door_check = false
 		if t.is_in_group("Doors"):
 			if t.same_level and t.door_index == door_index:
 				do_door_check = true
-		if t.level == old_level_name and t.door_index == door_index:
+		if t.level == old_level_path and t.door_index == door_index:
 			do_door_check = true
 
 		if do_door_check:
@@ -226,6 +215,7 @@ func change_level_via_trigger(level_path, door_index):
 					_: printerr("ERROR: Invalid direction on Load Zone")
 			elif t.is_in_group("Doors"):
 				$Juniper.global_position = t.global_position + Vector2(size.x * 0.5, size.y)
+
 
 		#print("doors: ", doors_found)
 		if doors_found == 0:
@@ -250,18 +240,12 @@ func change_level_via_trigger(level_path, door_index):
 
 	if (old_level_path != level_path):
 		display_level_text(current_level)
+	run_conversation_on_enter(current_level)
 	#await get_tree().create_timer(0.01).timeout
 	$Juniper/PlayerCamera.position_smoothing_enabled = true
 
-	if current_level.level_type == current_level.LevelType.PLAYERLESS_CUTSCENE: #TODO: change how these work
-		#TODO: right now juniper isn't unloaded between levels
-		$Juniper.queue_free()
-		f.hud().queue_free()
 
-
-
-
-
+### HELPERS ###
 
 func display_level_text(level):
 	if ui.has_node("LevelText"):
@@ -270,7 +254,12 @@ func display_level_text(level):
 	level_text.text = level.name #TODO: in final version switch this to display name
 	ui.add_child(level_text)
 
-
+func run_conversation_on_enter(level):
+	if level.conversation_on_enter:
+		if level.level_type == level.LevelType.PLAYERLESS_CUTSCENE:
+			level.do_conversation_on_enter(true)
+		else:
+			level.do_conversation_on_enter(false)
 
 func clear_spawn_layers():
 	for c in back.get_children():

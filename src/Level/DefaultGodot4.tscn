@@ -3,21 +3,17 @@
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="1_4uhn8"]
 [ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="2_s4ctt"]
 [ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_abgb0"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_c0l8s"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_iuj41"]
 [ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="5_sjslv"]
 [ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="5_v7nqo"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="6_dcw0l"]
-[ext_resource type="PackedScene" path="res://src/Effect/Light/SunLight.tscn" id="6_mcn17"]
 [ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="7_mlr58"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_v7nqo"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_jjgiq"]
-[ext_resource type="PackedScene" path="res://src/Utility/Waypoint.tscn" id="9_20ig1"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="10_j7c6d"]
-[ext_resource type="Script" path="res://src/Effect/Light/SunLight.gd" id="12_ug36o"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="14_lw0ap"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="16_wcveo"]
-[ext_resource type="Script" path="res://src/Utility/Waypoint.gd" id="18_hahi5"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_njn3k"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="10_yl2sd"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="12_v7nqo"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="14_c0l8s"]
 
 [node name="DefaultGodot4" type="Node2D" unique_id=1165197377]
 visibility_layer = 2
@@ -28,12 +24,12 @@ dialog_json = "res://src/Dialog/Village.json"
 
 [node name="LevelLimiter" type="MarginContainer" parent="." unique_id=10937438 instance=ExtResource("3_t226a")]
 visibility_layer = 2
-offset_left = -256.0
-offset_top = -512.0
-offset_right = 1088.0
-offset_bottom = 192.0
+offset_left = 1632.0
+offset_top = 1744.0
+offset_right = 2976.0
+offset_bottom = 2288.0
 mouse_filter = 2
-script = ExtResource("3_c0l8s")
+script = ExtResource("3_iuj41")
 background_resource = ExtResource("3_abgb0")
 texture = ExtResource("5_v7nqo")
 layers = 5
@@ -61,28 +57,28 @@ z_index = 1
 visibility_layer = 2
 z_index = -1
 use_parent_material = true
-tile_map_data = PackedByteArray("AAAHAPf/AAAAAAAAAAAGAPf/AAAAAAAAAAAFAPf/AAAAAAAAAAAFAPj/AAAAAAAAAAAGAPj/AAAAAAAAAAAHAPj/AAAAAAAAAAAHAPb/AAAAAAAAAAAGAPb/AAAAAAAAAAAFAPb/AAAAAAAAAAAEAPn/AAAAAAAAAAAFAPn/AAAAAAAAAAAGAPn/AAAAAAAAAAAHAPn/AAAAAAAAAAAFAPX/AAAAAAAAAAAGAPX/AAAAAAAAAAAFAPP/AAAAAAAAAAAFAPT/AAAAAAAAAAAGAPT/AAAAAAAAAAAHAPT/AAAAAAAAAAAHAPX/AAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAB7AHYAAAAAAAAAAAB7AHcAAAAAAAAAAAB8AHcAAAAAAAAAAAB9AHcAAAAAAAAAAAB7AHgAAAAAAAAAAAB8AHgAAAAAAAAAAAB9AHgAAAAAAAAAAAB7AHkAAAAAAAAAAAB8AHkAAAAAAAAAAAB9AHkAAAAAAAAAAAB7AHoAAAAAAAAAAAB8AHoAAAAAAAAAAAB9AHoAAAAAAAAAAAB7AHsAAAAAAAAAAAB8AHsAAAAAAAAAAAB9AHsAAAAAAAAAAAB6AHwAAAAAAAAAAAB7AHwAAAAAAAAAAAB8AHwAAAAAAAAAAAB9AHwAAAAAAAAAAAA=")
 tile_set = ExtResource("2_s4ctt")
 
 [node name="Back" type="TileMapLayer" parent="TileMap" unique_id=387206527]
 visibility_layer = 2
 z_index = -1
 use_parent_material = true
-tile_map_data = PackedByteArray("AADx/woAAAAAAAcAAADy/woAAAAAAAcAAADz/woAAAAAAAcAAAD0/woAAAAAAAcAAAD1/woAAAAAAAcAAAD2/woAAAAAAAcAAAD3/woAAAAAAAcAAAD3/wkAAAAAAAcAAAD4/wkAAAAAAAcAAAD4/wgAAAAAAAcAAAD4/woAAAAAAAcAAAD2/wkAAAAAAAcAAAD1/wkAAAAAAAcAAAD0/wkAAAAAAAcAAAD0/wgAAAAAAAcAAADz/wgAAAAAAAcAAADy/wgAAAAAAAcAAADx/wgAAAAAAAcAAADy/wkAAAAAAAcAAADz/wkAAAAAAAcAAADx/wkAAAAAAAcAAADx/wcAAAAAAAcAAADx/wYAAAAAAAcAAADy/wYAAAAAAAcAAADz/wYAAAAAAAcAAAD0/wYAAAAAAAcAAAD1/wcAAAAAAAcAAAD2/wcAAAAAAAcAAAD2/wgAAAAAAAcAAAD1/wgAAAAAAAcAAAD0/wcAAAAAAAcAAADz/wcAAAAAAAcAAADy/wcAAAAAAAcAAAD3/wcAAAAAAAcAAAD3/wgAAAAAAAcAAAD4/wcAAAAAAAcAAAD4/wYAAAAAAAcAAAD3/wYAAAAAAAcAAAD2/wYAAAAAAAcAAAD1/wYAAAAAAAcAAADx/wUAAAAAAAYAAADy/wUAAAAAAAYAAADz/wUAAAAAAAYAAAD0/wUAAAAAAAYAAAD1/wUAAAAAAAYAAAD2/wUAAAAAAAYAAAD3/wUAAAAAAAYAAAD4/wUAAAAAAAYAAAAVAAUAAAABAAQAAAAVAAQAAAABAAQAAAAVAAMAAAABAAQAAAAVAAIAAAABAAQAAAAVAAEAAAABAAQAAAAVAAAAAAABAAQAAAAGAP//AAADAAQAAAAFAAkAAAAAAAQAAAAFAAoAAAAAAAUAAAAJAAkAAAAAAAQAAAAJAAoAAAAAAAUAAAAQAAkAAAAAAAQAAAAQAAoAAAAAAAUAAAADAP//AAAEAAQAAAA=")
+tile_map_data = PackedByteArray("AAB5AIIAAAAEAAQAAAB8AIIAAAADAAQAAACLAIMAAAABAAQAAACLAIQAAAABAAQAAACLAIUAAAABAAQAAACLAIYAAAABAAQAAACLAIcAAAABAAQAAABnAIgAAAAAAAYAAABoAIgAAAAAAAYAAABpAIgAAAAAAAYAAABqAIgAAAAAAAYAAABrAIgAAAAAAAYAAABsAIgAAAAAAAYAAABtAIgAAAAAAAYAAABuAIgAAAAAAAYAAACLAIgAAAABAAQAAABnAIkAAAAAAAcAAABoAIkAAAAAAAcAAABpAIkAAAAAAAcAAABqAIkAAAAAAAcAAABrAIkAAAAAAAcAAABsAIkAAAAAAAcAAABtAIkAAAAAAAcAAABuAIkAAAAAAAcAAABnAIoAAAAAAAcAAABoAIoAAAAAAAcAAABpAIoAAAAAAAcAAABqAIoAAAAAAAcAAABrAIoAAAAAAAcAAABsAIoAAAAAAAcAAABtAIoAAAAAAAcAAABuAIoAAAAAAAcAAABnAIsAAAAAAAcAAABoAIsAAAAAAAcAAABpAIsAAAAAAAcAAABqAIsAAAAAAAcAAABrAIsAAAAAAAcAAABsAIsAAAAAAAcAAABtAIsAAAAAAAcAAABuAIsAAAAAAAcAAABnAIwAAAAAAAcAAABoAIwAAAAAAAcAAABpAIwAAAAAAAcAAABqAIwAAAAAAAcAAABrAIwAAAAAAAcAAABsAIwAAAAAAAcAAABtAIwAAAAAAAcAAABuAIwAAAAAAAcAAAB7AIwAAAAAAAQAAAB/AIwAAAAAAAQAAACGAIwAAAAAAAQAAABnAI0AAAAAAAcAAABoAI0AAAAAAAcAAABpAI0AAAAAAAcAAABqAI0AAAAAAAcAAABrAI0AAAAAAAcAAABsAI0AAAAAAAcAAABtAI0AAAAAAAcAAABuAI0AAAAAAAcAAAB7AI0AAAAAAAUAAAB/AI0AAAAAAAUAAACGAI0AAAAAAAUAAAA=")
 tile_set = ExtResource("2_s4ctt")
 
 [node name="Front" type="TileMapLayer" parent="TileMap" unique_id=2126912126]
 visibility_layer = 2
 z_index = 1
 use_parent_material = true
-tile_map_data = PackedByteArray("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AAAqAAsAAAAAAAgAAAApAAsAAAAAAAgAAAAoAAsAAAAAAAgAAAAnAAsAAAAAAAgAAAAQAAAAAAAGAAgAAAD+//n/AAAGAAgAAAD+//v/AAAGAAgAAAABAPv/AAAGAAgAAAABAPn/AAAGAAgAAAAjAAMAAAAAAAgAAAAkAAMAAAAAAAgAAAAeAAMAAAAAAAgAAAAfAAMAAAAAAAgAAAD4//z/AAAAAAgAAAD3//z/AAAAAAgAAAD2//z/AAAAAAgAAADy//z/AAAAAAgAAADx//z/AAAAAAgAAADw//z/AAAAAAgAAADv//z/AAAAAAgAAADz/wEAAAAAAAgAAAD0/wEAAAAAAAgAAAD1/wEAAAAAAAgAAAD2/wEAAAAAAAgAAADw/wsAAAAAAAgAAADx/wsAAAAAAAgAAADy/wsAAAAAAAgAAADz/wsAAAAAAAgAAAD0/wsAAAAAAAgAAAD1/wsAAAAAAAgAAAD2/wsAAAAAAAgAAAD3/wsAAAAAAAgAAAD4/wsAAAAAAAgAAAD5/wsAAAAAAAgAAAD5/woAAAAAAAgAAAD5/wkAAAAAAAgAAAD5/wgAAAAAAAgAAAD5/wcAAAAAAAgAAAD5/wYAAAAAAAgAAAD5/wUAAAAAAAgAAAD6/wsAAAAAAAgAAAD7/wsAAAAAAAgAAAD8/wsAAAAAAAgAAAD9/wsAAAAAAAgAAAD+/wsAAAAAAAgAAADw/wUAAAAAAAgAAADw/wYAAAAAAAgAAADw/wcAAAAAAAgAAADw/wgAAAAAAAgAAADw/wkAAAAAAAgAAADw/woAAAAAAAgAAADz/wgAAAAAAAgAAAD2/wgAAAAAAAgAAAD6/wgAAAAGAAgAAAD1//n/AAAAAAgAAAD2//n/AAAAAAgAAAD3//n/AAAAAAgAAAD4//n/AAAAAAgAAAD5//n/AAAAAAgAAAD9//n/AAAAAAgAAAAvAAMAAAAAAAgAAAAwAAMAAAAAAAgAAAAxAAMAAAAAAAgAAAAyAAMAAAAAAAgAAAAzAAMAAAAAAAgAAAA0AAMAAAAAAAgAAAA1AAMAAAAAAAgAAAA2AAMAAAAAAAgAAAA3AAMAAAAAAAgAAAA4AAMAAAAAAAgAAAA5AAMAAAAAAAgAAAA6AAMAAAAAAAgAAAA7AAMAAAAAAAgAAAA8AAMAAAAAAAgAAAA9AAMAAAAAAAgAAAA+AAMAAAAAAAgAAAA/AAMAAAAAAAgAAABAAAMAAAAAAAgAAABBAAMAAAAAAAgAAABCAAMAAAAAAAgAAABDAAMAAAAAAAgAAAAvAP//AAAAAAgAAAAvAP7/AAAAAAgAAAAvAP3/AAAAAAgAAAAwAP3/AAAAAAgAAAAxAP3/AAAAAAgAAAAyAP3/AAAAAAgAAAAzAP3/AAAAAAgAAAA0AP3/AAAAAAgAAAA1AP3/AAAAAAgAAAA2AP3/AAAAAAgAAAA3AP3/AAAAAAgAAAA4AP3/AAAAAAgAAAA5AP3/AAAAAAgAAAA6AP3/AAAAAAgAAAA7AP3/AAAAAAgAAAA8AP3/AAAAAAgAAAA9AP3/AAAAAAgAAAA+AP3/AAAAAAgAAAA/AP3/AAAAAAgAAABAAP3/AAAAAAgAAABBAP3/AAAAAAgAAABCAP3/AAAAAAgAAABDAP3/AAAAAAgAAABDAP7/AAAAAAgAAABDAP//AAAAAAgAAAAsAAQAAAAAAAgAAAAtAAQAAAAAAAgAAAAuAAQAAAAAAAgAAADz//z/AAAAAAgAAAD0//z/AAAAAAgAAAD1//z/AAAAAAgAAADz//n/AAAAAAgAAAD0//n/AAAAAAgAAAD0//f/AAAAAAgAAAD0//j/AAAAAAgAAAD0//b/AAAAAAgAAAD6//n/AAAAAAgAAAD7//n/AAAAAAgAAAANAPD/AAAAAAgAAAANAPH/AAAAAAgAAAANAPL/AAAAAAgAAAANAPP/AAAAAAgAAAANAPT/AAAAAAgAAAANAPX/AAAAAAgAAAANAPb/AAAAAAgAAAAFAPD/AAAGAAgAAAAHAPD/AAAAAAgAAAAIAPD/AAAAAAgAAAAJAPD/AAAAAAgAAAAKAPD/AAAAAAgAAAALAPD/AAAAAAgAAAAMAPD/AAAAAAgAAAAFAPH/AAAAAAgAAAAFAPL/AAAAAAgAAAAFAPP/AAAAAAgAAAAFAPT/AAAAAAgAAAAFAPX/AAAAAAgAAAAFAPb/AAAAAAgAAAAFAPf/AAAAAAgAAAAFAPj/AAAAAAgAAAAFAPn/AAAAAAgAAAAHAPr/AAAIAAkAAAAKAPr/AAAIAAkAAAALAPr/AAAIAAkAAAAMAPr/AAAIAAkAAAD//wAAAAAAAAgAAAD3//f/AAAAAAgAAAD3//j/AAAAAAgAAAACAPn/AAAAAAgAAAADAPn/AAAAAAgAAAAEAPn/AAAAAAgAAAD6/wIAAAAAAAgAAAD//wQAAAAAAAkAAAD9/wQAAAAAAAgAAAD+/wQAAAAAAAgAAAD8/wMAAAAAAAgAAAD8/wQAAAAAAAgAAAD+/wIAAAAAAAgAAAAAAAoAAAAAAAgAAAD//wIAAAAAAAgAAAAKAAoAAAAAAAgAAAADAPv/AAAAAAgAAAACAPv/AAAAAAgAAAAEAAIAAAAHAAkAAAAFAAQAAAAHAAkAAAAGAAYAAAAHAAkAAAAHAAgAAAAHAAkAAAADAAEAAAAGAAoAAAADAAIAAAAGAAsAAAAEAAMAAAAGAAoAAAAEAAQAAAAGAAsAAAAFAAUAAAAGAAoAAAAGAAcAAAAGAAoAAAAGAAgAAAAGAAsAAAAFAAAAAAAGAAoAAAAFAAEAAAAGAAsAAAAGAAIAAAAGAAoAAAAGAAMAAAAGAAsAAAAGAAEAAAAAAAgAAAANAP7/AAAAAAgAAAAOAP7/AAAAAAgAAAAPAP7/AAAAAAgAAAAQAP7/AAAAAAgAAAANAP3/AAAEAAgAAAAOAPz/AAAEAAgAAAAPAPz/AAAFAAgAAAAQAP3/AAAFAAgAAAAOAP3/AAAAAAgAAAAPAP3/AAAAAAgAAAAMAPn/AAAAAAgAAAAMAPj/AAAAAAgAAAAMAPf/AAAAAAgAAAAMAPb/AAAAAAgAAAD2//v/AAAHAAkAAAD6//f/AAAFAAgAAAD5//f/AAAEAAgAAAD7//X/AAAGAAgAAADz/wkAAAAAAAgAAAAeAAsAAAAAAAgAAAAfAAsAAAAAAAgAAAAhAAsAAAAAAAgAAAAiAAsAAAAAAAgAAAAjAAsAAAAAAAgAAAAkAAsAAAAAAAgAAAAlAAsAAAAAAAgAAAAmAAsAAAAAAAgAAAAgAAsAAAAAAAgAAAAsAAsAAAAAAAkAAAAtAAsAAAAAAAkAAAAuAAsAAAAAAAkAAAAjAAoAAAAAAAgAAAAAAO7/AAAAAAkAAAABAO7/AAAAAAkAAAACAO7/AAAAAAkAAAADAO7/AAAAAAkAAAAQAPD/AAAAAAgAAAARAPD/AAAAAAgAAAASAPD/AAAAAAgAAAAQAO3/AAAAAAgAAAAQAO7/AAAAAAgAAAACAO//AAAAAAkAAAAYAPD/AAAAAAgAAAAZAPD/AAAAAAgAAAAaAPD/AAAAAAgAAAAbAPD/AAAAAAgAAAAcAPD/AAAAAAgAAAAXAPD/AAAAAAgAAAATAPD/AAAAAAgAAAAUAPD/AAAAAAgAAAA=")
+tile_map_data = PackedByteArray("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")
 tile_set = ExtResource("2_s4ctt")
 
 [node name="FarFront" type="TileMapLayer" parent="TileMap" unique_id=1690667449]
 visibility_layer = 2
 z_index = 2
 use_parent_material = true
-tile_map_data = PackedByteArray("AADz/wAAAAADAA0AAAD0/wAAAAADAA0AAAD1/wAAAAADAA0AAAD2/wAAAAADAA0AAAASAP//AAADAA0AAAD//+3/AAAIAAwAAAAFAO3/AAAIAAwAAAD9//D/AAAIAAwAAAD7//X/AAAIAAwAAAADAPD/AAAAAAwAAAABAPD/AAAAAAwAAAD///D/AAAAAAwAAAD7//D/AAAAAAwAAAA=")
+tile_map_data = PackedByteArray("AAB1AHAAAAAIAAwAAAB7AHAAAAAIAAwAAABxAHMAAAAAAAwAAABzAHMAAAAIAAwAAAB1AHMAAAAAAAwAAAB3AHMAAAAAAAwAAAB5AHMAAAAAAAwAAABxAHgAAAAIAAwAAACIAIIAAAADAA0AAABpAIMAAAADAA0AAABqAIMAAAADAA0AAABrAIMAAAADAA0AAABsAIMAAAADAA0AAAA=")
 tile_set = ExtResource("2_s4ctt")
 
 [node name="Props" type="Node2D" parent="." unique_id=96715822]
@@ -98,36 +94,14 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=993935856]
 visibility_layer = 2
 
-[node name="Child" type="Area2D" parent="Spawns" unique_id=1811182026 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(-40, 0)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_jjgiq")
-actor_path = "res://src/Actor/NPC/Child.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"conversation": ["branchtest4", 4],
-"dialog_json": ["res://src/Dialog/Village.json", 4],
-"editor_hidden": [false, 1],
-"id": ["child", 4],
-"speed": [Vector2(100, 100), 5],
-"starting_state": ["", 4],
-"voiced": [true, 1],
-"walk_speed": [Vector2(50, 50), 5],
-"water_gravity": [150.0, 3]
-}
-
 [node name="Frog" type="Area2D" parent="Spawns" unique_id=517586733 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(280, -192)
+position = Vector2(2168, 1904)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_jjgiq")
+script = ExtResource("8_njn3k")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -139,36 +113,14 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Nun" type="Area2D" parent="Spawns" unique_id=545318789 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(336, 176)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_jjgiq")
-actor_path = "res://src/Actor/NPC/Nun.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"conversation": ["simpletest", 4],
-"dialog_json": ["res://src/Dialog/Village.json", 4],
-"editor_hidden": [false, 1],
-"id": ["nun", 4],
-"speed": [Vector2(150, 350), 5],
-"starting_state": ["walk", 4],
-"voiced": [true, 1],
-"walk_speed": [Vector2(50, 50), 5],
-"water_gravity": [150.0, 3]
-}
-
 [node name="Stalagtite" type="Area2D" parent="Spawns" unique_id=1099828600 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(328, -112)
+position = Vector2(2216, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_jjgiq")
+script = ExtResource("8_njn3k")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -184,10 +136,10 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(360, -112)
+position = Vector2(2248, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_jjgiq")
+script = ExtResource("8_njn3k")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -203,10 +155,10 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(296, -112)
+position = Vector2(2184, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_jjgiq")
+script = ExtResource("8_njn3k")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -222,10 +174,10 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(-248, 80)
+position = Vector2(1640, 2176)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_jjgiq")
+script = ExtResource("8_njn3k")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -241,10 +193,10 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(-24, -112)
+position = Vector2(1864, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_jjgiq")
+script = ExtResource("8_njn3k")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -259,10 +211,10 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(144, 96)
+position = Vector2(2032, 2192)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_jjgiq")
+script = ExtResource("8_njn3k")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -281,10 +233,10 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(208, 48)
+position = Vector2(2096, 2144)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_jjgiq")
+script = ExtResource("8_njn3k")
 actor_path = "res://src/Actor/Enemy/Junior.tscn"
 properties = {
 "aim_time": [0.2, 3],
@@ -304,10 +256,10 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(280, -168)
+position = Vector2(2168, 1928)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_jjgiq")
+script = ExtResource("8_njn3k")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -323,10 +275,10 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(392, 96)
+position = Vector2(2280, 2192)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_jjgiq")
+script = ExtResource("8_njn3k")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -346,10 +298,10 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(520, -112)
+position = Vector2(2408, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_jjgiq")
+script = ExtResource("8_njn3k")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -369,10 +321,10 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(392, 0)
+position = Vector2(2280, 2096)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_jjgiq")
+script = ExtResource("8_njn3k")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -384,80 +336,14 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Tabith" type="Area2D" parent="Spawns" unique_id=2119422903 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(232, 96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_jjgiq")
-actor_path = "res://src/Actor/NPC/Tabith.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"conversation": ["", 4],
-"dialog_json": ["", 4],
-"editor_hidden": [false, 1],
-"id": ["tabith", 4],
-"speed": [Vector2(150, 350), 5],
-"starting_state": ["walk", 4],
-"voiced": [true, 1],
-"walk_speed": [Vector2(50, 50), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Sage" type="Area2D" parent="Spawns" unique_id=800859589 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(216, 176)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_jjgiq")
-actor_path = "res://src/Actor/NPC/Sage.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"conversation": ["", 4],
-"dialog_json": ["", 4],
-"editor_hidden": [false, 1],
-"id": ["sage", 4],
-"speed": [Vector2(150, 350), 5],
-"starting_state": ["walk", 4],
-"voiced": [true, 1],
-"walk_speed": [Vector2(50, 50), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Sage1" type="Area2D" parent="Spawns" unique_id=1310858624 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(328, 96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_jjgiq")
-actor_path = "res://src/Actor/NPC/Sage.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"conversation": ["", 4],
-"dialog_json": ["", 4],
-"editor_hidden": [false, 1],
-"id": ["sage", 4],
-"speed": [Vector2(150, 350), 5],
-"starting_state": ["walk", 4],
-"voiced": [true, 1],
-"walk_speed": [Vector2(50, 50), 5],
-"water_gravity": [150.0, 3]
-}
-
 [node name="Frog3" type="Area2D" parent="Spawns" unique_id=916519479 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(-8, 160)
+position = Vector2(1880, 2256)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_jjgiq")
+script = ExtResource("8_njn3k")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -473,10 +359,10 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(-168, -112)
+position = Vector2(1720, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_jjgiq")
+script = ExtResource("8_njn3k")
 actor_path = "res://src/Actor/Enemy/Beetle.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -494,10 +380,10 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(160, -168)
+position = Vector2(2048, 1928)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_jjgiq")
+script = ExtResource("8_njn3k")
 actor_path = "res://src/Actor/Enemy/Climber.tscn"
 properties = {
 "arm_angle_speed": [0.01, 3],
@@ -516,10 +402,10 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(744, -16)
+position = Vector2(2632, 2080)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_jjgiq")
+script = ExtResource("8_njn3k")
 actor_path = "res://src/Actor/Enemy/Beetle.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -538,12 +424,12 @@ modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
-offset_left = -256.0
-offset_top = -528.0
-offset_right = -96.0
-offset_bottom = -512.0
+offset_left = 1632.0
+offset_top = 1728.0
+offset_right = 1792.0
+offset_bottom = 1744.0
 mouse_filter = 2
-script = ExtResource("10_j7c6d")
+script = ExtResource("10_yl2sd")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -560,12 +446,12 @@ modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
-offset_left = -272.0
-offset_top = -256.0
-offset_right = -256.0
-offset_bottom = -64.0
+offset_left = 1616.0
+offset_top = 1840.0
+offset_right = 1632.0
+offset_bottom = 2032.0
 mouse_filter = 2
-script = ExtResource("10_j7c6d")
+script = ExtResource("10_yl2sd")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -582,12 +468,12 @@ modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
-offset_left = -208.0
-offset_top = 8.0
-offset_right = -144.0
-offset_bottom = 16.0
+offset_left = 1680.0
+offset_top = 2104.0
+offset_right = 1744.0
+offset_bottom = 2112.0
 mouse_filter = 2
-script = ExtResource("10_j7c6d")
+script = ExtResource("10_yl2sd")
 trigger_path = "res://src/Trigger/Spikes.tscn"
 properties = {
 "color": [Color(1, 0, 0, 1), 20],
@@ -601,12 +487,12 @@ modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
-offset_left = -240.0
-offset_top = 80.0
-offset_right = -112.0
-offset_bottom = 176.0
+offset_left = 1648.0
+offset_top = 2176.0
+offset_right = 1776.0
+offset_bottom = 2272.0
 mouse_filter = 2
-script = ExtResource("10_j7c6d")
+script = ExtResource("10_yl2sd")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20],
@@ -621,11 +507,12 @@ modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
-offset_left = 336.0
-offset_right = 352.0
-offset_bottom = 96.0
+offset_left = 2224.0
+offset_top = 2096.0
+offset_right = 2240.0
+offset_bottom = 2192.0
 mouse_filter = 2
-script = ExtResource("10_j7c6d")
+script = ExtResource("10_yl2sd")
 trigger_path = "res://src/Trigger/Ladder.tscn"
 properties = {
 "color": [Color(1, 0.494118, 0, 1), 20],
@@ -639,12 +526,12 @@ modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
-offset_left = 288.0
-offset_top = -8.0
-offset_right = 304.0
-offset_bottom = 16.0
+offset_left = 2176.0
+offset_top = 2088.0
+offset_right = 2192.0
+offset_bottom = 2096.0
 mouse_filter = 2
-script = ExtResource("10_j7c6d")
+script = ExtResource("10_yl2sd")
 trigger_path = "res://src/Trigger/Spikes.tscn"
 properties = {
 "color": [Color(1, 0, 0, 1), 20],
@@ -658,12 +545,12 @@ modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
-offset_left = 96.0
-offset_top = -16.0
-offset_right = 112.0
-offset_bottom = 16.0
+offset_left = 1984.0
+offset_top = 2080.0
+offset_right = 2000.0
+offset_bottom = 2096.0
 mouse_filter = 2
-script = ExtResource("10_j7c6d")
+script = ExtResource("10_yl2sd")
 trigger_path = "res://src/Trigger/Sign.tscn"
 properties = {
 "color": [Color(0.901961, 0.74902, 0, 1), 20],
@@ -680,12 +567,12 @@ modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
-offset_left = 80.0
-offset_top = 144.0
-offset_right = 96.0
-offset_bottom = 176.0
+offset_left = 1968.0
+offset_top = 2240.0
+offset_right = 1984.0
+offset_bottom = 2272.0
 mouse_filter = 2
-script = ExtResource("10_j7c6d")
+script = ExtResource("10_yl2sd")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -704,12 +591,12 @@ modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
-offset_left = 144.0
-offset_top = 144.0
-offset_right = 160.0
-offset_bottom = 176.0
+offset_left = 2032.0
+offset_top = 2240.0
+offset_right = 2048.0
+offset_bottom = 2272.0
 mouse_filter = 2
-script = ExtResource("10_j7c6d")
+script = ExtResource("10_yl2sd")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -728,12 +615,12 @@ modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
-offset_left = 256.0
-offset_top = 144.0
-offset_right = 272.0
-offset_bottom = 176.0
+offset_left = 2144.0
+offset_top = 2240.0
+offset_right = 2160.0
+offset_bottom = 2272.0
 mouse_filter = 2
-script = ExtResource("10_j7c6d")
+script = ExtResource("10_yl2sd")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -752,12 +639,12 @@ modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
-offset_left = 48.0
-offset_top = -16.0
-offset_right = 64.0
-offset_bottom = 16.0
+offset_left = 1936.0
+offset_top = 2080.0
+offset_right = 1952.0
+offset_bottom = 2096.0
 mouse_filter = 2
-script = ExtResource("10_j7c6d")
+script = ExtResource("10_yl2sd")
 trigger_path = "res://src/Trigger/FlavorText.tscn"
 properties = {
 "color": [Color(0.901961, 0.74902, 0, 1), 20],
@@ -767,84 +654,17 @@ properties = {
 }
 size_is_default = false
 
-[node name="Stalagtite4" type="Area2D" parent="Spawns" unique_id=628762634 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(-168, 48)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_jjgiq")
-actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"speed": [Vector2(150, 350), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Tabith1" type="Area2D" parent="Spawns" unique_id=1942666777 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(-168, 176)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_jjgiq")
-actor_path = "res://src/Actor/NPC/Tabith.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"conversation": ["", 4],
-"dialog_json": ["", 4],
-"editor_hidden": [false, 1],
-"id": ["tabith", 4],
-"speed": [Vector2(150, 350), 5],
-"starting_state": ["walk", 4],
-"voiced": [true, 1],
-"walk_speed": [Vector2(50, 50), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="SunLight" type="Area2D" parent="." unique_id=1052512429 groups=["SunLights"] instance=ExtResource("6_mcn17")]
-visibility_layer = 2
-position = Vector2(35, -198)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_ug36o")
-
 [node name="VanishingPoint" type="Area2D" parent="." unique_id=852042071 groups=["VanishingPoints"] instance=ExtResource("7_mlr58")]
 visibility_layer = 2
 z_index = 999
-position = Vector2(424, -264)
+position = Vector2(2288, 1832)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_lw0ap")
+script = ExtResource("12_v7nqo")
 
 [node name="SpawnPoint" type="Area2D" parent="." unique_id=1505342073 groups=["SpawnPoints"] instance=ExtResource("5_sjslv")]
 visibility_layer = 2
-position = Vector2(152, -256)
+position = Vector2(1672, 2032)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_wcveo")
-
-[node name="Waypoint" type="Area2D" parent="." unique_id=104198103 groups=["Entities", "VisualUtilities", "Waypoints"] instance=ExtResource("9_20ig1")]
-modulate = Color(1, 0, 0, 1)
-visibility_layer = 2
-position = Vector2(-72, 0)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_hahi5")
-owner_id = "child"
-
-[node name="Waypoint2" type="Area2D" parent="." unique_id=342867542 groups=["Entities", "VisualUtilities", "Waypoints"] instance=ExtResource("9_20ig1")]
-modulate = Color(1, 0, 0, 1)
-visibility_layer = 2
-position = Vector2(40, 0)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_hahi5")
-owner_id = "child"
-index = 1
+script = ExtResource("14_c0l8s")

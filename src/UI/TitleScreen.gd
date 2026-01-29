@@ -3,8 +3,6 @@ extends Control
 const KEY_GUIDE = preload("res://src/UI/KeyGuide.tscn")
 const LEVELSELECT = preload("res://src/UI/LevelSelect/LevelSelect.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
-const JUNIPER = preload("res://src/Player/Juniper.tscn")
-const HUD = preload("res://src/UI/HUD/HUD.tscn")
 
 @onready var w = get_tree().get_root().get_node("World")
 

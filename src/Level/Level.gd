@@ -24,12 +24,6 @@ func _ready():
 		get_node("Notes").visible = false
 	setup_kill_box()
 
-	if conversation_on_enter:
-		if level_type == LevelType.PLAYERLESS_CUTSCENE:
-			do_conversation_on_enter(true)
-		else:
-			do_conversation_on_enter(false)
-
 	for i in $TileMap.get_children():
 		i.fix_invalid_tiles()
 	merge_one_way_ssp_tile()
