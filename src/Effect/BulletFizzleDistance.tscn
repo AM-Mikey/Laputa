@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjxee6so8q72b"]
+
+[ext_resource type="Script" uid="uid://camw6u7y8otj0" path="res://src/Effect/BulletFizzleDistance.gd" id="1_ldegd"]
+[ext_resource type="Texture2D" uid="uid://r1dhr8p4odfy" path="res://assets/Effect/BulletFizzleDistance.png" id="1_q2xw0"]
+
+[sub_resource type="Animation" id="Animation_ldegd"]
+resource_name = "Fizzle"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_h7a4w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_14q0a"]
+_data = {
+&"Fizzle": SubResource("Animation_ldegd"),
+&"RESET": SubResource("Animation_h7a4w")
+}
+
+[node name="BulletFizzleDistance" type="Node2D"]
+script = ExtResource("1_ldegd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_q2xw0")
+centered = false
+offset = Vector2(-4, -1)
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_14q0a")
+}
+autoplay = "Fizzle"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
