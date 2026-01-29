@@ -19,7 +19,10 @@ func state_process(_delta):
 		mm.knockback_velocity = Vector2.ZERO
 		#pc.knockback = false
 		#print("changing from kb to cached")
-		mm.change_state(mm.cached_state.name.to_lower())
+		var next_state: String = mm.cached_state.name.to_lower()
+		if (next_state == "ladder"):
+			next_state = "run"
+		mm.change_state(next_state)
 		return
 
 	pc.velocity = get_move_velocity(pc.velocity, pc.move_dir)
