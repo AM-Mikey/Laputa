@@ -35,6 +35,9 @@ func parse_command(string):
 			db.display_name(argument)
 		"hidename":
 			db.hide_name()
+		"hideface":
+			hide_face()
+			db.hide_name()
 		"newchar": #/newchar, (face), (name)
 			var a = string.split(",")
 			db.dl.text = ""
@@ -138,9 +141,7 @@ func face(string):
 	face_sprite.hframes = face_sprite.texture.get_width() / 48
 	face_sprite.frame = expression
 
-	face_sprite.position.x = -48
-	var tween = get_tree().create_tween()
-	tween.tween_property(face_sprite, "position", Vector2.ZERO, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	db.get_node("AnimationPlayer").play("FaceEnter")
 
 
 func flip_face(arguement):
@@ -149,6 +150,13 @@ func flip_face(arguement):
 	else:
 		db.flip_face(arguement)
 
+func hide_face():
+	#db.get_node("NPC").visible = false
+	#db.get_node("Flat").visible = true
+	#db.get_node("Face").visible = false
+	db.get_node("AnimationPlayer").play("NPCToFlat")
+	db.dl = db.get_node("Flat/DialogFlat")
+	db.dl.text = ""
 
 func set_visible(string, visible):
 	if string == "":

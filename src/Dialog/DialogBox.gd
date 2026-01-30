@@ -2,7 +2,7 @@ extends Control
 
 signal dialog_finished
 
-@export var print_delay = 0.05
+@export var print_delay = 0.03
 @export var do_delay = true
 @export var punctuation_delay = 0.3
 
@@ -43,9 +43,6 @@ func _ready():
 	_resolution_scale_changed(vs.resolution_scale)
 
 func start_printing(dialog_json, conversation: String):
-	$NPC.visible = true
-	dl = $NPC/DialogNPC
-	dl.text = ""
 	current_dialog_json = dialog_json
 	active = true
 	var dialog = load_dialog_json(dialog_json)
@@ -57,6 +54,15 @@ func start_printing(dialog_json, conversation: String):
 		return
 	else:
 		current_text_array = split_text(dialog[conversation]) #contains array of: command, newline as blank string, text string
+
+	if get_text_array_starts_with_face():
+		$NPC.visible = true
+		dl = $NPC/DialogNPC
+	else:
+		$Flat.visible = true
+		dl = $Flat/DialogFlat
+	dl.text = ""
+
 	align_box()
 	#pc.disable()
 	pc.mm.cached_state = pc.mm.current_state
@@ -309,6 +315,18 @@ func flip_face(dir = "auto"):
 			$Face/Sprite2D.flip_h = true
 
 
+
+### GETTERS ###
+
+func get_text_array_starts_with_face() -> bool:
+	var out = false
+	for section in current_text_array:
+		if !section.left(1) == "/":
+			return out #false, we found a bit of text before a /face
+		elif section.containsn("/newchar") || section.containsn("/face"):
+			out = true
+			return out
+	return out
 
 ### SIGNALS ###
 

@@ -1,62 +1,65 @@
 {
 	"a_s0":
 	"
-	/newchar,basil,NPC_A Main mission:
+	/newchar,izu,NPC_A Main mission:
 	This progressed your mission stage /progress_main_mission
+	/newchar,sage,NPC_B That's the spirit!
 	",
 	
 	"a_s1":
 	"
-	/newchar,basil,NPC_A Your Stage is talk_npc_b
+	/newchar,izu,NPC_A Your Stage is talk_npc_b
 	I'm denying your progress. Talk to NPC B
 	",
 	
 	"a_s2":
 	"
-	/newchar,basil,NPC_A Your Stage is talk_npc_c
+	/newchar,izu,NPC_A Your Stage is talk_npc_c
 	I'm denying your progress. Talk to NPC C
 	",
 
 	"a_s3":
 	"
-	/newchar,basil,NPC_A Your Stage is talk_npc_d
+	/newchar,izu,NPC_A Your Stage is talk_npc_d
 	I'm denying your progress. Talk to NPC D
 	",
 	
 	"a_s4":
 	"
-	/newchar,basil,NPC_A Congrats! You reached Stage celebrate!
+	/newchar,izu,NPC_A Congrats! You reached Stage celebrate!
 	",
 	
 	
 	
 	"b_s0":
 	"
-	/newchar,basil,NPC_B Your Stage is talk_npc_a
+	/newchar,sage,NPC_B Your Stage is talk_npc_a
 	I'm denying your progress. Talk to NPC A
 	",
 	
 	"b_s1":
 	"
-	/newchar,basil,NPC_B Main mission:
+	/newchar,sage,NPC_B Main mission:
 	This progressed your mission stage /progress_main_mission
+	/hideface This indeed did progress your mission stage...
+	In fact, you think that you should probably talk to NPC C next.
 	",
 	
 	"b_s2":
 	"
-	/newchar,basil,NPC_B Your Stage is talk_npc_c
+	/newchar,sage,NPC_B Your Stage is talk_npc_c
 	I'm denying your progress. Talk to NPC C
 	",
 
 	"b_s3":
 	"
-	/newchar,basil,NPC_B Your Stage is talk_npc_d
+	/newchar,sage,NPC_B Your Stage is talk_npc_d
 	I'm denying your progress. Talk to NPC D
 	",
 	
 	"b_s4":
 	"
-	/newchar,basil,NPC_B Congrats! You reached Stage celebrate!
+	/newchar,sage,NPC_B Congrats! You reached Stage celebrate!
 	",
 
 
@@ -94,31 +97,31 @@
 	
 	"d_s0":
 	"
-	/newchar,basil,NPC_D Your Stage is talk_npc_a
+	/newchar,nun,NPC_D Your Stage is talk_npc_a
 	I'm denying your progress. Talk to NPC A
 	",
 	
 	"d_s1":
 	"
-	/newchar,basil,NPC_D Your Stage is talk_npc_b
+	/newchar,nun,NPC_D Your Stage is talk_npc_b
 	I'm denying your progress. Talk to NPC B
 	",
 	
 	"d_s2":
 	"
-	/newchar,basil,NPC_D Your Stage is talk_npc_c
+	/newchar,nun,NPC_D Your Stage is talk_npc_c
 	I'm denying your progress. Talk to NPC C
 	",
 
 	"d_s3":
 	"
-	/newchar,basil,NPC_D Main mission:
+	/newchar,nun,NPC_D Main mission:
 	This progressed your mission stage /progress_main_mission
 	",
 	
 	"d_s4":
 	"
-	/newchar,basil,NPC_D Congrats! You reached Stage celebrate!
+	/newchar,nun,NPC_D Congrats! You reached Stage celebrate!
 	",
 	
 	"cutscene_talk_npc_a":
