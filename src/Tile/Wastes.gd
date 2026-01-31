@@ -24,8 +24,8 @@ func do_auto_tile(start_coords, start_layer):
 	var data = tile_map.get_child(start_layer).get_cell_tile_data(start_coords)
 	var auto_tile_group = data.get_custom_data("auto_tile_group")
 	if auto_tile_group != "":
-		if auto_tile_group == "backdirt":
-			var group = "backdirt"
+		if auto_tile_group == "backdirt" or auto_tile_group == "ground":
+			var group = auto_tile_group
 
 			var connected_cells = find_all_connected_cells(start_coords, start_layer, group)
 			print(connected_cells)
@@ -34,7 +34,7 @@ func do_auto_tile(start_coords, start_layer):
 				find_cells_recursive(connected_cells, start_layer, group)
 
 			for i in active_tile_map_cells:
-				pattern_backdirt(start_layer, i)
+				pattern(start_layer, i, group)
 			#print("a: ", active_tile_map_cells)
 			active_tile_map_cells = []
 		else:
@@ -73,8 +73,8 @@ func find_all_connected_cells(coords, layer, group) -> Array:
 
 
 
-func pattern_backdirt(layer, coords):
-	var dict = get_auto_tile_directions("backdirt")
+func pattern(layer, coords, pattern: String):
+	var dict = get_auto_tile_directions(pattern)
 	var group = dict["all"]
 
 	var non_connections = []
@@ -135,7 +135,6 @@ func get_auto_tile_directions(auto_tile_group) -> Dictionary:
 						if tile_data.has_custom_data("auto_tile_direction"):
 							out["all"].append(coords)
 							var auto_tile_directions: String = tile_data.get_custom_data("auto_tile_direction")
-							# TODO: Separate on commas and append to all the directions
 							var directions = auto_tile_directions.split(",")
 							print("YEAH")
 							for auto_tile_direction in directions:
