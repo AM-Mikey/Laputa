@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://5iamg3dn2key"]
+[gd_scene format=3 uid="uid://5iamg3dn2key"]
 
 [ext_resource type="Script" uid="uid://y1dudl2wg4ui" path="res://src/RenderAlign/RenderAlign.gd" id="1_sjyo6"]
 [ext_resource type="Script" uid="uid://dgmq3eqt3wg32" path="res://src/RenderAlign/Rounder.gd" id="2_6g3t1"]
 
-[node name="RenderAlign" type="Control"]
+[node name="RenderAlign" type="Control" unique_id=1936090496]
+process_mode = 3
 visibility_layer = 2
 z_index = 100
 layout_mode = 3
@@ -15,9 +16,9 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_sjyo6")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=46609011]
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer" unique_id=302668683]
 texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,7 +27,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer" unique_id=1451649703]
 unique_name_in_owner = true
 transparent_bg = true
 handle_input_locally = false
@@ -34,13 +35,13 @@ canvas_item_default_texture_filter = 0
 size = Vector2i(480, 270)
 render_target_update_mode = 4
 
-[node name="BasePosition" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+[node name="BasePosition" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport" unique_id=1202863280]
 unique_name_in_owner = true
 
-[node name="Rounder" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport/BasePosition"]
+[node name="Rounder" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport/BasePosition" unique_id=234404576]
 script = ExtResource("2_6g3t1")
 
-[node name="Camera2D" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport/BasePosition/Rounder"]
+[node name="Camera2D" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport/BasePosition/Rounder" unique_id=165561027]
 unique_name_in_owner = true
 process_callback = 0
 limit_enabled = false
