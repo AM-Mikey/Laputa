@@ -78,11 +78,11 @@ func on_limit_camera(left, right, top, bottom):
 		var thickness = ((window_width / vs.resolution_scale) - (right - left))/2
 
 		spawn_black_bar("BarLeft", \
-		Vector2(thickness, window_height), \
+		Vector2(thickness + 1, window_height), \
 		Vector2.ZERO)
 		spawn_black_bar("BarRight", \
-		Vector2(thickness, window_height), \
-		Vector2((right - left) + thickness, 0))
+		Vector2(thickness + 2, window_height), \
+		Vector2((right - left) + thickness - 1, 0))
 
 		limit_left = left - thickness
 		limit_right = right + thickness
@@ -95,11 +95,11 @@ func on_limit_camera(left, right, top, bottom):
 		var thickness = (window_height / vs.resolution_scale - (bottom - top))/2
 
 		spawn_black_bar("BarTop", \
-		Vector2(window_width, thickness), \
+		Vector2(window_width, thickness + 1), \
 		Vector2.ZERO)
 		spawn_black_bar("BarBottom", \
 		Vector2(window_width, thickness + 16), \
-		Vector2(0, (bottom - top) + thickness))  #16 for overscan safety
+		Vector2(0, (bottom - top) + thickness - 1))  #16 for overscan safety
 
 		limit_top = top - thickness
 		limit_bottom = bottom + thickness
