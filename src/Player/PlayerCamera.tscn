@@ -4,6 +4,7 @@
 
 [node name="PlayerCamera" type="Camera2D" unique_id=1936706909 groups=["Cameras", "PlayerCameras"]]
 position = Vector2(0, -16)
+offset = Vector2(0.001, 0.001)
 process_callback = 0
 limit_smoothed = true
 position_smoothing_enabled = true
