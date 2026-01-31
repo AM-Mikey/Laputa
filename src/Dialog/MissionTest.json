@@ -68,6 +68,11 @@
 	"
 	/newchar,basil,NPC_C Your Stage is talk_npc_a
 	I'm denying your progress. Talk to NPC A
+	/options,Why?,Huh?,Ok Ya dig?
+	/db,0 Because I said so! Now SCRAM! /udb
+	/db,1 Waddaya mean huh? /udb
+	/db,2 Now git. /end
+	/m Shoo!
 	",
 	
 	"c_s1":

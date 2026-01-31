@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://bnwo7ae85qnwb"]
+[gd_scene format=3 uid="uid://bnwo7ae85qnwb"]
 
 [ext_resource type="PackedScene" uid="uid://brl16iyt5eq02" path="res://src/Player/PlayerCamera.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://0mxxcirrmb5d" path="res://src/Gun/Shotgun.tscn" id="4"]
@@ -13,14 +13,12 @@
 [ext_resource type="Script" uid="uid://cqho5rvdldsw5" path="res://src/Player/Player.gd" id="14"]
 [ext_resource type="Script" uid="uid://cwfo2x3kl4tkp" path="res://src/Player/MovementManager.gd" id="15"]
 [ext_resource type="Script" uid="uid://5j8mlgvadx1f" path="res://src/Player/GunPos.gd" id="16_adexv"]
-[ext_resource type="PackedScene" uid="uid://diwpy822anfc4" path="res://src/Gun/MPistol.tscn" id="17_p4m8n"]
 [ext_resource type="PackedScene" uid="uid://cjueepke5w45c" path="res://src/Gun/Red7.tscn" id="18_l3dey"]
 [ext_resource type="PackedScene" uid="uid://byv37yjh2rp36" path="res://src/Gun/Revolver.tscn" id="19_v6qwc"]
 [ext_resource type="PackedScene" uid="uid://5orkim7sjfi7" path="res://src/Gun/Tsurugi.tscn" id="20_x1gsf"]
 [ext_resource type="Shader" uid="uid://d4doa1vf12lkt" path="res://src/Shader/JuniperRecolor.gdshader" id="24_s1pnb"]
 [ext_resource type="Texture2D" uid="uid://mkfrxk3djlu1" path="res://assets/Player/Palette/Normal.png" id="25_3o18d"]
 [ext_resource type="PackedScene" uid="uid://bn8xosty72skm" path="res://src/Gun/Roberta.tscn" id="25_cd6iy"]
-[ext_resource type="Texture2D" uid="uid://b6mfl184pisc1" path="res://assets/Player/Palette/Mono.png" id="25_v6qwc"]
 [ext_resource type="Script" uid="uid://cn112wea32cdx" path="res://src/Player/Inspect.gd" id="27"]
 [ext_resource type="Texture2D" uid="uid://b6mfl184pisc1" path="res://assets/Player/Palette/Mono.png" id="27_cn5rl"]
 [ext_resource type="PackedScene" uid="uid://diwpy822anfc4" path="res://src/Gun/MPistol.tscn" id="28"]
@@ -90,7 +88,7 @@ shader_parameter/screen_mode = false
 shader_parameter/num_colors = 16
 shader_parameter/precision = 0.0
 shader_parameter/palette_in = ExtResource("25_3o18d")
-shader_parameter/palette_out = ExtResource("25_v6qwc")
+shader_parameter/palette_out = ExtResource("27_cn5rl")
 
 [sub_resource type="Animation" id="53"]
 length = 0.2
@@ -3759,37 +3757,37 @@ _data = {
 &"valley": SubResource("Animation_0hfk1")
 }
 
-[node name="Juniper" type="CharacterBody2D" groups=["Players"]]
+[node name="Juniper" type="CharacterBody2D" unique_id=605706498 groups=["Players"]]
 z_index = 1
 collision_layer = 0
 collision_mask = 520
 script = ExtResource("14")
 
-[node name="PhysicsLayerBody" type="CharacterBody2D" parent="."]
+[node name="PhysicsLayerBody" type="CharacterBody2D" parent="." unique_id=1948623770]
 collision_layer = 32768
 collision_mask = 32768
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1988404313]
 position = Vector2(0, -9)
 shape = SubResource("72")
 debug_color = Color(0, 0.6, 0.701961, 0.392157)
 
-[node name="PlayerLayerBody" type="CharacterBody2D" parent="."]
+[node name="PlayerLayerBody" type="CharacterBody2D" parent="." unique_id=150292828]
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerLayerBody"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerLayerBody" unique_id=295160649]
 position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_6utdb")
 debug_color = Color(0, 0.588235, 0.705882, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1696456564]
 light_mask = 0
 z_index = 1
 position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_us632")
 debug_color = Color(0, 0.588235, 0.705882, 0.501961)
 
-[node name="CrouchingCollision" type="CollisionShape2D" parent="."]
+[node name="CrouchingCollision" type="CollisionShape2D" parent="." unique_id=659746043]
 visible = false
 z_index = 1
 position = Vector2(0, -3.5)
@@ -3797,7 +3795,7 @@ shape = SubResource("RectangleShape2D_804ka")
 disabled = true
 debug_color = Color(0, 0.588235, 0.705882, 0.501961)
 
-[node name="JumpCollision" type="CollisionPolygon2D" parent="."]
+[node name="JumpCollision" type="CollisionPolygon2D" parent="." unique_id=49247692]
 visible = false
 modulate = Color(1, 1, 1, 0.501961)
 z_index = 1
@@ -3805,7 +3803,7 @@ position = Vector2(-6, 0)
 polygon = PackedVector2Array(0, 0, 12, 0, 12, -1, 8, -15, 4, -15, 0, -1)
 disabled = true
 
-[node name="CeilingL" type="RayCast2D" parent="."]
+[node name="CeilingL" type="RayCast2D" parent="." unique_id=1958268322]
 modulate = Color(1, 1, 1, 0.501961)
 position = Vector2(-6, 0)
 rotation = 3.14159
@@ -3813,31 +3811,31 @@ scale = Vector2(0.33, 1)
 target_position = Vector2(-6.67572e-05, 15)
 collision_mask = 8
 
-[node name="WallLB" type="RayCast2D" parent="."]
+[node name="WallLB" type="RayCast2D" parent="." unique_id=199764577]
 modulate = Color(1, 1, 1, 0.501961)
 position = Vector2(-5.5, -2)
 target_position = Vector2(-1, 1.19209e-07)
 collision_mask = 8
 
-[node name="WallLT" type="RayCast2D" parent="."]
+[node name="WallLT" type="RayCast2D" parent="." unique_id=1785380488]
 modulate = Color(1, 1, 1, 0.501961)
 position = Vector2(-5.5, -15)
 target_position = Vector2(-1, 0)
 collision_mask = 8
 
-[node name="WallRB" type="RayCast2D" parent="."]
+[node name="WallRB" type="RayCast2D" parent="." unique_id=170918551]
 modulate = Color(1, 1, 1, 0.501961)
 position = Vector2(5.5, -2)
 target_position = Vector2(1, 0)
 collision_mask = 8
 
-[node name="WallRT" type="RayCast2D" parent="."]
+[node name="WallRT" type="RayCast2D" parent="." unique_id=997571567]
 modulate = Color(1, 1, 1, 0.501961)
 position = Vector2(5.5, -15)
 target_position = Vector2(1, 0)
 collision_mask = 8
 
-[node name="ClearenceLH" type="RayCast2D" parent="."]
+[node name="ClearenceLH" type="RayCast2D" parent="." unique_id=431711031]
 modulate = Color(1, 1, 1, 0.501961)
 position = Vector2(-4, -15)
 rotation = 3.14159
@@ -3845,7 +3843,7 @@ scale = Vector2(0.33, 1)
 target_position = Vector2(-4.88758e-05, 11)
 collision_mask = 8
 
-[node name="ClearenceLF" type="RayCast2D" parent="."]
+[node name="ClearenceLF" type="RayCast2D" parent="." unique_id=118123578]
 modulate = Color(1, 1, 1, 0.501961)
 position = Vector2(-2, -15)
 rotation = 3.14159
@@ -3853,7 +3851,7 @@ scale = Vector2(0.33, 1)
 target_position = Vector2(-4.88758e-05, 11)
 collision_mask = 8
 
-[node name="ClearenceRF" type="RayCast2D" parent="."]
+[node name="ClearenceRF" type="RayCast2D" parent="." unique_id=316188930]
 modulate = Color(1, 1, 1, 0.501961)
 position = Vector2(2, -15)
 rotation = 3.14159
@@ -3861,7 +3859,7 @@ scale = Vector2(0.33, 1)
 target_position = Vector2(-4.88758e-05, 11)
 collision_mask = 8
 
-[node name="ClearenceRH" type="RayCast2D" parent="."]
+[node name="ClearenceRH" type="RayCast2D" parent="." unique_id=1463640696]
 modulate = Color(1, 1, 1, 0.501961)
 position = Vector2(4, -15)
 rotation = -3.14159
@@ -3869,7 +3867,7 @@ scale = Vector2(0.33, 1)
 target_position = Vector2(-4.88758e-05, 11)
 collision_mask = 8
 
-[node name="CeilingR" type="RayCast2D" parent="."]
+[node name="CeilingR" type="RayCast2D" parent="." unique_id=2144337245]
 modulate = Color(1, 1, 1, 0.501961)
 position = Vector2(6, 0)
 rotation = 3.14159
@@ -3877,14 +3875,14 @@ scale = Vector2(0.33, 1)
 target_position = Vector2(-6.67572e-05, 15)
 collision_mask = 8
 
-[node name="AbsoluteLeft" type="RayCast2D" parent="."]
+[node name="AbsoluteLeft" type="RayCast2D" parent="." unique_id=823987707]
 z_index = 16
 position = Vector2(-6, -0.5)
 target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="ValleyLeft" type="RayCast2D" parent="."]
+[node name="ValleyLeft" type="RayCast2D" parent="." unique_id=2082765567]
 z_index = 16
 position = Vector2(-6, -0.5)
 scale = Vector2(0.33, 1)
@@ -3892,7 +3890,7 @@ target_position = Vector2(0, 3)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="PeakLeft" type="RayCast2D" parent="."]
+[node name="PeakLeft" type="RayCast2D" parent="." unique_id=444939058]
 z_index = 16
 position = Vector2(-6, -0.5)
 scale = Vector2(0.33, 1)
@@ -3900,7 +3898,7 @@ target_position = Vector2(0, 5)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="SlightSlopePeakLeft" type="RayCast2D" parent="."]
+[node name="SlightSlopePeakLeft" type="RayCast2D" parent="." unique_id=188128457]
 z_index = 16
 position = Vector2(-6, 0)
 scale = Vector2(0.10890001, 1)
@@ -3908,35 +3906,35 @@ target_position = Vector2(0, 2)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="StandCloseLeft" type="RayCast2D" parent="."]
+[node name="StandCloseLeft" type="RayCast2D" parent="." unique_id=128641614]
 z_index = 16
 position = Vector2(-4, -0.5)
 target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="EdgeLeft" type="RayCast2D" parent="."]
+[node name="EdgeLeft" type="RayCast2D" parent="." unique_id=981640774]
 z_index = 16
 position = Vector2(-1, -0.5)
 target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="EdgeRight" type="RayCast2D" parent="."]
+[node name="EdgeRight" type="RayCast2D" parent="." unique_id=1029509164]
 z_index = 16
 position = Vector2(1, -0.5)
 target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="StandCloseRight" type="RayCast2D" parent="."]
+[node name="StandCloseRight" type="RayCast2D" parent="." unique_id=1774546175]
 z_index = 16
 position = Vector2(4, -0.5)
 target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="ValleyRight" type="RayCast2D" parent="."]
+[node name="ValleyRight" type="RayCast2D" parent="." unique_id=194167607]
 z_index = 16
 position = Vector2(6, -0.5)
 scale = Vector2(0.33, 1)
@@ -3944,7 +3942,7 @@ target_position = Vector2(0, 3)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="PeakRight" type="RayCast2D" parent="."]
+[node name="PeakRight" type="RayCast2D" parent="." unique_id=273905397]
 z_index = 16
 position = Vector2(6.0000005, -0.5)
 scale = Vector2(0.33, 1)
@@ -3952,7 +3950,7 @@ target_position = Vector2(0, 5)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="SlightSlopePeakRight" type="RayCast2D" parent="."]
+[node name="SlightSlopePeakRight" type="RayCast2D" parent="." unique_id=1064069458]
 z_index = 16
 position = Vector2(6.0000005, -0.5)
 scale = Vector2(0.33, 1)
@@ -3960,14 +3958,14 @@ target_position = Vector2(0, 2)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="AbsoluteRight" type="RayCast2D" parent="."]
+[node name="AbsoluteRight" type="RayCast2D" parent="." unique_id=550834602]
 z_index = 16
 position = Vector2(6, -0.5)
 target_position = Vector2(0, 1)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="RightEdgeIsWorld" type="RayCast2D" parent="."]
+[node name="RightEdgeIsWorld" type="RayCast2D" parent="." unique_id=618089167]
 z_index = 16
 position = Vector2(1, -0.5)
 scale = Vector2(0.1, 1)
@@ -3975,7 +3973,7 @@ target_position = Vector2(0, 7.75)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="LeftEdgeIsWorld" type="RayCast2D" parent="."]
+[node name="LeftEdgeIsWorld" type="RayCast2D" parent="." unique_id=1166786665]
 z_index = 16
 position = Vector2(-1, -0.5)
 scale = Vector2(0.1, 1)
@@ -3983,7 +3981,7 @@ target_position = Vector2(0, 7.75)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="LeftNormalFinder" type="RayCast2D" parent="."]
+[node name="LeftNormalFinder" type="RayCast2D" parent="." unique_id=2083161465]
 z_index = 16
 position = Vector2(-6, -0.5)
 scale = Vector2(0.1, 1)
@@ -3991,7 +3989,7 @@ target_position = Vector2(0, 13)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="RightNormalFinder" type="RayCast2D" parent="."]
+[node name="RightNormalFinder" type="RayCast2D" parent="." unique_id=964912557]
 z_index = 16
 position = Vector2(6, -0.5)
 scale = Vector2(0.1, 1)
@@ -3999,7 +3997,7 @@ target_position = Vector2(0, 13)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="LerpDeltaVertical" type="RayCast2D" parent="."]
+[node name="LerpDeltaVertical" type="RayCast2D" parent="." unique_id=1333175176]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(0, -0.5)
@@ -4007,7 +4005,7 @@ target_position = Vector2(0, 8)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="LerpDeltaVerticalLeft" type="RayCast2D" parent="."]
+[node name="LerpDeltaVerticalLeft" type="RayCast2D" parent="." unique_id=708460353]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(-6, -0.5)
@@ -4015,7 +4013,7 @@ target_position = Vector2(0, 13)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="LerpDeltaVerticalRight" type="RayCast2D" parent="."]
+[node name="LerpDeltaVerticalRight" type="RayCast2D" parent="." unique_id=1526707316]
 modulate = Color(0, 0, 0, 1)
 z_index = 16
 position = Vector2(6, -0.5)
@@ -4023,80 +4021,80 @@ target_position = Vector2(0, 13)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="LeftJumpGroundFinder" type="RayCast2D" parent="."]
+[node name="LeftJumpGroundFinder" type="RayCast2D" parent="." unique_id=582342595]
 z_index = 16
 position = Vector2(-8, -1)
 target_position = Vector2(0, 3)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="RightJumpGroundFinder" type="RayCast2D" parent="."]
+[node name="RightJumpGroundFinder" type="RayCast2D" parent="." unique_id=942806960]
 z_index = 16
 position = Vector2(7, -1)
 target_position = Vector2(0, 3)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="LeftJumpBonkFinder" type="RayCast2D" parent="."]
+[node name="LeftJumpBonkFinder" type="RayCast2D" parent="." unique_id=1058251084]
 z_index = 16
 position = Vector2(-6.5, -11)
 target_position = Vector2(0, -4)
 collision_mask = 8
 collide_with_areas = true
 
-[node name="RightJumpBonkFinder" type="RayCast2D" parent="."]
+[node name="RightJumpBonkFinder" type="RayCast2D" parent="." unique_id=1774379781]
 z_index = 16
 position = Vector2(6.5, -11)
 target_position = Vector2(0, -4)
 collision_mask = 8
 collide_with_areas = true
 
-[node name="SSPCasts" type="Node2D" parent="."]
+[node name="SSPCasts" type="Node2D" parent="." unique_id=617798130]
 
-[node name="SSPLeft" type="RayCast2D" parent="SSPCasts"]
+[node name="SSPLeft" type="RayCast2D" parent="SSPCasts" unique_id=457129248]
 position = Vector2(-6, 0)
 target_position = Vector2(0, 1)
 collision_mask = 512
 
-[node name="SSPRight" type="RayCast2D" parent="SSPCasts"]
+[node name="SSPRight" type="RayCast2D" parent="SSPCasts" unique_id=1870369667]
 position = Vector2(6, 0)
 target_position = Vector2(0, 1)
 collision_mask = 512
 
-[node name="WorldLeft" type="RayCast2D" parent="SSPCasts"]
+[node name="WorldLeft" type="RayCast2D" parent="SSPCasts" unique_id=490253036]
 position = Vector2(-6, 0)
 target_position = Vector2(0, 1)
 collision_mask = 8
 
-[node name="WorldRight" type="RayCast2D" parent="SSPCasts"]
+[node name="WorldRight" type="RayCast2D" parent="SSPCasts" unique_id=959920158]
 position = Vector2(6, 0)
 target_position = Vector2(0, 1)
 collision_mask = 8
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1189893987]
 visible = false
 collision_layer = 65536
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1956051383]
 light_mask = 0
 position = Vector2(0, -8.5)
 shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="CrouchingCollision" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CrouchingCollision" type="CollisionShape2D" parent="Hurtbox" unique_id=533153243]
 visible = false
 position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_7jab8")
 disabled = true
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="MovementManager" type="Node2D" parent="."]
+[node name="MovementManager" type="Node2D" parent="." unique_id=520773588]
 script = ExtResource("15")
 
-[node name="States" type="Node2D" parent="MovementManager"]
+[node name="States" type="Node2D" parent="MovementManager" unique_id=313306428]
 
-[node name="StateLabel" type="Label" parent="MovementManager/States"]
+[node name="StateLabel" type="Label" parent="MovementManager/States" unique_id=256856139]
 visible = false
 offset_left = -21.1084
 offset_top = -34.0
@@ -4104,143 +4102,143 @@ offset_right = 18.8916
 offset_bottom = -20.0
 theme = ExtResource("5")
 
-[node name="Disabled" type="Node" parent="MovementManager/States"]
+[node name="Disabled" type="Node" parent="MovementManager/States" unique_id=1527430225]
 script = ExtResource("11")
 
-[node name="Inspect" type="Node" parent="MovementManager/States"]
+[node name="Inspect" type="Node" parent="MovementManager/States" unique_id=1164693356]
 script = ExtResource("27")
 
-[node name="Run" type="Node" parent="MovementManager/States"]
+[node name="Run" type="Node" parent="MovementManager/States" unique_id=1979081924]
 script = ExtResource("30")
 
-[node name="Jump" type="Node" parent="MovementManager/States"]
+[node name="Jump" type="Node" parent="MovementManager/States" unique_id=1159215986]
 script = ExtResource("29")
 
-[node name="Ladder" type="Node" parent="MovementManager/States"]
+[node name="Ladder" type="Node" parent="MovementManager/States" unique_id=2074025169]
 script = ExtResource("10")
 
-[node name="Fly" type="Node" parent="MovementManager/States"]
+[node name="Fly" type="Node" parent="MovementManager/States" unique_id=1112821324]
 script = ExtResource("9")
 
-[node name="Knockback" type="Node" parent="MovementManager/States"]
+[node name="Knockback" type="Node" parent="MovementManager/States" unique_id=1376013122]
 script = ExtResource("7")
 
-[node name="MoveTo" type="Node" parent="MovementManager/States"]
+[node name="MoveTo" type="Node" parent="MovementManager/States" unique_id=727532989]
 script = ExtResource("8")
 
-[node name="MinDirTimer" type="Timer" parent="MovementManager"]
+[node name="MinDirTimer" type="Timer" parent="MovementManager" unique_id=851777814]
 process_callback = 0
 one_shot = true
 
-[node name="CoyoteTimer" type="Timer" parent="MovementManager"]
+[node name="CoyoteTimer" type="Timer" parent="MovementManager" unique_id=852056551]
 process_callback = 0
 one_shot = true
 
-[node name="PlayerCamera" parent="." instance=ExtResource("2")]
+[node name="PlayerCamera" parent="." unique_id=560471510 instance=ExtResource("2")]
 
-[node name="ItemDetector" type="Area2D" parent="."]
+[node name="ItemDetector" type="Area2D" parent="." unique_id=1938488034]
 show_behind_parent = true
 z_index = -1
 position = Vector2(0, -2)
 collision_layer = 0
 collision_mask = 1028
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemDetector" unique_id=76892793]
 light_mask = 0
 position = Vector2(0, -7.5)
 shape = SubResource("2")
 debug_color = Color(0, 0.627451, 0.27451, 0)
 
-[node name="CrouchDetector" type="Area2D" parent="."]
+[node name="CrouchDetector" type="Area2D" parent="." unique_id=69251914]
 visible = false
 z_index = 1
 position = Vector2(0, -2)
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CrouchDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrouchDetector" unique_id=1683671447]
 position = Vector2(0, -14)
 shape = SubResource("63")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
-[node name="Ear" type="Area2D" parent="."]
+[node name="Ear" type="Area2D" parent="." unique_id=1823593050]
 collision_layer = 0
 collision_mask = 1048576
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ear"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ear" unique_id=1068930771]
 position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_v6qwc")
 
-[node name="GunManager" type="Node2D" parent="."]
+[node name="GunManager" type="Node2D" parent="." unique_id=950056630]
 script = ExtResource("12")
 
-[node name="GunPosLeft" type="Marker2D" parent="GunManager"]
+[node name="GunPosLeft" type="Marker2D" parent="GunManager" unique_id=1580425245]
 modulate = Color(1, 0, 1, 1)
 z_index = 5
 position = Vector2(-3, -11)
 gizmo_extents = 1.0
 script = ExtResource("16_adexv")
 
-[node name="GunPosLeftUp" type="Marker2D" parent="GunManager"]
+[node name="GunPosLeftUp" type="Marker2D" parent="GunManager" unique_id=220901613]
 modulate = Color(1, 0, 1, 1)
 z_index = 5
 position = Vector2(-1, -16)
 gizmo_extents = 1.0
 script = ExtResource("16_adexv")
 
-[node name="GunPosLeftDown" type="Marker2D" parent="GunManager"]
+[node name="GunPosLeftDown" type="Marker2D" parent="GunManager" unique_id=1143839656]
 modulate = Color(1, 0, 1, 1)
 z_index = 5
 position = Vector2(0, -6)
 gizmo_extents = 1.0
 script = ExtResource("16_adexv")
 
-[node name="GunPosRight" type="Marker2D" parent="GunManager"]
+[node name="GunPosRight" type="Marker2D" parent="GunManager" unique_id=370138693]
 modulate = Color(1, 0, 1, 1)
 z_index = 5
 position = Vector2(1, -9)
 gizmo_extents = 1.0
 script = ExtResource("16_adexv")
 
-[node name="GunPosRightUp" type="Marker2D" parent="GunManager"]
+[node name="GunPosRightUp" type="Marker2D" parent="GunManager" unique_id=1799802304]
 modulate = Color(1, 0, 1, 1)
 z_index = 5
 position = Vector2(-7, -9)
 gizmo_extents = 1.0
 script = ExtResource("16_adexv")
 
-[node name="GunPosRightDown" type="Marker2D" parent="GunManager"]
+[node name="GunPosRightDown" type="Marker2D" parent="GunManager" unique_id=1837767496]
 modulate = Color(1, 0, 1, 1)
 z_index = 5
 position = Vector2(3, -6)
 gizmo_extents = 1.0
 script = ExtResource("16_adexv")
 
-[node name="ShootDown" type="RayCast2D" parent="GunManager"]
+[node name="ShootDown" type="RayCast2D" parent="GunManager" unique_id=1593515548]
 visible = false
 target_position = Vector2(0, 16)
 collision_mask = 8
 
-[node name="CooldownTimer" type="Timer" parent="GunManager"]
+[node name="CooldownTimer" type="Timer" parent="GunManager" unique_id=983634534]
 one_shot = true
 autostart = true
 
-[node name="Guns" type="Node2D" parent="GunManager"]
+[node name="Guns" type="Node2D" parent="GunManager" unique_id=1698976950]
 position = Vector2(-3, -11)
 
-[node name="Roberta" parent="GunManager/Guns" instance=ExtResource("25_cd6iy")]
+[node name="Roberta" parent="GunManager/Guns" unique_id=808189538 instance=ExtResource("25_cd6iy")]
 
-[node name="Shotgun" parent="GunManager/Guns" instance=ExtResource("4")]
+[node name="Shotgun" parent="GunManager/Guns" unique_id=343421900 instance=ExtResource("4")]
 
-[node name="MPistol" parent="GunManager/Guns" instance=ExtResource("17_p4m8n")]
+[node name="MPistol" parent="GunManager/Guns" unique_id=1036754226 instance=ExtResource("28")]
 
-[node name="Red7" parent="GunManager/Guns" instance=ExtResource("18_l3dey")]
+[node name="Red7" parent="GunManager/Guns" unique_id=1783234816 instance=ExtResource("18_l3dey")]
 
-[node name="Revolver" parent="GunManager/Guns" instance=ExtResource("19_v6qwc")]
+[node name="Revolver" parent="GunManager/Guns" unique_id=260130874 instance=ExtResource("19_v6qwc")]
 
-[node name="Tsurugi" parent="GunManager/Guns" instance=ExtResource("20_x1gsf")]
+[node name="Tsurugi" parent="GunManager/Guns" unique_id=304850335 instance=ExtResource("20_x1gsf")]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=964220440]
 light_mask = 2
 material = SubResource("61")
 position = Vector2(0, -16)
@@ -4249,20 +4247,16 @@ hframes = 12
 vframes = 8
 script = ExtResource("13")
 
-[node name="EffectPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_acjyt")
-}
+[node name="EffectPlayer" type="AnimationPlayer" parent="." unique_id=136471067]
+libraries/ = SubResource("AnimationLibrary_acjyt")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_oo325")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1210520726]
+libraries/ = SubResource("AnimationLibrary_oo325")
 
-[node name="BulletOrigin" type="Marker2D" parent="."]
+[node name="BulletOrigin" type="Marker2D" parent="." unique_id=403297890]
 position = Vector2(0, -8)
 
-[node name="IframeTimer" type="Timer" parent="."]
+[node name="IframeTimer" type="Timer" parent="." unique_id=848232590]
 unique_name_in_owner = true
 wait_time = 2.0
 

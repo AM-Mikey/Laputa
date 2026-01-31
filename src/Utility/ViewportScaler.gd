@@ -6,6 +6,7 @@ var resolution_scale := 4.0
 var menu_resolution_scale := 4.0
 var debug_resolution_scale := 1.0
 var inventory_resolution_scale := 4.0
+var dialog_resolution_scale := 4.0
 
 
 func _ready():
@@ -32,6 +33,12 @@ func _viewport_size_changed():
 	var inventory_urs_y = viewport_size.y / inventory_size.y
 	var inventory_urs = min(inventory_urs_x, inventory_urs_y)
 	inventory_resolution_scale = get_res_scale_from_urs(inventory_urs, true)
+	var dialog_size = Vector2(400, 78)
+	var dialog_urs_x = viewport_size.x / dialog_size.x
+	var dialog_urs_y = viewport_size.y / dialog_size.y
+	var dialog_urs = min(dialog_urs_x, dialog_urs_y)
+	dialog_resolution_scale =  get_res_scale_from_urs(dialog_urs, true)
+
 
 	emit_signal("scale_changed", resolution_scale)
 	await get_tree().process_frame
