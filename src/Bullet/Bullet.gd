@@ -3,7 +3,9 @@ extends CharacterBody2D
 
 class_name Bullet
 
-const FIZZLE = preload("res://src/Effect/BulletFizzle.tscn")
+const FIZZLE_DISTANCE = preload("res://src/Effect/BulletFizzleDistance.tscn")
+const FIZZLE_WORLD = preload("res://src/Effect/BulletFizzleWorld.tscn")
+const FIZZLE_ARMOR = preload("res://src/Effect/BulletFizzleArmor.tscn")
 
 var disabled = false
 var gravity = 300
@@ -37,11 +39,19 @@ func on_break(_method):
 	do_fizzle("bullet")
 
 func do_fizzle(type: String):
-	var fizzle = FIZZLE.instantiate()
-	fizzle.type = type.to_lower()
+	var fizzle
+	match type:
+		"range":
+			fizzle = FIZZLE_DISTANCE.instantiate()
+			fizzle.direction = direction
+		"world":
+			fizzle = FIZZLE_WORLD.instantiate()
+		"armor":
+			fizzle = FIZZLE_ARMOR.instantiate()
+
+
 	world.get_node("Middle").add_child(fizzle)
 	fizzle.position = $End.global_position if has_node("End") else global_position
-	fizzle.play()
 	if instant_fizzle and not is_enemy_bullet:
 		var gun = f.pc().guns.get_child(0)
 		var gun_center = gun.global_position
