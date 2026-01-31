@@ -23,3 +23,15 @@ func hud():
 		return huds[0]
 	else:
 		return null
+
+func db():
+	var dialog_boxes = []
+	for d in get_tree().get_nodes_in_group("DialogBoxes"):
+		dialog_boxes.append(d)
+	if dialog_boxes.size() > 1:
+		printerr("ERROR: Multiple nodes found in group 'DialogBox'")
+		return null
+	elif dialog_boxes.size() == 1:
+		return dialog_boxes[0]
+	else:
+		return null

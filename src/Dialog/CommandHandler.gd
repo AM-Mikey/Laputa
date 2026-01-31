@@ -35,6 +35,9 @@ func parse_command(string):
 			db.display_name(argument)
 		"hidename":
 			db.hide_name()
+		"hideface":
+			hide_face()
+			db.hide_name()
 		"newchar": #/newchar, (face), (name)
 			var a = string.split(",")
 			db.dl.text = ""
@@ -71,6 +74,8 @@ func parse_command(string):
 		"yn":
 			yes_no()
 		"udb":
+			merge_branch()
+		"end":
 			end_branch()
 		"options":
 			options(argument)
@@ -138,9 +143,7 @@ func face(string):
 	face_sprite.hframes = face_sprite.texture.get_width() / 48
 	face_sprite.frame = expression
 
-	face_sprite.position.x = -48
-	var tween = get_tree().create_tween()
-	tween.tween_property(face_sprite, "position", Vector2.ZERO, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	db.get_node("AnimationPlayer").play("FaceEnter")
 
 
 func flip_face(arguement):
@@ -149,6 +152,15 @@ func flip_face(arguement):
 	else:
 		db.flip_face(arguement)
 
+func hide_face():
+	#db.get_node("NPC").visible = false
+	#db.get_node("Flat").visible = true
+	#db.get_node("Face").visible = false
+	db.get_node("AnimationPlayer").play("NPCToFlat")
+	db.size = Vector2(384, 78)
+	db._resolution_scale_changed() #to update after size
+	db.dl = db.get_node("Flat/DialogFlat")
+	db.dl.text = ""
 
 func set_visible(string, visible):
 	if string == "":
@@ -267,8 +279,9 @@ func yes_no():
 	db.get_node("Options").display_options()
 	db.dl = db.get_node("Response/DialogResponse")
 	db.dl.text = ""
-	if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
-		db.get_node("Options").exit_action = "options"
+	print("cleared text + set db")
+	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
+	db.get_node("Options").exit_action = "options"
 
 func options(string):
 	var a = string.split(",")
@@ -280,8 +293,8 @@ func options(string):
 	db.get_node("Options").display_options()
 	db.dl = db.get_node("Response/DialogResponse")
 	db.dl.text = ""
-	if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
-		db.get_node("Options").exit_action = "options"
+	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
+	db.get_node("Options").exit_action = "options"
 
 func topics(argument):
 	var npc_topics = argument.split(",")
@@ -305,8 +318,8 @@ func topics(argument):
 	db.get_node("Options").display_options()
 	db.dl = db.get_node("Response/DialogResponse")
 	db.dl.text = ""
-	if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
-		db.get_node("Options").exit_action = "topics"
+	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
+	db.get_node("Options").exit_action = "topics"
 
 
 func on_select_branch(branch):
@@ -315,14 +328,19 @@ func on_select_branch(branch):
 		seek(seek_target)
 
 
-func end_branch():
-	print("ending branch")
+func merge_branch():
+	print("merging branch")
 	db.awaiting_merge = true
 	db.flash_type = db.FLASH_NORMAL
 	db.flash_original_text = db.dl.text
 	db.get_node("FlashTimer").start(0.3)
 
-
+func end_branch():
+	print("ending branch")
+	db.do_force_end = true
+	#db.flash_type = db.FLASH_END
+	#db.flash_original_text = db.dl.text
+	#db.get_node("FlashTimer").start(0.1)
 
 func seek(string, do_nl = false):
 	print("seeking: ", string)

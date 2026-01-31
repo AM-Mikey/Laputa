@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfxub53miyl7j"]
+[gd_scene format=3 uid="uid://dfxub53miyl7j"]
 
 [ext_resource type="Script" uid="uid://cxnqax67v6rlf" path="res://src/Effect/BasicAnimation.gd" id="1_ij0hb"]
 [ext_resource type="Texture2D" uid="uid://degk8xlhf3n7n" path="res://assets/Effect/BulletFizzleWorld.png" id="2_t4bob"]

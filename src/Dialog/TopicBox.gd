@@ -13,7 +13,7 @@ const TOPIC_BUTTON = preload("res://src/Dialog/TopicButton.tscn")
 @onready var button_path = $Margin/HBox/ScrollContainer/GridContainer
 @onready var face_sprite = $Margin/HBox/Face/Sprite2D
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 @onready var pc = f.pc()
 
 func _ready():
@@ -39,12 +39,12 @@ func add_button(topic):
 		button.grab_focus()
 
 func on_button_pressed(topic):
-	var db = world.get_node("UILayer/DialogBox")
+	var db = f.db()
 	var dialog_json = db.current_dialog_json
 	db.exit()
 
 	var new_db = dialog_box.instantiate()
-	world.ui.add_child(new_db)
+	w.dll.add_child(new_db)
 	new_db.start_printing(dialog_json, topic)
 
 	self.queue_free()

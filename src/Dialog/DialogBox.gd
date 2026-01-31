@@ -2,12 +2,13 @@ extends Control
 
 signal dialog_finished
 
-@export var print_delay = 0.05
+@export var print_delay = 0.03
 @export var do_delay = true
 @export var punctuation_delay = 0.3
 
 var busy = false #executing commands, ignore input
 var awaiting_merge = false
+var do_force_end = false
 var auto_input = false
 var active = false #actively printing
 var current_dialog_json
@@ -40,12 +41,9 @@ func _ready():
 	$Options.visible = false
 
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
-	_resolution_scale_changed(vs.resolution_scale)
+	_resolution_scale_changed()
 
 func start_printing(dialog_json, conversation: String):
-	$NPC.visible = true
-	dl = $NPC/DialogNPC
-	dl.text = ""
 	current_dialog_json = dialog_json
 	active = true
 	var dialog = load_dialog_json(dialog_json)
@@ -57,6 +55,19 @@ func start_printing(dialog_json, conversation: String):
 		return
 	else:
 		current_text_array = split_text(dialog[conversation]) #contains array of: command, newline as blank string, text string
+
+	if get_text_array_starts_with_face():
+		$NPC.visible = true
+		size = Vector2(400, 78)
+		_resolution_scale_changed() #to update after size
+		dl = $NPC/DialogNPC
+	else:
+		$Flat.visible = true
+		size = Vector2(384, 78)
+		_resolution_scale_changed() #to update after size
+		dl = $Flat/DialogFlat
+	dl.text = ""
+
 	align_box()
 	#pc.disable()
 	pc.mm.cached_state = pc.mm.current_state
@@ -66,6 +77,8 @@ func start_printing(dialog_json, conversation: String):
 
 func start_printing_sign(text: String):
 	$Flat.visible = true
+	size = Vector2(384, 78)
+	_resolution_scale_changed() #to update after size
 	dl = $Flat/DialogFlat
 	dl.text = ""
 	dl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -82,6 +95,8 @@ func start_printing_sign(text: String):
 
 func start_printing_flavor_text(text: String):
 	$Flat.visible = true
+	size = Vector2(384, 78)
+	_resolution_scale_changed() #to update after size
 	dl = $Flat/DialogFlat
 	dl.text = ""
 	active = true
@@ -119,7 +134,7 @@ func split_text(text) -> Array: #TODO: regex removes all spaces between commands
 
 
 func run_text_array(text_array, from_input := false): #step is always the next step ready to do, not the one just done
-	if step == current_text_array.size():
+	if step == current_text_array.size() || do_force_end:
 		#print("reached end")
 		active = false
 		if !is_sign:
@@ -158,14 +173,19 @@ func run_text_array(text_array, from_input := false): #step is always the next s
 
 
 func run_text_string(string):
+	var character_step = 0
 	for character in string:
+		var is_last_character = character_step == string.length() - 1
 		dl.text += character
 		if do_delay:
 			am.play("npc_dialog")
-			if character == ",": #or character == "." or character == "?" or character == "!": ##leave out other punctuation since the pause after a line is bad UX
+			if is_last_character:
+				pass
+			elif character in [",", ".", "?", "!"]:
 				await get_tree().create_timer(punctuation_delay).timeout
 			else:
 				await get_tree().create_timer(print_delay).timeout
+		character_step += 1
 
 
 func _on_flash_timer_timeout():
@@ -205,7 +225,7 @@ func _input(event):
 
 
 func progress_text(with_newline = true):
-	if step == current_text_array.size():
+	if step == current_text_array.size() || do_force_end:
 		exit()
 		return
 	do_delay = true
@@ -310,10 +330,22 @@ func flip_face(dir = "auto"):
 
 
 
+### GETTERS ###
+
+func get_text_array_starts_with_face() -> bool:
+	var out = false
+	for section in current_text_array:
+		if !section.left(1) == "/":
+			return out #false, we found a bit of text before a /face
+		elif section.containsn("/newchar") || section.containsn("/face"):
+			out = true
+			return out
+	return out
+
 ### SIGNALS ###
 
-func _resolution_scale_changed(resolution_scale):
-	var viewport_size = get_tree().get_root().size / resolution_scale
-	size.x = min(viewport_size.x, 400)
+func _resolution_scale_changed(_resolution_scale = vs.dialog_resolution_scale):
+	var viewport_size = get_tree().get_root().size / vs.dialog_resolution_scale
+	#size.x = min(viewport_size.x, 400)
 	position.x = (viewport_size.x - size.x) / 2.0
-	position.y = viewport_size.y - 80
+	#position.y = viewport_size.y - 80

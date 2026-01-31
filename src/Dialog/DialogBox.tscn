@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://dmt6h4vj5irs3"]
 
 [ext_resource type="Script" uid="uid://dadxo4i123gxi" path="res://src/Dialog/DialogBox.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://c7swp4yjswsx5" path="res://assets/Dialog/Dialog.png" id="2_a6pxh"]
 [ext_resource type="Texture2D" uid="uid://c1f0r66kayepy" path="res://assets/Dialog/DialogNPC.png" id="2_f46i3"]
+[ext_resource type="Texture2D" uid="uid://cy1x0rcbjtlha" path="res://assets/Dialog/DialogFlatAnimation.png" id="3_a6pxh"]
 [ext_resource type="Texture2D" uid="uid://che6fhlvarswb" path="res://assets/Dialog/NamePanel.png" id="3_f46i3"]
-[ext_resource type="Texture2D" uid="uid://ulkepy7djoku" path="res://assets/Dialog/DialogPanel.png" id="3_irc2v"]
-[ext_resource type="Texture2D" uid="uid://dic7u16psrtwn" path="res://assets/Dialog/DialogNPCPanel.png" id="3_p6mm4"]
+[ext_resource type="Texture2D" uid="uid://bci40e7ebagi2" path="res://assets/Dialog/DialogNPCPanel.png" id="3_p6mm4"]
 [ext_resource type="Texture2D" uid="uid://cn84txin4yywk" path="res://assets/Face/Izu.png" id="4"]
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="4_2s414"]
 [ext_resource type="Shader" uid="uid://d3lkwynjfk4hg" path="res://src/Shader/SimpleBlur.gdshader" id="4_4nt3f"]
 [ext_resource type="FontFile" uid="uid://bwfshb35302x4" path="res://assets/UI/Font/momobold.ttf" id="4_52hu8"]
+[ext_resource type="Texture2D" uid="uid://dip1p20ort6ga" path="res://assets/Dialog/DialogFlatPanelAnimation.png" id="4_irc2v"]
 [ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="4_p6mm4"]
 [ext_resource type="Script" uid="uid://m5b2hs3sruoe" path="res://src/Dialog/CommandHandler.gd" id="6"]
 [ext_resource type="Shader" uid="uid://cvys2g8e6w63u" path="res://src/Shader/SimpleShadow.gdshader" id="8_6ds22"]
@@ -4486,6 +4486,213 @@ _data = {
 &"TwoSecondToFirst": SubResource("Animation_ygvmu")
 }
 
+[sub_resource type="Animation" id="Animation_6fx66"]
+resource_name = "FaceEnter"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Face/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [Vector2(-48, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Face/Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_e0wmx"]
+resource_name = "FlatToNPC"
+length = 0.3
+step = 0.0333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NPC:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flat:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Face:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Flat/Dialog:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.06666666, 0.09999998, 0.13333334, 0.16666664, 0.2, 0.23333333, 0.26666665, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Flat/DialogPanel:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.033333316, 0.06666666, 0.10000001, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666665, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Face/Sprite2D:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Face:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.16666667, 0.2, 0.23333333, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 22), Vector2(0, 20), Vector2(0, 16), Vector2(0, 12)]
+}
+
+[sub_resource type="Animation" id="Animation_gully"]
+resource_name = "NPCToFlat"
+length = 0.3
+step = 0.0333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NPC:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flat:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Face:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Flat/Dialog:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Flat/DialogPanel:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Face/Sprite2D:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Face:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 8), Vector2(0, 12), Vector2(0, 16), Vector2(0, 20), Vector2(0, 22)]
+}
+
 [sub_resource type="Animation" id="Animation_hhm5f"]
 length = 0.001
 tracks/0/type = "value"
@@ -4583,6 +4790,102 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Face/Sprite2D:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Face/Sprite2D:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("NPC:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Flat:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Face:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Flat/Dialog:frame")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Flat/DialogPanel:frame")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Face:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 8)]
 }
 
 [sub_resource type="Animation" id="Animation_wfih8"]
@@ -4787,6 +5090,9 @@ tracks/7/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6fx66"]
 _data = {
+&"FaceEnter": SubResource("Animation_6fx66"),
+&"FlatToNPC": SubResource("Animation_e0wmx"),
+&"NPCToFlat": SubResource("Animation_gully"),
 &"RESET": SubResource("Animation_hhm5f"),
 &"ResponseEnter": SubResource("Animation_wfih8"),
 &"ResponseExit": SubResource("Animation_yx40r")
@@ -4796,7 +5102,7 @@ _data = {
 process_mode = 1
 layout_mode = 3
 anchors_preset = 0
-offset_right = 480.0
+offset_right = 424.0
 offset_bottom = 78.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -4815,19 +5121,23 @@ polygon = PackedVector2Array(-370, 101, -21, 101, -19, 102, -18, 103, -17, 105, 
 
 [node name="Dialog" type="Sprite2D" parent="Flat" unique_id=2066378263]
 position = Vector2(192, -43)
-texture = ExtResource("2_a6pxh")
+texture = ExtResource("3_a6pxh")
+hframes = 10
+frame = 9
 
 [node name="DialogPanel" type="Sprite2D" parent="Flat" unique_id=2088603311]
 modulate = Color(1, 1, 1, 0.85)
 position = Vector2(192, -43)
-texture = ExtResource("3_irc2v")
+texture = ExtResource("4_irc2v")
+hframes = 10
+frame = 9
 
 [node name="DialogFlat" type="RichTextLabel" parent="Flat" unique_id=2035403117]
 light_mask = 2
 layout_mode = 0
-offset_left = 38.0
-offset_top = 22.0
-offset_right = 346.0
+offset_left = 32.0
+offset_top = 21.0
+offset_right = 352.0
 offset_bottom = 70.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -4836,7 +5146,8 @@ theme_override_constants/line_separation = 1
 theme_override_fonts/normal_font = ExtResource("4_2s414")
 theme_override_fonts/bold_font = ExtResource("4_52hu8")
 bbcode_enabled = true
-text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+Third Line of Text"
 scroll_active = false
 scroll_following = true
 
@@ -4847,14 +5158,14 @@ anchors_preset = 0
 z_index = -1
 material = SubResource("ShaderMaterial_js7dk")
 position = Vector2(400, -86)
-polygon = PackedVector2Array(-336, 101, 3, 101, 5, 102, 6, 103, 7, 105, 7, 110, -17, 158, -18, 159, -19, 161, -20, 162, -22, 163, -347, 163, -349, 162, -350, 161, -351, 159, -352, 157, -353, 154, -354, 152, -355, 151, -355, 101)
+polygon = PackedVector2Array(-336, 101, -13, 101, -11, 102, -10, 103, -9, 105, -9, 110, -33, 158, -34, 159, -35, 161, -36, 162, -38, 163, -347, 163, -349, 162, -350, 161, -351, 159, -352, 157, -353, 154, -354, 152, -355, 151, -355, 101)
 
 [node name="Edge" type="Sprite2D" parent="NPC" unique_id=965333611]
 position = Vector2(200, -43)
 texture = ExtResource("2_f46i3")
 
 [node name="Panel" type="Sprite2D" parent="NPC" unique_id=1410700595]
-modulate = Color(1, 1, 1, 0.85)
+modulate = Color(1, 1, 1, 0.8509804)
 position = Vector2(200, -43)
 texture = ExtResource("3_p6mm4")
 
@@ -4862,8 +5173,8 @@ texture = ExtResource("3_p6mm4")
 light_mask = 2
 layout_mode = 0
 offset_left = 72.0
-offset_top = 22.0
-offset_right = 380.0
+offset_top = 21.0
+offset_right = 376.0
 offset_bottom = 70.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -4872,12 +5183,12 @@ theme_override_constants/line_separation = 1
 theme_override_fonts/normal_font = ExtResource("4_2s414")
 theme_override_fonts/bold_font = ExtResource("4_52hu8")
 bbcode_enabled = true
-text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+Third line of txt"
 scroll_active = false
 scroll_following = true
 
 [node name="Response" type="Control" parent="." unique_id=1643388423]
-visible = false
 anchors_preset = 0
 
 [node name="Blur" type="Polygon2D" parent="Response" unique_id=336552230]
@@ -4898,7 +5209,7 @@ texture = ExtResource("9_a6pxh")
 hframes = 10
 
 [node name="Panel" type="Sprite2D" parent="Response" unique_id=1706319221]
-modulate = Color(1, 1, 1, 0.8)
+modulate = Color(1, 1, 1, 0.8509804)
 position = Vector2(200, -43)
 texture = ExtResource("10_irc2v")
 hframes = 10
@@ -4911,7 +5222,7 @@ texture = ExtResource("10_js7dk")
 light_mask = 2
 layout_mode = 0
 offset_left = 72.0
-offset_top = 22.0
+offset_top = 21.0
 offset_right = 232.0
 offset_bottom = 70.0
 size_flags_horizontal = 3
@@ -4926,7 +5237,6 @@ scroll_active = false
 scroll_following = true
 
 [node name="Name" type="Control" parent="." unique_id=219904090]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -4980,13 +5290,12 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="Face" type="Control" parent="." unique_id=1581205440]
-visible = false
 clip_contents = true
 anchors_preset = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 56.0
-offset_bottom = 56.0
+offset_bottom = 55.999992
 mouse_filter = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Face" unique_id=1322914896]

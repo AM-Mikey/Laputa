@@ -121,12 +121,12 @@ func merge_one_way_ssp_tile() -> void:
 
 func do_conversation_on_enter(hide_player = false): #TODO: implement the player hidden + switch camera option
 	await get_tree().process_frame
-	if w.has_node("UILayer/DialogBox"): #clear old dialog box if there is one
-		w.get_node("UILayer/DialogBox").exit()
+	if f.db(): #clear old dialog box if there is one
+		f.db().exit()
 
 	var dialog_box = DB.instantiate()
 	dialog_box.connect("dialog_finished", Callable(self, "on_dialog_finished"))
-	get_tree().get_root().get_node("World/UILayer").add_child(dialog_box)
+	w.dll.add_child(dialog_box)
 	dialog_box.start_printing(dialog_json, conversation_on_enter)
 
 

@@ -27,6 +27,7 @@ var internal_version: String = get_internal_version()
 @onready var bl = $BlackoutLayer
 @onready var ml = $MenuLayer
 @onready var il = $InventoryLayer
+@onready var dll = $DialogLayer
 @onready var front = $Front
 @onready var middle = $Middle
 @onready var back = $Back
@@ -131,7 +132,7 @@ func change_level_via_code(level_path, use_save_data):
 		ml.get_node("PauseMenu").exit()
 	if has_node("MenuLayer/LevelSelect"):
 		get_node("MenuLayer/LevelSelect").queue_free()
-	if ui.has_node("DialogBox"): await $UILayer/DialogBox.exit()
+	if f.db(): await f.db().exit()
 	if f.hud():
 		$HUDLayer/HUDAnimator.play("RESET")
 		f.hud().free()
@@ -175,7 +176,7 @@ func change_level_via_code(level_path, use_save_data):
 func change_level_via_trigger(level_path, door_index):
 	print("changing level via trigger...")
 	SaveSystem.write_level_data_to_temp(current_level)
-	if ui.has_node("DialogBox"): await $UILayer/DialogBox.exit()
+	if f.db(): await f.db().exit()
 	if f.hud():
 		$HUDLayer/HUDAnimator.play("RESET")
 	clear_spawn_layers()
@@ -321,3 +322,4 @@ func _resolution_scale_changed(resolution_scale):
 	dl.scale = Vector2(half_scale, half_scale)
 	ml.scale = Vector2(vs.menu_resolution_scale, vs.menu_resolution_scale)
 	il.scale = Vector2(vs.inventory_resolution_scale, vs.inventory_resolution_scale)
+	dll.scale = Vector2(vs.dialog_resolution_scale, vs.dialog_resolution_scale)

@@ -35,7 +35,7 @@ var bail_time = 6.0
 
 var camera_forgiveness = 16
 
-#@onready var pc = f.pc()
+@onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
 	home = global_position
@@ -187,7 +187,7 @@ func enter_talk(_last_state):
 	else:
 		dialog_box = DB.instantiate()
 		dialog_box.connect("dialog_finished", Callable(self, "on_dialog_finished"))
-		get_tree().get_root().get_node("World/UILayer").add_child(dialog_box)
+		w.dll.add_child(dialog_box)
 		dialog_box.start_printing(dialog_json, conversation)
 
 
