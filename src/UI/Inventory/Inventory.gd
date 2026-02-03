@@ -3,9 +3,6 @@ extends Control
 @onready var w = get_tree().get_root().get_node("World")
 @onready var items = %Items
 @onready var weapon_wheel = %WeaponWheel
-@onready var header = %Header
-@onready var body = %Body
-
 
 func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
@@ -20,7 +17,6 @@ func _input(event):
 func display_items():
 	var pc = f.pc()
 	for i in pc.item_array:
-		print("s")
 		var texture = i.texture
 		%ItemList.add_icon_item(texture)
 

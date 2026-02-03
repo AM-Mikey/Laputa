@@ -272,8 +272,6 @@ func display_hp_number(hp, max_hp):
 
 
 var xp_tween: Tween
-
-
 func _on_xp_updated(xp: float, max_xp: float, level: int, max_level: int, do_xp_flash = false, cause: String = "default") -> void:
 	modulate = Color(1, 1, 1) #to prevent flash animation from stopping on a transparent frame
 	xp_num.frame_coords.x = level
@@ -296,7 +294,7 @@ func _on_xp_updated(xp: float, max_xp: float, level: int, max_level: int, do_xp_
 		if (xp < xp_lost.value / old_progress_max_value * max_xp):
 			xp_lost.value = xp
 		else:
-			xp_lost.value = xp_lost.value / old_progress_max_value * max_xp
+			xp_lost.value = old_progress_value / old_progress_max_value * max_xp
 		xp_tween = get_tree().create_tween().set_parallel()
 		xp_tween.tween_property(xp_progress, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		xp_tween.tween_property(xp_lost, "value", xp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
