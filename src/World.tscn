@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://bsjpymr2sylbl"]
+[gd_scene format=3]
 
-[ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
+[ext_resource type="Script" path="res://src/World.gd" id="8"]
 
 [sub_resource type="Animation" id="Animation_qbf6s"]
 resource_name = "Flash"
@@ -47,10 +47,10 @@ development_stage = "alpha"
 release_version = "1.8"
 do_skip_title = true
 debug_visible = true
-start_level_path = "res://src/Level/MissionTest.tscn"
+start_level_path = "res://src/Level/CloudFactoryExterior.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=912648782]
-scroll_offset = Vector2(32, -222.25714)
+scroll_offset = Vector2(-8352, -8575.484)
 
 [node name="Back" type="Node2D" parent="." unique_id=1451941770]
 visibility_layer = 2
@@ -65,10 +65,13 @@ visibility_layer = 2
 z_index = 2
 
 [node name="InventoryLayer" type="CanvasLayer" parent="." unique_id=1283144760]
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
 
 [node name="BlackoutLayer" type="CanvasLayer" parent="." unique_id=1856051554]
 process_mode = 3
 layer = 2
+visible = false
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
@@ -87,6 +90,7 @@ autoplay = &"RESET"
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=1389692242]
 process_mode = 3
 layer = 4
+visible = false
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
@@ -111,3 +115,5 @@ process_mode = 3
 layer = 8
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
+
+[connection signal="level_saved" from="EditorLayer/Editor" to="EditorLayer/Editor/Main/Win/Tab/Levels" method="on_save"]

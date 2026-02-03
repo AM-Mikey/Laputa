@@ -192,7 +192,8 @@ func read_level_data_from_save(current_level):
 
 func read_mission_data_from_save():
 	var scoped_data = read_from_file(save_path)
-	ms.main_mission_stage = scoped_data["main_mission_stage"]
+	var mission_data = scoped_data["mission_data"]
+	ms.main_mission_stage = mission_data["main_mission_stage"]
 	print("mission data loaded from save")
 
 

@@ -51,8 +51,8 @@ func _input(event):
 			w.ui.add_child(popup)
 			SaveSystem.write_player_data_to_save(w.current_level)
 			SaveSystem.write_level_data_to_temp(w.current_level)
-			SaveSystem.write_mission_data_from_save()
 			SaveSystem.copy_level_data_from_temp_to_save()
+			SaveSystem.write_mission_data_to_save()
 
 
 		if event.is_action_pressed("debug_load"):
@@ -61,8 +61,8 @@ func _input(event):
 			w.ui.add_child(popup)
 			SaveSystem.read_player_data_from_save()
 			SaveSystem.read_level_data_from_save(w.current_level)
-			SaveSystem.read_mission_data_from_save()
 			SaveSystem.copy_level_data_from_save_to_temp()
+			SaveSystem.read_mission_data_from_save()
 
 
 		if event.is_action_pressed("debug_fly"):
