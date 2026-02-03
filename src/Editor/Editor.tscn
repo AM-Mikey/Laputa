@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b5eyeotyrei5i"]
+[gd_scene format=3 uid="uid://b5eyeotyrei5i"]
 
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1"]
 [ext_resource type="Script" uid="uid://c5dc1trq3p0hk" path="res://src/Editor/Editor.gd" id="2"]
@@ -17,7 +17,7 @@
 [ext_resource type="Script" uid="uid://xwjfyhiur8mw" path="res://src/Editor/EditorSettings.gd" id="14"]
 [ext_resource type="Script" uid="uid://xd4yxnbtve0" path="res://src/Editor/TileMaster.gd" id="15_aiisb"]
 
-[node name="Editor" type="Control"]
+[node name="Editor" type="Control" unique_id=1209833802]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,54 +28,54 @@ mouse_filter = 2
 theme = ExtResource("1")
 script = ExtResource("2")
 
-[node name="Margin" type="MarginContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="." unique_id=2073629998]
 layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 mouse_filter = 2
 
-[node name="InfoBox" parent="Margin" instance=ExtResource("13")]
+[node name="InfoBox" parent="Margin" unique_id=800879850 instance=ExtResource("13")]
 layout_mode = 2
 
-[node name="Log" parent="Margin" instance=ExtResource("4_vdv4f")]
+[node name="Log" parent="Margin" unique_id=1682258741 instance=ExtResource("4_vdv4f")]
 layout_mode = 2
 
-[node name="VBox" type="VBoxContainer" parent="Margin"]
+[node name="VBox" type="VBoxContainer" parent="Margin" unique_id=571468971]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Spacer" type="Control" parent="Margin/VBox"]
+[node name="Spacer" type="Control" parent="Margin/VBox" unique_id=545335150]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBox" type="HBoxContainer" parent="Margin/VBox"]
+[node name="HBox" type="HBoxContainer" parent="Margin/VBox" unique_id=1875380757]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="MainSizeRef" type="Control" parent="Margin/VBox/HBox"]
+[node name="MainSizeRef" type="Control" parent="Margin/VBox/HBox" unique_id=1334486049]
 custom_minimum_size = Vector2(205, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 mouse_filter = 2
 
-[node name="SecondarySizeRef" type="Control" parent="Margin/VBox/HBox"]
+[node name="SecondarySizeRef" type="Control" parent="Margin/VBox/HBox" unique_id=780972402]
 custom_minimum_size = Vector2(228, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 2
 
-[node name="Spacer2" type="Control" parent="Margin/VBox"]
+[node name="Spacer2" type="Control" parent="Margin/VBox" unique_id=1930166274]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Main" type="CanvasGroup" parent="."]
+[node name="Main" type="CanvasGroup" parent="." unique_id=1307115763]
 self_modulate = Color(1, 1, 1, 0.282353)
 position = Vector2(0, 32)
 
-[node name="Win" parent="Main" instance=ExtResource("3")]
+[node name="Win" parent="Main" unique_id=1203181185 instance=ExtResource("3")]
 use_parent_material = true
 custom_minimum_size = Vector2(208, 0)
 anchors_preset = 0
@@ -85,60 +85,60 @@ offset_right = 192.0
 offset_bottom = 416.0
 mouse_filter = 1
 
-[node name="Tab" type="TabContainer" parent="Main/Win"]
+[node name="Tab" type="TabContainer" parent="Main/Win" unique_id=849846040]
 layout_mode = 2
 mouse_filter = 2
 current_tab = 0
 tabs_visible = false
 
-[node name="Tiles" parent="Main/Win/Tab" instance=ExtResource("4")]
+[node name="Tiles" parent="Main/Win/Tab" unique_id=190397767 instance=ExtResource("4")]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="TileSet" parent="Main/Win/Tab" instance=ExtResource("5")]
+[node name="TileSet" parent="Main/Win/Tab" unique_id=1873930394 instance=ExtResource("5")]
 visible = false
 use_parent_material = true
 layout_mode = 2
 mouse_filter = 2
 metadata/_tab_index = 1
 
-[node name="Levels" parent="Main/Win/Tab" instance=ExtResource("6")]
+[node name="Levels" parent="Main/Win/Tab" unique_id=1565405635 instance=ExtResource("6")]
 visible = false
 use_parent_material = true
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="Enemies" parent="Main/Win/Tab" instance=ExtResource("8")]
+[node name="Enemies" parent="Main/Win/Tab" unique_id=1608683170 instance=ExtResource("8")]
 visible = false
 use_parent_material = true
 layout_mode = 2
 metadata/_tab_index = 3
 
-[node name="NPCs" parent="Main/Win/Tab" instance=ExtResource("10")]
+[node name="NPCs" parent="Main/Win/Tab" unique_id=1054793033 instance=ExtResource("10")]
 visible = false
 use_parent_material = true
 layout_mode = 2
 metadata/_tab_index = 4
 
-[node name="Props" parent="Main/Win/Tab" instance=ExtResource("9")]
+[node name="Props" parent="Main/Win/Tab" unique_id=1480227362 instance=ExtResource("9")]
 visible = false
 use_parent_material = true
 layout_mode = 2
 metadata/_tab_index = 5
 
-[node name="Triggers" parent="Main/Win/Tab" instance=ExtResource("11")]
+[node name="Triggers" parent="Main/Win/Tab" unique_id=1555493131 instance=ExtResource("11")]
 visible = false
 use_parent_material = true
 layout_mode = 2
 metadata/_tab_index = 6
 
-[node name="TabButtons" type="Control" parent="Main/Win"]
+[node name="TabButtons" type="Control" parent="Main/Win" unique_id=467728333]
 show_behind_parent = true
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("12")
 
-[node name="VBox" type="HBoxContainer" parent="Main/Win/TabButtons"]
+[node name="VBox" type="HBoxContainer" parent="Main/Win/TabButtons" unique_id=565831286]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -147,10 +147,10 @@ grow_horizontal = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Secondary" type="CanvasGroup" parent="."]
+[node name="Secondary" type="CanvasGroup" parent="." unique_id=115186581]
 position = Vector2(0, 32)
 
-[node name="Win" parent="Secondary" instance=ExtResource("3")]
+[node name="Win" parent="Secondary" unique_id=560892266 instance=ExtResource("3")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -158,13 +158,13 @@ offset_left = 761.0
 offset_right = 966.0
 offset_bottom = 440.0
 
-[node name="Inspector" parent="Secondary/Win" instance=ExtResource("7")]
+[node name="Inspector" parent="Secondary/Win" unique_id=1484142811 instance=ExtResource("7")]
 layout_mode = 2
 
-[node name="EditorSettings" type="Node" parent="."]
+[node name="EditorSettings" type="Node" parent="." unique_id=195270786]
 script = ExtResource("14")
 
-[node name="TileMaster" type="Node" parent="."]
+[node name="TileMaster" type="Node" parent="." unique_id=1902613451]
 script = ExtResource("15_aiisb")
 
 [connection signal="level_saved" from="." to="Main/Win/Tab/Levels" method="on_save"]

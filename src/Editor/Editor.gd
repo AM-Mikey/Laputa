@@ -168,6 +168,7 @@ func exit():	#TODO: make this an editor_exit signal ## no? that just decentraliz
 	f.pc().enable()
 	f.pc().get_node("PlayerCamera").enabled = true
 	f.pc().get_node("PlayerCamera").make_current()
+	f.pc().get_node("PlayerCamera").reset()
 	w.current_level.get_node("LevelLimiter").setup() #must be after camera setup
 	#set_entities_pickable(false)
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):

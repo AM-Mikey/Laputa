@@ -114,10 +114,7 @@ func first_time_level_setup():
 		ms.setup_level_via_main_mission()
 	pc.global_position = get_spawn_point().global_position
 
-	if current_level.has_node("LevelCamera"):
-		player_camera.enabled = false
-	else:
-		player_camera.enabled = true
+	$Juniper/PlayerCamera.reset()
 
 	#wipe would go here if we want one
 	display_level_text(current_level)
@@ -126,8 +123,8 @@ func first_time_level_setup():
 func change_level_via_code(level_path, use_save_data):
 	print("changing level via code...")
 
-	if has_node("MenuLayer/TitleScreen"):
-		get_node("MenuLayer/TitleScreen").queue_free()
+	if ml.has_node("TitleScreen"):
+		ml.get_node("TitleScreen").exit()
 	if ml.has_node("PauseMenu"):
 		ml.get_node("PauseMenu").exit()
 	if has_node("MenuLayer/LevelSelect"):
@@ -142,7 +139,7 @@ func change_level_via_code(level_path, use_save_data):
 	if f.pc() != null:
 		$Juniper.free()
 	add_child(JUNIPER.instantiate())
-	$Juniper/PlayerCamera.position_smoothing_enabled = false
+
 	$Juniper.velocity = Vector2.ZERO
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 
@@ -156,11 +153,7 @@ func change_level_via_code(level_path, use_save_data):
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		$Juniper.global_position = s.global_position
 
-
-	if current_level.has_node("LevelCamera"):
-		$Juniper/PlayerCamera.enabled = false
-	else:
-		$Juniper/PlayerCamera.enabled = true
+	$Juniper/PlayerCamera.reset()
 
 	#wipe would go here if we want one
 	display_level_text(current_level)
@@ -168,9 +161,6 @@ func change_level_via_code(level_path, use_save_data):
 	if use_save_data:
 		SaveSystem.read_level_data_from_temp(current_level)
 
-	await get_tree().process_frame
-	await get_tree().process_frame
-	$Juniper/PlayerCamera.position_smoothing_enabled = true
 
 
 func change_level_via_trigger(level_path, door_index):
@@ -189,7 +179,7 @@ func change_level_via_trigger(level_path, door_index):
 	add_child(current_level)
 	if current_level.main_mission_level_update:
 		ms.setup_level_via_main_mission()
-	$Juniper/PlayerCamera.position_smoothing_enabled = false
+	$Juniper/PlayerCamera.reset()
 
 	#### get the door with the right index
 	var doors_found = 0
@@ -243,7 +233,6 @@ func change_level_via_trigger(level_path, door_index):
 		display_level_text(current_level)
 	run_conversation_on_enter(current_level)
 	#await get_tree().create_timer(0.01).timeout
-	$Juniper/PlayerCamera.position_smoothing_enabled = true
 
 
 ### HELPERS ###

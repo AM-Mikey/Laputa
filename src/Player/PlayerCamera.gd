@@ -23,19 +23,28 @@ func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 
+
 func _physics_process(_delta):
 	if h_dir != pc.look_dir.x:
 		h_dir = pc.look_dir.x
 		pan_horizontal(pc.look_dir.x)
 
 	if h_tween: #TODO: this should only run if h_tween is running
-		h_tween.set_speed_scale(max(abs(pc.velocity.x)/mm.speed.x, h_pan_min_speed))
+		if h_tween.is_running():
+			h_tween.set_speed_scale(max(abs(pc.velocity.x)/mm.speed.x, h_pan_min_speed))
 
 	if !pc.disabled and pc.can_input and !pc.mm.current_state == pc.mm.states["inspect"]:
 		if inp.pressed("look_up",1) or inp.pressed("look_down",1) \
 		or inp.released("look_up") or inp.released("look_down"):
 			pan_vertical(get_v_dir())
 
+func reset():
+	position_smoothing_enabled = false #reset_smoothing() has issues
+	drag_horizontal_offset =  pc.look_dir.x * (h_pan_distance / vs.resolution_scale) #initialize camera offset
+	force_update_scroll()
+	await get_tree().process_frame #godot quirk that this requires two frames
+	await get_tree().process_frame
+	position_smoothing_enabled = true
 
 ### MAIN ###
 
@@ -56,6 +65,8 @@ func pan_horizontal(dir):
 func stop_tween():
 	h_tween.kill()
 	v_tween.kill()
+
+
 
 ### GETTERS ###
 func get_v_dir() -> int:
@@ -121,3 +132,4 @@ func spawn_black_bar(bar_name, size, bar_position):
 
 func _resolution_scale_changed(resolution_scale):
 	zoom = Vector2(resolution_scale, resolution_scale)
+	reset()

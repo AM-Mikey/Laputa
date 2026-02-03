@@ -200,4 +200,5 @@ func _on_CoyoteTimer_timeout():
 	pc.position.y += 1
 	pc.velocity.y += 20 #prevent us from walking across 1 tile gaps
 	if not pc.is_on_floor() and current_state == states["run"]:
+		$States/Jump.is_dropping = true
 		change_state("jump")
