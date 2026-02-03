@@ -7,6 +7,7 @@ var action_buttons = {}
 var action_button_is_red = []
 var ignore_button_press = false
 var current_listening_action = null
+var unsaved_action = []
 var action_button_panel_default_widths = {}
 var action_button_panel_tween_time = 0.1
 var button_text_color_temp = Color(0.988, 0.22, 0.22)
@@ -65,6 +66,7 @@ func set_temp_action_input(event, device_type):
 		print("already using this input")
 	else:
 		temp_action_input[current_listening_action] = input_array
+		unsaved_action.append(current_listening_action)
 		match device_type:
 			"keyboard":
 				p.set_button_text(true)
@@ -75,6 +77,7 @@ func set_temp_action_input(event, device_type):
 
 
 func reset_temp_action_input():
+	unsaved_action = []
 	temp_action_keyboard_input = {
 	"move_left": convert_input_event_to_array(get_action_input_event("move_left", "keyboard")),
 	"move_right": convert_input_event_to_array(get_action_input_event("move_right", "keyboard")),
@@ -105,6 +108,7 @@ func reset_temp_action_input():
 
 func confirm_action_input(device_type):
 	action_button_is_red.clear()
+	unsaved_action = []
 	var temp_action_input
 	match device_type:
 		"keyboard":

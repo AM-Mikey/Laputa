@@ -52,9 +52,6 @@ func _ready():
 	controller_config.after_settings_ready = true
 	key_config.after_settings_ready = true
 
-func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("pause") or Input.is_action_just_pressed("ui_cancel"):
-		on_return()
 
 ### SIGNALS
 
@@ -215,4 +212,4 @@ func on_reset():
 	load_settings()
 
 func on_return():
-	w.get_node("MenuLayer/Options").exit()
+	w.get_node("MenuLayer/Options").process_exit()

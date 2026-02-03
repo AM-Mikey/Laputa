@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dyl8fvraxwivv"]
+[gd_scene format=3 uid="uid://dyl8fvraxwivv"]
 
 [ext_resource type="PackedScene" uid="uid://b1vehxtueux4l" path="res://src/UI/Options/Settings.tscn" id="1"]
 [ext_resource type="Theme" uid="uid://c1np2xna4dogr" path="res://src/UI/Theme/InsetMenu.tres" id="1_sv0a2"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b648rn7n08p6b" path="res://assets/UI/Options/ArrowLeft.png" id="6_sv0a2"]
 [ext_resource type="Texture2D" uid="uid://dvit2aabssmha" path="res://assets/UI/Options/ArrowRight.png" id="7_hsdg4"]
 
-[node name="Options" type="MarginContainer"]
+[node name="Options" type="MarginContainer" unique_id=2043058675]
 clip_contents = true
 offset_right = 480.0
 offset_bottom = 270.0
@@ -21,20 +21,20 @@ theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 2
 script = ExtResource("5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=451799657]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Control" type="Control" parent="VBoxContainer"]
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=1215261743]
 custom_minimum_size = Vector2(0, 14.324)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1535014702]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TabContainer" type="TabContainer" parent="VBoxContainer2"]
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer2" unique_id=115509983]
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 2
@@ -42,7 +42,7 @@ size_flags_vertical = 3
 tab_alignment = 1
 current_tab = 0
 
-[node name="Settings" parent="VBoxContainer2/TabContainer" instance=ExtResource("1")]
+[node name="Settings" parent="VBoxContainer2/TabContainer" unique_id=649723207 instance=ExtResource("1")]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/margin_left = 2
@@ -51,7 +51,7 @@ theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 metadata/_tab_index = 0
 
-[node name="KeyConfig" parent="VBoxContainer2/TabContainer" instance=ExtResource("2")]
+[node name="KeyConfig" parent="VBoxContainer2/TabContainer" unique_id=1096285039 instance=ExtResource("2")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -61,7 +61,7 @@ theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 metadata/_tab_index = 1
 
-[node name="ControllerConfig" parent="VBoxContainer2/TabContainer" instance=ExtResource("4")]
+[node name="ControllerConfig" parent="VBoxContainer2/TabContainer" unique_id=1698475888 instance=ExtResource("4")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -71,13 +71,13 @@ theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 metadata/_tab_index = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1526903931]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 2
 alignment = 1
 
-[node name="LeftArrow" type="TextureRect" parent="HBoxContainer"]
+[node name="LeftArrow" type="TextureRect" parent="HBoxContainer" unique_id=778651960]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(288, 0)
 layout_mode = 2
@@ -87,37 +87,80 @@ mouse_filter = 2
 texture = ExtResource("6_sv0a2")
 stretch_mode = 2
 
-[node name="RightArrow" type="TextureRect" parent="HBoxContainer"]
+[node name="RightArrow" type="TextureRect" parent="HBoxContainer" unique_id=940832422]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("7_hsdg4")
 
-[node name="ExitTimer" type="Timer" parent="."]
+[node name="ExitTimer" type="Timer" parent="." unique_id=1742942847]
 unique_name_in_owner = true
 one_shot = true
 
-[node name="ExitDecayTimer" type="Timer" parent="."]
+[node name="ExitDecayTimer" type="Timer" parent="." unique_id=231174282]
 unique_name_in_owner = true
 one_shot = true
 
-[node name="LeftTimer" type="Timer" parent="."]
+[node name="LeftTimer" type="Timer" parent="." unique_id=770918743]
 unique_name_in_owner = true
 one_shot = true
 
-[node name="LeftDecayTimer" type="Timer" parent="."]
+[node name="LeftDecayTimer" type="Timer" parent="." unique_id=463545762]
 unique_name_in_owner = true
 one_shot = true
 
-[node name="RightTimer" type="Timer" parent="."]
+[node name="RightTimer" type="Timer" parent="." unique_id=929887294]
 unique_name_in_owner = true
 one_shot = true
 
-[node name="RightDecayTimer" type="Timer" parent="."]
+[node name="RightDecayTimer" type="Timer" parent="." unique_id=1934046054]
 unique_name_in_owner = true
 one_shot = true
+
+[node name="Outer" type="Node" parent="." unique_id=1408918138]
+
+[node name="UnsavedConfirm" type="MarginContainer" parent="Outer" unique_id=1961666780]
+unique_name_in_owner = true
+visible = false
+offset_left = 101.0
+offset_top = 120.0
+offset_right = 362.0
+offset_bottom = 161.0
+theme = ExtResource("1_sv0a2")
+
+[node name="Panel" type="Panel" parent="Outer/UnsavedConfirm" unique_id=1416478608]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Outer/UnsavedConfirm" unique_id=1415546264]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Outer/UnsavedConfirm/Margin" unique_id=263430434]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Outer/UnsavedConfirm/Margin/VBoxContainer" unique_id=1329565589]
+layout_mode = 2
+text = "Are you sure? There are unsaved changes"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Outer/UnsavedConfirm/Margin/VBoxContainer" unique_id=928354679]
+layout_mode = 2
+alignment = 1
+
+[node name="Yes" type="Button" parent="Outer/UnsavedConfirm/Margin/VBoxContainer/HBoxContainer" unique_id=468828696]
+layout_mode = 2
+focus_neighbor_left = NodePath("../No")
+focus_neighbor_right = NodePath("../No")
+text = "Yes"
+
+[node name="No" type="Button" parent="Outer/UnsavedConfirm/Margin/VBoxContainer/HBoxContainer" unique_id=91417893]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Yes")
+focus_neighbor_right = NodePath("../Yes")
+text = "No"
 
 [connection signal="tab_changed" from="VBoxContainer2/TabContainer" to="." method="_on_TabContainer_tab_changed"]
-[connection signal="timeout" from="ExitTimer" to="." method="exit"]
+[connection signal="timeout" from="ExitTimer" to="." method="process_exit"]
 [connection signal="timeout" from="LeftTimer" to="." method="change_tab" binds= ["left"]]
 [connection signal="timeout" from="RightTimer" to="." method="change_tab" binds= ["right"]]
+[connection signal="pressed" from="Outer/UnsavedConfirm/Margin/VBoxContainer/HBoxContainer/Yes" to="." method="exit_unsaved_confirm"]
+[connection signal="pressed" from="Outer/UnsavedConfirm/Margin/VBoxContainer/HBoxContainer/No" to="." method="exit_unsaved_reject"]
