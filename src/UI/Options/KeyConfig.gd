@@ -188,7 +188,7 @@ func on_reset():
 
 
 func on_return():
-	w.get_node("MenuLayer/Options").exit()
+	w.get_node("MenuLayer/Options").process_exit()
 
 ### UI ###
 

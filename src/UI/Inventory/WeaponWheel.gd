@@ -47,19 +47,14 @@ func _input(event):
 	var gun_count = pc.guns.get_child_count()
 	if (event.is_action_pressed("gun_left") || event.is_action_pressed("gun_right")) && timer.time_left == 0: # and timer.time_left == 0)
 		var old_child = $Sprites.get_child(0)
-		var gun_to_move
 
 		#changing gun
 		if event.is_action_pressed("gun_left"):
-			gun_to_move = pc.guns.get_child(gun_count - 1)
-			pc.guns.move_child(gun_to_move, 0)
+			pc.gm.shift_gun("left", false)
 			$Sprites.move_child($Sprites.get_child(gun_count - 1), 0)
 		elif event.is_action_pressed("gun_right"):
-			gun_to_move = pc.guns.get_child(0)
-			pc.guns.move_child(gun_to_move, gun_count - 1)
+			pc.gm.shift_gun("right", false)
 			$Sprites.move_child($Sprites.get_child(0), gun_count - 1)
-		pc.gm.set_guns_visible()
-		pc.emit_signal("guns_updated", pc.guns.get_children())
 
 		var active_child = $Sprites.get_child(0)
 		timer.start(cycle_time)

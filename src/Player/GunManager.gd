@@ -42,7 +42,7 @@ func can_shoot() -> bool:
 
 ### METHODS
 
-func shift_gun(direction):
+func shift_gun(direction, audio: bool = true):
 	# Stop the active gun from erroneously firing when it's no longer active
 	if $Guns.get_child_count() < 2: #no guns to swap, bozo!
 		return
@@ -63,7 +63,8 @@ func shift_gun(direction):
 	set_guns_visible()
 
 	#pc.emit_signal("xp_updated", $Guns.get_child(0).xp, $Guns.get_child(0).max_xp, $Guns.get_child(0).level, $Guns.get_child(0).max_level)
-	am.play("gun_shift")
+	if (audio):
+		am.play("gun_shift")
 
 	# The new active gun should continue firing even when we swap between guns
 	active_gun = $Guns.get_child(0)

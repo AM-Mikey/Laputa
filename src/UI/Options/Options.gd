@@ -6,7 +6,7 @@ const RIGHT_ARROW = preload("res://assets/UI/Options/ArrowRight.png")
 
 @onready var world = get_tree().get_root().get_node("World")
 var ishidden = false
-var exit_time := 1.0
+var exit_time := 0.4
 var arrow_time := 0.4
 
 @onready var tabs = $VBoxContainer2/TabContainer
@@ -60,20 +60,31 @@ func _physics_process(_delta):
 
 
 func _input(event):
-	if event.is_action_pressed("gun_left"):
-		%LeftTimer.start(arrow_time)
-	if event.is_action_released("gun_left"):
-		%LeftTimer.stop()
-	if event.is_action_pressed("gun_right"):
-		%RightTimer.start(arrow_time)
-	if event.is_action_released("gun_right"):
-		%RightTimer.stop()
+	if (!%UnsavedConfirm.visible):
+		if event.is_action_pressed("gun_left"):
+			%LeftTimer.start(arrow_time)
+		if event.is_action_released("gun_left"):
+			%LeftTimer.stop()
+		if event.is_action_pressed("gun_right"):
+			%RightTimer.start(arrow_time)
+		if event.is_action_released("gun_right"):
+			%RightTimer.stop()
 
-	if event.is_action_pressed("ui_cancel"):
-		%ExitTimer.start(exit_time)
-	if event.is_action_released("ui_cancel"):
-		%ExitTimer.stop()
+		if event.is_action_pressed("ui_cancel") or event.is_action_pressed("pause"):
+			%ExitTimer.start(exit_time)
+		if event.is_action_released("ui_cancel") or event.is_action_released("pause"):
+			%ExitTimer.stop()
 
+func process_exit():
+	if (%KeyConfig.rm.unsaved_action.size() > 0 or %ControllerConfig.rm.unsaved_action.size() > 0):
+		var error_message: PackedStringArray = []
+		if %KeyConfig.rm.unsaved_action.size() > 0: error_message.append("Keyboard")
+		if %ControllerConfig.rm.unsaved_action.size() > 0: error_message.append("Controller")
+		%UnsavedConfirm.visible = true
+		%UnsavedConfirm/Margin/VBoxContainer/Label.text = "Are you sure? There are unsaved changes in: " + ", ".join(error_message)
+		%UnsavedConfirm/Margin/VBoxContainer/HBoxContainer/No.grab_focus()
+	else:
+		exit()
 
 func exit():
 	%ExitTimer.stop()
@@ -86,7 +97,14 @@ func exit():
 		world.get_node("MenuLayer/TitleScreen").do_focus()
 	queue_free()
 
+func exit_unsaved_confirm() -> void:
+	focus_current_tab()
+	%UnsavedConfirm.visible = false
+	exit()
 
+func exit_unsaved_reject() -> void:
+	focus_current_tab()
+	%UnsavedConfirm.visible = false
 
 ### HELPERS ###
 
@@ -132,10 +150,14 @@ func _on_TabContainer_tab_changed(tab):
 	%RightTimer.stop()
 	%RightDecayTimer.stop()
 	await get_tree().process_frame
-	match tab:
+	focus_current_tab
+
+func focus_current_tab() -> void:
+	match tabs.current_tab:
 		0: %Settings.do_focus()
 		1: %KeyConfig.do_focus()
 		2: %ControllerConfig.do_focus()
+
 
 func _resolution_scale_changed(_resolution_scale):
 	set_deferred("size", get_tree().get_root().size / vs.menu_resolution_scale)
