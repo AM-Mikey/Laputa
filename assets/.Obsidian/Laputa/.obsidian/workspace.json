@@ -56,12 +56,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Groups/Dogtown Residents.md",
+                "file": "The World/Dinero.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Dogtown Residents"
+              "title": "Dinero"
             }
           }
         ],
@@ -244,12 +244,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "8e79af8c8cf32a05",
+  "active": "716f7f890990af0d",
   "lastOpenFiles": [
+    "Objects/Machine.md",
+    "The World/Dinero.md",
+    "Groups/Dogtown Residents.md",
     "Groups/Corp..md",
     "Groups/Colonists.md",
     "Groups/Capital City Residents.md",
-    "The World/Dinero.md",
     "Groups/Laputans.md",
     "Concepts/Timeline of Events Before Laputa.md",
     "The World/Monsters and Animals.md",
@@ -270,8 +272,6 @@
     "Characters/Rosemary.md",
     "Characters/Scrum.md",
     "Concepts/Second Inhabitants.md",
-    "Concepts/Laputan Crown.md",
-    "Characters/Spirit of the Island.md",
     "Aseprite_8jemaKX0FE.png",
     "Aseprite_EEozVk20AW.png",
     "Aseprite_ujhX9SUnNc.png",

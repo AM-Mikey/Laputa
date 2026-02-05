@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b7ilah41ye7yl"]
+[gd_scene format=3 uid="uid://b7ilah41ye7yl"]
 
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="3"]
@@ -50,32 +50,32 @@ shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pkrle"]
 
-[node name="Inventory" type="CenterContainer"]
+[node name="Inventory" type="CenterContainer" unique_id=2030748233]
 process_mode = 3
 offset_right = 480.0
 offset_bottom = 270.0
 theme = ExtResource("2")
 script = ExtResource("6")
 
-[node name="Blur" type="Polygon2D" parent="."]
+[node name="Blur" type="Polygon2D" parent="." unique_id=1728504874]
 material = SubResource("ShaderMaterial_l1q3b")
 polygon = PackedVector2Array(0, 0, 480, 0, 480, 270, 0, 270)
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="." unique_id=117969254]
 custom_minimum_size = Vector2(288, 248)
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="HBox" type="HBoxContainer" parent="VBox"]
+[node name="HBox" type="HBoxContainer" parent="VBox" unique_id=1449758567]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Control" type="Control" parent="VBox/HBox"]
+[node name="Control" type="Control" parent="VBox/HBox" unique_id=72491428]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="InventoryButton" type="Button" parent="VBox/HBox"]
+[node name="InventoryButton" type="Button" parent="VBox/HBox" unique_id=682668949]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -92,11 +92,11 @@ toggle_mode = true
 button_pressed = true
 text = "Inventory"
 
-[node name="Control2" type="Control" parent="VBox/HBox"]
+[node name="Control2" type="Control" parent="VBox/HBox" unique_id=363994811]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 
-[node name="MissionButton" type="Button" parent="VBox/HBox"]
+[node name="MissionButton" type="Button" parent="VBox/HBox" unique_id=794407605]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -112,11 +112,11 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_eo4w6")
 toggle_mode = true
 text = "Mission"
 
-[node name="Control3" type="Control" parent="VBox/HBox"]
+[node name="Control3" type="Control" parent="VBox/HBox" unique_id=1343740971]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 
-[node name="MapButton" type="Button" parent="VBox/HBox"]
+[node name="MapButton" type="Button" parent="VBox/HBox" unique_id=455113071]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -132,17 +132,19 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_eo4w6")
 toggle_mode = true
 text = "Map"
 
-[node name="Control4" type="Control" parent="VBox/HBox"]
+[node name="Control4" type="Control" parent="VBox/HBox" unique_id=2121974066]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Background" type="Panel" parent="VBox"]
+[node name="Background" type="Panel" parent="VBox" unique_id=1551394557]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(288, 232)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("8")
 
-[node name="Inventory" type="MarginContainer" parent="VBox/Background"]
+[node name="Inventory" type="MarginContainer" parent="VBox/Background" unique_id=2102478161]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(288, 232)
 layout_mode = 0
 offset_right = 288.0
@@ -152,22 +154,22 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 8
 
-[node name="VBox" type="VBoxContainer" parent="VBox/Background/Inventory"]
+[node name="VBox" type="VBoxContainer" parent="VBox/Background/Inventory" unique_id=610653170]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Weapons" type="MarginContainer" parent="VBox/Background/Inventory/VBox"]
+[node name="Weapons" type="MarginContainer" parent="VBox/Background/Inventory/VBox" unique_id=567955850]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Panel" type="Panel" parent="VBox/Background/Inventory/VBox/Weapons"]
+[node name="Panel" type="Panel" parent="VBox/Background/Inventory/VBox/Weapons" unique_id=1974858271]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_1ly47")
 
-[node name="Node2D" type="Node2D" parent="VBox/Background/Inventory/VBox/Weapons"]
+[node name="Node2D" type="Node2D" parent="VBox/Background/Inventory/VBox/Weapons" unique_id=1191019744]
 
-[node name="TextureRect" type="TextureRect" parent="VBox/Background/Inventory/VBox/Weapons/Node2D"]
+[node name="TextureRect" type="TextureRect" parent="VBox/Background/Inventory/VBox/Weapons/Node2D" unique_id=483773731]
 offset_left = 29.0
 offset_top = 28.0
 offset_right = 211.0
@@ -175,21 +177,21 @@ offset_bottom = 53.0
 texture = ExtResource("6_l1q3b")
 expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Inventory/VBox/Weapons"]
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Inventory/VBox/Weapons" unique_id=1554793153]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="WeaponWheel" parent="VBox/Background/Inventory/VBox/Weapons/MarginContainer" instance=ExtResource("7")]
+[node name="WeaponWheel" parent="VBox/Background/Inventory/VBox/Weapons/MarginContainer" unique_id=238393302 instance=ExtResource("7")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 height_modifier = 0.1
 
-[node name="Items" type="MarginContainer" parent="VBox/Background/Inventory/VBox"]
+[node name="Items" type="MarginContainer" parent="VBox/Background/Inventory/VBox" unique_id=582997615]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -199,18 +201,18 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 0
 
-[node name="Panel" type="Panel" parent="VBox/Background/Inventory/VBox/Items"]
+[node name="Panel" type="Panel" parent="VBox/Background/Inventory/VBox/Items" unique_id=522726902]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("6_4pdh5")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Inventory/VBox/Items"]
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Inventory/VBox/Items" unique_id=35496646]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 4
 
-[node name="ItemList" type="ItemList" parent="VBox/Background/Inventory/VBox/Items/MarginContainer"]
+[node name="ItemList" type="ItemList" parent="VBox/Background/Inventory/VBox/Items/MarginContainer" unique_id=1974989419]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
@@ -233,27 +235,27 @@ max_columns = 6
 fixed_column_width = 32
 fixed_icon_size = Vector2i(32, 16)
 
-[node name="Description" type="MarginContainer" parent="VBox/Background/Inventory/VBox"]
+[node name="Description" type="MarginContainer" parent="VBox/Background/Inventory/VBox" unique_id=1990781247]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Panel" type="Panel" parent="VBox/Background/Inventory/VBox/Description"]
+[node name="Panel" type="Panel" parent="VBox/Background/Inventory/VBox/Description" unique_id=1146520857]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("3")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Inventory/VBox/Description"]
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Inventory/VBox/Description" unique_id=838177359]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="VBox" type="VBoxContainer" parent="VBox/Background/Inventory/VBox/Description/MarginContainer"]
+[node name="VBox" type="VBoxContainer" parent="VBox/Background/Inventory/VBox/Description/MarginContainer" unique_id=1885470096]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="InventoryHeader" type="Label" parent="VBox/Background/Inventory/VBox/Description/MarginContainer/VBox"]
+[node name="InventoryHeader" type="Label" parent="VBox/Background/Inventory/VBox/Description/MarginContainer/VBox" unique_id=2130064493]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -262,7 +264,7 @@ theme_override_colors/font_shadow_color = Color(0.113725, 0.156863, 0.227451, 1)
 theme_override_fonts/font = ExtResource("7_y7abv")
 text = "Tasty Treat"
 
-[node name="InventoryBody" type="Label" parent="VBox/Background/Inventory/VBox/Description/MarginContainer/VBox"]
+[node name="InventoryBody" type="Label" parent="VBox/Background/Inventory/VBox/Description/MarginContainer/VBox" unique_id=242460956]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
@@ -270,12 +272,11 @@ theme_override_colors/font_color = Color(0.784314, 0.784314, 0.639216, 1)
 theme_override_colors/font_shadow_color = Color(0.113725, 0.156863, 0.227451, 1)
 theme_override_fonts/font = ExtResource("8_1e805")
 text = "Chocolate covered mushrooms? 
-xcv sdfsdfsdf sdfsdfsdf sdfsdf sdfsdf sdfsdf"
+xcv gggggggghhhhhhhhhhhhhhhhhh"
 autowrap_mode = 3
 
-[node name="Mission" type="MarginContainer" parent="VBox/Background"]
+[node name="Mission" type="MarginContainer" parent="VBox/Background" unique_id=281285142]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(288, 232)
 layout_mode = 0
 offset_right = 288.0
@@ -285,43 +286,84 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 8
 
-[node name="VBox" type="VBoxContainer" parent="VBox/Background/Mission"]
+[node name="VBox" type="VBoxContainer" parent="VBox/Background/Mission" unique_id=444823704]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Weapons" type="MarginContainer" parent="VBox/Background/Mission/VBox"]
+[node name="Missions" type="MarginContainer" parent="VBox/Background/Mission/VBox" unique_id=1069239040]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBox/Weapons"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBox/Background/Mission/VBox/Missions" unique_id=1815589522]
 layout_mode = 2
+
+[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer" unique_id=1115827441]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("3")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Weapons/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer/Panel" unique_id=1692406411]
 layout_mode = 0
-offset_right = 240.0
+offset_right = 128.0
 offset_bottom = 64.0
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="VBox" type="VBoxContainer" parent="VBox/Background/Mission/VBox/Weapons/Panel/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 2
-
-[node name="Body" type="Label" parent="VBox/Background/Mission/VBox/Weapons/Panel/MarginContainer/VBox"]
+[node name="MissionBody" type="Label" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer/Panel/MarginContainer" unique_id=988650954]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.784314, 0.784314, 0.639216, 1)
 theme_override_colors/font_shadow_color = Color(0.113725, 0.156863, 0.227451, 1)
 theme_override_fonts/font = ExtResource("8_1e805")
-text = "Current Mission:
-Explore the area"
+text = "Escape the Cloud Factory and return to Basil in Dogtown"
 autowrap_mode = 3
 
-[node name="Topics" type="MarginContainer" parent="VBox/Background/Mission/VBox"]
+[node name="Panel2" type="Panel" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer" unique_id=1474095994]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("6_4pdh5")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer/Panel2" unique_id=2039890261]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 64.0
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+
+[node name="TopicList" type="ItemList" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer/Panel2/MarginContainer" unique_id=783086266]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_colors/font_hovered_color = Color(0.6392157, 0.42745098, 0.12941177, 1)
+theme_override_colors/font_hovered_selected_color = Color(0.9529412, 0.69411767, 0.19215687, 1)
+theme_override_colors/font_selected_color = Color(0.8509804, 0.5647059, 0.101960786, 1)
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/line_separation = 0
+theme_override_constants/icon_margin = 0
+theme_override_fonts/font = ExtResource("8_1e805")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_l1q3b")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lmyv0")
+theme_override_styles/hovered = SubResource("StyleBoxEmpty_ebj88")
+theme_override_styles/hovered_selected = SubResource("StyleBoxEmpty_frhsn")
+theme_override_styles/hovered_selected_focus = SubResource("StyleBoxEmpty_ynejs")
+theme_override_styles/selected = ExtResource("12_vxl58")
+theme_override_styles/selected_focus = ExtResource("12_vxl58")
+theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_xpheq")
+theme_override_styles/cursor = SubResource("StyleBoxEmpty_pkrle")
+allow_search = false
+item_count = 4
+item_0/text = "· Food Delivery"
+item_1/text = "· Save the cat!"
+item_2/text = "· Meanwhile..."
+item_3/text = "· Clear the area"
+
+[node name="Topics" type="MarginContainer" parent="VBox/Background/Mission/VBox" unique_id=1403991417]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -330,18 +372,18 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 0
 
-[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBox/Topics"]
+[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBox/Topics" unique_id=881649936]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("6_4pdh5")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Topics"]
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Topics" unique_id=1161177433]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 4
 
-[node name="TopicList" type="ItemList" parent="VBox/Background/Mission/VBox/Topics/MarginContainer"]
+[node name="TopicList" type="ItemList" parent="VBox/Background/Mission/VBox/Topics/MarginContainer" unique_id=1356951046]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
@@ -369,27 +411,27 @@ fixed_column_width = 48
 icon_mode = 0
 fixed_icon_size = Vector2i(48, 16)
 
-[node name="Description" type="MarginContainer" parent="VBox/Background/Mission/VBox"]
+[node name="Description" type="MarginContainer" parent="VBox/Background/Mission/VBox" unique_id=2058229200]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBox/Description"]
+[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBox/Description" unique_id=1201406583]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("3")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Description"]
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Description" unique_id=2084437399]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="VBox" type="VBoxContainer" parent="VBox/Background/Mission/VBox/Description/MarginContainer"]
+[node name="VBox" type="VBoxContainer" parent="VBox/Background/Mission/VBox/Description/MarginContainer" unique_id=1921090074]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="MissionBody" type="Label" parent="VBox/Background/Mission/VBox/Description/MarginContainer/VBox"]
+[node name="MissionBody" type="Label" parent="VBox/Background/Mission/VBox/Description/MarginContainer/VBox" unique_id=514091422]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
@@ -399,7 +441,7 @@ theme_override_fonts/font = ExtResource("8_1e805")
 text = "Here's a full overview description of the given topic."
 autowrap_mode = 3
 
-[node name="Map" type="MarginContainer" parent="VBox/Background"]
+[node name="Map" type="MarginContainer" parent="VBox/Background" unique_id=221584181]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(288, 232)
@@ -411,15 +453,15 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 8
 
-[node name="ColorRect" type="ColorRect" parent="VBox/Background/Map"]
+[node name="ColorRect" type="ColorRect" parent="VBox/Background/Map" unique_id=1574677173]
 layout_mode = 2
 color = Color(4.5724212e-07, 0.32200053, 0.35008585, 1)
 
-[node name="Control" type="Node2D" parent="."]
+[node name="Control" type="Node2D" parent="." unique_id=1428598834]
 visible = false
 position = Vector2(120, 11)
 
-[node name="Input" type="Button" parent="Control"]
+[node name="Input" type="Button" parent="Control" unique_id=84521874]
 offset_left = -18.0
 offset_top = -12.0
 offset_right = 18.0
@@ -433,3 +475,4 @@ flat = true
 [connection signal="item_activated" from="VBox/Background/Inventory/VBox/Items/MarginContainer/ItemList" to="." method="_on_Items_item_activated"]
 [connection signal="item_selected" from="VBox/Background/Inventory/VBox/Items/MarginContainer/ItemList" to="." method="_on_ItemList_item_selected"]
 [connection signal="item_activated" from="VBox/Background/Mission/VBox/Topics/MarginContainer/TopicList" to="." method="_on_Items_item_activated"]
+[connection signal="item_selected" from="VBox/Background/Mission/VBox/Topics/MarginContainer/TopicList" to="." method="_on_TopicList_item_selected"]

@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://0ac4soyfj6f0" path="res://src/UI/Options/Options.gd" id="5"]
 [ext_resource type="Texture2D" uid="uid://b648rn7n08p6b" path="res://assets/UI/Options/ArrowLeft.png" id="6_sv0a2"]
 [ext_resource type="Texture2D" uid="uid://dvit2aabssmha" path="res://assets/UI/Options/ArrowRight.png" id="7_hsdg4"]
+[ext_resource type="Theme" uid="uid://ch0b2mlj6ek78" path="res://src/UI/Theme/GreenPaperPopup.tres" id="8_hsdg4"]
 
 [node name="Options" type="MarginContainer" unique_id=2043058675]
 clip_contents = true
@@ -117,42 +118,49 @@ one_shot = true
 unique_name_in_owner = true
 one_shot = true
 
-[node name="Outer" type="Node" parent="." unique_id=1408918138]
-
-[node name="UnsavedConfirm" type="MarginContainer" parent="Outer" unique_id=1961666780]
+[node name="UnsavedConfirm" type="CenterContainer" parent="." unique_id=1584622278]
 unique_name_in_owner = true
 visible = false
-offset_left = 101.0
-offset_top = 120.0
-offset_right = 362.0
-offset_bottom = 161.0
-theme = ExtResource("1_sv0a2")
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("8_hsdg4")
 
-[node name="Panel" type="Panel" parent="Outer/UnsavedConfirm" unique_id=1416478608]
+[node name="Panel" type="Panel" parent="UnsavedConfirm" unique_id=1416478608]
+custom_minimum_size = Vector2(192, 100)
 layout_mode = 2
 
-[node name="Margin" type="MarginContainer" parent="Outer/UnsavedConfirm" unique_id=1415546264]
+[node name="Margin" type="MarginContainer" parent="UnsavedConfirm" unique_id=1415546264]
+custom_minimum_size = Vector2(192, 100)
 layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Outer/UnsavedConfirm/Margin" unique_id=263430434]
+[node name="VBox" type="VBoxContainer" parent="UnsavedConfirm/Margin" unique_id=263430434]
 layout_mode = 2
+theme_override_constants/separation = 7
 
-[node name="Label" type="Label" parent="Outer/UnsavedConfirm/Margin/VBoxContainer" unique_id=1329565589]
+[node name="Label" type="Label" parent="UnsavedConfirm/Margin/VBox" unique_id=1329565589]
 layout_mode = 2
-text = "Are you sure? There are unsaved changes"
+text = "Do you want to exit? There are unsaved keyboard and controller bindings."
 horizontal_alignment = 1
+autowrap_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Outer/UnsavedConfirm/Margin/VBoxContainer" unique_id=928354679]
+[node name="HBox" type="HBoxContainer" parent="UnsavedConfirm/Margin/VBox" unique_id=928354679]
 layout_mode = 2
 alignment = 1
 
-[node name="Yes" type="Button" parent="Outer/UnsavedConfirm/Margin/VBoxContainer/HBoxContainer" unique_id=468828696]
+[node name="Yes" type="Button" parent="UnsavedConfirm/Margin/VBox/HBox" unique_id=468828696]
+custom_minimum_size = Vector2(42, 0)
 layout_mode = 2
 focus_neighbor_left = NodePath("../No")
 focus_neighbor_right = NodePath("../No")
 text = "Yes"
 
-[node name="No" type="Button" parent="Outer/UnsavedConfirm/Margin/VBoxContainer/HBoxContainer" unique_id=91417893]
+[node name="No" type="Button" parent="UnsavedConfirm/Margin/VBox/HBox" unique_id=91417893]
+custom_minimum_size = Vector2(42, 0)
 layout_mode = 2
 focus_neighbor_left = NodePath("../Yes")
 focus_neighbor_right = NodePath("../Yes")
@@ -162,5 +170,5 @@ text = "No"
 [connection signal="timeout" from="ExitTimer" to="." method="process_exit"]
 [connection signal="timeout" from="LeftTimer" to="." method="change_tab" binds= ["left"]]
 [connection signal="timeout" from="RightTimer" to="." method="change_tab" binds= ["right"]]
-[connection signal="pressed" from="Outer/UnsavedConfirm/Margin/VBoxContainer/HBoxContainer/Yes" to="." method="exit_unsaved_confirm"]
-[connection signal="pressed" from="Outer/UnsavedConfirm/Margin/VBoxContainer/HBoxContainer/No" to="." method="exit_unsaved_reject"]
+[connection signal="pressed" from="UnsavedConfirm/Margin/VBox/HBox/Yes" to="." method="exit_unsaved_confirm"]
+[connection signal="pressed" from="UnsavedConfirm/Margin/VBox/HBox/No" to="." method="exit_unsaved_reject"]

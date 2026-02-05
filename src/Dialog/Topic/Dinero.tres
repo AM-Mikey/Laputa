@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Topic" format=3 uid="uid://b26p45fq252yp"]
+
+[ext_resource type="Script" uid="uid://dgc1kvoblef0o" path="res://src/Dialog/Topic/Topic.gd" id="1_kb65b"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_kb65b")
+topic_name = "Dinero"
+topic_stages = Array[int]([0, 1, 3, 4])
+d0 = "The main currency of Laputa is counted in gold by weight, using the symbol ($)."
+d1 = "Gold is the primary export of Laputa. It was raided from massive treasure hordes on Laputa during it's hayday. Nowadays Most Dinero comes from monsters or from mining operations, though those are drying up as well."
+d2 = "Laputan monsters have an innate lust for gold, and consume it. It's unknown if they extract nutrients from it or use it for some other biological process. Their bodies transform the gold into the well known \"spikeballs\" that are commonly traded."
+d3 = "Under Davey's reign, raw Dinero is being replaced with minted coins."
+d4 = "Raw Dinero is now illegal to trade. Coins are serialized, making them able to be traced by Corp."
+metadata/_custom_type_script = "uid://dgc1kvoblef0o"

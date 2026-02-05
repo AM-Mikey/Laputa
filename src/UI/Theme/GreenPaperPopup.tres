@@ -1,0 +1,20 @@
+[gd_resource type="Theme" format=3 uid="uid://ch0b2mlj6ek78"]
+
+[ext_resource type="StyleBox" uid="uid://hshjid5k85su" path="res://src/UI/StyleBox/Paper.tres" id="2_0e1vo"]
+[ext_resource type="StyleBox" uid="uid://b4l7d2bk4tp4" path="res://src/UI/StyleBox/PaperGreenLight.tres" id="2_w4yep"]
+[ext_resource type="StyleBox" uid="uid://cedgt8u8aawp3" path="res://src/UI/StyleBox/PaperGreen.tres" id="3_w4yep"]
+[ext_resource type="StyleBox" uid="uid://breje657gv8r2" path="res://src/UI/StyleBox/PaperWatermark.tres" id="4_rsi53"]
+[ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="14_xve6g"]
+
+[resource]
+default_font = ExtResource("14_xve6g")
+Button/colors/font_color = Color(0.3019608, 0.37254903, 0.38039216, 1)
+Button/colors/font_focus_color = Color(0.44313726, 0.56078434, 0.56078434, 1)
+Button/colors/font_hover_color = Color(0.44313726, 0.56078434, 0.56078434, 1)
+Button/colors/font_pressed_color = Color(0.14509805, 0.09411765, 0.1254902, 1)
+Button/styles/focus = ExtResource("2_0e1vo")
+Button/styles/hover = ExtResource("2_0e1vo")
+Button/styles/normal = ExtResource("2_w4yep")
+Button/styles/pressed = ExtResource("3_w4yep")
+Label/colors/font_color = Color(0.48235294, 0.5921569, 0.5921569, 1)
+Panel/styles/panel = ExtResource("4_rsi53")

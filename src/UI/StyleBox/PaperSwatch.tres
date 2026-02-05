@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://dj8k7ro8dbrl3"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://dj8k7ro8dbrl3"]
 
 [ext_resource type="Texture2D" uid="uid://bygbcq3n5sjnr" path="res://assets/UI/StyleBox/PaperSwatch.png" id="1"]
 

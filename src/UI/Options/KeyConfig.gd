@@ -193,7 +193,6 @@ func on_return():
 ### UI ###
 
 func do_focus():
-	print("k")
 	get_node(ui_focus).grab_focus()
 
 

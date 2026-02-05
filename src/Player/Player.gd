@@ -44,7 +44,7 @@ var dead = false
 
 
 var item_array: Array[Item]
-var topic_array: Array[String] = ["child", "sasuke", "basil", "general"]
+var topic_array: Array[Topic] = [load("res://src/Dialog/Topic/Dinero.tres")]
 var inspect_target: Node = null
 var experience_number: Node = null
 var damage_number: Node = null

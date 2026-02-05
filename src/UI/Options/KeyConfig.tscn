@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dqramyf8aeeyv"]
+[gd_scene format=3 uid="uid://dqramyf8aeeyv"]
 
 [ext_resource type="Theme" uid="uid://c1np2xna4dogr" path="res://src/UI/Theme/InsetMenu.tres" id="1"]
 [ext_resource type="Texture2D" uid="uid://cl3sa7nubis6p" path="res://assets/UI/Options/KeyboardMouse.png" id="2"]
@@ -18,7 +18,7 @@
 [ext_resource type="StyleBox" uid="uid://bwe3j6hcp3u7j" path="res://src/UI/StyleBox/SteelBeveledLight.tres" id="11_dcmbp"]
 [ext_resource type="Texture2D" uid="uid://1kxm2qe3r0oi" path="res://assets/UI/Options/IconReset.png" id="11_j3ls4"]
 
-[node name="KeyConfig" type="MarginContainer"]
+[node name="KeyConfig" type="MarginContainer" unique_id=2104689631]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -32,45 +32,44 @@ ui_focus = NodePath("Margin/HBox/Controls/Scroll/ActionSelections/jump/Button")
 preset_path = NodePath("Margin/HBox/Presets/ItemList")
 metadata/_edit_vertical_guides_ = [24.0]
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1401198303]
 layout_mode = 2
 
-[node name="Margin" type="MarginContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="." unique_id=743599214]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
 
-[node name="HBox" type="HBoxContainer" parent="Margin"]
+[node name="HBox" type="HBoxContainer" parent="Margin" unique_id=522998560]
 layout_mode = 2
 
-[node name="Controls" type="VBoxContainer" parent="Margin/HBox"]
+[node name="Controls" type="VBoxContainer" parent="Margin/HBox" unique_id=67731104]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls" unique_id=1295885921]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Controls:"
 
-[node name="Scroll" type="ScrollContainer" parent="Margin/HBox/Controls"]
+[node name="Scroll" type="ScrollContainer" parent="Margin/HBox/Controls" unique_id=1613842679]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 follow_focus = true
 
-[node name="ActionSelections" type="VBoxContainer" parent="Margin/HBox/Controls/Scroll"]
+[node name="ActionSelections" type="VBoxContainer" parent="Margin/HBox/Controls/Scroll" unique_id=837010797]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="jump" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+[node name="jump" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections" unique_id=877203301]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/jump"]
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/jump" unique_id=1456451455]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 0
 offset_top = 3.0
@@ -80,7 +79,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_enb1l")
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/jump/Panel"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/jump/Panel" unique_id=398529690]
 layout_mode = 0
 offset_left = 56.0
 offset_right = 134.0
@@ -92,7 +91,7 @@ theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Jump / Accept"
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/jump"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/jump" unique_id=1410694690]
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
@@ -101,12 +100,12 @@ focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
-[node name="fire_manual" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+[node name="fire_manual" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections" unique_id=403077290]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_manual"]
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_manual" unique_id=776517956]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 0
 offset_top = 3.0
@@ -116,7 +115,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_enb1l")
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_manual/Panel"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_manual/Panel" unique_id=878402541]
 layout_mode = 0
 offset_left = 56.0
 offset_right = 134.0
@@ -128,7 +127,7 @@ theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Fire / Cancel"
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_manual"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_manual" unique_id=1141302609]
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
@@ -136,12 +135,12 @@ focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
-[node name="fire_automatic" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+[node name="fire_automatic" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections" unique_id=1652924566]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_automatic"]
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_automatic" unique_id=445582543]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 0
 offset_top = 3.0
@@ -151,7 +150,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_enb1l")
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_automatic/Panel"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_automatic/Panel" unique_id=2071177610]
 layout_mode = 0
 offset_left = 56.0
 offset_right = 191.0
@@ -163,7 +162,7 @@ theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Auto-Fire / D-Lock"
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_automatic"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/fire_automatic" unique_id=38602514]
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
@@ -171,12 +170,12 @@ focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
-[node name="move_left" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+[node name="move_left" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections" unique_id=1634846049]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/move_left"]
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/move_left" unique_id=1775441925]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 0
 offset_top = 3.0
@@ -186,7 +185,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_enb1l")
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/move_left/Panel"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/move_left/Panel" unique_id=481162964]
 layout_mode = 0
 offset_left = 56.0
 offset_right = 109.0
@@ -198,7 +197,7 @@ theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Move Left"
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/move_left"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/move_left" unique_id=621233745]
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
@@ -206,12 +205,12 @@ focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
-[node name="move_right" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+[node name="move_right" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections" unique_id=472597348]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/move_right"]
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/move_right" unique_id=711441403]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 0
 offset_top = 3.0
@@ -221,7 +220,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_enb1l")
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/move_right/Panel"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/move_right/Panel" unique_id=285573751]
 layout_mode = 0
 offset_left = 56.0
 offset_right = 114.0
@@ -233,7 +232,7 @@ theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Move Right"
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/move_right"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/move_right" unique_id=706462789]
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
@@ -241,12 +240,12 @@ focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
-[node name="look_up" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+[node name="look_up" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections" unique_id=907279173]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/look_up"]
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/look_up" unique_id=807239063]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 0
 offset_top = 3.0
@@ -256,7 +255,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_enb1l")
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/look_up/Panel"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/look_up/Panel" unique_id=524627004]
 layout_mode = 0
 offset_left = 56.0
 offset_right = 97.0
@@ -268,7 +267,7 @@ theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Look Up"
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/look_up"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/look_up" unique_id=199500570]
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
@@ -276,12 +275,12 @@ focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
-[node name="look_down" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+[node name="look_down" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections" unique_id=641635816]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/look_down"]
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/look_down" unique_id=1175634041]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 0
 offset_top = 3.0
@@ -291,7 +290,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_enb1l")
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/look_down/Panel"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/look_down/Panel" unique_id=214634321]
 layout_mode = 0
 offset_left = 56.0
 offset_right = 113.0
@@ -303,7 +302,7 @@ theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Look Down"
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/look_down"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/look_down" unique_id=1099653289]
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
@@ -311,12 +310,12 @@ focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
-[node name="gun_left" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+[node name="gun_left" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections" unique_id=440753257]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_left"]
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_left" unique_id=986425401]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 0
 offset_top = 3.0
@@ -326,7 +325,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_enb1l")
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_left/Panel"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_left/Panel" unique_id=1266393540]
 layout_mode = 0
 offset_left = 56.0
 offset_right = 124.0
@@ -338,7 +337,7 @@ theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Previous Gun"
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_left"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_left" unique_id=556142731]
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
@@ -346,12 +345,12 @@ focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
-[node name="gun_right" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+[node name="gun_right" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections" unique_id=1542262322]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_right"]
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_right" unique_id=1165780800]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 0
 offset_top = 3.0
@@ -361,7 +360,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_enb1l")
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_right/Panel"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_right/Panel" unique_id=1768707399]
 layout_mode = 0
 offset_left = 56.0
 offset_right = 104.0
@@ -373,7 +372,7 @@ theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Next Gun"
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_right"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/gun_right" unique_id=1578843264]
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
@@ -381,12 +380,12 @@ focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "A"
 
-[node name="inventory" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+[node name="inventory" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections" unique_id=941565909]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/inventory"]
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/inventory" unique_id=977865153]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 0
 offset_top = 3.0
@@ -396,7 +395,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_enb1l")
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/inventory/Panel"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/inventory/Panel" unique_id=197480244]
 layout_mode = 0
 offset_left = 56.0
 offset_right = 105.0
@@ -408,7 +407,7 @@ theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Inventory"
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/inventory"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/inventory" unique_id=1606277903]
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 23.0
@@ -416,12 +415,12 @@ focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "TAB"
 
-[node name="pause" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections"]
+[node name="pause" type="Control" parent="Margin/HBox/Controls/Scroll/ActionSelections" unique_id=49537076]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/pause"]
+[node name="Panel" type="Panel" parent="Margin/HBox/Controls/Scroll/ActionSelections/pause" unique_id=954624995]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 0
 offset_top = 3.0
@@ -431,7 +430,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_enb1l")
 
-[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/pause/Panel"]
+[node name="Label" type="Label" parent="Margin/HBox/Controls/Scroll/ActionSelections/pause/Panel" unique_id=1056901380]
 layout_mode = 0
 offset_left = 56.0
 offset_right = 86.0
@@ -443,7 +442,7 @@ theme_override_fonts/font = ExtResource("3_vje3i")
 text = "Pause"
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/pause"]
+[node name="Button" type="Button" parent="Margin/HBox/Controls/Scroll/ActionSelections/pause" unique_id=1374551296]
 custom_minimum_size = Vector2(12, 0)
 layout_mode = 0
 offset_right = 15.0
@@ -453,20 +452,20 @@ focus_neighbor_right = NodePath("../../../../../Settings/JumpOnHold")
 toggle_mode = true
 text = "ESCAPE"
 
-[node name="Control" type="MarginContainer" parent="Margin/HBox/Controls/Scroll/ActionSelections/pause"]
+[node name="Control" type="MarginContainer" parent="Margin/HBox/Controls/Scroll/ActionSelections/pause" unique_id=1619101641]
 clip_contents = true
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 23.0
 
-[node name="Settings" type="VBoxContainer" parent="Margin/HBox"]
+[node name="Settings" type="VBoxContainer" parent="Margin/HBox" unique_id=2101771429]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/HBox/Settings"]
+[node name="Label" type="Label" parent="Margin/HBox/Settings" unique_id=1346400004]
 layout_mode = 2
 text = "Settings:"
 
-[node name="JumpOnHold" type="CheckBox" parent="Margin/HBox/Settings"]
+[node name="JumpOnHold" type="CheckBox" parent="Margin/HBox/Settings" unique_id=2134267218]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
@@ -476,7 +475,7 @@ focus_neighbor_left = NodePath("../../Controls/Scroll/ActionSelections/jump/Butt
 focus_neighbor_bottom = NodePath("../../../../Corner/Margin/HBox/Confirm")
 text = "Jump on Hold"
 
-[node name="MouseAsKey" type="CheckBox" parent="Margin/HBox/Settings"]
+[node name="MouseAsKey" type="CheckBox" parent="Margin/HBox/Settings" unique_id=430238192]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 2
@@ -485,19 +484,19 @@ tooltip_text = "Allows the mouse buttons to be mapped like keyboard keys.  Disab
 text = "Use mouse as 
 keyboard input"
 
-[node name="Control" type="Control" parent="Margin/HBox"]
+[node name="Control" type="Control" parent="Margin/HBox" unique_id=1376471519]
 layout_mode = 2
 
-[node name="Presets" type="VBoxContainer" parent="Margin/HBox"]
+[node name="Presets" type="VBoxContainer" parent="Margin/HBox" unique_id=809172557]
 visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/HBox/Presets"]
+[node name="Label" type="Label" parent="Margin/HBox/Presets" unique_id=1996646228]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Presets:"
 
-[node name="ItemList" type="ItemList" parent="Margin/HBox/Presets"]
+[node name="ItemList" type="ItemList" parent="Margin/HBox/Presets" unique_id=449073890]
 custom_minimum_size = Vector2(111, 0)
 layout_mode = 2
 size_flags_vertical = 3
@@ -512,18 +511,18 @@ item_2/text = "Mouse"
 item_2/icon = ExtResource("2")
 item_3/text = "Left Hand (Keys)"
 
-[node name="Control" type="Control" parent="Margin/HBox/Presets"]
+[node name="Control" type="Control" parent="Margin/HBox/Presets" unique_id=67645815]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 
-[node name="Corner" type="Panel" parent="."]
+[node name="Corner" type="Panel" parent="." unique_id=658961328]
 custom_minimum_size = Vector2(124, 44)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 10
 theme_override_styles/panel = ExtResource("9")
 
-[node name="Panel" type="Panel" parent="Corner"]
+[node name="Panel" type="Panel" parent="Corner" unique_id=1745013456]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 12.0
@@ -531,7 +530,7 @@ offset_right = 84.0
 offset_bottom = 44.0
 theme_override_styles/panel = ExtResource("9_dcmbp")
 
-[node name="Margin" type="MarginContainer" parent="Corner"]
+[node name="Margin" type="MarginContainer" parent="Corner" unique_id=878397433]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
@@ -540,10 +539,10 @@ offset_bottom = 44.0
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 
-[node name="HBox" type="HBoxContainer" parent="Corner/Margin"]
+[node name="HBox" type="HBoxContainer" parent="Corner/Margin" unique_id=1727044890]
 layout_mode = 2
 
-[node name="Confirm" type="Button" parent="Corner/Margin/HBox"]
+[node name="Confirm" type="Button" parent="Corner/Margin/HBox" unique_id=2027044411]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
@@ -558,7 +557,7 @@ theme_override_styles/focus = ExtResource("11_dcmbp")
 icon = ExtResource("10_j67hf")
 icon_alignment = 1
 
-[node name="Reset" type="Button" parent="Corner/Margin/HBox"]
+[node name="Reset" type="Button" parent="Corner/Margin/HBox" unique_id=1879776404]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
@@ -573,7 +572,7 @@ theme_override_styles/focus = ExtResource("11_dcmbp")
 icon = ExtResource("11_j3ls4")
 icon_alignment = 1
 
-[node name="Return" type="Button" parent="Corner/Margin/HBox"]
+[node name="Return" type="Button" parent="Corner/Margin/HBox" unique_id=1214693422]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
@@ -588,7 +587,7 @@ theme_override_styles/focus = ExtResource("11_dcmbp")
 icon = ExtResource("10_ray4k")
 icon_alignment = 1
 
-[node name="RemapManager" type="Node" parent="."]
+[node name="RemapManager" type="Node" parent="." unique_id=1835249012]
 script = ExtResource("10_enb1l")
 
 [connection signal="toggled" from="Margin/HBox/Settings/JumpOnHold" to="." method="on_jump_on_hold_toggled"]

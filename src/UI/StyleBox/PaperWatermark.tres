@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://breje657gv8r2"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://breje657gv8r2"]
 
 [ext_resource type="Texture2D" uid="uid://decoldsv3hjam" path="res://assets/UI/StyleBox/PaperWatermark.png" id="1"]
 
@@ -6,6 +6,6 @@
 texture = ExtResource("1")
 texture_margin_left = 6.0
 texture_margin_top = 6.0
-texture_margin_right = 7.0
-texture_margin_bottom = 7.0
+texture_margin_right = 29.0
+texture_margin_bottom = 25.0
 region_rect = Rect2(0, 0, 36, 32)

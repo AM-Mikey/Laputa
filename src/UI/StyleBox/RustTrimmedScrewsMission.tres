@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://ylslq3moyyaj"]
+
+[ext_resource type="Texture2D" uid="uid://b7w3yw3sg62hq" path="res://assets/UI/StyleBox/RustTrimmedScrewsMission.png" id="1_862xu"]
+
+[resource]
+texture = ExtResource("1_862xu")
+texture_margin_left = 17.0
+texture_margin_top = 88.0
+texture_margin_right = 17.0
+texture_margin_bottom = 89.0
+region_rect = Rect2(0, 0, 64, 192)
