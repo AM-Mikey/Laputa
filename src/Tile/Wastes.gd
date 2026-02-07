@@ -33,6 +33,9 @@ func do_auto_tile(start_coords, start_layer):
 			if !connected_cells.is_empty():
 				find_cells_recursive(connected_cells, start_layer, group)
 
+			if data.get_custom_data("dont_replace") == true:
+				active_tile_map_cells.erase(start_coords)
+
 			for i in active_tile_map_cells:
 				pattern(start_layer, i, group)
 			#print("a: ", active_tile_map_cells)
@@ -67,6 +70,8 @@ func find_all_connected_cells(coords, layer, group) -> Array:
 		if tile_map_layer.get_cell_atlas_coords(neighbor) != Vector2i(-1, -1): #cell is filled
 			var neighbor_data = tile_map_layer.get_cell_tile_data(neighbor)
 			if neighbor_data.get_custom_data("auto_tile_group") == group:
+				if neighbor_data.get_custom_data("dont_replace") == true:
+					continue
 				out.append(neighbor)
 	return out
 
@@ -125,6 +130,8 @@ func get_auto_tile_directions(auto_tile_group) -> Dictionary:
 	out["all"] = [] #all tiles in group
 	var source = tile_map.get_child(0).tile_set.get_source(0)
 
+	# TODO: For modulates, find the rect size and do the shit lol
+
 	for x in source.texture_region_size.x:
 		for y in source.texture_region_size.y:
 			var coords = Vector2i(x, y)
@@ -136,9 +143,7 @@ func get_auto_tile_directions(auto_tile_group) -> Dictionary:
 							out["all"].append(coords)
 							var auto_tile_directions: String = tile_data.get_custom_data("auto_tile_direction")
 							var directions = auto_tile_directions.split(",")
-							print("YEAH")
 							for auto_tile_direction in directions:
-								print(auto_tile_direction)
 								if out.has(auto_tile_direction):
 									out[auto_tile_direction].append(coords)
 								else:
