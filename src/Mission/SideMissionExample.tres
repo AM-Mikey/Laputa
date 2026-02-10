@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SideMission" format=3 uid="uid://sl1qeykjggts"]
+
+[ext_resource type="Script" uid="uid://diqvc33oc8rqv" path="res://src/Mission/SideMission.gd" id="1_68ov6"]
+
+[resource]
+script = ExtResource("1_68ov6")
+display_name = "Example"
+stages = Array[String](["start", "middle", "end"])
+current_stage = "start"
+metadata/_custom_type_script = "uid://diqvc33oc8rqv"

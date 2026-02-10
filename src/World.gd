@@ -110,8 +110,8 @@ func first_time_level_setup():
 	add_child(current_level)
 	if current_level.debug_main_mission_stage:
 		ms.main_mission_stage = current_level.debug_main_mission_stage
-	if current_level.main_mission_level_update:
-		ms.setup_level_via_main_mission()
+	if current_level.mission_level_update:
+		ms.setup_level_via_mission()
 	pc.global_position = get_spawn_point().global_position
 
 	$Juniper/PlayerCamera.reset()
@@ -148,8 +148,8 @@ func change_level_via_code(level_path, use_save_data):
 	if !use_save_data:
 		if current_level.debug_main_mission_stage:
 			ms.main_mission_stage = current_level.debug_main_mission_stage
-	if current_level.main_mission_level_update:
-		ms.setup_level_via_main_mission()
+	if current_level.mission_level_update:
+		ms.setup_level_via_mission()
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		$Juniper.global_position = s.global_position
 
@@ -177,8 +177,8 @@ func change_level_via_trigger(level_path, door_index):
 	#await get_tree().process_frame
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
-	if current_level.main_mission_level_update:
-		ms.setup_level_via_main_mission()
+	if current_level.mission_level_update:
+		ms.setup_level_via_mission()
 	$Juniper/PlayerCamera.reset()
 
 	#### get the door with the right index

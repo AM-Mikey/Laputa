@@ -15,6 +15,7 @@
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="8_1e805"]
 [ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="12_vxl58"]
 [ext_resource type="StyleBox" uid="uid://b2eysynpuqm3n" path="res://src/UI/StyleBox/RustTabs.tres" id="13_4huqx"]
+[ext_resource type="StyleBox" uid="uid://ctw8lx7pcj6kl" path="res://src/UI/StyleBox/Leather.tres" id="16_eo4w6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l1q3b"]
 shader = ExtResource("3_4pdh5")
@@ -77,6 +78,7 @@ layout_mode = 2
 
 [node name="InventoryButton" type="Button" parent="VBox/HBox" unique_id=682668949]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.6313726, 0.4862745, 0.4, 1)
@@ -90,14 +92,15 @@ theme_override_styles/hover_pressed = ExtResource("6_vxl58")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_eo4w6")
 toggle_mode = true
 button_pressed = true
-text = "Inventory"
+text = "Items"
 
 [node name="Control2" type="Control" parent="VBox/HBox" unique_id=363994811]
-custom_minimum_size = Vector2(8, 0)
+custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
 
 [node name="MissionButton" type="Button" parent="VBox/HBox" unique_id=794407605]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.6313726, 0.4862745, 0.4, 1)
@@ -113,11 +116,33 @@ toggle_mode = true
 text = "Mission"
 
 [node name="Control3" type="Control" parent="VBox/HBox" unique_id=1343740971]
-custom_minimum_size = Vector2(8, 0)
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+
+[node name="BookButton" type="Button" parent="VBox/HBox" unique_id=776606825]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.6313726, 0.4862745, 0.4, 1)
+theme_override_colors/font_pressed_color = Color(0.96862745, 0.8862745, 0.7176471, 1)
+theme_override_colors/font_hover_color = Color(0.84313726, 0.68235296, 0.53333336, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = ExtResource("4_2n62p")
+theme_override_styles/pressed = ExtResource("13_4huqx")
+theme_override_styles/hover = ExtResource("13_4huqx")
+theme_override_styles/hover_pressed = ExtResource("6_vxl58")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_eo4w6")
+toggle_mode = true
+text = "Book"
+
+[node name="Control4" type="Control" parent="VBox/HBox" unique_id=2121974066]
+custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
 
 [node name="MapButton" type="Button" parent="VBox/HBox" unique_id=455113071]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.6313726, 0.4862745, 0.4, 1)
@@ -132,7 +157,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_eo4w6")
 toggle_mode = true
 text = "Map"
 
-[node name="Control4" type="Control" parent="VBox/HBox" unique_id=2121974066]
+[node name="Control5" type="Control" parent="VBox/HBox" unique_id=128060172]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
@@ -277,7 +302,6 @@ autowrap_mode = 3
 
 [node name="Mission" type="MarginContainer" parent="VBox/Background" unique_id=281285142]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(288, 232)
 layout_mode = 0
 offset_right = 288.0
 offset_bottom = 232.0
@@ -286,28 +310,28 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 8
 
-[node name="VBox" type="VBoxContainer" parent="VBox/Background/Mission" unique_id=444823704]
+[node name="VBox" type="HBoxContainer" parent="VBox/Background/Mission" unique_id=836684017]
 layout_mode = 2
 theme_override_constants/separation = 8
 
 [node name="Missions" type="MarginContainer" parent="VBox/Background/Mission/VBox" unique_id=1069239040]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBox/Background/Mission/VBox/Missions" unique_id=1815589522]
-layout_mode = 2
-
-[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer" unique_id=1115827441]
-custom_minimum_size = Vector2(128, 0)
+custom_minimum_size = Vector2(144, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = ExtResource("3")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="VBox/Background/Mission/VBox/Missions" unique_id=1580143400]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer" unique_id=1115827441]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("16_eo4w6")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer/Panel" unique_id=1692406411]
 layout_mode = 0
 offset_right = 128.0
-offset_bottom = 64.0
+offset_bottom = 207.0
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
@@ -325,17 +349,20 @@ autowrap_mode = 3
 [node name="Panel2" type="Panel" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer" unique_id=1474095994]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("6_4pdh5")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer/Panel2" unique_id=2039890261]
 layout_mode = 0
-offset_right = 108.0
-offset_bottom = 64.0
+offset_right = 128.0
+offset_bottom = 144.0
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 0
 
-[node name="TopicList" type="ItemList" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer/Panel2/MarginContainer" unique_id=783086266]
+[node name="SideMissionList" type="ItemList" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer/Panel2/MarginContainer" unique_id=783086266]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
 theme_override_colors/font_hovered_color = Color(0.6392157, 0.42745098, 0.12941177, 1)
@@ -363,27 +390,69 @@ item_1/text = "· Save the cat!"
 item_2/text = "· Meanwhile..."
 item_3/text = "· Clear the area"
 
-[node name="Topics" type="MarginContainer" parent="VBox/Background/Mission/VBox" unique_id=1403991417]
+[node name="Description" type="MarginContainer" parent="VBox/Background/Mission/VBox" unique_id=2058229200]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBox/Description" unique_id=1201406583]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Description" unique_id=2084437399]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Background/Mission/VBox/Description/MarginContainer" unique_id=1921090074]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="MissionBody" type="Label" parent="VBox/Background/Mission/VBox/Description/MarginContainer/VBox" unique_id=514091422]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.784314, 0.784314, 0.639216, 1)
+theme_override_colors/font_shadow_color = Color(0.113725, 0.156863, 0.227451, 1)
+theme_override_fonts/font = ExtResource("8_1e805")
+text = "Here's a full overview description of the given mission."
+autowrap_mode = 3
+
+[node name="Book" type="MarginContainer" parent="VBox/Background" unique_id=2118501264]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(288, 232)
+layout_mode = 0
+offset_right = 288.0
+offset_bottom = 232.0
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 8
+
+[node name="VBox" type="HBoxContainer" parent="VBox/Background/Book" unique_id=1248644430]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Topics" type="MarginContainer" parent="VBox/Background/Book/VBox" unique_id=1072196304]
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 0
 
-[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBox/Topics" unique_id=881649936]
+[node name="Panel" type="Panel" parent="VBox/Background/Book/VBox/Topics" unique_id=1640220941]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("6_4pdh5")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Topics" unique_id=1161177433]
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Book/VBox/Topics" unique_id=1780695907]
 layout_mode = 2
-theme_override_constants/margin_left = 16
+theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 16
+theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="TopicList" type="ItemList" parent="VBox/Background/Mission/VBox/Topics/MarginContainer" unique_id=1356951046]
+[node name="TopicList" type="ItemList" parent="VBox/Background/Book/VBox/Topics/MarginContainer" unique_id=1999648936]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
@@ -406,33 +475,36 @@ theme_override_styles/selected_focus = ExtResource("12_vxl58")
 theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_xpheq")
 theme_override_styles/cursor = SubResource("StyleBoxEmpty_pkrle")
 allow_search = false
-max_columns = 4
-fixed_column_width = 48
+item_count = 4
 icon_mode = 0
 fixed_icon_size = Vector2i(48, 16)
+item_0/text = "Testing"
+item_1/text = "Longer Test"
+item_2/text = "Longest Test"
+item_3/text = "1234567890"
 
-[node name="Description" type="MarginContainer" parent="VBox/Background/Mission/VBox" unique_id=2058229200]
-custom_minimum_size = Vector2(0, 64)
+[node name="Description" type="MarginContainer" parent="VBox/Background/Book/VBox" unique_id=429932468]
+custom_minimum_size = Vector2(144, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBox/Description" unique_id=1201406583]
+[node name="Panel" type="Panel" parent="VBox/Background/Book/VBox/Description" unique_id=830391660]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("3")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Description" unique_id=2084437399]
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Book/VBox/Description" unique_id=757148823]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="VBox" type="VBoxContainer" parent="VBox/Background/Mission/VBox/Description/MarginContainer" unique_id=1921090074]
+[node name="VBox" type="VBoxContainer" parent="VBox/Background/Book/VBox/Description/MarginContainer" unique_id=1572133835]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="MissionBody" type="Label" parent="VBox/Background/Mission/VBox/Description/MarginContainer/VBox" unique_id=514091422]
-unique_name_in_owner = true
+[node name="TopicBody" type="Label" parent="VBox/Background/Book/VBox/Description/MarginContainer/VBox" unique_id=1252717082]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.784314, 0.784314, 0.639216, 1)
@@ -471,8 +543,7 @@ flat = true
 
 [connection signal="toggled" from="VBox/HBox/InventoryButton" to="." method="_on_tab_toggled" binds= ["inventory"]]
 [connection signal="toggled" from="VBox/HBox/MissionButton" to="." method="_on_tab_toggled" binds= ["mission"]]
+[connection signal="toggled" from="VBox/HBox/BookButton" to="." method="_on_tab_toggled" binds= ["book"]]
 [connection signal="toggled" from="VBox/HBox/MapButton" to="." method="_on_tab_toggled" binds= ["map"]]
 [connection signal="item_activated" from="VBox/Background/Inventory/VBox/Items/MarginContainer/ItemList" to="." method="_on_Items_item_activated"]
 [connection signal="item_selected" from="VBox/Background/Inventory/VBox/Items/MarginContainer/ItemList" to="." method="_on_ItemList_item_selected"]
-[connection signal="item_activated" from="VBox/Background/Mission/VBox/Topics/MarginContainer/TopicList" to="." method="_on_Items_item_activated"]
-[connection signal="item_selected" from="VBox/Background/Mission/VBox/Topics/MarginContainer/TopicList" to="." method="_on_TopicList_item_selected"]

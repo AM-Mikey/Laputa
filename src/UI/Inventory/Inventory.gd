@@ -80,29 +80,46 @@ func _on_tab_toggled(toggled_on: bool, tab: String):
 				%InventoryButton.set_pressed_no_signal(true)
 			"mission":
 				%MissionButton.set_pressed_no_signal(true)
+			"book":
+				%BookButton.set_pressed_no_signal(true)
 			"map":
 				%MapButton.set_pressed_no_signal(true)
 	else:
 		match tab:
 			"inventory":
 				%MissionButton.set_pressed_no_signal(false)
+				%BookButton.set_pressed_no_signal(false)
 				%MapButton.set_pressed_no_signal(false)
 				%Inventory.visible = true
 				%Mission.visible = false
+				%Book.visible = false
 				%Map.visible = false
 				%Background.add_theme_stylebox_override("panel", BACKGROUND_STYLEBOX_NORMAL)
 			"mission":
 				%InventoryButton.set_pressed_no_signal(false)
+				%BookButton.set_pressed_no_signal(false)
 				%MapButton.set_pressed_no_signal(false)
 				%Inventory.visible = false
 				%Mission.visible = true
+				%Book.visible = false
 				%Map.visible = false
 				%Background.add_theme_stylebox_override("panel", BACKGROUND_STYLEBOX_MISSION)
+			"book":
+				%InventoryButton.set_pressed_no_signal(false)
+				%MissionButton.set_pressed_no_signal(false)
+				%MapButton.set_pressed_no_signal(false)
+				%Inventory.visible = false
+				%Mission.visible = false
+				%Book.visible = true
+				%Map.visible = false
+				%Background.add_theme_stylebox_override("panel", BACKGROUND_STYLEBOX_NORMAL)
 			"map":
 				%InventoryButton.set_pressed_no_signal(false)
 				%MissionButton.set_pressed_no_signal(false)
+				%BookButton.set_pressed_no_signal(false)
 				%Inventory.visible = false
 				%Mission.visible = false
+				%Book.visible = false
 				%Map.visible = true
 				%Background.add_theme_stylebox_override("panel", BACKGROUND_STYLEBOX_NORMAL)
 

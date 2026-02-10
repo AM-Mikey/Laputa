@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bc5rx1j4v1cvd"
-path="res://.godot/imported/MainMissionLevelUpdate.png-4ce1d6aeeb4797be894211586d5a6ad3.ctex"
+uid="uid://b3hhsr20iuqpu"
+path="res://.godot/imported/SideMission.png-f8f9235ae4180058fff9e602162fb6e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Icon/MainMissionLevelUpdate.png"
-dest_files=["res://.godot/imported/MainMissionLevelUpdate.png-4ce1d6aeeb4797be894211586d5a6ad3.ctex"]
+source_file="res://assets/Icon/SideMission.png"
+dest_files=["res://.godot/imported/SideMission.png-f8f9235ae4180058fff9e602162fb6e8.ctex"]
 
 [params]
 

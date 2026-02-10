@@ -89,11 +89,15 @@ func parse_command(string):
 			db.dl.text += "[/color][/b] "
 
 		### Missions
-		"progress_main_mission":
+		"progress_main_mission": #/progress_main_mission
 			ms.progress_main_mission()
-		"seek_main_mission":
+		"seek_main_mission": #/seek_main_mission, (string: seek_value)
 			ms.seek_main_misssion(argument)
-
+		"progress_side_mission": #/progress_side_mission, (string: mission_name(filename))
+			ms.progress_side_mission(argument)
+		"seek_side_mission": #/seek_side_mission, (string: mission_name(filename)), (string: seek_value)
+			var a = string.split(",")
+			ms.seek_side_misssion(a[0], a[1])
 
 		#"focus":#					/focus, (string: npc_id)							focuses PlayerCamera on an npc, doesn't work indoors
 			#focus(argument)
