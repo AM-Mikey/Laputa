@@ -4,7 +4,8 @@
 
 [resource]
 script = ExtResource("1_68ov6")
-display_name = "Example"
-stages = Array[String](["start", "middle", "end"])
-current_stage = "start"
+display_name = "A tasty treat"
+description = "Find some salty candy for the old nun."
+stages = Array[Array]([["find", "item", "salmiakki"], ["give"]])
+current_stage = "find"
 metadata/_custom_type_script = "uid://diqvc33oc8rqv"

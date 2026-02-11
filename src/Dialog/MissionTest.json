@@ -99,11 +99,24 @@
 	",
 	
 	
-	
 	"d_s0":
 	"
 	/newchar,nun,NPC_D Your Stage is talk_npc_a
-	I'm denying your progress. Talk to NPC A
+	I'm denying your progress. Talk to NPC A /next
+	",
+	
+	"salmiakki0":
+	"
+	/newchar,nun,NPC_D By the way, do you have any of that salty candy?
+	Talk to me again if you find some. /start_side_mission,SideMissionExample
+	",
+	
+	"salmiakki1":
+	"
+	/newchar,nun,NPC_D Oh you have some of that Salmiakki!
+	/yn May I have some?
+	/db,0 Why thank you! /end_side_mission,SideMissionExample /next /end
+	/db,1 Oh, alright then. /end
 	",
 	
 	"d_s1":

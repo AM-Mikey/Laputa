@@ -3,5 +3,6 @@ extends Resource
 class_name SideMission
 
 @export var display_name: String = "Null Side Mission"
-@export var stages: Array[String] = []
+@export_multiline() var description: String
+@export var stages: Array[Array] #[name, trigger_type, trigger_value]
 @export var current_stage: String

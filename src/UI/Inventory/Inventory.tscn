@@ -16,6 +16,7 @@
 [ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="12_vxl58"]
 [ext_resource type="StyleBox" uid="uid://b2eysynpuqm3n" path="res://src/UI/StyleBox/RustTabs.tres" id="13_4huqx"]
 [ext_resource type="StyleBox" uid="uid://ctw8lx7pcj6kl" path="res://src/UI/StyleBox/Leather.tres" id="16_eo4w6"]
+[ext_resource type="FontFile" uid="uid://bwfshb35302x4" path="res://assets/UI/Font/momobold.ttf" id="17_lfc7o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l1q3b"]
 shader = ExtResource("3_4pdh5")
@@ -475,16 +476,11 @@ theme_override_styles/selected_focus = ExtResource("12_vxl58")
 theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_xpheq")
 theme_override_styles/cursor = SubResource("StyleBoxEmpty_pkrle")
 allow_search = false
-item_count = 4
 icon_mode = 0
 fixed_icon_size = Vector2i(48, 16)
-item_0/text = "Testing"
-item_1/text = "Longer Test"
-item_2/text = "Longest Test"
-item_3/text = "1234567890"
 
 [node name="Description" type="MarginContainer" parent="VBox/Background/Book/VBox" unique_id=429932468]
-custom_minimum_size = Vector2(144, 0)
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -504,14 +500,18 @@ theme_override_constants/margin_bottom = 6
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="TopicBody" type="Label" parent="VBox/Background/Book/VBox/Description/MarginContainer/VBox" unique_id=1252717082]
+[node name="TopicBody" type="RichTextLabel" parent="VBox/Background/Book/VBox/Description/MarginContainer/VBox" unique_id=1069744218]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 0
-theme_override_colors/font_color = Color(0.784314, 0.784314, 0.639216, 1)
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.78431374, 0.78431374, 0.6392157, 1)
 theme_override_colors/font_shadow_color = Color(0.113725, 0.156863, 0.227451, 1)
-theme_override_fonts/font = ExtResource("8_1e805")
+theme_override_constants/paragraph_separation = 8
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/normal_font = ExtResource("8_1e805")
+theme_override_fonts/bold_font = ExtResource("17_lfc7o")
+bbcode_enabled = true
 text = "Here's a full overview description of the given topic."
-autowrap_mode = 3
 
 [node name="Map" type="MarginContainer" parent="VBox/Background" unique_id=221584181]
 unique_name_in_owner = true
@@ -547,3 +547,4 @@ flat = true
 [connection signal="toggled" from="VBox/HBox/MapButton" to="." method="_on_tab_toggled" binds= ["map"]]
 [connection signal="item_activated" from="VBox/Background/Inventory/VBox/Items/MarginContainer/ItemList" to="." method="_on_Items_item_activated"]
 [connection signal="item_selected" from="VBox/Background/Inventory/VBox/Items/MarginContainer/ItemList" to="." method="_on_ItemList_item_selected"]
+[connection signal="item_selected" from="VBox/Background/Book/VBox/Topics/MarginContainer/TopicList" to="." method="_on_TopicList_item_selected"]

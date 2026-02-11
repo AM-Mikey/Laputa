@@ -93,11 +93,28 @@ func parse_command(string):
 			ms.progress_main_mission()
 		"seek_main_mission": #/seek_main_mission, (string: seek_value)
 			ms.seek_main_misssion(argument)
+		"start_side_mission": #/start_side_mission, (string: mission_name(filename))
+			var is_duplicate := false
+			for m in ms.side_missions:
+				if m.resource_path.get_file().trim_suffix(".tres") == argument:
+					is_duplicate = true
+			if !is_duplicate:
+				ms.side_missions.append(load("res://src/Mission/%s.tres" %argument))
 		"progress_side_mission": #/progress_side_mission, (string: mission_name(filename))
 			ms.progress_side_mission(argument)
 		"seek_side_mission": #/seek_side_mission, (string: mission_name(filename)), (string: seek_value)
 			var a = string.split(",")
 			ms.seek_side_misssion(a[0], a[1])
+		"end_side_mission":#/end_side_mission, (string: mission_name(filename))
+			ms.end_side_mission(argument)
+
+		### Conversation Queuing
+		"next":
+			for n in get_tree().get_nodes_in_group("NPCs"):
+				if n.dialog_box == db: #npc that spawned the db
+					n.conversation_queue.pop_front()
+
+
 
 		#"focus":#					/focus, (string: npc_id)							focuses PlayerCamera on an npc, doesn't work indoors
 			#focus(argument)

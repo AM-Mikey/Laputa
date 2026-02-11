@@ -144,18 +144,19 @@ func _resolution_scale_changed(_resolution_scale):
 
 
 func _on_TopicList_item_selected(index: int):
+	print("ass")
 	var pc = f.pc()
 	var topic = pc.topic_array[index]
-	%MissionBody.text = ""
+	%TopicBody.text = ""
 	if topic.topic_stages.has(0):
-		%MissionBody.text = topic.d0
+		%TopicBody.text = "[p] " + topic.d0
 	if topic.topic_stages.has(1):
-		%MissionBody.text = %MissionBody.text + "\n" + topic.d1
+		%TopicBody.text = %TopicBody.text + "\n[p] " + topic.d1
 	if topic.topic_stages.has(2):
-		%MissionBody.text = %MissionBody.text + "\n" + topic.d2
+		%TopicBody.text = %TopicBody.text + "\n[p] " + topic.d2
 	if topic.topic_stages.has(3):
-		%MissionBody.text = %MissionBody.text + "\n" + topic.d3
+		%TopicBody.text = %TopicBody.text + "\n[p] " + topic.d3
 	if topic.topic_stages.has(4):
-		%MissionBody.text = %MissionBody.text + "\n" + topic.d4
+		%TopicBody.text = %TopicBody.text + "\n[p] " + topic.d4
 	if topic.topic_stages.has(5):
-		%MissionBody.text = %MissionBody.text + "\n" + topic.d5
+		%TopicBody.text = %TopicBody.text + "\n[p] " + topic.d5

@@ -93,7 +93,7 @@ position = Vector2(304, 288)
 actor_path = "res://src/Actor/NPC/Nun.tscn"
 properties = {
 "base_gravity": [300.0, 3],
-"conversation": ["d_s0", 4],
+"conversation_queue": [{}, 27],
 "dialog_json": ["res://src/Dialog/MissionTest.json", 4],
 "editor_hidden": [false, 1],
 "id": ["npc_d", 4],
@@ -110,7 +110,7 @@ position = Vector2(64, 288)
 actor_path = "res://src/Actor/NPC/Tabith.tscn"
 properties = {
 "base_gravity": [300.0, 3],
-"conversation": ["a_s0", 4],
+"conversation_queue": [{}, 27],
 "dialog_json": ["res://src/Dialog/MissionTest.json", 4],
 "editor_hidden": [false, 1],
 "id": ["npc_a", 4],
@@ -127,7 +127,7 @@ position = Vector2(144, 288)
 actor_path = "res://src/Actor/NPC/Sage.tscn"
 properties = {
 "base_gravity": [300.0, 3],
-"conversation": ["b_s0", 4],
+"conversation_queue": [{}, 27],
 "dialog_json": ["res://src/Dialog/MissionTest.json", 4],
 "editor_hidden": [false, 1],
 "id": ["npc_b", 4],
@@ -144,7 +144,7 @@ position = Vector2(232, 288)
 actor_path = "res://src/Actor/NPC/Basil.tscn"
 properties = {
 "base_gravity": [300.0, 3],
-"conversation": ["c_s0", 4],
+"conversation_queue": [{}, 27],
 "dialog_json": ["res://src/Dialog/MissionTest.json", 4],
 "editor_hidden": [false, 1],
 "id": ["npc_c", 4],

@@ -1,6 +1,6 @@
 {
-	"npc_dialog_updates": {
-		"main": {
+	"npc_conversation_queue_updates": {
+		"Main": {
 			"npc_a": {
 				"talk_npc_a": "a_s0",
 				"talk_npc_b": "a_s1",
@@ -23,17 +23,16 @@
 				"celebrate": "c_s4",
 			},
 			"npc_d": {
-				"talk_npc_a": "d_s0",
+				"talk_npc_a": [["d_s0", false], ["salmiakki0", false]],
 				"talk_npc_b": "d_s1",
 				"talk_npc_c": "d_s2",
 				"talk_npc_d": "d_s3",
 				"celebrate": "d_s4",
 			},
 		},
-		"side_mission_1": {
-			"npc_a": {
-				"stage_0": "converastion_0",
-				"stage_1": "conversation_1",
+		"SideMissionExample": {
+			"npc_d": {
+				"give": "salmiakki1",
 			},
 		},
 	},

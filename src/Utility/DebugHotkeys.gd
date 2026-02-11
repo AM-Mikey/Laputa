@@ -100,5 +100,5 @@ func debug_print():
 #
 func reload_level():
 	print("reloading level")
-	ms.main_mission_stage = ms.MAIN_MISSION_LIST.front() #TODO: have it load a mission based on a debug level start mission
+	ms.main_mission_stage = ms.MAIN_MISSION.front() #TODO: have it load a mission based on a debug level start mission
 	w.change_level_via_code(w.current_level.scene_file_path, false)

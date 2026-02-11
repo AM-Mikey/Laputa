@@ -10,8 +10,6 @@ var cached_state: String
 var predialog_state: String
 
 var dialog_box: Node
-var dialog_step: int = 1
-var branch: String = ""
 
 var active_pc = null
 var disabled = false
@@ -28,7 +26,7 @@ var bail_time = 6.0
 @export var starting_state := "idle"
 @export var walk_speed = Vector2(50, 50)
 @export_file("*.json") var dialog_json: String
-@export var conversation: String
+@export var conversation_queue: Array #[[conversation, is_forced]]
 @export var voiced = true
 @export var id: String
 
@@ -188,14 +186,15 @@ func enter_talk(_last_state):
 		dialog_box = DB.instantiate()
 		dialog_box.connect("dialog_finished", Callable(self, "on_dialog_finished"))
 		w.dll.add_child(dialog_box)
-		dialog_box.start_printing(dialog_json, conversation)
+
+		dialog_box.start_printing(dialog_json, conversation_queue[0][0])
 
 
 ### MISC
 
 func _input(event):
 	if event.is_action_pressed("inspect") && active_pc \
-	&& dialog_json != "" && conversation != "" && state != "talk" && active_pc.mm.current_state == active_pc.mm.states["run"]:
+	&& dialog_json != "" && conversation_queue[0][0] != "" && state != "talk" && active_pc.mm.current_state == active_pc.mm.states["run"]:
 		if active_pc.can_input:
 			predialog_state = state
 			change_state("talk")

@@ -1,5 +1,7 @@
 extends PhysicsProp
 
+const GOT_ITEM = preload("res://src/UI/GotItem.tscn")
+
 @export var held_item_name: String
 
 var held_item: Item
@@ -33,8 +35,12 @@ func _input(event):
 func activate(player):
 	am.play("chest_open")
 	am.play_interrupt("get_item")
+	var got_item = GOT_ITEM.instantiate()
+	got_item.item_name = held_item_name
+	w.ui.add_child(got_item)
 	$AnimationPlayer.play("Used")
 	spent = true
+
 	if held_item:
 		var already_has_item = false
 		for i in player.item_array:
@@ -42,6 +48,7 @@ func activate(player):
 				already_has_item = true
 		if !already_has_item:
 			player.item_array.append(held_item)
+			mission_progress_check()
 			print("added item: '", held_item_name, "' to item array")
 		else:
 			print("WARNING: Item: ", held_item_name, " already in item array, ignoring")
@@ -53,6 +60,19 @@ func expend_prop():
 	spent = true
 	$AnimationPlayer.play("Used")
 
+func mission_progress_check(): #TODO: for main mission too
+	print("s")
+	for m in ms.side_missions:
+		var stage: Array
+		for s in m.stages:
+			if s[0] == m.current_stage:
+				stage = s
+		print(stage.size())
+		if stage.size() == 3: #has trigger and value
+			if stage[1] == "item":
+				if stage[2].to_pascal_case() == held_item_name.to_pascal_case():
+					print("asddddd")
+					ms.progress_side_mision(m.resource_path.get_file().trim_suffix(".tres"))
 
 
 ### SIGNALS ###
