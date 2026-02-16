@@ -61,17 +61,14 @@ func expend_prop():
 	$AnimationPlayer.play("Used")
 
 func mission_progress_check(): #TODO: for main mission too
-	print("s")
 	for m in ms.side_missions:
 		var stage: Array
 		for s in m.stages:
 			if s[0] == m.current_stage:
 				stage = s
-		print(stage.size())
 		if stage.size() == 3: #has trigger and value
 			if stage[1] == "item":
 				if stage[2].to_pascal_case() == held_item_name.to_pascal_case():
-					print("asddddd")
 					ms.progress_side_mision(m.resource_path.get_file().trim_suffix(".tres"))
 
 

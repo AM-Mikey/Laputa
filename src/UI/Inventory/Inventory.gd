@@ -27,11 +27,14 @@ func display_items():
 		var texture = i.texture
 		%ItemList.add_icon_item(texture)
 
-
 func display_topics():
 	var pc = f.pc()
 	for t in pc.topic_array:
 		%TopicList.add_item(t.topic_name)
+
+func display_side_missions():
+	for m in ms.side_missions:
+		%SideMissionList.add_item(m.display_name)
 
 func enter():
 	get_tree().paused = true
@@ -39,6 +42,7 @@ func enter():
 	w.ui.visible = false
 	display_items()
 	display_topics()
+	display_side_missions()
 
 func exit():
 	get_tree().paused = false
@@ -144,7 +148,6 @@ func _resolution_scale_changed(_resolution_scale):
 
 
 func _on_TopicList_item_selected(index: int):
-	print("ass")
 	var pc = f.pc()
 	var topic = pc.topic_array[index]
 	%TopicBody.text = ""
@@ -160,3 +163,8 @@ func _on_TopicList_item_selected(index: int):
 		%TopicBody.text = %TopicBody.text + "\n[p] " + topic.d4
 	if topic.topic_stages.has(5):
 		%TopicBody.text = %TopicBody.text + "\n[p] " + topic.d5
+
+
+func _on_SideMissionList_item_selected(index: int):
+	var side_mission = ms.side_missions[index]
+	%MissionBody.text = side_mission.description

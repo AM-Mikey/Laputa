@@ -385,11 +385,6 @@ theme_override_styles/selected_focus = ExtResource("12_vxl58")
 theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_xpheq")
 theme_override_styles/cursor = SubResource("StyleBoxEmpty_pkrle")
 allow_search = false
-item_count = 4
-item_0/text = "· Food Delivery"
-item_1/text = "· Save the cat!"
-item_2/text = "· Meanwhile..."
-item_3/text = "· Clear the area"
 
 [node name="Description" type="MarginContainer" parent="VBox/Background/Mission/VBox" unique_id=2058229200]
 layout_mode = 2
@@ -547,4 +542,5 @@ flat = true
 [connection signal="toggled" from="VBox/HBox/MapButton" to="." method="_on_tab_toggled" binds= ["map"]]
 [connection signal="item_activated" from="VBox/Background/Inventory/VBox/Items/MarginContainer/ItemList" to="." method="_on_Items_item_activated"]
 [connection signal="item_selected" from="VBox/Background/Inventory/VBox/Items/MarginContainer/ItemList" to="." method="_on_ItemList_item_selected"]
+[connection signal="item_selected" from="VBox/Background/Mission/VBox/Missions/HBoxContainer/Panel2/MarginContainer/SideMissionList" to="." method="_on_SideMissionList_item_selected"]
 [connection signal="item_selected" from="VBox/Background/Book/VBox/Topics/MarginContainer/TopicList" to="." method="_on_TopicList_item_selected"]

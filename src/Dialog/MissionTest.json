@@ -102,7 +102,7 @@
 	"d_s0":
 	"
 	/newchar,nun,NPC_D Your Stage is talk_npc_a
-	I'm denying your progress. Talk to NPC A /next
+	I'm denying your progress. Talk to NPC A
 	",
 	
 	"salmiakki0":
@@ -115,7 +115,7 @@
 	"
 	/newchar,nun,NPC_D Oh you have some of that Salmiakki!
 	/yn May I have some?
-	/db,0 Why thank you! /end_side_mission,SideMissionExample /next /end
+	/db,0 Why thank you! /end_side_mission,SideMissionExample /end
 	/db,1 Oh, alright then. /end
 	",
 	

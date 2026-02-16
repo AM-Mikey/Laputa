@@ -193,6 +193,7 @@ func enter_talk(_last_state):
 ### MISC
 
 func _input(event):
+	if conversation_queue.size() == 0: return
 	if event.is_action_pressed("inspect") && active_pc \
 	&& dialog_json != "" && conversation_queue[0][0] != "" && state != "talk" && active_pc.mm.current_state == active_pc.mm.states["run"]:
 		if active_pc.can_input:

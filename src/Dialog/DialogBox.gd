@@ -226,7 +226,7 @@ func _input(event):
 
 func progress_text(with_newline = true):
 	if step == current_text_array.size() || do_force_end:
-		exit()
+		check_for_forced_conversation()
 		return
 	do_delay = true
 	active = true
@@ -237,7 +237,23 @@ func progress_text(with_newline = true):
 		dl.text = flash_original_text
 	run_text_array(current_text_array, true)
 
-
+func check_for_forced_conversation():
+	var npc: Node
+	for n in get_tree().get_nodes_in_group("NPCs"):
+		if n.dialog_box == self:
+			npc = n
+	if npc:
+		npc.conversation_queue.pop_front()
+		if !npc.conversation_queue.size() == 0 && npc.conversation_queue[0][1] == true: #is forced
+				print("forcing next dialog")
+				$FlashTimer.stop()
+				dl.text = ""
+				step = 0
+				start_printing(npc.dialog_json, npc.conversation_queue[0][0]) #ideally we never end the dialog, so the npc doesnt exit the state
+		else:
+			exit()
+	else:
+		exit()
 
 func exit():
 	if is_exiting: return

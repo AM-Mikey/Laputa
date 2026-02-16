@@ -37,17 +37,35 @@ func progress_side_mision(mission_name): #no protection for index > # of stages
 	mission.current_stage = mission.stages[current_index + 1][0]
 	print("Side mission %s progress, new stage: " %mission_name + mission.current_stage)
 	update_level_via_mission(mission_name)
+	mission_progress_check()
 
 func seek_side_mission(mission_name, seek_value): #no protection for correct seek_value
 	var mission = mission_name_to_mission(mission_name)
 	mission.current_stage = seek_value
 	print("Side mission %s seek, new stage: " %mission_name + mission.current_stage)
 	update_level_via_mission(mission_name)
+	mission_progress_check()
 
 func end_side_mission(mission_name):
 	var mission = mission_name_to_mission(mission_name)
 	side_missions.erase(mission)
 	print("Side mission %s completed" %mission_name)
+
+
+func mission_progress_check(): #TODO: for main mission too
+	print("checking")
+	for m in ms.side_missions:
+		var stage: Array
+		for s in m.stages:
+			if s[0] == m.current_stage:
+				stage = s
+		if stage.size() == 3: #has trigger and value
+			if stage[1] == "item": #search inventory for item
+				for i in f.pc().item_array:
+					if stage[2].to_pascal_case() == i.resource_path.get_file().trim_suffix(".tres"):
+						print("GOTEEEM")
+						ms.progress_side_mision(m.resource_path.get_file().trim_suffix(".tres"))
+
 
 func update_level_via_mission(mission_name = "Main"): #while already in level
 	var json = load(w.current_level.mission_level_update)
@@ -113,17 +131,20 @@ func update_level_via_mission(mission_name = "Main"): #while already in level
 	for k in trigger_runtime_position_offset_dict.keys():
 		k.global_position += array_to_vector2(trigger_runtime_position_offset_dict[k])
 
-#npc_conversation_queue_updates
-	var npc_conversation_queue_updates_dict = get_matching_entities_values(data, mission_name, "npc_conversation_queue_updates", "NPCs", false)
-	for k in npc_conversation_queue_updates_dict.keys():
-		var conversation_queue = []
-		if npc_conversation_queue_updates_dict[k] is String:
-			conversation_queue = [[npc_conversation_queue_updates_dict[k], false]]
+#npc_set_conversation_queue
+	var npc_set_conversation_queue_dict = get_matching_entities_values(data, mission_name, "npc_set_conversation_queue", "NPCs", false)
+	for k in npc_set_conversation_queue_dict.keys():
+		if npc_set_conversation_queue_dict[k] is String:
+			k.conversation_queue = [[npc_set_conversation_queue_dict[k], false]]
 		else:
-			conversation_queue = npc_conversation_queue_updates_dict[k]
-		k.conversation_queue = conversation_queue
-
-
+			k.conversation_queue = npc_set_conversation_queue_dict[k]
+#npc_append_conversation_queue
+	var npc_append_conversation_queue_dict = get_matching_entities_values(data, mission_name, "npc_append_conversation_queue", "NPCs", false)
+	for k in npc_append_conversation_queue_dict.keys():
+		if npc_append_conversation_queue_dict[k] is String:
+			k.conversation_queue.append_array([npc_append_conversation_queue_dict[k], false])
+		else:
+			k.conversation_queue.append_array(npc_append_conversation_queue_dict[k])
 
 func setup_level_via_mission(mission_name = "Main"): #on level enter
 	var json = load(w.current_level.mission_level_update)
@@ -172,15 +193,21 @@ func setup_level_via_mission(mission_name = "Main"): #on level enter
 	for k in trigger_spawn_position_offset_dict.keys():
 		k.allow_spawn += array_to_vector2(trigger_spawn_position_offset_dict[k])
 
-#npc_conversation_queue_updates
-	var npc_conversation_queue_updates_dict = get_matching_entities_values(data, mission_name, "npc_conversation_queue_updates", "NPCSpawns", true)
-	for k in npc_conversation_queue_updates_dict.keys():
-		var conversation_queue = []
-		if npc_conversation_queue_updates_dict[k] is String:
-			conversation_queue = [[npc_conversation_queue_updates_dict[k], false]]
+#npc_set_conversation_queue
+	var npc_set_conversation_queue_dict = get_matching_entities_values(data, mission_name, "npc_set_conversation_queue", "NPCSpawns", true)
+	for k in npc_set_conversation_queue_dict.keys():
+		if npc_set_conversation_queue_dict[k] is String:
+			k.properties["conversation_queue"][0] = [[npc_set_conversation_queue_dict[k], false]]
 		else:
-			conversation_queue = npc_conversation_queue_updates_dict[k]
-		k.properties["conversation_queue"][0] = conversation_queue
+			k.properties["conversation_queue"][0] = npc_set_conversation_queue_dict[k]
+#npc_append_conversation_queue
+	var npc_append_conversation_queue_dict = get_matching_entities_values(data, mission_name, "npc_append_conversation_queue", "NPCSpawns", true)
+	for k in npc_append_conversation_queue_dict.keys():
+		if npc_append_conversation_queue_dict[k] is String:
+			k.properties["conversation_queue"][0].append_array([npc_append_conversation_queue_dict[k], false])
+		else:
+			k.properties["conversation_queue"][0].append_array(npc_append_conversation_queue_dict[k])
+
 
 #level_conversation_on_enter
 	if data.has("level_conversation_on_enter"):

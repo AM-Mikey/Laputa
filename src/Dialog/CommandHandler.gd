@@ -100,6 +100,7 @@ func parse_command(string):
 					is_duplicate = true
 			if !is_duplicate:
 				ms.side_missions.append(load("res://src/Mission/%s.tres" %argument))
+				ms.mission_progress_check()
 		"progress_side_mission": #/progress_side_mission, (string: mission_name(filename))
 			ms.progress_side_mission(argument)
 		"seek_side_mission": #/seek_side_mission, (string: mission_name(filename)), (string: seek_value)
@@ -109,10 +110,14 @@ func parse_command(string):
 			ms.end_side_mission(argument)
 
 		### Conversation Queuing
-		"next":
-			for n in get_tree().get_nodes_in_group("NPCs"):
-				if n.dialog_box == db: #npc that spawned the db
-					n.conversation_queue.pop_front()
+		#"next":
+			#print("nextigngggg")
+			#for n in get_tree().get_nodes_in_group("NPCs"):
+				#if n.dialog_box == db: #npc that spawned the db
+					#n.conversation_queue.pop_front()
+					#if n.conversation_queue.size() == 0: return
+					#if n.conversation_queue[0][1] == true: #is forced
+						#db.start_printing(n.dialog_json, n.conversation_queue[0][0]) #ideally we never end the dialog, so the npc doesnt exit the state
 
 
 
