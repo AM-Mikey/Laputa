@@ -71,7 +71,7 @@
 	/options,Why?,Huh?,Ok Ya dig?
 	/db,0 Because I said so! Now SCRAM! /udb
 	/db,1 Waddaya mean huh? /udb
-	/db,2 Now git. /end
+	/db,2 Now git. /eb
 	/m Shoo!
 	",
 	
@@ -115,8 +115,8 @@
 	"
 	/newchar,nun,NPC_D Oh you have some of that Salmiakki!
 	/yn May I have some?
-	/db,0 Why thank you! /end_side_mission,SideMissionExample /end
-	/db,1 Oh, alright then. /end
+	/db,0 Why thank you! /end_side_mission,SideMissionExample /eb
+	/db,1 Oh, alright then. /eb
 	",
 	
 	"d_s1":

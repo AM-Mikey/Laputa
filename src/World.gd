@@ -81,8 +81,8 @@ func child_layer_set(c: Node): #set the visibility layer of all children to laye
 
 
 func _input(event):
-	if event.is_action_pressed("inventory") and has_node("Juniper"):
-		if not il.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled and $Juniper.can_input:
+	if event.is_action_pressed("inventory") && f.pc():
+		if !il.has_node("Inventory") && !get_tree().paused && !f.pc().disabled && f.pc().can_input && !dll.has_node("DialogBox"):
 			il.add_child(INVENTORY.instantiate())
 
 
@@ -111,7 +111,9 @@ func first_time_level_setup():
 	if current_level.debug_main_mission_stage:
 		ms.main_mission_stage = current_level.debug_main_mission_stage
 	if current_level.mission_level_update:
-		ms.setup_level_via_mission()
+		ms.setup_level_via_mission("Main")
+		for m in ms.side_missions:
+			ms.setup_level_via_mission(m)
 	pc.global_position = get_spawn_point().global_position
 
 	$Juniper/PlayerCamera.reset()
@@ -149,7 +151,9 @@ func change_level_via_code(level_path, use_save_data):
 		if current_level.debug_main_mission_stage:
 			ms.main_mission_stage = current_level.debug_main_mission_stage
 	if current_level.mission_level_update:
-		ms.setup_level_via_mission()
+		ms.setup_level_via_mission("Main")
+		for m in ms.side_missions:
+			ms.setup_level_via_mission(m)
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		$Juniper.global_position = s.global_position
 
@@ -178,7 +182,9 @@ func change_level_via_trigger(level_path, door_index):
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
 	if current_level.mission_level_update:
-		ms.setup_level_via_mission()
+		ms.setup_level_via_mission("Main")
+		for m in ms.side_missions:
+			ms.setup_level_via_mission(m)
 	$Juniper/PlayerCamera.reset()
 
 	#### get the door with the right index

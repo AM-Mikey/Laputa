@@ -23,18 +23,17 @@
 				"celebrate": "c_s4",
 			},
 			"npc_d": {
-				"talk_npc_a": [["d_s0", false], ["salmiakki0", false]],
-				"talk_npc_b": [["d_s1", false], ["salmiakki0", false]],
-				"talk_npc_c": [["d_s2", false], ["salmiakki0", false]],
-				"talk_npc_d": [["d_s3", false], ["salmiakki0", false]],
+				"talk_npc_a": [["d_s0", "main", false], ["salmiakki0", "side", false]],
+				"talk_npc_b": "d_s1",
+				"talk_npc_c": "d_s2",
+				"talk_npc_d": "d_s3",
 				"celebrate": "d_s4",
 			},
 		},
-	},
-	"npc_append_conversation_queue": {
 		"SideMissionExample": {
 			"npc_d": {
-				"give": [["salmiakki1", true]]
+				"give": [["salmiakki1", "side", true]],
+				"complete": [[]],
 			},
 		},
 	},

@@ -26,7 +26,8 @@ var bail_time = 6.0
 @export var starting_state := "idle"
 @export var walk_speed = Vector2(50, 50)
 @export_file("*.json") var dialog_json: String
-@export var conversation_queue: Array #[[conversation, is_forced]]
+@export var conversation_queue: Array #[[conversation_name, main_or_side, is_forced, repeatable, completed_once]]
+@export var side_conversation_queue: Array #[[conversation_name, main_or_side, is_forced, repeatable, completed_once]]
 @export var voiced = true
 @export var id: String
 
@@ -187,7 +188,19 @@ func enter_talk(_last_state):
 		dialog_box.connect("dialog_finished", Callable(self, "on_dialog_finished"))
 		w.dll.add_child(dialog_box)
 
-		dialog_box.start_printing(dialog_json, conversation_queue[0][0])
+		if conversation_queue.is_empty():
+			side_conversation_queue[0][4] = true
+			dialog_box.start_printing(dialog_json, side_conversation_queue[0][0])
+		elif side_conversation_queue.is_empty():
+			conversation_queue[0][4] = true
+			dialog_box.start_printing(dialog_json, conversation_queue[0][0])
+		else: #pick main or side conversation
+			if conversation_queue[0][4] == true: #has been read once
+				side_conversation_queue[0][4] = true
+				dialog_box.start_printing(dialog_json, side_conversation_queue[0][0])
+			else:
+				conversation_queue[0][4] = true
+				dialog_box.start_printing(dialog_json, conversation_queue[0][0])
 
 
 ### MISC

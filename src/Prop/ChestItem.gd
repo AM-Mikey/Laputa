@@ -69,7 +69,7 @@ func mission_progress_check(): #TODO: for main mission too
 		if stage.size() == 3: #has trigger and value
 			if stage[1] == "item":
 				if stage[2].to_pascal_case() == held_item_name.to_pascal_case():
-					ms.progress_side_mision(m.resource_path.get_file().trim_suffix(".tres"))
+					ms.progress_side_mission(m.resource_path.get_file().trim_suffix(".tres"))
 
 
 ### SIGNALS ###

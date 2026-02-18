@@ -75,7 +75,7 @@ func parse_command(string):
 			yes_no()
 		"udb":
 			merge_branch()
-		"end":
+		"eb":
 			end_branch()
 		"options":
 			options(argument)
@@ -108,16 +108,6 @@ func parse_command(string):
 			ms.seek_side_misssion(a[0], a[1])
 		"end_side_mission":#/end_side_mission, (string: mission_name(filename))
 			ms.end_side_mission(argument)
-
-		### Conversation Queuing
-		#"next":
-			#print("nextigngggg")
-			#for n in get_tree().get_nodes_in_group("NPCs"):
-				#if n.dialog_box == db: #npc that spawned the db
-					#n.conversation_queue.pop_front()
-					#if n.conversation_queue.size() == 0: return
-					#if n.conversation_queue[0][1] == true: #is forced
-						#db.start_printing(n.dialog_json, n.conversation_queue[0][0]) #ideally we never end the dialog, so the npc doesnt exit the state
 
 
 

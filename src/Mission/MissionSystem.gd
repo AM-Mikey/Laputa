@@ -26,7 +26,7 @@ func seek_main_mission(seek_value): #no protection for correct seek_value
 	print("Main mission seek, new stage: " + main_mission_stage)
 	update_level_via_mission()
 
-func progress_side_mision(mission_name): #no protection for index > # of stages
+func progress_side_mission(mission_name): #no protection for index > # of stages
 	var mission = mission_name_to_mission(mission_name)
 	var current_index: int
 	var index := 0
@@ -48,12 +48,12 @@ func seek_side_mission(mission_name, seek_value): #no protection for correct see
 
 func end_side_mission(mission_name):
 	var mission = mission_name_to_mission(mission_name)
-	side_missions.erase(mission)
+	mission.current_stage = "complete"
 	print("Side mission %s completed" %mission_name)
+	update_level_via_mission(mission_name)
 
 
 func mission_progress_check(): #TODO: for main mission too
-	print("checking")
 	for m in ms.side_missions:
 		var stage: Array
 		for s in m.stages:
@@ -63,8 +63,7 @@ func mission_progress_check(): #TODO: for main mission too
 			if stage[1] == "item": #search inventory for item
 				for i in f.pc().item_array:
 					if stage[2].to_pascal_case() == i.resource_path.get_file().trim_suffix(".tres"):
-						print("GOTEEEM")
-						ms.progress_side_mision(m.resource_path.get_file().trim_suffix(".tres"))
+						ms.progress_side_mission(m.resource_path.get_file().trim_suffix(".tres"))
 
 
 func update_level_via_mission(mission_name = "Main"): #while already in level
@@ -134,17 +133,30 @@ func update_level_via_mission(mission_name = "Main"): #while already in level
 #npc_set_conversation_queue
 	var npc_set_conversation_queue_dict = get_matching_entities_values(data, mission_name, "npc_set_conversation_queue", "NPCs", false)
 	for k in npc_set_conversation_queue_dict.keys():
-		if npc_set_conversation_queue_dict[k] is String:
-			k.conversation_queue = [[npc_set_conversation_queue_dict[k], false]]
-		else:
-			k.conversation_queue = npc_set_conversation_queue_dict[k]
+		var convo_queue = get_conversation_queue_from_mixed_or_partial(npc_set_conversation_queue_dict[k])
+		if convo_queue == [[]]:
+			k.conversation_queue = []
+			k.side_conversation_queue = []
+			return
+		var main_queue = []
+		var side_queue = []
+		for a in convo_queue:
+			match a[1]:
+				"main": main_queue.append(a)
+				"side": side_queue.append(a)
+		if !main_queue.is_empty():
+			k.conversation_queue = main_queue
+		if !side_queue.is_empty():
+			k.side_conversation_queue = side_queue
+
 #npc_append_conversation_queue
 	var npc_append_conversation_queue_dict = get_matching_entities_values(data, mission_name, "npc_append_conversation_queue", "NPCs", false)
 	for k in npc_append_conversation_queue_dict.keys():
-		if npc_append_conversation_queue_dict[k] is String:
-			k.conversation_queue.append_array([npc_append_conversation_queue_dict[k], false])
-		else:
-			k.conversation_queue.append_array(npc_append_conversation_queue_dict[k])
+		var convo_queue = get_conversation_queue_from_mixed_or_partial(npc_append_conversation_queue_dict[k])
+		for a in convo_queue:
+			match a[1]:
+				"main": k.conversation_queue.append(a)
+				"side": k.side_conversation_queue.append(a)
 
 func setup_level_via_mission(mission_name = "Main"): #on level enter
 	var json = load(w.current_level.mission_level_update)
@@ -196,17 +208,30 @@ func setup_level_via_mission(mission_name = "Main"): #on level enter
 #npc_set_conversation_queue
 	var npc_set_conversation_queue_dict = get_matching_entities_values(data, mission_name, "npc_set_conversation_queue", "NPCSpawns", true)
 	for k in npc_set_conversation_queue_dict.keys():
-		if npc_set_conversation_queue_dict[k] is String:
-			k.properties["conversation_queue"][0] = [[npc_set_conversation_queue_dict[k], false]]
-		else:
-			k.properties["conversation_queue"][0] = npc_set_conversation_queue_dict[k]
+		var convo_queue = get_conversation_queue_from_mixed_or_partial(npc_set_conversation_queue_dict[k])
+		var main_queue = []
+		var side_queue = []
+		for a in convo_queue:
+			match a[1]:
+				"main": main_queue.append(a)
+				"side": side_queue.append(a)
+		if !main_queue.is_empty():
+			k.properties["conversation_queue"][0] = main_queue
+		if !side_queue.is_empty():
+			k.properties["side_conversation_queue"][0] = side_queue
 #npc_append_conversation_queue
 	var npc_append_conversation_queue_dict = get_matching_entities_values(data, mission_name, "npc_append_conversation_queue", "NPCSpawns", true)
 	for k in npc_append_conversation_queue_dict.keys():
-		if npc_append_conversation_queue_dict[k] is String:
-			k.properties["conversation_queue"][0].append_array([npc_append_conversation_queue_dict[k], false])
-		else:
-			k.properties["conversation_queue"][0].append_array(npc_append_conversation_queue_dict[k])
+		var convo_queue = get_conversation_queue_from_mixed_or_partial(npc_append_conversation_queue_dict[k])
+		if convo_queue == [[]]:
+			k.conversation_queue = []
+			k.side_conversation_queue = []
+			return
+		for a in convo_queue:
+			match a[1]:
+				"main": k.properties["conversation_queue"][0].append(a)
+				"side": k.properties["side_conversation_queue"][0].append(a)
+
 
 
 #level_conversation_on_enter
@@ -259,4 +284,30 @@ func mission_name_to_mission(mission_name) -> SideMission:
 	for m in side_missions:
 		if m.resource_path.get_file().trim_suffix(".tres") == mission_name:
 			out = m
+	return out
+
+func get_conversation_queue_from_mixed_or_partial(mixed_or_partial) -> Array:
+	var out = []
+	if mixed_or_partial is String:
+		out = [[mixed_or_partial, "main", false, true, false]]
+	elif mixed_or_partial is Array:
+		if mixed_or_partial == [] or mixed_or_partial == [[]]:
+			out = [[]]
+			return out
+		match mixed_or_partial[0].size(): #if array, how abbreviated is it? take the first as an example
+			1:
+				for a in mixed_or_partial:
+					out.append([a[0], "main", false, true, false])
+			2:
+				for a in mixed_or_partial:
+					out.append([a[0], a[1], false, true, false])
+			3:
+				for a in mixed_or_partial:
+					out.append([a[0], a[1], a[2], true, false])
+			4:
+				for a in mixed_or_partial:
+					out.append([a[0], a[1], a[2], a[3], false])
+			5:
+				out = mixed_or_partial
+			_: printerr("ERROR: Too many indices in conversation_queue array")
 	return out

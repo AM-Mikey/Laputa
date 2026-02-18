@@ -226,7 +226,7 @@ func _input(event):
 
 func progress_text(with_newline = true):
 	if step == current_text_array.size() || do_force_end:
-		check_for_forced_conversation()
+		setup_next_conversation()
 		return
 	do_delay = true
 	active = true
@@ -237,19 +237,85 @@ func progress_text(with_newline = true):
 		dl.text = flash_original_text
 	run_text_array(current_text_array, true)
 
-func check_for_forced_conversation():
+func setup_next_conversation():
 	var npc: Node
 	for n in get_tree().get_nodes_in_group("NPCs"):
 		if n.dialog_box == self:
 			npc = n
 	if npc:
-		npc.conversation_queue.pop_front()
-		if !npc.conversation_queue.size() == 0 && npc.conversation_queue[0][1] == true: #is forced
-				print("forcing next dialog")
+		#progressing to next npc dialog or repeating if it's the last one
+		var correct_queue
+
+
+		#more main missions to do, keep going
+		var main_conversation_count = npc.conversation_queue.size()
+		var side_conversation_count = npc.side_conversation_queue.size()
+
+		if main_conversation_count > 1:
+			npc.conversation_queue.pop_front()
+			correct_queue = "conversation_queue"
+			print("progressing to next main convo")
+
+		elif side_conversation_count > 1: #main must be already read or count 0 by this point
+			if npc.side_conversation_queue[0][4]: #first side convo has been read
+				npc.conversation_queue.pop_front()
+				correct_queue = "side_conversation_queue"
+				print("progressing to next side convo")
+			else:
+				correct_queue = "side_conversation_queue"
+				print("progressing to first side convo after main convo")
+
+		elif side_conversation_count == 1 && !npc.side_conversation_queue[0][4]: #one unread side convo
+			correct_queue = "side_conversation_queue"
+			print("progressing to side convo")
+
+		elif main_conversation_count == 1 && side_conversation_count == 0:
+			if npc.conversation_queue[0][3]: #main can repeat
+				correct_queue = "conversation_queue"
+				print("repeating main convo")
+			else:
+				npc.conversation_queue.pop_front()
+				exit()
+				return
+
+		elif main_conversation_count == 0 && side_conversation_count == 1:
+			if npc.side_conversation_queue[0][3]: #side can repeat
+				correct_queue = "side_conversation_queue"
+				print("repeating side convo")
+			else:
+				npc.side_conversation_queue.pop_front()
+				exit()
+				return
+
+		elif main_conversation_count == 1 && side_conversation_count == 1: #choose which to repeat
+			if !npc.side_conversation_queue[0][3]: #side can't repeat
+				npc.side_conversation_queue.pop_front()
+				if !npc.conversation_queue[0][3]: #main can't repeat
+					npc.conversation_queue.pop_front()
+					exit()
+					return
+				else:
+					correct_queue = "conversation_queue" #repeat main instead
+					print("repeating main convo")
+			else:
+				correct_queue = "side_conversation_queue" #side can repeat, do so
+				print("repeating side convo")
+
+		elif main_conversation_count == 0 && side_conversation_count == 0: #no more
+			exit()
+			return
+
+		var stored_correct_queue = npc.get(correct_queue)
+		var stored_next_convo = stored_correct_queue[0]
+		print(stored_next_convo)
+		if stored_next_convo && stored_next_convo[2] && !stored_next_convo[4]: #make sure forced is true and already read is false
+				print("forcing next convo")
 				$FlashTimer.stop()
 				dl.text = ""
 				step = 0
-				start_printing(npc.dialog_json, npc.conversation_queue[0][0]) #ideally we never end the dialog, so the npc doesnt exit the state
+				stored_correct_queue[0][3] = false
+				npc.set(correct_queue, stored_correct_queue)
+				start_printing(npc.dialog_json, stored_next_convo[0]) #ideally we never end the dialog, so the npc doesnt exit the state
 		else:
 			exit()
 	else:
