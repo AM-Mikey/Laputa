@@ -48,7 +48,7 @@ func activate(player):
 				already_has_item = true
 		if !already_has_item:
 			player.item_array.append(held_item)
-			mission_progress_check()
+			ms.mission_progress_check()
 			print("added item: '", held_item_name, "' to item array")
 		else:
 			print("WARNING: Item: ", held_item_name, " already in item array, ignoring")
@@ -59,17 +59,6 @@ func activate(player):
 func expend_prop():
 	spent = true
 	$AnimationPlayer.play("Used")
-
-func mission_progress_check(): #TODO: for main mission too
-	for m in ms.side_missions:
-		var stage: Array
-		for s in m.stages:
-			if s[0] == m.current_stage:
-				stage = s
-		if stage.size() == 3: #has trigger and value
-			if stage[1] == "item":
-				if stage[2].to_pascal_case() == held_item_name.to_pascal_case():
-					ms.progress_side_mission(m.resource_path.get_file().trim_suffix(".tres"))
 
 
 ### SIGNALS ###

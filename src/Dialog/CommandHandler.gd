@@ -85,6 +85,7 @@ func parse_command(string):
 			db.dl.text += " [b][color=#f3b131]" #bright gold
 			if !pc.topic_array.has(argument):
 				pc.topic_array.append(argument)
+				ms.mission_progress_check()
 		"ut":
 			db.dl.text += "[/color][/b] "
 

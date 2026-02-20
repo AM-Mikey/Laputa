@@ -11,7 +11,7 @@ enum LevelType {NORMAL, PLAYERLESS_CUTSCENE}
 @export_file("*.json") var dialog_json: String
 @export var conversation_on_enter: String
 @export_file("*.json") var mission_level_update: String
-@export var debug_main_mission_stage: String
+@export var debug_main_mission_stage: Array
 
 var time_created: Dictionary
 

@@ -1,16 +1,14 @@
 extends Node
 
-const MAIN_MISSION = [
-	"talk_npc_a",
-	"talk_npc_b",
-	"talk_npc_c",
-	"talk_npc_d",
-	"celebrate",
+const MAIN_MISSION = [ #[name, trigger_type, trigger_value]
+	["talk_npc_a"],
+	["talk_npc_b"],
+	["talk_npc_c"],
+	["talk_npc_d"],
+	["celebrate"],
 ]
 
-
-var main_mission_stage: String = MAIN_MISSION.front()
-
+var main_mission_stage: Array = MAIN_MISSION[0]
 var side_missions: Array[SideMission]
 
 @onready var w = get_tree().get_root().get_node("World")
@@ -18,12 +16,12 @@ var side_missions: Array[SideMission]
 func progress_main_mission(): #no protection for index > # of stages
 	var current_index = MAIN_MISSION.find(main_mission_stage)
 	main_mission_stage = MAIN_MISSION[current_index + 1]
-	print("Main mission progress, new stage: " + main_mission_stage)
+	print("Main mission progress, new stage: " + main_mission_stage[0])
 	update_level_via_mission()
 
 func seek_main_mission(seek_value): #no protection for correct seek_value
 	main_mission_stage = seek_value
-	print("Main mission seek, new stage: " + main_mission_stage)
+	print("Main mission seek, new stage: " + main_mission_stage[0])
 	update_level_via_mission()
 
 func progress_side_mission(mission_name): #no protection for index > # of stages
@@ -53,17 +51,60 @@ func end_side_mission(mission_name):
 	update_level_via_mission(mission_name)
 
 
-func mission_progress_check(): #TODO: for main mission too
+func mission_progress_check(): #TODO: compress these into one
 	for m in ms.side_missions:
 		var stage: Array
 		for s in m.stages:
 			if s[0] == m.current_stage:
 				stage = s
+		var do_progress = false
 		if stage.size() == 3: #has trigger and value
-			if stage[1] == "item": #search inventory for item
+			match stage[1]:
+				"item": #search inventory for item
+					for i in f.pc().item_array:
+						if stage[2].to_pascal_case() == i.resource_path.get_file().trim_suffix(".tres"):
+							do_progress = true
+				"gun": #search guns for gun
+					for g in f.pc().guns:
+						if stage[2].to_pascal_case() == g.name:
+							do_progress = true
+				"topic": #search topic array for topic
+					for t in f.pc().topic_array:
+						if stage[2].to_pascal_case() == t.topic_name:
+							do_progress = true
+				"level_enter": #check if we entered the level with the given name
+					if stage[2].to_pascal_case() == w.current_level.name:
+						do_progress = true
+				"boss_defeat": #check if we defeated a boss
+					pass
+		if do_progress:
+			ms.progress_side_mission(m.resource_path.get_file().trim_suffix(".tres"))
+
+	#main mission
+	var stage = ms.main_mission_stage
+	var do_progress = false
+	if stage.size() == 3: #has trigger and value
+		match stage[1]:
+			"item": #search inventory for item
 				for i in f.pc().item_array:
 					if stage[2].to_pascal_case() == i.resource_path.get_file().trim_suffix(".tres"):
-						ms.progress_side_mission(m.resource_path.get_file().trim_suffix(".tres"))
+						do_progress = true
+			"gun": #search guns for gun
+				for g in f.pc().guns:
+					if stage[2].to_pascal_case() == g.name:
+						do_progress = true
+			"topic": #search topic array for topic
+				for t in f.pc().topic_array:
+					if stage[2].to_pascal_case() == t.topic_name:
+						do_progress = true
+			"level_enter": #check if we entered the level with the given name
+				if stage[2].to_pascal_case() ==  w.current_level.name:
+					do_progress = true
+			"boss_defeat": #check if we defeated a boss
+				pass
+	if do_progress:
+		ms.progress_main_mission()
+
 
 
 func update_level_via_mission(mission_name = "Main"): #while already in level
@@ -239,7 +280,7 @@ func setup_level_via_mission(mission_name = "Main"): #on level enter
 		if data["level_conversation_on_enter"].has(mission_name):
 			var mission_stage: String
 			if mission_name == "Main":
-				mission_stage = main_mission_stage
+				mission_stage = main_mission_stage[0]
 			else:
 				mission_stage = mission_name_to_mission(mission_name).current_stage
 			for stage in data["level_conversation_on_enter"][mission_name]:
@@ -264,7 +305,7 @@ func get_matching_entities_values(data, mission_name, data_key, group, is_spawn)
 			if correct_id:
 				var mission_stage: String
 				if mission_name == "Main":
-					mission_stage = main_mission_stage
+					mission_stage = main_mission_stage[0]
 				else:
 					mission_stage = mission_name_to_mission(mission_name).current_stage
 

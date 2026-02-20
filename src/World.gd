@@ -114,6 +114,7 @@ func first_time_level_setup():
 		ms.setup_level_via_mission("Main")
 		for m in ms.side_missions:
 			ms.setup_level_via_mission(m)
+	ms.mission_progress_check()
 	pc.global_position = get_spawn_point().global_position
 
 	$Juniper/PlayerCamera.reset()
@@ -154,6 +155,7 @@ func change_level_via_code(level_path, use_save_data):
 		ms.setup_level_via_mission("Main")
 		for m in ms.side_missions:
 			ms.setup_level_via_mission(m)
+	ms.mission_progress_check()
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		$Juniper.global_position = s.global_position
 
@@ -185,6 +187,7 @@ func change_level_via_trigger(level_path, door_index):
 		ms.setup_level_via_mission("Main")
 		for m in ms.side_missions:
 			ms.setup_level_via_mission(m)
+	ms.mission_progress_check()
 	$Juniper/PlayerCamera.reset()
 
 	#### get the door with the right index
