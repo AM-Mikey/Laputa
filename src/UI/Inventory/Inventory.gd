@@ -152,17 +152,17 @@ func _on_TopicList_item_selected(index: int):
 	var topic = pc.topic_array[index]
 	%TopicBody.text = ""
 	if topic.topic_stages.has(0):
-		%TopicBody.text = "[p] " + topic.d0
+		%TopicBody.text = "" + topic.d0
 	if topic.topic_stages.has(1):
-		%TopicBody.text = %TopicBody.text + "\n[p] " + topic.d1
+		%TopicBody.text = %TopicBody.text + "\n" + topic.d1
 	if topic.topic_stages.has(2):
-		%TopicBody.text = %TopicBody.text + "\n[p] " + topic.d2
+		%TopicBody.text = %TopicBody.text + "\n" + topic.d2
 	if topic.topic_stages.has(3):
-		%TopicBody.text = %TopicBody.text + "\n[p] " + topic.d3
+		%TopicBody.text = %TopicBody.text + "\n" + topic.d3
 	if topic.topic_stages.has(4):
-		%TopicBody.text = %TopicBody.text + "\n[p] " + topic.d4
+		%TopicBody.text = %TopicBody.text + "\n" + topic.d4
 	if topic.topic_stages.has(5):
-		%TopicBody.text = %TopicBody.text + "\n[p] " + topic.d5
+		%TopicBody.text = %TopicBody.text + "\n" + topic.d5
 
 
 func _on_SideMissionList_item_selected(index: int):
