@@ -21,7 +21,11 @@ var active_tile_map_cells = []
 
 
 func do_auto_tile(start_coords: Vector2i, start_layer):
-	var data = tile_map.get_child(start_layer).get_cell_tile_data(start_coords)
+
+	var data: TileData = tile_map.get_child(start_layer).get_cell_tile_data(start_coords)
+	if data == null:
+		return
+
 	var auto_tile_group = data.get_custom_data("auto_tile_group")
 
 	var auto_tile_data = get_auto_tile_data(auto_tile_group)
