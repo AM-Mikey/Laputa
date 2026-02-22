@@ -77,38 +77,23 @@ func pattern(layer, coords, pattern: String):
 	var dict = get_auto_tile_data(pattern)
 	var group = dict["all"]
 
-	var non_connections = []
+	var non_connections: String = ""
 
 	if !is_group_in_direction(group, layer, coords, N):
-		non_connections.append(N)
+		non_connections += "n"
 	if !is_group_in_direction(group, layer, coords, S):
-		non_connections.append(S)
+		non_connections += "s"
 	if !is_group_in_direction(group, layer, coords, W):
-		non_connections.append(W)
+		non_connections += "w"
 	if !is_group_in_direction(group, layer, coords, E):
-		non_connections.append(E)
+		non_connections += "e"
 
-	var new_atlas_coords = dict["c"].pick_random() #default to center
-	match non_connections:
-		[N,S,W,E]:
-			pass
-		[N,W]:
-			new_atlas_coords = dict["nw"].pick_random()
-		[N,E]:
-			new_atlas_coords = dict["ne"].pick_random()
-		[S,W]:
-			new_atlas_coords = dict["sw"].pick_random()
-		[S,E]:
-			new_atlas_coords = dict["se"].pick_random()
-		[N]:
-			new_atlas_coords = dict["n"].pick_random()
-		[S]:
-			new_atlas_coords = dict["s"].pick_random()
-		[W]:
-			new_atlas_coords = dict["w"].pick_random()
-		[E]:
-			new_atlas_coords = dict["e"].pick_random()
+	var atlas_coord_options = dict["c"] # Default to center
 
+	if dict.has(non_connections):
+		atlas_coord_options = dict[non_connections]
+
+	var new_atlas_coords: Vector2i = atlas_coord_options.pick_random()
 
 	var tile_map_layer: TileMapLayer = tile_map.get_child(layer)
 	tile_map_layer.set_cell(coords, 0, new_atlas_coords)
@@ -136,16 +121,26 @@ func get_auto_tile_data(auto_tile_group) -> Dictionary:
 						if tile_data.has_custom_data("auto_tile_direction"):
 							out["all"].append(coords)
 							var auto_tile_directions: String = tile_data.get_custom_data("auto_tile_direction")
-							var directions = auto_tile_directions.split(",")
+							var directions = auto_tile_directions.split(",", false)
 							for auto_tile_direction in directions:
+								var parsed_auto_tile_dir: String = ""
+								# The directions need to be in a certain order, therefore this parsing is done
+								for dir_letter in ["n", "s", "w", "e"]:
+									if auto_tile_direction.contains(dir_letter):
+										parsed_auto_tile_dir += dir_letter
+								if parsed_auto_tile_dir == "":
+									if auto_tile_direction == "c":
+										parsed_auto_tile_dir = "c"
+									else:
+										printerr("Unrecognized auto tile direction \"%s\"" % auto_tile_direction)
 								if auto_tile_direction == "m":
 									is_modulate_pattern = true
 								else:
 									is_connection_pattern = true
-								if out.has(auto_tile_direction):
-									out[auto_tile_direction].append(coords)
+								if out.has(parsed_auto_tile_dir):
+									out[parsed_auto_tile_dir].append(coords)
 								else:
-									out[auto_tile_direction] = [coords]
+									out[parsed_auto_tile_dir] = [coords]
 	if is_modulate_pattern and is_connection_pattern:
 		printerr("Auto-tile pattern %s contains both connection and modulate tiles!" % auto_tile_group)
 
