@@ -15,6 +15,7 @@ enum LevelType {NORMAL, PLAYERLESS_CUTSCENE}
 
 var time_created: Dictionary
 var map_covered_rect: Rect2 = Rect2()
+var map_covered_rect: Rect2 = Rect2()
 
 @onready var w = get_tree().get_root().get_node("World")
 
