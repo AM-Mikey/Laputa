@@ -94,7 +94,7 @@ func do_aggro():
 	#this isnt the best way to do this, but returns a good result.
 	#right now this cuts off move_dir when it's more than a block away (to -1 or 1)
 	#the small adjustment when less than that is why we don't just use sign()
-	var x_dir = clamp((waypoint.position.x - position.x)/16, -1, 1)
+	var x_dir: float = clamp((waypoint.position.x - position.x)/16, -1.0, 1.0)
 	move_dir = Vector2(lerp(move_dir.x, x_dir, 0.2), 0)
 
 	if abs(position.x - waypoint.position.x) < lock_tolerance:
