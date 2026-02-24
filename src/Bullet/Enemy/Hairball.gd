@@ -5,17 +5,17 @@ var start_velocity
 
 
 
-func _ready():
+func _ready() -> void:
 	is_enemy_bullet = true
 	ap.play("Rotate")
 	gravity *= .5
 
 	velocity = calc_velocity(speed)
 	start_velocity = abs(velocity.x) + abs(velocity.y) / 2.0 #used to calculate animation slowdown
-	setup_vis_notifier()
+	super._ready()
 
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if disabled: return
 	velocity.y += gravity * delta
 	move_and_slide()
@@ -24,6 +24,8 @@ func _physics_process(delta):
 	ap.speed_scale = current_velocity / start_velocity
 	if ap.speed_scale < .1:
 		ap.stop()
+
+	super._physics_process(delta)
 
 
 func calc_velocity(projectile_speed) -> Vector2:

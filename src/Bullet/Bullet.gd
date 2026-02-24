@@ -25,13 +25,33 @@ var is_enemy_bullet = false
 @onready var world = get_tree().get_root().get_node("World")
 @onready var rng = RandomNumberGenerator.new()
 
-
+const TIMEOUT_TIME: float = 60.0
+const OUT_OF_MAP_MAX_DISTANCE: float = 50.0
 ### HELPERS ###
 
-func setup_vis_notifier():
-	var vis = VisibleOnScreenNotifier2D.new()
-	add_child(vis)
-	vis.connect("screen_exited", Callable(self, "_on_screen_exit"))
+func _ready() -> void:
+	setup_timeout()
+
+func _physics_process(delta: float) -> void:
+	check_out_of_map()
+
+func setup_timeout():
+	await get_tree().create_timer(TIMEOUT_TIME, false, true, false).timeout
+	print("delete bullet: timeout")
+	queue_free()
+	disabled = true
+
+func check_out_of_map():
+	var map_covered_rect: Rect2 = world.current_level.map_covered_rect
+	if (!map_covered_rect.has_point(global_position)):
+		var up_left_map: Vector2 = map_covered_rect.position
+		var down_right_map: Vector2 = map_covered_rect.position + map_covered_rect.size
+		var dist_x_from_nearest_edge: float = min(abs(up_left_map.x - global_position.x), abs(down_right_map.x - global_position.x))
+		var dist_y_from_nearest_edge: float = min(abs(up_left_map.y - global_position.y), abs(down_right_map.y - global_position.y))
+		if (dist_x_from_nearest_edge >= OUT_OF_MAP_MAX_DISTANCE or dist_y_from_nearest_edge >= OUT_OF_MAP_MAX_DISTANCE):
+			print("delete bullet: out of map boundary")
+			queue_free()
+			disabled = true
 
 func on_break(_method):
 	if disabled: return
@@ -69,6 +89,7 @@ func do_fizzle(type: String):
 		if result:
 			fizzle.position = result.position
 	queue_free()
+	disabled = true
 
 func instant_fizzle_check():
 	instant_fizzle = true
@@ -106,10 +127,6 @@ func get_blood_dir(body) -> Vector2: #TODO this update changed knockback dir cal
 
 
 ### SIGNALS ###
-
-func _on_screen_exit(): #TODO: bullets that start offscreen are not cleared
-	print("cleared offscreen bullet")
-	queue_free()
 
 func _on_CollisionDetector_body_entered(body):
 	if disabled: return

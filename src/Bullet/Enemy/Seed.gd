@@ -3,17 +3,17 @@ extends Bullet
 var start_velocity
 @onready var ap = $AnimationPlayer
 
-func _ready():
+func _ready() -> void:
 	is_enemy_bullet = true
 	ap.play("RotateLeft")
 
 	velocity = get_initial_velocity()
 	start_velocity = max((abs(velocity.x) + abs(velocity.y) / 2.0), 0.1) #used to calculate animation slowdown
-	setup_vis_notifier()
+	super._ready()
 
 
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if disabled: return
 	velocity.y += gravity * delta
 	move_and_slide()
@@ -23,7 +23,7 @@ func _physics_process(delta):
 	if ap.speed_scale < .1:
 		ap.stop()
 
-
+	super._physics_process(delta)
 
 ### HELPERS ###
 

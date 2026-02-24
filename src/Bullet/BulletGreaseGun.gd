@@ -13,7 +13,7 @@ var recoil_velocity = 40
 
 
 
-func _ready():
+func _ready() -> void:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var spread_distance = int(rng.randf_range(max_spread_distance * -1, max_spread_distance))
@@ -33,11 +33,13 @@ func _ready():
 			#global_position.x += spread_distance
 			pc.velocity.y -= recoil_velocity
 
-	setup_vis_notifier()
+	super._ready()
 
-func _physics_process(_delta):
+func _physics_process(delta: float) -> void:
 	if disabled: return
 	velocity = speed * direction
 	move_and_slide()
 	if origin.distance_to(global_position) > f_range:
 		do_fizzle("range")
+
+	super._physics_process(delta)

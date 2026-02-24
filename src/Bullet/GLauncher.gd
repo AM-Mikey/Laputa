@@ -16,7 +16,7 @@ var touched_floor = false
 
 
 
-func _ready():
+func _ready() -> void:
 	break_method = "burn"
 	$ExplosionDetector.scale = Vector2.ZERO
 	$ExplosionDetector/CollisionShape2D.set_deferred("disabled", true)
@@ -24,9 +24,9 @@ func _ready():
 	start_velocity = abs(velocity.x) + abs(velocity.y) / 2.0 #used to calculate animation slowdown
 	$Timer.start(explosion_time)
 
+	super._ready()
 
-
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if disabled: return
 	velocity.y += gravity * delta
 
@@ -48,6 +48,8 @@ func _physics_process(delta):
 	$AnimationPlayer.speed_scale = avr_velocity / start_velocity
 	if $AnimationPlayer.speed_scale < .1:
 		$AnimationPlayer.stop()
+
+	super._physics_process(delta)
 
 ### GETTERS ###
 

@@ -9,14 +9,15 @@ var cool_time := 0.5
 var free_time := 3.0
 var cool := false
 
-func _ready():
+func _ready() -> void:
 	break_method = "cut"
 	velocity = get_initial_velocity()
 	initial_velocity = velocity
 	$FreeTimer.start(free_time)
 	$CoolTimer.start(cool_time)
+	super._ready()
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if disabled: return
 	velocity.x = lerp(velocity.x, 0.0, air_cof)
 	velocity.y += gravity * delta
@@ -38,6 +39,8 @@ func _physics_process(delta):
 		else:
 			velocity = Vector2.ZERO
 			queue_free()
+
+	super._physics_process(delta)
 
 
 ### GETTERS ###

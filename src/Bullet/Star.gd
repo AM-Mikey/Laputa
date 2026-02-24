@@ -16,16 +16,17 @@ var touched_floor = false
 
 
 
-func _ready():
+func _ready() -> void:
 	$FizzleTimer.start(f_time)
 	break_method = "cut"
 
 	velocity = get_initial_velocity()
 	start_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 
+	super._ready()
 
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if disabled: return
 	velocity.y += gravity * delta
 
@@ -48,6 +49,7 @@ func _physics_process(delta):
 	if $AnimationPlayer.speed_scale < .1:
 		$AnimationPlayer.stop()
 
+	super._physics_process(delta)
 
 
 func get_initial_velocity() -> Vector2:

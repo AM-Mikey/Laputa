@@ -6,9 +6,10 @@ var collision_shape: RectangleShape2D
 
 var duration = 0.1
 
-func _ready(): #TODO think about a particle based buckshot system? then you can stop on world
+func _ready() -> void: #TODO think about a particle based buckshot system? then you can stop on world
 	$Timer.start(duration)
 	rotation_degrees = get_rot(direction)
+	super._ready()
 
 func _on_CollisionDetector_body_entered(body): #shadows parent
 	#do not stop on world
