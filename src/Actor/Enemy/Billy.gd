@@ -82,6 +82,10 @@ func enter_idle(_last_state):
 	await $StateTimer.timeout
 	change_state("walk")
 
+func do_idle() -> void:
+	velocity = calc_velocity(move_dir)
+	set_up_direction(FLOOR_NORMAL)
+	move_and_slide()
 
 func enter_aggro(_last_state):
 	pass
@@ -109,8 +113,6 @@ func do_aggro():
 	velocity = calc_velocity(move_dir)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
-
-
 
 ### HELPERS ###
 
