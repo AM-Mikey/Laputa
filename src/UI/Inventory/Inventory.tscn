@@ -303,7 +303,6 @@ autowrap_mode = 3
 
 [node name="Mission" type="MarginContainer" parent="VBox/Background" unique_id=281285142]
 unique_name_in_owner = true
-visible = false
 layout_mode = 0
 offset_right = 288.0
 offset_bottom = 232.0
@@ -339,7 +338,8 @@ theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="MissionBody" type="Label" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer/Panel/MarginContainer" unique_id=988650954]
+[node name="MainMissionBody" type="Label" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer/Panel/MarginContainer" unique_id=988650954]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.784314, 0.784314, 0.639216, 1)
@@ -413,11 +413,11 @@ size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.784314, 0.784314, 0.639216, 1)
 theme_override_colors/font_shadow_color = Color(0.113725, 0.156863, 0.227451, 1)
 theme_override_fonts/font = ExtResource("8_1e805")
-text = "Here's a full overview description of the given mission."
 autowrap_mode = 3
 
 [node name="Book" type="MarginContainer" parent="VBox/Background" unique_id=2118501264]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(288, 232)
 layout_mode = 0
 offset_right = 288.0
@@ -506,16 +506,6 @@ theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/normal_font = ExtResource("8_1e805")
 theme_override_fonts/bold_font = ExtResource("17_lfc7o")
 bbcode_enabled = true
-text = "Here's a full overview description of the given topic.
-ffffffffffffffffcf cv g g g
-f
-
-f
-f
-f
-
-f
-f"
 
 [node name="Map" type="MarginContainer" parent="VBox/Background" unique_id=221584181]
 unique_name_in_owner = true

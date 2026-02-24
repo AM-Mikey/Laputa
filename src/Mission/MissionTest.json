@@ -9,7 +9,7 @@
 				"celebrate": "a_s4",
 			},
 			"npc_b": {
-				"talk_npc_a": "b_s0",
+				"talk_npc_a": [["b_s0"], ["topics"]],
 				"talk_npc_b": "b_s1",
 				"talk_npc_c": "b_s2",
 				"talk_npc_d": "b_s3",
@@ -38,7 +38,7 @@
 		},
 	},
 	"enemy_allow_spawn": {
-		"main": {
+		"Main": {
 			"frog_a": {
 				"talk_npc_a": true,
 				"celebrate": true,
@@ -62,7 +62,7 @@
 		},
 	},
 	"prop_runtime_position_offset": {
-		"main": {
+		"Main": {
 			"box_a": {
 				"talk_npc_a": [32,0],
 			},
@@ -77,8 +77,18 @@
 			},
 		},
 	},
+	"prop_spawn_position_offset": {
+		"Main": {
+			"ammo_refill": {
+				"talk_npc_a": [0,0],
+				"talk_npc_b": [80,0],
+				"talk_npc_c": [80,0],
+				"talk_npc_d": [80,0],
+			},
+		},
+	},
 	"level_conversation_on_enter": {
-		"main": {
+		"Main": {
 			"talk_npc_a": "cutscene_talk_npc_a",
 			"talk_npc_b": "cutscene_talk_npc_b",
 			"talk_npc_c": "cutscene_talk_npc_c",

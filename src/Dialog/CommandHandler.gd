@@ -1,6 +1,8 @@
 extends Node #TODO: this script needs major cleanup
 
-@onready var world = get_tree().get_root().get_node("World")
+const INVENTORY_ICON = preload("res://src/UI/Inventory/InventoryIcon.tscn")
+
+@onready var w = get_tree().get_root().get_node("World")
 @onready var pc = f.pc()
 @onready var db = get_parent()
 
@@ -83,9 +85,16 @@ func parse_command(string):
 			topics(argument)
 		"t":
 			db.dl.text += " [b][color=#f3b131]" #bright gold
-			if !pc.topic_array.has(argument):
-				pc.topic_array.append(argument)
+			var already_has_topic = false
+			for t in pc.topic_array:
+				if argument.to_pascal_case() == t.resource_path.get_file().trim_suffix(".tres"):
+					already_has_topic = true
+			if !already_has_topic:
+				pc.topic_array.append(load("res://src/Dialog/Topic/%s.tres" %argument.to_pascal_case()))
 				ms.mission_progress_check()
+				var inventory_icon = INVENTORY_ICON.instantiate()
+				inventory_icon.type = "Book"
+				w.ui.add_child(inventory_icon)
 		"ut":
 			db.dl.text += "[/color][/b] "
 
@@ -95,13 +104,7 @@ func parse_command(string):
 		"seek_main_mission": #/seek_main_mission, (string: seek_value)
 			ms.seek_main_misssion(argument)
 		"start_side_mission": #/start_side_mission, (string: mission_name(filename))
-			var is_duplicate := false
-			for m in ms.side_missions:
-				if m.resource_path.get_file().trim_suffix(".tres") == argument:
-					is_duplicate = true
-			if !is_duplicate:
-				ms.side_missions.append(load("res://src/Mission/%s.tres" %argument))
-				ms.mission_progress_check()
+			ms.start_side_mission(argument)
 		"progress_side_mission": #/progress_side_mission, (string: mission_name(filename))
 			ms.progress_side_mission(argument)
 		"seek_side_mission": #/seek_side_mission, (string: mission_name(filename)), (string: seek_value)

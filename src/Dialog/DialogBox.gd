@@ -181,7 +181,7 @@ func run_text_string(string):
 			am.play("npc_dialog")
 			if is_last_character:
 				pass
-			elif character in [",", ".", "?", "!"]:
+			elif character in [",", ".", "?", "!", ":", ";"]:
 				await get_tree().create_timer(punctuation_delay).timeout
 			else:
 				await get_tree().create_timer(print_delay).timeout

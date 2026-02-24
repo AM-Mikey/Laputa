@@ -5,13 +5,13 @@
 	This progressed your mission stage /progress_main_mission
 	/newchar,sage,NPC_B That's the spirit!
 	",
-	
+
 	"a_s1":
 	"
 	/newchar,izu,NPC_A Your Stage is talk_npc_b
 	I'm denying your progress. Talk to NPC B
 	",
-	
+
 	"a_s2":
 	"
 	/newchar,izu,NPC_A Your Stage is talk_npc_c
@@ -23,20 +23,27 @@
 	/newchar,izu,NPC_A Your Stage is talk_npc_d
 	I'm denying your progress. Talk to NPC D
 	",
-	
+
 	"a_s4":
 	"
 	/newchar,izu,NPC_A Congrats! You reached Stage celebrate!
 	",
-	
-	
-	
+
+
+
 	"b_s0":
 	"
 	/newchar,sage,NPC_B Your Stage is talk_npc_a
 	I'm denying your progress. Talk to NPC A
 	",
-	
+
+	"topics":
+	"
+	/newchar,sage,NPC_B Here's a topic for you!
+	Do you know what /t,dinero Dinero /ut is?
+	Dinero is money. Now you know.
+	",
+
 	"b_s1":
 	"
 	/newchar,sage,NPC_B Main mission:
@@ -44,7 +51,7 @@
 	/hideface This indeed did progress your mission stage...
 	In fact, you think that you should probably talk to NPC C next.
 	",
-	
+
 	"b_s2":
 	"
 	/newchar,sage,NPC_B Your Stage is talk_npc_c
@@ -56,7 +63,7 @@
 	/newchar,sage,NPC_B Your Stage is talk_npc_d
 	I'm denying your progress. Talk to NPC D
 	",
-	
+
 	"b_s4":
 	"
 	/newchar,sage,NPC_B Congrats! You reached Stage celebrate!
@@ -74,13 +81,13 @@
 	/db,2 Now git. /eb
 	/m Shoo!
 	",
-	
+
 	"c_s1":
 	"
 	/newchar,basil,NPC_C Your Stage is talk_npc_b
 	I'm denying your progress. Talk to NPC B
 	",
-	
+
 	"c_s2":
 	"
 	/newchar,basil,NPC_C Main mission:
@@ -92,25 +99,25 @@
 	/newchar,basil,NPC_C Your Stage is talk_npc_d
 	I'm denying your progress. Talk to NPC D
 	",
-	
+
 	"c_s4":
 	"
 	/newchar,basil,NPC_C Congrats! You reached Stage celebrate!
 	",
-	
-	
+
+
 	"d_s0":
 	"
 	/newchar,nun,NPC_D Your Stage is talk_npc_a
 	I'm denying your progress. Talk to NPC A
 	",
-	
+
 	"salmiakki0":
 	"
 	/newchar,nun,NPC_D By the way, do you have any of that salty candy?
 	Talk to me again if you find some. /start_side_mission,SideMissionExample
 	",
-	
+
 	"salmiakki1":
 	"
 	/newchar,nun,NPC_D Oh you have some of that Salmiakki!
@@ -118,13 +125,13 @@
 	/db,0 Why thank you! /end_side_mission,SideMissionExample /eb
 	/db,1 Oh, alright then. /eb
 	",
-	
+
 	"d_s1":
 	"
 	/newchar,nun,NPC_D Your Stage is talk_npc_b
 	I'm denying your progress. Talk to NPC B
 	",
-	
+
 	"d_s2":
 	"
 	/newchar,nun,NPC_D Your Stage is talk_npc_c
@@ -136,17 +143,17 @@
 	/newchar,nun,NPC_D Main mission:
 	This progressed your mission stage /progress_main_mission
 	",
-	
+
 	"d_s4":
 	"
 	/newchar,nun,NPC_D Congrats! You reached Stage celebrate!
 	",
-	
+
 	"cutscene_talk_npc_a":
 	"
 	welcome to the mission system demo!
 	",
-	
+
 	"cutscene_talk_npc_b":
 	"
 	welcome back! you need to talk to npc b!
@@ -161,7 +168,7 @@
 	"
 	welcome back! you need to talk to npc d!
 	",
-	
+
 	"cutscene_celebrate":
 	"
 	you finished all there is to see!

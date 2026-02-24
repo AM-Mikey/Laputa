@@ -108,15 +108,34 @@ func first_time_level_setup():
 
 	current_level = load(start_level_path).instantiate()
 	add_child(current_level)
-	if current_level.debug_main_mission_stage:
-		ms.main_mission_stage = current_level.debug_main_mission_stage
-	if current_level.mission_level_update:
-		ms.setup_level_via_mission("Main")
-		for m in ms.side_missions:
-			ms.setup_level_via_mission(m)
-	ms.mission_progress_check()
-	pc.global_position = get_spawn_point().global_position
 
+	#mission stuff
+	if current_level.mission_level_update:
+		if current_level.debug_main_mission_stage_name: #TODO: check some global debug version variable
+			var array = []
+			for s in ms.MAIN_MISSION: #add all stages until we get to the one that matches
+				array.append(["Main", s[0]])
+				if s[0] == current_level.debug_main_mission_stage_name:
+					ms.main_mission_stage = s
+					break
+			ms.setup_level_from_array(array)
+		else:
+			ms.setup_level_via_mission("Main") #first only
+
+		if !current_level.side_missions_on_enter.is_empty():
+			for m in current_level.side_missions_on_enter:
+				ms.start_side_mission(m) #Warning: this does runtime updates
+
+		var array = [] #side mission updates
+		for m in ms.side_missions:
+			for s in m.stages:
+				array.append([m.resource_path.get_file().trim_suffix(".tres"), s[0]])
+				if s[0] == m.current_stage:
+					break
+		ms.setup_level_from_array(array)
+		ms.mission_progress_check()
+
+	pc.global_position = get_spawn_point().global_position
 	$Juniper/PlayerCamera.reset()
 
 	#wipe would go here if we want one
@@ -148,14 +167,38 @@ func change_level_via_code(level_path, use_save_data):
 
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
-	if !use_save_data:
-		if current_level.debug_main_mission_stage:
-			ms.main_mission_stage = current_level.debug_main_mission_stage
+
+	#mission stuff
 	if current_level.mission_level_update:
-		ms.setup_level_via_mission("Main")
-		for m in ms.side_missions:
-			ms.setup_level_via_mission(m)
-	ms.mission_progress_check()
+		if !use_save_data:
+			if current_level.debug_main_mission_stage_name: #TODO: check some global debug version variable
+				var array = []
+				for s in ms.MAIN_MISSION: #add all stages until we get to the one that matches
+					array.append(["Main", s[0]])
+					if s[0] == current_level.debug_main_mission_stage_name:
+						ms.main_mission_stage = s
+						break
+				ms.setup_level_from_array(array)
+			else:
+				ms.setup_level_via_mission("Main") #first only
+
+			var array = [] #side mission updates
+			for m in ms.side_missions:
+				for s in m.stages:
+					array.append([m.resource_path.get_file().trim_suffix(".tres"), s[0]])
+					if s[0] == m.current_stage:
+						break
+		else:
+			ms.setup_level_from_mission_progress_history()
+
+		if !current_level.side_missions_on_enter.is_empty():
+			for m in current_level.side_missions_on_enter:
+				ms.start_side_mission(m) #Warning: this does runtime updates
+				ms.setup_level_via_mission(m)
+			ms.mission_progress_check()
+
+
+
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		$Juniper.global_position = s.global_position
 
@@ -183,11 +226,30 @@ func change_level_via_trigger(level_path, door_index):
 	#await get_tree().process_frame
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
+
+	#mission_stuff
 	if current_level.mission_level_update:
-		ms.setup_level_via_mission("Main")
+		if !current_level.side_missions_on_enter.is_empty():
+			for m in current_level.side_missions_on_enter:
+				ms.start_side_mission(m) #Warning: this does runtime updates
+
+		var main_array = []
+		for s in ms.MAIN_MISSION: #add all stages until we get to the one that matches
+			main_array.append(["Main", s[0]])
+			if s[0] == current_level.debug_main_mission_stage_name:
+				ms.main_mission_stage = s
+				break TODO: Doesnt break
+		ms.setup_level_from_array(main_array)
+
+		var side_array = [] #side mission updates
 		for m in ms.side_missions:
-			ms.setup_level_via_mission(m)
-	ms.mission_progress_check()
+			for s in m.stages:
+				side_array.append([m.resource_path.get_file().trim_suffix(".tres"), s[0]])
+				if s[0] == m.current_stage:
+					break TODO: Doesnt break
+		ms.setup_level_from_array(side_array)
+		ms.mission_progress_check()
+
 	$Juniper/PlayerCamera.reset()
 
 	#### get the door with the right index

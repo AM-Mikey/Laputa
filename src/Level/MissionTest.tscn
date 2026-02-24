@@ -18,7 +18,6 @@ level_name = "MissionTest"
 dialog_json = "res://src/Dialog/MissionTest.json"
 conversation_on_enter = "cutscene_talk_npc_a"
 mission_level_update = "res://src/Mission/MissionTest.json"
-debug_main_mission_stage = "talk_npc_a"
 
 [node name="LevelLimiter" parent="." unique_id=1355825292 instance=ExtResource("2_72to3")]
 visibility_layer = 2
@@ -93,11 +92,11 @@ position = Vector2(304, 288)
 actor_path = "res://src/Actor/NPC/Nun.tscn"
 properties = {
 "base_gravity": [300.0, 3],
-"conversation_queue": [{}, 27],
+"conversation_queue": [[["d_s0", "main", false, true, false]], 27],
 "dialog_json": ["res://src/Dialog/MissionTest.json", 4],
 "editor_hidden": [false, 1],
 "id": ["npc_d", 4],
-"side_conversation_queue": [{}, 27],
+"side_conversation_queue": [[["salmiakki0", "side", false, true, false]], 27],
 "speed": [Vector2(150, 350), 5],
 "starting_state": ["idle", 4],
 "voiced": [true, 1],
@@ -111,7 +110,7 @@ position = Vector2(64, 288)
 actor_path = "res://src/Actor/NPC/Tabith.tscn"
 properties = {
 "base_gravity": [300.0, 3],
-"conversation_queue": [{}, 27],
+"conversation_queue": [[["a_s0", "main", false, true, false]], 27],
 "dialog_json": ["res://src/Dialog/MissionTest.json", 4],
 "editor_hidden": [false, 1],
 "id": ["npc_a", 4],
@@ -129,7 +128,7 @@ position = Vector2(144, 288)
 actor_path = "res://src/Actor/NPC/Sage.tscn"
 properties = {
 "base_gravity": [300.0, 3],
-"conversation_queue": [{}, 27],
+"conversation_queue": [[["b_s0", "main", false, true, false], ["topics", "main", false, true, false]], 27],
 "dialog_json": ["res://src/Dialog/MissionTest.json", 4],
 "editor_hidden": [false, 1],
 "id": ["npc_b", 4],
@@ -147,7 +146,7 @@ position = Vector2(232, 288)
 actor_path = "res://src/Actor/NPC/Basil.tscn"
 properties = {
 "base_gravity": [300.0, 3],
-"conversation_queue": [{}, 27],
+"conversation_queue": [[["c_s0", "main", false, true, false]], 27],
 "dialog_json": ["res://src/Dialog/MissionTest.json", 4],
 "editor_hidden": [false, 1],
 "id": ["npc_c", 4],
@@ -368,6 +367,15 @@ properties = {
 "same_level_next_index": [0, 2]
 }
 size_is_default = false
+
+[node name="AmmoRefill" parent="Spawns" unique_id=1449282698 instance=ExtResource("9_leir5")]
+visibility_layer = 2
+position = Vector2(80, 208)
+prop_path = "res://src/Prop/AmmoRefill.tscn"
+properties = {
+"editor_hidden": [false, 1],
+"id": ["ammo_refill", 4]
+}
 
 [node name="VanishingPoint" parent="." unique_id=9884164 instance=ExtResource("9_if8wo")]
 visibility_layer = 2

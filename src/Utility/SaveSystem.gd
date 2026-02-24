@@ -5,9 +5,9 @@ const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 var save_path = "user://save.dat"
 var temp_path = "user://temp.dat"
 var data = {
+	"mission_data" : {},
 	"player_data" : {},
 	"level_data" : {},
-	"mission_data" : {},
 	}
 
 @onready var w = get_tree().get_root().get_node("World")
@@ -15,6 +15,20 @@ var data = {
 
 
 ### SAVE ###
+
+func write_mission_data_to_save():
+	var side_missions_deconstructed = {}
+	for m in ms.side_missions:
+		side_missions_deconstructed[m.resource_path] = m.current_stage
+	data["mission_data"] = {
+		"main_mission_stage" : ms.main_mission_stage,
+		"side_missions_deconstructed" : side_missions_deconstructed,
+		"mission_progress_history" : ms.mission_progress_history
+		}
+	write_to_file(save_path, data)
+	print("mission data written to save")
+
+
 
 func write_player_data_to_save(current_level):
 	var pc = f.pc()
@@ -48,7 +62,6 @@ func write_player_data_to_save(current_level):
 
 
 
-
 func write_level_data_to_temp(current_level):
 	var limited_props = []
 	for p in get_tree().get_nodes_in_group("LimitedProps"):
@@ -75,14 +88,6 @@ func write_level_data_to_temp(current_level):
 
 
 
-func write_mission_data_to_save():
-	data["mission_data"] = {
-		"main_mission_stage" : ms.main_mission_stage,
-		}
-	write_to_file(save_path, data)
-	print("mission data written to save")
-
-
 ### COPY ###
 
 func copy_level_data_from_save_to_temp():
@@ -105,6 +110,7 @@ func copy_level_data_from_temp_to_save():
 		return
 	var scoped_data = {}
 	scoped_data["player_data"] = save_data["player_data"]
+	scoped_data["mission_data"] = save_data["mission_data"]
 	scoped_data["level_data"] = temp_data["level_data"]
 	write_to_file(save_path, scoped_data)
 	print("level data copied from temp to save")
@@ -112,6 +118,20 @@ func copy_level_data_from_temp_to_save():
 
 
 ### LOAD ###
+
+func read_mission_data_from_save():
+	var scoped_data = read_from_file(save_path)
+	var mission_data = scoped_data["mission_data"]
+	ms.main_mission_stage = mission_data["main_mission_stage"]
+	ms.side_missions = []
+	for path in mission_data["side_missions_deconstructed"].keys():
+		var side_mission = load(path)
+		side_mission.current_stage = mission_data["side_missions_deconstructed"][path] #the key's value is the current stage
+		ms.side_missions.append(side_mission)
+	ms.mission_progress_history = mission_data["mission_progress_history"]
+	print("mission data loaded from save")
+
+
 
 func read_player_data_from_save():
 	var scoped_data = read_from_file(save_path)
@@ -157,9 +177,7 @@ func read_player_data_from_save():
 	#pc.update_inventory()
 	pc.emit_signal("invincibility_end")
 	print("player data loaded")
-
 	await get_tree().process_frame
-
 
 
 
@@ -177,7 +195,6 @@ func read_level_data_from_temp(current_level):
 	print("level data loaded from temp")
 
 
-
 func read_level_data_from_save(current_level):
 	var scoped_data = read_from_file(save_path)
 	if !scoped_data["level_data"].has(current_level.level_name):
@@ -187,14 +204,6 @@ func read_level_data_from_save(current_level):
 	set_props_spent(current_level_data["limited_props"])
 	set_triggers_spent(current_level_data["limited_triggers"])
 	print("level data loaded from save")
-
-
-
-func read_mission_data_from_save():
-	var scoped_data = read_from_file(save_path)
-	var mission_data = scoped_data["mission_data"]
-	ms.main_mission_stage = mission_data["main_mission_stage"]
-	print("mission data loaded from save")
 
 
 

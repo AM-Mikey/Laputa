@@ -32,6 +32,9 @@ func display_topics():
 	for t in pc.topic_array:
 		%TopicList.add_item(t.topic_name)
 
+func display_main_mission():
+	%MainMissionBody.text = ms.main_mission_stage[1] #description
+
 func display_side_missions():
 	for m in ms.side_missions:
 		%SideMissionList.add_item(m.display_name)
@@ -43,6 +46,7 @@ func enter():
 	display_items()
 	display_topics()
 	display_side_missions()
+	display_main_mission()
 
 func exit():
 	get_tree().paused = false
@@ -134,17 +138,6 @@ func _on_ItemList_item_selected(index: int):
 	%InventoryBody.text = pc.item_array[index].description
 
 
-func _resolution_scale_changed(_resolution_scale):
-	var inventory_size = get_tree().get_root().size / vs.inventory_resolution_scale
-	set_deferred("size", inventory_size)
-
-	var polygon_points = [
-		Vector2(0,0),
-		Vector2(inventory_size.x, 0),
-		inventory_size,
-		Vector2(0, inventory_size.y),
-		]
-	$Blur.polygon = PackedVector2Array(polygon_points)
 
 
 func _on_TopicList_item_selected(index: int):
@@ -152,7 +145,7 @@ func _on_TopicList_item_selected(index: int):
 	var topic = pc.topic_array[index]
 	%TopicBody.text = ""
 	if topic.topic_stages.has(0):
-		%TopicBody.text = "" + topic.d0
+		%TopicBody.text = topic.d0
 	if topic.topic_stages.has(1):
 		%TopicBody.text = %TopicBody.text + "\n" + topic.d1
 	if topic.topic_stages.has(2):
@@ -168,3 +161,16 @@ func _on_TopicList_item_selected(index: int):
 func _on_SideMissionList_item_selected(index: int):
 	var side_mission = ms.side_missions[index]
 	%MissionBody.text = side_mission.description
+
+
+func _resolution_scale_changed(_resolution_scale):
+	var inventory_size = get_tree().get_root().size / vs.inventory_resolution_scale
+	set_deferred("size", inventory_size)
+
+	var polygon_points = [
+		Vector2(0,0),
+		Vector2(inventory_size.x, 0),
+		inventory_size,
+		Vector2(0, inventory_size.y),
+		]
+	$Blur.polygon = PackedVector2Array(polygon_points)
