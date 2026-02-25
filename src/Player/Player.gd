@@ -74,8 +74,8 @@ var cameracontrol_active := false
 func cameracontrol_processing() -> void:
 	#test
 	if inp.pressed("look_up",0):
-		cameraaction_add(["inputlock",true])
-		cameraaction_add( ["wait",30] ) 
+		cameraaction_add(["can_act",false])
+		cameraaction_add( ["wait",30] )
 	
 	##Terminate cameracontrol related code if no actions remain
 	if len(cameracontrol_actions) == 0:
@@ -94,15 +94,15 @@ func cameracontrol_processing() -> void:
 				pass
 			"wait":
 				if current_action[1] > 0:
-					current_action[1] -= 1 #decrementation happens inside the action instead of a separate timer
+					current_action[1] -= 1 #decrement happens inside the action instead of a dedicated timer
 				else:
 					cameraaction_next()
-			"inputlock":
+			"can_act":
 				print ("inputlock soon " + str(inp.can_act) + "   " + str(cameracontrol_actions))
 				inp.can_act = current_action[1]
 				print ("inputlock arrived " + str(inp.can_act) + "   " + str(cameracontrol_actions))
 				cameraaction_next()
-				print ("inputlock removed " + str(inp.can_act) + "   " + str(cameracontrol_actions))
+				print ("inputlock action popped " + str(inp.can_act) + "   " + str(cameracontrol_actions))
 
 
 func cameraaction_add(action:Array) -> void:
