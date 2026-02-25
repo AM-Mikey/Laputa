@@ -29,7 +29,6 @@ signal invincibility_end()
 
 var invincible = false
 var disabled = false
-var can_input = true
 @export var die_from_falling = true
 
 #var is_on_conveyor = false
@@ -65,7 +64,6 @@ var shoot_dir := Vector2.LEFT
 ##
 ##future actions:
 ##goto_object. Uses the node name
-
 var cameracontrol_actions:Array[Array] =[
 	
 	]
@@ -83,7 +81,7 @@ func cameracontrol_processing() -> void:
 	if len(cameracontrol_actions) == 0:
 		if cameracontrol_active == true:
 			cameracontrol_active = false
-			can_input = true
+			inp.can_act = true
 			print ("final action cleared")
 		return
 	##Camera control code
@@ -91,7 +89,7 @@ func cameracontrol_processing() -> void:
 		cameracontrol_active = true
 		var current_action = cameracontrol_actions[0]
 		print (current_action)
-		match current_action[0]:
+		match current_action[0]: #[0]= action name
 			"goto_pos":
 				pass
 			"wait":
@@ -100,11 +98,11 @@ func cameracontrol_processing() -> void:
 				else:
 					cameraaction_next()
 			"inputlock":
-				print ("inputlock soon " + str(can_input) + "   " + str(cameracontrol_actions))
-				can_input = current_action[1]
-				print ("inputlock arrived " + str(can_input) + "   " + str(cameracontrol_actions))
+				print ("inputlock soon " + str(inp.can_act) + "   " + str(cameracontrol_actions))
+				inp.can_act = current_action[1]
+				print ("inputlock arrived " + str(inp.can_act) + "   " + str(cameracontrol_actions))
 				cameraaction_next()
-				print ("inputlock removed " + str(can_input) + "   " + str(cameracontrol_actions))
+				print ("inputlock removed " + str(inp.can_act) + "   " + str(cameracontrol_actions))
 
 
 func cameraaction_add(action:Array) -> void:
@@ -134,14 +132,14 @@ var sound_profile = SoundProfile.NORMAL:
 
 func disable():
 	disabled = true
-	can_input = false
+	inp.can_act = false
 	invincible = true
 	mm.change_state("disabled")
 	return
 
 func enable():
 	disabled = false
-	can_input = true
+	inp.can_act = true
 	invincible = false
 	if mm.cached_state:
 		#print("change state via player enable to cached state")

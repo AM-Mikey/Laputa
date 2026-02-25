@@ -51,7 +51,7 @@ func display_tooltip():
 
 
 func _input(event):
-	if event.is_action_pressed("inspect") and has_player_near == true and active_player.disabled == false and active_player.can_input:
+	if event.is_action_pressed("inspect") and has_player_near == true and active_player.disabled == false and inp.can_act:
 		if used == false:
 			if active_player.money >= price:
 				active_player.money -= price

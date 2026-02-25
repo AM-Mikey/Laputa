@@ -38,7 +38,7 @@ func _process(_delta: float) -> void:
 
 
 func can_shoot() -> bool:
-	return not pc.disabled and !disabled and pc.can_input and $Guns.get_child_count() > 0 and pc.mm.current_state != pc.mm.states["inspect"]
+	return not pc.disabled and !disabled and inp.can_act and $Guns.get_child_count() > 0 and pc.mm.current_state != pc.mm.states["inspect"]
 
 ### METHODS
 

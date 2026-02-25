@@ -34,7 +34,7 @@ func setup(): #for children
 func _input(event):
 	if event.is_action_pressed("inspect") && !active_players.is_empty():
 		for p in active_players:
-			if !p.disabled && p.can_input && p.mm.current_state == p.mm.states["run"]:
+			if !p.disabled && inp.can_act && p.mm.current_state == p.mm.states["run"]:
 				var previous_look_dir = p.look_dir
 				p.mm.change_state("inspect")
 				p.look_dir = Vector2(sign(p.global_position.x - $CollisionShape2D.global_position.x), 0.0)

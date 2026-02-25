@@ -82,7 +82,7 @@ func child_layer_set(c: Node): #set the visibility layer of all children to laye
 
 func _input(event):
 	if event.is_action_pressed("inventory") and has_node("Juniper"):
-		if not il.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled and $Juniper.can_input:
+		if not il.has_node("Inventory") and not get_tree().paused and not $Juniper.disabled and inp.can_act:
 			il.add_child(INVENTORY.instantiate())
 
 
@@ -221,13 +221,13 @@ func change_level_via_trigger(level_path, door_index):
 		await get_tree().create_timer(0.8).timeout
 		$BlackoutLayer/TransitionWipe.play_out_animation()
 		await $BlackoutLayer/TransitionWipe.tree_exiting #wait for a bit of the animation to finish
-		$Juniper.can_input = true
+		inp.can_act = true
 
 	elif bl.has_node("TransitionIris"): #DOORS
 		await get_tree().create_timer(0.4).timeout
 		$BlackoutLayer/TransitionIris.play_out_animation()
 		await $BlackoutLayer/TransitionIris.tree_exiting #wait for a bit of the animation to finish
-		$Juniper.can_input = true
+		inp.can_act = true
 
 	if (old_level_path != level_path):
 		display_level_text(current_level)

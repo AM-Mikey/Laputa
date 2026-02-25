@@ -35,7 +35,7 @@ func _physics_process(_delta):
 		if h_tween.is_running():
 			h_tween.set_speed_scale(max(abs(pc.velocity.x)/mm.speed.x, h_pan_min_speed))
 
-	if !pc.disabled and pc.can_input and !pc.mm.current_state == pc.mm.states["inspect"]:
+	if !pc.disabled and inp.can_act and !pc.mm.current_state == pc.mm.states["inspect"]:
 		if inp.pressed("look_up",1) or inp.pressed("look_down",1) \
 		or inp.released("look_up") or inp.released("look_down"):
 			pan_vertical(get_v_dir())
@@ -75,7 +75,7 @@ func stop_tween():
 ### GETTERS ###
 func get_v_dir() -> int:
 	var dir = 0
-	if pc.can_input:
+	if inp.can_act:
 		if inp.held("look_up"): dir -= 1
 		if inp.held("look_down"): dir += 1
 	return dir

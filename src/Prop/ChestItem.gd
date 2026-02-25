@@ -17,7 +17,7 @@ func _input(event):
 	if !held_item: return
 	if event.is_action_pressed("inspect") && !active_players.is_empty():
 		for p in active_players:
-			if !p.disabled && p.can_input && p.mm.current_state == p.mm.states["run"]:
+			if !p.disabled && inp.can_act && p.mm.current_state == p.mm.states["run"]:
 				if spent:
 					am.play("prop_deny")
 					return

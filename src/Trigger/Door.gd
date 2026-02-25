@@ -23,7 +23,7 @@ func _on_body_exited(_body):
 
 func _input(event):
 	if event.is_action_pressed("inspect") and active_pc != null:
-		if active_pc.is_on_floor() and active_pc.can_input:
+		if active_pc.is_on_floor() and inp.can_act:
 			if not locked:
 				enter_door()
 			else:
@@ -36,7 +36,7 @@ func _input(event):
 
 
 func enter_door():
-	active_pc.can_input = false
+	inp.can_act = false
 	active_pc.inspect_target = self
 	active_pc.mm.change_state("inspect")
 	active_pc.move_to(global_position + Vector2($CollisionShape2D.shape.size.x * 0.5, $CollisionShape2D.shape.size.y))

@@ -11,7 +11,7 @@ func setup():
 func _input(event):
 	if event.is_action_pressed("inspect") && !active_players.is_empty():
 		for p in active_players:
-			if !p.disabled && p.can_input && p.mm.current_state == p.mm.states["run"]:
+			if !p.disabled && inp.can_act && p.mm.current_state == p.mm.states["run"]:
 				if p.hp >= p.max_hp: #don't need it
 					am.play("ui_deny")
 				else:

@@ -41,10 +41,10 @@ func jump_processing():
 		if f.db().is_exiting:
 			return #prevent the jump while db exists and is not exiting, this does allow holdjumping, though
 
-	if inp.pressed("jump") and Input.is_action_pressed("look_down") and pc.is_on_ssp and pc.can_input:
+	if inp.pressed("jump") and Input.is_action_pressed("look_down") and pc.is_on_ssp and inp.can_act:
 		is_dropping = true
 		mm.drop()
-	elif !is_dropping and pc.can_input:
+	elif !is_dropping and inp.can_act:
 		if inp.pressed("jump"):
 			mm.jump()
 		elif inp.buttonconfig.holdjumping:
@@ -55,7 +55,7 @@ func jump_processing():
 
 func set_player_directions():
 	var input_dir:Vector2 = Vector2(0.0,0.0)
-	if pc.can_input: input_dir = inp.analogstick
+	if inp.can_act: input_dir = inp.analogstick
 	#get move_dir
 	pc.move_dir = Vector2(input_dir.x, 0.0)
 	#get look_dir
