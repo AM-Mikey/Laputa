@@ -26,20 +26,34 @@ func _ready():
 
 func _physics_process(_delta):
 	pc.cameracontrol_processing()
-	
-	if h_dir != pc.look_dir.x:
-		h_dir = pc.look_dir.x
-		pan_horizontal(pc.look_dir.x)
 
-	if h_tween: #TODO: this should only run if h_tween is running
-		if h_tween.is_running():
-			h_tween.set_speed_scale(max(abs(pc.velocity.x)/mm.speed.x, h_pan_min_speed))
+	if not pc.cameracontrol_active: #regular camera
+		if h_dir != pc.look_dir.x:
+			h_dir = pc.look_dir.x
+			pan_horizontal(pc.look_dir.x)
 
-	if !pc.disabled and inp.can_act and !pc.mm.current_state == pc.mm.states["inspect"]:
-		if inp.pressed("look_up",1) or inp.pressed("look_down",1) \
-		or inp.released("look_up") or inp.released("look_down"):
-			pan_vertical(get_v_dir())
+		if h_tween: #TODO: this should only run if h_tween is running
+			if h_tween.is_running():
+				h_tween.set_speed_scale(max(abs(pc.velocity.x)/mm.speed.x, h_pan_min_speed))
 
+		if !pc.disabled and inp.can_act and !pc.mm.current_state == pc.mm.states["inspect"]:
+			if inp.pressed("look_up",1) or inp.pressed("look_down",1) \
+			or inp.released("look_up") or inp.released("look_down"):
+				pan_vertical(get_v_dir())
+
+
+func cameracontrol_topos(targetpos:Vector2,speed:float) -> void:
+	var posdelta: = targetpos - global_position
+	var movement:= posdelta.normalized() * speed
+	if global_position.distance_to(targetpos) <= global_position.distance_to(global_position+movement):
+		global_position = targetpos
+		pc.cameracontrol_next()
+	else:
+		global_position += movement
+
+##resets camera back to player
+func cameracontrol_reset():
+	position = Vector2(0,-16)
 
 
 func reset():

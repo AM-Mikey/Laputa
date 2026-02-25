@@ -55,33 +55,39 @@ var direction_lock := Vector2i.ZERO
 var shoot_dir := Vector2.LEFT
 
 ##action types-
-##     goto_pos
-##x[1]= speed; -1 is instant. Might make different action for instant camera pos change
-##     wait
+##				goto_pos
+##x[1] = position
+##x[2]= speed; -1 can be instant? Might make different action for instant camera pos change
+##				wait
 ##x[1]=framecount
-##     inputlock
+##				inputlock
 ##x[1]=bool. Calling this locks the input until the last action is done or inputlock,false is called.
-##
 ##future actions:
-##goto_object. Uses the node name
+##goto_object. Uses the node directory in player's parent? 
 var cameracontrol_actions:Array[Array] =[
 	
 	]
 
 var cameracontrol_active := false
 
-
 func cameracontrol_processing() -> void:
 	#test
-	if inp.pressed("look_up",0):
-		cameraaction_add(["can_act",false])
-		cameraaction_add( ["wait",30] )
-	
+	if Input.is_action_just_pressed("debug_testbutton"):
+		cameracontrol_add(["can_act",false])
+		cameracontrol_add( ["wait",20] )
+		cameracontrol_add( ["goto_pos",Vector2(200,200),30] )
+		cameracontrol_add( ["reset"] )
+		cameracontrol_add( ["wait",40] )
+
+
+
 	##Terminate cameracontrol related code if no actions remain
 	if len(cameracontrol_actions) == 0:
 		if cameracontrol_active == true:
 			cameracontrol_active = false
 			inp.can_act = true
+			$PlayerCamera.cameracontrol_reset()
+			
 		return
 	##Camera control code
 	else:
@@ -89,22 +95,24 @@ func cameracontrol_processing() -> void:
 		var current_action = cameracontrol_actions[0]
 		match current_action[0]: #[0]= action name
 			"goto_pos":
-				pass
+				$PlayerCamera.cameracontrol_topos(current_action[1],current_action[2])
 			"wait":
 				if current_action[1] > 0:
 					current_action[1] -= 1 #decrement happens inside the action instead of a dedicated timer
 				else:
-					cameraaction_next()
+					cameracontrol_next()
 			"can_act":
 				inp.can_act = current_action[1]
-				cameraaction_next()
+				cameracontrol_next()
+			"reset":
+				$PlayerCamera.cameracontrol_reset()
+				cameracontrol_next()
 
-
-func cameraaction_add(action:Array) -> void:
+func cameracontrol_add(action:Array) -> void:
 	cameracontrol_actions.append(action)
 
 ##Removes the current action
-func cameraaction_next() -> void:
+func cameracontrol_next() -> void:
 	cameracontrol_actions.pop_at(0)
 
 
