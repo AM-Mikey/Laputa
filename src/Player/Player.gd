@@ -82,13 +82,11 @@ func cameracontrol_processing() -> void:
 		if cameracontrol_active == true:
 			cameracontrol_active = false
 			inp.can_act = true
-			print ("final action cleared")
 		return
 	##Camera control code
 	else:
 		cameracontrol_active = true
 		var current_action = cameracontrol_actions[0]
-		print (current_action)
 		match current_action[0]: #[0]= action name
 			"goto_pos":
 				pass
@@ -98,11 +96,8 @@ func cameracontrol_processing() -> void:
 				else:
 					cameraaction_next()
 			"can_act":
-				print ("inputlock soon " + str(inp.can_act) + "   " + str(cameracontrol_actions))
 				inp.can_act = current_action[1]
-				print ("inputlock arrived " + str(inp.can_act) + "   " + str(cameracontrol_actions))
 				cameraaction_next()
-				print ("inputlock action popped " + str(inp.can_act) + "   " + str(cameracontrol_actions))
 
 
 func cameraaction_add(action:Array) -> void:
