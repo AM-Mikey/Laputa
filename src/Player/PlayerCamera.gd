@@ -25,6 +25,8 @@ func _ready():
 
 
 func _physics_process(_delta):
+	pc.cameracontrol_processing()
+	
 	if h_dir != pc.look_dir.x:
 		h_dir = pc.look_dir.x
 		pan_horizontal(pc.look_dir.x)
@@ -37,6 +39,8 @@ func _physics_process(_delta):
 		if inp.pressed("look_up",1) or inp.pressed("look_down",1) \
 		or inp.released("look_up") or inp.released("look_down"):
 			pan_vertical(get_v_dir())
+
+
 
 func reset():
 	position_smoothing_enabled = false #reset_smoothing() has issues

@@ -55,6 +55,66 @@ var look_dir := Vector2i.LEFT
 var direction_lock := Vector2i.ZERO
 var shoot_dir := Vector2.LEFT
 
+##action types-
+##     goto_pos
+##x[1]= speed; -1 is instant. Might make different action for instant camera pos change
+##     wait
+##x[1]=framecount
+##     inputlock
+##x[1]=bool. Calling this locks the input until the last action is done or inputlock,false is called.
+##
+##future actions:
+##goto_object. Uses the node name
+
+var cameracontrol_actions:Array[Array] =[
+	
+	]
+
+var cameracontrol_active := false
+
+
+func cameracontrol_processing() -> void:
+	#test
+	if inp.pressed("look_up",0):
+		cameraaction_add(["inputlock",true])
+		cameraaction_add( ["wait",30] ) 
+	
+	##Terminate cameracontrol related code if no actions remain
+	if len(cameracontrol_actions) == 0:
+		if cameracontrol_active == true:
+			cameracontrol_active = false
+			can_input = true
+			print ("final action cleared")
+		return
+	##Camera control code
+	else:
+		cameracontrol_active = true
+		var current_action = cameracontrol_actions[0]
+		print (current_action)
+		match current_action[0]:
+			"goto_pos":
+				pass
+			"wait":
+				if current_action[1] > 0:
+					current_action[1] -= 1 #decrementation happens inside the action instead of a separate timer
+				else:
+					cameraaction_next()
+			"inputlock":
+				print ("inputlock soon " + str(can_input) + "   " + str(cameracontrol_actions))
+				can_input = current_action[1]
+				print ("inputlock arrived " + str(can_input) + "   " + str(cameracontrol_actions))
+				cameraaction_next()
+				print ("inputlock removed " + str(can_input) + "   " + str(cameracontrol_actions))
+
+
+func cameraaction_add(action:Array) -> void:
+	cameracontrol_actions.append(action)
+
+##Removes the current action
+func cameraaction_next() -> void:
+	cameracontrol_actions.pop_at(0)
+
+
 enum SoundProfile {NORMAL, UNDERWATER}
 var sound_profile = SoundProfile.NORMAL:
 	set(val):
