@@ -9,12 +9,10 @@ var length = 0.0
 
 
 
-func _ready():
+func setup():
 	rotation_degrees = get_rot(direction)
-	setup_vis_notifier()
 
-func _physics_process(_delta):
-	if disabled: return
+func _on_physics_process(_delta):
 	velocity = speed * direction
 	move_and_slide()
 	if origin.distance_to(global_position) > f_range:
@@ -33,7 +31,7 @@ func update_length():
 
 ### SIGNALS ###
 
-func _on_CollisionDetector_body_exited(body):
+func _on_CollisionDetector_body_exited(_body):
 	pass # Replace with function body.
 
 

@@ -16,6 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://cjueepke5w45c" path="res://src/Gun/Red7.tscn" id="18_l3dey"]
 [ext_resource type="PackedScene" uid="uid://byv37yjh2rp36" path="res://src/Gun/Revolver.tscn" id="19_v6qwc"]
 [ext_resource type="PackedScene" uid="uid://5orkim7sjfi7" path="res://src/Gun/Tsurugi.tscn" id="20_x1gsf"]
+[ext_resource type="PackedScene" uid="uid://bqy18424skcwk" path="res://src/Gun/GLauncher.tscn" id="21_v6qwc"]
+[ext_resource type="PackedScene" uid="uid://cdgi2ibu56t2j" path="res://src/Gun/Speeder.tscn" id="22_x1gsf"]
 [ext_resource type="Shader" uid="uid://d4doa1vf12lkt" path="res://src/Shader/JuniperRecolor.gdshader" id="24_s1pnb"]
 [ext_resource type="Texture2D" uid="uid://mkfrxk3djlu1" path="res://assets/Player/Palette/Normal.png" id="25_3o18d"]
 [ext_resource type="PackedScene" uid="uid://bn8xosty72skm" path="res://src/Gun/Roberta.tscn" id="25_cd6iy"]
@@ -4220,6 +4222,7 @@ target_position = Vector2(0, 16)
 collision_mask = 8
 
 [node name="CooldownTimer" type="Timer" parent="GunManager" unique_id=983634534]
+process_callback = 0
 one_shot = true
 autostart = true
 
@@ -4237,6 +4240,10 @@ position = Vector2(-3, -11)
 [node name="Revolver" parent="GunManager/Guns" unique_id=260130874 instance=ExtResource("19_v6qwc")]
 
 [node name="Tsurugi" parent="GunManager/Guns" unique_id=304850335 instance=ExtResource("20_x1gsf")]
+
+[node name="GLauncher" parent="GunManager/Guns" unique_id=1228929108 instance=ExtResource("21_v6qwc")]
+
+[node name="Speeder" parent="GunManager/Guns" unique_id=648406504 instance=ExtResource("22_x1gsf")]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=964220440]
 light_mask = 2
@@ -4258,6 +4265,7 @@ position = Vector2(0, -8)
 
 [node name="IframeTimer" type="Timer" parent="." unique_id=848232590]
 unique_name_in_owner = true
+process_callback = 0
 wait_time = 2.0
 
 [connection signal="timeout" from="MovementManager/CoyoteTimer" to="MovementManager" method="_on_CoyoteTimer_timeout"]

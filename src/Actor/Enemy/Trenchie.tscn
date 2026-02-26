@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b06vi8xuugq3x"]
+[gd_scene format=3 uid="uid://b06vi8xuugq3x"]
 
 [ext_resource type="Script" uid="uid://v81ewf55f1wu" path="res://src/Actor/Enemy/Trenchie.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://2j2flsg5b2p1" path="res://assets/Actor/Enemy/Trenchie.png" id="2"]
@@ -314,86 +314,85 @@ _data = {
 &"StandRight": SubResource("14")
 }
 
-[node name="Trenchie" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+[node name="Trenchie" type="CharacterBody2D" unique_id=537359 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 10
 script = ExtResource("1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=15185635]
 position = Vector2(0, -8)
 shape = SubResource("1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1399974050]
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1045347332]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_s5m1v")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=1731305823]
 collision_layer = 262144
 collision_mask = 65536
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=570003612]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_s5m1v")
 debug_color = Color(1, 0, 0, 0.235294)
 
-[node name="HideDetector" type="Area2D" parent="."]
+[node name="HideDetector" type="Area2D" parent="." unique_id=2052989006]
 collision_layer = 0
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HideDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HideDetector" unique_id=907490545]
 position = Vector2(0, -56)
 shape = SubResource("2")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
-[node name="PeekDetector" type="Area2D" parent="."]
+[node name="PeekDetector" type="Area2D" parent="." unique_id=268478907]
 collision_layer = 0
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PeekDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PeekDetector" unique_id=554901259]
 shape = SubResource("3")
 debug_color = Color(0, 0.627451, 0.27451, 0.0392157)
 
-[node name="ShootDetector" type="Area2D" parent="."]
+[node name="ShootDetector" type="Area2D" parent="." unique_id=610142864]
 collision_layer = 0
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShootDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShootDetector" unique_id=2124841858]
 position = Vector2(0, -72)
 shape = SubResource("4")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2001834571]
 position = Vector2(0, -16)
 texture = ExtResource("2")
 hframes = 4
 vframes = 4
 frame = 5
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_u10c2")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=30203701]
+libraries/ = SubResource("AnimationLibrary_u10c2")
 
-[node name="FireCooldown" type="Timer" parent="."]
+[node name="FireCooldown" type="Timer" parent="." unique_id=640674883]
+process_callback = 0
 one_shot = true
 autostart = true
 
-[node name="StateMachine" parent="." instance=ExtResource("3")]
+[node name="StateMachine" parent="." unique_id=1597158486 instance=ExtResource("3")]
 
-[node name="Label" type="Label" parent="StateMachine"]
+[node name="Label" type="Label" parent="StateMachine" unique_id=1020451732]
 offset_right = 40.0
 offset_bottom = 14.0
 
-[node name="Idle" type="Node" parent="StateMachine"]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1443198337]
 script = ExtResource("5")
 
-[node name="Jump" type="Node" parent="StateMachine"]
+[node name="Jump" type="Node" parent="StateMachine" unique_id=980838786]
 script = ExtResource("4")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

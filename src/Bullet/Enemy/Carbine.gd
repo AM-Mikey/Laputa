@@ -1,17 +1,13 @@
 extends Bullet
 
-#TODO: consider having a instancable scene for bullet collision detectors
-
-func _ready():
+func setup():
 	damage = 4
 	speed = 128
 	f_range = 64
 	is_enemy_bullet = true
 	rotation_degrees = get_rot(direction)
-	setup_vis_notifier()
 
-func _physics_process(_delta):
-	if disabled: return
+func _on_physics_process(_delta):
 	velocity = speed * direction
 	move_and_slide()
 	if origin.distance_to(global_position) > f_range:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkic3dr6ls30i"]
+[gd_scene format=3 uid="uid://dkic3dr6ls30i"]
 
 [ext_resource type="Texture2D" uid="uid://d27tf3k2og0is" path="res://assets/Bullet/Laser.png" id="1"]
 [ext_resource type="Script" uid="uid://2r0x7bnb6180" path="res://src/Bullet/Laser.gd" id="2"]
@@ -7,36 +7,37 @@
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(12, 1)
 
-[node name="Laser1" type="CharacterBody2D"]
+[node name="Laser1" type="CharacterBody2D" unique_id=1375418196]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("2")
 
-[node name="PlayerCollisionDetector" parent="." instance=ExtResource("3")]
+[node name="PlayerCollisionDetector" parent="." unique_id=1816215527 instance=ExtResource("3")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector" unique_id=1578084601]
 position = Vector2(-6, 0.5)
 shape = SubResource("1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2139648260]
 position = Vector2(-8, 0)
 texture = ExtResource("1")
 vframes = 3
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1901544676]
 offset_left = -12.0
 offset_right = -12.0
 offset_bottom = 1.0
 grow_horizontal = 0
 
-[node name="End" type="Marker2D" parent="."]
+[node name="End" type="Marker2D" parent="." unique_id=12384036]
 position = Vector2(-12, 0)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=561560158]
+process_callback = 0
 one_shot = true
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1611929699]
 
 [connection signal="area_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
 [connection signal="body_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_body_entered"]

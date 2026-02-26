@@ -95,7 +95,7 @@ func fire():
 					elif target.global_position > global_position: #player to the right
 						$AnimationPlayer.play("ShootRight")
 						look_dir = Vector2.RIGHT
-					await get_tree().create_timer(0.2).timeout #delay for animation sync
+					await get_tree().create_timer(0.2, false, true).timeout #delay for animation sync
 					if target == null:
 						break
 					prepare_bullet()

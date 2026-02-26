@@ -9,15 +9,14 @@ var cool_time := 0.5
 var free_time := 3.0
 var cool := false
 
-func _ready():
+func setup():
 	break_method = "cut"
 	velocity = get_initial_velocity()
 	initial_velocity = velocity
 	$FreeTimer.start(free_time)
 	$CoolTimer.start(cool_time)
 
-func _physics_process(delta):
-	if disabled: return
+func _on_physics_process(delta):
 	velocity.x = lerp(velocity.x, 0.0, air_cof)
 	velocity.y += gravity * delta
 	if velocity.y < 0.0: #going up
@@ -67,7 +66,6 @@ func get_direction_from_spread_degrees() -> Vector2:
 ### SIGNALS ###
 
 func _on_CollisionDetector_body_entered(body):
-	if disabled: return
 	if cool: return
 	if !body is TileMapLayer:
 		if body.get_collision_layer_value(9): #breakable
@@ -77,7 +75,6 @@ func _on_CollisionDetector_body_entered(body):
 
 
 func _on_CollisionDetector_area_entered(area):
-	if disabled: return
 	if cool: return
 
 	if area.get_collision_layer_value(18): #enemyhurt

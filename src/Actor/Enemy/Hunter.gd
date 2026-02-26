@@ -60,7 +60,7 @@ func wander():
 		move_dir = dir
 		look_dir = dir
 
-		await get_tree().create_timer(walk_time).timeout
+		await get_tree().create_timer(walk_time, false, true).timeout
 		move_dir = Vector2.ZERO
 		if look_dir == Vector2.LEFT:
 			$AnimationPlayer.play("BlinkLeft")
@@ -80,7 +80,7 @@ func fire():
 				elif target.global_position > global_position: #player to the right
 					$AnimationPlayer.play("ShootRight")
 					look_dir = Vector2.RIGHT
-				await get_tree().create_timer(0.2).timeout #delay for animation sync
+				await get_tree().create_timer(0.2, false, true).timeout #delay for animation sync
 				if not locked_on:
 					break
 				prepare_bullet()
@@ -98,7 +98,7 @@ func search():
 		move_dir = dir
 		look_dir = dir
 
-		await get_tree().create_timer(walk_time).timeout
+		await get_tree().create_timer(walk_time, false, true).timeout
 		move_dir = Vector2.ZERO
 		if look_dir == Vector2.LEFT:
 			$AnimationPlayer.play("SniffLeft")

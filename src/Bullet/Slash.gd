@@ -4,7 +4,7 @@ extends Bullet
 #var texture_index: int
 #var collision_shape: RectangleShape2D
 
-func _ready():
+func setup():
 	if direction == Vector2.LEFT or direction == Vector2.RIGHT:
 		scale.x = direction.x *-1
 		$Sprite2D.scale = Vector2.ONE
@@ -17,8 +17,7 @@ func _ready():
 	await $AnimationPlayer.animation_finished
 	queue_free()
 
-#func _physics_process(_delta):
-	#if disabled: return
+#func _on_physics_process(_delta):
 	#velocity = speed * direction
 	#move_and_slide()
 	#if origin.distance_to(global_position) > f_range:

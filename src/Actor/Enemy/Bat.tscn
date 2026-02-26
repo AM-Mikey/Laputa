@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://spx2ohg588ta"]
+[gd_scene format=3 uid="uid://spx2ohg588ta"]
 
 [ext_resource type="Script" uid="uid://bnlm023xutjf3" path="res://src/Actor/Enemy/Bat.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bufns1cnhgyw1" path="res://assets/Actor/Enemy/Bat.png" id="3"]
@@ -85,57 +85,56 @@ _data = {
 &"UnflapAggro": SubResource("10")
 }
 
-[node name="Bat" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+[node name="Bat" type="CharacterBody2D" unique_id=1971925525 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("1")
 debug = true
 editor_hidden = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=61209783]
 shape = SubResource("CapsuleShape2D_sje0e")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=792018167]
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1963235226]
 shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=1677539914]
 collision_layer = 262144
 collision_mask = 65536
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=809758726]
 shape = SubResource("1")
 debug_color = Color(1, 0, 0, 0.235294)
 
-[node name="PlayerDetector" type="Area2D" parent="."]
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=801044207]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=492793243]
 shape = SubResource("8")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1165393899]
 position = Vector2(7.62939e-06, -3.8147e-06)
 texture = ExtResource("3")
 hframes = 3
 vframes = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mr7me")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2026348066]
+libraries/ = SubResource("AnimationLibrary_mr7me")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=2110664708]
 target_position = Vector2(50, 100)
 collision_mask = 8
 collide_with_areas = true
 
-[node name="BailTimer" type="Timer" parent="."]
+[node name="BailTimer" type="Timer" parent="." unique_id=1714626371]
+process_callback = 0
 one_shot = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
