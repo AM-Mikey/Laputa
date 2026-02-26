@@ -135,7 +135,7 @@ _data = {
 &"WalkShoot": SubResource("5")
 }
 
-[node name="Billy" type="CharacterBody2D" unique_id=2130316265 groups=["Actors", "Enemies", "Entities"]]
+[node name="Billy" type="CharacterBody2D" unique_id=147745042 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 floor_max_angle = 0.87266463
@@ -143,63 +143,64 @@ script = ExtResource("1")
 debug = true
 editor_hidden = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=658087893]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1482682800]
 position = Vector2(0, -7.5)
 shape = SubResource("CapsuleShape2D_sy72i")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Hurtbox" type="Area2D" parent="." unique_id=1325540491]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=205096187]
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1736266324]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=2117243380]
 position = Vector2(0, -7.5)
 shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="Hitbox" type="Area2D" parent="." unique_id=2008901030]
+[node name="Hitbox" type="Area2D" parent="." unique_id=811340404]
 collision_layer = 262144
 collision_mask = 65536
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1295120424]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1195822173]
 position = Vector2(0, -7.5)
 shape = SubResource("1")
 debug_color = Color(1, 0, 0, 0.235294)
 
-[node name="PlayerDetector" type="Area2D" parent="." unique_id=1926653618]
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=377674534]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=2022790069]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=1623635154]
 modulate = Color(0.992157, 0.992157, 0.992157, 0.156863)
 position = Vector2(0, -16)
 shape = SubResource("2")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1680670748]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1818064119]
 position = Vector2(0, -16)
 texture = ExtResource("2")
 hframes = 4
 vframes = 5
-frame = 17
 
-[node name="StateTimer" type="Timer" parent="." unique_id=1234494570]
+[node name="StateTimer" type="Timer" parent="." unique_id=1916012981]
+process_callback = 0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=79997886]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1741187660]
 libraries/ = SubResource("AnimationLibrary_afpet")
 
-[node name="FireCooldown" type="Timer" parent="." unique_id=1387954903]
+[node name="FireCooldown" type="Timer" parent="." unique_id=435739959]
+process_callback = 0
 one_shot = true
 
-[node name="BulletOrigin" type="Marker2D" parent="." unique_id=1903712784]
+[node name="BulletOrigin" type="Marker2D" parent="." unique_id=761623249]
 position = Vector2(0, -16)
 
-[node name="FloorDetectorL" type="RayCast2D" parent="." unique_id=956642299]
+[node name="FloorDetectorL" type="RayCast2D" parent="." unique_id=1314022133]
 position = Vector2(-7, -8)
 target_position = Vector2(0, 16)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="FloorDetectorR" type="RayCast2D" parent="." unique_id=1305408056]
+[node name="FloorDetectorR" type="RayCast2D" parent="." unique_id=1337091757]
 position = Vector2(7, -8)
 target_position = Vector2(0, 16)
 collision_mask = 520

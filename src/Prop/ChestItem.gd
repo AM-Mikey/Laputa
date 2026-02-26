@@ -25,7 +25,7 @@ func _input(event):
 				p.mm.change_state("inspect")
 				p.inspect_target = $CollisionShape2D
 				activate(p)
-				await get_tree().create_timer(inspect_time).timeout
+				await get_tree().create_timer(inspect_time, false, true).timeout
 				p.mm.change_state("run")
 				p.look_dir = previous_look_dir
 

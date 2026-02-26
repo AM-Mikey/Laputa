@@ -3,7 +3,7 @@ extends Node2D
 var size
 
 
-func _ready():
+func _ready(): #TODO: move sfx to am
 	$AudioStreamPlayer2D.play()
 	$AnimationPlayer.play(size)
 

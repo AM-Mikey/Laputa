@@ -288,5 +288,5 @@ func _check_sfx(sfx_string) -> bool:
 
 func _do_recent_time(sfx_string):
 	sfx_recent.append(sfx_string)
-	await get_tree().create_timer(sfx_recent_time).timeout
+	await get_tree().create_timer(sfx_recent_time, true, false).timeout
 	sfx_recent.erase(sfx_string)

@@ -1,16 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://ca63y3kg5okvr"]
+[gd_scene format=3 uid="uid://ca63y3kg5okvr"]
 
 [ext_resource type="Script" uid="uid://dfmy0bg0ed3a8" path="res://src/Actor/Pickup/Heart.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bdnfq6epbm4h" path="res://assets/Actor/Pickup/Heart.png" id="2"]
 
-[sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(11, 9)
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(13, 11)
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(16, 16)
-
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(13, 11)
 
 [sub_resource type="Animation" id="3"]
 resource_name = "Large"
@@ -147,6 +144,9 @@ tracks/3/keys = {
 "method": &"clear"
 }]
 }
+
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(11, 9)
 
 [sub_resource type="Animation" id="5"]
 length = 0.2
@@ -452,36 +452,36 @@ _data = {
 &"SmallPop": SubResource("Animation_c7rvj")
 }
 
-[node name="Heart" type="CharacterBody2D" groups=["Actors", "Entities", "HeartPickups", "Pickups"]]
+[node name="Heart" type="CharacterBody2D" unique_id=823047809 groups=["Actors", "Entities", "HeartPickups", "Pickups"]]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("1")
 speed = Vector2(0, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1414595694]
 position = Vector2(-0.5, -0.5)
-shape = SubResource("4")
+shape = SubResource("1")
 
-[node name="CollectArea" type="Area2D" parent="."]
+[node name="CollectArea" type="Area2D" parent="." unique_id=343709427]
 position = Vector2(0, 8)
 collision_layer = 1024
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea" unique_id=1492872241]
 modulate = Color(0.360784, 0.901961, 0.172549, 0.639216)
 position = Vector2(0, -8)
 shape = SubResource("2")
 
-[node name="Shadow" type="Sprite2D" parent="."]
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1630216373]
 modulate = Color(0, 0, 0, 0.392157)
 position = Vector2(-7, -7)
 texture = ExtResource("2")
 centered = false
 hframes = 3
 vframes = 4
-frame = 6
+frame = 9
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1971186418]
 position = Vector2(-8, -8)
 texture = ExtResource("2")
 centered = false
@@ -489,12 +489,11 @@ hframes = 3
 vframes = 4
 frame = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_a8hkq")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=304470396]
+libraries/ = SubResource("AnimationLibrary_a8hkq")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1183067429]
+process_callback = 0
 one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
