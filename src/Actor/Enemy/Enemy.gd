@@ -78,6 +78,10 @@ func _physics_process(delta):
 func _on_physics_process(_delta): #for child
 	pass
 
+func set_is_in_water(val):
+	print(is_in_water, " -> ", val)
+	super.set_is_in_water(val)
+
 func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
 	var out: = velocity
 	var fractional_speed = speed
