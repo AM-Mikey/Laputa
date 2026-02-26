@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bkn72s05jggwq"]
+[gd_scene format=3 uid="uid://bkn72s05jggwq"]
 
 [ext_resource type="Script" uid="uid://ii3n548fd8d6" path="res://src/Bullet/Star.gd" id="1_1qp2b"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="2_1lxsx"]
@@ -49,38 +49,37 @@ _data = {
 &"FlipRight": SubResource("5")
 }
 
-[node name="Star3" type="CharacterBody2D"]
+[node name="Star3" type="CharacterBody2D" unique_id=1486534184]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("1_1qp2b")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1834244184]
 position = Vector2(-0.5, -0.5)
 shape = SubResource("1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="PlayerCollisionDetector" parent="." instance=ExtResource("2_1lxsx")]
+[node name="PlayerCollisionDetector" parent="." unique_id=1985790731 instance=ExtResource("2_1lxsx")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector" unique_id=805134638]
 position = Vector2(-0.5, -0.5)
 shape = SubResource("6")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="End" type="Marker2D" parent="."]
+[node name="End" type="Marker2D" parent="." unique_id=1470343192]
 position = Vector2(0, 5)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=64548877]
 texture = ExtResource("3_1w6uq")
 hframes = 4
 vframes = 3
-frame = 11
+frame = 8
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_v0i8r")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=803824338]
+libraries/ = SubResource("AnimationLibrary_v0i8r")
 
-[node name="FizzleTimer" type="Timer" parent="."]
+[node name="FizzleTimer" type="Timer" parent="." unique_id=1146051508]
+process_callback = 0
 one_shot = true
 
 [connection signal="area_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]

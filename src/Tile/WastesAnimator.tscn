@@ -1,15 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkfpf8fg3xa0d"]
+[gd_scene format=3 uid="uid://bkfpf8fg3xa0d"]
 
 [ext_resource type="Script" uid="uid://wftb1fa7j2ti" path="res://src/Tile/WastesAnimator.gd" id="1_6x7aa"]
 
-[node name="WastesAnimator" type="Node2D"]
+[node name="WastesAnimator" type="Node2D" unique_id=840158690]
 script = ExtResource("1_6x7aa")
 
-[node name="WaterfallTimer" type="Timer" parent="."]
+[node name="WaterfallTimer" type="Timer" parent="." unique_id=1112588505]
+process_callback = 0
 wait_time = 0.1
 autostart = true
 
-[node name="GrassTimer" type="Timer" parent="."]
+[node name="GrassTimer" type="Timer" parent="." unique_id=2069293850]
+process_callback = 0
 autostart = true
 
 [connection signal="timeout" from="WaterfallTimer" to="." method="_on_WaterfallTimer_timeout"]

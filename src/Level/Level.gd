@@ -14,29 +14,11 @@ enum LevelType {NORMAL, PLAYERLESS_CUTSCENE}
 @export var debug_main_mission_stage: String
 
 var time_created: Dictionary
-var map_covered_rect: Rect2 = Rect2()
-var map_covered_rect: Rect2 = Rect2()
 
 @onready var w = get_tree().get_root().get_node("World")
 
 
 func _ready():
-	# Calculate map_covered_rect
-	var res: Rect2 = Rect2()
-	var first_layer: bool = true
-	for child: TileMapLayer in $TileMap.get_children():
-		var layer_coord_rect: Rect2i = child.get_used_rect()
-		if (layer_coord_rect.size != Vector2i.ZERO):
-			layer_coord_rect.size += Vector2i.ONE
-		var layer_rect = Rect2(Vector2(layer_coord_rect.position * child.tile_set.tile_size), Vector2(layer_coord_rect.size * child.tile_set.tile_size))
-		if (first_layer):
-			res = layer_rect
-			first_layer = false
-		else:
-			res = res.expand(layer_rect.position)
-			res = res.expand(layer_rect.position + layer_rect.size)
-	map_covered_rect = res
-
 	add_to_group("Levels")
 	if has_node("Notes"):
 		get_node("Notes").visible = false

@@ -7,7 +7,6 @@ const FIZZLE_DISTANCE = preload("res://src/Effect/BulletFizzleDistance.tscn")
 const FIZZLE_WORLD = preload("res://src/Effect/BulletFizzleWorld.tscn")
 const FIZZLE_ARMOR = preload("res://src/Effect/BulletFizzleArmor.tscn")
 
-var disabled = false
 var gravity = 300
 
 var damage = 0
@@ -22,39 +21,41 @@ var instant_fizzle = true
 var break_method = "cut"
 var is_enemy_bullet = false
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 @onready var rng = RandomNumberGenerator.new()
 
 const TIMEOUT_TIME: float = 60.0
-const OUT_OF_MAP_MAX_DISTANCE: float = 50.0
-### HELPERS ###
+const level_exit_safe_distance: float = 512.0
 
-func _ready() -> void:
+
+func _ready():
 	setup_timeout()
+	setup()
 
-func _physics_process(delta: float) -> void:
-	check_out_of_map()
+func setup(): #for children
+	pass
+
+func _physics_process(delta):
+	level_exit_check()
+	_on_physics_process(delta)
+
+func _on_physics_process(delta): #for children
+	pass
 
 func setup_timeout():
-	await get_tree().create_timer(TIMEOUT_TIME, false, true, false).timeout
-	print("delete bullet: timeout")
+	await get_tree().create_timer(TIMEOUT_TIME, false, true).timeout
+	print("freed bullet via timeout")
 	queue_free()
-	disabled = true
 
-func check_out_of_map():
-	var map_covered_rect: Rect2 = world.current_level.map_covered_rect
-	if (!map_covered_rect.has_point(global_position)):
-		var up_left_map: Vector2 = map_covered_rect.position
-		var down_right_map: Vector2 = map_covered_rect.position + map_covered_rect.size
-		var dist_x_from_nearest_edge: float = min(abs(up_left_map.x - global_position.x), abs(down_right_map.x - global_position.x))
-		var dist_y_from_nearest_edge: float = min(abs(up_left_map.y - global_position.y), abs(down_right_map.y - global_position.y))
-		if (dist_x_from_nearest_edge >= OUT_OF_MAP_MAX_DISTANCE or dist_y_from_nearest_edge >= OUT_OF_MAP_MAX_DISTANCE):
-			print("delete bullet: out of map boundary")
-			queue_free()
-			disabled = true
+func level_exit_check():
+	var level_limiter = w.current_level.get_node("LevelLimiter")
+	var safe_rect = Rect2(level_limiter.global_position, level_limiter.size)
+	safe_rect = safe_rect.grow(level_exit_safe_distance)
+	if (!safe_rect.has_point(global_position)):
+		print("freed bullet via level bounds")
+		queue_free()
 
 func on_break(_method):
-	if disabled: return
 	print("destroyed bullet: " + name)
 	do_fizzle("bullet")
 
@@ -70,7 +71,7 @@ func do_fizzle(type: String):
 			fizzle = FIZZLE_ARMOR.instantiate()
 
 
-	world.get_node("Middle").add_child(fizzle)
+	w.get_node("Middle").add_child(fizzle)
 	fizzle.position = $End.global_position if has_node("End") else global_position
 	if instant_fizzle and not is_enemy_bullet:
 		var gun = f.pc().guns.get_child(0)
@@ -89,7 +90,6 @@ func do_fizzle(type: String):
 		if result:
 			fizzle.position = result.position
 	queue_free()
-	disabled = true
 
 func instant_fizzle_check():
 	instant_fizzle = true
@@ -129,7 +129,6 @@ func get_blood_dir(body) -> Vector2: #TODO this update changed knockback dir cal
 ### SIGNALS ###
 
 func _on_CollisionDetector_body_entered(body):
-	if disabled: return
 	if body is TileMapLayer:
 		if body.tile_set.get_physics_layer_collision_layer(0) == 8: #world (layer value)
 			do_fizzle("world")
@@ -144,8 +143,6 @@ func _on_CollisionDetector_body_entered(body):
 
 
 func _on_CollisionDetector_area_entered(area):
-	if disabled: return
-
 	if area.get_collision_layer_value(18): #enemyhurt
 		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
 		queue_free()

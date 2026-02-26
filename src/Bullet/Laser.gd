@@ -9,18 +9,14 @@ var length = 0.0
 
 
 
-func _ready() -> void:
+func setup():
 	rotation_degrees = get_rot(direction)
-	super._ready()
 
-func _physics_process(delta: float) -> void:
-	if disabled: return
+func _on_physics_process(_delta):
 	velocity = speed * direction
 	move_and_slide()
 	if origin.distance_to(global_position) > f_range:
 		do_fizzle("range")
-
-	super._physics_process(delta)
 
 ### HELPERS ###
 
@@ -35,7 +31,7 @@ func update_length():
 
 ### SIGNALS ###
 
-func _on_CollisionDetector_body_exited(body):
+func _on_CollisionDetector_body_exited(_body):
 	pass # Replace with function body.
 
 

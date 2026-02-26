@@ -1,6 +1,6 @@
 extends MarginContainer
 
-var sfx_prompt = load("res://assets/SFX/placeholder/snd_menu_prompt.ogg")
+var sfx_prompt = load("res://assets/SFX/placeholder/snd_menu_prompt.ogg") #TODO: it looks like i was trying to add sfx at some point. add them via am
 var sfx_move = load("res://assets/SFX/placeholder/snd_menu_move.ogg")
 var sfx_select = load("res://assets/SFX/placeholder/snd_menu_select.ogg")
 

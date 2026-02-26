@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bohy43u6frlcy"]
+[gd_scene format=3 uid="uid://bohy43u6frlcy"]
 
 [ext_resource type="Script" uid="uid://cfowbliw450pc" path="res://src/Actor/Enemy/Shield.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dkiev70oqmmm1" path="res://assets/Actor/Enemy/Shield.png" id="3"]
@@ -89,82 +89,81 @@ _data = {
 &"WalkRight": SubResource("7")
 }
 
-[node name="Shield" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+[node name="Shield" type="CharacterBody2D" unique_id=1317608156 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("1")
 debug = true
 editor_hidden = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1052230966]
 position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_1abx7")
 
-[node name="BulletBlocker" type="Area2D" parent="."]
+[node name="BulletBlocker" type="Area2D" parent="." unique_id=1594386711]
 collision_layer = 32
 collision_mask = 64
 input_pickable = false
 
-[node name="Left" type="CollisionShape2D" parent="BulletBlocker"]
+[node name="Left" type="CollisionShape2D" parent="BulletBlocker" unique_id=1573356133]
 position = Vector2(-3.5, -8)
 shape = SubResource("10")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Right" type="CollisionShape2D" parent="BulletBlocker"]
+[node name="Right" type="CollisionShape2D" parent="BulletBlocker" unique_id=1078921533]
 position = Vector2(3.5, -8)
 shape = SubResource("10")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1159295574]
 collision_layer = 131072
 collision_mask = 0
 
-[node name="Left" type="CollisionShape2D" parent="Hurtbox"]
+[node name="Left" type="CollisionShape2D" parent="Hurtbox" unique_id=1212747302]
 position = Vector2(-3.5, -8)
 shape = SubResource("10")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="Right" type="CollisionShape2D" parent="Hurtbox"]
+[node name="Right" type="CollisionShape2D" parent="Hurtbox" unique_id=761589040]
 position = Vector2(3.5, -8)
 shape = SubResource("10")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=2096615862]
 collision_layer = 262144
 collision_mask = 65536
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1112825049]
 position = Vector2(0, -8)
 shape = SubResource("1")
 debug_color = Color(1, 0, 0, 0.235294)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1603770504]
 position = Vector2(0, -16)
 texture = ExtResource("3")
 hframes = 4
 vframes = 2
-frame = 5
+frame = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_kfp7m")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=547631705]
+libraries/ = SubResource("AnimationLibrary_kfp7m")
 
-[node name="FloorDetectorL" type="RayCast2D" parent="."]
+[node name="FloorDetectorL" type="RayCast2D" parent="." unique_id=999532932]
 visible = false
 position = Vector2(-7, -8)
 target_position = Vector2(0, 16)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="FloorDetectorR" type="RayCast2D" parent="."]
+[node name="FloorDetectorR" type="RayCast2D" parent="." unique_id=1892793878]
 visible = false
 position = Vector2(7, -8)
 target_position = Vector2(0, 16)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="StateTimer" type="Timer" parent="."]
+[node name="StateTimer" type="Timer" parent="." unique_id=2100369599]
+process_callback = 0
 one_shot = true
 
 [connection signal="area_entered" from="BulletBlocker" to="." method="_on_BulletBlocker_area_entered"]

@@ -6,15 +6,11 @@ var collision_shape: RectangleShape2D
 
 
 
-func _ready() -> void:
+func _ready():
 	rotation_degrees = get_rot(direction)
-	super._ready()
 
-func _physics_process(delta: float) -> void:
-	if disabled: return
+func _on_physics_process(_delta):
 	velocity = speed * direction
 	move_and_slide()
 	if origin.distance_to(global_position) > f_range:
 		do_fizzle("range")
-
-	super._physics_process(delta)

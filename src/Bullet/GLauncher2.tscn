@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://h5muslophs8x"]
+[gd_scene format=3 uid="uid://h5muslophs8x"]
 
 [ext_resource type="Texture2D" uid="uid://b8hr08cetxnob" path="res://assets/Bullet/BulletGrenadeLauncher.png" id="1"]
 [ext_resource type="Script" uid="uid://3bmujcg5fwtv" path="res://src/Bullet/GLauncher.gd" id="2"]
@@ -53,45 +53,44 @@ _data = {
 &"FlipRight": SubResource("5")
 }
 
-[node name="GLauncher2" type="CharacterBody2D"]
+[node name="GLauncher2" type="CharacterBody2D" unique_id=1665990515]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1307154629]
 shape = SubResource("1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="PlayerCollisionDetector" parent="." instance=ExtResource("3")]
+[node name="PlayerCollisionDetector" parent="." unique_id=384638287 instance=ExtResource("3")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector" unique_id=1626140780]
 shape = SubResource("CapsuleShape2D_vcs0n")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="ExplosionDetector" type="Area2D" parent="."]
+[node name="ExplosionDetector" type="Area2D" parent="." unique_id=307113953]
 collision_layer = 0
 collision_mask = 196896
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionDetector" unique_id=353912836]
 shape = SubResource("3")
 debug_color = Color(0, 0.627451, 0.27451, 0.156863)
 
-[node name="End" type="Marker2D" parent="."]
+[node name="End" type="Marker2D" parent="." unique_id=1509234251]
 position = Vector2(0, 6)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1968456272]
 texture = ExtResource("1")
 hframes = 8
 vframes = 3
 frame = 15
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1911554376]
+process_callback = 0
 one_shot = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_t000f")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=528588730]
+libraries/ = SubResource("AnimationLibrary_t000f")
 
 [connection signal="area_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
 [connection signal="body_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
