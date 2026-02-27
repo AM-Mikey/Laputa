@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dvmfxj76jww0o"]
+[gd_scene format=3 uid="uid://dvmfxj76jww0o"]
 
 [ext_resource type="Texture2D" uid="uid://c1wouwbovbivr" path="res://assets/Actor/Enemy/Stalagtite.png" id="2"]
 [ext_resource type="Script" uid="uid://dutiad4j22gxd" path="res://src/Actor/Enemy/Stalagtite.gd" id="3"]
@@ -135,81 +135,80 @@ _data = {
 &"Stake": SubResource("Animation_57rfx")
 }
 
-[node name="Stalagtite" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+[node name="Stalagtite" type="CharacterBody2D" unique_id=1485357399 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("3")
 debug = true
 editor_hidden = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=32125895]
 position = Vector2(0, -8)
 shape = SubResource("1")
 
-[node name="GroundedCollision" type="CollisionShape2D" parent="."]
+[node name="GroundedCollision" type="CollisionShape2D" parent="." unique_id=2135141035]
 position = Vector2(0, -4)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_pbcgp")
 disabled = true
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=587944831]
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1717793609]
 position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_njk2w")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=1445436817]
 collision_layer = 262144
 collision_mask = 196608
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1725023784]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_n2kuq")
 debug_color = Color(1, 0, 0, 0.235294)
 
-[node name="Standable" type="CharacterBody2D" parent="."]
+[node name="Standable" type="CharacterBody2D" parent="." unique_id=2084552391]
 collision_layer = 512
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Standable"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Standable" unique_id=2017913045]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_o0pis")
 disabled = true
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_6602m")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=604158181]
+libraries/ = SubResource("AnimationLibrary_6602m")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=909744772]
 position = Vector2(0, -8)
 texture = ExtResource("2")
 hframes = 8
 vframes = 3
 frame = 9
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=415812160]
 target_position = Vector2(0, 1000)
 collision_mask = 521
 collide_with_areas = true
 
-[node name="WallRight" type="RayCast2D" parent="."]
+[node name="WallRight" type="RayCast2D" parent="." unique_id=675584364]
 position = Vector2(0, -8)
 enabled = false
 target_position = Vector2(9, 0)
 collision_mask = 520
 
-[node name="WallLeft" type="RayCast2D" parent="."]
+[node name="WallLeft" type="RayCast2D" parent="." unique_id=775273708]
 position = Vector2(0, -8)
 enabled = false
 target_position = Vector2(-9, 0)
 collision_mask = 520
 
-[node name="StateTimer" type="Timer" parent="."]
+[node name="StateTimer" type="Timer" parent="." unique_id=811823215]
+process_callback = 0
 one_shot = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

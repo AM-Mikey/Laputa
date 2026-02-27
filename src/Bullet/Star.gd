@@ -9,24 +9,14 @@ var bounciness = 1 #.6
 var start_velocity
 var touched_floor = false
 
-
-
-@onready var w = get_tree().get_root().get_node("World")
-@onready var pc = f.pc()
-
-
-
-func _ready():
+func setup():
 	$FizzleTimer.start(f_time)
 	break_method = "cut"
-
 	velocity = get_initial_velocity()
 	start_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 
 
-
-func _physics_process(delta):
-	if disabled: return
+func _on_physics_process(delta):
 	velocity.y += gravity * delta
 
 	if velocity.x > 0:
@@ -49,15 +39,11 @@ func _physics_process(delta):
 		$AnimationPlayer.stop()
 
 
-
 func get_initial_velocity() -> Vector2:
 	var out = velocity
-
 	out.x = speed * direction.x
 	out.y = speed * direction.y
-
 	out.y -= 80 #give us some ups to start with
-
 	return out
 
 
@@ -65,7 +51,6 @@ func get_initial_velocity() -> Vector2:
 ### SIGNALS ###
 
 func _on_CollisionDetector_body_entered(body): #shadows
-	if disabled: return
 	if not body is TileMapLayer:
 		#enemy
 		if body.get_collision_layer_value(2):
@@ -76,8 +61,6 @@ func _on_CollisionDetector_body_entered(body): #shadows
 			queue_free()
 
 func _on_CollisionDetector_area_entered(area): #shadows
-	if disabled: return
-
 	if area.get_collision_layer_value(18): #enemyhurt
 		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
 		queue_free()

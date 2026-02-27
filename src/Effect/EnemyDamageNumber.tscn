@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://3krnqae68h4d"]
+[gd_scene format=3 uid="uid://3krnqae68h4d"]
 
 [ext_resource type="Script" uid="uid://drj33i4nu3wo" path="res://src/Effect/DisplayNumber.gd" id="1_t3mvi"]
 [ext_resource type="Texture2D" uid="uid://c7wyw4y3jdl7j" path="res://assets/UI/NumberNew.png" id="2_5ot4g"]
@@ -65,48 +65,47 @@ _data = {
 &"FloatOut": SubResource("Animation_gqp5h")
 }
 
-[node name="DamageNumber" type="Node2D"]
+[node name="DamageNumber" type="Node2D" unique_id=237989710]
 z_index = 5
 z_as_relative = false
 script = ExtResource("1_t3mvi")
 type = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_085d2")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1535817013]
+libraries/ = SubResource("AnimationLibrary_085d2")
 
-[node name="Layer" type="Node2D" parent="."]
+[node name="Layer" type="Node2D" parent="." unique_id=2136063124]
 position = Vector2(0, -8)
 
-[node name="Sign" type="Sprite2D" parent="Layer"]
+[node name="Sign" type="Sprite2D" parent="Layer" unique_id=1149339997]
 position = Vector2(-4, 0)
 texture = ExtResource("2_5ot4g")
 hframes = 11
 vframes = 6
 frame = 32
 
-[node name="Num1" type="Sprite2D" parent="Layer"]
+[node name="Num1" type="Sprite2D" parent="Layer" unique_id=743771863]
 position = Vector2(5, 0)
 texture = ExtResource("2_5ot4g")
 hframes = 11
 vframes = 6
 frame = 31
 
-[node name="Num2" type="Sprite2D" parent="Layer"]
+[node name="Num2" type="Sprite2D" parent="Layer" unique_id=68121176]
 position = Vector2(14, 0)
 texture = ExtResource("2_5ot4g")
 hframes = 11
 vframes = 6
 frame = 31
 
-[node name="Num3" type="Sprite2D" parent="Layer"]
+[node name="Num3" type="Sprite2D" parent="Layer" unique_id=1959664768]
 position = Vector2(23, 0)
 texture = ExtResource("2_5ot4g")
 hframes = 11
 vframes = 6
 frame = 31
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=181793388]
+process_callback = 0
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

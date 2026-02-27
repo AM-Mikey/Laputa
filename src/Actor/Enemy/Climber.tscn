@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dol3v8dg0drgu"]
+[gd_scene format=3 uid="uid://dol3v8dg0drgu"]
 
 [ext_resource type="Script" uid="uid://c2bm3y56ilkuj" path="res://src/Actor/Enemy/Climber.gd" id="1_7gha7"]
 [ext_resource type="Texture2D" uid="uid://dsb7pimaiub0y" path="res://assets/Actor/Enemy/Climber.png" id="2_u0hs7"]
@@ -19,59 +19,58 @@ size = Vector2(14, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7gha7"]
 size = Vector2(16, 0.5)
 
-[node name="Climber" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+[node name="Climber" type="CharacterBody2D" unique_id=182879502 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_7gha7")
 debug = true
 editor_hidden = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1086623904]
 shape = SubResource("CircleShape2D_qm1p1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=667417281]
 position = Vector2(0, 7)
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1678419504]
 position = Vector2(0, -7)
 shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=782090081]
 collision_layer = 262144
 collision_mask = 65536
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=203473163]
 shape = SubResource("RectangleShape2D_lodrl")
 debug_color = Color(1, 0, 0, 0.235294)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=334634194]
 light_mask = 4
 material = SubResource("11")
 texture = ExtResource("2_u0hs7")
 hframes = 8
 vframes = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_o6omx")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1890913218]
+libraries/ = SubResource("AnimationLibrary_o6omx")
 
-[node name="PivotCooldown" type="Timer" parent="."]
+[node name="PivotCooldown" type="Timer" parent="." unique_id=1164796679]
+process_callback = 0
 wait_time = 0.1
 one_shot = true
 
-[node name="Arms" type="Node2D" parent="."]
+[node name="Arms" type="Node2D" parent="." unique_id=1024818279]
 
-[node name="GroundDetector" type="Area2D" parent="."]
+[node name="GroundDetector" type="Area2D" parent="." unique_id=1370725363]
 position = Vector2(0, 8)
 collision_layer = 0
 collision_mask = 520
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetector" unique_id=1621047851]
 position = Vector2(0, -0.25)
 shape = SubResource("RectangleShape2D_7gha7")
 

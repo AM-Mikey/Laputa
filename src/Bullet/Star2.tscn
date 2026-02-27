@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhuvxv3tivyss"]
+[gd_scene format=3 uid="uid://bhuvxv3tivyss"]
 
 [ext_resource type="Script" uid="uid://ii3n548fd8d6" path="res://src/Bullet/Star.gd" id="1_ijee2"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="2_4yksi"]
@@ -49,38 +49,37 @@ _data = {
 &"FlipRight": SubResource("5")
 }
 
-[node name="Star2" type="CharacterBody2D"]
+[node name="Star2" type="CharacterBody2D" unique_id=2127941936]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("1_ijee2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=241186702]
 position = Vector2(-0.5, -0.5)
 shape = SubResource("1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="PlayerCollisionDetector" parent="." instance=ExtResource("2_4yksi")]
+[node name="PlayerCollisionDetector" parent="." unique_id=1245561879 instance=ExtResource("2_4yksi")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector" unique_id=688386488]
 position = Vector2(-0.5, -0.5)
 shape = SubResource("6")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="End" type="Marker2D" parent="."]
+[node name="End" type="Marker2D" parent="." unique_id=101529717]
 position = Vector2(0, 4)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1743977592]
 texture = ExtResource("3_mf8v5")
 hframes = 4
 vframes = 3
-frame = 3
+frame = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_v0i8r")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=908329193]
+libraries/ = SubResource("AnimationLibrary_v0i8r")
 
-[node name="FizzleTimer" type="Timer" parent="."]
+[node name="FizzleTimer" type="Timer" parent="." unique_id=1510733044]
+process_callback = 0
 one_shot = true
 autostart = true
 

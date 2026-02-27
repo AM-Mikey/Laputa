@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c65je163t5ruv"]
+[gd_scene format=3 uid="uid://cn8s4sgtse0nm"]
 
 [ext_resource type="Script" uid="uid://bg13m0gkqq3o6" path="res://src/Bullet/Birdshot.gd" id="1_akuxm"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="2_skik2"]
@@ -24,21 +24,6 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3]
 }
 
-[sub_resource type="Animation" id="Animation_ujfdw"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="Animation" id="Animation_akuxm"]
 resource_name = "Cool"
 length = 0.1
@@ -56,6 +41,21 @@ tracks/0/keys = {
 "values": [4]
 }
 
+[sub_resource type="Animation" id="Animation_ujfdw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_77lg8"]
 _data = {
 &"Burnout": SubResource("Animation_skik2"),
@@ -66,40 +66,40 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_skik2"]
 radius = 1.0
 
-[node name="Birdshot" type="CharacterBody2D"]
+[node name="Birdshot" type="CharacterBody2D" unique_id=525010911]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("1_akuxm")
 metadata/_custom_type_script = "uid://dpbp5em8cu4x4"
 
-[node name="PlayerCollisionDetector" parent="." instance=ExtResource("2_skik2")]
+[node name="PlayerCollisionDetector" parent="." unique_id=1126962128 instance=ExtResource("2_skik2")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector" unique_id=8153572]
 position = Vector2(-2, 0)
 shape = SubResource("CircleShape2D_akuxm")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1365046941]
 position = Vector2(-2, 0)
 texture = ExtResource("3_akuxm")
 hframes = 5
 
-[node name="End" type="Marker2D" parent="."]
+[node name="End" type="Marker2D" parent="." unique_id=1084066349]
 position = Vector2(-4, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_77lg8")
-}
-autoplay = "Burnout"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1770478955]
+libraries/ = SubResource("AnimationLibrary_77lg8")
+autoplay = &"Burnout"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=196763876]
 position = Vector2(-2, 0)
 shape = SubResource("CircleShape2D_skik2")
 
-[node name="FreeTimer" type="Timer" parent="."]
+[node name="FreeTimer" type="Timer" parent="." unique_id=1151928354]
+process_callback = 0
 one_shot = true
 
-[node name="CoolTimer" type="Timer" parent="."]
+[node name="CoolTimer" type="Timer" parent="." unique_id=1647736990]
+process_callback = 0
 one_shot = true
 
 [connection signal="area_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]

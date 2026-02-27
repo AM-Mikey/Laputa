@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dr1kk5b0rkos7"]
+[gd_scene format=3 uid="uid://dr1kk5b0rkos7"]
 
 [ext_resource type="Script" uid="uid://b80mj2pbqh664" path="res://src/Actor/Enemy/Frog.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cimkcsmiyj0d8" path="res://assets/Actor/Enemy/Frog.png" id="2"]
@@ -105,7 +105,7 @@ _data = {
 &"Stand": SubResource("9")
 }
 
-[node name="Frog" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+[node name="Frog" type="CharacterBody2D" unique_id=1440636904 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("1")
@@ -113,40 +113,40 @@ debug = true
 speed = Vector2(50, 100)
 editor_hidden = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=672254353]
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_qm1p1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=448817390]
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=2023241749]
 position = Vector2(0, -7)
 shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=204996881]
 collision_layer = 262144
 collision_mask = 65536
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=691035070]
 position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_h82ma")
 debug_color = Color(1, 0, 0, 0.235294)
 
-[node name="PlayerDetector" type="Area2D" parent="."]
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=1715285071]
 visible = false
 collision_layer = 0
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=1090077688]
 position = Vector2(0, -8)
 shape = SubResource("2")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2143587783]
 light_mask = 4
 material = SubResource("11")
 position = Vector2(0, -8)
@@ -155,16 +155,16 @@ hframes = 4
 vframes = 2
 frame = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_o6omx")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1423179648]
+libraries/ = SubResource("AnimationLibrary_o6omx")
 
-[node name="JumpTimer" type="Timer" parent="."]
+[node name="JumpTimer" type="Timer" parent="." unique_id=1553549195]
+process_callback = 0
 wait_time = 3.0
 one_shot = true
 
-[node name="CroakTimer" type="Timer" parent="."]
+[node name="CroakTimer" type="Timer" parent="." unique_id=360260981]
+process_callback = 0
 one_shot = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
