@@ -1449,3 +1449,62 @@ properties = {
 "editor_hidden": [false, 1],
 "id": ["", 4]
 }
+
+[node name="Water" type="MarginContainer" parent="Spawns" unique_id=221169776 groups=["TriggerSpawns"] instance=ExtResource("15_gjgdo")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
+offset_left = 3392.0
+offset_top = 2016.0
+offset_right = 3600.0
+offset_bottom = 2112.0
+mouse_filter = 2
+script = ExtResource("14_e0rs8")
+trigger_path = "res://src/Trigger/Water.tscn"
+properties = {
+"color": [Color(0, 0, 0.701961, 1), 20],
+"editor_hidden": [false, 1],
+"id": ["", 4],
+"velocity_dropoff": [0.75, 3]
+}
+size_is_default = false
+
+[node name="Water1" type="MarginContainer" parent="Spawns" unique_id=1319993853 groups=["TriggerSpawns"] instance=ExtResource("15_gjgdo")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
+offset_left = 4240.0
+offset_top = 2144.0
+offset_right = 4272.0
+offset_bottom = 2176.0
+mouse_filter = 2
+script = ExtResource("14_e0rs8")
+trigger_path = "res://src/Trigger/Water.tscn"
+properties = {
+"color": [Color(0, 0, 0.701961, 1), 20],
+"editor_hidden": [false, 1],
+"id": ["", 4],
+"velocity_dropoff": [0.75, 3]
+}
+size_is_default = false
+
+[node name="Frog15" type="Area2D" parent="Spawns" unique_id=1611106926 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3448, 2112)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_vw0qr")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"debug": [true, 1],
+"editor_hidden": [false, 1],
+"id": ["", 4],
+"jump_delay": [3.0, 3],
+"speed": [Vector2(50, 100), 5],
+"water_gravity": [150.0, 3]
+}
