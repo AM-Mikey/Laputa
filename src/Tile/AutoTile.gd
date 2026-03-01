@@ -132,7 +132,6 @@ func get_auto_tile_data(auto_tile_group) -> Dictionary:
 	out["all"] = [] #all tiles in group
 	var source = tile_map.get_child(0).tile_set.get_source(0)
 
-	# TODO: For modulates, find the rect size and do the shit lol
 	var is_modulate_pattern: bool = false
 	var is_connection_pattern: bool = false
 
