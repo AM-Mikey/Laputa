@@ -20,7 +20,16 @@ const WAYPOINT = preload("res://src/Utility/Waypoint.tscn")
 @export var lock_distance = 128
 @export var lock_tolerance = 16
 
-@export_range(0.0, 1.0, 1.0) var difficulty: int = 0
+@export_range(0.0, 1.0, 1.0) var difficulty: int = 0:
+	set(val):
+		match val:
+			0:
+				$JumpDetection/Left.enabled = false
+				$JumpDetection/Right.enabled = false
+			1:
+				$JumpDetection/Left.enabled = true
+				$JumpDetection/Right.enabled = true
+		difficulty = val
 const JUMP_VELOCITY: float = -1100.0
 
 var target: Node
@@ -39,9 +48,6 @@ func setup():
 	reward = 2
 	damage_on_contact = 1
 	speed = Vector2(50, 50)
-
-
-
 
 ### STATES ###
 
@@ -117,8 +123,6 @@ func do_aggro():
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
 
-var debug_name: String = "Billy7"
-
 var is_jumping: bool = false
 var jump_acceleration: float = 0.0
 func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
@@ -135,18 +139,14 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_frict
 			if (collision):
 				wall_is_slope = collision.get_angle() <= deg_to_rad(80)
 				wall_in_walking_direction = true
-				#if (name == debug_name):
-					#print(rad_to_deg(collision.get_angle()))
 
 			var check_raycast: RayCast2D = $JumpDetection/Right if moving_right else $JumpDetection/Left
 			if (is_on_wall() and wall_in_walking_direction and !wall_is_slope and !check_raycast.is_colliding()):
-				#if (name == debug_name):
-					#print("Wall")
-				jump()
+				jump_acceleration = JUMP_VELOCITY
+				is_jumping = true
+				$JumpAccelTimer.start()
 				default_value.y = jump_acceleration * get_physics_process_delta_time()
 		else:
-			#if (name == debug_name):
-				#print(jump_acceleration)
 			default_value.y += jump_acceleration * get_physics_process_delta_time()
 			if ($JumpAccelTimer.time_left <= 0.0 and is_on_floor()):
 				is_jumping = false
@@ -165,11 +165,6 @@ func fire():
 
 	world.get_node("Middle").add_child(bullet)
 	am.play("enemy_shoot", self)
-
-func jump():
-	jump_acceleration = JUMP_VELOCITY
-	is_jumping = true
-	$JumpAccelTimer.start()
 
 func set_waypoint(target_dir: Vector2):
 	if waypoint: waypoint.queue_free()
