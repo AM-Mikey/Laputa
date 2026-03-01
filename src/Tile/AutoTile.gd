@@ -137,31 +137,34 @@ func get_auto_tile_data(auto_tile_group) -> Dictionary:
 			var coords = Vector2i(x, y)
 			if source.get_tile_at_coords(coords) != Vector2i(-1, -1): #tile exists
 				var tile_data = source.get_tile_data(Vector2i(x, y), 0) #alternative id is always 0
-				if tile_data.has_custom_data("auto_tile_group"):
-					if auto_tile_group == tile_data.get_custom_data("auto_tile_group"): #the right group
-						if tile_data.has_custom_data("auto_tile_direction"):
-							out["all"].append(coords)
-							var auto_tile_directions: String = tile_data.get_custom_data("auto_tile_direction")
-							var directions = auto_tile_directions.split(",", false)
-							for auto_tile_direction in directions:
-								var parsed_auto_tile_dir: String = ""
-								# The directions need to be in a certain order, therefore this parsing is done
-								for dir_letter in ["n", "s", "w", "e", "m"]:
-									if auto_tile_direction.contains(dir_letter):
-										parsed_auto_tile_dir += dir_letter
-								if parsed_auto_tile_dir == "":
-									if auto_tile_direction == "c":
-										parsed_auto_tile_dir = "c"
-									else:
-										printerr("Unrecognized auto tile direction \"%s\"" % auto_tile_direction)
-								if auto_tile_direction == "m":
-									is_modulate_pattern = true
-								else:
-									is_connection_pattern = true
-								if out.has(parsed_auto_tile_dir):
-									out[parsed_auto_tile_dir].append(coords)
-								else:
-									out[parsed_auto_tile_dir] = [coords]
+				if tile_data.has_custom_data("auto_tile_group") == false:
+					continue
+				if auto_tile_group != tile_data.get_custom_data("auto_tile_group"):
+					continue
+				if tile_data.has_custom_data("auto_tile_direction") == false:
+					continue
+				out["all"].append(coords)
+				var auto_tile_directions: String = tile_data.get_custom_data("auto_tile_direction")
+				var directions = auto_tile_directions.split(",", false)
+				for auto_tile_direction in directions:
+					var parsed_auto_tile_dir: String = ""
+					# The directions need to be in a certain order, therefore this parsing is done
+					for dir_letter in ["n", "s", "w", "e", "m"]:
+						if auto_tile_direction.contains(dir_letter):
+							parsed_auto_tile_dir += dir_letter
+					if parsed_auto_tile_dir == "":
+						if auto_tile_direction == "c":
+							parsed_auto_tile_dir = "c"
+						else:
+							printerr("Unrecognized auto tile direction \"%s\"" % auto_tile_direction)
+					if auto_tile_direction == "m":
+						is_modulate_pattern = true
+					else:
+						is_connection_pattern = true
+					if out.has(parsed_auto_tile_dir):
+						out[parsed_auto_tile_dir].append(coords)
+					else:
+						out[parsed_auto_tile_dir] = [coords]
 	if is_modulate_pattern and is_connection_pattern:
 		printerr("Auto-tile pattern %s contains both connection and modulate tiles!" % auto_tile_group)
 
