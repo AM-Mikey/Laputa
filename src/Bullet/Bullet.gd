@@ -69,6 +69,8 @@ func do_fizzle(type: String):
 			fizzle = FIZZLE_WORLD.instantiate()
 		"armor":
 			fizzle = FIZZLE_ARMOR.instantiate()
+		"bullet":
+			fizzle = FIZZLE_ARMOR.instantiate()
 
 
 	w.get_node("Middle").add_child(fizzle)

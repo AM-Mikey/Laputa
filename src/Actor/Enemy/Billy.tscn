@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://d7hgcoq0lmkd" path="res://src/Actor/Enemy/Billy.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dxp874vl8xdex" path="res://assets/Actor/Enemy/Billy.png" id="2"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sy72i"]
-radius = 7.0
-height = 15.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sy72i"]
+size = Vector2(10, 14)
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(14, 15)
@@ -138,13 +137,14 @@ _data = {
 [node name="Billy" type="CharacterBody2D" unique_id=147745042 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
+floor_max_angle = 1.0471976
 script = ExtResource("1")
 debug = true
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1482682800]
-position = Vector2(0, -7.5)
-shape = SubResource("CapsuleShape2D_sy72i")
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_sy72i")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=205096187]
@@ -196,16 +196,37 @@ position = Vector2(0, -16)
 [node name="FloorDetectorL" type="RayCast2D" parent="." unique_id=1314022133]
 position = Vector2(-7, -8)
 target_position = Vector2(0, 16)
-collision_mask = 8
+collision_mask = 520
 collide_with_areas = true
 
 [node name="FloorDetectorR" type="RayCast2D" parent="." unique_id=1337091757]
 position = Vector2(7, -8)
 target_position = Vector2(0, 16)
-collision_mask = 8
+collision_mask = 520
 collide_with_areas = true
+
+[node name="JumpDetection" type="Node2D" parent="." unique_id=106257102]
+
+[node name="Left" type="RayCast2D" parent="JumpDetection" unique_id=1684778919]
+z_index = 5
+position = Vector2(-7, -32)
+target_position = Vector2(0, 14)
+collision_mask = 8
+hit_from_inside = true
+
+[node name="Right" type="RayCast2D" parent="JumpDetection" unique_id=1238464550]
+z_index = 5
+position = Vector2(7, -32)
+target_position = Vector2(0, 14)
+collision_mask = 8
+hit_from_inside = true
+
+[node name="JumpAccelTimer" type="Timer" parent="." unique_id=1621155892]
+wait_time = 0.1
+one_shot = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
+[connection signal="timeout" from="JumpAccelTimer" to="." method="_on_JumpAccelTimer_timeout"]
