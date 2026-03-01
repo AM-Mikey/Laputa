@@ -20,6 +20,9 @@ const WAYPOINT = preload("res://src/Utility/Waypoint.tscn")
 @export var lock_distance = 128
 @export var lock_tolerance = 16
 
+@export_range(0.0, 1.0, 1.0) var difficulty: int = 0
+const JUMP_VELOCITY: float = -1100.0
+
 var target: Node
 var locked_on = false
 var shooting = false
@@ -114,6 +117,41 @@ func do_aggro():
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
 
+var debug_name: String = "Billy7"
+
+var is_jumping: bool = false
+var jump_acceleration: float = 0.0
+func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
+	var default_value = super.calc_velocity(move_dir, do_gravity, do_acceleration, do_friction)
+	if (difficulty == 1):
+		if !(is_jumping):
+			if !(is_on_floor()):
+				return default_value
+			var moving_right: bool = move_dir.x > 0
+			var wall_is_slope: bool = false
+			var wall_in_walking_direction: bool = false
+
+			var collision: KinematicCollision2D = move_and_collide(8 * move_dir.sign(), true)
+			if (collision):
+				wall_is_slope = collision.get_angle() <= deg_to_rad(80)
+				wall_in_walking_direction = true
+				#if (name == debug_name):
+					#print(rad_to_deg(collision.get_angle()))
+
+			var check_raycast: RayCast2D = $JumpDetection/Right if moving_right else $JumpDetection/Left
+			if (is_on_wall() and wall_in_walking_direction and !wall_is_slope and !check_raycast.is_colliding()):
+				#if (name == debug_name):
+					#print("Wall")
+				jump()
+				default_value.y = jump_acceleration * get_physics_process_delta_time()
+		else:
+			#if (name == debug_name):
+				#print(jump_acceleration)
+			default_value.y += jump_acceleration * get_physics_process_delta_time()
+			if ($JumpAccelTimer.time_left <= 0.0 and is_on_floor()):
+				is_jumping = false
+	return default_value
+
 ### HELPERS ###
 
 func fire():
@@ -127,6 +165,11 @@ func fire():
 
 	world.get_node("Middle").add_child(bullet)
 	am.play("enemy_shoot", self)
+
+func jump():
+	jump_acceleration = JUMP_VELOCITY
+	is_jumping = true
+	$JumpAccelTimer.start()
 
 func set_waypoint(target_dir: Vector2):
 	if waypoint: waypoint.queue_free()
@@ -147,3 +190,7 @@ func _on_PlayerDetector_body_exited(_body):
 	#shooting = false
 	#target = null
 	#change_state("walk")
+
+
+func _on_JumpAccelTimer_timeout() -> void:
+	jump_acceleration = 0
