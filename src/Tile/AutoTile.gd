@@ -49,6 +49,10 @@ func do_auto_tile(start_coords: Vector2i, start_layer):
 		var new_atlas_coords := Vector2i(tile_x, tile_y)
 		var tile_map_layer: TileMapLayer = tile_map.get_child(start_layer)
 		tile_map_layer.set_cell(start_coords, 0, new_atlas_coords)
+	elif auto_tile_data["type"] == "none":
+		pass
+	elif auto_tile_data["type"] == "invalid":
+		pass
 
 func connection_pattern(layer, coords, pattern_name: String):
 	var dict = get_auto_tile_data(pattern_name)
@@ -167,11 +171,12 @@ func get_auto_tile_data(auto_tile_group) -> Dictionary:
 						out[parsed_auto_tile_dir] = [coords]
 	if is_modulate_pattern and is_connection_pattern:
 		printerr("Auto-tile pattern %s contains both connection and modulate tiles!" % auto_tile_group)
-
-	if is_modulate_pattern == true:
+		out["type"] = "invalid"
+	elif is_modulate_pattern == false and is_connection_pattern == false:
+		out["type"] = "none"
+	elif is_modulate_pattern == true:
 		out["type"] = "modulate"
-
-	if is_connection_pattern == true:
+	elif is_connection_pattern == true:
 		out["type"] = "connections"
 
 	if is_modulate_pattern == true:
