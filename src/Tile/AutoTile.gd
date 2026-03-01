@@ -146,7 +146,7 @@ func get_auto_tile_data(auto_tile_group) -> Dictionary:
 							for auto_tile_direction in directions:
 								var parsed_auto_tile_dir: String = ""
 								# The directions need to be in a certain order, therefore this parsing is done
-								for dir_letter in ["n", "s", "w", "e"]:
+								for dir_letter in ["n", "s", "w", "e", "m"]:
 									if auto_tile_direction.contains(dir_letter):
 										parsed_auto_tile_dir += dir_letter
 								if parsed_auto_tile_dir == "":
