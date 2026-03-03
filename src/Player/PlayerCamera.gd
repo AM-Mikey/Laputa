@@ -42,19 +42,35 @@ func _physics_process(_delta):
 				pan_vertical(get_v_dir())
 
 
+
 func cameracontrol_topos(targetpos:Vector2,speed:float) -> void:
+
+	if h_tween:
+		h_tween.kill()
+
+	var dragspeed = min(speed/10,0.1)
+
+	##drag speed trends to 0
+	if drag_horizontal_offset > 0:
+		drag_horizontal_offset = max(0,drag_horizontal_offset-dragspeed)
+	if drag_horizontal_offset < 0:
+		drag_horizontal_offset = min(0,drag_horizontal_offset+dragspeed)
+
+
+
 	var posdelta: = targetpos - global_position
 	var movement:= posdelta.normalized() * speed
 	if global_position.distance_to(targetpos) <= global_position.distance_to(global_position+movement):
 		global_position = targetpos
-		pc.cameracontrol_next()
+		pc.cameracontrol_next() #end
+		
 	else:
 		global_position += movement
 
 ##resets camera back to player
 func cameracontrol_reset():
 	position = Vector2(0,-16)
-
+	reset()
 
 func reset():
 	position_smoothing_enabled = false #reset_smoothing() has issues

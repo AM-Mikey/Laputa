@@ -62,8 +62,13 @@ var shoot_dir := Vector2.LEFT
 ##x[1]=framecount
 ##				inputlock
 ##x[1]=bool. Calling this locks the input until the last action is done or inputlock,false is called.
+##				reset
+##instantly resets the camera back to player.
+
 ##future actions:
-##goto_object. Uses the node directory in player's parent? 
+##goto_object. Uses the node directory in player's parent?
+##goto_player. Same as goto_pos but player position
+
 var cameracontrol_actions:Array[Array] =[
 	
 	]
@@ -75,9 +80,9 @@ func cameracontrol_processing() -> void:
 	if Input.is_action_just_pressed("debug_testbutton"):
 		cameracontrol_add(["can_act",false])
 		cameracontrol_add( ["wait",20] )
-		cameracontrol_add( ["goto_pos",Vector2(200,200),30] )
-		cameracontrol_add( ["reset"] )
+		cameracontrol_add( ["goto_pos",Vector2(3000,1968),5] )
 		cameracontrol_add( ["wait",40] )
+		cameracontrol_add( ["reset"] )
 
 
 
