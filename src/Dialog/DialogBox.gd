@@ -181,8 +181,8 @@ func run_text_string(string):
 			am.play("npc_dialog")
 			if is_last_character:
 				pass
-			elif character in [",", ".", "?", "!"]:
-				await get_tree().create_timer(punctuation_delay, true, false).timeout
+			elif character in [",", ".", "?", "!", ":", ";"]:
+				await get_tree().create_timer(punctuation_delay).timeout
 			else:
 				await get_tree().create_timer(print_delay, true, false).timeout
 		character_step += 1
@@ -226,7 +226,7 @@ func _input(event):
 
 func progress_text(with_newline = true):
 	if step == current_text_array.size() || do_force_end:
-		exit()
+		setup_next_conversation()
 		return
 	do_delay = true
 	active = true
@@ -237,7 +237,64 @@ func progress_text(with_newline = true):
 		dl.text = flash_original_text
 	run_text_array(current_text_array, true)
 
+func setup_next_conversation():
+	var npc: Node
+	for n in get_tree().get_nodes_in_group("NPCs"):
+		if n.dialog_box == self:
+			npc = n
+	if npc:
+		# Find first uncompleted index in each queue, or last index as fallback
+		var main_next = get_next_conversation_index(npc.conversation_queue) if npc.conversation_queue.size() > 0 else -1
+		var side_next = get_next_conversation_index(npc.side_conversation_queue) if npc.side_conversation_queue.size() > 0 else -1
 
+		var main_exhausted = npc.conversation_queue.size() == 0 || (main_next == npc.conversation_queue.size() - 1 && npc.conversation_queue[main_next][4])
+		var side_exhausted = npc.side_conversation_queue.size() == 0 || (side_next == npc.side_conversation_queue.size() - 1 && npc.side_conversation_queue[side_next][4])
+
+		#print("logic_time")
+		if !main_exhausted:
+			npc.next_conversation_queue_name = "conversation_queue"
+			npc.next_conversation_index = main_next
+			print("progressing to next main convo")
+		elif !side_exhausted:
+			npc.next_conversation_queue_name = "side_conversation_queue"
+			npc.next_conversation_index = side_next
+			print("progressing to next side convo")
+		else:
+			# All conversations completed, check if final entries are repeatable
+			var main_repeatable = npc.conversation_queue.size() > 0 && npc.conversation_queue[main_next][3]
+			var side_repeatable = npc.side_conversation_queue.size() > 0 && npc.side_conversation_queue[side_next][3]
+
+			if side_repeatable:
+				npc.next_conversation_queue_name = "side_conversation_queue"
+				npc.next_conversation_index = side_next
+				print("repeating last side convo")
+			elif main_repeatable:
+				npc.next_conversation_queue_name = "conversation_queue"
+				npc.next_conversation_index = main_next
+				print("repeating last main convo")
+			else:
+				exit()
+				return
+
+		var stored_next_convo = npc.get(npc.next_conversation_queue_name)[npc.next_conversation_index]
+		if stored_next_convo && stored_next_convo[2] && !stored_next_convo[4]: # forced and not yet completed
+			print("forcing next convo")
+			$FlashTimer.stop()
+			dl.text = ""
+			step = 0
+			npc.get(npc.next_conversation_queue_name)[npc.next_conversation_index][4] = true #completed
+			SaveSystem.write_dialog_data_to_temp(w.current_level, npc)
+			start_printing(npc.dialog_json, stored_next_convo[0])
+		else:
+			exit()
+	else:
+		exit()
+
+func get_next_conversation_index(queue: Array) -> int:
+	for i in queue.size():
+		if !queue[i][4]:
+			return i
+	return queue.size() - 1 # all completed, return last as fallback
 
 func exit():
 	if is_exiting: return

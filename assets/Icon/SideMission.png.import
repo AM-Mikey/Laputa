@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmbf4cgwf2d5i"
-path="res://.godot/imported/GrabberArea.png-748cab42f9aa41bd59cc2ca4102f1b8e.ctex"
+uid="uid://b3hhsr20iuqpu"
+path="res://.godot/imported/SideMission.png-f8f9235ae4180058fff9e602162fb6e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Slider/GrabberArea.png"
-dest_files=["res://.godot/imported/GrabberArea.png-748cab42f9aa41bd59cc2ca4102f1b8e.ctex"]
+source_file="res://assets/Icon/SideMission.png"
+dest_files=["res://.godot/imported/SideMission.png-f8f9235ae4180058fff9e602162fb6e8.ctex"]
 
 [params]
 

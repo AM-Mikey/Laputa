@@ -75,16 +75,7 @@ func _input(event):
 		if event.is_action_released("ui_cancel") or event.is_action_released("pause"):
 			%ExitTimer.stop()
 
-func process_exit():
-	if (%KeyConfig.rm.unsaved_action.size() > 0 or %ControllerConfig.rm.unsaved_action.size() > 0):
-		var error_message: PackedStringArray = []
-		if %KeyConfig.rm.unsaved_action.size() > 0: error_message.append("Keyboard")
-		if %ControllerConfig.rm.unsaved_action.size() > 0: error_message.append("Controller")
-		%UnsavedConfirm.visible = true
-		%UnsavedConfirm/Margin/VBoxContainer/Label.text = "Are you sure? There are unsaved changes in: " + ", ".join(error_message)
-		%UnsavedConfirm/Margin/VBoxContainer/HBoxContainer/No.grab_focus()
-	else:
-		exit()
+
 
 func exit():
 	%ExitTimer.stop()
@@ -97,14 +88,7 @@ func exit():
 		world.get_node("MenuLayer/TitleScreen").do_focus()
 	queue_free()
 
-func exit_unsaved_confirm() -> void:
-	focus_current_tab()
-	%UnsavedConfirm.visible = false
-	exit()
 
-func exit_unsaved_reject() -> void:
-	focus_current_tab()
-	%UnsavedConfirm.visible = false
 
 ### HELPERS ###
 
@@ -144,6 +128,21 @@ func change_tab(arrow = "left"):
 			else:
 				tabs.current_tab += 1
 
+func process_exit():
+	if (%KeyConfig.rm.unsaved_action.size() > 0 or %ControllerConfig.rm.unsaved_action.size() > 0):
+		var message: String
+		if %KeyConfig.rm.unsaved_action.size() > 0:
+			message = "Do you want to exit? There are unsaved keyboard bindings."
+		elif %ControllerConfig.rm.unsaved_action.size() > 0:
+			message = "Do you want to exit? There are unsaved controller bindings."
+		elif %KeyConfig.rm.unsaved_action.size() > 0 && %ControllerConfig.rm.unsaved_action.size() > 0:
+			message = "Do you want to exit? There are unsaved keyboard and controller bindings."
+		%UnsavedConfirm.visible = true
+		%UnsavedConfirm/Margin/VBox/Label.text = message
+		%UnsavedConfirm/Margin/VBox/HBox/No.grab_focus()
+	else:
+		exit()
+
 func _on_TabContainer_tab_changed(tab):
 	%LeftTimer.stop()
 	%LeftDecayTimer.stop()
@@ -157,6 +156,15 @@ func focus_current_tab() -> void:
 		0: %Settings.do_focus()
 		1: %KeyConfig.do_focus()
 		2: %ControllerConfig.do_focus()
+
+func exit_unsaved_confirm() -> void:
+	focus_current_tab()
+	%UnsavedConfirm.visible = false
+	exit()
+
+func exit_unsaved_reject() -> void:
+	focus_current_tab()
+	%UnsavedConfirm.visible = false
 
 
 func _resolution_scale_changed(_resolution_scale):

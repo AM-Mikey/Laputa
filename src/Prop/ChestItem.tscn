@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bedbx1wsm7g0j"]
+[gd_scene format=3 uid="uid://bedbx1wsm7g0j"]
 
 [ext_resource type="Script" uid="uid://nlae4x8toysd" path="res://src/Prop/ChestItem.gd" id="1_dbmu8"]
 [ext_resource type="Texture2D" uid="uid://bjwvnd0w6cx4x" path="res://assets/Prop/ChestWeapon.png" id="2_o3acv"]
@@ -50,7 +50,7 @@ size = Vector2(24, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wipiq"]
 size = Vector2(32, 16)
 
-[node name="ChestItem" type="RigidBody2D" groups=["LimitedProps", "PhysicsProps", "Props"]]
+[node name="ChestItem" type="RigidBody2D" unique_id=786570276 groups=["LimitedProps", "PhysicsProps", "Props"]]
 collision_layer = 16
 collision_mask = 520
 can_sleep = false
@@ -59,33 +59,31 @@ freeze = true
 freeze_mode = 1
 script = ExtResource("1_dbmu8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=696438141]
 position = Vector2(16, 8)
 shape = SubResource("1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1846200959]
 texture = ExtResource("2_o3acv")
 centered = false
 hframes = 9
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_s4csk")
-}
-autoplay = "Shine"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1034651172]
+libraries/ = SubResource("AnimationLibrary_s4csk")
+autoplay = &"Shine"
 
-[node name="PlayerDetector" type="Area2D" parent="."]
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=787201922]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=1654433043]
 position = Vector2(16, 8)
 shape = SubResource("RectangleShape2D_xwv30")
 
-[node name="EditorArea" type="Area2D" parent="."]
+[node name="EditorArea" type="Area2D" parent="." unique_id=798294006]
 collision_layer = 0
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea" unique_id=192199465]
 position = Vector2(16, 8)
 shape = SubResource("RectangleShape2D_wipiq")
 debug_color = Color(0, 0.6, 0.69803923, 0)

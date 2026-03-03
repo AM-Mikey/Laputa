@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dids6g4yrcgvy"
-path="res://.godot/imported/GrabberAreaHighlight.png-69fa507029c91dbc93ed847aca1f5f29.ctex"
+uid="uid://y8mnwbu5rbcq"
+path="res://.godot/imported/BookIcon.png-45f0792cfd3cafcc980d6c8dfe490da7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Slider/GrabberAreaHighlight.png"
-dest_files=["res://.godot/imported/GrabberAreaHighlight.png-69fa507029c91dbc93ed847aca1f5f29.ctex"]
+source_file="res://assets/UI/Inventory/BookIcon.png"
+dest_files=["res://.godot/imported/BookIcon.png-45f0792cfd3cafcc980d6c8dfe490da7.ctex"]
 
 [params]
 

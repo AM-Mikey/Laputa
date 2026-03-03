@@ -1,5 +1,8 @@
 extends Control
 
+const BACKGROUND_STYLEBOX_NORMAL = preload("res://src/UI/StyleBox/RustTrimmedScrews.tres")
+const BACKGROUND_STYLEBOX_MISSION = preload("res://src/UI/StyleBox/RustTrimmedScrewsMission.tres")
+
 @onready var w = get_tree().get_root().get_node("World")
 @onready var items = %Items
 @onready var weapon_wheel = %WeaponWheel
@@ -8,6 +11,10 @@ func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 	enter()
+	#For testing, remove this
+	#var pc = f.pc()
+	#var first_topic = pc.topic_array.front()
+	#first_topic.topic_stages = [0,1,2,3,4]
 
 func _input(event):
 	if event.is_action_pressed("inventory") and f.pc().can_input:
@@ -20,11 +27,17 @@ func display_items():
 		var texture = i.texture
 		%ItemList.add_icon_item(texture)
 
-
 func display_topics():
 	var pc = f.pc()
 	for t in pc.topic_array:
-		%TopicList.add_item(t)
+		%TopicList.add_item(t.topic_name)
+
+func display_main_mission():
+	%MainMissionBody.text = ms.main_mission_stage[1] #description
+
+func display_side_missions():
+	for m in ms.side_missions:
+		%SideMissionList.add_item(m.display_name)
 
 func enter():
 	get_tree().paused = true
@@ -32,6 +45,8 @@ func enter():
 	w.ui.visible = false
 	display_items()
 	display_topics()
+	display_side_missions()
+	display_main_mission()
 
 func exit():
 	get_tree().paused = false
@@ -73,34 +88,79 @@ func _on_tab_toggled(toggled_on: bool, tab: String):
 				%InventoryButton.set_pressed_no_signal(true)
 			"mission":
 				%MissionButton.set_pressed_no_signal(true)
+			"book":
+				%BookButton.set_pressed_no_signal(true)
 			"map":
 				%MapButton.set_pressed_no_signal(true)
 	else:
 		match tab:
 			"inventory":
 				%MissionButton.set_pressed_no_signal(false)
+				%BookButton.set_pressed_no_signal(false)
 				%MapButton.set_pressed_no_signal(false)
 				%Inventory.visible = true
 				%Mission.visible = false
+				%Book.visible = false
 				%Map.visible = false
+				%Background.add_theme_stylebox_override("panel", BACKGROUND_STYLEBOX_NORMAL)
 			"mission":
 				%InventoryButton.set_pressed_no_signal(false)
+				%BookButton.set_pressed_no_signal(false)
 				%MapButton.set_pressed_no_signal(false)
 				%Inventory.visible = false
 				%Mission.visible = true
+				%Book.visible = false
 				%Map.visible = false
+				%Background.add_theme_stylebox_override("panel", BACKGROUND_STYLEBOX_MISSION)
+			"book":
+				%InventoryButton.set_pressed_no_signal(false)
+				%MissionButton.set_pressed_no_signal(false)
+				%MapButton.set_pressed_no_signal(false)
+				%Inventory.visible = false
+				%Mission.visible = false
+				%Book.visible = true
+				%Map.visible = false
+				%Background.add_theme_stylebox_override("panel", BACKGROUND_STYLEBOX_NORMAL)
 			"map":
 				%InventoryButton.set_pressed_no_signal(false)
 				%MissionButton.set_pressed_no_signal(false)
+				%BookButton.set_pressed_no_signal(false)
 				%Inventory.visible = false
 				%Mission.visible = false
+				%Book.visible = false
 				%Map.visible = true
+				%Background.add_theme_stylebox_override("panel", BACKGROUND_STYLEBOX_NORMAL)
 
 
 func _on_ItemList_item_selected(index: int):
 	var pc = f.pc()
 	%InventoryHeader.text = pc.item_array[index].item_name
 	%InventoryBody.text = pc.item_array[index].description
+
+
+
+
+func _on_TopicList_item_selected(index: int):
+	var pc = f.pc()
+	var topic = pc.topic_array[index]
+	%TopicBody.text = ""
+	if topic.topic_stages.has(0):
+		%TopicBody.text = topic.d0
+	if topic.topic_stages.has(1):
+		%TopicBody.text = %TopicBody.text + "\n" + topic.d1
+	if topic.topic_stages.has(2):
+		%TopicBody.text = %TopicBody.text + "\n" + topic.d2
+	if topic.topic_stages.has(3):
+		%TopicBody.text = %TopicBody.text + "\n" + topic.d3
+	if topic.topic_stages.has(4):
+		%TopicBody.text = %TopicBody.text + "\n" + topic.d4
+	if topic.topic_stages.has(5):
+		%TopicBody.text = %TopicBody.text + "\n" + topic.d5
+
+
+func _on_SideMissionList_item_selected(index: int):
+	var side_mission = ms.side_missions[index]
+	%MissionBody.text = side_mission.description
 
 
 func _resolution_scale_changed(_resolution_scale):

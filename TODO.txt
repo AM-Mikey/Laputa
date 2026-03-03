@@ -423,3 +423,19 @@ add bg visibility
 next todo:
 add items
 add secondary tab inventory: quests, dialog topics, then topic descriptions
+
+
+
+
+### strange mission loading behavior:
+
+load, talk, get s, talk = skipping main mission dialog
+
+reload, talk s0, get s, talk = talk s0, cant progress to s1 despite mission = gives
+	- doesn't happen if not reloading
+
+
+### ok scenarios
+save,load, talk s0, get s, talk s1, reply no
+
+new game, talk s0, save, get s, load, get s, = talk is m0 instead of s1. no results in infinite text (s1)

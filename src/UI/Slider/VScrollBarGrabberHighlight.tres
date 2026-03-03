@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://dg61mwvkb31v3"]
+
+[ext_resource type="Texture2D" uid="uid://dgkxd40w2adjr" path="res://assets/UI/Slider/VScrollBarGrabberHighlight.png" id="1_wfrj3"]
+
+[resource]
+texture = ExtResource("1_wfrj3")
+texture_margin_left = 6.0
+texture_margin_top = 4.0
+texture_margin_right = 2.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(0, 0, 10, 6)

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=15 format=3 uid="uid://45e84j2sj7w0"]
+[gd_resource type="Theme" format=3 uid="uid://45e84j2sj7w0"]
 
 [ext_resource type="StyleBox" uid="uid://cb3gs2qq26l03" path="res://src/UI/StyleBox/RustTabsLight.tres" id="1"]
 [ext_resource type="StyleBox" uid="uid://cc3ivdery0b8x" path="res://src/UI/StyleBox/RustRound.tres" id="3"]
@@ -7,7 +7,10 @@
 [ext_resource type="StyleBox" uid="uid://bwe3j6hcp3u7j" path="res://src/UI/StyleBox/SteelBeveledLight.tres" id="10"]
 [ext_resource type="StyleBox" uid="uid://b2eysynpuqm3n" path="res://src/UI/StyleBox/RustTabs.tres" id="10_kp8hw"]
 [ext_resource type="StyleBox" uid="uid://ot23c6kiunqk" path="res://src/UI/StyleBox/RustTabsDark.tres" id="11"]
+[ext_resource type="StyleBox" uid="uid://bpq27uwrkvyxy" path="res://src/UI/Slider/VScrollBarGrabber.tres" id="11_102qv"]
+[ext_resource type="StyleBox" uid="uid://cr1nw0a6yivfy" path="res://src/UI/Slider/VScrollBarSlider.tres" id="11_ms7ki"]
 [ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="11_ryfn6"]
+[ext_resource type="StyleBox" uid="uid://dg61mwvkb31v3" path="res://src/UI/Slider/VScrollBarGrabberHighlight.tres" id="12_y4i5o"]
 [ext_resource type="StyleBox" uid="uid://djsxt54vtaivl" path="res://src/UI/Slider/ScrollBarGrabber.tres" id="13"]
 [ext_resource type="StyleBox" uid="uid://qim7rgmnpjii" path="res://src/UI/Slider/ScrollBarGrabberHighlight.tres" id="14"]
 [ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="24"]
@@ -98,10 +101,10 @@ TextEdit/styles/focus = ExtResource("4")
 TextEdit/styles/normal = ExtResource("4")
 TextEdit/styles/read_only = ExtResource("4")
 Tree/styles/bg = ExtResource("4")
-VScrollBar/styles/grabber = ExtResource("13")
-VScrollBar/styles/grabber_highlight = ExtResource("14")
-VScrollBar/styles/grabber_pressed = ExtResource("14")
-VScrollBar/styles/scroll = ExtResource("6")
+VScrollBar/styles/grabber = ExtResource("11_102qv")
+VScrollBar/styles/grabber_highlight = ExtResource("12_y4i5o")
+VScrollBar/styles/grabber_pressed = ExtResource("12_y4i5o")
+VScrollBar/styles/scroll = ExtResource("11_ms7ki")
 VSlider/icons/grabber = null
 VSlider/styles/grabber_area = SubResource("9")
 VSlider/styles/grabber_area_highlight = SubResource("10")

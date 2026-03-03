@@ -5,7 +5,7 @@ var ids = []
 
 @export var up_down_cooldown_time = 0.2
 
-var selected_option = 0
+var selected_option = -1
 var is_displaying = false
 var is_exiting = false
 var exit_action = "continue"
@@ -29,18 +29,22 @@ func display_options():
 	else:
 		$Up.visible = false
 		$Down.visible = false
+
 	if options.size() >= 4:
+		$AnimationPlayer.play("ResetFour")
 		$Four/First/Label.text = options[0]
 		$Four/Second/Label.text = options[1]
 		$Four/Third/Label.text = options[2]
 		$Four/Forth/Label.text = options[3]
 		$Four.visible = true
 	elif options.size() == 3:
+		$AnimationPlayer.play("ResetThree")
 		$Three/First/Label.text = options[0]
 		$Three/Second/Label.text = options[1]
 		$Three/Third/Label.text = options[2]
 		$Three.visible = true
 	elif options.size() == 2:
+		$AnimationPlayer.play("ResetTwo")
 		$Two/First/Label.text = options[0]
 		$Two/Second/Label.text = options[1]
 		$Two.visible = true
@@ -56,7 +60,10 @@ func _input(event):
 		$UpDownTimer.start(up_down_cooldown_time)
 		option_down()
 	if event.is_action_pressed("ui_accept") and is_displaying and not is_exiting:
-		hide_options()
+		if selected_option == -1:
+			am.play("ui_deny")
+		else:
+			hide_options()
 
 
 func hide_options():
@@ -84,6 +91,14 @@ func hide_options():
 ### HELPER ###
 
 func option_up():
+	if selected_option == -1: #haven't selected yet
+		selected_option = options.size() - 1
+		match options.size():
+			2: $AnimationPlayer.play("TwoNoneToSecond")
+			3: $AnimationPlayer.play("ThreeNoneToThird")
+			4: $AnimationPlayer.play("FourNoneToFourth")
+		return
+
 	if options.size() >= 4:
 		if selected_option == 0:
 			selected_option = options.size() - 1
@@ -127,6 +142,14 @@ func option_up():
 
 
 func option_down():
+	if selected_option == -1: #haven't selected yet
+		selected_option = 0
+		match options.size():
+			2: $AnimationPlayer.play("TwoNoneToFirst")
+			3: $AnimationPlayer.play("ThreeNoneToFirst")
+			4: $AnimationPlayer.play("FourNoneToFirst")
+		return
+
 	if options.size() >= 4:
 		if selected_option == options.size() - 1:
 			selected_option = 0
@@ -151,10 +174,16 @@ func option_down():
 			selected_option = 0
 			$AnimationPlayer.play("ThreeThirdToFirst")
 		else:
+			print("ok")
 			selected_option += 1
 			match selected_option:
-				1: $AnimationPlayer.play("ThreeFirstToSecond")
-				2: $AnimationPlayer.play("ThreeSecondToThird")
+				1:
+					$AnimationPlayer.play("ThreeFirstToSecond")
+					print("s")
+				2:
+					$AnimationPlayer.play("ThreeSecondToThird")
+					print("a")
+					print(selected_option)
 
 	elif options.size() == 2:
 		if selected_option == 0:

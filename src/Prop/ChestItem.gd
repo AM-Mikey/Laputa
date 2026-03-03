@@ -1,5 +1,7 @@
 extends PhysicsProp
 
+const GOT_ITEM = preload("res://src/UI/GotItem.tscn")
+
 @export var held_item_name: String
 
 var held_item: Item
@@ -33,8 +35,12 @@ func _input(event):
 func activate(player):
 	am.play("chest_open")
 	am.play_interrupt("get_item")
+	var got_item = GOT_ITEM.instantiate()
+	got_item.item_name = held_item_name
+	w.ui.add_child(got_item)
 	$AnimationPlayer.play("Used")
 	spent = true
+
 	if held_item:
 		var already_has_item = false
 		for i in player.item_array:
@@ -42,6 +48,7 @@ func activate(player):
 				already_has_item = true
 		if !already_has_item:
 			player.item_array.append(held_item)
+			ms.mission_progress_check()
 			print("added item: '", held_item_name, "' to item array")
 		else:
 			print("WARNING: Item: ", held_item_name, " already in item array, ignoring")
@@ -52,7 +59,6 @@ func activate(player):
 func expend_prop():
 	spent = true
 	$AnimationPlayer.play("Used")
-
 
 
 ### SIGNALS ###

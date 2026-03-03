@@ -1,6 +1,6 @@
 extends Area2D
 
-var allow_spawn := true
+#var allow_spawn := true
 
 @export_file var actor_path
 @export var properties = {}
@@ -74,8 +74,8 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 	actor.free()
 
 func spawn():
-	await get_tree().process_frame #wait to set allow_spawn
-	if !allow_spawn: return
+	#await get_tree().process_frame #wait to set allow_spawn
+	#if !allow_spawn: return
 	if actor_path == null:
 		printerr("ERROR: no actor chosen in ActorSpawn")
 		return
