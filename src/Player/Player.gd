@@ -56,8 +56,9 @@ var shoot_dir := Vector2.LEFT
 
 ##action types-
 ##				goto_pos
-##x[1] = position
-##x[2]= speed; -1 can be instant? Might make different action for instant camera pos change
+##x[1] = positionX
+##x[2] = positionY
+##x[3]= speed
 ##				wait
 ##x[1]=framecount
 ##				inputlock
@@ -80,7 +81,7 @@ func cameracontrol_processing() -> void:
 	if Input.is_action_just_pressed("debug_testbutton"):
 		cameracontrol_add(["can_act",false])
 		cameracontrol_add( ["wait",20] )
-		cameracontrol_add( ["goto_pos",Vector2(3000,1968),5] )
+		cameracontrol_add( ["goto_pos",3000,1968,5] )
 		cameracontrol_add( ["wait",40] )
 		cameracontrol_add( ["reset"] )
 
@@ -100,7 +101,8 @@ func cameracontrol_processing() -> void:
 		var current_action = cameracontrol_actions[0]
 		match current_action[0]: #[0]= action name
 			"goto_pos":
-				$PlayerCamera.cameracontrol_topos(current_action[1],current_action[2])
+				$PlayerCamera.cameracontrol_topos\
+				(Vector2(current_action[1],current_action[2]),current_action[3])
 			"wait":
 				if current_action[1] > 0:
 					current_action[1] -= 1 #decrement happens inside the action instead of a dedicated timer

@@ -63,12 +63,11 @@ func cameracontrol_topos(targetpos:Vector2,speed:float) -> void:
 	if global_position.distance_to(targetpos) <= global_position.distance_to(global_position+movement):
 		global_position = targetpos
 		pc.cameracontrol_next() #end
-		
 	else:
 		global_position += movement
 
 ##resets camera back to player
-func cameracontrol_reset():
+func cameracontrol_reset() -> void:
 	position = Vector2(0,-16)
 	reset()
 
