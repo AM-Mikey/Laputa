@@ -59,10 +59,12 @@ var shoot_dir := Vector2.LEFT
 ##x[1] = positionX
 ##x[2] = positionY
 ##x[3]= speed
+##				goto_player
+##x[1] = speed
 ##				wait
-##x[1]=framecount
+##x[1] = framecount
 ##				inputlock
-##x[1]=bool. Calling this locks the input until the last action is done or inputlock,false is called.
+##x[1] = bool. Calling this locks the input until the last action or ['inputlock',false] is called.
 ##				reset
 ##instantly resets the camera back to player.
 
@@ -80,9 +82,11 @@ func cameracontrol_processing() -> void:
 	#test
 	if Input.is_action_just_pressed("debug_testbutton"):
 		cameracontrol_add(["can_act",false])
-		cameracontrol_add( ["wait",20] )
 		cameracontrol_add( ["goto_pos",3000,1968,5] )
 		cameracontrol_add( ["wait",40] )
+		cameracontrol_add( ["goto_player",2] )
+		cameracontrol_add( ["wait",20] )
+		cameracontrol_add( ["goto_pos",3000,1968,12] )
 		cameracontrol_add( ["reset"] )
 
 
@@ -103,6 +107,8 @@ func cameracontrol_processing() -> void:
 			"goto_pos":
 				$PlayerCamera.cameracontrol_topos\
 				(Vector2(current_action[1],current_action[2]),current_action[3])
+			"goto_player":
+				$PlayerCamera.cameracontrol_toplayer(current_action[1])
 			"wait":
 				if current_action[1] > 0:
 					current_action[1] -= 1 #decrement happens inside the action instead of a dedicated timer
@@ -114,6 +120,7 @@ func cameracontrol_processing() -> void:
 			"reset":
 				$PlayerCamera.cameracontrol_reset()
 				cameracontrol_next()
+
 
 func cameracontrol_add(action:Array) -> void:
 	cameracontrol_actions.append(action)

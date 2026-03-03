@@ -41,22 +41,16 @@ func _physics_process(_delta):
 			or inp.released("look_up") or inp.released("look_down"):
 				pan_vertical(get_v_dir())
 
-
-
 func cameracontrol_topos(targetpos:Vector2,speed:float) -> void:
-
 	if h_tween:
 		h_tween.kill()
 
 	var dragspeed = min(speed/10,0.1)
-
 	##drag speed trends to 0
 	if drag_horizontal_offset > 0:
 		drag_horizontal_offset = max(0,drag_horizontal_offset-dragspeed)
 	if drag_horizontal_offset < 0:
 		drag_horizontal_offset = min(0,drag_horizontal_offset+dragspeed)
-
-
 
 	var posdelta: = targetpos - global_position
 	var movement:= posdelta.normalized() * speed
@@ -66,10 +60,33 @@ func cameracontrol_topos(targetpos:Vector2,speed:float) -> void:
 	else:
 		global_position += movement
 
-##resets camera back to player
+##resets camera back to player instantly
 func cameracontrol_reset() -> void:
 	position = Vector2(0,-16)
 	reset()
+
+##Moves camera towards player position
+func cameracontrol_toplayer(speed:float) -> void:
+	if h_tween:
+		h_tween.kill()
+
+	var dragspeed = min(speed/10,0.1)
+	##drag speed trends to 0
+	if drag_horizontal_offset > 0:
+		drag_horizontal_offset = max(0,drag_horizontal_offset-dragspeed)
+	if drag_horizontal_offset < 0:
+		drag_horizontal_offset = min(0,drag_horizontal_offset+dragspeed)
+
+	var targetpos:Vector2 = pc.position
+	var posdelta:= targetpos - global_position
+	var movement:= posdelta.normalized() * speed
+	if global_position.distance_to(targetpos) <= global_position.distance_to(global_position+movement):
+		global_position = targetpos
+		pc.cameracontrol_next() #end
+	else:
+		global_position += movement
+
+
 
 func reset():
 	position_smoothing_enabled = false #reset_smoothing() has issues
