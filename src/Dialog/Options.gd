@@ -70,7 +70,7 @@ func hide_options():
 	is_exiting = true
 	get_parent().do_delay = false
 	#print("set_delay_false")
-	await get_tree().create_timer(0.1).timeout #wait for text to finish printing without delay
+	await get_tree().create_timer(0.1, true, false).timeout #wait for text to finish printing without delay
 	get_parent().dl = get_parent().get_node("NPC/DialogNPC")
 	get_parent().dl.text = ""
 	get_parent().flash_original_text = ""

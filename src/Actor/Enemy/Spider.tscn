@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ced57a1w0tgdk"]
+[gd_scene format=3 uid="uid://ced57a1w0tgdk"]
 
 [ext_resource type="Script" uid="uid://d2yv8egvqk153" path="res://src/Actor/Enemy/Spider.gd" id="1_shhv2"]
 [ext_resource type="Texture2D" uid="uid://bwimmhc71ip4k" path="res://assets/Actor/Enemy/SpiderBody.png" id="2_impgl"]
@@ -19,52 +19,51 @@ size = Vector2(48, 48)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o6omx"]
 
-[node name="Spider" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+[node name="Spider" type="CharacterBody2D" unique_id=1795526670 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("1_shhv2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2072140151]
 shape = SubResource("CircleShape2D_qm1p1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=243863388]
 position = Vector2(0, 7)
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=2112653579]
 position = Vector2(0, -7)
 shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=67842844]
 collision_layer = 262144
 collision_mask = 65536
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=799597565]
 shape = SubResource("RectangleShape2D_shhv2")
 debug_color = Color(1, 0, 0, 0.235294)
 
-[node name="PlayerDetector" type="Area2D" parent="."]
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=654109218]
 collision_layer = 0
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=592273465]
 shape = SubResource("2")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=68897135]
 light_mask = 4
 material = SubResource("11")
 texture = ExtResource("2_impgl")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_o6omx")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=53379330]
+libraries/ = SubResource("AnimationLibrary_o6omx")
 
-[node name="StateTimer" type="Timer" parent="."]
+[node name="StateTimer" type="Timer" parent="." unique_id=1570038962]
+process_callback = 0
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

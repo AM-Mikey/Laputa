@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bdlb4ndh8yuh2"]
+[gd_scene format=3 uid="uid://bdlb4ndh8yuh2"]
 
 [ext_resource type="Script" uid="uid://bc5jt2xwk1n7v" path="res://src/Actor/Enemy/Junior.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dfq7titr5btw6" path="res://assets/Actor/Enemy/Junior.png" id="2"]
@@ -105,71 +105,70 @@ _data = {
 &"Walk": SubResource("9")
 }
 
-[node name="Junior" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+[node name="Junior" type="CharacterBody2D" unique_id=1459592098 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("1")
 editor_hidden = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1692564585]
 position = Vector2(0, -10)
 shape = SubResource("CapsuleShape2D_2oly5")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=2059768783]
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=303664136]
 position = Vector2(0, -10)
 shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=1754009659]
 collision_layer = 262144
 collision_mask = 65536
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=45032850]
 position = Vector2(0, -10)
 shape = SubResource("1")
 debug_color = Color(1, 0, 0, 0.235294)
 
-[node name="PlayerDetector" type="Area2D" parent="."]
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=710817486]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=907619884]
 position = Vector2(-48, -16)
 shape = SubResource("10")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2073292579]
 position = Vector2(0, -16)
 texture = ExtResource("2")
 hframes = 4
 vframes = 5
-frame = 12
+frame = 8
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_eq2gb")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=106569615]
+libraries/ = SubResource("AnimationLibrary_eq2gb")
 
-[node name="FloorDetectorL" type="RayCast2D" parent="."]
+[node name="FloorDetectorL" type="RayCast2D" parent="." unique_id=290892272]
 position = Vector2(-6, -8)
 target_position = Vector2(0, 16)
 collision_mask = 8
 collide_with_areas = true
 
-[node name="FloorDetectorR" type="RayCast2D" parent="."]
+[node name="FloorDetectorR" type="RayCast2D" parent="." unique_id=1323628632]
 position = Vector2(6, -8)
 target_position = Vector2(0, 16)
 collision_mask = 8
 collide_with_areas = true
 
-[node name="StateTimer" type="Timer" parent="."]
+[node name="StateTimer" type="Timer" parent="." unique_id=479823069]
+process_callback = 0
 one_shot = true
 
-[node name="BulletOrigin" type="Marker2D" parent="."]
+[node name="BulletOrigin" type="Marker2D" parent="." unique_id=1371135166]
 position = Vector2(-13, -13)
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

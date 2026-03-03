@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dgsxaluaknjbk"]
+[gd_scene format=3 uid="uid://dgsxaluaknjbk"]
 
 [ext_resource type="Script" uid="uid://3bmujcg5fwtv" path="res://src/Bullet/GLauncher.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://b8hr08cetxnob" path="res://assets/Bullet/BulletGrenadeLauncher.png" id="2"]
@@ -53,46 +53,45 @@ _data = {
 &"FlipRight": SubResource("5")
 }
 
-[node name="GLauncher3" type="CharacterBody2D"]
+[node name="GLauncher3" type="CharacterBody2D" unique_id=1200597303]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1911874945]
 position = Vector2(0, 0.5)
 shape = SubResource("1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="PlayerCollisionDetector" parent="." instance=ExtResource("3")]
+[node name="PlayerCollisionDetector" parent="." unique_id=940254248 instance=ExtResource("3")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector" unique_id=97271008]
 shape = SubResource("CapsuleShape2D_3padu")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="ExplosionDetector" type="Area2D" parent="."]
+[node name="ExplosionDetector" type="Area2D" parent="." unique_id=1184395406]
 collision_layer = 0
 collision_mask = 196896
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionDetector" unique_id=362706793]
 shape = SubResource("3")
 debug_color = Color(0, 0.627451, 0.27451, 0.156863)
 
-[node name="End" type="Marker2D" parent="."]
+[node name="End" type="Marker2D" parent="." unique_id=917541286]
 position = Vector2(0, 8)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=476779638]
 texture = ExtResource("2")
 hframes = 8
 vframes = 3
 frame = 23
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=56231926]
+process_callback = 0
 one_shot = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_trxyl")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1759881315]
+libraries/ = SubResource("AnimationLibrary_trxyl")
 
 [connection signal="area_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
 [connection signal="body_entered" from="ExplosionDetector" to="." method="_on_CollisionDetector_body_entered"]

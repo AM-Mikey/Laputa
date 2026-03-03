@@ -80,7 +80,7 @@ func enter_idle(_last_state): #level 0
 	set_collision_shapes()
 	speed = Vector2.ZERO
 	$AnimationPlayer.play("Idle")
-	await get_tree().create_timer(idle_time).timeout
+	await get_tree().create_timer(idle_time, false, true).timeout
 	change_state("fly")
 
 

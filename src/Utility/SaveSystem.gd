@@ -283,7 +283,7 @@ func check_dat_file_presence(filename:String) -> void:
 
 
 func set_props_spent(limited_props):
-	await get_tree().create_timer(0.01).timeout #wait for props to spawn
+	await get_tree().create_timer(0.01, true, false).timeout #wait for props to spawn
 	for saved in limited_props:
 		for current in get_tree().get_nodes_in_group("LimitedProps"):
 			if saved["name"] == current.name:
@@ -292,7 +292,7 @@ func set_props_spent(limited_props):
 					current.expend_prop()
 
 func set_triggers_spent(limited_triggers):
-	await get_tree().create_timer(0.01).timeout #wait for triggers to spawn
+	await get_tree().create_timer(0.01, true, false).timeout #wait for triggers to spawn
 	for saved in limited_triggers:
 		for current in get_tree().get_nodes_in_group("LimitedTriggers"):
 			if saved["name"] == current.name:

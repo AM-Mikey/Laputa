@@ -115,7 +115,7 @@ func enter_idle(_last_state):
 		ap.play("UnflapAggro")
 	else:
 		ap.play("Unflap")
-	await get_tree().create_timer(idle_time).timeout
+	await get_tree().create_timer(idle_time, false, true).timeout
 	can_flap = true
 
 func do_idle():
@@ -136,7 +136,7 @@ func enter_flap(_last_state):
 		ap.play("FlapAggro")
 	else:
 		ap.play("Flap")
-	await get_tree().create_timer(flap_time).timeout
+	await get_tree().create_timer(flap_time, false, true).timeout
 	change_state("idle")
 
 

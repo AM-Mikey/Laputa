@@ -6,15 +6,13 @@ var collision_shape: RectangleShape2D
 
 var duration = 0.1
 
-func _ready(): #TODO think about a particle based buckshot system? then you can stop on world
+func setup():
 	$Timer.start(duration)
 	rotation_degrees = get_rot(direction)
 
 func _on_CollisionDetector_body_entered(body): #shadows parent
 	#do not stop on world
 	#do not stop on enemy
-	if disabled:
-		return
 	if body is TileMapLayer:
 		pass
 		#if body.tile_set.get_physics_layer_collision_layer(0) == 8: #world (layer value)

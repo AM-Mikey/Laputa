@@ -1,17 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjueepke5w45c"]
+[gd_scene format=3 uid="uid://cjueepke5w45c"]
 
 [ext_resource type="Script" uid="uid://dckpwqwvk8ib2" path="res://src/Gun/Red7.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bfwhdpytgrv8k" path="res://assets/Gun/Red7.png" id="2"]
 
-[node name="Red7" type="Node2D"]
+[node name="Red7" type="Node2D" unique_id=1817080786]
 script = ExtResource("1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1070453912]
 texture = ExtResource("2")
 
-[node name="Muzzle" type="Marker2D" parent="."]
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1088159458]
 position = Vector2(-7, -1)
 
-[node name="AutoReload" type="Timer" parent="."]
+[node name="AutoReload" type="Timer" parent="." unique_id=502082199]
+process_callback = 0
 
 [connection signal="timeout" from="AutoReload" to="." method="_on_AutoReload_timeout"]
