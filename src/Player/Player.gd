@@ -79,17 +79,6 @@ var cameracontrol_actions:Array[Array] =[
 var cameracontrol_active := false
 
 func cameracontrol_processing() -> void:
-	#test
-	if Input.is_action_just_pressed("debug_testbutton"):
-		cameracontrol_add(["can_act",false])
-		cameracontrol_add( ["goto_pos",3000,1968,5] )
-		cameracontrol_add( ["wait",40] )
-		cameracontrol_add( ["goto_player",2] )
-		cameracontrol_add( ["wait",20] )
-		cameracontrol_add( ["goto_pos",3000,1968,12] )
-		cameracontrol_add( ["reset"] )
-
-
 
 	##Terminate cameracontrol related code if no actions remain
 	if len(cameracontrol_actions) == 0:
