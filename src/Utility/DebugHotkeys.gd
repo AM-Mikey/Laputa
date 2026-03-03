@@ -53,7 +53,7 @@ func _input(event):
 			SaveSystem.write_mission_data_to_save()
 			SaveSystem.write_player_data_to_save(w.current_level)
 			SaveSystem.write_level_data_to_temp(w.current_level)
-			SaveSystem.copy_level_data_from_temp_to_save()
+			SaveSystem.copy_level_and_dialog_data_from_temp_to_save()
 
 
 		if event.is_action_pressed("debug_load"):
@@ -61,10 +61,11 @@ func _input(event):
 			var popup = POPUP.instantiate()
 			popup.text = "loaded save"
 			w.ui.add_child(popup)
-			SaveSystem.read_mission_data_from_save()
 			SaveSystem.read_player_data_from_save()
 			SaveSystem.read_level_data_from_save(w.current_level)
-			SaveSystem.copy_level_data_from_save_to_temp()
+			SaveSystem.read_dialog_data_from_save(w.current_level)
+			SaveSystem.copy_level_and_dialog_data_from_save_to_temp()
+			SaveSystem.read_mission_data_from_save()
 
 
 		if event.is_action_pressed("debug_fly"):

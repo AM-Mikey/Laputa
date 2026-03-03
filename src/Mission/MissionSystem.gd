@@ -2,16 +2,16 @@ extends Node
 
 const INVENTORY_ICON = preload("res://src/UI/Inventory/InventoryIcon.tscn")
 
-const MAIN_MISSION = [ #[name, description, trigger_type, trigger_value]
-	["talk_npc_a",
+const MAIN_MISSION = [ #[name, trigger_type, trigger_value, description]
+	["talk_npc_a", "", "",
 	"I need to talk to NPC A"],
-	["talk_npc_b",
+	["talk_npc_b", "", "",
 	"I need to talk to NPC B"],
-	["talk_npc_c",
+	["talk_npc_c", "", "",
 	"I need to talk to NPC C"],
-	["talk_npc_d",
+	["talk_npc_d", "", "",
 	"I need to talk to NPC D"],
-	["celebrate",
+	["celebrate", "", "",
 	"I've completed the mission demo!"],
 ]
 
@@ -73,6 +73,7 @@ func end_side_mission(mission_name):
 	var mission = mission_name_to_mission(mission_name)
 	mission.current_stage = "complete"
 	print("Side mission %s completed" %mission_name)
+
 	update_level_via_mission(mission_name)
 
 
@@ -83,7 +84,7 @@ func mission_progress_check(): #TODO: compress these into one
 			if s[0] == m.current_stage:
 				stage = s
 		var do_progress = false
-		if stage.size() == 3: #has trigger and value
+		if stage.size() >= 3: #has trigger and value
 			match stage[1]:
 				"item": #search inventory for item
 					for i in f.pc().item_array:
@@ -108,22 +109,22 @@ func mission_progress_check(): #TODO: compress these into one
 	#main mission
 	var stage = ms.main_mission_stage
 	var do_progress = false
-	if stage.size() == 3: #has trigger and value
-		match stage[2]:
+	if stage.size() >= 3: #has trigger and value
+		match stage[1]:
 			"item": #search inventory for item
 				for i in f.pc().item_array:
-					if stage[3].to_pascal_case() == i.resource_path.get_file().trim_suffix(".tres"):
+					if stage[2].to_pascal_case() == i.resource_path.get_file().trim_suffix(".tres"):
 						do_progress = true
 			"gun": #search guns for gun
 				for g in f.pc().guns:
-					if stage[3].to_pascal_case() == g.name:
+					if stage[2].to_pascal_case() == g.name:
 						do_progress = true
 			"topic": #search topic array for topic
 				for t in f.pc().topic_array:
-					if stage[3].to_pascal_case() == t.topic_name:
+					if stage[2].to_pascal_case() == t.topic_name:
 						do_progress = true
 			"level_enter": #check if we entered the level with the given name
-				if stage[3].to_pascal_case() ==  w.current_level.name:
+				if stage[2].to_pascal_case() ==  w.current_level.name:
 					do_progress = true
 			"boss_defeat": #check if we defeated a boss
 				pass
@@ -136,17 +137,17 @@ func setup_level_from_array(array):
 		var mission_name = i[0]
 		var mission_stage = i[1]
 		#print("testing: ", mission_name, mission_stage)
-		setup_level_via_mission(mission_name, mission_stage)
+		update_level_via_mission(mission_name, mission_stage, false) #don't update conversations, instead we load them from save
 
 func setup_level_from_mission_progress_history():
 	print("from history")
 	for i in mission_progress_history:
 		var mission_name = i[0]
 		var mission_stage = i[1]
-		setup_level_via_mission(mission_name, mission_stage)
+		update_level_via_mission(mission_name, mission_stage, false)  #don't update conversations, instead we load them from save
 
 
-func update_level_via_mission(mission_name = "Main", mission_stage = "current"): #while already in level
+func update_level_via_mission(mission_name = "Main", mission_stage = "current", update_conversations = true): #while already in level
 	var json = load(w.current_level.mission_level_update)
 	var data = json.get_data()
 	if mission_stage == "current":
@@ -154,7 +155,6 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current"):
 			mission_stage = main_mission_stage[0]
 		else:
 			mission_stage = mission_name_to_mission(mission_name).current_stage
-
 #spawn
 	var enemy_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "enemy_spawn", "EnemySpawns", true)
 	for k in enemy_spawn_dict.keys():
@@ -215,113 +215,34 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current"):
 	for k in trigger_runtime_position_offset_dict.keys():
 		k.global_position += array_to_vector2(trigger_runtime_position_offset_dict[k])
 
-#npc_set_conversation_queue
-	var npc_set_conversation_queue_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_set_conversation_queue", "NPCs", false)
-	for k in npc_set_conversation_queue_dict.keys():
-		var convo_queue = get_conversation_queue_from_mixed_or_partial(npc_set_conversation_queue_dict[k])
-		if convo_queue == [[]]:
-			k.conversation_queue = []
-			k.side_conversation_queue = []
-			return
-		var main_queue = []
-		var side_queue = []
-		for a in convo_queue:
-			match a[1]:
-				"main": main_queue.append(a)
-				"side": side_queue.append(a)
-		if !main_queue.is_empty():
-			k.conversation_queue = main_queue
-		if !side_queue.is_empty():
-			k.side_conversation_queue = side_queue
-
-#npc_append_conversation_queue
-	var npc_append_conversation_queue_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_append_conversation_queue", "NPCs", false)
-	for k in npc_append_conversation_queue_dict.keys():
-		var convo_queue = get_conversation_queue_from_mixed_or_partial(npc_append_conversation_queue_dict[k])
-		for a in convo_queue:
-			match a[1]:
-				"main": k.conversation_queue.append(a)
-				"side": k.side_conversation_queue.append(a)
-
-func setup_level_via_mission(mission_name = "Main", mission_stage = "current"): #on level enter
-	var json = load(w.current_level.mission_level_update)
-	var data = json.get_data()
-	if mission_stage == "current":
-		if mission_name == "Main":
-			mission_stage = main_mission_stage[0]
-		else:
-			mission_stage = mission_name_to_mission(mission_name).current_stage
-
-#allow_spawn
-	var enemy_allow_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "enemy_allow_spawn", "EnemySpawns", true)
-	for k in enemy_allow_spawn_dict.keys():
-		k.allow_spawn = enemy_allow_spawn_dict[k]
-	var npc_allow_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_allow_spawn", "NPCSpawns", true)
-	for k in npc_allow_spawn_dict.keys():
-		k.allow_spawn = npc_allow_spawn_dict[k]
-	var prop_allow_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "prop_allow_spawn", "PropSpawns", true)
-	for k in prop_allow_spawn_dict.keys():
-		k.allow_spawn = prop_allow_spawn_dict[k]
-	var trigger_allow_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "trigger_allow_spawn", "TriggerSpawns", true)
-	for k in trigger_allow_spawn_dict.keys():
-		k.allow_spawn = trigger_allow_spawn_dict[k]
-
-#spawn_position
-	var enemy_spawn_position_dict = get_matching_entities_values(data, mission_name, mission_stage, "enemy_spawn_position", "EnemySpawns", true)
-	for k in enemy_spawn_position_dict.keys():
-		k.global_position = array_to_vector2(enemy_spawn_position_dict[k])
-	var npc_spawn_position_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_spawn_position", "NPCSpawns", true)
-	for k in npc_spawn_position_dict.keys():
-		k.global_position = array_to_vector2(npc_spawn_position_dict[k])
-	var prop_spawn_position_dict = get_matching_entities_values(data, mission_name, mission_stage, "prop_spawn_position", "PropSpawns", true)
-	for k in prop_spawn_position_dict.keys():
-		k.global_position = array_to_vector2(prop_spawn_position_dict[k])
-	var trigger_spawn_position_dict = get_matching_entities_values(data, mission_name, mission_stage, "trigger_spawn_position", "TriggerSpawns", true)
-	for k in trigger_spawn_position_dict.keys():
-		k.global_position = array_to_vector2(trigger_spawn_position_dict[k])
-
-#spawn_position_offset
-	var enemy_spawn_position_offset_dict = get_matching_entities_values(data, mission_name, mission_stage, "enemy_spawn_position_offset", "EnemySpawns", true)
-	for k in enemy_spawn_position_offset_dict.keys():
-		k.global_position += array_to_vector2(enemy_spawn_position_offset_dict[k])
-	var npc_spawn_position_offset_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_spawn_position_offset", "NPCSpawns", true)
-	for k in npc_spawn_position_offset_dict.keys():
-		k.global_position += array_to_vector2(npc_spawn_position_offset_dict[k])
-	var prop_spawn_position_offset_dict = get_matching_entities_values(data, mission_name, mission_stage, "prop_spawn_position_offset", "PropSpawns", true)
-	for k in prop_spawn_position_offset_dict.keys():
-		k.global_position += array_to_vector2(prop_spawn_position_offset_dict[k])
-	var trigger_spawn_position_offset_dict = get_matching_entities_values(data, mission_name, mission_stage, "trigger_spawn_position_offset", "TriggerSpawns", true)
-	for k in trigger_spawn_position_offset_dict.keys():
-		k.global_position += array_to_vector2(trigger_spawn_position_offset_dict[k])
-
-#npc_set_conversation_queue
-	var npc_set_conversation_queue_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_set_conversation_queue", "NPCSpawns", true)
-	for k in npc_set_conversation_queue_dict.keys():
-		var convo_queue = get_conversation_queue_from_mixed_or_partial(npc_set_conversation_queue_dict[k])
-		var main_queue = []
-		var side_queue = []
-		for a in convo_queue:
-			match a[1]:
-				"main": main_queue.append(a)
-				"side": side_queue.append(a)
-		if !main_queue.is_empty():
-			k.properties["conversation_queue"][0] = main_queue
-		if !side_queue.is_empty():
-			k.properties["side_conversation_queue"][0] = side_queue
-#npc_append_conversation_queue
-	var npc_append_conversation_queue_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_append_conversation_queue", "NPCSpawns", true)
-	for k in npc_append_conversation_queue_dict.keys():
-		var convo_queue = get_conversation_queue_from_mixed_or_partial(npc_append_conversation_queue_dict[k])
-		if convo_queue == [[]]:
-			k.conversation_queue = []
-			k.side_conversation_queue = []
-			return
-		for a in convo_queue:
-			match a[1]:
-				"main": k.properties["conversation_queue"][0].append(a)
-				"side": k.properties["side_conversation_queue"][0].append(a)
-
-
+##npc_set_conversation_queue #TODO: depricate
+	#var npc_set_conversation_queue_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_set_conversation_queue", "NPCs", false)
+	#for k in npc_set_conversation_queue_dict.keys():
+		#var convo_queue = get_conversation_queue_from_mixed_or_partial(npc_set_conversation_queue_dict[k])
+		#if convo_queue == [[]]:
+			#k.conversation_queue = []
+			#k.side_conversation_queue = []
+			#return
+		#var main_queue = []
+		#var side_queue = []
+		#for a in convo_queue:
+			#match a[1]:
+				#"main": main_queue.append(a)
+				#"side": side_queue.append(a)
+		#if !main_queue.is_empty():
+			#k.conversation_queue = main_queue
+		#if !side_queue.is_empty():
+			#k.side_conversation_queue = side_queue
+	if update_conversations:
+		#npc_append_conversation_queue
+		var npc_append_conversation_queue_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_append_conversation_queue", "NPCs", false)
+		for k in npc_append_conversation_queue_dict.keys():
+			var convo_queue = get_conversation_queue_from_mixed_or_partial(npc_append_conversation_queue_dict[k])
+			for a in convo_queue:
+				match a[1]:
+					"main": k.conversation_queue.append(a)
+					"side": k.side_conversation_queue.append(a)
+				SaveSystem.write_dialog_data_to_temp(w.current_level, k)
 
 #level_conversation_on_enter
 	if data.has("level_conversation_on_enter"):
@@ -369,9 +290,9 @@ func get_conversation_queue_from_mixed_or_partial(mixed_or_partial) -> Array:
 	if mixed_or_partial is String:
 		out = [[mixed_or_partial, "main", false, true, false]]
 	elif mixed_or_partial is Array:
-		if mixed_or_partial == [] or mixed_or_partial == [[]]:
-			out = [[]]
-			return out
+		#if mixed_or_partial == [] or mixed_or_partial == [[]]: Don't clear like this anymore. probably just set repeating to false instead?
+			#out = [[]]
+			#return out
 		match mixed_or_partial[0].size(): #if array, how abbreviated is it? take the first as an example
 			1:
 				for a in mixed_or_partial:

@@ -54,9 +54,10 @@ func _on_new():
 
 func _on_load():
 	SaveSystem.read_player_data_from_save()
-	SaveSystem.read_mission_data_from_save()
 	SaveSystem.read_level_data_from_save(w.current_level)
-	SaveSystem.copy_level_data_from_save_to_temp()
+	SaveSystem.read_dialog_data_from_save(w.current_level)
+	SaveSystem.copy_level_and_dialog_data_from_save_to_temp()
+	SaveSystem.read_mission_data_from_save()
 	exit()
 
 func _on_options():

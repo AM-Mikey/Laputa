@@ -152,7 +152,7 @@ func setup_level_editor_layer(): #the layer for editor overlays that go over the
 
 
 
-func exit():	#TODO: make this an editor_exit signal ## no? that just decentralizes and makes the order that this triggers in unclear. the order is important!
+func exit():
 	inspector.exit()
 	if w.current_level.has_node("TileAnimator"):
 		w.current_level.get_node("TileAnimator").editor_exit()

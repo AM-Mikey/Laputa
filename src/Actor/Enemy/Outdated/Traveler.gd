@@ -25,9 +25,9 @@ func _ready():
 	move_dir = starting_direction
 	look_dir = starting_direction
 	acceleration = 25
-	
+
 	reward = 3
-	
+
 #	$RayCast2D.cast_to = Vector2(200, 200) * starting_direction #cast ray left or right 200 px
 
 func _physics_process(_delta):
@@ -52,12 +52,12 @@ func _physics_process(_delta):
 				#print("wall is right")
 				move_dir = Vector2.DOWN
 				ground_dir = Vector2.RIGHT
-		
+
 		elif is_on_floor() and is_on_wall():
 			#print("on floor and wall")
 			move_dir = Vector2.UP
 			ground_dir = Vector2.LEFT
-		
+
 		elif is_on_ceiling() and is_on_wall():
 			#print("on ceiling and wall")
 			move_dir = Vector2.DOWN
@@ -103,16 +103,16 @@ func calculate_movevelocity(
 		ground_dir: Vector2,
 		speed: Vector2
 		) -> Vector2:
-	
+
 	var out: = linearvelocity
 	var gravity_vector = ground_dir * gravity
 
 	out.x = speed.x * move_dir.x
 	out.y = speed.y * move_dir.y
 	out += gravity_vector
-	
+
 	return out
-	
+
 func animate():
 	match ground_dir:
 		Vector2.LEFT:

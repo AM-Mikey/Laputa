@@ -102,55 +102,25 @@ func _input(event):
 func first_time_level_setup():
 	print("first time level setup")
 	add_child(JUNIPER.instantiate())
-	var pc = f.pc()
-	var player_camera = pc.get_node("PlayerCamera")
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
-
 	current_level = load(start_level_path).instantiate()
 	add_child(current_level)
 
-	#mission stuff
-	if current_level.mission_level_update:
-		if current_level.debug_main_mission_stage_name: #TODO: check some global debug version variable
-			var array = []
-			for s in ms.MAIN_MISSION: #add all stages until we get to the one that matches
-				array.append(["Main", s[0]])
-				if s[0] == current_level.debug_main_mission_stage_name:
-					ms.main_mission_stage = s
-					break
-			ms.setup_level_from_array(array)
-		else:
-			ms.setup_level_via_mission("Main") #first only
-
-		if !current_level.side_missions_on_enter.is_empty():
-			for m in current_level.side_missions_on_enter:
-				ms.start_side_mission(m) #Warning: this does runtime updates
-
-		var array = [] #side mission updates
-		for m in ms.side_missions:
-			for s in m.stages:
-				array.append([m.resource_path.get_file().trim_suffix(".tres"), s[0]])
-				if s[0] == m.current_stage:
-					break
-		ms.setup_level_from_array(array)
-		ms.mission_progress_check()
-
-	pc.global_position = get_spawn_point().global_position
+	$Juniper.global_position = get_spawn_point().global_position
 	$Juniper/PlayerCamera.reset()
 
 	#wipe would go here if we want one
 	display_level_text(current_level)
 	run_conversation_on_enter(current_level)
+	await get_tree().physics_frame
+	await get_tree().physics_frame #wait for npcs to spawn, takes 2 frames for some reason
+	setup_missions(false, "first_time")
 
 func change_level_via_code(level_path, use_save_data):
-	print("changing level via code...")
-
-	if ml.has_node("TitleScreen"):
-		ml.get_node("TitleScreen").exit()
-	if ml.has_node("PauseMenu"):
-		ml.get_node("PauseMenu").exit()
-	if has_node("MenuLayer/LevelSelect"):
-		get_node("MenuLayer/LevelSelect").queue_free()
+	print("changing level via code")
+	if ml.has_node("TitleScreen"): ml.get_node("TitleScreen").exit()
+	if ml.has_node("PauseMenu"): ml.get_node("PauseMenu").exit()
+	if has_node("MenuLayer/LevelSelect"): get_node("MenuLayer/LevelSelect").queue_free()
 	if f.db(): await f.db().exit()
 	if f.hud():
 		$HUDLayer/HUDAnimator.play("RESET")
@@ -158,50 +128,15 @@ func change_level_via_code(level_path, use_save_data):
 	clear_spawn_layers()
 	current_level.free()
 	current_level = null
-	if f.pc() != null:
-		$Juniper.free()
-	add_child(JUNIPER.instantiate())
+	if f.pc() != null: $Juniper.free()
 
+	add_child(JUNIPER.instantiate())
 	$Juniper.velocity = Vector2.ZERO
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
-
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
 
-	#mission stuff
-	if current_level.mission_level_update:
-		if !use_save_data:
-			if current_level.debug_main_mission_stage_name: #TODO: check some global debug version variable
-				var array = []
-				for s in ms.MAIN_MISSION: #add all stages until we get to the one that matches
-					array.append(["Main", s[0]])
-					if s[0] == current_level.debug_main_mission_stage_name:
-						ms.main_mission_stage = s
-						break
-				ms.setup_level_from_array(array)
-			else:
-				ms.setup_level_via_mission("Main") #first only
-
-			var array = [] #side mission updates
-			for m in ms.side_missions:
-				for s in m.stages:
-					array.append([m.resource_path.get_file().trim_suffix(".tres"), s[0]])
-					if s[0] == m.current_stage:
-						break
-		else:
-			ms.setup_level_from_mission_progress_history()
-
-		if !current_level.side_missions_on_enter.is_empty():
-			for m in current_level.side_missions_on_enter:
-				ms.start_side_mission(m) #Warning: this does runtime updates
-				ms.setup_level_via_mission(m)
-			ms.mission_progress_check()
-
-
-
-	for s in get_tree().get_nodes_in_group("SpawnPoints"):
-		$Juniper.global_position = s.global_position
-
+	$Juniper.global_position = get_spawn_point().global_position
 	$Juniper/PlayerCamera.reset()
 
 	#wipe would go here if we want one
@@ -209,11 +144,16 @@ func change_level_via_code(level_path, use_save_data):
 	run_conversation_on_enter(current_level)
 	if use_save_data:
 		SaveSystem.read_level_data_from_temp(current_level)
+	await get_tree().physics_frame
+	await get_tree().physics_frame #wait for npcs to spawn, takes 2 frames for some reason
+	if use_save_data:
+		SaveSystem.read_dialog_data_from_temp(current_level)
+	setup_missions(use_save_data, "code")
 
 
 
 func change_level_via_trigger(level_path, door_index):
-	print("changing level via trigger...")
+	print("changing level via trigger")
 	SaveSystem.write_level_data_to_temp(current_level)
 	if f.db(): await f.db().exit()
 	if f.hud():
@@ -222,47 +162,88 @@ func change_level_via_trigger(level_path, door_index):
 	var old_level_path = current_level.scene_file_path
 	current_level.free()
 	current_level = null
+	#Note: Juniper and HUD are never freed this way
 
-	#await get_tree().process_frame
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
 
-	#mission_stuff
-	if current_level.mission_level_update:
-		if !current_level.side_missions_on_enter.is_empty():
-			for m in current_level.side_missions_on_enter:
-				ms.start_side_mission(m) #Warning: this does runtime updates
+	$Juniper/PlayerCamera.reset()
 
-		var main_array = []
-		for s in ms.MAIN_MISSION: #add all stages until we get to the one that matches
-			main_array.append(["Main", s[0]])
-			if s[0] == current_level.debug_main_mission_stage_name:
-				ms.main_mission_stage = s
-				break TODO: Doesnt break
-		ms.setup_level_from_array(main_array)
+	SaveSystem.read_level_data_from_temp(current_level)
+	await get_tree().process_frame
+	await get_tree().process_frame #wait for npcs to spawn, takes 2 frames for some reason
+	SaveSystem.read_dialog_data_from_temp(current_level)
+	setup_missions(false, "trigger")
+	setup_door(door_index, old_level_path)
 
-		var side_array = [] #side mission updates
+	###transition out
+	if bl.has_node("TransitionWipe"): #LOADZONES
+		await get_tree().create_timer(0.8).timeout
+		$BlackoutLayer/TransitionWipe.play_out_animation()
+		await $BlackoutLayer/TransitionWipe.tree_exiting #wait for a bit of the animation to finish
+		$Juniper.can_input = true
+
+	elif bl.has_node("TransitionIris"): #DOORS
+		await get_tree().create_timer(0.4).timeout
+		$BlackoutLayer/TransitionIris.play_out_animation()
+		await $BlackoutLayer/TransitionIris.tree_exiting #wait for a bit of the animation to finish
+		$Juniper.can_input = true
+
+	if old_level_path != level_path:
+		display_level_text(current_level)
+	run_conversation_on_enter(current_level)
+
+
+
+func setup_missions(use_save_data: bool, type = "first_time"):
+	if !current_level.mission_level_update: return
+
+	#main mission
+	if use_save_data: #setup all main and side stages
+		ms.setup_level_from_mission_progress_history()
+	else:
+		if type != "trigger": #Don't if we're moving thru a door or loadzone
+			if current_level.debug_main_mission_stage_name: #add all stages until we get to the one that matches.
+				var main_array = []
+				var main_array_completed = false
+				for s in ms.MAIN_MISSION:
+					if !main_array_completed:
+						main_array.append(["Main", s[0]])
+						if s[0] == current_level.debug_main_mission_stage_name:
+							ms.main_mission_stage = s
+							main_array_completed = true
+				ms.setup_level_from_array(main_array)
+			else: #start with the very first main mission stage
+				var update_conversations = true if type in ["first_time"] else false
+				ms.update_level_via_mission("Main", "current", update_conversations)
+
+		#side missions
+		for m in current_level.side_missions_on_enter: #never need to add these if we're loading save data
+			ms.start_side_mission(m) #Note: this does runtime updates for these missions
+
+		var side_array = []
+		var side_array_completed = false
 		for m in ms.side_missions:
-			for s in m.stages:
-				side_array.append([m.resource_path.get_file().trim_suffix(".tres"), s[0]])
-				if s[0] == m.current_stage:
-					break TODO: Doesnt break
+			if !side_array_completed:
+				for s in m.stages:
+					if !side_array_completed:
+						side_array.append([m.resource_path.get_file().trim_suffix(".tres"), s[0]])
+						if s[0] == m.current_stage:
+							side_array_completed = true
 		ms.setup_level_from_array(side_array)
 		ms.mission_progress_check()
 
-	$Juniper/PlayerCamera.reset()
 
-	#### get the door with the right index
+
+func setup_door(door_index, old_level_path):
 	var doors_found = 0
-	await get_tree().process_frame #give time for triggers to load
-	await get_tree().process_frame
-	var triggers = get_tree().get_nodes_in_group("LevelTriggers")
-	for t in triggers:
+
+	for t in get_tree().get_nodes_in_group("LevelTriggers"):
 		var do_door_check = false
 		if t.is_in_group("Doors"):
-			if t.same_level and t.door_index == door_index:
+			if t.same_level && t.door_index == door_index:
 				do_door_check = true
-		if t.level == old_level_path and t.door_index == door_index:
+		if t.level == old_level_path && t.door_index == door_index:
 			do_door_check = true
 
 		if do_door_check:
@@ -278,32 +259,11 @@ func change_level_via_trigger(level_path, door_index):
 			elif t.is_in_group("Doors"):
 				$Juniper.global_position = t.global_position + Vector2(size.x * 0.5, size.y)
 
-
-		#print("doors: ", doors_found)
 		if doors_found == 0:
 			printerr("ERROR: could not find door with right index")
 		if doors_found > 1:
 			printerr("ERROR: more than one door with same index")
 
-	SaveSystem.read_level_data_from_temp(current_level)
-
-	###transition out
-	if bl.has_node("TransitionWipe"): #LOADZONES
-		await get_tree().create_timer(0.8).timeout
-		$BlackoutLayer/TransitionWipe.play_out_animation()
-		await $BlackoutLayer/TransitionWipe.tree_exiting #wait for a bit of the animation to finish
-		$Juniper.can_input = true
-
-	elif bl.has_node("TransitionIris"): #DOORS
-		await get_tree().create_timer(0.4).timeout
-		$BlackoutLayer/TransitionIris.play_out_animation()
-		await $BlackoutLayer/TransitionIris.tree_exiting #wait for a bit of the animation to finish
-		$Juniper.can_input = true
-
-	if (old_level_path != level_path):
-		display_level_text(current_level)
-	run_conversation_on_enter(current_level)
-	#await get_tree().create_timer(0.01).timeout
 
 
 ### HELPERS ###

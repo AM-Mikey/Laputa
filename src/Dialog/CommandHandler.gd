@@ -111,6 +111,9 @@ func parse_command(string):
 			var a = string.split(",")
 			ms.seek_side_misssion(a[0], a[1])
 		"end_side_mission":#/end_side_mission, (string: mission_name(filename))
+			for n in get_tree().get_nodes_in_group("NPCs"):
+				if n.dialog_box == db:
+					n.side_conversation_queue[-1][3] = false #set repeatable = false so we clean up the side mission dialog
 			ms.end_side_mission(argument)
 
 

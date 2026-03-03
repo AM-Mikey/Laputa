@@ -1,5 +1,5 @@
 {
-	"npc_set_conversation_queue": {
+	"npc_append_conversation_queue": {
 		"Main": {
 			"npc_a": {
 				"talk_npc_a": "a_s0",
@@ -33,7 +33,6 @@
 		"SideMissionExample": {
 			"npc_d": {
 				"give": [["salmiakki1", "side", true]],
-				"complete": [[]],
 			},
 		},
 	},

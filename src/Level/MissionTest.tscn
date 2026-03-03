@@ -92,11 +92,9 @@ position = Vector2(304, 288)
 actor_path = "res://src/Actor/NPC/Nun.tscn"
 properties = {
 "base_gravity": [300.0, 3],
-"conversation_queue": [[["d_s0", "main", false, true, false]], 27],
 "dialog_json": ["res://src/Dialog/MissionTest.json", 4],
 "editor_hidden": [false, 1],
 "id": ["npc_d", 4],
-"side_conversation_queue": [[["salmiakki0", "side", false, true, false]], 27],
 "speed": [Vector2(150, 350), 5],
 "starting_state": ["idle", 4],
 "voiced": [true, 1],
@@ -110,11 +108,9 @@ position = Vector2(64, 288)
 actor_path = "res://src/Actor/NPC/Tabith.tscn"
 properties = {
 "base_gravity": [300.0, 3],
-"conversation_queue": [[["a_s0", "main", false, true, false]], 27],
 "dialog_json": ["res://src/Dialog/MissionTest.json", 4],
 "editor_hidden": [false, 1],
 "id": ["npc_a", 4],
-"side_conversation_queue": [{}, 27],
 "speed": [Vector2(150, 350), 5],
 "starting_state": ["idle", 4],
 "voiced": [true, 1],
@@ -128,11 +124,9 @@ position = Vector2(144, 288)
 actor_path = "res://src/Actor/NPC/Sage.tscn"
 properties = {
 "base_gravity": [300.0, 3],
-"conversation_queue": [[["b_s0", "main", false, true, false], ["topics", "main", false, true, false]], 27],
 "dialog_json": ["res://src/Dialog/MissionTest.json", 4],
 "editor_hidden": [false, 1],
 "id": ["npc_b", 4],
-"side_conversation_queue": [{}, 27],
 "speed": [Vector2(150, 350), 5],
 "starting_state": ["idle", 4],
 "voiced": [true, 1],
@@ -146,11 +140,9 @@ position = Vector2(232, 288)
 actor_path = "res://src/Actor/NPC/Basil.tscn"
 properties = {
 "base_gravity": [300.0, 3],
-"conversation_queue": [[["c_s0", "main", false, true, false]], 27],
 "dialog_json": ["res://src/Dialog/MissionTest.json", 4],
 "editor_hidden": [false, 1],
 "id": ["npc_c", 4],
-"side_conversation_queue": [{}, 27],
 "speed": [Vector2(150, 350), 5],
 "starting_state": ["idle", 4],
 "voiced": [true, 1],
