@@ -94,7 +94,9 @@ position = Vector2(2472, 2176)
 
 [node name="Waypoint0" parent="." unique_id=1432238783 instance=ExtResource("8_owv0v")]
 position = Vector2(1534, 2044)
+owner_id = "PlayerCamera"
 
 [node name="Waypoint1" parent="." unique_id=142825389 instance=ExtResource("8_owv0v")]
 position = Vector2(2366, 1716)
+owner_id = "PlayerCamera"
 index = 1
