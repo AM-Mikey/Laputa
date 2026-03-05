@@ -172,23 +172,10 @@ func manual_reset(): #resets camera back to player instantly
 	position = Vector2(0,-16)
 	reset()
 
-func manual_to_player(speed: float): #Moves camera towards player position
-	if h_tween:
-		h_tween.kill()
-	if v_tween:
-		v_tween.kill()
-	var drag_speed = min(speed/200,0.2)
-	drag_horizontal_offset = trend_float_to_zero(drag_horizontal_offset,drag_speed)
-	drag_vertical_offset = trend_float_to_zero(drag_vertical_offset,drag_speed)
+func manual_to_player(speed: float) -> void: #Moves camera towards player position
+	var player_pos: Vector2 = pc.position
+	manual_to_position(player_pos,speed)
 
-	var target_pos: Vector2 = pc.position
-	var pos_delta := target_pos - global_position
-	var movement := pos_delta.normalized() * speed
-	if global_position.distance_to(target_pos) <= global_position.distance_to(global_position + movement):
-		global_position = target_pos
-		cameracontrol_next() #end
-	else:
-		global_position += movement
 
 func manual_to_waypoint(waypoint_index:int,speed:float) -> void:
 	var waypoints := get_tree().get_nodes_in_group("Waypoints")
@@ -201,7 +188,6 @@ func manual_to_waypoint(waypoint_index:int,speed:float) -> void:
 			print ("WAYPOINT NOT FOUND!!!!!")
 	target_pos = cameracontrol_target.position
 	manual_to_position(target_pos,speed)
-
 
 
 
