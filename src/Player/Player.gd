@@ -54,69 +54,6 @@ var look_dir := Vector2i.LEFT
 var direction_lock := Vector2i.ZERO
 var shoot_dir := Vector2.LEFT
 
-##action types-
-##				goto_pos
-##x[1] = positionX
-##x[2] = positionY
-##x[3]= speed
-##				goto_player
-##x[1] = speed
-##				wait
-##x[1] = framecount
-##				inputlock
-##x[1] = bool. Calling this locks the input until the last action or ['inputlock',false] is called.
-##				reset
-##instantly resets the camera back to player.
-
-##future actions:
-##goto_object. Uses the node directory in player's parent?
-##goto_player. Same as goto_pos but player position
-
-var cameracontrol_actions:Array[Array] =[
-
-	]
-
-var cameracontrol_active := false
-
-func cameracontrol_processing() -> void:
-
-	##Terminate cameracontrol related code if no actions remain
-	if len(cameracontrol_actions) == 0:
-		if cameracontrol_active == true:
-			cameracontrol_active = false
-			inp.can_act = true
-			$PlayerCamera.cameracontrol_reset()
-
-		return
-	##Camera control code
-	else:
-		cameracontrol_active = true
-		var current_action = cameracontrol_actions[0]
-		match current_action[0]: #[0]= action name
-			"goto_pos":
-				$PlayerCamera.cameracontrol_topos\
-				(Vector2(current_action[1],current_action[2]),current_action[3])
-			"goto_player":
-				$PlayerCamera.cameracontrol_toplayer(current_action[1])
-			"wait":
-				if current_action[1] > 0:
-					current_action[1] -= 1 #decrement happens inside the action instead of a dedicated timer
-				else:
-					cameracontrol_next()
-			"can_act":
-				inp.can_act = current_action[1]
-				cameracontrol_next()
-			"reset":
-				$PlayerCamera.cameracontrol_reset()
-				cameracontrol_next()
-
-
-func cameracontrol_add(action:Array) -> void:
-	cameracontrol_actions.append(action)
-
-##Removes the current action
-func cameracontrol_next() -> void:
-	cameracontrol_actions.pop_at(0)
 
 
 enum SoundProfile {NORMAL, UNDERWATER}
