@@ -82,6 +82,9 @@ func reset():
 ##x[3]= speed
 ##				goto_player
 ##x[1] = speed
+##				goto_waypoint
+##x[1] = waypoint index
+##x[2] = speed
 ##				wait
 ##x[1] = framecount
 ##				can_act
@@ -91,7 +94,6 @@ func reset():
 ##
 ##future actions:
 ##goto_object. Uses the node directory in player's parent?
-##goto_player. Same as goto_pos but player position
 var cameracontrol_actions:Array[Array] =[
 
 	]
@@ -102,10 +104,10 @@ var cameracontrol_target:Node = null #reference to a node, not strictly necessar
 func cameracontrol_processing() -> void:
 	if Input.is_action_just_pressed("debug_testbutton"):
 		cameracontrol_add(['can_act',false] )
-		cameracontrol_add( ['goto_pos',3000,2700,50] )
-		cameracontrol_add( ['wait',40] )
-
-
+		cameracontrol_add( ['goto_waypoint',0,16] )
+		cameracontrol_add( ['wait',20] )
+		cameracontrol_add( ['goto_waypoint',1,8] )
+		cameracontrol_add( ['wait',20] )
 
 	##Terminate cameracontrol related code if no actions remain
 	if len(cameracontrol_actions) == 0:
@@ -116,6 +118,7 @@ func cameracontrol_processing() -> void:
 		return
 	##Camera control code
 	else:
+		print (cameracontrol_actions)
 		cameracontrol_active = true
 		var current_action = cameracontrol_actions[0]
 		match current_action[0]: #[0]= action name
@@ -123,6 +126,8 @@ func cameracontrol_processing() -> void:
 				manual_to_position(Vector2(current_action[1],current_action[2]),current_action[3])
 			"goto_player":
 				manual_to_player(current_action[1])
+			"goto_waypoint":
+				manual_to_waypoint(current_action[1],current_action[2])
 			"wait":
 				if current_action[1] > 0:
 					current_action[1] -= 1 #decrement happens inside the action instead of a dedicated timer
@@ -143,19 +148,17 @@ func cameracontrol_add(action:Array) -> void:
 
 ##Removes the current action
 func cameracontrol_next() -> void:
+	cameracontrol_target = null
 	cameracontrol_actions.pop_at(0)
-
 
 func manual_to_position(target_pos: Vector2, speed: float):
 	if h_tween:
 		h_tween.kill()
 	if v_tween:
 		v_tween.kill()
-
 	var drag_speed = min(speed/200,0.2)
 	drag_horizontal_offset = trend_float_to_zero(drag_horizontal_offset,drag_speed)
 	drag_vertical_offset = trend_float_to_zero(drag_vertical_offset,drag_speed)
-
 
 	var pos_delta := target_pos - global_position
 	var movement := pos_delta.normalized() * speed
@@ -164,7 +167,6 @@ func manual_to_position(target_pos: Vector2, speed: float):
 		cameracontrol_next() #end
 	else:
 		global_position += movement
-
 
 func manual_reset(): #resets camera back to player instantly
 	position = Vector2(0,-16)
@@ -175,7 +177,6 @@ func manual_to_player(speed: float): #Moves camera towards player position
 		h_tween.kill()
 	if v_tween:
 		v_tween.kill()
-
 	var drag_speed = min(speed/200,0.2)
 	drag_horizontal_offset = trend_float_to_zero(drag_horizontal_offset,drag_speed)
 	drag_vertical_offset = trend_float_to_zero(drag_vertical_offset,drag_speed)
@@ -189,6 +190,21 @@ func manual_to_player(speed: float): #Moves camera towards player position
 	else:
 		global_position += movement
 
+func manual_to_waypoint(waypoint_index:int,speed:float) -> void:
+	var waypoints := get_tree().get_nodes_in_group("Waypoints")
+	var target_pos := Vector2(0,0)
+	if cameracontrol_target == null:
+		for node in waypoints:
+			if node.index == waypoint_index:
+				cameracontrol_target = node
+		if cameracontrol_target == null:
+			print ("WAYPOINT NOT FOUND!!!!!")
+	target_pos = cameracontrol_target.position
+	manual_to_position(target_pos,speed)
+
+
+
+
 func trend_float_to_zero(input_float:float, speed:float) -> float:
 	var result:float = input_float
 	if input_float > 0:
@@ -196,6 +212,7 @@ func trend_float_to_zero(input_float:float, speed:float) -> float:
 	if input_float < 0:
 		result = min(0, input_float + speed)
 	return result
+
 
 
 ### GETTERS ###

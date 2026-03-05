@@ -1,15 +1,13 @@
-[gd_scene format=4]
+[gd_scene format=4 uid="uid://dul1gj82hoshb"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_owv0v"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_7lvhr"]
-[ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_0qf1s"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_nkisl"]
-[ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="4_nkisl"]
-[ext_resource type="TileSet" path="res://src/Tile/CloudFactoryExterior.tres" id="5_owv0v"]
-[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="7_2d11i"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="8_eci8o"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="8_w643x"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="10_xqt2m"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_owv0v"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_7lvhr"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_0qf1s"]
+[ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="4_nkisl"]
+[ext_resource type="TileSet" uid="uid://cjt34mqcgd6o" path="res://src/Tile/CloudFactoryExterior.tres" id="5_owv0v"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="7_2d11i"]
+[ext_resource type="PackedScene" uid="uid://dim3av368jfya" path="res://src/Utility/Waypoint.tscn" id="8_owv0v"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="8_w643x"]
 
 [node name="CloudFactoryExterior" type="Node2D" unique_id=1604351222]
 visibility_layer = 2
@@ -18,14 +16,12 @@ level_name = "CloudFactoryExterior"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=752739957 instance=ExtResource("2_7lvhr")]
+[node name="LevelLimiter" parent="." unique_id=752739957 instance=ExtResource("2_7lvhr")]
 visibility_layer = 2
 offset_left = 1232.0
 offset_top = 1584.0
 offset_right = 4240.0
 offset_bottom = 2224.0
-mouse_filter = 2
-script = ExtResource("3_nkisl")
 background_resource = ExtResource("3_0qf1s")
 texture = ExtResource("4_nkisl")
 layers = 5
@@ -88,17 +84,17 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=1093703971]
 visibility_layer = 2
 
-[node name="VanishingPoint" type="Area2D" parent="." unique_id=1306714221 groups=["VanishingPoints"] instance=ExtResource("7_2d11i")]
+[node name="VanishingPoint" parent="." unique_id=1306714221 instance=ExtResource("7_2d11i")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2096, 2072)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_eci8o")
 
-[node name="SpawnPoint" type="Area2D" parent="." unique_id=1578892610 groups=["SpawnPoints"] instance=ExtResource("8_w643x")]
+[node name="SpawnPoint" parent="." unique_id=1578892610 instance=ExtResource("8_w643x")]
 visibility_layer = 2
 position = Vector2(2472, 2176)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_xqt2m")
+
+[node name="Waypoint0" parent="." unique_id=1432238783 instance=ExtResource("8_owv0v")]
+position = Vector2(1534, 2044)
+
+[node name="Waypoint1" parent="." unique_id=142825389 instance=ExtResource("8_owv0v")]
+position = Vector2(2366, 1716)
+index = 1
