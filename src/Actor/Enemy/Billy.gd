@@ -189,3 +189,7 @@ func _on_PlayerDetector_body_exited(_body):
 
 func _on_JumpAccelTimer_timeout() -> void:
 	jump_acceleration = 0
+
+func _exit_tree() -> void:
+	if waypoint:
+		waypoint.queue_free()
