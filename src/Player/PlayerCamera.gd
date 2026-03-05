@@ -154,6 +154,7 @@ func manual_to_position(target_pos: Vector2, speed: float):
 
 	var drag_speed = min(speed/200,0.2)
 	drag_horizontal_offset = trend_float_to_zero(drag_horizontal_offset,drag_speed)
+	drag_vertical_offset = trend_float_to_zero(drag_vertical_offset,drag_speed)
 
 
 	var pos_delta := target_pos - global_position
