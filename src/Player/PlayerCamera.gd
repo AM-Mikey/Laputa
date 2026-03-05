@@ -104,10 +104,6 @@ func cameracontrol_processing() -> void:
 		cameracontrol_add(['can_act',false] )
 		cameracontrol_add( ['goto_pos',3000,2700,50] )
 		cameracontrol_add( ['wait',40] )
-		cameracontrol_add( ['reset',90] )
-		cameracontrol_add(['can_act',true] ) 
-		cameracontrol_add( ['wait',20] )
-		cameracontrol_add( ['goto_pos',3000,2700,5] )
 
 
 
@@ -130,6 +126,8 @@ func cameracontrol_processing() -> void:
 			"wait":
 				if current_action[1] > 0:
 					current_action[1] -= 1 #decrement happens inside the action instead of a dedicated timer
+					drag_horizontal_offset = trend_float_to_zero(drag_horizontal_offset,0.08)
+
 				else:
 					cameracontrol_next()
 			"can_act":
@@ -152,12 +150,9 @@ func manual_to_position(target_pos: Vector2, speed: float):
 	if h_tween:
 		h_tween.kill()
 
-	var drag_speed = min(speed/10,0.1)
-	##drag speed trends to 0
-	if drag_horizontal_offset > 0:
-		drag_horizontal_offset = max(0, drag_horizontal_offset - drag_speed)
-	if drag_horizontal_offset < 0:
-		drag_horizontal_offset = min(0, drag_horizontal_offset + drag_speed)
+	var drag_speed = min(speed/200,0.2)
+	drag_horizontal_offset = trend_float_to_zero(drag_horizontal_offset,drag_speed)
+
 
 	var pos_delta := target_pos - global_position
 	var movement := pos_delta.normalized() * speed
@@ -177,11 +172,7 @@ func manual_to_player(speed: float): #Moves camera towards player position
 		h_tween.kill()
 
 	var drag_speed = min(speed / 10, 0.1)
-	##drag speed trends to 0
-	if drag_horizontal_offset > 0:
-		drag_horizontal_offset = max(0, drag_horizontal_offset - drag_speed)
-	if drag_horizontal_offset < 0:
-		drag_horizontal_offset = min(0, drag_horizontal_offset + drag_speed)
+	drag_horizontal_offset = trend_float_to_zero(drag_horizontal_offset,drag_speed)
 
 	var target_pos: Vector2 = pc.position
 	var pos_delta := target_pos - global_position
@@ -192,6 +183,13 @@ func manual_to_player(speed: float): #Moves camera towards player position
 	else:
 		global_position += movement
 
+func trend_float_to_zero(input_float:float, speed:float) -> float:
+	var result:float = input_float
+	if input_float > 0:
+		result = max(0, input_float - speed)
+	if input_float < 0:
+		result = min(0, input_float + speed)
+	return result
 
 
 ### GETTERS ###
