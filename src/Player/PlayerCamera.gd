@@ -149,6 +149,8 @@ func cameracontrol_next() -> void:
 func manual_to_position(target_pos: Vector2, speed: float):
 	if h_tween:
 		h_tween.kill()
+	if v_tween:
+		v_tween.kill()
 
 	var drag_speed = min(speed/200,0.2)
 	drag_horizontal_offset = trend_float_to_zero(drag_horizontal_offset,drag_speed)
@@ -170,9 +172,12 @@ func manual_reset(): #resets camera back to player instantly
 func manual_to_player(speed: float): #Moves camera towards player position
 	if h_tween:
 		h_tween.kill()
+	if v_tween:
+		v_tween.kill()
 
-	var drag_speed = min(speed / 10, 0.1)
+	var drag_speed = min(speed/200,0.2)
 	drag_horizontal_offset = trend_float_to_zero(drag_horizontal_offset,drag_speed)
+	drag_vertical_offset = trend_float_to_zero(drag_vertical_offset,drag_speed)
 
 	var target_pos: Vector2 = pc.position
 	var pos_delta := target_pos - global_position
