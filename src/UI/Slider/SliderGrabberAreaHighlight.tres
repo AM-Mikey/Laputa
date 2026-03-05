@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://g2yej05lk4sl"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://g2yej05lk4sl"]
 
 [ext_resource type="Texture2D" uid="uid://dids6g4yrcgvy" path="res://assets/UI/Slider/GrabberAreaHighlight.png" id="1_ppfup"]
 

@@ -73,7 +73,7 @@ var shoot_dir := Vector2.LEFT
 ##goto_player. Same as goto_pos but player position
 
 var cameracontrol_actions:Array[Array] =[
-	
+
 	]
 
 var cameracontrol_active := false
@@ -86,7 +86,7 @@ func cameracontrol_processing() -> void:
 			cameracontrol_active = false
 			inp.can_act = true
 			$PlayerCamera.cameracontrol_reset()
-			
+
 		return
 	##Camera control code
 	else:
