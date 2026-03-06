@@ -82,6 +82,7 @@ func setup_level(): #TODO: clear undo history
 	f.hud().queue_free()
 	w.ui.visible = false
 	w.bl.visible = false
+	w.current_level.get_node("BlackBars").visible = false
 	for a in get_tree().get_nodes_in_group("Actors"):
 		a.queue_free()
 	for p in get_tree().get_nodes_in_group("Props"):
@@ -164,6 +165,7 @@ func exit():	#TODO: make this an editor_exit signal ## no? that just decentraliz
 	w.get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 	w.ui.visible = true
 	w.bl.visible = true
+	w.current_level.get_node("BlackBars").visible = true
 	mc.display("arrow")
 	f.pc().enable()
 	f.pc().get_node("PlayerCamera").enabled = true

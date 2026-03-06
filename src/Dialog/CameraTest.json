@@ -1,0 +1,6 @@
+{
+	"camera_test_1":
+	"
+	/newchar,basil,Looker Hey, look over there /cam,to_waypoint,0,40 /cam,wait,5 /cam,to_player,40
+	",
+}

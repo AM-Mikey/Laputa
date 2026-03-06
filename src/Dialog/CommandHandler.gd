@@ -121,6 +121,25 @@ func parse_command(string):
 			pass
 			#skipinput()
 
+		### Camera Control
+		"cam":
+			var a = string.split(",")
+			var camera = pc.get_node("PlayerCamera")
+			inp.can_act = false
+			match a[1]:
+				"to_pos":
+					camera.control_add(["to_position", float(a[2]), float(a[3]), float(a[4])])
+				"to_player":
+					camera.control_add(["to_player", float(a[2])])
+				"to_waypoint":
+					camera.control_add(["to_waypoint", int(a[2]), float(a[3])])
+				"wait":
+					camera.control_add(["wait", float(a[1])])
+				"reset":
+					camera.control_add(["reset"])
+
+
+
 
 ### COMMANDS ###
 

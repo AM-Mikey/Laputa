@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="4_nkisl"]
 [ext_resource type="TileSet" uid="uid://cjt34mqcgd6o" path="res://src/Tile/CloudFactoryExterior.tres" id="5_owv0v"]
 [ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="7_2d11i"]
+[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="7_w643x"]
 [ext_resource type="PackedScene" uid="uid://dim3av368jfya" path="res://src/Utility/Waypoint.tscn" id="8_owv0v"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="8_w643x"]
 
@@ -84,6 +85,23 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=1093703971]
 visibility_layer = 2
 
+[node name="Basil" parent="Spawns" unique_id=369421758 instance=ExtResource("7_w643x")]
+visibility_layer = 2
+position = Vector2(2504, 2176)
+actor_path = "res://src/Actor/NPC/Basil.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"conversation": ["camera_test_1", 4],
+"dialog_json": ["res://src/Dialog/CameraTest.json", 4],
+"editor_hidden": [false, 1],
+"id": ["basil", 4],
+"speed": [Vector2(150, 350), 5],
+"starting_state": ["idle", 4],
+"voiced": [true, 1],
+"walk_speed": [Vector2(50, 50), 5],
+"water_gravity": [150.0, 3]
+}
+
 [node name="VanishingPoint" parent="." unique_id=1306714221 instance=ExtResource("7_2d11i")]
 visibility_layer = 2
 position = Vector2(2096, 2072)
@@ -93,10 +111,12 @@ visibility_layer = 2
 position = Vector2(2472, 2176)
 
 [node name="Waypoint0" parent="." unique_id=1432238783 instance=ExtResource("8_owv0v")]
-position = Vector2(1534, 2044)
+visibility_layer = 2
+position = Vector2(4181, 2113)
 owner_id = "PlayerCamera"
 
 [node name="Waypoint1" parent="." unique_id=142825389 instance=ExtResource("8_owv0v")]
+visibility_layer = 2
 position = Vector2(2366, 1716)
 owner_id = "PlayerCamera"
 index = 1

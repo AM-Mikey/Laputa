@@ -1,13 +1,11 @@
 extends Camera2D
 
-const BLACKBAR = preload("res://src/Utility/BlackBar.tscn")
-
-var horizontal_focus = Vector2.LEFT
+var horizontal_focus = Vector2.LEFT #TODO:is this outdated now that we can control using the player camera
 var homing_camera = false
 var panning_up = false
 var panning_down = false
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 @onready var pc = f.pc()
 
 func _ready():
@@ -17,53 +15,29 @@ func _ready():
 
 
 func on_limit_camera(left, right, top, bottom):
-	var bars = get_tree().get_nodes_in_group("BlackBars")
-	for b in bars:
-		b.free()
+	var window_width = get_window().get_size().x
+	var window_height = get_window().get_size().y
 
-
-	if get_window().get_size().x > (right - left) * world.resolution_scale:
+	if get_window().get_size().x > (right - left) * w.resolution_scale:
 		print("WARNING: window width larger than camera limit")
-		var extra_margin = ((get_window().get_size().x / world.resolution_scale) - (right - left))/2
+		var extra_margin = ((get_window().get_size().x / w.resolution_scale) - (right - left))/2
 
 		limit_left = left - extra_margin
 		limit_right = right + extra_margin
 
-		var left_pillar = BLACKBAR.instantiate()
-		left_pillar.name = "BlackBarLeft"
-		left_pillar.size = Vector2(extra_margin, get_window().get_size().y)
-		world.bl.add_child(left_pillar)
-		world.bl.move_child(left_pillar, 0)
 
-		var right_pillar = BLACKBAR.instantiate()
-		right_pillar.name = "BlackBarRight"
-		right_pillar.size = Vector2(extra_margin, get_window().get_size().y)
-		right_pillar.position = Vector2((right - left) + extra_margin, 0)
-		world.bl.add_child(right_pillar)
-		world.bl.move_child(right_pillar, 0)
+
 
 	else:
 		limit_left = left
 		limit_right = right
 
-	if get_window().get_size().y > (bottom - top) * world.resolution_scale:
+	if get_window().get_size().y > (bottom - top) * w.resolution_scale:
 		print("WARNING: window height larger than camera limit")
 		var extra_margin = (get_window().get_size().y - (bottom - top))/2
 		limit_top = top - extra_margin
 		limit_bottom = bottom  + extra_margin
 
-		var top_pillar = BLACKBAR.instantiate()
-		top_pillar.name = "BlackBarTop"
-		top_pillar.size = Vector2(get_window().get_size().x, extra_margin)
-		world.bl.add_child(top_pillar)
-		world.bl.move_child(top_pillar, 0)
-
-		var bottom_pillar = BLACKBAR.instantiate()
-		bottom_pillar.name = "BlackBarBottom"
-		bottom_pillar.size = Vector2(get_window().get_size().x, extra_margin + 16) #16 for overscan safety
-		bottom_pillar.position = Vector2(0, (bottom - top) + extra_margin)
-		world.bl.add_child(bottom_pillar)
-		world.bl.move_child(bottom_pillar, 0)
 
 	else:
 		limit_top = top

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dn1sku44ig2ws"]
+[gd_scene format=3 uid="uid://dn1sku44ig2ws"]
 
 [ext_resource type="Script" uid="uid://eadbkt60gwwc" path="res://src/Utility/DeathCamera.gd" id="1"]
 
-[node name="DeathCamera" type="Camera2D"]
+[node name="DeathCamera" type="Camera2D" unique_id=129475180]
 script = ExtResource("1")
