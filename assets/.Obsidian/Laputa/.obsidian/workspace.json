@@ -6,7 +6,7 @@
       {
         "id": "f8cbbec6d568959c",
         "type": "tabs",
-        "dimension": 36.10406091370558,
+        "dimension": 72.75641025641025,
         "children": [
           {
             "id": "fd4f00696d9a397d",
@@ -63,14 +63,28 @@
               "icon": "lucide-file",
               "title": "Junior"
             }
+          },
+          {
+            "id": "93f66a3c2e9912d4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Groups/Dogtown Residents.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Dogtown Residents"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       },
       {
         "id": "f00468223e4d7550",
         "type": "tabs",
-        "dimension": 63.89593908629442,
+        "dimension": 27.24358974358974,
         "children": [
           {
             "id": "0b2f6be5223829c1",
@@ -244,13 +258,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "8e79af8c8cf32a05",
+  "active": "93f66a3c2e9912d4",
   "lastOpenFiles": [
+    "The World/Areas/Dogtown.md",
+    "Groups/Dogtown Residents.md",
     "Concepts/Resistance.md",
     "Concepts/Religion.md",
     "Objects/Machine.md",
     "The World/Dinero.md",
-    "Groups/Dogtown Residents.md",
     "Groups/Corp..md",
     "Groups/Colonists.md",
     "Groups/Capital City Residents.md",
@@ -271,7 +286,6 @@
     "Concepts/Great Plague.md",
     "Concepts/History of Laputa.md",
     "Characters/Rosemary.md",
-    "Characters/Scrum.md",
     "Aseprite_8jemaKX0FE.png",
     "Aseprite_EEozVk20AW.png",
     "Aseprite_ujhX9SUnNc.png",

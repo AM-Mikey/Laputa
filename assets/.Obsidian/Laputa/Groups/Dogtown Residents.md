@@ -7,8 +7,8 @@ List of Residents:
 	[[Sage]]
 	Family 1
 		Red-Haired Mom
-		Suspenders Boy
-		Skirt Girl
+		Suspenders Boy (Ben)
+		Skirt Girl (Lucy)
 	Grandpa
 	Grandma
 
@@ -24,7 +24,7 @@ Doctor's Daughter
 
 
 Black-Haired Kid
-	A shifty-eyed kid (not gendered) who likes poking around in areas they're not supposed to. They like pushing people's buttons and conversation with them tends to run in circles. Wants to ride a motorcycle when they grow up.
+	A shifty-eyed kid (not gendered) who likes poking around in areas they're not supposed to. They like pushing people's buttons and conversation with them tends to run in circles. Wants to ride a motorcycle when they grow up. Grandchild of grandpa + grandma
 
 Pillbox hat Otter
 	Frequent bar attendee. She speaks in a flippant and debonair fashion. She acts like she has secrets and a complicated love life, although it actually isn't that mysterious.
@@ -45,3 +45,6 @@ Sheriff's Daughter
 
 Jailer/Sheriff
 	A former member of the Old Guard, he took this position in his retirement, and brought his family along with to dogtown. He is prone to fits of uncontrollable rage and often spits when he talks. He takes his job as Jailer very seriously.
+
+Family Kids
+	Tease us and tell us we look like the mascot rabbit from something

@@ -54,13 +54,7 @@ _data = {
 collision_layer = 128
 collision_mask = 8
 script = ExtResource("1_ag8g5")
-starting_state = null
-walk_speed = null
-dialog_json = null
-voiced = null
 id = "child"
-base_gravity = null
-water_gravity = null
 speed = Vector2(100, 100)
 editor_hidden = false
 
