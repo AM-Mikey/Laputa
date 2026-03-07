@@ -77,14 +77,26 @@
               "icon": "lucide-file",
               "title": "Dogtown Residents"
             }
+          },
+          {
+            "id": "17b5642717e47f4a",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.12.4"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.12.4"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       },
       {
         "id": "f00468223e4d7550",
         "type": "tabs",
-        "dimension": 27.24358974358974,
+        "dimension": 27.243589743589745,
         "children": [
           {
             "id": "0b2f6be5223829c1",
@@ -258,7 +270,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "93f66a3c2e9912d4",
+  "active": "17b5642717e47f4a",
   "lastOpenFiles": [
     "The World/Areas/Dogtown.md",
     "Groups/Dogtown Residents.md",
