@@ -32,6 +32,7 @@ func activate(player):
 		heart_get_max.global_position = $CollisionShape2D.global_position
 		w.middle.add_child(heart_get_max)
 		am.play("hp_refill")
+		ms.mission_progress_check(id)
 
 
 

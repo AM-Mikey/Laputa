@@ -11,6 +11,7 @@ func activate():
 		$AnimationPlayer.stop()
 	else:
 		$AnimationPlayer.play("Spin")
+	ms.mission_progress_check(id)
 
 ### SIGNALS ###
 

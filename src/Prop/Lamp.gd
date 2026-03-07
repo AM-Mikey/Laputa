@@ -18,6 +18,7 @@ func activate():
 		$AnimationPlayer.play("On")
 	else:
 		$AnimationPlayer.play("Off")
+	ms.mission_progress_check(id)
 
 
 ### SIGNALS ###

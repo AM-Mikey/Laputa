@@ -23,4 +23,4 @@ func setup_length():
 			sprites.append(duplicated_sprite)
 
 #func activate():
-	#
+	#ms.mission_progress_check(id)

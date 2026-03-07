@@ -13,8 +13,10 @@ const MAIN_MISSION = [ #[name, trigger_type, trigger_value, description]
 	"I need to talk to NPC D"],
 	["celebrate", "", "",
 	"I've completed the mission demo!"],
-	["camera_test", "", "",
+	["camera_test", "prop_activate", "lamp",
 	"This is a test of the manual camera controls"],
+	["camera_test_2", "", "",
+	"This is a test of the manual camera controls, part 2"],
 ]
 
 var main_mission_stage: Array = MAIN_MISSION[0]
@@ -79,37 +81,18 @@ func end_side_mission(mission_name):
 	update_level_via_mission(mission_name)
 
 
-func mission_progress_check(): #TODO: compress these into one
+func mission_progress_check(passed_variable = null):
+	#side missions
 	for m in ms.side_missions:
 		var stage: Array
 		for s in m.stages:
 			if s[0] == m.current_stage:
 				stage = s
-		var do_progress = false
-		if stage.size() >= 3: #has trigger and value
-			match stage[1]:
-				"item": #search inventory for item
-					for i in f.pc().item_array:
-						if stage[2].to_pascal_case() == i.resource_path.get_file().trim_suffix(".tres"):
-							do_progress = true
-				"gun": #search guns for gun
-					for g in f.pc().guns:
-						if stage[2].to_pascal_case() == g.name:
-							do_progress = true
-				"topic": #search topic array for topic
-					for t in f.pc().topic_array:
-						if stage[2].to_pascal_case() == t.topic_name:
-							do_progress = true
-				"level_enter": #check if we entered the level with the given name
-					if stage[2].to_pascal_case() == w.current_level.name:
-						do_progress = true
-				"boss_defeat": #check if we defeated a boss
-					pass
-		if do_progress:
-			ms.progress_side_mission(m.resource_path.get_file().trim_suffix(".tres"))
-
+		_progress_from_check("side", m, stage, passed_variable)
 	#main mission
-	var stage = ms.main_mission_stage
+	_progress_from_check("main", "main",ms.main_mission_stage, passed_variable)
+
+func _progress_from_check(type: String, mission, stage, passed_variable):
 	var do_progress = false
 	if stage.size() >= 3: #has trigger and value
 		match stage[1]:
@@ -130,8 +113,15 @@ func mission_progress_check(): #TODO: compress these into one
 					do_progress = true
 			"boss_defeat": #check if we defeated a boss
 				pass
+			"prop_activate": #check if a prop was activated
+				if passed_variable:
+					if stage[2].to_pascal_case() == passed_variable.to_pascal_case():
+						do_progress = true
 	if do_progress:
-		ms.progress_main_mission()
+		match type:
+			"main": ms.progress_main_mission()
+			"side": ms.progress_side_mission(mission.resource_path.get_file().trim_suffix(".tres"))
+
 
 
 func setup_level_from_array(array, update_conversations):
@@ -248,6 +238,15 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 			for stage in data["level_conversation_on_enter"][mission_name]:
 				if stage == mission_stage:
 					w.current_level.conversation_on_enter = data["level_conversation_on_enter"][mission_name][stage]
+
+#camera_control_add
+	if data.has("camera_control_add"):
+		if data["camera_control_add"].has(mission_name):
+			for stage in data["camera_control_add"][mission_name]:
+				if stage == mission_stage:
+					inp.can_act = false
+					for a in data["camera_control_add"][mission_name][stage]:
+						f.pc().get_node("PlayerCamera").control_add(a)
 
 ### HELPER ###
 
