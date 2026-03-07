@@ -31,7 +31,7 @@ func _input(event):
 				p.mm.change_state("inspect")
 				p.inspect_target = $CollisionShape2D
 				activate(p)
-				await get_tree().create_timer(inspect_time).timeout
+				await get_tree().create_timer(inspect_time, false, true).timeout
 				p.mm.change_state("run")
 				p.look_dir = previous_look_dir
 
@@ -51,6 +51,7 @@ func activate(player):
 			player.get_node("GunManager/Guns").move_child(gun, 0)
 			player.emit_signal("guns_updated", player.guns.get_children(), "get_gun")
 			player.gm.set_guns_visible()
+			ms.mission_progress_check()
 			print("added gun '", gun_name, "' to guns")
 		else:
 			print("WARNING: Gun: ", gun_name, " already in guns, ignoring")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d3sw60ygo6bb6"]
+[gd_scene format=3 uid="uid://d3sw60ygo6bb6"]
 
 [ext_resource type="Texture2D" uid="uid://ddaew12v1ku8o" path="res://assets/Actor/Enemy/Beetle.png" id="2_7vcwk"]
 [ext_resource type="Script" uid="uid://qcbiyidgaq45" path="res://src/Actor/Enemy/Beetle.gd" id="3"]
@@ -142,197 +142,197 @@ _data = {
 &"RESET": SubResource("Animation_8fv4h")
 }
 
-[node name="Beetle" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+[node name="Beetle" type="CharacterBody2D" unique_id=340835941 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("3")
 debug = true
-editor_hidden = false
 speed = Vector2(150, 150)
+editor_hidden = false
 
-[node name="Crawl" type="CollisionShape2D" parent="."]
+[node name="Crawl" type="CollisionShape2D" parent="." unique_id=1402698365]
 position = Vector2(0, -4.5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_7vcwk")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="CrawlDiagonal" type="CollisionShape2D" parent="."]
+[node name="CrawlDiagonal" type="CollisionShape2D" parent="." unique_id=686662712]
 position = Vector2(-2, -6)
 rotation = -0.785397
 shape = SubResource("CapsuleShape2D_g4id4")
 disabled = true
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Fly" type="CollisionShape2D" parent="."]
+[node name="Fly" type="CollisionShape2D" parent="." unique_id=1435893146]
 position = Vector2(0, -8)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_qsmhk")
 disabled = true
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=547326425]
 collision_layer = 131072
 collision_mask = 0
 
-[node name="Crawl" type="CollisionShape2D" parent="Hurtbox"]
+[node name="Crawl" type="CollisionShape2D" parent="Hurtbox" unique_id=1512399654]
 position = Vector2(0, -5)
 shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="CrawlDiagonal" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CrawlDiagonal" type="CollisionShape2D" parent="Hurtbox" unique_id=1527454381]
 position = Vector2(-2, -6)
 rotation = 0.785397
 shape = SubResource("RectangleShape2D_8fv4h")
 disabled = true
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="Fly" type="CollisionShape2D" parent="Hurtbox"]
+[node name="Fly" type="CollisionShape2D" parent="Hurtbox" unique_id=389128745]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_fjd7u")
 disabled = true
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=1477557090]
 collision_layer = 262144
 collision_mask = 65536
 
-[node name="Crawl" type="CollisionShape2D" parent="Hitbox"]
+[node name="Crawl" type="CollisionShape2D" parent="Hitbox" unique_id=1875444151]
 position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_g4id4")
 debug_color = Color(1, 0, 0, 0.235294)
 
-[node name="CrawlDiagonal" type="CollisionShape2D" parent="Hitbox"]
+[node name="CrawlDiagonal" type="CollisionShape2D" parent="Hitbox" unique_id=878142523]
 position = Vector2(-2, -6)
 rotation = 0.785397
 shape = SubResource("RectangleShape2D_c4c1t")
 disabled = true
 debug_color = Color(1, 0, 0, 0.235294)
 
-[node name="Fly" type="CollisionShape2D" parent="Hitbox"]
+[node name="Fly" type="CollisionShape2D" parent="Hitbox" unique_id=304220547]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_t75oa")
 disabled = true
 debug_color = Color(1, 0, 0, 0.235294)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=342499573]
 position = Vector2(0, -8)
 texture = ExtResource("2_7vcwk")
 hframes = 2
 vframes = 3
 frame = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_hpx8l")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1763209571]
+libraries/ = SubResource("AnimationLibrary_hpx8l")
 
-[node name="LeftCast" type="RayCast2D" parent="."]
+[node name="LeftCast" type="RayCast2D" parent="." unique_id=795130591]
 position = Vector2(-7, -8)
 target_position = Vector2(-2, 0)
 collision_mask = 8
 
-[node name="LeftCastU" type="RayCast2D" parent="."]
+[node name="LeftCastU" type="RayCast2D" parent="." unique_id=1879513713]
 position = Vector2(-7, -16)
 target_position = Vector2(-2, 0)
 collision_mask = 8
 
-[node name="LeftCastD" type="RayCast2D" parent="."]
+[node name="LeftCastD" type="RayCast2D" parent="." unique_id=1231460932]
 position = Vector2(-7, 0)
 target_position = Vector2(-2, 0)
 collision_mask = 8
 
-[node name="RightCast" type="RayCast2D" parent="."]
+[node name="RightCast" type="RayCast2D" parent="." unique_id=1114197483]
 position = Vector2(7, -8)
 target_position = Vector2(2, 0)
 collision_mask = 8
 
-[node name="RightCastU" type="RayCast2D" parent="."]
+[node name="RightCastU" type="RayCast2D" parent="." unique_id=1400881259]
 position = Vector2(7, -16)
 target_position = Vector2(2, 0)
 collision_mask = 8
 
-[node name="RightCastD" type="RayCast2D" parent="."]
+[node name="RightCastD" type="RayCast2D" parent="." unique_id=1625154967]
 position = Vector2(7, 0)
 target_position = Vector2(2, 0)
 collision_mask = 8
 
-[node name="UpCast" type="RayCast2D" parent="."]
+[node name="UpCast" type="RayCast2D" parent="." unique_id=83836088]
 position = Vector2(0, -15)
 target_position = Vector2(0, -2)
 collision_mask = 8
 
-[node name="UpCastL" type="RayCast2D" parent="."]
+[node name="UpCastL" type="RayCast2D" parent="." unique_id=456977005]
 position = Vector2(-8, -15)
 target_position = Vector2(0, -2)
 collision_mask = 8
 
-[node name="UpCastR" type="RayCast2D" parent="."]
+[node name="UpCastR" type="RayCast2D" parent="." unique_id=1523508074]
 position = Vector2(8, -15)
 target_position = Vector2(0, -2)
 collision_mask = 8
 
-[node name="DownCast" type="RayCast2D" parent="."]
+[node name="DownCast" type="RayCast2D" parent="." unique_id=189306189]
 position = Vector2(0, -1)
 target_position = Vector2(0, 2)
 collision_mask = 8
 collide_with_areas = true
 
-[node name="DownCastL" type="RayCast2D" parent="."]
+[node name="DownCastL" type="RayCast2D" parent="." unique_id=1836998465]
 position = Vector2(-8, -1)
 target_position = Vector2(0, 2)
 collision_mask = 8
 
-[node name="DownCastR" type="RayCast2D" parent="."]
+[node name="DownCastR" type="RayCast2D" parent="." unique_id=1006335656]
 position = Vector2(8, -1)
 target_position = Vector2(0, 2)
 collision_mask = 8
 
-[node name="Pivot" type="Marker2D" parent="."]
+[node name="Pivot" type="Marker2D" parent="." unique_id=634197743]
 position = Vector2(0, -8)
 gizmo_extents = 1.0
 
-[node name="PlayerLeftCast" type="RayCast2D" parent="."]
+[node name="PlayerLeftCast" type="RayCast2D" parent="." unique_id=983175377]
 position = Vector2(-8, -8)
 target_position = Vector2(-100, 0)
 collision_mask = 9
 
-[node name="PlayerRightCast" type="RayCast2D" parent="."]
+[node name="PlayerRightCast" type="RayCast2D" parent="." unique_id=1884372464]
 position = Vector2(8, -8)
 target_position = Vector2(100, 0)
 collision_mask = 9
 
-[node name="PlayerUpCast" type="RayCast2D" parent="."]
+[node name="PlayerUpCast" type="RayCast2D" parent="." unique_id=1245707981]
 position = Vector2(0, -16)
 target_position = Vector2(0, -100)
 collision_mask = 9
 
-[node name="PlayerDownCast" type="RayCast2D" parent="."]
+[node name="PlayerDownCast" type="RayCast2D" parent="." unique_id=1188767378]
 target_position = Vector2(0, 100)
 collision_mask = 9
 
-[node name="WorldLeftCast" type="RayCast2D" parent="."]
+[node name="WorldLeftCast" type="RayCast2D" parent="." unique_id=650209830]
 position = Vector2(-8, -8)
 target_position = Vector2(-200, 0)
 collision_mask = 8
 
-[node name="WorldRightCast" type="RayCast2D" parent="."]
+[node name="WorldRightCast" type="RayCast2D" parent="." unique_id=1411438551]
 position = Vector2(8, -8)
 target_position = Vector2(200, 0)
 collision_mask = 8
 
-[node name="WorldUpCast" type="RayCast2D" parent="."]
+[node name="WorldUpCast" type="RayCast2D" parent="." unique_id=813832102]
 position = Vector2(0, -16)
 target_position = Vector2(0, -200)
 collision_mask = 8
 
-[node name="WorldDownCast" type="RayCast2D" parent="."]
+[node name="WorldDownCast" type="RayCast2D" parent="." unique_id=1925182833]
 target_position = Vector2(0, 200)
 collision_mask = 8
 
-[node name="FlyCooldown" type="Timer" parent="."]
+[node name="FlyCooldown" type="Timer" parent="." unique_id=439362844]
+process_callback = 0
 one_shot = true
 
-[node name="FlipCooldown" type="Timer" parent="."]
+[node name="FlipCooldown" type="Timer" parent="." unique_id=1452385037]
+process_callback = 0
 one_shot = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

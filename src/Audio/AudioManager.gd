@@ -116,13 +116,13 @@ var interrupt_queue = []
 
 
 
-func play(sfx_string: String, actor = null, bus = null, volume = 1.0):
+func play(sfx_string: String, actor = null, bus = null, volume = 1.0, pitchspread:=0.0):
 	if _check_sfx(sfx_string):
 		var player
 		if actor == null: #non-positional
-			player = _add_player("sfx", sfx_string, null, volume)
+			player = _add_player("sfx", sfx_string, null, volume, pitchspread)
 		else: #positional
-			player = _add_player("pos", sfx_string, actor, volume)
+			player = _add_player("pos", sfx_string, actor, volume, pitchspread)
 
 		if sfx_queue.size() > sfx_player_max:
 			print("WARNING: Too many SFX players! Removed first player")
@@ -186,13 +186,15 @@ func play_interrupt(music_string):
 
 ### ADD AND REMOVE ###
 
-func _add_player(type, audio_string, actor = null, volume = 1.0):
+func _add_player(type, audio_string, actor = null, volume = 1.0, pitchspread := 0.0):
 	var player
 	match type:
 		"sfx":
 			player = SFX_PLAYER.instantiate()
 			player.stream = sfx_dict[audio_string]
 			player.volume_db = linear_to_db(volume)
+			var rngpitch = randf() * pitchspread
+			player.pitch_scale = 1.0 - (pitchspread/2) + rngpitch
 			add_child(player)
 			var queue_slot = [player, audio_string]
 			sfx_queue.append(queue_slot)
@@ -201,6 +203,8 @@ func _add_player(type, audio_string, actor = null, volume = 1.0):
 			player.stream = sfx_dict[audio_string]
 			player.volume_db = linear_to_db(volume)
 			player.global_position = actor.global_position
+			var rngpitch = randf() * pitchspread
+			player.pitch_scale = 1.0 - (pitchspread/2) + rngpitch
 			add_child(player)
 			var queue_slot = [player, audio_string]
 			sfx_queue.append(queue_slot)
@@ -288,5 +292,5 @@ func _check_sfx(sfx_string) -> bool:
 
 func _do_recent_time(sfx_string):
 	sfx_recent.append(sfx_string)
-	await get_tree().create_timer(sfx_recent_time).timeout
+	await get_tree().create_timer(sfx_recent_time, true, false).timeout
 	sfx_recent.erase(sfx_string)

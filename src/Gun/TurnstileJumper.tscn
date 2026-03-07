@@ -1,16 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://cq3m4fy6fnxfn"]
+[gd_scene format=3 uid="uid://cq3m4fy6fnxfn"]
 
 [ext_resource type="Script" uid="uid://dd0yoslo4r0rr" path="res://src/Gun/TurnstileJumper.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cg54u1k8whqg3" path="res://assets/Gun/TurnstileJumper.png" id="2"]
 
-[node name="TurnstileJumper" type="Node2D"]
+[node name="TurnstileJumper" type="Node2D" unique_id=594551449]
 script = ExtResource("1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=966130284]
 texture = ExtResource("2")
 
-[node name="Muzzle" type="Marker2D" parent="."]
+[node name="Muzzle" type="Marker2D" parent="." unique_id=779395255]
 position = Vector2(-6, -1)
 
-[node name="ChargeTimer" type="Timer" parent="."]
+[node name="ChargeTimer" type="Timer" parent="." unique_id=2140496789]
+process_callback = 0
 one_shot = true

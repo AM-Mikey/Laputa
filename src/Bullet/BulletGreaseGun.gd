@@ -12,9 +12,7 @@ var recoil_velocity = 40
 @onready var pc = f.pc()
 
 
-
-func _ready():
-	var rng = RandomNumberGenerator.new()
+func setup():
 	rng.randomize()
 	var spread_distance = int(rng.randf_range(max_spread_distance * -1, max_spread_distance))
 
@@ -33,10 +31,7 @@ func _ready():
 			#global_position.x += spread_distance
 			pc.velocity.y -= recoil_velocity
 
-	setup_vis_notifier()
-
-func _physics_process(_delta):
-	if disabled: return
+func _on_physics_process(_delta):
 	velocity = speed * direction
 	move_and_slide()
 	if origin.distance_to(global_position) > f_range:

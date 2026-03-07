@@ -1,0 +1,177 @@
+[gd_scene format=3 uid="uid://qtx0b43he8cp"]
+
+[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="1_81yb6"]
+[ext_resource type="Script" uid="uid://ddutburcie5er" path="res://src/UI/GotItem.gd" id="2_81yb6"]
+[ext_resource type="StyleBox" uid="uid://4n3eltlwqyie" path="res://src/UI/StyleBox/PaperBorder.tres" id="3_81yb6"]
+[ext_resource type="Texture2D" uid="uid://dml1i4m4ybgs3" path="res://assets/Item/Salmiakki.png" id="4_dx54j"]
+[ext_resource type="Shader" uid="uid://dero0bty7fsn4" path="res://src/Shader/SimpleRecolor.gdshader" id="5_mi34q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lva65"]
+shader = ExtResource("5_mi34q")
+shader_parameter/color = Color(0.78431374, 0.78431374, 0.6392157, 1)
+
+[sub_resource type="Animation" id="Animation_v2c3i"]
+resource_name = "FloatIn"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBox/Control:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 64), Vector2(0, 32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_17ptf"]
+resource_name = "FloatOut"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBox/Control:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 32), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wm7dd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBox/Control:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 64)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_17ptf"]
+_data = {
+&"FloatIn": SubResource("Animation_v2c3i"),
+&"FloatOut": SubResource("Animation_17ptf"),
+&"RESET": SubResource("Animation_wm7dd")
+}
+
+[node name="GotItem" type="MarginContainer" unique_id=309332791]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_81yb6")
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+script = ExtResource("2_81yb6")
+
+[node name="VBox" type="VBoxContainer" parent="." unique_id=83085520]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Control" type="Control" parent="VBox" unique_id=802499686]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="VBox" unique_id=803407385]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_shadow_color = Color(0.11372549, 0.15686275, 0.22745098, 1)
+theme_override_constants/shadow_outline_size = 0
+bbcode_enabled = true
+text = "Got the [color=f3b131]ItemName[/color]!"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Control" type="Control" parent="." unique_id=1391527796]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Control" unique_id=1862018848]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 80.0
+offset_right = 234.0
+offset_bottom = 116.0
+theme_override_styles/panel = ExtResource("3_81yb6")
+
+[node name="TextureRect" type="TextureRect" parent="Control/Panel" unique_id=240612235]
+layout_mode = 0
+offset_left = -23.0
+offset_top = -14.0
+offset_right = 83.0
+offset_bottom = 50.0
+texture = ExtResource("4_dx54j")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="Shadow" type="TextureRect" parent="Control/Panel/TextureRect" unique_id=1770415806]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_lva65")
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 107.0
+offset_bottom = 65.0
+texture = ExtResource("4_dx54j")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=530815300]
+libraries/ = SubResource("AnimationLibrary_17ptf")
+autoplay = &"FloatIn"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

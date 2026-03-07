@@ -153,7 +153,7 @@ func setup_level_editor_layer(): #the layer for editor overlays that go over the
 
 
 
-func exit():	#TODO: make this an editor_exit signal ## no? that just decentralizes and makes the order that this triggers in unclear. the order is important!
+func exit():
 	inspector.exit()
 	if w.current_level.has_node("TileAnimator"):
 		w.current_level.get_node("TileAnimator").editor_exit()
@@ -613,9 +613,17 @@ func set_cells(cells: Rect2i, erase = false): #no need to pass brush since its g
 				if multi_erase: #erase on all layers
 					for tile_map_layer: TileMapLayer in tile_map.get_children():
 						tile_map_layer.set_cell(tile_map_position, -1, tile_set_position)
+						if auto_tile and w.current_level.has_node("AutoTile"):
+							var neighbors := get_surrounding_positions(tile_map_position)
+							for pos in neighbors:
+								w.current_level.get_node("AutoTile").do_auto_tile(pos, tile_map_layer_id)
 				else:
-					var tile_map_layer_current = tile_map.get_child(active_tile_map_layer)
+					var tile_map_layer_current: TileMapLayer = tile_map.get_child(active_tile_map_layer)
 					tile_map_layer_current.set_cell(tile_map_position, -1, tile_set_position)
+					if auto_tile and w.current_level.has_node("AutoTile"):
+						var neighbors := get_surrounding_positions(tile_map_position)
+						for pos in neighbors:
+							w.current_level.get_node("AutoTile").do_auto_tile(pos, tile_map_layer_id)
 			else:
 				if tile_map.get_child(0).tile_set.get_source(0).has_tile(tile_set_position):
 					var tile_map_layer_current: TileMapLayer = tile_map.get_child(tile_map_layer_id)
@@ -956,3 +964,26 @@ func _resolution_scale_changed(_resolution_scale):
 	await get_tree().process_frame #idk why
 	$Margin.size = Vector2(get_tree().get_root().size) / Vector2(w.el.scale)
 	setup_windows()
+
+static func get_surrounding_positions(coords : Vector2i) -> Array [Vector2i]:
+	# Would probably make sense to have this in a utility class somewhere xd
+	const NW = Vector2i(-1, -1)
+	const N = Vector2i(0, -1)
+	const NE = Vector2i(1, -1)
+	const W = Vector2i(-1, 0)
+	const SELF = Vector2i(0, 0)
+	const E = Vector2i(1, 0)
+	const SW = Vector2i(-1, 1)
+	const S = Vector2i(0, 1)
+	const SE = Vector2i(1, 1)
+	var neighbors : Array [Vector2i] = [
+		coords + NW,
+		coords + N,
+		coords + NE,
+		coords + W,
+		coords + E,
+		coords + SW,
+		coords + S,
+		coords + SE
+		]
+	return neighbors

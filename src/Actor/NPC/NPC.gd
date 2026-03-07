@@ -10,8 +10,6 @@ var cached_state: String
 var predialog_state: String
 
 var dialog_box: Node
-var dialog_step: int = 1
-var branch: String = ""
 
 var active_pc = null
 var disabled = false
@@ -28,7 +26,10 @@ var bail_time = 6.0
 @export var starting_state := "idle"
 @export var walk_speed = Vector2(50, 50)
 @export_file("*.json") var dialog_json: String
-@export var conversation: String
+var conversation_queue: Array #[[conversation_name, main_or_side, is_forced, repeatable, completed_once]]
+var side_conversation_queue: Array #[[conversation_name, main_or_side, is_forced, repeatable, completed_once]]
+var next_conversation_queue_name: String
+var next_conversation_index: int
 @export var voiced = true
 @export var id: String
 
@@ -188,15 +189,54 @@ func enter_talk(_last_state):
 		dialog_box = DB.instantiate()
 		dialog_box.connect("dialog_finished", Callable(self, "on_dialog_finished"))
 		w.dll.add_child(dialog_box)
-		dialog_box.start_printing(dialog_json, conversation)
+
+		if !next_conversation_queue_name && !next_conversation_index: #fist time setup
+			var main_exhausted = true
+			var side_exhausted = true
+			var main_index: int
+			var side_index: int
+			for c in conversation_queue:
+				if !c[4]:
+					if main_exhausted: #only the first
+						main_exhausted = false
+						main_index = conversation_queue.find(c) #vulnerable to repeat entries
+			for c in side_conversation_queue:
+				if !c[4]:
+					if side_exhausted: #only the first
+						side_exhausted = false
+						side_index = side_conversation_queue.find(c) #vulnerable to repeat entries
+
+			if conversation_queue.size() == 0: #if no main convo, find the next side convo
+				if side_conversation_queue.size() == 0:
+					print("no valid convos, stopping")
+					change_state(predialog_state)
+					return
+				else:
+					next_conversation_queue_name = "side_conversation_queue"
+					if !side_exhausted: #do next side
+						next_conversation_index = side_index
+					else: #repeat last side
+						next_conversation_index = side_conversation_queue.size() -1
+			else:
+				next_conversation_queue_name = "conversation_queue"
+				if !main_exhausted: #do next main
+					next_conversation_index = main_index
+				else: #repeat last main
+					next_conversation_index = conversation_queue.size() -1
+
+		get(next_conversation_queue_name)[next_conversation_index][4] = true #completed
+		SaveSystem.write_dialog_data_to_temp(w.current_level, self)
+		dialog_box.start_printing(dialog_json, get(next_conversation_queue_name)[next_conversation_index][0])
+
 
 
 ### MISC
 
 func _input(event):
+	if conversation_queue.size() == 0: return
 	if event.is_action_pressed("inspect") && active_pc \
-	&& dialog_json != "" && conversation != "" && state != "talk" && active_pc.mm.current_state == active_pc.mm.states["run"]:
-		if inp.can_act:
+	&& dialog_json != "" && conversation_queue[0][0] != "" && state != "talk" && active_pc.mm.current_state == active_pc.mm.states["run"]:
+		if active_pc.can_act:
 			predialog_state = state
 			change_state("talk")
 			return
@@ -220,8 +260,6 @@ func calc_velocity(do_gravity = true) -> Vector2:
 	else:
 		out.y = fractional_speed.y * move_dir.y
 	return out
-
-
 
 ### NEW PATHFINDING
 

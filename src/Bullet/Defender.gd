@@ -10,8 +10,7 @@ var max_spread_distance = 7
 
 
 
-func _ready():
-	var rng = RandomNumberGenerator.new()
+func setup():
 	rng.randomize()
 	var spread_distance = int(rng.randf_range(max_spread_distance * -1, max_spread_distance))
 
@@ -25,11 +24,9 @@ func _ready():
 			global_position.x += spread_distance
 		Vector2.DOWN:
 			global_position.x += spread_distance
-	setup_vis_notifier()
 
 
-func _physics_process(_delta):
-	if disabled: return
+func _on_physics_process(_delta):
 	velocity = speed * direction
 	move_and_slide()
 	if origin.distance_to(global_position) > f_range:

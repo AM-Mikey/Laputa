@@ -46,22 +46,25 @@ func _input(event):
 	if not w.el.has_node("Editor"): #non-editor only commands
 
 		if event.is_action_pressed("debug_save"):
+			print("debug save")
 			var popup = POPUP.instantiate()
 			popup.text = "quicksaved..."
 			w.ui.add_child(popup)
+			SaveSystem.write_mission_data_to_save()
 			SaveSystem.write_player_data_to_save(w.current_level)
 			SaveSystem.write_level_data_to_temp(w.current_level)
-			SaveSystem.copy_level_data_from_temp_to_save()
-			SaveSystem.write_mission_data_to_save()
+			SaveSystem.copy_level_and_dialog_data_from_temp_to_save()
 
 
 		if event.is_action_pressed("debug_load"):
+			print("debug load")
 			var popup = POPUP.instantiate()
 			popup.text = "loaded save"
 			w.ui.add_child(popup)
 			SaveSystem.read_player_data_from_save()
 			SaveSystem.read_level_data_from_save(w.current_level)
-			SaveSystem.copy_level_data_from_save_to_temp()
+			SaveSystem.read_dialog_data_from_save(w.current_level)
+			SaveSystem.copy_level_and_dialog_data_from_save_to_temp()
 			SaveSystem.read_mission_data_from_save()
 
 
@@ -100,5 +103,4 @@ func debug_print():
 #
 func reload_level():
 	print("reloading level")
-	ms.main_mission_stage = ms.MAIN_MISSION_LIST.front() #TODO: have it load a mission based on a debug level start mission
 	w.change_level_via_code(w.current_level.scene_file_path, false)

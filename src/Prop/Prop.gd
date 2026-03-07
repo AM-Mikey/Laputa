@@ -39,7 +39,7 @@ func _input(event):
 				p.mm.change_state("inspect")
 				p.look_dir = Vector2(sign(p.global_position.x - $CollisionShape2D.global_position.x), 0.0)
 				activate()
-				await get_tree().create_timer(inspect_time).timeout
+				await get_tree().create_timer(inspect_time, false, true).timeout
 				p.mm.change_state("run")
 				p.look_dir = previous_look_dir
 

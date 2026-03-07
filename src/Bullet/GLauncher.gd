@@ -16,7 +16,7 @@ var touched_floor = false
 
 
 
-func _ready():
+func setup():
 	break_method = "burn"
 	$ExplosionDetector.scale = Vector2.ZERO
 	$ExplosionDetector/CollisionShape2D.set_deferred("disabled", true)
@@ -24,10 +24,7 @@ func _ready():
 	start_velocity = abs(velocity.x) + abs(velocity.y) / 2.0 #used to calculate animation slowdown
 	$Timer.start(explosion_time)
 
-
-
-func _physics_process(delta):
-	if disabled: return
+func _on_physics_process(delta):
 	velocity.y += gravity * delta
 
 	if velocity.x < 0:
@@ -49,6 +46,8 @@ func _physics_process(delta):
 	if $AnimationPlayer.speed_scale < .1:
 		$AnimationPlayer.stop()
 
+
+
 ### GETTERS ###
 
 func get_initial_velocity(scoped_projectile_speed, scoped_direction) -> Vector2:
@@ -63,9 +62,7 @@ func get_initial_velocity(scoped_projectile_speed, scoped_direction) -> Vector2:
 		pass
 	else:
 		out.y -= 100 #give us some ups to start with
-
 	return out
-
 
 
 
@@ -84,8 +81,6 @@ func _on_CollisionDetector_area_entered(area): #shadows
 		else:
 			area.get_parent().hit(int(damage/2.0), get_blood_dir(area.get_parent()))
 		queue_free()
-
-
 
 func _on_Timer_timeout():
 	$ExplosionDetector/CollisionShape2D.set_deferred("disabled", false)
@@ -109,14 +104,12 @@ func _on_Timer_timeout():
 
 
 func _on_ExplosionDetector_body_entered(body):
-	if disabled: return
 	#breakable
 	if body.get_collision_layer_value(9):
 		body.on_break("fire")
 
 
 func _on_ExplosionDetector_area_entered(area):
-	if disabled: return
 	#playerhurt
 	if area.get_collision_layer_value(17):
 		var knockback_direction = Vector2(sign(area.get_parent().global_position.x - global_position.x), 0)

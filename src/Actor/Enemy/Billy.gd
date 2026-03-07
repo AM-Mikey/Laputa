@@ -20,6 +20,18 @@ const WAYPOINT = preload("res://src/Utility/Waypoint.tscn")
 @export var lock_distance = 128
 @export var lock_tolerance = 16
 
+@export_range(0.0, 1.0, 1.0) var difficulty: int = 0:
+	set(val):
+		match val:
+			0:
+				$JumpDetection/Left.enabled = false
+				$JumpDetection/Right.enabled = false
+			1:
+				$JumpDetection/Left.enabled = true
+				$JumpDetection/Right.enabled = true
+		difficulty = val
+const JUMP_VELOCITY: float = -1100.0
+
 var target: Node
 var locked_on = false
 var shooting = false
@@ -36,9 +48,6 @@ func setup():
 	reward = 2
 	damage_on_contact = 1
 	speed = Vector2(50, 50)
-
-
-
 
 ### STATES ###
 
@@ -82,6 +91,10 @@ func enter_idle(_last_state):
 	await $StateTimer.timeout
 	change_state("walk")
 
+func do_idle() -> void:
+	velocity = calc_velocity(move_dir)
+	set_up_direction(FLOOR_NORMAL)
+	move_and_slide()
 
 func enter_aggro(_last_state):
 	pass
@@ -94,7 +107,7 @@ func do_aggro():
 	#this isnt the best way to do this, but returns a good result.
 	#right now this cuts off move_dir when it's more than a block away (to -1 or 1)
 	#the small adjustment when less than that is why we don't just use sign()
-	var x_dir = clamp((waypoint.position.x - position.x)/16, -1, 1)
+	var x_dir: float = clamp((waypoint.position.x - position.x)/16, -1.0, 1.0)
 	move_dir = Vector2(lerp(move_dir.x, x_dir, 0.2), 0)
 
 	if abs(position.x - waypoint.position.x) < lock_tolerance:
@@ -110,7 +123,34 @@ func do_aggro():
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
 
+var is_jumping: bool = false
+var jump_acceleration: float = 0.0
+func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
+	var default_value = super.calc_velocity(move_dir, do_gravity, do_acceleration, do_friction)
+	if (difficulty == 1):
+		if !(is_jumping):
+			if !(is_on_floor()):
+				return default_value
+			var moving_right: bool = move_dir.x > 0
+			var wall_is_slope: bool = false
+			var wall_in_walking_direction: bool = false
 
+			var collision: KinematicCollision2D = move_and_collide(8 * move_dir.sign(), true)
+			if (collision):
+				wall_is_slope = collision.get_angle() <= deg_to_rad(80)
+				wall_in_walking_direction = true
+
+			var check_raycast: RayCast2D = $JumpDetection/Right if moving_right else $JumpDetection/Left
+			if (is_on_wall() and wall_in_walking_direction and !wall_is_slope and !check_raycast.is_colliding()):
+				jump_acceleration = JUMP_VELOCITY
+				is_jumping = true
+				$JumpAccelTimer.start()
+				default_value.y = jump_acceleration * get_physics_process_delta_time()
+		else:
+			default_value.y += jump_acceleration * get_physics_process_delta_time()
+			if ($JumpAccelTimer.time_left <= 0.0 and is_on_floor()):
+				is_jumping = false
+	return default_value
 
 ### HELPERS ###
 
@@ -145,3 +185,11 @@ func _on_PlayerDetector_body_exited(_body):
 	#shooting = false
 	#target = null
 	#change_state("walk")
+
+
+func _on_JumpAccelTimer_timeout() -> void:
+	jump_acceleration = 0
+
+func _exit_tree() -> void:
+	if waypoint:
+		waypoint.queue_free()

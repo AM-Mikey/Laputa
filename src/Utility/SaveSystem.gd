@@ -8,6 +8,7 @@ var data = {
 	"player_data" : {},
 	"level_data" : {},
 	"mission_data" : {},
+	"dialog_data" : {},
 	}
 
 @onready var w = get_tree().get_root().get_node("World")
@@ -48,7 +49,6 @@ func write_player_data_to_save(current_level):
 
 
 
-
 func write_level_data_to_temp(current_level):
 	var limited_props = []
 	for p in get_tree().get_nodes_in_group("LimitedProps"):
@@ -75,43 +75,77 @@ func write_level_data_to_temp(current_level):
 
 
 
-func write_mission_data_to_save():
+func write_mission_data_to_save(): #TODO: last session moved this to trigger save and load last, verify this works
+	var side_missions_deconstructed = {}
+	for m in ms.side_missions:
+		side_missions_deconstructed[m.resource_path] = m.current_stage
 	data["mission_data"] = {
 		"main_mission_stage" : ms.main_mission_stage,
+		"side_missions_deconstructed" : side_missions_deconstructed,
+		"mission_progress_history" : ms.mission_progress_history,
 		}
 	write_to_file(save_path, data)
 	print("mission data written to save")
 
 
+
+func write_dialog_data_to_temp(current_level, npc):
+	if !data["dialog_data"].has(current_level.level_name): #create the specific level if not
+		data["dialog_data"][current_level.level_name] = {}
+	data["dialog_data"][current_level.level_name][npc.id] = [npc.conversation_queue, npc.side_conversation_queue]
+	write_to_file(temp_path, data)
+	print("dialog data saved to temp")
+
+
+
 ### COPY ###
 
-func copy_level_data_from_save_to_temp():
+func copy_level_and_dialog_data_from_save_to_temp():
 	var save_data = read_from_file(save_path)
 	if !save_data.has("level_data"):
 		print("no level data to copy from save to temp")
-		return
+	if !save_data.has("dialog_data"):
+		print("no dialog data to copy from save to temp")
 	var scoped_data = {}
 	scoped_data["level_data"] = save_data["level_data"]
+	scoped_data["dialog_data"] = save_data["dialog_data"]
 	write_to_file(temp_path, scoped_data)
-	print("level data copied from save to temp")
+	print("level and dialog data copied from save to temp")
 
 
 
-func copy_level_data_from_temp_to_save():
+func copy_level_and_dialog_data_from_temp_to_save():
 	var temp_data = read_from_file(temp_path)
 	var save_data = read_from_file(save_path)
 	if !temp_data.has("level_data"):
 		print("no level data to copy from temp to save")
-		return
+	if !temp_data.has("dialog_data"):
+		print("no dialog data to copy from temp to save")
 	var scoped_data = {}
 	scoped_data["player_data"] = save_data["player_data"]
 	scoped_data["level_data"] = temp_data["level_data"]
+	scoped_data["mission_data"] = save_data["mission_data"]
+	scoped_data["dialog_data"] = temp_data["dialog_data"]
 	write_to_file(save_path, scoped_data)
-	print("level data copied from temp to save")
+	print("level and dialog data copied from temp to save")
 
 
 
 ### LOAD ###
+
+func read_mission_data_from_save():
+	var scoped_data = read_from_file(save_path)
+	var mission_data = scoped_data["mission_data"]
+	ms.main_mission_stage = mission_data["main_mission_stage"]
+	ms.side_missions = []
+	for path in mission_data["side_missions_deconstructed"].keys():
+		var side_mission = load(path)
+		side_mission.current_stage = mission_data["side_missions_deconstructed"][path] #the key's value is the current stage
+		ms.side_missions.append(side_mission)
+	ms.mission_progress_history = mission_data["mission_progress_history"]
+	print("mission data loaded from save")
+
+
 
 func read_player_data_from_save():
 	var scoped_data = read_from_file(save_path)
@@ -157,9 +191,7 @@ func read_player_data_from_save():
 	#pc.update_inventory()
 	pc.emit_signal("invincibility_end")
 	print("player data loaded")
-
 	await get_tree().process_frame
-
 
 
 
@@ -167,7 +199,6 @@ func read_level_data_from_temp(current_level):
 	check_dat_file_presence("save")
 	check_dat_file_presence("temp")
 	var scoped_data = read_from_file(temp_path)
-		#return
 	if !scoped_data["level_data"].has(current_level.level_name):
 		print("no previous level data in temp")
 		return
@@ -175,7 +206,6 @@ func read_level_data_from_temp(current_level):
 	set_props_spent(current_level_data["limited_props"])
 	set_triggers_spent(current_level_data["limited_triggers"])
 	print("level data loaded from temp")
-
 
 
 func read_level_data_from_save(current_level):
@@ -190,13 +220,34 @@ func read_level_data_from_save(current_level):
 
 
 
-func read_mission_data_from_save():
+func read_dialog_data_from_temp(current_level):
+	check_dat_file_presence("save")
+	check_dat_file_presence("temp")
+	var scoped_data = read_from_file(temp_path)
+	if !scoped_data["dialog_data"].has(current_level.level_name):
+		print("no previous dialog data in temp")
+		return
+	var current_level_data = scoped_data["dialog_data"][current_level.level_name]
+	for id in current_level_data:
+		for npc in get_tree().get_nodes_in_group("NPCs"):
+			if npc.id == id:
+				npc.conversation_queue = current_level_data[id][0]
+				npc.side_conversation_queue = current_level_data[id][1]
+	print("dialog data loaded from temp")
+
+
+func read_dialog_data_from_save(current_level):
 	var scoped_data = read_from_file(save_path)
-	var mission_data = scoped_data["mission_data"]
-	ms.main_mission_stage = mission_data["main_mission_stage"]
-	print("mission data loaded from save")
-
-
+	if !scoped_data["dialog_data"].has(current_level.level_name):
+		print("no previous dialog data in save")
+		return
+	var current_level_data = scoped_data["dialog_data"][current_level.level_name]
+	for id in current_level_data:
+		for npc in get_tree().get_nodes_in_group("NPCs"):
+			if npc.id == id:
+				npc.conversation_queue = current_level_data[id][0]
+				npc.side_conversation_queue = current_level_data[id][1]
+	print("dialog data loaded from save")
 
 #### HELPER ###
 
@@ -232,7 +283,7 @@ func check_dat_file_presence(filename:String) -> void:
 
 
 func set_props_spent(limited_props):
-	await get_tree().create_timer(0.01).timeout #wait for props to spawn
+	await get_tree().create_timer(0.01, true, false).timeout #wait for props to spawn
 	for saved in limited_props:
 		for current in get_tree().get_nodes_in_group("LimitedProps"):
 			if saved["name"] == current.name:
@@ -241,7 +292,7 @@ func set_props_spent(limited_props):
 					current.expend_prop()
 
 func set_triggers_spent(limited_triggers):
-	await get_tree().create_timer(0.01).timeout #wait for triggers to spawn
+	await get_tree().create_timer(0.01, true, false).timeout #wait for triggers to spawn
 	for saved in limited_triggers:
 		for current in get_tree().get_nodes_in_group("LimitedTriggers"):
 			if saved["name"] == current.name:
