@@ -81,7 +81,7 @@ func child_layer_set(c: Node): #set the visibility layer of all children to laye
 func _input(event):
 	if event.is_action_pressed("inventory") && f.pc():
 		if !il.has_node("Inventory") && !get_tree().paused && !f.pc().disabled && f.pc().can_act && !dll.has_node("DialogBox"):
-
+			il.add_child(INVENTORY.instantiate())
 
 	if event.is_action_pressed("pause") && !ml.has_node("TitleScreen") && !el.has_node("Editor"):
 		if not ml.has_node("PauseMenu") and not get_tree().paused:

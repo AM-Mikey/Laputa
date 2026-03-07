@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=39 format=3 uid="uid://c1np2xna4dogr"]
+[gd_resource type="Theme" format=3 uid="uid://c1np2xna4dogr"]
 
 [ext_resource type="StyleBox" uid="uid://dbafhti4g7dp4" path="res://src/UI/StyleBox/LeatherLight.tres" id="1"]
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="4"]
@@ -17,9 +17,7 @@
 [ext_resource type="StyleBox" uid="uid://djsxt54vtaivl" path="res://src/UI/Slider/ScrollBarGrabber.tres" id="13"]
 [ext_resource type="StyleBox" uid="uid://qim7rgmnpjii" path="res://src/UI/Slider/ScrollBarGrabberHighlight.tres" id="14"]
 [ext_resource type="Texture2D" uid="uid://bht7kghp51wa" path="res://assets/UI/Slider/SliderTick.png" id="14_ao67j"]
-[ext_resource type="StyleBox" uid="uid://b63vgk5a7tw0q" path="res://src/UI/Slider/SliderGrabberArea.tres" id="15_low3n"]
 [ext_resource type="StyleBox" uid="uid://nvs48gdh8bwm" path="res://src/UI/StyleBox/LeatherDark.tres" id="16"]
-[ext_resource type="StyleBox" uid="uid://g2yej05lk4sl" path="res://src/UI/Slider/SliderGrabberAreaHighlight.tres" id="16_b27pm"]
 [ext_resource type="Texture2D" uid="uid://bl1htelnmympq" path="res://assets/UI/Slider/SliderGrabberHighlight.png" id="18"]
 [ext_resource type="StyleBox" uid="uid://ctw8lx7pcj6kl" path="res://src/UI/StyleBox/Leather.tres" id="21"]
 [ext_resource type="Texture2D" uid="uid://c8h4uacgruxtt" path="res://assets/UI/OptionArrowLeather.png" id="21_low3n"]
@@ -30,7 +28,10 @@
 [ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="28_b27pm"]
 [ext_resource type="StyleBox" uid="uid://c53b3p1k47jdu" path="res://src/UI/StyleBox/SteelRound.tres" id="28_f6tep"]
 [ext_resource type="StyleBox" uid="uid://brcoinunoig2o" path="res://src/UI/StyleBox/Selected.tres" id="29"]
+[ext_resource type="StyleBox" uid="uid://bpq27uwrkvyxy" path="res://src/UI/Slider/VScrollBarGrabber.tres" id="29_f6tep"]
 [ext_resource type="StyleBox" uid="uid://b2eysynpuqm3n" path="res://src/UI/StyleBox/RustTabs.tres" id="29_prda7"]
+[ext_resource type="StyleBox" uid="uid://dg61mwvkb31v3" path="res://src/UI/Slider/VScrollBarGrabberHighlight.tres" id="30_1pxy0"]
+[ext_resource type="StyleBox" uid="uid://cr1nw0a6yivfy" path="res://src/UI/Slider/VScrollBarSlider.tres" id="31_t07as"]
 
 [sub_resource type="StyleBoxEmpty" id="12"]
 
@@ -90,8 +91,8 @@ HScrollBar/styles/scroll = ExtResource("6")
 HSlider/icons/grabber = ExtResource("7")
 HSlider/icons/grabber_highlight = ExtResource("18")
 HSlider/icons/tick = ExtResource("14_ao67j")
-HSlider/styles/grabber_area = ExtResource("15_low3n")
-HSlider/styles/grabber_area_highlight = ExtResource("16_b27pm")
+HSlider/styles/grabber_area = null
+HSlider/styles/grabber_area_highlight = null
 HSlider/styles/slider = ExtResource("6")
 ItemList/colors/font_color = Color(0.968627, 0.886275, 0.717647, 1)
 ItemList/colors/font_color_selected = Color(0.882353, 0.882353, 0.882353, 1)
@@ -140,12 +141,10 @@ TextEdit/styles/read_only = ExtResource("4")
 TooltipLabel/colors/font_color = Color(0.40784314, 0.007843138, 0.06666667, 1)
 TooltipPanel/styles/panel = ExtResource("25")
 Tree/styles/bg = ExtResource("24")
-VScrollBar/styles/grabber = ExtResource("13")
-VScrollBar/styles/grabber_highlight = ExtResource("14")
-VScrollBar/styles/grabber_pressed = ExtResource("14")
-VScrollBar/styles/scroll = ExtResource("6")
+VScrollBar/styles/grabber = ExtResource("29_f6tep")
+VScrollBar/styles/grabber_highlight = ExtResource("30_1pxy0")
+VScrollBar/styles/grabber_pressed = ExtResource("29_f6tep")
+VScrollBar/styles/scroll = ExtResource("31_t07as")
 VSlider/icons/grabber = ExtResource("7")
 VSlider/icons/grabber_highlight = ExtResource("18")
-VSlider/styles/grabber_area = ExtResource("15_low3n")
-VSlider/styles/grabber_area_highlight = ExtResource("16_b27pm")
 VSlider/styles/slider = ExtResource("6")

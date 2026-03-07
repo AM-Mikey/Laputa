@@ -1,6 +1,6 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bsjpymr2sylbl"]
 
-[ext_resource type="Script" path="res://src/World.gd" id="8"]
+[ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
 
 [sub_resource type="Animation" id="Animation_qbf6s"]
 resource_name = "Flash"
@@ -77,7 +77,7 @@ transform = Transform2D(4, 0, 0, 4, 0, 0)
 
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=345291776]
 process_mode = 3
-layer = 4
+layer = 3
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
@@ -89,30 +89,28 @@ autoplay = &"RESET"
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=1389692242]
 process_mode = 3
-layer = 5
+layer = 4
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
 [node name="DialogLayer" type="CanvasLayer" parent="." unique_id=396863006]
 process_mode = 3
-layer = 6
+layer = 5
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
 [node name="EditorLayer" type="CanvasLayer" parent="." unique_id=1207639602]
-layer = 7
+layer = 6
 scale = Vector2(2, 2)
 transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="DebugLayer" type="CanvasLayer" parent="." unique_id=1159031028]
-layer = 8
+layer = 7
 scale = Vector2(2, 2)
 transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="MenuLayer" type="CanvasLayer" parent="." unique_id=2033685382]
 process_mode = 3
-layer = 9
+layer = 8
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
-
-[connection signal="level_saved" from="EditorLayer/Editor" to="EditorLayer/Editor/Main/Win/Tab/Levels" method="on_save"]
