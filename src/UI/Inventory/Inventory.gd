@@ -17,7 +17,7 @@ func _ready():
 	#first_topic.topic_stages = [0,1,2,3,4]
 
 func _input(event):
-	if event.is_action_pressed("inventory") and f.pc().can_input:
+	if event.is_action_pressed("inventory") and inp.can_act:
 		exit()
 
 

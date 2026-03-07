@@ -1,12 +1,10 @@
 extends Node2D
 
-#const DEBUG_INFO = preload("res://src/UI/Debug/DebugInfo.tscn")
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const INVENTORY = preload("res://src/UI/Inventory/Inventory.tscn")
 const LEVEL_TEXT = preload("res://src/UI/LevelText.tscn")
 
 const PAUSEMENU = preload("res://src/UI/PauseMenu.tscn")
-#const POPUP = preload("res://src/UI/PopupText.tscn")
 const JUNIPER = preload("res://src/Player/Juniper.tscn")
 const TITLE = preload("res://src/UI/TitleScreen.tscn")
 const TITLECAM = preload("res://src/Utility/TitleCam.tscn")
@@ -82,8 +80,7 @@ func child_layer_set(c: Node): #set the visibility layer of all children to laye
 
 func _input(event):
 	if event.is_action_pressed("inventory") && f.pc():
-		if !il.has_node("Inventory") && !get_tree().paused && !f.pc().disabled && f.pc().can_input && !dll.has_node("DialogBox"):
-			il.add_child(INVENTORY.instantiate())
+		if !il.has_node("Inventory") && !get_tree().paused && !f.pc().disabled && f.pc().can_act && !dll.has_node("DialogBox"):
 
 
 	if event.is_action_pressed("pause") && !ml.has_node("TitleScreen") && !el.has_node("Editor"):
@@ -118,6 +115,7 @@ func first_time_level_setup():
 
 func change_level_via_code(level_path, use_save_data):
 	print("changing level via code")
+	inp.can_act = true
 	if ml.has_node("TitleScreen"): ml.get_node("TitleScreen").exit()
 	if ml.has_node("PauseMenu"): ml.get_node("PauseMenu").exit()
 	if has_node("MenuLayer/LevelSelect"): get_node("MenuLayer/LevelSelect").queue_free()
@@ -154,6 +152,7 @@ func change_level_via_code(level_path, use_save_data):
 
 func change_level_via_trigger(level_path, door_index):
 	print("changing level via trigger")
+	inp.can_act = true
 	SaveSystem.write_level_data_to_temp(current_level)
 	if f.db(): await f.db().exit()
 	if f.hud():
@@ -337,7 +336,7 @@ func _resolution_scale_changed(resolution_scale):
 	ui.scale = Vector2(resolution_scale, resolution_scale)
 	hl.scale = Vector2(resolution_scale, resolution_scale)
 	bl.scale = Vector2(resolution_scale, resolution_scale)
-	var half_scale = max(ceil(resolution_scale/2.0), 1)
+	var half_scale = max(ceil(resolution_scale / 2.0), 1)
 	el.scale = Vector2(half_scale, half_scale)
 	dl.scale = Vector2(half_scale, half_scale)
 	ml.scale = Vector2(vs.menu_resolution_scale, vs.menu_resolution_scale)

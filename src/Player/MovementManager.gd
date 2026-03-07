@@ -83,9 +83,9 @@ func _physics_process(_delta):
 
 func _input(event):
 	if not pc.disabled:
-		if event.is_action_pressed("fire_automatic") and pc.can_input:
+		if event.is_action_pressed("fire_automatic") and inp.can_act:
 			pc.direction_lock = pc.look_dir
-		if event.is_action_released("fire_automatic"): #bypass can_input
+		if event.is_action_released("fire_automatic"): #bypass inp.can_act
 			pc.direction_lock = Vector2i.ZERO
 
 func do_coyote_time():

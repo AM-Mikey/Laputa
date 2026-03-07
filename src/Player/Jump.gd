@@ -18,7 +18,7 @@ var jump_time : int = 0
 func state_process(_delta):
 	jump_time += 1
 	# Jump holding
-	if pc.can_input and not Input.is_action_pressed("jump"):
+	if inp.can_act and not Input.is_action_pressed("jump"):
 		holding_jump = false
 
 	var squeezing_into_a_corridor : bool
@@ -54,7 +54,7 @@ func state_process(_delta):
 
 func set_player_directions():
 	var input_dir = Vector2.ZERO
-	if pc.can_input: input_dir = inp.analogstick
+	if inp.can_act: input_dir = inp.analogstick
 
 	#get move dir
 	pc.move_dir = Vector2(input_dir.x, pc.move_dir.y)
@@ -170,7 +170,7 @@ func enter(_prev_state: String) -> void:
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
 	pc.mm.snap_vector = Vector2.ZERO
-	holding_jump = pc.can_input and Input.is_action_pressed("jump") and !is_dropping
+	holding_jump = inp.can_act and Input.is_action_pressed("jump") and !is_dropping
 	if holding_jump:
 		# Set the player's move dir to -1.0 to indicate a jump.
 		# It will be reset on next physics frame

@@ -29,7 +29,6 @@ signal invincibility_end()
 
 var invincible = false
 var disabled = false
-var can_input = true
 @export var die_from_falling = true
 
 #var is_on_conveyor = false
@@ -55,6 +54,8 @@ var look_dir := Vector2i.LEFT
 var direction_lock := Vector2i.ZERO
 var shoot_dir := Vector2.LEFT
 
+
+
 enum SoundProfile {NORMAL, UNDERWATER}
 var sound_profile = SoundProfile.NORMAL:
 	set(val):
@@ -74,14 +75,14 @@ var sound_profile = SoundProfile.NORMAL:
 
 func disable():
 	disabled = true
-	can_input = false
+	inp.can_act = false
 	invincible = true
 	mm.change_state("disabled")
 	return
 
 func enable():
 	disabled = false
-	can_input = true
+	inp.can_act = true
 	invincible = false
 	if mm.cached_state:
 		#print("change state via player enable to cached state")

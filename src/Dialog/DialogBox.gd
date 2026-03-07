@@ -213,7 +213,7 @@ func _on_flash_timer_timeout():
 
 
 func _input(event):
-	if event.is_action_pressed("ui_accept") and not busy: #bypass can_input
+	if event.is_action_pressed("ui_accept") and not busy: #bypass inp.can_act
 		if $Options.is_displaying: return #so it doesn't input
 		if awaiting_merge:
 			awaiting_merge = false

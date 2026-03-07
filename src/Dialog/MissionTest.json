@@ -106,6 +106,7 @@
 	",
 
 
+
 	"d_s0":
 	"
 	/newchar,nun,NPC_D Your Stage is talk_npc_a
@@ -148,6 +149,8 @@
 	"
 	/newchar,nun,NPC_D Congrats! You reached Stage celebrate!
 	",
+
+
 
 	"cutscene_talk_npc_a":
 	"

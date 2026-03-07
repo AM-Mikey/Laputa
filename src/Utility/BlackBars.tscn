@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://oypc71shfnay"]
+
+[ext_resource type="Texture2D" uid="uid://b3hnyxt5qixpm" path="res://assets/Utility/Black.png" id="1_v3lqr"]
+
+[node name="BlackBars" type="Node2D" unique_id=1230593609]
+visibility_layer = 2
+
+[node name="Left" type="Sprite2D" parent="." unique_id=596837067]
+visibility_layer = 2
+position = Vector2(-10000, -5000)
+scale = Vector2(10000, 10000)
+texture = ExtResource("1_v3lqr")
+centered = false
+
+[node name="Right" type="Sprite2D" parent="." unique_id=1184319445]
+visibility_layer = 2
+position = Vector2(1080, -5000)
+scale = Vector2(10000, 10000)
+texture = ExtResource("1_v3lqr")
+centered = false
+
+[node name="Top" type="Sprite2D" parent="." unique_id=2115954809]
+visibility_layer = 2
+position = Vector2(-5000, -10000)
+scale = Vector2(10000, 10000)
+texture = ExtResource("1_v3lqr")
+centered = false
+
+[node name="Bottom" type="Sprite2D" parent="." unique_id=705133873]
+visibility_layer = 2
+position = Vector2(-5000, 1080)
+scale = Vector2(10000, 10000)
+texture = ExtResource("1_v3lqr")
+centered = false

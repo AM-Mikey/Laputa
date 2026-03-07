@@ -23,7 +23,7 @@ func _on_body_exited(_body):
 
 
 func enter_load_zone(): #see if you need the inspect state
-	active_pc.can_input = false
+	inp.can_act = false
 	match direction:
 		Direction.LEFT:
 			active_pc.move_to(Vector2(position.x - 16, position.y))

@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://deyh6xyl8c6tr"]
+[gd_scene format=3 uid="uid://deyh6xyl8c6tr"]
 
 [ext_resource type="Script" uid="uid://sw5a0ja4xk2f" path="res://src/Background/LevelLimiter.gd" id="1"]
 
-[node name="LevelLimiter" type="MarginContainer"]
+[node name="LevelLimiter" type="MarginContainer" unique_id=1023975287]
 offset_right = 476.0
 offset_bottom = 274.0
 mouse_filter = 2
 script = ExtResource("1")
 
-[node name="ReferenceRect" type="ReferenceRect" parent="."]
+[node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=693576039]
 layout_mode = 2
 mouse_filter = 2
 border_color = Color(1, 1, 1, 1)

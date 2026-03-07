@@ -9,8 +9,10 @@ var analogstick:Vector2 = Vector2(0,0)
 var Xaxis_deadzone:float = 0.2 #general deadzone
 var Yaxis_deadzone:float = 0.2 #general deadzone
 var Xaxis_clampzone:float = 0.85 #everything after this input is turned into 1.0
-
 var Y_axis_shoot_deadzone:float = 0.25
+
+			#ETC
+var can_act:= true
 
 func rawstick() -> Vector2:
 	var outputX:float = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -52,6 +54,8 @@ var buffer:Array=[
 
 
 func base_inputheld(button:String) -> bool:
+	if not can_act:
+		return false
 	if Input.get_action_strength(button) >= inputstrength:
 		return true
 	else:
@@ -72,6 +76,7 @@ func writebuffer() -> void:
 
 
 func pressed(button,custombuffer=pressbuffer) -> bool:
+	
 	for x in buffer:
 		if x[0] == button:
 			if x[2] <= custombuffer:

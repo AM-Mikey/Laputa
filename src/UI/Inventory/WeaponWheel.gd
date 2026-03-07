@@ -42,7 +42,7 @@ func _physics_process(_delta):
 		order_z_index()
 
 func _input(event):
-	if pc.disabled or not pc.can_input:
+	if pc.disabled or not inp.can_act:
 		return
 	var gun_count = pc.guns.get_child_count()
 	if (event.is_action_pressed("gun_left") || event.is_action_pressed("gun_right")) && timer.time_left == 0: # and timer.time_left == 0)

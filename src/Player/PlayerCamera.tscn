@@ -2,6 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cxspdb8eq5n0h" path="res://src/Player/PlayerCamera.gd" id="1"]
 
+[sub_resource type="Curve" id="Curve_s1ms6"]
+_limits = [0.0, 1.12, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.35, 1.1), 0.0, 0.0, 0, 0, Vector2(0.6, 0.96), 0.0, 0.0, 0, 0, Vector2(0.8, 1.01), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+
 [node name="PlayerCamera" type="Camera2D" unique_id=1936706909 groups=["Cameras", "PlayerCameras"]]
 position = Vector2(0, -16)
 offset = Vector2(0.001, 0.001)
@@ -9,3 +14,4 @@ process_callback = 0
 limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("1")
+curve_elastic = SubResource("Curve_s1ms6")

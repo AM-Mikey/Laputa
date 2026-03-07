@@ -1,5 +1,7 @@
 extends MarginContainer
 
+const BLACKBARS = preload("res://src/Utility/BlackBars.tscn")
+
 signal limit_camera(left, right, top, bottom)
 
 enum Focus {TOP, ONE_QUARTER, CENTER, THREE_QUARTERS, BOTTOM}
@@ -44,6 +46,14 @@ func setup():
 	setup_background_resource()
 	setup_layers()
 	update_layers()
+
+	if w.current_level.has_node("BlackBars"):
+		w.current_level.get_node("BlackBars").free()
+	var blackbars = BLACKBARS.instantiate()
+	blackbars.global_position = global_position
+	blackbars.get_node("Right").position.x = size.x
+	blackbars.get_node("Bottom").position.y = size.y
+	w.current_level.add_child(blackbars)
 
 	#Wait for the entire tree done initializing to have a proper camera
 	if camera:
@@ -202,5 +212,7 @@ func on_camera_zoom_changed():
 
 func _resolution_scale_changed(_resolution_scale):
 	emit_signal("limit_camera", offset_left, offset_right, offset_top, offset_bottom)
+	w.current_level.get_node("BlackBars").get_node("Right").position.x = size.x
+	w.current_level.get_node("BlackBars").get_node("Bottom").position.y = size.y
 	#set_focus()
 	update_layers()
