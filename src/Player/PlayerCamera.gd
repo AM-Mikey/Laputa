@@ -124,9 +124,10 @@ func control_processing():
 		"to_pos":
 			control_to_position(Vector2(current_action[1],current_action[2]),current_action[3])
 		"to_player":
-			control_to_player(current_action[1])
+			await control_to_player(current_action[1])
 			if control_action_queue.size() == 0:
-					control_stop()
+				print("mom")
+				control_stop()
 		"to_waypoint":
 			control_to_waypoint(current_action[1],current_action[2])
 		"wait":
@@ -134,6 +135,8 @@ func control_processing():
 			control_next()
 			if control_action_queue.size() == 0:
 				control_stop()
+		"hold":
+			control_next(false) #go to the next one without running it
 		"can_act":
 			inp.can_act = current_action[1]
 			control_next()
@@ -148,14 +151,15 @@ func control_processing():
 
 func control_add(action: Array):
 	control_action_queue.append(action)
-	if !control_active:
+	if !control_active || control_action_queue.size() == 1: #after a hold this will be active but the only index
 		control_processing()
 
 
-func control_next(): #remove the current action
+func control_next(with_processing = true): #remove the current action
 	control_target = null
 	control_action_queue.pop_front()
-	control_processing()
+	if with_processing:
+		control_processing()
 
 
 func control_stop(): #return to automatic camera
@@ -169,6 +173,7 @@ func control_stop(): #return to automatic camera
 
 func control_to_position(target_pos: Vector2, speed: float, do_player_drag_offset = false):
 	stop_tweens()
+	w.dll.get_node("DialogBox").busy = true
 	var target_offset = target_pos - global_position
 	var start_offset = offset
 	var overshoot_target = target_offset + (target_offset - start_offset).normalized() * control_overshoot_distance
@@ -181,7 +186,7 @@ func control_to_position(target_pos: Vector2, speed: float, do_player_drag_offse
 		v_tween.tween_property(self, "drag_vertical_offset", 0.0, drag_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	else:
 		var dist = h_pan_distance / vs.resolution_scale
-		h_tween.tween_property(self, "drag_horizontal_offset", pc.look_dir.x, drag_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		h_tween.tween_property(self, "drag_horizontal_offset", pc.look_dir.x * dist, drag_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		v_tween.tween_property(self, "drag_vertical_offset", 0.0, drag_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 	control_tween = create_tween()
@@ -207,19 +212,18 @@ func control_to_position(target_pos: Vector2, speed: float, do_player_drag_offse
 	else:
 		adjusting_level_limits = false
 		var ll = w.current_level.get_node("LevelLimiter") #to reset the limits
-		limit_tween_left.tween_property(self, "limit_left", ll.limit_left, drag_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-		limit_tween_right.tween_property(self, "limit_right", ll.limit_right, drag_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-		limit_tween_top.tween_property(self, "limit_top", ll.limit_top, drag_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-		limit_tween_bottom.tween_property(self, "limit_bottom", ll.limit_bottom, drag_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		limit_tween_left.tween_property(self, "limit_left", ll.offset_left, drag_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		limit_tween_right.tween_property(self, "limit_right", ll.offset_right, drag_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		limit_tween_top.tween_property(self, "limit_top", ll.offset_top, drag_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		limit_tween_bottom.tween_property(self, "limit_bottom", ll.offset_bottom, drag_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 
 	await control_tween.finished
+	w.dll.get_node("DialogBox").busy = false
 	control_next()
-	if control_action_queue.size() == 0:
-		control_stop()
 
 func control_to_player(speed: float): #Moves camera towards player position
-	var player_pos: Vector2 = pc.global_position
-	control_to_position(player_pos, speed)
+	var player_pos: Vector2 = pc.global_position + Vector2(0.001, -15.999)
+	control_to_position(player_pos, speed, true)
 
 
 func control_to_waypoint(waypoint_index: int, speed: float):
@@ -238,8 +242,6 @@ func control_to_waypoint(waypoint_index: int, speed: float):
 func control_reset(): #resets camera back to player instantly
 	position = Vector2(0, -16)
 	reset()
-
-
 
 ### HELPERS ###
 

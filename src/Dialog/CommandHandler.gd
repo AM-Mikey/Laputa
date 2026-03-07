@@ -135,6 +135,8 @@ func parse_command(string):
 					camera.control_add(["to_waypoint", int(a[2]), float(a[3])])
 				"wait":
 					camera.control_add(["wait", float(a[1])])
+				"hold":
+					camera.control_add(["hold"])
 				"reset":
 					camera.control_add(["reset"])
 
