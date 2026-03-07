@@ -16,6 +16,8 @@ script = ExtResource("1_owv0v")
 level_name = "CloudFactoryExterior"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
+mission_level_update = "res://src/Mission/MissionTest.json"
+debug_main_mission_stage_name = "camera_test"
 
 [node name="LevelLimiter" parent="." unique_id=752739957 instance=ExtResource("2_7lvhr")]
 visibility_layer = 2

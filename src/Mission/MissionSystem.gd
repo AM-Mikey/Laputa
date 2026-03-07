@@ -13,6 +13,8 @@ const MAIN_MISSION = [ #[name, trigger_type, trigger_value, description]
 	"I need to talk to NPC D"],
 	["celebrate", "", "",
 	"I've completed the mission demo!"],
+	["camera_test", "", "",
+	"This is a test of the camera system using missions"],
 ]
 
 var main_mission_stage: Array = MAIN_MISSION[0]
@@ -250,6 +252,15 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 			for stage in data["level_conversation_on_enter"][mission_name]:
 				if stage == mission_stage:
 					w.current_level.conversation_on_enter = data["level_conversation_on_enter"][mission_name][stage]
+
+#camera_control_add
+	if data.has("camera_control_add"):
+		if data["camera_control_add"].has(mission_name):
+			for stage in data["camera_control_add"][mission_name]:
+				if stage == mission_stage:
+					#inp.can_act = false
+					f.pc().get_node("PlayerCamera").control_add(data["camera_control_add"][mission_name][stage])
+
 
 ### HELPER ###
 

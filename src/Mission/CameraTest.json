@@ -1,0 +1,7 @@
+{
+	"camera_control_add": {
+		"Main": {
+			"camera_test": ["to_pos", 0.0 , 0.0, 10.0],
+		},
+	},
+}
