@@ -13,6 +13,8 @@ const MAIN_MISSION = [ #[name, trigger_type, trigger_value, description]
 	"I need to talk to NPC D"],
 	["celebrate", "", "",
 	"I've completed the mission demo!"],
+	["camera_test", "", "",
+	"This is a test of the manual camera controls"],
 ]
 
 var main_mission_stage: Array = MAIN_MISSION[0]
@@ -132,12 +134,12 @@ func mission_progress_check(): #TODO: compress these into one
 		ms.progress_main_mission()
 
 
-func setup_level_from_array(array):
+func setup_level_from_array(array, update_conversations):
 	for i in array:
 		var mission_name = i[0]
 		var mission_stage = i[1]
 		#print("testing: ", mission_name, mission_stage)
-		update_level_via_mission(mission_name, mission_stage, false) #don't update conversations, instead we load them from save
+		update_level_via_mission(mission_name, mission_stage, update_conversations) #don't update conversations, instead we load them from save
 
 func setup_level_from_mission_progress_history():
 	print("from history")
@@ -215,25 +217,21 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 	for k in trigger_runtime_position_offset_dict.keys():
 		k.global_position += array_to_vector2(trigger_runtime_position_offset_dict[k])
 
-##npc_set_conversation_queue #TODO: depricate
-	#var npc_set_conversation_queue_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_set_conversation_queue", "NPCs", false)
-	#for k in npc_set_conversation_queue_dict.keys():
-		#var convo_queue = get_conversation_queue_from_mixed_or_partial(npc_set_conversation_queue_dict[k])
-		#if convo_queue == [[]]:
-			#k.conversation_queue = []
-			#k.side_conversation_queue = []
-			#return
-		#var main_queue = []
-		#var side_queue = []
-		#for a in convo_queue:
-			#match a[1]:
-				#"main": main_queue.append(a)
-				#"side": side_queue.append(a)
-		#if !main_queue.is_empty():
-			#k.conversation_queue = main_queue
-		#if !side_queue.is_empty():
-			#k.side_conversation_queue = side_queue
+
+
 	if update_conversations:
+		#npc_set_main_conversation_queue
+		var npc_set_main_conversation_queue = get_matching_entities_values(data, mission_name, mission_stage, "npc_set_main_conversation_queue", "NPCs", false)
+		for k in npc_set_main_conversation_queue.keys():
+			var queue_to_add = get_conversation_queue_from_mixed_or_partial(npc_set_main_conversation_queue[k])
+			var first_added_conversation_index = k.conversation_queue.size()
+			for i in k.conversation_queue.size(): #this doesnt actually set, just sets all previous convo to already_read
+				k.conversation_queue[i][4] = true
+			for c in queue_to_add:
+				k.conversation_queue.append(c)
+			k.next_conversation_queue_name = "conversation_queue"
+			k.next_conversation_index = first_added_conversation_index
+
 		#npc_append_conversation_queue
 		var npc_append_conversation_queue_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_append_conversation_queue", "NPCs", false)
 		for k in npc_append_conversation_queue_dict.keys():

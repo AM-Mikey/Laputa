@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://d32ixmoch3w5j"]
+[gd_scene format=4 uid="uid://bpcx5p67v02tm"]
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_53evh"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_72to3"]
@@ -18,6 +18,7 @@ level_name = "MissionTest"
 dialog_json = "res://src/Dialog/MissionTest.json"
 conversation_on_enter = "cutscene_talk_npc_a"
 mission_level_update = "res://src/Mission/MissionTest.json"
+debug_main_mission_stage_name = "talk_npc_a"
 
 [node name="LevelLimiter" parent="." unique_id=1355825292 instance=ExtResource("2_72to3")]
 visibility_layer = 2

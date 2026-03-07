@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://driq444nxd8v8"]
+[gd_scene format=3 uid="uid://driq444nxd8v8"]
 
 [ext_resource type="Script" uid="uid://d3nbxvskm8eat" path="res://src/UI/TitleScreen.gd" id="3"]
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="3_f4kbc"]
 [ext_resource type="Theme" uid="uid://ouysr8x0xtu5" path="res://src/UI/Theme/Floating.tres" id="4"]
 [ext_resource type="PackedScene" uid="uid://cocixd0n3hmcm" path="res://src/UI/MenuButton.tscn" id="7"]
 
-[node name="TitleScreen" type="MarginContainer"]
+[node name="TitleScreen" type="MarginContainer" unique_id=1366518061]
 offset_right = 576.0
 offset_bottom = 360.0
 theme = ExtResource("4")
@@ -15,7 +15,7 @@ theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 script = ExtResource("3")
 
-[node name="VersionLabel" type="Label" parent="."]
+[node name="VersionLabel" type="Label" parent="." unique_id=1809038730]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -24,33 +24,33 @@ theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("3_f4kbc")
 text = "Version:"
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="." unique_id=1745499973]
 layout_mode = 2
 
-[node name="Title" type="TextureRect" parent="VBox"]
+[node name="Title" type="TextureRect" parent="VBox" unique_id=1893686185]
 layout_mode = 2
 stretch_mode = 4
 
-[node name="New" parent="VBox" instance=ExtResource("7")]
+[node name="New" parent="VBox" unique_id=1082688312 instance=ExtResource("7")]
 layout_mode = 2
 text = "New Game"
 
-[node name="Load" parent="VBox" instance=ExtResource("7")]
+[node name="Load" parent="VBox" unique_id=949136124 instance=ExtResource("7")]
 layout_mode = 2
 text = "Load Game"
 
-[node name="Options" parent="VBox" instance=ExtResource("7")]
+[node name="Options" parent="VBox" unique_id=910375674 instance=ExtResource("7")]
 layout_mode = 2
 text = "Options"
 
-[node name="KeyGuide" parent="VBox" instance=ExtResource("7")]
+[node name="KeyGuide" parent="VBox" unique_id=1175018240 instance=ExtResource("7")]
 layout_mode = 2
 text = "How To Play"
 
-[node name="Level" parent="VBox" instance=ExtResource("7")]
+[node name="Level" parent="VBox" unique_id=2112246992 instance=ExtResource("7")]
 layout_mode = 2
 text = "Level Select"
 
-[node name="Quit" parent="VBox" instance=ExtResource("7")]
+[node name="Quit" parent="VBox" unique_id=388169599 instance=ExtResource("7")]
 layout_mode = 2
 text = "Quit"

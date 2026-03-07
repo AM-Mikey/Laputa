@@ -16,6 +16,8 @@ script = ExtResource("1_owv0v")
 level_name = "CloudFactoryExterior"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
+mission_level_update = "res://src/Mission/CameraTest.json"
+debug_main_mission_stage_name = "camera_test"
 
 [node name="LevelLimiter" parent="." unique_id=752739957 instance=ExtResource("2_7lvhr")]
 visibility_layer = 2
@@ -91,7 +93,6 @@ position = Vector2(2504, 2176)
 actor_path = "res://src/Actor/NPC/Basil.tscn"
 properties = {
 "base_gravity": [300.0, 3],
-"conversation": ["camera_test_1", 4],
 "dialog_json": ["res://src/Dialog/CameraTest.json", 4],
 "editor_hidden": [false, 1],
 "id": ["basil", 4],
@@ -113,6 +114,7 @@ properties = {
 "cooldown_time": [1, 2],
 "debug": [true, 1],
 "defend_time": [0.4, 3],
+"difficulty": [0, 2],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "idle_max_time": [5.0, 3],

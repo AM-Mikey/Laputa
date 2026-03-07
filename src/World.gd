@@ -80,7 +80,7 @@ func child_layer_set(c: Node): #set the visibility layer of all children to laye
 
 func _input(event):
 	if event.is_action_pressed("inventory") && f.pc():
-		if !il.has_node("Inventory") && !get_tree().paused && !f.pc().disabled && f.pc().can_act && !dll.has_node("DialogBox"):
+		if !il.has_node("Inventory") && !get_tree().paused && !f.pc().disabled && inp.can_act && !dll.has_node("DialogBox"):
 			il.add_child(INVENTORY.instantiate())
 
 	if event.is_action_pressed("pause") && !ml.has_node("TitleScreen") && !el.has_node("Editor"):
@@ -155,8 +155,7 @@ func change_level_via_trigger(level_path, door_index):
 	inp.can_act = true
 	SaveSystem.write_level_data_to_temp(current_level)
 	if f.db(): await f.db().exit()
-	if f.hud():
-		$HUDLayer/HUDAnimator.play("RESET")
+	if f.hud(): $HUDLayer/HUDAnimator.play("RESET")
 	clear_spawn_layers()
 	var old_level_path = current_level.scene_file_path
 	current_level.free()
@@ -180,13 +179,13 @@ func change_level_via_trigger(level_path, door_index):
 		await get_tree().create_timer(0.8).timeout
 		$BlackoutLayer/TransitionWipe.play_out_animation()
 		await $BlackoutLayer/TransitionWipe.tree_exiting #wait for a bit of the animation to finish
-		$Juniper.can_input = true
+		inp.can_act = true
 
 	elif bl.has_node("TransitionIris"): #DOORS
 		await get_tree().create_timer(0.4).timeout
 		$BlackoutLayer/TransitionIris.play_out_animation()
 		await $BlackoutLayer/TransitionIris.tree_exiting #wait for a bit of the animation to finish
-		$Juniper.can_input = true
+		inp.can_act = true
 
 	if old_level_path != level_path:
 		display_level_text(current_level)
@@ -196,11 +195,13 @@ func change_level_via_trigger(level_path, door_index):
 
 func setup_missions(use_save_data: bool, type = "first_time"):
 	if !current_level.mission_level_update: return
-
+	print("setting up missions")
 	#main mission
 	if use_save_data: #setup all main and side stages
 		ms.setup_level_from_mission_progress_history()
 	else:
+		var update_conversations = true if type in ["first_time", "code"] else false
+
 		if type != "trigger": #Don't if we're moving thru a door or loadzone
 			if current_level.debug_main_mission_stage_name: #add all stages until we get to the one that matches.
 				var main_array = []
@@ -211,9 +212,9 @@ func setup_missions(use_save_data: bool, type = "first_time"):
 						if s[0] == current_level.debug_main_mission_stage_name:
 							ms.main_mission_stage = s
 							main_array_completed = true
-				ms.setup_level_from_array(main_array)
+				ms.setup_level_from_array(main_array, update_conversations)
 			else: #start with the very first main mission stage
-				var update_conversations = true if type in ["first_time"] else false
+				ms.main_mission_stage = ms.MAIN_MISSION[0]
 				ms.update_level_via_mission("Main", "current", update_conversations)
 
 		#side missions
@@ -229,7 +230,7 @@ func setup_missions(use_save_data: bool, type = "first_time"):
 						side_array.append([m.resource_path.get_file().trim_suffix(".tres"), s[0]])
 						if s[0] == m.current_stage:
 							side_array_completed = true
-		ms.setup_level_from_array(side_array)
+		ms.setup_level_from_array(side_array, update_conversations)
 		ms.mission_progress_check()
 
 

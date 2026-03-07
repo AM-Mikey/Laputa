@@ -1,0 +1,9 @@
+{
+	"npc_set_main_conversation_queue": {
+		"Main": {
+			"basil": {
+				"camera_test": "camera_test_1",
+			},
+		},
+	},
+}

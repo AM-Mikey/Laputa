@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://bsjpymr2sylbl"]
+[gd_scene format=3]
 
-[ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
+[ext_resource type="Script" path="res://src/World.gd" id="8"]
 
 [sub_resource type="Animation" id="Animation_qbf6s"]
 resource_name = "Flash"
@@ -47,10 +47,10 @@ development_stage = "alpha"
 release_version = "1.8"
 do_skip_title = true
 debug_visible = true
-start_level_path = "res://src/Level/Dogtown.tscn"
+start_level_path = "res://src/Level/CloudFactoryExterior.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=912648782]
-scroll_offset = Vector2(-8352, -8447.5)
+scroll_offset = Vector2(-6633.4995, -6066.9775)
 
 [node name="Back" type="Node2D" parent="." unique_id=1451941770]
 visibility_layer = 2
@@ -65,21 +65,21 @@ visibility_layer = 2
 z_index = 2
 
 [node name="InventoryLayer" type="CanvasLayer" parent="." unique_id=1283144760]
-scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 0, 0)
+scale = Vector2(3, 3)
+transform = Transform2D(3, 0, 0, 3, 0, 0)
 
 [node name="BlackoutLayer" type="CanvasLayer" parent="." unique_id=1856051554]
 process_mode = 3
 layer = 2
 visible = false
-scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 0, 0)
+scale = Vector2(3, 3)
+transform = Transform2D(3, 0, 0, 3, 0, 0)
 
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=345291776]
 process_mode = 3
 layer = 3
-scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 0, 0)
+scale = Vector2(3, 3)
+transform = Transform2D(3, 0, 0, 3, 0, 0)
 
 [node name="HUDGroup" type="CanvasGroup" parent="HUDLayer" unique_id=37916589]
 
@@ -90,14 +90,15 @@ autoplay = &"RESET"
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=1389692242]
 process_mode = 3
 layer = 4
-scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 0, 0)
+visible = false
+scale = Vector2(3, 3)
+transform = Transform2D(3, 0, 0, 3, 0, 0)
 
 [node name="DialogLayer" type="CanvasLayer" parent="." unique_id=396863006]
 process_mode = 3
 layer = 5
-scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 0, 0)
+scale = Vector2(3, 3)
+transform = Transform2D(3, 0, 0, 3, 0, 0)
 
 [node name="EditorLayer" type="CanvasLayer" parent="." unique_id=1207639602]
 layer = 6
@@ -112,5 +113,7 @@ transform = Transform2D(2, 0, 0, 2, 0, 0)
 [node name="MenuLayer" type="CanvasLayer" parent="." unique_id=2033685382]
 process_mode = 3
 layer = 8
-scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 0, 0)
+scale = Vector2(3, 3)
+transform = Transform2D(3, 0, 0, 3, 0, 0)
+
+[connection signal="level_saved" from="EditorLayer/Editor" to="EditorLayer/Editor/Main/Win/Tab/Levels" method="on_save"]

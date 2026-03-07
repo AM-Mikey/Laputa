@@ -76,7 +76,7 @@ func writebuffer() -> void:
 
 
 func pressed(button,custombuffer=pressbuffer) -> bool:
-	
+
 	for x in buffer:
 		if x[0] == button:
 			if x[2] <= custombuffer:
