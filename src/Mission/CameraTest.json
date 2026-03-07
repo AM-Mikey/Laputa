@@ -6,4 +6,9 @@
 			},
 		},
 	},
+	"camera_control_add": {
+		"Main": {
+		"camera_test_2": [["to_pos", 3900.0 , 2048.0, 50],["wait", 2.0],["to_player", 50]],
+		},
+	},
 }

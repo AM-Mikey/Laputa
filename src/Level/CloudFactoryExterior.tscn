@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="7_w643x"]
 [ext_resource type="PackedScene" uid="uid://dim3av368jfya" path="res://src/Utility/Waypoint.tscn" id="8_owv0v"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="8_w643x"]
+[ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="9_mrs6x"]
 
 [node name="CloudFactoryExterior" type="Node2D" unique_id=1604351222]
 visibility_layer = 2
@@ -125,6 +126,16 @@ properties = {
 "speed": [Vector2(150, 350), 5],
 "walk_max_time": [10.0, 3],
 "water_gravity": [150.0, 3]
+}
+
+[node name="Lamp" parent="Spawns" unique_id=1449282698 instance=ExtResource("9_mrs6x")]
+visibility_layer = 2
+position = Vector2(2552, 2160)
+prop_path = "res://src/Prop/Lamp.tscn"
+properties = {
+"editor_hidden": [false, 1],
+"id": ["lamp", 4],
+"style": [0, 2]
 }
 
 [node name="VanishingPoint" parent="." unique_id=1306714221 instance=ExtResource("7_2d11i")]

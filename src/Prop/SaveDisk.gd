@@ -59,6 +59,8 @@ func activate():
 	await tween.finished
 	tween = get_tree().create_tween()
 	tween.tween_property($AnimationPlayer, "speed_scale", default_speed_scale, touched_spin_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	ms.mission_progress_check()
+	SaveSystem.write_mission_data_to_save()
 	SaveSystem.write_level_data_to_temp(w.current_level)
 	SaveSystem.write_player_data_to_save(w.current_level)
 	SaveSystem.copy_level_and_dialog_data_from_temp_to_save()

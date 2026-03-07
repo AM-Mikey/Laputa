@@ -115,38 +115,29 @@ func reset():
 
 
 func control_processing():
-	#Keep last position until we call a reset or to player
-	if control_action_queue.size() == 0: return
-	#print(control_action_queue)
+	if control_action_queue.size() == 0: #just hold camera in place
+		return
+	print(control_action_queue)
 	control_active = true
 	var current_action = control_action_queue[0]
 	match current_action[0]: #[0]= action name
 		"to_pos":
 			control_to_position(Vector2(current_action[1],current_action[2]),current_action[3])
 		"to_player":
-			await control_to_player(current_action[1])
-			if control_action_queue.size() == 0:
-				print("mom")
-				control_stop()
+			control_to_player(current_action[1])
 		"to_waypoint":
 			control_to_waypoint(current_action[1],current_action[2])
 		"wait":
 			await get_tree().create_timer(current_action[1], false, true).timeout
 			control_next()
-			if control_action_queue.size() == 0:
-				control_stop()
 		"hold":
 			control_next(false) #go to the next one without running it
 		"can_act":
 			inp.can_act = current_action[1]
 			control_next()
-			if control_action_queue.size() == 0:
-					control_stop()
 		"reset":
 			control_reset()
 			control_next()
-			if control_action_queue.size() == 0:
-				control_stop()
 
 
 func control_add(action: Array):
@@ -155,10 +146,14 @@ func control_add(action: Array):
 		control_processing()
 
 
-func control_next(with_processing = true): #remove the current action
+func control_next(with_processing = true, stop_on_queue_empty = true): #remove the current action
 	control_target = null
 	control_action_queue.pop_front()
-	if with_processing:
+	if !with_processing:
+		return
+	if stop_on_queue_empty && control_action_queue.size() == 0:
+		control_stop()
+	else:
 		control_processing()
 
 
@@ -173,7 +168,8 @@ func control_stop(): #return to automatic camera
 
 func control_to_position(target_pos: Vector2, speed: float, do_player_drag_offset = false):
 	stop_tweens()
-	w.dll.get_node("DialogBox").busy = true
+	if w.dll.get_node("DialogBox"):
+		w.dll.get_node("DialogBox").busy = true
 	var target_offset = target_pos - global_position
 	var start_offset = offset
 	var overshoot_target = target_offset + (target_offset - start_offset).normalized() * control_overshoot_distance
@@ -218,12 +214,16 @@ func control_to_position(target_pos: Vector2, speed: float, do_player_drag_offse
 		limit_tween_bottom.tween_property(self, "limit_bottom", ll.offset_bottom, drag_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 
 	await control_tween.finished
-	w.dll.get_node("DialogBox").busy = false
-	control_next()
+	if w.dll.get_node("DialogBox"):
+		w.dll.get_node("DialogBox").busy = false
+	control_next(true, false)
+
 
 func control_to_player(speed: float): #Moves camera towards player position
 	var player_pos: Vector2 = pc.global_position + Vector2(0.001, -15.999)
-	control_to_position(player_pos, speed, true)
+	await control_to_position(player_pos, speed, true)
+	if control_action_queue.size() == 0: #since there's no more in the queue, returning to the player ends manual control
+		control_stop()
 
 
 func control_to_waypoint(waypoint_index: int, speed: float):

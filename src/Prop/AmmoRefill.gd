@@ -33,6 +33,7 @@ func activate(player):
 	ammo_get_max.global_position = $CollisionShape2D.global_position
 	w.middle.add_child(ammo_get_max)
 	am.play("ammo_refill")
+	ms.mission_progress_check(id)
 
 
 func get_is_ammo_needed(player) -> bool:
