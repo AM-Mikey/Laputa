@@ -27,6 +27,8 @@ signal players_updated
 	"block_thud": preload("res://assets/SFX/Placeholder/snd_quake.ogg"),
 	"chest_open": preload("res://assets/SFX/Placeholder/snd_chest_open.ogg"),
 	"health_upgrade_break": preload("res://assets/SFX/PotterySmash.ogg"),
+	"rope_loose": preload("res://assets/SFX/RopeLoose.ogg"),
+	"rope_land": preload("res://assets/SFX/RopeLand.ogg"),
 
 	"break_grass": preload("res://assets/SFX/Placeholder/snd_explosion2.ogg"),
 

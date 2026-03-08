@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dxnb66edllhsa"]
+
+[ext_resource type="Script" uid="uid://dgt1xd0pgkr67" path="res://src/Prop/PhysicsProp.gd" id="1_bh5vf"]
+[ext_resource type="Texture2D" uid="uid://bog4ig0jl2q24" path="res://assets/Prop/Bucket.png" id="2_3tmxh"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0cau2"]
+size = Vector2(16, 16)
+
+[node name="Bucket" type="RigidBody2D" unique_id=485471113 groups=["Entities", "LimitedProps", "PhysicsProps", "Props"]]
+collision_layer = 16
+collision_mask = 520
+can_sleep = false
+lock_rotation = true
+freeze_mode = 1
+script = ExtResource("1_bh5vf")
+metadata/_custom_type_script = "uid://dgt1xd0pgkr67"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1907040936]
+position = Vector2(8, 8)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=777060922]
+texture = ExtResource("2_3tmxh")
+centered = false
+
+[node name="EditorArea" type="Area2D" parent="." unique_id=1834523202]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea" unique_id=989338639]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_0cau2")
+debug_color = Color(0, 0.6, 0.69803923, 0)

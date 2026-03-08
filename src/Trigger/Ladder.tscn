@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://duftuj7madbsh"]
+[gd_scene format=3 uid="uid://duftuj7madbsh"]
 
 [ext_resource type="Script" uid="uid://b33ajhck23frq" path="res://src/Trigger/Ladder.gd" id="1"]
 
@@ -9,20 +9,20 @@ size = Vector2(5, 8)
 resource_local_to_scene = true
 size = Vector2(4, 4)
 
-[node name="Ladder" type="Area2D" groups=["Triggers"]]
+[node name="Ladder" type="Area2D" unique_id=38046865 groups=["Triggers"]]
 collision_layer = 0
 script = ExtResource("1")
 editor_hidden = true
 color = Color(1, 0.494118, 0, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=772742450]
 shape = SubResource("1")
 
-[node name="AllowDownInput" type="Area2D" parent="."]
+[node name="AllowDownInput" type="Area2D" parent="." unique_id=250486425]
 collision_layer = 0
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AllowDownInput"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AllowDownInput" unique_id=1033291914]
 shape = SubResource("RectangleShape2D_nybew")
 
 [connection signal="body_entered" from="." to="." method="_on_Ladder_body_entered"]

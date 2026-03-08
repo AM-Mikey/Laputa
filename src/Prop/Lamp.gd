@@ -26,6 +26,5 @@ func activate():
 func _on_PlayerDetector_body_entered(body: Node2D):
 	active_players.append(body.get_parent())
 
-
 func _on_PlayerDetector_body_exited(body: Node2D):
 	active_players.erase(body.get_parent())

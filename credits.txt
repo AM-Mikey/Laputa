@@ -1,19 +1,22 @@
 
-LukaLop: Lead Designer, programmer, artist, etc
+LukaLop: Creator, Designer, Programmer, Artist, Writer, Etc.
 
-Developers: CrystalWarrior, SanpoNeko, Soru
-Programming Assistance: Neropatti, Parzivail
-Additional Backgrounds: Katt
-Additional Concept Art, Additional Character Design: Daedily
+Developers: SanpoNeko, Soru, Neropatti, CrystalWarrior
+Programming Assistance: Parzivail
+
 Lead Composer: FiveNineSquared
 Additional Tracks: Curelapse, PhiDelta
+
+Additional Backgrounds: Katt
+Additional Concept Art, Additional Character Design: Daedily
 Bat Sprites: Yobonnie
+Additional Effect Sprites: Dancing Jackal
 
 
-Special Thanks: Zoe B. Yobonnie, Ashford G., Chandler (Dancing Jackal)
+Special Thanks: Zoe B. Yobonnie, Ashford G.
 
-Also Thanks To: Godot and godot discord
+Also Thanks To: Godot and Godot Discord
 
 Inspired by the works of: Daisuke Amaya, Hayao Miyazaki, Edward Hopper, Taracod, Shaun Tan, Ashley Wood, Yoshitaka Amano, Roger Dean, Honda Souichi
 
-And all the friends in the Laputa Dev server and those who caught the development streams
+And all the friends in the Laputa Dev server and those who caught the development streams!
