@@ -1,19 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://xce0p5v08dn2"]
+[gd_scene format=3 uid="uid://xce0p5v08dn2"]
 
 [ext_resource type="Script" uid="uid://b7n2ctrbbq4kn" path="res://src/Trigger/Water.gd" id="1"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
 
-[node name="Water" type="Area2D" groups=["Triggers"]]
+[node name="Water" type="Area2D" unique_id=1352829104 groups=["Triggers"]]
 collision_layer = 1048576
 collision_mask = 7315
 script = ExtResource("1")
 color = Color(0, 0, 0.701961, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1012661956]
 position = Vector2(8, 8)
 shape = SubResource("1")
+
+[node name="GraceTimer" type="Timer" parent="." unique_id=712103786]
+wait_time = 0.15
+one_shot = true
+autostart = true
 
 [connection signal="body_entered" from="." to="." method="_on_Water_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Water_body_exited"]

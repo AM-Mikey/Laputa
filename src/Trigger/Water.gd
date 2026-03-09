@@ -23,7 +23,7 @@ func _on_Water_body_entered(body):
 		target.velocity *= velocity_dropoff
 		do_bubbles = false
 	if !body.get_collision_layer_value(1):
-		if target.just_spawned:
+		if $GraceTimer.time_left > 0.0:
 			if (!splash_targets.has(target)):
 				splash_targets.append(target)
 	active_bodies.append(target)
