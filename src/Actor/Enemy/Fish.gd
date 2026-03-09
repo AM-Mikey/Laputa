@@ -86,7 +86,7 @@ func do_idle():
 	if collision != null:
 		if (collision is not TileMapLayer and collision.get_collision_layer_value(1)):
 			if (abs(collision.global_position.x - global_position.x) <= 1):
-				print("got target")
+				if (debug): print("got target")
 				change_state("attack")
 				return
 #endregion
@@ -180,12 +180,11 @@ func update_path_lines():
 	if Engine.is_editor_hint():
 		vline.add_point(Vector2.ZERO)
 		vline.add_point(Vector2(0, jump_height * -16))
-		add_child(vline)
-		move_child(vline, 0)
 	elif debug and world:
-		vline.add_point(position)
-		vline.add_point(jump_pos)
-		world.front.add_child(vline)
+		vline.add_point(global_position)
+		vline.add_point(global_position + Vector2(0, jump_height * -16))
+	add_child(vline)
+	move_child(vline, 0)
 
 	var hline = PATH_LINE.instantiate()
 	hline.name = "HPath"
@@ -193,9 +192,8 @@ func update_path_lines():
 	if Engine.is_editor_hint():
 		hline.add_point(Vector2(x_min * 16, -4))
 		hline.add_point(Vector2(x_max * 16, -4))
-		add_child(hline)
-		move_child(hline, 0)
 	elif debug and world:
-		hline.add_point(position + Vector2(x_min * 16, -4))
-		hline.add_point(position + Vector2(x_max * 16, -4))
-		world.front.add_child(hline)
+		hline.add_point(global_position + Vector2(x_min * 16, -4))
+		hline.add_point(global_position + Vector2(x_max * 16, -4))
+	add_child(hline)
+	move_child(hline, 0)
