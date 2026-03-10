@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://crtxny1yjnkmi"]
+[gd_scene format=3 uid="uid://bcw46w7o0xwu3"]
 
 [ext_resource type="Texture2D" uid="uid://bbu1jyosea4de" path="res://assets/Actor/Enemy/Fish.png" id="1"]
-[ext_resource type="Script" uid="uid://ddxy1osfjb432" path="res://src/Actor/Enemy/Fish.gd" id="2"]
+[ext_resource type="Script" uid="uid://fmkb35te6ic0" path="res://src/Actor/Enemy/Fish.gd" id="2"]
 
 [sub_resource type="RectangleShape2D" id="5"]
 size = Vector2(10, 5)
@@ -464,7 +464,10 @@ _data = {
 [node name="Fish" type="CharacterBody2D" unique_id=1312856769 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 8
-floor_max_angle = 0.0
+motion_mode = 1
+slide_on_ceiling = false
+wall_min_slide_angle = 3.1415927
+floor_snap_length = 0.0
 script = ExtResource("2")
 speed = Vector2(20, 150)
 editor_hidden = false
