@@ -59,28 +59,28 @@ func bonk():
 	w.get_node("Front").add_child(bonk_effect)
 	did_bonk = true
 
-func calc_velocity(move_dir, _do_gravity = true, _do_acceleration = true, _do_friction = true) -> Vector2:
+func calc_velocity(dir, _do_gravity = true, _do_acceleration = true, _do_friction = true) -> Vector2:
 	match state:
 		"idle", "swim":
 			var out = velocity
 
-			out.x = speed.x * move_dir.x
+			out.x = speed.x * dir.x
 
 			return out
 		"attack":
 			var out = velocity
 
 			out.y += gravity * get_physics_process_delta_time()
-			if move_dir.y < 0:
-				out.y = speed.y * move_dir.y
+			if dir.y < 0:
+				out.y = speed.y * dir.y
 			elif is_on_ceiling() and !did_bonk:
-				out.y = -10
+				out.y = 0
 
 			return out
 		"fall":
 			var out = velocity
 			if (is_on_ceiling() and !did_bonk):
-				out.y = -10
+				out.y = 0
 			else:
 				out.y += gravity * get_physics_process_delta_time()
 
