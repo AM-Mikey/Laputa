@@ -16,7 +16,7 @@ position = Vector2(8, 8)
 shape = SubResource("1")
 
 [node name="GraceTimer" type="Timer" parent="." unique_id=712103786]
-wait_time = 0.15
+wait_time = 0.2
 one_shot = true
 autostart = true
 
