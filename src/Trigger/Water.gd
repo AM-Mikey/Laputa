@@ -23,14 +23,14 @@ func _on_Water_body_entered(body):
 		target.velocity *= velocity_dropoff
 		do_bubbles = false
 	if !body.get_collision_layer_value(1):
-		if target.just_spawned:
+		if $GraceTimer.time_left > 0.0:
 			if (!splash_targets.has(target)):
 				splash_targets.append(target)
 	active_bodies.append(target)
 
 	if not target.is_in_water:
 		target.is_in_water = true
-		if do_bubbles:
+		if do_bubbles && target.do_bubbles:
 			var be = BUBBLEEMITTER.instantiate()
 			bubble_emitters[target] = be
 			target.call_deferred("add_child", be)
@@ -56,7 +56,7 @@ func _on_Water_body_exited(body):
 
 	if not get_overlap(body):
 		target.is_in_water = false
-		if do_bubbles and bubble_emitters.has(target):
+		if do_bubbles && bubble_emitters.has(target):
 			bubble_emitters[target].queue_free()
 			bubble_emitters.erase(target)
 		await get_tree().physics_frame
