@@ -40,6 +40,7 @@ var forbid_crouching = false
 var is_in_water = false
 var is_in_coyote = false
 var dead = false
+var do_bubbles = true
 @export var controller_id: int = 0
 
 

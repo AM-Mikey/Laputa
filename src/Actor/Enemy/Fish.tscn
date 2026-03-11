@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://bcw46w7o0xwu3"]
 
 [ext_resource type="Texture2D" uid="uid://bbu1jyosea4de" path="res://assets/Actor/Enemy/Fish.png" id="1"]
-[ext_resource type="Script" uid="uid://fmkb35te6ic0" path="res://src/Actor/Enemy/Fish.gd" id="2"]
+[ext_resource type="Script" uid="uid://bugags3jgh55c" path="res://src/Actor/Enemy/Fish.gd" id="2"]
 
 [sub_resource type="RectangleShape2D" id="5"]
 size = Vector2(10, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yyuli"]
+size = Vector2(12, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vcisb"]
 size = Vector2(10, 5)
@@ -12,17 +15,16 @@ size = Vector2(10, 5)
 [sub_resource type="Animation" id="1"]
 resource_name = "Fall"
 length = 0.1
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [12]
 }
 tracks/1/type = "value"
@@ -35,7 +37,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(-0.5, -4)]
+"values": [Vector2(-0.5, -8)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -47,7 +49,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(-0.5, -4)]
+"values": [Vector2(-0.5, -8)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -59,7 +61,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(-0.5, -4)]
+"values": [Vector2(-0.5, -8)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -124,7 +126,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(0, -3.5)]
+"values": [Vector2(0, -7.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -136,7 +138,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(0, -3.5)]
+"values": [Vector2(0, -7.5)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -148,7 +150,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(0, -3.5)]
+"values": [Vector2(0, -7.5)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -199,7 +201,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(0, -3.5)]
+"values": [Vector2(0, -7.5)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -211,7 +213,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(0, -3.5)]
+"values": [Vector2(0, -7.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -223,7 +225,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(0, -3.5)]
+"values": [Vector2(0, -7.5)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -277,17 +279,16 @@ tracks/6/keys = {
 [sub_resource type="Animation" id="3"]
 resource_name = "Rise"
 length = 0.1
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [8]
 }
 tracks/1/type = "value"
@@ -300,7 +301,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(-0.5, -4)]
+"values": [Vector2(-0.5, -8)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -312,7 +313,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(-0.5, -4)]
+"values": [Vector2(-0.5, -8)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -324,7 +325,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(-0.5, -4)]
+"values": [Vector2(-0.5, -8)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -366,7 +367,7 @@ tracks/6/keys = {
 [sub_resource type="Animation" id="4"]
 resource_name = "Target"
 length = 0.2
-step = 0.05
+step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -374,10 +375,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [4, 7]
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -389,7 +390,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [Vector2(0, -3.5), Vector2(0, -4), Vector2(-0.5, -3.5)]
+"values": [Vector2(0, -7.5), Vector2(0, -8), Vector2(-0.5, -7.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -401,7 +402,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.10000001),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [Vector2(0, -3.5), Vector2(0, -4), Vector2(-0.5, -3.5)]
+"values": [Vector2(0, -7.5), Vector2(0, -8), Vector2(-0.5, -7.5)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -413,7 +414,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.10000001),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [Vector2(0, -3.5), Vector2(0, -4), Vector2(-0.5, -3.5)]
+"values": [Vector2(0, -7.5), Vector2(0, -8), Vector2(-0.5, -7.5)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -473,7 +474,7 @@ speed = Vector2(20, 150)
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1208749473]
-position = Vector2(0, -3.5)
+position = Vector2(0, -7.5)
 shape = SubResource("5")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=434285087]
@@ -481,8 +482,8 @@ collision_layer = 131072
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=569733112]
-position = Vector2(0, -3.5)
-shape = SubResource("RectangleShape2D_vcisb")
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_yyuli")
 debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=430236071]
@@ -490,12 +491,12 @@ collision_layer = 262144
 collision_mask = 65536
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=2082591926]
-position = Vector2(0, -3.5)
+position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_vcisb")
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=971659152]
-position = Vector2(0, -4)
+position = Vector2(0, -8)
 scale = Vector2(-1, 1)
 texture = ExtResource("1")
 hframes = 4

@@ -5,6 +5,8 @@ const PATH_LINE = preload("res://src/Utility/PathLine.tscn")
 var move_dir = Vector2.LEFT
 @export var swim_dir_x = -1: set = on_swim_dir_x_changed
 @export var jump_height: int = 6: set = on_jump_height_changed
+var normal_damage = 1
+var attack_damage = 4
 
 @onready var start_pos = global_position
 var jump_pos: Vector2 = global_position
@@ -21,9 +23,11 @@ var did_bonk: bool = false
 
 func setup():
 	change_state("idle")
+	do_bubbles = false
 	if debug: print("ready fish")
 	speed = Vector2(20, 150)
-	damage_on_contact = 1
+	hp = 3
+	damage_on_contact = normal_damage
 	update_path_lines()
 
 func on_swim_dir_x_changed(new):
@@ -106,7 +110,7 @@ func do_idle():
 	if collision != null:
 		if (collision is not TileMapLayer and collision.get_collision_layer_value(1)):
 			if (abs(collision.global_position.x - rc.global_position.x) <= 1):
-				if (debug): print("got target")
+				if (debug): print("fish got target")
 				change_state("attack")
 				return
 #endregion
@@ -126,7 +130,7 @@ func do_swim():
 	if collision != null:
 		if (collision is not TileMapLayer and collision.get_collision_layer_value(1)):
 			if (abs(collision.global_position.x - rc.global_position.x) <= 1): #Prevent the fish target just the side of player hitbox
-				if debug: print("got target")
+				if debug: print("fish got target")
 				change_state("attack")
 				return
 
@@ -144,6 +148,7 @@ func do_swim():
 
 #region Attack
 func enter_attack(_prev_state: String):
+	damage_on_contact = attack_damage
 	motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
 	jump_pos = global_position
 	ap.play("Target")
@@ -162,6 +167,9 @@ func do_attack():
 	velocity = calc_velocity(move_dir)
 	move_and_slide()
 #endregion
+
+func exit_attack(_prev_state):
+	damage_on_contact = normal_damage
 
 #region Fall
 func exit_fall(_next_state: String):

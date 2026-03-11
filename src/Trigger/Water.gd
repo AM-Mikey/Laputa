@@ -30,7 +30,7 @@ func _on_Water_body_entered(body):
 
 	if not target.is_in_water:
 		target.is_in_water = true
-		if do_bubbles:
+		if do_bubbles && target.do_bubbles:
 			var be = BUBBLEEMITTER.instantiate()
 			bubble_emitters[target] = be
 			target.call_deferred("add_child", be)
@@ -56,7 +56,7 @@ func _on_Water_body_exited(body):
 
 	if not get_overlap(body):
 		target.is_in_water = false
-		if do_bubbles and bubble_emitters.has(target):
+		if do_bubbles && bubble_emitters.has(target):
 			bubble_emitters[target].queue_free()
 			bubble_emitters.erase(target)
 		await get_tree().physics_frame
