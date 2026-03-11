@@ -1,15 +1,12 @@
-[gd_scene format=4]
+[gd_scene format=4 uid="uid://8qpwe0pcud22"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_4uhn8"]
-[ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_abgb0"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_emfu1"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
-[ext_resource type="TileSet" path="res://src/Tile/Temple.tres" id="5_j20xi"]
-[ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="5_oelck"]
-[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="6_c0ys6"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="7_06iwr"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="8_8lkdd"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="10_xbdcb"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_4uhn8"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_abgb0"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
+[ext_resource type="TileSet" uid="uid://hyq6f5pg0oh8" path="res://src/Tile/Temple.tres" id="5_j20xi"]
+[ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="5_oelck"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="6_c0ys6"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="7_06iwr"]
 
 [node name="Temple" type="Node2D" unique_id=2129941240]
 visibility_layer = 2
@@ -18,14 +15,12 @@ level_name = "Temple"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=722725491 instance=ExtResource("3_t226a")]
+[node name="LevelLimiter" parent="." unique_id=722725491 instance=ExtResource("3_t226a")]
 visibility_layer = 2
 offset_left = 1600.0
 offset_top = 1600.0
 offset_right = 2416.0
 offset_bottom = 1952.0
-mouse_filter = 2
-script = ExtResource("3_emfu1")
 background_resource = ExtResource("3_abgb0")
 texture = ExtResource("5_oelck")
 layers = 5
@@ -87,17 +82,12 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=1995677311]
 visibility_layer = 2
 
-[node name="VanishingPoint" type="Area2D" parent="." unique_id=2033141968 groups=["VanishingPoints"] instance=ExtResource("6_c0ys6")]
-visibility_layer = 2
-z_index = 999
-position = Vector2(1920, 1496)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_8lkdd")
+[node name="Waypoints" type="Node2D" parent="." unique_id=1618141153]
 
-[node name="SpawnPoint" type="Area2D" parent="." unique_id=1703534516 groups=["SpawnPoints"] instance=ExtResource("7_06iwr")]
+[node name="VanishingPoint" parent="." unique_id=2033141968 instance=ExtResource("6_c0ys6")]
+visibility_layer = 2
+position = Vector2(1920, 1496)
+
+[node name="SpawnPoint" parent="." unique_id=1703534516 instance=ExtResource("7_06iwr")]
 visibility_layer = 2
 position = Vector2(1888, 1792)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_xbdcb")

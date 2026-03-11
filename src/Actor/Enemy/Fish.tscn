@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bbu1jyosea4de" path="res://assets/Actor/Enemy/Fish.png" id="1"]
 [ext_resource type="Script" uid="uid://bugags3jgh55c" path="res://src/Actor/Enemy/Fish.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/WaypointLocal.tscn" id="3_jx5j2"]
 
 [sub_resource type="RectangleShape2D" id="5"]
 size = Vector2(10, 5)
@@ -509,6 +510,10 @@ libraries/ = SubResource("AnimationLibrary_3s1p6")
 target_position = Vector2(0, -96)
 collision_mask = 9
 collide_with_areas = true
+
+[node name="WaypointJump" parent="." unique_id=1432238783 instance=ExtResource("3_jx5j2")]
+position = Vector2(0, -94)
+tag_name = "jump"
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

@@ -59,6 +59,12 @@ func initialize(): #first time set up properties
 	for p in actor.get_property_list():
 		if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
 			properties[p["name"]] = [actor.get(p["name"]), p["type"]]
+	for c in actor.get_children():
+		if c.is_in_group("WaypointLocals"):
+			if !get_if_actor_has_waypoint(c):
+				actor.remove_child(c)
+				add_child(c)
+				c.owner = w.current_level
 	actor.free()
 
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
@@ -71,6 +77,12 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 				properties[p["name"]] = old_properties[p["name"]]
 			else:
 				properties[p["name"]] = [actor.get(p["name"]), p["type"]]
+	for c in actor.get_children():
+		if c.is_in_group("WaypointLocals"):
+			if !get_if_actor_has_waypoint(c):
+				actor.remove_child(c)
+				add_child(c)
+				c.owner = w.current_level
 	actor.free()
 
 func spawn():
@@ -85,9 +97,25 @@ func spawn():
 		actor.set(p, properties[p][0])
 	actor.name = name
 	actor.global_position = global_position
-	w.current_level.get_node("Actors").call_deferred("add_child", actor)
+	await w.current_level.get_node("Actors").call_deferred("add_child", actor)
 
+	for ac in actor.get_children(): #clear old
+		if ac.is_in_group("WaypointLocals"):
+			actor.remove_child(ac)
+	for c in get_children(): #add new
+		if c.is_in_group("WaypointLocals"):
+			var copy = c.duplicate()
+			actor.add_child(copy)
 
+### GETTERS
+
+func get_if_actor_has_waypoint(actor_waypoint)-> bool:
+	var out = false
+	for c in get_children():
+		if c.is_in_group("WaypointLocals"):
+			if c.tag_name == actor_waypoint.tag_name:
+				out = true
+	return out
 
 ### SIGNALS
 

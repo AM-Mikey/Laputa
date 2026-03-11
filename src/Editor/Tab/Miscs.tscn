@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://rju7cf1v4f8c"]
+
+[ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1_njfwm"]
+[ext_resource type="Script" uid="uid://cjm8dcwrn6enb" path="res://src/Editor/Tab/Miscs.gd" id="2_a1vhq"]
+
+[node name="Miscs" type="MarginContainer" unique_id=824501068]
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 0
+theme = ExtResource("1_njfwm")
+script = ExtResource("2_a1vhq")
+
+[node name="VBox" type="VBoxContainer" parent="." unique_id=858736828]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox" unique_id=630449849]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.878431, 0.784314, 0.345098, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Misc."
+
+[node name="Margin" type="MarginContainer" parent="VBox" unique_id=855995950]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="VBox/Margin" unique_id=1798187047]
+layout_mode = 2
+
+[node name="Scroll" type="ScrollContainer" parent="VBox/Margin" unique_id=332166170]
+layout_mode = 2
+
+[node name="Buttons" type="VBoxContainer" parent="VBox/Margin/Scroll" unique_id=566988003]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

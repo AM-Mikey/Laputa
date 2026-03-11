@@ -28,6 +28,9 @@ func setup():
 	speed = Vector2(20, 150)
 	hp = 3
 	damage_on_contact = normal_damage
+	for c in get_children():
+		if c.is_in_group("WaypointLocals") && c.tag_name == "jump":
+			rc.target_position.y = c.position.y
 	update_path_lines()
 
 func on_swim_dir_x_changed(new):
@@ -59,7 +62,7 @@ func bonk():
 	#print("Fish bonked ", slide_collision.get_normal())
 	bonk_effect.normal = slide_collision.get_normal()
 	bonk_effect.global_position.x = global_position.x
-	bonk_effect.global_position.y = global_position.y + 7.0
+	bonk_effect.global_position.y = global_position.y + 13.0
 	w.get_node("Front").add_child(bonk_effect)
 	did_bonk = true
 

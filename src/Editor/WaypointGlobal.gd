@@ -19,12 +19,6 @@ func deactivate():
 	active_count -= 1
 	set_color()
 
-func on_editor_select():
-	modulate = Color(2,2,2)
-
-func on_editor_deselect():
-	modulate = Color(1,1,1)
-
 func set_color():
 	match active_count:
 		0: modulate = Color(1,1,1)
@@ -33,3 +27,16 @@ func set_color():
 		3: modulate = Color.DARK_MAGENTA
 		4: modulate = Color.DARK_BLUE
 		_: modulate = Color.BLACK
+
+### SIGNALS
+
+func on_editor_select():
+	$Sprite2D.modulate = Color.RED
+
+func on_editor_deselect():
+	$Sprite2D.modulate = Color(1,1,1)
+
+func _input_event(_viewport, event, _shape_idx): #selecting in editor
+	var editor = w.get_node("EditorLayer/Editor")
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
+		editor.inspector.on_selected(self, "waypoint_local")

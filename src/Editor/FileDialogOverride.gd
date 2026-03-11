@@ -3,7 +3,7 @@ extends FileDialog
 func _ready():
 	for c in get_all_children(self, [], false):
 		if c is LineEdit:
-			print("got linedit")
+			#print("got lineedit")
 			c.set_script(load("res://src/Editor/LineEditOverride.gd"))
 	dialog_close_on_escape = false
 
