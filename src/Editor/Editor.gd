@@ -73,10 +73,11 @@ func _ready():
 
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
-	setup_level() #Call this every time the level is changed or reloaded
+	setup_level()
 	#$Main/Win.move_child($Main/Win/Tab, 0) TODO: was supposed to make tabcontainer go behind resize controls, didnt work
 
-func setup_level(): #TODO: clear undo history
+func setup_level(): #Call this every time the level is changed or reloaded
+	print("enter")
 	#emit_signal("level_selected", w.current_level)
 	setup_windows()
 	f.pc().disable()
@@ -89,6 +90,9 @@ func setup_level(): #TODO: clear undo history
 		p.queue_free()
 	for t in get_tree().get_nodes_in_group("Triggers"):
 		t.queue_free()
+	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
+		if wg.uses_spawn:
+			wg.queue_free()
 	actor_collection = w.current_level.get_node("Actors")
 	prop_collection = w.current_level.get_node("Props")
 	trigger_collection = w.current_level.get_node("Triggers")
@@ -113,6 +117,10 @@ func setup_level(): #TODO: clear undo history
 		s.visible = true
 	for v in get_tree().get_nodes_in_group("VanishingPoints"):
 		v.visible = true
+	for wgs in get_tree().get_nodes_in_group("WaypointGlobalSpawns"): #TODO: this actually only gets the children of actor briefly before they're freed. We want to get child of actor spawn: waypoint spawn, but that doesnt exist.
+		wgs.visible = true
+		wgs.input_pickable = true
+		#wgs.reinitialize()
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.visible = true
 		a.input_pickable = true
@@ -141,8 +149,6 @@ func setup_windows(): #the main and secondary editor windows
 	$Secondary/Win.size = $Margin/VBox/HBox/SecondarySizeRef.size
 	$Secondary/Win.position = $Margin/VBox/HBox/SecondarySizeRef.position
 
-
-
 func setup_level_editor_layer(): #the layer for editor overlays that go over the level
 	var editor_layer = Node2D.new()
 	editor_layer.name = "Editor"
@@ -157,6 +163,7 @@ func setup_level_editor_layer(): #the layer for editor overlays that go over the
 
 
 func exit():
+	print("exit")
 	inspector.exit()
 	if w.current_level.has_node("TileAnimator"):
 		w.current_level.get_node("TileAnimator").editor_exit()
@@ -178,6 +185,9 @@ func exit():
 		s.visible = false
 	for v in get_tree().get_nodes_in_group("VanishingPoints"):
 		v.visible = false
+	for wgs in get_tree().get_nodes_in_group("WaypointGlobalSpawns"):
+		wgs.spawn()
+		wgs.visible = false
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.spawn()
 		a.visible = false
@@ -189,6 +199,7 @@ func exit():
 		t.visible = false
 	for l in get_tree().get_nodes_in_group("SunLights"):
 		l.editor_exit()
+
 
 	for t in trigger_collection.get_children():
 		if t.has_node("TriggerController"):
@@ -700,6 +711,16 @@ func set_misc(misc_path, pos):
 		misc.global_position = (pos * 16) + Vector2i(8, 8)
 		waypoint_collection.add_child(misc)
 		inspector.on_selected(misc, "misc")
+
+	elif misc_path == "res://src/Editor/Spawn/WaypointGlobalSpawn.tscn":
+		if inspector.active_type in ["actor_spawn", "prop_spawn", "trigger_spawn"]:
+			misc.global_position = ((pos * 16) + Vector2i(8, 8)) - Vector2i(inspector.active.global_position)
+			inspector.active.add_child(misc) #don't select it though so we can add more
+		else:
+			log.lprint("no valid entity for WaypointGlobalSpawn")
+			misc.free()
+			return
+
 	elif misc_path == "res://src/Editor/WaypointLocal.tscn":
 		if inspector.active_type in ["actor_spawn", "prop_spawn", "trigger_spawn"]:
 			misc.global_position = ((pos * 16) + Vector2i(8, 8)) - Vector2i(inspector.active.global_position)

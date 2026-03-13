@@ -64,7 +64,7 @@ func _ready():
 func child_layer_set(c: Node): #set the visibility layer of all children to layer 2 so that they're rendered by the subviewport
 	if c == self:
 		return
-	c.child_entered_tree.connect(child_layer_set)
+	c.child_entered_tree.connect(child_layer_set) #why this line?
 	if c is CanvasItem:
 		c.visibility_layer = 2
 

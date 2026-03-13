@@ -18,7 +18,7 @@ func on_editor_select():
 	$Sprite2D.modulate = Color.RED
 
 func on_editor_deselect():
-	$Sprite2D.modulate = Color.GOLDENROD
+	$Sprite2D.modulate = Color.FOREST_GREEN
 
 func on_pressed():
 	emit_signal("selected", self, "waypoint_local")

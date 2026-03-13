@@ -3,21 +3,23 @@
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="1_6s35s"]
 [ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_i4wap"]
 [ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_4qvu0"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_t8fqs"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_ho0nu"]
 [ext_resource type="TileSet" path="res://src/Tile/DogtownExterior.tres" id="5_0ewrk"]
 [ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="5_q8lop"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_4qvu0"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="7_anwej"]
 [ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="7_i4wap"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_q8lop"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_aqway"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="9_b7ing"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="10_ho0nu"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="10_vbnr3"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_6grhi"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_aqway"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_6grhi"]
 [ext_resource type="PackedScene" path="res://src/Editor/WaypointLocal.tscn" id="13_ho0nu"]
-[ext_resource type="Script" path="res://src/Editor/WaypointLocal.gd" id="14_aqway"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="14_vbnr3"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="16_6grhi"]
+[ext_resource type="Script" path="res://src/Editor/WaypointLocal.gd" id="14_2xpek"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/WaypointGlobalSpawn.tscn" id="15_vbnr3"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/WaypointGlobalSpawn.gd" id="16_6grhi"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="16_vohvr"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="18_qtlxt"]
 
 [node name="Dogtown" type="Node2D" unique_id=1604351222]
 visibility_layer = 2
@@ -33,7 +35,7 @@ offset_top = 1584.0
 offset_right = 2608.0
 offset_bottom = 2528.0
 mouse_filter = 2
-script = ExtResource("3_t8fqs")
+script = ExtResource("3_ho0nu")
 background_resource = ExtResource("3_4qvu0")
 texture = ExtResource("5_q8lop")
 layers = 5
@@ -106,7 +108,7 @@ offset_top = 2368.0
 offset_right = 2288.0
 offset_bottom = 2416.0
 mouse_filter = 2
-script = ExtResource("8_q8lop")
+script = ExtResource("8_aqway")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20],
@@ -126,7 +128,7 @@ offset_top = 1904.0
 offset_right = 2592.0
 offset_bottom = 1936.0
 mouse_filter = 2
-script = ExtResource("8_q8lop")
+script = ExtResource("8_aqway")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -150,7 +152,7 @@ offset_top = 1936.0
 offset_right = 2288.0
 offset_bottom = 2096.0
 mouse_filter = 2
-script = ExtResource("8_q8lop")
+script = ExtResource("8_aqway")
 trigger_path = "res://src/Trigger/Ladder.tscn"
 properties = {
 "color": [Color(1, 0.494118, 0, 1), 20],
@@ -166,7 +168,7 @@ z_index = 999
 position = Vector2(2240, 1920)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_ho0nu")
+script = ExtResource("10_vbnr3")
 prop_path = "res://src/Prop/RopeLadder.tscn"
 properties = {
 "editor_hidden": [false, 1],
@@ -177,10 +179,10 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(2368, 2240)
+position = Vector2(2392, 2256)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_aqway")
+script = ExtResource("12_6grhi")
 actor_path = "res://src/Actor/NPC/Aikka.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -198,10 +200,10 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(2136, 2384)
+position = Vector2(2104, 2304)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_aqway")
+script = ExtResource("12_6grhi")
 actor_path = "res://src/Actor/Enemy/Fish.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -212,27 +214,42 @@ properties = {
 "jump_height": [6, 2],
 "speed": [Vector2(20, 150), 5],
 "swim_dir_x": [-1, 2],
-"water_gravity": [150.0, 3],
-"x_max": [3, 2],
-"x_min": [-3, 2]
+"water_gravity": [150.0, 3]
 }
 
 [node name="WaypointJump" type="Area2D" parent="Spawns/Fish" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_ho0nu")]
 visibility_layer = 2
-position = Vector2(0, -40)
+position = Vector2(0, -94)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_aqway")
+script = ExtResource("14_2xpek")
 tag_name = "jump"
 
-[node name="Fish1" type="Area2D" parent="Spawns" unique_id=462850177 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_6grhi")]
+[node name="WaypointGlobalSpawnLeft" type="Area2D" parent="Spawns/Fish" unique_id=669830458 groups=["Entities", "WaypointGlobalSpawns"] instance=ExtResource("15_vbnr3")]
+visibility_layer = 2
+position = Vector2(-64, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_6grhi")
+tag_name = "left"
+
+[node name="WaypointGlobalSpawnRight" type="Area2D" parent="Spawns/Fish" unique_id=331105630 groups=["Entities", "WaypointGlobalSpawns"] instance=ExtResource("15_vbnr3")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+position = Vector2(80, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_6grhi")
+tag_name = "right"
+
+[node name="Fish1" type="Area2D" parent="Spawns" unique_id=1230817920 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_6grhi")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(2088, 2384)
+position = Vector2(2104, 2352)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_aqway")
+script = ExtResource("12_6grhi")
 actor_path = "res://src/Actor/Enemy/Fish.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -243,80 +260,33 @@ properties = {
 "jump_height": [6, 2],
 "speed": [Vector2(20, 150), 5],
 "swim_dir_x": [-1, 2],
-"water_gravity": [150.0, 3],
-"x_max": [3, 2],
-"x_min": [-3, 2]
+"water_gravity": [150.0, 3]
 }
 
-[node name="WaypointJump" type="Area2D" parent="Spawns/Fish1" unique_id=433937301 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_ho0nu")]
-visibility_layer = 2
-position = Vector2(0, -56)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_aqway")
-tag_name = "jump"
-
-[node name="Fish2" type="Area2D" parent="Spawns" unique_id=1888999240 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_6grhi")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(2184, 2384)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_aqway")
-actor_path = "res://src/Actor/Enemy/Fish.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"can_move_x": [true, 1],
-"debug": [false, 1],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_height": [6, 2],
-"speed": [Vector2(20, 150), 5],
-"swim_dir_x": [-1, 2],
-"water_gravity": [150.0, 3],
-"x_max": [3, 2],
-"x_min": [-3, 2]
-}
-
-[node name="WaypointJump" type="Area2D" parent="Spawns/Fish2" unique_id=151198335 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_ho0nu")]
-visibility_layer = 2
-position = Vector2(0, -48)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_aqway")
-tag_name = "jump"
-
-[node name="Fish3" type="Area2D" parent="Spawns" unique_id=1235083172 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_6grhi")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(2032, 2384)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_aqway")
-actor_path = "res://src/Actor/Enemy/Fish.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"can_move_x": [true, 1],
-"debug": [false, 1],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_height": [6, 2],
-"speed": [Vector2(20, 150), 5],
-"swim_dir_x": [-1, 2],
-"water_gravity": [150.0, 3],
-"x_max": [3, 2],
-"x_min": [-3, 2]
-}
-
-[node name="WaypointJump" type="Area2D" parent="Spawns/Fish3" unique_id=2111643205 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_ho0nu")]
+[node name="WaypointJump" type="Area2D" parent="Spawns/Fish1" unique_id=345827382 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_ho0nu")]
 visibility_layer = 2
 position = Vector2(0, -94)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_aqway")
+script = ExtResource("14_2xpek")
 tag_name = "jump"
+
+[node name="WaypointGlobalSpawnLeft" type="Area2D" parent="Spawns/Fish1" unique_id=1446500092 groups=["Entities", "WaypointGlobalSpawns"] instance=ExtResource("15_vbnr3")]
+visibility_layer = 2
+position = Vector2(-64, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_6grhi")
+tag_name = "left"
+
+[node name="WaypointGlobalSpawnRight" type="Area2D" parent="Spawns/Fish1" unique_id=1947164402 groups=["Entities", "WaypointGlobalSpawns"] instance=ExtResource("15_vbnr3")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+position = Vector2(80, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_6grhi")
+tag_name = "right"
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1469425040]
 visibility_layer = 2
@@ -327,11 +297,11 @@ z_index = 999
 position = Vector2(2096, 2072)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_vbnr3")
+script = ExtResource("16_vohvr")
 
 [node name="SpawnPoint" type="Area2D" parent="." unique_id=1578892610 groups=["SpawnPoints"] instance=ExtResource("7_anwej")]
 visibility_layer = 2
 position = Vector2(2328, 2256)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_6grhi")
+script = ExtResource("18_qtlxt")
