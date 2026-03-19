@@ -145,6 +145,7 @@ _data = {
 [node name="Beetle" type="CharacterBody2D" unique_id=340835941 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 8
+floor_max_angle = 0.17453292
 script = ExtResource("3")
 debug = true
 speed = Vector2(150, 150)
@@ -224,18 +225,61 @@ frame = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1763209571]
 libraries/ = SubResource("AnimationLibrary_hpx8l")
 
+[node name="CenteredPivot" type="Node2D" parent="." unique_id=343255131]
+z_index = 1000
+z_as_relative = false
+position = Vector2(0, -8)
+
+[node name="FloorCastL" type="RayCast2D" parent="CenteredPivot" unique_id=1836998465]
+position = Vector2(-6, 7)
+target_position = Vector2(0, 2)
+collision_mask = 8
+hit_from_inside = true
+
+[node name="FloorCastR" type="RayCast2D" parent="CenteredPivot" unique_id=1006335656]
+position = Vector2(6, 7)
+target_position = Vector2(0, 2)
+collision_mask = 8
+hit_from_inside = true
+
+[node name="MovableEdgeL1" type="RayCast2D" parent="CenteredPivot" unique_id=2048299719]
+position = Vector2(-12, 8)
+target_position = Vector2(0, 19)
+collision_mask = 8
+hit_from_inside = true
+
+[node name="MovableEdgeL2" type="RayCast2D" parent="CenteredPivot" unique_id=2633938]
+position = Vector2(-24, 20)
+target_position = Vector2(19, 0)
+collision_mask = 8
+hit_from_inside = true
+
+[node name="MovableEdgeL3" type="RayCast2D" parent="CenteredPivot" unique_id=843513174]
+position = Vector2(-20, 8)
+target_position = Vector2(0, 19)
+collision_mask = 8
+hit_from_inside = true
+
+[node name="MovableEdgeR1" type="RayCast2D" parent="CenteredPivot" unique_id=350123190]
+position = Vector2(12, 8)
+target_position = Vector2(0, 19)
+collision_mask = 8
+hit_from_inside = true
+
+[node name="MovableEdgeR2" type="RayCast2D" parent="CenteredPivot" unique_id=1710496432]
+position = Vector2(24, 20)
+target_position = Vector2(-19, 0)
+collision_mask = 8
+hit_from_inside = true
+
+[node name="MovableEdgeR3" type="RayCast2D" parent="CenteredPivot" unique_id=1702144698]
+position = Vector2(20, 8)
+target_position = Vector2(0, 19)
+collision_mask = 8
+hit_from_inside = true
+
 [node name="LeftCast" type="RayCast2D" parent="." unique_id=795130591]
 position = Vector2(-7, -8)
-target_position = Vector2(-2, 0)
-collision_mask = 8
-
-[node name="LeftCastU" type="RayCast2D" parent="." unique_id=1879513713]
-position = Vector2(-7, -16)
-target_position = Vector2(-2, 0)
-collision_mask = 8
-
-[node name="LeftCastD" type="RayCast2D" parent="." unique_id=1231460932]
-position = Vector2(-7, 0)
 target_position = Vector2(-2, 0)
 collision_mask = 8
 
@@ -244,44 +288,13 @@ position = Vector2(7, -8)
 target_position = Vector2(2, 0)
 collision_mask = 8
 
-[node name="RightCastU" type="RayCast2D" parent="." unique_id=1400881259]
-position = Vector2(7, -16)
-target_position = Vector2(2, 0)
-collision_mask = 8
-
-[node name="RightCastD" type="RayCast2D" parent="." unique_id=1625154967]
-position = Vector2(7, 0)
-target_position = Vector2(2, 0)
-collision_mask = 8
-
 [node name="UpCast" type="RayCast2D" parent="." unique_id=83836088]
 position = Vector2(0, -15)
 target_position = Vector2(0, -2)
 collision_mask = 8
 
-[node name="UpCastL" type="RayCast2D" parent="." unique_id=456977005]
-position = Vector2(-8, -15)
-target_position = Vector2(0, -2)
-collision_mask = 8
-
-[node name="UpCastR" type="RayCast2D" parent="." unique_id=1523508074]
-position = Vector2(8, -15)
-target_position = Vector2(0, -2)
-collision_mask = 8
-
 [node name="DownCast" type="RayCast2D" parent="." unique_id=189306189]
 position = Vector2(0, -1)
-target_position = Vector2(0, 2)
-collision_mask = 8
-collide_with_areas = true
-
-[node name="DownCastL" type="RayCast2D" parent="." unique_id=1836998465]
-position = Vector2(-8, -1)
-target_position = Vector2(0, 2)
-collision_mask = 8
-
-[node name="DownCastR" type="RayCast2D" parent="." unique_id=1006335656]
-position = Vector2(8, -1)
 target_position = Vector2(0, 2)
 collision_mask = 8
 
