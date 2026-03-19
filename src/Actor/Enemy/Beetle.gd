@@ -22,6 +22,7 @@ var collision_shape_data: Dictionary
 
 func setup():
 	gravity = 0
+	collision_shape_data = get_collision_shape_data()
 	match difficulty:
 		0:
 			hp = 2
@@ -49,7 +50,6 @@ func setup():
 			#reward = 5
 			#damage_on_contact = 4
 			#$Sprite2D.texture = TX_3
-	collision_shape_data = get_collision_shape_data()
 
 
 
@@ -183,8 +183,8 @@ func enter_platformcrawl(last_state): #level 2
 		else:
 			move_dir = crawl_start_dir
 			doing_crawl_start_dir = false #turn off after we're done
-		set_collision_shapes()
-		get_crawl_sprite()
+	set_collision_shapes()
+	get_crawl_sprite()
 	speed = crawl_speed
 
 func exit_platformcrawl(_next_state):
