@@ -201,6 +201,12 @@ func do_platformcrawl():
 	var edge_top_rc2: RayCast2D
 	var edge_bottom_rc: RayCast2D
 
+	match move_dir:
+		Vector2.LEFT: wall_collider = $LeftCast.get_collider()
+		Vector2.RIGHT: wall_collider = $RightCast.get_collider()
+		Vector2.UP: wall_collider = $UpCast.get_collider()
+		Vector2.DOWN: wall_collider = $DownCast.get_collider()
+
 	match wall_dir:
 		Vector2.LEFT:
 			if move_dir == Vector2.UP:
@@ -254,7 +260,7 @@ func do_platformcrawl():
 				edge_bottom_rc = $CenteredPivot/MovableEdgeR2
 			player_collider = $PlayerUpCast.get_collider()
 			world_collider = $WorldUpCast.get_collider()
-	if is_on_wall(): #turn around from wall
+	if wall_collider: #turn around from wall
 		if $FlipCooldown.is_stopped():
 			$FlipCooldown.start(flip_cooldown_time)
 			move_dir *= -1
@@ -422,33 +428,38 @@ func get_collision_shape_data() -> Dictionary:
 
 func set_collision_shapes():
 	for key in collision_shape_data.keys():
-		get_node(key).visible = false
 		get_node(key).disabled = true
+		get_node(key).visible = false
 
 	var new_shape_rot = -90 + rad_to_deg(wall_dir.angle()) #90 * move_dir.x
 
 	$CenteredPivot.rotation_degrees = new_shape_rot
 
+	var target_collision_name: String = ""
 	match state:
 		"idle", "crawl", "platformcrawl", "idlescan", "turn_edge":
+			target_collision_name = "crawl"
 			for i in collision_shape_data:
-				var is_crawl = collision_shape_data[i][0] == "crawl"
-				get_node(i).disabled = !is_crawl
-				get_node(i).visible = is_crawl
-				if is_crawl:
+				if collision_shape_data[i][0] == "crawl":
+					var curr_collision_node: CollisionShape2D = get_node(i)
 					var base_rot = collision_shape_data[i][1]
 					var base_pos = collision_shape_data[i][2]
-					rotate_collision_shape(get_node(i), new_shape_rot, base_rot, base_pos)
+					rotate_collision_shape(curr_collision_node, new_shape_rot, base_rot, base_pos)
 		"crawldiagonal":
-			for i in collision_shape_data:
-				var is_crawldiagonal = collision_shape_data[i][0] == "crawldiagonal"
-				get_node(i).disabled = !is_crawldiagonal
-				get_node(i).visible = is_crawldiagonal
+			target_collision_name = "crawldiagonal"
 		"fly":
-			for i in collision_shape_data:
-				var is_fly = collision_shape_data[i][0] == "fly"
-				get_node(i).disabled = !is_fly
-				get_node(i).visible = is_fly
+			target_collision_name = "fly"
+
+	for i in collision_shape_data:
+		var curr_collision_node: CollisionShape2D = get_node(i)
+		if (collision_shape_data[i][0] == target_collision_name):
+			if (i == target_collision_name):
+				$CollisionShape2D.shape = curr_collision_node.shape
+				$CollisionShape2D.position = curr_collision_node.position
+				$CollisionShape2D.rotation = curr_collision_node.rotation
+			else:
+				curr_collision_node.disabled = false
+				curr_collision_node.visible = true
 
 
 func rotate_collision_shape(shape, deg, base_deg, base_pos):

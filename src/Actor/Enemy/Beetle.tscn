@@ -3,9 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://ddaew12v1ku8o" path="res://assets/Actor/Enemy/Beetle.png" id="2_7vcwk"]
 [ext_resource type="Script" uid="uid://qcbiyidgaq45" path="res://src/Actor/Enemy/Beetle.gd" id="3"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7vcwk"]
-radius = 4.5
-height = 14.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7vcwk"]
+size = Vector2(12, 9)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4id4"]
 radius = 4.5
@@ -151,13 +150,20 @@ debug = true
 speed = Vector2(150, 150)
 editor_hidden = false
 
-[node name="Crawl" type="CollisionShape2D" parent="." unique_id=1402698365]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1804859425]
 position = Vector2(0, -4.5)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_7vcwk")
+shape = SubResource("RectangleShape2D_7vcwk")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="Crawl" type="CollisionShape2D" parent="." unique_id=1402698365]
+visible = false
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_7vcwk")
+disabled = true
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="CrawlDiagonal" type="CollisionShape2D" parent="." unique_id=686662712]
+visible = false
 position = Vector2(-2, -6)
 rotation = -0.785397
 shape = SubResource("CapsuleShape2D_g4id4")
@@ -165,6 +171,7 @@ disabled = true
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Fly" type="CollisionShape2D" parent="." unique_id=1435893146]
+visible = false
 position = Vector2(0, -8)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_qsmhk")
@@ -172,6 +179,7 @@ disabled = true
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=547326425]
+visible = false
 collision_layer = 131072
 collision_mask = 0
 
@@ -194,6 +202,7 @@ disabled = true
 debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=1477557090]
+visible = false
 collision_layer = 262144
 collision_mask = 65536
 
