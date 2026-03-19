@@ -201,12 +201,6 @@ func do_platformcrawl():
 	var edge_top_rc2: RayCast2D
 	var edge_bottom_rc: RayCast2D
 
-	match move_dir:
-		Vector2.LEFT: wall_collider = $LeftCast.get_collider()
-		Vector2.RIGHT: wall_collider = $RightCast.get_collider()
-		Vector2.UP: wall_collider = $UpCast.get_collider()
-		Vector2.DOWN: wall_collider = $DownCast.get_collider()
-
 	match wall_dir:
 		Vector2.LEFT:
 			if move_dir == Vector2.UP:
@@ -260,7 +254,7 @@ func do_platformcrawl():
 				edge_bottom_rc = $CenteredPivot/MovableEdgeR2
 			player_collider = $PlayerUpCast.get_collider()
 			world_collider = $WorldUpCast.get_collider()
-	if wall_collider: #turn around from wall
+	if is_on_wall(): #turn around from wall
 		if $FlipCooldown.is_stopped():
 			$FlipCooldown.start(flip_cooldown_time)
 			move_dir *= -1
