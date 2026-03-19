@@ -255,7 +255,6 @@ func do_platformcrawl():
 			player_collider = $PlayerUpCast.get_collider()
 			world_collider = $WorldUpCast.get_collider()
 	if is_on_wall(): #turn around from wall
-		#print("flipwall")
 		if $FlipCooldown.is_stopped():
 			$FlipCooldown.start(flip_cooldown_time)
 			move_dir *= -1
@@ -264,8 +263,9 @@ func do_platformcrawl():
 		if (!edge_top_rc.is_colliding() and !edge_top_rc2.is_colliding() and edge_bottom_rc.is_colliding()):#turn corner from ledge
 			change_state("pre_turn_edge")
 		else: #turn around if no valid edge to turn
-			move_dir *= -1
-			get_crawl_sprite()
+			if !(just_spawned):
+				move_dir *= -1
+				get_crawl_sprite()
 
 
 	if player_collider:
