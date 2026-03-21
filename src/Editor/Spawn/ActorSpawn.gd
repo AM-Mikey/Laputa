@@ -55,13 +55,28 @@ func _ready():
 		spawn()
 
 func initialize(): #first time set up properties
+	print("initialize")
 	var actor = load(actor_path).instantiate()
 	for p in actor.get_property_list():
 		if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
 			properties[p["name"]] = [actor.get(p["name"]), p["type"]]
+	properties["id"] = [name, TYPE_STRING]
+
+	for ac in actor.get_children():
+		if ac.is_in_group("WaypointLocals"): #move to actor_spawn
+			if !get_if_actor_has_waypoint(ac):
+				actor.remove_child(ac)
+				add_child(ac)
+				ac.owner = w.current_level
+		if ac.is_in_group("WaypointGlobalSpawns"): #move to actor_spawn
+			if !get_if_actor_has_waypoint(ac):
+				actor.remove_child(ac)
+				add_child(ac)
+				ac.owner = w.current_level
 	actor.free()
 
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
+	print("re initialize")
 	var old_properties = properties
 	properties = {}
 	var actor = load(actor_path).instantiate()
@@ -71,9 +86,17 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 				properties[p["name"]] = old_properties[p["name"]]
 			else:
 				properties[p["name"]] = [actor.get(p["name"]), p["type"]]
+
+	for ac in actor.get_children():
+		if ac.is_in_group("WaypointLocals"): #move to actor_spawn
+			if !get_if_actor_has_waypoint(ac):
+				actor.remove_child(ac)
+				add_child(ac)
+				ac.owner = w.current_level
 	actor.free()
 
 func spawn():
+	print("spawn")
 	#await get_tree().process_frame #wait to set allow_spawn
 	#if !allow_spawn: return
 	if actor_path == null:
@@ -84,10 +107,31 @@ func spawn():
 	for p in properties:
 		actor.set(p, properties[p][0])
 	actor.name = name
+	if properties["id"][0] == "": #no given id
+		actor.id = name
 	actor.global_position = global_position
-	w.current_level.get_node("Actors").call_deferred("add_child", actor)
+	await w.current_level.get_node("Actors").call_deferred("add_child", actor)
 
+	for ac in actor.get_children(): #clear old
+		if ac.is_in_group("WaypointLocals"):
+			actor.remove_child(ac)
+		if ac.is_in_group("WaypointGlobalSpawns"): #turn off visibility
+			ac.visible = false
 
+	for c in get_children(): #add new
+		if c.is_in_group("WaypointLocals"):
+			var copy = c.duplicate()
+			actor.add_child(copy)
+
+### GETTERS
+
+func get_if_actor_has_waypoint(actor_waypoint)-> bool:
+	var out = false
+	for c in get_children():
+		if c.is_in_group("WaypointLocals"):
+			if c.tag_name == actor_waypoint.tag_name:
+				out = true
+	return out
 
 ### SIGNALS
 
@@ -97,9 +141,6 @@ func on_editor_select(): #when
 func on_editor_deselect():
 	modulate = Color(1,1,1,.75)
 
-
-#func on_pressed(): #when
-	#emit_signal("selected", self, "actor_spawn")
 
 func _input_event(_viewport, event, _shape_idx): #selecting in editor
 	var inspector = w.get_node("EditorLayer/Editor").inspector

@@ -20,7 +20,7 @@ func setup():
 	find_waypoints()
 
 func find_waypoints():
-	for wp in get_tree().get_nodes_in_group("Waypoints"):
+	for wp in get_tree().get_nodes_in_group("WaypointGlobals"):
 		if wp.owner_id == id:
 			waypoints[wp.index] = wp
 

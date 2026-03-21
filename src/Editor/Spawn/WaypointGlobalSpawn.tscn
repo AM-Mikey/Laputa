@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://xx5fbltdrdxk"]
+
+[ext_resource type="Script" uid="uid://crvg1jvm67k7u" path="res://src/Editor/Spawn/WaypointGlobalSpawn.gd" id="1_ycpum"]
+[ext_resource type="Texture2D" uid="uid://dsmy50efq1bj0" path="res://assets/Utility/Waypoint.png" id="2_cry4f"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(8, 8)
+
+[node name="WaypointGlobalSpawn" type="Area2D" unique_id=1432238783 groups=["Entities", "WaypointGlobalSpawns"]]
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("1_ycpum")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=666135226]
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1572684330]
+modulate = Color(0.13333334, 0.54509807, 0.13333334, 1)
+z_index = 999
+texture = ExtResource("2_cry4f")

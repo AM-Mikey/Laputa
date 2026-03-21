@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="6_8lqyu"]
 [ext_resource type="Script" path="res://src/Tile/WastesAutoTile.gd" id="9_633jl"]
 [ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="9_ag25g"]
-[ext_resource type="PackedScene" uid="uid://dim3av368jfya" path="res://src/Utility/Waypoint.tscn" id="10_htl27"]
+[ext_resource type="PackedScene" uid="uid://dim3av368jfya" path="res://src/Editor/WaypointGlobal.tscn" id="10_htl27"]
 [ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_c6eqk"]
 [ext_resource type="Script" uid="uid://wftb1fa7j2ti" path="res://src/Tile/WastesAnimator.gd" id="12_obofi"]
 [ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="13_hmghs"]
@@ -160,6 +160,19 @@ properties = {
 }
 size_is_default = false
 
+[node name="Waypoints" type="Node2D" parent="." unique_id=228139383]
+
+[node name="Waypoint" parent="Waypoints" unique_id=368447829 instance=ExtResource("10_htl27")]
+visibility_layer = 2
+position = Vector2(2392, 1976)
+owner_id = "bird1"
+
+[node name="Waypoint2" parent="Waypoints" unique_id=2037427852 instance=ExtResource("10_htl27")]
+visibility_layer = 2
+position = Vector2(2576, 1928)
+owner_id = "bird1"
+index = 1
+
 [node name="TileAnimator" type="Node2D" parent="." unique_id=1560605216]
 visibility_layer = 2
 script = ExtResource("12_obofi")
@@ -167,17 +180,6 @@ script = ExtResource("12_obofi")
 [node name="AutoTile" type="Node2D" parent="." unique_id=586402167]
 visibility_layer = 2
 script = ExtResource("9_633jl")
-
-[node name="Waypoint" parent="." unique_id=368447829 instance=ExtResource("10_htl27")]
-visibility_layer = 2
-position = Vector2(2392, 1976)
-owner_id = "bird1"
-
-[node name="Waypoint2" parent="." unique_id=2037427852 instance=ExtResource("10_htl27")]
-visibility_layer = 2
-position = Vector2(2576, 1928)
-owner_id = "bird1"
-index = 1
 
 [node name="VanishingPoint" parent="." unique_id=1961289487 instance=ExtResource("13_hmghs")]
 visibility_layer = 2

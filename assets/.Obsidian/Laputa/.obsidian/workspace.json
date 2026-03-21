@@ -6,7 +6,7 @@
       {
         "id": "f8cbbec6d568959c",
         "type": "tabs",
-        "dimension": 72.75641025641025,
+        "dimension": 56.15482233502538,
         "children": [
           {
             "id": "fd4f00696d9a397d",
@@ -23,31 +23,17 @@
             }
           },
           {
-            "id": "e8e9d350e2bb8079",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Characters/Juniper.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Juniper"
-            }
-          },
-          {
             "id": "680a833611f90e85",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Concepts/Religion.md",
+                "file": "Characters/Alexander.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Religion"
+              "title": "Alexander"
             }
           },
           {
@@ -82,21 +68,23 @@
             "id": "17b5642717e47f4a",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.12.4"
+                "file": "2026-03-12.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.12.4"
+              "icon": "lucide-file",
+              "title": "2026-03-12"
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 1
       },
       {
         "id": "f00468223e4d7550",
         "type": "tabs",
-        "dimension": 27.243589743589745,
+        "dimension": 43.84517766497462,
         "children": [
           {
             "id": "0b2f6be5223829c1",
@@ -270,12 +258,20 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "17b5642717e47f4a",
+  "active": "680a833611f90e85",
   "lastOpenFiles": [
+    "Characters/Spirit of the Island.md",
+    "Characters/Treasure Hunter.md",
+    "Characters/Scrum.md",
+    "Characters/Laputa's Former King.md",
+    "Concepts/Religion.md",
+    "2026-03-12.md",
+    "Characters/Alexander.md",
+    "Characters/Colin.md",
+    "Untitled.base",
     "The World/Areas/Dogtown.md",
     "Groups/Dogtown Residents.md",
     "Concepts/Resistance.md",
-    "Concepts/Religion.md",
     "Objects/Machine.md",
     "The World/Dinero.md",
     "Groups/Corp..md",
@@ -291,13 +287,6 @@
     "The World/Areas/Ancient Ruins.md",
     "hidden knowledge.md",
     "Concepts/Davey's Secret Knowledge.md",
-    "Characters/Junior.md",
-    "Concepts/Endings.md",
-    "Concepts/Ethnicity.md",
-    "Concepts/Gender.md",
-    "Concepts/Great Plague.md",
-    "Concepts/History of Laputa.md",
-    "Characters/Rosemary.md",
     "Aseprite_8jemaKX0FE.png",
     "Aseprite_EEozVk20AW.png",
     "Aseprite_ujhX9SUnNc.png",
@@ -316,7 +305,6 @@
     "The World",
     "Concepts",
     "Characters",
-    "Groups",
-    "The World/Areas"
+    "Groups"
   ]
 }

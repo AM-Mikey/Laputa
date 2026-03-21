@@ -227,14 +227,14 @@ func control_to_player(speed: float): #Moves camera towards player position
 
 
 func control_to_waypoint(waypoint_index: int, speed: float):
-	var waypoints := get_tree().get_nodes_in_group("Waypoints")
+	var waypoints := get_tree().get_nodes_in_group("WaypointGlobals")
 	var target_pos := Vector2(0, 0)
 	if control_target == null:
 		for node in waypoints:
 			if node.index == waypoint_index:
 				control_target = node
 		if control_target == null:
-			printerr("ERROR: WAYPOINT NOT FOUND")
+			printerr("ERROR: WAYPOINT GLOBAL NOT FOUND")
 	target_pos = control_target.global_position
 	control_to_position(target_pos, speed)
 

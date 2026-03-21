@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://36k868wp3ide" path="res://src/Editor/Tab/Triggers.tscn" id="11"]
 [ext_resource type="Script" uid="uid://c16or36ij3x8" path="res://src/Editor/TabButtons.gd" id="12"]
 [ext_resource type="PackedScene" uid="uid://begsayt1f6ent" path="res://src/Editor/InfoBox.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://rju7cf1v4f8c" path="res://src/Editor/Tab/Miscs.tscn" id="13_m7ebl"]
 [ext_resource type="Script" uid="uid://xwjfyhiur8mw" path="res://src/Editor/EditorSettings.gd" id="14"]
 [ext_resource type="Script" uid="uid://xd4yxnbtve0" path="res://src/Editor/TileMaster.gd" id="15_aiisb"]
 
@@ -131,6 +132,11 @@ visible = false
 use_parent_material = true
 layout_mode = 2
 metadata/_tab_index = 6
+
+[node name="Miscs" parent="Main/Win/Tab" unique_id=824501068 instance=ExtResource("13_m7ebl")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 7
 
 [node name="TabButtons" type="Control" parent="Main/Win" unique_id=467728333]
 show_behind_parent = true

@@ -1,6 +1,6 @@
 extends Enemy
 
-const WAYPOINT = preload("res://src/Utility/Waypoint.tscn") #TODO: clean up waypoint implementation to match NPC
+const WAYPOINT = preload("res://src/Editor/WaypointGlobal.tscn") #TODO: clean up waypoint implementation to match NPC
 
 @export var move_dir = Vector2.ZERO
 @export var flap_time = 0.1
@@ -33,7 +33,7 @@ func setup():
 	find_waypoints()
 
 func find_waypoints():
-	for wp in get_tree().get_nodes_in_group("Waypoints"):
+	for wp in get_tree().get_nodes_in_group("WaypointGlobals"):
 		if wp.owner_id == id and wp.index != -1: #dont include the aggro waypoint
 			waypoints[wp.index] = wp
 	if not waypoints.is_empty():

@@ -10,7 +10,7 @@ var active_trigger_path
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
 
 
-func setup_triggers(): #TODO: connect this to editor
+func setup_triggers():
 	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
 	var index = 0
 	for p in find_trigger_scenes("res://src/Trigger/"):

@@ -1,7 +1,7 @@
 extends Enemy
 
 const SEED = preload("res://src/Bullet/Enemy/Seed.tscn")
-const WAYPOINT = preload("res://src/Utility/Waypoint.tscn")
+const WAYPOINT = preload("res://src/Editor/WaypointGlobal.tscn")
 
 @export var move_dir = Vector2.LEFT
 @export var look_dir = Vector2.LEFT
@@ -126,7 +126,7 @@ func do_aggro():
 var is_jumping: bool = false
 var jump_acceleration: float = 0.0
 func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
-	var default_value = super.calc_velocity(move_dir, do_gravity, do_acceleration, do_friction)
+	var default_value = super.calc_velocity(move_dir, do_gravity, do_acceleration, do_friction) #TODO: probably remove the super here
 	if (difficulty == 1):
 		if !(is_jumping):
 			if !(is_on_floor()):
