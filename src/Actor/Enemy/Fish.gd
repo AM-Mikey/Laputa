@@ -38,9 +38,9 @@ func setup():
 		if c.owner_id == id:
 			match c.tag_name:
 				"left":
-					x_min = c.position.x
+					x_min = c.position.x - start_pos.x
 				"right":
-					x_max = c.position.x
+					x_max = c.position.x - start_pos.x
 	update_path_lines()
 
 func on_swim_dir_x_changed(new):

@@ -60,6 +60,7 @@ func initialize(): #first time set up properties
 	for p in actor.get_property_list():
 		if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
 			properties[p["name"]] = [actor.get(p["name"]), p["type"]]
+	properties["id"] = [name, TYPE_STRING]
 
 	for ac in actor.get_children():
 		if ac.is_in_group("WaypointLocals"): #move to actor_spawn
@@ -106,6 +107,8 @@ func spawn():
 	for p in properties:
 		actor.set(p, properties[p][0])
 	actor.name = name
+	if properties["id"][0] == "": #no given id
+		actor.id = name
 	actor.global_position = global_position
 	await w.current_level.get_node("Actors").call_deferred("add_child", actor)
 
@@ -138,9 +141,6 @@ func on_editor_select(): #when
 func on_editor_deselect():
 	modulate = Color(1,1,1,.75)
 
-
-#func on_pressed(): #when
-	#emit_signal("selected", self, "actor_spawn")
 
 func _input_event(_viewport, event, _shape_idx): #selecting in editor
 	var inspector = w.get_node("EditorLayer/Editor").inspector

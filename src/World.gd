@@ -9,6 +9,8 @@ const JUNIPER = preload("res://src/Player/Juniper.tscn")
 const TITLE = preload("res://src/UI/TitleScreen.tscn")
 const TITLECAM = preload("res://src/Utility/TitleCam.tscn")
 
+var current_level
+
 @export var development_stage: String = "Alpha"
 var internal_version: String = get_internal_version()
 @export var release_version: String
@@ -17,7 +19,6 @@ var internal_version: String = get_internal_version()
 @export var debug_visible = false
 
 @export var start_level_path: String
-@onready var current_level = load(start_level_path).instantiate() #assumes current level to start with, might cause issues down the line
 @onready var ui = $UILayer
 @onready var hl = $HUDLayer
 @onready var el = $EditorLayer
@@ -97,11 +98,16 @@ func _input(event):
 ### LEVEL CHANGE ###
 
 func first_time_level_setup():
+	bl.visible = true #TODO: this is a bandaid solution to saving in editor causing world.gd to have some layers invisible. since it's only supposed to save the current level, I'm not sure why this is affecting the world node
+	ui.visible = true
 	print("first time level setup")
 	add_child(JUNIPER.instantiate())
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 	current_level = load(start_level_path).instantiate()
 	add_child(current_level)
+	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
+		if wg.uses_spawn:
+			wg.queue_free()
 
 	$Juniper.global_position = get_spawn_point().global_position
 	$Juniper/PlayerCamera.reset()
@@ -133,6 +139,9 @@ func change_level_via_code(level_path, use_save_data):
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
+	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
+		if wg.uses_spawn:
+			wg.queue_free()
 
 	$Juniper.global_position = get_spawn_point().global_position
 	$Juniper/PlayerCamera.reset()
@@ -164,8 +173,13 @@ func change_level_via_trigger(level_path, door_index):
 
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
+	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
+		if wg.uses_spawn:
+			wg.queue_free()
 
 	$Juniper/PlayerCamera.reset()
+
+	do_transition(old_level_path, level_path)
 
 	SaveSystem.read_level_data_from_temp(current_level)
 	await get_tree().process_frame
@@ -174,23 +188,27 @@ func change_level_via_trigger(level_path, door_index):
 	setup_missions(false, "trigger")
 	setup_door(door_index, old_level_path)
 
-	###transition out
+
+
+func do_transition(old_level_path, level_path):
+	inp.can_act = false
 	if bl.has_node("TransitionWipe"): #LOADZONES
 		await get_tree().create_timer(0.8).timeout
 		$BlackoutLayer/TransitionWipe.play_out_animation()
 		await $BlackoutLayer/TransitionWipe.tree_exiting #wait for a bit of the animation to finish
 		inp.can_act = true
+		if old_level_path != level_path:
+			display_level_text(current_level)
+		run_conversation_on_enter(current_level)
 
 	elif bl.has_node("TransitionIris"): #DOORS
 		await get_tree().create_timer(0.4).timeout
 		$BlackoutLayer/TransitionIris.play_out_animation()
 		await $BlackoutLayer/TransitionIris.tree_exiting #wait for a bit of the animation to finish
 		inp.can_act = true
-
-	if old_level_path != level_path:
-		display_level_text(current_level)
-	run_conversation_on_enter(current_level)
-
+		if old_level_path != level_path:
+			display_level_text(current_level)
+		run_conversation_on_enter(current_level)
 
 
 func setup_missions(use_save_data: bool, type = "first_time"):

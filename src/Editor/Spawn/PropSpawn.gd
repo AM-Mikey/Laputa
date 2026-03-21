@@ -52,6 +52,7 @@ func initialize(): #first time set up properties
 	for p in prop.get_property_list():
 		if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
 			properties[p["name"]] = [prop.get(p["name"]), p["type"]]
+	properties["id"] = [name, TYPE_STRING]
 	prop.free()
 
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
@@ -93,9 +94,6 @@ func on_editor_select(): #when
 func on_editor_deselect():
 	modulate = Color(1,1,1,.75)
 
-
-#func on_pressed(): #when
-	#emit_signal("selected", self, "prop_spawn")
 
 func _input_event(_viewport, event, _shape_idx): #selecting in editor
 	var inspector = w.get_node("EditorLayer/Editor").inspector

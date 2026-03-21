@@ -54,10 +54,11 @@ func spawn():
 	var waypoint_global = WAYPOINT_GLOBAL.instantiate()
 	waypoint_global.global_position = saved_pos
 	if "id" in get_parent():
-		waypoint_global.owner_id = get_parent().id #TODO: force enemies to get an ID
+		waypoint_global.owner_id = get_parent().id
 	else:
 		waypoint_global.owner_id = get_parent().properties["id"][0]
 	waypoint_global.index = index
+	waypoint_global.tag_name = tag_name
 	waypoint_global.uses_spawn = true
 	w.current_level.get_node("Waypoints").add_child(waypoint_global)
 
@@ -70,9 +71,6 @@ func on_editor_select(): #when
 func on_editor_deselect():
 	modulate = Color(1,1,1,.75)
 
-
-#func on_pressed(): #when
-	#emit_signal("selected", self, "actor_spawn")
 
 func _input_event(_viewport, event, _shape_idx): #selecting in editor
 	var inspector = w.get_node("EditorLayer/Editor").inspector

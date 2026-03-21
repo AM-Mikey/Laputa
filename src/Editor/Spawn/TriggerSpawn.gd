@@ -57,6 +57,7 @@ func initialize(): #first time set up properties
 			properties[p["name"]] = [trigger.get(p["name"]), p["type"]]
 		elif p["usage"] == 69638: #exported property enums
 			properties[p["name"]] = [trigger.get(p["name"]), p["type"]]
+	properties["id"] = [name, TYPE_STRING]
 	trigger.free()
 
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
