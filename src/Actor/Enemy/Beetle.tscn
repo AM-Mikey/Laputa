@@ -253,7 +253,7 @@ hit_from_inside = true
 
 [node name="MovableEdgeL1" type="RayCast2D" parent="CenteredPivot" unique_id=2048299719]
 position = Vector2(-12, 8)
-target_position = Vector2(0, 19)
+target_position = Vector2(0, 15)
 collision_mask = 8
 hit_from_inside = true
 
@@ -265,13 +265,13 @@ hit_from_inside = true
 
 [node name="MovableEdgeL3" type="RayCast2D" parent="CenteredPivot" unique_id=843513174]
 position = Vector2(-20, 8)
-target_position = Vector2(0, 19)
+target_position = Vector2(0, 15)
 collision_mask = 8
 hit_from_inside = true
 
 [node name="MovableEdgeR1" type="RayCast2D" parent="CenteredPivot" unique_id=350123190]
 position = Vector2(12, 8)
-target_position = Vector2(0, 19)
+target_position = Vector2(0, 15)
 collision_mask = 8
 hit_from_inside = true
 
@@ -283,7 +283,7 @@ hit_from_inside = true
 
 [node name="MovableEdgeR3" type="RayCast2D" parent="CenteredPivot" unique_id=1702144698]
 position = Vector2(20, 8)
-target_position = Vector2(0, 19)
+target_position = Vector2(0, 15)
 collision_mask = 8
 hit_from_inside = true
 
