@@ -241,51 +241,69 @@ position = Vector2(0, -8)
 
 [node name="FloorCastL" type="RayCast2D" parent="CenteredPivot" unique_id=1836998465]
 position = Vector2(-6, 7)
+enabled = false
 target_position = Vector2(0, 2)
 collision_mask = 8
 hit_from_inside = true
 
 [node name="FloorCastR" type="RayCast2D" parent="CenteredPivot" unique_id=1006335656]
 position = Vector2(6, 7)
+enabled = false
 target_position = Vector2(0, 2)
 collision_mask = 8
 hit_from_inside = true
 
 [node name="MovableEdgeL1" type="RayCast2D" parent="CenteredPivot" unique_id=2048299719]
 position = Vector2(-12, 8)
+enabled = false
 target_position = Vector2(0, 15)
 collision_mask = 8
 hit_from_inside = true
 
 [node name="MovableEdgeL2" type="RayCast2D" parent="CenteredPivot" unique_id=2633938]
 position = Vector2(-24, 20)
+enabled = false
 target_position = Vector2(19, 0)
 collision_mask = 8
 hit_from_inside = true
 
 [node name="MovableEdgeL3" type="RayCast2D" parent="CenteredPivot" unique_id=843513174]
 position = Vector2(-20, 8)
+enabled = false
 target_position = Vector2(0, 15)
 collision_mask = 8
 hit_from_inside = true
 
 [node name="MovableEdgeR1" type="RayCast2D" parent="CenteredPivot" unique_id=350123190]
 position = Vector2(12, 8)
+enabled = false
 target_position = Vector2(0, 15)
 collision_mask = 8
 hit_from_inside = true
 
 [node name="MovableEdgeR2" type="RayCast2D" parent="CenteredPivot" unique_id=1710496432]
 position = Vector2(24, 20)
+enabled = false
 target_position = Vector2(-19, 0)
 collision_mask = 8
 hit_from_inside = true
 
 [node name="MovableEdgeR3" type="RayCast2D" parent="CenteredPivot" unique_id=1702144698]
 position = Vector2(20, 8)
+enabled = false
 target_position = Vector2(0, 15)
 collision_mask = 8
 hit_from_inside = true
+
+[node name="PlayerCast" type="RayCast2D" parent="CenteredPivot" unique_id=1245707981]
+enabled = false
+target_position = Vector2(0, -100)
+collision_mask = 9
+
+[node name="WorldCast" type="RayCast2D" parent="CenteredPivot" unique_id=813832102]
+enabled = false
+target_position = Vector2(0, -200)
+collision_mask = 8
 
 [node name="LeftCast" type="RayCast2D" parent="." unique_id=795130591]
 position = Vector2(-7, -8)
@@ -310,44 +328,6 @@ collision_mask = 8
 [node name="Pivot" type="Marker2D" parent="." unique_id=634197743]
 position = Vector2(0, -8)
 gizmo_extents = 1.0
-
-[node name="PlayerLeftCast" type="RayCast2D" parent="." unique_id=983175377]
-position = Vector2(-8, -8)
-target_position = Vector2(-100, 0)
-collision_mask = 9
-
-[node name="PlayerRightCast" type="RayCast2D" parent="." unique_id=1884372464]
-position = Vector2(8, -8)
-target_position = Vector2(100, 0)
-collision_mask = 9
-
-[node name="PlayerUpCast" type="RayCast2D" parent="." unique_id=1245707981]
-position = Vector2(0, -16)
-target_position = Vector2(0, -100)
-collision_mask = 9
-
-[node name="PlayerDownCast" type="RayCast2D" parent="." unique_id=1188767378]
-target_position = Vector2(0, 100)
-collision_mask = 9
-
-[node name="WorldLeftCast" type="RayCast2D" parent="." unique_id=650209830]
-position = Vector2(-8, -8)
-target_position = Vector2(-200, 0)
-collision_mask = 8
-
-[node name="WorldRightCast" type="RayCast2D" parent="." unique_id=1411438551]
-position = Vector2(8, -8)
-target_position = Vector2(200, 0)
-collision_mask = 8
-
-[node name="WorldUpCast" type="RayCast2D" parent="." unique_id=813832102]
-position = Vector2(0, -16)
-target_position = Vector2(0, -200)
-collision_mask = 8
-
-[node name="WorldDownCast" type="RayCast2D" parent="." unique_id=1925182833]
-target_position = Vector2(0, 200)
-collision_mask = 8
 
 [node name="FlyCooldown" type="Timer" parent="." unique_id=439362844]
 process_callback = 0

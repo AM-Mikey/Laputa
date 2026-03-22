@@ -36,12 +36,24 @@ func setup():
 			reward = 2
 			damage_on_contact = 2
 			$Sprite2D.texture = TX_1
+			$CenteredPivot/PlayerCast.enabled = true
+			$CenteredPivot/WorldCast.enabled = true
 			change_state("idlescan")
 		2:
 			hp = 3
 			reward = 4
 			damage_on_contact = 2
 			$Sprite2D.texture = TX_2
+			$CenteredPivot/PlayerCast.enabled = true
+			$CenteredPivot/WorldCast.enabled = true
+			$CenteredPivot/FloorCastL.enabled = true
+			$CenteredPivot/FloorCastR.enabled = true
+			$CenteredPivot/MovableEdgeL1.enabled = true
+			$CenteredPivot/MovableEdgeL2.enabled = true
+			$CenteredPivot/MovableEdgeL3.enabled = true
+			$CenteredPivot/MovableEdgeR1.enabled = true
+			$CenteredPivot/MovableEdgeR2.enabled = true
+			$CenteredPivot/MovableEdgeR3.enabled = true
 			if crawl_start_dir != Vector2.ZERO:
 				doing_crawl_start_dir = true
 			change_state("platformcrawl")
@@ -110,18 +122,10 @@ func enter_idlescan(_last_state): #level 1
 	$AnimationPlayer.play("Idle")
 
 func do_idlescan():
-	var collider
-	match wall_dir:
-		Vector2.LEFT:
-			collider = $PlayerRightCast.get_collider()
-		Vector2.RIGHT:
-			collider = $PlayerLeftCast.get_collider()
-		Vector2.UP:
-			collider = $PlayerDownCast.get_collider()
-		Vector2.DOWN:
-			collider = $PlayerUpCast.get_collider()
+	var collider = $CenteredPivot/PlayerCast.get_collider()
+	var world_collider = $CenteredPivot/WorldCast.get_collider()
 
-	if collider:
+	if collider and world_collider:
 		if collider is TileMapLayer:
 			return
 		if $FlyCooldown.is_stopped():
@@ -213,8 +217,6 @@ func do_platformcrawl():
 				edge_top_rc = $CenteredPivot/MovableEdgeR1
 				edge_top_rc2 = $CenteredPivot/MovableEdgeR3
 				edge_bottom_rc = $CenteredPivot/MovableEdgeR2
-			player_collider = $PlayerRightCast.get_collider()
-			world_collider = $WorldRightCast.get_collider()
 		Vector2.RIGHT:
 			if move_dir == Vector2.UP:
 				edge_collider = $CenteredPivot/FloorCastR.get_collider()
@@ -226,8 +228,6 @@ func do_platformcrawl():
 				edge_top_rc = $CenteredPivot/MovableEdgeL1
 				edge_top_rc2 = $CenteredPivot/MovableEdgeL3
 				edge_bottom_rc = $CenteredPivot/MovableEdgeL2
-			player_collider = $PlayerLeftCast.get_collider()
-			world_collider = $WorldLeftCast.get_collider()
 		Vector2.UP:
 			if move_dir == Vector2.LEFT:
 				edge_collider = $CenteredPivot/FloorCastR.get_collider()
@@ -239,8 +239,6 @@ func do_platformcrawl():
 				edge_top_rc = $CenteredPivot/MovableEdgeL1
 				edge_top_rc2 = $CenteredPivot/MovableEdgeL3
 				edge_bottom_rc = $CenteredPivot/MovableEdgeL2
-			player_collider = $PlayerDownCast.get_collider()
-			world_collider = $WorldDownCast.get_collider()
 		Vector2.DOWN:
 			if move_dir == Vector2.LEFT:
 				edge_collider = $CenteredPivot/FloorCastL.get_collider()
@@ -252,8 +250,10 @@ func do_platformcrawl():
 				edge_top_rc = $CenteredPivot/MovableEdgeR1
 				edge_top_rc2 = $CenteredPivot/MovableEdgeR3
 				edge_bottom_rc = $CenteredPivot/MovableEdgeR2
-			player_collider = $PlayerUpCast.get_collider()
-			world_collider = $WorldUpCast.get_collider()
+
+	player_collider = $CenteredPivot/PlayerCast.get_collider()
+	world_collider = $CenteredPivot/WorldCast.get_collider()
+
 	if is_on_wall(): #turn around from wall
 		if $FlipCooldown.is_stopped():
 			$FlipCooldown.start(flip_cooldown_time)
