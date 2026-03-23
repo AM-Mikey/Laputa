@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bo6wktdqx2md0"]
+[gd_scene format=3 uid="uid://bo6wktdqx2md0"]
 
 [ext_resource type="Script" uid="uid://dntcigk2jyejb" path="res://src/Prop/Outdated/BreakBlock.gd" id="1"]
 

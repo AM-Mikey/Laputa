@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://1j3e4dgg6gv3"]
+[gd_scene format=3 uid="uid://1j3e4dgg6gv3"]
 
 [ext_resource type="Script" uid="uid://bq7j4yi4xlvbs" path="res://src/Prop/Outdated/ChestWeapon.gd" id="2"]
 

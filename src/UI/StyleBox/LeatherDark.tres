@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://nvs48gdh8bwm"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://nvs48gdh8bwm"]
 
 [ext_resource type="Texture2D" uid="uid://cg04ixxekpyy4" path="res://assets/UI/StyleBox/LeatherDark.png" id="1"]
 

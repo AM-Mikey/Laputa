@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bedbx1wsm7g0j"]
+[gd_scene format=3 uid="uid://bedbx1wsm7g0j"]
 
 [ext_resource type="Script" uid="uid://nlae4x8toysd" path="res://src/Prop/Outdated/ChestKeyItem.gd" id="2"]
 

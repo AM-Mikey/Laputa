@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1yubtqqrblj6"]
+[gd_scene format=3 uid="uid://d1yubtqqrblj6"]
 
 [ext_resource type="Script" uid="uid://cy4m405gaecyu" path="res://src/Utility/Outdated/MovementHandler.gd" id="1"]
 

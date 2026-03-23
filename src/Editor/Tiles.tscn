@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bg715nunngytq"]
+[gd_scene format=3 uid="uid://bg715nunngytq"]
 
 [ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="1"]
 [ext_resource type="Script" uid="uid://ce2moo6lnjdkn" path="res://src/Editor/Tiles.gd" id="2"]

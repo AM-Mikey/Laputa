@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d2wqxefaewuxm"]
+[gd_scene format=3 uid="uid://d2wqxefaewuxm"]
 
 [ext_resource type="Theme" uid="uid://c1np2xna4dogr" path="res://src/UI/Theme/InsetMenu.tres" id="1"]
 [ext_resource type="Texture2D" uid="uid://diafdejhbs5fg" path="res://assets/UI/Settings/ControllerConfig/FrontBack.png" id="6"]

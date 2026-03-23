@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d11mjw1kfmapi"]
+[gd_scene format=3 uid="uid://d11mjw1kfmapi"]
 
 [ext_resource type="Texture2D" uid="uid://dhxy8j6e76eg8" path="res://assets/Prop/Fan.png" id="1"]
 [ext_resource type="Script" uid="uid://ceam3wmge4fgc" path="res://src/Prop/Outdated/Fan.gd" id="2"]

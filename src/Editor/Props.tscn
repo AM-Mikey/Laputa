@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://digf86wrb8mov"]
+[gd_scene format=3 uid="uid://digf86wrb8mov"]
 
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1"]
 [ext_resource type="Script" uid="uid://rn4lib2jnvfs" path="res://src/Editor/Props.gd" id="2"]

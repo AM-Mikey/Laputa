@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://oypc71shfnay"]
+[gd_scene format=3 uid="uid://oypc71shfnay"]
 
 [ext_resource type="Texture2D" uid="uid://b0nagu2fsjsoe" path="res://assets/Background/Black.png" id="1"]
 

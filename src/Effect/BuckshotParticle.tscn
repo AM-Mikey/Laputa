@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://catdmr4lstwgp"]
+[gd_scene format=3 uid="uid://catdmr4lstwgp"]
 
 [ext_resource type="Texture2D" uid="uid://bbt42c2d6660n" path="res://assets/Bullet/BulletShotgun.png" id="1_qhghx"]
 [ext_resource type="Texture2D" uid="uid://c0uvowge7tlu2" path="res://assets/Effect/Bonk.png" id="2_ed4gp"]

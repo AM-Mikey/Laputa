@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://d20qvx0q5xflf"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://d20qvx0q5xflf"]
 
 [ext_resource type="Texture2D" uid="uid://y2rihoonm6pc" path="res://assets/UI/StyleBox/RustTrimmedScrews.png" id="1_0dpmw"]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpiw0v4011n6y"]
+[gd_scene format=3 uid="uid://bpiw0v4011n6y"]
 
 [ext_resource type="Texture2D" uid="uid://b3ryb218bm38c" path="res://assets/Prop/Lamp.png" id="1"]
 [ext_resource type="Script" uid="uid://bpv44v42v3lnl" path="res://src/Prop/Outdated/Lamp.gd" id="2"]

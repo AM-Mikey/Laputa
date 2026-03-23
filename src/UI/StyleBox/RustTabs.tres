@@ -1,0 +1,9 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://cf14mnttmx87y"]
+
+[ext_resource type="Texture2D" path="res://assets/UI/StyleBox/RustTab.png" id="1_gbn8p"]
+
+[resource]
+texture = ExtResource("1_gbn8p")
+texture_margin_left = 10.0
+texture_margin_right = 10.0
+region_rect = Rect2(0, 0, 32, 16)

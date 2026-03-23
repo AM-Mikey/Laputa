@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://bor4s16rrdlxh"]
+[gd_scene format=3 uid="uid://bor4s16rrdlxh"]
 
 [ext_resource type="Script" uid="uid://clvvy7mrb0jmi" path="res://src/Editor/ActorSpawnPreview.gd" id="1_l3p8o"]
 

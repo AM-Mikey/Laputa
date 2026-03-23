@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://vmeytj0j6nm4"]
+[gd_scene format=3 uid="uid://vmeytj0j6nm4"]
 
 [ext_resource type="Script" uid="uid://bar2epwbuic8c" path="res://src/Prop/Outdated/RefillTerminal.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://dgktewce5k5jw" path="res://assets/Prop/0RefillTerminal.png" id="2_5osfq"]

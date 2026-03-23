@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cyudviigyrkx2"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://cyudviigyrkx2"]
 
 [ext_resource type="Texture2D" uid="uid://brrf47fc2oqyt" path="res://assets/UI/StyleBox/SteelBeveled.png" id="1_73xrh"]
 

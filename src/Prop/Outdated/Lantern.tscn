@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvvxaveawy1n7"]
+[gd_scene format=3 uid="uid://bvvxaveawy1n7"]
 
 [ext_resource type="Script" uid="uid://bel8i5oa8s60p" path="res://src/Prop/Outdated/Lantern.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://ckd0cibuyuodb" path="res://assets/Prop/Lantern.png" id="2"]

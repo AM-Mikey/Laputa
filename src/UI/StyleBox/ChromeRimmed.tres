@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://byg47wg5teo1"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://byg47wg5teo1"]
 
 [ext_resource type="Texture2D" uid="uid://b73ifadob16sm" path="res://assets/UI/StyleBox/ChromeRimmed.png" id="1"]
 

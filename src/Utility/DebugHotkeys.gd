@@ -24,11 +24,11 @@ func _input(event):
 			w.el.add_child(LEVEL_EDITOR.instantiate())
 			w.el.get_node("Editor/Main/Win/Tab").current_tab = editor_tab
 			w.el.get_node("Editor").on_tab_changed(editor_tab)
-	
+
 	if event.is_action_pressed("debug_print"):
 		debug_print()
 
-	
+
 	if event.is_action_pressed("debug_reload"):
 		if w.el.has_node("Editor"):
 			w.el.get_node("Editor").disabled = true
@@ -48,7 +48,7 @@ func _input(event):
 		get_tree().quit()
 
 	if not w.el.has_node("Editor"): #non-editor only commands
-		
+
 		if event.is_action_pressed("debug_save"):
 			var popup = POPUP.instantiate()
 			popup.text = "quicksaved..."

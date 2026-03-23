@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=29 format=3 uid="uid://c1np2xna4dogr"]
+[gd_resource type="Theme" format=3 uid="uid://c1np2xna4dogr"]
 
 [ext_resource type="StyleBox" uid="uid://dbafhti4g7dp4" path="res://src/UI/StyleBox/LeatherLight.tres" id="1"]
 [ext_resource type="StyleBox" uid="uid://dceypmylvy2ho" path="res://src/UI/StyleBox/StoneBeveled.tres" id="3"]

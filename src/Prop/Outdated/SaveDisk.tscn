@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://eoah43mp5yo8"]
+[gd_scene format=3 uid="uid://eoah43mp5yo8"]
 
 [ext_resource type="Texture2D" uid="uid://b7puntitab4qd" path="res://assets/Prop/SaveDisk.png" id="1"]
 [ext_resource type="Script" uid="uid://bwn6q2qrnygr3" path="res://src/Prop/Outdated/SaveDisk.gd" id="3"]
