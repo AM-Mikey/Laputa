@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bx311rlr77xnh"]
+
+[ext_resource type="Script" path="res://src/Editor/WaypointGlobal.gd" id="1_i3ngx"]
+[ext_resource type="Texture2D" uid="uid://dsmy50efq1bj0" path="res://assets/Utility/Waypoint.png" id="2_qogsp"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(8, 8)
+
+[node name="WaypointGlobal" type="Area2D" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointGlobals", "Waypoints"]]
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("1_i3ngx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=666135226]
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1572684330]
+z_index = 999
+texture = ExtResource("2_qogsp")

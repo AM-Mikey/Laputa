@@ -15,7 +15,7 @@ radius = 7.0
 height = 15.0
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(14, 10)
+size = Vector2(14, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8fv4h"]
 size = Vector2(14, 10)
@@ -179,12 +179,11 @@ disabled = true
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=547326425]
-visible = false
 collision_layer = 131072
 collision_mask = 0
 
 [node name="Crawl" type="CollisionShape2D" parent="Hurtbox" unique_id=1512399654]
-position = Vector2(0, -5)
+position = Vector2(0, -5.5)
 shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
