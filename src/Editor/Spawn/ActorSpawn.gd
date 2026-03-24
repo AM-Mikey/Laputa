@@ -146,7 +146,7 @@ func get_if_actor_has_waypoint(actor_waypoint) -> bool:
 func get_if_actor_has_tool_vector(actor_tool_vector) -> bool:
 	for c in get_children():
 		if c.is_in_group("ToolVectors"):
-			if c.index == actor_tool_vector.index:
+			if c.tag_name == actor_tool_vector.tag_name:
 				return true
 	return false
 

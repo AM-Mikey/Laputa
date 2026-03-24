@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ddaew12v1ku8o" path="res://assets/Actor/Enemy/Beetle.png" id="2_7vcwk"]
 [ext_resource type="Script" uid="uid://yuqevorrxdj1" path="res://src/Actor/Enemy/BeetleDifficulty2.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/ToolVector.tscn" id="3_6e2ya"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7vcwk"]
 size = Vector2(12, 9)
@@ -335,6 +336,19 @@ one_shot = true
 [node name="FlipCooldown" type="Timer" parent="." unique_id=1452385037]
 process_callback = 0
 one_shot = true
+
+[node name="MoveVector" parent="." unique_id=872564127 instance=ExtResource("3_6e2ya")]
+position = Vector2(0, -8)
+tag_name = "move"
+direction = Vector2(-1, 0)
+movement_locked = true
+
+[node name="WallVector" parent="." unique_id=2126548652 instance=ExtResource("3_6e2ya")]
+position = Vector2(0, -8)
+arrow_length = 24.0
+tag_name = "wall"
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

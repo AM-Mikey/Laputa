@@ -2,9 +2,9 @@ extends Area2D
 
 signal selected(tool_vector, type)
 
-const ARROW_LENGTH := 16.0
 const HANDLE_RADIUS := 4.0
 
+@export var arrow_length = 16.0
 @export var tag_name: String
 @export var index: int = 0
 @export var direction: Vector2 = Vector2.RIGHT:
@@ -15,6 +15,12 @@ const HANDLE_RADIUS := 4.0
 	set(val):
 		movement_locked = val
 		_update_collision_visibility(val)
+@export var color := Color(0.85, 0.65, 0.12, 1.0):
+	set(val):
+		color = val
+		$Line2D.default_color = val
+		$ArrowHead.modulate = val
+
 
 
 var _dragging_tip := false
@@ -59,9 +65,11 @@ func _snap_dir_45(vec: Vector2) -> Vector2:
 func _update_arrow_visuals():
 	if !is_inside_tree():
 		return
-	var tip_pos = direction.normalized() * ARROW_LENGTH
-	$Line2D.rotation = direction.angle()
+	var tip_pos = direction.normalized() * arrow_length
+	var line_pos = direction.normalized() * (arrow_length - 4.0) #head size
+	$Line2D.set_point_position(1, line_pos)
 	$ArrowHead.rotation = direction.angle()
+	$ArrowHead.position = line_pos
 	$TipHandle.position = tip_pos
 
 func _update_collision_visibility(val):
@@ -75,8 +83,8 @@ func on_editor_select():
 
 
 func on_editor_deselect():
-	$Line2D.default_color = Color(0.85, 0.65, 0.12, 1.0)
-	$ArrowHead.modulate = Color(0.85, 0.65, 0.12, 1.0)
+	$Line2D.default_color = color
+	$ArrowHead.modulate = color
 
 
 func on_pressed():

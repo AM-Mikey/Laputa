@@ -24,8 +24,9 @@ default_color = Color(0.854902, 0.647059, 0.12549, 1)
 
 [node name="ArrowHead" type="Polygon2D" parent="." unique_id=329270870]
 z_index = 1000
+position = Vector2(10, 0)
 color = Color(0.854902, 0.647059, 0.12549, 1)
-polygon = PackedVector2Array(16, 0, 10, -4, 10, 4)
+polygon = PackedVector2Array(6, 0, 0, -4, 0, 4)
 
 [node name="TipHandle" type="Area2D" parent="." unique_id=124244390]
 position = Vector2(16, 0)

@@ -19,6 +19,8 @@ var crawl_speed = Vector2(20, 20)
 var collision_shape_data: Dictionary
 
 func setup():
+	move_dir = $MoveVector.direction
+	wall_dir = $WallVector.direction
 	gravity = 0
 	collision_shape_data = get_collision_shape_data()
 	match difficulty:
@@ -60,55 +62,6 @@ func _on_physics_process(_delta):
 
 ### STATES ###
 
-func enter_idle(_last_state): #level 0
-	move_dir = wall_dir * -1
-	match wall_dir:
-		Vector2.LEFT: #face up
-			$Sprite2D.flip_h = false
-			$Sprite2D.rotation_degrees = 90
-		Vector2.RIGHT: #face up
-			$Sprite2D.flip_h = true
-			$Sprite2D.rotation_degrees = -90
-		Vector2.UP: #face same dir used in fly
-			$Sprite2D.rotation_degrees = 180
-			$Sprite2D.flip_h = !$Sprite2D.flip_h
-		Vector2.DOWN: #face same dir used in fly
-			$Sprite2D.rotation_degrees = 0
-	set_collision_shapes()
-	speed = Vector2.ZERO
-	$AnimationPlayer.play("Idle")
-	await get_tree().create_timer(idle_time, false, true).timeout
-	change_state("fly")
-
-
-func enter_idlescan(_last_state): #level 1
-	move_dir = wall_dir * -1
-	match wall_dir:
-		Vector2.LEFT: #face up
-			$Sprite2D.flip_h = false
-			$Sprite2D.rotation_degrees = 90
-		Vector2.RIGHT: #face up
-			$Sprite2D.flip_h = true
-			$Sprite2D.rotation_degrees = -90
-		Vector2.UP: #face same dir used in fly
-			$Sprite2D.rotation_degrees = 180
-			$Sprite2D.flip_h = !$Sprite2D.flip_h
-		Vector2.DOWN: #face same dir used in fly
-			$Sprite2D.rotation_degrees = 0
-	set_collision_shapes()
-	speed = Vector2.ZERO
-	$AnimationPlayer.play("Idle")
-
-func do_idlescan():
-	var collider = $CenteredPivot/PlayerCast.get_collider()
-	var world_collider = $CenteredPivot/WorldCast.get_collider()
-
-	if collider and world_collider:
-		if collider is TileMapLayer:
-			return
-		if $FlyCooldown.is_stopped():
-			change_state("fly")
-			return
 
 func enter_fly(_last_state):
 	if (!pc or pc.dead): # In case the player die
@@ -132,21 +85,18 @@ func enter_fly(_last_state):
 
 func do_fly():
 	var collider
-	match move_dir:
-		Vector2.LEFT: collider = $LeftCast.get_collider()
-		Vector2.RIGHT: collider = $RightCast.get_collider()
-		Vector2.UP: collider = $UpCast.get_collider()
-		Vector2.DOWN: collider = $DownCast.get_collider()
+	if move_dir.dot(Vector2.LEFT) > 0.9: #close to Vector2.Left
+		collider = $LeftCast.get_collider()
+	elif move_dir.dot(Vector2.RIGHT) > 0.9:
+		collider = $RightCast.get_collider()
+	elif move_dir.dot(Vector2.UP) > 0.9:
+		collider = $UpCast.get_collider()
+	elif move_dir.dot(Vector2.DOWN) > 0.9:
+		collider = $DownCast.get_collider()
 
 	if collider:
 		move_and_collide(move_dir * 2)
 		match difficulty:
-			0:
-				wall_dir *= -1
-				change_state("idle")
-			1:
-				wall_dir *= -1
-				change_state("idlescan")
 			2:
 				wall_dir *= -1 #wall_dir = move_dir * -1
 				#var random_sign = 1 - 2 * (randi() % 2) #random direction after land
@@ -300,7 +250,7 @@ func enter_turn_edge(_prev_state):
 	start_wall_dir = wall_dir
 	start_sprite_rotation = $Sprite2D.rotation
 	var turn_degree: float = 0
-	var cross := wall_dir.cross(move_dir)
+	var cross = wall_dir.cross(move_dir)
 	if abs(cross) > 0.9:
 		turn_degree = sign(cross) * PI / 2
 
@@ -313,7 +263,7 @@ func enter_turn_edge(_prev_state):
 	allow_turn_edge_do = true
 
 # rotated() can return a vector component of -0.0 which does not equal to 0.0 and mess with match statement
-func convert_minus_zero_to_zero(vec: Vector2):
+func convert_minus_zero_to_zero(vec: Vector2): #TODO:remove and replace with approximation
 	if is_zero_approx(vec.x):
 		vec.x = 0.0
 	if is_zero_approx(vec.y):
