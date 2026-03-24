@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ddaew12v1ku8o" path="res://assets/Actor/Enemy/Beetle.png" id="2_7vcwk"]
 [ext_resource type="Script" uid="uid://qcbiyidgaq45" path="res://src/Actor/Enemy/Beetle.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/ToolVector.tscn" id="3_g4id4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7vcwk"]
 size = Vector2(12, 9)
@@ -141,6 +142,7 @@ speed = Vector2(150, 150)
 editor_hidden = false
 
 [node name="Cling" type="CollisionShape2D" parent="." unique_id=1402698365]
+visible = false
 position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_7vcwk")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
@@ -157,6 +159,7 @@ collision_layer = 131072
 collision_mask = 0
 
 [node name="Cling" type="CollisionShape2D" parent="Hurtbox" unique_id=1512399654]
+visible = false
 position = Vector2(0, -7)
 shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
@@ -224,7 +227,7 @@ target_position = Vector2(0, -2)
 collision_mask = 8
 
 [node name="DownCast" type="RayCast2D" parent="." unique_id=189306189]
-position = Vector2(0, -1)
+position = Vector2(0, -0.5)
 target_position = Vector2(0, 2)
 collision_mask = 8
 
@@ -235,6 +238,10 @@ gizmo_extents = 1.0
 [node name="FlyCooldown" type="Timer" parent="." unique_id=439362844]
 process_callback = 0
 one_shot = true
+
+[node name="MoveVector" parent="." unique_id=872564127 instance=ExtResource("3_g4id4")]
+position = Vector2(0, -8)
+movement_locked = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

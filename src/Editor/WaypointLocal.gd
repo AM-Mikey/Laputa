@@ -1,6 +1,6 @@
 extends Area2D
 
-signal selected(vanishing_point, type)
+signal selected(waypoint_local, type)
 
 @export var tag_name: String
 @export var index: int = 0

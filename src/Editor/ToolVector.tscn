@@ -1,20 +1,38 @@
 [gd_scene format=3 uid="uid://bwp6sqdlvfo84"]
 
-[ext_resource type="Script" uid="uid://doxxnsbh2jwk6" path="res://src/Editor/WaypointLocal.gd" id="1_i8mcg"]
-[ext_resource type="Texture2D" uid="uid://dsmy50efq1bj0" path="res://assets/Utility/Waypoint.png" id="2_6y177"]
+[ext_resource type="Script" uid="uid://deuh22v7t26qw" path="res://src/Editor/ToolVector.gd" id="1_tvec"]
 
-[sub_resource type="RectangleShape2D" id="1"]
+[sub_resource type="RectangleShape2D" id="RectRoot"]
 size = Vector2(8, 8)
 
-[node name="WaypointLocal" type="Area2D" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"]]
+[sub_resource type="CircleShape2D" id="CircleTip"]
+radius = 4.0
+
+[node name="ToolVector" type="Area2D" unique_id=872564127 groups=["Entities", "ToolVectors", "VisualUtilities"]]
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("1_i8mcg")
+script = ExtResource("1_tvec")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=666135226]
-shape = SubResource("1")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1807401778]
+shape = SubResource("RectRoot")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1572684330]
-modulate = Color(0.85490197, 0.64705884, 0.1254902, 1)
+[node name="Line2D" type="Line2D" parent="." unique_id=1014939874]
 z_index = 999
-texture = ExtResource("2_6y177")
+points = PackedVector2Array(0, 0, 10, 0)
+width = 2.0
+default_color = Color(0.854902, 0.647059, 0.12549, 1)
+
+[node name="ArrowHead" type="Polygon2D" parent="." unique_id=329270870]
+z_index = 1000
+color = Color(0.854902, 0.647059, 0.12549, 1)
+polygon = PackedVector2Array(16, 0, 10, -4, 10, 4)
+
+[node name="TipHandle" type="Area2D" parent="." unique_id=124244390]
+position = Vector2(16, 0)
+collision_layer = 16384
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TipHandle" unique_id=1931129253]
+shape = SubResource("CircleTip")
+
+[connection signal="input_event" from="TipHandle" to="." method="_on_tip_handle_input_event"]

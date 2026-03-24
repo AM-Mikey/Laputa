@@ -1,7 +1,5 @@
 extends Enemy
 
-const TX_0 = preload("res://assets/Actor/Enemy/Beetle.png")
-const TX_1 = preload("res://assets/Actor/Enemy/Beetle1.png")
 const TX_2 = preload("res://assets/Actor/Enemy/Beetle2.png")
 const TX_3 = preload("res://assets/Actor/Enemy/Beetle3.png")
 
@@ -24,21 +22,6 @@ func setup():
 	gravity = 0
 	collision_shape_data = get_collision_shape_data()
 	match difficulty:
-		0:
-			hp = 2
-			reward = 1
-			damage_on_contact = 1
-			idle_time = 2.0
-			$Sprite2D.texture = TX_0
-			change_state("idle")
-		1:
-			hp = 2
-			reward = 2
-			damage_on_contact = 2
-			$Sprite2D.texture = TX_1
-			$CenteredPivot/PlayerCast.enabled = true
-			$CenteredPivot/WorldCast.enabled = true
-			change_state("idlescan")
 		2:
 			hp = 3
 			reward = 4
@@ -57,11 +40,6 @@ func setup():
 			if crawl_start_dir != Vector2.ZERO:
 				doing_crawl_start_dir = true
 			change_state("platformcrawl")
-		#3:
-			#hp = 4
-			#reward = 5
-			#damage_on_contact = 4
-			#$Sprite2D.texture = TX_3
 
 
 
@@ -322,27 +300,9 @@ func enter_turn_edge(_prev_state):
 	start_wall_dir = wall_dir
 	start_sprite_rotation = $Sprite2D.rotation
 	var turn_degree: float = 0
-	match wall_dir:
-		Vector2.LEFT:
-			if move_dir == Vector2.UP:
-				turn_degree = -PI / 2
-			elif move_dir == Vector2.DOWN:
-				turn_degree = PI / 2
-		Vector2.RIGHT:
-			if move_dir == Vector2.UP:
-				turn_degree = PI / 2
-			elif move_dir == Vector2.DOWN:
-				turn_degree = -PI / 2
-		Vector2.UP:
-			if move_dir == Vector2.LEFT:
-				turn_degree = PI / 2
-			elif move_dir == Vector2.RIGHT:
-				turn_degree = -PI / 2
-		Vector2.DOWN:
-			if move_dir == Vector2.LEFT:
-				turn_degree = -PI / 2
-			elif move_dir == Vector2.RIGHT:
-				turn_degree = PI / 2
+	var cross := wall_dir.cross(move_dir)
+	if abs(cross) > 0.9:
+		turn_degree = sign(cross) * PI / 2
 
 	var tween_time: float =  PI / 2 / (crawl_speed.x / 4.5)
 	var turn_corner_tween: Tween = get_tree().create_tween()
@@ -377,33 +337,11 @@ func do_turn_edge():
 #endregion
 ### HELPERS ###
 
-func get_crawl_sprite(): #TODO fix
+func get_crawl_sprite():
 	$AnimationPlayer.play("Crawl")
-	match wall_dir:
-		Vector2.LEFT:
-			$Sprite2D.rotation_degrees = 90
-			if move_dir == Vector2.UP:
-				$Sprite2D.flip_h = false
-			elif move_dir == Vector2.DOWN:
-				$Sprite2D.flip_h = true
-		Vector2.RIGHT:
-			$Sprite2D.rotation_degrees = 270
-			if move_dir == Vector2.UP:
-				$Sprite2D.flip_h = true
-			elif move_dir == Vector2.DOWN:
-				$Sprite2D.flip_h = false
-		Vector2.UP:
-			$Sprite2D.rotation_degrees = 180
-			if move_dir == Vector2.LEFT:
-				$Sprite2D.flip_h = true
-			elif move_dir == Vector2.RIGHT:
-				$Sprite2D.flip_h = false
-		Vector2.DOWN:
-			$Sprite2D.rotation_degrees = 0
-			if move_dir == Vector2.LEFT:
-				$Sprite2D.flip_h = false
-			elif move_dir == Vector2.RIGHT:
-				$Sprite2D.flip_h = true
+	var cross = wall_dir.cross(move_dir)
+	$Sprite2D.rotation = wall_dir.angle() + PI / 2
+	$Sprite2D.flip_h = cross < 0
 
 
 func get_collision_shape_data() -> Dictionary:

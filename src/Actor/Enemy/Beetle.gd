@@ -4,7 +4,7 @@ const TX_0 = preload("res://assets/Actor/Enemy/Beetle.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Beetle1.png")
 
 var move_dir = Vector2.LEFT
-@export var wall_dir = Vector2.LEFT:
+var wall_dir = Vector2.LEFT:
 	set(val):
 		up_direction = -val
 		wall_dir = val
@@ -15,6 +15,8 @@ var fly_speed = Vector2(100, 100)
 var collision_shape_data: Dictionary
 
 func setup():
+	move_dir = $MoveVector.direction
+	wall_dir = move_dir * -1
 	gravity = 0
 	collision_shape_data = get_collision_shape_data()
 	match difficulty:
@@ -115,11 +117,14 @@ func enter_fly(_last_state):
 
 func do_fly():
 	var collider
-	match move_dir:
-		Vector2.LEFT: collider = $LeftCast.get_collider()
-		Vector2.RIGHT: collider = $RightCast.get_collider()
-		Vector2.UP: collider = $UpCast.get_collider()
-		Vector2.DOWN: collider = $DownCast.get_collider()
+	if move_dir.dot(Vector2.LEFT) > 0.9: #close to Vector2.Left
+		collider = $LeftCast.get_collider()
+	elif move_dir.dot(Vector2.RIGHT) > 0.9:
+		collider = $RightCast.get_collider()
+	elif move_dir.dot(Vector2.UP) > 0.9:
+		collider = $UpCast.get_collider()
+	elif move_dir.dot(Vector2.DOWN) > 0.9:
+		collider = $DownCast.get_collider()
 
 	if collider:
 		move_and_collide(move_dir * 2)
