@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://jxrbq13obemo"]
+[gd_scene format=3 uid="uid://cyg86p7wau0n7"]
 
-[ext_resource type="Script" path="res://src/Editor/WaypointLocal.gd" id="1_n57sk"]
+[ext_resource type="Script" uid="uid://doxxnsbh2jwk6" path="res://src/Editor/WaypointLocal.gd" id="1_n57sk"]
 [ext_resource type="Texture2D" uid="uid://dsmy50efq1bj0" path="res://assets/Utility/Waypoint.png" id="2_06s3u"]
 
 [sub_resource type="RectangleShape2D" id="1"]

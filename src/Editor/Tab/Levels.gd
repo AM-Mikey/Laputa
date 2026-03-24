@@ -60,7 +60,6 @@ func save_level(level, path):
 	level.save_changes()
 	level.name = path.get_file().get_basename()
 	level.level_name = path.get_file().get_basename() #TODO: add this to inspector
-
 	if FileAccess.file_exists(path):
 		log.lprint("Saved over File")
 		print("Saved over File")

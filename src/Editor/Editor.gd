@@ -56,6 +56,7 @@ var actor_collection
 var prop_collection
 var trigger_collection
 var spawn_collection
+var waypoint_collection
 var tile_map
 var editor_level_limiter
 var tile_map_cursor
@@ -72,27 +73,31 @@ func _ready():
 
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
-	setup_level() #Call this every time the level is changed or reloaded
+	setup_level()
 	#$Main/Win.move_child($Main/Win/Tab, 0) TODO: was supposed to make tabcontainer go behind resize controls, didnt work
 
-func setup_level(): #TODO: clear undo history
+func setup_level(): #Call this every time the level is changed or reloaded
+	print("enter")
 	#emit_signal("level_selected", w.current_level)
 	setup_windows()
 	f.pc().disable()
 	f.hud().queue_free()
 	w.ui.visible = false
 	w.bl.visible = false
-	w.current_level.get_node("BlackBars").visible = false
 	for a in get_tree().get_nodes_in_group("Actors"):
 		a.queue_free()
 	for p in get_tree().get_nodes_in_group("Props"):
 		p.queue_free()
 	for t in get_tree().get_nodes_in_group("Triggers"):
 		t.queue_free()
+	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
+		if wg.uses_spawn:
+			wg.queue_free()
 	actor_collection = w.current_level.get_node("Actors")
 	prop_collection = w.current_level.get_node("Props")
 	trigger_collection = w.current_level.get_node("Triggers")
 	spawn_collection = w.current_level.get_node("Spawns")
+	waypoint_collection = w.current_level.get_node("Waypoints")
 
 	tile_map = w.current_level.get_node("TileMap")
 	tile_master.setup_tile_master()
@@ -105,12 +110,17 @@ func setup_level(): #TODO: clear undo history
 	$Main/Win/Tab/NPCs.setup_npcs()
 	$Main/Win/Tab/Props.setup_props()
 	$Main/Win/Tab/Triggers.setup_triggers()
+	$Main/Win/Tab/Miscs.setup_miscs()
 
 	setup_level_editor_layer()
 	for s in get_tree().get_nodes_in_group("SpawnPoints"): #TODO: see if you can avoid this by calling a signal or something
 		s.visible = true
 	for v in get_tree().get_nodes_in_group("VanishingPoints"):
 		v.visible = true
+	for wgs in get_tree().get_nodes_in_group("WaypointGlobalSpawns"): #TODO: this actually only gets the children of actor briefly before they're freed. We want to get child of actor spawn: waypoint spawn, but that doesnt exist.
+		wgs.visible = true
+		wgs.input_pickable = true
+		#wgs.reinitialize()
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.visible = true
 		a.input_pickable = true
@@ -128,7 +138,8 @@ func setup_level(): #TODO: clear undo history
 		if t.has_node("TriggerController"):
 			t.get_node("TriggerController").enable()
 	w.el.get_node("EditorCamera").make_current()
-	w.current_level.get_node("LevelLimiter").setup() #must be after camera setup
+	await w.current_level.get_node("LevelLimiter").setup() #must be after camera setup
+	w.current_level.get_node("BlackBars").visible = false
 
 
 func setup_windows(): #the main and secondary editor windows
@@ -137,8 +148,6 @@ func setup_windows(): #the main and secondary editor windows
 	$Main/Win.position = $Margin/VBox/HBox/MainSizeRef.position
 	$Secondary/Win.size = $Margin/VBox/HBox/SecondarySizeRef.size
 	$Secondary/Win.position = $Margin/VBox/HBox/SecondarySizeRef.position
-
-
 
 func setup_level_editor_layer(): #the layer for editor overlays that go over the level
 	var editor_layer = Node2D.new()
@@ -154,6 +163,7 @@ func setup_level_editor_layer(): #the layer for editor overlays that go over the
 
 
 func exit():
+	print("exit")
 	inspector.exit()
 	if w.current_level.has_node("TileAnimator"):
 		w.current_level.get_node("TileAnimator").editor_exit()
@@ -165,18 +175,19 @@ func exit():
 	w.get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 	w.ui.visible = true
 	w.bl.visible = true
-	w.current_level.get_node("BlackBars").visible = true
 	mc.display("arrow")
 	f.pc().enable()
 	f.pc().get_node("PlayerCamera").enabled = true
 	f.pc().get_node("PlayerCamera").make_current()
 	f.pc().get_node("PlayerCamera").reset()
-	w.current_level.get_node("LevelLimiter").setup() #must be after camera setup
 	#set_entities_pickable(false)
 	for s in get_tree().get_nodes_in_group("SpawnPoints"):
 		s.visible = false
 	for v in get_tree().get_nodes_in_group("VanishingPoints"):
 		v.visible = false
+	for wgs in get_tree().get_nodes_in_group("WaypointGlobalSpawns"):
+		wgs.spawn()
+		wgs.visible = false
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.spawn()
 		a.visible = false
@@ -188,10 +199,14 @@ func exit():
 		t.visible = false
 	for l in get_tree().get_nodes_in_group("SunLights"):
 		l.editor_exit()
-	queue_free()
+
+
 	for t in trigger_collection.get_children():
 		if t.has_node("TriggerController"):
 			t.get_node("TriggerController").disable()
+	await w.current_level.get_node("LevelLimiter").setup() #must be after camera setup
+	w.current_level.get_node("BlackBars").visible = true
+	queue_free()
 
 
 
@@ -249,6 +264,7 @@ func _unhandled_input(event):
 			KEY_F5: on_tab_selected(4)
 			KEY_F6: on_tab_selected(5)
 			KEY_F7: on_tab_selected(6)
+			KEY_F8: on_tab_selected(7)
 
 
 	if event.is_action_pressed("editor_lmb"):
@@ -382,6 +398,8 @@ func do_entity_input(event):
 				set_prop_spawn($Main/Win/Tab/Props.active_prop_path, grid_pos)
 			"trigger":
 				set_trigger_spawn($Main/Win/Tab/Triggers.active_trigger_path, grid_pos)
+			"misc":
+				set_misc($Main/Win/Tab/Miscs.active_misc_path,grid_pos)
 			"noplace":
 				pass
 
@@ -670,7 +688,7 @@ func set_actor_spawn(actor_path, pos):
 func set_prop_spawn(prop_path, pos):
 	var prop_spawn = PROP_SPAWN.instantiate()
 	prop_spawn.prop_path = prop_path
-	prop_spawn.global_position = (pos * 16) + Vector2i(8, 16)
+	prop_spawn.global_position = (pos * 16)
 	spawn_collection.add_child(prop_spawn)
 	prop_spawn.owner = w.current_level
 	prop_spawn.initialize()
@@ -679,13 +697,43 @@ func set_prop_spawn(prop_path, pos):
 func set_trigger_spawn(trigger_path, pos):
 	var trigger_spawn = TRIGGER_SPAWN.instantiate()
 	trigger_spawn.trigger_path = trigger_path
-	trigger_spawn.global_position = (pos * 16) + Vector2i(8, 16)
+	trigger_spawn.global_position = (pos * 16)
 	#entity.input_pickable = true
 	spawn_collection.add_child(trigger_spawn)
 	trigger_spawn.owner = w.current_level
 	trigger_spawn.initialize()
 	inspector.on_selected(trigger_spawn, "trigger_spawn")
 
+func set_misc(misc_path, pos):
+	var misc = load(misc_path).instantiate()
+
+	if misc_path == "res://src/Editor/WaypointGlobal.tscn":
+		misc.global_position = (pos * 16) + Vector2i(8, 8)
+		waypoint_collection.add_child(misc)
+		inspector.on_selected(misc, "misc")
+
+	elif misc_path == "res://src/Editor/Spawn/WaypointGlobalSpawn.tscn":
+		if inspector.active_type in ["actor_spawn", "prop_spawn", "trigger_spawn"]:
+			misc.global_position = ((pos * 16) + Vector2i(8, 8)) - Vector2i(inspector.active.global_position)
+			inspector.active.add_child(misc) #don't select it though so we can add more
+		else:
+			log.lprint("no valid entity for WaypointGlobalSpawn")
+			misc.free()
+			return
+
+	elif misc_path == "res://src/Editor/WaypointLocal.tscn":
+		if inspector.active_type in ["actor_spawn", "prop_spawn", "trigger_spawn"]:
+			misc.global_position = ((pos * 16) + Vector2i(8, 8)) - Vector2i(inspector.active.global_position)
+			inspector.active.add_child(misc) #don't select it though so we can add more
+		else:
+			log.lprint("no valid entity for WaypointLocal")
+			misc.free()
+			return
+	else:
+		misc.global_position = (pos * 16) + Vector2i(8, 8)
+		w.current_level.add_child(misc)
+		inspector.on_selected(misc, "misc")
+	misc.owner = w.current_level
 
 
 ### PREVIEW ###
@@ -957,6 +1005,8 @@ func on_tab_changed(tab):
 		"Triggers":
 			set_tool("entity", "trigger")
 			#set_entities_pickable()
+		"Miscs":
+			set_tool("entity", "misc")
 		_:
 			print("WARNING: could not find tab with name: " + $Main/Win/Tab.get_child(tab).name)
 

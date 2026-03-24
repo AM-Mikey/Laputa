@@ -1,6 +1,7 @@
 extends Enemy
 
 const PATH_LINE = preload("res://src/Utility/PathLine.tscn")
+const BONK = preload("res://src/Effect/BonkParticle.tscn")
 
 var move_dir = Vector2.LEFT
 @export var swim_dir_x = -1: set = on_swim_dir_x_changed
@@ -8,26 +9,38 @@ var move_dir = Vector2.LEFT
 var normal_damage = 1
 var attack_damage = 4
 
-@onready var start_pos = global_position
 var jump_pos: Vector2 = global_position
 
 @export var can_move_x = true
-@export var x_min = -3: set = on_x_min_changed
-@export var x_max = 3: set = on_x_max_changed
+var x_min = -3
+var x_max = 3
+var did_bonk: bool = false
 
+@onready var start_pos = global_position
 @onready var ap: AnimationPlayer = get_node("AnimationPlayer")
 @onready var rc: RayCast2D = get_node("RayCast2D")
 
-@onready var BONK: PackedScene = preload("res://src/Effect/BonkParticle.tscn")
-var did_bonk: bool = false
 
 func setup():
+	print("setup fish")
 	change_state("idle")
 	do_bubbles = false
 	if debug: print("ready fish")
 	speed = Vector2(20, 150)
 	hp = 3
 	damage_on_contact = normal_damage
+	for c in get_children():
+		if c.is_in_group("Waypoints"):
+			match c.tag_name:
+				"jump":
+					rc.target_position.y = c.position.y
+	for c in w.current_level.get_node("Waypoints").get_children():
+		if c.owner_id == id:
+			match c.tag_name:
+				"left":
+					x_min = c.position.x - start_pos.x
+				"right":
+					x_max = c.position.x - start_pos.x
 	update_path_lines()
 
 func on_swim_dir_x_changed(new):
@@ -42,13 +55,6 @@ func on_jump_height_changed(new):
 	jump_height = new
 	update_path_lines()
 
-func on_x_min_changed(new):
-	x_min = new
-	update_path_lines()
-
-func on_x_max_changed(new):
-	x_max = new
-	update_path_lines()
 
 func bonk():
 	if (did_bonk or get_slide_collision_count() == 0):
@@ -59,7 +65,7 @@ func bonk():
 	#print("Fish bonked ", slide_collision.get_normal())
 	bonk_effect.normal = slide_collision.get_normal()
 	bonk_effect.global_position.x = global_position.x
-	bonk_effect.global_position.y = global_position.y + 7.0
+	bonk_effect.global_position.y = global_position.y + 13.0
 	w.get_node("Front").add_child(bonk_effect)
 	did_bonk = true
 
@@ -137,9 +143,9 @@ func do_swim():
 	if is_on_wall() and (move_and_collide(Vector2.RIGHT, true) or move_and_collide(Vector2.LEFT, true)):
 		swim_dir_x = -swim_dir_x
 	else:
-		if global_position.x < start_pos.x + x_min * 16:
+		if global_position.x < start_pos.x + x_min:
 			swim_dir_x = 1
-		if global_position.x > start_pos.x + x_max * 16:
+		if global_position.x > start_pos.x + x_max:
 			swim_dir_x = -1
 
 	velocity = calc_velocity(move_dir)
@@ -229,11 +235,11 @@ func update_path_lines():
 	var hline = PATH_LINE.instantiate()
 	hline.name = "HPath"
 	hline.default_color = Color.RED
-	if Engine.is_editor_hint():
-		hline.add_point(Vector2(x_min * 16, -4))
-		hline.add_point(Vector2(x_max * 16, -4))
-	elif debug and world:
-		hline.add_point(global_position + Vector2(x_min * 16, -4))
-		hline.add_point(global_position + Vector2(x_max * 16, -4))
+	#if Engine.is_editor_hint():
+		#hline.add_point(Vector2(x_min, -4))
+		#hline.add_point(Vector2(x_max, -4))
+	#elif debug and world:
+		#hline.add_point(global_position + Vector2(x_min, -4))
+		#hline.add_point(global_position + Vector2(x_max, -4))
 	add_child(hline)
 	move_child(hline, 0)

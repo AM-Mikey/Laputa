@@ -35,15 +35,6 @@ func on_selected(selection, selection_type):
 		if active.has_method("on_editor_select"): active.on_editor_select()
 	display_data()
 
-	#match active_type:
-		##"spawn_point":
-			##editor.set_tool("entity", "noplace")
-		###"actor_spawn": this just makes it so we cant place enemies. weird
-			###editor.set_tool("entity", "noplace")
-		##"light":
-			##editor.set_tool("entity", "noplace")
-		#_:
-			#pass
 
 func on_deselected():
 	if active:
@@ -96,25 +87,10 @@ func display_data():
 					create_button("text", active.properties[p][0], "multiline")
 				else:
 					create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
-
-		#"enemy": #replaced with actor spawn
-			#for p in active.get_property_list():
-				#if p["usage"] == EXPORT:
-					#create_button(p["name"], active.get(p["name"]), p["type"])
-		#"npc":
-			#for p in active.get_property_list():
-				#if p["usage"] == EXPORT:
-					#create_button(p["name"], active.get(p["name"]), p["type"])
 		"prop":
 			for p in active.get_property_list():
 				if p["usage"] == EXPORT:
 					create_button(p["name"], active.get(p["name"]), p["type"])
-		#"trigger": should never be just trigger
-			#for p in active.get_property_list():
-				#if p["name"] == "level": #a trigger wants to load a level path
-					#create_button("level", active.get("level"), "load")
-				#elif p["usage"] == EXPORT:
-					#create_button(p["name"], active.get(p["name"]), p["type"])
 		"level":
 			create_button("level_name", active.level_name, "string")
 			create_button("level_type", active.level_type, "enum", active.LevelType.keys())
@@ -129,6 +105,10 @@ func display_data():
 		"tile_map":
 			for layer_id in range(0, get_child_count()):
 				create_layer_button(layer_id)
+		"waypoint_local", "waypoint_global", "waypoint_global_spawn":
+			for p in active.get_property_list():
+				if p["usage"] == EXPORT:
+					create_button(p["name"], active.get(p["name"]), p["type"])
 
 func get_property_type(type_flag, _is_load) -> String:
 	var out = ""
@@ -271,13 +251,11 @@ func on_property_changed(property_name, property_value):
 		"light":
 			active.set(property_name, property_value)
 			active.setup_colors()
-		#"npc":
+		#"waypoint_local", "waypoint_global":
 			#active.set(property_name, property_value)
-		"trigger":
-			active.set(property_name, property_value)
-			active.visual.update()
 		_:
 			active.set(property_name, property_value)
+
 
 	display_data() #to reload
 	editor.log.lprint(str("Changed ", active_type, " ", active.name, "'s ", property_name, " to ", property_value))

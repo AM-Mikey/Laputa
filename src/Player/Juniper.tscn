@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://c5umwov83kvyb" path="res://src/Player/Ladder.gd" id="10"]
 [ext_resource type="Script" uid="uid://dlkv1e7mfhdpt" path="res://src/Player/Disabled.gd" id="11"]
 [ext_resource type="Script" uid="uid://c3gbfbcwja8hd" path="res://src/Player/GunManager.gd" id="12"]
+[ext_resource type="Script" uid="uid://cubhnhyu064a0" path="res://src/Player/Cutscene.gd" id="12_x1gsf"]
 [ext_resource type="Script" uid="uid://c4ogd5866m3uu" path="res://src/Player/PlayerSprite.gd" id="13"]
 [ext_resource type="Script" uid="uid://cqho5rvdldsw5" path="res://src/Player/Player.gd" id="14"]
 [ext_resource type="Script" uid="uid://cwfo2x3kl4tkp" path="res://src/Player/MovementManager.gd" id="15"]
@@ -3763,6 +3764,7 @@ _data = {
 z_index = 1
 collision_layer = 0
 collision_mask = 520
+floor_constant_speed = true
 script = ExtResource("14")
 
 [node name="PhysicsLayerBody" type="CharacterBody2D" parent="." unique_id=1948623770]
@@ -4127,6 +4129,9 @@ script = ExtResource("7")
 
 [node name="MoveTo" type="Node" parent="MovementManager/States" unique_id=727532989]
 script = ExtResource("8")
+
+[node name="Cutscene" type="Node" parent="MovementManager/States" unique_id=396950407]
+script = ExtResource("12_x1gsf")
 
 [node name="MinDirTimer" type="Timer" parent="MovementManager" unique_id=851777814]
 process_callback = 0

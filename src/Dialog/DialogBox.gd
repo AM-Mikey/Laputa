@@ -43,7 +43,7 @@ func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed()
 
-func start_printing(dialog_json, conversation: String):
+func start_printing(dialog_json, conversation: String, next_state = "inspect"):
 	current_dialog_json = dialog_json
 	active = true
 	var dialog = load_dialog_json(dialog_json)
@@ -71,7 +71,7 @@ func start_printing(dialog_json, conversation: String):
 	align_box()
 	#pc.disable()
 	pc.mm.cached_state = pc.mm.current_state
-	pc.mm.change_state("inspect")
+	pc.mm.change_state(next_state)
 	run_text_array(current_text_array)
 
 

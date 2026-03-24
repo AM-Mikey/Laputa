@@ -128,7 +128,7 @@ func do_conversation_on_enter(hide_player = false): #TODO: implement the player 
 	var dialog_box = DB.instantiate()
 	dialog_box.connect("dialog_finished", Callable(self, "on_dialog_finished"))
 	w.dll.add_child(dialog_box)
-	dialog_box.start_printing(dialog_json, conversation_on_enter)
+	dialog_box.start_printing(dialog_json, conversation_on_enter, "cutscene")
 
 
 func setup_kill_box():
@@ -153,3 +153,6 @@ func save_changes():
 	ll.background_resource.horizontal_speed = ll.horizontal_speed
 	ll.background_resource.tile_mode = ll.tile_mode
 	ll.background_resource.back_tile_mode = ll.back_tile_mode
+
+func on_dialog_finished():
+	pass
