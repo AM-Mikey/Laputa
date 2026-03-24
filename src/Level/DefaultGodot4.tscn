@@ -363,7 +363,7 @@ position = Vector2(1720, 1984)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("8_njn3k")
-actor_path = "res://src/Actor/Enemy/Beetle.tscn"
+actor_path = "res://src/Actor/Enemy/BeetleDifficulty2.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "crawl_start_dir": [Vector2(0, 1), 5],
