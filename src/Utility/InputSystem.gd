@@ -76,14 +76,13 @@ func writebuffer() -> void:
 
 
 func pressed(button,custombuffer=pressbuffer) -> bool:
-
 	for x in buffer:
 		if x[0] == button:
-			if x[2] <= custombuffer:
+			if x[2] <= custombuffer and x[1] > 0:
 				x[2] = custombuffer
 				return true
 			else: return false
-	print ("INPUT NOT FOUND IN BUFFER")
+	printerr ("INPUT NOT FOUND IN BUFFER")
 	return false
 
 func held(button,below=900000000,above=0) -> bool: #button held. pretty simple
