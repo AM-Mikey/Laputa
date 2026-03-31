@@ -4,14 +4,20 @@ const BUBBLEEMITTER = preload("res://src/Effect/BubbleEmitter.tscn")
 
 var bubble_emitters = {}
 var splash_targets = []
-@export var velocity_dropoff = 0.75
+@export var velocity_dropoff = 0.75:
+	set(val):
+		gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * val
+		velocity_dropoff = val
 
 func _ready():
 	trigger_type = "water"
+	velocity_dropoff = velocity_dropoff
 
 func _on_Water_body_entered(body):
 	var do_bubbles = true
 	var target
+	if (body is RigidBody2D): # Use built in Area2D gravity instead.
+		return
 	if body.get_collision_layer_value(1):
 		target = body.get_parent()
 		target.velocity *= velocity_dropoff
