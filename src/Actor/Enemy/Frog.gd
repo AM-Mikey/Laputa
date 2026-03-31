@@ -72,11 +72,13 @@ func do_targeting():
 		elif !(see_target):
 			change_state("idle")
 		else:
-			look_dir = Vector2(sign(target.get_global_position().x - global_position.x), 0)
+			if (target):
+				look_dir = Vector2(sign(target.global_position.x - global_position.x), 0)
 
 func enter_jump(_last_state):
 	am.play("enemy_jump", self)
-	move_dir = Vector2(sign(target.get_global_position().x - global_position.x), -1)
+	if (target):
+		move_dir = Vector2(sign(target.global_position.x - global_position.x), -1)
 	look_dir = Vector2(move_dir.x, 0)
 
 func do_jump():
