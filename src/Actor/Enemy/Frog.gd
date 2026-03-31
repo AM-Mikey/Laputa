@@ -4,31 +4,29 @@ var tx_toad = preload("res://assets/Actor/Enemy/Toad.png")
 var tx_frog = preload("res://assets/Actor/Enemy/Frog.png")
 
 var target
+var see_target: bool = false
 
 @export var jump_delay = 3.0
 @export var difficulty: int = 0:
 	set(val):
 		match val:
 			0:
-				$TongueDetection/Collision.disabled = true
+				$TongueDetection.enabled = false
 			1:
-				$TongueDetection/Collision.disabled = false
+				$TongueDetection.enabled = true
 		difficulty = val
 var croak_time = 1.0
 var move_dir = Vector2.ZERO
 var look_dir = Vector2.LEFT:
 	set(val):
-		$TongueDetection/Collision.position = $TongueDetection/Collision.shape.size / 2.0 * Vector2(val.x, -1.0)
+		$TongueDetection.target_position.x = tongue_range * val.x
 		look_dir = val
 
 var tongue_damage: float = 2.0
 var tongue_range: float = 50.0:
 	set(val):
-		$TongueDetection/Collision.shape.size = Vector2(val, 12.0)
-		$TongueDetection/Collision.position = $TongueDetection/Collision.shape.size / 2.0 * Vector2(look_dir.x, -1.0)
+		$TongueDetection.target_position.x = val * look_dir.x
 		tongue_range = val
-var player_in_vision: bool = false
-var player_in_tongue_detection: bool = false
 
 #enum Difficulty {easy, normal, hard}
 #export(Difficulty) var difficulty = Difficulty.normal setget _on_difficulty_changed
@@ -38,7 +36,6 @@ func setup():
 	damage_on_contact = 1
 	reward = 2
 	hp = 3
-	look_dir = look_dir
 	tongue_range = tongue_range
 	set_floor_stop_on_slope_enabled(true)
 
@@ -54,21 +51,26 @@ func _on_physics_process(_delta):
 	move_and_slide()
 	animate()
 
+	if (target):
+		see_target = check_to_see_player(target)
+
 ### STATES ###
 
 func do_idle():
-	if (player_in_tongue_detection and $TongueTimer.is_stopped()):
+	if (difficulty == 1 and is_on_floor() and tongue_detection_see_player() and $TongueTimer.is_stopped()):
 		change_state("tongue_attack")
-	elif (player_in_vision):
+	elif (see_target):
 		change_state("targeting")
 
 func do_targeting():
 	if is_on_floor():
-		if (difficulty == 1 and player_in_tongue_detection and $TongueTimer.is_stopped()):
+		if (difficulty == 1 and tongue_detection_see_player() and $TongueTimer.is_stopped()):
 			change_state("tongue_attack")
 		elif $JumpTimer.time_left == 0.0:
 			change_state("jump")
 			return
+		elif !(see_target):
+			change_state("idle")
 		else:
 			look_dir = Vector2(sign(target.get_global_position().x - global_position.x), 0)
 
@@ -83,12 +85,10 @@ func do_jump():
 		$AnimationPlayer.play("Stand")
 		$JumpTimer.start(jump_delay)
 		$CroakTimer.start(croak_time)
-		if target == null:
-			change_state("idle")
-			return
-		else:
+		if see_target:
 			change_state("targeting")
-			return
+		else:
+			change_state("idle")
 
 func enter_tongue_attack(_prev_state):
 	move_dir = Vector2.ZERO
@@ -104,7 +104,7 @@ func enter_tongue_attack(_prev_state):
 	await tween.finished
 	$Tongue/Collision.disabled = true
 	$TongueTimer.start()
-	if (player_in_vision):
+	if (see_target):
 		change_state("targeting")
 	else:
 		change_state("idle")
@@ -132,18 +132,36 @@ func animate():
 		elif move_dir.y > 0:
 			$AnimationPlayer.play("Fall")
 
+### UTILITY ###
+func check_to_see_player(player) -> bool:
+	var raycast_parameter: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.new()
+	raycast_parameter.from = global_position + Vector2(0.0, -14.0)
+	raycast_parameter.to = player.global_position
+	raycast_parameter.collide_with_areas = false
+	raycast_parameter.collide_with_bodies = true
+	raycast_parameter.collision_mask = 8 + 256 # world and breakable block
+	var raycast_result: Dictionary = get_world_2d().direct_space_state.intersect_ray(raycast_parameter)
+	if !(raycast_result.is_empty()):
+		return false
+	return true
+
+func tongue_detection_see_player() -> bool:
+	if !($TongueDetection.is_colliding()):
+		return false
+	var collider = $TongueDetection.get_collider()
+	if (collider is not TileMapLayer):
+		if (collider.get_collision_layer_value(1)):
+			return true
+	return false
 
 ### SIGNALS ###
 
 func _on_PlayerDetector_body_entered(body):
 	target = body.owner
-	player_in_vision = true
 
 func _on_PlayerDetector_body_exited(_body):
 	target = null
-	player_in_vision = false
-	if state == "targeting":
-		change_state("idle")
+	see_target = false
 
 func _on_croak_timer_timeout():
 	if state == "targeting":
@@ -191,9 +209,3 @@ func _on_Tongue_area_entered(area: Area2D) -> void:
 		pass
 	elif area.get_collision_layer_value(6): #armor
 		pass
-
-func _on_TongueDetection_body_entered(body: Node2D) -> void:
-	player_in_tongue_detection = true
-
-func _on_TongueDetection_body_exited(body: Node2D) -> void:
-	player_in_tongue_detection = false

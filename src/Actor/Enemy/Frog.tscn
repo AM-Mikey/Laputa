@@ -112,9 +112,6 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ih0x2"]
 size = Vector2(8, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvdu1"]
-size = Vector2(31, 12)
-
 [node name="Frog" type="CharacterBody2D" unique_id=1440636904 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
@@ -195,13 +192,10 @@ disabled = true
 z_index = -1
 color = Color(1, 0, 0, 0.41568628)
 
-[node name="TongueDetection" type="Area2D" parent="." unique_id=138755315]
-collision_layer = 0
-
-[node name="Collision" type="CollisionShape2D" parent="TongueDetection" unique_id=1363333573]
-position = Vector2(15.1, -6)
-shape = SubResource("RectangleShape2D_nvdu1")
-disabled = true
+[node name="TongueDetection" type="RayCast2D" parent="." unique_id=62037362]
+position = Vector2(0, -8)
+target_position = Vector2(-50, 0)
+collision_mask = 265
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
@@ -210,5 +204,3 @@ disabled = true
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="CroakTimer" to="." method="_on_croak_timer_timeout"]
 [connection signal="area_entered" from="Tongue" to="." method="_on_Tongue_area_entered"]
-[connection signal="body_entered" from="TongueDetection" to="." method="_on_TongueDetection_body_entered"]
-[connection signal="body_exited" from="TongueDetection" to="." method="_on_TongueDetection_body_exited"]
