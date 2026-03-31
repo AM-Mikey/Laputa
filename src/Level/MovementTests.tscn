@@ -1,0 +1,151 @@
+[gd_scene format=4 uid="uid://dnc78kgrw0ikc"]
+
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_07uvp"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_677qy"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_il3au"]
+[ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="4_34mmk"]
+[ext_resource type="TileSet" uid="uid://dct5q86qhnom8" path="res://src/Tile/Debug.tres" id="5_pfwss"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_pfwss"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="8_q2cqg"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="9_kg0ly"]
+
+[node name="MovementTests" type="Node2D" unique_id=1165197377]
+visibility_layer = 2
+script = ExtResource("1_07uvp")
+level_name = "MovementTests"
+music = "train"
+dialog_json = "res://src/Dialog/Village.json"
+
+[node name="LevelLimiter" parent="." unique_id=10937438 instance=ExtResource("2_677qy")]
+visibility_layer = 2
+offset_left = 1632.0
+offset_top = 1744.0
+offset_right = 2976.0
+offset_bottom = 2288.0
+background_resource = ExtResource("3_il3au")
+texture = ExtResource("4_34mmk")
+layers = 5
+layer_scales = {
+0: Vector2(0, 0),
+1: Vector2(0.4, 0.4),
+2: Vector2(0.5, 0.6),
+3: Vector2(0.7, 0.7),
+4: Vector2(0.9, 0.9)
+}
+layer_height_offsets = {
+0: 0.0,
+1: -100.0,
+2: -50.0,
+3: 0.0,
+4: 0.0
+}
+tile_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TileMap" type="Node2D" parent="." unique_id=1148391406]
+visibility_layer = 2
+z_index = 1
+
+[node name="FarBack" type="TileMapLayer" parent="TileMap" unique_id=1394156717]
+visibility_layer = 2
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("5_pfwss")
+
+[node name="Back" type="TileMapLayer" parent="TileMap" unique_id=387206527]
+visibility_layer = 2
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("5_pfwss")
+
+[node name="Front" type="TileMapLayer" parent="TileMap" unique_id=2126912126]
+visibility_layer = 2
+z_index = 1
+use_parent_material = true
+tile_map_data = PackedByteArray("AABoAH8AAAAAAAgAAABpAH8AAAAAAAkAAABrAH8AAAAAAAkAAABnAH4AAAAAAAgAAABnAH0AAAAAAAgAAABnAH8AAAAAAAgAAABsAH8AAAAAAAgAAABtAH8AAAAAAAgAAABtAH4AAAAAAAgAAABtAH0AAAAAAAgAAABtAHwAAAAAAAgAAABtAHsAAAAAAAgAAABsAHsAAAAAAAgAAABrAHsAAAAAAAgAAABqAHsAAAAAAAgAAABpAHsAAAAAAAgAAABoAHsAAAAAAAgAAABnAHsAAAAAAAgAAABnAHwAAAAAAAgAAABnAIAAAAAAAAgAAABnAIEAAAAAAAgAAABnAIIAAAAAAAgAAABtAIMAAAAAAAgAAABsAIMAAAAAAAgAAABrAIMAAAAAAAgAAABqAIMAAAAAAAgAAABpAIMAAAAAAAgAAABoAIMAAAAAAAgAAABnAIMAAAAAAAgAAABuAIMAAAAAAAgAAABvAIMAAAAAAAgAAABwAIMAAAAAAAgAAABxAIMAAAAAAAgAAABzAIMAAAAAAAgAAAB0AIMAAAAAAAgAAAB1AIMAAAAAAAgAAAB2AH8AAAAAAAgAAAB1AH8AAAAAAAgAAAB0AH8AAAAAAAgAAABzAH8AAAAAAAgAAAByAH8AAAAAAAgAAABxAH8AAAAAAAgAAABwAH8AAAAAAAgAAABvAH8AAAAAAAgAAABuAH8AAAAAAAgAAAByAIMAAAAAAAgAAAB2AIMAAAAAAAkAAAB4AIMAAAAAAAkAAAB5AIMAAAAAAAgAAAB6AIMAAAAAAAgAAAB3AH8AAAAAAAgAAAB4AH8AAAAAAAgAAAB5AH8AAAAAAAgAAAB6AH8AAAAAAAgAAAB7AH8AAAAAAAgAAAB7AIAAAAAAAAgAAAB7AIEAAAAAAAgAAAB7AIIAAAAAAAgAAAB7AIMAAAAAAAgAAAB1AIQAAAAAAAgAAAB5AIQAAAAAAAgAAAB1AIUAAAAAAAgAAAB1AIYAAAAAAAgAAAB1AIcAAAAAAAgAAAB1AIgAAAAAAAgAAAB1AIkAAAAAAAgAAAB1AIoAAAAAAAgAAAB1AIsAAAAAAAgAAAB1AIwAAAAAAAgAAAB5AIwAAAAAAAgAAAB5AIsAAAAAAAgAAAB5AIoAAAAAAAgAAAB5AIkAAAAAAAgAAAB5AIgAAAAAAAgAAAB5AIcAAAAAAAgAAAB5AIYAAAAAAAgAAAB5AIUAAAAAAAgAAAB1AI0AAAAAAAgAAAB1AI4AAAAAAAgAAAB2AI4AAAAAAAgAAAB3AI4AAAAAAAgAAAB4AI4AAAAAAAgAAAB5AI4AAAAAAAgAAAB5AI0AAAAAAAgAAAA=")
+tile_set = ExtResource("5_pfwss")
+
+[node name="FarFront" type="TileMapLayer" parent="TileMap" unique_id=1690667449]
+visibility_layer = 2
+z_index = 2
+use_parent_material = true
+tile_set = ExtResource("5_pfwss")
+
+[node name="Props" type="Node2D" parent="." unique_id=96715822]
+visibility_layer = 2
+
+[node name="Actors" type="Node2D" parent="." unique_id=1174921448]
+visibility_layer = 2
+
+[node name="Triggers" type="Node2D" parent="." unique_id=135787628]
+visibility_layer = 2
+
+[node name="Spawns" type="Node2D" parent="." unique_id=993935856]
+visibility_layer = 2
+
+[node name="KillBox" parent="Spawns" unique_id=1464089271 instance=ExtResource("7_pfwss")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+offset_left = 1728.0
+offset_top = 2016.0
+offset_right = 1744.0
+offset_bottom = 2032.0
+trigger_path = "res://src/Trigger/KillBox.tscn"
+properties = {
+"color": [Color(1, 0, 0, 1), 20],
+"editor_hidden": [false, 1],
+"id": [&"KillBox", 4]
+}
+size_is_default = false
+
+[node name="KillBox1" parent="Spawns" unique_id=1627714966 instance=ExtResource("7_pfwss")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+offset_left = 1952.0
+offset_top = 2080.0
+offset_right = 1968.0
+offset_bottom = 2096.0
+trigger_path = "res://src/Trigger/KillBox.tscn"
+properties = {
+"color": [Color(1, 0, 0, 1), 20],
+"editor_hidden": [false, 1],
+"id": [&"KillBox1", 4]
+}
+size_is_default = false
+
+[node name="Waypoints" type="Node2D" parent="." unique_id=170593986]
+visibility_layer = 2
+
+[node name="VanishingPoint" parent="." unique_id=852042071 instance=ExtResource("8_q2cqg")]
+visibility_layer = 2
+position = Vector2(2288, 1832)
+
+[node name="SpawnPoint" parent="." unique_id=1505342073 instance=ExtResource("9_kg0ly")]
+visibility_layer = 2
+position = Vector2(1672, 2032)
+
+[node name="Label" type="Label" parent="." unique_id=1617441582]
+z_index = 100
+offset_left = 1803.0
+offset_top = 1978.0
+offset_right = 1945.0
+offset_bottom = 2027.0
+text = "For all tests:
+Dying = test failed"
+
+[node name="Label2" type="Label" parent="." unique_id=105357831]
+z_index = 100
+offset_left = 1647.0
+offset_top = 1977.0
+offset_right = 1876.0
+offset_bottom = 2026.0
+text = "Hold right until
+further notice"
+
+[node name="Label3" type="Label" parent="." unique_id=873516621]
+z_index = 100
+offset_left = 1852.0
+offset_top = 2250.0
+offset_right = 2081.0
+offset_bottom = 2299.0
+text = "All tests passed!"
