@@ -87,15 +87,16 @@ func enter_idlescan(_last_state): #level 1
 	$AnimationPlayer.play("Idle")
 
 func do_idlescan():
-	var collider = $CenteredPivot/PlayerCast.get_collider()
+	var player_collider = $CenteredPivot/PlayerCast.get_collider()
 	var world_collider = $CenteredPivot/WorldCast.get_collider()
 
-	if collider and world_collider:
-		if collider is TileMapLayer:
+	if player_collider and world_collider:
+		if player_collider is TileMapLayer || player_collider.get_collision_layer_value(4): #for when it hits world before player
 			return
 		if $FlyCooldown.is_stopped():
-			change_state("fly")
-			return
+			if world_cast_check():
+				change_state("fly")
+				return
 
 func enter_fly(_last_state):
 	if (!pc or pc.dead): # In case the player die
@@ -136,6 +137,25 @@ func do_fly():
 				wall_dir *= -1
 				change_state("idlescan")
 
+### HELPER ###
+
+func world_cast_check() -> bool:
+	var world_cast = $CenteredPivot/WorldCast
+	if not world_cast.is_colliding():
+		printerr("ERROR: No opposite wall for beetle.")
+		return false
+
+	var normal = world_cast.get_collision_normal()
+	var expected = wall_dir
+	var is_valid = normal.dot(expected) > 0.9
+
+	if not is_valid:
+		printerr(
+			"ERROR: Opposite wall for beetle with normal %s does not match expected %s."
+			% [normal, expected]
+		)
+
+	return is_valid
 
 func get_collision_shape_data() -> Dictionary:
 	var out = {}

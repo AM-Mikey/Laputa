@@ -9,8 +9,9 @@ const HANDLE_RADIUS := 4.0
 @export var index: int = 0
 @export var direction: Vector2 = Vector2.RIGHT:
 	set(val):
-		direction = _snap_dir_45(val)
+		direction = _snap_dir(val)
 		_update_arrow_visuals()
+@export var snap_degrees := 45.0
 @export var movement_locked: bool = false:
 	set(val):
 		movement_locked = val
@@ -31,8 +32,8 @@ var _dragging_tip := false
 func _ready():
 	if movement_locked:
 		$CollisionShape2D.visible = false
-	visible = w.debug_visible
-	direction = _snap_dir_45(direction)
+	visible = w.debug_visible or w.el.get_child_count() > 0
+	direction = _snap_dir(direction)
 	_update_arrow_visuals()
 
 
@@ -42,7 +43,7 @@ func _unhandled_input(event):
 
 	if event is InputEventMouseMotion:
 		var local_mouse = to_local(get_global_mouse_position())
-		direction = _snap_dir_45(local_mouse)
+		direction = _snap_dir(local_mouse)
 		get_viewport().set_input_as_handled()
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and !event.pressed:
 		_dragging_tip = false
@@ -55,10 +56,10 @@ func _on_tip_handle_input_event(_viewport, event, _shape_idx):
 		get_viewport().set_input_as_handled()
 
 
-func _snap_dir_45(vec: Vector2) -> Vector2:
+func _snap_dir(vec: Vector2) -> Vector2:
 	if vec == Vector2.ZERO:
 		return Vector2.RIGHT
-	var snapped_angle = snappedf(vec.angle(), PI / 4.0)
+	var snapped_angle = snappedf(vec.angle(), deg_to_rad(snap_degrees))
 	return Vector2.RIGHT.rotated(snapped_angle).normalized()
 
 

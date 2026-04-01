@@ -1500,147 +1500,6 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Beetle" type="Area2D" parent="Spawns" unique_id=462475672 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3608, 2168)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_vw0qr")
-actor_path = "res://src/Actor/Enemy/Beetle.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"speed": [Vector2(150, 150), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="MoveVector" type="Area2D" parent="Spawns/Beetle" unique_id=872564127 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
-visibility_layer = 2
-position = Vector2(-17, 6)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_xdtt3")
-
-[node name="WallVector" type="Area2D" parent="Spawns/Beetle" unique_id=854809578 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
-visibility_layer = 2
-position = Vector2(14, 6)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_xdtt3")
-
-[node name="@Area2D@3212" type="Area2D" parent="Spawns/Beetle" unique_id=589909480 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
-visibility_layer = 2
-position = Vector2(-17, 6)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_xdtt3")
-
-[node name="@Area2D@3213" type="Area2D" parent="Spawns/Beetle" unique_id=875029607 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
-visibility_layer = 2
-position = Vector2(14, 6)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_xdtt3")
-
-[node name="Beetle1" type="Area2D" parent="Spawns" unique_id=1185758330 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3560, 2168)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_vw0qr")
-actor_path = "res://src/Actor/Enemy/Beetle.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"speed": [Vector2(150, 150), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="MoveVector" type="Area2D" parent="Spawns/Beetle1" unique_id=140549320 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
-visibility_layer = 2
-position = Vector2(-17, 6)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_xdtt3")
-
-[node name="WallVector" type="Area2D" parent="Spawns/Beetle1" unique_id=742892909 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
-visibility_layer = 2
-position = Vector2(14, 6)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_xdtt3")
-
-[node name="@Area2D@3214" type="Area2D" parent="Spawns/Beetle1" unique_id=1531488759 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
-visibility_layer = 2
-position = Vector2(-17, 6)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_xdtt3")
-
-[node name="@Area2D@3215" type="Area2D" parent="Spawns/Beetle1" unique_id=445376945 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
-visibility_layer = 2
-position = Vector2(14, 6)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_xdtt3")
-
-[node name="Beetle2" type="Area2D" parent="Spawns" unique_id=1113404942 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3688, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_vw0qr")
-actor_path = "res://src/Actor/Enemy/Beetle.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [0, 2],
-"editor_hidden": [false, 1],
-"id": [&"Beetle4", 4],
-"speed": [Vector2(150, 150), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="MoveVector" type="Area2D" parent="Spawns/Beetle2" unique_id=1009344875 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
-visibility_layer = 2
-position = Vector2(-17, 6)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_xdtt3")
-
-[node name="WallVector" type="Area2D" parent="Spawns/Beetle2" unique_id=753412016 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
-visibility_layer = 2
-position = Vector2(14, 6)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_xdtt3")
-
-[node name="@Area2D@3216" type="Area2D" parent="Spawns/Beetle2" unique_id=26017176 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
-visibility_layer = 2
-position = Vector2(-17, 6)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_xdtt3")
-
-[node name="@Area2D@3217" type="Area2D" parent="Spawns/Beetle2" unique_id=911128774 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
-visibility_layer = 2
-position = Vector2(14, 6)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_xdtt3")
-
 [node name="Door" type="MarginContainer" parent="Spawns" unique_id=1532429292 groups=["TriggerSpawns"] instance=ExtResource("15_gjgdo")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -1687,6 +1546,7 @@ properties = {
 }
 
 [node name="WaypointJump" type="Area2D" parent="Spawns/Fish" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_ys6yb")]
+visible = false
 visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
@@ -1710,7 +1570,7 @@ collision_mask = 0
 script = ExtResource("18_0qug2")
 tag_name = "right"
 
-[node name="Beetle3" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Beetle" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1729,7 +1589,7 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="MoveVector" type="Area2D" parent="Spawns/Beetle3" unique_id=2137166031 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
+[node name="MoveVector" type="Area2D" parent="Spawns/Beetle" unique_id=2137166031 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
 visibility_layer = 2
 position = Vector2(0, -8)
 collision_layer = 16384
@@ -1737,7 +1597,7 @@ collision_mask = 0
 script = ExtResource("14_xdtt3")
 movement_locked = true
 
-[node name="Beetle4" type="Area2D" parent="Spawns" unique_id=259012380 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Beetle1" type="Area2D" parent="Spawns" unique_id=259012380 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1756,7 +1616,7 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="MoveVector" type="Area2D" parent="Spawns/Beetle4" unique_id=781946534 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
+[node name="MoveVector" type="Area2D" parent="Spawns/Beetle1" unique_id=781946534 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
 visibility_layer = 2
 position = Vector2(0, -8)
 collision_layer = 16384
@@ -1765,7 +1625,7 @@ script = ExtResource("14_xdtt3")
 direction = Vector2(-4.371139e-08, -1)
 movement_locked = true
 
-[node name="Beetle5" type="Area2D" parent="Spawns" unique_id=1434006208 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+[node name="Beetle2" type="Area2D" parent="Spawns" unique_id=1434006208 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1784,7 +1644,7 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="MoveVector" type="Area2D" parent="Spawns/Beetle5" unique_id=1820787928 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
+[node name="MoveVector" type="Area2D" parent="Spawns/Beetle2" unique_id=1820787928 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
 visibility_layer = 2
 position = Vector2(0, -8)
 collision_layer = 16384
@@ -1797,7 +1657,7 @@ movement_locked = true
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(4088, 2288)
+position = Vector2(4104, 2288)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("8_vw0qr")
@@ -1830,7 +1690,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_xdtt3")
 tag_name = "move"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 movement_locked = true
 
 [node name="WallVector" type="Area2D" parent="Spawns/BeetleDifficulty2" unique_id=2126548652 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
@@ -1872,7 +1732,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_xdtt3")
 tag_name = "move"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 movement_locked = true
 
 [node name="WallVector" type="Area2D" parent="Spawns/BeetleDifficulty21" unique_id=1838625436 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
@@ -1885,6 +1745,89 @@ arrow_length = 24.0
 tag_name = "wall"
 movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
+[node name="Beetle3" type="Area2D" parent="Spawns" unique_id=451422737 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3624, 2160)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_vw0qr")
+actor_path = "res://src/Actor/Enemy/Beetle.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"debug": [false, 1],
+"difficulty": [1, 2],
+"editor_hidden": [false, 1],
+"id": [&"Beetle6", 4],
+"speed": [Vector2(150, 150), 5],
+"water_gravity": [150.0, 3]
+}
+
+[node name="MoveVector" type="Area2D" parent="Spawns/Beetle3" unique_id=872564127 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_xdtt3")
+movement_locked = true
+
+[node name="Beetle4" type="Area2D" parent="Spawns" unique_id=761750539 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3768, 2112)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_vw0qr")
+actor_path = "res://src/Actor/Enemy/Beetle.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"debug": [false, 1],
+"difficulty": [1, 2],
+"editor_hidden": [false, 1],
+"id": [&"Beetle4", 4],
+"speed": [Vector2(150, 150), 5],
+"water_gravity": [150.0, 3]
+}
+
+[node name="MoveVector" type="Area2D" parent="Spawns/Beetle4" unique_id=504576690 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_xdtt3")
+direction = Vector2(-4.371139e-08, 1)
+movement_locked = true
+
+[node name="Beetle5" type="Area2D" parent="Spawns" unique_id=659962915 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3736, 2128)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_vw0qr")
+actor_path = "res://src/Actor/Enemy/Beetle.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"debug": [false, 1],
+"difficulty": [1, 2],
+"editor_hidden": [false, 1],
+"id": [&"Beetle5", 4],
+"speed": [Vector2(150, 150), 5],
+"water_gravity": [150.0, 3]
+}
+
+[node name="MoveVector" type="Area2D" parent="Spawns/Beetle5" unique_id=451417812 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_xdtt3")
+direction = Vector2(-4.371139e-08, 1)
+movement_locked = true
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2

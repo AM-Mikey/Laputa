@@ -121,6 +121,8 @@ func setup_level(): #Call this every time the level is changed or reloaded
 		wgs.visible = true
 		wgs.input_pickable = true
 		#wgs.reinitialize()
+	for tv in get_tree().get_nodes_in_group("ToolVectors"):
+		tv.visible = true
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.visible = true
 		a.input_pickable = true
@@ -188,6 +190,8 @@ func exit():
 	for wgs in get_tree().get_nodes_in_group("WaypointGlobalSpawns"):
 		wgs.spawn()
 		wgs.visible = false
+	for tv in get_tree().get_nodes_in_group("ToolVectors"):
+		tv.visible = false
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.spawn()
 		a.visible = false

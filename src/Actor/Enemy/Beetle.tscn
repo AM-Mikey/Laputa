@@ -137,7 +137,6 @@ collision_layer = 2
 collision_mask = 8
 floor_max_angle = 0.17453292
 script = ExtResource("3")
-debug = true
 speed = Vector2(150, 150)
 editor_hidden = false
 
@@ -203,12 +202,12 @@ position = Vector2(0, -8)
 
 [node name="PlayerCast" type="RayCast2D" parent="CenteredPivot" unique_id=1245707981]
 enabled = false
-target_position = Vector2(0, -100)
+target_position = Vector2(0, -512)
 collision_mask = 9
 
 [node name="WorldCast" type="RayCast2D" parent="CenteredPivot" unique_id=813832102]
 enabled = false
-target_position = Vector2(0, -200)
+target_position = Vector2(0, -512)
 collision_mask = 8
 
 [node name="LeftCast" type="RayCast2D" parent="." unique_id=795130591]
@@ -241,6 +240,7 @@ one_shot = true
 
 [node name="MoveVector" parent="." unique_id=872564127 instance=ExtResource("3_g4id4")]
 position = Vector2(0, -8)
+snap_degrees = 90.0
 movement_locked = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
