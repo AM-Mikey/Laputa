@@ -1,5 +1,7 @@
 extends Enemy
 
+const ICON = preload("res://assets/Actor/Enemy/RollerIcon.png")
+
 @export var start_dir = Vector2.LEFT
 
 var move_dir

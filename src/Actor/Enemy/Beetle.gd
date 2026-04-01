@@ -1,5 +1,6 @@
 extends Enemy
 
+const ICON = preload("res://assets/Actor/Enemy/BeetleIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/Beetle.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Beetle1.png")
 
@@ -9,6 +10,7 @@ var wall_dir = Vector2.LEFT:
 		up_direction = -val
 		wall_dir = val
 @export var difficulty := 0
+var max_difficulty := 1
 var idle_time: float
 var fly_cooldown_time = 2.0
 var fly_speed = Vector2(100, 100)

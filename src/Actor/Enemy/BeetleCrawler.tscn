@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://kf8aqeg86h82"]
 
-[ext_resource type="Texture2D" uid="uid://ddaew12v1ku8o" path="res://assets/Actor/Enemy/Beetle.png" id="2_7vcwk"]
-[ext_resource type="Script" uid="uid://yuqevorrxdj1" path="res://src/Actor/Enemy/BeetleDifficulty2.gd" id="3"]
-[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/ToolVector.tscn" id="3_6e2ya"]
+[ext_resource type="Script" uid="uid://yuqevorrxdj1" path="res://src/Actor/Enemy/BeetleCrawler.gd" id="1_jyaun"]
+[ext_resource type="Texture2D" uid="uid://ddaew12v1ku8o" path="res://assets/Actor/Enemy/Beetle.png" id="2_ey80y"]
+[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/ToolVector.tscn" id="3_80cd0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7vcwk"]
 size = Vector2(12, 9)
@@ -142,11 +142,11 @@ _data = {
 &"RESET": SubResource("Animation_8fv4h")
 }
 
-[node name="BeetleDifficulty2" type="CharacterBody2D" unique_id=1359591718 groups=["Actors", "Enemies", "Entities"]]
+[node name="BeetleCrawler" type="CharacterBody2D" unique_id=1359591718 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 8
 floor_max_angle = 0.17453292
-script = ExtResource("3")
+script = ExtResource("1_jyaun")
 debug = true
 speed = Vector2(150, 150)
 editor_hidden = false
@@ -226,7 +226,7 @@ debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=342499573]
 position = Vector2(0, -8)
-texture = ExtResource("2_7vcwk")
+texture = ExtResource("2_ey80y")
 hframes = 2
 vframes = 3
 frame = 1
@@ -337,13 +337,13 @@ one_shot = true
 process_callback = 0
 one_shot = true
 
-[node name="MoveVector" parent="." unique_id=872564127 instance=ExtResource("3_6e2ya")]
+[node name="MoveVector" parent="." unique_id=872564127 instance=ExtResource("3_80cd0")]
 position = Vector2(0, -8)
 tag_name = "move"
 direction = Vector2(-1, 0)
 movement_locked = true
 
-[node name="WallVector" parent="." unique_id=2126548652 instance=ExtResource("3_6e2ya")]
+[node name="WallVector" parent="." unique_id=2126548652 instance=ExtResource("3_80cd0")]
 position = Vector2(0, -8)
 arrow_length = 24.0
 tag_name = "wall"

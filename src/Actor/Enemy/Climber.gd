@@ -1,5 +1,6 @@
 extends Enemy
 
+const ICON = preload("res://assets/Actor/Enemy/ClimberIcon.png")
 const ARM = preload("res://src/Actor/Enemy/ClimberArm.tscn")
 
 @export var climb_dir = "cw"

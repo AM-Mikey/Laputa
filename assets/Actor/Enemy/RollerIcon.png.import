@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7fxhhw8ymwee"
-path="res://.godot/imported/Beetle3.png-8dd9d4a9338a1e0bfe661def8a7959bd.ctex"
+uid="uid://db72msncxwv7y"
+path="res://.godot/imported/RollerIcon.png-72dad83cac1d5a46acf591817e775875.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Enemy/Beetle3.png"
-dest_files=["res://.godot/imported/Beetle3.png-8dd9d4a9338a1e0bfe661def8a7959bd.ctex"]
+source_file="res://assets/Actor/Enemy/RollerIcon.png"
+dest_files=["res://.godot/imported/RollerIcon.png-72dad83cac1d5a46acf591817e775875.ctex"]
 
 [params]
 

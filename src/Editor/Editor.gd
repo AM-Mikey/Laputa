@@ -684,6 +684,12 @@ func set_actor_spawn(actor_path, pos):
 	var actor_spawn = ACTOR_SPAWN.instantiate()
 	actor_spawn.actor_path = actor_path
 	actor_spawn.global_position = (pos * 16) + Vector2i(8, 16)
+	if active_tool == "entity" && subtool == "enemy":
+		var active_button
+		for b in get_tree().get_nodes_in_group("EnemyButtons"):
+			if b.active:
+				active_button = b
+		actor_spawn.properties["difficulty"] = [active_button.enemy_difficulty, TYPE_INT]
 	spawn_collection.add_child(actor_spawn)
 	actor_spawn.owner = w.current_level
 	actor_spawn.initialize()
@@ -942,7 +948,6 @@ func set_tool(new_tool = "", new_subtool = ""):
 		match active_tool: #default subtools
 			"tile": new_subtool = "paint"
 			"grab": new_subtool = "hold"
-			"enemy": new_subtool = "place"
 			_: new_subtool = ""
 
 	subtool = new_subtool

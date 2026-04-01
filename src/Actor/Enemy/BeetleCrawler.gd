@@ -1,7 +1,8 @@
 extends Enemy
 
-const TX_2 = preload("res://assets/Actor/Enemy/Beetle2.png")
-const TX_3 = preload("res://assets/Actor/Enemy/Beetle3.png")
+const ICON = preload("res://assets/Actor/Enemy/BeetleCrawlerIcon.png")
+const TX_0 = preload("res://assets/Actor/Enemy/BeetleCrawler.png")
+const TX_1 = preload("res://assets/Actor/Enemy/BeetleCrawler1.png")
 
 var move_dir = Vector2.LEFT
 @export var wall_dir = Vector2.LEFT:
@@ -10,7 +11,8 @@ var move_dir = Vector2.LEFT
 		wall_dir = val
 @export var crawl_start_dir = Vector2.ZERO
 var doing_crawl_start_dir = false
-@export var difficulty:= 0
+@export var difficulty := 0
+var max_difficulty := 1
 var idle_time: float
 var fly_cooldown_time = 2.0
 var flip_cooldown_time = 1.0
@@ -24,11 +26,11 @@ func setup():
 	gravity = 0
 	collision_shape_data = get_collision_shape_data()
 	match difficulty:
-		2:
+		0:
 			hp = 3
 			reward = 4
 			damage_on_contact = 2
-			$Sprite2D.texture = TX_2
+			$Sprite2D.texture = TX_0
 			$CenteredPivot/PlayerCast.enabled = true
 			$CenteredPivot/WorldCast.enabled = true
 			$CenteredPivot/FloorCastL.enabled = true

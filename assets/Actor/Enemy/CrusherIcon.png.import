@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cav21invdhaiw"
-path="res://.godot/imported/PowerCritter.png-74af2a5f6e06f5cc73393e9a4ed5343a.ctex"
+uid="uid://c52vmxebl0mkv"
+path="res://.godot/imported/CrusherIcon.png-982b6efe680c637dcde487fe86c60be1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Enemy/PowerCritter.png"
-dest_files=["res://.godot/imported/PowerCritter.png-74af2a5f6e06f5cc73393e9a4ed5343a.ctex"]
+source_file="res://assets/Actor/Enemy/CrusherIcon.png"
+dest_files=["res://.godot/imported/CrusherIcon.png-982b6efe680c637dcde487fe86c60be1.ctex"]
 
 [params]
 
