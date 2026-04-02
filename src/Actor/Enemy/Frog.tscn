@@ -110,6 +110,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ih0x2"]
+resource_local_to_scene = true
 size = Vector2(8, 4)
 
 [node name="Frog" type="CharacterBody2D" unique_id=1440636904 groups=["Actors", "Enemies", "Entities"]]
@@ -200,7 +201,7 @@ target_position = Vector2(-20, 0)
 collision_mask = 264
 
 [node name="TongueDetection" type="RayCast2D" parent="." unique_id=62037362]
-position = Vector2(0, -8)
+position = Vector2(0, -4)
 enabled = false
 target_position = Vector2(-50, 0)
 collision_mask = 265
