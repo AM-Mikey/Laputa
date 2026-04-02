@@ -187,13 +187,21 @@ collision_mask = 65536
 position = Vector2(-4, -4)
 shape = SubResource("RectangleShape2D_ih0x2")
 disabled = true
+debug_color = Color(1, 1, 0.69803923, 0.41960785)
 
 [node name="Sprite" type="Polygon2D" parent="Tongue" unique_id=1938788440]
 z_index = -1
-color = Color(1, 0, 0, 0.41568628)
+color = Color(0.88235295, 0, 0, 1)
+
+[node name="WorldCollision" type="RayCast2D" parent="Tongue" unique_id=1671657245]
+position = Vector2(0, -4)
+enabled = false
+target_position = Vector2(-20, 0)
+collision_mask = 264
 
 [node name="TongueDetection" type="RayCast2D" parent="." unique_id=62037362]
 position = Vector2(0, -8)
+enabled = false
 target_position = Vector2(-50, 0)
 collision_mask = 265
 

@@ -19,14 +19,15 @@ var croak_time = 1.0
 var move_dir = Vector2.ZERO
 var look_dir = Vector2.LEFT:
 	set(val):
-		$TongueDetection.target_position.x = tongue_range * val.x
+		$TongueDetection.target_position.x = (8.0 + tongue_range) * val.x
 		look_dir = val
 
 var tongue_damage: float = 2.0
 var tongue_range: float = 50.0:
 	set(val):
-		$TongueDetection.target_position.x = val * look_dir.x
+		$TongueDetection.target_position.x = (8.0 + val) * look_dir.x
 		tongue_range = val
+var tongue_speed: float = 150.0
 
 #enum Difficulty {easy, normal, hard}
 #export(Difficulty) var difficulty = Difficulty.normal setget _on_difficulty_changed
@@ -92,31 +93,58 @@ func do_jump():
 		else:
 			change_state("idle")
 
+var tongue_attack_extend_tween: Tween = null
 func enter_tongue_attack(_prev_state):
+	var tongue_time: float = tongue_range / tongue_speed
+	$Tongue/Collision.shape.size = Vector2(8.0, 4.0)
+	$Tongue/Collision.position = Vector2(4.0, -4.0) * Vector2(look_dir.x, 1.0)
+	$Tongue/Sprite.visible = true
 	move_dir = Vector2.ZERO
 	$Tongue/Collision.disabled = false
+	$Tongue/WorldCollision.target_position.x = 8.0 * look_dir.x
+	$Tongue/WorldCollision.enabled = true
+	var tween = create_tween()
+	tongue_attack_extend_tween = create_tween()
+	tongue_attack_extend_tween.set_parallel()
+	tongue_attack_extend_tween.tween_property($Tongue/Collision.shape, "size", Vector2(8.0 + tongue_range, 4.0), tongue_time)
+	tongue_attack_extend_tween.tween_property($Tongue/Collision, "position", Vector2(4.0 + tongue_range / 2.0, -4.0) * Vector2(look_dir.x, 1.0), tongue_time)
+	tongue_attack_extend_tween.tween_property($Tongue/WorldCollision, "target_position:x", (8.0 + tongue_range) * look_dir.x, tongue_time)
+
+func do_tongue_attack():
+	# Later on when there's proper sprite, remove all thing related to $Tongue/Sprite
+	$Tongue/Sprite.polygon = from_rectangle_to_polygon(Rect2($Tongue/Collision.position - $Tongue/Collision.shape.size / 2.0, $Tongue/Collision.shape.size))
+
+	if (tongue_attack_extend_tween):
+		if !(tongue_attack_extend_tween.is_running()):
+			change_state("tongue_attack_retract")
+		elif ($Tongue/WorldCollision.is_colliding()):
+			change_state("tongue_attack_retract")
+
+func exit_tongue_attack(_next_state):
+	if (tongue_attack_extend_tween):
+		tongue_attack_extend_tween.kill()
+		tongue_attack_extend_tween = null
+
+func enter_tongue_attack_retract(prev_state):
+	var tongue_time: float = abs($Tongue/WorldCollision.target_position.x - (8.0 * look_dir.x)) / tongue_speed
 	var tween = create_tween()
 	tween.set_parallel()
-	tween.tween_property($Tongue/Collision.shape, "size", Vector2(8.0 + tongue_range, 4.0), 0.3 )
-	tween.tween_property($Tongue/Collision, "position", Vector2(-4.0 + tongue_range / 2.0, -4.0) * Vector2(look_dir.x, 1.0), 0.3)
-	tween.set_parallel(false)
-	tween.tween_property($Tongue/Collision.shape, "size", Vector2(8.0, 4.0), 0.3)
-	tween.set_parallel(true)
-	tween.tween_property($Tongue/Collision, "position", Vector2(-4.0, -4.0) * Vector2(look_dir.x, 1.0), 0.3)
+	tween.tween_property($Tongue/Collision.shape, "size", Vector2(8.0, 4.0), tongue_time)
+	tween.tween_property($Tongue/Collision, "position", Vector2(4.0, -4.0) * Vector2(look_dir.x, 1.0), tongue_time)
+	tween.tween_property($Tongue/WorldCollision, "target_position:x", 8.0 * look_dir.x, tongue_time)
 	await tween.finished
+	$Tongue/WorldCollision.enabled = false
 	$Tongue/Collision.disabled = true
+	$Tongue/Sprite.visible = false
 	$TongueTimer.start()
 	if (see_target):
 		change_state("targeting")
 	else:
 		change_state("idle")
 
-func do_tongue_attack(): # Later on when there's proper sprite, remove this
+func do_tongue_attack_retract():
+	# Later on when there's proper sprite, remove this
 	$Tongue/Sprite.polygon = from_rectangle_to_polygon(Rect2($Tongue/Collision.position - $Tongue/Collision.shape.size / 2.0, $Tongue/Collision.shape.size))
-
-func from_rectangle_to_polygon(rect: Rect2) -> PackedVector2Array:
-	var res: PackedVector2Array = [rect.position, rect.position + Vector2(rect.size.x, 0.0), rect.position + rect.size, rect.position + Vector2(0.0, rect.size.y)]
-	return res
 
 ### SFX ###
 
@@ -151,10 +179,15 @@ func tongue_detection_see_player() -> bool:
 	if !($TongueDetection.is_colliding()):
 		return false
 	var collider = $TongueDetection.get_collider()
-	if (collider is not TileMapLayer):
-		if (collider.get_collision_layer_value(1)):
-			return true
+	if (collider):
+		if (collider is not TileMapLayer):
+			if (collider.get_collision_layer_value(1)):
+				return true
 	return false
+
+func from_rectangle_to_polygon(rect: Rect2) -> PackedVector2Array:
+	var res: PackedVector2Array = [rect.position, rect.position + Vector2(rect.size.x, 0.0), rect.position + rect.size, rect.position + Vector2(0.0, rect.size.y)]
+	return res
 
 ### SIGNALS ###
 
