@@ -1,5 +1,6 @@
 extends Enemy
 
+const ICON = preload("res://assets/Actor/Enemy/FishIcon.png")
 const PATH_LINE = preload("res://src/Utility/PathLine.tscn")
 const BONK = preload("res://src/Effect/BonkParticle.tscn")
 
@@ -108,7 +109,7 @@ func enter_idle(_prev_state: String):
 		get_parent().get_parent().get_node("AnimationPlayer").play("Idle")
 
 
-func do_idle():
+func do_idle(_delta):
 	velocity = calc_velocity(move_dir)
 	move_and_slide()
 
@@ -131,7 +132,7 @@ func exit_swim(_next_state: String, _arg: Dictionary = {}):
 	move_dir = Vector2.ZERO
 	velocity = Vector2.ZERO
 
-func do_swim():
+func do_swim(_delta):
 	var collision = rc.get_collider()
 	if collision != null:
 		if (collision is not TileMapLayer and collision.get_collision_layer_value(1)):
@@ -163,7 +164,7 @@ func enter_attack(_prev_state: String):
 	await ap.animation_finished
 	move_dir = Vector2.UP
 
-func do_attack():
+func do_attack(_delta):
 	if position.y <= jump_pos.y - jump_height * 16 + speed.y * 0.3 or is_on_ceiling():
 		if (is_on_ceiling()):
 			bonk()
@@ -181,7 +182,7 @@ func exit_attack(_prev_state):
 func exit_fall(_next_state: String):
 	velocity = Vector2.ZERO
 
-func do_fall():
+func do_fall(_delta):
 	if (velocity.y > 0):
 		if (ap.current_animation != "Fall"):
 			ap.play("Fall")

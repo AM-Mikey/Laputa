@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bn7jivd31wefk"
-path="res://.godot/imported/Toad.png-cc007a271f8fec5bc13982bfeae2bc29.ctex"
+uid="uid://cqhuq0vjtnbub"
+path="res://.godot/imported/BillyIcon.png-bc001936364d5c62ed7a0cb5efd7932f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Enemy/Toad.png"
-dest_files=["res://.godot/imported/Toad.png-cc007a271f8fec5bc13982bfeae2bc29.ctex"]
+source_file="res://assets/Actor/Enemy/BillyIcon.png"
+dest_files=["res://.godot/imported/BillyIcon.png-bc001936364d5c62ed7a0cb5efd7932f.ctex"]
 
 [params]
 

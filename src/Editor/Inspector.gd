@@ -105,7 +105,7 @@ func display_data():
 		"tile_map":
 			for layer_id in range(0, get_child_count()):
 				create_layer_button(layer_id)
-		"waypoint_local", "waypoint_global", "waypoint_global_spawn":
+		"waypoint_local", "waypoint_global", "waypoint_global_spawn", "tool_vector":
 			for p in active.get_property_list():
 				if p["usage"] == EXPORT:
 					create_button(p["name"], active.get(p["name"]), p["type"])

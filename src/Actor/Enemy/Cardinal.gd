@@ -1,5 +1,7 @@
 extends Enemy
 
+const ICON = preload("res://assets/Actor/Enemy/CardinalIcon.png")
+
 var target
 
 var move_dir = Vector2.ZERO

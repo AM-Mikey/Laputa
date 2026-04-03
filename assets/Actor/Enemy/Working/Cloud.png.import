@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4dcwodpefid"
-path="res://.godot/imported/Beetle2.png-664ebffd50ceac1e652a85f38199434a.ctex"
+uid="uid://bfta7jrl6c5i8"
+path="res://.godot/imported/Cloud.png-0e7f92205eca4c78864b16f74d80289e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Enemy/Beetle2.png"
-dest_files=["res://.godot/imported/Beetle2.png-664ebffd50ceac1e652a85f38199434a.ctex"]
+source_file="res://assets/Actor/Enemy/Working/Cloud.png"
+dest_files=["res://.godot/imported/Cloud.png-0e7f92205eca4c78864b16f74d80289e.ctex"]
 
 [params]
 
