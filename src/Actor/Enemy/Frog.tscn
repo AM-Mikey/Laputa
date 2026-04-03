@@ -100,7 +100,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_h82ma"]
-resource_name = "tongue_attack"
+resource_name = "TongueAttack"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o6omx"]
 _data = {
@@ -108,7 +108,7 @@ _data = {
 &"Fall": SubResource("5"),
 &"Rise": SubResource("7"),
 &"Stand": SubResource("9"),
-&"tongue_attack": SubResource("Animation_h82ma")
+&"TongueAttack": SubResource("Animation_h82ma")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ih0x2"]
@@ -186,8 +186,8 @@ one_shot = true
 collision_layer = 0
 collision_mask = 65536
 
-[node name="Collision" type="CollisionShape2D" parent="Tongue" unique_id=13567573]
-position = Vector2(-4, -4)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tongue" unique_id=13567573]
+position = Vector2(-4, -7)
 shape = SubResource("RectangleShape2D_ih0x2")
 disabled = true
 debug_color = Color(1, 1, 0.69803923, 0.41960785)
@@ -196,25 +196,27 @@ debug_color = Color(1, 1, 0.69803923, 0.41960785)
 z_index = -1
 color = Color(0.88235295, 0, 0, 1)
 
-[node name="WorldCollision" type="RayCast2D" parent="Tongue" unique_id=1671657245]
-position = Vector2(0, -4)
+[node name="WorldCast" type="RayCast2D" parent="Tongue" unique_id=1671657245]
+position = Vector2(0, -7)
 enabled = false
 target_position = Vector2(-20, 0)
 collision_mask = 264
 
 [node name="TongueDetection" type="RayCast2D" parent="." unique_id=62037362]
-position = Vector2(0, -4)
+position = Vector2(0, -7)
 enabled = false
 target_position = Vector2(-50, 0)
 collision_mask = 265
 
-[node name="LookDir" parent="." unique_id=872564127 instance=ExtResource("3_nvdu1")]
-tag_name = "LookDir"
+[node name="LookVector" parent="." unique_id=872564127 instance=ExtResource("3_nvdu1")]
+position = Vector2(0, -7)
+tag_name = "look"
 snap_degrees = 180.0
+movement_locked = true
 
 [node name="TongueRange" parent="." unique_id=1432238783 instance=ExtResource("3_ih0x2")]
-position = Vector2(-50, 0)
-tag_name = "TongueRange"
+position = Vector2(-50, -7)
+tag_name = "tongue_range"
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

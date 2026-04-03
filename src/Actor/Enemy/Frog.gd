@@ -8,14 +8,8 @@ var target
 var see_target: bool = false
 
 @export var jump_delay = 3.0
-@export var difficulty: int = 0:
-	set(val):
-		match val:
-			0:
-				$TongueDetection.enabled = false
-			1:
-				$TongueDetection.enabled = true
-		difficulty = val
+@export var difficulty := 1
+var max_difficulty := 1
 @export var croak_time = 1.0
 var move_dir = Vector2.ZERO
 var look_dir = Vector2.LEFT:
@@ -28,24 +22,34 @@ var tongue_range: float = 50.0:
 	set(val):
 		$TongueDetection.target_position.x = (8.0 + val) * look_dir.x
 		tongue_range = val
-var tongue_speed: float = 150.0
-
-#enum Difficulty {easy, normal, hard}
-#export(Difficulty) var difficulty = Difficulty.normal setget _on_difficulty_changed
+var tongue_speed := 150.0
+var tongue_tween: Tween
 
 func setup():
 	change_state("idle")
-	damage_on_contact = 1
-	reward = 2
-	hp = 3
-	print(name, " ", $LookDir.direction)
-	look_dir = $LookDir.direction
+	look_dir = $LookVector.direction
 	tongue_range = abs($TongueRange.position.x)
 	set_floor_stop_on_slope_enabled(true)
+	match difficulty:
+		0:
+			$TongueDetection.enabled = false
+			hp = 3
+			reward = 2
+			damage_on_contact = 1
+			$Sprite2D.texture = TX_0
+			speed = Vector2(60, 120)
+		1:
+			$TongueDetection.enabled = true
+			hp = 4
+			reward = 3
+			damage_on_contact = 2
+			$Sprite2D.texture = TX_1
+			speed = Vector2(12, 120)
+
 
 func _on_physics_process(_delta):
 	if disabled or dead or Engine.is_editor_hint(): return
-	if not is_on_floor():
+	if !is_on_floor():
 		move_dir.y = 0 #don't allow them to jump if they are midair
 
 	velocity = calc_velocity(move_dir)
@@ -55,26 +59,33 @@ func _on_physics_process(_delta):
 	if (target):
 		see_target = check_to_see_player(target)
 
+
+
 ### STATES ###
 
 func do_idle(_delta):
-	if (difficulty == 1 and is_on_floor() and tongue_detection_see_player() and $TongueTimer.is_stopped()):
+	if difficulty == 1 && is_on_floor() && tongue_detection_see_player() && $TongueTimer.is_stopped():
 		change_state("tongue_attack")
+		return
 	elif (see_target):
 		change_state("targeting")
+		return
 
 func do_targeting(_delta):
 	if is_on_floor():
-		if (difficulty == 1 and tongue_detection_see_player() and $TongueTimer.is_stopped()):
+		if difficulty == 1 && tongue_detection_see_player() && $TongueTimer.is_stopped():
 			change_state("tongue_attack")
+			return
 		elif $JumpTimer.time_left == 0.0:
 			change_state("jump")
 			return
-		elif !(see_target):
+		elif !see_target:
 			change_state("idle")
-		else:
-			if (target):
-				look_dir = Vector2(sign(target.global_position.x - global_position.x), 0)
+			return
+		elif target:
+			look_dir = Vector2(sign(target.global_position.x - global_position.x), 0)
+
+
 
 func enter_jump(_last_state):
 	am.play("enemy_jump", self)
@@ -90,51 +101,54 @@ func do_jump(_delta):
 		$CroakTimer.start(croak_time)
 		if see_target:
 			change_state("targeting")
+			return
 		else:
 			change_state("idle")
+			return
 
-var tongue_attack_extend_tween: Tween = null
+
+
 func enter_tongue_attack(_prev_state):
 	var tongue_time: float = tongue_range / tongue_speed
-	$Tongue/Collision.shape.size = Vector2(8.0, 4.0)
-	$Tongue/Collision.position = Vector2(4.0, -4.0) * Vector2(look_dir.x, 1.0)
+	$Tongue/CollisionShape2D.shape.size = Vector2(8.0, 4.0)
+	$Tongue/CollisionShape2D.position = Vector2(4.0, -4.0) * Vector2(look_dir.x, 1.0)
 	$Tongue/Sprite.visible = true
 	move_dir = Vector2.ZERO
-	$Tongue/Collision.disabled = false
-	$Tongue/WorldCollision.target_position.x = 8.0 * look_dir.x
-	$Tongue/WorldCollision.enabled = true
-	var tween = create_tween()
-	tongue_attack_extend_tween = create_tween()
-	tongue_attack_extend_tween.set_parallel()
-	tongue_attack_extend_tween.tween_property($Tongue/Collision.shape, "size", Vector2(8.0 + tongue_range, 4.0), tongue_time)
-	tongue_attack_extend_tween.tween_property($Tongue/Collision, "position", Vector2(4.0 + tongue_range / 2.0, -4.0) * Vector2(look_dir.x, 1.0), tongue_time)
-	tongue_attack_extend_tween.tween_property($Tongue/WorldCollision, "target_position:x", (8.0 + tongue_range) * look_dir.x, tongue_time)
+	$Tongue/CollisionShape2D.disabled = false
+	$Tongue/WorldCast.target_position.x = 8.0 * look_dir.x
+	$Tongue/WorldCast.enabled = true
+	tongue_tween = create_tween()
+	tongue_tween.set_parallel()
+	tongue_tween.tween_property($Tongue/CollisionShape2D.shape, "size", Vector2(8.0 + tongue_range, 4.0), tongue_time)
+	tongue_tween.tween_property($Tongue/CollisionShape2D, "position", Vector2(4.0 + tongue_range / 2.0, -4.0) * Vector2(look_dir.x, 1.0), tongue_time)
+	tongue_tween.tween_property($Tongue/WorldCast, "target_position:x", (8.0 + tongue_range) * look_dir.x, tongue_time)
 
 func do_tongue_attack(_delta):
 	# Later on when there's proper sprite, remove all thing related to $Tongue/Sprite
-	$Tongue/Sprite.polygon = from_rectangle_to_polygon(Rect2($Tongue/Collision.position - $Tongue/Collision.shape.size / 2.0, $Tongue/Collision.shape.size))
+	$Tongue/Sprite.polygon = from_rectangle_to_polygon(Rect2($Tongue/CollisionShape2D.position - $Tongue/CollisionShape2D.shape.size / 2.0, $Tongue/CollisionShape2D.shape.size))
 
-	if (tongue_attack_extend_tween):
-		if !(tongue_attack_extend_tween.is_running()):
-			change_state("tongue_attack_retract")
-		elif ($Tongue/WorldCollision.is_colliding()):
-			change_state("tongue_attack_retract")
+	if tongue_tween:
+		if !tongue_tween.is_running() || $Tongue/WorldCast.is_colliding():
+			change_state("tongue_retract")
+			return
 
 func exit_tongue_attack(_next_state):
-	if (tongue_attack_extend_tween):
-		tongue_attack_extend_tween.kill()
-		tongue_attack_extend_tween = null
+	if (tongue_tween):
+		tongue_tween.kill()
+		tongue_tween = null
 
-func enter_tongue_attack_retract(prev_state):
-	var tongue_time: float = abs($Tongue/WorldCollision.target_position.x - (8.0 * look_dir.x)) / tongue_speed
+
+
+func enter_tongue_retract(_prev_state):
+	var tongue_time: float = abs($Tongue/WorldCast.target_position.x - (8.0 * look_dir.x)) / tongue_speed
 	var tween = create_tween()
 	tween.set_parallel()
-	tween.tween_property($Tongue/Collision.shape, "size", Vector2(8.0, 4.0), tongue_time)
-	tween.tween_property($Tongue/Collision, "position", Vector2(4.0, -4.0) * Vector2(look_dir.x, 1.0), tongue_time)
-	tween.tween_property($Tongue/WorldCollision, "target_position:x", 8.0 * look_dir.x, tongue_time)
+	tween.tween_property($Tongue/CollisionShape2D.shape, "size", Vector2(8.0, 4.0), tongue_time)
+	tween.tween_property($Tongue/CollisionShape2D, "position", Vector2(4.0, -4.0) * Vector2(look_dir.x, 1.0), tongue_time)
+	tween.tween_property($Tongue/WorldCast, "target_position:x", 8.0 * look_dir.x, tongue_time)
 	await tween.finished
-	$Tongue/WorldCollision.enabled = false
-	$Tongue/Collision.disabled = true
+	$Tongue/WorldCast.enabled = false
+	$Tongue/CollisionShape2D.disabled = true
 	$Tongue/Sprite.visible = false
 	$TongueTimer.start()
 	if (see_target):
@@ -144,9 +158,11 @@ func enter_tongue_attack_retract(prev_state):
 
 func do_tongue_attack_retract(_delta):
 	# Later on when there's proper sprite, remove this
-	$Tongue/Sprite.polygon = from_rectangle_to_polygon(Rect2($Tongue/Collision.position - $Tongue/Collision.shape.size / 2.0, $Tongue/Collision.shape.size))
+	$Tongue/Sprite.polygon = from_rectangle_to_polygon(Rect2($Tongue/CollisionShape2D.position - $Tongue/CollisionShape2D.shape.size / 2.0, $Tongue/CollisionShape2D.shape.size))
 
-### SFX ###
+
+
+### EFFECT ###
 
 func croak():
 	am.play("enemy_croak", self)
@@ -162,7 +178,10 @@ func animate():
 		elif move_dir.y > 0:
 			$AnimationPlayer.play("Fall")
 
-### UTILITY ###
+
+
+### HELPER ###
+
 func check_to_see_player(player) -> bool:
 	var raycast_parameter: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.new()
 	raycast_parameter.from = global_position + Vector2(0.0, -14.0)
@@ -189,6 +208,8 @@ func from_rectangle_to_polygon(rect: Rect2) -> PackedVector2Array:
 	var res: PackedVector2Array = [rect.position, rect.position + Vector2(rect.size.x, 0.0), rect.position + rect.size, rect.position + Vector2(0.0, rect.size.y)]
 	return res
 
+
+
 ### SIGNALS ###
 
 func _on_PlayerDetector_body_entered(body):
@@ -201,36 +222,6 @@ func _on_PlayerDetector_body_exited(_body):
 func _on_croak_timer_timeout():
 	if state == "targeting":
 		$AnimationPlayer.play("Croak")
-
-
-#func _on_difficulty_changed(new):
-#	difficulty = new
-#	match difficulty:
-#
-#		Difficulty.hard:
-#			hp = 4
-#			reward = 3
-#			damage_on_contact = 2
-#			$Sprite.modulate = Color(1,1,1)
-#			$Sprite.texture = tx_toad
-#			speed = Vector2(60, 120)
-#
-#		Difficulty.normal:
-#			hp = 4
-#			reward = 2
-#			damage_on_contact = 2
-#			$Sprite.modulate = Color(1,1,1)
-#			$Sprite.texture = tx_frog
-#			speed = Vector2(12, 120)
-#
-#		Difficulty.easy:
-#			hp = 2
-#			reward = 1
-#			damage_on_contact = 1
-#			$Sprite.modulate = Color(0, 0.976471, 1)
-#			$Sprite.texture = tx_frog
-#			speed = Vector2(12, 120)
-
 
 func _on_Tongue_area_entered(area: Area2D) -> void:
 	if area.get_collision_layer_value(18): #enemyhurt
