@@ -135,7 +135,6 @@ func set_sprite():
 	if "difficulty" in actor:
 		var texture_const_string = "TX_%s" % properties["difficulty"][0]
 		$Sprite2D.texture = actor.get(texture_const_string)
-		print("asd")
 	else:
 		$Sprite2D.texture = actor.get_node("Sprite2D").texture
 	$Sprite2D.hframes = actor.get_node("Sprite2D").hframes

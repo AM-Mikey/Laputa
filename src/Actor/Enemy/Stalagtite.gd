@@ -62,7 +62,7 @@ func _on_physics_process(_delta):
 func enter_hang(_last_state):
 	$AnimationPlayer.play("HangIdle")
 
-func do_hang():
+func do_hang(_delta):
 	var collider = $RayCast2D.get_collider()
 	if collider:
 		if collider is TileMapLayer: return
@@ -82,7 +82,7 @@ func enter_drop(_last_state):
 	hit_enemies_on_contact = true
 	damage_on_contact = drop_damage
 
-func do_drop():
+func do_drop(_delta):
 	if is_on_floor():
 		if difficulty == 0: #purple
 			change_state("stake")
@@ -124,7 +124,7 @@ func enter_run(_last_state):
 	$WallRight.enabled = true
 	$WallLeft.enabled = true
 
-func do_run():
+func do_run(_delta):
 	match move_dir:
 		Vector2.LEFT:
 			$Sprite2D.flip_h = false

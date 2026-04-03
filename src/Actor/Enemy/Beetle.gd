@@ -88,7 +88,7 @@ func enter_idlescan(_last_state): #level 1
 	speed = Vector2.ZERO
 	$AnimationPlayer.play("Idle")
 
-func do_idlescan():
+func do_idlescan(_delta):
 	var player_collider = $CenteredPivot/PlayerCast.get_collider()
 	var world_collider = $CenteredPivot/WorldCast.get_collider()
 
@@ -118,7 +118,7 @@ func enter_fly(_last_state):
 	speed = fly_speed
 	$AnimationPlayer.play("Fly")
 
-func do_fly():
+func do_fly(_delta):
 	var collider
 	if move_dir.dot(Vector2.LEFT) > 0.9: #close to Vector2.Left
 		collider = $LeftCast.get_collider()

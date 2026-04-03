@@ -5,60 +5,60 @@ const TX_0 = preload("res://assets/Actor/Enemy/BeetleCrawler.png")
 const TX_1 = preload("res://assets/Actor/Enemy/BeetleCrawler1.png")
 
 var move_dir = Vector2.LEFT
-@export var wall_dir = Vector2.LEFT:
+var saved_move_dir: Vector2
+var saved_exterior_position: Vector2
+var fly_dir = Vector2.UP
+var wall_dir = Vector2.LEFT:
 	set(val):
 		up_direction = -val
 		wall_dir = val
-@export var crawl_start_dir = Vector2.ZERO
-var doing_crawl_start_dir = false
+var crawl_dir = Vector2.LEFT
 @export var difficulty := 0
 var max_difficulty := 1
 var idle_time: float
 var fly_cooldown_time = 2.0
 var flip_cooldown_time = 1.0
+var exterior_corner_time = 0.4
+var interior_corner_time = 0.3
 var fly_speed = Vector2(100, 100)
 var crawl_speed = Vector2(20, 20)
 var collision_shape_data: Dictionary
 
+#var start_move_dir: Vector2 = Vector2.RIGHT
+#var start_wall_dir: Vector2 = Vector2.RIGHT
+#var start_sprite_rotation: float = 0.0
+#var allow_turn_edge_do: bool = false
+
+
+var exterior_corner_saved_pos: Vector2
+
 func setup():
-	move_dir = $MoveVector.direction
-	wall_dir = $WallVector.direction
+	wall_dir = fly_dir * -1
+	crawl_dir = $CrawlVector.direction
+	$CenteredPivot.scale.x = crawl_dir.x * -1.0
+	$Sprite2D.scale.x = crawl_dir.x * -1.0
 	gravity = 0
-	collision_shape_data = get_collision_shape_data()
+	move_dir = crawl_dir
+	#collision_shape_data = get_collision_shape_data()
 	match difficulty:
 		0:
 			hp = 3
 			reward = 4
 			damage_on_contact = 2
 			$Sprite2D.texture = TX_0
-			$CenteredPivot/PlayerCast.enabled = true
-			$CenteredPivot/WorldCast.enabled = true
-			$CenteredPivot/FloorCastL.enabled = true
-			$CenteredPivot/FloorCastR.enabled = true
-			$CenteredPivot/MovableEdgeL1.enabled = true
-			$CenteredPivot/MovableEdgeL2.enabled = true
-			$CenteredPivot/MovableEdgeL3.enabled = true
-			$CenteredPivot/MovableEdgeR1.enabled = true
-			$CenteredPivot/MovableEdgeR2.enabled = true
-			$CenteredPivot/MovableEdgeR3.enabled = true
-			if crawl_start_dir != Vector2.ZERO:
-				doing_crawl_start_dir = true
-			change_state("platformcrawl")
+			change_state("crawl")
 
 
 
 func _on_physics_process(_delta):
 	if disabled or dead or Engine.is_editor_hint(): return
-	#if not is_on_floor():
-		#move_dir.y = 0 #don't allow them to jump if they are midair
 
 
 	velocity = calc_velocity(move_dir, false) #no gravity
-	if (state == "turn_edge"):
-		velocity += wall_dir * 10.0
+	#if (state == "turn_edge"):
+		#velocity += wall_dir * 10.0
 
 	move_and_slide()
-	#animate()
 
 
 
@@ -73,7 +73,7 @@ func enter_fly(_last_state):
 			1:
 				change_state("idlescan")
 			2:
-				change_state("platformcrawl")
+				change_state("crawl")
 		return
 	$FlyCooldown.start(fly_cooldown_time)
 	match move_dir.x:
@@ -85,7 +85,7 @@ func enter_fly(_last_state):
 	speed = fly_speed
 	$AnimationPlayer.play("Fly")
 
-func do_fly():
+func do_fly(_delta):
 	var collider
 	if move_dir.dot(Vector2.LEFT) > 0.9: #close to Vector2.Left
 		collider = $LeftCast.get_collider()
@@ -103,191 +103,125 @@ func do_fly():
 				wall_dir *= -1 #wall_dir = move_dir * -1
 				#var random_sign = 1 - 2 * (randi() % 2) #random direction after land
 				#move_dir = wall_dir.rotated(deg_to_rad(90 * random_sign))
-				change_state("platformcrawl")
+				change_state("crawl")
 				return
 
-func enter_platformcrawl(last_state): #level 2
-	if (last_state != "turn_edge"):
-		if not doing_crawl_start_dir:
-			var random_sign_float: float = 1 - 2 * (randi() % 2)
-			if wall_dir == Vector2.LEFT or wall_dir == Vector2.RIGHT:
-				move_dir = Vector2(0, random_sign_float)
-			if wall_dir == Vector2.UP or wall_dir == Vector2.DOWN:
-				move_dir = Vector2(random_sign_float, 0)
-		else:
-			move_dir = crawl_start_dir
-			doing_crawl_start_dir = false #turn off after we're done
-	set_collision_shapes()
-	get_crawl_sprite()
+
+
+func enter_crawl(_last_state): #level 0
+	$AnimationPlayer.play("Crawl")
+	#move_dir = crawl_dir
+	#set_collision_shapes()
+	#get_crawl_sprite()
 	speed = crawl_speed
 
-func exit_platformcrawl(_next_state):
-	if (!$FlipCooldown.is_stopped()):
-		$FlipCooldown.stop()
-
-func do_platformcrawl():
-	var wall_collider
-	var edge_collider
+func do_crawl(_delta):
 	var player_collider
 	var world_collider
 
-	var edge_top_rc: RayCast2D
-	var edge_top_rc2: RayCast2D
-	var edge_bottom_rc: RayCast2D
-
-	match wall_dir:
-		Vector2.LEFT:
-			if move_dir == Vector2.UP:
-				edge_collider = $CenteredPivot/FloorCastL.get_collider()
-				edge_top_rc = $CenteredPivot/MovableEdgeL1
-				edge_top_rc2 = $CenteredPivot/MovableEdgeL3
-				edge_bottom_rc = $CenteredPivot/MovableEdgeL2
-			elif move_dir == Vector2.DOWN:
-				edge_collider = $CenteredPivot/FloorCastR.get_collider()
-				edge_top_rc = $CenteredPivot/MovableEdgeR1
-				edge_top_rc2 = $CenteredPivot/MovableEdgeR3
-				edge_bottom_rc = $CenteredPivot/MovableEdgeR2
-		Vector2.RIGHT:
-			if move_dir == Vector2.UP:
-				edge_collider = $CenteredPivot/FloorCastR.get_collider()
-				edge_top_rc = $CenteredPivot/MovableEdgeR1
-				edge_top_rc2 = $CenteredPivot/MovableEdgeR3
-				edge_bottom_rc = $CenteredPivot/MovableEdgeR2
-			elif move_dir == Vector2.DOWN:
-				edge_collider = $CenteredPivot/FloorCastL.get_collider()
-				edge_top_rc = $CenteredPivot/MovableEdgeL1
-				edge_top_rc2 = $CenteredPivot/MovableEdgeL3
-				edge_bottom_rc = $CenteredPivot/MovableEdgeL2
-		Vector2.UP:
-			if move_dir == Vector2.LEFT:
-				edge_collider = $CenteredPivot/FloorCastR.get_collider()
-				edge_top_rc = $CenteredPivot/MovableEdgeR1
-				edge_top_rc2 = $CenteredPivot/MovableEdgeR3
-				edge_bottom_rc = $CenteredPivot/MovableEdgeR2
-			elif move_dir == Vector2.RIGHT:
-				edge_collider = $CenteredPivot/FloorCastL.get_collider()
-				edge_top_rc = $CenteredPivot/MovableEdgeL1
-				edge_top_rc2 = $CenteredPivot/MovableEdgeL3
-				edge_bottom_rc = $CenteredPivot/MovableEdgeL2
-		Vector2.DOWN:
-			if move_dir == Vector2.LEFT:
-				edge_collider = $CenteredPivot/FloorCastL.get_collider()
-				edge_top_rc = $CenteredPivot/MovableEdgeL1
-				edge_top_rc2 = $CenteredPivot/MovableEdgeL3
-				edge_bottom_rc = $CenteredPivot/MovableEdgeL2
-			elif move_dir == Vector2.RIGHT:
-				edge_collider = $CenteredPivot/FloorCastR.get_collider()
-				edge_top_rc = $CenteredPivot/MovableEdgeR1
-				edge_top_rc2 = $CenteredPivot/MovableEdgeR3
-				edge_bottom_rc = $CenteredPivot/MovableEdgeR2
 
 	player_collider = $CenteredPivot/PlayerCast.get_collider()
 	world_collider = $CenteredPivot/WorldCast.get_collider()
 
-	if is_on_wall(): #turn around from wall
-		if $FlipCooldown.is_stopped():
-			$FlipCooldown.start(flip_cooldown_time)
-			move_dir *= -1
-			get_crawl_sprite()
-	elif !edge_collider: #At edge
-		if (!edge_top_rc.is_colliding() and !edge_top_rc2.is_colliding() and edge_bottom_rc.is_colliding()):#turn corner from ledge
-			change_state("pre_turn_edge")
-		else: #turn around if no valid edge to turn
-			if !(just_spawned):
-				move_dir *= -1
-				get_crawl_sprite()
 
 
-	if player_collider:
-		if player_collider is TileMapLayer:
+	if !%FloorCast.is_colliding(): #At edge
+		if %ExteriorCornerCast.is_colliding() && %ExteriorCornerDetector.get_overlapping_bodies() == []: #turn corner
+			change_state("exterior_corner")
+		elif %ExteriorCornerCast.is_colliding() || %ExteriorCornerDetector.get_overlapping_bodies() == []: #turn around from unturnable edge
+			flip_check()
+
+
+	if player_collider && world_collider:
+		if player_collider is TileMapLayer || player_collider.get_collision_layer_value(4): #for when it hits world before player
 			return
-		if world_collider:
-			#print("gotplayer")
-			if $FlyCooldown.is_stopped():
+		if $FlyCooldown.is_stopped():
+			if world_cast_check():
 				move_dir = wall_dir * -1
 				change_state("fly")
 				return
 
+	if %InteriorCornerCast.is_colliding() && %InteriorCornerCast2.is_colliding(): #At wall
+		change_state("interior_corner")
+	elif %InteriorCornerCast.is_colliding() || %InteriorCornerCast2.is_colliding():
+		flip_check()
 
-#region Pre turn corner
-func enter_pre_turn_corner(prev_state):
-	if (prev_state != "platformcrawl"):
-		change_state("platformcrawl")
+func exit_crawl(_next_state):
+	print("exit crawl")
+	if (!$FlipCooldown.is_stopped()):
+		$FlipCooldown.stop()
 
-func do_pre_turn_edge():
-	var oppos_edge_collider
-	match wall_dir:
-		Vector2.LEFT:
-			if move_dir == Vector2.UP:
-				oppos_edge_collider = $CenteredPivot/FloorCastR.get_collider()
-			elif move_dir == Vector2.DOWN:
-				oppos_edge_collider = $CenteredPivot/FloorCastL.get_collider()
-		Vector2.RIGHT:
-			if move_dir == Vector2.UP:
-				oppos_edge_collider = $CenteredPivot/FloorCastL.get_collider()
-			elif move_dir == Vector2.DOWN:
-				oppos_edge_collider = $CenteredPivot/FloorCastR.get_collider()
-		Vector2.UP:
-			if move_dir == Vector2.LEFT:
-				oppos_edge_collider = $CenteredPivot/FloorCastL.get_collider()
-			elif move_dir == Vector2.RIGHT:
-				oppos_edge_collider = $CenteredPivot/FloorCastR.get_collider()
-		Vector2.DOWN:
-			if move_dir == Vector2.LEFT:
-				oppos_edge_collider = $CenteredPivot/FloorCastR.get_collider()
-			elif move_dir == Vector2.RIGHT:
-				oppos_edge_collider = $CenteredPivot/FloorCastL.get_collider()
-
-	if (!oppos_edge_collider):
-		change_state("turn_edge")
-
-#region Turn Corner
-var start_move_dir: Vector2 = Vector2.RIGHT
-var start_wall_dir: Vector2 = Vector2.RIGHT
-var start_sprite_rotation: float = 0.0
-var allow_turn_edge_do: bool = false
-func enter_turn_edge(_prev_state):
-	allow_turn_edge_do = false
-	start_move_dir = move_dir
-	start_wall_dir = wall_dir
-	start_sprite_rotation = $Sprite2D.rotation
-	var turn_degree: float = 0
-	var cross = wall_dir.cross(move_dir)
-	if abs(cross) > 0.9:
-		turn_degree = sign(cross) * PI / 2
-
-	var tween_time: float =  PI / 2 / (crawl_speed.x / 4.5)
-	var turn_corner_tween: Tween = get_tree().create_tween()
-	turn_corner_tween.tween_method(tween_move_dir, 0.0, turn_degree, tween_time)
-	await turn_corner_tween.finished
-	move_dir = convert_minus_zero_to_zero(start_move_dir.rotated(turn_degree))
-	wall_dir = convert_minus_zero_to_zero(start_wall_dir.rotated(turn_degree))
-	allow_turn_edge_do = true
-
-# rotated() can return a vector component of -0.0 which does not equal to 0.0 and mess with match statement
-func convert_minus_zero_to_zero(vec: Vector2): #TODO:remove and replace with approximation
-	if is_zero_approx(vec.x):
-		vec.x = 0.0
-	if is_zero_approx(vec.y):
-		vec.y = 0.0
-	return vec
+func flip_check():
+	print("tried to flip")
+	if $FlipCooldown.is_stopped():
+		$FlipCooldown.start(flip_cooldown_time)
+		move_dir *= -1.0
+		crawl_dir *= -1.0
+		$CenteredPivot.scale.x *= -1.0
+		$Sprite2D.scale.x *= -1.0
 
 
-func tween_move_dir(curr_prog_angle):
-	move_dir = start_move_dir.rotated(curr_prog_angle)
-	wall_dir = start_wall_dir.rotated(curr_prog_angle)
-	$Sprite2D.rotation = start_sprite_rotation + curr_prog_angle
-	set_collision_shapes()
 
-func do_turn_edge():
-	if !allow_turn_edge_do:
-		return
+func enter_exterior_corner(_last_state):
+	$AnimationPlayer.play("ExteriorCorner")
+	$CollisionShape2D.disabled = true
+	saved_move_dir = move_dir
+	velocity = Vector2.ZERO
+	move_dir = Vector2.ZERO
+	$CornerTimer.start(exterior_corner_time)
 
-	if (is_on_floor()):
-		change_state("platformcrawl")
 
-#endregion
+func do_exterior_corner(_delta):
+	if $CornerTimer.is_stopped():
+		change_state("crawl")
+
+func exit_exterior_corner(_next_state):
+	global_position += saved_move_dir * 6 + wall_dir * 6
+	rotation += deg_to_rad(90.0 * crawl_dir.x)
+	move_dir = saved_move_dir.rotated(deg_to_rad(90.0 * crawl_dir.x))
+	wall_dir = wall_dir.rotated(deg_to_rad(90.0 * crawl_dir.x))
+	$CollisionShape2D.set_deferred("disabled", false)
+
+
+
+func enter_interior_corner(_last_state):
+	$AnimationPlayer.play("InteriorCorner")
+	$CollisionShape2D.disabled = true
+	saved_move_dir = move_dir
+	velocity = Vector2.ZERO
+	move_dir = Vector2.ZERO
+	$CornerTimer.start(interior_corner_time)
+
+func do_interior_corner(_delta):
+	if $CornerTimer.is_stopped():
+		change_state("crawl")
+
+func exit_interior_corner(_next_state):
+	global_position += saved_move_dir * 6 + wall_dir * -6
+	rotation += deg_to_rad(-90.0 * crawl_dir.x)
+	move_dir = saved_move_dir.rotated(deg_to_rad(-90.0 * crawl_dir.x))
+	wall_dir = wall_dir.rotated(deg_to_rad(-90.0 * crawl_dir.x))
+	$CollisionShape2D.set_deferred("disabled", false)
+
+
 ### HELPERS ###
+
+func world_cast_check() -> bool:
+	var world_cast = $CenteredPivot/WorldCast
+	if not world_cast.is_colliding():
+		printerr("ERROR: No opposite wall for beetle.")
+		return false
+
+	var normal = world_cast.get_collision_normal()
+	var expected = wall_dir
+	var is_valid = normal.dot(expected) > 0.9
+
+	if not is_valid:
+		printerr(
+			"ERROR: Opposite wall for beetle with normal %s does not match expected %s."
+			% [normal, expected]
+		)
+	return is_valid
 
 func get_crawl_sprite():
 	$AnimationPlayer.play("Crawl")
@@ -321,7 +255,7 @@ func set_collision_shapes():
 
 	var target_collision_name: String = ""
 	match state:
-		"idle", "crawl", "platformcrawl", "idlescan", "turn_edge":
+		"idle", "crawl", "exterior_corner", "interior_corner":
 			target_collision_name = "crawl"
 			for i in collision_shape_data:
 				if collision_shape_data[i][0] == "crawl":

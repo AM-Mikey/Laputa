@@ -1,15 +1,11 @@
 [gd_scene format=3 uid="uid://kf8aqeg86h82"]
 
 [ext_resource type="Script" uid="uid://yuqevorrxdj1" path="res://src/Actor/Enemy/BeetleCrawler.gd" id="1_jyaun"]
-[ext_resource type="Texture2D" uid="uid://ddaew12v1ku8o" path="res://assets/Actor/Enemy/Beetle.png" id="2_ey80y"]
+[ext_resource type="Texture2D" uid="uid://bhhny2ymfaacp" path="res://assets/Actor/Enemy/BeetleCrawler.png" id="2_jyaun"]
 [ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/ToolVector.tscn" id="3_80cd0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7vcwk"]
 size = Vector2(12, 9)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4id4"]
-radius = 4.5
-height = 14.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qsmhk"]
 radius = 7.0
@@ -18,16 +14,10 @@ height = 15.0
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(14, 14)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8fv4h"]
-size = Vector2(14, 10)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fjd7u"]
 size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4id4"]
-size = Vector2(12, 9)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c4c1t"]
 size = Vector2(12, 9)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t75oa"]
@@ -51,9 +41,9 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_fjd7u"]
-resource_name = "CrawlDiagonal"
-length = 0.2
-loop_mode = 1
+resource_name = "ExteriorCorner"
+length = 0.5
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -61,10 +51,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.20000002, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [4, 5]
+"values": [15, 16, 17, 18, 19]
 }
 
 [sub_resource type="Animation" id="2"]
@@ -81,7 +71,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [2, 3]
+"values": [5, 6]
 }
 
 [sub_resource type="Animation" id="3"]
@@ -100,10 +90,10 @@ tracks/0/keys = {
 "values": [1]
 }
 
-[sub_resource type="Animation" id="Animation_7vcwk"]
-resource_name = "IdleDiagonal"
-length = 0.1
-loop_mode = 2
+[sub_resource type="Animation" id="Animation_jyaun"]
+resource_name = "InteriorCorner"
+length = 0.3
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -111,10 +101,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.20000002),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [4]
+"values": [10, 11, 12]
 }
 
 [sub_resource type="Animation" id="Animation_8fv4h"]
@@ -131,18 +121,34 @@ tracks/0/keys = {
 "update": 1,
 "values": [1]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hpx8l"]
 _data = {
 &"Crawl": SubResource("Animation_qsmhk"),
-&"CrawlDiagonal": SubResource("Animation_fjd7u"),
+&"ExteriorCorner": SubResource("Animation_fjd7u"),
 &"Fly": SubResource("2"),
 &"Idle": SubResource("3"),
-&"IdleDiagonal": SubResource("Animation_7vcwk"),
+&"InteriorCorner": SubResource("Animation_jyaun"),
 &"RESET": SubResource("Animation_8fv4h")
 }
 
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_jyaun"]
+points = PackedVector2Array(-4.5, -6, 3.5, -14, 3.5, -6, 3.5, 6, -4.5, 6)
+
 [node name="BeetleCrawler" type="CharacterBody2D" unique_id=1359591718 groups=["Actors", "Enemies", "Entities"]]
+visibility_layer = 2
 collision_layer = 2
 collision_mask = 8
 floor_max_angle = 0.17453292
@@ -156,21 +162,6 @@ position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_7vcwk")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Crawl" type="CollisionShape2D" parent="." unique_id=1402698365]
-visible = false
-position = Vector2(0, -4.5)
-shape = SubResource("RectangleShape2D_7vcwk")
-disabled = true
-debug_color = Color(0, 0.588235, 0.705882, 0.235294)
-
-[node name="CrawlDiagonal" type="CollisionShape2D" parent="." unique_id=686662712]
-visible = false
-position = Vector2(-2, -6)
-rotation = -0.785397
-shape = SubResource("CapsuleShape2D_g4id4")
-disabled = true
-debug_color = Color(0, 0.588235, 0.705882, 0.235294)
-
 [node name="Fly" type="CollisionShape2D" parent="." unique_id=1435893146]
 visible = false
 position = Vector2(0, -8)
@@ -180,19 +171,13 @@ disabled = true
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=547326425]
+visible = false
 collision_layer = 131072
 collision_mask = 0
 
 [node name="Crawl" type="CollisionShape2D" parent="Hurtbox" unique_id=1512399654]
 position = Vector2(0, -7)
 shape = SubResource("1")
-debug_color = Color(0, 1, 0, 0.235294)
-
-[node name="CrawlDiagonal" type="CollisionShape2D" parent="Hurtbox" unique_id=1527454381]
-position = Vector2(-2, -6)
-rotation = 0.785397
-shape = SubResource("RectangleShape2D_8fv4h")
-disabled = true
 debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Fly" type="CollisionShape2D" parent="Hurtbox" unique_id=389128745]
@@ -211,13 +196,6 @@ position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_g4id4")
 debug_color = Color(1, 0, 0, 0.235294)
 
-[node name="CrawlDiagonal" type="CollisionShape2D" parent="Hitbox" unique_id=878142523]
-position = Vector2(-2, -6)
-rotation = 0.785397
-shape = SubResource("RectangleShape2D_c4c1t")
-disabled = true
-debug_color = Color(1, 0, 0, 0.235294)
-
 [node name="Fly" type="CollisionShape2D" parent="Hitbox" unique_id=304220547]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_t75oa")
@@ -225,10 +203,9 @@ disabled = true
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=342499573]
-position = Vector2(0, -8)
-texture = ExtResource("2_ey80y")
-hframes = 2
-vframes = 3
+texture = ExtResource("2_jyaun")
+hframes = 5
+vframes = 4
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1763209571]
@@ -239,70 +216,49 @@ z_index = 1000
 z_as_relative = false
 position = Vector2(0, -8)
 
-[node name="FloorCastL" type="RayCast2D" parent="CenteredPivot" unique_id=1836998465]
+[node name="FloorCast" type="RayCast2D" parent="CenteredPivot" unique_id=1836998465]
+unique_name_in_owner = true
 position = Vector2(-6, 7)
-enabled = false
 target_position = Vector2(0, 2)
 collision_mask = 8
 hit_from_inside = true
 
-[node name="FloorCastR" type="RayCast2D" parent="CenteredPivot" unique_id=1006335656]
-position = Vector2(6, 7)
-enabled = false
-target_position = Vector2(0, 2)
+[node name="InteriorCornerCast" type="RayCast2D" parent="CenteredPivot" unique_id=844464313]
+unique_name_in_owner = true
+position = Vector2(-5, -4)
+target_position = Vector2(-2, 0)
+collision_mask = 8
+
+[node name="InteriorCornerCast2" type="RayCast2D" parent="CenteredPivot" unique_id=1820230308]
+unique_name_in_owner = true
+position = Vector2(-5, 6)
+target_position = Vector2(-2, 0)
+collision_mask = 8
+
+[node name="ExteriorCornerCast" type="RayCast2D" parent="CenteredPivot" unique_id=2633938]
+unique_name_in_owner = true
+position = Vector2(-7, 20)
+target_position = Vector2(2, 0)
 collision_mask = 8
 hit_from_inside = true
 
-[node name="MovableEdgeL1" type="RayCast2D" parent="CenteredPivot" unique_id=2048299719]
-position = Vector2(-12, 8)
-enabled = false
-target_position = Vector2(0, 15)
+[node name="ExteriorCornerDetector" type="Area2D" parent="CenteredPivot" unique_id=1779077580]
+unique_name_in_owner = true
+position = Vector2(-10.5, 14)
+collision_layer = 0
 collision_mask = 8
-hit_from_inside = true
 
-[node name="MovableEdgeL2" type="RayCast2D" parent="CenteredPivot" unique_id=2633938]
-position = Vector2(-24, 20)
-enabled = false
-target_position = Vector2(19, 0)
-collision_mask = 8
-hit_from_inside = true
-
-[node name="MovableEdgeL3" type="RayCast2D" parent="CenteredPivot" unique_id=843513174]
-position = Vector2(-20, 8)
-enabled = false
-target_position = Vector2(0, 15)
-collision_mask = 8
-hit_from_inside = true
-
-[node name="MovableEdgeR1" type="RayCast2D" parent="CenteredPivot" unique_id=350123190]
-position = Vector2(12, 8)
-enabled = false
-target_position = Vector2(0, 15)
-collision_mask = 8
-hit_from_inside = true
-
-[node name="MovableEdgeR2" type="RayCast2D" parent="CenteredPivot" unique_id=1710496432]
-position = Vector2(24, 20)
-enabled = false
-target_position = Vector2(-19, 0)
-collision_mask = 8
-hit_from_inside = true
-
-[node name="MovableEdgeR3" type="RayCast2D" parent="CenteredPivot" unique_id=1702144698]
-position = Vector2(20, 8)
-enabled = false
-target_position = Vector2(0, 15)
-collision_mask = 8
-hit_from_inside = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CenteredPivot/ExteriorCornerDetector" unique_id=1211721085]
+shape = SubResource("ConvexPolygonShape2D_jyaun")
 
 [node name="PlayerCast" type="RayCast2D" parent="CenteredPivot" unique_id=1245707981]
 enabled = false
-target_position = Vector2(0, -100)
+target_position = Vector2(0, -512)
 collision_mask = 9
 
 [node name="WorldCast" type="RayCast2D" parent="CenteredPivot" unique_id=813832102]
 enabled = false
-target_position = Vector2(0, -200)
+target_position = Vector2(0, -512)
 collision_mask = 8
 
 [node name="LeftCast" type="RayCast2D" parent="." unique_id=795130591]
@@ -337,16 +293,23 @@ one_shot = true
 process_callback = 0
 one_shot = true
 
-[node name="MoveVector" parent="." unique_id=872564127 instance=ExtResource("3_80cd0")]
+[node name="CornerTimer" type="Timer" parent="." unique_id=627440402]
+process_callback = 0
+one_shot = true
+
+[node name="FlyVector" parent="." unique_id=872564127 instance=ExtResource("3_80cd0")]
+visible = false
 position = Vector2(0, -8)
-tag_name = "move"
+tag_name = "fly"
 direction = Vector2(-1, 0)
 movement_locked = true
 
-[node name="WallVector" parent="." unique_id=2126548652 instance=ExtResource("3_80cd0")]
+[node name="CrawlVector" parent="." unique_id=2126548652 instance=ExtResource("3_80cd0")]
+visible = false
 position = Vector2(0, -8)
 arrow_length = 24.0
-tag_name = "wall"
+tag_name = "crawl"
+snap_degrees = 90.0
 movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
 

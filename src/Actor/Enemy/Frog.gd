@@ -34,7 +34,7 @@ func _on_physics_process(_delta):
 
 ### STATES ###
 
-func do_targeting():
+func do_targeting(_delta):
 	if is_on_floor():
 		if $JumpTimer.time_left == 0.0:
 			change_state("jump")
@@ -47,7 +47,7 @@ func enter_jump(_last_state):
 	move_dir = Vector2(sign(target.get_global_position().x - global_position.x), -1)
 	look_dir = Vector2(move_dir.x, 0)
 
-func do_jump():
+func do_jump(_delta):
 	if is_on_floor():
 		move_dir = Vector2.ZERO
 		$AnimationPlayer.play("Stand")
