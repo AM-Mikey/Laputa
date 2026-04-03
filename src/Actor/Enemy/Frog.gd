@@ -16,14 +16,14 @@ var see_target: bool = false
 			1:
 				$TongueDetection.enabled = true
 		difficulty = val
-var croak_time = 1.0
+@export var croak_time = 1.0
 var move_dir = Vector2.ZERO
 var look_dir = Vector2.LEFT:
 	set(val):
 		$TongueDetection.target_position.x = (8.0 + tongue_range) * val.x
 		look_dir = val
 
-var tongue_damage: float = 2.0
+@export var tongue_damage: float = 2.0
 var tongue_range: float = 50.0:
 	set(val):
 		$TongueDetection.target_position.x = (8.0 + val) * look_dir.x
@@ -38,11 +38,10 @@ func setup():
 	damage_on_contact = 1
 	reward = 2
 	hp = 3
+	print(name, " ", $LookDir.direction)
+	look_dir = $LookDir.direction
 	tongue_range = abs($TongueRange.position.x)
 	set_floor_stop_on_slope_enabled(true)
-
-
-
 
 func _on_physics_process(_delta):
 	if disabled or dead or Engine.is_editor_hint(): return
@@ -58,13 +57,13 @@ func _on_physics_process(_delta):
 
 ### STATES ###
 
-func do_idle():
+func do_idle(_delta):
 	if (difficulty == 1 and is_on_floor() and tongue_detection_see_player() and $TongueTimer.is_stopped()):
 		change_state("tongue_attack")
 	elif (see_target):
 		change_state("targeting")
 
-func do_targeting():
+func do_targeting(_delta):
 	if is_on_floor():
 		if (difficulty == 1 and tongue_detection_see_player() and $TongueTimer.is_stopped()):
 			change_state("tongue_attack")
@@ -111,7 +110,7 @@ func enter_tongue_attack(_prev_state):
 	tongue_attack_extend_tween.tween_property($Tongue/Collision, "position", Vector2(4.0 + tongue_range / 2.0, -4.0) * Vector2(look_dir.x, 1.0), tongue_time)
 	tongue_attack_extend_tween.tween_property($Tongue/WorldCollision, "target_position:x", (8.0 + tongue_range) * look_dir.x, tongue_time)
 
-func do_tongue_attack():
+func do_tongue_attack(_delta):
 	# Later on when there's proper sprite, remove all thing related to $Tongue/Sprite
 	$Tongue/Sprite.polygon = from_rectangle_to_polygon(Rect2($Tongue/Collision.position - $Tongue/Collision.shape.size / 2.0, $Tongue/Collision.shape.size))
 
@@ -143,7 +142,7 @@ func enter_tongue_attack_retract(prev_state):
 	else:
 		change_state("idle")
 
-func do_tongue_attack_retract():
+func do_tongue_attack_retract(_delta):
 	# Later on when there's proper sprite, remove this
 	$Tongue/Sprite.polygon = from_rectangle_to_polygon(Rect2($Tongue/Collision.position - $Tongue/Collision.shape.size / 2.0, $Tongue/Collision.shape.size))
 

@@ -2,20 +2,22 @@
 
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="1_5yje6"]
 [ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_0lfk7"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_frgma"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_3qshh"]
 [ext_resource type="Resource" path="res://src/Background/iedge.tres" id="3_o6am6"]
 [ext_resource type="Texture2D" path="res://assets/Background/IslandEdge.png" id="4_qmdty"]
 [ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_pwpvv"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="6_fgnt1"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_frgma"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_wj5vw"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_fiogo"]
 [ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="9_3qshh"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="10_3qshh"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="9_arimv"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="10_ct86i"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="10_fiogo"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="11_frgma"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="12_fiogo"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="14_arimv"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="16_ct86i"]
+[ext_resource type="PackedScene" path="res://src/Editor/ToolVector.tscn" id="11_36t42"]
+[ext_resource type="Script" path="res://src/Editor/ToolVector.gd" id="12_55n25"]
+[ext_resource type="PackedScene" path="res://src/Editor/WaypointLocal.tscn" id="13_30c4u"]
+[ext_resource type="Script" path="res://src/Editor/WaypointLocal.gd" id="14_nbj4a"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="16_pdlvu"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="18_m2jyg"]
 
 [node name="FrogTestZone" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
@@ -31,7 +33,7 @@ offset_top = 1600.0
 offset_right = 4432.0
 offset_bottom = 2496.0
 mouse_filter = 2
-script = ExtResource("3_frgma")
+script = ExtResource("3_3qshh")
 background_resource = ExtResource("3_o6am6")
 texture = ExtResource("4_qmdty")
 layers = 5
@@ -95,306 +97,6 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=751148410]
 visibility_layer = 2
 
-[node name="Frog" type="Area2D" parent="Spawns" unique_id=921078984 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_fgnt1")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3320, 1840)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wj5vw")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog14" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_fgnt1")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3160, 1824)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wj5vw")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog15" type="Area2D" parent="Spawns" unique_id=2073792252 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_fgnt1")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3511.5347, 1840.0001)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wj5vw")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog16" type="Area2D" parent="Spawns" unique_id=89021845 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_fgnt1")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3672, 1840)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wj5vw")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog17" type="Area2D" parent="Spawns" unique_id=1714921751 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_fgnt1")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3772.1016, 1840.1278)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wj5vw")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog18" type="Area2D" parent="Spawns" unique_id=2007888805 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_fgnt1")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3897.1016, 1840.1278)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wj5vw")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog19" type="Area2D" parent="Spawns" unique_id=468393542 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_fgnt1")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3927.4463, 1839.3337)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wj5vw")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog20" type="Area2D" parent="Spawns" unique_id=568611834 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_fgnt1")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(4056, 1840)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wj5vw")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog21" type="Area2D" parent="Spawns" unique_id=353093223 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_fgnt1")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3335.7527, 2015.6816)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wj5vw")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog22" type="Area2D" parent="Spawns" unique_id=222924202 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_fgnt1")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3512.0002, 2016)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wj5vw")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog23" type="Area2D" parent="Spawns" unique_id=1374003278 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_fgnt1")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3671.174, 2015.9897)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wj5vw")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog24" type="Area2D" parent="Spawns" unique_id=282476908 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_fgnt1")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3772.1018, 2016.1277)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wj5vw")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog25" type="Area2D" parent="Spawns" unique_id=374991300 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_fgnt1")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3897.1018, 2016.1277)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wj5vw")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog26" type="Area2D" parent="Spawns" unique_id=1627834214 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_fgnt1")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3928.0002, 2016)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wj5vw")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog27" type="Area2D" parent="Spawns" unique_id=1308761288 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_fgnt1")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(4056.0002, 2016)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wj5vw")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
 [node name="Water" type="MarginContainer" parent="Spawns" unique_id=1319993853 groups=["TriggerSpawns"] instance=ExtResource("7_frgma")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -405,7 +107,7 @@ offset_top = 1856.0
 offset_right = 4078.0
 offset_bottom = 2016.0
 mouse_filter = 2
-script = ExtResource("10_3qshh")
+script = ExtResource("8_fiogo")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20],
@@ -415,162 +117,579 @@ properties = {
 }
 size_is_default = false
 
-[node name="BreakBlock" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("11_frgma")]
+[node name="Frog" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(3360, 1824)
+position = Vector2(3352, 1840)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_fiogo")
-prop_path = "res://src/Prop/BreakBlock.tscn"
-properties = {
-"crush_enemies": [true, 1],
-"crush_players": [false, 1],
-"editor_hidden": [false, 1],
-"id": [&"BreakBlock", 4]
-}
-
-[node name="BreakBlock1" type="Area2D" parent="Spawns" unique_id=133563098 groups=["Entities", "PropSpawns"] instance=ExtResource("11_frgma")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3376, 1824)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_fiogo")
-prop_path = "res://src/Prop/BreakBlock.tscn"
-properties = {
-"crush_enemies": [true, 1],
-"crush_players": [false, 1],
-"editor_hidden": [false, 1],
-"id": [&"BreakBlock1", 4]
-}
-
-[node name="BreakBlock2" type="Area2D" parent="Spawns" unique_id=2023720480 groups=["Entities", "PropSpawns"] instance=ExtResource("11_frgma")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3376, 1808)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_fiogo")
-prop_path = "res://src/Prop/BreakBlock.tscn"
-properties = {
-"crush_enemies": [true, 1],
-"crush_players": [false, 1],
-"editor_hidden": [false, 1],
-"id": [&"BreakBlock2", 4]
-}
-
-[node name="BreakBlock3" type="Area2D" parent="Spawns" unique_id=1536971262 groups=["Entities", "PropSpawns"] instance=ExtResource("11_frgma")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3360, 1808)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_fiogo")
-prop_path = "res://src/Prop/BreakBlock.tscn"
-properties = {
-"crush_enemies": [true, 1],
-"crush_players": [false, 1],
-"editor_hidden": [false, 1],
-"id": [&"BreakBlock3", 4]
-}
-
-[node name="BreakBlock4" type="Area2D" parent="Spawns" unique_id=1288885318 groups=["Entities", "PropSpawns"] instance=ExtResource("11_frgma")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3360, 1808)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_fiogo")
-prop_path = "res://src/Prop/BreakBlock.tscn"
-properties = {
-"crush_enemies": [true, 1],
-"crush_players": [false, 1],
-"editor_hidden": [false, 1],
-"id": [&"BreakBlock4", 4]
-}
-
-[node name="BreakBlock5" type="Area2D" parent="Spawns" unique_id=1149146449 groups=["Entities", "PropSpawns"] instance=ExtResource("11_frgma")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3360, 1792)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_fiogo")
-prop_path = "res://src/Prop/BreakBlock.tscn"
-properties = {
-"crush_enemies": [true, 1],
-"crush_players": [false, 1],
-"editor_hidden": [false, 1],
-"id": [&"BreakBlock5", 4]
-}
-
-[node name="BreakBlock6" type="Area2D" parent="Spawns" unique_id=808505131 groups=["Entities", "PropSpawns"] instance=ExtResource("11_frgma")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3376, 1792)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_fiogo")
-prop_path = "res://src/Prop/BreakBlock.tscn"
-properties = {
-"crush_enemies": [true, 1],
-"crush_players": [false, 1],
-"editor_hidden": [false, 1],
-"id": [&"BreakBlock6", 4]
-}
-
-[node name="BreakBlock7" type="Area2D" parent="Spawns" unique_id=626399639 groups=["Entities", "PropSpawns"] instance=ExtResource("11_frgma")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3376, 1776)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_fiogo")
-prop_path = "res://src/Prop/BreakBlock.tscn"
-properties = {
-"crush_enemies": [true, 1],
-"crush_players": [false, 1],
-"editor_hidden": [false, 1],
-"id": [&"BreakBlock7", 4]
-}
-
-[node name="Billy" type="Area2D" parent="Spawns" unique_id=2093816347 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_fgnt1")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3432, 1680)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wj5vw")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
-"bullet_damage": [2, 2],
-"bullet_speed": [200, 2],
-"cooldown_time": [1, 2],
-"debug": [false, 1],
-"defend_time": [0.4, 3],
-"difficulty": [0, 2],
+"croak_time": [1.0, 3],
+"debug": [true, 1],
+"difficulty": [1, 2],
 "editor_hidden": [false, 1],
-"id": [&"Billy", 4],
-"idle_max_time": [5.0, 3],
-"lock_distance": [128, 2],
-"lock_tolerance": [16, 2],
-"look_dir": [Vector2(-1, 0), 5],
-"move_dir": [Vector2(-1, 0), 5],
-"speed": [Vector2(150, 350), 5],
-"walk_max_time": [10.0, 3],
+"id": [&"Frog", 4],
+"jump_delay": [3.0, 3],
+"speed": [Vector2(50, 100), 5],
+"tongue_damage": [2.0, 3],
 "water_gravity": [150.0, 3]
 }
+
+[node name="LookDir" type="Area2D" parent="Spawns/Frog" unique_id=872564127 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_55n25")
+tag_name = "LookDir"
+snap_degrees = 180.0
+
+[node name="TongueRange" type="Area2D" parent="Spawns/Frog" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_30c4u")]
+visibility_layer = 2
+position = Vector2(-56, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_nbj4a")
+tag_name = "TongueRange"
+
+[node name="Frog1" type="Area2D" parent="Spawns" unique_id=1639219223 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3512, 1840)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"croak_time": [1.0, 3],
+"debug": [true, 1],
+"difficulty": [1, 2],
+"editor_hidden": [false, 1],
+"id": [&"Frog1", 4],
+"jump_delay": [3.0, 3],
+"speed": [Vector2(50, 100), 5],
+"tongue_damage": [2.0, 3],
+"water_gravity": [150.0, 3]
+}
+
+[node name="LookDir" type="Area2D" parent="Spawns/Frog1" unique_id=2001102681 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_55n25")
+tag_name = "LookDir"
+snap_degrees = 180.0
+
+[node name="TongueRange" type="Area2D" parent="Spawns/Frog1" unique_id=2052437463 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_30c4u")]
+visibility_layer = 2
+position = Vector2(-50, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_nbj4a")
+tag_name = "TongueRange"
+
+[node name="Frog2" type="Area2D" parent="Spawns" unique_id=1641631304 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3672, 1840)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"croak_time": [1.0, 3],
+"debug": [true, 1],
+"difficulty": [1, 2],
+"editor_hidden": [false, 1],
+"id": [&"Frog2", 4],
+"jump_delay": [3.0, 3],
+"speed": [Vector2(50, 100), 5],
+"tongue_damage": [2.0, 3],
+"water_gravity": [150.0, 3]
+}
+
+[node name="LookDir" type="Area2D" parent="Spawns/Frog2" unique_id=886647941 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_55n25")
+tag_name = "LookDir"
+snap_degrees = 180.0
+
+[node name="TongueRange" type="Area2D" parent="Spawns/Frog2" unique_id=452553097 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_30c4u")]
+visibility_layer = 2
+position = Vector2(-50, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_nbj4a")
+tag_name = "TongueRange"
+
+[node name="Frog3" type="Area2D" parent="Spawns" unique_id=342318614 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3784, 1840)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"croak_time": [1.0, 3],
+"debug": [true, 1],
+"difficulty": [1, 2],
+"editor_hidden": [false, 1],
+"id": [&"Frog3", 4],
+"jump_delay": [3.0, 3],
+"speed": [Vector2(50, 100), 5],
+"tongue_damage": [2.0, 3],
+"water_gravity": [150.0, 3]
+}
+
+[node name="LookDir" type="Area2D" parent="Spawns/Frog3" unique_id=1102261005 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_55n25")
+tag_name = "LookDir"
+snap_degrees = 180.0
+
+[node name="TongueRange" type="Area2D" parent="Spawns/Frog3" unique_id=1281356789 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_30c4u")]
+visibility_layer = 2
+position = Vector2(-50, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_nbj4a")
+tag_name = "TongueRange"
+
+[node name="Frog4" type="Area2D" parent="Spawns" unique_id=926840855 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3896, 1840)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"croak_time": [1.0, 3],
+"debug": [true, 1],
+"difficulty": [1, 2],
+"editor_hidden": [false, 1],
+"id": [&"Frog4", 4],
+"jump_delay": [3.0, 3],
+"speed": [Vector2(50, 100), 5],
+"tongue_damage": [2.0, 3],
+"water_gravity": [150.0, 3]
+}
+
+[node name="LookDir" type="Area2D" parent="Spawns/Frog4" unique_id=262136502 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_55n25")
+tag_name = "LookDir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
+[node name="TongueRange" type="Area2D" parent="Spawns/Frog4" unique_id=101690954 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_30c4u")]
+visibility_layer = 2
+position = Vector2(-50, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_nbj4a")
+tag_name = "TongueRange"
+
+[node name="Frog5" type="Area2D" parent="Spawns" unique_id=862148111 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3928, 1840)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"croak_time": [1.0, 3],
+"debug": [true, 1],
+"difficulty": [1, 2],
+"editor_hidden": [false, 1],
+"id": [&"Frog5", 4],
+"jump_delay": [3.0, 3],
+"speed": [Vector2(50, 100), 5],
+"tongue_damage": [2.0, 3],
+"water_gravity": [150.0, 3]
+}
+
+[node name="LookDir" type="Area2D" parent="Spawns/Frog5" unique_id=1302803394 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_55n25")
+tag_name = "LookDir"
+snap_degrees = 180.0
+
+[node name="TongueRange" type="Area2D" parent="Spawns/Frog5" unique_id=1463177755 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_30c4u")]
+visibility_layer = 2
+position = Vector2(-50, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_nbj4a")
+tag_name = "TongueRange"
+
+[node name="Frog6" type="Area2D" parent="Spawns" unique_id=100613575 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(4056, 1840)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"croak_time": [1.0, 3],
+"debug": [true, 1],
+"difficulty": [1, 2],
+"editor_hidden": [false, 1],
+"id": [&"Frog6", 4],
+"jump_delay": [3.0, 3],
+"speed": [Vector2(50, 100), 5],
+"tongue_damage": [2.0, 3],
+"water_gravity": [150.0, 3]
+}
+
+[node name="LookDir" type="Area2D" parent="Spawns/Frog6" unique_id=1252074900 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_55n25")
+tag_name = "LookDir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
+[node name="TongueRange" type="Area2D" parent="Spawns/Frog6" unique_id=1642482081 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_30c4u")]
+visibility_layer = 2
+position = Vector2(-50, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_nbj4a")
+tag_name = "TongueRange"
+
+[node name="Frog7" type="Area2D" parent="Spawns" unique_id=133604365 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3352, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"croak_time": [1.0, 3],
+"debug": [true, 1],
+"difficulty": [1, 2],
+"editor_hidden": [false, 1],
+"id": [&"Frog7", 4],
+"jump_delay": [3.0, 3],
+"speed": [Vector2(50, 100), 5],
+"tongue_damage": [2.0, 3],
+"water_gravity": [150.0, 3]
+}
+
+[node name="LookDir" type="Area2D" parent="Spawns/Frog7" unique_id=329091944 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_55n25")
+tag_name = "LookDir"
+snap_degrees = 180.0
+
+[node name="TongueRange" type="Area2D" parent="Spawns/Frog7" unique_id=1303176333 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_30c4u")]
+visibility_layer = 2
+position = Vector2(-50, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_nbj4a")
+tag_name = "TongueRange"
+
+[node name="Frog8" type="Area2D" parent="Spawns" unique_id=363666015 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3512, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"croak_time": [1.0, 3],
+"debug": [true, 1],
+"difficulty": [1, 2],
+"editor_hidden": [false, 1],
+"id": [&"Frog8", 4],
+"jump_delay": [3.0, 3],
+"speed": [Vector2(50, 100), 5],
+"tongue_damage": [2.0, 3],
+"water_gravity": [150.0, 3]
+}
+
+[node name="LookDir" type="Area2D" parent="Spawns/Frog8" unique_id=178807671 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_55n25")
+tag_name = "LookDir"
+snap_degrees = 180.0
+
+[node name="TongueRange" type="Area2D" parent="Spawns/Frog8" unique_id=121436602 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_30c4u")]
+visibility_layer = 2
+position = Vector2(-50, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_nbj4a")
+tag_name = "TongueRange"
+
+[node name="Frog9" type="Area2D" parent="Spawns" unique_id=981952933 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3672, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"croak_time": [1.0, 3],
+"debug": [true, 1],
+"difficulty": [1, 2],
+"editor_hidden": [false, 1],
+"id": [&"Frog9", 4],
+"jump_delay": [3.0, 3],
+"speed": [Vector2(50, 100), 5],
+"tongue_damage": [2.0, 3],
+"water_gravity": [150.0, 3]
+}
+
+[node name="LookDir" type="Area2D" parent="Spawns/Frog9" unique_id=1681768123 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_55n25")
+tag_name = "LookDir"
+snap_degrees = 180.0
+
+[node name="TongueRange" type="Area2D" parent="Spawns/Frog9" unique_id=204862329 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_30c4u")]
+visibility_layer = 2
+position = Vector2(-50, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_nbj4a")
+tag_name = "TongueRange"
+
+[node name="Frog10" type="Area2D" parent="Spawns" unique_id=1028628630 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3784, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"croak_time": [1.0, 3],
+"debug": [true, 1],
+"difficulty": [1, 2],
+"editor_hidden": [false, 1],
+"id": [&"Frog10", 4],
+"jump_delay": [3.0, 3],
+"speed": [Vector2(50, 100), 5],
+"tongue_damage": [2.0, 3],
+"water_gravity": [150.0, 3]
+}
+
+[node name="LookDir" type="Area2D" parent="Spawns/Frog10" unique_id=1389115665 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_55n25")
+tag_name = "LookDir"
+snap_degrees = 180.0
+
+[node name="TongueRange" type="Area2D" parent="Spawns/Frog10" unique_id=1150237393 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_30c4u")]
+visibility_layer = 2
+position = Vector2(-50, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_nbj4a")
+tag_name = "TongueRange"
+
+[node name="Frog11" type="Area2D" parent="Spawns" unique_id=633080833 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3896, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"croak_time": [1.0, 3],
+"debug": [true, 1],
+"difficulty": [1, 2],
+"editor_hidden": [false, 1],
+"id": [&"Frog11", 4],
+"jump_delay": [3.0, 3],
+"speed": [Vector2(50, 100), 5],
+"tongue_damage": [2.0, 3],
+"water_gravity": [150.0, 3]
+}
+
+[node name="LookDir" type="Area2D" parent="Spawns/Frog11" unique_id=1399471453 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_55n25")
+tag_name = "LookDir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
+
+[node name="TongueRange" type="Area2D" parent="Spawns/Frog11" unique_id=25458474 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_30c4u")]
+visibility_layer = 2
+position = Vector2(-50, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_nbj4a")
+tag_name = "TongueRange"
+
+[node name="Frog12" type="Area2D" parent="Spawns" unique_id=683413834 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(4056, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"croak_time": [1.0, 3],
+"debug": [true, 1],
+"difficulty": [1, 2],
+"editor_hidden": [false, 1],
+"id": [&"Frog12", 4],
+"jump_delay": [3.0, 3],
+"speed": [Vector2(50, 100), 5],
+"tongue_damage": [2.0, 3],
+"water_gravity": [150.0, 3]
+}
+
+[node name="LookDir" type="Area2D" parent="Spawns/Frog12" unique_id=1525799738 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_55n25")
+tag_name = "LookDir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
+
+[node name="TongueRange" type="Area2D" parent="Spawns/Frog12" unique_id=1621775471 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_30c4u")]
+visibility_layer = 2
+position = Vector2(-88, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_nbj4a")
+tag_name = "TongueRange"
+
+[node name="Frog13" type="Area2D" parent="Spawns" unique_id=784864917 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3928, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"croak_time": [1.0, 3],
+"debug": [true, 1],
+"difficulty": [1, 2],
+"editor_hidden": [false, 1],
+"id": [&"Frog13", 4],
+"jump_delay": [3.0, 3],
+"speed": [Vector2(50, 100), 5],
+"tongue_damage": [2.0, 3],
+"water_gravity": [150.0, 3]
+}
+
+[node name="LookDir" type="Area2D" parent="Spawns/Frog13" unique_id=1883495208 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_55n25")
+tag_name = "LookDir"
+snap_degrees = 180.0
+
+[node name="TongueRange" type="Area2D" parent="Spawns/Frog13" unique_id=687801394 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_30c4u")]
+visibility_layer = 2
+position = Vector2(-50, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_nbj4a")
+tag_name = "TongueRange"
+
+[node name="Frog14" type="Area2D" parent="Spawns" unique_id=1600066713 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3128, 1840)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"croak_time": [1.0, 3],
+"debug": [true, 1],
+"difficulty": [0, 2],
+"editor_hidden": [false, 1],
+"id": [&"Frog14", 4],
+"jump_delay": [3.0, 3],
+"speed": [Vector2(50, 100), 5],
+"tongue_damage": [2.0, 3],
+"water_gravity": [150.0, 3]
+}
+
+[node name="LookDir" type="Area2D" parent="Spawns/Frog14" unique_id=2032088198 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_55n25")
+tag_name = "LookDir"
+snap_degrees = 180.0
+
+[node name="TongueRange" type="Area2D" parent="Spawns/Frog14" unique_id=1208945665 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_30c4u")]
+visibility_layer = 2
+position = Vector2(-50, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_nbj4a")
+tag_name = "TongueRange"
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1729474890]
 visibility_layer = 2
@@ -581,11 +700,11 @@ z_index = 999
 position = Vector2(3008, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_arimv")
+script = ExtResource("16_pdlvu")
 
 [node name="SpawnPoint" type="Area2D" parent="." unique_id=1710023778 groups=["SpawnPoints"] instance=ExtResource("10_fiogo")]
 visibility_layer = 2
 position = Vector2(3415.5159, 1823.8131)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_ct86i")
+script = ExtResource("18_m2jyg")
