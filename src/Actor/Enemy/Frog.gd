@@ -37,7 +37,7 @@ func setup():
 	damage_on_contact = 1
 	reward = 2
 	hp = 3
-	tongue_range = tongue_range
+	tongue_range = abs($TongueRange.position.x)
 	set_floor_stop_on_slope_enabled(true)
 
 

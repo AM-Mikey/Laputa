@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b80mj2pbqh664" path="res://src/Actor/Enemy/Frog.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cimkcsmiyj0d8" path="res://assets/Actor/Enemy/Frog.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/WaypointLocal.tscn" id="3_ih0x2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qm1p1"]
 radius = 7.0
@@ -205,6 +206,9 @@ position = Vector2(0, -4)
 enabled = false
 target_position = Vector2(-50, 0)
 collision_mask = 265
+
+[node name="TongueRange" parent="." unique_id=1432238783 instance=ExtResource("3_ih0x2")]
+position = Vector2(-50, 0)
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
