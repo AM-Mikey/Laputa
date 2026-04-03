@@ -8,6 +8,8 @@ size = Vector2(16, 16)
 [node name="Water" type="Area2D" unique_id=1352829104 groups=["Triggers"]]
 collision_layer = 1048576
 collision_mask = 7315
+gravity_space_override = 1
+gravity = 225.0
 script = ExtResource("1")
 color = Color(0, 0, 0.701961, 1)
 
