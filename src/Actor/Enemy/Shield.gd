@@ -1,5 +1,7 @@
 extends Enemy
 
+const ICON = preload("res://assets/Actor/Enemy/ShieldIcon.png")
+
 @export var move_dir = Vector2.LEFT
 @export var wait_max_time = 5.0
 @export var walk_max_time = 10.0

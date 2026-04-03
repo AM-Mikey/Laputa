@@ -70,7 +70,7 @@ func enable():
 func _physics_process(delta):
 	if disabled or dead: return
 	if state != "":
-		do_state()
+		do_state(delta)
 	if has_node("StateLabel"):
 		get_node("StateLabel").text = state
 	_on_physics_process(delta)
@@ -108,11 +108,11 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_frict
 
 ### STATES ###
 
-func do_state():
+func do_state(delta):
 	if disabled: return
 	var do_method = "do_" + state
 	if has_method(do_method):
-		call(do_method)
+		call(do_method, delta)
 	#else: printerr("ERROR: Enemy: " + name + " is missing state method with name: " + do_method)
 
 func change_state(new):

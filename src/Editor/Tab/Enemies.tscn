@@ -1,10 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnho1sw0qp562"]
+[gd_scene format=3 uid="uid://cnho1sw0qp562"]
 
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1"]
 [ext_resource type="Script" uid="uid://btnfsr2mmrwpi" path="res://src/Editor/Tab/Enemies.gd" id="2"]
 
-
-[node name="Enemies" type="MarginContainer"]
+[node name="Enemies" type="MarginContainer" unique_id=315182994]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,10 +13,10 @@ mouse_filter = 0
 theme = ExtResource("1")
 script = ExtResource("2")
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="." unique_id=799982439]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBox"]
+[node name="Label" type="Label" parent="VBox" unique_id=97230623]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_vertical = 0
@@ -25,18 +24,18 @@ theme_override_colors/font_color = Color(0.878431, 0.784314, 0.345098, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "Enemies"
 
-[node name="Margin" type="MarginContainer" parent="VBox"]
+[node name="Margin" type="MarginContainer" parent="VBox" unique_id=202482048]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Panel" type="Panel" parent="VBox/Margin"]
+[node name="Panel" type="Panel" parent="VBox/Margin" unique_id=1491945003]
 layout_mode = 2
 
-[node name="Scroll" type="ScrollContainer" parent="VBox/Margin"]
+[node name="Scroll" type="ScrollContainer" parent="VBox/Margin" unique_id=722525059]
 layout_mode = 2
 
-[node name="Buttons" type="GridContainer" parent="VBox/Margin/Scroll"]
+[node name="Buttons" type="GridContainer" parent="VBox/Margin/Scroll" unique_id=1480566803]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 2
+columns = 4

@@ -1,9 +1,11 @@
 extends Enemy
 
+const ICON = preload("res://assets/Actor/Enemy/TrenchieIcon.png")
+const BULLET = preload("res://src/Bullet/Enemy/Laser.tscn")
+
 @export var look_dir: Vector2 = Vector2.LEFT
 var move_dir: Vector2
 
-const BULLET = preload("res://src/Bullet/Enemy/Laser.tscn")
 @export var projectile_speed: int = 120
 @export var height_tolerance = 7
 @export var cooldown_time = 1

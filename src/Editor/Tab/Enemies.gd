@@ -22,7 +22,13 @@ func setup_enemies():
 			var enemy_button = ENEMY_BUTTON.instantiate()
 			enemy_button.enemy_path = e
 			enemy_button.enemy_name = enemy.name
-			enemy_button.enemy_sprite = enemy.get_node("Sprite2D").texture
+			enemy_button.enemy_icon = enemy.ICON
+			if "difficulty" in enemy && "max_difficulty" in enemy:
+				enemy_button.enemy_difficulty = enemy.difficulty
+				enemy_button.enemy_max_difficulty = enemy.max_difficulty
+			else:
+				enemy_button.enemy_difficulty = 0
+				enemy_button.enemy_max_difficulty = 0
 			enemy_button.connect("enemy_changed", Callable(self, "_on_enemy_changed"))
 			if index == 0:
 				enemy_button.active = true

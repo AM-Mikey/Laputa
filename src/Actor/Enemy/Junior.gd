@@ -1,5 +1,6 @@
 extends Enemy
 
+const ICON = preload("res://assets/Actor/Enemy/JuniorIcon.png")
 const BULLET = preload("res://src/Bullet/Enemy/Carbine.tscn")
 
 var starting_state := "walk"

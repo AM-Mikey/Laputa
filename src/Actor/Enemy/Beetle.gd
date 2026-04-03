@@ -1,24 +1,26 @@
 extends Enemy
 
+const ICON = preload("res://assets/Actor/Enemy/BeetleIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/Beetle.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Beetle1.png")
-const TX_2 = preload("res://assets/Actor/Enemy/Beetle2.png")
-const TX_3 = preload("res://assets/Actor/Enemy/Beetle3.png")
 
 var move_dir = Vector2.LEFT
-@export var wall_dir = Vector2.LEFT
-@export var crawl_start_dir = Vector2.ZERO
-var doing_crawl_start_dir = false
-@export var difficulty:= 0
+var wall_dir = Vector2.LEFT:
+	set(val):
+		up_direction = -val
+		wall_dir = val
+@export var difficulty := 0
+var max_difficulty := 1
 var idle_time: float
 var fly_cooldown_time = 2.0
-var flip_cooldown_time = 1.0
 var fly_speed = Vector2(100, 100)
-var crawl_speed = Vector2(20, 20)
 var collision_shape_data: Dictionary
 
 func setup():
+	move_dir = $MoveVector.direction
+	wall_dir = move_dir * -1
 	gravity = 0
+	collision_shape_data = get_collision_shape_data()
 	match difficulty:
 		0:
 			hp = 2
@@ -32,32 +34,16 @@ func setup():
 			reward = 2
 			damage_on_contact = 2
 			$Sprite2D.texture = TX_1
+			$CenteredPivot/PlayerCast.enabled = true
+			$CenteredPivot/WorldCast.enabled = true
 			change_state("idlescan")
-		2:
-			hp = 3
-			reward = 4
-			damage_on_contact = 2
-			$Sprite2D.texture = TX_2
-			if crawl_start_dir != Vector2.ZERO:
-				doing_crawl_start_dir = true
-			change_state("platformcrawl")
-		#3:
-			#hp = 4
-			#reward = 5
-			#damage_on_contact = 4
-			#$Sprite2D.texture = TX_3
-	collision_shape_data = get_collision_shape_data()
 
 
 
 func _on_physics_process(_delta):
 	if disabled or dead or Engine.is_editor_hint(): return
-	#if not is_on_floor():
-		#move_dir.y = 0 #don't allow them to jump if they are midair
-
 	velocity = calc_velocity(move_dir, false) #no gravity
 	move_and_slide()
-	#animate()
 
 
 
@@ -102,26 +88,26 @@ func enter_idlescan(_last_state): #level 1
 	speed = Vector2.ZERO
 	$AnimationPlayer.play("Idle")
 
-func do_idlescan():
-	var collider
-	match wall_dir:
-		Vector2.LEFT:
-			collider = $PlayerRightCast.get_collider()
-		Vector2.RIGHT:
-			collider = $PlayerLeftCast.get_collider()
-		Vector2.UP:
-			collider = $PlayerDownCast.get_collider()
-		Vector2.DOWN:
-			collider = $PlayerUpCast.get_collider()
+func do_idlescan(_delta):
+	var player_collider = $CenteredPivot/PlayerCast.get_collider()
+	var world_collider = $CenteredPivot/WorldCast.get_collider()
 
-	if collider:
-		if collider is TileMapLayer:
+	if player_collider and world_collider:
+		if player_collider is TileMapLayer || player_collider.get_collision_layer_value(4): #for when it hits world before player
 			return
 		if $FlyCooldown.is_stopped():
-			change_state("fly")
-			return
+			if world_cast_check():
+				change_state("fly")
+				return
 
 func enter_fly(_last_state):
+	if (!pc or pc.dead): # In case the player die
+		match difficulty:
+			0:
+				change_state("idle")
+			_:
+				change_state("idlescan")
+		return
 	$FlyCooldown.start(fly_cooldown_time)
 	match move_dir.x:
 		-1.0: $Sprite2D.flip_h = false
@@ -132,15 +118,19 @@ func enter_fly(_last_state):
 	speed = fly_speed
 	$AnimationPlayer.play("Fly")
 
-func do_fly():
+func do_fly(_delta):
 	var collider
-	match move_dir:
-		Vector2.LEFT: collider = $LeftCast.get_collider()
-		Vector2.RIGHT: collider = $RightCast.get_collider()
-		Vector2.UP: collider = $UpCast.get_collider()
-		Vector2.DOWN: collider = $DownCast.get_collider()
+	if move_dir.dot(Vector2.LEFT) > 0.9: #close to Vector2.Left
+		collider = $LeftCast.get_collider()
+	elif move_dir.dot(Vector2.RIGHT) > 0.9:
+		collider = $RightCast.get_collider()
+	elif move_dir.dot(Vector2.UP) > 0.9:
+		collider = $UpCast.get_collider()
+	elif move_dir.dot(Vector2.DOWN) > 0.9:
+		collider = $DownCast.get_collider()
 
 	if collider:
+		move_and_collide(move_dir * 2)
 		match difficulty:
 			0:
 				wall_dir *= -1
@@ -148,131 +138,26 @@ func do_fly():
 			1:
 				wall_dir *= -1
 				change_state("idlescan")
-			2:
-				wall_dir *= -1 #wall_dir = move_dir * -1
-				#var random_sign = 1 - 2 * (randi() % 2) #random direction after land
-				#move_dir = wall_dir.rotated(deg_to_rad(90 * random_sign))
-				change_state("platformcrawl")
-				return
 
-func enter_platformcrawl(_last_state): #level 2
-	if not doing_crawl_start_dir:
-		var random_sign_float: float = 1 - 2 * (randi() % 2)
-		if wall_dir == Vector2.LEFT or wall_dir == Vector2.RIGHT:
-			move_dir = Vector2(0, random_sign_float)
-		if wall_dir == Vector2.UP or wall_dir == Vector2.DOWN:
-			move_dir = Vector2(random_sign_float, 0)
-	else:
-		move_dir = crawl_start_dir
-		doing_crawl_start_dir = false #turn off after we're done
-	set_collision_shapes()
-	get_crawl_sprite()
-	speed = crawl_speed
+### HELPER ###
 
-func do_platformcrawl():
-	var wall_collider
-	var edge_collider
-	var player_collider
-	var world_collider
+func world_cast_check() -> bool:
+	var world_cast = $CenteredPivot/WorldCast
+	if not world_cast.is_colliding():
+		printerr("ERROR: No opposite wall for beetle.")
+		return false
 
+	var normal = world_cast.get_collision_normal()
+	var expected = wall_dir
+	var is_valid = normal.dot(expected) > 0.9
 
-	match move_dir:
-		Vector2.LEFT:
-			wall_collider = $LeftCast.get_collider()
-		Vector2.RIGHT:
-			wall_collider = $RightCast.get_collider()
-		Vector2.UP:
-			wall_collider = $UpCast.get_collider()
-		Vector2.DOWN:
-			wall_collider = $DownCast.get_collider()
+	if not is_valid:
+		printerr(
+			"ERROR: Opposite wall for beetle with normal %s does not match expected %s."
+			% [normal, expected]
+		)
 
-	match wall_dir:
-		Vector2.LEFT:
-			if move_dir == Vector2.UP:
-				edge_collider = $LeftCastU.get_collider()
-			elif move_dir == Vector2.DOWN:
-				edge_collider = $LeftCastD.get_collider()
-			player_collider = $PlayerRightCast.get_collider()
-			world_collider = $WorldRightCast.get_collider()
-		Vector2.RIGHT:
-			if move_dir == Vector2.UP:
-				edge_collider = $RightCastU.get_collider()
-			elif move_dir == Vector2.DOWN:
-				edge_collider = $RightCastD.get_collider()
-			player_collider = $PlayerLeftCast.get_collider()
-			world_collider = $WorldLeftCast.get_collider()
-		Vector2.UP:
-			if move_dir == Vector2.LEFT:
-				edge_collider = $UpCastL.get_collider()
-			elif move_dir == Vector2.RIGHT:
-				edge_collider = $UpCastR.get_collider()
-			player_collider = $PlayerDownCast.get_collider()
-			world_collider = $WorldDownCast.get_collider()
-		Vector2.DOWN:
-			if move_dir == Vector2.LEFT:
-				edge_collider = $DownCastL.get_collider()
-			elif move_dir == Vector2.RIGHT:
-				edge_collider = $DownCastR.get_collider()
-			player_collider = $PlayerUpCast.get_collider()
-			world_collider = $WorldUpCast.get_collider()
-
-	if wall_collider: #flip from wall
-		#print("flipwall")
-		if $FlipCooldown.is_stopped():
-			$FlipCooldown.start(flip_cooldown_time)
-			move_dir *= -1
-			get_crawl_sprite()
-	elif !edge_collider: #flip from ledge
-		#print("flipedge")
-		if $FlipCooldown.is_stopped():
-			speed = crawl_speed
-			$FlipCooldown.start(flip_cooldown_time)
-			move_dir *= -1
-			get_crawl_sprite()
-		else:
-			speed = Vector2.ZERO #prevent from walking off edge
-	if player_collider:
-		if player_collider is TileMapLayer:
-			return
-		if world_collider:
-			#print("gotplayer")
-			if $FlyCooldown.is_stopped():
-				move_dir = wall_dir * -1
-				change_state("fly")
-				return
-
-
-
-### HELPERS ###
-
-func get_crawl_sprite(): #TODO fix
-	$AnimationPlayer.play("Crawl")
-	match wall_dir:
-		Vector2.LEFT:
-			$Sprite2D.rotation_degrees = 90
-			if move_dir == Vector2.UP:
-				$Sprite2D.flip_h = false
-			elif move_dir == Vector2.DOWN:
-				$Sprite2D.flip_h = true
-		Vector2.RIGHT:
-			$Sprite2D.rotation_degrees = 270
-			if move_dir == Vector2.UP:
-				$Sprite2D.flip_h = true
-			elif move_dir == Vector2.DOWN:
-				$Sprite2D.flip_h = false
-		Vector2.UP:
-			$Sprite2D.rotation_degrees = 180
-			if move_dir == Vector2.LEFT:
-				$Sprite2D.flip_h = true
-			elif move_dir == Vector2.RIGHT:
-				$Sprite2D.flip_h = false
-		Vector2.DOWN:
-			$Sprite2D.rotation_degrees = 0
-			if move_dir == Vector2.LEFT:
-				$Sprite2D.flip_h = false
-			elif move_dir == Vector2.RIGHT:
-				$Sprite2D.flip_h = true
-
+	return is_valid
 
 func get_collision_shape_data() -> Dictionary:
 	var out = {}
@@ -290,31 +175,36 @@ func get_collision_shape_data() -> Dictionary:
 
 func set_collision_shapes():
 	for key in collision_shape_data.keys():
-		get_node(key).visible = false
 		get_node(key).disabled = true
+		get_node(key).visible = false
 
 	var new_shape_rot = -90 + rad_to_deg(wall_dir.angle()) #90 * move_dir.x
 
+	$CenteredPivot.rotation_degrees = new_shape_rot
+
+	var target_collision_name: String = ""
 	match state:
-		"idle", "crawl", "platformcrawl", "idlescan":
+		"idle", "idlescan":
+			target_collision_name = "cling"
 			for i in collision_shape_data:
-				var is_crawl = collision_shape_data[i][0] == "crawl"
-				get_node(i).disabled = !is_crawl
-				get_node(i).visible = is_crawl
-				if is_crawl:
+				if collision_shape_data[i][0] == "cling":
+					var curr_collision_node: CollisionShape2D = get_node(i)
 					var base_rot = collision_shape_data[i][1]
 					var base_pos = collision_shape_data[i][2]
-					rotate_collision_shape(get_node(i), new_shape_rot, base_rot, base_pos)
-		"crawldiagonal":
-			for i in collision_shape_data:
-				var is_crawldiagonal = collision_shape_data[i][0] == "crawldiagonal"
-				get_node(i).disabled = !is_crawldiagonal
-				get_node(i).visible = is_crawldiagonal
+					rotate_collision_shape(curr_collision_node, new_shape_rot, base_rot, base_pos)
 		"fly":
-			for i in collision_shape_data:
-				var is_fly = collision_shape_data[i][0] == "fly"
-				get_node(i).disabled = !is_fly
-				get_node(i).visible = is_fly
+			target_collision_name = "fly"
+
+	for i in collision_shape_data:
+		var curr_collision_node: CollisionShape2D = get_node(i)
+		if (collision_shape_data[i][0] == target_collision_name):
+			if (i == target_collision_name):
+				$CollisionShape2D.shape = curr_collision_node.shape
+				$CollisionShape2D.position = curr_collision_node.position
+				$CollisionShape2D.rotation = curr_collision_node.rotation
+			else:
+				curr_collision_node.disabled = false
+				curr_collision_node.visible = true
 
 
 func rotate_collision_shape(shape, deg, base_deg, base_pos):

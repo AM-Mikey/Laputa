@@ -1,7 +1,5 @@
 extends Area2D
 
-#var allow_spawn := true
-
 @export_file var actor_path
 @export var properties = {}
 
@@ -19,13 +17,7 @@ func _ready():
 		add_to_group("EnemySpawns")
 
 
-	#sprite
 	var actor = load(actor_path).instantiate()
-	$Sprite2D.texture = actor.get_node("Sprite2D").texture
-	$Sprite2D.hframes = actor.get_node("Sprite2D").hframes
-	$Sprite2D.vframes = actor.get_node("Sprite2D").vframes
-	$Sprite2D.frame = actor.get_node("Sprite2D").frame
-	$Sprite2D.position = actor.get_node("Sprite2D").position
 
 	#name
 	var index = 0
@@ -55,28 +47,37 @@ func _ready():
 		spawn()
 
 func initialize(): #first time set up properties
-	print("initialize")
+	#print("initialize")
 	var actor = load(actor_path).instantiate()
 	for p in actor.get_property_list():
 		if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
-			properties[p["name"]] = [actor.get(p["name"]), p["type"]]
+			if p["name"] == "difficulty":
+				pass #we set this when creating the actorspawn
+			else:
+				properties[p["name"]] = [actor.get(p["name"]), p["type"]]
 	properties["id"] = [name, TYPE_STRING]
+	set_sprite()
 
-	for ac in actor.get_children():
-		if ac.is_in_group("WaypointLocals"): #move to actor_spawn
+	for ac in actor.get_children(): #TODO: add these to props and to waypoints
+		if ac.is_in_group("WaypointLocals"):
 			if !get_if_actor_has_waypoint(ac):
 				actor.remove_child(ac)
 				add_child(ac)
 				ac.owner = w.current_level
-		if ac.is_in_group("WaypointGlobalSpawns"): #move to actor_spawn
+		if ac.is_in_group("WaypointGlobalSpawns"):
 			if !get_if_actor_has_waypoint(ac):
+				actor.remove_child(ac)
+				add_child(ac)
+				ac.owner = w.current_level
+		if ac.is_in_group("ToolVectors"):
+			if !get_if_actor_has_tool_vector(ac):
 				actor.remove_child(ac)
 				add_child(ac)
 				ac.owner = w.current_level
 	actor.free()
 
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
-	print("re initialize")
+	#print("re initialize")
 	var old_properties = properties
 	properties = {}
 	var actor = load(actor_path).instantiate()
@@ -86,19 +87,23 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 				properties[p["name"]] = old_properties[p["name"]]
 			else:
 				properties[p["name"]] = [actor.get(p["name"]), p["type"]]
+	set_sprite()
 
 	for ac in actor.get_children():
-		if ac.is_in_group("WaypointLocals"): #move to actor_spawn
+		if ac.is_in_group("WaypointLocals"):
 			if !get_if_actor_has_waypoint(ac):
+				actor.remove_child(ac)
+				add_child(ac)
+				ac.owner = w.current_level
+		if ac.is_in_group("ToolVectors"):
+			if !get_if_actor_has_tool_vector(ac):
 				actor.remove_child(ac)
 				add_child(ac)
 				ac.owner = w.current_level
 	actor.free()
 
 func spawn():
-	print("spawn")
-	#await get_tree().process_frame #wait to set allow_spawn
-	#if !allow_spawn: return
+	#print("spawn")
 	if actor_path == null:
 		printerr("ERROR: no actor chosen in ActorSpawn")
 		return
@@ -112,26 +117,47 @@ func spawn():
 	actor.global_position = global_position
 	await w.current_level.get_node("Actors").call_deferred("add_child", actor)
 
-	for ac in actor.get_children(): #clear old
-		if ac.is_in_group("WaypointLocals"):
+	for ac in actor.get_children(): #clear old from actor
+		if ac.is_in_group("WaypointLocals") || ac.is_in_group("ToolVectors"):
 			actor.remove_child(ac)
 		if ac.is_in_group("WaypointGlobalSpawns"): #turn off visibility
 			ac.visible = false
 
-	for c in get_children(): #add new
-		if c.is_in_group("WaypointLocals"):
+	for c in get_children(): #add new from spawn
+		if c.is_in_group("WaypointLocals") || c.is_in_group("ToolVectors"):
 			var copy = c.duplicate()
 			actor.add_child(copy)
 
+### HELPERS ###
+
+func set_sprite():
+	var actor = load(actor_path).instantiate()
+	if "difficulty" in actor:
+		var texture_const_string = "TX_%s" % properties["difficulty"][0]
+		$Sprite2D.texture = actor.get(texture_const_string)
+	else:
+		$Sprite2D.texture = actor.get_node("Sprite2D").texture
+	$Sprite2D.hframes = actor.get_node("Sprite2D").hframes
+	$Sprite2D.vframes = actor.get_node("Sprite2D").vframes
+	$Sprite2D.frame = actor.get_node("Sprite2D").frame
+	$Sprite2D.position = actor.get_node("Sprite2D").position
+
 ### GETTERS
 
-func get_if_actor_has_waypoint(actor_waypoint)-> bool:
+func get_if_actor_has_waypoint(actor_waypoint) -> bool:
 	var out = false
 	for c in get_children():
-		if c.is_in_group("WaypointLocals"):
+		if c.is_in_group("WaypointLocals"): #q: does this need to apply for global spawns as well?
 			if c.tag_name == actor_waypoint.tag_name:
 				out = true
 	return out
+
+func get_if_actor_has_tool_vector(actor_tool_vector) -> bool:
+	for c in get_children():
+		if c.is_in_group("ToolVectors"):
+			if c.tag_name == actor_tool_vector.tag_name:
+				return true
+	return false
 
 ### SIGNALS
 

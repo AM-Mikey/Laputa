@@ -1,6 +1,6 @@
 extends Area2D
 
-signal selected(waypoint_local, type)
+signal selected(vanishing_point, type)
 
 @onready var world = get_tree().get_root().get_node("World")
 

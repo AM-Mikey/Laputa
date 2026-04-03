@@ -285,7 +285,7 @@ properties = {
 [node name="Beetle" parent="Spawns" unique_id=663837822 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
 position = Vector2(1720, 1984)
-actor_path = "res://src/Actor/Enemy/Beetle.tscn"
+actor_path = "res://src/Actor/Enemy/BeetleDifficulty2.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "crawl_start_dir": [Vector2(0, 1), 5],
@@ -522,7 +522,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Waypoints" type="Node2D" parent="." unique_id=170593986]
+[node name="Waypoints" type="Node2D" parent="." unique_id=1140943479]
 
 [node name="VanishingPoint" parent="." unique_id=852042071 instance=ExtResource("7_mlr58")]
 visibility_layer = 2

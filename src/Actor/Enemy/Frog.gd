@@ -1,7 +1,8 @@
 extends Enemy
 
-var tx_toad = preload("res://assets/Actor/Enemy/Toad.png")
-var tx_frog = preload("res://assets/Actor/Enemy/Frog.png")
+const ICON = preload("res://assets/Actor/Enemy/FrogIcon.png")
+const TX_0 = preload("res://assets/Actor/Enemy/Frog.png")
+const TX_1 = preload("res://assets/Actor/Enemy/Frog1.png")
 
 var target
 
@@ -9,9 +10,8 @@ var target
 var croak_time = 1.0
 var move_dir = Vector2.ZERO
 var look_dir = Vector2.LEFT
-
-#enum Difficulty {easy, normal, hard}
-#export(Difficulty) var difficulty = Difficulty.normal setget _on_difficulty_changed
+@export var difficulty := 0
+var max_difficulty := 1
 
 func setup():
 	change_state("idle")
@@ -34,7 +34,7 @@ func _on_physics_process(_delta):
 
 ### STATES ###
 
-func do_targeting():
+func do_targeting(_delta):
 	if is_on_floor():
 		if $JumpTimer.time_left == 0.0:
 			change_state("jump")
@@ -47,7 +47,7 @@ func enter_jump(_last_state):
 	move_dir = Vector2(sign(target.get_global_position().x - global_position.x), -1)
 	look_dir = Vector2(move_dir.x, 0)
 
-func do_jump():
+func do_jump(_delta):
 	if is_on_floor():
 		move_dir = Vector2.ZERO
 		$AnimationPlayer.play("Stand")

@@ -1,60 +1,59 @@
-[gd_scene load_steps=5 format=3 uid="uid://df16lgeg7a3qm"]
+[gd_scene format=3 uid="uid://df16lgeg7a3qm"]
 
 [ext_resource type="StyleBox" uid="uid://c53b3p1k47jdu" path="res://src/UI/StyleBox/SteelRound.tres" id="1"]
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="2"]
 [ext_resource type="Script" uid="uid://hmpjupmf4gfg" path="res://src/Editor/Button/EnemyButton.gd" id="3"]
-[ext_resource type="Texture2D" uid="uid://bufns1cnhgyw1" path="res://assets/Actor/Enemy/Bat.png" id="4_7l42t"]
+[ext_resource type="Texture2D" uid="uid://dd3bghcv5usn5" path="res://assets/Actor/Enemy/BatIcon.png" id="4_tea74"]
 
-[node name="EnemyButton" type="MarginContainer" groups=["EnemyButtons"]]
+[node name="EnemyButton" type="MarginContainer" unique_id=35287136 groups=["EnemyButtons"]]
+custom_minimum_size = Vector2(40, 0)
 offset_right = 44.0
 offset_bottom = 50.0
 theme = ExtResource("2")
 script = ExtResource("3")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1579865373]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="PanelActive" type="Panel" parent="."]
+[node name="PanelActive" type="Panel" parent="." unique_id=827601430]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1")
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="." unique_id=217173955]
 layout_mode = 2
 
-[node name="HBox" type="HBoxContainer" parent="VBox"]
+[node name="HBox" type="HBoxContainer" parent="VBox" unique_id=987408981]
 layout_mode = 2
 
-[node name="Spacer" type="Control" parent="VBox/HBox"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="VBox/HBox"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 6
-text = "Enemy"
-
-[node name="Spacer2" type="Control" parent="VBox/HBox"]
+[node name="Spacer" type="Control" parent="VBox/HBox" unique_id=1465676070]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBox"]
+[node name="Label" type="Label" parent="VBox/HBox" unique_id=469107422]
 unique_name_in_owner = true
-clip_contents = true
-custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ornithopter"
+text_overrun_behavior = 1
+
+[node name="Spacer2" type="Control" parent="VBox/HBox" unique_id=249791278]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBox" unique_id=1070421252]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-texture = ExtResource("4_7l42t")
-expand_mode = 1
-stretch_mode = 1
+texture = ExtResource("4_tea74")
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=1540029312]
 layout_mode = 2
+button_mask = 3
 flat = true
 vertical_icon_alignment = 0
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="gui_input" from="Button" to="." method="_on_Button_gui_input"]

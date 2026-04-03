@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm276v1acy6oc"
-path="res://.godot/imported/Cloud.png-82cf4ac667a60f440e49f450070d4a43.ctex"
+uid="uid://dvs3tvok44cex"
+path="res://.godot/imported/FishIcon.png-35a3d564c56e2f65766316ac8d1a6884.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Enemy/Cloud.png"
-dest_files=["res://.godot/imported/Cloud.png-82cf4ac667a60f440e49f450070d4a43.ctex"]
+source_file="res://assets/Actor/Enemy/FishIcon.png"
+dest_files=["res://.godot/imported/FishIcon.png-35a3d564c56e2f65766316ac8d1a6884.ctex"]
 
 [params]
 

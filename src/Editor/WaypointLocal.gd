@@ -1,6 +1,6 @@
 extends Area2D
 
-signal selected(vanishing_point, type)
+signal selected(waypoint_local, type)
 
 @export var tag_name: String
 @export var index: int = 0
@@ -10,7 +10,7 @@ var active_count = 0
 @onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
-	visible = w.debug_visible
+	visible = w.debug_visible or w.el.get_child_count() > 0
 
 ### SIGNALS
 

@@ -1,9 +1,11 @@
 extends Enemy
 
+const ICON = preload("res://assets/Actor/Enemy/SentryIcon.png")
+const HAIRBALL = preload("res://src/Bullet/Enemy/Hairball.tscn")
+
 @export var look_dir: Vector2 = Vector2.LEFT
 var move_dir: Vector2
 
-const HAIRBALL = preload("res://src/Bullet/Enemy/Hairball.tscn")
 
 @export var height_tolerance = 7
 @export var cooldown_time = 2.0

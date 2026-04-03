@@ -1,5 +1,6 @@
 extends Enemy
 
+const ICON = preload("res://assets/Actor/Enemy/StalagtiteIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/Stalagtite.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Stalagtite1.png")
 const TX_2 = preload("res://assets/Actor/Enemy/Stalagtite2.png")
@@ -7,12 +8,13 @@ const TX_2 = preload("res://assets/Actor/Enemy/Stalagtite2.png")
 var target: Node
 
 var move_dir = Vector2.ZERO
-@export var difficulty := 1
+@export var difficulty := 0
+var max_difficulty := 2
 
 var base_damage = 2
 var drop_damage: int
 var wait_time: float
-var ternminal_drop_velocity: float = 320.0
+var terminal_drop_velocity: float = 320.0
 
 func set_is_in_water(val):
 	if (state not in ["hang", "hangactive"]):
@@ -52,7 +54,7 @@ func _on_physics_process(_delta):
 		velocity = Vector2.ZERO
 	else:
 		velocity = calc_velocity(move_dir)
-	velocity.y = min(velocity.y, ternminal_drop_velocity)
+	velocity.y = min(velocity.y, terminal_drop_velocity)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
 
@@ -60,7 +62,7 @@ func _on_physics_process(_delta):
 func enter_hang(_last_state):
 	$AnimationPlayer.play("HangIdle")
 
-func do_hang():
+func do_hang(_delta):
 	var collider = $RayCast2D.get_collider()
 	if collider:
 		if collider is TileMapLayer: return
@@ -80,7 +82,7 @@ func enter_drop(_last_state):
 	hit_enemies_on_contact = true
 	damage_on_contact = drop_damage
 
-func do_drop():
+func do_drop(_delta):
 	if is_on_floor():
 		if difficulty == 0: #purple
 			change_state("stake")
@@ -122,7 +124,7 @@ func enter_run(_last_state):
 	$WallRight.enabled = true
 	$WallLeft.enabled = true
 
-func do_run():
+func do_run(_delta):
 	match move_dir:
 		Vector2.LEFT:
 			$Sprite2D.flip_h = false
