@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://yuqevorrxdj1" path="res://src/Actor/Enemy/BeetleCrawler.gd" id="1_jyaun"]
 [ext_resource type="Texture2D" uid="uid://bhhny2ymfaacp" path="res://assets/Actor/Enemy/BeetleCrawler.png" id="2_jyaun"]
-[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/ToolVector.tscn" id="3_80cd0"]
+[ext_resource type="PackedScene" path="res://src/Editor/ToolVector.tscn" id="3_80cd0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7vcwk"]
 size = Vector2(12, 9)
@@ -252,12 +252,10 @@ collision_mask = 8
 shape = SubResource("ConvexPolygonShape2D_jyaun")
 
 [node name="PlayerCast" type="RayCast2D" parent="CenteredPivot" unique_id=1245707981]
-enabled = false
 target_position = Vector2(0, -512)
 collision_mask = 9
 
 [node name="WorldCast" type="RayCast2D" parent="CenteredPivot" unique_id=813832102]
-enabled = false
 target_position = Vector2(0, -512)
 collision_mask = 8
 
