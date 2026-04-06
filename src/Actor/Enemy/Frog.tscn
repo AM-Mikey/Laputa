@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://b80mj2pbqh664" path="res://src/Actor/Enemy/Frog.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cimkcsmiyj0d8" path="res://assets/Actor/Enemy/Frog.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/WaypointLocal.tscn" id="3_ih0x2"]
+[ext_resource type="PackedScene" path="res://src/Editor/ToolVector.tscn" id="3_nvdu1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qm1p1"]
 radius = 7.0
@@ -97,13 +99,21 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_h82ma"]
+resource_name = "TongueAttack"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o6omx"]
 _data = {
 &"Croak": SubResource("3"),
 &"Fall": SubResource("5"),
 &"Rise": SubResource("7"),
-&"Stand": SubResource("9")
+&"Stand": SubResource("9"),
+&"TongueAttack": SubResource("Animation_h82ma")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ih0x2"]
+resource_local_to_scene = true
+size = Vector2(8, 4)
 
 [node name="Frog" type="CharacterBody2D" unique_id=1440636904 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
@@ -163,12 +173,55 @@ process_callback = 0
 wait_time = 3.0
 one_shot = true
 
+[node name="TongueTimer" type="Timer" parent="." unique_id=529912591]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
+
 [node name="CroakTimer" type="Timer" parent="." unique_id=360260981]
 process_callback = 0
 one_shot = true
+
+[node name="Tongue" type="Area2D" parent="." unique_id=1237732106]
+collision_layer = 0
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tongue" unique_id=13567573]
+position = Vector2(-4, -7)
+shape = SubResource("RectangleShape2D_ih0x2")
+disabled = true
+debug_color = Color(1, 1, 0.69803923, 0.41960785)
+
+[node name="Sprite" type="Polygon2D" parent="Tongue" unique_id=1938788440]
+z_index = -1
+color = Color(0.88235295, 0, 0, 1)
+
+[node name="WorldCast" type="RayCast2D" parent="Tongue" unique_id=1671657245]
+position = Vector2(0, -7)
+enabled = false
+target_position = Vector2(-20, 0)
+collision_mask = 264
+
+[node name="TongueDetection" type="RayCast2D" parent="." unique_id=62037362]
+position = Vector2(0, -7)
+enabled = false
+target_position = Vector2(-50, 0)
+collision_mask = 265
+
+[node name="LookVector" parent="." unique_id=872564127 instance=ExtResource("3_nvdu1")]
+position = Vector2(0, -7)
+tag_name = "look"
+snap_degrees = 180.0
+movement_locked = true
+
+[node name="TongueRange" parent="." unique_id=1432238783 instance=ExtResource("3_ih0x2")]
+position = Vector2(-50, -7)
+tag_name = "tongue_range"
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="CroakTimer" to="." method="_on_croak_timer_timeout"]
+[connection signal="area_entered" from="Tongue" to="." method="_on_Tongue_area_entered"]
