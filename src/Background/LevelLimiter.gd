@@ -24,6 +24,8 @@ var layer_animation_offset = {} #used for moving bgs
 @onready var w = get_tree().get_root().get_node("World")
 @onready var pb = w.get_node("ParallaxBackground")
 
+var a_star_grid: AStarGrid2D
+
 #func set_background_resouce(value): #note this goes through inspector on_changed code
 	#background_resource = value
 	#print("set background resource")
@@ -46,6 +48,7 @@ func setup():
 	setup_background_resource()
 	setup_layers()
 	update_layers()
+	setup_a_star()
 
 	if w.current_level.has_node("BlackBars"):
 		w.current_level.get_node("BlackBars").free()
@@ -126,9 +129,6 @@ func setup_layers():
 			layer_height_offsets[layer_index] = 0.0
 	update_layers()
 
-
-
-
 func update_layers(): #change so we center around the tile #texture_rect, mode = tile_mode
 	var vanishing_point = get_vanishing_point()
 	var texture_rect_example = pb.get_child(0).get_child(0)
@@ -187,6 +187,40 @@ func update_layers(): #change so we center around the tile #texture_rect, mode =
 		layer.motion_offset.y += layer_height_offsets[index]
 		layer_base_offset[index] = layer.motion_offset
 
+func setup_a_star():
+	a_star_grid = AStarGrid2D.new()
+
+	var tile_map = w.current_level.get_node("TileMap")
+	var used_region = Rect2(Vector2i(global_position / 16.0), Vector2i(size / 16.0) + Vector2i.ONE)
+
+	a_star_grid.region = used_region
+	a_star_grid.cell_size = Vector2(16, 16)
+	a_star_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
+	a_star_grid.offset = Vector2(8, 8)
+	a_star_grid.update()
+
+	#use this to destinguish which points are solid, based on collision
+	var tiles_with_collision = []
+	var source = tile_map.get_child(0).tile_set.get_source(0)
+	for column in source.texture_region_size.x:
+		for row in source.texture_region_size.y:
+			if source.get_tile_at_coords(Vector2i(column, row)) != Vector2i(-1, -1):
+				var tile_data = source.get_tile_data(Vector2i(column, row), 0)
+				if tile_data.get_collision_polygons_count(0) != 0: #there is collision on layer 0
+					tiles_with_collision.append(Vector2i(column, row))
+	for tile_map_layer: TileMapLayer in tile_map.get_children():
+		for cell in tile_map_layer.get_used_cells():
+			var tile = tile_map_layer.get_cell_atlas_coords(cell)
+			if tiles_with_collision.has(tile):
+
+				#var sprite = Sprite2D.new()
+				#sprite.texture = load("res://assets/Icon/EnemyIcon.png")
+				#sprite.position = (cell * 16) + Vector2i(8,8)
+				#sprite.z_index = 999
+				#w.add_child(sprite)
+
+				a_star_grid.set_point_solid(cell, true)
+				a_star_grid.update()
 
 
 ### GETTERS ###
