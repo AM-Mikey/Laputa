@@ -58,6 +58,16 @@ func _on_physics_process(_delta):
 	#if (state == "turn_edge"):
 		#velocity += wall_dir * 10.0
 
+	if state == "crawl":
+		# Prevent pixel gaps between the beetle and the terrain by making the beetle
+		# stick closer to the wall
+		var collision := move_and_collide(wall_dir * 5, true)
+		# The first move_and_collide doesn't move the body, instead it tests if
+		# the body *would* collide if moved
+		if collision != null:
+			if collision.get_travel().length() > 0.0001:
+				move_and_collide(wall_dir * 5)
+
 	move_and_slide()
 
 
