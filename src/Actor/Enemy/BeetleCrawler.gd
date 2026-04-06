@@ -20,7 +20,7 @@ var max_difficulty := 1
 
 var idle_time: float
 var flip_cooldown_time = 1.0
-var fly_cooldown_time = 2.0
+var fly_cooldown_time = 1.0
 var exterior_corner_time = 0.4
 var interior_corner_time = 0.3
 var fly_speed = Vector2(100, 100)
@@ -59,7 +59,6 @@ func _on_physics_process(_delta):
 
 ### STATES ###
 
-
 func enter_fly(_last_state):
 	if (!pc or pc.dead): # In case the player die
 		change_state("crawl")
@@ -75,30 +74,36 @@ func enter_fly(_last_state):
 	speed = fly_speed
 	$AnimationPlayer.play("Fly")
 
-func do_fly(_delta):
-	var collider
-	if move_dir.dot(Vector2.LEFT) > 0.9: #close to Vector2.Left
-		collider = $LeftCast.get_collider()
+func do_fly(_delta): ##TODO: some issue when landing or starting from a seam in the world geometry, check raycast normals to verify
+	var cast: RayCast2D = null
+	if move_dir.dot(Vector2.LEFT) > 0.9:
+		cast = $LeftCast
 	elif move_dir.dot(Vector2.RIGHT) > 0.9:
-		collider = $RightCast.get_collider()
+		cast = $RightCast
 	elif move_dir.dot(Vector2.UP) > 0.9:
-		collider = $UpCast.get_collider()
+		cast = $UpCast
 	elif move_dir.dot(Vector2.DOWN) > 0.9:
-		collider = $DownCast.get_collider()
+		cast = $DownCast
 
-	if collider:
-		move_and_collide(move_dir * 2)
-		wall_dir *= -1
-		fly_dir *= -1
-		var random_sign = 1 - 2 * (randi() % 2) #random direction after land
-		crawl_dir.x = random_sign
-		$CenteredPivot.scale.x = crawl_dir.x * -1
-		$Sprite2D.scale.x = crawl_dir.x * -1
-		rotation = fly_dir.angle() + deg_to_rad(90)
-		move_dir = crawl_dir.rotated(rotation)
-
-		change_state("crawl")
+	if cast == null or not cast.is_colliding():
 		return
+
+	wall_dir *= -1
+	fly_dir *= -1
+	var random_sign = 1 - 2 * (randi() % 2)
+	crawl_dir.x = random_sign
+	$CenteredPivot.scale.x = crawl_dir.x * -1
+	$Sprite2D.scale.x = crawl_dir.x * -1
+	rotation = fly_dir.angle() + deg_to_rad(90)
+	move_dir = crawl_dir.rotated(rotation)
+
+
+	var collision_point = cast.get_collision_point()
+	var shape_reach = 9.0  # distance from origin to the surface-facing edge of the crawl shape
+	global_position = collision_point + wall_dir * shape_reach
+
+	change_state("crawl")
+	return
 
 
 
@@ -121,6 +126,7 @@ func do_crawl(_delta):
 		if %ExteriorCornerCast.is_colliding() && %ExteriorCornerDetector.get_overlapping_bodies() == []: #turn corner
 			change_state("exterior_corner")
 		elif %ExteriorCornerCast.is_colliding() || %ExteriorCornerDetector.get_overlapping_bodies() == []: #turn around from unturnable edge
+			##this call is the issue, caused by the position after fly being off of the wall
 			flip_check()
 
 
@@ -136,6 +142,7 @@ func do_crawl(_delta):
 	if %InteriorCornerCast.is_colliding() && %InteriorCornerCast2.is_colliding(): #At wall
 		change_state("interior_corner")
 	elif %InteriorCornerCast.is_colliding() || %InteriorCornerCast2.is_colliding():
+		print("sassssssssssssssssss")
 		flip_check()
 
 func exit_crawl(_next_state):

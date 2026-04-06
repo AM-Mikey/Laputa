@@ -1850,7 +1850,7 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(4144, 2352)
+position = Vector2(4152, 2432)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("8_xdtt3")
@@ -1872,7 +1872,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("18_nvccq")
 tag_name = "fly"
-direction = Vector2(-4.371139e-08, 1)
+direction = Vector2(-4.371139e-08, -1)
 movement_locked = true
 
 [node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler" unique_id=2126548652 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
@@ -1883,7 +1883,7 @@ collision_mask = 0
 script = ExtResource("18_nvccq")
 arrow_length = 24.0
 tag_name = "crawl"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
