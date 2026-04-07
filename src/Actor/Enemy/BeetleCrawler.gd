@@ -53,6 +53,17 @@ func setup():
 func _on_physics_process(_delta):
 	if disabled or dead or Engine.is_editor_hint(): return
 	velocity = calc_velocity(move_dir, false) #no gravity
+
+	if state == "crawl": #TODO: move to state
+		# Prevent pixel gaps between the beetle and the terrain by making the beetle
+		# stick closer to the wall
+		var collision := move_and_collide(wall_dir * 5, true)
+		# The first move_and_collide doesn't move the body, instead it tests if
+		# the body *would* collide if moved
+		if collision != null:
+			if collision.get_travel().length() > 0.0001:
+				move_and_collide(wall_dir * 5)
+
 	move_and_slide()
 
 
@@ -64,17 +75,41 @@ func enter_fly(_last_state):
 		change_state("crawl")
 		return
 
-	$FlyCooldown.start(fly_cooldown_time)
 	match move_dir.x:
-		-1.0: $Sprite2D.scale.x = -1.0
-		1.0: $Sprite2D.scale.x = 1.0
+		-1.0: $Sprite2D.scale.x = 1.0
+		1.0: $Sprite2D.scale.x = -1.0
 		0.0: $Sprite2D.scale.x = sign(pc.global_position.x - global_position.x) == 1 #else have it track the player
+
+	align_to_nearest_tile()
+
 	rotation_degrees = 0
 	set_collision_shapes("fly")
 	speed = fly_speed
 	$AnimationPlayer.play("Fly")
 
-func do_fly(_delta): ##TODO: some issue when landing or starting from a seam in the world geometry, check raycast normals to verify
+func align_to_nearest_tile():
+	#move it out of the wall
+	if move_dir.dot(Vector2.LEFT) > 0.9:
+		global_position += Vector2(-6, 0)
+		global_position.y = floori(global_position.y / 16.0) * 16.0 + 16.0 #snap height
+	elif move_dir.dot(Vector2.RIGHT) > 0.9:
+		global_position += Vector2(6, 0)
+		global_position.y = floori(global_position.y / 16.0) * 16.0 + 16.0 #snap height
+	elif move_dir.dot(Vector2.UP) > 0.9:
+		pass
+		global_position.x = floori(global_position.x / 16.0) * 16.0 + (16.0 / 2.0) #snap width
+	elif move_dir.dot(Vector2.DOWN) > 0.9:
+		global_position += Vector2(0, 14)
+		global_position.x = floori(global_position.x / 16.0) * 16.0 + (16.0 / 2.0) #snap width
+	#var bf = global_position
+	#check closest tile bottom center position to post-adjusted global position
+	#global_position = Vector2(
+		#floori(global_position.x / 16.0) * 16.0 + (16.0 / 2.0),
+		#floori(global_position.y / 16.0) * 16.0 + 16.0)
+	#var j = global_position
+	#print("j")
+
+func do_fly(_delta):
 	var cast: RayCast2D = null
 	if move_dir.dot(Vector2.LEFT) > 0.9:
 		cast = $LeftCast
@@ -94,14 +129,13 @@ func do_fly(_delta): ##TODO: some issue when landing or starting from a seam in 
 	crawl_dir.x = random_sign
 	$CenteredPivot.scale.x = crawl_dir.x * -1
 	$Sprite2D.scale.x = crawl_dir.x * -1
-	rotation = fly_dir.angle() + deg_to_rad(90)
+	rotation = wall_dir.angle() - deg_to_rad(90)
 	move_dir = crawl_dir.rotated(rotation)
 
 
 	var collision_point = cast.get_collision_point()
-	var shape_reach = 9.0  # distance from origin to the surface-facing edge of the crawl shape
-	global_position = collision_point + wall_dir * shape_reach
-
+	global_position = collision_point
+	$FlyCooldown.start(fly_cooldown_time)
 	change_state("crawl")
 	return
 
@@ -126,7 +160,6 @@ func do_crawl(_delta):
 		if %ExteriorCornerCast.is_colliding() && %ExteriorCornerDetector.get_overlapping_bodies() == []: #turn corner
 			change_state("exterior_corner")
 		elif %ExteriorCornerCast.is_colliding() || %ExteriorCornerDetector.get_overlapping_bodies() == []: #turn around from unturnable edge
-			##this call is the issue, caused by the position after fly being off of the wall
 			flip_check()
 
 
@@ -142,7 +175,6 @@ func do_crawl(_delta):
 	if %InteriorCornerCast.is_colliding() && %InteriorCornerCast2.is_colliding(): #At wall
 		change_state("interior_corner")
 	elif %InteriorCornerCast.is_colliding() || %InteriorCornerCast2.is_colliding():
-		print("sassssssssssssssssss")
 		flip_check()
 
 func exit_crawl(_next_state):

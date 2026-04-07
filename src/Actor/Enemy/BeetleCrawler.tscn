@@ -9,7 +9,7 @@ size = Vector2(12, 9)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qsmhk"]
 radius = 7.0
-height = 15.0
+height = 14.0
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(14, 14)
@@ -21,7 +21,7 @@ size = Vector2(16, 16)
 size = Vector2(12, 9)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t75oa"]
-size = Vector2(14, 14)
+size = Vector2(15, 14)
 
 [sub_resource type="Animation" id="Animation_qsmhk"]
 resource_name = "Crawl"
@@ -163,15 +163,13 @@ shape = SubResource("RectangleShape2D_7vcwk")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Fly" type="CollisionShape2D" parent="." unique_id=1435893146]
-visible = false
-position = Vector2(0, -8)
+position = Vector2(0, -7)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_qsmhk")
 disabled = true
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=547326425]
-visible = false
 collision_layer = 131072
 collision_mask = 0
 
@@ -181,7 +179,7 @@ shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Fly" type="CollisionShape2D" parent="Hurtbox" unique_id=389128745]
-position = Vector2(0, -8)
+position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_fjd7u")
 disabled = true
 debug_color = Color(0, 1, 0, 0.235294)
@@ -197,7 +195,7 @@ shape = SubResource("RectangleShape2D_g4id4")
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="Fly" type="CollisionShape2D" parent="Hitbox" unique_id=304220547]
-position = Vector2(0, -8)
+position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_t75oa")
 disabled = true
 debug_color = Color(1, 0, 0, 0.235294)
@@ -260,22 +258,21 @@ target_position = Vector2(0, -512)
 collision_mask = 8
 
 [node name="LeftCast" type="RayCast2D" parent="." unique_id=795130591]
-position = Vector2(-7, -8)
+position = Vector2(-7, -7)
 target_position = Vector2(-2, 0)
 collision_mask = 8
 
 [node name="RightCast" type="RayCast2D" parent="." unique_id=1114197483]
-position = Vector2(7, -8)
+position = Vector2(7, -7)
 target_position = Vector2(2, 0)
 collision_mask = 8
 
 [node name="UpCast" type="RayCast2D" parent="." unique_id=83836088]
-position = Vector2(0, -15)
+position = Vector2(0, -14)
 target_position = Vector2(0, -2)
 collision_mask = 8
 
 [node name="DownCast" type="RayCast2D" parent="." unique_id=189306189]
-position = Vector2(0, -1)
 target_position = Vector2(0, 2)
 collision_mask = 8
 
