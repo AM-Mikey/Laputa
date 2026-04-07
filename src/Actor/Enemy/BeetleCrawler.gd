@@ -53,17 +53,6 @@ func setup():
 func _on_physics_process(_delta):
 	if disabled or dead or Engine.is_editor_hint(): return
 	velocity = calc_velocity(move_dir, false) #no gravity
-
-	if state == "crawl": #TODO: move to state
-		# Prevent pixel gaps between the beetle and the terrain by making the beetle
-		# stick closer to the wall
-		var collision := move_and_collide(wall_dir * 5, true)
-		# The first move_and_collide doesn't move the body, instead it tests if
-		# the body *would* collide if moved
-		if collision != null:
-			if collision.get_travel().length() > 0.0001:
-				move_and_collide(wall_dir * 5)
-
 	move_and_slide()
 
 
@@ -87,27 +76,6 @@ func enter_fly(_last_state):
 	speed = fly_speed
 	$AnimationPlayer.play("Fly")
 
-func align_to_nearest_tile():
-	#move it out of the wall
-	if move_dir.dot(Vector2.LEFT) > 0.9:
-		global_position += Vector2(-6, 0)
-		global_position.y = floori(global_position.y / 16.0) * 16.0 + 16.0 #snap height
-	elif move_dir.dot(Vector2.RIGHT) > 0.9:
-		global_position += Vector2(6, 0)
-		global_position.y = floori(global_position.y / 16.0) * 16.0 + 16.0 #snap height
-	elif move_dir.dot(Vector2.UP) > 0.9:
-		pass
-		global_position.x = floori(global_position.x / 16.0) * 16.0 + (16.0 / 2.0) #snap width
-	elif move_dir.dot(Vector2.DOWN) > 0.9:
-		global_position += Vector2(0, 14)
-		global_position.x = floori(global_position.x / 16.0) * 16.0 + (16.0 / 2.0) #snap width
-	#var bf = global_position
-	#check closest tile bottom center position to post-adjusted global position
-	#global_position = Vector2(
-		#floori(global_position.x / 16.0) * 16.0 + (16.0 / 2.0),
-		#floori(global_position.y / 16.0) * 16.0 + 16.0)
-	#var j = global_position
-	#print("j")
 
 func do_fly(_delta):
 	var cast: RayCast2D = null
@@ -132,12 +100,26 @@ func do_fly(_delta):
 	rotation = wall_dir.angle() - deg_to_rad(90)
 	move_dir = crawl_dir.rotated(rotation)
 
-
 	var collision_point = cast.get_collision_point()
 	global_position = collision_point
 	$FlyCooldown.start(fly_cooldown_time)
 	change_state("crawl")
 	return
+
+func align_to_nearest_tile():
+	#move it out of the wall
+	if move_dir.dot(Vector2.LEFT) > 0.9:
+		global_position += Vector2(-6, 0)
+		global_position.y = floori(global_position.y / 16.0) * 16.0 + 16.0 #snap height
+	elif move_dir.dot(Vector2.RIGHT) > 0.9:
+		global_position += Vector2(6, 0)
+		global_position.y = floori(global_position.y / 16.0) * 16.0 + 16.0 #snap height
+	elif move_dir.dot(Vector2.UP) > 0.9:
+		pass
+		global_position.x = floori(global_position.x / 16.0) * 16.0 + (16.0 / 2.0) #snap width
+	elif move_dir.dot(Vector2.DOWN) > 0.9:
+		global_position += Vector2(0, 14)
+		global_position.x = floori(global_position.x / 16.0) * 16.0 + (16.0 / 2.0) #snap width
 
 
 
@@ -147,21 +129,20 @@ func enter_crawl(_last_state):
 	set_collision_shapes("crawl")
 
 func do_crawl(_delta):
-	var player_collider
-	var world_collider
+	# Prevent pixel gaps between the beetle and the terrain by making the beetle stick closer to the wall
+	var collision := move_and_collide(wall_dir * 5, true)
+	# The first move_and_collide doesn't move the body, instead it tests if the body *would* collide if moved
+	if collision != null:
+		if collision.get_travel().length() > 0.0001:
+			move_and_collide(wall_dir * 5)
 
-
-	player_collider = $CenteredPivot/PlayerCast.get_collider()
-	world_collider = $CenteredPivot/WorldCast.get_collider()
-
-
-
+	var player_collider = $CenteredPivot/PlayerCast.get_collider()
+	var world_collider = $CenteredPivot/WorldCast.get_collider()
 	if !%FloorCast.is_colliding(): #At edge
 		if %ExteriorCornerCast.is_colliding() && %ExteriorCornerDetector.get_overlapping_bodies() == []: #turn corner
 			change_state("exterior_corner")
 		elif %ExteriorCornerCast.is_colliding() || %ExteriorCornerDetector.get_overlapping_bodies() == []: #turn around from unturnable edge
 			flip_check()
-
 
 	if player_collider && world_collider && difficulty == 1:
 		if player_collider is TileMapLayer || player_collider.get_collision_layer_value(4): #for when it hits world before player
@@ -174,7 +155,7 @@ func do_crawl(_delta):
 
 	if %InteriorCornerCast.is_colliding() && %InteriorCornerCast2.is_colliding(): #At wall
 		change_state("interior_corner")
-	elif %InteriorCornerCast.is_colliding() || %InteriorCornerCast2.is_colliding():
+	elif %InteriorCornerCast.is_colliding() || %InteriorCornerCast2.is_colliding(): #
 		flip_check()
 
 func exit_crawl(_next_state):

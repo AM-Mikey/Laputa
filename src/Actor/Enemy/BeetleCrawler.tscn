@@ -223,13 +223,13 @@ hit_from_inside = true
 
 [node name="InteriorCornerCast" type="RayCast2D" parent="CenteredPivot" unique_id=844464313]
 unique_name_in_owner = true
-position = Vector2(-5, -4)
+position = Vector2(-5, -6)
 target_position = Vector2(-2, 0)
 collision_mask = 8
 
 [node name="InteriorCornerCast2" type="RayCast2D" parent="CenteredPivot" unique_id=1820230308]
 unique_name_in_owner = true
-position = Vector2(-5, 6)
+position = Vector2(-5, 8)
 target_position = Vector2(-2, 0)
 collision_mask = 8
 
