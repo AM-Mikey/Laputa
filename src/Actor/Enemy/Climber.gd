@@ -6,7 +6,8 @@ const ARM = preload("res://src/Actor/Enemy/ClimberArm.tscn")
 @export var climb_dir = "cw"
 @export var arm_count: int = 6
 @export var arm_radius = 16
-@export var arm_angle_speed = 0.01
+@export var rotate_speed: float = 0.05
+@export var rotate_stop_time: float = 1.5
 
 var pivot
 var pivot_pos
@@ -14,6 +15,9 @@ var pivot_index
 #var pivot_cooldown_time = 0.01
 var rotation_cycle = 0
 
+#var rotate_angle: float = 0.0
+var curr_rotate_angle: float = 0.0
+var tolerate_angle: float = 0.5
 
 func setup():
 	hp = 16
@@ -21,8 +25,8 @@ func setup():
 	reward = 3
 	speed = Vector2(80, 80) #chase speed
 	setup_arms()
-	change_state("rotate")
-
+	$RotateStop.wait_time = rotate_stop_time
+	change_state("rotate_stop")
 
 func setup_arms(): #index 0 is always to the left side, consider that when flipping, THIS IS ALSO USED IN ROTATE CODE
 	var arm_index = 0
@@ -44,12 +48,9 @@ func setup_arms(): #index 0 is always to the left side, consider that when flipp
 
 
 ### STATES ###
-
-#func _input(event: InputEvent) -> void:
-	#if event.is_action_pressed("debug_level_up"):
-		#pivot = arms[(arms.find(pivot) - 1) % arms.size()] #next arm
-		#pivot_pos = pivot.global_position
-		#rotation_cycle -= 2 * PI / arm_count
+func enter_rotate(_prev_state):
+	#print("A: ", _prev_state)
+	curr_rotate_angle = 0.0
 
 func do_rotate(_delta):
 	if debug:
@@ -57,14 +58,23 @@ func do_rotate(_delta):
 			a.modulate = Color.WHITE
 			pivot.modulate = Color.RED
 
-	if climb_dir == "cw": rotation_cycle += arm_angle_speed
-	elif climb_dir == "ccw": rotation_cycle -= arm_angle_speed
+	if climb_dir == "cw": rotation_cycle += rotate_speed
+	elif climb_dir == "ccw": rotation_cycle -= rotate_speed
 	global_position = pivot_pos + Vector2(cos(rotation_cycle), sin(rotation_cycle)) * arm_radius
 
 	for arm in $Arms.get_children():
 		arm.position = Vector2(arm_radius, 0).rotated(get_arm_angular_distance() * arm.index + rotation_cycle + fmod(2 * PI - (PI * (2.0 * pivot_index / arm_count + 1)), 2 * PI))
+	curr_rotate_angle += rotate_speed
+	#print(curr_rotate_angle, " ", rotate_angle)
+	#if (curr_rotate_angle >= rotate_angle):
+		#change_state("rotate_stop")
+
+func enter_rotate_stop(_prev_state):
+	#print("Stop: ", _prev_state)
+	$RotateStop.start()
 
 func enter_fall(_prev_state):
+	$RotateStop.stop()
 	$GroundDetector/CollisionShape2D.set_deferred("disabled", false)
 	for arm in $Arms.get_children():
 		arm.get_node("WorldDetector").set_deferred("monitoring", false)
@@ -109,7 +119,6 @@ func on_arm_die(arm):
 
 
 func on_arm_body_entered(_body, arm):
-	change_state("rotate")
 	var old_pivot_index = pivot_index
 	pivot = arm
 	pivot_pos = arm.global_position
@@ -118,9 +127,38 @@ func on_arm_body_entered(_body, arm):
 	var arm_index_difference = fposmod(old_pivot_index - pivot_index, arm_count)
 	rotation_cycle -= (2 * PI / arm_count) * arm_index_difference
 
+	if (curr_rotate_angle > tolerate_angle):
+		change_state("rotate_stop")
 
 func _on_GroundDetector_body_entered(_body):
 	if state == "fall":
 		for a in $Arms.get_children():
 			a.die()
 		die()
+
+func _on_RotateStop_timeout() -> void:
+	#var arms_angle_section: float = TAU / arm_count
+	#var arms: Array = $Arms.get_children()
+	#arms.sort_custom(func (a, b): return a.index < b.index)
+	#var pivot_arm_arr_idx: int = arms.find_custom(func (ele): return ele.index == pivot_index)
+	#var next_arm_arr_idx: int = wrapi(pivot_arm_arr_idx - 1 if climb_dir == "cw" else pivot_arm_arr_idx + 1, 0, arm_count)
+	#var next_arm_idx: int = arms[next_arm_arr_idx].index
+#
+	#var section_number: int = 0
+	#if climb_dir == "cw":
+		#print(pivot_index, " ", next_arm_idx)
+		#if next_arm_idx < pivot_index:
+			#print("A")
+			#section_number = pivot_index - next_arm_idx
+		#else:
+			#print("B")
+			#section_number = arm_count - next_arm_idx + pivot_index
+	#else:
+		#if next_arm_idx > pivot_index:
+			#section_number = next_arm_idx - pivot_index
+		#else:
+			#section_number = arm_count - pivot_index + next_arm_idx
+	#print("F: ",section_number)
+	#rotate_angle = section_number * arms_angle_section
+
+	change_state("rotate")

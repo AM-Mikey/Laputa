@@ -1,27 +1,18 @@
-[gd_scene format=4]
+[gd_scene format=4 uid="uid://cf8hc68y65mgj"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_v7eq2"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_jmuq0"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_ds6jv"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_v7eq2"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_jmuq0"]
 [ext_resource type="Resource" path="res://src/Background/iedge.tres" id="3_vsvsd"]
-[ext_resource type="Texture2D" path="res://assets/Background/IslandEdge.png" id="4_ik13d"]
-[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_0chf0"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="6_uphkj"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_umu1a"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="8_l7jh2"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_xxkrx"]
-[ext_resource type="PackedScene" path="res://src/Editor/WaypointLocal.tscn" id="9_w84y6"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="10_alxy6"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/WaypointGlobalSpawn.tscn" id="10_ds6jv"]
-[ext_resource type="PackedScene" path="res://src/Editor/ToolVector.tscn" id="11_xxkrx"]
-[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="12_alxy6"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="12_jcvae"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="13_jcvae"]
-[ext_resource type="Script" path="res://src/Editor/WaypointLocal.gd" id="14_kr1um"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/WaypointGlobalSpawn.gd" id="16_xq3bb"]
-[ext_resource type="Script" path="res://src/Editor/ToolVector.gd" id="18_shtl7"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="20_uuclg"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="22_3v325"]
+[ext_resource type="Texture2D" uid="uid://maf247vr1ab" path="res://assets/Background/IslandEdge.png" id="4_ik13d"]
+[ext_resource type="TileSet" uid="uid://dct5q86qhnom8" path="res://src/Tile/Debug.tres" id="5_0chf0"]
+[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="6_uphkj"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_umu1a"]
+[ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="8_l7jh2"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/WaypointLocal.tscn" id="9_w84y6"]
+[ext_resource type="PackedScene" uid="uid://xx5fbltdrdxk" path="res://src/Editor/Spawn/WaypointGlobalSpawn.tscn" id="10_ds6jv"]
+[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/ToolVector.tscn" id="11_xxkrx"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="12_alxy6"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="13_jcvae"]
 
 [node name="ClimberTestZone" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
@@ -30,14 +21,12 @@ level_name = "ClimberTestZone"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1011068996 instance=ExtResource("2_jmuq0")]
+[node name="LevelLimiter" parent="." unique_id=1011068996 instance=ExtResource("2_jmuq0")]
 visibility_layer = 2
 offset_left = 1600.0
 offset_top = 1600.0
 offset_right = 4432.0
 offset_bottom = 2496.0
-mouse_filter = 2
-script = ExtResource("3_ds6jv")
 background_resource = ExtResource("3_vsvsd")
 texture = ExtResource("4_ik13d")
 layers = 5
@@ -101,14 +90,9 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=751148410]
 visibility_layer = 2
 
-[node name="Frog" type="Area2D" parent="Spawns" unique_id=921078984 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog" parent="Spawns" unique_id=921078984 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3832, 1968)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -121,14 +105,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog1" type="Area2D" parent="Spawns" unique_id=2073792252 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog1" parent="Spawns" unique_id=2073792252 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4040, 1888)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -141,14 +120,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog2" type="Area2D" parent="Spawns" unique_id=89021845 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog2" parent="Spawns" unique_id=89021845 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4120, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -161,14 +135,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog3" type="Area2D" parent="Spawns" unique_id=1714921751 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog3" parent="Spawns" unique_id=1714921751 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4136, 1968)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -181,14 +150,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite" type="Area2D" parent="Spawns" unique_id=307859341 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite" parent="Spawns" unique_id=307859341 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4000, 2072)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -200,14 +164,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite1" type="Area2D" parent="Spawns" unique_id=2129104426 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite1" parent="Spawns" unique_id=2129104426 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3832, 2096)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -219,14 +178,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite2" type="Area2D" parent="Spawns" unique_id=947785320 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite2" parent="Spawns" unique_id=947785320 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3880, 2096)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -238,14 +192,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum" type="Area2D" parent="Spawns" unique_id=694789718 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum" parent="Spawns" unique_id=694789718 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3656, 2240)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -256,14 +205,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum1" type="Area2D" parent="Spawns" unique_id=1387621619 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum1" parent="Spawns" unique_id=1387621619 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3544, 2272)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -274,14 +218,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog4" type="Area2D" parent="Spawns" unique_id=668058351 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog4" parent="Spawns" unique_id=668058351 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3520, 2352)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -294,14 +233,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog5" type="Area2D" parent="Spawns" unique_id=49740504 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog5" parent="Spawns" unique_id=49740504 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3560, 2352)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -314,14 +248,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog6" type="Area2D" parent="Spawns" unique_id=1182643378 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog6" parent="Spawns" unique_id=1182643378 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3448, 2320)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -334,14 +263,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite3" type="Area2D" parent="Spawns" unique_id=2123899854 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite3" parent="Spawns" unique_id=2123899854 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3192, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -353,14 +277,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum2" type="Area2D" parent="Spawns" unique_id=1872939184 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum2" parent="Spawns" unique_id=1872939184 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2808, 2416)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -371,14 +290,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum3" type="Area2D" parent="Spawns" unique_id=120443708 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum3" parent="Spawns" unique_id=120443708 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2936, 2416)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -389,14 +303,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum4" type="Area2D" parent="Spawns" unique_id=1432010565 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum4" parent="Spawns" unique_id=1432010565 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3224, 1936)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -407,14 +316,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum5" type="Area2D" parent="Spawns" unique_id=897021115 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum5" parent="Spawns" unique_id=897021115 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3208, 1936)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -425,14 +329,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum6" type="Area2D" parent="Spawns" unique_id=186598144 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum6" parent="Spawns" unique_id=186598144 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3192, 1936)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -443,14 +342,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum7" type="Area2D" parent="Spawns" unique_id=1098526648 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum7" parent="Spawns" unique_id=1098526648 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3176, 1936)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -461,14 +355,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum8" type="Area2D" parent="Spawns" unique_id=749104960 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum8" parent="Spawns" unique_id=749104960 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3160, 1936)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -479,14 +368,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite4" type="Area2D" parent="Spawns" unique_id=56492856 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite4" parent="Spawns" unique_id=56492856 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2888, 2288)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -498,14 +382,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite5" type="Area2D" parent="Spawns" unique_id=549273483 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite5" parent="Spawns" unique_id=549273483 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2872, 2256)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -517,14 +396,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum9" type="Area2D" parent="Spawns" unique_id=1634027501 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum9" parent="Spawns" unique_id=1634027501 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2712, 2352)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -535,14 +409,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum10" type="Area2D" parent="Spawns" unique_id=1492200205 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum10" parent="Spawns" unique_id=1492200205 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2696, 2304)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -553,14 +422,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog7" type="Area2D" parent="Spawns" unique_id=468393542 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog7" parent="Spawns" unique_id=468393542 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3000, 2096)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -573,14 +437,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog8" type="Area2D" parent="Spawns" unique_id=1954089767 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog8" parent="Spawns" unique_id=1954089767 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2824, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -593,14 +452,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog9" type="Area2D" parent="Spawns" unique_id=557630504 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog9" parent="Spawns" unique_id=557630504 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3192, 2016)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -613,14 +467,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog10" type="Area2D" parent="Spawns" unique_id=1277034996 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog10" parent="Spawns" unique_id=1277034996 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2632, 1920)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -633,14 +482,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog11" type="Area2D" parent="Spawns" unique_id=1511728444 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog11" parent="Spawns" unique_id=1511728444 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2616, 1920)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -653,14 +497,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite6" type="Area2D" parent="Spawns" unique_id=395708593 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite6" parent="Spawns" unique_id=395708593 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3064, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -672,14 +511,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite7" type="Area2D" parent="Spawns" unique_id=525626648 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite7" parent="Spawns" unique_id=525626648 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3208, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -691,14 +525,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite8" type="Area2D" parent="Spawns" unique_id=81146457 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite8" parent="Spawns" unique_id=81146457 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3224, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -710,14 +539,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite9" type="Area2D" parent="Spawns" unique_id=1522671767 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite9" parent="Spawns" unique_id=1522671767 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3176, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -729,14 +553,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite10" type="Area2D" parent="Spawns" unique_id=823103488 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite10" parent="Spawns" unique_id=823103488 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3160, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -748,14 +567,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite11" type="Area2D" parent="Spawns" unique_id=1655388514 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite11" parent="Spawns" unique_id=1655388514 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3144, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -767,14 +581,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite12" type="Area2D" parent="Spawns" unique_id=1014137383 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite12" parent="Spawns" unique_id=1014137383 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2968, 2320)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -786,14 +595,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite13" type="Area2D" parent="Spawns" unique_id=763422086 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite13" parent="Spawns" unique_id=763422086 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2984, 2288)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -805,14 +609,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite14" type="Area2D" parent="Spawns" unique_id=1633820769 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite14" parent="Spawns" unique_id=1633820769 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3000, 2272)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -824,14 +623,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite15" type="Area2D" parent="Spawns" unique_id=1061497025 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite15" parent="Spawns" unique_id=1061497025 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3000, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -843,14 +637,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite16" type="Area2D" parent="Spawns" unique_id=418126191 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite16" parent="Spawns" unique_id=418126191 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2984, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -862,14 +651,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite17" type="Area2D" parent="Spawns" unique_id=400075482 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite17" parent="Spawns" unique_id=400075482 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2808, 2016)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -881,14 +665,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite18" type="Area2D" parent="Spawns" unique_id=1034006354 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite18" parent="Spawns" unique_id=1034006354 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2936, 2032)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -900,14 +679,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite19" type="Area2D" parent="Spawns" unique_id=423975962 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite19" parent="Spawns" unique_id=423975962 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3240, 2176)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -919,14 +693,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite20" type="Area2D" parent="Spawns" unique_id=870138368 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite20" parent="Spawns" unique_id=870138368 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3256, 2192)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -938,14 +707,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite21" type="Area2D" parent="Spawns" unique_id=1873900846 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite21" parent="Spawns" unique_id=1873900846 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3272, 2176)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -957,14 +721,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog12" type="Area2D" parent="Spawns" unique_id=905187468 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog12" parent="Spawns" unique_id=905187468 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4200, 1824)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -977,14 +736,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum11" type="Area2D" parent="Spawns" unique_id=1137607306 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum11" parent="Spawns" unique_id=1137607306 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3944, 1920)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -995,14 +749,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum12" type="Area2D" parent="Spawns" unique_id=1074385772 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum12" parent="Spawns" unique_id=1074385772 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3784, 2208)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1013,14 +762,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum13" type="Area2D" parent="Spawns" unique_id=275583853 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum13" parent="Spawns" unique_id=275583853 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3320, 2224)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1031,14 +775,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum14" type="Area2D" parent="Spawns" unique_id=1504398871 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum14" parent="Spawns" unique_id=1504398871 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2888, 2176)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1049,14 +788,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite22" type="Area2D" parent="Spawns" unique_id=1967510394 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite22" parent="Spawns" unique_id=1967510394 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2968, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1068,14 +802,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite23" type="Area2D" parent="Spawns" unique_id=800988150 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite23" parent="Spawns" unique_id=800988150 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3048, 2112)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1087,14 +816,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum15" type="Area2D" parent="Spawns" unique_id=361421077 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum15" parent="Spawns" unique_id=361421077 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2952, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1105,14 +829,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog13" type="Area2D" parent="Spawns" unique_id=1026882846 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog13" parent="Spawns" unique_id=1026882846 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2120, 1920)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1125,14 +844,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite24" type="Area2D" parent="Spawns" unique_id=1229551528 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite24" parent="Spawns" unique_id=1229551528 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2536, 1824)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1144,14 +858,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite25" type="Area2D" parent="Spawns" unique_id=1787925207 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite25" parent="Spawns" unique_id=1787925207 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2376, 1824)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1163,14 +872,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Frog14" type="Area2D" parent="Spawns" unique_id=1579221045 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog14" parent="Spawns" unique_id=1579221045 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1672, 2064)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1183,14 +887,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum16" type="Area2D" parent="Spawns" unique_id=416720653 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum16" parent="Spawns" unique_id=416720653 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4024, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1201,14 +900,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum17" type="Area2D" parent="Spawns" unique_id=420436490 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum17" parent="Spawns" unique_id=420436490 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4104, 1824)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1219,14 +913,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Sphagnum18" type="Area2D" parent="Spawns" unique_id=698683677 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum18" parent="Spawns" unique_id=698683677 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4184, 1808)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1237,17 +926,13 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Ladder" type="MarginContainer" parent="Spawns" unique_id=2055877538 groups=["TriggerSpawns"] instance=ExtResource("7_umu1a")]
+[node name="Ladder" parent="Spawns" unique_id=2055877538 instance=ExtResource("7_umu1a")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 4064.0
 offset_top = 2128.0
 offset_right = 4080.0
 offset_bottom = 2160.0
-mouse_filter = 2
-script = ExtResource("10_alxy6")
 trigger_path = "res://src/Trigger/Ladder.tscn"
 properties = {
 "color": [Color(1, 0.494118, 0, 1), 20],
@@ -1256,17 +941,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Ladder1" type="MarginContainer" parent="Spawns" unique_id=928666576 groups=["TriggerSpawns"] instance=ExtResource("7_umu1a")]
+[node name="Ladder1" parent="Spawns" unique_id=928666576 instance=ExtResource("7_umu1a")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 4064.0
 offset_top = 1968.0
 offset_right = 4080.0
 offset_bottom = 2096.0
-mouse_filter = 2
-script = ExtResource("10_alxy6")
 trigger_path = "res://src/Trigger/Ladder.tscn"
 properties = {
 "color": [Color(1, 0.494118, 0, 1), 20],
@@ -1275,17 +956,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Ladder2" type="MarginContainer" parent="Spawns" unique_id=418925368 groups=["TriggerSpawns"] instance=ExtResource("7_umu1a")]
+[node name="Ladder2" parent="Spawns" unique_id=418925368 instance=ExtResource("7_umu1a")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 3968.0
 offset_top = 1792.0
 offset_right = 3984.0
 offset_bottom = 1888.0
-mouse_filter = 2
-script = ExtResource("10_alxy6")
 trigger_path = "res://src/Trigger/Ladder.tscn"
 properties = {
 "color": [Color(1, 0.494118, 0, 1), 20],
@@ -1294,17 +971,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Ladder3" type="MarginContainer" parent="Spawns" unique_id=1796815527 groups=["TriggerSpawns"] instance=ExtResource("7_umu1a")]
+[node name="Ladder3" parent="Spawns" unique_id=1796815527 instance=ExtResource("7_umu1a")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 4048.0
 offset_top = 1776.0
 offset_right = 4064.0
 offset_bottom = 1856.0
-mouse_filter = 2
-script = ExtResource("10_alxy6")
 trigger_path = "res://src/Trigger/Ladder.tscn"
 properties = {
 "color": [Color(1, 0.494118, 0, 1), 20],
@@ -1313,17 +986,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Ladder4" type="MarginContainer" parent="Spawns" unique_id=706804780 groups=["TriggerSpawns"] instance=ExtResource("7_umu1a")]
+[node name="Ladder4" parent="Spawns" unique_id=706804780 instance=ExtResource("7_umu1a")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 4144.0
 offset_top = 1760.0
 offset_right = 4160.0
 offset_bottom = 1824.0
-mouse_filter = 2
-script = ExtResource("10_alxy6")
 trigger_path = "res://src/Trigger/Ladder.tscn"
 properties = {
 "color": [Color(1, 0.494118, 0, 1), 20],
@@ -1332,28 +1001,18 @@ properties = {
 }
 size_is_default = false
 
-[node name="AmmoRefill" type="Area2D" parent="Spawns" unique_id=1663284261 groups=["Entities", "PropSpawns"] instance=ExtResource("8_l7jh2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="AmmoRefill" parent="Spawns" unique_id=1663284261 instance=ExtResource("8_l7jh2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4096, 2144)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_jcvae")
 prop_path = "res://src/Prop/AmmoRefill.tscn"
 properties = {
 "editor_hidden": [false, 1],
 "id": ["", 4]
 }
 
-[node name="BreakBlock" type="Area2D" parent="Spawns" unique_id=769698883 groups=["Entities", "PropSpawns"] instance=ExtResource("8_l7jh2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock" parent="Spawns" unique_id=769698883 instance=ExtResource("8_l7jh2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4128, 2112)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_jcvae")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -1362,14 +1021,9 @@ properties = {
 "id": ["", 4]
 }
 
-[node name="BreakBlock1" type="Area2D" parent="Spawns" unique_id=1347021268 groups=["Entities", "PropSpawns"] instance=ExtResource("8_l7jh2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock1" parent="Spawns" unique_id=1347021268 instance=ExtResource("8_l7jh2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4144, 2096)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_jcvae")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -1378,14 +1032,9 @@ properties = {
 "id": ["", 4]
 }
 
-[node name="BreakBlock2" type="Area2D" parent="Spawns" unique_id=233986155 groups=["Entities", "PropSpawns"] instance=ExtResource("8_l7jh2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock2" parent="Spawns" unique_id=233986155 instance=ExtResource("8_l7jh2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4160, 2112)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_jcvae")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -1394,14 +1043,9 @@ properties = {
 "id": ["", 4]
 }
 
-[node name="BreakBlock3" type="Area2D" parent="Spawns" unique_id=1243718001 groups=["Entities", "PropSpawns"] instance=ExtResource("8_l7jh2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock3" parent="Spawns" unique_id=1243718001 instance=ExtResource("8_l7jh2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4160, 2096)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_jcvae")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -1410,14 +1054,9 @@ properties = {
 "id": ["", 4]
 }
 
-[node name="BreakBlock4" type="Area2D" parent="Spawns" unique_id=544780902 groups=["Entities", "PropSpawns"] instance=ExtResource("8_l7jh2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock4" parent="Spawns" unique_id=544780902 instance=ExtResource("8_l7jh2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4144, 2112)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_jcvae")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -1426,14 +1065,9 @@ properties = {
 "id": ["", 4]
 }
 
-[node name="BreakBlock5" type="Area2D" parent="Spawns" unique_id=686232511 groups=["Entities", "PropSpawns"] instance=ExtResource("8_l7jh2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock5" parent="Spawns" unique_id=686232511 instance=ExtResource("8_l7jh2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4152, 2080)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_jcvae")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -1442,31 +1076,22 @@ properties = {
 "id": ["", 4]
 }
 
-[node name="RefillTerminal" type="Area2D" parent="Spawns" unique_id=1626084803 groups=["Entities", "PropSpawns"] instance=ExtResource("8_l7jh2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="RefillTerminal" parent="Spawns" unique_id=1626084803 instance=ExtResource("8_l7jh2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4056, 2112)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_jcvae")
 prop_path = "res://src/Prop/HealthRefill.tscn"
 properties = {
 "editor_hidden": [false, 1],
 "id": ["", 4]
 }
 
-[node name="Water" type="MarginContainer" parent="Spawns" unique_id=221169776 groups=["TriggerSpawns"] instance=ExtResource("7_umu1a")]
+[node name="Water" parent="Spawns" unique_id=221169776 instance=ExtResource("7_umu1a")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 3392.0
 offset_top = 2016.0
 offset_right = 3600.0
 offset_bottom = 2112.0
-mouse_filter = 2
-script = ExtResource("10_alxy6")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20],
@@ -1476,17 +1101,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Water1" type="MarginContainer" parent="Spawns" unique_id=1319993853 groups=["TriggerSpawns"] instance=ExtResource("7_umu1a")]
+[node name="Water1" parent="Spawns" unique_id=1319993853 instance=ExtResource("7_umu1a")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 4240.0
 offset_top = 2144.0
 offset_right = 4272.0
 offset_bottom = 2176.0
-mouse_filter = 2
-script = ExtResource("10_alxy6")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20],
@@ -1496,14 +1117,9 @@ properties = {
 }
 size_is_default = false
 
-[node name="Frog15" type="Area2D" parent="Spawns" unique_id=1611106926 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog15" parent="Spawns" unique_id=1611106926 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3448, 2112)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1516,17 +1132,13 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Door" type="MarginContainer" parent="Spawns" unique_id=1532429292 groups=["TriggerSpawns"] instance=ExtResource("7_umu1a")]
+[node name="Door" parent="Spawns" unique_id=1532429292 instance=ExtResource("7_umu1a")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 3264.0
 offset_top = 1744.0
 offset_right = 3280.0
 offset_bottom = 1776.0
-mouse_filter = 2
-script = ExtResource("10_alxy6")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -1540,14 +1152,9 @@ properties = {
 }
 size_is_default = false
 
-[node name="Fish" type="Area2D" parent="Spawns" unique_id=510818953 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Fish" parent="Spawns" unique_id=510818953 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3448, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Fish.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1561,39 +1168,25 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="WaypointJump" type="Area2D" parent="Spawns/Fish" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w84y6")]
+[node name="WaypointJump" parent="Spawns/Fish" unique_id=1432238783 instance=ExtResource("9_w84y6")]
 visible = false
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_kr1um")
 tag_name = "jump"
 
-[node name="WaypointGlobalSpawnLeft" type="Area2D" parent="Spawns/Fish" unique_id=669830458 groups=["Entities", "WaypointGlobalSpawns"] instance=ExtResource("10_ds6jv")]
+[node name="WaypointGlobalSpawnLeft" parent="Spawns/Fish" unique_id=669830458 instance=ExtResource("10_ds6jv")]
 visibility_layer = 2
 position = Vector2(-64, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_xq3bb")
 tag_name = "left"
 
-[node name="WaypointGlobalSpawnRight" type="Area2D" parent="Spawns/Fish" unique_id=331105630 groups=["Entities", "WaypointGlobalSpawns"] instance=ExtResource("10_ds6jv")]
+[node name="WaypointGlobalSpawnRight" parent="Spawns/Fish" unique_id=331105630 instance=ExtResource("10_ds6jv")]
 visibility_layer = 2
 position = Vector2(64, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_xq3bb")
 tag_name = "right"
 
-[node name="Beetle" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Beetle" parent="Spawns" unique_id=1199277091 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3624, 1920)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Beetle.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1605,22 +1198,14 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="MoveVector" type="Area2D" parent="Spawns/Beetle" unique_id=2137166031 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_xxkrx")]
+[node name="MoveVector" parent="Spawns/Beetle" unique_id=2137166031 instance=ExtResource("11_xxkrx")]
 visibility_layer = 2
 position = Vector2(0, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_shtl7")
 movement_locked = true
 
-[node name="Beetle1" type="Area2D" parent="Spawns" unique_id=259012380 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Beetle1" parent="Spawns" unique_id=259012380 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3720, 2000)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Beetle.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1632,23 +1217,15 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="MoveVector" type="Area2D" parent="Spawns/Beetle1" unique_id=781946534 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_xxkrx")]
+[node name="MoveVector" parent="Spawns/Beetle1" unique_id=781946534 instance=ExtResource("11_xxkrx")]
 visibility_layer = 2
 position = Vector2(0, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_shtl7")
 direction = Vector2(-4.371139e-08, -1)
 movement_locked = true
 
-[node name="Beetle2" type="Area2D" parent="Spawns" unique_id=1434006208 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Beetle2" parent="Spawns" unique_id=1434006208 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3560, 1968)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Beetle.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1660,22 +1237,14 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="MoveVector" type="Area2D" parent="Spawns/Beetle2" unique_id=1820787928 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_xxkrx")]
+[node name="MoveVector" parent="Spawns/Beetle2" unique_id=1820787928 instance=ExtResource("11_xxkrx")]
 visibility_layer = 2
 position = Vector2(0, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_shtl7")
 movement_locked = true
 
-[node name="Beetle3" type="Area2D" parent="Spawns" unique_id=451422737 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Beetle3" parent="Spawns" unique_id=451422737 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3624, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Beetle.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1687,22 +1256,14 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="MoveVector" type="Area2D" parent="Spawns/Beetle3" unique_id=872564127 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_xxkrx")]
+[node name="MoveVector" parent="Spawns/Beetle3" unique_id=872564127 instance=ExtResource("11_xxkrx")]
 visibility_layer = 2
 position = Vector2(0, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_shtl7")
 movement_locked = true
 
-[node name="Beetle4" type="Area2D" parent="Spawns" unique_id=761750539 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Beetle4" parent="Spawns" unique_id=761750539 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3768, 2112)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Beetle.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1714,23 +1275,15 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="MoveVector" type="Area2D" parent="Spawns/Beetle4" unique_id=504576690 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_xxkrx")]
+[node name="MoveVector" parent="Spawns/Beetle4" unique_id=504576690 instance=ExtResource("11_xxkrx")]
 visibility_layer = 2
 position = Vector2(0, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_shtl7")
 direction = Vector2(-4.371139e-08, 1)
 movement_locked = true
 
-[node name="Beetle5" type="Area2D" parent="Spawns" unique_id=659962915 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Beetle5" parent="Spawns" unique_id=659962915 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3736, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Beetle.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1742,23 +1295,15 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="MoveVector" type="Area2D" parent="Spawns/Beetle5" unique_id=451417812 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_xxkrx")]
+[node name="MoveVector" parent="Spawns/Beetle5" unique_id=451417812 instance=ExtResource("11_xxkrx")]
 visibility_layer = 2
 position = Vector2(0, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_shtl7")
 direction = Vector2(-4.371139e-08, 1)
 movement_locked = true
 
-[node name="Stalagtite26" type="Area2D" parent="Spawns" unique_id=1630942312 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite26" parent="Spawns" unique_id=1630942312 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3304, 1744)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1770,14 +1315,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite27" type="Area2D" parent="Spawns" unique_id=2057542107 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite27" parent="Spawns" unique_id=2057542107 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3288, 1792)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1789,14 +1329,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite28" type="Area2D" parent="Spawns" unique_id=800753990 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite28" parent="Spawns" unique_id=800753990 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3400, 1760)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1808,14 +1343,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite29" type="Area2D" parent="Spawns" unique_id=515615456 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite29" parent="Spawns" unique_id=515615456 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3512, 1760)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1827,14 +1357,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Stalagtite30" type="Area2D" parent="Spawns" unique_id=974903986 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite30" parent="Spawns" unique_id=974903986 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3480, 1760)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -1846,17 +1371,11 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Climber" type="Area2D" parent="Spawns" unique_id=641683686 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Climber" parent="Spawns" unique_id=641683686 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4120, 2256)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Climber.tscn"
 properties = {
-"arm_angle_speed": [0.03, 3],
 "arm_count": [6, 2],
 "arm_radius": [16, 2],
 "base_gravity": [300.0, 3],
@@ -1864,29 +1383,27 @@ properties = {
 "debug": [true, 1],
 "editor_hidden": [false, 1],
 "id": [&"Climber", 4],
+"rotate_speed": [0.05, 3],
+"rotate_stop_time": [1.5, 3],
 "speed": [Vector2(150, 350), 5],
 "water_gravity": [150.0, 3]
 }
 
-[node name="Climber1" type="Area2D" parent="Spawns" unique_id=1935511996 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Climber1" parent="Spawns" unique_id=1895221101 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4264, 2256)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xxkrx")
 actor_path = "res://src/Actor/Enemy/Climber.tscn"
 properties = {
-"arm_angle_speed": [0.01, 3],
 "arm_count": [6, 2],
 "arm_radius": [16, 2],
 "base_gravity": [300.0, 3],
-"climb_dir": ["cw", 4],
+"climb_dir": ["ccw", 4],
 "debug": [true, 1],
 "difficulty": [0, 2],
 "editor_hidden": [false, 1],
 "id": [&"Climber1", 4],
+"rotate_speed": [0.05, 3],
+"rotate_stop_time": [1.5, 3],
 "speed": [Vector2(150, 350), 5],
 "water_gravity": [150.0, 3]
 }
@@ -1894,17 +1411,10 @@ properties = {
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
 
-[node name="VanishingPoint" type="Area2D" parent="." unique_id=1745666426 groups=["VanishingPoints"] instance=ExtResource("12_alxy6")]
+[node name="VanishingPoint" parent="." unique_id=1745666426 instance=ExtResource("12_alxy6")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3008, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("20_uuclg")
 
-[node name="SpawnPoint" type="Area2D" parent="." unique_id=1710023778 groups=["SpawnPoints"] instance=ExtResource("13_jcvae")]
+[node name="SpawnPoint" parent="." unique_id=1710023778 instance=ExtResource("13_jcvae")]
 visibility_layer = 2
 position = Vector2(4096, 2432)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("22_3v325")
