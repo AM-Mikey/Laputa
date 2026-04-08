@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bd7eb5fja305a"]
+[gd_scene format=3 uid="uid://bd7eb5fja305a"]
 
 [ext_resource type="Script" uid="uid://y6ak7rqu8052" path="res://src/Actor/Enemy/ClimberArm.gd" id="1_61cwp"]
 [ext_resource type="Texture2D" uid="uid://dsb7pimaiub0y" path="res://assets/Actor/Enemy/Climber.png" id="2_7tnkt"]
@@ -20,35 +20,38 @@ size = Vector2(6, 6)
 [sub_resource type="CircleShape2D" id="CircleShape2D_61cwp"]
 radius = 3.0
 
-[node name="ClimberArm" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+[node name="ClimberArm" type="CharacterBody2D" unique_id=44563639 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("1_61cwp")
 metadata/_custom_type_script = "uid://clpkxqaavntw4"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=766555156]
 shape = SubResource("CircleShape2D_qm1p1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1026244625]
+visible = false
 position = Vector2(0, 7)
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1606277702]
 position = Vector2(0, -7)
 shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=645567145]
+visible = false
 collision_layer = 262144
 collision_mask = 65536
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1873773731]
 shape = SubResource("RectangleShape2D_lodrl")
 debug_color = Color(1, 0, 0, 0.235294)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1816856634]
+visible = false
 light_mask = 4
 material = SubResource("11")
 texture = ExtResource("2_7tnkt")
@@ -56,20 +59,18 @@ hframes = 8
 vframes = 2
 frame = 9
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_o6omx")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1786591807]
+libraries/ = SubResource("AnimationLibrary_o6omx")
 
-[node name="WorldDetector" type="Area2D" parent="."]
+[node name="WorldDetector" type="Area2D" parent="." unique_id=1132434925]
 collision_layer = 0
 collision_mask = 520
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldDetector" unique_id=799034472]
 shape = SubResource("CircleShape2D_61cwp")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=485709901]
 offset_left = -4.0
 offset_right = 17.0
 offset_bottom = 15.0
@@ -78,3 +79,4 @@ text = "wsd"
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="body_entered" from="WorldDetector" to="." method="_on_WorldDetector_body_entered"]

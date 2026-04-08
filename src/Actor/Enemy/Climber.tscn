@@ -17,14 +17,12 @@ size = Vector2(14, 14)
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o6omx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7gha7"]
-size = Vector2(16, 0.5)
+size = Vector2(16, 1)
 
 [node name="Climber" type="CharacterBody2D" unique_id=182879502 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
-collision_mask = 0
+collision_mask = 8
 script = ExtResource("1_7gha7")
-debug = true
-editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1086623904]
 shape = SubResource("CircleShape2D_qm1p1")
@@ -71,7 +69,6 @@ collision_layer = 0
 collision_mask = 520
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetector" unique_id=1621047851]
-position = Vector2(0, -0.25)
 shape = SubResource("RectangleShape2D_7gha7")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

@@ -2,6 +2,8 @@ extends Enemy
 
 var index: int
 
+signal arm_die(arm)
+
 func setup():
 	hp = 2
 	reward = 1
@@ -9,13 +11,4 @@ func setup():
 	$Label.visible = get_parent().get_parent().debug
 
 func do_death_routine():
-	var climber = get_parent().get_parent()
-
-	if climber.state == "fall": #dont bother when about to chase
-		return
-
-	if index == climber.pivot_index:
-		climber.change_state("fall")
-
-	if climber.get_node("Arms").get_child_count() == 1: #we are the last child
-		climber.change_state("chase")
+	arm_die.emit(self)

@@ -33,6 +33,7 @@ func setup_arms(): #index 0 is always to the left side, consider that when flipp
 		arm.index = arm_index
 		arm.get_node("Label").text = str(arm_index)
 		arm.get_node("WorldDetector").connect("body_entered", Callable(self, "on_arm_body_entered").bind(arm))
+		arm.arm_die.connect(on_arm_die)
 		arm.position = Vector2(arm_radius, 0).rotated((get_arm_angular_distance() * arm.index) + PI) #add pi to the rotation to add 180 degrees since it wont work otherwise
 
 		if arm_index == 0:
@@ -50,7 +51,7 @@ func setup_arms(): #index 0 is always to the left side, consider that when flipp
 		#pivot_pos = pivot.global_position
 		#rotation_cycle -= 2 * PI / arm_count
 
-func do_rotate():
+func do_rotate(_delta):
 	if debug:
 		for a in $Arms.get_children():
 			a.modulate = Color.WHITE
@@ -63,15 +64,12 @@ func do_rotate():
 	for arm in $Arms.get_children():
 		arm.position = Vector2(arm_radius, 0).rotated(get_arm_angular_distance() * arm.index + rotation_cycle + fmod(2 * PI - (PI * (2.0 * pivot_index / arm_count + 1)), 2 * PI))
 
-func do_chase():
-	hp = 1
-	if not pc:
-		return
-	var player_vector = (pc.global_position - global_position).normalized()
-	velocity = calc_velocity(player_vector)
-	move_and_slide()
+func enter_fall(_prev_state):
+	for arm in $Arms.get_children():
+		arm.get_node("WorldDetector").set_deferred("monitoring", false)
+		arm.get_node("WorldDetector").set_deferred("monitorable", false)
 
-func do_fall():
+func do_fall(_delta):
 	velocity = calc_velocity(Vector2(0,0), true)
 	move_and_slide()
 
@@ -83,9 +81,32 @@ func exit_fall(_next_state):
 func get_arm_angular_distance() -> float:
 	return (2 * PI) / float(arm_count)
 
-
+func check_more_than_half_is_consecutively_mising() -> bool:
+	var arms: Array = $Arms.get_children().filter(func (ele): return !ele.dead)
+	arms = arms.map(func (ele): return ele.index)
+	if arms.size() <= 1:
+		return true
+	arms.sort_custom(func (a, b): return a < b)
+	# Check missing arms from the last to the first
+	if (arm_count - arms[-1] - 1 + arms[0] >= arm_count / 2.0):
+		return true
+	# Check missing arm sequentially
+	for i in range(1, arms.size()):
+		if (arms[i] - arms[i - 1] - 1 >= arm_count / 2.0):
+			return true
+	return false
 
 ### SIGNALS ###
+
+func on_arm_die(arm):
+	if state == "fall": #dont bother when about to chase
+		return
+
+	# Having one last arm left or missing more than half of the arms, consecutively
+	print(pivot_index, " ", $Arms.get_child_count(), " ", check_more_than_half_is_consecutively_mising())
+	if arm.index == pivot_index or $Arms.get_child_count() == 1 or check_more_than_half_is_consecutively_mising():
+		change_state("fall")
+
 
 func on_arm_body_entered(_body, arm):
 	change_state("rotate")
@@ -99,7 +120,8 @@ func on_arm_body_entered(_body, arm):
 
 
 func _on_GroundDetector_body_entered(_body):
+	print("F")
 	if state == "fall":
 		for a in $Arms.get_children():
 			a.die()
-		change_state("chase")
+		die()
