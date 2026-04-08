@@ -14,6 +14,7 @@ var pivot_index
 #var pivot_cooldown_time = 0.01
 var rotation_cycle = 0
 
+var linear_momentum := Vector2.ZERO
 
 func setup():
 	hp = 16
@@ -42,6 +43,15 @@ func setup_arms(): #index 0 is always to the left side, consider that when flipp
 			pivot_index = pivot.index
 		arm_index += 1
 
+func calc_velocity(_move_dir, _do_gravity = true, _do_acceleration = true, _do_friction = true) -> Vector2:
+	var out: = velocity
+	var fractional_mod = 1.0 if !is_in_water else 0.666
+
+	out *= fractional_mod
+
+	#Y
+	out.y += gravity * get_physics_process_delta_time()
+	return out
 
 ### STATES ###
 
@@ -51,7 +61,7 @@ func setup_arms(): #index 0 is always to the left side, consider that when flipp
 		#pivot_pos = pivot.global_position
 		#rotation_cycle -= 2 * PI / arm_count
 
-func do_rotate(_delta):
+func do_rotate(delta):
 	if debug:
 		for a in $Arms.get_children():
 			a.modulate = Color.WHITE
@@ -59,19 +69,24 @@ func do_rotate(_delta):
 
 	if climb_dir == "cw": rotation_cycle += arm_angle_speed
 	elif climb_dir == "ccw": rotation_cycle -= arm_angle_speed
-	global_position = pivot_pos + Vector2(cos(rotation_cycle), sin(rotation_cycle)) * arm_radius
+	var new_global_position: Vector2 = pivot_pos + Vector2(cos(rotation_cycle), sin(rotation_cycle)) * arm_radius
+	linear_momentum = (new_global_position -  global_position) / delta
+	global_position = new_global_position
+
 
 	for arm in $Arms.get_children():
 		arm.position = Vector2(arm_radius, 0).rotated(get_arm_angular_distance() * arm.index + rotation_cycle + fmod(2 * PI - (PI * (2.0 * pivot_index / arm_count + 1)), 2 * PI))
 
 func enter_fall(_prev_state):
+	velocity = linear_momentum
+	print(velocity)
 	$GroundDetector/CollisionShape2D.set_deferred("disabled", false)
 	for arm in $Arms.get_children():
 		arm.get_node("WorldDetector").set_deferred("monitoring", false)
 		arm.get_node("WorldDetector").set_deferred("monitorable", false)
 
 func do_fall(_delta):
-	velocity = calc_velocity(Vector2(0,0), true)
+	velocity = calc_velocity(Vector2.ZERO)
 	move_and_slide()
 
 func exit_fall(_next_state):
@@ -105,7 +120,7 @@ func on_arm_die(arm):
 
 	# Having one last arm left or missing more than half of the arms, consecutively
 	if arm.index == pivot_index or $Arms.get_child_count() == 1 or check_more_than_half_is_consecutively_mising():
-		change_state("fall")
+		change_state.call_deferred("fall")
 
 
 func on_arm_body_entered(_body, arm):
