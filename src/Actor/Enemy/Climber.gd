@@ -65,6 +65,7 @@ func do_rotate(_delta):
 		arm.position = Vector2(arm_radius, 0).rotated(get_arm_angular_distance() * arm.index + rotation_cycle + fmod(2 * PI - (PI * (2.0 * pivot_index / arm_count + 1)), 2 * PI))
 
 func enter_fall(_prev_state):
+	$GroundDetector/CollisionShape2D.set_deferred("disabled", false)
 	for arm in $Arms.get_children():
 		arm.get_node("WorldDetector").set_deferred("monitoring", false)
 		arm.get_node("WorldDetector").set_deferred("monitorable", false)
@@ -103,7 +104,6 @@ func on_arm_die(arm):
 		return
 
 	# Having one last arm left or missing more than half of the arms, consecutively
-	print(pivot_index, " ", $Arms.get_child_count(), " ", check_more_than_half_is_consecutively_mising())
 	if arm.index == pivot_index or $Arms.get_child_count() == 1 or check_more_than_half_is_consecutively_mising():
 		change_state("fall")
 
@@ -120,7 +120,6 @@ func on_arm_body_entered(_body, arm):
 
 
 func _on_GroundDetector_body_entered(_body):
-	print("F")
 	if state == "fall":
 		for a in $Arms.get_children():
 			a.die()

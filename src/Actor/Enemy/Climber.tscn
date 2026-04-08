@@ -23,6 +23,8 @@ size = Vector2(16, 1)
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("1_7gha7")
+debug = true
+editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1086623904]
 shape = SubResource("CircleShape2D_qm1p1")
@@ -70,6 +72,7 @@ collision_mask = 520
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetector" unique_id=1621047851]
 shape = SubResource("RectangleShape2D_7gha7")
+disabled = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
