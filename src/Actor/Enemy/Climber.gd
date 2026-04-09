@@ -11,7 +11,7 @@ const ARM = preload("res://src/Actor/Enemy/ClimberArm.tscn")
 var pivot
 var pivot_pos
 var pivot_index
-#var pivot_cooldown_time = 0.01
+
 var rotation_cycle = 0
 
 var linear_momentum := Vector2.ZERO
@@ -55,12 +55,6 @@ func calc_velocity(_move_dir, _do_gravity = true, _do_acceleration = true, _do_f
 
 ### STATES ###
 
-#func _input(event: InputEvent) -> void:
-	#if event.is_action_pressed("debug_level_up"):
-		#pivot = arms[(arms.find(pivot) - 1) % arms.size()] #next arm
-		#pivot_pos = pivot.global_position
-		#rotation_cycle -= 2 * PI / arm_count
-
 func do_rotate(delta):
 	if debug:
 		for a in $Arms.get_children():
@@ -79,8 +73,6 @@ func do_rotate(delta):
 
 func enter_fall(_prev_state):
 	velocity = linear_momentum
-	print(velocity)
-	$GroundDetector/CollisionShape2D.set_deferred("disabled", false)
 	for arm in $Arms.get_children():
 		arm.get_node("WorldDetector").set_deferred("monitoring", false)
 		arm.get_node("WorldDetector").set_deferred("monitorable", false)
@@ -88,6 +80,11 @@ func enter_fall(_prev_state):
 func do_fall(_delta):
 	velocity = calc_velocity(Vector2.ZERO)
 	move_and_slide()
+
+	if (is_on_floor()):
+		for a in $Arms.get_children():
+			a.die()
+		die()
 
 func exit_fall(_next_state):
 	velocity = Vector2.ZERO
@@ -132,10 +129,3 @@ func on_arm_body_entered(_body, arm):
 
 	var arm_index_difference = fposmod(old_pivot_index - pivot_index, arm_count)
 	rotation_cycle -= (2 * PI / arm_count) * arm_index_difference
-
-
-func _on_GroundDetector_body_entered(_body):
-	if state == "fall":
-		for a in $Arms.get_children():
-			a.die()
-		die()
