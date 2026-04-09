@@ -210,11 +210,13 @@ speed = Vector2(50, 100)
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=672254353]
+visible = false
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_qm1p1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=448817390]
+visible = false
 collision_layer = 131072
 collision_mask = 0
 
@@ -224,6 +226,7 @@ shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=204996881]
+visible = false
 collision_layer = 262144
 collision_mask = 65536
 
@@ -233,6 +236,7 @@ shape = SubResource("CapsuleShape2D_abmcr")
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="PlayerDetector" type="Area2D" parent="." unique_id=1715285071]
+visible = false
 collision_layer = 0
 monitorable = false
 
@@ -290,15 +294,17 @@ vframes = 2
 position = Vector2(-16, -7)
 shape = SubResource("RectangleShape2D_ih0x2")
 disabled = true
-debug_color = Color(1, 1, 0.69803923, 0.41960785)
+debug_color = Color(0.6247848, 0.35109678, 1, 0.41960785)
 
 [node name="WorldCast" type="RayCast2D" parent="Tongue" unique_id=1671657245]
+visible = false
 position = Vector2(0, -7)
 enabled = false
 target_position = Vector2(-32, 0)
 collision_mask = 264
 
 [node name="TonguePlayerCast" type="RayCast2D" parent="." unique_id=62037362]
+visible = false
 position = Vector2(0, -12)
 enabled = false
 target_position = Vector2(-32, 0)

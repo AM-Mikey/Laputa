@@ -16,7 +16,7 @@ var look_dir = Vector2.LEFT
 @export var tongue_damage := 2.0
 var tongue_length := 0.0
 var tongue_max_length : float
-var tongue_speed := 150.0
+var tongue_speed := 100.0
 var tongue_ready_time := 0.5
 var tongue_unready_time := 2.0
 var tongue_cooldown_time := 6.0
@@ -130,31 +130,39 @@ func enter_tongue_out(_prev_state): #TODO: change collision shape scale/position
 	$TongueCooldown.start(tongue_cooldown_time)
 	$AnimationPlayer.play("TongueOut")
 	$Tongue/Sprite2D.frame = difficulty
+	$Tongue/CollisionShape2D.shape.size.x = 0
+	$Tongue/CollisionShape2D.position.x = 0
+	$Tongue/CollisionShape2D.disabled = false
 	await $AnimationPlayer.animation_finished
 	var tween = create_tween()
 	var tongue_duration = tongue_max_length / tongue_speed
 	tongue_length = 16 #to start with
-	tween.tween_property(self, "tongue_length", tongue_max_length, tongue_duration)
+	tween.tween_property(self, "tongue_length", tongue_max_length, tongue_duration).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 
 func do_tongue_out(_delta):
 	var tongue_scale = ((tongue_length - 16)/ 16.0) #16 for the start distance
 	$Tongue/Sprite2D.scale.x = max(tongue_scale, 0.0) * -1
+	$Tongue/CollisionShape2D.shape.size.x = tongue_length
+	$Tongue/CollisionShape2D.position.x = (tongue_length / 2.0) * -1
 	if tongue_length == tongue_max_length:
 		change_state("tongue_in")
 
 func enter_tongue_in(_prev_state):
 	var tween = create_tween()
 	var tongue_duration = tongue_max_length / tongue_speed
-	tween.tween_property(self, "tongue_length", 16.0, tongue_duration)
+	tween.tween_property(self, "tongue_length", 16.0, tongue_duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
 	await tween.finished
 	$AnimationPlayer.play("TongueIn")
 	await $AnimationPlayer.animation_finished
+	$Tongue/CollisionShape2D.disabled = true
 	change_state("idle") #might go to another state if neccesary
 	return
 
 func do_tongue_in(_delta):
 	var tongue_scale = ((tongue_length - 16)/ 16.0) #16 for the start distance
 	$Tongue/Sprite2D.scale.x = max(tongue_scale, 0.0) * -1
+	$Tongue/CollisionShape2D.shape.size.x = tongue_length
+	$Tongue/CollisionShape2D.position.x = (tongue_length / 2.0) * -1
 
 
 ### EFFECT ###
