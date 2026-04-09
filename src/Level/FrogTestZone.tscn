@@ -177,6 +177,168 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
+[node name="Tadpole1" type="Area2D" parent="Spawns" unique_id=437413099 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3464, 1984)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Tadpole.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"debug": [false, 1],
+"editor_hidden": [false, 1],
+"id": [&"Tadpole1", 4],
+"speed": [Vector2(150, 350), 5],
+"water_gravity": [150.0, 3]
+}
+
+[node name="Tadpole2" type="Area2D" parent="Spawns" unique_id=1954641763 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3496, 1984)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Tadpole.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"debug": [false, 1],
+"editor_hidden": [false, 1],
+"id": [&"Tadpole2", 4],
+"speed": [Vector2(150, 350), 5],
+"water_gravity": [150.0, 3]
+}
+
+[node name="Tadpole3" type="Area2D" parent="Spawns" unique_id=201546318 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3464, 1952)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Tadpole.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"debug": [false, 1],
+"editor_hidden": [false, 1],
+"id": [&"Tadpole3", 4],
+"speed": [Vector2(150, 350), 5],
+"water_gravity": [150.0, 3]
+}
+
+[node name="Tadpole4" type="Area2D" parent="Spawns" unique_id=1817066490 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3496, 1952)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Tadpole.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"debug": [false, 1],
+"editor_hidden": [false, 1],
+"id": [&"Tadpole4", 4],
+"speed": [Vector2(150, 350), 5],
+"water_gravity": [150.0, 3]
+}
+
+[node name="Tadpole5" type="Area2D" parent="Spawns" unique_id=1058599905 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3528, 1952)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Tadpole.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"debug": [false, 1],
+"editor_hidden": [false, 1],
+"id": [&"Tadpole5", 4],
+"speed": [Vector2(150, 350), 5],
+"water_gravity": [150.0, 3]
+}
+
+[node name="Tadpole6" type="Area2D" parent="Spawns" unique_id=1345892062 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3560, 1952)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Tadpole.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"debug": [false, 1],
+"editor_hidden": [false, 1],
+"id": [&"Tadpole6", 4],
+"speed": [Vector2(150, 350), 5],
+"water_gravity": [150.0, 3]
+}
+
+[node name="Tadpole7" type="Area2D" parent="Spawns" unique_id=725218541 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3560, 1920)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Tadpole.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"debug": [false, 1],
+"editor_hidden": [false, 1],
+"id": [&"Tadpole7", 4],
+"speed": [Vector2(150, 350), 5],
+"water_gravity": [150.0, 3]
+}
+
+[node name="Tadpole8" type="Area2D" parent="Spawns" unique_id=1460539687 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3528, 1920)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Tadpole.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"debug": [false, 1],
+"editor_hidden": [false, 1],
+"id": [&"Tadpole8", 4],
+"speed": [Vector2(150, 350), 5],
+"water_gravity": [150.0, 3]
+}
+
+[node name="Tadpole9" type="Area2D" parent="Spawns" unique_id=1064277033 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_arimv")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3496, 1920)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_ct86i")
+actor_path = "res://src/Actor/Enemy/Tadpole.tscn"
+properties = {
+"base_gravity": [300.0, 3],
+"debug": [false, 1],
+"editor_hidden": [false, 1],
+"id": [&"Tadpole9", 4],
+"speed": [Vector2(150, 350), 5],
+"water_gravity": [150.0, 3]
+}
+
 [node name="Waypoints" type="Node2D" parent="." unique_id=1729474890]
 visibility_layer = 2
 

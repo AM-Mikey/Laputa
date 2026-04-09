@@ -65,7 +65,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_qqbp8"]
 radius = 2.0
 
-[node name="Tadpole" type="CharacterBody2D" unique_id=1704495056 groups=["Actors", "Enemies", "Entities"]]
+[node name="Tadpole" type="CharacterBody2D" unique_id=1704495056 groups=["Actors", "Enemies", "Entities", "Tadpoles"]]
 visibility_layer = 2
 collision_layer = 2
 collision_mask = 8
@@ -89,6 +89,11 @@ vframes = 2
 libraries/ = SubResource("AnimationLibrary_h3diu")
 
 [node name="StateTimer" type="Timer" parent="." unique_id=1877164304]
+process_callback = 0
+one_shot = true
+
+[node name="FlockTimer" type="Timer" parent="." unique_id=654577584]
+process_callback = 0
 one_shot = true
 
 [node name="WorldDetector" type="Area2D" parent="." unique_id=1817036760]
@@ -110,4 +115,5 @@ target_position = Vector2(10, 0)
 collision_mask = 8
 
 [connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]
+[connection signal="timeout" from="FlockTimer" to="." method="_on_FlockTimer_timeout"]
 [connection signal="body_entered" from="WorldDetector" to="." method="_on_WorldDetector_body_entered"]
