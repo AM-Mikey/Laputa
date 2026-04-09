@@ -317,7 +317,7 @@ snap_degrees = 180.0
 movement_locked = true
 
 [node name="TongueRange" parent="." unique_id=1432238783 instance=ExtResource("3_ih0x2")]
-position = Vector2(-56, -12)
+position = Vector2(-32, -12)
 tag_name = "tongue_range"
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

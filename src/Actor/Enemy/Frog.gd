@@ -18,7 +18,7 @@ var tongue_length := 0.0
 var tongue_max_length : float
 var tongue_speed := 100.0
 var tongue_ready_time := 0.5
-var tongue_unready_time := 2.0
+var tongue_unready_time := 1.0
 var tongue_cooldown_time := 6.0
 
 func setup():
