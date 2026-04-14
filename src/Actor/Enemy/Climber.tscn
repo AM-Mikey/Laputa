@@ -63,5 +63,8 @@ one_shot = true
 
 [node name="Arms" type="Node2D" parent="." unique_id=1024818279]
 
+[node name="RotateStop" type="Timer" parent="." unique_id=1648132673]
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="timeout" from="RotateStop" to="." method="_on_RotateStop_timeout"]

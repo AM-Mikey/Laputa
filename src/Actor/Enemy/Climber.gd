@@ -7,6 +7,9 @@ const ARM = preload("res://src/Actor/Enemy/ClimberArm.tscn")
 @export var arm_count: int = 6
 @export var arm_radius = 16
 @export var arm_angle_speed = 0.01
+@export var rotate_stop_time: float = 1.5
+@export var difficulty: int = 0
+
 
 var pivot
 var pivot_pos
@@ -14,7 +17,11 @@ var pivot_index
 
 var rotation_cycle = 0
 
+var curr_rotate_angle: float = 0.0
+var tolerate_angle: float = 0.5
+
 var linear_momentum := Vector2.ZERO
+
 
 func setup():
 	hp = 16
@@ -55,11 +62,16 @@ func calc_velocity(_move_dir, _do_gravity = true, _do_acceleration = true, _do_f
 
 ### STATES ###
 
+func enter_rotate(_prev_state):
+	if (difficulty == 0):
+		curr_rotate_angle = 0.0
+
 func do_rotate(delta):
 	if debug:
 		for a in $Arms.get_children():
 			a.modulate = Color.WHITE
-			pivot.modulate = Color.RED
+			if (pivot):
+				pivot.modulate = Color.RED
 
 	if climb_dir == "cw": rotation_cycle += arm_angle_speed
 	elif climb_dir == "ccw": rotation_cycle -= arm_angle_speed
@@ -67,15 +79,25 @@ func do_rotate(delta):
 	linear_momentum = (new_global_position -  global_position) / delta
 	global_position = new_global_position
 
-
 	for arm in $Arms.get_children():
 		arm.position = Vector2(arm_radius, 0).rotated(get_arm_angular_distance() * arm.index + rotation_cycle + fmod(2 * PI - (PI * (2.0 * pivot_index / arm_count + 1)), 2 * PI))
+
+	if (difficulty == 0):
+		curr_rotate_angle += arm_angle_speed
+
+
+func enter_rotate_stop(_prev_state):
+	#print("Stop: ", _prev_state)
+	$RotateStop.start()
 
 func enter_fall(_prev_state):
 	velocity = linear_momentum
 	for arm in $Arms.get_children():
 		arm.get_node("WorldDetector").set_deferred("monitoring", false)
 		arm.get_node("WorldDetector").set_deferred("monitorable", false)
+
+
+
 
 func do_fall(_delta):
 	velocity = calc_velocity(Vector2.ZERO)
@@ -121,7 +143,6 @@ func on_arm_die(arm):
 
 
 func on_arm_body_entered(_body, arm):
-	change_state("rotate")
 	var old_pivot_index = pivot_index
 	pivot = arm
 	pivot_pos = arm.global_position
@@ -129,3 +150,10 @@ func on_arm_body_entered(_body, arm):
 
 	var arm_index_difference = fposmod(old_pivot_index - pivot_index, arm_count)
 	rotation_cycle -= (2 * PI / arm_count) * arm_index_difference
+
+	if (difficulty == 0 and state == "rotate" and curr_rotate_angle > tolerate_angle):
+		change_state("rotate_stop")
+
+
+func _on_RotateStop_timeout() -> void:
+	change_state("rotate")

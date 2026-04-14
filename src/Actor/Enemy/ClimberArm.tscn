@@ -79,4 +79,3 @@ text = "wsd"
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
-[connection signal="body_entered" from="WorldDetector" to="." method="_on_WorldDetector_body_entered"]
