@@ -24,6 +24,7 @@ radius = 3.0
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("1_61cwp")
+do_bubbles = false
 metadata/_custom_type_script = "uid://clpkxqaavntw4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=766555156]
