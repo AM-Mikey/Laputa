@@ -14,14 +14,12 @@ const ARM = preload("res://src/Actor/Enemy/ClimberArm.tscn")
 var pivot
 var pivot_pos
 var pivot_index
+var body_contact_world := false
 
 var rotation_cycle = 0
 
 var curr_rotate_angle: float = 0.0
 var tolerate_angle: float = 0.5
-
-var linear_momentum := Vector2.ZERO
-
 
 func setup():
 	hp = 16
@@ -49,15 +47,14 @@ func setup_arms(): #index 0 is always to the left side, consider that when flipp
 			pivot_pos = arm.global_position
 			pivot_index = pivot.index
 		arm_index += 1
+		add_collision_exception_with(arm)
 
 func calc_velocity(_move_dir, _do_gravity = true, _do_acceleration = true, _do_friction = true) -> Vector2:
 	var out: = velocity
 	var fractional_mod = 1.0 if !is_in_water else 0.666
 
-	out *= fractional_mod
-
 	#Y
-	out.y += gravity * get_physics_process_delta_time()
+	out.y += gravity * get_physics_process_delta_time() * fractional_mod
 	return out
 
 ### STATES ###
@@ -67,36 +64,42 @@ func enter_rotate(_prev_state):
 		curr_rotate_angle = 0.0
 
 func do_rotate(delta):
-	if debug:
-		for a in $Arms.get_children():
-			a.modulate = Color.WHITE
-			if (pivot):
-				pivot.modulate = Color.RED
+	debug_pivot()
 
 	if climb_dir == "cw": rotation_cycle += arm_angle_speed
 	elif climb_dir == "ccw": rotation_cycle -= arm_angle_speed
-	var new_global_position: Vector2 = pivot_pos + Vector2(cos(rotation_cycle), sin(rotation_cycle)) * arm_radius
-	linear_momentum = (new_global_position -  global_position) / delta
-	global_position = new_global_position
+
+	if !body_contact_world:
+		var new_global_position: Vector2 = pivot_pos + Vector2(arm_radius, 0).rotated(rotation_cycle)
+		velocity = (new_global_position - global_position) / delta
+		if ($WorldContactTolerate.is_stopped()):
+			body_contact_world = get_slide_collision_count() > 0
+	else:
+		if !(is_on_floor()):
+			velocity = calc_velocity(Vector2.ZERO)
 
 	for arm in $Arms.get_children():
-		arm.position = Vector2(arm_radius, 0).rotated(get_arm_angular_distance() * arm.index + rotation_cycle + fmod(2 * PI - (PI * (2.0 * pivot_index / arm_count + 1)), 2 * PI))
+		arm.position = Vector2(arm_radius, 0).rotated(get_arm_angular_distance() * (arm.index - pivot_index) + rotation_cycle + PI )
+
+	move_and_slide()
 
 	if (difficulty == 0):
 		curr_rotate_angle += arm_angle_speed
 
-
 func enter_rotate_stop(_prev_state):
 	#print("Stop: ", _prev_state)
+	velocity = Vector2.ZERO
 	$RotateStop.start()
 
+	debug_pivot()
+
+func exit_rotate_stop(_next_state):
+	$WorldContactTolerate.start()
+
 func enter_fall(_prev_state):
-	velocity = linear_momentum
 	for arm in $Arms.get_children():
 		arm.get_node("WorldDetector").set_deferred("monitoring", false)
 		arm.get_node("WorldDetector").set_deferred("monitorable", false)
-
-
 
 
 func do_fall(_delta):
@@ -112,6 +115,14 @@ func exit_fall(_next_state):
 	velocity = Vector2.ZERO
 
 ### HELPERS ###
+
+func debug_pivot() -> void:
+	if debug:
+		for a in $Arms.get_children():
+			a.modulate = Color.WHITE
+		modulate = Color.WHITE
+		if (pivot):
+			pivot.modulate = Color.RED
 
 func get_arm_angular_distance() -> float:
 	return (2 * PI) / float(arm_count)
@@ -138,7 +149,7 @@ func on_arm_die(arm):
 		return
 
 	# Having one last arm left or missing more than half of the arms, consecutively
-	if arm.index == pivot_index or $Arms.get_child_count() == 1 or check_more_than_half_is_consecutively_mising():
+	if arm.index == pivot_index or $Arms.get_child_count() == 1:
 		change_state.call_deferred("fall")
 
 
@@ -147,6 +158,8 @@ func on_arm_body_entered(_body, arm):
 	pivot = arm
 	pivot_pos = arm.global_position
 	pivot_index = arm.index
+	body_contact_world = false
+	$WorldContactTolerate.start()
 
 	var arm_index_difference = fposmod(old_pivot_index - pivot_index, arm_count)
 	rotation_cycle -= (2 * PI / arm_count) * arm_index_difference
