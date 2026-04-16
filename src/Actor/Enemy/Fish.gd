@@ -23,7 +23,7 @@ var did_bonk: bool = false
 
 
 func setup():
-	print("setup fish")
+	#print("setup fish")
 	change_state("idle")
 	do_bubbles = false
 	if debug: print("ready fish")

@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://b80mj2pbqh664" path="res://src/Actor/Enemy/Frog.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cimkcsmiyj0d8" path="res://assets/Actor/Enemy/Frog.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cmfcg6bvrqf0f" path="res://assets/Actor/Enemy/FrogTongue.png" id="3_abmcr"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/WaypointLocal.tscn" id="3_ih0x2"]
+[ext_resource type="PackedScene" path="res://src/Editor/ToolVector.tscn" id="3_nvdu1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qm1p1"]
 radius = 7.0
@@ -9,8 +12,9 @@ radius = 7.0
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 18)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h82ma"]
-size = Vector2(14, 14)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_abmcr"]
+radius = 7.0
+height = 14.0
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(144, 112)
@@ -30,7 +34,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [4, 5, 6, 7]
+"values": [8, 9, 10, 11]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -61,6 +65,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_nvdu1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="7"]
@@ -97,13 +116,90 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_hw183"]
+resource_name = "TongueIn"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.050000012, 0.100000024, 0.15000004, 0.19999999, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [23, 22, 21, 20, 19, 18, 17, 16]
+}
+
+[sub_resource type="Animation" id="Animation_j6wp0"]
+resource_name = "TongueOut"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [18, 19, 20, 21, 22, 23]
+}
+
+[sub_resource type="Animation" id="Animation_abmcr"]
+resource_name = "TongueReady"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [16, 17, 18]
+}
+
+[sub_resource type="Animation" id="Animation_hyiyx"]
+resource_name = "TongueUnready"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [18, 17, 16]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o6omx"]
 _data = {
 &"Croak": SubResource("3"),
 &"Fall": SubResource("5"),
+&"RESET": SubResource("Animation_nvdu1"),
 &"Rise": SubResource("7"),
-&"Stand": SubResource("9")
+&"Stand": SubResource("9"),
+&"TongueIn": SubResource("Animation_hw183"),
+&"TongueOut": SubResource("Animation_j6wp0"),
+&"TongueReady": SubResource("Animation_abmcr"),
+&"TongueUnready": SubResource("Animation_hyiyx")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ih0x2"]
+resource_local_to_scene = true
+size = Vector2(32, 2)
 
 [node name="Frog" type="CharacterBody2D" unique_id=1440636904 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
@@ -114,11 +210,13 @@ speed = Vector2(50, 100)
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=672254353]
+visible = false
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_qm1p1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=448817390]
+visible = false
 collision_layer = 131072
 collision_mask = 0
 
@@ -128,12 +226,13 @@ shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=204996881]
+visible = false
 collision_layer = 262144
 collision_mask = 65536
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=691035070]
 position = Vector2(0, -7)
-shape = SubResource("RectangleShape2D_h82ma")
+shape = SubResource("CapsuleShape2D_abmcr")
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="PlayerDetector" type="Area2D" parent="." unique_id=1715285071]
@@ -151,9 +250,8 @@ light_mask = 4
 material = SubResource("11")
 position = Vector2(0, -8)
 texture = ExtResource("2")
-hframes = 4
-vframes = 2
-frame = 4
+hframes = 8
+vframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1423179648]
 libraries/ = SubResource("AnimationLibrary_o6omx")
@@ -163,12 +261,69 @@ process_callback = 0
 wait_time = 3.0
 one_shot = true
 
+[node name="TongueCooldown" type="Timer" parent="." unique_id=529912591]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
+
+[node name="TongueReadyTimer" type="Timer" parent="." unique_id=82971832]
+process_callback = 0
+one_shot = true
+
+[node name="TongueUnreadyTimer" type="Timer" parent="." unique_id=1844718565]
+process_callback = 0
+one_shot = true
+
 [node name="CroakTimer" type="Timer" parent="." unique_id=360260981]
 process_callback = 0
 one_shot = true
+
+[node name="Tongue" type="Area2D" parent="." unique_id=1237732106]
+position = Vector2(0, -5)
+collision_layer = 0
+collision_mask = 65536
+
+[node name="Sprite2D" type="Sprite2D" parent="Tongue" unique_id=935427830]
+position = Vector2(-16, -19)
+scale = Vector2(1e-05, 1)
+texture = ExtResource("3_abmcr")
+centered = false
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tongue" unique_id=13567573]
+position = Vector2(-16, -7)
+shape = SubResource("RectangleShape2D_ih0x2")
+disabled = true
+debug_color = Color(0.6247848, 0.35109678, 1, 0.41960785)
+
+[node name="WorldCast" type="RayCast2D" parent="Tongue" unique_id=1671657245]
+visible = false
+position = Vector2(0, -7)
+enabled = false
+target_position = Vector2(-32, 0)
+collision_mask = 264
+
+[node name="TonguePlayerCast" type="RayCast2D" parent="." unique_id=62037362]
+visible = false
+position = Vector2(0, -12)
+enabled = false
+target_position = Vector2(-32, 0)
+collision_mask = 265
+
+[node name="LookVector" parent="." unique_id=872564127 instance=ExtResource("3_nvdu1")]
+position = Vector2(0, -7)
+tag_name = "look"
+snap_degrees = 180.0
+movement_locked = true
+
+[node name="TongueRange" parent="." unique_id=1432238783 instance=ExtResource("3_ih0x2")]
+position = Vector2(-32, -12)
+tag_name = "tongue_range"
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="CroakTimer" to="." method="_on_croak_timer_timeout"]
+[connection signal="area_entered" from="Tongue" to="." method="_on_Tongue_area_entered"]
