@@ -1,25 +1,17 @@
-[gd_scene format=4]
+[gd_scene format=4 uid="uid://dv0vxsxnvp2p2"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_v7eq2"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_jmuq0"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_l7jh2"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_v7eq2"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_jmuq0"]
 [ext_resource type="Resource" path="res://src/Background/iedge.tres" id="3_vsvsd"]
-[ext_resource type="Texture2D" path="res://assets/Background/IslandEdge.png" id="4_ik13d"]
-[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_0chf0"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="6_uphkj"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_umu1a"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="8_l7jh2"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_w84y6"]
-[ext_resource type="PackedScene" path="res://src/Editor/WaypointLocal.tscn" id="9_w84y6"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/WaypointGlobalSpawn.tscn" id="10_ds6jv"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="10_xxkrx"]
-[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="12_alxy6"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="12_jcvae"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="13_jcvae"]
-[ext_resource type="Script" path="res://src/Editor/WaypointLocal.gd" id="14_kr1um"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/WaypointGlobalSpawn.gd" id="16_xq3bb"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="18_shtl7"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="20_uuclg"]
+[ext_resource type="Texture2D" uid="uid://maf247vr1ab" path="res://assets/Background/IslandEdge.png" id="4_ik13d"]
+[ext_resource type="TileSet" uid="uid://dct5q86qhnom8" path="res://src/Tile/Debug.tres" id="5_0chf0"]
+[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="6_uphkj"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_umu1a"]
+[ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="8_l7jh2"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/WaypointLocal.tscn" id="9_w84y6"]
+[ext_resource type="PackedScene" uid="uid://xx5fbltdrdxk" path="res://src/Editor/Spawn/WaypointGlobalSpawn.tscn" id="10_ds6jv"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="12_alxy6"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="13_jcvae"]
 
 [node name="ClimberTestZone" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
@@ -28,14 +20,12 @@ level_name = "ClimberTestZone"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1011068996 instance=ExtResource("2_jmuq0")]
+[node name="LevelLimiter" parent="." unique_id=1011068996 instance=ExtResource("2_jmuq0")]
 visibility_layer = 2
 offset_left = 1600.0
 offset_top = 1600.0
 offset_right = 4432.0
 offset_bottom = 2496.0
-mouse_filter = 2
-script = ExtResource("3_l7jh2")
 background_resource = ExtResource("3_vsvsd")
 texture = ExtResource("4_ik13d")
 layers = 5
@@ -99,14 +89,9 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=751148410]
 visibility_layer = 2
 
-[node name="Climber" type="Area2D" parent="Spawns" unique_id=641683686 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Climber" parent="Spawns" unique_id=641683686 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4168, 2256)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_w84y6")
 actor_path = "res://src/Actor/Enemy/Climber.tscn"
 properties = {
 "arm_angle_speed": [0.05, 3],
@@ -124,17 +109,13 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Water" type="MarginContainer" parent="Spawns" unique_id=1839451250 groups=["TriggerSpawns"] instance=ExtResource("7_umu1a")]
+[node name="Water" parent="Spawns" unique_id=1839451250 instance=ExtResource("7_umu1a")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 3984.0
 offset_top = 2288.0
 offset_right = 4336.0
 offset_bottom = 2432.0
-mouse_filter = 2
-script = ExtResource("10_xxkrx")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20],
@@ -144,14 +125,9 @@ properties = {
 }
 size_is_default = false
 
-[node name="BreakBlock" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("8_l7jh2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock" parent="Spawns" unique_id=1449282698 instance=ExtResource("8_l7jh2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4192, 2416)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_jcvae")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -160,14 +136,9 @@ properties = {
 "id": [&"BreakBlock6", 4]
 }
 
-[node name="BreakBlock1" type="Area2D" parent="Spawns" unique_id=1406648667 groups=["Entities", "PropSpawns"] instance=ExtResource("8_l7jh2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock1" parent="Spawns" unique_id=1406648667 instance=ExtResource("8_l7jh2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4208, 2400)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_jcvae")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -176,14 +147,9 @@ properties = {
 "id": [&"BreakBlock7", 4]
 }
 
-[node name="BreakBlock2" type="Area2D" parent="Spawns" unique_id=989813404 groups=["Entities", "PropSpawns"] instance=ExtResource("8_l7jh2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock2" parent="Spawns" unique_id=989813404 instance=ExtResource("8_l7jh2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4208, 2400)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_jcvae")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -192,14 +158,9 @@ properties = {
 "id": [&"BreakBlock8", 4]
 }
 
-[node name="BreakBlock3" type="Area2D" parent="Spawns" unique_id=1830630219 groups=["Entities", "PropSpawns"] instance=ExtResource("8_l7jh2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock3" parent="Spawns" unique_id=1830630219 instance=ExtResource("8_l7jh2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4208, 2416)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_jcvae")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -208,14 +169,9 @@ properties = {
 "id": [&"BreakBlock9", 4]
 }
 
-[node name="BreakBlock4" type="Area2D" parent="Spawns" unique_id=2055870906 groups=["Entities", "PropSpawns"] instance=ExtResource("8_l7jh2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock4" parent="Spawns" unique_id=2055870906 instance=ExtResource("8_l7jh2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4192, 2400)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_jcvae")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -224,14 +180,9 @@ properties = {
 "id": [&"BreakBlock10", 4]
 }
 
-[node name="Aikka" type="Area2D" parent="Spawns" unique_id=567815701 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Aikka" parent="Spawns" unique_id=567815701 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3928, 2224)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_w84y6")
 actor_path = "res://src/Actor/NPC/Aikka.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -246,14 +197,9 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Fish" type="Area2D" parent="Spawns" unique_id=410549795 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_uphkj")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Fish" parent="Spawns" unique_id=410549795 instance=ExtResource("6_uphkj")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4136, 2336)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_w84y6")
 actor_path = "res://src/Actor/Enemy/Fish.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -268,45 +214,29 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="WaypointJump" type="Area2D" parent="Spawns/Fish" unique_id=1907591488 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w84y6")]
+[node name="WaypointJump" parent="Spawns/Fish" unique_id=1907591488 instance=ExtResource("9_w84y6")]
 visible = false
 visibility_layer = 2
 position = Vector2(0, -94)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_kr1um")
 tag_name = "jump"
 
-[node name="WaypointGlobalSpawnLeft" type="Area2D" parent="Spawns/Fish" unique_id=88363951 groups=["Entities", "WaypointGlobalSpawns"] instance=ExtResource("10_ds6jv")]
+[node name="WaypointGlobalSpawnLeft" parent="Spawns/Fish" unique_id=88363951 instance=ExtResource("10_ds6jv")]
 visibility_layer = 2
 position = Vector2(-64, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_xq3bb")
 tag_name = "left"
 
-[node name="WaypointGlobalSpawnRight" type="Area2D" parent="Spawns/Fish" unique_id=2041433284 groups=["Entities", "WaypointGlobalSpawns"] instance=ExtResource("10_ds6jv")]
+[node name="WaypointGlobalSpawnRight" parent="Spawns/Fish" unique_id=2041433284 instance=ExtResource("10_ds6jv")]
 visibility_layer = 2
 position = Vector2(64, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_xq3bb")
 tag_name = "right"
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
 
-[node name="VanishingPoint" type="Area2D" parent="." unique_id=1745666426 groups=["VanishingPoints"] instance=ExtResource("12_alxy6")]
+[node name="VanishingPoint" parent="." unique_id=1745666426 instance=ExtResource("12_alxy6")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3008, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_shtl7")
 
-[node name="SpawnPoint" type="Area2D" parent="." unique_id=1710023778 groups=["SpawnPoints"] instance=ExtResource("13_jcvae")]
+[node name="SpawnPoint" parent="." unique_id=1710023778 instance=ExtResource("13_jcvae")]
 visibility_layer = 2
 position = Vector2(4096, 2432)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("20_uuclg")

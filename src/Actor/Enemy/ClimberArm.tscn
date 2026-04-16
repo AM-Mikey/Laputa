@@ -15,8 +15,6 @@ size = Vector2(6, 6)
 
 [sub_resource type="CanvasItemMaterial" id="11"]
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_o6omx"]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_61cwp"]
 radius = 3.0
 
@@ -43,7 +41,6 @@ shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=645567145]
-visible = false
 collision_layer = 262144
 collision_mask = 65536
 
@@ -52,16 +49,12 @@ shape = SubResource("RectangleShape2D_lodrl")
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1816856634]
-visible = false
 light_mask = 4
 material = SubResource("11")
 texture = ExtResource("2_7tnkt")
 hframes = 8
 vframes = 2
 frame = 9
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1786591807]
-libraries/ = SubResource("AnimationLibrary_o6omx")
 
 [node name="WorldDetector" type="Area2D" parent="." unique_id=1132434925]
 collision_layer = 0
@@ -72,11 +65,13 @@ shape = SubResource("CircleShape2D_61cwp")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
 [node name="Label" type="Label" parent="." unique_id=485709901]
-offset_left = -4.0
-offset_right = 17.0
-offset_bottom = 15.0
+offset_left = -8.0
+offset_right = 8.0
+offset_bottom = 16.0
 theme_override_fonts/font = ExtResource("3_7tnkt")
-text = "wsd"
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 2
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
