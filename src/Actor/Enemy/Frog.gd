@@ -21,7 +21,7 @@ var tongue_ready_time := 0.5
 var tongue_unready_time := 1.0
 var tongue_cooldown_time := 6.0
 
-func setup():
+func setup(): #TODO: fix not getting to check_threats
 	change_state("idle")
 	look_dir = $LookVector.direction
 	tongue_max_length = abs($TongueRange.position.x)

@@ -65,6 +65,9 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_qqbp8"]
 radius = 2.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_threat"]
+radius = 64.12488
+
 [node name="Tadpole" type="CharacterBody2D" unique_id=1704495056 groups=["Actors", "Enemies", "Entities", "Tadpoles"]]
 visibility_layer = 2
 collision_layer = 2
@@ -96,6 +99,18 @@ one_shot = true
 process_callback = 0
 one_shot = true
 
+[node name="ScatterToFlockCooldownTimer" type="Timer" parent="." unique_id=374195390]
+process_callback = 0
+one_shot = true
+
+[node name="ScatterTimer" type="Timer" parent="." unique_id=754577585]
+process_callback = 0
+one_shot = true
+
+[node name="ScatterCooldownTimer" type="Timer" parent="." unique_id=876792798]
+process_callback = 0
+one_shot = true
+
 [node name="WorldDetector" type="Area2D" parent="." unique_id=1817036760]
 collision_layer = 0
 collision_mask = 8
@@ -114,6 +129,19 @@ position = Vector2(0, -4)
 target_position = Vector2(10, 0)
 collision_mask = 8
 
+[node name="ThreatDetector" type="Area2D" parent="." unique_id=954577586]
+position = Vector2(0, -4)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ThreatDetector" unique_id=1054577587]
+shape = SubResource("CircleShape2D_threat")
+debug_color = Color(0.36074692, 0.86663747, 0, 0.05)
+
 [connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]
 [connection signal="timeout" from="FlockTimer" to="." method="_on_FlockTimer_timeout"]
+[connection signal="timeout" from="ScatterToFlockCooldownTimer" to="." method="_on_FlockTimer_timeout"]
+[connection signal="timeout" from="ScatterTimer" to="." method="_on_ScatterTimer_timeout"]
 [connection signal="body_entered" from="WorldDetector" to="." method="_on_WorldDetector_body_entered"]
+[connection signal="body_entered" from="ThreatDetector" to="." method="_on_ThreatDetector_body_entered"]
+[connection signal="body_exited" from="ThreatDetector" to="." method="_on_ThreatDetector_body_exited"]

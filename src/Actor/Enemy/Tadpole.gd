@@ -27,7 +27,14 @@ var weight_alignment  := 1.0
 var weight_cohesion   := 0.6
 var weight_separation := 1.8
 
-var flock_timer := 0.0
+var scatter_radius := 48.0
+var avoid_radius := 64.0
+var scatter_speed_mult := 2.2
+var scatter_duration_min := 0.6
+var scatter_duration_max := 1.2
+var scatter_cooldown_duration := 5.0
+var scatter_to_flock_cooldown_duration := 5.0
+var threats := []
 
 func setup():
 	hp = 1
@@ -40,7 +47,7 @@ func setup():
 	change_state("swim")
 
 
-func _physics_process(delta):
+func _on_physics_process(delta):
 	if disabled or dead: return
 	update_drift(delta)
 	$MoveCast.rotation = velocity.angle()
@@ -62,7 +69,6 @@ func update_drift(delta: float): #instead of normal velocity calculation
 		move_dir = target_dir
 	else:
 		move_dir = move_dir.rotated(sign(angle_diff) * max_turn)
-
 	#accelerate/decellerate
 	var desired := move_dir * swim_speed.x
 	velocity = velocity.lerp(desired, water_friction)
@@ -77,19 +83,26 @@ func enter_swim(_prev_state):
 			target_dir = Vector2.RIGHT.rotated(randf_range(0, TAU)) #random
 		else:
 			target_dir = move_dir
-
 	move_dir = target_dir
 	var swim_time = rng.randf_range(active_time_min, active_time_max)
 	$StateTimer.start(swim_time)
 
 func do_swim(_delta):
+	if !$ScatterToFlockCooldownTimer.is_stopped(): return
+	_check_threats()
 	if _get_flock_neighbors().size() > 0: #join flock
 		change_state("flock")
+
 
 func enter_wait(_prev_state):
 	target_dir = Vector2.ZERO
 	var wait_time = rng.randf_range(idle_time_min, idle_time_max)
 	$StateTimer.start(wait_time)
+
+func do_wait(_delta):
+	#print("wait ct")
+	_check_threats()
+
 
 func enter_flock(_prev_state):
 	if target_dir == Vector2.ZERO:
@@ -97,7 +110,68 @@ func enter_flock(_prev_state):
 			else Vector2.RIGHT.rotated(randf_range(0, TAU))
 	_on_FlockTimer_timeout() #calls and starts timer
 
+func do_flock(_prev_state):
+	#print("flock ct")
+	_check_threats()
 
+func enter_scatter(_prev_state):
+	var threat_dir = _get_nearest_threat_dir()
+	if threat_dir == Vector2.ZERO:
+		threat_dir = Vector2.RIGHT.rotated(randf_range(0, TAU))
+
+	target_dir = (threat_dir * -1).rotated(randf_range(-PI / 5.0, PI / 5.0)) #away from threat
+	move_dir = target_dir
+
+	velocity = move_dir * swim_speed.x * scatter_speed_mult #instantly raise velocity
+
+	$FlockTimer.stop()
+	$StateTimer.stop()
+	var scatter_duration = rng.randf_range(scatter_duration_min, scatter_duration_max)
+	$ScatterTimer.start(scatter_duration)
+	$ScatterCooldownTimer.start(scatter_duration + scatter_cooldown_duration)
+
+func do_scatter(_delta):
+	#pass
+	var threat_dir = _get_nearest_threat_dir()
+	if threat_dir != Vector2.ZERO:
+		target_dir = (threat_dir * -1).rotated(randf_range(-PI / 5.0, PI / 5.0)) #away from threat
+
+### THREATS ###
+
+func _check_threats():
+	if !$ScatterCooldownTimer.is_stopped(): return #prevent re-entering if we're on cooldown
+	if threats.is_empty(): return
+	var nearest_dir := _get_nearest_threat_dir()
+	if nearest_dir == Vector2.ZERO: return
+
+	var nearest_dist := _get_nearest_threat_dist()
+	if nearest_dist <= scatter_radius:
+		#print("scatter")
+		change_state("scatter")
+	elif nearest_dist <= avoid_radius: #avoid threat instead
+		target_dir = target_dir.lerp((nearest_dir * -1), 0.3).normalized()
+
+
+func _get_nearest_threat_dir() -> Vector2:
+	var best_dist := INF
+	var out := Vector2.ZERO
+	for t in threats:
+		if not is_instance_valid(t): continue
+		var d := global_position.distance_to(t.global_position)
+		if d < best_dist:
+			best_dist = d
+			out = (t.global_position - global_position).normalized()
+	return out
+
+
+func _get_nearest_threat_dist() -> float:
+	var out := INF
+	for t in threats:
+		if not is_instance_valid(t): continue
+		var d := global_position.distance_to(t.global_position)
+		if d < out:
+			out = d
+	return out
 
 ### WATER BOUNDARY ###
 
@@ -123,11 +197,24 @@ func _enforce_water_boundary():
 
 	if normal != Vector2.ZERO:
 		var n := normal.normalized()
-		target_dir = target_dir.reflect(n)
-		move_dir = target_dir
 		wall_normal = n
 		just_hit_wall = true
-		if state == "swim":
+		if state == "scatter":
+			# Pick a direction along the wall, biased away from the nearest threat.
+			# The wall tangent is the normal rotated 90°; choose whichever tangent
+			# points more away from the threat.
+			var tangent := Vector2(-n.y, n.x)
+			var threat_dir := _get_nearest_threat_dir()
+			var away := -threat_dir if threat_dir != Vector2.ZERO else move_dir
+			if tangent.dot(away) < 0:
+				tangent = -tangent
+			# Add a small random nudge so repeated corner bounces don't loop
+			target_dir = tangent.rotated(randf_range(-PI / 6.0, PI / 6.0))
+			move_dir = target_dir
+			return
+		target_dir = target_dir.reflect(n)
+		move_dir = target_dir
+		if state == "swim" or state == "flock":
 			change_state("wait")
 
 
@@ -245,9 +332,14 @@ func _on_StateTimer_timeout():
 				target_dir = Vector2.RIGHT.rotated(randf_range(0, TAU)) #random direction
 			change_state("swim")
 
+func _on_ScatterTimer_timeout():
+	target_dir = move_dir if move_dir != Vector2.ZERO \
+		else Vector2.RIGHT.rotated(randf_range(0, TAU))
+	$ScatterToFlockCooldownTimer.start(scatter_to_flock_cooldown_duration)
+	change_state("swim")
 
 func _on_WorldDetector_body_entered(_body: Node2D):
-	if state == "swim":
+	if state == "swim" || state == "flock":
 		just_hit_wall = true
 		wall_normal = $MoveCast.get_collision_normal()
 		change_state("wait")
@@ -261,3 +353,15 @@ func _on_FlockTimer_timeout():
 
 	target_dir = _calc_flock_direction(neighbors)
 	$FlockTimer.start(flock_check_time)
+
+
+func _on_ThreatDetector_body_entered(body: Node2D):
+	#ignore self and tadpoles
+	if body == self: return
+	if body.is_in_group("Tadpoles"): return
+	if not threats.has(body):
+		threats.append(body)
+
+
+func _on_ThreatDetector_body_exited(body: Node2D):
+	threats.erase(body)
