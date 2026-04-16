@@ -13,7 +13,7 @@ func setup():
 func _on_physics_process(_delta):
 	var parent_direction = global_position - get_parent().global_position
 	var angle_to_parent = parent_direction.angle()
-	var frame_index = posmod(round(angle_to_parent / (TAU / 8)), 8)
+	var frame_index = posmod(round(angle_to_parent / (TAU / 16)), 16)
 	$Sprite2D.frame_coords.x = frame_index
 
 func do_death_routine():

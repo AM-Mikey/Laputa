@@ -41,6 +41,7 @@ shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=645567145]
+visible = false
 collision_layer = 262144
 collision_mask = 65536
 
@@ -52,9 +53,9 @@ debug_color = Color(1, 0, 0, 0.235294)
 light_mask = 4
 material = SubResource("11")
 texture = ExtResource("2_7tnkt")
-hframes = 8
+hframes = 16
 vframes = 2
-frame = 9
+frame = 16
 
 [node name="WorldDetector" type="Area2D" parent="." unique_id=1132434925]
 collision_layer = 0

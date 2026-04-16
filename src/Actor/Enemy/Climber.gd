@@ -1,6 +1,8 @@
 extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/ClimberIcon.png")
+const TX_0 = preload("res://assets/Actor/Enemy/Climber.png")
+const TX_1 = preload("res://assets/Actor/Enemy/Climber1.png")
 const ARM = preload("res://src/Actor/Enemy/ClimberArm.tscn")
 
 @export var climb_dir = "cw"
@@ -9,6 +11,7 @@ const ARM = preload("res://src/Actor/Enemy/ClimberArm.tscn")
 @export var arm_angle_speed = 0.01
 @export var rotate_stop_time: float = 1.5
 @export var difficulty: int = 0
+var max_difficulty := 1
 
 
 var pivot
@@ -22,12 +25,21 @@ var curr_rotate_angle: float = 0.0
 var tolerate_angle: float = 0.5
 
 func setup():
-	hp = 16
-	damage_on_contact = 3
-	reward = 3
 	speed = Vector2(80, 80) #chase speed
 	setup_arms()
+	match difficulty:
+		0:
+			hp = 12
+			reward = 2
+			damage_on_contact = 2
+			$Sprite2D.texture = TX_0
+		1:
+			hp = 16
+			reward = 3
+			damage_on_contact = 3
+			$Sprite2D.texture = TX_1
 	change_state("rotate")
+
 
 
 func setup_arms(): #index 0 is always to the left side, consider that when flipping, THIS IS ALSO USED IN ROTATE CODE
@@ -41,6 +53,9 @@ func setup_arms(): #index 0 is always to the left side, consider that when flipp
 		arm.get_node("WorldDetector").connect("body_entered", Callable(self, "on_arm_body_entered").bind(arm))
 		arm.arm_die.connect(on_arm_die)
 		arm.position = Vector2(arm_radius, 0).rotated((get_arm_angular_distance() * arm.index) + PI) #add pi to the rotation to add 180 degrees since it wont work otherwise
+		match difficulty:
+			0: arm.get_node("Sprite2D").texture = TX_0
+			1: arm.get_node("Sprite2D").texture = TX_1
 
 		if arm_index == 0:
 			pivot = arm

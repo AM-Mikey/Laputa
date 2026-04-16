@@ -50,7 +50,7 @@ debug_color = Color(1, 0, 0, 0.235294)
 light_mask = 4
 material = SubResource("11")
 texture = ExtResource("2_u0hs7")
-hframes = 8
+hframes = 16
 vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1890913218]
