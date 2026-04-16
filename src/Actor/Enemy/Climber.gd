@@ -109,22 +109,20 @@ func enter_rotate_stop(_prev_state):
 	debug_pivot()
 
 func exit_rotate_stop(_next_state):
+	$RotateStop.stop()
 	$WorldContactTolerate.start()
 
 func enter_fall(_prev_state):
+	set_collision_mask_value(10, false)
 	for arm in $Arms.get_children():
 		arm.get_node("WorldDetector").set_deferred("monitoring", false)
 		arm.get_node("WorldDetector").set_deferred("monitorable", false)
+	$WorldDetector/CollisionShape2D.disabled = false
 
 
 func do_fall(_delta):
 	velocity = calc_velocity(Vector2.ZERO)
 	move_and_slide()
-
-	if (is_on_floor()):
-		for a in $Arms.get_children():
-			a.die()
-		die()
 
 func exit_fall(_next_state):
 	velocity = Vector2.ZERO
@@ -160,11 +158,11 @@ func check_more_than_half_is_consecutively_mising() -> bool:
 ### SIGNALS ###
 
 func on_arm_die(arm):
-	if state == "fall": #dont bother when about to chase
+	if state == "fall": #dont bother when about to fall
 		return
 
-	# Having one last arm left or missing more than half of the arms, consecutively
-	if arm.index == pivot_index or $Arms.get_child_count() == 1:
+	# Having one last arm left or the pivot arm is shot down
+	if arm.index == pivot_index or $Arms.get_children().filter(func (ele): return !ele.dead).size() <= 1:
 		change_state.call_deferred("fall")
 
 
@@ -185,3 +183,9 @@ func on_arm_body_entered(_body, arm):
 
 func _on_RotateStop_timeout() -> void:
 	change_state("rotate")
+
+
+func _on_WorldDetector_body_entered(_body: Node2D) -> void:
+	for a in $Arms.get_children():
+		a.die()
+	die()

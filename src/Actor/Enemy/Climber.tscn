@@ -16,9 +16,12 @@ size = Vector2(14, 14)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o6omx"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7gha7"]
+size = Vector2(15, 1)
+
 [node name="Climber" type="CharacterBody2D" unique_id=182879502 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
-collision_mask = 776
+collision_mask = 520
 floor_max_angle = 1.2217305
 script = ExtResource("1_7gha7")
 debug = true
@@ -72,6 +75,19 @@ process_callback = 0
 wait_time = 0.2
 one_shot = true
 
+[node name="WorldDetector" type="Area2D" parent="." unique_id=1527380702]
+position = Vector2(0, 8)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldDetector" unique_id=322267352]
+position = Vector2(-1.1920929e-07, -0.5)
+rotation = -3.1415925
+shape = SubResource("RectangleShape2D_7gha7")
+disabled = true
+debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="timeout" from="RotateStop" to="." method="_on_RotateStop_timeout"]
+[connection signal="body_entered" from="WorldDetector" to="." method="_on_WorldDetector_body_entered"]
