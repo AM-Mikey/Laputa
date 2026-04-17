@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dphx5itcoj1wr"]
+[gd_scene format=3 uid="uid://dphx5itcoj1wr"]
 
 [ext_resource type="Texture2D" uid="uid://08od13wukqd7" path="res://assets/Actor/Enemy/Ornithopter.png" id="2"]
-[ext_resource type="Script" uid="uid://b4dp4p1y5pmt" path="res://src/Actor/Enemy/NeedsFix/Ornithopter.gd" id="3"]
+[ext_resource type="Script" uid="uid://b4dp4p1y5pmt" path="res://src/Actor/Enemy/Ornithopter.gd" id="3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_utfr7"]
 size = Vector2(20, 9)
@@ -78,43 +78,41 @@ _data = {
 &"FlyRight": SubResource("3")
 }
 
-[node name="Ornithopter" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+[node name="Ornithopter" type="CharacterBody2D" unique_id=897008319 groups=["Actors", "Enemies", "Entities"]]
+z_index = 3
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("3")
 editor_hidden = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1771011050]
 position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_utfr7")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1941801583]
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=881828085]
 shape = SubResource("RectangleShape2D_yp85x")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=2104077394]
 collision_layer = 262144
 collision_mask = 65536
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1637204380]
 position = Vector2(0, 1.5)
 shape = SubResource("1")
 debug_color = Color(1, 0, 0, 0.235294)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=324493484]
 texture = ExtResource("2")
 hframes = 8
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_jjdxu")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1840993920]
+libraries/ = SubResource("AnimationLibrary_jjdxu")
 
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

@@ -46,7 +46,7 @@ script = ExtResource("8")
 development_stage = "alpha"
 release_version = "1.8"
 do_skip_title = true
-start_level_path = "res://src/Level/FrogTestZone.tscn"
+start_level_path = "res://src/Level/OrnithhopterTesting.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=912648782]
 scroll_offset = Vector2(-12903.97, -7039.511)
