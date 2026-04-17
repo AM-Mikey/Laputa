@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://yatg2l6kxg8u"]
+
+[ext_resource type="Shader" uid="uid://b5nd4y5tbl7bm" path="res://src/Shader/WaterTest.gdshader" id="1_n6ysh"]
+[ext_resource type="Script" uid="uid://b0gfrx4abukgr" path="res://src/Utility/WaterTest.gd" id="1_x1865"]
+[ext_resource type="Texture2D" uid="uid://7e8qhdr3awj" path="res://assets/Face/Basil.png" id="2_7l4mo"]
+[ext_resource type="Texture2D" uid="uid://copax48ywi875" path="res://assets/Utility/Water.png" id="2_aixmu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x1865"]
+shader = ExtResource("1_n6ysh")
+shader_parameter/world_position = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(320, 96)
+shader_parameter/camera_zoom = Vector2(1, 1)
+shader_parameter/scroll_speed = Vector2(0.1, 0)
+shader_parameter/fill_texture = ExtResource("2_7l4mo")
+shader_parameter/texture_tile_size = Vector2(32, 32)
+shader_parameter/edge_color = Color(0.49560964, 0.7287319, 1, 0.8)
+shader_parameter/edge_thickness = 2.0
+shader_parameter/base_y_frac = 0.25
+shader_parameter/wave_amplitude_px = 4.0
+shader_parameter/wave_frequency_px = 0.04
+shader_parameter/wave_speed = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7l4mo"]
+shader = ExtResource("1_n6ysh")
+shader_parameter/world_position = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(320, 96)
+shader_parameter/camera_zoom = Vector2(1, 1)
+shader_parameter/scroll_speed = Vector2(0.1, 0)
+shader_parameter/fill_texture = ExtResource("2_aixmu")
+shader_parameter/texture_tile_size = Vector2(32, 32)
+shader_parameter/edge_color = Color(0.93285507, 0.9058309, 1, 0.8)
+shader_parameter/edge_thickness = 2.0
+shader_parameter/base_y_frac = 0.25
+shader_parameter/wave_amplitude_px = 4.0
+shader_parameter/wave_frequency_px = 0.04
+shader_parameter/wave_speed = 3.0
+
+[node name="WaterTest" type="Node2D" unique_id=620505894]
+z_index = 1
+script = ExtResource("1_x1865")
+
+[node name="Panel2" type="Sprite2D" parent="." unique_id=1602806215]
+material = SubResource("ShaderMaterial_x1865")
+position = Vector2(101.00001, 22)
+scale = Vector2(3.3541667, 1)
+texture = ExtResource("2_7l4mo")
+
+[node name="Panel" type="Sprite2D" parent="." unique_id=195850788]
+material = SubResource("ShaderMaterial_7l4mo")
+position = Vector2(80.5, 24)
+scale = Vector2(3.3541667, 1)
+texture = ExtResource("2_7l4mo")

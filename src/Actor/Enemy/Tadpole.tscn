@@ -121,12 +121,12 @@ shape = SubResource("CircleShape2D_qqbp8")
 
 [node name="MoveCast" type="RayCast2D" parent="." unique_id=1944886963]
 position = Vector2(0, -4)
-target_position = Vector2(10, 0)
+target_position = Vector2(3, 0)
 collision_mask = 8
 
 [node name="TargetCast" type="RayCast2D" parent="." unique_id=393272081]
 position = Vector2(0, -4)
-target_position = Vector2(10, 0)
+target_position = Vector2(3, 0)
 collision_mask = 8
 
 [node name="ThreatDetector" type="Area2D" parent="." unique_id=954577586]

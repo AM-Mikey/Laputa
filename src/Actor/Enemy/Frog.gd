@@ -21,7 +21,7 @@ var tongue_ready_time := 0.5
 var tongue_unready_time := 1.0
 var tongue_cooldown_time := 6.0
 
-func setup(): #TODO: fix not getting to check_threats
+func setup():
 	change_state("idle")
 	look_dir = $LookVector.direction
 	tongue_max_length = abs($TongueRange.position.x)
@@ -210,12 +210,13 @@ func _on_croak_timer_timeout():
 	if state == "jump_ready":
 		$AnimationPlayer.play("Croak")
 
-func _on_Tongue_area_entered(area: Area2D) -> void:
+func _on_Tongue_area_entered(area: Area2D):
 	if area.get_collision_layer_value(18): #enemyhurt
 		area.get_parent().hit(tongue_damage, $Tongue.global_position.direction_to(area.global_position))
 	elif area.get_collision_layer_value(17): #playerhurt
 		area.get_parent().hit(tongue_damage,  $Tongue.global_position.direction_to(area.global_position))
 	elif area.get_collision_layer_value(9): #breakable
+		#NOTE: this doesn't actually work, it's not desirable behavior anyways so it doesn't need to
 		area.get_parent().on_break("cut")
 		#on_break(break_method) produced two fizzle particles so instead do:
 	elif area.get_collision_layer_value(4): #world
