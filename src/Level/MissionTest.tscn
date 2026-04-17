@@ -205,62 +205,6 @@ properties = {
 "id": ["box_d", 4]
 }
 
-[node name="Frog" parent="Spawns" unique_id=901092885 instance=ExtResource("7_72to3")]
-visibility_layer = 2
-position = Vector2(40, 176)
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"editor_hidden": [false, 1],
-"id": ["frog_a", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog1" parent="Spawns" unique_id=521528727 instance=ExtResource("7_72to3")]
-visibility_layer = 2
-position = Vector2(120, 176)
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"editor_hidden": [false, 1],
-"id": ["frog_b", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog2" parent="Spawns" unique_id=57133467 instance=ExtResource("7_72to3")]
-visibility_layer = 2
-position = Vector2(200, 176)
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"editor_hidden": [false, 1],
-"id": ["frog_c", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog3" parent="Spawns" unique_id=103008614 instance=ExtResource("7_72to3")]
-visibility_layer = 2
-position = Vector2(280, 176)
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"editor_hidden": [false, 1],
-"id": ["frog_d", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
 [node name="Door" parent="Spawns" unique_id=2122957837 instance=ExtResource("11_1n8rj")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
