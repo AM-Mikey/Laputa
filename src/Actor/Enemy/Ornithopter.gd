@@ -28,14 +28,6 @@ func _ready():
 func _physics_process(_delta):
 	if disabled or dead:
 		return
-#		if dir == Vector2.LEFT:
-#			if position.x <= cl.get_node("Left").position.x - safe_distance:
-#				print("freed ornithopter")
-#				queue_free()
-#		if dir == Vector2.RIGHT:
-#			if position.x >= cl.get_node("Right").position.x + safe_distance:
-#				print("freed ornithopter")
-#				queue_free()
 
 	velocity = calc_velocity(dir, false)
 	move_and_slide()
