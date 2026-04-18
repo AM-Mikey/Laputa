@@ -11,7 +11,7 @@ extends Trigger
 ## Can only take one of the 4 cardinal direction
 @export var direction_dependence: bool = true
 ## In global position
-@export var spawn_area: Rect2
+var spawn_area: Rect2
 
 @onready var actors = w.current_level.get_node("Actors")
 
@@ -20,10 +20,13 @@ var spawn_dir := Vector2.ZERO
 var enemy_on_screen_count := 0
 
 func _ready():
-	trigger_type = "ScreenSpawner"
-	spawn_area = Rect2($CollisionShape2D.global_position - $CollisionShape2D.shape.size / 2.0, $CollisionShape2D.shape.size)
+	trigger_type = "screen_spawner"
+	spawn_area = Rect2( - $CollisionShape2D.shape.size / 2.0, $CollisionShape2D.shape.size)
 	$SpawnTimer.wait_time = spawn_interval
-	$SpawnTimer.start()
+	spawn_area = $SpawnArea.value
+
+	if w.el.get_child_count() == 0:
+		$SpawnTimer.start()
 
 func _on_body_entered(body: Node2D):
 	var player_direction: Vector2 = $CollisionShape2D.global_position.direction_to(body.global_position)

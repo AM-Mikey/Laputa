@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://ubqnsy8gukfn"]
+
+[ext_resource type="Script" uid="uid://jtc837d50ca6" path="res://src/Editor/ToolRect.gd" id="1_3xth1"]
+[ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="2_gdknm"]
+
+[node name="ToolRect" type="Node2D" unique_id=307026447 groups=["Entities", "ToolRects", "VisualUtilities"]]
+script = ExtResource("1_3xth1")
+
+[node name="Rect" type="MarginContainer" parent="." unique_id=955871811]
+texture_filter = 1
+offset_right = 76.0
+offset_bottom = 38.0
+mouse_filter = 2
+
+[node name="Handles" type="VBoxContainer" parent="Rect" unique_id=768757386]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Top" type="HBoxContainer" parent="Rect/Handles" unique_id=624416840]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="TopLeft" type="TextureButton" parent="Rect/Handles/Top" unique_id=508460443]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_default_cursor_shape = 12
+
+[node name="Top" type="TextureButton" parent="Rect/Handles/Top" unique_id=956982175]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_default_cursor_shape = 9
+
+[node name="TopRight" type="TextureButton" parent="Rect/Handles/Top" unique_id=696055766]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+mouse_default_cursor_shape = 11
+
+[node name="Mid" type="HBoxContainer" parent="Rect/Handles" unique_id=1249457433]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Left" type="TextureButton" parent="Rect/Handles/Mid" unique_id=1310813382]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 10
+
+[node name="Mid" type="TextureButton" parent="Rect/Handles/Mid" unique_id=572674902]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 13
+
+[node name="Right" type="TextureButton" parent="Rect/Handles/Mid" unique_id=1114878860]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_default_cursor_shape = 10
+
+[node name="Bottom" type="HBoxContainer" parent="Rect/Handles" unique_id=911077599]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="BottomLeft" type="TextureButton" parent="Rect/Handles/Bottom" unique_id=117873335]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_default_cursor_shape = 11
+
+[node name="Bottom" type="TextureButton" parent="Rect/Handles/Bottom" unique_id=1705017643]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+mouse_default_cursor_shape = 9
+
+[node name="BottomRight" type="TextureButton" parent="Rect/Handles/Bottom" unique_id=1214390821]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_default_cursor_shape = 12
+
+[node name="ColorRect" type="ColorRect" parent="Rect" unique_id=1440088111]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.8509804, 0.6509804, 0.12156863, 1)
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Rect" unique_id=860015496]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+editor_only = false
+
+[node name="TagName" type="Label" parent="Rect" unique_id=1849138629]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_gdknm")
+text = "Test"
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 5

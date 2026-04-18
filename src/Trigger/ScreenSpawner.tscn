@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://ce7aqfjljmhvd"]
 
 [ext_resource type="Script" uid="uid://btqb133gmlcah" path="res://src/Trigger/ScreenSpawner.gd" id="1_o6fug"]
+[ext_resource type="PackedScene" uid="uid://ubqnsy8gukfn" path="res://src/Editor/ToolRect.tscn" id="2_t5opi"]
+[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/ToolVector.tscn" id="3_i70y7"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
@@ -16,12 +18,18 @@ position = Vector2(8, 8)
 shape = SubResource("1")
 
 [node name="Polygon2D" type="Polygon2D" parent="CollisionShape2D" unique_id=228238370]
+visible = false
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-2, 1, 1, -2, 3, 1)
 
-[node name="EditingTools" type="Node2D" parent="." unique_id=373828472]
-
 [node name="SpawnTimer" type="Timer" parent="." unique_id=684785219]
+
+[node name="SpawnArea" parent="." unique_id=955871811 instance=ExtResource("2_t5opi")]
+tag_name = "SpawnArea"
+snap_mode = 1
+
+[node name="ToolVector" parent="." unique_id=872564127 instance=ExtResource("3_i70y7")]
+tag_name = "a"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

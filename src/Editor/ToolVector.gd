@@ -32,7 +32,8 @@ var _dragging_tip := false
 func _ready():
 	if movement_locked:
 		$CollisionShape2D.visible = false
-	visible = w.debug_visible or w.el.get_child_count() > 0
+	if w.el.get_child_count() == 0: #not in editor
+		visible = false
 	direction = _snap_dir(direction)
 	_update_arrow_visuals()
 
@@ -45,13 +46,13 @@ func _unhandled_input(event):
 		var local_mouse = to_local(get_global_mouse_position())
 		direction = _snap_dir(local_mouse)
 		get_viewport().set_input_as_handled()
-	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and !event.pressed:
+	elif event is InputEventMouseButton and event.is_action_released("editor_rmb"):
 		_dragging_tip = false
 		get_viewport().set_input_as_handled()
 
 
 func _on_tip_handle_input_event(_viewport, event, _shape_idx):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+	if event is InputEventMouseButton and event.is_action_pressed("editor_rmb"):
 		_dragging_tip = true
 		get_viewport().set_input_as_handled()
 
@@ -66,6 +67,7 @@ func _snap_dir(vec: Vector2) -> Vector2:
 func _update_arrow_visuals():
 	if !is_inside_tree():
 		return
+
 	var tip_pos = direction.normalized() * arrow_length
 	var line_pos = direction.normalized() * (arrow_length - 4.0) #head size
 	$Line2D.set_point_position(1, line_pos)
@@ -95,5 +97,5 @@ func on_pressed():
 func _input_event(_viewport, event, _shape_idx):
 	var editor = w.get_node("EditorLayer/Editor")
 	if !movement_locked:
-		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
+		if event is InputEventMouseButton and event.is_action_pressed("editor_rmb"):
 			editor.inspector.on_selected(self, "tool_vector")

@@ -38,15 +38,12 @@ func _ready():
 	if world.el.get_child_count() == 0: #not in editor
 		visible = false
 		spawn()
-	for h in $Handles/Top.get_children():
-			h.connect("button_down", Callable(self, "on_handle").bind(h))
-			buttons.append(h)
-	for h in $Handles/Mid.get_children():
-			h.connect("button_down", Callable(self, "on_handle").bind(h))
-			buttons.append(h)
-	for h in $Handles/Bottom.get_children():
-			h.connect("button_down", Callable(self, "on_handle").bind(h))
-			buttons.append(h)
+
+	for section in $Handles.get_children():
+		for button in section.get_children():
+			if !(button.button_down.is_connected(on_handle)):
+				button.connect("button_down", Callable(self, "on_handle").bind(button))
+			buttons.append(button)
 
 
 
@@ -58,6 +55,27 @@ func initialize(): #first time set up properties
 		elif p["usage"] == 69638: #exported property enums
 			properties[p["name"]] = [trigger.get(p["name"]), p["type"]]
 	properties["id"] = [name, TYPE_STRING]
+	for ac in trigger.get_children(): #TODO: add these to props and to waypoints
+		if ac.is_in_group("WaypointLocals"):
+			if !get_if_trigger_has_waypoint(ac):
+				trigger.remove_child(ac)
+				add_child(ac)
+				ac.owner = world.current_level
+		if ac.is_in_group("WaypointGlobalSpawns"):
+			if !get_if_trigger_has_waypoint(ac):
+				trigger.remove_child(ac)
+				add_child(ac)
+				ac.owner = world.current_level
+		if ac.is_in_group("ToolVectors"):
+			if !get_if_trigger_has_tool_vector(ac):
+				trigger.remove_child(ac)
+				add_child(ac)
+				ac.owner = world.current_level
+		if ac.is_in_group("ToolRects"):
+			if !get_if_trigger_has_tool_rect(ac):
+				trigger.remove_child(ac)
+				add_child(ac)
+				ac.owner = world.current_level
 	trigger.free()
 
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
@@ -70,6 +88,23 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 				properties[p["name"]] = old_properties[p["name"]]
 			else:
 				properties[p["name"]] = [trigger.get(p["name"]), p["type"]]
+	for ac in trigger.get_children():
+		if ac.is_in_group("WaypointLocals"):
+			if !get_if_trigger_has_waypoint(ac):
+				trigger.remove_child(ac)
+				add_child(ac)
+				ac.owner = world.current_level
+		if ac.is_in_group("ToolVectors"):
+			if !get_if_trigger_has_tool_vector(ac):
+				trigger.remove_child(ac)
+				add_child(ac)
+				ac.owner = world.current_level
+		if ac.is_in_group("ToolRects"):
+			if !get_if_trigger_has_tool_rect(ac):
+				trigger.remove_child(ac)
+				add_child(ac)
+				ac.owner = world.current_level
+
 	trigger.free()
 
 func spawn():
@@ -89,9 +124,18 @@ func spawn():
 	trigger.get_node("CollisionShape2D").shape = new_shape
 	trigger.get_node("CollisionShape2D").position = new_shape.size * 0.5
 
+	for ac in trigger.get_children(): #clear old from trigger
+		if ac.is_in_group("WaypointLocals") || ac.is_in_group("ToolVectors") || ac.is_in_group("ToolRects"):
+			trigger.remove_child(ac)
+		if ac.is_in_group("WaypointGlobalSpawns"): #turn off visibility
+			ac.visible = false
+
+	for c in get_children(): #add new from spawn
+		if c.is_in_group("WaypointLocals") || c.is_in_group("ToolVectors") || c.is_in_group("ToolRects"):
+			var copy = c.duplicate()
+			trigger.add_child(copy)
+
 	world.current_level.get_node("Triggers").call_deferred("add_child", trigger)
-
-
 
 func _input(event):
 	if event.is_action_released("editor_lmb"):
@@ -131,6 +175,29 @@ func _input(event):
 					"Right":
 						offset_right = x - parent_x
 
+### GETTERS
+
+func get_if_trigger_has_waypoint(trigger_waypoint) -> bool:
+	var out = false
+	for c in get_children():
+		if c.is_in_group("WaypointLocals"): #q: does this need to apply for global spawns as well?
+			if c.tag_name == trigger_waypoint.tag_name:
+				out = true
+	return out
+
+func get_if_trigger_has_tool_vector(trigger_tool_vector) -> bool:
+	for c in get_children():
+		if c.is_in_group("ToolVectors"):
+			if c.tag_name == trigger_tool_vector.tag_name:
+				return true
+	return false
+
+func get_if_trigger_has_tool_rect(trigger_tool_rect) -> bool:
+	for c in get_children():
+		if c.is_in_group("ToolRects"):
+			if c.tag_name == trigger_tool_rect.tag_name:
+				return true
+	return false
 
 ### SIGNALS
 
@@ -149,8 +216,6 @@ func on_handle(handle):
 	else:
 		state = "drag"
 		drag_offset = global_position - get_global_mouse_position()
-	emit_signal("selected", get_parent(), "trigger")
-
 
 	var inspector = world.get_node("EditorLayer/Editor").inspector
 	inspector.on_selected(self, "trigger_spawn")

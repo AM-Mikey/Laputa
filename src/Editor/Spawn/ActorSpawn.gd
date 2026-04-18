@@ -74,6 +74,11 @@ func initialize(): #first time set up properties
 				actor.remove_child(ac)
 				add_child(ac)
 				ac.owner = w.current_level
+		if ac.is_in_group("ToolRects"):
+			if !get_if_actor_has_tool_rect(ac):
+				actor.remove_child(ac)
+				add_child(ac)
+				ac.owner = w.current_level
 	actor.free()
 
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
@@ -100,6 +105,11 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 				actor.remove_child(ac)
 				add_child(ac)
 				ac.owner = w.current_level
+		if ac.is_in_group("ToolRects"):
+			if !get_if_actor_has_tool_rect(ac):
+				actor.remove_child(ac)
+				add_child(ac)
+				ac.owner = w.current_level
 	actor.free()
 
 func spawn():
@@ -118,13 +128,13 @@ func spawn():
 	await w.current_level.get_node("Actors").call_deferred("add_child", actor)
 
 	for ac in actor.get_children(): #clear old from actor
-		if ac.is_in_group("WaypointLocals") || ac.is_in_group("ToolVectors"):
+		if ac.is_in_group("WaypointLocals") || ac.is_in_group("ToolVectors") || ac.is_in_group("ToolRects"):
 			actor.remove_child(ac)
 		if ac.is_in_group("WaypointGlobalSpawns"): #turn off visibility
 			ac.visible = false
 
 	for c in get_children(): #add new from spawn
-		if c.is_in_group("WaypointLocals") || c.is_in_group("ToolVectors"):
+		if c.is_in_group("WaypointLocals") || c.is_in_group("ToolVectors") || c.is_in_group("ToolRects"):
 			var copy = c.duplicate()
 			actor.add_child(copy)
 
@@ -156,6 +166,13 @@ func get_if_actor_has_tool_vector(actor_tool_vector) -> bool:
 	for c in get_children():
 		if c.is_in_group("ToolVectors"):
 			if c.tag_name == actor_tool_vector.tag_name:
+				return true
+	return false
+
+func get_if_actor_has_tool_rect(actor_tool_rect) -> bool:
+	for c in get_children():
+		if c.is_in_group("ToolRects"):
+			if c.tag_name == actor_tool_rect.tag_name:
 				return true
 	return false
 

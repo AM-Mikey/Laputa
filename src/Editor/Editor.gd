@@ -123,6 +123,9 @@ func setup_level(): #Call this every time the level is changed or reloaded
 		#wgs.reinitialize()
 	for tv in get_tree().get_nodes_in_group("ToolVectors"):
 		tv.visible = true
+	for t in get_tree().get_nodes_in_group("ToolRects"):
+		t.visible = true
+		t._ready()
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.visible = true
 		a.input_pickable = true
@@ -192,6 +195,8 @@ func exit():
 		wgs.visible = false
 	for tv in get_tree().get_nodes_in_group("ToolVectors"):
 		tv.visible = false
+	for t in get_tree().get_nodes_in_group("ToolRects"):
+		t.visible = false
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.spawn()
 		a.visible = false
@@ -746,6 +751,15 @@ func set_misc(misc_path, pos):
 			inspector.active.add_child(misc) #don't select it though so we can add more
 		else:
 			log.lprint("no valid entity for ToolVector")
+			misc.free()
+			return
+
+	elif misc_path == "res://src/Editor/ToolRect.tscn":
+		if inspector.active_type in ["actor_spawn", "prop_spawn", "trigger_spawn"]:
+			misc.global_position = ((pos * 16) + Vector2i(8, 8)) - Vector2i(inspector.active.global_position)
+			inspector.active.add_child(misc) #don't select it though so we can add more
+		else:
+			log.lprint("no valid entity for ToolRect")
 			misc.free()
 			return
 
