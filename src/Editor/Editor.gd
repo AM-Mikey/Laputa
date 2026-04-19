@@ -73,11 +73,11 @@ func _ready():
 
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
-	setup_level()
+	enter()
 	#$Main/Win.move_child($Main/Win/Tab, 0) TODO: was supposed to make tabcontainer go behind resize controls, didnt work
 
-func setup_level(): #Call this every time the level is changed or reloaded
-	print("enter")
+func enter(): #Call this every time the level is changed or reloaded
+	#print("enter")
 	#emit_signal("level_selected", w.current_level)
 	setup_windows()
 	f.pc().disable()

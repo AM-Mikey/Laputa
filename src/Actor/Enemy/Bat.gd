@@ -32,6 +32,7 @@ func setup():
 	damage_on_contact = 2
 	speed = Vector2(100, 50)
 	find_waypoints()
+	return true
 
 func find_waypoints():
 	for wp in get_tree().get_nodes_in_group("WaypointGlobals"):

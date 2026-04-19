@@ -191,7 +191,6 @@ func read_player_data_from_save():
 	#pc.update_inventory()
 	pc.emit_signal("invincibility_end")
 	print("player data loaded")
-	await get_tree().process_frame
 
 
 

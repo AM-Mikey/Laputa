@@ -86,7 +86,7 @@ func load_level(path):
 
 	w.change_level_via_code(path, true)
 	await get_tree().process_frame
-	w.el.get_node("Editor").setup_level()
+	w.el.get_node("Editor").enter()
 	w.el.get_node("EditorCamera").enabled = true
 	w.el.get_node("EditorCamera").global_position = f.pc().global_position
 
