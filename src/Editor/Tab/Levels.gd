@@ -55,13 +55,13 @@ func find_level_scenes(path):
 ### SAVE/LOAD ###
 
 func save_level(level, path):
-	var log = editor.log
+	var e_log = editor.e_log
 	editor.inspector.on_deselected()
 	level.save_changes()
 	level.name = path.get_file().get_basename()
 	level.level_name = path.get_file().get_basename() #TODO: add this to inspector
 	if FileAccess.file_exists(path):
-		log.lprint("Saved over File")
+		e_log.lprint("Saved over File")
 		print("Saved over File")
 
 	var packed_scene = PackedScene.new()
@@ -69,11 +69,11 @@ func save_level(level, path):
 	var err = ResourceSaver.save(packed_scene, path)
 
 	if err == OK:
-		log.lprint(str("Saved Level to:", path))
+		e_log.lprint(str("Saved Level to:", path))
 		print("Saved Level to: ", path)
 		am.play("save")
 	else:
-		log.lprint("ERROR: Could Not Save File")
+		e_log.lprint("ERROR: Could Not Save File")
 		printerr("ERROR: Could Not Save File")
 
 
@@ -86,7 +86,7 @@ func load_level(path):
 
 	w.change_level_via_code(path, true)
 	await get_tree().process_frame
-	w.el.get_node("Editor").setup_level()
+	w.el.get_node("Editor").enter()
 	w.el.get_node("EditorCamera").enabled = true
 	w.el.get_node("EditorCamera").global_position = f.pc().global_position
 
@@ -101,17 +101,17 @@ func on_save(): #from editor
 	save_level(w.current_level, w.current_level.scene_file_path)
 
 func on_save_as():
-	$SaveDialog.current_path = "res://src/level/"
-	$SaveDialog.popup()
+	$SaveDiae_log.current_path = "res://src/level/"
+	$SaveDiae_log.popup()
 
 func on_load():
 	load_level(active_level_path)
-	#$LoadDialog.current_path = "res://src/level/"
-	#$LoadDialog.popup()
+	#$LoadDiae_log.current_path = "res://src/level/"
+	#$LoadDiae_log.popup()
 
 func on_new():
-	$NewDialog.current_path = "res://src/level/"
-	$NewDialog.popup()
+	$NewDiae_log.current_path = "res://src/level/"
+	$NewDiae_log.popup()
 
 func _on_Default_pressed():
 	w.start_level_path = w.current_level.scene_file_path
@@ -130,7 +130,7 @@ func _on_Default_pressed():
 
 func on_save_confirmed():
 	var level = w.current_level
-	var path = $SaveDialog.current_path.get_basename() + ".tscn"
+	var path = $SaveDiae_log.current_path.get_basename() + ".tscn"
 	save_level(level, path)
 
 #func on_load_selected(path):
@@ -138,7 +138,7 @@ func on_save_confirmed():
 
 func on_new_confirmed():
 	var level = load(default_level).instantiate()
-	var path = $NewDialog.current_path.get_basename() + ".tscn"
+	var path = $NewDiae_log.current_path.get_basename() + ".tscn"
 	save_level(level, path)
 	load_level(path)
 

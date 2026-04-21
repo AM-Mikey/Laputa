@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dom55oqlg636t"]
+[gd_scene format=3 uid="uid://dom55oqlg636t"]
 
 [ext_resource type="Script" uid="uid://conblsvr0rsat" path="res://src/Actor/Enemy/Cardinal.gd" id="1_glth5"]
 [ext_resource type="Texture2D" uid="uid://cjxl16augech4" path="res://assets/Actor/Enemy/Cardinal.png" id="2_uswyo"]
@@ -71,49 +71,47 @@ _data = {
 &"RESET": SubResource("Animation_nwotf")
 }
 
-[node name="Cardinal" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+[node name="Cardinal" type="CharacterBody2D" unique_id=1995619659 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("1_glth5")
 debug = true
-editor_hidden = false
 speed = Vector2(100, 100)
+editor_hidden = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1935487877]
 position = Vector2(0, -2.5)
 shape = SubResource("CircleShape2D_qm1p1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1210380650]
 position = Vector2(0, 7)
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1182105334]
 position = Vector2(0, -7)
 shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="PlayerDetector" type="Area2D" parent="."]
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=1907300022]
 collision_layer = 0
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=1343747204]
 position = Vector2(0, -8)
 shape = SubResource("2")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1426131659]
 light_mask = 4
 material = SubResource("11")
 texture = ExtResource("2_uswyo")
 hframes = 4
 vframes = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_o6omx")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2127197099]
+libraries/ = SubResource("AnimationLibrary_o6omx")
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

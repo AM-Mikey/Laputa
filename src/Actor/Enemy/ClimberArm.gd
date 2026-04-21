@@ -2,11 +2,12 @@ extends Enemy
 
 var index: int
 
-func setup():
+func setup(): #Reminder: no function called can use await
 	hp = 2
 	reward = 1
 	damage_on_contact = 1
 	$Label.visible = get_parent().get_parent().debug
+	w.emit_signal("finished_spawn_entities_step")
 
 func do_death_routine():
 	var climber = get_parent().get_parent()

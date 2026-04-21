@@ -576,7 +576,31 @@ Beetle yellow start direction
 blue beetle fly onto half slab side
 beetle toolvector visibility false on start or enemy debug
 
-frog level 0 targeting fix
 fix tadpoles leaving water to much
 
-set set order
+set load order!!!!!!!!
+
+enemy copy in editor code
+
+additional missing previews in editor
+
+pause menu not centering
+
+
+
+load order work
+	-remove awaits from camera reset code
+	
+add additional load steps to large world-based loading in code that includes on editor exit
+
+
+
+
+cleanup "tools" and give them a name after merging ornithopter
+rename stalagtites
+
+clarify "disabled" across enemies and different stuff, give seperate names
+
+add waypoint local 1 dimensional varient/mode
+
+gun (or upgrade) that adds your movement speed to its bullet's movement

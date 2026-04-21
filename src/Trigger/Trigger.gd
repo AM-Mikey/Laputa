@@ -13,6 +13,8 @@ var spent = false
 
 @onready var w = get_tree().get_root().get_node("World")
 
+
+
 func get_overlap(body) -> bool:
 	var body_in_triggers = 0
 	for t in get_tree().get_nodes_in_group("Triggers"):

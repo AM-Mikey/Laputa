@@ -21,8 +21,7 @@ func set_is_in_water(val):
 		super.set_is_in_water(val)
 	is_in_water = val
 
-func setup():
-	#print("doing setup")
+func setup(): #Reminder: no function called can use await
 	match difficulty:
 		0:
 			hp = 2
@@ -46,6 +45,7 @@ func setup():
 	enemy_damage_on_contact = 999
 	speed = Vector2.ZERO
 	gravity = 0
+	w.emit_signal("finished_spawn_entities_step")
 	change_state("hang")
 
 

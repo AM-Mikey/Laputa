@@ -11,8 +11,9 @@ var speed = 4
 @onready var starting_pos = global_position
 @onready var min_pos = global_position + Vector2(0, stop_distance)
 
-func _ready():
+func setup(): #Reminder: no function called can use await
 	$Sprite2D.frame = sprite
+	w.emit_signal("finished_spawn_entities_step")
 
 func _physics_process(_delta):
 	if pcs_on_top.is_empty() and enemies_on_top.is_empty():
