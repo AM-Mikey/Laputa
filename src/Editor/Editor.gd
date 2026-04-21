@@ -351,7 +351,10 @@ func do_tile_input(event):
 					move_tile_map_selection(mouse_start_pos, mouse_pos)
 					mc.display("grabopen")
 			"line":
-				set_cells_from_brush_origins(get_cells_line_origins(mouse_start_pos, mouse_pos))
+				if lmb_held:
+					set_cells_from_brush_origins(get_cells_line_origins(mouse_start_pos, mouse_pos))
+				elif rmb_held:
+					set_cells_from_brush_origins(get_cells_line_origins(mouse_start_pos, mouse_pos), true)
 			"box":
 				if lmb_held:
 					set_cells(get_cells_box(mouse_start_pos, mouse_pos))
