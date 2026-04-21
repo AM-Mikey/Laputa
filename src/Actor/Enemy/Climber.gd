@@ -24,7 +24,7 @@ var rotation_cycle = 0
 var curr_rotate_angle: float = 0.0
 var tolerate_angle: float = 0.5
 
-func setup():
+func setup(): #Reminder: no function called can use await
 	speed = Vector2(80, 80) #chase speed
 	setup_arms()
 	match difficulty:
@@ -38,6 +38,7 @@ func setup():
 			reward = 3
 			damage_on_contact = 3
 			$Sprite2D.texture = TX_1
+  w.emit_signal("finished_spawn_entities_step")
 	change_state("rotate")
 
 

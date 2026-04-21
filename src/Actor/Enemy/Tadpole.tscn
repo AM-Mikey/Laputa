@@ -1,0 +1,147 @@
+[gd_scene format=3 uid="uid://dey1u1oh7tc0v"]
+
+[ext_resource type="Script" uid="uid://bymgm0fnily6a" path="res://src/Actor/Enemy/Tadpole.gd" id="1_pb65w"]
+[ext_resource type="Texture2D" uid="uid://boqma8lhyo88h" path="res://assets/Actor/Enemy/Tadpole.png" id="2_qqbp8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frwge"]
+size = Vector2(2, 2)
+
+[sub_resource type="Animation" id="Animation_qqbp8"]
+resource_name = "Diagonal"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_frwge"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ctxeu"]
+resource_name = "Straight"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h3diu"]
+_data = {
+&"Diagonal": SubResource("Animation_qqbp8"),
+&"RESET": SubResource("Animation_frwge"),
+&"Straight": SubResource("Animation_ctxeu")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qqbp8"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_threat"]
+radius = 64.12488
+
+[node name="Tadpole" type="CharacterBody2D" unique_id=1704495056 groups=["Actors", "Enemies", "Entities", "Tadpoles"]]
+visibility_layer = 2
+collision_layer = 2
+collision_mask = 8
+script = ExtResource("1_pb65w")
+debug = true
+editor_hidden = false
+metadata/_custom_type_script = "uid://clpkxqaavntw4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2093108263]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_frwge")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=527041073]
+position = Vector2(0, -4)
+texture = ExtResource("2_qqbp8")
+hframes = 2
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=883626230]
+libraries/ = SubResource("AnimationLibrary_h3diu")
+
+[node name="StateTimer" type="Timer" parent="." unique_id=1877164304]
+process_callback = 0
+one_shot = true
+
+[node name="FlockTimer" type="Timer" parent="." unique_id=654577584]
+process_callback = 0
+one_shot = true
+
+[node name="ScatterToFlockCooldownTimer" type="Timer" parent="." unique_id=374195390]
+process_callback = 0
+one_shot = true
+
+[node name="ScatterTimer" type="Timer" parent="." unique_id=754577585]
+process_callback = 0
+one_shot = true
+
+[node name="ScatterCooldownTimer" type="Timer" parent="." unique_id=876792798]
+process_callback = 0
+one_shot = true
+
+[node name="WorldDetector" type="Area2D" parent="." unique_id=1817036760]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldDetector" unique_id=1130383620]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_qqbp8")
+
+[node name="MoveCast" type="RayCast2D" parent="." unique_id=1944886963]
+position = Vector2(0, -4)
+target_position = Vector2(10, 0)
+collision_mask = 8
+
+[node name="TargetCast" type="RayCast2D" parent="." unique_id=393272081]
+position = Vector2(0, -4)
+target_position = Vector2(10, 0)
+collision_mask = 8
+
+[node name="ThreatDetector" type="Area2D" parent="." unique_id=954577586]
+position = Vector2(0, -4)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ThreatDetector" unique_id=1054577587]
+shape = SubResource("CircleShape2D_threat")
+debug_color = Color(0.36074692, 0.86663747, 0, 0.05)
+
+[connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]
+[connection signal="timeout" from="FlockTimer" to="." method="_on_FlockTimer_timeout"]
+[connection signal="timeout" from="ScatterToFlockCooldownTimer" to="." method="_on_FlockTimer_timeout"]
+[connection signal="timeout" from="ScatterTimer" to="." method="_on_ScatterTimer_timeout"]
+[connection signal="body_entered" from="WorldDetector" to="." method="_on_WorldDetector_body_entered"]
+[connection signal="body_entered" from="ThreatDetector" to="." method="_on_ThreatDetector_body_entered"]
+[connection signal="body_exited" from="ThreatDetector" to="." method="_on_ThreatDetector_body_exited"]

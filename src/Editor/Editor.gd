@@ -51,7 +51,7 @@ var active_operation = [] #[[subop][subop][subop]]
 @onready var w = get_tree().get_root().get_node("World")
 @onready var inspector = $Secondary/Win/Inspector
 @onready var tile_master = $TileMaster
-@onready var log = $Margin/Log
+@onready var e_log = $Margin/Log
 var actor_collection
 var prop_collection
 var trigger_collection
@@ -73,11 +73,11 @@ func _ready():
 
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
-	setup_level()
+	enter()
 	#$Main/Win.move_child($Main/Win/Tab, 0) TODO: was supposed to make tabcontainer go behind resize controls, didnt work
 
-func setup_level(): #Call this every time the level is changed or reloaded
-	print("enter")
+func enter(): #Call this every time the level is changed or reloaded
+	#print("enter")
 	#emit_signal("level_selected", w.current_level)
 	setup_windows()
 	f.pc().disable()
@@ -90,9 +90,6 @@ func setup_level(): #Call this every time the level is changed or reloaded
 		p.queue_free()
 	for t in get_tree().get_nodes_in_group("Triggers"):
 		t.queue_free()
-	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
-		if wg.uses_spawn:
-			wg.queue_free()
 	actor_collection = w.current_level.get_node("Actors")
 	prop_collection = w.current_level.get_node("Props")
 	trigger_collection = w.current_level.get_node("Triggers")
@@ -183,24 +180,18 @@ func exit():
 	f.pc().get_node("PlayerCamera").make_current()
 	f.pc().get_node("PlayerCamera").reset()
 	#set_entities_pickable(false)
-	for s in get_tree().get_nodes_in_group("SpawnPoints"):
-		s.visible = false
-	for v in get_tree().get_nodes_in_group("VanishingPoints"):
-		v.visible = false
-	for wgs in get_tree().get_nodes_in_group("WaypointGlobalSpawns"):
-		wgs.spawn()
-		wgs.visible = false
-	for tv in get_tree().get_nodes_in_group("ToolVectors"):
-		tv.visible = false
-	for a in get_tree().get_nodes_in_group("ActorSpawns"):
-		a.spawn()
-		a.visible = false
-	for p in get_tree().get_nodes_in_group("PropSpawns"):
-		p.spawn()
-		p.visible = false
-	for t in get_tree().get_nodes_in_group("TriggerSpawns"):
-		t.spawn()
-		t.visible = false
+
+	w.spawn_entities()
+	await w.finished_spawning
+
+	var visibility_change_list = ["SpawnPoints", "VanishingPoints", \
+	"WaypointGlobalSpawns", "WaypointGlobals", "WaypointLocals", \
+	"ToolVectors", "ActorSpawns", "PropSpawns", "TriggerSpawns"]
+
+	for i in visibility_change_list:
+		for j in get_tree().get_nodes_in_group(i):
+			j.visible = false
+
 	for l in get_tree().get_nodes_in_group("SunLights"):
 		l.editor_exit()
 
@@ -485,7 +476,7 @@ func set_tile_map_selection(start_pos, end_pos):
 	#print(tile_map_selection)
 
 func move_tile_map_selection(start_pos, end_pos):# TODO: make work with undo/redo
-	log.lprint("moved tiles")
+	e_log.lprint("moved tiles")
 	var selected_cells = get_selected_cells_as_dictionary()
 
 	var change = get_cell(end_pos) - get_cell(start_pos)
@@ -503,7 +494,7 @@ func move_tile_map_selection(start_pos, end_pos):# TODO: make work with undo/red
 			tile_map_layer_current.set_cell(new_tm_pos, 0, ts_pos)
 
 func erase_tile_map_selection():
-	log.lprint("erased tiles")
+	e_log.lprint("erased tiles")
 	var selected_cells = get_selected_cells_as_dictionary()
 	for layer in selected_cells:
 		var tile_map_layer_current: TileMapLayer = tile_map.get_child(layer)
@@ -514,11 +505,11 @@ func erase_tile_map_selection():
 
 
 func copy_tile_map_selection():
-	log.lprint("copied tiles")
+	e_log.lprint("copied tiles")
 	tile_map_copy_buffer = get_selected_cells_as_dictionary("local_to_selection")
 
 func paste_tiles_from_buffer(pos):
-	log.lprint("pasted tiles")
+	e_log.lprint("pasted tiles")
 	for layer in tile_map_copy_buffer:
 		var tile_map_layer_current: TileMapLayer = tile_map.get_child(layer)
 		for cell in tile_map_copy_buffer[layer]:
@@ -727,7 +718,7 @@ func set_misc(misc_path, pos):
 			misc.global_position = ((pos * 16) + Vector2i(8, 8)) - Vector2i(inspector.active.global_position)
 			inspector.active.add_child(misc) #don't select it though so we can add more
 		else:
-			log.lprint("no valid entity for WaypointGlobalSpawn")
+			e_log.lprint("no valid entity for WaypointGlobalSpawn")
 			misc.free()
 			return
 
@@ -736,7 +727,7 @@ func set_misc(misc_path, pos):
 			misc.global_position = ((pos * 16) + Vector2i(8, 8)) - Vector2i(inspector.active.global_position)
 			inspector.active.add_child(misc) #don't select it though so we can add more
 		else:
-			log.lprint("no valid entity for WaypointLocal")
+			e_log.lprint("no valid entity for WaypointLocal")
 			misc.free()
 			return
 
@@ -745,7 +736,7 @@ func set_misc(misc_path, pos):
 			misc.global_position = ((pos * 16) + Vector2i(8, 8)) - Vector2i(inspector.active.global_position)
 			inspector.active.add_child(misc) #don't select it though so we can add more
 		else:
-			log.lprint("no valid entity for ToolVector")
+			e_log.lprint("no valid entity for ToolVector")
 			misc.free()
 			return
 

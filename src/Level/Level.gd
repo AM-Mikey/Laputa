@@ -120,7 +120,7 @@ func merge_one_way_ssp_tile() -> void:
 		static_body.add_child(polygon_node)
 
 
-func do_conversation_on_enter(hide_player = false): #TODO: implement the player hidden + switch camera option
+func do_conversation_on_enter(_hide_player = false): #TODO: implement the player hidden + switch camera option
 	await get_tree().process_frame
 	if f.db(): #clear old dialog box if there is one
 		f.db().exit()

@@ -2,14 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://ddaew12v1ku8o" path="res://assets/Actor/Enemy/Beetle.png" id="2_7vcwk"]
 [ext_resource type="Script" uid="uid://qcbiyidgaq45" path="res://src/Actor/Enemy/Beetle.gd" id="3"]
-[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/ToolVector.tscn" id="3_g4id4"]
+[ext_resource type="PackedScene" path="res://src/Editor/ToolVector.tscn" id="3_g4id4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7vcwk"]
 size = Vector2(12, 9)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qsmhk"]
 radius = 7.0
-height = 15.0
+height = 14.0
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(14, 14)
@@ -154,11 +154,11 @@ disabled = true
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=547326425]
+visible = false
 collision_layer = 131072
 collision_mask = 0
 
 [node name="Cling" type="CollisionShape2D" parent="Hurtbox" unique_id=1512399654]
-visible = false
 position = Vector2(0, -7)
 shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
@@ -170,7 +170,6 @@ disabled = true
 debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=1477557090]
-visible = false
 collision_layer = 262144
 collision_mask = 65536
 

@@ -290,10 +290,10 @@ func _on_ItemDetector_area_entered(area):
 
 
 		elif pickup.is_in_group("AmmoPickups"):
-			for w in guns.get_children():
-				if w.max_ammo != 0:
-					w.ammo += int(w.max_ammo * pickup.value) #percent of max ammo
-					w.ammo = min(w.ammo, w.max_ammo)
+			for g in guns.get_children():
+				if g.max_ammo != 0:
+					g.ammo += int(g.max_ammo * pickup.value) #percent of max ammo
+					g.ammo = min(g.ammo, g.max_ammo)
 			am.play("get_ammo")
 			var ammo_get = AMMO_GET.instantiate()
 			ammo_get.position = pickup.global_position

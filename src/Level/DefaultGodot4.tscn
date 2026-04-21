@@ -87,20 +87,6 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=993935856]
 visibility_layer = 2
 
-[node name="Frog" parent="Spawns" unique_id=517586733 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
-position = Vector2(2168, 1904)
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
 [node name="Stalagtite" parent="Spawns" unique_id=1099828600 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
 position = Vector2(2216, 1984)
@@ -140,20 +126,6 @@ properties = {
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog1" parent="Spawns" unique_id=1864607949 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
-position = Vector2(1640, 2176)
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
 "water_gravity": [150.0, 3]
 }
 
@@ -251,34 +223,6 @@ properties = {
 "projectile_damage": [2, 2],
 "projectile_speed": [150, 2],
 "speed": [Vector2(150, 350), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog2" parent="Spawns" unique_id=2081191910 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
-position = Vector2(2280, 2096)
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [false, 1],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Frog3" parent="Spawns" unique_id=916519479 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
-position = Vector2(1880, 2256)
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"editor_hidden": [false, 1],
-"id": ["iwilldie", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
 "water_gravity": [150.0, 3]
 }
 

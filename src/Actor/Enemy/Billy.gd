@@ -43,12 +43,13 @@ var waypoint
 
 
 
-func setup():
-	change_state("walk")
+func setup(): #Reminder: no function called can use await
 	hp = 6
 	reward = 2
 	damage_on_contact = 1
 	speed = Vector2(50, 50)
+	w.emit_signal("finished_spawn_entities_step")
+	change_state("walk")
 
 ### STATES ###
 
@@ -69,7 +70,7 @@ func enter_walk(_last_state):
 	await $StateTimer.timeout
 	change_state("idle")
 
-func do_walk():
+func do_walk(_delta):
 	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
 		change_state("idle")
 		return
@@ -92,7 +93,7 @@ func enter_idle(_last_state):
 	await $StateTimer.timeout
 	change_state("walk")
 
-func do_idle() -> void:
+func do_idle(_delta) -> void:
 	velocity = calc_velocity(move_dir)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
@@ -100,7 +101,7 @@ func do_idle() -> void:
 func enter_aggro(_last_state):
 	pass
 
-func do_aggro():
+func do_aggro(_delta):
 	if pc: #TODO: global enemy shutdown fix
 		var target_dir = Vector2(sign(position.x - pc.position.x), 0)
 		look_dir = target_dir * -1

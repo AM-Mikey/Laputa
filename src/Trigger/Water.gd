@@ -9,9 +9,10 @@ var splash_targets = []
 		gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * val
 		velocity_dropoff = val
 
-func _ready():
+func _ready(): #Reminder: no function called can use await
 	trigger_type = "water"
 	velocity_dropoff = velocity_dropoff
+	w.emit_signal("finished_spawn_entities_step")
 
 func _on_Water_body_entered(body):
 	var do_bubbles = true

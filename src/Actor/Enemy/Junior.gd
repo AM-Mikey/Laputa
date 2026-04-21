@@ -15,12 +15,13 @@ var target: Node
 @onready var ap = $AnimationPlayer
 @onready var st = $StateTimer
 
-func setup():
-	change_state(starting_state)
+func setup(): #Reminder: no function called can use await
 	hp = 12
 	reward = 8
 	damage_on_contact = 3
 	speed = Vector2(50, 50)
+	w.emit_signal("finished_spawn_entities_step")
+	change_state(starting_state)
 
 ### STATES ###
 

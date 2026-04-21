@@ -25,13 +25,15 @@ var bail_time = 6.0
 
 
 
-func setup():
-	change_state(starting_state)
+func setup(): #Reminder: no function called can use await
 	hp = 4
 	reward = 2
 	damage_on_contact = 2
 	speed = Vector2(100, 50)
+	w.emit_signal("finished_spawn_entities_step")
+	await w.finished_spawning #wait for global_waypoints
 	find_waypoints()
+	change_state(starting_state)
 
 func find_waypoints():
 	for wp in get_tree().get_nodes_in_group("WaypointGlobals"):

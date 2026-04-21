@@ -118,7 +118,7 @@ var interrupt_queue = []
 
 
 
-func play(sfx_string: String, actor = null, bus = null, volume = 1.0, pitchspread:=0.0):
+func play(sfx_string: String, actor = null, bus = null, volume = 1.0, pitchspread := 0.0):
 	if _check_sfx(sfx_string):
 		var player
 		if actor == null: #non-positional

@@ -16,7 +16,7 @@ var fly_cooldown_time = 2.0
 var fly_speed = Vector2(100, 100)
 var collision_shape_data: Dictionary
 
-func setup():
+func setup(): #Reminder: no function called can use await
 	move_dir = $MoveVector.direction
 	wall_dir = move_dir * -1
 	gravity = 0
@@ -28,6 +28,7 @@ func setup():
 			damage_on_contact = 1
 			idle_time = 2.0
 			$Sprite2D.texture = TX_0
+			w.emit_signal("finished_spawn_entities_step")
 			change_state("idle")
 		1:
 			hp = 2
@@ -36,6 +37,7 @@ func setup():
 			$Sprite2D.texture = TX_1
 			$CenteredPivot/PlayerCast.enabled = true
 			$CenteredPivot/WorldCast.enabled = true
+			w.emit_signal("finished_spawn_entities_step")
 			change_state("idlescan")
 
 

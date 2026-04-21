@@ -1,4 +1,5 @@
 [gd_scene format=3 uid="uid://5f0rh3vdufdg"]
 
-[node name="PosSFX" type="AudioStreamPlayer2D"]
+[node name="PosSFX" type="AudioStreamPlayer2D" unique_id=1094658765]
+max_distance = 512.0
 bus = &"SFX"
