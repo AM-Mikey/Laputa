@@ -7,12 +7,10 @@
 [ext_resource type="Texture2D" path="res://assets/Background/IslandEdge.png" id="4_ik13d"]
 [ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_0chf0"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="6_uphkj"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_umu1a"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="8_l7jh2"]
 [ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_w84y6"]
 [ext_resource type="PackedScene" path="res://src/Editor/WaypointLocal.tscn" id="9_w84y6"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/WaypointGlobalSpawn.tscn" id="10_ds6jv"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="10_xxkrx"]
 [ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="12_alxy6"]
 [ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="12_jcvae"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="13_jcvae"]
@@ -123,26 +121,6 @@ properties = {
 "speed": [Vector2(150, 350), 5],
 "water_gravity": [150.0, 3]
 }
-
-[node name="Water" type="MarginContainer" parent="Spawns" unique_id=1839451250 groups=["TriggerSpawns"] instance=ExtResource("7_umu1a")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
-offset_left = 3984.0
-offset_top = 2288.0
-offset_right = 4336.0
-offset_bottom = 2432.0
-mouse_filter = 2
-script = ExtResource("10_xxkrx")
-trigger_path = "res://src/Trigger/Water.tscn"
-properties = {
-"color": [Color(0, 0, 0.701961, 1), 20],
-"editor_hidden": [false, 1],
-"id": [&"Water2", 4],
-"velocity_dropoff": [0.75, 3]
-}
-size_is_default = false
 
 [node name="BreakBlock" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("8_l7jh2")]
 modulate = Color(1, 1, 1, 0.75)

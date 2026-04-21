@@ -38,7 +38,7 @@ func setup(): #Reminder: no function called can use await
 			reward = 3
 			damage_on_contact = 3
 			$Sprite2D.texture = TX_1
-  w.emit_signal("finished_spawn_entities_step")
+	w.emit_signal("finished_spawn_entities_step")
 	change_state("rotate")
 
 
