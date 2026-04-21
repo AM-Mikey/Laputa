@@ -11,7 +11,7 @@ var air_cof = 0.05
 
 var dead = false
 var is_in_water = false: set = set_is_in_water
-var do_bubbles = true
+@export var do_bubbles = true
 var home := Vector2(0, 0)
 var rng = RandomNumberGenerator.new()
 

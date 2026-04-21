@@ -472,6 +472,7 @@ slide_on_ceiling = false
 wall_min_slide_angle = 3.1415927
 floor_snap_length = 0.0
 script = ExtResource("2")
+do_bubbles = false
 speed = Vector2(20, 150)
 editor_hidden = false
 

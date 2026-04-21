@@ -2,6 +2,8 @@ extends Enemy
 
 var index: int
 
+signal arm_die(arm)
+
 func setup(): #Reminder: no function called can use await
 	hp = 2
 	reward = 1
@@ -9,14 +11,11 @@ func setup(): #Reminder: no function called can use await
 	$Label.visible = get_parent().get_parent().debug
 	w.emit_signal("finished_spawn_entities_step")
 
+func _on_physics_process(_delta):
+	var parent_direction = global_position - get_parent().global_position
+	var angle_to_parent = parent_direction.angle()
+	var frame_index = posmod(round(angle_to_parent / (TAU / 16)), 16)
+	$Sprite2D.frame_coords.x = frame_index
+
 func do_death_routine():
-	var climber = get_parent().get_parent()
-
-	if climber.state == "fall": #dont bother when about to chase
-		return
-
-	if index == climber.pivot_index:
-		climber.change_state("fall")
-
-	if climber.get_node("Arms").get_child_count() == 1: #we are the last child
-		climber.change_state("chase")
+	arm_die.emit(self)
