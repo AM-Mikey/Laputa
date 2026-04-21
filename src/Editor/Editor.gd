@@ -40,6 +40,8 @@ var pre_grab_subtool: String
 var last_updated_cell: Vector2i #store for limiting updating cells on mousing over with a tool, i.e. painting
 var lmb_held = false
 var rmb_held = false
+var lmb_physically_held = false
+var rmb_physically_held = false
 var shift_held = false
 var ctrl_held = false
 
@@ -263,16 +265,19 @@ func _unhandled_input(event):
 
 
 	if event.is_action_pressed("editor_lmb"):
-		lmb_held = true
-		rmb_held = false #this might fuck things up for other tools
-		future_operations.clear()
+		lmb_physically_held = true
 
 	if event.is_action_pressed("editor_rmb"):
-		rmb_held = true
-		inspector.on_deselected() #slight consequence is in inspector, unsaved values will reset on moving entity
-		#lmb_held = false #this might fuck things up for other tools
-		future_operations.clear()
+		rmb_physically_held = true
 
+	if !lmb_held and !rmb_held:
+		if lmb_physically_held:
+			lmb_held = true
+			future_operations.clear()
+		elif rmb_physically_held:
+			rmb_held = true
+			inspector.on_deselected() #slight consequence is in inspector, unsaved values will reset on moving entity
+			future_operations.clear()
 	#main part
 	await get_tree().process_frame #wait for new active to be set
 	match active_tool:
@@ -282,8 +287,10 @@ func _unhandled_input(event):
 
 	#after, just so we can check held during main part
 	if event.is_action_released("editor_lmb"):
+		lmb_physically_held = false
 		lmb_held = false
 	if event.is_action_released("editor_rmb"):
+		rmb_physically_held = false
 		rmb_held = false
 
 
@@ -306,9 +313,9 @@ func do_tile_input(event):
 			elif ctrl_held: set_tool("tile", "box")
 			else:
 				set_tool("tile", "paint")
-				if event.is_action_pressed("editor_lmb"):
+				if event.is_action_pressed("editor_lmb") and lmb_held:
 					set_cells(get_cells_centerbox(mouse_pos))
-				elif event.is_action_pressed("editor_rmb"):
+				elif event.is_action_pressed("editor_rmb") and rmb_held:
 					if inspector.active and inspector.active_type != "background" and inspector.active_type != "tile_map":
 						return #don't erase a tile if we're selecting an entity
 					set_cells(get_cells_centerbox(mouse_pos), true)
