@@ -15,11 +15,12 @@ var spinup_speed_scale = 12.0
 var spinup_spin_time = 0.5
 var tween
 
-func setup():
+func setup(): #Reminder: no function called can use await
 	inspect_time = 1.0
 	base_gravity_scale = 0.5
 	water_gravity_scale = 0.5
 	gravity_scale = base_gravity_scale
+	w.emit_signal("finished_spawn_entities_step")
 
 func _input(event):
 	if event.is_action_pressed("inspect") && !active_players.is_empty():

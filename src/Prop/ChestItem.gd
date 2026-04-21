@@ -8,11 +8,12 @@ var held_item: Item
 var active_players = []
 
 
-func setup(): #check if items are orphaned or not
+func setup(): #Reminder: no function called can use await #TODO:check if items are orphaned or not
 	inspect_time = 4.0 #got item interrupt length
 	held_item = load("res://src/Item/%s.tres" % held_item_name.to_pascal_case())
 	if !held_item:
 		expend_prop()
+	w.emit_signal("finished_spawn_entities_step")
 
 
 func _input(event):

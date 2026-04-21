@@ -23,14 +23,14 @@ var locked_on = false
 var shooting = false
 
 
-func setup():
-	change_state("idle")
+func setup(): #Reminder: no function called can use await
 	hp = 4
 	damage_on_contact = 1
 	speed = Vector2(50, 200)
 	gravity = 250
 	reward = 2
-
+	w.emit_signal("finished_spawn_entities_step")
+	change_state("idle")
 
 ### STATES ###
 

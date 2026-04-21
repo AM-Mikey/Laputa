@@ -18,17 +18,15 @@ var hiding = false
 var peeking = false
 
 
-func setup():
+func setup(): #Reminder: no function called can use await
 	hp = 4
 	damage_on_contact = 1
 	speed = Vector2(100, 200)
 	gravity = 250
-
 	reward = 3
-
 	$FireCooldown.start(cooldown_time)
-
 	cover()
+	w.emit_signal("finished_spawn_entities_step")
 
 func _physics_process(_delta):
 	if disabled or dead: return

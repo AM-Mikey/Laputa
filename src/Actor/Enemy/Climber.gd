@@ -15,12 +15,13 @@ var pivot_index
 var rotation_cycle = 0
 
 
-func setup():
+func setup(): #Reminder: no function called can use await
 	hp = 16
 	damage_on_contact = 3
 	reward = 3
 	speed = Vector2(80, 80) #chase speed
 	setup_arms()
+	w.emit_signal("finished_spawn_entities_step")
 	change_state("rotate")
 
 

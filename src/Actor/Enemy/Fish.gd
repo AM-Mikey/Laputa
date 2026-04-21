@@ -22,11 +22,8 @@ var did_bonk: bool = false
 @onready var rc: RayCast2D = get_node("RayCast2D")
 
 
-func setup():
-	#print("setup fish")
-	change_state("idle")
+func setup(): #Reminder: no function called can use await
 	do_bubbles = false
-	if debug: print("ready fish")
 	speed = Vector2(20, 150)
 	hp = 3
 	damage_on_contact = normal_damage
@@ -43,6 +40,8 @@ func setup():
 				"right":
 					x_max = c.position.x - start_pos.x
 	update_path_lines()
+	w.emit_signal("finished_spawn_entities_step")
+	change_state("idle")
 
 func on_swim_dir_x_changed(new):
 	swim_dir_x = new

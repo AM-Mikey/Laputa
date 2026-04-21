@@ -1,10 +1,10 @@
 extends Area2D
 
-var allow_spawn := true
-var physics_prop_spawn_distance = 0.001
-
 @export_file var prop_path
 @export var properties = {}
+
+var allow_spawn := true
+var physics_prop_spawn_distance = 0.001
 
 @onready var w = get_tree().get_root().get_node("World")
 
@@ -68,7 +68,6 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 	prop.free()
 
 func spawn():
-	await get_tree().process_frame #wait to set allow_spawn
 	if !allow_spawn: return
 	if prop_path == null:
 		printerr("ERROR: no prop chosen in PropSpawn")

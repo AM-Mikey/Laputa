@@ -359,11 +359,11 @@ func align_out():
 		await tween.finished
 
 
-func display_name(name: String):
+func display_name(d_name: String):
 	$Name.visible = true
 	$Name/Shadow.global_position = $Name/HBox/Label.global_position - Vector2.ONE
-	$Name/HBox/Label.text = name.capitalize()
-	$Name/Shadow.text = name.capitalize()
+	$Name/HBox/Label.text = d_name.capitalize()
+	$Name/Shadow.text = d_name.capitalize()
 	await get_tree().create_timer(0.01, true, false).timeout
 	$Name/Shadow.size = $Name/HBox/Label.size
 	$Name/Panel.size.x = $Name/HBox/Label.size.x + 19

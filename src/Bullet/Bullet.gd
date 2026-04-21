@@ -39,7 +39,7 @@ func _physics_process(delta):
 	level_exit_check()
 	_on_physics_process(delta)
 
-func _on_physics_process(delta): #for children
+func _on_physics_process(_delta): #for children
 	pass
 
 func setup_timeout():

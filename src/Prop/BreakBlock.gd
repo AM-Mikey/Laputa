@@ -10,9 +10,8 @@ var is_grounded = true
 @export var crush_enemies = true
 
 
-#func setup():
-	#velocity = Vector2.ZERO
-	#move_and_slide()
+func setup(): #Reminder: no function called can use await
+	w.emit_signal("finished_spawn_entities_step")
 
 func on_break(method = "cut"):
 	broken = true
@@ -35,7 +34,7 @@ func on_break(method = "cut"):
 		$Sprite2D.visible = false
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if !broken:
 		if !linear_velocity.y > 50.0:
 			if !is_grounded:
@@ -83,7 +82,6 @@ func _on_CrushDetector_body_entered(body): #TODO: other crush interactions
 		target = ["enemy", body]
 		if !crush_targets.has(target):
 			crush_targets.append(target)
-
 
 func _on_CrushDetector_body_exited(body):
 	var target

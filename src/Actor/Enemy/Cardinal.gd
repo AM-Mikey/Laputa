@@ -14,12 +14,13 @@ var waypoint_tolerance := 2.0
 
 @export var max_speed := Vector2(150.0, 100.0)
 
-func setup():
-	change_state("idle")
+func setup(): #Reminder: no function called can use await
 	reward = 1
 	hp = 1
 	set_floor_stop_on_slope_enabled(true)
 	find_waypoints()
+	w.emit_signal("finished_spawn_entities_step")
+	change_state("idle")
 
 func find_waypoints():
 	for wp in get_tree().get_nodes_in_group("WaypointGlobals"):

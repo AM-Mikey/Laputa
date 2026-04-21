@@ -51,4 +51,4 @@ func _unhandled_input(event):
 		zoom = Vector2(zooms[current_zoom_index], zooms[current_zoom_index])
 		global_position += (-0.5 * get_viewport().size + get_viewport().get_mouse_position()) * ((1/zooms[old_zoom_index]) - (1/zooms[current_zoom_index]))
 		emit_signal("camera_zoom_changed")
-		editor.log.lprint("Zoomed to %.2fx" % zoom.x)
+		editor.e_log.lprint("Zoomed to %.2fx" % zoom.x)

@@ -6,10 +6,11 @@ var length: int
 var sprites := []
 var sprite_to_animate
 
-func setup():
+func setup(): #Reminder: no function called can use await
 	inspect_time = 0.1
 	await get_tree().process_frame #needs for some reason
 	setup_length()
+	w.emit_signal("finished_spawn_entities_step")
 
 func setup_length():
 	if $Ground.is_colliding():

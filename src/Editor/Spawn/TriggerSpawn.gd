@@ -1,13 +1,13 @@
 extends MarginContainer
 
+@export_file var trigger_path
+@export var properties = {}
+@export var size_is_default = true
+
 var allow_spawn := true
 var state = "idle"
 var active_handle = null
 var drag_offset = Vector2.ZERO
-
-@export_file var trigger_path
-@export var properties = {}
-@export var size_is_default = true
 
 @onready var world = get_tree().get_root().get_node("World")
 
@@ -73,7 +73,6 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 	trigger.free()
 
 func spawn():
-	await get_tree().process_frame #wait to set allow_spawn
 	if !allow_spawn: return
 	if trigger_path == null:
 		printerr("ERROR: no trigger chosen in TriggerSpawn")

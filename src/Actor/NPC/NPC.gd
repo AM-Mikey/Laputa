@@ -14,7 +14,6 @@ var dialog_box: Node
 var active_pc = null
 var disabled = false
 var move_dir = Vector2.LEFT
-var just_spawned = true
 
 var waypoints = {}
 #var current_waypoint := 0
@@ -38,17 +37,13 @@ var camera_forgiveness = 16
 
 @onready var w = get_tree().get_root().get_node("World")
 
-func _ready():
+func _ready(): #Reminder: no function called can use await
 	home = global_position
 	find_waypoints()
-
 	speed = Vector2.ZERO
-
 	setup_states()
+	w.emit_signal("finished_spawn_entities_step")
 	change_state(starting_state)
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	just_spawned = false
 
 
 

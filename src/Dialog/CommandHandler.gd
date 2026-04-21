@@ -175,11 +175,11 @@ func face(string):
 	if string == "":
 		printerr("COMMAND ERROR: no npc given for /face")
 		return
-	var face = string.split(",", true, 1)
-	var id =  face[0]
+	var n_face = string.split(",", true, 1)
+	var id =  n_face[0]
 	var expression = 0
-	if face.size() > 1:
-		expression = int(face[1])
+	if n_face.size() > 1:
+		expression = int(n_face[1])
 
 	face_node.visible = true
 

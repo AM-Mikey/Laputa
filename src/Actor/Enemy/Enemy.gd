@@ -21,7 +21,6 @@ var hit_enemies_on_contact = false
 var hurt_sound = "enemy_hurt"
 var die_sound = "enemy_die"
 var damage_number = null
-var just_spawned = true
 
 var reward = 1
 var heart_chance = 1
@@ -36,7 +35,7 @@ var ammo_chance = 1
 
 
 
-func _ready():
+func _ready(): #Reminder: no function called can use await
 	home = global_position
 
 	if disabled: return
@@ -52,9 +51,6 @@ func _ready():
 			#change_state(state)
 
 	setup()
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	just_spawned = false
 
 func setup(): #EVERY ENEMY MUST HAVE
 	pass #to be determined in enemy script.

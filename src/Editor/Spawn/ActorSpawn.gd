@@ -3,6 +3,8 @@ extends Area2D
 @export_file var actor_path
 @export var properties = {}
 
+var allow_spawn := true
+
 @onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
@@ -44,7 +46,7 @@ func _ready():
 	if w.el.get_child_count() == 0: #not in editor
 		visible = false
 		input_pickable = false
-		spawn()
+		#spawn() #TODO:cleanup this as we're doing this in world.gd now
 
 func initialize(): #first time set up properties
 	#print("initialize")
@@ -103,8 +105,8 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 	actor.free()
 
 func spawn():
-	#print("spawn")
-	if actor_path == null:
+	if !allow_spawn: return
+	if !actor_path:
 		printerr("ERROR: no actor chosen in ActorSpawn")
 		return
 
@@ -115,7 +117,7 @@ func spawn():
 	if properties["id"][0] == "": #no given id
 		actor.id = name
 	actor.global_position = global_position
-	await w.current_level.get_node("Actors").call_deferred("add_child", actor)
+	w.current_level.get_node("Actors").call_deferred("add_child", actor)
 
 	for ac in actor.get_children(): #clear old from actor
 		if ac.is_in_group("WaypointLocals") || ac.is_in_group("ToolVectors"):
@@ -127,6 +129,8 @@ func spawn():
 		if c.is_in_group("WaypointLocals") || c.is_in_group("ToolVectors"):
 			var copy = c.duplicate()
 			actor.add_child(copy)
+
+
 
 ### HELPERS ###
 

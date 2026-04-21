@@ -2,7 +2,7 @@ extends Area2D
 
 const WAYPOINT_GLOBAL = preload("res://src/Editor/WaypointGlobal.tscn")
 
-#@export var properties = {}
+#@export var properties = {} #TODO: save and export hese
 @export var tag_name: String
 @export var index: int = 0
 
@@ -49,7 +49,7 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 
 
 func spawn():
-	print("spawnwaypoint") #somehow spawns more than one of these if it's not the starting position #TODO
+	#somehow spawns more than one of these if it's not the starting position #TODO check if this is still the case
 	var saved_pos = global_position
 	var waypoint_global = WAYPOINT_GLOBAL.instantiate()
 	waypoint_global.global_position = saved_pos

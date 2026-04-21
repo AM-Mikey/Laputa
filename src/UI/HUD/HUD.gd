@@ -391,5 +391,5 @@ func _on_xp_progress_value_changed(_value: float) -> void:
 func _on_xp_lost_value_changed(_value: float) -> void:
 	set_cap_pos(xp_lost, xp_lost.size.x, xp_lost_cap)
 
-func _on_cooldown_progress_value_changed(value: float) -> void:
+func _on_cooldown_progress_value_changed(_value: float) -> void:
 	set_cap_pos(cd_progress, cd_progress.size.x, cd_progress_cap)
