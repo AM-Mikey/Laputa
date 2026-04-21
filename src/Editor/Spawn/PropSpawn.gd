@@ -45,7 +45,6 @@ func _ready():
 	if w.el.get_child_count() == 0: #not in editor
 		visible = false
 		input_pickable = false
-		spawn()
 
 func initialize(): #first time set up properties
 	var prop = load(prop_path).instantiate()

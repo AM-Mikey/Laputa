@@ -90,9 +90,6 @@ func enter(): #Call this every time the level is changed or reloaded
 		p.queue_free()
 	for t in get_tree().get_nodes_in_group("Triggers"):
 		t.queue_free()
-	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
-		if wg.uses_spawn:
-			wg.queue_free()
 	actor_collection = w.current_level.get_node("Actors")
 	prop_collection = w.current_level.get_node("Props")
 	trigger_collection = w.current_level.get_node("Triggers")
@@ -183,24 +180,18 @@ func exit():
 	f.pc().get_node("PlayerCamera").make_current()
 	f.pc().get_node("PlayerCamera").reset()
 	#set_entities_pickable(false)
-	for s in get_tree().get_nodes_in_group("SpawnPoints"):
-		s.visible = false
-	for v in get_tree().get_nodes_in_group("VanishingPoints"):
-		v.visible = false
-	for wgs in get_tree().get_nodes_in_group("WaypointGlobalSpawns"):
-		wgs.spawn()
-		wgs.visible = false
-	for tv in get_tree().get_nodes_in_group("ToolVectors"):
-		tv.visible = false
-	for a in get_tree().get_nodes_in_group("ActorSpawns"):
-		a.spawn()
-		a.visible = false
-	for p in get_tree().get_nodes_in_group("PropSpawns"):
-		p.spawn()
-		p.visible = false
-	for t in get_tree().get_nodes_in_group("TriggerSpawns"):
-		t.spawn()
-		t.visible = false
+
+	w.spawn_entities()
+	await w.finished_spawning
+
+	var visibility_change_list = ["SpawnPoints", "VanishingPoints", \
+	"WaypointGlobalSpawns", "WaypointGlobals", "WaypointLocals", \
+	"ToolVectors", "ActorSpawns", "PropSpawns", "TriggerSpawns"]
+
+	for i in visibility_change_list:
+		for j in get_tree().get_nodes_in_group(i):
+			j.visible = false
+
 	for l in get_tree().get_nodes_in_group("SunLights"):
 		l.editor_exit()
 

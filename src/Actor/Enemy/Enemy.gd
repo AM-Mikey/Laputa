@@ -37,25 +37,15 @@ var ammo_chance = 1
 
 func _ready(): #Reminder: no function called can use await
 	home = global_position
-
 	if disabled: return
-
 	var state_label = STATE_LABEL.instantiate()
 	add_child(state_label)
 	state_label.visible = debug
 	safe_margin = 0.001
-
-	#if not is_in_group("EnemyPreviews"): #this was causing issues with waiting a frame for setup(), just start state in setup()
-		#await get_tree().process_frame
-		#if state != "" and state != null: #TODO: this prevents enemies from starting in a state if we dont yield? we get ton of errors if we dont because we delete the enemy when moving it
-			#change_state(state)
-
 	setup()
 
 func setup(): #EVERY ENEMY MUST HAVE
 	pass #to be determined in enemy script.
-
-
 
 func disable():
 	disabled = true

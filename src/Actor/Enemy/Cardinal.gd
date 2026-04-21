@@ -18,8 +18,9 @@ func setup(): #Reminder: no function called can use await
 	reward = 1
 	hp = 1
 	set_floor_stop_on_slope_enabled(true)
-	find_waypoints()
 	w.emit_signal("finished_spawn_entities_step")
+	await w.finished_spawning #wait for global_waypoints
+	find_waypoints()
 	change_state("idle")
 
 func find_waypoints():

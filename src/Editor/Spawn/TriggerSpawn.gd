@@ -37,7 +37,7 @@ func _ready():
 
 	if world.el.get_child_count() == 0: #not in editor
 		visible = false
-		spawn()
+
 	for h in $Handles/Top.get_children():
 			h.connect("button_down", Callable(self, "on_handle").bind(h))
 			buttons.append(h)

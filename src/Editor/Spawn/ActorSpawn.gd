@@ -46,7 +46,6 @@ func _ready():
 	if w.el.get_child_count() == 0: #not in editor
 		visible = false
 		input_pickable = false
-		#spawn() #TODO:cleanup this as we're doing this in world.gd now
 
 func initialize(): #first time set up properties
 	#print("initialize")
@@ -66,7 +65,7 @@ func initialize(): #first time set up properties
 				actor.remove_child(ac)
 				add_child(ac)
 				ac.owner = w.current_level
-		if ac.is_in_group("WaypointGlobalSpawns"):
+		if ac.is_in_group("WaypointGlobalSpawns"): #Not sure about this being here. what is this part realistically doing?
 			if !get_if_actor_has_waypoint(ac):
 				actor.remove_child(ac)
 				add_child(ac)
@@ -120,10 +119,8 @@ func spawn():
 	w.current_level.get_node("Actors").call_deferred("add_child", actor)
 
 	for ac in actor.get_children(): #clear old from actor
-		if ac.is_in_group("WaypointLocals") || ac.is_in_group("ToolVectors"):
+		if ac.is_in_group("WaypointLocals") || ac.is_in_group("ToolVectors") || ac.is_in_group("WaypointGlobalSpawns"):
 			actor.remove_child(ac)
-		if ac.is_in_group("WaypointGlobalSpawns"): #turn off visibility
-			ac.visible = false
 
 	for c in get_children(): #add new from spawn
 		if c.is_in_group("WaypointLocals") || c.is_in_group("ToolVectors"):

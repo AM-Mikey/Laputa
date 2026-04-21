@@ -12,7 +12,6 @@ func _ready():
 	if w.el.get_child_count() == 0: #not in editor
 		visible = false
 		input_pickable = false
-		spawn()
 
 func initialize(): #first time set up properties
 	pass
@@ -49,7 +48,6 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 
 
 func spawn():
-	#somehow spawns more than one of these if it's not the starting position #TODO check if this is still the case
 	var saved_pos = global_position
 	var waypoint_global = WAYPOINT_GLOBAL.instantiate()
 	waypoint_global.global_position = saved_pos

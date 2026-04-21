@@ -587,20 +587,20 @@ additional missing previews in editor
 pause menu not centering
 
 
-load order plan:
-await for each previous stage to finish, have a signal or return 
 
 load order work
 	-remove awaits from camera reset code
-	-remove await from setup() on rope ladder
-	-remove allow_spawn wait or replace with something on actorspawn
-	-spawn_entities(): #also set this when doing editor exit, load via code, load via trigger
 	
 add additional load steps to large world-based loading in code that includes on editor exit
--OR-
-just force the level to reload on exitor exit? (inconvinient)
+
 
 
 
 cleanup "tools" and give them a name after merging ornithopter
 rename stalagtites
+
+clarify "disabled" across enemies and different stuff, give seperate names
+
+add waypoint local 1 dimensional varient/mode
+
+gun (or upgrade) that adds your movement speed to its bullet's movement

@@ -108,9 +108,6 @@ func first_time_level_setup(): #Reminder: no function called can use await
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 	current_level = load(start_level_path).instantiate()
 	add_child(current_level)
-	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
-		if wg.uses_spawn:
-			wg.queue_free()
 
 	spawn_entities()
 
@@ -121,7 +118,7 @@ func first_time_level_setup(): #Reminder: no function called can use await
 	display_level_text(current_level)
 	run_conversation_on_enter(current_level)
 	await get_tree().physics_frame
-	await get_tree().physics_frame #wait for npcs to spawn, takes 2 frames for some reason
+	await get_tree().physics_frame #wait for npcs to spawn #caused by camera reset time
 	setup_missions(false, "first_time")
 
 func change_level_via_code(level_path, use_save_data):
@@ -144,9 +141,8 @@ func change_level_via_code(level_path, use_save_data):
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
-	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
-		if wg.uses_spawn:
-			wg.queue_free()
+
+	spawn_entities()
 
 	$Juniper.global_position = get_spawn_point().global_position
 	$Juniper/PlayerCamera.reset()
@@ -178,9 +174,8 @@ func change_level_via_trigger(level_path, door_index):
 
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
-	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
-		if wg.uses_spawn:
-			wg.queue_free()
+
+	spawn_entities()
 
 	$Juniper/PlayerCamera.reset()
 
@@ -313,8 +308,13 @@ func clear_spawn_layers():
 	for c in front.get_children():
 		c.free()
 
-func spawn_entities(): #also set this when doing editor exit, load via code, load via trigger
+func spawn_entities():
 	#TODO: Timing for setting allow_spawn (mission system) goes up here)
+	#cleanup
+	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
+		if wg.uses_spawn:
+			wg.queue_free()
+	#spawn
 	for t in get_tree().get_nodes_in_group("TriggerSpawns"):
 		t.spawn()
 		await finished_spawn_entities_step
@@ -331,7 +331,7 @@ func spawn_entities(): #also set this when doing editor exit, load via code, loa
 		p.spawn()
 		await finished_spawn_entities_step
 	print("all props spawned")
-	emit_signal("finished_spawning") #unused, for later use
+	emit_signal("finished_spawning")
 
 
 
