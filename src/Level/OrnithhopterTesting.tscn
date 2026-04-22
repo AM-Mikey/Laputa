@@ -2,26 +2,24 @@
 
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="1_q0jps"]
 [ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_qmqra"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_a15t6"]
 [ext_resource type="Resource" path="res://src/Background/PlainsWastes.tres" id="3_munln"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_rn7th"]
 [ext_resource type="Texture2D" path="res://assets/Background/PlainsWastes.png" id="4_ojeld"]
 [ext_resource type="TileSet" path="res://src/Tile/Wastes.tres" id="5_1e00t"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_qr03l"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_3wqwr"]
 [ext_resource type="PackedScene" path="res://src/Editor/WaypointGlobal.tscn" id="8_30ft2"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_uh5sa"]
 [ext_resource type="Script" path="res://src/Tile/WastesAnimator.gd" id="9_6671f"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="9_a15t6"]
 [ext_resource type="Script" path="res://src/Tile/WastesAutoTile.gd" id="10_8y50y"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="10_egrem"]
-[ext_resource type="PackedScene" path="res://src/Editor/ToolVector.tscn" id="11_a15t6"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="10_rn7th"]
 [ext_resource type="PackedScene" path="res://src/Editor/ToolRect.tscn" id="11_rn7th"]
 [ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="11_ruftt"]
-[ext_resource type="Script" path="res://src/Editor/ToolVector.gd" id="12_3wqwr"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="12_ejtq8"]
 [ext_resource type="Script" path="res://src/Editor/ToolRect.gd" id="12_uh5sa"]
-[ext_resource type="Script" path="res://src/Editor/WaypointGlobal.gd" id="16_52qmx"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="20_6fulf"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="22_psgr2"]
+[ext_resource type="Script" path="res://src/Editor/WaypointGlobal.gd" id="14_egrem"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="18_dnhws"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="20_rgqcq"]
 
 [node name="OrnithhopterTesting" type="Node2D" unique_id=156549534]
 visibility_layer = 2
@@ -37,7 +35,7 @@ offset_top = 1648.0
 offset_right = 3008.0
 offset_bottom = 2240.0
 mouse_filter = 2
-script = ExtResource("3_rn7th")
+script = ExtResource("3_a15t6")
 background_resource = ExtResource("3_munln")
 texture = ExtResource("4_ojeld")
 layers = 5
@@ -111,7 +109,7 @@ offset_top = 2288.0
 offset_right = 2864.0
 offset_bottom = 2304.0
 mouse_filter = 2
-script = ExtResource("8_uh5sa")
+script = ExtResource("8_3wqwr")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -133,7 +131,7 @@ offset_top = 2128.0
 offset_right = 2960.0
 offset_bottom = 2160.0
 mouse_filter = 2
-script = ExtResource("8_uh5sa")
+script = ExtResource("8_3wqwr")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -157,7 +155,7 @@ offset_top = 1648.0
 offset_right = 3024.0
 offset_bottom = 2160.0
 mouse_filter = 2
-script = ExtResource("8_uh5sa")
+script = ExtResource("8_3wqwr")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -179,7 +177,7 @@ offset_top = 2160.0
 offset_right = 2896.0
 offset_bottom = 2176.0
 mouse_filter = 2
-script = ExtResource("8_uh5sa")
+script = ExtResource("8_3wqwr")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -201,7 +199,7 @@ offset_top = 1648.0
 offset_right = 1600.0
 offset_bottom = 2144.0
 mouse_filter = 2
-script = ExtResource("8_uh5sa")
+script = ExtResource("8_3wqwr")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -223,7 +221,7 @@ offset_top = 1632.0
 offset_right = 3008.0
 offset_bottom = 1648.0
 mouse_filter = 2
-script = ExtResource("8_uh5sa")
+script = ExtResource("8_3wqwr")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -245,7 +243,7 @@ offset_top = 2112.0
 offset_right = 1728.0
 offset_bottom = 2144.0
 mouse_filter = 2
-script = ExtResource("8_uh5sa")
+script = ExtResource("8_3wqwr")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20],
@@ -266,7 +264,7 @@ z_index = 999
 position = Vector2(2488, 2064)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_egrem")
+script = ExtResource("10_rn7th")
 actor_path = "res://src/Actor/Enemy/Ornithopter.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -285,7 +283,7 @@ z_index = 999
 position = Vector2(1864, 1712)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_egrem")
+script = ExtResource("10_rn7th")
 actor_path = "res://src/Actor/NPC/Aikka.tscn"
 properties = {
 "base_gravity": [300.0, 3],
@@ -304,111 +302,33 @@ modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
-offset_left = 2192.0
+offset_left = 1840.0
 offset_top = 1952.0
-offset_right = 2584.0
-offset_bottom = 2128.0
+offset_right = 2528.0
+offset_bottom = 2144.0
 mouse_filter = 2
-script = ExtResource("8_uh5sa")
+script = ExtResource("8_3wqwr")
 trigger_path = "res://src/Trigger/ScreenSpawner.tscn"
 properties = {
 "color": [Color(0.26666665, 1, 0, 1), 20],
-"direction_dependence": [true, 1],
 "editor_hidden": [false, 1],
 "enemy_path": ["res://src/Actor/Enemy/Ornithopter.tscn", 4],
+"enemy_per_spawn": [1, 2],
 "id": [&"ScreenSpawner", 4],
-"max_enemy_on_screen": [8, 2],
-"spawn_interval": [1.0, 3]
+"only_spawn_direction": [Vector2(0, 0), 5],
+"spawn_horizontal": [true, 1],
+"spawn_interval": [1.0, 3],
+"spawn_vertical": [true, 1]
 }
 size_is_default = false
 
 [node name="SpawnArea" type="Node2D" parent="Spawns/ScreenSpawner" unique_id=955871811 groups=["Entities", "ToolRects", "VisualUtilities"] instance=ExtResource("11_rn7th")]
 visibility_layer = 2
-z_index = -1
-position = Vector2(-56, 0)
 script = ExtResource("12_uh5sa")
 tag_name = "SpawnArea"
 snap_mode = 1
-editor_color = Color(1, 0.4166667, 0, 1)
-value = Rect2(2192, 1952, 384, 112)
-grid_value = Rect2i(137, 122, 24, 7)
-
-[node name="ToolVector" type="Area2D" parent="Spawns/ScreenSpawner" unique_id=872564127 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_a15t6")]
-visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_3wqwr")
-tag_name = "a"
-direction = Vector2(-1, 8.742278e-08)
-
-[node name="Beetle" type="Area2D" parent="Spawns" unique_id=1814954125 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_a15t6")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(2520, 2144)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_egrem")
-actor_path = "res://src/Actor/Enemy/Beetle.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [false, 1],
-"difficulty": [0, 2],
-"editor_hidden": [false, 1],
-"id": [&"Beetle", 4],
-"speed": [Vector2(150, 150), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="MoveVector" type="Area2D" parent="Spawns/Beetle" unique_id=1867192706 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_a15t6")]
-visibility_layer = 2
-position = Vector2(0, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_3wqwr")
-direction = Vector2(-1, 8.742278e-08)
-snap_degrees = 90.0
-movement_locked = true
-
-[node name="ScreenSpawner1" type="MarginContainer" parent="Spawns" unique_id=1088478933 groups=["TriggerSpawns"] instance=ExtResource("7_qr03l")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
-offset_left = 2488.0
-offset_top = 2016.0
-offset_right = 2504.0
-offset_bottom = 2032.0
-mouse_filter = 2
-script = ExtResource("8_uh5sa")
-trigger_path = "res://src/Trigger/ScreenSpawner.tscn"
-properties = {
-"color": [Color(0.26666665, 1, 0, 1), 20],
-"direction_dependence": [true, 1],
-"editor_hidden": [false, 1],
-"enemy_path": ["", 4],
-"id": [&"ScreenSpawner1", 4],
-"max_enemy_on_screen": [8, 2],
-"spawn_interval": [5.0, 3]
-}
-size_is_default = false
-
-[node name="SpawnArea" type="Node2D" parent="Spawns/ScreenSpawner1" unique_id=1857717862 groups=["Entities", "ToolRects", "VisualUtilities"] instance=ExtResource("11_rn7th")]
-visibility_layer = 2
-position = Vector2(104, -48)
-script = ExtResource("12_uh5sa")
-tag_name = "SpawnArea"
-snap_mode = 1
-value = Rect2(2600, 1976, 64, 64)
-grid_value = Rect2i(162, 123, 4, 4)
-
-[node name="ToolVector" type="Area2D" parent="Spawns/ScreenSpawner1" unique_id=1045873059 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_a15t6")]
-visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_3wqwr")
-tag_name = "a"
-direction = Vector2(-0.7071068, -0.7071068)
+value = Rect2(1840, 1952, 688, 152)
+grid_value = Rect2i(115, 122, 43, 9)
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=228139383]
 visibility_layer = 2
@@ -419,7 +339,7 @@ visibility_layer = 2
 position = Vector2(2392, 1976)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_52qmx")
+script = ExtResource("14_egrem")
 owner_id = "bird1"
 
 [node name="TileAnimator" type="Node2D" parent="." unique_id=1560605216]
@@ -436,11 +356,11 @@ z_index = 999
 position = Vector2(2304, 2008)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("20_6fulf")
+script = ExtResource("18_dnhws")
 
 [node name="SpawnPoint" type="Area2D" parent="." unique_id=865907600 groups=["SpawnPoints"] instance=ExtResource("12_ejtq8")]
 visibility_layer = 2
 position = Vector2(2536, 2136)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("22_psgr2")
+script = ExtResource("20_rgqcq")

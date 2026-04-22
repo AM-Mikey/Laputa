@@ -2,13 +2,24 @@
 
 [ext_resource type="Script" uid="uid://btqb133gmlcah" path="res://src/Trigger/ScreenSpawner.gd" id="1_o6fug"]
 [ext_resource type="PackedScene" uid="uid://ubqnsy8gukfn" path="res://src/Editor/ToolRect.tscn" id="2_t5opi"]
-[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/ToolVector.tscn" id="3_i70y7"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_t5opi"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i70y7"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_npmgt"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1pdpv"]
+normal = Vector2(-1, 0)
+
 [node name="ScreenSpawner" type="Area2D" unique_id=1352829104 groups=["Triggers"]]
 collision_layer = 0
+monitorable = false
 gravity = 225.0
 script = ExtResource("1_o6fug")
 color = Color(0.26666665, 1, 0, 1)
@@ -17,20 +28,54 @@ color = Color(0.26666665, 1, 0, 1)
 position = Vector2(8, 8)
 shape = SubResource("1")
 
-[node name="Polygon2D" type="Polygon2D" parent="CollisionShape2D" unique_id=228238370]
-visible = false
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-2, 1, 1, -2, 3, 1)
-
 [node name="SpawnTimer" type="Timer" parent="." unique_id=684785219]
 
 [node name="SpawnArea" parent="." unique_id=955871811 instance=ExtResource("2_t5opi")]
 tag_name = "SpawnArea"
 snap_mode = 1
 
-[node name="ToolVector" parent="." unique_id=872564127 instance=ExtResource("3_i70y7")]
-tag_name = "a"
+[node name="DespawnBoudary" type="Node2D" parent="." unique_id=614430978]
+
+[node name="Up" type="Area2D" parent="DespawnBoudary" unique_id=497818236]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DespawnBoudary/Up" unique_id=1239650372]
+shape = SubResource("WorldBoundaryShape2D_t5opi")
+disabled = true
+
+[node name="Left" type="Area2D" parent="DespawnBoudary" unique_id=52650887]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DespawnBoudary/Left" unique_id=1373233387]
+shape = SubResource("WorldBoundaryShape2D_i70y7")
+disabled = true
+
+[node name="Bottom" type="Area2D" parent="DespawnBoudary" unique_id=311287034]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DespawnBoudary/Bottom" unique_id=350989041]
+shape = SubResource("WorldBoundaryShape2D_npmgt")
+disabled = true
+
+[node name="Right" type="Area2D" parent="DespawnBoudary" unique_id=1703437906]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DespawnBoudary/Right" unique_id=1405849321]
+shape = SubResource("WorldBoundaryShape2D_1pdpv")
+disabled = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="body_entered" from="DespawnBoudary/Up" to="." method="_on_despawn_boundary_body_entered"]
+[connection signal="body_entered" from="DespawnBoudary/Left" to="." method="_on_despawn_boundary_body_entered"]
+[connection signal="body_entered" from="DespawnBoudary/Bottom" to="." method="_on_despawn_boundary_body_entered"]
+[connection signal="body_entered" from="DespawnBoudary/Right" to="." method="_on_despawn_boundary_body_entered"]
