@@ -1,5 +1,6 @@
 extends Prop
 
+const ICON = preload("res://assets/Prop/LampIcon.png")
 var toggled = true
 
 @export var style: int = 0

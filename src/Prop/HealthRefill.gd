@@ -1,5 +1,6 @@
 extends PhysicsProp
 
+const ICON = preload("res://assets/Prop/HealthRefillIcon.png")
 const HEART_GET_MAX = preload("res://src/Effect/HeartGetMax.tscn")
 
 var active_players = []

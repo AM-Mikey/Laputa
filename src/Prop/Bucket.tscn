@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dxnb66edllhsa"]
 
-[ext_resource type="Script" uid="uid://dgt1xd0pgkr67" path="res://src/Prop/PhysicsProp.gd" id="1_bh5vf"]
+[ext_resource type="Script" uid="uid://dti2qhaj3qe5o" path="res://src/Prop/Bucket.gd" id="1_bh5vf"]
 [ext_resource type="Texture2D" uid="uid://bog4ig0jl2q24" path="res://assets/Prop/Bucket.png" id="2_3tmxh"]
 
 [sub_resource type="RectangleShape2D" id="1"]

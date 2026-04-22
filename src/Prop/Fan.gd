@@ -1,5 +1,6 @@
 extends Prop
 
+const ICON = preload("res://assets/Prop/FanIcon.png")
 @export var style: int = 0
 
 func setup(): #Reminder: no function called can use await

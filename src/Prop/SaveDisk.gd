@@ -1,5 +1,6 @@
 extends PhysicsProp
 
+const ICON = preload("res://assets/Prop/SaveDiskIcon.png")
 const SPARKLE = preload("res://src/Effect/Sparkle.tscn")
 
 var active_players := []

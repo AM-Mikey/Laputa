@@ -1,5 +1,6 @@
 extends PhysicsProp
 
+const ICON = preload("res://assets/Prop/AmmoRefillIcon.png")
 const AMMO_GET_MAX = preload("res://src/Effect/AmmoGetMax.tscn")
 
 var active_players = []

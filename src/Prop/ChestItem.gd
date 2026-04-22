@@ -1,5 +1,6 @@
 extends PhysicsProp
 
+const ICON = preload("res://assets/Prop/ChestWeaponIcon.png")
 const GOT_ITEM = preload("res://src/UI/GotItem.tscn")
 
 @export var held_item_name: String

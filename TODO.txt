@@ -578,13 +578,16 @@ beetle toolvector visibility false on start or enemy debug
 
 fix tadpoles leaving water to much
 
-set load order!!!!!!!!
 
 enemy copy in editor code
 
 additional missing previews in editor
-
-pause menu not centering
+	-prop previews
+		-small font
+		-prop icons
+	-trigger previews
+		-trigger icons
+	-misc previews (hold this for later)
 
 
 
@@ -597,6 +600,8 @@ add additional load steps to large world-based loading in code that includes on 
 
 
 cleanup "tools" and give them a name after merging ornithopter
+	-misc export proerties
+
 rename stalagtites
 
 clarify "disabled" across enemies and different stuff, give seperate names
@@ -604,3 +609,11 @@ clarify "disabled" across enemies and different stuff, give seperate names
 add waypoint local 1 dimensional varient/mode
 
 gun (or upgrade) that adds your movement speed to its bullet's movement
+
+water phys code
+
+review editor enter and exit code to see if we can bundle more with spawn in world
+
+adjust editor panel size default
+
+chestitem sprite

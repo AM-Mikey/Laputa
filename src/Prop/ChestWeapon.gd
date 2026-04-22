@@ -1,5 +1,6 @@
 extends PhysicsProp
 
+const ICON = preload("res://assets/Prop/ChestWeaponIcon.png")
 var gun
 var active_players = []
 

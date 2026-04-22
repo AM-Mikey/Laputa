@@ -30,10 +30,10 @@ func setup_enemies():
 				enemy_button.enemy_difficulty = 0
 				enemy_button.enemy_max_difficulty = 0
 			enemy_button.connect("enemy_changed", Callable(self, "_on_enemy_changed"))
-			if index == 0:
-				enemy_button.active = true
-				active_enemy_path = e
 			$VBox/Margin/Scroll/Buttons.add_child(enemy_button)
+			if index == 0:
+				active_enemy_path = e
+				enemy_button.activate()
 			index += 1
 
 

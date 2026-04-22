@@ -1,5 +1,6 @@
 extends PhysicsProp
 
+const ICON = preload("res://assets/Prop/HealthUpgradeIcon.png")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
 const CRYSTAL = preload("res://src/Actor/Pickup/HealthUpgradeCrystal.tscn")
 

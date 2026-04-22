@@ -1,5 +1,6 @@
 extends Prop
 
+const ICON = preload("res://assets/Prop/LilypadIcon.png")
 var pcs_on_top = []
 var enemies_on_top = []
 var speed = 4

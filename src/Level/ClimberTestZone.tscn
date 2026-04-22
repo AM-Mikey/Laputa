@@ -206,7 +206,7 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(3928, 2224)
+position = Vector2(3864, 2208)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("8_w84y6")
@@ -294,6 +294,36 @@ properties = {
 "rotate_stop_time": [1.5, 3],
 "speed": [Vector2(150, 350), 5],
 "water_gravity": [150.0, 3]
+}
+
+[node name="RopeLadder" type="Area2D" parent="Spawns" unique_id=560371566 groups=["Entities", "PropSpawns"] instance=ExtResource("8_l7jh2")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(4112, 2272)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_jcvae")
+prop_path = "res://src/Prop/RopeLadder.tscn"
+properties = {
+"editor_hidden": [false, 1],
+"id": [&"RopeLadder", 4]
+}
+
+[node name="BreakBlock5" type="Area2D" parent="Spawns" unique_id=1762763257 groups=["Entities", "PropSpawns"] instance=ExtResource("8_l7jh2")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(4240, 2400)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_jcvae")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1],
+"crush_players": [false, 1],
+"editor_hidden": [false, 1],
+"id": [&"BreakBlock5", 4]
 }
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]

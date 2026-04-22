@@ -21,6 +21,7 @@ const PROP_SPAWN = preload("res://src/Editor/Spawn/PropSpawn.tscn")
 const TRIGGER_SPAWN = preload("res://src/Editor/Spawn/TriggerSpawn.tscn")
 const TILE_MAP_PREVIEW = preload("res://src/Editor/Preview/TileMapPreview.tscn")
 const ACTOR_SPAWN_PREVIEW = preload("res://src/Editor/Preview/ActorSpawnPreview.tscn")
+const PROP_SPAWN_PREVIEW = preload("res://src/Editor/Preview/PropSpawnPreview.tscn")
 
 var disabled = false
 
@@ -435,7 +436,8 @@ func do_generic_input(event):
 				free_previews() #check that this doesnt clear on top of other inputs
 				preview_actor_spawn($Main/Win/Tab/Enemies.active_enemy_path, grid_pos)
 			"prop":
-				pass #TODO
+				free_previews()
+				preview_prop_spawn($Main/Win/Tab/Props.active_prop_path, grid_pos)
 			"npc":
 				free_previews()
 				preview_actor_spawn($Main/Win/Tab/NPCs.active_npc_path, grid_pos)
@@ -757,6 +759,7 @@ func set_misc(misc_path, pos):
 	misc.owner = w.current_level
 
 
+
 ### PREVIEW ###
 
 func preview_cells_box(cells: Rect2i):
@@ -812,6 +815,12 @@ func preview_actor_spawn(actor_path, pos):
 	var preview = ACTOR_SPAWN_PREVIEW.instantiate()
 	preview.actor_path = actor_path
 	preview.global_position = (pos * 16) + Vector2i(8, 16)
+	spawn_collection.add_child(preview)
+
+func preview_prop_spawn(prop_path, pos):
+	var preview = PROP_SPAWN_PREVIEW.instantiate()
+	preview.prop_path = prop_path
+	preview.global_position = (pos * 16) #+ Vector2i(8, 16)
 	spawn_collection.add_child(preview)
 
 #func preview_entity(pos, entity_path, entity_type):

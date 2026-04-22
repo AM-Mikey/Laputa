@@ -16,10 +16,12 @@ func activate():
 	for e in get_tree().get_nodes_in_group("NPCButtons"):
 		e.deactivate()
 	%PanelActive.visible = true
+	%Label.add_theme_color_override("font_color", Color(0.969, 0.886, 0.718, 1.0))
 	active = true
 
 func deactivate():
 	%PanelActive.visible = false
+	%Label.add_theme_color_override("font_color", Color(0.443, 0.561, 0.561))
 	active = false
 
 

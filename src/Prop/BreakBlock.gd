@@ -1,5 +1,6 @@
 extends PhysicsProp
 
+const ICON = preload("res://assets/Prop/BreakBlockIcon.png")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
 
 var broken = false

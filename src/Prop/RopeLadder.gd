@@ -1,5 +1,6 @@
 extends Prop
 
+const ICON = preload("res://assets/Prop/RopeLadderIcon.png")
 const LADDER = preload("res://src/Trigger/Ladder.tscn")
 var ladder_trigger: Node
 var length: int
