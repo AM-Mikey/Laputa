@@ -3,7 +3,7 @@ extends Trigger
 ## Which enemy to spawn
 @export var enemy_path: String = ""
 ## How many enemy per spawn
-@export var enemy_per_spawn: int = 1
+#@export var enemy_per_spawn: int = 1
 ## Spawn a new enemy after specified interval, given the spawner does not spawn more than [member=max_enemy_on_screen]
 @export var spawn_interval: float = 5.0
 
@@ -14,12 +14,15 @@ extends Trigger
 @export var spawn_vertical: bool = true
 ## If set to any value different front Vector2.ZERO, spawn_horizontal, spawn_vertical will be ignored and spawn direction will always set to this value.
 @export var only_spawn_direction: Vector2 = Vector2.ZERO
+## If spawn in horizontal directions, the spawner will only take the top and bottom edges as limit.
+## Similar for vertical direction, the spawner will only take the left and right edges as limits
+var spawn_area: Rect2
 
 @onready var actors = w.current_level.get_node("Actors")
 @onready var ll = w.current_level.get_node("LevelLimiter")
 
 var enemy_speed: Vector2 = Vector2.ZERO
-var spawn_area: Rect2
+
 var player_in_trigger := false
 var curr_spawn_direction := Vector2.ZERO:
 	set(val):
@@ -58,10 +61,10 @@ func _ready():
 	actors.add_child(sample_enemy)
 	enemy_speed = sample_enemy.speed
 
-	$DespawnBoudary/Up.global_position = ll.global_position
-	$DespawnBoudary/Left.global_position = ll.global_position
-	$DespawnBoudary/Right.global_position = ll.global_position + ll.size
-	$DespawnBoudary/Bottom.global_position = ll.global_position + ll.size
+	$DespawnBoudary/Up.global_position = ll.global_position + Vector2(0.0, -100.0)
+	$DespawnBoudary/Left.global_position = ll.global_position + Vector2(-100.0, 0.0)
+	$DespawnBoudary/Right.global_position = ll.global_position + ll.size + Vector2(100.0, 0.0)
+	$DespawnBoudary/Bottom.global_position = ll.global_position + ll.size + Vector2(0.0, 100.0)
 
 var min_screen_size: Vector2i = Vector2i(200, 100)
 var max_screen_size: Vector2i = Vector2i(3000, 2000)
@@ -93,11 +96,14 @@ func _on_SpawnTimer_timeout() -> void:
 	var screen_position: Vector2 = camera.get_screen_center_position() - screen_size / 2.0
 	var screen_rect: Rect2 = Rect2(screen_position, screen_size)
 	var level_rect: Rect2 = Rect2(ll.global_position, ll.size)
+	var curr_spawn_area: Rect2 = spawn_area.intersection(screen_rect)
 
 	var enemy_distance: float = enemy_speed.x * spawn_interval
+	var enemy_spread_on_ortho: int = 0
+	var enemy_distance_on_ortho: float = 0.0
 
-	# Remove all invalid processed enemy. Including dead, move out of level bound
-	var to_be_deleted_enemy: Array = processed_enemy.filter(func (ele): return !level_rect.has_point(global_position) or !ele or !is_instance_valid(ele) or ele.is_queued_for_deletion())
+	# Remove all invalid processed enemy. Including dead
+	var to_be_deleted_enemy: Array = processed_enemy.filter(func (ele): return  !ele or !is_instance_valid(ele) or ele.is_queued_for_deletion())
 	for en in to_be_deleted_enemy:
 		if is_instance_valid(en):
 			en.queue_free()
@@ -156,30 +162,44 @@ func _on_SpawnTimer_timeout() -> void:
 			#endregion
 
 			#region Test 2: Spawn enemies preemptively and continue spawning from the farthest one
+			enemy_distance_on_ortho = screen_size.y
+			var average_one_wave_spawn_on_ortho: int = ceil(spawn_area.size.y / enemy_distance_on_ortho)
 			var to_spawn: int = 0
 			var enemy_beyond_screen_edge: int = 0
 			if (curr_spawn_direction == Vector2.RIGHT):
 				enemy_beyond_screen_edge = processed_enemy.reduce(func (accum, ele): return accum + 1 if ele.global_position.x < default_spawn_screen_edge_x else accum, 0)
 			else:
 				enemy_beyond_screen_edge = processed_enemy.reduce(func (accum, ele): return accum + 1 if ele.global_position.x > default_spawn_screen_edge_x else accum, 0)
-			if (enemy_beyond_screen_edge < 3):
+			if (enemy_beyond_screen_edge < 3 * average_one_wave_spawn_on_ortho):
 				to_spawn = 3
-			elif (enemy_beyond_screen_edge < 5):
+			elif (enemy_beyond_screen_edge < 5 * average_one_wave_spawn_on_ortho):
 				to_spawn = 2
-			elif (enemy_beyond_screen_edge < 10):
+			elif (enemy_beyond_screen_edge < 10 * average_one_wave_spawn_on_ortho):
 				to_spawn = 1
 			else:
 				to_spawn = 0
 
-			for i in range(0, to_spawn):
-				var enemy = enemy_scene.instantiate()
-				enemy.global_position.y = randf() * screen_size.y + screen_position.y
-				enemy.global_position.x = curr_x
-				enemy.dir = curr_spawn_direction
+			var near_screen_y: float = curr_spawn_area.position.y + curr_spawn_area.size.y * randf()
+			var enemy_spread_on_ortho_min_section: int = ceil((spawn_area.position.y - near_screen_y) / enemy_distance_on_ortho)
+			var enemy_spread_on_ortho_max_section: int = floor((spawn_area.position.y + spawn_area.size.y - near_screen_y) / enemy_distance_on_ortho)
+			#print(curr_spawn_area, " ", screen_rect, " ", spawn_area)
 
-				actors.add_child(enemy)
-				processed_enemy.append(enemy)
+			for i in range(0, to_spawn):
+				for j in range(enemy_spread_on_ortho_min_section, enemy_spread_on_ortho_max_section + 1):
+					var curr_y: float = near_screen_y + j * enemy_distance_on_ortho * (0.9 + 0.2 * randf())
+					if (spawn_area.position.y > curr_y or spawn_area.position.y + spawn_area.size.y < curr_y):
+						continue
+					var enemy = enemy_scene.instantiate()
+					enemy.global_position.y = curr_y
+					enemy.global_position.x = curr_x + (-0.2 + randf() * 0.1) * enemy_distance
+					enemy.dir = curr_spawn_direction
+
+					actors.add_child(enemy)
+					processed_enemy.append(enemy)
 				curr_x += enemy_distance * -curr_spawn_direction.x
+				if (curr_x < level_rect.position.x or curr_x > level_rect.position.x + level_rect.size.x):
+					break
+
 			#region
 
 ### SIGNAL ###
@@ -190,7 +210,7 @@ func _on_body_entered(body: Node2D):
 	for boundary in $DespawnBoudary.get_children():
 		boundary.get_node("CollisionShape2D").set_deferred("disabled", true)
 
-	var detection_rect: Rect2 = Rect2($CollisionShape2D.global_position, $CollisionShape2D.shape.size)
+	var detection_rect: Rect2 = Rect2($CollisionShape2D.global_position - $CollisionShape2D.shape.size / 2.0 , $CollisionShape2D.shape.size)
 	var player_x_percent: float = (body.global_position.x - detection_rect.position.x) / detection_rect.size.x
 	var player_y_percent: float = (body.global_position.y - detection_rect.position.y) / detection_rect.size.y
 
