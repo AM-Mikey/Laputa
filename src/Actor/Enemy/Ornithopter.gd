@@ -3,12 +3,8 @@ extends Enemy
 const ICON = preload("res://assets/Actor/Enemy/OrnithopterIcon.png")
 
 @export var dir = Vector2.LEFT
-#var safe_distance = 100
 
-#@onready var levels = get_tree().get_nodes_in_group("Levels")
-#@onready var cl = get_parent().get_parent().get_node("CameraLimiter")
-
-func _ready():
+func setup():
 	disabled = false
 	visible = true
 
@@ -17,8 +13,7 @@ func _ready():
 	speed = Vector2(100, 100)
 	acceleration = 25
 
-	reward = 2
-
+	reward = 0
 
 	if dir == Vector2.LEFT:
 		$AnimationPlayer.play("FlyLeft")
@@ -31,8 +26,3 @@ func _physics_process(_delta):
 
 	velocity = calc_velocity(dir, false)
 	move_and_slide()
-
-
-func on_cue():
-	visible = true
-	disabled = false
