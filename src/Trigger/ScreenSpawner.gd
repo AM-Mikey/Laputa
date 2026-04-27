@@ -203,11 +203,10 @@ func _on_SpawnTimer_timeout() -> void:
 	var near_screen_ortho: float = curr_spawn_area_ortho_position + curr_spawn_area_ortho_size * randf()
 	var enemy_spread_on_ortho_min_section: int = ceil((spawn_area_ortho_position - near_screen_ortho) / enemy_distance_on_ortho)
 	var enemy_spread_on_ortho_max_section: int = floor((spawn_area_ortho_position + spawn_area_ortho_size - near_screen_ortho) / enemy_distance_on_ortho)
-	#print(curr_spawn_area, " ", screen_rect, " ", spawn_area)
 
 	for i in range(0, to_spawn):
 		for j in range(enemy_spread_on_ortho_min_section, enemy_spread_on_ortho_max_section + 1):
-			var curr_ortho_pos: float = near_screen_ortho + j * enemy_distance_on_ortho * (0.9 + 0.2 * randf())
+			var curr_ortho_pos: float = near_screen_ortho + (j - 0.2 + 0.4 * randf()) * enemy_distance_on_ortho
 			if (spawn_area_ortho_position > curr_ortho_pos or spawn_area_ortho_position + spawn_area_ortho_size < curr_ortho_pos):
 				continue
 			var enemy = enemy_scene.instantiate()
@@ -221,9 +220,14 @@ func _on_SpawnTimer_timeout() -> void:
 
 			actors.add_child(enemy)
 			processed_enemy.append(enemy)
-		curr_pos += enemy_distance * -curr_spawn_direction.x
-		if (curr_pos < level_rect.position.x or curr_pos > level_rect.position.x + level_rect.size.x):
-			break
+		if (curr_spawn_direction in [Vector2.LEFT, Vector2.RIGHT]):
+			curr_pos += enemy_distance * -curr_spawn_direction.x
+			if (curr_pos < level_rect.position.x or curr_pos > level_rect.position.x + level_rect.size.x):
+				break
+		else:
+			curr_pos += enemy_distance * -curr_spawn_direction.y
+			if (curr_pos < level_rect.position.y or curr_pos > level_rect.position.y + level_rect.size.y):
+				break
 
 	#endregion
 
@@ -238,9 +242,6 @@ func _on_body_entered(body: Node2D):
 	var detection_rect: Rect2 = Rect2($CollisionShape2D.global_position - $CollisionShape2D.shape.size / 2.0 , $CollisionShape2D.shape.size)
 	var player_x_percent: float = (body.global_position.x - detection_rect.position.x) / detection_rect.size.x
 	var player_y_percent: float = (body.global_position.y - detection_rect.position.y) / detection_rect.size.y
-	print(detection_rect, " ", body.global_position)
-	print(player_x_percent, " ", player_y_percent)
-
 	if (only_spawn_direction == Vector2.ZERO):
 		if (spawn_horizontal and !spawn_vertical):
 			if (player_x_percent <= 0.5):
