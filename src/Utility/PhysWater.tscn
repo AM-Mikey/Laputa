@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cbuxkug0nih2m"]
+
+[ext_resource type="Script" uid="uid://cseeuh5uy3v" path="res://src/Utility/PhysWater.gd" id="1_x2d66"]
+
+[node name="PhysWater" type="Node2D" unique_id=1888838736]
+script = ExtResource("1_x2d66")
