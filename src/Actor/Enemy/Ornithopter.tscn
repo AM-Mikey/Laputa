@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://dphx5itcoj1wr"]
 
 [ext_resource type="Texture2D" uid="uid://08od13wukqd7" path="res://assets/Actor/Enemy/Ornithopter.png" id="2"]
-[ext_resource type="Script" uid="uid://b4dp4p1y5pmt" path="res://src/Actor/Enemy/Ornithopter.gd" id="3"]
+[ext_resource type="Script" uid="uid://ce3csdiy7d7c" path="res://src/Actor/Enemy/Ornithopter.gd" id="3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_utfr7"]
-size = Vector2(20, 9)
+size = Vector2(20, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yp85x"]
-size = Vector2(32, 18)
+size = Vector2(32, 16)
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(20, 15)
+size = Vector2(20, 10)
 
 [sub_resource type="Animation" id="2"]
 resource_name = "FlyLeft"
@@ -86,7 +86,7 @@ script = ExtResource("3")
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1771011050]
-position = Vector2(0, 4.5)
+position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_utfr7")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
@@ -103,7 +103,7 @@ collision_layer = 262144
 collision_mask = 65536
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1637204380]
-position = Vector2(0, 1.5)
+position = Vector2(0, 3)
 shape = SubResource("1")
 debug_color = Color(1, 0, 0, 0.235294)
 

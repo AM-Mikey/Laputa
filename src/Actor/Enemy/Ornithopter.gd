@@ -13,7 +13,7 @@ func setup():
 	speed = Vector2(100, 100)
 	acceleration = 25
 
-	reward = 0
+	reward = 2
 
 	if dir == Vector2.LEFT:
 		$AnimationPlayer.play("FlyLeft")

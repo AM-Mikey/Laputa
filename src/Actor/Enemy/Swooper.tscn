@@ -1,10 +1,16 @@
 [gd_scene format=3 uid="uid://ds1ythga30lxc"]
 
-[ext_resource type="Script" uid="uid://dg5gcniasbgdb" path="res://src/Actor/Enemy/Swooper.gd" id="2"]
+[ext_resource type="Script" uid="uid://dbfcjhehm5jhu" path="res://src/Actor/Enemy/Swooper.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://j2gmpjjm1unr" path="res://assets/Actor/Enemy/Swooper.png" id="3"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j4lei"]
+size = Vector2(20, 10)
+
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(32, 18)
+size = Vector2(32, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f5gwo"]
+size = Vector2(20, 10)
 
 [sub_resource type="Animation" id="2"]
 resource_name = "FlyLeft"
@@ -165,7 +171,8 @@ collision_mask = 0
 script = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1280127294]
-shape = SubResource("1")
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_j4lei")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1558827398]
@@ -181,7 +188,8 @@ collision_layer = 262144
 collision_mask = 65536
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1570833654]
-shape = SubResource("1")
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_f5gwo")
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=600940779]
