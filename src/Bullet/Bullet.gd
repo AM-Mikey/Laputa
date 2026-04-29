@@ -20,6 +20,7 @@ var instant_fizzle = true
 
 var break_method = "cut"
 var is_enemy_bullet = false
+var is_fizzling := false
 
 @onready var w = get_tree().get_root().get_node("World")
 @onready var rng = RandomNumberGenerator.new()
@@ -60,6 +61,8 @@ func on_break(_method):
 	do_fizzle("bullet")
 
 func do_fizzle(type: String):
+	print("fizzling bullet")
+	is_fizzling = true
 	var fizzle
 	match type:
 		"range":

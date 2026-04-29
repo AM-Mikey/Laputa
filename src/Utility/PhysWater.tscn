@@ -2,5 +2,21 @@
 
 [ext_resource type="Script" uid="uid://cseeuh5uy3v" path="res://src/Utility/PhysWater.gd" id="1_x2d66"]
 
-[node name="PhysWater" type="Node2D" unique_id=1888838736]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x2d66"]
+resource_local_to_scene = true
+
+[node name="PhysWater" type="Node2D" unique_id=1888838736 groups=["PhysWater"]]
 script = ExtResource("1_x2d66")
+surface_color = Color(1, 1, 1, 1)
+water_fill_color = Color(0.27395758, 0.50956357, 0.7055968, 0.3)
+
+[node name="SplashDetector" type="Area2D" parent="." unique_id=998207753]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SplashDetector" unique_id=1981858868]
+shape = SubResource("RectangleShape2D_x2d66")
+
+[connection signal="body_entered" from="SplashDetector" to="." method="_on_SplashDetector_body_entered"]
+[connection signal="body_exited" from="SplashDetector" to="." method="_on_SplashDetector_body_exited"]

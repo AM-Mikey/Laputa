@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ds1ythga30lxc"]
+[gd_scene format=3 uid="uid://ds1ythga30lxc"]
 
 [ext_resource type="Script" uid="uid://dg5gcniasbgdb" path="res://src/Actor/Enemy/NeedsFix/Swooper.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://j2gmpjjm1unr" path="res://assets/Actor/Enemy/Swooper.png" id="3"]

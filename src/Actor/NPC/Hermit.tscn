@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://hdql7akghkm5"]
+[gd_scene format=3 uid="uid://hdql7akghkm5"]
 
 [ext_resource type="Script" uid="uid://b58ifwfgkr5v6" path="res://src/Actor/NPC/NPC.gd" id="1_gt62u"]
 [ext_resource type="Texture2D" uid="uid://c8m6g0gylx0hm" path="res://assets/Actor/NPC/Hermit.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_0qh03"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_28fta"]
 radius = 6.0
@@ -67,68 +68,72 @@ _data = {
 &"Walk": SubResource("4")
 }
 
-[node name="Hermit" type="CharacterBody2D" groups=["Actors", "Entities", "NPCs"]]
+[node name="Hermit" type="CharacterBody2D" unique_id=844527989 groups=["Actors", "Entities", "NPCs"]]
 collision_layer = 128
 collision_mask = 8
 script = ExtResource("1_gt62u")
 id = "hermit"
 editor_hidden = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1474318387]
 position = Vector2(0, -14)
 shape = SubResource("CapsuleShape2D_28fta")
 
-[node name="PlayerDetector" type="Area2D" parent="."]
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_0qh03")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=2102903468]
+position = Vector2(0, -14)
+shape = SubResource("CapsuleShape2D_28fta")
+
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=121480628]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=783259881]
 modulate = Color(1, 1, 1, 0.172549)
 position = Vector2(0, -14)
 shape = SubResource("2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=18410283]
 position = Vector2(0, -16)
 texture = ExtResource("2")
 hframes = 4
 vframes = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_aevyf")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1664099841]
+libraries/ = SubResource("AnimationLibrary_aevyf")
 
-[node name="FloorL" type="RayCast2D" parent="."]
+[node name="FloorL" type="RayCast2D" parent="." unique_id=193900996]
 position = Vector2(-8, -16)
 target_position = Vector2(0, 24)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="FloorR" type="RayCast2D" parent="."]
+[node name="FloorR" type="RayCast2D" parent="." unique_id=2125250824]
 position = Vector2(8, -16)
 target_position = Vector2(0, 24)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="WallRB" type="RayCast2D" parent="."]
+[node name="WallRB" type="RayCast2D" parent="." unique_id=1067224600]
 position = Vector2(6, -7)
 target_position = Vector2(2, 0)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="WallRT" type="RayCast2D" parent="."]
+[node name="WallRT" type="RayCast2D" parent="." unique_id=1798433830]
 position = Vector2(6, -17)
 rotation = 1.5322363e-05
 target_position = Vector2(2, -3.1471252e-05)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="WallLB" type="RayCast2D" parent="."]
+[node name="WallLB" type="RayCast2D" parent="." unique_id=96645113]
 position = Vector2(-6, -7)
 target_position = Vector2(-2, 0)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="WallLT" type="RayCast2D" parent="."]
+[node name="WallLT" type="RayCast2D" parent="." unique_id=1698536900]
 position = Vector2(-6, -17)
 target_position = Vector2(-2, 0)
 collision_mask = 520

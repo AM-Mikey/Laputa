@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dey1u1oh7tc0v"]
 
 [ext_resource type="Script" uid="uid://bymgm0fnily6a" path="res://src/Actor/Enemy/Tadpole.gd" id="1_pb65w"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_frwge"]
 [ext_resource type="Texture2D" uid="uid://boqma8lhyo88h" path="res://assets/Actor/Enemy/Tadpole.png" id="2_qqbp8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_frwge"]
@@ -78,6 +79,13 @@ editor_hidden = false
 metadata/_custom_type_script = "uid://clpkxqaavntw4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2093108263]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_frwge")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_frwge")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1017020912]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_frwge")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)

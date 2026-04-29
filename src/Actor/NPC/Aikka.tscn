@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b58ifwfgkr5v6" path="res://src/Actor/NPC/NPC.gd" id="1_wg08w"]
 [ext_resource type="Texture2D" uid="uid://bufs103b1f3md" path="res://assets/Actor/NPC/Aikka.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_6b1fg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r68m0"]
 radius = 6.0
@@ -58,6 +59,12 @@ id = "aikka"
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1531156947]
+position = Vector2(0, -12)
+shape = SubResource("CapsuleShape2D_r68m0")
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_6b1fg")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1841177104]
 position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_r68m0")
 

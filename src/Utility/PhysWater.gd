@@ -1,9 +1,8 @@
 extends Node2D
-class_name PhysWater
 
 @export var water_size := Vector2(8.0, 16.0)
 @export var surface_pos_y := 0.5
-@export_range(2, 512) var segment_count := 64 #TODO: make this based on the water width
+var segment_count: int
 
 @export var player_splash_multiplier := 0.12
 @export_range(0.0, 1000.0) var water_physics_speed := 80.0
@@ -23,12 +22,10 @@ var surface_line: Line2D
 var fill_polygon: Polygon2D
 
 func _ready():
-	for i in get_children():
-		i.queue_free()
-
 	_initiate_water()
 
 func _initiate_water():
+	segment_count = int(water_size.x / 2.0)
 	segment_data.clear()
 	for i in range(segment_count):
 		segment_data.append({
@@ -50,25 +47,15 @@ func _initiate_water():
 	surface_line.add_child(polygon)
 	fill_polygon = polygon
 
-	var area = Area2D.new()
-	area.set_collision_layer_value(1, false) #i believe this defaults to true
-	area.set_collision_mask_value(1, true) #just player for now
-	area.body_entered.connect(_on_body_entered)
-	area.body_exited.connect(_on_body_exited)
-	add_child(area)
+	#area
+	%SplashDetector/CollisionShape2D.shape.size = water_size
+	%SplashDetector/CollisionShape2D.position = water_size / 2.0 + Vector2(0, surface_pos_y / 2.0)
 
-	var collision_shape = CollisionShape2D.new()
-	var shape = RectangleShape2D.new()
-	shape.size = water_size
-	collision_shape.shape = shape
-	collision_shape.position = water_size / 2.0 + Vector2(0, surface_pos_y / 2.0)
-	area.add_child(collision_shape)
-
-func _process(delta: float):
+func _process(delta: float) -> void:
 	update_physics(delta)
 	update_visuals()
 
-func update_physics(delta):
+func update_physics(delta) -> void:
 	for i in range(segment_count):
 		var displacement = segment_data[i]["height"] - surface_pos_y
 		var acceleration = -water_restoring_force * displacement - segment_data[i]["velocity"] * wave_energy_loss
@@ -79,19 +66,13 @@ func update_physics(delta):
 	for updates in range(wave_spread_updates):
 		for i in range(segment_count):
 			if i > 0:
-				segment_data[i]["wave_to_left"] = (segment_data[i]["height"] - segment_data[i-1]["height"] * wave_strength)
+				segment_data[i]["wave_to_left"] = (segment_data[i]["height"] - segment_data[i-1]["height"]) * wave_strength
 				segment_data[i-1]["velocity"] += segment_data[i]["wave_to_left"] * delta * water_physics_speed
 			if i < segment_count - 1:
-				segment_data[i]["wave_to_right"] = (segment_data[i]["height"] - segment_data[i+1]["height"] * wave_strength)
+				segment_data[i]["wave_to_right"] = (segment_data[i]["height"] - segment_data[i+1]["height"]) * wave_strength
 				segment_data[i+1]["velocity"] += segment_data[i]["wave_to_right"] * delta * water_physics_speed
-
-		#for i in range(segment_count):
-			#if i > 0:
-				#segment_data[i]["wave_to_left"] = (segment_data[i]["height"] - segment_data[i-1]["height"] * wave_strength)
-				#segment_data[i-1]["velocity"] += segment_data[i]["wave_to_left"] * delta * water_physics_speed
-			#if i < segment_count - 1:
-				#segment_data[i]["wave_to_right"] = (segment_data[i]["height"] - segment_data[i+1]["height"] * wave_strength)
-				#segment_data[i-1]["velocity"] += segment_data[i]["wave_to_right"] * delta * water_physics_speed
+			#print(segment_data[i]["height"])
+			#print(" ")
 
 		for i in range(segment_count):
 			if i > 0:
@@ -119,7 +100,7 @@ func update_physics(delta):
 	else:
 		recently_splashed = false
 
-func update_visuals():
+func update_visuals() -> void:
 	var points: Array[Vector2] = []
 	var segment_width: float = water_size.x / (segment_count - 1)
 	for i in range(segment_count):
@@ -141,6 +122,7 @@ func update_visuals():
 	fill_polygon.polygon = final_points
 
 func splash(splash_pos: Vector2, splash_velocity: float):
+	print("doing_splash")
 	var local_x_pos: float = to_local(splash_pos).x
 	var segment_width: float = water_size.x / (segment_count - 1)
 	var index := int(clamp(local_x_pos / segment_width, 0, segment_count - 1))
@@ -157,14 +139,26 @@ func _get_body_velocity_y(body: Node) -> float:
 
 ### SIGNALS ###
 
-func _on_body_entered(body): #TODO: expand to other things besides just player, put this on juniper's physics shape instead
-	if body.get_parent().get_collision_layer_value(1): #player
+func _on_SplashDetector_body_entered(body: Node2D): #need to stop this triggering if we just spawned it this frame
+	#print("body_enter")
+
+	if body.get_collision_layer_value(16): #rigidbody
+		if body.just_spawned:
+			print("body just spawned in water, ignoring splash")
+			return
+		print("entered")
 		var target = body.get_parent()
-		var vy := _get_body_velocity_y(body)
+		var vy := _get_body_velocity_y(target)
 		splash(target.global_position, -vy * player_splash_multiplier)
 
-func _on_body_exited(body):
-	if body.get_parent().get_collision_layer_value(1): #player
+
+func _on_SplashDetector_body_exited(body: Node2D):
+	if body.get_collision_layer_value(16):
 		var target = body.get_parent()
-		var vy := _get_body_velocity_y(body)
-		splash(target.global_position,  vy * player_splash_multiplier)
+		if "is_fizzling" in target:
+			if target.is_fizzling:
+				print("bullet fizzled in water, ignoring splash")
+				return
+		print("exited")
+		var vy := _get_body_velocity_y(target)
+		splash(target.global_position, vy * player_splash_multiplier)

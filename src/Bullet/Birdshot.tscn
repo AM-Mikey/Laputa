@@ -1,8 +1,9 @@
-[gd_scene format=3 uid="uid://cn8s4sgtse0nm"]
+[gd_scene format=3 uid="uid://c65je163t5ruv"]
 
 [ext_resource type="Script" uid="uid://bg13m0gkqq3o6" path="res://src/Bullet/Birdshot.gd" id="1_akuxm"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="2_skik2"]
 [ext_resource type="Texture2D" uid="uid://ups4wtsreu48" path="res://assets/Bullet/Birdshot.png" id="3_akuxm"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_skik2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_akuxm"]
 radius = 2.0
@@ -75,6 +76,12 @@ metadata/_custom_type_script = "uid://dpbp5em8cu4x4"
 [node name="PlayerCollisionDetector" parent="." unique_id=1126962128 instance=ExtResource("2_skik2")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector" unique_id=8153572]
+position = Vector2(-2, 0)
+shape = SubResource("CircleShape2D_akuxm")
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("3_skik2")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1850943045]
 position = Vector2(-2, 0)
 shape = SubResource("CircleShape2D_akuxm")
 

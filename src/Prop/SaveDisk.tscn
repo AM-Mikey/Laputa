@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://eoah43mp5yo8"]
 
 [ext_resource type="Script" uid="uid://bwn6q2qrnygr3" path="res://src/Prop/SaveDisk.gd" id="1_prrpi"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_kgn2t"]
 [ext_resource type="Texture2D" uid="uid://16nu4i3wsr5s" path="res://assets/Prop/SaveDisk.png" id="2_w3a02"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_prrpi"]
@@ -8,6 +9,9 @@ bounce = 0.6
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ahhh4"]
+radius = 8.062258
 
 [sub_resource type="Animation" id="1"]
 resource_name = "Spin"
@@ -50,6 +54,12 @@ script = ExtResource("1_prrpi")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=926717291]
 position = Vector2(8, 8)
 shape = SubResource("2")
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_kgn2t")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=848304332]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_ahhh4")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1502130820]
 texture = ExtResource("2_w3a02")

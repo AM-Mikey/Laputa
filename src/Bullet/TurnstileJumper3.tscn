@@ -1,31 +1,42 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlpvavfw17y7y"]
+[gd_scene format=3 uid="uid://dlpvavfw17y7y"]
 
 [ext_resource type="Texture2D" uid="uid://cl4o5t4sgdfhh" path="res://assets/Bullet/BulletTurnstileJumper.png" id="1"]
 [ext_resource type="Script" uid="uid://bhh6wymtqa1if" path="res://src/Bullet/TurnstileJumper.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_t3i0f"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 3)
 
-[node name="TurnstileJumper3" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t3i0f"]
+size = Vector2(8, 3)
+
+[node name="TurnstileJumper3" type="CharacterBody2D" unique_id=239731524]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("2")
 
-[node name="PlayerCollisionDetector" parent="." instance=ExtResource("3")]
+[node name="PlayerCollisionDetector" parent="." unique_id=2037520230 instance=ExtResource("3")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector" unique_id=959333364]
 position = Vector2(-8, 0.5)
 shape = SubResource("1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("3_t3i0f")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=94360498]
+position = Vector2(-12, 0.5)
+shape = SubResource("RectangleShape2D_t3i0f")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1475659456]
 position = Vector2(-8, 0)
 texture = ExtResource("1")
 vframes = 3
 frame = 2
 
-[node name="End" type="Marker2D" parent="."]
+[node name="End" type="Marker2D" parent="." unique_id=1298857699]
 position = Vector2(-16, 0)
 
 [connection signal="area_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]

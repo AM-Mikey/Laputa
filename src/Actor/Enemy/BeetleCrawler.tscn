@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://kf8aqeg86h82"]
 
 [ext_resource type="Script" uid="uid://yuqevorrxdj1" path="res://src/Actor/Enemy/BeetleCrawler.gd" id="1_jyaun"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_ey80y"]
 [ext_resource type="Texture2D" uid="uid://bhhny2ymfaacp" path="res://assets/Actor/Enemy/BeetleCrawler.png" id="2_jyaun"]
 [ext_resource type="PackedScene" path="res://src/Editor/ToolVector.tscn" id="3_80cd0"]
 
@@ -163,6 +164,15 @@ shape = SubResource("RectangleShape2D_7vcwk")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Fly" type="CollisionShape2D" parent="." unique_id=1435893146]
+position = Vector2(0, -7)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_qsmhk")
+disabled = true
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_ey80y")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=107790619]
 position = Vector2(0, -7)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_qsmhk")

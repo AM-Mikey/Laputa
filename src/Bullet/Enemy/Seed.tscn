@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dui5vllutev51" path="res://src/Bullet/Enemy/Seed.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dkhsxpnntjtp7" path="res://assets/Bullet/Enemy/Seed.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://d1oy3g4tudn3v" path="res://src/Bullet/Enemy/EnemyCollisionDetector.tscn" id="2_ae4d7"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_s075v"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(8, 8)
@@ -39,6 +40,12 @@ collision_layer = 8448
 collision_mask = 65576
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCollisionDetector" unique_id=329169527]
+shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("3_s075v")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=465294805]
 shape = SubResource("1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 

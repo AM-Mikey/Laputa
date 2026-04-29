@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bl7qmtrrcpsqy"]
 
 [ext_resource type="Script" uid="uid://bkl387nkbn5p1" path="res://src/Actor/Enemy/Larry.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_c4kmm"]
 [ext_resource type="Texture2D" uid="uid://42e5ficnc637" path="res://assets/Actor/Enemy/Larry.png" id="3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vpjct"]
@@ -92,6 +93,13 @@ script = ExtResource("2")
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=231356033]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_vpjct")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_c4kmm")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1571496105]
 position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_vpjct")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)

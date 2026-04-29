@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bc5jt2xwk1n7v" path="res://src/Actor/Enemy/Junior.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dfq7titr5btw6" path="res://assets/Actor/Enemy/Junior.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_5es0p"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2oly5"]
 radius = 6.0
@@ -112,6 +113,13 @@ script = ExtResource("1")
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1692564585]
+position = Vector2(0, -10)
+shape = SubResource("CapsuleShape2D_2oly5")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_5es0p")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1108063322]
 position = Vector2(0, -10)
 shape = SubResource("CapsuleShape2D_2oly5")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)

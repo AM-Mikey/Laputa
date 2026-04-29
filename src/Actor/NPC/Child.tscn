@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c0h0cekifebk3" path="res://assets/Actor/NPC/Child.png" id="1"]
 [ext_resource type="Script" uid="uid://b58ifwfgkr5v6" path="res://src/Actor/NPC/NPC.gd" id="1_ag8g5"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_240hq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1e851"]
 radius = 6.0
@@ -59,6 +60,12 @@ speed = Vector2(100, 100)
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1475047424]
+position = Vector2(0, -12)
+shape = SubResource("CapsuleShape2D_1e851")
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_240hq")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=2143950619]
 position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_1e851")
 

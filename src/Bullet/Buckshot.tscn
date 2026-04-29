@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bbt42c2d6660n" path="res://assets/Bullet/BulletShotgun.png" id="1"]
 [ext_resource type="Script" uid="uid://cbaol2ugw4p6j" path="res://src/Bullet/Buckshot.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_dbawr"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_e6qj8"]
 points = PackedVector2Array(-48, -16, -48, 16, 0, 0)
@@ -15,6 +16,11 @@ script = ExtResource("2")
 [node name="PlayerCollisionDetector" parent="." unique_id=872059963 instance=ExtResource("3")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector" unique_id=24883289]
+shape = SubResource("ConvexPolygonShape2D_e6qj8")
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("3_dbawr")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=193197031]
 shape = SubResource("ConvexPolygonShape2D_e6qj8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=622953805]

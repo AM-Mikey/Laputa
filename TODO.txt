@@ -580,3 +580,19 @@ frog level 0 targeting fix
 fix tadpoles leaving water to much
 
 set set order
+
+WATER TODO:
+-add shader
+-add splash particles
+-add drip prop effect
+-add wind effect
+-configure to work with different sizes
+-fix flashing bug/rubber banding
+-pause hide or delete during editor/reinit
+	-dup on editor exit
+-fix jumprope effect
+-make resolution (points) based on width
+
+
+	-#maybe when a bullet exits, one exits the other is caught fizzling
+	-player jumps out of higher doesnt affect this
