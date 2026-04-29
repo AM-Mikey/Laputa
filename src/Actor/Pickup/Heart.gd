@@ -5,7 +5,6 @@ var dir = Vector2.DOWN
 var normal_time = 2.0
 var end_time = 1.0
 var state = "normal"
-var just_spawned = true
 
 func _ready():
 	gravity = 100
@@ -17,9 +16,6 @@ func _ready():
 		8: $AnimationPlayer.play("Large")
 		_: printerr("ERROR: Heart given non-standard value")
 	$Timer.start(normal_time)
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	just_spawned = false
 
 func _physics_process(_delta):
 	velocity = calc_velocity(dir)

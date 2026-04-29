@@ -1,15 +1,17 @@
 extends Prop
 
+const ICON = preload("res://assets/Prop/LampIcon.png")
 var toggled = true
 
 @export var style: int = 0
 
-func setup():
+func setup(): #Reminder: no function called can use await
 	$Sprite2D.frame_coords.y = style
 	if toggled:
 		$AnimationPlayer.play("On")
 	else:
 		$AnimationPlayer.play("Off")
+	w.emit_signal("finished_spawn_entities_step")
 
 func activate():
 	am.play("prop_click")

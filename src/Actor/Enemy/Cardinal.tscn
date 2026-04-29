@@ -72,7 +72,7 @@ _data = {
 &"RESET": SubResource("Animation_nwotf")
 }
 
-[node name="Cardinal" type="CharacterBody2D" unique_id=1529634415 groups=["Actors", "Enemies", "Entities"]]
+[node name="Cardinal" type="CharacterBody2D" unique_id=1995619659 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("1_glth5")
@@ -92,33 +92,33 @@ position = Vector2(0, -2.5)
 shape = SubResource("CircleShape2D_qm1p1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Hurtbox" type="Area2D" parent="." unique_id=649474005]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1210380650]
 position = Vector2(0, 7)
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=928440526]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1182105334]
 position = Vector2(0, -7)
 shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="PlayerDetector" type="Area2D" parent="." unique_id=869153999]
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=1907300022]
 collision_layer = 0
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=2020258474]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=1343747204]
 position = Vector2(0, -8)
 shape = SubResource("2")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=425060696]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1426131659]
 light_mask = 4
 material = SubResource("11")
 texture = ExtResource("2_uswyo")
 hframes = 4
 vframes = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=760840943]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2127197099]
 libraries/ = SubResource("AnimationLibrary_o6omx")
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]

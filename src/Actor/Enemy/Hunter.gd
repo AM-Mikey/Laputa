@@ -19,17 +19,16 @@ var shooting = false
 var walk_time = 1
 
 
-func _ready():
+func setup(): #Reminder: no function called can use await
 	rng.randomize()
 	hp = 20
 	damage_on_contact = 1
 	speed = Vector2(80, 100)
 	gravity = 250
-
 	reward = 4
 
 	$FireCooldown.start(cooldown_time)
-
+	w.emit_signal("finished_spawn_entities_step")
 	#wander()
 
 func _physics_process(_delta):

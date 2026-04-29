@@ -10,6 +10,7 @@ func _ready():
 	$AllowDownInput/CollisionShape2D.shape.size.y = 1.0
 	$AllowDownInput.position.x = $CollisionShape2D.shape.size.x / 2.0
 	$AllowDownInput.position.y = - 0.5
+	w.emit_signal("finished_spawn_entities_step")
 
 func _physics_process(_delta):
 	for b in bodies_allow_down: #Allow down input
@@ -23,6 +24,9 @@ func _physics_process(_delta):
 				b.mm.change_state("ladder")
 				b.position.x = position.x + 8
 
+
+
+### SIGNALS
 
 func _on_Ladder_body_entered(body):
 	active_bodies.append(body.get_parent())

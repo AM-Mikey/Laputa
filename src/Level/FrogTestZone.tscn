@@ -1,4 +1,4 @@
-[gd_scene format=4]
+[gd_scene format=4 uid="uid://cqlbthr18nn7a"]
 
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="1_5yje6"]
 [ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_0lfk7"]
@@ -30,7 +30,7 @@ level_name = "FrogTestZone"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1011068996 instance=ExtResource("2_0lfk7")]
+[node name="LevelLimiter" parent="." unique_id=1011068996 instance=ExtResource("2_0lfk7")]
 visibility_layer = 2
 offset_left = 1600.0
 offset_top = 1600.0
@@ -113,18 +113,18 @@ script = ExtResource("10_36t42")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3],
-"croak_time": [1.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
+"can_move_x": [true, 1],
+"debug": [false, 1],
 "editor_hidden": [false, 1],
-"id": [&"Frog", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"tongue_damage": [2.0, 3],
+"id": [&"Fish", 4],
+"jump_height": [6, 2],
+"speed": [Vector2(20, 150), 5],
+"swim_dir_x": [-1, 2],
 "water_gravity": [150.0, 3]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Frog" unique_id=872564127 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
+[node name="WaypointJump" parent="Spawns/Fish" unique_id=1432238783 instance=ExtResource("11_36t42")]
+visible = false
 visibility_layer = 2
 position = Vector2(0, -7)
 collision_layer = 16384
@@ -134,8 +134,7 @@ tag_name = "look"
 snap_degrees = 180.0
 movement_locked = true
 
-[node name="TongueRange" type="Area2D" parent="Spawns/Frog" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_30c4u")]
-visible = false
+[node name="WaypointGlobalSpawnLeft" parent="Spawns/Fish" unique_id=669830458 instance=ExtResource("13_30c4u")]
 visibility_layer = 2
 position = Vector2(-32, -12)
 collision_layer = 16384
@@ -243,15 +242,14 @@ size_is_default = false
 [node name="Waypoints" type="Node2D" parent="." unique_id=1729474890]
 visibility_layer = 2
 
-[node name="VanishingPoint" type="Area2D" parent="." unique_id=1745666426 groups=["VanishingPoints"] instance=ExtResource("9_3qshh")]
+[node name="VanishingPoint" parent="." unique_id=1745666426 instance=ExtResource("9_3qshh")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3008, 1856)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("16_nbj4a")
 
-[node name="SpawnPoint" type="Area2D" parent="." unique_id=1710023778 groups=["SpawnPoints"] instance=ExtResource("10_fiogo")]
+[node name="SpawnPoint" parent="." unique_id=1710023778 instance=ExtResource("10_fiogo")]
 visibility_layer = 2
 position = Vector2(3704, 1792)
 collision_layer = 16384

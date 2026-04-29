@@ -27,7 +27,7 @@ var fly_speed = Vector2(100, 100)
 var crawl_speed = Vector2(20, 20)
 
 
-func setup():
+func setup(): #Reminder: no function called can use await
 	fly_dir = $FlyVector.direction
 	wall_dir = fly_dir * -1
 	crawl_dir.x = fly_dir.cross($CrawlVector.direction)
@@ -47,6 +47,7 @@ func setup():
 			reward = 5
 			damage_on_contact = 2
 			$Sprite2D.texture = TX_1
+	w.emit_signal("finished_spawn_entities_step")
 	change_state("crawl")
 
 

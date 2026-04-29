@@ -36,14 +36,14 @@ var scatter_cooldown_duration := 5.0
 var scatter_to_flock_cooldown_duration := 5.0
 var threats := []
 
-func setup():
+func setup(): #Reminder: no function called can use await
 	hp = 1
 	damage_on_contact = 0
 	reward = 0
 	rng.randomize()
 	do_bubbles = false
-	await get_tree().create_timer(0.01).timeout #TODO: for some reason the water trigger spawns really late. look into this or pass a signal
-	_find_water_trigger()
+	_find_water_trigger() #make sure triggers are spawned first for this to work
+	w.emit_signal("finished_spawn_entities_step")
 	change_state("swim")
 
 

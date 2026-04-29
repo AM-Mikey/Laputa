@@ -7,19 +7,18 @@ var idle = false
 var idle_time: float
 var active_time: float
 
-func _ready():
+func setup(): #Reminder: no function called can use await
 	hp = 1
 	damage_on_contact = 0
 	speed = Vector2(100, 100)
-
 	reward = 0
 
 	rng.randomize()
 	move_dir = Vector2(sign(rng.randf_range(-1, 1)), 0)
 	idle_time = rng.randf_range(0.5, 2)
 	active_time = rng.randf_range(2, 4)
-
 	$Timer.wait_time = active_time
+	w.emit_signal("finished_spawn_entities_step")
 
 func _physics_process(_delta):
 	if disabled or dead:

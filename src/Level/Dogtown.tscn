@@ -218,6 +218,7 @@ properties = {
 }
 
 [node name="WaypointJump" type="Area2D" parent="Spawns/Fish" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_ho0nu")]
+visible = false
 visibility_layer = 2
 position = Vector2(0, -94)
 collision_layer = 16384
@@ -237,7 +238,7 @@ tag_name = "left"
 [node name="WaypointGlobalSpawnRight" type="Area2D" parent="Spawns/Fish" unique_id=331105630 groups=["Entities", "WaypointGlobalSpawns"] instance=ExtResource("15_vbnr3")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(120, -8)
+position = Vector2(96, -8)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("16_6grhi")
@@ -265,6 +266,7 @@ properties = {
 }
 
 [node name="WaypointJump" type="Area2D" parent="Spawns/Fish1" unique_id=1568328639 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_ho0nu")]
+visible = false
 visibility_layer = 2
 position = Vector2(0, -94)
 collision_layer = 16384
@@ -284,7 +286,7 @@ tag_name = "left"
 [node name="WaypointGlobalSpawnRight" type="Area2D" parent="Spawns/Fish1" unique_id=1248503630 groups=["Entities", "WaypointGlobalSpawns"] instance=ExtResource("15_vbnr3")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(32, -8)
+position = Vector2(24, -8)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("16_6grhi")

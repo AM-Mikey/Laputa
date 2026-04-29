@@ -1,23 +1,23 @@
 extends PhysicsProp
 
+const ICON = preload("res://assets/Prop/ChestWeaponIcon.png")
 var gun
 var active_players = []
 
 @export var gun_name: String
 
 
-func setup():
+func setup(): #Reminder: no function called can use await
 	inspect_time = 4.0 #got item interrupt length
 	var gun_scene = load("res://src/Gun/%s" % gun_name.to_pascal_case() + ".tscn")
 	if gun_scene != null:
 			gun = gun_scene.instantiate()
 	else:
 		printerr("ERROR: CAN'T FIND GUN WITH FILE PATH: res://src/Gun/%s" % gun_name.to_pascal_case() + ".tscn")
-
+	w.emit_signal("finished_spawn_entities_step")
 
 func expend_prop(): #used when loading a spent prop
 	$AnimationPlayer.play("Used")
-
 
 func _input(event):
 	if !gun: return

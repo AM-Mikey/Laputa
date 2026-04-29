@@ -65,13 +65,13 @@ position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_0cau2")
 debug_color = Color(0, 0.6, 0.69803923, 0)
 
-[node name="GroundLeft" type="RayCast2D" parent="." unique_id=320173834]
+[node name="GroundLeft" type="RayCast2D" parent="." unique_id=1408564082]
 position = Vector2(1, 16.5)
 target_position = Vector2(0, 0.5)
 collision_mask = 520
 hit_from_inside = true
 
-[node name="GroundRight" type="RayCast2D" parent="." unique_id=606283149]
+[node name="GroundRight" type="RayCast2D" parent="." unique_id=679420263]
 position = Vector2(15, 16.5)
 target_position = Vector2(0, 0.5)
 collision_mask = 520

@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://bex7srafeqqi"]
+[gd_scene format=3 uid="uid://bex7srafeqqi"]
 
 [ext_resource type="Script" uid="uid://cqrjnoxqsf03b" path="res://src/Trigger/Sign.gd" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
 
-[node name="Sign" type="Area2D" groups=["Triggers"]]
+[node name="Sign" type="Area2D" unique_id=1361037147 groups=["Triggers"]]
 collision_layer = 0
 script = ExtResource("2")
 editor_hidden = true
 color = Color(0.901961, 0.74902, 0, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1235693791]
 show_behind_parent = true
 position = Vector2(8, 8)
 shape = SubResource("1")

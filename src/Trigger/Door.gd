@@ -13,13 +13,7 @@ signal level_change(level, door_index)
 func _ready():
 	var _err = connect("level_change", Callable(w, "change_level_via_trigger"))
 	trigger_type = "door"
-
-
-func _on_body_entered(body):
-	active_pc = body.get_parent()
-func _on_body_exited(_body):
-	active_pc = null
-
+	w.emit_signal("finished_spawn_entities_step")
 
 func _input(event):
 	if event.is_action_pressed("inspect") and active_pc != null:
@@ -34,22 +28,17 @@ func _input(event):
 				else:
 					am.play("locked")
 
-
 func enter_door():
 	inp.can_act = false
 	active_pc.inspect_target = self
 	active_pc.mm.change_state("inspect")
 	active_pc.move_to(global_position + Vector2($CollisionShape2D.shape.size.x * 0.5, $CollisionShape2D.shape.size.y))
-
 	am.play("door")
-
 	var transition = TRANSITION.instantiate()
 	if w.bl.has_node("TransitionIris"):
 		w.bl.get_node("TransitionIris").free()
 	w.bl.add_child(transition)
-
 	await transition.get_node("AnimationPlayer").animation_finished
-
 	active_pc.mm.change_state("run")
 
 	if same_level:
@@ -60,3 +49,12 @@ func enter_door():
 			#printerr("ERROR: No Level With Name: ", level)
 			#return
 		emit_signal("level_change", level, door_index)
+
+
+
+### SIGNALS
+
+func _on_body_entered(body):
+	active_pc = body.get_parent()
+func _on_body_exited(_body):
+	active_pc = null

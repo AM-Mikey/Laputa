@@ -81,7 +81,7 @@ func stop_tweens():
 	if limit_tween_top: limit_tween_top.kill()
 	if limit_tween_bottom: limit_tween_bottom.kill()
 
-func reset():
+func reset(): #TODO: REMOVE THESE AWAITS IT CAUSES SHIT TO MULTITHREAD
 	position_smoothing_enabled = false #reset_smoothing() has issues
 	drag_horizontal_offset =  pc.look_dir.x * (h_pan_distance / vs.resolution_scale) #initialize camera offset
 	force_update_scroll()
