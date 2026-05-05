@@ -22,7 +22,8 @@ var spawn_area: Rect2
 @onready var actors = w.current_level.get_node("Actors")
 @onready var ll = w.current_level.get_node("LevelLimiter")
 
-var enemy_speed: Vector2 = Vector2.ZERO
+var enemy_speed := Vector2.ZERO
+var enemy_size := Vector2.ZERO
 
 var player_in_trigger := false
 var curr_spawn_direction := Vector2.ZERO:
@@ -47,7 +48,7 @@ var curr_spawn_direction := Vector2.ZERO:
 				$DespawnBoudary/Left/CollisionShape2D.set_deferred("disabled", false)
 		curr_spawn_direction = val
 
-const min_screen_size: Vector2i = Vector2i(200, 100)
+const min_screen_size: Vector2i = Vector2i(300, 300)
 const max_screen_size: Vector2i = Vector2i(3000, 2000)
 
 var processed_enemy = []
@@ -67,6 +68,7 @@ func _ready():
 	sample_enemy.process_mode = ProcessMode.PROCESS_MODE_DISABLED
 	actors.add_child(sample_enemy)
 	enemy_speed = sample_enemy.speed
+	enemy_size = sample_enemy.get_node("CollisionShape2D").shape.get_rect().size
 	sample_enemy.queue_free()
 
 	$DespawnBoudary/Up.global_position = ll.global_position + Vector2(0.0, -100.0)
@@ -97,6 +99,8 @@ func _on_SpawnTimer_timeout() -> void:
 	# Find the farthest spawned one on the screen. If there is no enemy or the farthest one is less than the screen edge, default to that screen edge
 	var default_spawn_screen_edge: float = get_screen_edge_position()
 	var curr_pos: float = default_spawn_screen_edge
+	var default_distance_from_edge: float = min(enemy_size.length(), 15.0 + (enemy_size.x if curr_spawn_direction in [Vector2.RIGHT, Vector2.LEFT] else enemy_size.y))
+	curr_pos += default_distance_from_edge * -(curr_spawn_direction.x if curr_spawn_direction in [Vector2.RIGHT, Vector2.LEFT] else curr_spawn_direction.y)
 	var valid_processed_enemy: Array = processed_enemy.filter(func (ele): return ele not in to_be_deleted_enemy)
 	if valid_processed_enemy.size() > 0:
 		match curr_spawn_direction:
