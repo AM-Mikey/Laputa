@@ -47,6 +47,12 @@ var curr_spawn_direction := Vector2.ZERO:
 				$DespawnBoudary/Left/CollisionShape2D.set_deferred("disabled", false)
 		curr_spawn_direction = val
 
+const min_screen_size: Vector2i = Vector2i(200, 100)
+const max_screen_size: Vector2i = Vector2i(3000, 2000)
+
+var processed_enemy = []
+var leftover_enemy = []
+
 func _ready():
 	trigger_type = "screen_spawner"
 	spawn_area = Rect2(-$CollisionShape2D.shape.size / 2.0, $CollisionShape2D.shape.size)
@@ -68,29 +74,8 @@ func _ready():
 	$DespawnBoudary/Right.global_position = ll.global_position + ll.size + Vector2(100.0, 0.0)
 	$DespawnBoudary/Bottom.global_position = ll.global_position + ll.size + Vector2(0.0, 100.0)
 
-var min_screen_size: Vector2i = Vector2i(200, 100)
-var max_screen_size: Vector2i = Vector2i(3000, 2000)
-
-var unprocessed_enemy: Array = []
-var processed_enemy: Array = []
-
-#func _physics_process(delta: float) -> void:
-	#print(processed_enemy.size())
-
-func _exit_tree() -> void:
-	for en in unprocessed_enemy:
-		if (is_instance_valid(en)):
-			en.queue_free()
-	for en in processed_enemy:
-		if (is_instance_valid(en)):
-			en.queue_free()
-
 
 func _on_SpawnTimer_timeout() -> void:
-	for en in unprocessed_enemy:
-		en.queue_free()
-	unprocessed_enemy = []
-
 	var enemy_scene = load(enemy_path)
 
 	var camera: Camera2D = get_viewport().get_camera_2d()
@@ -101,7 +86,6 @@ func _on_SpawnTimer_timeout() -> void:
 	var curr_spawn_area: Rect2 = spawn_area.intersection(screen_rect)
 
 	var enemy_distance: float = enemy_speed.x * spawn_interval
-	var enemy_spread_on_ortho: int = 0
 	var enemy_distance_on_ortho: float = 0.0
 
 	# Remove all invalid processed enemy. Including dead
@@ -136,41 +120,6 @@ func _on_SpawnTimer_timeout() -> void:
 					curr_pos = farthest_spawned_y + enemy_distance * -curr_spawn_direction.y
 
 	processed_enemy = valid_processed_enemy
-
-	#region Test 1: Spawn an enemy at the edge and many more standby (disabled and invis until on screen) further out from the edge
-	## Resulting in some to spawn fast or slow depending on the screen move speed
-	## Fresh spawn from the edge of the screen
-	#var final_x: float = curr_pos + 1000.0 * -curr_spawn_direction.x
-	#var enemy = enemy_scene.instantiate()
-	#enemy.dir = curr_spawn_direction
-	#enemy.global_position.y = randf() * screen_size.y + screen_position.y
-	#enemy.global_position.x = curr_pos
-	#actors.add_child(enemy)
-	#processed_enemy.append(enemy)
-	#curr_pos += enemy_distance * -curr_spawn_direction.x
-#
-	## Spawn aheads but will not be active until enter screen
-	#while !is_equal_approx(curr_pos, final_x):
-		#var visible_notifier: VisibleOnScreenEnabler2D = VisibleOnScreenEnabler2D.new()
-		#var enemy_ahead = enemy_scene.instantiate()
-		#enemy_ahead.process_mode = PROCESS_MODE_DISABLED
-		#enemy_ahead.visible = false
-		#enemy_ahead.global_position.y = randf() * screen_size.y + screen_position.y
-		#enemy_ahead.global_position.x = curr_pos
-		#enemy_ahead.dir = curr_spawn_direction
-		#var enemy_ahead_boundary_rect = enemy_ahead.get_node("CollisionShape2D").shape.get_rect()
-		#visible_notifier.enable_mode = VisibleOnScreenEnabler2D.ENABLE_MODE_INHERIT
-		#visible_notifier.rect = enemy_ahead_boundary_rect
-		#visible_notifier.show_rect = true # Later change
-		#visible_notifier.screen_entered.connect(visible_notifier.queue_free)
-		#visible_notifier.screen_entered.connect(unprocessed_enemy.erase.bind(enemy_ahead))
-		#visible_notifier.screen_entered.connect(processed_enemy.append.bind(enemy_ahead))
-#
-		#enemy_ahead.add_child(visible_notifier)
-		#actors.add_child(enemy_ahead)
-		#unprocessed_enemy.append(enemy_ahead)
-		#curr_pos += enemy_distance * -curr_spawn_direction.x
-	#endregion
 
 	#region Test 2: Spawn enemies preemptively and continue spawning from the farthest one
 	enemy_distance_on_ortho = screen_size.y if curr_spawn_direction in [Vector2.LEFT, Vector2.RIGHT] else screen_size.x
@@ -233,10 +182,15 @@ func _on_SpawnTimer_timeout() -> void:
 	#endregion
 
 ### SIGNAL ###
-func _on_body_entered(body: Node2D):
-	var player_direction: Vector2 = $CollisionShape2D.global_position.direction_to(body.global_position)
-	var player_direction_angle := player_direction.angle()
+func _exit_tree() -> void:
+	for en in processed_enemy:
+		if (is_instance_valid(en)):
+			en.queue_free()
+	for en in leftover_enemy:
+		if (is_instance_valid(en) and !en.is_queued_for_deletion()):
+			en.queue_free()
 
+func _on_body_entered(body: Node2D):
 	for boundary in $DespawnBoudary.get_children():
 		boundary.get_node("CollisionShape2D").set_deferred("disabled", true)
 
@@ -287,9 +241,6 @@ func _on_body_exited(body: Node2D):
 			return
 
 	player_in_trigger = false
-	for en in unprocessed_enemy:
-		en.queue_free()
-	unprocessed_enemy = []
 
 	var screen_edge: float = get_screen_edge_position()
 
@@ -310,6 +261,8 @@ func _on_body_exited(body: Node2D):
 				if (en.global_position.y < screen_edge):
 					en.queue_free()
 	processed_enemy = processed_enemy.filter(func (ele): return ele and !ele.dead and !ele.is_queued_for_deletion())
+	leftover_enemy.append_array(processed_enemy)
+	processed_enemy = []
 	$SpawnTimer.stop()
 
 func get_screen_edge_position() -> float:
@@ -328,6 +281,7 @@ func get_screen_edge_position() -> float:
 	return 0.0
 
 func _on_despawn_boundary_body_entered(actor: Enemy) -> void:
-	if (actor in processed_enemy):
+	if (actor in processed_enemy or actor in leftover_enemy):
 		actor.queue_free()
 		processed_enemy.erase(actor)
+		leftover_enemy.erase(actor)
