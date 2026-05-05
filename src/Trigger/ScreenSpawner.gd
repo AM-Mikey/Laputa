@@ -6,7 +6,8 @@ extends Trigger
 #@export var enemy_per_spawn: int = 1
 ## Spawn a new enemy after specified interval, given the spawner does not spawn more than [member=max_enemy_on_screen]
 @export var spawn_interval: float = 5.0
-
+## Will not turn off the spawner when the player's exit the area when false
+@export var off_on_player_exit: bool = true
 ## In 4 cardinal direction only
 ## The spawning enemy will be given a Dictionary {"dir": Vector2}
 ## The spawner will infer the direction from how the player enters the spawn zone.
@@ -195,6 +196,9 @@ func _exit_tree() -> void:
 			en.queue_free()
 
 func _on_body_entered(body: Node2D):
+	if (!off_on_player_exit and player_in_trigger):
+		return
+
 	for boundary in $DespawnBoudary.get_children():
 		boundary.get_node("CollisionShape2D").set_deferred("disabled", true)
 
@@ -237,7 +241,7 @@ func _on_body_entered(body: Node2D):
 	$SpawnTimer.start()
 
 func _on_body_exited(body: Node2D):
-	if (is_queued_for_deletion()):
+	if (is_queued_for_deletion() or !off_on_player_exit):
 		return
 
 	if (body is CharacterBody2D and body.get_collision_layer_value(1)):
