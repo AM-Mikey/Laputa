@@ -40,14 +40,10 @@ func setup():
 		$AnimationPlayer.play("FlyLeft")
 		if (difficulty == 1):
 			$VisibleOnScreenNotifier2D.position = Vector2(16.0, -3.0)
-			#$PlayerDetection.target_position.x = -(swoop_distance - 1.0) * 16.0
-			#$PlayerDetection.position = Vector2(-8.0, (swoop_height - 0.5) * 16.0)
 	elif dir == Vector2.RIGHT:
 		$AnimationPlayer.play("FlyRight")
 		if (difficulty == 1):
 			$VisibleOnScreenNotifier2D.position = Vector2(-22.0, -3.0)
-			#$PlayerDetection.target_position.x = (swoop_distance - 1.0) * 16.0
-			#$PlayerDetection.position = Vector2(8.0, (swoop_height - 0.5) * 16.0)
 	change_state("fly")
 
 func enter_fly(_prev_state):
@@ -61,8 +57,8 @@ func do_fly(_delta):
 	move_and_slide()
 
 	if (difficulty == 1):
-		var screen_size_x = (get_viewport().get_visible_rect().size / vs.resolution_scale).x
-		var screen_too_thin_check = screen_size_x < 300.0
+		var screen_size = get_viewport().get_visible_rect().size / vs.resolution_scale
+		var screen_too_thin_check = screen_size.x < 300.0
 		if (screen_too_thin_check or (is_on_screen and !screen_too_thin_check)):
 			var player = f.pc()
 			if (player):
@@ -72,8 +68,8 @@ func do_fly(_delta):
 				var player_distance_relative = abs(player_grid_coord.x - grid_coord.x)
 				var player_height_relative = player_grid_coord.y - grid_coord.y
 
-				var valid_to_swoop = player_height_relative >= min_swoop_height and player_height_relative <= max_swoop_height  \
-									and player_distance_relative >= min_swoop_detection_x and player_distance_relative <= min(max_swoop_detection_x, floor(screen_size_x / 16.0)) \
+				var valid_to_swoop = player_height_relative >= min_swoop_height and player_height_relative <= min(max_swoop_height, floor(screen_size.y / 16.0 / 2.0))  \
+									and player_distance_relative >= min_swoop_detection_x and player_distance_relative <= min(max_swoop_detection_x, floor(screen_size.x / 16.0)) \
 									and player_direction_check
 
 				if (!has_swoop and valid_to_swoop):
