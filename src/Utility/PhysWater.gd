@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var water_size := Vector2(8.0, 16.0)
+var water_size: Vector2 #:= Vector2(8.0, 16.0)
 @export var surface_pos_y := 0.5
 var segment_count: int
 
@@ -25,7 +25,9 @@ func _ready():
 	_initiate_water()
 
 func _initiate_water():
-	segment_count = int(water_size.x / 2.0)
+	water_size.x += 2 #to hide jump-rope effect
+	position.x -= 1
+	segment_count = int(water_size.x)# / 2.0) #1px resolution
 	segment_data.clear()
 	for i in range(segment_count):
 		segment_data.append({
@@ -139,26 +141,19 @@ func _get_body_velocity_y(body: Node) -> float:
 
 ### SIGNALS ###
 
-func _on_SplashDetector_body_entered(body: Node2D): #need to stop this triggering if we just spawned it this frame
-	#print("body_enter")
-
-	if body.get_collision_layer_value(16): #rigidbody
-		if body.just_spawned:
-			print("body just spawned in water, ignoring splash")
-			return
-		print("entered")
-		var target = body.get_parent()
-		var vy := _get_body_velocity_y(target)
-		splash(target.global_position, -vy * player_splash_multiplier)
+func _on_SplashDetector_body_entered(body: Node2D): #always rigidbody
+	if body.just_spawned:
+		print("body just spawned in water, ignoring splash")
+		return
+	var target = body.get_parent()
+	var vy := _get_body_velocity_y(target)
+	splash(target.global_position, -vy * player_splash_multiplier)
 
 
-func _on_SplashDetector_body_exited(body: Node2D):
-	if body.get_collision_layer_value(16):
-		var target = body.get_parent()
-		if "is_fizzling" in target:
-			if target.is_fizzling:
-				print("bullet fizzled in water, ignoring splash")
-				return
-		print("exited")
-		var vy := _get_body_velocity_y(target)
-		splash(target.global_position, vy * player_splash_multiplier)
+func _on_SplashDetector_body_exited(body: Node2D): #always rigidbody
+	if body.is_exiting_tree:
+		print("body is exiting tree, ignoring splash")
+		return
+	var target = body.get_parent()
+	var vy := _get_body_velocity_y(target)
+	splash(target.global_position, vy * player_splash_multiplier)

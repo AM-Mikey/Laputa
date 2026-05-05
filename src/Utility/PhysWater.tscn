@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x2d66"]
 resource_local_to_scene = true
 
-[node name="PhysWater" type="Node2D" unique_id=1888838736 groups=["PhysWater"]]
+[node name="PhysWater" type="Node2D" unique_id=1888838736 groups=["PhysWaters"]]
 script = ExtResource("1_x2d66")
 surface_color = Color(1, 1, 1, 1)
 water_fill_color = Color(0.27395758, 0.50956357, 0.7055968, 0.3)

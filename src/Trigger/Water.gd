@@ -17,6 +17,7 @@ func _ready(): #Reminder: no function called can use await
 	phys_water.water_size = $CollisionShape2D.shape.size
 	phys_water.global_position = global_position
 	w.current_level.add_child(phys_water) #TODO: put this on a utility layer
+	w.emit_signal("finished_spawn_entities_step")
 
 func _on_Water_body_entered(body):
 	var do_bubbles = true
