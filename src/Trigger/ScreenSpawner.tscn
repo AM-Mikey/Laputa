@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ce7aqfjljmhvd"]
 
-[ext_resource type="Script" uid="uid://btqb133gmlcah" path="res://src/Trigger/ScreenSpawner.gd" id="1_o6fug"]
+[ext_resource type="Script" uid="uid://dm0wrfwattmhy" path="res://src/Trigger/ScreenSpawner.gd" id="1_o6fug"]
 [ext_resource type="PackedScene" uid="uid://ubqnsy8gukfn" path="res://src/Editor/ToolRect.tscn" id="2_t5opi"]
 
 [sub_resource type="RectangleShape2D" id="1"]

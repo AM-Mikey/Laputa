@@ -6,6 +6,10 @@ extends Trigger
 #@export var enemy_per_spawn: int = 1
 ## Spawn a new enemy after specified interval, given the spawner does not spawn more than [member=max_enemy_on_screen]
 @export var spawn_interval: float = 5.0
+## How many enemy can this spawner spawn. Will run out faster if the ScreenSpawn is bigger than 1 screen due to the spawn spreading mechanism.
+## Value of -1 mean infinite spawn.
+## The limit will not be replenlished when reenteed the area.
+@export var spawn_limit: int = -1
 ## Will not turn off the spawner when the player's exit the area when false
 @export var off_on_player_exit: bool = true
 ## In 4 cardinal direction only
@@ -55,6 +59,9 @@ const max_screen_size: Vector2i = Vector2i(3000, 2000)
 var processed_enemy = []
 var leftover_enemy = []
 
+# For spawn limit
+var spawn_left := 100000
+
 func _ready():
 	trigger_type = "screen_spawner"
 	spawn_area = Rect2(-$CollisionShape2D.shape.size / 2.0, $CollisionShape2D.shape.size)
@@ -77,8 +84,14 @@ func _ready():
 	$DespawnBoudary/Right.global_position = ll.global_position + ll.size + Vector2(100.0, 0.0)
 	$DespawnBoudary/Bottom.global_position = ll.global_position + ll.size + Vector2(0.0, 100.0)
 
+	if (spawn_limit != -1):
+		spawn_left = spawn_limit
 
 func _on_SpawnTimer_timeout() -> void:
+	if (spawn_limit != - 1 and spawn_left <= 0):
+		$SpawnTimer.stop()
+		return
+
 	var enemy_scene = load(enemy_path)
 
 	var camera: Camera2D = get_viewport().get_camera_2d()
@@ -160,7 +173,11 @@ func _on_SpawnTimer_timeout() -> void:
 	var enemy_spread_on_ortho_max_section: int = floor((spawn_area_ortho_position + spawn_area_ortho_size - near_screen_ortho) / enemy_distance_on_ortho)
 
 	for i in range(0, to_spawn):
+		if (spawn_limit != - 1 and spawn_left <= 0):
+			break
 		for j in range(enemy_spread_on_ortho_min_section, enemy_spread_on_ortho_max_section + 1):
+			if (spawn_limit != - 1 and spawn_left <= 0):
+				break
 			var curr_ortho_pos: float = near_screen_ortho + (j - 0.2 + 0.4 * randf()) * enemy_distance_on_ortho
 			if (spawn_area_ortho_position > curr_ortho_pos or spawn_area_ortho_position + spawn_area_ortho_size < curr_ortho_pos):
 				continue
@@ -175,6 +192,8 @@ func _on_SpawnTimer_timeout() -> void:
 
 			actors.add_child(enemy)
 			processed_enemy.append(enemy)
+			if (spawn_limit != -1):
+				spawn_left -= 1
 		if (curr_spawn_direction in [Vector2.LEFT, Vector2.RIGHT]):
 			curr_pos += enemy_distance * -curr_spawn_direction.x
 			if (curr_pos < level_rect.position.x or curr_pos > level_rect.position.x + level_rect.size.x):
