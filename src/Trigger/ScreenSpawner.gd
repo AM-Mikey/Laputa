@@ -61,6 +61,7 @@ func _ready():
 	sample_enemy.process_mode = ProcessMode.PROCESS_MODE_DISABLED
 	actors.add_child(sample_enemy)
 	enemy_speed = sample_enemy.speed
+	sample_enemy.queue_free()
 
 	$DespawnBoudary/Up.global_position = ll.global_position + Vector2(0.0, -100.0)
 	$DespawnBoudary/Left.global_position = ll.global_position + Vector2(-100.0, 0.0)
@@ -277,9 +278,13 @@ func _on_body_entered(body: Node2D):
 	player_in_trigger = true
 	$SpawnTimer.start()
 
-func _on_body_exited(_body: Node2D):
+func _on_body_exited(body: Node2D):
 	if (is_queued_for_deletion()):
 		return
+
+	if (body is CharacterBody2D and body.get_collision_layer_value(1)):
+		if (body.get_parent().dead or body.get_parent().is_queued_for_deletion()):
+			return
 
 	player_in_trigger = false
 	for en in unprocessed_enemy:
