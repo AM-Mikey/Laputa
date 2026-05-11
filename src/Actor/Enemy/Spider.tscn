@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d2yv8egvqk153" path="res://src/Actor/Enemy/Spider.gd" id="1_shhv2"]
 [ext_resource type="Texture2D" uid="uid://bwimmhc71ip4k" path="res://assets/Actor/Enemy/SpiderBody.png" id="2_impgl"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_jm4eq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qm1p1"]
 radius = 7.5
@@ -25,6 +26,12 @@ collision_mask = 520
 script = ExtResource("1_shhv2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2072140151]
+shape = SubResource("CircleShape2D_qm1p1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_jm4eq")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=615369972]
 shape = SubResource("CircleShape2D_qm1p1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 

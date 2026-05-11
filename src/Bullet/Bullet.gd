@@ -60,6 +60,7 @@ func on_break(_method):
 	do_fizzle("bullet")
 
 func do_fizzle(type: String):
+	#print("fizzling bullet")
 	var fizzle
 	match type:
 		"range":

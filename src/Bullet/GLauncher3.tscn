@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://3bmujcg5fwtv" path="res://src/Bullet/GLauncher.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://b8hr08cetxnob" path="res://assets/Bullet/BulletGrenadeLauncher.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_ofpog"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(12, 9)
+size = Vector2(10, 10)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3padu"]
 radius = 8.0
@@ -59,13 +60,18 @@ collision_mask = 8
 script = ExtResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1911874945]
-position = Vector2(0, 0.5)
 shape = SubResource("1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="PlayerCollisionDetector" parent="." unique_id=940254248 instance=ExtResource("3")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector" unique_id=97271008]
+shape = SubResource("CapsuleShape2D_3padu")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("3_ofpog")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1064401555]
 shape = SubResource("CapsuleShape2D_3padu")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
@@ -84,7 +90,7 @@ position = Vector2(0, 8)
 texture = ExtResource("2")
 hframes = 8
 vframes = 3
-frame = 23
+frame = 22
 
 [node name="Timer" type="Timer" parent="." unique_id=56231926]
 process_callback = 0

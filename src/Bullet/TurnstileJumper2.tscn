@@ -1,31 +1,42 @@
-[gd_scene load_steps=5 format=3 uid="uid://mb61dn8e5i58"]
+[gd_scene format=3 uid="uid://mb61dn8e5i58"]
 
 [ext_resource type="Texture2D" uid="uid://cl4o5t4sgdfhh" path="res://assets/Bullet/BulletTurnstileJumper.png" id="1"]
 [ext_resource type="Script" uid="uid://bhh6wymtqa1if" path="res://src/Bullet/TurnstileJumper.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_v7sp3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(15, 2)
 
-[node name="TurnstileJumper2" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7sp3"]
+size = Vector2(8, 2)
+
+[node name="TurnstileJumper2" type="CharacterBody2D" unique_id=258813827]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("2")
 
-[node name="PlayerCollisionDetector" parent="." instance=ExtResource("3")]
+[node name="PlayerCollisionDetector" parent="." unique_id=639493374 instance=ExtResource("3")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector" unique_id=127394419]
 position = Vector2(-7.5, 0)
 shape = SubResource("1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("3_v7sp3")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=977420975]
+position = Vector2(-11, 0)
+shape = SubResource("RectangleShape2D_v7sp3")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=228476289]
 position = Vector2(-8, 0)
 texture = ExtResource("1")
 vframes = 3
 frame = 1
 
-[node name="End" type="Marker2D" parent="."]
+[node name="End" type="Marker2D" parent="." unique_id=1286980528]
 position = Vector2(-15, 0)
 
 [connection signal="area_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]

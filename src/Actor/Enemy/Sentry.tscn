@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bhkn70appytmn" path="res://assets/Actor/Enemy/Sentry.png" id="1"]
 [ext_resource type="Script" uid="uid://dkmxqwtxwp02i" path="res://src/Actor/Enemy/Sentry.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_r0jmj"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
@@ -78,6 +79,13 @@ debug = true
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1748172784]
+position = Vector2(0, -8)
+shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_r0jmj")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=392979737]
 position = Vector2(0, -8)
 shape = SubResource("1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bwmc03kthumv7"]
+[gd_scene format=3 uid="uid://bwmc03kthumv7"]
 
 [ext_resource type="Script" uid="uid://b58ifwfgkr5v6" path="res://src/Actor/NPC/NPC.gd" id="1_arjde"]
 [ext_resource type="Texture2D" uid="uid://syhjudorscwo" path="res://assets/Actor/NPC/Mink.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_0qvnm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6ym3a"]
 radius = 6.0
@@ -50,69 +51,73 @@ _data = {
 &"Walk": SubResource("4")
 }
 
-[node name="Mink" type="CharacterBody2D" groups=["Actors", "Entities", "NPCs"]]
+[node name="Mink" type="CharacterBody2D" unique_id=1067338007 groups=["Actors", "Entities", "NPCs"]]
 collision_layer = 128
 collision_mask = 8
 script = ExtResource("1_arjde")
 id = "mink"
 editor_hidden = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=675915906]
 position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_6ym3a")
 
-[node name="PlayerDetector" type="Area2D" parent="."]
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_0qvnm")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1110281951]
+position = Vector2(0, -12)
+shape = SubResource("CapsuleShape2D_6ym3a")
+
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=1231277861]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=1142360630]
 modulate = Color(1, 1, 1, 0.172549)
 position = Vector2(0, -12)
 shape = SubResource("RectangleShape2D_jxrdw")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1119707571]
 position = Vector2(0, -16)
 texture = ExtResource("2")
 hframes = 4
 vframes = 2
 frame = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_75hsg")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=838739813]
+libraries/ = SubResource("AnimationLibrary_75hsg")
 
-[node name="FloorL" type="RayCast2D" parent="."]
+[node name="FloorL" type="RayCast2D" parent="." unique_id=1167618083]
 position = Vector2(-8, -16)
 target_position = Vector2(0, 24)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="FloorR" type="RayCast2D" parent="."]
+[node name="FloorR" type="RayCast2D" parent="." unique_id=277193171]
 position = Vector2(8, -16)
 target_position = Vector2(0, 24)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="WallRB" type="RayCast2D" parent="."]
+[node name="WallRB" type="RayCast2D" parent="." unique_id=293728592]
 position = Vector2(6, -7)
 target_position = Vector2(2, 0)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="WallRT" type="RayCast2D" parent="."]
+[node name="WallRT" type="RayCast2D" parent="." unique_id=539209137]
 position = Vector2(6, -17)
 rotation = 1.5322363e-05
 target_position = Vector2(2, -3.1471252e-05)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="WallLB" type="RayCast2D" parent="."]
+[node name="WallLB" type="RayCast2D" parent="." unique_id=933488348]
 position = Vector2(-6, -7)
 target_position = Vector2(-2, 0)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="WallLT" type="RayCast2D" parent="."]
+[node name="WallLT" type="RayCast2D" parent="." unique_id=714876445]
 position = Vector2(-6, -17)
 target_position = Vector2(-2, 0)
 collision_mask = 520

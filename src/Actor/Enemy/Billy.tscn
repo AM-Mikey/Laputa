@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d7hgcoq0lmkd" path="res://src/Actor/Enemy/Billy.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dxp874vl8xdex" path="res://assets/Actor/Enemy/Billy.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_aysxk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sy72i"]
 size = Vector2(10, 14)
@@ -142,6 +143,13 @@ script = ExtResource("1")
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1482682800]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_sy72i")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_aysxk")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=2123462247]
 position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_sy72i")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)

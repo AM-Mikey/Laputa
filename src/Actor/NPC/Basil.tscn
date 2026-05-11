@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b58ifwfgkr5v6" path="res://src/Actor/NPC/NPC.gd" id="1_svifp"]
 [ext_resource type="Texture2D" uid="uid://cm4fnl5xl0bt6" path="res://assets/Actor/NPC/Fluffy.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_g0equ"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6paw1"]
 radius = 6.0
@@ -58,6 +59,12 @@ id = "basil"
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1085596730]
+position = Vector2(0, -10)
+shape = SubResource("CapsuleShape2D_6paw1")
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_g0equ")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1646398031]
 position = Vector2(0, -10)
 shape = SubResource("CapsuleShape2D_6paw1")
 

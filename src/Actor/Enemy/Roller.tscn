@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7yhu5je8w1pf"]
+[gd_scene format=3 uid="uid://c7yhu5je8w1pf"]
 
 [ext_resource type="Script" uid="uid://btmn4aedyq1op" path="res://src/Actor/Enemy/Roller.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://b8jbm3e01232q" path="res://assets/Actor/Enemy/Roller.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_8c34y"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 8.0
@@ -35,45 +36,51 @@ _data = {
 &"Roll": SubResource("2")
 }
 
-[node name="Roller" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+[node name="Roller" type="CharacterBody2D" unique_id=991816014 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 522
 script = ExtResource("1")
 editor_hidden = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=644952424]
 position = Vector2(0, -8)
 rotation = 1.5708
 shape = SubResource("1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_8c34y")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1737066927]
+position = Vector2(0, -8)
+rotation = 1.5708
+shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=151348047]
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1854700610]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_mkfiv")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=1691706982]
 collision_layer = 262144
 collision_mask = 65536
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=259821210]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_3raoo")
 debug_color = Color(1, 0, 0, 0.235294)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=151251306]
 position = Vector2(0, -8)
 texture = ExtResource("2")
 hframes = 8
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ms45c")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1695882587]
+libraries/ = SubResource("AnimationLibrary_ms45c")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

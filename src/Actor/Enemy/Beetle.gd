@@ -5,7 +5,7 @@ const TX_0 = preload("res://assets/Actor/Enemy/Beetle.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Beetle1.png")
 
 var move_dir = Vector2.LEFT
-var wall_dir = Vector2.LEFT:
+@export var wall_dir = Vector2.LEFT:
 	set(val):
 		up_direction = -val
 		wall_dir = val
@@ -122,23 +122,22 @@ func enter_fly(_last_state):
 
 func do_fly(_delta):
 	var collider
-	if move_dir.dot(Vector2.LEFT) > 0.9: #close to Vector2.Left
-		collider = $LeftCast.get_collider()
-	elif move_dir.dot(Vector2.RIGHT) > 0.9:
-		collider = $RightCast.get_collider()
-	elif move_dir.dot(Vector2.UP) > 0.9:
-		collider = $UpCast.get_collider()
-	elif move_dir.dot(Vector2.DOWN) > 0.9:
-		collider = $DownCast.get_collider()
+	match move_dir:
+		Vector2.LEFT: collider = $LeftCast.get_collider()
+		Vector2.RIGHT: collider = $RightCast.get_collider()
+		Vector2.UP: collider = $UpCast.get_collider()
+		Vector2.DOWN: collider = $DownCast.get_collider()
 
 	if collider:
+		var next_wall_dir = move_dir * -1
+		if not can_switch_to_next_wall(next_wall_dir):
+			return
 		move_and_collide(move_dir * 2)
+		wall_dir = next_wall_dir
 		match difficulty:
 			0:
-				wall_dir *= -1
 				change_state("idle")
 			1:
-				wall_dir *= -1
 				change_state("idlescan")
 
 ### HELPER ###
@@ -216,3 +215,10 @@ func rotate_collision_shape(shape, deg, base_deg, base_pos):
 	var rotated_offset = offset.rotated(rad)
 	shape.position = pivot + rotated_offset
 	shape.rotation_degrees = deg + base_deg
+
+func can_switch_to_next_wall(next_wall_dir: Vector2) -> bool:
+	var curr_is_horizontal = !is_zero_approx(wall_dir.x)
+	var curr_is_vertical = !is_zero_approx(wall_dir.y)
+	var next_is_horizontal = !is_zero_approx(next_wall_dir.x)
+	var next_is_vertical = !is_zero_approx(next_wall_dir.y)
+	return (curr_is_horizontal and next_is_horizontal) or (curr_is_vertical and next_is_vertical)

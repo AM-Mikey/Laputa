@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dol3v8dg0drgu"]
 
 [ext_resource type="Script" uid="uid://c2bm3y56ilkuj" path="res://src/Actor/Enemy/Climber.gd" id="1_7gha7"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_lodrl"]
 [ext_resource type="Texture2D" uid="uid://dsb7pimaiub0y" path="res://assets/Actor/Enemy/Climber.png" id="2_u0hs7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qm1p1"]
@@ -28,6 +29,12 @@ debug = true
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1086623904]
+shape = SubResource("CircleShape2D_qm1p1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_lodrl")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=534404475]
 shape = SubResource("CircleShape2D_qm1p1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://7hbenrfv6p3q"]
+
+[ext_resource type="Script" uid="uid://bf4n7fw4hiihb" path="res://src/Utility/PhysicsLayerBody.gd" id="1_s2oak"]
+
+[node name="PhysicsLayerBody" type="CharacterBody2D" unique_id=307469918]
+collision_layer = 32768
+collision_mask = 0
+script = ExtResource("1_s2oak")
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

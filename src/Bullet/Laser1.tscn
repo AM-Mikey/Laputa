@@ -3,9 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://d27tf3k2og0is" path="res://assets/Bullet/Laser.png" id="1"]
 [ext_resource type="Script" uid="uid://2r0x7bnb6180" path="res://src/Bullet/Laser.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_olgh2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(12, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_olgh2"]
+size = Vector2(6, 1)
 
 [node name="Laser1" type="CharacterBody2D" unique_id=1375418196]
 collision_layer = 0
@@ -17,6 +21,13 @@ script = ExtResource("2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector" unique_id=1578084601]
 position = Vector2(-6, 0.5)
 shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("3_olgh2")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1485532265]
+position = Vector2(-9, 0.5)
+shape = SubResource("RectangleShape2D_olgh2")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2139648260]

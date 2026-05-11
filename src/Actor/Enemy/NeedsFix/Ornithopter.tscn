@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dphx5itcoj1wr"]
+[gd_scene format=3 uid="uid://dphx5itcoj1wr"]
 
 [ext_resource type="Texture2D" uid="uid://08od13wukqd7" path="res://assets/Actor/Enemy/Ornithopter.png" id="2"]
 [ext_resource type="Script" uid="uid://b4dp4p1y5pmt" path="res://src/Actor/Enemy/NeedsFix/Ornithopter.gd" id="3"]

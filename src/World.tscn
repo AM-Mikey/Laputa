@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://dif0ptb0whacs"]
+[gd_scene format=3]
 
-[ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
+[ext_resource type="Script" path="res://src/World.gd" id="8"]
 
 [sub_resource type="Animation" id="Animation_qbf6s"]
 resource_name = "Flash"
@@ -46,10 +46,10 @@ script = ExtResource("8")
 development_stage = "alpha"
 release_version = "1.8"
 do_skip_title = true
-start_level_path = "res://src/Level/ClimberTestZone.tscn"
+start_level_path = "res://src/Level/FrogTestZone.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=912648782]
-scroll_offset = Vector2(-12903.97, -7039.511)
+scroll_offset = Vector2(-13856, -6783.4976)
 
 [node name="Back" type="Node2D" parent="." unique_id=1451941770]
 visibility_layer = 2
@@ -70,8 +70,9 @@ transform = Transform2D(4, 0, 0, 4, 0, 0)
 [node name="BlackoutLayer" type="CanvasLayer" parent="." unique_id=1856051554]
 process_mode = 3
 layer = 2
-scale = Vector2(2, 2)
-transform = Transform2D(2, 0, 0, 2, 0, 0)
+visible = false
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
 
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=345291776]
 process_mode = 3
@@ -88,8 +89,9 @@ autoplay = &"RESET"
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=1389692242]
 process_mode = 3
 layer = 4
-scale = Vector2(2, 2)
-transform = Transform2D(2, 0, 0, 2, 0, 0)
+visible = false
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
 
 [node name="DialogLayer" type="CanvasLayer" parent="." unique_id=396863006]
 process_mode = 3
@@ -110,5 +112,7 @@ transform = Transform2D(2, 0, 0, 2, 0, 0)
 [node name="MenuLayer" type="CanvasLayer" parent="." unique_id=2033685382]
 process_mode = 3
 layer = 8
-scale = Vector2(2, 2)
-transform = Transform2D(2, 0, 0, 2, 0, 0)
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+
+[connection signal="level_saved" from="EditorLayer/Editor" to="EditorLayer/Editor/Main/Win/Tab/Levels" method="on_save"]

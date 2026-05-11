@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ii3n548fd8d6" path="res://src/Bullet/Star.gd" id="1_1qp2b"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="2_1lxsx"]
 [ext_resource type="Texture2D" uid="uid://da323nnsbu3cg" path="res://assets/Bullet/Star.png" id="3_1w6uq"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_xxg3g"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(11, 11)
@@ -62,6 +63,13 @@ debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 [node name="PlayerCollisionDetector" parent="." unique_id=1985790731 instance=ExtResource("2_1lxsx")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector" unique_id=805134638]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("6")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("3_xxg3g")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=347545007]
 position = Vector2(-0.5, -0.5)
 shape = SubResource("6")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)

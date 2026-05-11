@@ -1,30 +1,37 @@
-[gd_scene load_steps=5 format=3 uid="uid://k852h8fel8oy"]
+[gd_scene format=3 uid="uid://k852h8fel8oy"]
 
 [ext_resource type="Texture2D" uid="uid://dx7u3816jj4oq" path="res://assets/Bullet/Fan.png" id="1"]
 [ext_resource type="Script" uid="uid://dlgswnhbcopta" path="res://src/Bullet/Fan.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_4xs38"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(10, 10)
 
-[node name="Fan3" type="CharacterBody2D"]
+[node name="Fan3" type="CharacterBody2D" unique_id=728418654]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("2")
 
-[node name="PlayerCollisionDetector" parent="." instance=ExtResource("3")]
+[node name="PlayerCollisionDetector" parent="." unique_id=280168381 instance=ExtResource("3")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector" unique_id=1737470446]
 position = Vector2(-5, 0)
 shape = SubResource("1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("3_4xs38")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1998982377]
+position = Vector2(-5, 0)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=530728484]
 position = Vector2(-5, 0)
 texture = ExtResource("1")
 vframes = 3
 frame = 2
 
-[node name="End" type="Marker2D" parent="."]
+[node name="End" type="Marker2D" parent="." unique_id=1554458418]
 position = Vector2(-10, 0)
 
 [connection signal="area_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]

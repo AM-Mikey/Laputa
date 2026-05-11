@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dom55oqlg636t"]
 
 [ext_resource type="Script" uid="uid://conblsvr0rsat" path="res://src/Actor/Enemy/Cardinal.gd" id="1_glth5"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_nwotf"]
 [ext_resource type="Texture2D" uid="uid://cjxl16augech4" path="res://assets/Actor/Enemy/Cardinal.png" id="2_uswyo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qm1p1"]
@@ -79,7 +80,14 @@ debug = true
 speed = Vector2(100, 100)
 editor_hidden = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1935487877]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1648787771]
+position = Vector2(0, -2.5)
+shape = SubResource("CircleShape2D_qm1p1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_nwotf")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1003123358]
 position = Vector2(0, -2.5)
 shape = SubResource("CircleShape2D_qm1p1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
