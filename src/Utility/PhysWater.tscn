@@ -6,9 +6,10 @@
 resource_local_to_scene = true
 
 [node name="PhysWater" type="Node2D" unique_id=1888838736 groups=["PhysWaters"]]
+z_index = 1
 script = ExtResource("1_x2d66")
 surface_color = Color(1, 1, 1, 1)
-water_fill_color = Color(0.27395758, 0.50956357, 0.7055968, 0.3)
+water_fill_color = Color(0, 0.6460767, 0.83396184, 0.3)
 
 [node name="SplashDetector" type="Area2D" parent="." unique_id=998207753]
 unique_name_in_owner = true

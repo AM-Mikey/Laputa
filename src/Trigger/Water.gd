@@ -2,6 +2,7 @@ extends Trigger
 
 const BUBBLE_EMITTER = preload("res://src/Effect/BubbleEmitter.tscn")
 const PHYS_WATER = preload("res://src/Utility/PhysWater.tscn")
+const DROPLET_SPLASH = preload("res://src/Effect/DropletSplash.tscn")
 
 var bubble_emitters = {}
 var splash_targets = []
@@ -49,7 +50,7 @@ func _on_Water_body_entered(body):
 
 		if !splash_targets.has(target):
 			splash_targets.append(target)
-			var splash = load("res://src/Effect/Splash.tscn").instantiate()
+			var splash = DROPLET_SPLASH.instantiate()
 			splash.position.x = body.global_position.x
 			splash.position.y = global_position.y - 4
 			get_tree().get_root().get_node("World/Front").add_child(splash)
