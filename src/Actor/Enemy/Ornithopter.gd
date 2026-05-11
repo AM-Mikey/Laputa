@@ -2,6 +2,9 @@ extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/OrnithopterIcon.png")
 
+const TX_0 = preload("res://assets/Actor/Enemy/Ornithopter.png")
+const TX_1 = preload("res://assets/Actor/Enemy/Swooper.png")
+
 @export var dir = Vector2.LEFT
 @export var difficulty: int = 0
 
@@ -28,6 +31,7 @@ func setup():
 			acceleration = 25
 
 			reward = 2
+			$Sprite2D.texture = TX_0
 		1:
 			hp = 3
 			damage_on_contact = 2
@@ -35,6 +39,7 @@ func setup():
 			acceleration = 25
 
 			reward = 3
+			$Sprite2D.texture = TX_1
 
 	if dir == Vector2.LEFT:
 		$AnimationPlayer.play("FlyLeft")

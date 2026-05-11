@@ -4,6 +4,9 @@ const ICON = preload("res://assets/Actor/Enemy/BillyIcon.png")
 const SEED = preload("res://src/Bullet/Enemy/Seed.tscn")
 const WAYPOINT = preload("res://src/Editor/WaypointGlobal.tscn")
 
+const TX_0 = preload("res://assets/Actor/Enemy/Billy.png")
+const TX_1 = preload("res://assets/Actor/Enemy/Billy.png")
+
 @export var move_dir = Vector2.LEFT
 @export var look_dir = Vector2.LEFT
 

@@ -1,7 +1,7 @@
 extends Trigger
 
 ## Which enemy to spawn
-@export var enemy_path: String = ""
+@export_file var enemy_path: String = ""
 ## How many enemy per spawn
 #@export var enemy_per_spawn: int = 1
 ## Spawn a new enemy after specified interval, given the spawner does not spawn more than [member=max_enemy_on_screen]
@@ -62,22 +62,46 @@ var leftover_enemy = []
 # For spawn limit
 var spawn_left := 100000
 
+var sample_enemy = null
+var sample_enemy_og_visible = false
+var sample_enemy_og_process_mode = ProcessMode.PROCESS_MODE_INHERIT
+
 func _ready():
 	trigger_type = "screen_spawner"
 	spawn_area = Rect2(-$CollisionShape2D.shape.size / 2.0, $CollisionShape2D.shape.size)
 	$SpawnTimer.wait_time = spawn_interval
 	spawn_area = $SpawnArea.value
 
+
 	if !(FileAccess.file_exists(enemy_path)):
 		printerr("ScreenSpawner %s | _ready(): Invalid enemy_path %s" % [name, enemy_path])
 		return
 
-	var sample_enemy = load(enemy_path).instantiate()
+	sample_enemy = load(enemy_path).instantiate()
+
+	if ("dir" not in sample_enemy):
+		printerr("ScreenSpawner %s | _ready(): Enemy at %s doesn't have \"dir\" property!" % [name, enemy_path])
+		sample_enemy.queue_free()
+		return
+
+	var enemy_properties = $ActorSpawn.properties
+	for p_name in $ActorSpawn.properties:
+		sample_enemy.set(p_name, enemy_properties[p_name][0])
+	sample_enemy_og_process_mode = sample_enemy.process_mode
+	sample_enemy_og_visible = sample_enemy.visible
 	sample_enemy.process_mode = ProcessMode.PROCESS_MODE_DISABLED
-	actors.add_child(sample_enemy)
+	sample_enemy.global_position = Vector2(-1000000000, -1000000000)
 	enemy_speed = sample_enemy.speed
-	enemy_size = sample_enemy.get_node("CollisionShape2D").shape.get_rect().size
-	sample_enemy.queue_free()
+
+	var collision_shape = null
+	if sample_enemy.has_node("CollisionShape2D"):
+		collision_shape = sample_enemy.get_node("CollisionShape2D")
+	elif sample_enemy.has_node("Standable"):
+		collision_shape = sample_enemy.get_node("Standable/CollisionShape2D")
+	else:
+		collision_shape = sample_enemy.get_child(0)
+	enemy_size = collision_shape.shape.get_rect().size
+	actors.add_child(sample_enemy)
 
 	$DespawnBoudary/Up.global_position = ll.global_position + Vector2(0.0, -100.0)
 	$DespawnBoudary/Left.global_position = ll.global_position + Vector2(-100.0, 0.0)
@@ -88,11 +112,9 @@ func _ready():
 		spawn_left = spawn_limit
 
 func _on_SpawnTimer_timeout() -> void:
-	if (spawn_limit != - 1 and spawn_left <= 0):
+	if (spawn_limit != - 1 and spawn_left <= 0 or !sample_enemy):
 		$SpawnTimer.stop()
 		return
-
-	var enemy_scene = load(enemy_path)
 
 	var camera: Camera2D = get_viewport().get_camera_2d()
 	var screen_size: Vector2 = get_viewport().get_visible_rect().size / vs.resolution_scale
@@ -181,7 +203,7 @@ func _on_SpawnTimer_timeout() -> void:
 			var curr_ortho_pos: float = near_screen_ortho + (j - 0.2 + 0.4 * randf()) * enemy_distance_on_ortho
 			if (spawn_area_ortho_position > curr_ortho_pos or spawn_area_ortho_position + spawn_area_ortho_size < curr_ortho_pos):
 				continue
-			var enemy = enemy_scene.instantiate()
+			var enemy = spawn_enemy()
 			if (curr_spawn_direction in [Vector2.LEFT, Vector2.RIGHT]):
 				enemy.global_position.y = curr_ortho_pos
 				enemy.global_position.x = curr_pos + (-0.2 + randf() * 0.1) * enemy_distance
@@ -204,6 +226,17 @@ func _on_SpawnTimer_timeout() -> void:
 				break
 
 	#endregion
+
+### UTILITY
+func spawn_enemy() -> Node:
+	if (!sample_enemy):
+		printerr("ScreenSpawner %s: Cannot find the sample enemy!" % [name])
+		return null
+	var res: Node = sample_enemy.duplicate()
+	res.visible = sample_enemy_og_visible
+	res.process_mode = sample_enemy_og_process_mode
+	return res
+
 
 ### SIGNAL ###
 func _exit_tree() -> void:

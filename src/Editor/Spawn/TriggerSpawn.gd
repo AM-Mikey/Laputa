@@ -45,8 +45,6 @@ func _ready():
 				button.connect("button_down", Callable(self, "on_handle").bind(button))
 			buttons.append(button)
 
-
-
 func initialize(): #first time set up properties
 	var trigger = load(trigger_path).instantiate()
 	for p in trigger.get_property_list():
@@ -59,23 +57,34 @@ func initialize(): #first time set up properties
 		if ac.is_in_group("WaypointLocals"):
 			if !get_if_trigger_has_waypoint(ac):
 				trigger.remove_child(ac)
+				ac.owner = null
 				add_child(ac)
 				ac.owner = world.current_level
 		if ac.is_in_group("WaypointGlobalSpawns"):
 			if !get_if_trigger_has_waypoint(ac):
 				trigger.remove_child(ac)
+				ac.owner = null
 				add_child(ac)
 				ac.owner = world.current_level
 		if ac.is_in_group("ToolVectors"):
 			if !get_if_trigger_has_tool_vector(ac):
 				trigger.remove_child(ac)
+				ac.owner = null
 				add_child(ac)
 				ac.owner = world.current_level
 		if ac.is_in_group("ToolRects"):
 			if !get_if_trigger_has_tool_rect(ac):
 				trigger.remove_child(ac)
+				ac.owner = null
 				add_child(ac)
 				ac.owner = world.current_level
+		if ac.is_in_group("ActorSpawns"):
+			if !get_if_trigger_has_actor_spawn(ac):
+				trigger.remove_child(ac)
+				ac.owner = null
+				add_child(ac)
+				ac.owner = world.current_level
+				ac.initialize()
 	trigger.free()
 
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
@@ -92,18 +101,28 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 		if ac.is_in_group("WaypointLocals"):
 			if !get_if_trigger_has_waypoint(ac):
 				trigger.remove_child(ac)
+				ac.owner = null
 				add_child(ac)
 				ac.owner = world.current_level
 		if ac.is_in_group("ToolVectors"):
 			if !get_if_trigger_has_tool_vector(ac):
 				trigger.remove_child(ac)
+				ac.owner = null
 				add_child(ac)
 				ac.owner = world.current_level
 		if ac.is_in_group("ToolRects"):
 			if !get_if_trigger_has_tool_rect(ac):
 				trigger.remove_child(ac)
+				ac.owner = null
 				add_child(ac)
 				ac.owner = world.current_level
+		if ac.is_in_group("ActorSpawns"):
+			if !get_if_trigger_has_actor_spawn(ac):
+				trigger.remove_child(ac)
+				ac.owner = null
+				add_child(ac)
+				ac.owner = world.current_level
+				ac.reinitialize()
 
 	trigger.free()
 
@@ -125,13 +144,13 @@ func spawn():
 	trigger.get_node("CollisionShape2D").position = new_shape.size * 0.5
 
 	for ac in trigger.get_children(): #clear old from trigger
-		if ac.is_in_group("WaypointLocals") || ac.is_in_group("ToolVectors") || ac.is_in_group("ToolRects"):
+		if ac.is_in_group("WaypointLocals") || ac.is_in_group("ToolVectors") || ac.is_in_group("ToolRects") || ac.is_in_group("ActorSpawns"):
 			trigger.remove_child(ac)
 		if ac.is_in_group("WaypointGlobalSpawns"): #turn off visibility
 			ac.visible = false
 
 	for c in get_children(): #add new from spawn
-		if c.is_in_group("WaypointLocals") || c.is_in_group("ToolVectors") || c.is_in_group("ToolRects"):
+		if c.is_in_group("WaypointLocals") || c.is_in_group("ToolVectors") || c.is_in_group("ToolRects") || c.is_in_group("ActorSpawns"):
 			var copy = c.duplicate()
 			trigger.add_child(copy)
 
@@ -199,6 +218,13 @@ func get_if_trigger_has_tool_rect(trigger_tool_rect) -> bool:
 				return true
 	return false
 
+func get_if_trigger_has_actor_spawn(actor_spawn_tool) -> bool:
+	for c in get_children():
+		if c.is_in_group("ActorSpawns"):
+			if c.tag_name == actor_spawn_tool.tag_name:
+				return true
+	return false
+
 ### SIGNALS
 
 func on_editor_select(): #when
@@ -219,3 +245,16 @@ func on_handle(handle):
 
 	var inspector = world.get_node("EditorLayer/Editor").inspector
 	inspector.on_selected(self, "trigger_spawn")
+
+func on_property_changed(p_name, p_value):
+	match p_name:
+		"enemy_path":
+			for c in get_children():
+				if c.is_in_group("ActorSpawns") and c.is_tool:
+					for ac in c.get_children():
+						if ac.is_in_group("WaypointLocals") || ac.is_in_group("WaypointGlobalSpawns") \
+						|| ac.is_in_group("ToolVectors") || ac.is_in_group("ToolRects") || ac.is_in_group("ActorSpawns"):
+							ac.queue_free()
+					c.actor_path = p_value
+					c.reinitialize()
+					return

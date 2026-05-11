@@ -244,6 +244,7 @@ func on_property_changed(property_name, property_value):
 			active.properties[property_name][0] = property_value
 		"trigger_spawn":
 			active.properties[property_name][0] = property_value
+			active.on_property_changed(property_name, property_value)
 		"level":
 			match property_name:
 				"tile_set":
