@@ -9,7 +9,7 @@ var state = "idle"
 var active_handle = null
 var drag_offset = Vector2.ZERO
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 var buttons = []
 
@@ -29,13 +29,15 @@ func _ready():
 			index +=1
 	if index == 0: name = trigger.name
 	else: name = str(trigger.name, index)
+	#Label
+	$Label.text = trigger.name
 	#transform
 	if size_is_default:
 		size = trigger.get_node("CollisionShape2D").shape.size
 		size_is_default = false
 	#global_position = trigger.get_node("CollisionShape2D").global_position
 
-	if world.el.get_child_count() == 0: #not in editor
+	if w.el.get_child_count() == 0: #not in editor
 		visible = false
 
 	for h in $Handles/Top.get_children():
@@ -88,24 +90,27 @@ func spawn():
 	trigger.get_node("CollisionShape2D").shape = new_shape
 	trigger.get_node("CollisionShape2D").position = new_shape.size * 0.5
 
-	world.current_level.get_node("Triggers").call_deferred("add_child", trigger)
+	w.current_level.get_node("Triggers").call_deferred("add_child", trigger)
 
 
 
 func _input(event):
-	if event.is_action_released("editor_lmb"):
+	if !w.has_node("EditorLayer/Editor"): return
+	var editor = w.get_node("EditorLayer/Editor")
+	if editor.subtool == "grab": return #grabbing a non-trigger
+	if event.is_action_released("editor_rmb") && state != "idle":
 		state = "idle"
+		editor.active_tool = editor.pre_grab_tool
+		editor.subtool = editor.pre_grab_subtool
 		return
+
 	if event is InputEventMouseMotion and state != "idle": #dragging or resizing
 		var x = snapped(get_global_mouse_position().x + drag_offset.x, 8)
 		var y = snapped(get_global_mouse_position().y + drag_offset.y, 8)
-
 		var parent_x = get_parent().position.x
 		var parent_y = get_parent().position.y
-
 		match state:
 			"drag":
-				#var tile_map = world.current_level.get_node("TileMap")
 				global_position = Vector2(x, y)
 			"resize":
 				match active_handle.name:
@@ -130,6 +135,10 @@ func _input(event):
 					"Right":
 						offset_right = x - parent_x
 
+func _process(_delta):
+	if w.has_node("EditorLayer/Editor"): #i wonder if this is too many calls to check
+		if w.get_node("EditorLayer/Editor").subtool == "grab": #grabbing a non-trigger
+			state = "idle"
 
 ### SIGNALS
 
@@ -141,15 +150,24 @@ func on_editor_deselect():
 
 
 func on_handle(handle):
+	var editor = w.get_node("EditorLayer/Editor")
+	if editor.subtool == "grab": return #grabbing a non-trigger
+
 	if handle.name != "Mid":
 		state = "resize"
+		editor.pre_grab_tool = editor.active_tool
+		editor.pre_grab_subtool = editor.subtool
+		editor.set_tool("entity", "triggerresize")
 		active_handle = handle
 		drag_offset = handle.global_position - get_global_mouse_position()
 	else:
 		state = "drag"
+		editor.pre_grab_tool = editor.active_tool
+		editor.pre_grab_subtool = editor.subtool
+		editor.set_tool("entity", "triggergrab")
 		drag_offset = global_position - get_global_mouse_position()
 	emit_signal("selected", get_parent(), "trigger")
 
 
-	var inspector = world.get_node("EditorLayer/Editor").inspector
+	var inspector = w.get_node("EditorLayer/Editor").inspector
 	inspector.on_selected(self, "trigger_spawn")
