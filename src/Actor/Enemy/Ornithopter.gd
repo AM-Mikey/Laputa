@@ -11,13 +11,17 @@ const TX_1 = preload("res://assets/Actor/Enemy/Swooper.png")
 var is_on_screen: bool = false
 var has_swoop: bool = false
 
-var swoop_speed: float = 120.0
 var swoop_curve: Curve2D
 var swoop_t: float
+const swoop_speed: float = 120.0
+const swoop_speed_thin: float = 90.0
+const screen_thin_threshold_x: float = 250.0
 ## The unit for all below constant is the distance of 1 cell in the grid
 const min_swoop_detection_x: float = 5.0
 const max_swoop_detection_x: float = 25.0
-const min_swoop_height: float = 1.0
+const max_swoop_detection_x_thin: float = 15.0
+
+const min_swoop_height: float = 2.0
 const max_swoop_height: float = 20.0
 const min_swoop_distance: float = 15.0
 const max_swoop_distance: float = 30.0
@@ -62,8 +66,8 @@ func do_fly(_delta):
 	move_and_slide()
 
 	if (difficulty == 1):
-		var screen_size = get_viewport().get_visible_rect().size / vs.resolution_scale
-		var screen_too_thin_check = screen_size.x < 300.0
+		var screen_size = vs.get_screen_global_rect().size
+		var screen_too_thin_check = screen_size.x < screen_thin_threshold_x
 		if (screen_too_thin_check or (is_on_screen and !screen_too_thin_check)):
 			var player = f.pc()
 			if (player):
@@ -73,8 +77,10 @@ func do_fly(_delta):
 				var player_distance_relative = abs(player_grid_coord.x - grid_coord.x)
 				var player_height_relative = player_grid_coord.y - grid_coord.y
 
+				var max_check_distance =  min(max_swoop_detection_x, floor(screen_size.x / 16.0)) if !screen_too_thin_check else max_swoop_detection_x_thin
+
 				var valid_to_swoop = player_height_relative >= min_swoop_height and player_height_relative <= min(max_swoop_height, floor(screen_size.y / 16.0 / 2.0))  \
-									and player_distance_relative >= min_swoop_detection_x and player_distance_relative <= min(max_swoop_detection_x, floor(screen_size.x / 16.0)) \
+									and player_distance_relative >= min_swoop_detection_x and player_distance_relative <= max_check_distance \
 									and player_direction_check
 
 				if (!has_swoop and valid_to_swoop):
@@ -115,10 +121,10 @@ func enter_swoop(_prev_state: String):
 		$Debug.points = points
 
 func do_swoop(delta: float):
-	swoop_t += swoop_speed * delta
+	var calc_speed: float = swoop_speed_thin if vs.get_screen_global_rect().size.x < screen_thin_threshold_x else swoop_speed
+	swoop_t += calc_speed * delta
 	var curr_transform: Transform2D = swoop_curve.sample_baked_with_rotation(swoop_t)
 	global_position = curr_transform.get_origin()
-	#global_rotation = curr_transform.get_rotation()
 
 	if (swoop_t > swoop_curve.get_baked_length()):
 		change_state("fly")

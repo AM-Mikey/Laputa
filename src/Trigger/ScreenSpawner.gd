@@ -116,10 +116,8 @@ func _on_SpawnTimer_timeout() -> void:
 		$SpawnTimer.stop()
 		return
 
-	var camera: Camera2D = get_viewport().get_camera_2d()
-	var screen_size: Vector2 = get_viewport().get_visible_rect().size / vs.resolution_scale
-	var screen_position: Vector2 = camera.get_screen_center_position() - screen_size / 2.0
-	var screen_rect: Rect2 = Rect2(screen_position, screen_size)
+	var screen_rect: Rect2 = vs.get_screen_global_rect()
+	var screen_size: Vector2 = screen_rect.size
 	var level_rect: Rect2 = Rect2(ll.global_position, ll.size)
 	var curr_spawn_area: Rect2 = spawn_area.intersection(screen_rect)
 
@@ -326,9 +324,9 @@ func _on_body_exited(body: Node2D):
 	$SpawnTimer.stop()
 
 func get_screen_edge_position() -> float:
-	var camera: Camera2D = get_viewport().get_camera_2d()
-	var screen_size: Vector2 = get_viewport().get_visible_rect().size / vs.resolution_scale
-	var screen_position: Vector2 = camera.get_screen_center_position() - screen_size / 2.0
+	var screen_rect: Rect2 = vs.get_screen_global_rect()
+	var screen_size: Vector2 = screen_rect.size
+	var screen_position: Vector2 = screen_rect.position
 	match curr_spawn_direction:
 		Vector2.LEFT:
 			return screen_position.x + screen_size.x

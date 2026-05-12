@@ -58,3 +58,11 @@ func get_res_scale_from_urs(urs, always_round_down = false) -> float:
 		out = roundi(out) #else round normally
 	out = max(out, 1)
 	return out
+
+func get_screen_global_rect() -> Rect2:
+	var camera: Camera2D = get_viewport().get_camera_2d()
+	if (!camera):
+		return Rect2(Vector2.ZERO, Vector2.ZERO)
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size / resolution_scale
+	var screen_position: Vector2 = camera.get_screen_center_position() - screen_size / 2.0
+	return Rect2(screen_position, screen_size)
