@@ -580,3 +580,14 @@ frog level 0 targeting fix
 fix tadpoles leaving water to much
 
 set set order
+
+WATER TODO:
+-add shader (later)
+-add drip prop effect
+-add wind effect
+-editor now takes longer to open/close
+
+
+
+
+-beetle rotation fix

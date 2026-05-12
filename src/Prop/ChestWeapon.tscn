@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bq7j4yi4xlvbs" path="res://src/Prop/ChestWeapon.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bjwvnd0w6cx4x" path="res://assets/Prop/ChestWeapon.png" id="2_f6n5n"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_v0jpg"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(24, 16)
@@ -60,6 +61,12 @@ script = ExtResource("2")
 metadata/_custom_type_script = "uid://dgt1xd0pgkr67"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1664013525]
+position = Vector2(16, 8)
+shape = SubResource("1")
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_v0jpg")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1939196859]
 position = Vector2(16, 8)
 shape = SubResource("1")
 

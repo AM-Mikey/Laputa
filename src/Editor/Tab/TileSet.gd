@@ -432,7 +432,7 @@ func _on_New_file_selected(path):
 	var id = 0
 	while id < rows * columns:
 		var x_pos = (id % columns) * 16
-		var y_pos = floor(id / columns) * 16
+		var y_pos = floor(id / float(columns)) * 16
 		var region = Rect2(x_pos, y_pos, 16, 16)
 		tile_set.create_tile(id)
 		tile_set.tile_set_texture(id, texture)

@@ -2,6 +2,7 @@ extends Trigger
 
 func _ready():
 	trigger_type = "kill_box"
+	w.emit_signal("finished_spawn_entities_step")
 
 func _on_body_entered(body): #note this currently only kills players and enemies
 	if body.get_collision_layer_value(1):

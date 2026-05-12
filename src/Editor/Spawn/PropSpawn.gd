@@ -1,10 +1,10 @@
 extends Area2D
 
-var allow_spawn := true
-var physics_prop_spawn_distance = 0.001
-
 @export_file var prop_path
 @export var properties = {}
+
+var allow_spawn := true
+var physics_prop_spawn_distance = 0.001
 
 @onready var w = get_tree().get_root().get_node("World")
 
@@ -45,7 +45,6 @@ func _ready():
 	if w.el.get_child_count() == 0: #not in editor
 		visible = false
 		input_pickable = false
-		spawn()
 
 func initialize(): #first time set up properties
 	var prop = load(prop_path).instantiate()
@@ -68,7 +67,6 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 	prop.free()
 
 func spawn():
-	await get_tree().process_frame #wait to set allow_spawn
 	if !allow_spawn: return
 	if prop_path == null:
 		printerr("ERROR: no prop chosen in PropSpawn")
@@ -96,6 +94,6 @@ func on_editor_deselect():
 
 
 func _input_event(_viewport, event, _shape_idx): #selecting in editor
-	var inspector = w.get_node("EditorLayer/Editor").inspector
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
-		inspector.on_selected(self, "actor_spawn")
+		var inspector = w.get_node("EditorLayer/Editor").inspector
+		inspector.on_selected(self, "prop_spawn")

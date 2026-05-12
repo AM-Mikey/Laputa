@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dvmfxj76jww0o"]
 
 [ext_resource type="Texture2D" uid="uid://c1wouwbovbivr" path="res://assets/Actor/Enemy/Stalagtite.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_b0s3x"]
 [ext_resource type="Script" uid="uid://dutiad4j22gxd" path="res://src/Actor/Enemy/Stalagtite.gd" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
@@ -151,6 +152,12 @@ position = Vector2(0, -4)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_pbcgp")
 disabled = true
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_b0s3x")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1831271393]
+position = Vector2(0, -8)
+shape = SubResource("1")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=587944831]
 collision_layer = 131072

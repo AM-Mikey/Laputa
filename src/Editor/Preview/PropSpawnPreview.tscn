@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b0fjxad7sv1v3"]
+
+[ext_resource type="Script" uid="uid://c8kqfye4237bm" path="res://src/Editor/Preview/PropSpawnPreview.gd" id="1_qtkp7"]
+
+[node name="PropSpawnPreview" type="Node2D" unique_id=869260895 groups=["Previews"]]
+modulate = Color(1, 1, 1, 0.75)
+script = ExtResource("1_qtkp7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=143740932]
+centered = false

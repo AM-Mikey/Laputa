@@ -8,9 +8,10 @@ var active_count = 0
 
 @onready var w = get_tree().get_root().get_node("World")
 
-func _ready():
+func _ready(): #Reminder: no function called can use await
 	visible = w.debug_visible or w.el.get_child_count() > 0
-
+	await get_tree().process_frame #it seems like the WPGs set up too fast without this, and the signal doesn't have time to reset properly
+	w.emit_signal("finished_spawn_entities_step")
 
 func activate():
 	active_count += 1

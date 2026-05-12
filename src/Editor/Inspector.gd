@@ -22,6 +22,7 @@ func exit():
 ### SELECTING
 
 func on_selected(selection, selection_type):
+	#print(selection, selection_type)
 	if selection.is_in_group("Previews"): return
 
 	if active: #deselect old
@@ -263,7 +264,7 @@ func on_property_changed(property_name, property_value):
 
 
 	display_data() #to reload
-	editor.log.lprint(str("Changed ", active_type, " ", active.name, "'s ", property_name, " to ", property_value))
+	editor.e_log.lprint(str("Changed ", active_type, " ", active.name, "'s ", property_name, " to ", property_value))
 	print("Changed ", active_type, " ", active.name, "'s ", property_name, " to ", property_value)
 
 
@@ -292,6 +293,6 @@ func _on_SaveDialog_file_selected(path: String):
 		new.tile_mode = ll.tile_mode
 		new.back_tile_mode = ll.back_tile_mode
 		ResourceSaver.save(new, path)
-		editor.log.lprint(str("Saved Current Background Resource to: ", path))
+		editor.e_log.lprint(str("Saved Current Background Resource to: ", path))
 		print("Saved Current Background Resource to: ", path)
 		on_property_changed("background_resource", path)

@@ -64,4 +64,4 @@ func _on_Quit_pressed():
 	queue_free()
 
 func _resolution_scale_changed(resolution_scale):
-	set_deferred("size", get_tree().get_root().size / resolution_scale)
+	set_deferred("size", get_tree().get_root().size / vs.menu_resolution_scale)

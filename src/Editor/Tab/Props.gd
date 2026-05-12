@@ -22,7 +22,7 @@ func setup_props():
 			var prop_button = PROP_BUTTON.instantiate()
 			prop_button.prop_path = p
 			prop_button.prop_name = prop.name
-			prop_button.prop_sprite = prop.get_node("Sprite2D").texture
+			prop_button.prop_icon = prop.ICON
 			prop_button.connect("prop_changed", Callable(self, "_on_prop_changed"))
 			if index == 0:
 				prop_button.active = true

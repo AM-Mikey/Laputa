@@ -1,6 +1,8 @@
 extends Trigger
 
-const BUBBLEEMITTER = preload("res://src/Effect/BubbleEmitter.tscn")
+const BUBBLE_EMITTER = preload("res://src/Effect/BubbleEmitter.tscn")
+const PHYS_WATER = preload("res://src/Utility/PhysWater.tscn")
+const DROPLET_SPLASH = preload("res://src/Effect/DropletSplash.tscn")
 
 var bubble_emitters = {}
 var splash_targets = []
@@ -9,9 +11,14 @@ var splash_targets = []
 		gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * val
 		velocity_dropoff = val
 
-func _ready():
+func _ready(): #Reminder: no function called can use await
 	trigger_type = "water"
 	velocity_dropoff = velocity_dropoff
+	var phys_water = PHYS_WATER.instantiate()
+	phys_water.water_size = $CollisionShape2D.shape.size
+	phys_water.global_position = global_position
+	w.current_level.add_child(phys_water) #TODO: put this on a utility layer
+	w.emit_signal("finished_spawn_entities_step")
 
 func _on_Water_body_entered(body):
 	var do_bubbles = true
@@ -37,13 +44,13 @@ func _on_Water_body_entered(body):
 	if not target.is_in_water:
 		target.is_in_water = true
 		if do_bubbles && target.do_bubbles:
-			var be = BUBBLEEMITTER.instantiate()
+			var be = BUBBLE_EMITTER.instantiate()
 			bubble_emitters[target] = be
 			target.call_deferred("add_child", be)
 
 		if !splash_targets.has(target):
 			splash_targets.append(target)
-			var splash = load("res://src/Effect/Splash.tscn").instantiate()
+			var splash = DROPLET_SPLASH.instantiate()
 			splash.position.x = body.global_position.x
 			splash.position.y = global_position.y - 4
 			get_tree().get_root().get_node("World/Front").add_child(splash)

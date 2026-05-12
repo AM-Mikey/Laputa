@@ -1,5 +1,6 @@
 extends PhysicsProp
 
+const ICON = preload("res://assets/Prop/HealthUpgradeIcon.png")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
 const CRYSTAL = preload("res://src/Actor/Pickup/HealthUpgradeCrystal.tscn")
 
@@ -8,9 +9,8 @@ var broken = false
 var has_left_ground = false
 var value := 2
 
-#func setup():
-	#velocity = Vector2.ZERO
-	#move_and_slide()
+func setup(): #Reminder: no function called can use await
+	w.emit_signal("finished_spawn_entities_step")
 
 func on_break(_method = "cut"): #prevent from breaking midair?
 	broken = true

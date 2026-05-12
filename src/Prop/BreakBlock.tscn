@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bo6wktdqx2md0"]
+[gd_scene format=3 uid="uid://bo6wktdqx2md0"]
 
 [ext_resource type="Script" uid="uid://dntcigk2jyejb" path="res://src/Prop/BreakBlock.gd" id="1_ejag6"]
 [ext_resource type="Texture2D" uid="uid://cj748gt2c20yk" path="res://assets/Prop/BreakBlock.png" id="2_0cau2"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_xkehe"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
@@ -15,7 +16,7 @@ size = Vector2(14, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0cau2"]
 size = Vector2(16, 16)
 
-[node name="BreakBlock" type="RigidBody2D" groups=["Entities", "PhysicsProps", "Props"]]
+[node name="BreakBlock" type="RigidBody2D" unique_id=1193421281 groups=["Entities", "PhysicsProps", "Props"]]
 collision_layer = 24
 collision_mask = 520
 can_sleep = false
@@ -24,47 +25,53 @@ freeze_mode = 1
 script = ExtResource("1_ejag6")
 metadata/_custom_type_script = "uid://dgt1xd0pgkr67"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=145023394]
 position = Vector2(8, 8)
 shape = SubResource("1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_xkehe")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1097072401]
+position = Vector2(8, 8)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=130698616]
 texture = ExtResource("2_0cau2")
 centered = false
 hframes = 3
 
-[node name="BreakArea" type="Area2D" parent="."]
+[node name="BreakArea" type="Area2D" parent="." unique_id=1617953084]
 collision_layer = 256
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakArea" unique_id=913900600]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_xkehe")
 
-[node name="CrushDetector" type="Area2D" parent="."]
+[node name="CrushDetector" type="Area2D" parent="." unique_id=41672407]
 collision_layer = 0
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CrushDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrushDetector" unique_id=228822363]
 position = Vector2(8, 16.5)
 shape = SubResource("RectangleShape2D_xavsd")
 
-[node name="EditorArea" type="Area2D" parent="."]
+[node name="EditorArea" type="Area2D" parent="." unique_id=1143192318]
 collision_layer = 0
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea" unique_id=1284484738]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_0cau2")
 debug_color = Color(0, 0.6, 0.69803923, 0)
 
-[node name="GroundLeft" type="RayCast2D" parent="."]
+[node name="GroundLeft" type="RayCast2D" parent="." unique_id=1408564082]
 position = Vector2(1, 16.5)
 target_position = Vector2(0, 0.5)
 collision_mask = 520
 hit_from_inside = true
 
-[node name="GroundRight" type="RayCast2D" parent="."]
+[node name="GroundRight" type="RayCast2D" parent="." unique_id=679420263]
 position = Vector2(15, 16.5)
 target_position = Vector2(0, 0.5)
 collision_mask = 520

@@ -6,7 +6,7 @@ const ICON = preload("res://assets/Actor/Enemy/RollerIcon.png")
 
 var move_dir
 
-func setup():
+func setup(): #Reminder: no function called can use await
 	hp = 3
 	reward = 2
 	damage_on_contact = 2
@@ -16,7 +16,7 @@ func setup():
 	move_dir = start_dir
 	set_up_direction(FLOOR_NORMAL)
 	animate()
-
+	w.emit_signal("finished_spawn_entities_step")
 
 
 func _on_physics_process(_delta):

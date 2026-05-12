@@ -1,5 +1,8 @@
 extends Node2D
 
+signal finished_spawn_entities_step
+signal finished_spawning
+
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const INVENTORY = preload("res://src/UI/Inventory/Inventory.tscn")
 const LEVEL_TEXT = preload("res://src/UI/LevelText.tscn")
@@ -97,7 +100,7 @@ func _input(event):
 
 ### LEVEL CHANGE ###
 
-func first_time_level_setup():
+func first_time_level_setup(): #Reminder: no function called can use await
 	bl.visible = true #TODO: this is a bandaid solution to saving in editor causing world.gd to have some layers invisible. since it's only supposed to save the current level, I'm not sure why this is affecting the world node
 	ui.visible = true
 	print("first time level setup")
@@ -105,18 +108,17 @@ func first_time_level_setup():
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 	current_level = load(start_level_path).instantiate()
 	add_child(current_level)
-	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
-		if wg.uses_spawn:
-			wg.queue_free()
+
+	spawn_entities()
 
 	$Juniper.global_position = get_spawn_point().global_position
-	$Juniper/PlayerCamera.reset()
+	$Juniper/PlayerCamera.reset() #TODO: REMOVE THESE AWAITS IT CAUSES SHIT TO MULTITHREAD
 
 	#wipe would go here if we want one
 	display_level_text(current_level)
 	run_conversation_on_enter(current_level)
 	await get_tree().physics_frame
-	await get_tree().physics_frame #wait for npcs to spawn, takes 2 frames for some reason
+	await get_tree().physics_frame #wait for npcs to spawn #caused by camera reset time
 	setup_missions(false, "first_time")
 
 func change_level_via_code(level_path, use_save_data):
@@ -139,9 +141,8 @@ func change_level_via_code(level_path, use_save_data):
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
-	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
-		if wg.uses_spawn:
-			wg.queue_free()
+
+	spawn_entities()
 
 	$Juniper.global_position = get_spawn_point().global_position
 	$Juniper/PlayerCamera.reset()
@@ -173,9 +174,8 @@ func change_level_via_trigger(level_path, door_index):
 
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
-	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
-		if wg.uses_spawn:
-			wg.queue_free()
+
+	spawn_entities()
 
 	$Juniper/PlayerCamera.reset()
 
@@ -308,7 +308,31 @@ func clear_spawn_layers():
 	for c in front.get_children():
 		c.free()
 
-
+func spawn_entities():
+	#TODO: Timing for setting allow_spawn (mission system) goes up here)
+	#cleanup
+	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
+		if wg.uses_spawn:
+			wg.queue_free()
+	#spawn
+	for t in get_tree().get_nodes_in_group("TriggerSpawns"):
+		t.spawn()
+		print(t)
+		await finished_spawn_entities_step
+	print("all triggers spawned")
+	for a in get_tree().get_nodes_in_group("ActorSpawns"):
+		a.spawn()
+		await finished_spawn_entities_step
+	print("all actors spawned")
+	for w in get_tree().get_nodes_in_group("WaypointGlobalSpawns"):
+		w.spawn()
+		await finished_spawn_entities_step
+	print("all waypoint globals spawned")
+	for p in get_tree().get_nodes_in_group("PropSpawns"):
+		p.spawn()
+		await finished_spawn_entities_step
+	print("all props spawned")
+	emit_signal("finished_spawning")
 
 ### GETTERS ###
 

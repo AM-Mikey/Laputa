@@ -22,14 +22,15 @@ var did_bonk: bool = false
 @onready var rc: RayCast2D = get_node("RayCast2D")
 
 
-func setup():
-	#print("setup fish")
-	change_state("idle")
+func setup(): #Reminder: no function called can use await
 	do_bubbles = false
-	if debug: print("ready fish")
 	speed = Vector2(20, 150)
 	hp = 3
 	damage_on_contact = normal_damage
+	update_path_lines()
+	w.emit_signal("finished_spawn_entities_step")
+
+	await w.finished_spawning #wait for global_waypoints
 	for c in get_children():
 		if c.is_in_group("Waypoints"):
 			match c.tag_name:
@@ -42,7 +43,8 @@ func setup():
 					x_min = c.position.x - start_pos.x
 				"right":
 					x_max = c.position.x - start_pos.x
-	update_path_lines()
+
+	change_state("idle")
 
 func on_swim_dir_x_changed(new):
 	swim_dir_x = new

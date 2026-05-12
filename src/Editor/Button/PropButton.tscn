@@ -1,50 +1,68 @@
-[gd_scene load_steps=5 format=3 uid="uid://brrrka1ptx3y4"]
+[gd_scene format=3 uid="uid://brrrka1ptx3y4"]
 
 [ext_resource type="StyleBox" uid="uid://c53b3p1k47jdu" path="res://src/UI/StyleBox/SteelRound.tres" id="1"]
 [ext_resource type="Script" uid="uid://cqqo4ddydvfwm" path="res://src/Editor/Button/PropButton.gd" id="2"]
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://cedutrf4qdb7q" path="res://src/UI/StyleBox/SteelRoundDark.tres" id="3_ntrmt"]
 [ext_resource type="Texture2D" uid="uid://cj748gt2c20yk" path="res://assets/Prop/BreakBlock.png" id="4_036me"]
+[ext_resource type="FontFile" uid="uid://c4ibssirigp5x" path="res://assets/UI/Font/Kirigami.ttf" id="5_384sh"]
 
-[node name="PropButton" type="MarginContainer" groups=["PropButtons"]]
-custom_minimum_size = Vector2(16, 16)
+[node name="PropButton" type="MarginContainer" unique_id=1987471604 groups=["PropButtons"]]
 offset_right = 35.0
 offset_bottom = 34.0
+size_flags_horizontal = 3
 theme = ExtResource("3")
 script = ExtResource("2")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=350161136]
 layout_mode = 2
 mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_ntrmt")
 
-[node name="PanelActive" type="Panel" parent="."]
+[node name="PanelActive" type="Panel" parent="." unique_id=1185871260]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1")
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="." unique_id=1522652236]
 layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="HBox" type="HBoxContainer" parent="VBox"]
-layout_mode = 2
-
-[node name="Spacer" type="Control" parent="VBox/HBox"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="VBox/HBox"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 6
-text = "Prop"
-
-[node name="Spacer2" type="Control" parent="VBox/HBox"]
+[node name="Spacer" type="Control" parent="VBox" unique_id=405094746]
+custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBox"]
+[node name="HBox" type="HBoxContainer" parent="VBox" unique_id=1403857448]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Spacer" type="Control" parent="VBox/HBox" unique_id=734505729]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="VBox/HBox" unique_id=960633085]
 unique_name_in_owner = true
-clip_contents = true
+custom_minimum_size = Vector2(0, 17)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.44313726, 0.56078434, 0.56078434, 1)
+theme_override_fonts/font = ExtResource("5_384sh")
+theme_override_font_sizes/font_size = 7
+text = "breakblock"
+horizontal_alignment = 1
+autowrap_mode = 3
+uppercase = true
+
+[node name="Spacer2" type="Control" parent="VBox/HBox" unique_id=1075707460]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBox" unique_id=1209016307]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -53,8 +71,14 @@ texture = ExtResource("4_036me")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="Button" type="Button" parent="."]
+[node name="Spacer2" type="Control" parent="VBox" unique_id=287666392]
+custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="." unique_id=380265039]
+layout_mode = 2
+button_mask = 3
 flat = true
 vertical_icon_alignment = 0
 

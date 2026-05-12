@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://dxnb66edllhsa"]
 
-[ext_resource type="Script" uid="uid://dgt1xd0pgkr67" path="res://src/Prop/PhysicsProp.gd" id="1_bh5vf"]
+[ext_resource type="Script" uid="uid://dti2qhaj3qe5o" path="res://src/Prop/Bucket.gd" id="1_bh5vf"]
 [ext_resource type="Texture2D" uid="uid://bog4ig0jl2q24" path="res://assets/Prop/Bucket.png" id="2_3tmxh"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_tt2fx"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
@@ -19,6 +20,12 @@ script = ExtResource("1_bh5vf")
 metadata/_custom_type_script = "uid://dgt1xd0pgkr67"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1907040936]
+position = Vector2(8, 8)
+shape = SubResource("1")
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_tt2fx")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1885417909]
 position = Vector2(8, 8)
 shape = SubResource("1")
 

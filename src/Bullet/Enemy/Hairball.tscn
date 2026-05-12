@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://db8sonshae0f5" path="res://src/Bullet/Enemy/Hairball.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bwidtesm4rihd" path="res://assets/Bullet/Enemy/Hairball.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://d1oy3g4tudn3v" path="res://src/Bullet/Enemy/EnemyCollisionDetector.tscn" id="2_ahdkj"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_oq5v0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sh0tx"]
 radius = 6.0
@@ -40,6 +41,12 @@ collision_layer = 8448
 collision_mask = 65576
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCollisionDetector" unique_id=1859592137]
+shape = SubResource("CapsuleShape2D_sh0tx")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("3_oq5v0")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=609724048]
 shape = SubResource("CapsuleShape2D_sh0tx")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 

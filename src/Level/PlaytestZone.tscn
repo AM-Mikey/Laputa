@@ -72,7 +72,7 @@ tile_set = ExtResource("6_uue3x")
 visibility_layer = 2
 z_index = -1
 use_parent_material = true
-tile_map_data = PackedByteArray("AAADAW4AAAABAAQAAAD9AG8AAAABAAQAAAADAW8AAAABAAQAAAD4AHAAAAABAAQAAAD9AHAAAAABAAQAAAADAXAAAAABAAQAAAD4AHEAAAABAAQAAAD9AHEAAAABAAQAAAADAXEAAAABAAQAAAD4AHIAAAABAAQAAAD9AHIAAAABAAQAAAD4AHMAAAABAAQAAAD9AHMAAAABAAQAAAD4AHQAAAABAAQAAABnAHUAAAABAAQAAAD4AHUAAAABAAQAAABnAHYAAAABAAQAAABpAHYAAAAAAAQAAABnAHcAAAABAAQAAABpAHcAAAAAAAUAAACdAHcAAAADAAQAAABnAHgAAAABAAQAAABnAHkAAAABAAQAAABnAHoAAAABAAQAAABnAHsAAAABAAQAAAD+AHsAAAABAAQAAABnAHwAAAABAAQAAAD+AHwAAAABAAQAAABnAH0AAAABAAQAAAD+AH0AAAABAAQAAABnAH4AAAABAAQAAADUAH4AAAAAAAYAAADVAH4AAAAAAAYAAADWAH4AAAAAAAYAAADXAH4AAAAAAAYAAADYAH4AAAAAAAYAAADZAH4AAAAAAAYAAADaAH4AAAAAAAYAAADbAH4AAAAAAAYAAADcAH4AAAAAAAYAAADdAH4AAAAAAAYAAADeAH4AAAAAAAYAAADfAH4AAAAAAAYAAADgAH4AAAAAAAYAAAD+AH4AAAABAAQAAABnAH8AAAABAAQAAADUAH8AAAAAAAcAAADVAH8AAAAAAAcAAADWAH8AAAAAAAcAAADXAH8AAAAAAAcAAADYAH8AAAAAAAcAAADZAH8AAAAAAAcAAADaAH8AAAAAAAcAAADbAH8AAAAAAAcAAADcAH8AAAAAAAcAAADdAH8AAAAAAAcAAADeAH8AAAAAAAcAAAD+AH8AAAABAAQAAABnAIAAAAABAAQAAABuAIAAAAADAAQAAADUAIAAAAAAAAcAAADVAIAAAAAAAAcAAADWAIAAAAAAAAcAAADXAIAAAAAAAAcAAADYAIAAAAAAAAcAAADZAIAAAAAAAAcAAADaAIAAAAAAAAcAAADbAIAAAAAAAAcAAADcAIAAAAAAAAcAAADdAIAAAAAAAAcAAADeAIAAAAAAAAcAAAD+AIAAAAABAAQAAADUAIEAAAAAAAcAAADVAIEAAAAAAAcAAADWAIEAAAAAAAcAAADXAIEAAAAAAAcAAADYAIEAAAAAAAcAAADZAIEAAAAAAAcAAADaAIEAAAAAAAcAAADbAIEAAAAAAAcAAADcAIEAAAAAAAcAAAD+AIEAAAABAAQAAADUAIIAAAAAAAcAAADVAIIAAAAAAAcAAADWAIIAAAAAAAcAAADXAIIAAAAAAAcAAADYAIIAAAAAAAcAAADZAIIAAAAAAAcAAADaAIIAAAAAAAcAAADbAIIAAAAAAAcAAAD+AIIAAAABAAQAAADUAIMAAAAAAAcAAADVAIMAAAAAAAcAAADWAIMAAAAAAAcAAADXAIMAAAAAAAcAAADYAIMAAAAAAAcAAADZAIMAAAAAAAcAAADaAIMAAAAAAAcAAADbAIMAAAAAAAcAAAD+AIUAAAABAAQAAAD+AIYAAAABAAQAAAAJAYYAAAAAAAYAAAAKAYYAAAAAAAYAAAAJAYcAAAAAAAcAAAAKAYcAAAAAAAcAAAA=")
+tile_map_data = PackedByteArray("AAADAW4AAAABAAQAAAD9AG8AAAABAAQAAAADAW8AAAABAAQAAAD4AHAAAAABAAQAAAD9AHAAAAABAAQAAAADAXAAAAABAAQAAAD4AHEAAAABAAQAAAD9AHEAAAABAAQAAAADAXEAAAABAAQAAAD4AHIAAAABAAQAAAD9AHIAAAABAAQAAAD4AHMAAAABAAQAAAD9AHMAAAABAAQAAAD4AHQAAAABAAQAAABnAHUAAAABAAQAAAD4AHUAAAABAAQAAABnAHYAAAABAAQAAABpAHYAAAAAAAQAAABnAHcAAAABAAQAAABpAHcAAAAAAAUAAACdAHcAAAADAAQAAABnAHgAAAABAAQAAABnAHkAAAABAAQAAABnAHoAAAABAAQAAABnAHsAAAABAAQAAAD+AHsAAAABAAQAAABnAHwAAAABAAQAAAD+AHwAAAABAAQAAABnAH0AAAABAAQAAAD+AH0AAAABAAQAAABnAH4AAAABAAQAAAD+AH4AAAABAAQAAABnAH8AAAABAAQAAAD+AH8AAAABAAQAAABnAIAAAAABAAQAAABuAIAAAAADAAQAAAD+AIAAAAABAAQAAAD+AIEAAAABAAQAAAD+AIIAAAABAAQAAAD+AIUAAAABAAQAAAD+AIYAAAABAAQAAAAJAYYAAAAAAAYAAAAKAYYAAAAAAAYAAAAJAYcAAAAAAAcAAAAKAYcAAAAAAAcAAAA=")
 tile_set = ExtResource("6_uue3x")
 
 [node name="Front" type="TileMapLayer" parent="TileMap" unique_id=1829366578]
@@ -114,6 +114,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -133,6 +134,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [3, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -152,6 +154,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -170,6 +173,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -188,6 +192,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -207,6 +212,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -225,6 +231,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -243,6 +250,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -261,6 +269,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -279,6 +288,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -297,6 +307,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -315,6 +326,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -333,6 +345,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -352,6 +365,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -371,6 +385,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -389,6 +404,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -407,6 +423,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -426,6 +443,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -445,6 +463,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -464,6 +483,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -483,6 +503,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -502,6 +523,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -521,6 +543,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -540,6 +563,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -559,6 +583,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -578,6 +603,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -597,6 +623,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -616,6 +643,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -635,6 +663,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [2, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -654,6 +683,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -673,6 +703,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -692,6 +723,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -711,6 +743,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -729,6 +762,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -747,6 +781,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -765,6 +800,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -783,6 +819,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -802,6 +839,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -821,6 +859,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -839,6 +878,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -858,6 +898,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [2, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -877,6 +918,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [2, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -895,6 +937,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -913,6 +956,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -931,6 +975,7 @@ actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": ["", 4],
 "speed": [Vector2(150, 350), 5],
@@ -1233,6 +1278,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "can_move_x": [true, 1],
 "debug": [false, 1],
+"do_bubbles": [false, 1],
 "editor_hidden": [false, 1],
 "id": [&"Fish", 4],
 "jump_height": [6, 2],
@@ -1279,9 +1325,11 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [0, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": [&"Beetle3", 4],
 "speed": [Vector2(150, 150), 5],
+"wall_dir": [Vector2(-1, 0), 5],
 "water_gravity": [150.0, 3]
 }
 
@@ -1306,9 +1354,11 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [0, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": [&"Beetle4", 4],
 "speed": [Vector2(150, 150), 5],
+"wall_dir": [Vector2(-1, 0), 5],
 "water_gravity": [150.0, 3]
 }
 
@@ -1334,9 +1384,11 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [0, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": [&"Beetle5", 4],
 "speed": [Vector2(150, 150), 5],
+"wall_dir": [Vector2(-1, 0), 5],
 "water_gravity": [150.0, 3]
 }
 
@@ -1361,9 +1413,11 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": [&"Beetle6", 4],
 "speed": [Vector2(150, 150), 5],
+"wall_dir": [Vector2(-1, 0), 5],
 "water_gravity": [150.0, 3]
 }
 
@@ -1388,9 +1442,11 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": [&"Beetle4", 4],
 "speed": [Vector2(150, 150), 5],
+"wall_dir": [Vector2(-1, 0), 5],
 "water_gravity": [150.0, 3]
 }
 
@@ -1416,9 +1472,11 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [false, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": [&"Beetle5", 4],
 "speed": [Vector2(150, 150), 5],
+"wall_dir": [Vector2(-1, 0), 5],
 "water_gravity": [150.0, 3]
 }
 
@@ -1444,6 +1502,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": [&"Stalagtite26", 4],
 "speed": [Vector2(150, 350), 5],
@@ -1463,6 +1522,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [2, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": [&"Stalagtite27", 4],
 "speed": [Vector2(150, 350), 5],
@@ -1482,6 +1542,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [2, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": [&"Stalagtite28", 4],
 "speed": [Vector2(150, 350), 5],
@@ -1501,6 +1562,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [2, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": [&"Stalagtite29", 4],
 "speed": [Vector2(150, 350), 5],
@@ -1520,6 +1582,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": [&"Stalagtite30", 4],
 "speed": [Vector2(150, 350), 5],
@@ -1530,15 +1593,16 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(4312, 2432)
+position = Vector2(4160, 2432)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("8_xdtt3")
 actor_path = "res://src/Actor/Enemy/BeetleCrawler.tscn"
 properties = {
 "base_gravity": [300.0, 3],
-"debug": [true, 1],
+"debug": [false, 1],
 "difficulty": [1, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": [&"BeetleCrawler", 4],
 "speed": [Vector2(150, 150), 5],
@@ -1581,6 +1645,7 @@ properties = {
 "base_gravity": [300.0, 3],
 "debug": [true, 1],
 "difficulty": [0, 2],
+"do_bubbles": [true, 1],
 "editor_hidden": [false, 1],
 "id": [&"BeetleCrawler1", 4],
 "speed": [Vector2(150, 150), 5],
@@ -1605,92 +1670,10 @@ collision_mask = 0
 script = ExtResource("18_nvccq")
 arrow_length = 24.0
 tag_name = "crawl"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
-
-[node name="Frog" type="Area2D" parent="Spawns" unique_id=248888549 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3560, 2352)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xdtt3")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"croak_time": [1.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": [&"Frog", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"tongue_damage": [2.0, 3],
-"water_gravity": [150.0, 3]
-}
-
-[node name="LookVector" type="Area2D" parent="Spawns/Frog" unique_id=1097995752 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
-visibility_layer = 2
-position = Vector2(0, -7)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_nvccq")
-tag_name = "look"
-snap_degrees = 180.0
-movement_locked = true
-
-[node name="TongueRange" type="Area2D" parent="Spawns/Frog" unique_id=1519925716 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_ys6yb")]
-visible = false
-visibility_layer = 2
-position = Vector2(-32, -12)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_vnnt7")
-tag_name = "tongue_range"
-
-[node name="Frog1" type="Area2D" parent="Spawns" unique_id=139885428 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3496, 2352)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_xdtt3")
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"croak_time": [1.0, 3],
-"debug": [true, 1],
-"difficulty": [0, 2],
-"editor_hidden": [false, 1],
-"id": [&"Frog1", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"tongue_damage": [2.0, 3],
-"water_gravity": [150.0, 3]
-}
-
-[node name="LookVector" type="Area2D" parent="Spawns/Frog1" unique_id=118460853 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
-visibility_layer = 2
-position = Vector2(0, -7)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_nvccq")
-tag_name = "look"
-snap_degrees = 180.0
-movement_locked = true
-
-[node name="TongueRange" type="Area2D" parent="Spawns/Frog1" unique_id=1432164514 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_ys6yb")]
-visible = false
-visibility_layer = 2
-position = Vector2(-32, -12)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_vnnt7")
-tag_name = "tongue_range"
 
 [node name="BreakBlock6" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("17_8ue5j")]
 modulate = Color(1, 1, 1, 0.75)

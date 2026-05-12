@@ -10,11 +10,12 @@ const ICON = preload("res://assets/Actor/Enemy/ShieldIcon.png")
 @onready var ap = $AnimationPlayer
 @onready var bb = $BulletBlocker
 
-func setup():
+func setup(): #Reminder: no function called can use await
 	hp = 6
 	reward = 2
 	damage_on_contact = 2
 	speed = Vector2(50, 50)
+	w.emit_signal("finished_spawn_entities_step")
 	change_state("wait")
 
 

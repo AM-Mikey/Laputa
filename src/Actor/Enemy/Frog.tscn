@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b80mj2pbqh664" path="res://src/Actor/Enemy/Frog.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cimkcsmiyj0d8" path="res://assets/Actor/Enemy/Frog.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_hw183"]
 [ext_resource type="Texture2D" uid="uid://cmfcg6bvrqf0f" path="res://assets/Actor/Enemy/FrogTongue.png" id="3_abmcr"]
 [ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/WaypointLocal.tscn" id="3_ih0x2"]
 [ext_resource type="PackedScene" path="res://src/Editor/ToolVector.tscn" id="3_nvdu1"]
@@ -210,7 +211,13 @@ speed = Vector2(50, 100)
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=672254353]
-visible = false
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_qm1p1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_hw183")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1249417735]
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_qm1p1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)

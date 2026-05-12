@@ -71,7 +71,6 @@ func _ready():
 		if w.el.get_child_count() == 0: #not in editor
 			visible = false
 			input_pickable = false
-			spawn()
 
 func initialize(): #first time set up properties
 	#print("initialize")
@@ -86,6 +85,7 @@ func initialize(): #first time set up properties
 		properties["id"] = [name, TYPE_STRING]
 		set_sprite()
 
+
 		for ac in actor.get_children(): #TODO: add these to props and to waypoints
 			if ac.is_in_group("WaypointLocals"):
 				if !get_if_actor_has_waypoint(ac):
@@ -93,7 +93,7 @@ func initialize(): #first time set up properties
 					ac.owner = null
 					add_child(ac)
 					ac.owner = w.current_level
-			if ac.is_in_group("WaypointGlobalSpawns"):
+			if ac.is_in_group("WaypointGlobalSpawns"): #Not sure about this being here. what is this part realistically doing?
 				if !get_if_actor_has_waypoint(ac):
 					actor.remove_child(ac)
 					ac.owner = null
@@ -151,8 +151,7 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 func spawn():
 	if (is_tool):
 		return
-	#print("spawn")
-	if actor_path == null:
+	if actor_path == "":
 		printerr("ERROR: no actor chosen in ActorSpawn")
 		return
 
@@ -163,18 +162,18 @@ func spawn():
 	if properties["id"][0] == "": #no given id
 		actor.id = name
 	actor.global_position = global_position
-	await w.current_level.get_node("Actors").call_deferred("add_child", actor)
+	w.current_level.get_node("Actors").call_deferred("add_child", actor)
 
 	for ac in actor.get_children(): #clear old from actor
-		if ac.is_in_group("WaypointLocals") || ac.is_in_group("ToolVectors") || ac.is_in_group("ToolRects"):
+		if ac.is_in_group("WaypointLocals") || ac.is_in_group("ToolVectors") || ac.is_in_group("ToolRects") || ac.is_in_group("WaypointGlobalSpawns"):
 			actor.remove_child(ac)
-		if ac.is_in_group("WaypointGlobalSpawns"): #turn off visibility
-			ac.visible = false
 
 	for c in get_children(): #add new from spawn
 		if c.is_in_group("WaypointLocals") || c.is_in_group("ToolVectors") || c.is_in_group("ToolRects"):
 			var copy = c.duplicate()
 			actor.add_child(copy)
+
+
 
 ### HELPERS ###
 
