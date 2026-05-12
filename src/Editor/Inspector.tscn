@@ -1,22 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctxo7a6euqnhd"]
+[gd_scene format=3 uid="uid://ctxo7a6euqnhd"]
 
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1"]
 [ext_resource type="Script" uid="uid://ul3hypjc8cyj" path="res://src/Editor/Inspector.gd" id="2"]
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="3_x868a"]
 [ext_resource type="Script" uid="uid://6ci8g1yjeufc" path="res://src/Editor/FileDialogOverride.gd" id="4_b2bhf"]
 
-[node name="Inspector" type="MarginContainer"]
+[node name="Inspector" type="MarginContainer" unique_id=1226368358]
 offset_right = 415.0
 offset_bottom = 400.0
 mouse_filter = 2
 theme = ExtResource("1")
 script = ExtResource("2")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1212184699]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Margin" type="MarginContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="." unique_id=1222432112]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 8
@@ -24,11 +24,11 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBox" type="VBoxContainer" parent="Margin"]
+[node name="VBox" type="VBoxContainer" parent="Margin" unique_id=1582085874]
 layout_mode = 2
 mouse_filter = 0
 
-[node name="Label" type="Label" parent="Margin/VBox"]
+[node name="Label" type="Label" parent="Margin/VBox" unique_id=326601931]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 1
@@ -36,25 +36,25 @@ theme_override_colors/font_color = Color(0.878431, 0.784314, 0.345098, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 
-[node name="Scroll" type="ScrollContainer" parent="Margin/VBox"]
+[node name="Scroll" type="ScrollContainer" parent="Margin/VBox" unique_id=34293814]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBox" type="VBoxContainer" parent="Margin/VBox/Scroll"]
+[node name="VBox" type="VBoxContainer" parent="Margin/VBox/Scroll" unique_id=1556268890]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="HBox" type="HBoxContainer" parent="Margin/VBox"]
+[node name="HBox" type="HBoxContainer" parent="Margin/VBox" unique_id=1789467630]
 layout_mode = 2
 
-[node name="ToolLabel" type="Label" parent="Margin/VBox/HBox"]
+[node name="ToolLabel" type="Label" parent="Margin/VBox/HBox" unique_id=1866382056]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.301961, 0.372549, 0.380392, 1)
 theme_override_fonts/font = ExtResource("3_x868a")
 text = "TOOL:"
 
-[node name="Tool" type="Label" parent="Margin/VBox/HBox"]
+[node name="Tool" type="Label" parent="Margin/VBox/HBox" unique_id=794824600]
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.301961, 0.372549, 0.380392, 1)
@@ -62,20 +62,20 @@ theme_override_fonts/font = ExtResource("3_x868a")
 text = "Testing"
 clip_text = true
 
-[node name="SubtoolLabel" type="Label" parent="Margin/VBox/HBox"]
+[node name="SubtoolLabel" type="Label" parent="Margin/VBox/HBox" unique_id=268076194]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.301961, 0.372549, 0.380392, 1)
 theme_override_fonts/font = ExtResource("3_x868a")
 text = "SUBTOOL:"
 
-[node name="Subtool" type="Label" parent="Margin/VBox/HBox"]
+[node name="Subtool" type="Label" parent="Margin/VBox/HBox" unique_id=960016808]
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.301961, 0.372549, 0.380392, 1)
 theme_override_fonts/font = ExtResource("3_x868a")
 text = "Testing"
 
-[node name="FileDialog" type="FileDialog" parent="."]
+[node name="FileDialog" type="FileDialog" parent="." unique_id=1871539985]
 title = "Open a File"
 initial_position = 1
 size = Vector2i(400, 400)
@@ -84,7 +84,7 @@ file_mode = 0
 filters = PackedStringArray(".json")
 script = ExtResource("4_b2bhf")
 
-[node name="SaveDialog" type="FileDialog" parent="."]
+[node name="SaveDialog" type="FileDialog" parent="." unique_id=1223095879]
 initial_position = 1
 size = Vector2i(400, 400)
 script = ExtResource("4_b2bhf")

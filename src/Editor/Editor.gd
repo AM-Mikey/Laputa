@@ -1,8 +1,5 @@
 extends Control
 
-#signal enemy_selected(enemy)
-#signal prop_selected(prop)
-#signal entity_selected(entity, entity_type)
 signal level_selected(level)
 signal layer_updated(active_tile_map_layer)
 
@@ -81,7 +78,6 @@ func _ready():
 
 func enter(): #Call this every time the level is changed or reloaded
 	#print("enter")
-	#emit_signal("level_selected", w.current_level)
 	setup_windows()
 	f.pc().disable()
 	f.hud().queue_free()
@@ -443,8 +439,6 @@ func do_generic_input(event):
 			"npc":
 				free_previews()
 				preview_actor_spawn($Main/Win/Tab/NPCs.active_npc_path, grid_pos)
-			"trigger":
-				pass #TODO
 			"grab":
 				if shift_held: inspector.active.global_position = Vector2(mouse_pos + grab_offset).snapped(Vector2(4,4))
 				else: inspector.active.global_position = Vector2(mouse_pos + grab_offset).snapped(Vector2(8,8))

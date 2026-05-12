@@ -22,6 +22,7 @@ func exit():
 ### SELECTING
 
 func on_selected(selection, selection_type):
+	#print(selection, selection_type)
 	if selection.is_in_group("Previews"): return
 
 	if active: #deselect old

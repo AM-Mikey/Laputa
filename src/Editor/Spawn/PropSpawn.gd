@@ -94,6 +94,6 @@ func on_editor_deselect():
 
 
 func _input_event(_viewport, event, _shape_idx): #selecting in editor
-	var inspector = w.get_node("EditorLayer/Editor").inspector
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
-		inspector.on_selected(self, "actor_spawn")
+		var inspector = w.get_node("EditorLayer/Editor").inspector
+		inspector.on_selected(self, "prop_spawn")
