@@ -97,8 +97,11 @@ func spawn():
 func _input(event):
 	if !w.has_node("EditorLayer/Editor"): return
 	var editor = w.get_node("EditorLayer/Editor")
-	if editor.subtool == "grab": return #grabbing a non-trigger
+	if editor.active_tool == "tile": return
+
 	if event.is_action_released("editor_rmb") && state != "idle":
+		var inspector = w.get_node("EditorLayer/Editor").inspector
+		inspector.on_selected(self, "trigger_spawn")
 		state = "idle"
 		editor.active_tool = editor.pre_grab_tool
 		editor.subtool = editor.pre_grab_subtool
@@ -135,23 +138,21 @@ func _input(event):
 					"Right":
 						offset_right = x - parent_x
 
-func _process(_delta):
-	if w.has_node("EditorLayer/Editor"): #i wonder if this is too many calls to check
-		if w.get_node("EditorLayer/Editor").subtool == "grab": #grabbing a non-trigger
-			state = "idle"
 
 ### SIGNALS
 
 func on_editor_select(): #when
 	modulate = Color(1,0,0,.75)
+	%Mid.disabled = false
 
 func on_editor_deselect():
 	modulate = Color(1,1,1,.75)
+	%Mid.disabled = true
 
 
 func on_handle(handle):
 	var editor = w.get_node("EditorLayer/Editor")
-	if editor.subtool == "grab": return #grabbing a non-trigger
+	if editor.active_tool == "tile": return
 
 	if handle.name != "Mid":
 		state = "resize"

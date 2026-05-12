@@ -208,7 +208,7 @@ size_is_default = false
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(3624, 1744)
+position = Vector2(3632, 1768)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("16_nbj4a")
@@ -237,6 +237,30 @@ properties = {
 "editor_hidden": [false, 1],
 "id": [&"Water2", 4],
 "velocity_dropoff": [0.75, 3]
+}
+size_is_default = false
+
+[node name="Door" type="MarginContainer" parent="Spawns" unique_id=1800792368 groups=["TriggerSpawns"] instance=ExtResource("7_frgma")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
+offset_left = 3760.0
+offset_top = 1808.0
+offset_right = 3776.0
+offset_bottom = 1840.0
+mouse_filter = 2
+script = ExtResource("14_30c4u")
+trigger_path = "res://src/Trigger/Door.tscn"
+properties = {
+"color": [Color(0, 0.4, 0, 1), 20],
+"door_index": [0, 2],
+"editor_hidden": [false, 1],
+"id": [&"Door", 4],
+"level": ["", 4],
+"locked": [false, 1],
+"same_level": [false, 1],
+"same_level_next_index": [0, 2]
 }
 size_is_default = false
 
