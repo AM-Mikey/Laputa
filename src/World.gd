@@ -332,6 +332,7 @@ func spawn_entities():
 		p.spawn()
 		await finished_spawn_entities_step
 	print("all props spawned")
+	await get_tree().physics_frame # In case the level has nothing, this ensures the caller funciton to preperly receive the "finished_spawning" signal
 	emit_signal("finished_spawning")
 
 ### GETTERS ###

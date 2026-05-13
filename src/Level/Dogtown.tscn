@@ -111,10 +111,10 @@ mouse_filter = 2
 script = ExtResource("8_aqway")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
-"color": [Color(0, 0, 0.701961, 1), 20],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"velocity_dropoff": [0.75, 3]
+"color": [Color(0, 0, 0.701961, 1), 20, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""],
+"velocity_dropoff": [0.75, 3, ""]
 }
 size_is_default = false
 
@@ -131,14 +131,14 @@ mouse_filter = 2
 script = ExtResource("8_aqway")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
-"color": [Color(0, 0.4, 0, 1), 20],
-"door_index": [0, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"level": ["res://src/Level/DogtownEast.tscn", 4],
-"locked": [false, 1],
-"same_level": [false, 1],
-"same_level_next_index": [0, 2]
+"color": [Color(0, 0.4, 0, 1), 20, ""],
+"door_index": [0, 2, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""],
+"level": ["res://src/Level/DogtownEast.tscn", 4, ""],
+"locked": [false, 1, ""],
+"same_level": [false, 1, ""],
+"same_level_next_index": [0, 2, ""]
 }
 size_is_default = false
 
@@ -155,9 +155,9 @@ mouse_filter = 2
 script = ExtResource("8_aqway")
 trigger_path = "res://src/Trigger/Ladder.tscn"
 properties = {
-"color": [Color(1, 0.494118, 0, 1), 20],
-"editor_hidden": [true, 1],
-"id": ["", 4]
+"color": [Color(1, 0.494118, 0, 1), 20, ""],
+"editor_hidden": [true, 1, ""],
+"id": ["", 4, ""]
 }
 size_is_default = false
 
@@ -185,15 +185,16 @@ collision_mask = 0
 script = ExtResource("12_6grhi")
 actor_path = "res://src/Actor/NPC/Aikka.tscn"
 properties = {
-"base_gravity": [300.0, 3],
-"dialog_json": ["", 4],
-"editor_hidden": [false, 1],
-"id": ["aikka", 4],
-"speed": [Vector2(150, 350), 5],
-"starting_state": ["idle", 4],
-"voiced": [true, 1],
-"walk_speed": [Vector2(50, 50), 5],
-"water_gravity": [150.0, 3]
+"base_gravity": [300.0, 3, ""],
+"dialog_json": ["", 4, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["aikka", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
 }
 
 [node name="Fish" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_6grhi")]
@@ -206,15 +207,16 @@ collision_mask = 0
 script = ExtResource("12_6grhi")
 actor_path = "res://src/Actor/Enemy/Fish.tscn"
 properties = {
-"base_gravity": [300.0, 3],
-"can_move_x": [true, 1],
-"debug": [false, 1],
-"editor_hidden": [false, 1],
-"id": ["fish0", 4],
-"jump_height": [6, 2],
-"speed": [Vector2(20, 150), 5],
-"swim_dir_x": [-1, 2],
-"water_gravity": [150.0, 3]
+"base_gravity": [300.0, 3, ""],
+"can_move_x": [true, 1, ""],
+"debug": [false, 1, ""],
+"do_bubbles": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["fish0", 4, ""],
+"jump_height": [6, 2, ""],
+"speed": [Vector2(20, 150), 5, ""],
+"swim_dir_x": [-1, 2, ""],
+"water_gravity": [150.0, 3, ""]
 }
 
 [node name="WaypointJump" type="Area2D" parent="Spawns/Fish" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_ho0nu")]
@@ -254,15 +256,16 @@ collision_mask = 0
 script = ExtResource("12_6grhi")
 actor_path = "res://src/Actor/Enemy/Fish.tscn"
 properties = {
-"base_gravity": [300.0, 3],
-"can_move_x": [true, 1],
-"debug": [false, 1],
-"editor_hidden": [false, 1],
-"id": ["fish1", 4],
-"jump_height": [6, 2],
-"speed": [Vector2(20, 150), 5],
-"swim_dir_x": [-1, 2],
-"water_gravity": [150.0, 3]
+"base_gravity": [300.0, 3, ""],
+"can_move_x": [true, 1, ""],
+"debug": [false, 1, ""],
+"do_bubbles": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["fish1", 4, ""],
+"jump_height": [6, 2, ""],
+"speed": [Vector2(20, 150), 5, ""],
+"swim_dir_x": [-1, 2, ""],
+"water_gravity": [150.0, 3, ""]
 }
 
 [node name="WaypointJump" type="Area2D" parent="Spawns/Fish1" unique_id=1568328639 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_ho0nu")]

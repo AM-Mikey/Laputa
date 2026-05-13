@@ -93,6 +93,8 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 	for p in trigger.get_property_list():
 		if p["usage"] & 4102 == 4102: #exported properties
 			if old_properties.has(p["name"]):
+				if (old_properties[p["name"]].size() == 2): #Backward compability
+					old_properties[p["name"]].append("")
 				properties[p["name"]] = old_properties[p["name"]]
 			else:
 				properties[p["name"]] = [trigger.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]

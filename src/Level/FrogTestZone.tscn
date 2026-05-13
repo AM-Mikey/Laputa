@@ -110,17 +110,17 @@ collision_mask = 0
 script = ExtResource("8_ct86i")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
-"base_gravity": [300.0, 3],
-"croak_time": [1.0, 3],
-"debug": [false, 1],
-"difficulty": [1, 2],
-"do_bubbles": [true, 1],
-"editor_hidden": [false, 1],
-"id": [&"Fish", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(20, 150), 5],
-"tongue_damage": [2.0, 3],
-"water_gravity": [150.0, 3]
+"base_gravity": [300.0, 3, ""],
+"croak_time": [1.0, 3, ""],
+"debug": [false, 1, ""],
+"difficulty": [1, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Fish", 4, ""],
+"jump_delay": [3.0, 3, ""],
+"speed": [Vector2(20, 150), 5, ""],
+"tongue_damage": [2.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
 }
 
 [node name="LookVector" type="Area2D" parent="Spawns/Frog" unique_id=872564127 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
@@ -152,17 +152,17 @@ collision_mask = 0
 script = ExtResource("8_ct86i")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
-"base_gravity": [300.0, 3],
-"croak_time": [1.0, 3],
-"debug": [true, 1],
-"difficulty": [0, 2],
-"do_bubbles": [true, 1],
-"editor_hidden": [false, 1],
-"id": [&"Frog1", 4],
-"jump_delay": [3.0, 3],
-"speed": [Vector2(50, 100), 5],
-"tongue_damage": [2.0, 3],
-"water_gravity": [150.0, 3]
+"base_gravity": [300.0, 3, ""],
+"croak_time": [1.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Frog1", 4, ""],
+"jump_delay": [3.0, 3, ""],
+"speed": [Vector2(50, 100), 5, ""],
+"tongue_damage": [2.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
 }
 
 [node name="LookVector" type="Area2D" parent="Spawns/Frog1" unique_id=535038282 groups=["Entities", "ToolVectors", "VisualUtilities"] instance=ExtResource("11_36t42")]
@@ -197,10 +197,10 @@ mouse_filter = 2
 script = ExtResource("14_30c4u")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
-"color": [Color(0, 0, 0.701961, 1), 20],
-"editor_hidden": [false, 1],
-"id": [&"Water1", 4],
-"velocity_dropoff": [0.75, 3]
+"color": [Color(0, 0, 0.701961, 1), 20, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Water1", 4, ""],
+"velocity_dropoff": [0.75, 3, ""]
 }
 size_is_default = false
 
@@ -233,10 +233,10 @@ mouse_filter = 2
 script = ExtResource("14_30c4u")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
-"color": [Color(0, 0, 0.701961, 1), 20],
-"editor_hidden": [false, 1],
-"id": [&"Water2", 4],
-"velocity_dropoff": [0.75, 3]
+"color": [Color(0, 0, 0.701961, 1), 20, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Water2", 4, ""],
+"velocity_dropoff": [0.75, 3, ""]
 }
 size_is_default = false
 
@@ -253,14 +253,14 @@ mouse_filter = 2
 script = ExtResource("14_30c4u")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
-"color": [Color(0, 0.4, 0, 1), 20],
-"door_index": [0, 2],
-"editor_hidden": [false, 1],
-"id": [&"Door", 4],
-"level": ["", 4],
-"locked": [false, 1],
-"same_level": [false, 1],
-"same_level_next_index": [0, 2]
+"color": [Color(0, 0.4, 0, 1), 20, ""],
+"door_index": [0, 2, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Door", 4, ""],
+"level": ["", 4, ""],
+"locked": [false, 1, ""],
+"same_level": [false, 1, ""],
+"same_level_next_index": [0, 2, ""]
 }
 size_is_default = false
 
