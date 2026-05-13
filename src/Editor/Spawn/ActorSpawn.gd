@@ -33,7 +33,6 @@ extends Area2D
 func _ready():
 	if (is_tool):
 		actor_path = actor_path
-		remove_from_group("ActorSpawns")
 	else:
 		if !is_tool and actor_path == "":
 			printerr("ERROR: no actor chosen in ActorSpawn")
@@ -153,6 +152,7 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 
 func spawn():
 	if (is_tool):
+		w.emit_signal.call_deferred("finished_spawn_entities_step")
 		return
 	if actor_path == "":
 		printerr("ERROR: no actor chosen in ActorSpawn")

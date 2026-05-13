@@ -13,11 +13,13 @@
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="9_a15t6"]
 [ext_resource type="Script" path="res://src/Tile/WastesAutoTile.gd" id="10_8y50y"]
 [ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="10_rn7th"]
+[ext_resource type="PackedScene" path="res://src/Editor/ToolRect.tscn" id="11_a15t6"]
 [ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="11_ruftt"]
-[ext_resource type="PackedScene" path="res://src/Editor/ToolRect.tscn" id="11_uh5sa"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="12_ejtq8"]
 [ext_resource type="Script" path="res://src/Editor/ToolRect.gd" id="12_uh5sa"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="13_rn7th"]
 [ext_resource type="Script" path="res://src/Editor/WaypointGlobal.gd" id="14_egrem"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="14_uh5sa"]
 [ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="18_dnhws"]
 [ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="20_rgqcq"]
 
@@ -257,11 +259,30 @@ properties = {
 }
 size_is_default = false
 
-[node name="Ornithopter" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_a15t6")]
+[node name="Ladder" type="MarginContainer" parent="Spawns" unique_id=1800792368 groups=["TriggerSpawns"] instance=ExtResource("7_qr03l")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(2504, 2112)
+custom_minimum_size = Vector2(8, 8)
+offset_left = 2416.0
+offset_top = 1920.0
+offset_right = 2552.0
+offset_bottom = 2016.0
+mouse_filter = 2
+script = ExtResource("8_3wqwr")
+trigger_path = "res://src/Trigger/Ladder.tscn"
+properties = {
+"color": [Color(1, 0.494118, 0, 1), 20, ""],
+"editor_hidden": [true, 1, ""],
+"id": [&"Ladder", 4, ""]
+}
+size_is_default = false
+
+[node name="Ornithopter" type="Area2D" parent="Spawns" unique_id=820898365 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_a15t6")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(2552, 2072)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("10_rn7th")
@@ -273,119 +294,81 @@ properties = {
 "dir": [Vector2(-1, 0), 5, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Ornithopter", 4, ""],
+"id": [&"Ornithopter1", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="ScreenSpawner" type="MarginContainer" parent="Spawns" unique_id=1800792368 groups=["TriggerSpawns"] instance=ExtResource("7_qr03l")]
+[node name="ScreenSpawner" type="MarginContainer" parent="Spawns" unique_id=895566566 groups=["TriggerSpawns"] instance=ExtResource("7_qr03l")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
-offset_left = 2464.0
-offset_top = 2064.0
-offset_right = 2552.0
-offset_bottom = 2112.0
+offset_left = 1744.0
+offset_top = 1648.0
+offset_right = 2528.0
+offset_bottom = 2240.0
 mouse_filter = 2
 script = ExtResource("8_3wqwr")
 trigger_path = "res://src/Trigger/ScreenSpawner.tscn"
 properties = {
 "color": [Color(0.26666665, 1, 0, 1), 20, ""],
 "editor_hidden": [false, 1, ""],
-"enemy_path": ["", 4, ""],
-"id": [&"ScreenSpawner", 4, ""],
+"enemy_path": ["res://src/Actor/Enemy/Ornithopter.tscn", 4, ""],
+"id": [&"ScreenSpawner1", 4, ""],
 "off_on_player_exit": [true, 1, ""],
 "only_spawn_direction": [Vector2(0, 0), 5, ""],
 "spawn_horizontal": [true, 1, ""],
-"spawn_interval": [5.0, 3, ""],
+"spawn_interval": [1.0, 3, ""],
 "spawn_limit": [-1, 2, ""],
 "spawn_on_opposite_screen_edge": [true, 1, ""],
 "spawn_vertical": [true, 1, ""]
 }
 size_is_default = false
 
-[node name="SpawnArea" type="Node2D" parent="Spawns/ScreenSpawner" unique_id=955871811 groups=["Entities", "ToolRects", "VisualUtilities"] instance=ExtResource("11_uh5sa")]
+[node name="SpawnArea" type="Node2D" parent="Spawns/ScreenSpawner" unique_id=955871811 groups=["Entities", "ToolRects", "VisualUtilities"] instance=ExtResource("11_a15t6")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(56, 0)
 script = ExtResource("12_uh5sa")
 tag_name = "SpawnArea"
-snap_mode = 3
-value = Rect2(2520, 2064, 104, 16)
-grid_value = Rect2i(157, 129, 6, 1)
+value = Rect2(1744, 1640, 784, 480)
+grid_value = Rect2i(109, 102, 49, 30)
 
-[node name="ActorSpawn" type="Area2D" parent="Spawns/ScreenSpawner" unique_id=485059668 groups=["Entities"] instance=ExtResource("9_a15t6")]
+[node name="ActorTool" type="Area2D" parent="Spawns/ScreenSpawner" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_a15t6")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
+position = Vector2(792, 456)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("10_rn7th")
-actor_path = "uid://bdlb4ndh8yuh2"
+actor_path = "res://src/Actor/Enemy/Ornithopter.tscn"
 properties = {
-"aim_time": [0.2, 3, ""],
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
+"difficulty": [1, 2, ""],
+"dir": [Vector2(-1, 0), 5, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"ActorSpawn", 4, ""],
-"idle_max_time": [5.0, 3, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
-"reload_time": [2.0, 3, ""],
+"id": [&"ActorTool", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
-"walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 is_tool = true
 
-[node name="@Area2D@12149" type="Area2D" parent="Spawns/ScreenSpawner" unique_id=2089033354 groups=["Entities"] instance=ExtResource("9_a15t6")]
+[node name="AmmoRefill" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("13_rn7th")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
+position = Vector2(1792, 1904)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_rn7th")
-actor_path = "uid://bdlb4ndh8yuh2"
+script = ExtResource("14_uh5sa")
+prop_path = "res://src/Prop/AmmoRefill.tscn"
 properties = {
-"aim_time": [0.2, 3, ""],
-"base_gravity": [300.0, 3, ""],
-"debug": [false, 1, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": ["", 4, ""],
-"idle_max_time": [5.0, 3, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
-"reload_time": [2.0, 3, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"walk_max_time": [10.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
+"editor_hidden": [null, 1],
+"id": [&"AmmoRefill", 4]
 }
-is_tool = true
-
-[node name="ActorTool" type="Area2D" parent="Spawns/ScreenSpawner" unique_id=1981595232 groups=["Entities"] instance=ExtResource("9_a15t6")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_rn7th")
-actor_path = "uid://bdlb4ndh8yuh2"
-properties = {
-"aim_time": [0.2, 3, ""],
-"base_gravity": [300.0, 3, ""],
-"debug": [false, 1, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": ["", 4, ""],
-"idle_max_time": [5.0, 3, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
-"reload_time": [2.0, 3, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"walk_max_time": [10.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
-}
-is_tool = true
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=228139383]
 visibility_layer = 2
@@ -417,7 +400,7 @@ script = ExtResource("18_dnhws")
 
 [node name="SpawnPoint" type="Area2D" parent="." unique_id=865907600 groups=["SpawnPoints"] instance=ExtResource("12_ejtq8")]
 visibility_layer = 2
-position = Vector2(2536, 2136)
+position = Vector2(2552, 2136)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("20_rgqcq")

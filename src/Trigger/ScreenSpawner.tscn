@@ -33,7 +33,6 @@ shape = SubResource("1")
 
 [node name="SpawnArea" parent="." unique_id=955871811 instance=ExtResource("2_t5opi")]
 tag_name = "SpawnArea"
-snap_mode = 1
 
 [node name="DespawnBoudary" type="Node2D" parent="." unique_id=614430978]
 

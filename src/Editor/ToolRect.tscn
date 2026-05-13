@@ -2,14 +2,16 @@
 
 [ext_resource type="Script" uid="uid://be4ibvfg6rpm8" path="res://src/Editor/ToolRect.gd" id="1_3xth1"]
 [ext_resource type="FontFile" uid="uid://c4ibssirigp5x" path="res://assets/UI/Font/Kirigami.ttf" id="2_gdknm"]
+[ext_resource type="Script" uid="uid://v5bhgnn2emyr" path="res://src/Editor/ToolRectInput.gd" id="2_ld6qu"]
 
-[node name="ToolRect" type="Node2D" unique_id=307026447 groups=["Entities", "ToolRects", "VisualUtilities"]]
+[node name="ToolRect" type="Node2D" unique_id=688682803 groups=["Entities", "ToolRects", "VisualUtilities"]]
 script = ExtResource("1_3xth1")
 
 [node name="Rect" type="MarginContainer" parent="." unique_id=612564398]
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
+script = ExtResource("2_ld6qu")
 
 [node name="Handles" type="VBoxContainer" parent="Rect" unique_id=805614453]
 layout_mode = 2
@@ -121,7 +123,6 @@ mouse_filter = 2
 editor_only = false
 
 [node name="ColorRect" type="ColorRect" parent="Rect" unique_id=964386449]
-modulate = Color(1, 1, 1, 0.25098)
 layout_mode = 2
 mouse_filter = 2
 color = Color(0.333333, 1, 0, 1)
