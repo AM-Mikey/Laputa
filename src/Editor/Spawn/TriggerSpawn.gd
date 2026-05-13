@@ -9,7 +9,7 @@ var state = "idle"
 var active_handle = null
 var drag_offset = Vector2.ZERO
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 var buttons = []
 
@@ -39,7 +39,6 @@ func _ready():
 
 	if w.el.get_child_count() == 0: #not in editor
 		visible = false
-		spawn()
 
 	for section in $Handles.get_children():
 		for button in section.get_children():
@@ -50,42 +49,40 @@ func _ready():
 func initialize(): #first time set up properties
 	var trigger = load(trigger_path).instantiate()
 	for p in trigger.get_property_list():
-		if p["usage"] == 4102: #exported properties
-			properties[p["name"]] = [trigger.get(p["name"]), p["type"]]
-		elif p["usage"] == 69638: #exported property enums
-			properties[p["name"]] = [trigger.get(p["name"]), p["type"]]
-	properties["id"] = [name, TYPE_STRING]
+		if p["usage"] & 4102 == 4102: #exported properties
+			properties[p["name"]] = [trigger.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
+	properties["id"] = [name, TYPE_STRING, ""]
 	for ac in trigger.get_children(): #TODO: add these to props and to waypoints
 		if ac.is_in_group("WaypointLocals"):
 			if !get_if_trigger_has_waypoint(ac):
 				trigger.remove_child(ac)
 				ac.owner = null
 				add_child(ac)
-				ac.owner = world.current_level
+				ac.owner = w.current_level
 		if ac.is_in_group("WaypointGlobalSpawns"):
 			if !get_if_trigger_has_waypoint(ac):
 				trigger.remove_child(ac)
 				ac.owner = null
 				add_child(ac)
-				ac.owner = world.current_level
+				ac.owner = w.current_level
 		if ac.is_in_group("ToolVectors"):
 			if !get_if_trigger_has_tool_vector(ac):
 				trigger.remove_child(ac)
 				ac.owner = null
 				add_child(ac)
-				ac.owner = world.current_level
+				ac.owner = w.current_level
 		if ac.is_in_group("ToolRects"):
 			if !get_if_trigger_has_tool_rect(ac):
 				trigger.remove_child(ac)
 				ac.owner = null
 				add_child(ac)
-				ac.owner = world.current_level
+				ac.owner = w.current_level
 		if ac.is_in_group("ActorSpawns"):
 			if !get_if_trigger_has_actor_spawn(ac):
 				trigger.remove_child(ac)
 				ac.owner = null
 				add_child(ac)
-				ac.owner = world.current_level
+				ac.owner = w.current_level
 				ac.initialize()
 	trigger.free()
 
@@ -94,36 +91,36 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 	properties = {}
 	var trigger = load(trigger_path).instantiate()
 	for p in trigger.get_property_list():
-		if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
+		if p["usage"] & 4102 == 4102: #exported properties
 			if old_properties.has(p["name"]):
 				properties[p["name"]] = old_properties[p["name"]]
 			else:
-				properties[p["name"]] = [trigger.get(p["name"]), p["type"]]
+				properties[p["name"]] = [trigger.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
 	for ac in trigger.get_children():
 		if ac.is_in_group("WaypointLocals"):
 			if !get_if_trigger_has_waypoint(ac):
 				trigger.remove_child(ac)
 				ac.owner = null
 				add_child(ac)
-				ac.owner = world.current_level
+				ac.owner = w.current_level
 		if ac.is_in_group("ToolVectors"):
 			if !get_if_trigger_has_tool_vector(ac):
 				trigger.remove_child(ac)
 				ac.owner = null
 				add_child(ac)
-				ac.owner = world.current_level
+				ac.owner = w.current_level
 		if ac.is_in_group("ToolRects"):
 			if !get_if_trigger_has_tool_rect(ac):
 				trigger.remove_child(ac)
 				ac.owner = null
 				add_child(ac)
-				ac.owner = world.current_level
+				ac.owner = w.current_level
 		if ac.is_in_group("ActorSpawns"):
 			if !get_if_trigger_has_actor_spawn(ac):
 				trigger.remove_child(ac)
 				ac.owner = null
 				add_child(ac)
-				ac.owner = world.current_level
+				ac.owner = w.current_level
 				ac.reinitialize()
 
 	trigger.free()
@@ -155,7 +152,7 @@ func spawn():
 			var copy = c.duplicate()
 			trigger.add_child(copy)
 
-	world.current_level.get_node("Triggers").call_deferred("add_child", trigger)
+	w.current_level.get_node("Triggers").call_deferred("add_child", trigger)
 
 func _input(event):
 	if !w.has_node("EditorLayer/Editor"): return
@@ -270,8 +267,8 @@ func on_property_changed(p_name, p_value):
 			for c in get_children():
 				if c.is_in_group("ActorSpawns") and c.is_tool:
 					for ac in c.get_children():
-						if ac.is_in_group("WaypointLocals") || ac.is_in_group("WaypointGlobalSpawns") \
-						|| ac.is_in_group("ToolVectors") || ac.is_in_group("ToolRects") || ac.is_in_group("ActorSpawns"):
+						if ac.is_in_group("WaypointLocals") or ac.is_in_group("WaypointGlobalSpawns") \
+						or ac.is_in_group("ToolVectors") or ac.is_in_group("ToolRects") or ac.is_in_group("ActorSpawns"):
 							ac.queue_free()
 					c.actor_path = p_value
 					c.reinitialize()

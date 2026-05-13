@@ -79,7 +79,15 @@ func display_data():
 				if p == "dialog_json":
 					create_button("dialog_json", active.properties[p][0], "load")
 				else:
-					create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
+					var enum_string =  active.properties[p][2]
+					if enum_string != "":
+						var enum_keys = Array(enum_string.split(",", false))
+						if (enum_string.find(":") != -1):
+							enum_keys = enum_keys.map(func (ele): return ele.split(":", false)[0])
+						create_button(p, active.properties[p][0], "enum", enum_keys)
+					else:
+						create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
+
 		"trigger_spawn":
 			for p in active.properties:
 				if p == "direction":
@@ -87,11 +95,16 @@ func display_data():
 				elif p == "text":
 					create_button("text", active.properties[p][0], "multiline")
 				else:
-					create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
+					var enum_string =  active.properties[p][2]
+					if enum_string != "":
+						var enum_keys = Array(enum_string.split(",", false))
+						if (enum_string.find(":") != -1):
+							enum_keys = enum_keys.map(func (ele): return ele.split(":", false)[0])
+						create_button(p, active.properties[p][0], "enum", enum_keys)
+					else:
+						create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
 		"prop":
-			for p in active.get_property_list():
-				if p["usage"] == EXPORT:
-					create_button(p["name"], active.get(p["name"]), p["type"])
+			create_properties_button(active.get_property_list())
 		"level":
 			create_button("level_name", active.level_name, "string")
 			create_button("level_type", active.level_type, "enum", active.LevelType.keys())
@@ -100,16 +113,12 @@ func display_data():
 			create_button("dialog_json", active.dialog_json, "load")
 			create_button("conversation_on_enter", active.conversation_on_enter, "string")
 		"light":
-			for p in active.get_property_list():
-				if p["usage"] == EXPORT:
-					create_button(p["name"], active.get(p["name"]), p["type"])
+			create_properties_button(active.get_property_list())
 		"tile_map":
 			for layer_id in range(0, get_child_count()):
 				create_layer_button(layer_id)
-		"waypoint_local", "waypoint_global", "waypoint_global_spawn", "tool_vector":
-			for p in active.get_property_list():
-				if p["usage"] == EXPORT:
-					create_button(p["name"], active.get(p["name"]), p["type"])
+		"waypoint_local", "waypoint_global", "waypoint_global_spawn", "tool_vector", "tool_rect":
+			create_properties_button(active.get_property_list())
 
 func get_property_type(type_flag, _is_load) -> String:
 	var out = ""
@@ -131,6 +140,18 @@ func clear_data():
 	$Margin/VBox/Label.text = ""
 	for c in $Margin/VBox/Scroll/VBox.get_children():
 		c.queue_free()
+
+func create_properties_button(property_list):
+	for p in property_list:
+		if p["usage"] & EXPORT == EXPORT:
+			if p["hint"] & PROPERTY_HINT_ENUM == PROPERTY_HINT_ENUM:
+				var enum_keys = Array(p["hint_string"].split(",", false))
+				if (p["hint_string"].find(":") != -1):
+					enum_keys = enum_keys.map(func (ele): return ele.split(":", false)[0])
+				create_button(p["name"], active.get(p["name"]), "enum", enum_keys)
+			else:
+				create_button(p["name"], active.get(p["name"]), p["type"])
+
 
 func create_button(property, value, type = TYPE_NIL, enum_items = []):
 	if property == "editor_hidden":

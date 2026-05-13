@@ -23,7 +23,7 @@ extends Area2D
 				$CollisionShape2D.position = new_shape.size / 2.0
 
 @export var properties = {}
-## If true, become an UI to customize Actor for Trigger
+## If true, become an UI to customize Actor for Trigger + disable spawning
 @export var is_tool: bool = false
 @export_group("Trigger Tool")
 @export var tag_name: String = ""
@@ -33,6 +33,7 @@ extends Area2D
 func _ready():
 	if (is_tool):
 		actor_path = actor_path
+		remove_from_group("ActorSpawns")
 	else:
 		if !is_tool and actor_path == "":
 			printerr("ERROR: no actor chosen in ActorSpawn")
@@ -77,12 +78,12 @@ func initialize(): #first time set up properties
 	if (actor_path != ""):
 		var actor = load(actor_path).instantiate()
 		for p in actor.get_property_list():
-			if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
+			if p["usage"] & 4102 == 4102: #exported properties
 				if p["name"] == "difficulty":
-					pass #we set this when creating the actorspawn
+					properties[p["name"]] = [actor.get(p["name"]), TYPE_INT, ""]
 				else:
-					properties[p["name"]] = [actor.get(p["name"]), p["type"]]
-		properties["id"] = [name, TYPE_STRING]
+					properties[p["name"]] = [actor.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
+		properties["id"] = [name, TYPE_STRING, ""]
 		set_sprite()
 
 
@@ -120,11 +121,11 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 		properties = {}
 		var actor = load(actor_path).instantiate()
 		for p in actor.get_property_list():
-			if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
+			if p["usage"] & 4102 == 4102: #exported properties
 				if old_properties.has(p["name"]):
 					properties[p["name"]] = old_properties[p["name"]]
 				else:
-					properties[p["name"]] = [actor.get(p["name"]), p["type"]]
+					properties[p["name"]] = [actor.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
 		set_sprite()
 
 		for ac in actor.get_children():

@@ -53,6 +53,7 @@ func setup():
 		$AnimationPlayer.play("FlyRight")
 		if (difficulty == 1):
 			$VisibleOnScreenNotifier2D.position = Vector2(-22.0, -3.0)
+	w.emit_signal("finished_spawn_entities_step")
 	change_state("fly")
 
 func enter_fly(_prev_state):

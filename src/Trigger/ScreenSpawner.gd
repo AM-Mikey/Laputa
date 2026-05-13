@@ -74,6 +74,7 @@ func _ready():
 
 
 	if !(FileAccess.file_exists(enemy_path)):
+		w.emit_signal("finished_spawn_entities_step")
 		printerr("ScreenSpawner %s | _ready(): Invalid enemy_path %s" % [name, enemy_path])
 		return
 
@@ -82,10 +83,11 @@ func _ready():
 	if ("dir" not in sample_enemy):
 		printerr("ScreenSpawner %s | _ready(): Enemy at %s doesn't have \"dir\" property!" % [name, enemy_path])
 		sample_enemy.queue_free()
+		w.emit_signal("finished_spawn_entities_step")
 		return
 
-	var enemy_properties = $ActorSpawn.properties
-	for p_name in $ActorSpawn.properties:
+	var enemy_properties = $ActorTool.properties
+	for p_name in $ActorTool.properties:
 		sample_enemy.set(p_name, enemy_properties[p_name][0])
 	sample_enemy_og_process_mode = sample_enemy.process_mode
 	sample_enemy_og_visible = sample_enemy.visible
@@ -110,6 +112,8 @@ func _ready():
 
 	if (spawn_limit != -1):
 		spawn_left = spawn_limit
+
+	w.emit_signal("finished_spawn_entities_step")
 
 func _on_SpawnTimer_timeout() -> void:
 	if (spawn_limit != - 1 and spawn_left <= 0 or !sample_enemy):

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dm0wrfwattmhy" path="res://src/Trigger/ScreenSpawner.gd" id="1_o6fug"]
 [ext_resource type="PackedScene" uid="uid://ubqnsy8gukfn" path="res://src/Editor/ToolRect.tscn" id="2_t5opi"]
+[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="3_i70y7"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
@@ -71,6 +72,10 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DespawnBoudary/Right" unique_id=1405849321]
 shape = SubResource("WorldBoundaryShape2D_1pdpv")
 disabled = true
+
+[node name="ActorTool" parent="." unique_id=1199277091 instance=ExtResource("3_i70y7")]
+actor_path = "uid://bdlb4ndh8yuh2"
+is_tool = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
