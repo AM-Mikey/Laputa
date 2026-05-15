@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://j2gmpjjm1unr"
-path="res://.godot/imported/Swooper.png-608953c6a9a0e394ace749751f00b9a0.ctex"
+uid="uid://dtpet67jhsl0y"
+path="res://.godot/imported/Ornithopter1.png-f2bfb4c3a9227abdcf6906a5341eba32.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Actor/Enemy/Swooper.png"
-dest_files=["res://.godot/imported/Swooper.png-608953c6a9a0e394ace749751f00b9a0.ctex"]
+source_file="res://assets/Actor/Enemy/Ornithopter1.png"
+dest_files=["res://.godot/imported/Ornithopter1.png-f2bfb4c3a9227abdcf6906a5341eba32.ctex"]
 
 [params]
 

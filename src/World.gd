@@ -13,6 +13,7 @@ const TITLE = preload("res://src/UI/TitleScreen.tscn")
 const TITLECAM = preload("res://src/Utility/TitleCam.tscn")
 
 var current_level
+var is_in_transition := false
 
 @export var development_stage: String = "Alpha"
 var internal_version: String = get_internal_version()
@@ -37,6 +38,7 @@ var internal_version: String = get_internal_version()
 
 
 func _ready():
+	get_tree().get_root().connect("close_requested", Callable(self, "on_root_window_close_requested"))
 	self.visibility_layer = 2
 	self.child_entered_tree.connect(child_layer_set)
 	for node: Node in [front, middle, back]:
@@ -132,6 +134,8 @@ func change_level_via_code(level_path, use_save_data):
 		$HUDLayer/HUDAnimator.play("RESET")
 		f.hud().free()
 	clear_spawn_layers()
+	for kb in get_tree().get_nodes_in_group("KillBoxes"):
+		kb.forbid = true
 	current_level.free()
 	current_level = null
 	if f.pc() != null: $Juniper.free()
@@ -167,6 +171,8 @@ func change_level_via_trigger(level_path, door_index):
 	if f.db(): await f.db().exit()
 	if f.hud(): $HUDLayer/HUDAnimator.play("RESET")
 	clear_spawn_layers()
+	for kb in get_tree().get_nodes_in_group("KillBoxes"):
+		kb.forbid = true
 	var old_level_path = current_level.scene_file_path
 	current_level.free()
 	current_level = null
@@ -191,12 +197,14 @@ func change_level_via_trigger(level_path, door_index):
 
 
 func do_transition(old_level_path, level_path):
+	is_in_transition = true
 	inp.can_act = false
 	if bl.has_node("TransitionWipe"): #LOADZONES
 		await get_tree().create_timer(0.8).timeout
 		$BlackoutLayer/TransitionWipe.play_out_animation()
 		await $BlackoutLayer/TransitionWipe.tree_exiting #wait for a bit of the animation to finish
 		inp.can_act = true
+		is_in_transition = false
 		if old_level_path != level_path:
 			display_level_text(current_level)
 		run_conversation_on_enter(current_level)
@@ -206,6 +214,7 @@ func do_transition(old_level_path, level_path):
 		$BlackoutLayer/TransitionIris.play_out_animation()
 		await $BlackoutLayer/TransitionIris.tree_exiting #wait for a bit of the animation to finish
 		inp.can_act = true
+		is_in_transition = false
 		if old_level_path != level_path:
 			display_level_text(current_level)
 		run_conversation_on_enter(current_level)
@@ -332,7 +341,7 @@ func spawn_entities():
 		p.spawn()
 		await finished_spawn_entities_step
 	print("all props spawned")
-	await get_tree().physics_frame # In case the level has nothing, this ensures the caller funciton to preperly receive the "finished_spawning" signal
+	await get_tree().physics_frame # In case the level has nothing, this ensures the caller funciton to properly receive the "finished_spawning" signal
 	emit_signal("finished_spawning")
 
 ### GETTERS ###
@@ -386,3 +395,8 @@ func _resolution_scale_changed(resolution_scale):
 	ml.scale = Vector2(vs.menu_resolution_scale, vs.menu_resolution_scale)
 	il.scale = Vector2(vs.inventory_resolution_scale, vs.inventory_resolution_scale)
 	dll.scale = Vector2(vs.dialog_resolution_scale, vs.dialog_resolution_scale)
+
+func on_root_window_close_requested():
+	print("Closing Window")
+	for kb in get_tree().get_nodes_in_group("KillBoxes"):
+		kb.forbid = true

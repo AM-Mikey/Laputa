@@ -105,6 +105,8 @@ func on_save_as():
 	$SaveDiae_log.popup()
 
 func on_load():
+	for kb in get_tree().get_nodes_in_group("KillBoxes"):
+		kb.forbid = true
 	load_level(active_level_path)
 	#$LoadDiae_log.current_path = "res://src/level/"
 	#$LoadDiae_log.popup()

@@ -11,15 +11,15 @@ extends Trigger
 ## The limit will not be replenlished when reenteed the area.
 @export var spawn_limit: int = -1
 ## Will not turn off the spawner when the player's exit the area when false
-@export var off_on_player_exit: bool = true
+@export var stop_on_player_exit: bool = true
 ## In 4 cardinal direction only
 ## The spawning enemy will be given a Dictionary {"dir": Vector2}
 ## The spawner will infer the direction from how the player enters the spawn zone.
 @export var spawn_horizontal: bool = true
 @export var spawn_vertical: bool = true
-@export var spawn_on_opposite_screen_edge: bool = true
+@export var spawn_facing_player: bool = true
 ## If set to any value different front Vector2.ZERO, spawn_horizontal, spawn_vertical will be ignored and spawn direction will always set to this value.
-@export var only_spawn_direction: Vector2 = Vector2.ZERO
+@export var spawn_direction_override: Vector2 = Vector2.ZERO
 ## If spawn in horizontal directions, the spawner will only take the top and bottom edges as limits.
 ## Similar for vertical direction, the spawner will only take the left and right edges as limits
 var spawn_area: Rect2
@@ -33,24 +33,6 @@ var enemy_size := Vector2.ZERO
 var player_in_trigger := false
 var curr_spawn_direction := Vector2.ZERO:
 	set(val):
-		match curr_spawn_direction:
-			Vector2.UP:
-				$DespawnBoudary/Up/CollisionShape2D.set_deferred("disabled", true)
-			Vector2.RIGHT:
-				$DespawnBoudary/Right/CollisionShape2D.set_deferred("disabled", true)
-			Vector2.DOWN:
-				$DespawnBoudary/Bottom/CollisionShape2D.set_deferred("disabled", true)
-			Vector2.LEFT:
-				$DespawnBoudary/Left/CollisionShape2D.set_deferred("disabled", true)
-		match val:
-			Vector2.UP:
-				$DespawnBoudary/Up/CollisionShape2D.set_deferred("disabled", false)
-			Vector2.RIGHT:
-				$DespawnBoudary/Right/CollisionShape2D.set_deferred("disabled", false)
-			Vector2.DOWN:
-				$DespawnBoudary/Bottom/CollisionShape2D.set_deferred("disabled", false)
-			Vector2.LEFT:
-				$DespawnBoudary/Left/CollisionShape2D.set_deferred("disabled", false)
 		curr_spawn_direction = val
 
 const min_screen_size: Vector2i = Vector2i(300, 300)
@@ -73,15 +55,15 @@ func _ready():
 	spawn_area = $SpawnArea.value
 
 
-	if !(FileAccess.file_exists(enemy_path)):
+	if !FileAccess.file_exists(enemy_path):
 		w.emit_signal("finished_spawn_entities_step")
 		printerr("ScreenSpawner %s | _ready(): Invalid enemy_path %s" % [name, enemy_path])
 		return
 
 	sample_enemy = load(enemy_path).instantiate()
 
-	if ("dir" not in sample_enemy):
-		printerr("ScreenSpawner %s | _ready(): Enemy at %s doesn't have \"dir\" property!" % [name, enemy_path])
+	if !sample_enemy.is_in_group("ScreenSpawnerCompatible"):
+		printerr("ScreenSpawner %s | _ready(): Enemy at %s isn't in ScreenSpawnerCompatible group!" % [name, enemy_path])
 		sample_enemy.queue_free()
 		w.emit_signal("finished_spawn_entities_step")
 		return
@@ -104,11 +86,6 @@ func _ready():
 		collision_shape = sample_enemy.get_child(0)
 	enemy_size = collision_shape.shape.get_rect().size
 	actors.add_child(sample_enemy)
-
-	$DespawnBoudary/Up.global_position = ll.global_position + Vector2(0.0, -100.0)
-	$DespawnBoudary/Left.global_position = ll.global_position + Vector2(-100.0, 0.0)
-	$DespawnBoudary/Right.global_position = ll.global_position + ll.size + Vector2(100.0, 0.0)
-	$DespawnBoudary/Bottom.global_position = ll.global_position + ll.size + Vector2(0.0, 100.0)
 
 	if (spawn_limit != -1):
 		spawn_left = spawn_limit
@@ -250,52 +227,49 @@ func _exit_tree() -> void:
 			en.queue_free()
 
 func _on_body_entered(body: Node2D):
-	if (!off_on_player_exit and player_in_trigger):
+	if (!stop_on_player_exit and player_in_trigger):
 		return
-
-	for boundary in $DespawnBoudary.get_children():
-		boundary.get_node("CollisionShape2D").set_deferred("disabled", true)
 
 	var detection_rect: Rect2 = Rect2($CollisionShape2D.global_position - $CollisionShape2D.shape.size / 2.0 , $CollisionShape2D.shape.size)
 	var player_x_percent: float = (body.global_position.x - detection_rect.position.x) / detection_rect.size.x
 	var player_y_percent: float = (body.global_position.y - detection_rect.position.y) / detection_rect.size.y
-	if (only_spawn_direction == Vector2.ZERO):
+	if (spawn_direction_override == Vector2.ZERO):
 		if (spawn_horizontal and !spawn_vertical):
 			if (player_x_percent <= 0.5):
-				curr_spawn_direction = Vector2.LEFT if spawn_on_opposite_screen_edge else Vector2.RIGHT
+				curr_spawn_direction = Vector2.LEFT if spawn_facing_player else Vector2.RIGHT
 			else:
-				curr_spawn_direction = Vector2.RIGHT if spawn_on_opposite_screen_edge else Vector2.LEFT
+				curr_spawn_direction = Vector2.RIGHT if spawn_facing_player else Vector2.LEFT
 		elif (spawn_vertical and !spawn_horizontal):
 			if (player_y_percent <= 0.5):
-				curr_spawn_direction = Vector2.UP if spawn_on_opposite_screen_edge else Vector2.DOWN
+				curr_spawn_direction = Vector2.UP if spawn_facing_player else Vector2.DOWN
 			else:
-				curr_spawn_direction = Vector2.DOWN if spawn_on_opposite_screen_edge else Vector2.UP
+				curr_spawn_direction = Vector2.DOWN if spawn_facing_player else Vector2.UP
 		elif (spawn_vertical and spawn_horizontal):
 			var check_x_left: float = player_y_percent
 			var check_x_right: float = 1.0 - player_y_percent
 
 			if (player_y_percent <= 0.5):
 				if (player_x_percent >= check_x_left and player_x_percent <= check_x_right):
-					curr_spawn_direction = Vector2.UP if spawn_on_opposite_screen_edge else Vector2.DOWN
+					curr_spawn_direction = Vector2.UP if spawn_facing_player else Vector2.DOWN
 				elif player_x_percent < check_x_left:
-					curr_spawn_direction = Vector2.LEFT if spawn_on_opposite_screen_edge else Vector2.RIGHT
+					curr_spawn_direction = Vector2.LEFT if spawn_facing_player else Vector2.RIGHT
 				else:
-					curr_spawn_direction = Vector2.RIGHT if spawn_on_opposite_screen_edge else Vector2.LEFT
+					curr_spawn_direction = Vector2.RIGHT if spawn_facing_player else Vector2.LEFT
 			else:
 				if (player_x_percent >= check_x_right and player_x_percent <= check_x_left):
-					curr_spawn_direction = Vector2.DOWN if spawn_on_opposite_screen_edge else Vector2.UP
+					curr_spawn_direction = Vector2.DOWN if spawn_facing_player else Vector2.UP
 				elif player_x_percent < check_x_right:
-					curr_spawn_direction = Vector2.LEFT if spawn_on_opposite_screen_edge else Vector2.RIGHT
+					curr_spawn_direction = Vector2.LEFT if spawn_facing_player else Vector2.RIGHT
 				else:
-					curr_spawn_direction = Vector2.RIGHT if spawn_on_opposite_screen_edge else Vector2.LEFT
+					curr_spawn_direction = Vector2.RIGHT if spawn_facing_player else Vector2.LEFT
 	else:
-		curr_spawn_direction = only_spawn_direction
+		curr_spawn_direction = spawn_direction_override
 
 	player_in_trigger = true
 	$SpawnTimer.start()
 
 func _on_body_exited(body: Node2D):
-	if (is_queued_for_deletion() or !off_on_player_exit):
+	if (is_queued_for_deletion() or !stop_on_player_exit):
 		return
 
 	if (body is CharacterBody2D and body.get_collision_layer_value(1)):
@@ -341,9 +315,3 @@ func get_screen_edge_position() -> float:
 		Vector2.DOWN:
 			return screen_position.y
 	return 0.0
-
-func _on_despawn_boundary_body_entered(actor: Enemy) -> void:
-	if (actor in processed_enemy or actor in leftover_enemy):
-		actor.queue_free()
-		processed_enemy.erase(actor)
-		leftover_enemy.erase(actor)

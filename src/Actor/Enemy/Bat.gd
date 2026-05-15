@@ -121,7 +121,7 @@ func enter_idle(_last_state):
 	await get_tree().create_timer(idle_time, false, true).timeout
 	can_flap = true
 
-func do_idle():
+func do_idle(_delta):
 	if can_flap and position.y > target_pos.y: #lower than target
 		change_state("flap")
 		return

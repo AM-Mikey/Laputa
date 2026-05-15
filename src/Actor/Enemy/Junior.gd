@@ -41,7 +41,7 @@ func enter_walk(_last_state):
 	rng.randomize()
 	st.start(rng.randf_range(1.0, walk_max_time))
 
-func do_walk():
+func do_walk(_delta):
 	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
 		change_state("idle")
 		return

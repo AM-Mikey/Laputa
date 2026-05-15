@@ -44,7 +44,7 @@ func enter_flee(_last_state):
 	if current_waypoint_id >= waypoints.size():
 		current_waypoint_id = 0
 
-func do_flee():
+func do_flee(_delta):
 	var distance_from_waypoint = waypoints[current_waypoint_id].global_position - global_position
 	move_dir = distance_from_waypoint.normalized()
 	look_dir = move_dir

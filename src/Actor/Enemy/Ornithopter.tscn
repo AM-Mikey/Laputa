@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dphx5itcoj1wr"]
+[gd_scene format=3 uid="uid://it7syr43jeh"]
 
 [ext_resource type="Texture2D" uid="uid://08od13wukqd7" path="res://assets/Actor/Enemy/Ornithopter.png" id="2"]
 [ext_resource type="Script" uid="uid://ce3csdiy7d7c" path="res://src/Actor/Enemy/Ornithopter.gd" id="3"]
@@ -6,14 +6,20 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_utfr7"]
 size = Vector2(20, 10)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dhyu"]
+size = Vector2(22, 15)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yp85x"]
-size = Vector2(32, 16)
+size = Vector2(24, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_11uu1"]
+size = Vector2(18, 13)
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(20, 10)
+size = Vector2(18, 17)
 
 [sub_resource type="Animation" id="2"]
-resource_name = "FlyLeft"
+resource_name = "Fly"
 length = 0.5
 loop_mode = 1
 step = 0.05
@@ -22,88 +28,31 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.15, 0.2, 0.25, 0.35, 0.4, 0.45),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="3"]
-resource_name = "FlyRight"
-length = 0.5
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.15, 0.2, 0.25, 0.35, 0.4, 0.45),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_4dhyu"]
-resource_name = "SwoopLeft"
-length = 0.05
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_11uu1"]
-resource_name = "SwoopRight"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_4dhyu"]
+resource_name = "SwoopDown"
 length = 0.05
 loop_mode = 1
 step = 0.05
@@ -112,32 +61,56 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_y6gtq"]
+resource_name = "SwoopUp"
+length = 0.5
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.2, 0.25, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_ftfuk"]
+resource_name = "SwoopUpTransition"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.050000012, 0.099999994),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [21, 22, 23]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jjdxu"]
 _data = {
-&"FlyLeft": SubResource("2"),
-&"FlyRight": SubResource("3"),
-&"SwoopLeft": SubResource("Animation_4dhyu"),
-&"SwoopRight": SubResource("Animation_11uu1")
+&"Fly": SubResource("2"),
+&"RESET": SubResource("Animation_11uu1"),
+&"SwoopDown": SubResource("Animation_4dhyu"),
+&"SwoopUp": SubResource("Animation_y6gtq"),
+&"SwoopUpTransition": SubResource("Animation_ftfuk")
 }
 
 [node name="Ornithopter" type="CharacterBody2D" unique_id=897008319 groups=["Actors", "Enemies", "Entities"]]
@@ -148,7 +121,7 @@ script = ExtResource("3")
 difficulty = 1
 editor_hidden = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1771011050]
+[node name="Fly" type="CollisionShape2D" parent="." unique_id=1771011050]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_utfr7")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
@@ -157,23 +130,37 @@ debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=881828085]
+[node name="Fly" type="CollisionShape2D" parent="Hurtbox" unique_id=881828085]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_4dhyu")
+debug_color = Color(0, 1, 0, 0.235294)
+
+[node name="Swoop" type="CollisionShape2D" parent="Hurtbox" unique_id=1485398235]
+position = Vector2(2, 2.5)
 shape = SubResource("RectangleShape2D_yp85x")
+disabled = true
 debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=2104077394]
 collision_layer = 262144
 collision_mask = 65536
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1637204380]
-position = Vector2(0, 3)
+[node name="Fly" type="CollisionShape2D" parent="Hitbox" unique_id=1637204380]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_11uu1")
+debug_color = Color(1, 0, 0, 0.235294)
+
+[node name="Swoop" type="CollisionShape2D" parent="Hitbox" unique_id=443529568]
+position = Vector2(1, 3.5)
 shape = SubResource("1")
+disabled = true
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=324493484]
 texture = ExtResource("2")
 hframes = 8
-frame = 1
+vframes = 3
+frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1840993920]
 libraries/ = SubResource("AnimationLibrary_jjdxu")

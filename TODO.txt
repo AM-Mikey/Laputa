@@ -591,3 +591,12 @@ WATER TODO:
 
 
 -beetle rotation fix
+
+
+SCREENSPAWNER TODO:
+make a whitelist of screenspawner compat enemies
+	test enemy compat 
+make a better name for tools
+
+SWOOPER TODO:
+swoop delay

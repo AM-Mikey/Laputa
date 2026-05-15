@@ -1,15 +1,16 @@
-[gd_scene format=3 uid="uid://ubqnsy8gukfn"]
+[gd_scene format=3 uid="uid://b0hildwypv8q5"]
 
 [ext_resource type="Script" uid="uid://be4ibvfg6rpm8" path="res://src/Editor/ToolRect.gd" id="1_3xth1"]
 [ext_resource type="FontFile" uid="uid://c4ibssirigp5x" path="res://assets/UI/Font/Kirigami.ttf" id="2_gdknm"]
-[ext_resource type="Script" uid="uid://v5bhgnn2emyr" path="res://src/Editor/ToolRectInput.gd" id="2_ld6qu"]
+[ext_resource type="Script" uid="uid://bksn8j3bkgq34" path="res://src/Editor/ToolRectInput.gd" id="2_ld6qu"]
+[ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="3_48ell"]
 
 [node name="ToolRect" type="Node2D" unique_id=688682803 groups=["Entities", "ToolRects", "VisualUtilities"]]
 script = ExtResource("1_3xth1")
 
 [node name="Rect" type="MarginContainer" parent="." unique_id=612564398]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 64.0
+offset_bottom = 64.0
 mouse_filter = 2
 script = ExtResource("2_ld6qu")
 
@@ -122,10 +123,11 @@ layout_mode = 2
 mouse_filter = 2
 editor_only = false
 
-[node name="ColorRect" type="ColorRect" parent="Rect" unique_id=964386449]
+[node name="Panel" type="Panel" parent="Rect" unique_id=186837814]
+modulate = Color(1, 1, 1, 0.5)
 layout_mode = 2
 mouse_filter = 2
-color = Color(0.333333, 1, 0, 1)
+theme_override_styles/panel = ExtResource("3_48ell")
 
 [node name="Label" type="Label" parent="Rect" unique_id=1300830036]
 layout_mode = 2
@@ -133,6 +135,5 @@ size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("2_gdknm")
 theme_override_font_sizes/font_size = 7
 text = "Trigger Name"
-horizontal_alignment = 2
 clip_text = true
 uppercase = true

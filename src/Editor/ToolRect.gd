@@ -9,19 +9,21 @@ enum ToolRectSnapMode {NONE, TO_HALF_GRID, TO_GRID}
 @export var snap_mode: ToolRectSnapMode = ToolRectSnapMode.TO_HALF_GRID
 @export var editor_color: Color = Color(0.85, 0.65, 0.12, 1.0):
 	set(val):
-		$Rect/ColorRect.color = val
+		$Rect/Panel.modulate = val
 		editor_color = val
 
 ## In global transform
-@export var value: Rect2 = Rect2(Vector2.ZERO, Vector2.ZERO):
+var value: Rect2 = Rect2(Vector2.ZERO, Vector2.ZERO):
 	set(val):
 		value = val
 		grid_value = Rect2i(floor(val.position / 16.0), floor(val.size / 16.0))
 		update_visual()
 
-@export var grid_value: Rect2i = Rect2i(Vector2i.ZERO, Vector2i.ZERO)
+var grid_value: Rect2i = Rect2i(Vector2i.ZERO, Vector2i.ZERO)
 
 @onready var w = get_tree().get_root().get_node("World")
+
+
 
 func _ready():
 	if w.el.get_child_count() == 0: #not in editor
@@ -42,8 +44,11 @@ func update_visual():
 	$Rect.global_position = value.position
 	$Rect.size = value.size
 
+
+
 ### SIGNALS
-func on_editor_select(): #when
+
+func on_editor_select():
 	modulate = Color(1,0,0,.75)
 	%Mid.disabled = false
 

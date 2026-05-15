@@ -67,6 +67,8 @@ func _on_level():
 	get_parent().add_child(LEVELSELECT.instantiate())
 
 func _on_quit():
+	for kb in get_tree().get_nodes_in_group("KillBoxes"):
+		kb.forbid = true
 	get_tree().quit()
 
 func _on_keyguide():

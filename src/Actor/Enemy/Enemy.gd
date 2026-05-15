@@ -17,17 +17,17 @@ var protected = false
 var hp: int
 var damage_on_contact: int
 var enemy_damage_on_contact: int
-var hit_enemies_on_contact = false
+var hit_enemies_on_contact := false
 var hurt_sound = "enemy_hurt"
 var die_sound = "enemy_die"
 var damage_number = null
 
-var reward = 1
-var heart_chance = 1
-var experience_chance = 3
-var ammo_chance = 1
+var reward := 1
+var heart_chance := 1
+var experience_chance := 3
+var ammo_chance := 1
 
-@export var debug = false
+@export var debug := false
 @export var id: String
 
 @onready var w = get_tree().get_root().get_node("World")

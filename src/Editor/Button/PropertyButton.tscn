@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bji3j7jm2votc"]
+[gd_scene format=3 uid="uid://bji3j7jm2votc"]
 
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="1"]
 [ext_resource type="StyleBox" uid="uid://c53b3p1k47jdu" path="res://src/UI/StyleBox/SteelRound.tres" id="2"]
@@ -6,6 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="4"]
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="4_sdg3t"]
 [ext_resource type="Script" uid="uid://q2r8s3f687q7" path="res://src/Editor/LineEditOverride.gd" id="6_yjys0"]
+[ext_resource type="StyleBox" uid="uid://cql2au3d3637e" path="res://src/UI/StyleBox/SteelRoundInset.tres" id="7_l6t5d"]
 
 [sub_resource type="StyleBoxEmpty" id="5"]
 
@@ -29,31 +30,31 @@
 
 [sub_resource type="StyleBoxEmpty" id="8"]
 
-[node name="PropertyButton" type="MarginContainer" groups=["PropertyButtons"]]
+[node name="PropertyButton" type="MarginContainer" unique_id=1861786889 groups=["PropertyButtons"]]
 clip_contents = true
 offset_right = 248.0
 offset_bottom = 32.0
 theme = ExtResource("1")
 script = ExtResource("3")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=505332422]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="PanelActive" type="Panel" parent="."]
+[node name="PanelActive" type="Panel" parent="." unique_id=1053490156]
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("2")
 
-[node name="HBox" type="HBoxContainer" parent="."]
+[node name="HBox" type="HBoxContainer" parent="." unique_id=968536348]
 layout_mode = 2
 
-[node name="Spacer" type="Control" parent="HBox"]
+[node name="Spacer" type="Control" parent="HBox" unique_id=672578454]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Button" type="Button" parent="HBox"]
+[node name="Button" type="Button" parent="HBox" unique_id=859256510]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_sdg3t")
@@ -65,12 +66,12 @@ theme_override_styles/focus = SubResource("3")
 text = "Property"
 flat = true
 
-[node name="HBox" type="HBoxContainer" parent="HBox"]
+[node name="HBox" type="HBoxContainer" parent="HBox" unique_id=2055015654]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="Bool" type="CheckBox" parent="HBox/HBox"]
+[node name="Bool" type="CheckBox" parent="HBox/HBox" unique_id=1318809379]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -82,7 +83,7 @@ theme_override_styles/hover_pressed = SubResource("10")
 theme_override_styles/disabled = SubResource("9")
 theme_override_styles/focus = SubResource("8")
 
-[node name="Panel" type="Panel" parent="HBox/HBox/Bool"]
+[node name="Panel" type="Panel" parent="HBox/HBox/Bool" unique_id=613793208]
 show_behind_parent = true
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 0
@@ -92,7 +93,7 @@ offset_bottom = 32.0
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("4")
 
-[node name="Color" type="ColorPickerButton" parent="HBox/HBox"]
+[node name="Color" type="ColorPickerButton" parent="HBox/HBox" unique_id=652324966]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(32, 0)
@@ -104,7 +105,7 @@ theme_override_styles/hover = ExtResource("4")
 theme_override_styles/disabled = ExtResource("4")
 theme_override_styles/focus = ExtResource("4")
 
-[node name="Enum" type="OptionButton" parent="HBox/HBox"]
+[node name="EnumUnused" type="OptionButton" parent="HBox/HBox" unique_id=1813803755]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -117,7 +118,7 @@ theme_override_styles/hover = ExtResource("4")
 theme_override_styles/disabled = ExtResource("4")
 theme_override_styles/focus = ExtResource("4")
 
-[node name="String" type="LineEdit" parent="HBox/HBox"]
+[node name="String" type="LineEdit" parent="HBox/HBox" unique_id=394985210]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(64, 0)
@@ -130,7 +131,7 @@ alignment = 2
 deselect_on_focus_loss_enabled = false
 script = ExtResource("6_yjys0")
 
-[node name="Multiline" type="TextEdit" parent="HBox/HBox"]
+[node name="Multiline" type="TextEdit" parent="HBox/HBox" unique_id=736469035]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(64, 0)
@@ -141,7 +142,7 @@ theme_override_fonts/font = ExtResource("4_sdg3t")
 placeholder_text = "Null"
 deselect_on_focus_loss_enabled = false
 
-[node name="Int" type="LineEdit" parent="HBox/HBox"]
+[node name="Int" type="LineEdit" parent="HBox/HBox" unique_id=458342607]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -153,7 +154,7 @@ alignment = 2
 deselect_on_focus_loss_enabled = false
 script = ExtResource("6_yjys0")
 
-[node name="Float" type="LineEdit" parent="HBox/HBox"]
+[node name="Float" type="LineEdit" parent="HBox/HBox" unique_id=952509177]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -165,19 +166,20 @@ alignment = 2
 deselect_on_focus_loss_enabled = false
 script = ExtResource("6_yjys0")
 
-[node name="Load" type="LineEdit" parent="HBox/HBox"]
+[node name="LoadUnused" type="LineEdit" parent="HBox/HBox" unique_id=1239961595]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 theme_override_fonts/font = ExtResource("4_sdg3t")
+theme_override_styles/read_only = ExtResource("7_l6t5d")
 placeholder_text = "Null"
 alignment = 2
 editable = false
 script = ExtResource("6_yjys0")
 
-[node name="Vector2X" type="LineEdit" parent="HBox/HBox"]
+[node name="Vector2X" type="LineEdit" parent="HBox/HBox" unique_id=765417263]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -188,7 +190,7 @@ placeholder_text = "Null"
 alignment = 2
 script = ExtResource("6_yjys0")
 
-[node name="Vector2Y" type="LineEdit" parent="HBox/HBox"]
+[node name="Vector2Y" type="LineEdit" parent="HBox/HBox" unique_id=1477945210]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -198,7 +200,7 @@ theme_override_fonts/font = ExtResource("4_sdg3t")
 alignment = 2
 script = ExtResource("6_yjys0")
 
-[node name="Spacer2" type="Control" parent="HBox"]
+[node name="Spacer2" type="Control" parent="HBox" unique_id=351535716]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 mouse_filter = 2
@@ -206,7 +208,7 @@ mouse_filter = 2
 [connection signal="pressed" from="HBox/Button" to="." method="on_pressed"]
 [connection signal="toggled" from="HBox/HBox/Bool" to="." method="on_bool_toggled"]
 [connection signal="popup_closed" from="HBox/HBox/Color" to="." method="on_color_changed"]
-[connection signal="item_selected" from="HBox/HBox/Enum" to="." method="on_enum_selected"]
+[connection signal="item_selected" from="HBox/HBox/EnumUnused" to="." method="on_enum_selected"]
 [connection signal="focus_exited" from="HBox/HBox/String" to="." method="_on_string_complete"]
 [connection signal="text_submitted" from="HBox/HBox/String" to="." method="_on_string_complete"]
 [connection signal="focus_exited" from="HBox/HBox/Multiline" to="." method="_on_multiline_complete"]
@@ -214,8 +216,8 @@ mouse_filter = 2
 [connection signal="text_submitted" from="HBox/HBox/Int" to="." method="_on_int_complete"]
 [connection signal="focus_exited" from="HBox/HBox/Float" to="." method="_on_float_complete"]
 [connection signal="text_submitted" from="HBox/HBox/Float" to="." method="_on_float_complete"]
-[connection signal="focus_exited" from="HBox/HBox/Load" to="." method="_on_string_complete"]
-[connection signal="text_submitted" from="HBox/HBox/Load" to="." method="_on_string_complete"]
+[connection signal="focus_exited" from="HBox/HBox/LoadUnused" to="." method="_on_string_complete"]
+[connection signal="text_submitted" from="HBox/HBox/LoadUnused" to="." method="_on_string_complete"]
 [connection signal="focus_exited" from="HBox/HBox/Vector2X" to="." method="_on_vector2x_complete"]
 [connection signal="text_submitted" from="HBox/HBox/Vector2X" to="." method="_on_vector2x_complete"]
 [connection signal="focus_exited" from="HBox/HBox/Vector2Y" to="." method="_on_vector2y_complete"]

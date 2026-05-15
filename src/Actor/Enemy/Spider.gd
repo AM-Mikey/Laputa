@@ -77,19 +77,19 @@ func find_path():
 
 ### STATES ###
 
-func do_idle():
+func do_idle(_delta):
 	pass
 
-func do_popin():
+func do_popin(_delta):
 	$StateTimer.start(popin_time)
 	await $StateTimer.is_stopped()
 	pass
 	#change_state("chase")
 
-func do_popout():
+func do_popout(_delta):
 	pass
 
-func do_chase(): #goes to point 1 first btw
+func do_chase(_delta): #goes to point 1 first btw
 	find_path()
 	if path.size() < 2: return
 	if abs(global_position.x - path[current_point].x) < point_tolerance \

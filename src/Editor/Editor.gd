@@ -88,9 +88,12 @@ func enter(): #Call this every time the level is changed or reloaded
 	for p in get_tree().get_nodes_in_group("Props"):
 		p.queue_free()
 	for t in get_tree().get_nodes_in_group("Triggers"):
-		t.queue_free()
+		if !t.is_in_group("PreserveTriggers"):
+			t.queue_free()
 	for pw in get_tree().get_nodes_in_group("PhysWaters"):
 		pw.queue_free()
+	if w.current_level.get_node("SSPMerges"):
+		w.current_level.get_node("SSPMerges").queue_free()
 	actor_collection = w.current_level.get_node("Actors")
 	prop_collection = w.current_level.get_node("Props")
 	trigger_collection = w.current_level.get_node("Triggers")
