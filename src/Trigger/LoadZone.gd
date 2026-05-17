@@ -27,9 +27,11 @@ func enter_load_zone(): #see if you need the inspect state
 	inp.can_act = false
 	match direction:
 		Direction.LEFT:
-			active_pc.move_to(Vector2(position.x - 16, position.y))
+			if active_pc.is_on_floor():
+				active_pc.move_to(Vector2(position.x - 16, position.y))
 		Direction.RIGHT:
-			active_pc.move_to(Vector2(position.x + 16, position.y))
+			if active_pc.is_on_floor():
+				active_pc.move_to(Vector2(position.x + 16, position.y))
 		Direction.UP:
 			pass
 		Direction.DOWN:
@@ -50,6 +52,7 @@ func enter_load_zone(): #see if you need the inspect state
 	w.bl.add_child(transition)
 
 	await transition.get_node("AnimationPlayer").animation_finished
+
 
 	active_pc.mm.change_state("run")
 	#var level_path = str("res://src/Level/" + level + ".tscn")

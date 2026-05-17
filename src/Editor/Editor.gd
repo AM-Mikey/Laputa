@@ -88,9 +88,12 @@ func enter(): #Call this every time the level is changed or reloaded
 	for p in get_tree().get_nodes_in_group("Props"):
 		p.queue_free()
 	for t in get_tree().get_nodes_in_group("Triggers"):
-		t.queue_free()
+		if !t.is_in_group("PreserveTriggers"):
+			t.queue_free()
 	for pw in get_tree().get_nodes_in_group("PhysWaters"):
 		pw.queue_free()
+	if w.current_level.get_node("SSPMerges"):
+		w.current_level.get_node("SSPMerges").queue_free()
 	actor_collection = w.current_level.get_node("Actors")
 	prop_collection = w.current_level.get_node("Props")
 	trigger_collection = w.current_level.get_node("Triggers")
@@ -119,8 +122,11 @@ func enter(): #Call this every time the level is changed or reloaded
 		wgs.visible = true
 		wgs.input_pickable = true
 		#wgs.reinitialize()
-	for tv in get_tree().get_nodes_in_group("ToolVectors"):
+	for tv in get_tree().get_nodes_in_group("VUVectors"):
 		tv.visible = true
+	for t in get_tree().get_nodes_in_group("VURects"):
+		t.visible = true
+		t._ready()
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.visible = true
 		a.input_pickable = true
@@ -181,13 +187,12 @@ func exit():
 	f.pc().get_node("PlayerCamera").make_current()
 	f.pc().get_node("PlayerCamera").reset()
 	#set_entities_pickable(false)
-
 	w.spawn_entities()
 	await w.finished_spawning
 
 	var visibility_change_list = ["SpawnPoints", "VanishingPoints", \
 	"WaypointGlobalSpawns", "WaypointGlobals", "WaypointLocals", \
-	"ToolVectors", "ActorSpawns", "PropSpawns", "TriggerSpawns"]
+	"VUVectors", "VURects", "ActorSpawns", "PropSpawns", "TriggerSpawns"]
 
 	for i in visibility_change_list:
 		for j in get_tree().get_nodes_in_group(i):
@@ -739,12 +744,21 @@ func set_misc(misc_path, pos):
 			misc.free()
 			return
 
-	elif misc_path == "res://src/Editor/ToolVector.tscn":
+	elif misc_path == "res://src/Editor/VisualUtility/VUVector.tscn":
 		if inspector.active_type in ["actor_spawn", "prop_spawn", "trigger_spawn"]:
 			misc.global_position = ((pos * 16) + Vector2i(8, 8)) - Vector2i(inspector.active.global_position)
 			inspector.active.add_child(misc) #don't select it though so we can add more
 		else:
-			e_log.lprint("no valid entity for ToolVector")
+			e_log.lprint("no valid entity for VUVector")
+			misc.free()
+			return
+
+	elif misc_path == "res://src/Editor/VisualUtility/VURect.tscn":
+		if inspector.active_type in ["actor_spawn", "prop_spawn", "trigger_spawn"]:
+			misc.global_position = ((pos * 16) + Vector2i(8, 8)) - Vector2i(inspector.active.global_position)
+			inspector.active.add_child(misc) #don't select it though so we can add more
+		else:
+			e_log.lprint("no valid entity for VURect")
 			misc.free()
 			return
 

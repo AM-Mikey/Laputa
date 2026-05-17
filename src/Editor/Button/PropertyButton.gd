@@ -45,8 +45,11 @@ func _ready():
 			enabled_controls.append(button_enum)
 			for i in enum_items:
 				button_enum.add_item(i)
-			button_enum.select(property_value)
 
+			if (property_value is String):
+				button_enum.select(enum_items.find(property_value))
+			else:
+				button_enum.select(property_value)
 		"int", Variant.Type.TYPE_INT:
 			enabled_controls.append(button_int)
 			if property_value != null: #"if property_value" doesn't trigger for value = 0
@@ -117,7 +120,10 @@ func on_color_changed():
 		property_value = button_color.color
 		emit_signal("property_changed", property_name, property_value)
 func on_enum_selected(index):
-	property_value = index
+	if (property_value is String):
+		property_value = enum_items[index]
+	else:
+		property_value = index
 	emit_signal("property_changed", property_name, property_value)
 
 func _on_string_complete(_value = 0):

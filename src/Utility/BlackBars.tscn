@@ -3,7 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://b3hnyxt5qixpm" path="res://assets/Utility/Black.png" id="1_v3lqr"]
 
 [node name="BlackBars" type="Node2D" unique_id=1230593609]
+top_level = true
 visibility_layer = 2
+z_index = 1024
 
 [node name="Left" type="Sprite2D" parent="." unique_id=596837067]
 visibility_layer = 2

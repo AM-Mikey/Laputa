@@ -1,25 +1,26 @@
 [gd_scene format=4]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_6s35s"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_i4wap"]
-[ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_4qvu0"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_ho0nu"]
-[ext_resource type="TileSet" path="res://src/Tile/DogtownExterior.tres" id="5_0ewrk"]
-[ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="5_q8lop"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_4qvu0"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="7_anwej"]
-[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="7_i4wap"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_aqway"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="9_b7ing"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="10_vbnr3"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_6grhi"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_6grhi"]
-[ext_resource type="PackedScene" path="res://src/Editor/WaypointLocal.tscn" id="13_ho0nu"]
-[ext_resource type="Script" path="res://src/Editor/WaypointLocal.gd" id="14_2xpek"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/WaypointGlobalSpawn.tscn" id="15_vbnr3"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/WaypointGlobalSpawn.gd" id="16_6grhi"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="16_vohvr"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="18_qtlxt"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_6s35s"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_i4wap"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_4qvu0"]
+[ext_resource type="Script" uid="uid://sw5a0ja4xk2f" path="res://src/Background/LevelLimiter.gd" id="3_ho0nu"]
+[ext_resource type="TileSet" uid="uid://bgrifkxiitl3h" path="res://src/Tile/DogtownExterior.tres" id="5_0ewrk"]
+[ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="5_q8lop"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_4qvu0"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="7_anwej"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VisualUtility/VanishingPoint.tscn" id="7_i4wap"]
+[ext_resource type="Script" uid="uid://od834g8t6x33" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_aqway"]
+[ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="9_b7ing"]
+[ext_resource type="Script" uid="uid://nrubrkh2u04v" path="res://src/Editor/Spawn/PropSpawn.gd" id="10_vbnr3"]
+[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_6grhi"]
+[ext_resource type="Script" uid="uid://djyfnyi3ldp7j" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_6grhi"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="13_ho0nu"]
+[ext_resource type="Script" uid="uid://doxxnsbh2jwk6" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="14_2xpek"]
+[ext_resource type="PackedScene" uid="uid://xx5fbltdrdxk" path="res://src/Editor/Spawn/WaypointGlobalSpawn.tscn" id="15_vbnr3"]
+[ext_resource type="Script" uid="uid://crvg1jvm67k7u" path="res://src/Editor/Spawn/WaypointGlobalSpawn.gd" id="16_6grhi"]
+[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VisualUtility/VanishingPoint.gd" id="16_vohvr"]
+[ext_resource type="Script" uid="uid://8n6tfcpb6rqw" path="res://src/Editor/SpawnPoint.gd" id="18_qtlxt"]
+
 
 [node name="Dogtown" type="Node2D" unique_id=1604351222]
 visibility_layer = 2
@@ -111,10 +112,10 @@ mouse_filter = 2
 script = ExtResource("8_aqway")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
-"color": [Color(0, 0, 0.701961, 1), 20],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"velocity_dropoff": [0.75, 3]
+"color": [Color(0, 0, 0.701961, 1), 20, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""],
+"velocity_dropoff": [0.75, 3, ""]
 }
 size_is_default = false
 
@@ -131,14 +132,14 @@ mouse_filter = 2
 script = ExtResource("8_aqway")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
-"color": [Color(0, 0.4, 0, 1), 20],
-"door_index": [0, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"level": ["res://src/Level/DogtownEast.tscn", 4],
-"locked": [false, 1],
-"same_level": [false, 1],
-"same_level_next_index": [0, 2]
+"color": [Color(0, 0.4, 0, 1), 20, ""],
+"door_index": [0, 2, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""],
+"level": ["res://src/Level/DogtownEast.tscn", 4, ""],
+"locked": [false, 1, ""],
+"same_level": [false, 1, ""],
+"same_level_next_index": [0, 2, ""]
 }
 size_is_default = false
 
@@ -155,9 +156,9 @@ mouse_filter = 2
 script = ExtResource("8_aqway")
 trigger_path = "res://src/Trigger/Ladder.tscn"
 properties = {
-"color": [Color(1, 0.494118, 0, 1), 20],
-"editor_hidden": [true, 1],
-"id": ["", 4]
+"color": [Color(1, 0.494118, 0, 1), 20, ""],
+"editor_hidden": [true, 1, ""],
+"id": ["", 4, ""]
 }
 size_is_default = false
 
@@ -185,15 +186,16 @@ collision_mask = 0
 script = ExtResource("12_6grhi")
 actor_path = "res://src/Actor/NPC/Aikka.tscn"
 properties = {
-"base_gravity": [300.0, 3],
-"dialog_json": ["", 4],
-"editor_hidden": [false, 1],
-"id": ["aikka", 4],
-"speed": [Vector2(150, 350), 5],
-"starting_state": ["idle", 4],
-"voiced": [true, 1],
-"walk_speed": [Vector2(50, 50), 5],
-"water_gravity": [150.0, 3]
+"base_gravity": [300.0, 3, ""],
+"dialog_json": ["", 4, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["aikka", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
 }
 
 [node name="Fish" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_6grhi")]
@@ -206,15 +208,16 @@ collision_mask = 0
 script = ExtResource("12_6grhi")
 actor_path = "res://src/Actor/Enemy/Fish.tscn"
 properties = {
-"base_gravity": [300.0, 3],
-"can_move_x": [true, 1],
-"debug": [false, 1],
-"editor_hidden": [false, 1],
-"id": ["fish0", 4],
-"jump_height": [6, 2],
-"speed": [Vector2(20, 150), 5],
-"swim_dir_x": [-1, 2],
-"water_gravity": [150.0, 3]
+"base_gravity": [300.0, 3, ""],
+"can_move_x": [true, 1, ""],
+"debug": [false, 1, ""],
+"do_bubbles": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["fish0", 4, ""],
+"jump_height": [6, 2, ""],
+"speed": [Vector2(20, 150), 5, ""],
+"swim_dir_x": [-1, 2, ""],
+"water_gravity": [150.0, 3, ""]
 }
 
 [node name="WaypointJump" type="Area2D" parent="Spawns/Fish" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_ho0nu")]
@@ -254,15 +257,16 @@ collision_mask = 0
 script = ExtResource("12_6grhi")
 actor_path = "res://src/Actor/Enemy/Fish.tscn"
 properties = {
-"base_gravity": [300.0, 3],
-"can_move_x": [true, 1],
-"debug": [false, 1],
-"editor_hidden": [false, 1],
-"id": ["fish1", 4],
-"jump_height": [6, 2],
-"speed": [Vector2(20, 150), 5],
-"swim_dir_x": [-1, 2],
-"water_gravity": [150.0, 3]
+"base_gravity": [300.0, 3, ""],
+"can_move_x": [true, 1, ""],
+"debug": [false, 1, ""],
+"do_bubbles": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["fish1", 4, ""],
+"jump_height": [6, 2, ""],
+"speed": [Vector2(20, 150), 5, ""],
+"swim_dir_x": [-1, 2, ""],
+"water_gravity": [150.0, 3, ""]
 }
 
 [node name="WaypointJump" type="Area2D" parent="Spawns/Fish1" unique_id=1568328639 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_ho0nu")]

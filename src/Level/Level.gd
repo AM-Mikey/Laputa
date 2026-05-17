@@ -38,7 +38,7 @@ func _ready():
 		else:
 			am.play_music(music)
 
-func merge_one_way_ssp_tile() -> void:
+func merge_one_way_ssp_tile():
 	for child in $Triggers.get_children():
 		if (child is StaticBody2D):
 			child.queue_free()
@@ -107,11 +107,13 @@ func merge_one_way_ssp_tile() -> void:
 		used_tiles_ssp_collision = merged_polygon
 		merged_polygon = []
 
+	if get_node("SSPMerges"):
+		$SSPMerges.free()
 	var static_body: StaticBody2D = StaticBody2D.new()
-	static_body.name = "SSP"
+	static_body.name = "SSPMerges"
 	static_body.collision_layer = 0
 	static_body.set_collision_layer_value(10, true)
-	$Triggers.add_child(static_body)
+	add_child(static_body)
 
 	for polygon in used_tiles_ssp_collision:
 		var polygon_node: CollisionPolygon2D = CollisionPolygon2D.new()
@@ -134,11 +136,15 @@ func do_conversation_on_enter(_hide_player = false): #TODO: implement the player
 func setup_kill_box():
 	var kill_box = KILL_BOX.instantiate()
 	var ll = get_node("LevelLimiter")
-	var bottom_distance = ll.global_position.y + ll.size.y
-	var forgiveness = 64
-	kill_box.global_position = Vector2(ll.global_position.x, bottom_distance + forgiveness)
-	kill_box.get_node("CollisionShape2D").position = Vector2.ZERO
-	kill_box.get_node("CollisionShape2D").shape.size = Vector2(ll.size.x, 16)
+	var forgiveness_bottom = 64
+	var forgiveness_top = 64
+	var forgiveness_side = 64
+	kill_box.global_position = Vector2(ll.global_position.x - forgiveness_top, ll.global_position.y - forgiveness_side)
+
+	var shape = RectangleShape2D.new()
+	shape.size = Vector2(ll.size.x + (forgiveness_side * 2.0), ll.size.x + forgiveness_top + forgiveness_bottom)
+	kill_box.get_node("CollisionShape2D").shape = shape
+	kill_box.get_node("CollisionShape2D").position = shape.size / 2.0
 	$Triggers.add_child(kill_box)
 
 func exit_level():

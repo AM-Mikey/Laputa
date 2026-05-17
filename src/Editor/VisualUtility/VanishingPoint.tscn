@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dovj8uq00xato"]
+[gd_scene format=3 uid="uid://dovj8uq00xato"]
 
-[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VanishingPoint.gd" id="1_6byqu"]
+[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VisualUtility/VanishingPoint.gd" id="1_6byqu"]
 [ext_resource type="Texture2D" uid="uid://bv4mdd2d4bysf" path="res://assets/Editor/VanishingPoint.png" id="2_os2xy"]
 [ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="3_os2xy"]
+
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)

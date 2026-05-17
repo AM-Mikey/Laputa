@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://yuqevorrxdj1" path="res://src/Actor/Enemy/BeetleCrawler.gd" id="1_jyaun"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_ey80y"]
 [ext_resource type="Texture2D" uid="uid://bhhny2ymfaacp" path="res://assets/Actor/Enemy/BeetleCrawler.png" id="2_jyaun"]
-[ext_resource type="PackedScene" path="res://src/Editor/ToolVector.tscn" id="3_80cd0"]
+[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/ToolVector.tscn" id="3_80cd0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7vcwk"]
 size = Vector2(12, 9)

@@ -71,6 +71,8 @@ signal players_updated
 	"enemy_hurt": preload("res://assets/SFX/Placeholder/snd_enemy_hurt.ogg"),
 	"enemy_shoot": preload("res://assets/SFX/Placeholder/snd_em_fire.ogg"),
 	"enemy_tweet": preload("res://assets/SFX/bird.ogg"),
+
+	"ornithopter": preload("res://assets/SFX/Ornithopter.ogg"),
 	#"enemy_buzz":
 
 	"npc_dialog": preload("res://assets/SFX/Placeholder/snd_msg.ogg"),

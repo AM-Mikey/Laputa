@@ -33,7 +33,7 @@ func enter_walk(_last_state):
 	await $StateTimer.timeout
 	change_state("wait")
 
-func do_walk():
+func do_walk(_delta):
 	if (not $FloorDetectorL.is_colliding() and move_dir.x < 0) \
 	or (not $FloorDetectorR.is_colliding() and move_dir.x > 0):
 		change_state("wait")

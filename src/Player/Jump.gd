@@ -2,7 +2,7 @@ extends Node
 
 const BONK: = preload("res://src/Effect/BonkParticle.tscn")
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 @onready var pc = get_parent().get_parent().get_parent()
 @onready var mm = pc.get_node("MovementManager")
 @onready var sprite = pc.get_node("Sprite2D")
@@ -111,7 +111,7 @@ func bonk(normal):
 	var effect = BONK.instantiate()
 	effect.position = pc.position
 	effect.normal = normal
-	world.get_node("Front").add_child(effect)
+	w.get_node("Front").add_child(effect)
 
 ### GETTERS ###
 
@@ -179,7 +179,7 @@ func enter(_prev_state: String) -> void:
 	did_bonk = false
 
 func exit(next_state: String) -> void:
-	if (next_state in ["run"]):
+	if (next_state in ["run"]) && w.is_in_transition:
 		pc.mm.land()
 	var disable = [
 		pc.get_node("CrouchingCollision"),

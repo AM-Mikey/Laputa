@@ -1,0 +1,139 @@
+[gd_scene format=3 uid="uid://b0hildwypv8q5"]
+
+[ext_resource type="Script" uid="uid://be4ibvfg6rpm8" path="res://src/Editor/VisualUtility/VURect.gd" id="1_3xth1"]
+[ext_resource type="FontFile" uid="uid://c4ibssirigp5x" path="res://assets/UI/Font/Kirigami.ttf" id="2_gdknm"]
+[ext_resource type="Script" uid="uid://bksn8j3bkgq34" path="res://src/Editor/VisualUtility/VURectInput.gd" id="2_ld6qu"]
+[ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="3_48ell"]
+
+[node name="VURect" type="Node2D" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"]]
+script = ExtResource("1_3xth1")
+
+[node name="Rect" type="MarginContainer" parent="." unique_id=612564398]
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 2
+script = ExtResource("2_ld6qu")
+
+[node name="Handles" type="VBoxContainer" parent="Rect" unique_id=805614453]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Top" type="HBoxContainer" parent="Rect/Handles" unique_id=98155602]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="TopLeft" type="TextureButton" parent="Rect/Handles/Top" unique_id=878811339]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 12
+button_mask = 2
+
+[node name="Top" type="TextureButton" parent="Rect/Handles/Top" unique_id=1671940920]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 9
+button_mask = 2
+
+[node name="TopRight" type="TextureButton" parent="Rect/Handles/Top" unique_id=1574826979]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 11
+button_mask = 2
+
+[node name="Mid" type="HBoxContainer" parent="Rect/Handles" unique_id=1084109298]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Left" type="TextureButton" parent="Rect/Handles/Mid" unique_id=1397456665]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 10
+button_mask = 2
+
+[node name="Mid" type="TextureButton" parent="Rect/Handles/Mid" unique_id=751613898]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 13
+disabled = true
+button_mask = 2
+
+[node name="Right" type="TextureButton" parent="Rect/Handles/Mid" unique_id=1342085757]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 1
+mouse_default_cursor_shape = 10
+button_mask = 2
+
+[node name="Bottom" type="HBoxContainer" parent="Rect/Handles" unique_id=1916457895]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="BottomLeft" type="TextureButton" parent="Rect/Handles/Bottom" unique_id=1089357648]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 1
+mouse_default_cursor_shape = 11
+button_mask = 2
+
+[node name="Bottom" type="TextureButton" parent="Rect/Handles/Bottom" unique_id=927579459]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+mouse_filter = 1
+mouse_default_cursor_shape = 9
+button_mask = 2
+
+[node name="BottomRight" type="TextureButton" parent="Rect/Handles/Bottom" unique_id=1413912931]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 1
+mouse_default_cursor_shape = 12
+button_mask = 2
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Rect" unique_id=189073084]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+editor_only = false
+
+[node name="Panel" type="Panel" parent="Rect" unique_id=186837814]
+modulate = Color(1, 1, 1, 0.5)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_48ell")
+
+[node name="Label" type="Label" parent="Rect" unique_id=1300830036]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_gdknm")
+theme_override_font_sizes/font_size = 7
+text = "Trigger Name"
+clip_text = true
+uppercase = true

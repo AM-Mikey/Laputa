@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://8fm1x2wm2ok"]
+[gd_scene format=4 uid="uid://tje28nfn7lbd"]
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_4uhn8"]
 [ext_resource type="TileSet" uid="uid://dct5q86qhnom8" path="res://src/Tile/Debug.tres" id="2_s4ctt"]
@@ -7,8 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="5_sjslv"]
 [ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="5_v7nqo"]
 [ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="6_dcw0l"]
-[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="7_mlr58"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VisualUtility/VanishingPoint.tscn" id="7_mlr58"]
 [ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_v7nqo"]
+[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="11_ug36o"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="13_wcveo"]
 
 [node name="DefaultGodot4" type="Node2D" unique_id=1165197377]
 visibility_layer = 2
@@ -92,13 +94,14 @@ visibility_layer = 2
 position = Vector2(2216, 1984)
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": ["1", 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"speed": [Vector2(150, 350), 5],
-"water_gravity": [150.0, 3]
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": ["1", 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
 }
 
 [node name="Stalagtite1" parent="Spawns" unique_id=135404477 instance=ExtResource("6_dcw0l")]
@@ -106,13 +109,14 @@ visibility_layer = 2
 position = Vector2(2248, 1984)
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": ["2", 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"speed": [Vector2(150, 350), 5],
-"water_gravity": [150.0, 3]
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": ["2", 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
 }
 
 [node name="Stalagtite2" parent="Spawns" unique_id=435739753 instance=ExtResource("6_dcw0l")]
@@ -120,13 +124,14 @@ visibility_layer = 2
 position = Vector2(2184, 1984)
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": ["0", 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"speed": [Vector2(150, 350), 5],
-"water_gravity": [150.0, 3]
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": ["0", 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
 }
 
 [node name="Sphagnum" parent="Spawns" unique_id=2134574927 instance=ExtResource("6_dcw0l")]
@@ -134,46 +139,13 @@ visibility_layer = 2
 position = Vector2(1864, 1984)
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
-"base_gravity": [300.0, 3],
-"debug": [false, 1],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"speed": [Vector2(150, 350), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Shield" parent="Spawns" unique_id=674599747 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
-position = Vector2(2032, 2192)
-actor_path = "res://src/Actor/Enemy/Shield.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"defend_time": [0.4, 3],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"move_dir": [Vector2(-1, 0), 5],
-"speed": [Vector2(150, 350), 5],
-"wait_max_time": [5.0, 3],
-"walk_max_time": [10.0, 3],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Junior" parent="Spawns" unique_id=486934185 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
-position = Vector2(2096, 2144)
-properties = {
-"aim_time": [0.2, 3],
-"base_gravity": [300.0, 3],
-"debug": [false, 1],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"idle_max_time": [5.0, 3],
-"move_dir": [Vector2(-1, 0), 5],
-"reload_time": [2.0, 3],
-"speed": [Vector2(150, 350), 5],
-"walk_max_time": [10.0, 3],
-"water_gravity": [150.0, 3]
+"base_gravity": [300.0, 3, ""],
+"debug": [false, 1, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
 }
 
 [node name="Stalagtite3" parent="Spawns" unique_id=2139553996 instance=ExtResource("6_dcw0l")]
@@ -181,13 +153,14 @@ visibility_layer = 2
 position = Vector2(2168, 1928)
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
-"base_gravity": [300.0, 3],
-"debug": [true, 1],
-"difficulty": [1, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"speed": [Vector2(150, 350), 5],
-"water_gravity": [150.0, 3]
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [1, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
 }
 
 [node name="Sentry" parent="Spawns" unique_id=785960008 instance=ExtResource("6_dcw0l")]
@@ -195,17 +168,18 @@ visibility_layer = 2
 position = Vector2(2280, 2192)
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
-"base_gravity": [300.0, 3],
-"cooldown_time": [4.0, 3],
-"debug": [true, 1],
-"editor_hidden": [false, 1],
-"height_tolerance": [7, 2],
-"id": ["", 4],
-"look_dir": [Vector2(-1, 0), 5],
-"projectile_damage": [2, 2],
-"projectile_speed": [150, 2],
-"speed": [Vector2(150, 350), 5],
-"water_gravity": [150.0, 3]
+"base_gravity": [300.0, 3, ""],
+"cooldown_time": [4.0, 3, ""],
+"debug": [true, 1, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"height_tolerance": [7, 2, ""],
+"id": ["", 4, ""],
+"look_dir": [Vector2(-1, 0), 5, ""],
+"projectile_damage": [2, 2, ""],
+"projectile_speed": [150, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
 }
 
 [node name="Sentry1" parent="Spawns" unique_id=983666366 instance=ExtResource("6_dcw0l")]
@@ -213,33 +187,18 @@ visibility_layer = 2
 position = Vector2(2408, 1984)
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
-"base_gravity": [300.0, 3],
-"cooldown_time": [4.0, 3],
-"debug": [true, 1],
-"editor_hidden": [false, 1],
-"height_tolerance": [7, 2],
-"id": ["", 4],
-"look_dir": [Vector2(-1, 0), 5],
-"projectile_damage": [2, 2],
-"projectile_speed": [150, 2],
-"speed": [Vector2(150, 350), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Beetle" parent="Spawns" unique_id=663837822 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
-position = Vector2(1720, 1984)
-actor_path = "res://src/Actor/Enemy/BeetleDifficulty2.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"crawl_start_dir": [Vector2(0, 1), 5],
-"debug": [true, 1],
-"difficulty": [2, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"speed": [Vector2(150, 150), 5],
-"wall_dir": [Vector2(-1, 0), 5],
-"water_gravity": [150.0, 3]
+"base_gravity": [300.0, 3, ""],
+"cooldown_time": [4.0, 3, ""],
+"debug": [true, 1, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"height_tolerance": [7, 2, ""],
+"id": ["", 4, ""],
+"look_dir": [Vector2(-1, 0), 5, ""],
+"projectile_damage": [2, 2, ""],
+"projectile_speed": [150, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
 }
 
 [node name="Climber" parent="Spawns" unique_id=444396003 instance=ExtResource("6_dcw0l")]
@@ -247,32 +206,19 @@ visibility_layer = 2
 position = Vector2(2048, 1928)
 actor_path = "res://src/Actor/Enemy/Climber.tscn"
 properties = {
-"arm_angle_speed": [0.01, 3],
-"arm_count": [4, 2],
-"arm_radius": [32, 2],
-"base_gravity": [300.0, 3],
-"climb_dir": ["ccw", 4],
-"debug": [true, 1],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"speed": [Vector2(150, 350), 5],
-"water_gravity": [150.0, 3]
-}
-
-[node name="Beetle1" parent="Spawns" unique_id=1512755897 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
-position = Vector2(2632, 2080)
-actor_path = "res://src/Actor/Enemy/Beetle.tscn"
-properties = {
-"base_gravity": [300.0, 3],
-"crawl_start_dir": [Vector2(0, 0), 5],
-"debug": [true, 1],
-"difficulty": [0, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"speed": [Vector2(150, 150), 5],
-"wall_dir": [Vector2(-1, 0), 5],
-"water_gravity": [150.0, 3]
+"arm_angle_speed": [0.01, 3, ""],
+"arm_count": [4, 2, ""],
+"arm_radius": [32, 2, ""],
+"base_gravity": [300.0, 3, ""],
+"climb_dir": ["ccw", 4, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""],
+"rotate_stop_time": [1.5, 3, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
 }
 
 [node name="LoadZone" parent="Spawns" unique_id=782260727 instance=ExtResource("7_v7nqo")]
@@ -284,12 +230,12 @@ offset_right = 1792.0
 offset_bottom = 1744.0
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
-"color": [Color(0, 0.4, 0, 1), 20],
-"direction": [3, 2],
-"door_index": [0, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"level": ["res://src/Level/WastesTesting.tscn", 4]
+"color": [Color(0, 0.4, 0, 1), 20, ""],
+"direction": [3, 2, ""],
+"door_index": [0, 2, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""],
+"level": ["res://src/Level/WastesTesting.tscn", 4, ""]
 }
 size_is_default = false
 
@@ -302,12 +248,12 @@ offset_right = 1632.0
 offset_bottom = 2032.0
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
-"color": [Color(0, 0.4, 0, 1), 20],
-"direction": [0, 2],
-"door_index": [1.0, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"level": ["res://src/Level/WastesTesting.tscn", 4]
+"color": [Color(0, 0.4, 0, 1), 20, ""],
+"direction": [0, 2, ""],
+"door_index": [1.0, 2, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""],
+"level": ["res://src/Level/WastesTesting.tscn", 4, ""]
 }
 size_is_default = false
 
@@ -320,9 +266,9 @@ offset_right = 1744.0
 offset_bottom = 2112.0
 trigger_path = "res://src/Trigger/Spikes.tscn"
 properties = {
-"color": [Color(1, 0, 0, 1), 20],
-"editor_hidden": [false, 1],
-"id": ["", 4]
+"color": [Color(1, 0, 0, 1), 20, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""]
 }
 size_is_default = false
 
@@ -335,10 +281,10 @@ offset_right = 1776.0
 offset_bottom = 2272.0
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
-"color": [Color(0, 0, 0.701961, 1), 20],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"velocity_dropoff": [0.75, 3]
+"color": [Color(0, 0, 0.701961, 1), 20, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""],
+"velocity_dropoff": [0.75, 3, ""]
 }
 size_is_default = false
 
@@ -351,9 +297,9 @@ offset_right = 2240.0
 offset_bottom = 2192.0
 trigger_path = "res://src/Trigger/Ladder.tscn"
 properties = {
-"color": [Color(1, 0.494118, 0, 1), 20],
-"editor_hidden": [true, 1],
-"id": ["", 4]
+"color": [Color(1, 0.494118, 0, 1), 20, ""],
+"editor_hidden": [true, 1, ""],
+"id": ["", 4, ""]
 }
 size_is_default = false
 
@@ -366,9 +312,9 @@ offset_right = 2192.0
 offset_bottom = 2096.0
 trigger_path = "res://src/Trigger/Spikes.tscn"
 properties = {
-"color": [Color(1, 0, 0, 1), 20],
-"editor_hidden": [false, 1],
-"id": ["", 4]
+"color": [Color(1, 0, 0, 1), 20, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""]
 }
 size_is_default = false
 
@@ -381,12 +327,12 @@ offset_right = 2000.0
 offset_bottom = 2096.0
 trigger_path = "res://src/Trigger/Sign.tscn"
 properties = {
-"color": [Color(0.901961, 0.74902, 0, 1), 20],
-"editor_hidden": [true, 1],
-"id": ["", 4],
+"color": [Color(0.901961, 0.74902, 0, 1), 20, ""],
+"editor_hidden": [true, 1, ""],
+"id": ["", 4, ""],
 "text": ["Welcome to the Debug Level!
 batsdsfdsdfsdsd
-", 4]
+", 4, ""]
 }
 size_is_default = false
 
@@ -399,14 +345,14 @@ offset_right = 1984.0
 offset_bottom = 2272.0
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
-"color": [Color(0, 0.4, 0, 1), 20],
-"door_index": [10, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"level": ["", 4],
-"locked": [false, 1],
-"same_level": [true, 1],
-"same_level_next_index": [11, 2]
+"color": [Color(0, 0.4, 0, 1), 20, ""],
+"door_index": [10, 2, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""],
+"level": ["", 4, ""],
+"locked": [false, 1, ""],
+"same_level": [true, 1, ""],
+"same_level_next_index": [11, 2, ""]
 }
 size_is_default = false
 
@@ -419,14 +365,14 @@ offset_right = 2048.0
 offset_bottom = 2272.0
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
-"color": [Color(0, 0.4, 0, 1), 20],
-"door_index": [11, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"level": ["", 4],
-"locked": [false, 1],
-"same_level": [true, 1],
-"same_level_next_index": [12, 2]
+"color": [Color(0, 0.4, 0, 1), 20, ""],
+"door_index": [11, 2, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""],
+"level": ["", 4, ""],
+"locked": [false, 1, ""],
+"same_level": [true, 1, ""],
+"same_level_next_index": [12, 2, ""]
 }
 size_is_default = false
 
@@ -439,14 +385,14 @@ offset_right = 2160.0
 offset_bottom = 2272.0
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
-"color": [Color(0, 0.4, 0, 1), 20],
-"door_index": [12, 2],
-"editor_hidden": [false, 1],
-"id": ["", 4],
-"level": ["", 4],
-"locked": [false, 1],
-"same_level": [true, 1],
-"same_level_next_index": [10, 2]
+"color": [Color(0, 0.4, 0, 1), 20, ""],
+"door_index": [12, 2, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""],
+"level": ["", 4, ""],
+"locked": [false, 1, ""],
+"same_level": [true, 1, ""],
+"same_level_next_index": [10, 2, ""]
 }
 size_is_default = false
 
@@ -459,14 +405,45 @@ offset_right = 1952.0
 offset_bottom = 2096.0
 trigger_path = "res://src/Trigger/FlavorText.tscn"
 properties = {
-"color": [Color(0.901961, 0.74902, 0, 1), 20],
-"editor_hidden": [true, 1],
-"id": ["", 4],
-"text": ["It's a small sunflower...", 4]
+"color": [Color(0.901961, 0.74902, 0, 1), 20, ""],
+"editor_hidden": [true, 1, ""],
+"id": ["", 4, ""],
+"text": ["It's a small sunflower...", 4, ""]
 }
 size_is_default = false
 
+[node name="Frog" parent="Spawns" unique_id=1199277091 instance=ExtResource("6_dcw0l")]
+visibility_layer = 2
+position = Vector2(1880, 2272)
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"croak_time": [1.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [1, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Frog", 4, ""],
+"jump_delay": [3.0, 3, ""],
+"speed": [Vector2(50, 100), 5, ""],
+"tongue_damage": [2.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="LookVector" parent="Spawns/Frog" unique_id=872564127 instance=ExtResource("11_ug36o")]
+visibility_layer = 2
+position = Vector2(0, -7)
+tag_name = "look"
+snap_degrees = 180.0
+movement_locked = true
+
+[node name="TongueRange" parent="Spawns/Frog" unique_id=1432238783 instance=ExtResource("13_wcveo")]
+visibility_layer = 2
+position = Vector2(-32, -12)
+tag_name = "tongue_range"
+
 [node name="Waypoints" type="Node2D" parent="." unique_id=1140943479]
+visibility_layer = 2
 
 [node name="VanishingPoint" parent="." unique_id=852042071 instance=ExtResource("7_mlr58")]
 visibility_layer = 2
