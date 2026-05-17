@@ -2,10 +2,10 @@ extends MarginContainer
 
 const MISC_BUTTON = preload("res://src/Editor/Button/MiscButton.tscn")
 const MISC_SCENES = [
-	"res://src/Editor/WaypointLocal.tscn",
-	"res://src/Editor/ToolVector.tscn",
-	"res://src/Editor/ToolRect.tscn",
-	"res://src/Editor/WaypointGlobal.tscn",
+	"res://src/Editor/VisualUtility/WaypointLocal.tscn",
+	"res://src/Editor/VisualUtility/VUVector.tscn",
+	"res://src/Editor/VisualUtility/VURect.tscn",
+	"res://src/Editor/VisualUtility/WaypointGlobal.tscn",
 	"res://src/Editor/Spawn/WaypointGlobalSpawn.tscn",
 	"res://src/Editor/SpawnPoint.tscn",
 	"res://src/Editor/VanishingPoint.tscn",

@@ -230,7 +230,6 @@ func on_property_selected(property_name):
 					$FileDialog.set_filters(PackedStringArray(["*.tscn"]))
 					$FileDialog.popup()
 				"enemy_path":
-					$HBox/Button.add_theme_color_override()
 					$FileDialog.current_dir = "res://src/Actor/Enemy/"
 					$FileDialog.set_filters(PackedStringArray(["*.tscn"]))
 					$FileDialog.popup()

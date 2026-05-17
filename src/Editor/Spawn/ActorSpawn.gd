@@ -3,7 +3,7 @@ extends Area2D
 @export_file var actor_path := "":
 	set(val):
 		actor_path = val
-		if (is_tool):
+		if is_model:
 			if (FileAccess.file_exists(actor_path)):
 				var actor = load(actor_path).instantiate()
 
@@ -24,17 +24,16 @@ extends Area2D
 
 @export var properties = {}
 ## If true, become an UI to customize Actor for Trigger + disable spawning
-@export var is_tool: bool = false
-@export_group("Trigger Tool")
+@export var is_model: bool = false
 @export var tag_name: String = ""
 
 @onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
-	if (is_tool):
+	if is_model:
 		actor_path = actor_path
 	else:
-		if !is_tool and actor_path == "":
+		if actor_path == "":
 			printerr("ERROR: no actor chosen in ActorSpawn")
 			return
 
@@ -99,14 +98,14 @@ func initialize(): #first time set up properties
 					ac.owner = null
 					add_child(ac)
 					ac.owner = w.current_level
-			if ac.is_in_group("ToolVectors"):
-				if !get_if_actor_has_tool_vector(ac):
+			if ac.is_in_group("VUVectors"):
+				if !get_if_actor_has_vu_vector(ac):
 					actor.remove_child(ac)
 					ac.owner = null
 					add_child(ac)
 					ac.owner = w.current_level
-			if ac.is_in_group("ToolRects"):
-				if !get_if_actor_has_tool_rect(ac):
+			if ac.is_in_group("VURects"):
+				if !get_if_actor_has_vu_rect(ac):
 					actor.remove_child(ac)
 					ac.owner = null
 					add_child(ac)
@@ -136,14 +135,14 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 					ac.owner = null
 					add_child(ac)
 					ac.owner = w.current_level
-			if ac.is_in_group("ToolVectors"):
-				if !get_if_actor_has_tool_vector(ac):
+			if ac.is_in_group("VUVectors"):
+				if !get_if_actor_has_vu_vector(ac):
 					actor.remove_child(ac)
 					ac.owner = null
 					add_child(ac)
 					ac.owner = w.current_level
-			if ac.is_in_group("ToolRects"):
-				if !get_if_actor_has_tool_rect(ac):
+			if ac.is_in_group("VURects"):
+				if !get_if_actor_has_vu_rect(ac):
 					actor.remove_child(ac)
 					ac.owner = null
 					add_child(ac)
@@ -151,7 +150,7 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 		actor.free()
 
 func spawn():
-	if (is_tool):
+	if is_model:
 		w.emit_signal.call_deferred("finished_spawn_entities_step")
 		return
 	if actor_path == "":
@@ -168,11 +167,11 @@ func spawn():
 	w.current_level.get_node("Actors").call_deferred("add_child", actor)
 
 	for ac in actor.get_children(): #clear old from actor
-		if ac.is_in_group("WaypointLocals") || ac.is_in_group("ToolVectors") || ac.is_in_group("ToolRects") || ac.is_in_group("WaypointGlobalSpawns"):
+		if ac.is_in_group("WaypointLocals") || ac.is_in_group("VUVectors") || ac.is_in_group("VURects") || ac.is_in_group("WaypointGlobalSpawns"):
 			actor.remove_child(ac)
 
 	for c in get_children(): #add new from spawn
-		if c.is_in_group("WaypointLocals") || c.is_in_group("ToolVectors") || c.is_in_group("ToolRects"):
+		if c.is_in_group("WaypointLocals") || c.is_in_group("VUVectors") || c.is_in_group("VURects"):
 			var copy = c.duplicate()
 			actor.add_child(copy)
 
@@ -202,17 +201,17 @@ func get_if_actor_has_waypoint(actor_waypoint) -> bool:
 				out = true
 	return out
 
-func get_if_actor_has_tool_vector(actor_tool_vector) -> bool:
+func get_if_actor_has_vu_vector(actor_vu_vector) -> bool:
 	for c in get_children():
-		if c.is_in_group("ToolVectors"):
-			if c.tag_name == actor_tool_vector.tag_name:
+		if c.is_in_group("VUVectors"):
+			if c.tag_name == actor_vu_vector.tag_name:
 				return true
 	return false
 
-func get_if_actor_has_tool_rect(actor_tool_rect) -> bool:
+func get_if_actor_has_vu_rect(actor_vu_rect) -> bool:
 	for c in get_children():
-		if c.is_in_group("ToolRects"):
-			if c.tag_name == actor_tool_rect.tag_name:
+		if c.is_in_group("VURects"):
+			if c.tag_name == actor_vu_rect.tag_name:
 				return true
 	return false
 

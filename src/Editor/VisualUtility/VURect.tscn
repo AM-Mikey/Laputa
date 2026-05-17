@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://b0hildwypv8q5"]
 
-[ext_resource type="Script" uid="uid://be4ibvfg6rpm8" path="res://src/Editor/ToolRect.gd" id="1_3xth1"]
+[ext_resource type="Script" uid="uid://be4ibvfg6rpm8" path="res://src/Editor/VisualUtility/VURect.gd" id="1_3xth1"]
 [ext_resource type="FontFile" uid="uid://c4ibssirigp5x" path="res://assets/UI/Font/Kirigami.ttf" id="2_gdknm"]
-[ext_resource type="Script" uid="uid://bksn8j3bkgq34" path="res://src/Editor/ToolRectInput.gd" id="2_ld6qu"]
+[ext_resource type="Script" uid="uid://bksn8j3bkgq34" path="res://src/Editor/VisualUtility/VURectInput.gd" id="2_ld6qu"]
 [ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="3_48ell"]
 
-[node name="ToolRect" type="Node2D" unique_id=688682803 groups=["Entities", "ToolRects", "VisualUtilities"]]
+[node name="VURect" type="Node2D" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"]]
 script = ExtResource("1_3xth1")
 
 [node name="Rect" type="MarginContainer" parent="." unique_id=612564398]

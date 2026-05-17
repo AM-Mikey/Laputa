@@ -68,8 +68,8 @@ func _ready():
 		w.emit_signal("finished_spawn_entities_step")
 		return
 
-	var enemy_properties = $ActorTool.properties
-	for p_name in $ActorTool.properties:
+	var enemy_properties = $ActorModel.properties
+	for p_name in $ActorModel.properties:
 		sample_enemy.set(p_name, enemy_properties[p_name][0])
 	sample_enemy_og_process_mode = sample_enemy.process_mode
 	sample_enemy_og_visible = sample_enemy.visible

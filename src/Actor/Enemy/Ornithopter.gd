@@ -5,8 +5,8 @@ const ICON = preload("res://assets/Actor/Enemy/OrnithopterIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/Ornithopter.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Ornithopter1.png")
 
-@export var dir = Vector2.LEFT
-@export var difficulty: int = 0
+@export var dir := Vector2.LEFT
+@export var difficulty := 0
 var max_difficulty := 1
 
 var is_on_screen: bool = false
@@ -18,9 +18,7 @@ const swoop_speed: float = 120.0
 const swoop_speed_thin: float = 90.0
 const screen_thin_threshold_x: float = 250.0
 ## The unit for all below constant is the distance of 1 cell in the grid
-const min_swoop_detection_x: float = 5.0
-const max_swoop_detection_x: float = 25.0
-const max_swoop_detection_x_thin: float = 15.0
+@export var swoop_trigger_distance := 10.0
 
 const min_swoop_height: float = 2.0
 const max_swoop_height: float = 20.0
@@ -35,7 +33,7 @@ func setup():
 			speed = Vector2(100, 100)
 			acceleration = 25
 
-			reward = 2
+			reward = 1
 			$Sprite2D.texture = TX_0
 		1:
 			hp = 3
@@ -43,7 +41,7 @@ func setup():
 			speed = Vector2(100, 100)
 			acceleration = 25
 
-			reward = 3
+			reward = 2
 			$Sprite2D.texture = TX_1
 
 	if dir == Vector2.LEFT:
@@ -67,16 +65,14 @@ func enter_fly(_prev_state):
 		$Sprite2D.flip_h = true
 
 func do_fly(_delta):
-	if not $AnimationPlayer.is_playing(): #wait for transition
+	if not $AnimationPlayer.is_playing():
 		$AnimationPlayer.play("Fly")
 
 	velocity = calc_velocity(dir, false)
 	move_and_slide()
 
 	if (difficulty == 1):
-		var screen_size = vs.get_screen_global_rect().size
-		var screen_too_thin_check = screen_size.x < screen_thin_threshold_x
-		if screen_too_thin_check or (is_on_screen and !screen_too_thin_check):
+		if is_on_screen:
 			var player = f.pc()
 			if (player):
 				var player_direction_check = sign(player.global_position.x - global_position.x) == sign(dir.x)
@@ -85,13 +81,12 @@ func do_fly(_delta):
 				var player_distance_relative = abs(player_grid_coord.x - grid_coord.x)
 				var player_height_relative = player_grid_coord.y - grid_coord.y
 
-				var max_check_distance =  min(max_swoop_detection_x, floor(screen_size.x / 16.0)) if !screen_too_thin_check else max_swoop_detection_x_thin
+				var valid_to_swoop = player_height_relative >= min_swoop_height \
+				and player_height_relative <= max_swoop_height \
+				and player_distance_relative <= swoop_trigger_distance \
+				and player_direction_check
 
-				var valid_to_swoop = player_height_relative >= min_swoop_height and player_height_relative <= min(max_swoop_height, floor(screen_size.y / 16.0 / 2.0))  \
-									and player_distance_relative >= min_swoop_detection_x and player_distance_relative <= max_check_distance \
-									and player_direction_check
-
-				if (!has_swoop and valid_to_swoop):
+				if !has_swoop and valid_to_swoop:
 					change_state("swoop")
 
 
@@ -103,6 +98,7 @@ func enter_swoop(_prev_state: String):
 		return
 
 	var screen_size: Vector2 = get_viewport().get_visible_rect().size / vs.resolution_scale
+	var screen_too_thin_check = screen_size.x < screen_thin_threshold_x
 
 	$AnimationPlayer.play("SwoopDown")
 	$Hurtbox/Fly.disabled = true
@@ -113,19 +109,37 @@ func enter_swoop(_prev_state: String):
 		$Sprite2D.flip_h = false
 	elif dir == Vector2.RIGHT:
 		$Sprite2D.flip_h = true
-	var height_grid_offset = 16.0 - fmod(global_position.y, 16.0)
-	var swoop_height = floor(player.global_position.y / 16.0) - floor(global_position.y / 16.0) - 0.5 # Aim at gun level instead of feet
-	var swoop_distance = clamp(floor(screen_size.x * clamp(remap(screen_size.x, 300.0, 500.0, 1.0, 0.8), 1.0, 0.8) / 16.0), min_swoop_distance, max_swoop_distance)
+
+	# Derive swoop geometry from actual player position
+	var player_offset: Vector2 = player.global_position - global_position
+	var swoop_distance: float = clamp(abs(player_offset.x) / 16.0, min_swoop_distance, max_swoop_distance)
+	var swoop_height: float = floor(player.global_position.y / 16.0) - floor(global_position.y / 16.0) - 0.5 # Aim at gun level instead of feet
+	var height_grid_offset: float = 16.0 - fmod(global_position.y, 16.0)
+
+	# Bottom point lands on player X; exit point mirrors the same distance past them
+	var bottom_pos: Vector2 = Vector2(player.global_position.x, global_position.y + swoop_height * 16.0 + height_grid_offset)
+	var exit_pos: Vector2 = global_position + Vector2(player_offset.x * 2.0, 0.0)
+
+	# Clamp exit point to screen bounds on thin screens
+	if screen_too_thin_check:
+		var screen_rect: Rect2 = vs.get_screen_global_rect()
+		exit_pos.x = clamp(exit_pos.x, screen_rect.position.x, screen_rect.position.x + screen_rect.size.x)
+
 	swoop_t = 0.0
 	swoop_curve = Curve2D.new()
-	var swoop_toward_inner: float = clamp(remap(screen_size.x, min_swoop_distance * 16.0, max_swoop_distance * 16.0, 0.0, max_swoop_distance * 8.0), 0.0, max_swoop_distance / 8.0) * clamp(swoop_distance / swoop_height, 1.0, 3.0)
+
+	var swoop_toward_inner: float = clamp(
+		remap(abs(player_offset.x), min_swoop_distance * 16.0, max_swoop_distance * 16.0, 0.0, max_swoop_distance * 8.0),
+		0.0, max_swoop_distance / 8.0
+	) * clamp(swoop_distance / swoop_height, 1.0, 3.0)
 	var swoop_toward_outer: float = swoop_distance * 2.0
 	var swoop_toward_height: float = swoop_height * 16.0
-	swoop_curve.add_point(global_position, Vector2.ZERO, Vector2(swoop_toward_inner * dir.x, swoop_toward_height))
-	swoop_curve.add_point(global_position + Vector2(dir.x * swoop_distance * 8.0, swoop_height * 16.0 + height_grid_offset), Vector2(-swoop_toward_outer * dir.x, 0.0), Vector2(swoop_toward_outer * dir.x, 0.0))
-	swoop_curve.add_point(global_position + Vector2(dir.x * swoop_distance * 16.0, 0), Vector2(-swoop_toward_inner * dir.x, swoop_toward_height), Vector2.ZERO)
-	has_swoop = true
 
+	swoop_curve.add_point(global_position, Vector2.ZERO, Vector2(swoop_toward_inner * dir.x, swoop_toward_height))
+	swoop_curve.add_point(bottom_pos, Vector2(-swoop_toward_outer * dir.x, 0.0), Vector2(swoop_toward_outer * dir.x, 0.0))
+	swoop_curve.add_point(exit_pos, Vector2(-swoop_toward_inner * dir.x, swoop_toward_height), Vector2.ZERO)
+
+	has_swoop = true
 	am.play("ornithopter", self, null, 1.0, 0.1)
 
 	if debug:

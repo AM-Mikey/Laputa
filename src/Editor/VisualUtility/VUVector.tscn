@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bwp6sqdlvfo84"]
 
-[ext_resource type="Script" uid="uid://deuh22v7t26qw" path="res://src/Editor/ToolVector.gd" id="1_tvec"]
+[ext_resource type="Script" uid="uid://deuh22v7t26qw" path="res://src/Editor/VisualUtility/VUVector.gd" id="1_tvec"]
 
 [sub_resource type="RectangleShape2D" id="RectRoot"]
 size = Vector2(8, 8)
@@ -8,7 +8,7 @@ size = Vector2(8, 8)
 [sub_resource type="CircleShape2D" id="CircleTip"]
 radius = 4.0
 
-[node name="ToolVector" type="Area2D" unique_id=872564127 groups=["Entities", "ToolVectors", "VisualUtilities"]]
+[node name="VUVector" type="Area2D" unique_id=872564127 groups=["Entities", "VUVector", "VisualUtilities"]]
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("1_tvec")

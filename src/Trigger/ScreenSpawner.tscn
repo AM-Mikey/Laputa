@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dc5of1gbrwlns"]
 
 [ext_resource type="Script" uid="uid://dm0wrfwattmhy" path="res://src/Trigger/ScreenSpawner.gd" id="1_o6fug"]
-[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/ToolRect.tscn" id="2_t5opi"]
+[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="2_t5opi"]
 [ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="3_i70y7"]
 
 [sub_resource type="RectangleShape2D" id="1"]
@@ -23,9 +23,9 @@ shape = SubResource("1")
 [node name="SpawnArea" parent="." unique_id=955871811 instance=ExtResource("2_t5opi")]
 tag_name = "SpawnArea"
 
-[node name="ActorTool" parent="." unique_id=1199277091 instance=ExtResource("3_i70y7")]
+[node name="ActorModel" parent="." unique_id=1199277091 instance=ExtResource("3_i70y7")]
 actor_path = "uid://it7syr43jeh"
-is_tool = true
+is_model = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -13,13 +13,13 @@ enum ToolRectSnapMode {NONE, TO_HALF_GRID, TO_GRID}
 		editor_color = val
 
 ## In global transform
-var value: Rect2 = Rect2(Vector2.ZERO, Vector2.ZERO):
+@export var value: Rect2 = Rect2(Vector2.ZERO, Vector2.ZERO):
 	set(val):
 		value = val
 		grid_value = Rect2i(floor(val.position / 16.0), floor(val.size / 16.0))
 		update_visual()
 
-var grid_value: Rect2i = Rect2i(Vector2i.ZERO, Vector2i.ZERO)
+@export var grid_value: Rect2i = Rect2i(Vector2i.ZERO, Vector2i.ZERO)
 
 @onready var w = get_tree().get_root().get_node("World")
 

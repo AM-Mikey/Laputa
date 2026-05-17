@@ -3,8 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://bbu1jyosea4de" path="res://assets/Actor/Enemy/Fish.png" id="1"]
 [ext_resource type="Script" uid="uid://bugags3jgh55c" path="res://src/Actor/Enemy/Fish.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_utagi"]
-[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/WaypointLocal.tscn" id="3_jx5j2"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="3_jx5j2"]
 [ext_resource type="PackedScene" uid="uid://xx5fbltdrdxk" path="res://src/Editor/Spawn/WaypointGlobalSpawn.tscn" id="4_q3y8u"]
+
 
 [sub_resource type="RectangleShape2D" id="5"]
 size = Vector2(10, 5)

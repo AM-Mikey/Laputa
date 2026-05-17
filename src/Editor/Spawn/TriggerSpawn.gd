@@ -65,14 +65,14 @@ func initialize(): #first time set up properties
 				ac.owner = null
 				add_child(ac)
 				ac.owner = w.current_level
-		if ac.is_in_group("ToolVectors"):
-			if !get_if_trigger_has_tool_vector(ac):
+		if ac.is_in_group("VUVectors"):
+			if !get_if_trigger_has_vu_vector(ac):
 				trigger.remove_child(ac)
 				ac.owner = null
 				add_child(ac)
 				ac.owner = w.current_level
-		if ac.is_in_group("ToolRects"):
-			if !get_if_trigger_has_tool_rect(ac):
+		if ac.is_in_group("VURects"):
+			if !get_if_trigger_has_vu_rect(ac):
 				trigger.remove_child(ac)
 				ac.owner = null
 				add_child(ac)
@@ -105,14 +105,14 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 				ac.owner = null
 				add_child(ac)
 				ac.owner = w.current_level
-		if ac.is_in_group("ToolVectors"):
-			if !get_if_trigger_has_tool_vector(ac):
+		if ac.is_in_group("VUVectors"):
+			if !get_if_trigger_has_vu_vector(ac):
 				trigger.remove_child(ac)
 				ac.owner = null
 				add_child(ac)
 				ac.owner = w.current_level
-		if ac.is_in_group("ToolRects"):
-			if !get_if_trigger_has_tool_rect(ac):
+		if ac.is_in_group("VURects"):
+			if !get_if_trigger_has_vu_rect(ac):
 				trigger.remove_child(ac)
 				ac.owner = null
 				add_child(ac)
@@ -144,13 +144,13 @@ func spawn():
 	trigger.get_node("CollisionShape2D").position = new_shape.size * 0.5
 
 	for ac in trigger.get_children(): #clear old from trigger
-		if ac.is_in_group("WaypointLocals") || ac.is_in_group("ToolVectors") || ac.is_in_group("ToolRects") || ac.is_in_group("ActorSpawns"):
+		if ac.is_in_group("WaypointLocals") || ac.is_in_group("VUVectors") || ac.is_in_group("VURects") || ac.is_in_group("ActorSpawns"):
 			trigger.remove_child(ac)
 		if ac.is_in_group("WaypointGlobalSpawns"): #turn off visibility
 			ac.visible = false
 
 	for c in get_children(): #add new from spawn
-		if c.is_in_group("WaypointLocals") || c.is_in_group("ToolVectors") || c.is_in_group("ToolRects") || c.is_in_group("ActorSpawns"):
+		if c.is_in_group("WaypointLocals") || c.is_in_group("VUVectors") || c.is_in_group("VURects") || c.is_in_group("ActorSpawns"):
 			var copy = c.duplicate()
 			trigger.add_child(copy)
 
@@ -210,24 +210,24 @@ func get_if_trigger_has_waypoint(trigger_waypoint) -> bool:
 				out = true
 	return out
 
-func get_if_trigger_has_tool_vector(trigger_tool_vector) -> bool:
+func get_if_trigger_has_vu_vector(trigger_vu_vector) -> bool:
 	for c in get_children():
-		if c.is_in_group("ToolVectors"):
-			if c.tag_name == trigger_tool_vector.tag_name:
+		if c.is_in_group("VUVectors"):
+			if c.tag_name == trigger_vu_vector.tag_name:
 				return true
 	return false
 
-func get_if_trigger_has_tool_rect(trigger_tool_rect) -> bool:
+func get_if_trigger_has_vu_rect(trigger_vu_rect) -> bool:
 	for c in get_children():
-		if c.is_in_group("ToolRects"):
-			if c.tag_name == trigger_tool_rect.tag_name:
+		if c.is_in_group("VURects"):
+			if c.tag_name == trigger_vu_rect.tag_name:
 				return true
 	return false
 
-func get_if_trigger_has_actor_spawn(actor_spawn_tool) -> bool:
+func get_if_trigger_has_actor_spawn(actor_spawn) -> bool:
 	for c in get_children():
 		if c.is_in_group("ActorSpawns"):
-			if c.tag_name == actor_spawn_tool.tag_name:
+			if c.tag_name == actor_spawn.tag_name:
 				return true
 	return false
 
@@ -267,10 +267,10 @@ func on_property_changed(p_name, p_value):
 	match p_name:
 		"enemy_path":
 			for c in get_children():
-				if c.is_in_group("ActorSpawns") and c.is_tool:
+				if c.is_in_group("ActorSpawns") and c.is_model:
 					for ac in c.get_children():
 						if ac.is_in_group("WaypointLocals") or ac.is_in_group("WaypointGlobalSpawns") \
-						or ac.is_in_group("ToolVectors") or ac.is_in_group("ToolRects") or ac.is_in_group("ActorSpawns"):
+						or ac.is_in_group("VUVectors") or ac.is_in_group("VURects") or ac.is_in_group("ActorSpawns"):
 							ac.queue_free()
 					c.actor_path = p_value
 					c.reinitialize()
