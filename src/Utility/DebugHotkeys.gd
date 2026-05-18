@@ -1,6 +1,7 @@
 extends Node
 
 const DEBUG_INFO = preload("res://src/UI/DebugInfo/DebugInfo.tscn")
+const WIND_VISUAL = preload("res://src/UI/WindVisual.tscn")
 const LEVEL_EDITOR = preload("res://src/Editor/Editor.tscn")
 const POPUP = preload("res://src/UI/PopupText.tscn")
 const SHOP_MENU = preload("res://src/UI/ShopMenu/ShopMenu.tscn")
@@ -27,6 +28,9 @@ func _input(event):
 		if w.el.has_node("Editor"): return
 		debug_print()
 
+	if event.is_action_pressed("debug_wind"):
+		if w.el.has_node("Editor"): return
+		debug_wind()
 
 	if event.is_action_pressed("debug_reload"):
 		if w.el.has_node("Editor"): return
@@ -99,8 +103,14 @@ func debug_print():
 		w.dl.add_child(DEBUG_INFO.instantiate())
 	else:
 		w.dl.get_node("DebugInfo").queue_free()
-#
-#
+
+func debug_wind():
+	if !w.dl.has_node("WindVisual"):
+		print("showing wind visual")
+		w.dl.add_child(WIND_VISUAL.instantiate())
+	else:
+		w.dl.get_node("WindVisual").queue_free()
+
 func reload_level():
 	print("reloading level")
 	w.change_level_via_code(w.current_level.scene_file_path, false)

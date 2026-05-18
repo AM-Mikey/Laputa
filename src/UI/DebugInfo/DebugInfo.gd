@@ -1,7 +1,7 @@
 extends Control
 #TODO: this scene doesnt pass mouse input for some reason.
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
@@ -13,10 +13,10 @@ func _ready():
 		am.connect("players_updated", Callable(self, "_on_audio_players_updated"))
 		_on_guns_updated(pc.guns.get_children())
 
-	if world.is_release:
-		$VBox/General/Label.text = "Laputa " + world.internal_version + " (" + world.release_version+ ")"
+	if w.is_release:
+		$VBox/General/Label.text = "Laputa " + w.internal_version + " (" + w.release_version+ ")"
 	else:
-		$VBox/General/Label.text = "Laputa " + world.internal_version + " (" + world.development_stage+ ")"
+		$VBox/General/Label.text = "Laputa " + w.internal_version + " (" + w.development_stage+ ")"
 	_resolution_scale_changed(vs.resolution_scale)
 
 
@@ -65,9 +65,9 @@ func _physics_process(_delta):
 		$VBox/HBox/C2/A/SSP.text = str(pc.is_on_ssp)
 		$VBox/HBox/C2/A/Water.text = str(pc.is_in_water)
 
-		$VBox/HBox/C2/A/Front.text = str(world.get_node("Front").get_child_count())
-		$VBox/HBox/C2/A/Middle.text = str(world.get_node("Middle").get_child_count())
-		$VBox/HBox/C2/A/Back.text = str(world.get_node("Back").get_child_count())
+		$VBox/HBox/C2/A/Front.text = str(w.get_node("Front").get_child_count())
+		$VBox/HBox/C2/A/Middle.text = str(w.get_node("Middle").get_child_count())
+		$VBox/HBox/C2/A/Back.text = str(w.get_node("Back").get_child_count())
 
 		$VBox/HBox/C2/A/Main.text = str(ms.main_mission_stage[0])
 
@@ -108,4 +108,4 @@ func _clear_array(array):
 ### SIGNALS ###
 
 func _resolution_scale_changed(_resolution_scale):
-	size = get_tree().get_root().size / Vector2i(world.dl.scale)
+	size = get_tree().get_root().size / Vector2i(w.dl.scale)

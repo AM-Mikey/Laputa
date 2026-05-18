@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b0mu7r4mhbqji"]
+
+[ext_resource type="Script" uid="uid://dgy0n6fueile3" path="res://src/Utility/WindController.gd" id="1_brx80"]
+
+[node name="WindController" type="Node2D" unique_id=1817680800]
+script = ExtResource("1_brx80")

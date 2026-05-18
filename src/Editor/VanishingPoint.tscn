@@ -1,28 +1,27 @@
 [gd_scene format=3 uid="uid://dovj8uq00xato"]
 
-[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VisualUtility/VanishingPoint.gd" id="1_6byqu"]
+[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VanishingPoint.gd" id="1_6byqu"]
 [ext_resource type="Texture2D" uid="uid://bv4mdd2d4bysf" path="res://assets/Editor/VanishingPoint.png" id="2_os2xy"]
 [ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="3_os2xy"]
-
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
 
-[node name="VanishingPoint" type="Area2D" groups=["VanishingPoints"]]
+[node name="VanishingPoint" type="Area2D" unique_id=2052223351 groups=["VanishingPoints"]]
 z_index = 999
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("1_6byqu")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=468097100]
 shape = SubResource("1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1133607643]
 position = Vector2(-8, -8)
 texture = ExtResource("2_os2xy")
 centered = false
 
-[node name="BackgroundOutline" type="Panel" parent="."]
+[node name="BackgroundOutline" type="Panel" parent="." unique_id=294794145]
 modulate = Color(0, 1, 1, 0.5019608)
 custom_minimum_size = Vector2(200, 200)
 anchors_preset = 8

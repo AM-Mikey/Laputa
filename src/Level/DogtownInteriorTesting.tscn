@@ -11,10 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_0p40l"]
 [ext_resource type="Script" uid="uid://bkqwlyui5hbvy" path="res://src/Tile/DogtownInteriorAnimator.gd" id="7_85c3g"]
 [ext_resource type="Script" uid="uid://od834g8t6x33" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_uwfxm"]
-[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VisualUtility/VanishingPoint.tscn" id="9_ln0on"]
-[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VisualUtility/VanishingPoint.gd" id="11_byxhc"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="9_ln0on"]
+[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VanishingPoint.gd" id="11_byxhc"]
 [ext_resource type="Script" uid="uid://i43kyg3iw4cu" path="res://src/Effect/Light/SunLight.gd" id="13_3x46j"]
 [ext_resource type="Script" uid="uid://8n6tfcpb6rqw" path="res://src/Editor/SpawnPoint.gd" id="15_c1rcd"]
+
 
 
 [node name="DogtownInteriorTesting" type="Node2D" unique_id=1288213928]
