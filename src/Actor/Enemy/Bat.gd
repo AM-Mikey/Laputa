@@ -1,7 +1,7 @@
 extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/BatIcon.png")
-const WAYPOINT = preload("res://src/Editor/WaypointGlobal.tscn") #TODO: clean up waypoint implementation to match NPC
+const WAYPOINT = preload("res://src/Editor/VisualUtility/WaypointGlobal.tscn") #TODO: clean up waypoint implementation to match NPC
 
 @export var move_dir = Vector2.ZERO
 @export var flap_time = 0.1

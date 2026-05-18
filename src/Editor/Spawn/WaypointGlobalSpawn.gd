@@ -1,6 +1,6 @@
 extends Area2D
 
-const WAYPOINT_GLOBAL = preload("res://src/Editor/WaypointGlobal.tscn")
+const WAYPOINT_GLOBAL = preload("res://src/Editor/VisualUtility/WaypointGlobal.tscn")
 
 #@export var properties = {} #TODO: save and export hese
 @export var tag_name: String

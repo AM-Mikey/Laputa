@@ -593,10 +593,6 @@ WATER TODO:
 -beetle rotation fix
 
 
-SCREENSPAWNER TODO:
-make a whitelist of screenspawner compat enemies
-	test enemy compat 
-make a better name for tools
+create new visualutility for actor model
 
-SWOOPER TODO:
-swoop delay
+turn off debuglayer visible when in editor

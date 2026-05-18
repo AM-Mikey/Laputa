@@ -12,14 +12,15 @@
 [ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="9_w84y6"]
 [ext_resource type="PackedScene" uid="uid://xx5fbltdrdxk" path="res://src/Editor/Spawn/WaypointGlobalSpawn.tscn" id="10_ds6jv"]
 [ext_resource type="Script" uid="uid://nrubrkh2u04v" path="res://src/Editor/Spawn/PropSpawn.gd" id="10_xxkrx"]
-[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VisualUtility/VanishingPoint.tscn" id="12_alxy6"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="12_alxy6"]
 [ext_resource type="Script" uid="uid://doxxnsbh2jwk6" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="12_jcvae"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="13_jcvae"]
 [ext_resource type="Script" uid="uid://crvg1jvm67k7u" path="res://src/Editor/Spawn/WaypointGlobalSpawn.gd" id="14_kr1um"]
 [ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="15_xq3bb"]
 [ext_resource type="Script" uid="uid://od834g8t6x33" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="16_shtl7"]
-[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VisualUtility/VanishingPoint.gd" id="18_uuclg"]
+[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VanishingPoint.gd" id="18_uuclg"]
 [ext_resource type="Script" uid="uid://8n6tfcpb6rqw" path="res://src/Editor/SpawnPoint.gd" id="20_3v325"]
+
 
 
 [node name="ClimberTestZone" type="Node2D" unique_id=1952135705]

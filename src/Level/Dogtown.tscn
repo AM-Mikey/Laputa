@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="5_q8lop"]
 [ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_4qvu0"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="7_anwej"]
-[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VisualUtility/VanishingPoint.tscn" id="7_i4wap"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="7_i4wap"]
 [ext_resource type="Script" uid="uid://od834g8t6x33" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_aqway"]
 [ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="9_b7ing"]
 [ext_resource type="Script" uid="uid://nrubrkh2u04v" path="res://src/Editor/Spawn/PropSpawn.gd" id="10_vbnr3"]
@@ -18,8 +18,9 @@
 [ext_resource type="Script" uid="uid://doxxnsbh2jwk6" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="14_2xpek"]
 [ext_resource type="PackedScene" uid="uid://xx5fbltdrdxk" path="res://src/Editor/Spawn/WaypointGlobalSpawn.tscn" id="15_vbnr3"]
 [ext_resource type="Script" uid="uid://crvg1jvm67k7u" path="res://src/Editor/Spawn/WaypointGlobalSpawn.gd" id="16_6grhi"]
-[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VisualUtility/VanishingPoint.gd" id="16_vohvr"]
+[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VanishingPoint.gd" id="16_vohvr"]
 [ext_resource type="Script" uid="uid://8n6tfcpb6rqw" path="res://src/Editor/SpawnPoint.gd" id="18_qtlxt"]
+
 
 
 [node name="Dogtown" type="Node2D" unique_id=1604351222]

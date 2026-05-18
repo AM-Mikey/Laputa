@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://sw5a0ja4xk2f" path="res://src/Background/LevelLimiter.gd" id="3_yl4bd"]
 [ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="4_nkisl"]
 [ext_resource type="TileSet" uid="uid://cjt34mqcgd6o" path="res://src/Tile/CloudFactoryExterior.tres" id="5_owv0v"]
-[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VisualUtility/VanishingPoint.tscn" id="7_2d11i"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="7_2d11i"]
 [ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="7_w643x"]
 [ext_resource type="Script" uid="uid://djyfnyi3ldp7j" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_e7upw"]
 [ext_resource type="PackedScene" uid="uid://dim3av368jfya" path="res://src/Editor/VisualUtility/WaypointGlobal.tscn" id="8_owv0v"]
@@ -14,8 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="9_mrs6x"]
 [ext_resource type="Script" uid="uid://nrubrkh2u04v" path="res://src/Editor/Spawn/PropSpawn.gd" id="10_mrs6x"]
 [ext_resource type="Script" uid="uid://0l4a624mkqoj" path="res://src/Editor/VisualUtility/WaypointGlobal.gd" id="12_ea5be"]
-[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VisualUtility/VanishingPoint.gd" id="14_3ho07"]
+[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VanishingPoint.gd" id="14_3ho07"]
 [ext_resource type="Script" uid="uid://8n6tfcpb6rqw" path="res://src/Editor/SpawnPoint.gd" id="16_mqkkg"]
+
 
 
 [node name="CloudFactoryExterior" type="Node2D" unique_id=1604351222]

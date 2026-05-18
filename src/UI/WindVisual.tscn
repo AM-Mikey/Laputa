@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://b1441x4p4kohj"]
+
+[ext_resource type="Script" uid="uid://df7qjsea75qqs" path="res://src/UI/WindVisual.gd" id="1_ik21t"]
+
+[node name="WindVisual" type="MarginContainer" unique_id=688037945]
+offset_right = 480.0
+offset_bottom = 270.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+script = ExtResource("1_ik21t")
+
+[node name="Control" type="Control" parent="." unique_id=2099315121]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Control" unique_id=907358185]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Arrow" type="Control" parent="Control/Panel" unique_id=1997732495]
+anchors_preset = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="ArrowHead" type="Polygon2D" parent="Control/Panel/Arrow" unique_id=572562990]
+position = Vector2(3, 0)
+polygon = PackedVector2Array(0, -1, 3, 1, 0, 3)
+
+[node name="ArrowBody" type="Polygon2D" parent="Control/Panel/Arrow" unique_id=17568573]
+position = Vector2(3, 0)
+polygon = PackedVector2Array(0, 0, -3, 0, -3, 2, 0, 2)

@@ -6,10 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
 [ext_resource type="TileSet" uid="uid://hyq6f5pg0oh8" path="res://src/Tile/Temple.tres" id="5_j20xi"]
 [ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="5_oelck"]
-[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VisualUtility/VanishingPoint.tscn" id="6_c0ys6"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="6_c0ys6"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="7_06iwr"]
-[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VisualUtility/VanishingPoint.gd" id="8_oelck"]
+[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VanishingPoint.gd" id="8_oelck"]
 [ext_resource type="Script" uid="uid://8n6tfcpb6rqw" path="res://src/Editor/SpawnPoint.gd" id="10_8lkdd"]
+
 
 
 [node name="Temple" type="Node2D" unique_id=2129941240]

@@ -721,7 +721,7 @@ func set_trigger_spawn(trigger_path, pos):
 func set_misc(misc_path, pos):
 	var misc = load(misc_path).instantiate()
 
-	if misc_path == "res://src/Editor/WaypointGlobal.tscn":
+	if misc_path == "res://src/Editor/VisualUtility/WaypointGlobal.tscn":
 		misc.global_position = (pos * 16) + Vector2i(8, 8)
 		waypoint_collection.add_child(misc)
 		inspector.on_selected(misc, "misc")
@@ -735,7 +735,7 @@ func set_misc(misc_path, pos):
 			misc.free()
 			return
 
-	elif misc_path == "res://src/Editor/WaypointLocal.tscn":
+	elif misc_path == "res://src/Editor/VisualUtility/WaypointLocal.tscn":
 		if inspector.active_type in ["actor_spawn", "prop_spawn", "trigger_spawn"]:
 			misc.global_position = ((pos * 16) + Vector2i(8, 8)) - Vector2i(inspector.active.global_position)
 			inspector.active.add_child(misc) #don't select it though so we can add more
