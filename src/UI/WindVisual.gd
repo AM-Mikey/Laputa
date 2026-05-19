@@ -6,7 +6,8 @@ func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 
-
+func update_visual():
+	$Arrow.Rotation
 
 ### SIGNALS ###
 

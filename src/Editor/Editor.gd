@@ -92,6 +92,8 @@ func enter(): #Call this every time the level is changed or reloaded
 			t.queue_free()
 	for pw in get_tree().get_nodes_in_group("PhysWaters"):
 		pw.queue_free()
+	for pwc in get_tree().get_nodes_in_group("PhysWindColumns"):
+		pwc.queue_free()
 	if w.current_level.get_node("SSPMerges"):
 		w.current_level.get_node("SSPMerges").queue_free()
 	actor_collection = w.current_level.get_node("Actors")

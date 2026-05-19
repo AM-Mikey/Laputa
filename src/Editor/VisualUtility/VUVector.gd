@@ -7,7 +7,7 @@ const HANDLE_RADIUS := 4.0
 @export var arrow_length = 16.0
 @export var tag_name: String
 @export var index: int = 0
-@export var direction: Vector2 = Vector2.RIGHT:
+@export var direction: Vector2 = Vector2.RIGHT: #TODO: NOTE THIS CAUSES IMPERCEPTIBLY SMALL ERRORS, SO CHECKING FOR = VECTOR2.RIGHT WONT WORK. BEST TO USE .SNAPPED BEFORE YOU SET USING THIS
 	set(val):
 		direction = _snap_dir(val)
 		_update_arrow_visuals()

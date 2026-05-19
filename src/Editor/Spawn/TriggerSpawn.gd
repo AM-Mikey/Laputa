@@ -52,6 +52,7 @@ func initialize(): #first time set up properties
 		if p["usage"] & 4102 == 4102: #exported properties
 			properties[p["name"]] = [trigger.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
 	properties["id"] = [name, TYPE_STRING, ""]
+
 	for ac in trigger.get_children(): #TODO: add these to props and to waypoints
 		if ac.is_in_group("WaypointLocals"):
 			if !get_if_trigger_has_waypoint(ac):

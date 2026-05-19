@@ -166,7 +166,7 @@ alignment = 2
 deselect_on_focus_loss_enabled = false
 script = ExtResource("6_yjys0")
 
-[node name="LoadUnused" type="LineEdit" parent="HBox/HBox" unique_id=1239961595]
+[node name="Load" type="LineEdit" parent="HBox/HBox" unique_id=1239961595]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -216,8 +216,8 @@ mouse_filter = 2
 [connection signal="text_submitted" from="HBox/HBox/Int" to="." method="_on_int_complete"]
 [connection signal="focus_exited" from="HBox/HBox/Float" to="." method="_on_float_complete"]
 [connection signal="text_submitted" from="HBox/HBox/Float" to="." method="_on_float_complete"]
-[connection signal="focus_exited" from="HBox/HBox/LoadUnused" to="." method="_on_string_complete"]
-[connection signal="text_submitted" from="HBox/HBox/LoadUnused" to="." method="_on_string_complete"]
+[connection signal="focus_exited" from="HBox/HBox/Load" to="." method="_on_string_complete"]
+[connection signal="text_submitted" from="HBox/HBox/Load" to="." method="_on_string_complete"]
 [connection signal="focus_exited" from="HBox/HBox/Vector2X" to="." method="_on_vector2x_complete"]
 [connection signal="text_submitted" from="HBox/HBox/Vector2X" to="." method="_on_vector2x_complete"]
 [connection signal="focus_exited" from="HBox/HBox/Vector2Y" to="." method="_on_vector2y_complete"]

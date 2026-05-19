@@ -50,8 +50,33 @@ func initialize(): #first time set up properties
 	var prop = load(prop_path).instantiate()
 	for p in prop.get_property_list():
 		if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
-			properties[p["name"]] = [prop.get(p["name"]), p["type"]]
+			properties[p["name"]] = [prop.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
 	properties["id"] = [name, TYPE_STRING]
+	for ac in prop.get_children():
+		if ac.is_in_group("WaypointLocals"):
+			if !get_if_prop_has_waypoint(ac):
+				prop.remove_child(ac)
+				ac.owner = null
+				add_child(ac)
+				ac.owner = w.current_level
+		if ac.is_in_group("WaypointGlobalSpawns"):
+			if !get_if_prop_has_waypoint(ac):
+				prop.remove_child(ac)
+				ac.owner = null
+				add_child(ac)
+				ac.owner = w.current_level
+		if ac.is_in_group("VUVectors"):
+			if !get_if_prop_has_vu_vector(ac):
+				prop.remove_child(ac)
+				ac.owner = null
+				add_child(ac)
+				ac.owner = w.current_level
+		if ac.is_in_group("VURects"):
+			if !get_if_prop_has_vu_rect(ac):
+				prop.remove_child(ac)
+				ac.owner = null
+				add_child(ac)
+				ac.owner = w.current_level
 	prop.free()
 
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
@@ -63,7 +88,32 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 			if old_properties.has(p["name"]):
 				properties[p["name"]] = old_properties[p["name"]]
 			else:
-				properties[p["name"]] = [prop.get(p["name"]), p["type"]]
+				properties[p["name"]] = [prop.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
+	for ac in prop.get_children():
+		if ac.is_in_group("WaypointLocals"):
+			if !get_if_prop_has_waypoint(ac):
+				prop.remove_child(ac)
+				ac.owner = null
+				add_child(ac)
+				ac.owner = w.current_level
+		if ac.is_in_group("WaypointGlobalSpawns"):
+			if !get_if_prop_has_waypoint(ac):
+				prop.remove_child(ac)
+				ac.owner = null
+				add_child(ac)
+				ac.owner = w.current_level
+		if ac.is_in_group("VUVectors"):
+			if !get_if_prop_has_vu_vector(ac):
+				prop.remove_child(ac)
+				ac.owner = null
+				add_child(ac)
+				ac.owner = w.current_level
+		if ac.is_in_group("VURects"):
+			if !get_if_prop_has_vu_rect(ac):
+				prop.remove_child(ac)
+				ac.owner = null
+				add_child(ac)
+				ac.owner = w.current_level
 	prop.free()
 
 func spawn():
@@ -80,7 +130,52 @@ func spawn():
 		prop.global_position = Vector2(global_position.x, global_position.y - physics_prop_spawn_distance) #so that they don't clip through one-ways
 	else:
 		prop.global_position = global_position
+
+	for ac in prop.get_children(): #clear old from trigger
+		if ac.is_in_group("WaypointLocals") || ac.is_in_group("VUVectors") || ac.is_in_group("VURects"):
+			prop.remove_child(ac)
+		if ac.is_in_group("WaypointGlobalSpawns"): #turn off visibility
+			ac.visible = false
+
+	for c in get_children(): #add new from spawn
+		if c.is_in_group("WaypointLocals") || c.is_in_group("VUVectors") || c.is_in_group("VURects"):
+			var copy = c.duplicate()
+			prop.add_child(copy)
+
 	w.current_level.get_node("Props").call_deferred("add_child", prop)
+
+
+
+### GETTERS
+
+func get_if_prop_has_waypoint(waypoint) -> bool:
+	var out = false
+	for c in get_children():
+		if c.is_in_group("WaypointLocals"): #q: does this need to apply for global spawns as well?
+			if c.tag_name == waypoint.tag_name:
+				out = true
+	return out
+
+func get_if_prop_has_vu_vector(vu_vector) -> bool:
+	for c in get_children():
+		if c.is_in_group("VUVectors"):
+			if c.tag_name == vu_vector.tag_name:
+				return true
+	return false
+
+func get_if_prop_has_vu_rect(vu_rect) -> bool:
+	for c in get_children():
+		if c.is_in_group("VURects"):
+			if c.tag_name == vu_rect.tag_name:
+				return true
+	return false
+
+func get_if_prop_has_actor_spawn(actor_spawn) -> bool:
+	for c in get_children():
+		if c.is_in_group("ActorSpawns"):
+			if c.tag_name == actor_spawn.tag_name:
+				return true
+	return false
 
 
 

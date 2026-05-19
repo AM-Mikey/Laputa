@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://ccpeurojd18hr"]
+
+[ext_resource type="Script" uid="uid://jk7dd4awkfvv" path="res://src/Prop/PhysFan.gd" id="1_gjt0e"]
+[ext_resource type="Texture2D" uid="uid://dgpbiesdiqwdg" path="res://assets/Prop/PhysFan.png" id="2_rweh6"]
+[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="3_igokt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rweh6"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjt0e"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_gjt0e"]
+resource_name = "Off"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_igokt"]
+resource_name = "On"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_i7gnv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2rvec"]
+_data = {
+&"Off": SubResource("Animation_gjt0e"),
+&"On": SubResource("Animation_igokt"),
+&"RESET": SubResource("Animation_i7gnv")
+}
+
+[node name="PhysFan" type="CharacterBody2D" unique_id=1543445750 groups=["Entities", "Props"]]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_gjt0e")
+metadata/_custom_type_script = "uid://dkko72kbbon8e"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1758409351]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_rweh6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1813029342]
+texture = ExtResource("2_rweh6")
+centered = false
+hframes = 4
+vframes = 4
+
+[node name="WindVector" parent="." unique_id=872564127 instance=ExtResource("3_igokt")]
+position = Vector2(8, 8)
+direction = Vector2(-1, 0)
+snap_degrees = 90.0
+movement_locked = true
+
+[node name="WorldCast" type="RayCast2D" parent="." unique_id=2024427602]
+position = Vector2(8, 8)
+target_position = Vector2(-256, 0)
+collision_mask = 8
+
+[node name="EditorArea" type="Area2D" parent="." unique_id=2019635167]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea" unique_id=721308520]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_gjt0e")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1206385164]
+libraries/ = SubResource("AnimationLibrary_2rvec")
