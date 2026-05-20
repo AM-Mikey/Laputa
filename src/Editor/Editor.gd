@@ -693,7 +693,6 @@ func set_actor_spawn(actor_path, pos):
 		for b in get_tree().get_nodes_in_group("EnemyButtons"):
 			if b.active:
 				active_button = b
-		actor_spawn.properties["difficulty"] = [active_button.enemy_difficulty, TYPE_INT]
 	spawn_collection.add_child(actor_spawn)
 	actor_spawn.owner = w.current_level
 	actor_spawn.initialize()
