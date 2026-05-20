@@ -228,6 +228,8 @@ func _exit_tree() -> void:
 	for en in leftover_enemy:
 		if (is_instance_valid(en) and !en.is_queued_for_deletion()):
 			en.queue_free()
+	if (sample_enemy):
+		sample_enemy.queue_free()
 
 func _on_body_entered(body: Node2D):
 	if (!stop_on_player_exit and player_in_trigger):
