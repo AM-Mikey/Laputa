@@ -59,9 +59,9 @@ const PLACEHOLDER_ICON: Texture2D = preload("res://assets/Icon/ActorIcon.png")
 			actor.free()
 		else:
 			var new_shape: RectangleShape2D = RectangleShape2D.new()
-			new_shape.size = Vector2i(16, 16)
+			new_shape.size = Vector2i(12, 12)
 			$CollisionShape2D.shape = new_shape
-			$CollisionShape2D.position = new_shape.size / 2.0
+			$CollisionShape2D.position = Vector2(0, -6)
 		set_sprite()
 
 @export var properties = {}
