@@ -1,5 +1,7 @@
 extends Area2D
 
+const PLACEHOLDER_ICON: Texture2D = preload("res://assets/Icon/ActorIcon.png")
+
 @export_file var actor_path := "":
 	set(val):
 		actor_path = val
@@ -16,11 +18,51 @@ extends Area2D
 				collision_shape = actor.get_child(0)
 			$CollisionShape2D.shape = collision_shape.shape
 			$CollisionShape2D.position = collision_shape.position
+
+			# Borrow from Actor.reinitialize()
+			var old_properties = properties
+			properties = {}
+			for p in actor.get_property_list():
+				if p["usage"] & 4102 == 4102: #exported properties
+					if old_properties.has(p["name"]):
+						if (old_properties[p["name"]].size() == 2): #Backward compability
+							old_properties[p["name"]].append("")
+						properties[p["name"]] = old_properties[p["name"]]
+					else:
+						properties[p["name"]] = [actor.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
+
+			for ac in actor.get_children():
+				if ac.is_in_group("WaypointLocals"):
+					if !get_if_actor_has_waypoint(ac):
+						actor.remove_child(ac)
+						ac.owner = null
+						add_child(ac)
+						ac.owner = w.current_level
+				if ac.is_in_group("VUVectors"):
+					if !get_if_actor_has_vu_vector(ac):
+						actor.remove_child(ac)
+						ac.owner = null
+						add_child(ac)
+						ac.owner = w.current_level
+				if ac.is_in_group("VURects"):
+					if !get_if_actor_has_vu_rect(ac):
+						actor.remove_child(ac)
+						ac.owner = null
+						add_child(ac)
+						ac.owner = w.current_level
+				if ac.is_in_group("VUActors"):
+					if !get_if_actor_has_vu_rect(ac):
+						actor.remove_child(ac)
+						ac.owner = null
+						add_child(ac)
+						ac.owner = w.current_level
+			actor.free()
 		else:
 			var new_shape: RectangleShape2D = RectangleShape2D.new()
 			new_shape.size = Vector2i(16, 16)
 			$CollisionShape2D.shape = new_shape
 			$CollisionShape2D.position = new_shape.size / 2.0
+		set_sprite()
 
 @export var properties = {}
 @export var tag_name: String = ""
@@ -28,117 +70,11 @@ extends Area2D
 @onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
-	actor_path = actor_path
-
-	if (!FileAccess.file_exists(actor_path)):
-		return
-	#groups
-	var actor = load(actor_path).instantiate()
-
-	#collision shape
-	var collision_shape
-	if actor.has_node("CollisionShape2D"):
-		collision_shape = actor.get_node("CollisionShape2D")
-	elif actor.has_node("Standable"):
-		collision_shape = actor.get_node("Standable/CollisionShape2D")
-	else:
-		collision_shape = actor.get_child(0)
-	$CollisionShape2D.shape = collision_shape.shape
-	$CollisionShape2D.position = collision_shape.position
-
 	if w.el.get_child_count() == 0: #not in editor
 		visible = false
-		input_pickable = false
-
-	actor.free()
-
-func initialize(): #first time set up properties
-	#print("initialize")
-	if (actor_path != ""):
-		var actor = load(actor_path).instantiate()
-		for p in actor.get_property_list():
-			if p["usage"] & 4102 == 4102: #exported properties
-				if p["name"] == "difficulty":
-					properties[p["name"]] = [actor.get(p["name"]), TYPE_INT, ""]
-				else:
-					properties[p["name"]] = [actor.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
-		properties["id"] = [name, TYPE_STRING, ""]
-		set_sprite()
-
-
-		for ac in actor.get_children(): #TODO: add these to props and to waypoints
-			if ac.is_in_group("WaypointLocals"):
-				if !get_if_actor_has_waypoint(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-			if ac.is_in_group("WaypointGlobalSpawns"): #Not sure about this being here. what is this part realistically doing?
-				if !get_if_actor_has_waypoint(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-			if ac.is_in_group("VUVectors"):
-				if !get_if_actor_has_vu_vector(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-			if ac.is_in_group("VURects"):
-				if !get_if_actor_has_vu_rect(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-			if ac.is_in_group("VUActors"):
-				if !get_if_actor_has_vu_rect(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-		actor.free()
-
-func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
-	#print("re initialize")
-	if (actor_path != ""):
-		var old_properties = properties
-		properties = {}
-		var actor = load(actor_path).instantiate()
-		for p in actor.get_property_list():
-			if p["usage"] & 4102 == 4102: #exported properties
-				if old_properties.has(p["name"]):
-					if (old_properties[p["name"]].size() == 2): #Backward compability
-						old_properties[p["name"]].append("")
-					properties[p["name"]] = old_properties[p["name"]]
-				else:
-					properties[p["name"]] = [actor.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
-		set_sprite()
-
-		for ac in actor.get_children():
-			if ac.is_in_group("WaypointLocals"):
-				if !get_if_actor_has_waypoint(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-			if ac.is_in_group("VUVectors"):
-				if !get_if_actor_has_vu_vector(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-			if ac.is_in_group("VURects"):
-				if !get_if_actor_has_vu_rect(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-		actor.free()
 
 func spawn() -> Node:
-	if actor_path == "":
-		printerr("ERROR: no actor chosen in VUActor")
+	if !(FileAccess.file_exists(actor_path)):
 		return null
 
 	var actor = load(actor_path).instantiate()
@@ -151,11 +87,11 @@ func spawn() -> Node:
 	w.current_level.get_node("Actors").call_deferred("add_child", actor)
 
 	for ac in actor.get_children(): #clear old from actor
-		if ac.is_in_group("WaypointLocals") || ac.is_in_group("VUVectors") || ac.is_in_group("VURects") || ac.is_in_group("WaypointGlobalSpawns"):
+		if ac.is_in_group("WaypointLocals") || ac.is_in_group("VUVectors") || ac.is_in_group("VURects") || ac.is_in_group("VUActors") || ac.is_in_group("WaypointGlobalSpawns"):
 			actor.remove_child(ac)
 
 	for c in get_children(): #add new from spawn
-		if c.is_in_group("WaypointLocals") || c.is_in_group("VUVectors") || c.is_in_group("VURects"):
+		if c.is_in_group("WaypointLocals") || c.is_in_group("VUVectors") || c.is_in_group("VURects") || c.is_in_group("VUActors"):
 			var copy = c.duplicate()
 			actor.add_child(copy)
 
@@ -164,16 +100,25 @@ func spawn() -> Node:
 ### HELPERS ###
 
 func set_sprite():
-	var actor = load(actor_path).instantiate()
-	if "difficulty" in actor:
-		var texture_const_string = "TX_%s" % properties["difficulty"][0]
-		$Sprite2D.texture = actor.get(texture_const_string)
+	if (FileAccess.file_exists(actor_path)):
+		var actor = load(actor_path).instantiate()
+		if "difficulty" in actor:
+			var texture_const_string = "TX_%s" % properties["difficulty"][0]
+			$Sprite2D.texture = actor.get(texture_const_string)
+		else:
+			$Sprite2D.texture = actor.get_node("Sprite2D").texture
+		$Sprite2D.hframes = actor.get_node("Sprite2D").hframes
+		$Sprite2D.vframes = actor.get_node("Sprite2D").vframes
+		$Sprite2D.frame = actor.get_node("Sprite2D").frame
+		$Sprite2D.position = actor.get_node("Sprite2D").position
+		actor.free()
 	else:
-		$Sprite2D.texture = actor.get_node("Sprite2D").texture
-	$Sprite2D.hframes = actor.get_node("Sprite2D").hframes
-	$Sprite2D.vframes = actor.get_node("Sprite2D").vframes
-	$Sprite2D.frame = actor.get_node("Sprite2D").frame
-	$Sprite2D.position = actor.get_node("Sprite2D").position
+		$Sprite2D.texture = PLACEHOLDER_ICON
+		$Sprite2D.hframes = 1
+		$Sprite2D.vframes = 1
+		$Sprite2D.frame = 0
+		$Sprite2D.position = Vector2(0.0, - PLACEHOLDER_ICON.get_height() / 2.0)
+
 
 ### GETTERS
 
@@ -216,6 +161,10 @@ func on_editor_deselect():
 
 
 func _input_event(_viewport, event, _shape_idx): #selecting in editor
-	var inspector = w.get_node("EditorLayer/Editor").inspector
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
-		inspector.on_selected(self, "actor_spawn")
+	if w.get_node_or_null("EditorLayer/Editor"):
+		var inspector = w.get_node("EditorLayer/Editor").inspector
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
+			inspector.on_selected(self, "vu_actor")
+
+func on_property_changed(p_name, p_value):
+	pass

@@ -54,7 +54,6 @@ func _ready():
 	$SpawnTimer.wait_time = spawn_interval
 	spawn_area = $SpawnArea.value
 
-
 	if !FileAccess.file_exists(enemy_path):
 		w.emit_signal("finished_spawn_entities_step")
 		printerr("ScreenSpawner %s | _ready(): Invalid enemy_path %s" % [name, enemy_path])

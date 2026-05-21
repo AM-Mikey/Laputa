@@ -91,11 +91,11 @@ func on_editor_deselect():
 
 
 func on_pressed():
-	emit_signal("selected", self, "tool_vector")
-
+	emit_signal("selected", self, "vu_vector")
 
 func _input_event(_viewport, event, _shape_idx):
-	var editor = w.get_node("EditorLayer/Editor")
+	var editor = w.get_node_or_null("EditorLayer/Editor")
+	if (!editor): return
 	if !movement_locked:
 		if event is InputEventMouseButton and event.is_action_pressed("editor_rmb"):
-			editor.inspector.on_selected(self, "tool_vector")
+			editor.inspector.on_selected(self, "vu_vector")

@@ -36,7 +36,7 @@ func _input(event: InputEvent):
 
 	if event.is_action_released("editor_rmb") && state != "idle":
 		var inspector = main.w.get_node("EditorLayer/Editor").inspector
-		inspector.on_selected(main, "tool_rect")
+		inspector.on_selected(main, "vu_rect")
 		state = "idle"
 		editor.active_tool = editor.pre_grab_tool
 		editor.subtool = editor.pre_grab_subtool
@@ -109,4 +109,4 @@ func on_handle(handle):
 		drag_offset = global_position - get_global_mouse_position()
 
 	var inspector = main.w.get_node("EditorLayer/Editor").inspector
-	inspector.on_selected(main, "tool_rect")
+	inspector.on_selected(main, "vu_rect")

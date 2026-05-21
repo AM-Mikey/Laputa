@@ -129,6 +129,9 @@ func enter(): #Call this every time the level is changed or reloaded
 	for t in get_tree().get_nodes_in_group("VURects"):
 		t.visible = true
 		t._ready()
+	for t in get_tree().get_nodes_in_group("VUActors"):
+		t.visible = true
+		t._ready()
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
 		a.visible = true
 		a.input_pickable = true
@@ -194,7 +197,7 @@ func exit():
 
 	var visibility_change_list = ["SpawnPoints", "VanishingPoints", \
 	"WaypointGlobalSpawns", "WaypointGlobals", "WaypointLocals", \
-	"VUVectors", "VURects", "ActorSpawns", "PropSpawns", "TriggerSpawns"]
+	"VUVectors", "VURects", "VUActors", "ActorSpawns", "PropSpawns", "TriggerSpawns"]
 
 	for i in visibility_change_list:
 		for j in get_tree().get_nodes_in_group(i):

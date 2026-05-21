@@ -74,7 +74,7 @@ func display_data():
 			create_button("tile_mode", limiter.tile_mode, "enum", limiter.TileMode.keys())
 			create_button("back_tile_mode", limiter.back_tile_mode, "enum", limiter.TileMode.keys())
 			create_save_button("background")
-		"actor_spawn":
+		"actor_spawn", "vu_actor":
 			for p in active.properties:
 				if p == "dialog_json":
 					create_button("dialog_json", active.properties[p][0], "load")
@@ -117,7 +117,7 @@ func display_data():
 		"tile_map":
 			for layer_id in range(0, get_child_count()):
 				create_layer_button(layer_id)
-		"waypoint_local", "waypoint_global", "waypoint_global_spawn", "tool_vector", "tool_rect":
+		"waypoint_local", "waypoint_global", "waypoint_global_spawn", "vu_vector", "vu_rect":
 			create_properties_button(active.get_property_list())
 
 func get_property_type(type_flag, _is_load) -> String:
@@ -217,7 +217,7 @@ func on_property_selected(property_name):
 					$FileDialog.current_dir = "res://assets/Music/"
 					$FileDialog.set_filters(PackedStringArray(["*.wav"]))
 					$FileDialog.popup()
-		"actor_spawn":
+		"actor_spawn", "vu_actor":
 			match property_name:
 				"dialog_json":
 					$FileDialog.current_dir = "res://src/Dialog/"
@@ -262,7 +262,7 @@ func on_property_changed(property_name, property_value):
 				active.level_limiter.layer_height_offsets[layer_index] = property_value
 				active.level_limiter.setup_layers()
 
-		"actor_spawn":
+		"actor_spawn", "vu_actor":
 			active.properties[property_name][0] = property_value
 			active.on_property_changed(property_name, property_value)
 		"prop_spawn":

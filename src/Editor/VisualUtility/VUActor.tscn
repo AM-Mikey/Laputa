@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://crj4agnff8siv"]
 
 [ext_resource type="Script" uid="uid://bci36kfe5spdx" path="res://src/Editor/VisualUtility/VUActor.gd" id="1_i0s70"]
+[ext_resource type="Texture2D" uid="uid://fs47pbri8j1i" path="res://assets/Icon/ActorIcon.png" id="2_ngpi6"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(12, 12)
@@ -17,3 +18,5 @@ position = Vector2(0, -6)
 shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=988000690]
+position = Vector2(0, -8)
+texture = ExtResource("2_ngpi6")

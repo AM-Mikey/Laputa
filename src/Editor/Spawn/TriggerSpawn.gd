@@ -240,7 +240,6 @@ func on_editor_deselect():
 	modulate = Color(1,1,1,.75)
 	%Mid.disabled = true
 
-
 func on_handle(handle):
 	var editor = w.get_node("EditorLayer/Editor")
 	if editor.active_tool == "tile": return
@@ -266,11 +265,10 @@ func on_property_changed(p_name, p_value):
 	match p_name:
 		"enemy_path":
 			for c in get_children():
-				if c.is_in_group("VUActors") and c.is_model:
+				if c.is_in_group("VUActors"):
 					for ac in c.get_children():
 						if ac.is_in_group("WaypointLocals") or ac.is_in_group("WaypointGlobalSpawns") \
 						or ac.is_in_group("VUVectors") or ac.is_in_group("VURects") or ac.is_in_group("VUActors"):
 							ac.queue_free()
 					c.actor_path = p_value
-					c.reinitialize()
 					return
