@@ -139,10 +139,10 @@ func setup_kill_box():
 	var forgiveness_bottom = 64
 	var forgiveness_top = 64
 	var forgiveness_side = 64
-	kill_box.global_position = Vector2(ll.global_position.x - forgiveness_top, ll.global_position.y - forgiveness_side)
+	kill_box.global_position = Vector2(ll.global_position.x - forgiveness_side, ll.global_position.y - forgiveness_top)
 
 	var shape = RectangleShape2D.new()
-	shape.size = Vector2(ll.size.x + (forgiveness_side * 2.0), ll.size.x + forgiveness_top + forgiveness_bottom)
+	shape.size = Vector2(ll.size.x + (forgiveness_side * 2.0), ll.size.y + forgiveness_top + forgiveness_bottom)
 	kill_box.get_node("CollisionShape2D").shape = shape
 	kill_box.get_node("CollisionShape2D").position = shape.size / 2.0
 	$Triggers.add_child(kill_box)
