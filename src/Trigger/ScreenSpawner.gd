@@ -170,6 +170,8 @@ func _on_SpawnTimer_timeout() -> void:
 	var near_screen_ortho: float = curr_spawn_area_ortho_position + curr_spawn_area_ortho_size * randf()
 	var enemy_spread_on_ortho_min_section: int = ceil((spawn_area_ortho_position - near_screen_ortho) / enemy_distance_on_ortho)
 	var enemy_spread_on_ortho_max_section: int = floor((spawn_area_ortho_position + spawn_area_ortho_size - near_screen_ortho) / enemy_distance_on_ortho)
+	if (enemy_spread_on_ortho_max_section < enemy_spread_on_ortho_min_section): # Avoid no spawn when the spawn area is too thin
+		enemy_spread_on_ortho_max_section = enemy_spread_on_ortho_min_section
 
 	for i in range(0, to_spawn):
 		if (spawn_limit != - 1 and spawn_left <= 0):
@@ -177,7 +179,8 @@ func _on_SpawnTimer_timeout() -> void:
 		for j in range(enemy_spread_on_ortho_min_section, enemy_spread_on_ortho_max_section + 1):
 			if (spawn_limit != - 1 and spawn_left <= 0):
 				break
-			var curr_ortho_pos: float = near_screen_ortho + (j - 0.2 + 0.4 * randf()) * enemy_distance_on_ortho
+			var curr_ortho_pos: float = near_screen_ortho + j * enemy_distance_on_ortho
+			curr_ortho_pos += (-0.2 + 0.4 * randf()) * curr_spawn_area_ortho_size
 			if (spawn_area_ortho_position > curr_ortho_pos or spawn_area_ortho_position + spawn_area_ortho_size < curr_ortho_pos):
 				continue
 			var enemy = spawn_enemy()
@@ -223,6 +226,8 @@ func _exit_tree() -> void:
 	for en in leftover_enemy:
 		if (is_instance_valid(en) and !en.is_queued_for_deletion()):
 			en.queue_free()
+	if (sample_enemy):
+		sample_enemy.queue_free()
 
 func _on_body_entered(body: Node2D):
 	if (!stop_on_player_exit and player_in_trigger):

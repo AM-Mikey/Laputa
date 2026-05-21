@@ -18,7 +18,8 @@ const swoop_speed: float = 120.0
 const swoop_speed_thin: float = 90.0
 const screen_thin_threshold_x: float = 250.0
 ## The unit for all below constant is the distance of 1 cell in the grid
-@export var swoop_trigger_distance := 10.0
+@export var swoop_trigger_distance_max: float = 10.0
+const swoop_trigger_distance_min: float = 2.0
 
 const min_swoop_height: float = 2.0
 const max_swoop_height: float = 20.0
@@ -83,7 +84,8 @@ func do_fly(_delta):
 
 				var valid_to_swoop = player_height_relative >= min_swoop_height \
 				and player_height_relative <= max_swoop_height \
-				and player_distance_relative <= swoop_trigger_distance \
+				and player_distance_relative <= swoop_trigger_distance_max \
+				and player_distance_relative >= swoop_trigger_distance_min \
 				and player_direction_check
 
 				if !has_swoop and valid_to_swoop:
@@ -112,7 +114,7 @@ func enter_swoop(_prev_state: String):
 
 	# Derive swoop geometry from actual player position
 	var player_offset: Vector2 = player.global_position - global_position
-	var swoop_distance: float = clamp(abs(player_offset.x) / 16.0, min_swoop_distance, max_swoop_distance)
+	var swoop_distance: float = min(abs(floor(player_offset.x * 2.0 / 16.0)), max_swoop_distance)
 	var swoop_height: float = floor(player.global_position.y / 16.0) - floor(global_position.y / 16.0) - 0.5 # Aim at gun level instead of feet
 	var height_grid_offset: float = 16.0 - fmod(global_position.y, 16.0)
 
@@ -120,21 +122,23 @@ func enter_swoop(_prev_state: String):
 	var bottom_pos: Vector2 = Vector2(player.global_position.x, global_position.y + swoop_height * 16.0 + height_grid_offset)
 	var exit_pos: Vector2 = global_position + Vector2(player_offset.x * 2.0, 0.0)
 
-	# Clamp exit point to screen bounds on thin screens
-	if screen_too_thin_check:
-		var screen_rect: Rect2 = vs.get_screen_global_rect()
-		exit_pos.x = clamp(exit_pos.x, screen_rect.position.x, screen_rect.position.x + screen_rect.size.x)
+	# Clamp exit point to screen bounds on thin screens (Maybe not, it curves so bizzarely)
+	#if screen_too_thin_check:
+		#var screen_rect: Rect2 = vs.get_screen_global_rect()
+		#exit_pos.x = clamp(exit_pos.x, screen_rect.position.x, screen_rect.position.x + screen_rect.size.x)
 
 	swoop_t = 0.0
 	swoop_curve = Curve2D.new()
 
-	var swoop_toward_inner: float = clamp(
-		remap(abs(player_offset.x), min_swoop_distance * 16.0, max_swoop_distance * 16.0, 0.0, max_swoop_distance * 8.0),
-		0.0, max_swoop_distance / 8.0
-	) * clamp(swoop_distance / swoop_height, 1.0, 3.0)
-	var swoop_toward_outer: float = swoop_distance * 2.0
-	var swoop_toward_height: float = swoop_height * 16.0
 
+	var swoop_toward_inner: float = clamp(
+		remap(swoop_distance / 2.0, 0.0, max_swoop_distance, 0.0, max_swoop_distance),
+		0.0, max_swoop_distance
+	) * clamp(swoop_distance / swoop_height, 0.33, 3.0)
+
+	var swoop_toward_outer: float = swoop_distance * 2.0 if swoop_distance / swoop_height >= 1.0 \
+								 else swoop_distance * swoop_distance / swoop_height
+	var swoop_toward_height: float = swoop_height * 16.0
 	swoop_curve.add_point(global_position, Vector2.ZERO, Vector2(swoop_toward_inner * dir.x, swoop_toward_height))
 	swoop_curve.add_point(bottom_pos, Vector2(-swoop_toward_outer * dir.x, 0.0), Vector2(swoop_toward_outer * dir.x, 0.0))
 	swoop_curve.add_point(exit_pos, Vector2(-swoop_toward_inner * dir.x, swoop_toward_height), Vector2.ZERO)
@@ -148,7 +152,7 @@ func enter_swoop(_prev_state: String):
 		$Debug.points = points
 
 func do_swoop(delta: float):
-	var calc_speed: float = swoop_speed_thin if vs.get_screen_global_rect().size.x < screen_thin_threshold_x else swoop_speed
+	var calc_speed: float = swoop_speed
 	swoop_t += calc_speed * delta
 	var curr_transform: Transform2D = swoop_curve.sample_baked_with_rotation(swoop_t)
 	global_position = curr_transform.get_origin()
