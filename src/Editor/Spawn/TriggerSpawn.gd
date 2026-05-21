@@ -78,13 +78,12 @@ func initialize(): #first time set up properties
 				ac.owner = null
 				add_child(ac)
 				ac.owner = w.current_level
-		if ac.is_in_group("ActorSpawns"):
-			if !get_if_trigger_has_actor_spawn(ac):
+		if ac.is_in_group("VUActors"):
+			if !get_if_actor_has_vu_actor(ac):
 				trigger.remove_child(ac)
 				ac.owner = null
 				add_child(ac)
 				ac.owner = w.current_level
-				ac.initialize()
 	trigger.free()
 
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
@@ -125,6 +124,12 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 				add_child(ac)
 				ac.owner = w.current_level
 				ac.reinitialize()
+		if ac.is_in_group("VUActors"):
+			if !get_if_actor_has_vu_actor(ac):
+				trigger.remove_child(ac)
+				ac.owner = null
+				add_child(ac)
+				ac.owner = w.current_level
 
 	trigger.free()
 
@@ -229,6 +234,13 @@ func get_if_trigger_has_actor_spawn(actor_spawn) -> bool:
 	for c in get_children():
 		if c.is_in_group("ActorSpawns"):
 			if c.tag_name == actor_spawn.tag_name:
+				return true
+	return false
+
+func get_if_actor_has_vu_actor(actor_vu_act) -> bool:
+	for c in get_children():
+		if c.is_in_group("VUActors"):
+			if c.tag_name == actor_vu_act.tag_name:
 				return true
 	return false
 

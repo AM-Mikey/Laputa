@@ -1,35 +1,39 @@
 extends Area2D
 
-@export_file var actor_path := ""
+@export_file var actor_path := "":
+	set(val):
+		actor_path = val
+
+		if (FileAccess.file_exists(actor_path)):
+			var actor = load(actor_path).instantiate()
+
+			var collision_shape
+			if actor.has_node("CollisionShape2D"):
+				collision_shape = actor.get_node("CollisionShape2D")
+			elif actor.has_node("Standable"):
+				collision_shape = actor.get_node("Standable/CollisionShape2D")
+			else:
+				collision_shape = actor.get_child(0)
+			$CollisionShape2D.shape = collision_shape.shape
+			$CollisionShape2D.position = collision_shape.position
+		else:
+			var new_shape: RectangleShape2D = RectangleShape2D.new()
+			new_shape.size = Vector2i(16, 16)
+			$CollisionShape2D.shape = new_shape
+			$CollisionShape2D.position = new_shape.size / 2.0
+
 @export var properties = {}
 @export var tag_name: String = ""
 
 @onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
+	actor_path = actor_path
 
-	if actor_path == "":
-		printerr("ERROR: no actor chosen in ActorSpawn")
+	if (!FileAccess.file_exists(actor_path)):
 		return
-
 	#groups
-	if actor_path.begins_with("res://src/Actor/NPC/"):
-		add_to_group("NPCSpawns")
-	elif actor_path.begins_with("res://src/Actor/Enemy/"):
-		add_to_group("EnemySpawns")
-
 	var actor = load(actor_path).instantiate()
-
-	#name
-	var index = 0
-	for a in get_tree().get_nodes_in_group("ActorSpawns"):
-		if a == self: break
-		if a.actor_path == actor_path:
-			index +=1
-	if index == 0:
-		name = actor.name
-	else:
-		name = str(actor.name, index)
 
 	#collision shape
 	var collision_shape
@@ -45,6 +49,8 @@ func _ready():
 	if w.el.get_child_count() == 0: #not in editor
 		visible = false
 		input_pickable = false
+
+	actor.free()
 
 func initialize(): #first time set up properties
 	#print("initialize")
@@ -81,12 +87,6 @@ func initialize(): #first time set up properties
 					ac.owner = w.current_level
 			if ac.is_in_group("VURects"):
 				if !get_if_actor_has_vu_rect(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-			if ac.is_in_group("VUActors"):
-				if !get_if_actor_has_vu_actor(ac):
 					actor.remove_child(ac)
 					ac.owner = null
 					add_child(ac)
@@ -128,19 +128,12 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 					ac.owner = null
 					add_child(ac)
 					ac.owner = w.current_level
-			if ac.is_in_group("VUActors"):
-				if !get_if_actor_has_vu_actor(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
 		actor.free()
 
-func spawn():
+func spawn() -> Node:
 	if actor_path == "":
-		printerr("ERROR: no actor chosen in ActorSpawn")
-		w.emit_signal.call_deferred("finished_spawn_entities_step")
-		return
+		printerr("ERROR: no actor chosen in VUActor")
+		return null
 
 	var actor = load(actor_path).instantiate()
 	for p in properties:
@@ -160,7 +153,7 @@ func spawn():
 			var copy = c.duplicate()
 			actor.add_child(copy)
 
-
+	return actor
 
 ### HELPERS ###
 
