@@ -19,7 +19,8 @@ var direction = Vector2.ZERO
 var instant_fizzle = true
 
 var break_method = "cut"
-var is_enemy_bullet = false
+var is_wind_affected := false
+var is_enemy_bullet := false
 
 @onready var w = get_tree().get_root().get_node("World")
 @onready var rng = RandomNumberGenerator.new()

@@ -92,6 +92,8 @@ func enter(): #Call this every time the level is changed or reloaded
 			t.queue_free()
 	for pw in get_tree().get_nodes_in_group("PhysWaters"):
 		pw.queue_free()
+	for pwc in get_tree().get_nodes_in_group("PhysWindColumns"):
+		pwc.queue_free()
 	if w.current_level.get_node("SSPMerges"):
 		w.current_level.get_node("SSPMerges").queue_free()
 	actor_collection = w.current_level.get_node("Actors")
@@ -693,6 +695,8 @@ func set_actor_spawn(actor_path, pos):
 		for b in get_tree().get_nodes_in_group("EnemyButtons"):
 			if b.active:
 				active_button = b
+		if actor_spawn.properties.has("difficulty"):
+			actor_spawn.properties["difficulty"] = [active_button.enemy_difficulty, TYPE_INT, ""]
 	spawn_collection.add_child(actor_spawn)
 	actor_spawn.owner = w.current_level
 	actor_spawn.initialize()

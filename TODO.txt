@@ -596,3 +596,8 @@ WATER TODO:
 create new visualutility for actor model
 
 turn off debuglayer visible when in editor
+
+
+FANTODO:
+	remote switch activation (shooting switch or standing or activating)
+	looping sfx for things that are continuously activated

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1yngkh5hjc25"]
+[gd_scene format=3 uid="uid://d1yngkh5hjc25"]
 
 [ext_resource type="Script" uid="uid://b4obj4ymt6374" path="res://src/Prop/Lilypad.gd" id="1_kblue"]
 [ext_resource type="Texture2D" uid="uid://c67neolw1exkr" path="res://assets/Prop/Lilypad.png" id="2_xqncc"]
@@ -12,36 +12,36 @@ size = Vector2(16, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xqncc"]
 size = Vector2(16, 16)
 
-[node name="Lilypad" type="CharacterBody2D" groups=["Entities", "Props"]]
+[node name="Lilypad" type="CharacterBody2D" unique_id=1228460793 groups=["Entities", "Props"]]
 collision_layer = 512
 collision_mask = 0
 script = ExtResource("1_kblue")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1637484727]
 position = Vector2(8, 1.5)
 shape = SubResource("RectangleShape2D_tv77v")
 one_way_collision = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=384673365]
 z_index = 2
 texture = ExtResource("2_xqncc")
 centered = false
 hframes = 2
 
-[node name="CBDetector" type="Area2D" parent="."]
+[node name="CBDetector" type="Area2D" parent="." unique_id=449573792]
 position = Vector2(0, -1)
 collision_layer = 0
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CBDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CBDetector" unique_id=688726467]
 position = Vector2(8, 0.5)
 shape = SubResource("RectangleShape2D_r01ty")
 
-[node name="EditorArea" type="Area2D" parent="."]
+[node name="EditorArea" type="Area2D" parent="." unique_id=971949875]
 collision_layer = 0
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea" unique_id=377297390]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_xqncc")
 debug_color = Color(0, 0.6, 0.69803923, 0)

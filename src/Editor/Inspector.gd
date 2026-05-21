@@ -87,7 +87,9 @@ func display_data():
 						create_button(p, active.properties[p][0], "enum", enum_keys)
 					else:
 						create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
-
+		"prop_spawn":
+			for p in active.properties:
+				create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
 		"trigger_spawn":
 			for p in active.properties:
 				if p == "direction":
@@ -103,8 +105,6 @@ func display_data():
 						create_button(p, active.properties[p][0], "enum", enum_keys)
 					else:
 						create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
-		"prop":
-			create_properties_button(active.get_property_list())
 		"level":
 			create_button("level_name", active.level_name, "string")
 			create_button("level_type", active.level_type, "enum", active.LevelType.keys())
@@ -263,6 +263,8 @@ func on_property_changed(property_name, property_value):
 				active.level_limiter.setup_layers()
 
 		"actor_spawn":
+			active.properties[property_name][0] = property_value
+		"prop_spawn":
 			active.properties[property_name][0] = property_value
 		"trigger_spawn":
 			active.properties[property_name][0] = property_value

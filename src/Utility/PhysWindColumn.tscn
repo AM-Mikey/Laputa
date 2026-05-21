@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dw7sedue7iyox"]
+
+[ext_resource type="Script" uid="uid://duvrih0ykirci" path="res://src/Utility/PhysWindColumn.gd" id="1_t7hjx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bes6g"]
+resource_local_to_scene = true
+size = Vector2(16, 16)
+
+[node name="PhysWindColumn" type="Node2D" unique_id=80866750 groups=["PhysWindColumns"]]
+script = ExtResource("1_t7hjx")
+
+[node name="BodyDetector" type="Area2D" parent="." unique_id=570737577]
+collision_layer = 0
+collision_mask = 9283
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyDetector" unique_id=1362003307]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_bes6g")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=539494460]
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(1, 1, 1, 0.12941177)
+
+[connection signal="body_entered" from="BodyDetector" to="." method="_on_BodyDetector_body_entered"]
+[connection signal="body_exited" from="BodyDetector" to="." method="_on_BodyDetector_body_exited"]

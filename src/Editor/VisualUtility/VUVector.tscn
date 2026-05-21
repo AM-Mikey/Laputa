@@ -8,7 +8,7 @@ size = Vector2(8, 8)
 [sub_resource type="CircleShape2D" id="CircleTip"]
 radius = 4.0
 
-[node name="VUVector" type="Area2D" unique_id=872564127 groups=["Entities", "VUVector", "VisualUtilities"]]
+[node name="VUVector" type="Area2D" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"]]
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("1_tvec")
