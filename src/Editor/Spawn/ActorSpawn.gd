@@ -152,15 +152,13 @@ func spawn():
 	w.current_level.get_node("Actors").call_deferred("add_child", actor)
 
 	for ac in actor.get_children(): #clear old from actor
-		if ac.is_in_group("WaypointLocals") || ac.is_in_group("VUVectors") || ac.is_in_group("VURects") || ac.is_in_group("WaypointGlobalSpawns"):
+		if ac.is_in_group("WaypointLocals") || ac.is_in_group("VUVectors") || ac.is_in_group("VURects") || ac.is_in_group("VUActors") || ac.is_in_group("WaypointGlobalSpawns"):
 			actor.remove_child(ac)
 
 	for c in get_children(): #add new from spawn
-		if c.is_in_group("WaypointLocals") || c.is_in_group("VUVectors") || c.is_in_group("VURects"):
+		if c.is_in_group("WaypointLocals") || c.is_in_group("VUVectors") || c.is_in_group("VURects") || c.is_in_group("VUActors"):
 			var copy = c.duplicate()
 			actor.add_child(copy)
-
-
 
 ### HELPERS ###
 
@@ -221,3 +219,6 @@ func _input_event(_viewport, event, _shape_idx): #selecting in editor
 		var inspector = w.get_node("EditorLayer/Editor").inspector
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
 			inspector.on_selected(self, "actor_spawn")
+
+func on_property_changed(p_name, p_value):
+	pass

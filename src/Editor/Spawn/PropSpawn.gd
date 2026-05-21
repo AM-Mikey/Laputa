@@ -77,6 +77,12 @@ func initialize(): #first time set up properties
 				ac.owner = null
 				add_child(ac)
 				ac.owner = w.current_level
+		if ac.is_in_group("VUActors"):
+			if !get_if_prop_has_vu_actor(ac):
+				prop.remove_child(ac)
+				ac.owner = null
+				add_child(ac)
+				ac.owner = w.current_level
 	prop.free()
 
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
@@ -114,6 +120,12 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 				ac.owner = null
 				add_child(ac)
 				ac.owner = w.current_level
+		if ac.is_in_group("VUActors"):
+			if !get_if_prop_has_vu_actor(ac):
+				prop.remove_child(ac)
+				ac.owner = null
+				add_child(ac)
+				ac.owner = w.current_level
 	prop.free()
 
 func spawn():
@@ -132,19 +144,17 @@ func spawn():
 		prop.global_position = global_position
 
 	for ac in prop.get_children(): #clear old from trigger
-		if ac.is_in_group("WaypointLocals") || ac.is_in_group("VUVectors") || ac.is_in_group("VURects"):
+		if ac.is_in_group("WaypointLocals") || ac.is_in_group("VUVectors") || ac.is_in_group("VURects") || ac.is_in_group("VUActors"):
 			prop.remove_child(ac)
 		if ac.is_in_group("WaypointGlobalSpawns"): #turn off visibility
 			ac.visible = false
 
 	for c in get_children(): #add new from spawn
-		if c.is_in_group("WaypointLocals") || c.is_in_group("VUVectors") || c.is_in_group("VURects"):
+		if c.is_in_group("WaypointLocals") || c.is_in_group("VUVectors") || c.is_in_group("VURects") || c.is_in_group("VUActors"):
 			var copy = c.duplicate()
 			prop.add_child(copy)
 
 	w.current_level.get_node("Props").call_deferred("add_child", prop)
-
-
 
 ### GETTERS
 
@@ -170,13 +180,12 @@ func get_if_prop_has_vu_rect(vu_rect) -> bool:
 				return true
 	return false
 
-func get_if_prop_has_actor_spawn(actor_spawn) -> bool:
+func get_if_prop_has_vu_actor(vu_actor) -> bool:
 	for c in get_children():
-		if c.is_in_group("ActorSpawns"):
-			if c.tag_name == actor_spawn.tag_name:
+		if c.is_in_group("VUActors"):
+			if c.tag_name == vu_actor.tag_name:
 				return true
 	return false
-
 
 
 ### SIGNALS
@@ -192,3 +201,6 @@ func _input_event(_viewport, event, _shape_idx): #selecting in editor
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
 		var inspector = w.get_node("EditorLayer/Editor").inspector
 		inspector.on_selected(self, "prop_spawn")
+
+func on_property_changed(p_name, p_value):
+	pass

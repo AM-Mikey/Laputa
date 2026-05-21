@@ -91,6 +91,12 @@ func initialize(): #first time set up properties
 					ac.owner = null
 					add_child(ac)
 					ac.owner = w.current_level
+			if ac.is_in_group("VUActors"):
+				if !get_if_actor_has_vu_rect(ac):
+					actor.remove_child(ac)
+					ac.owner = null
+					add_child(ac)
+					ac.owner = w.current_level
 		actor.free()
 
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
