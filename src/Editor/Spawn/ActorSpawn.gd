@@ -72,7 +72,7 @@ func _ready():
 			input_pickable = false
 
 func initialize(): #first time set up properties
-	#print("initialize")
+	print("initialize")
 	if (actor_path != ""):
 		var actor = load(actor_path).instantiate()
 		for p in actor.get_property_list():
