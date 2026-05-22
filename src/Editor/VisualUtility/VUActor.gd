@@ -2,7 +2,9 @@ extends Area2D
 
 const PLACEHOLDER_ICON: Texture2D = preload("res://assets/Icon/ActorIcon.png")
 
-@export var actor_path := "":
+enum ActorTeamFilter {NONE, ENEMY, NPC}
+
+@export var actor_path: String = "":
 	set(val):
 		actor_path = val
 
@@ -65,9 +67,13 @@ const PLACEHOLDER_ICON: Texture2D = preload("res://assets/Icon/ActorIcon.png")
 
 			properties = {}
 		set_sprite()
+@export var filter_team: ActorTeamFilter = ActorTeamFilter.NONE
+## Use comma (,) to seperate actor
+## Will be confined by filter_team if filter_team != ActorTeamFilter.NONE
+@export var filter_actor: String = ""
+@export var tag_name: String = ""
 
 @export var properties = {}
-@export var tag_name: String = ""
 
 @onready var w = get_tree().get_root().get_node("World")
 

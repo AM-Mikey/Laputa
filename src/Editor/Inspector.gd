@@ -77,6 +77,10 @@ func display_data():
 		"actor_spawn", "vu_actor":
 			if (active_type == "vu_actor"):
 				create_button("actor_path", active.actor_path, "load")
+				create_properties_button(active.get_property_list().filter(func (ele): return ele["name"] not in ["actor_path", "properties"]))
+				var actor_label = $Margin/VBox/Label.duplicate()
+				actor_label.text = active.actor_path.split("/")[-1].rstrip(".tscn")
+				$Margin/VBox/Scroll/VBox.add_child.call_deferred(actor_label)
 			for p in active.properties:
 				if p == "dialog_json":
 					create_button("dialog_json", active.properties[p][0], "load")
@@ -152,7 +156,7 @@ func create_properties_button(property_list):
 					enum_keys = enum_keys.map(func (ele): return ele.split(":", false)[0])
 				create_button(p["name"], active.get(p["name"]), "enum", enum_keys)
 			else:
-				create_button(p["name"], active.get(p["name"]), p["type"])
+				create_button(p["name"], active.get(p["name"]), get_property_type(p["type"], false))
 
 
 func create_button(property, value, type = TYPE_NIL, enum_items = []):
@@ -222,8 +226,20 @@ func on_property_selected(property_name):
 			match property_name:
 				"actor_path":
 					if (active_type == "vu_actor"):
-						$FileDialog.current_dir = "res://src/Actor"
-						$FileDialog.set_filters(PackedStringArray(["*.tscn"]))
+						var start_dir = "res://src/Actor"
+						if (active.filter_team != active.ActorTeamFilter.NONE):
+							if (active.filter_team == active.ActorTeamFilter.ENEMY):
+								start_dir = "res://src/Actor/Enemy"
+							else:
+								start_dir = "res://src/Actor/NPC"
+						var filter_actor = active.filter_actor.strip_edges().split(",", false)
+						for i in range(0, filter_actor.size()):
+							filter_actor[i] = filter_actor[i].strip_edges() + ".tscn"
+						$FileDialog.current_dir = start_dir
+						if (filter_actor.size() > 0):
+							$FileDialog.set_filters(filter_actor)
+						else:
+							$FileDialog.set_filters(["*.tscn"])
 						$FileDialog.popup()
 				"dialog_json":
 					$FileDialog.current_dir = "res://src/Dialog/"
@@ -264,8 +280,8 @@ func on_property_changed(property_name, property_value):
 				active.level_limiter.setup_layers()
 
 		"actor_spawn", "vu_actor":
-			if (active_type == "vu_actor" and property_name == "actor_path"):
-				active.actor_path = property_value
+			if (active_type == "vu_actor" and property_name in ["actor_path", "filter_team", "filter_actor", "tag_name"]):
+				active.set(property_name, property_value)
 			else:
 				active.properties[property_name][0] = property_value
 			active.on_property_changed(property_name, property_value)

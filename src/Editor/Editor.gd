@@ -726,7 +726,6 @@ func set_trigger_spawn(trigger_path, pos):
 
 func set_misc(misc_path, pos):
 	var misc = load(misc_path).instantiate()
-	print(misc_path)
 
 	if misc_path == "res://src/Editor/VisualUtility/WaypointGlobal.tscn":
 		misc.global_position = (pos * 16) + Vector2i(8, 8)

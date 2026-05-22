@@ -24,6 +24,8 @@ shape = SubResource("1")
 tag_name = "SpawnArea"
 
 [node name="VUActor" parent="." unique_id=1199277091 instance=ExtResource("3_i70y7")]
+filter_team = 1
+filter_actor = "Ornithopter"
 tag_name = "spawn_actor"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
