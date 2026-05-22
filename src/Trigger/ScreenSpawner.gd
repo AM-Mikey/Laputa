@@ -58,12 +58,6 @@ func _ready():
 		printerr("ScreenSpawner %s | _ready(): Invalid enemy at %s!" % [name, $VUActor.actor_path])
 		w.emit_signal("finished_spawn_entities_step")
 		return
-	elif !sample_enemy.is_in_group("ScreenSpawnerCompatible"):
-		printerr("ScreenSpawner %s | _ready(): Enemy at %s isn't in ScreenSpawnerCompatible group!" % [name, $VUActor.actor_path])
-		sample_enemy.queue_free()
-		w.emit_signal("finished_spawn_entities_step")
-		return
-
 
 	sample_enemy_og_process_mode = sample_enemy.process_mode
 	sample_enemy_og_visible = sample_enemy.visible
