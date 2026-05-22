@@ -1,7 +1,5 @@
 extends Trigger
 
-## Which enemy to spawn
-@export_file var enemy_path: String = ""
 ## How many enemy per spawn
 #@export var enemy_per_spawn: int = 1
 ## Spawn a new enemy after specified interval, given the spawner does not spawn more than [member=max_enemy_on_screen]
@@ -54,20 +52,19 @@ func _ready():
 	$SpawnTimer.wait_time = spawn_interval
 	spawn_area = $SpawnArea.value
 
-	if !FileAccess.file_exists(enemy_path):
+	sample_enemy = $VUActor.spawn()
+
+	if !sample_enemy:
+		printerr("ScreenSpawner %s | _ready(): Invalid enemy at %s!" % [name, $VUActor.actor_path])
 		w.emit_signal("finished_spawn_entities_step")
-		printerr("ScreenSpawner %s | _ready(): Invalid enemy_path %s" % [name, enemy_path])
 		return
-
-	sample_enemy = load(enemy_path).instantiate()
-
-	if !sample_enemy.is_in_group("ScreenSpawnerCompatible"):
-		printerr("ScreenSpawner %s | _ready(): Enemy at %s isn't in ScreenSpawnerCompatible group!" % [name, enemy_path])
+	elif !sample_enemy.is_in_group("ScreenSpawnerCompatible"):
+		printerr("ScreenSpawner %s | _ready(): Enemy at %s isn't in ScreenSpawnerCompatible group!" % [name, $VUActor.actor_path])
 		sample_enemy.queue_free()
 		w.emit_signal("finished_spawn_entities_step")
 		return
 
-	sample_enemy = $VUActor.spawn()
+
 	sample_enemy_og_process_mode = sample_enemy.process_mode
 	sample_enemy_og_visible = sample_enemy.visible
 	sample_enemy.process_mode = ProcessMode.PROCESS_MODE_DISABLED

@@ -2,7 +2,7 @@ extends Area2D
 
 const PLACEHOLDER_ICON: Texture2D = preload("res://assets/Icon/ActorIcon.png")
 
-@export_file var actor_path := "":
+@export var actor_path := "":
 	set(val):
 		actor_path = val
 
@@ -62,6 +62,8 @@ const PLACEHOLDER_ICON: Texture2D = preload("res://assets/Icon/ActorIcon.png")
 			new_shape.size = Vector2i(12, 12)
 			$CollisionShape2D.shape = new_shape
 			$CollisionShape2D.position = Vector2(0, -6)
+
+			properties = {}
 		set_sprite()
 
 @export var properties = {}

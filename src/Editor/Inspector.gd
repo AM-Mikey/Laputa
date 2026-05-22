@@ -75,6 +75,8 @@ func display_data():
 			create_button("back_tile_mode", limiter.back_tile_mode, "enum", limiter.TileMode.keys())
 			create_save_button("background")
 		"actor_spawn", "vu_actor":
+			if (active_type == "vu_actor"):
+				create_button("actor_path", active.actor_path, "load")
 			for p in active.properties:
 				if p == "dialog_json":
 					create_button("dialog_json", active.properties[p][0], "load")
@@ -202,7 +204,6 @@ func on_property_selected(property_name):
 					$FileDialog.current_dir = "res://assets/Background/"
 					$FileDialog.set_filters(PackedStringArray(["*.png"]))
 					$FileDialog.popup()
-
 		"level":
 			match property_name:
 				"tile_set":
@@ -219,6 +220,11 @@ func on_property_selected(property_name):
 					$FileDialog.popup()
 		"actor_spawn", "vu_actor":
 			match property_name:
+				"actor_path":
+					if (active_type == "vu_actor"):
+						$FileDialog.current_dir = "res://src/Actor"
+						$FileDialog.set_filters(PackedStringArray(["*.tscn"]))
+						$FileDialog.popup()
 				"dialog_json":
 					$FileDialog.current_dir = "res://src/Dialog/"
 					$FileDialog.set_filters(PackedStringArray(["*.json"]))
@@ -229,11 +235,6 @@ func on_property_selected(property_name):
 					$FileDialog.current_dir = "res://src/Level/"
 					$FileDialog.set_filters(PackedStringArray(["*.tscn"]))
 					$FileDialog.popup()
-				"enemy_path":
-					$FileDialog.current_dir = "res://src/Actor/Enemy/"
-					$FileDialog.set_filters(PackedStringArray(["*.tscn"]))
-					$FileDialog.popup()
-
 
 
 func on_property_changed(property_name, property_value):
@@ -263,7 +264,10 @@ func on_property_changed(property_name, property_value):
 				active.level_limiter.setup_layers()
 
 		"actor_spawn", "vu_actor":
-			active.properties[property_name][0] = property_value
+			if (active_type == "vu_actor" and property_name == "actor_path"):
+				active.actor_path = property_value
+			else:
+				active.properties[property_name][0] = property_value
 			active.on_property_changed(property_name, property_value)
 		"prop_spawn":
 			active.properties[property_name][0] = property_value

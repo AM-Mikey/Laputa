@@ -262,13 +262,4 @@ func on_handle(handle):
 	inspector.on_selected(self, "trigger_spawn")
 
 func on_property_changed(p_name, p_value):
-	match p_name:
-		"enemy_path":
-			for c in get_children():
-				if c.is_in_group("VUActors"):
-					for ac in c.get_children():
-						if ac.is_in_group("WaypointLocals") or ac.is_in_group("WaypointGlobalSpawns") \
-						or ac.is_in_group("VUVectors") or ac.is_in_group("VURects") or ac.is_in_group("VUActors"):
-							ac.queue_free()
-					c.actor_path = p_value
-					return
+	pass
