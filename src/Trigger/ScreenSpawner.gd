@@ -63,6 +63,7 @@ func _ready():
 	sample_enemy_og_visible = sample_enemy.visible
 	sample_enemy.process_mode = ProcessMode.PROCESS_MODE_DISABLED
 	sample_enemy.global_position = Vector2(-1000000000, -1000000000)
+	actors.add_child(sample_enemy)
 	enemy_speed = sample_enemy.speed
 
 	var collision_shape = null
@@ -73,12 +74,124 @@ func _ready():
 	else:
 		collision_shape = sample_enemy.get_child(0)
 	enemy_size = collision_shape.shape.get_rect().size
-	actors.add_child(sample_enemy)
 
 	if (spawn_limit != -1):
 		spawn_left = spawn_limit
 
 	w.emit_signal("finished_spawn_entities_step")
+
+### UTILITY
+func spawn_enemy() -> Node:
+	if (!sample_enemy):
+		printerr("ScreenSpawner %s: Cannot find the sample enemy!" % [name])
+		return null
+	var res: Node = sample_enemy.duplicate()
+	res.visible = sample_enemy_og_visible
+	res.process_mode = sample_enemy_og_process_mode
+	return res
+
+func get_screen_edge_position() -> float:
+	var screen_rect: Rect2 = vs.get_screen_global_rect()
+	var screen_size: Vector2 = screen_rect.size
+	var screen_position: Vector2 = screen_rect.position
+	match curr_spawn_direction:
+		Vector2.LEFT:
+			return screen_position.x + screen_size.x
+		Vector2.RIGHT:
+			return screen_position.x
+		Vector2.UP:
+			return screen_position.y + screen_size.y
+		Vector2.DOWN:
+			return screen_position.y
+	return 0.0
+
+
+
+### SIGNAL ###
+func _exit_tree() -> void:
+	for en in processed_enemy:
+		if (is_instance_valid(en)):
+			en.queue_free()
+	for en in leftover_enemy:
+		if (is_instance_valid(en) and !en.is_queued_for_deletion()):
+			en.queue_free()
+	if (sample_enemy):
+		sample_enemy.queue_free()
+
+func _on_body_entered(body: Node2D):
+	if (!stop_on_player_exit and player_in_trigger):
+		return
+
+	var detection_rect: Rect2 = Rect2($CollisionShape2D.global_position - $CollisionShape2D.shape.size / 2.0 , $CollisionShape2D.shape.size)
+	var player_x_percent: float = (body.global_position.x - detection_rect.position.x) / detection_rect.size.x
+	var player_y_percent: float = (body.global_position.y - detection_rect.position.y) / detection_rect.size.y
+	if (spawn_direction_override == Vector2.ZERO):
+		if (spawn_horizontal and !spawn_vertical):
+			if (player_x_percent <= 0.5):
+				curr_spawn_direction = Vector2.LEFT if spawn_facing_player else Vector2.RIGHT
+			else:
+				curr_spawn_direction = Vector2.RIGHT if spawn_facing_player else Vector2.LEFT
+		elif (spawn_vertical and !spawn_horizontal):
+			if (player_y_percent <= 0.5):
+				curr_spawn_direction = Vector2.UP if spawn_facing_player else Vector2.DOWN
+			else:
+				curr_spawn_direction = Vector2.DOWN if spawn_facing_player else Vector2.UP
+		elif (spawn_vertical and spawn_horizontal):
+			var check_x_left: float = player_y_percent
+			var check_x_right: float = 1.0 - player_y_percent
+
+			if (player_y_percent <= 0.5):
+				if (player_x_percent >= check_x_left and player_x_percent <= check_x_right):
+					curr_spawn_direction = Vector2.UP if spawn_facing_player else Vector2.DOWN
+				elif player_x_percent < check_x_left:
+					curr_spawn_direction = Vector2.LEFT if spawn_facing_player else Vector2.RIGHT
+				else:
+					curr_spawn_direction = Vector2.RIGHT if spawn_facing_player else Vector2.LEFT
+			else:
+				if (player_x_percent >= check_x_right and player_x_percent <= check_x_left):
+					curr_spawn_direction = Vector2.DOWN if spawn_facing_player else Vector2.UP
+				elif player_x_percent < check_x_right:
+					curr_spawn_direction = Vector2.LEFT if spawn_facing_player else Vector2.RIGHT
+				else:
+					curr_spawn_direction = Vector2.RIGHT if spawn_facing_player else Vector2.LEFT
+	else:
+		curr_spawn_direction = spawn_direction_override
+
+	player_in_trigger = true
+	$StartTimer.start()
+
+func _on_body_exited(body: Node2D):
+	if (is_queued_for_deletion() or !stop_on_player_exit):
+		return
+
+	if (body is CharacterBody2D and body.get_collision_layer_value(1)):
+		if (body.get_parent().dead or body.get_parent().is_queued_for_deletion()):
+			return
+
+	player_in_trigger = false
+
+	var screen_edge: float = get_screen_edge_position()
+
+	for en in processed_enemy:
+		if !(en):
+			continue
+		match curr_spawn_direction:
+			Vector2.LEFT:
+				if (en.global_position.x > screen_edge):
+					en.queue_free()
+			Vector2.RIGHT:
+				if (en.global_position.x < screen_edge):
+					en.queue_free()
+			Vector2.UP:
+				if (en.global_position.y > screen_edge):
+					en.queue_free()
+			Vector2.DOWN:
+				if (en.global_position.y < screen_edge):
+					en.queue_free()
+	processed_enemy = processed_enemy.filter(func (ele): return ele and !ele.dead and !ele.is_queued_for_deletion())
+	leftover_enemy.append_array(processed_enemy)
+	processed_enemy = []
+	$SpawnTimer.stop()
 
 func _on_SpawnTimer_timeout() -> void:
 	if (spawn_limit != - 1 and spawn_left <= 0 or !sample_enemy):
@@ -90,7 +203,7 @@ func _on_SpawnTimer_timeout() -> void:
 	var level_rect: Rect2 = Rect2(ll.global_position, ll.size)
 	var curr_spawn_area: Rect2 = spawn_area.intersection(screen_rect)
 
-	var enemy_distance: float = enemy_speed.x * spawn_interval
+	var enemy_distance: float = enemy_speed.x * spawn_interval if curr_spawn_direction in [Vector2.LEFT, Vector2.RIGHT] else enemy_speed.y * spawn_interval
 	var enemy_distance_on_ortho: float = 0.0
 
 	# Remove all invalid processed enemy. Including dead
@@ -176,10 +289,18 @@ func _on_SpawnTimer_timeout() -> void:
 			var enemy = spawn_enemy()
 			if (curr_spawn_direction in [Vector2.LEFT, Vector2.RIGHT]):
 				enemy.global_position.y = curr_ortho_pos
-				enemy.global_position.x = curr_pos + (-0.2 + randf() * 0.1) * enemy_distance
+				enemy.global_position.x = curr_pos + (randf() * 2.0 - 1.0) * min(enemy_distance / 3.0, 100.0)
+				if (curr_spawn_direction == Vector2.LEFT):
+					enemy.global_position.x = max(enemy.global_position.x, default_spawn_screen_edge + default_distance_from_edge)
+				else:
+					enemy.global_position.x = min(enemy.global_position.x, default_spawn_screen_edge - default_distance_from_edge)
 			else:
 				enemy.global_position.x = curr_ortho_pos
-				enemy.global_position.y = curr_pos + (-0.2 + randf() * 0.1) * enemy_distance
+				enemy.global_position.y = curr_pos + (randf() * 2.0 - 1.0) * min(enemy_distance / 3.0, 100.0)
+				if (curr_spawn_direction == Vector2.UP):
+					enemy.global_position.y = max(enemy.global_position.y, default_spawn_screen_edge + default_distance_from_edge)
+				else:
+					enemy.global_position.y = min(enemy.global_position.y, default_spawn_screen_edge - default_distance_from_edge)
 			enemy.dir = curr_spawn_direction
 
 			actors.add_child(enemy)
@@ -197,114 +318,5 @@ func _on_SpawnTimer_timeout() -> void:
 
 	#endregion
 
-### UTILITY
-func spawn_enemy() -> Node:
-	if (!sample_enemy):
-		printerr("ScreenSpawner %s: Cannot find the sample enemy!" % [name])
-		return null
-	var res: Node = sample_enemy.duplicate()
-	res.visible = sample_enemy_og_visible
-	res.process_mode = sample_enemy_og_process_mode
-	return res
-
-
-### SIGNAL ###
-func _exit_tree() -> void:
-	for en in processed_enemy:
-		if (is_instance_valid(en)):
-			en.queue_free()
-	for en in leftover_enemy:
-		if (is_instance_valid(en) and !en.is_queued_for_deletion()):
-			en.queue_free()
-	if (sample_enemy):
-		sample_enemy.queue_free()
-
-func _on_body_entered(body: Node2D):
-	if (!stop_on_player_exit and player_in_trigger):
-		return
-
-	var detection_rect: Rect2 = Rect2($CollisionShape2D.global_position - $CollisionShape2D.shape.size / 2.0 , $CollisionShape2D.shape.size)
-	var player_x_percent: float = (body.global_position.x - detection_rect.position.x) / detection_rect.size.x
-	var player_y_percent: float = (body.global_position.y - detection_rect.position.y) / detection_rect.size.y
-	if (spawn_direction_override == Vector2.ZERO):
-		if (spawn_horizontal and !spawn_vertical):
-			if (player_x_percent <= 0.5):
-				curr_spawn_direction = Vector2.LEFT if spawn_facing_player else Vector2.RIGHT
-			else:
-				curr_spawn_direction = Vector2.RIGHT if spawn_facing_player else Vector2.LEFT
-		elif (spawn_vertical and !spawn_horizontal):
-			if (player_y_percent <= 0.5):
-				curr_spawn_direction = Vector2.UP if spawn_facing_player else Vector2.DOWN
-			else:
-				curr_spawn_direction = Vector2.DOWN if spawn_facing_player else Vector2.UP
-		elif (spawn_vertical and spawn_horizontal):
-			var check_x_left: float = player_y_percent
-			var check_x_right: float = 1.0 - player_y_percent
-
-			if (player_y_percent <= 0.5):
-				if (player_x_percent >= check_x_left and player_x_percent <= check_x_right):
-					curr_spawn_direction = Vector2.UP if spawn_facing_player else Vector2.DOWN
-				elif player_x_percent < check_x_left:
-					curr_spawn_direction = Vector2.LEFT if spawn_facing_player else Vector2.RIGHT
-				else:
-					curr_spawn_direction = Vector2.RIGHT if spawn_facing_player else Vector2.LEFT
-			else:
-				if (player_x_percent >= check_x_right and player_x_percent <= check_x_left):
-					curr_spawn_direction = Vector2.DOWN if spawn_facing_player else Vector2.UP
-				elif player_x_percent < check_x_right:
-					curr_spawn_direction = Vector2.LEFT if spawn_facing_player else Vector2.RIGHT
-				else:
-					curr_spawn_direction = Vector2.RIGHT if spawn_facing_player else Vector2.LEFT
-	else:
-		curr_spawn_direction = spawn_direction_override
-
-	player_in_trigger = true
+func _on_StartTimer_timeout() -> void:
 	$SpawnTimer.start()
-
-func _on_body_exited(body: Node2D):
-	if (is_queued_for_deletion() or !stop_on_player_exit):
-		return
-
-	if (body is CharacterBody2D and body.get_collision_layer_value(1)):
-		if (body.get_parent().dead or body.get_parent().is_queued_for_deletion()):
-			return
-
-	player_in_trigger = false
-
-	var screen_edge: float = get_screen_edge_position()
-
-	for en in processed_enemy:
-		if !(en):
-			continue
-		match curr_spawn_direction:
-			Vector2.LEFT:
-				if (en.global_position.x > screen_edge):
-					en.queue_free()
-			Vector2.RIGHT:
-				if (en.global_position.x < screen_edge):
-					en.queue_free()
-			Vector2.UP:
-				if (en.global_position.y > screen_edge):
-					en.queue_free()
-			Vector2.DOWN:
-				if (en.global_position.y < screen_edge):
-					en.queue_free()
-	processed_enemy = processed_enemy.filter(func (ele): return ele and !ele.dead and !ele.is_queued_for_deletion())
-	leftover_enemy.append_array(processed_enemy)
-	processed_enemy = []
-	$SpawnTimer.stop()
-
-func get_screen_edge_position() -> float:
-	var screen_rect: Rect2 = vs.get_screen_global_rect()
-	var screen_size: Vector2 = screen_rect.size
-	var screen_position: Vector2 = screen_rect.position
-	match curr_spawn_direction:
-		Vector2.LEFT:
-			return screen_position.x + screen_size.x
-		Vector2.RIGHT:
-			return screen_position.x
-		Vector2.UP:
-			return screen_position.y + screen_size.y
-		Vector2.DOWN:
-			return screen_position.y
-	return 0.0
