@@ -761,7 +761,6 @@ func set_misc(misc_path, pos):
 
 	elif misc_path == "res://src/Editor/VisualUtility/VURect.tscn":
 		if inspector.active_type in ["actor_spawn", "prop_spawn", "trigger_spawn"]:
-			print(inspector.active.global_position)
 			inspector.active.add_child(misc) #don't select it though so we can add more
 			misc.global_position = (pos * 16)
 		else:
