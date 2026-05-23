@@ -202,8 +202,9 @@ func _on_SpawnTimer_timeout() -> void:
 	var screen_size: Vector2 = screen_rect.size
 	var level_rect: Rect2 = Rect2(ll.global_position, ll.size)
 	var curr_spawn_area: Rect2 = spawn_area.intersection(screen_rect)
+	var horizontal_spawn_direction: bool = curr_spawn_direction in [Vector2.LEFT, Vector2.RIGHT]
 
-	var enemy_distance: float = enemy_speed.x * spawn_interval if curr_spawn_direction in [Vector2.LEFT, Vector2.RIGHT] else enemy_speed.y * spawn_interval
+	var enemy_distance: float = enemy_speed.x * spawn_interval if horizontal_spawn_direction else enemy_speed.y * spawn_interval
 	var enemy_distance_on_ortho: float = 0.0
 
 	# Remove all invalid processed enemy. Including dead
@@ -226,8 +227,8 @@ func _on_SpawnTimer_timeout() -> void:
 					farthest_spawned_x = valid_processed_enemy.reduce(func (accum, ele): return max(ele.global_position.x, accum), -9999999999)
 				else:
 					farthest_spawned_x = valid_processed_enemy.reduce(func (accum, ele): return min(ele.global_position.x, accum), 9999999999)
-				if (curr_spawn_direction == Vector2.RIGHT and farthest_spawned_x < default_spawn_screen_edge) or \
-				(curr_spawn_direction == Vector2.LEFT and farthest_spawned_x > default_spawn_screen_edge):
+				if (curr_spawn_direction == Vector2.RIGHT and farthest_spawned_x - enemy_distance < default_spawn_screen_edge) or \
+				(curr_spawn_direction == Vector2.LEFT and farthest_spawned_x + enemy_distance > default_spawn_screen_edge):
 					curr_pos = farthest_spawned_x + enemy_distance * -curr_spawn_direction.x
 			Vector2.UP, Vector2.DOWN:
 				var farthest_spawned_y: float = 0.0
@@ -235,15 +236,15 @@ func _on_SpawnTimer_timeout() -> void:
 					farthest_spawned_y = valid_processed_enemy.reduce(func (accum, ele): return max(ele.global_position.y, accum), -9999999999)
 				else:
 					farthest_spawned_y = valid_processed_enemy.reduce(func (accum, ele): return min(ele.global_position.y, accum), 9999999999)
-				if (curr_spawn_direction == Vector2.UP and farthest_spawned_y > default_spawn_screen_edge) or \
-				(curr_spawn_direction == Vector2.DOWN and farthest_spawned_y < default_spawn_screen_edge):
+				if (curr_spawn_direction == Vector2.UP and farthest_spawned_y + enemy_distance > default_spawn_screen_edge) or \
+				(curr_spawn_direction == Vector2.DOWN and farthest_spawned_y - enemy_distance < default_spawn_screen_edge):
 					curr_pos = farthest_spawned_y + enemy_distance * -curr_spawn_direction.y
 
 	processed_enemy = valid_processed_enemy
 
 	#region Test 2: Spawn enemies preemptively and continue spawning from the farthest one
-	enemy_distance_on_ortho = screen_size.y if curr_spawn_direction in [Vector2.LEFT, Vector2.RIGHT] else screen_size.x
-	var average_one_wave_spawn_on_ortho: int = ceil(spawn_area.size.y / enemy_distance_on_ortho)
+	enemy_distance_on_ortho = screen_size.y if horizontal_spawn_direction else screen_size.x
+	var average_one_wave_spawn_on_ortho: int = ceil(spawn_area.size.y / enemy_distance_on_ortho) if horizontal_spawn_direction else ceil(spawn_area.size.x / enemy_distance_on_ortho)
 	var to_spawn: int = 0
 	var enemy_beyond_screen_edge: int = 0
 	match curr_spawn_direction:
@@ -256,7 +257,9 @@ func _on_SpawnTimer_timeout() -> void:
 		Vector2.DOWN:
 			enemy_beyond_screen_edge = processed_enemy.reduce(func (accum, ele): return accum + 1 if ele.global_position.y > default_spawn_screen_edge else accum, 0)
 
-	if (enemy_beyond_screen_edge < 3 * average_one_wave_spawn_on_ortho):
+	if (enemy_beyond_screen_edge <= 0):
+		to_spawn = int(spawn_area.size.x * 2.0 / enemy_distance) if horizontal_spawn_direction else int(spawn_area.size.y * 2.0 / enemy_distance)
+	elif (enemy_beyond_screen_edge < 3 * average_one_wave_spawn_on_ortho):
 		to_spawn = 3
 	elif (enemy_beyond_screen_edge < 5 * average_one_wave_spawn_on_ortho):
 		to_spawn = 2
@@ -265,10 +268,10 @@ func _on_SpawnTimer_timeout() -> void:
 	else:
 		to_spawn = 0
 
-	var curr_spawn_area_ortho_position = curr_spawn_area.position.y if curr_spawn_direction in [Vector2.LEFT, Vector2.RIGHT] else curr_spawn_area.position.x
-	var curr_spawn_area_ortho_size = curr_spawn_area.size.y if curr_spawn_direction in [Vector2.LEFT, Vector2.RIGHT] else curr_spawn_area.size.x
-	var spawn_area_ortho_position = spawn_area.position.y if curr_spawn_direction in [Vector2.LEFT, Vector2.RIGHT] else spawn_area.position.x
-	var spawn_area_ortho_size = spawn_area.size.y if curr_spawn_direction in [Vector2.LEFT, Vector2.RIGHT] else spawn_area.size.x
+	var curr_spawn_area_ortho_position = curr_spawn_area.position.y if horizontal_spawn_direction else curr_spawn_area.position.x
+	var curr_spawn_area_ortho_size = curr_spawn_area.size.y if horizontal_spawn_direction else curr_spawn_area.size.x
+	var spawn_area_ortho_position = spawn_area.position.y if horizontal_spawn_direction else spawn_area.position.x
+	var spawn_area_ortho_size = spawn_area.size.y if horizontal_spawn_direction else spawn_area.size.x
 
 	var near_screen_ortho: float = curr_spawn_area_ortho_position + curr_spawn_area_ortho_size * randf()
 	var enemy_spread_on_ortho_min_section: int = ceil((spawn_area_ortho_position - near_screen_ortho) / enemy_distance_on_ortho)
@@ -287,16 +290,16 @@ func _on_SpawnTimer_timeout() -> void:
 			if (spawn_area_ortho_position > curr_ortho_pos or spawn_area_ortho_position + spawn_area_ortho_size < curr_ortho_pos):
 				continue
 			var enemy = spawn_enemy()
-			if (curr_spawn_direction in [Vector2.LEFT, Vector2.RIGHT]):
+			if (horizontal_spawn_direction):
 				enemy.global_position.y = curr_ortho_pos
-				enemy.global_position.x = curr_pos + (randf() * 2.0 - 1.0) * min(enemy_distance / 3.0, 100.0)
+				enemy.global_position.x = curr_pos + (randf() * 2.0 - 1.0) * min(enemy_distance / 5.0, 100.0)
 				if (curr_spawn_direction == Vector2.LEFT):
 					enemy.global_position.x = max(enemy.global_position.x, default_spawn_screen_edge + default_distance_from_edge)
 				else:
 					enemy.global_position.x = min(enemy.global_position.x, default_spawn_screen_edge - default_distance_from_edge)
 			else:
 				enemy.global_position.x = curr_ortho_pos
-				enemy.global_position.y = curr_pos + (randf() * 2.0 - 1.0) * min(enemy_distance / 3.0, 100.0)
+				enemy.global_position.y = curr_pos + (randf() * 2.0 - 1.0) * min(enemy_distance / 5.0, 100.0)
 				if (curr_spawn_direction == Vector2.UP):
 					enemy.global_position.y = max(enemy.global_position.y, default_spawn_screen_edge + default_distance_from_edge)
 				else:
@@ -307,7 +310,7 @@ func _on_SpawnTimer_timeout() -> void:
 			processed_enemy.append(enemy)
 			if (spawn_limit != -1):
 				spawn_left -= 1
-		if (curr_spawn_direction in [Vector2.LEFT, Vector2.RIGHT]):
+		if (horizontal_spawn_direction):
 			curr_pos += enemy_distance * -curr_spawn_direction.x
 			if (curr_pos < level_rect.position.x or curr_pos > level_rect.position.x + level_rect.size.x):
 				break

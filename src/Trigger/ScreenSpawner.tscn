@@ -20,6 +20,9 @@ shape = SubResource("1")
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=684785219]
 
+[node name="StartTimer" type="Timer" parent="." unique_id=1318970884]
+one_shot = true
+
 [node name="SpawnArea" parent="." unique_id=955871811 instance=ExtResource("2_t5opi")]
 tag_name = "SpawnArea"
 
@@ -31,3 +34,5 @@ tag_name = "spawn_actor"
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_SpawnTimer_timeout"]
