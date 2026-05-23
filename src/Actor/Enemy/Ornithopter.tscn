@@ -166,8 +166,8 @@ frame = 8
 libraries/ = SubResource("AnimationLibrary_jjdxu")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1339755006]
-position = Vector2(16, -3)
-rect = Rect2(0, 0, 6, 6)
+position = Vector2(16, -15)
+rect = Rect2(0, 0, 1, 1)
 
 [node name="Debug" type="Line2D" parent="." unique_id=968233588]
 top_level = true

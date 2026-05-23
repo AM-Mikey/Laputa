@@ -46,9 +46,9 @@ func setup():
 			$Sprite2D.texture = TX_1
 
 	if dir == Vector2.LEFT:
-			$VisibleOnScreenNotifier2D.position = Vector2(16.0, -3.0)
+		$VisibleOnScreenNotifier2D.position = Vector2(16.0, -15.0)
 	elif dir == Vector2.RIGHT:
-			$VisibleOnScreenNotifier2D.position = Vector2(-22.0, -3.0)
+		$VisibleOnScreenNotifier2D.position = Vector2(-16.0, -15.0)
 
 	w.emit_signal("finished_spawn_entities_step")
 	change_state("fly")
