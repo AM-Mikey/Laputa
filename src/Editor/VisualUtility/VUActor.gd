@@ -86,8 +86,6 @@ func spawn() -> Node:
 	actor.name = name
 	if properties["id"][0] == "": #no given id
 		actor.id = name
-	actor.global_position = global_position
-	w.current_level.get_node("Actors").call_deferred("add_child", actor)
 
 	for ac in actor.get_children(): #clear old from actor
 		if ac.is_in_group("WaypointLocals") || ac.is_in_group("VUVectors") || ac.is_in_group("VURects") || ac.is_in_group("VUActors") || ac.is_in_group("WaypointGlobalSpawns"):

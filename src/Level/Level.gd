@@ -107,7 +107,7 @@ func merge_one_way_ssp_tile():
 		used_tiles_ssp_collision = merged_polygon
 		merged_polygon = []
 
-	if get_node("SSPMerges"):
+	if get_node_or_null("SSPMerges"):
 		$SSPMerges.free()
 	var static_body: StaticBody2D = StaticBody2D.new()
 	static_body.name = "SSPMerges"
