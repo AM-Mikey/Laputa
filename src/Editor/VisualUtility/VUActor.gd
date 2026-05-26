@@ -4,7 +4,7 @@ const PLACEHOLDER_ICON: Texture2D = preload("res://assets/Icon/ActorIcon.png")
 
 enum ActorTeamFilter {NONE, ENEMY, NPC}
 
-@export var actor_path: String = "":
+@export_file var actor_path: String = "":
 	set(val):
 		actor_path = val
 
