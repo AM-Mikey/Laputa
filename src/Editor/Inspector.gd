@@ -76,7 +76,11 @@ func display_data():
 			create_save_button("background")
 		"actor_spawn", "vu_actor":
 			if (active_type == "vu_actor"):
-				create_button("actor_path", active.actor_path, "load")
+				var actor_path_str: String = active.actor_path
+				if (ResourceUID.has_id(ResourceUID.text_to_id(actor_path_str))):
+					actor_path_str = ResourceUID.uid_to_path(actor_path_str)
+
+				create_button("actor_path", actor_path_str, "load")
 				create_properties_button(active.get_property_list().filter(func (ele): return ele["name"] not in ["actor_path", "properties"]))
 				var actor_label = $Margin/VBox/Label.duplicate()
 				actor_label.text = active.actor_path.split("/")[-1].rstrip(".tscn")
@@ -280,7 +284,7 @@ func on_property_changed(property_name, property_value):
 				active.level_limiter.setup_layers()
 
 		"actor_spawn", "vu_actor":
-			if (active_type == "vu_actor" and property_name in ["actor_path", "filter_team", "filter_actor", "tag_name"]):
+			if (active_type == "vu_actor" and property_name in ["actor_path" , "filter_team", "filter_actor", "tag_name"]):
 				active.set(property_name, property_value)
 			else:
 				active.properties[property_name][0] = property_value

@@ -6,7 +6,10 @@ enum ActorTeamFilter {NONE, ENEMY, NPC}
 
 @export_file var actor_path: String = "":
 	set(val):
+		var old_val = actor_path
 		actor_path = val
+
+		if !is_node_ready(): return
 
 		if (FileAccess.file_exists(actor_path)):
 			var actor = load(actor_path).instantiate()
@@ -32,6 +35,11 @@ enum ActorTeamFilter {NONE, ENEMY, NPC}
 						properties[p["name"]] = old_properties[p["name"]]
 					else:
 						properties[p["name"]] = [actor.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
+
+			if old_val != actor_path:
+				for c in get_children():
+					if (c.is_in_group("VisualUtilities")):
+						c.free()
 
 			for ac in actor.get_children():
 				if ac.is_in_group("WaypointLocals"):
@@ -80,6 +88,7 @@ enum ActorTeamFilter {NONE, ENEMY, NPC}
 func _ready():
 	if w.el.get_child_count() == 0: #not in editor
 		visible = false
+	actor_path = actor_path
 
 func spawn() -> Node:
 	if !(FileAccess.file_exists(actor_path)):

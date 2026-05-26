@@ -59,6 +59,13 @@ func _ready():
 		w.emit_signal("finished_spawn_entities_step")
 		return
 
+	if "dir" not in sample_enemy:
+		printerr("ScreenSpawner %s | _ready(): Enemy at %s doesn't have \"dir\" variable!" % [name, $VUActor.actor_path])
+		sample_enemy.queue_free()
+		sample_enemy = null
+		w.emit_signal("finished_spawn_entities_step")
+		return
+
 	sample_enemy_og_process_mode = sample_enemy.process_mode
 	sample_enemy_og_visible = sample_enemy.visible
 	sample_enemy.process_mode = ProcessMode.PROCESS_MODE_DISABLED
