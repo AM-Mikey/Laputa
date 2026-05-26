@@ -120,6 +120,9 @@ func enter(): #Call this every time the level is changed or reloaded
 		s.visible = true
 	for v in get_tree().get_nodes_in_group("VanishingPoints"):
 		v.visible = true
+	for wl in get_tree().get_nodes_in_group("WaypointLocals"):
+		wl.visible = true
+		wl.input_pickable = true
 	for wgs in get_tree().get_nodes_in_group("WaypointGlobalSpawns"): #TODO: this actually only gets the children of actor briefly before they're freed. We want to get child of actor spawn: waypoint spawn, but that doesnt exist.
 		wgs.visible = true
 		wgs.input_pickable = true

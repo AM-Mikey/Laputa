@@ -38,34 +38,20 @@ enum ActorTeamFilter {NONE, ENEMY, NPC}
 
 			if old_val != actor_path:
 				for c in get_children():
-					if (c.is_in_group("VisualUtilities")):
+					if (c.is_in_group("VisualUtilities") or c.is_in_group("WaypointGlobalSpawns")):
 						c.free()
 
+			var visual_ult_groups = ["WaypointLocals", "WaypointGlobalSpawns",
+			 "VUVectors", "VURects", "VUActors"]
 			for ac in actor.get_children():
-				if ac.is_in_group("WaypointLocals"):
-					if !get_if_actor_has_waypoint(ac):
-						actor.remove_child(ac)
-						ac.owner = null
-						add_child(ac)
-						ac.owner = w.current_level
-				if ac.is_in_group("VUVectors"):
-					if !get_if_actor_has_vu_vector(ac):
-						actor.remove_child(ac)
-						ac.owner = null
-						add_child(ac)
-						ac.owner = w.current_level
-				if ac.is_in_group("VURects"):
-					if !get_if_actor_has_vu_rect(ac):
-						actor.remove_child(ac)
-						ac.owner = null
-						add_child(ac)
-						ac.owner = w.current_level
-				if ac.is_in_group("VUActors"):
-					if !get_if_actor_has_vu_rect(ac):
-						actor.remove_child(ac)
-						ac.owner = null
-						add_child(ac)
-						ac.owner = w.current_level
+				for vu_group in visual_ult_groups:
+					if ac.is_in_group(vu_group):
+						if !get_if_actor_has_visual_utility(ac, vu_group):
+							actor.remove_child(ac)
+							ac.owner = null
+							add_child(ac)
+							ac.owner = w.current_level
+
 			actor.free()
 		else:
 			var new_shape: RectangleShape2D = RectangleShape2D.new()
@@ -105,7 +91,7 @@ func spawn() -> Node:
 
 	for ac in actor.get_children(): #clear old from actor
 		if ac.is_in_group("WaypointLocals") || ac.is_in_group("VUVectors") || ac.is_in_group("VURects") || ac.is_in_group("VUActors") || ac.is_in_group("WaypointGlobalSpawns"):
-			actor.remove_child(ac)
+			ac.queue_free()
 
 	for c in get_children(): #add new from spawn
 		if c.is_in_group("WaypointLocals") || c.is_in_group("VUVectors") || c.is_in_group("VURects") || c.is_in_group("VUActors"):
@@ -138,35 +124,13 @@ func set_sprite():
 
 
 ### GETTERS
-
-func get_if_actor_has_waypoint(actor_waypoint) -> bool:
+func get_if_actor_has_visual_utility(actor_waypoint, group) -> bool:
 	var out = false
 	for c in get_children():
-		if c.is_in_group("WaypointLocals"): #q: does this need to apply for global spawns as well?
+		if c.is_in_group(group): #q: does this need to apply for global spawns as well?
 			if c.tag_name == actor_waypoint.tag_name:
 				out = true
 	return out
-
-func get_if_actor_has_vu_vector(actor_vu_vector) -> bool:
-	for c in get_children():
-		if c.is_in_group("VUVectors"):
-			if c.tag_name == actor_vu_vector.tag_name:
-				return true
-	return false
-
-func get_if_actor_has_vu_rect(actor_vu_rect) -> bool:
-	for c in get_children():
-		if c.is_in_group("VURects"):
-			if c.tag_name == actor_vu_rect.tag_name:
-				return true
-	return false
-
-func get_if_actor_has_vu_actor(actor_vu_act) -> bool:
-	for c in get_children():
-		if c.is_in_group("VUActors"):
-			if c.tag_name == actor_vu_act.tag_name:
-				return true
-	return false
 
 ### SIGNALS
 
