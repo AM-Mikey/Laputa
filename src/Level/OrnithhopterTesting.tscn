@@ -292,6 +292,7 @@ properties = {
 "spawn_horizontal": [true, 1, ""],
 "spawn_interval": [1.5, 3, ""],
 "spawn_limit": [-1, 2, ""],
+"spawn_start_grace": [1.0, 3, ""],
 "spawn_vertical": [true, 1, ""],
 "stop_on_player_exit": [true, 1, ""]
 }
@@ -425,6 +426,7 @@ properties = {
 "spawn_horizontal": [true, 1, ""],
 "spawn_interval": [5.0, 3, ""],
 "spawn_limit": [-1, 2, ""],
+"spawn_start_grace": [1.0, 3, ""],
 "spawn_vertical": [true, 1, ""],
 "stop_on_player_exit": [true, 1, ""]
 }

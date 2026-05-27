@@ -1,7 +1,7 @@
 extends Trigger
 
-## How many enemy per spawn
-#@export var enemy_per_spawn: int = 1
+## Adjust the spawn grace time after the player steps into the detection zone
+@export var spawn_start_grace: float = 1.0
 ## Spawn a new enemy after specified interval, given the spawner does not spawn more than [member=max_enemy_on_screen]
 @export var spawn_interval: float = 5.0
 ## How many enemy can this spawner spawn. Will run out faster if the ScreenSpawn is bigger than 1 screen due to the spawn spreading mechanism.
@@ -50,6 +50,7 @@ func _ready():
 	trigger_type = "screen_spawner"
 	spawn_area = Rect2(-$CollisionShape2D.shape.size / 2.0, $CollisionShape2D.shape.size)
 	$SpawnTimer.wait_time = spawn_interval
+	$StartTimer.wait_time = spawn_start_grace
 	spawn_area = $SpawnArea.value
 
 	sample_enemy = $VUActor.spawn()
@@ -114,7 +115,7 @@ func get_screen_edge_position() -> float:
 
 
 
-### SIGNAL ###
+### SIGNAL
 func _exit_tree() -> void:
 	for en in processed_enemy:
 		if (is_instance_valid(en)):
@@ -199,10 +200,12 @@ func _on_body_exited(body: Node2D):
 	leftover_enemy.append_array(processed_enemy)
 	processed_enemy = []
 	$SpawnTimer.stop()
+	$StartTimer.stop()
 
 func _on_SpawnTimer_timeout() -> void:
 	if (spawn_limit != - 1 and spawn_left <= 0 or !sample_enemy):
 		$SpawnTimer.stop()
+		$StartTimer.stop()
 		return
 
 	var screen_rect: Rect2 = vs.get_screen_global_rect()
