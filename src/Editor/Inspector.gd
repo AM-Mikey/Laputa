@@ -83,7 +83,7 @@ func display_data():
 				create_button("actor_path", actor_path_str, "load")
 				create_properties_button(active.get_property_list().filter(func (ele): return ele["name"] not in ["actor_path", "properties"]))
 				var actor_label = $Margin/VBox/Label.duplicate()
-				actor_label.text = active.actor_path.split("/")[-1].rstrip(".tscn")
+				actor_label.text = actor_path_str.split("/")[-1].rstrip(".tscn")
 				$Margin/VBox/Scroll/VBox.add_child.call_deferred(actor_label)
 			for p in active.properties:
 				if p == "dialog_json":
