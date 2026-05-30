@@ -5,6 +5,7 @@ const MISC_SCENES = [
 	"res://src/Editor/VisualUtility/WaypointLocal.tscn",
 	"res://src/Editor/VisualUtility/VUVector.tscn",
 	"res://src/Editor/VisualUtility/VURect.tscn",
+	"res://src/Editor/VisualUtility/VUActor.tscn",
 	"res://src/Editor/VisualUtility/WaypointGlobal.tscn",
 	"res://src/Editor/Spawn/WaypointGlobalSpawn.tscn",
 	"res://src/Editor/SpawnPoint.tscn",

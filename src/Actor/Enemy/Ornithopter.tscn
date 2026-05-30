@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://it7syr43jeh"]
+[gd_scene format=3 uid="uid://dphx5itcoj1wr"]
 
 [ext_resource type="Texture2D" uid="uid://08od13wukqd7" path="res://assets/Actor/Enemy/Ornithopter.png" id="2"]
 [ext_resource type="Script" uid="uid://ce3csdiy7d7c" path="res://src/Actor/Enemy/Ornithopter.gd" id="3"]
@@ -113,7 +113,7 @@ _data = {
 &"SwoopUpTransition": SubResource("Animation_ftfuk")
 }
 
-[node name="Ornithopter" type="CharacterBody2D" unique_id=897008319 groups=["Actors", "Enemies", "Entities", "ScreenSpawnerCompatible"]]
+[node name="Ornithopter" type="CharacterBody2D" unique_id=897008319 groups=["Actors", "Enemies", "Entities"]]
 z_index = 3
 collision_layer = 2
 collision_mask = 0
@@ -166,8 +166,8 @@ frame = 8
 libraries/ = SubResource("AnimationLibrary_jjdxu")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1339755006]
-position = Vector2(16, -3)
-rect = Rect2(0, 0, 6, 6)
+position = Vector2(16, -15)
+rect = Rect2(0, 0, 1, 1)
 
 [node name="Debug" type="Line2D" parent="." unique_id=968233588]
 top_level = true

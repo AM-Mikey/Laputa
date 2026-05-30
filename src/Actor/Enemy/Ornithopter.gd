@@ -46,9 +46,9 @@ func setup():
 			$Sprite2D.texture = TX_1
 
 	if dir == Vector2.LEFT:
-			$VisibleOnScreenNotifier2D.position = Vector2(16.0, -3.0)
+		$VisibleOnScreenNotifier2D.position = Vector2(16.0, -15.0)
 	elif dir == Vector2.RIGHT:
-			$VisibleOnScreenNotifier2D.position = Vector2(-22.0, -3.0)
+		$VisibleOnScreenNotifier2D.position = Vector2(-16.0, -15.0)
 
 	w.emit_signal("finished_spawn_entities_step")
 	change_state("fly")
@@ -100,7 +100,6 @@ func enter_swoop(_prev_state: String):
 		return
 
 	var screen_size: Vector2 = get_viewport().get_visible_rect().size / vs.resolution_scale
-	var screen_too_thin_check = screen_size.x < screen_thin_threshold_x
 
 	$AnimationPlayer.play("SwoopDown")
 	$Hurtbox/Fly.disabled = true
@@ -122,19 +121,11 @@ func enter_swoop(_prev_state: String):
 	var bottom_pos: Vector2 = Vector2(player.global_position.x, global_position.y + swoop_height * 16.0 + height_grid_offset)
 	var exit_pos: Vector2 = global_position + Vector2(player_offset.x * 2.0, 0.0)
 
-	# Clamp exit point to screen bounds on thin screens (Maybe not, it curves so bizzarely)
-	#if screen_too_thin_check:
-		#var screen_rect: Rect2 = vs.get_screen_global_rect()
-		#exit_pos.x = clamp(exit_pos.x, screen_rect.position.x, screen_rect.position.x + screen_rect.size.x)
-
 	swoop_t = 0.0
 	swoop_curve = Curve2D.new()
 
 
-	var swoop_toward_inner: float = clamp(
-		remap(swoop_distance / 2.0, 0.0, max_swoop_distance, 0.0, max_swoop_distance),
-		0.0, max_swoop_distance
-	) * clamp(swoop_distance / swoop_height, 0.33, 3.0)
+	var swoop_toward_inner: float = clamp(swoop_distance / 2.0, 0.0, max_swoop_distance) * clamp(swoop_distance / swoop_height, 0.33, 3.0)
 
 	var swoop_toward_outer: float = swoop_distance * 2.0 if swoop_distance / swoop_height >= 1.0 \
 								 else swoop_distance * swoop_distance / swoop_height
