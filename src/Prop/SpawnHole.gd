@@ -3,6 +3,8 @@ extends Prop
 const ICON = preload("res://assets/Icon/PropIcon.png")
 
 @export var launch_force: Vector2 = Vector2.ZERO
+## If true, spawn enemy regardless the player in detection zone
+@export var always_active: bool = false
 ## The grace period after the player just entered the detection zone
 @export var spawn_start_timer: float = 1.0
 @export var spawn_interval: float = 1.0
@@ -17,8 +19,13 @@ var sample_enemy_og_process_mode = ProcessMode.PROCESS_MODE_INHERIT
 var sample_enemy_og_visible = true
 
 func setup():
-	$PlayerDetector/CollisionShape2D.shape.size = $VURect.value.size
-	$PlayerDetector.global_position = $VURect.value.position + $VURect.value.size / 2.0
+	if (always_active):
+		$PlayerDetector/CollisionShape2D.shape.size = Vector2.ZERO
+		$PlayerDetector.monitoring = false
+	else:
+		$PlayerDetector/CollisionShape2D.shape.size = $VURect.value.size
+		$PlayerDetector.global_position = $VURect.value.position + $VURect.value.size / 2.0
+		$PlayerDetector.monitoring = true
 	$SpawnTimer.wait_time = spawn_interval
 	$StartTimer.wait_time = spawn_start_timer
 
@@ -36,6 +43,9 @@ func setup():
 	sample_actor.global_position = Vector2(-1000000000, -1000000000)
 
 	w.emit_signal("finished_spawn_entities_step")
+
+	if (always_active):
+		$StartTimer.start()
 
 func _exit_tree() -> void:
 	for enemy in spawned_actor:
