@@ -2,16 +2,11 @@
 
 [ext_resource type="Script" uid="uid://btmn4aedyq1op" path="res://src/Actor/Enemy/Roller.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://b8jbm3e01232q" path="res://assets/Actor/Enemy/Roller.png" id="2"]
-[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_8c34y"]
 
-[sub_resource type="CapsuleShape2D" id="1"]
-radius = 8.0
-height = 16.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_mkfiv"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_i7s0c"]
 radius = 8.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3raoo"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_8c34y"]
 radius = 8.0
 
 [sub_resource type="Animation" id="2"]
@@ -45,15 +40,7 @@ editor_hidden = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=644952424]
 position = Vector2(0, -8)
 rotation = 1.5708
-shape = SubResource("1")
-debug_color = Color(0, 0.588235, 0.705882, 0.235294)
-
-[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_8c34y")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1737066927]
-position = Vector2(0, -8)
-rotation = 1.5708
-shape = SubResource("1")
+shape = SubResource("CircleShape2D_i7s0c")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=151348047]
@@ -62,7 +49,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1854700610]
 position = Vector2(0, -8)
-shape = SubResource("CircleShape2D_mkfiv")
+shape = SubResource("CircleShape2D_8c34y")
 debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=1691706982]
@@ -71,7 +58,7 @@ collision_mask = 65536
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=259821210]
 position = Vector2(0, -8)
-shape = SubResource("CircleShape2D_3raoo")
+shape = SubResource("CircleShape2D_8c34y")
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=151251306]
@@ -82,7 +69,33 @@ hframes = 8
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1695882587]
 libraries/ = SubResource("AnimationLibrary_ms45c")
 
-[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1861627773]
+[node name="TurnTimer" type="Timer" parent="." unique_id=1629209555]
+wait_time = 0.1
+one_shot = true
+
+[node name="R1" type="RayCast2D" parent="." unique_id=1996564239]
+position = Vector2(6.5, -15)
+target_position = Vector2(0, 14)
+collision_mask = 522
+hit_from_inside = true
+
+[node name="R2" type="RayCast2D" parent="." unique_id=1445699779]
+position = Vector2(8.5, -11)
+target_position = Vector2(0, 6)
+collision_mask = 522
+hit_from_inside = true
+
+[node name="L1" type="RayCast2D" parent="." unique_id=572170680]
+position = Vector2(-6.5, -15)
+target_position = Vector2(0, 14)
+collision_mask = 522
+hit_from_inside = true
+
+[node name="L2" type="RayCast2D" parent="." unique_id=1240672371]
+position = Vector2(-8.5, -11)
+target_position = Vector2(0, 6)
+collision_mask = 522
+hit_from_inside = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

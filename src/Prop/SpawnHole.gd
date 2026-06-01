@@ -60,6 +60,7 @@ func spawn_actor() -> Node:
 		printerr("SpawnHole %s: Cannot find the sample enemy!" % [name])
 		return null
 	var res: Node = sample_actor.duplicate()
+	res.name = name # Marking name for debug
 	res.visible = sample_enemy_og_visible
 	res.process_mode = sample_enemy_og_process_mode
 	spawned_actor.append(res)
