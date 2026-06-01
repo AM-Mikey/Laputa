@@ -52,15 +52,15 @@ debug_color = Color(0, 0.6, 0.69803923, 0)
 [node name="StartTimer" type="Timer" parent="." unique_id=48186689]
 one_shot = true
 
+[node name="VURect" parent="." unique_id=688682803 instance=ExtResource("4_3crp0")]
+tag_name = "player_detection"
+
 [node name="VUActor" parent="." unique_id=1199277091 instance=ExtResource("3_snk1j")]
-position = Vector2(32, 32)
+position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
 tag_name = "spawn_actor"
-
-[node name="VURect" parent="." unique_id=688682803 instance=ExtResource("4_3crp0")]
-tag_name = "player_detection"
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

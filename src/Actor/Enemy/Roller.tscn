@@ -82,5 +82,7 @@ hframes = 8
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1695882587]
 libraries/ = SubResource("AnimationLibrary_ms45c")
 
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1861627773]
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
