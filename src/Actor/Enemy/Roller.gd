@@ -6,6 +6,11 @@ const ICON = preload("res://assets/Actor/Enemy/RollerIcon.png")
 
 var move_dir
 
+@onready var prev_global_position := global_position
+var stuck := false
+var stuck_grace_timer := 0.1
+var stuck_timer := 0.0
+
 func setup(): #Reminder: no function called can use await
 	hp = 3
 	reward = 2
@@ -22,27 +27,39 @@ func setup(): #Reminder: no function called can use await
 	w.emit_signal("finished_spawn_entities_step")
 
 
-func _on_physics_process(_delta):
+func _on_physics_process(delta):
 	if disabled or dead: return
 	velocity = calc_velocity(move_dir, true, false, false)
-	#if (name == "SpawnHole2"):
-		#print("A ", velocity)
+
+	if is_on_floor(): # Avoid getting stuck on weird geometry
+		velocity.y = 0.0
 	move_and_slide()
-	#if (name == "SpawnHole2"):
-		#print(velocity)
+	animate()
+
+	if (prev_global_position - global_position).length() <= 0.1:
+		if (stuck_timer <= stuck_grace_timer):
+			stuck_timer += delta
+		else:
+			stuck = true
+	else:
+		stuck = false
+		stuck_timer = 0.0
 
 	if ($TurnTimer.time_left <= 0):
 		var wall_contact = (move_dir.x > 0 and ($R1.is_colliding() or $R2.is_colliding())) \
 							or (move_dir.x <= 0 and ($L1.is_colliding() or $L2.is_colliding()))
 
-		if wall_contact:
+		if wall_contact and !stuck:
 			move_dir *= -1
 			am.play("enemy_jump", self)
-			animate()
 			$TurnTimer.start()
 
+	prev_global_position = global_position
+
 func animate():
-	$AnimationPlayer.play("Roll")
-	match move_dir:
-		Vector2.LEFT: $Sprite2D.flip_h = false
-		Vector2.RIGHT: $Sprite2D.flip_h = true
+	var displacement = (prev_global_position - global_position) / get_physics_process_delta_time()
+	$AnimationPlayer.play("Roll", -1.0, displacement.length() / 80.0)
+	if !stuck:
+		match move_dir:
+			Vector2.LEFT: $Sprite2D.flip_h = false
+			Vector2.RIGHT: $Sprite2D.flip_h = true
