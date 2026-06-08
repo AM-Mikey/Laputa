@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b8jbm3e01232q" path="res://assets/Actor/Enemy/Roller.png" id="2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i7s0c"]
-radius = 8.0
+radius = 7.8
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8c34y"]
 radius = 8.0
@@ -45,6 +45,7 @@ shape = SubResource("CircleShape2D_i7s0c")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=151348047]
+visible = false
 collision_layer = 131072
 collision_mask = 0
 
@@ -54,6 +55,7 @@ shape = SubResource("CircleShape2D_8c34y")
 debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=1691706982]
+visible = false
 collision_layer = 262144
 collision_mask = 65536
 
@@ -75,46 +77,49 @@ wait_time = 0.1
 one_shot = true
 
 [node name="RFloor" type="RayCast2D" parent="." unique_id=1996564239]
-position = Vector2(7, -2)
-target_position = Vector2(0, 3)
+position = Vector2(6, -5)
+target_position = Vector2(0, 22)
 collision_mask = 522
 hit_from_inside = true
 
 [node name="RWall" type="RayCast2D" parent="." unique_id=1445699779]
-position = Vector2(8.5, -11)
+position = Vector2(7.9, -11)
 target_position = Vector2(0, 6)
 collision_mask = 522
 hit_from_inside = true
 
 [node name="RWall2" type="RayCast2D" parent="." unique_id=1395596203]
 position = Vector2(0, -8)
-target_position = Vector2(6.5, 6.5)
+target_position = Vector2(5.85, 5.85)
 collision_mask = 522
-hit_from_inside = true
 
 [node name="LFloor" type="RayCast2D" parent="." unique_id=572170680]
-position = Vector2(-7, -2)
-target_position = Vector2(0, 3)
+position = Vector2(-6, -5)
+target_position = Vector2(0, 22)
 collision_mask = 522
 hit_from_inside = true
 
 [node name="LWall" type="RayCast2D" parent="." unique_id=1240672371]
-position = Vector2(-8.5, -11)
+position = Vector2(-7.9, -11)
 target_position = Vector2(0, 6)
 collision_mask = 522
 hit_from_inside = true
 
 [node name="LWall2" type="RayCast2D" parent="." unique_id=1141564041]
 position = Vector2(0, -8)
-target_position = Vector2(-6.5, 6.5)
+target_position = Vector2(-5.85, 5.85)
+collision_mask = 522
+
+[node name="Floor" type="RayCast2D" parent="." unique_id=1540645007]
+position = Vector2(-4, 0)
+target_position = Vector2(8, 0)
 collision_mask = 522
 hit_from_inside = true
 
-[node name="Floor" type="RayCast2D" parent="." unique_id=1540645007]
-position = Vector2(-3, 0.3)
-target_position = Vector2(6, 0)
+[node name="FloorNormal" type="RayCast2D" parent="." unique_id=1814582159]
+position = Vector2(0, -8)
+target_position = Vector2(0, 7.9)
 collision_mask = 522
-hit_from_inside = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
