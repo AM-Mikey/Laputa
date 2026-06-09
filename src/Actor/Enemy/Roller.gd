@@ -124,7 +124,7 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_fric
 	if !on_floor or on_slope:
 		gravity_velocity.y += gravity * get_physics_process_delta_time()
 		if on_slope:
-			const max_grav: float = 20.0
+			const max_grav: float = 50.0
 			const max_x: float = 20.0
 			## Exchange excess gravity velocity into proper slide to avoid the Engine spazzing out with move_and_slide():
 			if (abs(current_vel.x) <= max_x):
