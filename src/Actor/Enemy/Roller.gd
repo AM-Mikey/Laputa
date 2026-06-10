@@ -19,7 +19,7 @@ var on_floor: bool = false
 var on_slope: bool = false
 var floor_normal := Vector2.ZERO
 
-const debug_name := "SpawnHole16"
+const debug_name := "SpawnHole2"
 
 func setup(): #Reminder: no function called can use await
 	hp = 3
@@ -76,8 +76,8 @@ func _on_physics_process(delta):
 	move_and_slide()
 	animate()
 
-	if (name == debug_name):
-		print(current_vel, " -> ", velocity, " Move dir: ", move_dir, ", Floor: ", on_floor, ", Slope: ", on_slope,", Stuck: ", stuck_state == StuckState.STUCK)
+	#if (name == debug_name):
+		#print(current_vel, " -> ", velocity, " Move dir: ", move_dir, ", Floor: ", on_floor, ", Slope: ", on_slope,", Stuck: ", stuck_state == StuckState.STUCK)
 
 	if ($TurnTimer.time_left <= 0):
 		var right_wall_contact = $RWall.is_colliding() or $RWall2.is_colliding()
@@ -93,7 +93,7 @@ func _on_physics_process(delta):
 			$TurnTimer.start()
 
 	var try_unstuck_flag: bool = false
-	if (prev_global_position - global_position).length() <= 0.1:
+	if (prev_global_position - global_position).length() <= 0.25:
 		if (stuck_timer <= stuck_grace_time):
 			stuck_timer += delta
 		if (stuck_state == StuckState.NONE and stuck_timer > attempt_unstuck_time):
@@ -143,8 +143,8 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_fric
 		gravity_velocity.y = 0.0
 		gravity_convert_vel = Vector2.ZERO
 
-	if (name == debug_name):
-		print(move_velocity, " ", gravity_velocity, " ", gravity_convert_vel)
+	#if (name == debug_name):
+		#print(move_velocity, " ", gravity_velocity, " ", gravity_convert_vel)
 
 	out = gravity_velocity + move_velocity + gravity_convert_vel
 	return out

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b8jbm3e01232q" path="res://assets/Actor/Enemy/Roller.png" id="2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i7s0c"]
-radius = 7.8
+radius = 7.9
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8c34y"]
 radius = 8.0
@@ -67,7 +67,7 @@ debug_color = Color(1, 0, 0, 0.235294)
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=151251306]
 position = Vector2(0, -8)
 texture = ExtResource("2")
-offset = Vector2(0, -0.2)
+offset = Vector2(0, -0.1)
 hframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1695882587]
@@ -84,14 +84,14 @@ collision_mask = 522
 hit_from_inside = true
 
 [node name="RWall" type="RayCast2D" parent="." unique_id=1445699779]
-position = Vector2(7.9, -11)
+position = Vector2(8, -11)
 target_position = Vector2(0, 6)
 collision_mask = 522
 hit_from_inside = true
 
 [node name="RWall2" type="RayCast2D" parent="." unique_id=1395596203]
 position = Vector2(0, -8)
-target_position = Vector2(5.85, 5.85)
+target_position = Vector2(5.9, 5.9)
 collision_mask = 522
 
 [node name="LFloor" type="RayCast2D" parent="." unique_id=572170680]
@@ -101,14 +101,14 @@ collision_mask = 522
 hit_from_inside = true
 
 [node name="LWall" type="RayCast2D" parent="." unique_id=1240672371]
-position = Vector2(-7.9, -11)
+position = Vector2(-8, -11)
 target_position = Vector2(0, 6)
 collision_mask = 522
 hit_from_inside = true
 
 [node name="LWall2" type="RayCast2D" parent="." unique_id=1141564041]
 position = Vector2(0, -8)
-target_position = Vector2(-5.85, 5.85)
+target_position = Vector2(-5.9, 5.9)
 collision_mask = 522
 
 [node name="Floor" type="RayCast2D" parent="." unique_id=1540645007]
@@ -119,7 +119,7 @@ hit_from_inside = true
 
 [node name="FloorNormal" type="RayCast2D" parent="." unique_id=1814582159]
 position = Vector2(0, -8)
-target_position = Vector2(0, 7.9)
+target_position = Vector2(0, 8.1)
 collision_mask = 522
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
