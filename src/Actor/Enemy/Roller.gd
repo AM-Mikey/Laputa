@@ -153,8 +153,7 @@ func animate():
 	if (stuck_state == StuckState.STUCK):
 		$AnimationPlayer.stop()
 	else:
-		var displacement = (prev_global_position - global_position) / get_physics_process_delta_time()
-		$AnimationPlayer.play("Roll", -1.0, displacement.length() / 80.0)
+		$AnimationPlayer.play("Roll", -1.0, velocity.length() / 80.0)
 		match move_dir:
 			Vector2.LEFT: $Sprite2D.flip_h = false
 			Vector2.RIGHT: $Sprite2D.flip_h = true
