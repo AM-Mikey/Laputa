@@ -575,21 +575,6 @@ direction = Vector2(-4.371139e-08, 1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="ChestWeapon" type="Area2D" parent="Spawns" unique_id=1460924595 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(1904, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_tk244")
-prop_path = "res://src/Prop/ChestWeapon.tscn"
-properties = {
-"editor_hidden": [false, 1, ""],
-"gun_name": ["", 4, ""],
-"id": [&"ChestWeapon", 4]
-}
-
 [node name="PhysFan1" type="Area2D" parent="Spawns" unique_id=132587828 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -694,7 +679,7 @@ properties = {
 "id": [&"AmmoRefill", 4]
 }
 
-[node name="RefillTerminal" type="Area2D" parent="Spawns" unique_id=932539730 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
+[node name="HealthRefill" type="Area2D" parent="Spawns" unique_id=932539730 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999

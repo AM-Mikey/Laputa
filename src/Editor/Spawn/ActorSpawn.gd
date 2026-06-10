@@ -29,6 +29,7 @@ extends Area2D
 
 @onready var w = get_tree().get_root().get_node("World")
 
+
 func _ready():
 	if is_model:
 		actor_path = actor_path

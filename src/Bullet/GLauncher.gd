@@ -4,7 +4,7 @@ var texture: CompressedTexture2D
 var texture_index: int
 var collision_shape: RectangleShape2D
 
-var minimum_speed := 6.0
+var minimum_speed := 8.0
 var bounciness := 0.6
 var explosion_time = 2.5
 var start_velocity

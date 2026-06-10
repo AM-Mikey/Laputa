@@ -5,8 +5,13 @@ const PHYS_WIND_COLUMN = preload("res://src/Utility/PhysWindColumn.tscn")
 
 
 var wind_dir : Vector2
+var phys_wind_column : Node
 @export var speed := 20.0 #4 is about equal with gravity
 @export var toggled := true
+var fan_start_sfx_player
+var fan_loop_sfx_player
+var fan_vis_wind_up_duration := 3.33
+var fan_vis_wind_down_duration := 6.66
 
 func setup(): #Reminder: no function called can use await
 	wind_dir = $WindVector.direction.snapped(Vector2(1, 1)) #remove VUVector imprecision
@@ -28,6 +33,7 @@ func setup(): #Reminder: no function called can use await
 	if toggled:
 		$AnimationPlayer.speed_scale = speed / 5.0
 		$AnimationPlayer.play("On")
+		_do_sfx_loop()
 	else:
 		$AnimationPlayer.speed_scale = 1.0
 		$AnimationPlayer.play("Off")
@@ -35,24 +41,21 @@ func setup(): #Reminder: no function called can use await
 	w.emit_signal("finished_spawn_entities_step") #NOTE telling it we're done with setup early feels like cheating but this should work
 	await get_tree().physics_frame
 	await get_tree().physics_frame
-	var phys_wind_column = PHYS_WIND_COLUMN.instantiate()
+	if toggled:
+		create_phys_wind_column()
+
+
+
+### HELPERS ###
+
+func create_phys_wind_column():
+	phys_wind_column = PHYS_WIND_COLUMN.instantiate()
 	phys_wind_column.wind_dir = wind_dir
 	phys_wind_column.speed = speed
 	phys_wind_column.column_rect = get_column_rect()
 	phys_wind_column.global_position = global_position
 	w.current_level.add_child(phys_wind_column) #TODO: maybe put this on a custom misc layer?
 
-
-func activate(): #TODO: add buttons for this, shootable, standable, interactable
-	toggled = !toggled
-	if toggled:
-		$AnimationPlayer.speed_scale = speed / 5.0 #TODO: doesnt yet have a way to play a continuous sfx, make vol scalable to speed
-		$AnimationPlayer.play("On")
-	else:
-		$AnimationPlayer.speed_scale = 1.0
-		$AnimationPlayer.play("Off")
-
-### HELPERS ###
 
 func get_column_rect() -> Rect2:
 	var start_point: Vector2
@@ -78,3 +81,62 @@ func get_column_rect() -> Rect2:
 	var min_corner := start_point.min(end_point) - Vector2(half_thickness, half_thickness)
 	var max_corner := start_point.max(end_point) + Vector2(half_thickness, half_thickness)
 	return Rect2(min_corner, max_corner - min_corner)
+
+
+func _do_sfx_start():
+	fan_start_sfx_player = am.play("fan_start", self, null, 0.8, 0.0)
+	await get_tree().create_timer(6.98).timeout #stupid but no gap/pop in audio like this. exact time of fanstart.ogg
+	#await fan_start_sfx_player.finished #0.0006 second gap from the last one finishing to this audio starting. that sucks #in the case of _do_sfx_end() starting during this await, it never finishes this await. this is desired behavior
+	if fan_start_sfx_player:
+		fan_loop_sfx_player = am.play("fan_loop", self, null, 0.8, 0.0)
+
+func _do_sfx_loop(): #TODO: bug where it can be looping more than once
+	fan_loop_sfx_player = am.play("fan_loop", self, null, 0.8, 0.0)
+
+func _do_sfx_end():
+	if fan_loop_sfx_player:
+		am.clear_player_by_node(fan_loop_sfx_player)
+		fan_loop_sfx_player = null
+	if fan_start_sfx_player:
+		am.clear_player_by_node(fan_start_sfx_player)
+		fan_start_sfx_player = null
+	am.play("fan_end", self, null, 0.8, 0.0)
+
+func _physics_process(_delta):
+	var max_speed_scale = speed / 5.0
+	if !$VisWindUp.is_stopped():
+		$AnimationPlayer.speed_scale = max_speed_scale - (max_speed_scale * ($VisWindUp.time_left / fan_vis_wind_up_duration))
+	elif !$VisWindDown.is_stopped():
+		$AnimationPlayer.speed_scale = ($VisWindDown.time_left / fan_vis_wind_down_duration) * max_speed_scale
+		if $AnimationPlayer.speed_scale <= 0.01:
+			$AnimationPlayer.stop()
+	else:
+		$AnimationPlayer.speed_scale = max_speed_scale #TODO: doesnt yet have a way to play a continuous sfx, make vol scalable to speed
+
+### SIGNALS ###
+
+func on_switch_toggled(switch_toggled):
+	toggled = switch_toggled
+	$AnimationPlayer.play("On")
+	if toggled:
+		$VisWindUp.start(fan_vis_wind_up_duration)
+		create_phys_wind_column()
+		_do_sfx_start()
+	else:
+		$VisWindDown.start(fan_vis_wind_down_duration)
+		phys_wind_column.queue_free()
+		_do_sfx_end()
+
+
+func on_switch_timer_start():
+	toggled = true
+	$AnimationPlayer.play("On")
+	create_phys_wind_column()
+	_do_sfx_start()
+
+
+func on_switch_timer_timeout():
+	toggled = false
+	$AnimationPlayer.play("On")
+	phys_wind_column.queue_free()
+	_do_sfx_end()

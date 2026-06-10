@@ -2,10 +2,6 @@
 extends CharacterBody2D
 class_name Prop
 
-var sfx_ammo_refill = load("res://assets/SFX/placeholder/snd_get_missile.ogg")
-var sfx_deny = load("res://assets/SFX/placeholder/snd_quote_bonkhead.ogg")
-var sfx_chest = load("res://assets/SFX/placeholder/snd_chest_open.ogg")
-
 
 var active_players := []
 var rng = RandomNumberGenerator.new()

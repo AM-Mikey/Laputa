@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dw7sedue7iyox"]
 
-[ext_resource type="Script" uid="uid://duvrih0ykirci" path="res://src/Utility/PhysWindColumn.gd" id="1_t7hjx"]
+[ext_resource type="Script" path="res://src/Utility/PhysWindColumn.gd" id="1_t7hjx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bes6g"]
 resource_local_to_scene = true

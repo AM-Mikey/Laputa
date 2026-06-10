@@ -29,6 +29,12 @@ signal players_updated
 	"health_upgrade_break": preload("res://assets/SFX/PotterySmash.ogg"),
 	"rope_loose": preload("res://assets/SFX/RopeLoose.ogg"),
 	"rope_land": preload("res://assets/SFX/RopeLand.ogg"),
+	"switch_lever_down": preload("res://assets/SFX/SwitchLeverDown.ogg"),
+	"switch_lever_up": preload("res://assets/SFX/SwitchLeverUp.ogg"),
+	"switch_timer": preload("res://assets/SFX/SwitchTimer.ogg"),
+	"fan_start": preload("res://assets/SFX/FanStart.ogg"),
+	"fan_loop": preload("res://assets/SFX/FanLoop.ogg"),
+	"fan_end": preload("res://assets/SFX/FanEnd.ogg"),
 
 	"break_grass": preload("res://assets/SFX/Placeholder/snd_explosion2.ogg"),
 
@@ -135,10 +141,18 @@ func play(sfx_string: String, actor = null, bus = null, volume = 1.0, pitchsprea
 		if bus != null: #non-specific bus
 			player.bus = bus
 
-		await player.finished
-		var queue_slot = [player, sfx_string]
-		_clear_player("sfx", queue_slot)
+		var loaded_sfx = sfx_dict[sfx_string]
+		if !loaded_sfx.loop:
+			_wait_and_clear_non_looping_sfx(player, sfx_string)
+		return player
+	else:
+		return null
 
+
+func _wait_and_clear_non_looping_sfx(player, sfx_string):
+	await player.finished
+	var queue_slot = [player, sfx_string]
+	_clear_player("sfx", queue_slot)
 
 func play_music(music_string): #TODO: add a resource with track info
 	#var track = {
@@ -242,6 +256,13 @@ func _clear_player(type, queue_slot):
 		"interrupt":
 			interrupt_queue.erase(queue_slot)
 	queue_slot[0].queue_free() #player
+	emit_signal("players_updated")
+
+func clear_player_by_node(player_node):
+	for s in sfx_queue:
+		if s[0] == player_node:
+			sfx_queue.erase(s)
+	player_node.queue_free()
 	emit_signal("players_updated")
 
 ### CONTROLS ###

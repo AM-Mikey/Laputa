@@ -601,3 +601,37 @@ turn off debuglayer visible when in editor
 FANTODO:
 	remote switch activation (shooting switch or standing or activating)
 	looping sfx for things that are continuously activated
+	
+	
+	
+Lever TODO:
+	levers and puzzle elements do not save their state. recreating an exact state would be too complicated/prevent resetting the puzzle
+		by exiting and re-entering
+	levers that act to solve a puzzle (such as opening a door) should not only open that door, but change the level tscn of all connecting
+	levels' doors and loadzones to be an alternate version of the level where the puzzle is already solved.
+		Can this get complicated with multiple puzzles in the same level?
+			Only an issue in town levels
+	
+	lever light if effect isnt obvious
+	lever sfx
+	kill all sfx on reload
+	#TODO: bug where it can be looping more than once fan
+	puzzle solved is a level var/state. forces all affected switches to be inert/inactive
+	
+	
+	what we need
+		-level.puzzle_solved: bool
+		-switch.connected_to_puzzle: bool
+		-connected_prop_or_trigger_etc.set_puzzle_solved(true)
+			or instead level.set_puzzle_solved({}) dict structure: {entity: [var_name, var_value]} to be able to affect everything needed
+			
+			
+	
+		-on_switch_toggled(toggled):
+		
+		-on_switch_activated():
+		
+		-on_switch_timer_start():
+		
+		-on_switch_timer_timeout():
+		
