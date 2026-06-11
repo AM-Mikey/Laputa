@@ -14,7 +14,6 @@ const MISC_SCENES = [
 
 signal misc_changed(misc_path)
 
-var miscs = {}
 var active_misc_path
 
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
@@ -25,7 +24,7 @@ func setup_miscs():
 	var index = 0
 	for m in MISC_SCENES:
 		var misc = load(m).instantiate()
-		miscs[misc.name] = misc
+		misc.queue_free.call_deferred()
 		var misc_button = MISC_BUTTON.instantiate()
 		misc_button.misc_path = m
 		misc_button.misc_name = misc.name

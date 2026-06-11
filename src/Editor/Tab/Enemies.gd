@@ -4,7 +4,6 @@ const ENEMY_BUTTON = preload("res://src/Editor/Button/EnemyButton.tscn")
 
 signal enemy_changed(enemy_path) #never used
 
-var enemies = {}
 var active_enemy_path
 
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
@@ -16,8 +15,8 @@ func setup_enemies():
 	for e in find_enemy_scenes("res://src/Actor/Enemy/"):
 
 		var enemy = load(e).instantiate()
+		enemy.queue_free.call_deferred()
 		if not enemy.editor_hidden:
-			enemies[enemy.name] = enemy
 
 			var enemy_button = ENEMY_BUTTON.instantiate()
 			enemy_button.enemy_path = e

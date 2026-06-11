@@ -4,7 +4,6 @@ const NPC_BUTTON = preload("res://src/Editor/Button/NPCButton.tscn")
 
 signal npc_changed(npc_path) #never used
 
-var npcs = {}
 var active_npc_path
 
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
@@ -16,8 +15,8 @@ func setup_npcs():
 	for p in find_npc_scenes("res://src/Actor/NPC/"):
 
 		var npc = load(p).instantiate()
+		npc.queue_free.call_deferred()
 		if not npc.editor_hidden:
-			npcs[npc.name] = npc
 
 			var npc_button = NPC_BUTTON.instantiate()
 			npc_button.npc_path = p

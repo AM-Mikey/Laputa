@@ -19,6 +19,7 @@ func _ready():
 		add_to_group("EnemySpawns")
 
 	var actor = load(actor_path).instantiate()
+	actor.queue_free.call_deferred()
 
 	#name
 	var index = 0
@@ -154,6 +155,7 @@ func spawn():
 	for ac in actor.get_children(): #clear old from actor
 		if ac.is_in_group("WaypointLocals") || ac.is_in_group("VUVectors") || ac.is_in_group("VURects") || ac.is_in_group("VUActors") || ac.is_in_group("WaypointGlobalSpawns"):
 			actor.remove_child(ac)
+			ac.queue_free()
 
 	for c in get_children(): #add new from spawn
 		if c.is_in_group("WaypointLocals") || c.is_in_group("VUVectors") || c.is_in_group("VURects") || c.is_in_group("VUActors"):
@@ -164,6 +166,7 @@ func spawn():
 
 func set_sprite():
 	var actor = load(actor_path).instantiate()
+	actor.queue_free.call_deferred()
 	if "difficulty" in actor:
 		var texture_const_string = "TX_%s" % properties["difficulty"][0]
 		$Sprite2D.texture = actor.get(texture_const_string)

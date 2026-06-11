@@ -20,6 +20,7 @@ func _ready():
 
 	#ColorRect
 	var trigger = load(trigger_path).instantiate()
+	trigger.queue_free.call_deferred()
 	$ColorRect.color = trigger.color
 	#name
 	var index = 0
@@ -48,6 +49,7 @@ func _ready():
 
 func initialize(): #first time set up properties
 	var trigger = load(trigger_path).instantiate()
+	trigger.queue_free.call_deferred()
 	for p in trigger.get_property_list():
 		if p["usage"] & 4102 == 4102: #exported properties
 			properties[p["name"]] = [trigger.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
@@ -84,7 +86,6 @@ func initialize(): #first time set up properties
 				ac.owner = null
 				add_child(ac)
 				ac.owner = w.current_level
-	trigger.free()
 
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
 	var old_properties = properties
@@ -145,6 +146,7 @@ func spawn():
 	for ac in trigger.get_children(): #clear old from trigger
 		if ac.is_in_group("WaypointLocals") || ac.is_in_group("VUVectors") || ac.is_in_group("VURects") || ac.is_in_group("VUActors"):
 			trigger.remove_child(ac)
+			ac.queue_free()
 		if ac.is_in_group("WaypointGlobalSpawns"): #turn off visibility
 			ac.visible = false
 
