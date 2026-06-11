@@ -108,7 +108,7 @@ collision_mask = 522
 hit_from_inside = true
 
 [node name="RWall2" type="RayCast2D" parent="." unique_id=1395596203]
-position = Vector2(0, -8)
+position = Vector2(0, -7)
 target_position = Vector2(5.9, 5.9)
 collision_mask = 522
 
@@ -125,13 +125,13 @@ collision_mask = 522
 hit_from_inside = true
 
 [node name="LWall2" type="RayCast2D" parent="." unique_id=1141564041]
-position = Vector2(0, -8)
+position = Vector2(0, -7)
 target_position = Vector2(-5.9, 5.9)
 collision_mask = 522
 
 [node name="Floor" type="RayCast2D" parent="." unique_id=1540645007]
-position = Vector2(-4, 0)
-target_position = Vector2(8, 0)
+position = Vector2(-4.1, 0)
+target_position = Vector2(8.1, 0)
 collision_mask = 522
 hit_from_inside = true
 

@@ -72,9 +72,11 @@ func _on_physics_process(delta):
 
 	current_vel = calc_velocity(move_dir, true, false, false)
 
-	velocity = current_vel
-	move_and_slide()
+	var collision = move_and_collide(current_vel * delta)
 	animate()
+
+	if (collision and !on_floor and !on_slope): # Allow it to lodging into 1 tile-gap instead of move over it
+		move_and_collide(Vector2(0, current_vel.y) * delta)
 
 	#if (name == debug_name):
 		#print(current_vel, " -> ", velocity, " Move dir: ", move_dir, ", Floor: ", on_floor, ", Slope: ", on_slope,", Stuck: ", stuck_state == StuckState.STUCK)
@@ -83,11 +85,13 @@ func _on_physics_process(delta):
 		var right_wall_contact = $RWall.is_colliding() or $RWall2.is_colliding()
 		var left_wall_contact = $LWall.is_colliding() or $LWall2.is_colliding()
 		var wall_contact = (move_dir.x > 0 and right_wall_contact) or (move_dir.x <= 0 and left_wall_contact)
-		var free_opposite_slope = true
-		if on_slope:
-			free_opposite_slope = (move_dir.x > 0 and !left_wall_contact) or (move_dir.x <= 0 and !right_wall_contact)
+		var check_flag = wall_contact and stuck_state != StuckState.STUCK
 
-		if wall_contact and free_opposite_slope and stuck_state != StuckState.STUCK:
+		if on_slope:
+			var free_opposite_slope: bool = (move_dir.x > 0 and !left_wall_contact) or (move_dir.x <= 0 and !right_wall_contact)
+			check_flag = wall_contact and free_opposite_slope and stuck_state != StuckState.STUCK
+
+		if check_flag:
 			move_dir.x *= -1.0
 			am.play("enemy_jump", self)
 			$TurnTimer.start()
@@ -122,27 +126,29 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_fric
 	move_velocity = speed * move_dir * in_water_mult
 
 	if !on_floor or on_slope:
-		gravity_velocity.y += gravity * get_physics_process_delta_time()
+		var add_gravity: float = gravity * get_physics_process_delta_time()
 		if on_slope:
-			const max_grav: float = 50.0
-			const max_x: float = 20.0
+			move_velocity = move_velocity.slide(floor_normal)
+			gravity_velocity = gravity_velocity.slide(floor_normal)
+			var max_x := speed.x * 1.0 / tan(floor_normal.angle() - (PI / 2.0))
 			## Exchange excess gravity velocity into proper slide to avoid the Engine spazzing out with move_and_slide():
-			if (abs(current_vel.x) <= max_x):
-				if (gravity_velocity.y > max_grav):
-					var excess_gravity := Vector2(0, gravity_velocity.y - max_grav)
-					var convert_vel := excess_gravity.slide(floor_normal)
-					#if (name == debug_name):
-						#print("A: ", current_vel, " slide ", floor_normal, " ", convert_vel)
-					gravity_convert_vel += convert_vel
-					gravity_velocity.y = min(gravity_velocity.y, max_grav)
-			else:
-				gravity_velocity.y = min(gravity_velocity.y, max_grav)
+			if (abs(gravity_velocity.x) <= abs(max_x)):
+				var excess_gravity := Vector2(0, add_gravity)
+				var convert_vel := excess_gravity.slide(floor_normal)
+				#if (name == debug_name):
+					#print("A: ", excess_gravity, " slide ", floor_normal, " ", convert_vel)
+				gravity_velocity += convert_vel
 		else:
-			gravity_convert_vel = lerp(gravity_convert_vel, Vector2.ZERO, 0.2);
+			if (abs(gravity_velocity.x) <= 0.01):
+				gravity_velocity.x = 0.0
+			else:
+				gravity_velocity.x = move_toward(gravity_velocity.x, 0.0, 1.0)
+			gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
+			gravity_velocity.y += add_gravity
 	else:
+		gravity_velocity.x = move_toward(gravity_velocity.x, 0.0, 1.0)
+		gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
 		gravity_velocity.y = 0.0
-		gravity_convert_vel = Vector2.ZERO
-
 	#if (name == debug_name):
 		#print(move_velocity, " ", gravity_velocity, " ", gravity_convert_vel)
 
@@ -153,7 +159,7 @@ func animate():
 	if (stuck_state == StuckState.STUCK):
 		$AnimationPlayer.stop()
 	else:
-		$AnimationPlayer.play("Roll", -1.0, velocity.length() / 80.0)
+		$AnimationPlayer.play("Roll", -1.0, current_vel.length() / 80.0)
 		match move_dir:
 			Vector2.LEFT: $Sprite2D.flip_h = false
 			Vector2.RIGHT: $Sprite2D.flip_h = true
