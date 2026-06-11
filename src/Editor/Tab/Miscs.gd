@@ -24,7 +24,7 @@ func setup_miscs():
 	var index = 0
 	for m in MISC_SCENES:
 		var misc = load(m).instantiate()
-		misc.queue_free.call_deferred()
+		misc.queue_free()
 		var misc_button = MISC_BUTTON.instantiate()
 		misc_button.misc_path = m
 		misc_button.misc_name = misc.name

@@ -15,7 +15,7 @@ func setup_props():
 	for p in find_prop_scenes("res://src/Prop/"):
 
 		var prop = load(p).instantiate()
-		prop.queue_free.call_deferred()
+		prop.queue_free()
 		if not prop.editor_hidden:
 
 			var prop_button = PROP_BUTTON.instantiate()

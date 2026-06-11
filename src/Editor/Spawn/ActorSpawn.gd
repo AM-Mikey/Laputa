@@ -19,7 +19,7 @@ func _ready():
 		add_to_group("EnemySpawns")
 
 	var actor = load(actor_path).instantiate()
-	actor.queue_free.call_deferred()
+	actor.queue_free()
 
 	#name
 	var index = 0
@@ -166,7 +166,7 @@ func spawn():
 
 func set_sprite():
 	var actor = load(actor_path).instantiate()
-	actor.queue_free.call_deferred()
+	actor.queue_free()
 	if "difficulty" in actor:
 		var texture_const_string = "TX_%s" % properties["difficulty"][0]
 		$Sprite2D.texture = actor.get(texture_const_string)

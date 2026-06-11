@@ -15,7 +15,7 @@ func setup_npcs():
 	for p in find_npc_scenes("res://src/Actor/NPC/"):
 
 		var npc = load(p).instantiate()
-		npc.queue_free.call_deferred()
+		npc.queue_free()
 		if not npc.editor_hidden:
 
 			var npc_button = NPC_BUTTON.instantiate()

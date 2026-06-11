@@ -15,7 +15,7 @@ func setup_enemies():
 	for e in find_enemy_scenes("res://src/Actor/Enemy/"):
 
 		var enemy = load(e).instantiate()
-		enemy.queue_free.call_deferred()
+		enemy.queue_free()
 		if not enemy.editor_hidden:
 
 			var enemy_button = ENEMY_BUTTON.instantiate()
