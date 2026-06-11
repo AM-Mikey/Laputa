@@ -101,7 +101,16 @@ func _on_physics_process(delta):
 	animate()
 
 	if (collision and !on_floor and !on_slope): # Allow it to lodging into 1 tile-gap instead of move over it
-		move_and_collide(Vector2(0, current_vel.y) * delta)
+		var c := move_and_collide(Vector2(0, current_vel.y) * delta)
+
+		if c != null:
+			var diff := c.get_position().x - self.global_position.x
+			if absf(diff) < 0.1:
+				pass
+			elif diff < 0:
+				move_and_collide(Vector2(1, 0))
+			else:
+				move_and_collide(Vector2(-1, 0))
 
 	#if (name == debug_name):
 		#print("A: ", current_vel, " -> ", velocity, " Move dir: ", move_dir, ", Floor: ", on_floor, ", Slope: ", on_slope,", Stuck: ", stuck_state == StuckState.STUCK)
