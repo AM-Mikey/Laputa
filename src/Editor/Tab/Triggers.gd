@@ -4,7 +4,6 @@ const TRIGGER_BUTTON = preload("res://src/Editor/Button/TriggerButton.tscn")
 
 signal trigger_changed(trigger_path)
 
-var triggers = {}
 var active_trigger_path
 
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
@@ -16,8 +15,7 @@ func setup_triggers():
 	for p in find_trigger_scenes("res://src/Trigger/"):
 
 		var trigger = load(p).instantiate()
-
-		triggers[trigger.name] = trigger
+		trigger.queue_free.call_deferred()
 
 		var trigger_button = TRIGGER_BUTTON.instantiate()
 		trigger_button.trigger_path = p

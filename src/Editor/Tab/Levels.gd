@@ -24,6 +24,7 @@ func setup_levels():
 	for l in find_level_scenes("res://src/Level/"):
 
 		var level = load(l).instantiate()
+		level.queue_free()
 		if not level.editor_hidden:
 			levels[level.name] = level
 
@@ -140,6 +141,7 @@ func on_save_confirmed():
 
 func on_new_confirmed():
 	var level = load(default_level).instantiate()
+	level.queue_free()
 	var path = $NewDiae_log.current_path.get_basename() + ".tscn"
 	save_level(level, path)
 	load_level(path)

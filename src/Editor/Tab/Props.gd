@@ -4,7 +4,6 @@ const PROP_BUTTON = preload("res://src/Editor/Button/PropButton.tscn")
 
 signal prop_changed(prop_path)
 
-var props = {}
 var active_prop_path
 
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
@@ -16,8 +15,8 @@ func setup_props():
 	for p in find_prop_scenes("res://src/Prop/"):
 
 		var prop = load(p).instantiate()
+		prop.queue_free()
 		if not prop.editor_hidden:
-			props[prop.name] = prop
 
 			var prop_button = PROP_BUTTON.instantiate()
 			prop_button.prop_path = p

@@ -160,7 +160,12 @@ func swap_tiles(first_pos, second_pos): #warning, this is sensative to tile_set 
 		var level_path = ("res://src/Level/" + l)
 		var first_cell_positions = []
 		var second_cell_positions = []
-		var loaded_level = w.current_level if level_path == w.current_level.scene_file_path else load(level_path).instantiate()
+		var loaded_level: Node
+		if level_path == w.current_level.scene_file_path:
+			loaded_level = w.current_level 
+		else:
+			loaded_level = load(level_path).instantiate()
+			loaded_level.queue_free.call_deferred()
 		var tile_map = loaded_level.get_node("TileMap")
 		if tile_map.get_child(0).tile_set == main_tile_set:
 			for layer in tile_map.get_child_count():
