@@ -601,7 +601,7 @@ turn off debuglayer visible when in editor
 FANTODO:
 	remote switch activation (shooting switch or standing or activating)
 	looping sfx for things that are continuously activated
-	
+	fan bug: edging the side of an upward facing fan shoots juniper crazy high
 	
 	
 Lever TODO:

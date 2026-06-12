@@ -90,8 +90,8 @@ func _input(event):
 				pc.die()
 
 		if event.is_action_pressed("debug_slowmode"):
-			if Engine.time_scale != 0.5:
-				Engine.time_scale = 0.5
+			if Engine.time_scale != 0.01:
+				Engine.time_scale = 0.01
 			else:
 				Engine.time_scale = 1.0
 

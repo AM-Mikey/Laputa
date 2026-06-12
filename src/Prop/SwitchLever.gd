@@ -60,10 +60,9 @@ func activate():
 			$AnimationPlayer.play("Timer")
 
 func _do_click():
-	am.play("switch_lever_down")
-
+	am.play("switch_lever_down", null, null, 0.8, 0)
 func _do_release():
-	am.play("switch_lever_up")
+	am.play("switch_lever_up", null, null, 0.4, 0)
 
 func _do_tick():
 	am.play("switch_timer", self, null, 1.0, 0)

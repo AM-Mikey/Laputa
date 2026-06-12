@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://ch0jfwxc1hplq"]
+
+[ext_resource type="Script" uid="uid://bks7sfy37mf1" path="res://src/Effect/WindFan.gd" id="1_34ngb"]
+[ext_resource type="Texture2D" uid="uid://clac11f28uoj8" path="res://assets/Effect/Droplet.png" id="2_1mbxl"]
+[ext_resource type="Texture2D" uid="uid://cn84txin4yywk" path="res://assets/Face/Izu.png" id="3_1mbxl"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vt20v"]
+particles_animation = true
+particles_anim_h_frames = 7
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_1mbxl"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(0.2, -1), 0.0, 0.0, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(0.4, -1), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(0.6, -1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(0.8, -1), 0.0, 0.0, 0, 0, Vector2(0.90000004, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 11
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_34ngb"]
+offsets = PackedFloat32Array(0, 0.2199211, 0.6499014, 1)
+colors = PackedColorArray(1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_34ngb"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.1, -1), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(0.3, -1), 0.0, 0.0, 0, 0, Vector2(0.4, 1), 0.0, 0.0, 0, 0, Vector2(0.5, -1), 0.0, 0.0, 0, 0, Vector2(0.6, 1), 0.0, 0.0, 0, 0, Vector2(0.7, -1), 0.0, 0.0, 0, 0, Vector2(0.8, 1), 0.0, 0.0, 0, 0, Vector2(0.90000004, -1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 11
+metadata/_snap_enabled = true
+
+[node name="WindFan" type="Node2D" unique_id=1938051302]
+script = ExtResource("1_34ngb")
+
+[node name="Left" type="CPUParticles2D" parent="." unique_id=950058206]
+material = SubResource("CanvasItemMaterial_vt20v")
+amount = 32
+texture = ExtResource("2_1mbxl")
+lifetime = 3.0
+preprocess = 4.0
+spread = 2.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+tangential_accel_min = 400.0
+tangential_accel_max = 400.0
+tangential_accel_curve = SubResource("Curve_1mbxl")
+color_ramp = SubResource("Gradient_34ngb")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="Right" type="CPUParticles2D" parent="." unique_id=1803432895]
+material = SubResource("CanvasItemMaterial_vt20v")
+amount = 32
+texture = ExtResource("2_1mbxl")
+lifetime = 3.0
+spread = 2.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+tangential_accel_min = 400.0
+tangential_accel_max = 400.0
+tangential_accel_curve = SubResource("Curve_34ngb")
+color_ramp = SubResource("Gradient_34ngb")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=64501035]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_1mbxl")

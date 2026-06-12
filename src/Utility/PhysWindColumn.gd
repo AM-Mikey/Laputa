@@ -1,17 +1,24 @@
 extends Node2D
 
+const WIND_FAN = preload("res://src/Effect/WindFan.tscn")
+
 var affected_entities := []
 
 var wind_dir : Vector2
 var speed : float #4 is about equal with gravity
-var column_rect : Rect2
+var column_rect : Rect2 #in global
 #var disable_gravity_on_horizontal := true
 
 func _ready():
 	$BodyDetector/CollisionShape2D.shape.size = column_rect.size
-	$BodyDetector/CollisionShape2D.position = column_rect.position + (column_rect.size / 2.0)
+	$BodyDetector/CollisionShape2D.global_position = column_rect.position + (column_rect.size / 2.0)
 	$ColorRect.size = column_rect.size
-	$ColorRect.position = column_rect.position
+	$ColorRect.global_position = column_rect.position
+	var wind_fan = WIND_FAN.instantiate()
+	wind_fan.direction = wind_dir
+	wind_fan.global_position = global_position
+	wind_fan.tile_distance = (max(column_rect.size.x, column_rect.size.y) / 16.0)
+	get_tree().get_root().get_node("World").middle.add_child(wind_fan)
 
 
 func _physics_process(_delta: float):

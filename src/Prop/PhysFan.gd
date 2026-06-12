@@ -53,35 +53,42 @@ func create_phys_wind_column():
 	phys_wind_column.wind_dir = wind_dir
 	phys_wind_column.speed = speed
 	phys_wind_column.column_rect = get_column_rect()
-	phys_wind_column.global_position = global_position
+	phys_wind_column.global_position = global_position + get_column_pos()
 	w.current_level.add_child(phys_wind_column) #TODO: maybe put this on a custom misc layer?
 
-
-func get_column_rect() -> Rect2:
-	var start_point: Vector2
-	var end_point: Vector2
+func get_column_pos() -> Vector2:
 	match wind_dir:
 		Vector2.LEFT:
-			start_point = Vector2(0, 8)
+			return Vector2(0, 8)
 		Vector2.RIGHT:
-			start_point = Vector2(16, 8)
+			return Vector2(16, 8)
 		Vector2.UP:
-			start_point = Vector2(8, 0)
+			return Vector2(8, 0)
 		Vector2.DOWN:
-			start_point = Vector2(8, 16)
+			return Vector2(8, 16)
+		_:
+			printerr("ERROR: PhysFan wind_dir isn't ortagonal!")
+			return Vector2.ZERO
 
-	$WorldCast.position = start_point
+func get_column_rect() -> Rect2:
+	var column_pos = get_column_pos()
+	var start_point = global_position + column_pos + Vector2(0, -8).rotated(wind_dir.angle())
+	var end_point
+
+	$WorldCast.position = column_pos
 	if $WorldCast.is_colliding():
-		end_point = to_local($WorldCast.get_collision_point())
+		end_point = $WorldCast.get_collision_point() + Vector2(0, 8).rotated(wind_dir.angle())
 	else:
 		print("PhysFan didn't find a collision point, using PhysFan/WorldCast's length")
-		end_point = $WorldCast.position + $WorldCast.target_position.rotated($WorldCast.rotation)
+		end_point = $WorldCast.global_position + $WorldCast.target_position.rotated($WorldCast.rotation) + Vector2(0, 8).rotated(wind_dir.angle())
 
-	var half_thickness := 8.0
-	var min_corner := start_point.min(end_point) - Vector2(half_thickness, half_thickness)
-	var max_corner := start_point.max(end_point) + Vector2(half_thickness, half_thickness)
-	return Rect2(min_corner, max_corner - min_corner)
+	var rect_pos = Vector2(min(start_point.x, end_point.x), min(start_point.y, end_point.y))
+	var rect_size = Vector2(abs(start_point.x - end_point.x), abs(start_point.y - end_point.y))
+	return Rect2(rect_pos, rect_size)
 
+
+
+### SFX ###
 
 func _do_sfx_start():
 	fan_start_sfx_player = am.play("fan_start", self, null, 0.8, 0.0)
@@ -101,6 +108,8 @@ func _do_sfx_end():
 		am.clear_player_by_node(fan_start_sfx_player)
 		fan_start_sfx_player = null
 	am.play("fan_end", self, null, 0.8, 0.0)
+
+
 
 func _physics_process(_delta):
 	var max_speed_scale = speed / 5.0

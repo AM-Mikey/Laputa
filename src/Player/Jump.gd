@@ -122,9 +122,15 @@ func calc_velocity():
 		out.y = mm.speed.y * pc.move_dir.y
 	# Otherwise, perform gravity calculations
 	else:
+		#print(mm.gravity * get_physics_process_delta_time())
 		out.y += mm.gravity * get_physics_process_delta_time()
 		if not holding_jump and pc.velocity.y < 0.0:
+			print("doing scaling")
 			out.y *= 0.9
+		elif pc.velocity.y > 0.0:
+			print("goiing down")
+		else:
+			print("not that")
 	#X
 	if pc.move_dir.x != 0.0:
 		var value = out.x + mm.acceleration * pc.move_dir.x
