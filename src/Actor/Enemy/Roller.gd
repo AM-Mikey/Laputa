@@ -38,6 +38,7 @@ func setup(): #Reminder: no function called can use await
 
 const slope_detection_tolerance: float = PI / 90.0
 func _on_physics_process(delta):
+	var debug_text : Array [String] = []
 	if disabled or dead: return
 	on_floor = $Floor.is_colliding() or $LWall2.is_colliding() or $RWall2.is_colliding()
 	var floor_raycast_check = [$Floor, $LWall2, $RWall2, ]
@@ -104,8 +105,9 @@ func _on_physics_process(delta):
 		var c := move_and_collide(Vector2(0, current_vel.y) * delta)
 
 		if c != null:
+			var a := absf(c.get_normal().angle())
 			var diff := c.get_position().x - self.global_position.x
-			if absf(diff) < 0.1:
+			if absf(diff) < 0.1 || a > 2.65:
 				pass
 			elif diff < 0:
 				move_and_collide(Vector2(1, 0))
