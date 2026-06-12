@@ -1,14 +1,10 @@
 extends Bullet
-
-var texture: CompressedTexture2D
-var texture_index: int
-var collision_shape: RectangleShape2D
-
 var minimum_speed := 6.0
 var bounciness := 0.6
 var explosion_time = 2.5
-var start_velocity
+var start_avg_vel: float
 var touched_floor = false
+
 
 @onready var pc = f.pc()
 @onready var pc_on_floor = pc.is_on_floor()
@@ -21,17 +17,16 @@ func setup():
 	$ExplosionDetector.scale = Vector2.ZERO
 	$ExplosionDetector/CollisionShape2D.set_deferred("disabled", true)
 	velocity = get_initial_velocity(speed, direction)
-	start_velocity = abs(velocity.x) + abs(velocity.y) / 2.0 #used to calculate animation slowdown
+	start_avg_vel = (abs(velocity.x) + abs(velocity.y)) / 2.0 #used to calculate animation slowdown
 	$Timer.start(explosion_time)
-
-func _on_physics_process(delta):
-	velocity.y += gravity * delta
-
 	if velocity.x < 0:
 		$AnimationPlayer.play("FlipLeft")
 	else:
 		$AnimationPlayer.play("FlipRight")
 
+
+func _on_physics_process(delta):
+	velocity.y += gravity * delta
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		if abs(velocity.y) > minimum_speed:
@@ -40,11 +35,17 @@ func _on_physics_process(delta):
 			am.play("gun_grenade_bounce", self)
 		else:
 			velocity = Vector2.ZERO
+		if velocity.x < 0:
+			$AnimationPlayer.play("FlipLeft")
+		else:
+			$AnimationPlayer.play("FlipRight")
 
-	var avr_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
-	$AnimationPlayer.speed_scale = avr_velocity / start_velocity
-	if $AnimationPlayer.speed_scale < .1:
-		$AnimationPlayer.stop()
+	var avg_vel = (abs(velocity.x) + abs(velocity.y)) / 2.0 #used to calculate animation slowdown
+
+	$AnimationPlayer.speed_scale = avg_vel / start_avg_vel
+	if $AnimationPlayer.speed_scale < 0.1:
+		$AnimationPlayer.pause()
+	print($AnimationPlayer.speed_scale)
 
 
 
@@ -63,6 +64,25 @@ func get_initial_velocity(scoped_projectile_speed, scoped_direction) -> Vector2:
 	else:
 		out.y -= 100 #give us some ups to start with
 	return out
+
+
+func is_world_blocking(target) -> bool:
+	var target_center_global_position: Vector2
+	var target_shape : CollisionShape2D #NOTE: only works on CollisionShape2D
+	for c in target.get_children():
+		if c is CollisionShape2D:
+			target_shape = c #NOTE: gets the LAST collisionshape
+	if target_shape:
+		target_center_global_position = target_shape.global_position
+	else:
+		printerr("ERROR: Cannot find child CollisionShape2D in target: ", target)
+	$WorldCast.target_position = to_local(target_center_global_position)
+	$WorldCast.force_raycast_update()
+	if $WorldCast.is_colliding():
+		print("World in way of grenade")
+		return true
+	else:
+		return false
 
 
 
@@ -89,14 +109,13 @@ func _on_Timer_timeout():
 	var explosion = load("res://src/Effect/GrenadeExplosion.tscn").instantiate()
 	explosion.position = position
 
-	if $ExplosionDetector/CollisionShape2D.shape.radius == 32:
+	if $ExplosionDetector/CollisionShape2D.shape.radius == 32: #Brotha EWWWW
 		explosion.size = "Small"
 	if $ExplosionDetector/CollisionShape2D.shape.radius == 48:
 		explosion.size = "Medium"
 	if $ExplosionDetector/CollisionShape2D.shape.radius == 64:
 		explosion.size = "Large"
 	get_tree().get_root().get_node("World/Front").add_child(explosion)
-
 	var tween = get_tree().create_tween()
 	tween.tween_property($ExplosionDetector, "scale", Vector2.ONE, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await tween.finished
@@ -106,14 +125,17 @@ func _on_Timer_timeout():
 func _on_ExplosionDetector_body_entered(body):
 	#breakable
 	if body.get_collision_layer_value(9):
-		body.on_break("fire")
+		if !is_world_blocking(body):
+			body.on_break("fire")
 
 
 func _on_ExplosionDetector_area_entered(area):
 	#playerhurt
 	if area.get_collision_layer_value(17):
-		var knockback_direction = Vector2(sign(area.get_parent().global_position.x - global_position.x), 0)
-		area.get_parent().hit(int(damage/4.0), knockback_direction)
+		if !is_world_blocking(area):
+			var knockback_direction = Vector2(sign(area.get_parent().global_position.x - global_position.x), 0)
+			area.get_parent().hit(int(damage/4.0), knockback_direction)
 	#enemyhurt
 	elif area.get_collision_layer_value(18):
-		area.get_parent().hit(int(damage/4.0), get_blood_dir(area.get_parent()))
+		if !is_world_blocking(area):
+			area.get_parent().hit(int(damage/4.0), get_blood_dir(area.get_parent()))
