@@ -8,18 +8,20 @@ var move_dir
 
 @onready var prev_global_position := global_position
 
-enum StuckState {NONE, ATTEMPT_UNSTUCK, STUCK}
-var stuck_state: StuckState = StuckState.NONE
+var stuck := false
 var stuck_grace_time := 0.2
-var attempt_unstuck_time := 0.15
 var stuck_timer := 0.0
 
 var current_vel := Vector2.ZERO
-var on_floor: bool = false
+var on_floor: bool = false:
+	set(val):
+		just_landed = !on_floor and val
+		on_floor = val
 var on_slope: bool = false
+var just_landed: bool = false
 var floor_normal := Vector2.ZERO
 
-const debug_name := "SpawnHole21"
+const debug_name := "SpawnHole16"
 
 func setup(): #Reminder: no function called can use await
 	hp = 3
@@ -112,48 +114,42 @@ func _on_physics_process(delta):
 			else:
 				move_and_collide(Vector2(-0.15, 0.0))
 
-	#if (name == debug_name):
-		#print("A: ", current_vel, " Move dir: ", move_dir, ", Floor: ", on_floor, ", Slope: ", on_slope,", Stuck: ", stuck_state == StuckState.STUCK)
+	if (name == debug_name):
+		#print("A: ", current_vel, " Move dir: ", move_dir, ", Floor: ", on_floor, ", Slope: ", on_slope,", Stuck: ", stuck)
+		print("B: ", prev_global_position - global_position)
 
 	if ($TurnTimer.time_left <= 0):
 		var right_wall_contact = $RWall.is_colliding() or $RWall2.is_colliding()
 		var left_wall_contact = $LWall.is_colliding() or $LWall2.is_colliding()
 		var wall_contact = (move_dir.x > 0 and right_wall_contact) or (move_dir.x <= 0 and left_wall_contact)
-		var check_flag = wall_contact and stuck_state != StuckState.STUCK
+		var check_flag = wall_contact and !stuck
 
 		if on_slope:
 			var free_opposite_slope: bool = (move_dir.x > 0 and !left_wall_contact) or (move_dir.x <= 0 and !right_wall_contact)
-			check_flag = wall_contact and free_opposite_slope and stuck_state != StuckState.STUCK
+			check_flag = wall_contact and free_opposite_slope and !stuck
 
 		if check_flag:
 			move_dir.x *= -1.0
 			am.play("enemy_jump", self)
 			$TurnTimer.start()
 
-	var try_unstuck_flag: bool = false
 	if (prev_global_position - global_position).length() <= 0.25:
 		if (stuck_timer <= stuck_grace_time):
 			stuck_timer += delta
-		if (stuck_state == StuckState.NONE and stuck_timer > attempt_unstuck_time):
-			stuck_state = StuckState.ATTEMPT_UNSTUCK
-			global_position.y -= 0.05
-			try_unstuck_flag = true
-		elif (stuck_state == StuckState.ATTEMPT_UNSTUCK and stuck_timer > stuck_grace_time):
-			stuck_state = StuckState.STUCK
+		if (!stuck and stuck_timer > stuck_grace_time):
+			stuck = true
 	else:
-		stuck_state = StuckState.NONE
+		stuck = false
 		stuck_timer = 0.0
 
-	if (try_unstuck_flag):
-		prev_global_position = global_position + Vector2(0.0, 0.05)
-	else:
-		prev_global_position = global_position
-
+	prev_global_position = global_position
 
 var move_velocity: Vector2 = Vector2.ZERO
-var gravity_convert_vel: Vector2 = Vector2.ZERO
 var gravity_velocity: Vector2 = Vector2.ZERO
 func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_friction = false) -> Vector2:
+	if (stuck):
+		return Vector2.ZERO
+
 	var out := Vector2.ZERO
 	var in_water_mult := Vector2.ONE if !is_in_water else Vector2(0.666, 0.666)
 
@@ -180,18 +176,21 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_fric
 			gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
 			gravity_velocity.y += add_gravity
 	else:
-		gravity_velocity.x = move_toward(gravity_velocity.x, 0.0, 1.0)
-		gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
-		gravity_velocity.y = 0.0
+		if (just_landed and abs(gravity_velocity.y) >= 10.0):
+			gravity_velocity.y = -abs(gravity_velocity.y) * 0.2
+		else:
+			gravity_velocity.x = move_toward(gravity_velocity.x, 0.0, 1.0)
+			gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
+			gravity_velocity.y = 0.0
 
 	#if (name == debug_name):
 		#print(move_velocity, " ", gravity_velocity, " ", floor_normal)
 
-	out = gravity_velocity + move_velocity + gravity_convert_vel
+	out = gravity_velocity + move_velocity
 	return out
 
 func animate():
-	if (stuck_state == StuckState.STUCK):
+	if (stuck):
 		$AnimationPlayer.stop()
 	else:
 		$AnimationPlayer.play("Roll", -1.0, current_vel.length() / 80.0)
