@@ -1,12 +1,12 @@
 extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/RollerIcon.png")
+const LAND: = preload("res://src/Effect/LandParticle.tscn")
 
 @export var start_dir = Vector2.LEFT
-
-var move_dir
-
 @onready var prev_global_position := global_position
+
+var move_dir := Vector2.ZERO
 
 var stuck := false
 var stuck_grace_time := 0.2
@@ -114,9 +114,9 @@ func _on_physics_process(delta):
 			else:
 				move_and_collide(Vector2(-0.15, 0.0))
 
-	if (name == debug_name):
+	#if (name == debug_name):
 		#print("A: ", current_vel, " Move dir: ", move_dir, ", Floor: ", on_floor, ", Slope: ", on_slope,", Stuck: ", stuck)
-		print("B: ", prev_global_position - global_position)
+		#print("B: ", prev_global_position - global_position)
 
 	if ($TurnTimer.time_left <= 0):
 		var right_wall_contact = $RWall.is_colliding() or $RWall2.is_colliding()
@@ -147,9 +147,6 @@ func _on_physics_process(delta):
 var move_velocity: Vector2 = Vector2.ZERO
 var gravity_velocity: Vector2 = Vector2.ZERO
 func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_friction = false) -> Vector2:
-	if (stuck):
-		return Vector2.ZERO
-
 	var out := Vector2.ZERO
 	var in_water_mult := Vector2.ONE if !is_in_water else Vector2(0.666, 0.666)
 
@@ -177,7 +174,13 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_fric
 			gravity_velocity.y += add_gravity
 	else:
 		if (just_landed and abs(gravity_velocity.y) >= 10.0):
+			if (abs(gravity_velocity.y) > 100.0):
+				am.play("pc_land")
+				var effect = LAND.instantiate()
+				effect.position = global_position
+				world.get_node("Front").add_child(effect)
 			gravity_velocity.y = -abs(gravity_velocity.y) * 0.2
+
 		else:
 			gravity_velocity.x = move_toward(gravity_velocity.x, 0.0, 1.0)
 			gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
