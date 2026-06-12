@@ -9,6 +9,21 @@ const SHOP_MENU = preload("res://src/UI/ShopMenu/ShopMenu.tscn")
 @onready var w = get_tree().get_root().get_node("World")
 
 var editor_tab = 0 #to save when we re-enter the editor
+var time_scales = [
+	0.01,
+	0.025,
+	0.05,
+	0.1,
+	0.25,
+	0.5,
+	1.0,
+	1.25,
+	1.5,
+	1.75,
+	2.0,
+	5.0,
+	10.0]
+var current_time_scale_index := 6
 
 func _ready():
 	process_mode = PROCESS_MODE_ALWAYS
@@ -89,11 +104,17 @@ func _input(event):
 					return
 				pc.die()
 
-		if event.is_action_pressed("debug_slowmode"):
-			if Engine.time_scale != 0.01:
-				Engine.time_scale = 0.01
-			else:
-				Engine.time_scale = 1.0
+		if event.is_action_pressed("debug_slow_down"):
+			if current_time_scale_index != 0:
+				current_time_scale_index -= 1
+				Engine.time_scale = time_scales[current_time_scale_index]
+				print("Time Scale: ", Engine.time_scale)
+
+		if event.is_action_pressed("debug_speed_up"):
+			if current_time_scale_index != 12:
+				current_time_scale_index += 1
+				Engine.time_scale = time_scales[current_time_scale_index]
+				print("Time Scale: ", Engine.time_scale)
 
 
 
@@ -114,3 +135,5 @@ func debug_wind():
 func reload_level():
 	print("reloading level")
 	w.change_level_via_code(w.current_level.scene_file_path, false)
+	current_time_scale_index = 6
+	Engine.time_scale = time_scales[current_time_scale_index]

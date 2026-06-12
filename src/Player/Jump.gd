@@ -128,7 +128,7 @@ func calc_velocity():
 			print("doing scaling")
 			out.y *= 0.9
 		elif pc.velocity.y > 0.0:
-			print("goiing down")
+			print("going down")
 		else:
 			print("not that")
 	#X

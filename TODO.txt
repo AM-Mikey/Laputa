@@ -598,10 +598,22 @@ create new visualutility for actor model
 turn off debuglayer visible when in editor
 
 
+GENERAL TODO:
+	Debug slowmode with levels of slowness
+
 FANTODO:
 	remote switch activation (shooting switch or standing or activating)
 	looping sfx for things that are continuously activated
-	fan bug: edging the side of an upward facing fan shoots juniper crazy high
+	
+	LAST THING
+		fan bug: jumping into an upward facing fan shoots juniper crazy high
+		-this is because gravity is lower than the upward speed of the fan, we only
+		are limited here because of the 0.9 scaling when releasing jump
+			-enemies etc have no protection, so they need solution as well
+	
+	amount of particles = fan speed
+	create multiple fans
+	fan loop playing multiple times on startup
 	
 	
 Lever TODO:
