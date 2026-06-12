@@ -19,7 +19,7 @@ var on_floor: bool = false
 var on_slope: bool = false
 var floor_normal := Vector2.ZERO
 
-const debug_name := "SpawnHole24"
+const debug_name := "SpawnHole21"
 
 func setup(): #Reminder: no function called can use await
 	hp = 3
@@ -104,16 +104,16 @@ func _on_physics_process(delta):
 		var c := move_and_collide(Vector2(0, current_vel.y) * delta)
 
 		if c != null:
-			var diff := c.get_position().x - self.global_position.x
+			var diff := c.get_position().x - global_position.x
 			if absf(diff) < 0.1:
 				pass
 			elif diff < 0:
-				move_and_collide(Vector2(1, 0))
+				move_and_collide(Vector2(0.15, 0.0))
 			else:
-				move_and_collide(Vector2(-1, 0))
+				move_and_collide(Vector2(-0.15, 0.0))
 
 	#if (name == debug_name):
-		#print("A: ", current_vel, " -> ", velocity, " Move dir: ", move_dir, ", Floor: ", on_floor, ", Slope: ", on_slope,", Stuck: ", stuck_state == StuckState.STUCK)
+		#print("A: ", current_vel, " Move dir: ", move_dir, ", Floor: ", on_floor, ", Slope: ", on_slope,", Stuck: ", stuck_state == StuckState.STUCK)
 
 	if ($TurnTimer.time_left <= 0):
 		var right_wall_contact = $RWall.is_colliding() or $RWall2.is_colliding()
