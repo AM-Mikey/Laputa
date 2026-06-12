@@ -175,7 +175,7 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_fric
 	else:
 		if (just_landed and abs(gravity_velocity.y) >= 10.0):
 			if (abs(gravity_velocity.y) > 100.0):
-				am.play("pc_land")
+				am.play("enemy_thud")
 				var effect = LAND.instantiate()
 				effect.position = global_position
 				world.get_node("Front").add_child(effect)
