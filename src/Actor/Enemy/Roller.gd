@@ -35,6 +35,7 @@ func setup(): #Reminder: no function called can use await
 		move_dir = Vector2(signf(velocity.x), 0.0)
 	else:
 		move_dir = start_dir
+
 	set_up_direction(FLOOR_NORMAL)
 	animate()
 	w.emit_signal("finished_spawn_entities_step")
@@ -49,51 +50,55 @@ func _on_physics_process(delta):
 		if fraycast.is_colliding():
 			floor_raycast = fraycast
 			break
-	if (on_floor and $LFloor.is_colliding() and $RFloor.is_colliding()):
-		var left_floor_collide_pos = $LFloor.get_collision_point()
-		var right_floor_collide_pos = $RFloor.get_collision_point()
-		var floor_pos
-		if (floor_raycast == $Floor):
-			floor_pos = global_position + Vector2(0.0, -0.1)
-		else:
-			floor_pos = floor_raycast.get_collision_point()
-
-		var left_floor_angle := angle_to_nearest_x_axis(left_floor_collide_pos.angle_to_point(floor_pos))
-		var left_floor_angle_check := left_floor_angle > slope_detection_tolerance and left_floor_angle <= floor_max_angle
-		var right_floor_angle := angle_to_nearest_x_axis(right_floor_collide_pos.angle_to_point(floor_pos))
-		var right_floor_angle_check := right_floor_angle > slope_detection_tolerance and right_floor_angle <= floor_max_angle
-		on_slope = left_floor_angle_check and right_floor_angle_check
-
-		#if (name == debug_name):
-			#print(rad_to_deg(left_floor_angle_check), " ", rad_to_deg(right_floor_angle_check))
-
-		if (left_floor_angle_check and right_floor_angle_check):
-			floor_normal = left_floor_collide_pos.direction_to(right_floor_collide_pos).orthogonal()
-		elif left_floor_angle_check:
-			floor_normal = left_floor_collide_pos.direction_to(floor_pos).orthogonal()
-		elif right_floor_angle_check:
-			floor_normal = floor_pos.direction_to(right_floor_collide_pos).orthogonal()
-	elif (on_floor and ($LFloor.is_colliding() or $RFloor.is_colliding())):
-		if !(($LFloor.is_colliding() and floor_raycast == $RWall2) or ($RFloor.is_colliding() and floor_raycast == $LWall2)):
-			var offside_raycast: RayCast2D = $LFloor if $LFloor.is_colliding() else $RFloor
-			var offside_collide_pos = offside_raycast.get_collision_point()
+	if (difficulty == 0):
+		if (on_floor and $LFloor.is_colliding() and $RFloor.is_colliding()):
+			var left_floor_collide_pos = $LFloor.get_collision_point()
+			var right_floor_collide_pos = $RFloor.get_collision_point()
 			var floor_pos
 			if (floor_raycast == $Floor):
 				floor_pos = global_position + Vector2(0.0, -0.1)
 			else:
 				floor_pos = floor_raycast.get_collision_point()
+
+			var left_floor_angle := angle_to_nearest_x_axis(left_floor_collide_pos.angle_to_point(floor_pos))
+			var left_floor_angle_check := left_floor_angle > slope_detection_tolerance and left_floor_angle <= floor_max_angle
+			var right_floor_angle := angle_to_nearest_x_axis(right_floor_collide_pos.angle_to_point(floor_pos))
+			var right_floor_angle_check := right_floor_angle > slope_detection_tolerance and right_floor_angle <= floor_max_angle
+			on_slope = left_floor_angle_check and right_floor_angle_check
+
 			#if (name == debug_name):
-				#print(floor_pos, " -> ", offside_collide_pos, " = ",rad_to_deg(fmod(abs(offside_collide_pos.angle_to_point(floor_pos)), PI)))
+				#print(rad_to_deg(left_floor_angle_check), " ", rad_to_deg(right_floor_angle_check))
 
-			var angle_check = angle_to_nearest_x_axis(offside_collide_pos.angle_to_point(floor_pos))
-			on_slope = angle_check > slope_detection_tolerance and angle_check <= floor_max_angle
+			if (left_floor_angle_check and right_floor_angle_check):
+				floor_normal = left_floor_collide_pos.direction_to(right_floor_collide_pos).orthogonal()
+			elif left_floor_angle_check:
+				floor_normal = left_floor_collide_pos.direction_to(floor_pos).orthogonal()
+			elif right_floor_angle_check:
+				floor_normal = floor_pos.direction_to(right_floor_collide_pos).orthogonal()
+		elif (on_floor and ($LFloor.is_colliding() or $RFloor.is_colliding())):
+			if !(($LFloor.is_colliding() and floor_raycast == $RWall2) or ($RFloor.is_colliding() and floor_raycast == $LWall2)):
+				var offside_raycast: RayCast2D = $LFloor if $LFloor.is_colliding() else $RFloor
+				var offside_collide_pos = offside_raycast.get_collision_point()
+				var floor_pos
+				if (floor_raycast == $Floor):
+					floor_pos = global_position + Vector2(0.0, -0.1)
+				else:
+					floor_pos = floor_raycast.get_collision_point()
+				#if (name == debug_name):
+					#print(floor_pos, " -> ", offside_collide_pos, " = ",rad_to_deg(fmod(abs(offside_collide_pos.angle_to_point(floor_pos)), PI)))
 
-			#if (name == debug_name):
-				#print(rad_to_deg(angle_check))
+				var angle_check = angle_to_nearest_x_axis(offside_collide_pos.angle_to_point(floor_pos))
+				on_slope = angle_check > slope_detection_tolerance and angle_check <= floor_max_angle
 
-			floor_normal = floor_pos.direction_to(offside_collide_pos).orthogonal()
-			if (offside_raycast == $LFloor):
-				floor_normal = -floor_normal
+				#if (name == debug_name):
+					#print(rad_to_deg(angle_check))
+
+				floor_normal = floor_pos.direction_to(offside_collide_pos).orthogonal()
+				if (offside_raycast == $LFloor):
+					floor_normal = -floor_normal
+		else:
+			on_slope = false
+			floor_normal = Vector2.ZERO
 	else:
 		on_slope = false
 		floor_normal = Vector2.ZERO
@@ -119,9 +124,13 @@ func _on_physics_process(delta):
 		#print("A: ", current_vel, " Move dir: ", move_dir, ", Floor: ", on_floor, ", Slope: ", on_slope,", Stuck: ", stuck)
 		#print("B: ", prev_global_position - global_position)
 
+	const max_wall_upper_angle := PI / 3.0
 	if ($TurnTimer.time_left <= 0):
-		var right_wall_contact = $RWall.is_colliding() or $RWall2.is_colliding() or $RWall3.is_colliding()
-		var left_wall_contact = $LWall.is_colliding() or $LWall2.is_colliding() or $LWall3.is_colliding()
+		var center_point := global_position + Vector2(0, -8)
+		var right_wall_top = collision and center_point.angle_to_point(collision.get_position()) <= 0.0 and center_point.angle_to_point(collision.get_position()) >= -max_wall_upper_angle
+		var right_wall_contact = $RWall.is_colliding() or $RWall2.is_colliding() or right_wall_top
+		var left_wall_top = collision and center_point.angle_to_point(collision.get_position()) <= -PI + max_wall_upper_angle
+		var left_wall_contact = $LWall.is_colliding() or $LWall2.is_colliding() or left_wall_top
 		var wall_contact = (move_dir.x > 0 and right_wall_contact) or (move_dir.x <= 0 and left_wall_contact)
 		var check_flag = wall_contact and !stuck
 
@@ -133,6 +142,8 @@ func _on_physics_process(delta):
 			move_dir.x *= -1.0
 			am.play("enemy_jump", self)
 			$TurnTimer.start()
+			if (difficulty == 1):
+				gravity_velocity.x = -gravity_velocity.x
 
 	if (prev_global_position - global_position).length() <= 0.25:
 		if (stuck_timer <= stuck_grace_time):
@@ -174,9 +185,8 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_fric
 			gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
 			gravity_velocity.y += add_gravity
 	else:
-
-		if (just_landed and abs(gravity_velocity.y) >= 10.0):
-			if (difficulty == 0):
+		if (just_landed):
+			if (difficulty == 0 and abs(gravity_velocity.y) >= 10.0):
 				if (abs(gravity_velocity.y) > 100.0):
 					am.play("enemy_thud")
 					var effect = LAND.instantiate()
@@ -184,13 +194,18 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_fric
 					world.get_node("Front").add_child(effect)
 				gravity_velocity.y = -abs(gravity_velocity.y) * 0.2
 			elif (difficulty == 1):
-				if (gravity_velocity.length() > 100.0):
-					am.play("enemy_jump")
-					#var effect = LAND.instantiate()
-					#effect.position = global_position
-					#world.get_node("Front").add_child(effect)
-				gravity_velocity = -gravity_velocity * 0.7
-
+				if (abs(gravity_velocity.y) >= 10.0):
+					if (gravity_velocity.length() > 50.0):
+						var collision = move_and_collide((gravity_velocity + move_velocity) * get_physics_process_delta_time(), true)
+						if (collision):
+							am.play("enemy_jump")
+							var effect = LAND.instantiate()
+							effect.position = collision.get_position()
+							effect.rotation = collision.get_normal().rotated(PI / 2.0).angle()
+							world.get_node("Front").add_child(effect)
+					gravity_velocity = -abs(gravity_velocity) * 0.7
+				else:
+					gravity_velocity = Vector2.ZERO
 		else:
 			gravity_velocity.x = move_toward(gravity_velocity.x, 0.0, 1.0)
 			gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
