@@ -26,7 +26,7 @@ var just_landed := false
 var floor_normal := Vector2.ZERO
 var last_collision = null
 const max_wall_upper_angle := PI / 3.0
-var bounce_next_frame := false
+var ceil_bounce_next_frame := false
 
 #const debug_name := "SpawnHole5"
 
@@ -37,8 +37,9 @@ func setup(): #Reminder: no function called can use await
 	speed = Vector2(60, 60)
 	acceleration = 50
 	gravity = 200
+	gravity_velocity = velocity
 	if (velocity != Vector2.ZERO):
-		move_dir = Vector2(signf(velocity.x), 0.0)
+		move_dir = Vector2(-1.0 if signf(velocity.x) <= 0.0 else 1.0, 0.0)
 	else:
 		move_dir = start_dir
 
@@ -172,14 +173,14 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_fric
 
 	move_velocity = speed * move_dir * in_water_mult
 
-	if (difficulty == 1 and bounce_next_frame):
+	if (ceil_bounce_next_frame):
 		am.play("enemy_thud", self, "sfx", gravity_velocity.length() / 25.0)
 		if (gravity_velocity.length() > 100.0):
 			create_effect("Land")
 		if (gravity_velocity.length() > 250.0):
 			create_effect("Bonk")
 		gravity_velocity = -gravity_velocity * diff_1_bounce_factor
-		bounce_next_frame = false
+		ceil_bounce_next_frame = false
 	else:
 		if !on_floor or on_slope:
 			var add_gravity: float = gravity * get_physics_process_delta_time()
@@ -201,13 +202,12 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_fric
 					gravity_velocity.x = move_toward(gravity_velocity.x, 0.0, 1.0)
 				gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
 				gravity_velocity.y += add_gravity
-				if (difficulty == 1): #Ceil bounce
-					var collision = move_and_collide((gravity_velocity + move_velocity) * get_physics_process_delta_time(), true)
-					var ceil_angle = PI / 3.0
-					if (collision):
-						var check_angle := (global_position + Vector2(0, -8.0)).angle_to_point(collision.get_position())
-						if (check_angle >= -PI / 2.0 - ceil_angle and check_angle <= -PI / 2.0 + ceil_angle):
-							bounce_next_frame = true
+				var collision = move_and_collide((gravity_velocity + move_velocity) * get_physics_process_delta_time(), true)
+				var ceil_angle = PI / 3.0
+				if (collision):
+					var check_angle := (global_position + Vector2(0, -8.0)).angle_to_point(collision.get_position())
+					if (check_angle >= -PI / 2.0 - ceil_angle and check_angle <= -PI / 2.0 + ceil_angle):
+						ceil_bounce_next_frame = true
 		else:
 			if (just_landed):
 				if (difficulty == 0 and abs(gravity_velocity.y) >= 10.0):
