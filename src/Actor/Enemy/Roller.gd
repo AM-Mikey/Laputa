@@ -4,25 +4,30 @@ const ICON = preload("res://assets/Actor/Enemy/RollerIcon.png")
 const LAND: = preload("res://src/Effect/LandParticle.tscn")
 
 @export var difficulty := 1
+@export var diff_1_bounce_factor := 0.7
 @export var start_dir = Vector2.LEFT
-@onready var prev_global_position := global_position
 
 var move_dir := Vector2.ZERO
+
+var prev_global_position := global_position
 
 var stuck := false
 var stuck_grace_time := 0.2
 var stuck_timer := 0.0
 
 var current_vel := Vector2.ZERO
-var on_floor: bool = false:
+var on_floor := false:
 	set(val):
 		just_landed = !on_floor and val
 		on_floor = val
-var on_slope: bool = false
-var just_landed: bool = false
+var on_slope := false
+var just_landed := false
 var floor_normal := Vector2.ZERO
+var last_collision = null
+const max_wall_upper_angle := PI / 3.0
+var bounce_next_frame := false
 
-const debug_name := "SpawnHole16"
+#const debug_name := "SpawnHole5"
 
 func setup(): #Reminder: no function called can use await
 	hp = 3
@@ -36,6 +41,12 @@ func setup(): #Reminder: no function called can use await
 	else:
 		move_dir = start_dir
 
+	if (difficulty == 0):
+		$Sprite2D.modulate = Color.WHITE
+	elif (difficulty == 1):
+		$Sprite2D.modulate = Color.DEEP_PINK
+
+	prev_global_position = global_position
 	set_up_direction(FLOOR_NORMAL)
 	animate()
 	w.emit_signal("finished_spawn_entities_step")
@@ -90,9 +101,6 @@ func _on_physics_process(delta):
 				var angle_check = angle_to_nearest_x_axis(offside_collide_pos.angle_to_point(floor_pos))
 				on_slope = angle_check > slope_detection_tolerance and angle_check <= floor_max_angle
 
-				#if (name == debug_name):
-					#print(rad_to_deg(angle_check))
-
 				floor_normal = floor_pos.direction_to(offside_collide_pos).orthogonal()
 				if (offside_raycast == $LFloor):
 					floor_normal = -floor_normal
@@ -105,10 +113,10 @@ func _on_physics_process(delta):
 
 	current_vel = calc_velocity(move_dir, true, false, false)
 
-	var collision = move_and_collide(current_vel * delta)
+	last_collision = move_and_collide(current_vel * delta)
 	animate()
 
-	if (collision and !on_floor and !on_slope): # Allow it to lodging into 1 tile-gap instead of move over it
+	if (last_collision and !on_floor and !on_slope): # Allow it to lodging into 1 tile-gap instead of move over it
 		var c := move_and_collide(Vector2(0, current_vel.y) * delta)
 
 		if c != null:
@@ -124,12 +132,11 @@ func _on_physics_process(delta):
 		#print("A: ", current_vel, " Move dir: ", move_dir, ", Floor: ", on_floor, ", Slope: ", on_slope,", Stuck: ", stuck)
 		#print("B: ", prev_global_position - global_position)
 
-	const max_wall_upper_angle := PI / 3.0
 	if ($TurnTimer.time_left <= 0):
 		var center_point := global_position + Vector2(0, -8)
-		var right_wall_top = collision and center_point.angle_to_point(collision.get_position()) <= 0.0 and center_point.angle_to_point(collision.get_position()) >= -max_wall_upper_angle
+		var right_wall_top = last_collision and center_point.angle_to_point(last_collision.get_position()) <= 0.0 and center_point.angle_to_point(last_collision.get_position()) >= -max_wall_upper_angle
 		var right_wall_contact = $RWall.is_colliding() or $RWall2.is_colliding() or right_wall_top
-		var left_wall_top = collision and center_point.angle_to_point(collision.get_position()) <= -PI + max_wall_upper_angle
+		var left_wall_top = last_collision and center_point.angle_to_point(last_collision.get_position()) <= -PI + max_wall_upper_angle
 		var left_wall_contact = $LWall.is_colliding() or $LWall2.is_colliding() or left_wall_top
 		var wall_contact = (move_dir.x > 0 and right_wall_contact) or (move_dir.x <= 0 and left_wall_contact)
 		var check_flag = wall_contact and !stuck
@@ -164,52 +171,63 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_fric
 
 	move_velocity = speed * move_dir * in_water_mult
 
-	if !on_floor or on_slope:
-		var add_gravity: float = gravity * get_physics_process_delta_time()
-		if on_slope:
-			move_velocity = move_velocity.slide(floor_normal)
-			gravity_velocity = gravity_velocity.slide(floor_normal)
-			var max_x := speed.x * 1.0 / tan(floor_normal.angle() - (PI / 2.0))
-			## Exchange excess gravity velocity into proper slide to avoid the Engine spazzing out with move_and_slide():
-			if (abs(gravity_velocity.x) <= abs(max_x)):
-				var excess_gravity := Vector2(0, add_gravity)
-				var convert_vel := excess_gravity.slide(floor_normal)
-				#if (name == debug_name):
-					#print("A: ", excess_gravity, " slide ", floor_normal, " ", convert_vel)
-				gravity_velocity += convert_vel
-		else:
-			if (abs(gravity_velocity.x) <= 0.01):
-				gravity_velocity.x = 0.0
-			else:
-				gravity_velocity.x = move_toward(gravity_velocity.x, 0.0, 1.0)
-			gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
-			gravity_velocity.y += add_gravity
+	if (difficulty == 1 and bounce_next_frame):
+		gravity_velocity = -gravity_velocity * diff_1_bounce_factor
+		bounce_next_frame = false
 	else:
-		if (just_landed):
-			if (difficulty == 0 and abs(gravity_velocity.y) >= 10.0):
-				if (abs(gravity_velocity.y) > 100.0):
-					am.play("enemy_thud")
-					var effect = LAND.instantiate()
-					effect.position = global_position
-					world.get_node("Front").add_child(effect)
-				gravity_velocity.y = -abs(gravity_velocity.y) * 0.2
-			elif (difficulty == 1):
-				if (abs(gravity_velocity.y) >= 10.0):
-					if (gravity_velocity.length() > 50.0):
-						var collision = move_and_collide((gravity_velocity + move_velocity) * get_physics_process_delta_time(), true)
-						if (collision):
+		if !on_floor or on_slope:
+			var add_gravity: float = gravity * get_physics_process_delta_time()
+			if on_slope:
+				move_velocity = move_velocity.slide(floor_normal)
+				gravity_velocity = gravity_velocity.slide(floor_normal)
+				var max_x := speed.x * 1.0 / tan(floor_normal.angle() - (PI / 2.0))
+				## Exchange excess gravity velocity into proper slide to avoid the Engine spazzing out with move_and_slide():
+				if (abs(gravity_velocity.x) <= abs(max_x)):
+					var excess_gravity := Vector2(0, add_gravity)
+					var convert_vel := excess_gravity.slide(floor_normal)
+					#if (name == debug_name):
+						#print("A: ", excess_gravity, " slide ", floor_normal, " ", convert_vel)
+					gravity_velocity += convert_vel
+			else:
+				if (abs(gravity_velocity.x) <= 0.01):
+					gravity_velocity.x = 0.0
+				else:
+					gravity_velocity.x = move_toward(gravity_velocity.x, 0.0, 1.0)
+				gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
+				gravity_velocity.y += add_gravity
+				if (difficulty == 1): #Ceil bounce
+					var collision = move_and_collide((gravity_velocity + move_velocity) * get_physics_process_delta_time(), true)
+					var ceil_angle = PI / 3.0
+					if (collision):
+						var check_angle := (global_position + Vector2(0, -8.0)).angle_to_point(collision.get_position())
+						if (check_angle >= -PI / 2.0 - ceil_angle and check_angle <= -PI / 2.0 + ceil_angle):
+							bounce_next_frame = true
+
+
+		else:
+			if (just_landed):
+				if (difficulty == 0 and abs(gravity_velocity.y) >= 10.0):
+					if (abs(gravity_velocity.y) > 100.0):
+						am.play("enemy_thud")
+						var effect = LAND.instantiate()
+						effect.position = global_position
+						world.get_node("Front").add_child(effect)
+					gravity_velocity.y = -abs(gravity_velocity.y) * 0.2
+				elif (difficulty == 1):
+					if (abs(gravity_velocity.y) >= 5.0 and last_collision):
+						if (gravity_velocity.length() > 100.0):
 							am.play("enemy_jump")
 							var effect = LAND.instantiate()
-							effect.position = collision.get_position()
-							effect.rotation = collision.get_normal().rotated(PI / 2.0).angle()
+							effect.position = last_collision.get_position()
+							effect.rotation = last_collision.get_normal().rotated(PI / 2.0).angle()
 							world.get_node("Front").add_child(effect)
-					gravity_velocity = -abs(gravity_velocity) * 0.7
-				else:
-					gravity_velocity = Vector2.ZERO
-		else:
-			gravity_velocity.x = move_toward(gravity_velocity.x, 0.0, 1.0)
-			gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
-			gravity_velocity.y = 0.0
+						gravity_velocity = -gravity_velocity * diff_1_bounce_factor
+					else:
+						gravity_velocity = Vector2.ZERO
+			else:
+				gravity_velocity.x = move_toward(gravity_velocity.x, 0.0, 1.0)
+				gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
+				gravity_velocity.y = 0.0
 
 	#if (name == debug_name):
 		#print(move_velocity, " ", gravity_velocity, " ", floor_normal)
