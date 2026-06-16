@@ -1,9 +1,10 @@
 extends Enemy
 
+const BONK = preload("res://src/Effect/BonkParticle.tscn")
 const ICON = preload("res://assets/Actor/Enemy/RollerIcon.png")
 const LAND: = preload("res://src/Effect/LandParticle.tscn")
 
-@export var difficulty := 1
+@export var difficulty := 0
 @export var diff_1_bounce_factor := 0.7
 @export var start_dir = Vector2.LEFT
 
@@ -147,7 +148,7 @@ func _on_physics_process(delta):
 
 		if check_flag:
 			move_dir.x *= -1.0
-			am.play("enemy_jump", self)
+			am.play("enemy_jump", self, "sfx")
 			$TurnTimer.start()
 			if (difficulty == 1):
 				gravity_velocity.x = -gravity_velocity.x
@@ -172,6 +173,11 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_fric
 	move_velocity = speed * move_dir * in_water_mult
 
 	if (difficulty == 1 and bounce_next_frame):
+		am.play("enemy_thud", self, "sfx", gravity_velocity.length() / 25.0)
+		if (gravity_velocity.length() > 100.0):
+			create_effect("Land")
+		if (gravity_velocity.length() > 250.0):
+			create_effect("Bonk")
 		gravity_velocity = -gravity_velocity * diff_1_bounce_factor
 		bounce_next_frame = false
 	else:
@@ -202,25 +208,24 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_fric
 						var check_angle := (global_position + Vector2(0, -8.0)).angle_to_point(collision.get_position())
 						if (check_angle >= -PI / 2.0 - ceil_angle and check_angle <= -PI / 2.0 + ceil_angle):
 							bounce_next_frame = true
-
-
 		else:
 			if (just_landed):
 				if (difficulty == 0 and abs(gravity_velocity.y) >= 10.0):
-					if (abs(gravity_velocity.y) > 100.0):
-						am.play("enemy_thud")
-						var effect = LAND.instantiate()
-						effect.position = global_position
-						world.get_node("Front").add_child(effect)
+					am.play("enemy_thud", self, "sfx", gravity_velocity.length() / 25.0)
+					if (last_collision):
+						if (gravity_velocity.length() > 100.0):
+							create_effect("Land")
+						if (gravity_velocity.length() > 250.0):
+							create_effect("Bonk")
 					gravity_velocity.y = -abs(gravity_velocity.y) * 0.2
 				elif (difficulty == 1):
-					if (abs(gravity_velocity.y) >= 5.0 and last_collision):
-						if (gravity_velocity.length() > 100.0):
-							am.play("enemy_jump")
-							var effect = LAND.instantiate()
-							effect.position = last_collision.get_position()
-							effect.rotation = last_collision.get_normal().rotated(PI / 2.0).angle()
-							world.get_node("Front").add_child(effect)
+					if (abs(gravity_velocity.y) >= 5.0):
+						am.play("enemy_thud", self, "sfx", gravity_velocity.length() / 25.0)
+						if last_collision:
+							if (gravity_velocity.length() > 100.0):
+								create_effect("Land")
+							if (gravity_velocity.length() > 250.0):
+								create_effect("Bonk")
 						gravity_velocity = -gravity_velocity * diff_1_bounce_factor
 					else:
 						gravity_velocity = Vector2.ZERO
@@ -244,9 +249,23 @@ func animate():
 			Vector2.LEFT: $Sprite2D.flip_h = false
 			Vector2.RIGHT: $Sprite2D.flip_h = true
 
+## UTILITY
 # Return value in [0, PI / 2.0]
 func angle_to_nearest_x_axis(angle: float) -> float:
 	var proc_angle = fmod(abs(angle), PI)
 	if (proc_angle > PI / 2.0):
 		proc_angle = PI - proc_angle
 	return proc_angle
+
+func create_effect(vfx_name):
+	if (last_collision):
+		if (vfx_name == "Land"):
+			var effect = LAND.instantiate()
+			effect.position = last_collision.get_position()
+			effect.rotation = last_collision.get_normal().rotated(PI / 2.0).angle()
+			world.get_node("Front").add_child(effect)
+		elif (vfx_name == "Bonk"):
+			var bonk_effect = BONK.instantiate()
+			bonk_effect.normal = last_collision.get_normal()
+			bonk_effect.global_position = last_collision.get_position() + Vector2(0, 16)
+			world.get_node("Front").add_child(bonk_effect)
