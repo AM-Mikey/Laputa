@@ -149,7 +149,7 @@ func _on_physics_process(delta):
 
 		if check_flag:
 			move_dir.x *= -1.0
-			am.play("enemy_jump", self, "sfx")
+			am.play("enemy_jump", self)
 			$TurnTimer.start()
 			if (difficulty == 1):
 				gravity_velocity.x = -gravity_velocity.x
@@ -174,7 +174,7 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_fric
 	move_velocity = speed * move_dir * in_water_mult
 
 	if (ceil_bounce_next_frame):
-		am.play("enemy_thud", self, "sfx", gravity_velocity.length() / 25.0)
+		am.play("enemy_thud", self, null, gravity_velocity.length() / 25.0)
 		if (gravity_velocity.length() > 100.0):
 			create_effect("Land")
 		if (gravity_velocity.length() > 250.0):
@@ -211,7 +211,7 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_fric
 		else:
 			if (just_landed):
 				if (difficulty == 0 and abs(gravity_velocity.y) >= 10.0):
-					am.play("enemy_thud", self, "sfx", gravity_velocity.length() / 25.0)
+					am.play("enemy_thud", self, null, gravity_velocity.length() / 25.0)
 					if (last_collision):
 						if (gravity_velocity.length() > 100.0):
 							create_effect("Land")
@@ -220,7 +220,7 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = false, do_fric
 					gravity_velocity.y = -abs(gravity_velocity.y) * 0.2
 				elif (difficulty == 1):
 					if (abs(gravity_velocity.y) >= 5.0):
-						am.play("enemy_thud", self, "sfx", gravity_velocity.length() / 25.0)
+						am.play("enemy_thud", self, null, gravity_velocity.length() / 25.0)
 						if last_collision:
 							if (gravity_velocity.length() > 100.0):
 								create_effect("Land")
