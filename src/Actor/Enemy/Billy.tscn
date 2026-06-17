@@ -32,8 +32,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="3"]
 resource_name = "Jump"
-length = 0.4
-loop_mode = 1
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -41,10 +40,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [8, 9, 10, 11]
+"values": [8, 9, 10, 11, 8]
 }
 
 [sub_resource type="Animation" id="7"]
@@ -186,6 +185,7 @@ position = Vector2(0, -16)
 texture = ExtResource("2")
 hframes = 4
 vframes = 5
+frame = 8
 
 [node name="StateTimer" type="Timer" parent="." unique_id=1916012981]
 process_callback = 0

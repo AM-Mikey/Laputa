@@ -13,7 +13,7 @@ func setup():
 	$FizzleTimer.start(f_time)
 	break_method = "cut"
 	velocity = get_initial_velocity()
-	start_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
+	start_velocity = abs(velocity.x) + abs(velocity.y) / 2.0 #used to calculate animation slowdown
 
 
 func _on_physics_process(delta):
@@ -33,7 +33,7 @@ func _on_physics_process(delta):
 		else:
 			velocity = Vector2.ZERO
 
-	var avr_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
+	var avr_velocity = abs(velocity.x) + abs(velocity.y) / 2.0 #used to calculate animation slowdown
 	$AnimationPlayer.speed_scale = avr_velocity / start_velocity
 	if $AnimationPlayer.speed_scale < .1:
 		$AnimationPlayer.stop()

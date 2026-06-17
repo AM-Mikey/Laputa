@@ -4,16 +4,16 @@ const ICON = preload("res://assets/Actor/Enemy/BillyIcon.png")
 const SEED = preload("res://src/Bullet/Enemy/Seed.tscn")
 const WAYPOINT = preload("res://src/Editor/VisualUtility/WaypointGlobal.tscn")
 
-const TX_0 = preload("res://assets/Actor/Enemy/Billy.png")
-const TX_1 = preload("res://assets/Actor/Enemy/Billy.png")
+const TX_0 = preload("res://assets/Actor/Enemy/Billy0.png")
+const TX_1 = preload("res://assets/Actor/Enemy/Billy1.png")
 
 @export var move_dir = Vector2.LEFT
 @export var look_dir = Vector2.LEFT
-
+@export var difficulty := 0
+var max_difficulty := 1
 @export var idle_max_time = 5.0
 @export var walk_max_time = 10.0
 @export var defend_time = 0.4
-
 
 
 @export var cooldown_time = 1
@@ -24,16 +24,6 @@ const TX_1 = preload("res://assets/Actor/Enemy/Billy.png")
 @export var lock_distance = 128
 @export var lock_tolerance = 16
 
-@export_range(0.0, 1.0, 1.0) var difficulty: int = 0:
-	set(val):
-		match val:
-			0:
-				$JumpDetection/Left.enabled = false
-				$JumpDetection/Right.enabled = false
-			1:
-				$JumpDetection/Left.enabled = true
-				$JumpDetection/Right.enabled = true
-		difficulty = val
 const JUMP_VELOCITY: float = -1100.0
 
 var target: Node
@@ -47,10 +37,24 @@ var waypoint
 
 
 func setup(): #Reminder: no function called can use await
-	hp = 6
-	reward = 2
-	damage_on_contact = 1
-	speed = Vector2(50, 50)
+	match difficulty:
+		0:
+			$Sprite2D.texture = TX_0
+			$JumpDetection/Left.enabled = false
+			$JumpDetection/Right.enabled = false
+			hp = 6
+			reward = 2
+			damage_on_contact = 1
+			speed = Vector2(50, 50)
+		1:
+			$Sprite2D.texture = TX_1
+			$JumpDetection/Left.enabled = true
+			$JumpDetection/Right.enabled = true
+			hp = 6
+			reward = 3
+			damage_on_contact = 2
+			speed = Vector2(70, 70)
+
 	w.emit_signal("finished_spawn_entities_step")
 	change_state("walk")
 
@@ -187,9 +191,6 @@ func _on_PlayerDetector_body_entered(_body):
 
 func _on_PlayerDetector_body_exited(_body):
 	pass
-	#shooting = false
-	#target = null
-	#change_state("walk")
 
 
 func _on_JumpAccelTimer_timeout() -> void:
