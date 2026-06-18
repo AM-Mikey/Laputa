@@ -139,6 +139,7 @@ collision_layer = 2
 collision_mask = 520
 floor_max_angle = 1.0471976
 script = ExtResource("1")
+debug = true
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1482682800]
@@ -204,24 +205,20 @@ position = Vector2(0, -16)
 position = Vector2(-7, -8)
 target_position = Vector2(0, 16)
 collision_mask = 520
-collide_with_areas = true
 
 [node name="FloorDetectorR" type="RayCast2D" parent="." unique_id=1337091757]
 position = Vector2(7, -8)
 target_position = Vector2(0, 16)
 collision_mask = 520
-collide_with_areas = true
 
-[node name="JumpDetection" type="Node2D" parent="." unique_id=106257102]
-
-[node name="Left" type="RayCast2D" parent="JumpDetection" unique_id=1684778919]
+[node name="JumpDetectorL" type="RayCast2D" parent="." unique_id=1684778919]
 z_index = 5
 position = Vector2(-7, -32)
 target_position = Vector2(0, 14)
 collision_mask = 8
 hit_from_inside = true
 
-[node name="Right" type="RayCast2D" parent="JumpDetection" unique_id=1238464550]
+[node name="JumpDetectorR" type="RayCast2D" parent="." unique_id=1238464550]
 z_index = 5
 position = Vector2(7, -32)
 target_position = Vector2(0, 14)

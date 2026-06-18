@@ -40,16 +40,16 @@ func setup(): #Reminder: no function called can use await
 	match difficulty:
 		0:
 			$Sprite2D.texture = TX_0
-			$JumpDetection/Left.enabled = false
-			$JumpDetection/Right.enabled = false
+			$JumpDetectorL.enabled = false
+			$JumpDetectorR.enabled = false
 			hp = 6
 			reward = 2
 			damage_on_contact = 1
 			speed = Vector2(50, 50)
 		1:
 			$Sprite2D.texture = TX_1
-			$JumpDetection/Left.enabled = true
-			$JumpDetection/Right.enabled = true
+			$JumpDetectorL.enabled = true
+			$JumpDetectorR.enabled = true
 			hp = 6
 			reward = 3
 			damage_on_contact = 2
@@ -61,16 +61,12 @@ func setup(): #Reminder: no function called can use await
 ### STATES ###
 
 func enter_walk(_last_state):
-	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
-		move_dir = Vector2.RIGHT
-	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
-		move_dir = Vector2.LEFT
+	#if not $FloorDetectorL.is_colliding() or is_on_wall() and move_dir.x < 0:
+		#move_dir = Vector2.RIGHT
+	#if not $FloorDetectorR.is_colliding() or is_on_wall() and move_dir.x > 0:
+		#move_dir = Vector2.LEFT
 
 	ap.play("Walk")
-
-	match move_dir:
-		Vector2.LEFT: $Sprite2D.flip_h = false
-		Vector2.RIGHT: $Sprite2D.flip_h = true
 
 	rng.randomize()
 	$StateTimer.start(rng.randf_range(1.0, walk_max_time))
@@ -78,35 +74,27 @@ func enter_walk(_last_state):
 	change_state("idle")
 
 func do_walk(_delta):
-	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
-		change_state("idle")
-		return
-	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
-		change_state("idle")
-		return
+	if is_on_wall() || \
+		(!$FloorDetectorL.is_colliding() && move_dir.x < 0) || \
+		(!$FloorDetectorR.is_colliding() && move_dir.x > 0):
+		move_dir.x = -move_dir.x
+		look_dir.x = move_dir.x
 	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
 		velocity = calc_velocity(move_dir)
-		set_up_direction(FLOOR_NORMAL)
 		move_and_slide()
-
+	update_animation()
 
 func enter_idle(_last_state):
 	rng.randomize()
 	ap.play("Idle")
-	match move_dir:
-		Vector2.LEFT: $Sprite2D.flip_h = false
-		Vector2.RIGHT: $Sprite2D.flip_h = true
+	update_animation()
 	$StateTimer.start(rng.randf_range(1.0, idle_max_time))
 	await $StateTimer.timeout
 	change_state("walk")
 
-func do_idle(_delta) -> void:
-	velocity = calc_velocity(move_dir)
-	set_up_direction(FLOOR_NORMAL)
-	move_and_slide()
-
-func enter_aggro(_last_state):
-	pass
+#func do_idle(_delta) -> void:
+	#velocity = calc_velocity(move_dir)
+	#move_and_slide()
 
 func do_aggro(_delta):
 	if pc: #TODO: global enemy shutdown fix
@@ -116,21 +104,50 @@ func do_aggro(_delta):
 	#this isnt the best way to do this, but returns a good result.
 	#right now this cuts off move_dir when it's more than a block away (to -1 or 1)
 	#the small adjustment when less than that is why we don't just use sign()
-	var x_dir: float = clamp((waypoint.position.x - position.x)/16, -1.0, 1.0)
+	var on_edge := false
+	var displace_to_waypoint = waypoint.position.x - position.x
+	var x_dir: float = clamp(displace_to_waypoint / 16.0, -1.0, 1.0)
 	move_dir = Vector2(lerp(move_dir.x, x_dir, 0.2), 0)
 
-	if abs(position.x - waypoint.position.x) < lock_tolerance:
-		if abs(move_dir.x) < 0.1:
-			ap.play("StandShoot")
-		else:
-			ap.play("WalkShoot")
-	else:
-		ap.play("Walk")
+	if	difficulty == 1 && is_on_floor() && \
+		((!$FloorDetectorL.is_colliding() && move_dir.x < 0) || \
+		(!$FloorDetectorR.is_colliding() && move_dir.x > 0)):
+		move_dir.x = 0.0
+		on_edge = true
 
-#	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
+	if on_edge:
+		ap.play("Idle")
+	else:
+		if abs(displace_to_waypoint) < lock_tolerance:
+			if abs(move_dir.x) < 0.1:
+				ap.play("StandShoot")
+			else:
+				ap.play("WalkShoot")
+		else:
+			ap.play("Walk")
+
 	velocity = calc_velocity(move_dir)
-	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
+
+	# Make it so that it look away when run to find proper firing position and turn around
+	#var fractional_speed := speed
+	#if is_in_water:
+		#fractional_speed = speed * Vector2(0.666, 0.666)
+	#var curr_move_dir := velocity / fractional_speed
+#
+#
+	#if (abs(displace_to_waypoint) >= lock_distance * 0.5):
+		#look_dir = -look_dir
+	#elif (abs(curr_move_dir.x) >= 0.8):
+		#look_dir = -look_dir
+#
+	#if (name == "Billy6"):
+		#print(look_dir, " ", abs(displace_to_waypoint), " >= ", lock_distance * 0.5)
+
+	update_animation()
+
+func exit_aggro(_next_state):
+	move_dir.x = 1.0 if signf(move_dir.x) >= 0 else -1.0
 
 var is_jumping: bool = false
 var jump_acceleration: float = 0.0
@@ -149,7 +166,7 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_frict
 				wall_is_slope = collision.get_angle() <= deg_to_rad(80)
 				wall_in_walking_direction = true
 
-			var check_raycast: RayCast2D = $JumpDetection/Right if moving_right else $JumpDetection/Left
+			var check_raycast: RayCast2D = $JumpDetectorR if moving_right else $JumpDetectorL
 			if (is_on_wall() and wall_in_walking_direction and !wall_is_slope and !check_raycast.is_colliding()):
 				jump_acceleration = JUMP_VELOCITY
 				is_jumping = true
@@ -183,6 +200,11 @@ func set_waypoint(target_dir: Vector2):
 	waypoint.index = -1
 	world.current_level.add_child(waypoint)
 
+func update_animation():
+	match look_dir.x:
+		-1.0: $Sprite2D.flip_h = false
+		1.0: $Sprite2D.flip_h = true
+
 ### SIGNALS ###
 
 func _on_PlayerDetector_body_entered(_body):
@@ -190,7 +212,8 @@ func _on_PlayerDetector_body_entered(_body):
 	change_state("aggro")
 
 func _on_PlayerDetector_body_exited(_body):
-	pass
+	if (state == "aggro"):
+		change_state("idle")
 
 
 func _on_JumpAccelTimer_timeout() -> void:
