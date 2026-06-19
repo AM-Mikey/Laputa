@@ -61,11 +61,6 @@ func setup(): #Reminder: no function called can use await
 ### STATES ###
 
 func enter_walk(_last_state):
-	#if not $FloorDetectorL.is_colliding() or is_on_wall() and move_dir.x < 0:
-		#move_dir = Vector2.RIGHT
-	#if not $FloorDetectorR.is_colliding() or is_on_wall() and move_dir.x > 0:
-		#move_dir = Vector2.LEFT
-
 	ap.play("Walk")
 
 	rng.randomize()
@@ -92,9 +87,9 @@ func enter_idle(_last_state):
 	await $StateTimer.timeout
 	change_state("walk")
 
-#func do_idle(_delta) -> void:
-	#velocity = calc_velocity(move_dir)
-	#move_and_slide()
+func do_idle(_delta):
+	velocity = calc_velocity(Vector2.ZERO)
+	move_and_slide()
 
 func do_aggro(_delta):
 	if pc: #TODO: global enemy shutdown fix
@@ -128,21 +123,6 @@ func do_aggro(_delta):
 
 	velocity = calc_velocity(move_dir)
 	move_and_slide()
-
-	# Make it so that it look away when run to find proper firing position and turn around
-	#var fractional_speed := speed
-	#if is_in_water:
-		#fractional_speed = speed * Vector2(0.666, 0.666)
-	#var curr_move_dir := velocity / fractional_speed
-#
-#
-	#if (abs(displace_to_waypoint) >= lock_distance * 0.5):
-		#look_dir = -look_dir
-	#elif (abs(curr_move_dir.x) >= 0.8):
-		#look_dir = -look_dir
-#
-	#if (name == "Billy6"):
-		#print(look_dir, " ", abs(displace_to_waypoint), " >= ", lock_distance * 0.5)
 
 	update_animation()
 
