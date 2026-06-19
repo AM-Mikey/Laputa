@@ -109,7 +109,7 @@ func do_aggro(_delta):
 	var x_dir: float = clamp(displace_to_waypoint / 16.0, -1.0, 1.0)
 	move_dir = Vector2(lerp(move_dir.x, x_dir, 0.2), 0)
 
-	if	difficulty == 1 && is_on_floor() && \
+	if	difficulty == 0 && is_on_floor() && \
 		((!$FloorDetectorL.is_colliding() && move_dir.x < 0) || \
 		(!$FloorDetectorR.is_colliding() && move_dir.x > 0)):
 		move_dir.x = 0.0
@@ -166,8 +166,9 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_frict
 				wall_is_slope = collision.get_angle() <= deg_to_rad(80)
 				wall_in_walking_direction = true
 
-			var check_raycast: RayCast2D = $JumpDetectorR if moving_right else $JumpDetectorL
-			if (is_on_wall() and wall_in_walking_direction and !wall_is_slope and !check_raycast.is_colliding()):
+			var check_raycast: bool = !$JumpDetectorR.is_colliding() and !$JumpDetectorRWall.is_colliding() if moving_right \
+										else !$JumpDetectorL.is_colliding() and !$JumpDetectorLWall.is_colliding()
+			if (is_on_wall() and wall_in_walking_direction and !wall_is_slope and check_raycast):
 				jump_acceleration = JUMP_VELOCITY
 				is_jumping = true
 				$JumpAccelTimer.start()

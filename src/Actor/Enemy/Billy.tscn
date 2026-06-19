@@ -216,14 +216,24 @@ z_index = 5
 position = Vector2(-7, -32)
 target_position = Vector2(0, 14)
 collision_mask = 8
-hit_from_inside = true
+
+[node name="JumpDetectorLWall" type="RayCast2D" parent="." unique_id=2105790102]
+z_index = 5
+position = Vector2(-5, -18)
+target_position = Vector2(-3, 0)
+collision_mask = 8
 
 [node name="JumpDetectorR" type="RayCast2D" parent="." unique_id=1238464550]
 z_index = 5
 position = Vector2(7, -32)
 target_position = Vector2(0, 14)
 collision_mask = 8
-hit_from_inside = true
+
+[node name="JumpDetectorRWall" type="RayCast2D" parent="." unique_id=1571238141]
+z_index = 5
+position = Vector2(5, -18)
+target_position = Vector2(3, 0)
+collision_mask = 8
 
 [node name="JumpAccelTimer" type="Timer" parent="." unique_id=1621155892]
 wait_time = 0.1
