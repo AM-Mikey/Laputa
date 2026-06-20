@@ -137,7 +137,7 @@ _data = {
 [node name="Billy" type="CharacterBody2D" unique_id=147745042 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
-floor_max_angle = 1.0471976
+floor_max_angle = 0.87266463
 script = ExtResource("1")
 debug = true
 editor_hidden = false
@@ -219,7 +219,7 @@ collision_mask = 8
 [node name="JumpDetectorLWall" type="RayCast2D" parent="." unique_id=2105790102]
 z_index = 5
 position = Vector2(-5, -18)
-target_position = Vector2(-3, 0)
+target_position = Vector2(-2, 0)
 collision_mask = 8
 
 [node name="JumpDetectorR" type="RayCast2D" parent="." unique_id=1238464550]
@@ -231,7 +231,7 @@ collision_mask = 8
 [node name="JumpDetectorRWall" type="RayCast2D" parent="." unique_id=1571238141]
 z_index = 5
 position = Vector2(5, -18)
-target_position = Vector2(3, 0)
+target_position = Vector2(2, 0)
 collision_mask = 8
 
 [node name="JumpAccelTimer" type="Timer" parent="." unique_id=1621155892]
