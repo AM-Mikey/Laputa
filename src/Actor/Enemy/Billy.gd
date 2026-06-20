@@ -132,7 +132,7 @@ func exit_aggro(_next_state):
 var is_jumping: bool = false
 var jump_acceleration: float = 0.0
 func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
-	var default_value = super.calc_velocity(move_dir, do_gravity, do_acceleration, do_friction) #TODO: probably remove the super here
+	var default_value = super.calc_velocity(move_dir, do_gravity, false, false) #TODO: probably remove the super here
 	if (difficulty == 1):
 		if !(is_jumping):
 			if !(is_on_floor()):
@@ -141,7 +141,7 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_frict
 			var wall_is_slope: bool = false
 			var wall_in_walking_direction: bool = false
 
-			var collision: KinematicCollision2D = move_and_collide(8 * move_dir.sign(), true)
+			var collision: KinematicCollision2D = move_and_collide(move_dir.sign(), true)
 			if (collision):
 				wall_is_slope = collision.get_angle() <= deg_to_rad(80)
 				wall_in_walking_direction = true

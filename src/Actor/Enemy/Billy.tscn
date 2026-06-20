@@ -186,7 +186,6 @@ position = Vector2(0, -16)
 texture = ExtResource("2")
 hframes = 4
 vframes = 5
-frame = 8
 
 [node name="StateTimer" type="Timer" parent="." unique_id=1916012981]
 process_callback = 0
@@ -203,12 +202,12 @@ position = Vector2(0, -16)
 
 [node name="FloorDetectorL" type="RayCast2D" parent="." unique_id=1314022133]
 position = Vector2(-7, -8)
-target_position = Vector2(0, 16)
+target_position = Vector2(0, 24)
 collision_mask = 520
 
 [node name="FloorDetectorR" type="RayCast2D" parent="." unique_id=1337091757]
 position = Vector2(7, -8)
-target_position = Vector2(0, 16)
+target_position = Vector2(0, 24)
 collision_mask = 520
 
 [node name="JumpDetectorL" type="RayCast2D" parent="." unique_id=1684778919]
