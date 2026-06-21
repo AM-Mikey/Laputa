@@ -238,8 +238,13 @@ collision_mask = 8
 wait_time = 0.1
 one_shot = true
 
+[node name="DeaggroTimer" type="Timer" parent="." unique_id=1615668914]
+wait_time = 0.3
+one_shot = true
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
 [connection signal="timeout" from="JumpAccelTimer" to="." method="_on_JumpAccelTimer_timeout"]
+[connection signal="timeout" from="DeaggroTimer" to="." method="_on_DeaggroTimer_timeout"]

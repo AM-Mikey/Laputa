@@ -13,6 +13,7 @@ const TX_1 = preload("res://assets/Actor/Enemy/Billy1.png")
 var max_difficulty := 1
 @export var idle_max_time = 5.0
 @export var walk_max_time = 10.0
+@export var deaggro_delay = 0.3
 @export var defend_time = 0.4
 
 
@@ -53,6 +54,7 @@ func setup(): #Reminder: no function called can use await
 			damage_on_contact = 2
 			speed = Vector2(70, 70)
 
+	$DeaggroTimer.wait_time = deaggro_delay
 	waypoint = WAYPOINT.instantiate()
 	waypoint.owner_id = id
 	waypoint.index = -1
@@ -199,6 +201,10 @@ func _on_PlayerDetector_body_entered(_body):
 	change_state("aggro")
 
 func _on_PlayerDetector_body_exited(_body):
+	if (state == "aggro"):
+		$DeaggroTimer.start()
+
+func _on_DeaggroTimer_timeout() -> void:
 	if (state == "aggro"):
 		change_state("idle")
 
