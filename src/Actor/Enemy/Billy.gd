@@ -55,6 +55,11 @@ func setup(): #Reminder: no function called can use await
 			damage_on_contact = 2
 			speed = Vector2(70, 70)
 
+	waypoint = WAYPOINT.instantiate()
+	waypoint.owner_id = id
+	waypoint.index = -1
+	w.current_level.get_node("Waypoints").add_child(waypoint)
+
 	w.emit_signal("finished_spawn_entities_step")
 	change_state("walk")
 
@@ -74,9 +79,8 @@ func do_walk(_delta):
 		(!$FloorDetectorR.is_colliding() && move_dir.x > 0):
 		move_dir.x = -move_dir.x
 		look_dir.x = move_dir.x
-	if $FloorDetectorL.is_colliding() or $FloorDetectorR.is_colliding():
-		velocity = calc_velocity(move_dir)
-		move_and_slide()
+	velocity = calc_velocity(move_dir)
+	move_and_slide()
 	update_animation()
 
 func enter_idle(_last_state):
@@ -95,7 +99,7 @@ func do_aggro(_delta):
 	if pc: #TODO: global enemy shutdown fix
 		var target_dir = Vector2(sign(position.x - pc.position.x), 0)
 		look_dir = target_dir * -1
-		set_waypoint(target_dir)
+		waypoint.position = Vector2(pc.position.x + (lock_distance * target_dir.x), pc.position.y) #left or right of pc
 	#this isnt the best way to do this, but returns a good result.
 	#right now this cuts off move_dir when it's more than a block away (to -1 or 1)
 	#the small adjustment when less than that is why we don't just use sign()
@@ -122,6 +126,8 @@ func do_aggro(_delta):
 			ap.play("Walk")
 
 	velocity = calc_velocity(move_dir)
+	if (name == "Billy4"):
+		print(velocity)
 	move_and_slide()
 
 	update_animation()
@@ -133,9 +139,9 @@ var is_jumping: bool = false
 var jump_acceleration: float = 0.0
 func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
 	var default_value = super.calc_velocity(move_dir, do_gravity, false, false) #TODO: probably remove the super here
-	if (difficulty == 1):
-		if !(is_jumping):
-			if !(is_on_floor()):
+	if difficulty == 1:
+		if !is_jumping:
+			if !is_on_floor():
 				return default_value
 			var moving_right: bool = move_dir.x > 0
 			var wall_is_slope: bool = false
@@ -172,14 +178,6 @@ func fire():
 
 	world.get_node("Middle").add_child(bullet)
 	am.play("enemy_shoot", self)
-
-func set_waypoint(target_dir: Vector2):
-	if waypoint: waypoint.queue_free()
-	waypoint = WAYPOINT.instantiate()
-	waypoint.position = Vector2(pc.position.x + (lock_distance * target_dir.x), pc.position.y) #left or right of pc
-	waypoint.owner_id = id
-	waypoint.index = -1
-	world.current_level.add_child(waypoint)
 
 func update_animation():
 	match look_dir.x:
