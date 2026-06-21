@@ -140,7 +140,7 @@ var jump_acceleration: float = 0.0
 func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
 	var default_value = super.calc_velocity(move_dir, do_gravity, false, false) #TODO: probably remove the super here
 	if difficulty == 1:
-		if !is_jumping:
+		if !is_jumping and state == "aggro":
 			if !is_on_floor():
 				return default_value
 			var moving_right: bool = move_dir.x > 0
@@ -154,7 +154,7 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_frict
 
 			var check_raycast: bool = !$JumpDetectorR.is_colliding() and !$JumpDetectorRWall.is_colliding() if moving_right \
 										else !$JumpDetectorL.is_colliding() and !$JumpDetectorLWall.is_colliding()
-			if (is_on_wall() and wall_in_walking_direction and !wall_is_slope and check_raycast):
+			if (wall_in_walking_direction and !wall_is_slope and check_raycast):
 				jump_acceleration = JUMP_VELOCITY
 				is_jumping = true
 				$JumpAccelTimer.start()
