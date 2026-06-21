@@ -126,9 +126,17 @@ func do_aggro(_delta):
 			ap.play("Walk")
 
 	velocity = calc_velocity(move_dir)
-	if (name == "Billy28"):
-		print(velocity)
 	move_and_slide()
+
+	var floor_collision := move_and_collide(Vector2.DOWN, true)
+	if floor_collision:
+		var slide_normal_angle = floor_collision.get_normal().angle()
+		if slide_normal_angle < 0.0 && (slide_normal_angle >= deg_to_rad(-80) || slide_normal_angle <= deg_to_rad(-100)):
+			$Sprite2D.offset.y = 1
+		else:
+			$Sprite2D.offset.y = 0
+	else:
+		$Sprite2D.offset.y = 0
 
 	update_animation()
 
@@ -138,7 +146,7 @@ func exit_aggro(_next_state):
 var is_jumping: bool = false
 var jump_acceleration: float = 0.0
 func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
-	var default_value = super.calc_velocity(move_dir, do_gravity, false, false) #TODO: probably remove the super here
+	var default_value = super.calc_velocity(move_dir, do_gravity, do_acceleration, do_friction) #TODO: probably remove the super here
 	if difficulty == 1:
 		if !is_jumping and state == "aggro":
 			if !is_on_floor():
