@@ -34,8 +34,6 @@ var waypoint
 
 @onready var ap = $AnimationPlayer
 
-
-
 func setup(): #Reminder: no function called can use await
 	match difficulty:
 		0:
@@ -87,9 +85,11 @@ func enter_idle(_last_state):
 	rng.randomize()
 	ap.play("Idle")
 	update_animation()
-	$StateTimer.start(rng.randf_range(1.0, idle_max_time))
-	await $StateTimer.timeout
-	change_state("walk")
+
+	if ($StateTimer.is_inside_tree()):
+		$StateTimer.start(rng.randf_range(1.0, idle_max_time))
+		await $StateTimer.timeout
+		change_state("walk")
 
 func do_idle(_delta):
 	velocity = calc_velocity(Vector2.ZERO)
@@ -126,7 +126,7 @@ func do_aggro(_delta):
 			ap.play("Walk")
 
 	velocity = calc_velocity(move_dir)
-	if (name == "Billy4"):
+	if (name == "Billy28"):
 		print(velocity)
 	move_and_slide()
 
