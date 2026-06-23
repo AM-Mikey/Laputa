@@ -31,9 +31,11 @@ var last_collision: KinematicCollision2D
 var on_floor := false
 var on_wall := false
 
+var stuck_shooting := false
+
 @onready var ap = $AnimationPlayer
 
-var debug_name = "Billy4"
+var debug_name = "Billy39"
 
 func setup(): #Reminder: no function called can use await
 	match difficulty:
@@ -101,6 +103,7 @@ func do_aggro(delta):
 		var target_dir = Vector2(sign(position.x - pc.position.x), 0)
 		look_dir = target_dir * -1
 		waypoint.position = Vector2(pc.position.x + (lock_distance * target_dir.x), pc.position.y) #left or right of pc
+
 	#this isnt the best way to do this, but returns a good result.
 	#right now this cuts off move_dir when it's more than a block away (to -1 or 1)
 	#the small adjustment when less than that is why we don't just use sign()
@@ -115,16 +118,25 @@ func do_aggro(delta):
 		move_dir.x = 0.0
 		on_edge = true
 
-	if on_edge:
-		ap.play("Idle")
+	if on_wall:
+		ap.play("StandShoot")
+		stuck_shooting = true
 	else:
-		if abs(displace_to_waypoint) < lock_tolerance:
-			if abs(move_dir.x) < 0.1:
+		stuck_shooting = false
+		if on_edge:
+			if abs(displace_to_waypoint) < lock_tolerance:
 				ap.play("StandShoot")
 			else:
-				ap.play("WalkShoot")
+				ap.play("Idle")
 		else:
-			ap.play("Walk")
+			if abs(displace_to_waypoint) < lock_tolerance:
+				if abs(move_dir.x) < 0.1:
+					ap.play("StandShoot")
+				else:
+					ap.play("WalkShoot")
+			else:
+				ap.play("Walk")
+
 
 	velocity = calc_velocity(move_dir)
 	last_collision = move_and_collide(velocity * delta)
@@ -143,6 +155,7 @@ func do_aggro(delta):
 
 func exit_aggro(_next_state):
 	move_dir.x = 1.0 if signf(move_dir.x) >= 0 else -1.0
+	stuck_shooting = false
 
 var is_jumping := false
 var jump_acceleration := 0.0
@@ -157,18 +170,16 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_frict
 
 	on_wall = false
 	on_floor = false
-	var floor_collision: KinematicCollision2D
-	var wall_collision: KinematicCollision2D
-	if (last_collision):
-		floor_collision = move_and_collide(Vector2.DOWN, true)
-		if (floor_collision):
-			var floor_normal_angle = floor_collision.get_normal().angle()
-			on_floor = floor_normal_angle < -PI / 2.0 + floor_max_angle && floor_normal_angle > -PI / 2.0 - floor_max_angle
+	var floor_collision: KinematicCollision2D = move_and_collide(Vector2.DOWN, true)
+	var wall_collision: KinematicCollision2D = move_and_collide(move_dir.sign(), true)
 
-		wall_collision = move_and_collide(move_dir.sign(), true)
-		if (wall_collision):
-			var wall_normal_angle = wall_collision.get_normal().angle()
-			on_wall = wall_normal_angle > -PI / 2.0 + floor_max_angle || wall_normal_angle < -PI / 2.0 - floor_max_angle
+	if (floor_collision):
+		var floor_normal_angle = floor_collision.get_normal().angle()
+		on_floor = floor_normal_angle < -PI / 2.0 + floor_max_angle && floor_normal_angle > -PI / 2.0 - floor_max_angle
+
+	if (wall_collision):
+		var wall_normal_angle = wall_collision.get_normal().angle()
+		on_wall = abs(wall_normal_angle) >= PI / 2.0 + floor_max_angle || abs(wall_normal_angle) <= PI / 2.0 - floor_max_angle
 
 	move_velocity = move_dir * fractional_speed
 	var gravity_amount := gravity * delta
@@ -217,8 +228,8 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_frict
 				is_jumping = false
 
 	out = move_velocity + gravity_velocity
-	if (name == debug_name):
-		print(state, " ", move_dir, " ", out, " ", move_velocity, " ", gravity_velocity)
+	#if (name == debug_name):
+		#print(state, " ", move_dir, " ", out, " ", move_velocity, " ", gravity_velocity)
 	return out
 
 ### HELPERS ###
@@ -227,10 +238,28 @@ func fire():
 	var bullet = SEED.instantiate()
 
 	bullet.damage = bullet_damage
-	bullet.speed = bullet_speed
 	bullet.position = $BulletOrigin.global_position
 	bullet.origin = $BulletOrigin.global_position
-	bullet.direction = Vector2(look_dir.x /2 , -1) #Adjust this for angle
+
+	if !stuck_shooting: #Normal shooting
+		bullet.speed = bullet_speed
+		bullet.direction = Vector2(look_dir.x / 2 , -1) #Adjust this for angle
+	else:
+		# Even when shooting at close range, the arc will always peak at the same height as normal shooting
+		var normal_start_bullet_vel_y = bullet_speed * sin(Vector2(look_dir.x / 2.0, -1).angle())
+		var normal_time_peak_reached = abs(normal_start_bullet_vel_y / bullet.gravity)
+		var peak_y = 0.5 * bullet.gravity * pow(normal_time_peak_reached, 2) + normal_start_bullet_vel_y * normal_time_peak_reached
+		var normal_time_travel = sqrt(abs((peak_y + $BulletOrigin.position.y) / 0.5 / bullet.gravity)) + normal_time_peak_reached
+		var target_distance_x = (waypoint.global_position.x + lock_distance * look_dir.x) - $BulletOrigin.global_position.x
+
+		var b_speed_x = target_distance_x / normal_time_travel
+		var b_speed_y = (peak_y - 0.5 * bullet.gravity * pow(normal_time_peak_reached, 2)) / normal_time_peak_reached
+		bullet.speed = Vector2(b_speed_x, b_speed_y).length()
+		bullet.direction = Vector2(b_speed_x, b_speed_y).normalized()
+
+		#if name == debug_name:
+			#print("B ", bullet.speed, " ", bullet.direction)
+			#print(peak_y, " ", abs(0.5 * bullet.gravity * pow(normal_time_peak_reached, 2)))
 
 	world.get_node("Middle").add_child(bullet)
 	am.play("enemy_shoot", self)
