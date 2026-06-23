@@ -28,7 +28,9 @@ func calc_velocity(projectile_speed) -> Vector2:
 	var out = velocity
 	out.x = projectile_speed * direction.x
 	out.y += gravity * get_physics_process_delta_time()
-
 	if direction.y < 0:
 		out.y = projectile_speed * direction.y
+	if wind_areas_inside.size() != 0: #Inside Wind
+		if velocity.y < 0:
+			velocity.y *= 0.9
 	return out

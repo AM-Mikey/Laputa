@@ -18,6 +18,7 @@ var touched_floor = false
 
 func setup():
 	break_method = "burn"
+	is_wind_affected = true
 	$ExplosionDetector.scale = Vector2.ZERO
 	$ExplosionDetector/CollisionShape2D.set_deferred("disabled", true)
 	velocity = get_initial_velocity(speed, direction)
@@ -40,6 +41,10 @@ func _on_physics_process(delta):
 			am.play("gun_grenade_bounce", self)
 		else:
 			velocity = Vector2.ZERO
+
+	if wind_areas_inside.size() != 0: #Inside Wind
+		if velocity.y < 0:
+			velocity.y *= 0.9
 
 	var avr_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 	$AnimationPlayer.speed_scale = avr_velocity / start_velocity

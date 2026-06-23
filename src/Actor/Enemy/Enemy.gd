@@ -89,6 +89,9 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_frict
 			out.y = fractional_speed.y * move_dir.y
 	else:
 		out.y = fractional_speed.y * move_dir.y
+	if wind_areas_inside.size() != 0: #Inside Wind
+		if out.y < 0.0:
+			out.y *= 0.9
 	return out
 
 

@@ -64,6 +64,7 @@ func _physics_process(_delta):
 		$VBox/HBox/C2/A/Crouch.text = str(pc.is_crouching)
 		$VBox/HBox/C2/A/SSP.text = str(pc.is_on_ssp)
 		$VBox/HBox/C2/A/Water.text = str(pc.is_in_water)
+		$VBox/HBox/C2/A/Winds.text = str(pc.wind_areas_inside.size())
 
 		$VBox/HBox/C2/A/Front.text = str(w.get_node("Front").get_child_count())
 		$VBox/HBox/C2/A/Middle.text = str(w.get_node("Middle").get_child_count())

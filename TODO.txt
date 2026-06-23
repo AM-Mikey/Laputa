@@ -598,22 +598,23 @@ create new visualutility for actor model
 turn off debuglayer visible when in editor
 
 
-GENERAL TODO:
-	Debug slowmode with levels of slowness
 
 FANTODO:
 	remote switch activation (shooting switch or standing or activating)
 	looping sfx for things that are continuously activated
 	
-	LAST THING
-		fan bug: jumping into an upward facing fan shoots juniper crazy high
-		-this is because gravity is lower than the upward speed of the fan, we only
-		are limited here because of the 0.9 scaling when releasing jump
-			-enemies etc have no protection, so they need solution as well
-	
-	amount of particles = fan speed
+			
+			6/22/26
+			test wind on grenade and star (fix)
+			bullet add speed based on velocity for star and grenade
+				-bullets not working
+				-pickups arent working
+			juniper side wind velocity and others
+			star hold down for more direct arc
+			
 	create multiple fans
-	fan loop playing multiple times on startup
+	fan loop playing multiple times on reload level (on flicking repeatedly)
+		(better looping sfx handling)
 	
 	
 Lever TODO:
@@ -624,9 +625,8 @@ Lever TODO:
 		Can this get complicated with multiple puzzles in the same level?
 			Only an issue in town levels
 	
-	lever light if effect isnt obvious
-	lever sfx
 	kill all sfx on reload
+	
 	#TODO: bug where it can be looping more than once fan
 	puzzle solved is a level var/state. forces all affected switches to be inert/inactive
 	
@@ -636,14 +636,3 @@ Lever TODO:
 		-switch.connected_to_puzzle: bool
 		-connected_prop_or_trigger_etc.set_puzzle_solved(true)
 			or instead level.set_puzzle_solved({}) dict structure: {entity: [var_name, var_value]} to be able to affect everything needed
-			
-			
-	
-		-on_switch_toggled(toggled):
-		
-		-on_switch_activated():
-		
-		-on_switch_timer_start():
-		
-		-on_switch_timer_timeout():
-		

@@ -19,6 +19,7 @@ var did_second_frame = false
 
 func _ready():
 	home = global_position
+	is_wind_affected = true
 	$StateTimer.start(normal_time)
 	direction = randomize_direction()
 	speed = randomize_speed()
@@ -62,6 +63,11 @@ func _physics_process(delta):
 		if abs(velocity.y) > minimum_speed or abs(velocity.x) > minimum_speed:
 			if i == 0: #only one collision per frame
 				am.play("xp", self)
+
+	if wind_areas_inside.size() != 0: #Inside Wind
+		print("inside")
+		if velocity.y < 0.0:
+			velocity.y *= 0.9
 
 	if did_first_frame and !did_second_frame:
 		did_second_frame = true

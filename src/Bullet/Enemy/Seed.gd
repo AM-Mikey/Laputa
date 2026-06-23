@@ -18,6 +18,9 @@ func _on_physics_process(delta):
 	ap.speed_scale = current_velocity / start_velocity
 	if ap.speed_scale < .1:
 		ap.stop()
+	if wind_areas_inside.size() != 0: #Inside Wind
+		if velocity.y < 0:
+			velocity.y *= 0.9
 
 ### HELPERS ###
 

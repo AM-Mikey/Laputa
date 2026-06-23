@@ -16,6 +16,7 @@ func setup(): #Reminder: no function called can use await
 	move_dir = start_dir
 	set_up_direction(FLOOR_NORMAL)
 	animate()
+	is_wind_affected = true
 	w.emit_signal("finished_spawn_entities_step")
 
 

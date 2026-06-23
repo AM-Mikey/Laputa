@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dw7sedue7iyox"]
 
 [ext_resource type="Script" uid="uid://duvrih0ykirci" path="res://src/Utility/PhysWindColumn.gd" id="1_t7hjx"]
-[ext_resource type="Texture2D" uid="uid://7e8qhdr3awj" path="res://assets/Face/Basil.png" id="2_bes6g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bes6g"]
 resource_local_to_scene = true
@@ -18,14 +17,7 @@ collision_mask = 9283
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_bes6g")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=539494460]
-offset_right = 16.0
-offset_bottom = 16.0
-color = Color(1, 1, 1, 0.12941177)
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=84114116]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_bes6g")
-
+[connection signal="area_entered" from="BodyDetector" to="." method="_on_BodyDetector_area_entered"]
+[connection signal="area_exited" from="BodyDetector" to="." method="_on_BodyDetector_area_exited"]
 [connection signal="body_entered" from="BodyDetector" to="." method="_on_BodyDetector_body_entered"]
 [connection signal="body_exited" from="BodyDetector" to="." method="_on_BodyDetector_body_exited"]

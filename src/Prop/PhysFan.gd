@@ -133,6 +133,7 @@ func on_switch_toggled(switch_toggled):
 		_do_sfx_start()
 	else:
 		$VisWindDown.start(fan_vis_wind_down_duration)
+		phys_wind_column.effect.stop()
 		phys_wind_column.queue_free()
 		_do_sfx_end()
 
@@ -140,12 +141,14 @@ func on_switch_toggled(switch_toggled):
 func on_switch_timer_start():
 	toggled = true
 	$AnimationPlayer.play("On")
+	$VisWindUp.start(fan_vis_wind_up_duration)
 	create_phys_wind_column()
 	_do_sfx_start()
 
 
 func on_switch_timer_timeout():
 	toggled = false
-	$AnimationPlayer.play("On")
+	$VisWindDown.start(fan_vis_wind_down_duration)
+	phys_wind_column.effect.stop()
 	phys_wind_column.queue_free()
 	_do_sfx_end()

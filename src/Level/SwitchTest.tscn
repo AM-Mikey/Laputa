@@ -3,23 +3,21 @@
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="1_4uhn8"]
 [ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="2_s4ctt"]
 [ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_abgb0"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_gh0dl"]
 [ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_wiqud"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="5_sjslv"]
 [ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="5_v7nqo"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="7_hy5g4"]
 [ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="7_mlr58"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="8_ywv84"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="8_410oh"]
 [ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="9_wiqud"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="10_gh0dl"]
-[ext_resource type="PackedScene" path="res://src/Effect/WindFan.tscn" id="10_pxkmp"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="10_c6b85"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_c6b85"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="12_410oh"]
 [ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_travn"]
 [ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="13_wlrbl"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="14_4r1a1"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="14_c6b85"]
-[ext_resource type="Script" path="res://src/Effect/WindFan.gd" id="16_travn"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="14_wlrbl"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="16_4r1a1"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="18_a5syg"]
 
 [node name="SwitchTest" type="Node2D" unique_id=1165197377]
 visibility_layer = 2
@@ -34,7 +32,7 @@ offset_top = 1744.0
 offset_right = 2976.0
 offset_bottom = 2288.0
 mouse_filter = 2
-script = ExtResource("3_wiqud")
+script = ExtResource("3_gh0dl")
 background_resource = ExtResource("3_abgb0")
 texture = ExtResource("5_v7nqo")
 layers = 5
@@ -74,7 +72,7 @@ tile_set = ExtResource("2_s4ctt")
 visibility_layer = 2
 z_index = 1
 use_parent_material = true
-tile_map_data = PackedByteArray("AABmAH8AAAAAAAgAAABnAH8AAAAAAAgAAABoAH8AAAAAAAgAAABpAH8AAAAAAAgAAABqAH8AAAAAAAgAAABrAH8AAAAAAAgAAABsAH8AAAAAAAgAAABtAH8AAAAAAAgAAABuAH8AAAAAAAgAAABvAH8AAAAAAAgAAABwAH8AAAAAAAgAAABxAH8AAAAAAAgAAAByAH8AAAAAAAgAAABzAH8AAAAAAAgAAAB0AH8AAAAAAAgAAAB1AH8AAAAAAAgAAAB2AH8AAAAAAAgAAAB3AH8AAAAAAAgAAAB4AH8AAAAAAAgAAAB5AH8AAAAAAAgAAAB6AH8AAAAAAAgAAAB7AH8AAAAAAAgAAAB8AH8AAAAAAAgAAAB9AH8AAAAAAAgAAAB+AH8AAAAAAAgAAAB/AH8AAAAAAAgAAACAAH8AAAAAAAgAAACBAH8AAAAAAAgAAACCAH8AAAAAAAgAAACDAH8AAAAAAAgAAACEAH8AAAAAAAgAAACFAH8AAAAAAAgAAACGAH8AAAAAAAgAAACHAH8AAAAAAAgAAACIAH8AAAAAAAgAAACJAH8AAAAAAAgAAACKAH8AAAAAAAgAAACLAH8AAAAAAAgAAACMAH8AAAAAAAgAAACNAH8AAAAAAAgAAACOAH8AAAAAAAgAAACPAH8AAAAAAAgAAACQAH8AAAAAAAgAAACRAH8AAAAAAAgAAACSAH8AAAAAAAgAAACTAH8AAAAAAAgAAACUAH8AAAAAAAgAAACVAH8AAAAAAAgAAACWAH8AAAAAAAgAAACXAH8AAAAAAAgAAACYAH8AAAAAAAgAAACZAH8AAAAAAAgAAACaAH8AAAAAAAgAAACbAH8AAAAAAAgAAACcAH8AAAAAAAgAAACdAH8AAAAAAAgAAACeAH8AAAAAAAgAAACfAH8AAAAAAAgAAACgAH8AAAAAAAgAAAChAH8AAAAAAAgAAACiAH8AAAAAAAgAAACjAH8AAAAAAAgAAACkAH8AAAAAAAgAAAClAH8AAAAAAAgAAACmAH8AAAAAAAgAAACnAH8AAAAAAAgAAACoAH8AAAAAAAgAAACpAH8AAAAAAAgAAACqAH8AAAAAAAgAAACrAH8AAAAAAAgAAACsAH8AAAAAAAgAAACtAH8AAAAAAAgAAACuAH8AAAAAAAgAAACvAH8AAAAAAAgAAACwAH8AAAAAAAgAAACxAH8AAAAAAAgAAACyAH8AAAAAAAgAAACzAH8AAAAAAAgAAAC0AH8AAAAAAAgAAAC1AH8AAAAAAAgAAAC2AH8AAAAAAAgAAAC3AH8AAAAAAAgAAAC4AH8AAAAAAAgAAAC5AH8AAAAAAAgAAABtAG8AAAAAAAgAAABuAG8AAAAAAAgAAAB8AH4AAAAAAAgAAAB8AH0AAAAAAAgAAAB8AHwAAAAAAAgAAABuAHAAAAAAAAgAAABuAHEAAAAAAAgAAABuAHIAAAAAAAgAAABuAHMAAAAAAAgAAABuAHQAAAAAAAgAAABuAHUAAAAAAAgAAABuAHYAAAAAAAgAAAA=")
+tile_map_data = PackedByteArray("AABmAH8AAAAAAAgAAABnAH8AAAAAAAgAAABoAH8AAAAAAAgAAABpAH8AAAAAAAgAAABqAH8AAAAAAAgAAABrAH8AAAAAAAgAAABsAH8AAAAAAAgAAABtAH8AAAAAAAgAAABuAH8AAAAAAAgAAABwAH8AAAAAAAgAAAByAH8AAAAAAAgAAAB0AH8AAAAAAAgAAAB1AH8AAAAAAAgAAAB2AH8AAAAAAAgAAAB3AH8AAAAAAAgAAAB4AH8AAAAAAAgAAAB5AH8AAAAAAAgAAAB6AH8AAAAAAAgAAAB7AH8AAAAAAAgAAAB8AH8AAAAAAAgAAAB9AH8AAAAAAAgAAAB+AH8AAAAAAAgAAAB/AH8AAAAAAAgAAACAAH8AAAAAAAgAAACBAH8AAAAAAAgAAACCAH8AAAAAAAgAAACDAH8AAAAAAAgAAACEAH8AAAAAAAgAAACFAH8AAAAAAAgAAACGAH8AAAAAAAgAAACHAH8AAAAAAAgAAACIAH8AAAAAAAgAAACJAH8AAAAAAAgAAACKAH8AAAAAAAgAAACLAH8AAAAAAAgAAACMAH8AAAAAAAgAAACNAH8AAAAAAAgAAACOAH8AAAAAAAgAAACPAH8AAAAAAAgAAACQAH8AAAAAAAgAAACRAH8AAAAAAAgAAACSAH8AAAAAAAgAAACTAH8AAAAAAAgAAACUAH8AAAAAAAgAAACVAH8AAAAAAAgAAACWAH8AAAAAAAgAAACXAH8AAAAAAAgAAACYAH8AAAAAAAgAAACZAH8AAAAAAAgAAACaAH8AAAAAAAgAAACbAH8AAAAAAAgAAACcAH8AAAAAAAgAAACdAH8AAAAAAAgAAACeAH8AAAAAAAgAAACfAH8AAAAAAAgAAACgAH8AAAAAAAgAAAChAH8AAAAAAAgAAACiAH8AAAAAAAgAAACjAH8AAAAAAAgAAACkAH8AAAAAAAgAAAClAH8AAAAAAAgAAACmAH8AAAAAAAgAAACnAH8AAAAAAAgAAACoAH8AAAAAAAgAAACpAH8AAAAAAAgAAACqAH8AAAAAAAgAAACrAH8AAAAAAAgAAACsAH8AAAAAAAgAAACtAH8AAAAAAAgAAACuAH8AAAAAAAgAAACvAH8AAAAAAAgAAACwAH8AAAAAAAgAAACxAH8AAAAAAAgAAACyAH8AAAAAAAgAAACzAH8AAAAAAAgAAAC0AH8AAAAAAAgAAAC1AH8AAAAAAAgAAAC2AH8AAAAAAAgAAAC3AH8AAAAAAAgAAAC4AH8AAAAAAAgAAAC5AH8AAAAAAAgAAABtAG8AAAAAAAgAAABuAG8AAAAAAAgAAAB8AH4AAAAAAAgAAAB8AH0AAAAAAAgAAAB8AHwAAAAAAAgAAABuAHAAAAAAAAgAAABuAHEAAAAAAAgAAABuAHIAAAAAAAgAAABuAHMAAAAAAAgAAABuAHQAAAAAAAgAAABuAHUAAAAAAAgAAABuAHYAAAAAAAgAAABvAH8AAAAAAAgAAAA=")
 tile_set = ExtResource("2_s4ctt")
 
 [node name="FarFront" type="TileMapLayer" parent="TileMap" unique_id=1690667449]
@@ -100,10 +98,10 @@ visibility_layer = 2
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(1760, 2016)
+position = Vector2(1808, 2032)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_ywv84")
+script = ExtResource("8_410oh")
 prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "editor_hidden": [false, 1, ""],
@@ -117,7 +115,7 @@ visibility_layer = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_gh0dl")
+script = ExtResource("10_c6b85")
 direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
@@ -129,7 +127,7 @@ z_index = 999
 position = Vector2(1936, 2016)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_ywv84")
+script = ExtResource("8_410oh")
 prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "editor_hidden": [false, 1, ""],
@@ -143,7 +141,7 @@ visibility_layer = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_gh0dl")
+script = ExtResource("10_c6b85")
 direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
@@ -152,10 +150,10 @@ movement_locked = true
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(1840, 2016)
+position = Vector2(1840, 2032)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_ywv84")
+script = ExtResource("8_410oh")
 prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "editor_hidden": [false, 1, ""],
@@ -169,7 +167,7 @@ visibility_layer = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_gh0dl")
+script = ExtResource("10_c6b85")
 direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
@@ -181,7 +179,7 @@ z_index = 999
 position = Vector2(1712, 2016)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_ywv84")
+script = ExtResource("8_410oh")
 prop_path = "res://src/Prop/SwitchLever.tscn"
 properties = {
 "connected_entity_id": ["PhysFan", 4, ""],
@@ -199,7 +197,7 @@ z_index = 999
 position = Vector2(1744, 2016)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_ywv84")
+script = ExtResource("8_410oh")
 prop_path = "res://src/Prop/SwitchLever.tscn"
 properties = {
 "connected_entity_id": ["PhysFan1", 4, ""],
@@ -217,10 +215,10 @@ z_index = 999
 position = Vector2(1904, 2016)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_ywv84")
+script = ExtResource("8_410oh")
 prop_path = "res://src/Prop/SwitchLever.tscn"
 properties = {
-"connected_entity_id": ["", 4, ""],
+"connected_entity_id": ["PhysFan3", 4, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"SwitchLever2", 4],
 "switch_type": [0, 2, "Toggle:0,Impulse:1,Timer:2"],
@@ -232,10 +230,10 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(2000, 1984)
+position = Vector2(2000, 2016)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_ywv84")
+script = ExtResource("8_410oh")
 prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "editor_hidden": [false, 1, ""],
@@ -249,7 +247,7 @@ visibility_layer = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_gh0dl")
+script = ExtResource("10_c6b85")
 snap_degrees = 90.0
 movement_locked = true
 
@@ -257,7 +255,7 @@ movement_locked = true
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(1848, 2016)
+position = Vector2(1992, 1984)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_travn")
@@ -281,7 +279,7 @@ visibility_layer = 2
 position = Vector2(0, -7)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_gh0dl")
+script = ExtResource("10_c6b85")
 tag_name = "look"
 snap_degrees = 180.0
 movement_locked = true
@@ -292,7 +290,7 @@ visibility_layer = 2
 position = Vector2(24, -48)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_4r1a1")
+script = ExtResource("14_wlrbl")
 tag_name = "tongue_range"
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1140943479]
@@ -304,18 +302,13 @@ z_index = 999
 position = Vector2(2288, 1832)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_410oh")
+script = ExtResource("16_4r1a1")
 
 [node name="SpawnPoint" type="Area2D" parent="." unique_id=1505342073 groups=["SpawnPoints"] instance=ExtResource("5_sjslv")]
 visibility_layer = 2
 position = Vector2(1672, 2032)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_c6b85")
-
-[node name="WindFan" type="Node2D" parent="." unique_id=1938051302 instance=ExtResource("10_pxkmp")]
-visibility_layer = 2
-position = Vector2(1728, 1944)
-script = ExtResource("16_travn")
+script = ExtResource("18_a5syg")
 
 [connection signal="body_exited" from="Triggers/KillBox" to="Triggers/KillBox" method="_on_body_exited"]

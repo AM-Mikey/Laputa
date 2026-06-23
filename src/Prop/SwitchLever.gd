@@ -29,6 +29,7 @@ func setup(): #Reminder: no function called can use await before finishing entit
 		if "id" in e:
 			if e.id == connected_entity_id:
 				connected_entity = e
+				set_switch_toggled_from_connected_entity()
 	match switch_type:
 		SwitchType.TOGGLE:
 			connect("switch_toggled", Callable(connected_entity, "on_switch_toggled"))
@@ -39,25 +40,37 @@ func setup(): #Reminder: no function called can use await before finishing entit
 			connect("switch_timer_timeout", Callable(connected_entity, "on_switch_timer_timeout"))
 
 
+
+func set_switch_toggled_from_connected_entity(): #only do this kinda level setup for toggle switches
+	toggled = connected_entity.toggled
+	match switch_type:
+		SwitchType.TOGGLE:
+			if toggled:
+				$AnimationPlayer.play("PresetDown")
+			else:
+				$AnimationPlayer.play("PresetUp")
+
 func activate():
-	toggled = !toggled
 	ms.mission_progress_check(id)
 	match switch_type:
 		SwitchType.TOGGLE:
+			toggled = !toggled
 			if toggled:
 				$AnimationPlayer.play("Down")
 			else:
 				$AnimationPlayer.play("Up")
-			var err = emit_signal("switch_toggled", toggled)
+			emit_signal("switch_toggled", toggled)
 		SwitchType.IMPULSE:
 			$AnimationPlayer.play("Pull")
 			emit_signal("switch_activated")
 		SwitchType.TIMER:
-			$AnimationPlayer.play("Down")
-			emit_signal("switch_timer_start")
-			$Timer.start(timer_duration)
-			await $AnimationPlayer.animation_finished
-			$AnimationPlayer.play("Timer")
+			if !toggled:
+				toggled = true
+				$AnimationPlayer.play("Down")
+				emit_signal("switch_timer_start")
+				$Timer.start(timer_duration)
+				await $AnimationPlayer.animation_finished
+				$AnimationPlayer.play("Timer")
 
 func _do_click():
 	am.play("switch_lever_down", null, null, 0.8, 0)
@@ -77,5 +90,6 @@ func _on_PlayerDetector_body_exited(body: Node2D):
 
 
 func _on_Timer_timeout():
+	toggled = false
 	$AnimationPlayer.play("Up")
 	emit_signal("switch_timer_timeout")

@@ -9,6 +9,7 @@ var water_gravity_scale := 0.5
 var spent = false
 
 var is_in_water = false: set = set_is_in_water
+var wind_areas_inside := []
 
 @export var editor_hidden = false
 @export var id: String

@@ -18,6 +18,7 @@ func setup(): #Reminder: no function called can use await
 	idle_time = rng.randf_range(0.5, 2)
 	active_time = rng.randf_range(2, 4)
 	$Timer.wait_time = active_time
+	is_wind_affected = true
 	w.emit_signal("finished_spawn_entities_step")
 
 func _physics_process(_delta):

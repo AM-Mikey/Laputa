@@ -12,6 +12,7 @@ var touched_floor = false
 func setup():
 	$FizzleTimer.start(f_time)
 	break_method = "cut"
+	is_wind_affected = true
 	velocity = get_initial_velocity()
 	start_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 
@@ -32,6 +33,10 @@ func _on_physics_process(delta):
 			am.play("gun_star_bounce", self)
 		else:
 			velocity = Vector2.ZERO
+
+	if wind_areas_inside.size() != 0: #Inside Wind
+		if velocity.y < 0:
+			velocity.y *= 0.9
 
 	var avr_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 	$AnimationPlayer.speed_scale = avr_velocity / start_velocity

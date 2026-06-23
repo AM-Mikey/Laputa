@@ -23,6 +23,7 @@ func setup(): #Reminder: no function called can use await
 	hp = 8
 	speed = Vector2(100, 100)
 	setup_a_star()
+	is_wind_affected = true
 	w.emit_signal("finished_spawn_entities_step")
 	change_state("chase")
 
