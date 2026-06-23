@@ -19,7 +19,7 @@ const TX_1 = preload("res://assets/Actor/Enemy/Billy1.png")
 @export var lock_distance := 128
 @export var lock_tolerance := 16
 
-const JUMP_VELOCITY := -1100.0
+const JUMP_VELOCITY := -1150.0
 var look_dir := Vector2.LEFT
 
 var target: Node
@@ -27,8 +27,13 @@ var locked_on := false
 var shooting := false
 
 var waypoint
+var last_collision: KinematicCollision2D
+var on_floor := false
+var on_wall := false
 
 @onready var ap = $AnimationPlayer
+
+var debug_name = "Billy4"
 
 func setup(): #Reminder: no function called can use await
 	match difficulty:
@@ -59,7 +64,6 @@ func setup(): #Reminder: no function called can use await
 	change_state("walk")
 
 ### STATES ###
-
 func enter_walk(_last_state):
 	ap.play("Walk")
 
@@ -68,14 +72,14 @@ func enter_walk(_last_state):
 	await $StateTimer.timeout
 	change_state("idle")
 
-func do_walk(_delta):
-	if is_on_wall() || \
+func do_walk(delta):
+	if on_wall || \
 		(!$FloorDetectorL.is_colliding() && move_dir.x < 0) || \
 		(!$FloorDetectorR.is_colliding() && move_dir.x > 0):
 		move_dir.x = -move_dir.x
 		look_dir.x = move_dir.x
 	velocity = calc_velocity(move_dir)
-	move_and_slide()
+	last_collision = move_and_collide(velocity * delta)
 	update_animation()
 
 func enter_idle(_last_state):
@@ -88,11 +92,11 @@ func enter_idle(_last_state):
 		await $StateTimer.timeout
 		change_state("walk")
 
-func do_idle(_delta):
+func do_idle(delta):
 	velocity = calc_velocity(Vector2.ZERO)
-	move_and_slide()
+	last_collision = move_and_collide(velocity * delta)
 
-func do_aggro(_delta):
+func do_aggro(delta):
 	if pc: #TODO: global enemy shutdown fix
 		var target_dir = Vector2(sign(position.x - pc.position.x), 0)
 		look_dir = target_dir * -1
@@ -105,7 +109,7 @@ func do_aggro(_delta):
 	var x_dir: float = clamp(displace_to_waypoint / 16.0, -1.0, 1.0)
 	move_dir = Vector2(lerp(move_dir.x, x_dir, 0.2), 0)
 
-	if	difficulty == 0 && is_on_floor() && \
+	if	difficulty == 0 && on_floor && \
 		((!$FloorDetectorL.is_colliding() && move_dir.x < 0) || \
 		(!$FloorDetectorR.is_colliding() && move_dir.x > 0)):
 		move_dir.x = 0.0
@@ -123,7 +127,7 @@ func do_aggro(_delta):
 			ap.play("Walk")
 
 	velocity = calc_velocity(move_dir)
-	move_and_slide()
+	last_collision = move_and_collide(velocity * delta)
 
 	var floor_collision := move_and_collide(Vector2.DOWN, true)
 	if floor_collision:
@@ -142,21 +146,61 @@ func exit_aggro(_next_state):
 
 var is_jumping := false
 var jump_acceleration := 0.0
+var move_velocity := Vector2.ZERO
+var gravity_velocity := Vector2.ZERO
 func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
-	var default_value = super.calc_velocity(move_dir, do_gravity, do_acceleration, do_friction) #TODO: probably remove the super here
+	var out: = Vector2.ZERO
+	var fractional_speed = speed
+	var delta := get_physics_process_delta_time()
+	if is_in_water:
+		fractional_speed = speed * Vector2(0.666, 0.666)
 
+	on_wall = false
+	on_floor = false
+	var floor_collision: KinematicCollision2D
+	var wall_collision: KinematicCollision2D
+	if (last_collision):
+		floor_collision = move_and_collide(Vector2.DOWN, true)
+		if (floor_collision):
+			var floor_normal_angle = floor_collision.get_normal().angle()
+			on_floor = floor_normal_angle < -PI / 2.0 + floor_max_angle && floor_normal_angle > -PI / 2.0 - floor_max_angle
+
+		wall_collision = move_and_collide(move_dir.sign(), true)
+		if (wall_collision):
+			var wall_normal_angle = wall_collision.get_normal().angle()
+			on_wall = wall_normal_angle > -PI / 2.0 + floor_max_angle || wall_normal_angle < -PI / 2.0 - floor_max_angle
+
+	move_velocity = move_dir * fractional_speed
+	var gravity_amount := gravity * delta
+
+	if !on_floor:
+		if (wall_collision):
+			var wall_normal = wall_collision.get_normal()
+			var wall_normal_angle = wall_normal.angle()
+			if (abs(wall_normal_angle) > PI - floor_max_angle || abs(wall_normal_angle) < floor_max_angle):
+				move_velocity = move_velocity.slide(wall_normal)
+				gravity_velocity = (gravity_velocity + Vector2(0, gravity_amount)).slide(wall_normal)
+		else:
+			gravity_velocity.y += gravity_amount
+	else:
+		var floor_normal = floor_collision.get_normal()
+		var floor_normal_angle = floor_normal.angle()
+		if (floor_normal_angle < -PI / 2.0 + floor_max_angle && floor_normal_angle > deg_to_rad(-80)) || \
+			(floor_normal_angle > -PI / 2.0 - floor_max_angle && floor_normal_angle < deg_to_rad(-100)):
+			move_velocity = move_velocity.slide(floor_normal)
+		if !(difficulty == 1 && is_jumping):
+			gravity_velocity = Vector2(0, gravity_amount)
 
 	if difficulty == 1:
 		if !is_jumping and state == "aggro":
-			if !is_on_floor():
-				return default_value
+			if !on_floor:
+				return move_velocity + gravity_velocity
 			var moving_right: bool = move_dir.x > 0
 			var wall_is_slope: bool = false
 			var wall_in_walking_direction: bool = false
 
-			var collision: KinematicCollision2D = move_and_collide(move_dir.sign(), true)
-			if (collision):
-				wall_is_slope = collision.get_angle() <= deg_to_rad(80)
+			if (wall_collision):
+				wall_is_slope = wall_collision.get_angle() <= floor_max_angle
 				wall_in_walking_direction = true
 
 			var check_raycast: bool = !$JumpDetectorR.is_colliding() and !$JumpDetectorRWall.is_colliding() if moving_right \
@@ -165,12 +209,17 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_frict
 				jump_acceleration = JUMP_VELOCITY
 				is_jumping = true
 				$JumpAccelTimer.start()
-				default_value.y = jump_acceleration * get_physics_process_delta_time()
+				gravity_velocity.x = 0.0
+				gravity_velocity.y = jump_acceleration * delta
 		else:
-			default_value.y += jump_acceleration * get_physics_process_delta_time()
-			if ($JumpAccelTimer.time_left <= 0.0 and is_on_floor()):
+			gravity_velocity.y += jump_acceleration * delta
+			if $JumpAccelTimer.time_left <= 0.0 and on_floor:
 				is_jumping = false
-	return default_value
+
+	out = move_velocity + gravity_velocity
+	if (name == debug_name):
+		print(state, " ", move_dir, " ", out, " ", move_velocity, " ", gravity_velocity)
+	return out
 
 ### HELPERS ###
 
@@ -199,7 +248,7 @@ func _on_PlayerDetector_body_entered(_body):
 	change_state("aggro")
 
 func _on_PlayerDetector_body_exited(_body):
-	if (state == "aggro"):
+	if (state == "aggro" && $DeaggroTimer.is_inside_tree()):
 		$DeaggroTimer.start()
 
 func _on_DeaggroTimer_timeout() -> void:
