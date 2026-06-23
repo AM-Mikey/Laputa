@@ -8,28 +8,23 @@ const TX_0 = preload("res://assets/Actor/Enemy/Billy0.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Billy1.png")
 
 @export var move_dir = Vector2.LEFT
-@export var look_dir = Vector2.LEFT
 @export var difficulty := 0
-var max_difficulty := 1
-@export var idle_max_time = 5.0
-@export var walk_max_time = 10.0
-@export var deaggro_delay = 0.3
-@export var defend_time = 0.4
+@export var idle_max_time := 5.0
+@export var walk_max_time := 10.0
+@export var deaggro_delay := 1.0
 
+@export var bullet_speed := 200
+@export var bullet_damage :int = 2
 
-@export var cooldown_time = 1
-@export var bullet_speed: int = 200
-@export var bullet_damage: int = 2
+@export var lock_distance := 128
+@export var lock_tolerance := 16
 
-
-@export var lock_distance = 128
-@export var lock_tolerance = 16
-
-const JUMP_VELOCITY: float = -1100.0
+const JUMP_VELOCITY := -1100.0
+var look_dir := Vector2.LEFT
 
 var target: Node
-var locked_on = false
-var shooting = false
+var locked_on := false
+var shooting := false
 
 var waypoint
 
@@ -145,10 +140,12 @@ func do_aggro(_delta):
 func exit_aggro(_next_state):
 	move_dir.x = 1.0 if signf(move_dir.x) >= 0 else -1.0
 
-var is_jumping: bool = false
-var jump_acceleration: float = 0.0
+var is_jumping := false
+var jump_acceleration := 0.0
 func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
 	var default_value = super.calc_velocity(move_dir, do_gravity, do_acceleration, do_friction) #TODO: probably remove the super here
+
+
 	if difficulty == 1:
 		if !is_jumping and state == "aggro":
 			if !is_on_floor():
@@ -198,6 +195,7 @@ func update_animation():
 
 func _on_PlayerDetector_body_entered(_body):
 	$StateTimer.stop()
+	$DeaggroTimer.stop()
 	change_state("aggro")
 
 func _on_PlayerDetector_body_exited(_body):
