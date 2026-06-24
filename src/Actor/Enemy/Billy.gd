@@ -11,7 +11,7 @@ const TX_1 = preload("res://assets/Actor/Enemy/Billy1.png")
 @export var difficulty := 0
 @export var idle_max_time := 5.0
 @export var walk_max_time := 10.0
-@export var deaggro_delay := 1.0
+@export var deaggro_delay := 3.0
 
 @export var bullet_speed := 200
 @export var bullet_damage :int = 2
@@ -19,7 +19,7 @@ const TX_1 = preload("res://assets/Actor/Enemy/Billy1.png")
 @export var lock_distance := 128
 @export var lock_tolerance := 16
 
-const JUMP_VELOCITY := -1150.0
+const JUMP_VELOCITY := -1000.0
 var look_dir := Vector2.LEFT
 
 var target: Node
@@ -283,7 +283,6 @@ func _on_PlayerDetector_body_exited(_body):
 func _on_DeaggroTimer_timeout() -> void:
 	if (state == "aggro"):
 		change_state("idle")
-
 
 func _on_JumpAccelTimer_timeout() -> void:
 	jump_acceleration = 0

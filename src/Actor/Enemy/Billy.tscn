@@ -186,6 +186,7 @@ position = Vector2(0, -16)
 texture = ExtResource("2")
 hframes = 4
 vframes = 5
+frame = 16
 
 [node name="StateTimer" type="Timer" parent="." unique_id=1916012981]
 process_callback = 0
