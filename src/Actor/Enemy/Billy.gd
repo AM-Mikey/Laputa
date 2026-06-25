@@ -20,7 +20,10 @@ const TX_1 = preload("res://assets/Actor/Enemy/Billy1.png")
 @export var lock_tolerance := 16
 
 const JUMP_VELOCITY := -1000.0
+var jump_dir_x := 1.0
+
 var look_dir := Vector2.LEFT
+var aggro_dir := Vector2.ZERO
 
 var target: Node
 var locked_on := false
@@ -33,9 +36,15 @@ var on_wall := false
 
 var stuck_shooting := false
 
+var is_jumping := false
+var jump_acceleration := 0.0
+
+var move_velocity := Vector2.ZERO
+var gravity_velocity := Vector2.ZERO
+
 @onready var ap = $AnimationPlayer
 
-var debug_name = "Billy39"
+var debug_name = "Billy6"
 
 func setup(): #Reminder: no function called can use await
 	match difficulty:
@@ -98,6 +107,9 @@ func do_idle(delta):
 	velocity = calc_velocity(Vector2.ZERO)
 	last_collision = move_and_collide(velocity * delta)
 
+func enter_aggro(_prev_state):
+	aggro_dir = move_dir
+
 func do_aggro(delta):
 	if pc: #TODO: global enemy shutdown fix
 		var target_dir = Vector2(sign(position.x - pc.position.x), 0)
@@ -110,12 +122,14 @@ func do_aggro(delta):
 	var on_edge := false
 	var displace_to_waypoint = waypoint.position.x - position.x
 	var x_dir: float = clamp(displace_to_waypoint / 16.0, -1.0, 1.0)
-	move_dir = Vector2(lerp(move_dir.x, x_dir, 0.2), 0)
+	aggro_dir = Vector2(lerp(aggro_dir.x, x_dir, 0.2), 0)
+	move_dir.x = signf(x_dir)
 
 	if	difficulty == 0 && on_floor && \
 		((!$FloorDetectorL.is_colliding() && move_dir.x < 0) || \
 		(!$FloorDetectorR.is_colliding() && move_dir.x > 0)):
 		move_dir.x = 0.0
+		aggro_dir.x = 0.0
 		on_edge = true
 
 	if on_wall:
@@ -130,7 +144,7 @@ func do_aggro(delta):
 				ap.play("Idle")
 		else:
 			if abs(displace_to_waypoint) < lock_tolerance:
-				if abs(move_dir.x) < 0.1:
+				if abs(aggro_dir.x) < 0.1:
 					ap.play("StandShoot")
 				else:
 					ap.play("WalkShoot")
@@ -138,7 +152,7 @@ func do_aggro(delta):
 				ap.play("Walk")
 
 
-	velocity = calc_velocity(move_dir)
+	velocity = calc_velocity(aggro_dir)
 	last_collision = move_and_collide(velocity * delta)
 
 	var floor_collision := move_and_collide(Vector2.DOWN, true)
@@ -157,11 +171,7 @@ func exit_aggro(_next_state):
 	move_dir.x = 1.0 if signf(move_dir.x) >= 0 else -1.0
 	stuck_shooting = false
 
-var is_jumping := false
-var jump_acceleration := 0.0
-var move_velocity := Vector2.ZERO
-var gravity_velocity := Vector2.ZERO
-func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
+func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
 	var out: = Vector2.ZERO
 	var fractional_speed = speed
 	var delta := get_physics_process_delta_time()
@@ -171,7 +181,11 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_frict
 	on_wall = false
 	on_floor = false
 	var floor_collision: KinematicCollision2D = move_and_collide(Vector2.DOWN, true)
-	var wall_collision: KinematicCollision2D = move_and_collide(move_dir.sign(), true)
+	var wall_collision: KinematicCollision2D
+	if (is_jumping and !on_floor):
+		wall_collision = move_and_collide(Vector2(jump_dir_x, 0.0), true)
+	else:
+		wall_collision = move_and_collide(move_dir.sign(), true)
 
 	if (floor_collision):
 		var floor_normal_angle = floor_collision.get_normal().angle()
@@ -181,16 +195,18 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_frict
 		var wall_normal_angle = wall_collision.get_normal().angle()
 		on_wall = abs(wall_normal_angle) >= PI / 2.0 + floor_max_angle || abs(wall_normal_angle) <= PI / 2.0 - floor_max_angle
 
-	move_velocity = move_dir * fractional_speed
+	if (is_jumping and !on_floor):
+		move_velocity = Vector2(jump_dir_x, 0.0) * fractional_speed
+	else:
+		move_velocity = dir * fractional_speed
+
 	var gravity_amount := gravity * delta
 
 	if !on_floor:
-		if (wall_collision):
+		if on_wall:
 			var wall_normal = wall_collision.get_normal()
-			var wall_normal_angle = wall_normal.angle()
-			if (abs(wall_normal_angle) > PI - floor_max_angle || abs(wall_normal_angle) < floor_max_angle):
-				move_velocity = move_velocity.slide(wall_normal)
-				gravity_velocity = (gravity_velocity + Vector2(0, gravity_amount)).slide(wall_normal)
+			move_velocity = Vector2.ZERO
+			gravity_velocity = (gravity_velocity + Vector2(0, gravity_amount)).slide(wall_normal)
 		else:
 			gravity_velocity.y += gravity_amount
 	else:
@@ -220,11 +236,13 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_frict
 				jump_acceleration = JUMP_VELOCITY
 				is_jumping = true
 				$JumpAccelTimer.start()
+				jump_dir_x = 1.0 if move_dir.x >= 0 else -1.0
 				gravity_velocity.x = 0.0
 				gravity_velocity.y = jump_acceleration * delta
 		else:
 			gravity_velocity.y += jump_acceleration * delta
 			if $JumpAccelTimer.time_left <= 0.0 and on_floor:
+				jump_dir_x = 0.0
 				is_jumping = false
 
 	out = move_velocity + gravity_velocity
