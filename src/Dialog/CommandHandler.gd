@@ -305,13 +305,13 @@ func lookat(string): #TODO: enable multiple lookers
 func wait(string):
 	var wait_time = float(string) if string != null and float(string) > 0 else 1.0
 	db.busy = true
-	await get_tree().create_timer(wait_time, true, false).timeout
+	await get_tree().create_timer(wait_time, true, false).timeout #TODO: check if these flags are correct
 	db.busy = false
 
 #func skipinput():
 	#db.auto_input = true
 	#db.do_delay = true
-	#await get_tree().create_timer(0.1, true, false).timeout
+	#await get_tree().create_timer(0.1, true, false).timeout #TODO: check if these flags are correct
 	#db.auto_input = false
 
 

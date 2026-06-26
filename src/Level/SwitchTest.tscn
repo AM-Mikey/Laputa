@@ -23,6 +23,7 @@
 visibility_layer = 2
 script = ExtResource("1_4uhn8")
 level_name = "SwitchTest"
+music = "dogtown_night"
 dialog_json = "res://src/Dialog/Village.json"
 
 [node name="LevelLimiter" type="MarginContainer" parent="." unique_id=10937438 instance=ExtResource("3_t226a")]
@@ -186,8 +187,7 @@ properties = {
 "editor_hidden": [false, 1, ""],
 "id": [&"SwitchLever", 4],
 "switch_type": [0, 2, "Toggle:0,Impulse:1,Timer:2"],
-"timer_duration": [1.0, 3, ""],
-"toggled": [false, 1, ""]
+"timer_duration": [1.0, 3, ""]
 }
 
 [node name="SwitchLever1" type="Area2D" parent="Spawns" unique_id=1774004550 groups=["Entities", "PropSpawns"] instance=ExtResource("7_hy5g4")]
@@ -204,8 +204,7 @@ properties = {
 "editor_hidden": [false, 1, ""],
 "id": [&"SwitchLever1", 4],
 "switch_type": [2, 2, "Toggle:0,Impulse:1,Timer:2"],
-"timer_duration": [12.0, 3, ""],
-"toggled": [false, 1, ""]
+"timer_duration": [12.0, 3, ""]
 }
 
 [node name="SwitchLever2" type="Area2D" parent="Spawns" unique_id=1139234001 groups=["Entities", "PropSpawns"] instance=ExtResource("7_hy5g4")]
@@ -222,8 +221,7 @@ properties = {
 "editor_hidden": [false, 1, ""],
 "id": [&"SwitchLever2", 4],
 "switch_type": [0, 2, "Toggle:0,Impulse:1,Timer:2"],
-"timer_duration": [1.0, 3, ""],
-"toggled": [false, 1, ""]
+"timer_duration": [1.0, 3, ""]
 }
 
 [node name="PhysFan3" type="Area2D" parent="Spawns" unique_id=1189915509 groups=["Entities", "PropSpawns"] instance=ExtResource("7_hy5g4")]

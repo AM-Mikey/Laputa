@@ -8,8 +8,8 @@ var wind_dir : Vector2
 var phys_wind_column : Node
 @export var speed := 20.0 #4 is about equal with gravity
 @export var toggled := true
-var fan_start_sfx_player
-var fan_loop_sfx_player
+var fan_start_sfx_player: Node
+var fan_loop_sfx_player: Node
 var fan_vis_wind_up_duration := 3.33
 var fan_vis_wind_down_duration := 6.66
 
@@ -91,13 +91,22 @@ func get_column_rect() -> Rect2:
 ### SFX ###
 
 func _do_sfx_start():
+	if fan_start_sfx_player:
+		am.clear_player_by_node(fan_start_sfx_player)
+		fan_start_sfx_player = null
+		return
 	fan_start_sfx_player = am.play("fan_start", self, null, 0.8, 0.0)
-	await get_tree().create_timer(6.98).timeout #stupid but no gap/pop in audio like this. exact time of fanstart.ogg
+	await get_tree().create_timer(am.get_sfx_duration("fan_start")).timeout
+	#await get_tree().create_timer(6.98).timeout #stupid but no gap/pop in audio like this. exact time of fanstart.ogg
 	#await fan_start_sfx_player.finished #0.0006 second gap from the last one finishing to this audio starting. that sucks #in the case of _do_sfx_end() starting during this await, it never finishes this await. this is desired behavior
 	if fan_start_sfx_player:
-		fan_loop_sfx_player = am.play("fan_loop", self, null, 0.8, 0.0)
+		_do_sfx_loop()
 
-func _do_sfx_loop(): #TODO: bug where it can be looping more than once
+
+func _do_sfx_loop():
+	if fan_start_sfx_player:
+		am.clear_player_by_node(fan_start_sfx_player)
+		fan_start_sfx_player = null
 	fan_loop_sfx_player = am.play("fan_loop", self, null, 0.8, 0.0)
 
 func _do_sfx_end():

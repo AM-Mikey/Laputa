@@ -10,7 +10,6 @@ func _ready():
 	if f.pc():
 		var pc = f.pc()
 		pc.connect("guns_updated", Callable(self, "_on_guns_updated"))
-		am.connect("players_updated", Callable(self, "_on_audio_players_updated"))
 		_on_guns_updated(pc.guns.get_children())
 
 	if w.is_release:
@@ -25,6 +24,7 @@ func _physics_process(_delta):
 	$VBox/General/FPS.text = str(Engine.get_frames_per_second()) + " fps"
 	$VBox/General/Screen.text = str(get_window().get_size().x) + "x" + str(get_window().get_size().y)
 
+	update_audio_players()
 
 	if (f.pc()):
 		var pc = f.pc()
@@ -83,7 +83,7 @@ func _on_guns_updated(guns):
 		label.text = g.name
 		array.add_child(label)
 
-func _on_audio_players_updated():
+func update_audio_players():
 	var sfx_array = $VBox/General/Arrays/Sfx
 	var music_array = $VBox/General/Arrays/Music
 	_clear_array(sfx_array)

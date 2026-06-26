@@ -599,22 +599,12 @@ turn off debuglayer visible when in editor
 
 
 
+6/25/26
+-resolve conflict between fan and switch being set on
+	(in editor, also determine which one is master)
+
 FANTODO:
 	remote switch activation (shooting switch or standing or activating)
-	looping sfx for things that are continuously activated
-	
-			
-			6/22/26
-			test wind on grenade and star (fix)
-			bullet add speed based on velocity for star and grenade
-				-bullets not working
-				-pickups arent working
-			juniper side wind velocity and others
-			star hold down for more direct arc
-			
-	create multiple fans
-	fan loop playing multiple times on reload level (on flicking repeatedly)
-		(better looping sfx handling)
 	
 	
 Lever TODO:
@@ -625,9 +615,6 @@ Lever TODO:
 		Can this get complicated with multiple puzzles in the same level?
 			Only an issue in town levels
 	
-	kill all sfx on reload
-	
-	#TODO: bug where it can be looping more than once fan
 	puzzle solved is a level var/state. forces all affected switches to be inert/inactive
 	
 	

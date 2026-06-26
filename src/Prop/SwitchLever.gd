@@ -10,7 +10,7 @@ const ICON = preload("res://assets/Prop/SwitchLeverIcon.png")
 enum SwitchType {TOGGLE, IMPULSE, TIMER}
 
 @export var connected_entity_id : String
-@export var toggled = false
+var toggled = false
 @export var switch_type := SwitchType.TOGGLE
 @export var timer_duration := 1.0
 
