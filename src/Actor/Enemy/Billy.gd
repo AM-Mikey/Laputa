@@ -19,7 +19,7 @@ const TX_1 = preload("res://assets/Actor/Enemy/Billy1.png")
 @export var lock_distance := 128
 @export var lock_tolerance := 16
 
-const JUMP_VELOCITY := -1000.0
+const JUMP_VELOCITY := -950.0
 var jump_dir_x := 1.0
 
 var look_dir := Vector2.LEFT
@@ -178,11 +178,9 @@ func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction =
 	if is_in_water:
 		fractional_speed = speed * Vector2(0.666, 0.666)
 
-	on_wall = false
-	on_floor = false
 	var floor_collision: KinematicCollision2D = move_and_collide(Vector2.DOWN, true)
 	var wall_collision: KinematicCollision2D
-	if (is_jumping and !on_floor):
+	if is_jumping:
 		wall_collision = move_and_collide(Vector2(jump_dir_x, 0.0), true)
 	else:
 		wall_collision = move_and_collide(move_dir.sign(), true)
@@ -190,12 +188,18 @@ func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction =
 	if (floor_collision):
 		var floor_normal_angle = floor_collision.get_normal().angle()
 		on_floor = floor_normal_angle < -PI / 2.0 + floor_max_angle && floor_normal_angle > -PI / 2.0 - floor_max_angle
+	else:
+		on_floor = false
 
 	if (wall_collision):
 		var wall_normal_angle = wall_collision.get_normal().angle()
 		on_wall = abs(wall_normal_angle) >= PI / 2.0 + floor_max_angle || abs(wall_normal_angle) <= PI / 2.0 - floor_max_angle
+	else:
+		on_wall = false
 
-	if (is_jumping and !on_floor):
+	if on_wall:
+		move_velocity = Vector2.ZERO
+	elif is_jumping:
 		move_velocity = Vector2(jump_dir_x, 0.0) * fractional_speed
 	else:
 		move_velocity = dir * fractional_speed
@@ -205,7 +209,6 @@ func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction =
 	if !on_floor:
 		if on_wall:
 			var wall_normal = wall_collision.get_normal()
-			move_velocity = Vector2.ZERO
 			gravity_velocity = (gravity_velocity + Vector2(0, gravity_amount)).slide(wall_normal)
 		else:
 			gravity_velocity.y += gravity_amount
@@ -217,6 +220,7 @@ func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction =
 			move_velocity = move_velocity.slide(floor_normal)
 		if !(difficulty == 1 && is_jumping):
 			gravity_velocity = Vector2(0, gravity_amount)
+
 
 	if difficulty == 1:
 		if !is_jumping and state == "aggro":
@@ -246,8 +250,8 @@ func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction =
 				is_jumping = false
 
 	out = move_velocity + gravity_velocity
-	#if (name == debug_name):
-		#print(state, " ", move_dir, " ", out, " ", move_velocity, " ", gravity_velocity)
+	if (name == debug_name):
+		print(on_wall, " ", is_jumping, " ", jump_dir_x, " ", move_dir, " ", out, " ", move_velocity, " ", gravity_velocity)
 	return out
 
 ### HELPERS ###
