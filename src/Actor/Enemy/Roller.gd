@@ -1,7 +1,9 @@
 extends Enemy
 
-const BONK = preload("res://src/Effect/BonkParticle.tscn")
 const ICON = preload("res://assets/Actor/Enemy/RollerIcon.png")
+const TX_0 = preload("res://assets/Actor/Enemy/Roller.png")
+
+const BONK = preload("res://src/Effect/BonkParticle.tscn")
 const LAND := preload("res://src/Effect/LandParticle.tscn")
 const SPARK := preload("res://src/Effect/Spark.tscn")
 
