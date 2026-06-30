@@ -19,7 +19,7 @@ const TX_1 = preload("res://assets/Actor/Enemy/Billy1.png")
 @export var lock_distance := 128
 @export var lock_tolerance := 16
 
-const JUMP_VELOCITY := -950.0
+const JUMP_VELOCITY := -1000.0
 var jump_dir_x := 1.0
 
 var look_dir := Vector2.LEFT
@@ -42,9 +42,11 @@ var jump_acceleration := 0.0
 var move_velocity := Vector2.ZERO
 var gravity_velocity := Vector2.ZERO
 
+var aggro_right_side := true
+
 @onready var ap = $AnimationPlayer
 
-var debug_name = "Billy6"
+var debug_name = "Billy5"
 
 func setup(): #Reminder: no function called can use await
 	match difficulty:
@@ -69,6 +71,7 @@ func setup(): #Reminder: no function called can use await
 	waypoint = WAYPOINT.instantiate()
 	waypoint.owner_id = id
 	waypoint.index = -1
+	waypoint.visible = true
 	w.current_level.get_node("Waypoints").add_child(waypoint)
 
 	w.emit_signal("finished_spawn_entities_step")
@@ -111,17 +114,35 @@ func enter_aggro(_prev_state):
 	aggro_dir = move_dir
 
 func do_aggro(delta):
+	var reach_point = waypoint.global_position #left or right of pc
+	var approach_slow: bool = false
 	if pc: #TODO: global enemy shutdown fix
 		var target_dir = Vector2(sign(position.x - pc.position.x), 0)
 		look_dir = target_dir * -1
-		waypoint.position = Vector2(pc.position.x + (lock_distance * target_dir.x), pc.position.y) #left or right of pc
+		aggro_right_side = target_dir.x >= 0.0
+
+		reach_point =  Vector2(pc.position.x + (lock_distance * target_dir.x), pc.position.y) #left or right of pc
+		waypoint.global_position = reach_point
+
+		for bil in get_tree().get_nodes_in_group("Billy"):
+			if bil != self && bil.state == "aggro" && \
+				abs(bil.global_position.x - global_position.x) <= 16.0 && \
+				abs(bil.global_position.y - global_position.y) <= 16.0:
+				if bil.global_position.x - global_position.x < 0.0:
+					reach_point.x = max(bil.global_position.x + 14.0, reach_point.x)
+				else:
+					reach_point.x = min(bil.global_position.x - 14.0, reach_point.x)
+				approach_slow = true
 
 	#this isnt the best way to do this, but returns a good result.
 	#right now this cuts off move_dir when it's more than a block away (to -1 or 1)
 	#the small adjustment when less than that is why we don't just use sign()
 	var on_edge := false
-	var displace_to_waypoint = waypoint.position.x - position.x
-	var x_dir: float = clamp(displace_to_waypoint / 16.0, -1.0, 1.0)
+	var displace_to_waypoint = reach_point.x - global_position.x
+	var x_dir: float = signf(displace_to_waypoint)
+	if approach_slow:
+		if abs(displace_to_waypoint) < 16.0:
+			x_dir *= 0.5
 	aggro_dir = Vector2(lerp(aggro_dir.x, x_dir, 0.2), 0)
 	move_dir.x = signf(x_dir)
 
@@ -131,6 +152,9 @@ func do_aggro(delta):
 		move_dir.x = 0.0
 		aggro_dir.x = 0.0
 		on_edge = true
+
+	if (name == debug_name):
+		print(on_edge, " ",aggro_dir.x, " ", ap.current_animation )
 
 	if on_wall:
 		ap.play("StandShoot")
@@ -144,7 +168,7 @@ func do_aggro(delta):
 				ap.play("Idle")
 		else:
 			if abs(displace_to_waypoint) < lock_tolerance:
-				if abs(aggro_dir.x) < 0.1:
+				if abs(aggro_dir.x) < 0.03:
 					ap.play("StandShoot")
 				else:
 					ap.play("WalkShoot")
@@ -250,11 +274,17 @@ func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction =
 				is_jumping = false
 
 	out = move_velocity + gravity_velocity
-	if (name == debug_name):
-		print(on_wall, " ", is_jumping, " ", jump_dir_x, " ", move_dir, " ", out, " ", move_velocity, " ", gravity_velocity)
+	#if (name == debug_name):
+		#print(on_wall, " ", is_jumping, " ", jump_dir_x, " ", move_dir, " ", out, " ", move_velocity, " ", gravity_velocity)
 	return out
 
 ### HELPERS ###
+func get_all_billy_on_current_aggro_side():
+	var res := []
+	for bil in get_tree().get_nodes_in_group("Billy"):
+		if bil.state == "aggro" && bil.aggro_right_side == aggro_right_side:
+			res.append(bil)
+	return res
 
 func fire():
 	var bullet = SEED.instantiate()
@@ -267,12 +297,15 @@ func fire():
 		bullet.speed = bullet_speed
 		bullet.direction = Vector2(look_dir.x / 2 , -1) #Adjust this for angle
 	else:
+		if !pc:
+			bullet.queue_free()
+			return
 		# Even when shooting at close range, the arc will always peak at the same height as normal shooting
 		var normal_start_bullet_vel_y = bullet_speed * sin(Vector2(look_dir.x / 2.0, -1).angle())
 		var normal_time_peak_reached = abs(normal_start_bullet_vel_y / bullet.gravity)
 		var peak_y = 0.5 * bullet.gravity * pow(normal_time_peak_reached, 2) + normal_start_bullet_vel_y * normal_time_peak_reached
 		var normal_time_travel = sqrt(abs((peak_y + $BulletOrigin.position.y) / 0.5 / bullet.gravity)) + normal_time_peak_reached
-		var target_distance_x = (waypoint.global_position.x + lock_distance * look_dir.x) - $BulletOrigin.global_position.x
+		var target_distance_x = pc.global_position.x - $BulletOrigin.global_position.x
 
 		var b_speed_x = target_distance_x / normal_time_travel
 		var b_speed_y = (peak_y - 0.5 * bullet.gravity * pow(normal_time_peak_reached, 2)) / normal_time_peak_reached

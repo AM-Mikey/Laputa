@@ -134,7 +134,7 @@ _data = {
 &"WalkShoot": SubResource("5")
 }
 
-[node name="Billy" type="CharacterBody2D" unique_id=147745042 groups=["Actors", "Enemies", "Entities"]]
+[node name="Billy" type="CharacterBody2D" unique_id=147745042 groups=["Actors", "Billy", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 floor_max_angle = 0.87266463
@@ -186,7 +186,7 @@ position = Vector2(0, -16)
 texture = ExtResource("2")
 hframes = 4
 vframes = 5
-frame = 16
+frame = 4
 
 [node name="StateTimer" type="Timer" parent="." unique_id=1916012981]
 process_callback = 0
