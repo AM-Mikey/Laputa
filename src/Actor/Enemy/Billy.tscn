@@ -17,6 +17,7 @@ size = Vector2(256, 160)
 resource_name = "Idle"
 length = 0.4
 loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -33,6 +34,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="3"]
 resource_name = "Jump"
 length = 0.6
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -50,6 +52,7 @@ tracks/0/keys = {
 resource_name = "StandShoot"
 length = 0.4
 loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -81,6 +84,7 @@ tracks/1/keys = {
 resource_name = "Walk"
 length = 0.4
 loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -98,6 +102,7 @@ tracks/0/keys = {
 resource_name = "WalkShoot"
 length = 0.4
 loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -134,7 +139,7 @@ _data = {
 &"WalkShoot": SubResource("5")
 }
 
-[node name="Billy" type="CharacterBody2D" unique_id=147745042 groups=["Actors", "Billy", "Enemies", "Entities"]]
+[node name="Billy" type="CharacterBody2D" unique_id=147745042 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 floor_max_angle = 0.87266463

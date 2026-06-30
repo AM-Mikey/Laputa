@@ -42,11 +42,9 @@ var jump_acceleration := 0.0
 var move_velocity := Vector2.ZERO
 var gravity_velocity := Vector2.ZERO
 
-var aggro_right_side := true
-
 @onready var ap = $AnimationPlayer
 
-var debug_name = "Billy5"
+var debug_name = "Billy3"
 
 func setup(): #Reminder: no function called can use await
 	match difficulty:
@@ -111,6 +109,7 @@ func do_idle(delta):
 	last_collision = move_and_collide(velocity * delta)
 
 func enter_aggro(_prev_state):
+	add_to_group("BillyAggro")
 	aggro_dir = move_dir
 
 func do_aggro(delta):
@@ -119,30 +118,39 @@ func do_aggro(delta):
 	if pc: #TODO: global enemy shutdown fix
 		var target_dir = Vector2(sign(position.x - pc.position.x), 0)
 		look_dir = target_dir * -1
-		aggro_right_side = target_dir.x >= 0.0
 
 		reach_point =  Vector2(pc.position.x + (lock_distance * target_dir.x), pc.position.y) #left or right of pc
 		waypoint.global_position = reach_point
 
-		for bil in get_tree().get_nodes_in_group("Billy"):
-			if bil != self && bil.state == "aggro" && \
-				abs(bil.global_position.x - global_position.x) <= 16.0 && \
-				abs(bil.global_position.y - global_position.y) <= 16.0:
-				if bil.global_position.x - global_position.x < 0.0:
-					reach_point.x = max(bil.global_position.x + 14.0, reach_point.x)
+		var right_billy := false
+		var left_billy := false
+		for bil in get_tree().get_nodes_in_group("BillyAggro"):
+			if bil != self && \
+				abs(bil.global_position.x - global_position.x) <= 24.0 && \
+				abs(bil.global_position.y - global_position.y) <= 24.0:
+				var displace_x: float = bil.global_position.x - global_position.x
+				if displace_x < 0.0:
+					if !left_billy:
+						reach_point.x = max(bil.global_position.x + 14.0, reach_point.x)
+					else:
+						reach_point.x += 21.0
+					left_billy = true
 				else:
-					reach_point.x = min(bil.global_position.x - 14.0, reach_point.x)
+					if !right_billy:
+						reach_point.x = min(bil.global_position.x - 14.0, reach_point.x)
+					else:
+						reach_point.x -= 21.0
+					right_billy = true
 				approach_slow = true
 
-	#this isnt the best way to do this, but returns a good result.
-	#right now this cuts off move_dir when it's more than a block away (to -1 or 1)
-	#the small adjustment when less than that is why we don't just use sign()
 	var on_edge := false
 	var displace_to_waypoint = reach_point.x - global_position.x
-	var x_dir: float = signf(displace_to_waypoint)
+	var x_dir: float = 0.0
 	if approach_slow:
-		if abs(displace_to_waypoint) < 16.0:
-			x_dir *= 0.5
+		x_dir = signf(displace_to_waypoint) if abs(displace_to_waypoint) > 1.0 else 0.0
+	else:
+		x_dir = signf(displace_to_waypoint) if abs(displace_to_waypoint) > 3.0 else 0.0
+
 	aggro_dir = Vector2(lerp(aggro_dir.x, x_dir, 0.2), 0)
 	move_dir.x = signf(x_dir)
 
@@ -153,8 +161,8 @@ func do_aggro(delta):
 		aggro_dir.x = 0.0
 		on_edge = true
 
-	if (name == debug_name):
-		print(on_edge, " ",aggro_dir.x, " ", ap.current_animation )
+	#if (name == debug_name):
+		#print(on_edge, " ", on_wall, " ", approach_slow, " ",aggro_dir.x, " ", x_dir, " ", ap.current_animation)
 
 	if on_wall:
 		ap.play("StandShoot")
@@ -168,13 +176,12 @@ func do_aggro(delta):
 				ap.play("Idle")
 		else:
 			if abs(displace_to_waypoint) < lock_tolerance:
-				if abs(aggro_dir.x) < 0.03:
+				if abs(aggro_dir.x) < 0.05:
 					ap.play("StandShoot")
 				else:
 					ap.play("WalkShoot")
 			else:
 				ap.play("Walk")
-
 
 	velocity = calc_velocity(aggro_dir)
 	last_collision = move_and_collide(velocity * delta)
@@ -194,6 +201,7 @@ func do_aggro(delta):
 func exit_aggro(_next_state):
 	move_dir.x = 1.0 if signf(move_dir.x) >= 0 else -1.0
 	stuck_shooting = false
+	remove_from_group("BillyAggro")
 
 func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
 	var out: = Vector2.ZERO
@@ -279,13 +287,6 @@ func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction =
 	return out
 
 ### HELPERS ###
-func get_all_billy_on_current_aggro_side():
-	var res := []
-	for bil in get_tree().get_nodes_in_group("Billy"):
-		if bil.state == "aggro" && bil.aggro_right_side == aggro_right_side:
-			res.append(bil)
-	return res
-
 func fire():
 	var bullet = SEED.instantiate()
 
