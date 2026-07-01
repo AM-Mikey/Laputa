@@ -40,6 +40,12 @@ func setup(): #Reminder: no function called can use await before finishing entit
 			connect("switch_timer_timeout", Callable(connected_entity, "on_switch_timer_timeout"))
 
 
+func _has_switch_connection_duplicates() -> bool:
+	for s in get_tree().get_nodes_in_group("Switches"):
+		if s != self && s.connected_entity == connected_entity:
+			printerr("ERROR, switch ", self, " and switch ", s, " have same connected_entity: ", connected_entity)
+			return true
+	return false
 
 func set_switch_toggled_from_connected_entity(): #only do this kinda level setup for toggle switches
 	toggled = connected_entity.toggled

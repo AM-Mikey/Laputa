@@ -600,8 +600,10 @@ turn off debuglayer visible when in editor
 
 
 6/25/26
--resolve conflict between fan and switch being set on
-	(in editor, also determine which one is master)
+-add support in editor for export vars of array[enum, enum...]
+
+6/29/26
+-rng vars preset up in classes are not truely random, as if they are time based, their rng.randomize calls will be synced
 
 FANTODO:
 	remote switch activation (shooting switch or standing or activating)

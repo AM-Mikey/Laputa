@@ -12,6 +12,7 @@ var fan_start_sfx_player: Node
 var fan_loop_sfx_player: Node
 var fan_vis_wind_up_duration := 3.33
 var fan_vis_wind_down_duration := 6.66
+var doing_retrigger_wind_up := false
 
 func setup(): #Reminder: no function called can use await
 	wind_dir = $WindVector.direction.snapped(Vector2(1, 1)) #remove VUVector imprecision
@@ -122,13 +123,26 @@ func _do_sfx_end():
 
 func _physics_process(_delta):
 	var max_speed_scale = speed / 5.0
+
+	#wind up
 	if !$VisWindUp.is_stopped():
-		$AnimationPlayer.speed_scale = max_speed_scale - (max_speed_scale * ($VisWindUp.time_left / fan_vis_wind_up_duration))
+		if !$VisWindDown.is_stopped():
+			$VisWindDown.stop()
+			doing_retrigger_wind_up = true
+
+		if doing_retrigger_wind_up:
+			var start_speed_scale = $AnimationPlayer.speed_scale
+			$AnimationPlayer.speed_scale = start_speed_scale + ((max_speed_scale - start_speed_scale) * (1.0 - ($VisWindUp.time_left / fan_vis_wind_up_duration)))
+		else:
+			$AnimationPlayer.speed_scale = max_speed_scale - (max_speed_scale * ($VisWindUp.time_left / fan_vis_wind_up_duration))
+	#wind down
 	elif !$VisWindDown.is_stopped():
 		$AnimationPlayer.speed_scale = ($VisWindDown.time_left / fan_vis_wind_down_duration) * max_speed_scale
 		if $AnimationPlayer.speed_scale <= 0.01:
 			$AnimationPlayer.stop()
+	#normal
 	else:
+		doing_retrigger_wind_up = false #done winding up
 		$AnimationPlayer.speed_scale = max_speed_scale #TODO: doesnt yet have a way to play a continuous sfx, make vol scalable to speed
 
 ### SIGNALS ###

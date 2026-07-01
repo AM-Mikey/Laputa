@@ -219,7 +219,7 @@ size = Vector2(16, 24)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_egoxq"]
 size = Vector2(16, 16)
 
-[node name="SwitchLever" type="CharacterBody2D" unique_id=1522602251 groups=["Entities", "Props"]]
+[node name="SwitchLever" type="CharacterBody2D" unique_id=1522602251 groups=["Entities", "Props", "Switches"]]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_is1nf")

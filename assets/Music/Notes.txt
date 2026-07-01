@@ -1,0 +1,2 @@
+cloud factory, intro needs beat fix to remove the skipped beats
+	-the hold on the syncopated notes needs to be longer? less glitchy and short sounding
