@@ -229,7 +229,7 @@ visibility_layer = 2
 position = Vector2(1776, 2016)
 prop_path = "res://src/Prop/SwitchPlate.tscn"
 properties = {
-"connected_entity_id": ["PhysFan", 4, ""],
+"connected_entity_id": ["", 4, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"SwitchPlate", 4],
 "switch_type": [2, 2, "Toggle:0,Impulse:1,Timer:2"],

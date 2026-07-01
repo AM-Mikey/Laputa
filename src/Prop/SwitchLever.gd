@@ -42,7 +42,7 @@ func setup(): #Reminder: no function called can use await before finishing entit
 
 func _has_switch_connection_duplicates() -> bool:
 	for s in get_tree().get_nodes_in_group("Switches"):
-		if s != self && s.connected_entity == connected_entity:
+		if s != self && s.connected_entity == connected_entity && connected_entity != null:
 			printerr("ERROR, switch ", self, " and switch ", s, " have same connected_entity: ", connected_entity)
 			return true
 	return false
