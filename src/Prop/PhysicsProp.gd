@@ -10,6 +10,7 @@ var spent = false
 
 var is_in_water = false: set = set_is_in_water
 @export var do_bubble: bool = false
+var wind_areas_inside := []
 
 @export var editor_hidden = false
 @export var id: String

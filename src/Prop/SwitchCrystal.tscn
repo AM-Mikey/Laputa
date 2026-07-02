@@ -1,0 +1,269 @@
+[gd_scene format=3 uid="uid://bnfhuvp3tt7d5"]
+
+[ext_resource type="Script" uid="uid://c2u757iicakdd" path="res://src/Prop/SwitchCrystal.gd" id="1_xcbhh"]
+[ext_resource type="Texture2D" uid="uid://b15m5cygg6cdf" path="res://assets/Prop/SwitchCrystal.png" id="2_3exgd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xowu8"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_vt65e"]
+resource_name = "Hit"
+length = 0.2
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FloatingParent/CrystalSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StandSprite:frame_coords:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_blh6n"]
+resource_name = "Impulse"
+length = 0.8
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FloatingParent/CrystalSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.275, 0.375, 0.475, 0.575, 0.675),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 4, 3, 2, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StandSprite:frame_coords:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.275, 0.375, 0.475, 0.575, 0.675),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 4, 3, 2, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_xcbhh"]
+resource_name = "Off"
+length = 0.2
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FloatingParent/CrystalSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025000006, 0.049999997, 0.07500002, 0.099999994, 0.125, 0.15, 0.175),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 4, 3, 2, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StandSprite:frame_coords:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.025000006, 0.050000012, 0.075, 0.1, 0.125, 0.15, 0.175),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 4, 3, 2, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_d55xm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FloatingParent/CrystalSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StandSprite:frame_coords:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_3exgd"]
+resource_name = "Timer"
+length = 0.8
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FloatingParent/CrystalSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.125, 0.15, 0.175, 0.2, 0.225, 0.25, 0.27499998, 0.29999998, 0.32500002),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 4, 3, 2, 1, 0, 1, 2, 3, 4, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StandSprite:frame_coords:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.125, 0.15, 0.175, 0.2, 0.225, 0.25, 0.27499998, 0.29999998, 0.32500002),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 4, 3, 2, 1, 0, 1, 2, 3, 4, 7]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_do_tick"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qexbl"]
+_data = {
+&"Hit": SubResource("Animation_vt65e"),
+&"Impulse": SubResource("Animation_blh6n"),
+&"Off": SubResource("Animation_xcbhh"),
+&"RESET": SubResource("Animation_d55xm"),
+&"Timer": SubResource("Animation_3exgd")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qexbl"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_egoxq"]
+size = Vector2(16, 20)
+
+[sub_resource type="Animation" id="Animation_u2w5c"]
+resource_name = "Floating"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FloatingParent:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8000001, 1.2, 1.6),
+"transitions": PackedFloat32Array(1, 2, 1, 2, 1),
+"update": 0,
+"values": [Vector2(0, -4), Vector2(0, -5), Vector2(0, -4), Vector2(0, -3), Vector2(0, -4)]
+}
+
+[sub_resource type="Animation" id="Animation_owurk"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0xhgk"]
+_data = {
+&"Floating": SubResource("Animation_u2w5c"),
+&"RESET": SubResource("Animation_owurk")
+}
+
+[node name="SwitchCrystal" type="CharacterBody2D" unique_id=1522602251 groups=["Entities", "Props", "Switches"]]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_xcbhh")
+metadata/_custom_type_script = "uid://dkko72kbbon8e"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1402776169]
+visible = false
+position = Vector2(0, -8)
+texture = ExtResource("2_3exgd")
+centered = false
+hframes = 8
+vframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2107765043]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_xowu8")
+
+[node name="FloatingParent" type="Node2D" parent="." unique_id=1616430574]
+
+[node name="CrystalSprite" type="Sprite2D" parent="FloatingParent" unique_id=1218717689]
+texture = ExtResource("2_3exgd")
+centered = false
+hframes = 8
+vframes = 5
+
+[node name="StandSprite" type="Sprite2D" parent="." unique_id=87196360]
+texture = ExtResource("2_3exgd")
+centered = false
+hframes = 8
+vframes = 5
+frame = 24
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=909782559]
+libraries/ = SubResource("AnimationLibrary_qexbl")
+
+[node name="BulletDetector" type="Area2D" parent="." unique_id=394360552]
+collision_layer = 0
+collision_mask = 8256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletDetector" unique_id=1994630025]
+position = Vector2(8, 4)
+shape = SubResource("RectangleShape2D_qexbl")
+
+[node name="EditorArea" type="Area2D" parent="." unique_id=1494438291]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea" unique_id=1697744625]
+position = Vector2(8, 6)
+shape = SubResource("RectangleShape2D_egoxq")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[node name="Timer" type="Timer" parent="." unique_id=498600675]
+process_callback = 0
+one_shot = true
+
+[node name="AnimationPlayerFloating" type="AnimationPlayer" parent="." unique_id=1816846121]
+libraries/ = SubResource("AnimationLibrary_0xhgk")
+
+[connection signal="area_entered" from="BulletDetector" to="." method="_on_BulletDetector_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

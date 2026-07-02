@@ -139,6 +139,7 @@ func change_level_via_code(level_path, use_save_data):
 		kb.forbid = true
 	current_level.free()
 	current_level = null
+	am.stop_sfx()
 	if f.pc() != null: $Juniper.free()
 
 	add_child(JUNIPER.instantiate())
@@ -205,6 +206,7 @@ func do_transition(old_level_path, level_path):
 	if bl.has_node("TransitionWipe"): #LOADZONES
 		await get_tree().create_timer(0.8).timeout
 		$BlackoutLayer/TransitionWipe.play_out_animation()
+		am.fade_sfx(0.8)
 		await $BlackoutLayer/TransitionWipe.tree_exiting #wait for a bit of the animation to finish
 		inp.can_act = true
 		is_in_transition = false
@@ -215,6 +217,7 @@ func do_transition(old_level_path, level_path):
 	elif bl.has_node("TransitionIris"): #DOORS
 		await get_tree().create_timer(0.4).timeout
 		$BlackoutLayer/TransitionIris.play_out_animation()
+		am.fade_sfx(0.4)
 		await $BlackoutLayer/TransitionIris.tree_exiting #wait for a bit of the animation to finish
 		inp.can_act = true
 		is_in_transition = false

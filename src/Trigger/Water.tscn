@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
 
-[node name="Water" type="Area2D" unique_id=1352829104 groups=["Triggers"]]
+[node name="Water" type="Area2D" unique_id=1352829104 groups=["Enitities", "Triggers"]]
 collision_layer = 1048576
 collision_mask = 7315
 gravity_space_override = 1

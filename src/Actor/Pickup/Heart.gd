@@ -9,6 +9,7 @@ var state = "normal"
 func _ready():
 	gravity = 100
 	home = global_position
+	is_wind_affected = true
 	speed = Vector2(10, 10)
 	match value:
 		2: $AnimationPlayer.play("Small")
@@ -26,11 +27,13 @@ func calc_velocity(direction) -> Vector2:
 	var fractional_speed = speed
 	if is_in_water:
 		fractional_speed = speed * Vector2(0.666, 0.666)
-
 	out.x = fractional_speed.x * direction.x
 	out.y += gravity * get_physics_process_delta_time()
 	if direction.y == -1.0:
 		out.y = fractional_speed.y * direction.y
+	if wind_areas_inside.size() != 0: #Inside Wind
+		if out.y < 0.0:
+			out.y *= 0.9
 	return out
 
 func _on_Timer_timeout():

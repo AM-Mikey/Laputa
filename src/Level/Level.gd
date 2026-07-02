@@ -31,7 +31,7 @@ func _ready():
 
 	if not am.music_queue.is_empty():
 		am.fade_music()
-		await am.fadeout_finished
+		await am.music_fadeout_finished
 	if not w.has_node("UILayer/TitleScreen"):
 		if music == "":
 			pass

@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ylmoqwimv31g"]
+[gd_scene format=3 uid="uid://ylmoqwimv31g"]
 
 [ext_resource type="Script" uid="uid://qayi8dq3f88s" path="res://src/UI/DebugInfo/DebugInfo.gd" id="1"]
 [ext_resource type="Theme" uid="uid://d2y1ya8pt8ye2" path="res://src/UI/DebugInfo/Debug.tres" id="2"]
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="3_d57kx"]
 [ext_resource type="FontFile" uid="uid://dwxtgalfv3erc" path="res://assets/UI/Font/momomono.ttf" id="5_osv66"]
 
-[node name="DebugInfo" type="MarginContainer"]
+[node name="DebugInfo" type="MarginContainer" unique_id=1135510475]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,24 +16,24 @@ mouse_filter = 2
 theme = ExtResource("2")
 script = ExtResource("1")
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="." unique_id=606867755]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="General" type="HBoxContainer" parent="VBox"]
+[node name="General" type="HBoxContainer" parent="VBox" unique_id=2012297619]
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="VBox/General"]
+[node name="Label" type="Label" parent="VBox/General" unique_id=871532360]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("2")
 text = "Laputa"
 
-[node name="FPS" type="Label" parent="VBox/General"]
+[node name="FPS" type="Label" parent="VBox/General" unique_id=1523135306]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -41,7 +41,7 @@ theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "FPS: "
 
-[node name="Screen" type="Label" parent="VBox/General"]
+[node name="Screen" type="Label" parent="VBox/General" unique_id=899555182]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -49,524 +49,536 @@ theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Screen:"
 
-[node name="Arrays" type="HBoxContainer" parent="VBox/General"]
+[node name="Arrays" type="HBoxContainer" parent="VBox/General" unique_id=202427605]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 4
 
-[node name="Guns" type="VBoxContainer" parent="VBox/General/Arrays"]
+[node name="Guns" type="VBoxContainer" parent="VBox/General/Arrays" unique_id=1104134394]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="VBox/General/Arrays/Guns"]
+[node name="Label" type="Label" parent="VBox/General/Arrays/Guns" unique_id=294412763]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
 text = "GUNS"
 
-[node name="Music" type="VBoxContainer" parent="VBox/General/Arrays"]
+[node name="Music" type="VBoxContainer" parent="VBox/General/Arrays" unique_id=1036989405]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="VBox/General/Arrays/Music"]
+[node name="Label" type="Label" parent="VBox/General/Arrays/Music" unique_id=1166089518]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
 text = "MUSIC"
 
-[node name="Sfx" type="VBoxContainer" parent="VBox/General/Arrays"]
+[node name="Sfx" type="VBoxContainer" parent="VBox/General/Arrays" unique_id=2035307505]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="VBox/General/Arrays/Sfx"]
+[node name="Label" type="Label" parent="VBox/General/Arrays/Sfx" unique_id=1056600453]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
 text = "SFX"
 
-[node name="Inventory" type="VBoxContainer" parent="VBox/General/Arrays"]
+[node name="Inventory" type="VBoxContainer" parent="VBox/General/Arrays" unique_id=1664451503]
 visible = false
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Topic" type="VBoxContainer" parent="VBox/General/Arrays"]
+[node name="Topic" type="VBoxContainer" parent="VBox/General/Arrays" unique_id=991760142]
 visible = false
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBox" type="HBoxContainer" parent="VBox"]
+[node name="HBox" type="HBoxContainer" parent="VBox" unique_id=880699207]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="C1" type="HBoxContainer" parent="VBox/HBox"]
-layout_mode = 2
-mouse_filter = 2
-theme = ExtResource("2")
-
-[node name="Q" type="VBoxContainer" parent="VBox/HBox/C1"]
+[node name="C1" type="HBoxContainer" parent="VBox/HBox" unique_id=1453831197]
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("2")
 
-[node name="Bars" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="Q" type="VBoxContainer" parent="VBox/HBox/C1" unique_id=587932630]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2")
+
+[node name="Bars" type="Label" parent="VBox/HBox/C1/Q" unique_id=1279871873]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "BARS"
 
-[node name="HP" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="HP" type="Label" parent="VBox/HBox/C1/Q" unique_id=3632073]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "HP: "
 
-[node name="Money" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="Money" type="Label" parent="VBox/HBox/C1/Q" unique_id=1471141533]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Tot XP: "
 
-[node name="XP" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="XP" type="Label" parent="VBox/HBox/C1/Q" unique_id=2043279126]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Wp XP: "
 
-[node name="WeaponCooldown" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="WeaponCooldown" type="Label" parent="VBox/HBox/C1/Q" unique_id=36623072]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "CD: "
 
-[node name="Movement" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="Movement" type="Label" parent="VBox/HBox/C1/Q" unique_id=1184562422]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "MOVE"
 
-[node name="Velocity" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="Velocity" type="Label" parent="VBox/HBox/C1/Q" unique_id=1043956697]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Vel: "
 
-[node name="Speed" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="Speed" type="Label" parent="VBox/HBox/C1/Q" unique_id=1645298855]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Speed: "
 
-[node name="Gravity" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="Gravity" type="Label" parent="VBox/HBox/C1/Q" unique_id=1255183355]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Grav: "
 
-[node name="Pos" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="Pos" type="Label" parent="VBox/HBox/C1/Q" unique_id=872347102]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Position: "
 
-[node name="Animation" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="Animation" type="Label" parent="VBox/HBox/C1/Q" unique_id=2017034428]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Anim: "
 
-[node name="State" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="State" type="Label" parent="VBox/HBox/C1/Q" unique_id=362154177]
 visible = false
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "State: "
 
-[node name="Direction" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="Direction" type="Label" parent="VBox/HBox/C1/Q" unique_id=90933962]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "DIR"
 
-[node name="MoveDir" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="MoveDir" type="Label" parent="VBox/HBox/C1/Q" unique_id=332556893]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Move: "
 
-[node name="LookDir" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="LookDir" type="Label" parent="VBox/HBox/C1/Q" unique_id=84984975]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Look: "
 
-[node name="LockDir" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="LockDir" type="Label" parent="VBox/HBox/C1/Q" unique_id=1016661904]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Lock: "
 
-[node name="ShootDir" type="Label" parent="VBox/HBox/C1/Q"]
+[node name="ShootDir" type="Label" parent="VBox/HBox/C1/Q" unique_id=139668915]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Shoot: "
 
-[node name="A" type="VBoxContainer" parent="VBox/HBox/C1"]
+[node name="A" type="VBoxContainer" parent="VBox/HBox/C1" unique_id=1714139043]
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("2")
 
-[node name="Bars" type="Label" parent="VBox/HBox/C1/A"]
+[node name="Bars" type="Label" parent="VBox/HBox/C1/A" unique_id=247302669]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("5_osv66")
 
-[node name="HP" type="Label" parent="VBox/HBox/C1/A"]
+[node name="HP" type="Label" parent="VBox/HBox/C1/A" unique_id=1250242451]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="Money" type="Label" parent="VBox/HBox/C1/A"]
+[node name="Money" type="Label" parent="VBox/HBox/C1/A" unique_id=1151081215]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="XP" type="Label" parent="VBox/HBox/C1/A"]
+[node name="XP" type="Label" parent="VBox/HBox/C1/A" unique_id=498180341]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="WeaponCooldown" type="Label" parent="VBox/HBox/C1/A"]
+[node name="WeaponCooldown" type="Label" parent="VBox/HBox/C1/A" unique_id=362253462]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="Movement" type="Label" parent="VBox/HBox/C1/A"]
+[node name="Movement" type="Label" parent="VBox/HBox/C1/A" unique_id=1014860784]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("5_osv66")
 
-[node name="Velocity" type="Label" parent="VBox/HBox/C1/A"]
+[node name="Velocity" type="Label" parent="VBox/HBox/C1/A" unique_id=873358766]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="Speed" type="Label" parent="VBox/HBox/C1/A"]
+[node name="Speed" type="Label" parent="VBox/HBox/C1/A" unique_id=375166262]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="Gravity" type="Label" parent="VBox/HBox/C1/A"]
+[node name="Gravity" type="Label" parent="VBox/HBox/C1/A" unique_id=981879354]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="Pos" type="Label" parent="VBox/HBox/C1/A"]
+[node name="Pos" type="Label" parent="VBox/HBox/C1/A" unique_id=974261609]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="Animation" type="Label" parent="VBox/HBox/C1/A"]
+[node name="Animation" type="Label" parent="VBox/HBox/C1/A" unique_id=1982689413]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "-"
 
-[node name="State" type="Label" parent="VBox/HBox/C1/A"]
+[node name="State" type="Label" parent="VBox/HBox/C1/A" unique_id=1733040576]
 visible = false
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="Direction" type="Label" parent="VBox/HBox/C1/A"]
+[node name="Direction" type="Label" parent="VBox/HBox/C1/A" unique_id=421942463]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("5_osv66")
 
-[node name="MoveDir" type="Label" parent="VBox/HBox/C1/A"]
+[node name="MoveDir" type="Label" parent="VBox/HBox/C1/A" unique_id=1108973670]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="LookDir" type="Label" parent="VBox/HBox/C1/A"]
+[node name="LookDir" type="Label" parent="VBox/HBox/C1/A" unique_id=406265327]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="LockDir" type="Label" parent="VBox/HBox/C1/A"]
+[node name="LockDir" type="Label" parent="VBox/HBox/C1/A" unique_id=864094057]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="ShootDir" type="Label" parent="VBox/HBox/C1/A"]
+[node name="ShootDir" type="Label" parent="VBox/HBox/C1/A" unique_id=1819626571]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="C2" type="HBoxContainer" parent="VBox/HBox"]
+[node name="C2" type="HBoxContainer" parent="VBox/HBox" unique_id=2103694978]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
 mouse_filter = 2
 theme = ExtResource("2")
 
-[node name="Q" type="VBoxContainer" parent="VBox/HBox/C2"]
+[node name="Q" type="VBoxContainer" parent="VBox/HBox/C2" unique_id=1866696579]
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("2")
 
-[node name="Cam" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="Cam" type="Label" parent="VBox/HBox/C2/Q" unique_id=554026190]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "CAM"
 
-[node name="CameraPos" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="CameraPos" type="Label" parent="VBox/HBox/C2/Q" unique_id=385672846]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Pos: "
 
-[node name="CameraOffset" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="CameraOffset" type="Label" parent="VBox/HBox/C2/Q" unique_id=909560228]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Offset: "
 
-[node name="State" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="State" type="Label" parent="VBox/HBox/C2/Q" unique_id=1474370666]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "STATE"
 
-[node name="Disabled" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="Disabled" type="Label" parent="VBox/HBox/C2/Q" unique_id=2055181117]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Disabl: "
 
-[node name="CanInput" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="CanInput" type="Label" parent="VBox/HBox/C2/Q" unique_id=1383906265]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Input:"
 
-[node name="Invincible" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="Invincible" type="Label" parent="VBox/HBox/C2/Q" unique_id=1074649417]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Invin: "
 
-[node name="Inspect" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="Inspect" type="Label" parent="VBox/HBox/C2/Q" unique_id=238953680]
 visible = false
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Inspec: "
 
-[node name="Floor" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="Floor" type="Label" parent="VBox/HBox/C2/Q" unique_id=1570188819]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Floor: "
 
-[node name="Wall" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="Wall" type="Label" parent="VBox/HBox/C2/Q" unique_id=1929982317]
 visible = false
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Wall:"
 
-[node name="Crouch" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="Crouch" type="Label" parent="VBox/HBox/C2/Q" unique_id=375093647]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Crouch"
 
-[node name="SSP" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="SSP" type="Label" parent="VBox/HBox/C2/Q" unique_id=343998338]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "SSP: "
 
-[node name="Water" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="Water" type="Label" parent="VBox/HBox/C2/Q" unique_id=2129627823]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Water: "
 
-[node name="Object" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="Winds" type="Label" parent="VBox/HBox/C2/Q" unique_id=1124746102]
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_fonts/font = ExtResource("3_d57kx")
+text = "Winds: "
+
+[node name="Object" type="Label" parent="VBox/HBox/C2/Q" unique_id=1926404631]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "OBJ"
 
-[node name="Front" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="Front" type="Label" parent="VBox/HBox/C2/Q" unique_id=622275432]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Front: "
 
-[node name="Middle" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="Middle" type="Label" parent="VBox/HBox/C2/Q" unique_id=1000316348]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Middle: "
 
-[node name="Back" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="Back" type="Label" parent="VBox/HBox/C2/Q" unique_id=902905608]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Back: "
 
-[node name="Mission" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="Mission" type="Label" parent="VBox/HBox/C2/Q" unique_id=226646423]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "MSN"
 
-[node name="Main" type="Label" parent="VBox/HBox/C2/Q"]
+[node name="Main" type="Label" parent="VBox/HBox/C2/Q" unique_id=1762426905]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "Main: "
 
-[node name="A" type="VBoxContainer" parent="VBox/HBox/C2"]
+[node name="A" type="VBoxContainer" parent="VBox/HBox/C2" unique_id=2077252412]
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("2")
 
-[node name="View" type="Label" parent="VBox/HBox/C2/A"]
+[node name="View" type="Label" parent="VBox/HBox/C2/A" unique_id=868305296]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("5_osv66")
 
-[node name="CameraPos" type="Label" parent="VBox/HBox/C2/A"]
+[node name="CameraPos" type="Label" parent="VBox/HBox/C2/A" unique_id=1831597123]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="CameraOffset" type="Label" parent="VBox/HBox/C2/A"]
+[node name="CameraOffset" type="Label" parent="VBox/HBox/C2/A" unique_id=2072002760]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="State" type="Label" parent="VBox/HBox/C2/A"]
+[node name="State" type="Label" parent="VBox/HBox/C2/A" unique_id=249695850]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("5_osv66")
 
-[node name="Disabled" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Disabled" type="Label" parent="VBox/HBox/C2/A" unique_id=2134117318]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "-"
 
-[node name="CanInput" type="Label" parent="VBox/HBox/C2/A"]
+[node name="CanInput" type="Label" parent="VBox/HBox/C2/A" unique_id=444275509]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "-"
 
-[node name="Invincible" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Invincible" type="Label" parent="VBox/HBox/C2/A" unique_id=196226643]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "-"
 
-[node name="Inspect" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Inspect" type="Label" parent="VBox/HBox/C2/A" unique_id=287609662]
 visible = false
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="Floor" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Floor" type="Label" parent="VBox/HBox/C2/A" unique_id=625894622]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "-"
 
-[node name="Wall" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Wall" type="Label" parent="VBox/HBox/C2/A" unique_id=56119658]
 visible = false
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "-"
 
-[node name="Crouch" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Crouch" type="Label" parent="VBox/HBox/C2/A" unique_id=790856284]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "-"
 
-[node name="SSP" type="Label" parent="VBox/HBox/C2/A"]
+[node name="SSP" type="Label" parent="VBox/HBox/C2/A" unique_id=1558272203]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "-"
 
-[node name="Water" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Water" type="Label" parent="VBox/HBox/C2/A" unique_id=1472462387]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "-"
 
-[node name="Object" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Winds" type="Label" parent="VBox/HBox/C2/A" unique_id=1350843626]
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_fonts/font = ExtResource("3_d57kx")
+text = "-"
+
+[node name="Object" type="Label" parent="VBox/HBox/C2/A" unique_id=827608601]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("5_osv66")
 
-[node name="Front" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Front" type="Label" parent="VBox/HBox/C2/A" unique_id=1276399958]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="Middle" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Middle" type="Label" parent="VBox/HBox/C2/A" unique_id=1848430436]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="Back" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Back" type="Label" parent="VBox/HBox/C2/A" unique_id=2081709187]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="Mission" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Mission" type="Label" parent="VBox/HBox/C2/A" unique_id=1482373172]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("5_osv66")
 
-[node name="Main" type="Label" parent="VBox/HBox/C2/A"]
+[node name="Main" type="Label" parent="VBox/HBox/C2/A" unique_id=162552296]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")

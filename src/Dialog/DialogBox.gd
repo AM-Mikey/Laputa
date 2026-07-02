@@ -184,7 +184,7 @@ func run_text_string(string):
 			elif character in [",", ".", "?", "!", ":", ";"]:
 				await get_tree().create_timer(punctuation_delay).timeout
 			else:
-				await get_tree().create_timer(print_delay, true, false).timeout
+				await get_tree().create_timer(print_delay, true, false).timeout #TODO: check if these flags are correct
 		character_step += 1
 
 
@@ -364,7 +364,7 @@ func display_name(d_name: String):
 	$Name/Shadow.global_position = $Name/HBox/Label.global_position - Vector2.ONE
 	$Name/HBox/Label.text = d_name.capitalize()
 	$Name/Shadow.text = d_name.capitalize()
-	await get_tree().create_timer(0.01, true, false).timeout
+	await get_tree().create_timer(0.01, true, false).timeout #TODO: check if these flags are correct
 	$Name/Shadow.size = $Name/HBox/Label.size
 	$Name/Panel.size.x = $Name/HBox/Label.size.x + 19
 

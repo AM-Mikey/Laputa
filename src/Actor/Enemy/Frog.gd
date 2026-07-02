@@ -30,7 +30,7 @@ func setup(): #Reminder: no function called can use await
 	rect.size = Vector2(tongue_max_length, 2)
 	$Tongue/CollisionShape2D.shape = rect
 	$Tongue/CollisionShape2D.position = Vector2(look_dir.x * -1 * (tongue_max_length / 2.0), -7)
-
+	is_wind_affected = true
 	set_floor_stop_on_slope_enabled(true)
 	match difficulty:
 		0:

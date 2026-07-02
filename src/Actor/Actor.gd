@@ -12,6 +12,8 @@ var air_cof = 0.05
 var dead = false
 var is_in_water = false: set = set_is_in_water
 @export var do_bubbles = true
+var is_wind_affected := false
+var wind_areas_inside := []
 var home := Vector2(0, 0)
 var rng = RandomNumberGenerator.new()
 

@@ -20,6 +20,7 @@ var instant_fizzle = true
 
 var break_method = "cut"
 var is_wind_affected := false
+var wind_areas_inside := []
 var is_enemy_bullet := false
 
 @onready var w = get_tree().get_root().get_node("World")

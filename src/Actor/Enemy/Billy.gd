@@ -65,13 +65,13 @@ func setup(): #Reminder: no function called can use await
 			damage_on_contact = 2
 			speed = Vector2(70, 70)
 
+  is_wind_affected = true
 	$DeaggroTimer.wait_time = deaggro_delay
 	waypoint = WAYPOINT.instantiate()
 	waypoint.owner_id = id
 	waypoint.index = -1
 	waypoint.visible = true
 	w.current_level.get_node("Waypoints").add_child(waypoint)
-
 	w.emit_signal("finished_spawn_entities_step")
 	change_state("walk")
 

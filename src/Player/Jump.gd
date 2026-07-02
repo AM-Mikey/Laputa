@@ -120,8 +120,14 @@ func calc_velocity():
 	# The player's move dir is vertically up. This happens only for a single frame
 	if sign(pc.move_dir.y) == -1:
 		out.y = mm.speed.y * pc.move_dir.y
+	# In a wind column
+	elif pc.wind_areas_inside.size() != 0:
+		out.y += mm.gravity * get_physics_process_delta_time()
+		if pc.velocity.y < 0.0:
+			out.y *= 0.9
 	# Otherwise, perform gravity calculations
 	else:
+		#print(mm.gravity * get_physics_process_delta_time())
 		out.y += mm.gravity * get_physics_process_delta_time()
 		if not holding_jump and pc.velocity.y < 0.0:
 			out.y *= 0.9

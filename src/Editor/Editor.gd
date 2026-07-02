@@ -108,6 +108,8 @@ func enter(): #Call this every time the level is changed or reloaded
 	if w.current_level.has_node("TileAnimator"):
 		w.current_level.get_node("TileAnimator").editor_enter()
 
+	am.stop_sfx()
+
 	$Main/Win/Tab/Levels.setup_levels()
 	$Main/Win/Tab/Enemies.setup_enemies()
 	$Main/Win/Tab/NPCs.setup_npcs()

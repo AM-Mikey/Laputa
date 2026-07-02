@@ -105,3 +105,9 @@ debug_color = Color(0, 0.6, 0.69803923, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1206385164]
 libraries/ = SubResource("AnimationLibrary_2rvec")
+
+[node name="VisWindUp" type="Timer" parent="." unique_id=1754499085]
+one_shot = true
+
+[node name="VisWindDown" type="Timer" parent="." unique_id=56432646]
+one_shot = true

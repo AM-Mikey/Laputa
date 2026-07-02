@@ -5,8 +5,8 @@ const POS_SFX_PLAYER = preload("res://src/Audio/PosSFX.tscn")
 const MUSIC_PLAYER = preload("res://src/Audio/Music.tscn")
 
 signal interrupt_finished
-signal fadeout_finished
-signal players_updated
+signal sfx_fadeout_finished
+signal music_fadeout_finished
 
 @export var sfx_dict: Dictionary = {
 	"sound_test": preload("res://assets/SFX/Placeholder/snd_menu_move.ogg"),
@@ -29,12 +29,12 @@ signal players_updated
 	"health_upgrade_break": preload("res://assets/SFX/PotterySmash.ogg"),
 	"rope_loose": preload("res://assets/SFX/RopeLoose.ogg"),
 	"rope_land": preload("res://assets/SFX/RopeLand.ogg"),
-	#"switch_lever_down": preload("res://assets/SFX/SwitchLeverDown.ogg"),
-	#"switch_lever_up": preload("res://assets/SFX/SwitchLeverUp.ogg"),
-	#"switch_timer": preload("res://assets/SFX/SwitchTimer.ogg"),
-	#"fan_start": preload("res://assets/SFX/FanStart.ogg"),
-	#"fan_loop": preload("res://assets/SFX/FanLoop.ogg"),
-	#"fan_end": preload("res://assets/SFX/FanEnd.ogg"),
+	"switch_lever_down": preload("res://assets/SFX/SwitchLeverDown.ogg"),
+	"switch_lever_up": preload("res://assets/SFX/SwitchLeverUp.ogg"),
+	"switch_timer": preload("res://assets/SFX/SwitchTimer.ogg"),
+	"fan_start": preload("res://assets/SFX/FanStart.ogg"),
+	"fan_loop": preload("res://assets/SFX/FanLoop.ogg"),
+	"fan_end": preload("res://assets/SFX/FanEnd.ogg"),
 
 	"break_grass": preload("res://assets/SFX/Placeholder/snd_explosion2.ogg"),
 
@@ -130,7 +130,7 @@ var interrupt_queue = []
 
 
 
-func play(sfx_string: String, actor = null, bus = null, volume = 1.0, pitchspread := 0.0):
+func play(sfx_string: String, actor = null, bus = null, volume = 1.0, pitchspread := 0.0, duration := -1.0, is_fadeout_exempt = false):
 	if _check_sfx(sfx_string):
 		var player
 		if actor == null: #non-positional
@@ -146,15 +146,25 @@ func play(sfx_string: String, actor = null, bus = null, volume = 1.0, pitchsprea
 			player.bus = bus
 
 		var loaded_sfx = sfx_dict[sfx_string]
-		if !loaded_sfx.loop:
+		if duration != -1.0: #play for a duration
+			if get_sfx_duration(sfx_string) >= duration || loaded_sfx.loop:
+				_wait_and_clear_sfx_from_duration(player, sfx_string, duration)
+			else:
+				printerr("ERROR: Duration too long for SFX: ", sfx_string)
+		elif !loaded_sfx.loop:
 			_wait_and_clear_non_looping_sfx(player, sfx_string)
-		return player
+		return player #returs a finished non-looping sfx or a current looping sfx. kinda only half useful
 	else:
 		return null
 
 
 func _wait_and_clear_non_looping_sfx(player, sfx_string):
 	await player.finished
+	var queue_slot = [player, sfx_string]
+	_clear_player("sfx", queue_slot)
+
+func _wait_and_clear_sfx_from_duration(player, sfx_string, duration):
+	await get_tree().create_timer(duration, false, true).timeout
 	var queue_slot = [player, sfx_string]
 	_clear_player("sfx", queue_slot)
 
@@ -247,7 +257,6 @@ func _add_player(type, audio_string, actor = null, volume = 1.0, pitchspread := 
 			music_queue.append(queue_slot)
 
 	player.play()
-	emit_signal("players_updated")
 	return player
 
 
@@ -260,7 +269,12 @@ func _clear_player(type, queue_slot):
 		"interrupt":
 			interrupt_queue.erase(queue_slot)
 	queue_slot[0].queue_free() #player
-	emit_signal("players_updated")
+
+func clear_player_by_node(player_node):
+	for s in sfx_queue:
+		if s[0] == player_node:
+			sfx_queue.erase(s)
+	player_node.queue_free()
 
 func clear_player_by_node(player_node):
 	for s in sfx_queue:
@@ -273,27 +287,37 @@ func clear_player_by_node(player_node):
 func stop_sfx():
 	for s in sfx_queue:
 		s[0].queue_free()
-		emit_signal("players_updated")
+	sfx_queue.clear()
+
+func fade_sfx(duration = 1.0):
+	if sfx_queue.is_empty(): return
+	var player = sfx_queue.front()[0]
+	var tween = get_tree().create_tween()
+	tween.tween_property(player, "volume_db", -80, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	await tween.finished
+	if !sfx_queue.is_empty():
+		_clear_player("sfx", sfx_queue.front())
+
+	emit_signal("sfx_fadeout_finished")
 
 func stop_music():
 	for s in music_queue:
 		s[0].queue_free()
-		emit_signal("players_updated")
+	music_queue.clear()
 
 func pause_music(pause = true):
 	for s in music_queue:
 		s[0].stream_paused = pause
 
 func fade_music(duration = 1.0):
-	if music_queue.is_empty():
-		return
+	if music_queue.is_empty(): return
 	var player = music_queue.front()[0]
 	var tween = get_tree().create_tween()
 	tween.tween_property(player, "volume_db", -80, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	await tween.finished
 	if !music_queue.is_empty():
 		_clear_player("music", music_queue.front())
-	emit_signal("fadeout_finished")
+	emit_signal("music_fadeout_finished")
 
 func underwater_attenuate(do_attenuate: bool):
 	var audio_bus_music_idx: int = AudioServer.get_bus_index("Music")
@@ -321,5 +345,9 @@ func _check_sfx(sfx_string) -> bool:
 
 func _do_recent_time(sfx_string):
 	sfx_recent.append(sfx_string)
-	await get_tree().create_timer(sfx_recent_time, true, false).timeout
+	await get_tree().create_timer(sfx_recent_time, true, false).timeout #TODO: check if these flags are correct
 	sfx_recent.erase(sfx_string)
+
+func get_sfx_duration(sfx_string) -> float:
+	var sfx = sfx_dict[sfx_string]
+	return sfx.get_length()

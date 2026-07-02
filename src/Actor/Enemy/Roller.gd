@@ -56,6 +56,7 @@ func setup(): #Reminder: no function called can use await before emit
 	prev_global_position = global_position
 	set_up_direction(FLOOR_NORMAL)
 	_animate()
+	is_wind_affected = true
 	w.emit_signal("finished_spawn_entities_step")
 
 

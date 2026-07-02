@@ -99,7 +99,14 @@ func display_data():
 						create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
 		"prop_spawn":
 			for p in active.properties:
-				create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
+				if p == "switch_type":
+					var enum_string =  active.properties[p][2]
+					var enum_keys = Array(enum_string.split(",", false))
+					if (enum_string.find(":") != -1):
+						enum_keys = enum_keys.map(func (ele): return ele.split(":", false)[0])
+					create_button(p, active.properties[p][0], "enum", enum_keys)
+				else:
+					create_button(p, active.properties[p][0], get_property_type(active.properties[p][1], false))
 		"trigger_spawn":
 			for p in active.properties:
 				if p == "direction":

@@ -1,4 +1,9 @@
 extends Bullet
+
+var texture: CompressedTexture2D
+var texture_index: int
+var collision_shape: RectangleShape2D
+
 var minimum_speed := 6.0
 var bounciness := 0.6
 var explosion_time = 2.5
@@ -14,6 +19,7 @@ var touched_floor = false
 
 func setup():
 	break_method = "burn"
+	is_wind_affected = true
 	$ExplosionDetector.scale = Vector2.ZERO
 	$ExplosionDetector/CollisionShape2D.set_deferred("disabled", true)
 	velocity = get_initial_velocity(speed, direction)
@@ -40,12 +46,14 @@ func _on_physics_process(delta):
 		else:
 			$AnimationPlayer.play("FlipRight")
 
-	var avg_vel = (abs(velocity.x) + abs(velocity.y)) / 2.0 #used to calculate animation slowdown
+	if wind_areas_inside.size() != 0: #Inside Wind
+		if velocity.y < 0:
+			velocity.y *= 0.9
 
-	$AnimationPlayer.speed_scale = avg_vel / start_avg_vel
-	if $AnimationPlayer.speed_scale < 0.1:
-		$AnimationPlayer.pause()
-	print($AnimationPlayer.speed_scale)
+	var avr_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
+	$AnimationPlayer.speed_scale = avr_velocity / start_velocity
+	if $AnimationPlayer.speed_scale < .1:
+		$AnimationPlayer.stop()
 
 
 

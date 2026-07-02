@@ -13,7 +13,7 @@ size = Vector2(22, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uiv56"]
 size = Vector2(32, 16)
 
-[node name="RefillTerminal" type="RigidBody2D" unique_id=114196242]
+[node name="HealthRefill" type="RigidBody2D" unique_id=114196242 groups=["Entities", "PhysicsProps", "Props"]]
 collision_layer = 16
 collision_mask = 520
 script = ExtResource("2")

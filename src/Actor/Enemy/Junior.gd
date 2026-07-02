@@ -20,6 +20,7 @@ func setup(): #Reminder: no function called can use await
 	reward = 8
 	damage_on_contact = 3
 	speed = Vector2(50, 50)
+	is_wind_affected = true
 	w.emit_signal("finished_spawn_entities_step")
 	change_state(starting_state)
 

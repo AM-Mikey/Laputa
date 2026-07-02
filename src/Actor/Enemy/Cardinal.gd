@@ -17,6 +17,7 @@ var waypoint_tolerance := 2.0
 func setup(): #Reminder: no function called can use await
 	reward = 1
 	hp = 1
+	is_wind_affected = true
 	set_floor_stop_on_slope_enabled(true)
 	w.emit_signal("finished_spawn_entities_step")
 	await w.finished_spawning #wait for global_waypoints
