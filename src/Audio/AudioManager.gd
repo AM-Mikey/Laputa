@@ -29,6 +29,12 @@ signal players_updated
 	"health_upgrade_break": preload("res://assets/SFX/PotterySmash.ogg"),
 	"rope_loose": preload("res://assets/SFX/RopeLoose.ogg"),
 	"rope_land": preload("res://assets/SFX/RopeLand.ogg"),
+	#"switch_lever_down": preload("res://assets/SFX/SwitchLeverDown.ogg"),
+	#"switch_lever_up": preload("res://assets/SFX/SwitchLeverUp.ogg"),
+	#"switch_timer": preload("res://assets/SFX/SwitchTimer.ogg"),
+	#"fan_start": preload("res://assets/SFX/FanStart.ogg"),
+	#"fan_loop": preload("res://assets/SFX/FanLoop.ogg"),
+	#"fan_end": preload("res://assets/SFX/FanEnd.ogg"),
 
 	"break_grass": preload("res://assets/SFX/Placeholder/snd_explosion2.ogg"),
 
@@ -71,6 +77,10 @@ signal players_updated
 	"enemy_hurt": preload("res://assets/SFX/Placeholder/snd_enemy_hurt.ogg"),
 	"enemy_shoot": preload("res://assets/SFX/Placeholder/snd_em_fire.ogg"),
 	"enemy_tweet": preload("res://assets/SFX/bird.ogg"),
+	"enemy_thud_0": preload("res://assets/SFX/EnemyThud0.ogg"),
+	"enemy_thud_1": preload("res://assets/SFX/EnemyThud1.ogg"),
+	"enemy_metal_thud": preload("res://assets/SFX/DrumMetal.ogg"),
+	"enemy_slam": preload("res://assets/SFX/GunHeavy.ogg"),
 
 	"ornithopter": preload("res://assets/SFX/Ornithopter.ogg"),
 	#"enemy_buzz":
@@ -104,10 +114,10 @@ signal players_updated
 }
 
 
-@export var sfx_player_max = 12
+@export var sfx_player_max = 16
 var sfx_queue = []
 @export var remove_recent_duplicate_sfx = true
-@export var sfx_recent_time = 0.05
+@export var sfx_recent_time = 0.01
 var sfx_recent = []
 
 @export var music_player_max = 1
@@ -135,10 +145,18 @@ func play(sfx_string: String, actor = null, bus = null, volume = 1.0, pitchsprea
 		if bus != null: #non-specific bus
 			player.bus = bus
 
-		await player.finished
-		var queue_slot = [player, sfx_string]
-		_clear_player("sfx", queue_slot)
+		var loaded_sfx = sfx_dict[sfx_string]
+		if !loaded_sfx.loop:
+			_wait_and_clear_non_looping_sfx(player, sfx_string)
+		return player
+	else:
+		return null
 
+
+func _wait_and_clear_non_looping_sfx(player, sfx_string):
+	await player.finished
+	var queue_slot = [player, sfx_string]
+	_clear_player("sfx", queue_slot)
 
 func play_music(music_string): #TODO: add a resource with track info
 	#var track = {
@@ -242,6 +260,13 @@ func _clear_player(type, queue_slot):
 		"interrupt":
 			interrupt_queue.erase(queue_slot)
 	queue_slot[0].queue_free() #player
+	emit_signal("players_updated")
+
+func clear_player_by_node(player_node):
+	for s in sfx_queue:
+		if s[0] == player_node:
+			sfx_queue.erase(s)
+	player_node.queue_free()
 	emit_signal("players_updated")
 
 ### CONTROLS ###

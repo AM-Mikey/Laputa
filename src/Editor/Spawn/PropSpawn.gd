@@ -52,7 +52,7 @@ func initialize(): #first time set up properties
 	for p in prop.get_property_list():
 		if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
 			properties[p["name"]] = [prop.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
-	properties["id"] = [name, TYPE_STRING]
+	properties["id"] = [name, TYPE_STRING, ""]
 	for ac in prop.get_children():
 		if ac.is_in_group("WaypointLocals"):
 			if !get_if_prop_has_waypoint(ac):

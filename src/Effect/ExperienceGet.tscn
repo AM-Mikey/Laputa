@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://2sgs4b0a04hd"]
+[gd_scene format=3 uid="uid://2sgs4b0a04hd"]
 
 [ext_resource type="Texture2D" uid="uid://byoud7800466y" path="res://assets/Effect/ExperienceGet.png" id="1_yhchw"]
 [ext_resource type="Script" uid="uid://cw1bcyj65k2dg" path="res://src/Effect/BasicParticle.gd" id="2_txres"]
@@ -15,7 +15,7 @@ _data = [Vector2(0, 2), 0.0, -1.6938, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 metadata/_snap_enabled = true
 
-[node name="ExperienceGet" type="CPUParticles2D"]
+[node name="ExperienceGet" type="CPUParticles2D" unique_id=166103809]
 light_mask = 2
 material = SubResource("1")
 amount = 1
