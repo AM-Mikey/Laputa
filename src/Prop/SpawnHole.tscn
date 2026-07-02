@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://bblf2ujhsheuj"]
+
+[ext_resource type="Script" uid="uid://cpm5cseq1i0da" path="res://src/Prop/SpawnHole.gd" id="1_j4i1c"]
+[ext_resource type="Texture2D" uid="uid://bs4vei2upuv5o" path="res://assets/Icon/PropIcon.png" id="2_3crp0"]
+[ext_resource type="PackedScene" uid="uid://crj4agnff8siv" path="res://src/Editor/VisualUtility/VUActor.tscn" id="3_snk1j"]
+[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="4_3crp0"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hr2ib"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3crp0"]
+size = Vector2(16, 16)
+
+[node name="SpawnHole" type="CharacterBody2D" unique_id=538781107 groups=["Entities", "Props"]]
+collision_layer = 16
+script = ExtResource("1_j4i1c")
+metadata/_custom_type_script = "uid://dkko72kbbon8e"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2016785547]
+position = Vector2(8, 8)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=448154214]
+light_mask = 0
+texture = ExtResource("2_3crp0")
+centered = false
+
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=1322505918]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=741386217]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_hr2ib")
+
+[node name="EditorArea" type="Area2D" parent="." unique_id=33299375]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea" unique_id=1325894454]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_3crp0")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1451728143]
+
+[node name="StartTimer" type="Timer" parent="." unique_id=48186689]
+one_shot = true
+
+[node name="VURect" parent="." unique_id=688682803 instance=ExtResource("4_3crp0")]
+tag_name = "player_detection"
+
+[node name="VUActor" parent="." unique_id=1199277091 instance=ExtResource("3_snk1j")]
+position = Vector2(8, 0)
+actor_path = "uid://c7yhu5je8w1pf"
+filter_team = 1
+filter_actor = "roller"
+tag_name = "spawn_actor"
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_SpawnTimer_timeout"]

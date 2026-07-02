@@ -10,7 +10,9 @@ var active_count = 0
 @onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
-	visible = w.debug_visible or w.el.get_child_count() > 0
+	if w.el.get_child_count() == 0: #not in editor
+		visible = false
+		input_pickable = false
 
 ### SIGNALS
 

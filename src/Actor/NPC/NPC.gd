@@ -24,7 +24,7 @@ var bail_time = 6.0
 
 @export var starting_state := "idle"
 @export var walk_speed = Vector2(50, 50)
-@export_file("*.json") var dialog_json: String
+var dialog_json: String #@export_file("*.json") removed export on this! do it via mission system now!
 var conversation_queue: Array #[[conversation_name, main_or_side, is_forced, repeatable, completed_once]]
 var side_conversation_queue: Array #[[conversation_name, main_or_side, is_forced, repeatable, completed_once]]
 var next_conversation_queue_name: String

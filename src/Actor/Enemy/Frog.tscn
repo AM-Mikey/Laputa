@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="3_ih0x2"]
 [ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="3_nvdu1"]
 
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_qm1p1"]
 radius = 7.0
 

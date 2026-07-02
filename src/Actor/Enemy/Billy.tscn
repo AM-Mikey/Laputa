@@ -17,6 +17,7 @@ size = Vector2(256, 160)
 resource_name = "Idle"
 length = 0.4
 loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -32,8 +33,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="3"]
 resource_name = "Jump"
-length = 0.4
-loop_mode = 1
+length = 0.6
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -41,16 +42,17 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [8, 9, 10, 11]
+"values": [8, 9, 10, 11, 8]
 }
 
 [sub_resource type="Animation" id="7"]
 resource_name = "StandShoot"
 length = 0.4
 loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -82,6 +84,7 @@ tracks/1/keys = {
 resource_name = "Walk"
 length = 0.4
 loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -99,6 +102,7 @@ tracks/0/keys = {
 resource_name = "WalkShoot"
 length = 0.4
 loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -138,8 +142,9 @@ _data = {
 [node name="Billy" type="CharacterBody2D" unique_id=147745042 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
-floor_max_angle = 1.0471976
+floor_max_angle = 0.87266463
 script = ExtResource("1")
+debug = true
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1482682800]
@@ -186,6 +191,7 @@ position = Vector2(0, -16)
 texture = ExtResource("2")
 hframes = 4
 vframes = 5
+frame = 4
 
 [node name="StateTimer" type="Timer" parent="." unique_id=1916012981]
 process_callback = 0
@@ -202,34 +208,44 @@ position = Vector2(0, -16)
 
 [node name="FloorDetectorL" type="RayCast2D" parent="." unique_id=1314022133]
 position = Vector2(-7, -8)
-target_position = Vector2(0, 16)
+target_position = Vector2(0, 24)
 collision_mask = 520
-collide_with_areas = true
 
 [node name="FloorDetectorR" type="RayCast2D" parent="." unique_id=1337091757]
 position = Vector2(7, -8)
-target_position = Vector2(0, 16)
+target_position = Vector2(0, 24)
 collision_mask = 520
-collide_with_areas = true
 
-[node name="JumpDetection" type="Node2D" parent="." unique_id=106257102]
-
-[node name="Left" type="RayCast2D" parent="JumpDetection" unique_id=1684778919]
+[node name="JumpDetectorL" type="RayCast2D" parent="." unique_id=1684778919]
 z_index = 5
 position = Vector2(-7, -32)
 target_position = Vector2(0, 14)
 collision_mask = 8
-hit_from_inside = true
 
-[node name="Right" type="RayCast2D" parent="JumpDetection" unique_id=1238464550]
+[node name="JumpDetectorLWall" type="RayCast2D" parent="." unique_id=2105790102]
+z_index = 5
+position = Vector2(-5, -18)
+target_position = Vector2(-2, 0)
+collision_mask = 8
+
+[node name="JumpDetectorR" type="RayCast2D" parent="." unique_id=1238464550]
 z_index = 5
 position = Vector2(7, -32)
 target_position = Vector2(0, 14)
 collision_mask = 8
-hit_from_inside = true
+
+[node name="JumpDetectorRWall" type="RayCast2D" parent="." unique_id=1571238141]
+z_index = 5
+position = Vector2(5, -18)
+target_position = Vector2(2, 0)
+collision_mask = 8
 
 [node name="JumpAccelTimer" type="Timer" parent="." unique_id=1621155892]
 wait_time = 0.1
+one_shot = true
+
+[node name="DeaggroTimer" type="Timer" parent="." unique_id=1615668914]
+wait_time = 0.3
 one_shot = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
@@ -237,3 +253,4 @@ one_shot = true
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
 [connection signal="timeout" from="JumpAccelTimer" to="." method="_on_JumpAccelTimer_timeout"]
+[connection signal="timeout" from="DeaggroTimer" to="." method="_on_DeaggroTimer_timeout"]

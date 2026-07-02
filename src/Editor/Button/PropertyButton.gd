@@ -126,10 +126,11 @@ func on_enum_selected(index):
 		property_value = index
 	emit_signal("property_changed", property_name, property_value)
 
-func _on_string_complete(_value = 0):
-	if property_value != button_string.text and !disabled:
+func _on_string_complete(_value = ""):
+	var check_button = button_string if property_type == "string" else button_load
+	if property_value != check_button.text and !disabled:
 	#$HBox/HBox/String.release_focus()
-		property_value = button_string.text
+		property_value = check_button.text
 		emit_signal("property_changed", property_name, property_value)
 func _on_multiline_complete(_value = 0):
 	if property_value != button_multiline.text and !disabled:

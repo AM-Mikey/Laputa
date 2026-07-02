@@ -18,7 +18,7 @@ func setup():
 	break_method = "cut"
 	is_wind_affected = true
 	velocity = get_initial_velocity()
-	start_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
+	start_velocity = abs(velocity.x) + abs(velocity.y) / 2.0 #used to calculate animation slowdown
 
 
 func _on_physics_process(delta):
@@ -41,8 +41,8 @@ func _on_physics_process(delta):
 	if wind_areas_inside.size() != 0: #Inside Wind
 		if velocity.y < 0:
 			velocity.y *= 0.9
+	var avr_velocity = abs(velocity.x) + abs(velocity.y) / 2.0 #used to calculate animation slowdown
 
-	var avr_velocity = abs(velocity.x) + abs(velocity.y)/2 #used to calculate animation slowdown
 	$AnimationPlayer.speed_scale = avr_velocity / start_velocity
 	if $AnimationPlayer.speed_scale < .1:
 		$AnimationPlayer.stop()

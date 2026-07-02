@@ -7,6 +7,7 @@ func _ready():
 		printerr("ERROR: no actor chosen in ActorSpawnPreview")
 		return
 	var actor = load(actor_path).instantiate()
+	actor.queue_free()
 
 	if "difficulty" in actor:
 		var active_button

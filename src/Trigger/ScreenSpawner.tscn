@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://dc5of1gbrwlns"]
+[gd_scene format=3 uid="uid://ce7aqfjljmhvd"]
 
 [ext_resource type="Script" uid="uid://dm0wrfwattmhy" path="res://src/Trigger/ScreenSpawner.gd" id="1_o6fug"]
 [ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="2_t5opi"]
-[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="3_i70y7"]
+[ext_resource type="PackedScene" uid="uid://crj4agnff8siv" path="res://src/Editor/VisualUtility/VUActor.tscn" id="3_i70y7"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
@@ -20,13 +20,19 @@ shape = SubResource("1")
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=684785219]
 
+[node name="StartTimer" type="Timer" parent="." unique_id=1318970884]
+one_shot = true
+
 [node name="SpawnArea" parent="." unique_id=955871811 instance=ExtResource("2_t5opi")]
 tag_name = "SpawnArea"
 
-[node name="ActorModel" parent="." unique_id=1199277091 instance=ExtResource("3_i70y7")]
-actor_path = "uid://it7syr43jeh"
-is_model = true
+[node name="VUActor" parent="." unique_id=1199277091 instance=ExtResource("3_i70y7")]
+filter_team = 1
+filter_actor = "Ornithopter"
+tag_name = "spawn_actor"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]

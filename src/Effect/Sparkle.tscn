@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvescyhdhfa0y"]
+[gd_scene format=3 uid="uid://cvescyhdhfa0y"]
 
 [ext_resource type="Texture2D" uid="uid://bilxkgk0hcfkf" path="res://assets/Effect/Sparkle.png" id="1_3c7xh"]
 [ext_resource type="Script" uid="uid://cw1bcyj65k2dg" path="res://src/Effect/BasicParticle.gd" id="2_cder7"]
@@ -15,7 +15,7 @@ _data = [Vector2(0, 1), 0.0, 3.02856e-06, 0, 0, Vector2(1, 1), 0.0, 0.0, 1, 0]
 point_count = 2
 metadata/_snap_enabled = true
 
-[node name="Sparkle" type="CPUParticles2D"]
+[node name="Sparkle" type="CPUParticles2D" unique_id=477836675]
 material = SubResource("1")
 emitting = false
 amount = 2

@@ -74,7 +74,17 @@ func display_data():
 			create_button("tile_mode", limiter.tile_mode, "enum", limiter.TileMode.keys())
 			create_button("back_tile_mode", limiter.back_tile_mode, "enum", limiter.TileMode.keys())
 			create_save_button("background")
-		"actor_spawn":
+		"actor_spawn", "vu_actor":
+			if (active_type == "vu_actor"):
+				var actor_path_str: String = active.actor_path
+				if (ResourceUID.has_id(ResourceUID.text_to_id(actor_path_str))):
+					actor_path_str = ResourceUID.uid_to_path(actor_path_str)
+
+				create_button("actor_path", actor_path_str, "load")
+				create_properties_button(active.get_property_list().filter(func (ele): return ele["name"] not in ["actor_path", "properties"]))
+				var actor_label = $Margin/VBox/Label.duplicate()
+				actor_label.text = actor_path_str.split("/")[-1].rstrip(".tscn")
+				$Margin/VBox/Scroll/VBox.add_child.call_deferred(actor_label)
 			for p in active.properties:
 				if p == "dialog_json":
 					create_button("dialog_json", active.properties[p][0], "load")
@@ -124,7 +134,7 @@ func display_data():
 		"tile_map":
 			for layer_id in range(0, get_child_count()):
 				create_layer_button(layer_id)
-		"waypoint_local", "waypoint_global", "waypoint_global_spawn", "tool_vector", "tool_rect":
+		"waypoint_local", "waypoint_global", "waypoint_global_spawn", "vu_vector", "vu_rect":
 			create_properties_button(active.get_property_list())
 
 func get_property_type(type_flag, _is_load) -> String:
@@ -157,7 +167,7 @@ func create_properties_button(property_list):
 					enum_keys = enum_keys.map(func (ele): return ele.split(":", false)[0])
 				create_button(p["name"], active.get(p["name"]), "enum", enum_keys)
 			else:
-				create_button(p["name"], active.get(p["name"]), p["type"])
+				create_button(p["name"], active.get(p["name"]), get_property_type(p["type"], false))
 
 
 func create_button(property, value, type = TYPE_NIL, enum_items = []):
@@ -209,7 +219,6 @@ func on_property_selected(property_name):
 					$FileDialog.current_dir = "res://assets/Background/"
 					$FileDialog.set_filters(PackedStringArray(["*.png"]))
 					$FileDialog.popup()
-
 		"level":
 			match property_name:
 				"tile_set":
@@ -224,8 +233,25 @@ func on_property_selected(property_name):
 					$FileDialog.current_dir = "res://assets/Music/"
 					$FileDialog.set_filters(PackedStringArray(["*.wav"]))
 					$FileDialog.popup()
-		"actor_spawn":
+		"actor_spawn", "vu_actor":
 			match property_name:
+				"actor_path":
+					if (active_type == "vu_actor"):
+						var start_dir = "res://src/Actor"
+						if (active.filter_team != active.ActorTeamFilter.NONE):
+							if (active.filter_team == active.ActorTeamFilter.ENEMY):
+								start_dir = "res://src/Actor/Enemy"
+							else:
+								start_dir = "res://src/Actor/NPC"
+						var filter_actor = active.filter_actor.strip_edges().split(",", false)
+						for i in range(0, filter_actor.size()):
+							filter_actor[i] = filter_actor[i].strip_edges() + ".tscn"
+						$FileDialog.current_dir = start_dir
+						if (filter_actor.size() > 0):
+							$FileDialog.set_filters(filter_actor)
+						else:
+							$FileDialog.set_filters(["*.tscn"])
+						$FileDialog.popup()
 				"dialog_json":
 					$FileDialog.current_dir = "res://src/Dialog/"
 					$FileDialog.set_filters(PackedStringArray(["*.json"]))
@@ -236,11 +262,6 @@ func on_property_selected(property_name):
 					$FileDialog.current_dir = "res://src/Level/"
 					$FileDialog.set_filters(PackedStringArray(["*.tscn"]))
 					$FileDialog.popup()
-				"enemy_path":
-					$FileDialog.current_dir = "res://src/Actor/Enemy/"
-					$FileDialog.set_filters(PackedStringArray(["*.tscn"]))
-					$FileDialog.popup()
-
 
 
 func on_property_changed(property_name, property_value):
@@ -269,10 +290,15 @@ func on_property_changed(property_name, property_value):
 				active.level_limiter.layer_height_offsets[layer_index] = property_value
 				active.level_limiter.setup_layers()
 
-		"actor_spawn":
-			active.properties[property_name][0] = property_value
+		"actor_spawn", "vu_actor":
+			if (active_type == "vu_actor" and property_name in ["actor_path" , "filter_team", "filter_actor", "tag_name"]):
+				active.set(property_name, property_value)
+			else:
+				active.properties[property_name][0] = property_value
+			active.on_property_changed(property_name, property_value)
 		"prop_spawn":
 			active.properties[property_name][0] = property_value
+			active.on_property_changed(property_name, property_value)
 		"trigger_spawn":
 			active.properties[property_name][0] = property_value
 			active.on_property_changed(property_name, property_value)

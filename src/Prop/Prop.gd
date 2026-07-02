@@ -9,7 +9,8 @@ var inspect_time = 0.2
 var spent = false
 #var gravity = 300.0
 
-#var is_in_water = false: set = set_is_in_water
+var is_in_water = false: set = set_is_in_water
+@export var do_bubble: bool = false
 
 #@export var base_gravity: float = 300.0
 #@export var water_gravity: float = 150.0
@@ -42,6 +43,5 @@ func _input(event):
 func activate(): #for children
 	pass
 
-#func set_is_in_water(val):
-	#gravity = base_gravity if !val else water_gravity
-	#is_in_water = val
+func set_is_in_water(val):
+	pass

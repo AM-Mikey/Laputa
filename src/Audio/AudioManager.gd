@@ -77,6 +77,10 @@ signal music_fadeout_finished
 	"enemy_hurt": preload("res://assets/SFX/Placeholder/snd_enemy_hurt.ogg"),
 	"enemy_shoot": preload("res://assets/SFX/Placeholder/snd_em_fire.ogg"),
 	"enemy_tweet": preload("res://assets/SFX/bird.ogg"),
+	"enemy_thud_0": preload("res://assets/SFX/EnemyThud0.ogg"),
+	"enemy_thud_1": preload("res://assets/SFX/EnemyThud1.ogg"),
+	"enemy_metal_thud": preload("res://assets/SFX/DrumMetal.ogg"),
+	"enemy_slam": preload("res://assets/SFX/GunHeavy.ogg"),
 
 	"ornithopter": preload("res://assets/SFX/Ornithopter.ogg"),
 	#"enemy_buzz":
@@ -110,10 +114,10 @@ signal music_fadeout_finished
 }
 
 
-@export var sfx_player_max = 12
+@export var sfx_player_max = 16
 var sfx_queue = []
 @export var remove_recent_duplicate_sfx = true
-@export var sfx_recent_time = 0.05
+@export var sfx_recent_time = 0.01
 var sfx_recent = []
 
 @export var music_player_max = 1
@@ -271,6 +275,13 @@ func clear_player_by_node(player_node):
 		if s[0] == player_node:
 			sfx_queue.erase(s)
 	player_node.queue_free()
+
+func clear_player_by_node(player_node):
+	for s in sfx_queue:
+		if s[0] == player_node:
+			sfx_queue.erase(s)
+	player_node.queue_free()
+	emit_signal("players_updated")
 
 ### CONTROLS ###
 func stop_sfx():

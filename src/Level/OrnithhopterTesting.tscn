@@ -1,21 +1,29 @@
-[gd_scene format=4 uid="uid://cr68apmau1i1x"]
+[gd_scene format=4]
 
-[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_q0jps"]
-[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_qmqra"]
+[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_q0jps"]
+[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_qmqra"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_egrem"]
 [ext_resource type="Resource" path="res://src/Background/PlainsWastes.tres" id="3_munln"]
-[ext_resource type="Texture2D" uid="uid://cx3q6icspkqra" path="res://assets/Background/PlainsWastes.png" id="4_ojeld"]
-[ext_resource type="TileSet" uid="uid://lxvvoeye2frj" path="res://src/Tile/Wastes.tres" id="5_1e00t"]
-[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_qr03l"]
-[ext_resource type="PackedScene" uid="uid://dim3av368jfya" path="res://src/Editor/VisualUtility/WaypointGlobal.tscn" id="8_30ft2"]
-[ext_resource type="Script" uid="uid://wftb1fa7j2ti" path="res://src/Tile/WastesAnimator.gd" id="9_6671f"]
-[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="9_a15t6"]
+[ext_resource type="Texture2D" path="res://assets/Background/PlainsWastes.png" id="4_ojeld"]
+[ext_resource type="TileSet" path="res://src/Tile/Wastes.tres" id="5_1e00t"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_qr03l"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/WaypointGlobal.tscn" id="8_30ft2"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_dnhws"]
+[ext_resource type="Script" path="res://src/Tile/WastesAnimator.gd" id="9_6671f"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="9_rn7th"]
 [ext_resource type="Script" path="res://src/Tile/WastesAutoTile.gd" id="10_8y50y"]
-[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="11_ruftt"]
-[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="11_uh5sa"]
-[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="12_ejtq8"]
-[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="13_egrem"]
-[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="15_jdkka"]
-
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="10_rgqcq"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUActor.tscn" id="11_egrem"]
+[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="11_ruftt"]
+[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="12_ejtq8"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="12_jdkka"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="13_egrem"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="14_h2qwh"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="15_rgqcq"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUActor.gd" id="16_52qmx"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointGlobal.gd" id="18_6fulf"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="22_psgr2"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="24_4pd1b"]
 
 [node name="OrnithhopterTesting" type="Node2D" unique_id=156549534]
 visibility_layer = 2
@@ -24,12 +32,14 @@ level_name = "OrnithhopterTesting"
 music = "dogtown_day"
 dialog_json = "res://src/Dialog/Village.json"
 
-[node name="LevelLimiter" parent="." unique_id=1349839013 instance=ExtResource("2_qmqra")]
+[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1349839013 instance=ExtResource("2_qmqra")]
 visibility_layer = 2
 offset_left = 1600.0
 offset_top = 1632.0
 offset_right = 3008.0
 offset_bottom = 2240.0
+mouse_filter = 2
+script = ExtResource("3_egrem")
 background_resource = ExtResource("3_munln")
 texture = ExtResource("4_ojeld")
 layers = 5
@@ -71,7 +81,7 @@ tile_set = ExtResource("5_1e00t")
 visibility_layer = 2
 z_index = 1
 use_parent_material = true
-tile_map_data = PackedByteArray("AACHAG8AAAACAAgAAACIAG8AAAAIAAgAAACJAG8AAAACAAgAAACKAG8AAAABAAgAAACLAG8AAAACAAgAAACMAG8AAAAIAAgAAABzAHAAAAADAAgAAAB0AHAAAAADAAgAAAB1AHAAAAADAAgAAACHAHAAAAAAAAgAAACIAHAAAAAIAAgAAACJAHAAAAAAAAgAAACKAHAAAAAAAAgAAACLAHAAAAAAAAgAAACMAHAAAAAIAAkAAACNAHAAAAAAAAgAAABzAHEAAAABAAgAAAB0AHEAAAACAAgAAAB1AHEAAAABAAgAAAB/AHEAAAAAAAgAAACAAHEAAAAAAAgAAACBAHEAAAAAAAgAAACCAHEAAAAAAAgAAACHAHEAAAAAAAgAAACIAHEAAAAIAAkAAACJAHEAAAABAAgAAACKAHEAAAACAAgAAACLAHEAAAABAAgAAACMAHEAAAAIAAoAAACNAHEAAAACAAgAAABxAHIAAAAAAAgAAAByAHIAAAAAAAgAAABzAHIAAAAAAAgAAAB0AHIAAAAAAAgAAAB1AHIAAAAAAAgAAAB2AHIAAAAAAAgAAAB3AHIAAAAAAAgAAAB4AHIAAAAAAAgAAAB5AHIAAAAAAAgAAAB6AHIAAAAAAAgAAAB7AHIAAAAAAAgAAAB8AHIAAAAAAAgAAAB9AHIAAAAAAAgAAAB+AHIAAAAAAAgAAAB/AHIAAAAAAAgAAACAAHIAAAAAAAgAAACBAHIAAAAAAAgAAACCAHIAAAAAAAgAAACDAHIAAAAAAAgAAACEAHIAAAAAAAgAAACFAHIAAAAAAAgAAACGAHIAAAAAAAgAAACHAHIAAAAAAAgAAACIAHIAAAAIAAoAAACJAHIAAAAAAAgAAACKAHIAAAAAAAgAAACLAHIAAAAAAAgAAACMAHIAAAAIAAsAAACNAHIAAAACAAkAAABxAHMAAAABAAkAAAByAHMAAAACAAkAAABzAHMAAAADAAkAAAB0AHMAAAACAAkAAAB1AHMAAAADAAkAAAB2AHMAAAAAAAkAAAB3AHMAAAAAAAkAAAB4AHMAAAAAAAkAAAB5AHMAAAABAAkAAAB6AHMAAAAAAAkAAAB7AHMAAAACAAkAAAB8AHMAAAABAAkAAAB9AHMAAAADAAkAAAB+AHMAAAAAAAkAAAB/AHMAAAABAAkAAACAAHMAAAACAAgAAACBAHMAAAABAAgAAACCAHMAAAADAAkAAACDAHMAAAABAAkAAACEAHMAAAACAAkAAACFAHMAAAADAAkAAACGAHMAAAAAAAkAAACHAHMAAAABAAkAAACIAHMAAAAIAAsAAACJAHMAAAACAAkAAACKAHMAAAAAAAkAAACLAHMAAAABAAkAAACMAHMAAAAJAAgAAACAAHQAAAACAAkAAACBAHQAAAABAAkAAACIAHQAAAAIAAgAAACMAHQAAAAIAAgAAACIAHUAAAAIAAkAAACMAHUAAAAIAAkAAAByAHYAAAAAAAsAAABzAHYAAAABAAsAAAB0AHYAAAABAAoAAAB1AHYAAAABAAoAAAB2AHYAAAAAAAsAAAB3AHYAAAABAAsAAACIAHYAAAAIAAoAAACMAHYAAAAIAAoAAABxAHcAAAAAAAsAAAByAHcAAAABAAsAAABzAHcAAAAAAAoAAAB0AHcAAAABAAoAAAB1AHcAAAAAAAsAAAB2AHcAAAABAAsAAAB3AHcAAAABAAoAAAB4AHcAAAAAAAsAAAB5AHcAAAABAAsAAAB6AHcAAAABAAoAAACIAHcAAAAIAAsAAACMAHcAAAAIAAsAAACIAHgAAAAIAAgAAACMAHgAAAAJAAgAAAB+AHkAAAAAAAgAAAB/AHkAAAAAAAgAAACAAHkAAAAAAAgAAACBAHkAAAAAAAgAAACGAHkAAAAAAAgAAACHAHkAAAAAAAgAAACIAHkAAAAIAAkAAACJAHkAAAAAAAgAAACKAHkAAAAAAAgAAACLAHkAAAAAAAgAAACMAHkAAAAIAAgAAACNAHkAAAAAAAgAAACOAHkAAAAAAAgAAABzAHoAAAAAAAsAAAB0AHoAAAABAAsAAAB1AHoAAAAAAAsAAAB2AHoAAAABAAsAAAB3AHoAAAAAAAoAAAB4AHoAAAABAAoAAAB5AHoAAAAAAAoAAAB6AHoAAAAAAAsAAAB7AHoAAAABAAsAAAB8AHoAAAAAAAsAAAB9AHoAAAABAAsAAAB+AHoAAAAAAAgAAAB/AHoAAAAAAAgAAACAAHoAAAAAAAgAAACBAHoAAAAAAAgAAACEAHoAAAAAAAgAAACFAHoAAAAAAAgAAACGAHoAAAAAAAgAAACHAHoAAAAAAAgAAACIAHoAAAAIAAoAAACJAHoAAAAAAAgAAACKAHoAAAAAAAgAAACLAHoAAAAAAAgAAACMAHoAAAAIAAkAAACNAHoAAAAAAAgAAACOAHoAAAAAAAgAAACPAHoAAAAAAAgAAAB0AHsAAAAAAAoAAAB1AHsAAAAAAAoAAAB2AHsAAAAAAAsAAAB3AHsAAAABAAsAAAB4AHsAAAAAAAsAAAB5AHsAAAABAAsAAAB6AHsAAAABAAoAAAB7AHsAAAAAAAsAAAB8AHsAAAABAAsAAAB9AHsAAAABAAoAAAB+AHsAAAAAAAgAAAB/AHsAAAAAAAgAAACAAHsAAAACAAkAAACBAHsAAAADAAkAAACEAHsAAAACAAkAAACFAHsAAAAAAAkAAACGAHsAAAABAAgAAACHAHsAAAACAAgAAACIAHsAAAAIAAsAAACJAHsAAAABAAgAAACKAHsAAAACAAgAAACLAHsAAAABAAgAAACMAHsAAAAIAAoAAACNAHsAAAABAAgAAACOAHsAAAACAAgAAACPAHsAAAABAAkAAAB7AHwAAAAAAAoAAAB8AHwAAAABAAoAAAB9AHwAAAABAAoAAAB+AHwAAAACAAgAAAB/AHwAAAAAAAgAAACGAHwAAAADAAkAAACHAHwAAAADAAkAAACIAHwAAAAIAAgAAACJAHwAAAAAAAkAAACKAHwAAAABAAkAAACLAHwAAAACAAkAAACMAHwAAAAIAAsAAACNAHwAAAACAAkAAACOAHwAAAACAAkAAACSAHwAAAACAAsAAACTAHwAAAADAAsAAACUAHwAAAACAAoAAACVAHwAAAACAAoAAAB8AH0AAAAAAAoAAAB9AH0AAAABAAoAAAB+AH0AAAAAAAgAAAB/AH0AAAAAAAgAAACIAH0AAAAIAAkAAACMAH0AAAAJAAgAAACRAH0AAAACAAoAAACSAH0AAAACAAoAAACTAH0AAAACAAoAAACUAH0AAAACAAoAAACVAH0AAAACAAoAAAB+AH4AAAAAAAgAAAB/AH4AAAAAAAgAAACIAH4AAAAIAAoAAACMAH4AAAAIAAgAAACVAH4AAAACAAoAAACWAH4AAAACAAoAAAB+AH8AAAABAAkAAAB/AH8AAAABAAkAAACIAH8AAAAIAAsAAACMAH8AAAAIAAkAAAB3AIAAAAABAAoAAACIAIAAAAAIAAgAAACJAIAAAAADAAoAAACKAIAAAAACAAsAAACLAIAAAAADAAsA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AACGAIgAAAACAAkAAACHAIgAAAADAAkAAACIAIgAAAAIAAgAAACJAIgAAAABAAkAAACKAIgAAAACAAkAAACLAIgAAAADAAkAAACMAIgAAAAIAAoAAACNAIgAAAABAAkAAACOAIgAAAACAAkAAACPAIgAAAADAAkAAACQAIgAAAAAAAkAAACRAIgAAAABAAkAAACSAIgAAAACAAkAAACTAIgAAAAAAAkAAACUAIgAAAAAAAkAAACVAIgAAAABAAkAAACWAIgAAAACAAkAAACXAIgAAAADAAkAAACYAIgAAAAAAAkAAACZAIgAAAABAAkAAACaAIgAAAACAAkAAACbAIgAAAADAAkAAACcAIgAAAAAAAkAAACdAIgAAAABAAkAAACeAIgAAAACAAkAAACfAIgAAAADAAkAAACgAIgAAAAAAAkAAAChAIgAAAAAAAkAAAClAIgAAAAAAAkAAACmAIgAAAABAAkAAACnAIgAAAACAAkAAACoAIgAAAADAAkAAACpAIgAAAAAAAkAAACqAIgAAAABAAkAAACIAIkAAAAIAAkAAACMAIkAAAAIAAsAAAC8AIcAAAAAAAoAAACkAIcAAAAAAAgAAACjAIcAAAAAAAgAAACiAIcAAAAAAAgAAACjAIYAAAAAAAgAAACiAIYAAAAAAAgAAACiAIgAAAABAAkAAACjAIgAAAAAAAkAAACkAIgAAAABAAkAAAA=")
+tile_map_data = PackedByteArray("AACHAG8AAAACAAgAAACIAG8AAAAIAAgAAACJAG8AAAACAAgAAACKAG8AAAABAAgAAACLAG8AAAACAAgAAACMAG8AAAAIAAgAAABzAHAAAAADAAgAAAB0AHAAAAADAAgAAAB1AHAAAAADAAgAAACHAHAAAAAAAAgAAACIAHAAAAAIAAgAAACJAHAAAAAAAAgAAACKAHAAAAAAAAgAAACLAHAAAAAAAAgAAACMAHAAAAAIAAkAAACNAHAAAAAAAAgAAABzAHEAAAABAAgAAAB0AHEAAAACAAgAAAB1AHEAAAABAAgAAAB/AHEAAAAAAAgAAACAAHEAAAAAAAgAAACBAHEAAAAAAAgAAACCAHEAAAAAAAgAAACHAHEAAAAAAAgAAACIAHEAAAAIAAkAAACJAHEAAAABAAgAAACKAHEAAAACAAgAAACLAHEAAAABAAgAAACMAHEAAAAIAAoAAACNAHEAAAACAAgAAABxAHIAAAAAAAgAAAByAHIAAAAAAAgAAABzAHIAAAAAAAgAAAB0AHIAAAAAAAgAAAB1AHIAAAAAAAgAAAB2AHIAAAAAAAgAAAB3AHIAAAAAAAgAAAB4AHIAAAAAAAgAAAB5AHIAAAAAAAgAAAB6AHIAAAAAAAgAAAB7AHIAAAAAAAgAAAB8AHIAAAAAAAgAAAB9AHIAAAAAAAgAAAB+AHIAAAAAAAgAAAB/AHIAAAAAAAgAAACAAHIAAAAAAAgAAACBAHIAAAAAAAgAAACCAHIAAAAAAAgAAACDAHIAAAAAAAgAAACEAHIAAAAAAAgAAACFAHIAAAAAAAgAAACGAHIAAAAAAAgAAACHAHIAAAAAAAgAAACIAHIAAAAIAAoAAACJAHIAAAAAAAgAAACKAHIAAAAAAAgAAACLAHIAAAAAAAgAAACMAHIAAAAIAAsAAACNAHIAAAACAAkAAABxAHMAAAABAAkAAAByAHMAAAACAAkAAABzAHMAAAADAAkAAAB0AHMAAAACAAkAAAB1AHMAAAADAAkAAAB2AHMAAAAAAAkAAAB3AHMAAAAAAAkAAAB4AHMAAAAAAAkAAAB5AHMAAAABAAkAAAB6AHMAAAAAAAkAAAB7AHMAAAACAAkAAAB8AHMAAAABAAkAAAB9AHMAAAADAAkAAAB+AHMAAAAAAAkAAAB/AHMAAAABAAkAAACAAHMAAAACAAgAAACBAHMAAAABAAgAAACCAHMAAAADAAkAAACDAHMAAAABAAkAAACEAHMAAAACAAkAAACFAHMAAAADAAkAAACGAHMAAAAAAAkAAACHAHMAAAABAAkAAACIAHMAAAAIAAsAAACJAHMAAAACAAkAAACKAHMAAAAAAAkAAACLAHMAAAABAAkAAACMAHMAAAAJAAgAAACAAHQAAAACAAkAAACBAHQAAAABAAkAAACIAHQAAAAIAAgAAACMAHQAAAAIAAgAAACIAHUAAAAIAAkAAACMAHUAAAAIAAkAAAByAHYAAAAAAAsAAABzAHYAAAABAAsAAAB0AHYAAAABAAoAAAB1AHYAAAABAAoAAAB2AHYAAAAAAAsAAAB3AHYAAAABAAsAAACIAHYAAAAIAAoAAACMAHYAAAAIAAoAAABxAHcAAAAAAAsAAAByAHcAAAABAAsAAABzAHcAAAAAAAoAAAB0AHcAAAABAAoAAAB1AHcAAAAAAAsAAAB2AHcAAAABAAsAAAB3AHcAAAABAAoAAAB4AHcAAAAAAAsAAAB5AHcAAAABAAsAAAB6AHcAAAABAAoAAACIAHcAAAAIAAsAAACMAHcAAAAIAAsAAACIAHgAAAAIAAgAAACMAHgAAAAJAAgAAAB+AHkAAAAAAAgAAAB/AHkAAAAAAAgAAACAAHkAAAAAAAgAAACBAHkAAAAAAAgAAACGAHkAAAAAAAgAAACHAHkAAAAAAAgAAACIAHkAAAAIAAkAAACJAHkAAAAAAAgAAACKAHkAAAAAAAgAAACLAHkAAAAAAAgAAACMAHkAAAAIAAgAAACNAHkAAAAAAAgAAACOAHkAAAAAAAgAAABzAHoAAAAAAAsAAAB0AHoAAAABAAsAAAB1AHoAAAAAAAsAAAB2AHoAAAABAAsAAAB3AHoAAAAAAAoAAAB4AHoAAAABAAoAAAB5AHoAAAAAAAoAAAB6AHoAAAAAAAsAAAB7AHoAAAABAAsAAAB8AHoAAAAAAAsAAAB9AHoAAAABAAsAAAB+AHoAAAAAAAgAAAB/AHoAAAAAAAgAAACAAHoAAAAAAAgAAACBAHoAAAAAAAgAAACEAHoAAAAAAAgAAACFAHoAAAAAAAgAAACGAHoAAAAAAAgAAACHAHoAAAAAAAgAAACIAHoAAAAIAAoAAACJAHoAAAAAAAgAAACKAHoAAAAAAAgAAACLAHoAAAAAAAgAAACMAHoAAAAIAAkAAACNAHoAAAAAAAgAAACOAHoAAAAAAAgAAACPAHoAAAAAAAgAAAB0AHsAAAAAAAoAAAB1AHsAAAAAAAoAAAB2AHsAAAAAAAsAAAB3AHsAAAABAAsAAAB4AHsAAAAAAAsAAAB5AHsAAAABAAsAAAB6AHsAAAABAAoAAAB7AHsAAAAAAAsAAAB8AHsAAAABAAsAAAB9AHsAAAABAAoAAAB+AHsAAAAAAAgAAAB/AHsAAAAAAAgAAACAAHsAAAACAAkAAACBAHsAAAADAAkAAACEAHsAAAACAAkAAACFAHsAAAAAAAkAAACGAHsAAAABAAgAAACHAHsAAAACAAgAAACIAHsAAAAIAAsAAACJAHsAAAABAAgAAACKAHsAAAACAAgAAACLAHsAAAABAAgAAACMAHsAAAAIAAoAAACNAHsAAAABAAgAAACOAHsAAAACAAgAAACPAHsAAAABAAkAAAB7AHwAAAAAAAoAAAB8AHwAAAABAAoAAAB9AHwAAAABAAoAAAB+AHwAAAACAAgAAAB/AHwAAAAAAAgAAACGAHwAAAADAAkAAACHAHwAAAADAAkAAACIAHwAAAAIAAgAAACJAHwAAAAAAAkAAACKAHwAAAABAAkAAACLAHwAAAACAAkAAACMAHwAAAAIAAsAAACNAHwAAAACAAkAAACOAHwAAAACAAkAAACSAHwAAAACAAsAAACTAHwAAAADAAsAAACUAHwAAAACAAoAAACVAHwAAAACAAoAAAB8AH0AAAAAAAoAAAB9AH0AAAABAAoAAAB+AH0AAAAAAAgAAAB/AH0AAAAAAAgAAACIAH0AAAAIAAkAAACMAH0AAAAJAAgAAACRAH0AAAACAAoAAACSAH0AAAACAAoAAACTAH0AAAACAAoAAACUAH0AAAACAAoAAACVAH0AAAACAAoAAAB+AH4AAAAAAAgAAAB/AH4AAAAAAAgAAACIAH4AAAAIAAoAAACMAH4AAAAIAAgAAACVAH4AAAACAAoAAACWAH4AAAACAAoAAAB+AH8AAAABAAkAAAB/AH8AAAABAAkAAACIAH8AAAAIAAsAAACMAH8AAAAIAAkAAAB3AIAAAAABAAoAAACIAIAAAAAIAAgAAACJAIAAAAADAAoAAACKAIAAAAACAAsAAACLAIAAAAADAAsA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")
 tile_set = ExtResource("5_1e00t")
 
 [node name="FarFront" type="TileMapLayer" parent="TileMap" unique_id=412721145]
@@ -93,13 +103,17 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=1267117855]
 visibility_layer = 2
 
-[node name="Door" parent="Spawns" unique_id=203859521 instance=ExtResource("7_qr03l")]
+[node name="Door" type="MarginContainer" parent="Spawns" unique_id=203859521 groups=["TriggerSpawns"] instance=ExtResource("7_qr03l")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 2928.0
 offset_top = 2128.0
 offset_right = 2960.0
 offset_bottom = 2160.0
+mouse_filter = 2
+script = ExtResource("8_dnhws")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -113,13 +127,17 @@ properties = {
 }
 size_is_default = false
 
-[node name="LoadZone" parent="Spawns" unique_id=1016058949 instance=ExtResource("7_qr03l")]
+[node name="LoadZone" type="MarginContainer" parent="Spawns" unique_id=1016058949 groups=["TriggerSpawns"] instance=ExtResource("7_qr03l")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 3008.0
 offset_top = 1648.0
 offset_right = 3024.0
 offset_bottom = 2160.0
+mouse_filter = 2
+script = ExtResource("8_dnhws")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -131,13 +149,17 @@ properties = {
 }
 size_is_default = false
 
-[node name="LoadZone1" parent="Spawns" unique_id=657336798 instance=ExtResource("7_qr03l")]
+[node name="LoadZone1" type="MarginContainer" parent="Spawns" unique_id=657336798 groups=["TriggerSpawns"] instance=ExtResource("7_qr03l")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 2864.0
 offset_top = 2160.0
 offset_right = 2896.0
 offset_bottom = 2176.0
+mouse_filter = 2
+script = ExtResource("8_dnhws")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -149,13 +171,17 @@ properties = {
 }
 size_is_default = false
 
-[node name="LoadZone2" parent="Spawns" unique_id=1492737603 instance=ExtResource("7_qr03l")]
+[node name="LoadZone2" type="MarginContainer" parent="Spawns" unique_id=1492737603 groups=["TriggerSpawns"] instance=ExtResource("7_qr03l")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 1584.0
 offset_top = 1648.0
 offset_right = 1600.0
 offset_bottom = 2144.0
+mouse_filter = 2
+script = ExtResource("8_dnhws")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -167,13 +193,17 @@ properties = {
 }
 size_is_default = false
 
-[node name="LoadZone3" parent="Spawns" unique_id=876570456 instance=ExtResource("7_qr03l")]
+[node name="LoadZone3" type="MarginContainer" parent="Spawns" unique_id=876570456 groups=["TriggerSpawns"] instance=ExtResource("7_qr03l")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 1600.0
 offset_top = 1632.0
 offset_right = 3008.0
 offset_bottom = 1648.0
+mouse_filter = 2
+script = ExtResource("8_dnhws")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -185,13 +215,17 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door1" parent="Spawns" unique_id=1647722660 instance=ExtResource("7_qr03l")]
+[node name="Door1" type="MarginContainer" parent="Spawns" unique_id=1647722660 groups=["TriggerSpawns"] instance=ExtResource("7_qr03l")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 1648.0
 offset_top = 2112.0
 offset_right = 1728.0
 offset_bottom = 2144.0
+mouse_filter = 2
+script = ExtResource("8_dnhws")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -205,109 +239,219 @@ properties = {
 }
 size_is_default = false
 
-[node name="ScreenSpawner" parent="Spawns" unique_id=869252364 instance=ExtResource("7_qr03l")]
+[node name="Beetle" type="Area2D" parent="Spawns" unique_id=27842196 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_egrem")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-offset_left = 1792.0
-offset_top = 1648.0
-offset_right = 2400.0
-offset_bottom = 2224.0
-trigger_path = "res://src/Trigger/ScreenSpawner.tscn"
-properties = {
-"color": [Color(0.26666665, 1, 0, 1), 20, ""],
-"editor_hidden": [false, 1, ""],
-"enemy_path": ["res://src/Actor/Enemy/Ornithopter.tscn", 4, ""],
-"id": [&"ScreenSpawner", 4, ""],
-"spawn_direction_override": [Vector2(0, 0), 5, ""],
-"spawn_facing_player": [true, 1, ""],
-"spawn_horizontal": [true, 1, ""],
-"spawn_interval": [1.0, 3, ""],
-"spawn_limit": [-1, 2, ""],
-"spawn_vertical": [true, 1, ""],
-"stop_on_player_exit": [true, 1, ""]
-}
-size_is_default = false
-
-[node name="SpawnArea" parent="Spawns/ScreenSpawner" unique_id=955871811 instance=ExtResource("11_uh5sa")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-tag_name = "SpawnArea"
-value = Rect2(1792, 1648, 608, 496)
-grid_value = Rect2i(112, 103, 38, 31)
-
-[node name="ActorModel" parent="Spawns/ScreenSpawner" unique_id=1199277091 instance=ExtResource("9_a15t6")]
-visibility_layer = 2
-position = Vector2(32, 376)
-actor_path = "res://src/Actor/Enemy/Ornithopter.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"debug": [false, 1, ""],
-"difficulty": [1, 2, ""],
-"dir": [Vector2(-1, 0), 5, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"ActorTool", 4, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"swoop_delay_time": [1.0, 3, ""],
-"swoop_trigger_distance": [10.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
-}
-is_model = true
-
-[node name="ScreenSpawner1" parent="Spawns" unique_id=734346769 instance=ExtResource("7_qr03l")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-offset_left = 2440.0
-offset_top = 1920.0
-offset_right = 2616.0
-offset_bottom = 2048.0
-trigger_path = "res://src/Trigger/ScreenSpawner.tscn"
-properties = {
-"color": [Color(0.26666665, 1, 0, 1), 20, ""],
-"editor_hidden": [false, 1, ""],
-"enemy_path": ["res://src/Actor/Enemy/Ornithopter.tscn", 4, ""],
-"id": [&"ScreenSpawner1", 4, ""],
-"spawn_direction_override": [Vector2(0, 0), 5, ""],
-"spawn_facing_player": [true, 1, ""],
-"spawn_horizontal": [true, 1, ""],
-"spawn_interval": [1.0, 3, ""],
-"spawn_limit": [-1, 2, ""],
-"spawn_vertical": [true, 1, ""],
-"stop_on_player_exit": [true, 1, ""]
-}
-size_is_default = false
-
-[node name="SpawnArea" parent="Spawns/ScreenSpawner1" unique_id=62720163 instance=ExtResource("11_uh5sa")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-tag_name = "SpawnArea"
-editor_color = Color(1, 0, 0, 1)
-value = Rect2(2440, 1920, 176, 128)
-grid_value = Rect2i(152, 120, 11, 8)
-
-[node name="ActorModel" parent="Spawns/ScreenSpawner1" unique_id=455673348 instance=ExtResource("9_a15t6")]
-visibility_layer = 2
-position = Vector2(80, 152)
-actor_path = "res://src/Actor/Enemy/Ornithopter.tscn"
+z_index = 999
+position = Vector2(2480, 2144)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_rgqcq")
+actor_path = "res://src/Actor/Enemy/Beetle.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
 "difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Beetle1", 4, ""],
+"speed": [Vector2(150, 150), 5, ""],
+"wall_dir": [Vector2(-1, 0), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="MoveVector" type="Area2D" parent="Spawns/Beetle" unique_id=938621766 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_rgqcq")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+input_pickable = false
+script = ExtResource("12_jdkka")
+direction = Vector2(-4.371139e-08, -1)
+snap_degrees = 90.0
+movement_locked = true
+
+[node name="ScreenSpawner" type="MarginContainer" parent="Spawns" unique_id=1670924711 groups=["TriggerSpawns"] instance=ExtResource("7_qr03l")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
+offset_left = 1808.0
+offset_top = 1632.0
+offset_right = 2472.0
+offset_bottom = 2144.0
+mouse_filter = 2
+script = ExtResource("8_dnhws")
+trigger_path = "res://src/Trigger/ScreenSpawner.tscn"
+properties = {
+"color": [Color(0.26666665, 1, 0, 1), 20, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"ScreenSpawner", 4, ""],
+"spawn_direction_override": [Vector2(0, 0), 5, ""],
+"spawn_facing_player": [true, 1, ""],
+"spawn_horizontal": [true, 1, ""],
+"spawn_interval": [1.5, 3, ""],
+"spawn_limit": [-1, 2, ""],
+"spawn_start_grace": [1.0, 3, ""],
+"spawn_vertical": [true, 1, ""],
+"stop_on_player_exit": [true, 1, ""]
+}
+size_is_default = false
+
+[node name="SpawnArea" type="Node2D" parent="Spawns/ScreenSpawner" unique_id=955871811 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_rn7th")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+script = ExtResource("14_h2qwh")
+tag_name = "SpawnArea"
+value = Rect2(1808, 1640, 648, 464)
+grid_value = Rect2i(113, 102, 40, 29)
+
+[node name="VUActor" type="Area2D" parent="Spawns/ScreenSpawner" unique_id=1199277091 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_egrem")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(-8, 24)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_52qmx")
+actor_path = "res://src/Actor/Enemy/Ornithopter.tscn"
+filter_team = 1
+filter_actor = "Ornithopter"
+tag_name = "spawn_actor"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [1, 2, ""],
 "dir": [Vector2(-1, 0), 5, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"ActorTool", 4, ""],
+"id": ["", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
-"swoop_delay_time": [1.0, 3, ""],
-"swoop_trigger_distance": [10.0, 3, ""],
+"swoop_trigger_distance_max": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
-is_model = true
 
-[node name="Ornithopter2" parent="Spawns" unique_id=84364498 instance=ExtResource("9_a15t6")]
+[node name="Beetle1" type="Area2D" parent="Spawns" unique_id=844484614 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_egrem")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(2616, 2112)
+z_index = 999
+position = Vector2(2672, 2144)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_rgqcq")
+actor_path = "res://src/Actor/Enemy/Beetle.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [false, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Beetle1", 4, ""],
+"speed": [Vector2(150, 150), 5, ""],
+"wall_dir": [Vector2(-1, 0), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="MoveVector" type="Area2D" parent="Spawns/Beetle1" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_rgqcq")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_jdkka")
+direction = Vector2(-4.371139e-08, -1)
+snap_degrees = 90.0
+movement_locked = true
+
+[node name="BeetleCrawler" type="Area2D" parent="Spawns" unique_id=1730983700 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_egrem")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(2584, 2144)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_rgqcq")
+actor_path = "res://src/Actor/Enemy/BeetleCrawler.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BeetleCrawler", 4, ""],
+"speed": [Vector2(150, 150), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler" unique_id=828254514 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_rgqcq")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_jdkka")
+tag_name = "fly"
+direction = Vector2(-4.371139e-08, -1)
+movement_locked = true
+
+[node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler" unique_id=2126548652 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_rgqcq")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_jdkka")
+arrow_length = 24.0
+tag_name = "crawl"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 90.0
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
+[node name="ScreenSpawner1" type="MarginContainer" parent="Spawns" unique_id=1800792368 groups=["TriggerSpawns"] instance=ExtResource("7_qr03l")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
+offset_left = 2464.0
+offset_top = 2000.0
+offset_right = 2560.0
+offset_bottom = 2048.0
+mouse_filter = 2
+script = ExtResource("8_dnhws")
+trigger_path = "res://src/Trigger/ScreenSpawner.tscn"
+properties = {
+"color": [Color(0.26666665, 1, 0, 1), 20, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"ScreenSpawner1", 4, ""],
+"spawn_direction_override": [Vector2(0, 0), 5, ""],
+"spawn_facing_player": [true, 1, ""],
+"spawn_horizontal": [true, 1, ""],
+"spawn_interval": [5.0, 3, ""],
+"spawn_limit": [-1, 2, ""],
+"spawn_start_grace": [1.0, 3, ""],
+"spawn_vertical": [true, 1, ""],
+"stop_on_player_exit": [true, 1, ""]
+}
+size_is_default = false
+
+[node name="SpawnArea" type="Node2D" parent="Spawns/ScreenSpawner1" unique_id=1623851373 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_rn7th")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+script = ExtResource("14_h2qwh")
+tag_name = "SpawnArea"
+value = Rect2(2560, 1992, 128, 56)
+grid_value = Rect2i(160, 124, 8, 3)
+
+[node name="VUActor" type="Area2D" parent="Spawns/ScreenSpawner1" unique_id=1711413478 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_egrem")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(88, 64)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_52qmx")
 actor_path = "res://src/Actor/Enemy/Ornithopter.tscn"
+filter_team = 1
+filter_actor = "Ornithopter"
+tag_name = "spawn_actor"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -315,51 +459,22 @@ properties = {
 "dir": [Vector2(-1, 0), 5, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Ornithopter3", 4, ""],
+"id": ["", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
-"swoop_delay_time": [1.0, 3, ""],
-"swoop_trigger_distance": [10.0, 3, ""],
+"swoop_trigger_distance_max": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
-
-[node name="Frog" parent="Spawns" unique_id=512670481 instance=ExtResource("9_a15t6")]
-visibility_layer = 2
-position = Vector2(2472, 2208)
-actor_path = "res://src/Actor/Enemy/Frog.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"croak_time": [1.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Frog", 4, ""],
-"jump_delay": [3.0, 3, ""],
-"speed": [Vector2(50, 100), 5, ""],
-"tongue_damage": [2.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="LookVector" parent="Spawns/Frog" unique_id=872564127 instance=ExtResource("13_egrem")]
-visibility_layer = 2
-position = Vector2(0, -7)
-tag_name = "look"
-snap_degrees = 180.0
-movement_locked = true
-
-[node name="TongueRange" parent="Spawns/Frog" unique_id=1432238783 instance=ExtResource("15_jdkka")]
-visible = false
-visibility_layer = 2
-position = Vector2(-32, -12)
-tag_name = "tongue_range"
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=228139383]
 visibility_layer = 2
 
-[node name="Waypoint" parent="Waypoints" unique_id=368447829 instance=ExtResource("8_30ft2")]
+[node name="Waypoint" type="Area2D" parent="Waypoints" unique_id=368447829 groups=["Entities", "VisualUtilities", "WaypointGlobals", "Waypoints"] instance=ExtResource("8_30ft2")]
 visible = false
 visibility_layer = 2
 position = Vector2(2392, 1976)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_6fulf")
 owner_id = "bird1"
 
 [node name="TileAnimator" type="Node2D" parent="." unique_id=1560605216]
@@ -370,10 +485,19 @@ script = ExtResource("9_6671f")
 visibility_layer = 2
 script = ExtResource("10_8y50y")
 
-[node name="VanishingPoint" parent="." unique_id=1961289487 instance=ExtResource("11_ruftt")]
+[node name="VanishingPoint" type="Area2D" parent="." unique_id=1961289487 groups=["VanishingPoints"] instance=ExtResource("11_ruftt")]
 visibility_layer = 2
+z_index = 999
 position = Vector2(2304, 2008)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("22_psgr2")
 
-[node name="SpawnPoint" parent="." unique_id=865907600 instance=ExtResource("12_ejtq8")]
+[node name="SpawnPoint" type="Area2D" parent="." unique_id=865907600 groups=["SpawnPoints"] instance=ExtResource("12_ejtq8")]
 visibility_layer = 2
-position = Vector2(2552, 2144)
+position = Vector2(2520, 2144)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("24_4pd1b")
+
+[connection signal="body_exited" from="Triggers/KillBox" to="Triggers/KillBox" method="_on_body_exited"]
