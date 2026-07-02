@@ -276,13 +276,6 @@ func clear_player_by_node(player_node):
 			sfx_queue.erase(s)
 	player_node.queue_free()
 
-func clear_player_by_node(player_node):
-	for s in sfx_queue:
-		if s[0] == player_node:
-			sfx_queue.erase(s)
-	player_node.queue_free()
-	emit_signal("players_updated")
-
 ### CONTROLS ###
 func stop_sfx():
 	for s in sfx_queue:

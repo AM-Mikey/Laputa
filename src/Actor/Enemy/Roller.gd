@@ -245,7 +245,7 @@ func _calc_velocity_rolling() -> Vector2:
 		else:
 			if just_landed:
 				if difficulty == 0 && abs(gravity_velocity.y) >= 10.0:
-					am.play("enemy_metal_thud", self, null, gravity_velocity.length() / 25.0)
+					am.play("enemy_metal_thud", self, null, gravity_velocity.length() / 50.0)
 					if last_collision != null:
 						if gravity_velocity.length() > 100.0:
 							_create_effect("Land")
@@ -254,7 +254,7 @@ func _calc_velocity_rolling() -> Vector2:
 					gravity_velocity.y = -abs(gravity_velocity.y) * 0.2
 				elif difficulty == 1:
 					if abs(gravity_velocity.y) >= 5.0:
-						am.play("enemy_metal_thud", self, null, gravity_velocity.length() / 25.0)
+						am.play("enemy_metal_thud", self, null, gravity_velocity.length() / 50.0)
 						if last_collision != null:
 							if gravity_velocity.length() > 100.0:
 								_create_effect("Land")
