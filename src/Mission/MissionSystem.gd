@@ -140,6 +140,7 @@ func setup_level_from_mission_progress_history():
 
 
 func update_level_via_mission(mission_name = "Main", mission_stage = "current", update_conversations = true): #while already in level
+	print("updating via missionnnnn")
 	var json = load(w.current_level.mission_level_update)
 	var data = json.get_data()
 	if mission_stage == "current":
@@ -210,6 +211,7 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 
 
 	if update_conversations:
+		print("updating convossssss")
 		#npc_set_main_conversation_queue
 		var npc_set_main_conversation_queue = get_matching_entities_values(data, mission_name, mission_stage, "npc_set_main_conversation_queue", "NPCs", false)
 		for k in npc_set_main_conversation_queue.keys():
@@ -231,6 +233,8 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 					"main": k.conversation_queue.append(a)
 					"side": k.side_conversation_queue.append(a)
 				SaveSystem.write_dialog_data_to_temp(w.current_level, k)
+	else:
+		print("baba")
 
 #level_conversation_on_enter
 	if data.has("level_conversation_on_enter"):

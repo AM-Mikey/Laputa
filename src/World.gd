@@ -122,7 +122,7 @@ func first_time_level_setup(): #Reminder: no function called can use await
 	run_conversation_on_enter(current_level)
 	await get_tree().physics_frame
 	await get_tree().physics_frame #wait for npcs to spawn #caused by camera reset time
-	setup_missions(false, "first_time")
+	_setup_missions(false, "first_time")
 
 func change_level_via_code(level_path, use_save_data):
 	print("changing level via code")
@@ -161,7 +161,7 @@ func change_level_via_code(level_path, use_save_data):
 	await get_tree().physics_frame #wait for npcs to spawn, takes 2 frames for some reason
 	if use_save_data:
 		SaveSystem.read_dialog_data_from_temp(current_level)
-	setup_missions(use_save_data, "code")
+	_setup_missions(use_save_data, "code")
 
 
 
@@ -169,6 +169,8 @@ func change_level_via_trigger(level_path, door_index):
 	print("changing level via trigger")
 	inp.can_act = true
 	SaveSystem.write_level_data_to_temp(current_level)
+	for n in get_tree().get_nodes_in_group("NPCs"):
+		SaveSystem.write_dialog_data_to_temp(current_level, n)
 	if f.db(): await f.db().exit()
 	if f.hud(): $HUDLayer/HUDAnimator.play("RESET")
 	clear_spawn_layers()
@@ -192,7 +194,7 @@ func change_level_via_trigger(level_path, door_index):
 	await get_tree().process_frame
 	await get_tree().process_frame #wait for npcs to spawn, takes 2 frames for some reason
 	SaveSystem.read_dialog_data_from_temp(current_level)
-	setup_missions(false, "trigger")
+	_setup_missions(false, "trigger")
 	setup_door(door_index, old_level_path)
 
 
@@ -221,7 +223,7 @@ func do_transition(old_level_path, level_path):
 		run_conversation_on_enter(current_level)
 
 
-func setup_missions(use_save_data: bool, type = "first_time"):
+func _setup_missions(use_save_data: bool, type = "first_time"):
 	if !current_level.mission_level_update: return
 	print("setting up missions")
 	#main mission
@@ -241,6 +243,7 @@ func setup_missions(use_save_data: bool, type = "first_time"):
 							ms.main_mission_stage = s
 							main_array_completed = true
 				ms.setup_level_from_array(main_array, update_conversations)
+				print("trigger is doing setup level fron array")
 			else: #start with the very first main mission stage
 				ms.main_mission_stage = ms.MAIN_MISSION[0]
 				ms.update_level_via_mission("Main", "current", update_conversations)
