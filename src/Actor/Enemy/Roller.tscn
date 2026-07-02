@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://btmn4aedyq1op" path="res://src/Actor/Enemy/Roller.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://b8jbm3e01232q" path="res://assets/Actor/Enemy/Roller.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_8c34y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i7s0c"]
 radius = 7.9
@@ -56,6 +57,14 @@ script = ExtResource("1")
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=644952424]
+position = Vector2(0, -8)
+rotation = 1.5708
+shape = SubResource("CircleShape2D_i7s0c")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_8c34y")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1010456697]
 position = Vector2(0, -8)
 rotation = 1.5708
 shape = SubResource("CircleShape2D_i7s0c")
