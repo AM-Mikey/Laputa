@@ -19,33 +19,35 @@ radius = 48.0
 resource_name = "FlipLeft"
 length = 0.8
 loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [15, 8]
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [15, 14, 13, 12, 11, 10, 9, 8]
 }
 
 [sub_resource type="Animation" id="5"]
 length = 0.8
 loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [8, 15]
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 13, 14, 15, 8]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t000f"]
@@ -90,7 +92,7 @@ position = Vector2(0, 6)
 texture = ExtResource("1")
 hframes = 8
 vframes = 3
-frame = 14
+frame = 10
 
 [node name="Timer" type="Timer" parent="." unique_id=1911554376]
 process_callback = 0
@@ -98,6 +100,10 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=528588730]
 libraries/ = SubResource("AnimationLibrary_t000f")
+
+[node name="WorldCast" type="RayCast2D" parent="." unique_id=1048863942]
+collision_mask = 8
+collide_with_areas = true
 
 [connection signal="area_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
 [connection signal="body_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_body_entered"]

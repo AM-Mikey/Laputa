@@ -7,6 +7,7 @@ func _ready():
 		printerr("ERROR: no actor chosen in PropSpawnPreview")
 		return
 	var prop = load(prop_path).instantiate()
+	prop.queue_free()
 	$Sprite2D.texture = prop.get_node("Sprite2D").texture
 	$Sprite2D.hframes = prop.get_node("Sprite2D").hframes
 	$Sprite2D.vframes = prop.get_node("Sprite2D").vframes
