@@ -243,10 +243,20 @@ func _setup_missions(use_save_data: bool, type = "first_time"):
 							ms.main_mission_stage = s
 							main_array_completed = true
 				ms.setup_level_from_array(main_array, update_conversations)
-				print("trigger is doing setup level fron array")
 			else: #start with the very first main mission stage
 				ms.main_mission_stage = ms.MAIN_MISSION[0]
 				ms.update_level_via_mission("Main", "current", update_conversations)
+		else: #trigger
+			var main_array = []
+			var main_array_completed = false
+			for s in ms.MAIN_MISSION:
+				if !main_array_completed:
+					main_array.append(["Main", s[0]])
+					if s[0] == ms.main_mission_stage[0]:
+						ms.main_mission_stage = s
+						main_array_completed = true
+			ms.setup_level_from_array(main_array, update_conversations)
+
 
 		#side missions
 		for m in current_level.side_missions_on_enter: #never need to add these if we're loading save data
