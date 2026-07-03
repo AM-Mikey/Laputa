@@ -11,13 +11,13 @@
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_d7k7o"]
 [ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_d7k7o"]
 [ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="12_s0ppf"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="13_bl3ur"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="13_ddw3t"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="13_l0h4m"]
-[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="13_xxkol"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="14_bl3ur"]
-[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="15_flikr"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="16_xxkol"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="18_edts7"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="14_xxkol"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="15_edts7"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="16_flikr"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="18_4pk0b"]
 
 [node name="EnSentryTesting" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
@@ -146,20 +146,19 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Sentry" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+[node name="VURect" type="Node2D" parent="Spawns/Sentry" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_bl3ur")]
 visibility_layer = 2
-script = ExtResource("14_bl3ur")
-tag_name = "PlayerDetection"
+script = ExtResource("14_xxkol")
+tag_name = "player_detector"
 value = Rect2(-192, -192, 384, 384)
-grid_value = Rect2i(-12, -12, 24, 24)
 
-[node name="ShootPosition" type="Area2D" parent="Spawns/Sentry" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+[node name="ShootWaypoint" type="Area2D" parent="Spawns/Sentry" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_edts7")]
 visibility_layer = 2
-position = Vector2(32, 24)
+position = Vector2(40, 16)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_xxkol")
-tag_name = "ShotHeightAndDistance"
+script = ExtResource("16_flikr")
+tag_name = "shoot_distance_and_height"
 
 [node name="Sentry1" type="Area2D" parent="Spawns" unique_id=1732826500 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
 modulate = Color(1, 1, 1, 0.75)
@@ -182,20 +181,19 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Sentry1" unique_id=1171594917 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+[node name="VURect" type="Node2D" parent="Spawns/Sentry1" unique_id=645717504 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_bl3ur")]
 visibility_layer = 2
-script = ExtResource("14_bl3ur")
-tag_name = "PlayerDetection"
+script = ExtResource("14_xxkol")
+tag_name = "player_detector"
 value = Rect2(-192, -192, 384, 384)
-grid_value = Rect2i(-12, -12, 24, 24)
 
-[node name="ShootPosition" type="Area2D" parent="Spawns/Sentry1" unique_id=85622695 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+[node name="ShootWaypoint" type="Area2D" parent="Spawns/Sentry1" unique_id=326621081 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_edts7")]
 visibility_layer = 2
-position = Vector2(-16, 8)
+position = Vector2(-40, 16)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_xxkol")
-tag_name = "ShotHeightAndDistance"
+script = ExtResource("16_flikr")
+tag_name = "shoot_distance_and_height"
 
 [node name="Sentry2" type="Area2D" parent="Spawns" unique_id=564412125 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
 modulate = Color(1, 1, 1, 0.75)
@@ -218,20 +216,19 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Sentry2" unique_id=1135995412 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+[node name="VURect" type="Node2D" parent="Spawns/Sentry2" unique_id=1272467000 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_bl3ur")]
 visibility_layer = 2
-script = ExtResource("14_bl3ur")
-tag_name = "PlayerDetection"
+script = ExtResource("14_xxkol")
+tag_name = "player_detector"
 value = Rect2(-192, -192, 384, 384)
-grid_value = Rect2i(-12, -12, 24, 24)
 
-[node name="ShootPosition" type="Area2D" parent="Spawns/Sentry2" unique_id=1925025430 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+[node name="ShootWaypoint" type="Area2D" parent="Spawns/Sentry2" unique_id=629258074 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_edts7")]
 visibility_layer = 2
-position = Vector2(-32, -232)
+position = Vector2(168, -184)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_xxkol")
-tag_name = "ShotHeightAndDistance"
+script = ExtResource("16_flikr")
+tag_name = "shoot_distance_and_height"
 
 [node name="Sentry3" type="Area2D" parent="Spawns" unique_id=632241329 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
 modulate = Color(1, 1, 1, 0.75)
@@ -254,20 +251,19 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Sentry3" unique_id=216952805 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+[node name="VURect" type="Node2D" parent="Spawns/Sentry3" unique_id=905542068 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_bl3ur")]
 visibility_layer = 2
-script = ExtResource("14_bl3ur")
-tag_name = "PlayerDetection"
+script = ExtResource("14_xxkol")
+tag_name = "player_detector"
 value = Rect2(-192, -192, 384, 384)
-grid_value = Rect2i(-12, -12, 24, 24)
 
-[node name="ShootPosition" type="Area2D" parent="Spawns/Sentry3" unique_id=6247912 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+[node name="ShootWaypoint" type="Area2D" parent="Spawns/Sentry3" unique_id=1359573978 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_edts7")]
 visibility_layer = 2
-position = Vector2(128, -216)
+position = Vector2(-264, -184)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_xxkol")
-tag_name = "ShotHeightAndDistance"
+script = ExtResource("16_flikr")
+tag_name = "shoot_distance_and_height"
 
 [node name="Sentry4" type="Area2D" parent="Spawns" unique_id=1028816999 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
 modulate = Color(1, 1, 1, 0.75)
@@ -290,20 +286,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Sentry4" unique_id=1810986939 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+[node name="VURect" type="Node2D" parent="Spawns/Sentry4" unique_id=208925496 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_bl3ur")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-script = ExtResource("14_bl3ur")
-tag_name = "PlayerDetection"
-value = Rect2(-192, -192, 384, 384)
-grid_value = Rect2i(-12, -12, 24, 24)
+script = ExtResource("14_xxkol")
+tag_name = "player_detector"
+value = Rect2(-192, -112, 368, 304)
 
-[node name="ShootPosition" type="Area2D" parent="Spawns/Sentry4" unique_id=122425736 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+[node name="ShootWaypoint" type="Area2D" parent="Spawns/Sentry4" unique_id=376825600 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_edts7")]
 visibility_layer = 2
-position = Vector2(136, -96)
+position = Vector2(160, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_xxkol")
-tag_name = "ShotHeightAndDistance"
+script = ExtResource("16_flikr")
+tag_name = "shoot_distance_and_height"
 
 [node name="Sentry5" type="Area2D" parent="Spawns" unique_id=1037738839 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
 modulate = Color(1, 1, 1, 0.75)
@@ -326,20 +322,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Sentry5" unique_id=763903618 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+[node name="VURect" type="Node2D" parent="Spawns/Sentry5" unique_id=1276032265 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_bl3ur")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-script = ExtResource("14_bl3ur")
-tag_name = "PlayerDetection"
-value = Rect2(-192, -192, 384, 384)
-grid_value = Rect2i(-12, -12, 24, 24)
+script = ExtResource("14_xxkol")
+tag_name = "player_detector"
+value = Rect2(-192, -96, 352, 288)
 
-[node name="ShootPosition" type="Area2D" parent="Spawns/Sentry5" unique_id=2006096538 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+[node name="ShootWaypoint" type="Area2D" parent="Spawns/Sentry5" unique_id=469183692 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_edts7")]
 visibility_layer = 2
-position = Vector2(-128, -64)
+position = Vector2(-160, -128)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_xxkol")
-tag_name = "ShotHeightAndDistance"
+script = ExtResource("16_flikr")
+tag_name = "shoot_distance_and_height"
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
@@ -349,6 +345,6 @@ visibility_layer = 2
 position = Vector2(3080, 1880)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_edts7")
+script = ExtResource("18_4pk0b")
 
 [connection signal="body_exited" from="Triggers/KillBox" to="Triggers/KillBox" method="_on_body_exited"]

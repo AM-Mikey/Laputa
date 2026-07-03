@@ -139,11 +139,11 @@ frame = 1
 libraries/ = SubResource("AnimationLibrary_egxmn")
 
 [node name="VURect" parent="." unique_id=688682803 instance=ExtResource("4_ecneg")]
-tag_name = "PlayerDetection"
+tag_name = "player_detector"
 value = Rect2(-192, -192, 384, 384)
 
 [node name="ShootWaypoint" parent="." unique_id=1432238783 instance=ExtResource("5_n6wfj")]
-tag_name = " DistanceAndHeight"
+tag_name = "shoot_distance_and_height"
 
 [node name="ShootDelay" type="Timer" parent="." unique_id=1985058438]
 
