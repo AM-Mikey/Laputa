@@ -1,27 +1,27 @@
 extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/SentryIcon.png")
+
+const TX_0 = preload("res://assets/Actor/Enemy/Sentry.png")
+
 const HAIRBALL = preload("res://src/Bullet/Enemy/Hairball.tscn")
 
 @export var look_dir: Vector2 = Vector2.LEFT
-var move_dir: Vector2
-
-
-@export var height_tolerance = 7
 @export var cooldown_time = 2.0
+
+@export var projectile_travel_time: float = 0.5
 @export var projectile_speed: int = 150
 @export var projectile_damage: int = 2
+var shoot_distance := 0.0
+var shoot_height := 0.0
 
-
-#@export var shoot_distance = 128
-#@export var shoot_tolerance = 16
+var move_dir: Vector2
 
 var target: Node = null
-var locked_on = false
+const shoot_reload_cycle_time := 1.2
+var anim_speed := 1.0
 
-
-var shooting = false
-
+@onready var ap = $AnimationPlayer
 
 func setup(): #Reminder: no function called can use await
 	hp = 4
@@ -29,63 +29,70 @@ func setup(): #Reminder: no function called can use await
 	speed = Vector2(50, 200)
 	gravity = 250
 	reward = 2
+	$Sprite2D.flip_h = look_dir.x >= 0.0
+	anim_speed = max(1.0, shoot_reload_cycle_time / cooldown_time)
+	shoot_distance = abs($ShootPosition.position.x)
+	shoot_height = abs($ShootPosition.position.y)
+
 	w.emit_signal("finished_spawn_entities_step")
 	change_state("idle")
 
 ### STATES ###
-
-func enter_target(_last_state):
-	change_state("shoot")
-
-#func enter_target():
-	#var target_pos_x = target.global_position.x
-	#if global_position.x >= target_pos_x: #player to the left
-		#target_pos_x += shoot_distance
-		#look_dir = Vector2.LEFT
-	#else: #player to the right
-		#target_pos_x -= shoot_distance
-		#look_dir = Vector2.RIGHT
-	#
-	#if abs(global_position.x - target_pos_x) < shoot_tolerance:
-		#change_state("shoot")
-
 func enter_shoot(_last_state):
-	prepare_bullet()
-	$StateTimer.start(cooldown_time)
-
-
-
-
-
-
-
-
+	if ap.current_animation == "Reload":
+		ap.play("Reload", -1.0, anim_speed)
+	else:
+		ap.play("Shoot", -1.0, anim_speed)
 
 func prepare_bullet():
 	am.play("enemy_shoot", self)
 	var bullet = HAIRBALL.instantiate()
 	bullet.damage = projectile_damage
+
+	var bullet_origin := Vector2(0.0, -12.0)
+	bullet.position = global_position + bullet_origin
+
 	bullet.speed = projectile_speed
+	bullet.direction = Vector2(look_dir.x, -1)
 
-	bullet.position = Vector2($CollisionShape2D.global_position.x, $CollisionShape2D.global_position.y - height_tolerance)
-	bullet.direction = Vector2(look_dir.x / 2.0, -1) #Adjust this for angle
+	#var normal_time_travel = 2.0
+	#var target_displace_x = shoot_distance * look_dir.x
+#
+	#var b_speed_x = target_displace_x / normal_time_travel
+	#var b_speed_y = (-0.5 * bullet.gravity * pow(normal_time_travel, 2) - bullet_origin.y) / normal_time_travel
+#
+	#bullet.speed = Vector2(b_speed_x, b_speed_y).length()
+	#bullet.direction = Vector2(b_speed_x, b_speed_y).normalized()
 
-	w.middle.add_child.call_deferred(bullet)
+	w.middle.add_child(bullet)
 
 
+func exit_shoot(next_state):
+	$ShootDelay.stop()
 
 ### SIGNALS ###
-
-
-
 func _on_PlayerDetector_body_entered(body):
 	target = body.owner
-	change_state("target")
+	change_state("shoot")
 
 func _on_PlayerDetector_body_exited(_body):
 	target = null
 	change_state("idle")
 
-func _on_StateTimer_timeout():
+func _on_AnimationPlayer_animation_finished(anim_name: StringName) -> void:
+	match anim_name:
+		"Shoot":
+			if state == "idle":
+				ap.play("Reload")
+			elif state == "shoot":
+				ap.play("Reload", -1.0, anim_speed)
+		"Reload":
+			if state == "shoot":
+				if cooldown_time > shoot_reload_cycle_time:
+					$ShootDelay.start(cooldown_time - shoot_reload_cycle_time)
+				else:
+					ap.play("Shoot", -1.0, anim_speed)
+
+func _on_ShootDelay_timeout() -> void:
 	if state == "shoot":
-		change_state("target")
+		ap.play("Shoot", -1.0, anim_speed)

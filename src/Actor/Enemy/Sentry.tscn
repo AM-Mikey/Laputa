@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://bhkn70appytmn" path="res://assets/Actor/Enemy/Sentry.png" id="1"]
 [ext_resource type="Script" uid="uid://dkmxqwtxwp02i" path="res://src/Actor/Enemy/Sentry.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_r0jmj"]
+[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="4_ecneg"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="5_n6wfj"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
@@ -10,9 +12,25 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(384, 384)
 
+[sub_resource type="Animation" id="Animation_mctue"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
 [sub_resource type="Animation" id="3"]
-resource_name = "ReloadLeft"
+resource_name = "Reload"
 length = 0.4
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -20,26 +38,16 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [8, 11]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [false]
+"values": [8, 9, 10, 11]
 }
 
 [sub_resource type="Animation" id="4"]
+resource_name = "Shoot"
 length = 0.8
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -47,28 +55,31 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0, 7]
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"values": [{
+"args": [],
+"method": &"prepare_bullet"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_egxmn"]
 _data = {
-&"ReloadLeft": SubResource("3"),
-&"ShootLeft": SubResource("4")
+&"RESET": SubResource("Animation_mctue"),
+&"Reload": SubResource("3"),
+&"Shoot": SubResource("4")
 }
 
 [node name="Sentry" type="CharacterBody2D" unique_id=1551191755 groups=["Actors", "Enemies", "Entities"]]
@@ -121,17 +132,24 @@ position = Vector2(0, -8)
 texture = ExtResource("1")
 hframes = 8
 vframes = 2
-frame = 8
-
-[node name="StateTimer" type="Timer" parent="." unique_id=399068538]
-process_callback = 0
-one_shot = true
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1373409396]
 libraries/ = SubResource("AnimationLibrary_egxmn")
+
+[node name="VURect" parent="." unique_id=688682803 instance=ExtResource("4_ecneg")]
+tag_name = "PlayerDetection"
+value = Rect2(-192, -192, 384, 384)
+grid_value = Rect2i(-12, -12, 12, 12)
+
+[node name="ShootPosition" parent="." unique_id=1432238783 instance=ExtResource("5_n6wfj")]
+tag_name = " Height"
+
+[node name="ShootDelay" type="Timer" parent="." unique_id=1985058438]
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
-[connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="ShootDelay" to="." method="_on_ShootDelay_timeout"]
