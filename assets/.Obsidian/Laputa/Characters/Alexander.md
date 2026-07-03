@@ -12,3 +12,6 @@ Alexander possesses the powers of teleportation, levitation and telekinesis, bei
 
 #### After Defeat
 Near the end of the game, after being defeated by Juniper and sensing the inevitable defeat of King Davey, he reveals to the protagonist everything he knows about the crown title and the history of the Laputans. He suggests that by defeating Davey, Juniper could become the new King.
+
+Design Inspiration: Tyki Mikk, Alex Turner
+Namesake: Anyways (Arctic Monkeys)

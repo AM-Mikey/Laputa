@@ -68,7 +68,7 @@ config/icon="uid://b42so8fnnp3uq"
 
 [audio]
 
-buses/default_bus_layout="uid://c2jgypabye4cc"
+buses/default_bus_layout=""
 
 [autoload]
 
@@ -442,7 +442,6 @@ debug_slowmode={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_environment="res://default_env.tres"
 
 [tiled_importer]
 

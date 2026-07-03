@@ -56,12 +56,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Concepts/Cloud Curtain.md",
+                "file": "Characters/Alexander.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Cloud Curtain"
+              "title": "Alexander"
             }
           },
           {
@@ -288,6 +288,24 @@
   },
   "active": "530bc650ea873274",
   "lastOpenFiles": [
+    "Characters/Basil.md",
+    "Characters/Treasure Hunter.md",
+    "Characters/Scrum.md",
+    "Characters/Rosemary.md",
+    "Characters/Alexander.md",
+    "Characters/Colin.md",
+    "Characters/Dola.md",
+    "Characters/Emily.md",
+    "Characters/Fuuka.md",
+    "Characters/Junior.md",
+    "Characters/Juniper.md",
+    "Characters/King Davey.md",
+    "Characters/Laputa's Former King.md",
+    "Characters/Parsley and Thyme.md",
+    "Characters/Quincy.md",
+    "Characters/Sage.md",
+    "Characters/Spirit of the Island.md",
+    "Concepts/Cloud Curtain.md",
     "Untitled 2.base",
     "Untitled 1.base",
     "Concepts/Second Inhabitants.md",
@@ -298,23 +316,6 @@
     "Concepts/Humans and Beastfolk.md",
     "Concepts/Laputan Crown.md",
     "Concepts/Davey's Secret Knowledge.md",
-    "Concepts/Cloud Curtain.md",
-    "Concepts/Endings.md",
-    "Characters/Alexander.md",
-    "Characters/Basil.md",
-    "Characters/Dola.md",
-    "Characters/Emily.md",
-    "Characters/Fuuka.md",
-    "Characters/Junior.md",
-    "Characters/Juniper.md",
-    "Characters/King Davey.md",
-    "Characters/Laputa's Former King.md",
-    "Characters/Quincy.md",
-    "Characters/Parsley and Thyme.md",
-    "Objects/Vehicles/Sushi.md",
-    "2026-06-25.md",
-    "Groups/LZH Firearms Co..md",
-    "Groups/Lost Boys.md",
     "Untitled.base",
     "Aseprite_8jemaKX0FE.png",
     "Aseprite_EEozVk20AW.png",
@@ -332,7 +333,6 @@
     "Objects/Vehicles",
     "Groups/Untitled",
     "The World",
-    "Concepts",
-    "Characters"
+    "Concepts"
   ]
 }

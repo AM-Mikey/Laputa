@@ -411,31 +411,27 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Billy" type="Area2D" parent="Spawns" unique_id=696348511 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_c6b85")]
+[node name="Sentry" type="Area2D" parent="Spawns" unique_id=1602451852 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_c6b85")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(1800, 2032)
+position = Vector2(2264, 2032)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_travn")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
+"cooldown_time": [2.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy", 4, ""],
-"idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
+"height_tolerance": [7, 2, ""],
+"id": [&"Sentry", 4, ""],
+"look_dir": [Vector2(-1, 0), 5, ""],
+"projectile_damage": [2, 2, ""],
+"projectile_speed": [150, 2, ""],
 "speed": [Vector2(150, 350), 5, ""],
-"walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
