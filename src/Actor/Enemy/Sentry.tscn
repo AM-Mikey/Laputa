@@ -10,6 +10,7 @@
 size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="2"]
+resource_local_to_scene = true
 size = Vector2(384, 384)
 
 [sub_resource type="Animation" id="Animation_mctue"]
@@ -140,10 +141,9 @@ libraries/ = SubResource("AnimationLibrary_egxmn")
 [node name="VURect" parent="." unique_id=688682803 instance=ExtResource("4_ecneg")]
 tag_name = "PlayerDetection"
 value = Rect2(-192, -192, 384, 384)
-grid_value = Rect2i(-12, -12, 12, 12)
 
-[node name="ShootPosition" parent="." unique_id=1432238783 instance=ExtResource("5_n6wfj")]
-tag_name = "ShotHeightAndDistance"
+[node name="ShootWaypoint" parent="." unique_id=1432238783 instance=ExtResource("5_n6wfj")]
+tag_name = " DistanceAndHeight"
 
 [node name="ShootDelay" type="Timer" parent="." unique_id=1985058438]
 

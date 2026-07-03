@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d7hgcoq0lmkd" path="res://src/Actor/Enemy/Billy.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dxp874vl8xdex" path="res://assets/Actor/Enemy/Billy.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_aysxk"]
+[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="4_bgd16"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sy72i"]
 size = Vector2(10, 14)
@@ -11,6 +12,7 @@ size = Vector2(10, 14)
 size = Vector2(14, 15)
 
 [sub_resource type="RectangleShape2D" id="2"]
+resource_local_to_scene = true
 size = Vector2(256, 160)
 
 [sub_resource type="Animation" id="6"]
@@ -247,6 +249,10 @@ one_shot = true
 [node name="DeaggroTimer" type="Timer" parent="." unique_id=1615668914]
 wait_time = 0.3
 one_shot = true
+
+[node name="VURect" parent="." unique_id=688682803 instance=ExtResource("4_bgd16")]
+tag_name = "player_detector"
+value = Rect2(-128, -80, 256, 160)
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

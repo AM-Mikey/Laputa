@@ -26,9 +26,12 @@ func setup(): #Reminder: no function called can use await
 	gravity = 250
 	reward = 2
 	anim_speed = max(1.0, shoot_reload_cycle_time / cooldown_time)
-	shoot_displace_x = $ShootPosition.position.x
-	shoot_height = abs($ShootPosition.position.y)
+	shoot_displace_x = $ShootWaypoint.position.x
+	shoot_height = abs($ShootWaypoint.position.y)
 	$Sprite2D.flip_h = shoot_displace_x >= 0.0
+
+	$PlayerDetector/CollisionShape2D.shape.size = $VURect.value.size
+	$PlayerDetector/CollisionShape2D.position = $VURect.value.size / 2.0 + $VURect.value.position
 
 	w.emit_signal("finished_spawn_entities_step")
 	change_state("idle")

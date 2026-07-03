@@ -67,6 +67,9 @@ func setup(): #Reminder: no function called can use await
 
 	is_wind_affected = true
 	$DeaggroTimer.wait_time = deaggro_delay
+	$PlayerDetector/CollisionShape2D.shape.size = $VURect.value.size
+	$PlayerDetector/CollisionShape2D.position = $VURect.value.position + $VURect.value.size / 2.0
+
 	waypoint = WAYPOINT.instantiate()
 	waypoint.owner_id = id
 	waypoint.index = -1

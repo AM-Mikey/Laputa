@@ -24,7 +24,7 @@ func setup():
 		$PlayerDetector.monitoring = false
 	else:
 		$PlayerDetector/CollisionShape2D.shape.size = $VURect.value.size
-		$PlayerDetector.global_position = $VURect.value.position + $VURect.value.size / 2.0
+		$PlayerDetector/CollisionShape2D.position = $VURect.value.position + $VURect.value.size / 2.0
 		$PlayerDetector.monitoring = true
 	$SpawnTimer.wait_time = spawn_interval
 	$StartTimer.wait_time = spawn_start_timer

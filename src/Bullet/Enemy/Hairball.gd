@@ -15,7 +15,6 @@ func setup():
 	velocity = calc_velocity(speed)
 	start_velocity = abs(velocity.x) + abs(velocity.y) / 2.0 #used to calculate animation slowdown
 
-
 func _on_physics_process(delta):
 	velocity.y += gravity * delta
 	move_and_slide()
