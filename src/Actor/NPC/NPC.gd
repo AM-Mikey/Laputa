@@ -24,7 +24,6 @@ var bail_time = 6.0
 
 @export var starting_state := "idle"
 @export var walk_speed = Vector2(50, 50)
-var dialog_json: String #@export_file("*.json") removed export on this! do it via mission system now!
 var conversation_queue: Array #[[conversation_name, main_or_side, is_forced, repeatable, completed_once]]
 var side_conversation_queue: Array #[[conversation_name, main_or_side, is_forced, repeatable, completed_once]]
 var next_conversation_queue_name: String
@@ -221,7 +220,7 @@ func enter_talk(_last_state):
 
 		get(next_conversation_queue_name)[next_conversation_index][4] = true #completed
 		SaveSystem.write_dialog_data_to_temp(w.current_level, self)
-		dialog_box.start_printing(dialog_json, get(next_conversation_queue_name)[next_conversation_index][0])
+		dialog_box.start_printing(w.current_level.dialog_json, get(next_conversation_queue_name)[next_conversation_index][0])
 
 
 
@@ -229,8 +228,7 @@ func enter_talk(_last_state):
 
 func _input(event):
 	if conversation_queue.size() == 0: return
-	if event.is_action_pressed("inspect") && active_pc \
-	&& dialog_json != "" && conversation_queue[0][0] != "" && state != "talk" && active_pc.mm.current_state == active_pc.mm.states["run"]:
+	if event.is_action_pressed("inspect") && active_pc && conversation_queue[0][0] != "" && state != "talk" && active_pc.mm.current_state == active_pc.mm.states["run"]:
 		if inp.can_act:
 			predialog_state = state
 			change_state("talk")

@@ -625,3 +625,7 @@ Lever TODO:
 		-switch.connected_to_puzzle: bool
 		-connected_prop_or_trigger_etc.set_puzzle_solved(true)
 			or instead level.set_puzzle_solved({}) dict structure: {entity: [var_name, var_value]} to be able to affect everything needed
+			
+
+
+General TODO: change liscence when possible

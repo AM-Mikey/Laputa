@@ -238,7 +238,6 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 			for stage in data["level_conversation_on_enter"][mission_name]:
 				if stage == mission_stage:
 					w.current_level.conversation_on_enter = data["level_conversation_on_enter"][mission_name][stage]
-					print("frog")
 
 #camera_control_add
 	if data.has("camera_control_add"):
