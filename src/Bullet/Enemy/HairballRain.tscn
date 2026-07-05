@@ -1,9 +1,9 @@
-[gd_scene format=3 uid="uid://fioqnyqjoqkt"]
+[gd_scene format=3 uid="uid://bqlmnjg5ntp08"]
 
-[ext_resource type="Script" uid="uid://db8sonshae0f5" path="res://src/Bullet/Enemy/Hairball.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://bwidtesm4rihd" path="res://assets/Bullet/Enemy/Hairball.png" id="2"]
-[ext_resource type="PackedScene" uid="uid://d1oy3g4tudn3v" path="res://src/Bullet/Enemy/EnemyCollisionDetector.tscn" id="2_ahdkj"]
-[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_oq5v0"]
+[ext_resource type="Script" uid="uid://dn4mhqcpjxrrf" path="res://src/Bullet/Enemy/HairballRain.gd" id="1_as6tm"]
+[ext_resource type="PackedScene" uid="uid://d1oy3g4tudn3v" path="res://src/Bullet/Enemy/EnemyCollisionDetector.tscn" id="2_l706f"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_y6sgh"]
+[ext_resource type="Texture2D" uid="uid://bwidtesm4rihd" path="res://assets/Bullet/Enemy/Hairball.png" id="4_qu8bh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sh0tx"]
 radius = 6.0
@@ -32,27 +32,28 @@ _data = {
 &"Rotate": SubResource("2")
 }
 
-[node name="Hairball" type="CharacterBody2D" unique_id=1451375695 groups=["WindBullets"]]
+[node name="HairballRain" type="CharacterBody2D" unique_id=1451375695 groups=["WindBullets"]]
+z_index = 3
 collision_layer = 0
 collision_mask = 0
-script = ExtResource("1")
+script = ExtResource("1_as6tm")
 
-[node name="EnemyCollisionDetector" parent="." unique_id=552659552 instance=ExtResource("2_ahdkj")]
+[node name="EnemyCollisionDetector" parent="." unique_id=552659552 instance=ExtResource("2_l706f")]
 collision_layer = 8448
-collision_mask = 65576
+collision_mask = 65568
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCollisionDetector" unique_id=1859592137]
 shape = SubResource("CapsuleShape2D_sh0tx")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("3_oq5v0")]
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("3_y6sgh")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=609724048]
 shape = SubResource("CapsuleShape2D_sh0tx")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=386688638]
-texture = ExtResource("2")
+texture = ExtResource("4_qu8bh")
 hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1812764444]

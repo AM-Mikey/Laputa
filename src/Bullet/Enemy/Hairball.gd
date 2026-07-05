@@ -3,8 +3,6 @@ extends Bullet
 var start_velocity
 @onready var ap = $AnimationPlayer
 
-
-
 func _init() -> void:
 	gravity *= .5
 
@@ -21,9 +19,6 @@ func _on_physics_process(delta):
 
 	var current_velocity = abs(velocity.x) + abs(velocity.y) /2 #used to calculate animation slowdown
 	ap.speed_scale = current_velocity / start_velocity
-	if ap.speed_scale < .1:
-		ap.stop()
-
 
 func calc_velocity(projectile_speed) -> Vector2:
 	var out = velocity
