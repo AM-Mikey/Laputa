@@ -1,7 +1,13 @@
 extends Bullet
 
 @onready var ap = $AnimationPlayer
-var fly_upward := true
+var fly_upward := true:
+	set(val):
+		if fly_upward and !val:
+			var screen_rect :Rect2 = vs.get_screen_global_rect()
+			if screen_rect.position.y - global_position.y >= 0.0:
+				$TpTimer.start()
+		fly_upward = val
 var time_swing := 0.0
 var swing_left_first := false
 
@@ -49,3 +55,9 @@ func calc_velocity(projectile_speed) -> Vector2:
 			velocity.y *= 0.9
 
 	return out
+
+
+func _on_TpTimer_timeout() -> void:
+	var screen_rect :Rect2 = vs.get_screen_global_rect()
+	if screen_rect.position.y - global_position.y >= 0.0:
+		global_position.y = screen_rect.position.y - 5.0

@@ -59,5 +59,10 @@ hframes = 2
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1812764444]
 libraries/ = SubResource("AnimationLibrary_mlsak")
 
+[node name="TpTimer" type="Timer" parent="." unique_id=337965719]
+wait_time = 0.3
+one_shot = true
+
 [connection signal="area_entered" from="EnemyCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
 [connection signal="body_entered" from="EnemyCollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
+[connection signal="timeout" from="TpTimer" to="." method="_on_TpTimer_timeout"]
