@@ -46,10 +46,10 @@ script = ExtResource("8")
 development_stage = "alpha"
 release_version = "1.8"
 do_skip_title = true
-start_level_path = "res://src/Level/MissionTest.tscn"
+start_level_path = "res://src/Level/Dogtown.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=912648782]
-scroll_offset = Vector2(224, -575.4707)
+scroll_offset = Vector2(-6750.851, -8834.894)
 
 [node name="Back" type="Node2D" parent="." unique_id=1451941770]
 visibility_layer = 2
