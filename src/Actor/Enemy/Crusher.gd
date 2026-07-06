@@ -3,37 +3,50 @@ extends Enemy
 const ICON = preload("res://assets/Actor/Enemy/CrusherIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/Crusher.png")
 
-@export var amplitude_v: float = 64
-@export var amplitude_h: float = 0
-@export var frequency: float = 2
-@export var crushing: bool = true
+# Time take to move from current postion -> to_pos. Not accounting for return trip
+@export var travel_time: = 3.0
+@export var loop := true
+@export var crushing := true
 
-var center_pos: Vector2
-var time: float = 0
+var start_pos: = Vector2.ZERO
+var to_pos := Vector2.ZERO
+var time :float = 0.0
 
 var t_body = null
 var t_dir = null
 
-func _ready():
+var prev_global_position := Vector2.ZERO
+
+func setup():
 	hp = 4
 	reward = 2
 
-	center_pos = global_position
+	to_pos = $ToPoint.global_position
+	start_pos = global_position
+	prev_global_position = global_position
+
 
 func _physics_process(delta):
-	if Engine.is_editor_hint():
-		pass
+	if disabled || dead:
+		return
+	if loop || time <= travel_time:
+		time += delta
 	else:
-		if disabled or dead:
-			return
-		time += delta * frequency
-		position.x = center_pos.x + sin(time) * amplitude_h
-		position.y = center_pos.y + cos(time) * amplitude_v
+		time = travel_time
 
-		if t_body != null and crushing:
-			crush_check()
+	var t_value := wrapf(time / travel_time, 0.0, 2.0)
+	if t_value <= 1.0:
+		t_value  = t_value
+	else:
+		t_value = 1.0 - (t_value - 1.0)
 
-		animate()
+	global_position = lerp(start_pos, to_pos, t_value)
+
+	if t_body != null and crushing:
+		crush_check()
+
+	animate()
+	prev_global_position = global_position
 
 
 func on_crush_body_entered(body, dir):
@@ -55,15 +68,15 @@ func crush_check():
 
 
 func animate():
-	if global_position.x < center_pos.x - (amplitude_h * .75):
-		$Sprite2D.frame = 1
-	elif global_position.x > center_pos.x + (amplitude_h * .75):
-		$Sprite2D.frame = 2
-
-	elif global_position.y < center_pos.y - (amplitude_v * .75):
-		$Sprite2D.frame = 3
-	elif global_position.y > center_pos.y + (amplitude_v * .75):
-		$Sprite2D.frame = 4
-
-	else:
+	var move_angle = (global_position - prev_global_position).angle()
+	if (global_position - prev_global_position).length() <= 0.01:
 		$Sprite2D.frame = 0
+	else:
+		if abs(move_angle) >= 3.0 * PI / 4.0 :
+			$Sprite2D.frame = 1
+		elif abs(move_angle) < PI / 4.0:
+			$Sprite2D.frame = 2
+		elif move_angle <= -PI / 4.0 && move_angle > -3.0 * PI / 4.0:
+			$Sprite2D.frame = 3
+		else:
+			$Sprite2D.frame = 4

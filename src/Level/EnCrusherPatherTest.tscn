@@ -2,18 +2,20 @@
 
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="1_6q8mx"]
 [ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_jogqi"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_e3mxr"]
 [ext_resource type="Resource" path="res://src/Background/iedge.tres" id="3_f378h"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_y3k5t"]
 [ext_resource type="Texture2D" path="res://assets/Background/IslandEdge.png" id="4_53gin"]
 [ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_6aw22"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_23bxm"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="9_e3mxr"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="10_yinca"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_yinca"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="9_uly8o"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="10_qo8mf"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="11_1ycm6"]
 [ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="12_s0ppf"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="12_uly8o"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="12_sjkid"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="13_ddw3t"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="13_l0h4m"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="14_qo8mf"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="14_q0mgo"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="16_vy1xn"]
 
 [node name="EnCrusherPatherTest" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
@@ -29,7 +31,7 @@ offset_top = 1600.0
 offset_right = 4432.0
 offset_bottom = 2496.0
 mouse_filter = 2
-script = ExtResource("3_y3k5t")
+script = ExtResource("3_e3mxr")
 background_resource = ExtResource("3_f378h")
 texture = ExtResource("4_53gin")
 layers = 5
@@ -103,7 +105,7 @@ offset_top = 2000.0
 offset_right = 4320.0
 offset_bottom = 2160.0
 mouse_filter = 2
-script = ExtResource("8_23bxm")
+script = ExtResource("8_yinca")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20, ""],
@@ -123,7 +125,7 @@ offset_top = 1840.0
 offset_right = 2304.0
 offset_bottom = 2415.0
 mouse_filter = 2
-script = ExtResource("8_23bxm")
+script = ExtResource("8_yinca")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20, ""],
@@ -133,28 +135,95 @@ properties = {
 }
 size_is_default = false
 
-[node name="Crusher" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_e3mxr")]
+[node name="Crusher" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_uly8o")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(3672, 1904)
+position = Vector2(3368, 1888)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_yinca")
+script = ExtResource("10_qo8mf")
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
 properties = {
-"amplitude_h": [32.0, 3, ""],
-"amplitude_v": [32.0, 3, ""],
 "base_gravity": [300.0, 3, ""],
 "crushing": [true, 1, ""],
 "debug": [false, 1, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"frequency": [2.0, 3, ""],
 "id": [&"Crusher", 4, ""],
+"loop": [true, 1, ""],
 "speed": [Vector2(150, 350), 5, ""],
+"travel_time": [1.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="ToPoint" type="Area2D" parent="Spawns/Crusher" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("11_1ycm6")]
+visibility_layer = 2
+position = Vector2(0, 88)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_sjkid")
+tag_name = "to_point"
+
+[node name="Crusher1" type="Area2D" parent="Spawns" unique_id=730307070 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3448, 1952)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_qo8mf")
+actor_path = "res://src/Actor/Enemy/Crusher.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"crushing": [true, 1, ""],
+"debug": [false, 1, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Crusher1", 4, ""],
+"loop": [true, 1, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"travel_time": [3.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="ToPoint" type="Area2D" parent="Spawns/Crusher1" unique_id=1639992633 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("11_1ycm6")]
+visibility_layer = 2
+position = Vector2(88, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_sjkid")
+tag_name = "to_point"
+
+[node name="Crusher2" type="Area2D" parent="Spawns" unique_id=239288798 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3528, 1840)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_qo8mf")
+actor_path = "res://src/Actor/Enemy/Crusher.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"crushing": [true, 1, ""],
+"debug": [false, 1, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Crusher2", 4, ""],
+"loop": [true, 1, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"travel_time": [7.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="ToPoint" type="Area2D" parent="Spawns/Crusher2" unique_id=964076433 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("11_1ycm6")]
+visibility_layer = 2
+position = Vector2(-112, 80)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_sjkid")
+tag_name = "to_point"
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
@@ -165,13 +234,13 @@ z_index = 999
 position = Vector2(3008, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uly8o")
+script = ExtResource("14_q0mgo")
 
 [node name="SpawnPoint" type="Area2D" parent="." unique_id=1710023778 groups=["SpawnPoints"] instance=ExtResource("13_ddw3t")]
 visibility_layer = 2
-position = Vector2(3056, 2384)
+position = Vector2(3250.6655, 1984.2908)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_qo8mf")
+script = ExtResource("16_vy1xn")
 
 [connection signal="body_exited" from="Triggers/KillBox" to="Triggers/KillBox" method="_on_body_exited"]

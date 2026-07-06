@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dmfya5e64iar7" path="res://assets/Actor/Enemy/Crusher.png" id="1"]
 [ext_resource type="Script" uid="uid://b1w4ji0d60ww0" path="res://src/Actor/Enemy/Crusher.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="3_wfkhk"]
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(32, 14)
@@ -16,7 +17,7 @@ size = Vector2(22, 1)
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("2")
-amplitude_h = 64.0
+do_bubbles = false
 editor_hidden = false
 
 [node name="Standable" type="CharacterBody2D" parent="." unique_id=86773982]
@@ -45,6 +46,10 @@ shape = SubResource("4")
 light_mask = 4
 texture = ExtResource("1")
 hframes = 5
+
+[node name="ToPoint" parent="." unique_id=1432238783 instance=ExtResource("3_wfkhk")]
+position = Vector2(0, 16)
+tag_name = "to_point"
 
 [connection signal="body_entered" from="CrushDown" to="." method="on_crush_body_entered" binds= ["down"]]
 [connection signal="body_exited" from="CrushDown" to="." method="on_crush_body_exited"]

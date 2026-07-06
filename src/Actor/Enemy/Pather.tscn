@@ -17,6 +17,7 @@ size = Vector2(22, 1)
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("2")
+do_bubbles = false
 editor_hidden = false
 
 [node name="Standable" type="CharacterBody2D" parent="." unique_id=1408443852]
@@ -49,7 +50,6 @@ hframes = 5
 [node name="PosHurt" type="AudioStreamPlayer2D" parent="." unique_id=435746629]
 stream = ExtResource("4")
 attenuation = 0.164938
-bus = &"SFX"
 
 [connection signal="body_entered" from="CrushDown" to="." method="on_crush_body_entered" binds= ["down"]]
 [connection signal="body_exited" from="CrushDown" to="." method="on_crush_body_exited"]
