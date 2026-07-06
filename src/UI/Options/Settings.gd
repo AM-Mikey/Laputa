@@ -85,7 +85,7 @@ func on_musicvolume_changed(value):
 func on_sfxvolume_changed(value):
 	change_bus_volume(value,"SFX")
 
-func change_bus_volume(value,busname:String):
+func change_bus_volume(value, busname:String):
 	var slidernode
 	match busname:
 		"Master":
@@ -106,7 +106,6 @@ func change_bus_volume(value,busname:String):
 	if after_ready and !w.get_node("MenuLayer/Options").ishidden:
 		am.play("sound_test")
 		save_setting(busname + "Volume", value)
-
 
 
 
