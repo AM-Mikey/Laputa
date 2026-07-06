@@ -39,8 +39,8 @@ func _ready(): #TODO: update load and save to new file
 func _on_Return_pressed():
 	if world.has_node("MenuLayer/PauseMenu"):
 		world.get_node("MenuLayer/PauseMenu").do_focus()
-	if world.has_node("MenuLayer/TitleScreen"):
-		world.get_node("MenuLayer/TitleScreen").do_focus()
+	if world.has_node("MenuLayer/Title"):
+		world.get_node("MenuLayer/Title").do_focus()
 	queue_free()
 
 func _resolution_scale_changed(resolution_scale):

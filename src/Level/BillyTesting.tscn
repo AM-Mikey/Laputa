@@ -3,17 +3,18 @@
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="1_6q8mx"]
 [ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_jogqi"]
 [ext_resource type="Resource" path="res://src/Background/iedge.tres" id="3_f378h"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_k22su"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_mku4y"]
 [ext_resource type="Texture2D" path="res://assets/Background/IslandEdge.png" id="4_53gin"]
 [ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_6aw22"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_mku4y"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="10_mc4he"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_mc4he"]
+[ext_resource type="PackedScene" path="res://src/Editor/TitlePreview.tscn" id="10_p2w7n"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="10_uo8bs"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_uo8bs"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_dny36"]
 [ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="12_s0ppf"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_uo8bs"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="13_ddw3t"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="13_l0h4m"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="14_dny36"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="14_rjnx0"]
 
 [node name="BillyTesting" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
@@ -29,7 +30,7 @@ offset_top = 1600.0
 offset_right = 4431.0
 offset_bottom = 2496.0
 mouse_filter = 2
-script = ExtResource("3_k22su")
+script = ExtResource("3_mku4y")
 background_resource = ExtResource("3_f378h")
 texture = ExtResource("4_53gin")
 layers = 5
@@ -103,7 +104,7 @@ offset_top = 2000.0
 offset_right = 4320.0
 offset_bottom = 2160.0
 mouse_filter = 2
-script = ExtResource("8_mku4y")
+script = ExtResource("8_mc4he")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20, ""],
@@ -119,7 +120,7 @@ z_index = 999
 position = Vector2(3008, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_mc4he")
+script = ExtResource("10_uo8bs")
 
 [node name="Billy" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -128,7 +129,7 @@ z_index = 999
 position = Vector2(3176, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -156,7 +157,7 @@ z_index = 999
 position = Vector2(3176, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -184,7 +185,7 @@ z_index = 999
 position = Vector2(2919, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -212,7 +213,7 @@ z_index = 999
 position = Vector2(2455, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -240,7 +241,7 @@ z_index = 999
 position = Vector2(2535, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -268,7 +269,7 @@ z_index = 999
 position = Vector2(2487, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -296,7 +297,7 @@ z_index = 999
 position = Vector2(2007, 1904)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -324,7 +325,7 @@ z_index = 999
 position = Vector2(1991, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -352,7 +353,7 @@ z_index = 999
 position = Vector2(1975, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -380,7 +381,7 @@ z_index = 999
 position = Vector2(1959, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -408,7 +409,7 @@ z_index = 999
 position = Vector2(2007, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -436,7 +437,7 @@ z_index = 999
 position = Vector2(2071, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -464,7 +465,7 @@ z_index = 999
 position = Vector2(2023, 1904)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -492,7 +493,7 @@ z_index = 999
 position = Vector2(2503, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -513,14 +514,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy18" type="Area2D" parent="Spawns" unique_id=973427187 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy14" type="Area2D" parent="Spawns" unique_id=973427187 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(2663, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -541,14 +542,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy19" type="Area2D" parent="Spawns" unique_id=1692567228 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy15" type="Area2D" parent="Spawns" unique_id=1692567228 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(2663, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -569,14 +570,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy30" type="Area2D" parent="Spawns" unique_id=1162682772 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy16" type="Area2D" parent="Spawns" unique_id=1162682772 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(2519, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -597,14 +598,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy31" type="Area2D" parent="Spawns" unique_id=752417822 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy17" type="Area2D" parent="Spawns" unique_id=752417822 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(2615, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -625,14 +626,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy32" type="Area2D" parent="Spawns" unique_id=918963500 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy18" type="Area2D" parent="Spawns" unique_id=918963500 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(2647, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -653,14 +654,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy33" type="Area2D" parent="Spawns" unique_id=1090259047 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy19" type="Area2D" parent="Spawns" unique_id=1090259047 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(2631, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -681,14 +682,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy35" type="Area2D" parent="Spawns" unique_id=1403510373 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy20" type="Area2D" parent="Spawns" unique_id=1403510373 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(2215, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -709,14 +710,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy36" type="Area2D" parent="Spawns" unique_id=805196409 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy21" type="Area2D" parent="Spawns" unique_id=805196409 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(2199, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -737,14 +738,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy37" type="Area2D" parent="Spawns" unique_id=15507948 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy22" type="Area2D" parent="Spawns" unique_id=15507948 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(2183, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -765,14 +766,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy34" type="Area2D" parent="Spawns" unique_id=1368712194 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy23" type="Area2D" parent="Spawns" unique_id=1368712194 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(2920, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -793,14 +794,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy38" type="Area2D" parent="Spawns" unique_id=1859222939 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy24" type="Area2D" parent="Spawns" unique_id=1859222939 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3704, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -821,14 +822,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy39" type="Area2D" parent="Spawns" unique_id=1916492263 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy25" type="Area2D" parent="Spawns" unique_id=1916492263 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3688, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -849,14 +850,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy40" type="Area2D" parent="Spawns" unique_id=747485573 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy26" type="Area2D" parent="Spawns" unique_id=747485573 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3448, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -877,14 +878,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy41" type="Area2D" parent="Spawns" unique_id=1706834576 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy27" type="Area2D" parent="Spawns" unique_id=1706834576 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3432, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -905,14 +906,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy57" type="Area2D" parent="Spawns" unique_id=143919362 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy28" type="Area2D" parent="Spawns" unique_id=143919362 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3448, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -933,14 +934,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy58" type="Area2D" parent="Spawns" unique_id=952797665 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy29" type="Area2D" parent="Spawns" unique_id=952797665 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3432, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -961,14 +962,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy59" type="Area2D" parent="Spawns" unique_id=362673771 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy30" type="Area2D" parent="Spawns" unique_id=362673771 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(4216, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -989,14 +990,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy60" type="Area2D" parent="Spawns" unique_id=381324728 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy31" type="Area2D" parent="Spawns" unique_id=381324728 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(4200, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1017,14 +1018,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy42" type="Area2D" parent="Spawns" unique_id=1491991131 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy32" type="Area2D" parent="Spawns" unique_id=1491991131 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3704, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1045,14 +1046,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy43" type="Area2D" parent="Spawns" unique_id=811705184 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy33" type="Area2D" parent="Spawns" unique_id=811705184 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3688, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1073,14 +1074,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy61" type="Area2D" parent="Spawns" unique_id=1964371095 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy34" type="Area2D" parent="Spawns" unique_id=1964371095 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3704, 1872)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1101,14 +1102,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy62" type="Area2D" parent="Spawns" unique_id=808682814 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy35" type="Area2D" parent="Spawns" unique_id=808682814 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3688, 1872)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1129,14 +1130,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy63" type="Area2D" parent="Spawns" unique_id=1915757733 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy36" type="Area2D" parent="Spawns" unique_id=1915757733 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3704, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1157,14 +1158,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy64" type="Area2D" parent="Spawns" unique_id=6268043 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy37" type="Area2D" parent="Spawns" unique_id=6268043 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3688, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1185,14 +1186,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy44" type="Area2D" parent="Spawns" unique_id=1844965496 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy38" type="Area2D" parent="Spawns" unique_id=1844965496 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3960, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1213,14 +1214,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy45" type="Area2D" parent="Spawns" unique_id=1263350495 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy39" type="Area2D" parent="Spawns" unique_id=1263350495 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3944, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1241,14 +1242,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy65" type="Area2D" parent="Spawns" unique_id=1405264603 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy40" type="Area2D" parent="Spawns" unique_id=1405264603 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3960, 1776)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1269,14 +1270,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy66" type="Area2D" parent="Spawns" unique_id=365107748 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy41" type="Area2D" parent="Spawns" unique_id=365107748 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3944, 1776)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1297,14 +1298,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy67" type="Area2D" parent="Spawns" unique_id=1027884295 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy42" type="Area2D" parent="Spawns" unique_id=1027884295 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3960, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1325,14 +1326,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy68" type="Area2D" parent="Spawns" unique_id=902411160 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy43" type="Area2D" parent="Spawns" unique_id=902411160 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3944, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1353,14 +1354,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy46" type="Area2D" parent="Spawns" unique_id=785647807 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy44" type="Area2D" parent="Spawns" unique_id=785647807 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(4216, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1381,14 +1382,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy47" type="Area2D" parent="Spawns" unique_id=1050618566 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy45" type="Area2D" parent="Spawns" unique_id=1050618566 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(4200, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1409,14 +1410,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy48" type="Area2D" parent="Spawns" unique_id=408057904 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy46" type="Area2D" parent="Spawns" unique_id=408057904 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(4216, 1776)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1437,14 +1438,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy49" type="Area2D" parent="Spawns" unique_id=1611409990 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy47" type="Area2D" parent="Spawns" unique_id=1611409990 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(4200, 1776)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1465,14 +1466,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy50" type="Area2D" parent="Spawns" unique_id=94255033 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy48" type="Area2D" parent="Spawns" unique_id=94255033 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(4216, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1493,14 +1494,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy51" type="Area2D" parent="Spawns" unique_id=682159196 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy49" type="Area2D" parent="Spawns" unique_id=682159196 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(4200, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1521,14 +1522,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy52" type="Area2D" parent="Spawns" unique_id=1097082109 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy50" type="Area2D" parent="Spawns" unique_id=1097082109 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3960, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1549,14 +1550,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy53" type="Area2D" parent="Spawns" unique_id=1638316154 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy51" type="Area2D" parent="Spawns" unique_id=1638316154 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3944, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1577,14 +1578,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy54" type="Area2D" parent="Spawns" unique_id=1553674648 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy52" type="Area2D" parent="Spawns" unique_id=1553674648 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3032, 2208)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1605,14 +1606,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy55" type="Area2D" parent="Spawns" unique_id=1505328772 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy53" type="Area2D" parent="Spawns" unique_id=1505328772 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3096, 2208)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1633,14 +1634,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy56" type="Area2D" parent="Spawns" unique_id=2010360427 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy54" type="Area2D" parent="Spawns" unique_id=2010360427 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(3288, 2432)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_uo8bs")
+script = ExtResource("12_dny36")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1669,6 +1670,15 @@ visibility_layer = 2
 position = Vector2(3000, 1952)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_dny36")
+script = ExtResource("14_rjnx0")
+
+[node name="TitlePreview" type="Area2D" parent="." unique_id=1513334426 groups=["TitlePreviews"] instance=ExtResource("10_p2w7n")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2528, 1912)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_uo8bs")
+zoom = 6.0
 
 [connection signal="body_exited" from="Triggers/KillBox" to="Triggers/KillBox" method="_on_body_exited"]

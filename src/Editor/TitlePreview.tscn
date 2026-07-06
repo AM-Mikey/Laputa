@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dhjqke0pgo21f"]
+
+[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VanishingPoint.gd" id="1_2knbb"]
+[ext_resource type="Texture2D" uid="uid://dfueehd70iijg" path="res://assets/Editor/TitlePreview.png" id="2_2knbb"]
+[ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="3_qadvx"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+
+[node name="TitlePreview" type="Area2D" unique_id=2052223351 groups=["TitlePreviews"]]
+z_index = 999
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("1_2knbb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=468097100]
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1133607643]
+position = Vector2(-8, -8)
+texture = ExtResource("2_2knbb")
+centered = false
+
+[node name="BackgroundOutline" type="Panel" parent="." unique_id=294794145]
+modulate = Color(0, 1, 1, 0.5019608)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -33.0
+offset_right = 33.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_qadvx")

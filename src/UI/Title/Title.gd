@@ -19,10 +19,7 @@ func _ready():
 		$VBox/Load.queue_free()
 
 	####
-	am.play_music("theme")
-	await get_tree().process_frame
-	if f.hud():
-		f.hud().free()
+	am.play_music("title")
 	do_focus()
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
@@ -40,7 +37,7 @@ func exit():
 	w.ui.visible = true
 	w.hl.visible = true
 	queue_free()
-	var camera = get_viewport().get_camera_2d()
+	var camera = get_viewport().get_camera_2d() #TODO: check if neccesary
 	if camera:
 		if camera.is_in_group("PlayerCameras"):
 			camera.reset()

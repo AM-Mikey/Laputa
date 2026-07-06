@@ -45,7 +45,6 @@ visibility_layer = 2
 script = ExtResource("8")
 development_stage = "alpha"
 release_version = "1.8"
-do_skip_title = true
 start_level_path = "res://src/Level/SwitchTest.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=912648782]

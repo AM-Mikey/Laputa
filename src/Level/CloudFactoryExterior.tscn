@@ -1,23 +1,22 @@
-[gd_scene format=4 uid="uid://dul1gj82hoshb"]
+[gd_scene format=4]
 
-[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_owv0v"]
-[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_7lvhr"]
-[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_0qf1s"]
-[ext_resource type="Script" uid="uid://sw5a0ja4xk2f" path="res://src/Background/LevelLimiter.gd" id="3_yl4bd"]
-[ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="4_nkisl"]
-[ext_resource type="TileSet" uid="uid://cjt34mqcgd6o" path="res://src/Tile/CloudFactoryExterior.tres" id="5_owv0v"]
-[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="7_2d11i"]
-[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="7_w643x"]
-[ext_resource type="Script" uid="uid://djyfnyi3ldp7j" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_e7upw"]
-[ext_resource type="PackedScene" uid="uid://dim3av368jfya" path="res://src/Editor/VisualUtility/WaypointGlobal.tscn" id="8_owv0v"]
-[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="8_w643x"]
-[ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="9_mrs6x"]
-[ext_resource type="Script" uid="uid://nrubrkh2u04v" path="res://src/Editor/Spawn/PropSpawn.gd" id="10_mrs6x"]
-[ext_resource type="Script" uid="uid://0l4a624mkqoj" path="res://src/Editor/VisualUtility/WaypointGlobal.gd" id="12_ea5be"]
-[ext_resource type="Script" uid="uid://cdi4qe1ijss82" path="res://src/Editor/VanishingPoint.gd" id="14_3ho07"]
-[ext_resource type="Script" uid="uid://8n6tfcpb6rqw" path="res://src/Editor/SpawnPoint.gd" id="16_mqkkg"]
-
-
+[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_owv0v"]
+[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_7lvhr"]
+[ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_0qf1s"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_e7upw"]
+[ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="4_nkisl"]
+[ext_resource type="TileSet" path="res://src/Tile/CloudFactoryExterior.tres" id="5_owv0v"]
+[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="7_2d11i"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="7_w643x"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_mrs6x"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/WaypointGlobal.tscn" id="8_owv0v"]
+[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="8_w643x"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="9_mrs6x"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="10_ea5be"]
+[ext_resource type="PackedScene" path="res://src/Editor/TitlePreview.tscn" id="11_nkisl"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointGlobal.gd" id="12_3ho07"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="14_mqkkg"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="16_dcymp"]
 
 [node name="CloudFactoryExterior" type="Node2D" unique_id=1604351222]
 visibility_layer = 2
@@ -35,7 +34,7 @@ offset_top = 1584.0
 offset_right = 4240.0
 offset_bottom = 2224.0
 mouse_filter = 2
-script = ExtResource("3_yl4bd")
+script = ExtResource("3_e7upw")
 background_resource = ExtResource("3_0qf1s")
 texture = ExtResource("4_nkisl")
 layers = 5
@@ -105,11 +104,10 @@ z_index = 999
 position = Vector2(2504, 2176)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_e7upw")
+script = ExtResource("8_mrs6x")
 actor_path = "res://src/Actor/NPC/Basil.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
-"dialog_json": ["res://src/Dialog/CameraTest.json", 4, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": ["basil", 4, ""],
@@ -127,15 +125,14 @@ z_index = 999
 position = Vector2(1576, 1760)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_e7upw")
+script = ExtResource("8_mrs6x")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "bullet_damage": [2, 2, ""],
 "bullet_speed": [200, 2, ""],
-"cooldown_time": [1, 2, ""],
+"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"defend_time": [0.4, 3, ""],
 "difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
@@ -143,7 +140,6 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"look_dir": [Vector2(-1, 0), 5, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
@@ -157,9 +153,10 @@ z_index = 999
 position = Vector2(2552, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_mrs6x")
+script = ExtResource("10_ea5be")
 prop_path = "res://src/Prop/Lamp.tscn"
 properties = {
+"do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1],
 "id": ["lamp", 4],
 "style": [0, 2]
@@ -169,21 +166,19 @@ properties = {
 visibility_layer = 2
 
 [node name="Waypoint0" type="Area2D" parent="Waypoints" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointGlobals", "Waypoints"] instance=ExtResource("8_owv0v")]
-visible = false
 visibility_layer = 2
 position = Vector2(1576, 1696)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_ea5be")
+script = ExtResource("12_3ho07")
 owner_id = "PlayerCamera"
 
 [node name="Waypoint1" type="Area2D" parent="Waypoints" unique_id=142825389 groups=["Entities", "VisualUtilities", "WaypointGlobals", "Waypoints"] instance=ExtResource("8_owv0v")]
-visible = false
 visibility_layer = 2
 position = Vector2(2366, 1716)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_ea5be")
+script = ExtResource("12_3ho07")
 owner_id = "PlayerCamera"
 index = 1
 
@@ -193,11 +188,22 @@ z_index = 999
 position = Vector2(2096, 2072)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_3ho07")
+script = ExtResource("14_mqkkg")
 
 [node name="SpawnPoint" type="Area2D" parent="." unique_id=1578892610 groups=["SpawnPoints"] instance=ExtResource("8_w643x")]
 visibility_layer = 2
 position = Vector2(2472, 2176)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_mqkkg")
+script = ExtResource("16_dcymp")
+
+[node name="TitlePreview" type="Area2D" parent="." unique_id=2052223351 groups=["TitlePreviews"] instance=ExtResource("11_nkisl")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(1952, 2184)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_mqkkg")
+zoom = 2.0
+
+[connection signal="body_exited" from="Triggers/KillBox" to="Triggers/KillBox" method="_on_body_exited"]

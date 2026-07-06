@@ -2,20 +2,21 @@
 
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="1_53evh"]
 [ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_72to3"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_1n8rj"]
 [ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_8qmvv"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_sexp1"]
 [ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="4_leir5"]
 [ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_5uu0q"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="7_72to3"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_sexp1"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_8jk8i"]
 [ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="9_if8wo"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="9_leir5"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="10_8jk8i"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="10_h4mej"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="10_if8wo"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="11_1n8rj"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="12_if8wo"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="14_h4mej"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="16_gby2n"]
+[ext_resource type="PackedScene" path="res://src/Editor/TitlePreview.tscn" id="11_53evh"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="12_h4mej"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="14_gby2n"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="16_jvjt7"]
 
 [node name="MissionTest" type="Node2D" unique_id=734148647]
 visibility_layer = 2
@@ -32,7 +33,7 @@ offset_top = 32.0
 offset_right = 1040.0
 offset_bottom = 304.0
 mouse_filter = 2
-script = ExtResource("3_1n8rj")
+script = ExtResource("3_sexp1")
 background_resource = ExtResource("3_8qmvv")
 texture = ExtResource("4_leir5")
 layers = 5
@@ -102,7 +103,7 @@ z_index = 999
 position = Vector2(304, 288)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_sexp1")
+script = ExtResource("8_8jk8i")
 actor_path = "res://src/Actor/NPC/Nun.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -123,7 +124,7 @@ z_index = 999
 position = Vector2(64, 288)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_sexp1")
+script = ExtResource("8_8jk8i")
 actor_path = "res://src/Actor/NPC/Tabith.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -144,7 +145,7 @@ z_index = 999
 position = Vector2(144, 288)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_sexp1")
+script = ExtResource("8_8jk8i")
 actor_path = "res://src/Actor/NPC/Sage.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -165,7 +166,7 @@ z_index = 999
 position = Vector2(232, 288)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_sexp1")
+script = ExtResource("8_8jk8i")
 actor_path = "res://src/Actor/NPC/Basil.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -186,7 +187,7 @@ z_index = 999
 position = Vector2(360, 272)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_8jk8i")
+script = ExtResource("10_if8wo")
 prop_path = "res://src/Prop/ChestItem.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -202,7 +203,7 @@ z_index = 999
 position = Vector2(32, 208)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_8jk8i")
+script = ExtResource("10_if8wo")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -219,7 +220,7 @@ z_index = 999
 position = Vector2(112, 208)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_8jk8i")
+script = ExtResource("10_if8wo")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -236,7 +237,7 @@ z_index = 999
 position = Vector2(192, 208)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_8jk8i")
+script = ExtResource("10_if8wo")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -253,7 +254,7 @@ z_index = 999
 position = Vector2(272, 208)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_8jk8i")
+script = ExtResource("10_if8wo")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1],
@@ -273,7 +274,7 @@ offset_top = 96.0
 offset_right = 48.0
 offset_bottom = 128.0
 mouse_filter = 2
-script = ExtResource("12_if8wo")
+script = ExtResource("12_h4mej")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -297,7 +298,7 @@ offset_top = 96.0
 offset_right = 128.0
 offset_bottom = 128.0
 mouse_filter = 2
-script = ExtResource("12_if8wo")
+script = ExtResource("12_h4mej")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -321,7 +322,7 @@ offset_top = 96.0
 offset_right = 208.0
 offset_bottom = 128.0
 mouse_filter = 2
-script = ExtResource("12_if8wo")
+script = ExtResource("12_h4mej")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -345,7 +346,7 @@ offset_top = 96.0
 offset_right = 288.0
 offset_bottom = 128.0
 mouse_filter = 2
-script = ExtResource("12_if8wo")
+script = ExtResource("12_h4mej")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -369,7 +370,7 @@ offset_top = 256.0
 offset_right = 416.0
 offset_bottom = 288.0
 mouse_filter = 2
-script = ExtResource("12_if8wo")
+script = ExtResource("12_h4mej")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -390,7 +391,7 @@ z_index = 999
 position = Vector2(80, 208)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_8jk8i")
+script = ExtResource("10_if8wo")
 prop_path = "res://src/Prop/AmmoRefill.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -407,13 +408,30 @@ z_index = 999
 position = Vector2(296, -152)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_h4mej")
+script = ExtResource("14_gby2n")
 
 [node name="SpawnPoint" type="Area2D" parent="." unique_id=422711910 groups=["SpawnPoints"] instance=ExtResource("10_h4mej")]
 visibility_layer = 2
 position = Vector2(184, 288)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_gby2n")
+script = ExtResource("16_jvjt7")
+
+[node name="TitlePreview" type="Area2D" parent="." unique_id=2052223351 groups=["TitlePreviews"] instance=ExtResource("11_53evh")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(256, 168)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_gby2n")
+
+[node name="TitlePreview2" type="Area2D" parent="." unique_id=1988776948 groups=["TitlePreviews"] instance=ExtResource("11_53evh")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(664, 176)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_gby2n")
+zoom = 8.0
 
 [connection signal="body_exited" from="Triggers/KillBox" to="Triggers/KillBox" method="_on_body_exited"]

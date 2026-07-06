@@ -100,17 +100,15 @@ signal music_fadeout_finished
 	"village": preload("res://assets/Music/Placeholder/Mimiga Town.ogg"),
 	"access": preload("res://assets/Music/Placeholder/Access.ogg"),
 	"safety": preload("res://assets/Music/Placeholder/Safety.ogg"),
-	"theme": preload("res://assets/Music/Placeholder/laputaintro.ogg"),
 
 	"shop": preload("res://assets/Music/PhiDelta_Shop.wav"),
 	"shop_intro": preload("res://assets/Music/PhiDelta_Shop_Intro.wav"),
 	"dogtown_day": preload("res://assets/Music/59Squared_DogtownDay.wav"),
 	"dogtown_night": preload("res://assets/Music/59Squared_DogtownNight.wav"),
+	"overture": preload("res://assets/Music/59Squared_Overture.wav"),
 	"title": preload("res://assets/Music/59Squared_Title.wav"),
 	"train_intro": preload("res://assets/Music/59Squared_Train_Intro.wav"),
-	"train": preload("res://assets/Music/59Squared_Train_Loop.wav")
-
-
+	"train": preload("res://assets/Music/59Squared_Train_Loop.wav"),
 }
 
 

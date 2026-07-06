@@ -9,8 +9,8 @@ const LEVEL_TEXT = preload("res://src/UI/LevelText.tscn")
 
 const PAUSEMENU = preload("res://src/UI/PauseMenu.tscn")
 const JUNIPER = preload("res://src/Player/Juniper.tscn")
-const TITLE = preload("res://src/UI/TitleScreen.tscn")
-const TITLECAM = preload("res://src/Utility/TitleCam.tscn")
+const TITLE = preload("res://src/UI/Title/Title.tscn")
+const TITLECAM = preload("res://src/UI/Title/TitleCam.tscn")
 
 var current_level
 var is_in_transition := false
@@ -46,10 +46,8 @@ func _ready():
 			node.visibility_layer = 2
 		node.child_entered_tree.connect(child_layer_set)
 
-	if not do_skip_title: #TODO: update this
-		ml.add_child(TITLE.instantiate())
-		add_child(TITLECAM.instantiate())
-		first_time_level_setup()
+	if not do_skip_title:
+		setup_title_and_background()
 	else:
 		first_time_level_setup()
 
@@ -90,7 +88,7 @@ func _input(event):
 		if !il.has_node("Inventory") && !get_tree().paused && !f.pc().disabled && inp.can_act && !dll.has_node("DialogBox"):
 			il.add_child(INVENTORY.instantiate())
 
-	if event.is_action_pressed("pause") && !ml.has_node("TitleScreen") && !el.has_node("Editor"):
+	if event.is_action_pressed("pause") && !ml.has_node("Title") && !el.has_node("Editor"):
 		if not ml.has_node("PauseMenu") and not get_tree().paused:
 			ml.add_child(PAUSEMENU.instantiate())
 
@@ -102,6 +100,20 @@ func _input(event):
 
 
 ### LEVEL CHANGE ###
+
+func setup_title_and_background(): #Reminder: no function called can use await
+	bl.visible = true #TODO: this is a bandaid solution to saving in editor causing world.gd to have some layers invisible. since it's only supposed to save the current level, I'm not sure why this is affecting the world node
+	ui.visible = true
+	current_level = load(start_level_path).instantiate()
+	current_level.ignore_music_for_title = true
+	add_child(current_level)
+	ml.add_child(TITLE.instantiate())
+	add_child(TITLECAM.instantiate())
+	spawn_entities()
+	#await get_tree().physics_frame
+	#await get_tree().physics_frame #wait for npcs to spawn #caused by camera reset time #TODO: is this actally needed without player camera?
+	_setup_missions(false, "first_time")
+
 
 func first_time_level_setup(): #Reminder: no function called can use await
 	bl.visible = true #TODO: this is a bandaid solution to saving in editor causing world.gd to have some layers invisible. since it's only supposed to save the current level, I'm not sure why this is affecting the world node
@@ -124,10 +136,11 @@ func first_time_level_setup(): #Reminder: no function called can use await
 	await get_tree().physics_frame #wait for npcs to spawn #caused by camera reset time
 	_setup_missions(false, "first_time")
 
+
 func change_level_via_code(level_path, use_save_data):
 	print("changing level via code")
 	inp.can_act = true
-	if ml.has_node("TitleScreen"): ml.get_node("TitleScreen").exit()
+	if ml.has_node("Title"): ml.get_node("Title").exit()
 	if ml.has_node("PauseMenu"): ml.get_node("PauseMenu").exit()
 	if has_node("MenuLayer/LevelSelect"): get_node("MenuLayer/LevelSelect").queue_free()
 	if f.db(): await f.db().exit()

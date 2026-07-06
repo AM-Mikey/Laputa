@@ -1,6 +1,6 @@
 extends MarginContainer
 
-const TITLESCREEN = preload("res://src/UI/TitleScreen.tscn")
+const TITLE = preload("res://src/UI//Title/Title.tscn")
 
 
 @onready var w = get_tree().get_root().get_node("World")
@@ -38,7 +38,7 @@ func _on_Continue_pressed():
 
 func _on_Quit_pressed():
 	visible = false
-	w.get_node("UILayer").add_child(TITLESCREEN.instantiate())
+	w.get_node("UILayer").add_child(TITLE.instantiate())
 
 func _resolution_scale_changed(resolution_scale):
 	set_deferred("size", get_tree().get_root().size / resolution_scale)

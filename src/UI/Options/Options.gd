@@ -19,8 +19,8 @@ func _ready():
 		display_arrow_icon()
 		tabs.get_node("Settings").ignore_display_mode = true
 		tabs.get_node("Settings").do_focus()
-		if world.has_node("MenuLayer/TitleScreen"):
-			world.get_node("MenuLayer/TitleScreen").visible = false
+		if world.has_node("MenuLayer/Title"):
+			world.get_node("MenuLayer/Title").visible = false
 		if world.has_node("MenuLayer/PauseMenu"):
 			world.get_node("MenuLayer/PauseMenu").visible = false
 		%TabContainer.set_tab_title(0, "Main")
@@ -83,9 +83,9 @@ func exit():
 	if world.has_node("MenuLayer/PauseMenu"):
 		world.get_node("MenuLayer/PauseMenu").visible = true
 		world.get_node("MenuLayer/PauseMenu").do_focus()
-	if world.has_node("MenuLayer/TitleScreen"):
-		world.get_node("MenuLayer/TitleScreen").visible = true
-		world.get_node("MenuLayer/TitleScreen").do_focus()
+	if world.has_node("MenuLayer/Title"):
+		world.get_node("MenuLayer/Title").visible = true
+		world.get_node("MenuLayer/Title").do_focus()
 	queue_free()
 
 

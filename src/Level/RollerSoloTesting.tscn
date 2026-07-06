@@ -1,30 +1,40 @@
-[gd_scene format=4 uid="uid://do1udff7unj3l"]
+[gd_scene format=4]
 
-[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_2ta3j"]
-[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_jtujt"]
+[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_2ta3j"]
+[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_jtujt"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_vq0j0"]
 [ext_resource type="Resource" path="res://src/Background/iedge.tres" id="3_xw8wj"]
-[ext_resource type="Texture2D" uid="uid://maf247vr1ab" path="res://assets/Background/IslandEdge.png" id="4_sa2xq"]
-[ext_resource type="TileSet" uid="uid://dct5q86qhnom8" path="res://src/Tile/Debug.tres" id="5_3ouy4"]
-[ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="6_v3qif"]
-[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="7_tawob"]
-[ext_resource type="PackedScene" uid="uid://crj4agnff8siv" path="res://src/Editor/VisualUtility/VUActor.tscn" id="8_1elff"]
-[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="9_vq0j0"]
-[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="10_2ruld"]
-[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="11_ooi6d"]
+[ext_resource type="Texture2D" path="res://assets/Background/IslandEdge.png" id="4_sa2xq"]
+[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_3ouy4"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="6_v3qif"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="7_tawob"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUActor.tscn" id="8_1elff"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="8_2ruld"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="9_vq0j0"]
+[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="10_2ruld"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="10_ooi6d"]
+[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="11_ooi6d"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUActor.gd" id="12_c8jeu"]
+[ext_resource type="PackedScene" path="res://src/Editor/TitlePreview.tscn" id="12_jtujt"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="14_62oud"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="16_d6m8f"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="18_tesss"]
 
-[node name="RollerTesting" type="Node2D" unique_id=1952135705]
+[node name="RollerSoloTesting" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
 script = ExtResource("1_2ta3j")
-level_name = "RollerTesting"
+level_name = "RollerSoloTesting"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 
-[node name="LevelLimiter" parent="." unique_id=1011068996 instance=ExtResource("2_jtujt")]
+[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1011068996 instance=ExtResource("2_jtujt")]
 visibility_layer = 2
 offset_left = 1600.0
 offset_top = 1600.0
 offset_right = 4432.0
 offset_bottom = 2496.0
+mouse_filter = 2
+script = ExtResource("3_vq0j0")
 background_resource = ExtResource("3_xw8wj")
 texture = ExtResource("4_sa2xq")
 layers = 5
@@ -88,9 +98,14 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=751148410]
 visibility_layer = 2
 
-[node name="SpawnHole38" parent="Spawns" unique_id=2078279651 instance=ExtResource("6_v3qif")]
+[node name="SpawnHole" type="Area2D" parent="Spawns" unique_id=2078279651 groups=["Entities", "PropSpawns"] instance=ExtResource("6_v3qif")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(4240, 2032)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_2ruld")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -103,15 +118,21 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/SpawnHole38" unique_id=68906218 instance=ExtResource("7_tawob")]
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole" unique_id=68906218 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("7_tawob")]
 visibility_layer = 2
+script = ExtResource("10_ooi6d")
 tag_name = "player_detection"
 value = Rect2(3440, 1968, 16, 16)
 grid_value = Rect2i(215, 123, 1, 1)
 
-[node name="VUActor" parent="Spawns/SpawnHole38" unique_id=477002984 instance=ExtResource("8_1elff")]
+[node name="VUActor" type="Area2D" parent="Spawns/SpawnHole" unique_id=477002984 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("8_1elff")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(24, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_c8jeu")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -119,6 +140,8 @@ tag_name = "spawn_actor"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
+"diff_1_bounce_factor": [0.7, 3, ""],
+"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": ["", 4, ""],
@@ -127,9 +150,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="SpawnHole41" parent="Spawns" unique_id=1449282698 instance=ExtResource("6_v3qif")]
+[node name="SpawnHole1" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("6_v3qif")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(4240, 1856)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_2ruld")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -142,15 +170,21 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/SpawnHole41" unique_id=688682803 instance=ExtResource("7_tawob")]
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole1" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("7_tawob")]
 visibility_layer = 2
+script = ExtResource("10_ooi6d")
 tag_name = "player_detection"
 value = Rect2(3440, 1968, 16, 16)
 grid_value = Rect2i(215, 123, 1, 1)
 
-[node name="VUActor" parent="Spawns/SpawnHole41" unique_id=1199277091 instance=ExtResource("8_1elff")]
+[node name="VUActor" type="Area2D" parent="Spawns/SpawnHole1" unique_id=1199277091 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("8_1elff")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(24, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_c8jeu")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -158,6 +192,8 @@ tag_name = "spawn_actor"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
+"diff_1_bounce_factor": [0.7, 3, ""],
+"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": ["", 4, ""],
@@ -166,9 +202,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="SpawnHole39" parent="Spawns" unique_id=1047281262 instance=ExtResource("6_v3qif")]
+[node name="SpawnHole2" type="Area2D" parent="Spawns" unique_id=1047281262 groups=["Entities", "PropSpawns"] instance=ExtResource("6_v3qif")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(3088, 2192)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_2ruld")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -181,15 +222,21 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/SpawnHole39" unique_id=2129185341 instance=ExtResource("7_tawob")]
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole2" unique_id=2129185341 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("7_tawob")]
 visibility_layer = 2
+script = ExtResource("10_ooi6d")
 tag_name = "player_detection"
 value = Rect2(3440, 1968, 16, 16)
 grid_value = Rect2i(215, 123, 1, 1)
 
-[node name="VUActor" parent="Spawns/SpawnHole39" unique_id=148440105 instance=ExtResource("8_1elff")]
+[node name="VUActor" type="Area2D" parent="Spawns/SpawnHole2" unique_id=148440105 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("8_1elff")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(24, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_c8jeu")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -197,6 +244,8 @@ tag_name = "spawn_actor"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
+"diff_1_bounce_factor": [0.7, 3, ""],
+"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": ["", 4, ""],
@@ -205,9 +254,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="SpawnHole40" parent="Spawns" unique_id=1282827777 instance=ExtResource("6_v3qif")]
+[node name="SpawnHole3" type="Area2D" parent="Spawns" unique_id=1282827777 groups=["Entities", "PropSpawns"] instance=ExtResource("6_v3qif")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(3040, 2192)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_2ruld")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -220,15 +274,21 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/SpawnHole40" unique_id=31263651 instance=ExtResource("7_tawob")]
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole3" unique_id=31263651 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("7_tawob")]
 visibility_layer = 2
+script = ExtResource("10_ooi6d")
 tag_name = "player_detection"
 value = Rect2(3440, 1968, 16, 16)
 grid_value = Rect2i(215, 123, 1, 1)
 
-[node name="VUActor" parent="Spawns/SpawnHole40" unique_id=995136187 instance=ExtResource("8_1elff")]
+[node name="VUActor" type="Area2D" parent="Spawns/SpawnHole3" unique_id=995136187 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("8_1elff")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(24, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_c8jeu")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -236,6 +296,8 @@ tag_name = "spawn_actor"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
+"diff_1_bounce_factor": [0.7, 3, ""],
+"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": ["", 4, ""],
@@ -244,13 +306,17 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Water" parent="Spawns" unique_id=1800792368 instance=ExtResource("9_vq0j0")]
+[node name="Water" type="MarginContainer" parent="Spawns" unique_id=1800792368 groups=["TriggerSpawns"] instance=ExtResource("9_vq0j0")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 2704.0
 offset_top = 2000.0
 offset_right = 4320.0
 offset_bottom = 2160.0
+mouse_filter = 2
+script = ExtResource("14_62oud")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20, ""],
@@ -260,13 +326,17 @@ properties = {
 }
 size_is_default = false
 
-[node name="Water1" parent="Spawns" unique_id=841179443 instance=ExtResource("9_vq0j0")]
+[node name="Water1" type="MarginContainer" parent="Spawns" unique_id=841179443 groups=["TriggerSpawns"] instance=ExtResource("9_vq0j0")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 2224.0
 offset_top = 1840.0
 offset_right = 2304.0
 offset_bottom = 2415.0
+mouse_filter = 2
+script = ExtResource("14_62oud")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20, ""],
@@ -279,10 +349,28 @@ size_is_default = false
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
 
-[node name="VanishingPoint" parent="." unique_id=1745666426 instance=ExtResource("10_2ruld")]
+[node name="VanishingPoint" type="Area2D" parent="." unique_id=1745666426 groups=["VanishingPoints"] instance=ExtResource("10_2ruld")]
 visibility_layer = 2
+z_index = 999
 position = Vector2(3008, 1856)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_d6m8f")
 
-[node name="SpawnPoint" parent="." unique_id=1710023778 instance=ExtResource("11_ooi6d")]
+[node name="SpawnPoint" type="Area2D" parent="." unique_id=1710023778 groups=["SpawnPoints"] instance=ExtResource("11_ooi6d")]
 visibility_layer = 2
 position = Vector2(3063.6875, 2271.9321)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_tesss")
+
+[node name="TitlePreview" type="Area2D" parent="." unique_id=2052223351 groups=["TitlePreviews"] instance=ExtResource("12_jtujt")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3384, 1872)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_d6m8f")
+zoom = 2.0
+
+[connection signal="body_exited" from="Triggers/KillBox" to="Triggers/KillBox" method="_on_body_exited"]
