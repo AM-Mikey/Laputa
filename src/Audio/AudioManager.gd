@@ -128,7 +128,10 @@ var interrupt_queue = []
 
 @export var attenuate_music: bool = true
 
-
+var underwater_tween_1: Tween
+var underwater_tween_2: Tween
+var underwater_tween_3: Tween
+var underwater_tween_4: Tween
 
 func play(sfx_string: String, actor = null, bus = null, volume = 1.0, pitchspread := 0.0, duration := -1.0, is_fadeout_exempt = false):
 	if _check_sfx(sfx_string):
@@ -316,80 +319,65 @@ func fade_music(duration = 1.0):
 func underwater_attenuate(do_attenuate: bool):
 	var audio_bus_music_idx: int = AudioServer.get_bus_index("Music")
 	var audio_bus_sfx_idx: int = AudioServer.get_bus_index("SFX")
-	#AudioServer.set_bus_effect_enabled(audio_bus_music_idx, 0, do_attenuate and attenuate_music) #LowPassFilter
-	#AudioServer.set_bus_effect_enabled(audio_bus_music_idx, 1, do_attenuate and attenuate_music) #Reverb
-	#AudioServer.set_bus_effect_enabled(audio_bus_sfx_idx, 0, do_attenuate) #LowPassFilter
-	#AudioServer.set_bus_effect_enabled(audio_bus_sfx_idx, 1, do_attenuate) #Reverb
-	var transition_time = 0.4
+	var enter_time = 0.4
+	var exit_time = 0.2
 
 	var music_lpf = AudioServer.get_bus_effect(audio_bus_music_idx, 0)
 	var music_rev = AudioServer.get_bus_effect(audio_bus_music_idx, 1)
 	var sfx_lpf = AudioServer.get_bus_effect(audio_bus_sfx_idx, 0)
 	var sfx_rev = AudioServer.get_bus_effect(audio_bus_sfx_idx, 1)
 
+	if underwater_tween_1 and underwater_tween_1.is_valid():
+		underwater_tween_1.kill()
+	underwater_tween_1 = create_tween()
+	if underwater_tween_2 and underwater_tween_2.is_valid():
+		underwater_tween_2.kill()
+	underwater_tween_2 = create_tween()
+	if underwater_tween_3 and underwater_tween_3.is_valid():
+		underwater_tween_3.kill()
+	underwater_tween_3 = create_tween()
+	if underwater_tween_4 and underwater_tween_4.is_valid():
+		underwater_tween_4.kill()
+	underwater_tween_4 = create_tween()
+
 	if do_attenuate:
 		if attenuate_music:
-			AudioServer.set_bus_effect_enabled(audio_bus_music_idx, 0, true)
 			music_lpf.cutoff_hz = 20500.0
-			var tween = create_tween()
-			tween.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
-			tween.tween_property(music_lpf, "cutoff_hz", 300.0, transition_time)
+			underwater_tween_1.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+			underwater_tween_1.tween_property(music_lpf, "cutoff_hz", 300.0, enter_time)
 
-			AudioServer.set_bus_effect_enabled(audio_bus_music_idx, 1, true)
 			music_rev.dry = 1.0
 			music_rev.wet = 0.0
-			var tween2 = create_tween()
-			tween2.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-			tween2.tween_property(music_rev, "wet", 0.5, transition_time)
-			tween2.parallel().tween_property(music_rev, "dry", 0.5, transition_time)
+			underwater_tween_2.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+			underwater_tween_2.tween_property(music_rev, "wet", 0.5, enter_time)
+			underwater_tween_2.parallel().tween_property(music_rev, "dry", 0.5, enter_time)
 
 
-		AudioServer.set_bus_effect_enabled(audio_bus_sfx_idx, 0, true)
 		sfx_lpf.cutoff_hz = 20500.0
-		var tween3 = create_tween()
-		tween3.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
-		tween3.tween_property(sfx_lpf, "cutoff_hz", 300.0, transition_time)
+		underwater_tween_3.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+		underwater_tween_3.tween_property(sfx_lpf, "cutoff_hz", 300.0, enter_time)
 
-		AudioServer.set_bus_effect_enabled(audio_bus_sfx_idx, 1, true)
-		music_rev.dry = 1.0
-		music_rev.wet = 0.0
-		var tween4 = create_tween()
-		tween4.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-		tween4.tween_property(music_rev, "wet", 0.5, transition_time)
-		tween4.parallel().tween_property(music_rev, "dry", 0.5, transition_time)
-
-
-
-
+		sfx_rev.dry = 1.0
+		sfx_rev.wet = 0.0
+		underwater_tween_4.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		underwater_tween_4.tween_property(sfx_rev, "wet", 0.5, enter_time)
+		underwater_tween_4.parallel().tween_property(sfx_rev, "dry", 0.5, enter_time)
 
 	else:
 		if attenuate_music:
-			var tween = create_tween()
-			tween.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
-			tween.tween_property(music_lpf, "cutoff_hz", 20500.0, transition_time)
-			await tween.finished
-			AudioServer.set_bus_effect_enabled(audio_bus_music_idx, 0, false)
+			underwater_tween_1.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+			underwater_tween_1.tween_property(music_lpf, "cutoff_hz", 20500.0, exit_time)
 
-			var tween2 = create_tween()
-			tween2.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-			tween2.tween_property(music_rev, "wet", 0.0, transition_time)
-			tween2.parallel().tween_property(music_rev, "dry", 1.0, transition_time)
-			await tween2.finished
-			AudioServer.set_bus_effect_enabled(audio_bus_music_idx, 1, false)
+			underwater_tween_2.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+			underwater_tween_2.tween_property(music_rev, "wet", 0.0, exit_time)
+			underwater_tween_2.parallel().tween_property(music_rev, "dry", 1.0, exit_time)
 
+		underwater_tween_3.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+		underwater_tween_3.tween_property(sfx_lpf, "cutoff_hz", 20500.0, exit_time)
 
-		var tween3 = create_tween()
-		tween3.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
-		tween3.tween_property(music_lpf, "cutoff_hz", 20500.0, transition_time)
-		await tween3.finished
-		AudioServer.set_bus_effect_enabled(audio_bus_sfx_idx, 0, false)
-
-		var tween4 = create_tween()
-		tween4.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-		tween4.tween_property(sfx_rev, "wet", 0.0, transition_time)
-		tween4.parallel().tween_property(sfx_rev, "dry", 1.0, transition_time)
-		await tween4.finished
-		AudioServer.set_bus_effect_enabled(audio_bus_sfx_idx, 1, false)
+		underwater_tween_4.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		underwater_tween_4.tween_property(sfx_rev, "wet", 0.0, exit_time)
+		underwater_tween_4.parallel().tween_property(sfx_rev, "dry", 1.0, exit_time)
 
 
 

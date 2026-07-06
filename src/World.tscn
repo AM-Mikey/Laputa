@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://nby3vuvs2upy"]
+[gd_scene format=3]
 
-[ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
+[ext_resource type="Script" path="res://src/World.gd" id="8"]
 
 [sub_resource type="Animation" id="Animation_qbf6s"]
 resource_name = "Flash"
@@ -46,10 +46,10 @@ script = ExtResource("8")
 development_stage = "alpha"
 release_version = "1.8"
 do_skip_title = true
-start_level_path = "res://src/Level/SwitchTest.tscn"
+start_level_path = "res://src/Level/Dogtown.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=912648782]
-scroll_offset = Vector2(-5728, -7551.4707)
+scroll_offset = Vector2(-6750.851, -8834.894)
 
 [node name="Back" type="Node2D" parent="." unique_id=1451941770]
 visibility_layer = 2
@@ -114,3 +114,5 @@ process_mode = 3
 layer = 8
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
+
+[connection signal="level_saved" from="EditorLayer/Editor" to="EditorLayer/Editor/Main/Win/Tab/Levels" method="on_save"]
