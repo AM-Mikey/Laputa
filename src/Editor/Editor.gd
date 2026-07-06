@@ -199,6 +199,7 @@ func exit():
 	#set_entities_pickable(false)
 	w.spawn_entities()
 	await w.finished_spawning
+	w.setup_missions(false, "code")
 
 	var visibility_change_list = ["SpawnPoints", "VanishingPoints", \
 	"WaypointGlobalSpawns", "WaypointGlobals", "WaypointLocals", \
