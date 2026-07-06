@@ -112,7 +112,7 @@ transform = Transform2D(2, 0, 0, 2, 0, 0)
 [node name="MenuLayer" type="CanvasLayer" parent="." unique_id=2033685382]
 process_mode = 3
 layer = 8
-scale = Vector2(3, 3)
-transform = Transform2D(3, 0, 0, 3, 0, 0)
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
 
 [connection signal="level_saved" from="EditorLayer/Editor" to="EditorLayer/Editor/Main/Win/Tab/Levels" method="on_save"]
