@@ -1,0 +1,140 @@
+{
+	"npc_append_conversation_queue": {
+		"SideMissionExample": {
+			"npc_d": {
+				"give": [["salmiakki1", "side", true]],
+			},
+		},
+	},
+	
+	
+	"camera_control_add": {
+		"Main": {
+			"talk_npc_b": [["to_pos", 16.0 , 16.0, 10],["wait", 1.0],["to_pos", -16.0 , -16.0, 10],["wait", 1.0],["to_player", 50]],
+		},
+	},
+	
+	"npc_free" :{
+		"Main" : {
+			"npc_c" : {
+				"celebrate" : [[false]],
+			},
+		},
+	},	
+
+	"npc_set_main_conversation_queue": {
+		"Main": {
+			"npc_a": {
+				"talk_npc_a": "a_s0",
+				"talk_npc_b": "a_s1",
+				"talk_npc_c": "a_s2",
+				"talk_npc_d": "a_s3",
+				"celebrate": "a_s4",
+			},
+			"npc_b": {
+				"talk_npc_a": [["b_s0"], ["topics"]],
+				"talk_npc_b": "b_s1",
+				"talk_npc_c": "b_s2",
+				"talk_npc_d": "b_s3",
+				"celebrate": "b_s4",
+			},
+			"npc_c": {
+				"talk_npc_a": "c_s0",
+				"talk_npc_b": "c_s1",
+				"talk_npc_c": "c_s2",
+				"talk_npc_d": "c_s3",
+				"celebrate": "c_s4",
+			},
+			"npc_d": {
+				"talk_npc_a": [["d_s0", "main", false], ["salmiakki0", "side", false]],
+				"talk_npc_b": "d_s1",
+				"talk_npc_c": "d_s2",
+				"talk_npc_d": "d_s3",
+				"celebrate": "d_s4",
+			},
+		},
+	},
+	"prop_runtime_position_offset": {
+		"Main": {
+			"box_a": {
+				"talk_npc_a": [32,0],
+			},
+			"box_b": {
+				"talk_npc_b": [32,0],
+			},
+			"box_c": {
+				"talk_npc_c": [32,0],
+			},
+			"box_d": {
+				"talk_npc_d": [32,0],
+			},
+		},
+	},
+	
+	"enemy_free": {
+		"Main": {
+			"bat": {
+				"talk_npc_a": true,
+			},
+		},
+	},
+	"trigger_free" :{
+		"Main": {
+			"KillBox" : {
+				"talk_npc_a" : false,
+				
+			},
+		},
+	},
+	"npc_free" :{
+		"Main": {
+			"aikka" : {
+				"talk_npc_a" : true,
+			},
+		},
+	},
+		"prop_free": {
+		"Main": {
+			"ammo_box": {
+				"talk_npc_c": false,
+			},
+		},
+	},
+	"trigger_spawn" :{
+		"Main": {
+			"KillBox" : {
+				"talk_npc_c" : false,
+			},
+		},
+	},
+	"npc_spawn" :{
+		"Main": {
+			"aikka" : {
+				"talk_npc_c" : true,
+			},
+		},
+	},
+	"enemy_spawn": {
+		"Main": {
+			"bat": {
+				"talk_npc_c": false,
+			},
+		},
+	},
+		"prop_spawn": {
+		"Main": {
+			"ammo_box": {
+				"talk_npc_c": true,
+			},
+		},
+	},
+	"level_conversation_on_enter": {
+		"Main": {
+			"talk_npc_a": "cutscene_talk_npc_a",
+			"talk_npc_b": "cutscene_talk_npc_b",
+			"talk_npc_c": "cutscene_talk_npc_c",
+			"talk_npc_d": "cutscene_talk_npc_d",
+			"celebrate": "cutscene_celebrate",
+		},
+	},
+}

@@ -150,25 +150,53 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 #spawn
 	var enemy_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "enemy_spawn", "EnemySpawns", true)
 	for k in enemy_spawn_dict.keys():
-		k.allow_spawn = enemy_spawn_dict[k]
-		k.spawn()
+		var enemy_with_id_exists = false
+		for e in get_tree().get_nodes_in_group("Enemies"):
+			if e.id == k.properties["id"][0]:
+				enemy_with_id_exists = true
+				printerr("ERROR: enemy with id: ", k.properties["id"][0], " already exists!")
+		if !enemy_with_id_exists:
+			k.allow_spawn = true
+			k.spawn()
 	var npc_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_spawn", "NPCSpawns", true)
 	for k in npc_spawn_dict.keys():
-		k.allow_spawn = npc_spawn_dict[k]
+		var npc_with_id_exists = false
+		for e in get_tree().get_nodes_in_group("NPCs"):
+			if e.id == k.properties["id"][0]:
+				npc_with_id_exists = true
+				printerr("ERROR: npc with id: ", k.properties["id"][0], " already exists!")
+		if !npc_with_id_exists:
+			k.allow_spawn = true
 		k.spawn()
 	var prop_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "prop_spawn", "PropSpawns", true)
 	for k in prop_spawn_dict.keys():
-		k.allow_spawn = prop_spawn_dict[k]
+		var prop_with_id_exists = false
+		for e in get_tree().get_nodes_in_group("Props"):
+			if e.id == k.properties["id"][0]:
+				prop_with_id_exists = true
+				printerr("ERROR: prop with id: ", k.properties["id"][0], " already exists!")
+		if !prop_with_id_exists:
+			k.allow_spawn = true
 		k.spawn()
 	var trigger_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "trigger_spawn", "TriggerSpawns", true)
 	for k in trigger_spawn_dict.keys():
-		k.allow_spawn = trigger_spawn_dict[k]
+		var trigger_with_id_exists = false
+		for e in get_tree().get_nodes_in_group("Triggers"):
+			if e.id == k.properties["id"][0]:
+				trigger_with_id_exists = true
+				printerr("ERROR: trigger with id: ", k.properties["id"][0], " already exists!")
+		if !trigger_with_id_exists:
+			k.allow_spawn = true
 		k.spawn()
 
 #free
 	var enemy_free_dict = get_matching_entities_values(data, mission_name, mission_stage, "enemy_free", "Enemies", false)
 	for k in enemy_free_dict.keys():
 		k.die(true)
+	var enemy_free_dict_2 = get_matching_entities_values(data, mission_name, mission_stage, "enemy_free", "EnemySpawns", true)
+	for k in enemy_free_dict_2.keys():
+		k.allow_spawn = false
+	
 	var npc_free_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_free", "NPCs", false)
 	for k in npc_free_dict.keys():
 		k.queue_free() #Warning: Untested
