@@ -159,17 +159,15 @@ func play(sfx_string: String, actor = null, bus = null, volume = 1.0, pitchsprea
 
 
 func _wait_and_clear_non_looping_sfx(player, sfx_string):
-	if get_tree().root.get_node("World/MenuLayer").get_child_count() > 0:
-		await get_tree().create_timer(get_sfx_duration(sfx_string), true, true).timeout
-	else:
-		await player.finished
+	await player.finished
 	var queue_slot = [player, sfx_string]
 	_clear_player("sfx", queue_slot)
 
 func _wait_and_clear_sfx_from_duration(player, sfx_string, duration):
-	await get_tree().create_timer(duration, get_tree().root.get_node("World/MenuLayer").get_child_count() > 0, true).timeout
+	await get_tree().create_timer(duration, false, true).timeout
 	var queue_slot = [player, sfx_string]
 	_clear_player("sfx", queue_slot)
+
 
 func play_music(music_string): #TODO: add a resource with track info
 	#var track = {
