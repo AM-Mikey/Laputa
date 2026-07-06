@@ -343,7 +343,6 @@ func spawn_entities():
 	#spawn
 	for t in get_tree().get_nodes_in_group("TriggerSpawns"):
 		t.spawn()
-		print(t)
 		await finished_spawn_entities_step
 	print("all triggers spawned")
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
