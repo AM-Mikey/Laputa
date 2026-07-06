@@ -1,11 +1,12 @@
-@tool
 extends Enemy
 
-const PATH_LINE = preload("res://src/Utility/PathLine.tscn")
+const ICON = preload("res://assets/Actor/Enemy/CrusherIcon.png")
+const TX_0 = preload("res://assets/Actor/Enemy/Crusher.png")
 
-@export var amplitude_v: float = 64: set = on_amplitude_v_changed
-@export var amplitude_h: float = 0: set = on_amplitude_h_changed
+@export var amplitude_v: float = 64
+@export var amplitude_h: float = 0
 @export var frequency: float = 2
+@export var crushing: bool = true
 
 var center_pos: Vector2
 var time: float = 0
@@ -13,41 +14,11 @@ var time: float = 0
 var t_body = null
 var t_dir = null
 
-
 func _ready():
 	hp = 4
 	reward = 2
 
 	center_pos = global_position
-
-func on_amplitude_v_changed(new_amplitude):
-	amplitude_v = new_amplitude
-
-	if Engine.is_editor_hint():
-		for c in get_children():
-			if c.name == "PathV": c.free()
-
-		var line = PATH_LINE.instantiate()
-		line.add_point(Vector2(0, new_amplitude * -1))
-		line.add_point(Vector2(0, new_amplitude))
-		line.name = "PathV"
-		add_child(line)
-		move_child(line, 0)
-
-func on_amplitude_h_changed(new_amplitude):
-	amplitude_h = new_amplitude
-
-	if Engine.is_editor_hint():
-		for c in get_children():
-			if c.name == "PathH": c.free()
-
-		var line = PATH_LINE.instantiate()
-		line.add_point(Vector2(new_amplitude * -1, 0))
-		line.add_point(Vector2(new_amplitude, 0 ))
-		line.name = "PathH"
-		add_child(line)
-		move_child(line, 0)
-
 
 func _physics_process(delta):
 	if Engine.is_editor_hint():
@@ -55,21 +26,21 @@ func _physics_process(delta):
 	else:
 		if disabled or dead:
 			return
-
 		time += delta * frequency
+		position.x = center_pos.x + sin(time) * amplitude_h
 		position.y = center_pos.y + cos(time) * amplitude_v
 
-		if t_body != null:
+		if t_body != null and crushing:
 			crush_check()
 
 		animate()
 
 
-
 func on_crush_body_entered(body, dir):
 	t_body = body.get_parent()
 	t_dir = dir
-func on_crush_body_exited(body):
+
+func on_crush_body_exited(_body):
 	t_body = null
 	t_dir = null
 
