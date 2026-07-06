@@ -196,7 +196,7 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 	var enemy_free_dict_2 = get_matching_entities_values(data, mission_name, mission_stage, "enemy_free", "EnemySpawns", true)
 	for k in enemy_free_dict_2.keys():
 		k.allow_spawn = false
-	
+
 	var npc_free_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_free", "NPCs", false)
 	for k in npc_free_dict.keys():
 		k.queue_free() #Warning: Untested
