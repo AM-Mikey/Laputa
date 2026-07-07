@@ -121,7 +121,7 @@ script = ExtResource("3")
 difficulty = 1
 editor_hidden = false
 
-[node name="Fly" type="CollisionShape2D" parent="." unique_id=1771011050]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1771011050]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_utfr7")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
