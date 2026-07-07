@@ -193,7 +193,6 @@ position = Vector2(0, -16)
 texture = ExtResource("2")
 hframes = 4
 vframes = 5
-frame = 4
 
 [node name="StateTimer" type="Timer" parent="." unique_id=1916012981]
 process_callback = 0
@@ -248,6 +247,10 @@ one_shot = true
 
 [node name="DeaggroTimer" type="Timer" parent="." unique_id=1615668914]
 wait_time = 0.3
+one_shot = true
+
+[node name="OnEdgeDelay" type="Timer" parent="." unique_id=2087442621]
+wait_time = 0.1
 one_shot = true
 
 [node name="VURect" parent="." unique_id=688682803 instance=ExtResource("4_bgd16")]

@@ -33,6 +33,7 @@ var waypoint
 var last_collision: KinematicCollision2D
 var on_floor := false
 var on_wall := false
+var on_edge := false
 
 var stuck_shooting := false
 
@@ -44,7 +45,7 @@ var gravity_velocity := Vector2.ZERO
 
 @onready var ap = $AnimationPlayer
 
-var debug_name = "Billy3"
+var debug_name = "Billy25"
 
 func setup(): #Reminder: no function called can use await
 	match difficulty:
@@ -116,9 +117,9 @@ func enter_aggro(_prev_state):
 	aggro_dir = move_dir
 
 func do_aggro(delta):
-	var reach_point = waypoint.global_position #left or right of pc
+	var reach_point = waypoint.global_position
 	var approach_slow: bool = false
-	if pc: #TODO: global enemy shutdown fix
+	if pc:
 		var target_dir = Vector2(sign(position.x - pc.position.x), 0)
 		look_dir = target_dir * -1
 
@@ -146,7 +147,6 @@ func do_aggro(delta):
 					right_billy = true
 				approach_slow = true
 
-	var on_edge := false
 	var displace_to_waypoint = reach_point.x - global_position.x
 	var x_dir: float = 0.0
 	if approach_slow:
@@ -157,27 +157,30 @@ func do_aggro(delta):
 	aggro_dir = Vector2(lerp(aggro_dir.x, x_dir, 0.2), 0)
 	move_dir.x = signf(x_dir)
 
-	if	difficulty == 0 && on_floor && \
-		((!$FloorDetectorL.is_colliding() && move_dir.x < 0) || \
-		(!$FloorDetectorR.is_colliding() && move_dir.x > 0)):
-		move_dir.x = 0.0
-		aggro_dir.x = 0.0
-		on_edge = true
+	if difficulty == 0:
+		if on_floor && \
+			((!$FloorDetectorL.is_colliding() && move_dir.x < 0) || \
+			(!$FloorDetectorR.is_colliding() && move_dir.x > 0)):
+			move_dir.x = 0.0
+			aggro_dir.x = 0.0
+			on_edge = true
+			$OnEdgeDelay.start()
+		else:
+			if $OnEdgeDelay.time_left <= 0.0:
+				on_edge = false
 
-	#if (name == debug_name):
-		#print(on_edge, " ", on_wall, " ", approach_slow, " ",aggro_dir.x, " ", x_dir, " ", ap.current_animation)
+	if (name == debug_name):
+		print(on_edge, " ", on_wall, " ", on_floor, " ", move_dir.x, " ", aggro_dir.x, " ", x_dir, " ", displace_to_waypoint)
 
 	if on_wall:
 		ap.play("StandShoot")
 		stuck_shooting = true
 	else:
-		stuck_shooting = false
 		if on_edge:
-			if abs(displace_to_waypoint) < lock_tolerance:
-				ap.play("StandShoot")
-			else:
-				ap.play("Idle")
+			ap.play("StandShoot")
+			stuck_shooting = true
 		else:
+			stuck_shooting = false
 			if abs(displace_to_waypoint) < lock_tolerance:
 				if abs(aggro_dir.x) < 0.05:
 					ap.play("StandShoot")
@@ -220,13 +223,13 @@ func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction =
 	else:
 		wall_collision = move_and_collide(move_dir.sign(), true)
 
-	if (floor_collision):
+	if floor_collision:
 		var floor_normal_angle = floor_collision.get_normal().angle()
 		on_floor = floor_normal_angle < -PI / 2.0 + floor_max_angle && floor_normal_angle > -PI / 2.0 - floor_max_angle
 	else:
 		on_floor = false
 
-	if (wall_collision):
+	if wall_collision:
 		var wall_normal_angle = wall_collision.get_normal().angle()
 		on_wall = abs(wall_normal_angle) >= PI / 2.0 + floor_max_angle || abs(wall_normal_angle) <= PI / 2.0 - floor_max_angle
 	else:
