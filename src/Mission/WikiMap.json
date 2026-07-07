@@ -54,7 +54,7 @@
 			},
 		},
 	},
-	"prop_runtime_position_offset": {
+	"prop_position_offset": {
 		"Main": {
 			"box_a": {
 				"talk_npc_a": [32,0],
@@ -114,14 +114,16 @@
 			},
 		},
 	},
-	"enemy_spawn": {
+	"enemy_set_spawn": {
 		"Main": {
 			"bat": {
-				"talk_npc_c": false,
+				"talk_npc_b": false,
+				"talk_npc_c": true,
+				"talk_npc_d": false,
 			},
 		},
 	},
-		"prop_spawn": {
+	"prop_spawn": {
 		"Main": {
 			"ammo_box": {
 				"talk_npc_c": true,
