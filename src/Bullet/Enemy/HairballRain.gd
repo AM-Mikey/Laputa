@@ -27,6 +27,8 @@ func setup():
 	velocity = speed * direction
 	swing_left_first = randi() % 2 == 0
 	curr_swing_amplitude = randf_range(min_swing_amplitude, max_swing_amplitude)
+	if !$VisibleOnScreenNotifier2D.is_on_screen():
+		$NotOnScreenTimer.start()
 
 func _on_physics_process(_delta):
 	velocity = calc_velocity(speed)
@@ -56,8 +58,18 @@ func calc_velocity(projectile_speed) -> Vector2:
 
 	return out
 
-
+### SIGNAL
 func _on_TpTimer_timeout() -> void:
 	var screen_rect :Rect2 = vs.get_screen_global_rect()
 	if screen_rect.position.y - global_position.y >= 0.0:
 		global_position.y = screen_rect.position.y - 5.0
+
+func _on_VisibleOnScreenNotifier2d_screen_exited() -> void:
+	$NotOnScreenTimer.start()
+
+func _on_VisibleOnScreenNotifier2d_screen_entered() -> void:
+	$NotOnScreenTimer.stop()
+
+# If it's not visible on screen for a long time, delete them
+func _on_NotOnScreenTimer_timeout() -> void:
+	queue_free()

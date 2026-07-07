@@ -63,6 +63,16 @@ libraries/ = SubResource("AnimationLibrary_mlsak")
 wait_time = 0.3
 one_shot = true
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=836247871]
+rect = Rect2(-7, -7, 14, 14)
+
+[node name="NotOnScreenTimer" type="Timer" parent="." unique_id=558568137]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="area_entered" from="EnemyCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
 [connection signal="body_entered" from="EnemyCollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
 [connection signal="timeout" from="TpTimer" to="." method="_on_TpTimer_timeout"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibleOnScreenNotifier2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibleOnScreenNotifier2d_screen_exited"]
+[connection signal="timeout" from="NotOnScreenTimer" to="." method="_on_NotOnScreenTimer_timeout"]

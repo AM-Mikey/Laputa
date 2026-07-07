@@ -33,18 +33,15 @@ var anim_speed := 1.0
 @onready var ap = $AnimationPlayer
 
 func setup(): #Reminder: no function called can use await
-	hp = 4
-	damage_on_contact = 1
-	speed = Vector2(50, 200)
-	gravity = 250
-	reward = 2
 	anim_speed = max(1.0, shoot_reload_cycle_time / cooldown_time)
-
 	facing_right = $ShootWaypoint.position.x >= 0.0
 
 	$PlayerDetector/CollisionShape2D.shape.size = $VURect.value.size
 	$PlayerDetector/CollisionShape2D.position = $VURect.value.size / 2.0 + $VURect.value.position
 
+	hp = 4
+	damage_on_contact = 1
+	reward = 2
 	match difficulty:
 		0:
 			$Sprite2D.texture = TX_0
