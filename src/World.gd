@@ -122,7 +122,7 @@ func first_time_level_setup(): #Reminder: no function called can use await
 	run_conversation_on_enter(current_level)
 	await get_tree().physics_frame
 	await get_tree().physics_frame #wait for npcs to spawn #caused by camera reset time
-	_setup_missions(false, "first_time")
+	setup_missions(false, "first_time")
 
 func change_level_via_code(level_path, use_save_data):
 	print("changing level via code")
@@ -162,7 +162,7 @@ func change_level_via_code(level_path, use_save_data):
 	await get_tree().physics_frame #wait for npcs to spawn, takes 2 frames for some reason
 	if use_save_data:
 		SaveSystem.read_dialog_data_from_temp(current_level)
-	_setup_missions(use_save_data, "code")
+	setup_missions(use_save_data, "code")
 
 
 
@@ -195,7 +195,7 @@ func change_level_via_trigger(level_path, door_index):
 	await get_tree().process_frame
 	await get_tree().process_frame #wait for npcs to spawn, takes 2 frames for some reason
 	SaveSystem.read_dialog_data_from_temp(current_level)
-	_setup_missions(false, "trigger")
+	setup_missions(false, "trigger")
 	setup_door(door_index, old_level_path)
 
 
@@ -226,7 +226,7 @@ func do_transition(old_level_path, level_path):
 		run_conversation_on_enter(current_level)
 
 
-func _setup_missions(use_save_data: bool, type = "first_time"):
+func setup_missions(use_save_data: bool, type = "first_time"):
 	if !current_level.mission_level_update: return
 	print("setting up missions")
 	#main mission
@@ -343,7 +343,6 @@ func spawn_entities():
 	#spawn
 	for t in get_tree().get_nodes_in_group("TriggerSpawns"):
 		t.spawn()
-		print(t)
 		await finished_spawn_entities_step
 	print("all triggers spawned")
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):

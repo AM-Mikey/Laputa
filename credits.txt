@@ -2,11 +2,12 @@
 LukaLop: Creator, Designer, Programmer, Artist, Writer, Etc.
 
 Developers: SanpoNeko, Soru, Neropatti, CrystalWarrior
-Programming Assistance: Parzivail
+Programming Assistance: Parzivail, Daedily
 
 Lead Composer: FiveNineSquared
 Additional Tracks: Curelapse, PhiDelta
 
+UI Design Assistance, Pixel Art Assistance: Toastie
 Additional Backgrounds: Katt
 Additional Concept Art, Additional Character Design: Daedily
 Bat Sprites: Yobonnie

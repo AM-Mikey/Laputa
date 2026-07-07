@@ -46,7 +46,7 @@ func _ready():
 func start_printing(dialog_json, conversation: String, next_state = "inspect"):
 	current_dialog_json = dialog_json
 	active = true
-	var dialog = load_dialog_json(dialog_json)
+	var dialog = _load_dialog_json(dialog_json)
 	conversation = conversation.to_lower()
 
 	if !dialog.has(conversation): #null convo
@@ -108,7 +108,7 @@ func start_printing_flavor_text(text: String):
 	run_text_array(current_text_array)
 
 
-func load_dialog_json(dialog_json) -> Dictionary: #loads json and converts it into a dictionary
+func _load_dialog_json(dialog_json) -> Dictionary: #loads json and converts it into a dictionary
 	var file = FileAccess.open(dialog_json, FileAccess.READ)
 	var loaded_text = file.get_as_text()
 	var json = JSON.new()
