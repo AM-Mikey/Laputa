@@ -83,6 +83,7 @@ func enter(): #Call this every time the level is changed or reloaded
 	f.hud().queue_free()
 	w.ui.visible = false
 	w.bl.visible = false
+	w.clear_spawn_layers()
 	for a in get_tree().get_nodes_in_group("Actors"):
 		a.queue_free()
 	for p in get_tree().get_nodes_in_group("Props"):
