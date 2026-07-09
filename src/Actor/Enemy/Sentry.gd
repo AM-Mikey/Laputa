@@ -36,7 +36,7 @@ var debug_name = "Sentry22"
 
 func setup(): #Reminder: no function called can use await
 	anim_speed = max(1.0, shoot_reload_cycle_time / cooldown_time)
-	facing_right = $ShootWaypoint.position.x >= 0.0
+	facing_right = $ShootX.position.x >= 0.0
 
 	$PlayerDetector/CollisionShape2D.shape.size = $VURect.value.size
 	$PlayerDetector/CollisionShape2D.position = $VURect.value.size / 2.0 + $VURect.value.position
@@ -84,9 +84,6 @@ func prepare_bullet():
 
 	var bullet_gravity: float = bullet.base_gravity if !is_in_water else bullet.water_gravity
 
-	#if name == debug_name:
-		#print("A: ", is_in_water, " ", bullet_gravity)
-
 
 	if difficulty in [0, 1, 2]:
 		var peak_displace_y: float = 0.0
@@ -94,14 +91,14 @@ func prepare_bullet():
 
 		match difficulty:
 			0:
-				peak_displace_y = $ShootWaypoint.position.y
-				target_displace_x = $ShootWaypoint.position.x
+				peak_displace_y = $ShootY.position.y
+				target_displace_x = $ShootX.position.x
 			1:
-				peak_displace_y = $ShootWaypoint.position.y
-				target_displace_x = abs($ShootWaypoint.position.x)
+				peak_displace_y = $ShootY.position.y
+				target_displace_x = abs($ShootX.position.x)
 				target_displace_x *= 1.0 if facing_right else -1.0
 			2:
-				peak_displace_y = $ShootWaypoint.position.y
+				peak_displace_y = $ShootY.position.y
 				target_displace_x = target.global_position.x - global_position.x
 
 		if peak_displace_y >= 0.0:

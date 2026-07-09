@@ -456,8 +456,12 @@ func do_generic_input(event):
 				free_previews()
 				preview_actor_spawn($Main/Win/Tab/NPCs.active_npc_path, grid_pos)
 			"grab":
-				if shift_held: inspector.active.global_position = Vector2(mouse_pos + grab_offset).snapped(Vector2(4,4))
-				else: inspector.active.global_position = Vector2(mouse_pos + grab_offset).snapped(Vector2(8,8))
+				var snapped_to = Vector2(4.0, 4.0) if shift_held else Vector2(8.0, 8.0)
+				var calc_new_position = Vector2(mouse_pos + grab_offset)
+				if inspector.active_type in ["waypoint_local", "waypoint_global_spawn"]:
+					if inspector.active.lock_x: calc_new_position.x = inspector.active.global_position.x
+					if inspector.active.lock_y: calc_new_position.y = inspector.active.global_position.y
+				inspector.active.global_position = calc_new_position.snapped(snapped_to)
 
 	#deleting entity
 	if event.is_action_pressed("editor_delete"):

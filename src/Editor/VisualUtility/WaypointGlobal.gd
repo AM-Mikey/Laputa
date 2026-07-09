@@ -3,6 +3,8 @@ extends Area2D
 @export var owner_id: String
 @export var tag_name: String
 @export var index : int = 0
+@export var lock_x: bool = false
+@export var lock_y: bool = false
 var uses_spawn := false
 var active_count = 0
 

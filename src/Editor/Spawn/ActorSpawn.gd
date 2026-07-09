@@ -10,7 +10,6 @@ var allow_spawn := true
 
 
 func _ready():
-
 	if actor_path == "":
 		printerr("ERROR: no actor chosen in ActorSpawn")
 		return
@@ -61,8 +60,6 @@ func initialize(): #first time set up properties
 				else:
 					properties[p["name"]] = [actor.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
 		properties["id"] = [name, TYPE_STRING, ""]
-		set_sprite()
-
 
 		for ac in actor.get_children(): #TODO: add these to props and to waypoints
 			if ac.is_in_group("WaypointLocals"):
@@ -97,6 +94,10 @@ func initialize(): #first time set up properties
 					ac.owner = w.current_level
 		actor.free()
 
+		set_sprite()
+		for prop in properties: # init all special interaction when changing property
+			on_property_changed(prop, properties[prop][0])
+
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
 	#print("re initialize")
 	if (actor_path != ""):
@@ -111,7 +112,6 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 					properties[p["name"]] = old_properties[p["name"]]
 				else:
 					properties[p["name"]] = [actor.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
-		set_sprite()
 
 		for ac in actor.get_children():
 			if ac.is_in_group("WaypointLocals"):
@@ -139,6 +139,10 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 					add_child(ac)
 					ac.owner = w.current_level
 		actor.free()
+
+		set_sprite()
+		for prop in properties: # init all special interaction when changing property
+			on_property_changed(prop, properties[prop][0])
 
 func spawn():
 	if !allow_spawn:
@@ -230,4 +234,16 @@ func _input_event(_viewport, event, _shape_idx): #selecting in editor
 			inspector.on_selected(self, "actor_spawn")
 
 func on_property_changed(p_name, p_value):
-	pass
+	if !actor_path.is_absolute_path(): return
+	var actor = actor_path.get_file()
+	if actor.get_extension() != "tscn": return
+	actor = actor.split(".")[0]
+
+	if p_name == "difficulty":
+		set_sprite()
+
+	match actor:
+		"Sentry":
+			if p_name == "difficulty":
+				$ShootX.visible = p_value < 2
+				$ShootY.visible = p_value < 3

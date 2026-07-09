@@ -325,8 +325,9 @@ snap_degrees = 180.0
 movement_locked = true
 
 [node name="TongueRange" parent="." unique_id=1432238783 instance=ExtResource("3_ih0x2")]
-position = Vector2(-32, -12)
+position = Vector2(-32, -8)
 tag_name = "tongue_range"
+lock_y = true
 
 [node name="VURect" parent="." unique_id=688682803 instance=ExtResource("7_j6wp0")]
 tag_name = "player_detector"
