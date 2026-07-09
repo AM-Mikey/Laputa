@@ -19,8 +19,9 @@ var max_swing_amplitude := 64.0
 var min_swing_amplitude := 32.0
 var curr_swing_amplitude := 0.0
 
-var swing_gravity_mult := 0.08
-var peak_to_swing_time := 1.0
+var swing_gravity_mult := 0.15
+var peak_to_swing_time := 0.5
+var speed_scale := 1.5
 
 ### MAIN ###
 func setup():
@@ -51,7 +52,7 @@ func calc_velocity(projectile_speed) -> Vector2:
 		out.y += gravity * get_physics_process_delta_time()
 		ap.speed_scale = out.length() / 300.0
 	else:
-		var phase := time_swing
+		var phase := time_swing * speed_scale
 		var phase_value = -cos(phase) if swing_left_first else cos(phase)
 		if abs(phase_value) <= 0.01:
 			curr_swing_amplitude = randf_range(min_swing_amplitude, max_swing_amplitude)

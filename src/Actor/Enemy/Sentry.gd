@@ -17,10 +17,11 @@ const HAIRBALL_RAIN = preload("res://src/Bullet/Enemy/HairballRain.tscn")
 @export var diff_3_force: float = 300.0
 @export var diff_3_bullet: int = 8
 @export var diff_3_spread: float = PI / 6.0 # From [-diff_3_spread / 2.0, diff_3_spread / 2.0]
-@export var diff_3_bullet_max_swing_amp: float = 64.0
+@export var diff_3_bullet_speed_scale: float = 1.5
+@export var diff_3_bullet_max_swing_amp: float = 32.0
 @export var diff_3_bullet_min_swing_amp: float = 32.0
 @export var diff_3_bullet_peak_to_swing_time: float = 0.3
-@export var diff_3_bullet_swing_gravity_mult: float = 0.08
+@export var diff_3_bullet_swing_gravity_mult: float = 0.15
 
 var facing_right := false:
 	set(val):
