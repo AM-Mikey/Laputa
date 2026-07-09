@@ -1,13 +1,17 @@
 extends Bullet
 
 @onready var ap = $AnimationPlayer
-var fly_upward := true:
+enum HairballRainState {FLY_UPWARD, WAIT, FALL}
+var state: HairballRainState = HairballRainState.FLY_UPWARD:
 	set(val):
-		if fly_upward and !val:
-			var screen_rect :Rect2 = vs.get_screen_global_rect()
-			if screen_rect.position.y - global_position.y >= 0.0:
-				$TpTimer.start()
-		fly_upward = val
+		if state != val:
+			if state == HairballRainState.FLY_UPWARD && val == HairballRainState.WAIT:
+				$PeakToSwingTimer.start()
+			elif val == HairballRainState.FALL:
+				var screen_rect :Rect2 = vs.get_screen_global_rect()
+				if screen_rect.position.y - global_position.y >= 0.0:
+					$TpTimer.start()
+		state = val
 var time_swing := 0.0
 var swing_left_first := false
 
@@ -16,7 +20,9 @@ var min_swing_amplitude := 32.0
 var curr_swing_amplitude := 0.0
 
 var swing_gravity_mult := 0.08
+var peak_to_swing_time := 1.0
 
+### MAIN ###
 func setup():
 	is_wind_affected = true
 	is_enemy_bullet = true
@@ -24,6 +30,7 @@ func setup():
 	velocity = speed * direction
 	swing_left_first = randi() % 2 == 0
 	curr_swing_amplitude = randf_range(min_swing_amplitude, max_swing_amplitude)
+	$PeakToSwingTimer.wait_time = peak_to_swing_time
 	if !$VisibleOnScreenNotifier2D.is_on_screen():
 		$NotOnScreenTimer.start()
 
@@ -32,9 +39,14 @@ func _on_physics_process(_delta):
 	move_and_slide()
 
 func calc_velocity(projectile_speed) -> Vector2:
-	fly_upward = velocity.y <= 0.0
+	if state == HairballRainState.FLY_UPWARD:
+		if velocity.y >= 0.0:
+			if peak_to_swing_time <= 0.0:
+				state = HairballRainState.FALL
+			else:
+				state = HairballRainState.WAIT
 	var out = velocity
-	if fly_upward:
+	if state != HairballRainState.FALL:
 		out.x = projectile_speed * direction.x
 		out.y += gravity * get_physics_process_delta_time()
 		ap.speed_scale = out.length() / 300.0
@@ -55,7 +67,7 @@ func calc_velocity(projectile_speed) -> Vector2:
 
 	return out
 
-### SIGNAL
+### SIGNAL ###
 func _on_TpTimer_timeout() -> void:
 	var screen_rect :Rect2 = vs.get_screen_global_rect()
 	if screen_rect.position.y - global_position.y >= 0.0:
@@ -70,3 +82,6 @@ func _on_VisibleOnScreenNotifier2d_screen_entered() -> void:
 # If it's not visible on screen for a long time, delete them
 func _on_NotOnScreenTimer_timeout() -> void:
 	queue_free()
+
+func _on_PeakToSwingTimer_timeout() -> void:
+	state = HairballRainState.FALL

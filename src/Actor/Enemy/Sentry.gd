@@ -15,9 +15,11 @@ const HAIRBALL_RAIN = preload("res://src/Bullet/Enemy/HairballRain.tscn")
 @export var projectile_damage: int = 2
 
 @export var diff_3_force: float = 300.0
+@export var diff_3_bullet: int = 8
 @export var diff_3_spread: float = PI / 6.0 # From [-diff_3_spread / 2.0, diff_3_spread / 2.0]
 @export var diff_3_bullet_max_swing_amp: float = 64.0
 @export var diff_3_bullet_min_swing_amp: float = 32.0
+@export var diff_3_bullet_peak_to_swing_time: float = 0.3
 @export var diff_3_bullet_swing_gravity_mult: float = 0.08
 
 var facing_right := false:
@@ -76,16 +78,16 @@ func prepare_bullet():
 	if difficulty == 2 && !target:
 		return
 
-	var bullet = HAIRBALL_RAIN.instantiate() if difficulty == 3 else HAIRBALL.instantiate()
-	bullet.damage = projectile_damage
-
 	var bullet_origin := Vector2(0.0, -12.0)
-	bullet.position = global_position + bullet_origin
-
-	var bullet_gravity: float = bullet.base_gravity if !is_in_water else bullet.water_gravity
-
 
 	if difficulty in [0, 1, 2]:
+		var bullet = HAIRBALL.instantiate()
+		bullet.damage = projectile_damage
+
+		bullet.position = global_position + bullet_origin
+
+		var bullet_gravity: float = bullet.base_gravity if !is_in_water else bullet.water_gravity
+
 		var peak_displace_y: float = 0.0
 		var target_displace_x: float = 0.0
 
@@ -111,22 +113,29 @@ func prepare_bullet():
 		var time_peak_to_start = sqrt(max((bullet_origin.y - peak_displace_y) * 2.0 / bullet_gravity, 0.0))
 		var time_travel = time_peak_to_ground + time_peak_to_start
 
-		if name == debug_name:
-			print(time_travel, " ", bullet_gravity)
+		#if name == debug_name:
+			#print(time_travel, " ", bullet_gravity)
 
 		var bullet_vel_x = target_displace_x / time_travel
 		var bullet_vel_y = (-0.5 * bullet_gravity * pow(time_travel, 2) - bullet_origin.y) / time_travel
 
 		bullet.speed = Vector2(bullet_vel_x, bullet_vel_y).length()
 		bullet.direction = Vector2(bullet_vel_x, bullet_vel_y).normalized()
+		w.middle.add_child(bullet)
 	else:
-		bullet.speed = diff_3_force
-		bullet.direction = Vector2.UP.rotated(randf_range(-diff_3_spread / 2.0, diff_3_spread / 2.0))
-		bullet.max_swing_amplitude = diff_3_bullet_max_swing_amp
-		bullet.min_swing_amplitude = diff_3_bullet_min_swing_amp
-		bullet.swing_gravity_mult = diff_3_bullet_swing_gravity_mult
+		for i in range(diff_3_bullet):
+			var bullet = HAIRBALL_RAIN.instantiate()
+			bullet.damage = projectile_damage
+			bullet.position = global_position + bullet_origin
+			bullet.peak_to_swing_time = diff_3_bullet_peak_to_swing_time
 
-	w.middle.add_child(bullet)
+			bullet.speed = diff_3_force
+			bullet.direction = Vector2.UP.rotated(-diff_3_spread / 2.0 + i * diff_3_spread / diff_3_bullet)
+			bullet.max_swing_amplitude = diff_3_bullet_max_swing_amp
+			bullet.min_swing_amplitude = diff_3_bullet_min_swing_amp
+			bullet.swing_gravity_mult = diff_3_bullet_swing_gravity_mult
+			w.middle.add_child(bullet)
+
 	am.play("enemy_shoot", self)
 
 func exit_shoot(_next_state):
