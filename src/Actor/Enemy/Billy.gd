@@ -308,20 +308,21 @@ func fire():
 			bullet.queue_free()
 			return
 		# Even when shooting at close range, the arc will always peak at the same height as normal shooting
+		var bullet_gravity: float = bullet.base_gravity if !is_in_water else bullet.water_gravity
 		var normal_start_bullet_vel_y = bullet_speed * sin(Vector2(look_dir.x / 2.0, -1).angle())
-		var normal_time_peak_reached = abs(normal_start_bullet_vel_y / bullet.gravity)
-		var peak_y = 0.5 * bullet.gravity * pow(normal_time_peak_reached, 2) + normal_start_bullet_vel_y * normal_time_peak_reached
-		var normal_time_travel = sqrt(abs((peak_y + $BulletOrigin.position.y) / 0.5 / bullet.gravity)) + normal_time_peak_reached
+		var normal_time_peak_reached = abs(normal_start_bullet_vel_y / bullet.base_gravity)
+		var peak_y = 0.5 * bullet.base_gravity * pow(normal_time_peak_reached, 2) + normal_start_bullet_vel_y * normal_time_peak_reached
+		var normal_time_travel = sqrt(abs((peak_y + $BulletOrigin.position.y) / 0.5 / bullet_gravity)) + normal_time_peak_reached
 		var target_distance_x = pc.global_position.x - $BulletOrigin.global_position.x
 
 		var b_speed_x = target_distance_x / normal_time_travel
-		var b_speed_y = (peak_y - 0.5 * bullet.gravity * pow(normal_time_peak_reached, 2)) / normal_time_peak_reached
+		var b_speed_y = (peak_y - 0.5 * bullet_gravity * pow(normal_time_peak_reached, 2)) / normal_time_peak_reached
 		bullet.speed = Vector2(b_speed_x, b_speed_y).length()
 		bullet.direction = Vector2(b_speed_x, b_speed_y).normalized()
 
 		#if name == debug_name:
 			#print("B ", bullet.speed, " ", bullet.direction)
-			#print(peak_y, " ", abs(0.5 * bullet.gravity * pow(normal_time_peak_reached, 2)))
+			#print(peak_y, " ", abs(0.5 * bullet_gravity * pow(normal_time_peak_reached, 2)))
 
 	world.get_node("Middle").add_child(bullet)
 	am.play("enemy_shoot", self)
