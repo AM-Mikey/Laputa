@@ -91,7 +91,7 @@ func do_fizzle(type: String):
 
 	w.get_node("Middle").add_child(fizzle)
 	fizzle.position = $End.global_position if has_node("End") else global_position
-	if instant_fizzle and not is_enemy_bullet:
+	if instant_fizzle and not is_enemy_bullet and f.pc():
 		var gun = f.pc().guns.get_child(0)
 		var gun_center = gun.global_position
 		var space_state = get_world_2d().direct_space_state

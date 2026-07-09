@@ -54,10 +54,10 @@ func _on_Water_body_entered(body):
 
 		var valid_for_splash = true
 		if !splash_targets.has(target):
-			if target.get_node_or_null("PhysicsLayerBody"):
+			if target.has_node("PhysicsLayerBody"):
 				valid_for_splash = !target.get_node("PhysicsLayerBody").just_spawned
 			var target_check_position_y = target.global_position.y
-			if target.get_node_or_null("CollisionShape2D"):
+			if target.has_node("CollisionShape2D"):
 				target_check_position_y = min(target_check_position_y, target.get_node("CollisionShape2D").global_position.y)
 			valid_for_splash = valid_for_splash && target_check_position_y <= global_position.y + 5.0
 
