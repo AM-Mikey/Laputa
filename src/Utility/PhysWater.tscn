@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cbuxkug0nih2m"]
 
-[ext_resource type="Script" uid="uid://cseeuh5uy3v" path="res://src/Utility/PhysWater.gd" id="1_x2d66"]
+[ext_resource type="Script" path="res://src/Utility/PhysWater.gd" id="1_x2d66"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x2d66"]
 resource_local_to_scene = true

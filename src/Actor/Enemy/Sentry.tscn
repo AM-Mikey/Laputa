@@ -87,7 +87,6 @@ _data = {
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("2")
-debug = true
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1748172784]

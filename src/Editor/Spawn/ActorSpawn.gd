@@ -141,7 +141,7 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 		actor.free()
 
 func spawn():
-	if !allow_spawn: 
+	if !allow_spawn:
 		w.emit_signal.call_deferred("finished_spawn_entities_step")
 		return
 	if actor_path == "":

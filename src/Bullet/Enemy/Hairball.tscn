@@ -33,9 +33,19 @@ _data = {
 }
 
 [node name="Hairball" type="CharacterBody2D" unique_id=1451375695 groups=["WindBullets"]]
-collision_layer = 0
+collision_layer = 8192
 collision_mask = 0
 script = ExtResource("1")
+base_gravity = 150.0
+water_gravity = 50.0
+damage = 2.0
+is_water_affected = true
+is_wind_affected = true
+is_enemy_bullet = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=816356931]
+shape = SubResource("CapsuleShape2D_sh0tx")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="EnemyCollisionDetector" parent="." unique_id=552659552 instance=ExtResource("2_ahdkj")]
 collision_layer = 8448

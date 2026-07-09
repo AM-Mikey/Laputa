@@ -23,11 +23,14 @@ func _ready(): #Reminder: no function called can use await
 func _on_Water_body_entered(body):
 	var do_bubbles = true
 	var target
-	if (body is RigidBody2D): # Use built in Area2D gravity instead.
+	if body is RigidBody2D: # Use built in Area2D gravity instead.
 		return
 	if body.get_collision_layer_value(1):
 		target = body.get_parent()
 		target.velocity *= velocity_dropoff
+	elif body.get_collision_layer_value(7) or body.get_collision_layer_value(14): # Bullet
+		target = body
+		do_bubbles = false
 	elif body.get_collision_layer_value(2) or body.get_collision_layer_value(8):
 		target = body
 		target.velocity *= velocity_dropoff
@@ -48,7 +51,17 @@ func _on_Water_body_entered(body):
 			bubble_emitters[target] = be
 			target.call_deferred("add_child", be)
 
+
+		var valid_for_splash = true
 		if !splash_targets.has(target):
+			if target.get_node_or_null("PhysicsLayerBody"):
+				valid_for_splash = !target.get_node("PhysicsLayerBody").just_spawned
+			var target_check_position_y = target.global_position.y
+			if target.get_node_or_null("CollisionShape2D"):
+				target_check_position_y = min(target_check_position_y, target.get_node("CollisionShape2D").global_position.y)
+			valid_for_splash = valid_for_splash && target_check_position_y <= global_position.y + 5.0
+
+		if valid_for_splash:
 			splash_targets.append(target)
 			var splash = DROPLET_SPLASH.instantiate()
 			splash.position.x = body.global_position.x
@@ -62,6 +75,8 @@ func _on_Water_body_exited(body):
 	if body.get_collision_layer_value(1):
 		target = body.get_parent()
 	elif body.get_collision_layer_value(2) or body.get_collision_layer_value(8):
+		target = body
+	elif body.get_collision_layer_value(7) or body.get_collision_layer_value(14): #Bullet
 		target = body
 	elif body.get_collision_layer_value(5) or body.get_collision_layer_value(11) or body.get_collision_layer_value(12) or body.get_collision_layer_value(13):
 		target = body

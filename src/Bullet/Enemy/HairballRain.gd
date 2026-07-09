@@ -17,9 +17,6 @@ var curr_swing_amplitude := 0.0
 
 var swing_gravity_mult := 0.08
 
-func _init() -> void:
-	gravity *= .5
-
 func setup():
 	is_wind_affected = true
 	is_enemy_bullet = true

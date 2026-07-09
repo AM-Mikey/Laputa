@@ -3,12 +3,7 @@ extends Bullet
 var start_velocity
 @onready var ap = $AnimationPlayer
 
-func _init() -> void:
-	gravity *= .5
-
 func setup():
-	is_wind_affected = true
-	is_enemy_bullet = true
 	ap.play("Rotate")
 	velocity = calc_velocity(speed)
 	start_velocity = abs(velocity.x) + abs(velocity.y) / 2.0 #used to calculate animation slowdown

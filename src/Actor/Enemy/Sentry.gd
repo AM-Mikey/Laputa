@@ -32,6 +32,8 @@ var anim_speed := 1.0
 
 @onready var ap = $AnimationPlayer
 
+var debug_name = "Sentry22"
+
 func setup(): #Reminder: no function called can use await
 	anim_speed = max(1.0, shoot_reload_cycle_time / cooldown_time)
 	facing_right = $ShootWaypoint.position.x >= 0.0
@@ -80,6 +82,12 @@ func prepare_bullet():
 	var bullet_origin := Vector2(0.0, -12.0)
 	bullet.position = global_position + bullet_origin
 
+	var bullet_gravity: float = bullet.base_gravity if !is_in_water else bullet.water_gravity
+
+	#if name == debug_name:
+		#print("A: ", is_in_water, " ", bullet_gravity)
+
+
 	if difficulty in [0, 1, 2]:
 		var peak_displace_y: float = 0.0
 		var target_displace_x: float = 0.0
@@ -102,12 +110,15 @@ func prepare_bullet():
 			else:
 				peak_displace_y = -16.0
 
-		var time_peak_to_ground = sqrt(max(-2.0 * peak_displace_y / bullet.gravity, 0.0))
-		var time_peak_to_start = sqrt(max((bullet_origin.y - peak_displace_y) * 2.0 / bullet.gravity, 0.0))
+		var time_peak_to_ground = sqrt(max(-2.0 * peak_displace_y / bullet_gravity, 0.0))
+		var time_peak_to_start = sqrt(max((bullet_origin.y - peak_displace_y) * 2.0 / bullet_gravity, 0.0))
 		var time_travel = time_peak_to_ground + time_peak_to_start
 
+		if name == debug_name:
+			print(time_travel, " ", bullet_gravity)
+
 		var bullet_vel_x = target_displace_x / time_travel
-		var bullet_vel_y = (-0.5 * bullet.gravity * pow(time_travel, 2) - bullet_origin.y) / time_travel
+		var bullet_vel_y = (-0.5 * bullet_gravity * pow(time_travel, 2) - bullet_origin.y) / time_travel
 
 		bullet.speed = Vector2(bullet_vel_x, bullet_vel_y).length()
 		bullet.direction = Vector2(bullet_vel_x, bullet_vel_y).normalized()
