@@ -1,17 +1,25 @@
-[gd_scene format=4 uid="uid://b8qwsylj7fefh"]
+[gd_scene format=4]
 
-[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_6q8mx"]
-[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_jogqi"]
+[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_6q8mx"]
+[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_jogqi"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_1byma"]
 [ext_resource type="Resource" path="res://src/Background/iedge.tres" id="3_f378h"]
-[ext_resource type="Texture2D" uid="uid://maf247vr1ab" path="res://assets/Background/IslandEdge.png" id="4_53gin"]
-[ext_resource type="TileSet" uid="uid://dct5q86qhnom8" path="res://src/Tile/Debug.tres" id="5_6aw22"]
-[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_d7k7o"]
-[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="12_s0ppf"]
-[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="13_ddw3t"]
-[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="13_l0h4m"]
-[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="13_xxkol"]
-[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="15_flikr"]
-[ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="17_1byma"]
+[ext_resource type="Texture2D" path="res://assets/Background/IslandEdge.png" id="4_53gin"]
+[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_6aw22"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_d7k7o"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="10_bl3ur"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_d7k7o"]
+[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="12_s0ppf"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_xxkol"]
+[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="13_ddw3t"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="13_l0h4m"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="13_xxkol"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="14_edts7"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="15_flikr"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="16_flikr"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="17_1byma"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="18_4pk0b"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="20_mdql1"]
 
 [node name="EnSentryTesting" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
@@ -20,12 +28,14 @@ level_name = "EnSentryTesting"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 
-[node name="LevelLimiter" parent="." unique_id=1011068996 instance=ExtResource("2_jogqi")]
+[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1011068996 instance=ExtResource("2_jogqi")]
 visibility_layer = 2
 offset_left = 1599.0
 offset_top = 1600.0
 offset_right = 4431.0
 offset_bottom = 2496.0
+mouse_filter = 2
+script = ExtResource("3_1byma")
 background_resource = ExtResource("3_f378h")
 texture = ExtResource("4_53gin")
 layers = 5
@@ -89,13 +99,17 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=751148410]
 visibility_layer = 2
 
-[node name="Water" parent="Spawns" unique_id=1800792368 instance=ExtResource("13_l0h4m")]
+[node name="Water" type="MarginContainer" parent="Spawns" unique_id=1800792368 groups=["TriggerSpawns"] instance=ExtResource("13_l0h4m")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 3584.0
 offset_top = 2000.0
 offset_right = 4320.0
 offset_bottom = 2368.0
+mouse_filter = 2
+script = ExtResource("8_d7k7o")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20, ""],
@@ -105,710 +119,22 @@ properties = {
 }
 size_is_default = false
 
-[node name="VanishingPoint" parent="Spawns" unique_id=2052223351 instance=ExtResource("12_s0ppf")]
+[node name="VanishingPoint" type="Area2D" parent="Spawns" unique_id=2052223351 groups=["VanishingPoints"] instance=ExtResource("12_s0ppf")]
 visibility_layer = 2
+z_index = 999
 position = Vector2(3008, 1856)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_bl3ur")
 
-[node name="Sentry" parent="Spawns" unique_id=1199277091 instance=ExtResource("11_d7k7o")]
-visibility_layer = 2
-position = Vector2(3864, 1648)
-actor_path = "res://src/Actor/Enemy/Sentry.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"cooldown_time": [2.0, 3, ""],
-"debug": [true, 1, ""],
-"diff_3_bullet": [8, 2, ""],
-"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
-"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
-"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
-"diff_3_force": [300.0, 3, ""],
-"diff_3_spread": [0.5235987755982988, 3, ""],
-"difficulty": [0, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Sentry", 4, ""],
-"projectile_damage": [2, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Sentry" unique_id=688682803 instance=ExtResource("13_xxkol")]
-visibility_layer = 2
-tag_name = "player_detector"
-value = Rect2(-192, -192, 384, 384)
-
-[node name="ShootX" parent="Spawns/Sentry" unique_id=1432238783 instance=ExtResource("15_flikr")]
-visibility_layer = 2
-position = Vector2(104, 0)
-tag_name = "shoot_x"
-lock_y = true
-
-[node name="ShootY" parent="Spawns/Sentry" unique_id=595539309 instance=ExtResource("15_flikr")]
-modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
-position = Vector2(0, 8)
-tag_name = "shoot_y"
-lock_x = true
-
-[node name="Sentry1" parent="Spawns" unique_id=310849572 instance=ExtResource("11_d7k7o")]
-visibility_layer = 2
-position = Vector2(4040, 1648)
-actor_path = "res://src/Actor/Enemy/Sentry.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"cooldown_time": [2.0, 3, ""],
-"debug": [true, 1, ""],
-"diff_3_bullet": [8, 2, ""],
-"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
-"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
-"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
-"diff_3_force": [300.0, 3, ""],
-"diff_3_spread": [0.5235987755982988, 3, ""],
-"difficulty": [0, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Sentry1", 4, ""],
-"projectile_damage": [2, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Sentry1" unique_id=1915983744 instance=ExtResource("13_xxkol")]
-visibility_layer = 2
-tag_name = "player_detector"
-value = Rect2(-192, -192, 384, 384)
-
-[node name="ShootX" parent="Spawns/Sentry1" unique_id=1670896715 instance=ExtResource("15_flikr")]
-visibility_layer = 2
-position = Vector2(-96, 0)
-tag_name = "shoot_x"
-lock_y = true
-
-[node name="ShootY" parent="Spawns/Sentry1" unique_id=2143875493 instance=ExtResource("15_flikr")]
-modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
-position = Vector2(0, 24)
-tag_name = "shoot_y"
-lock_x = true
-
-[node name="Sentry2" parent="Spawns" unique_id=669530245 instance=ExtResource("11_d7k7o")]
-visibility_layer = 2
-position = Vector2(3944, 1792)
-actor_path = "res://src/Actor/Enemy/Sentry.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"cooldown_time": [2.0, 3, ""],
-"debug": [true, 1, ""],
-"diff_3_bullet": [8, 2, ""],
-"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
-"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
-"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
-"diff_3_force": [300.0, 3, ""],
-"diff_3_spread": [0.5235987755982988, 3, ""],
-"difficulty": [2, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Sentry2", 4, ""],
-"projectile_damage": [2, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Sentry2" unique_id=669990235 instance=ExtResource("13_xxkol")]
-visibility_layer = 2
-tag_name = "player_detector"
-value = Rect2(-192, -192, 384, 384)
-
-[node name="ShootX" parent="Spawns/Sentry2" unique_id=772411448 instance=ExtResource("15_flikr")]
-visible = false
-visibility_layer = 2
-position = Vector2(-56, 0)
-tag_name = "shoot_x"
-lock_y = true
-
-[node name="ShootY" parent="Spawns/Sentry2" unique_id=1002226647 instance=ExtResource("15_flikr")]
-modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
-position = Vector2(0, -64)
-tag_name = "shoot_y"
-lock_x = true
-
-[node name="Sentry3" parent="Spawns" unique_id=188903635 instance=ExtResource("11_d7k7o")]
-visibility_layer = 2
-position = Vector2(3960, 1792)
-actor_path = "res://src/Actor/Enemy/Sentry.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"cooldown_time": [2.0, 3, ""],
-"debug": [true, 1, ""],
-"diff_3_bullet": [8, 2, ""],
-"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
-"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
-"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
-"diff_3_force": [300.0, 3, ""],
-"diff_3_spread": [0.5235987755982988, 3, ""],
-"difficulty": [1, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Sentry3", 4, ""],
-"projectile_damage": [2, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Sentry3" unique_id=283805010 instance=ExtResource("13_xxkol")]
-visibility_layer = 2
-tag_name = "player_detector"
-value = Rect2(-192, -192, 384, 384)
-
-[node name="ShootX" parent="Spawns/Sentry3" unique_id=1570929202 instance=ExtResource("15_flikr")]
-visibility_layer = 2
-position = Vector2(64, 0)
-tag_name = "shoot_x"
-lock_y = true
-
-[node name="ShootY" parent="Spawns/Sentry3" unique_id=1932651329 instance=ExtResource("15_flikr")]
-modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
-position = Vector2(0, -40)
-tag_name = "shoot_y"
-lock_x = true
-
-[node name="Sentry4" parent="Spawns" unique_id=1889813992 instance=ExtResource("11_d7k7o")]
-visibility_layer = 2
-position = Vector2(3864, 1968)
-actor_path = "res://src/Actor/Enemy/Sentry.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"cooldown_time": [2.0, 3, ""],
-"debug": [true, 1, ""],
-"diff_3_bullet": [8, 2, ""],
-"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
-"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
-"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
-"diff_3_force": [300.0, 3, ""],
-"diff_3_spread": [0.5235987755982988, 3, ""],
-"difficulty": [0, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Sentry4", 4, ""],
-"projectile_damage": [2, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Sentry4" unique_id=617484620 instance=ExtResource("13_xxkol")]
-visibility_layer = 2
-tag_name = "player_detector"
-value = Rect2(-192, -192, 384, 384)
-
-[node name="ShootX" parent="Spawns/Sentry4" unique_id=1264627153 instance=ExtResource("15_flikr")]
-visibility_layer = 2
-position = Vector2(152, 0)
-tag_name = "shoot_x"
-lock_y = true
-
-[node name="ShootY" parent="Spawns/Sentry4" unique_id=383185159 instance=ExtResource("15_flikr")]
-modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
-position = Vector2(0, -208)
-tag_name = "shoot_y"
-lock_x = true
-
-[node name="Sentry5" parent="Spawns" unique_id=1447220826 instance=ExtResource("11_d7k7o")]
-visibility_layer = 2
-position = Vector2(4040, 1968)
-actor_path = "res://src/Actor/Enemy/Sentry.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"cooldown_time": [2.0, 3, ""],
-"debug": [true, 1, ""],
-"diff_3_bullet": [8, 2, ""],
-"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
-"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
-"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
-"diff_3_force": [300.0, 3, ""],
-"diff_3_spread": [0.5235987755982988, 3, ""],
-"difficulty": [0, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Sentry5", 4, ""],
-"projectile_damage": [2, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Sentry5" unique_id=1554690686 instance=ExtResource("13_xxkol")]
-visibility_layer = 2
-tag_name = "player_detector"
-value = Rect2(-192, -192, 384, 384)
-
-[node name="ShootX" parent="Spawns/Sentry5" unique_id=391169614 instance=ExtResource("15_flikr")]
-visibility_layer = 2
-position = Vector2(-144, 0)
-tag_name = "shoot_x"
-lock_y = true
-
-[node name="ShootY" parent="Spawns/Sentry5" unique_id=1826081317 instance=ExtResource("15_flikr")]
-modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
-position = Vector2(0, -264)
-tag_name = "shoot_y"
-lock_x = true
-
-[node name="Sentry6" parent="Spawns" unique_id=2057680078 instance=ExtResource("11_d7k7o")]
-visibility_layer = 2
-position = Vector2(3608, 1808)
-actor_path = "res://src/Actor/Enemy/Sentry.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"cooldown_time": [0.5, 3, ""],
-"debug": [true, 1, ""],
-"diff_3_bullet": [8, 2, ""],
-"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
-"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
-"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
-"diff_3_force": [300.0, 3, ""],
-"diff_3_spread": [0.5235987755982988, 3, ""],
-"difficulty": [0, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Sentry6", 4, ""],
-"projectile_damage": [2, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Sentry6" unique_id=894561014 instance=ExtResource("13_xxkol")]
-visibility_layer = 2
-tag_name = "player_detector"
-value = Rect2(-192, -192, 384, 384)
-
-[node name="ShootX" parent="Spawns/Sentry6" unique_id=2113340153 instance=ExtResource("15_flikr")]
-visibility_layer = 2
-position = Vector2(120, 0)
-tag_name = "shoot_x"
-lock_y = true
-
-[node name="ShootY" parent="Spawns/Sentry6" unique_id=133574658 instance=ExtResource("15_flikr")]
-modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
-position = Vector2(0, -152)
-tag_name = "shoot_y"
-lock_x = true
-
-[node name="Sentry7" parent="Spawns" unique_id=2136404886 instance=ExtResource("11_d7k7o")]
-visibility_layer = 2
-position = Vector2(3784, 1808)
-actor_path = "res://src/Actor/Enemy/Sentry.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"cooldown_time": [0.3, 3, ""],
-"debug": [true, 1, ""],
-"diff_3_bullet": [8, 2, ""],
-"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
-"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
-"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
-"diff_3_force": [300.0, 3, ""],
-"diff_3_spread": [0.5235987755982988, 3, ""],
-"difficulty": [0, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Sentry7", 4, ""],
-"projectile_damage": [2, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Sentry7" unique_id=1351476850 instance=ExtResource("13_xxkol")]
-visibility_layer = 2
-tag_name = "player_detector"
-value = Rect2(-192, -192, 384, 384)
-
-[node name="ShootX" parent="Spawns/Sentry7" unique_id=2055006716 instance=ExtResource("15_flikr")]
-visibility_layer = 2
-position = Vector2(-96, 0)
-tag_name = "shoot_x"
-lock_y = true
-
-[node name="ShootY" parent="Spawns/Sentry7" unique_id=207608404 instance=ExtResource("15_flikr")]
-modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
-position = Vector2(0, -168)
-tag_name = "shoot_y"
-lock_x = true
-
-[node name="Sentry8" parent="Spawns" unique_id=453749782 instance=ExtResource("11_d7k7o")]
-visibility_layer = 2
-position = Vector2(3608, 1984)
-actor_path = "res://src/Actor/Enemy/Sentry.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"cooldown_time": [5.0, 3, ""],
-"debug": [true, 1, ""],
-"diff_3_bullet": [8, 2, ""],
-"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
-"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
-"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
-"diff_3_force": [300.0, 3, ""],
-"diff_3_spread": [0.5235987755982988, 3, ""],
-"difficulty": [0, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Sentry8", 4, ""],
-"projectile_damage": [2, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Sentry8" unique_id=1095142853 instance=ExtResource("13_xxkol")]
-visibility_layer = 2
-tag_name = "player_detector"
-value = Rect2(-192, -192, 384, 384)
-
-[node name="ShootX" parent="Spawns/Sentry8" unique_id=95666969 instance=ExtResource("15_flikr")]
-visibility_layer = 2
-position = Vector2(144, 0)
-tag_name = "shoot_x"
-lock_y = true
-
-[node name="ShootY" parent="Spawns/Sentry8" unique_id=478666124 instance=ExtResource("15_flikr")]
-modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
-position = Vector2(0, -56)
-tag_name = "shoot_y"
-lock_x = true
-
-[node name="Sentry9" parent="Spawns" unique_id=7761835 instance=ExtResource("11_d7k7o")]
-visibility_layer = 2
-position = Vector2(3264, 2048)
-actor_path = "res://src/Actor/Enemy/Sentry.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"cooldown_time": [5.0, 3, ""],
-"debug": [true, 1, ""],
-"diff_3_bullet": [8, 2, ""],
-"diff_3_bullet_max_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_peak_to_swing_time": [0.5, 3, ""],
-"diff_3_bullet_swing_gravity_mult": [0.15, 3, ""],
-"diff_3_force": [300.0, 3, ""],
-"diff_3_spread": [0.4, 3, ""],
-"difficulty": [3, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Sentry8", 4, ""],
-"projectile_damage": [2, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Sentry9" unique_id=1178538391 instance=ExtResource("13_xxkol")]
-visibility_layer = 2
-tag_name = "player_detector"
-value = Rect2(-192, -192, 384, 384)
-
-[node name="ShootX" parent="Spawns/Sentry9" unique_id=978311971 instance=ExtResource("15_flikr")]
-visible = false
-visibility_layer = 2
-position = Vector2(64, 0)
-tag_name = "shoot_x"
-lock_y = true
-
-[node name="ShootY" parent="Spawns/Sentry9" unique_id=610398807 instance=ExtResource("15_flikr")]
-visible = false
-modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
-position = Vector2(0, -64)
-tag_name = "shoot_y"
-lock_x = true
-
-[node name="Sentry10" parent="Spawns" unique_id=111549484 instance=ExtResource("11_d7k7o")]
-visibility_layer = 2
-position = Vector2(3048, 2048)
-actor_path = "res://src/Actor/Enemy/Sentry.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"cooldown_time": [5.0, 3, ""],
-"debug": [true, 1, ""],
-"diff_3_bullet": [8, 2, ""],
-"diff_3_bullet_max_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_peak_to_swing_time": [0.5, 3, ""],
-"diff_3_bullet_swing_gravity_mult": [0.15, 3, ""],
-"diff_3_force": [300.0, 3, ""],
-"diff_3_spread": [0.4, 3, ""],
-"difficulty": [3, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Sentry8", 4, ""],
-"projectile_damage": [2, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Sentry10" unique_id=1115513603 instance=ExtResource("13_xxkol")]
-visibility_layer = 2
-tag_name = "player_detector"
-value = Rect2(-192, -192, 384, 384)
-
-[node name="ShootX" parent="Spawns/Sentry10" unique_id=823059121 instance=ExtResource("15_flikr")]
-visible = false
-visibility_layer = 2
-position = Vector2(64, 0)
-tag_name = "shoot_x"
-lock_y = true
-
-[node name="ShootY" parent="Spawns/Sentry10" unique_id=1802822121 instance=ExtResource("15_flikr")]
-visible = false
-modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
-position = Vector2(0, -64)
-tag_name = "shoot_y"
-lock_x = true
-
-[node name="Sentry11" parent="Spawns" unique_id=994812523 instance=ExtResource("11_d7k7o")]
-visibility_layer = 2
-position = Vector2(3048, 2368)
-actor_path = "res://src/Actor/Enemy/Sentry.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"cooldown_time": [5.0, 3, ""],
-"debug": [true, 1, ""],
-"diff_3_bullet": [8, 2, ""],
-"diff_3_bullet_max_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_peak_to_swing_time": [0.5, 3, ""],
-"diff_3_bullet_swing_gravity_mult": [0.15, 3, ""],
-"diff_3_force": [300.0, 3, ""],
-"diff_3_spread": [0.4, 3, ""],
-"difficulty": [3, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Sentry8", 4, ""],
-"projectile_damage": [2, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Sentry11" unique_id=468184810 instance=ExtResource("13_xxkol")]
-visibility_layer = 2
-tag_name = "player_detector"
-value = Rect2(-192, -192, 384, 384)
-
-[node name="ShootX" parent="Spawns/Sentry11" unique_id=1343050635 instance=ExtResource("15_flikr")]
-visible = false
-visibility_layer = 2
-position = Vector2(64, 0)
-tag_name = "shoot_x"
-lock_y = true
-
-[node name="ShootY" parent="Spawns/Sentry11" unique_id=1088477312 instance=ExtResource("15_flikr")]
-visible = false
-modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
-position = Vector2(0, -64)
-tag_name = "shoot_y"
-lock_x = true
-
-[node name="Sentry12" parent="Spawns" unique_id=1885966590 instance=ExtResource("11_d7k7o")]
-visibility_layer = 2
-position = Vector2(3256, 2368)
-actor_path = "res://src/Actor/Enemy/Sentry.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"cooldown_time": [5.0, 3, ""],
-"debug": [true, 1, ""],
-"diff_3_bullet": [8, 2, ""],
-"diff_3_bullet_max_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_peak_to_swing_time": [0.5, 3, ""],
-"diff_3_bullet_swing_gravity_mult": [0.15, 3, ""],
-"diff_3_force": [300.0, 3, ""],
-"diff_3_spread": [0.4, 3, ""],
-"difficulty": [3, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Sentry8", 4, ""],
-"projectile_damage": [2, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Sentry12" unique_id=334375673 instance=ExtResource("13_xxkol")]
-visibility_layer = 2
-tag_name = "player_detector"
-value = Rect2(-192, -192, 384, 384)
-
-[node name="ShootX" parent="Spawns/Sentry12" unique_id=984527057 instance=ExtResource("15_flikr")]
-visible = false
-visibility_layer = 2
-position = Vector2(64, 0)
-tag_name = "shoot_x"
-lock_y = true
-
-[node name="ShootY" parent="Spawns/Sentry12" unique_id=1330994332 instance=ExtResource("15_flikr")]
-visible = false
-modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
-position = Vector2(0, -64)
-tag_name = "shoot_y"
-lock_x = true
-
-[node name="Sentry13" parent="Spawns" unique_id=893155255 instance=ExtResource("11_d7k7o")]
-visibility_layer = 2
-position = Vector2(3784, 1984)
-actor_path = "res://src/Actor/Enemy/Sentry.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"cooldown_time": [3.0, 3, ""],
-"debug": [true, 1, ""],
-"diff_3_bullet": [8, 2, ""],
-"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
-"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
-"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
-"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
-"diff_3_force": [300.0, 3, ""],
-"diff_3_spread": [0.5235987755982988, 3, ""],
-"difficulty": [0, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Sentry9", 4, ""],
-"projectile_damage": [2, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Sentry13" unique_id=909908104 instance=ExtResource("13_xxkol")]
-visibility_layer = 2
-tag_name = "player_detector"
-value = Rect2(-192, -192, 384, 384)
-
-[node name="ShootX" parent="Spawns/Sentry13" unique_id=1730444829 instance=ExtResource("15_flikr")]
-visibility_layer = 2
-position = Vector2(-120, 0)
-tag_name = "shoot_x"
-lock_y = true
-
-[node name="ShootY" parent="Spawns/Sentry13" unique_id=1310366408 instance=ExtResource("15_flikr")]
-modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
-position = Vector2(0, -88)
-tag_name = "shoot_y"
-lock_x = true
-
-[node name="Water1" parent="Spawns" unique_id=1632964686 instance=ExtResource("13_l0h4m")]
+[node name="Sentry" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-offset_left = 2928.0
-offset_top = 1616.0
-offset_right = 3168.0
-offset_bottom = 2368.0
-trigger_path = "res://src/Trigger/Water.tscn"
-properties = {
-"color": [Color(0, 0, 0.701961, 1), 20, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Water1", 4, ""],
-"velocity_dropoff": [0.75, 3, ""]
-}
-size_is_default = false
-
-[node name="BreakBlock" parent="Spawns" unique_id=1449282698 instance=ExtResource("17_1byma")]
-visibility_layer = 2
-position = Vector2(3728, 1968)
-prop_path = "res://src/Prop/BreakBlock.tscn"
-properties = {
-"crush_enemies": [true, 1, ""],
-"crush_players": [false, 1, ""],
-"do_bubble": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"BreakBlock", 4, ""]
-}
-
-[node name="BreakBlock1" parent="Spawns" unique_id=645576579 instance=ExtResource("17_1byma")]
-visibility_layer = 2
-position = Vector2(3728, 1952)
-prop_path = "res://src/Prop/BreakBlock.tscn"
-properties = {
-"crush_enemies": [true, 1, ""],
-"crush_players": [false, 1, ""],
-"do_bubble": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"BreakBlock1", 4, ""]
-}
-
-[node name="BreakBlock2" parent="Spawns" unique_id=306993375 instance=ExtResource("17_1byma")]
-visibility_layer = 2
-position = Vector2(3744, 1968)
-prop_path = "res://src/Prop/BreakBlock.tscn"
-properties = {
-"crush_enemies": [true, 1, ""],
-"crush_players": [false, 1, ""],
-"do_bubble": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"BreakBlock2", 4, ""]
-}
-
-[node name="BreakBlock3" parent="Spawns" unique_id=2021743814 instance=ExtResource("17_1byma")]
-visibility_layer = 2
-position = Vector2(3744, 1952)
-prop_path = "res://src/Prop/BreakBlock.tscn"
-properties = {
-"crush_enemies": [true, 1, ""],
-"crush_players": [false, 1, ""],
-"do_bubble": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"BreakBlock3", 4, ""]
-}
-
-[node name="BreakBlock4" parent="Spawns" unique_id=147962035 instance=ExtResource("17_1byma")]
-visibility_layer = 2
-position = Vector2(3712, 1952)
-prop_path = "res://src/Prop/BreakBlock.tscn"
-properties = {
-"crush_enemies": [true, 1, ""],
-"crush_players": [false, 1, ""],
-"do_bubble": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"BreakBlock4", 4, ""]
-}
-
-[node name="BreakBlock5" parent="Spawns" unique_id=628004807 instance=ExtResource("17_1byma")]
-visibility_layer = 2
-position = Vector2(3712, 1968)
-prop_path = "res://src/Prop/BreakBlock.tscn"
-properties = {
-"crush_enemies": [true, 1, ""],
-"crush_players": [false, 1, ""],
-"do_bubble": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"BreakBlock5", 4, ""]
-}
-
-[node name="BreakBlock6" parent="Spawns" unique_id=1084525101 instance=ExtResource("17_1byma")]
-visibility_layer = 2
-position = Vector2(3728, 1936)
-prop_path = "res://src/Prop/BreakBlock.tscn"
-properties = {
-"crush_enemies": [true, 1, ""],
-"crush_players": [false, 1, ""],
-"do_bubble": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"BreakBlock6", 4, ""]
-}
-
-[node name="Sentry14" parent="Spawns" unique_id=523141494 instance=ExtResource("11_d7k7o")]
-visibility_layer = 2
-position = Vector2(3864, 2032)
+z_index = 999
+position = Vector2(3864, 1648)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -818,8 +144,11 @@ properties = {
 "diff_3_bullet_max_swing_amp": [64.0, 3, ""],
 "diff_3_bullet_min_swing_amp": [32.0, 3, ""],
 "diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
 "diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
 "diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
 "diff_3_spread": [0.5235987755982988, 3, ""],
 "difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
@@ -830,27 +159,39 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Sentry14" unique_id=2004756440 instance=ExtResource("13_xxkol")]
+[node name="VURect" type="Node2D" parent="Spawns/Sentry" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
 visibility_layer = 2
+script = ExtResource("14_edts7")
 tag_name = "player_detector"
 value = Rect2(-192, -192, 384, 384)
 
-[node name="ShootX" parent="Spawns/Sentry14" unique_id=581943054 instance=ExtResource("15_flikr")]
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 visibility_layer = 2
 position = Vector2(104, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_x"
 lock_y = true
 
-[node name="ShootY" parent="Spawns/Sentry14" unique_id=287182754 instance=ExtResource("15_flikr")]
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry" unique_id=595539309 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, 8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry15" parent="Spawns" unique_id=2057514910 instance=ExtResource("11_d7k7o")]
+[node name="Sentry1" type="Area2D" parent="Spawns" unique_id=310849572 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(4040, 2032)
+z_index = 999
+position = Vector2(4040, 1648)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -860,8 +201,11 @@ properties = {
 "diff_3_bullet_max_swing_amp": [64.0, 3, ""],
 "diff_3_bullet_min_swing_amp": [32.0, 3, ""],
 "diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
 "diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
 "diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
 "diff_3_spread": [0.5235987755982988, 3, ""],
 "difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
@@ -872,27 +216,39 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Sentry15" unique_id=1047247898 instance=ExtResource("13_xxkol")]
+[node name="VURect" type="Node2D" parent="Spawns/Sentry1" unique_id=1915983744 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
 visibility_layer = 2
+script = ExtResource("14_edts7")
 tag_name = "player_detector"
 value = Rect2(-192, -192, 384, 384)
 
-[node name="ShootX" parent="Spawns/Sentry15" unique_id=1901632729 instance=ExtResource("15_flikr")]
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry1" unique_id=1670896715 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 visibility_layer = 2
 position = Vector2(-96, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_x"
 lock_y = true
 
-[node name="ShootY" parent="Spawns/Sentry15" unique_id=226491610 instance=ExtResource("15_flikr")]
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry1" unique_id=2143875493 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, 24)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry16" parent="Spawns" unique_id=658928389 instance=ExtResource("11_d7k7o")]
+[node name="Sentry2" type="Area2D" parent="Spawns" unique_id=669530245 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(3944, 2176)
+z_index = 999
+position = Vector2(3944, 1792)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -902,8 +258,11 @@ properties = {
 "diff_3_bullet_max_swing_amp": [64.0, 3, ""],
 "diff_3_bullet_min_swing_amp": [32.0, 3, ""],
 "diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
 "diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
 "diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
 "diff_3_spread": [0.5235987755982988, 3, ""],
 "difficulty": [2, 2, ""],
 "do_bubbles": [true, 1, ""],
@@ -914,28 +273,40 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Sentry16" unique_id=72446787 instance=ExtResource("13_xxkol")]
+[node name="VURect" type="Node2D" parent="Spawns/Sentry2" unique_id=669990235 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
 visibility_layer = 2
+script = ExtResource("14_edts7")
 tag_name = "player_detector"
 value = Rect2(-192, -192, 384, 384)
 
-[node name="ShootX" parent="Spawns/Sentry16" unique_id=793148764 instance=ExtResource("15_flikr")]
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry2" unique_id=772411448 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 visible = false
 visibility_layer = 2
 position = Vector2(-56, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_x"
 lock_y = true
 
-[node name="ShootY" parent="Spawns/Sentry16" unique_id=569982762 instance=ExtResource("15_flikr")]
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry2" unique_id=1002226647 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, -64)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry17" parent="Spawns" unique_id=1842259221 instance=ExtResource("11_d7k7o")]
+[node name="Sentry3" type="Area2D" parent="Spawns" unique_id=188903635 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(3960, 2176)
+z_index = 999
+position = Vector2(3960, 1792)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -945,8 +316,11 @@ properties = {
 "diff_3_bullet_max_swing_amp": [64.0, 3, ""],
 "diff_3_bullet_min_swing_amp": [32.0, 3, ""],
 "diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
 "diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
 "diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
 "diff_3_spread": [0.5235987755982988, 3, ""],
 "difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
@@ -957,27 +331,39 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Sentry17" unique_id=1722973829 instance=ExtResource("13_xxkol")]
+[node name="VURect" type="Node2D" parent="Spawns/Sentry3" unique_id=283805010 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
 visibility_layer = 2
+script = ExtResource("14_edts7")
 tag_name = "player_detector"
 value = Rect2(-192, -192, 384, 384)
 
-[node name="ShootX" parent="Spawns/Sentry17" unique_id=469774146 instance=ExtResource("15_flikr")]
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry3" unique_id=1570929202 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 visibility_layer = 2
 position = Vector2(64, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_x"
 lock_y = true
 
-[node name="ShootY" parent="Spawns/Sentry17" unique_id=1075923927 instance=ExtResource("15_flikr")]
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry3" unique_id=1932651329 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, -40)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry18" parent="Spawns" unique_id=1976868817 instance=ExtResource("11_d7k7o")]
+[node name="Sentry4" type="Area2D" parent="Spawns" unique_id=1889813992 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(3864, 2352)
+z_index = 999
+position = Vector2(3864, 1968)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -987,8 +373,11 @@ properties = {
 "diff_3_bullet_max_swing_amp": [64.0, 3, ""],
 "diff_3_bullet_min_swing_amp": [32.0, 3, ""],
 "diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
 "diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
 "diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
 "diff_3_spread": [0.5235987755982988, 3, ""],
 "difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
@@ -999,27 +388,39 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Sentry18" unique_id=2107629010 instance=ExtResource("13_xxkol")]
+[node name="VURect" type="Node2D" parent="Spawns/Sentry4" unique_id=617484620 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
 visibility_layer = 2
+script = ExtResource("14_edts7")
 tag_name = "player_detector"
 value = Rect2(-192, -192, 384, 384)
 
-[node name="ShootX" parent="Spawns/Sentry18" unique_id=954654400 instance=ExtResource("15_flikr")]
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry4" unique_id=1264627153 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 visibility_layer = 2
 position = Vector2(152, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_x"
 lock_y = true
 
-[node name="ShootY" parent="Spawns/Sentry18" unique_id=576232103 instance=ExtResource("15_flikr")]
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry4" unique_id=383185159 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, -208)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry19" parent="Spawns" unique_id=1691762299 instance=ExtResource("11_d7k7o")]
+[node name="Sentry5" type="Area2D" parent="Spawns" unique_id=1447220826 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(4040, 2352)
+z_index = 999
+position = Vector2(4040, 1968)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1029,8 +430,11 @@ properties = {
 "diff_3_bullet_max_swing_amp": [64.0, 3, ""],
 "diff_3_bullet_min_swing_amp": [32.0, 3, ""],
 "diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
 "diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
 "diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
 "diff_3_spread": [0.5235987755982988, 3, ""],
 "difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
@@ -1041,27 +445,39 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Sentry19" unique_id=1321478604 instance=ExtResource("13_xxkol")]
+[node name="VURect" type="Node2D" parent="Spawns/Sentry5" unique_id=1554690686 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
 visibility_layer = 2
+script = ExtResource("14_edts7")
 tag_name = "player_detector"
 value = Rect2(-192, -192, 384, 384)
 
-[node name="ShootX" parent="Spawns/Sentry19" unique_id=1817369360 instance=ExtResource("15_flikr")]
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry5" unique_id=391169614 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 visibility_layer = 2
 position = Vector2(-144, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_x"
 lock_y = true
 
-[node name="ShootY" parent="Spawns/Sentry19" unique_id=690980751 instance=ExtResource("15_flikr")]
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry5" unique_id=1826081317 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, -264)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry20" parent="Spawns" unique_id=1568617292 instance=ExtResource("11_d7k7o")]
+[node name="Sentry6" type="Area2D" parent="Spawns" unique_id=2057680078 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(3608, 2192)
+z_index = 999
+position = Vector2(3608, 1808)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1071,8 +487,11 @@ properties = {
 "diff_3_bullet_max_swing_amp": [64.0, 3, ""],
 "diff_3_bullet_min_swing_amp": [32.0, 3, ""],
 "diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
 "diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
 "diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
 "diff_3_spread": [0.5235987755982988, 3, ""],
 "difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
@@ -1083,27 +502,39 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Sentry20" unique_id=1740398167 instance=ExtResource("13_xxkol")]
+[node name="VURect" type="Node2D" parent="Spawns/Sentry6" unique_id=894561014 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
 visibility_layer = 2
+script = ExtResource("14_edts7")
 tag_name = "player_detector"
 value = Rect2(-192, -192, 384, 384)
 
-[node name="ShootX" parent="Spawns/Sentry20" unique_id=1714304946 instance=ExtResource("15_flikr")]
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry6" unique_id=2113340153 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 visibility_layer = 2
 position = Vector2(120, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_x"
 lock_y = true
 
-[node name="ShootY" parent="Spawns/Sentry20" unique_id=963223132 instance=ExtResource("15_flikr")]
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry6" unique_id=133574658 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, -152)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry21" parent="Spawns" unique_id=831838064 instance=ExtResource("11_d7k7o")]
+[node name="Sentry7" type="Area2D" parent="Spawns" unique_id=2136404886 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(3784, 2192)
+z_index = 999
+position = Vector2(3784, 1808)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1113,8 +544,11 @@ properties = {
 "diff_3_bullet_max_swing_amp": [64.0, 3, ""],
 "diff_3_bullet_min_swing_amp": [32.0, 3, ""],
 "diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
 "diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
 "diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
 "diff_3_spread": [0.5235987755982988, 3, ""],
 "difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
@@ -1125,27 +559,39 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Sentry21" unique_id=1992600044 instance=ExtResource("13_xxkol")]
+[node name="VURect" type="Node2D" parent="Spawns/Sentry7" unique_id=1351476850 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
 visibility_layer = 2
+script = ExtResource("14_edts7")
 tag_name = "player_detector"
 value = Rect2(-192, -192, 384, 384)
 
-[node name="ShootX" parent="Spawns/Sentry21" unique_id=1652406637 instance=ExtResource("15_flikr")]
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry7" unique_id=2055006716 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 visibility_layer = 2
 position = Vector2(-96, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_x"
 lock_y = true
 
-[node name="ShootY" parent="Spawns/Sentry21" unique_id=831354216 instance=ExtResource("15_flikr")]
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry7" unique_id=207608404 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, -168)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry22" parent="Spawns" unique_id=10878043 instance=ExtResource("11_d7k7o")]
+[node name="Sentry8" type="Area2D" parent="Spawns" unique_id=453749782 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(3608, 2368)
+z_index = 999
+position = Vector2(3608, 1984)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1155,8 +601,11 @@ properties = {
 "diff_3_bullet_max_swing_amp": [64.0, 3, ""],
 "diff_3_bullet_min_swing_amp": [32.0, 3, ""],
 "diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
 "diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
 "diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
 "diff_3_spread": [0.5235987755982988, 3, ""],
 "difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
@@ -1167,27 +616,275 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Sentry22" unique_id=323495827 instance=ExtResource("13_xxkol")]
+[node name="VURect" type="Node2D" parent="Spawns/Sentry8" unique_id=1095142853 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
 visibility_layer = 2
+script = ExtResource("14_edts7")
 tag_name = "player_detector"
 value = Rect2(-192, -192, 384, 384)
 
-[node name="ShootX" parent="Spawns/Sentry22" unique_id=1998186146 instance=ExtResource("15_flikr")]
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry8" unique_id=95666969 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 visibility_layer = 2
 position = Vector2(144, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_x"
 lock_y = true
 
-[node name="ShootY" parent="Spawns/Sentry22" unique_id=1197126626 instance=ExtResource("15_flikr")]
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry8" unique_id=478666124 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, -56)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry23" parent="Spawns" unique_id=283387148 instance=ExtResource("11_d7k7o")]
+[node name="Sentry9" type="Area2D" parent="Spawns" unique_id=7761835 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(3784, 2368)
+z_index = 999
+position = Vector2(3264, 2048)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
+actor_path = "res://src/Actor/Enemy/Sentry.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"cooldown_time": [5.0, 3, ""],
+"debug": [true, 1, ""],
+"diff_3_bullet": [4, 2, ""],
+"diff_3_bullet_max_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_peak_to_swing_time": [0.5, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
+"diff_3_bullet_swing_gravity_mult": [0.15, 3, ""],
+"diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [2, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [1.0, 3, ""],
+"diff_3_spread": [0.2, 3, ""],
+"difficulty": [3, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Sentry8", 4, ""],
+"projectile_damage": [2, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VURect" type="Node2D" parent="Spawns/Sentry9" unique_id=1178538391 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+visibility_layer = 2
+script = ExtResource("14_edts7")
+tag_name = "player_detector"
+value = Rect2(-192, -192, 384, 384)
+
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry9" unique_id=978311971 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visible = false
+visibility_layer = 2
+position = Vector2(64, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_x"
+lock_y = true
+
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry9" unique_id=610398807 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visible = false
+modulate = Color(0, 1.8247963, 1.8247963, 1)
+visibility_layer = 2
+position = Vector2(0, -64)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_y"
+lock_x = true
+
+[node name="Sentry10" type="Area2D" parent="Spawns" unique_id=111549484 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3048, 2048)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
+actor_path = "res://src/Actor/Enemy/Sentry.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"cooldown_time": [0.3, 3, ""],
+"debug": [true, 1, ""],
+"diff_3_bullet": [12, 2, ""],
+"diff_3_bullet_max_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_peak_to_swing_time": [0.5, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
+"diff_3_bullet_swing_gravity_mult": [0.15, 3, ""],
+"diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [2, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [1.0, 3, ""],
+"diff_3_spread": [0.1, 3, ""],
+"difficulty": [3, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Sentry8", 4, ""],
+"projectile_damage": [2, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VURect" type="Node2D" parent="Spawns/Sentry10" unique_id=1115513603 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+visibility_layer = 2
+script = ExtResource("14_edts7")
+tag_name = "player_detector"
+value = Rect2(-192, -192, 384, 384)
+
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry10" unique_id=823059121 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visible = false
+visibility_layer = 2
+position = Vector2(64, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_x"
+lock_y = true
+
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry10" unique_id=1802822121 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visible = false
+modulate = Color(0, 1.8247963, 1.8247963, 1)
+visibility_layer = 2
+position = Vector2(0, -64)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_y"
+lock_x = true
+
+[node name="Sentry11" type="Area2D" parent="Spawns" unique_id=994812523 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3048, 2368)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
+actor_path = "res://src/Actor/Enemy/Sentry.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"cooldown_time": [0.3, 3, ""],
+"debug": [true, 1, ""],
+"diff_3_bullet": [8, 2, ""],
+"diff_3_bullet_max_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_peak_to_swing_time": [0.5, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
+"diff_3_bullet_swing_gravity_mult": [0.15, 3, ""],
+"diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
+"diff_3_spread": [0.4, 3, ""],
+"difficulty": [3, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Sentry8", 4, ""],
+"projectile_damage": [2, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VURect" type="Node2D" parent="Spawns/Sentry11" unique_id=468184810 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+visibility_layer = 2
+script = ExtResource("14_edts7")
+tag_name = "player_detector"
+value = Rect2(-192, -192, 384, 384)
+
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry11" unique_id=1343050635 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visible = false
+visibility_layer = 2
+position = Vector2(64, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_x"
+lock_y = true
+
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry11" unique_id=1088477312 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visible = false
+modulate = Color(0, 1.8247963, 1.8247963, 1)
+visibility_layer = 2
+position = Vector2(0, -64)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_y"
+lock_x = true
+
+[node name="Sentry12" type="Area2D" parent="Spawns" unique_id=1885966590 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3256, 2368)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
+actor_path = "res://src/Actor/Enemy/Sentry.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"cooldown_time": [5.0, 3, ""],
+"debug": [true, 1, ""],
+"diff_3_bullet": [8, 2, ""],
+"diff_3_bullet_max_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_peak_to_swing_time": [0.5, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
+"diff_3_bullet_swing_gravity_mult": [0.15, 3, ""],
+"diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [1, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
+"diff_3_spread": [0.2, 3, ""],
+"difficulty": [3, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Sentry8", 4, ""],
+"projectile_damage": [2, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VURect" type="Node2D" parent="Spawns/Sentry12" unique_id=334375673 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+visibility_layer = 2
+script = ExtResource("14_edts7")
+tag_name = "player_detector"
+value = Rect2(-192, -192, 384, 384)
+
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry12" unique_id=984527057 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visible = false
+visibility_layer = 2
+position = Vector2(64, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_x"
+lock_y = true
+
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry12" unique_id=1330994332 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visible = false
+modulate = Color(0, 1.8247963, 1.8247963, 1)
+visibility_layer = 2
+position = Vector2(0, -64)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_y"
+lock_x = true
+
+[node name="Sentry13" type="Area2D" parent="Spawns" unique_id=893155255 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3784, 1984)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1197,8 +894,11 @@ properties = {
 "diff_3_bullet_max_swing_amp": [64.0, 3, ""],
 "diff_3_bullet_min_swing_amp": [32.0, 3, ""],
 "diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
 "diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
 "diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
 "diff_3_spread": [0.5235987755982988, 3, ""],
 "difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
@@ -1209,27 +909,59 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Sentry23" unique_id=1643228368 instance=ExtResource("13_xxkol")]
+[node name="VURect" type="Node2D" parent="Spawns/Sentry13" unique_id=909908104 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
 visibility_layer = 2
+script = ExtResource("14_edts7")
 tag_name = "player_detector"
 value = Rect2(-192, -192, 384, 384)
 
-[node name="ShootX" parent="Spawns/Sentry23" unique_id=999960253 instance=ExtResource("15_flikr")]
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry13" unique_id=1730444829 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 visibility_layer = 2
 position = Vector2(-120, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_x"
 lock_y = true
 
-[node name="ShootY" parent="Spawns/Sentry23" unique_id=292989202 instance=ExtResource("15_flikr")]
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry13" unique_id=1310366408 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, -88)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="BreakBlock7" parent="Spawns" unique_id=1049605092 instance=ExtResource("17_1byma")]
+[node name="Water1" type="MarginContainer" parent="Spawns" unique_id=1632964686 groups=["TriggerSpawns"] instance=ExtResource("13_l0h4m")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(3728, 2352)
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
+offset_left = 2776.0
+offset_top = 1664.0
+offset_right = 3016.0
+offset_bottom = 2416.0
+mouse_filter = 2
+script = ExtResource("8_d7k7o")
+trigger_path = "res://src/Trigger/Water.tscn"
+properties = {
+"color": [Color(0, 0, 0.701961, 1), 20, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Water1", 4, ""],
+"velocity_dropoff": [0.75, 3, ""]
+}
+size_is_default = false
+
+[node name="BreakBlock" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("17_1byma")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3728, 1968)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_4pk0b")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -1239,9 +971,14 @@ properties = {
 "id": [&"BreakBlock", 4, ""]
 }
 
-[node name="BreakBlock8" parent="Spawns" unique_id=595891808 instance=ExtResource("17_1byma")]
+[node name="BreakBlock1" type="Area2D" parent="Spawns" unique_id=645576579 groups=["Entities", "PropSpawns"] instance=ExtResource("17_1byma")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(3728, 2336)
+z_index = 999
+position = Vector2(3728, 1952)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_4pk0b")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -1251,9 +988,14 @@ properties = {
 "id": [&"BreakBlock1", 4, ""]
 }
 
-[node name="BreakBlock9" parent="Spawns" unique_id=1922209842 instance=ExtResource("17_1byma")]
+[node name="BreakBlock2" type="Area2D" parent="Spawns" unique_id=306993375 groups=["Entities", "PropSpawns"] instance=ExtResource("17_1byma")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(3744, 2352)
+z_index = 999
+position = Vector2(3744, 1968)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_4pk0b")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -1263,9 +1005,14 @@ properties = {
 "id": [&"BreakBlock2", 4, ""]
 }
 
-[node name="BreakBlock10" parent="Spawns" unique_id=2089455172 instance=ExtResource("17_1byma")]
+[node name="BreakBlock3" type="Area2D" parent="Spawns" unique_id=2021743814 groups=["Entities", "PropSpawns"] instance=ExtResource("17_1byma")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(3744, 2336)
+z_index = 999
+position = Vector2(3744, 1952)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_4pk0b")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -1275,9 +1022,14 @@ properties = {
 "id": [&"BreakBlock3", 4, ""]
 }
 
-[node name="BreakBlock11" parent="Spawns" unique_id=1476967602 instance=ExtResource("17_1byma")]
+[node name="BreakBlock4" type="Area2D" parent="Spawns" unique_id=147962035 groups=["Entities", "PropSpawns"] instance=ExtResource("17_1byma")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(3712, 2336)
+z_index = 999
+position = Vector2(3712, 1952)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_4pk0b")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -1287,9 +1039,14 @@ properties = {
 "id": [&"BreakBlock4", 4, ""]
 }
 
-[node name="BreakBlock12" parent="Spawns" unique_id=136098492 instance=ExtResource("17_1byma")]
+[node name="BreakBlock5" type="Area2D" parent="Spawns" unique_id=628004807 groups=["Entities", "PropSpawns"] instance=ExtResource("17_1byma")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(3712, 2352)
+z_index = 999
+position = Vector2(3712, 1968)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_4pk0b")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -1299,9 +1056,14 @@ properties = {
 "id": [&"BreakBlock5", 4, ""]
 }
 
-[node name="BreakBlock13" parent="Spawns" unique_id=1266211343 instance=ExtResource("17_1byma")]
+[node name="BreakBlock6" type="Area2D" parent="Spawns" unique_id=1084525101 groups=["Entities", "PropSpawns"] instance=ExtResource("17_1byma")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(3728, 2320)
+z_index = 999
+position = Vector2(3728, 1936)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_4pk0b")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -1311,9 +1073,704 @@ properties = {
 "id": [&"BreakBlock6", 4, ""]
 }
 
-[node name="Billy" parent="Spawns" unique_id=1988799210 instance=ExtResource("11_d7k7o")]
+[node name="Sentry14" type="Area2D" parent="Spawns" unique_id=523141494 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
+position = Vector2(3864, 2032)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
+actor_path = "res://src/Actor/Enemy/Sentry.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"cooldown_time": [2.0, 3, ""],
+"debug": [true, 1, ""],
+"diff_3_bullet": [8, 2, ""],
+"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
+"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
+"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
+"diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
+"diff_3_spread": [0.5235987755982988, 3, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Sentry", 4, ""],
+"projectile_damage": [2, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VURect" type="Node2D" parent="Spawns/Sentry14" unique_id=2004756440 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+visibility_layer = 2
+script = ExtResource("14_edts7")
+tag_name = "player_detector"
+value = Rect2(-192, -192, 384, 384)
+
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry14" unique_id=581943054 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visibility_layer = 2
+position = Vector2(104, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_x"
+lock_y = true
+
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry14" unique_id=287182754 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+modulate = Color(0, 1.8247963, 1.8247963, 1)
+visibility_layer = 2
+position = Vector2(0, 8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_y"
+lock_x = true
+
+[node name="Sentry15" type="Area2D" parent="Spawns" unique_id=2057514910 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(4040, 2032)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
+actor_path = "res://src/Actor/Enemy/Sentry.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"cooldown_time": [2.0, 3, ""],
+"debug": [true, 1, ""],
+"diff_3_bullet": [8, 2, ""],
+"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
+"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
+"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
+"diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
+"diff_3_spread": [0.5235987755982988, 3, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Sentry1", 4, ""],
+"projectile_damage": [2, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VURect" type="Node2D" parent="Spawns/Sentry15" unique_id=1047247898 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+visibility_layer = 2
+script = ExtResource("14_edts7")
+tag_name = "player_detector"
+value = Rect2(-192, -192, 384, 384)
+
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry15" unique_id=1901632729 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visibility_layer = 2
+position = Vector2(-96, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_x"
+lock_y = true
+
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry15" unique_id=226491610 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+modulate = Color(0, 1.8247963, 1.8247963, 1)
+visibility_layer = 2
+position = Vector2(0, 24)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_y"
+lock_x = true
+
+[node name="Sentry16" type="Area2D" parent="Spawns" unique_id=658928389 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3944, 2176)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
+actor_path = "res://src/Actor/Enemy/Sentry.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"cooldown_time": [2.0, 3, ""],
+"debug": [true, 1, ""],
+"diff_3_bullet": [8, 2, ""],
+"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
+"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
+"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
+"diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
+"diff_3_spread": [0.5235987755982988, 3, ""],
+"difficulty": [2, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Sentry2", 4, ""],
+"projectile_damage": [2, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VURect" type="Node2D" parent="Spawns/Sentry16" unique_id=72446787 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+visibility_layer = 2
+script = ExtResource("14_edts7")
+tag_name = "player_detector"
+value = Rect2(-192, -192, 384, 384)
+
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry16" unique_id=793148764 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visible = false
+visibility_layer = 2
+position = Vector2(-56, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_x"
+lock_y = true
+
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry16" unique_id=569982762 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+modulate = Color(0, 1.8247963, 1.8247963, 1)
+visibility_layer = 2
+position = Vector2(0, -64)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_y"
+lock_x = true
+
+[node name="Sentry17" type="Area2D" parent="Spawns" unique_id=1842259221 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3960, 2176)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
+actor_path = "res://src/Actor/Enemy/Sentry.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"cooldown_time": [2.0, 3, ""],
+"debug": [true, 1, ""],
+"diff_3_bullet": [8, 2, ""],
+"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
+"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
+"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
+"diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
+"diff_3_spread": [0.5235987755982988, 3, ""],
+"difficulty": [1, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Sentry3", 4, ""],
+"projectile_damage": [2, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VURect" type="Node2D" parent="Spawns/Sentry17" unique_id=1722973829 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+visibility_layer = 2
+script = ExtResource("14_edts7")
+tag_name = "player_detector"
+value = Rect2(-192, -192, 384, 384)
+
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry17" unique_id=469774146 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visibility_layer = 2
+position = Vector2(64, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_x"
+lock_y = true
+
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry17" unique_id=1075923927 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+modulate = Color(0, 1.8247963, 1.8247963, 1)
+visibility_layer = 2
+position = Vector2(0, -40)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_y"
+lock_x = true
+
+[node name="Sentry18" type="Area2D" parent="Spawns" unique_id=1976868817 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3864, 2352)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
+actor_path = "res://src/Actor/Enemy/Sentry.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"cooldown_time": [2.0, 3, ""],
+"debug": [true, 1, ""],
+"diff_3_bullet": [8, 2, ""],
+"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
+"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
+"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
+"diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
+"diff_3_spread": [0.5235987755982988, 3, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Sentry4", 4, ""],
+"projectile_damage": [2, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VURect" type="Node2D" parent="Spawns/Sentry18" unique_id=2107629010 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+visibility_layer = 2
+script = ExtResource("14_edts7")
+tag_name = "player_detector"
+value = Rect2(-192, -192, 384, 384)
+
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry18" unique_id=954654400 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visibility_layer = 2
+position = Vector2(152, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_x"
+lock_y = true
+
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry18" unique_id=576232103 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+modulate = Color(0, 1.8247963, 1.8247963, 1)
+visibility_layer = 2
+position = Vector2(0, -208)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_y"
+lock_x = true
+
+[node name="Sentry19" type="Area2D" parent="Spawns" unique_id=1691762299 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(4040, 2352)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
+actor_path = "res://src/Actor/Enemy/Sentry.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"cooldown_time": [2.0, 3, ""],
+"debug": [true, 1, ""],
+"diff_3_bullet": [8, 2, ""],
+"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
+"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
+"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
+"diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
+"diff_3_spread": [0.5235987755982988, 3, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Sentry5", 4, ""],
+"projectile_damage": [2, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VURect" type="Node2D" parent="Spawns/Sentry19" unique_id=1321478604 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+visibility_layer = 2
+script = ExtResource("14_edts7")
+tag_name = "player_detector"
+value = Rect2(-192, -192, 384, 384)
+
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry19" unique_id=1817369360 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visibility_layer = 2
+position = Vector2(-144, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_x"
+lock_y = true
+
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry19" unique_id=690980751 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+modulate = Color(0, 1.8247963, 1.8247963, 1)
+visibility_layer = 2
+position = Vector2(0, -264)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_y"
+lock_x = true
+
+[node name="Sentry20" type="Area2D" parent="Spawns" unique_id=1568617292 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3608, 2192)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
+actor_path = "res://src/Actor/Enemy/Sentry.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"cooldown_time": [0.5, 3, ""],
+"debug": [true, 1, ""],
+"diff_3_bullet": [8, 2, ""],
+"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
+"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
+"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
+"diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
+"diff_3_spread": [0.5235987755982988, 3, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Sentry6", 4, ""],
+"projectile_damage": [2, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VURect" type="Node2D" parent="Spawns/Sentry20" unique_id=1740398167 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+visibility_layer = 2
+script = ExtResource("14_edts7")
+tag_name = "player_detector"
+value = Rect2(-192, -192, 384, 384)
+
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry20" unique_id=1714304946 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visibility_layer = 2
+position = Vector2(120, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_x"
+lock_y = true
+
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry20" unique_id=963223132 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+modulate = Color(0, 1.8247963, 1.8247963, 1)
+visibility_layer = 2
+position = Vector2(0, -152)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_y"
+lock_x = true
+
+[node name="Sentry21" type="Area2D" parent="Spawns" unique_id=831838064 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3784, 2192)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
+actor_path = "res://src/Actor/Enemy/Sentry.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"cooldown_time": [0.3, 3, ""],
+"debug": [true, 1, ""],
+"diff_3_bullet": [8, 2, ""],
+"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
+"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
+"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
+"diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
+"diff_3_spread": [0.5235987755982988, 3, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Sentry7", 4, ""],
+"projectile_damage": [2, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VURect" type="Node2D" parent="Spawns/Sentry21" unique_id=1992600044 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+visibility_layer = 2
+script = ExtResource("14_edts7")
+tag_name = "player_detector"
+value = Rect2(-192, -192, 384, 384)
+
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry21" unique_id=1652406637 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visibility_layer = 2
+position = Vector2(-96, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_x"
+lock_y = true
+
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry21" unique_id=831354216 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+modulate = Color(0, 1.8247963, 1.8247963, 1)
+visibility_layer = 2
+position = Vector2(0, -168)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_y"
+lock_x = true
+
+[node name="Sentry22" type="Area2D" parent="Spawns" unique_id=10878043 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3608, 2368)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
+actor_path = "res://src/Actor/Enemy/Sentry.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"cooldown_time": [5.0, 3, ""],
+"debug": [true, 1, ""],
+"diff_3_bullet": [8, 2, ""],
+"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
+"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
+"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
+"diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
+"diff_3_spread": [0.5235987755982988, 3, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Sentry8", 4, ""],
+"projectile_damage": [2, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VURect" type="Node2D" parent="Spawns/Sentry22" unique_id=323495827 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+visibility_layer = 2
+script = ExtResource("14_edts7")
+tag_name = "player_detector"
+value = Rect2(-192, -192, 384, 384)
+
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry22" unique_id=1998186146 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visibility_layer = 2
+position = Vector2(144, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_x"
+lock_y = true
+
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry22" unique_id=1197126626 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+modulate = Color(0, 1.8247963, 1.8247963, 1)
+visibility_layer = 2
+position = Vector2(0, -56)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_y"
+lock_x = true
+
+[node name="Sentry23" type="Area2D" parent="Spawns" unique_id=283387148 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3784, 2368)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
+actor_path = "res://src/Actor/Enemy/Sentry.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"cooldown_time": [3.0, 3, ""],
+"debug": [true, 1, ""],
+"diff_3_bullet": [8, 2, ""],
+"diff_3_bullet_max_swing_amp": [64.0, 3, ""],
+"diff_3_bullet_min_swing_amp": [32.0, 3, ""],
+"diff_3_bullet_peak_to_swing_time": [1.0, 3, ""],
+"diff_3_bullet_speed_scale": [1.5, 3, ""],
+"diff_3_bullet_swing_gravity_mult": [0.08, 3, ""],
+"diff_3_force": [300.0, 3, ""],
+"diff_3_rapid_fire_from": [0, 2, "Left:0,Right:1,Random:2"],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
+"diff_3_spread": [0.5235987755982988, 3, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Sentry9", 4, ""],
+"projectile_damage": [2, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VURect" type="Node2D" parent="Spawns/Sentry23" unique_id=1643228368 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+visibility_layer = 2
+script = ExtResource("14_edts7")
+tag_name = "player_detector"
+value = Rect2(-192, -192, 384, 384)
+
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry23" unique_id=999960253 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visibility_layer = 2
+position = Vector2(-120, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_x"
+lock_y = true
+
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry23" unique_id=292989202 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+modulate = Color(0, 1.8247963, 1.8247963, 1)
+visibility_layer = 2
+position = Vector2(0, -88)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_flikr")
+tag_name = "shoot_y"
+lock_x = true
+
+[node name="BreakBlock7" type="Area2D" parent="Spawns" unique_id=1049605092 groups=["Entities", "PropSpawns"] instance=ExtResource("17_1byma")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3728, 2352)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_4pk0b")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock", 4, ""]
+}
+
+[node name="BreakBlock8" type="Area2D" parent="Spawns" unique_id=595891808 groups=["Entities", "PropSpawns"] instance=ExtResource("17_1byma")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3728, 2336)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_4pk0b")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock1", 4, ""]
+}
+
+[node name="BreakBlock9" type="Area2D" parent="Spawns" unique_id=1922209842 groups=["Entities", "PropSpawns"] instance=ExtResource("17_1byma")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3744, 2352)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_4pk0b")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock2", 4, ""]
+}
+
+[node name="BreakBlock10" type="Area2D" parent="Spawns" unique_id=2089455172 groups=["Entities", "PropSpawns"] instance=ExtResource("17_1byma")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3744, 2336)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_4pk0b")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock3", 4, ""]
+}
+
+[node name="BreakBlock11" type="Area2D" parent="Spawns" unique_id=1476967602 groups=["Entities", "PropSpawns"] instance=ExtResource("17_1byma")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3712, 2336)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_4pk0b")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock4", 4, ""]
+}
+
+[node name="BreakBlock12" type="Area2D" parent="Spawns" unique_id=136098492 groups=["Entities", "PropSpawns"] instance=ExtResource("17_1byma")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3712, 2352)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_4pk0b")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock5", 4, ""]
+}
+
+[node name="BreakBlock13" type="Area2D" parent="Spawns" unique_id=1266211343 groups=["Entities", "PropSpawns"] instance=ExtResource("17_1byma")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3728, 2320)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_4pk0b")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock6", 4, ""]
+}
+
+[node name="Billy" type="Area2D" parent="Spawns" unique_id=1988799210 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
 position = Vector2(3640, 2368)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_xxkol")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1334,18 +1791,23 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Billy" unique_id=840820796 instance=ExtResource("13_xxkol")]
+[node name="VURect" type="Node2D" parent="Spawns/Billy" unique_id=840820796 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
 visibility_layer = 2
+script = ExtResource("14_edts7")
 tag_name = "player_detector"
 value = Rect2(-128, -80, 256, 160)
 
-[node name="Water2" parent="Spawns" unique_id=1218207942 instance=ExtResource("13_l0h4m")]
+[node name="Water2" type="MarginContainer" parent="Spawns" unique_id=1218207942 groups=["TriggerSpawns"] instance=ExtResource("13_l0h4m")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 3376.0
 offset_top = 1808.0
 offset_right = 3552.0
 offset_bottom = 1984.0
+mouse_filter = 2
+script = ExtResource("8_d7k7o")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20, ""],
@@ -1358,6 +1820,11 @@ size_is_default = false
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
 
-[node name="SpawnPoint" parent="." unique_id=1710023778 instance=ExtResource("13_ddw3t")]
+[node name="SpawnPoint" type="Area2D" parent="." unique_id=1710023778 groups=["SpawnPoints"] instance=ExtResource("13_ddw3t")]
 visibility_layer = 2
 position = Vector2(3448, 1808)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("20_mdql1")
+
+[connection signal="body_exited" from="Triggers/KillBox" to="Triggers/KillBox" method="_on_body_exited"]

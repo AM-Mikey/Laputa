@@ -15,6 +15,9 @@ const HAIRBALL_RAIN = preload("res://src/Bullet/Enemy/HairballRain.tscn")
 @export var projectile_damage: int = 2
 
 @export var diff_3_force: float = 300.0
+enum RapidFireFrom {LEFT, RIGHT, RANDOM}
+@export var diff_3_rapid_fire_from: RapidFireFrom = RapidFireFrom.LEFT
+@export var diff_3_rapid_fire_time: float = 0.1
 @export var diff_3_bullet: int = 8
 @export var diff_3_spread: float = PI / 6.0 # From [-diff_3_spread / 2.0, diff_3_spread / 2.0]
 @export var diff_3_bullet_speed_scale: float = 1.5
@@ -29,17 +32,25 @@ var facing_right := false:
 		facing_right = val
 
 var target: Node2D = null
+var first_sight_target := false
 
-const shoot_reload_cycle_time := 1.2
-var anim_speed := 1.0
+const shoot_reload_anim_time := 1.2
+const reload_anim_time = 0.4
+var shoot_anim_speed := 1.0
+
+var curr_bullet_idx := 0
+var rapid_fire_from_left := false
 
 @onready var ap = $AnimationPlayer
 
-var debug_name = "Sentry22"
+var debug_name = "Sentry8"
 
 func setup(): #Reminder: no function called can use await
-	anim_speed = max(1.0, shoot_reload_cycle_time / cooldown_time)
+	shoot_anim_speed = shoot_reload_anim_time / cooldown_time if difficulty < 3 else (shoot_reload_anim_time - reload_anim_time) / diff_3_rapid_fire_time
+	shoot_anim_speed = max(1.0, shoot_anim_speed)
 	facing_right = $ShootX.position.x >= 0.0
+	if difficulty == 3:
+		rapid_fire_from_left = diff_3_rapid_fire_from == RapidFireFrom.LEFT
 
 	$PlayerDetector/CollisionShape2D.shape.size = $VURect.value.size
 	$PlayerDetector/CollisionShape2D.position = $VURect.value.size / 2.0 + $VURect.value.position
@@ -65,15 +76,29 @@ func setup(): #Reminder: no function called can use await
 	change_state("idle")
 
 ### STATES ###
+#func do_idle(_delta):
+	#if name == debug_name:
+		#print($ShootDelay.time_left, " ", ap.current_animation)
+
 func enter_shoot(_last_state):
-	if ap.current_animation == "Reload":
-		ap.play("Reload", -1.0, anim_speed)
-	else:
-		ap.play("Shoot", -1.0, anim_speed)
+	if ap.current_animation == "":
+		if difficulty == 3:
+			if diff_3_rapid_fire_from == RapidFireFrom.RANDOM:
+				rapid_fire_from_left = (randi() % 2 == 0)
+			if $ShootDelay.time_left <= 0.0:
+				ap.play("Shoot", -1.0, shoot_anim_speed)
+		elif difficulty < 3:
+			ap.play("Shoot", -1.0, shoot_anim_speed)
+			first_sight_target = false
 
 func do_shoot(_delta):
 	if difficulty in [1, 2] and target:
 		facing_right = target.global_position.x - global_position.x >= 0.0
+	if difficulty < 3:
+		if ap.current_animation == "" && first_sight_target:
+			ap.play("Shoot", -1.0, shoot_anim_speed)
+			first_sight_target = false
+
 
 func prepare_bullet():
 	if difficulty == 2 && !target:
@@ -124,47 +149,78 @@ func prepare_bullet():
 		bullet.direction = Vector2(bullet_vel_x, bullet_vel_y).normalized()
 		w.middle.add_child(bullet)
 	else:
-		for i in range(diff_3_bullet):
-			var bullet = HAIRBALL_RAIN.instantiate()
-			bullet.damage = projectile_damage
-			bullet.position = global_position + bullet_origin
-			bullet.peak_to_swing_time = diff_3_bullet_peak_to_swing_time
+		var bullet = HAIRBALL_RAIN.instantiate()
+		bullet.damage = projectile_damage
+		bullet.position = global_position + bullet_origin
+		bullet.peak_to_swing_time = diff_3_bullet_peak_to_swing_time
 
-			bullet.speed = diff_3_force
-			bullet.direction = Vector2.UP.rotated(-diff_3_spread / 2.0 + i * diff_3_spread / diff_3_bullet)
-			bullet.max_swing_amplitude = diff_3_bullet_max_swing_amp
-			bullet.min_swing_amplitude = diff_3_bullet_min_swing_amp
-			bullet.swing_gravity_mult = diff_3_bullet_swing_gravity_mult
-			w.middle.add_child(bullet)
+		bullet.speed = diff_3_force
+		var deviation_idx = curr_bullet_idx if rapid_fire_from_left else diff_3_bullet - 1 - curr_bullet_idx
+		bullet.direction = Vector2.UP.rotated(-diff_3_spread / 2.0 + deviation_idx * diff_3_spread / (diff_3_bullet - 1))
+		bullet.max_swing_amplitude = diff_3_bullet_max_swing_amp
+		bullet.min_swing_amplitude = diff_3_bullet_min_swing_amp
+		bullet.swing_gravity_mult = diff_3_bullet_swing_gravity_mult
+		w.middle.add_child(bullet)
+		curr_bullet_idx += 1
 
 	am.play("enemy_shoot", self)
 
 func exit_shoot(_next_state):
-	$ShootDelay.stop()
+	if difficulty < 3:
+		$ShootDelay.stop()
 
 ### SIGNALS ###
 func _on_PlayerDetector_body_entered(body):
 	target = body
+	if difficulty < 3:
+		first_sight_target = true
 	change_state("shoot")
 
 func _on_PlayerDetector_body_exited(_body):
 	target = null
+	if difficulty < 3:
+		first_sight_target = false
 	change_state("idle")
 
 func _on_AnimationPlayer_animation_finished(anim_name: StringName) -> void:
 	match anim_name:
 		"Shoot":
 			if state == "idle":
-				ap.play("Reload")
-			elif state == "shoot":
-				ap.play("Reload", -1.0, anim_speed)
-		"Reload":
-			if state == "shoot":
-				if cooldown_time > shoot_reload_cycle_time:
-					$ShootDelay.start(cooldown_time - shoot_reload_cycle_time)
+				if difficulty < 3:
+					ap.play("Reload")
 				else:
-					ap.play("Shoot", -1.0, anim_speed)
+					if curr_bullet_idx < diff_3_bullet:
+						ap.play("Shoot", -1.0, shoot_anim_speed)
+					else:
+						curr_bullet_idx = 0
+						if diff_3_rapid_fire_from == RapidFireFrom.RANDOM:
+							rapid_fire_from_left = (randi() % 2 == 0)
+						ap.play("Reload", -1.0, max(1.0, reload_anim_time / cooldown_time))
+			elif state == "shoot":
+				if difficulty < 3:
+					ap.play("Reload", -1.0, shoot_anim_speed)
+				else:
+					if curr_bullet_idx < diff_3_bullet:
+						ap.play("Shoot", -1.0, shoot_anim_speed)
+					else:
+						curr_bullet_idx = 0
+						if diff_3_rapid_fire_from == RapidFireFrom.RANDOM:
+							rapid_fire_from_left = (randi() % 2 == 0)
+						ap.play("Reload", -1.0, max(1.0, reload_anim_time / cooldown_time))
+		"Reload":
+			if difficulty == 3 && cooldown_time > reload_anim_time:
+				$ShootDelay.start(cooldown_time - reload_anim_time)
+			if state == "shoot":
+				if difficulty < 3 && cooldown_time > shoot_reload_anim_time:
+					$ShootDelay.start(cooldown_time - shoot_reload_anim_time)
+				else:
+					if difficulty < 3:
+						ap.play("Shoot", -1.0, shoot_anim_speed)
+						first_sight_target = false
+					else:
+						if $ShootDelay.time_left <= 0.0:
+							ap.play("Shoot", -1.0, shoot_anim_speed)
 
 func _on_ShootDelay_timeout() -> void:
 	if state == "shoot":
-		ap.play("Shoot", -1.0, anim_speed)
+		ap.play("Shoot", -1.0, shoot_anim_speed)

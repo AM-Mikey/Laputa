@@ -153,6 +153,7 @@ tag_name = "shoot_y"
 lock_x = true
 
 [node name="ShootDelay" type="Timer" parent="." unique_id=1985058438]
+one_shot = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
