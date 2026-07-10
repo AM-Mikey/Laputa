@@ -233,11 +233,31 @@ func _input_event(_viewport, event, _shape_idx): #selecting in editor
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
 			inspector.on_selected(self, "actor_spawn")
 
+func _draw() -> void:
+	var actor = get_actor_name()
+	if actor == "": return
+
+	match actor:
+		"Sentry":
+			if properties["difficulty"][0] == 3:
+				var line_color = Color.RED
+				var polygon_color = Color.CRIMSON
+				polygon_color.a = 0.8
+				var trans_polygon_color = polygon_color
+				trans_polygon_color.a = 0.0
+				var cone_length = 160.0
+				var spread = properties["diff_3_spread"][0] / 2.0
+				var bullet_origin = Vector2(0.0, -12.0)
+				var left_cone_point: Vector2 = bullet_origin + cone_length * Vector2.UP.rotated(-spread)
+				var right_cone_point: Vector2 = bullet_origin + cone_length * Vector2.UP.rotated(spread)
+				draw_dashed_line(bullet_origin, left_cone_point, line_color, 1.5, 3.0)
+				draw_dashed_line(bullet_origin, right_cone_point, line_color, 1.5, 3.0)
+				draw_polygon([bullet_origin, left_cone_point, right_cone_point], [polygon_color, trans_polygon_color, trans_polygon_color])
+
+
 func on_property_changed(p_name, p_value):
-	if !actor_path.is_absolute_path(): return
-	var actor = actor_path.get_file()
-	if actor.get_extension() != "tscn": return
-	actor = actor.split(".")[0]
+	var actor = get_actor_name()
+	if actor == "": return
 
 	if p_name == "difficulty":
 		set_sprite()
@@ -247,3 +267,17 @@ func on_property_changed(p_name, p_value):
 			if p_name == "difficulty":
 				$ShootX.visible = p_value < 2
 				$ShootY.visible = p_value < 3
+				queue_redraw()
+			if p_name == "diff_3_spread":
+				queue_redraw()
+
+func get_actor_name() -> String:
+	if !actor_path.is_absolute_path():
+		print("ActorSpawn | get_actor_name(): actor_path is not a valid path!")
+		return ""
+	var actor = actor_path.get_file()
+	if actor.get_extension() != "tscn":
+		print("ActorSpawn | get_actor_name(): actor_path does not point to a scene (.tscn) file!")
+		return ""
+	actor = actor.split(".")[0]
+	return actor
