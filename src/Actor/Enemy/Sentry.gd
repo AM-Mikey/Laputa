@@ -10,21 +10,23 @@ const TX_3 = preload("res://assets/Actor/Enemy/Sentry.png") #WIP: Placeholder
 const HAIRBALL = preload("res://src/Bullet/Enemy/Hairball.tscn")
 const HAIRBALL_RAIN = preload("res://src/Bullet/Enemy/HairballRain.tscn")
 
+enum RapidFireFrom {LEFT, RIGHT, RANDOM}
+
 @export var difficulty: int = 0
 @export var cooldown_time = 2.0
 @export var projectile_damage: int = 2
 
-@export var diff_3_force: float = 300.0
-enum RapidFireFrom {LEFT, RIGHT, RANDOM}
-@export var diff_3_rapid_fire_from: RapidFireFrom = RapidFireFrom.LEFT
-@export var diff_3_rapid_fire_time: float = 0.1
-@export var diff_3_bullet: int = 8
+@export var diff_3_bullet_in_spread: int = 8
 @export var diff_3_spread: float = PI / 6.0 # From [-diff_3_spread / 2.0, diff_3_spread / 2.0]
-@export var diff_3_bullet_speed_scale: float = 1.5
-@export var diff_3_bullet_max_swing_amp: float = 32.0
-@export var diff_3_bullet_min_swing_amp: float = 32.0
-@export var diff_3_bullet_peak_to_swing_time: float = 0.3
-@export var diff_3_bullet_swing_gravity_mult: float = 0.15
+@export var diff_3_force: float = 300.0
+@export var diff_3_rapid_fire_time: float = 0.1
+@export var diff_3_rapid_fire_from: RapidFireFrom = RapidFireFrom.LEFT
+
+#var diff_3_bullet_speed_scale: float = 1.5
+#var diff_3_bullet_max_swing_amp: float = 32.0
+#var diff_3_bullet_min_swing_amp: float = 32.0
+#var diff_3_bullet_peak_to_swing_time: float = 0.3
+#var diff_3_bullet_swing_gravity_mult: float = 0.15
 
 var facing_right := false:
 	set(val):
@@ -76,10 +78,6 @@ func setup(): #Reminder: no function called can use await
 	change_state("idle")
 
 ### STATES ###
-#func do_idle(_delta):
-	#if name == debug_name:
-		#print($ShootDelay.time_left, " ", ap.current_animation)
-
 func enter_shoot(_last_state):
 	if ap.current_animation == "":
 		if difficulty == 3:
@@ -92,7 +90,7 @@ func enter_shoot(_last_state):
 			first_sight_target = false
 
 func do_shoot(_delta):
-	if difficulty in [1, 2] and target:
+	if difficulty in [1, 2] && target:
 		facing_right = target.global_position.x - global_position.x >= 0.0
 	if difficulty < 3:
 		if ap.current_animation == "" && first_sight_target:
@@ -139,9 +137,6 @@ func prepare_bullet():
 		var time_peak_to_start = sqrt(max((bullet_origin.y - peak_displace_y) * 2.0 / bullet_gravity, 0.0))
 		var time_travel = time_peak_to_ground + time_peak_to_start
 
-		#if name == debug_name:
-			#print(time_travel, " ", bullet_gravity)
-
 		var bullet_vel_x = target_displace_x / time_travel
 		var bullet_vel_y = (-0.5 * bullet_gravity * pow(time_travel, 2) - bullet_origin.y) / time_travel
 
@@ -152,14 +147,14 @@ func prepare_bullet():
 		var bullet = HAIRBALL_RAIN.instantiate()
 		bullet.damage = projectile_damage
 		bullet.position = global_position + bullet_origin
-		bullet.peak_to_swing_time = diff_3_bullet_peak_to_swing_time
+		#bullet.peak_to_swing_time = diff_3_bullet_peak_to_swing_time
 
 		bullet.speed = diff_3_force
-		var deviation_idx = curr_bullet_idx if rapid_fire_from_left else diff_3_bullet - 1 - curr_bullet_idx
-		bullet.direction = Vector2.UP.rotated(-diff_3_spread / 2.0 + deviation_idx * diff_3_spread / (diff_3_bullet - 1))
-		bullet.max_swing_amplitude = diff_3_bullet_max_swing_amp
-		bullet.min_swing_amplitude = diff_3_bullet_min_swing_amp
-		bullet.swing_gravity_mult = diff_3_bullet_swing_gravity_mult
+		var deviation_idx = curr_bullet_idx if rapid_fire_from_left else diff_3_bullet_in_spread - 1 - curr_bullet_idx
+		bullet.direction = Vector2.UP.rotated(-diff_3_spread / 2.0 + deviation_idx * diff_3_spread / (diff_3_bullet_in_spread - 1))
+		#bullet.max_swing_amplitude = diff_3_bullet_max_swing_amp
+		#bullet.min_swing_amplitude = diff_3_bullet_min_swing_amp
+		#bullet.swing_gravity_mult = diff_3_bullet_swing_gravity_mult
 		w.middle.add_child(bullet)
 		curr_bullet_idx += 1
 
@@ -189,7 +184,7 @@ func _on_AnimationPlayer_animation_finished(anim_name: StringName) -> void:
 				if difficulty < 3:
 					ap.play("Reload")
 				else:
-					if curr_bullet_idx < diff_3_bullet:
+					if curr_bullet_idx < diff_3_bullet_in_spread:
 						ap.play("Shoot", -1.0, shoot_anim_speed)
 					else:
 						curr_bullet_idx = 0
@@ -200,7 +195,7 @@ func _on_AnimationPlayer_animation_finished(anim_name: StringName) -> void:
 				if difficulty < 3:
 					ap.play("Reload", -1.0, shoot_anim_speed)
 				else:
-					if curr_bullet_idx < diff_3_bullet:
+					if curr_bullet_idx < diff_3_bullet_in_spread:
 						ap.play("Shoot", -1.0, shoot_anim_speed)
 					else:
 						curr_bullet_idx = 0

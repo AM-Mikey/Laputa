@@ -15,7 +15,7 @@ var state: HairballRainState = HairballRainState.FLY_UPWARD:
 var time_swing := 0.0
 var swing_left_first := false
 
-var max_swing_amplitude := 64.0
+var max_swing_amplitude := 32.0
 var min_swing_amplitude := 32.0
 var curr_swing_amplitude := 0.0
 
