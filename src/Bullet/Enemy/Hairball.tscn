@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_oq5v0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sh0tx"]
-radius = 6.0
-height = 12.0
+radius = 5.0
+height = 10.0
 
 [sub_resource type="Animation" id="2"]
 resource_name = "Rotate"
