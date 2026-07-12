@@ -15,21 +15,22 @@ var state: HairballRainState = HairballRainState.FLY_UPWARD:
 var time_swing := 0.0
 var swing_left_first := false
 
-var max_swing_amplitude := 32.0
-var min_swing_amplitude := 32.0
+var max_swing_amplitude := 8.0
+var min_swing_amplitude := 8.0
 var curr_swing_amplitude := 0.0
 
 var swing_gravity_mult := 0.15
 var peak_to_swing_time := 0.5
 var speed_scale := 1.5
 
+var height
+@onready var start_y := global_position.y
 ### MAIN ###
 func setup():
 	is_wind_affected = true
 	is_enemy_bullet = true
 	ap.play("Rotate")
 	velocity = speed * direction
-	swing_left_first = randi() % 2 == 0
 	curr_swing_amplitude = randf_range(min_swing_amplitude, max_swing_amplitude)
 	$PeakToSwingTimer.wait_time = peak_to_swing_time
 	if !$VisibleOnScreenNotifier2D.is_on_screen():

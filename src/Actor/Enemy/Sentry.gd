@@ -6,21 +6,21 @@ const TX_0 = preload("res://assets/Actor/Enemy/Sentry.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Sentry.png") #WIP: Placeholder
 const TX_2 = preload("res://assets/Actor/Enemy/Sentry.png") #WIP: Placeholder
 const TX_3 = preload("res://assets/Actor/Enemy/Sentry.png") #WIP: Placeholder
+const TX_4 = preload("res://assets/Actor/Enemy/Sentry.png") #WIP: Placeholder
 
 const HAIRBALL = preload("res://src/Bullet/Enemy/Hairball.tscn")
 const HAIRBALL_RAIN = preload("res://src/Bullet/Enemy/HairballRain.tscn")
 
-enum RapidFireFrom {LEFT, RIGHT, RANDOM}
-
+# difficulty = 3: Shoot rapidly upward in order in the spread cone starting from player's direction then wait for cooldown_time
+# difficulty = 4: Shoot upward with random deviation defined by spread
 @export var difficulty: int = 0
 @export var cooldown_time = 2.0
 @export var projectile_damage: int = 2
 
-@export var diff_3_bullet_in_spread: int = 8
-@export var diff_3_spread: float = PI / 6.0 # From [-diff_3_spread / 2.0, diff_3_spread / 2.0]
-@export var diff_3_force: float = 300.0
+@export var fountain_bullet_in_spread: int = 8
+@export var fountain_spread: float = PI / 12.0 # From [-diff_3_spread / 2.0, diff_3_spread / 2.0]
+@export var fountain_force: float = 300.0
 @export var diff_3_rapid_fire_time: float = 0.1
-@export var diff_3_rapid_fire_from: RapidFireFrom = RapidFireFrom.LEFT
 
 #var diff_3_bullet_speed_scale: float = 1.5
 #var diff_3_bullet_max_swing_amp: float = 32.0
@@ -48,11 +48,9 @@ var rapid_fire_from_left := false
 var debug_name = "Sentry8"
 
 func setup(): #Reminder: no function called can use await
-	shoot_anim_speed = shoot_reload_anim_time / cooldown_time if difficulty < 3 else (shoot_reload_anim_time - reload_anim_time) / diff_3_rapid_fire_time
+	shoot_anim_speed = shoot_reload_anim_time / cooldown_time if difficulty != 3 else (shoot_reload_anim_time - reload_anim_time) / diff_3_rapid_fire_time
 	shoot_anim_speed = max(1.0, shoot_anim_speed)
 	facing_right = $ShootX.position.x >= 0.0
-	if difficulty == 3:
-		rapid_fire_from_left = diff_3_rapid_fire_from == RapidFireFrom.LEFT
 
 	$PlayerDetector/CollisionShape2D.shape.size = $VURect.value.size
 	$PlayerDetector/CollisionShape2D.position = $VURect.value.size / 2.0 + $VURect.value.position
@@ -73,6 +71,9 @@ func setup(): #Reminder: no function called can use await
 		3:
 			$Sprite2D.texture = TX_3
 			$Sprite2D.self_modulate = Color.YELLOW #WIP: Placeholder
+		4:
+			$Sprite2D.texture = TX_3
+			$Sprite2D.self_modulate = Color.PINK #WIP: Placeholder
 
 	w.emit_signal("finished_spawn_entities_step")
 	change_state("idle")
@@ -81,18 +82,19 @@ func setup(): #Reminder: no function called can use await
 func enter_shoot(_last_state):
 	if ap.current_animation == "":
 		if difficulty == 3:
-			if diff_3_rapid_fire_from == RapidFireFrom.RANDOM:
-				rapid_fire_from_left = (randi() % 2 == 0)
+			var player = f.pc()
+			if player:
+				rapid_fire_from_left = (player.global_position.x - global_position.x < 0.0)
 			if $ShootDelay.time_left <= 0.0:
 				ap.play("Shoot", -1.0, shoot_anim_speed)
-		elif difficulty < 3:
+		else:
 			ap.play("Shoot", -1.0, shoot_anim_speed)
 			first_sight_target = false
 
 func do_shoot(_delta):
 	if difficulty in [1, 2] && target:
 		facing_right = target.global_position.x - global_position.x >= 0.0
-	if difficulty < 3:
+	if difficulty != 3:
 		if ap.current_animation == "" && first_sight_target:
 			ap.play("Shoot", -1.0, shoot_anim_speed)
 			first_sight_target = false
@@ -143,15 +145,29 @@ func prepare_bullet():
 		bullet.speed = Vector2(bullet_vel_x, bullet_vel_y).length()
 		bullet.direction = Vector2(bullet_vel_x, bullet_vel_y).normalized()
 		w.middle.add_child(bullet)
-	else:
+	elif difficulty == 3:
+		var bullet = HAIRBALL_RAIN.instantiate()
+		bullet.damage = projectile_damage
+		bullet.position = global_position + bullet_origin
+		bullet.swing_left_first = true
+		#bullet.peak_to_swing_time = diff_3_bullet_peak_to_swing_time
+
+		bullet.speed = fountain_force
+		var deviation_idx = curr_bullet_idx if rapid_fire_from_left else fountain_bullet_in_spread - 1 - curr_bullet_idx
+		bullet.direction = Vector2.UP.rotated(-fountain_spread / 2.0 + deviation_idx * fountain_spread / (fountain_bullet_in_spread - 1))
+		#bullet.max_swing_amplitude = diff_3_bullet_max_swing_amp
+		#bullet.min_swing_amplitude = diff_3_bullet_min_swing_amp
+		#bullet.swing_gravity_mult = diff_3_bullet_swing_gravity_mult
+		w.middle.add_child(bullet)
+		curr_bullet_idx += 1
+	elif difficulty == 4:
 		var bullet = HAIRBALL_RAIN.instantiate()
 		bullet.damage = projectile_damage
 		bullet.position = global_position + bullet_origin
 		#bullet.peak_to_swing_time = diff_3_bullet_peak_to_swing_time
 
-		bullet.speed = diff_3_force
-		var deviation_idx = curr_bullet_idx if rapid_fire_from_left else diff_3_bullet_in_spread - 1 - curr_bullet_idx
-		bullet.direction = Vector2.UP.rotated(-diff_3_spread / 2.0 + deviation_idx * diff_3_spread / (diff_3_bullet_in_spread - 1))
+		bullet.speed = fountain_force
+		bullet.direction = Vector2.UP.rotated(randf_range(-fountain_spread / 2.0, fountain_spread / 2.0))
 		#bullet.max_swing_amplitude = diff_3_bullet_max_swing_amp
 		#bullet.min_swing_amplitude = diff_3_bullet_min_swing_amp
 		#bullet.swing_gravity_mult = diff_3_bullet_swing_gravity_mult
@@ -161,19 +177,19 @@ func prepare_bullet():
 	am.play("enemy_shoot", self)
 
 func exit_shoot(_next_state):
-	if difficulty < 3:
+	if difficulty != 3:
 		$ShootDelay.stop()
 
 ### SIGNALS ###
 func _on_PlayerDetector_body_entered(body):
 	target = body
-	if difficulty < 3:
+	if difficulty != 3:
 		first_sight_target = true
 	change_state("shoot")
 
 func _on_PlayerDetector_body_exited(_body):
 	target = null
-	if difficulty < 3:
+	if difficulty != 3:
 		first_sight_target = false
 	change_state("idle")
 
@@ -181,35 +197,37 @@ func _on_AnimationPlayer_animation_finished(anim_name: StringName) -> void:
 	match anim_name:
 		"Shoot":
 			if state == "idle":
-				if difficulty < 3:
+				if difficulty != 3:
 					ap.play("Reload")
 				else:
-					if curr_bullet_idx < diff_3_bullet_in_spread:
+					if curr_bullet_idx < fountain_bullet_in_spread:
 						ap.play("Shoot", -1.0, shoot_anim_speed)
 					else:
 						curr_bullet_idx = 0
-						if diff_3_rapid_fire_from == RapidFireFrom.RANDOM:
-							rapid_fire_from_left = (randi() % 2 == 0)
+						var player = f.pc()
+						if player:
+							rapid_fire_from_left = (player.global_position.x - global_position.x < 0.0)
 						ap.play("Reload", -1.0, max(1.0, reload_anim_time / cooldown_time))
 			elif state == "shoot":
-				if difficulty < 3:
+				if difficulty != 3:
 					ap.play("Reload", -1.0, shoot_anim_speed)
 				else:
-					if curr_bullet_idx < diff_3_bullet_in_spread:
+					if curr_bullet_idx < fountain_bullet_in_spread:
 						ap.play("Shoot", -1.0, shoot_anim_speed)
 					else:
 						curr_bullet_idx = 0
-						if diff_3_rapid_fire_from == RapidFireFrom.RANDOM:
-							rapid_fire_from_left = (randi() % 2 == 0)
+						var player = f.pc()
+						if player:
+							rapid_fire_from_left = (player.global_position.x - global_position.x < 0.0)
 						ap.play("Reload", -1.0, max(1.0, reload_anim_time / cooldown_time))
 		"Reload":
 			if difficulty == 3 && cooldown_time > reload_anim_time:
 				$ShootDelay.start(cooldown_time - reload_anim_time)
 			if state == "shoot":
-				if difficulty < 3 && cooldown_time > shoot_reload_anim_time:
+				if difficulty != 3 && cooldown_time > shoot_reload_anim_time:
 					$ShootDelay.start(cooldown_time - shoot_reload_anim_time)
 				else:
-					if difficulty < 3:
+					if difficulty != 3:
 						ap.play("Shoot", -1.0, shoot_anim_speed)
 						first_sight_target = false
 					else:

@@ -239,14 +239,14 @@ func _draw() -> void:
 
 	match actor:
 		"Sentry":
-			if properties["difficulty"][0] == 3:
+			if properties["difficulty"][0] >= 3:
 				var line_color = Color.RED
 				var polygon_color = Color.CRIMSON
 				polygon_color.a = 0.8
 				var trans_polygon_color = polygon_color
 				trans_polygon_color.a = 0.0
 				var cone_length = 160.0
-				var spread = properties["diff_3_spread"][0] / 2.0
+				var spread = properties["fountain_spread"][0] / 2.0
 				var bullet_origin = Vector2(0.0, -12.0)
 				var left_cone_point: Vector2 = bullet_origin + cone_length * Vector2.UP.rotated(-spread)
 				var right_cone_point: Vector2 = bullet_origin + cone_length * Vector2.UP.rotated(spread)
@@ -268,7 +268,7 @@ func on_property_changed(p_name, p_value):
 				$ShootX.visible = p_value < 2
 				$ShootY.visible = p_value < 3
 				queue_redraw()
-			if p_name == "diff_3_spread":
+			if p_name == "fountain_spread":
 				queue_redraw()
 
 func get_actor_name() -> String:
