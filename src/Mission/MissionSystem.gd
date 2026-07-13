@@ -124,22 +124,21 @@ func _progress_from_check(type: String, mission, stage, passed_variable):
 
 
 
-func setup_level_from_array(array, update_conversations):
+func setup_level_from_array(array, update_conversations, is_entering):
 	for i in array:
 		var mission_name = i[0]
 		var mission_stage = i[1]
-		#print("testing: ", mission_name, mission_stage)
-		update_level_via_mission(mission_name, mission_stage, update_conversations) #don't update conversations, instead we load them from save
+		update_level_via_mission(mission_name, mission_stage, update_conversations, is_entering) #don't update conversations, instead we load them from save
 
 func setup_level_from_mission_progress_history():
 	print("from history")
 	for i in mission_progress_history:
 		var mission_name = i[0]
 		var mission_stage = i[1]
-		update_level_via_mission(mission_name, mission_stage, false)  #don't update conversations, instead we load them from save
+		update_level_via_mission(mission_name, mission_stage, true, true)  #don't update conversations, instead we load them from save
 
 
-func update_level_via_mission(mission_name = "Main", mission_stage = "current", update_conversations = true): #while already in level
+func update_level_via_mission(mission_name = "Main", mission_stage = "current", update_conversations = true, is_entering = false):
 	var json = load(w.current_level.mission_level_update)
 	var data = json.get_data()
 	if mission_stage == "current":
@@ -147,66 +146,92 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 			mission_stage = main_mission_stage[0]
 		else:
 			mission_stage = mission_name_to_mission(mission_name).current_stage
-#spawn
-	var enemy_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "enemy_spawn", "EnemySpawns", true)
+
+
+#set_spawn
+	var enemy_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "enemy_set_spawn", "EnemySpawns", true)
 	for k in enemy_spawn_dict.keys():
-		k.allow_spawn = enemy_spawn_dict[k]
-		k.spawn()
-	var npc_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_spawn", "NPCSpawns", true)
+		if enemy_spawn_dict[k]: #spawn
+			if !get_has_entity_with_id("Enemies", k.properties["id"][0]):
+				k.allow_spawn = true
+				k.spawn()
+		else: #free
+			var enemy_free_dict = get_matching_entities_values(data, mission_name, mission_stage, "enemy_set_spawn", "Enemies", false)
+			for l in enemy_free_dict.keys():
+				l.free() #l.die(true) #TODO: poof effect? idk #free is faster for cases where we need to do it repeatedly on off, otherwise get_has_entity_with_id has a false positive when it flashes through all of the mission stages when loading a save file
+			k.allow_spawn = false
+
+	var npc_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_set_spawn", "NPCSpawns", true)
 	for k in npc_spawn_dict.keys():
-		k.allow_spawn = npc_spawn_dict[k]
-		k.spawn()
-	var prop_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "prop_spawn", "PropSpawns", true)
+		if npc_spawn_dict[k]: #spawn
+			if !get_has_entity_with_id("NPCs", k.properties["id"][0]):
+				k.allow_spawn = true
+				k.spawn()
+		else: #free
+			var npc_free_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_set_spawn", "NPCs", false)
+			for l in npc_free_dict.keys():
+				l.free()
+			k.allow_spawn = false
+
+	var prop_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "prop_set_spawn", "PropSpawns", true)
 	for k in prop_spawn_dict.keys():
-		k.allow_spawn = prop_spawn_dict[k]
-		k.spawn()
-	var trigger_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "trigger_spawn", "TriggerSpawns", true)
+		if prop_spawn_dict[k]: #spawn
+			if !get_has_entity_with_id("Props", k.properties["id"][0]):
+				k.allow_spawn = true
+				k.spawn()
+		else: #free
+			var prop_free_dict = get_matching_entities_values(data, mission_name, mission_stage, "prop_set_spawn", "Props", false)
+			for l in prop_free_dict.keys():
+				l.free()
+			k.allow_spawn = false
+
+	var trigger_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "trigger_set_spawn", "TriggerSpawns", true)
 	for k in trigger_spawn_dict.keys():
-		k.allow_spawn = trigger_spawn_dict[k]
-		k.spawn()
+		if trigger_spawn_dict[k]: #spawn
+			if !get_has_entity_with_id("Triggers", k.properties["id"][0]):
+				k.allow_spawn = true
+				k.spawn()
+		else: #free
+			var trigger_free_dict = get_matching_entities_values(data, mission_name, mission_stage, "trigger_set_spawn", "Triggers", false)
+			for l in trigger_free_dict.keys():
+				l.free()
+			k.allow_spawn = false
 
-#free
-	var enemy_free_dict = get_matching_entities_values(data, mission_name, mission_stage, "enemy_free", "Enemies", false)
-	for k in enemy_free_dict.keys():
-		k.die(true)
-	var npc_free_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_free", "NPCs", false)
-	for k in npc_free_dict.keys():
-		k.queue_free() #Warning: Untested
-	var prop_free_dict = get_matching_entities_values(data, mission_name, mission_stage, "prop_free", "Props", false)
-	for k in prop_free_dict.keys():
-		k.queue_free() #Warning: Untested
-	var trigger_free_dict = get_matching_entities_values(data, mission_name, mission_stage, "trigger_free", "Triggers", false)
-	for k in trigger_free_dict.keys():
-		k.queue_free() #Warning: Untested
 
-#runtime_position
-	var enemy_runtime_position_dict = get_matching_entities_values(data, mission_name, mission_stage, "enemy_runtime_position", "Enemies", false)
-	for k in enemy_runtime_position_dict.keys():
-		k.global_position = array_to_vector2(enemy_runtime_position_dict[k])
-	var npc_runtime_position_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_runtime_position", "NPCs", false)
-	for k in npc_runtime_position_dict.keys():
-		k.global_position = array_to_vector2(npc_runtime_position_dict[k])
-	var prop_runtime_position_dict = get_matching_entities_values(data, mission_name, mission_stage, "prop_runtime_position", "Props", false)
-	for k in prop_runtime_position_dict.keys():
-		k.global_position = array_to_vector2(prop_runtime_position_dict[k])
-	var trigger_runtime_position_dict = get_matching_entities_values(data, mission_name, mission_stage, "trigger_runtime_position", "Triggers", false)
-	for k in trigger_runtime_position_dict.keys():
-		k.global_position = array_to_vector2(trigger_runtime_position_dict[k])
+#position
+	var enemy_position_dict = get_matching_entities_values(data, mission_name, mission_stage, "enemy_position", "Enemies", false)
+	for k in enemy_position_dict.keys():
+		k.global_position = array_to_vector2(enemy_position_dict[k])
 
-#runtime_position_offset
-	var enemy_runtime_position_offset_dict = get_matching_entities_values(data, mission_name, mission_stage, "enemy_runtime_position_offset", "Enemies", false)
-	for k in enemy_runtime_position_offset_dict.keys():
-		k.global_position += array_to_vector2(enemy_runtime_position_offset_dict[k])
-	var npc_runtime_position_offset_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_runtime_position_offset", "NPCs", false)
-	for k in npc_runtime_position_offset_dict.keys():
-		k.global_position += array_to_vector2(npc_runtime_position_offset_dict[k])
-	var prop_runtime_position_offset_dict = get_matching_entities_values(data, mission_name, mission_stage, "prop_runtime_position_offset", "Props", false)
-	for k in prop_runtime_position_offset_dict.keys():
-		k.global_position += array_to_vector2(prop_runtime_position_offset_dict[k])
-	var trigger_runtime_position_offset_dict = get_matching_entities_values(data, mission_name, mission_stage, "trigger_runtime_position_offset", "Triggers", false)
-	for k in trigger_runtime_position_offset_dict.keys():
-		k.global_position += array_to_vector2(trigger_runtime_position_offset_dict[k])
+	var npc_position_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_position", "NPCs", false)
+	for k in npc_position_dict.keys():
+		k.global_position = array_to_vector2(npc_position_dict[k])
 
+	var prop_position_dict = get_matching_entities_values(data, mission_name, mission_stage, "prop_position", "Props", false)
+	for k in prop_position_dict.keys():
+		k.global_position = array_to_vector2(prop_position_dict[k])
+
+	var trigger_position_dict = get_matching_entities_values(data, mission_name, mission_stage, "trigger_position", "Triggers", false)
+	for k in trigger_position_dict.keys():
+		k.global_position = array_to_vector2(trigger_position_dict[k])
+
+
+#position_offset
+	var enemy_position_offset_dict = get_matching_entities_values(data, mission_name, mission_stage, "enemy_position_offset", "Enemies", false)
+	for k in enemy_position_offset_dict.keys():
+		k.global_position += array_to_vector2(enemy_position_offset_dict[k])
+
+	var npc_position_offset_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_position_offset", "NPCs", false)
+	for k in npc_position_offset_dict.keys():
+		k.global_position += array_to_vector2(npc_position_offset_dict[k])
+
+	var prop_position_offset_dict = get_matching_entities_values(data, mission_name, mission_stage, "prop_position_offset", "Props", false)
+	for k in prop_position_offset_dict.keys():
+		k.global_position += array_to_vector2(prop_position_offset_dict[k])
+
+	var trigger_position_offset_dict = get_matching_entities_values(data, mission_name, mission_stage, "trigger_position_offset", "Triggers", false)
+	for k in trigger_position_offset_dict.keys():
+		k.global_position += array_to_vector2(trigger_position_offset_dict[k])
 
 
 	if update_conversations:
@@ -240,13 +265,14 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 					w.current_level.conversation_on_enter = data["level_conversation_on_enter"][mission_name][stage]
 
 #camera_control_add
-	if data.has("camera_control_add"):
-		if data["camera_control_add"].has(mission_name):
-			for stage in data["camera_control_add"][mission_name]:
-				if stage == mission_stage:
-					inp.can_act = false
-					for a in data["camera_control_add"][mission_name][stage]:
-						f.pc().get_node("PlayerCamera").control_add(a)
+	if !is_entering:
+		if data.has("camera_control_add"):
+			if data["camera_control_add"].has(mission_name):
+				for stage in data["camera_control_add"][mission_name]:
+					if stage == mission_stage:
+						inp.can_act = false
+						for a in data["camera_control_add"][mission_name][stage]:
+							f.pc().get_node("PlayerCamera").control_add(a)
 
 ### HELPER ###
 
@@ -269,6 +295,14 @@ func get_matching_entities_values(data, mission_name, mission_stage, data_key, g
 				elif data[data_key][mission_name][id].has("any"):
 					out[n] = data[data_key][mission_name][id]["any"]
 	return out
+
+
+func get_has_entity_with_id(entity_group: String, id):
+	for e in get_tree().get_nodes_in_group(entity_group):
+		if e.id == id:
+			printerr("ERROR: entity with id: ", id, " already exists!")
+			return true
+	return false
 
 
 func array_to_vector2(array) -> Vector2:

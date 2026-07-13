@@ -629,3 +629,15 @@ Lever TODO:
 
 
 General TODO: change liscence when possible
+	weapon change 1-6 hotkeys
+
+Title TODO:
+	reorganize title with toastie
+	title logo re-add
+	title background testing, make sure nothing weird happens
+	render a preview using title preview and title camera for level select
+
+Item Menu TODO:
+
+
+Mission TODO:

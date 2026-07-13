@@ -34,6 +34,7 @@ func _on_Continue_pressed():
 	SaveSystem.read_level_data_from_save(w.current_level)
 	SaveSystem.read_dialog_data_from_save(w.current_level)
 	SaveSystem.copy_level_and_dialog_data_from_save_to_temp()
+	SaveSystem.read_mission_data_from_save()
 	queue_free()
 
 func _on_Quit_pressed():

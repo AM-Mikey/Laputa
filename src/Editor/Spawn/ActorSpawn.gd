@@ -4,6 +4,8 @@ extends Area2D
 @export var properties = {}
 @export var tag_name: String = ""
 
+var allow_spawn := true
+
 @onready var w = get_tree().get_root().get_node("World")
 
 
@@ -139,6 +141,9 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 		actor.free()
 
 func spawn():
+	if !allow_spawn: 
+		w.emit_signal.call_deferred("finished_spawn_entities_step")
+		return
 	if actor_path == "":
 		printerr("ERROR: no actor chosen in ActorSpawn")
 		w.emit_signal.call_deferred("finished_spawn_entities_step")
