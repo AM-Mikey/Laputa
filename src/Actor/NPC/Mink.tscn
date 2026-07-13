@@ -52,8 +52,8 @@ _data = {
 }
 
 [node name="Mink" type="CharacterBody2D" unique_id=1067338007 groups=["Actors", "Entities", "NPCs"]]
-collision_layer = 640
-collision_mask = 8
+collision_layer = 128
+collision_mask = 520
 script = ExtResource("1_arjde")
 id = "mink"
 editor_hidden = false
