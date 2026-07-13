@@ -7,7 +7,7 @@ size = Vector2(16, 16)
 
 [node name="Water" type="Area2D" unique_id=1352829104 groups=["Enitities", "Triggers"]]
 collision_layer = 1048576
-collision_mask = 7315
+collision_mask = 15571
 gravity_space_override = 1
 gravity = 225.0
 script = ExtResource("1")

@@ -57,9 +57,11 @@ _data = {
 }
 
 [node name="GLauncher3" type="CharacterBody2D" unique_id=1200597303]
-collision_layer = 0
+collision_layer = 64
 collision_mask = 8
 script = ExtResource("1")
+is_water_affected = true
+is_wind_affected = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1911874945]
 shape = SubResource("1")

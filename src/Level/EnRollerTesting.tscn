@@ -2,27 +2,27 @@
 
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="1_6q8mx"]
 [ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_jogqi"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_bgy0n"]
 [ext_resource type="Resource" path="res://src/Background/iedge.tres" id="3_f378h"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_usffs"]
 [ext_resource type="Texture2D" path="res://assets/Background/IslandEdge.png" id="4_53gin"]
 [ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_6aw22"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="7_gd7rc"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="8_88oha"]
-[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="9_88oha"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="10_kaepw"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="8_21jaq"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUActor.gd" id="10_o6gqe"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="11_e8i6e"]
 [ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUActor.tscn" id="11_gt8t5"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUActor.gd" id="12_gt8t5"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="12_ha2hh"]
 [ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="12_s0ppf"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="13_ddw3t"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="13_l0h4m"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="14_l0h4m"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="16_57er1"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="18_wbuq6"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="14_4ge24"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="16_18xl8"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="18_yn5t4"]
 
-[node name="RollerTesting" type="Node2D" unique_id=1952135705]
+[node name="EnRollerTesting" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
 script = ExtResource("1_6q8mx")
-level_name = "RollerTesting"
+level_name = "EnRollerTesting"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 
@@ -33,7 +33,7 @@ offset_top = 1600.0
 offset_right = 4432.0
 offset_bottom = 2496.0
 mouse_filter = 2
-script = ExtResource("3_bgy0n")
+script = ExtResource("3_usffs")
 background_resource = ExtResource("3_f378h")
 texture = ExtResource("4_53gin")
 layers = 5
@@ -104,7 +104,7 @@ z_index = 999
 position = Vector2(3440, 1968)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -117,13 +117,6 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
-
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole" unique_id=1199277091 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -131,7 +124,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -149,6 +142,12 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
+
 [node name="SpawnHole1" type="Area2D" parent="Spawns" unique_id=440846068 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -156,7 +155,7 @@ z_index = 999
 position = Vector2(3040, 1872)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -169,13 +168,6 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole1" unique_id=1426433973 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
-
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole1" unique_id=1283180354 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -183,7 +175,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -200,6 +192,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole1" unique_id=143750372 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole2" type="Area2D" parent="Spawns" unique_id=2080949562 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -208,7 +206,7 @@ z_index = 999
 position = Vector2(2768, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -220,13 +218,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole2" unique_id=631986331 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole2" unique_id=818511284 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -235,7 +226,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -252,6 +243,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole2" unique_id=12477618 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole3" type="Area2D" parent="Spawns" unique_id=1885019154 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -260,7 +257,7 @@ z_index = 999
 position = Vector2(2656, 1904)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -272,13 +269,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole3" unique_id=691647939 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole3" unique_id=71402282 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -287,7 +277,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -304,6 +294,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole3" unique_id=225625158 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole4" type="Area2D" parent="Spawns" unique_id=796428422 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -312,7 +308,7 @@ z_index = 999
 position = Vector2(2288, 1808)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -324,13 +320,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole4" unique_id=735539141 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole4" unique_id=831207210 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -339,7 +328,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -356,6 +345,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole4" unique_id=2078112427 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole5" type="Area2D" parent="Spawns" unique_id=1334386808 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -364,7 +359,7 @@ z_index = 999
 position = Vector2(2192, 1808)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -376,13 +371,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole5" unique_id=1437662860 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole5" unique_id=2090996527 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -391,7 +379,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -408,6 +396,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole5" unique_id=2022201233 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole6" type="Area2D" parent="Spawns" unique_id=1688791156 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -416,7 +410,7 @@ z_index = 999
 position = Vector2(2096, 1808)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -428,13 +422,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole6" unique_id=1429444615 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole6" unique_id=1267994240 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -443,7 +430,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -460,6 +447,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole6" unique_id=1538681744 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole7" type="Area2D" parent="Spawns" unique_id=542924808 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -468,7 +461,7 @@ z_index = 999
 position = Vector2(2000, 1808)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -480,13 +473,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole7" unique_id=1225359950 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole7" unique_id=1246025446 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -495,7 +481,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -513,6 +499,12 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole7" unique_id=787254225 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
+
 [node name="SpawnHole8" type="Area2D" parent="Spawns" unique_id=1287283109 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -520,7 +512,7 @@ z_index = 999
 position = Vector2(1904, 1808)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -533,13 +525,6 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole8" unique_id=1564101060 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
-
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole8" unique_id=1643294051 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -547,7 +532,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -565,6 +550,12 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole8" unique_id=511939289 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
+
 [node name="SpawnHole9" type="Area2D" parent="Spawns" unique_id=852817385 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -572,7 +563,7 @@ z_index = 999
 position = Vector2(2640, 1968)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -585,13 +576,6 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole9" unique_id=1488977959 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
-
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole9" unique_id=1908158392 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -599,7 +583,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -617,6 +601,12 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole9" unique_id=1419873254 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
+
 [node name="SpawnHole10" type="Area2D" parent="Spawns" unique_id=371922945 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -624,7 +614,7 @@ z_index = 999
 position = Vector2(3088, 1872)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -637,13 +627,6 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole10" unique_id=1610890725 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
-
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole10" unique_id=1183089571 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -651,7 +634,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -669,6 +652,12 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole10" unique_id=1102518006 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
+
 [node name="SpawnHole11" type="Area2D" parent="Spawns" unique_id=403705419 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -676,7 +665,7 @@ z_index = 999
 position = Vector2(2832, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -689,13 +678,6 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole11" unique_id=714932387 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
-
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole11" unique_id=1145873248 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -703,7 +685,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -721,6 +703,12 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole11" unique_id=814893156 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
+
 [node name="SpawnHole12" type="Area2D" parent="Spawns" unique_id=1569248474 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -728,7 +716,7 @@ z_index = 999
 position = Vector2(3040, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -741,13 +729,6 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole12" unique_id=1928857280 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
-
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole12" unique_id=893251631 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -755,7 +736,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -773,6 +754,12 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole12" unique_id=2114060121 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
+
 [node name="SpawnHole13" type="Area2D" parent="Spawns" unique_id=1275589984 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -780,7 +767,7 @@ z_index = 999
 position = Vector2(2768, 2032)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -793,13 +780,6 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole13" unique_id=365651233 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
-
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole13" unique_id=304291609 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -807,7 +787,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -825,6 +805,12 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole13" unique_id=990820979 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
+
 [node name="SpawnHole14" type="Area2D" parent="Spawns" unique_id=704324220 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -832,7 +818,7 @@ z_index = 999
 position = Vector2(3088, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -845,13 +831,6 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole14" unique_id=1775851913 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
-
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole14" unique_id=405672226 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -859,7 +838,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -877,6 +856,12 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole14" unique_id=2068616655 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
+
 [node name="SpawnHole15" type="Area2D" parent="Spawns" unique_id=898153951 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -884,7 +869,7 @@ z_index = 999
 position = Vector2(2832, 2032)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -897,13 +882,6 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole15" unique_id=330982471 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
-
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole15" unique_id=1829066268 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -911,7 +889,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -929,6 +907,12 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole15" unique_id=612848101 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
+
 [node name="SpawnHole16" type="Area2D" parent="Spawns" unique_id=1522068122 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -936,7 +920,7 @@ z_index = 999
 position = Vector2(3440, 2144)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -949,13 +933,6 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole16" unique_id=1096013483 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
-
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole16" unique_id=1220771323 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -963,7 +940,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -980,6 +957,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole16" unique_id=1458415503 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole17" type="Area2D" parent="Spawns" unique_id=1750056647 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -988,7 +971,7 @@ z_index = 999
 position = Vector2(3648, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1000,13 +983,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole17" unique_id=2064400555 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole17" unique_id=1048124935 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1015,7 +991,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1033,6 +1009,12 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole17" unique_id=1487683321 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
+
 [node name="SpawnHole18" type="Area2D" parent="Spawns" unique_id=1224204423 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -1040,7 +1022,7 @@ z_index = 999
 position = Vector2(3040.0159, 2192.1804)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1053,13 +1035,6 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole18" unique_id=1513248871 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
-
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole18" unique_id=1173897338 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -1067,7 +1042,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1085,14 +1060,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole18" unique_id=1901921158 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
+
 [node name="SpawnHole19" type="Area2D" parent="Spawns" unique_id=326040387 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(3088.0159, 2192.1804)
+position = Vector2(3088, 2192)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1105,13 +1086,6 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole19" unique_id=1237904345 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
-
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole19" unique_id=694352070 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -1119,7 +1093,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1137,6 +1111,12 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole19" unique_id=1413310224 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
+
 [node name="SpawnHole20" type="Area2D" parent="Spawns" unique_id=1336631091 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -1144,7 +1124,7 @@ z_index = 999
 position = Vector2(3919.4707, 2192.1233)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1157,13 +1137,6 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole20" unique_id=1971533191 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
-
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole20" unique_id=1951995026 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -1171,7 +1144,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1188,6 +1161,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole20" unique_id=1789929315 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole21" type="Area2D" parent="Spawns" unique_id=867993202 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1196,7 +1175,7 @@ z_index = 999
 position = Vector2(3424.0159, 2192.1804)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1208,13 +1187,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole21" unique_id=167401903 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole21" unique_id=1566067496 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1223,7 +1195,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1240,6 +1212,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole21" unique_id=1584124226 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole22" type="Area2D" parent="Spawns" unique_id=390359190 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1248,7 +1226,7 @@ z_index = 999
 position = Vector2(3488.0159, 2176.1804)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1260,13 +1238,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole22" unique_id=787491505 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole22" unique_id=1827575632 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1275,7 +1246,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1292,6 +1263,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole22" unique_id=2099404102 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole23" type="Area2D" parent="Spawns" unique_id=1895532572 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1300,7 +1277,7 @@ z_index = 999
 position = Vector2(3568.0159, 2176.1804)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1312,13 +1289,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole23" unique_id=123473149 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole23" unique_id=786043483 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1327,7 +1297,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1344,6 +1314,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole23" unique_id=168961809 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole24" type="Area2D" parent="Spawns" unique_id=367837410 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1352,7 +1328,7 @@ z_index = 999
 position = Vector2(3648.0159, 2320.1804)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1364,13 +1340,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole24" unique_id=1714278018 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole24" unique_id=1777290959 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1379,7 +1348,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1396,6 +1365,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole24" unique_id=1084301124 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole25" type="Area2D" parent="Spawns" unique_id=1705067703 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1404,7 +1379,7 @@ z_index = 999
 position = Vector2(3504.0159, 2320.1804)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1416,13 +1391,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole25" unique_id=1699857864 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole25" unique_id=551958075 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1431,7 +1399,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1448,6 +1416,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole25" unique_id=1392018764 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole26" type="Area2D" parent="Spawns" unique_id=848571253 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1456,7 +1430,7 @@ z_index = 999
 position = Vector2(3424.0159, 2320.1804)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1468,13 +1442,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole26" unique_id=2140577185 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole26" unique_id=1049177376 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1483,7 +1450,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1500,6 +1467,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole26" unique_id=2000963407 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole27" type="Area2D" parent="Spawns" unique_id=1392309535 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1508,7 +1481,7 @@ z_index = 999
 position = Vector2(3728, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1520,13 +1493,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole27" unique_id=1963651274 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole27" unique_id=1392057013 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1535,7 +1501,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1552,6 +1518,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole27" unique_id=1007941944 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole28" type="Area2D" parent="Spawns" unique_id=1723181226 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1560,7 +1532,7 @@ z_index = 999
 position = Vector2(3904, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1572,13 +1544,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole28" unique_id=2114687101 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole28" unique_id=1183992867 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1587,7 +1552,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1604,6 +1569,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole28" unique_id=190272007 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole29" type="Area2D" parent="Spawns" unique_id=129257757 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1612,7 +1583,7 @@ z_index = 999
 position = Vector2(3984, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1624,13 +1595,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole29" unique_id=660370688 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole29" unique_id=254654539 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1639,7 +1603,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1656,6 +1620,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole29" unique_id=1502201451 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole30" type="Area2D" parent="Spawns" unique_id=2101378820 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1664,7 +1634,7 @@ z_index = 999
 position = Vector2(4160, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1676,13 +1646,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole30" unique_id=857930262 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole30" unique_id=1856268315 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1691,7 +1654,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1708,6 +1671,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole30" unique_id=83202502 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole31" type="Area2D" parent="Spawns" unique_id=1660009588 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1716,7 +1685,7 @@ z_index = 999
 position = Vector2(4240, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1728,13 +1697,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole31" unique_id=998996023 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole31" unique_id=109877449 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1743,7 +1705,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1760,6 +1722,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole31" unique_id=2035278901 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole32" type="Area2D" parent="Spawns" unique_id=133334342 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1768,7 +1736,7 @@ z_index = 999
 position = Vector2(3648, 2032)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1780,13 +1748,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole32" unique_id=1432450922 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole32" unique_id=1422988246 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1795,7 +1756,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1812,6 +1773,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole32" unique_id=101398352 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole33" type="Area2D" parent="Spawns" unique_id=287681018 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1820,7 +1787,7 @@ z_index = 999
 position = Vector2(3728, 2032)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1832,13 +1799,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole33" unique_id=1062637251 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole33" unique_id=1950818986 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1847,7 +1807,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1864,6 +1824,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole33" unique_id=117963746 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole34" type="Area2D" parent="Spawns" unique_id=203918040 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1872,7 +1838,7 @@ z_index = 999
 position = Vector2(3904, 2032)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1884,13 +1850,6 @@ properties = {
 "spawn_limit": [1, 2, ""],
 "spawn_start_timer": [1.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole34" unique_id=958926840 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole34" unique_id=1519819552 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1899,7 +1858,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1917,6 +1876,12 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole34" unique_id=1564513430 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
+
 [node name="SpawnHole35" type="Area2D" parent="Spawns" unique_id=2119698483 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -1924,7 +1889,7 @@ z_index = 999
 position = Vector2(3984, 2032)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1937,13 +1902,6 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole35" unique_id=1040580296 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
-
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole35" unique_id=393179657 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -1951,7 +1909,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1969,6 +1927,12 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole35" unique_id=1922994995 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
+
 [node name="SpawnHole36" type="Area2D" parent="Spawns" unique_id=1750497498 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -1976,7 +1940,7 @@ z_index = 999
 position = Vector2(4160, 2032)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -1989,13 +1953,6 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole36" unique_id=81027605 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
-
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole36" unique_id=2109527319 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -2003,7 +1960,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -2021,6 +1978,12 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole36" unique_id=1163919190 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
+
 [node name="SpawnHole37" type="Area2D" parent="Spawns" unique_id=2078279651 groups=["Entities", "PropSpawns"] instance=ExtResource("7_gd7rc")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -2028,7 +1991,7 @@ z_index = 999
 position = Vector2(4240, 2032)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_88oha")
+script = ExtResource("8_21jaq")
 prop_path = "res://src/Prop/SpawnHole.tscn"
 properties = {
 "always_active": [true, 1, ""],
@@ -2041,13 +2004,6 @@ properties = {
 "spawn_start_timer": [1.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/SpawnHole37" unique_id=68906218 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_88oha")]
-visibility_layer = 2
-script = ExtResource("10_kaepw")
-tag_name = "player_detection"
-value = Rect2(3440, 1968, 16, 16)
-grid_value = Rect2i(215, 123, 1, 1)
-
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole37" unique_id=477002984 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_gt8t5")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -2055,7 +2011,7 @@ z_index = 999
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_gt8t5")
+script = ExtResource("10_o6gqe")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -2072,6 +2028,12 @@ properties = {
 "start_dir": [Vector2(-1, 0), 5, ""],
 "water_gravity": [150.0, 3, ""]
 }
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole37" unique_id=1164854278 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_e8i6e")]
+visibility_layer = 2
+script = ExtResource("12_ha2hh")
+tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="Water" type="MarginContainer" parent="Spawns" unique_id=1800792368 groups=["TriggerSpawns"] instance=ExtResource("13_l0h4m")]
 modulate = Color(1, 1, 1, 0.75)
@@ -2083,7 +2045,7 @@ offset_top = 2000.0
 offset_right = 4320.0
 offset_bottom = 2160.0
 mouse_filter = 2
-script = ExtResource("14_l0h4m")
+script = ExtResource("14_4ge24")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20, ""],
@@ -2103,7 +2065,7 @@ offset_top = 1840.0
 offset_right = 2304.0
 offset_bottom = 2415.0
 mouse_filter = 2
-script = ExtResource("14_l0h4m")
+script = ExtResource("14_4ge24")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20, ""],
@@ -2122,13 +2084,13 @@ z_index = 999
 position = Vector2(3008, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_57er1")
+script = ExtResource("16_18xl8")
 
 [node name="SpawnPoint" type="Area2D" parent="." unique_id=1710023778 groups=["SpawnPoints"] instance=ExtResource("13_ddw3t")]
 visibility_layer = 2
 position = Vector2(3056, 2384)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_wbuq6")
+script = ExtResource("18_yn5t4")
 
 [connection signal="body_exited" from="Triggers/KillBox" to="Triggers/KillBox" method="_on_body_exited"]

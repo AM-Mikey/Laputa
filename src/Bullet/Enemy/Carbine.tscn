@@ -9,9 +9,16 @@
 size = Vector2(6, 2)
 
 [node name="Carbine" type="CharacterBody2D" unique_id=1647668194]
-collision_layer = 0
+collision_layer = 8192
 collision_mask = 0
 script = ExtResource("1")
+damage = 4.0
+is_enemy_bullet = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=632199032]
+position = Vector2(-3, 0)
+shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="EnemyCollisionDetector" parent="." unique_id=968538818 instance=ExtResource("3_qggel")]
 
