@@ -68,7 +68,6 @@ func start_printing(dialog_json, conversation: String, next_state = "inspect"): 
 	dl.text = ""
 
 	align_box()
-	#pc.disable()
 	pc.mm.cached_state = pc.mm.current_state
 	pc.mm.change_state(next_state)
 	dl.text = text_stripped_of_commands
@@ -151,10 +150,10 @@ func run_text_array(text_array, from_input := false): #step is always the next s
 	if step == current_text_array.size() || do_force_end:
 		#print("reached end")
 		active = false
-		#if !is_sign:
-			#flash_type = FLASH_END
-			#flash_original_text = dl.text
-			#$FlashTimer.start(0.1)
+		if !is_sign:
+			flash_type = FLASH_END
+			flash_original_text = dl.text
+			$FlashTimer.start(0.1)
 		return
 	var string = text_array[step]
 
@@ -171,15 +170,13 @@ func run_text_array(text_array, from_input := false): #step is always the next s
 			step += 1
 			print("step: ", step)
 			current_character_index += 1
-			#if string == "\r\n": #one more character
-				#current_character_index += 1
 			run_text_array(text_array)
 		else:
 			active = false #otherwise it sets active == false and ends the loop
-			#if !is_sign:
-				#flash_type = FLASH_NORMAL
-				#flash_original_text = dl.text
-				#$FlashTimer.start(0.3)
+			if !is_sign:
+				flash_type = FLASH_NORMAL
+				flash_original_text = dl.text
+				$FlashTimer.start(0.3)
 
 	else:
 		print(string)
@@ -188,20 +185,6 @@ func run_text_array(text_array, from_input := false): #step is always the next s
 		print("step: ", step)
 		run_text_array(text_array)
 
-#func run_text_string(string): #OLD
-	#var character_step = 0
-	#for character in string:
-		#var is_last_character = character_step == string.length() - 1
-		#dl.text += character
-		#if do_delay:
-			#am.play("npc_dialog")
-			#if is_last_character:
-				#pass
-			#elif character in [",", ".", "?", "!", ":", ";"]:
-				#await get_tree().create_timer(punctuation_delay).timeout
-			#else:
-				#await get_tree().create_timer(print_delay, true, false).timeout #TODO: check if these flags are correct
-		#character_step += 1
 
 func run_text_string(string):
 	for character in string:
@@ -218,28 +201,31 @@ func run_text_string(string):
 				await get_tree().create_timer(print_delay, true, false).timeout #TODO: check if these flags are correct
 
 
-#func _on_flash_timer_timeout():
-	#if busy: return
-	#if flash_type == FLASH_NORMAL:				#TODO: delete previous text after third line
-		#if dl.text == flash_original_text:
-			#dl.text += " §"#"[color=#ffffff40] [/color]"
-		#else:
-			#dl.text = flash_original_text
-	#elif flash_type == FLASH_END:
-		#match flash_step:
-			#0:
-				#dl.text = flash_original_text + "[color=goldenrod] ¤[/color]"
-				#$FlashTimer.wait_time = 0.1
-			#1:
-				#dl.text = flash_original_text + "[color=goldenrod] €[/color]"
-				#$FlashTimer.wait_time = 0.075
-			#2:
-				#dl.text = flash_original_text + "[color=goldenrod] £[/color]"
-				#$FlashTimer.wait_time = 0.1
-			#3:
-				#dl.text = flash_original_text + "[color=goldenrod] ¢[/color]"
-				#$FlashTimer.wait_time = 0.2
-		#flash_step = (flash_step + 1) % 4 #warning, this is never reset
+func _on_flash_timer_timeout():
+	if busy: return
+	if flash_type == FLASH_NORMAL:				#TODO: delete previous text after third line
+		if dl.text == flash_original_text:
+			dl.text = dl.text.insert(current_character_index, " §")#"[color=#ffffff40] [/color]"
+			dl.visible_characters += 2
+		else:
+			dl.text = flash_original_text
+			dl.visible_characters -= 2
+	elif flash_type == FLASH_END:
+		dl.visible_characters += 2
+		match flash_step:
+			0:
+				dl.text = flash_original_text + "[color=goldenrod] ¤[/color]"
+				$FlashTimer.wait_time = 0.1
+			1:
+				dl.text = flash_original_text + "[color=goldenrod] €[/color]"
+				$FlashTimer.wait_time = 0.075
+			2:
+				dl.text = flash_original_text + "[color=goldenrod] £[/color]"
+				$FlashTimer.wait_time = 0.1
+			3:
+				dl.text = flash_original_text + "[color=goldenrod] ¢[/color]"
+				$FlashTimer.wait_time = 0.2
+		flash_step = (flash_step + 1) % 4 #warning, this is never reset
 
 
 func _input(event):
@@ -261,10 +247,10 @@ func progress_text(with_newline = true):
 	do_delay = true
 	active = true
 	$FlashTimer.stop()
-	#if with_newline:
-		#dl.text = flash_original_text + "\n" #remove cursor, add back newline
-	#else:
-		#dl.text = flash_original_text
+	if with_newline:
+		dl.text = flash_original_text + "\n" #remove cursor, add back newline
+	else:
+		dl.text = flash_original_text
 	run_text_array(current_text_array, true)
 
 func setup_next_conversation():
