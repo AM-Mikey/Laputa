@@ -58,13 +58,9 @@ func start_printing(dialog_json, conversation: String, next_state = "inspect"):
 
 	if get_text_array_starts_with_face():
 		$NPC.visible = true
-		size = Vector2(400, 78)
-		_resolution_scale_changed() #to update after size
 		dl = $NPC/DialogNPC
 	else:
 		$Flat.visible = true
-		size = Vector2(384, 78)
-		_resolution_scale_changed() #to update after size
 		dl = $Flat/DialogFlat
 	dl.text = ""
 
@@ -145,8 +141,8 @@ func run_text_array(text_array, from_input := false): #step is always the next s
 	var string = text_array[step]
 
 	if string.begins_with("/"):
-		#print("did command: ", string)
-		await $CommandHandler.parse_command(string.lstrip("/"))
+		var command_is_first = true if step == 0 else false
+		await $CommandHandler.parse_command(string.lstrip("/"), command_is_first)
 		step += 1
 		print("step: ", step)
 		run_text_array(text_array)
@@ -360,11 +356,12 @@ func align_out():
 
 
 func display_name(d_name: String):
-	$Name.visible = true
 	$Name/Shadow.global_position = $Name/HBox/Label.global_position - Vector2.ONE
 	$Name/HBox/Label.text = d_name.capitalize()
 	$Name/Shadow.text = d_name.capitalize()
-	await get_tree().create_timer(0.01, true, false).timeout #TODO: check if these flags are correct
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	$Name.visible = true
 	$Name/Shadow.size = $Name/HBox/Label.size
 	$Name/Panel.size.x = $Name/HBox/Label.size.x + 19
 
@@ -386,18 +383,29 @@ func flip_face(dir = "auto"):
 			$Face/Sprite2D.flip_h = true
 
 
+func change_background(node_to_show) -> bool:
+	if node_to_show == $Flat:
+		if $Flat.visible: return false
+		elif $NPC.visible:
+			$NPC.visible = false
+			$AnimationPlayer.play("NPCToFlat")
+			return true
+	elif node_to_show == $NPC:
+		if $NPC.visible: return false
+		if $Flat.visible:
+			$Flat.visible = false
+			$AnimationPlayer.play("FlatToNPC")
+			return true
+	return false
+
 
 ### GETTERS ###
 
 func get_text_array_starts_with_face() -> bool:
-	var out = false
-	for section in current_text_array:
-		if !section.left(1) == "/":
-			return out #false, we found a bit of text before a /face
-		elif section.containsn("/newchar") || section.containsn("/face"):
-			out = true
-			return out
-	return out
+	if current_text_array[0].containsn("/newchar") || current_text_array[0].containsn("/face"):
+		return true
+	else:
+		return false
 
 ### SIGNALS ###
 

@@ -70,7 +70,7 @@ _data = {
 }
 
 [node name="Nun" type="CharacterBody2D" unique_id=2077629338 groups=["Actors", "Entities", "NPCs"]]
-collision_layer = 128
+collision_layer = 640
 collision_mask = 8
 script = ExtResource("1_15sr2")
 starting_state = "walk"
