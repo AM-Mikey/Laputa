@@ -702,18 +702,21 @@ func set_cells_from_brush_origins(origins: Array, erase = false):
 
 func set_actor_spawn(actor_path, pos):
 	var actor_spawn = ACTOR_SPAWN.instantiate()
+	var actor = load(actor_path).instantiate()
+	var active_button: Node
 	actor_spawn.actor_path = actor_path
 	actor_spawn.global_position = (pos * 16) + Vector2i(8, 16)
 	if active_tool == "entity" && subtool == "enemy":
-		var active_button
 		for b in get_tree().get_nodes_in_group("EnemyButtons"):
 			if b.active:
 				active_button = b
-		if actor_spawn.properties.has("difficulty"):
-			actor_spawn.properties["difficulty"] = [active_button.enemy_difficulty, TYPE_INT, ""]
 	spawn_collection.add_child(actor_spawn)
 	actor_spawn.owner = w.current_level
 	actor_spawn.initialize()
+	if actor_spawn.properties.has("difficulty") && active_button:
+		actor_spawn.properties["difficulty"] = [active_button.enemy_difficulty, TYPE_INT, ""]
+		actor_spawn.get_node("Sprite2D").texture = actor.get("TX_%s" %active_button.enemy_difficulty)
+	actor.free()
 	inspector.on_selected(actor_spawn, "actor_spawn")
 
 func set_prop_spawn(prop_path, pos):

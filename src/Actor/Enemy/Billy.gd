@@ -9,6 +9,7 @@ const TX_1 = preload("res://assets/Actor/Enemy/Billy1.png")
 
 @export var move_dir = Vector2.LEFT
 @export var difficulty := 0
+var max_difficulty = 1
 @export var idle_max_time := 5.0
 @export var walk_max_time := 10.0
 @export var deaggro_delay := 3.0
@@ -44,8 +45,6 @@ var move_velocity := Vector2.ZERO
 var gravity_velocity := Vector2.ZERO
 
 @onready var ap = $AnimationPlayer
-
-var debug_name = "Billy25"
 
 func setup(): #Reminder: no function called can use await
 	match difficulty:
@@ -169,9 +168,6 @@ func do_aggro(delta):
 			if $OnEdgeDelay.time_left <= 0.0:
 				on_edge = false
 
-	if (name == debug_name):
-		print(on_edge, " ", on_wall, " ", on_floor, " ", move_dir.x, " ", aggro_dir.x, " ", x_dir, " ", displace_to_waypoint)
-
 	if on_wall:
 		ap.play("StandShoot")
 		stuck_shooting = true
@@ -288,8 +284,6 @@ func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction =
 				is_jumping = false
 
 	out = move_velocity + gravity_velocity
-	#if (name == debug_name):
-		#print(on_wall, " ", is_jumping, " ", jump_dir_x, " ", move_dir, " ", out, " ", move_velocity, " ", gravity_velocity)
 	return out
 
 ### HELPERS ###
@@ -319,10 +313,6 @@ func fire():
 		var b_speed_y = (peak_y - 0.5 * bullet_gravity * pow(normal_time_peak_reached, 2)) / normal_time_peak_reached
 		bullet.speed = Vector2(b_speed_x, b_speed_y).length()
 		bullet.direction = Vector2(b_speed_x, b_speed_y).normalized()
-
-		#if name == debug_name:
-			#print("B ", bullet.speed, " ", bullet.direction)
-			#print(peak_y, " ", abs(0.5 * bullet_gravity * pow(normal_time_peak_reached, 2)))
 
 	world.get_node("Middle").add_child(bullet)
 	am.play("enemy_shoot", self)

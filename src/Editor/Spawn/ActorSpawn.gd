@@ -50,12 +50,12 @@ func _ready():
 		input_pickable = false
 
 func initialize(): #first time set up properties
-	print("initialize")
 	if (actor_path != ""):
 		var actor = load(actor_path).instantiate()
 		for p in actor.get_property_list():
 			if p["usage"] & 4102 == 4102: #exported properties
 				if p["name"] == "difficulty":
+					print("set difficulty via initialize")
 					properties[p["name"]] = [actor.get(p["name"]), TYPE_INT, ""]
 				else:
 					properties[p["name"]] = [actor.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
