@@ -42,7 +42,6 @@ func parse_command(string, command_is_first):
 			await hide_face()
 		"newchar": #/newchar, (face), (name)
 			var a = string.split(",")
-			db.dl.text = ""
 			face(a[1].to_lower(), command_is_first)
 			db.display_name(a[2].to_lower())
 		"hide":#				/hide, (string: npc_id)									makes the npc with given id invisible
@@ -61,7 +60,9 @@ func parse_command(string, command_is_first):
 			db.dl.text += "[/b] "
 		"knockpc":
 			var a = string.split(",")
-			db.dl.text = ""
+			db.dl.text = db.get_text_stripped_of_commands(db.step)
+			db.dl.visible_characters = 0
+			db.current_character_index = 0
 			match a[1]:
 				"left": pc.mm.knockback_direction = Vector2.LEFT
 				"right": pc.mm.knockback_direction = Vector2.RIGHT
@@ -131,7 +132,9 @@ func parse_command(string, command_is_first):
 			flip("right", argument)
 
 		"clear":#																		clears the text		(use at start of text)
-			db.dl.text = ""
+			db.dl.text = db.get_text_stripped_of_commands(db.step)
+			db.dl.visible_characters = 0
+			db.current_character_index = 0
 		"wait":#					/wait, (float: duration = 1.0)						clears text and hides db until duration
 			await wait(argument)
 		"auto":#																		blocks input and automatically progresses text
@@ -318,7 +321,9 @@ func yes_no():
 	db.get_node("Options").options = ["Yes", "No"]
 	db.get_node("Options").display_options()
 	db.dl = db.get_node("Response/DialogResponse")
-	db.dl.text = ""
+	db.dl.text = db.get_text_stripped_of_commands(db.step)
+	db.dl.visible_characters = 0
+	db.current_character_index = 0
 	print("cleared text + set db")
 	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
 	db.get_node("Options").exit_action = "options"
@@ -332,7 +337,9 @@ func options(string):
 	db.get_node("Options").options = capitalized_array
 	db.get_node("Options").display_options()
 	db.dl = db.get_node("Response/DialogResponse")
-	db.dl.text = ""
+	db.dl.text = db.get_text_stripped_of_commands(db.step)
+	db.dl.visible_characters = 0
+	db.current_character_index = 0
 	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
 	db.get_node("Options").exit_action = "options"
 
@@ -357,7 +364,9 @@ func topics(argument):
 	db.get_node("Options").ids = final_ids
 	db.get_node("Options").display_options()
 	db.dl = db.get_node("Response/DialogResponse")
-	db.dl.text = ""
+	db.dl.text = db.get_text_stripped_of_commands(db.step)
+	db.dl.visible_characters = 0
+	db.current_character_index = 0
 	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
 	db.get_node("Options").exit_action = "topics"
 
