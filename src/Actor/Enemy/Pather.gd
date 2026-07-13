@@ -21,6 +21,7 @@ var t_dir = null
 
 var prev_global_position := Vector2.ZERO
 var debug_path_color := Color.RED
+var debug_path_start := true
 
 func _draw():
 	if debug and !dead:
@@ -61,6 +62,8 @@ func setup():
 
 	if debug:
 		debug_path_color = Color(randf(), randf(), randf(), 1.0)
+		if debug_path_start:
+			path_start = randf()
 	w.emit_signal("finished_spawn_entities_step")
 
 func _physics_process(delta):
@@ -69,12 +72,14 @@ func _physics_process(delta):
 
 	if disabled || dead:
 		return
+
 	if loop || time <= travel_time:
 		time += delta
 	else:
 		time = travel_time
+		return
 
-	var t_value := wrapf(time / travel_time, 0.0, 1.0)
+	var t_value := wrapf(path_start + time / travel_time, 0.0, 1.0)
 
 	global_position = path.sample_baked(t_value * path_length)
 

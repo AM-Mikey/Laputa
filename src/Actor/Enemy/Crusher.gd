@@ -30,10 +30,12 @@ func setup():
 func _physics_process(delta):
 	if disabled || dead:
 		return
+
 	if loop || time <= travel_time:
 		time += delta
 	else:
 		time = travel_time
+		return
 
 	var t_value := wrapf(time / travel_time, 0.0, 2.0)
 	if t_value <= 1.0:
