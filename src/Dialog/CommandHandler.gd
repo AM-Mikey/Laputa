@@ -8,7 +8,7 @@ const INVENTORY_ICON = preload("res://src/UI/Inventory/InventoryIcon.tscn")
 
 
 
-func parse_command(string):
+func parse_command(string, command_is_first):
 	var command = string.split(",", true, 1)
 	print("command: ", string)
 
@@ -24,7 +24,7 @@ func parse_command(string):
 		#/face, (sprite_name)
 		#changes face_sprite to the specified file
 		"face":
-			face(argument)
+			face(argument, command_is_first)
 		#/flipface, (string: direction)
 		#flips the face sprite, to the opposite direction, or in a specified direction
 		"flipface":
@@ -38,12 +38,12 @@ func parse_command(string):
 		"hidename":
 			db.hide_name()
 		"hideface":
-			hide_face()
 			db.hide_name()
+			await hide_face()
 		"newchar": #/newchar, (face), (name)
 			var a = string.split(",")
 			db.dl.text = ""
-			face(a[1].to_lower())
+			face(a[1].to_lower(), command_is_first)
 			db.display_name(a[2].to_lower())
 		"hide":#				/hide, (string: npc_id)									makes the npc with given id invisible
 			set_visible(argument, false)
@@ -140,9 +140,6 @@ func parse_command(string):
 				db.do_delay = true
 			else:
 				db.auto_input = false
-		"skipinput":#																		automatically progresses the next line
-			pass
-			#skipinput()
 
 		### Camera Control
 		"cam":
@@ -164,14 +161,11 @@ func parse_command(string):
 					camera.control_add(["reset"])
 
 
-
-
 ### COMMANDS ###
 
-func face(string):
+func face(string, command_is_first):
 	var face_node = db.get_node("Face")
 	var face_sprite = face_node.get_node("Sprite2D")
-
 	if string == "":
 		printerr("COMMAND ERROR: no npc given for /face")
 		return
@@ -180,14 +174,25 @@ func face(string):
 	var expression = 0
 	if n_face.size() > 1:
 		expression = int(n_face[1])
-
+	
 	face_node.visible = true
-
 	face_sprite.texture = load("res://assets/Face/%s.png" % id.capitalize())
 	face_sprite.hframes = face_sprite.texture.get_width() / 48
 	face_sprite.frame = expression
+	if !command_is_first: #run the full version if it's not the first command
+		#var saved_text = db.dl.text
+		
+		db.dl.text = ""
+		db.dl = db.get_node("NPC/DialogNPC")
+		db.dl.text = ""
+		#db.dl.text = saved_text
+		#db.align_box() #WE NEED ANOTHER COMMAND TO MOVE ITS POSITION
+		var change_was_needed = db.change_background(db.get_node("NPC"))
+		if !change_was_needed:
+			db.get_node("AnimationPlayer").play("FaceEnter") #either play FlatToNPC or FaceIn, not both
+	
 
-	db.get_node("AnimationPlayer").play("FaceEnter")
+
 
 
 func flip_face(arguement):
@@ -197,14 +202,11 @@ func flip_face(arguement):
 		db.flip_face(arguement)
 
 func hide_face():
-	#db.get_node("NPC").visible = false
-	#db.get_node("Flat").visible = true
-	#db.get_node("Face").visible = false
-	db.get_node("AnimationPlayer").play("NPCToFlat")
-	db.size = Vector2(384, 78)
-	db._resolution_scale_changed() #to update after size
+	db.change_background(db.get_node("Flat"))
 	db.dl = db.get_node("Flat/DialogFlat")
 	db.dl.text = ""
+	await db.get_node("AnimationPlayer").animation_finished
+	
 
 func set_visible(string, visible):
 	if string == "":
@@ -307,14 +309,6 @@ func wait(string):
 	db.busy = true
 	await get_tree().create_timer(wait_time, true, false).timeout #TODO: check if these flags are correct
 	db.busy = false
-
-#func skipinput():
-	#db.auto_input = true
-	#db.do_delay = true
-	#await get_tree().create_timer(0.1, true, false).timeout #TODO: check if these flags are correct
-	#db.auto_input = false
-
-
 
 ### BRANCHING ###
 

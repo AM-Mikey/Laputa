@@ -17,6 +17,8 @@ const MAIN_MISSION = [ #[name, trigger_type, trigger_value, description]
 	"This is a test of the manual camera controls"],
 	["camera_test_2", "", "",
 	"This is a test of the manual camera controls, part 2"],
+	["stress_test_main_mission", "", "",
+	"Prod the system till it spontaneously combusts!"]
 ]
 
 var main_mission_stage: Array = MAIN_MISSION[0]
@@ -270,7 +272,7 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 			if data["camera_control_add"].has(mission_name):
 				for stage in data["camera_control_add"][mission_name]:
 					if stage == mission_stage:
-						inp.can_act = false
+						#inp.can_act = false
 						for a in data["camera_control_add"][mission_name][stage]:
 							f.pc().get_node("PlayerCamera").control_add(a)
 

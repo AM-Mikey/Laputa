@@ -52,7 +52,7 @@ _data = {
 }
 
 [node name="Child" type="CharacterBody2D" unique_id=687117163 groups=["Actors", "Entities", "NPCs"]]
-collision_layer = 128
+collision_layer = 640
 collision_mask = 8
 script = ExtResource("1_ag8g5")
 id = "child"

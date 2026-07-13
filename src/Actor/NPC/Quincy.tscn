@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://b58ifwfgkr5v6" path="res://src/Actor/NPC/NPC.gd" id="1_a3r05"]
 [ext_resource type="Texture2D" uid="uid://bxmpmwm6ge8qm" path="res://assets/Actor/NPC/Quincy.png" id="2"]
-[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_vi7pi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rtbp7"]
 radius = 7.0
@@ -51,7 +50,7 @@ _data = {
 }
 
 [node name="Quincy" type="CharacterBody2D" unique_id=156717109 groups=["Actors", "Entities", "NPCs"]]
-collision_layer = 128
+collision_layer = 640
 collision_mask = 8
 script = ExtResource("1_a3r05")
 id = "quincy"
