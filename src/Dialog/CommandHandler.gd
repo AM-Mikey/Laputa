@@ -24,7 +24,7 @@ func parse_command(string, command_is_first):
 		#/face, (sprite_name)
 		#changes face_sprite to the specified file
 		"face":
-			face(argument, command_is_first)
+			await face(argument, command_is_first)
 		#/flipface, (string: direction)
 		#flips the face sprite, to the opposite direction, or in a specified direction
 		"flipface":
@@ -180,17 +180,17 @@ func face(string, command_is_first):
 	face_sprite.hframes = face_sprite.texture.get_width() / 48
 	face_sprite.frame = expression
 	if !command_is_first: #run the full version if it's not the first command
-		#var saved_text = db.dl.text
-		
 		db.dl.text = ""
 		db.dl = db.get_node("NPC/DialogNPC")
-		db.dl.text = ""
-		#db.dl.text = saved_text
+		db.dl.text = db.get_text_stripped_of_commands(db.step)
+		db.dl.visible_characters = 0
+		db.current_character_index = 0
+		
 		#db.align_box() #WE NEED ANOTHER COMMAND TO MOVE ITS POSITION
 		var change_was_needed = db.change_background(db.get_node("NPC"))
 		if !change_was_needed:
 			db.get_node("AnimationPlayer").play("FaceEnter") #either play FlatToNPC or FaceIn, not both
-	
+		await db.get_node("AnimationPlayer").animation_finished
 
 
 
@@ -204,7 +204,9 @@ func flip_face(arguement):
 func hide_face():
 	db.change_background(db.get_node("Flat"))
 	db.dl = db.get_node("Flat/DialogFlat")
-	db.dl.text = ""
+	db.dl.text = db.get_text_stripped_of_commands(db.step)
+	db.dl.visible_characters = 0
+	db.current_character_index = 0
 	await db.get_node("AnimationPlayer").animation_finished
 	
 

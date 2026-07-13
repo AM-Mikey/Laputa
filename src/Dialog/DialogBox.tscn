@@ -6098,6 +6098,8 @@ text = "Lorem Ipsum is simply dummy text of the printing and typesetting industr
 Third Line of Text"
 scroll_active = false
 scroll_following = true
+scroll_following_visible_characters = true
+visible_characters_behavior = 1
 
 [node name="NPC" type="Control" parent="." unique_id=231870637]
 anchors_preset = 0
@@ -6105,6 +6107,7 @@ anchors_preset = 0
 [node name="Blur" type="Polygon2D" parent="NPC" unique_id=1739696838]
 z_index = -1
 material = SubResource("ShaderMaterial_js7dk")
+position = Vector2(392, -86)
 polygon = PackedVector2Array(-336, 101, -13, 101, -11, 102, -10, 103, -9, 105, -9, 110, -33, 158, -34, 159, -35, 161, -36, 162, -38, 163, -347, 163, -349, 162, -350, 161, -351, 159, -352, 157, -353, 154, -354, 152, -355, 151, -355, 101)
 
 [node name="Edge" type="Sprite2D" parent="NPC" unique_id=965333611]
@@ -6134,8 +6137,10 @@ text = "Lorem Ipsum is simply dummy text of the printing and typesetting industr
 Third line of txt"
 scroll_active = false
 scroll_following = true
-visible_characters = 80
-visible_ratio = 0.8695652
+scroll_following_visible_characters = true
+visible_characters = 71
+visible_characters_behavior = 1
+visible_ratio = 0.7717391
 
 [node name="Response" type="Control" parent="." unique_id=1643388423]
 visible = false
@@ -6185,6 +6190,8 @@ bbcode_enabled = true
 text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
 scroll_active = false
 scroll_following = true
+scroll_following_visible_characters = true
+visible_characters_behavior = 1
 
 [node name="Name" type="Control" parent="." unique_id=219904090]
 anchors_preset = 0
