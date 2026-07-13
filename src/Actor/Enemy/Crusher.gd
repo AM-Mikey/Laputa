@@ -24,6 +24,7 @@ func setup():
 	to_pos = $ToPoint.global_position
 	start_pos = global_position
 	prev_global_position = global_position
+	w.emit_signal("finished_spawn_entities_step")
 
 
 func _physics_process(delta):
