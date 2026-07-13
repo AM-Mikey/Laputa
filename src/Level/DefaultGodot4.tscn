@@ -642,82 +642,6 @@ script = ExtResource("18_r87vw")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="BeetleCrawler" type="Area2D" parent="Spawns" unique_id=1326540084 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(2552, 2032)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wcveo")
-actor_path = "res://src/Actor/Enemy/BeetleCrawler.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"BeetleCrawler", 4, ""],
-"speed": [Vector2(150, 150), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_ug36o")]
-visibility_layer = 2
-position = Vector2(0, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_k26mr")
-tag_name = "fly"
-direction = Vector2(-1, -8.742278e-08)
-movement_locked = true
-
-[node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler" unique_id=2126548652 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_ug36o")]
-visibility_layer = 2
-position = Vector2(0, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_k26mr")
-arrow_length = 24.0
-tag_name = "crawl"
-snap_degrees = 90.0
-movement_locked = true
-color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
-
-[node name="Billy" type="Area2D" parent="Spawns" unique_id=979780270 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(2520, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wcveo")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Billy", 4, ""],
-"idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"walk_max_time": [10.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" type="Node2D" parent="Spawns/Billy" unique_id=1723238334 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
-visibility_layer = 2
-script = ExtResource("16_ah4rl")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
 [node name="Billy1" type="Area2D" parent="Spawns" unique_id=546465970 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -781,40 +705,6 @@ properties = {
 }
 
 [node name="VURect" type="Node2D" parent="Spawns/Billy2" unique_id=1859121448 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
-visibility_layer = 2
-script = ExtResource("16_ah4rl")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy3" type="Area2D" parent="Spawns" unique_id=1736399421 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(2456, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_wcveo")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Billy3", 4, ""],
-"idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"walk_max_time": [10.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" type="Node2D" parent="Spawns/Billy3" unique_id=1762514617 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
 visibility_layer = 2
 script = ExtResource("16_ah4rl")
 tag_name = "player_detector"
@@ -992,6 +882,7 @@ tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry3" unique_id=417413993 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+visible = false
 visibility_layer = 2
 position = Vector2(64, 0)
 collision_layer = 16384
@@ -1044,6 +935,7 @@ tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry4" unique_id=1699828033 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+visible = false
 visibility_layer = 2
 position = Vector2(64, 0)
 collision_layer = 16384
@@ -1053,6 +945,7 @@ tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" type="Area2D" parent="Spawns/Sentry4" unique_id=1066131863 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+visible = false
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, -64)
@@ -1096,6 +989,7 @@ tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry5" unique_id=816198350 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+visible = false
 visibility_layer = 2
 position = Vector2(64, 0)
 collision_layer = 16384
@@ -1105,6 +999,7 @@ tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" type="Area2D" parent="Spawns/Sentry5" unique_id=1956625328 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+visible = false
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, -64)
