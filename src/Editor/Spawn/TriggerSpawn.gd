@@ -96,7 +96,10 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 			if old_properties.has(p["name"]):
 				if (old_properties[p["name"]].size() == 2): #Backward compability
 					old_properties[p["name"]].append("")
-				properties[p["name"]] = old_properties[p["name"]]
+				if p["hint"] == PROPERTY_HINT_ENUM && old_properties[p["name"]][2] != "":
+					properties[p["name"]] = [old_properties[p["name"]][0], old_properties[p["name"]][1], p["hint_string"]]
+				else:
+					properties[p["name"]] = old_properties[p["name"]]
 			else:
 				properties[p["name"]] = [trigger.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
 	for ac in trigger.get_children():

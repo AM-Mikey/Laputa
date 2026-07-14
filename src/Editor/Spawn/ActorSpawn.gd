@@ -109,7 +109,10 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 				if old_properties.has(p["name"]):
 					if (old_properties[p["name"]].size() == 2): #Backward compability
 						old_properties[p["name"]].append("")
-					properties[p["name"]] = old_properties[p["name"]]
+					if p["hint"] == PROPERTY_HINT_ENUM && old_properties[p["name"]][2] != "":
+						properties[p["name"]] = [old_properties[p["name"]][0], old_properties[p["name"]][1], p["hint_string"]]
+					else:
+						properties[p["name"]] = old_properties[p["name"]]
 				else:
 					properties[p["name"]] = [actor.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
 
@@ -272,10 +275,18 @@ func on_property_changed(p_name, p_value):
 				queue_redraw()
 
 func get_actor_name() -> String:
-	if !actor_path.is_absolute_path():
+	var file_path = actor_path
+	if file_path.begins_with("uid://"):
+		var uid = ResourceUID.text_to_id(actor_path)
+		if !ResourceUID.has_id(uid):
+			print("ActorSpawn | get_actor_name(): The provided actor_path doesn't have a corresponding UID")
+			return ""
+		file_path = ResourceUID.get_id_path(uid)
+
+	if !file_path.is_absolute_path():
 		print("ActorSpawn | get_actor_name(): actor_path is not a valid path!")
 		return ""
-	var actor = actor_path.get_file()
+	var actor = file_path.get_file()
 	if actor.get_extension() != "tscn":
 		print("ActorSpawn | get_actor_name(): actor_path does not point to a scene (.tscn) file!")
 		return ""
