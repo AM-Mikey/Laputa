@@ -83,6 +83,7 @@ func enter(): #Call this every time the level is changed or reloaded
 	f.hud().queue_free()
 	w.ui.visible = false
 	w.bl.visible = false
+	w.clear_spawn_layers()
 	for a in get_tree().get_nodes_in_group("Actors"):
 		a.queue_free()
 	for p in get_tree().get_nodes_in_group("Props"):
@@ -456,8 +457,12 @@ func do_generic_input(event):
 				free_previews()
 				preview_actor_spawn($Main/Win/Tab/NPCs.active_npc_path, grid_pos)
 			"grab":
-				if shift_held: inspector.active.global_position = Vector2(mouse_pos + grab_offset).snapped(Vector2(4,4))
-				else: inspector.active.global_position = Vector2(mouse_pos + grab_offset).snapped(Vector2(8,8))
+				var snapped_to = Vector2(4.0, 4.0) if shift_held else Vector2(8.0, 8.0)
+				var calc_new_position = Vector2(mouse_pos + grab_offset)
+				if inspector.active_type in ["waypoint_local", "waypoint_global_spawn"]:
+					if inspector.active.lock_x: calc_new_position.x = inspector.active.global_position.x
+					if inspector.active.lock_y: calc_new_position.y = inspector.active.global_position.y
+				inspector.active.global_position = calc_new_position.snapped(snapped_to)
 
 	#deleting entity
 	if event.is_action_pressed("editor_delete"):
@@ -697,18 +702,21 @@ func set_cells_from_brush_origins(origins: Array, erase = false):
 
 func set_actor_spawn(actor_path, pos):
 	var actor_spawn = ACTOR_SPAWN.instantiate()
+	var actor = load(actor_path).instantiate()
+	var active_button: Node
 	actor_spawn.actor_path = actor_path
 	actor_spawn.global_position = (pos * 16) + Vector2i(8, 16)
 	if active_tool == "entity" && subtool == "enemy":
-		var active_button
 		for b in get_tree().get_nodes_in_group("EnemyButtons"):
 			if b.active:
 				active_button = b
-		if actor_spawn.properties.has("difficulty"):
-			actor_spawn.properties["difficulty"] = [active_button.enemy_difficulty, TYPE_INT, ""]
 	spawn_collection.add_child(actor_spawn)
 	actor_spawn.owner = w.current_level
 	actor_spawn.initialize()
+	if actor_spawn.properties.has("difficulty") && active_button:
+		actor_spawn.properties["difficulty"] = [active_button.enemy_difficulty, TYPE_INT, ""]
+		actor_spawn.get_node("Sprite2D").texture = actor.get("TX_%s" %active_button.enemy_difficulty)
+	actor.free()
 	inspector.on_selected(actor_spawn, "actor_spawn")
 
 func set_prop_spawn(prop_path, pos):

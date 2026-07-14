@@ -48,10 +48,9 @@ var sample_enemy_og_process_mode = ProcessMode.PROCESS_MODE_INHERIT
 
 func _ready():
 	trigger_type = "screen_spawner"
-	spawn_area = Rect2(-$CollisionShape2D.shape.size / 2.0, $CollisionShape2D.shape.size)
 	$SpawnTimer.wait_time = spawn_interval
 	$StartTimer.wait_time = spawn_start_grace
-	spawn_area = $SpawnArea.value
+	spawn_area = $SpawnArea.get_global_value()
 
 	sample_enemy = $VUActor.spawn()
 

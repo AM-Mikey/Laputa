@@ -7,9 +7,12 @@ const FIZZLE_DISTANCE = preload("res://src/Effect/BulletFizzleDistance.tscn")
 const FIZZLE_WORLD = preload("res://src/Effect/BulletFizzleWorld.tscn")
 const FIZZLE_ARMOR = preload("res://src/Effect/BulletFizzleArmor.tscn")
 
-var gravity = 300
+@export var base_gravity := 300.0
+@export var water_gravity := 150.0
+@export var damage := 0.0
 
-var damage = 0
+@onready var gravity := water_gravity if is_in_water else base_gravity
+
 var f_range
 var f_time
 var speed
@@ -19,9 +22,18 @@ var direction = Vector2.ZERO
 var instant_fizzle = true
 
 var break_method = "cut"
-var is_wind_affected := false
+@export var is_water_affected := false
+@export var is_wind_affected := false
+@export var is_enemy_bullet := false
+
 var wind_areas_inside := []
-var is_enemy_bullet := false
+var is_in_water := false:
+	set(val):
+		if is_water_affected:
+			gravity = water_gravity if val else base_gravity
+			on_is_in_water_change(is_in_water, val)
+		is_in_water = val
+
 
 @onready var w = get_tree().get_root().get_node("World")
 @onready var rng = RandomNumberGenerator.new()
@@ -63,6 +75,7 @@ func on_break(_method):
 
 func do_fizzle(type: String):
 	#print("fizzling bullet")
+
 	var fizzle
 	match type:
 		"range":
@@ -78,7 +91,7 @@ func do_fizzle(type: String):
 
 	w.get_node("Middle").add_child(fizzle)
 	fizzle.position = $End.global_position if has_node("End") else global_position
-	if instant_fizzle and not is_enemy_bullet:
+	if instant_fizzle and not is_enemy_bullet and f.pc():
 		var gun = f.pc().guns.get_child(0)
 		var gun_center = gun.global_position
 		var space_state = get_world_2d().direct_space_state
@@ -104,7 +117,8 @@ func instant_fizzle_check():
 	instant_fizzle = false
 	visible = true
 
-
+func on_is_in_water_change(old_val, val):
+	pass
 
 ### GETTERS ###
 

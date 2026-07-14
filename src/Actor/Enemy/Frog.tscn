@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cmfcg6bvrqf0f" path="res://assets/Actor/Enemy/FrogTongue.png" id="3_abmcr"]
 [ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="3_ih0x2"]
 [ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="3_nvdu1"]
+[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="7_j6wp0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qm1p1"]
 radius = 7.0
@@ -18,6 +19,7 @@ radius = 7.0
 height = 14.0
 
 [sub_resource type="RectangleShape2D" id="2"]
+resource_local_to_scene = true
 size = Vector2(144, 112)
 
 [sub_resource type="CanvasItemMaterial" id="11"]
@@ -243,7 +245,6 @@ shape = SubResource("CapsuleShape2D_abmcr")
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="PlayerDetector" type="Area2D" parent="." unique_id=1715285071]
-visible = false
 collision_layer = 0
 monitorable = false
 
@@ -324,8 +325,13 @@ snap_degrees = 180.0
 movement_locked = true
 
 [node name="TongueRange" parent="." unique_id=1432238783 instance=ExtResource("3_ih0x2")]
-position = Vector2(-32, -12)
+position = Vector2(-32, -8)
 tag_name = "tongue_range"
+lock_y = true
+
+[node name="VURect" parent="." unique_id=688682803 instance=ExtResource("7_j6wp0")]
+tag_name = "player_detector"
+value = Rect2(-72, -64, 144, 112)
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

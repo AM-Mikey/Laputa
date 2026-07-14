@@ -24,6 +24,9 @@ var tongue_cooldown_time := 6.0
 func setup(): #Reminder: no function called can use await
 	look_dir = $LookVector.direction
 	tongue_max_length = abs($TongueRange.position.x)
+	$PlayerDetector/CollisionShape2D.shape.size = $VURect.value.size
+	$PlayerDetector/CollisionShape2D.position = $VURect.value.position + $VURect.value.size / 2.0
+
 	$TonguePlayerCast.target_position = Vector2($TongueRange.position.x, 0.0)
 	$Tongue/WorldCast.target_position = Vector2($TongueRange.position.x, 0.0)
 	var rect = RectangleShape2D.new()

@@ -12,9 +12,14 @@ size = Vector2(16, 2)
 size = Vector2(8, 2)
 
 [node name="MPistol" type="CharacterBody2D" unique_id=2115918577]
-collision_layer = 0
+collision_layer = 64
 collision_mask = 0
 script = ExtResource("2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2020841427]
+position = Vector2(-8, 0)
+shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="PlayerCollisionDetector" parent="." unique_id=62112097 instance=ExtResource("3")]
 

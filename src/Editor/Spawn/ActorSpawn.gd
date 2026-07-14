@@ -10,7 +10,6 @@ var allow_spawn := true
 
 
 func _ready():
-
 	if actor_path == "":
 		printerr("ERROR: no actor chosen in ActorSpawn")
 		return
@@ -51,18 +50,16 @@ func _ready():
 		input_pickable = false
 
 func initialize(): #first time set up properties
-	print("initialize")
 	if (actor_path != ""):
 		var actor = load(actor_path).instantiate()
 		for p in actor.get_property_list():
 			if p["usage"] & 4102 == 4102: #exported properties
 				if p["name"] == "difficulty":
+					print("set difficulty via initialize")
 					properties[p["name"]] = [actor.get(p["name"]), TYPE_INT, ""]
 				else:
 					properties[p["name"]] = [actor.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
 		properties["id"] = [name, TYPE_STRING, ""]
-		set_sprite()
-
 
 		for ac in actor.get_children(): #TODO: add these to props and to waypoints
 			if ac.is_in_group("WaypointLocals"):
@@ -97,6 +94,10 @@ func initialize(): #first time set up properties
 					ac.owner = w.current_level
 		actor.free()
 
+		set_sprite()
+		for prop in properties: # init all special interaction when changing property
+			on_property_changed(prop, properties[prop][0])
+
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
 	#print("re initialize")
 	if (actor_path != ""):
@@ -111,7 +112,6 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 					properties[p["name"]] = old_properties[p["name"]]
 				else:
 					properties[p["name"]] = [actor.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
-		set_sprite()
 
 		for ac in actor.get_children():
 			if ac.is_in_group("WaypointLocals"):
@@ -140,8 +140,12 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 					ac.owner = w.current_level
 		actor.free()
 
+		set_sprite()
+		for prop in properties: # init all special interaction when changing property
+			on_property_changed(prop, properties[prop][0])
+
 func spawn():
-	if !allow_spawn: 
+	if !allow_spawn:
 		w.emit_signal.call_deferred("finished_spawn_entities_step")
 		return
 	if actor_path == "":
@@ -229,5 +233,51 @@ func _input_event(_viewport, event, _shape_idx): #selecting in editor
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
 			inspector.on_selected(self, "actor_spawn")
 
+func _draw() -> void:
+	var actor = get_actor_name()
+	if actor == "": return
+
+	match actor:
+		"Sentry":
+			if properties["difficulty"][0] >= 3:
+				var line_color = Color.RED
+				var polygon_color = Color.CRIMSON
+				polygon_color.a = 0.8
+				var trans_polygon_color = polygon_color
+				trans_polygon_color.a = 0.0
+				var cone_length = 160.0
+				var spread = properties["fountain_spread"][0] / 2.0
+				var bullet_origin = Vector2(0.0, -12.0)
+				var left_cone_point: Vector2 = bullet_origin + cone_length * Vector2.UP.rotated(-spread)
+				var right_cone_point: Vector2 = bullet_origin + cone_length * Vector2.UP.rotated(spread)
+				draw_dashed_line(bullet_origin, left_cone_point, line_color, 1.5, 3.0)
+				draw_dashed_line(bullet_origin, right_cone_point, line_color, 1.5, 3.0)
+				draw_polygon([bullet_origin, left_cone_point, right_cone_point], [polygon_color, trans_polygon_color, trans_polygon_color])
+
+
 func on_property_changed(p_name, p_value):
-	pass
+	var actor = get_actor_name()
+	if actor == "": return
+
+	if p_name == "difficulty":
+		set_sprite()
+
+	match actor:
+		"Sentry":
+			if p_name == "difficulty":
+				$ShootX.visible = p_value < 2
+				$ShootY.visible = p_value < 3
+				queue_redraw()
+			if p_name == "fountain_spread":
+				queue_redraw()
+
+func get_actor_name() -> String:
+	if !actor_path.is_absolute_path():
+		print("ActorSpawn | get_actor_name(): actor_path is not a valid path!")
+		return ""
+	var actor = actor_path.get_file()
+	if actor.get_extension() != "tscn":
+		print("ActorSpawn | get_actor_name(): actor_path does not point to a scene (.tscn) file!")
+		return ""
+	actor = actor.split(".")[0]
+	return actor

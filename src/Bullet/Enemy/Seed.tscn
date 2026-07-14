@@ -5,6 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://d1oy3g4tudn3v" path="res://src/Bullet/Enemy/EnemyCollisionDetector.tscn" id="2_ae4d7"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_s075v"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s075v"]
+size = Vector2(6, 6)
+
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(8, 8)
 
@@ -31,9 +34,16 @@ _data = {
 }
 
 [node name="Seed" type="CharacterBody2D" unique_id=275298759 groups=["WindBullets"]]
-collision_layer = 0
+collision_layer = 8192
 collision_mask = 0
 script = ExtResource("1")
+is_water_affected = true
+is_wind_affected = true
+is_enemy_bullet = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1775446467]
+shape = SubResource("RectangleShape2D_s075v")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="EnemyCollisionDetector" parent="." unique_id=520654986 instance=ExtResource("2_ae4d7")]
 collision_layer = 8448
