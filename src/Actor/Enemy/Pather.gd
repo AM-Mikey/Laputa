@@ -36,20 +36,21 @@ func setup():
 
 	match path_type:
 		PathType.RECTANGLE:
+			var rect_global :Rect2 = $Shape.get_global_value()
 			var new_path = Curve2D.new()
-			new_path.add_point($Shape.value.position)
-			new_path.add_point($Shape.value.position + Vector2($Shape.value.size.x, 0.0))
-			new_path.add_point($Shape.value.position + $Shape.value.size)
-			new_path.add_point($Shape.value.position + Vector2(0.0, $Shape.value.size.y))
-			new_path.add_point($Shape.value.position)
+			new_path.add_point(rect_global.position)
+			new_path.add_point(rect_global.position + Vector2(rect_global.size.x, 0.0))
+			new_path.add_point(rect_global.position + rect_global.size)
+			new_path.add_point(rect_global.position + Vector2(0.0, rect_global.size.y))
+			new_path.add_point(rect_global.position)
 			path = new_path
-			path_length = ($Shape.value.size.x + $Shape.value.size.y) * 2.0
+			path_length = (rect_global.size.x + rect_global.size.y) * 2.0
 		PathType.ELLIPSE:
 			var max_segment := 240.0
 			var new_path = Curve2D.new()
 			var ellipse_a: float = $Shape.value.size.x / 2.0
 			var ellipse_b: float = $Shape.value.size.y / 2.0
-			var ellipse_center: Vector2 = $Shape.value.get_center()
+			var ellipse_center: Vector2 = $Shape.get_global_value().get_center()
 			for i in range(0, max_segment):
 				var curr_angle := float(i) * 2.0 * PI / max_segment
 				var radius := ellipse_a * ellipse_b / sqrt(pow(ellipse_a * sin(curr_angle), 2) + pow(ellipse_b * cos(curr_angle), 2))
