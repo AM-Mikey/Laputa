@@ -17,8 +17,16 @@ const MAIN_MISSION = [ #[name, trigger_type, trigger_value, description]
 	"This is a test of the manual camera controls"],
 	["camera_test_2", "", "",
 	"This is a test of the manual camera controls, part 2"],
-	["stress_test_main_mission", "", "",
-	"Prod the system till it spontaneously combusts!"]
+	["dialog_system_demo_start", "", "",
+	"Start demo"],
+	["textbox_demo", "", "",
+	"Textbox related dialog commands demo"],
+	["dialog_branching_demo", "", "",
+	"Dialog branching dialog commands demo"],
+	["entity_demo", "", "",
+	"Entity related dialog commands demo"],
+	["camera_demo", "", "",
+	"camera related dialog commands demo"],
 ]
 
 var main_mission_stage: Array = MAIN_MISSION[0]
