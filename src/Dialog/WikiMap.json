@@ -1,16 +1,79 @@
 {
-	"dialog_system_demo_start":
+	"start":
 	"
-	/b All systems go! /ub
-	This debug mission aims to execute all 
+	All systems go! /ub
+	This debug mission aims to execute all scripting commands currently available to Laputa!
+	/progress_main_mission
 	",
 
-	"textbox_category_conversation":
+	"textbox_demo":
 	"
-	test1
-	/face,Sasuke face command is run to Sasuke's portrait
-	test2
 	/newchar,Cool,Aikka newchar sets a name and portrait to the dialog box.
-	/hideface If this is being seen then hideface works for changing back from NPC dialog box to Flat 
+	/face,Sasuke face changes or sets a portrait.
+	/flipface,right flipface flips the portrait, here we flip it to the Right.
+	/flipface,left Now we flip it to the Left.
+	/name,Sasuke name changes the name on the dialog box.
+	/hidename hidename removes it.
+	/hideface hideface removes the portrait.
+	/impactline 
+	impact line
+	/b b is for Bold text. /ub and ub stops it.
+	/auto,on 
+	When auto is set to 'on', text auto progresses.
+	You cannot press the Shoot button to skip it.
+	But you may use the Jump button to skip to the next line.
+	This is enabled by default in signs?
+	/auto,off 
+	auto is now set to 'off'.
+	/t,example Topics format this text to a golden color! /ut . Check book in the Q menu.
+	That's all for this category!
+	/progress_main_mission
+	",
+	
+	"yes_no_demo":
+	"
+	/newchar,Juniper,Juniper
+	/yn should i own an air fryer?..
+	/db,0 yes, the masses must know air fry. /eb
+	/db,1 no, but what if... /udb
+	/m delightfully devilish, juniper
+	",
+	
+	"options_demo":
+	"
+	/newchar,Basil,Basil
+	/options,a,b,c,d Pick the correct one.
+	/db,0 Nope! /udb
+	/db,1 Incorrect. /udb
+	/db,2 Right answer! /eb /progress_main_mission
+	/db,4 Cmon, at least try to get it right... /udb
+	/m EXTREMELY LOUD BUZZER SOUND /progress_main_mission
+	",
+	
+	"topics_demo":
+	"
+	/topics,example
+	",
+	
+	"entity_demo":
+	"
+	/newchar,Sage,Sage Lets make Basil vanish forever.
+	/hide,basil Poof, he's gone forever.
+	/unhide,basil Okay you can have him back.
+	/knockpc,left now get outta ere!
+	/left,aikka hmph!
+	/right,aikka
+	/progress_main_mission
+	",
+	
+	"camera_demo":
+	"
+	/lookat,sage,basil lookat can target one or more NPCs
+	/cam,to_waypoint,0,30 move the camera to a global waypoint of index 0, set on the map
+	/cam,wait,1 here we are waiting for 1 seconds before running the next command
+	/cam,to_player,30 returning the camera to the player.
+	/cam,to_pos,100,100,30 here we are moving the camera to the position x100, y100 at speed 30
+	/cam,hold camera will be held at this position until the player progresses text
+	/cam,to_player,30 returning the camera to the player once more
 	",
 }

@@ -1,9 +1,15 @@
 {
+	
 	"npc_set_main_conversation_queue": {
-		"Main" :{
-			"Aikka" :{
-				"stress_test_main_mission": "textbox_category_conversation",
-			},
+		"Main": {
+			"aikka": {
+				"dialog_system_demo_start": "start",
+				"textbox_demo": "textbox_demo",
+				"dialog_branching_demo": [["yes_no_demo"], ["options_demo"]],
+				"mission_demo":"mission_demo",
+				"entity_demo": "entity_demo",	
+				"camera_demo": "camera_demo"
+			},		
 		},
 	},
 }
