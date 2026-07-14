@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dmfya5e64iar7" path="res://assets/Actor/Enemy/Crusher.png" id="1"]
 [ext_resource type="Script" uid="uid://b1w4ji0d60ww0" path="res://src/Actor/Enemy/Crusher.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="3_wfkhk"]
+[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="4_tvvg5"]
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(32, 14)
@@ -50,6 +51,10 @@ hframes = 5
 [node name="ToPoint" parent="." unique_id=1432238783 instance=ExtResource("3_wfkhk")]
 position = Vector2(0, 16)
 tag_name = "to_point"
+
+[node name="Shape" parent="." unique_id=688682803 instance=ExtResource("4_tvvg5")]
+tag_name = "shape_define"
+value = Rect2(-16, -16, 48, 48)
 
 [connection signal="body_entered" from="CrushDown" to="." method="on_crush_body_entered" binds= ["down"]]
 [connection signal="body_exited" from="CrushDown" to="." method="on_crush_body_exited"]
