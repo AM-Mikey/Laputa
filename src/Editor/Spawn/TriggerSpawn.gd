@@ -120,6 +120,7 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 				trigger.remove_child(ac)
 				ac.owner = null
 				add_child(ac)
+				ac.value_changed.connect(on_vu_value_changed)
 				ac.owner = w.current_level
 		if ac.is_in_group("VUActors"):
 			if !get_if_trigger_has_vu_actor(ac):
@@ -267,4 +268,7 @@ func on_handle(handle):
 	inspector.on_selected(self, "trigger_spawn")
 
 func on_property_changed(p_name, p_value):
+	pass
+
+func on_vu_value_changed(tag, old_value, new_value):
 	pass
