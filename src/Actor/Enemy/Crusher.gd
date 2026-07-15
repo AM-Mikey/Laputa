@@ -22,7 +22,12 @@ var time :float = 0.0
 var t_body = null
 var t_dir = null
 
+# Animating var
 var prev_global_position := Vector2.ZERO
+enum FacingDir {NEUTRAL, LEFT, RIGHT, UP, DOWN}
+var facing_dir: FacingDir = FacingDir.NEUTRAL
+
+
 var debug_path_color := Color.RED
 var debug_path_start := true
 
@@ -93,6 +98,8 @@ func _physics_process(delta):
 			time = wrapf(time, 0.0, travel_time)
 		else:
 			time = travel_time
+			prev_global_position = global_position
+			animate()
 			return
 
 	var start_point = 0.0 if path_type == PathType.SEGMENT else non_segment_path_start
@@ -109,7 +116,6 @@ func _physics_process(delta):
 		t_value = wrapf(start_point + time / travel_time, 0.0, 1.0)
 
 	global_position = path.sample_baked(t_value * path_length)
-
 
 	if t_body != null and crushing:
 		crush_check()
@@ -135,17 +141,17 @@ func crush_check():
 			if t_body.is_on_floor():
 				t_body.hit(999, Vector2.ZERO)
 
-
+@onready var ap = $AnimationPlayer
 func animate():
 	var move_angle = (global_position - prev_global_position).angle()
 	if (global_position - prev_global_position).length() <= 0.01:
-		$Sprite2D.frame = 0
+		facing_dir = FacingDir.NEUTRAL
 	else:
-		if abs(move_angle) >= 3.0 * PI / 4.0 :
-			$Sprite2D.frame = 1
+		if abs(move_angle) >= 3.0 * PI / 4.0:
+			facing_dir = FacingDir.LEFT
 		elif abs(move_angle) < PI / 4.0:
-			$Sprite2D.frame = 2
+			facing_dir = FacingDir.RIGHT
 		elif move_angle <= -PI / 4.0 && move_angle > -3.0 * PI / 4.0:
-			$Sprite2D.frame = 3
+			facing_dir = FacingDir.UP
 		else:
-			$Sprite2D.frame = 4
+			facing_dir = FacingDir.DOWN
