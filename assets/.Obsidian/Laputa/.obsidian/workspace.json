@@ -56,12 +56,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Characters/Alexander.md",
+                "file": "Concepts/Davey's Secret Knowledge.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Alexander"
+              "title": "Davey's Secret Knowledge"
             }
           },
           {
@@ -288,11 +288,12 @@
   },
   "active": "530bc650ea873274",
   "lastOpenFiles": [
+    "Guns.md",
+    "Characters/Alexander.md",
     "Characters/Basil.md",
     "Characters/Treasure Hunter.md",
     "Characters/Scrum.md",
     "Characters/Rosemary.md",
-    "Characters/Alexander.md",
     "Characters/Colin.md",
     "Characters/Dola.md",
     "Characters/Emily.md",
@@ -315,7 +316,6 @@
     "Concepts/History of Laputa.md",
     "Concepts/Humans and Beastfolk.md",
     "Concepts/Laputan Crown.md",
-    "Concepts/Davey's Secret Knowledge.md",
     "Untitled.base",
     "Aseprite_8jemaKX0FE.png",
     "Aseprite_EEozVk20AW.png",
