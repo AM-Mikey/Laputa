@@ -16,6 +16,8 @@ var current_text_array
 var text_stripped_of_commands
 var step := 0 #step in printing dialog
 var current_character_index := 0
+var character_is_newline_count := 0
+#var carat_visible_character_size := 2
 var is_sign = false
 var is_flavor = false
 var is_exiting = false
@@ -122,8 +124,7 @@ func split_text(text) -> Array: #TODO: regex removes all spaces between commands
 	if !is_sign:
 		text = text.strip_edges().replace("\t", "") #remove first and last newlines, remove tabulation
 	var regex = RegEx.new()
-	regex.compile(r'(*NOTEMPTY)(?=\/)(\S*)(?=\r?\n|$| )|(?! )(.*?)(?= \/|\r?\n|$)|(\r?\n)') #new vers, gets rid of \r for some reason but it works for us anyways
-	#regex.compile(r'(*NOTEMPTY)(?=\/)(\S*)(?=\n|$| )|(?! )(.*?)(?= \/|\n|$)|(\n)') #took me so long to come up with, if a command doesnt register properly, check this in https://regex101.com/
+	regex.compile(r'(*NOTEMPTY)(?=\/)(\S*)(?=\r?\n|$| )|(?! )([^\r\n]+?)(?= \/|\r?\n|$)|(\r?\n)')
 	for result in regex.search_all(text):
 		out.push_back(result.get_string())
 	#var out_escaped = [] #keep these lines for testing
@@ -143,7 +144,7 @@ func get_text_stripped_of_commands(from_step: int) -> String:
 			array_of_desirable_text.append(i)
 		step_index += 1
 	out = out.join(array_of_desirable_text)
-	print(out)
+	#print(out)
 	return out
 
 func run_text_array(text_array, from_input := false): #step is always the next step ready to do, not the one just done
@@ -165,11 +166,12 @@ func run_text_array(text_array, from_input := false): #step is always the next s
 		run_text_array(text_array)
 
 	elif string == "\n" or string == "\r\n" or string == "":
+		print("NEW")
 		if auto_input or from_input:
-			#dl.text += "\n" #we don't do this because progress_text does this
 			step += 1
-			print("step: ", step)
 			current_character_index += 1
+			character_is_newline_count += 1
+			print("step: ", step)
 			run_text_array(text_array)
 		else:
 			active = false #otherwise it sets active == false and ends the loop
@@ -178,38 +180,56 @@ func run_text_array(text_array, from_input := false): #step is always the next s
 				flash_original_text = dl.text
 				$FlashTimer.start(0.3)
 
+				dl.text = flash_original_text.insert(current_character_index + character_is_newline_count + 1, "  ") #needs to add cinc because windows probably treats it as two characters
+				dl.visible_characters += 2
+				#if dl.get_character_line(current_character_index) < current_character_index + character_is_newline_count + 3: #when the carat is on a new line
+					#carat_visible_character_size = 3
+				#else:
+					#carat_visible_character_size = 2
+				#dl.visible_characters += carat_visible_character_size
+				print("starting carat")
+
 	else:
-		print(string)
+		#print(string)
 		await run_text_string(string)
 		step += 1
 		print("step: ", step)
 		run_text_array(text_array)
 
 
-func run_text_string(string):
+func run_text_string(string): #TODO: have this autorun clear on starting line 4
+	var current_character_string_index = 0
 	for character in string:
-		var is_last_character = current_character_index == string.length() - 1
-		current_character_index += 1
-		dl.visible_characters = current_character_index
+		var is_last_character = current_character_string_index == string.length() - 1
+		dl.visible_characters = current_character_index + 1
+		#print("vc: ", dl.visible_characters)
 		if do_delay:
 			am.play("npc_dialog")
 			if is_last_character:
-				pass
+				print("IS LAST")
+				return
 			elif character in [",", ".", "?", "!", ":", ";"]:
-				await get_tree().create_timer(punctuation_delay).timeout
+				await get_tree().create_timer(punctuation_delay, true, false).timeout
 			else:
-				await get_tree().create_timer(print_delay, true, false).timeout #TODO: check if these flags are correct
-
+				await get_tree().create_timer(print_delay, true, false).timeout
+		else: #no delay
+			if is_last_character:
+				print("IS LAST")
+				return
+		current_character_index += 1
+		#print("cci: ", current_character_index)
+		current_character_string_index += 1
 
 func _on_flash_timer_timeout():
 	if busy: return
-	if flash_type == FLASH_NORMAL:				#TODO: delete previous text after third line
-		if dl.text == flash_original_text:
-			dl.text = dl.text.insert(current_character_index, " §")#"[color=#ffffff40] [/color]"
-			dl.visible_characters += 2
-		else:
-			dl.text = flash_original_text
-			dl.visible_characters -= 2
+	if flash_type == FLASH_NORMAL:
+		match flash_step:
+			0:
+				dl.text = flash_original_text.insert(current_character_index + character_is_newline_count + 1, " §") #needs to add cinc because windows probably treats it as two characters
+			1:
+				dl.text = flash_original_text.insert(current_character_index + character_is_newline_count + 1, "  ") #needs to add cinc because windows probably treats it as two characters
+		flash_step = (flash_step + 1) % 2
+
 	elif flash_type == FLASH_END:
 		dl.visible_characters += 2
 		match flash_step:
@@ -225,7 +245,7 @@ func _on_flash_timer_timeout():
 			3:
 				dl.text = flash_original_text + "[color=goldenrod] ¢[/color]"
 				$FlashTimer.wait_time = 0.2
-		flash_step = (flash_step + 1) % 4 #warning, this is never reset
+		flash_step = (flash_step + 1) % 4
 
 
 func _input(event):
@@ -237,6 +257,10 @@ func _input(event):
 		elif active: #if already active, speed text up
 			do_delay = false
 		else:
+			var current_line = dl.get_character_line(current_character_index)
+			print("line is number: ", current_line)
+			if current_line % 3 == 2: #&& current_line != 0:
+				dl.scroll_to_line(current_line + 1)
 			progress_text()
 
 
@@ -247,10 +271,11 @@ func progress_text(with_newline = true):
 	do_delay = true
 	active = true
 	$FlashTimer.stop()
+	flash_step = 0
+	dl.visible_characters -= 2
+	dl.text = flash_original_text
 	if with_newline:
-		dl.text = flash_original_text + "\n" #remove cursor, add back newline
-	else:
-		dl.text = flash_original_text
+		current_character_index +=1
 	run_text_array(current_text_array, true)
 
 func setup_next_conversation():
@@ -296,7 +321,9 @@ func setup_next_conversation():
 		if stored_next_convo && stored_next_convo[2] && !stored_next_convo[4]: # forced and not yet completed
 			print("forcing next convo")
 			$FlashTimer.stop()
+			flash_step = 0
 			dl.text = ""
+			dl.visible_characters = 0
 			step = 0
 			npc.get(npc.next_conversation_queue_name)[npc.next_conversation_index][4] = true #completed
 			SaveSystem.write_dialog_data_to_temp(w.current_level, npc)
@@ -396,10 +423,8 @@ func flip_face(dir = "auto"):
 			1: dir = "left"
 	match dir:
 		"left":
-			$Face.get_parent().move_child($Face, 0)
 			$Face/Sprite2D.flip_h = false
 		"right":
-			$Face.get_parent().move_child($Face, 1)
 			$Face/Sprite2D.flip_h = true
 
 
@@ -426,6 +451,8 @@ func get_text_array_starts_with_face() -> bool:
 		return true
 	else:
 		return false
+
+#func convert_index
 
 ### SIGNALS ###
 

@@ -6097,8 +6097,6 @@ bbcode_enabled = true
 text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.
 Third Line of Text"
 scroll_active = false
-scroll_following = true
-scroll_following_visible_characters = true
 visible_characters_behavior = 1
 
 [node name="NPC" type="Control" parent="." unique_id=231870637]
@@ -6136,8 +6134,6 @@ bbcode_enabled = true
 text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.
 Third line of txt"
 scroll_active = false
-scroll_following = true
-scroll_following_visible_characters = true
 visible_characters = 71
 visible_characters_behavior = 1
 visible_ratio = 0.7717391
@@ -6189,8 +6185,6 @@ theme_override_fonts/bold_font = ExtResource("4_52hu8")
 bbcode_enabled = true
 text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
 scroll_active = false
-scroll_following = true
-scroll_following_visible_characters = true
 visible_characters_behavior = 1
 
 [node name="Name" type="Control" parent="." unique_id=219904090]

@@ -177,21 +177,21 @@ func face(string, command_is_first):
 	var expression = 0
 	if n_face.size() > 1:
 		expression = int(n_face[1])
-	
+
 	face_node.visible = true
 	face_sprite.texture = load("res://assets/Face/%s.png" % id.capitalize())
 	face_sprite.hframes = face_sprite.texture.get_width() / 48
 	face_sprite.frame = expression
 	if !command_is_first: #run the full version if it's not the first command
+		var change_was_needed = db.change_background(db.get_node("NPC"))
 		db.dl.text = ""
 		db.dl = db.get_node("NPC/DialogNPC")
 		db.dl.text = db.get_text_stripped_of_commands(db.step)
 		db.dl.visible_characters = 0
 		db.current_character_index = 0
-		
-		#db.align_box() #WE NEED ANOTHER COMMAND TO MOVE ITS POSITION
-		var change_was_needed = db.change_background(db.get_node("NPC"))
+		db.character_is_newline_count = 0
 		if !change_was_needed:
+			#db.dl.scroll_to_line(db.dl.get_character_line(db.current_character_index) + 1)
 			db.get_node("AnimationPlayer").play("FaceEnter") #either play FlatToNPC or FaceIn, not both
 		await db.get_node("AnimationPlayer").animation_finished
 
@@ -211,7 +211,7 @@ func hide_face():
 	db.dl.visible_characters = 0
 	db.current_character_index = 0
 	await db.get_node("AnimationPlayer").animation_finished
-	
+
 
 func set_visible(string, visible):
 	if string == "":
