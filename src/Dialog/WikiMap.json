@@ -63,6 +63,7 @@
 	/knockpc,left now get outta ere!
 	/left,aikka hmph!
 	/right,aikka
+	/waypoint,0,aikka,0
 	/progress_main_mission
 	",
 	
