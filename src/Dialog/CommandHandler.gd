@@ -55,9 +55,9 @@ func parse_command(string, command_is_first):
 			db.dl.text += "\n"
 			#dl.horizontal_alignment = 1 #center
 		"b":
-			db.dl.text += " [b]"
+			db.dl.text = db.dl.text.insert(db.current_character_index + db.character_is_newline_count, "[b]")
 		"ub": #doesnt work at end of line
-			db.dl.text += "[/b] "
+			db.dl.text = db.dl.text.insert(db.current_character_index + db.character_is_newline_count + 4, "[/b] ")
 		"knockpc":
 			var a = string.split(",")
 			db.dl.text = db.get_text_stripped_of_commands(db.step)
@@ -210,6 +210,7 @@ func hide_face():
 	db.dl.text = db.get_text_stripped_of_commands(db.step)
 	db.dl.visible_characters = 0
 	db.current_character_index = 0
+	db.character_is_newline_count = 0
 	await db.get_node("AnimationPlayer").animation_finished
 
 
@@ -324,6 +325,7 @@ func yes_no():
 	db.dl.text = db.get_text_stripped_of_commands(db.step)
 	db.dl.visible_characters = 0
 	db.current_character_index = 0
+	db.character_is_newline_count = 0
 	print("cleared text + set db")
 	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
 	db.get_node("Options").exit_action = "options"
@@ -340,6 +342,7 @@ func options(string):
 	db.dl.text = db.get_text_stripped_of_commands(db.step)
 	db.dl.visible_characters = 0
 	db.current_character_index = 0
+	db.character_is_newline_count = 0
 	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
 	db.get_node("Options").exit_action = "options"
 
@@ -367,6 +370,7 @@ func topics(argument):
 	db.dl.text = db.get_text_stripped_of_commands(db.step)
 	db.dl.visible_characters = 0
 	db.current_character_index = 0
+	db.character_is_newline_count = 0
 	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
 	db.get_node("Options").exit_action = "topics"
 

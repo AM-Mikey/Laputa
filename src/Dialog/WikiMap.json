@@ -15,14 +15,13 @@
 	/name,Sasuke name changes the name on the dialog box.
 	/hidename hidename removes it.
 	/hideface hideface removes the portrait.
-	/impactline impact line
 	/b b is for Bold text. /ub and ub stops it.
+	/impactline impact line
 	/auto,on When auto is set to 'on', text auto progresses.
 	You cannot press the Shoot button to skip it.
 	But you may use the Jump button to skip to the next line.
 	This is enabled by default in signs?
-	/auto,off 
-	auto is now set to 'off'.
+	/auto,off auto is now set to 'off'.
 	/t,example Topics format this text to a golden color! /ut . Check book in the Q menu.
 	That's all for this category!
 	/progress_main_mission
