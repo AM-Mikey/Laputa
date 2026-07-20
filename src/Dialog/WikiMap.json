@@ -16,15 +16,14 @@
 	/hidename hidename removes it.
 	/hideface hideface removes the portrait.
 	/b b is for Bold text. /ub ub stops it.
-	/impactline impact line
+	/impactline impact line.
 	/auto,on When auto is set to 'on', text auto progresses.
-	You cannot press the Shoot button to skip it.
-	But you may use the Jump button to skip to the next line.
-	This is enabled by default in signs?
+	line
+	You cannot press the any button to skip it.
+	This is enabled by default in signs, however they print instantly.
 	/auto,off auto is now set to 'off'.
-	/t,example Topics format this text to a golden color! /ut . Check book in the Q menu.
-	That's all for this category!
-	/progress_main_mission
+	Topics, such as this /t,example example /ut format this text to a golden color! Check book in the Q menu.
+	That's all for this category! /progress_main_mission
 	",
 	
 	"yes_no_demo":

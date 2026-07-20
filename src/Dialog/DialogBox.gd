@@ -5,6 +5,7 @@ signal dialog_finished
 @export var print_delay = 0.03
 @export var do_delay = true
 @export var punctuation_delay = 0.3
+@export var auto_input_delay = 0.5
 
 var busy = false #executing commands, ignore input
 var awaiting_merge = false
@@ -183,7 +184,10 @@ func run_text_array(text_array, from_input := false): #step is always the next s
 		run_text_array(text_array)
 
 	elif string == "\n" or string == "\r\n" or string == "":
-		if auto_input or from_input:
+		if auto_input:
+			await prepare_auto_input()
+			from_input = true
+		if from_input:
 			step += 1
 			character_shown_count += 1
 			character_is_newline_count += 1
@@ -219,6 +223,7 @@ func run_text_string(string):
 		var is_last_character = current_character_string_index == string.length() - 1
 		dl.visible_characters = character_shown_count + 1
 		character_shown_count += 1
+		check_line_overflow(character_shown_count - 1)
 		if do_delay:
 			am.play("npc_dialog")
 			if is_last_character:
@@ -261,7 +266,8 @@ func _on_flash_timer_timeout():
 
 
 func _input(event):
-	if event.is_action_pressed("ui_accept") and not busy: #bypass inp.can_act
+	if auto_input: return
+	if event.is_action_pressed("ui_accept") && !busy: #bypass inp.can_act
 		if $Options.is_displaying: return #so it doesn't input
 		if awaiting_merge:
 			awaiting_merge = false
@@ -269,12 +275,16 @@ func _input(event):
 		elif active: #if already active, speed text up
 			do_delay = false
 		else:
-			var current_line = dl.get_character_line(character_shown_count - 1)
-			print("line is number: ", current_line)
-			if current_line % 3 == 2: #&& current_line != 0:
-				dl.scroll_to_line(current_line + 1)
+			check_line_overflow(character_shown_count + 1)
 			progress_text()
 
+func prepare_auto_input():
+	await get_tree().create_timer(auto_input_delay, true, false).timeout
+	if awaiting_merge:
+		awaiting_merge = false
+		$CommandHandler.seek("/m", true)
+	else:
+		check_line_overflow(character_shown_count + 1)
 
 func progress_text():
 	if step == current_text_array.size() || do_force_end:
@@ -460,6 +470,7 @@ func clear_text():
 	character_is_newline_count = 0
 	character_is_bbcode_count = 0
 
+
 ### GETTERS ###
 
 func get_text_array_starts_with_face() -> bool:
@@ -470,6 +481,11 @@ func get_text_array_starts_with_face() -> bool:
 
 func get_raw_index(extra := 0) -> int:
 	return character_shown_count + character_is_newline_count + character_is_bbcode_count + extra
+
+func check_line_overflow(character_index: int): #TODO: this just makes it go to visual line 0, not consistant with other kinds of wrapping from some other place in the code. final solution here would be some kind of animation/scroll etc
+	var line = dl.get_character_line(character_index)
+	if line % 3 == 2:
+		dl.scroll_to_line(line)
 
 #func convert_index
 
