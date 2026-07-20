@@ -12,10 +12,10 @@
 	/face,Sasuke face changes or sets a portrait.
 	/flipface,right flipface flips the portrait, here we flip it to the Right.
 	/flipface,left Now we flip it to the Left.
-	/name,Sasuke name changes the name on the dialog box.
+	/name,Sasuke name changes the name on the dialog box. /name,Peter Like this.
 	/hidename hidename removes it.
 	/hideface hideface removes the portrait.
-	/b b is for Bold text. /ub and ub stops it.
+	/b b is for Bold text. /ub ub stops it.
 	/impactline impact line
 	/auto,on When auto is set to 'on', text auto progresses.
 	You cannot press the Shoot button to skip it.

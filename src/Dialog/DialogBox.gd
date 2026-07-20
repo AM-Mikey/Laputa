@@ -15,8 +15,9 @@ var current_dialog_json
 var current_text_array
 var text_stripped_of_commands
 var step := 0 #step in printing dialog
-var current_character_index := 0
+var character_shown_count := 0
 var character_is_newline_count := 0
+var character_is_bbcode_count := 0
 #var carat_visible_character_size := 2
 var is_sign = false
 var is_flavor = false
@@ -119,19 +120,34 @@ func _load_dialog_json(dialog_json) -> Dictionary: #loads json and converts it i
 	return out
 
 
-func split_text(text) -> Array: #TODO: regex removes all spaces between commands, not just the first (i'm talking /face  about you)
+func split_text(text) -> Array:
 	var out = []
 	if !is_sign:
 		text = text.strip_edges().replace("\t", "") #remove first and last newlines, remove tabulation
 	var regex = RegEx.new()
 	regex.compile(r'(*NOTEMPTY)(?=\/)(\S*)(?=\r?\n|$| )|(?! )([^\r\n]+?)(?= \/|\r?\n|$)|(\r?\n)')
 	for result in regex.search_all(text):
-		out.push_back(result.get_string())
-	#var out_escaped = [] #keep these lines for testing
-	#for group in out:
-		#out_escaped.append(group.c_escape())
-	#print("stop here")
+		out.append(result.get_string())
+	return restore_command_spacing(out)
+
+func restore_command_spacing(tokens: Array) -> Array:
+	#reinsert exactly one space wherever a run of commands separates two text tokens on the same line.
+	var out = []
+	var pending_command := false
+	var has_prior_text_this_line := false
+	for token in tokens:
+		if token.begins_with("/"):
+			pending_command = true
+			out.append(token)
+			continue
+		var is_newline = token == "\n" or token == "\r\n" or token == ""
+		if pending_command and has_prior_text_this_line and !is_newline:
+			out.append(" ")
+		out.append(token)
+		pending_command = false
+		has_prior_text_this_line = !is_newline
 	return out
+
 
 func get_text_stripped_of_commands(from_step: int) -> String:
 	var out = ""
@@ -146,6 +162,7 @@ func get_text_stripped_of_commands(from_step: int) -> String:
 	out = out.join(array_of_desirable_text)
 	#print(out)
 	return out
+
 
 func run_text_array(text_array, from_input := false): #step is always the next step ready to do, not the one just done
 	if step == current_text_array.size() || do_force_end:
@@ -166,10 +183,9 @@ func run_text_array(text_array, from_input := false): #step is always the next s
 		run_text_array(text_array)
 
 	elif string == "\n" or string == "\r\n" or string == "":
-		print("NEW")
 		if auto_input or from_input:
 			step += 1
-			current_character_index += 1
+			character_shown_count += 1
 			character_is_newline_count += 1
 			print("step: ", step)
 			run_text_array(text_array)
@@ -180,7 +196,7 @@ func run_text_array(text_array, from_input := false): #step is always the next s
 				flash_original_text = dl.text
 				$FlashTimer.start(0.3)
 
-				dl.text = flash_original_text.insert(current_character_index + character_is_newline_count + 1, "  ") #needs to add cinc because windows probably treats it as two characters
+				dl.text = flash_original_text.insert(get_raw_index(), "  ") #needs to add cinc because windows probably treats it as two characters
 				dl.visible_characters += 2
 				#if dl.get_character_line(current_character_index) < current_character_index + character_is_newline_count + 3: #when the carat is on a new line
 					#carat_visible_character_size = 3
@@ -197,16 +213,15 @@ func run_text_array(text_array, from_input := false): #step is always the next s
 		run_text_array(text_array)
 
 
-func run_text_string(string): #TODO: have this autorun clear on starting line 4
+func run_text_string(string):
 	var current_character_string_index = 0
 	for character in string:
 		var is_last_character = current_character_string_index == string.length() - 1
-		dl.visible_characters = current_character_index + 1
-		#print("vc: ", dl.visible_characters)
+		dl.visible_characters = character_shown_count + 1
+		character_shown_count += 1
 		if do_delay:
 			am.play("npc_dialog")
 			if is_last_character:
-				print("IS LAST")
 				return
 			elif character in [",", ".", "?", "!", ":", ";"]:
 				await get_tree().create_timer(punctuation_delay, true, false).timeout
@@ -214,10 +229,7 @@ func run_text_string(string): #TODO: have this autorun clear on starting line 4
 				await get_tree().create_timer(print_delay, true, false).timeout
 		else: #no delay
 			if is_last_character:
-				print("IS LAST")
 				return
-		current_character_index += 1
-		#print("cci: ", current_character_index)
 		current_character_string_index += 1
 
 func _on_flash_timer_timeout():
@@ -225,9 +237,9 @@ func _on_flash_timer_timeout():
 	if flash_type == FLASH_NORMAL:
 		match flash_step:
 			0:
-				dl.text = flash_original_text.insert(current_character_index + character_is_newline_count + 1, " §") #needs to add cinc because windows probably treats it as two characters
+				dl.text = flash_original_text.insert(get_raw_index(), " §") #needs to add cinc because windows probably treats it as two characters
 			1:
-				dl.text = flash_original_text.insert(current_character_index + character_is_newline_count + 1, "  ") #needs to add cinc because windows probably treats it as two characters
+				dl.text = flash_original_text.insert(get_raw_index(), "  ") #needs to add cinc because windows probably treats it as two characters
 		flash_step = (flash_step + 1) % 2
 
 	elif flash_type == FLASH_END:
@@ -257,14 +269,14 @@ func _input(event):
 		elif active: #if already active, speed text up
 			do_delay = false
 		else:
-			var current_line = dl.get_character_line(current_character_index)
+			var current_line = dl.get_character_line(character_shown_count - 1)
 			print("line is number: ", current_line)
 			if current_line % 3 == 2: #&& current_line != 0:
 				dl.scroll_to_line(current_line + 1)
 			progress_text()
 
 
-func progress_text(with_newline = true):
+func progress_text():
 	if step == current_text_array.size() || do_force_end:
 		setup_next_conversation()
 		return
@@ -274,8 +286,6 @@ func progress_text(with_newline = true):
 	flash_step = 0
 	dl.visible_characters -= 2
 	dl.text = flash_original_text
-	if with_newline:
-		current_character_index +=1
 	run_text_array(current_text_array, true)
 
 func setup_next_conversation():
@@ -443,6 +453,12 @@ func change_background(node_to_show) -> bool:
 			return true
 	return false
 
+func clear_text():
+	dl.text = get_text_stripped_of_commands(step)
+	dl.visible_characters = 0
+	character_shown_count = 0
+	character_is_newline_count = 0
+	character_is_bbcode_count = 0
 
 ### GETTERS ###
 
@@ -451,6 +467,9 @@ func get_text_array_starts_with_face() -> bool:
 		return true
 	else:
 		return false
+
+func get_raw_index(extra := 0) -> int:
+	return character_shown_count + character_is_newline_count + character_is_bbcode_count + extra
 
 #func convert_index
 
