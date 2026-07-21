@@ -8,11 +8,8 @@
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(32, 14)
 
-[sub_resource type="RectangleShape2D" id="3"]
-size = Vector2(22, 1)
-
 [sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(22, 1)
+size = Vector2(34, 16)
 
 [sub_resource type="Animation" id="Animation_tvvg5"]
 length = 0.001
@@ -35,6 +32,18 @@ tracks/1/path = NodePath("Standable/CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Crush/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -70,6 +79,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, -0.5)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Crush/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -0.5)]
+}
 
 [sub_resource type="Animation" id="Animation_hn3b7"]
 resource_name = "left"
@@ -100,6 +121,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, -2)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Crush/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -2)]
+}
 
 [sub_resource type="Animation" id="Animation_o7efd"]
 resource_name = "neutral"
@@ -124,6 +157,18 @@ tracks/1/path = NodePath("Standable/CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Crush/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -159,6 +204,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, -2)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Crush/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -2)]
+}
 
 [sub_resource type="Animation" id="Animation_ohgmm"]
 resource_name = "up"
@@ -184,6 +241,18 @@ tracks/1/path = NodePath("Standable/CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -3.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Crush/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -261,7 +330,7 @@ advance_expression = "facing_dir != 4"
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ng5ua"]
 states/Start/position = Vector2(352, 206.08)
 states/down/node = SubResource("AnimationNodeAnimation_3ty57")
-states/down/position = Vector2(489.87204, 186.4)
+states/down/position = Vector2(490.4867, 186.4)
 states/left/node = SubResource("AnimationNodeAnimation_rpy05")
 states/left/position = Vector2(328.40002, 100.8)
 states/neutral/node = SubResource("AnimationNodeAnimation_dgewo")
@@ -279,7 +348,7 @@ script = ExtResource("2")
 do_bubbles = false
 editor_hidden = false
 
-[node name="Standable" type="CharacterBody2D" parent="." unique_id=86773982]
+[node name="Standable" type="CharacterBody2D" parent="." unique_id=86773982 groups=["CrusherStandable"]]
 collision_layer = 8
 collision_mask = 0
 
@@ -287,20 +356,13 @@ collision_mask = 0
 position = Vector2(0, -2)
 shape = SubResource("2")
 
-[node name="CrushDown" type="Area2D" parent="." unique_id=238018441]
-visible = false
+[node name="Crush" type="Area2D" parent="." unique_id=930772536]
 collision_layer = 0
+collision_mask = 3
+monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CrushDown" unique_id=1724652312]
-position = Vector2(0, 5.5)
-shape = SubResource("3")
-
-[node name="CrushUp" type="Area2D" parent="." unique_id=930772536]
-visible = false
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CrushUp" unique_id=1289397965]
-position = Vector2(0, -9.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Crush" unique_id=1289397965]
+position = Vector2(0, -2)
 shape = SubResource("4")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1806400746]
@@ -324,7 +386,5 @@ tree_root = SubResource("AnimationNodeStateMachine_ng5ua")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 
-[connection signal="body_entered" from="CrushDown" to="." method="on_crush_body_entered" binds= ["down"]]
-[connection signal="body_exited" from="CrushDown" to="." method="on_crush_body_exited"]
-[connection signal="body_entered" from="CrushUp" to="." method="on_crush_body_entered" binds= ["up"]]
-[connection signal="body_exited" from="CrushUp" to="." method="on_crush_body_exited"]
+[connection signal="body_entered" from="Crush" to="." method="on_crush_body_entered"]
+[connection signal="body_exited" from="Crush" to="." method="on_crush_body_exited"]

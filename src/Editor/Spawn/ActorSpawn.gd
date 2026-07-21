@@ -69,9 +69,9 @@ func _draw() -> void:
 					draw_circle(new_path.sample_baked(properties["non_segment_path_start"][0] * new_path.get_baked_length()), point_inner_radius, point_inner_color)
 				2: #Ellipse
 					var new_path: Curve2D = Curve2D.new()
-					var max_segment := 240.0
 					var ellipse_a: float = $Shape.value.size.x / 2.0
 					var ellipse_b: float = $Shape.value.size.y / 2.0
+					var max_segment: float = max(TAU * (ellipse_a + ellipse_b) / 2.0 / 10.0, 40.0)
 					var ellipse_center: Vector2 = $Shape.value.get_center()
 					for i in range(0, max_segment):
 						var curr_angle := float(i) * 2.0 * PI / max_segment
