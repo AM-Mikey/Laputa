@@ -12,14 +12,15 @@ enum ToolRectSnapMode {NONE, TO_HALF_GRID, TO_GRID}
 		$Rect/Panel.modulate = val
 		editor_color = val
 
-signal value_changed(tag, old_val, new_val)
+signal value_changed(what, old_val, new_val)
 ## In local transform
 @export var value: Rect2 = Rect2(Vector2.ZERO, Vector2.ZERO):
 	set(val):
 		var old_val = value
 		value = val
 		update_visual()
-		value_changed.emit(tag_name, old_val, value)
+		if old_val != value:
+			value_changed.emit(self, old_val, value)
 
 @onready var w = get_tree().get_root().get_node("World")
 

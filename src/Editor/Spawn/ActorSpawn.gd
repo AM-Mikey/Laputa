@@ -54,25 +54,38 @@ func _draw() -> void:
 						draw_line(-move_from_center, -move_from_center + main_dir.rotated(arrow_angle) * arrow_length, path_color, path_width)
 					else:
 						draw_line(Vector2.ZERO, to_point, path_color, path_width)
-						draw_line(to_point, to_point - main_dir.rotated(arrow_angle) * arrow_length, path_color, path_width)
-						draw_line(to_point, to_point - main_dir.rotated(-arrow_angle) * arrow_length, path_color, path_width)
+						draw_arrow(to_point, main_dir, arrow_length, arrow_angle, path_color, path_width)
 				1: #Rectangle
 					var new_path: Curve2D = Curve2D.new()
 					var rect_global: Rect2 = $Shape.value
+					var path_length := (rect_global.size.x + rect_global.size.y) * 2.0
+					var arrow_length = clamp(path_length / 8.0, 8.0, 15.0)
+					const arrow_angle = PI / 6.0
 					new_path.add_point(rect_global.position)
 					new_path.add_point(rect_global.position + Vector2(rect_global.size.x, 0.0))
 					new_path.add_point(rect_global.position + rect_global.size)
 					new_path.add_point(rect_global.position + Vector2(0.0, rect_global.size.y))
 					new_path.add_point(rect_global.position)
 					draw_rect($Shape.value, path_color, false, path_width)
-					draw_circle(new_path.sample_baked(properties["non_segment_path_start"][0] * new_path.get_baked_length()), point_radius, point_color)
-					draw_circle(new_path.sample_baked(properties["non_segment_path_start"][0] * new_path.get_baked_length()), point_inner_radius, point_inner_color)
+					draw_circle(new_path.sample_baked(properties["non_segment_path_start"][0] * path_length), point_radius, point_color)
+					draw_circle(new_path.sample_baked(properties["non_segment_path_start"][0] * path_length), point_inner_radius, point_inner_color)
+					var compensated = 0.5 * arrow_length * cos(arrow_angle)
+					draw_arrow(new_path.sample(0, 0.5) + compensated * (Vector2.RIGHT if !properties["non_segment_path_reverse"][0] else Vector2.LEFT), \
+						Vector2.RIGHT if !properties["non_segment_path_reverse"][0] else Vector2.LEFT, arrow_length, arrow_angle, path_color, path_width)
+					draw_arrow(new_path.sample(1, 0.5) + compensated * (Vector2.DOWN if !properties["non_segment_path_reverse"][0] else Vector2.UP), \
+						Vector2.DOWN if !properties["non_segment_path_reverse"][0] else Vector2.UP, arrow_length, arrow_angle, path_color, path_width)
+					draw_arrow(new_path.sample(2, 0.5) + compensated * (Vector2.LEFT if !properties["non_segment_path_reverse"][0] else Vector2.RIGHT), \
+						Vector2.LEFT if !properties["non_segment_path_reverse"][0] else Vector2.RIGHT, arrow_length, arrow_angle, path_color, path_width)
+					draw_arrow(new_path.sample(3, 0.5) + compensated * (Vector2.UP if !properties["non_segment_path_reverse"][0] else Vector2.DOWN), \
+						Vector2.UP if !properties["non_segment_path_reverse"][0] else Vector2.DOWN, arrow_length, arrow_angle, path_color, path_width)
 				2: #Ellipse
 					var new_path: Curve2D = Curve2D.new()
+					var path_length := 0.0
 					var ellipse_a: float = $Shape.value.size.x / 2.0
 					var ellipse_b: float = $Shape.value.size.y / 2.0
 					var max_segment: float = max(TAU * (ellipse_a + ellipse_b) / 2.0 / 10.0, 40.0)
 					var ellipse_center: Vector2 = $Shape.value.get_center()
+
 					for i in range(0, max_segment):
 						var curr_angle := float(i) * 2.0 * PI / max_segment
 						var radius := ellipse_a * ellipse_b / sqrt(pow(ellipse_a * sin(curr_angle), 2) + pow(ellipse_b * cos(curr_angle), 2))
@@ -83,6 +96,21 @@ func _draw() -> void:
 					draw_ellipse($Shape.value.get_center(), ellipse_a, ellipse_b, path_color, false, path_width)
 					draw_circle(new_path.sample_baked(properties["non_segment_path_start"][0] * new_path.get_baked_length()), point_radius, point_color)
 					draw_circle(new_path.sample_baked(properties["non_segment_path_start"][0] * new_path.get_baked_length()), point_inner_radius, point_inner_color)
+					path_length = new_path.get_baked_length()
+					var arrow_length = clamp(new_path.get_baked_length() / 8.0, 8.0, 15.0)
+					const arrow_angle = PI / 6.0
+					for i in range(0, 4):
+						var draw_t = (0.125 + 0.25 * i) * path_length
+						var draw_point_1 = new_path.sample_baked(draw_t)
+						var compensated = 0.5 * arrow_length * cos(arrow_angle)
+						compensated *= 1.0 if !properties["non_segment_path_reverse"][0] else -1.0
+						var draw_point_2 = new_path.sample_baked(draw_t + compensated)
+						var draw_dir = draw_point_1.direction_to(draw_point_2)
+						draw_arrow(draw_point_2, draw_dir , arrow_length, arrow_angle, path_color, path_width)
+
+func draw_arrow(pos: Vector2, dir: Vector2, arrow_length: float, arrow_angle: float, color: Color, width: float = -1.0):
+	draw_line(pos, pos - dir.rotated(arrow_angle) * arrow_length, color, width)
+	draw_line(pos, pos - dir.rotated(-arrow_angle) * arrow_length, color, width)
 
 func _ready():
 	if actor_path == "":
@@ -136,38 +164,23 @@ func initialize(): #first time set up properties
 					properties[p["name"]] = [actor.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
 		properties["id"] = [name, TYPE_STRING, ""]
 
-		for ac in actor.get_children(): #TODO: add these to props and to waypoints
-			if ac.is_in_group("WaypointLocals"):
-				if !get_if_actor_has_waypoint(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-			if ac.is_in_group("WaypointGlobalSpawns"): #Not sure about this being here. what is this part realistically doing?
-				if !get_if_actor_has_waypoint(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-			if ac.is_in_group("VUVectors"):
-				if !get_if_actor_has_vu_vector(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-			if ac.is_in_group("VURects"):
-				if !get_if_actor_has_vu_rect(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-			if ac.is_in_group("VUActors"):
-				if !get_if_actor_has_vu_actor(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-		actor.free()
+		var visual_ult_groups = ["WaypointLocals", "WaypointGlobalSpawns",
+			 "VUVectors", "VURects", "VUActors"]
+		for ac in actor.get_children():
+			for vu_group in visual_ult_groups:
+				if ac.is_in_group(vu_group):
+					if !get_if_actor_has_visual_utility(ac, vu_group):
+						actor.remove_child(ac)
+						ac.owner = null
+						add_child(ac)
+						ac.owner = w.current_level
+
+		actor.queue_free()
+
+		for child in get_children():
+			if child.is_in_group("VisualUtilities"):
+				if child.has_signal("value_changed") && !child.value_changed.is_connected(on_vu_value_changed):
+					child.value_changed.connect(on_vu_value_changed)
 
 		set_sprite()
 		for prop in properties: # init all special interaction when changing property
@@ -191,32 +204,23 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 				else:
 					properties[p["name"]] = [actor.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
 
+		var visual_ult_groups = ["WaypointLocals", "WaypointGlobalSpawns",
+			 "VUVectors", "VURects", "VUActors"]
 		for ac in actor.get_children():
-			if ac.is_in_group("WaypointLocals"):
-				if !get_if_actor_has_waypoint(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-			if ac.is_in_group("VUVectors"):
-				if !get_if_actor_has_vu_vector(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-			if ac.is_in_group("VURects"):
-				if !get_if_actor_has_vu_rect(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-			if ac.is_in_group("VUActors"):
-				if !get_if_actor_has_vu_actor(ac):
-					actor.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-		actor.free()
+			for vu_group in visual_ult_groups:
+				if ac.is_in_group(vu_group):
+					if !get_if_actor_has_visual_utility(ac, vu_group):
+						actor.remove_child(ac)
+						ac.owner = null
+						add_child(ac)
+						ac.owner = w.current_level
+
+		actor.queue_free()
+
+		for child in get_children():
+			if child.is_in_group("VisualUtilities"):
+				if child.has_signal("value_changed") && !child.value_changed.is_connected(on_vu_value_changed):
+					child.value_changed.connect(on_vu_value_changed)
 
 		set_sprite()
 		for prop in properties: # init all special interaction when changing property
@@ -241,12 +245,12 @@ func spawn():
 	w.current_level.get_node("Actors").call_deferred("add_child", actor)
 
 	for ac in actor.get_children(): #clear old from actor
-		if ac.is_in_group("WaypointLocals") || ac.is_in_group("VUVectors") || ac.is_in_group("VURects") || ac.is_in_group("VUActors") || ac.is_in_group("WaypointGlobalSpawns"):
+		if ac.is_in_group("VisualUtilities"):
 			actor.remove_child(ac)
 			ac.queue_free()
 
 	for c in get_children(): #add new from spawn
-		if c.is_in_group("WaypointLocals") || c.is_in_group("VUVectors") || c.is_in_group("VURects") || c.is_in_group("VUActors"):
+		if c.is_in_group("VisualUtilities") && !c.is_in_group("WaypointGlobalSpawns"):
 			var copy = c.duplicate()
 			actor.add_child(copy)
 
@@ -266,39 +270,13 @@ func set_sprite():
 	$Sprite2D.position = actor.get_node("Sprite2D").position
 
 ### GETTERS
-
-func get_if_actor_has_waypoint(actor_waypoint) -> bool:
+func get_if_actor_has_visual_utility(actor_waypoint, group) -> bool:
 	var out = false
 	for c in get_children():
-		if c.is_in_group("WaypointLocals"): #q: does this need to apply for global spawns as well?
+		if c.is_in_group(group):
 			if c.tag_name == actor_waypoint.tag_name:
 				out = true
 	return out
-
-func get_if_actor_has_vu_vector(actor_vu_vector) -> bool:
-	for c in get_children():
-		if c.is_in_group("VUVectors"):
-			if c.tag_name == actor_vu_vector.tag_name:
-				return true
-	return false
-
-func get_if_actor_has_vu_rect(actor_vu_rect) -> bool:
-	if !actor_vu_rect.value_changed.is_connected(on_vu_value_changed):
-		actor_vu_rect.value_changed.connect(on_vu_value_changed)
-	for c in get_children():
-		if c.is_in_group("VURects"):
-			if c.tag_name == actor_vu_rect.tag_name:
-				if !c.value_changed.is_connected(on_vu_value_changed):
-					c.value_changed.connect(on_vu_value_changed)
-				return true
-	return false
-
-func get_if_actor_has_vu_actor(actor_vu_act) -> bool:
-	for c in get_children():
-		if c.is_in_group("VUActors"):
-			if c.tag_name == actor_vu_act.tag_name:
-				return true
-	return false
 
 ### SIGNALS
 
@@ -331,19 +309,20 @@ func on_property_changed(p_name, p_value):
 				queue_redraw()
 		"Crusher":
 			if p_name == "path_type":
-				$ToPoint.visible = properties[p_name][0] == 0
-				$Shape.visible = properties[p_name][0] != 0
+				$ToPoint.visible = p_value == 0
+				$Shape.visible = p_value != 0
 			if p_name in ["path_type", "non_segment_path_reverse",
 						 "non_segment_path_start", "loop"]:
 				queue_redraw()
 
-func on_vu_value_changed(tag, old_value, new_value):
+func on_vu_value_changed(vu, _old_value, _new_value):
 	var actor = get_actor_name()
 	if actor == "": return
 
 	match actor:
 		"Crusher":
-			if tag == "shape_define": queue_redraw()
+			if vu.is_in_group("VURects") and vu.tag_name == "shape_define": queue_redraw()
+			elif vu.is_in_group("WaypointLocals") and vu.tag_name == "to_point": queue_redraw()
 
 func get_actor_name() -> String:
 	var file_path = actor_path

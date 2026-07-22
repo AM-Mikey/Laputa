@@ -1,6 +1,7 @@
 extends MarginContainer
 
 @onready var main = get_parent()
+@onready var w = get_tree().get_root().get_node("World")
 
 var buttons = []
 
@@ -30,8 +31,8 @@ func _ready() -> void:
 			buttons.append(button)
 
 func _input(event: InputEvent):
-	if !main.w.has_node("EditorLayer/Editor"): return
-	var editor = main.w.get_node("EditorLayer/Editor")
+	if !main || !main.is_node_ready() || w.el.get_child_count() == 0: return
+	var editor = w.get_node("EditorLayer/Editor")
 	if editor.active_tool == "tile": return
 
 	if event.is_action_released("editor_rmb") && state != "idle":

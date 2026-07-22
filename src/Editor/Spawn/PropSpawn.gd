@@ -53,38 +53,27 @@ func initialize(): #first time set up properties
 		if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
 			properties[p["name"]] = [prop.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
 	properties["id"] = [name, TYPE_STRING, ""]
+
+	var visual_ult_groups = ["WaypointLocals", "WaypointGlobalSpawns",
+			 "VUVectors", "VURects", "VUActors"]
 	for ac in prop.get_children():
-		if ac.is_in_group("WaypointLocals"):
-			if !get_if_prop_has_waypoint(ac):
-				prop.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
-		if ac.is_in_group("WaypointGlobalSpawns"):
-			if !get_if_prop_has_waypoint(ac):
-				prop.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
-		if ac.is_in_group("VUVectors"):
-			if !get_if_prop_has_vu_vector(ac):
-				prop.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
-		if ac.is_in_group("VURects"):
-			if !get_if_prop_has_vu_rect(ac):
-				prop.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
-		if ac.is_in_group("VUActors"):
-			if !get_if_prop_has_vu_actor(ac):
-				prop.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
+		for vu_group in visual_ult_groups:
+			if ac.is_in_group(vu_group):
+				if !get_if_prop_has_visual_utility(ac, vu_group):
+					prop.remove_child(ac)
+					ac.owner = null
+					add_child(ac)
+					ac.owner = w.current_level
+
 	prop.free()
+
+	for child in get_children():
+		if child.is_in_group("VisualUtilities"):
+			if child.has_signal("value_changed") && !child.value_changed.is_connected(on_vu_value_changed):
+				child.value_changed.connect(on_vu_value_changed)
+
+	for p in properties: # init all special interaction when changing property
+		on_property_changed(p, properties[p][0])
 
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
 	var old_properties = properties
@@ -96,38 +85,27 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 				properties[p["name"]] = old_properties[p["name"]]
 			else:
 				properties[p["name"]] = [prop.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
+
+	var visual_ult_groups = ["WaypointLocals", "WaypointGlobalSpawns",
+			 "VUVectors", "VURects", "VUActors"]
 	for ac in prop.get_children():
-		if ac.is_in_group("WaypointLocals"):
-			if !get_if_prop_has_waypoint(ac):
-				prop.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
-		if ac.is_in_group("WaypointGlobalSpawns"):
-			if !get_if_prop_has_waypoint(ac):
-				prop.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
-		if ac.is_in_group("VUVectors"):
-			if !get_if_prop_has_vu_vector(ac):
-				prop.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
-		if ac.is_in_group("VURects"):
-			if !get_if_prop_has_vu_rect(ac):
-				prop.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
-		if ac.is_in_group("VUActors"):
-			if !get_if_prop_has_vu_actor(ac):
-				prop.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
+		for vu_group in visual_ult_groups:
+			if ac.is_in_group(vu_group):
+				if !get_if_prop_has_visual_utility(ac, vu_group):
+					prop.remove_child(ac)
+					ac.owner = null
+					add_child(ac)
+					ac.owner = w.current_level
+
 	prop.free()
+
+	for child in get_children():
+		if child.is_in_group("VisualUtilities"):
+			if child.has_signal("value_changed") && !child.value_changed.is_connected(on_vu_value_changed):
+				child.value_changed.connect(on_vu_value_changed)
+
+	for p in properties: # init all special interaction when changing property
+		on_property_changed(p, properties[p][0])
 
 func spawn():
 	if !allow_spawn: return
@@ -145,49 +123,25 @@ func spawn():
 		prop.global_position = global_position
 
 	for ac in prop.get_children(): #clear old from trigger
-		if ac.is_in_group("WaypointLocals") || ac.is_in_group("VUVectors") || ac.is_in_group("VURects") || ac.is_in_group("VUActors"):
+		if ac.is_in_group("VisualUtilities"):
 			prop.remove_child(ac)
-		if ac.is_in_group("WaypointGlobalSpawns"): #turn off visibility
-			ac.visible = false
+			ac.queue_free()
 
 	for c in get_children(): #add new from spawn
-		if c.is_in_group("WaypointLocals") || c.is_in_group("VUVectors") || c.is_in_group("VURects") || c.is_in_group("VUActors"):
+		if c.is_in_group("VisualUtilities") && !c.is_in_group("WaypointGlobalSpawns"):
 			var copy = c.duplicate()
 			prop.add_child(copy)
 
 	w.current_level.get_node("Props").call_deferred("add_child", prop)
 
 ### GETTERS
-
-func get_if_prop_has_waypoint(waypoint) -> bool:
+func get_if_prop_has_visual_utility(actor_waypoint, group) -> bool:
 	var out = false
 	for c in get_children():
-		if c.is_in_group("WaypointLocals"): #q: does this need to apply for global spawns as well?
-			if c.tag_name == waypoint.tag_name:
+		if c.is_in_group(group):
+			if c.tag_name == actor_waypoint.tag_name:
 				out = true
 	return out
-
-func get_if_prop_has_vu_vector(vu_vector) -> bool:
-	for c in get_children():
-		if c.is_in_group("VUVectors"):
-			if c.tag_name == vu_vector.tag_name:
-				return true
-	return false
-
-func get_if_prop_has_vu_rect(vu_rect) -> bool:
-	for c in get_children():
-		if c.is_in_group("VURects"):
-			if c.tag_name == vu_rect.tag_name:
-				return true
-	return false
-
-func get_if_prop_has_vu_actor(vu_actor) -> bool:
-	for c in get_children():
-		if c.is_in_group("VUActors"):
-			if c.tag_name == vu_actor.tag_name:
-				return true
-	return false
-
 
 ### SIGNALS
 
@@ -204,4 +158,7 @@ func _input_event(_viewport, event, _shape_idx): #selecting in editor
 		inspector.on_selected(self, "prop_spawn")
 
 func on_property_changed(p_name, p_value):
+	pass
+
+func on_vu_value_changed(vu, _old_value, _new_value):
 	pass

@@ -182,8 +182,8 @@ func crush_check():
 			var raycheck_position := Vector2.ZERO
 			var check_direction := Vector2.ZERO
 
-			if name in debug_name:
-				print("Find raycheck")
+			#if name in debug_name:
+				#print("Find raycheck")
 
 			if moving_direction.x < 0.0 and body_position.x < crush_rect_center.x:
 				check_direction.x = -1
