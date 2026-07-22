@@ -7,16 +7,33 @@
 [ext_resource type="StyleBox" uid="uid://ot23c6kiunqk" path="res://src/UI/StyleBox/RustTabsDark.tres" id="4_2n62p"]
 [ext_resource type="Script" uid="uid://dw8rl6uwhnt3l" path="res://src/UI/Inventory/Inventory.gd" id="6"]
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="6_4pdh5"]
-[ext_resource type="Texture2D" uid="uid://m5cabpidxb4v" path="res://assets/UI/Inventory/Shadow.png" id="6_l1q3b"]
 [ext_resource type="StyleBox" uid="uid://cb3gs2qq26l03" path="res://src/UI/StyleBox/RustTabsLight.tres" id="6_vxl58"]
-[ext_resource type="PackedScene" uid="uid://dbyknhh1oyx5i" path="res://src/UI/Inventory/WeaponWheel.tscn" id="7"]
+[ext_resource type="Texture2D" uid="uid://i6iasefg0ocd" path="res://assets/UI/Inventory/Items/WeaponWheelDark.png" id="7_lmyv0"]
 [ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="7_y7abv"]
 [ext_resource type="StyleBox" uid="uid://d20qvx0q5xflf" path="res://src/UI/StyleBox/RustTrimmedScrews.tres" id="8"]
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="8_1e805"]
+[ext_resource type="Texture2D" uid="uid://el0mgxf4lb6s" path="res://assets/UI/Inventory/Items/WeaponWheelSide.png" id="9_lmga8"]
+[ext_resource type="Texture2D" uid="uid://bnoxbd4fv78ux" path="res://assets/UI/Inventory/Items/WeaponWheel.png" id="10_ebj88"]
+[ext_resource type="Texture2D" uid="uid://dyhiddbqi3lk2" path="res://assets/UI/Inventory/Items/StarFull.png" id="11_frhsn"]
+[ext_resource type="Texture2D" uid="uid://d7gfc5xk2jjn" path="res://assets/UI/Inventory/Items/Selector.png" id="11_j0w38"]
 [ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="12_vxl58"]
+[ext_resource type="Texture2D" uid="uid://bhlo7pyv1e1g8" path="res://assets/Gun/GLauncherIcon.png" id="12_y48ww"]
 [ext_resource type="StyleBox" uid="uid://b2eysynpuqm3n" path="res://src/UI/StyleBox/RustTabs.tres" id="13_4huqx"]
+[ext_resource type="Texture2D" uid="uid://cl7uidhdx20wc" path="res://assets/Gun/RevolverIcon.png" id="13_aojjx"]
+[ext_resource type="Texture2D" uid="uid://biemb4gcelr1x" path="res://assets/UI/Inventory/Items/IconCooldown.png" id="13_frhsn"]
+[ext_resource type="Texture2D" uid="uid://p1k84i4nwdsn" path="res://assets/Gun/MPistolIcon.png" id="14_jkuqs"]
+[ext_resource type="Texture2D" uid="uid://cdpcddq6jqnts" path="res://assets/UI/Inventory/Items/IconDamage.png" id="14_ynejs"]
+[ext_resource type="Texture2D" uid="uid://dl5f3evfbmfum" path="res://assets/UI/GunIcon/Revolver.png" id="15_34jj4"]
+[ext_resource type="Texture2D" uid="uid://bpkhce083he6t" path="res://assets/UI/Inventory/Items/IconMaxAmmo.png" id="15_xpheq"]
 [ext_resource type="StyleBox" uid="uid://ctw8lx7pcj6kl" path="res://src/UI/StyleBox/Leather.tres" id="16_eo4w6"]
+[ext_resource type="Texture2D" uid="uid://xhufqjy1hspy" path="res://assets/UI/GunIcon/GLauncher.png" id="16_l780j"]
+[ext_resource type="Texture2D" uid="uid://c0cf5ynbobv11" path="res://assets/UI/Inventory/Items/IconLifetime.png" id="16_pkrle"]
+[ext_resource type="Texture2D" uid="uid://dk7468h5r2i0d" path="res://assets/UI/Inventory/Items/IconRange.png" id="17_j0w38"]
+[ext_resource type="Texture2D" uid="uid://c8116s2g3tl86" path="res://assets/UI/GunIcon/Haymaker.png" id="17_knvwb"]
 [ext_resource type="FontFile" uid="uid://bwfshb35302x4" path="res://assets/UI/Font/momobold.ttf" id="17_lfc7o"]
+[ext_resource type="Texture2D" uid="uid://de0nn1vywo5oi" path="res://assets/UI/GunIcon/Red7.png" id="18_dn5nk"]
+[ext_resource type="Texture2D" uid="uid://djhuwh2kittmi" path="res://assets/UI/GunIcon/Tsurugi.png" id="19_5to30"]
+[ext_resource type="Texture2D" uid="uid://dx2f0s7evdyou" path="res://assets/UI/GunIcon/MPistol.png" id="20_mrnct"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l1q3b"]
 shader = ExtResource("3_4pdh5")
@@ -162,6 +179,13 @@ text = "Map"
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
+[node name="BackHints" type="Node2D" parent="VBox" unique_id=851565105]
+position = Vector2(0, 16)
+
+[node name="WeaponWheelDark" type="Sprite2D" parent="VBox/BackHints" unique_id=471658246]
+position = Vector2(28, 40)
+texture = ExtResource("7_lmyv0")
+
 [node name="Background" type="Panel" parent="VBox" unique_id=1551394557]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(288, 232)
@@ -170,7 +194,6 @@ theme_override_styles/panel = ExtResource("8")
 
 [node name="Inventory" type="MarginContainer" parent="VBox/Background" unique_id=2102478161]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(288, 232)
 layout_mode = 0
 offset_right = 288.0
@@ -180,42 +203,301 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 8
 
+[node name="Weapons" type="Node2D" parent="VBox/Background/Inventory" unique_id=753212467]
+
+[node name="WeaponWheelSide" type="Sprite2D" parent="VBox/Background/Inventory/Weapons" unique_id=1123977996]
+position = Vector2(-8, 4)
+texture = ExtResource("9_lmga8")
+centered = false
+
+[node name="WeaponWheel" type="Sprite2D" parent="VBox/Background/Inventory/Weapons" unique_id=192819495]
+position = Vector2(28, 40)
+texture = ExtResource("10_ebj88")
+
+[node name="Selector" type="Sprite2D" parent="VBox/Background/Inventory/Weapons" unique_id=134563625]
+position = Vector2(65, 31)
+texture = ExtResource("11_j0w38")
+centered = false
+
+[node name="GunSprites" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=1715717104]
+
+[node name="1" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/GunSprites" unique_id=101867673]
+modulate = Color(0.5, 0.5, 0.5, 1)
+position = Vector2(124, 17)
+texture = ExtResource("12_y48ww")
+
+[node name="0" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/GunSprites" unique_id=1464855613]
+position = Vector2(132, 40)
+texture = ExtResource("13_aojjx")
+
+[node name="5" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/GunSprites" unique_id=207525192]
+modulate = Color(0.5, 0.5, 0.5, 1)
+position = Vector2(124, 63)
+texture = ExtResource("14_jkuqs")
+
+[node name="GunIcons" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=1533623299]
+
+[node name="0" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/GunIcons" unique_id=785452739]
+position = Vector2(51, 40)
+texture = ExtResource("15_34jj4")
+
+[node name="1" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/GunIcons" unique_id=1497646102]
+position = Vector2(40, 20)
+texture = ExtResource("16_l780j")
+
+[node name="2" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/GunIcons" unique_id=1350559738]
+position = Vector2(16, 20)
+texture = ExtResource("17_knvwb")
+
+[node name="3" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/GunIcons" unique_id=2048044352]
+visible = false
+position = Vector2(5, 40)
+texture = ExtResource("18_dn5nk")
+
+[node name="4" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/GunIcons" unique_id=1995096888]
+visible = false
+position = Vector2(16, 60)
+texture = ExtResource("19_5to30")
+
+[node name="5" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/GunIcons" unique_id=727189170]
+position = Vector2(40, 60)
+texture = ExtResource("20_mrnct")
+
+[node name="OneStar" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=2133602971]
+visible = false
+
+[node name="One" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/OneStar" unique_id=488709158]
+position = Vector2(197, 34)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="TwoStar" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=1081895696]
+visible = false
+
+[node name="One" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/TwoStar" unique_id=1993360819]
+position = Vector2(195, 48)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="Two" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/TwoStar" unique_id=675593736]
+position = Vector2(195, 20)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="ThreeStar" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=1572075072]
+
+[node name="One" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/ThreeStar" unique_id=362023990]
+position = Vector2(192, 60)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="Two" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/ThreeStar" unique_id=1346651178]
+position = Vector2(197, 34)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="Three" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/ThreeStar" unique_id=439390496]
+position = Vector2(192, 8)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="FourStar" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=2106499172]
+visible = false
+
+[node name="One" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/FourStar" unique_id=63762411]
+position = Vector2(191, 63)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="Two" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/FourStar" unique_id=1959625928]
+position = Vector2(196, 44)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="Three" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/FourStar" unique_id=755414349]
+position = Vector2(196, 24)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="Four" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/FourStar" unique_id=1717183616]
+position = Vector2(191, 5)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="FiveStar" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=444000761]
+visible = false
+
+[node name="One" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/FiveStar" unique_id=1533570655]
+position = Vector2(190, 65)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="Two" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/FiveStar" unique_id=1659015181]
+position = Vector2(195, 50)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="Three" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/FiveStar" unique_id=1849463549]
+position = Vector2(197, 34)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="Four" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/FiveStar" unique_id=839070554]
+position = Vector2(195, 18)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="Five" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/FiveStar" unique_id=271173211]
+position = Vector2(190, 3)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="SixStar" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=2003515184]
+visible = false
+
+[node name="One" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/SixStar" unique_id=802676825]
+position = Vector2(188, 65)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="Two" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/SixStar" unique_id=591334929]
+position = Vector2(195, 54)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="Three" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/SixStar" unique_id=223524852]
+position = Vector2(197, 41)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="Four" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/SixStar" unique_id=165979213]
+position = Vector2(197, 27)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="Five" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/SixStar" unique_id=1776922010]
+position = Vector2(195, 14)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="Six" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/SixStar" unique_id=1205390596]
+position = Vector2(188, 3)
+texture = ExtResource("11_frhsn")
+centered = false
+
+[node name="Stats" type="MarginContainer" parent="VBox/Background/Inventory/Weapons" unique_id=2074551181]
+offset_left = 192.0
+offset_right = 288.0
+offset_bottom = 80.0
+theme = ExtResource("2")
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="Panel" type="Panel" parent="VBox/Background/Inventory/Weapons/Stats" unique_id=658651073]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_1ly47")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Inventory/Weapons/Stats" unique_id=1321871481]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 4
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer" unique_id=1439053068]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Cooldown" type="HBoxContainer" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox" unique_id=822635100]
+layout_mode = 2
+
+[node name="Sprite2D" type="TextureRect" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Cooldown" unique_id=1983242111]
+layout_mode = 2
+texture = ExtResource("13_frhsn")
+
+[node name="Label" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Cooldown" unique_id=293865982]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.32941177, 0.80784315, 0.22352941, 1)
+theme_override_colors/font_shadow_color = Color(0.11372549, 0.15686275, 0.22745098, 1)
+text = "3.5"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Damage" type="HBoxContainer" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox" unique_id=364348296]
+layout_mode = 2
+
+[node name="Sprite2D" type="TextureRect" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Damage" unique_id=269715401]
+layout_mode = 2
+texture = ExtResource("14_ynejs")
+
+[node name="Label" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Damage" unique_id=327391269]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.8392157, 0.14117648, 0.14117648, 1)
+theme_override_colors/font_shadow_color = Color(0.11372549, 0.15686275, 0.22745098, 1)
+text = "2"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="MaxAmmo" type="HBoxContainer" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox" unique_id=751021404]
+layout_mode = 2
+
+[node name="Sprite2D" type="TextureRect" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/MaxAmmo" unique_id=131720596]
+layout_mode = 2
+texture = ExtResource("15_xpheq")
+
+[node name="Label" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/MaxAmmo" unique_id=79667585]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.96862745, 0.8862745, 0.7176471, 1)
+theme_override_colors/font_shadow_color = Color(0.11372549, 0.15686275, 0.22745098, 1)
+text = "144"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Lifetime" type="HBoxContainer" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox" unique_id=1833310922]
+layout_mode = 2
+
+[node name="Sprite2D" type="TextureRect" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Lifetime" unique_id=507531097]
+layout_mode = 2
+texture = ExtResource("16_pkrle")
+
+[node name="Label" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Lifetime" unique_id=828176075]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.6862745, 0.8784314, 0.78431374, 1)
+theme_override_colors/font_shadow_color = Color(0.11372549, 0.15686275, 0.22745098, 1)
+text = "4.2"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Range" type="HBoxContainer" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox" unique_id=1606016513]
+visible = false
+layout_mode = 2
+
+[node name="Sprite2D" type="TextureRect" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Range" unique_id=1333090133]
+layout_mode = 2
+texture = ExtResource("17_j0w38")
+
+[node name="Label" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Range" unique_id=1353080429]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.6862745, 0.8784314, 0.78431374, 1)
+theme_override_colors/font_shadow_color = Color(0.11372549, 0.15686275, 0.22745098, 1)
+text = "12"
+horizontal_alignment = 2
+clip_text = true
+
 [node name="VBox" type="VBoxContainer" parent="VBox/Background/Inventory" unique_id=610653170]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Weapons" type="MarginContainer" parent="VBox/Background/Inventory/VBox" unique_id=567955850]
+[node name="Spacer" type="Control" parent="VBox/Background/Inventory/VBox" unique_id=617491277]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Panel" type="Panel" parent="VBox/Background/Inventory/VBox/Weapons" unique_id=1974858271]
-layout_mode = 2
-theme_override_styles/panel = ExtResource("4_1ly47")
-
-[node name="Node2D" type="Node2D" parent="VBox/Background/Inventory/VBox/Weapons" unique_id=1191019744]
-
-[node name="TextureRect" type="TextureRect" parent="VBox/Background/Inventory/VBox/Weapons/Node2D" unique_id=483773731]
-offset_left = 29.0
-offset_top = 28.0
-offset_right = 211.0
-offset_bottom = 53.0
-texture = ExtResource("6_l1q3b")
-expand_mode = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Inventory/VBox/Weapons" unique_id=1554793153]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="WeaponWheel" parent="VBox/Background/Inventory/VBox/Weapons/MarginContainer" unique_id=238393302 instance=ExtResource("7")]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-height_modifier = 0.1
 
 [node name="Items" type="MarginContainer" parent="VBox/Background/Inventory/VBox" unique_id=582997615]
 unique_name_in_owner = true
@@ -297,12 +579,12 @@ size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.784314, 0.784314, 0.639216, 1)
 theme_override_colors/font_shadow_color = Color(0.113725, 0.156863, 0.227451, 1)
 theme_override_fonts/font = ExtResource("8_1e805")
-text = "Chocolate covered mushrooms? 
-xcv gggggggghhhhhhhhhhhhhhhhhh"
+text = "Chocolate covered mushrooms? xcv gggggggghhhhhhhhhhhhhhhhhh"
 autowrap_mode = 3
 
 [node name="Mission" type="MarginContainer" parent="VBox/Background" unique_id=281285142]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_right = 288.0
 offset_bottom = 232.0

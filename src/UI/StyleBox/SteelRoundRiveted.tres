@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://deshi6r488bxi"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://deshi6r488bxi"]
 
 [ext_resource type="Texture2D" uid="uid://c0fi4aso0k07j" path="res://assets/UI/StyleBox/SteelRoundRiveted.png" id="1_v6nqe"]
 
