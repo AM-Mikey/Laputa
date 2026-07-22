@@ -24,6 +24,7 @@ var t_body = null
 var t_dir = null
 
 # Animating var
+var moving_direction := Vector2.ZERO
 var prev_global_position := Vector2.ZERO
 enum FacingDir {NEUTRAL, LEFT, RIGHT, UP, DOWN}
 var facing_dir: FacingDir = FacingDir.NEUTRAL
@@ -129,6 +130,11 @@ func _physics_process(delta):
 
 	global_position = path.sample_baked(t_value * path_length)
 
+	var tolerance = min(path_length / travel_time / 333.33, 1.0)
+	moving_direction = global_position - prev_global_position
+	moving_direction.x = sign(moving_direction.x) if abs(moving_direction.x) > tolerance else 0.0
+	moving_direction.y = sign(moving_direction.y) if abs(moving_direction.y) > tolerance else 0.0
+
 	if crushing:
 		crush_check()
 
@@ -147,16 +153,11 @@ func on_crush_body_exited(body):
 
 
 func crush_check():
+	if moving_direction == Vector2.ZERO: return
+
 	var crush_rect_size = $Crush/CollisionShape2D.shape.size
 	var crush_rect := Rect2($Crush/CollisionShape2D.global_position - crush_rect_size / 2.0, crush_rect_size)
 	var crush_rect_center := crush_rect.get_center()
-
-	var tolerance = min(path_length / travel_time / 333.33, 1.0)
-	var moving_direction := global_position - prev_global_position
-	moving_direction.x = sign(moving_direction.x) if abs(moving_direction.x) > tolerance else 0.0
-	moving_direction.y = sign(moving_direction.y) if abs(moving_direction.y) > tolerance else 0.0
-
-	if moving_direction == Vector2.ZERO: return
 
 	#if name in debug_name:
 		#print(name, " ", nearby_bodies.size())
@@ -221,10 +222,15 @@ func crush_check():
 			while !collision.is_empty():
 				var collider = collision["collider"]
 				if collider.is_in_group("CrusherStandable"):
-					var exception = raycheck_param.exclude
-					exception.append(collider.get_rid())
-					raycheck_param.exclude = exception
-					collision = physics_space.intersect_ray(raycheck_param)
+					var collider_move_direction = collider.get_parent().moving_direction
+					if moving_direction.x * collider_move_direction.x < 0.0 || moving_direction.y * collider_move_direction.y < 0.0:
+						collide_with_world = true
+						break
+					else:
+						var exception = raycheck_param.exclude
+						exception.append(collider.get_rid())
+						raycheck_param.exclude = exception
+						collision = physics_space.intersect_ray(raycheck_param)
 				else:
 					#if name in debug_name:
 						#print("A")
