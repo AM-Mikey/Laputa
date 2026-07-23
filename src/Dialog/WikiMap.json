@@ -54,10 +54,9 @@
 	/newchar,Sage,Sage Lets make Basil vanish forever.
 	/hide,basil Poof, he's gone forever.
 	/unhide,basil Okay you can have him back.
-	/knockpc,left now get outta ere!
-	/left,aikka hmph!
-	/right,aikka
-	/progress_main_mission
+	/knockpc,aikka now get outta ere!
+	/lookat,aikka,not_pc hmph!
+	/right,aikka ... /progress_main_mission
 	",
 	
 	"camera_demo":

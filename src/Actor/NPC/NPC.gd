@@ -235,8 +235,12 @@ func _input(event):
 			return
 
 
-func look_at_node(node):
-	var look_dir = sign(node.global_position.x - global_position.x)
+func look_at_node(node, inverted = false):
+	var look_dir: float
+	if !inverted:
+		look_dir = sign(node.global_position.x - global_position.x)
+	else:
+		look_dir = sign(global_position.x - node.global_position.x)
 	$Sprite2D.flip_h = look_dir == 1
 
 

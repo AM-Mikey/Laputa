@@ -68,15 +68,23 @@ func parse_command(string, command_is_first):
 			db.character_is_bbcode_count += 4
 		"knockpc":
 			var a = string.split(",")
-			db.dl.text = db.get_text_stripped_of_commands(db.step)
-			db.dl.visible_characters = 0
-			db.character_shown_count = 0
 			match a[1]:
 				"left": pc.mm.knockback_direction = Vector2.LEFT
 				"right": pc.mm.knockback_direction = Vector2.RIGHT
+				_: #find an npc with that name
+					var found_npcs = []
+					for n in get_tree().get_nodes_in_group("NPCs"):
+						if n.id == a[1]:
+							found_npcs.append(n)
+					if found_npcs.is_empty():
+						printerr("COMMAND ERROR: could not find NPC with id: " + a[1])
+						return
+					var x_dir = sign(pc.global_position.x - found_npcs[0].global_position.x)
+					pc.mm.knockback_direction = Vector2(x_dir, 0)
 			pc.mm.knockback_speed = Vector2(25, 40)
 			pc.mm.snap_vector = Vector2.ZERO
 			pc.mm.change_state("knockback")
+
 
 		#"walk":#				/walk, (string: npc_id), (int: distance)				makes an npc walk a certain distance from their current pos
 			#walk(argument)#																with negative being left and positive being right
@@ -135,7 +143,7 @@ func parse_command(string, command_is_first):
 		#"unfocus":#																		returns camera focus to the pc
 			#unfocus()
 
-		"lookat":#					/lookat, (string: npc_id), (string: target_npc_id) or ("player" or "pc")
+		"lookat":#					/lookat, (string: npc_id), (string: target_npc_id) or ("player" or "pc") or ("notpc" or "notplayer")
 			lookat(argument)
 		"left":#					/left, (string: npc_id)								faces an npc left
 			flip("left", argument)
@@ -297,8 +305,12 @@ func lookat(string): #TODO: enable multiple lookers
 		return
 
 	var found_target = Node
-	if target_id == "player" or target_id == "pc":
+	var inverted = false
+	if target_id in ["pc", "player"]:
 		found_target = pc
+	elif target_id in ["not_pc", "not_player"]:
+		found_target = pc
+		inverted = true
 	else:
 		for n in get_tree().get_nodes_in_group("NPCs"):
 			if n.id == target_id:
@@ -308,7 +320,7 @@ func lookat(string): #TODO: enable multiple lookers
 			return
 
 	for n in found_npcs: #only looks at last n
-		n.look_at_node(found_target)
+		n.look_at_node(found_target, inverted)
 
 
 
