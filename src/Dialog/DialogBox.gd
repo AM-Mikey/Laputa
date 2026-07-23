@@ -262,16 +262,20 @@ func _on_flash_timer_timeout():
 		dl.visible_characters += 2
 		match flash_step:
 			0:
-				dl.text = flash_original_text + "[color=goldenrod] ¤[/color]"
+				dl.text = flash_original_text.insert(get_raw_index(), "[color=goldenrod] ¤[/color]")
+				#dl.text = flash_original_text + "[color=goldenrod] ¤[/color]"
 				$FlashTimer.wait_time = 0.1
 			1:
-				dl.text = flash_original_text + "[color=goldenrod] €[/color]"
+				dl.text = flash_original_text.insert(get_raw_index(), "[color=goldenrod] €[/color]")
+				#dl.text = flash_original_text + "[color=goldenrod] €[/color]"
 				$FlashTimer.wait_time = 0.075
 			2:
-				dl.text = flash_original_text + "[color=goldenrod] £[/color]"
+				dl.text = flash_original_text.insert(get_raw_index(), "[color=goldenrod] £[/color]")
+				#dl.text = flash_original_text + "[color=goldenrod] £[/color]"
 				$FlashTimer.wait_time = 0.1
 			3:
-				dl.text = flash_original_text + "[color=goldenrod] ¢[/color]"
+				dl.text = flash_original_text.insert(get_raw_index(), "[color=goldenrod] ¢[/color]")
+				#dl.text = flash_original_text + "[color=goldenrod] ¢[/color]"
 				$FlashTimer.wait_time = 0.2
 		flash_step = (flash_step + 1) % 4
 

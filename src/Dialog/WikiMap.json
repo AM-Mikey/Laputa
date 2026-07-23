@@ -36,12 +36,11 @@
 	
 	"options_demo":
 	"
-	/newchar,Basil,Basil
-	/options,a,b,c,d Pick the correct one.
+	/newchar,Basil,Basil Pick the correct one. /options,a,b,c,d
 	/db,0 Nope! /udb
 	/db,1 Incorrect. /udb
-	/db,2 Right answer! /eb /progress_main_mission
-	/db,4 Cmon, at least try to get it right... /udb
+	/db,2 Right answer! /progress_main_mission /eb
+	/db,3 Cmon, at least try to get it right... /udb
 	/m EXTREMELY LOUD BUZZER SOUND /progress_main_mission
 	",
 	

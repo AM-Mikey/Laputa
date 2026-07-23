@@ -327,7 +327,7 @@ func yes_no():
 	var saved_visible_characters = db.dl.visible_characters
 	db.change_background(db.get_node("Response"))
 	db.dl = db.get_node("Response/DialogResponse")
-	db.dl.text = db.get_text_stripped_of_commands(db.step - 1) #TODO: brief flash here on certain frames
+	db.dl.text = db.get_text_stripped_of_commands(db.step - 1)
 	db.dl.visible_characters = saved_visible_characters
 	db.get_node("Options").exit_action = "options"
 
@@ -340,9 +340,11 @@ func options(string):
 		capitalized_array.append(capitalized)
 	db.get_node("Options").options = capitalized_array
 	db.get_node("Options").display_options()
+	var saved_visible_characters = db.dl.visible_characters
+	db.change_background(db.get_node("Response"))
 	db.dl = db.get_node("Response/DialogResponse")
-	db.clear_text()
-	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
+	db.dl.text = db.get_text_stripped_of_commands(db.step - 1)
+	db.dl.visible_characters = saved_visible_characters
 	db.get_node("Options").exit_action = "options"
 
 
