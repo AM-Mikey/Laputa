@@ -264,6 +264,7 @@ position = Vector2(40, 60)
 texture = ExtResource("20_mrnct")
 
 [node name="OneStar" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=2133602971]
+unique_name_in_owner = true
 visible = false
 
 [node name="One" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/OneStar" unique_id=488709158]
@@ -272,6 +273,7 @@ texture = ExtResource("11_frhsn")
 centered = false
 
 [node name="TwoStar" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=1081895696]
+unique_name_in_owner = true
 visible = false
 
 [node name="One" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/TwoStar" unique_id=1993360819]
@@ -285,6 +287,7 @@ texture = ExtResource("11_frhsn")
 centered = false
 
 [node name="ThreeStar" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=1572075072]
+unique_name_in_owner = true
 
 [node name="One" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/ThreeStar" unique_id=362023990]
 position = Vector2(192, 60)
@@ -302,6 +305,7 @@ texture = ExtResource("11_frhsn")
 centered = false
 
 [node name="FourStar" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=2106499172]
+unique_name_in_owner = true
 visible = false
 
 [node name="One" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/FourStar" unique_id=63762411]
@@ -325,6 +329,7 @@ texture = ExtResource("11_frhsn")
 centered = false
 
 [node name="FiveStar" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=444000761]
+unique_name_in_owner = true
 visible = false
 
 [node name="One" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/FiveStar" unique_id=1533570655]
@@ -353,6 +358,7 @@ texture = ExtResource("11_frhsn")
 centered = false
 
 [node name="SixStar" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=2003515184]
+unique_name_in_owner = true
 visible = false
 
 [node name="One" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/SixStar" unique_id=802676825]
@@ -417,7 +423,8 @@ layout_mode = 2
 layout_mode = 2
 texture = ExtResource("13_frhsn")
 
-[node name="Label" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Cooldown" unique_id=293865982]
+[node name="CooldownLabel" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Cooldown" unique_id=293865982]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.32941177, 0.80784315, 0.22352941, 1)
@@ -433,7 +440,8 @@ layout_mode = 2
 layout_mode = 2
 texture = ExtResource("14_ynejs")
 
-[node name="Label" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Damage" unique_id=327391269]
+[node name="DamageLabel" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Damage" unique_id=327391269]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.8392157, 0.14117648, 0.14117648, 1)
@@ -449,7 +457,8 @@ layout_mode = 2
 layout_mode = 2
 texture = ExtResource("15_xpheq")
 
-[node name="Label" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/MaxAmmo" unique_id=79667585]
+[node name="MaxAmmoLabel" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/MaxAmmo" unique_id=79667585]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.96862745, 0.8862745, 0.7176471, 1)
@@ -465,7 +474,8 @@ layout_mode = 2
 layout_mode = 2
 texture = ExtResource("16_pkrle")
 
-[node name="Label" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Lifetime" unique_id=828176075]
+[node name="LifetimeLabel" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Lifetime" unique_id=828176075]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.6862745, 0.8784314, 0.78431374, 1)
@@ -475,14 +485,14 @@ horizontal_alignment = 2
 clip_text = true
 
 [node name="Range" type="HBoxContainer" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox" unique_id=1606016513]
-visible = false
 layout_mode = 2
 
 [node name="Sprite2D" type="TextureRect" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Range" unique_id=1333090133]
 layout_mode = 2
 texture = ExtResource("17_j0w38")
 
-[node name="Label" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Range" unique_id=1353080429]
+[node name="RangeLabel" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Range" unique_id=1353080429]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.6862745, 0.8784314, 0.78431374, 1)

@@ -6,19 +6,68 @@ const BACKGROUND_STYLEBOX_MISSION = preload("res://src/UI/StyleBox/RustTrimmedSc
 @onready var w = get_tree().get_root().get_node("World")
 @onready var items = %Items
 @onready var weapon_wheel = %WeaponWheel
+@onready var pc = f.pc()
 
 func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
+	pc.guns_updated.connect(_on_guns_updated)
+	update_gun_stats()
 	enter()
 	#For testing, remove this
 	#var pc = f.pc()
 	#var first_topic = pc.topic_array.front()
 	#first_topic.topic_stages = [0,1,2,3,4]
 
+func _on_guns_updated(_guns, _action) -> void:
+	update_gun_stats()
+
+func update_gun_stats():
+	var guns = pc.guns
+	if guns.get_child_count() == 0:
+		return
+
+	# Note that index 0 is always the active gun
+	var active_gun = guns.get_child(0)  
+
+	%CooldownLabel.text = str(active_gun.cooldown_time)
+	%DamageLabel.text = str(active_gun.damage)
+	%MaxAmmoLabel.text = str(active_gun.max_ammo)
+	%LifetimeLabel.text = str(active_gun.f_time)
+	%RangeLabel.text = str(active_gun.f_range)
+	%InventoryHeader.text = active_gun.display_name
+	%InventoryBody.text = active_gun.description
+	update_star_count(active_gun.level, active_gun.max_level)
+
+func update_star_count(gun_level: int, max_level: int) -> void:
+	var star_groups = {
+		1: %OneStar,
+		2: %TwoStar,
+		3: %ThreeStar,
+		4: %FourStar,
+		5: %FiveStar,
+		6: %SixStar,
+	}
+
+	for key in star_groups:
+		var group = star_groups[key]
+		group.visible = (key == max_level)
+
+		if key == max_level:
+			for i in group.get_child_count():
+				group.get_child(i).visible = i < gun_level
+
+
 func _input(event):
 	if event.is_action_pressed("inventory") and inp.can_act:
 		exit()
+
+	if event.is_action_pressed("gun_left"):
+		pc.gm.shift_gun("left")
+		update_gun_stats()
+	elif event.is_action_pressed("gun_right"):
+		pc.gm.shift_gun("right")
+		update_gun_stats()
 
 
 func display_items():
