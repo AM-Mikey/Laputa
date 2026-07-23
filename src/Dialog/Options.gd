@@ -3,9 +3,10 @@ extends Control
 var options = ["Yes", "No", "Option Three", "Option Four", "Option Five", "Option Six"]
 var ids = []
 
-@export var up_down_cooldown_time = 0.2
+var up_down_cooldown_time = 0.2
 
 var selected_option = -1
+var is_entering = false
 var is_displaying = false
 var is_exiting = false
 var exit_action = "continue"
@@ -15,10 +16,8 @@ func _ready():
 	#display_options()
 
 func display_options():
+	is_entering = true
 	print("displaying options")
-	get_parent().get_node("AnimationPlayer").play("ResponseEnter")
-	get_parent().get_node("Response").visible = true
-	visible = true
 	$Four.visible = false
 	$Three.visible = false
 	$Two.visible = false
@@ -67,25 +66,28 @@ func _input(event):
 
 
 func hide_options():
+	var db = get_parent()
+	is_displaying = false
 	is_exiting = true
 	get_parent().do_delay = false
 	#print("set_delay_false")
 	await get_tree().create_timer(0.1, true, false).timeout #wait for text to finish printing without delay #TODO: check if these flags are correct
-	get_parent().dl = get_parent().get_node("NPC/DialogNPC")
-	get_parent().dl.text = ""
-	get_parent().flash_original_text = ""
-	#print("cleared dl")
-	get_parent().get_node("AnimationPlayer").play("ResponseExit")
+
+	db.dl.text = ""
+	db.dl = db.get_node("NPC/DialogNPC")
+	db.change_background(db.get_node("NPC"))
+	db.clear_text()
+
+
 	await get_parent().get_node("AnimationPlayer").animation_finished
 
 	match exit_action:
 		"continue":
-			get_parent().progress_text(false)
+			get_parent().progress_text()
 		"options":
 			get_parent().get_node("CommandHandler").on_select_branch(selected_option)
 		"topics":
 			get_parent().get_node("CommandHandler").on_select_branch(ids[selected_option])
-	is_displaying = false
 	is_exiting = false
 
 ### HELPER ###
@@ -209,20 +211,11 @@ func up_label_swap():
 	$Four/Third/Label.text = options[selected_option + 1]
 	$Four/Forth/Label.text = options[selected_option + 2]
 
-### SIGNALS ###
-
-#func _on_AnimationPlayer_animation_finished(anim_name: StringName):
-	#if Input.is_action_pressed("ui_up"):
-		#$UpDownTimer.start(up_down_cooldown_time)
-		#option_up()
-	#if Input.is_action_pressed("ui_down"):
-		#$UpDownTimer.start(up_down_cooldown_time)
-		#option_down()
-
-
+## SIGNALS ###
 func _on_MainAnimationPlayer_animation_finished(anim_name: StringName):
 	if anim_name == "ResponseEnter":
 		is_displaying = true
+		is_entering = false
 
 
 func _on_UpDownTimer_timeout():

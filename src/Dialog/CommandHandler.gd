@@ -324,11 +324,13 @@ func wait(string):
 func yes_no():
 	db.get_node("Options").options = ["Yes", "No"]
 	db.get_node("Options").display_options()
+	var saved_visible_characters = db.dl.visible_characters
+	db.change_background(db.get_node("Response"))
 	db.dl = db.get_node("Response/DialogResponse")
-	db.clear_text()
-	print("cleared text + set db")
-	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
+	db.dl.text = db.get_text_stripped_of_commands(db.step - 1) #TODO: brief flash here on certain frames
+	db.dl.visible_characters = saved_visible_characters
 	db.get_node("Options").exit_action = "options"
+
 
 func options(string):
 	var a = string.split(",")
@@ -342,6 +344,7 @@ func options(string):
 	db.clear_text()
 	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
 	db.get_node("Options").exit_action = "options"
+
 
 func topics(argument):
 	var npc_topics = argument.split(",")
@@ -365,7 +368,6 @@ func topics(argument):
 	db.get_node("Options").display_options()
 	db.dl = db.get_node("Response/DialogResponse")
 	db.clear_text()
-	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
 	db.get_node("Options").exit_action = "topics"
 
 
@@ -391,13 +393,17 @@ func end_branch():
 
 func seek(string):
 	print("seeking: ", string)
-	#print(db.current_text_array)
 	var found = false
 	for i in db.current_text_array:
 		if i == string:
 			found = true
-			print(db.current_text_array.find(i))
-			db.step = db.current_text_array.find(i) #to skip the null /db command
+			db.step = db.current_text_array.find(i)
+			db.dl.text = db.get_branch_text(db.step + 1)
+			db.character_shown_count = 0
+			db.character_is_newline_count = 0
+			db.character_is_bbcode_count = 0
+			db.dl.visible_characters = 2 #since progress_text(): db.dl.visible_characters -= 2
+			db.flash_original_text = db.dl.text
 			db.progress_text()
 	if !found:
 		printerr("ERROR: Branch " + string + " Not Found")

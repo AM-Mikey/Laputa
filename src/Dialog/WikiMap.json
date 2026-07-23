@@ -28,9 +28,8 @@
 	
 	"yes_no_demo":
 	"
-	/newchar,Juniper,Juniper
-	/yn should i own an air fryer?..
-	/db,0 yes, the masses must know air fry. /eb
+	/newchar,Juniper,Juniper should i own an air fryer?.. /yn 
+	/db,0 yes, the masses must know air fry. /udb
 	/db,1 no, but what if... /udb
 	/m delightfully devilish, juniper
 	",

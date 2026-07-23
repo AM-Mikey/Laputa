@@ -164,6 +164,17 @@ func get_text_stripped_of_commands(from_step: int) -> String:
 	#print(out)
 	return out
 
+func get_branch_text(from_step: int) -> String:
+	var out := PackedStringArray([])
+	var step_index := 0
+	for i in current_text_array:
+		if step_index >= from_step:
+			if i.begins_with("/db,") or i == "/m":
+				break
+			elif !i.contains("/"):
+				out.append(i)
+		step_index += 1
+	return "".join(out)
 
 func run_text_array(text_array, from_input := false): #step is always the next step ready to do, not the one just done
 	if step == current_text_array.size() || do_force_end:
@@ -268,10 +279,10 @@ func _on_flash_timer_timeout():
 func _input(event):
 	if auto_input: return
 	if event.is_action_pressed("ui_accept") && !busy: #bypass inp.can_act
-		if $Options.is_displaying: return #so it doesn't input
+		if $Options.is_entering || $Options.is_displaying || $Options.is_exiting: return #so it doesn't input
 		if awaiting_merge:
 			awaiting_merge = false
-			$CommandHandler.seek("/m", true)
+			$CommandHandler.seek("/m")
 		elif active: #if already active, speed text up
 			do_delay = false
 		else:
@@ -282,7 +293,7 @@ func prepare_auto_input():
 	await get_tree().create_timer(auto_input_delay, true, false).timeout
 	if awaiting_merge:
 		awaiting_merge = false
-		$CommandHandler.seek("/m", true)
+		$CommandHandler.seek("/m")
 	else:
 		check_line_overflow(character_shown_count + 1)
 
@@ -450,16 +461,29 @@ func flip_face(dir = "auto"):
 
 func change_background(node_to_show) -> bool:
 	if node_to_show == $Flat:
-		if $Flat.visible: return false
+		if $Flat.visible:
+			return false
 		elif $NPC.visible:
-			$NPC.visible = false
 			$AnimationPlayer.play("NPCToFlat")
 			return true
+		elif $Response.visible:
+			return true
 	elif node_to_show == $NPC:
-		if $NPC.visible: return false
-		if $Flat.visible:
-			$Flat.visible = false
+		if $NPC.visible:
+			return false
+		elif $Flat.visible:
 			$AnimationPlayer.play("FlatToNPC")
+			return true
+		elif $Response.visible:
+			$AnimationPlayer.play("ResponseExit")
+			return true
+	elif node_to_show == $Response:
+		if $Response.visible:
+			return false
+		elif $Flat.visible:
+			return true
+		elif $NPC.visible:
+			$AnimationPlayer.play("ResponseEnter")
 			return true
 	return false
 
