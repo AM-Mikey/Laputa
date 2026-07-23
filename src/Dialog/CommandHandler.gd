@@ -74,7 +74,7 @@ func parse_command(string, command_is_first):
 				_: #find an npc with that name
 					var found_npcs = []
 					for n in get_tree().get_nodes_in_group("NPCs"):
-						if n.id == a[1]:
+						if n.id.nocasecmp_to(a[1]) == 0:
 							found_npcs.append(n)
 					if found_npcs.is_empty():
 						printerr("COMMAND ERROR: could not find NPC with id: " + a[1])
@@ -231,7 +231,7 @@ func set_visible(string, visible):
 		return
 	var id = string.to_lower()
 	for n in get_tree().get_nodes_in_group("NPCs"):
-		if n.id == id:
+		if n.id.nocasecmp_to(id) == 0:
 			n.visible = visible
 
 #func walk(string):
@@ -246,7 +246,7 @@ func set_visible(string, visible):
 		#return
 	#
 	#for n in get_tree().get_nodes_in_group("NPCs"):
-		#if n.id == id:
+		#if n.id.nocasecmp_to(id) == 0:
 			#n.target_pos = Vector2(n.global_position.x + (distance * 16), 0)
 			#print("npc target position: ", n.target_pos)
 			#
@@ -262,7 +262,7 @@ func waypoint(string):
 	var id = a[0]
 	var index = int(a[1])
 	for n in get_tree().get_nodes_in_group("NPCs"):
-		if n.id == id:
+		if n.id.nocasecmp_to(id) == 0:
 			n.walk_to_waypoint(index)
 
 
@@ -270,9 +270,9 @@ func focus(string):
 	if string == "":
 		printerr("COMMAND ERROR: no npc given for /focus")
 		return
-	var id = string.to_lower()
+	var id = string
 	for n in get_tree().get_nodes_in_group("NPCs"):
-		if n.id == id:
+		if n.id.nocasecmp_to(id) == 0:
 			pc.get_node("PlayerCamera").global_position = n.global_position
 
 
@@ -281,10 +281,10 @@ func unfocus():
 
 
 func flip(direction, string):
-	var id = string.to_lower()
+	var id = string
 	var found_npcs = 0
 	for n in get_tree().get_nodes_in_group("NPCs"):
-		if n.id == id:
+		if n.id.nocasecmp_to(id) == 0:
 			found_npcs += 1
 			n.get_node("Sprite2D").flip_h = direction == "right"
 	if found_npcs == 0:
@@ -293,12 +293,12 @@ func flip(direction, string):
 
 func lookat(string): #TODO: enable multiple lookers
 	var a = string.split(",")
-	var npc_id = a[0].to_lower()
-	var target_id = a[1].to_lower()
+	var npc_id = a[0]
+	var target_id = a[1]
 
 	var found_npcs = []
 	for n in get_tree().get_nodes_in_group("NPCs"):
-		if n.id == npc_id:
+		if n.id.nocasecmp_to(npc_id) == 0:
 			found_npcs.append(n)
 	if found_npcs.is_empty():
 		printerr("COMMAND ERROR: could not find NPC with id: " + npc_id)
@@ -313,7 +313,7 @@ func lookat(string): #TODO: enable multiple lookers
 		inverted = true
 	else:
 		for n in get_tree().get_nodes_in_group("NPCs"):
-			if n.id == target_id:
+			if n.id.nocasecmp_to(target_id) == 0:
 				found_target = n
 		if found_target == null:
 			printerr("COMMAND ERROR: could not find NPC with id: " + target_id)

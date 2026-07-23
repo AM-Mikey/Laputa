@@ -27,7 +27,7 @@ func setup(): #Reminder: no function called can use await before finishing entit
 		if e.is_in_group("EditorEntities"):
 			return
 		if "id" in e:
-			if e.id == connected_entity_id:
+			if e.id.nocasecmp_to(connected_entity_id) == 0:
 				connected_entity = e
 				set_switch_toggled_from_connected_entity()
 	match switch_type:

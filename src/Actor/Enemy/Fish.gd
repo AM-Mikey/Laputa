@@ -40,7 +40,7 @@ func setup(): #Reminder: no function called can use await
 				"jump":
 					rc.target_position.y = c.position.y
 	for c in w.current_level.get_node("Waypoints").get_children():
-		if c.owner_id == id:
+		if c.owner_id.nocasecmp_to(id) == 0:
 			match c.tag_name:
 				"left":
 					x_min = c.position.x - start_pos.x

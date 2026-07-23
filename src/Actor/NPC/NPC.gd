@@ -265,7 +265,7 @@ func calc_velocity(do_gravity = true) -> Vector2:
 
 func find_waypoints():
 	for wp in get_tree().get_nodes_in_group("WaypointGlobals"):
-		if wp.owner_id.to_lower() == id.to_lower():
+		if wp.owner_id.nocasecmp_to(id) == 0:
 			waypoints[w.index] = wp
 	if not waypoints.is_empty():
 		set_target(waypoints[0])
