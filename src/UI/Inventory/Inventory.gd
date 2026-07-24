@@ -28,7 +28,7 @@ func update_gun_stats():
 		return
 
 	# Note that index 0 is always the active gun
-	var active_gun = guns.get_child(0)  
+	var active_gun: Gun = guns.get_child(0)  
 
 	%CooldownLabel.text = str(active_gun.cooldown_time)
 	%DamageLabel.text = str(active_gun.damage)
@@ -38,8 +38,13 @@ func update_gun_stats():
 	%InventoryHeader.text = active_gun.display_name
 	%InventoryBody.text = active_gun.description
 	update_star_count(active_gun.level, active_gun.max_level)
+	
+	%Lifetime.visible = active_gun.has_lifetime
+	%Range.visible = not active_gun.has_lifetime
+		
 
-func update_star_count(gun_level: int, max_level: int) -> void:
+	
+func update_star_count(gun_level: int, max_level: int):
 	var star_groups = {
 		1: %OneStar,
 		2: %TwoStar,

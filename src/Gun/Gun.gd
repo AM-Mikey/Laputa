@@ -28,6 +28,9 @@ var spread_degrees: float = 0.0
 var ammo: int = 0
 var max_ammo: int = 0
 
+
+var has_lifetime: bool = false # Note: A gun has a lifetime if the bullet has a timer on it
+	
 var xp: int = 0
 var max_xp: int = 20
 var max_level: int = 1

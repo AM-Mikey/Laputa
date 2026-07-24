@@ -468,6 +468,7 @@ horizontal_alignment = 2
 clip_text = true
 
 [node name="Lifetime" type="HBoxContainer" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox" unique_id=1833310922]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Sprite2D" type="TextureRect" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Lifetime" unique_id=507531097]
@@ -485,6 +486,7 @@ horizontal_alignment = 2
 clip_text = true
 
 [node name="Range" type="HBoxContainer" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox" unique_id=1606016513]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Sprite2D" type="TextureRect" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Range" unique_id=1333090133]
