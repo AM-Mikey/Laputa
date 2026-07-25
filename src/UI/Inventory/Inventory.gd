@@ -7,6 +7,7 @@ const BACKGROUND_STYLEBOX_MISSION = preload("res://src/UI/StyleBox/RustTrimmedSc
 @onready var items = %Items
 @onready var weapon_wheel = %WeaponWheel
 @onready var pc = f.pc()
+@onready var weapon_wheel_animator = %WeaponWheelAnimator
 
 func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
@@ -69,12 +70,22 @@ func _input(event):
 
 	if event.is_action_pressed("gun_left"):
 		pc.gm.shift_gun("left")
+		weapon_wheel_animator.play("CWW")
+		await weapon_wheel_animator.animation_finished
+
+		var child_to_move = %GunIcons.get_child(%GunIcons.get_child_count() - 1)
+		%GunIcons.move_child(child_to_move, 0)
 		update_gun_stats()
+
 	elif event.is_action_pressed("gun_right"):
 		pc.gm.shift_gun("right")
+		weapon_wheel_animator.play("CW")
+		await weapon_wheel_animator.animation_finished
+
+		var child_to_move = %GunIcons.get_child(0)
+		%GunIcons.move_child(child_to_move, %GunIcons.get_child_count() - 1)
 		update_gun_stats()
-
-
+			
 func display_items():
 	var pc = f.pc()
 	for i in pc.item_array:
