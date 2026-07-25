@@ -57,7 +57,7 @@ region = Rect2(0, 190, 320, 21)
 
 [sub_resource type="Animation" id="Animation_5to30"]
 resource_name = "CW"
-length = 0.5
+length = 0.6
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -170,7 +170,7 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_34jj4"]
 resource_name = "CWW"
-length = 0.5
+length = 5.2
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -215,10 +215,10 @@ tracks/3/path = NodePath("GunIcons/0:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"times": PackedFloat32Array(-2.9802322e-08, 0.099999964, 0.19999999, 0.3),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 0,
-"values": [Vector2(42, 54), Vector2(45, 50), Vector2(48, 45), Vector2(38, 58)]
+"values": [Vector2(48, 33), Vector2(45, 28), Vector2(42, 24), Vector2(38, 20)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -227,10 +227,10 @@ tracks/4/path = NodePath("GunIcons/1:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"times": PackedFloat32Array(-2.9802322e-08, 0.099999964, 0.19999999, 0.3),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 0,
-"values": [Vector2(48, 33), Vector2(45, 28), Vector2(42, 24), Vector2(49, 39)]
+"values": [Vector2(33, 18), Vector2(27, 17), Vector2(21, 18), Vector2(16, 20)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -239,10 +239,10 @@ tracks/5/path = NodePath("GunIcons/2:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"times": PackedFloat32Array(-2.9802322e-08, 0.099999964, 0.19999999, 0.3),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 0,
-"values": [Vector2(33, 18), Vector2(27, 17), Vector2(21, 18), Vector2(38, 20)]
+"values": [Vector2(12, 24), Vector2(9, 28), Vector2(6, 33), Vector2(5, 39)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -251,10 +251,10 @@ tracks/6/path = NodePath("GunIcons/3:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"times": PackedFloat32Array(-2.9802322e-08, 0.099999964, 0.19999999, 0.3),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 0,
-"values": [Vector2(12, 24), Vector2(9, 28), Vector2(6, 33), Vector2(16, 20)]
+"values": [Vector2(6, 45), Vector2(9, 50), Vector2(12, 54), Vector2(16, 58)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -263,10 +263,10 @@ tracks/7/path = NodePath("GunIcons/4:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"times": PackedFloat32Array(-2.9802322e-08, 0.099999964, 0.19999999, 0.3),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 0,
-"values": [Vector2(6, 45), Vector2(9, 50), Vector2(12, 54), Vector2(5, 39)]
+"values": [Vector2(21, 60), Vector2(27, 61), Vector2(33, 60), Vector2(38, 58)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -275,10 +275,10 @@ tracks/8/path = NodePath("GunIcons/5:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"times": PackedFloat32Array(-2.9802322e-08, 0.099999964, 0.19999999, 0.3),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 0,
-"values": [Vector2(21, 60), Vector2(27, 61), Vector2(33, 60), Vector2(16, 58)]
+"values": [Vector2(42, 54), Vector2(45, 50), Vector2(48, 45), Vector2(49, 38)]
 }
 
 [sub_resource type="Animation" id="Animation_dn5nk"]
@@ -573,7 +573,7 @@ position = Vector2(49, 39)
 texture = ExtResource("15_34jj4")
 
 [node name="1" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons" unique_id=1497646102]
-position = Vector2(48, 33)
+position = Vector2(42, 24)
 texture = ExtResource("16_l780j")
 
 [node name="2" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons" unique_id=1350559738]
@@ -581,11 +581,11 @@ position = Vector2(16, 20)
 texture = ExtResource("17_knvwb")
 
 [node name="3" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons" unique_id=2048044352]
-position = Vector2(12, 24)
+position = Vector2(6, 33)
 texture = ExtResource("18_dn5nk")
 
 [node name="4" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons" unique_id=1995096888]
-position = Vector2(6, 45)
+position = Vector2(12, 54)
 texture = ExtResource("19_5to30")
 
 [node name="5" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons" unique_id=727189170]
