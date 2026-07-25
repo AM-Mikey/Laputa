@@ -57,7 +57,7 @@ region = Rect2(0, 190, 320, 21)
 
 [sub_resource type="Animation" id="Animation_5to30"]
 resource_name = "CW"
-length = 0.6
+length = 0.3
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -170,7 +170,7 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_34jj4"]
 resource_name = "CWW"
-length = 5.2
+length = 0.3
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -525,11 +525,7 @@ theme_override_constants/margin_bottom = 8
 
 [node name="Weapons" type="Node2D" parent="VBox/Background/Inventory" unique_id=753212467]
 
-[node name="WeaponWheelSide" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=1597716539]
-
-[node name="Sprite2D" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheelSide" unique_id=534301486]
-
-[node name="WeaponWheelSid" type="Sprite2D" parent="VBox/Background/Inventory/Weapons" unique_id=1123977996]
+[node name="WeaponWheelSide" type="Sprite2D" parent="VBox/Background/Inventory/Weapons" unique_id=1123977996]
 visible = false
 position = Vector2(-8, 4)
 texture = ExtResource("9_lmga8")
@@ -538,11 +534,6 @@ hframes = 4
 region_enabled = true
 region_rect = Rect2(0, 0, 640, 73)
 region_filter_clip_enabled = true
-
-[node name="WeaponWhee" type="Sprite2D" parent="VBox/Background/Inventory/Weapons" unique_id=192819495]
-visible = false
-position = Vector2(28, 40)
-texture = ExtResource("10_ebj88")
 
 [node name="WeaponWheel" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=2009112383]
 position = Vector2(-10, 3)
@@ -573,7 +564,7 @@ position = Vector2(49, 39)
 texture = ExtResource("15_34jj4")
 
 [node name="1" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons" unique_id=1497646102]
-position = Vector2(42, 24)
+position = Vector2(49, 39)
 texture = ExtResource("16_l780j")
 
 [node name="2" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons" unique_id=1350559738]
@@ -581,11 +572,11 @@ position = Vector2(16, 20)
 texture = ExtResource("17_knvwb")
 
 [node name="3" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons" unique_id=2048044352]
-position = Vector2(6, 33)
+position = Vector2(16, 20)
 texture = ExtResource("18_dn5nk")
 
 [node name="4" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons" unique_id=1995096888]
-position = Vector2(12, 54)
+position = Vector2(5, 39)
 texture = ExtResource("19_5to30")
 
 [node name="5" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons" unique_id=727189170]
@@ -602,6 +593,7 @@ texture = ExtResource("11_j0w38")
 centered = false
 
 [node name="GunSprites" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=1715717104]
+visible = false
 
 [node name="1" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/GunSprites" unique_id=101867673]
 modulate = Color(0.5, 0.5, 0.5, 1)
