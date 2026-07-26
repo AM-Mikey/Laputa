@@ -29,24 +29,12 @@ var prev_global_position := Vector2.ZERO
 enum FacingDir {NEUTRAL, LEFT, RIGHT, UP, DOWN}
 var facing_dir: FacingDir = FacingDir.NEUTRAL
 
-
 var debug_path_color := Color.RED
 var debug_path_start := true
-var debug_name = ["Crusher42"]
+var debug_name = ["Crusher16"]
 #["Crusher60", "Crusher58", "Crusher42", "Crusher43", "Crusher44", "Crusher45", "Crusher46", "Crusher47", "Crusher48", "Crusher49"]
 
-var bod_rect : Rect2
-var self_rect : Rect2
-var over_rect : Rect2
-
 func _draw():
-	if name in debug_name:
-		var draw_bod_rect = Rect2(bod_rect.position - global_position, bod_rect.size)
-		var draw_self_rect = Rect2(self_rect.position - global_position, self_rect.size)
-		var draw_over_rect = Rect2(over_rect.position - global_position, over_rect.size)
-		draw_rect(draw_bod_rect, Color.BLUE)
-		draw_rect(draw_self_rect, Color.RED)
-		draw_rect(draw_over_rect, Color.PURPLE)
 	if debug and !dead:
 		var draw_points: PackedVector2Array = path.get_baked_points()
 		for i in range(draw_points.size()):
@@ -173,29 +161,38 @@ func crush_check():
 		var body_rect := Rect2(body_collision_shape.global_position - body_size / 2.0, body_size)
 		var body_overlap_rect := body_rect.intersection(crush_rect)
 
-		#if name in debug_name:
-			#self_rect = crush_rect
-			#bod_rect = body_rect
-			#over_rect = body_overlap_rect
-			#queue_redraw()
+		if name in debug_name:
+			$DebugDraw.self_rect = crush_rect
+			$DebugDraw.bod_rect = body_rect
+			$DebugDraw.over_rect = body_overlap_rect
+			$DebugDraw.queue_redraw()
+
 		if body_overlap_rect != Rect2():
 			var body_position = body_overlap_rect.get_center()
 			var raycheck_position := Vector2.ZERO
 			var check_direction := Vector2.ZERO
 
+			const body_in_y_tolerance: = 1.0
+			var body_in_y = body_position.y >= crush_rect.position.y + body_in_y_tolerance && body_position.y <= crush_rect.position.y + crush_rect.size.y - body_in_y_tolerance
+			const body_in_x_tolerance: = 1.0
+			var body_in_x = body_position.x >= crush_rect.position.x + body_in_x_tolerance && body_position.x <= crush_rect.position.x + crush_rect.size.x - body_in_x_tolerance
+
 			#if name in debug_name:
 				#print("Find raycheck")
-
-			if moving_direction.x < 0.0 and body_position.x < crush_rect_center.x:
+			if body_in_y and moving_direction.x < 0.0 and body_position.x < crush_rect_center.x:
+				#and cos(check_angle) < -crush_rect.size.x / 2.0 / hypotheus:
 				check_direction.x = -1
 				raycheck_position = body_rect.position + Vector2(0.0, body_rect.size.y / 2.0)
-			elif moving_direction.x > 0.0 and body_position.x > crush_rect_center.x:
+			elif body_in_y and moving_direction.x > 0.0 and body_position.x > crush_rect_center.x:
+				#and cos(check_angle) > crush_rect.size.x / 2.0 / hypotheus:
 				check_direction.x = 1
 				raycheck_position = body_rect.position + Vector2(body_rect.size.x, body_rect.size.y / 2.0)
-			if moving_direction.y < 0.0 and body_position.y < crush_rect_center.y:
+			if body_in_x and moving_direction.y < 0.0 and body_position.y < crush_rect_center.y:
+				#and sin(check_angle) < -crush_rect.size.y / 2.0 / hypotheus:
 				check_direction.y = -1
 				raycheck_position = body_rect.position + Vector2(body_rect.size.x / 2.0, 0.0)
-			elif moving_direction.y > 0.0 and body_position.y > crush_rect_center.y:
+			elif body_in_x and moving_direction.y > 0.0 and body_position.y > crush_rect_center.y:
+				#and sin(check_angle) > crush_rect.size.y / 2.0 / hypotheus:
 				check_direction.y = 1
 				raycheck_position = body_rect.position + Vector2(body_rect.size.x / 2.0, body_rect.size.y)
 
@@ -239,6 +236,11 @@ func crush_check():
 					break
 
 			if collide_with_world:
+				if name in debug_name:
+					$DebugDraw.self_rect = crush_rect
+					$DebugDraw.bod_rect = body_rect
+					$DebugDraw.over_rect = body_overlap_rect
+					$DebugDraw.queue_redraw()
 				body.hit(999, Vector2.ZERO)
 				body.die() # Pierce invis
 
