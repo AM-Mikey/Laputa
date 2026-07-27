@@ -31,7 +31,7 @@ var facing_dir: FacingDir = FacingDir.NEUTRAL
 
 var debug_path_color := Color.RED
 var debug_path_start := true
-var debug_name = ["Crusher16"]
+var debug_name = ["Crusher121"]
 #["Crusher60", "Crusher58", "Crusher42", "Crusher43", "Crusher44", "Crusher45", "Crusher46", "Crusher47", "Crusher48", "Crusher49"]
 
 func _draw():
@@ -169,70 +169,75 @@ func crush_check():
 
 		if body_overlap_rect != Rect2():
 			var body_position = body_overlap_rect.get_center()
-			var raycheck_position := Vector2.ZERO
 			var check_direction := Vector2.ZERO
+			var raycheck_position := [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
 
-			const body_in_y_tolerance: = 1.0
+			const body_in_y_tolerance: = 3.0
 			var body_in_y = body_position.y >= crush_rect.position.y + body_in_y_tolerance && body_position.y <= crush_rect.position.y + crush_rect.size.y - body_in_y_tolerance
-			const body_in_x_tolerance: = 1.0
+			const body_in_x_tolerance: = 3.0
 			var body_in_x = body_position.x >= crush_rect.position.x + body_in_x_tolerance && body_position.x <= crush_rect.position.x + crush_rect.size.x - body_in_x_tolerance
 
 			#if name in debug_name:
 				#print("Find raycheck")
+			const adjust := 1.0
 			if body_in_y and moving_direction.x < 0.0 and body_position.x < crush_rect_center.x:
-				#and cos(check_angle) < -crush_rect.size.x / 2.0 / hypotheus:
 				check_direction.x = -1
-				raycheck_position = body_rect.position + Vector2(0.0, body_rect.size.y / 2.0)
+				raycheck_position.append(body_rect.position + Vector2(0.0, adjust))
+				raycheck_position.append(body_rect.position + Vector2(0.0, body_rect.size.y / 2.0))
+				raycheck_position.append(body_rect.position + Vector2(0.0, body_rect.size.y - adjust))
 			elif body_in_y and moving_direction.x > 0.0 and body_position.x > crush_rect_center.x:
-				#and cos(check_angle) > crush_rect.size.x / 2.0 / hypotheus:
 				check_direction.x = 1
-				raycheck_position = body_rect.position + Vector2(body_rect.size.x, body_rect.size.y / 2.0)
+				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x, adjust))
+				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x, body_rect.size.y / 2.0))
+				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x, body_rect.size.y - adjust))
 			if body_in_x and moving_direction.y < 0.0 and body_position.y < crush_rect_center.y:
-				#and sin(check_angle) < -crush_rect.size.y / 2.0 / hypotheus:
 				check_direction.y = -1
-				raycheck_position = body_rect.position + Vector2(body_rect.size.x / 2.0, 0.0)
+				raycheck_position.append(body_rect.position + Vector2(adjust, 0.0))
+				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x / 2.0, 0.0))
+				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x - adjust, 0.0))
 			elif body_in_x and moving_direction.y > 0.0 and body_position.y > crush_rect_center.y:
-				#and sin(check_angle) > crush_rect.size.y / 2.0 / hypotheus:
 				check_direction.y = 1
-				raycheck_position = body_rect.position + Vector2(body_rect.size.x / 2.0, body_rect.size.y)
+				raycheck_position.append(body_rect.position + Vector2(adjust, body_rect.size.y))
+				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x / 2.0, body_rect.size.y))
+				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x - adjust, body_rect.size.y))
 
 			if check_direction == Vector2.ZERO: continue
 
 			#if name in debug_name:
 				#print(check_direction)
 
-			var raycheck_param: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.new()
-			#raycheck_param.transform = Transform2D(body_collision_shape.global_rotation, body_collision_shape.global_scale, 0.0, body_collision_shape.global_position)
-			#raycheck_param.motion = check_direction
-			#raycheck_param.shape = body_collision_shape.shape
-			raycheck_param.from = raycheck_position
-			raycheck_param.to = raycheck_position + check_direction
-			raycheck_param.exclude = [body.get_rid()]
-			raycheck_param.collision_mask = 8
-			raycheck_param.hit_from_inside = true
-			raycheck_param.collide_with_bodies = true
-			raycheck_param.collide_with_areas = false
-
 			var collide_with_world: bool = false
-			var physics_space = get_world_2d().direct_space_state
-			var collision = physics_space.intersect_ray(raycheck_param)
-			while !collision.is_empty():
-				var collider = collision["collider"]
-				if collider.is_in_group("CrusherStandable"):
-					var collider_move_direction = collider.get_parent().moving_direction
-					if moving_direction.x * collider_move_direction.x < 0.0 || moving_direction.y * collider_move_direction.y < 0.0:
+			for i in range(0, raycheck_position.size()):
+				var raycheck_param: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.new()
+				raycheck_param.from = raycheck_position[i]
+				raycheck_param.to = raycheck_position[i] + check_direction
+				raycheck_param.exclude = [body.get_rid()]
+				raycheck_param.collision_mask = 8
+				raycheck_param.hit_from_inside = true
+				raycheck_param.collide_with_bodies = true
+				raycheck_param.collide_with_areas = false
+
+				var physics_space = get_world_2d().direct_space_state
+				var collision = physics_space.intersect_ray(raycheck_param)
+				while !collision.is_empty():
+					var collider = collision["collider"]
+					if collider.is_in_group("CrusherStandable"):
+						var collider_move_direction = collider.get_parent().moving_direction
+						if moving_direction.x * collider_move_direction.x < 0.0 || moving_direction.y * collider_move_direction.y < 0.0:
+							collide_with_world = true
+							break
+						else:
+							var exception = raycheck_param.exclude
+							exception.append(collider.get_rid())
+							raycheck_param.exclude = exception
+							collision = physics_space.intersect_ray(raycheck_param)
+					else:
+						#if name in debug_name:
+							#print("A")
+							#print(check_direction, " ", collider.name)
 						collide_with_world = true
 						break
-					else:
-						var exception = raycheck_param.exclude
-						exception.append(collider.get_rid())
-						raycheck_param.exclude = exception
-						collision = physics_space.intersect_ray(raycheck_param)
-				else:
-					#if name in debug_name:
-						#print("A")
-						#print(check_direction, " ", collider.name)
-					collide_with_world = true
+				if collide_with_world:
 					break
 
 			if collide_with_world:
