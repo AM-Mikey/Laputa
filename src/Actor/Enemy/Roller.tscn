@@ -52,7 +52,7 @@ _data = {
 [node name="Roller" type="CharacterBody2D" unique_id=991816014 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 522
-floor_max_angle = 1.0471976
+floor_max_angle = 0.87266463
 script = ExtResource("1")
 do_bubbles = false
 editor_hidden = false
