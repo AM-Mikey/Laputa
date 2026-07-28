@@ -31,7 +31,7 @@ var facing_dir: FacingDir = FacingDir.NEUTRAL
 
 var debug_path_color := Color.RED
 var debug_path_start := true
-var debug_name = ["Crusher121"]
+var debug_name = ["Crusher1"]
 #["Crusher60", "Crusher58", "Crusher42", "Crusher43", "Crusher44", "Crusher45", "Crusher46", "Crusher47", "Crusher48", "Crusher49"]
 
 func _draw():
@@ -82,11 +82,19 @@ func setup():
 			path_length = path.get_baked_length()
 	path = new_path
 
+	for node in get_tree().get_nodes_in_group("Props"):
+		if name in debug_name:
+			print(name)
+		$Standable.add_collision_exception_with(node)
+
 	if debug:
 		debug_path_color = Color(randf(), randf(), randf(), 1.0)
 
 	w.emit_signal("finished_spawn_entities_step")
 
+	await w.finished_spawning
+	for node in get_tree().get_nodes_in_group("Props"):
+		$Standable.add_collision_exception_with(node)
 
 func _physics_process(delta):
 	if disabled || dead:
@@ -138,8 +146,6 @@ func on_crush_body_exited(body):
 	if nearby_bodies.has(body):
 		nearby_bodies.erase(body)
 
-
-
 func crush_check():
 	if moving_direction == Vector2.ZERO: return
 
@@ -168,7 +174,7 @@ func crush_check():
 			$DebugDraw.queue_redraw()
 
 		if body_overlap_rect != Rect2():
-			var body_position = body_overlap_rect.get_center()
+			var body_position := body_overlap_rect.get_center()
 			var check_direction := Vector2.ZERO
 			var raycheck_position := [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
 
@@ -221,7 +227,7 @@ func crush_check():
 				var collision = physics_space.intersect_ray(raycheck_param)
 				while !collision.is_empty():
 					var collider = collision["collider"]
-					if collider.is_in_group("CrusherStandable"):
+					if collider.is_in_group("MovablePlatform"):
 						var collider_move_direction = collider.get_parent().moving_direction
 						if moving_direction.x * collider_move_direction.x < 0.0 || moving_direction.y * collider_move_direction.y < 0.0:
 							collide_with_world = true

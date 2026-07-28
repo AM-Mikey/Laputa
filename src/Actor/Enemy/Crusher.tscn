@@ -421,7 +421,7 @@ script = ExtResource("2")
 do_bubbles = false
 editor_hidden = false
 
-[node name="Standable" type="CharacterBody2D" parent="." unique_id=86773982 groups=["CrusherStandable"]]
+[node name="Standable" type="CharacterBody2D" parent="." unique_id=86773982 groups=["MovablePlatform"]]
 collision_layer = 8
 collision_mask = 0
 
