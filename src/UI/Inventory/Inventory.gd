@@ -14,6 +14,9 @@ func _ready():
 	_resolution_scale_changed(vs.resolution_scale)
 	pc.guns_updated.connect(_on_guns_updated)
 	update_gun_stats()
+	gun_icon_textures = []
+	for g in %GunIcons.get_children():
+		gun_icon_textures.append(g.texture)
 	enter()
 	#For testing, remove this
 	#var pc = f.pc()
@@ -63,29 +66,32 @@ func update_star_count(gun_level: int, max_level: int):
 			for i in group.get_child_count():
 				group.get_child(i).visible = i < gun_level
 
+var gun_icon_textures: Array = []
 
 func _input(event):
 	if event.is_action_pressed("inventory") and inp.can_act:
 		exit()
-
 	if event.is_action_pressed("gun_left"):
 		pc.gm.shift_gun("left")
 		weapon_wheel_animator.play("CWW")
-		await weapon_wheel_animator.animation_finished
-
-		var child_to_move = %GunIcons.get_child(%GunIcons.get_child_count() - 1)
-		%GunIcons.move_child(child_to_move, 0)
+		gun_icon_textures.push_front(gun_icon_textures.pop_back())
+		refresh_gun_icon_textures()
 		update_gun_stats()
-
 	elif event.is_action_pressed("gun_right"):
 		pc.gm.shift_gun("right")
 		weapon_wheel_animator.play("CW")
-		await weapon_wheel_animator.animation_finished
-
-		var child_to_move = %GunIcons.get_child(0)
-		%GunIcons.move_child(child_to_move, %GunIcons.get_child_count() - 1)
+		gun_icon_textures.push_back(gun_icon_textures.pop_front())
+		refresh_gun_icon_textures()
 		update_gun_stats()
-			
+
+func refresh_gun_icon_textures():
+	%GunIcons.get_node("0").texture = gun_icon_textures[0]
+	%GunIcons.get_node("1").texture = gun_icon_textures[1]
+	%GunIcons.get_node("2").texture = gun_icon_textures[2]
+	%GunIcons.get_node("3").texture = gun_icon_textures[3]
+	%GunIcons.get_node("4").texture = gun_icon_textures[4]
+	%GunIcons.get_node("5").texture = gun_icon_textures[5]
+
 func display_items():
 	var pc = f.pc()
 	for i in pc.item_array:
