@@ -24,6 +24,9 @@ var is_sign = false
 var is_flavor = false
 var is_exiting = false
 
+var scroll_tween: Tween
+var last_pushed_line := -1
+
 var flash_original_text = ""
 enum {FLASH_NONE, FLASH_NORMAL, FLASH_END}
 var flash_type = FLASH_NONE
@@ -506,10 +509,24 @@ func get_text_array_starts_with_face() -> bool:
 func get_raw_index(extra := 0) -> int:
 	return character_shown_count + character_is_newline_count + character_is_bbcode_count + extra
 
-func check_line_overflow(character_index: int): #TODO: this just makes it go to visual line 0, not consistant with other kinds of wrapping from some other place in the code. final solution here would be some kind of animation/scroll etc
+func check_line_overflow(character_index: int):
 	var line = dl.get_character_line(character_index)
-	if line % 3 == 2:
-		dl.scroll_to_line(line)
+	if line >= 2 and line != last_pushed_line:
+		last_pushed_line = line
+		push_scroll_to_line(line - 2)
+
+func push_scroll_to_line(target_line: int, duration := 0.12):
+	var v_scroll = dl.get_v_scroll_bar()
+	var start_value = v_scroll.value
+	dl.scroll_to_line(target_line) #let RTL compute the correct pixel target
+	var target_value = v_scroll.value
+	v_scroll.value = start_value #revert instantly, we'll animate to it ourselves
+
+	if scroll_tween and scroll_tween.is_valid():
+		scroll_tween.kill()
+	scroll_tween = create_tween()
+	scroll_tween.tween_property(v_scroll, "value", target_value, duration)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 #func convert_index
 

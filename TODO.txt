@@ -651,3 +651,7 @@ the best way to get this accurately would be to get the current number of lines,
 
 dialog todo: blur still there when animation changing to options, remove
 clears based on absolute line 4 on current text array? not the actual printed text?
+
+features:
+npc talk speed
+npc talk voice
