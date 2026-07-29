@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://bywk424fantvw"]
+[gd_scene format=4 uid="uid://2rwkqcoyqcqf"]
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_53evh"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_72to3"]
@@ -17,12 +17,12 @@ script = ExtResource("1_53evh")
 level_name = "WikiMap"
 dialog_json = "res://src/Dialog/WikiMap.json"
 mission_level_update = "res://src/Mission/WikiMap.json"
-debug_main_mission_stage_name = "dialog_branching_demo"
+debug_main_mission_stage_name = "camera_demo"
 
 [node name="LevelLimiter" parent="." unique_id=1355825292 instance=ExtResource("2_72to3")]
 visibility_layer = 2
 offset_left = 16.0
-offset_top = 32.0
+offset_top = -464.0
 offset_right = 1040.0
 offset_bottom = 304.0
 background_resource = ExtResource("3_8qmvv")
@@ -58,7 +58,7 @@ tile_set = ExtResource("5_5uu0q")
 visibility_layer = 2
 z_index = -1
 use_parent_material = true
-tile_map_data = PackedByteArray("AAACABAAAAAAAAQAAAACABEAAAAAAAUAAAA+AAMAAAAAAAQAAAA+AAQAAAAAAAUAAAA=")
+tile_map_data = PackedByteArray("AAACABAAAAAAAAQAAAACABEAAAAAAAUAAAA+AAMAAAAAAAQAAAA+AAQAAAAAAAUAAAAPAAcAAAAEAAQAAAA=")
 tile_set = ExtResource("5_5uu0q")
 
 [node name="Front" type="TileMapLayer" parent="TileMap" unique_id=1369203978]
@@ -403,14 +403,9 @@ size_is_default = false
 visibility_layer = 2
 
 [node name="WaypointGlobal" parent="Waypoints" unique_id=1432238783 instance=ExtResource("11_2x06w")]
-visible = false
 visibility_layer = 2
-position = Vector2(488, 184)
-
-[node name="@Area2D@3475" parent="Waypoints" unique_id=1317981016 instance=ExtResource("11_2x06w")]
-visible = false
-visibility_layer = 2
-position = Vector2(488, 184)
+position = Vector2(56, -312)
+tag_name = "Camera0"
 
 [node name="VanishingPoint" parent="." unique_id=9884164 instance=ExtResource("9_if8wo")]
 visibility_layer = 2

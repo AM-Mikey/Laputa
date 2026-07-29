@@ -19,7 +19,7 @@
 	/impactline impact line.
 	/auto,on When auto is set to 'on', text auto progresses.
 	line
-	You cannot press the any button to skip it.
+	You cannot press any button to skip it.
 	This is enabled by default in signs, however they print instantly.
 	/auto,off auto is now set to 'off'.
 	Topics, such as this /t,example example /ut format this text to a golden color! Check book in the Q menu.
@@ -62,10 +62,10 @@
 	"camera_demo":
 	"
 	/lookat,sage,basil lookat can target one or more NPCs
-	/cam,to_waypoint,0,30 move the camera to a global waypoint of index 0, set on the map
-	/cam,wait,1 here we are waiting for 1 seconds before running the next command
-	/cam,to_player,30 returning the camera to the player.
-	/cam,to_pos,100,100,30 here we are moving the camera to the position x100, y100 at speed 30
+	/cam,to_waypoint,0,15 move the camera to a global waypoint of index 0, set on the map
+	/cam,wait,3 /cam,to_player,30 here we are waiting for 3 seconds before running the next command
+	returned the camera to the player.
+	/cam,to_pos,500,100,30 here we are moving the camera to the position (500, 100) at speed 30
 	/cam,hold camera will be held at this position until the player progresses text
 	/cam,to_player,30 returning the camera to the player once more
 	",

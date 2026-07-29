@@ -12,7 +12,7 @@ func _ready() -> void:
 	get_viewport().canvas_cull_mask = 1
 	sub_viewport.canvas_cull_mask = 2
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	var active_cam := get_viewport().get_camera_2d()
 	if active_cam == null:
 		return
