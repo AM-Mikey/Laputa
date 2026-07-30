@@ -12,41 +12,35 @@
 	/face,Sasuke face changes or sets a portrait.
 	/flipface,right flipface flips the portrait, here we flip it to the Right.
 	/flipface,left Now we flip it to the Left.
-	/name,Sasuke name changes the name on the dialog box.
+	/name,Sasuke name changes the name on the dialog box. /name,Peter Like this.
 	/hidename hidename removes it.
 	/hideface hideface removes the portrait.
-	/impactline 
-	impact line
-	/b b is for Bold text. /ub and ub stops it.
-	/auto,on 
-	When auto is set to 'on', text auto progresses.
-	You cannot press the Shoot button to skip it.
-	But you may use the Jump button to skip to the next line.
-	This is enabled by default in signs?
-	/auto,off 
-	auto is now set to 'off'.
-	/t,example Topics format this text to a golden color! /ut . Check book in the Q menu.
-	That's all for this category!
-	/progress_main_mission
+	/b b is for Bold text. /ub ub stops it.
+	/impactline impact line.
+	/auto,on When auto is set to 'on', text auto progresses.
+	line
+	You cannot press any button to skip it.
+	This is enabled by default in signs, however they print instantly.
+	/auto,off auto is now set to 'off'.
+	Topics, such as this /t,example example /ut format this text to a golden color! Check book in the Q menu.
+	That's all for this category! /progress_main_mission
 	",
 	
 	"yes_no_demo":
 	"
-	/newchar,Juniper,Juniper
-	/yn should i own an air fryer?..
-	/db,0 yes, the masses must know air fry. /eb
+	/newchar,Juniper,Juniper should i own an air fryer?.. /yn 
+	/db,0 yes, the masses must know air fry. /udb
 	/db,1 no, but what if... /udb
 	/m delightfully devilish, juniper
 	",
 	
 	"options_demo":
 	"
-	/newchar,Basil,Basil
-	/options,a,b,c,d Pick the correct one.
+	/newchar,Basil,Basil Pick the correct one. /options,a,b,c,d
 	/db,0 Nope! /udb
 	/db,1 Incorrect. /udb
-	/db,2 Right answer! /eb /progress_main_mission
-	/db,4 Cmon, at least try to get it right... /udb
+	/db,2 Right answer! /progress_main_mission /eb
+	/db,3 Cmon, at least try to get it right... /udb
 	/m EXTREMELY LOUD BUZZER SOUND /progress_main_mission
 	",
 	
@@ -60,20 +54,18 @@
 	/newchar,Sage,Sage Lets make Basil vanish forever.
 	/hide,basil Poof, he's gone forever.
 	/unhide,basil Okay you can have him back.
-	/knockpc,left now get outta ere!
-	/left,aikka hmph!
-	/right,aikka
-	/waypoint,0,aikka,0
-	/progress_main_mission
+	/knockpc,aikka now get outta ere!
+	/lookat,aikka,not_pc hmph!
+	/right,aikka ... /progress_main_mission
 	",
 	
 	"camera_demo":
 	"
 	/lookat,sage,basil lookat can target one or more NPCs
-	/cam,to_waypoint,0,30 move the camera to a global waypoint of index 0, set on the map
-	/cam,wait,1 here we are waiting for 1 seconds before running the next command
-	/cam,to_player,30 returning the camera to the player.
-	/cam,to_pos,100,100,30 here we are moving the camera to the position x100, y100 at speed 30
+	/cam,to_waypoint,0,15 move the camera to a global waypoint of index 0, set on the map
+	/cam,wait,3 /cam,to_player,30 here we are waiting for 3 seconds before running the next command
+	returned the camera to the player.
+	/cam,to_pos,500,100,30 here we are moving the camera to the position (500, 100) at speed 30
 	/cam,hold camera will be held at this position until the player progresses text
 	/cam,to_player,30 returning the camera to the player once more
 	",

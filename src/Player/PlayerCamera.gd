@@ -11,7 +11,7 @@ var homing_camera = false
 @export var h_pan_distance = 2.0
 @export var v_pan_distance = 2.0
 @export var curve_elastic: Curve
-@export var control_overshoot_distance = 2.0
+#@export var control_overshoot_distance = 4.0
 
 @onready var w = get_tree().get_root().get_node("World")
 @onready var pc = get_parent()
@@ -19,10 +19,7 @@ var homing_camera = false
 var h_tween: Tween
 var v_tween: Tween
 var control_tween: Tween
-var limit_tween_left: Tween
-var limit_tween_right: Tween
-var limit_tween_top: Tween
-var limit_tween_bottom: Tween
+var control_return_tween: Tween
 
 var adjusting_level_limits = false
 var adjusted_limit_left: float
@@ -40,6 +37,7 @@ func _ready():
 	control_processing()
 
 func _physics_process(_delta):
+	#print("offset: ", offset, "limit left: ", limit_left)
 	if !control_active: #regular camera
 		if h_dir != pc.look_dir.x:
 			h_dir = pc.look_dir.x
@@ -53,6 +51,9 @@ func _physics_process(_delta):
 			if inp.pressed("look_up",1) or inp.pressed("look_down",1) \
 			or inp.released("look_up") or inp.released("look_down"):
 				pan_vertical(get_v_dir())
+	#else:
+		#var ll = w.current_level.get_node("LevelLimiter")
+		#on_limit_camera(ll.offset_left, ll.offset_right, ll.offset_top, ll.offset_bottom) #set limit every frame
 
 
 
@@ -76,10 +77,7 @@ func stop_tweens():
 	if h_tween: h_tween.kill()
 	if v_tween: v_tween.kill()
 	if control_tween: control_tween.kill()
-	if limit_tween_left: limit_tween_left.kill()
-	if limit_tween_right: limit_tween_right.kill()
-	if limit_tween_top: limit_tween_top.kill()
-	if limit_tween_bottom: limit_tween_bottom.kill()
+	if control_return_tween: control_return_tween.kill()
 
 func reset(): #TODO: REMOVE THESE AWAITS IT CAUSES SHIT TO MULTITHREAD
 	position_smoothing_enabled = false #reset_smoothing() has issues
@@ -170,57 +168,66 @@ func control_to_position(target_pos: Vector2, speed: float, do_player_drag_offse
 	stop_tweens()
 	if w.dll.get_node("DialogBox"):
 		w.dll.get_node("DialogBox").busy = true
-	var target_offset = target_pos - global_position
-	var start_offset = offset
-	var overshoot_target = target_offset + (target_offset - start_offset).normalized() * control_overshoot_distance
-	var drag_time = (target_offset - start_offset).length() / (speed * 16.0)
+	var overshoot_dist = (target_pos - global_position).length() / 64.0
+	var overshoot_pos = target_pos + overshoot_dist * global_position.direction_to(target_pos)
+	var limited_overshoot_pos = limit_pos(target_pos) + overshoot_dist * global_position.direction_to(target_pos)
 
-	h_tween = create_tween()
-	v_tween = create_tween()
-	if !do_player_drag_offset:
-		h_tween.tween_property(self, "drag_horizontal_offset", 0.0, drag_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		v_tween.tween_property(self, "drag_vertical_offset", 0.0, drag_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	else:
-		var dist = h_pan_distance / vs.resolution_scale
-		h_tween.tween_property(self, "drag_horizontal_offset", pc.look_dir.x * dist, drag_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		v_tween.tween_property(self, "drag_vertical_offset", 0.0, drag_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	position_smoothing_enabled = false
+	drag_vertical_offset = 0
+	drag_horizontal_offset = 0
+
+	global_position = get_target_position()
+	limit_enabled = false
 
 	control_tween = create_tween()
-	#move to slightly past target
-	control_tween.tween_property(self, "offset", overshoot_target, drag_time * 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	#settle back to exact target
-	control_tween.tween_property(self, "offset", target_offset, drag_time * 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-
-	limit_tween_left = create_tween()
-	limit_tween_right = create_tween()
-	limit_tween_top = create_tween()
-	limit_tween_bottom = create_tween()
-	if !do_player_drag_offset:
-		adjusting_level_limits = true
-		adjusted_limit_left = limit_left - target_offset.x
-		limit_tween_left.tween_property(self, "limit_left", adjusted_limit_left, drag_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-		adjusted_limit_right = limit_right - target_offset.x
-		limit_tween_right.tween_property(self, "limit_right", adjusted_limit_right, drag_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-		adjusted_limit_top = limit_top - target_offset.y
-		limit_tween_top.tween_property(self, "limit_top", adjusted_limit_top, drag_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-		adjusted_limit_bottom = limit_bottom - target_offset.y
-		limit_tween_bottom.tween_property(self, "limit_bottom", adjusted_limit_bottom, drag_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	if limit_pos(target_pos) != target_pos: #target is outside limits
+		var drag_time = (limit_pos(target_pos) - global_position).length() / (speed * 16.0)
+		control_tween.tween_property(self, "global_position", limited_overshoot_pos, drag_time * 0.8).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		await control_tween.finished
+		control_return_tween = create_tween()
+		control_return_tween.tween_property(self, "global_position", limit_pos(target_pos), drag_time * 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	else:
-		adjusting_level_limits = false
-		var ll = w.current_level.get_node("LevelLimiter") #to reset the limits
-		limit_tween_left.tween_property(self, "limit_left", ll.offset_left, drag_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-		limit_tween_right.tween_property(self, "limit_right", ll.offset_right, drag_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-		limit_tween_top.tween_property(self, "limit_top", ll.offset_top, drag_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-		limit_tween_bottom.tween_property(self, "limit_bottom", ll.offset_bottom, drag_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		var drag_time = (target_pos - global_position).length() / (speed * 16.0)
+		control_tween.tween_property(self, "global_position", overshoot_pos, drag_time * 0.8).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		await control_tween.finished
+		control_return_tween = create_tween()
+		control_return_tween.tween_property(self, "global_position", target_pos, drag_time * 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
-	await control_tween.finished
+	await control_return_tween.finished
+	print("mhm")
+	limit_enabled = true
+	position_smoothing_enabled = true
+
 	if w.dll.get_node("DialogBox"):
 		w.dll.get_node("DialogBox").busy = false
 	control_next(true, false)
 
 
+func limit_pos(pos) -> Vector2:
+	var vp_size = get_viewport_rect().size / zoom
+	var vp_center = vp_size / 2.0
+	var min_x = limit_left + vp_center.x
+	var max_x = limit_right - vp_center.x
+	var min_y = limit_top + vp_center.y
+	var max_y = limit_bottom - vp_center.y
+
+	# Guard against limits narrower than the viewport (would invert min/max)
+	if min_x > max_x:
+		var mid_x = (limit_left + limit_right) / 2.0
+		min_x = mid_x
+		max_x = mid_x
+	if min_y > max_y:
+		var mid_y = (limit_top + limit_bottom) / 2.0
+		min_y = mid_y
+		max_y = mid_y
+
+	return Vector2(
+		clamp(pos.x, min_x, max_x),
+		clamp(pos.y, min_y, max_y))
+
+
 func control_to_player(speed: float): #Moves camera towards player position
-	var player_pos: Vector2 = pc.global_position + Vector2(0.001, -15.999)
+	var player_pos: Vector2 = pc.global_position + Vector2(0, -16)
 	await control_to_position(player_pos, speed, true)
 	if control_action_queue.size() == 0: #since there's no more in the queue, returning to the player ends manual control
 		control_stop()

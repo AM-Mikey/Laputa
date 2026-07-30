@@ -51,24 +51,40 @@ func parse_command(string, command_is_first):
 
 		"waypoint":#			/waypoint, (string: npc_id), (int: waypoint_index)
 			waypoint(argument)
-		"impactline": #adds a center line for impact
-			db.dl.text += "\n"
-			#dl.horizontal_alignment = 1 #center
+		"impactline": #adds a center line for impact #TODO: add newline in afterwards, while keeping the character_shown proper
+			var current_line = db.dl.get_character_line(db.character_shown_count - 1)
+			db.dl.scroll_to_line(current_line + 1)
+			db.dl.text = db.dl.text.insert(db.get_raw_index(), "\n")
+			db.character_shown_count += 1
+			#var position_of_next_line = db.get_raw_index() + db.current_text_array[db.step].length() #add the length of the line
+			#db.dl.text = db.dl.text.insert(position_of_next_line, "\n")
+			#db.character_shown_count += 1 #not working
+
 		"b":
-			db.dl.text += " [b]"
+			db.dl.text = db.dl.text.insert(db.get_raw_index(), "[b]")
+			db.character_is_bbcode_count += 3
 		"ub": #doesnt work at end of line
-			db.dl.text += "[/b] "
+			db.dl.text = db.dl.text.insert(db.get_raw_index(), "[/b]")
+			db.character_is_bbcode_count += 4
 		"knockpc":
 			var a = string.split(",")
-			db.dl.text = db.get_text_stripped_of_commands(db.step)
-			db.dl.visible_characters = 0
-			db.current_character_index = 0
 			match a[1]:
 				"left": pc.mm.knockback_direction = Vector2.LEFT
 				"right": pc.mm.knockback_direction = Vector2.RIGHT
+				_: #find an npc with that name
+					var found_npcs = []
+					for n in get_tree().get_nodes_in_group("NPCs"):
+						if n.id.nocasecmp_to(a[1]) == 0:
+							found_npcs.append(n)
+					if found_npcs.is_empty():
+						printerr("COMMAND ERROR: could not find NPC with id: " + a[1])
+						return
+					var x_dir = sign(pc.global_position.x - found_npcs[0].global_position.x)
+					pc.mm.knockback_direction = Vector2(x_dir, 0)
 			pc.mm.knockback_speed = Vector2(25, 40)
 			pc.mm.snap_vector = Vector2.ZERO
 			pc.mm.change_state("knockback")
+
 
 		#"walk":#				/walk, (string: npc_id), (int: distance)				makes an npc walk a certain distance from their current pos
 			#walk(argument)#																with negative being left and positive being right
@@ -85,7 +101,8 @@ func parse_command(string, command_is_first):
 		"topics":
 			topics(argument)
 		"t":
-			db.dl.text += " [b][color=#f3b131]" #bright gold
+			db.dl.text = db.dl.text.insert(db.get_raw_index(), "[b][color=#f3b131]") #bright gold
+			db.character_is_bbcode_count += 18
 			var already_has_topic = false
 			for t in pc.topic_array:
 				if argument.to_pascal_case() == t.resource_path.get_file().trim_suffix(".tres"):
@@ -97,7 +114,9 @@ func parse_command(string, command_is_first):
 				inventory_icon.type = "Book"
 				w.ui.add_child(inventory_icon)
 		"ut":
-			db.dl.text += "[/color][/b] "
+			db.dl.text = db.dl.text.insert(db.get_raw_index(), "[/color][/b]")
+			db.character_is_bbcode_count += 12
+			#db.dl.text += "[/color][/b] "
 
 		### Missions
 		"progress_main_mission": #/progress_main_mission
@@ -124,7 +143,7 @@ func parse_command(string, command_is_first):
 		#"unfocus":#																		returns camera focus to the pc
 			#unfocus()
 
-		"lookat":#					/lookat, (string: npc_id), (string: target_npc_id) or ("player" or "pc")
+		"lookat":#					/lookat, (string: npc_id), (string: target_npc_id) or ("player" or "pc") or ("notpc" or "notplayer")
 			lookat(argument)
 		"left":#					/left, (string: npc_id)								faces an npc left
 			flip("left", argument)
@@ -132,9 +151,7 @@ func parse_command(string, command_is_first):
 			flip("right", argument)
 
 		"clear":#																		clears the text		(use at start of text)
-			db.dl.text = db.get_text_stripped_of_commands(db.step)
-			db.dl.visible_characters = 0
-			db.current_character_index = 0
+			db.clear_text()
 		"wait":#					/wait, (float: duration = 1.0)						clears text and hides db until duration
 			await wait(argument)
 		"auto":#																		blocks input and automatically progresses text
@@ -151,13 +168,14 @@ func parse_command(string, command_is_first):
 			inp.can_act = false
 			match a[1]:
 				"to_pos":
-					camera.control_add(["to_position", float(a[2]), float(a[3]), float(a[4])])
+					camera.control_add(["to_pos", float(a[2]), float(a[3]), float(a[4])])
 				"to_player":
-					camera.control_add(["to_player", float(a	[2])])
+					camera.control_add(["to_player", float(a[2])])
 				"to_waypoint":
 					camera.control_add(["to_waypoint", int(a[2]), float(a[3])])
 				"wait":
-					camera.control_add(["wait", float(a[1])])
+					camera.control_add(["wait", float(a[2])])
+					db.busy = true
 				"hold":
 					camera.control_add(["hold"])
 				"reset":
@@ -177,21 +195,18 @@ func face(string, command_is_first):
 	var expression = 0
 	if n_face.size() > 1:
 		expression = int(n_face[1])
-	
+
 	face_node.visible = true
 	face_sprite.texture = load("res://assets/Face/%s.png" % id.capitalize())
 	face_sprite.hframes = face_sprite.texture.get_width() / 48
 	face_sprite.frame = expression
 	if !command_is_first: #run the full version if it's not the first command
+		var change_was_needed = db.change_background(db.get_node("NPC"))
 		db.dl.text = ""
 		db.dl = db.get_node("NPC/DialogNPC")
-		db.dl.text = db.get_text_stripped_of_commands(db.step)
-		db.dl.visible_characters = 0
-		db.current_character_index = 0
-		
-		#db.align_box() #WE NEED ANOTHER COMMAND TO MOVE ITS POSITION
-		var change_was_needed = db.change_background(db.get_node("NPC"))
+		db.clear_text()
 		if !change_was_needed:
+			#db.dl.scroll_to_line(db.dl.get_character_line(db.current_character_index) + 1)
 			db.get_node("AnimationPlayer").play("FaceEnter") #either play FlatToNPC or FaceIn, not both
 		await db.get_node("AnimationPlayer").animation_finished
 
@@ -207,11 +222,9 @@ func flip_face(arguement):
 func hide_face():
 	db.change_background(db.get_node("Flat"))
 	db.dl = db.get_node("Flat/DialogFlat")
-	db.dl.text = db.get_text_stripped_of_commands(db.step)
-	db.dl.visible_characters = 0
-	db.current_character_index = 0
+	db.clear_text()
 	await db.get_node("AnimationPlayer").animation_finished
-	
+
 
 func set_visible(string, visible):
 	if string == "":
@@ -219,7 +232,7 @@ func set_visible(string, visible):
 		return
 	var id = string.to_lower()
 	for n in get_tree().get_nodes_in_group("NPCs"):
-		if n.id == id:
+		if n.id.nocasecmp_to(id) == 0:
 			n.visible = visible
 
 #func walk(string):
@@ -234,7 +247,7 @@ func set_visible(string, visible):
 		#return
 	#
 	#for n in get_tree().get_nodes_in_group("NPCs"):
-		#if n.id == id:
+		#if n.id.nocasecmp_to(id) == 0:
 			#n.target_pos = Vector2(n.global_position.x + (distance * 16), 0)
 			#print("npc target position: ", n.target_pos)
 			#
@@ -250,7 +263,7 @@ func waypoint(string):
 	var id = a[0]
 	var index = int(a[1])
 	for n in get_tree().get_nodes_in_group("NPCs"):
-		if n.id == id:
+		if n.id.nocasecmp_to(id) == 0:
 			n.walk_to_waypoint(index)
 
 
@@ -258,9 +271,9 @@ func focus(string):
 	if string == "":
 		printerr("COMMAND ERROR: no npc given for /focus")
 		return
-	var id = string.to_lower()
+	var id = string
 	for n in get_tree().get_nodes_in_group("NPCs"):
-		if n.id == id:
+		if n.id.nocasecmp_to(id) == 0:
 			pc.get_node("PlayerCamera").global_position = n.global_position
 
 
@@ -269,10 +282,10 @@ func unfocus():
 
 
 func flip(direction, string):
-	var id = string.to_lower()
+	var id = string
 	var found_npcs = 0
 	for n in get_tree().get_nodes_in_group("NPCs"):
-		if n.id == id:
+		if n.id.nocasecmp_to(id) == 0:
 			found_npcs += 1
 			n.get_node("Sprite2D").flip_h = direction == "right"
 	if found_npcs == 0:
@@ -281,30 +294,34 @@ func flip(direction, string):
 
 func lookat(string): #TODO: enable multiple lookers
 	var a = string.split(",")
-	var npc_id = a[0].to_lower()
-	var target_id = a[1].to_lower()
+	var npc_id = a[0]
+	var target_id = a[1]
 
 	var found_npcs = []
 	for n in get_tree().get_nodes_in_group("NPCs"):
-		if n.id == npc_id:
+		if n.id.nocasecmp_to(npc_id) == 0:
 			found_npcs.append(n)
 	if found_npcs.is_empty():
 		printerr("COMMAND ERROR: could not find NPC with id: " + npc_id)
 		return
 
 	var found_target = Node
-	if target_id == "player" or target_id == "pc":
+	var inverted = false
+	if target_id in ["pc", "player"]:
 		found_target = pc
+	elif target_id in ["not_pc", "not_player"]:
+		found_target = pc
+		inverted = true
 	else:
 		for n in get_tree().get_nodes_in_group("NPCs"):
-			if n.id == target_id:
+			if n.id.nocasecmp_to(target_id) == 0:
 				found_target = n
 		if found_target == null:
 			printerr("COMMAND ERROR: could not find NPC with id: " + target_id)
 			return
 
 	for n in found_npcs: #only looks at last n
-		n.look_at_node(found_target)
+		n.look_at_node(found_target, inverted)
 
 
 
@@ -320,13 +337,13 @@ func wait(string):
 func yes_no():
 	db.get_node("Options").options = ["Yes", "No"]
 	db.get_node("Options").display_options()
+	var saved_visible_characters = db.dl.visible_characters
+	db.change_background(db.get_node("Response"))
 	db.dl = db.get_node("Response/DialogResponse")
-	db.dl.text = db.get_text_stripped_of_commands(db.step)
-	db.dl.visible_characters = 0
-	db.current_character_index = 0
-	print("cleared text + set db")
-	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
+	db.dl.text = db.get_text_stripped_of_commands(db.step - 1)
+	db.dl.visible_characters = saved_visible_characters
 	db.get_node("Options").exit_action = "options"
+
 
 func options(string):
 	var a = string.split(",")
@@ -336,12 +353,13 @@ func options(string):
 		capitalized_array.append(capitalized)
 	db.get_node("Options").options = capitalized_array
 	db.get_node("Options").display_options()
+	var saved_visible_characters = db.dl.visible_characters
+	db.change_background(db.get_node("Response"))
 	db.dl = db.get_node("Response/DialogResponse")
-	db.dl.text = db.get_text_stripped_of_commands(db.step)
-	db.dl.visible_characters = 0
-	db.current_character_index = 0
-	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
+	db.dl.text = db.get_text_stripped_of_commands(db.step - 1)
+	db.dl.visible_characters = saved_visible_characters
 	db.get_node("Options").exit_action = "options"
+
 
 func topics(argument):
 	var npc_topics = argument.split(",")
@@ -364,10 +382,7 @@ func topics(argument):
 	db.get_node("Options").ids = final_ids
 	db.get_node("Options").display_options()
 	db.dl = db.get_node("Response/DialogResponse")
-	db.dl.text = db.get_text_stripped_of_commands(db.step)
-	db.dl.visible_characters = 0
-	db.current_character_index = 0
-	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
+	db.clear_text()
 	db.get_node("Options").exit_action = "topics"
 
 
@@ -391,15 +406,19 @@ func end_branch():
 	#db.flash_original_text = db.dl.text
 	#db.get_node("FlashTimer").start(0.1)
 
-func seek(string, do_nl = false):
+func seek(string):
 	print("seeking: ", string)
-	#print(db.current_text_array)
 	var found = false
 	for i in db.current_text_array:
 		if i == string:
 			found = true
-			print(db.current_text_array.find(i))
-			db.step = db.current_text_array.find(i) #to skip the null /db command
-			db.progress_text(do_nl)
+			db.step = db.current_text_array.find(i)
+			db.dl.text = db.get_branch_text(db.step + 1)
+			db.character_shown_count = 0
+			db.character_is_newline_count = 0
+			db.character_is_bbcode_count = 0
+			db.dl.visible_characters = 2 #since progress_text(): db.dl.visible_characters -= 2
+			db.flash_original_text = db.dl.text
+			db.progress_text()
 	if !found:
 		printerr("ERROR: Branch " + string + " Not Found")
