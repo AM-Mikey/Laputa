@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3pn87gjg0qi"]
+[gd_scene format=3 uid="uid://b3pn87gjg0qi"]
 
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="1"]
 [ext_resource type="Script" uid="uid://s12r4qhtyyy5" path="res://src/UI/DeathScreen.gd" id="2"]
@@ -60,43 +60,41 @@ _data = {
 &"In": SubResource("1")
 }
 
-[node name="DeathScreen" type="MarginContainer"]
+[node name="DeathScreen" type="MarginContainer" unique_id=1945799975]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource("1")
 script = ExtResource("2")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1692930514]
 modulate = Color(1, 1, 1, 0.156863)
 layout_mode = 2
 color = Color(0, 0, 0, 1)
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="." unique_id=346555589]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="VBox"]
+[node name="Label" type="Label" parent="VBox" unique_id=1168901988]
 layout_mode = 2
 text = "You are Dead"
 horizontal_alignment = 1
 
-[node name="HBox" type="HBoxContainer" parent="VBox"]
+[node name="HBox" type="HBoxContainer" parent="VBox" unique_id=2011155330]
 layout_mode = 2
 alignment = 1
 
-[node name="Continue" type="Button" parent="VBox/HBox"]
+[node name="Continue" type="Button" parent="VBox/HBox" unique_id=2122359183]
 layout_mode = 2
 text = "Continue"
 
-[node name="Quit" type="Button" parent="VBox/HBox"]
+[node name="Quit" type="Button" parent="VBox/HBox" unique_id=809691355]
 layout_mode = 2
 text = "Quit"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_xys32")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2054185935]
+libraries/ = SubResource("AnimationLibrary_xys32")
 
 [connection signal="pressed" from="VBox/HBox/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="VBox/HBox/Quit" to="." method="_on_Quit_pressed"]

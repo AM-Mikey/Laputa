@@ -9,9 +9,16 @@
 size = Vector2(16, 2)
 
 [node name="Laser" type="CharacterBody2D" unique_id=1378005824]
-collision_layer = 0
+collision_layer = 8192
 collision_mask = 0
 script = ExtResource("1")
+damage = 3.0
+is_enemy_bullet = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1203563525]
+position = Vector2(-8, 0)
+shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="EnemyCollisionDetector" parent="." unique_id=619923215 instance=ExtResource("2_mu4xr")]
 

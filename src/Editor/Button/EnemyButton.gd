@@ -44,6 +44,8 @@ func _on_Button_gui_input(event: InputEvent):
 				activate()
 				emit_signal("enemy_changed", enemy_path)
 			MOUSE_BUTTON_RIGHT:
+				activate()
+				emit_signal("enemy_changed", enemy_path)
 				if enemy_difficulty == enemy_max_difficulty:
 					enemy_difficulty = 0
 				else:

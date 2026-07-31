@@ -88,7 +88,7 @@ func _input(event: InputEvent):
 					"Right":
 						offset_right = x - parent_x
 
-		main.value = Rect2(global_position, size)
+		main.value = Rect2(position, size)
 
 func on_handle(handle):
 	var editor = main.w.get_node("EditorLayer/Editor")

@@ -12,9 +12,13 @@ size = Vector2(16, 8)
 size = Vector2(8, 8)
 
 [node name="BulletRevolverLevel3" type="CharacterBody2D" unique_id=28178368]
-collision_layer = 0
+collision_layer = 64
 collision_mask = 0
 script = ExtResource("1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=518427556]
+position = Vector2(-8, 0)
+shape = SubResource("1")
 
 [node name="PlayerCollisionDetector" parent="." unique_id=1555636783 instance=ExtResource("3")]
 

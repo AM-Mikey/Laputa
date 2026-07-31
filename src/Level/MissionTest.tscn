@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://d31hwlle5wdhy"]
+[gd_scene format=4 uid="uid://sdbxti10iusg"]
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_53evh"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_72to3"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="9_leir5"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="10_h4mej"]
 [ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="11_1n8rj"]
-[ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="11_53evh"]
 
 [node name="MissionTest" type="Node2D" unique_id=734148647]
 visibility_layer = 2
@@ -331,7 +330,3 @@ position = Vector2(296, -152)
 [node name="SpawnPoint" parent="." unique_id=422711910 instance=ExtResource("10_h4mej")]
 visibility_layer = 2
 position = Vector2(184, 288)
-
-[node name="TitlePreview" parent="." unique_id=2052223351 instance=ExtResource("11_53evh")]
-visibility_layer = 2
-position = Vector2(256, 168)

@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://bqlmnjg5ntp08"]
+
+[ext_resource type="Script" uid="uid://dn4mhqcpjxrrf" path="res://src/Bullet/Enemy/HairballRain.gd" id="1_as6tm"]
+[ext_resource type="PackedScene" uid="uid://d1oy3g4tudn3v" path="res://src/Bullet/Enemy/EnemyCollisionDetector.tscn" id="2_l706f"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_y6sgh"]
+[ext_resource type="Texture2D" uid="uid://bwidtesm4rihd" path="res://assets/Bullet/Enemy/Hairball.png" id="4_qu8bh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sh0tx"]
+radius = 5.0
+height = 10.0
+
+[sub_resource type="Animation" id="2"]
+resource_name = "Rotate"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mlsak"]
+_data = {
+&"Rotate": SubResource("2")
+}
+
+[node name="HairballRain" type="CharacterBody2D" unique_id=1451375695 groups=["WindBullets"]]
+z_index = 3
+collision_layer = 8192
+collision_mask = 0
+script = ExtResource("1_as6tm")
+base_gravity = 150.0
+water_gravity = 50.0
+damage = 2.0
+is_water_affected = true
+is_wind_affected = true
+is_enemy_bullet = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2095997979]
+shape = SubResource("CapsuleShape2D_sh0tx")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="EnemyCollisionDetector" parent="." unique_id=552659552 instance=ExtResource("2_l706f")]
+collision_layer = 8448
+collision_mask = 65568
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCollisionDetector" unique_id=1859592137]
+shape = SubResource("CapsuleShape2D_sh0tx")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("3_y6sgh")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=609724048]
+shape = SubResource("CapsuleShape2D_sh0tx")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=386688638]
+texture = ExtResource("4_qu8bh")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1812764444]
+libraries/ = SubResource("AnimationLibrary_mlsak")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=836247871]
+rect = Rect2(-7, -7, 14, 14)
+
+[node name="TpTimer" type="Timer" parent="." unique_id=337965719]
+wait_time = 0.3
+one_shot = true
+
+[node name="PeakToSwingTimer" type="Timer" parent="." unique_id=1399565804]
+
+[node name="NotOnScreenTimer" type="Timer" parent="." unique_id=558568137]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="area_entered" from="EnemyCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
+[connection signal="body_entered" from="EnemyCollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibleOnScreenNotifier2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibleOnScreenNotifier2d_screen_exited"]
+[connection signal="timeout" from="TpTimer" to="." method="_on_TpTimer_timeout"]
+[connection signal="timeout" from="PeakToSwingTimer" to="." method="_on_PeakToSwingTimer_timeout"]
+[connection signal="timeout" from="NotOnScreenTimer" to="." method="_on_NotOnScreenTimer_timeout"]

@@ -5,6 +5,8 @@ const WAYPOINT_GLOBAL = preload("res://src/Editor/VisualUtility/WaypointGlobal.t
 #@export var properties = {} #TODO: save and export hese
 @export var tag_name: String
 @export var index: int = 0
+@export var lock_x: bool = false
+@export var lock_y: bool = false
 
 @onready var w = get_tree().get_root().get_node("World")
 

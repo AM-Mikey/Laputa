@@ -19,7 +19,6 @@ var touched_floor = false
 
 func setup():
 	break_method = "burn"
-	is_wind_affected = true
 	$ExplosionDetector.scale = Vector2.ZERO
 	$ExplosionDetector/CollisionShape2D.set_deferred("disabled", true)
 	velocity = get_initial_velocity(speed, direction)

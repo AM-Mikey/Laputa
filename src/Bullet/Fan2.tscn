@@ -9,9 +9,13 @@
 size = Vector2(6, 6)
 
 [node name="Fan2" type="CharacterBody2D" unique_id=1868336189]
-collision_layer = 0
+collision_layer = 64
 collision_mask = 0
 script = ExtResource("2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=765481569]
+position = Vector2(-3, 0)
+shape = SubResource("1")
 
 [node name="PlayerCollisionDetector" parent="." unique_id=1886871007 instance=ExtResource("3")]
 

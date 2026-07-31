@@ -9,7 +9,7 @@
 points = PackedVector2Array(-48, -16, -48, 16, 0, 0)
 
 [node name="Buckshot" type="CharacterBody2D" unique_id=1374804307]
-collision_layer = 0
+collision_layer = 64
 collision_mask = 0
 script = ExtResource("2")
 

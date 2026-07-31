@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bblf2ujhsheuj"]
+[gd_scene format=3 uid="uid://bkfqku4pq1qgq"]
 
 [ext_resource type="Script" uid="uid://cpm5cseq1i0da" path="res://src/Prop/SpawnHole.gd" id="1_j4i1c"]
 [ext_resource type="Texture2D" uid="uid://bs4vei2upuv5o" path="res://assets/Icon/PropIcon.png" id="2_3crp0"]
@@ -9,6 +9,7 @@
 size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hr2ib"]
+resource_local_to_scene = true
 size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3crp0"]
@@ -54,6 +55,7 @@ one_shot = true
 
 [node name="VURect" parent="." unique_id=688682803 instance=ExtResource("4_3crp0")]
 tag_name = "player_detection"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="VUActor" parent="." unique_id=1199277091 instance=ExtResource("3_snk1j")]
 position = Vector2(8, 0)
@@ -65,5 +67,5 @@ tag_name = "spawn_actor"
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
-[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]

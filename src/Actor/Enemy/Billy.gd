@@ -9,6 +9,7 @@ const TX_1 = preload("res://assets/Actor/Enemy/Billy1.png")
 
 @export var move_dir = Vector2.LEFT
 @export var difficulty := 0
+var max_difficulty = 1
 @export var idle_max_time := 5.0
 @export var walk_max_time := 10.0
 @export var deaggro_delay := 3.0
@@ -33,6 +34,7 @@ var waypoint
 var last_collision: KinematicCollision2D
 var on_floor := false
 var on_wall := false
+var on_edge := false
 
 var stuck_shooting := false
 
@@ -43,8 +45,6 @@ var move_velocity := Vector2.ZERO
 var gravity_velocity := Vector2.ZERO
 
 @onready var ap = $AnimationPlayer
-
-var debug_name = "Billy3"
 
 func setup(): #Reminder: no function called can use await
 	match difficulty:
@@ -67,6 +67,9 @@ func setup(): #Reminder: no function called can use await
 
 	is_wind_affected = true
 	$DeaggroTimer.wait_time = deaggro_delay
+	$PlayerDetector/CollisionShape2D.shape.size = $VURect.value.size
+	$PlayerDetector/CollisionShape2D.position = $VURect.value.position + $VURect.value.size / 2.0
+
 	waypoint = WAYPOINT.instantiate()
 	waypoint.owner_id = id
 	waypoint.index = -1
@@ -113,9 +116,9 @@ func enter_aggro(_prev_state):
 	aggro_dir = move_dir
 
 func do_aggro(delta):
-	var reach_point = waypoint.global_position #left or right of pc
+	var reach_point = waypoint.global_position
 	var approach_slow: bool = false
-	if pc: #TODO: global enemy shutdown fix
+	if pc:
 		var target_dir = Vector2(sign(position.x - pc.position.x), 0)
 		look_dir = target_dir * -1
 
@@ -143,7 +146,6 @@ func do_aggro(delta):
 					right_billy = true
 				approach_slow = true
 
-	var on_edge := false
 	var displace_to_waypoint = reach_point.x - global_position.x
 	var x_dir: float = 0.0
 	if approach_slow:
@@ -154,27 +156,27 @@ func do_aggro(delta):
 	aggro_dir = Vector2(lerp(aggro_dir.x, x_dir, 0.2), 0)
 	move_dir.x = signf(x_dir)
 
-	if	difficulty == 0 && on_floor && \
-		((!$FloorDetectorL.is_colliding() && move_dir.x < 0) || \
-		(!$FloorDetectorR.is_colliding() && move_dir.x > 0)):
-		move_dir.x = 0.0
-		aggro_dir.x = 0.0
-		on_edge = true
-
-	#if (name == debug_name):
-		#print(on_edge, " ", on_wall, " ", approach_slow, " ",aggro_dir.x, " ", x_dir, " ", ap.current_animation)
+	if difficulty == 0:
+		if on_floor && \
+			((!$FloorDetectorL.is_colliding() && move_dir.x < 0) || \
+			(!$FloorDetectorR.is_colliding() && move_dir.x > 0)):
+			move_dir.x = 0.0
+			aggro_dir.x = 0.0
+			on_edge = true
+			$OnEdgeDelay.start()
+		else:
+			if $OnEdgeDelay.time_left <= 0.0:
+				on_edge = false
 
 	if on_wall:
 		ap.play("StandShoot")
 		stuck_shooting = true
 	else:
-		stuck_shooting = false
 		if on_edge:
-			if abs(displace_to_waypoint) < lock_tolerance:
-				ap.play("StandShoot")
-			else:
-				ap.play("Idle")
+			ap.play("StandShoot")
+			stuck_shooting = true
 		else:
+			stuck_shooting = false
 			if abs(displace_to_waypoint) < lock_tolerance:
 				if abs(aggro_dir.x) < 0.05:
 					ap.play("StandShoot")
@@ -217,13 +219,13 @@ func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction =
 	else:
 		wall_collision = move_and_collide(move_dir.sign(), true)
 
-	if (floor_collision):
+	if floor_collision:
 		var floor_normal_angle = floor_collision.get_normal().angle()
 		on_floor = floor_normal_angle < -PI / 2.0 + floor_max_angle && floor_normal_angle > -PI / 2.0 - floor_max_angle
 	else:
 		on_floor = false
 
-	if (wall_collision):
+	if wall_collision:
 		var wall_normal_angle = wall_collision.get_normal().angle()
 		on_wall = abs(wall_normal_angle) >= PI / 2.0 + floor_max_angle || abs(wall_normal_angle) <= PI / 2.0 - floor_max_angle
 	else:
@@ -282,8 +284,6 @@ func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction =
 				is_jumping = false
 
 	out = move_velocity + gravity_velocity
-	#if (name == debug_name):
-		#print(on_wall, " ", is_jumping, " ", jump_dir_x, " ", move_dir, " ", out, " ", move_velocity, " ", gravity_velocity)
 	return out
 
 ### HELPERS ###
@@ -302,20 +302,17 @@ func fire():
 			bullet.queue_free()
 			return
 		# Even when shooting at close range, the arc will always peak at the same height as normal shooting
+		var bullet_gravity: float = bullet.base_gravity if !is_in_water else bullet.water_gravity
 		var normal_start_bullet_vel_y = bullet_speed * sin(Vector2(look_dir.x / 2.0, -1).angle())
-		var normal_time_peak_reached = abs(normal_start_bullet_vel_y / bullet.gravity)
-		var peak_y = 0.5 * bullet.gravity * pow(normal_time_peak_reached, 2) + normal_start_bullet_vel_y * normal_time_peak_reached
-		var normal_time_travel = sqrt(abs((peak_y + $BulletOrigin.position.y) / 0.5 / bullet.gravity)) + normal_time_peak_reached
+		var normal_time_peak_reached = abs(normal_start_bullet_vel_y / bullet.base_gravity)
+		var peak_y = 0.5 * bullet.base_gravity * pow(normal_time_peak_reached, 2) + normal_start_bullet_vel_y * normal_time_peak_reached
+		var normal_time_travel = sqrt(abs((peak_y + $BulletOrigin.position.y) / 0.5 / bullet_gravity)) + normal_time_peak_reached
 		var target_distance_x = pc.global_position.x - $BulletOrigin.global_position.x
 
 		var b_speed_x = target_distance_x / normal_time_travel
-		var b_speed_y = (peak_y - 0.5 * bullet.gravity * pow(normal_time_peak_reached, 2)) / normal_time_peak_reached
+		var b_speed_y = (peak_y - 0.5 * bullet_gravity * pow(normal_time_peak_reached, 2)) / normal_time_peak_reached
 		bullet.speed = Vector2(b_speed_x, b_speed_y).length()
 		bullet.direction = Vector2(b_speed_x, b_speed_y).normalized()
-
-		#if name == debug_name:
-			#print("B ", bullet.speed, " ", bullet.direction)
-			#print(peak_y, " ", abs(0.5 * bullet.gravity * pow(normal_time_peak_reached, 2)))
 
 	world.get_node("Middle").add_child(bullet)
 	am.play("enemy_shoot", self)

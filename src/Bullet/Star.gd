@@ -16,7 +16,6 @@ var touched_floor = false
 func setup():
 	$FizzleTimer.start(f_time)
 	break_method = "cut"
-	is_wind_affected = true
 	velocity = get_initial_velocity()
 	start_velocity = abs(velocity.x) + abs(velocity.y) / 2.0 #used to calculate animation slowdown
 

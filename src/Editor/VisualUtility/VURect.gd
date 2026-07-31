@@ -12,14 +12,11 @@ enum ToolRectSnapMode {NONE, TO_HALF_GRID, TO_GRID}
 		$Rect/Panel.modulate = val
 		editor_color = val
 
-## In global transform
+## In local transform
 @export var value: Rect2 = Rect2(Vector2.ZERO, Vector2.ZERO):
 	set(val):
 		value = val
-		grid_value = Rect2i(floor(val.position / 16.0), floor(val.size / 16.0))
 		update_visual()
-
-@export var grid_value: Rect2i = Rect2i(Vector2i.ZERO, Vector2i.ZERO)
 
 @onready var w = get_tree().get_root().get_node("World")
 
@@ -33,7 +30,7 @@ func _ready():
 	editor_color = editor_color
 
 	if (value == Rect2(Vector2.ZERO, Vector2.ZERO)):
-		value = Rect2(get_parent().global_position, Vector2(16, 16))
+		value = Rect2(Vector2.ZERO, Vector2(16, 16))
 	else:
 		value = value
 
@@ -41,10 +38,18 @@ func update_visual():
 	if !(is_inside_tree()):
 		return
 
-	$Rect.global_position = value.position
+	$Rect.position = value.position
 	$Rect.size = value.size
 
+### GETTER
+func get_global_value() -> Rect2:
+	return Rect2(get_parent().global_position + value.position, value.size)
 
+func get_grid_value() -> Rect2i:
+	return Rect2i(floor(value.position / 16.0), floor(value.size / 16.0))
+
+func get_global_grid_value() -> Rect2i:
+	return Rect2i(floor(get_parent().global_position + value.position / 16.0), floor(value.size / 16.0))
 
 ### SIGNALS
 

@@ -12,9 +12,14 @@ size = Vector2(16, 3)
 size = Vector2(8, 3)
 
 [node name="TurnstileJumper3" type="CharacterBody2D" unique_id=239731524]
-collision_layer = 0
+collision_layer = 64
 collision_mask = 0
 script = ExtResource("2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=8450521]
+position = Vector2(-8, 0.5)
+shape = SubResource("1")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="PlayerCollisionDetector" parent="." unique_id=2037520230 instance=ExtResource("3")]
 

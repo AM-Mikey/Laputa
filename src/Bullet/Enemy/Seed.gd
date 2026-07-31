@@ -4,8 +4,6 @@ var start_velocity
 @onready var ap = $AnimationPlayer
 
 func setup():
-	is_wind_affected = true
-	is_enemy_bullet = true
 	ap.play("RotateLeft")
 	velocity = get_initial_velocity()
 	start_velocity = max((abs(velocity.x) + abs(velocity.y) / 2.0), 0.1) #used to calculate animation slowdown
