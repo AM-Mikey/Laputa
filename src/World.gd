@@ -21,6 +21,7 @@ var internal_version: String = get_internal_version()
 @export var is_release = false
 @export var do_skip_title = false
 @export var debug_visible = false
+@export var default_gun_array: Array[String]
 
 @export var start_level_path: String
 @onready var ui = $UILayer
@@ -161,9 +162,14 @@ func change_level_via_code(level_path, use_save_data):
 
 	add_child(JUNIPER.instantiate())
 	$Juniper.velocity = Vector2.ZERO
-	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
+	if !use_save_data:
+		if current_level.debug_guns_on_enter != []:
+			f.pc().gm.setup_guns(current_level.debug_guns_on_enter)
+		else:
+			f.pc().gm.setup_guns(default_gun_array)
+	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 
 	spawn_entities()
 

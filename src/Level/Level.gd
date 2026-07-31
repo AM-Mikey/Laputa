@@ -14,6 +14,7 @@ var conversation_on_enter: String
 @export_file("*.json") var mission_level_update: String
 @export var debug_main_mission_stage_name: String
 @export var side_missions_on_enter: Array[String]
+@export var debug_guns_on_enter: Array[String]
 
 var time_created: Dictionary
 
