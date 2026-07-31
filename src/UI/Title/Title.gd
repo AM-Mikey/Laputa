@@ -39,6 +39,8 @@ func exit():
 	queue_free()
 	var camera = get_viewport().get_camera_2d() #TODO: check if neccesary
 	if camera:
+		if camera.is_in_group("TitleCameras"):
+			camera.queue_free()
 		if camera.is_in_group("PlayerCameras"):
 			camera.reset()
 

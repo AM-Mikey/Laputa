@@ -104,7 +104,11 @@ func _input(event):
 func setup_title_and_background(): #Reminder: no function called can use await
 	bl.visible = true #TODO: this is a bandaid solution to saving in editor causing world.gd to have some layers invisible. since it's only supposed to save the current level, I'm not sure why this is affecting the world node
 	ui.visible = true
-	current_level = load(start_level_path).instantiate()
+	if SaveSystem.has_save_file():
+		var data = SaveSystem.read_from_file("user://save.dat")
+		current_level = load(data["player_data"]["current_level"]).instantiate()
+	else:
+		current_level = load(start_level_path).instantiate()
 	current_level.ignore_music_for_title = true
 	add_child(current_level)
 	ml.add_child(TITLE.instantiate())

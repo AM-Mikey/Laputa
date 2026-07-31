@@ -3,11 +3,12 @@
 [ext_resource type="Theme" uid="uid://ouysr8x0xtu5" path="res://src/UI/Theme/Floating.tres" id="1_cicyv"]
 [ext_resource type="Script" uid="uid://d3nbxvskm8eat" path="res://src/UI/Title/Title.gd" id="2_03odi"]
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="3_lt7dh"]
+[ext_resource type="Texture2D" uid="uid://calw6xnym4vfk" path="res://assets/UI/TitleLogo.png" id="4_03odi"]
 [ext_resource type="PackedScene" uid="uid://cocixd0n3hmcm" path="res://src/UI/MenuButton.tscn" id="4_n14jg"]
 
 [node name="Title" type="MarginContainer" unique_id=1366518061]
-offset_right = 576.0
-offset_bottom = 360.0
+offset_right = 544.0
+offset_bottom = 384.0
 theme = ExtResource("1_cicyv")
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
@@ -24,12 +25,20 @@ theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("3_lt7dh")
 text = "Version:"
 
+[node name="Title" type="TextureRect" parent="." unique_id=1893686185]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 2
+texture = ExtResource("4_03odi")
+stretch_mode = 2
+
 [node name="VBox" type="VBoxContainer" parent="." unique_id=1745499973]
 layout_mode = 2
 
-[node name="Title" type="TextureRect" parent="VBox" unique_id=1893686185]
+[node name="Spacer" type="Control" parent="VBox" unique_id=539599292]
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-stretch_mode = 4
 
 [node name="New" parent="VBox" unique_id=1082688312 instance=ExtResource("4_n14jg")]
 layout_mode = 2

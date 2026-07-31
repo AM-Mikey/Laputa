@@ -280,6 +280,12 @@ func check_dat_file_presence(filename:String) -> void:
 	else:
 		DirAccess.copy_absolute(defaultfile_path,userfile_path)
 
+#checks if there is a save file
+func has_save_file() -> bool:
+	if FileAccess.file_exists("user://save.dat"):
+			return true
+	else:
+		return false
 
 func set_props_spent(limited_props):
 	await get_tree().create_timer(0.01, true, false).timeout #wait for props to spawn #TODO: check if these flags are correct
