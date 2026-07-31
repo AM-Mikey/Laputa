@@ -17,7 +17,7 @@ script = ExtResource("1_53evh")
 level_name = "WikiMap"
 dialog_json = "res://src/Dialog/WikiMap.json"
 mission_level_update = "res://src/Mission/WikiMap.json"
-debug_main_mission_stage_name = "camera_demo"
+debug_main_mission_stage_name = "textbox_demo"
 
 [node name="LevelLimiter" parent="." unique_id=1355825292 instance=ExtResource("2_72to3")]
 visibility_layer = 2

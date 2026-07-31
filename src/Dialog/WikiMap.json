@@ -16,8 +16,8 @@
 	/hidename hidename removes it.
 	/hideface hideface removes the portrait.
 	/b b is for Bold text. /ub ub stops it.
-	/impactline impact line.
-	/auto,on When auto is set to 'on', text auto progresses.
+	/impactline /b impact line!!! /ub
+	/clear /auto,on When auto is set to 'on', text auto progresses.
 	line
 	You cannot press any button to skip it.
 	This is enabled by default in signs, however they print instantly.

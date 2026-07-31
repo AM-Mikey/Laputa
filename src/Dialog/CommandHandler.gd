@@ -51,14 +51,10 @@ func parse_command(string, command_is_first):
 
 		"waypoint":#			/waypoint, (string: npc_id), (int: waypoint_index)
 			waypoint(argument)
-		"impactline": #adds a center line for impact #TODO: add newline in afterwards, while keeping the character_shown proper
-			var current_line = db.dl.get_character_line(db.character_shown_count - 1)
-			db.dl.scroll_to_line(current_line + 1)
+		"impactline": #adds a center line for impact #TODO: add clear command afterwards, while keeping the character_shown proper
+			db.clear_text()
 			db.dl.text = db.dl.text.insert(db.get_raw_index(), "\n")
 			db.character_shown_count += 1
-			#var position_of_next_line = db.get_raw_index() + db.current_text_array[db.step].length() #add the length of the line
-			#db.dl.text = db.dl.text.insert(position_of_next_line, "\n")
-			#db.character_shown_count += 1 #not working
 
 		"b":
 			db.dl.text = db.dl.text.insert(db.get_raw_index(), "[b]")
