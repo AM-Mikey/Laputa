@@ -2,22 +2,23 @@
 
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="1_4uhn8"]
 [ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="2_s4ctt"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_410oh"]
 [ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_abgb0"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_gh0dl"]
 [ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="5_sjslv"]
 [ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="5_v7nqo"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="7_hy5g4"]
 [ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="7_mlr58"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="8_410oh"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="8_c6b85"]
 [ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="9_wiqud"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="10_c6b85"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="10_travn"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_c6b85"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_travn"]
+[ext_resource type="PackedScene" path="res://src/Editor/TitlePreview.tscn" id="12_71hdy"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_wlrbl"]
 [ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="13_wlrbl"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="14_wlrbl"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="16_4r1a1"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="18_a5syg"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="14_4r1a1"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="16_a5syg"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="18_37y2b"]
 
 [node name="SwitchTest" type="Node2D" unique_id=1165197377]
 visibility_layer = 2
@@ -33,7 +34,7 @@ offset_top = 1744.0
 offset_right = 2976.0
 offset_bottom = 2288.0
 mouse_filter = 2
-script = ExtResource("3_gh0dl")
+script = ExtResource("3_410oh")
 background_resource = ExtResource("3_abgb0")
 texture = ExtResource("5_v7nqo")
 layers = 5
@@ -103,7 +104,7 @@ z_index = 999
 position = Vector2(1808, 2032)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_410oh")
+script = ExtResource("8_c6b85")
 prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -118,7 +119,7 @@ visibility_layer = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_c6b85")
+script = ExtResource("10_travn")
 direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
@@ -130,7 +131,7 @@ z_index = 999
 position = Vector2(1936, 2016)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_410oh")
+script = ExtResource("8_c6b85")
 prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -145,7 +146,7 @@ visibility_layer = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_c6b85")
+script = ExtResource("10_travn")
 direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
@@ -157,7 +158,7 @@ z_index = 999
 position = Vector2(1840, 2032)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_410oh")
+script = ExtResource("8_c6b85")
 prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -172,7 +173,7 @@ visibility_layer = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_c6b85")
+script = ExtResource("10_travn")
 direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
@@ -184,7 +185,7 @@ z_index = 999
 position = Vector2(1712, 2016)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_410oh")
+script = ExtResource("8_c6b85")
 prop_path = "res://src/Prop/SwitchLever.tscn"
 properties = {
 "connected_entity_id": ["PhysFan", 4, ""],
@@ -202,7 +203,7 @@ z_index = 999
 position = Vector2(1744, 2016)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_410oh")
+script = ExtResource("8_c6b85")
 prop_path = "res://src/Prop/SwitchLever.tscn"
 properties = {
 "connected_entity_id": ["PhysFan1", 4, ""],
@@ -220,7 +221,7 @@ z_index = 999
 position = Vector2(1904, 2016)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_410oh")
+script = ExtResource("8_c6b85")
 prop_path = "res://src/Prop/SwitchLever.tscn"
 properties = {
 "connected_entity_id": ["PhysFan3", 4, ""],
@@ -238,7 +239,7 @@ z_index = 999
 position = Vector2(2000, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_410oh")
+script = ExtResource("8_c6b85")
 prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -253,7 +254,7 @@ visibility_layer = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_c6b85")
+script = ExtResource("10_travn")
 snap_degrees = 90.0
 movement_locked = true
 
@@ -264,7 +265,7 @@ z_index = 999
 position = Vector2(1992, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_travn")
+script = ExtResource("12_wlrbl")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -285,7 +286,7 @@ visibility_layer = 2
 position = Vector2(0, -7)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_c6b85")
+script = ExtResource("10_travn")
 tag_name = "look"
 snap_degrees = 180.0
 movement_locked = true
@@ -295,7 +296,7 @@ visibility_layer = 2
 position = Vector2(24, -48)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_wlrbl")
+script = ExtResource("14_4r1a1")
 tag_name = "tongue_range"
 
 [node name="SwitchPlate" type="Area2D" parent="Spawns" unique_id=853266467 groups=["Entities", "PropSpawns"] instance=ExtResource("7_hy5g4")]
@@ -305,7 +306,7 @@ z_index = 999
 position = Vector2(1776, 2016)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_410oh")
+script = ExtResource("8_c6b85")
 prop_path = "res://src/Prop/SwitchPlate.tscn"
 properties = {
 "connected_entity_id": ["", 4, ""],
@@ -324,7 +325,7 @@ z_index = 999
 position = Vector2(1872, 2016)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_410oh")
+script = ExtResource("8_c6b85")
 prop_path = "res://src/Prop/SwitchCrystal.tscn"
 properties = {
 "connected_entity_id": ["", 4, ""],
@@ -345,7 +346,7 @@ z_index = 999
 position = Vector2(2048, 2016)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_410oh")
+script = ExtResource("8_c6b85")
 prop_path = "res://src/Prop/SwitchCrystal.tscn"
 properties = {
 "connected_entity_id": ["", 4, ""],
@@ -366,7 +367,7 @@ z_index = 999
 position = Vector2(2112, 2016)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_410oh")
+script = ExtResource("8_c6b85")
 prop_path = "res://src/Prop/SwitchCrystal.tscn"
 properties = {
 "connected_entity_id": ["", 4, ""],
@@ -387,7 +388,7 @@ z_index = 999
 position = Vector2(1896, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_travn")
+script = ExtResource("12_wlrbl")
 actor_path = "res://src/Actor/Enemy/Beetle.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -406,7 +407,7 @@ visibility_layer = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_c6b85")
+script = ExtResource("10_travn")
 direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
@@ -418,7 +419,7 @@ z_index = 999
 position = Vector2(2264, 2032)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_travn")
+script = ExtResource("12_wlrbl")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -444,13 +445,22 @@ z_index = 999
 position = Vector2(2288, 1832)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_4r1a1")
+script = ExtResource("16_a5syg")
 
 [node name="SpawnPoint" type="Area2D" parent="." unique_id=1505342073 groups=["SpawnPoints"] instance=ExtResource("5_sjslv")]
 visibility_layer = 2
 position = Vector2(1672, 2032)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_a5syg")
+script = ExtResource("18_37y2b")
+
+[node name="TitlePreview" type="Area2D" parent="." unique_id=2052223351 groups=["TitlePreviews"] instance=ExtResource("12_71hdy")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(1872, 1976)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_a5syg")
+zoom = 6.0
 
 [connection signal="body_exited" from="Triggers/KillBox" to="Triggers/KillBox" method="_on_body_exited"]

@@ -134,7 +134,7 @@ func display_data():
 		"tile_map":
 			for layer_id in range(0, get_child_count()):
 				create_layer_button(layer_id)
-		"waypoint_local", "waypoint_global", "waypoint_global_spawn", "vu_vector", "vu_rect":
+		"title_preview", "waypoint_local", "waypoint_global", "waypoint_global_spawn", "vu_vector", "vu_rect":
 			create_properties_button(active.get_property_list())
 
 func get_property_type(type_flag, _is_load) -> String:
