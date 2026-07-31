@@ -116,7 +116,7 @@ func setup_title_and_background(): #Reminder: no function called can use await
 	spawn_entities()
 	#await get_tree().physics_frame
 	#await get_tree().physics_frame #wait for npcs to spawn #caused by camera reset time #TODO: is this actally needed without player camera?
-	_setup_missions(false, "first_time")
+	setup_missions(false, "first_time")
 
 
 func first_time_level_setup(): #Reminder: no function called can use await
