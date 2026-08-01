@@ -69,15 +69,14 @@ func _draw() -> void:
 					draw_rect($Shape.value, path_color, false, path_width)
 					draw_circle(new_path.sample_baked(properties["non_segment_path_start"][0] * path_length), point_radius, point_color)
 					draw_circle(new_path.sample_baked(properties["non_segment_path_start"][0] * path_length), point_inner_radius, point_inner_color)
-					var compensated = 0.5 * arrow_length * cos(arrow_angle)
-					draw_arrow(new_path.sample(0, 0.5) + compensated * (Vector2.RIGHT if !properties["non_segment_path_reverse"][0] else Vector2.LEFT), \
-						Vector2.RIGHT if !properties["non_segment_path_reverse"][0] else Vector2.LEFT, arrow_length, arrow_angle, path_color, path_width)
-					draw_arrow(new_path.sample(1, 0.5) + compensated * (Vector2.DOWN if !properties["non_segment_path_reverse"][0] else Vector2.UP), \
-						Vector2.DOWN if !properties["non_segment_path_reverse"][0] else Vector2.UP, arrow_length, arrow_angle, path_color, path_width)
-					draw_arrow(new_path.sample(2, 0.5) + compensated * (Vector2.LEFT if !properties["non_segment_path_reverse"][0] else Vector2.RIGHT), \
-						Vector2.LEFT if !properties["non_segment_path_reverse"][0] else Vector2.RIGHT, arrow_length, arrow_angle, path_color, path_width)
-					draw_arrow(new_path.sample(3, 0.5) + compensated * (Vector2.UP if !properties["non_segment_path_reverse"][0] else Vector2.DOWN), \
-						Vector2.UP if !properties["non_segment_path_reverse"][0] else Vector2.DOWN, arrow_length, arrow_angle, path_color, path_width)
+					for i in range(0, 4):
+						var draw_t = wrapf(0.125 + 0.25 * i + properties["non_segment_path_start"][0], 0.0, 1.0) * path_length
+						var draw_point_1 = new_path.sample_baked(draw_t)
+						var compensated = 0.5 * arrow_length * cos(arrow_angle)
+						compensated *= 1.0 if !properties["non_segment_path_reverse"][0] else -1.0
+						var draw_point_2 = new_path.sample_baked(draw_t + compensated)
+						var draw_dir = draw_point_1.direction_to(draw_point_2)
+						draw_arrow(draw_point_2, draw_dir , arrow_length, arrow_angle, path_color, path_width)
 				2: #Ellipse
 					var new_path: Curve2D = Curve2D.new()
 					var path_length := 0.0
@@ -100,7 +99,7 @@ func _draw() -> void:
 					var arrow_length = clamp(new_path.get_baked_length() / 8.0, 8.0, 15.0)
 					const arrow_angle = PI / 6.0
 					for i in range(0, 4):
-						var draw_t = (0.125 + 0.25 * i) * path_length
+						var draw_t = wrapf(0.125 + 0.25 * i + properties["non_segment_path_start"][0], 0.0, 1.0) * path_length
 						var draw_point_1 = new_path.sample_baked(draw_t)
 						var compensated = 0.5 * arrow_length * cos(arrow_angle)
 						compensated *= 1.0 if !properties["non_segment_path_reverse"][0] else -1.0
