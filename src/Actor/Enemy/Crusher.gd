@@ -31,7 +31,7 @@ var facing_dir: FacingDir = FacingDir.NEUTRAL
 
 var debug_path_color := Color.RED
 var debug_path_start := true
-var debug_name = ["Crusher1"]
+var debug_name = ["Crusher4"]
 #["Crusher60", "Crusher58", "Crusher42", "Crusher43", "Crusher44", "Crusher45", "Crusher46", "Crusher47", "Crusher48", "Crusher49"]
 
 func _draw():
@@ -45,7 +45,7 @@ func setup():
 	hp = 4
 	reward = 2
 
-	prev_global_position = global_position
+	prev_global_position = $Standable.global_position
 
 	var new_path = Curve2D.new()
 	match path_type:
@@ -78,14 +78,8 @@ func setup():
 				var point_y := ellipse_center.y + radius * sin(curr_angle)
 				new_path.add_point(Vector2(point_x, point_y))
 			new_path.add_point(ellipse_center + Vector2(ellipse_a, 0))
-			path = new_path
-			path_length = path.get_baked_length()
+			path_length = new_path.get_baked_length()
 	path = new_path
-
-	for node in get_tree().get_nodes_in_group("Props"):
-		if name in debug_name:
-			print(name)
-		$Standable.add_collision_exception_with(node)
 
 	if debug:
 		debug_path_color = Color(randf(), randf(), randf(), 1.0)
@@ -96,7 +90,7 @@ func setup():
 	for node in get_tree().get_nodes_in_group("Props"):
 		$Standable.add_collision_exception_with(node)
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if disabled || dead:
 		return
 
@@ -106,7 +100,7 @@ func _physics_process(delta):
 			time = wrapf(time, 0.0, travel_time)
 		else:
 			time = travel_time
-			prev_global_position = global_position
+			prev_global_position = $Standable.global_position
 			animate()
 			return
 
@@ -124,10 +118,12 @@ func _physics_process(delta):
 		t_value = wrapf(start_point + time / travel_time, 0.0, 1.0)
 
 
-	global_position = path.sample_baked(t_value * path_length)
+	var new_position = path.sample_baked(t_value * path_length)
+	$Standable.global_position = new_position
 
-	var tolerance = min(path_length / travel_time / 333.33, 1.0)
-	moving_direction = global_position - prev_global_position
+	var moving_speed := path_length / travel_time
+	var tolerance = min(moving_speed / 333.33, 1.0)
+	moving_direction = new_position - prev_global_position
 	moving_direction.x = sign(moving_direction.x) if abs(moving_direction.x) > tolerance else 0.0
 	moving_direction.y = sign(moving_direction.y) if abs(moving_direction.y) > tolerance else 0.0
 
@@ -135,8 +131,7 @@ func _physics_process(delta):
 		crush_check()
 
 	animate()
-	prev_global_position = global_position
-
+	prev_global_position = new_position
 
 func on_crush_body_entered(body):
 	if !nearby_bodies.has(body):
@@ -149,9 +144,11 @@ func on_crush_body_exited(body):
 func crush_check():
 	if moving_direction == Vector2.ZERO: return
 
-	var crush_rect_size = $Crush/CollisionShape2D.shape.size
-	var crush_rect := Rect2($Crush/CollisionShape2D.global_position - crush_rect_size / 2.0, crush_rect_size)
+	var crush_rect_size = $Standable/Crush/CollisionShape2D.shape.size
+	var crush_rect := Rect2($Standable/Crush/CollisionShape2D.global_position - crush_rect_size / 2.0, crush_rect_size)
 	var crush_rect_center := crush_rect.get_center()
+
+	var physics_space = get_world_2d().direct_space_state
 
 	#if name in debug_name:
 		#print(name, " ", nearby_bodies.size())
@@ -167,11 +164,11 @@ func crush_check():
 		var body_rect := Rect2(body_collision_shape.global_position - body_size / 2.0, body_size)
 		var body_overlap_rect := body_rect.intersection(crush_rect)
 
-		if name in debug_name:
-			$DebugDraw.self_rect = crush_rect
-			$DebugDraw.bod_rect = body_rect
-			$DebugDraw.over_rect = body_overlap_rect
-			$DebugDraw.queue_redraw()
+		#if name in debug_name:
+			#$DebugDraw.self_rect = crush_rect
+			#$DebugDraw.bod_rect = body_rect
+			#$DebugDraw.over_rect = body_overlap_rect
+			#$DebugDraw.queue_redraw()
 
 		if body_overlap_rect != Rect2():
 			var body_position := body_overlap_rect.get_center()
@@ -186,26 +183,27 @@ func crush_check():
 			#if name in debug_name:
 				#print("Find raycheck")
 			const adjust := 1.0
+			const adjust_2 := 3.0
 			if body_in_y and moving_direction.x < 0.0 and body_position.x < crush_rect_center.x:
-				check_direction.x = -1
-				raycheck_position.append(body_rect.position + Vector2(0.0, adjust))
-				raycheck_position.append(body_rect.position + Vector2(0.0, body_rect.size.y / 2.0))
-				raycheck_position.append(body_rect.position + Vector2(0.0, body_rect.size.y - adjust))
+				check_direction.x = -1 - adjust_2
+				raycheck_position.append(body_rect.position + Vector2(adjust_2, adjust))
+				raycheck_position.append(body_rect.position + Vector2(adjust_2, body_rect.size.y / 2.0))
+				raycheck_position.append(body_rect.position + Vector2(adjust_2, body_rect.size.y - adjust))
 			elif body_in_y and moving_direction.x > 0.0 and body_position.x > crush_rect_center.x:
-				check_direction.x = 1
-				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x, adjust))
-				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x, body_rect.size.y / 2.0))
-				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x, body_rect.size.y - adjust))
+				check_direction.x = 1 + adjust_2
+				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x - adjust_2, adjust))
+				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x - adjust_2, body_rect.size.y / 2.0))
+				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x - adjust_2, body_rect.size.y - adjust))
 			if body_in_x and moving_direction.y < 0.0 and body_position.y < crush_rect_center.y:
-				check_direction.y = -1
-				raycheck_position.append(body_rect.position + Vector2(adjust, 0.0))
-				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x / 2.0, 0.0))
-				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x - adjust, 0.0))
+				check_direction.y = -1 - adjust_2
+				raycheck_position.append(body_rect.position + Vector2(adjust, adjust_2))
+				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x / 2.0, adjust_2))
+				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x - adjust, adjust_2))
 			elif body_in_x and moving_direction.y > 0.0 and body_position.y > crush_rect_center.y:
-				check_direction.y = 1
-				raycheck_position.append(body_rect.position + Vector2(adjust, body_rect.size.y))
-				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x / 2.0, body_rect.size.y))
-				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x - adjust, body_rect.size.y))
+				check_direction.y = 1 + adjust_2
+				raycheck_position.append(body_rect.position + Vector2(adjust, body_rect.size.y - adjust_2))
+				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x / 2.0, body_rect.size.y - adjust_2))
+				raycheck_position.append(body_rect.position + Vector2(body_rect.size.x - adjust, body_rect.size.y - adjust_2))
 
 			if check_direction == Vector2.ZERO: continue
 
@@ -217,17 +215,16 @@ func crush_check():
 				var raycheck_param: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.new()
 				raycheck_param.from = raycheck_position[i]
 				raycheck_param.to = raycheck_position[i] + check_direction
-				raycheck_param.exclude = [body.get_rid()]
+				raycheck_param.exclude = [body.get_rid(), $Standable.get_rid()]
 				raycheck_param.collision_mask = 8
 				raycheck_param.hit_from_inside = true
 				raycheck_param.collide_with_bodies = true
 				raycheck_param.collide_with_areas = false
 
-				var physics_space = get_world_2d().direct_space_state
 				var collision = physics_space.intersect_ray(raycheck_param)
 				while !collision.is_empty():
 					var collider = collision["collider"]
-					if collider.is_in_group("MovablePlatform"):
+					if collider.is_in_group("MovingPlatform"):
 						var collider_move_direction = collider.get_parent().moving_direction
 						if moving_direction.x * collider_move_direction.x < 0.0 || moving_direction.y * collider_move_direction.y < 0.0:
 							collide_with_world = true
@@ -247,18 +244,18 @@ func crush_check():
 					break
 
 			if collide_with_world:
-				if name in debug_name:
-					$DebugDraw.self_rect = crush_rect
-					$DebugDraw.bod_rect = body_rect
-					$DebugDraw.over_rect = body_overlap_rect
-					$DebugDraw.queue_redraw()
+				#if name in debug_name:
+					#$DebugDraw.self_rect = crush_rect
+					#$DebugDraw.bod_rect = body_rect
+					#$DebugDraw.over_rect = body_overlap_rect
+					#$DebugDraw.queue_redraw()
 				body.hit(999, Vector2.ZERO)
 				body.die() # Pierce invis
 
 @onready var ap = $AnimationPlayer
 func animate():
-	var move_angle = (global_position - prev_global_position).angle()
-	if (global_position - prev_global_position).length() <= 0.01:
+	var move_angle = ($Standable.global_position - prev_global_position).angle()
+	if ($Standable.global_position - prev_global_position).length() <= 0.01:
 		facing_dir = FacingDir.NEUTRAL
 	else:
 		if abs(move_angle) >= 3.0 * PI / 4.0:

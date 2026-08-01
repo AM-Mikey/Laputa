@@ -41,7 +41,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = false
-tracks/2/path = NodePath("Crush/CollisionShape2D:position")
+tracks/2/path = NodePath("Standable/Crush/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -95,7 +95,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = false
-tracks/2/path = NodePath("Crush/CollisionShape2D:position")
+tracks/2/path = NodePath("Standable/Crush/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -149,7 +149,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = false
-tracks/2/path = NodePath("Crush/CollisionShape2D:position")
+tracks/2/path = NodePath("Standable/Crush/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -202,7 +202,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = false
-tracks/2/path = NodePath("Crush/CollisionShape2D:position")
+tracks/2/path = NodePath("Standable/Crush/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -256,7 +256,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = false
-tracks/2/path = NodePath("Crush/CollisionShape2D:position")
+tracks/2/path = NodePath("Standable/Crush/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -310,7 +310,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = false
-tracks/2/path = NodePath("Crush/CollisionShape2D:position")
+tracks/2/path = NodePath("Standable/Crush/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -416,12 +416,12 @@ transitions = ["Start", "neutral", SubResource("AnimationNodeStateMachineTransit
 
 [node name="Crusher" type="CharacterBody2D" unique_id=1900029808 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
-collision_mask = 520
+collision_mask = 0
 script = ExtResource("2")
 do_bubbles = false
 editor_hidden = false
 
-[node name="Standable" type="CharacterBody2D" parent="." unique_id=86773982 groups=["MovablePlatform"]]
+[node name="Standable" type="AnimatableBody2D" parent="." unique_id=653794602 groups=["MovingPlatform"]]
 collision_layer = 8
 collision_mask = 0
 
@@ -429,14 +429,17 @@ collision_mask = 0
 position = Vector2(0, -2)
 shape = SubResource("2")
 
-[node name="Crush" type="Area2D" parent="." unique_id=930772536]
+[node name="Crush" type="Area2D" parent="Standable" unique_id=930772536]
 collision_layer = 0
 collision_mask = 3
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crush" unique_id=1289397965]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Standable/Crush" unique_id=1289397965]
 position = Vector2(0, -2)
 shape = SubResource("4")
+
+[node name="RemoteTransSprite" type="RemoteTransform2D" parent="Standable" unique_id=1496180762]
+remote_path = NodePath("../../Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1806400746]
 light_mask = 4
@@ -463,5 +466,5 @@ anim_player = NodePath("../AnimationPlayer")
 top_level = true
 script = ExtResource("5_m1tth")
 
-[connection signal="body_entered" from="Crush" to="." method="on_crush_body_entered"]
-[connection signal="body_exited" from="Crush" to="." method="on_crush_body_exited"]
+[connection signal="body_entered" from="Standable/Crush" to="." method="on_crush_body_entered"]
+[connection signal="body_exited" from="Standable/Crush" to="." method="on_crush_body_exited"]
