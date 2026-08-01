@@ -32,14 +32,24 @@ var facing_dir: FacingDir = FacingDir.NEUTRAL
 var debug_path_color := Color.RED
 var debug_path_start := true
 var debug_name = ["Crusher4"]
+var debug_self_rect: Rect2 = Rect2()
+var debug_body_rect: Rect2 = Rect2()
+var debug_over_rect: Rect2 = Rect2()
 #["Crusher60", "Crusher58", "Crusher42", "Crusher43", "Crusher44", "Crusher45", "Crusher46", "Crusher47", "Crusher48", "Crusher49"]
 
 func _draw():
-	if debug and !dead:
+	if name in debug_name:
 		var draw_points: PackedVector2Array = path.get_baked_points()
 		for i in range(draw_points.size()):
 			draw_points[i] -= global_position
 		draw_polyline(draw_points, debug_path_color, 2.0)
+
+		var draw_bod_rect = Rect2(debug_body_rect.position - global_position, debug_body_rect.size)
+		var draw_self_rect = Rect2(debug_self_rect.position - global_position, debug_self_rect.size)
+		var draw_over_rect = Rect2(debug_over_rect.position - global_position, debug_over_rect.size)
+		draw_rect(draw_bod_rect, Color.BLUE)
+		draw_rect(draw_self_rect, Color.RED)
+		draw_rect(draw_over_rect, Color.PURPLE)
 
 func setup():
 	hp = 4
@@ -164,11 +174,11 @@ func crush_check():
 		var body_rect := Rect2(body_collision_shape.global_position - body_size / 2.0, body_size)
 		var body_overlap_rect := body_rect.intersection(crush_rect)
 
-		#if name in debug_name:
-			#$DebugDraw.self_rect = crush_rect
-			#$DebugDraw.bod_rect = body_rect
-			#$DebugDraw.over_rect = body_overlap_rect
-			#$DebugDraw.queue_redraw()
+		if name in debug_name:
+			debug_self_rect = crush_rect
+			debug_body_rect = body_rect
+			debug_over_rect = body_overlap_rect
+			queue_redraw()
 
 		if body_overlap_rect != Rect2():
 			var body_position := body_overlap_rect.get_center()
@@ -244,11 +254,6 @@ func crush_check():
 					break
 
 			if collide_with_world:
-				#if name in debug_name:
-					#$DebugDraw.self_rect = crush_rect
-					#$DebugDraw.bod_rect = body_rect
-					#$DebugDraw.over_rect = body_overlap_rect
-					#$DebugDraw.queue_redraw()
 				body.hit(999, Vector2.ZERO)
 				body.die() # Pierce invis
 

@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_hn3b7"]
 [ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="3_wfkhk"]
 [ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="4_tvvg5"]
-[ext_resource type="Script" uid="uid://d0xwopem8ydiu" path="res://src/Actor/Enemy/CrusherDebugDraw.gd" id="5_m1tth"]
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(32, 14)
@@ -472,10 +471,6 @@ libraries/ = SubResource("AnimationLibrary_77ls4")
 tree_root = SubResource("AnimationNodeStateMachine_ng5ua")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
-
-[node name="DebugDraw" type="Node2D" parent="." unique_id=476750049]
-top_level = true
-script = ExtResource("5_m1tth")
 
 [connection signal="body_entered" from="Standable/Crush" to="." method="on_crush_body_entered"]
 [connection signal="body_exited" from="Standable/Crush" to="." method="on_crush_body_exited"]
