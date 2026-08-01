@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dmfya5e64iar7" path="res://assets/Actor/Enemy/Crusher.png" id="1"]
 [ext_resource type="Script" uid="uid://b1w4ji0d60ww0" path="res://src/Actor/Enemy/Crusher.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_hn3b7"]
 [ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="3_wfkhk"]
 [ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="4_tvvg5"]
 [ext_resource type="Script" uid="uid://d0xwopem8ydiu" path="res://src/Actor/Enemy/CrusherDebugDraw.gd" id="5_m1tth"]
@@ -421,6 +422,12 @@ script = ExtResource("2")
 do_bubbles = false
 editor_hidden = false
 
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_hn3b7")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1013294970]
+position = Vector2(0, -2)
+shape = SubResource("2")
+
 [node name="Standable" type="AnimatableBody2D" parent="." unique_id=653794602 groups=["MovingPlatform"]]
 collision_layer = 8
 collision_mask = 0
@@ -430,6 +437,7 @@ position = Vector2(0, -2)
 shape = SubResource("2")
 
 [node name="Crush" type="Area2D" parent="Standable" unique_id=930772536]
+visible = false
 collision_layer = 0
 collision_mask = 3
 monitorable = false
@@ -440,6 +448,9 @@ shape = SubResource("4")
 
 [node name="RemoteTransSprite" type="RemoteTransform2D" parent="Standable" unique_id=1496180762]
 remote_path = NodePath("../../Sprite2D")
+
+[node name="RemoteTransPhys" type="RemoteTransform2D" parent="Standable" unique_id=1852698396]
+remote_path = NodePath("../../PhysicsLayerBody")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1806400746]
 light_mask = 4
