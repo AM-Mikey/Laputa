@@ -5,18 +5,17 @@ const BACKGROUND_STYLEBOX_MISSION = preload("res://src/UI/StyleBox/RustTrimmedSc
 
 @onready var w = get_tree().get_root().get_node("World")
 @onready var items = %Items
-@onready var weapon_wheel = %WeaponWheel
+
 @onready var pc = f.pc()
-@onready var weapon_wheel_animator = %WeaponWheelAnimator
+
+@onready var weapons : Weapons = %Weapons
+
 
 func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 	pc.guns_updated.connect(_on_guns_updated)
-	update_gun_stats()
-	gun_icon_textures = []
-	for g in %GunIcons.get_children():
-		gun_icon_textures.append(g.texture)
+	weapons.update_gun_stats()
 	enter()
 	#For testing, remove this
 	#var pc = f.pc()
@@ -24,73 +23,21 @@ func _ready():
 	#first_topic.topic_stages = [0,1,2,3,4]
 
 func _on_guns_updated(_guns, _action) -> void:
-	update_gun_stats()
+	weapons.update_gun_stats()
 
-func update_gun_stats():
-	var guns = pc.guns
-	if guns.get_child_count() == 0:
-		return
 
-	# Note that index 0 is always the active gun
-	var active_gun: Gun = guns.get_child(0)  
-
-	%CooldownLabel.text = str(active_gun.cooldown_time)
-	%DamageLabel.text = str(active_gun.damage)
-	%MaxAmmoLabel.text = str(active_gun.max_ammo)
-	%LifetimeLabel.text = str(active_gun.f_time)
-	%RangeLabel.text = str(active_gun.f_range)
-	%InventoryHeader.text = active_gun.display_name
-	%InventoryBody.text = active_gun.description
-	update_star_count(active_gun.level, active_gun.max_level)
-	
-	%Lifetime.visible = active_gun.has_lifetime
-	%Range.visible = not active_gun.has_lifetime
-		
-
-	
-func update_star_count(gun_level: int, max_level: int):
-	var star_groups = {
-		1: %OneStar,
-		2: %TwoStar,
-		3: %ThreeStar,
-		4: %FourStar,
-		5: %FiveStar,
-		6: %SixStar,
-	}
-
-	for key in star_groups:
-		var group = star_groups[key]
-		group.visible = (key == max_level)
-
-		if key == max_level:
-			for i in group.get_child_count():
-				group.get_child(i).visible = i < gun_level
-
-var gun_icon_textures: Array = []
 
 func _input(event):
 	if event.is_action_pressed("inventory") and inp.can_act:
 		exit()
 	if event.is_action_pressed("gun_left"):
 		pc.gm.shift_gun("left")
-		weapon_wheel_animator.play("CWW")
-		gun_icon_textures.push_front(gun_icon_textures.pop_back())
-		refresh_gun_icon_textures()
-		update_gun_stats()
+		weapons.bullets_shift("CWW")
 	elif event.is_action_pressed("gun_right"):
 		pc.gm.shift_gun("right")
-		weapon_wheel_animator.play("CW")
-		gun_icon_textures.push_back(gun_icon_textures.pop_front())
-		refresh_gun_icon_textures()
-		update_gun_stats()
+		weapons.side_shift()
+		weapons.bullets_shift("CW")
 
-func refresh_gun_icon_textures():
-	%GunIcons.get_node("0").texture = gun_icon_textures[0]
-	%GunIcons.get_node("1").texture = gun_icon_textures[1]
-	%GunIcons.get_node("2").texture = gun_icon_textures[2]
-	%GunIcons.get_node("3").texture = gun_icon_textures[3]
-	%GunIcons.get_node("4").texture = gun_icon_textures[4]
-	%GunIcons.get_node("5").texture = gun_icon_textures[5]
 
 func display_items():
 	var pc = f.pc()

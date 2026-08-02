@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="7_y7abv"]
 [ext_resource type="StyleBox" uid="uid://d20qvx0q5xflf" path="res://src/UI/StyleBox/RustTrimmedScrews.tres" id="8"]
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="8_1e805"]
+[ext_resource type="Script" uid="uid://bortbtb5j1u0t" path="res://src/UI/Inventory/Weapons.gd" id="9_knvwb"]
 [ext_resource type="Texture2D" uid="uid://el0mgxf4lb6s" path="res://assets/UI/Inventory/Items/WeaponWheelSide.png" id="9_lmga8"]
 [ext_resource type="Texture2D" uid="uid://bnoxbd4fv78ux" path="res://assets/UI/Inventory/Items/WeaponWheel.png" id="10_ebj88"]
 [ext_resource type="Texture2D" uid="uid://dyhiddbqi3lk2" path="res://assets/UI/Inventory/Items/StarFull.png" id="11_frhsn"]
@@ -33,7 +34,10 @@
 [ext_resource type="FontFile" uid="uid://bwfshb35302x4" path="res://assets/UI/Font/momobold.ttf" id="17_lfc7o"]
 [ext_resource type="Texture2D" uid="uid://de0nn1vywo5oi" path="res://assets/UI/GunIcon/Red7.png" id="18_dn5nk"]
 [ext_resource type="Texture2D" uid="uid://djhuwh2kittmi" path="res://assets/UI/GunIcon/Tsurugi.png" id="19_5to30"]
+[ext_resource type="Texture2D" uid="uid://clvfvevpam8ef" path="res://assets/Gun/TsurugiIcon.png" id="20_l780j"]
 [ext_resource type="Texture2D" uid="uid://dx2f0s7evdyou" path="res://assets/UI/GunIcon/MPistol.png" id="20_mrnct"]
+[ext_resource type="Texture2D" uid="uid://k8gtyy865rl0" path="res://assets/Gun/Red7Icon.png" id="21_dn5nk"]
+[ext_resource type="Texture2D" uid="uid://cma55bs6stbrm" path="res://assets/Gun/SpeederIcon.png" id="23_5to30"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l1q3b"]
 shader = ExtResource("3_4pdh5")
@@ -401,6 +405,224 @@ _data = {
 &"RESET": SubResource("Animation_dn5nk")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn5nk"]
+atlas = ExtResource("9_lmga8")
+region = Rect2(0, 0, 640, 73)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5to30"]
+load_path = "res://.godot/imported/WeaponWheelSide.png-9655403187877a7432a6acbe3576c900.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrnct"]
+atlas = SubResource("CompressedTexture2D_5to30")
+region = Rect2(0, 73, 640, 73)
+
+[sub_resource type="Animation" id="Animation_l780j"]
+resource_name = "DOWN"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Side:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.20000002, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Side/Holes:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.20000002, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Side/GunSprites/0:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.20000002, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(128, 47), Vector2(126, 53), Vector2(123, 58), Vector2(116, 63)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Side/GunSprites/1:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(110, 69), Vector2(105, 75), Vector2(100, 81), Vector2(100, 86)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Side/GunSprites/2:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(124, -20)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Side/GunSprites/3:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(124, -20)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Side/GunSprites/4:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(82, -7), Vector2(114, 5), Vector2(119, 11), Vector2(125, 17)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Side/GunSprites/5:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(125, 21), Vector2(129, 26), Vector2(131, 32), Vector2(132, 40)]
+}
+
+[sub_resource type="Animation" id="Animation_knvwb"]
+length = 0.001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Side:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Side/Holes:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Side/GunSprites/0:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(132, 40)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Side/GunSprites/1:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(116, 63)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Side/GunSprites/2:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(124, -20)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Side/GunSprites/3:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(124, -20)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Side/GunSprites/4:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(124, -20)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Side/GunSprites/5:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(124, 17)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dn5nk"]
+_data = {
+&"DOWN": SubResource("Animation_l780j"),
+&"RESET": SubResource("Animation_knvwb")
+}
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l1q3b"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kyl46"]
@@ -562,18 +784,8 @@ theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 8
 
 [node name="Weapons" type="Node2D" parent="VBox/Background/Inventory" unique_id=753212467]
-
-[node name="WeaponWheelSide" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=728221545]
-
-[node name="Side" type="Sprite2D" parent="VBox/Background/Inventory/Weapons" unique_id=1123977996]
-visible = false
-position = Vector2(-8, 4)
-texture = ExtResource("9_lmga8")
-centered = false
-hframes = 4
-region_enabled = true
-region_rect = Rect2(0, 0, 640, 73)
-region_filter_clip_enabled = true
+unique_name_in_owner = true
+script = ExtResource("9_knvwb")
 
 [node name="WeaponWheel" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=2009112383]
 position = Vector2(-10, 3)
@@ -626,27 +838,68 @@ texture = ExtResource("20_mrnct")
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_mrnct")
 
-[node name="Selector" type="Sprite2D" parent="VBox/Background/Inventory/Weapons" unique_id=134563625]
-visible = false
-position = Vector2(65, 31)
-texture = ExtResource("11_j0w38")
+[node name="WeaponWheelSide" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=728221545]
+position = Vector2(36, 3)
+
+[node name="Side" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheelSide" unique_id=1123977996]
+clip_children = 2
+texture = SubResource("AtlasTexture_dn5nk")
 centered = false
+hframes = 4
+region_enabled = true
+region_rect = Rect2(0, 0, 640, 73)
+region_filter_clip_enabled = true
 
-[node name="GunSprites" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=1715717104]
+[node name="Holes" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheelSide/Side" unique_id=1560221951]
+texture = SubResource("AtlasTexture_mrnct")
+centered = false
+hframes = 4
+region_enabled = true
+region_rect = Rect2(0, 0, 640, 73)
+region_filter_clip_enabled = true
 
-[node name="1" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/GunSprites" unique_id=101867673]
-modulate = Color(0.5, 0.5, 0.5, 1)
-position = Vector2(124, 17)
-texture = ExtResource("12_y48ww")
+[node name="GunSprites" type="Node2D" parent="VBox/Background/Inventory/Weapons/WeaponWheelSide/Side" unique_id=1715717104]
+unique_name_in_owner = true
+position = Vector2(-36, -3)
 
-[node name="0" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/GunSprites" unique_id=1464855613]
+[node name="0" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheelSide/Side/GunSprites" unique_id=1464855613]
 position = Vector2(132, 40)
 texture = ExtResource("13_aojjx")
 
-[node name="5" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/GunSprites" unique_id=207525192]
+[node name="1" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheelSide/Side/GunSprites" unique_id=207525192]
 modulate = Color(0.5, 0.5, 0.5, 1)
-position = Vector2(124, 63)
+position = Vector2(116, 63)
 texture = ExtResource("14_jkuqs")
+
+[node name="2" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheelSide/Side/GunSprites" unique_id=343266282]
+modulate = Color(0.5, 0.5, 0.5, 1)
+position = Vector2(124, -20)
+texture = ExtResource("12_y48ww")
+
+[node name="3" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheelSide/Side/GunSprites" unique_id=101867673]
+modulate = Color(0.5, 0.5, 0.5, 1)
+position = Vector2(124, -20)
+texture = ExtResource("21_dn5nk")
+
+[node name="4" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheelSide/Side/GunSprites" unique_id=214354711]
+modulate = Color(0.5, 0.5, 0.5, 1)
+position = Vector2(124, -20)
+texture = ExtResource("20_l780j")
+
+[node name="5" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheelSide/Side/GunSprites" unique_id=770042839]
+modulate = Color(0.5, 0.5, 0.5, 1)
+position = Vector2(124, 17)
+texture = ExtResource("23_5to30")
+
+[node name="WeaponSideAnimator" type="AnimationPlayer" parent="VBox/Background/Inventory/Weapons/WeaponWheelSide/Side" unique_id=1760266196]
+unique_name_in_owner = true
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_dn5nk")
+
+[node name="Selector" type="Sprite2D" parent="VBox/Background/Inventory/Weapons" unique_id=134563625]
+position = Vector2(65, 31)
+texture = ExtResource("11_j0w38")
+centered = false
 
 [node name="OneStar" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=2133602971]
 unique_name_in_owner = true
@@ -673,6 +926,7 @@ centered = false
 
 [node name="ThreeStar" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=1572075072]
 unique_name_in_owner = true
+visible = false
 
 [node name="One" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/ThreeStar" unique_id=362023990]
 position = Vector2(192, 60)
@@ -691,7 +945,6 @@ centered = false
 
 [node name="FourStar" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=2106499172]
 unique_name_in_owner = true
-visible = false
 
 [node name="One" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/FourStar" unique_id=63762411]
 position = Vector2(191, 63)
