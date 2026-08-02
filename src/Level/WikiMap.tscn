@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="9_leir5"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="10_h4mej"]
 [ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="11_1n8rj"]
+[ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="11_c4qnx"]
 
 [node name="WikiMap" type="Node2D" unique_id=734148647]
 visibility_layer = 2
@@ -18,6 +19,7 @@ level_name = "WikiMap"
 dialog_json = "res://src/Dialog/WikiMap.json"
 mission_level_update = "res://src/Mission/WikiMap.json"
 debug_main_mission_stage_name = "talk_npc_a"
+debug_guns_on_enter = Array[String](["Speeder", "Tsurugi"])
 
 [node name="LevelLimiter" parent="." unique_id=1355825292 instance=ExtResource("2_72to3")]
 visibility_layer = 2
@@ -405,3 +407,7 @@ position = Vector2(296, -152)
 [node name="SpawnPoint" parent="." unique_id=422711910 instance=ExtResource("10_h4mej")]
 visibility_layer = 2
 position = Vector2(184, 288)
+
+[node name="TitlePreview" parent="." unique_id=2052223351 instance=ExtResource("11_c4qnx")]
+visibility_layer = 2
+position = Vector2(256, 168)

@@ -8,11 +8,13 @@ enum LevelType {NORMAL, PLAYERLESS_CUTSCENE}
 @export var level_name: String
 @export var level_type: LevelType
 @export var music: String
+var ignore_music_for_title: bool = false
 @export_file("*.json") var dialog_json: String
 var conversation_on_enter: String
 @export_file("*.json") var mission_level_update: String
 @export var debug_main_mission_stage_name: String
 @export var side_missions_on_enter: Array[String]
+@export var debug_guns_on_enter: Array[String]
 
 var time_created: Dictionary
 
@@ -29,14 +31,15 @@ func _ready():
 		i.fix_invalid_tiles()
 	merge_one_way_ssp_tile()
 
-	if not am.music_queue.is_empty():
-		am.fade_music()
-		await am.music_fadeout_finished
-	if not w.has_node("UILayer/TitleScreen"):
-		if music == "":
-			pass
-		else:
-			am.play_music(music)
+	if !ignore_music_for_title:
+		if not am.music_queue.is_empty():
+			am.fade_music()
+			await am.music_fadeout_finished
+		if not w.has_node("UILayer/Title"):
+			if music == "":
+				pass
+			else:
+				am.play_music(music)
 
 func merge_one_way_ssp_tile():
 	for child in $Triggers.get_children():
