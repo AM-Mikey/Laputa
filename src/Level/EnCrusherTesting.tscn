@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://ckcat155w5cjt"]
+[gd_scene format=4 uid="uid://dno3uipthhhbc"]
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_6q8mx"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_jogqi"]
@@ -1033,7 +1033,7 @@ properties = {
 "non_segment_path_start": [0.0, 3, ""],
 "path_type": [0, 2, "Segment:0,Rectangle:1,Ellipse:2"],
 "speed": [Vector2(150, 350), 5, ""],
-"travel_time": [3.0, 3, ""],
+"travel_time": [7.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
@@ -1127,7 +1127,7 @@ properties = {
 "non_segment_path_start": [0.0, 3, ""],
 "path_type": [2, 2, "Segment:0,Rectangle:1,Ellipse:2"],
 "speed": [Vector2(150, 350), 5, ""],
-"travel_time": [3.0, 3, ""],
+"travel_time": [4.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
@@ -1145,7 +1145,7 @@ tag_name = "to_point"
 
 [node name="Crusher16" parent="Spawns" unique_id=729456098 instance=ExtResource("9_uly8o")]
 visibility_layer = 2
-position = Vector2(2544, 1856)
+position = Vector2(2504, 1808)
 actor_path = "uid://bg4lsri7kp7fw"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1167,7 +1167,7 @@ properties = {
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 tag_name = "shape_define"
-value = Rect2(-48, -32, 440, 280)
+value = Rect2(0, 0, 440, 296)
 
 [node name="ToPoint" parent="Spawns/Crusher16" unique_id=269793502 instance=ExtResource("11_1ycm6")]
 visible = false
@@ -2222,37 +2222,7 @@ position = Vector2(8, 0)
 tag_name = "player_detector"
 value = Rect2(-128, -80, 256, 160)
 
-[node name="Billy16" parent="Spawns" unique_id=1747416462 instance=ExtResource("9_uly8o")]
-visibility_layer = 2
-position = Vector2(2904, 1920)
-actor_path = "uid://ckeh37ixn76w8"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Billy2", 4, ""],
-"idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(0, 0), 5, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"walk_max_time": [10.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Billy16" unique_id=355895837 instance=ExtResource("13_uly8o")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-position = Vector2(8, 0)
-tag_name = "player_detector"
-value = Rect2(8, -24, 16, 24)
-
-[node name="Billy17" parent="Spawns" unique_id=49413177 instance=ExtResource("9_uly8o")]
+[node name="Billy16" parent="Spawns" unique_id=49413177 instance=ExtResource("9_uly8o")]
 visibility_layer = 2
 position = Vector2(3176, 1880)
 actor_path = "uid://ckeh37ixn76w8"
@@ -2275,7 +2245,7 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Billy17" unique_id=788691091 instance=ExtResource("13_uly8o")]
+[node name="VURect" parent="Spawns/Billy16" unique_id=788691091 instance=ExtResource("13_uly8o")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
@@ -5726,70 +5696,6 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Crusher120" parent="Spawns" unique_id=488343711 instance=ExtResource("9_uly8o")]
-visibility_layer = 2
-position = Vector2(2584, 1936)
-actor_path = "res://src/Actor/Enemy/Crusher.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"crushing": [true, 1, ""],
-"debug": [false, 1, ""],
-"do_bubbles": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Crusher122", 4, ""],
-"loop": [true, 1, ""],
-"non_segment_path_reverse": [false, 1, ""],
-"non_segment_path_start": [0.0, 3, ""],
-"path_type": [1, 2, "Segment:0,Rectangle:1,Ellipse:2"],
-"speed": [Vector2(150, 350), 5, ""],
-"travel_time": [12.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="ToPoint" parent="Spawns/Crusher120" unique_id=1327821857 instance=ExtResource("11_1ycm6")]
-visible = false
-visibility_layer = 2
-position = Vector2(0, 16)
-tag_name = "to_point"
-
-[node name="Shape" parent="Spawns/Crusher120" unique_id=2145459862 instance=ExtResource("13_uly8o")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-tag_name = "shape_define"
-value = Rect2(-16, -16, 336, 152)
-
-[node name="Crusher121" parent="Spawns" unique_id=614535024 instance=ExtResource("9_uly8o")]
-visibility_layer = 2
-position = Vector2(2872, 1904)
-actor_path = "res://src/Actor/Enemy/Crusher.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"crushing": [true, 1, ""],
-"debug": [false, 1, ""],
-"do_bubbles": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Crusher123", 4, ""],
-"loop": [true, 1, ""],
-"non_segment_path_reverse": [false, 1, ""],
-"non_segment_path_start": [0.35, 3, ""],
-"path_type": [1, 2, "Segment:0,Rectangle:1,Ellipse:2"],
-"speed": [Vector2(150, 350), 5, ""],
-"travel_time": [20.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="ToPoint" parent="Spawns/Crusher121" unique_id=843269359 instance=ExtResource("11_1ycm6")]
-visible = false
-visibility_layer = 2
-position = Vector2(0, 16)
-tag_name = "to_point"
-
-[node name="Shape" parent="Spawns/Crusher121" unique_id=1982889631 instance=ExtResource("13_uly8o")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-tag_name = "shape_define"
-value = Rect2(-304, 16, 336, 160)
-
 [node name="BreakBlock4" parent="Spawns" unique_id=1381121339 instance=ExtResource("15_lfp3o")]
 visibility_layer = 2
 position = Vector2(4128, 2160)
@@ -5912,7 +5818,7 @@ properties = {
 
 [node name="BreakBlock14" parent="Spawns" unique_id=1528228344 instance=ExtResource("15_lfp3o")]
 visibility_layer = 2
-position = Vector2(3424, 2048)
+position = Vector2(3432, 2048)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -5958,21 +5864,9 @@ properties = {
 "id": [&"BreakBlock17", 4, ""]
 }
 
-[node name="BreakBlock18" parent="Spawns" unique_id=289885078 instance=ExtResource("15_lfp3o")]
+[node name="BreakBlock18" parent="Spawns" unique_id=345451316 instance=ExtResource("15_lfp3o")]
 visibility_layer = 2
-position = Vector2(2560, 1888)
-prop_path = "res://src/Prop/BreakBlock.tscn"
-properties = {
-"crush_enemies": [true, 1, ""],
-"crush_players": [false, 1, ""],
-"do_bubble": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"BreakBlock18", 4, ""]
-}
-
-[node name="BreakBlock19" parent="Spawns" unique_id=345451316 instance=ExtResource("15_lfp3o")]
-visibility_layer = 2
-position = Vector2(2576, 1872)
+position = Vector2(2584, 1872)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -5982,7 +5876,7 @@ properties = {
 "id": [&"BreakBlock19", 4, ""]
 }
 
-[node name="BreakBlock20" parent="Spawns" unique_id=556965841 instance=ExtResource("15_lfp3o")]
+[node name="BreakBlock19" parent="Spawns" unique_id=556965841 instance=ExtResource("15_lfp3o")]
 visibility_layer = 2
 position = Vector2(2576, 1888)
 prop_path = "res://src/Prop/BreakBlock.tscn"
@@ -5993,6 +5887,1562 @@ properties = {
 "editor_hidden": [false, 1, ""],
 "id": [&"BreakBlock20", 4, ""]
 }
+
+[node name="BreakBlock20" parent="Spawns" unique_id=1967903346 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(4144, 2352)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock21", 4, ""]
+}
+
+[node name="BreakBlock21" parent="Spawns" unique_id=1538719840 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(4144, 2336)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock22", 4, ""]
+}
+
+[node name="BreakBlock22" parent="Spawns" unique_id=1651233455 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(4160, 2336)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock23", 4, ""]
+}
+
+[node name="BreakBlock23" parent="Spawns" unique_id=1241656552 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(4160, 2352)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock24", 4, ""]
+}
+
+[node name="BreakBlock24" parent="Spawns" unique_id=1980642186 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(4176, 2352)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock25", 4, ""]
+}
+
+[node name="BreakBlock25" parent="Spawns" unique_id=1402734033 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(4128, 2352)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock26", 4, ""]
+}
+
+[node name="BreakBlock26" parent="Spawns" unique_id=1341247604 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(4176, 2336)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock27", 4, ""]
+}
+
+[node name="BreakBlock27" parent="Spawns" unique_id=864921325 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2816, 2256)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock28", 4, ""]
+}
+
+[node name="BreakBlock28" parent="Spawns" unique_id=92369354 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2800, 2272)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock29", 4, ""]
+}
+
+[node name="BreakBlock29" parent="Spawns" unique_id=1027285623 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2800, 2256)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock30", 4, ""]
+}
+
+[node name="BreakBlock30" parent="Spawns" unique_id=2092649610 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2816, 2272)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock31", 4, ""]
+}
+
+[node name="BreakBlock31" parent="Spawns" unique_id=1172295892 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2800, 2288)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock32", 4, ""]
+}
+
+[node name="BreakBlock32" parent="Spawns" unique_id=62817789 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2864, 2304)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock33", 4, ""]
+}
+
+[node name="BreakBlock33" parent="Spawns" unique_id=1271183868 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2864, 2288)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock34", 4, ""]
+}
+
+[node name="BreakBlock34" parent="Spawns" unique_id=1779071388 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2880, 2272)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock35", 4, ""]
+}
+
+[node name="BreakBlock35" parent="Spawns" unique_id=405663890 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3328, 1888)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock36", 4, ""]
+}
+
+[node name="BreakBlock36" parent="Spawns" unique_id=863629970 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3328, 1904)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock37", 4, ""]
+}
+
+[node name="BreakBlock37" parent="Spawns" unique_id=1099885557 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3328, 1936)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock38", 4, ""]
+}
+
+[node name="BreakBlock38" parent="Spawns" unique_id=736596040 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3328, 1920)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock39", 4, ""]
+}
+
+[node name="BreakBlock39" parent="Spawns" unique_id=1359400292 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3344, 1920)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock40", 4, ""]
+}
+
+[node name="BreakBlock40" parent="Spawns" unique_id=2105116916 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3344, 1904)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock41", 4, ""]
+}
+
+[node name="BreakBlock41" parent="Spawns" unique_id=220879938 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3360, 1904)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock42", 4, ""]
+}
+
+[node name="BreakBlock42" parent="Spawns" unique_id=284304624 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3360, 1920)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock43", 4, ""]
+}
+
+[node name="BreakBlock43" parent="Spawns" unique_id=1204250468 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3344, 1936)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock44", 4, ""]
+}
+
+[node name="BreakBlock44" parent="Spawns" unique_id=972099080 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3360, 1872)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock45", 4, ""]
+}
+
+[node name="BreakBlock45" parent="Spawns" unique_id=975850134 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3360, 1888)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock46", 4, ""]
+}
+
+[node name="BreakBlock46" parent="Spawns" unique_id=448883998 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3376, 1888)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock47", 4, ""]
+}
+
+[node name="BreakBlock47" parent="Spawns" unique_id=1126264339 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3376, 1904)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock48", 4, ""]
+}
+
+[node name="BreakBlock48" parent="Spawns" unique_id=1301186498 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3376, 1920)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock49", 4, ""]
+}
+
+[node name="BreakBlock49" parent="Spawns" unique_id=1707246807 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3360, 1936)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock50", 4, ""]
+}
+
+[node name="BreakBlock50" parent="Spawns" unique_id=916868372 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3376, 1936)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock51", 4, ""]
+}
+
+[node name="BreakBlock51" parent="Spawns" unique_id=812549993 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3392, 1936)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock52", 4, ""]
+}
+
+[node name="BreakBlock52" parent="Spawns" unique_id=1281684394 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3392, 1920)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock53", 4, ""]
+}
+
+[node name="BreakBlock53" parent="Spawns" unique_id=80932679 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3392, 1904)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock54", 4, ""]
+}
+
+[node name="BreakBlock54" parent="Spawns" unique_id=1595153033 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3392, 1888)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock55", 4, ""]
+}
+
+[node name="BreakBlock55" parent="Spawns" unique_id=1367044369 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3392, 1856)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock56", 4, ""]
+}
+
+[node name="BreakBlock56" parent="Spawns" unique_id=1042197900 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3392, 1872)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock57", 4, ""]
+}
+
+[node name="BreakBlock57" parent="Spawns" unique_id=1759078144 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3408, 1904)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock58", 4, ""]
+}
+
+[node name="BreakBlock58" parent="Spawns" unique_id=381166110 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3408, 1888)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock59", 4, ""]
+}
+
+[node name="BreakBlock59" parent="Spawns" unique_id=685333315 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3408, 1872)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock60", 4, ""]
+}
+
+[node name="BreakBlock60" parent="Spawns" unique_id=1228153656 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3440, 1872)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock61", 4, ""]
+}
+
+[node name="BreakBlock61" parent="Spawns" unique_id=1630382574 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3440, 1888)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock62", 4, ""]
+}
+
+[node name="BreakBlock62" parent="Spawns" unique_id=1617288798 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3440, 1856)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock63", 4, ""]
+}
+
+[node name="BreakBlock63" parent="Spawns" unique_id=2042536144 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3424, 1856)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock64", 4, ""]
+}
+
+[node name="BreakBlock64" parent="Spawns" unique_id=606541908 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3424, 1824)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock65", 4, ""]
+}
+
+[node name="BreakBlock65" parent="Spawns" unique_id=1681674560 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3440, 1824)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock66", 4, ""]
+}
+
+[node name="BreakBlock66" parent="Spawns" unique_id=1030242920 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3424, 1840)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock67", 4, ""]
+}
+
+[node name="BreakBlock67" parent="Spawns" unique_id=1644691977 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3440, 1840)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock68", 4, ""]
+}
+
+[node name="BreakBlock68" parent="Spawns" unique_id=1587811962 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3456, 1824)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock69", 4, ""]
+}
+
+[node name="BreakBlock69" parent="Spawns" unique_id=104329241 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3456, 1840)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock70", 4, ""]
+}
+
+[node name="BreakBlock70" parent="Spawns" unique_id=1057108081 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3456, 1856)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock71", 4, ""]
+}
+
+[node name="BreakBlock71" parent="Spawns" unique_id=1678441487 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3456, 1872)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock72", 4, ""]
+}
+
+[node name="BreakBlock72" parent="Spawns" unique_id=1661961530 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3488, 1888)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock73", 4, ""]
+}
+
+[node name="BreakBlock73" parent="Spawns" unique_id=1953499181 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3472, 1872)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock74", 4, ""]
+}
+
+[node name="BreakBlock74" parent="Spawns" unique_id=1388274958 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3472, 1888)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock75", 4, ""]
+}
+
+[node name="BreakBlock75" parent="Spawns" unique_id=2115848595 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3472, 1904)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock76", 4, ""]
+}
+
+[node name="BreakBlock76" parent="Spawns" unique_id=389902775 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3488, 1920)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock77", 4, ""]
+}
+
+[node name="BreakBlock77" parent="Spawns" unique_id=1673433618 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3504, 1872)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock78", 4, ""]
+}
+
+[node name="BreakBlock78" parent="Spawns" unique_id=1842006592 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3488, 1856)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock79", 4, ""]
+}
+
+[node name="BreakBlock79" parent="Spawns" unique_id=1822434081 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3488, 1872)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock80", 4, ""]
+}
+
+[node name="BreakBlock80" parent="Spawns" unique_id=253383627 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3488, 1904)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock81", 4, ""]
+}
+
+[node name="BreakBlock81" parent="Spawns" unique_id=781127123 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3504, 1936)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock82", 4, ""]
+}
+
+[node name="BreakBlock82" parent="Spawns" unique_id=473082685 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3504, 1920)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock83", 4, ""]
+}
+
+[node name="BreakBlock83" parent="Spawns" unique_id=362002716 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3488, 1936)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock84", 4, ""]
+}
+
+[node name="BreakBlock84" parent="Spawns" unique_id=1388917929 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3472, 1920)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock85", 4, ""]
+}
+
+[node name="BreakBlock85" parent="Spawns" unique_id=1098590400 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3472, 1936)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock86", 4, ""]
+}
+
+[node name="BreakBlock86" parent="Spawns" unique_id=370608075 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2736, 2272)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock87", 4, ""]
+}
+
+[node name="BreakBlock87" parent="Spawns" unique_id=1228994649 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2704, 2288)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock88", 4, ""]
+}
+
+[node name="BreakBlock88" parent="Spawns" unique_id=1915913211 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2720, 2304)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock89", 4, ""]
+}
+
+[node name="BreakBlock89" parent="Spawns" unique_id=1882397247 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2736, 2288)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock90", 4, ""]
+}
+
+[node name="BreakBlock90" parent="Spawns" unique_id=822103351 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2720, 2288)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock91", 4, ""]
+}
+
+[node name="BreakBlock91" parent="Spawns" unique_id=1971572264 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2192, 2016)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock92", 4, ""]
+}
+
+[node name="BreakBlock92" parent="Spawns" unique_id=557965006 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2192, 2000)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock93", 4, ""]
+}
+
+[node name="BreakBlock93" parent="Spawns" unique_id=1657965867 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2176, 2016)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock94", 4, ""]
+}
+
+[node name="BreakBlock94" parent="Spawns" unique_id=1924634544 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2176, 2032)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock95", 4, ""]
+}
+
+[node name="BreakBlock95" parent="Spawns" unique_id=700726060 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2176, 2048)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock96", 4, ""]
+}
+
+[node name="BreakBlock96" parent="Spawns" unique_id=1721194975 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2208, 2016)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock97", 4, ""]
+}
+
+[node name="BreakBlock97" parent="Spawns" unique_id=1116007347 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2208, 2000)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock98", 4, ""]
+}
+
+[node name="BreakBlock98" parent="Spawns" unique_id=1139693107 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2208, 1984)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock99", 4, ""]
+}
+
+[node name="BreakBlock99" parent="Spawns" unique_id=514774900 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2144, 2224)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock100", 4, ""]
+}
+
+[node name="BreakBlock100" parent="Spawns" unique_id=2096836796 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2160, 2224)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock101", 4, ""]
+}
+
+[node name="BreakBlock101" parent="Spawns" unique_id=594655265 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2176, 2224)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock102", 4, ""]
+}
+
+[node name="BreakBlock102" parent="Spawns" unique_id=49100706 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2176, 2208)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock103", 4, ""]
+}
+
+[node name="BreakBlock103" parent="Spawns" unique_id=329030541 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2160, 2208)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock104", 4, ""]
+}
+
+[node name="BreakBlock104" parent="Spawns" unique_id=490174914 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2160, 2192)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock105", 4, ""]
+}
+
+[node name="BreakBlock105" parent="Spawns" unique_id=1284263669 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2176, 2192)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock106", 4, ""]
+}
+
+[node name="BreakBlock106" parent="Spawns" unique_id=119310507 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2160, 2176)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock107", 4, ""]
+}
+
+[node name="BreakBlock107" parent="Spawns" unique_id=1858872067 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2144, 2208)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock108", 4, ""]
+}
+
+[node name="BreakBlock108" parent="Spawns" unique_id=2132453952 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2144, 2192)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock109", 4, ""]
+}
+
+[node name="BreakBlock109" parent="Spawns" unique_id=71102800 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2656, 2096)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock110", 4, ""]
+}
+
+[node name="BreakBlock110" parent="Spawns" unique_id=744328307 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2656, 2080)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock111", 4, ""]
+}
+
+[node name="BreakBlock111" parent="Spawns" unique_id=708112338 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2672, 2080)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock118", 4, ""]
+}
+
+[node name="BreakBlock112" parent="Spawns" unique_id=413105399 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2672, 2096)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock119", 4, ""]
+}
+
+[node name="BreakBlock113" parent="Spawns" unique_id=560089449 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3408, 2064)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock128", 4, ""]
+}
+
+[node name="BreakBlock114" parent="Spawns" unique_id=52066303 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3416, 2048)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock129", 4, ""]
+}
+
+[node name="BreakBlock115" parent="Spawns" unique_id=386095571 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3408, 2032)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock130", 4, ""]
+}
+
+[node name="BreakBlock116" parent="Spawns" unique_id=408925860 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3392, 2032)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock131", 4, ""]
+}
+
+[node name="BreakBlock117" parent="Spawns" unique_id=1356732213 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3392, 2016)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock132", 4, ""]
+}
+
+[node name="BreakBlock118" parent="Spawns" unique_id=903873230 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3408, 2016)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock133", 4, ""]
+}
+
+[node name="BreakBlock119" parent="Spawns" unique_id=77708859 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3440, 2032)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock134", 4, ""]
+}
+
+[node name="BreakBlock120" parent="Spawns" unique_id=1582467572 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3440, 2016)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock135", 4, ""]
+}
+
+[node name="BreakBlock121" parent="Spawns" unique_id=1940744892 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3448, 2048)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock136", 4, ""]
+}
+
+[node name="BreakBlock122" parent="Spawns" unique_id=1066662824 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3400, 2000)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock137", 4, ""]
+}
+
+[node name="BreakBlock123" parent="Spawns" unique_id=1665397808 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3448, 2000)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock138", 4, ""]
+}
+
+[node name="BreakBlock124" parent="Spawns" unique_id=1841297552 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3416, 2000)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock139", 4, ""]
+}
+
+[node name="BreakBlock125" parent="Spawns" unique_id=20922495 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3432, 2000)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock140", 4, ""]
+}
+
+[node name="BreakBlock126" parent="Spawns" unique_id=628049690 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3440, 1984)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock141", 4, ""]
+}
+
+[node name="BreakBlock127" parent="Spawns" unique_id=52141430 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3456, 1984)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock142", 4, ""]
+}
+
+[node name="BreakBlock128" parent="Spawns" unique_id=205145752 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(3464, 1968)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock143", 4, ""]
+}
+
+[node name="BreakBlock129" parent="Spawns" unique_id=1911446183 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2592, 1888)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock136", 4, ""]
+}
+
+[node name="BreakBlock130" parent="Spawns" unique_id=1377062066 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2568, 1872)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock137", 4, ""]
+}
+
+[node name="BreakBlock131" parent="Spawns" unique_id=1942675093 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2576, 1856)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock138", 4, ""]
+}
+
+[node name="BreakBlock132" parent="Spawns" unique_id=747196455 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2560, 1856)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock139", 4, ""]
+}
+
+[node name="BreakBlock133" parent="Spawns" unique_id=1322151064 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2608, 1856)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock140", 4, ""]
+}
+
+[node name="BreakBlock134" parent="Spawns" unique_id=1909123952 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2600, 1872)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock141", 4, ""]
+}
+
+[node name="BreakBlock135" parent="Spawns" unique_id=1015864397 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2624, 1856)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock142", 4, ""]
+}
+
+[node name="BreakBlock136" parent="Spawns" unique_id=151916755 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2608, 1888)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock143", 4, ""]
+}
+
+[node name="BreakBlock137" parent="Spawns" unique_id=6761141 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2616, 1872)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock144", 4, ""]
+}
+
+[node name="BreakBlock138" parent="Spawns" unique_id=1425171504 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2632, 1840)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock145", 4, ""]
+}
+
+[node name="BreakBlock139" parent="Spawns" unique_id=2137708938 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2616, 1840)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock146", 4, ""]
+}
+
+[node name="BreakBlock140" parent="Spawns" unique_id=1355304049 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2568, 1840)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock147", 4, ""]
+}
+
+[node name="BreakBlock141" parent="Spawns" unique_id=881787084 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2584, 1840)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock148", 4, ""]
+}
+
+[node name="BreakBlock142" parent="Spawns" unique_id=1430421204 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2552, 1840)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock149", 4, ""]
+}
+
+[node name="BreakBlock143" parent="Spawns" unique_id=814494597 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2544, 1824)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock150", 4, ""]
+}
+
+[node name="BreakBlock144" parent="Spawns" unique_id=1394202732 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2560, 1824)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock151", 4, ""]
+}
+
+[node name="BreakBlock145" parent="Spawns" unique_id=212360071 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2576, 1824)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock152", 4, ""]
+}
+
+[node name="BreakBlock146" parent="Spawns" unique_id=1068380925 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2592, 1824)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock153", 4, ""]
+}
+
+[node name="Crusher120" parent="Spawns" unique_id=1380131670 instance=ExtResource("9_uly8o")]
+visibility_layer = 2
+position = Vector2(2600, 1912)
+actor_path = "res://src/Actor/Enemy/Crusher.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"crushing": [true, 1, ""],
+"debug": [false, 1, ""],
+"do_bubbles": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Crusher120", 4, ""],
+"loop": [true, 1, ""],
+"non_segment_path_reverse": [false, 1, ""],
+"non_segment_path_start": [0.0, 3, ""],
+"path_type": [1, 2, "Segment:0,Rectangle:1,Ellipse:2"],
+"speed": [Vector2(150, 350), 5, ""],
+"travel_time": [20.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="ToPoint" parent="Spawns/Crusher120" unique_id=919773011 instance=ExtResource("11_1ycm6")]
+visible = false
+visibility_layer = 2
+position = Vector2(0, 16)
+tag_name = "to_point"
+
+[node name="Shape" parent="Spawns/Crusher120" unique_id=1390180592 instance=ExtResource("13_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+tag_name = "shape_define"
+value = Rect2(0, 0, 280, 152)
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2

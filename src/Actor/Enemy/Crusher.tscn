@@ -438,7 +438,7 @@ shape = SubResource("2")
 [node name="Crush" type="Area2D" parent="Standable" unique_id=930772536]
 visible = false
 collision_layer = 0
-collision_mask = 3
+collision_mask = 19
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Standable/Crush" unique_id=1289397965]
