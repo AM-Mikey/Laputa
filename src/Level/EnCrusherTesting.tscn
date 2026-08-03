@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="13_ddw3t"]
 [ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="13_uly8o"]
 [ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="15_lfp3o"]
+[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="17_4ie3j"]
 [ext_resource type="PackedScene" uid="uid://crj4agnff8siv" path="res://src/Editor/VisualUtility/VUActor.tscn" id="17_sbhd6"]
 
 [node name="EnCrusherTesting" type="Node2D" unique_id=1952135705]
@@ -6958,7 +6959,7 @@ properties = {
 
 [node name="BreakBlock109" parent="Spawns" unique_id=71102800 instance=ExtResource("15_lfp3o")]
 visibility_layer = 2
-position = Vector2(2656, 2096)
+position = Vector2(2760, 2096)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -6970,7 +6971,7 @@ properties = {
 
 [node name="BreakBlock110" parent="Spawns" unique_id=744328307 instance=ExtResource("15_lfp3o")]
 visibility_layer = 2
-position = Vector2(2656, 2080)
+position = Vector2(2760, 2080)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -6982,7 +6983,7 @@ properties = {
 
 [node name="BreakBlock111" parent="Spawns" unique_id=708112338 instance=ExtResource("15_lfp3o")]
 visibility_layer = 2
-position = Vector2(2672, 2080)
+position = Vector2(2776, 2080)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -6994,7 +6995,7 @@ properties = {
 
 [node name="BreakBlock112" parent="Spawns" unique_id=413105399 instance=ExtResource("15_lfp3o")]
 visibility_layer = 2
-position = Vector2(2672, 2096)
+position = Vector2(2776, 2096)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -7443,6 +7444,99 @@ modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 tag_name = "shape_define"
 value = Rect2(0, 0, 280, 152)
+
+[node name="HealthUpgrade" parent="Spawns" unique_id=1165805496 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2704, 2096)
+prop_path = "res://src/Prop/HealthUpgrade.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"HealthUpgrade", 4, ""]
+}
+
+[node name="SaveDisk" parent="Spawns" unique_id=1143351042 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2736, 2096)
+prop_path = "res://src/Prop/SaveDisk.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"SaveDisk", 4, ""]
+}
+
+[node name="PhysFan" parent="Spawns" unique_id=1479025217 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2800, 2096)
+prop_path = "res://src/Prop/PhysFan.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [20.0, 3, ""],
+"toggled": [true, 1, ""]
+}
+
+[node name="WindVector" parent="Spawns/PhysFan" unique_id=872564127 instance=ExtResource("17_4ie3j")]
+visibility_layer = 2
+position = Vector2(8, 8)
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 90.0
+movement_locked = true
+
+[node name="Lilypad" parent="Spawns" unique_id=1570646544 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2624, 2096)
+prop_path = "res://src/Prop/Lilypad.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Lilypad", 4, ""],
+"sprite": [0, 2, ""],
+"stop_distance": [16, 2, ""]
+}
+
+[node name="Fan" parent="Spawns" unique_id=563478987 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2592, 2096)
+prop_path = "res://src/Prop/Fan.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Fan", 4, ""],
+"style": [0, 2, ""]
+}
+
+[node name="ChestItem" parent="Spawns" unique_id=1183909373 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2560, 2096)
+prop_path = "res://src/Prop/ChestItem.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"held_item_name": ["", 4, ""],
+"id": [&"ChestItem", 4, ""]
+}
+
+[node name="Bucket" parent="Spawns" unique_id=1074928038 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2896, 2096)
+prop_path = "res://src/Prop/Bucket.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Bucket", 4, ""]
+}
+
+[node name="HealthRefill" parent="Spawns" unique_id=292367048 instance=ExtResource("15_lfp3o")]
+visibility_layer = 2
+position = Vector2(2912, 2096)
+prop_path = "res://src/Prop/HealthRefill.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"HealthRefill", 4, ""]
+}
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
