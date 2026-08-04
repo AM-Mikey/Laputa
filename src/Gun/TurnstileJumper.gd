@@ -14,7 +14,7 @@ func _ready():
 	charging = true
 	max_ammo = 0
 	max_level = 3
-	
+
 	has_lifetime = true
 	set_level(level)
 
