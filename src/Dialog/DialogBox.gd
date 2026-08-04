@@ -125,7 +125,7 @@ func start_printing_flavor_text(text: String):
 
 func _load_dialog_json(dialog_json) -> Dictionary: #loads json and converts it into a dictionary
 	var file = FileAccess.open(dialog_json, FileAccess.READ)
-	var loaded_text = file.get_as_text()
+	var loaded_text = file.get_as_text().replace("\r\n", "\n") #replace long newlines with short ones
 	var json = JSON.new()
 	json.parse(loaded_text)
 	var out = json.get_data()
@@ -239,7 +239,7 @@ func run_text_array(text_array, from_input := false): #step is always the next s
 				flash_original_text = dl.text
 				$FlashTimer.start(0.3)
 
-				dl.text = flash_original_text.insert(get_raw_index(), "  ") #needs to add cinc because windows probably treats it as two characters
+				dl.text = flash_original_text.insert(get_raw_index(), "  ")
 				dl.visible_characters += 2
 				#if dl.get_character_line(current_character_index) < current_character_index + character_is_newline_count + 3: #when the carat is on a new line
 					#carat_visible_character_size = 3
