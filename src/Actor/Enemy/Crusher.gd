@@ -3,12 +3,12 @@ extends Enemy
 const ICON = preload("res://assets/Actor/Enemy/CrusherIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/Crusher.png")
 
-# Time take to move from current postion -> to_pos. Not accounting for return trip
+
 enum PathType {SEGMENT, RECTANGLE, ELLIPSE}
 @export var path_type = PathType.RECTANGLE
 @export var non_segment_path_reverse := false
 @export var non_segment_path_start := 0.0
-@export var travel_time: = 3.0
+@export var travel_time: = 3.0 # Time to travel the whole path. If path_type = segment && loop = false, travel time does not account for the return trip.
 @export var loop := true
 @export var crushing := true
 
@@ -29,16 +29,14 @@ var prev_global_position := Vector2.ZERO
 enum FacingDir {NEUTRAL, LEFT, RIGHT, UP, DOWN}
 var facing_dir: FacingDir = FacingDir.NEUTRAL
 
+# Debug
 var debug_path_color := Color.RED
-var debug_path_start := true
-var debug_name = ["Crusher120"]
 var debug_self_rect: Rect2 = Rect2()
 var debug_body_rect: Rect2 = Rect2()
 var debug_over_rect: Rect2 = Rect2()
-#["Crusher60", "Crusher58", "Crusher42", "Crusher43", "Crusher44", "Crusher45", "Crusher46", "Crusher47", "Crusher48", "Crusher49"]
 
 func _draw():
-	if name in debug_name:
+	if debug:
 		var draw_points: PackedVector2Array = path.get_baked_points()
 		for i in range(draw_points.size()):
 			draw_points[i] -= global_position
@@ -165,8 +163,6 @@ func crush_check():
 
 	var physics_space = get_world_2d().direct_space_state
 
-	#if name in debug_name:
-		#print(name, " ", nearby_bodies.size())
 	for body in nearby_bodies:
 		if body.get_collision_layer_value(1):
 			body = body.get_parent()
@@ -222,7 +218,7 @@ func crush_check():
 			var body_rect := Rect2(body_collision_shape.global_position - body_size / 2.0, body_size)
 			var body_overlap_rect := body_rect.intersection(crush_rect)
 
-			if name in debug_name:
+			if debug:
 				debug_self_rect = crush_rect
 				debug_body_rect = body_rect
 				debug_over_rect = body_overlap_rect
@@ -238,8 +234,6 @@ func crush_check():
 				const body_in_x_tolerance: = 3.0
 				var body_in_x = body_position.x >= crush_rect.position.x + body_in_x_tolerance && body_position.x <= crush_rect.position.x + crush_rect.size.x - body_in_x_tolerance
 
-				#if name in debug_name:
-					#print("Find raycheck")
 				const adjust := 1.0
 				const adjust_2 := 3.0
 				if body_in_y and moving_direction.x < 0.0 and body_position.x < crush_rect_center.x:
@@ -264,9 +258,6 @@ func crush_check():
 					raycheck_position.append(body_rect.position + Vector2(body_rect.size.x - adjust, body_rect.size.y - adjust_2))
 
 				if check_direction == Vector2.ZERO: continue
-
-				#if name in debug_name:
-					#print(check_direction)
 
 				var collide_with_world: bool = false
 				for i in range(0, raycheck_position.size()):
@@ -293,9 +284,6 @@ func crush_check():
 								raycheck_param.exclude = exception
 								collision = physics_space.intersect_ray(raycheck_param)
 						else:
-							#if name in debug_name:
-								#print("A")
-								#print(check_direction, " ", collider.name)
 							collide_with_world = true
 							break
 					if collide_with_world:
