@@ -46,7 +46,7 @@
 	
 	"topics_demo":
 	"
-	What did you want to talk about? /topics,example,cats
+	/newchar,Nun,Nun What did you want to talk about? /topics,example,cats
 	/db,0 you picked example! /udb
 	/db,1 you picked cats! /udb
 	/m what fun topics.

@@ -85,7 +85,8 @@ signal music_fadeout_finished
 	"ornithopter": preload("res://assets/SFX/Ornithopter.ogg"),
 	#"enemy_buzz":
 
-	"npc_dialog": preload("res://assets/SFX/Placeholder/snd_msg.ogg"),
+	"npc_voice_normal": preload("res://assets/SFX/Placeholder/snd_msg.ogg"),
+	"npc_voice_high": preload("res://assets/SFX/PitchSoft.ogg"),
 
 	"effect_pop": preload("res://assets/SFX/PopSmall.ogg"),
 }

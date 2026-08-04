@@ -88,6 +88,8 @@ func display_data():
 			for p in active.properties:
 				if p == "dialog_json":
 					create_button("dialog_json", active.properties[p][0], "load")
+				if p in ["voiced", "voice_sfx", "voice_delay"]: #don't export these to editor as we read the base scene not the instance
+					pass
 				else:
 					var enum_string =  active.properties[p][2]
 					if enum_string != "":

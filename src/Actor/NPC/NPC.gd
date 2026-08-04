@@ -29,6 +29,8 @@ var side_conversation_queue: Array #[[conversation_name, main_or_side, is_forced
 var next_conversation_queue_name: String
 var next_conversation_index: int
 @export var voiced = true
+@export var voice_sfx : String = "npc_voice_normal"
+@export var voice_delay: float = 0.03
 @export var id: String
 
 

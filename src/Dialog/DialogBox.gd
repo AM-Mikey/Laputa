@@ -2,10 +2,12 @@ extends Control
 
 signal dialog_finished
 
-@export var print_delay = 0.03
 @export var do_delay = true
-@export var punctuation_delay = 0.3
-@export var auto_input_delay = 0.5
+var print_delay: float = 0.03
+var punctuation_delay: float = 0.3
+#var auto_input_delay = 0.5
+var do_print_sfx = true
+var print_sfx = "npc_voice_normal"
 
 var busy = false #executing commands, ignore input
 var awaiting_merge = false
@@ -262,7 +264,8 @@ func run_text_string(string):
 		character_shown_count += 1
 		check_line_overflow(character_shown_count - 1)
 		if do_delay:
-			am.play("npc_dialog")
+			if do_print_sfx:
+				am.play(print_sfx)
 			if is_last_character:
 				return
 			elif character in [",", ".", "?", "!", ":", ";"]:
@@ -316,7 +319,7 @@ func _input(event):
 			progress_text()
 
 func prepare_auto_input():
-	await get_tree().create_timer(auto_input_delay, true, false).timeout
+	await get_tree().create_timer(print_delay, true, false).timeout #auto_input_delay
 	if awaiting_merge:
 		awaiting_merge = false
 		$CommandHandler.seek("/m")

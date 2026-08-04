@@ -44,10 +44,19 @@ func parse_command(string, command_is_first):
 			var a = string.split(",")
 			face(a[1].to_lower(), command_is_first)
 			db.display_name(a[2].to_lower())
+			var npc_path = "res://src/Actor/NPC/%s.tscn" % a[1].capitalize()
+			if ResourceLoader.exists(npc_path):
+				var npc = load(npc_path).instantiate()
+				voice(str(npc.voice_delay) + "," + str(npc.voiced) + "," + str(npc.voice_sfx))
+				npc.free()
 		"hide":#				/hide, (string: npc_id)									makes the npc with given id invisible
 			set_visible(argument, false)
 		"unhide":
 			set_visible(argument, true)
+		"voice":
+			voice(argument)
+		"uvoice":
+			voice([db.print_delay, db.do_print_sfx, db.print_sfx])
 
 		"waypoint":#			/waypoint, (string: npc_id), (int: waypoint_index)
 			waypoint(argument)
@@ -230,6 +239,16 @@ func set_visible(string, visible):
 	for n in get_tree().get_nodes_in_group("NPCs"):
 		if n.id.nocasecmp_to(id) == 0:
 			n.visible = visible
+
+func voice(string):
+	var a = string.split(",")
+	db.print_delay = float(a[0])
+	db.punctuation_delay = float(a[0]) * 10.0
+	match a[1]:
+		"true": db.do_print_sfx = true
+		"false": db.do_print_sfx = false
+	db.print_sfx = a[2]
+
 
 #func walk(string):
 	#db.busy = true
