@@ -229,7 +229,7 @@ func run_text_array(text_array, from_input := false): #step is always the next s
 		if from_input:
 			step += 1
 			character_shown_count += 1
-			character_is_newline_count += 1
+			character_is_newline_count += max(string.length() - 1, 0)
 			print("step: ", step)
 			run_text_array(text_array)
 		else:
