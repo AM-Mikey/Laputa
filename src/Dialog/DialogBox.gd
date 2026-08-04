@@ -470,6 +470,7 @@ func change_background(node_to_show) -> bool:
 			$AnimationPlayer.play("NPCToFlat")
 			return true
 		elif $Response.visible:
+			$AnimationPlayer.play("ResponseToFlat")
 			return true
 	elif node_to_show == $NPC:
 		if $NPC.visible:
@@ -478,15 +479,16 @@ func change_background(node_to_show) -> bool:
 			$AnimationPlayer.play("FlatToNPC")
 			return true
 		elif $Response.visible:
-			$AnimationPlayer.play("ResponseExit")
+			$AnimationPlayer.play("ResponseToNPC")
 			return true
 	elif node_to_show == $Response:
 		if $Response.visible:
 			return false
 		elif $Flat.visible:
+			$AnimationPlayer.play("FlatToResponse")
 			return true
 		elif $NPC.visible:
-			$AnimationPlayer.play("ResponseEnter")
+			$AnimationPlayer.play("NPCToResponse")
 			return true
 	return false
 

@@ -1,20 +1,20 @@
 [gd_scene format=3 uid="uid://dmt6h4vj5irs3"]
 
 [ext_resource type="Script" uid="uid://dadxo4i123gxi" path="res://src/Dialog/DialogBox.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://c1f0r66kayepy" path="res://assets/Dialog/DialogNPC.png" id="2_f46i3"]
-[ext_resource type="Texture2D" uid="uid://cy1x0rcbjtlha" path="res://assets/Dialog/DialogFlatAnimation.png" id="3_a6pxh"]
+[ext_resource type="Texture2D" uid="uid://c1f0r66kayepy" path="res://assets/Dialog/NPCTrim.png" id="2_f46i3"]
+[ext_resource type="Texture2D" uid="uid://cy1x0rcbjtlha" path="res://assets/Dialog/NPCToFlatTrim.png" id="3_a6pxh"]
 [ext_resource type="Texture2D" uid="uid://che6fhlvarswb" path="res://assets/Dialog/NamePanel.png" id="3_f46i3"]
-[ext_resource type="Texture2D" uid="uid://bci40e7ebagi2" path="res://assets/Dialog/DialogNPCPanel.png" id="3_p6mm4"]
+[ext_resource type="Texture2D" uid="uid://bci40e7ebagi2" path="res://assets/Dialog/NPCPanel.png" id="3_p6mm4"]
 [ext_resource type="Texture2D" uid="uid://cn84txin4yywk" path="res://assets/Face/Izu.png" id="4"]
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="4_2s414"]
 [ext_resource type="Shader" uid="uid://d3lkwynjfk4hg" path="res://src/Shader/SimpleBlur.gdshader" id="4_4nt3f"]
 [ext_resource type="FontFile" uid="uid://bwfshb35302x4" path="res://assets/UI/Font/momobold.ttf" id="4_52hu8"]
-[ext_resource type="Texture2D" uid="uid://dip1p20ort6ga" path="res://assets/Dialog/DialogFlatPanelAnimation.png" id="4_irc2v"]
+[ext_resource type="Texture2D" uid="uid://dip1p20ort6ga" path="res://assets/Dialog/NPCToFlatPanel.png" id="4_irc2v"]
 [ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="4_p6mm4"]
 [ext_resource type="Script" uid="uid://m5b2hs3sruoe" path="res://src/Dialog/CommandHandler.gd" id="6"]
 [ext_resource type="Shader" uid="uid://cvys2g8e6w63u" path="res://src/Shader/SimpleShadow.gdshader" id="8_6ds22"]
-[ext_resource type="Texture2D" uid="uid://b2xlsq6yba67i" path="res://assets/Dialog/DialogResponseAnimation.png" id="9_a6pxh"]
-[ext_resource type="Texture2D" uid="uid://bg2j85qu017ye" path="res://assets/Dialog/DialogResponsePanelAnimation.png" id="10_irc2v"]
+[ext_resource type="Texture2D" uid="uid://b2xlsq6yba67i" path="res://assets/Dialog/NPCToResponseTrim.png" id="9_a6pxh"]
+[ext_resource type="Texture2D" uid="uid://bg2j85qu017ye" path="res://assets/Dialog/NPCToResponsePanel.png" id="10_irc2v"]
 [ext_resource type="Texture2D" uid="uid://b42so8fnnp3uq" path="res://assets/Face/Juniper.png" id="10_js7dk"]
 [ext_resource type="Script" uid="uid://j1w2mlt2k707" path="res://src/Dialog/Options.gd" id="15_6fcua"]
 [ext_resource type="Texture2D" uid="uid://g31hhk6jwj27" path="res://assets/Dialog/OptionThree.png" id="17_6fcua"]
@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://dp4s8ohqwmauh" path="res://assets/Dialog/OptionTwo.png" id="18_esgl1"]
 [ext_resource type="Texture2D" uid="uid://cjetfcuvl3t3b" path="res://assets/Dialog/OptionUp.png" id="18_nftl0"]
 [ext_resource type="Texture2D" uid="uid://xcfbqfilivaf" path="res://assets/Dialog/OptionDown.png" id="19_esgl1"]
+[ext_resource type="Texture2D" uid="uid://twlqy1tsxik1" path="res://assets/Dialog/FlatToResponseTrim.png" id="24_1u7gm"]
+[ext_resource type="Texture2D" uid="uid://bmqojvig0acre" path="res://assets/Dialog/FlatToResponsePanel.png" id="25_xy0m6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_js7dk"]
 shader = ExtResource("4_4nt3f")
@@ -5506,7 +5508,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Flat/Dialog:frame")
+tracks/3/path = NodePath("Flat/Trim:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -5518,7 +5520,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Flat/DialogPanel:frame")
+tracks/4/path = NodePath("Flat/Panel:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -5550,6 +5552,178 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(0, 22), Vector2(0, 20), Vector2(0, 16), Vector2(0, 12), Vector2(0, 8)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Flat/Trim:texture")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_a6pxh")]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Flat/Panel:texture")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_irc2v")]
+}
+
+[sub_resource type="Animation" id="Animation_gud7g"]
+resource_name = "FlatToResponse"
+length = 0.3333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Response/Trim:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Response/Panel:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.267208, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Response/Juniper:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Response/Juniper:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.166667, 0.2, 0.233333, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(328, 46), Vector2(344, 46), Vector2(356, 46), Vector2(364, 46), Vector2(368, 46)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Options:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Options:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.233333, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(-12, 0), Vector2(-4, 0), Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Response:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Options:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Response/Blur2:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Response/Trim:texture")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("24_1u7gm")]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Response/Panel:texture")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("25_xy0m6")]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Flat:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_gully"]
@@ -5595,7 +5769,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Flat/Dialog:frame")
+tracks/3/path = NodePath("Flat/Trim:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -5607,7 +5781,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Flat/DialogPanel:frame")
+tracks/4/path = NodePath("Flat/Panel:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -5640,13 +5814,185 @@ tracks/6/keys = {
 "update": 1,
 "values": [Vector2(0, 8), Vector2(0, 12), Vector2(0, 16), Vector2(0, 20), Vector2(0, 22)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Flat/Trim:texture")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_a6pxh")]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Flat/Panel:texture")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_irc2v")]
+}
+
+[sub_resource type="Animation" id="Animation_wfih8"]
+resource_name = "NPCToResponse"
+length = 0.3333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Response/Trim:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Response/Panel:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.267208, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Response/Juniper:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Response/Juniper:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.166667, 0.2, 0.233333, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(328, 46), Vector2(344, 46), Vector2(356, 46), Vector2(364, 46), Vector2(368, 46)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Options:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Options:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.233333, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(-12, 0), Vector2(-4, 0), Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("NPC:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Response:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Options:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Response/Blur2:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Response/Trim:texture")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_a6pxh")]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Response/Panel:texture")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("10_irc2v")]
+}
 
 [sub_resource type="Animation" id="Animation_hhm5f"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Response/Edge:frame")
+tracks/0/path = NodePath("Response/Trim:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -5778,7 +6124,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Flat/Dialog:frame")
+tracks/11/path = NodePath("Flat/Trim:frame")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -5790,7 +6136,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("Flat/DialogPanel:frame")
+tracks/12/path = NodePath("Flat/Panel:frame")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -5847,21 +6193,69 @@ tracks/16/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Response/Trim:texture")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_a6pxh")]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Response/Panel:texture")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("10_irc2v")]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Flat/Trim:texture")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_a6pxh")]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Flat/Panel:texture")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_irc2v")]
+}
 
-[sub_resource type="Animation" id="Animation_wfih8"]
-resource_name = "ResponseEnter"
+[sub_resource type="Animation" id="Animation_omvp0"]
+resource_name = "ResponseToFlat"
 length = 0.3333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Response/Edge:frame")
+tracks/0/path = NodePath("Response/Trim:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+"values": [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -5870,10 +6264,10 @@ tracks/1/path = NodePath("Response/Panel:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.267208, 0.3),
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+"values": [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -5882,10 +6276,10 @@ tracks/2/path = NodePath("Response/Juniper:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -5894,10 +6288,10 @@ tracks/3/path = NodePath("Response/Juniper:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.166667, 0.2, 0.233333, 0.266667, 0.3),
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(328, 46), Vector2(344, 46), Vector2(356, 46), Vector2(364, 46), Vector2(368, 46)]
+"values": [Vector2(368, 46), Vector2(364, 46), Vector2(356, 46), Vector2(344, 46), Vector2(328, 46)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -5906,10 +6300,10 @@ tracks/4/path = NodePath("Options:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.233333, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -5918,67 +6312,91 @@ tracks/5/path = NodePath("Options:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.233333, 0.266667, 0.3),
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [Vector2(-12, 0), Vector2(-4, 0), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(-4, 0), Vector2(-12, 0)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("NPC:visible")
+tracks/6/path = NodePath("Response:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [true, false]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Response:visible")
+tracks/7/path = NodePath("Options:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [true, false]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Options:visible")
+tracks/8/path = NodePath("Response/Blur2:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Response/Blur2:visible")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.3),
+"times": PackedFloat32Array(0, 0.033333335, 0.26666668),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Flat:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Response/Trim:texture")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("24_1u7gm")]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Response/Panel:texture")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("25_xy0m6")]
+}
 
 [sub_resource type="Animation" id="Animation_yx40r"]
-resource_name = "ResponseExit"
+resource_name = "ResponseToNPC"
 length = 0.3333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Response/Edge:frame")
+tracks/0/path = NodePath("Response/Trim:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -6095,15 +6513,41 @@ tracks/9/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Response/Trim:texture")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_a6pxh")]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Response/Panel:texture")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("10_irc2v")]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6fx66"]
 _data = {
 &"FaceEnter": SubResource("Animation_6fx66"),
 &"FlatToNPC": SubResource("Animation_e0wmx"),
+&"FlatToResponse": SubResource("Animation_gud7g"),
 &"NPCToFlat": SubResource("Animation_gully"),
+&"NPCToResponse": SubResource("Animation_wfih8"),
 &"RESET": SubResource("Animation_hhm5f"),
-&"ResponseEnter": SubResource("Animation_wfih8"),
-&"ResponseExit": SubResource("Animation_yx40r")
+&"ResponseToFlat": SubResource("Animation_omvp0"),
+&"ResponseToNPC": SubResource("Animation_yx40r")
 }
 
 [node name="DialogBox" type="Control" unique_id=1750378332 groups=["DialogBoxes"]]
@@ -6127,13 +6571,13 @@ material = SubResource("ShaderMaterial_js7dk")
 position = Vector2(400, -86)
 polygon = PackedVector2Array(-370, 101, -21, 101, -19, 102, -18, 103, -17, 105, -17, 110, -41, 158, -42, 159, -43, 161, -44, 162, -46, 163, -395, 163, -397, 162, -398, 161, -399, 159, -399, 154, -375, 106, -374, 105, -373, 103, -372, 102)
 
-[node name="Dialog" type="Sprite2D" parent="Flat" unique_id=2066378263]
+[node name="Trim" type="Sprite2D" parent="Flat" unique_id=2066378263]
 position = Vector2(192, -43)
 texture = ExtResource("3_a6pxh")
 hframes = 10
 frame = 9
 
-[node name="DialogPanel" type="Sprite2D" parent="Flat" unique_id=2088603311]
+[node name="Panel" type="Sprite2D" parent="Flat" unique_id=2088603311]
 modulate = Color(1, 1, 1, 0.85)
 position = Vector2(192, -43)
 texture = ExtResource("4_irc2v")
@@ -6168,7 +6612,7 @@ material = SubResource("ShaderMaterial_js7dk")
 position = Vector2(392, -86)
 polygon = PackedVector2Array(-336, 101, -13, 101, -11, 102, -10, 103, -9, 105, -9, 110, -33, 158, -34, 159, -35, 161, -36, 162, -38, 163, -347, 163, -349, 162, -350, 161, -351, 159, -352, 157, -353, 154, -354, 152, -355, 151, -355, 101)
 
-[node name="Edge" type="Sprite2D" parent="NPC" unique_id=965333611]
+[node name="Trim" type="Sprite2D" parent="NPC" unique_id=965333611]
 position = Vector2(192, -43)
 texture = ExtResource("2_f46i3")
 
@@ -6216,7 +6660,7 @@ material = SubResource("ShaderMaterial_xbdvf")
 position = Vector2(200, -43)
 polygon = PackedVector2Array(127, 58, 138, 58, 138, 120, 127, 120, 126, 119, 124, 115, 123, 112, 122, 107, 121, 99, 121, 79, 122, 71, 123, 66, 124, 63, 126, 59)
 
-[node name="Edge" type="Sprite2D" parent="Response" unique_id=623918750]
+[node name="Trim" type="Sprite2D" parent="Response" unique_id=623918750]
 position = Vector2(200, -43)
 texture = ExtResource("9_a6pxh")
 hframes = 10
@@ -6250,6 +6694,7 @@ scroll_active = false
 visible_characters_behavior = 1
 
 [node name="Name" type="Control" parent="." unique_id=219904090]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0

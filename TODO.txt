@@ -631,3 +631,9 @@ Item Menu TODO:
 features:
 npc talk speed
 npc talk voice
+
+
+last worked on: 7/30/26
+Options line 377, we need to have selecting never mind exit the text
+	in addition, the bug where our matching topic doesnt seem to be recognized
+	possibly doesnt switch to the right box. even tho it says displaying options in print

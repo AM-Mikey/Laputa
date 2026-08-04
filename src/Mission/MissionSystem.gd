@@ -21,6 +21,8 @@ const MAIN_MISSION = [ #[name, trigger_type, trigger_value, description]
 	"Start demo"],
 	["textbox_demo", "", "",
 	"Textbox related dialog commands demo"],
+	["topics_demo", "", "",
+	"topic related dialog commands demo"],
 	["dialog_branching_demo", "", "",
 	"Dialog branching dialog commands demo"],
 	["entity_demo", "", "",

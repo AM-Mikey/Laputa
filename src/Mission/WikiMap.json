@@ -5,10 +5,11 @@
 			"aikka": {
 				"dialog_system_demo_start": "start",
 				"textbox_demo": "textbox_demo",
+				"topics_demo": "topics_demo",
 				"dialog_branching_demo": [["yes_no_demo"], ["options_demo"]],
 				"mission_demo":"mission_demo",
 				"entity_demo": "entity_demo",	
-				"camera_demo": "camera_demo"
+				"camera_demo": "camera_demo",
 			},		
 		},
 	},

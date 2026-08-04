@@ -46,7 +46,11 @@
 	
 	"topics_demo":
 	"
-	/topics,example
+	proit
+	What did you want to talk about? /topics,example,cats
+	/db,0 you picked example! /udb
+	/db,1 you picked cats! /udb
+	/m what fun topics.
 	",
 	
 	"entity_demo":
@@ -67,6 +71,6 @@
 	returned the camera to the player.
 	/cam,to_pos,500,100,30 here we are moving the camera to the position (500, 100) at speed 30
 	/cam,hold camera will be held at this position until the player progresses text
-	/cam,to_player,30 returning the camera to the player once more
+	/cam,to_player,30 returning the camera to the player once more /progress_main_mission
 	",
 }

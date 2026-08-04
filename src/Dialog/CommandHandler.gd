@@ -359,27 +359,38 @@ func options(string):
 
 func topics(argument):
 	var npc_topics = argument.split(",")
+
 	var cap_pc_topics = []
-	for topic in pc.topic_array:
-		cap_pc_topics.append(topic.capitalize())
+	for pc_topic in pc.topic_array:
+		cap_pc_topics.append(pc_topic.topic_name)
+
 	var cap_npc_topics = []
-	for topic in npc_topics:
-		cap_npc_topics.append(topic.capitalize())
+	for npc_topic_name in npc_topics:
+		cap_npc_topics.append(npc_topic_name.capitalize())
+
 	var final_topics = []
 	var final_ids = []
 	for npc_topic in cap_npc_topics:
 		for pc_topic in cap_pc_topics:
 			if npc_topic == pc_topic:
 				final_topics.append(npc_topic)
-	for topic in final_topics:
-		final_ids.append(cap_npc_topics.find(topic))
+	if final_topics.size() == 0:
+		printerr("ERROR: NO TOPICS FOR /TOPICS")
+	else:
+		for topic in final_topics:
+			final_ids.append(cap_npc_topics.find(topic))
+		final_topics.append("Never Mind") #TODO: need return dialog for this
+		final_ids.append(final_ids.size())
 
-	db.get_node("Options").options = final_topics
-	db.get_node("Options").ids = final_ids
-	db.get_node("Options").display_options()
-	db.dl = db.get_node("Response/DialogResponse")
-	db.clear_text()
-	db.get_node("Options").exit_action = "topics"
+		db.get_node("Options").options = final_topics
+		db.get_node("Options").ids = final_ids
+		db.get_node("Options").display_options()
+		var saved_visible_characters = db.dl.visible_characters
+		db.change_background(db.get_node("Response"))
+		db.dl = db.get_node("Response/DialogResponse")
+		db.dl.text = db.get_text_stripped_of_commands(db.step - 1)
+		db.dl.visible_characters = saved_visible_characters
+		db.get_node("Options").exit_action = "topics"
 
 
 func on_select_branch(branch):
