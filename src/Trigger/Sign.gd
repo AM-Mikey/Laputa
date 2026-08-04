@@ -14,18 +14,20 @@ func _ready(): #Reminder: no function called can use await
 	w.emit_signal("finished_spawn_entities_step")
 
 func _input(event):
-	if reading: return
 	if event.is_action_pressed("inspect") and active_pc != null:
-		if not active_pc.disabled and inp.can_act and active_pc.mm.current_state == active_pc.mm.states["run"]:
+		if !reading && !active_pc.disabled && inp.can_act && active_pc.mm.current_state == active_pc.mm.states["run"]:
 			active_pc.inspect_target = $CollisionShape2D
 			reading = true
-			for i in get_tree().get_nodes_in_group("DialogBoxes"): #exit old
+			for i in get_tree().get_nodes_in_group("DialogBoxes"): #exit old db
 				i.exit()
-
 			db = DB.instantiate()
 			db.connect("dialog_finished", Callable(self, "on_dialog_finished"))
 			w.dll.add_child(db)
 			db.start_printing_sign(text)
+
+	elif event.is_action_pressed("jump") and active_pc != null && reading:
+			for i in get_tree().get_nodes_in_group("DialogBoxes"): #exit current db
+				i.exit()
 
 func on_dialog_finished():
 	reading = false

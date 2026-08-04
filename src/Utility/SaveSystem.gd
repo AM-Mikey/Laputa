@@ -229,7 +229,7 @@ func read_dialog_data_from_temp(current_level):
 	var current_level_data = scoped_data["dialog_data"][current_level.level_name]
 	for id in current_level_data:
 		for npc in get_tree().get_nodes_in_group("NPCs"):
-			if npc.id == id:
+			if npc.id.nocasecmp_to(id) == 0:
 				npc.conversation_queue = current_level_data[id][0]
 				npc.side_conversation_queue = current_level_data[id][1]
 	print("dialog data loaded from temp")
@@ -243,7 +243,7 @@ func read_dialog_data_from_save(current_level):
 	var current_level_data = scoped_data["dialog_data"][current_level.level_name]
 	for id in current_level_data:
 		for npc in get_tree().get_nodes_in_group("NPCs"):
-			if npc.id == id:
+			if npc.id.nocasecmp_to(id) == 0:
 				npc.conversation_queue = current_level_data[id][0]
 				npc.side_conversation_queue = current_level_data[id][1]
 	print("dialog data loaded from save")

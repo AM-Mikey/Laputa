@@ -17,6 +17,18 @@ const MAIN_MISSION = [ #[name, trigger_type, trigger_value, description]
 	"This is a test of the manual camera controls"],
 	["camera_test_2", "", "",
 	"This is a test of the manual camera controls, part 2"],
+	["dialog_system_demo_start", "", "",
+	"Start demo"],
+	["textbox_demo", "", "",
+	"Textbox related dialog commands demo"],
+	["topics_demo", "", "",
+	"topic related dialog commands demo"],
+	["dialog_branching_demo", "", "",
+	"Dialog branching dialog commands demo"],
+	["entity_demo", "", "",
+	"Entity related dialog commands demo"],
+	["camera_demo", "", "",
+	"camera related dialog commands demo"],
 ]
 
 var main_mission_stage: Array = MAIN_MISSION[0]
@@ -270,7 +282,7 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 			if data["camera_control_add"].has(mission_name):
 				for stage in data["camera_control_add"][mission_name]:
 					if stage == mission_stage:
-						inp.can_act = false
+						#inp.can_act = false
 						for a in data["camera_control_add"][mission_name][stage]:
 							f.pc().get_node("PlayerCamera").control_add(a)
 
@@ -286,9 +298,9 @@ func get_matching_entities_values(data, mission_name, mission_stage, data_key, g
 		for n in get_tree().get_nodes_in_group(group):
 			var correct_id = false
 			if is_spawn:
-				if n.properties["id"][0] == id: correct_id = true
+				if n.properties["id"][0].nocasecmp_to(id) == 0: correct_id = true
 			else:
-				if n.id == id: correct_id = true
+				if n.id.nocasecmp_to(id) == 0: correct_id = true
 			if correct_id:
 				if data[data_key][mission_name][id].has(mission_stage):
 					out[n] = data[data_key][mission_name][id][mission_stage]
@@ -299,7 +311,7 @@ func get_matching_entities_values(data, mission_name, mission_stage, data_key, g
 
 func get_has_entity_with_id(entity_group: String, id):
 	for e in get_tree().get_nodes_in_group(entity_group):
-		if e.id == id:
+		if e.id.nocasecmp_to(id) == 0:
 			printerr("ERROR: entity with id: ", id, " already exists!")
 			return true
 	return false

@@ -65,6 +65,19 @@
             }
           },
           {
+            "id": "fd4103d12f5e6068",
+            "type": "leaf",
+            "state": {
+              "type": "bases",
+              "state": {
+                "file": "Untitled 4.base",
+                "viewName": "Table"
+              },
+              "icon": "lucide-table",
+              "title": "Untitled 4"
+            }
+          },
+          {
             "id": "8e79af8c8cf32a05",
             "type": "leaf",
             "state": {
@@ -107,7 +120,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       },
       {
         "id": "f00468223e4d7550",
@@ -161,7 +174,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -286,8 +301,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "530bc650ea873274",
+  "active": "fd4103d12f5e6068",
   "lastOpenFiles": [
+    "Untitled 3.base",
+    "Untitled 4.base",
+    "Work Requests/7-30-26.md",
+    "Work Requests",
     "Guns.md",
     "Characters/Alexander.md",
     "Characters/Basil.md",
@@ -331,8 +350,6 @@
     "The World/Subareas",
     "Objects",
     "Objects/Vehicles",
-    "Groups/Untitled",
-    "The World",
-    "Concepts"
+    "Groups/Untitled"
   ]
 }

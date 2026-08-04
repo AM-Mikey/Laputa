@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Topic" format=3 uid="uid://ck8jkyhwpavuk"]
+
+[ext_resource type="Script" uid="uid://dgc1kvoblef0o" path="res://src/Dialog/Topic/Topic.gd" id="1_kfh25"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_kfh25")
+topic_name = "Example"
+topic_stages = Array[int]([0, 1, 3, 4])
+d0 = "Level 1 knowledge"
+d1 = "Level 2 knowledge"
+d2 = "Level 3 knowledge"
+d3 = "Level 4 knowledge"
+d4 = "Level 5 knowledge"
+d5 = "Level 6 knowledge"
+metadata/_custom_type_script = "uid://dgc1kvoblef0o"

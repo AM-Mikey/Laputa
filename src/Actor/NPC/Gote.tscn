@@ -53,7 +53,7 @@ _data = {
 
 [node name="Gote" type="CharacterBody2D" unique_id=672230821 groups=["Actors", "Entities", "NPCs"]]
 collision_layer = 128
-collision_mask = 8
+collision_mask = 520
 script = ExtResource("1_wttd1")
 id = "gote"
 editor_hidden = false
