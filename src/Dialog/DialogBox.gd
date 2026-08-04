@@ -52,7 +52,7 @@ func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed()
 
-func start_printing(dialog_json, conversation: String, next_state = "inspect"): #TODO: use shown characters for sign and other stuff too
+func start_printing(dialog_json, conversation: String, next_state = "inspect"):
 	current_dialog_json = dialog_json
 	active = true
 	var dialog = _load_dialog_json(dialog_json)
@@ -84,7 +84,7 @@ func start_printing(dialog_json, conversation: String, next_state = "inspect"): 
 
 func start_printing_sign(text: String):
 	$Flat.visible = true
-	size = Vector2(384, 78)
+	#size = Vector2(384, 78)
 	_resolution_scale_changed() #to update after size
 	dl = $Flat/DialogFlat
 	dl.text = ""
@@ -94,24 +94,30 @@ func start_printing_sign(text: String):
 	auto_input = true
 	is_sign = true
 	current_text_array = split_text(text) #contains array of: command, newline as blank string, text string
+	text_stripped_of_commands = get_text_stripped_of_commands(0)
 	align_box()
 	pc.mm.cached_state = pc.mm.current_state
 	pc.mm.change_state("inspect")
-	run_text_array(current_text_array)
+	dl.text = text_stripped_of_commands
+	#dl.visible_characters = 0
+	#run_text_array(current_text_array) #this would alow the text to scroll, otherwise we can just print as is without these two lines
 
 
 func start_printing_flavor_text(text: String):
 	$Flat.visible = true
-	size = Vector2(384, 78)
+	#size = Vector2(384, 78)
 	_resolution_scale_changed() #to update after size
 	dl = $Flat/DialogFlat
 	dl.text = ""
 	active = true
 	is_flavor = true
 	current_text_array = split_text(text) #contains array of: command, newline as blank string, text string
+	text_stripped_of_commands = get_text_stripped_of_commands(0)
 	align_box()
 	pc.mm.cached_state = pc.mm.current_state
 	pc.mm.change_state("inspect")
+	dl.text = text_stripped_of_commands
+	dl.visible_characters = 0
 	run_text_array(current_text_array)
 
 
@@ -153,19 +159,36 @@ func restore_command_spacing(tokens: Array) -> Array:
 	return out
 
 
-func get_text_stripped_of_commands(from_step: int) -> String:
+func get_text_stripped_of_commands(from_step: int, stop_at_branch := false) -> String:
 	var out = ""
 	var array_of_desirable_text = PackedStringArray([])
 	var step_index := 0
 	for i in current_text_array:
 		if step_index < from_step:
 			pass
+		elif stop_at_branch and (i.begins_with("/db,") or i == "/m"):
+			break #don't let prompt text (yn/options/topics) bleed into the branch replies that follow it
 		elif !i.contains("/"):
 			array_of_desirable_text.append(i)
 		step_index += 1
 	out = out.join(array_of_desirable_text)
 	#print(out)
 	return out
+
+func get_prompt_visible_characters(from_step: int) -> int:
+	#character_shown_count is an absolute index into the text starting at step 0.
+	#When we rebuild a shorter string starting at from_step (see get_text_stripped_of_commands
+	#above), we need to subtract however many characters were already shown *before* from_step
+	#so the new dl.visible_characters lines up with the new, shorter dl.text.
+	var shown_before := 0
+	var step_index := 0
+	for i in current_text_array:
+		if step_index >= from_step:
+			break
+		elif !i.contains("/"):
+			shown_before += i.length()
+		step_index += 1
+	return character_shown_count - shown_before
 
 func get_branch_text(from_step: int) -> String:
 	var out := PackedStringArray([])
@@ -530,7 +553,6 @@ func push_scroll_to_line(target_line: int, duration := 0.12):
 	scroll_tween.tween_property(v_scroll, "value", target_value, duration)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
-#func convert_index
 
 ### SIGNALS ###
 

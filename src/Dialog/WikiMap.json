@@ -46,7 +46,6 @@
 	
 	"topics_demo":
 	"
-	proit
 	What did you want to talk about? /topics,example,cats
 	/db,0 you picked example! /udb
 	/db,1 you picked cats! /udb

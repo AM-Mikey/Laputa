@@ -67,11 +67,17 @@ func _input(event):
 
 func hide_options():
 	var db = get_parent()
+	var chose_never_mind = options[selected_option] == "Never Mind"
 	is_displaying = false
 	is_exiting = true
 	get_parent().do_delay = false
 	#print("set_delay_false")
 	await get_tree().create_timer(0.1, true, false).timeout #wait for text to finish printing without delay #TODO: check if these flags are correct
+
+	if chose_never_mind: #no branch to seek to, just close the dialog outright
+		db.exit()
+		is_exiting = false
+		return
 
 	db.dl.text = ""
 	db.dl = db.get_node("NPC/DialogNPC")
@@ -176,16 +182,12 @@ func option_down():
 			selected_option = 0
 			$AnimationPlayer.play("ThreeThirdToFirst")
 		else:
-			print("ok")
 			selected_option += 1
 			match selected_option:
 				1:
 					$AnimationPlayer.play("ThreeFirstToSecond")
-					print("s")
 				2:
 					$AnimationPlayer.play("ThreeSecondToThird")
-					print("a")
-					print(selected_option)
 
 	elif options.size() == 2:
 		if selected_option == 0:
@@ -213,7 +215,7 @@ func up_label_swap():
 
 ## SIGNALS ###
 func _on_MainAnimationPlayer_animation_finished(anim_name: StringName):
-	if anim_name == "ResponseEnter":
+	if anim_name == "FlatToResponse" or anim_name == "NPCToResponse":
 		is_displaying = true
 		is_entering = false
 

@@ -20,7 +20,7 @@ func parse_command(string, command_is_first):
 	#print("function: ", function)
 	#print("argument: ", argument)
 
-	match await function: #TODO: probably slow, replace this with something else
+	match await function:
 		#/face, (sprite_name)
 		#changes face_sprite to the specified file
 		"face":
@@ -332,13 +332,7 @@ func wait(string):
 
 func yes_no():
 	db.get_node("Options").options = ["Yes", "No"]
-	db.get_node("Options").display_options()
-	var saved_visible_characters = db.dl.visible_characters
-	db.change_background(db.get_node("Response"))
-	db.dl = db.get_node("Response/DialogResponse")
-	db.dl.text = db.get_text_stripped_of_commands(db.step - 1)
-	db.dl.visible_characters = saved_visible_characters
-	db.get_node("Options").exit_action = "options"
+	show_response_options("options")
 
 
 func options(string):
@@ -348,13 +342,7 @@ func options(string):
 		var capitalized = s.capitalize()
 		capitalized_array.append(capitalized)
 	db.get_node("Options").options = capitalized_array
-	db.get_node("Options").display_options()
-	var saved_visible_characters = db.dl.visible_characters
-	db.change_background(db.get_node("Response"))
-	db.dl = db.get_node("Response/DialogResponse")
-	db.dl.text = db.get_text_stripped_of_commands(db.step - 1)
-	db.dl.visible_characters = saved_visible_characters
-	db.get_node("Options").exit_action = "options"
+	show_response_options("options")
 
 
 func topics(argument):
@@ -379,18 +367,28 @@ func topics(argument):
 	else:
 		for topic in final_topics:
 			final_ids.append(cap_npc_topics.find(topic))
-		final_topics.append("Never Mind") #TODO: need return dialog for this
-		final_ids.append(final_ids.size())
 
 		db.get_node("Options").options = final_topics
 		db.get_node("Options").ids = final_ids
-		db.get_node("Options").display_options()
-		var saved_visible_characters = db.dl.visible_characters
-		db.change_background(db.get_node("Response"))
-		db.dl = db.get_node("Response/DialogResponse")
-		db.dl.text = db.get_text_stripped_of_commands(db.step - 1)
-		db.dl.visible_characters = saved_visible_characters
-		db.get_node("Options").exit_action = "topics"
+		show_response_options("topics", true) #true = offer a "Never Mind" bail-out option
+
+
+#shared by yn/options/topics: swaps the dialog box over to the Response box and shows the option list, without letting /db,/m etc. leak into the prompt text or desync visible_characters
+func show_response_options(action: String, add_never_mind := false):
+	var options_node = db.get_node("Options")
+	if add_never_mind:
+		options_node.options.append("Never Mind")
+	options_node.display_options()
+
+	var from_step = db.step - 1
+	var new_text = db.get_text_stripped_of_commands(from_step, true)
+	var new_visible_characters = db.get_prompt_visible_characters(from_step)
+
+	db.change_background(db.get_node("Response"))
+	db.dl = db.get_node("Response/DialogResponse")
+	db.dl.text = new_text
+	db.dl.visible_characters = new_visible_characters
+	options_node.exit_action = action
 
 
 func on_select_branch(branch):
