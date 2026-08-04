@@ -10,7 +10,7 @@ func _ready():
 	if f.pc():
 		var pc = f.pc()
 		pc.connect("guns_updated", Callable(self, "_on_guns_updated"))
-		_on_guns_updated(pc.guns.get_children())
+		_on_guns_updated(pc.gm.gun_order)
 
 	if w.is_release:
 		$VBox/General/Label.text = "Laputa " + w.internal_version + " (" + w.release_version+ ")"

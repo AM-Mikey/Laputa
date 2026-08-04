@@ -16,8 +16,8 @@ func do_focus():
 func _on_return():
 	if w.has_node("MenuLayer/PauseMenu"):
 		w.get_node("MenuLayer/PauseMenu").do_focus()
-	if w.has_node("MenuLayer/TitleScreen"):
-		w.get_node("MenuLayer/TitleScreen").do_focus()
+	if w.has_node("MenuLayer/Title"):
+		w.get_node("MenuLayer/Title").do_focus()
 	queue_free()
 
 func _resolution_scale_changed(resolution_scale):

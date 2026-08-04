@@ -29,7 +29,7 @@ func _ready():
 	process_mode = PROCESS_MODE_ALWAYS
 
 func _input(event):
-	if event.is_action_pressed("debug_editor") && !w.ml.has_node("TitleScreen") && !w.ml.has_node("PauseMenu"):
+	if event.is_action_pressed("debug_editor") && !w.ml.has_node("Title") && !w.ml.has_node("PauseMenu"):
 		if w.el.has_node("Editor"):
 			editor_tab = w.el.get_node("Editor/Main/Win/Tab").current_tab
 			w.el.get_node("Editor").exit()

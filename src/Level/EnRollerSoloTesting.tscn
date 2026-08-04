@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="10_2ruld"]
 [ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="11_jgdc5"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="11_ooi6d"]
+[ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="12_oatwy"]
 
 [node name="EnRollerSoloTesting" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
@@ -291,3 +292,8 @@ position = Vector2(3008, 1856)
 [node name="SpawnPoint" parent="." unique_id=1710023778 instance=ExtResource("11_ooi6d")]
 visibility_layer = 2
 position = Vector2(3063.6875, 2271.9321)
+
+[node name="TitlePreview" parent="." unique_id=2052223351 instance=ExtResource("12_oatwy")]
+visibility_layer = 2
+position = Vector2(2160, 2160)
+zoom = 2.0
