@@ -931,6 +931,11 @@ func get_cells_line_origins(start_pos, end_pos) -> Array:
 	#var end = get_cell(end_pos)
 	var cb = get_cells_box(start_pos, end_pos)
 	var sign = Vector2i(sign(end_pos.x - start_pos.x), sign(end_pos.y - start_pos.y))
+	if sign.x == 0:
+		# Preventing division by zero
+		sign.x = 1
+	if sign.y == 0:
+		sign.y = 1
 	var min = cb.position
 	var max = cb.position + cb.size
 	var d = cb.size
