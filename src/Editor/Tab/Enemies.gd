@@ -10,7 +10,9 @@ var active_enemy_path
 
 
 func setup_enemies():
-	editor.connect("tab_changed", Callable(self, "_on_tab_changed"))
+	for child in $VBox/Margin/Scroll/Buttons.get_children():
+		child.queue_free()
+
 	var index = 0
 	for e in find_enemy_scenes("res://src/Actor/Enemy/"):
 

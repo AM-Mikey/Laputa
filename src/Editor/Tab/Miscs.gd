@@ -20,7 +20,9 @@ var active_misc_path
 
 
 func setup_miscs():
-	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
+	for child in $VBox/Margin/Scroll/Buttons.get_children():
+		child.queue_free()
+
 	var index = 0
 	for m in MISC_SCENES:
 		var misc = load(m).instantiate()

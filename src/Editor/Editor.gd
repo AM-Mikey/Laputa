@@ -182,8 +182,6 @@ func setup_level_editor_layer(): #the layer for editor overlays that go over the
 	editor_layer.add_child(tile_map_cursor)
 
 
-
-
 func exit():
 	print("exit")
 	inspector.exit()
