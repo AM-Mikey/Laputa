@@ -79,8 +79,10 @@ func _ready():
 func enter(): #Call this every time the level is changed or reloaded
 	#print("enter")
 	setup_windows()
-	f.pc().disable()
-	f.hud().queue_free()
+	if f.pc():
+		f.pc().disable()
+	if f.hud():
+		f.hud().queue_free()
 	w.ui.visible = false
 	w.bl.visible = false
 	w.clear_spawn_layers()
@@ -198,10 +200,11 @@ func exit():
 	w.ui.visible = true
 	w.bl.visible = true
 	mc.display("arrow")
-	f.pc().enable()
-	f.pc().get_node("PlayerCamera").enabled = true
-	f.pc().get_node("PlayerCamera").make_current()
-	f.pc().get_node("PlayerCamera").reset()
+	if f.pc():
+		f.pc().enable()
+		f.pc().get_node("PlayerCamera").enabled = true
+		f.pc().get_node("PlayerCamera").make_current()
+		f.pc().get_node("PlayerCamera").reset()
 	#set_entities_pickable(false)
 	w.spawn_entities()
 	await w.finished_spawning
