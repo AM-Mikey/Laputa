@@ -113,12 +113,12 @@ collision_mask = 64
 input_pickable = false
 
 [node name="Left" type="CollisionShape2D" parent="BulletBlocker" unique_id=1573356133]
-position = Vector2(-3.5, -8)
+position = Vector2(-6.5, -8)
 shape = SubResource("10")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Right" type="CollisionShape2D" parent="BulletBlocker" unique_id=1078921533]
-position = Vector2(3.5, -8)
+position = Vector2(6.5, -8)
 shape = SubResource("10")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
@@ -150,20 +150,18 @@ position = Vector2(0, -16)
 texture = ExtResource("3")
 hframes = 4
 vframes = 2
-frame = 1
+frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=547631705]
 libraries/ = SubResource("AnimationLibrary_kfp7m")
 
 [node name="FloorDetectorL" type="RayCast2D" parent="." unique_id=999532932]
-visible = false
 position = Vector2(-7, -8)
 target_position = Vector2(0, 16)
 collision_mask = 520
 collide_with_areas = true
 
 [node name="FloorDetectorR" type="RayCast2D" parent="." unique_id=1892793878]
-visible = false
 position = Vector2(7, -8)
 target_position = Vector2(0, 16)
 collision_mask = 520

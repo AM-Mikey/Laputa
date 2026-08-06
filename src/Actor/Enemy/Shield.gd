@@ -4,7 +4,7 @@ const ICON = preload("res://assets/Actor/Enemy/ShieldIcon.png")
 
 const TX_0 = preload("res://assets/Actor/Enemy/Shield.png")
 
-@export var move_dir = Vector2.LEFT
+@export var move_dir = Vector2.LEFT: set = set_move_dir
 @export var wait_max_time = 5.0
 @export var walk_max_time = 10.0
 @export var defend_time = 0.4
@@ -50,7 +50,6 @@ func do_walk(_delta):
 
 
 func enter_wait(_last_state):
-	set_move_dir(move_dir)
 	rng.randomize()
 	$StateTimer.start(rng.randf_range(1.0, wait_max_time))
 	await $StateTimer.timeout
@@ -69,13 +68,19 @@ func set_move_dir(dir):
 	move_dir = dir
 	match move_dir:
 		Vector2.LEFT:
-			ap.play("WalkLeft")
+			if state == "Walk":
+				ap.play("WalkLeft")
+			elif state == "idle":
+				ap.play("IdleLeft")
 			$BulletBlocker/Left.set_deferred("disabled", false)
 			$BulletBlocker/Right.set_deferred("disabled", true)
 			$Hurtbox/Left.set_deferred("disabled", true)
 			$Hurtbox/Right.set_deferred("disabled", false)
 		Vector2.RIGHT:
-			ap.play("WalkRight")
+			if state == "Walk":
+				ap.play("WalkRight")
+			elif state == "idle":
+				ap.play("IdleRight")
 			$BulletBlocker/Left.set_deferred("disabled", true)
 			$BulletBlocker/Right.set_deferred("disabled", false)
 			$Hurtbox/Left.set_deferred("disabled", false)
