@@ -80,8 +80,10 @@ func _ready():
 func enter(): #Call this every time the level is changed or reloaded
 	#print("enter")
 	setup_windows()
-	f.pc().disable()
-	f.hud().queue_free()
+	if f.pc():
+		f.pc().disable()
+	if f.hud():
+		f.hud().queue_free()
 	w.ui.visible = false
 	w.bl.visible = false
 	w.clear_spawn_layers()
@@ -197,10 +199,11 @@ func exit():
 	w.ui.visible = true
 	w.bl.visible = true
 	mc.display("arrow")
-	f.pc().enable()
-	f.pc().get_node("PlayerCamera").enabled = true
-	f.pc().get_node("PlayerCamera").make_current()
-	f.pc().get_node("PlayerCamera").reset()
+	if f.pc():
+		f.pc().enable()
+		f.pc().get_node("PlayerCamera").enabled = true
+		f.pc().get_node("PlayerCamera").make_current()
+		f.pc().get_node("PlayerCamera").reset()
 	#set_entities_pickable(false)
 	w.spawn_entities()
 	await w.finished_spawning
@@ -880,6 +883,11 @@ func get_cells_line_origins(start_pos, end_pos) -> Array:
 	#var end = get_cell(end_pos)
 	var cb = get_cells_box(start_pos, end_pos)
 	var sign = Vector2i(sign(end_pos.x - start_pos.x), sign(end_pos.y - start_pos.y))
+	if sign.x == 0:
+		# Preventing division by zero
+		sign.x = 1
+	if sign.y == 0:
+		sign.y = 1
 	var min = cb.position
 	var max = cb.position + cb.size
 	var d = cb.size
