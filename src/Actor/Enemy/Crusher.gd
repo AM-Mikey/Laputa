@@ -296,7 +296,6 @@ func crush_check():
 func animate():
 	var anim_playback = $AnimationTree["parameters/playback"]
 	var move_angle = ($Standable.global_position - prev_global_position).angle()
-	print($Standable.global_position, prev_global_position)
 	if ($Standable.global_position - prev_global_position).length() <= 0.01:
 		anim_playback.travel("Neutral")
 	else:
