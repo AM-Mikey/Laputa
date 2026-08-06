@@ -8,11 +8,13 @@ enum LevelType {NORMAL, PLAYERLESS_CUTSCENE}
 @export var level_name: String
 @export var level_type: LevelType
 @export var music: String
+var ignore_music_for_title: bool = false
 @export_file("*.json") var dialog_json: String
 var conversation_on_enter: String
 @export_file("*.json") var mission_level_update: String
 @export var debug_main_mission_stage_name: String
 @export var side_missions_on_enter: Array[String]
+@export var debug_guns_on_enter: Array[String] = []
 
 var time_created: Dictionary
 
@@ -29,14 +31,15 @@ func _ready():
 		i.fix_invalid_tiles()
 	merge_one_way_ssp_tile()
 
-	if not am.music_queue.is_empty():
-		am.fade_music()
-		await am.music_fadeout_finished
-	if not w.has_node("UILayer/TitleScreen"):
-		if music == "":
-			pass
-		else:
-			am.play_music(music)
+	if !ignore_music_for_title:
+		if not am.music_queue.is_empty():
+			am.fade_music()
+			await am.music_fadeout_finished
+		if not w.has_node("UILayer/Title"):
+			if music == "":
+				pass
+			else:
+				am.play_music(music)
 
 func merge_one_way_ssp_tile():
 	for child in $Triggers.get_children():
@@ -134,18 +137,39 @@ func do_conversation_on_enter(_hide_player = false): #TODO: implement the player
 
 
 func setup_kill_box():
-	var kill_box = KILL_BOX.instantiate()
 	var ll = get_node("LevelLimiter")
 	var forgiveness_bottom = 64
 	var forgiveness_top = 64
 	var forgiveness_side = 64
-	kill_box.global_position = Vector2(ll.global_position.x - forgiveness_side, ll.global_position.y - forgiveness_top)
+	var box_thickness = 5.0
+	var level_rect = ll.get_level_rect()
 
-	var shape = RectangleShape2D.new()
-	shape.size = Vector2(ll.size.x + (forgiveness_side * 2.0), ll.size.y + forgiveness_top + forgiveness_bottom)
-	kill_box.get_node("CollisionShape2D").shape = shape
-	kill_box.get_node("CollisionShape2D").position = shape.size / 2.0
-	$Triggers.add_child(kill_box)
+	for dir in [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]:
+		var kill_box = KILL_BOX.instantiate()
+		var kill_box_shape = RectangleShape2D.new() # For some reason, using WorldBoundary2D will just instantly kill the player
+
+		kill_box.name = "KillBoundary"
+		var forgiveness = 0
+		match dir:
+			Vector2.UP:
+				kill_box_shape.size = Vector2(level_rect.size.x + (forgiveness_side + box_thickness) * 2.0, box_thickness)
+				kill_box.name += "U"
+				forgiveness = forgiveness_top
+			Vector2.DOWN:
+				kill_box_shape.size = Vector2(level_rect.size.x + (forgiveness_side + box_thickness) * 2.0, box_thickness)
+				kill_box.name += "D"
+				forgiveness = forgiveness_bottom
+			Vector2.LEFT:
+				kill_box_shape.size = Vector2(box_thickness, level_rect.size.y + forgiveness_top + forgiveness_bottom + box_thickness * 2.0)
+				kill_box.name += "L"
+				forgiveness = forgiveness_side
+			Vector2.RIGHT:
+				kill_box_shape.size = Vector2(box_thickness, level_rect.size.y + forgiveness_top + forgiveness_bottom + box_thickness * 2.0)
+				kill_box.name += "R"
+				forgiveness = forgiveness_side
+		kill_box.global_position = level_rect.get_center() + level_rect.size / 2.0 * dir + (forgiveness + box_thickness / 2.0) * dir
+		kill_box.get_node("CollisionShape2D").shape = kill_box_shape
+		$Triggers.add_child(kill_box)
 
 func exit_level():
 	queue_free()

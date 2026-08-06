@@ -229,7 +229,7 @@ func read_dialog_data_from_temp(current_level):
 	var current_level_data = scoped_data["dialog_data"][current_level.level_name]
 	for id in current_level_data:
 		for npc in get_tree().get_nodes_in_group("NPCs"):
-			if npc.id == id:
+			if npc.id.nocasecmp_to(id) == 0:
 				npc.conversation_queue = current_level_data[id][0]
 				npc.side_conversation_queue = current_level_data[id][1]
 	print("dialog data loaded from temp")
@@ -243,7 +243,7 @@ func read_dialog_data_from_save(current_level):
 	var current_level_data = scoped_data["dialog_data"][current_level.level_name]
 	for id in current_level_data:
 		for npc in get_tree().get_nodes_in_group("NPCs"):
-			if npc.id == id:
+			if npc.id.nocasecmp_to(id) == 0:
 				npc.conversation_queue = current_level_data[id][0]
 				npc.side_conversation_queue = current_level_data[id][1]
 	print("dialog data loaded from save")
@@ -280,6 +280,12 @@ func check_dat_file_presence(filename:String) -> void:
 	else:
 		DirAccess.copy_absolute(defaultfile_path,userfile_path)
 
+#checks if there is a save file
+func has_save_file() -> bool:
+	if FileAccess.file_exists("user://save.dat"):
+			return true
+	else:
+		return false
 
 func set_props_spent(limited_props):
 	await get_tree().create_timer(0.01, true, false).timeout #wait for props to spawn #TODO: check if these flags are correct

@@ -38,5 +38,5 @@ func on_pressed():
 
 func _input_event(_viewport, event, _shape_idx): #selecting in editor
 	var editor = w.get_node("EditorLayer/Editor")
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
+	if event.is_action_pressed("editor_rmb"):
 		editor.inspector.on_selected(self, "waypoint_local")

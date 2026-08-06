@@ -18,3 +18,5 @@ shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=3021499]
 centered = false
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

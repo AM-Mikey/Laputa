@@ -100,5 +100,5 @@ func _input_event(_viewport, event, _shape_idx):
 	var editor = w.get_node_or_null("EditorLayer/Editor")
 	if (!editor): return
 	if !movement_locked:
-		if event is InputEventMouseButton and event.is_action_pressed("editor_rmb"):
+		if event.is_action_pressed("editor_rmb"):
 			editor.inspector.on_selected(self, "vu_vector")

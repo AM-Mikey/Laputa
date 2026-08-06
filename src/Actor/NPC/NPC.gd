@@ -29,6 +29,8 @@ var side_conversation_queue: Array #[[conversation_name, main_or_side, is_forced
 var next_conversation_queue_name: String
 var next_conversation_index: int
 @export var voiced = true
+@export var voice_sfx : String = "npc_voice_normal"
+@export var voice_delay: float = 0.03
 @export var id: String
 
 
@@ -235,8 +237,12 @@ func _input(event):
 			return
 
 
-func look_at_node(node):
-	var look_dir = sign(node.global_position.x - global_position.x)
+func look_at_node(node, inverted = false):
+	var look_dir: float
+	if !inverted:
+		look_dir = sign(node.global_position.x - global_position.x)
+	else:
+		look_dir = sign(global_position.x - node.global_position.x)
 	$Sprite2D.flip_h = look_dir == 1
 
 
@@ -261,7 +267,7 @@ func calc_velocity(do_gravity = true) -> Vector2:
 
 func find_waypoints():
 	for wp in get_tree().get_nodes_in_group("WaypointGlobals"):
-		if wp.owner_id.to_lower() == id.to_lower():
+		if wp.owner_id.nocasecmp_to(id) == 0:
 			waypoints[w.index] = wp
 	if not waypoints.is_empty():
 		set_target(waypoints[0])

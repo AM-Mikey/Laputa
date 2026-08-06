@@ -64,14 +64,15 @@ func _ready():
 		pc.money_updated.connect(_on_money_updated)
 		pc.invincibility_end.connect(_on_invincibility_ended)
 		pc.setup_hud()
-		setup_bars(pc.hp, pc.max_hp, pc.guns.get_child(0).xp, pc.guns.get_child(0).max_xp)
+		if pc.guns.get_child_count() > 0:
+			setup_bars(pc.hp, pc.max_hp, pc.guns.get_child(0).xp, pc.guns.get_child(0).max_xp)
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 
 func _process(_delta):
 	if f.pc():
 		var pc = f.pc()
-		if pc.guns.get_child(0) != null: #TODO: make this connected via signal
+		if pc.guns.get_children().size() != 0:
 			cd_progress.visible = true
 			cd_progress.value = 100 - ((pc.get_node("GunManager/CooldownTimer").time_left / pc.guns.get_child(0).cooldown_time) * 100)
 		else: cd_progress.visible = false
@@ -88,10 +89,14 @@ func _on_guns_updated(guns, cause = "default", do_xp_flash = false):
 	elif cause == "shift_right":
 		display_weapon_wheel(guns, "CW")
 		ammo_animate("reload", 5.0)
+	elif cause == "set":
+		display_weapon_wheel(guns, "CCW_Full")
+		ammo_animate("reload", 5.0)
 
-	if (cause not in ["fire", "get_ammo"]):
-		var g: Gun = guns[0]
-		_on_xp_updated(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash, cause)
+	if !cause in ["fire", "get_ammo"]:
+		if guns != []:
+			var g: Gun = guns[0]
+			_on_xp_updated(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash, cause)
 
 	#for g in guns:
 		#if guns.find(g) == 0: #main gun
@@ -140,6 +145,18 @@ func display_weapon_wheel(guns, rot_dir: String):
 				if guns[-1]:
 					weapon_wheel.get_node("Bullet6/Gun").texture = guns[-1].icon_small_texture
 		"CCW":
+				weapon_wheel_animator.play("CCW", -1, 4.0)
+				weapon_wheel.get_node("Bullet1/Gun").texture = guns[0].icon_texture
+				weapon_wheel.get_node("Bullet2/Gun").texture = guns[1].icon_small_texture
+				if guns.size() >= 3:
+					weapon_wheel.get_node("Bullet3/Gun").texture = guns[2].icon_small_texture
+				if guns.size() >= 4:
+					weapon_wheel.get_node("Bullet4/Gun").texture = guns[-3].icon_small_texture
+				if guns[-2]:
+					weapon_wheel.get_node("Bullet5/Gun").texture = guns[-2].icon_small_texture
+				if guns[-1]:
+					weapon_wheel.get_node("Bullet6/Gun").texture = guns[-1].icon_small_texture
+		"CCW_Full": #TODO: change this animation to a full rotation to a different gun
 				weapon_wheel_animator.play("CCW", -1, 4.0)
 				weapon_wheel.get_node("Bullet1/Gun").texture = guns[0].icon_texture
 				weapon_wheel.get_node("Bullet2/Gun").texture = guns[1].icon_small_texture

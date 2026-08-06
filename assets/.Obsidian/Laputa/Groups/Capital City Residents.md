@@ -10,4 +10,10 @@ Business Pig
 
 	Dress Cat
 	Famous Singer Fox
+Archilles Argyle
+	Racist goat who wants ethnostate.
+	
+	Terrible person 
+	Talks too much if given attention
+	 Very weird fetishes
 

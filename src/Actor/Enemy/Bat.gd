@@ -38,7 +38,7 @@ func setup(): #Reminder: no function called can use await
 
 func find_waypoints():
 	for wp in get_tree().get_nodes_in_group("WaypointGlobals"):
-		if wp.owner_id == id and wp.index != -1: #dont include the aggro waypoint
+		if wp.owner_id.nocasecmp_to(id) == 0 and wp.index != -1: #dont include the aggro waypoint
 			waypoints[wp.index] = wp
 	if not waypoints.is_empty():
 		set_target(start_waypoint)

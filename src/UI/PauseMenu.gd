@@ -3,7 +3,7 @@ extends Control
 const KEY_GUIDE = preload("res://src/UI/KeyGuide.tscn")
 const LEVEL_SELECT = preload("res://src/UI/LevelSelect/LevelSelect.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
-const TITLE = preload("res://src/UI/TitleScreen.tscn")
+const TITLE = preload("res://src/UI//Title/Title.tscn")
 
 @onready var w = get_tree().get_root().get_node("World")
 
@@ -59,7 +59,7 @@ func _on_Level_pressed():
 
 func _on_Quit_pressed():
 	var title = TITLE.instantiate()
-	if not w.ml.has_node("TitleScreen"):
+	if not w.ml.has_node("Title"):
 		w.ml.add_child(title)
 	queue_free()
 

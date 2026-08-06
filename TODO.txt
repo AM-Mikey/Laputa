@@ -588,15 +588,9 @@ WATER TODO:
 -editor now takes longer to open/close
 
 
-
-
 -beetle rotation fix
 
-
-create new visualutility for actor model
-
 turn off debuglayer visible when in editor
-
 
 
 6/25/26
@@ -604,10 +598,6 @@ turn off debuglayer visible when in editor
 
 6/29/26
 -rng vars preset up in classes are not truely random, as if they are time based, their rng.randomize calls will be synced
-
-FANTODO:
-	remote switch activation (shooting switch or standing or activating)
-	
 	
 Lever TODO:
 	levers and puzzle elements do not save their state. recreating an exact state would be too complicated/prevent resetting the puzzle
@@ -629,15 +619,32 @@ Lever TODO:
 
 
 General TODO: change liscence when possible
-	weapon change 1-6 hotkeys
+	weapon holding/swapping menu & prop
 
 Title TODO:
 	reorganize title with toastie
-	title logo re-add
 	title background testing, make sure nothing weird happens
-	render a preview using title preview and title camera for level select
 
 Item Menu TODO:
 
 
-Mission TODO:
+features:
+npc talk speed
+npc talk voice
+
+
+last worked on: 7/30/26
+Options line 377, we need to have selecting never mind exit the text
+	in addition, the bug where our matching topic doesnt seem to be recognized
+	possibly doesnt switch to the right box. even tho it says displaying options in print
+	
+	
+	
+	
+	check signs and flavor text
+	add npc voices
+	add npc voice speeds
+	
+
+TODO 8/5/26
+waypointlocal color change on select?

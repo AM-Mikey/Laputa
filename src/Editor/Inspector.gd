@@ -5,6 +5,7 @@ const LAYER_BUTTON = preload("res://src/Editor/Button/LayerButton.tscn")
 const SAVE_BUTTON = preload("res://src/Editor/Button/SaveButton.tscn")
 const EXPORT = PropertyUsageFlags.PROPERTY_USAGE_SCRIPT_VARIABLE + PropertyUsageFlags.PROPERTY_USAGE_STORAGE + PropertyUsageFlags.PROPERTY_USAGE_EDITOR
 
+@onready var w = get_tree().get_root().get_node("World")
 @onready var editor = get_parent().get_parent().get_parent()
 
 var active = null
@@ -21,9 +22,9 @@ func exit():
 
 ### SELECTING
 
-func on_selected(selection, selection_type):
-	#print(selection, selection_type)
+func on_selected(selection, selection_type, from_set = false):
 	if selection.is_in_group("Previews"): return
+	#if active == selection: return #don't reselect
 
 	if active: #deselect old
 		if active.has_method("on_editor_deselect"): active.on_editor_deselect()
@@ -35,6 +36,19 @@ func on_selected(selection, selection_type):
 	if active: #select new
 		if active.has_method("on_editor_select"): active.on_editor_select()
 	display_data()
+	if !from_set:
+		_do_editor_grab()
+
+
+func _do_editor_grab():
+	var mouse_pos = w.get_global_mouse_position()
+	#var grid_pos = editor.get_cell(mouse_pos)
+	if active_type in ["background", "tile_map", "trigger_spawn", "vu_rect", "level"]: return
+	editor.pre_grab_tool = editor.active_tool
+	editor.pre_grab_subtool = editor.subtool
+	editor.set_tool("entity", "grab")
+	editor.grab_offset = active.global_position - mouse_pos
+
 
 
 func on_deselected():
@@ -48,7 +62,7 @@ func on_deselected():
 	active_property = ""
 	clear_data()
 	if editor.get_node("Main/Win/Tab").current_tab == 0: #tiles
-		on_selected(editor.w.current_level.get_node("TileMap").get_node("Front"), "tile_map")
+		on_selected(w.current_level.get_node("TileMap").get_node("Front"), "tile_map")
 
 
 ### DISPLAY DATA
@@ -88,6 +102,8 @@ func display_data():
 			for p in active.properties:
 				if p == "dialog_json":
 					create_button("dialog_json", active.properties[p][0], "load")
+				if p in ["voiced", "voice_sfx", "voice_delay"]: #don't export these to editor as we read the base scene not the instance
+					pass
 				else:
 					var enum_string =  active.properties[p][2]
 					if enum_string != "":
@@ -134,7 +150,7 @@ func display_data():
 		"tile_map":
 			for layer_id in range(0, get_child_count()):
 				create_layer_button(layer_id)
-		"waypoint_local", "waypoint_global", "waypoint_global_spawn", "vu_vector", "vu_rect":
+		"title_preview", "waypoint_local", "waypoint_global", "waypoint_global_spawn", "vu_vector", "vu_rect":
 			create_properties_button(active.get_property_list())
 
 func get_property_type(type_flag, _is_load) -> String:
@@ -340,7 +356,7 @@ func on_target_saved(save_target):
 func _on_SaveDialog_file_selected(path: String):
 	if path.begins_with("res://src/Background/"):
 		var new = Background.new()
-		var ll = editor.w.current_level.get_node("LevelLimiter")
+		var ll = w.current_level.get_node("LevelLimiter")
 		new.texture = ll.texture
 		new.layers = ll.layers
 		new.layer_scales = ll.layer_scales

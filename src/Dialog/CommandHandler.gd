@@ -8,7 +8,7 @@ const INVENTORY_ICON = preload("res://src/UI/Inventory/InventoryIcon.tscn")
 
 
 
-func parse_command(string):
+func parse_command(string, command_is_first):
 	var command = string.split(",", true, 1)
 	print("command: ", string)
 
@@ -20,11 +20,11 @@ func parse_command(string):
 	#print("function: ", function)
 	#print("argument: ", argument)
 
-	match await function: #TODO: probably slow, replace this with something else
+	match await function:
 		#/face, (sprite_name)
 		#changes face_sprite to the specified file
 		"face":
-			face(argument)
+			await face(argument, command_is_first)
 		#/flipface, (string: direction)
 		#flips the face sprite, to the opposite direction, or in a specified direction
 		"flipface":
@@ -38,36 +38,58 @@ func parse_command(string):
 		"hidename":
 			db.hide_name()
 		"hideface":
-			hide_face()
 			db.hide_name()
+			await hide_face()
 		"newchar": #/newchar, (face), (name)
 			var a = string.split(",")
-			db.dl.text = ""
-			face(a[1].to_lower())
+			face(a[1].to_lower(), command_is_first)
 			db.display_name(a[2].to_lower())
+			var npc_path = "res://src/Actor/NPC/%s.tscn" % a[1].capitalize()
+			if ResourceLoader.exists(npc_path):
+				var npc = load(npc_path).instantiate()
+				voice(str(npc.voice_delay) + "," + str(npc.voiced) + "," + str(npc.voice_sfx))
+				npc.free()
 		"hide":#				/hide, (string: npc_id)									makes the npc with given id invisible
 			set_visible(argument, false)
 		"unhide":
 			set_visible(argument, true)
+		"voice":
+			voice(argument)
+		"uvoice":
+			voice([db.print_delay, db.do_print_sfx, db.print_sfx])
 
 		"waypoint":#			/waypoint, (string: npc_id), (int: waypoint_index)
 			waypoint(argument)
-		"impactline": #adds a center line for impact
-			db.dl.text += "\n"
-			#dl.horizontal_alignment = 1 #center
+		"impactline": #adds a center line for impact #TODO: add clear command afterwards, while keeping the character_shown proper
+			db.clear_text()
+			db.dl.text = db.dl.text.insert(db.get_raw_index(), "\n")
+			db.character_shown_count += 1
+
 		"b":
-			db.dl.text += " [b]"
+			db.dl.text = db.dl.text.insert(db.get_raw_index(), "[b]")
+			db.character_is_bbcode_count += 3
 		"ub": #doesnt work at end of line
-			db.dl.text += "[/b] "
+			db.dl.text = db.dl.text.insert(db.get_raw_index(), "[/b]")
+			db.character_is_bbcode_count += 4
 		"knockpc":
 			var a = string.split(",")
-			db.dl.text = ""
 			match a[1]:
 				"left": pc.mm.knockback_direction = Vector2.LEFT
 				"right": pc.mm.knockback_direction = Vector2.RIGHT
+				_: #find an npc with that name
+					var found_npcs = []
+					for n in get_tree().get_nodes_in_group("NPCs"):
+						if n.id.nocasecmp_to(a[1]) == 0:
+							found_npcs.append(n)
+					if found_npcs.is_empty():
+						printerr("COMMAND ERROR: could not find NPC with id: " + a[1])
+						return
+					var x_dir = sign(pc.global_position.x - found_npcs[0].global_position.x)
+					pc.mm.knockback_direction = Vector2(x_dir, 0)
 			pc.mm.knockback_speed = Vector2(25, 40)
 			pc.mm.snap_vector = Vector2.ZERO
 			pc.mm.change_state("knockback")
+
 
 		#"walk":#				/walk, (string: npc_id), (int: distance)				makes an npc walk a certain distance from their current pos
 			#walk(argument)#																with negative being left and positive being right
@@ -84,7 +106,8 @@ func parse_command(string):
 		"topics":
 			topics(argument)
 		"t":
-			db.dl.text += " [b][color=#f3b131]" #bright gold
+			db.dl.text = db.dl.text.insert(db.get_raw_index(), "[b][color=#f3b131]") #bright gold
+			db.character_is_bbcode_count += 18
 			var already_has_topic = false
 			for t in pc.topic_array:
 				if argument.to_pascal_case() == t.resource_path.get_file().trim_suffix(".tres"):
@@ -96,7 +119,9 @@ func parse_command(string):
 				inventory_icon.type = "Book"
 				w.ui.add_child(inventory_icon)
 		"ut":
-			db.dl.text += "[/color][/b] "
+			db.dl.text = db.dl.text.insert(db.get_raw_index(), "[/color][/b]")
+			db.character_is_bbcode_count += 12
+			#db.dl.text += "[/color][/b] "
 
 		### Missions
 		"progress_main_mission": #/progress_main_mission
@@ -123,7 +148,7 @@ func parse_command(string):
 		#"unfocus":#																		returns camera focus to the pc
 			#unfocus()
 
-		"lookat":#					/lookat, (string: npc_id), (string: target_npc_id) or ("player" or "pc")
+		"lookat":#					/lookat, (string: npc_id), (string: target_npc_id) or ("player" or "pc") or ("notpc" or "notplayer")
 			lookat(argument)
 		"left":#					/left, (string: npc_id)								faces an npc left
 			flip("left", argument)
@@ -131,7 +156,7 @@ func parse_command(string):
 			flip("right", argument)
 
 		"clear":#																		clears the text		(use at start of text)
-			db.dl.text = ""
+			db.clear_text()
 		"wait":#					/wait, (float: duration = 1.0)						clears text and hides db until duration
 			await wait(argument)
 		"auto":#																		blocks input and automatically progresses text
@@ -140,9 +165,6 @@ func parse_command(string):
 				db.do_delay = true
 			else:
 				db.auto_input = false
-		"skipinput":#																		automatically progresses the next line
-			pass
-			#skipinput()
 
 		### Camera Control
 		"cam":
@@ -151,27 +173,25 @@ func parse_command(string):
 			inp.can_act = false
 			match a[1]:
 				"to_pos":
-					camera.control_add(["to_position", float(a[2]), float(a[3]), float(a[4])])
+					camera.control_add(["to_pos", float(a[2]), float(a[3]), float(a[4])])
 				"to_player":
 					camera.control_add(["to_player", float(a[2])])
 				"to_waypoint":
 					camera.control_add(["to_waypoint", int(a[2]), float(a[3])])
 				"wait":
-					camera.control_add(["wait", float(a[1])])
+					camera.control_add(["wait", float(a[2])])
+					db.busy = true
 				"hold":
 					camera.control_add(["hold"])
 				"reset":
 					camera.control_add(["reset"])
 
 
-
-
 ### COMMANDS ###
 
-func face(string):
+func face(string, command_is_first):
 	var face_node = db.get_node("Face")
 	var face_sprite = face_node.get_node("Sprite2D")
-
 	if string == "":
 		printerr("COMMAND ERROR: no npc given for /face")
 		return
@@ -182,12 +202,20 @@ func face(string):
 		expression = int(n_face[1])
 
 	face_node.visible = true
-
 	face_sprite.texture = load("res://assets/Face/%s.png" % id.capitalize())
 	face_sprite.hframes = face_sprite.texture.get_width() / 48
 	face_sprite.frame = expression
+	if !command_is_first: #run the full version if it's not the first command
+		var change_was_needed = db.change_background(db.get_node("NPC"))
+		db.dl.text = ""
+		db.dl = db.get_node("NPC/DialogNPC")
+		db.clear_text()
+		if !change_was_needed:
+			#db.dl.scroll_to_line(db.dl.get_character_line(db.current_character_index) + 1)
+			db.get_node("AnimationPlayer").play("FaceEnter") #either play FlatToNPC or FaceIn, not both
+		await db.get_node("AnimationPlayer").animation_finished
 
-	db.get_node("AnimationPlayer").play("FaceEnter")
+
 
 
 func flip_face(arguement):
@@ -197,14 +225,11 @@ func flip_face(arguement):
 		db.flip_face(arguement)
 
 func hide_face():
-	#db.get_node("NPC").visible = false
-	#db.get_node("Flat").visible = true
-	#db.get_node("Face").visible = false
-	db.get_node("AnimationPlayer").play("NPCToFlat")
-	db.size = Vector2(384, 78)
-	db._resolution_scale_changed() #to update after size
+	db.change_background(db.get_node("Flat"))
 	db.dl = db.get_node("Flat/DialogFlat")
-	db.dl.text = ""
+	db.clear_text()
+	await db.get_node("AnimationPlayer").animation_finished
+
 
 func set_visible(string, visible):
 	if string == "":
@@ -212,8 +237,18 @@ func set_visible(string, visible):
 		return
 	var id = string.to_lower()
 	for n in get_tree().get_nodes_in_group("NPCs"):
-		if n.id == id:
+		if n.id.nocasecmp_to(id) == 0:
 			n.visible = visible
+
+func voice(string):
+	var a = string.split(",")
+	db.print_delay = float(a[0])
+	db.punctuation_delay = float(a[0]) * 10.0
+	match a[1]:
+		"true": db.do_print_sfx = true
+		"false": db.do_print_sfx = false
+	db.print_sfx = a[2]
+
 
 #func walk(string):
 	#db.busy = true
@@ -227,7 +262,7 @@ func set_visible(string, visible):
 		#return
 	#
 	#for n in get_tree().get_nodes_in_group("NPCs"):
-		#if n.id == id:
+		#if n.id.nocasecmp_to(id) == 0:
 			#n.target_pos = Vector2(n.global_position.x + (distance * 16), 0)
 			#print("npc target position: ", n.target_pos)
 			#
@@ -243,7 +278,7 @@ func waypoint(string):
 	var id = a[0]
 	var index = int(a[1])
 	for n in get_tree().get_nodes_in_group("NPCs"):
-		if n.id == id:
+		if n.id.nocasecmp_to(id) == 0:
 			n.walk_to_waypoint(index)
 
 
@@ -251,9 +286,9 @@ func focus(string):
 	if string == "":
 		printerr("COMMAND ERROR: no npc given for /focus")
 		return
-	var id = string.to_lower()
+	var id = string
 	for n in get_tree().get_nodes_in_group("NPCs"):
-		if n.id == id:
+		if n.id.nocasecmp_to(id) == 0:
 			pc.get_node("PlayerCamera").global_position = n.global_position
 
 
@@ -262,10 +297,10 @@ func unfocus():
 
 
 func flip(direction, string):
-	var id = string.to_lower()
+	var id = string
 	var found_npcs = 0
 	for n in get_tree().get_nodes_in_group("NPCs"):
-		if n.id == id:
+		if n.id.nocasecmp_to(id) == 0:
 			found_npcs += 1
 			n.get_node("Sprite2D").flip_h = direction == "right"
 	if found_npcs == 0:
@@ -274,30 +309,34 @@ func flip(direction, string):
 
 func lookat(string): #TODO: enable multiple lookers
 	var a = string.split(",")
-	var npc_id = a[0].to_lower()
-	var target_id = a[1].to_lower()
+	var npc_id = a[0]
+	var target_id = a[1]
 
 	var found_npcs = []
 	for n in get_tree().get_nodes_in_group("NPCs"):
-		if n.id == npc_id:
+		if n.id.nocasecmp_to(npc_id) == 0:
 			found_npcs.append(n)
 	if found_npcs.is_empty():
 		printerr("COMMAND ERROR: could not find NPC with id: " + npc_id)
 		return
 
 	var found_target = Node
-	if target_id == "player" or target_id == "pc":
+	var inverted = false
+	if target_id in ["pc", "player"]:
 		found_target = pc
+	elif target_id in ["not_pc", "not_player"]:
+		found_target = pc
+		inverted = true
 	else:
 		for n in get_tree().get_nodes_in_group("NPCs"):
-			if n.id == target_id:
+			if n.id.nocasecmp_to(target_id) == 0:
 				found_target = n
 		if found_target == null:
 			printerr("COMMAND ERROR: could not find NPC with id: " + target_id)
 			return
 
 	for n in found_npcs: #only looks at last n
-		n.look_at_node(found_target)
+		n.look_at_node(found_target, inverted)
 
 
 
@@ -308,24 +347,12 @@ func wait(string):
 	await get_tree().create_timer(wait_time, true, false).timeout #TODO: check if these flags are correct
 	db.busy = false
 
-#func skipinput():
-	#db.auto_input = true
-	#db.do_delay = true
-	#await get_tree().create_timer(0.1, true, false).timeout #TODO: check if these flags are correct
-	#db.auto_input = false
-
-
-
 ### BRANCHING ###
 
 func yes_no():
 	db.get_node("Options").options = ["Yes", "No"]
-	db.get_node("Options").display_options()
-	db.dl = db.get_node("Response/DialogResponse")
-	db.dl.text = ""
-	print("cleared text + set db")
-	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
-	db.get_node("Options").exit_action = "options"
+	show_response_options("options")
+
 
 func options(string):
 	var a = string.split(",")
@@ -334,36 +361,53 @@ func options(string):
 		var capitalized = s.capitalize()
 		capitalized_array.append(capitalized)
 	db.get_node("Options").options = capitalized_array
-	db.get_node("Options").display_options()
-	db.dl = db.get_node("Response/DialogResponse")
-	db.dl.text = ""
-	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
-	db.get_node("Options").exit_action = "options"
+	show_response_options("options")
+
 
 func topics(argument):
 	var npc_topics = argument.split(",")
+
 	var cap_pc_topics = []
-	for topic in pc.topic_array:
-		cap_pc_topics.append(topic.capitalize())
+	for pc_topic in pc.topic_array:
+		cap_pc_topics.append(pc_topic.topic_name)
+
 	var cap_npc_topics = []
-	for topic in npc_topics:
-		cap_npc_topics.append(topic.capitalize())
+	for npc_topic_name in npc_topics:
+		cap_npc_topics.append(npc_topic_name.capitalize())
+
 	var final_topics = []
 	var final_ids = []
 	for npc_topic in cap_npc_topics:
 		for pc_topic in cap_pc_topics:
 			if npc_topic == pc_topic:
 				final_topics.append(npc_topic)
-	for topic in final_topics:
-		final_ids.append(cap_npc_topics.find(topic))
+	if final_topics.size() == 0:
+		printerr("ERROR: NO TOPICS FOR /TOPICS")
+	else:
+		for topic in final_topics:
+			final_ids.append(cap_npc_topics.find(topic))
 
-	db.get_node("Options").options = final_topics
-	db.get_node("Options").ids = final_ids
-	db.get_node("Options").display_options()
+		db.get_node("Options").options = final_topics
+		db.get_node("Options").ids = final_ids
+		show_response_options("topics", true) #true = offer a "Never Mind" bail-out option
+
+
+#shared by yn/options/topics: swaps the dialog box over to the Response box and shows the option list, without letting /db,/m etc. leak into the prompt text or desync visible_characters
+func show_response_options(action: String, add_never_mind := false):
+	var options_node = db.get_node("Options")
+	if add_never_mind:
+		options_node.options.append("Never Mind")
+	options_node.display_options()
+
+	var from_step = db.step - 1
+	var new_text = db.get_text_stripped_of_commands(from_step, true)
+	var new_visible_characters = db.get_prompt_visible_characters(from_step)
+
+	db.change_background(db.get_node("Response"))
 	db.dl = db.get_node("Response/DialogResponse")
-	db.dl.text = ""
-	#if db.current_text_array[db.step + 3].begins_with("/db"): #if we see a /db ahead
-	db.get_node("Options").exit_action = "topics"
+	db.dl.text = new_text
+	db.dl.visible_characters = new_visible_characters
+	options_node.exit_action = action
 
 
 func on_select_branch(branch):
@@ -386,15 +430,19 @@ func end_branch():
 	#db.flash_original_text = db.dl.text
 	#db.get_node("FlashTimer").start(0.1)
 
-func seek(string, do_nl = false):
+func seek(string):
 	print("seeking: ", string)
-	#print(db.current_text_array)
 	var found = false
 	for i in db.current_text_array:
 		if i == string:
 			found = true
-			print(db.current_text_array.find(i))
-			db.step = db.current_text_array.find(i) #to skip the null /db command
-			db.progress_text(do_nl)
+			db.step = db.current_text_array.find(i)
+			db.dl.text = db.get_branch_text(db.step + 1)
+			db.character_shown_count = 0
+			db.character_is_newline_count = 0
+			db.character_is_bbcode_count = 0
+			db.dl.visible_characters = 2 #since progress_text(): db.dl.visible_characters -= 2
+			db.flash_original_text = db.dl.text
+			db.progress_text()
 	if !found:
 		printerr("ERROR: Branch " + string + " Not Found")

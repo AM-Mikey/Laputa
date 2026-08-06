@@ -3,25 +3,26 @@
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="1_4uhn8"]
 [ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="2_s4ctt"]
 [ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_abgb0"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_lw0ap"]
 [ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_wcveo"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="5_sjslv"]
 [ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="5_v7nqo"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="6_dcw0l"]
 [ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="7_mlr58"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_v7nqo"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_wcveo"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="10_hahi5"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_hahi5"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="10_tk244"]
 [ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="11_ug36o"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="12_tk244"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="14_k26mr"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="12_k26mr"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="14_7v6gq"]
+[ext_resource type="PackedScene" path="res://src/Editor/TitlePreview.tscn" id="14_iuj41"]
 [ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="15_7v6gq"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="15_tk244"]
 [ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="16_ah4rl"]
 [ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="17_rnumf"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="18_r87vw"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="20_bq2j0"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="22_e6srf"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="18_rnumf"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="20_r87vw"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="22_bq2j0"]
 
 [node name="DefaultGodot4" type="Node2D" unique_id=1165197377]
 visibility_layer = 2
@@ -37,7 +38,7 @@ offset_top = 1744.0
 offset_right = 2976.0
 offset_bottom = 2288.0
 mouse_filter = 2
-script = ExtResource("3_lw0ap")
+script = ExtResource("3_wcveo")
 background_resource = ExtResource("3_abgb0")
 texture = ExtResource("5_v7nqo")
 layers = 5
@@ -109,7 +110,7 @@ z_index = 999
 position = Vector2(2216, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_wcveo")
+script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -129,7 +130,7 @@ z_index = 999
 position = Vector2(2248, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_wcveo")
+script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -149,7 +150,7 @@ z_index = 999
 position = Vector2(2184, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_wcveo")
+script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -169,7 +170,7 @@ z_index = 999
 position = Vector2(1864, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_wcveo")
+script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -188,7 +189,7 @@ z_index = 999
 position = Vector2(2168, 1928)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_wcveo")
+script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -208,7 +209,7 @@ z_index = 999
 position = Vector2(2048, 1928)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_wcveo")
+script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Climber.tscn"
 properties = {
 "arm_angle_speed": [0.01, 3, ""],
@@ -236,7 +237,7 @@ offset_top = 1728.0
 offset_right = 1792.0
 offset_bottom = 1744.0
 mouse_filter = 2
-script = ExtResource("10_hahi5")
+script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -258,7 +259,7 @@ offset_top = 1840.0
 offset_right = 1632.0
 offset_bottom = 2032.0
 mouse_filter = 2
-script = ExtResource("10_hahi5")
+script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -280,7 +281,7 @@ offset_top = 2104.0
 offset_right = 1744.0
 offset_bottom = 2112.0
 mouse_filter = 2
-script = ExtResource("10_hahi5")
+script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Spikes.tscn"
 properties = {
 "color": [Color(1, 0, 0, 1), 20, ""],
@@ -299,7 +300,7 @@ offset_top = 2176.0
 offset_right = 1776.0
 offset_bottom = 2272.0
 mouse_filter = 2
-script = ExtResource("10_hahi5")
+script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20, ""],
@@ -319,7 +320,7 @@ offset_top = 2096.0
 offset_right = 2240.0
 offset_bottom = 2192.0
 mouse_filter = 2
-script = ExtResource("10_hahi5")
+script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Ladder.tscn"
 properties = {
 "color": [Color(1, 0.494118, 0, 1), 20, ""],
@@ -338,7 +339,7 @@ offset_top = 2088.0
 offset_right = 2192.0
 offset_bottom = 2096.0
 mouse_filter = 2
-script = ExtResource("10_hahi5")
+script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Spikes.tscn"
 properties = {
 "color": [Color(1, 0, 0, 1), 20, ""],
@@ -357,7 +358,7 @@ offset_top = 2080.0
 offset_right = 2000.0
 offset_bottom = 2096.0
 mouse_filter = 2
-script = ExtResource("10_hahi5")
+script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Sign.tscn"
 properties = {
 "color": [Color(0.901961, 0.74902, 0, 1), 20, ""],
@@ -379,7 +380,7 @@ offset_top = 2240.0
 offset_right = 1984.0
 offset_bottom = 2272.0
 mouse_filter = 2
-script = ExtResource("10_hahi5")
+script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -403,7 +404,7 @@ offset_top = 2240.0
 offset_right = 2048.0
 offset_bottom = 2272.0
 mouse_filter = 2
-script = ExtResource("10_hahi5")
+script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -427,7 +428,7 @@ offset_top = 2240.0
 offset_right = 2160.0
 offset_bottom = 2272.0
 mouse_filter = 2
-script = ExtResource("10_hahi5")
+script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -451,7 +452,7 @@ offset_top = 2080.0
 offset_right = 1952.0
 offset_bottom = 2096.0
 mouse_filter = 2
-script = ExtResource("10_hahi5")
+script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/FlavorText.tscn"
 properties = {
 "color": [Color(0.901961, 0.74902, 0, 1), 20, ""],
@@ -468,7 +469,7 @@ z_index = 999
 position = Vector2(1840, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_tk244")
+script = ExtResource("12_k26mr")
 prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -483,7 +484,7 @@ visibility_layer = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_k26mr")
+script = ExtResource("14_7v6gq")
 direction = Vector2(-4.371139e-08, 1)
 snap_degrees = 90.0
 movement_locked = true
@@ -495,7 +496,7 @@ z_index = 999
 position = Vector2(1872, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_tk244")
+script = ExtResource("12_k26mr")
 prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -510,7 +511,7 @@ visibility_layer = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_k26mr")
+script = ExtResource("14_7v6gq")
 direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
@@ -522,7 +523,7 @@ z_index = 999
 position = Vector2(2360, 2272)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_wcveo")
+script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/NPC/Basil.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -543,7 +544,7 @@ z_index = 999
 position = Vector2(2544, 2256)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_tk244")
+script = ExtResource("12_k26mr")
 prop_path = "res://src/Prop/AmmoRefill.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -558,7 +559,7 @@ z_index = 999
 position = Vector2(2480, 2224)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_tk244")
+script = ExtResource("12_k26mr")
 prop_path = "res://src/Prop/HealthRefill.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -576,7 +577,7 @@ offset_top = 2240.0
 offset_right = 2528.0
 offset_bottom = 2272.0
 mouse_filter = 2
-script = ExtResource("10_hahi5")
+script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -597,7 +598,7 @@ z_index = 999
 position = Vector2(2600, 2080)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_wcveo")
+script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -628,7 +629,7 @@ visibility_layer = 2
 position = Vector2(64, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_r87vw")
+script = ExtResource("18_rnumf")
 tag_name = "shoot_x"
 lock_y = true
 
@@ -638,18 +639,18 @@ visibility_layer = 2
 position = Vector2(0, -64)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_r87vw")
+script = ExtResource("18_rnumf")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Billy1" type="Area2D" parent="Spawns" unique_id=546465970 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Billy" type="Area2D" parent="Spawns" unique_id=546465970 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(2456, 1936)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_wcveo")
+script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -670,20 +671,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy1" unique_id=951928484 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+[node name="VURect" type="Node2D" parent="Spawns/Billy" unique_id=951928484 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
 visibility_layer = 2
 script = ExtResource("16_ah4rl")
 tag_name = "player_detector"
 value = Rect2(-128, -80, 256, 160)
 
-[node name="Billy2" type="Area2D" parent="Spawns" unique_id=1266214651 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Billy1" type="Area2D" parent="Spawns" unique_id=1266214651 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(2408, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_wcveo")
+script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -704,20 +705,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy2" unique_id=1859121448 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+[node name="VURect" type="Node2D" parent="Spawns/Billy1" unique_id=1859121448 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
 visibility_layer = 2
 script = ExtResource("16_ah4rl")
 tag_name = "player_detector"
 value = Rect2(-128, -80, 256, 160)
 
-[node name="Billy4" type="Area2D" parent="Spawns" unique_id=285981885 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Billy2" type="Area2D" parent="Spawns" unique_id=285981885 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 position = Vector2(2424, 2096)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_wcveo")
+script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -738,7 +739,7 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy4" unique_id=41270776 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+[node name="VURect" type="Node2D" parent="Spawns/Billy2" unique_id=41270776 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
 visibility_layer = 2
 script = ExtResource("16_ah4rl")
 tag_name = "player_detector"
@@ -751,7 +752,7 @@ z_index = 999
 position = Vector2(2648, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_wcveo")
+script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -782,7 +783,7 @@ visibility_layer = 2
 position = Vector2(64, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_r87vw")
+script = ExtResource("18_rnumf")
 tag_name = "shoot_x"
 lock_y = true
 
@@ -792,7 +793,7 @@ visibility_layer = 2
 position = Vector2(0, -64)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_r87vw")
+script = ExtResource("18_rnumf")
 tag_name = "shoot_y"
 lock_x = true
 
@@ -803,7 +804,7 @@ z_index = 999
 position = Vector2(2680, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_wcveo")
+script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -834,7 +835,7 @@ visibility_layer = 2
 position = Vector2(64, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_r87vw")
+script = ExtResource("18_rnumf")
 tag_name = "shoot_x"
 lock_y = true
 
@@ -844,7 +845,7 @@ visibility_layer = 2
 position = Vector2(0, -64)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_r87vw")
+script = ExtResource("18_rnumf")
 tag_name = "shoot_y"
 lock_x = true
 
@@ -855,7 +856,7 @@ z_index = 999
 position = Vector2(2712, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_wcveo")
+script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -887,7 +888,7 @@ visibility_layer = 2
 position = Vector2(64, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_r87vw")
+script = ExtResource("18_rnumf")
 tag_name = "shoot_x"
 lock_y = true
 
@@ -897,7 +898,7 @@ visibility_layer = 2
 position = Vector2(0, -64)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_r87vw")
+script = ExtResource("18_rnumf")
 tag_name = "shoot_y"
 lock_x = true
 
@@ -908,7 +909,7 @@ z_index = 999
 position = Vector2(2744, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_wcveo")
+script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -940,7 +941,7 @@ visibility_layer = 2
 position = Vector2(64, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_r87vw")
+script = ExtResource("18_rnumf")
 tag_name = "shoot_x"
 lock_y = true
 
@@ -951,7 +952,7 @@ visibility_layer = 2
 position = Vector2(0, -64)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_r87vw")
+script = ExtResource("18_rnumf")
 tag_name = "shoot_y"
 lock_x = true
 
@@ -962,7 +963,7 @@ z_index = 999
 position = Vector2(2776, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_wcveo")
+script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -994,7 +995,7 @@ visibility_layer = 2
 position = Vector2(64, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_r87vw")
+script = ExtResource("18_rnumf")
 tag_name = "shoot_x"
 lock_y = true
 
@@ -1005,7 +1006,7 @@ visibility_layer = 2
 position = Vector2(0, -64)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_r87vw")
+script = ExtResource("18_rnumf")
 tag_name = "shoot_y"
 lock_x = true
 
@@ -1018,13 +1019,22 @@ z_index = 999
 position = Vector2(2288, 1832)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("20_bq2j0")
+script = ExtResource("20_r87vw")
 
 [node name="SpawnPoint" type="Area2D" parent="." unique_id=1505342073 groups=["SpawnPoints"] instance=ExtResource("5_sjslv")]
 visibility_layer = 2
 position = Vector2(2536, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("22_e6srf")
+script = ExtResource("22_bq2j0")
+
+[node name="TitlePreview" type="Area2D" parent="." unique_id=2052223351 groups=["TitlePreviews"] instance=ExtResource("14_iuj41")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2496, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("20_r87vw")
+zoom = 2.0
 
 [connection signal="body_exited" from="Triggers/KillBox" to="Triggers/KillBox" method="_on_body_exited"]

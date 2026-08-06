@@ -15,10 +15,8 @@ var default_level = "res://src/Level/Default.tscn"
 
 
 func setup_levels():
-	editor.connect("tab_changed", Callable(self, "_on_tab_changed"))
-
-	for c in $VBox/Margin/Scroll/Buttons.get_children():
-		c.queue_free()
+	for child in $VBox/Margin/Scroll/Buttons.get_children():
+		child.queue_free()
 
 	var index = 0
 	for l in find_level_scenes("res://src/Level/"):
@@ -81,7 +79,7 @@ func save_level(level, path):
 func load_level(path):
 	if f.pc: f.pc().free()
 	if f.hud(): f.hud().free()
-	if w.ml.has_node("TitleScreen"): w.ml.get_node("TitleScreen").queue_free()
+	if w.ml.has_node("Title"): w.ml.get_node("Title").queue_free()
 	if w.ml.has_node("PauseMenu"): w.ml.get_node("PauseMenu").exit()
 	w.el.get_node("Editor").inspector.on_deselected()
 
@@ -145,10 +143,3 @@ func on_new_confirmed():
 	var path = $NewDiae_log.current_path.get_basename() + ".tscn"
 	save_level(level, path)
 	load_level(path)
-
-
-
-### SIGNALS ###
-
-func _on_tab_changed(_tab_name):
-	pass
