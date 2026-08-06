@@ -26,7 +26,7 @@ func setup(): #Reminder: no function called can use await
 
 func find_waypoints():
 	for wp in get_tree().get_nodes_in_group("WaypointGlobals"):
-		if wp.owner_id == id:
+		if wp.owner_id.nocasecmp_to(id) == 0:
 			waypoints[wp.index] = wp
 
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dip1p20ort6ga"
-path="res://.godot/imported/DialogFlatPanelAnimation.png-2509afa6ab8f173bb03b98b5832230fc.ctex"
+uid="uid://c7swp4yjswsx5"
+path="res://.godot/imported/FlatTrim.png-240d6c02d0a64aa9b32b12106ce41521.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Dialog/DialogFlatPanelAnimation.png"
-dest_files=["res://.godot/imported/DialogFlatPanelAnimation.png-2509afa6ab8f173bb03b98b5832230fc.ctex"]
+source_file="res://assets/Dialog/FlatTrim.png"
+dest_files=["res://.godot/imported/FlatTrim.png-240d6c02d0a64aa9b32b12106ce41521.ctex"]
 
 [params]
 
