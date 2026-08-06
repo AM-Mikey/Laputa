@@ -80,7 +80,7 @@ tile_set = ExtResource("5_5uu0q")
 visibility_layer = 2
 z_index = 2
 use_parent_material = true
-tile_map_data = PackedByteArray("AAAIAA4AAAAAAAwAAAAEAA4AAAAAAAwAAAAEAA8AAAAAAAwAAAAIAA8AAAAAAAwAAAAKAA8AAAAAAAwAAAAKAA4AAAAAAAwAAAAOAA4AAAAAAAwAAAAOAA8AAAAAAAwAAAAQAA8AAAAAAAwAAAAQAA4AAAAAAAwAAAAUAA4AAAAAAAwAAAAUAA8AAAAAAAwAAAAWAA8AAAAAAAwAAAAWAA4AAAAAAAwAAAAaAA4AAAAAAAwAAAAaAA8AAAAAAAwAAAAIAAwAAAAAAAwAAAAIAAsAAAAAAAwAAAAEAAsAAAAAAAwAAAAEAAwAAAAAAAwAAAAOAAsAAAAAAAwAAAAOAAwAAAAAAAwAAAAKAAwAAAAAAAwAAAAKAAsAAAAAAAwAAAAQAAwAAAAAAAwAAAAQAAsAAAAAAAwAAAAUAAwAAAAAAAwAAAAUAAsAAAAAAAwAAAAWAAwAAAAAAAwAAAAWAAsAAAAAAAwAAAAaAAwAAAAAAAwAAAAaAAsAAAAAAAwAAAAIAAkAAAAAAAwAAAAIAAgAAAAAAAwAAAAKAAkAAAAAAAwAAAAKAAgAAAAAAAwAAAAEAAkAAAAAAAwAAAAEAAgAAAAAAAwAAAAOAAkAAAAAAAwAAAAOAAgAAAAAAAwAAAAQAAkAAAAAAAwAAAAQAAgAAAAAAAwAAAAUAAkAAAAAAAwAAAAUAAgAAAAAAAwAAAAWAAkAAAAAAAwAAAAWAAgAAAAAAAwAAAAaAAkAAAAAAAwAAAAaAAgAAAAAAAwAAAAIAAYAAAAAAAwAAAAIAAUAAAAAAAwAAAAEAAYAAAAAAAwAAAAEAAUAAAAAAAwAAAAKAAYAAAAAAAwAAAAKAAUAAAAAAAwAAAAOAAYAAAAAAAwAAAAOAAUAAAAAAAwAAAAQAAYAAAAAAAwAAAAQAAUAAAAAAAwAAAAUAAYAAAAAAAwAAAAUAAUAAAAAAAwAAAAWAAYAAAAAAAwAAAAWAAUAAAAAAAwAAAAaAAYAAAAAAAwAAAAaAAUAAAAAAAwAAAAcAAUAAAAAAAwAAAAcAAYAAAAAAAwAAAAgAAUAAAAAAAwAAAAgAAYAAAAAAAwAAAAgAAgAAAAAAAwAAAAgAAkAAAAAAAwAAAAgAAsAAAAAAAwAAAAgAAwAAAAAAAwAAAAgAA4AAAAAAAwAAAAgAA8AAAAAAAwAAAAcAA4AAAAAAAwAAAAcAA8AAAAAAAwAAAAcAAsAAAAAAAwAAAAcAAwAAAAAAAwAAAAcAAgAAAAAAAwAAAAcAAkAAAAAAAwAAAA=")
+tile_map_data = PackedByteArray("AAAIAA4AAAAAAAwAAAAEAA4AAAAAAAwAAAAEAA8AAAAAAAwAAAAIAA8AAAAAAAwAAAAQAA8AAAAAAAwAAAAQAA4AAAAAAAwAAAAUAA4AAAAAAAwAAAAUAA8AAAAAAAwAAAAWAA8AAAAAAAwAAAAWAA4AAAAAAAwAAAAaAA4AAAAAAAwAAAAaAA8AAAAAAAwAAAAIAAwAAAAAAAwAAAAIAAsAAAAAAAwAAAAEAAsAAAAAAAwAAAAEAAwAAAAAAAwAAAAQAAwAAAAAAAwAAAAQAAsAAAAAAAwAAAAUAAwAAAAAAAwAAAAUAAsAAAAAAAwAAAAWAAwAAAAAAAwAAAAWAAsAAAAAAAwAAAAaAAwAAAAAAAwAAAAaAAsAAAAAAAwAAAAIAAkAAAAAAAwAAAAIAAgAAAAAAAwAAAAEAAkAAAAAAAwAAAAEAAgAAAAAAAwAAAAQAAkAAAAAAAwAAAAQAAgAAAAAAAwAAAAUAAkAAAAAAAwAAAAUAAgAAAAAAAwAAAAWAAkAAAAAAAwAAAAWAAgAAAAAAAwAAAAaAAkAAAAAAAwAAAAaAAgAAAAAAAwAAAAIAAYAAAAAAAwAAAAIAAUAAAAAAAwAAAAEAAYAAAAAAAwAAAAEAAUAAAAAAAwAAAAQAAYAAAAAAAwAAAAQAAUAAAAAAAwAAAAUAAYAAAAAAAwAAAAUAAUAAAAAAAwAAAAWAAYAAAAAAAwAAAAWAAUAAAAAAAwAAAAaAAYAAAAAAAwAAAAaAAUAAAAAAAwAAAAcAAUAAAAAAAwAAAAcAAYAAAAAAAwAAAAgAAUAAAAAAAwAAAAgAAYAAAAAAAwAAAAgAAgAAAAAAAwAAAAgAAkAAAAAAAwAAAAgAAsAAAAAAAwAAAAgAAwAAAAAAAwAAAAgAA4AAAAAAAwAAAAgAA8AAAAAAAwAAAAcAA4AAAAAAAwAAAAcAA8AAAAAAAwAAAAcAAsAAAAAAAwAAAAcAAwAAAAAAAwAAAAcAAgAAAAAAAwAAAAcAAkAAAAAAAwAAAAKAA4AAAAAAAwAAAAKAA8AAAAAAAwAAAAKAAwAAAAAAAwAAAAKAAsAAAAAAAwAAAAKAAgAAAAAAAwAAAAKAAkAAAAAAAwAAAAKAAUAAAAAAAwAAAAKAAYAAAAAAAwAAAAOAAUAAAAAAAwAAAAOAAYAAAAAAAwAAAAOAAkAAAAAAAwAAAAOAAgAAAAAAAwAAAAOAAwAAAAAAAwAAAAOAA4AAAAAAAwAAAAOAA8AAAAAAAwAAAAOAAsAAAAAAAwAAAA=")
 tile_set = ExtResource("5_5uu0q")
 
 [node name="Props" type="Node2D" parent="." unique_id=319539188]
@@ -135,6 +135,8 @@ properties = {
 "id": ["aikka", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -156,6 +158,8 @@ properties = {
 "id": ["basil", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -177,6 +181,8 @@ properties = {
 "id": [&"Ben", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -198,6 +204,8 @@ properties = {
 "id": [&"Child", 4, ""],
 "speed": [Vector2(100, 100), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -219,6 +227,8 @@ properties = {
 "id": [&"Dola", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -240,6 +250,8 @@ properties = {
 "id": [&"Fuuka", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -261,6 +273,8 @@ properties = {
 "id": [&"Gote", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -282,6 +296,8 @@ properties = {
 "id": [&"Grandma", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -303,6 +319,8 @@ properties = {
 "id": [&"Hermit", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -324,6 +342,8 @@ properties = {
 "id": [&"Jackal", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -345,6 +365,8 @@ properties = {
 "id": [&"Lucille", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -366,6 +388,8 @@ properties = {
 "id": [&"Mink", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -387,6 +411,8 @@ properties = {
 "id": [&"Nun", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["walk", 4, ""],
+"voice_delay": [0.06, 3, ""],
+"voice_sfx": ["npc_voice_high", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -408,6 +434,8 @@ properties = {
 "id": [&"Quincy", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -429,6 +457,8 @@ properties = {
 "id": ["sage", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -450,6 +480,8 @@ properties = {
 "id": [&"Sasuke", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -471,6 +503,8 @@ properties = {
 "id": [&"Tabith", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["walk", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]

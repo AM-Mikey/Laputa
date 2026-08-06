@@ -160,7 +160,6 @@ func spawn():
 func _input(event):
 	if !w.has_node("EditorLayer/Editor"): return
 	var editor = w.get_node("EditorLayer/Editor")
-	if editor.active_tool == "tile": return
 
 	if event.is_action_released("editor_rmb") && state != "idle":
 		var inspector = w.get_node("EditorLayer/Editor").inspector

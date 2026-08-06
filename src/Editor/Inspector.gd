@@ -22,10 +22,12 @@ func exit():
 ### SELECTING
 
 func on_selected(selection, selection_type):
-	#print(selection, selection_type)
+	print(selection, active)
 	if selection.is_in_group("Previews"): return
+	if active == selection: return #don't reselect
 
 	if active: #deselect old
+		print("deselect old")
 		if active.has_method("on_editor_deselect"): active.on_editor_deselect()
 		for c in $Margin/VBox/Scroll/VBox.get_children():
 			if c.is_in_group("PropertyButtons"):

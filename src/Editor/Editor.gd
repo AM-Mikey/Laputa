@@ -42,6 +42,7 @@ var lmb_physically_held = false
 var rmb_physically_held = false
 var shift_held = false
 var ctrl_held = false
+var alt_held = false
 
 var past_operations = [] #[[op][op][op]]
 var future_operations = [] #[[op][op][op]]
@@ -257,6 +258,8 @@ func _unhandled_input(event):
 	if event.is_action_released("editor_ctrl"): ctrl_held = false
 	if event.is_action_pressed("editor_shift"): shift_held = true
 	if event.is_action_released("editor_shift"): shift_held = false
+	if event.is_action_pressed("editor_alt"): alt_held = true
+	if event.is_action_released("editor_alt"): alt_held = false
 
 
 	if event is InputEventKey and event.is_pressed() and not event.is_echo() and ctrl_held:
@@ -291,7 +294,7 @@ func _unhandled_input(event):
 	if event.is_action_pressed("editor_rmb"):
 		rmb_physically_held = true
 
-	if !lmb_held and !rmb_held:
+	if !lmb_held && !rmb_held:
 		if lmb_physically_held:
 			lmb_held = true
 			future_operations.clear()
@@ -320,25 +323,24 @@ func do_tile_input(event):
 	var mouse_pos = w.get_global_mouse_position()
 	var tile_map_layer: TileMapLayer = tile_map.get_child(0)
 	#pressing
-	if event.is_action_pressed("editor_rmb") or event.is_action_pressed("editor_lmb"):
-
+	if event.is_action_pressed("editor_lmb") || event.is_action_pressed("editor_rmb"):
 		last_updated_cell = tile_map_layer.local_to_map(tile_map_layer.to_local(mouse_pos))
 		mouse_start_pos = mouse_pos
+
 		if subtool == "select":
 			if event.is_action_pressed("editor_lmb"):
 				set_tile_map_selection(mouse_start_pos, mouse_pos)
 			if event.is_action_pressed("editor_rmb"):
 				mc.display("grabclosed")
+
 		elif brush: #normal draw
-			if shift_held: set_tool("tile", "line")
+			if alt_held: set_tool("tile", "line")
 			elif ctrl_held: set_tool("tile", "box")
-			else:
+			elif event.is_action_pressed("editor_lmb") and lmb_held:
 				set_tool("tile", "paint")
-				if event.is_action_pressed("editor_lmb") and lmb_held:
+				if !shift_held:
 					set_cells(get_cells_centerbox(mouse_pos))
-				elif event.is_action_pressed("editor_rmb") and rmb_held:
-					if inspector.active and inspector.active_type != "background" and inspector.active_type != "tile_map":
-						return #don't erase a tile if we're selecting an entity
+				else:
 					set_cells(get_cells_centerbox(mouse_pos), true)
 					mc.display("eraser")
 
@@ -346,7 +348,6 @@ func do_tile_input(event):
 	if event is InputEventMouseMotion:
 		var new_updated_cell = tile_map_layer.local_to_map(tile_map_layer.to_local(mouse_pos))
 		if new_updated_cell != last_updated_cell: #don't trigger if we haven't moved a cell over
-			#print("moved a cell over")
 			last_updated_cell = new_updated_cell #update
 			free_previews()
 			match subtool:
@@ -360,18 +361,14 @@ func do_tile_input(event):
 				"box":
 					preview_cells_box(get_cells_box(mouse_start_pos, mouse_pos))
 				"paint":
-					if not brush:
-						return
+					if !brush: return
 					if lmb_held:
-						#TODO: group cells set by operation to ease undo code
-						set_cells(get_cells_centerbox(mouse_pos))
-					elif rmb_held:
-						set_cells(get_cells_centerbox(mouse_pos), true)
+						set_cells(get_cells_centerbox(mouse_pos), shift_held) #shift_held = is_eraser #TODO: group cells set by operation to ease undo code
 					else:
 						preview_cells_box(get_cells_centerbox(mouse_pos))
 
 	#releasing
-	if event.is_action_released("editor_lmb") and lmb_held or event.is_action_released("editor_rmb") and rmb_held:
+	if (event.is_action_released("editor_lmb") && lmb_held) || (event.is_action_released("editor_rmb") && rmb_held):
 		last_updated_cell = Vector2i.ZERO
 		match subtool:
 			"select":
@@ -380,14 +377,10 @@ func do_tile_input(event):
 					mc.display("grabopen")
 			"line":
 				if lmb_held:
-					set_cells_from_brush_origins(get_cells_line_origins(mouse_start_pos, mouse_pos))
-				elif rmb_held:
-					set_cells_from_brush_origins(get_cells_line_origins(mouse_start_pos, mouse_pos), true)
+					set_cells_from_brush_origins(get_cells_line_origins(mouse_start_pos, mouse_pos), shift_held)
 			"box":
 				if lmb_held:
-					set_cells(get_cells_box(mouse_start_pos, mouse_pos))
-				elif rmb_held:
-					set_cells(get_cells_box(mouse_start_pos, mouse_pos), true)
+					set_cells(get_cells_box(mouse_start_pos, mouse_pos),shift_held)
 
 		if subtool != "select": #why this way?
 			subtool = "paint"
@@ -425,7 +418,7 @@ func do_entity_input(event):
 			"trigger":
 				set_trigger_spawn($Main/Win/Tab/Triggers.active_trigger_path, grid_pos)
 			"misc":
-				set_misc($Main/Win/Tab/Miscs.active_misc_path,grid_pos)
+				set_misc($Main/Win/Tab/Miscs.active_misc_path, grid_pos)
 			"noplace":
 				pass
 
@@ -435,7 +428,7 @@ func do_generic_input(event):
 	var grid_pos = get_cell(mouse_pos)
 
 	#grabbing entity
-	if event.is_action_pressed("editor_rmb") and inspector.active:
+	if event.is_action_pressed("editor_rmb") && inspector.active:
 		match inspector.active_type:
 			"background", "tile_map": return
 		pre_grab_tool = active_tool
@@ -447,6 +440,7 @@ func do_generic_input(event):
 	if event.is_action_released("editor_rmb") and inspector.active:
 		match inspector.active_type:
 			"background", "tile_map": return
+		print("release entity")
 		set_tool(pre_grab_tool, pre_grab_subtool)
 
 	#moving entity
@@ -462,6 +456,7 @@ func do_generic_input(event):
 				free_previews()
 				preview_actor_spawn($Main/Win/Tab/NPCs.active_npc_path, grid_pos)
 			"grab":
+				print("grab moving entity")
 				var snapped_to = Vector2(4.0, 4.0) if shift_held else Vector2(8.0, 8.0)
 				var calc_new_position = Vector2(mouse_pos + grab_offset)
 				if inspector.active_type in ["waypoint_local", "waypoint_global_spawn"]:
@@ -475,27 +470,6 @@ func do_generic_input(event):
 			if !editor_delete_blacklist.has(inspector.active_type):
 				inspector.active.queue_free()
 				inspector.on_deselected()
-
-
-
-#func get_entity_at_pos(position):
-#	for a in actor_collection.get_children():
-#		if a.position == position:
-#			return a
-#	for p in prop_collection.get_children():
-#		if p.position == position:
-#			return p
-#	return null
-
-#func get_entity_type(entity: Node): #called by actor.gd #TODO DONT DO THIS
-	#if entity.is_in_group("ActorSpawns"): return "actor_spawn"
-	#if entity.is_in_group("Props"): return "prop"
-	#if entity.is_in_group("NPCs"): return "npc"
-	#if entity.is_in_group("Triggers"): return "trigger"
-	#if entity.is_in_group("SpawnPoints"): return "spawn_point"
-	#
-	#printerr("ERROR: Could not get entity type of entity: " + entity.name)
-	#return null
 
 
 
@@ -522,10 +496,15 @@ func move_tile_map_selection(start_pos, end_pos):# TODO: make work with undo/red
 		var tile_map_layer_current: TileMapLayer = tile_map.get_child(layer)
 		for cell in selected_cells[layer]:
 			var old_tm_pos = cell[0]
-			var new_tm_pos = cell[0] + change
 			var ts_pos = cell[1]
 			tile_map_layer_current.set_cell(old_tm_pos, -1, ts_pos) #erase old
-			tile_map_layer_current.set_cell(new_tm_pos, 0, ts_pos)
+
+	for layer in selected_cells:
+		var tile_map_layer_current: TileMapLayer = tile_map.get_child(layer)
+		for cell in selected_cells[layer]:
+			var new_tm_pos = cell[0] + change
+			var ts_pos = cell[1]
+			tile_map_layer_current.set_cell(new_tm_pos, 0, ts_pos) #set new
 
 func erase_tile_map_selection():
 	e_log.lprint("erased tiles")
@@ -866,22 +845,6 @@ func preview_prop_spawn(prop_path, pos):
 	preview.prop_path = prop_path
 	preview.global_position = (pos * 16) #+ Vector2i(8, 16)
 	spawn_collection.add_child(preview)
-
-#func preview_entity(pos, entity_path, entity_type):
-	#var preview = ENTITY_PREVIEW.instantiate()
-	#preview.entity_type = entity_type
-	#preview.entity_path = entity_path
-	#preview.global_position = pos
-	#match entity_type:
-		#"enemy", "npc", "player", "boss", "pickup":
-			#actor_collection.add_child(preview)
-		#"prop":
-			#prop_collection.add_child(preview)
-		#"trigger":
-			#trigger_collection.add_child(preview)
-		#_:
-			#printerr("ERROR: cannot find entity_type: " + entity_type)
-
 
 func free_previews():
 	for e in get_tree().get_nodes_in_group("Previews"):

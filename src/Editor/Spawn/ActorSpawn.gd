@@ -226,11 +226,14 @@ func on_editor_select(): #when
 func on_editor_deselect():
 	modulate = Color(1,1,1,.75)
 
-
-func _input_event(_viewport, event, _shape_idx): #selecting in editor
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
 	if w.get_node_or_null("EditorLayer/Editor"):
 		var inspector = w.get_node("EditorLayer/Editor").inspector
-		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
+		if event.is_action_pressed("editor_rmb"):
+			print("selected")
+			if inspector.active == self:
+				print("selected same entity")
+				return
 			inspector.on_selected(self, "actor_spawn")
 
 func _draw() -> void:
