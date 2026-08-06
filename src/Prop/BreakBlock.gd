@@ -49,7 +49,7 @@ func _physics_process(_delta):
 
 	if !($GroundLeft.is_colliding() || $GroundRight.is_colliding()) && broken:
 		$Sprite2D.visible = false
-	if linear_velocity.length_squared() > 1.0 && !broken && !crush_targets.is_empty():
+	if !broken && linear_velocity.length_squared() > 1.0 && !broken && !crush_targets.is_empty():
 		for t in crush_targets:
 			crush(t[0], t[1])
 			print("BreakBlock Crushed", t)

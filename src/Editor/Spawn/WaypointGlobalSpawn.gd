@@ -8,12 +8,21 @@ const WAYPOINT_GLOBAL = preload("res://src/Editor/VisualUtility/WaypointGlobal.t
 @export var lock_x: bool = false
 @export var lock_y: bool = false
 
+var prev_global_position
+signal value_changed(what, old_val, val)
+
 @onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
 	if w.el.get_child_count() == 0: #not in editor
 		visible = false
 		input_pickable = false
+
+func _process(_delta):
+	if w.el.get_child_count() > 0:
+		if prev_global_position != global_position:
+			value_changed.emit(self, prev_global_position, global_position)
+		prev_global_position = global_position
 
 func initialize(): #first time set up properties
 	pass

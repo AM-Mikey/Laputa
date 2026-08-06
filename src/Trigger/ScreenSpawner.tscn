@@ -25,8 +25,10 @@ one_shot = true
 
 [node name="SpawnArea" parent="." unique_id=955871811 instance=ExtResource("2_t5opi")]
 tag_name = "SpawnArea"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="VUActor" parent="." unique_id=1199277091 instance=ExtResource("3_i70y7")]
+actor_path = "uid://dphx5itcoj1wr"
 filter_team = 1
 filter_actor = "Ornithopter"
 tag_name = "spawn_actor"

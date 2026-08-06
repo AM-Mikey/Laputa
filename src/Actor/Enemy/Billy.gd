@@ -87,14 +87,15 @@ func enter_walk(_last_state):
 	await $StateTimer.timeout
 	change_state("idle")
 
-func do_walk(delta):
+func do_walk(_delta):
 	if on_wall || \
 		(!$FloorDetectorL.is_colliding() && move_dir.x < 0) || \
 		(!$FloorDetectorR.is_colliding() && move_dir.x > 0):
 		move_dir.x = -move_dir.x
 		look_dir.x = move_dir.x
 	velocity = calc_velocity(move_dir)
-	last_collision = move_and_collide(velocity * delta)
+	move_and_slide()
+	last_collision = get_last_slide_collision()
 	update_animation()
 
 func enter_idle(_last_state):
@@ -107,15 +108,16 @@ func enter_idle(_last_state):
 		await $StateTimer.timeout
 		change_state("walk")
 
-func do_idle(delta):
+func do_idle(_delta):
 	velocity = calc_velocity(Vector2.ZERO)
-	last_collision = move_and_collide(velocity * delta)
+	move_and_slide()
+	last_collision = get_last_slide_collision()
 
 func enter_aggro(_prev_state):
 	add_to_group("BillyAggro")
 	aggro_dir = move_dir
 
-func do_aggro(delta):
+func do_aggro(_delta):
 	var reach_point = waypoint.global_position
 	var approach_slow: bool = false
 	if pc:
@@ -186,7 +188,8 @@ func do_aggro(delta):
 				ap.play("Walk")
 
 	velocity = calc_velocity(aggro_dir)
-	last_collision = move_and_collide(velocity * delta)
+	move_and_slide()
+	last_collision = get_last_slide_collision()
 
 	var floor_collision := move_and_collide(Vector2.DOWN, true)
 	if floor_collision:

@@ -9,7 +9,10 @@ const HANDLE_RADIUS := 4.0
 @export var index: int = 0
 @export var direction: Vector2 = Vector2.RIGHT: #TODO: NOTE THIS CAUSES IMPERCEPTIBLY SMALL ERRORS, SO CHECKING FOR = VECTOR2.RIGHT WONT WORK. BEST TO USE .SNAPPED BEFORE YOU SET USING THIS
 	set(val):
+		var old_val = direction
 		direction = _snap_dir(val)
+		if old_val != direction:
+			value_changed.emit(self, old_val, direction)
 		_update_arrow_visuals()
 @export var snap_degrees := 45.0
 @export var movement_locked: bool = false:
@@ -22,7 +25,7 @@ const HANDLE_RADIUS := 4.0
 		$Line2D.default_color = val
 		$ArrowHead.modulate = val
 
-
+signal value_changed(what, old_value, value)
 
 var _dragging_tip := false
 

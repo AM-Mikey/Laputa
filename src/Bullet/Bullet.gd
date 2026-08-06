@@ -159,6 +159,9 @@ func _on_CollisionDetector_body_entered(body):
 		#armor
 		elif body.get_collision_layer_value(6):
 			do_fizzle("armor")
+		#Movable platform
+		if body.get_collision_layer_value(4):
+			do_fizzle("world")
 
 
 func _on_CollisionDetector_area_entered(area):
