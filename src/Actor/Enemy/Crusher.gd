@@ -26,8 +26,8 @@ var t_dir = null
 # Animating var
 var moving_direction := Vector2.ZERO
 var prev_global_position := Vector2.ZERO
-enum FacingDir {NEUTRAL, LEFT, RIGHT, UP, DOWN}
-var facing_dir: FacingDir = FacingDir.NEUTRAL
+#enum FacingDir {NEUTRAL, LEFT, RIGHT, UP, DOWN}
+#var facing_dir: FacingDir = FacingDir.NEUTRAL
 
 # Debug
 var debug_path_color := Color.RED
@@ -49,7 +49,7 @@ func _draw():
 		draw_rect(draw_self_rect, Color.RED)
 		draw_rect(draw_over_rect, Color.PURPLE)
 
-func setup():
+func setup(): #no awaits!
 	hp = 4
 	reward = 2
 
@@ -109,8 +109,8 @@ func _physics_process(delta):
 			time = wrapf(time, 0.0, travel_time)
 		else:
 			time = travel_time
-			prev_global_position = $Standable.global_position
 			animate()
+			prev_global_position = $Standable.global_position
 			return
 
 	var start_point = 0.0 if path_type == PathType.SEGMENT else non_segment_path_start
@@ -140,7 +140,7 @@ func _physics_process(delta):
 		crush_check()
 
 	animate()
-	prev_global_position = new_position
+	prev_global_position = $Standable.global_position
 
 func on_crush_body_entered(body):
 	if !nearby_bodies.has(body):
@@ -293,17 +293,26 @@ func crush_check():
 					body.hit(999, Vector2.ZERO)
 					body.die() # Pierce invis
 
-@onready var ap = $AnimationPlayer
 func animate():
+	var anim_playback = $AnimationTree["parameters/playback"]
 	var move_angle = ($Standable.global_position - prev_global_position).angle()
+	print($Standable.global_position, prev_global_position)
 	if ($Standable.global_position - prev_global_position).length() <= 0.01:
-		facing_dir = FacingDir.NEUTRAL
+		anim_playback.travel("Neutral")
 	else:
-		if abs(move_angle) >= 3.0 * PI / 4.0:
-			facing_dir = FacingDir.LEFT
-		elif abs(move_angle) < PI / 4.0:
-			facing_dir = FacingDir.RIGHT
-		elif move_angle <= -PI / 4.0 && move_angle > -3.0 * PI / 4.0:
-			facing_dir = FacingDir.UP
+		if abs(move_angle) >= 7.0 * PI / 8.0:
+			anim_playback.travel("Left")
+		elif abs(move_angle) < PI / 8.0:
+			anim_playback.travel("Right")
+		elif move_angle >= PI / 8.0 && move_angle < 3.0 * PI / 8.0:
+			anim_playback.travel("DownRight")
+		elif move_angle >= 3.0 * PI / 8.0 && move_angle < 5.0 * PI / 8.0:
+			anim_playback.travel("Down")
+		elif move_angle >= 5.0 * PI / 8.0 && move_angle < 7.0 * PI / 8.0:
+			anim_playback.travel("DownLeft")
+		elif move_angle <= -PI / 8.0 && move_angle > -3.0 * PI / 8.0:
+			anim_playback.travel("UpRight")
+		elif move_angle <= -3.0 * PI / 8.0 && move_angle > -5.0 * PI / 8.0:
+			anim_playback.travel("Up")
 		else:
-			facing_dir = FacingDir.DOWN
+			anim_playback.travel("UpLeft")
