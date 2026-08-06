@@ -256,8 +256,14 @@ func _unhandled_input(event):
 
 	if event.is_action_pressed("editor_ctrl"): ctrl_held = true
 	if event.is_action_released("editor_ctrl"): ctrl_held = false
-	if event.is_action_pressed("editor_shift"): shift_held = true
-	if event.is_action_released("editor_shift"): shift_held = false
+	if event.is_action_pressed("editor_shift"):
+		shift_held = true
+		if subtool == "paint":
+			mc.display("eraser")
+	if event.is_action_released("editor_shift"):
+		shift_held = false
+		if subtool == "paint":
+			mc.display("brush")
 	if event.is_action_pressed("editor_alt"): alt_held = true
 	if event.is_action_released("editor_alt"): alt_held = false
 
@@ -300,7 +306,7 @@ func _unhandled_input(event):
 			future_operations.clear()
 		elif rmb_physically_held:
 			rmb_held = true
-			inspector.on_deselected() #slight consequence is in inspector, unsaved values will reset on moving entity
+			#inspector.on_deselected() #slight consequence is in inspector, unsaved values will reset on moving entity
 			future_operations.clear()
 	#main part
 	await get_tree().process_frame #wait for new active to be set
@@ -338,11 +344,8 @@ func do_tile_input(event):
 			elif ctrl_held: set_tool("tile", "box")
 			elif event.is_action_pressed("editor_lmb") and lmb_held:
 				set_tool("tile", "paint")
-				if !shift_held:
-					set_cells(get_cells_centerbox(mouse_pos))
-				else:
-					set_cells(get_cells_centerbox(mouse_pos), true)
-					mc.display("eraser")
+				set_cells(get_cells_centerbox(mouse_pos), shift_held)
+
 
 	#moving
 	if event is InputEventMouseMotion:
@@ -384,8 +387,8 @@ func do_tile_input(event):
 
 		if subtool != "select": #why this way?
 			subtool = "paint"
-			if rmb_held:
-				mc.display("brush")
+			#if rmb_held:
+				#mc.display("brush")
 
 		if not active_operation.is_empty():
 			past_operations.append(["set_cells", active_operation.duplicate()])
@@ -399,7 +402,7 @@ func do_tile_input(event):
 
 
 func do_entity_input(event):
-	var mouse_pos = w.get_global_mouse_position() #Vector2(w.get_global_mouse_position().x, w.get_global_mouse_position().y + 8)
+	var mouse_pos = w.get_global_mouse_position()
 	var grid_pos = get_cell(mouse_pos)
 
 	#placing
@@ -427,20 +430,8 @@ func do_generic_input(event):
 	var mouse_pos = w.get_global_mouse_position() #Vector2(w.get_global_mouse_position().x, w.get_global_mouse_position().y + 8)
 	var grid_pos = get_cell(mouse_pos)
 
-	#grabbing entity
-	if event.is_action_pressed("editor_rmb") && inspector.active:
-		match inspector.active_type:
-			"background", "tile_map": return
-		pre_grab_tool = active_tool
-		pre_grab_subtool = subtool
-		set_tool("entity", "grab")
-		grab_offset = inspector.active.global_position - mouse_pos
-
-	#releasing entity
-	if event.is_action_released("editor_rmb") and inspector.active:
-		match inspector.active_type:
-			"background", "tile_map": return
-		print("release entity")
+	if event.is_action_released("editor_rmb") && inspector.active && subtool == "grab":
+		if inspector.active_type in ["background", "tile_map"]: return
 		set_tool(pre_grab_tool, pre_grab_subtool)
 
 	#moving entity
@@ -456,7 +447,6 @@ func do_generic_input(event):
 				free_previews()
 				preview_actor_spawn($Main/Win/Tab/NPCs.active_npc_path, grid_pos)
 			"grab":
-				print("grab moving entity")
 				var snapped_to = Vector2(4.0, 4.0) if shift_held else Vector2(8.0, 8.0)
 				var calc_new_position = Vector2(mouse_pos + grab_offset)
 				if inspector.active_type in ["waypoint_local", "waypoint_global_spawn"]:
@@ -685,6 +675,7 @@ func set_cells_from_brush_origins(origins: Array, erase = false):
 ### ENTITIES ###
 
 func set_actor_spawn(actor_path, pos):
+	print("setting actor spawn")
 	var actor_spawn = ACTOR_SPAWN.instantiate()
 	var actor = load(actor_path).instantiate()
 	var active_button: Node
@@ -701,7 +692,7 @@ func set_actor_spawn(actor_path, pos):
 		actor_spawn.properties["difficulty"] = [active_button.enemy_difficulty, TYPE_INT, ""]
 		actor_spawn.get_node("Sprite2D").texture = actor.get("TX_%s" %active_button.enemy_difficulty)
 	actor.free()
-	inspector.on_selected(actor_spawn, "actor_spawn")
+	inspector.on_selected(actor_spawn, "actor_spawn", true)
 
 func set_prop_spawn(prop_path, pos):
 	var prop_spawn = PROP_SPAWN.instantiate()
@@ -710,7 +701,7 @@ func set_prop_spawn(prop_path, pos):
 	spawn_collection.add_child(prop_spawn)
 	prop_spawn.owner = w.current_level
 	prop_spawn.initialize()
-	inspector.on_selected(prop_spawn, "prop_spawn")
+	inspector.on_selected(prop_spawn, "prop_spawn", true)
 
 func set_trigger_spawn(trigger_path, pos):
 	var trigger_spawn = TRIGGER_SPAWN.instantiate()
@@ -720,7 +711,7 @@ func set_trigger_spawn(trigger_path, pos):
 	spawn_collection.add_child(trigger_spawn)
 	trigger_spawn.owner = w.current_level
 	trigger_spawn.initialize()
-	inspector.on_selected(trigger_spawn, "trigger_spawn")
+	inspector.on_selected(trigger_spawn, "trigger_spawn", true)
 
 func set_misc(misc_path, pos):
 	var misc = load(misc_path).instantiate()
@@ -728,7 +719,7 @@ func set_misc(misc_path, pos):
 	if misc_path == "res://src/Editor/VisualUtility/WaypointGlobal.tscn":
 		misc.global_position = (pos * 16) + Vector2i(8, 8)
 		waypoint_collection.add_child(misc)
-		inspector.on_selected(misc, "misc")
+		inspector.on_selected(misc, "misc", true)
 
 	elif misc_path == "res://src/Editor/Spawn/WaypointGlobalSpawn.tscn":
 		if inspector.active_type in ["actor_spawn", "prop_spawn", "trigger_spawn"]:
@@ -778,7 +769,7 @@ func set_misc(misc_path, pos):
 	else:
 		misc.global_position = (pos * 16) + Vector2i(8, 8)
 		w.current_level.add_child(misc)
-		inspector.on_selected(misc, "misc")
+		inspector.on_selected(misc, "misc", true)
 	misc.owner = w.current_level
 
 
@@ -948,8 +939,11 @@ func grid_pos_has_entity(grid_pos) -> bool: #TODO: add props
 
 func set_tool(new_tool = "", new_subtool = ""):
 	#Cursors
-	if new_subtool == "paint":
-		mc.display("brush")
+	if new_subtool in ["paint", "line", "box"]:
+		if shift_held:
+			mc.display("eraser")
+		else:
+			mc.display("brush")
 		clear_tile_map_cursor()
 	elif new_subtool == "select":
 		mc.display("grabopen")

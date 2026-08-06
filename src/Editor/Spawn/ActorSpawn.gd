@@ -50,6 +50,7 @@ func _ready():
 		input_pickable = false
 
 func initialize(): #first time set up properties
+	print("init")
 	if (actor_path != ""):
 		var actor = load(actor_path).instantiate()
 		for p in actor.get_property_list():
@@ -230,10 +231,6 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
 	if w.get_node_or_null("EditorLayer/Editor"):
 		var inspector = w.get_node("EditorLayer/Editor").inspector
 		if event.is_action_pressed("editor_rmb"):
-			print("selected")
-			if inspector.active == self:
-				print("selected same entity")
-				return
 			inspector.on_selected(self, "actor_spawn")
 
 func _draw() -> void:
@@ -276,11 +273,11 @@ func on_property_changed(p_name, p_value):
 
 func get_actor_name() -> String:
 	if !actor_path.is_absolute_path():
-		print("ActorSpawn | get_actor_name(): actor_path is not a valid path!")
+		printerr("ActorSpawn | get_actor_name(): actor_path is not a valid path!")
 		return ""
 	var actor = actor_path.get_file()
 	if actor.get_extension() != "tscn":
-		print("ActorSpawn | get_actor_name(): actor_path does not point to a scene (.tscn) file!")
+		printerr("ActorSpawn | get_actor_name(): actor_path does not point to a scene (.tscn) file!")
 		return ""
 	actor = actor.split(".")[0]
 	return actor

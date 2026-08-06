@@ -646,8 +646,5 @@ Options line 377, we need to have selecting never mind exit the text
 	add npc voice speeds
 	
 
-contract 
-
-15th
-last day
-renewable
+TODO 8/5/26
+waypointlocal color change on select?
