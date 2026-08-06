@@ -1,46 +1,34 @@
-[gd_scene format=4]
+[gd_scene format=4 uid="uid://d2xmb8k3ymev4"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_d0l2e"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_w57gv"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_kiuv2"]
-[ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_xy46o"]
-[ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="4_s2hg1"]
-[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_kiuv2"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_xy46o"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_s2hg1"]
-[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="9_d2u17"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="9_kiuv2"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="10_mf36k"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="10_rvsaf"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_hehk1"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="12_3dcyn"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_7agpc"]
-[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="13_ed645"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="14_1xrja"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="14_d2u17"]
-[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="15_3k8qo"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="16_otnoa"]
-[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="17_vph1e"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="18_n4won"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/WaypointGlobalSpawn.tscn" id="19_ed645"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/WaypointGlobalSpawn.gd" id="20_1xrja"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_d0l2e"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_w57gv"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_xy46o"]
+[ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="4_s2hg1"]
+[ext_resource type="TileSet" uid="uid://dct5q86qhnom8" path="res://src/Tile/Debug.tres" id="5_kiuv2"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_xy46o"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="9_d2u17"]
+[ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="9_kiuv2"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="10_mf36k"]
+[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_hehk1"]
+[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="13_ed645"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="15_3k8qo"]
+[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="17_vph1e"]
+[ext_resource type="PackedScene" uid="uid://xx5fbltdrdxk" path="res://src/Editor/Spawn/WaypointGlobalSpawn.tscn" id="19_ed645"]
 
-[node name="Dungeon" type="Node2D" unique_id=734148647]
+[node name="DungeonBSide" type="Node2D" unique_id=734148647]
 visibility_layer = 2
 script = ExtResource("1_d0l2e")
-level_name = "Dungeon"
+level_name = "DungeonBside"
 dialog_json = "res://src/Dialog/WikiMap.json"
 mission_level_update = "res://src/Mission/WikiMap.json"
 debug_main_mission_stage_name = "talk_npc_a"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1355825292 instance=ExtResource("2_w57gv")]
+[node name="LevelLimiter" parent="." unique_id=1355825292 instance=ExtResource("2_w57gv")]
 visibility_layer = 2
 offset_left = 1584.0
 offset_top = 1584.0
 offset_right = 2912.0
 offset_bottom = 2592.0
-mouse_filter = 2
-script = ExtResource("3_kiuv2")
 background_resource = ExtResource("3_xy46o")
 texture = ExtResource("4_s2hg1")
 layers = 5
@@ -104,17 +92,13 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=1116492951]
 visibility_layer = 2
 
-[node name="Door" type="MarginContainer" parent="Spawns" unique_id=1800792368 groups=["TriggerSpawns"] instance=ExtResource("7_xy46o")]
+[node name="Door" parent="Spawns" unique_id=1800792368 instance=ExtResource("7_xy46o")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 2656.0
 offset_top = 2144.0
 offset_right = 2672.0
 offset_bottom = 2176.0
-mouse_filter = 2
-script = ExtResource("8_s2hg1")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -128,21 +112,17 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door1" type="MarginContainer" parent="Spawns" unique_id=1418959175 groups=["TriggerSpawns"] instance=ExtResource("7_xy46o")]
+[node name="Door1" parent="Spawns" unique_id=1418959175 instance=ExtResource("7_xy46o")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 2336.0
 offset_top = 2128.0
 offset_right = 2352.0
 offset_bottom = 2160.0
-mouse_filter = 2
-script = ExtResource("8_s2hg1")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
-"door_index": [1, 2, ""],
+"door_index": [0, 2, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Door1", 4, ""],
 "level": ["", 4, ""],
@@ -152,17 +132,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door2" type="MarginContainer" parent="Spawns" unique_id=563800730 groups=["TriggerSpawns"] instance=ExtResource("7_xy46o")]
+[node name="Door2" parent="Spawns" unique_id=563800730 instance=ExtResource("7_xy46o")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 2416.0
 offset_top = 2480.0
 offset_right = 2432.0
 offset_bottom = 2512.0
-mouse_filter = 2
-script = ExtResource("8_s2hg1")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -176,17 +152,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Water" type="MarginContainer" parent="Spawns" unique_id=1239600405 groups=["TriggerSpawns"] instance=ExtResource("7_xy46o")]
+[node name="Water" parent="Spawns" unique_id=1239600405 instance=ExtResource("7_xy46o")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 2112.0
 offset_top = 2432.0
 offset_right = 2864.0
 offset_bottom = 2552.0
-mouse_filter = 2
-script = ExtResource("8_s2hg1")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20, ""],
@@ -196,17 +168,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Water1" type="MarginContainer" parent="Spawns" unique_id=1782994566 groups=["TriggerSpawns"] instance=ExtResource("7_xy46o")]
+[node name="Water1" parent="Spawns" unique_id=1782994566 instance=ExtResource("7_xy46o")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 1680.0
 offset_top = 1768.0
 offset_right = 1856.0
 offset_bottom = 1808.0
-mouse_filter = 2
-script = ExtResource("8_s2hg1")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20, ""],
@@ -216,14 +184,9 @@ properties = {
 }
 size_is_default = false
 
-[node name="SaveDisk" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("9_kiuv2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="SaveDisk" parent="Spawns" unique_id=1449282698 instance=ExtResource("9_kiuv2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1648, 1744)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_rvsaf")
 prop_path = "res://src/Prop/SaveDisk.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -231,14 +194,9 @@ properties = {
 "id": [&"SaveDisk", 4, ""]
 }
 
-[node name="AmmoRefill" type="Area2D" parent="Spawns" unique_id=1871256366 groups=["Entities", "PropSpawns"] instance=ExtResource("9_kiuv2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="AmmoRefill" parent="Spawns" unique_id=1871256366 instance=ExtResource("9_kiuv2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1680, 1760)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_rvsaf")
 prop_path = "res://src/Prop/AmmoRefill.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -246,14 +204,9 @@ properties = {
 "id": [&"AmmoRefill", 4, ""]
 }
 
-[node name="HealthRefill" type="Area2D" parent="Spawns" unique_id=198121001 groups=["Entities", "PropSpawns"] instance=ExtResource("9_kiuv2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="HealthRefill" parent="Spawns" unique_id=198121001 instance=ExtResource("9_kiuv2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2712, 2272)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_rvsaf")
 prop_path = "res://src/Prop/HealthRefill.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -261,14 +214,9 @@ properties = {
 "id": [&"HealthRefill", 4, ""]
 }
 
-[node name="Lantern" type="Area2D" parent="Spawns" unique_id=677844022 groups=["Entities", "PropSpawns"] instance=ExtResource("9_kiuv2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Lantern" parent="Spawns" unique_id=677844022 instance=ExtResource("9_kiuv2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2736, 2272)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_rvsaf")
 prop_path = "res://src/Prop/Lantern.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -277,14 +225,9 @@ properties = {
 "style": [0, 2, ""]
 }
 
-[node name="Frog" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_hehk1")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog" parent="Spawns" unique_id=1199277091 instance=ExtResource("11_hehk1")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2856, 2320)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7agpc")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -300,40 +243,28 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Frog" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_ed645")]
+[node name="LookVector" parent="Spawns/Frog" unique_id=872564127 instance=ExtResource("13_ed645")]
 visibility_layer = 2
 position = Vector2(0, -7)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_1xrja")
 tag_name = "look"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 movement_locked = true
 
-[node name="TongueRange" type="Area2D" parent="Spawns/Frog" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_3k8qo")]
+[node name="TongueRange" parent="Spawns/Frog" unique_id=1432238783 instance=ExtResource("15_3k8qo")]
 visibility_layer = 2
 position = Vector2(-32, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_otnoa")
 tag_name = "tongue_range"
 lock_y = true
 
-[node name="VURect" type="Node2D" parent="Spawns/Frog" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("17_vph1e")]
+[node name="VURect" parent="Spawns/Frog" unique_id=688682803 instance=ExtResource("17_vph1e")]
 visibility_layer = 2
-script = ExtResource("18_n4won")
 tag_name = "player_detector"
 value = Rect2(-72, -64, 144, 112)
 
-[node name="Frog1" type="Area2D" parent="Spawns" unique_id=182837976 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_hehk1")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Frog1" parent="Spawns" unique_id=182837976 instance=ExtResource("11_hehk1")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2616, 2376)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7agpc")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -349,43 +280,32 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Frog1" unique_id=105600297 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_ed645")]
+[node name="LookVector" parent="Spawns/Frog1" unique_id=105600297 instance=ExtResource("13_ed645")]
 visibility_layer = 2
 position = Vector2(0, -7)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_1xrja")
 tag_name = "look"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 movement_locked = true
 
-[node name="TongueRange" type="Area2D" parent="Spawns/Frog1" unique_id=1770834087 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_3k8qo")]
+[node name="TongueRange" parent="Spawns/Frog1" unique_id=1770834087 instance=ExtResource("15_3k8qo")]
 visibility_layer = 2
 position = Vector2(-32, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_otnoa")
 tag_name = "tongue_range"
 lock_y = true
 
-[node name="VURect" type="Node2D" parent="Spawns/Frog1" unique_id=658059054 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("17_vph1e")]
+[node name="VURect" parent="Spawns/Frog1" unique_id=658059054 instance=ExtResource("17_vph1e")]
 visibility_layer = 2
-script = ExtResource("18_n4won")
 tag_name = "player_detector"
 value = Rect2(-72, -64, 144, 112)
 
-[node name="Sign" type="MarginContainer" parent="Spawns" unique_id=232735284 groups=["TriggerSpawns"] instance=ExtResource("7_xy46o")]
+[node name="Sign" parent="Spawns" unique_id=232735284 instance=ExtResource("7_xy46o")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 2080.0
 offset_top = 2384.0
 offset_right = 2096.0
 offset_bottom = 2400.0
-mouse_filter = 2
-script = ExtResource("8_s2hg1")
 trigger_path = "res://src/Trigger/Sign.tscn"
 properties = {
 "color": [Color(0.901961, 0.74902, 0, 1), 20, ""],
@@ -396,14 +316,9 @@ properties = {
 }
 size_is_default = false
 
-[node name="BeetleCrawler" type="Area2D" parent="Spawns" unique_id=66542737 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_hehk1")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BeetleCrawler" parent="Spawns" unique_id=66542737 instance=ExtResource("11_hehk1")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1984, 1712)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7agpc")
 actor_path = "res://src/Actor/Enemy/BeetleCrawler.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -416,36 +331,25 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler" unique_id=1676901045 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_ed645")]
+[node name="FlyVector" parent="Spawns/BeetleCrawler" unique_id=1676901045 instance=ExtResource("13_ed645")]
 visibility_layer = 2
 position = Vector2(0, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_1xrja")
 tag_name = "fly"
 direction = Vector2(-4.371139e-08, -1)
 movement_locked = true
 
-[node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler" unique_id=2126548652 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_ed645")]
+[node name="CrawlVector" parent="Spawns/BeetleCrawler" unique_id=2126548652 instance=ExtResource("13_ed645")]
 visibility_layer = 2
 position = Vector2(0, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_1xrja")
 arrow_length = 24.0
 tag_name = "crawl"
 snap_degrees = 90.0
 movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
 
-[node name="Lilypad" type="Area2D" parent="Spawns" unique_id=1334580313 groups=["Entities", "PropSpawns"] instance=ExtResource("9_kiuv2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Lilypad" parent="Spawns" unique_id=1334580313 instance=ExtResource("9_kiuv2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1744, 1768)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_rvsaf")
 prop_path = "res://src/Prop/Lilypad.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -455,14 +359,9 @@ properties = {
 "stop_distance": [16, 2, ""]
 }
 
-[node name="Lilypad1" type="Area2D" parent="Spawns" unique_id=2065592304 groups=["Entities", "PropSpawns"] instance=ExtResource("9_kiuv2")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Lilypad1" parent="Spawns" unique_id=2065592304 instance=ExtResource("9_kiuv2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1712, 1768)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_rvsaf")
 prop_path = "res://src/Prop/Lilypad.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -472,14 +371,9 @@ properties = {
 "stop_distance": [16, 2, ""]
 }
 
-[node name="Fish" type="Area2D" parent="Spawns" unique_id=90867393 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_hehk1")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Fish" parent="Spawns" unique_id=90867393 instance=ExtResource("11_hehk1")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2304, 2536)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7agpc")
 actor_path = "res://src/Actor/Enemy/Fish.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -494,41 +388,27 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="WaypointJump" type="Area2D" parent="Spawns/Fish" unique_id=891956042 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_3k8qo")]
+[node name="WaypointJump" parent="Spawns/Fish" unique_id=891956042 instance=ExtResource("15_3k8qo")]
 visibility_layer = 2
 position = Vector2(0, -94)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_otnoa")
 tag_name = "jump"
 lock_x = true
 
-[node name="WaypointGlobalSpawnLeft" type="Area2D" parent="Spawns/Fish" unique_id=669830458 groups=["EditorEntities", "Entities", "WaypointGlobalSpawns"] instance=ExtResource("19_ed645")]
+[node name="WaypointGlobalSpawnLeft" parent="Spawns/Fish" unique_id=669830458 instance=ExtResource("19_ed645")]
 visibility_layer = 2
 position = Vector2(-64, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("20_1xrja")
 tag_name = "left"
 lock_y = true
 
-[node name="WaypointGlobalSpawnRight" type="Area2D" parent="Spawns/Fish" unique_id=331105630 groups=["EditorEntities", "Entities", "WaypointGlobalSpawns"] instance=ExtResource("19_ed645")]
+[node name="WaypointGlobalSpawnRight" parent="Spawns/Fish" unique_id=331105630 instance=ExtResource("19_ed645")]
 visibility_layer = 2
 position = Vector2(64, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("20_1xrja")
 tag_name = "right"
 lock_y = true
 
-[node name="Fish1" type="Area2D" parent="Spawns" unique_id=552088565 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_hehk1")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Fish1" parent="Spawns" unique_id=552088565 instance=ExtResource("11_hehk1")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2552, 2464)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7agpc")
 actor_path = "res://src/Actor/Enemy/Fish.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -543,44 +423,31 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="WaypointJump" type="Area2D" parent="Spawns/Fish1" unique_id=883177039 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_3k8qo")]
+[node name="WaypointJump" parent="Spawns/Fish1" unique_id=883177039 instance=ExtResource("15_3k8qo")]
 visibility_layer = 2
 position = Vector2(0, -94)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_otnoa")
 tag_name = "jump"
 lock_x = true
 
-[node name="WaypointGlobalSpawnLeft" type="Area2D" parent="Spawns/Fish1" unique_id=2003679235 groups=["EditorEntities", "Entities", "WaypointGlobalSpawns"] instance=ExtResource("19_ed645")]
+[node name="WaypointGlobalSpawnLeft" parent="Spawns/Fish1" unique_id=2003679235 instance=ExtResource("19_ed645")]
 visibility_layer = 2
 position = Vector2(-64, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("20_1xrja")
 tag_name = "left"
 lock_y = true
 
-[node name="WaypointGlobalSpawnRight" type="Area2D" parent="Spawns/Fish1" unique_id=427263107 groups=["EditorEntities", "Entities", "WaypointGlobalSpawns"] instance=ExtResource("19_ed645")]
+[node name="WaypointGlobalSpawnRight" parent="Spawns/Fish1" unique_id=427263107 instance=ExtResource("19_ed645")]
 visibility_layer = 2
 position = Vector2(64, -8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("20_1xrja")
 tag_name = "right"
 lock_y = true
 
-[node name="LoadZone" type="MarginContainer" parent="Spawns" unique_id=925443426 groups=["TriggerSpawns"] instance=ExtResource("7_xy46o")]
+[node name="LoadZone" parent="Spawns" unique_id=925443426 instance=ExtResource("7_xy46o")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 1712.0
 offset_top = 2464.0
 offset_right = 1808.0
 offset_bottom = 2608.0
-mouse_filter = 2
-script = ExtResource("8_s2hg1")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -588,26 +455,17 @@ properties = {
 "door_index": [1, 2, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"LoadZone", 4, ""],
-"level": ["res://src/Level/DungeonBSide.tscn", 4, ""]
+"level": ["WikiMap", 4, ""]
 }
 size_is_default = false
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1416282546]
 visibility_layer = 2
 
-[node name="VanishingPoint" type="Area2D" parent="." unique_id=9884164 groups=["VanishingPoints"] instance=ExtResource("9_d2u17")]
+[node name="VanishingPoint" parent="." unique_id=9884164 instance=ExtResource("9_d2u17")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2264, 2072)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_3dcyn")
 
-[node name="SpawnPoint" type="Area2D" parent="." unique_id=422711910 groups=["SpawnPoints"] instance=ExtResource("10_mf36k")]
+[node name="SpawnPoint" parent="." unique_id=422711910 instance=ExtResource("10_mf36k")]
 visibility_layer = 2
 position = Vector2(1800, 1688)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_d2u17")
-
-[connection signal="body_exited" from="Triggers/KillBox" to="Triggers/KillBox" method="_on_body_exited"]
