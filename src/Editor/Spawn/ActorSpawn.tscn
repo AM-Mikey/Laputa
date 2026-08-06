@@ -18,3 +18,5 @@ position = Vector2(0, -6)
 shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=988000690]
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

@@ -43,9 +43,11 @@ func _ready():
 
 	for section in $Handles.get_children():
 		for button in section.get_children():
-			if !(button.button_down.is_connected(on_handle)):
-				button.connect("button_down", Callable(self, "on_handle").bind(button))
+			if !(button.button_down.is_connected(_on_handle)):
+				button.connect("button_down", Callable(self, "_on_handle").bind(button))
 			buttons.append(button)
+
+
 
 func initialize(): #first time set up properties
 	var trigger = load(trigger_path).instantiate()
@@ -87,6 +89,7 @@ func initialize(): #first time set up properties
 				add_child(ac)
 				ac.owner = w.current_level
 
+
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
 	var old_properties = properties
 	properties = {}
@@ -124,8 +127,8 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 				ac.owner = null
 				add_child(ac)
 				ac.owner = w.current_level
-
 	trigger.free()
+
 
 func spawn():
 	if !allow_spawn: return
@@ -157,10 +160,10 @@ func spawn():
 
 	w.current_level.get_node("Triggers").call_deferred("add_child", trigger)
 
+
 func _input(event):
 	if !w.has_node("EditorLayer/Editor"): return
 	var editor = w.get_node("EditorLayer/Editor")
-	if editor.active_tool == "tile": return
 
 	if event.is_action_released("editor_rmb") && state != "idle":
 		var inspector = w.get_node("EditorLayer/Editor").inspector
@@ -170,7 +173,7 @@ func _input(event):
 		editor.subtool = editor.pre_grab_subtool
 		return
 
-	if event is InputEventMouseMotion and state != "idle": #dragging or resizing
+	if event is InputEventMouseMotion && state != "idle": #dragging or resizing
 		var x = snapped(get_global_mouse_position().x + drag_offset.x, 8)
 		var y = snapped(get_global_mouse_position().y + drag_offset.y, 8)
 		var parent_x = get_parent().position.x
@@ -200,6 +203,8 @@ func _input(event):
 						offset_left = x - parent_x
 					"Right":
 						offset_right = x - parent_x
+
+
 
 ### GETTERS
 
@@ -232,19 +237,20 @@ func get_if_trigger_has_vu_actor(actor_vu_act) -> bool:
 				return true
 	return false
 
+
+
 ### SIGNALS
 
-func on_editor_select(): #when
+func on_editor_select():
 	modulate = Color(1,0,0,.75)
-	%Mid.disabled = false
 
 func on_editor_deselect():
 	modulate = Color(1,1,1,.75)
-	%Mid.disabled = true
 
-func on_handle(handle):
+func _on_handle(handle):
 	var editor = w.get_node("EditorLayer/Editor")
-	if editor.active_tool == "tile": return
+	var inspector = w.get_node("EditorLayer/Editor").inspector
+	inspector.on_selected(self, "trigger_spawn")
 
 	if handle.name != "Mid":
 		state = "resize"
@@ -260,8 +266,6 @@ func on_handle(handle):
 		editor.set_tool("entity", "triggergrab")
 		drag_offset = global_position - get_global_mouse_position()
 
-	var inspector = w.get_node("EditorLayer/Editor").inspector
-	inspector.on_selected(self, "trigger_spawn")
 
 func on_property_changed(p_name, p_value):
 	pass
