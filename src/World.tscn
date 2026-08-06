@@ -46,7 +46,7 @@ script = ExtResource("8")
 development_stage = "alpha"
 release_version = "1.8"
 default_gun_array = Array[String](["Revolver", "Speeder", "MPistol", "GLauncher", "Shotgun", "Tsurugi", "Red7", "Roberta"])
-start_level_path = "res://src/Level/WikiMap.tscn"
+start_level_path = "res://src/Level/EnShieldTesting.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=912648782]
 scroll_offset = Vector2(-9760, -6975.5)
