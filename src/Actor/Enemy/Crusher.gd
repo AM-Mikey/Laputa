@@ -17,9 +17,9 @@ var path_length := 0.0
 
 var start_pos: = Vector2.ZERO
 var to_pos := Vector2.ZERO
-var time :float = 0.0
+var time := 0.0
 
-var nearby_bodies: Array = []
+var nearby_bodies := []
 var t_body = null
 var t_dir = null
 
@@ -31,13 +31,13 @@ var facing_dir: FacingDir = FacingDir.NEUTRAL
 
 # Debug
 var debug_path_color := Color.RED
-var debug_self_rect: Rect2 = Rect2()
-var debug_body_rect: Rect2 = Rect2()
-var debug_over_rect: Rect2 = Rect2()
+var debug_self_rect := Rect2()
+var debug_body_rect := Rect2()
+var debug_over_rect := Rect2()
 
 func _draw():
 	if debug:
-		var draw_points: PackedVector2Array = path.get_baked_points()
+		var draw_points := path.get_baked_points()
 		for i in range(draw_points.size()):
 			draw_points[i] -= global_position
 		draw_polyline(draw_points, debug_path_color, 2.0)
@@ -67,7 +67,7 @@ func setup():
 				new_path.add_point(global_position)
 				path_length *= 2.0
 		PathType.RECTANGLE:
-			var rect_global :Rect2 = $Shape.get_global_value()
+			var rect_global = $Shape.get_global_value()
 			new_path.add_point(rect_global.position)
 			new_path.add_point(rect_global.position + Vector2(rect_global.size.x, 0.0))
 			new_path.add_point(rect_global.position + rect_global.size)
@@ -99,7 +99,7 @@ func setup():
 		if !node.has_node("BreakArea"): #Ignore all non-breakable prop
 			$Standable.add_collision_exception_with(node)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta):
 	if disabled || dead:
 		return
 
@@ -187,7 +187,7 @@ func crush_check():
 				while !body_queue.is_empty():
 					var curr_body = body_queue.pop_back()
 					var curr_body_collision_shape = curr_body.get_node_or_null("CollisionShape2D")
-					if !curr_body_collision_shape or curr_body_collision_shape.disabled:
+					if !curr_body_collision_shape || curr_body_collision_shape.disabled:
 						continue
 
 					var curr_body_size = curr_body_collision_shape.shape.get_rect().size
@@ -211,7 +211,7 @@ func crush_check():
 				if success: break
 		else:
 			var body_collision_shape = body.get_node("CollisionShape2D")
-			if !body_collision_shape or body_collision_shape.disabled:
+			if !body_collision_shape || body_collision_shape.disabled:
 				continue
 
 			var body_size = body_collision_shape.shape.get_rect().size
@@ -236,22 +236,22 @@ func crush_check():
 
 				const adjust := 1.0
 				const adjust_2 := 3.0
-				if body_in_y and moving_direction.x < 0.0 and body_position.x < crush_rect_center.x:
+				if body_in_y && moving_direction.x < 0.0 && body_position.x < crush_rect_center.x:
 					check_direction.x = -1 - adjust_2
 					raycheck_position.append(body_rect.position + Vector2(adjust_2, adjust))
 					raycheck_position.append(body_rect.position + Vector2(adjust_2, body_rect.size.y / 2.0))
 					raycheck_position.append(body_rect.position + Vector2(adjust_2, body_rect.size.y - adjust))
-				elif body_in_y and moving_direction.x > 0.0 and body_position.x > crush_rect_center.x:
+				elif body_in_y && moving_direction.x > 0.0 && body_position.x > crush_rect_center.x:
 					check_direction.x = 1 + adjust_2
 					raycheck_position.append(body_rect.position + Vector2(body_rect.size.x - adjust_2, adjust))
 					raycheck_position.append(body_rect.position + Vector2(body_rect.size.x - adjust_2, body_rect.size.y / 2.0))
 					raycheck_position.append(body_rect.position + Vector2(body_rect.size.x - adjust_2, body_rect.size.y - adjust))
-				if body_in_x and moving_direction.y < 0.0 and body_position.y < crush_rect_center.y:
+				if body_in_x && moving_direction.y < 0.0 && body_position.y < crush_rect_center.y:
 					check_direction.y = -1 - adjust_2
 					raycheck_position.append(body_rect.position + Vector2(adjust, adjust_2))
 					raycheck_position.append(body_rect.position + Vector2(body_rect.size.x / 2.0, adjust_2))
 					raycheck_position.append(body_rect.position + Vector2(body_rect.size.x - adjust, adjust_2))
-				elif body_in_x and moving_direction.y > 0.0 and body_position.y > crush_rect_center.y:
+				elif body_in_x && moving_direction.y > 0.0 && body_position.y > crush_rect_center.y:
 					check_direction.y = 1 + adjust_2
 					raycheck_position.append(body_rect.position + Vector2(adjust, body_rect.size.y - adjust_2))
 					raycheck_position.append(body_rect.position + Vector2(body_rect.size.x / 2.0, body_rect.size.y - adjust_2))
@@ -259,9 +259,9 @@ func crush_check():
 
 				if check_direction == Vector2.ZERO: continue
 
-				var collide_with_world: bool = false
+				var collide_with_world := false
 				for i in range(0, raycheck_position.size()):
-					var raycheck_param: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.new()
+					var raycheck_param := PhysicsRayQueryParameters2D.new()
 					raycheck_param.from = raycheck_position[i]
 					raycheck_param.to = raycheck_position[i] + check_direction
 					raycheck_param.exclude = [body.get_rid(), $Standable.get_rid()]

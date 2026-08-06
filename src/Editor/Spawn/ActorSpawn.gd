@@ -43,7 +43,7 @@ func _draw() -> void:
 					var arrow_length = clamp(to_point.length() / 8.0, 8.0, 15.0)
 					const arrow_angle = PI / 6.0
 					if properties["loop"][0]:
-						var move_from_center: Vector2 = 2.0 * main_dir.orthogonal()
+						var move_from_center := 2.0 * main_dir.orthogonal()
 						# To line
 						draw_line(move_from_center, to_point + move_from_center, path_color, path_width)
 						draw_line(move_from_center, move_from_center + main_dir.rotated(-arrow_angle) * arrow_length, path_color, path_width)
@@ -78,7 +78,7 @@ func _draw() -> void:
 						var draw_dir = draw_point_1.direction_to(draw_point_2)
 						draw_arrow(draw_point_2, draw_dir , arrow_length, arrow_angle, path_color, path_width)
 				2: #Ellipse
-					var new_path: Curve2D = Curve2D.new()
+					var new_path := Curve2D.new()
 					var path_length := 0.0
 					var ellipse_a: float = $Shape.value.size.x / 2.0
 					var ellipse_b: float = $Shape.value.size.y / 2.0

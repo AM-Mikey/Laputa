@@ -131,7 +131,7 @@ func _draw() -> void:
 						draw_line(Vector2.ZERO, to_point, path_color, path_width)
 						draw_arrow(to_point, main_dir, arrow_length, arrow_angle, path_color, path_width)
 				1: #Rectangle
-					var new_path: Curve2D = Curve2D.new()
+					var new_path := Curve2D.new()
 					var rect_global: Rect2 = $Shape.value
 					var path_length := (rect_global.size.x + rect_global.size.y) * 2.0
 					var arrow_length = clamp(path_length / 8.0, 8.0, 15.0)
@@ -153,7 +153,7 @@ func _draw() -> void:
 						var draw_dir = draw_point_1.direction_to(draw_point_2)
 						draw_arrow(draw_point_2, draw_dir , arrow_length, arrow_angle, path_color, path_width)
 				2: #Ellipse
-					var new_path: Curve2D = Curve2D.new()
+					var new_path := Curve2D.new()
 					var path_length := 0.0
 					var ellipse_a: float = $Shape.value.size.x / 2.0
 					var ellipse_b: float = $Shape.value.size.y / 2.0
