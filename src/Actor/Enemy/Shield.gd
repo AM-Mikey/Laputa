@@ -4,7 +4,8 @@ const ICON = preload("res://assets/Actor/Enemy/ShieldIcon.png")
 
 const TX_0 = preload("res://assets/Actor/Enemy/Shield.png")
 
-@export var move_dir = Vector2.LEFT: set = set_move_dir
+var shield_dir = Vector2.LEFT
+var move_dir = Vector2.LEFT: set = set_move_dir
 @export var wait_max_time = 5.0
 @export var walk_max_time = 10.0
 @export var defend_time = 0.4
@@ -18,9 +19,12 @@ func setup(): #Reminder: no function called can use await
 	damage_on_contact = 2
 	speed = Vector2(50, 50)
 	is_wind_affected = true
+	shield_dir = $ShieldDir.direction.snappedf(1.0)
+	if shield_dir == Vector2.RIGHT:
+		$Sprite2D.flip_h = true
+	move_dir = $MoveDir.direction.snappedf(1.0)
 	w.emit_signal("finished_spawn_entities_step")
 	change_state("wait")
-
 
 ### STATES ###
 
@@ -59,7 +63,7 @@ func enter_wait(_last_state):
 
 
 func enter_defend(_last_state):
-	ap.play("IdleLeft")
+	ap.play("IdleShield")
 	$StateTimer.start(defend_time)
 	await $StateTimer.timeout
 	change_state("walk")
@@ -68,36 +72,35 @@ func enter_defend(_last_state):
 
 func set_move_dir(dir):
 	move_dir = dir
-	match move_dir:
-		Vector2.LEFT:
-			if state == "walk":
-				ap.play("WalkLeft")
-			elif state == "wait":
-				ap.play("IdleLeft")
-			$BulletBlocker/Left.set_deferred("disabled", false)
-			$BulletBlocker/Right.set_deferred("disabled", true)
-			$Hurtbox/Left.set_deferred("disabled", true)
-			$Hurtbox/Right.set_deferred("disabled", false)
-		Vector2.RIGHT:
-			if state == "walk":
-				ap.play("WalkRight")
-			elif state == "wait":
-				ap.play("IdleRight")
-			$BulletBlocker/Left.set_deferred("disabled", true)
-			$BulletBlocker/Right.set_deferred("disabled", false)
-			$Hurtbox/Left.set_deferred("disabled", false)
-			$Hurtbox/Right.set_deferred("disabled", true)
+	if move_dir.x * shield_dir.x >= 0.0:
+		if state == "walk":
+			ap.play("WalkShield")
+		elif state == "wait":
+			ap.play("IdleShield")
+		$BulletBlocker/Left.set_deferred("disabled", move_dir != Vector2.LEFT)
+		$BulletBlocker/Right.set_deferred("disabled", move_dir == Vector2.LEFT)
+		$Hurtbox/Left.set_deferred("disabled", move_dir == Vector2.LEFT)
+		$Hurtbox/Right.set_deferred("disabled", move_dir != Vector2.LEFT)
+	else:
+		if state == "walk":
+			ap.play("WalkCake")
+		elif state == "wait":
+			ap.play("IdleCake")
+		$BulletBlocker/Left.set_deferred("disabled", true)
+		$BulletBlocker/Right.set_deferred("disabled", true)
+		$Hurtbox/Left.set_deferred("disabled", false)
+		$Hurtbox/Right.set_deferred("disabled", false)
+
 
 
 
 ### SIGNALS ###
-
 func _on_BulletBlocker_body_entered(body):
 	if body.get_collision_layer_value(7): #bullet
-		if move_dir == Vector2.LEFT:
+		if move_dir.x * shield_dir.x > 0.0:
 			change_state("defend")
 
 func _on_BulletBlocker_area_entered(area):
 	if area.get_collision_layer_value(7): #bullet
-		if move_dir == Vector2.LEFT:
+		if move_dir.x * shield_dir.x > 0.0:
 			change_state("defend")
