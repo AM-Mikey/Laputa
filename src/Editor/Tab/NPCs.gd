@@ -10,7 +10,9 @@ var active_npc_path
 
 
 func setup_npcs():
-	editor.connect("tab_changed", Callable(self, "_on_tab_changed"))
+	for child in $VBox/Margin/Scroll/Buttons.get_children():
+		child.queue_free()
+
 	var index = 0
 	for p in find_npc_scenes("res://src/Actor/NPC/"):
 
@@ -55,6 +57,3 @@ func find_npc_scenes(path):
 func _on_npc_changed(npc_path):
 	editor.set_tool("entity", "npc")
 	active_npc_path = npc_path
-
-func _on_tab_changed(_tab_name):
-	pass

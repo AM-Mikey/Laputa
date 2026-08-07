@@ -38,7 +38,6 @@ var mode_disc = "Mode"
 
 
 func setup_tiles():
-	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
 	tile_master.setup_tile_buttons(self, buttons)
 
 func setup_options(): #AutoLayer, Mode, Etc... TODO: use this if you need to set up defaults
@@ -112,9 +111,6 @@ func set_cursor():
 
 
 ### SIGNALS ###
-
-func on_tab_changed(_tab_name):
-	pass
 
 func _on_MultiErase_toggled(button_pressed):
 	if button_pressed:

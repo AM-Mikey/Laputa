@@ -116,7 +116,8 @@ func _on_physics_process(delta):
 		floor_normal = Vector2.ZERO
 
 	velocity = _calc_velocity_rolling()
-	last_collision = move_and_collide(velocity * delta)
+	move_and_slide()
+	last_collision = get_last_slide_collision()
 	_animate()
 
 	if last_collision != null && !on_floor && !on_slope: # Allow it to lodging into 1 tile-gap instead of move over it

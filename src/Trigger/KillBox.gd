@@ -7,7 +7,7 @@ func _ready():
 	w.emit_signal("finished_spawn_entities_step")
 	visible = false
 
-func _on_body_exited(body: Node2D):
+func _on_body_entered(body: Node2D) -> void:
 	if forbid: return
 	if body.get_collision_layer_value(1):
 		var pc = body.get_parent()

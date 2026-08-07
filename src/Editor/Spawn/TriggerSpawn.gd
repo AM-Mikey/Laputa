@@ -43,49 +43,40 @@ func _ready():
 
 	for section in $Handles.get_children():
 		for button in section.get_children():
-			if !(button.button_down.is_connected(on_handle)):
-				button.connect("button_down", Callable(self, "on_handle").bind(button))
+			if !(button.button_down.is_connected(_on_handle)):
+				button.connect("button_down", Callable(self, "_on_handle").bind(button))
 			buttons.append(button)
+
+
 
 func initialize(): #first time set up properties
 	var trigger = load(trigger_path).instantiate()
-	trigger.queue_free.call_deferred()
 	for p in trigger.get_property_list():
 		if p["usage"] & 4102 == 4102: #exported properties
 			properties[p["name"]] = [trigger.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
 	properties["id"] = [name, TYPE_STRING, ""]
 
-	for ac in trigger.get_children(): #TODO: add these to props and to waypoints
-		if ac.is_in_group("WaypointLocals"):
-			if !get_if_trigger_has_waypoint(ac):
-				trigger.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
-		if ac.is_in_group("WaypointGlobalSpawns"):
-			if !get_if_trigger_has_waypoint(ac):
-				trigger.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
-		if ac.is_in_group("VUVectors"):
-			if !get_if_trigger_has_vu_vector(ac):
-				trigger.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
-		if ac.is_in_group("VURects"):
-			if !get_if_trigger_has_vu_rect(ac):
-				trigger.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
-		if ac.is_in_group("VUActors"):
-			if !get_if_trigger_has_vu_actor(ac):
-				trigger.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
+	var visual_ult_groups = ["WaypointLocals", "WaypointGlobalSpawns",
+			 "VUVectors", "VURects", "VUActors"]
+	for ac in trigger.get_children():
+		for vu_group in visual_ult_groups:
+			if ac.is_in_group(vu_group):
+				if !get_if_trigger_has_visual_utility(ac, vu_group):
+					trigger.remove_child(ac)
+					ac.owner = null
+					add_child(ac)
+					ac.owner = w.current_level
+
+	trigger.queue_free()
+
+	for child in get_children():
+		if child.is_in_group("VisualUtilities"):
+			if child.has_signal("value_changed") && !child.value_changed.is_connected(on_vu_value_changed):
+				child.value_changed.connect(on_vu_value_changed)
+
+	for prop in properties: # init all special interaction when changing property
+		on_property_changed(prop, properties[prop][0])
+
 
 func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
 	var old_properties = properties
@@ -96,36 +87,34 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 			if old_properties.has(p["name"]):
 				if (old_properties[p["name"]].size() == 2): #Backward compability
 					old_properties[p["name"]].append("")
-				properties[p["name"]] = old_properties[p["name"]]
+				if p["hint"] == PROPERTY_HINT_ENUM && old_properties[p["name"]][2] != "":
+					properties[p["name"]] = [old_properties[p["name"]][0], old_properties[p["name"]][1], p["hint_string"]]
+				else:
+					properties[p["name"]] = old_properties[p["name"]]
 			else:
 				properties[p["name"]] = [trigger.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
+
+	var visual_ult_groups = ["WaypointLocals", "WaypointGlobalSpawns",
+			 "VUVectors", "VURects", "VUActors"]
 	for ac in trigger.get_children():
-		if ac.is_in_group("WaypointLocals"):
-			if !get_if_trigger_has_waypoint(ac):
-				trigger.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
-		if ac.is_in_group("VUVectors"):
-			if !get_if_trigger_has_vu_vector(ac):
-				trigger.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
-		if ac.is_in_group("VURects"):
-			if !get_if_trigger_has_vu_rect(ac):
-				trigger.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
-		if ac.is_in_group("VUActors"):
-			if !get_if_trigger_has_vu_actor(ac):
-				trigger.remove_child(ac)
-				ac.owner = null
-				add_child(ac)
-				ac.owner = w.current_level
+		for vu_group in visual_ult_groups:
+			if ac.is_in_group(vu_group):
+				if !get_if_trigger_has_visual_utility(ac, vu_group):
+					trigger.remove_child(ac)
+					ac.owner = null
+					add_child(ac)
+					ac.owner = w.current_level
 
 	trigger.free()
+
+	for child in get_children():
+		if child.is_in_group("VisualUtilities"):
+			if child.has_signal("value_changed") && !child.value_changed.is_connected(on_vu_value_changed):
+				child.value_changed.connect(on_vu_value_changed)
+
+	for prop in properties: # init all special interaction when changing property
+		on_property_changed(prop, properties[prop][0])
+
 
 func spawn():
 	if !allow_spawn: return
@@ -144,23 +133,21 @@ func spawn():
 	trigger.get_node("CollisionShape2D").position = new_shape.size * 0.5
 
 	for ac in trigger.get_children(): #clear old from trigger
-		if ac.is_in_group("WaypointLocals") || ac.is_in_group("VUVectors") || ac.is_in_group("VURects") || ac.is_in_group("VUActors"):
+		if ac.is_in_group("VisualUtilities"):
 			trigger.remove_child(ac)
 			ac.queue_free()
-		if ac.is_in_group("WaypointGlobalSpawns"): #turn off visibility
-			ac.visible = false
 
 	for c in get_children(): #add new from spawn
-		if c.is_in_group("WaypointLocals") || c.is_in_group("VUVectors") || c.is_in_group("VURects") || c.is_in_group("VUActors"):
+		if c.is_in_group("VisualUtilities") && !c.is_in_group("WaypointGlobalSpawns"):
 			var copy = c.duplicate()
 			trigger.add_child(copy)
 
 	w.current_level.get_node("Triggers").call_deferred("add_child", trigger)
 
+
 func _input(event):
 	if !w.has_node("EditorLayer/Editor"): return
 	var editor = w.get_node("EditorLayer/Editor")
-	if editor.active_tool == "tile": return
 
 	if event.is_action_released("editor_rmb") && state != "idle":
 		var inspector = w.get_node("EditorLayer/Editor").inspector
@@ -170,7 +157,7 @@ func _input(event):
 		editor.subtool = editor.pre_grab_subtool
 		return
 
-	if event is InputEventMouseMotion and state != "idle": #dragging or resizing
+	if event is InputEventMouseMotion && state != "idle": #dragging or resizing
 		var x = snapped(get_global_mouse_position().x + drag_offset.x, 8)
 		var y = snapped(get_global_mouse_position().y + drag_offset.y, 8)
 		var parent_x = get_parent().position.x
@@ -201,50 +188,29 @@ func _input(event):
 					"Right":
 						offset_right = x - parent_x
 
-### GETTERS
 
-func get_if_trigger_has_waypoint(trigger_waypoint) -> bool:
+
+### GETTERS
+func get_if_trigger_has_visual_utility(actor_waypoint, group) -> bool:
 	var out = false
 	for c in get_children():
-		if c.is_in_group("WaypointLocals"): #q: does this need to apply for global spawns as well?
-			if c.tag_name == trigger_waypoint.tag_name:
+		if c.is_in_group(group):
+			if c.tag_name == actor_waypoint.tag_name:
 				out = true
 	return out
 
-func get_if_trigger_has_vu_vector(trigger_vu_vector) -> bool:
-	for c in get_children():
-		if c.is_in_group("VUVectors"):
-			if c.tag_name == trigger_vu_vector.tag_name:
-				return true
-	return false
-
-func get_if_trigger_has_vu_rect(trigger_vu_rect) -> bool:
-	for c in get_children():
-		if c.is_in_group("VURects"):
-			if c.tag_name == trigger_vu_rect.tag_name:
-				return true
-	return false
-
-func get_if_trigger_has_vu_actor(actor_vu_act) -> bool:
-	for c in get_children():
-		if c.is_in_group("VUActors"):
-			if c.tag_name == actor_vu_act.tag_name:
-				return true
-	return false
-
 ### SIGNALS
 
-func on_editor_select(): #when
+func on_editor_select():
 	modulate = Color(1,0,0,.75)
-	%Mid.disabled = false
 
 func on_editor_deselect():
 	modulate = Color(1,1,1,.75)
-	%Mid.disabled = true
 
-func on_handle(handle):
+func _on_handle(handle):
 	var editor = w.get_node("EditorLayer/Editor")
-	if editor.active_tool == "tile": return
+	var inspector = w.get_node("EditorLayer/Editor").inspector
+	inspector.on_selected(self, "trigger_spawn")
 
 	if handle.name != "Mid":
 		state = "resize"
@@ -260,8 +226,9 @@ func on_handle(handle):
 		editor.set_tool("entity", "triggergrab")
 		drag_offset = global_position - get_global_mouse_position()
 
-	var inspector = w.get_node("EditorLayer/Editor").inspector
-	inspector.on_selected(self, "trigger_spawn")
 
 func on_property_changed(p_name, p_value):
+	pass
+
+func on_vu_value_changed(vu, old_value, new_value):
 	pass

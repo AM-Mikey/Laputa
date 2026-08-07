@@ -15,10 +15,8 @@ var default_level = "res://src/Level/Default.tscn"
 
 
 func setup_levels():
-	editor.connect("tab_changed", Callable(self, "_on_tab_changed"))
-
-	for c in $VBox/Margin/Scroll/Buttons.get_children():
-		c.queue_free()
+	for child in $VBox/Margin/Scroll/Buttons.get_children():
+		child.queue_free()
 
 	var index = 0
 	for l in find_level_scenes("res://src/Level/"):
@@ -145,10 +143,3 @@ func on_new_confirmed():
 	var path = $NewDiae_log.current_path.get_basename() + ".tscn"
 	save_level(level, path)
 	load_level(path)
-
-
-
-### SIGNALS ###
-
-func _on_tab_changed(_tab_name):
-	pass

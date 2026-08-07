@@ -15,4 +15,4 @@ editor_hidden = true
 position = Vector2(8, 8)
 shape = SubResource("1")
 
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

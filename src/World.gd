@@ -128,7 +128,7 @@ func first_time_level_setup(): #Reminder: no function called can use await
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 	current_level = load(start_level_path).instantiate()
 	add_child(current_level)
-
+	f.pc().gm.setup_guns(default_gun_array)
 	spawn_entities()
 
 	$Juniper.global_position = get_spawn_point().global_position
