@@ -25,10 +25,11 @@ func setup(): #Reminder: no function called can use await
 ### STATES ###
 
 func enter_walk(_last_state):
+	move_dir = move_dir
 	if not $FloorDetectorL.is_colliding() and move_dir.x < 0:
-		set_move_dir(Vector2.RIGHT)
+		move_dir = Vector2.RIGHT
 	if not $FloorDetectorR.is_colliding() and move_dir.x > 0:
-		set_move_dir(Vector2.LEFT)
+		move_dir = Vector2.LEFT
 
 
 	rng.randomize()
@@ -42,7 +43,7 @@ func do_walk(_delta):
 		change_state("wait")
 		return
 	if velocity.x == 0.0:
-		move_dir *= Vector2(-1,0)
+		move_dir.x *= -1.0
 
 	velocity = calc_velocity(move_dir)
 	move_and_slide()
@@ -50,6 +51,7 @@ func do_walk(_delta):
 
 
 func enter_wait(_last_state):
+	move_dir = move_dir
 	rng.randomize()
 	$StateTimer.start(rng.randf_range(1.0, wait_max_time))
 	await $StateTimer.timeout
@@ -68,18 +70,18 @@ func set_move_dir(dir):
 	move_dir = dir
 	match move_dir:
 		Vector2.LEFT:
-			if state == "Walk":
+			if state == "walk":
 				ap.play("WalkLeft")
-			elif state == "idle":
+			elif state == "wait":
 				ap.play("IdleLeft")
 			$BulletBlocker/Left.set_deferred("disabled", false)
 			$BulletBlocker/Right.set_deferred("disabled", true)
 			$Hurtbox/Left.set_deferred("disabled", true)
 			$Hurtbox/Right.set_deferred("disabled", false)
 		Vector2.RIGHT:
-			if state == "Walk":
+			if state == "walk":
 				ap.play("WalkRight")
-			elif state == "idle":
+			elif state == "wait":
 				ap.play("IdleRight")
 			$BulletBlocker/Left.set_deferred("disabled", true)
 			$BulletBlocker/Right.set_deferred("disabled", false)
