@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ced57a1w0tgdk"]
+[gd_scene format=3 uid="uid://ced57a1w0tgdk"]
 
 [ext_resource type="Script" uid="uid://d2yv8egvqk153" path="res://src/Actor/Enemy/Octopus.gd" id="1_h74fb"]
 [ext_resource type="Texture2D" uid="uid://bwimmhc71ip4k" path="res://assets/Actor/Enemy/SpiderBody.png" id="2_tnbw2"]
@@ -15,12 +15,12 @@ size = Vector2(14, 14)
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(48, 48)
 
-[sub_resource type="CanvasItemMaterial" id="11"]
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o6omx"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_ev8er"]
 points = PackedVector2Array(0, 64, 36, 58, 68, 36, 88, 4, 96, -32, 88, -68, 68, -100, 36, -122, 0, -128, -36, -122, -68, -100, -88, -68, -96, -32, -88, 4, -68, 36, -36, 58)
+
+[sub_resource type="CanvasItemMaterial" id="11"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_h74fb"]
 points = PackedVector2Array(0, 0, 91, -91, 78, -101, 64, -111, 49, -118, 33, -124, 17, -127, 0, -128)
@@ -46,172 +46,170 @@ points = PackedVector2Array(0, 0, -91, -91, -101, -78, -111, -64, -118, -49, -12
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_s12h0"]
 points = PackedVector2Array(0, 0, 0, -128, -17, -127, -33, -124, -49, -118, -64, -111, -78, -101, -91, -91)
 
-[node name="Octopus" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+[node name="Octopus" type="CharacterBody2D" unique_id=64530004 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("1_h74fb")
 debug = true
 editor_hidden = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1891583147]
 shape = SubResource("CircleShape2D_qm1p1")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1532463229]
 position = Vector2(0, 7)
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=2052671637]
 position = Vector2(0, -7)
 shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=1437116897]
 collision_layer = 262144
 collision_mask = 65536
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1493493119]
 shape = SubResource("RectangleShape2D_shhv2")
 debug_color = Color(1, 0, 0, 0.235294)
 
-[node name="PlayerDetector" type="Area2D" parent="."]
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=539493871]
 collision_layer = 0
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=1472773476]
 shape = SubResource("2")
 debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-light_mask = 4
-material = SubResource("11")
-texture = ExtResource("2_tnbw2")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=143499964]
+libraries/ = SubResource("AnimationLibrary_o6omx")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_o6omx")
-}
+[node name="StateTimer" type="Timer" parent="." unique_id=2054100962]
 
-[node name="StateTimer" type="Timer" parent="."]
-
-[node name="LegSectors" type="Node2D" parent="."]
+[node name="LegSectors" type="Node2D" parent="." unique_id=268746287]
 unique_name_in_owner = true
 
-[node name="Sector0" type="CollisionShape2D" parent="LegSectors"]
+[node name="Sector0" type="CollisionShape2D" parent="LegSectors" unique_id=1061654383]
 rotation = 0.3926991
 shape = SubResource("ConvexPolygonShape2D_ev8er")
 disabled = true
 
-[node name="Sector1" type="CollisionShape2D" parent="LegSectors"]
+[node name="Sector1" type="CollisionShape2D" parent="LegSectors" unique_id=1980721930]
 rotation = 1.1780972
 shape = SubResource("ConvexPolygonShape2D_ev8er")
 disabled = true
 
-[node name="Sector2" type="CollisionShape2D" parent="LegSectors"]
+[node name="Sector2" type="CollisionShape2D" parent="LegSectors" unique_id=1740278799]
 rotation = 1.9634954
 shape = SubResource("ConvexPolygonShape2D_ev8er")
 disabled = true
 
-[node name="Sector3" type="CollisionShape2D" parent="LegSectors"]
+[node name="Sector3" type="CollisionShape2D" parent="LegSectors" unique_id=37554225]
 rotation = 2.7488935
 shape = SubResource("ConvexPolygonShape2D_ev8er")
 disabled = true
 
-[node name="Sector4" type="CollisionShape2D" parent="LegSectors"]
+[node name="Sector4" type="CollisionShape2D" parent="LegSectors" unique_id=1774045675]
 rotation = 3.5342917
 shape = SubResource("ConvexPolygonShape2D_ev8er")
 disabled = true
 
-[node name="Sector5" type="CollisionShape2D" parent="LegSectors"]
+[node name="Sector5" type="CollisionShape2D" parent="LegSectors" unique_id=1500801459]
 rotation = 4.3196898
 shape = SubResource("ConvexPolygonShape2D_ev8er")
 disabled = true
 
-[node name="Sector6" type="CollisionShape2D" parent="LegSectors"]
+[node name="Sector6" type="CollisionShape2D" parent="LegSectors" unique_id=1535538977]
 rotation = 5.105088
 shape = SubResource("ConvexPolygonShape2D_ev8er")
 disabled = true
 
-[node name="Sector7" type="CollisionShape2D" parent="LegSectors"]
+[node name="Sector7" type="CollisionShape2D" parent="LegSectors" unique_id=1885199377]
 rotation = 5.8904862
 shape = SubResource("ConvexPolygonShape2D_ev8er")
 disabled = true
 
-[node name="LegLines" type="Node2D" parent="."]
+[node name="LegLines" type="Node2D" parent="." unique_id=349202847]
 unique_name_in_owner = true
 
-[node name="Leg0" type="Line2D" parent="LegLines"]
+[node name="Leg0" type="Line2D" parent="LegLines" unique_id=1942685783]
 points = PackedVector2Array(3.062, -7.391, 3.062, -7.391)
 width = 2.0
 
-[node name="Leg1" type="Line2D" parent="LegLines"]
+[node name="Leg1" type="Line2D" parent="LegLines" unique_id=1046205069]
 points = PackedVector2Array(7.391, -3.062, 7.391, -3.062)
 width = 2.0
 
-[node name="Leg2" type="Line2D" parent="LegLines"]
+[node name="Leg2" type="Line2D" parent="LegLines" unique_id=455071425]
 points = PackedVector2Array(7.391, 3.062, 7.391, 3.062)
 width = 2.0
 
-[node name="Leg3" type="Line2D" parent="LegLines"]
+[node name="Leg3" type="Line2D" parent="LegLines" unique_id=1546118325]
 points = PackedVector2Array(3.062, 7.391, 3.062, 7.391)
 width = 2.0
 
-[node name="Leg4" type="Line2D" parent="LegLines"]
+[node name="Leg4" type="Line2D" parent="LegLines" unique_id=1854353276]
 points = PackedVector2Array(-3.062, 7.391, -3.062, 7.391)
 width = 2.0
 
-[node name="Leg5" type="Line2D" parent="LegLines"]
+[node name="Leg5" type="Line2D" parent="LegLines" unique_id=745025286]
 points = PackedVector2Array(-7.391, 3.062, -7.391, 3.062)
 width = 2.0
 
-[node name="Leg6" type="Line2D" parent="LegLines"]
+[node name="Leg6" type="Line2D" parent="LegLines" unique_id=120499393]
 points = PackedVector2Array(-7.391, -3.062, -7.391, -3.062)
 width = 2.0
 
-[node name="Leg7" type="Line2D" parent="LegLines"]
+[node name="Leg7" type="Line2D" parent="LegLines" unique_id=213933547]
 points = PackedVector2Array(-3.062, -7.391, -3.062, -7.391)
 width = 2.0
 
-[node name="DebugTargets" type="Node2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2133068608]
+light_mask = 4
+material = SubResource("11")
+texture = ExtResource("2_tnbw2")
+
+[node name="DebugTargets" type="Node2D" parent="." unique_id=1926680434]
 unique_name_in_owner = true
 
-[node name="LegSectorsOld" type="Node2D" parent="."]
+[node name="LegSectorsOld" type="Node2D" parent="." unique_id=128116655]
 visible = false
 
-[node name="Sector0" type="CollisionShape2D" parent="LegSectorsOld"]
+[node name="Sector0" type="CollisionShape2D" parent="LegSectorsOld" unique_id=270456232]
 shape = SubResource("ConvexPolygonShape2D_h74fb")
 disabled = true
 
-[node name="Sector1" type="CollisionShape2D" parent="LegSectorsOld"]
+[node name="Sector1" type="CollisionShape2D" parent="LegSectorsOld" unique_id=121753960]
 shape = SubResource("ConvexPolygonShape2D_tnbw2")
 disabled = true
 
-[node name="Sector2" type="CollisionShape2D" parent="LegSectorsOld"]
+[node name="Sector2" type="CollisionShape2D" parent="LegSectorsOld" unique_id=1885329234]
 shape = SubResource("ConvexPolygonShape2D_gy16h")
 disabled = true
 
-[node name="Sector3" type="CollisionShape2D" parent="LegSectorsOld"]
+[node name="Sector3" type="CollisionShape2D" parent="LegSectorsOld" unique_id=265703260]
 shape = SubResource("ConvexPolygonShape2D_ocfyb")
 disabled = true
 
-[node name="Sector4" type="CollisionShape2D" parent="LegSectorsOld"]
+[node name="Sector4" type="CollisionShape2D" parent="LegSectorsOld" unique_id=172706694]
 shape = SubResource("ConvexPolygonShape2D_llxnq")
 disabled = true
 
-[node name="Sector5" type="CollisionShape2D" parent="LegSectorsOld"]
+[node name="Sector5" type="CollisionShape2D" parent="LegSectorsOld" unique_id=442860443]
 shape = SubResource("ConvexPolygonShape2D_j2lkh")
 disabled = true
 
-[node name="Sector6" type="CollisionShape2D" parent="LegSectorsOld"]
+[node name="Sector6" type="CollisionShape2D" parent="LegSectorsOld" unique_id=1896107986]
 shape = SubResource("ConvexPolygonShape2D_1f056")
 disabled = true
 
-[node name="Sector7" type="CollisionShape2D" parent="LegSectorsOld"]
+[node name="Sector7" type="CollisionShape2D" parent="LegSectorsOld" unique_id=221715793]
 shape = SubResource("ConvexPolygonShape2D_s12h0")
 disabled = true
 
-[node name="DebugRests" type="Node2D" parent="."]
+[node name="DebugRests" type="Node2D" parent="." unique_id=2033877061]
 unique_name_in_owner = true
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]

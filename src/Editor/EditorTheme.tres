@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=18 format=3 uid="uid://deptsttubjnfv"]
+[gd_resource type="Theme" format=3 uid="uid://deptsttubjnfv"]
 
 [ext_resource type="StyleBox" uid="uid://dyck1dw7csaip" path="res://src/UI/StyleBox/RustRoundInset.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://djsxt54vtaivl" path="res://src/UI/Slider/ScrollBarGrabber.tres" id="3"]

@@ -8,7 +8,6 @@ const DEBUG_REST_TEXTURE = preload("res://assets/UI/FileSelect/XpIcon.png")
 var target
 
 var move_dir = Vector2.ZERO
-#var look_dir = Vector2.LEFT
 
 var popin_time = 0.6
 var popout_time = 0.6
@@ -29,12 +28,28 @@ var leg_speed = 15.0
 #var leg_cooldown = 0.2
 var leg_min_proximity = 4.0
 
+@export_group("Leg IK")
+@export var leg_segment_count: int = 16 ## number of IK segments per tentacle - change this to grow/shrink the chains
+@export var leg_ik_iterations: int = 10 ## FABRIK solver iterations run per leg per frame
+@export var leg_chain_follow_speed: float = 18.0 ## how fast the drawn chain eases toward its solved/curled pose
+
+@export_group("Leg Idle Curl")
+@export var leg_curl_amount: float = .65 ## radians the chain bends per segment while idle (curls the tentacle up)
+@export var leg_curl_wiggle_amount: float = 0.18 ## radians of extra sinusoidal wiggle applied while idle
+@export var leg_curl_speed: float = 2.2 ## speed of the idle wiggle animation
+
+var leg_segment_length: float = 16.0 #recomputed in setup() as leg_max_distance / leg_segment_count so the IK chain still reaches leg_max_distance
+var leg_chain_points = {} #leg_index -> PackedVector2Array of GLOBAL joint positions, hip [0] ... tip [leg_segment_count]
+var leg_hip_positions = {} #leg_index -> local hip anchor, cached from each Line2D's authored point 0
+
 
 func setup():
 	reward = 5
 	hp = 8
 	speed = Vector2(60, 60)
 	setup_a_star()
+	leg_segment_length = leg_max_distance / float(leg_segment_count)
+	init_leg_chains()
 	change_state("chase")
 
 
@@ -62,19 +77,19 @@ func _on_physics_process(delta):
 	var active_leg_distance := 0.0
 	for d in enabled_rest_to_target_distances:
 		if enabled_rest_to_target_distances[d] > active_leg_distance: #NOTE: under this sceme, the octopus will always choose to start with leg 0. lower legs win ties in dist
-			active_leg_distance = enabled_rest_to_target_distances[d] 
+			active_leg_distance = enabled_rest_to_target_distances[d]
 			active_leg = d
-	
+
 	if active_leg != -1: #do a step
 		#print("octopus_step")
 		leg_rest_positions[active_leg] = leg_targets[active_leg]
 		if !leg_positions.has(active_leg): #first time, just put it on the target
 			leg_positions[active_leg] = leg_targets[active_leg]
-	
+
 	for k in 8:
 		if leg_positions.has(k) && leg_rest_positions.has(k):
 			leg_positions[k] = leg_positions[k].lerp(leg_rest_positions[k], delta * leg_speed) #otherwise lerp to the rest position
-	
+
 	if debug: set_leg_debug_visuals()
 	update_legs(delta)
 
@@ -225,29 +240,123 @@ func set_leg_debug_visuals():
 		%DebugTargets.add_child(debug_rest)
 
 
-func update_legs(delta):
-	for i in 8:
-		if leg_positions.has(i):
-			if leg_rest_positions.has(i):
-				%LegLines.get_child(i).set_point_position(1, to_local(leg_positions[i]))
-			else:
-				var lerp_to = to_global(get_leg_trailing_position(%LegLines.get_child(i).get_point_position(0)))
-				leg_positions[i] = leg_positions[i].lerp(lerp_to, delta * leg_speed) #lerp to line point 0
-				#print(leg_positions[i])
-				%LegLines.get_child(i).set_point_position(1, to_local(leg_positions[i]))
-				
-			#if %LegLines.points == [Vector2.ZERO, Vector2.ZERO]:
-				#%LegLines.get_child(i).visible = false
-			#else:
-				#%LegLines.get_child(i).visible = true
+### LEG IK / CURL ###
 
-func get_leg_trailing_position(leg_origin) -> Vector2:
-	var out: Vector2
-	var opposite_movement_angle = move_dir.angle() + PI
-	var move_by = Vector2(leg_max_distance, 0).rotated(opposite_movement_angle)
-	out = leg_origin + move_by
-	#print("s")
-	return out
+func init_leg_chains():
+	for i in 8:
+		var line: Line2D = %LegLines.get_child(i)
+		var hip_local: Vector2 = line.get_point_position(0) if line.get_point_count() > 0 else Vector2.ZERO
+		leg_hip_positions[i] = hip_local
+		leg_chain_points[i] = make_flat_chain(to_global(hip_local))
+
+		#round joints/caps so a multi-segment chain reads as a smooth tentacle instead of a jagged polyline
+		line.joint_mode = Line2D.LINE_JOINT_ROUND
+		line.begin_cap_mode = Line2D.LINE_CAP_ROUND
+		line.end_cap_mode = Line2D.LINE_CAP_ROUND
+
+		#taper the tentacle: thick where it meets the body, thin at the tip
+		var taper := Curve.new()
+		taper.add_point(Vector2(0.0, 1.0))
+		taper.add_point(Vector2(1.0, 0.35))
+		line.width_curve = taper
+
+func make_flat_chain(hip_global: Vector2) -> PackedVector2Array:
+	var chain := PackedVector2Array()
+	chain.resize(leg_segment_count + 1)
+	for p in chain.size():
+		chain[p] = hip_global
+	return chain
+
+func update_legs(delta):
+	var t := Time.get_ticks_msec() / 1000.0
+	for i in 8:
+		var line: Line2D = %LegLines.get_child(i)
+		var hip_local: Vector2 = leg_hip_positions.get(i, line.get_point_position(0))
+		var hip_global: Vector2 = to_global(hip_local)
+
+		if !leg_chain_points.has(i) or leg_chain_points[i].size() != leg_segment_count + 1:
+			leg_chain_points[i] = make_flat_chain(hip_global) #first frame for this leg, or segment_count changed live
+		var current_chain: PackedVector2Array = leg_chain_points[i]
+
+		var is_grounded := leg_rest_positions.has(i) and leg_positions.has(i)
+		var desired_chain: PackedVector2Array
+		if is_grounded: #reach for the planted foot target with a bending IK chain
+			desired_chain = solve_leg_ik(current_chain, hip_global, leg_positions[i], leg_segment_length, leg_ik_iterations)
+		else: #not currently targeting anything - curl the tentacle in near the body instead
+			desired_chain = get_curl_chain(hip_global, i, t)
+			leg_positions[i] = desired_chain[desired_chain.size() - 1] #keep the last-known tip in sync so re-grounding eases in smoothly
+
+		var follow_t: float = clamp(delta * leg_chain_follow_speed, 0.0, 1.0)
+		var new_chain := PackedVector2Array()
+		new_chain.resize(current_chain.size())
+		new_chain[0] = hip_global #the hip is rigidly attached to the body, it never lags
+		for p in range(1, current_chain.size()):
+			new_chain[p] = current_chain[p].lerp(desired_chain[p], follow_t)
+		leg_chain_points[i] = new_chain
+
+		var local_points := PackedVector2Array()
+		local_points.resize(new_chain.size())
+		for p in new_chain.size():
+			local_points[p] = to_local(new_chain[p])
+		line.points = local_points
+
+#classic FABRIK solve: chain_in seeds the elbow direction so the pose stays continuous frame to frame instead of popping
+func solve_leg_ik(chain_in: PackedVector2Array, root: Vector2, target_pos: Vector2, segment_length: float, iterations: int) -> PackedVector2Array:
+	var n := chain_in.size()
+	if n < 2:
+		return chain_in
+	var points := chain_in.duplicate()
+	points[0] = root
+
+	var total_length: float = segment_length * float(n - 1)
+	var dist_to_target: float = root.distance_to(target_pos)
+
+	if dist_to_target >= total_length: #target unreachable this frame - stretch straight toward it
+		var dir := safe_dir(target_pos - root, Vector2.RIGHT)
+		for i in range(1, n):
+			points[i] = points[i - 1] + dir * segment_length
+		return points
+
+	for _iter in iterations:
+		#backward pass: pin the tip to the target, walk back toward the root
+		points[n - 1] = target_pos
+		for i in range(n - 2, -1, -1):
+			var dir := safe_dir(points[i] - points[i + 1], Vector2.RIGHT)
+			points[i] = points[i + 1] + dir * segment_length
+		#forward pass: pin the root, walk back out toward the tip
+		points[0] = root
+		for i in range(1, n):
+			var dir := safe_dir(points[i] - points[i - 1], Vector2.RIGHT)
+			points[i] = points[i - 1] + dir * segment_length
+		if points[n - 1].distance_to(target_pos) < 0.5:
+			break
+	return points
+
+func safe_dir(v: Vector2, fallback: Vector2) -> Vector2:
+	if v.length_squared() < 0.0001:
+		return fallback
+	return v.normalized()
+
+#procedural forward-kinematics curl used whenever a leg has no active target: spirals the tentacle
+#in toward the body with a gentle idle wiggle, instead of just going limp or snapping away
+func get_curl_chain(hip_global: Vector2, leg_index: int, t: float) -> PackedVector2Array:
+	var chain := PackedVector2Array()
+	chain.resize(leg_segment_count + 1)
+	chain[0] = hip_global
+
+	var base_dir: Vector2 = hip_global - global_position
+	var angle: float = safe_dir(base_dir, Vector2.RIGHT.rotated(leg_index * TAU / 8.0)).angle()
+	var phase: float = leg_index * 0.9
+	var pos := hip_global
+
+	for s in leg_segment_count:
+		var segment_progress: float = float(s + 1) / float(leg_segment_count) #tip wiggles more than the base
+		var wiggle: float = sin(t * leg_curl_speed + phase + s * 0.7) * leg_curl_wiggle_amount * segment_progress
+		angle += leg_curl_amount + wiggle
+		pos += Vector2(leg_segment_length, 0).rotated(angle)
+		chain[s + 1] = pos
+
+	return chain
 
 ### SIGNALS ###
 
@@ -258,57 +367,3 @@ func _on_PlayerDetector_body_entered(body):
 
 func _on_PlayerDetector_body_exited(_body):
 	target = null
-
-
-
-### old code save for spider or walker etc
-#func _on_physics_process(delta):
-	#var nearest_ne = get_nearest_point_collision($LegSectorNE)
-	#if nearest_ne != Vector2.INF:
-		#ne_leg_target = nearest_ne
-#
-	#var nearest_nw = get_nearest_point_collision($LegSectorNW)
-	#if nearest_nw != Vector2.INF:
-		#nw_leg_target = nearest_nw
-#
-#
-	#if north_legs_enabled:
-		#var can_west_step = false
-		#var can_east_step = false
-#
-		#if nw_leg_target != Vector2.INF && nw_leg_rest_position.distance_to(nw_leg_target) > leg_step_distance:
-			#can_west_step = true
-		#if ne_leg_target != Vector2.INF && ne_leg_rest_position.distance_to(ne_leg_target) > leg_step_distance:
-			#can_east_step = true
-#
-		#if can_west_step and !can_east_step:
-			#print("west_step")
-			#nw_leg_rest_position = nw_leg_target
-		#elif can_east_step and !can_west_step:
-			#print("east_step")
-			#ne_leg_rest_position = ne_leg_target
-		#elif can_west_step and can_east_step:
-			#if nw_leg_rest_position.distance_to(nw_leg_target) > ne_leg_rest_position.distance_to(ne_leg_target):
-				#print("west_step")
-				#nw_leg_rest_position = nw_leg_target
-			#else:
-				#print("east_step")
-				#ne_leg_rest_position = ne_leg_target
-#
-#
-		#north_legs_enabled = false
-		#$NorthLegCooldown.start(leg_cooldown)
-#
-	#if ne_leg_position == Vector2.INF:
-		#ne_leg_position = ne_leg_target
-	#else:
-		#ne_leg_position = ne_leg_position.lerp(ne_leg_rest_position, delta * leg_speed)
-#
-	#if nw_leg_position == Vector2.INF:
-		#nw_leg_position = nw_leg_target
-	#else:
-		#nw_leg_position = nw_leg_position.lerp(nw_leg_rest_position, delta * leg_speed)
-#
-	#$LegRestNE.global_position = ne_leg_rest_position
-	#$LegRestNW.global_position = nw_leg_rest_position
-	#update_legs()
