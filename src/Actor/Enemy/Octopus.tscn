@@ -22,30 +22,6 @@ points = PackedVector2Array(0, 64, 36, 58, 68, 36, 88, 4, 96, -32, 88, -68, 68, 
 
 [sub_resource type="CanvasItemMaterial" id="11"]
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_h74fb"]
-points = PackedVector2Array(0, 0, 91, -91, 78, -101, 64, -111, 49, -118, 33, -124, 17, -127, 0, -128)
-
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_tnbw2"]
-points = PackedVector2Array(0, 0, 128, 0, 127, -17, 124, -33, 118, -49, 111, -64, 101, -78, 91, -91)
-
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_gy16h"]
-points = PackedVector2Array(0, 0, 91, 91, 101, 78, 111, 64, 118, 49, 124, 33, 127, 17, 128, 0)
-
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_ocfyb"]
-points = PackedVector2Array(0, 0, 0, 128, 17, 127, 33, 124, 49, 118, 64, 111, 78, 101, 91, 91)
-
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_llxnq"]
-points = PackedVector2Array(0, 0, -91, 91, -78, 101, -64, 111, -49, 118, -33, 124, -17, 127, 0, 128)
-
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_j2lkh"]
-points = PackedVector2Array(0, 0, -128, 0, -127, 17, -124, 33, -118, 49, -111, 64, -101, 78, -91, 91)
-
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_1f056"]
-points = PackedVector2Array(0, 0, -91, -91, -101, -78, -111, -64, -118, -49, -124, -33, -127, -17, -128, 0)
-
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_s12h0"]
-points = PackedVector2Array(0, 0, 0, -128, -17, -127, -33, -124, -49, -118, -64, -111, -78, -101, -91, -91)
-
 [node name="Octopus" type="CharacterBody2D" unique_id=64530004 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
@@ -173,41 +149,6 @@ texture = ExtResource("2_tnbw2")
 
 [node name="DebugTargets" type="Node2D" parent="." unique_id=1926680434]
 unique_name_in_owner = true
-
-[node name="LegSectorsOld" type="Node2D" parent="." unique_id=128116655]
-visible = false
-
-[node name="Sector0" type="CollisionShape2D" parent="LegSectorsOld" unique_id=270456232]
-shape = SubResource("ConvexPolygonShape2D_h74fb")
-disabled = true
-
-[node name="Sector1" type="CollisionShape2D" parent="LegSectorsOld" unique_id=121753960]
-shape = SubResource("ConvexPolygonShape2D_tnbw2")
-disabled = true
-
-[node name="Sector2" type="CollisionShape2D" parent="LegSectorsOld" unique_id=1885329234]
-shape = SubResource("ConvexPolygonShape2D_gy16h")
-disabled = true
-
-[node name="Sector3" type="CollisionShape2D" parent="LegSectorsOld" unique_id=265703260]
-shape = SubResource("ConvexPolygonShape2D_ocfyb")
-disabled = true
-
-[node name="Sector4" type="CollisionShape2D" parent="LegSectorsOld" unique_id=172706694]
-shape = SubResource("ConvexPolygonShape2D_llxnq")
-disabled = true
-
-[node name="Sector5" type="CollisionShape2D" parent="LegSectorsOld" unique_id=442860443]
-shape = SubResource("ConvexPolygonShape2D_j2lkh")
-disabled = true
-
-[node name="Sector6" type="CollisionShape2D" parent="LegSectorsOld" unique_id=1896107986]
-shape = SubResource("ConvexPolygonShape2D_1f056")
-disabled = true
-
-[node name="Sector7" type="CollisionShape2D" parent="LegSectorsOld" unique_id=221715793]
-shape = SubResource("ConvexPolygonShape2D_s12h0")
-disabled = true
 
 [node name="DebugRests" type="Node2D" parent="." unique_id=2033877061]
 unique_name_in_owner = true

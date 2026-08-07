@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4]
+[gd_scene format=4]
 
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="1_4uhn8"]
 [ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="2_s4ctt"]
@@ -17,14 +17,14 @@
 [ext_resource type="Script" path="res://src/Editor/TriggerSpawn.gd" id="14_j7c6d"]
 [ext_resource type="Script" path="res://src/Utility/Waypoint.gd" id="16_ug36o"]
 
-[node name="DefaultGodot4" type="Node2D"]
+[node name="DefaultGodot4" type="Node2D" unique_id=280010617]
 script = ExtResource("1_4uhn8")
 level_name = "DefaultGodot4"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 conversation = "cutscene_test"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." instance=ExtResource("3_t226a")]
+[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=338214731 instance=ExtResource("3_t226a")]
 offset_left = -256.0
 offset_top = -512.0
 offset_right = 1088.0
@@ -51,55 +51,55 @@ layer_height_offsets = {
 focus = 4
 tile_mode = 1
 
-[node name="TileMap" type="Node2D" parent="."]
+[node name="TileMap" type="Node2D" parent="." unique_id=1654249715]
 z_index = 1
 
-[node name="FarBack" type="TileMapLayer" parent="TileMap"]
+[node name="FarBack" type="TileMapLayer" parent="TileMap" unique_id=1427063019]
 z_index = -1
 use_parent_material = true
 tile_map_data = PackedByteArray("AAAHAPf/AAAAAAAAAAAGAPf/AAAAAAAAAAAFAPf/AAAAAAAAAAAFAPj/AAAAAAAAAAAGAPj/AAAAAAAAAAAHAPj/AAAAAAAAAAAHAPb/AAAAAAAAAAAGAPb/AAAAAAAAAAAFAPb/AAAAAAAAAAAEAPn/AAAAAAAAAAAFAPn/AAAAAAAAAAAGAPn/AAAAAAAAAAAHAPn/AAAAAAAAAAAFAPX/AAAAAAAAAAAGAPX/AAAAAAAAAAAFAPP/AAAAAAAAAAAFAPT/AAAAAAAAAAAGAPT/AAAAAAAAAAAHAPT/AAAAAAAAAAAHAPX/AAAAAAAAAAA=")
 tile_set = ExtResource("2_s4ctt")
 
-[node name="Back" type="TileMapLayer" parent="TileMap"]
+[node name="Back" type="TileMapLayer" parent="TileMap" unique_id=1706502147]
 z_index = -1
 use_parent_material = true
 tile_map_data = PackedByteArray("AADx/woAAAAAAAcAAADy/woAAAAAAAcAAADz/woAAAAAAAcAAAD0/woAAAAAAAcAAAD1/woAAAAAAAcAAAD2/woAAAAAAAcAAAD3/woAAAAAAAcAAAD3/wkAAAAAAAcAAAD4/wkAAAAAAAcAAAD4/wgAAAAAAAcAAAD4/woAAAAAAAcAAAD2/wkAAAAAAAcAAAD1/wkAAAAAAAcAAAD0/wkAAAAAAAcAAAD0/wgAAAAAAAcAAADz/wgAAAAAAAcAAADy/wgAAAAAAAcAAADx/wgAAAAAAAcAAADy/wkAAAAAAAcAAADz/wkAAAAAAAcAAADx/wkAAAAAAAcAAADx/wcAAAAAAAcAAADx/wYAAAAAAAcAAADy/wYAAAAAAAcAAADz/wYAAAAAAAcAAAD0/wYAAAAAAAcAAAD1/wcAAAAAAAcAAAD2/wcAAAAAAAcAAAD2/wgAAAAAAAcAAAD1/wgAAAAAAAcAAAD0/wcAAAAAAAcAAADz/wcAAAAAAAcAAADy/wcAAAAAAAcAAAD3/wcAAAAAAAcAAAD3/wgAAAAAAAcAAAD4/wcAAAAAAAcAAAD4/wYAAAAAAAcAAAD3/wYAAAAAAAcAAAD2/wYAAAAAAAcAAAD1/wYAAAAAAAcAAADx/wUAAAAAAAYAAADy/wUAAAAAAAYAAADz/wUAAAAAAAYAAAD0/wUAAAAAAAYAAAD1/wUAAAAAAAYAAAD2/wUAAAAAAAYAAAD3/wUAAAAAAAYAAAD4/wUAAAAAAAYAAAAVAAUAAAABAAQAAAAVAAQAAAABAAQAAAAVAAMAAAABAAQAAAAVAAIAAAABAAQAAAAVAAEAAAABAAQAAAAVAAAAAAABAAQAAAAGAP//AAADAAQAAAAFAAkAAAAAAAQAAAAFAAoAAAAAAAUAAAAJAAkAAAAAAAQAAAAJAAoAAAAAAAUAAAAQAAkAAAAAAAQAAAAQAAoAAAAAAAUAAAADAP//AAAEAAQAAAA=")
 tile_set = ExtResource("2_s4ctt")
 
-[node name="Front" type="TileMapLayer" parent="TileMap"]
+[node name="Front" type="TileMapLayer" parent="TileMap" unique_id=1571932739]
 z_index = 1
 use_parent_material = true
 tile_map_data = PackedByteArray("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AAApAAsAAAAAAAgAAAAoAAsAAAAAAAgAAAAnAAsAAAAAAAgAAAD+//n/AAAAAAgAAAAjAAMAAAAAAAgAAAAkAAMAAAAAAAgAAAAeAAMAAAAAAAgAAAAfAAMAAAAAAAgAAAD4//z/AAAAAAgAAAD3//z/AAAAAAgAAAD2//z/AAAAAAgAAADy//z/AAAAAAgAAADx//z/AAAAAAgAAADw//z/AAAAAAgAAADv//z/AAAAAAgAAADz/wEAAAAAAAgAAAD0/wEAAAAAAAgAAAD1/wEAAAAAAAgAAAD2/wEAAAAAAAgAAADw/wsAAAAAAAgAAADx/wsAAAAAAAgAAADy/wsAAAAAAAgAAADz/wsAAAAAAAgAAAD0/wsAAAAAAAgAAAD1/wsAAAAAAAgAAAD2/wsAAAAAAAgAAAD3/wsAAAAAAAgAAAD4/wsAAAAAAAgAAAD5/wsAAAAAAAgAAAD5/woAAAAAAAgAAAD5/wkAAAAAAAgAAAD5/wgAAAAAAAgAAAD5/wcAAAAAAAgAAAD5/wYAAAAAAAgAAAD5/wUAAAAAAAgAAAD6/wsAAAAAAAgAAAD7/wsAAAAAAAgAAAD8/wsAAAAAAAgAAAD9/wsAAAAAAAgAAAD+/wsAAAAAAAgAAADw/wUAAAAAAAgAAADw/wYAAAAAAAgAAADw/wcAAAAAAAgAAADw/wgAAAAAAAgAAADw/wkAAAAAAAgAAADw/woAAAAAAAgAAADz/wgAAAAAAAgAAAD2/wgAAAAAAAgAAAD1//n/AAAAAAgAAAD2//n/AAAAAAgAAAD3//n/AAAAAAgAAAD4//n/AAAAAAgAAAD5//n/AAAAAAgAAAD9//n/AAAAAAgAAAAvAAMAAAAAAAgAAAAwAAMAAAAAAAgAAAAxAAMAAAAAAAgAAAAyAAMAAAAAAAgAAAAzAAMAAAAAAAgAAAA0AAMAAAAAAAgAAAA1AAMAAAAAAAgAAAA2AAMAAAAAAAgAAAA3AAMAAAAAAAgAAAA4AAMAAAAAAAgAAAA5AAMAAAAAAAgAAAA6AAMAAAAAAAgAAAA7AAMAAAAAAAgAAAA8AAMAAAAAAAgAAAA9AAMAAAAAAAgAAAA+AAMAAAAAAAgAAAA/AAMAAAAAAAgAAABAAAMAAAAAAAgAAABBAAMAAAAAAAgAAABCAAMAAAAAAAgAAABDAAMAAAAAAAgA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")
 tile_set = ExtResource("2_s4ctt")
 
-[node name="FarFront" type="TileMapLayer" parent="TileMap"]
+[node name="FarFront" type="TileMapLayer" parent="TileMap" unique_id=152961568]
 z_index = 2
 use_parent_material = true
 tile_map_data = PackedByteArray("AADz/wAAAAADAA0AAAD0/wAAAAADAA0AAAD1/wAAAAADAA0AAAD2/wAAAAADAA0AAAASAP//AAADAA0AAAD//+3/AAAIAAwAAAAFAO3/AAAIAAwAAAD9//D/AAAIAAwAAAD7//X/AAAIAAwAAAADAPD/AAAAAAwAAAABAPD/AAAAAAwAAAD///D/AAAAAAwAAAD7//D/AAAAAAwAAAA=")
 tile_set = ExtResource("2_s4ctt")
 
-[node name="Props" type="Node2D" parent="."]
+[node name="Props" type="Node2D" parent="." unique_id=1006533911]
 
-[node name="Actors" type="Node2D" parent="."]
+[node name="Actors" type="Node2D" parent="." unique_id=1167130537]
 
-[node name="Triggers" type="Node2D" parent="."]
+[node name="Triggers" type="Node2D" parent="." unique_id=2105751407]
 visible = false
 
-[node name="SunLight" type="Area2D" parent="." groups=["SunLights"] instance=ExtResource("6_mcn17")]
+[node name="SunLight" type="Area2D" parent="." unique_id=1831667802 groups=["SunLights"] instance=ExtResource("6_mcn17")]
 position = Vector2(35, -198)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("8_v7nqo")
 
-[node name="Spawns" type="Node2D" parent="."]
+[node name="Spawns" type="Node2D" parent="." unique_id=1214205435]
 
-[node name="SpawnPoint" type="Area2D" parent="Spawns" groups=["SpawnPoints"] instance=ExtResource("5_sjslv")]
+[node name="SpawnPoint" type="Area2D" parent="Spawns" unique_id=1770140205 groups=["SpawnPoints"] instance=ExtResource("5_sjslv")]
 position = Vector2(152, -256)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("10_c0l8s")
 
-[node name="Child" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Child" type="Area2D" parent="Spawns" unique_id=2031513903 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(-40, 0)
@@ -117,7 +117,7 @@ properties = {
 "voiced": [true, 1]
 }
 
-[node name="Frog" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Frog" type="Area2D" parent="Spawns" unique_id=2052456288 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(280, -192)
@@ -133,7 +133,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Nun" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Nun" type="Area2D" parent="Spawns" unique_id=603584288 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(336, 176)
@@ -151,7 +151,7 @@ properties = {
 "voiced": [true, 1]
 }
 
-[node name="Stalagtite" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Stalagtite" type="Area2D" parent="Spawns" unique_id=1066043460 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(328, -112)
@@ -167,7 +167,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Stalagtite1" type="Area2D" parent="Spawns" unique_id=209756062 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(360, -112)
@@ -183,7 +183,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Stalagtite2" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Stalagtite2" type="Area2D" parent="Spawns" unique_id=1040936824 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(296, -112)
@@ -199,7 +199,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Frog1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Frog1" type="Area2D" parent="Spawns" unique_id=1233970115 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(-248, 80)
@@ -215,7 +215,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Sphagnum" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Sphagnum" type="Area2D" parent="Spawns" unique_id=546787607 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(-24, -112)
@@ -230,7 +230,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Shield" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Shield" type="Area2D" parent="Spawns" unique_id=1190388624 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(144, 96)
@@ -249,7 +249,7 @@ properties = {
 "walk_max_time": [10.0, 3]
 }
 
-[node name="Junior" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Junior" type="Area2D" parent="Spawns" unique_id=602156685 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(208, 48)
@@ -269,7 +269,7 @@ properties = {
 "walk_max_time": [10.0, 3]
 }
 
-[node name="Stalagtite3" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Stalagtite3" type="Area2D" parent="Spawns" unique_id=1596195407 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(280, -168)
@@ -285,7 +285,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sentry" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Sentry" type="Area2D" parent="Spawns" unique_id=1137336754 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(392, 96)
@@ -307,7 +307,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Sentry1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Sentry1" type="Area2D" parent="Spawns" unique_id=158721615 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(520, -112)
@@ -329,7 +329,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Frog2" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Frog2" type="Area2D" parent="Spawns" unique_id=1961509633 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(392, 0)
@@ -345,7 +345,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Tabith" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Tabith" type="Area2D" parent="Spawns" unique_id=353993341 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(232, 96)
@@ -364,7 +364,7 @@ properties = {
 "walk_speed": [Vector2(50, 50), 5]
 }
 
-[node name="Sage" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Sage" type="Area2D" parent="Spawns" unique_id=2085444651 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(216, 176)
@@ -383,7 +383,7 @@ properties = {
 "walk_speed": [Vector2(50, 50), 5]
 }
 
-[node name="Sage1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Sage1" type="Area2D" parent="Spawns" unique_id=2042473040 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(328, 96)
@@ -402,7 +402,7 @@ properties = {
 "walk_speed": [Vector2(50, 50), 5]
 }
 
-[node name="Frog3" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Frog3" type="Area2D" parent="Spawns" unique_id=16023891 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(-8, 160)
@@ -418,7 +418,7 @@ properties = {
 "speed": [Vector2(50, 100), 5]
 }
 
-[node name="Beetle" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Beetle" type="Area2D" parent="Spawns" unique_id=1071431969 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(-168, -112)
@@ -436,7 +436,7 @@ properties = {
 "wall_dir": [Vector2(-1, 0), 5]
 }
 
-[node name="Climber" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Climber" type="Area2D" parent="Spawns" unique_id=1732749599 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(160, -168)
@@ -455,7 +455,7 @@ properties = {
 "speed": [Vector2(150, 350), 5]
 }
 
-[node name="Beetle1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Beetle1" type="Area2D" parent="Spawns" unique_id=1460986305 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(744, -16)
@@ -473,7 +473,7 @@ properties = {
 "wall_dir": [Vector2(-1, 0), 5]
 }
 
-[node name="LoadZone" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="LoadZone" type="MarginContainer" parent="Spawns" unique_id=1746054535 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -493,7 +493,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="LoadZone1" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="LoadZone1" type="MarginContainer" parent="Spawns" unique_id=938905797 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -513,7 +513,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Spikes" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Spikes" type="MarginContainer" parent="Spawns" unique_id=139379103 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -530,7 +530,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Water" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Water" type="MarginContainer" parent="Spawns" unique_id=1519426699 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -547,7 +547,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Ladder" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Ladder" type="MarginContainer" parent="Spawns" unique_id=79298617 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -563,7 +563,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Spikes1" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Spikes1" type="MarginContainer" parent="Spawns" unique_id=336402562 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -580,7 +580,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Sign" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Sign" type="MarginContainer" parent="Spawns" unique_id=891273786 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -600,7 +600,7 @@ batsdsfdsdfsdsd
 }
 size_is_default = false
 
-[node name="Door" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Door" type="MarginContainer" parent="Spawns" unique_id=1772813204 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -622,7 +622,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door1" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Door1" type="MarginContainer" parent="Spawns" unique_id=1566516811 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -644,7 +644,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door2" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Door2" type="MarginContainer" parent="Spawns" unique_id=1114677343 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -666,7 +666,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="FlavorText" type="MarginContainer" parent="Spawns" groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="FlavorText" type="MarginContainer" parent="Spawns" unique_id=889730380 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -684,7 +684,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Stalagtite4" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Stalagtite4" type="Area2D" parent="Spawns" unique_id=1175240915 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(-168, 48)
@@ -702,7 +702,7 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Tabith1" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Tabith1" type="Area2D" parent="Spawns" unique_id=711400162 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 position = Vector2(-168, 176)
@@ -723,10 +723,10 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Octopus" type="Area2D" parent="Spawns" groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Octopus" type="Area2D" parent="Spawns" unique_id=1286195828 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
 modulate = Color(1, 1, 1, 0.75)
 z_index = 999
-position = Vector2(200, -368)
+position = Vector2(200, -280)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_jjgiq")
@@ -740,7 +740,7 @@ properties = {
 "water_gravity": [150.0, 3]
 }
 
-[node name="Waypoint" type="Area2D" parent="." groups=["Entities", "VisualUtilities", "Waypoints"] instance=ExtResource("9_20ig1")]
+[node name="Waypoint" type="Area2D" parent="." unique_id=1261938442 groups=["Entities", "VisualUtilities", "Waypoints"] instance=ExtResource("9_20ig1")]
 modulate = Color(1, 0, 0, 1)
 position = Vector2(-72, 0)
 collision_layer = 16384
@@ -748,7 +748,7 @@ collision_mask = 0
 script = ExtResource("16_ug36o")
 owner_id = "child"
 
-[node name="Waypoint2" type="Area2D" parent="." groups=["Entities", "VisualUtilities", "Waypoints"] instance=ExtResource("9_20ig1")]
+[node name="Waypoint2" type="Area2D" parent="." unique_id=1765633656 groups=["Entities", "VisualUtilities", "Waypoints"] instance=ExtResource("9_20ig1")]
 modulate = Color(1, 0, 0, 1)
 position = Vector2(40, 0)
 collision_layer = 16384

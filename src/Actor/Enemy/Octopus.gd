@@ -38,15 +38,19 @@ var leg_min_proximity = 4.0
 @export var leg_curl_wiggle_amount: float = 0.18 ## radians of extra sinusoidal wiggle applied while idle
 @export var leg_curl_speed: float = 2.2 ## speed of the idle wiggle animation
 
-var leg_segment_length: float = 16.0 #recomputed in setup() as leg_max_distance / leg_segment_count so the IK chain still reaches leg_max_distance
+var leg_segment_length: float = 8.0 #recomputed in setup() as leg_max_distance / leg_segment_count so the IK chain still reaches leg_max_distance
 var leg_chain_points = {} #leg_index -> PackedVector2Array of GLOBAL joint positions, hip [0] ... tip [leg_segment_count]
 var leg_hip_positions = {} #leg_index -> local hip anchor, cached from each Line2D's authored point 0
 
+var base_speed := Vector2(40.0, 40.0)
+var grab_speed := Vector2(10.0, 10.0)
+var grab_decay_rate := 5.0
+var grab_velocity := Vector2.ZERO
 
 func setup():
 	reward = 5
 	hp = 8
-	speed = Vector2(60, 60)
+	speed = base_speed
 	setup_a_star()
 	leg_segment_length = leg_max_distance / float(leg_segment_count)
 	init_leg_chains()
@@ -80,16 +84,35 @@ func _on_physics_process(delta):
 			active_leg_distance = enabled_rest_to_target_distances[d]
 			active_leg = d
 
+
 	if active_leg != -1: #do a step
 		#print("octopus_step")
 		leg_rest_positions[active_leg] = leg_targets[active_leg]
 		if !leg_positions.has(active_leg): #first time, just put it on the target
 			leg_positions[active_leg] = leg_targets[active_leg]
 
+		#speed boost
+		var move_angle = move_dir.angle()
+		var angle_to_leg = self.get_angle_to(leg_rest_positions[active_leg])
+		var angle_dif = angle_difference(move_angle, angle_to_leg)
+		var alignment_factor = cos(angle_dif)
+		var speed_multiplier = max(0.0, alignment_factor)
+		grab_velocity += speed_multiplier * grab_speed.rotated(move_angle)
+
+	grab_velocity = grab_velocity.move_toward(Vector2.ZERO, grab_decay_rate * delta)
+
 	for k in 8:
 		if leg_positions.has(k) && leg_rest_positions.has(k):
 			leg_positions[k] = leg_positions[k].lerp(leg_rest_positions[k], delta * leg_speed) #otherwise lerp to the rest position
 
+
+	#print(leg_targets.size())
+	#if leg_targets.size() == 0:
+		#speed = base_speed / 4.0
+	#elif leg_targets.size() < 4:
+		#speed = base_speed / leg_targets.size()
+	#else:
+		#speed = base_speed
 	if debug: set_leg_debug_visuals()
 	update_legs(delta)
 
@@ -173,6 +196,7 @@ func do_chase(): #goes to point 1 first btw
 	else:
 		move_dir = (path[current_point] - global_position).normalized()
 		velocity = calc_velocity(move_dir, false)
+		velocity += grab_velocity
 		move_and_slide()
 
 
