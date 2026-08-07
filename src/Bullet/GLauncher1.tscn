@@ -93,7 +93,7 @@ position = Vector2(0, 5)
 texture = ExtResource("2")
 hframes = 8
 vframes = 3
-frame = 1
+frame = 7
 
 [node name="Timer" type="Timer" parent="." unique_id=848141228]
 process_callback = 0
@@ -104,7 +104,7 @@ libraries/ = SubResource("AnimationLibrary_5bfrg")
 
 [node name="WorldCast" type="RayCast2D" parent="." unique_id=721022876]
 z_index = 999
-collision_mask = 8
+collision_mask = 40
 collide_with_areas = true
 
 [connection signal="area_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]

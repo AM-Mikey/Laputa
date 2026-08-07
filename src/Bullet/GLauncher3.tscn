@@ -104,7 +104,7 @@ one_shot = true
 libraries/ = SubResource("AnimationLibrary_trxyl")
 
 [node name="WorldCast" type="RayCast2D" parent="." unique_id=1370582998]
-collision_mask = 8
+collision_mask = 40
 collide_with_areas = true
 
 [connection signal="area_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
