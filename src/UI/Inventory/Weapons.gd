@@ -1,28 +1,23 @@
 class_name Weapons extends Node2D
 
+const STAR_BLANK_TEXTURE = preload("res://assets/UI/Inventory/Items/StarBlank.png") 
+const STAR_FULL_TEXTURE = preload("res://assets/UI/Inventory/Items/StarFull.png") 
+
 @onready var pc : Player = f.pc()
-
-
-var gun_icon_textures = []
-var gun_side_textures = []
 
 @onready var weapon_wheel = %WeaponWheel
 
 @onready var gun_icons = %GunIcons
 @onready var gun_sprites = %GunSprites
 
-
-
 @onready var weapon_wheel_animator = %WeaponWheelAnimator
 @onready var weapon_side_animator = %WeaponSideAnimator
+
 
 func _ready():
 	pc.guns_updated.connect(_on_guns_updated)
 	refresh_icons(pc.guns.get_children())
-	#[Revolver:<Node2D#378779211848>, Speeder:<Node2D#383476832338>, MPistol:<Node2D#386161186935>, GLauncher:<Node2D#388006680712>, Shotgun:<Node2D#390691035283>, Tsurugi:<Node2D#393023068324>, Red7:<Node2D#395086665908>, Roberta:<Node2D#397334812866>]
-func print_children(node: Node) -> void:
-	for child in node.get_children():
-		print(child)
+
 
 func refresh_icons(guns):
 	for i in range(min(guns.size(), 4)):
@@ -36,19 +31,15 @@ func refresh_icons(guns):
 	if guns.size() >= 1:
 		gun_icons.get_node("5").texture = guns[-1].icon_round_texture
 		gun_sprites.get_node("5").texture = guns[-1].icon_texture
+
 func rotate_gun(guns, rot_dir: String):
-
-	refresh_icons(guns)
-
 	match rot_dir:
 		"CW":
-			print(rot_dir + " DOWN")
 			weapon_wheel_animator.play("CW")
 			weapon_side_animator.play("DOWN")
 		"CCW":
 			weapon_wheel_animator.play("CCW")
 			weapon_side_animator.play("UP")
-			print(rot_dir + " UP")
 		#"CCW_Full": #TODO: change this animation to a full rotation to a different gun
 				#weapon_wheel_animator.play("CCW", -1, 4.0)
 				#weapon_wheel.get_node("Bullet1/Gun").texture = guns[0].icon_texture
@@ -72,17 +63,17 @@ func _on_guns_updated(guns, cause):
 
 func update_weapon_ui(guns, rotate_dir):
 	rotate_gun(guns, rotate_dir)
-	update_weapon_stats()
+	update_weapon_stats(guns)
 
-	
-func update_weapon_stats():
-	var guns = pc.guns
-	if guns.get_child_count() == 0:
+func update_weapon_stats(guns):
+	if guns.size() == 0:
 		return
 
 	# Note that index 0 is always the active gun
-	var active_gun: Gun = guns.get_child(0)  
+	var active_gun: Gun = guns[0]
 
+	update_star_count(active_gun.level, active_gun.max_level)
+	
 	%CooldownLabel.text = str(active_gun.cooldown_time)
 	%DamageLabel.text = str(active_gun.damage)
 	%MaxAmmoLabel.text = str(active_gun.max_ammo)
@@ -90,8 +81,7 @@ func update_weapon_stats():
 	%RangeLabel.text = str(active_gun.f_range)
 	%InventoryHeader.text = active_gun.display_name
 	%InventoryBody.text = active_gun.description
-	update_star_count(active_gun.level, active_gun.max_level)
-	
+
 	%Lifetime.visible = active_gun.has_lifetime
 	%Range.visible = not active_gun.has_lifetime
 
@@ -104,42 +94,11 @@ func update_star_count(gun_level: int, max_level: int):
 		5: %FiveStar,
 		6: %SixStar,
 	}
-
 	for key in star_groups:
 		var group = star_groups[key]
-		group.visible = (key == max_level)
 
+		group.visible = (key == max_level)
 		if key == max_level:
 			for i in group.get_child_count():
-				group.get_child(i).visible = i < gun_level
-
-func refresh_gun_icon_textures():
-	%GunIcons.get_node("0").texture = gun_icon_textures[0]
-	%GunIcons.get_node("1").texture = gun_icon_textures[1]
-	%GunIcons.get_node("2").texture = gun_icon_textures[2]
-	%GunIcons.get_node("3").texture = gun_icon_textures[3]
-	%GunIcons.get_node("4").texture = gun_icon_textures[4]
-	%GunIcons.get_node("5").texture = gun_icon_textures[5]
-	
-func refresh_gun_sprite_textures():
-	%GunSprites.get_node("0").texture = gun_side_textures[0]
-	%GunSprites.get_node("1").texture = gun_side_textures[1]
-	%GunSprites.get_node("2").texture = gun_side_textures[2]
-	%GunSprites.get_node("3").texture = gun_side_textures[3]
-	%GunSprites.get_node("4").texture = gun_side_textures[4]
-	%GunSprites.get_node("5").texture = gun_side_textures[5]
-
-func side_shift():
-	# Note: Currently UP isn't added animated...
-	# Also reuse some functionality by creating a cyclicarray 
-	# TODO: Fix the one-off shift issue with the guns/bullets, also this is very unclean will have to look a gun order
-	weapon_side_animator.play("DOWN")
-	gun_side_textures.push_front(gun_side_textures.pop_back())
-	refresh_gun_sprite_textures()
-	
-	for i in range(6):
-		var node = %GunSprites.get_node(str(i))
-		node.modulate = Color(1, 1, 1) if i == 0 else Color(0.5, 0.5, 0.5)
-
-
-	
+				var star = group.get_child(i)
+				star.texture = STAR_FULL_TEXTURE if i < gun_level else STAR_BLANK_TEXTURE

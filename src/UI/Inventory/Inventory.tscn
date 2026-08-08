@@ -91,10 +91,10 @@ tracks/2/path = NodePath("Side/GunSprites/0:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"times": PackedFloat32Array(0, 0.049999997, 0.09999998, 0.15000002),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(128, 47), Vector2(126, 53), Vector2(123, 58), Vector2(118, 63)]
+"values": [Vector2(125, 21), Vector2(129, 26), Vector2(131, 32), Vector2(132, 40)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -103,10 +103,10 @@ tracks/3/path = NodePath("Side/GunSprites/1:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.09999999, 0.15),
+"times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(110, 69), Vector2(105, 75), Vector2(100, 81), Vector2(100, 86)]
+"values": [Vector2(128, 47), Vector2(126, 53), Vector2(123, 58), Vector2(118, 63)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -139,10 +139,10 @@ tracks/6/path = NodePath("Side/GunSprites/4:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.09999999, 0.15),
+"times": PackedFloat32Array(0, 0.049999997, 0.09999998, 0.15000002),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(82, -7), Vector2(105, 5), Vector2(110, 11), Vector2(118, 17)]
+"values": [Vector2(110, 69), Vector2(105, 75), Vector2(100, 81), Vector2(100, 86)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -151,10 +151,10 @@ tracks/7/path = NodePath("Side/GunSprites/5:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.09999999, 0.15),
+"times": PackedFloat32Array(0, 0.049999997, 0.09999998, 0.15000002),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(125, 21), Vector2(129, 26), Vector2(131, 32), Vector2(132, 40)]
+"values": [Vector2(82, -7), Vector2(105, 5), Vector2(110, 11), Vector2(118, 17)]
 }
 
 [sub_resource type="Animation" id="Animation_knvwb"]
@@ -259,7 +259,7 @@ tracks/7/keys = {
 
 [sub_resource type="Animation" id="Animation_mrnct"]
 resource_name = "UP"
-length = 0.4
+length = 0.3
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -292,10 +292,10 @@ tracks/2/path = NodePath("Side/GunSprites/0:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
+"times": PackedFloat32Array(0, 0.050000004, 0.10000002, 0.15000004),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(100, 81), Vector2(105, 75), Vector2(110, 69), Vector2(118, 63)]
+"values": [Vector2(123, 58), Vector2(126, 53), Vector2(128, 47), Vector2(132, 40)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -304,10 +304,10 @@ tracks/3/path = NodePath("Side/GunSprites/1:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
+"times": PackedFloat32Array(0, 0.050000004, 0.10000002, 0.15000004),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(110, 11), Vector2(105, 5), Vector2(82, -7), Vector2(124, -20)]
+"values": [Vector2(100, 81), Vector2(105, 75), Vector2(110, 69), Vector2(118, 63)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -343,7 +343,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(131, 32), Vector2(129, 26), Vector2(125, 21), Vector2(118, 17)]
+"values": [Vector2(110, 11), Vector2(105, 5), Vector2(82, -7), Vector2(124, -20)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -355,7 +355,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(123, 58), Vector2(126, 53), Vector2(128, 47), Vector2(132, 40)]
+"values": [Vector2(131, 32), Vector2(129, 26), Vector2(125, 21), Vector2(118, 17)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dn5nk"]
@@ -428,10 +428,10 @@ tracks/3/path = NodePath("GunIcons/0:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.049999993, 0.10000002, 0.15000004),
+"times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(21, 60), Vector2(27, 61), Vector2(33, 60), Vector2(38, 58)]
+"values": [Vector2(42, 54), Vector2(45, 50), Vector2(48, 45), Vector2(49, 38)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -443,7 +443,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(6, 45), Vector2(9, 50), Vector2(12, 54), Vector2(16, 58)]
+"values": [Vector2(21, 60), Vector2(27, 61), Vector2(33, 60), Vector2(38, 58)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -455,7 +455,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(12, 24), Vector2(9, 28), Vector2(6, 33), Vector2(5, 39)]
+"values": [Vector2(6, 45), Vector2(9, 50), Vector2(12, 54), Vector2(16, 58)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -464,10 +464,10 @@ tracks/6/path = NodePath("GunIcons/3:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.049999993, 0.10000002, 0.15000004),
+"times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(33, 18), Vector2(27, 17), Vector2(21, 18), Vector2(16, 20)]
+"values": [Vector2(12, 24), Vector2(9, 28), Vector2(6, 33), Vector2(5, 39)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -479,7 +479,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(48, 33), Vector2(45, 28), Vector2(42, 24), Vector2(38, 20)]
+"values": [Vector2(33, 18), Vector2(27, 17), Vector2(21, 18), Vector2(16, 20)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -491,7 +491,7 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(42, 54), Vector2(45, 50), Vector2(48, 45), Vector2(49, 38)]
+"values": [Vector2(48, 33), Vector2(45, 28), Vector2(42, 24), Vector2(38, 20)]
 }
 
 [sub_resource type="Animation" id="Animation_5to30"]
@@ -541,10 +541,10 @@ tracks/3/path = NodePath("GunIcons/0:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"times": PackedFloat32Array(0, 0.050000004, 0.10000002, 0.15000004),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(48, 45), Vector2(45, 50), Vector2(42, 54), Vector2(38, 58)]
+"values": [Vector2(42, 24), Vector2(45, 28), Vector2(48, 33), Vector2(49, 39)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -553,10 +553,10 @@ tracks/4/path = NodePath("GunIcons/1:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
+"times": PackedFloat32Array(0, 0.050000004, 0.10000002, 0.15000004),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(33, 60), Vector2(27, 61), Vector2(21, 60), Vector2(16, 58)]
+"values": [Vector2(48, 45), Vector2(45, 50), Vector2(42, 54), Vector2(38, 58)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -565,10 +565,10 @@ tracks/5/path = NodePath("GunIcons/2:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
+"times": PackedFloat32Array(0, 0.050000004, 0.10000002, 0.15000004),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(12, 54), Vector2(9, 50), Vector2(6, 45), Vector2(5, 39)]
+"values": [Vector2(33, 60), Vector2(27, 61), Vector2(21, 60), Vector2(16, 58)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -577,10 +577,10 @@ tracks/6/path = NodePath("GunIcons/3:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"times": PackedFloat32Array(0, 0.050000004, 0.10000002, 0.15000004),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(6, 33), Vector2(9, 28), Vector2(12, 24), Vector2(16, 20)]
+"values": [Vector2(12, 54), Vector2(9, 50), Vector2(6, 45), Vector2(5, 39)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -589,10 +589,10 @@ tracks/7/path = NodePath("GunIcons/4:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
+"times": PackedFloat32Array(0, 0.050000004, 0.10000002, 0.15000004),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(21, 18), Vector2(27, 17), Vector2(33, 18), Vector2(38, 20)]
+"values": [Vector2(6, 33), Vector2(9, 28), Vector2(12, 24), Vector2(16, 20)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -601,10 +601,10 @@ tracks/8/path = NodePath("GunIcons/5:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
+"times": PackedFloat32Array(0, 0.050000004, 0.10000002, 0.15000004),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(42, 24), Vector2(45, 28), Vector2(48, 33), Vector2(49, 39)]
+"values": [Vector2(21, 18), Vector2(27, 17), Vector2(33, 18), Vector2(38, 20)]
 }
 
 [sub_resource type="Animation" id="Animation_dn5nk"]
@@ -724,6 +724,13 @@ _data = {
 &"CW": SubResource("Animation_5to30"),
 &"RESET": SubResource("Animation_dn5nk")
 }
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_knvwb"]
+load_path = "res://.godot/imported/StarFull.png-c909cfa62abcb7bcecd462c91f28cc4f.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_knvwb"]
+shader = ExtResource("19_mrnct")
+shader_parameter/color = Color(0.2, 0.25490198, 0.27058825, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l1q3b"]
 
@@ -1086,7 +1093,7 @@ unique_name_in_owner = true
 
 [node name="One" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/FourStar" unique_id=63762411]
 position = Vector2(191, 63)
-texture = ExtResource("11_frhsn")
+texture = SubResource("CompressedTexture2D_knvwb")
 centered = false
 
 [node name="Two" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/FourStar" unique_id=1959625928]
@@ -1199,6 +1206,16 @@ layout_mode = 2
 layout_mode = 2
 texture = ExtResource("13_frhsn")
 
+[node name="Shadow" type="TextureRect" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Cooldown/Sprite2D" unique_id=2122100353]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_knvwb")
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 17.0
+offset_bottom = 17.0
+texture = ExtResource("13_frhsn")
+
 [node name="CooldownLabel" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Cooldown" unique_id=293865982]
 unique_name_in_owner = true
 layout_mode = 2
@@ -1216,6 +1233,16 @@ layout_mode = 2
 layout_mode = 2
 texture = ExtResource("14_ynejs")
 
+[node name="Shadow" type="TextureRect" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Damage/Sprite2D" unique_id=1250533370]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_knvwb")
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 17.0
+offset_bottom = 17.0
+texture = ExtResource("14_ynejs")
+
 [node name="DamageLabel" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Damage" unique_id=327391269]
 unique_name_in_owner = true
 layout_mode = 2
@@ -1231,6 +1258,16 @@ layout_mode = 2
 
 [node name="Sprite2D" type="TextureRect" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/MaxAmmo" unique_id=131720596]
 layout_mode = 2
+texture = ExtResource("15_xpheq")
+
+[node name="Shadow" type="TextureRect" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/MaxAmmo/Sprite2D" unique_id=733570704]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_knvwb")
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 17.0
+offset_bottom = 17.0
 texture = ExtResource("15_xpheq")
 
 [node name="MaxAmmoLabel" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/MaxAmmo" unique_id=79667585]
@@ -1251,6 +1288,16 @@ layout_mode = 2
 layout_mode = 2
 texture = ExtResource("16_pkrle")
 
+[node name="Shadow" type="TextureRect" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Lifetime/Sprite2D" unique_id=1114440664]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_knvwb")
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 17.0
+offset_bottom = 17.0
+texture = ExtResource("16_pkrle")
+
 [node name="LifetimeLabel" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Lifetime" unique_id=828176075]
 unique_name_in_owner = true
 layout_mode = 2
@@ -1269,6 +1316,16 @@ layout_mode = 2
 layout_mode = 2
 texture = ExtResource("17_j0w38")
 
+[node name="Shadow" type="TextureRect" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Range/Sprite2D" unique_id=938697863]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_knvwb")
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 17.0
+offset_bottom = 17.0
+texture = ExtResource("17_j0w38")
+
 [node name="RangeLabel" type="Label" parent="VBox/Background/Inventory/Weapons/Stats/MarginContainer/VBox/Range" unique_id=1353080429]
 unique_name_in_owner = true
 layout_mode = 2
@@ -1280,7 +1337,6 @@ horizontal_alignment = 2
 clip_text = true
 
 [node name="VBox" type="VBoxContainer" parent="VBox/Background/Inventory" unique_id=610653170]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 8
 
