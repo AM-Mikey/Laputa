@@ -5,7 +5,8 @@ func _ready(): #since preload, this happens on game start
 	description = "A weapon that shoots sleeping darts. TODO:finish."
 	icon_texture = load("res://assets/Gun/HaymakerIcon.png")
 	icon_small_texture = load("res://assets/Gun/HaymakerIconSmall.png")
-
+	icon_round_texture = load("res://assets/UI/GunIcon/Haymaker.png")
+	
 	sfx = "gun_pistol"
 	cooldown_time = 0.1
 	automatic = false

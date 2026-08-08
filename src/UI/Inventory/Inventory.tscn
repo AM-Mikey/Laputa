@@ -61,7 +61,7 @@ region = Rect2(0, 190, 320, 21)
 
 [sub_resource type="Animation" id="Animation_5to30"]
 resource_name = "CW"
-length = 0.3
+length = 0.5
 step = 0.1
 capture_included = true
 tracks/0/type = "value"

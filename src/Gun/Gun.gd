@@ -11,6 +11,8 @@ var description: String = "Debug Description"
 
 var icon_texture: CompressedTexture2D = load("res://assets/Gun/RevolverIcon.png")
 var icon_small_texture: CompressedTexture2D = load("res://assets/Gun/RevolverIconSmall.png")
+var icon_round_texture: CompressedTexture2D = load("res://assets/UI/GunIcon/Revolver.png")
+
 var sfx: String = "gun_pistol"
 var bullet_scene: PackedScene = load("res://src/Bullet/BulletRevolver1.tscn")
 

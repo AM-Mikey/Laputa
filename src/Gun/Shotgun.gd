@@ -6,6 +6,8 @@ func _ready():
 	description = "Fires a cluster of birdshot. Get close for max effect."
 	icon_texture = load("res://assets/Gun/Blunderbuss.png") #need
 	icon_small_texture = load("res://assets/Gun/Blunderbuss.png") #need
+	icon_round_texture = load("res://assets/UI/GunIcon/Blunderbus.png")
+	
 	sfx = "gun_shotgun"
 	bullet_scene = load("res://src/Bullet/Birdshot.tscn")
 	damage = 1

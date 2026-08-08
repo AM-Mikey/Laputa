@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://5orkim7sjfi7"]
+[gd_scene format=3 uid="uid://5orkim7sjfi7"]
 
 [ext_resource type="Script" uid="uid://dg2on0ly0e2sc" path="res://src/Gun/Tsurugi.gd" id="1_40cej"]
 [ext_resource type="Texture2D" uid="uid://bkmtocyt76m15" path="res://assets/Gun/Tsurugi.png" id="2_d2e4q"]
 
-[node name="Tsurugi" type="Node2D"]
+[node name="Tsurugi" type="Node2D" unique_id=1424203016]
 script = ExtResource("1_40cej")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1191037372]
 texture = ExtResource("2_d2e4q")
 
-[node name="Muzzle" type="Marker2D" parent="."]
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1968175652]
 position = Vector2(-9, 0)

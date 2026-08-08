@@ -5,6 +5,8 @@ func _ready():
 	description = "Packs a punch. Hold down for a more direct arc. Extra damage if grenades don't bounce"
 	icon_texture = load("res://assets/Gun/GLauncherIcon.png")
 	icon_small_texture = load("res://assets/Gun/GLauncherIconSmall.png")
+	icon_round_texture = load("res://assets/UI/GunIcon/GLauncher.png")
+	
 	sfx = "gun_grenade"
 	automatic = false
 	ammo = 10
