@@ -129,6 +129,20 @@ position = Vector2(2, -8)
 shape = SubResource("RectangleShape2D_kcsk2")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
+[node name="StaticBody2D" type="StaticBody2D" parent="BulletBlocker" unique_id=966788885]
+collision_layer = 32
+collision_mask = 0
+
+[node name="Left" type="CollisionShape2D" parent="BulletBlocker/StaticBody2D" unique_id=86739648]
+position = Vector2(-2, -8)
+shape = SubResource("RectangleShape2D_tk834")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="Right" type="CollisionShape2D" parent="BulletBlocker/StaticBody2D" unique_id=1923657441]
+position = Vector2(2, -8)
+shape = SubResource("RectangleShape2D_kcsk2")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1159295574]
 collision_layer = 131072
 collision_mask = 0

@@ -20,8 +20,7 @@ func setup(): #Reminder: no function called can use await
 	speed = Vector2(50, 50)
 	is_wind_affected = true
 	shield_dir = $ShieldDir.direction.snappedf(1.0)
-	if shield_dir == Vector2.RIGHT:
-		$Sprite2D.flip_h = true
+	$Sprite2D.flip_h = shield_dir.x > 0.0
 	move_dir = $MoveDir.direction.snappedf(1.0)
 	w.emit_signal("finished_spawn_entities_step")
 	change_state("wait")
@@ -46,6 +45,7 @@ func do_walk(_delta):
 	or (not $FloorDetectorR.is_colliding() and move_dir.x > 0):
 		change_state("wait")
 		return
+
 	if velocity.x == 0.0:
 		move_dir.x *= -1.0
 
@@ -79,6 +79,8 @@ func set_move_dir(dir):
 			ap.play("IdleShield")
 		$BulletBlocker/Left.set_deferred("disabled", move_dir != Vector2.LEFT)
 		$BulletBlocker/Right.set_deferred("disabled", move_dir == Vector2.LEFT)
+		$BulletBlocker/StaticBody2D/Left.set_deferred("disabled", move_dir != Vector2.LEFT)
+		$BulletBlocker/StaticBody2D/Right.set_deferred("disabled", move_dir == Vector2.LEFT)
 		$Hurtbox/Left.set_deferred("disabled", move_dir == Vector2.LEFT)
 		$Hurtbox/Right.set_deferred("disabled", move_dir != Vector2.LEFT)
 	else:
@@ -88,6 +90,8 @@ func set_move_dir(dir):
 			ap.play("IdleCake")
 		$BulletBlocker/Left.set_deferred("disabled", true)
 		$BulletBlocker/Right.set_deferred("disabled", true)
+		$BulletBlocker/StaticBody2D/Left.set_deferred("disabled", true)
+		$BulletBlocker/StaticBody2D/Right.set_deferred("disabled", true)
 		$Hurtbox/Left.set_deferred("disabled", false)
 		$Hurtbox/Right.set_deferred("disabled", false)
 
