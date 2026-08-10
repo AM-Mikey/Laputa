@@ -87,7 +87,6 @@ func _on_CollisionDetector_area_entered(area): #shadows
 	elif area.get_collision_layer_value(4): #world
 		do_fizzle("world")
 	elif area.get_collision_layer_value(6): #armor
-		print("armor")
 		do_fizzle("armor")
 
 func _on_FizzleTimer_timeout():

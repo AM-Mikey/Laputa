@@ -88,8 +88,6 @@ func do_fizzle(type: String):
 		"bullet":
 			fizzle = FIZZLE_ARMOR.instantiate()
 
-
-	w.get_node("Middle").add_child(fizzle)
 	fizzle.position = $End.global_position if has_node("End") else global_position
 	if instant_fizzle and not is_enemy_bullet and f.pc():
 		var gun = f.pc().guns.get_child(0)
@@ -107,6 +105,7 @@ func do_fizzle(type: String):
 		var result = space_state.intersect_ray(query)
 		if result:
 			fizzle.position = result.position
+	w.get_node("Middle").add_child(fizzle)
 	queue_free()
 
 func instant_fizzle_check():

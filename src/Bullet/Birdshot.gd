@@ -85,7 +85,6 @@ func _on_CollisionDetector_area_entered(area):
 		#on_break(break_method) produced two fizzle particles so instead do:
 		queue_free()
 	elif area.get_collision_layer_value(6): #armor
-		print("armor")
 		do_fizzle("armor")
 
 
