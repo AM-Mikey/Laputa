@@ -148,35 +148,36 @@ func get_blood_dir(body) -> Vector2: #TODO this update changed knockback dir cal
 ### SIGNALS ###
 
 func _on_CollisionDetector_body_entered(body):
-	if body is TileMapLayer:
-		if body.tile_set.get_physics_layer_collision_layer(0) == 8: #world (layer value)
-			do_fizzle("world")
+	if !is_queued_for_deletion():
+		if body is TileMapLayer:
+			if body.tile_set.get_physics_layer_collision_layer(0) == 8: #world (layer value)
+				do_fizzle("world")
 
-	else: #not TileMapLayer
-		#breakable
-		if body.get_collision_layer_value(9):
-			on_break(break_method)
-		#armor
-		elif body.get_collision_layer_value(6):
-			do_fizzle("armor")
-		#Movable platform
-		if body.get_collision_layer_value(4):
-			do_fizzle("world")
+		else: #not TileMapLayer
+			#breakable
+			if body.get_collision_layer_value(9):
+				on_break(break_method)
+			#armor
+			elif body.get_collision_layer_value(6):
+				do_fizzle("armor")
+			#Movable platform
+			if body.get_collision_layer_value(4):
+				do_fizzle("world")
 
 
 func _on_CollisionDetector_area_entered(area):
-	if area.get_collision_layer_value(18): #enemyhurt
-		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
-		queue_free()
-	elif area.get_collision_layer_value(17): #playerhurt
-		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
-		queue_free()
-	elif area.get_collision_layer_value(9): #breakable
-		area.get_parent().on_break(break_method)
-		#on_break(break_method) produced two fizzle particles so instead do:
-		queue_free()
-	elif area.get_collision_layer_value(4): #world
-		do_fizzle("world")
-	elif area.get_collision_layer_value(6): #armor
-		print("armor")
-		do_fizzle("armor")
+	if !is_queued_for_deletion():
+		if area.get_collision_layer_value(18): #enemyhurt
+			area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
+			queue_free()
+		elif area.get_collision_layer_value(17): #playerhurt
+			area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
+			queue_free()
+		elif area.get_collision_layer_value(9): #breakable
+			area.get_parent().on_break(break_method)
+			#on_break(break_method) produced two fizzle particles so instead do:
+			queue_free()
+		elif area.get_collision_layer_value(4): #world
+			do_fizzle("world")
+		elif area.get_collision_layer_value(6): #armor
+			do_fizzle("armor")
