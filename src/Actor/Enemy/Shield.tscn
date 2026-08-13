@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_wlkrp"]
 [ext_resource type="Texture2D" uid="uid://dkiev70oqmmm1" path="res://assets/Actor/Enemy/Shield.png" id="3"]
 [ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="4_tk834"]
+[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="5_kcsk2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1abx7"]
 radius = 7.0
@@ -20,6 +21,10 @@ size = Vector2(7, 16)
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(14, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o1iq0"]
+resource_local_to_scene = true
+size = Vector2(320, 240)
 
 [sub_resource type="Animation" id="9"]
 resource_name = "IdleCake"
@@ -166,6 +171,15 @@ position = Vector2(0, -8)
 shape = SubResource("1")
 debug_color = Color(1, 0, 0, 0.235294)
 
+[node name="PlayerDetection" type="Area2D" parent="." unique_id=1120071840]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=515218732]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_o1iq0")
+debug_color = Color(1, 0, 0, 0.235294)
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1603770504]
 position = Vector2(0, -16)
 texture = ExtResource("3")
@@ -192,19 +206,18 @@ collide_with_areas = true
 process_callback = 0
 one_shot = true
 
-[node name="ShieldDir" parent="." unique_id=872564127 instance=ExtResource("4_tk834")]
-arrow_length = 32.0
-tag_name = "shield_dir"
-direction = Vector2(-1, 0)
-snap_degrees = 180.0
-color = Color(0, 1, 0.92941177, 1)
-
 [node name="MoveDir" parent="." unique_id=1540331808 instance=ExtResource("4_tk834")]
 tag_name = "move_dir"
 direction = Vector2(-1, 0)
 snap_degrees = 180.0
 
+[node name="PlayerDetectArea" parent="." unique_id=688682803 instance=ExtResource("5_kcsk2")]
+tag_name = "player_detection"
+value = Rect2(-24, -24, 48, 48)
+
 [connection signal="area_entered" from="BulletBlocker" to="." method="_on_BulletBlocker_area_entered"]
 [connection signal="body_entered" from="BulletBlocker" to="." method="_on_BulletBlocker_body_entered"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="area_entered" from="PlayerDetection" to="." method="_on_PlayerDetection_area_entered"]
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_PlayerDetection_body_entered"]
