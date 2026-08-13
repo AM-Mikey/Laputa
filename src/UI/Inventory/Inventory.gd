@@ -14,16 +14,16 @@ const BACKGROUND_STYLEBOX_MISSION = preload("res://src/UI/StyleBox/RustTrimmedSc
 func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
-	pc.guns_updated.connect(_on_guns_updated)
-	weapons.update_gun_stats()
+	#pc.guns_updated.connect(_on_guns_updated)
+	#weapons.update_gun_stats()
 	enter()
 	#For testing, remove this
 	#var pc = f.pc()
 	#var first_topic = pc.topic_array.front()
 	#first_topic.topic_stages = [0,1,2,3,4]
 
-func _on_guns_updated(_guns, _action) -> void:
-	weapons.update_gun_stats()
+#func _on_guns_updated(_guns, _action) -> void:
+	#weapons.update_gun_stats()
 
 
 
@@ -32,12 +32,8 @@ func _input(event):
 		exit()
 	if event.is_action_pressed("gun_left"):
 		pc.gm.shift_gun("left")
-		weapons.bullets_shift("CWW")
 	elif event.is_action_pressed("gun_right"):
 		pc.gm.shift_gun("right")
-		weapons.side_shift()
-		weapons.bullets_shift("CW")
-
 
 func display_items():
 	var pc = f.pc()

@@ -65,6 +65,19 @@
             }
           },
           {
+            "id": "fd4103d12f5e6068",
+            "type": "leaf",
+            "state": {
+              "type": "bases",
+              "state": {
+                "file": "Untitled 4.base",
+                "viewName": "Table"
+              },
+              "icon": "lucide-table",
+              "title": "Untitled 4"
+            }
+          },
+          {
             "id": "8e79af8c8cf32a05",
             "type": "leaf",
             "state": {
@@ -288,12 +301,23 @@
       "command-palette:Open command palette": false
     }
   },
+<<<<<<< HEAD
+  "active": "fd4103d12f5e6068",
+  "lastOpenFiles": [
+    "Untitled 3.base",
+    "Untitled 4.base",
+    "Work Requests/7-30-26.md",
+    "Work Requests",
+    "Guns.md",
+    "Characters/Alexander.md",
+=======
   "active": "8e79af8c8cf32a05",
   "lastOpenFiles": [
     "Untitled 4.base",
     "Untitled 3.base",
     "Work Requests/7-30-26.md",
     "Work Requests",
+>>>>>>> 68e84ad223ef708432a43a6651e2bb94bf585a7f
     "Characters/Basil.md",
     "Characters/Treasure Hunter.md",
     "Characters/Scrum.md",

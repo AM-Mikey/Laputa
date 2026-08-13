@@ -5,6 +5,7 @@ func _ready():
 	description = "A tricky weapon that shoots bouncing stars."
 	icon_texture = load("res://assets/Gun/SpeederIcon.png")
 	icon_small_texture = load("res://assets/Gun/SpeederIconSmall.png")
+	icon_round_texture = load("res://assets/UI/GunIcon/Speeder.png")
 	sfx = "gun_pistol"
 	cooldown_time = 0.2
 	automatic = false

@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdgi2ibu56t2j"]
+[gd_scene format=3 uid="uid://cdgi2ibu56t2j"]
 
 [ext_resource type="Script" uid="uid://crh6nuab7qxaq" path="res://src/Gun/Speeder.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://curoteu21cbu6" path="res://assets/Gun/Speeder.png" id="2"]
 
-[node name="Speeder" type="Node2D"]
+[node name="Speeder" type="Node2D" unique_id=759469017]
 script = ExtResource("1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=305739781]
 texture = ExtResource("2")
 
-[node name="Muzzle" type="Marker2D" parent="."]
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1589541311]
 position = Vector2(-6, -1)

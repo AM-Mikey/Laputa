@@ -9,6 +9,8 @@ func _ready():
 	description = "A powerful revolver once wielded by a lone cowboy."
 	icon_texture = load("res://assets/Gun/TurnstileJumperIcon.png")
 	icon_small_texture = load("res://assets/Gun/TurnstileJumperIconSmall.png")
+	icon_round_texture = load("res://assets/UI/GunIcon/TurnstyleJumper.png")
+	
 	sfx = "gun_revolver"
 	automatic = false
 	charging = true

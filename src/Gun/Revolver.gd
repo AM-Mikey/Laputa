@@ -5,6 +5,8 @@ func _ready(): #since preload, this happens on game start
 	description = "Your first weapon."
 	icon_texture = load("res://assets/Gun/RevolverIcon.png")
 	icon_small_texture = load("res://assets/Gun/RevolverIconSmall.png")
+	icon_round_texture = load("res://assets/UI/GunIcon/Revolver.png")
+	
 	sfx = "gun_pistol"
 	cooldown_time = 0.1
 	automatic = false

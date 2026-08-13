@@ -11,7 +11,8 @@ func _ready():
 	description = "Fires in bursts of up to Seven. Looks like some kind of prototype."
 	icon_texture = load("res://assets/Gun/Red7Icon.png")
 	icon_small_texture = load("res://assets/Gun/Red7IconSmall.png")
-
+	icon_round_texture = load("res://assets/UI/GunIcon/Red7.png")
+	
 	sfx = "gun_pistol"
 	cooldown_time = 0.1
 	automatic = true

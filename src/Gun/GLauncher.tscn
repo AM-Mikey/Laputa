@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqy18424skcwk"]
+[gd_scene format=3 uid="uid://bqy18424skcwk"]
 
 [ext_resource type="Script" uid="uid://chx65a42yhp5e" path="res://src/Gun/GLauncher.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://60d7h1gue2ph" path="res://assets/Gun/GLauncher.png" id="2"]
 
-[node name="GLauncher" type="Node2D"]
+[node name="GLauncher" type="Node2D" unique_id=608526459]
 script = ExtResource("1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1160690922]
 texture = ExtResource("2")
 
-[node name="Muzzle" type="Marker2D" parent="."]
+[node name="Muzzle" type="Marker2D" parent="." unique_id=792027069]
 position = Vector2(-8, 0)

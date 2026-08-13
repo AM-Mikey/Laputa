@@ -5,6 +5,7 @@ func _ready():
 	description = "Provides reliable rapid fire. Its large ammo capacity is stored in its stock."
 	icon_texture = load("res://assets/Gun/RobertaIcon.png")
 	icon_small_texture = load("res://assets/Gun/RobertaIconSmall.png")
+	icon_round_texture = load("res://assets/UI/GunIcon/Roberta.png")
 
 	sfx = "gun_pistol"
 	bullet_scene = load("res://src/Bullet/MPistol.tscn")
