@@ -33,6 +33,13 @@ size = Vector2(33, 24)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ui4tb"]
 size = Vector2(32, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5h1sb"]
+resource_local_to_scene = true
+size = Vector2(120, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrqs"]
+size = Vector2(14, 24)
+
 [sub_resource type="Animation" id="Animation_kcsk2"]
 resource_name = "Attack"
 length = 1.2000101
@@ -73,6 +80,23 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [false],
+"method": &"enable_shield"
+}, {
+"args": [true],
+"method": &"enable_shield"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0.5),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -130,6 +154,120 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_hycmb"]
+resource_name = "ShieldCharge"
+length = 0.3
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_ui4tb"]
+resource_name = "ShieldChargeEnd"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_onrqs"]
+resource_name = "ShieldChargeEndAttack"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [5, 7]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"enable_attack_hitbox"
+}, {
+"args": [false],
+"method": &"enable_attack_hitbox"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"enable_shield"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["gun_sword"],
+"method": &"play_sound"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_5h1sb"]
+resource_name = "ShieldChargeStart"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="7"]
 resource_name = "WalkCake"
 length = 0.4
@@ -170,6 +308,10 @@ _data = {
 &"IdleCake": SubResource("9"),
 &"IdleShield": SubResource("8"),
 &"RESET": SubResource("Animation_o1iq0"),
+&"ShieldCharge": SubResource("Animation_hycmb"),
+&"ShieldChargeEnd": SubResource("Animation_ui4tb"),
+&"ShieldChargeEndAttack": SubResource("Animation_onrqs"),
+&"ShieldChargeStart": SubResource("Animation_5h1sb"),
 &"WalkCake": SubResource("7"),
 &"WalkShield": SubResource("6")
 }
@@ -241,8 +383,12 @@ collision_mask = 65536
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1112825049]
 position = Vector2(-1.5, -8)
 shape = SubResource("1")
-disabled = true
 debug_color = Color(1, 0, 0, 0.235294)
+
+[node name="DefendTimer" type="Timer" parent="." unique_id=1034135348]
+process_callback = 0
+wait_time = 0.7
+one_shot = true
 
 [node name="PlayerDetection" type="Area2D" parent="." unique_id=1120071840]
 collision_layer = 0
@@ -254,6 +400,7 @@ shape = SubResource("RectangleShape2D_o1iq0")
 
 [node name="AttackDetection" type="Area2D" parent="." unique_id=9286811]
 collision_layer = 0
+monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDetection" unique_id=610885406]
@@ -263,7 +410,7 @@ debug_color = Color(1, 0, 0, 0.23529412)
 
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=999342442]
 collision_layer = 262144
-collision_mask = 65536
+collision_mask = 65792
 monitoring = false
 monitorable = false
 
@@ -271,6 +418,37 @@ monitorable = false
 position = Vector2(-16, -10)
 shape = SubResource("RectangleShape2D_ui4tb")
 debug_color = Color(1, 0, 0, 0.235294)
+
+[node name="AttackCooldown" type="Timer" parent="." unique_id=1599363784]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="ShieldChargeDetection" type="Area2D" parent="." unique_id=2084182477]
+collision_layer = 0
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldChargeDetection" unique_id=754976573]
+position = Vector2(-60, -12)
+shape = SubResource("RectangleShape2D_5h1sb")
+debug_color = Color(1, 1, 0, 0.23529412)
+
+[node name="ShieldChargeHitbox" type="Area2D" parent="." unique_id=564506973]
+collision_layer = 262144
+collision_mask = 65792
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldChargeHitbox" unique_id=835936714]
+position = Vector2(-7, -12)
+shape = SubResource("RectangleShape2D_onrqs")
+debug_color = Color(1, 1, 0, 0.23529412)
+
+[node name="ShieldChargeCooldown" type="Timer" parent="." unique_id=898590192]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1603770504]
 position = Vector2(0, -16)
@@ -293,10 +471,6 @@ target_position = Vector2(0, 16)
 collision_mask = 520
 collide_with_areas = true
 
-[node name="StateTimer" type="Timer" parent="." unique_id=2100369599]
-process_callback = 0
-one_shot = true
-
 [node name="MoveDir" parent="." unique_id=1540331808 instance=ExtResource("4_tk834")]
 tag_name = "move_dir"
 direction = Vector2(-1, 0)
@@ -310,8 +484,14 @@ value = Rect2(-160, -120, 320, 240)
 [connection signal="body_entered" from="BulletBlocker" to="." method="_on_BulletBlocker_body_entered"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="timeout" from="DefendTimer" to="." method="_on_DefendTimer_timeout"]
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_PlayerDetection_body_entered"]
 [connection signal="body_entered" from="AttackDetection" to="." method="_on_AttackDetection_body_entered"]
-[connection signal="area_entered" from="AttackHitbox" to="." method="_on_hitbox_area_entered"]
-[connection signal="area_exited" from="AttackHitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="body_exited" from="AttackDetection" to="." method="_on_AttackDetection_body_exited"]
+[connection signal="area_entered" from="AttackHitbox" to="." method="_on_Attack_hitbox_area_entered" binds= ["Attack"]]
+[connection signal="body_entered" from="AttackHitbox" to="." method="_on_Attack_hitbox_body_entered" binds= ["Attack"]]
+[connection signal="body_entered" from="ShieldChargeDetection" to="." method="_on_ShieldChargeDetection_body_entered"]
+[connection signal="body_exited" from="ShieldChargeDetection" to="." method="_on_ShieldChargeDetection_body_exited"]
+[connection signal="area_entered" from="ShieldChargeHitbox" to="." method="_on_Attack_hitbox_area_entered" binds= ["ShieldCharge"]]
+[connection signal="body_entered" from="ShieldChargeHitbox" to="." method="_on_Attack_hitbox_body_entered" binds= ["ShieldCharge"]]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
