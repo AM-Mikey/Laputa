@@ -26,6 +26,61 @@ size = Vector2(14, 16)
 resource_local_to_scene = true
 size = Vector2(320, 240)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hycmb"]
+resource_local_to_scene = true
+size = Vector2(33, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ui4tb"]
+size = Vector2(32, 20)
+
+[sub_resource type="Animation" id="Animation_kcsk2"]
+resource_name = "Attack"
+length = 1.2000101
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 5, 7]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"enable_attack_hitbox"
+}, {
+"args": [false],
+"method": &"enable_attack_hitbox"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["gun_sword"],
+"method": &"play_sound"
+}]
+}
+
 [sub_resource type="Animation" id="9"]
 resource_name = "IdleCake"
 length = 1.6
@@ -58,6 +113,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [1, 3]
+}
+
+[sub_resource type="Animation" id="Animation_o1iq0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="7"]
@@ -96,8 +166,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kfp7m"]
 _data = {
+&"Attack": SubResource("Animation_kcsk2"),
 &"IdleCake": SubResource("9"),
 &"IdleShield": SubResource("8"),
+&"RESET": SubResource("Animation_o1iq0"),
 &"WalkCake": SubResource("7"),
 &"WalkShield": SubResource("6")
 }
@@ -167,8 +239,9 @@ collision_layer = 262144
 collision_mask = 65536
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1112825049]
-position = Vector2(0, -8)
+position = Vector2(-1.5, -8)
 shape = SubResource("1")
+disabled = true
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="PlayerDetection" type="Area2D" parent="." unique_id=1120071840]
@@ -178,6 +251,25 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=515218732]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_o1iq0")
+
+[node name="AttackDetection" type="Area2D" parent="." unique_id=9286811]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDetection" unique_id=610885406]
+position = Vector2(-16.5, -12)
+shape = SubResource("RectangleShape2D_hycmb")
+debug_color = Color(1, 0, 0, 0.23529412)
+
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=999342442]
+collision_layer = 262144
+collision_mask = 65536
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=846037665]
+position = Vector2(-16, -10)
+shape = SubResource("RectangleShape2D_ui4tb")
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1603770504]
@@ -185,7 +277,6 @@ position = Vector2(0, -16)
 texture = ExtResource("3")
 hframes = 4
 vframes = 2
-frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=547631705]
 libraries/ = SubResource("AnimationLibrary_kfp7m")
@@ -213,11 +304,14 @@ snap_degrees = 180.0
 
 [node name="PlayerDetectArea" parent="." unique_id=688682803 instance=ExtResource("5_kcsk2")]
 tag_name = "player_detection"
-value = Rect2(-24, -24, 48, 48)
+value = Rect2(-160, -120, 320, 240)
 
 [connection signal="area_entered" from="BulletBlocker" to="." method="_on_BulletBlocker_area_entered"]
 [connection signal="body_entered" from="BulletBlocker" to="." method="_on_BulletBlocker_body_entered"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
-[connection signal="area_entered" from="PlayerDetection" to="." method="_on_PlayerDetection_area_entered"]
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_PlayerDetection_body_entered"]
+[connection signal="body_entered" from="AttackDetection" to="." method="_on_AttackDetection_body_entered"]
+[connection signal="area_entered" from="AttackHitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="AttackHitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
