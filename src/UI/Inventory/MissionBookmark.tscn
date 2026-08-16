@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://ft0bdyg0ncic"]
+
+[ext_resource type="Texture2D" uid="uid://dhjx46b61lu8p" path="res://assets/UI/Inventory/Mission/Bookmark.png" id="1_rrcqg"]
+[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="2_u6fpj"]
+
+[node name="Bookmark" type="Control" unique_id=155973909]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 133.0
+offset_bottom = 17.0
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=259960228]
+texture = ExtResource("1_rrcqg")
+centered = false
+vframes = 2
+frame = 1
+
+[node name="Label" type="RichTextLabel" parent="." unique_id=600078387]
+layout_mode = 0
+offset_left = 9.0
+offset_right = 129.0
+offset_bottom = 15.0
+theme = ExtResource("2_u6fpj")
+theme_override_colors/default_color = Color(0.9529412, 0.69411767, 0.19215687, 1)
+theme_override_colors/font_shadow_color = Color(0.6431373, 0.03529412, 0.03529412, 1)
+theme_override_constants/shadow_outline_size = 0
+text = "Side Mission Title"
