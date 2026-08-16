@@ -1608,13 +1608,13 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="ArrowLeft" type="Sprite2D" parent="VBox/Background/Mission" unique_id=1243003905]
-position = Vector2(73, 200)
+position = Vector2(77, 200)
 texture = ExtResource("42_dr7bi")
 centered = false
 hframes = 2
 
 [node name="ArrowRight" type="Sprite2D" parent="VBox/Background/Mission" unique_id=1896625884]
-position = Vector2(109, 200)
+position = Vector2(113, 200)
 texture = ExtResource("42_dr7bi")
 centered = false
 flip_h = true
@@ -1658,9 +1658,9 @@ text = "Side mission details explained here. Side mission details explained here
 
 [node name="PageNumber" type="RichTextLabel" parent="VBox/Background/Mission" unique_id=906194973]
 layout_mode = 0
-offset_left = 88.0
+offset_left = 92.0
 offset_top = 196.0
-offset_right = 104.0
+offset_right = 108.0
 offset_bottom = 211.0
 theme = SubResource("Theme_3w7lq")
 theme_override_colors/default_color = Color(0.4627451, 0.4862745, 0.43137255, 1)
