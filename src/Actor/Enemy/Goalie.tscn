@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://bwhf0ctg8u5ho" path="res://src/Actor/Enemy/Outdated/Goalie/Rise.gd" id="8_in2w3"]
 [ext_resource type="Script" uid="uid://bk8sni4bohh65" path="res://src/Actor/Enemy/Outdated/Goalie/Kick.gd" id="9_mejuo"]
 [ext_resource type="Script" uid="uid://cdeed6oueu0d1" path="res://src/Actor/Enemy/Outdated/Goalie/Fall.gd" id="10_8cy3u"]
+[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="11_p2rvj"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="12_ax27h"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(8, 15)
@@ -218,6 +220,16 @@ script = ExtResource("9_mejuo")
 
 [node name="Fall" type="Node" parent="StateMachine" unique_id=1815030219]
 script = ExtResource("10_8cy3u")
+
+[node name="LookVector" parent="." unique_id=872564127 instance=ExtResource("11_p2rvj")]
+tag_name = "look_dir"
+direction = Vector2(-1, 0)
+snap_degrees = 180.0
+
+[node name="JumpWaypoint" parent="." unique_id=1432238783 instance=ExtResource("12_ax27h")]
+position = Vector2(0, -96)
+tag_name = "jump_pos"
+lock_x = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

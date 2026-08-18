@@ -4,14 +4,15 @@ const ICON = preload("res://assets/Actor/Enemy/GoalieThumbnail.png")
 
 const TX_0 = preload("res://assets/Actor/Enemy/Goalie.png")
 
-@export var jump_height: int = 6
-@export var cooldown_time = 1
-var kick_damage = 4
+var jump_pos: = Vector2.ZERO
+@export var cooldown_time: = 1.0
+var kick_damage: = 4.0
 
-var move_dir = Vector2.ZERO
+var look_dir: = Vector2.ZERO
+var move_dir: = Vector2.ZERO
 var target = null
-@onready var start_pos = position
-var jump_pos
+@onready var start_pos: = position
+
 
 
 func _ready():
@@ -23,9 +24,13 @@ func _ready():
 	reward = 3
 	is_wind_affected = true
 
-	jump_pos = Vector2(position.x, position.y + jump_height * -16)
+	look_dir = $LookVector.direction.snappedf(1.0)
+	$KickDectector.scale.x = -look_dir.x
+	$Sprite2D.flip_h = look_dir.x > 0.0
 
+	jump_pos = $JumpWaypoint.global_position
 	w.emit_signal("finished_spawn_entities_step")
+	change_state("idle")
 
 
 func _on_ActiveDetector_body_entered(body):
