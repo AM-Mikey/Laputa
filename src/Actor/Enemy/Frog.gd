@@ -24,8 +24,6 @@ var tongue_cooldown_time := 6.0
 func setup(): #Reminder: no function called can use await
 	look_dir = $LookVector.direction
 	tongue_max_length = abs($TongueRange.position.x)
-	$PlayerDetector/CollisionShape2D.shape.size = $VURect.value.size
-	$PlayerDetector/CollisionShape2D.position = $VURect.value.position + $VURect.value.size / 2.0
 
 	$TonguePlayerCast.target_position = Vector2($TongueRange.position.x, 0.0)
 	$Tongue/WorldCast.target_position = Vector2($TongueRange.position.x, 0.0)
@@ -154,7 +152,7 @@ func do_tongue_out(_delta):
 func enter_tongue_in(_prev_state):
 	var tween = create_tween()
 	var tongue_duration = tongue_max_length / tongue_speed
-	tween.tween_property(self, "tongue_length", 16.0, tongue_duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+	tween.tween_property(self, "tongue_length", 0.0, tongue_duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
 	await tween.finished
 	$AnimationPlayer.play("TongueIn")
 	await $AnimationPlayer.animation_finished
