@@ -147,6 +147,9 @@ func change_level_via_code(level_path, use_save_data):
 	inp.can_act = true
 	if ml.has_node("Title"): ml.get_node("Title").exit()
 	if ml.has_node("PauseMenu"): ml.get_node("PauseMenu").exit()
+	if ui.has_node("Title"): ui.get_node("Title").queue_free()
+	if ui.has_node("LevelSelect"): ui.get_node("LevelSelect").queue_free()
+	if has_node("DeathCamera"): get_node("DeathCamera").queue_free()
 	if has_node("MenuLayer/LevelSelect"): get_node("MenuLayer/LevelSelect").queue_free()
 	if f.db(): await f.db().exit()
 	if f.hud():
