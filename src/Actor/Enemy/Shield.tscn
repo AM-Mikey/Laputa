@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cfowbliw450pc" path="res://src/Actor/Enemy/Shield.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_wlkrp"]
-[ext_resource type="Texture2D" uid="uid://dkiev70oqmmm1" path="res://assets/Actor/Enemy/Shield.png" id="3"]
 [ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="4_tk834"]
 [ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="5_kcsk2"]
+[ext_resource type="Texture2D" uid="uid://dbdcwuuqby42r" path="res://assets/Actor/Enemy/Shield0.png" id="5_o1iq0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1abx7"]
 radius = 7.0
@@ -1110,7 +1110,7 @@ value = Rect2(-160, -120, 320, 240)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1603770504]
 position = Vector2(0, -16)
-texture = ExtResource("3")
+texture = ExtResource("5_o1iq0")
 hframes = 8
 vframes = 13
 
@@ -1122,10 +1122,6 @@ vframes = 13
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_PlayerDetection_body_entered"]
 [connection signal="body_entered" from="AttackDetection" to="." method="_on_AttackDetection_body_entered"]
 [connection signal="body_exited" from="AttackDetection" to="." method="_on_AttackDetection_body_exited"]
-[connection signal="area_entered" from="AttackHitbox" to="." method="_on_Attack_hitbox_area_entered" binds= ["Attack"]]
-[connection signal="body_entered" from="AttackHitbox" to="." method="_on_Attack_hitbox_body_entered" binds= ["Attack"]]
 [connection signal="body_entered" from="ShieldChargeDetection" to="." method="_on_ShieldChargeDetection_body_entered"]
 [connection signal="body_exited" from="ShieldChargeDetection" to="." method="_on_ShieldChargeDetection_body_exited"]
-[connection signal="area_entered" from="ShieldChargeHitbox" to="." method="_on_Attack_hitbox_area_entered" binds= ["ShieldCharge"]]
-[connection signal="body_entered" from="ShieldChargeHitbox" to="." method="_on_Attack_hitbox_body_entered" binds= ["ShieldCharge"]]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

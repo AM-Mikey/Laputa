@@ -2,9 +2,9 @@ extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/ShieldIcon.png")
 
-const TX_0 = preload("res://assets/Actor/Enemy/Shield.png")
-const TX_1 = preload("res://assets/Actor/Enemy/Shield.png")
-const TX_2  = preload("res://assets/Actor/Enemy/Shield.png")
+const TX_0 = preload("res://assets/Actor/Enemy/Shield0.png")
+const TX_1 = preload("res://assets/Actor/Enemy/Shield1.png")
+const TX_2  = preload("res://assets/Actor/Enemy/Shield2.png")
 
 @export var difficulty: int = 0
 var move_dir: = Vector2.LEFT: set = set_move_dir
@@ -34,10 +34,8 @@ func setup(): #Reminder: no function called can use await
 			$Sprite2D.texture = TX_0
 		1:
 			$Sprite2D.texture = TX_1
-			$Sprite2D.self_modulate = Color.GREEN
 		2:
 			$Sprite2D.texture = TX_2
-			$Sprite2D.self_modulate = Color.RED
 	$AttackDetection.monitoring = difficulty >= 1
 	$ShieldChargeDetection.monitoring = difficulty == 2
 
