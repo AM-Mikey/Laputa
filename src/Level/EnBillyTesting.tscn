@@ -12,10 +12,10 @@
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_uo8bs"]
 [ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_7s6kp"]
 [ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="12_s0ppf"]
-[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="13_7s6kp"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="13_ddw3t"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="13_l0h4m"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="14_t51sm"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="14_t51sm"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="15_221ui"]
 [ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="16_by0gl"]
 
 [node name="EnBillyTesting" type="Node2D" unique_id=1952135705]
@@ -146,17 +146,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy1" type="Area2D" parent="Spawns" unique_id=1984945580 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -180,17 +182,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy1" unique_id=767047930 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy1" unique_id=1364508062 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy2" type="Area2D" parent="Spawns" unique_id=930545101 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -214,18 +218,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy2" unique_id=300055063 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="VUVector" type="Area2D" parent="Spawns/Billy2" unique_id=592573312 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-175, -64, 328, 144)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy3" type="Area2D" parent="Spawns" unique_id=1901015921 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -249,17 +254,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy3" unique_id=230949683 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy3" unique_id=1642511486 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy4" type="Area2D" parent="Spawns" unique_id=996645201 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -283,17 +290,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy4" unique_id=1294409270 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy4" unique_id=1169271574 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy5" type="Area2D" parent="Spawns" unique_id=2132866644 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -317,17 +326,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy5" unique_id=160219798 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy5" unique_id=1940482865 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy6" type="Area2D" parent="Spawns" unique_id=153978613 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -351,17 +362,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy6" unique_id=1838308525 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy6" unique_id=1292274413 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy7" type="Area2D" parent="Spawns" unique_id=1373189236 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -385,17 +398,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy7" unique_id=1835167236 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy7" unique_id=392503431 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy8" type="Area2D" parent="Spawns" unique_id=526005885 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -419,17 +434,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy8" unique_id=2076950953 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy8" unique_id=161127330 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy9" type="Area2D" parent="Spawns" unique_id=314367098 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -453,17 +470,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy9" unique_id=757693168 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy9" unique_id=839304506 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy10" type="Area2D" parent="Spawns" unique_id=265269619 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -487,17 +506,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy10" unique_id=80757571 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy10" unique_id=679801861 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy11" type="Area2D" parent="Spawns" unique_id=1210439660 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -521,17 +542,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy11" unique_id=599682159 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy11" unique_id=829936451 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy12" type="Area2D" parent="Spawns" unique_id=1769002117 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -555,17 +578,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy12" unique_id=589150485 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy12" unique_id=592851392 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy13" type="Area2D" parent="Spawns" unique_id=1039346574 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -589,17 +614,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy13" unique_id=1131866108 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy13" unique_id=773458806 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy14" type="Area2D" parent="Spawns" unique_id=973427187 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -623,17 +650,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy14" unique_id=897387927 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy14" unique_id=149783114 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy15" type="Area2D" parent="Spawns" unique_id=1692567228 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -657,17 +686,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy15" unique_id=164196138 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy15" unique_id=1512987804 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy16" type="Area2D" parent="Spawns" unique_id=1162682772 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -691,17 +722,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy16" unique_id=429461909 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy16" unique_id=1757662328 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy17" type="Area2D" parent="Spawns" unique_id=1582272538 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -725,17 +758,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy17" unique_id=1729516201 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy17" unique_id=617822345 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy18" type="Area2D" parent="Spawns" unique_id=1904943286 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -759,17 +794,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy18" unique_id=2064860267 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy18" unique_id=458258264 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy19" type="Area2D" parent="Spawns" unique_id=1832486936 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -793,17 +830,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy19" unique_id=906296746 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy19" unique_id=237860335 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy20" type="Area2D" parent="Spawns" unique_id=2083897735 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -827,17 +866,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy20" unique_id=1519724100 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy20" unique_id=313898265 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy21" type="Area2D" parent="Spawns" unique_id=546717449 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -861,17 +902,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy21" unique_id=1220077295 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy21" unique_id=81973634 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy22" type="Area2D" parent="Spawns" unique_id=752417822 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -895,17 +938,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy22" unique_id=649300702 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy22" unique_id=481583529 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy23" type="Area2D" parent="Spawns" unique_id=918963500 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -929,17 +974,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy23" unique_id=516391137 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy23" unique_id=1564313887 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy24" type="Area2D" parent="Spawns" unique_id=1090259047 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -963,17 +1010,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy24" unique_id=337378158 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy24" unique_id=1777723240 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy25" type="Area2D" parent="Spawns" unique_id=1403510373 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -997,17 +1046,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy25" unique_id=1547254220 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy25" unique_id=100665978 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy26" type="Area2D" parent="Spawns" unique_id=805196409 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1031,17 +1082,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy26" unique_id=1788580950 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy26" unique_id=2070176918 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy27" type="Area2D" parent="Spawns" unique_id=15507948 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1065,17 +1118,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy27" unique_id=70158 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy27" unique_id=664580870 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy28" type="Area2D" parent="Spawns" unique_id=1914940294 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1099,17 +1154,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy28" unique_id=423438577 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy28" unique_id=856802057 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy29" type="Area2D" parent="Spawns" unique_id=689863006 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1133,17 +1190,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy29" unique_id=1754716905 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy29" unique_id=787790694 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy30" type="Area2D" parent="Spawns" unique_id=1203087619 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1167,17 +1226,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy30" unique_id=329587114 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy30" unique_id=1257020578 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy31" type="Area2D" parent="Spawns" unique_id=1675149439 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1201,17 +1262,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy31" unique_id=1615724046 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy31" unique_id=1178715621 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy32" type="Area2D" parent="Spawns" unique_id=35550593 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1235,17 +1298,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy32" unique_id=1484866015 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy32" unique_id=1278759136 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy33" type="Area2D" parent="Spawns" unique_id=977941937 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1269,17 +1334,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy33" unique_id=267196572 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy33" unique_id=1619543147 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy34" type="Area2D" parent="Spawns" unique_id=1368712194 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1303,17 +1370,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy34" unique_id=1787016922 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy34" unique_id=642622050 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy35" type="Area2D" parent="Spawns" unique_id=1859222939 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1337,17 +1406,19 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy35" unique_id=623060791 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy35" unique_id=468790342 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Billy36" type="Area2D" parent="Spawns" unique_id=1916492263 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1371,57 +1442,25 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy36" unique_id=1425533211 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy36" unique_id=131936222 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy37" type="Area2D" parent="Spawns" unique_id=747485573 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
-position = Vector2(3448, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
-"idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"walk_max_time": [10.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" type="Node2D" parent="Spawns/Billy37" unique_id=1450995026 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
-visibility_layer = 2
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy38" type="Area2D" parent="Spawns" unique_id=1706834576 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy37" type="Area2D" parent="Spawns" unique_id=1706834576 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
-position = Vector2(3432, 1984)
+position = Vector2(3376, 1912)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_7s6kp")
@@ -1439,19 +1478,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy38" unique_id=550100519 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy37" unique_id=179069375 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy39" type="Area2D" parent="Spawns" unique_id=143919362 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy38" type="Area2D" parent="Spawns" unique_id=143919362 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1473,19 +1514,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy39" unique_id=272189417 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy38" unique_id=1977492745 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy40" type="Area2D" parent="Spawns" unique_id=952797665 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy39" type="Area2D" parent="Spawns" unique_id=952797665 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1507,19 +1550,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy40" unique_id=1854464650 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy39" unique_id=1074934617 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy41" type="Area2D" parent="Spawns" unique_id=362673771 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy40" type="Area2D" parent="Spawns" unique_id=362673771 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1541,19 +1586,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy41" unique_id=1825664890 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy40" unique_id=626697043 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy42" type="Area2D" parent="Spawns" unique_id=381324728 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy41" type="Area2D" parent="Spawns" unique_id=381324728 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1575,19 +1622,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy42" unique_id=153013559 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy41" unique_id=365825304 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy43" type="Area2D" parent="Spawns" unique_id=1491991131 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy42" type="Area2D" parent="Spawns" unique_id=1491991131 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1609,19 +1658,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy43" unique_id=835998934 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy42" unique_id=2084644804 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy44" type="Area2D" parent="Spawns" unique_id=811705184 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy43" type="Area2D" parent="Spawns" unique_id=811705184 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1643,19 +1694,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy44" unique_id=2066459705 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy43" unique_id=1957467263 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy45" type="Area2D" parent="Spawns" unique_id=1964371095 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy44" type="Area2D" parent="Spawns" unique_id=1964371095 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1677,19 +1730,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy45" unique_id=711430557 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy44" unique_id=850329642 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy46" type="Area2D" parent="Spawns" unique_id=808682814 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy45" type="Area2D" parent="Spawns" unique_id=808682814 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1711,19 +1766,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy46" unique_id=792539576 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy45" unique_id=439371682 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy47" type="Area2D" parent="Spawns" unique_id=1915757733 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy46" type="Area2D" parent="Spawns" unique_id=1915757733 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1745,19 +1802,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy47" unique_id=987440889 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy46" unique_id=1255590827 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy48" type="Area2D" parent="Spawns" unique_id=6268043 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy47" type="Area2D" parent="Spawns" unique_id=6268043 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1779,19 +1838,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy48" unique_id=86495399 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy47" unique_id=13082053 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy49" type="Area2D" parent="Spawns" unique_id=1844965496 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy48" type="Area2D" parent="Spawns" unique_id=1844965496 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1813,19 +1874,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy49" unique_id=1874236891 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy48" unique_id=1744149172 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy50" type="Area2D" parent="Spawns" unique_id=1263350495 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy49" type="Area2D" parent="Spawns" unique_id=1263350495 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1847,19 +1910,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy50" unique_id=1485558081 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy49" unique_id=1063925998 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy51" type="Area2D" parent="Spawns" unique_id=1405264603 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy50" type="Area2D" parent="Spawns" unique_id=1405264603 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1881,19 +1946,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy51" unique_id=1181648951 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy50" unique_id=772820095 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy52" type="Area2D" parent="Spawns" unique_id=365107748 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy51" type="Area2D" parent="Spawns" unique_id=365107748 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1915,19 +1982,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy52" unique_id=2051520503 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy51" unique_id=601168254 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy53" type="Area2D" parent="Spawns" unique_id=1027884295 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy52" type="Area2D" parent="Spawns" unique_id=1027884295 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1949,19 +2018,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy53" unique_id=1194850744 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy52" unique_id=1688713868 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy54" type="Area2D" parent="Spawns" unique_id=902411160 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy53" type="Area2D" parent="Spawns" unique_id=902411160 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -1983,19 +2054,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy54" unique_id=677533327 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy53" unique_id=499956707 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy55" type="Area2D" parent="Spawns" unique_id=785647807 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy54" type="Area2D" parent="Spawns" unique_id=785647807 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -2017,19 +2090,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy55" unique_id=920697533 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy54" unique_id=1611827252 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy56" type="Area2D" parent="Spawns" unique_id=1050618566 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy55" type="Area2D" parent="Spawns" unique_id=1050618566 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -2051,19 +2126,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy56" unique_id=90594767 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy55" unique_id=1970959335 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy57" type="Area2D" parent="Spawns" unique_id=408057904 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy56" type="Area2D" parent="Spawns" unique_id=408057904 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -2085,19 +2162,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy57" unique_id=1197543946 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy56" unique_id=765605539 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy58" type="Area2D" parent="Spawns" unique_id=1611409990 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy57" type="Area2D" parent="Spawns" unique_id=1611409990 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -2119,19 +2198,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy58" unique_id=1503621271 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy57" unique_id=2002364773 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy59" type="Area2D" parent="Spawns" unique_id=94255033 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy58" type="Area2D" parent="Spawns" unique_id=94255033 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -2153,19 +2234,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy59" unique_id=1786429054 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy58" unique_id=253265127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy60" type="Area2D" parent="Spawns" unique_id=682159196 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy59" type="Area2D" parent="Spawns" unique_id=682159196 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -2187,19 +2270,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy60" unique_id=2076014483 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy59" unique_id=1024177636 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy61" type="Area2D" parent="Spawns" unique_id=1097082109 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy60" type="Area2D" parent="Spawns" unique_id=1097082109 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -2221,19 +2306,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy61" unique_id=2123746617 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy60" unique_id=15622232 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy62" type="Area2D" parent="Spawns" unique_id=1638316154 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy61" type="Area2D" parent="Spawns" unique_id=1638316154 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -2255,19 +2342,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy62" unique_id=400774641 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy61" unique_id=1569928899 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy63" type="Area2D" parent="Spawns" unique_id=1553674648 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy62" type="Area2D" parent="Spawns" unique_id=1553674648 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -2289,19 +2378,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy63" unique_id=1631919872 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy62" unique_id=1334745704 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy64" type="Area2D" parent="Spawns" unique_id=1505328772 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy63" type="Area2D" parent="Spawns" unique_id=1505328772 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -2323,19 +2414,21 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy64" unique_id=653875009 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy63" unique_id=575941415 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
-[node name="Billy65" type="Area2D" parent="Spawns" unique_id=2010360427 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+[node name="Billy64" type="Area2D" parent="Spawns" unique_id=2010360427 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
@@ -2357,17 +2450,125 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy65" unique_id=1278454275 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="VUVector" type="Area2D" parent="Spawns/Billy64" unique_id=2104394624 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
+
+[node name="Billy65" type="Area2D" parent="Spawns" unique_id=1949908101 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3504, 1912)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_7s6kp")
+actor_path = "res://src/Actor/Enemy/Billy.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"bullet_damage": [2, 2, ""],
+"bullet_speed": [200, 2, ""],
+"deaggro_delay": [3.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [1, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Billy65", 4, ""],
+"idle_max_time": [5.0, 3, ""],
+"lock_distance": [128, 2, ""],
+"lock_tolerance": [16, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"walk_max_time": [10.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VUVector" type="Area2D" parent="Spawns/Billy65" unique_id=555857030 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_t51sm")
+tag_name = "move_dir"
+snap_degrees = 180.0
+
+[node name="Billy66" type="Area2D" parent="Spawns" unique_id=773325928 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3384, 1984)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_7s6kp")
+actor_path = "res://src/Actor/Enemy/Billy.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"bullet_damage": [2, 2, ""],
+"bullet_speed": [200, 2, ""],
+"deaggro_delay": [3.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Billy66", 4, ""],
+"idle_max_time": [5.0, 3, ""],
+"lock_distance": [128, 2, ""],
+"lock_tolerance": [16, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"walk_max_time": [10.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VUVector" type="Area2D" parent="Spawns/Billy66" unique_id=285664906 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_t51sm")
+tag_name = "move_dir"
+snap_degrees = 180.0
+
+[node name="Billy67" type="Area2D" parent="Spawns" unique_id=494323841 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3496, 1984)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_7s6kp")
+actor_path = "res://src/Actor/Enemy/Billy.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"bullet_damage": [2, 2, ""],
+"bullet_speed": [200, 2, ""],
+"deaggro_delay": [3.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Billy67", 4, ""],
+"idle_max_time": [5.0, 3, ""],
+"lock_distance": [128, 2, ""],
+"lock_tolerance": [16, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"walk_max_time": [10.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VUVector" type="Area2D" parent="Spawns/Billy67" unique_id=529135858 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_221ui")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_t51sm")
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
@@ -2388,4 +2589,76 @@ collision_mask = 0
 script = ExtResource("10_221ui")
 zoom = 3.0
 
-[connection signal="body_exited" from="Triggers/KillBox" to="Triggers/KillBox" method="_on_body_exited"]
+[connection signal="body_entered" from="Triggers/KillBoundaryU" to="Triggers/KillBoundaryU" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryD" to="Triggers/KillBoundaryD" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryL" to="Triggers/KillBoundaryL" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryR" to="Triggers/KillBoundaryR" method="_on_body_entered"]
+[connection signal="gui_input" from="Spawns/Water" to="Spawns/Water" method="_on_gui_input"]
+[connection signal="input_event" from="Spawns/Billy" to="Spawns/Billy" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy1" to="Spawns/Billy1" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy2" to="Spawns/Billy2" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy3" to="Spawns/Billy3" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy4" to="Spawns/Billy4" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy5" to="Spawns/Billy5" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy6" to="Spawns/Billy6" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy7" to="Spawns/Billy7" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy8" to="Spawns/Billy8" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy9" to="Spawns/Billy9" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy10" to="Spawns/Billy10" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy11" to="Spawns/Billy11" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy12" to="Spawns/Billy12" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy13" to="Spawns/Billy13" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy14" to="Spawns/Billy14" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy15" to="Spawns/Billy15" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy16" to="Spawns/Billy16" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy17" to="Spawns/Billy17" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy18" to="Spawns/Billy18" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy19" to="Spawns/Billy19" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy20" to="Spawns/Billy20" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy21" to="Spawns/Billy21" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy22" to="Spawns/Billy22" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy23" to="Spawns/Billy23" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy24" to="Spawns/Billy24" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy25" to="Spawns/Billy25" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy26" to="Spawns/Billy26" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy27" to="Spawns/Billy27" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy28" to="Spawns/Billy28" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy29" to="Spawns/Billy29" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy30" to="Spawns/Billy30" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy31" to="Spawns/Billy31" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy32" to="Spawns/Billy32" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy33" to="Spawns/Billy33" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy34" to="Spawns/Billy34" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy35" to="Spawns/Billy35" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy36" to="Spawns/Billy36" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy37" to="Spawns/Billy37" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy38" to="Spawns/Billy38" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy39" to="Spawns/Billy39" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy40" to="Spawns/Billy40" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy41" to="Spawns/Billy41" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy42" to="Spawns/Billy42" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy43" to="Spawns/Billy43" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy44" to="Spawns/Billy44" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy45" to="Spawns/Billy45" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy46" to="Spawns/Billy46" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy47" to="Spawns/Billy47" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy48" to="Spawns/Billy48" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy49" to="Spawns/Billy49" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy50" to="Spawns/Billy50" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy51" to="Spawns/Billy51" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy52" to="Spawns/Billy52" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy53" to="Spawns/Billy53" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy54" to="Spawns/Billy54" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy55" to="Spawns/Billy55" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy56" to="Spawns/Billy56" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy57" to="Spawns/Billy57" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy58" to="Spawns/Billy58" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy59" to="Spawns/Billy59" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy60" to="Spawns/Billy60" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy61" to="Spawns/Billy61" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy62" to="Spawns/Billy62" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy63" to="Spawns/Billy63" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy64" to="Spawns/Billy64" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy65" to="Spawns/Billy65" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy66" to="Spawns/Billy66" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy67" to="Spawns/Billy67" method="_on_input_event"]

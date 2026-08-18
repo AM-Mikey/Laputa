@@ -7,7 +7,7 @@ const WAYPOINT = preload("res://src/Editor/VisualUtility/WaypointGlobal.tscn")
 const TX_0 = preload("res://assets/Actor/Enemy/Billy0.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Billy1.png")
 
-@export var move_dir = Vector2.LEFT
+var move_dir = Vector2.LEFT
 @export var difficulty := 0
 var max_difficulty = 1
 @export var idle_max_time := 5.0
@@ -67,8 +67,8 @@ func setup(): #Reminder: no function called can use await
 
 	is_wind_affected = true
 	$DeaggroTimer.wait_time = deaggro_delay
-	$PlayerDetector/CollisionShape2D.shape.size = $VURect.value.size
-	$PlayerDetector/CollisionShape2D.position = $VURect.value.position + $VURect.value.size / 2.0
+	move_dir = $VUVector.direction.snappedf(1.0)
+	look_dir = move_dir
 
 	waypoint = WAYPOINT.instantiate()
 	waypoint.owner_id = id
@@ -89,8 +89,10 @@ func enter_walk(_last_state):
 
 func do_walk(_delta):
 	if on_wall || \
-		(!$FloorDetectorL.is_colliding() && move_dir.x < 0) || \
-		(!$FloorDetectorR.is_colliding() && move_dir.x > 0):
+		(on_floor && !$FloorDetectorL.is_colliding() && move_dir.x < 0) || \
+		(on_floor && !$FloorDetectorR.is_colliding() && move_dir.x > 0):
+		if name == "Billy38":
+			print("A, ", on_wall, " ", $FloorDetectorL.is_colliding(), " ", $FloorDetectorR.is_colliding())
 		move_dir.x = -move_dir.x
 		look_dir.x = move_dir.x
 	velocity = calc_velocity(move_dir)
