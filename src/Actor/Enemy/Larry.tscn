@@ -134,7 +134,10 @@ libraries/ = SubResource("AnimationLibrary_t5niq")
 [node name="Timer" type="Timer" parent="." unique_id=911070913]
 process_callback = 0
 one_shot = true
-autostart = true
+
+[node name="TurnCooldown" type="Timer" parent="." unique_id=2070997894]
+wait_time = 0.3
+one_shot = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
