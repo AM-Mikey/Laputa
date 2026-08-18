@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://c0y3jsegk3330"]
+[gd_scene format=3 uid="uid://b7e42dovy8ebw"]
 
 [ext_resource type="Texture2D" uid="uid://clhrvetw6ax6h" path="res://assets/Actor/Enemy/Goalie.png" id="1"]
 [ext_resource type="Script" uid="uid://d3h7pxwy2if6w" path="res://src/Actor/Enemy/Outdated/Goalie/Idle.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_e16d4"]
 [ext_resource type="PackedScene" uid="uid://qmvnhwivhm4j" path="res://src/Utility/StateMachine.tscn" id="3"]
-[ext_resource type="Script" uid="uid://cgnp13s3abode" path="res://src/Actor/Enemy/Outdated/Goalie/Goalie.gd" id="4"]
+[ext_resource type="Script" path="res://src/Actor/Enemy/Goalie.gd" id="4"]
 [ext_resource type="Script" uid="uid://bwhf0ctg8u5ho" path="res://src/Actor/Enemy/Outdated/Goalie/Rise.gd" id="5"]
 [ext_resource type="Script" uid="uid://c758j64luap4" path="res://src/Actor/Enemy/Outdated/Goalie/Active.gd" id="6"]
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="7"]
@@ -115,80 +116,84 @@ _data = {
 &"Rise": SubResource("9")
 }
 
-[node name="Goalie" type="CharacterBody2D" groups=["Actors", "Enemies", "Entities"]]
+[node name="Goalie" type="CharacterBody2D" unique_id=883282154 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("4")
 speed = Vector2(100, 200)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1630901694]
 position = Vector2(0, -8)
 shape = SubResource("1")
 
-[node name="KickDectector" type="Area2D" parent="."]
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_e16d4")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=177726214]
+position = Vector2(0, -8)
+shape = SubResource("1")
+
+[node name="KickDectector" type="Area2D" parent="." unique_id=487697926]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KickDectector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KickDectector" unique_id=1994513786]
 position = Vector2(-8, -8)
 shape = SubResource("10")
 
-[node name="ActiveDetector" type="Area2D" parent="."]
+[node name="ActiveDetector" type="Area2D" parent="." unique_id=1122222324]
 collision_layer = 0
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ActiveDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActiveDetector" unique_id=1345632410]
 modulate = Color(0.992157, 0.992157, 0.992157, 0.156863)
 position = Vector2(0, -64)
 shape = SubResource("3")
 
-[node name="JumpDetector" type="Area2D" parent="."]
+[node name="JumpDetector" type="Area2D" parent="." unique_id=104415215]
 collision_layer = 0
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpDetector" unique_id=14587079]
 modulate = Color(0, 0.0156863, 0.937255, 0.392157)
 position = Vector2(0, -72)
 shape = SubResource("4")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1138557505]
 position = Vector2(0, -16)
 texture = ExtResource("1")
 hframes = 2
 vframes = 5
-frame = 6
+frame = 2
 
-[node name="FireCooldown" type="Timer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1193424199]
+libraries/ = SubResource("AnimationLibrary_g0tk0")
+
+[node name="FireCooldown" type="Timer" parent="." unique_id=997669638]
 one_shot = true
 autostart = true
 
-[node name="StateMachine" parent="." instance=ExtResource("3")]
+[node name="StateMachine" parent="." unique_id=990411388 instance=ExtResource("3")]
 
-[node name="Label" type="Label" parent="StateMachine"]
+[node name="Label" type="Label" parent="StateMachine" unique_id=149672216]
 offset_left = -24.0
 offset_top = -32.0
 offset_right = 24.0
 offset_bottom = -16.0
 theme = ExtResource("7")
 
-[node name="Idle" type="Node" parent="StateMachine"]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=400746828]
 script = ExtResource("2")
 
-[node name="Active" type="Node" parent="StateMachine"]
+[node name="Active" type="Node" parent="StateMachine" unique_id=603508363]
 script = ExtResource("6")
 
-[node name="Rise" type="Node" parent="StateMachine"]
+[node name="Rise" type="Node" parent="StateMachine" unique_id=1456642393]
 script = ExtResource("5")
 
-[node name="Kick" type="Node" parent="StateMachine"]
+[node name="Kick" type="Node" parent="StateMachine" unique_id=512728381]
 script = ExtResource("8")
 
-[node name="Fall" type="Node" parent="StateMachine"]
+[node name="Fall" type="Node" parent="StateMachine" unique_id=1815030219]
 script = ExtResource("9")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_g0tk0")
-}
 
 [connection signal="body_entered" from="KickDectector" to="." method="_on_KickDectector_body_entered"]
 [connection signal="body_entered" from="ActiveDetector" to="." method="_on_ActiveDetector_body_entered"]
