@@ -51,11 +51,17 @@ func wait():
 
 
 func animate():
-	if speed != Vector2.ZERO:
-		if move_dir == Vector2.LEFT:
-			$AnimationPlayer.play("WalkLeft")
-		if move_dir == Vector2.RIGHT:
-			$AnimationPlayer.play("WalkRight")
+	if !idle:
+		if velocity.length() > 1.0:
+			if move_dir == Vector2.LEFT:
+				$AnimationPlayer.play("WalkLeft")
+			if move_dir == Vector2.RIGHT:
+				$AnimationPlayer.play("WalkRight")
+		else:
+			if move_dir == Vector2.LEFT:
+				$AnimationPlayer.play("IdleLeft")
+			if move_dir == Vector2.RIGHT:
+				$AnimationPlayer.play("IdleRight")
 	else:
 		if move_dir == Vector2.LEFT:
 			$AnimationPlayer.play("IdleLeft")
