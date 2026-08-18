@@ -72,4 +72,10 @@
 	/cam,hold camera will be held at this position until the player progresses text
 	/cam,to_player,30 returning the camera to the player once more /progress_main_mission
 	",
+	
+	"waypoint_demo":
+	"/newchar,Cool,Tabith Walking to waypoint 0. /waypoint,tabith,0
+	walking to waypoint 1. /waypoint,tabith,1
+	",
+	
 }
