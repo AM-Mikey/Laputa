@@ -1,38 +1,29 @@
-[gd_scene format=4]
+[gd_scene format=4 uid="uid://db2usaud85h0a"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_6q8mx"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_jogqi"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_6q8mx"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_jogqi"]
 [ext_resource type="Resource" path="res://src/Background/iedge.tres" id="3_f378h"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_ow22x"]
-[ext_resource type="Texture2D" path="res://assets/Background/IslandEdge.png" id="4_53gin"]
-[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_6aw22"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_o4jlr"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="10_221ui"]
-[ext_resource type="PackedScene" path="res://src/Editor/TitlePreview.tscn" id="11_atco8"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_uo8bs"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_7s6kp"]
-[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="12_s0ppf"]
-[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="13_7s6kp"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="13_ddw3t"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="13_l0h4m"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="14_t51sm"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="16_by0gl"]
+[ext_resource type="Texture2D" uid="uid://maf247vr1ab" path="res://assets/Background/IslandEdge.png" id="4_53gin"]
+[ext_resource type="TileSet" uid="uid://dct5q86qhnom8" path="res://src/Tile/Debug.tres" id="5_6aw22"]
+[ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="11_atco8"]
+[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_uo8bs"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="12_s0ppf"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="13_ddw3t"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="13_l0h4m"]
 
-[node name="EnBillyTesting" type="Node2D" unique_id=1952135705]
+[node name="EnGoalieTesting" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
 script = ExtResource("1_6q8mx")
 level_name = "EnBillyTesting"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1011068996 instance=ExtResource("2_jogqi")]
+[node name="LevelLimiter" parent="." unique_id=1011068996 instance=ExtResource("2_jogqi")]
 visibility_layer = 2
 offset_left = 1599.0
 offset_top = 1600.0
 offset_right = 4431.0
 offset_bottom = 2496.0
-mouse_filter = 2
-script = ExtResource("3_ow22x")
 background_resource = ExtResource("3_f378h")
 texture = ExtResource("4_53gin")
 layers = 5
@@ -96,17 +87,13 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=751148410]
 visibility_layer = 2
 
-[node name="Water" type="MarginContainer" parent="Spawns" unique_id=1800792368 groups=["TriggerSpawns"] instance=ExtResource("13_l0h4m")]
+[node name="Water" parent="Spawns" unique_id=1800792368 instance=ExtResource("13_l0h4m")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 2704.0
 offset_top = 2000.0
 offset_right = 4320.0
 offset_bottom = 2160.0
-mouse_filter = 2
-script = ExtResource("8_o4jlr")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20, ""],
@@ -116,2276 +103,1074 @@ properties = {
 }
 size_is_default = false
 
-[node name="VanishingPoint" type="Area2D" parent="Spawns" unique_id=2052223351 groups=["VanishingPoints"] instance=ExtResource("12_s0ppf")]
+[node name="VanishingPoint" parent="Spawns" unique_id=2052223351 instance=ExtResource("12_s0ppf")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3008, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_221ui")
 
-[node name="Billy" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie" parent="Spawns" unique_id=1199277091 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3176, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie1" parent="Spawns" unique_id=1984945580 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy1" type="Area2D" parent="Spawns" unique_id=1984945580 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3176, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy1" unique_id=767047930 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie2" parent="Spawns" unique_id=930545101 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy2" type="Area2D" parent="Spawns" unique_id=930545101 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2919, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy2" unique_id=300055063 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie3" parent="Spawns" unique_id=1901015921 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-175, -64, 328, 144)
-
-[node name="Billy3" type="Area2D" parent="Spawns" unique_id=1901015921 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2455, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy3" unique_id=230949683 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie4" parent="Spawns" unique_id=996645201 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy4" type="Area2D" parent="Spawns" unique_id=996645201 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2535, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy4" unique_id=1294409270 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie5" parent="Spawns" unique_id=2132866644 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy5" type="Area2D" parent="Spawns" unique_id=2132866644 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2487, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy5" unique_id=160219798 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie6" parent="Spawns" unique_id=153978613 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy6" type="Area2D" parent="Spawns" unique_id=153978613 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2007, 1904)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy6" unique_id=1838308525 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie7" parent="Spawns" unique_id=1373189236 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy7" type="Area2D" parent="Spawns" unique_id=1373189236 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(1991, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy7" unique_id=1835167236 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie8" parent="Spawns" unique_id=526005885 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy8" type="Area2D" parent="Spawns" unique_id=526005885 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(1975, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy8" unique_id=2076950953 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie9" parent="Spawns" unique_id=314367098 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy9" type="Area2D" parent="Spawns" unique_id=314367098 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(1959, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy9" unique_id=757693168 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie10" parent="Spawns" unique_id=265269619 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy10" type="Area2D" parent="Spawns" unique_id=265269619 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2007, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy10" unique_id=80757571 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie11" parent="Spawns" unique_id=1210439660 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy11" type="Area2D" parent="Spawns" unique_id=1210439660 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2071, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy11" unique_id=599682159 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie12" parent="Spawns" unique_id=1769002117 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy12" type="Area2D" parent="Spawns" unique_id=1769002117 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2023, 1904)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy12" unique_id=589150485 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie13" parent="Spawns" unique_id=1039346574 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy13" type="Area2D" parent="Spawns" unique_id=1039346574 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2503, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy13" unique_id=1131866108 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie14" parent="Spawns" unique_id=973427187 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy14" type="Area2D" parent="Spawns" unique_id=973427187 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2663, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy14" unique_id=897387927 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie15" parent="Spawns" unique_id=1692567228 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy15" type="Area2D" parent="Spawns" unique_id=1692567228 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2663, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy15" unique_id=164196138 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie16" parent="Spawns" unique_id=1162682772 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy16" type="Area2D" parent="Spawns" unique_id=1162682772 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2519, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy16" unique_id=429461909 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie17" parent="Spawns" unique_id=1582272538 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy17" type="Area2D" parent="Spawns" unique_id=1582272538 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2455, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy17" unique_id=1729516201 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie18" parent="Spawns" unique_id=1904943286 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy18" type="Area2D" parent="Spawns" unique_id=1904943286 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2535, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy18" unique_id=2064860267 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie19" parent="Spawns" unique_id=1832486936 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy19" type="Area2D" parent="Spawns" unique_id=1832486936 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2487, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy19" unique_id=906296746 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie20" parent="Spawns" unique_id=2083897735 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy20" type="Area2D" parent="Spawns" unique_id=2083897735 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2503, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy20" unique_id=1519724100 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie21" parent="Spawns" unique_id=546717449 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy21" type="Area2D" parent="Spawns" unique_id=546717449 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2519, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy21" unique_id=1220077295 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie22" parent="Spawns" unique_id=752417822 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy22" type="Area2D" parent="Spawns" unique_id=752417822 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2615, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy22" unique_id=649300702 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie23" parent="Spawns" unique_id=918963500 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy23" type="Area2D" parent="Spawns" unique_id=918963500 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2647, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy23" unique_id=516391137 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie24" parent="Spawns" unique_id=1090259047 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy24" type="Area2D" parent="Spawns" unique_id=1090259047 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2631, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy24" unique_id=337378158 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie25" parent="Spawns" unique_id=1403510373 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy25" type="Area2D" parent="Spawns" unique_id=1403510373 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2215, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy25" unique_id=1547254220 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie26" parent="Spawns" unique_id=805196409 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy26" type="Area2D" parent="Spawns" unique_id=805196409 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2199, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy26" unique_id=1788580950 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie27" parent="Spawns" unique_id=15507948 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy27" type="Area2D" parent="Spawns" unique_id=15507948 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2183, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy27" unique_id=70158 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie28" parent="Spawns" unique_id=1914940294 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy28" type="Area2D" parent="Spawns" unique_id=1914940294 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2615, 2024)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy28" unique_id=423438577 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie29" parent="Spawns" unique_id=689863006 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy29" type="Area2D" parent="Spawns" unique_id=689863006 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2647, 2024)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy29" unique_id=1754716905 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie30" parent="Spawns" unique_id=1203087619 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy30" type="Area2D" parent="Spawns" unique_id=1203087619 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2631, 2024)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy30" unique_id=329587114 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie31" parent="Spawns" unique_id=1675149439 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy31" type="Area2D" parent="Spawns" unique_id=1675149439 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2215, 2024)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy31" unique_id=1615724046 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie32" parent="Spawns" unique_id=35550593 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy32" type="Area2D" parent="Spawns" unique_id=35550593 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2199, 2024)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy32" unique_id=1484866015 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie33" parent="Spawns" unique_id=977941937 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy33" type="Area2D" parent="Spawns" unique_id=977941937 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2183, 2024)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy33" unique_id=267196572 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie34" parent="Spawns" unique_id=1368712194 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy34" type="Area2D" parent="Spawns" unique_id=1368712194 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2920, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy34" unique_id=1787016922 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie35" parent="Spawns" unique_id=1859222939 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy35" type="Area2D" parent="Spawns" unique_id=1859222939 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3704, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy35" unique_id=623060791 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie36" parent="Spawns" unique_id=1916492263 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy36" type="Area2D" parent="Spawns" unique_id=1916492263 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3688, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy36" unique_id=1425533211 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie37" parent="Spawns" unique_id=747485573 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy37" type="Area2D" parent="Spawns" unique_id=747485573 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3448, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy37" unique_id=1450995026 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie38" parent="Spawns" unique_id=1706834576 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy38" type="Area2D" parent="Spawns" unique_id=1706834576 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3432, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy38" unique_id=550100519 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie39" parent="Spawns" unique_id=143919362 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy39" type="Area2D" parent="Spawns" unique_id=143919362 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3448, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy39" unique_id=272189417 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie40" parent="Spawns" unique_id=952797665 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy40" type="Area2D" parent="Spawns" unique_id=952797665 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3432, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy40" unique_id=1854464650 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie41" parent="Spawns" unique_id=362673771 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy41" type="Area2D" parent="Spawns" unique_id=362673771 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(4216, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy41" unique_id=1825664890 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie42" parent="Spawns" unique_id=381324728 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy42" type="Area2D" parent="Spawns" unique_id=381324728 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(4200, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy42" unique_id=153013559 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie43" parent="Spawns" unique_id=1491991131 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy43" type="Area2D" parent="Spawns" unique_id=1491991131 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3704, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy43" unique_id=835998934 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie44" parent="Spawns" unique_id=811705184 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy44" type="Area2D" parent="Spawns" unique_id=811705184 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3688, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy44" unique_id=2066459705 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie45" parent="Spawns" unique_id=1964371095 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy45" type="Area2D" parent="Spawns" unique_id=1964371095 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3704, 1872)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy45" unique_id=711430557 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie46" parent="Spawns" unique_id=808682814 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy46" type="Area2D" parent="Spawns" unique_id=808682814 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3688, 1872)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy46" unique_id=792539576 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie47" parent="Spawns" unique_id=1915757733 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy47" type="Area2D" parent="Spawns" unique_id=1915757733 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3704, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy47" unique_id=987440889 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie48" parent="Spawns" unique_id=6268043 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy48" type="Area2D" parent="Spawns" unique_id=6268043 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3688, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy48" unique_id=86495399 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie49" parent="Spawns" unique_id=1844965496 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy49" type="Area2D" parent="Spawns" unique_id=1844965496 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3960, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy49" unique_id=1874236891 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie50" parent="Spawns" unique_id=1263350495 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy50" type="Area2D" parent="Spawns" unique_id=1263350495 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3944, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy50" unique_id=1485558081 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie51" parent="Spawns" unique_id=1405264603 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy51" type="Area2D" parent="Spawns" unique_id=1405264603 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3960, 1776)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy51" unique_id=1181648951 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie52" parent="Spawns" unique_id=365107748 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy52" type="Area2D" parent="Spawns" unique_id=365107748 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3944, 1776)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy52" unique_id=2051520503 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie53" parent="Spawns" unique_id=1027884295 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy53" type="Area2D" parent="Spawns" unique_id=1027884295 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3960, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy53" unique_id=1194850744 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie54" parent="Spawns" unique_id=902411160 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy54" type="Area2D" parent="Spawns" unique_id=902411160 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3944, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy54" unique_id=677533327 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie55" parent="Spawns" unique_id=785647807 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy55" type="Area2D" parent="Spawns" unique_id=785647807 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(4216, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy55" unique_id=920697533 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie56" parent="Spawns" unique_id=1050618566 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy56" type="Area2D" parent="Spawns" unique_id=1050618566 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(4200, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy56" unique_id=90594767 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie57" parent="Spawns" unique_id=408057904 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy57" type="Area2D" parent="Spawns" unique_id=408057904 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(4216, 1776)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy57" unique_id=1197543946 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie58" parent="Spawns" unique_id=1611409990 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy58" type="Area2D" parent="Spawns" unique_id=1611409990 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(4200, 1776)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy58" unique_id=1503621271 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie59" parent="Spawns" unique_id=94255033 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy59" type="Area2D" parent="Spawns" unique_id=94255033 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(4216, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy59" unique_id=1786429054 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie60" parent="Spawns" unique_id=682159196 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy60" type="Area2D" parent="Spawns" unique_id=682159196 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(4200, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy60" unique_id=2076014483 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie61" parent="Spawns" unique_id=1097082109 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy61" type="Area2D" parent="Spawns" unique_id=1097082109 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3960, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy61" unique_id=2123746617 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie62" parent="Spawns" unique_id=1638316154 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy62" type="Area2D" parent="Spawns" unique_id=1638316154 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3944, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy62" unique_id=400774641 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie63" parent="Spawns" unique_id=1553674648 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy63" type="Area2D" parent="Spawns" unique_id=1553674648 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3032, 2208)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy2", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
 "move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy63" unique_id=1631919872 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie64" parent="Spawns" unique_id=1505328772 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy64" type="Area2D" parent="Spawns" unique_id=1505328772 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3096, 2208)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy3", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(1, 0), 5, ""],
+"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy64" unique_id=653875009 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
+[node name="Goalie65" parent="Spawns" unique_id=2010360427 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy65" type="Area2D" parent="Spawns" unique_id=2010360427 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(3288, 2432)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_7s6kp")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
+actor_path = "uid://b7e42dovy8ebw"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
 "debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
 "do_bubbles": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Billy3", 4, ""],
+"id": [&"Billy", 4, ""],
 "idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(1, 0), 5, ""],
+"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
-
-[node name="VURect" type="Node2D" parent="Spawns/Billy65" unique_id=1278454275 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_7s6kp")]
-visibility_layer = 2
-script = ExtResource("14_t51sm")
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
 
-[node name="SpawnPoint" type="Area2D" parent="." unique_id=1710023778 groups=["SpawnPoints"] instance=ExtResource("13_ddw3t")]
+[node name="SpawnPoint" parent="." unique_id=1710023778 instance=ExtResource("13_ddw3t")]
 visibility_layer = 2
 position = Vector2(3000, 1952)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_by0gl")
 
-[node name="TitlePreview" type="Area2D" parent="." unique_id=1910190675 groups=["TitlePreviews"] instance=ExtResource("11_atco8")]
+[node name="TitlePreview" parent="." unique_id=1910190675 instance=ExtResource("11_atco8")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3040, 2336)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_221ui")
 zoom = 3.0
-
-[connection signal="body_exited" from="Triggers/KillBox" to="Triggers/KillBox" method="_on_body_exited"]

@@ -21,6 +21,11 @@ func _ready():
 	gravity = 250
 
 	reward = 3
+	is_wind_affected = true
+
+	jump_pos = Vector2(position.x, position.y + jump_height * -16)
+
+	w.emit_signal("finished_spawn_entities_step")
 
 
 func _on_ActiveDetector_body_entered(body):
@@ -39,7 +44,6 @@ func _on_JumpDetector_body_entered(_body):
 
 
 func _on_KickDectector_body_entered(body):
-	if not Engine.is_editor_hint():
-		if $StateMachine.current_state == $StateMachine/Rise:
-			target = body
-			$StateMachine.change_state("Kick")
+	if $StateMachine.current_state == $StateMachine/Rise:
+		target = body
+		$StateMachine.change_state("Kick")

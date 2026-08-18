@@ -1,18 +1,24 @@
 [gd_scene format=3 uid="uid://b7e42dovy8ebw"]
 
-[ext_resource type="Texture2D" uid="uid://clhrvetw6ax6h" path="res://assets/Actor/Enemy/Goalie.png" id="1"]
-[ext_resource type="Script" uid="uid://d3h7pxwy2if6w" path="res://src/Actor/Enemy/Outdated/Goalie/Idle.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_e16d4"]
-[ext_resource type="PackedScene" uid="uid://qmvnhwivhm4j" path="res://src/Utility/StateMachine.tscn" id="3"]
-[ext_resource type="Script" path="res://src/Actor/Enemy/Goalie.gd" id="4"]
-[ext_resource type="Script" uid="uid://bwhf0ctg8u5ho" path="res://src/Actor/Enemy/Outdated/Goalie/Rise.gd" id="5"]
-[ext_resource type="Script" uid="uid://c758j64luap4" path="res://src/Actor/Enemy/Outdated/Goalie/Active.gd" id="6"]
-[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="7"]
-[ext_resource type="Script" uid="uid://bk8sni4bohh65" path="res://src/Actor/Enemy/Outdated/Goalie/Kick.gd" id="8"]
-[ext_resource type="Script" uid="uid://cdeed6oueu0d1" path="res://src/Actor/Enemy/Outdated/Goalie/Fall.gd" id="9"]
+[ext_resource type="Script" uid="uid://cgnp13s3abode" path="res://src/Actor/Enemy/Goalie.gd" id="1_aho6q"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_17672"]
+[ext_resource type="Texture2D" uid="uid://clhrvetw6ax6h" path="res://assets/Actor/Enemy/Goalie.png" id="3_c3js0"]
+[ext_resource type="PackedScene" uid="uid://qmvnhwivhm4j" path="res://src/Utility/StateMachine.tscn" id="4_t2tsg"]
+[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="5_533tp"]
+[ext_resource type="Script" uid="uid://d3h7pxwy2if6w" path="res://src/Actor/Enemy/Outdated/Goalie/Idle.gd" id="6_6vfwe"]
+[ext_resource type="Script" uid="uid://c758j64luap4" path="res://src/Actor/Enemy/Outdated/Goalie/Active.gd" id="7_rilcr"]
+[ext_resource type="Script" uid="uid://bwhf0ctg8u5ho" path="res://src/Actor/Enemy/Outdated/Goalie/Rise.gd" id="8_in2w3"]
+[ext_resource type="Script" uid="uid://bk8sni4bohh65" path="res://src/Actor/Enemy/Outdated/Goalie/Kick.gd" id="9_mejuo"]
+[ext_resource type="Script" uid="uid://cdeed6oueu0d1" path="res://src/Actor/Enemy/Outdated/Goalie/Fall.gd" id="10_8cy3u"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(8, 8)
+size = Vector2(8, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e16d4"]
+size = Vector2(11, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2rvj"]
+size = Vector2(11, 15)
 
 [sub_resource type="RectangleShape2D" id="10"]
 size = Vector2(16, 8)
@@ -118,19 +124,37 @@ _data = {
 
 [node name="Goalie" type="CharacterBody2D" unique_id=883282154 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
-collision_mask = 8
-script = ExtResource("4")
+collision_mask = 520
+script = ExtResource("1_aho6q")
 speed = Vector2(100, 200)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1630901694]
-position = Vector2(0, -8)
+position = Vector2(0, -7.5)
 shape = SubResource("1")
 
-[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_e16d4")]
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_17672")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=177726214]
-position = Vector2(0, -8)
+position = Vector2(0, -7.5)
 shape = SubResource("1")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=2126275973]
+collision_layer = 131072
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=753131815]
+position = Vector2(-0.5, -7.5)
+shape = SubResource("RectangleShape2D_e16d4")
+debug_color = Color(0, 1, 0, 0.235294)
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=2047905312]
+collision_layer = 262144
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=359933471]
+position = Vector2(-0.5, -7.5)
+shape = SubResource("RectangleShape2D_p2rvj")
+debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="KickDectector" type="Area2D" parent="." unique_id=487697926]
 collision_layer = 0
@@ -159,7 +183,7 @@ shape = SubResource("4")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1138557505]
 position = Vector2(0, -16)
-texture = ExtResource("1")
+texture = ExtResource("3_c3js0")
 hframes = 2
 vframes = 5
 frame = 2
@@ -171,30 +195,32 @@ libraries/ = SubResource("AnimationLibrary_g0tk0")
 one_shot = true
 autostart = true
 
-[node name="StateMachine" parent="." unique_id=990411388 instance=ExtResource("3")]
+[node name="StateMachine" parent="." unique_id=990411388 instance=ExtResource("4_t2tsg")]
 
 [node name="Label" type="Label" parent="StateMachine" unique_id=149672216]
 offset_left = -24.0
 offset_top = -32.0
 offset_right = 24.0
 offset_bottom = -16.0
-theme = ExtResource("7")
+theme = ExtResource("5_533tp")
 
 [node name="Idle" type="Node" parent="StateMachine" unique_id=400746828]
-script = ExtResource("2")
+script = ExtResource("6_6vfwe")
 
 [node name="Active" type="Node" parent="StateMachine" unique_id=603508363]
-script = ExtResource("6")
+script = ExtResource("7_rilcr")
 
 [node name="Rise" type="Node" parent="StateMachine" unique_id=1456642393]
-script = ExtResource("5")
+script = ExtResource("8_in2w3")
 
 [node name="Kick" type="Node" parent="StateMachine" unique_id=512728381]
-script = ExtResource("8")
+script = ExtResource("9_mejuo")
 
 [node name="Fall" type="Node" parent="StateMachine" unique_id=1815030219]
-script = ExtResource("9")
+script = ExtResource("10_8cy3u")
 
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="KickDectector" to="." method="_on_KickDectector_body_entered"]
 [connection signal="body_entered" from="ActiveDetector" to="." method="_on_ActiveDetector_body_entered"]
 [connection signal="body_exited" from="ActiveDetector" to="." method="_on_ActiveDetector_body_exited"]
