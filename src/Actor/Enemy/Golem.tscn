@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://3uxdrhtpnk0"]
+
+[ext_resource type="Script" uid="uid://dgx5afpu8m3bo" path="res://src/Actor/Enemy/Golem.gd" id="1_wvikc"]
+[ext_resource type="Texture2D" uid="uid://cc8ipptje33gi" path="res://assets/Actor/Enemy/Golem.png" id="2_4jdro"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_ieiyb"]
+[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="4_tf2u3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sy72i"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvikc"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(32, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tf2u3"]
+size = Vector2(32, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2e12y"]
+size = Vector2(32, 6)
+
+[node name="Golem" type="CharacterBody2D" unique_id=147745042 groups=["Actors", "Enemies", "Entities"]]
+collision_layer = 2
+collision_mask = 520
+floor_max_angle = 0.87266463
+script = ExtResource("1_wvikc")
+debug = true
+do_bubbles = false
+editor_hidden = false
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1818064119]
+position = Vector2(0, -32)
+texture = ExtResource("2_4jdro")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1482682800]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_sy72i")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_ieiyb")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=2123462247]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_wvikc")
+debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=205096187]
+collision_layer = 131072
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=2117243380]
+position = Vector2(0, -13)
+shape = SubResource("1")
+debug_color = Color(0, 1, 0, 0.235294)
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=811340404]
+collision_layer = 262144
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1195822173]
+position = Vector2(0, -16.5)
+shape = SubResource("RectangleShape2D_tf2u3")
+debug_color = Color(1, 0, 0, 0.235294)
+
+[node name="FloorDetectorL" type="RayCast2D" parent="." unique_id=1314022133]
+position = Vector2(-16, -8)
+target_position = Vector2(0, 24)
+collision_mask = 520
+
+[node name="FloorDetectorR" type="RayCast2D" parent="." unique_id=1337091757]
+position = Vector2(16, -8)
+target_position = Vector2(0, 24)
+collision_mask = 520
+
+[node name="VUVector" parent="." unique_id=872564127 instance=ExtResource("4_tf2u3")]
+tag_name = "move_dir"
+direction = Vector2(-1, 0)
+snap_degrees = 180.0
+
+[node name="Standable" type="CharacterBody2D" parent="." unique_id=532283458 groups=["MovingPlatform"]]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Standable" unique_id=1154934702]
+position = Vector2(0, -29)
+shape = SubResource("RectangleShape2D_2e12y")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
