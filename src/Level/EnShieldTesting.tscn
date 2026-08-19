@@ -1,17 +1,24 @@
-[gd_scene format=4 uid="uid://c1jb54hw1n6my"]
+[gd_scene format=4]
 
-[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_ow8td"]
-[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_7l2kv"]
+[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_ow8td"]
+[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_7l2kv"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_ghdwt"]
 [ext_resource type="Resource" path="res://src/Background/iedge.tres" id="3_ud3a0"]
-[ext_resource type="Texture2D" uid="uid://maf247vr1ab" path="res://assets/Background/IslandEdge.png" id="4_xjnrr"]
-[ext_resource type="TileSet" uid="uid://dct5q86qhnom8" path="res://src/Tile/Debug.tres" id="5_x5hxt"]
-[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="9_130do"]
-[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="9_wm2il"]
-[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="10_r2aiy"]
-[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="11_usduj"]
-[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="11_wm2il"]
-[ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="12_3baw4"]
-[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="13_w2pfh"]
+[ext_resource type="Texture2D" path="res://assets/Background/IslandEdge.png" id="4_xjnrr"]
+[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_x5hxt"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_wm2il"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="9_130do"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="9_wm2il"]
+[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="10_r2aiy"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="10_usduj"]
+[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="11_usduj"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="11_wm2il"]
+[ext_resource type="PackedScene" path="res://src/Editor/TitlePreview.tscn" id="12_3baw4"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="12_mdnbd"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="13_w2pfh"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="14_w2pfh"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="16_yvlse"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="18_r6d6x"]
 
 [node name="EnShieldTesting" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
@@ -21,12 +28,14 @@ music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 debug_guns_on_enter = Array[String](["Revolver", "Speeder", "MPistol", "GLauncher", "Shotgun", "Tsurugi", "Red7", "Roberta"])
 
-[node name="LevelLimiter" parent="." unique_id=1011068996 instance=ExtResource("2_7l2kv")]
+[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1011068996 instance=ExtResource("2_7l2kv")]
 visibility_layer = 2
 offset_left = 1600.0
 offset_top = 1600.0
 offset_right = 4432.0
 offset_bottom = 2496.0
+mouse_filter = 2
+script = ExtResource("3_ghdwt")
 background_resource = ExtResource("3_ud3a0")
 texture = ExtResource("4_xjnrr")
 layers = 5
@@ -90,13 +99,17 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=751148410]
 visibility_layer = 2
 
-[node name="Water1" parent="Spawns" unique_id=841179443 instance=ExtResource("9_wm2il")]
+[node name="Water" type="MarginContainer" parent="Spawns" unique_id=841179443 groups=["TriggerSpawns"] instance=ExtResource("9_wm2il")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 2224.0
 offset_top = 1840.0
 offset_right = 2304.0
 offset_bottom = 2415.0
+mouse_filter = 2
+script = ExtResource("8_wm2il")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20, ""],
@@ -106,9 +119,14 @@ properties = {
 }
 size_is_default = false
 
-[node name="Shield" parent="Spawns" unique_id=1199277091 instance=ExtResource("9_130do")]
+[node name="Shield" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(3400, 1984)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -121,21 +139,30 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield" unique_id=1540331808 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield" unique_id=1540331808 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield" unique_id=688682803 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield1" parent="Spawns" unique_id=504304344 instance=ExtResource("9_130do")]
+[node name="Shield1" type="Area2D" parent="Spawns" unique_id=504304344 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(3656, 1872)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -148,20 +175,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield1" unique_id=408170292 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield1" unique_id=408170292 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield1" unique_id=1391403843 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield1" unique_id=1391403843 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield2" parent="Spawns" unique_id=2024909787 instance=ExtResource("9_130do")]
+[node name="Shield2" type="Area2D" parent="Spawns" unique_id=2024909787 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(3944, 1984)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -174,20 +210,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield2" unique_id=673795033 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield2" unique_id=673795033 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield2" unique_id=1200884446 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield2" unique_id=1200884446 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield3" parent="Spawns" unique_id=187616689 instance=ExtResource("9_130do")]
+[node name="Shield3" type="Area2D" parent="Spawns" unique_id=187616689 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(3704, 1984)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -200,20 +245,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield3" unique_id=1938859697 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield3" unique_id=1938859697 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield3" unique_id=519805657 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield3" unique_id=519805657 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield4" parent="Spawns" unique_id=1290214771 instance=ExtResource("9_130do")]
+[node name="Shield4" type="Area2D" parent="Spawns" unique_id=1290214771 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(3944, 1872)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -226,20 +280,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield4" unique_id=366027817 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield4" unique_id=366027817 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield4" unique_id=620338278 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield4" unique_id=620338278 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield5" parent="Spawns" unique_id=124374788 instance=ExtResource("9_130do")]
+[node name="Shield5" type="Area2D" parent="Spawns" unique_id=124374788 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(4200, 1872)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -252,20 +315,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield5" unique_id=1670043300 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield5" unique_id=1670043300 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield5" unique_id=380934824 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield5" unique_id=380934824 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield6" parent="Spawns" unique_id=852689807 instance=ExtResource("9_130do")]
+[node name="Shield6" type="Area2D" parent="Spawns" unique_id=852689807 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(4216, 1984)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -278,20 +350,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield6" unique_id=855400749 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield6" unique_id=855400749 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield6" unique_id=45423538 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield6" unique_id=45423538 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield7" parent="Spawns" unique_id=2080698449 instance=ExtResource("9_130do")]
+[node name="Shield7" type="Area2D" parent="Spawns" unique_id=2080698449 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(3704, 2048)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -304,20 +385,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield7" unique_id=2120764912 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield7" unique_id=2120764912 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield7" unique_id=2130787763 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield7" unique_id=2130787763 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield8" parent="Spawns" unique_id=316160635 instance=ExtResource("9_130do")]
+[node name="Shield8" type="Area2D" parent="Spawns" unique_id=316160635 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(3688, 2160)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -330,20 +420,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield8" unique_id=724116127 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield8" unique_id=724116127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield8" unique_id=667291000 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield8" unique_id=667291000 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield9" parent="Spawns" unique_id=1837851451 instance=ExtResource("9_130do")]
+[node name="Shield9" type="Area2D" parent="Spawns" unique_id=1837851451 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(3944, 2048)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -356,20 +455,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield9" unique_id=1919350915 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield9" unique_id=1919350915 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield9" unique_id=419091204 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield9" unique_id=419091204 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield10" parent="Spawns" unique_id=823426077 instance=ExtResource("9_130do")]
+[node name="Shield10" type="Area2D" parent="Spawns" unique_id=823426077 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(3944, 2160)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -382,20 +490,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield10" unique_id=1479732630 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield10" unique_id=1479732630 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield10" unique_id=549499814 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield10" unique_id=549499814 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield11" parent="Spawns" unique_id=2015313309 instance=ExtResource("9_130do")]
+[node name="Shield11" type="Area2D" parent="Spawns" unique_id=2015313309 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(4216, 2048)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -408,20 +525,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield11" unique_id=2140467480 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield11" unique_id=2140467480 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield11" unique_id=484549881 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield11" unique_id=484549881 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield12" parent="Spawns" unique_id=395356580 instance=ExtResource("9_130do")]
+[node name="Shield12" type="Area2D" parent="Spawns" unique_id=395356580 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(4216, 2160)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -434,20 +560,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield12" unique_id=1171591298 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield12" unique_id=1171591298 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield12" unique_id=1819188420 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield12" unique_id=1819188420 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield13" parent="Spawns" unique_id=1419962284 instance=ExtResource("9_130do")]
+[node name="Shield13" type="Area2D" parent="Spawns" unique_id=1419962284 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(2872, 1944)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -460,20 +595,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield13" unique_id=1795973410 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield13" unique_id=1795973410 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield13" unique_id=1571088060 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield13" unique_id=1571088060 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield14" parent="Spawns" unique_id=1432578500 instance=ExtResource("9_130do")]
+[node name="Shield14" type="Area2D" parent="Spawns" unique_id=1432578500 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(2760, 1872)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -486,20 +630,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield14" unique_id=1919819883 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield14" unique_id=1919819883 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield14" unique_id=1179850847 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield14" unique_id=1179850847 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield15" parent="Spawns" unique_id=1369712816 instance=ExtResource("9_130do")]
+[node name="Shield15" type="Area2D" parent="Spawns" unique_id=1369712816 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(2664, 1920)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -512,20 +665,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield15" unique_id=953488203 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield15" unique_id=953488203 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield15" unique_id=1936667907 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield15" unique_id=1936667907 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield16" parent="Spawns" unique_id=574879109 instance=ExtResource("9_130do")]
+[node name="Shield16" type="Area2D" parent="Spawns" unique_id=574879109 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(2472, 1936)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -538,20 +700,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield16" unique_id=1231323426 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield16" unique_id=1231323426 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield16" unique_id=1457729722 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield16" unique_id=1457729722 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield17" parent="Spawns" unique_id=64388184 instance=ExtResource("9_130do")]
+[node name="Shield17" type="Area2D" parent="Spawns" unique_id=64388184 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(2872, 2120)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -564,20 +735,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield17" unique_id=1634765091 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield17" unique_id=1634765091 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield17" unique_id=786630930 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield17" unique_id=786630930 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield18" parent="Spawns" unique_id=1287550304 instance=ExtResource("9_130do")]
+[node name="Shield18" type="Area2D" parent="Spawns" unique_id=1287550304 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(3000, 1888)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -590,20 +770,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield18" unique_id=344670991 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield18" unique_id=344670991 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield18" unique_id=52548255 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield18" unique_id=52548255 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield19" parent="Spawns" unique_id=737658782 instance=ExtResource("9_130do")]
+[node name="Shield19" type="Area2D" parent="Spawns" unique_id=737658782 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(3048, 2064)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -616,20 +805,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield19" unique_id=1084516053 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield19" unique_id=1084516053 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield19" unique_id=1961265556 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield19" unique_id=1961265556 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield20" parent="Spawns" unique_id=1224156179 instance=ExtResource("9_130do")]
+[node name="Shield20" type="Area2D" parent="Spawns" unique_id=1224156179 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(3480, 1984)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -642,20 +840,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield20" unique_id=698471170 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield20" unique_id=698471170 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield20" unique_id=1118164019 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield20" unique_id=1118164019 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield21" parent="Spawns" unique_id=80952013 instance=ExtResource("9_130do")]
+[node name="Shield21" type="Area2D" parent="Spawns" unique_id=80952013 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(3400, 2160)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -668,21 +875,30 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield21" unique_id=872564127 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield21" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield21" unique_id=2028679005 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield21" unique_id=2028679005 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield22" parent="Spawns" unique_id=910192165 instance=ExtResource("9_130do")]
+[node name="Shield22" type="Area2D" parent="Spawns" unique_id=910192165 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(3480, 2160)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -695,20 +911,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield22" unique_id=1174841897 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield22" unique_id=1174841897 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield22" unique_id=1533398903 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield22" unique_id=1533398903 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield23" parent="Spawns" unique_id=1320968108 instance=ExtResource("9_130do")]
+[node name="Shield23" type="Area2D" parent="Spawns" unique_id=1320968108 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
 position = Vector2(3704, 2224)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -721,229 +946,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield23" unique_id=594939463 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield23" unique_id=594939463 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
-tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
-snap_degrees = 180.0
-
-[node name="PlayerDetectArea" parent="Spawns/Shield23" unique_id=667565606 instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
-[node name="Shield24" parent="Spawns" unique_id=2063073981 instance=ExtResource("9_130do")]
-visibility_layer = 2
-position = Vector2(3688, 2336)
-actor_path = "res://src/Actor/Enemy/Shield.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [2, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Shield", 4, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="MoveDir" parent="Spawns/Shield24" unique_id=1233377312 instance=ExtResource("11_wm2il")]
-visibility_layer = 2
-tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
-snap_degrees = 180.0
-
-[node name="PlayerDetectArea" parent="Spawns/Shield24" unique_id=2040210926 instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
-[node name="Shield25" parent="Spawns" unique_id=2080712223 instance=ExtResource("9_130do")]
-visibility_layer = 2
-position = Vector2(3944, 2224)
-actor_path = "res://src/Actor/Enemy/Shield.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [2, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Shield", 4, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="MoveDir" parent="Spawns/Shield25" unique_id=1709555807 instance=ExtResource("11_wm2il")]
-visibility_layer = 2
-tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
-snap_degrees = 180.0
-
-[node name="PlayerDetectArea" parent="Spawns/Shield25" unique_id=675841992 instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
-[node name="Shield26" parent="Spawns" unique_id=1959416624 instance=ExtResource("9_130do")]
-visibility_layer = 2
-position = Vector2(3944, 2336)
-actor_path = "res://src/Actor/Enemy/Shield.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [2, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Shield", 4, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="MoveDir" parent="Spawns/Shield26" unique_id=374871939 instance=ExtResource("11_wm2il")]
-visibility_layer = 2
-tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
-snap_degrees = 180.0
-
-[node name="PlayerDetectArea" parent="Spawns/Shield26" unique_id=1217918737 instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
-[node name="Shield27" parent="Spawns" unique_id=1650218064 instance=ExtResource("9_130do")]
-visibility_layer = 2
-position = Vector2(4216, 2224)
-actor_path = "res://src/Actor/Enemy/Shield.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [2, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Shield", 4, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="MoveDir" parent="Spawns/Shield27" unique_id=1956675491 instance=ExtResource("11_wm2il")]
-visibility_layer = 2
-tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
-snap_degrees = 180.0
-
-[node name="PlayerDetectArea" parent="Spawns/Shield27" unique_id=7762620 instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
-[node name="Shield28" parent="Spawns" unique_id=607487489 instance=ExtResource("9_130do")]
-visibility_layer = 2
-position = Vector2(4216, 2336)
-actor_path = "res://src/Actor/Enemy/Shield.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [2, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Shield", 4, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="MoveDir" parent="Spawns/Shield28" unique_id=664035593 instance=ExtResource("11_wm2il")]
-visibility_layer = 2
-tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
-snap_degrees = 180.0
-
-[node name="PlayerDetectArea" parent="Spawns/Shield28" unique_id=289329902 instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
-[node name="Shield29" parent="Spawns" unique_id=2055288059 instance=ExtResource("9_130do")]
-visibility_layer = 2
-position = Vector2(2872, 2296)
-actor_path = "res://src/Actor/Enemy/Shield.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [2, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Shield", 4, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="MoveDir" parent="Spawns/Shield29" unique_id=225706051 instance=ExtResource("11_wm2il")]
-visibility_layer = 2
-tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
-snap_degrees = 180.0
-
-[node name="PlayerDetectArea" parent="Spawns/Shield29" unique_id=1461694614 instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
-[node name="Shield30" parent="Spawns" unique_id=1976034361 instance=ExtResource("9_130do")]
-visibility_layer = 2
-position = Vector2(3048, 2240)
-actor_path = "res://src/Actor/Enemy/Shield.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [2, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Shield", 4, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="MoveDir" parent="Spawns/Shield30" unique_id=572886866 instance=ExtResource("11_wm2il")]
-visibility_layer = 2
-tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
-snap_degrees = 180.0
-
-[node name="PlayerDetectArea" parent="Spawns/Shield30" unique_id=291120241 instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
-[node name="Shield31" parent="Spawns" unique_id=1282642277 instance=ExtResource("9_130do")]
-visibility_layer = 2
-position = Vector2(3400, 2336)
-actor_path = "res://src/Actor/Enemy/Shield.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [2, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Shield", 4, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="MoveDir" parent="Spawns/Shield31" unique_id=332101532 instance=ExtResource("11_wm2il")]
-visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield31" unique_id=1958593647 instance=ExtResource("13_w2pfh")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield23" unique_id=667565606 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
-[node name="Shield32" parent="Spawns" unique_id=2040123338 instance=ExtResource("9_130do")]
+[node name="Shield24" type="Area2D" parent="Spawns" unique_id=2063073981 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-position = Vector2(3480, 2336)
+z_index = 999
+position = Vector2(3688, 2336)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
 actor_path = "res://src/Actor/Enemy/Shield.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -956,29 +981,364 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveDir" parent="Spawns/Shield32" unique_id=944104443 instance=ExtResource("11_wm2il")]
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield24" unique_id=1233377312 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
 visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
+tag_name = "move_dir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield24" unique_id=2040210926 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
+visibility_layer = 2
+script = ExtResource("14_w2pfh")
+tag_name = "player_detection"
+value = Rect2(-160, -80, 320, 160)
+
+[node name="Shield25" type="Area2D" parent="Spawns" unique_id=2080712223 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3944, 2224)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
+actor_path = "res://src/Actor/Enemy/Shield.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [2, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Shield", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield25" unique_id=1709555807 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
+tag_name = "move_dir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield25" unique_id=675841992 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
+visibility_layer = 2
+script = ExtResource("14_w2pfh")
+tag_name = "player_detection"
+value = Rect2(-160, -80, 320, 160)
+
+[node name="Shield26" type="Area2D" parent="Spawns" unique_id=1959416624 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3944, 2336)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
+actor_path = "res://src/Actor/Enemy/Shield.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [2, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Shield", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield26" unique_id=374871939 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
+tag_name = "move_dir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield26" unique_id=1217918737 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
+visibility_layer = 2
+script = ExtResource("14_w2pfh")
+tag_name = "player_detection"
+value = Rect2(-160, -80, 320, 160)
+
+[node name="Shield27" type="Area2D" parent="Spawns" unique_id=1650218064 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(4216, 2224)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
+actor_path = "res://src/Actor/Enemy/Shield.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [2, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Shield", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield27" unique_id=1956675491 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
+tag_name = "move_dir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield27" unique_id=7762620 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
+visibility_layer = 2
+script = ExtResource("14_w2pfh")
+tag_name = "player_detection"
+value = Rect2(-160, -80, 320, 160)
+
+[node name="Shield28" type="Area2D" parent="Spawns" unique_id=607487489 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(4216, 2336)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
+actor_path = "res://src/Actor/Enemy/Shield.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [2, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Shield", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield28" unique_id=664035593 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
+tag_name = "move_dir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield28" unique_id=289329902 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
+visibility_layer = 2
+script = ExtResource("14_w2pfh")
+tag_name = "player_detection"
+value = Rect2(-160, -80, 320, 160)
+
+[node name="Shield29" type="Area2D" parent="Spawns" unique_id=2055288059 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(2872, 2296)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
+actor_path = "res://src/Actor/Enemy/Shield.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [2, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Shield", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield29" unique_id=225706051 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
+tag_name = "move_dir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield29" unique_id=1461694614 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
+visibility_layer = 2
+script = ExtResource("14_w2pfh")
+tag_name = "player_detection"
+value = Rect2(-160, -80, 320, 160)
+
+[node name="Shield30" type="Area2D" parent="Spawns" unique_id=1976034361 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3048, 2240)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
+actor_path = "res://src/Actor/Enemy/Shield.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [2, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Shield", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield30" unique_id=572886866 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
+tag_name = "move_dir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield30" unique_id=291120241 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
+visibility_layer = 2
+script = ExtResource("14_w2pfh")
+tag_name = "player_detection"
+value = Rect2(-160, -80, 320, 160)
+
+[node name="Shield31" type="Area2D" parent="Spawns" unique_id=1282642277 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3400, 2336)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
+actor_path = "res://src/Actor/Enemy/Shield.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [2, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Shield", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield31" unique_id=332101532 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
+
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield31" unique_id=1958593647 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+script = ExtResource("14_w2pfh")
+tag_name = "player_detection"
+value = Rect2(-160, -80, 320, 160)
+
+[node name="Shield32" type="Area2D" parent="Spawns" unique_id=2040123338 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3480, 2336)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
+actor_path = "res://src/Actor/Enemy/Shield.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [2, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Shield", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield32" unique_id=944104443 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" parent="Spawns/Shield32" unique_id=1569830860 instance=ExtResource("13_w2pfh")]
+[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield32" unique_id=1569830860 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+script = ExtResource("14_w2pfh")
 tag_name = "player_detection"
 value = Rect2(-160, -80, 320, 160)
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
 
-[node name="VanishingPoint" parent="." unique_id=1745666426 instance=ExtResource("10_r2aiy")]
+[node name="VanishingPoint" type="Area2D" parent="." unique_id=1745666426 groups=["VanishingPoints"] instance=ExtResource("10_r2aiy")]
 visibility_layer = 2
+z_index = 999
 position = Vector2(3008, 1856)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_yvlse")
 
-[node name="SpawnPoint" parent="." unique_id=1710023778 instance=ExtResource("11_usduj")]
+[node name="SpawnPoint" type="Area2D" parent="." unique_id=1710023778 groups=["SpawnPoints"] instance=ExtResource("11_usduj")]
 visibility_layer = 2
 position = Vector2(3259.1665, 1982.0958)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_r6d6x")
 
-[node name="TitlePreview" parent="." unique_id=2052223351 instance=ExtResource("12_3baw4")]
+[node name="TitlePreview" type="Area2D" parent="." unique_id=2052223351 groups=["TitlePreviews"] instance=ExtResource("12_3baw4")]
 visibility_layer = 2
+z_index = 999
 position = Vector2(1952, 2184)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_yvlse")
 zoom = 2.0
+
+[connection signal="body_entered" from="Triggers/KillBoundaryU" to="Triggers/KillBoundaryU" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryD" to="Triggers/KillBoundaryD" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryL" to="Triggers/KillBoundaryL" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryR" to="Triggers/KillBoundaryR" method="_on_body_entered"]
+[connection signal="gui_input" from="Spawns/Water" to="Spawns/Water" method="_on_gui_input"]
+[connection signal="input_event" from="Spawns/Shield" to="Spawns/Shield" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield1" to="Spawns/Shield1" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield2" to="Spawns/Shield2" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield3" to="Spawns/Shield3" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield4" to="Spawns/Shield4" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield5" to="Spawns/Shield5" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield6" to="Spawns/Shield6" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield7" to="Spawns/Shield7" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield8" to="Spawns/Shield8" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield9" to="Spawns/Shield9" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield10" to="Spawns/Shield10" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield11" to="Spawns/Shield11" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield12" to="Spawns/Shield12" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield13" to="Spawns/Shield13" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield14" to="Spawns/Shield14" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield15" to="Spawns/Shield15" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield16" to="Spawns/Shield16" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield17" to="Spawns/Shield17" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield18" to="Spawns/Shield18" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield19" to="Spawns/Shield19" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield20" to="Spawns/Shield20" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield21" to="Spawns/Shield21" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield22" to="Spawns/Shield22" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield23" to="Spawns/Shield23" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield24" to="Spawns/Shield24" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield25" to="Spawns/Shield25" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield26" to="Spawns/Shield26" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield27" to="Spawns/Shield27" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield28" to="Spawns/Shield28" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield29" to="Spawns/Shield29" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield30" to="Spawns/Shield30" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield31" to="Spawns/Shield31" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield32" to="Spawns/Shield32" method="_on_input_event"]

@@ -83,6 +83,7 @@ signal music_fadeout_finished
 	"enemy_slam": preload("res://assets/SFX/GunHeavy.ogg"),
 
 	"ornithopter": preload("res://assets/SFX/Ornithopter.ogg"),
+	"surprise": preload("res://assets/SFX/Placeholder/alert.mp3"),
 	#"enemy_buzz":
 
 	"npc_voice_normal": preload("res://assets/SFX/Placeholder/snd_msg.ogg"),
