@@ -38,14 +38,19 @@ func setup(): #Reminder: no function called can use await
 			$Sprite2D.texture = TX_2
 	$AttackDetection.monitoring = difficulty >= 1
 	$ShieldChargeDetection.monitoring = difficulty == 2
+	$BulletBlocker/StaticBody2D.add_collision_exception_with(self)
 	move_dir = $MoveDir.direction.snappedf(1.0)
 
 	w.emit_signal("finished_spawn_entities_step")
 
 	change_state("idle")
 
-
-
+func _on_hit(_damage, _blood_direction):
+	if state == "surprise_shield_up":
+		if difficulty == 0:
+			ap.play("UpHurtNS")
+		else:
+			ap.play("UpHurt")
 
 ### STATES ###
 func enter_idle(_prev_state):
@@ -117,9 +122,9 @@ func do_defend(_delta):
 
 
 func enter_surprise(_prev_state):
-	am.play("surprise", self)
+	play_sound("surprise")
 	if difficulty == 0:
-		ap.play("SupriseNS")
+		ap.play("SurpriseNS")
 	else:
 		ap.play("Surprise")
 	await ap.animation_finished
@@ -135,7 +140,7 @@ func enter_surprise_shield_up(_prev_state):
 		ap.play("UpNS")
 	else:
 		ap.play("Up")
-	#$BulletBlocker/StaticBody2D.set_collision_layer_value(4, true)
+	$BulletBlocker/StaticBody2D.set_collision_layer_value(4, true)
 	$BodyOnShieldDetection.monitoring = true
 	$SurpriseShieldUpTimer.start()
 	$Hurtbox/NoShield.disabled = false
@@ -157,7 +162,6 @@ func do_surprise_shield_up(_delta):
 func exit_surprise_shield_up(_next_state):
 	$SurpriseShieldUpTimer.paused = false
 	$SurpriseShieldUpTimer.stop()
-	$BodyOnShieldDetection.monitoring = false
 	$BodyOnShieldTimer.stop()
 
 
@@ -169,13 +173,8 @@ func enter_surprise_launch(_prev_state):
 	await ap.animation_finished
 	change_state("surprise_end")
 
-
-func launch():
-	const launch_velocity: Vector2 = Vector2(0, -500.0)
-	for body in bodies_on_shield:
-		body.get_parent().velocity.y += launch_velocity
-
 func enter_surprise_end(_prev_state):
+	$BodyOnShieldDetection.monitoring = false
 	$Hurtbox/NoShield.disabled = true
 	$Hurtbox/Side.disabled = false
 	$Hitbox/NoShield.disabled = true
@@ -184,7 +183,7 @@ func enter_surprise_end(_prev_state):
 	$BulletBlocker/Side.disabled = false
 	$BulletBlocker/StaticBody2D/Up.disabled = true
 	$BulletBlocker/StaticBody2D/Side.disabled = false
-	#$BulletBlocker/StaticBody2D.set_collision_layer_value(4, false)
+	$BulletBlocker/StaticBody2D.set_collision_layer_value(4, false)
 	if difficulty == 0:
 		ap.play("LowerNS")
 	else:
@@ -289,7 +288,15 @@ func enable_shield_charge_hitbox(val: bool):
 	$ShieldChargeHitbox.monitoring = val
 
 func play_sound(sfx_name: String):
-	am.play(sfx_name)
+	am.play(sfx_name, self)
+
+func launch():
+	const launch_velocity: Vector2 = Vector2(0, -500.0)
+	for body in bodies_on_shield:
+		if body.get_collision_layer_value(16):
+			body.get_parent().velocity += launch_velocity
+		if body.get_collision_layer_value(1):
+			body.get_parent().velocity += launch_velocity
 
 ### SIGNALS ###
 func _on_BulletBlocker_body_entered(body):
@@ -346,7 +353,13 @@ func _on_Attack_hitbox_body_entered(body, hitbox_name):
 		var knockback = move_dir * 10.0 if hitbox_name == "Attack" else move_dir * 50.0
 		body.get_parent().hit(damage, knockback)
 
-func _on_AnimationPlayer_animation_finished(anim_name: StringName) -> void:
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if state == "surprise_shield_up" and anim_name in ["UpHurtNS", "UpHurt"]:
+		if difficulty == 0:
+			ap.play("UpNS")
+		else:
+			ap.play("Up")
+		return
 	if difficulty == 1:
 		if state == "attack" && anim_name == "Attack":
 			change_state("walk")
