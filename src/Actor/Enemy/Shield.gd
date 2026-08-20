@@ -12,10 +12,12 @@ var walk_speed = Vector2(15.0, 15.0)
 var defend_speed = Vector2(5.0, 5.0)
 var player_is_behind: = false
 var bodies_on_shield: = []
+const launch_velocity: Vector2 = Vector2(0, -500.0)
 
 var attack_damage: = 4.0
 var player_in_attack_range: = false
 
+var shield_charge_distance: = 100.0
 var shield_charge_speed: = 150.0
 var shield_charge_damage: = 3.0
 var player_in_shield_charge_range: = false
@@ -39,6 +41,8 @@ func setup(): #Reminder: no function called can use await
 			$Sprite2D.texture = TX_2
 	$AttackDetection.monitoring = difficulty >= 1
 	$ShieldChargeDetection.monitoring = difficulty == 2
+	$ShieldChargeDetection/CollisionShape2D.shape.size.x = shield_charge_distance + 20.0
+	$ShieldChargeDetection/CollisionShape2D.position = -$ShieldChargeDetection/CollisionShape2D.shape.size / 2.0
 	$BulletBlocker/StaticBody2D.add_collision_exception_with(self)
 	move_dir = $MoveDir.direction.snappedf(1.0)
 
@@ -219,20 +223,21 @@ func do_surprise_end(_delta):
 
 func enter_attack(_prev_state):
 	ap.play("Slash")
-	$Sprite2D.position = Vector2(-8, -16) if move_dir.x <= 0 else Vector2(8, -16)
 
 func exit_attack(_next_state):
 	$AttackCooldown.start()
 
 
 func enter_shield_charge_start(_prev_state):
-	ap.play("ShieldChargeStart")
 	speed = Vector2(shield_charge_speed, shield_charge_speed)
+	ap.play("ChargeReady")
+	await ap.animation_finished
+	change_state("shield_charge")
 
 func enter_shield_charge(_prev_state):
 	enable_shield_charge_hitbox(true)
-	ap.play("ShieldCharge")
-	await get_tree().create_timer($ShieldChargeDetection/CollisionShape2D.shape.size.x / shield_charge_speed).timeout
+	ap.play("Charge")
+	await get_tree().create_timer(shield_charge_distance / shield_charge_speed).timeout
 	if state == "shield_charge":
 		change_state("shield_charge_end")
 
@@ -248,11 +253,9 @@ func do_shield_charge(_prev_state):
 
 func enter_shield_charge_end(_prev_state):
 	enable_shield_charge_hitbox(false)
-	if player_in_attack_range:
-		ap.play("Attack")
-	else:
-		ap.play("ShieldChargeEnd")
-	await get_tree().create_timer(1.0).timeout
+	ap.play("ChargeSlash")
+
+	await ap.animation_finished
 	change_state("walk")
 
 func do_shield_charge_end(_delta):
@@ -309,8 +312,10 @@ func enable_shield_charge_hitbox(val: bool):
 func play_sound(sfx_name: String):
 	am.play(sfx_name, self)
 
+func set_sprite_offset():
+	$Sprite2D.position = Vector2(8.0, -16.0) * Vector2(move_dir.x, 1.0)
+
 func launch():
-	const launch_velocity: Vector2 = Vector2(0, -500.0)
 	for body in bodies_on_shield:
 		if body.get_collision_layer_value(16):
 			body.get_parent().velocity += launch_velocity
@@ -368,9 +373,15 @@ func _on_Attack_hitbox_body_entered(body, hitbox_name):
 		body.on_break(break_method)
 	#player
 	if body.get_collision_layer_value(17):
-		var damage = attack_damage if hitbox_name == "Attack" else shield_charge_damage
-		var knockback = move_dir * 10.0 if hitbox_name == "Attack" else move_dir * 50.0
-		body.get_parent().hit(damage, knockback)
+		var player = body.get_parent()
+		if hitbox_name == "Attack":
+			player.hit(attack_damage, Vector2(move_dir.x, 0.0))
+		else:
+			var knockback: = Vector2(400.0 * move_dir.x, -100.0)
+			if not player.disabled and not player.invincible:
+				player.velocity += knockback
+
+			player.hit(shield_charge_damage, Vector2.ZERO)
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if state == "surprise_shield_up" and anim_name in ["UpHurtNS", "UpHurt"]:
@@ -379,11 +390,6 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		else:
 			ap.play("Up")
 		return
-	if difficulty == 1:
+	if difficulty > 0:
 		if state == "attack" && anim_name == "Slash":
 			change_state("walk")
-	elif difficulty == 2:
-		if state == "attack" && anim_name == "Slash":
-			change_state("walk")
-		elif state == "shield_charge_start" && anim_name == "ShieldChargeStart":
-			change_state("shield_charge")
