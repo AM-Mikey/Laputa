@@ -39,10 +39,10 @@ size = Vector2(18, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hycmb"]
 resource_local_to_scene = true
-size = Vector2(33, 24)
+size = Vector2(20, 34)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ui4tb"]
-size = Vector2(32, 20)
+size = Vector2(17, 22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5h1sb"]
 resource_local_to_scene = true
@@ -463,6 +463,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(0, -15)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackHitbox/CollisionShape2D:shape:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(17, 22)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackHitbox/CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-14, -6)]
+}
 
 [sub_resource type="Animation" id="Animation_hxcxx"]
 resource_name = "Raise"
@@ -524,7 +548,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_u8xld"]
 resource_name = "Slash"
-length = 0.4
+length = 0.950005
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -533,22 +557,82 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.19999999, 0.5, 0.54999995, 0.5999999, 0.65, 0.85, 0.90000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [80, 81, 82, 83, 84, 85, 86, 87]
+"values": [80, 81, 82, 83, 84, 85, 86, 87, 81]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"enable_attack_hitbox"
+}, {
+"args": [false],
+"method": &"enable_attack_hitbox"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [false],
+"method": &"enable_shield"
+}, {
+"args": [true],
+"method": &"enable_shield"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2(-8, -16)]
+"values": [{
+"args": ["gun_sword"],
+"method": &"play_sound"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackHitbox/CollisionShape2D:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5, 0.55, 0.6, 0.65000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(17, 19), Vector2(21.375, 13.000001), Vector2(19, 6), Vector2(19, 3)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackHitbox/CollisionShape2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5, 0.55, 0.6, 0.65000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-10.5, -21.499998), Vector2(-13.5, -13.5), Vector2(-13.5, -6), Vector2(-13.5, -5.5)]
 }
 
 [sub_resource type="Animation" id="Animation_cvi3x"]
@@ -1216,25 +1300,23 @@ process_callback = 0
 one_shot = true
 
 [node name="AttackDetection" type="Area2D" parent="." unique_id=9286811]
-visible = false
 collision_layer = 0
 monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDetection" unique_id=610885406]
-position = Vector2(-16.5, -12)
+position = Vector2(-10, -17)
 shape = SubResource("RectangleShape2D_hycmb")
 debug_color = Color(1, 0, 0, 0.23529412)
 
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=999342442]
-visible = false
 collision_layer = 262144
 collision_mask = 65792
 monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=846037665]
-position = Vector2(-16, -10)
+position = Vector2(-14, -6)
 shape = SubResource("RectangleShape2D_ui4tb")
 debug_color = Color(1, 0, 0, 0.235294)
 

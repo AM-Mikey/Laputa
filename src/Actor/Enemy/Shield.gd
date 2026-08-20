@@ -9,6 +9,7 @@ const TX_2  = preload("res://assets/Actor/Enemy/Shield2.png")
 @export var difficulty: int = 0
 var move_dir: = Vector2.LEFT: set = set_move_dir
 var walk_speed = Vector2(15.0, 15.0)
+var defend_speed = Vector2(5.0, 5.0)
 var player_is_behind: = false
 var bodies_on_shield: = []
 
@@ -98,7 +99,8 @@ func enter_defend(_last_state):
 	if difficulty == 0:
 		ap.play("DefendNS")
 	else:
-		ap.play("Defend")
+		ap.play("Walk", -1, 0.5)
+		speed = defend_speed
 
 func do_defend(_delta):
 	if $DefendTimer.time_left <= 0.0:
@@ -119,6 +121,8 @@ func do_defend(_delta):
 			if player_in_shield_charge_range and $ShieldChargeCooldown.time_left <= 0.0:
 				change_state("shield_charge_start")
 
+func exit_defend(_next_state):
+	speed = walk_speed
 
 
 func enter_surprise(_prev_state):
@@ -214,7 +218,8 @@ func do_surprise_end(_delta):
 
 
 func enter_attack(_prev_state):
-	ap.play("Attack")
+	ap.play("Slash")
+	$Sprite2D.position = Vector2(-8, -16) if move_dir.x <= 0 else Vector2(8, -16)
 
 func exit_attack(_next_state):
 	$AttackCooldown.start()
@@ -290,10 +295,8 @@ func set_move_dir(dir):
 
 ### UTILITY ###
 func enable_shield(val: bool):
-	$BulletBlocker/Left.set_deferred("disabled", !val || move_dir != Vector2.LEFT)
-	$BulletBlocker/Right.set_deferred("disabled", !val || move_dir == Vector2.LEFT)
-	$BulletBlocker/StaticBody2D/Left.set_deferred("disabled", !val || move_dir != Vector2.LEFT)
-	$BulletBlocker/StaticBody2D/Right.set_deferred("disabled", !val || move_dir == Vector2.LEFT)
+	$BulletBlocker/Side.set_deferred("disabled", !val)
+	$BulletBlocker/StaticBody2D/Side.set_deferred("disabled", !val)
 
 func enable_attack_hitbox(val: bool):
 	$AttackHitbox.monitorable = val
@@ -377,10 +380,10 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			ap.play("Up")
 		return
 	if difficulty == 1:
-		if state == "attack" && anim_name == "Attack":
+		if state == "attack" && anim_name == "Slash":
 			change_state("walk")
 	elif difficulty == 2:
-		if state == "attack" && anim_name == "Attack":
+		if state == "attack" && anim_name == "Slash":
 			change_state("walk")
 		elif state == "shield_charge_start" && anim_name == "ShieldChargeStart":
 			change_state("shield_charge")
