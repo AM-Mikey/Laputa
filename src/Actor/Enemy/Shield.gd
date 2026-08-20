@@ -135,6 +135,10 @@ func enter_surprise(_prev_state):
 	await ap.animation_finished
 	change_state("surprise_shield_up")
 
+func do_surprise(_delta):
+	velocity = calc_velocity(Vector2.ZERO)
+	move_and_slide()
+
 func enter_surprise_shield_up(_prev_state):
 	if difficulty == 0:
 		ap.play("UpNS")
@@ -154,6 +158,9 @@ func enter_surprise_shield_up(_prev_state):
 	bodies_on_shield = []
 
 func do_surprise_shield_up(_delta):
+	velocity = calc_velocity(Vector2.ZERO)
+	move_and_slide()
+
 	if $SurpriseShieldUpTimer.time_left <= 0.0:
 		change_state("surprise_end")
 	elif bodies_on_shield.size() > 0 and $BodyOnShieldTimer.time_left <= 0.0:
@@ -173,7 +180,13 @@ func enter_surprise_launch(_prev_state):
 	await ap.animation_finished
 	change_state("surprise_end")
 
+func do_surprise_launch(_delta):
+	velocity = calc_velocity(Vector2.ZERO)
+	move_and_slide()
+
+
 func enter_surprise_end(_prev_state):
+	move_dir = -move_dir
 	$BodyOnShieldDetection.monitoring = false
 	$Hurtbox/NoShield.disabled = true
 	$Hurtbox/Side.disabled = false
@@ -192,6 +205,9 @@ func enter_surprise_end(_prev_state):
 	$SurpriseCooldown.start()
 	change_state("walk")
 
+func do_surprise_end(_delta):
+	velocity = calc_velocity(Vector2.ZERO)
+	move_and_slide()
 
 
 
@@ -321,7 +337,7 @@ func _on_AttackDetection_body_exited(_body):
 func _on_PlayerBehindDetection_body_entered(_body):
 	player_is_behind = true
 
-func _on_PlayerBehindDetection_body_exited(_body: Node2D) -> void:
+func _on_PlayerBehindDetection_body_exited(_body):
 	player_is_behind = false
 
 func _on_BodyOnShieldDetection_body_entered(body):

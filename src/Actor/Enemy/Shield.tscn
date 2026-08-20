@@ -1113,7 +1113,6 @@ shape = SubResource("RectangleShape2D_tk834")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Up" type="CollisionShape2D" parent="BulletBlocker" unique_id=1078921533]
-visible = false
 position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_kcsk2")
 disabled = true
@@ -1124,7 +1123,6 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="Side" type="CollisionShape2D" parent="BulletBlocker/StaticBody2D" unique_id=999651742]
-visible = false
 position = Vector2(-5, -10)
 shape = SubResource("RectangleShape2D_tk834")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
@@ -1136,6 +1134,7 @@ disabled = true
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1159295574]
+visible = false
 collision_layer = 131072
 collision_mask = 0
 
@@ -1152,6 +1151,7 @@ disabled = true
 debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=2096615862]
+visible = false
 collision_layer = 262144
 collision_mask = 65536
 
@@ -1195,6 +1195,7 @@ process_callback = 0
 one_shot = true
 
 [node name="BodyOnShieldDetection" type="Area2D" parent="." unique_id=1550618608]
+visible = false
 collision_layer = 0
 collision_mask = 32769
 monitoring = false
@@ -1207,12 +1208,11 @@ debug_color = Color(1, 1, 0, 0.41960785)
 
 [node name="BodyOnShieldTimer" type="Timer" parent="." unique_id=1475173964]
 process_callback = 0
-wait_time = 0.3
+wait_time = 0.1
 one_shot = true
 
 [node name="SurpriseCooldown" type="Timer" parent="." unique_id=1334267570]
 process_callback = 0
-wait_time = 3.0
 one_shot = true
 
 [node name="AttackDetection" type="Area2D" parent="." unique_id=9286811]
