@@ -19,7 +19,8 @@ var speed
 var spread_degrees
 var origin = Vector2.ZERO
 var direction = Vector2.ZERO
-var instant_fizzle = true
+var instant_fizzle := true
+var already_fizzle := false
 
 var break_method = "cut"
 @export var is_water_affected := false
@@ -40,6 +41,7 @@ var is_in_water := false:
 
 const TIMEOUT_TIME: float = 60.0
 const level_exit_safe_distance: float = 512.0
+
 
 
 func _ready():
@@ -75,6 +77,7 @@ func on_break(_method):
 
 func do_fizzle(type: String):
 	#print("fizzling bullet")
+	if already_fizzle: return
 
 	var fizzle
 	match type:
@@ -106,6 +109,7 @@ func do_fizzle(type: String):
 		if result:
 			fizzle.position = result.position
 	w.get_node("Middle").add_child(fizzle)
+	already_fizzle = true
 	queue_free()
 
 func instant_fizzle_check():
@@ -147,36 +151,36 @@ func get_blood_dir(body) -> Vector2: #TODO this update changed knockback dir cal
 ### SIGNALS ###
 
 func _on_CollisionDetector_body_entered(body):
-	if !is_queued_for_deletion():
-		if body is TileMapLayer:
-			if body.tile_set.get_physics_layer_collision_layer(0) == 8: #world (layer value)
-				do_fizzle("world")
+	if body is TileMapLayer:
+		if body.tile_set.get_physics_layer_collision_layer(0) == 8: #world (layer value)
+			do_fizzle("world")
 
-		else: #not TileMapLayer
-			#breakable
-			if body.get_collision_layer_value(9):
-				on_break(break_method)
-			#armor
-			elif body.get_collision_layer_value(6):
-				do_fizzle("armor")
-			#Movable platform
-			if body.get_collision_layer_value(4):
-				do_fizzle("world")
+	else: #not TileMapLayer
+		#armor
+		if body.get_collision_layer_value(6):
+			do_fizzle("armor")
+		#breakable
+		elif body.get_collision_layer_value(9):
+			on_break(break_method)
+		#Movable platform
+		elif body.get_collision_layer_value(4):
+			do_fizzle("world")
 
 
 func _on_CollisionDetector_area_entered(area):
-	if !is_queued_for_deletion():
-		if area.get_collision_layer_value(18): #enemyhurt
+	if area.get_collision_layer_value(6): #armor
+		do_fizzle("armor")
+	if area.get_collision_layer_value(18): #enemyhurt
+		if !is_queued_for_deletion():
 			area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
 			queue_free()
-		elif area.get_collision_layer_value(17): #playerhurt
+	elif area.get_collision_layer_value(17): #playerhurt
+		if !is_queued_for_deletion():
 			area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
 			queue_free()
-		elif area.get_collision_layer_value(9): #breakable
-			area.get_parent().on_break(break_method)
-			#on_break(break_method) produced two fizzle particles so instead do:
-			queue_free()
-		elif area.get_collision_layer_value(4): #world
-			do_fizzle("world")
-		elif area.get_collision_layer_value(6): #armor
-			do_fizzle("armor")
+	elif area.get_collision_layer_value(9): #breakable
+		area.get_parent().on_break(break_method)
+		#on_break(break_method) produced two fizzle particles so instead do:
+		queue_free()
+	elif area.get_collision_layer_value(4): #world
+		do_fizzle("world")
