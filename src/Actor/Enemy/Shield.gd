@@ -30,8 +30,8 @@ func setup(): #Reminder: no function called can use await
 	damage_on_contact = 2
 	speed = walk_speed
 	is_wind_affected = true
-	$PlayerDetection/CollisionShape2D.shape.size = $PlayerDetectArea.value.size
-	$PlayerDetection/CollisionShape2D.position = $PlayerDetectArea.value.position + $PlayerDetectArea.value.size / 2.0
+	#$PlayerDetection/CollisionShape2D.shape.size = $PlayerDetectArea.value.size
+	#$PlayerDetection/CollisionShape2D.position = $PlayerDetectArea.value.position + $PlayerDetectArea.value.size / 2.0
 	match difficulty:
 		0:
 			$Sprite2D.texture = TX_0
@@ -393,7 +393,7 @@ func _on_Attack_hitbox_body_entered(body, hitbox_name):
 	#breakable
 	if body.get_collision_layer_value(9):
 		var break_method = "cut" if hitbox_name == "Attack" else "cut"
-		body.on_break(break_method)
+		body.get_parent().on_break(break_method)
 	#player
 	if body.get_collision_layer_value(17):
 		var player = body.get_parent()

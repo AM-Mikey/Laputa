@@ -15,8 +15,8 @@
 [ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="11_wm2il"]
 [ext_resource type="PackedScene" path="res://src/Editor/TitlePreview.tscn" id="12_3baw4"]
 [ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="12_mdnbd"]
-[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="13_w2pfh"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="14_w2pfh"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="13_w2pfh"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="14_w2pfh"]
 [ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="16_yvlse"]
 [ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="18_r6d6x"]
 
@@ -148,13 +148,6 @@ tag_name = "move_dir"
 direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
 [node name="Shield1" type="Area2D" parent="Spawns" unique_id=504304344 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -183,12 +176,6 @@ script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
-
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield1" unique_id=1391403843 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
 
 [node name="Shield2" type="Area2D" parent="Spawns" unique_id=2024909787 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
@@ -219,12 +206,6 @@ tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield2" unique_id=1200884446 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
 [node name="Shield3" type="Area2D" parent="Spawns" unique_id=187616689 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -253,12 +234,6 @@ script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
-
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield3" unique_id=519805657 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
 
 [node name="Shield4" type="Area2D" parent="Spawns" unique_id=1290214771 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
@@ -289,12 +264,6 @@ tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield4" unique_id=620338278 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
 [node name="Shield5" type="Area2D" parent="Spawns" unique_id=124374788 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -323,12 +292,6 @@ script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
-
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield5" unique_id=380934824 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
 
 [node name="Shield6" type="Area2D" parent="Spawns" unique_id=852689807 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
@@ -359,12 +322,6 @@ tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield6" unique_id=45423538 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
 [node name="Shield7" type="Area2D" parent="Spawns" unique_id=2080698449 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -393,12 +350,6 @@ script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
-
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield7" unique_id=2130787763 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
 
 [node name="Shield8" type="Area2D" parent="Spawns" unique_id=316160635 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
@@ -429,12 +380,6 @@ tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield8" unique_id=667291000 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
 [node name="Shield9" type="Area2D" parent="Spawns" unique_id=1837851451 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -463,12 +408,6 @@ script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
-
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield9" unique_id=419091204 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
 
 [node name="Shield10" type="Area2D" parent="Spawns" unique_id=823426077 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
@@ -499,12 +438,6 @@ tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield10" unique_id=549499814 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
 [node name="Shield11" type="Area2D" parent="Spawns" unique_id=2015313309 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -533,12 +466,6 @@ script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
-
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield11" unique_id=484549881 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
 
 [node name="Shield12" type="Area2D" parent="Spawns" unique_id=395356580 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
@@ -569,12 +496,6 @@ tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield12" unique_id=1819188420 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
 [node name="Shield13" type="Area2D" parent="Spawns" unique_id=1419962284 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -603,12 +524,6 @@ script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
-
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield13" unique_id=1571088060 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
 
 [node name="Shield14" type="Area2D" parent="Spawns" unique_id=1432578500 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
@@ -639,12 +554,6 @@ tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield14" unique_id=1179850847 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
 [node name="Shield15" type="Area2D" parent="Spawns" unique_id=1369712816 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -673,12 +582,6 @@ script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
-
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield15" unique_id=1936667907 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
 
 [node name="Shield16" type="Area2D" parent="Spawns" unique_id=574879109 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
@@ -709,12 +612,6 @@ tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield16" unique_id=1457729722 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
 [node name="Shield17" type="Area2D" parent="Spawns" unique_id=64388184 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -743,12 +640,6 @@ script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
-
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield17" unique_id=786630930 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
 
 [node name="Shield18" type="Area2D" parent="Spawns" unique_id=1287550304 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
@@ -779,12 +670,6 @@ tag_name = "move_dir"
 direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield18" unique_id=52548255 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
 [node name="Shield19" type="Area2D" parent="Spawns" unique_id=737658782 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -814,12 +699,6 @@ tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield19" unique_id=1961265556 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
 [node name="Shield20" type="Area2D" parent="Spawns" unique_id=1224156179 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -847,13 +726,6 @@ collision_mask = 0
 script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 snap_degrees = 180.0
-
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield20" unique_id=1118164019 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
 
 [node name="Shield21" type="Area2D" parent="Spawns" unique_id=80952013 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
@@ -884,13 +756,6 @@ tag_name = "move_dir"
 direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield21" unique_id=2028679005 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
 [node name="Shield22" type="Area2D" parent="Spawns" unique_id=910192165 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -918,13 +783,6 @@ collision_mask = 0
 script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 snap_degrees = 180.0
-
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield22" unique_id=1533398903 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
 
 [node name="Shield23" type="Area2D" parent="Spawns" unique_id=1320968108 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
@@ -955,12 +813,6 @@ tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield23" unique_id=667565606 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
 [node name="Shield24" type="Area2D" parent="Spawns" unique_id=2063073981 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -987,14 +839,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
-
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield24" unique_id=2040210926 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
 
 [node name="Shield25" type="Area2D" parent="Spawns" unique_id=2080712223 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1025,12 +870,6 @@ tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield25" unique_id=675841992 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
 [node name="Shield26" type="Area2D" parent="Spawns" unique_id=1959416624 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -1059,12 +898,6 @@ script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
-
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield26" unique_id=1217918737 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
 
 [node name="Shield27" type="Area2D" parent="Spawns" unique_id=1650218064 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1095,12 +928,6 @@ tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield27" unique_id=7762620 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
 [node name="Shield28" type="Area2D" parent="Spawns" unique_id=607487489 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -1129,12 +956,6 @@ script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
-
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield28" unique_id=289329902 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
 
 [node name="Shield29" type="Area2D" parent="Spawns" unique_id=2055288059 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1165,12 +986,6 @@ tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield29" unique_id=1461694614 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
 [node name="Shield30" type="Area2D" parent="Spawns" unique_id=1976034361 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -1199,12 +1014,6 @@ script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
-
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield30" unique_id=291120241 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
 
 [node name="Shield31" type="Area2D" parent="Spawns" unique_id=1282642277 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
@@ -1235,13 +1044,6 @@ tag_name = "move_dir"
 direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield31" unique_id=1958593647 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
-
 [node name="Shield32" type="Area2D" parent="Spawns" unique_id=2040123338 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
@@ -1270,12 +1072,718 @@ script = ExtResource("12_mdnbd")
 tag_name = "move_dir"
 snap_degrees = 180.0
 
-[node name="PlayerDetectArea" type="Node2D" parent="Spawns/Shield32" unique_id=1569830860 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_w2pfh")]
+[node name="BreakBlock" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
+z_index = 999
+position = Vector2(3040, 1968)
+collision_layer = 16384
+collision_mask = 0
 script = ExtResource("14_w2pfh")
-tag_name = "player_detection"
-value = Rect2(-160, -80, 320, 160)
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock", 4, ""]
+}
+
+[node name="BreakBlock1" type="Area2D" parent="Spawns" unique_id=375456734 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3040, 1952)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock1", 4, ""]
+}
+
+[node name="BreakBlock2" type="Area2D" parent="Spawns" unique_id=989886399 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3056, 1936)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock2", 4, ""]
+}
+
+[node name="BreakBlock3" type="Area2D" parent="Spawns" unique_id=1102930524 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3056, 1952)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock3", 4, ""]
+}
+
+[node name="BreakBlock4" type="Area2D" parent="Spawns" unique_id=238037495 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3056, 1968)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock4", 4, ""]
+}
+
+[node name="BreakBlock5" type="Area2D" parent="Spawns" unique_id=609985970 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3072, 1952)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock5", 4, ""]
+}
+
+[node name="BreakBlock6" type="Area2D" parent="Spawns" unique_id=2117037151 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3072, 1936)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock6", 4, ""]
+}
+
+[node name="BreakBlock7" type="Area2D" parent="Spawns" unique_id=2085424265 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3072, 1920)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock7", 4, ""]
+}
+
+[node name="BreakBlock8" type="Area2D" parent="Spawns" unique_id=84122522 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3072, 1968)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock8", 4, ""]
+}
+
+[node name="BreakBlock9" type="Area2D" parent="Spawns" unique_id=1453800311 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3056, 2080)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock9", 4, ""]
+}
+
+[node name="BreakBlock10" type="Area2D" parent="Spawns" unique_id=27449168 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3040, 2096)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock10", 4, ""]
+}
+
+[node name="BreakBlock11" type="Area2D" parent="Spawns" unique_id=1736981838 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3056, 2096)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock11", 4, ""]
+}
+
+[node name="BreakBlock12" type="Area2D" parent="Spawns" unique_id=762736594 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3072, 2096)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock12", 4, ""]
+}
+
+[node name="BreakBlock13" type="Area2D" parent="Spawns" unique_id=693321421 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3072, 2080)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock13", 4, ""]
+}
+
+[node name="BreakBlock14" type="Area2D" parent="Spawns" unique_id=423094556 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3040, 2112)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock14", 4, ""]
+}
+
+[node name="BreakBlock15" type="Area2D" parent="Spawns" unique_id=1247720564 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3056, 2112)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock15", 4, ""]
+}
+
+[node name="BreakBlock16" type="Area2D" parent="Spawns" unique_id=2032392615 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3072, 2112)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock16", 4, ""]
+}
+
+[node name="BreakBlock17" type="Area2D" parent="Spawns" unique_id=1647760691 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3056, 2128)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock17", 4, ""]
+}
+
+[node name="BreakBlock18" type="Area2D" parent="Spawns" unique_id=1812219449 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3040, 2128)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock18", 4, ""]
+}
+
+[node name="BreakBlock19" type="Area2D" parent="Spawns" unique_id=2010466274 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3072, 2128)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock19", 4, ""]
+}
+
+[node name="BreakBlock20" type="Area2D" parent="Spawns" unique_id=391921928 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3072, 2144)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock20", 4, ""]
+}
+
+[node name="BreakBlock21" type="Area2D" parent="Spawns" unique_id=320484380 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3056, 2144)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock21", 4, ""]
+}
+
+[node name="BreakBlock22" type="Area2D" parent="Spawns" unique_id=2129716492 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3040, 2144)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock22", 4, ""]
+}
+
+[node name="BreakBlock23" type="Area2D" parent="Spawns" unique_id=1776283879 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3072, 2256)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock23", 4, ""]
+}
+
+[node name="BreakBlock24" type="Area2D" parent="Spawns" unique_id=524726689 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3056, 2272)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock24", 4, ""]
+}
+
+[node name="BreakBlock25" type="Area2D" parent="Spawns" unique_id=1813731387 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3072, 2272)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock25", 4, ""]
+}
+
+[node name="BreakBlock26" type="Area2D" parent="Spawns" unique_id=1212839623 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3088, 2256)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock26", 4, ""]
+}
+
+[node name="BreakBlock27" type="Area2D" parent="Spawns" unique_id=949237025 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3088, 2272)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock27", 4, ""]
+}
+
+[node name="BreakBlock28" type="Area2D" parent="Spawns" unique_id=66250614 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3056, 2288)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock29", 4, ""]
+}
+
+[node name="BreakBlock29" type="Area2D" parent="Spawns" unique_id=1300407595 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3072, 2288)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock30", 4, ""]
+}
+
+[node name="BreakBlock30" type="Area2D" parent="Spawns" unique_id=1670321628 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3088, 2288)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock31", 4, ""]
+}
+
+[node name="BreakBlock31" type="Area2D" parent="Spawns" unique_id=1687435923 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3088, 2304)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock32", 4, ""]
+}
+
+[node name="BreakBlock32" type="Area2D" parent="Spawns" unique_id=1622344033 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3072, 2304)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock33", 4, ""]
+}
+
+[node name="BreakBlock33" type="Area2D" parent="Spawns" unique_id=1403076764 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3056, 2304)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock34", 4, ""]
+}
+
+[node name="BreakBlock34" type="Area2D" parent="Spawns" unique_id=1278308844 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3056, 2320)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock35", 4, ""]
+}
+
+[node name="BreakBlock35" type="Area2D" parent="Spawns" unique_id=1530074872 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3072, 2320)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock36", 4, ""]
+}
+
+[node name="BreakBlock36" type="Area2D" parent="Spawns" unique_id=1855278759 groups=["Entities", "PropSpawns"] instance=ExtResource("13_w2pfh")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3088, 2320)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_w2pfh")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BreakBlock37", 4, ""]
+}
+
+[node name="Shield33" type="Area2D" parent="Spawns" unique_id=1010035446 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(3000, 1984)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
+actor_path = "res://src/Actor/Enemy/Shield.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Shield33", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield33" unique_id=1361378887 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
+tag_name = "move_dir"
+snap_degrees = 180.0
+
+[node name="Shield34" type="Area2D" parent="Spawns" unique_id=1788123544 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(2984, 2160)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
+actor_path = "res://src/Actor/Enemy/Shield.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [1, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Shield34", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield34" unique_id=1274272381 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
+tag_name = "move_dir"
+snap_degrees = 180.0
+
+[node name="Shield35" type="Area2D" parent="Spawns" unique_id=546835533 groups=["ActorSpawns", "Entities"] instance=ExtResource("9_130do")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(2984, 2336)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_usduj")
+actor_path = "res://src/Actor/Enemy/Shield.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [2, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Shield35", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield35" unique_id=1476763777 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_wm2il")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdnbd")
+tag_name = "move_dir"
+snap_degrees = 180.0
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
@@ -1342,3 +1850,43 @@ zoom = 2.0
 [connection signal="input_event" from="Spawns/Shield30" to="Spawns/Shield30" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Shield31" to="Spawns/Shield31" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Shield32" to="Spawns/Shield32" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock" to="Spawns/BreakBlock" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock1" to="Spawns/BreakBlock1" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock2" to="Spawns/BreakBlock2" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock3" to="Spawns/BreakBlock3" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock4" to="Spawns/BreakBlock4" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock5" to="Spawns/BreakBlock5" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock6" to="Spawns/BreakBlock6" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock7" to="Spawns/BreakBlock7" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock8" to="Spawns/BreakBlock8" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock9" to="Spawns/BreakBlock9" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock10" to="Spawns/BreakBlock10" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock11" to="Spawns/BreakBlock11" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock12" to="Spawns/BreakBlock12" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock13" to="Spawns/BreakBlock13" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock14" to="Spawns/BreakBlock14" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock15" to="Spawns/BreakBlock15" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock16" to="Spawns/BreakBlock16" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock17" to="Spawns/BreakBlock17" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock18" to="Spawns/BreakBlock18" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock19" to="Spawns/BreakBlock19" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock20" to="Spawns/BreakBlock20" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock21" to="Spawns/BreakBlock21" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock22" to="Spawns/BreakBlock22" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock23" to="Spawns/BreakBlock23" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock24" to="Spawns/BreakBlock24" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock25" to="Spawns/BreakBlock25" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock26" to="Spawns/BreakBlock26" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock27" to="Spawns/BreakBlock27" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock28" to="Spawns/BreakBlock28" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock29" to="Spawns/BreakBlock29" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock30" to="Spawns/BreakBlock30" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock31" to="Spawns/BreakBlock31" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock32" to="Spawns/BreakBlock32" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock33" to="Spawns/BreakBlock33" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock34" to="Spawns/BreakBlock34" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock35" to="Spawns/BreakBlock35" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock36" to="Spawns/BreakBlock36" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield33" to="Spawns/Shield33" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield34" to="Spawns/Shield34" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield35" to="Spawns/Shield35" method="_on_input_event"]

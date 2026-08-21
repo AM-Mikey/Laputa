@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cfowbliw450pc" path="res://src/Actor/Enemy/Shield.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_wlkrp"]
 [ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="4_tk834"]
-[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="5_kcsk2"]
 [ext_resource type="Texture2D" uid="uid://dbdcwuuqby42r" path="res://assets/Actor/Enemy/Shield0.png" id="5_o1iq0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kcsk2"]
@@ -1456,10 +1455,6 @@ visible = false
 tag_name = "move_dir"
 direction = Vector2(-1, 0)
 snap_degrees = 180.0
-
-[node name="PlayerDetectArea" parent="." unique_id=688682803 instance=ExtResource("5_kcsk2")]
-tag_name = "player_detection"
-value = Rect2(-160, -120, 320, 240)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1603770504]
 position = Vector2(0, -16)
