@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="5_kcsk2"]
 [ext_resource type="Texture2D" uid="uid://dbdcwuuqby42r" path="res://assets/Actor/Enemy/Shield0.png" id="5_o1iq0"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1abx7"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kcsk2"]
 radius = 7.0
-height = 16.0
+height = 20.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tk834"]
 size = Vector2(10, 20)
@@ -1248,21 +1248,23 @@ _data = {
 [node name="Shield" type="CharacterBody2D" unique_id=1317608156 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
+floor_max_angle = 0.61086524
 script = ExtResource("1")
 debug = true
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1052230966]
-position = Vector2(0, -8)
-shape = SubResource("CapsuleShape2D_1abx7")
+position = Vector2(0, -10)
+shape = SubResource("CapsuleShape2D_kcsk2")
 
 [node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_wlkrp")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=534020338]
-position = Vector2(0, -8)
-shape = SubResource("CapsuleShape2D_1abx7")
+position = Vector2(0, -10)
+shape = SubResource("CapsuleShape2D_kcsk2")
 
 [node name="BulletBlocker" type="Area2D" parent="." unique_id=1594386711]
+visible = false
 collision_layer = 32
 collision_mask = 64
 input_pickable = false
@@ -1415,6 +1417,7 @@ shape = SubResource("RectangleShape2D_5h1sb")
 debug_color = Color(1, 1, 0, 0.23529412)
 
 [node name="ShieldChargeHitbox" type="Area2D" parent="." unique_id=564506973]
+visible = false
 collision_layer = 262144
 collision_mask = 65792
 monitoring = false
@@ -1424,6 +1427,10 @@ monitorable = false
 position = Vector2(-4.5, -10.5)
 shape = SubResource("RectangleShape2D_onrqs")
 debug_color = Color(1, 1, 0, 0.23529412)
+
+[node name="ShieldChargeTimer" type="Timer" parent="." unique_id=1966367518]
+process_callback = 0
+one_shot = true
 
 [node name="ShieldChargeCooldown" type="Timer" parent="." unique_id=898590192]
 process_callback = 0

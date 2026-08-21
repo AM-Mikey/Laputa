@@ -219,12 +219,12 @@ func do_surprise_end(_delta):
 
 
 
-
 func enter_attack(_prev_state):
 	ap.play("Slash")
 
 func exit_attack(_next_state):
 	$AttackCooldown.start()
+
 
 
 func enter_shield_charge_start(_prev_state):
@@ -233,23 +233,26 @@ func enter_shield_charge_start(_prev_state):
 	await ap.animation_finished
 	change_state("shield_charge")
 
+func do_shield_charge_start(_delta):
+	velocity = calc_velocity(Vector2.ZERO)
+	move_and_slide()
+
 func enter_shield_charge(_prev_state):
 	play_sound("shield_charge_start")
 	enable_shield_charge_hitbox(true)
 	ap.play("Charge")
-	await get_tree().create_timer(shield_charge_distance / shield_charge_speed).timeout
-	if state == "shield_charge":
-		change_state("shield_charge_end")
+	$ShieldChargeTimer.start(shield_charge_distance / shield_charge_speed)
 
 func do_shield_charge(_prev_state):
-	if (!$FloorDetectorL.is_colliding() and move_dir.x < 0) \
-	|| (!$FloorDetectorR.is_colliding() and move_dir.x > 0) \
-	|| (velocity.x == 0.0):
-		change_state("shield_charge_end")
-		return
-
 	velocity = calc_velocity(move_dir)
 	move_and_slide()
+
+	if (is_on_floor()  \
+	&& ((!$FloorDetectorL.is_colliding() and move_dir.x < 0) \
+	|| (!$FloorDetectorR.is_colliding() and move_dir.x > 0))) \
+	|| velocity.x == 0.0 \
+	|| $ShieldChargeTimer.time_left <= 0.0 :
+		change_state("shield_charge_end")
 
 func enter_shield_charge_end(_prev_state):
 	enable_shield_charge_hitbox(false)
@@ -260,9 +263,9 @@ func enter_shield_charge_end(_prev_state):
 
 func do_shield_charge_end(_delta):
 	var no_moving_forward := false
-	if (!$FloorDetectorL.is_colliding() and move_dir.x < 0) \
-	|| (!$FloorDetectorR.is_colliding() and move_dir.x > 0) \
-	|| (velocity.x == 0.0):
+	if (is_on_floor()  \
+	&& ((!$FloorDetectorL.is_colliding() and move_dir.x < 0) \
+	|| (!$FloorDetectorR.is_colliding() and move_dir.x > 0))):
 		no_moving_forward = true
 		return
 
@@ -274,6 +277,7 @@ func do_shield_charge_end(_delta):
 		ap.play("ShieldChargeEndAttack")
 
 func exit_shield_charge_end(_next_state):
+	global_position.y -= 2.0
 	speed = walk_speed
 	enable_shield(true)
 	$ShieldChargeCooldown.start()
