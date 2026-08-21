@@ -327,7 +327,11 @@ func set_sprite_offset():
 func launch():
 	for body in bodies_on_shield:
 		if body.get_collision_layer_value(16):
-			body.get_parent().velocity += launch_velocity
+			var main_body = body.get_parent()
+			if main_body is RigidBody2D:
+				main_body.linear_velocity += launch_velocity
+			else:
+				main_body.velocity += launch_velocity
 		if body.get_collision_layer_value(1):
 			body.get_parent().velocity += launch_velocity
 
