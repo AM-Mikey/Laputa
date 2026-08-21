@@ -173,6 +173,7 @@ func initialize(): #first time set up properties
 						actor.remove_child(ac)
 						ac.owner = null
 						add_child(ac)
+						ac.visible = true
 						ac.owner = w.current_level
 
 		actor.queue_free()
@@ -213,6 +214,7 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 						actor.remove_child(ac)
 						ac.owner = null
 						add_child(ac)
+						ac.visible = true
 						ac.owner = w.current_level
 
 		actor.queue_free()

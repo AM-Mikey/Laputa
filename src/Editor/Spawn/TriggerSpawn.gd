@@ -65,6 +65,7 @@ func initialize(): #first time set up properties
 					trigger.remove_child(ac)
 					ac.owner = null
 					add_child(ac)
+					ac.visible = true
 					ac.owner = w.current_level
 
 	trigger.queue_free()
@@ -103,6 +104,7 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 					trigger.remove_child(ac)
 					ac.owner = null
 					add_child(ac)
+					ac.visible = true
 					ac.owner = w.current_level
 
 	trigger.free()
