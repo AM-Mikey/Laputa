@@ -130,7 +130,6 @@ func exit_defend(_next_state):
 
 
 func enter_surprise(_prev_state):
-	play_sound("surprise")
 	if difficulty == 0:
 		ap.play("SurpriseNS")
 	else:
@@ -235,6 +234,7 @@ func enter_shield_charge_start(_prev_state):
 	change_state("shield_charge")
 
 func enter_shield_charge(_prev_state):
+	play_sound("shield_charge_start")
 	enable_shield_charge_hitbox(true)
 	ap.play("Charge")
 	await get_tree().create_timer(shield_charge_distance / shield_charge_speed).timeout

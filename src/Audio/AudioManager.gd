@@ -84,6 +84,12 @@ signal music_fadeout_finished
 
 	"ornithopter": preload("res://assets/SFX/Ornithopter.ogg"),
 	"surprise": preload("res://assets/SFX/Placeholder/alert.mp3"),
+
+	"shield_charge": preload("res://assets/SFX/Placeholder/snd_block_destroy.ogg"), #Placeholder
+	"shield_sword_rise": preload("res://assets/SFX/Placeholder/snd_spur_charge2.ogg"), #Placeholder
+	"shield_charge_ready": preload("res://assets/SFX/Placeholder/snd_spur_charged.ogg"), #Placeholder
+	"shield_charge_start": preload("res://assets/SFX/Placeholder/snd_block_destroy.ogg"), #Placeholder
+	"heavy_step": preload("res://assets/SFX/Placeholder/snd_quake.ogg"), #Placeholder
 	#"enemy_buzz":
 
 	"npc_voice_normal": preload("res://assets/SFX/Placeholder/snd_msg.ogg"),
