@@ -72,6 +72,14 @@ func do_idle(_delta):
 		change_state("surprise")
 		return
 
+	if difficulty >= 1:
+		if player_in_attack_range and $AttackCooldown.time_left <= 0.0:
+			change_state("attack")
+			return
+	if difficulty == 2:
+		if check_player_in_shield_charge_range() and $ShieldChargeCooldown.time_left <= 0.0:
+			change_state("shield_charge_start")
+
 func enter_walk(_prev_state):
 	if difficulty == 0:
 		ap.play("WalkNS")
@@ -96,7 +104,7 @@ func do_walk(_delta):
 			change_state("attack")
 			return
 	if difficulty == 2:
-		if player_in_shield_charge_range and $ShieldChargeCooldown.time_left <= 0.0:
+		if check_player_in_shield_charge_range() and $ShieldChargeCooldown.time_left <= 0.0:
 			change_state("shield_charge_start")
 
 func enter_defend(_last_state):
@@ -122,7 +130,7 @@ func do_defend(_delta):
 		if player_in_attack_range and $AttackCooldown.time_left <= 0.0:
 			change_state("attack")
 		if difficulty == 2:
-			if player_in_shield_charge_range and $ShieldChargeCooldown.time_left <= 0.0:
+			if check_player_in_shield_charge_range() and $ShieldChargeCooldown.time_left <= 0.0:
 				change_state("shield_charge_start")
 
 func exit_defend(_next_state):
@@ -273,11 +281,8 @@ func do_shield_charge_end(_delta):
 	if no_moving_forward: velocity.x = 0.0
 	move_and_slide()
 
-	if player_in_attack_range && ap.current_animation == "ShieldChargeEnd":
-		ap.play("ShieldChargeEndAttack")
-
 func exit_shield_charge_end(_next_state):
-	global_position.y -= 2.0
+	global_position.y -= 1.0
 	speed = walk_speed
 	enable_shield(true)
 	$ShieldChargeCooldown.start()
@@ -325,6 +330,20 @@ func launch():
 			body.get_parent().velocity += launch_velocity
 		if body.get_collision_layer_value(1):
 			body.get_parent().velocity += launch_velocity
+
+func check_player_in_shield_charge_range() -> bool:
+	if !f.pc() or !player_in_shield_charge_range: return false
+	var ray_param: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.new()
+	ray_param.from = $CollisionShape2D.global_position
+	ray_param.to = f.pc().get_node("CollisionShape2D").global_position
+	ray_param.collision_mask = 1 + 8
+	ray_param.collide_with_bodies = true
+	ray_param.collide_with_areas = false
+	var physics_world: PhysicsDirectSpaceState2D = get_world_2d().direct_space_state
+	var collision = physics_world.intersect_ray(ray_param)
+	if !collision.is_empty() and collision["collider"] is not TileMapLayer and collision["collider"].get_collision_layer_value(1):
+		return true
+	return false
 
 ### SIGNALS ###
 func _on_BulletBlocker_body_entered(body):

@@ -1344,6 +1344,7 @@ position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_o1iq0")
 
 [node name="PlayerBehindDetection" type="Area2D" parent="." unique_id=975405268]
+visible = false
 collision_layer = 0
 monitorable = false
 
@@ -1406,7 +1407,6 @@ wait_time = 0.5
 one_shot = true
 
 [node name="ShieldChargeDetection" type="Area2D" parent="." unique_id=2084182477]
-visible = false
 collision_layer = 0
 monitoring = false
 monitorable = false
@@ -1417,7 +1417,6 @@ shape = SubResource("RectangleShape2D_5h1sb")
 debug_color = Color(1, 1, 0, 0.23529412)
 
 [node name="ShieldChargeHitbox" type="Area2D" parent="." unique_id=564506973]
-visible = false
 collision_layer = 262144
 collision_mask = 65792
 monitoring = false
@@ -1442,13 +1441,13 @@ libraries/ = SubResource("AnimationLibrary_kfp7m")
 
 [node name="FloorDetectorL" type="RayCast2D" parent="." unique_id=999532932]
 position = Vector2(-7, -8)
-target_position = Vector2(0, 16)
+target_position = Vector2(0, 24)
 collision_mask = 520
 collide_with_areas = true
 
 [node name="FloorDetectorR" type="RayCast2D" parent="." unique_id=1892793878]
 position = Vector2(7, -8)
-target_position = Vector2(0, 16)
+target_position = Vector2(0, 24)
 collision_mask = 520
 collide_with_areas = true
 
