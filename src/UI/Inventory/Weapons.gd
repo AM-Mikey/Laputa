@@ -13,11 +13,9 @@ const STAR_FULL_TEXTURE = preload("res://assets/UI/Inventory/Items/StarFull.png"
 @onready var weapon_wheel_animator = %WeaponWheelAnimator
 @onready var weapon_side_animator = %WeaponSideAnimator
 
-
 func _ready():
 	pc.guns_updated.connect(_on_guns_updated)
 	refresh_icons(pc.guns.get_children())
-
 
 func refresh_icons(guns):
 	for i in range(min(guns.size(), 4)):

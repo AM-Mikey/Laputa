@@ -58,7 +58,7 @@ region = Rect2(0, 73, 640, 73)
 
 [sub_resource type="Animation" id="Animation_l780j"]
 resource_name = "DOWN"
-length = 0.2
+length = 0.15
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -103,10 +103,10 @@ tracks/3/path = NodePath("Side/GunSprites/1:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
+"times": PackedFloat32Array(0, 0.049999997, 0.09999998, 0.15000002),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(128, 47), Vector2(126, 53), Vector2(123, 58), Vector2(118, 63)]
+"values": [Vector2(82, -7), Vector2(105, 5), Vector2(110, 11), Vector2(118, 17)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -139,7 +139,7 @@ tracks/6/path = NodePath("Side/GunSprites/4:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.049999997, 0.09999998, 0.15000002),
+"times": PackedFloat32Array(0, 0.050000004, 0.09999999, 0.15000004),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(110, 69), Vector2(105, 75), Vector2(100, 81), Vector2(100, 86)]
@@ -151,10 +151,10 @@ tracks/7/path = NodePath("Side/GunSprites/5:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.049999997, 0.09999998, 0.15000002),
+"times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(82, -7), Vector2(105, 5), Vector2(110, 11), Vector2(118, 17)]
+"values": [Vector2(128, 47), Vector2(126, 53), Vector2(123, 58), Vector2(118, 63)]
 }
 
 [sub_resource type="Animation" id="Animation_knvwb"]
@@ -206,7 +206,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(118, 63)]
+"values": [Vector2(118, 17)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -254,12 +254,12 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(118, 17)]
+"values": [Vector2(118, 63)]
 }
 
 [sub_resource type="Animation" id="Animation_mrnct"]
 resource_name = "UP"
-length = 0.3
+length = 0.15
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -304,10 +304,10 @@ tracks/3/path = NodePath("Side/GunSprites/1:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.050000004, 0.10000002, 0.15000004),
+"times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(100, 81), Vector2(105, 75), Vector2(110, 69), Vector2(118, 63)]
+"values": [Vector2(131, 32), Vector2(129, 26), Vector2(125, 21), Vector2(118, 17)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -316,10 +316,10 @@ tracks/4/path = NodePath("Side/GunSprites/2:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.099999994, 0.15),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.049999982, 0.099999994, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(124, -20), Vector2(124, -20)]
+"values": [Vector2(110, 11), Vector2(105, 5), Vector2(82, -7), Vector2(124, -20)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -328,10 +328,10 @@ tracks/5/path = NodePath("Side/GunSprites/3:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.099999994, 0.15),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(124, -20), Vector2(124, -20)]
+"values": [Vector2(124, -20)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -340,10 +340,10 @@ tracks/6/path = NodePath("Side/GunSprites/4:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(110, 11), Vector2(105, 5), Vector2(82, -7), Vector2(124, -20)]
+"values": [Vector2(124, -20)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -355,7 +355,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(131, 32), Vector2(129, 26), Vector2(125, 21), Vector2(118, 17)]
+"values": [Vector2(100, 81), Vector2(105, 75), Vector2(110, 69), Vector2(118, 63)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dn5nk"]
@@ -383,7 +383,7 @@ shader_parameter/color = Color(0.2, 0.25490198, 0.27058825, 1)
 
 [sub_resource type="Animation" id="Animation_34jj4"]
 resource_name = "CCW"
-length = 0.2
+length = 0.15
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -443,7 +443,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(21, 60), Vector2(27, 61), Vector2(33, 60), Vector2(38, 58)]
+"values": [Vector2(48, 33), Vector2(45, 28), Vector2(42, 24), Vector2(38, 20)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -455,7 +455,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(6, 45), Vector2(9, 50), Vector2(12, 54), Vector2(16, 58)]
+"values": [Vector2(33, 18), Vector2(27, 17), Vector2(21, 18), Vector2(16, 20)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -479,7 +479,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(33, 18), Vector2(27, 17), Vector2(21, 18), Vector2(16, 20)]
+"values": [Vector2(6, 45), Vector2(9, 50), Vector2(12, 54), Vector2(16, 58)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -491,12 +491,12 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(48, 33), Vector2(45, 28), Vector2(42, 24), Vector2(38, 20)]
+"values": [Vector2(21, 60), Vector2(27, 61), Vector2(33, 60), Vector2(38, 58)]
 }
 
 [sub_resource type="Animation" id="Animation_5to30"]
 resource_name = "CW"
-length = 0.2
+length = 0.15
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -553,10 +553,10 @@ tracks/4/path = NodePath("GunIcons/1:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.050000004, 0.10000002, 0.15000004),
+"times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(48, 45), Vector2(45, 50), Vector2(42, 54), Vector2(38, 58)]
+"values": [Vector2(21, 18), Vector2(27, 17), Vector2(33, 18), Vector2(38, 20)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -565,10 +565,10 @@ tracks/5/path = NodePath("GunIcons/2:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.050000004, 0.10000002, 0.15000004),
+"times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(33, 60), Vector2(27, 61), Vector2(21, 60), Vector2(16, 58)]
+"values": [Vector2(6, 33), Vector2(9, 28), Vector2(12, 24), Vector2(16, 20)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -589,10 +589,10 @@ tracks/7/path = NodePath("GunIcons/4:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.050000004, 0.10000002, 0.15000004),
+"times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(6, 33), Vector2(9, 28), Vector2(12, 24), Vector2(16, 20)]
+"values": [Vector2(33, 60), Vector2(27, 61), Vector2(21, 60), Vector2(16, 58)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -601,10 +601,10 @@ tracks/8/path = NodePath("GunIcons/5:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.050000004, 0.10000002, 0.15000004),
+"times": PackedFloat32Array(0, 0.049999997, 0.10000001, 0.15000002),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 1,
-"values": [Vector2(21, 18), Vector2(27, 17), Vector2(33, 18), Vector2(38, 20)]
+"values": [Vector2(48, 45), Vector2(45, 50), Vector2(42, 54), Vector2(38, 58)]
 }
 
 [sub_resource type="Animation" id="Animation_dn5nk"]
@@ -667,7 +667,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(38, 58)]
+"values": [Vector2(38, 20)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -679,7 +679,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(16, 58)]
+"values": [Vector2(16, 20)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -703,7 +703,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(16, 20)]
+"values": [Vector2(16, 58)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -712,10 +712,10 @@ tracks/8/path = NodePath("GunIcons/5:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.6),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(38, 20), Vector2(38, 20)]
+"values": [Vector2(38, 58)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mrnct"]
@@ -926,7 +926,7 @@ texture = ExtResource("20_l780j")
 
 [node name="1" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheelSide/Side/GunSprites" unique_id=207525192]
 modulate = Color(0.5, 0.5, 0.5, 1)
-position = Vector2(118, 63)
+position = Vector2(118, 17)
 texture = ExtResource("20_l780j")
 
 [node name="2" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheelSide/Side/GunSprites" unique_id=343266282]
@@ -946,7 +946,7 @@ texture = ExtResource("20_l780j")
 
 [node name="5" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheelSide/Side/GunSprites" unique_id=770042839]
 modulate = Color(0.5, 0.5, 0.5, 1)
-position = Vector2(118, 17)
+position = Vector2(118, 63)
 texture = ExtResource("20_l780j")
 
 [node name="WeaponSideAnimator" type="AnimationPlayer" parent="VBox/Background/Inventory/Weapons/WeaponWheelSide/Side" unique_id=1760266196]
@@ -988,7 +988,7 @@ position = Vector2(1, 1)
 texture = ExtResource("15_34jj4")
 
 [node name="1" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons" unique_id=1497646102]
-position = Vector2(38, 58)
+position = Vector2(38, 20)
 texture = ExtResource("16_l780j")
 
 [node name="Shadow" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons/1" unique_id=220310498]
@@ -998,7 +998,7 @@ position = Vector2(1, 1)
 texture = ExtResource("15_34jj4")
 
 [node name="2" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons" unique_id=1350559738]
-position = Vector2(16, 58)
+position = Vector2(16, 20)
 texture = ExtResource("17_knvwb")
 
 [node name="Shadow" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons/2" unique_id=2028205625]
@@ -1018,7 +1018,7 @@ position = Vector2(1, 1)
 texture = ExtResource("15_34jj4")
 
 [node name="4" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons" unique_id=1995096888]
-position = Vector2(16, 20)
+position = Vector2(16, 58)
 texture = ExtResource("19_5to30")
 
 [node name="Shadow" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons/4" unique_id=211277859]
@@ -1028,7 +1028,7 @@ position = Vector2(1, 1)
 texture = ExtResource("15_34jj4")
 
 [node name="5" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons" unique_id=727189170]
-position = Vector2(38, 20)
+position = Vector2(38, 58)
 texture = ExtResource("20_mrnct")
 
 [node name="Shadow" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/WeaponWheel/GunIcons/5" unique_id=861607893]
