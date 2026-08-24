@@ -10,6 +10,7 @@ const TX_2  = preload("res://assets/Actor/Enemy/Shield2.png")
 var move_dir: = Vector2.LEFT: set = set_move_dir
 var walk_speed = Vector2(15.0, 15.0)
 var defend_speed = Vector2(5.0, 5.0)
+
 var player_is_behind: = false
 var bodies_on_shield: = []
 const launch_velocity: Vector2 = Vector2(0, -500.0)
@@ -28,8 +29,6 @@ var prev_global_position := Vector2.ZERO
 @onready var ap = $AnimationPlayer
 
 func setup(): #Reminder: no function called can use await
-	hp = 6
-	reward = 2
 	damage_on_contact = 2
 	speed = walk_speed
 	is_wind_affected = true
@@ -38,10 +37,19 @@ func setup(): #Reminder: no function called can use await
 	match difficulty:
 		0:
 			$Sprite2D.texture = TX_0
+			$SurpriseShieldUpTimer.wait_time = 1.5
+			hp = 6
+			reward = 2
 		1:
 			$Sprite2D.texture = TX_1
+			$SurpriseShieldUpTimer.wait_time = 1.0
+			hp = 6
+			reward = 3
 		2:
 			$Sprite2D.texture = TX_2
+			$SurpriseShieldUpTimer.wait_time = 0.8
+			hp = 6
+			reward = 4
 	$AttackDetection.monitoring = difficulty >= 1
 	$ShieldChargeDetection.monitoring = difficulty == 2
 	$ShieldChargeDetection/CollisionShape2D.shape.size.x = shield_charge_distance + 20.0
