@@ -5,9 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="4_tk834"]
 [ext_resource type="Texture2D" uid="uid://dbdcwuuqby42r" path="res://assets/Actor/Enemy/Shield0.png" id="5_o1iq0"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kcsk2"]
-radius = 7.0
-height = 20.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_513p3"]
+size = Vector2(13, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tk834"]
 size = Vector2(10, 20)
@@ -1253,14 +1252,14 @@ debug = true
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1052230966]
-position = Vector2(0, -10)
-shape = SubResource("CapsuleShape2D_kcsk2")
+position = Vector2(0.5, -10)
+shape = SubResource("RectangleShape2D_513p3")
 
 [node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_wlkrp")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=534020338]
-position = Vector2(0, -10)
-shape = SubResource("CapsuleShape2D_kcsk2")
+position = Vector2(0.5, -10)
+shape = SubResource("RectangleShape2D_513p3")
 
 [node name="BulletBlocker" type="Area2D" parent="." unique_id=1594386711]
 visible = false
@@ -1440,13 +1439,13 @@ libraries/ = SubResource("AnimationLibrary_kfp7m")
 
 [node name="FloorDetectorL" type="RayCast2D" parent="." unique_id=999532932]
 position = Vector2(-7, -8)
-target_position = Vector2(0, 16)
+target_position = Vector2(0, 15.5)
 collision_mask = 520
 collide_with_areas = true
 
 [node name="FloorDetectorR" type="RayCast2D" parent="." unique_id=1892793878]
 position = Vector2(7, -8)
-target_position = Vector2(0, 16)
+target_position = Vector2(0, 15.5)
 collision_mask = 520
 collide_with_areas = true
 
