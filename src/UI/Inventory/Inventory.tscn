@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://cvd56l8vf7avv" path="res://assets/UI/Font/welcomeback.ttf" id="7_y7abv"]
 [ext_resource type="StyleBox" uid="uid://d20qvx0q5xflf" path="res://src/UI/StyleBox/RustTrimmedScrews.tres" id="8"]
 [ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="8_1e805"]
+[ext_resource type="Texture2D" uid="uid://brw4obw2tvf56" path="res://assets/UI/Inventory/Mission/StampBaseDark.png" id="8_1jb1c"]
 [ext_resource type="Script" uid="uid://bortbtb5j1u0t" path="res://src/UI/Inventory/Weapons.gd" id="9_knvwb"]
 [ext_resource type="Texture2D" uid="uid://el0mgxf4lb6s" path="res://assets/UI/Inventory/Items/WeaponWheelSide.png" id="9_lmga8"]
 [ext_resource type="Texture2D" uid="uid://bnoxbd4fv78ux" path="res://assets/UI/Inventory/Items/WeaponWheel.png" id="10_ebj88"]
@@ -36,6 +37,23 @@
 [ext_resource type="Texture2D" uid="uid://clvfvevpam8ef" path="res://assets/Gun/TsurugiIcon.png" id="20_l780j"]
 [ext_resource type="Texture2D" uid="uid://dx2f0s7evdyou" path="res://assets/UI/GunIcon/MPistol.png" id="20_mrnct"]
 [ext_resource type="Texture2D" uid="uid://k8gtyy865rl0" path="res://assets/Gun/Red7Icon.png" id="21_dn5nk"]
+[ext_resource type="Texture2D" uid="uid://c5w2d48ep2vp3" path="res://assets/UI/Inventory/Mission/Notepad.png" id="36_uc3h4"]
+[ext_resource type="Texture2D" uid="uid://nqjy3p0on2qe" path="res://assets/UI/Inventory/Mission/Book.png" id="37_nj2vu"]
+[ext_resource type="Texture2D" uid="uid://h4f3pmhs4168" path="res://assets/UI/Inventory/Mission/MailStamp.png" id="38_rpy03"]
+[ext_resource type="Texture2D" uid="uid://2nnik23r4sue" path="res://assets/UI/Inventory/Mission/StampBase.png" id="39_0skjx"]
+[ext_resource type="Texture2D" uid="uid://cfkxg66mmk1vh" path="res://assets/UI/Inventory/Mission/Stamp.png" id="40_rcdsb"]
+[ext_resource type="PackedScene" uid="uid://ft0bdyg0ncic" path="res://src/UI/Inventory/MissionBookmark.tscn" id="41_2nf8i"]
+[ext_resource type="Texture2D" uid="uid://b1updbyxexqfn" path="res://assets/UI/Inventory/Mission/StampImprint.png" id="41_eylai"]
+[ext_resource type="Texture2D" uid="uid://d225wkvgvnapo" path="res://assets/UI/Inventory/Mission/Arrow.png" id="42_dr7bi"]
+[ext_resource type="Texture2D" uid="uid://csmkuryqmrx68" path="res://assets/UI/Inventory/Mission/MissionCompleted.png" id="42_k1ny3"]
+[ext_resource type="StyleBox" uid="uid://bwe3j6hcp3u7j" path="res://src/UI/StyleBox/SteelBeveledLight.tres" id="43_lnikm"]
+[ext_resource type="StyleBox" uid="uid://lk1bier0qaeg" path="res://src/UI/StyleBox/SteelBeveledDark.tres" id="44_7y7ip"]
+[ext_resource type="StyleBox" uid="uid://djsxt54vtaivl" path="res://src/UI/Slider/ScrollBarGrabber.tres" id="45_eylai"]
+[ext_resource type="StyleBox" uid="uid://qim7rgmnpjii" path="res://src/UI/Slider/ScrollBarGrabberHighlight.tres" id="46_k1ny3"]
+[ext_resource type="StyleBox" uid="uid://cl4yme0wtg3po" path="res://src/UI/Slider/Slider.tres" id="47_xcne2"]
+[ext_resource type="StyleBox" uid="uid://cc3ivdery0b8x" path="res://src/UI/StyleBox/RustRound.tres" id="48_4ptxt"]
+[ext_resource type="StyleBox" uid="uid://tcccnpc1013o" path="res://src/UI/Slider/NotepadVScrollBarGrabber.tres" id="49_4u3g2"]
+[ext_resource type="StyleBox" uid="uid://crslp6oirdgee" path="res://src/UI/Slider/NotepadVScrollBarSlider.tres" id="50_13m3q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l1q3b"]
 shader = ExtResource("3_4pdh5")
@@ -746,6 +764,101 @@ shader_parameter/color = Color(0.2, 0.25490198, 0.27058825, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vxl58"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ryfn6"]
+
+[sub_resource type="StyleBoxEmpty" id="9"]
+
+[sub_resource type="StyleBoxEmpty" id="10"]
+
+[sub_resource type="Theme" id="Theme_3w7lq"]
+default_font = ExtResource("7_y7abv")
+Button/colors/font_color = Color(0.964706, 0.964706, 0.964706, 1)
+Button/colors/font_color_disabled = Color(0.901961, 0.901961, 0.901961, 0.2)
+Button/colors/font_color_hover = Color(1, 1, 1, 1)
+Button/colors/font_color_pressed = Color(1, 1, 1, 1)
+Button/constants/hseparation = 2
+Button/styles/disabled = ExtResource("43_lnikm")
+Button/styles/focus = ExtResource("43_lnikm")
+Button/styles/hover = ExtResource("43_lnikm")
+Button/styles/normal = ExtResource("44_7y7ip")
+Button/styles/pressed = ExtResource("43_lnikm")
+CheckBox/colors/font_color = Color(0.88, 0.88, 0.88, 1)
+CheckBox/colors/font_color_disabled = Color(0.9, 0.9, 0.9, 0.2)
+CheckBox/colors/font_color_hover = Color(0.94, 0.94, 0.94, 1)
+CheckBox/colors/font_color_hover_pressed = Color(1, 1, 1, 1)
+CheckBox/colors/font_color_pressed = Color(1, 1, 1, 1)
+CheckBox/constants/check_vadjust = 0
+CheckBox/constants/hseparation = 4
+CheckBox/icons/checked = null
+CheckBox/icons/unchecked = null
+CheckButton/colors/font_color = Color(0.88, 0.88, 0.88, 1)
+CheckButton/colors/font_color_disabled = Color(0.9, 0.9, 0.9, 0.2)
+CheckButton/colors/font_color_hover = Color(0.94, 0.94, 0.94, 1)
+CheckButton/colors/font_color_hover_pressed = Color(1, 1, 1, 1)
+CheckButton/colors/font_color_pressed = Color(1, 1, 1, 1)
+CheckButton/constants/check_vadjust = 0
+CheckButton/constants/hseparation = 4
+CheckButton/icons/off = null
+CheckButton/icons/on = null
+HScrollBar/styles/grabber = ExtResource("45_eylai")
+HScrollBar/styles/grabber_highlight = ExtResource("46_k1ny3")
+HScrollBar/styles/grabber_pressed = ExtResource("46_k1ny3")
+HScrollBar/styles/scroll = ExtResource("47_xcne2")
+HSlider/icons/grabber = null
+HSlider/icons/grabber_highlight = null
+HSlider/icons/tick = null
+HSlider/styles/slider = ExtResource("47_xcne2")
+ItemList/colors/font_color = Color(1, 1, 1, 1)
+ItemList/colors/font_color_selected = Color(1, 1, 1, 1)
+ItemList/colors/guide_color = Color(0, 0, 0, 0.1)
+ItemList/constants/hseparation = 4
+ItemList/constants/icon_margin = 4
+ItemList/constants/line_separation = 2
+ItemList/constants/vseparation = 2
+ItemList/styles/bg = ExtResource("6_4pdh5")
+ItemList/styles/bg_focus = ExtResource("6_4pdh5")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_color_shadow = Color(0, 0, 0, 1)
+Label/colors/font_outline_modulate = Color(1, 1, 1, 1)
+Label/constants/line_spacing = 3
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+LineEdit/styles/focus = ExtResource("6_4pdh5")
+LineEdit/styles/normal = ExtResource("6_4pdh5")
+LineEdit/styles/read_only = ExtResource("6_4pdh5")
+OptionButton/colors/font_color = Color(0.2, 0.168627, 0.176471, 1)
+OptionButton/colors/font_color_disabled = Color(0.901961, 0.901961, 0.901961, 0.2)
+OptionButton/colors/font_color_hover = Color(0.2, 0.168627, 0.176471, 1)
+OptionButton/colors/font_color_pressed = Color(0.2, 0.168627, 0.176471, 1)
+OptionButton/constants/arrow_margin = 2
+OptionButton/constants/hseparation = 2
+OptionButton/icons/arrow = null
+Panel/styles/panel = ExtResource("48_4ptxt")
+TabContainer/constants/hseparation = 4
+TabContainer/constants/label_valign_bg = 2
+TabContainer/constants/label_valign_fg = 0
+TabContainer/constants/side_margin = 8
+TabContainer/constants/top_margin = 24
+TabContainer/styles/panel = SubResource("StyleBoxEmpty_ryfn6")
+TabContainer/styles/tab_focus = ExtResource("6_vxl58")
+TabContainer/styles/tab_hovered = ExtResource("6_vxl58")
+TabContainer/styles/tab_selected = ExtResource("13_4huqx")
+TabContainer/styles/tab_unselected = ExtResource("4_2n62p")
+TextEdit/styles/completion = ExtResource("6_4pdh5")
+TextEdit/styles/focus = ExtResource("6_4pdh5")
+TextEdit/styles/normal = ExtResource("6_4pdh5")
+TextEdit/styles/read_only = ExtResource("6_4pdh5")
+Tree/styles/bg = ExtResource("6_4pdh5")
+VScrollBar/constants/padding_left = 0
+VScrollBar/constants/padding_right = 0
+VScrollBar/styles/grabber = ExtResource("49_4u3g2")
+VScrollBar/styles/scroll = ExtResource("50_13m3q")
+VSlider/icons/grabber = null
+VSlider/styles/grabber_area = SubResource("9")
+VSlider/styles/grabber_area_highlight = SubResource("10")
+VSlider/styles/slider = ExtResource("47_xcne2")
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lmyv0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ebj88"]
@@ -875,6 +988,11 @@ position = Vector2(0, 16)
 position = Vector2(28, 40)
 texture = ExtResource("7_lmyv0")
 
+[node name="StampBaseDark" type="Sprite2D" parent="VBox/BackHints" unique_id=1531965647]
+position = Vector2(268, 8)
+texture = ExtResource("8_1jb1c")
+centered = false
+
 [node name="Background" type="Panel" parent="VBox" unique_id=1551394557]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(288, 232)
@@ -883,6 +1001,7 @@ theme_override_styles/panel = ExtResource("8")
 
 [node name="Inventory" type="MarginContainer" parent="VBox/Background" unique_id=2102478161]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(288, 232)
 layout_mode = 0
 offset_right = 288.0
@@ -1427,36 +1546,153 @@ theme_override_fonts/font = ExtResource("8_1e805")
 text = "Chocolate covered mushrooms? xcv gggggggghhhhhhhhhhhhhhhhhh"
 autowrap_mode = 3
 
-[node name="Mission" type="MarginContainer" parent="VBox/Background" unique_id=281285142]
+[node name="Mission" type="Control" parent="VBox/Background" unique_id=743516986]
 unique_name_in_owner = true
-visible = false
-layout_mode = 0
+anchors_preset = 0
 offset_right = 288.0
 offset_bottom = 232.0
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 8
 
-[node name="VBox" type="HBoxContainer" parent="VBox/Background/Mission" unique_id=836684017]
+[node name="Notepad" type="Sprite2D" parent="VBox/Background/Mission" unique_id=1659218826]
+position = Vector2(182, 8)
+texture = ExtResource("36_uc3h4")
+centered = false
+
+[node name="Book" type="Sprite2D" parent="VBox/Background/Mission" unique_id=465811711]
+position = Vector2(24, 8)
+texture = ExtResource("37_nj2vu")
+centered = false
+
+[node name="MailStamp" type="Sprite2D" parent="VBox/Background/Mission" unique_id=2004521325]
+position = Vector2(135, 21)
+texture = ExtResource("38_rpy03")
+centered = false
+
+[node name="StampBase" type="Sprite2D" parent="VBox/Background/Mission" unique_id=1860416678]
+position = Vector2(268, 8)
+texture = ExtResource("39_0skjx")
+centered = false
+
+[node name="Stamp" type="Sprite2D" parent="VBox/Background/Mission" unique_id=1331799153]
+position = Vector2(271, 38)
+texture = ExtResource("40_rcdsb")
+centered = false
+
+[node name="StampImprint" type="Sprite2D" parent="VBox/Background/Mission" unique_id=487335247]
+position = Vector2(239, 26)
+texture = ExtResource("41_eylai")
+centered = false
+
+[node name="MissionCompleted" type="Sprite2D" parent="VBox/Background/Mission" unique_id=1587157012]
+position = Vector2(189, 27)
+texture = ExtResource("42_k1ny3")
+centered = false
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Background/Mission" unique_id=1777726323]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 109.0
+offset_right = 176.0
+offset_bottom = 189.0
+theme_override_constants/separation = 21
+
+[node name="MissionBookmark0" parent="VBox/Background/Mission/VBox" unique_id=259960228 instance=ExtResource("41_2nf8i")]
 layout_mode = 2
+
+[node name="MissionBookmark1" parent="VBox/Background/Mission/VBox" unique_id=155973909 instance=ExtResource("41_2nf8i")]
+layout_mode = 2
+
+[node name="MissionBookmark2" parent="VBox/Background/Mission/VBox" unique_id=2131255572 instance=ExtResource("41_2nf8i")]
+layout_mode = 2
+
+[node name="MissionBookmark3" parent="VBox/Background/Mission/VBox" unique_id=2005994272 instance=ExtResource("41_2nf8i")]
+layout_mode = 2
+
+[node name="ArrowLeft" type="Sprite2D" parent="VBox/Background/Mission" unique_id=1243003905]
+position = Vector2(77, 200)
+texture = ExtResource("42_dr7bi")
+centered = false
+hframes = 2
+
+[node name="ArrowRight" type="Sprite2D" parent="VBox/Background/Mission" unique_id=1896625884]
+position = Vector2(113, 200)
+texture = ExtResource("42_dr7bi")
+centered = false
+flip_h = true
+hframes = 2
+
+[node name="MainMissionTitle" type="RichTextLabel" parent="VBox/Background/Mission" unique_id=1000297582]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 18.0
+offset_right = 128.0
+offset_bottom = 47.0
+theme_override_colors/default_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_colors/font_shadow_color = Color(0.96862745, 0.8862745, 0.7176471, 1)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+text = "Main Mission Full Title"
+
+[node name="MainMissionBody" type="RichTextLabel" parent="VBox/Background/Mission" unique_id=17085908]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 46.0
+offset_right = 152.0
+offset_bottom = 93.0
+theme_override_colors/default_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_constants/line_separation = -1
+theme_override_fonts/normal_font = ExtResource("8_1e805")
+text = "Main mission full description written here."
+
+[node name="SideMissionBody" type="RichTextLabel" parent="VBox/Background/Mission" unique_id=1112561301]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 47.0
+offset_right = 258.0
+offset_bottom = 208.0
+theme = SubResource("Theme_3w7lq")
+theme_override_colors/default_color = Color(0.4627451, 0.4862745, 0.43137255, 1)
+theme_override_fonts/normal_font = ExtResource("8_1e805")
+text = "Side mission details explained here. Side mission details explained here. Side mission details explained here. Side mission details explained here.fcxeeeeedrraaq"
+
+[node name="PageNumber" type="RichTextLabel" parent="VBox/Background/Mission" unique_id=906194973]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 196.0
+offset_right = 108.0
+offset_bottom = 211.0
+theme = SubResource("Theme_3w7lq")
+theme_override_colors/default_color = Color(0.4627451, 0.4862745, 0.43137255, 1)
+theme_override_fonts/normal_font = ExtResource("8_1e805")
+text = "1/3"
+fit_content = true
+scroll_active = false
+
+[node name="VBoxOLD" type="HBoxContainer" parent="VBox/Background/Mission" unique_id=836684017]
+visible = false
+layout_mode = 0
+offset_left = 24.0
+offset_top = 8.0
+offset_right = 264.0
+offset_bottom = 224.0
 theme_override_constants/separation = 8
 
-[node name="Missions" type="MarginContainer" parent="VBox/Background/Mission/VBox" unique_id=1069239040]
+[node name="Missions" type="MarginContainer" parent="VBox/Background/Mission/VBoxOLD" unique_id=1069239040]
 custom_minimum_size = Vector2(144, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="VBoxContainer" parent="VBox/Background/Mission/VBox/Missions" unique_id=1580143400]
+[node name="HBoxContainer" type="VBoxContainer" parent="VBox/Background/Mission/VBoxOLD/Missions" unique_id=1580143400]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer" unique_id=1115827441]
+[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBoxOLD/Missions/HBoxContainer" unique_id=1115827441]
 custom_minimum_size = Vector2(128, 64)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("16_eo4w6")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer/Panel" unique_id=1692406411]
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBoxOLD/Missions/HBoxContainer/Panel" unique_id=1692406411]
 layout_mode = 0
 offset_right = 128.0
 offset_bottom = 207.0
@@ -1465,7 +1701,7 @@ theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="MainMissionBody" type="Label" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer/Panel/MarginContainer" unique_id=988650954]
+[node name="MainMissionBody" type="Label" parent="VBox/Background/Mission/VBoxOLD/Missions/HBoxContainer/Panel/MarginContainer" unique_id=988650954]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
@@ -1475,13 +1711,13 @@ theme_override_fonts/font = ExtResource("8_1e805")
 text = "Escape the Cloud Factory and return to Basil in Dogtown"
 autowrap_mode = 3
 
-[node name="Panel2" type="Panel" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer" unique_id=1474095994]
+[node name="Panel2" type="Panel" parent="VBox/Background/Mission/VBoxOLD/Missions/HBoxContainer" unique_id=1474095994]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("6_4pdh5")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer/Panel2" unique_id=2039890261]
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBoxOLD/Missions/HBoxContainer/Panel2" unique_id=2039890261]
 layout_mode = 0
 offset_right = 128.0
 offset_bottom = 144.0
@@ -1490,7 +1726,7 @@ theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 0
 
-[node name="SideMissionList" type="ItemList" parent="VBox/Background/Mission/VBox/Missions/HBoxContainer/Panel2/MarginContainer" unique_id=783086266]
+[node name="SideMissionList" type="ItemList" parent="VBox/Background/Mission/VBoxOLD/Missions/HBoxContainer/Panel2/MarginContainer" unique_id=783086266]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
@@ -1514,26 +1750,26 @@ theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_xpheq")
 theme_override_styles/cursor = SubResource("StyleBoxEmpty_pkrle")
 allow_search = false
 
-[node name="Description" type="MarginContainer" parent="VBox/Background/Mission/VBox" unique_id=2058229200]
+[node name="Description" type="MarginContainer" parent="VBox/Background/Mission/VBoxOLD" unique_id=2058229200]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBox/Description" unique_id=1201406583]
+[node name="Panel" type="Panel" parent="VBox/Background/Mission/VBoxOLD/Description" unique_id=1201406583]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("3")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBox/Description" unique_id=2084437399]
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/VBoxOLD/Description" unique_id=2084437399]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="VBox" type="VBoxContainer" parent="VBox/Background/Mission/VBox/Description/MarginContainer" unique_id=1921090074]
+[node name="VBox" type="VBoxContainer" parent="VBox/Background/Mission/VBoxOLD/Description/MarginContainer" unique_id=1921090074]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="MissionBody" type="Label" parent="VBox/Background/Mission/VBox/Description/MarginContainer/VBox" unique_id=514091422]
+[node name="MissionBody" type="Label" parent="VBox/Background/Mission/VBoxOLD/Description/MarginContainer/VBox" unique_id=514091422]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
@@ -1668,5 +1904,5 @@ flat = true
 [connection signal="toggled" from="VBox/HBox/MapButton" to="." method="_on_tab_toggled" binds= ["map"]]
 [connection signal="item_activated" from="VBox/Background/Inventory/VBox/Items/MarginContainer/ItemList" to="." method="_on_Items_item_activated"]
 [connection signal="item_selected" from="VBox/Background/Inventory/VBox/Items/MarginContainer/ItemList" to="." method="_on_ItemList_item_selected"]
-[connection signal="item_selected" from="VBox/Background/Mission/VBox/Missions/HBoxContainer/Panel2/MarginContainer/SideMissionList" to="." method="_on_SideMissionList_item_selected"]
+[connection signal="item_selected" from="VBox/Background/Mission/VBoxOLD/Missions/HBoxContainer/Panel2/MarginContainer/SideMissionList" to="." method="_on_SideMissionList_item_selected"]
 [connection signal="item_selected" from="VBox/Background/Book/VBox/Topics/MarginContainer/TopicList" to="." method="_on_TopicList_item_selected"]

@@ -467,7 +467,6 @@ gun_5={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_environment="res://default_env.tres"
 
 [tiled_importer]
 
