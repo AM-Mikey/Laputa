@@ -14,13 +14,15 @@ var player_is_behind: = false
 var bodies_on_shield: = []
 const launch_velocity: Vector2 = Vector2(0, -500.0)
 
-var attack_damage: = 4.0
+var attack_damage: = 3.0
 var player_in_attack_range: = false
 
 var shield_charge_distance: = 100.0
 var shield_charge_speed: = 150.0
 var shield_charge_damage: = 3.0
 var player_in_shield_charge_range: = false
+
+var first_frame := true
 
 @onready var ap = $AnimationPlayer
 
@@ -93,7 +95,8 @@ func do_walk(_delta):
 	if (!$FloorDetectorL.is_colliding() and move_dir.x < 0) \
 	|| (!$FloorDetectorR.is_colliding() and move_dir.x > 0) \
 	|| (velocity.x == 0.0):
-		move_dir.x *= -1.0
+		if !first_frame:
+			move_dir.x *= -1.0
 
 	if player_is_behind and $SurpriseCooldown.time_left <= 0.0:
 		change_state("surprise")
@@ -106,6 +109,8 @@ func do_walk(_delta):
 	if difficulty == 2:
 		if check_player_in_shield_charge_range() and $ShieldChargeCooldown.time_left <= 0.0:
 			change_state("shield_charge_start")
+
+	if first_frame: first_frame = false
 
 func enter_defend(_last_state):
 	if difficulty == 0:
@@ -282,7 +287,6 @@ func do_shield_charge_end(_delta):
 	move_and_slide()
 
 func exit_shield_charge_end(_next_state):
-	global_position.y -= 1.0
 	speed = walk_speed
 	enable_shield(true)
 	$ShieldChargeCooldown.start()
