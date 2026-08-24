@@ -23,6 +23,7 @@ var shield_charge_damage: = 3.0
 var player_in_shield_charge_range: = false
 
 var first_frame := true
+var prev_global_position := Vector2.ZERO
 
 @onready var ap = $AnimationPlayer
 
@@ -51,6 +52,7 @@ func setup(): #Reminder: no function called can use await
 	w.emit_signal("finished_spawn_entities_step")
 
 	change_state("idle")
+	prev_global_position = global_position
 
 func _on_hit(_damage, _blood_direction):
 	if state == "surprise_shield_up":
@@ -88,7 +90,7 @@ func enter_walk(_prev_state):
 	else:
 		ap.play("Walk")
 
-func do_walk(_delta):
+func do_walk(delta):
 	velocity = calc_velocity(move_dir)
 	move_and_slide()
 
@@ -97,6 +99,9 @@ func do_walk(_delta):
 	|| (velocity.x == 0.0):
 		if !first_frame:
 			move_dir.x *= -1.0
+
+	if (prev_global_position - global_position).length() <= walk_speed.x * delta * 0.5:
+		global_position.y -= 1.0 * delta
 
 	if player_is_behind and $SurpriseCooldown.time_left <= 0.0:
 		change_state("surprise")
@@ -111,6 +116,7 @@ func do_walk(_delta):
 			change_state("shield_charge_start")
 
 	if first_frame: first_frame = false
+	prev_global_position = global_position
 
 func enter_defend(_last_state):
 	if difficulty == 0:
