@@ -21,6 +21,8 @@ var is_mouse_entered = false
 @onready var button_load = %Load
 @onready var button_string = %String
 @onready var button_multiline = %Multiline
+@onready var multiline_text = %MultilineText
+@onready var button_multiline_save = %MultilineSave
 @onready var button_vector2X = %Vector2X
 @onready var button_vector2Y = %Vector2Y
 
@@ -70,7 +72,7 @@ func _ready():
 			enabled_controls.append(button_multiline)
 			custom_minimum_size.y = 128
 			if property_value != null:
-				button_multiline.text = String(property_value)
+				multiline_text.text = String(property_value)
 
 		"vector2", Variant.Type.TYPE_VECTOR2: #unused as we split this
 			enabled_controls.append(button_vector2X)
@@ -132,11 +134,19 @@ func _on_string_complete(_value = ""):
 	#$HBox/HBox/String.release_focus()
 		property_value = check_button.text
 		emit_signal("property_changed", property_name, property_value)
-func _on_multiline_complete(_value = 0):
-	if property_value != button_multiline.text and !disabled:
-		property_value = button_multiline.text
+func _on_multiline_save():
+	if property_value != multiline_text.text and !disabled:
+		property_value = multiline_text.text
 		emit_signal("property_changed", property_name, property_value)
-
+	button_multiline_save.disabled = true
+	button_multiline_save.text = "Save"
+	# This is a bit redundant as all of the buttons are re-created
+	# every time a property is saved... Or at least this happend with multilines
+	# Leaving this in here just in case the behaviour is changed so that
+	# this doesn't break. -nero
+func _on_multiline_text_changed() -> void:
+	button_multiline_save.disabled = false
+	button_multiline_save.text = "Save(*)"
 func _on_int_complete(_value = 0):
 	if property_value != int(button_int.text) and !disabled:
 		property_value = int(button_int.text)
