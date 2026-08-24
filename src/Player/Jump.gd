@@ -36,7 +36,11 @@ func state_process(_delta):
 	set_player_directions()
 	pc.velocity = calc_velocity()
 	pc.velocity.y = min(mm.terminal_velocity, pc.velocity.y)
+	var pre_vel: float = pc.velocity.y
 	pc.move_and_slide()
+	if pc.velocity.y < pre_vel && !is_zero_approx(pc.velocity.y):
+		print("Jump: negated vertical velocity gain by move_and_slide()")
+		pc.velocity.y = pre_vel
 	animate()
 	# We only set move_dir.y to jump for a single frame
 	pc.move_dir.y = 0.0

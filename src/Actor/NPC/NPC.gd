@@ -268,8 +268,8 @@ func calc_velocity(do_gravity = true) -> Vector2:
 func find_waypoints():
 	for wp in get_tree().get_nodes_in_group("WaypointGlobals"):
 		if wp.owner_id.nocasecmp_to(id) == 0:
-			waypoints[w.index] = wp
-	if not waypoints.is_empty():
+			waypoints[wp.index] = wp
+	if !waypoints.is_empty():
 		set_target(waypoints[0])
 
 func set_target(new_target):
@@ -277,7 +277,7 @@ func set_target(new_target):
 		target_waypoint.deactivate()
 	target_waypoint = new_target
 	target_waypoint.activate()
-	$WaypointBailTimer.start(bail_time)
+	#$WaypointBailTimer.start(bail_time)
 
 func get_next_waypoint() -> Node:
 	return(waypoints[(target_waypoint.index + 1) % waypoints.size()])
@@ -300,10 +300,10 @@ func _on_PlayerDetector_body_entered(body):
 func _on_PlayerDetector_body_exited(_body):
 	active_pc = null
 
-func _on_waypoint_bail_timer_timeout(): #TODO: consider reimplementing (ala child.tscn)
-	pass
-	#if disabled or waypoints.is_empty(): return
-	#set_target(get_next_waypoint())
+#func _on_waypoint_bail_timer_timeout(): #TODO: consider reimplementing (ala child.tscn)
+	#pass
+	##if disabled or waypoints.is_empty(): return
+	##set_target(get_next_waypoint())
 
 func on_dialog_finished():
 	change_state(predialog_state)
