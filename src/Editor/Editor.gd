@@ -272,10 +272,24 @@ func _unhandled_input(event):
 	if event is InputEventKey and event.is_pressed() and not event.is_echo() and ctrl_held:
 		match event.keycode:
 			KEY_C:
-				copy_tile_map_selection()
+				if inspector.active_type == "actor_spawn":
+					copy_actor_spawn()
+				elif inspector.active_type == "prop_spawn":
+					copy_prop_spawn()
+				elif inspector.active_type == "trigger_spawn":
+					copy_trigger_spawn()
+				else:
+					copy_tile_map_selection()
 			KEY_V:
 				var pos: Vector2i = get_cell(w.get_global_mouse_position())
-				paste_tiles_from_buffer(pos)
+				if inspector.active_type == "actor_spawn":
+					paste_actor_spawn(pos)
+				elif inspector.active_type == "prop_spawn":
+					paste_prop_spawn(pos)
+				elif inspector.active_type == "trigger_spawn":
+					paste_trigger_spawn(pos)
+				else:
+					paste_tiles_from_buffer(pos)
 			KEY_Z:
 				if shift_held: redo()
 				else: undo()
@@ -844,6 +858,67 @@ func free_previews():
 
 
 
+func copy_actor_spawn():
+	e_log.lprint("copied actor spawn")
+	inspector.copied_entity = inspector.active
+
+func paste_actor_spawn(pos):
+	e_log.lprint("pasted actor spawn")
+	var actor_spawn = inspector.copied_entity.duplicate() #flag 8 if this is broken
+	set_owner_recursive(actor_spawn, actor_spawn)
+	actor_spawn.global_position = (pos * 16) + Vector2i(8, 16)
+	spawn_collection.add_child(actor_spawn)
+
+	#initialize but only the parts we want to use
+	actor_spawn.properties["id"] = [actor_spawn.name, TYPE_STRING, ""]
+	var actor = load(actor_spawn.actor_path).instantiate()
+	actor_spawn.setup_vus(actor)
+	actor.free()
+	inspector.on_selected(actor_spawn, "actor_spawn", true)
+
+
+func copy_prop_spawn():
+	e_log.lprint("copied prop spawn")
+	inspector.copied_entity = inspector.active
+
+func paste_prop_spawn(pos):
+	e_log.lprint("pasted prop spawn")
+	var prop_spawn = inspector.copied_entity.duplicate() #flag 8 if this is broken
+	set_owner_recursive(prop_spawn, prop_spawn)
+	prop_spawn.global_position = (pos * 16)
+	spawn_collection.add_child(prop_spawn)
+
+	#initialize but only the parts we want to use
+	prop_spawn.properties["id"] = [prop_spawn.name, TYPE_STRING, ""]
+	var prop = load(prop_spawn.prop_path).instantiate()
+	prop_spawn.setup_vus(prop)
+	prop.free()
+	inspector.on_selected(prop_spawn, "prop_spawn", true)
+
+
+func copy_trigger_spawn():
+	e_log.lprint("copied trigger spawn")
+	inspector.copied_entity = inspector.active
+
+func paste_trigger_spawn(pos):
+	e_log.lprint("pasted trigger spawn")
+	var trigger_spawn = inspector.copied_entity.duplicate() #flag 8 if this is broken
+	set_owner_recursive(trigger_spawn, trigger_spawn)
+	trigger_spawn.global_position = (pos * 16)
+	spawn_collection.add_child(trigger_spawn)
+
+	#initialize but only the parts we want to use
+	trigger_spawn.properties["id"] = [trigger_spawn.name, TYPE_STRING, ""]
+	var trigger = load(trigger_spawn.trigger_path).instantiate()
+	trigger_spawn.setup_vus(trigger)
+	trigger.free()
+	inspector.on_selected(trigger_spawn, "trigger_spawn", true)
+
+func copy_waypoint_global_spawn():
+	e_log.lprint("copied waypoint global spawn")
+	inspector.copied_entity = inspector.active
+
+
 ### GETTERS ###
 
 
@@ -973,6 +1048,11 @@ func clear_tile_map_cursor(): #Warning: it still exists after!
 	tile_map_selection = Rect2i(0,0,0,0)
 	tile_map_cursor.size = Vector2i.ZERO
 	tile_map_cursor.position = Vector2i.ZERO
+
+func set_owner_recursive(node: Node, new_owner: Node):
+	for child in node.get_children():
+		child.owner = new_owner
+		set_owner_recursive(child, new_owner)
 
 ### UI ###
 func set_menu_alpha():

@@ -648,3 +648,9 @@ Options line 377, we need to have selecting never mind exit the text
 
 TODO 8/5/26
 waypointlocal color change on select?
+
+TODO 8/24/26
+givewaypointglobal a name on instantiating based on previous waypointglobals with number
+change beetlecrawler default direction to be correct
+change beetlecrawler to setup raycasts before we exit the editor?
+beetlecrawler random direction on startup???

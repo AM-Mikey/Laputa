@@ -56,24 +56,8 @@ func initialize(): #first time set up properties
 			properties[p["name"]] = [trigger.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
 	properties["id"] = [name, TYPE_STRING, ""]
 
-	var visual_ult_groups = ["WaypointLocals", "WaypointGlobalSpawns",
-			 "VUVectors", "VURects", "VUActors"]
-	for ac in trigger.get_children():
-		for vu_group in visual_ult_groups:
-			if ac.is_in_group(vu_group):
-				if !get_if_trigger_has_visual_utility(ac, vu_group):
-					trigger.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-
-	trigger.queue_free()
-
-	for child in get_children():
-		if child.is_in_group("VisualUtilities"):
-			if child.has_signal("value_changed") && !child.value_changed.is_connected(on_vu_value_changed):
-				child.value_changed.connect(on_vu_value_changed)
-
+	setup_vus(trigger)
+	trigger.free()
 	for prop in properties: # init all special interaction when changing property
 		on_property_changed(prop, properties[prop][0])
 
@@ -94,24 +78,8 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 			else:
 				properties[p["name"]] = [trigger.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
 
-	var visual_ult_groups = ["WaypointLocals", "WaypointGlobalSpawns",
-			 "VUVectors", "VURects", "VUActors"]
-	for ac in trigger.get_children():
-		for vu_group in visual_ult_groups:
-			if ac.is_in_group(vu_group):
-				if !get_if_trigger_has_visual_utility(ac, vu_group):
-					trigger.remove_child(ac)
-					ac.owner = null
-					add_child(ac)
-					ac.owner = w.current_level
-
+	setup_vus(trigger)
 	trigger.free()
-
-	for child in get_children():
-		if child.is_in_group("VisualUtilities"):
-			if child.has_signal("value_changed") && !child.value_changed.is_connected(on_vu_value_changed):
-				child.value_changed.connect(on_vu_value_changed)
-
 	for prop in properties: # init all special interaction when changing property
 		on_property_changed(prop, properties[prop][0])
 
@@ -187,6 +155,24 @@ func _input(event):
 						offset_left = x - parent_x
 					"Right":
 						offset_right = x - parent_x
+
+
+
+### HELPERS
+func setup_vus(trigger):
+	var vu_groups = ["WaypointLocals", "WaypointGlobalSpawns", "VUVectors", "VURects", "VUActors"]
+	for i in trigger.get_children():
+		for vu_group in vu_groups:
+			if i.is_in_group(vu_group):
+				if !get_if_trigger_has_visual_utility(i, vu_group):
+					trigger.remove_child(i)
+					i.owner = null
+					add_child(i)
+					i.owner = w.current_level
+	for j in get_children():
+		if j.is_in_group("VisualUtilities"):
+			if j.has_signal("value_changed") && !j.value_changed.is_connected(on_vu_value_changed):
+				j.value_changed.connect(on_vu_value_changed)
 
 
 

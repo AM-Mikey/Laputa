@@ -12,6 +12,7 @@ var active = null
 var active_type: String
 var active_property: String #only use for referencing file dialog's user
 
+var copied_entity = null
 
 func _physics_process(_delta):
 	display_tool_labels()
