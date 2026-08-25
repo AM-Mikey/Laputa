@@ -263,8 +263,12 @@ func do_shield_charge_start(_delta):
 	move_and_slide()
 
 func enter_shield_charge(_prev_state):
+	$ShieldChargeHitbox.monitorable = true
+	$ShieldChargeHitbox.monitoring = true
+	$Hitbox.monitorable = false
+	$Hitbox.monitoring = false
 	play_sound("shield_charge_start")
-	enable_shield_charge_hitbox(true)
+
 	ap.play("Charge")
 	$ShieldChargeTimer.start(shield_charge_distance / shield_charge_speed)
 
@@ -280,7 +284,10 @@ func do_shield_charge(_prev_state):
 		change_state("shield_charge_end")
 
 func enter_shield_charge_end(_prev_state):
-	enable_shield_charge_hitbox(false)
+	$ShieldChargeHitbox.monitorable = false
+	$ShieldChargeHitbox.monitoring = false
+	$Hitbox.monitorable = true
+	$Hitbox.monitoring = true
 	ap.play("ChargeSlash")
 
 	await ap.animation_finished
@@ -329,10 +336,6 @@ func enable_shield(val: bool):
 func enable_attack_hitbox(val: bool):
 	$AttackHitbox.monitorable = val
 	$AttackHitbox.monitoring = val
-
-func enable_shield_charge_hitbox(val: bool):
-	$ShieldChargeHitbox.monitorable = val
-	$ShieldChargeHitbox.monitoring = val
 
 func play_sound(sfx_name: String):
 	am.play(sfx_name, self)
@@ -418,13 +421,13 @@ func _on_Attack_hitbox_body_entered(body, hitbox_name):
 	if body.get_collision_layer_value(17):
 		var player = body.get_parent()
 		if hitbox_name == "Attack":
-			player.hit(attack_damage, Vector2(move_dir.x, 0.0))
+			player.hit(attack_damage, Vector2(signf(move_dir.x), 0.0))
 		else:
-			var knockback: = Vector2(400.0 * move_dir.x, -100.0)
-			if not player.disabled and not player.invincible:
-				player.velocity += knockback
+			var knockback: = Vector2(100.0 * move_dir.x, -20.0)
+			#if not player.disabled and not player.invincible:
+				#player.velocity += knockback
 
-			player.hit(shield_charge_damage, Vector2.ZERO)
+			player.hit(shield_charge_damage, knockback)
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if state == "surprise_shield_up" and anim_name in ["UpHurtNS", "UpHurt"]:
