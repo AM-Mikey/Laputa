@@ -8,47 +8,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_513p3"]
 size = Vector2(13, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tk834"]
-size = Vector2(10, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcsk2"]
-size = Vector2(22, 2)
-
-[sub_resource type="RectangleShape2D" id="10"]
-size = Vector2(7, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_np4sj"]
-size = Vector2(6, 14)
-
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(13, 19)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o1iq0"]
-resource_local_to_scene = true
-size = Vector2(320, 240)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fp3sg"]
-resource_local_to_scene = true
-size = Vector2(21, 8)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_46mcm"]
-resource_local_to_scene = true
-size = Vector2(18, 2)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hycmb"]
-resource_local_to_scene = true
-size = Vector2(20, 34)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ui4tb"]
-size = Vector2(17, 22)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5h1sb"]
-resource_local_to_scene = true
-size = Vector2(120, 24)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrqs"]
-size = Vector2(13, 21)
-
 [sub_resource type="Animation" id="Animation_fp3sg"]
 resource_name = "Charge"
 length = 0.4
@@ -1243,6 +1202,47 @@ _data = {
 &"oldWalkShield": SubResource("6")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tk834"]
+size = Vector2(10, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcsk2"]
+size = Vector2(22, 2)
+
+[sub_resource type="RectangleShape2D" id="10"]
+size = Vector2(7, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_np4sj"]
+size = Vector2(6, 14)
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(13, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o1iq0"]
+resource_local_to_scene = true
+size = Vector2(320, 240)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fp3sg"]
+resource_local_to_scene = true
+size = Vector2(21, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_46mcm"]
+resource_local_to_scene = true
+size = Vector2(18, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hycmb"]
+resource_local_to_scene = true
+size = Vector2(20, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ui4tb"]
+size = Vector2(17, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5h1sb"]
+resource_local_to_scene = true
+size = Vector2(120, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrqs"]
+size = Vector2(13, 21)
+
 [node name="Shield" type="CharacterBody2D" unique_id=1317608156 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
@@ -1260,6 +1260,9 @@ shape = SubResource("RectangleShape2D_513p3")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=534020338]
 position = Vector2(0.5, -10)
 shape = SubResource("RectangleShape2D_513p3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=547631705]
+libraries/ = SubResource("AnimationLibrary_kfp7m")
 
 [node name="BulletBlocker" type="Area2D" parent="." unique_id=1594386711]
 visible = false
@@ -1434,9 +1437,6 @@ process_callback = 0
 wait_time = 2.0
 one_shot = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=547631705]
-libraries/ = SubResource("AnimationLibrary_kfp7m")
-
 [node name="FloorDetectorL" type="RayCast2D" parent="." unique_id=999532932]
 position = Vector2(-7, -8)
 target_position = Vector2(0, 15.5)
@@ -1461,6 +1461,7 @@ texture = ExtResource("5_o1iq0")
 hframes = 8
 vframes = 13
 
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="BulletBlocker" to="." method="_on_BulletBlocker_area_entered"]
 [connection signal="body_entered" from="BulletBlocker" to="." method="_on_BulletBlocker_body_entered"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
@@ -1478,4 +1479,3 @@ vframes = 13
 [connection signal="body_exited" from="ShieldChargeDetection" to="." method="_on_ShieldChargeDetection_body_exited"]
 [connection signal="area_entered" from="ShieldChargeHitbox" to="." method="_on_Attack_hitbox_body_entered" binds= ["ShieldCharge"]]
 [connection signal="body_entered" from="ShieldChargeHitbox" to="." method="_on_Attack_hitbox_body_entered" binds= ["ShieldCharge"]]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

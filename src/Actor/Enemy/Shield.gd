@@ -4,12 +4,12 @@ const ICON = preload("res://assets/Actor/Enemy/ShieldIcon.png")
 
 const TX_0 = preload("res://assets/Actor/Enemy/Shield0.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Shield1.png")
-const TX_2  = preload("res://assets/Actor/Enemy/Shield2.png")
+const TX_2 = preload("res://assets/Actor/Enemy/Shield2.png")
 
 @export var difficulty: int = 0
 var move_dir: = Vector2.LEFT: set = set_move_dir
-var walk_speed = Vector2(15.0, 15.0)
-var defend_speed = Vector2(5.0, 5.0)
+const walk_speed: = Vector2(15.0, 15.0)
+const defend_speed: = Vector2(5.0, 5.0)
 
 var player_is_behind: = false
 var bodies_on_shield: = []
@@ -29,7 +29,6 @@ var prev_global_position := Vector2.ZERO
 @onready var ap = $AnimationPlayer
 
 func setup(): #Reminder: no function called can use await
-	damage_on_contact = 2
 	speed = walk_speed
 	is_wind_affected = true
 	match difficulty:
@@ -38,16 +37,19 @@ func setup(): #Reminder: no function called can use await
 			$SurpriseShieldUpTimer.wait_time = 1.5
 			hp = 6
 			reward = 2
+			damage_on_contact = 2
 		1:
 			$Sprite2D.texture = TX_1
 			$SurpriseShieldUpTimer.wait_time = 1.0
 			hp = 6
 			reward = 3
+			damage_on_contact = 2
 		2:
 			$Sprite2D.texture = TX_2
 			$SurpriseShieldUpTimer.wait_time = 0.8
 			hp = 6
 			reward = 4
+			damage_on_contact = 2
 	$AttackDetection.monitoring = difficulty >= 1
 	$ShieldChargeDetection.monitoring = difficulty == 2
 	$ShieldChargeDetection/CollisionShape2D.shape.size.x = shield_charge_distance + 20.0
@@ -78,16 +80,16 @@ func do_idle(_delta):
 	velocity = calc_velocity(Vector2.ZERO)
 	move_and_slide()
 
-	if player_is_behind and $SurpriseCooldown.time_left <= 0.0:
+	if player_is_behind && $SurpriseCooldown.time_left <= 0.0:
 		change_state("surprise")
 		return
 
 	if difficulty >= 1:
-		if player_in_attack_range and $AttackCooldown.time_left <= 0.0:
+		if player_in_attack_range && $AttackCooldown.time_left <= 0.0:
 			change_state("attack")
 			return
 	if difficulty == 2:
-		if check_player_in_shield_charge_range() and $ShieldChargeCooldown.time_left <= 0.0:
+		if check_player_in_shield_charge_range() && $ShieldChargeCooldown.time_left <= 0.0:
 			change_state("shield_charge_start")
 
 func enter_walk(_prev_state):
@@ -100,8 +102,8 @@ func do_walk(delta):
 	velocity = calc_velocity(move_dir)
 	move_and_slide()
 
-	if (!$FloorDetectorL.is_colliding() and move_dir.x < 0) \
-	|| (!$FloorDetectorR.is_colliding() and move_dir.x > 0) \
+	if (!$FloorDetectorL.is_colliding() && move_dir.x < 0) \
+	|| (!$FloorDetectorR.is_colliding() && move_dir.x > 0) \
 	|| (velocity.x == 0.0):
 		if !first_frame:
 			move_dir.x *= -1.0
@@ -109,16 +111,16 @@ func do_walk(delta):
 	if (prev_global_position - global_position).length() <= walk_speed.x * delta * 0.5:
 		global_position.y -= 1.0 * delta
 
-	if player_is_behind and $SurpriseCooldown.time_left <= 0.0:
+	if player_is_behind && $SurpriseCooldown.time_left <= 0.0:
 		change_state("surprise")
 		return
 
 	if difficulty >= 1:
-		if player_in_attack_range and $AttackCooldown.time_left <= 0.0:
+		if player_in_attack_range && $AttackCooldown.time_left <= 0.0:
 			change_state("attack")
 			return
 	if difficulty == 2:
-		if check_player_in_shield_charge_range() and $ShieldChargeCooldown.time_left <= 0.0:
+		if check_player_in_shield_charge_range() && $ShieldChargeCooldown.time_left <= 0.0:
 			change_state("shield_charge_start")
 
 	if first_frame: first_frame = false
@@ -136,7 +138,7 @@ func do_defend(_delta):
 		change_state("walk")
 		return
 
-	if player_is_behind and $SurpriseCooldown.time_left <= 0.0:
+	if player_is_behind && $SurpriseCooldown.time_left <= 0.0:
 		change_state("surprise")
 		return
 
@@ -144,10 +146,10 @@ func do_defend(_delta):
 		velocity = calc_velocity(move_dir)
 		move_and_slide()
 
-		if player_in_attack_range and $AttackCooldown.time_left <= 0.0:
+		if player_in_attack_range && $AttackCooldown.time_left <= 0.0:
 			change_state("attack")
 		if difficulty == 2:
-			if check_player_in_shield_charge_range() and $ShieldChargeCooldown.time_left <= 0.0:
+			if check_player_in_shield_charge_range() && $ShieldChargeCooldown.time_left <= 0.0:
 				change_state("shield_charge_start")
 
 func exit_defend(_next_state):
@@ -195,7 +197,7 @@ func do_surprise_shield_up(_delta):
 
 	if $SurpriseShieldUpTimer.time_left <= 0.0:
 		change_state("surprise_end")
-	elif bodies_on_shield.size() > 0 and $BodyOnShieldTimer.time_left <= 0.0:
+	elif bodies_on_shield.size() > 0 && $BodyOnShieldTimer.time_left <= 0.0:
 		change_state("surprise_launch")
 
 func exit_surprise_shield_up(_next_state):
@@ -247,6 +249,10 @@ func do_surprise_end(_delta):
 func enter_attack(_prev_state):
 	ap.play("Slash")
 
+func do_attack(_delta):
+	velocity = calc_velocity(Vector2.ZERO)
+	move_and_slide()
+
 func exit_attack(_next_state):
 	$AttackCooldown.start()
 
@@ -277,8 +283,8 @@ func do_shield_charge(_prev_state):
 	move_and_slide()
 
 	if (is_on_floor()  \
-	&& ((!$FloorDetectorL.is_colliding() and move_dir.x < 0) \
-	|| (!$FloorDetectorR.is_colliding() and move_dir.x > 0))) \
+	&& ((!$FloorDetectorL.is_colliding() && move_dir.x < 0) \
+	|| (!$FloorDetectorR.is_colliding() && move_dir.x > 0))) \
 	|| velocity.x == 0.0 \
 	|| $ShieldChargeTimer.time_left <= 0.0 :
 		change_state("shield_charge_end")
@@ -296,8 +302,8 @@ func enter_shield_charge_end(_prev_state):
 func do_shield_charge_end(_delta):
 	var no_moving_forward := false
 	if (is_on_floor()  \
-	&& ((!$FloorDetectorL.is_colliding() and move_dir.x < 0) \
-	|| (!$FloorDetectorR.is_colliding() and move_dir.x > 0))):
+	&& ((!$FloorDetectorL.is_colliding() && move_dir.x < 0) \
+	|| (!$FloorDetectorR.is_colliding() && move_dir.x > 0))):
 		no_moving_forward = true
 		return
 
@@ -355,7 +361,7 @@ func launch():
 			body.get_parent().velocity += launch_velocity
 
 func check_player_in_shield_charge_range() -> bool:
-	if !f.pc() or !player_in_shield_charge_range: return false
+	if !f.pc() || !player_in_shield_charge_range: return false
 	var ray_param: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.new()
 	ray_param.from = $CollisionShape2D.global_position
 	ray_param.to = f.pc().get_node("CollisionShape2D").global_position
@@ -364,7 +370,7 @@ func check_player_in_shield_charge_range() -> bool:
 	ray_param.collide_with_areas = false
 	var physics_world: PhysicsDirectSpaceState2D = get_world_2d().direct_space_state
 	var collision = physics_world.intersect_ray(ray_param)
-	if !collision.is_empty() and collision["collider"] is not TileMapLayer and collision["collider"].get_collision_layer_value(1):
+	if !collision.is_empty() && collision["collider"] is not TileMapLayer && collision["collider"].get_collision_layer_value(1):
 		return true
 	return false
 
@@ -424,13 +430,10 @@ func _on_Attack_hitbox_body_entered(body, hitbox_name):
 			player.hit(attack_damage, Vector2(signf(move_dir.x), 0.0))
 		else:
 			var knockback: = Vector2(100.0 * move_dir.x, -20.0)
-			#if not player.disabled and not player.invincible:
-				#player.velocity += knockback
-
 			player.hit(shield_charge_damage, knockback)
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	if state == "surprise_shield_up" and anim_name in ["UpHurtNS", "UpHurt"]:
+	if state == "surprise_shield_up" && anim_name in ["UpHurtNS", "UpHurt"]:
 		if difficulty == 0:
 			ap.play("UpNS")
 		else:
