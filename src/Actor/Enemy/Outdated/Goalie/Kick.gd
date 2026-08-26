@@ -12,7 +12,7 @@ func state_process():
 
 func enter():
 	ap.play("Kick")
-	em.target.get_parent().hit(em.kick_damage, Vector2(sign(em.target.global_position.x - em.global_position.x), 0))
+	em.target.get_parent().hit(em.kick_damage, Vector2(80 * sign(em.target.global_position.x - em.global_position.x), 0))
 
 
 func exit():

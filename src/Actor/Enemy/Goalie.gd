@@ -43,12 +43,12 @@ func _on_ActiveDetector_body_exited(_body):
 		$StateMachine.change_state("Idle")
 
 
-func _on_JumpDetector_body_entered(_body):
+func _on_JumpDetector_body_entered(body):
 	if $StateMachine.current_state == $StateMachine/Active:
 		$StateMachine.change_state("Rise")
+		target = body
 
 
 func _on_KickDectector_body_entered(body):
 	if $StateMachine.current_state == $StateMachine/Rise:
-		target = body
 		$StateMachine.change_state("Kick")
