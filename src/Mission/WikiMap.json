@@ -10,7 +10,10 @@
 				"mission_demo":"mission_demo",
 				"entity_demo": "entity_demo",	
 				"camera_demo": "camera_demo",
-			},		
+			},
+			"tabith": {
+				"dialog_system_demo_start": "waypoint_demo",
+			}
 		},
 	},
 }
