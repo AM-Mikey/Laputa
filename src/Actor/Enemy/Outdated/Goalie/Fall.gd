@@ -11,6 +11,8 @@ func state_process():
 	em.velocity = em.velocity
 
 	if em.velocity.y == 0:
+		am.play("enemy_land", em)
+		em.create_effect("Land")
 		sm.change_state("Active")
 		return
 
@@ -28,4 +30,4 @@ func enter():
 		kick_grace_timer.start()
 
 func exit():
-	kick_grace_timer.stop()
+	pass

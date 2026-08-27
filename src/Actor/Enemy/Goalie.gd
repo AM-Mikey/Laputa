@@ -4,15 +4,18 @@ const ICON = preload("res://assets/Actor/Enemy/GoalieThumbnail.png")
 
 const TX_0 = preload("res://assets/Actor/Enemy/Goalie.png")
 
+@onready var BONK = preload("res://src/Effect/BonkParticle.tscn")
+@onready var LAND = preload("res://src/Effect/LandParticle.tscn")
+
 var jump_pos: = Vector2.ZERO
 @export var cooldown_time: = 1.0
+
 var kick_damage: = 4.0
 
 var look_dir: = Vector2.ZERO
 var move_dir: = Vector2.ZERO
 var target = null
 var target_kick = null
-@onready var start_pos: = position
 
 var player_in_active_zone: = false
 
@@ -29,6 +32,7 @@ func _ready():
 
 	look_dir = $LookVector.direction.snappedf(1.0)
 	$KickDectector.scale.x = -look_dir.x
+	$KickHitbox.scale.x = -look_dir.x
 
 	$ActiveDetector.scale.x = -look_dir.x
 	$ActiveDetector/CollisionShape2D.shape.size.y = abs($JumpWaypoint.position.y)
@@ -49,6 +53,21 @@ func _ready():
 	jump_pos = $JumpWaypoint.global_position
 	w.emit_signal("finished_spawn_entities_step")
 	change_state("idle")
+
+func create_effect(vfx_name):
+	var last_collision = get_last_slide_collision()
+	if last_collision != null:
+		match vfx_name:
+			"Land":
+				var land = LAND.instantiate()
+				land.global_position = Vector2(global_position.x, last_collision.get_position().y)
+				land.rotation = last_collision.get_normal().rotated(PI / 2.0).angle()
+				w.front.add_child(land)
+			"Bonk":
+				var bonk = BONK.instantiate()
+				bonk.normal = last_collision.get_normal()
+				bonk.global_position = last_collision.get_position() + Vector2(0, 16)
+				w.front.add_child(bonk)
 
 
 func _on_ActiveDetector_body_entered(_body):

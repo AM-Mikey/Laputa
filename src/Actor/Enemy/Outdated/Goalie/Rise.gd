@@ -3,7 +3,11 @@ extends State
 @onready var em = get_parent().get_parent()
 @onready var ap = em.get_node("AnimationPlayer")
 
+
 func state_process():
+	if em.is_on_ceiling():
+		em.create_effect("Bonk")
+
 	if em.is_on_ceiling() or em.position.y <= em.jump_pos.y or !em.target or em.position.y <= em.target.global_position.y:
 		sm.change_state("fall")
 		return
@@ -17,10 +21,9 @@ func calc_velocity() -> Vector2:
 	out.y = em.speed.y * em.move_dir.y
 	return out
 
-
-
 func enter():
 	ap.play("Rise")
+	am.play("enemy_jump", em)
 	em.move_dir = Vector2.UP
 
 func exit():

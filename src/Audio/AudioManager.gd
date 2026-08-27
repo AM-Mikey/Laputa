@@ -81,6 +81,7 @@ signal music_fadeout_finished
 	"enemy_thud_1": preload("res://assets/SFX/EnemyThud1.ogg"),
 	"enemy_metal_thud": preload("res://assets/SFX/DrumMetal.ogg"),
 	"enemy_slam": preload("res://assets/SFX/GunHeavy.ogg"),
+	"enemy_land": preload("res://assets/SFX/Placeholder/snd_thud.ogg"),
 
 	"ornithopter": preload("res://assets/SFX/Ornithopter.ogg"),
 	#"enemy_buzz":

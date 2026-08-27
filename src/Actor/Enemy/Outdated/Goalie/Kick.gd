@@ -16,6 +16,7 @@ func state_process():
 
 func enter():
 	ap.play("Kick")
+	am.play("enemy_shoot")
 	hitbox.monitoring = true
 	hitbox.monitorable = true
 
