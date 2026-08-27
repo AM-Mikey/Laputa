@@ -5,7 +5,7 @@ extends State
 
 func state_process():
 	if !em.player_in_active_zone:
-		get_parent().change_state("Idle")
+		sm.change_state("Idle")
 
 func enter():
 	ap.play("Active")

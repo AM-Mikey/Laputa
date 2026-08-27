@@ -11,10 +11,11 @@ var kick_damage: = 4.0
 var look_dir: = Vector2.ZERO
 var move_dir: = Vector2.ZERO
 var target = null
+var target_kick = null
 @onready var start_pos: = position
 
 var player_in_active_zone: = false
-var player_in_kick_zone: = false
+var player_in_jump_zone: = false
 
 
 
@@ -51,16 +52,14 @@ func _on_ActiveDetector_body_exited(_body):
 
 
 func _on_JumpDetector_body_entered(body):
+	player_in_jump_zone = true
 	if $StateMachine.current_state == $StateMachine/Active:
 		$StateMachine.change_state("Rise")
 		target = body
 
+func _on_JumpDetector_body_exited(_body: Node2D) -> void:
+	player_in_jump_zone = false
 
 func _on_KickDectector_body_entered(body):
-	player_in_kick_zone = true
 	if $StateMachine.current_state == $StateMachine/Rise:
 		$StateMachine.change_state("Kick")
-
-
-func _on_KickDectector_body_exited(body):
-	player_in_kick_zone = false

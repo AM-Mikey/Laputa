@@ -162,10 +162,22 @@ debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="KickDectector" type="Area2D" parent="." unique_id=487697926]
 collision_layer = 0
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KickDectector" unique_id=1994513786]
 position = Vector2(-8, -8)
 shape = SubResource("10")
+
+[node name="KickHitbox" type="Area2D" parent="." unique_id=1149402340]
+collision_layer = 262144
+collision_mask = 65824
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KickHitbox" unique_id=472885124]
+position = Vector2(-8, -8)
+shape = SubResource("10")
+debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="ActiveDetector" type="Area2D" parent="." unique_id=1122222324]
 collision_layer = 0
@@ -190,7 +202,7 @@ position = Vector2(0, -16)
 texture = ExtResource("3_c3js0")
 hframes = 2
 vframes = 5
-frame = 2
+frame = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1193424199]
 libraries/ = SubResource("AnimationLibrary_g0tk0")
@@ -237,6 +249,9 @@ lock_x = true
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="KickDectector" to="." method="_on_KickDectector_body_entered"]
 [connection signal="body_exited" from="KickDectector" to="." method="_on_KickDectector_body_exited"]
+[connection signal="area_entered" from="KickHitbox" to="StateMachine/Kick" method="_on_KickHitbox_area_entered"]
+[connection signal="body_entered" from="KickHitbox" to="StateMachine/Kick" method="_on_KickHitbox_body_entered"]
 [connection signal="body_entered" from="ActiveDetector" to="." method="_on_ActiveDetector_body_entered"]
 [connection signal="body_exited" from="ActiveDetector" to="." method="_on_ActiveDetector_body_exited"]
 [connection signal="body_entered" from="JumpDetector" to="." method="_on_JumpDetector_body_entered"]
+[connection signal="body_exited" from="JumpDetector" to="." method="_on_JumpDetector_body_exited"]
