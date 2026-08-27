@@ -15,7 +15,6 @@ var target_kick = null
 @onready var start_pos: = position
 
 var player_in_active_zone: = false
-var player_in_jump_zone: = false
 
 
 
@@ -30,13 +29,20 @@ func _ready():
 
 	look_dir = $LookVector.direction.snappedf(1.0)
 	$KickDectector.scale.x = -look_dir.x
+
 	$ActiveDetector.scale.x = -look_dir.x
 	$ActiveDetector/CollisionShape2D.shape.size.y = abs($JumpWaypoint.position.y)
 	$ActiveDetector/CollisionShape2D.position.y = -$ActiveDetector/CollisionShape2D.shape.size.y / 2.0
+	var active_detector_global_pos = $ActiveDetector.global_position
+	$ActiveDetector.top_level = true
+	$ActiveDetector.global_position = active_detector_global_pos
+
 	$JumpDetector.scale.x = -look_dir.x
 	$JumpDetector/CollisionShape2D.shape.size.y = abs($JumpWaypoint.position.y) - 32.0
 	$JumpDetector/CollisionShape2D.position.y = -$JumpDetector/CollisionShape2D.shape.size.y / 2.0 - 32.0
-
+	var jump_detector_global_pos = $JumpDetector.global_position
+	$JumpDetector.top_level = true
+	$JumpDetector.global_position = jump_detector_global_pos
 	$Sprite2D.flip_h = look_dir.x > 0.0
 
 	jump_pos = $JumpWaypoint.global_position
@@ -44,7 +50,7 @@ func _ready():
 	change_state("idle")
 
 
-func _on_ActiveDetector_body_entered(body):
+func _on_ActiveDetector_body_entered(_body):
 	player_in_active_zone = true
 
 func _on_ActiveDetector_body_exited(_body):
@@ -52,14 +58,13 @@ func _on_ActiveDetector_body_exited(_body):
 
 
 func _on_JumpDetector_body_entered(body):
-	player_in_jump_zone = true
+	target = body
 	if $StateMachine.current_state == $StateMachine/Active:
 		$StateMachine.change_state("Rise")
-		target = body
 
-func _on_JumpDetector_body_exited(_body: Node2D) -> void:
-	player_in_jump_zone = false
+func _on_JumpDetector_body_exited(_body):
+	target = null
 
-func _on_KickDectector_body_entered(body):
+func _on_KickDectector_body_entered(_body):
 	if $StateMachine.current_state == $StateMachine/Rise:
 		$StateMachine.change_state("Kick")

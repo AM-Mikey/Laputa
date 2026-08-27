@@ -7,6 +7,9 @@ func state_process():
 	if !em.player_in_active_zone:
 		sm.change_state("Idle")
 
+	if em.target and inp.pressed("jump"):
+		sm.change_state("Rise")
+
 func enter():
 	ap.play("Active")
 
