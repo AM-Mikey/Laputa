@@ -2,23 +2,23 @@
 
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="1_6q8mx"]
 [ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_jogqi"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_atyxx"]
 [ext_resource type="Resource" path="res://src/Background/iedge.tres" id="3_f378h"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_rrhud"]
 [ext_resource type="Texture2D" path="res://assets/Background/IslandEdge.png" id="4_53gin"]
 [ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_6aw22"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_suywb"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="10_rrhud"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_cex85"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="10_3gt83"]
 [ext_resource type="PackedScene" path="res://src/Editor/TitlePreview.tscn" id="11_atco8"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_uo8bs"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_cex85"]
 [ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="12_s0ppf"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_veimp"]
 [ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="13_3gt83"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="13_ddw3t"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="13_l0h4m"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="14_veimp"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="14_txhq1"]
 [ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="15_rrhud"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="16_cex85"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="16_txhq1"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="16_upidq"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="18_rvxqs"]
 
 [node name="EnGoalieTesting" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
@@ -34,7 +34,7 @@ offset_top = 1600.0
 offset_right = 4431.0
 offset_bottom = 2496.0
 mouse_filter = 2
-script = ExtResource("3_atyxx")
+script = ExtResource("3_rrhud")
 background_resource = ExtResource("3_f378h")
 texture = ExtResource("4_53gin")
 layers = 5
@@ -108,7 +108,7 @@ offset_top = 2000.0
 offset_right = 4320.0
 offset_bottom = 2160.0
 mouse_filter = 2
-script = ExtResource("8_suywb")
+script = ExtResource("8_cex85")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20, ""],
@@ -124,7 +124,7 @@ z_index = 999
 position = Vector2(3008, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_rrhud")
+script = ExtResource("10_3gt83")
 
 [node name="Goalie" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 modulate = Color(1, 1, 1, 0.75)
@@ -133,8 +133,8 @@ z_index = 999
 position = Vector2(3176, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -150,17 +150,17 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
 visibility_layer = 2
-position = Vector2(0, -80)
+position = Vector2(0, -128)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -171,8 +171,8 @@ z_index = 999
 position = Vector2(3176, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -188,9 +188,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie1" unique_id=1951634029 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -198,7 +198,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -209,8 +209,8 @@ z_index = 999
 position = Vector2(2919, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -226,9 +226,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie2" unique_id=391342996 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -236,7 +236,7 @@ visibility_layer = 2
 position = Vector2(1, -112)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -247,8 +247,8 @@ z_index = 999
 position = Vector2(2455, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -264,9 +264,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie3" unique_id=2095102575 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -274,7 +274,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -285,8 +285,8 @@ z_index = 999
 position = Vector2(2535, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -302,9 +302,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie4" unique_id=514123546 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -312,7 +312,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -323,8 +323,8 @@ z_index = 999
 position = Vector2(2487, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -340,9 +340,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie5" unique_id=506941113 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -350,7 +350,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -361,8 +361,8 @@ z_index = 999
 position = Vector2(2007, 1904)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -378,9 +378,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie6" unique_id=1079966316 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -388,7 +388,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -399,8 +399,8 @@ z_index = 999
 position = Vector2(1991, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -416,9 +416,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie7" unique_id=1720105199 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -426,7 +426,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -437,8 +437,8 @@ z_index = 999
 position = Vector2(1975, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -454,9 +454,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie8" unique_id=634480090 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -464,7 +464,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -475,8 +475,8 @@ z_index = 999
 position = Vector2(1959, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -492,9 +492,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie9" unique_id=1269944563 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -502,7 +502,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -513,8 +513,8 @@ z_index = 999
 position = Vector2(2007, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -530,9 +530,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie10" unique_id=789802506 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -540,7 +540,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -551,8 +551,8 @@ z_index = 999
 position = Vector2(2071, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -568,9 +568,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie11" unique_id=1087264896 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -578,7 +578,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -589,8 +589,8 @@ z_index = 999
 position = Vector2(2023, 1904)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -606,9 +606,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie12" unique_id=1775228871 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -616,7 +616,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -627,8 +627,8 @@ z_index = 999
 position = Vector2(2503, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -644,9 +644,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie13" unique_id=846988718 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -654,7 +654,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -665,8 +665,8 @@ z_index = 999
 position = Vector2(2663, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -682,9 +682,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie14" unique_id=86872491 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -692,7 +692,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -703,8 +703,8 @@ z_index = 999
 position = Vector2(2663, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -720,9 +720,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie15" unique_id=1707771027 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -730,7 +730,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -741,8 +741,8 @@ z_index = 999
 position = Vector2(2519, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -758,9 +758,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie16" unique_id=1148897374 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -768,7 +768,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -779,8 +779,8 @@ z_index = 999
 position = Vector2(2455, 2128)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -796,9 +796,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie17" unique_id=2138400972 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -806,7 +806,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -817,8 +817,8 @@ z_index = 999
 position = Vector2(2535, 2128)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -834,9 +834,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie18" unique_id=77546752 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -844,7 +844,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -855,8 +855,8 @@ z_index = 999
 position = Vector2(2487, 2128)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -872,9 +872,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie19" unique_id=930802534 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -882,7 +882,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -893,8 +893,8 @@ z_index = 999
 position = Vector2(2503, 2128)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -910,9 +910,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie20" unique_id=67675379 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -920,7 +920,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -931,8 +931,8 @@ z_index = 999
 position = Vector2(2519, 2128)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -948,9 +948,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie21" unique_id=361501681 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -958,7 +958,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -969,8 +969,8 @@ z_index = 999
 position = Vector2(2615, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -986,9 +986,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie22" unique_id=1221528472 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -996,7 +996,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1007,8 +1007,8 @@ z_index = 999
 position = Vector2(2647, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1024,9 +1024,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie23" unique_id=1339262757 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1034,7 +1034,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1045,8 +1045,8 @@ z_index = 999
 position = Vector2(2631, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1062,9 +1062,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie24" unique_id=1932558563 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1072,7 +1072,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1083,8 +1083,8 @@ z_index = 999
 position = Vector2(2215, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1100,9 +1100,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie25" unique_id=1840475261 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1110,7 +1110,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1121,8 +1121,8 @@ z_index = 999
 position = Vector2(2199, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1138,9 +1138,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie26" unique_id=758694632 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1148,7 +1148,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1159,8 +1159,8 @@ z_index = 999
 position = Vector2(2183, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1176,9 +1176,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie27" unique_id=2125990473 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1186,7 +1186,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1197,8 +1197,8 @@ z_index = 999
 position = Vector2(2615, 2024)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1214,9 +1214,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie28" unique_id=153961859 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1224,7 +1224,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1235,8 +1235,8 @@ z_index = 999
 position = Vector2(2647, 2024)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1252,9 +1252,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie29" unique_id=652251987 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1262,7 +1262,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1273,8 +1273,8 @@ z_index = 999
 position = Vector2(2631, 2024)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1290,9 +1290,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie30" unique_id=1745143932 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1300,7 +1300,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1311,8 +1311,8 @@ z_index = 999
 position = Vector2(2215, 2024)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1328,9 +1328,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie31" unique_id=1703765674 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1338,7 +1338,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1349,8 +1349,8 @@ z_index = 999
 position = Vector2(2199, 2024)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1366,9 +1366,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie32" unique_id=628829465 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1376,7 +1376,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1387,8 +1387,8 @@ z_index = 999
 position = Vector2(2183, 2024)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1404,9 +1404,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie33" unique_id=1028610456 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1414,7 +1414,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1425,8 +1425,8 @@ z_index = 999
 position = Vector2(2920, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1442,9 +1442,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie34" unique_id=354382518 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1452,7 +1452,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1463,8 +1463,8 @@ z_index = 999
 position = Vector2(3704, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1480,9 +1480,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie35" unique_id=1751982627 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1490,7 +1490,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1501,8 +1501,8 @@ z_index = 999
 position = Vector2(3688, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1518,9 +1518,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie36" unique_id=227088009 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1528,7 +1528,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1539,8 +1539,8 @@ z_index = 999
 position = Vector2(3448, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1556,16 +1556,16 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie37" unique_id=1057440568 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
 visibility_layer = 2
-position = Vector2(0, -80)
+position = Vector2(0, -96)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1576,8 +1576,8 @@ z_index = 999
 position = Vector2(3432, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1593,17 +1593,17 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie38" unique_id=392362883 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
 visibility_layer = 2
-position = Vector2(0, -80)
+position = Vector2(0, -96)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1614,8 +1614,8 @@ z_index = 999
 position = Vector2(3448, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1631,9 +1631,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie39" unique_id=280101549 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1641,7 +1641,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1652,8 +1652,8 @@ z_index = 999
 position = Vector2(3432, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1669,9 +1669,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie40" unique_id=1811873284 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1679,7 +1679,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1690,8 +1690,8 @@ z_index = 999
 position = Vector2(4216, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1707,9 +1707,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie41" unique_id=944975338 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1717,7 +1717,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1728,8 +1728,8 @@ z_index = 999
 position = Vector2(4200, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1745,9 +1745,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie42" unique_id=589959036 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1755,7 +1755,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1766,8 +1766,8 @@ z_index = 999
 position = Vector2(3704, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1783,9 +1783,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie43" unique_id=2066196471 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1793,7 +1793,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1804,8 +1804,8 @@ z_index = 999
 position = Vector2(3688, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1821,9 +1821,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie44" unique_id=1898280124 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1831,7 +1831,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1842,8 +1842,8 @@ z_index = 999
 position = Vector2(3704, 1872)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1859,9 +1859,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie45" unique_id=1018987654 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1869,7 +1869,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1880,8 +1880,8 @@ z_index = 999
 position = Vector2(3688, 1872)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1897,9 +1897,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie46" unique_id=733008889 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1907,7 +1907,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1918,8 +1918,8 @@ z_index = 999
 position = Vector2(3704, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1935,9 +1935,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie47" unique_id=952139904 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1945,7 +1945,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1956,8 +1956,8 @@ z_index = 999
 position = Vector2(3688, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -1973,9 +1973,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie48" unique_id=436461649 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -1983,7 +1983,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -1994,8 +1994,8 @@ z_index = 999
 position = Vector2(3960, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -2011,9 +2011,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie49" unique_id=494491075 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -2021,7 +2021,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -2032,8 +2032,8 @@ z_index = 999
 position = Vector2(3944, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -2049,9 +2049,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie50" unique_id=1084548698 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -2059,7 +2059,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -2070,8 +2070,8 @@ z_index = 999
 position = Vector2(3960, 1776)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -2087,9 +2087,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie51" unique_id=124949584 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -2097,7 +2097,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -2108,8 +2108,8 @@ z_index = 999
 position = Vector2(3944, 1776)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -2125,9 +2125,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie52" unique_id=845964929 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -2135,7 +2135,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -2146,8 +2146,8 @@ z_index = 999
 position = Vector2(3960, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -2163,9 +2163,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie53" unique_id=853361590 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -2173,7 +2173,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -2184,8 +2184,8 @@ z_index = 999
 position = Vector2(3944, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -2201,9 +2201,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie54" unique_id=1882553895 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -2211,7 +2211,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -2222,8 +2222,8 @@ z_index = 999
 position = Vector2(4216, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -2239,9 +2239,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie55" unique_id=1384305766 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -2249,7 +2249,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -2260,8 +2260,8 @@ z_index = 999
 position = Vector2(4200, 1984)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -2277,9 +2277,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie56" unique_id=1948990545 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -2287,7 +2287,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -2298,8 +2298,8 @@ z_index = 999
 position = Vector2(4216, 1776)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -2315,9 +2315,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie57" unique_id=1786808671 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -2325,7 +2325,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -2336,8 +2336,8 @@ z_index = 999
 position = Vector2(4200, 1776)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -2353,9 +2353,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie58" unique_id=224328790 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -2363,7 +2363,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -2374,8 +2374,8 @@ z_index = 999
 position = Vector2(4216, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -2391,9 +2391,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie59" unique_id=947363211 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -2401,7 +2401,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -2412,8 +2412,8 @@ z_index = 999
 position = Vector2(4200, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -2429,9 +2429,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie60" unique_id=1831695349 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -2439,7 +2439,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -2450,8 +2450,8 @@ z_index = 999
 position = Vector2(3960, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -2467,9 +2467,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie61" unique_id=2085367155 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -2477,7 +2477,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -2488,8 +2488,8 @@ z_index = 999
 position = Vector2(3944, 2160)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -2505,9 +2505,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie62" unique_id=1889327898 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -2515,7 +2515,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -2526,8 +2526,8 @@ z_index = 999
 position = Vector2(3032, 2208)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -2543,9 +2543,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie63" unique_id=1629398112 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -2553,7 +2553,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -2564,8 +2564,8 @@ z_index = 999
 position = Vector2(3096, 2208)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -2581,9 +2581,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie64" unique_id=369116681 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -2591,7 +2591,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -2602,8 +2602,8 @@ z_index = 999
 position = Vector2(3288, 2432)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("12_cex85")
-actor_path = "uid://b7e42dovy8ebw"
+script = ExtResource("12_veimp")
+actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "cooldown_time": [1.0, 3, ""],
@@ -2619,9 +2619,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_veimp")
+script = ExtResource("14_txhq1")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie65" unique_id=2038816058 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
@@ -2629,7 +2629,7 @@ visibility_layer = 2
 position = Vector2(0, -80)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_cex85")
+script = ExtResource("16_upidq")
 tag_name = "jump_pos"
 lock_x = true
 
@@ -2641,7 +2641,7 @@ visibility_layer = 2
 position = Vector2(3000, 1952)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("16_txhq1")
+script = ExtResource("18_rvxqs")
 
 [node name="TitlePreview" type="Area2D" parent="." unique_id=1910190675 groups=["TitlePreviews"] instance=ExtResource("11_atco8")]
 visibility_layer = 2
@@ -2649,7 +2649,7 @@ z_index = 999
 position = Vector2(3040, 2336)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_rrhud")
+script = ExtResource("10_3gt83")
 zoom = 3.0
 
 [connection signal="body_entered" from="Triggers/KillBoundaryU" to="Triggers/KillBoundaryU" method="_on_body_entered"]

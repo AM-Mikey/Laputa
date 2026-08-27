@@ -43,6 +43,7 @@ func _ready():
 	var jump_detector_global_pos = $JumpDetector.global_position
 	$JumpDetector.top_level = true
 	$JumpDetector.global_position = jump_detector_global_pos
+
 	$Sprite2D.flip_h = look_dir.x > 0.0
 
 	jump_pos = $JumpWaypoint.global_position
@@ -67,4 +68,6 @@ func _on_JumpDetector_body_exited(_body):
 
 func _on_KickDectector_body_entered(_body):
 	if $StateMachine.current_state == $StateMachine/Rise:
+		$StateMachine.change_state("Kick")
+	elif $StateMachine.current_state == $StateMachine/Fall and $KickGraceTimer.time_left > 0.0:
 		$StateMachine.change_state("Kick")

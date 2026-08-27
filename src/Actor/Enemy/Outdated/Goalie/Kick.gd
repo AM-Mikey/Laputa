@@ -9,6 +9,9 @@ func state_process():
 		sm.change_state("Fall")
 		return
 
+	em.velocity = Vector2.ZERO
+	em.move_and_slide()
+
 
 
 func enter():

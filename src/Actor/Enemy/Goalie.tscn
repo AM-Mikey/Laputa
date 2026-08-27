@@ -23,7 +23,10 @@ size = Vector2(11, 15)
 size = Vector2(11, 15)
 
 [sub_resource type="RectangleShape2D" id="10"]
-size = Vector2(16, 8)
+size = Vector2(14, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ax27h"]
+size = Vector2(16, 12)
 
 [sub_resource type="RectangleShape2D" id="3"]
 resource_local_to_scene = true
@@ -160,12 +163,17 @@ position = Vector2(-0.5, -7.5)
 shape = SubResource("RectangleShape2D_p2rvj")
 debug_color = Color(1, 0, 0, 0.235294)
 
+[node name="KickGraceTimer" type="Timer" parent="." unique_id=1715611932]
+process_callback = 0
+wait_time = 0.2
+one_shot = true
+
 [node name="KickDectector" type="Area2D" parent="." unique_id=487697926]
 collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KickDectector" unique_id=1994513786]
-position = Vector2(-8, -8)
+position = Vector2(-7, -6.5)
 shape = SubResource("10")
 
 [node name="KickHitbox" type="Area2D" parent="." unique_id=1149402340]
@@ -175,8 +183,8 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KickHitbox" unique_id=472885124]
-position = Vector2(-8, -8)
-shape = SubResource("10")
+position = Vector2(-8, -9)
+shape = SubResource("RectangleShape2D_ax27h")
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="ActiveDetector" type="Area2D" parent="." unique_id=1122222324]

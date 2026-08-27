@@ -7,7 +7,7 @@ func state_process():
 	if em.position.y <= em.jump_pos.y or !em.target or em.position.y <= em.target.global_position.y:
 		sm.change_state("fall")
 		return
-	em.set_velocity(calc_velocity())
+	em.velocity = calc_velocity()
 	em.move_and_slide()
 	em.velocity = em.velocity
 
