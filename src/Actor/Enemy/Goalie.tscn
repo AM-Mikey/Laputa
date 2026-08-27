@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b7e42dovy8ebw"]
+[gd_scene format=3 uid="uid://bp6f5q8b4w4dr"]
 
 [ext_resource type="Script" uid="uid://cgnp13s3abode" path="res://src/Actor/Enemy/Goalie.gd" id="1_aho6q"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_17672"]
@@ -26,10 +26,12 @@ size = Vector2(11, 15)
 size = Vector2(16, 8)
 
 [sub_resource type="RectangleShape2D" id="3"]
-size = Vector2(128, 64)
+resource_local_to_scene = true
+size = Vector2(64, 96)
 
 [sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(96, 40)
+resource_local_to_scene = true
+size = Vector2(46, 60)
 
 [sub_resource type="Animation" id="5"]
 resource_name = "Active"
@@ -171,7 +173,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActiveDetector" unique_id=1345632410]
 modulate = Color(0.992157, 0.992157, 0.992157, 0.156863)
-position = Vector2(0, -64)
+position = Vector2(-32, -48)
 shape = SubResource("3")
 
 [node name="JumpDetector" type="Area2D" parent="." unique_id=104415215]
@@ -180,7 +182,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpDetector" unique_id=14587079]
 modulate = Color(0, 0.0156863, 0.937255, 0.392157)
-position = Vector2(0, -72)
+position = Vector2(-25, -62)
 shape = SubResource("4")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1138557505]
@@ -234,6 +236,7 @@ lock_x = true
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="KickDectector" to="." method="_on_KickDectector_body_entered"]
+[connection signal="body_exited" from="KickDectector" to="." method="_on_KickDectector_body_exited"]
 [connection signal="body_entered" from="ActiveDetector" to="." method="_on_ActiveDetector_body_entered"]
 [connection signal="body_exited" from="ActiveDetector" to="." method="_on_ActiveDetector_body_exited"]
 [connection signal="body_entered" from="JumpDetector" to="." method="_on_JumpDetector_body_entered"]

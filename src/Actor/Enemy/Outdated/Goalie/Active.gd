@@ -4,7 +4,8 @@ extends State
 @onready var ap = em.get_node("AnimationPlayer")
 
 func state_process():
-	pass
+	if !em.player_in_active_zone:
+		get_parent().change_state("Idle")
 
 func enter():
 	ap.play("Active")
