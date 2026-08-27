@@ -4,10 +4,9 @@ extends State
 @onready var ap = em.get_node("AnimationPlayer")
 
 func state_process():
-	if !em.player_in_active_zone:
+	if !em.target:
 		sm.change_state("Idle")
-
-	if em.target and inp.pressed("jump"):
+	elif em.player_in_jump_zone and inp.pressed("jump"):
 		sm.change_state("Rise")
 
 func enter():

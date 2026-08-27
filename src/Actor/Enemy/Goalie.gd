@@ -15,9 +15,9 @@ var kick_damage: = 4.0
 var look_dir: = Vector2.ZERO
 var move_dir: = Vector2.ZERO
 var target = null
-var target_kick = null
 
-var player_in_active_zone: = false
+var player_in_jump_zone: = false
+var kicked: = false
 
 
 
@@ -70,20 +70,20 @@ func create_effect(vfx_name):
 				w.front.add_child(bonk)
 
 
-func _on_ActiveDetector_body_entered(_body):
-	player_in_active_zone = true
+func _on_ActiveDetector_body_entered(body):
+	target = body
 
 func _on_ActiveDetector_body_exited(_body):
-	player_in_active_zone = false
+	target = null
 
 
 func _on_JumpDetector_body_entered(body):
-	target = body
+	player_in_jump_zone = true
 	if $StateMachine.current_state == $StateMachine/Active:
 		$StateMachine.change_state("Rise")
 
 func _on_JumpDetector_body_exited(_body):
-	target = null
+	player_in_jump_zone = false
 
 func _on_KickDectector_body_entered(_body):
 	if $StateMachine.current_state == $StateMachine/Rise:

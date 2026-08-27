@@ -30,4 +30,4 @@ func enter():
 		kick_grace_timer.start()
 
 func exit():
-	pass
+	em.kicked = false
