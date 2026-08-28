@@ -8,6 +8,7 @@ func state_process():
 		sm.change_state("Active")
 
 func enter():
+	em.update_detector_position()
 	ap.play("Idle")
 
 func exit():

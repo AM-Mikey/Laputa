@@ -10,6 +10,7 @@ func state_process():
 		sm.change_state("Rise")
 
 func enter():
+	em.update_detector_position()
 	ap.play("Active")
 
 func exit():
