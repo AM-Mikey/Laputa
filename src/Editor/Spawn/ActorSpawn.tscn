@@ -6,7 +6,6 @@
 size = Vector2(12, 12)
 
 [node name="ActorSpawn" type="Area2D" unique_id=1199277091 groups=["ActorSpawns", "Entities"]]
-modulate = Color(1, 1, 1, 0.75)
 z_index = 999
 collision_layer = 16384
 collision_mask = 0

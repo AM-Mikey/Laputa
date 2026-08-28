@@ -21,14 +21,13 @@ func setup_levels():
 	var index = 0
 	for l in find_level_scenes("res://src/Level/"):
 
-		var level = load(l).instantiate()
-		level.queue_free()
-		if not level.editor_hidden:
-			levels[level.name] = level
+		var level = load(l)._bundled #never gets instantiated, just reading as a dictionary
+		if level.names.find("editor_hidden") == -1 || !level.variants[level.names.find("editor_hidden")]: #can't find property (since it's defaunt) or editor_hidden == false
+			levels[level.variants[level.names.find("level_name")]] = level
 
 			var level_button = LEVEL_BUTTON.instantiate()
 			level_button.level_path = l
-			level_button.level_name = level.name
+			level_button.level_name = level.variants[level.names.find("level_name")]
 			level_button.connect("level_selected", Callable(self, "_on_level_selected"))
 			if index == 0:
 				level_button.active = true

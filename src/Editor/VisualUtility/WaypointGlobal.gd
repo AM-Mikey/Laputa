@@ -12,6 +12,15 @@ var active_count = 0
 
 func _ready(): #Reminder: no function called can use await
 	visible = w.debug_visible or w.el.get_child_count() > 0
+
+#name
+	var name_index = 0
+	for wpg in get_tree().get_nodes_in_group("WaypointGlobals"):
+		if wpg == self: break
+		else: name_index +=1
+		if name_index == 0: name = "WaypointGlobal"
+		else: name = str("WaypointGlobal", name_index)
+
 	await get_tree().process_frame #it seems like the WPGs set up too fast without this, and the signal doesn't have time to reset properly
 	w.emit_signal("finished_spawn_entities_step")
 
@@ -43,4 +52,4 @@ func on_editor_deselect():
 func _input_event(_viewport, event, _shape_idx): #selecting in editor
 	var editor = w.get_node("EditorLayer/Editor")
 	if event.is_action_pressed("editor_rmb"):
-		editor.inspector.on_selected(self, "waypoint_local")
+		editor.inspector.on_selected(self, "waypoint_global")

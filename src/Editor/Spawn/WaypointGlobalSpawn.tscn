@@ -7,6 +7,7 @@
 size = Vector2(8, 8)
 
 [node name="WaypointGlobalSpawn" type="Area2D" unique_id=1432238783 groups=["EditorEntities", "Entities", "VisualUtilities", "WaypointGlobalSpawns"]]
+modulate = Color(0, 0.502, 1, 1)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("1_ycpum")
@@ -15,6 +16,5 @@ script = ExtResource("1_ycpum")
 shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1572684330]
-modulate = Color(0.13333334, 0.54509807, 0.13333334, 1)
 z_index = 999
 texture = ExtResource("2_cry4f")
