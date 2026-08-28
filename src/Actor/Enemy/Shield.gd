@@ -130,7 +130,7 @@ func enter_defend(_last_state):
 	if difficulty == 0:
 		ap.play("DefendNS")
 	else:
-		ap.play("Walk", -1, 0.5)
+		ap.play("WalkDefend")
 		speed = defend_speed
 
 func do_defend(_delta):
