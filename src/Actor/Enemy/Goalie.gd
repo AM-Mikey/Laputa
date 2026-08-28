@@ -63,6 +63,7 @@ func _ready():
 func update_detector_position():
 	$ActiveDetector.global_position = global_position + active_detector_pos
 	$JumpDetector.global_position = global_position + jump_detector_pos
+	jump_pos = $JumpWaypoint.global_position
 
 func set_detector_global(val: bool):
 	if val:
