@@ -724,6 +724,64 @@ tracks/2/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_tk834"]
+resource_name = "Turn"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [44]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, -16)]
+}
+
+[sub_resource type="Animation" id="Animation_kcsk2"]
+resource_name = "TurnNS"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, -16)]
+}
+
 [sub_resource type="Animation" id="Animation_2fpom"]
 resource_name = "Up"
 length = 0.2
@@ -872,6 +930,36 @@ tracks/1/keys = {
 "values": [Vector2(0, -16)]
 }
 
+[sub_resource type="Animation" id="Animation_o1iq0"]
+resource_name = "WalkDefend"
+length = 1.400005
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.35, 0.55, 0.7, 0.9, 1.05, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [45, 46, 47, 46, 45, 46, 47, 46]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, -16)]
+}
+
 [sub_resource type="Animation" id="Animation_droyl"]
 resource_name = "WalkNS"
 length = 1.400005
@@ -902,269 +990,6 @@ tracks/1/keys = {
 "values": [Vector2(0, -16)]
 }
 
-[sub_resource type="Animation" id="Animation_kcsk2"]
-resource_name = "oldAttack"
-length = 1.2000101
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 5, 7]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.5, 0.8),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [true],
-"method": &"enable_attack_hitbox"
-}, {
-"args": [false],
-"method": &"enable_attack_hitbox"
-}]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.5, 1.2),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [false],
-"method": &"enable_shield"
-}, {
-"args": [true],
-"method": &"enable_shield"
-}]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["gun_sword"],
-"method": &"play_sound"
-}]
-}
-
-[sub_resource type="Animation" id="9"]
-resource_name = "oldIdleCake"
-length = 1.6
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [5, 7]
-}
-
-[sub_resource type="Animation" id="8"]
-resource_name = "oldIdleShield"
-length = 1.6
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [1, 3]
-}
-
-[sub_resource type="Animation" id="Animation_o1iq0"]
-resource_name = "oldRESET"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_hycmb"]
-resource_name = "oldShieldCharge"
-length = 0.3
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-
-[sub_resource type="Animation" id="Animation_ui4tb"]
-resource_name = "oldShieldChargeEnd"
-length = 0.3
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
-
-[sub_resource type="Animation" id="Animation_onrqs"]
-resource_name = "oldShieldChargeEndAttack"
-length = 0.4
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [5, 7]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [true],
-"method": &"enable_attack_hitbox"
-}, {
-"args": [false],
-"method": &"enable_attack_hitbox"
-}]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [false],
-"method": &"enable_shield"
-}]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["gun_sword"],
-"method": &"play_sound"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_5h1sb"]
-resource_name = "oldShieldChargeStart"
-length = 0.3
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="7"]
-resource_name = "oldWalkCake"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [4, 5, 6, 5]
-}
-
-[sub_resource type="Animation" id="6"]
-resource_name = "oldWalkShield"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 1]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kfp7m"]
 _data = {
 &"Charge": SubResource("Animation_fp3sg"),
@@ -1184,22 +1009,15 @@ _data = {
 &"Slash": SubResource("Animation_u8xld"),
 &"Surprise": SubResource("Animation_cvi3x"),
 &"SurpriseNS": SubResource("Animation_c0elh"),
+&"Turn": SubResource("Animation_tk834"),
+&"TurnNS": SubResource("Animation_kcsk2"),
 &"Up": SubResource("Animation_2fpom"),
 &"UpHurt": SubResource("Animation_7j64d"),
 &"UpHurtNS": SubResource("Animation_l7n0d"),
 &"UpNS": SubResource("Animation_bw3lo"),
 &"Walk": SubResource("Animation_swqy3"),
-&"WalkNS": SubResource("Animation_droyl"),
-&"oldAttack": SubResource("Animation_kcsk2"),
-&"oldIdleCake": SubResource("9"),
-&"oldIdleShield": SubResource("8"),
-&"oldRESET": SubResource("Animation_o1iq0"),
-&"oldShieldCharge": SubResource("Animation_hycmb"),
-&"oldShieldChargeEnd": SubResource("Animation_ui4tb"),
-&"oldShieldChargeEndAttack": SubResource("Animation_onrqs"),
-&"oldShieldChargeStart": SubResource("Animation_5h1sb"),
-&"oldWalkCake": SubResource("7"),
-&"oldWalkShield": SubResource("6")
+&"WalkDefend": SubResource("Animation_o1iq0"),
+&"WalkNS": SubResource("Animation_droyl")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tk834"]
