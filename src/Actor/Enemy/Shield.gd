@@ -11,7 +11,6 @@ var move_dir: = Vector2.LEFT: set = set_move_dir
 const walk_speed: = Vector2(15.0, 15.0)
 const defend_speed: = Vector2(5.0, 5.0)
 
-var player_is_behind: = false
 var bodies_on_shield: = []
 var bodies_on_shield_ban: = []
 const launch_velocity: Vector2 = Vector2(0, -500.0)
@@ -63,8 +62,11 @@ func setup(): #Reminder: no function called can use await
 	change_state("idle")
 	prev_global_position = global_position
 
-func _on_hit(_damage, _blood_direction):
-	if state == "surprise_shield_up":
+func _on_hit(_damage, blood_direction):
+	if state in ["idle", "walk", "defend"]:
+		if abs(blood_direction.angle_to(move_dir)) <= PI / 18.0 && $SurpriseCooldown.time_left <= 0.0:
+			change_state("surprise")
+	elif state == "surprise_shield_up":
 		if difficulty == 0:
 			ap.play("UpHurtNS")
 		else:
@@ -80,10 +82,6 @@ func enter_idle(_prev_state):
 func do_idle(_delta):
 	velocity = calc_velocity(Vector2.ZERO)
 	move_and_slide()
-
-	if player_is_behind && $SurpriseCooldown.time_left <= 0.0:
-		change_state("surprise")
-		return
 
 	if difficulty >= 1:
 		if player_in_attack_range && $AttackCooldown.time_left <= 0.0:
@@ -112,10 +110,6 @@ func do_walk(delta):
 	if (prev_global_position - global_position).length() <= walk_speed.x * delta * 0.5:
 		global_position.y -= 1.0 * delta
 
-	if player_is_behind && $SurpriseCooldown.time_left <= 0.0:
-		change_state("surprise")
-		return
-
 	if difficulty >= 1:
 		if player_in_attack_range && $AttackCooldown.time_left <= 0.0:
 			change_state("attack")
@@ -137,10 +131,6 @@ func enter_defend(_last_state):
 func do_defend(_delta):
 	if $DefendTimer.time_left <= 0.0:
 		change_state("walk")
-		return
-
-	if player_is_behind && $SurpriseCooldown.time_left <= 0.0:
-		change_state("surprise")
 		return
 
 	if difficulty >= 1:
@@ -330,8 +320,7 @@ func set_move_dir(dir):
 	$Hurtbox.scale.x = scale_x_value
 	$Hitbox.scale.x = scale_x_value
 	$BulletBlocker.scale.x = scale_x_value
-	#$BulletBlocker/StaticBody2D.scale.x = scale_x_value
-	$PlayerBehindDetection.scale.x = scale_x_value
+	#$BulletBlocker/StaticBody2D.scale.x = scale_x_valuep
 	$AttackDetection.scale.x = scale_x_value
 	$AttackHitbox.scale.x = scale_x_value
 	$ShieldChargeDetection.scale.x = scale_x_value
@@ -411,12 +400,6 @@ func _on_AttackDetection_body_entered(_body):
 
 func _on_AttackDetection_body_exited(_body):
 	player_in_attack_range = false
-
-func _on_PlayerBehindDetection_body_entered(_body):
-	player_is_behind = true
-
-func _on_PlayerBehindDetection_body_exited(_body):
-	player_is_behind = false
 
 func _on_BodyOnShieldDetection_body_entered(body):
 	if body != $PhysicsLayerBody:

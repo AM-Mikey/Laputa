@@ -1039,10 +1039,6 @@ size = Vector2(13, 19)
 resource_local_to_scene = true
 size = Vector2(320, 240)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fp3sg"]
-resource_local_to_scene = true
-size = Vector2(21, 8)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_46mcm"]
 resource_local_to_scene = true
 size = Vector2(18, 2)
@@ -1165,16 +1161,6 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=515218732]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_o1iq0")
-
-[node name="PlayerBehindDetection" type="Area2D" parent="." unique_id=975405268]
-visible = false
-collision_layer = 0
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBehindDetection" unique_id=1023334420]
-position = Vector2(9.5, -10)
-shape = SubResource("RectangleShape2D_fp3sg")
-debug_color = Color(0, 1, 0.69803923, 0.41960785)
 
 [node name="SurpriseShieldUpTimer" type="Timer" parent="." unique_id=706186664]
 process_callback = 0
@@ -1301,17 +1287,11 @@ vframes = 13
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_PlayerDetection_body_entered"]
-[connection signal="body_entered" from="PlayerBehindDetection" to="." method="_on_PlayerBehindDetection_body_entered"]
-[connection signal="body_exited" from="PlayerBehindDetection" to="." method="_on_PlayerBehindDetection_body_exited"]
 [connection signal="body_entered" from="BodyOnShieldDetection" to="." method="_on_BodyOnShieldDetection_body_entered"]
 [connection signal="body_exited" from="BodyOnShieldDetection" to="." method="_on_BodyOnShieldDetection_body_exited"]
 [connection signal="body_entered" from="BodyOnShieldBanDetection" to="." method="_on_BodyOnShieldBanDetection_body_entered"]
 [connection signal="body_exited" from="BodyOnShieldBanDetection" to="." method="_on_BodyOnShieldBanDetection_body_exited"]
 [connection signal="body_entered" from="AttackDetection" to="." method="_on_AttackDetection_body_entered"]
 [connection signal="body_exited" from="AttackDetection" to="." method="_on_AttackDetection_body_exited"]
-[connection signal="area_entered" from="AttackHitbox" to="." method="_on_Attack_hitbox_body_entered" binds= ["Attack"]]
-[connection signal="body_entered" from="AttackHitbox" to="." method="_on_Attack_hitbox_body_entered" binds= ["Attack"]]
 [connection signal="body_entered" from="ShieldChargeDetection" to="." method="_on_ShieldChargeDetection_body_entered"]
 [connection signal="body_exited" from="ShieldChargeDetection" to="." method="_on_ShieldChargeDetection_body_exited"]
-[connection signal="area_entered" from="ShieldChargeHitbox" to="." method="_on_Attack_hitbox_body_entered" binds= ["ShieldCharge"]]
-[connection signal="body_entered" from="ShieldChargeHitbox" to="." method="_on_Attack_hitbox_body_entered" binds= ["ShieldCharge"]]
