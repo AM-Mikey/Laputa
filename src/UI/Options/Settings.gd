@@ -111,9 +111,10 @@ func change_bus_volume(value, busname:String):
 
 func _on_camera_pan_speed_changed(value: float) -> void:
 	var camera := get_tree().root.get_camera_2d()
+	var converted_value = 1.0 / value
 	if "h_pan_time" in camera:
-		camera.h_pan_time = value
-		camera.v_pan_time = value
+		camera.h_pan_time = converted_value
+		camera.v_pan_time = converted_value
 	else:
 		push_warning("Failed to modify Camera Pan Speed: h_pan_speed is not found in camera!")
 	%CameraPanSpeed.get_node("Label").text = "Camera Pan Speed: %.1f" % (value)
