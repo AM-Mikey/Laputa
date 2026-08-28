@@ -4,12 +4,15 @@ extends State
 @onready var ap = em.get_node("AnimationPlayer")
 
 func state_process():
+	em.velocity = em.calc_velocity(Vector2.ZERO)
+	em.move_and_slide()
+	em.update_detector_position()
 	if em.target:
 		sm.change_state("Active")
 
 func enter():
-	em.update_detector_position()
 	ap.play("Idle")
+
 
 func exit():
 	pass

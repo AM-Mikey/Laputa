@@ -55,7 +55,6 @@ func _ready():
 
 	$Sprite2D.flip_h = look_dir.x > 0.0
 
-
 	jump_pos = $JumpWaypoint.global_position
 	w.emit_signal("finished_spawn_entities_step")
 
