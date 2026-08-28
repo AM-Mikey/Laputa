@@ -92,10 +92,21 @@ func create_effect(vfx_name):
 	if last_collision != null:
 		match vfx_name:
 			"Land":
-				var land = LAND.instantiate()
-				land.global_position = Vector2(global_position.x, last_collision.get_position().y)
-				land.rotation = last_collision.get_normal().rotated(PI / 2.0).angle()
-				w.front.add_child(land)
+				#land.global_position = Vector2(global_position.x, last_collision.get_position().y)
+				var last_collision_normal = last_collision.get_normal()
+				var ray_param: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.new()
+				ray_param.from = global_position + Vector2(0.0, -3.0)
+				ray_param.to = ray_param.from - last_collision_normal * 5.0
+				ray_param.collide_with_bodies = true
+				ray_param.collide_with_areas = false
+				var world_physics = get_world_2d().direct_space_state
+				var result = world_physics.intersect_ray(ray_param)
+				if !result.is_empty():
+					var land_rotation = last_collision_normal.rotated(PI / 2.0).angle()
+					var land = LAND.instantiate()
+					land.global_position = result["position"]
+					land.rotation = land_rotation
+					w.front.add_child(land)
 			"Bonk":
 				var bonk = BONK.instantiate()
 				bonk.normal = last_collision.get_normal()

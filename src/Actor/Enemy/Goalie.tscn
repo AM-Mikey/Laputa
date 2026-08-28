@@ -13,8 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="11_p2rvj"]
 [ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="12_ax27h"]
 
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(8, 15)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ax27h"]
+radius = 4.0
+height = 15.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e16d4"]
 size = Vector2(11, 15)
@@ -132,18 +133,19 @@ _data = {
 [node name="Goalie" type="CharacterBody2D" unique_id=883282154 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
+floor_max_angle = 0.6981317
 script = ExtResource("1_aho6q")
 speed = Vector2(100, 200)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1630901694]
 position = Vector2(0, -7.5)
-shape = SubResource("1")
+shape = SubResource("CapsuleShape2D_ax27h")
 
 [node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_17672")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=177726214]
 position = Vector2(0, -7.5)
-shape = SubResource("1")
+shape = SubResource("CapsuleShape2D_ax27h")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=2126275973]
 collision_layer = 131072
