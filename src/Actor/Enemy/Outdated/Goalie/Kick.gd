@@ -30,7 +30,8 @@ func exit():
 
 func _on_KickHitbox_area_entered(area: Area2D) -> void:
 	if area.get_collision_layer_value(6): #armor
-		return
+		hitbox.set_deferred("monitoring", false)
+		hitbox.set_deferred("monitorable", false)
 	elif area.get_collision_layer_value(17): #playerhurt
 		area.get_parent().hit(em.kick_damage, Vector2(80 * em.look_dir.x, 0))
 	elif area.get_collision_layer_value(9): #breakable
@@ -39,4 +40,5 @@ func _on_KickHitbox_area_entered(area: Area2D) -> void:
 
 func _on_KickHitbox_body_entered(body: Node2D) -> void:
 	if body.get_collision_layer_value(6): #armor
-		return
+		hitbox.set_deferred("monitoring", false)
+		hitbox.set_deferred("monitorable", false)

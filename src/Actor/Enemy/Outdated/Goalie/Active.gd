@@ -9,7 +9,7 @@ func state_process():
 	em.update_detector_position()
 	if !em.target:
 		sm.change_state("Idle")
-	elif em.player_in_jump_zone and inp.pressed("jump"):
+	elif em.player_in_jump_zone && inp.pressed("jump"):
 		sm.change_state("Rise")
 
 func enter():

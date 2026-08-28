@@ -3,12 +3,11 @@ extends State
 @onready var em = get_parent().get_parent()
 @onready var ap = em.get_node("AnimationPlayer")
 
-
 func state_process():
 	if em.is_on_ceiling():
 		em.create_effect("Bonk")
 
-	if em.is_on_ceiling() or em.position.y <= em.jump_pos.y or !em.target or em.position.y <= em.target.global_position.y:
+	if em.is_on_ceiling() || em.position.y <= em.jump_pos.y || !em.target || em.position.y <= em.target.global_position.y:
 		sm.change_state("fall")
 		return
 	em.velocity = calc_velocity()

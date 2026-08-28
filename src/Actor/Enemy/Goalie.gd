@@ -23,7 +23,6 @@ var player_in_jump_zone: = false
 var kicked: = false
 
 
-
 func _ready():
 	hp = 4
 	damage_on_contact = 2
@@ -121,7 +120,7 @@ func _on_ActiveDetector_body_exited(_body):
 	target = null
 
 
-func _on_JumpDetector_body_entered(body):
+func _on_JumpDetector_body_entered(_body):
 	player_in_jump_zone = true
 	if $StateMachine.current_state == $StateMachine/Active:
 		$StateMachine.change_state("Rise")
@@ -132,5 +131,5 @@ func _on_JumpDetector_body_exited(_body):
 func _on_KickDectector_body_entered(_body):
 	if $StateMachine.current_state == $StateMachine/Rise:
 		$StateMachine.change_state("Kick")
-	elif $StateMachine.current_state == $StateMachine/Fall and $KickGraceTimer.time_left > 0.0:
+	elif $StateMachine.current_state == $StateMachine/Fall && $KickGraceTimer.time_left > 0.0:
 		$StateMachine.change_state("Kick")
