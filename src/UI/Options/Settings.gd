@@ -155,6 +155,14 @@ func load_settings():
 	print("loading settings")
 	var data = read_data()
 
+	var is_data_modified := false
+	for key in default.keys():
+		if not data.keys().has(key):
+			data[key] = default[key]
+			is_data_modified = true
+	if is_data_modified:
+		write_data(data)
+
 	mastervolume.get_node("Slider").value = data["MasterVolume"]
 	on_mastervolume_changed(data["MasterVolume"])
 	musicvolume.get_node("Slider").value = data["MusicVolume"]
