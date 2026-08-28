@@ -26,7 +26,7 @@ var kicked: = false
 
 func _ready():
 	hp = 4
-	damage_on_contact = 1
+	damage_on_contact = 2
 	speed = Vector2(100, 200)
 	gravity = 250
 

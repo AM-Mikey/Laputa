@@ -1,28 +1,19 @@
-[gd_scene format=4]
+[gd_scene format=4 uid="uid://bupkuqc04indk"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_6q8mx"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_jogqi"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_6q8mx"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_jogqi"]
 [ext_resource type="Resource" path="res://src/Background/iedge.tres" id="3_f378h"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_txhq1"]
-[ext_resource type="Texture2D" path="res://assets/Background/IslandEdge.png" id="4_53gin"]
-[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_6aw22"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_upidq"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="10_rvxqs"]
-[ext_resource type="PackedScene" path="res://src/Editor/TitlePreview.tscn" id="11_atco8"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_uo8bs"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_phd2y"]
-[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="12_s0ppf"]
-[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="13_3gt83"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="13_ddw3t"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="13_l0h4m"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="14_8iwyp"]
-[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="15_rrhud"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="16_4fpmn"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="17_bc0da"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="18_bc0da"]
-[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="19_fe88j"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="20_80658"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="22_fe88j"]
+[ext_resource type="Texture2D" uid="uid://maf247vr1ab" path="res://assets/Background/IslandEdge.png" id="4_53gin"]
+[ext_resource type="TileSet" uid="uid://dct5q86qhnom8" path="res://src/Tile/Debug.tres" id="5_6aw22"]
+[ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="11_atco8"]
+[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_uo8bs"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="12_s0ppf"]
+[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="13_3gt83"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="13_ddw3t"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="13_l0h4m"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="15_rrhud"]
+[ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="17_bc0da"]
+[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="19_fe88j"]
 
 [node name="EnGoalieTesting" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
@@ -31,14 +22,12 @@ level_name = "EnGoalieTesting"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1011068996 instance=ExtResource("2_jogqi")]
+[node name="LevelLimiter" parent="." unique_id=1011068996 instance=ExtResource("2_jogqi")]
 visibility_layer = 2
 offset_left = 1599.0
 offset_top = 1600.0
 offset_right = 4431.0
 offset_bottom = 2496.0
-mouse_filter = 2
-script = ExtResource("3_txhq1")
 background_resource = ExtResource("3_f378h")
 texture = ExtResource("4_53gin")
 layers = 5
@@ -102,17 +91,13 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=751148410]
 visibility_layer = 2
 
-[node name="Water" type="MarginContainer" parent="Spawns" unique_id=1800792368 groups=["TriggerSpawns"] instance=ExtResource("13_l0h4m")]
+[node name="Water" parent="Spawns" unique_id=1800792368 instance=ExtResource("13_l0h4m")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
-offset_left = 2736.0
+offset_left = 2160.0
 offset_top = 2000.0
-offset_right = 4352.0
+offset_right = 4321.0
 offset_bottom = 2160.0
-mouse_filter = 2
-script = ExtResource("8_upidq")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20, ""],
@@ -122,22 +107,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="VanishingPoint" type="Area2D" parent="Spawns" unique_id=2052223351 groups=["VanishingPoints"] instance=ExtResource("12_s0ppf")]
+[node name="VanishingPoint" parent="Spawns" unique_id=2052223351 instance=ExtResource("12_s0ppf")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3008, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_rvxqs")
 
-[node name="Goalie" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie" parent="Spawns" unique_id=1199277091 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3176, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -150,32 +126,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie" unique_id=872564127 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie" unique_id=1432238783 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie1" type="Area2D" parent="Spawns" unique_id=1984945580 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie1" parent="Spawns" unique_id=1984945580 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3176, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -188,32 +153,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie1" unique_id=423202646 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie1" unique_id=423202646 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie1" unique_id=1951634029 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie1" unique_id=1951634029 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie2" type="Area2D" parent="Spawns" unique_id=930545101 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie2" parent="Spawns" unique_id=930545101 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2919, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -226,32 +180,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie2" unique_id=1366149508 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie2" unique_id=1366149508 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie2" unique_id=391342996 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie2" unique_id=391342996 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(1, -112)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie3" type="Area2D" parent="Spawns" unique_id=1901015921 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie3" parent="Spawns" unique_id=1901015921 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2455, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -264,32 +207,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie3" unique_id=1136627875 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie3" unique_id=1136627875 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie3" unique_id=2095102575 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie3" unique_id=2095102575 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie4" type="Area2D" parent="Spawns" unique_id=996645201 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie4" parent="Spawns" unique_id=996645201 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2535, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -302,70 +234,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie4" unique_id=1115365192 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie4" unique_id=1115365192 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie4" unique_id=514123546 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie4" unique_id=514123546 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie5" type="Area2D" parent="Spawns" unique_id=2132866644 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie6" parent="Spawns" unique_id=153978613 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
-position = Vector2(2319, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
-actor_path = "uid://bp6f5q8b4w4dr"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"cooldown_time": [1.0, 3, ""],
-"debug": [true, 1, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Billy", 4, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie5" unique_id=1543898431 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
-visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
-tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
-snap_degrees = 180.0
-
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie5" unique_id=506941113 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
-visibility_layer = 2
-position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
-tag_name = "jump_pos"
-lock_x = true
-
-[node name="Goalie6" type="Area2D" parent="Spawns" unique_id=153978613 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
-z_index = 999
 position = Vector2(2007, 1904)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -378,32 +261,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie6" unique_id=2123017336 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie6" unique_id=2123017336 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie6" unique_id=1079966316 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie6" unique_id=1079966316 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie7" type="Area2D" parent="Spawns" unique_id=1373189236 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie7" parent="Spawns" unique_id=1373189236 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1991, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -416,32 +288,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie7" unique_id=518882630 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie7" unique_id=518882630 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie7" unique_id=1720105199 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie7" unique_id=1720105199 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie8" type="Area2D" parent="Spawns" unique_id=526005885 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie8" parent="Spawns" unique_id=526005885 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1975, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -454,32 +315,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie8" unique_id=568527771 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie8" unique_id=568527771 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie8" unique_id=634480090 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie8" unique_id=634480090 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie9" type="Area2D" parent="Spawns" unique_id=314367098 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie9" parent="Spawns" unique_id=314367098 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1959, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -492,32 +342,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie9" unique_id=2019805588 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie9" unique_id=2019805588 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie9" unique_id=1269944563 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie9" unique_id=1269944563 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie10" type="Area2D" parent="Spawns" unique_id=265269619 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie10" parent="Spawns" unique_id=265269619 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2007, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -530,32 +369,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie10" unique_id=772279666 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie10" unique_id=772279666 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie10" unique_id=789802506 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie10" unique_id=789802506 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie11" type="Area2D" parent="Spawns" unique_id=1210439660 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie11" parent="Spawns" unique_id=1210439660 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2071, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -568,32 +396,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie11" unique_id=1181033674 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie11" unique_id=1181033674 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie11" unique_id=1087264896 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie11" unique_id=1087264896 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie12" type="Area2D" parent="Spawns" unique_id=1769002117 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie12" parent="Spawns" unique_id=1769002117 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2023, 1904)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -606,32 +423,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie12" unique_id=2059886330 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie12" unique_id=2059886330 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie12" unique_id=1775228871 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie12" unique_id=1775228871 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie13" type="Area2D" parent="Spawns" unique_id=1039346574 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie13" parent="Spawns" unique_id=1039346574 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2615, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -644,32 +450,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie13" unique_id=149165489 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie13" unique_id=149165489 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie13" unique_id=846988718 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie13" unique_id=846988718 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie14" type="Area2D" parent="Spawns" unique_id=973427187 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie14" parent="Spawns" unique_id=973427187 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2663, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -682,32 +477,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie14" unique_id=1137931302 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie14" unique_id=1137931302 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie14" unique_id=86872491 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie14" unique_id=86872491 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie15" type="Area2D" parent="Spawns" unique_id=1692567228 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie15" parent="Spawns" unique_id=1692567228 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2663, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -720,32 +504,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie15" unique_id=827967954 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie15" unique_id=827967954 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie15" unique_id=1707771027 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie15" unique_id=1707771027 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie16" type="Area2D" parent="Spawns" unique_id=1162682772 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie16" parent="Spawns" unique_id=1162682772 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2519, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -758,32 +531,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie16" unique_id=1722228557 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie16" unique_id=1722228557 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie16" unique_id=1148897374 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie16" unique_id=1148897374 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie17" type="Area2D" parent="Spawns" unique_id=1582272538 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie17" parent="Spawns" unique_id=1582272538 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2455, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -796,32 +558,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie17" unique_id=126353385 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie17" unique_id=126353385 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie17" unique_id=2138400972 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie17" unique_id=2138400972 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie18" type="Area2D" parent="Spawns" unique_id=1904943286 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie18" parent="Spawns" unique_id=1904943286 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2535, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -834,32 +585,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie18" unique_id=1022047441 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie18" unique_id=1022047441 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie18" unique_id=77546752 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie18" unique_id=77546752 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie19" type="Area2D" parent="Spawns" unique_id=1832486936 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie19" parent="Spawns" unique_id=1832486936 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2487, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -872,32 +612,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie19" unique_id=1567303453 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie19" unique_id=1567303453 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie19" unique_id=930802534 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie19" unique_id=930802534 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie20" type="Area2D" parent="Spawns" unique_id=2083897735 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie20" parent="Spawns" unique_id=2083897735 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2503, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -910,32 +639,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie20" unique_id=1496426050 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie20" unique_id=1496426050 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie20" unique_id=67675379 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie20" unique_id=67675379 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie21" type="Area2D" parent="Spawns" unique_id=546717449 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie21" parent="Spawns" unique_id=546717449 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2519, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -948,32 +666,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie21" unique_id=1542222841 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie21" unique_id=1542222841 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie21" unique_id=361501681 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie21" unique_id=361501681 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie22" type="Area2D" parent="Spawns" unique_id=752417822 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie22" parent="Spawns" unique_id=752417822 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2615, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -986,32 +693,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie22" unique_id=1759604515 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie22" unique_id=1759604515 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie22" unique_id=1221528472 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie22" unique_id=1221528472 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie23" type="Area2D" parent="Spawns" unique_id=918963500 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie23" parent="Spawns" unique_id=918963500 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2647, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1024,32 +720,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie23" unique_id=281604696 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie23" unique_id=281604696 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie23" unique_id=1339262757 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie23" unique_id=1339262757 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie24" type="Area2D" parent="Spawns" unique_id=1090259047 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie24" parent="Spawns" unique_id=1090259047 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2631, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1062,32 +747,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie24" unique_id=462113459 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie24" unique_id=462113459 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie24" unique_id=1932558563 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie24" unique_id=1932558563 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie25" type="Area2D" parent="Spawns" unique_id=1403510373 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie25" parent="Spawns" unique_id=1403510373 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2215, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1100,32 +774,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie25" unique_id=604756891 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie25" unique_id=604756891 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie25" unique_id=1840475261 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie25" unique_id=1840475261 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie26" type="Area2D" parent="Spawns" unique_id=805196409 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie26" parent="Spawns" unique_id=805196409 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2199, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1138,32 +801,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie26" unique_id=1161788254 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie26" unique_id=1161788254 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie26" unique_id=758694632 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie26" unique_id=758694632 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie27" type="Area2D" parent="Spawns" unique_id=15507948 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie27" parent="Spawns" unique_id=15507948 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2183, 1856)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1176,32 +828,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie27" unique_id=36853549 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie27" unique_id=36853549 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie27" unique_id=2125990473 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie27" unique_id=2125990473 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie28" type="Area2D" parent="Spawns" unique_id=1914940294 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie28" parent="Spawns" unique_id=1914940294 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2615, 2024)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1214,32 +855,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie28" unique_id=155851929 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie28" unique_id=155851929 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie28" unique_id=153961859 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie28" unique_id=153961859 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie29" type="Area2D" parent="Spawns" unique_id=689863006 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie29" parent="Spawns" unique_id=689863006 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2647, 2024)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1252,32 +882,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie29" unique_id=7415370 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie29" unique_id=7415370 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie29" unique_id=652251987 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie29" unique_id=652251987 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie30" type="Area2D" parent="Spawns" unique_id=1203087619 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie30" parent="Spawns" unique_id=1203087619 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2631, 2024)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1290,32 +909,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie30" unique_id=1528730820 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie30" unique_id=1528730820 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie30" unique_id=1745143932 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie30" unique_id=1745143932 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie31" type="Area2D" parent="Spawns" unique_id=1675149439 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie31" parent="Spawns" unique_id=1675149439 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2215, 2024)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1328,32 +936,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie31" unique_id=1309201549 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie31" unique_id=1309201549 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie31" unique_id=1703765674 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie31" unique_id=1703765674 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie32" type="Area2D" parent="Spawns" unique_id=35550593 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie32" parent="Spawns" unique_id=35550593 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2199, 2024)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1366,32 +963,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie32" unique_id=791629030 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie32" unique_id=791629030 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie32" unique_id=628829465 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie32" unique_id=628829465 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie33" type="Area2D" parent="Spawns" unique_id=977941937 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie33" parent="Spawns" unique_id=977941937 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2183, 2024)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1404,32 +990,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie33" unique_id=1276498131 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie33" unique_id=1276498131 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie33" unique_id=1028610456 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie33" unique_id=1028610456 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie34" type="Area2D" parent="Spawns" unique_id=1368712194 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie34" parent="Spawns" unique_id=1368712194 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2920, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1442,32 +1017,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie34" unique_id=364660804 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie34" unique_id=364660804 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie34" unique_id=354382518 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie34" unique_id=354382518 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie35" type="Area2D" parent="Spawns" unique_id=1859222939 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie35" parent="Spawns" unique_id=1859222939 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3760, 1952)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1480,32 +1044,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie35" unique_id=1091357062 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie35" unique_id=1091357062 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie35" unique_id=1751982627 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie35" unique_id=1751982627 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie36" type="Area2D" parent="Spawns" unique_id=1916492263 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie36" parent="Spawns" unique_id=1916492263 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3632, 1952)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1518,31 +1071,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie36" unique_id=1896296609 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie36" unique_id=1896296609 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie36" unique_id=227088009 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie36" unique_id=227088009 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie37" type="Area2D" parent="Spawns" unique_id=747485573 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie37" parent="Spawns" unique_id=747485573 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3448, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1555,31 +1097,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie37" unique_id=2033362169 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie37" unique_id=2033362169 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie37" unique_id=1057440568 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie37" unique_id=1057440568 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -120)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie38" type="Area2D" parent="Spawns" unique_id=1706834576 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie38" parent="Spawns" unique_id=1706834576 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3432, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1592,32 +1123,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie38" unique_id=1062698275 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie38" unique_id=1062698275 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie38" unique_id=392362883 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie38" unique_id=392362883 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -120)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie39" type="Area2D" parent="Spawns" unique_id=143919362 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie39" parent="Spawns" unique_id=143919362 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3448, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1630,32 +1150,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie39" unique_id=66000280 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie39" unique_id=66000280 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie39" unique_id=280101549 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie39" unique_id=280101549 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -120)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie40" type="Area2D" parent="Spawns" unique_id=952797665 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie40" parent="Spawns" unique_id=952797665 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3432, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1668,32 +1176,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie40" unique_id=1834099808 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie40" unique_id=1834099808 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie40" unique_id=1811873284 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie40" unique_id=1811873284 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -120)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie41" type="Area2D" parent="Spawns" unique_id=362673771 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie41" parent="Spawns" unique_id=362673771 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4256, 2120)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1706,32 +1203,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie41" unique_id=842107320 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie41" unique_id=842107320 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie41" unique_id=944975338 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie41" unique_id=944975338 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie42" type="Area2D" parent="Spawns" unique_id=381324728 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie42" parent="Spawns" unique_id=381324728 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4160, 2120)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1744,31 +1230,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie42" unique_id=1029512246 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie42" unique_id=1029512246 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie42" unique_id=589959036 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie42" unique_id=589959036 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie43" type="Area2D" parent="Spawns" unique_id=1491991131 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie43" parent="Spawns" unique_id=1491991131 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3760, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1781,32 +1256,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie43" unique_id=995995306 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie43" unique_id=995995306 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie43" unique_id=2066196471 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie43" unique_id=2066196471 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie44" type="Area2D" parent="Spawns" unique_id=811705184 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie44" parent="Spawns" unique_id=811705184 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3632, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1819,31 +1283,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie44" unique_id=453126492 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie44" unique_id=453126492 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie44" unique_id=1898280124 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie44" unique_id=1898280124 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie45" type="Area2D" parent="Spawns" unique_id=1964371095 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie45" parent="Spawns" unique_id=1964371095 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3704, 1872)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1856,32 +1309,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie45" unique_id=1566153883 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie45" unique_id=1566153883 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie45" unique_id=1018987654 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie45" unique_id=1018987654 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie46" type="Area2D" parent="Spawns" unique_id=808682814 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie46" parent="Spawns" unique_id=808682814 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3688, 1872)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1894,32 +1336,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie46" unique_id=1996398829 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie46" unique_id=1996398829 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie46" unique_id=733008889 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie46" unique_id=733008889 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie47" type="Area2D" parent="Spawns" unique_id=1915757733 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie47" parent="Spawns" unique_id=1915757733 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3704, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1932,32 +1363,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie47" unique_id=1094678235 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie47" unique_id=1094678235 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie47" unique_id=952139904 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie47" unique_id=952139904 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie48" type="Area2D" parent="Spawns" unique_id=6268043 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie48" parent="Spawns" unique_id=6268043 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3688, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -1970,32 +1389,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie48" unique_id=1589083996 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie48" unique_id=1589083996 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie48" unique_id=436461649 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie48" unique_id=436461649 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie49" type="Area2D" parent="Spawns" unique_id=1844965496 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie49" parent="Spawns" unique_id=1844965496 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4024, 1952)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -2008,32 +1416,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie49" unique_id=1926536494 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie49" unique_id=1926536494 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie49" unique_id=494491075 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie49" unique_id=494491075 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie50" type="Area2D" parent="Spawns" unique_id=1263350495 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie50" parent="Spawns" unique_id=1263350495 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3880, 1952)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -2046,31 +1443,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie50" unique_id=1225421991 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie50" unique_id=1225421991 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie50" unique_id=1084548698 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie50" unique_id=1084548698 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie51" type="Area2D" parent="Spawns" unique_id=1405264603 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie51" parent="Spawns" unique_id=1405264603 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3960, 1776)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -2083,32 +1469,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie51" unique_id=1674234537 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie51" unique_id=1674234537 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie51" unique_id=124949584 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie51" unique_id=124949584 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie52" type="Area2D" parent="Spawns" unique_id=365107748 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie52" parent="Spawns" unique_id=365107748 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3944, 1776)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -2121,32 +1495,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie52" unique_id=1558948237 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie52" unique_id=1558948237 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie52" unique_id=845964929 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie52" unique_id=845964929 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie53" type="Area2D" parent="Spawns" unique_id=1027884295 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie53" parent="Spawns" unique_id=1027884295 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3960, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -2159,32 +1522,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie53" unique_id=1642351676 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie53" unique_id=1642351676 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie53" unique_id=853361590 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie53" unique_id=853361590 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie54" type="Area2D" parent="Spawns" unique_id=902411160 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie54" parent="Spawns" unique_id=902411160 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3944, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -2197,32 +1548,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie54" unique_id=951217466 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie54" unique_id=951217466 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie54" unique_id=1882553895 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie54" unique_id=1882553895 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie55" type="Area2D" parent="Spawns" unique_id=785647807 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie55" parent="Spawns" unique_id=785647807 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4264, 1936)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -2235,32 +1575,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie55" unique_id=1053010436 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie55" unique_id=1053010436 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie55" unique_id=1384305766 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie55" unique_id=1384305766 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie56" type="Area2D" parent="Spawns" unique_id=1050618566 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie56" parent="Spawns" unique_id=1050618566 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4152, 1936)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -2273,31 +1602,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie56" unique_id=773917754 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie56" unique_id=773917754 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie56" unique_id=1948990545 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie56" unique_id=1948990545 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie57" type="Area2D" parent="Spawns" unique_id=408057904 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie57" parent="Spawns" unique_id=408057904 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4216, 1776)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -2310,32 +1628,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie57" unique_id=2034320202 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie57" unique_id=2034320202 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie57" unique_id=1786808671 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie57" unique_id=1786808671 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie58" type="Area2D" parent="Spawns" unique_id=1611409990 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie58" parent="Spawns" unique_id=1611409990 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4200, 1776)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -2348,32 +1654,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie58" unique_id=1779265586 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie58" unique_id=1779265586 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie58" unique_id=224328790 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie58" unique_id=224328790 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie59" type="Area2D" parent="Spawns" unique_id=1097082109 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie59" parent="Spawns" unique_id=1097082109 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(4024, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -2386,32 +1681,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie59" unique_id=1512528419 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie59" unique_id=1512528419 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie59" unique_id=2085367155 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie59" unique_id=2085367155 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie60" type="Area2D" parent="Spawns" unique_id=1638316154 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie60" parent="Spawns" unique_id=1638316154 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3880, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -2424,31 +1708,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie60" unique_id=744525303 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie60" unique_id=744525303 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie60" unique_id=1889327898 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie60" unique_id=1889327898 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -96)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie61" type="Area2D" parent="Spawns" unique_id=1553674648 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie61" parent="Spawns" unique_id=1553674648 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3032, 2208)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -2461,32 +1734,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie61" unique_id=211004576 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie61" unique_id=211004576 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie61" unique_id=1629398112 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie61" unique_id=1629398112 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie62" type="Area2D" parent="Spawns" unique_id=1505328772 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie62" parent="Spawns" unique_id=1505328772 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3096, 2208)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -2499,32 +1761,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie62" unique_id=1886498640 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie62" unique_id=1886498640 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie62" unique_id=369116681 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie62" unique_id=369116681 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="Goalie63" type="Area2D" parent="Spawns" unique_id=2010360427 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Goalie63" parent="Spawns" unique_id=2010360427 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3288, 2432)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "uid://bp6f5q8b4w4dr"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -2537,32 +1788,21 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LookVector" type="Area2D" parent="Spawns/Goalie63" unique_id=347576619 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+[node name="LookVector" parent="Spawns/Goalie63" unique_id=347576619 instance=ExtResource("13_3gt83")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_8iwyp")
 tag_name = "look_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="JumpWaypoint" type="Area2D" parent="Spawns/Goalie63" unique_id=2038816058 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="JumpWaypoint" parent="Spawns/Goalie63" unique_id=2038816058 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(0, -80)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "jump_pos"
 lock_x = true
 
-[node name="BreakBlock" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock" parent="Spawns" unique_id=1449282698 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3152, 1952)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2572,14 +1812,9 @@ properties = {
 "id": [&"BreakBlock", 4, ""]
 }
 
-[node name="BreakBlock1" type="Area2D" parent="Spawns" unique_id=1472473187 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock1" parent="Spawns" unique_id=1472473187 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3152, 1936)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2589,14 +1824,9 @@ properties = {
 "id": [&"BreakBlock1", 4, ""]
 }
 
-[node name="BreakBlock2" type="Area2D" parent="Spawns" unique_id=843811246 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock2" parent="Spawns" unique_id=843811246 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3152, 1920)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2606,14 +1836,9 @@ properties = {
 "id": [&"BreakBlock2", 4, ""]
 }
 
-[node name="BreakBlock3" type="Area2D" parent="Spawns" unique_id=12130771 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock3" parent="Spawns" unique_id=12130771 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3152, 1904)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2623,14 +1848,9 @@ properties = {
 "id": [&"BreakBlock3", 4, ""]
 }
 
-[node name="BreakBlock4" type="Area2D" parent="Spawns" unique_id=1524377331 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock4" parent="Spawns" unique_id=1524377331 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3152, 1888)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2640,14 +1860,9 @@ properties = {
 "id": [&"BreakBlock4", 4, ""]
 }
 
-[node name="BreakBlock5" type="Area2D" parent="Spawns" unique_id=2037713227 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock5" parent="Spawns" unique_id=2037713227 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3152, 1872)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2657,14 +1872,9 @@ properties = {
 "id": [&"BreakBlock5", 4, ""]
 }
 
-[node name="BreakBlock6" type="Area2D" parent="Spawns" unique_id=1485005585 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock6" parent="Spawns" unique_id=1485005585 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3152, 2128)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2674,14 +1884,9 @@ properties = {
 "id": [&"BreakBlock6", 4, ""]
 }
 
-[node name="BreakBlock7" type="Area2D" parent="Spawns" unique_id=395921694 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock7" parent="Spawns" unique_id=395921694 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3152, 2112)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2691,14 +1896,9 @@ properties = {
 "id": [&"BreakBlock7", 4, ""]
 }
 
-[node name="BreakBlock8" type="Area2D" parent="Spawns" unique_id=2033529267 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock8" parent="Spawns" unique_id=2033529267 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3152, 2096)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2708,14 +1908,9 @@ properties = {
 "id": [&"BreakBlock8", 4, ""]
 }
 
-[node name="BreakBlock9" type="Area2D" parent="Spawns" unique_id=1071880454 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock9" parent="Spawns" unique_id=1071880454 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3152, 2080)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2725,14 +1920,9 @@ properties = {
 "id": [&"BreakBlock9", 4, ""]
 }
 
-[node name="BreakBlock10" type="Area2D" parent="Spawns" unique_id=1858718430 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock10" parent="Spawns" unique_id=1858718430 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3152, 2064)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2742,14 +1932,9 @@ properties = {
 "id": [&"BreakBlock10", 4, ""]
 }
 
-[node name="BreakBlock11" type="Area2D" parent="Spawns" unique_id=1649274219 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock11" parent="Spawns" unique_id=1649274219 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3152, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2759,14 +1944,9 @@ properties = {
 "id": [&"BreakBlock11", 4, ""]
 }
 
-[node name="BreakBlock12" type="Area2D" parent="Spawns" unique_id=1996301722 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock12" parent="Spawns" unique_id=1996301722 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3136, 1936)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2776,14 +1956,9 @@ properties = {
 "id": [&"BreakBlock12", 4, ""]
 }
 
-[node name="BreakBlock13" type="Area2D" parent="Spawns" unique_id=265807445 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock13" parent="Spawns" unique_id=265807445 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3136, 1920)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2793,14 +1968,9 @@ properties = {
 "id": [&"BreakBlock13", 4, ""]
 }
 
-[node name="BreakBlock14" type="Area2D" parent="Spawns" unique_id=312243404 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock14" parent="Spawns" unique_id=312243404 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3136, 1904)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2810,14 +1980,9 @@ properties = {
 "id": [&"BreakBlock14", 4, ""]
 }
 
-[node name="BreakBlock15" type="Area2D" parent="Spawns" unique_id=34448885 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock15" parent="Spawns" unique_id=34448885 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3136, 1888)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2827,14 +1992,9 @@ properties = {
 "id": [&"BreakBlock15", 4, ""]
 }
 
-[node name="BreakBlock16" type="Area2D" parent="Spawns" unique_id=1224812470 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock16" parent="Spawns" unique_id=1224812470 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3136, 1872)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2844,14 +2004,9 @@ properties = {
 "id": [&"BreakBlock16", 4, ""]
 }
 
-[node name="BreakBlock17" type="Area2D" parent="Spawns" unique_id=1495800238 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock17" parent="Spawns" unique_id=1495800238 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3136, 2112)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2861,14 +2016,9 @@ properties = {
 "id": [&"BreakBlock17", 4, ""]
 }
 
-[node name="BreakBlock18" type="Area2D" parent="Spawns" unique_id=1220899122 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock18" parent="Spawns" unique_id=1220899122 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3136, 2096)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2878,14 +2028,9 @@ properties = {
 "id": [&"BreakBlock18", 4, ""]
 }
 
-[node name="BreakBlock19" type="Area2D" parent="Spawns" unique_id=1043847607 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock19" parent="Spawns" unique_id=1043847607 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3136, 2080)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2895,14 +2040,9 @@ properties = {
 "id": [&"BreakBlock19", 4, ""]
 }
 
-[node name="BreakBlock20" type="Area2D" parent="Spawns" unique_id=1053305265 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock20" parent="Spawns" unique_id=1053305265 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3136, 2064)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2912,14 +2052,9 @@ properties = {
 "id": [&"BreakBlock20", 4, ""]
 }
 
-[node name="BreakBlock21" type="Area2D" parent="Spawns" unique_id=1465468181 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="BreakBlock21" parent="Spawns" unique_id=1465468181 instance=ExtResource("17_bc0da")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3136, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bc0da")
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
 "crush_enemies": [true, 1, ""],
@@ -2929,14 +2064,9 @@ properties = {
 "id": [&"BreakBlock21", 4, ""]
 }
 
-[node name="Crusher" type="Area2D" parent="Spawns" unique_id=1894259119 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Crusher" parent="Spawns" unique_id=1894259119 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3528, 1904)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -2954,29 +2084,20 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="ToPoint" type="Area2D" parent="Spawns/Crusher" unique_id=621578219 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="ToPoint" parent="Spawns/Crusher" unique_id=621578219 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(-168, 0)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "to_point"
 
-[node name="Shape" type="Node2D" parent="Spawns/Crusher" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("19_fe88j")]
+[node name="Shape" parent="Spawns/Crusher" unique_id=688682803 instance=ExtResource("19_fe88j")]
 visible = false
 visibility_layer = 2
-script = ExtResource("20_80658")
 tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
-[node name="Crusher1" type="Area2D" parent="Spawns" unique_id=22543968 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Crusher1" parent="Spawns" unique_id=22543968 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3528, 2088)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_phd2y")
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -2994,130 +2115,25 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="ToPoint" type="Area2D" parent="Spawns/Crusher1" unique_id=1877531575 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
+[node name="ToPoint" parent="Spawns/Crusher1" unique_id=1877531575 instance=ExtResource("15_rrhud")]
 visibility_layer = 2
 position = Vector2(-168, 0)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_4fpmn")
 tag_name = "to_point"
 
-[node name="Shape" type="Node2D" parent="Spawns/Crusher1" unique_id=1094036166 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("19_fe88j")]
+[node name="Shape" parent="Spawns/Crusher1" unique_id=1094036166 instance=ExtResource("19_fe88j")]
 visible = false
 visibility_layer = 2
-script = ExtResource("20_80658")
 tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
 
-[node name="SpawnPoint" type="Area2D" parent="." unique_id=1710023778 groups=["SpawnPoints"] instance=ExtResource("13_ddw3t")]
+[node name="SpawnPoint" parent="." unique_id=1710023778 instance=ExtResource("13_ddw3t")]
 visibility_layer = 2
 position = Vector2(3000, 1952)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("22_fe88j")
 
-[node name="TitlePreview" type="Area2D" parent="." unique_id=1910190675 groups=["TitlePreviews"] instance=ExtResource("11_atco8")]
+[node name="TitlePreview" parent="." unique_id=1910190675 instance=ExtResource("11_atco8")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(3040, 2336)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_rvxqs")
 zoom = 3.0
-
-[connection signal="body_entered" from="Triggers/KillBoundaryU" to="Triggers/KillBoundaryU" method="_on_body_entered"]
-[connection signal="body_entered" from="Triggers/KillBoundaryD" to="Triggers/KillBoundaryD" method="_on_body_entered"]
-[connection signal="body_entered" from="Triggers/KillBoundaryL" to="Triggers/KillBoundaryL" method="_on_body_entered"]
-[connection signal="body_entered" from="Triggers/KillBoundaryR" to="Triggers/KillBoundaryR" method="_on_body_entered"]
-[connection signal="gui_input" from="Spawns/Water" to="Spawns/Water" method="_on_gui_input"]
-[connection signal="input_event" from="Spawns/Goalie" to="Spawns/Goalie" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie1" to="Spawns/Goalie1" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie2" to="Spawns/Goalie2" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie3" to="Spawns/Goalie3" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie4" to="Spawns/Goalie4" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie5" to="Spawns/Goalie5" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie6" to="Spawns/Goalie6" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie7" to="Spawns/Goalie7" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie8" to="Spawns/Goalie8" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie9" to="Spawns/Goalie9" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie10" to="Spawns/Goalie10" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie11" to="Spawns/Goalie11" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie12" to="Spawns/Goalie12" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie13" to="Spawns/Goalie13" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie14" to="Spawns/Goalie14" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie15" to="Spawns/Goalie15" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie16" to="Spawns/Goalie16" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie17" to="Spawns/Goalie17" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie18" to="Spawns/Goalie18" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie19" to="Spawns/Goalie19" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie20" to="Spawns/Goalie20" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie21" to="Spawns/Goalie21" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie22" to="Spawns/Goalie22" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie23" to="Spawns/Goalie23" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie24" to="Spawns/Goalie24" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie25" to="Spawns/Goalie25" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie26" to="Spawns/Goalie26" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie27" to="Spawns/Goalie27" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie28" to="Spawns/Goalie28" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie29" to="Spawns/Goalie29" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie30" to="Spawns/Goalie30" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie31" to="Spawns/Goalie31" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie32" to="Spawns/Goalie32" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie33" to="Spawns/Goalie33" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie34" to="Spawns/Goalie34" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie35" to="Spawns/Goalie35" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie36" to="Spawns/Goalie36" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie37" to="Spawns/Goalie37" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie38" to="Spawns/Goalie38" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie39" to="Spawns/Goalie39" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie40" to="Spawns/Goalie40" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie41" to="Spawns/Goalie41" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie42" to="Spawns/Goalie42" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie43" to="Spawns/Goalie43" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie44" to="Spawns/Goalie44" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie45" to="Spawns/Goalie45" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie46" to="Spawns/Goalie46" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie47" to="Spawns/Goalie47" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie48" to="Spawns/Goalie48" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie49" to="Spawns/Goalie49" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie50" to="Spawns/Goalie50" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie51" to="Spawns/Goalie51" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie52" to="Spawns/Goalie52" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie53" to="Spawns/Goalie53" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie54" to="Spawns/Goalie54" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie55" to="Spawns/Goalie55" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie56" to="Spawns/Goalie56" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie57" to="Spawns/Goalie57" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie58" to="Spawns/Goalie58" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie59" to="Spawns/Goalie59" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie60" to="Spawns/Goalie60" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie61" to="Spawns/Goalie61" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie62" to="Spawns/Goalie62" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Goalie63" to="Spawns/Goalie63" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock" to="Spawns/BreakBlock" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock1" to="Spawns/BreakBlock1" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock2" to="Spawns/BreakBlock2" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock3" to="Spawns/BreakBlock3" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock4" to="Spawns/BreakBlock4" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock5" to="Spawns/BreakBlock5" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock6" to="Spawns/BreakBlock6" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock7" to="Spawns/BreakBlock7" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock8" to="Spawns/BreakBlock8" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock9" to="Spawns/BreakBlock9" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock10" to="Spawns/BreakBlock10" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock11" to="Spawns/BreakBlock11" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock12" to="Spawns/BreakBlock12" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock13" to="Spawns/BreakBlock13" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock14" to="Spawns/BreakBlock14" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock15" to="Spawns/BreakBlock15" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock16" to="Spawns/BreakBlock16" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock17" to="Spawns/BreakBlock17" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock18" to="Spawns/BreakBlock18" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock19" to="Spawns/BreakBlock19" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock20" to="Spawns/BreakBlock20" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlock21" to="Spawns/BreakBlock21" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Crusher" to="Spawns/Crusher" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Crusher1" to="Spawns/Crusher1" method="_on_input_event"]
