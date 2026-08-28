@@ -11,11 +11,14 @@ const EXPORT = PropertyUsageFlags.PROPERTY_USAGE_SCRIPT_VARIABLE + PropertyUsage
 var active = null
 var active_type: String
 var active_property: String #only use for referencing file dialog's user
+var has_selected_this_frame = false
 
 var copied_entity = null
 
 func _physics_process(_delta):
 	display_tool_labels()
+	if has_selected_this_frame:
+		has_selected_this_frame = false
 
 func exit():
 	on_deselected()
@@ -25,7 +28,9 @@ func exit():
 
 func on_selected(selection, selection_type, from_set = false):
 	if selection.is_in_group("Previews"): return
+	if has_selected_this_frame: return
 	#if active == selection: return #don't reselect
+	has_selected_this_frame = true
 
 	if active: #deselect old
 		if active.has_method("on_editor_deselect"): active.on_editor_deselect()

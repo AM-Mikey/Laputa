@@ -19,6 +19,14 @@ func _ready():
 		visible = false
 		input_pickable = false
 
+#name
+	var name_index = 0
+	for wpl in get_tree().get_nodes_in_group("WaypointLocals"):
+		if wpl == self: break
+		else: name_index +=1
+		if name_index == 0: name = "WaypointLocal"
+		else: name = str("WaypointLocal", name_index)
+
 func _process(_delta):
 	if w.el.get_child_count() > 0:
 		if (prev_global_position != global_position):
@@ -31,7 +39,7 @@ func on_editor_select():
 	$Sprite2D.modulate = Color.RED
 
 func on_editor_deselect():
-	$Sprite2D.modulate = Color.FOREST_GREEN
+	$Sprite2D.modulate = Color(0.0, 0.647, 0.125)
 
 func on_pressed():
 	emit_signal("selected", self, "waypoint_local")

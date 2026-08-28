@@ -269,7 +269,7 @@ func _unhandled_input(event):
 	if event.is_action_released("editor_alt"): alt_held = false
 
 
-	if event is InputEventKey and event.is_pressed() and not event.is_echo() and ctrl_held:
+	if event is InputEventKey && event.is_pressed() && !event.is_echo() && ctrl_held:
 		match event.keycode:
 			KEY_C:
 				if inspector.active_type == "actor_spawn":
@@ -278,6 +278,8 @@ func _unhandled_input(event):
 					copy_prop_spawn()
 				elif inspector.active_type == "trigger_spawn":
 					copy_trigger_spawn()
+				elif inspector.active_type in ["waypoint_local", "waypoint_global", "waypoint_global_spawn", "vu_vector", "vu_rect", "vu_actor"]:
+					copy_misc(inspector.active_type)
 				else:
 					copy_tile_map_selection()
 			KEY_V:
@@ -288,6 +290,8 @@ func _unhandled_input(event):
 					paste_prop_spawn(pos)
 				elif inspector.active_type == "trigger_spawn":
 					paste_trigger_spawn(pos)
+				elif inspector.active_type in ["waypoint_local", "waypoint_global", "waypoint_global_spawn", "vu_vector", "vu_rect", "vu_actor"]:
+					paste_misc(inspector.active_type, pos)
 				else:
 					paste_tiles_from_buffer(pos)
 			KEY_Z:
@@ -295,6 +299,10 @@ func _unhandled_input(event):
 				else: undo()
 			KEY_S:
 				emit_signal("level_saved")
+
+	#double click inputs, only when nothing is selectable
+	if event.is_action_pressed("editor_rmb") && event.double_click:
+		inspector.on_deselected() #slight consequence is in inspector, unsaved values will reset on moving entity
 
 
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
@@ -337,8 +345,6 @@ func _unhandled_input(event):
 	if event.is_action_released("editor_rmb"):
 		rmb_physically_held = false
 		rmb_held = false
-
-
 
 func do_tile_input(event):
 	var mouse_pos = w.get_global_mouse_position()
@@ -914,10 +920,22 @@ func paste_trigger_spawn(pos):
 	trigger.free()
 	inspector.on_selected(trigger_spawn, "trigger_spawn", true)
 
-func copy_waypoint_global_spawn():
-	e_log.lprint("copied waypoint global spawn")
+func copy_misc(type):
+	e_log.lprint("copied type " + type.to_lower())
 	inspector.copied_entity = inspector.active
 
+func paste_misc(type, pos):
+	e_log.lprint("pasted " + type.to_lower())
+	var misc = inspector.copied_entity.duplicate() #flag 8 if this is broken
+	set_owner_recursive(misc, misc)
+	if type in ["waypoint_local", "vu_vector", "vu_rect", "vu_actor", "waypoint_global_spawn"]:
+		inspector.active.get_parent().add_child(misc)
+	elif type in ["waypoint_global"]:
+		waypoint_collection.add_child(misc)
+	else:
+		w.current_level.add_child(misc)
+	misc.global_position = (pos * 16) + Vector2i(8, 8)
+	inspector.on_selected(misc, type, true)
 
 ### GETTERS ###
 

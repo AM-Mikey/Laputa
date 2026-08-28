@@ -28,6 +28,13 @@ signal value_changed(what, old_val, new_val)
 func _ready():
 	if w.el.get_child_count() == 0: #not in editor
 		visible = false
+#name
+	var name_index = 0
+	for vur in get_tree().get_nodes_in_group("VURects"):
+		if vur == self: break
+		else: name_index +=1
+		if name_index == 0: name = "VURect"
+		else: name = str("VURect", name_index)
 
 	tag_name = tag_name
 	editor_color = editor_color
@@ -57,9 +64,9 @@ func get_global_grid_value() -> Rect2i:
 ### SIGNALS
 
 func on_editor_select():
-	modulate = Color(1,0,0,.75)
+	modulate = Color.RED
 	%Mid.disabled = false
 
 func on_editor_deselect():
-	modulate = Color(1,1,1,.75)
+	modulate = Color(1,1,1)
 	%Mid.disabled = true
