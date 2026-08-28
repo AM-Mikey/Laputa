@@ -1047,6 +1047,10 @@ size = Vector2(21, 8)
 resource_local_to_scene = true
 size = Vector2(18, 2)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_32sx3"]
+resource_local_to_scene = true
+size = Vector2(18, 15)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hycmb"]
 resource_local_to_scene = true
 size = Vector2(20, 34)
@@ -1083,7 +1087,6 @@ shape = SubResource("RectangleShape2D_513p3")
 libraries/ = SubResource("AnimationLibrary_kfp7m")
 
 [node name="BulletBlocker" type="Area2D" parent="." unique_id=1594386711]
-visible = false
 collision_layer = 32
 collision_mask = 64
 input_pickable = false
@@ -1112,6 +1115,7 @@ debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_kcsk2")
 disabled = true
+one_way_collision = true
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1159295574]
@@ -1177,7 +1181,6 @@ process_callback = 0
 one_shot = true
 
 [node name="BodyOnShieldDetection" type="Area2D" parent="." unique_id=1550618608]
-visible = false
 collision_layer = 0
 collision_mask = 32769
 monitoring = false
@@ -1186,6 +1189,17 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyOnShieldDetection" unique_id=1123170058]
 position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_46mcm")
+debug_color = Color(1, 1, 0, 0.41960785)
+
+[node name="BodyOnShieldBanDetection" type="Area2D" parent="." unique_id=1486723929]
+collision_layer = 0
+collision_mask = 32769
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyOnShieldBanDetection" unique_id=864455722]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_32sx3")
 debug_color = Color(1, 1, 0, 0.41960785)
 
 [node name="BodyOnShieldTimer" type="Timer" parent="." unique_id=1475173964]
@@ -1226,6 +1240,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="ShieldChargeDetection" type="Area2D" parent="." unique_id=2084182477]
+visible = false
 collision_layer = 0
 monitoring = false
 monitorable = false
@@ -1236,6 +1251,7 @@ shape = SubResource("RectangleShape2D_5h1sb")
 debug_color = Color(1, 1, 0, 0.23529412)
 
 [node name="ShieldChargeHitbox" type="Area2D" parent="." unique_id=564506973]
+visible = false
 collision_layer = 262144
 collision_mask = 65792
 monitoring = false
@@ -1289,6 +1305,8 @@ vframes = 13
 [connection signal="body_exited" from="PlayerBehindDetection" to="." method="_on_PlayerBehindDetection_body_exited"]
 [connection signal="body_entered" from="BodyOnShieldDetection" to="." method="_on_BodyOnShieldDetection_body_entered"]
 [connection signal="body_exited" from="BodyOnShieldDetection" to="." method="_on_BodyOnShieldDetection_body_exited"]
+[connection signal="body_entered" from="BodyOnShieldBanDetection" to="." method="_on_BodyOnShieldBanDetection_body_entered"]
+[connection signal="body_exited" from="BodyOnShieldBanDetection" to="." method="_on_BodyOnShieldBanDetection_body_exited"]
 [connection signal="body_entered" from="AttackDetection" to="." method="_on_AttackDetection_body_entered"]
 [connection signal="body_exited" from="AttackDetection" to="." method="_on_AttackDetection_body_exited"]
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_Attack_hitbox_body_entered" binds= ["Attack"]]

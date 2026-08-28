@@ -13,6 +13,7 @@ const defend_speed: = Vector2(5.0, 5.0)
 
 var player_is_behind: = false
 var bodies_on_shield: = []
+var bodies_on_shield_ban: = []
 const launch_velocity: Vector2 = Vector2(0, -500.0)
 
 var attack_damage: = 3.0
@@ -178,8 +179,9 @@ func enter_surprise_shield_up(_prev_state):
 		ap.play("UpNS")
 	else:
 		ap.play("Up")
-	$BulletBlocker/StaticBody2D.set_collision_layer_value(4, true)
+	$BulletBlocker/StaticBody2D.set_collision_layer_value(10, true)
 	$BodyOnShieldDetection.monitoring = true
+	$BodyOnShieldBanDetection.monitoring = true
 	$SurpriseShieldUpTimer.start()
 	$Hurtbox/NoShield.disabled = false
 	$Hurtbox/Side.disabled = true
@@ -190,6 +192,7 @@ func enter_surprise_shield_up(_prev_state):
 	$BulletBlocker/StaticBody2D/Up.disabled = false
 	$BulletBlocker/StaticBody2D/Side.disabled = true
 	bodies_on_shield = []
+	bodies_on_shield_ban = []
 
 func do_surprise_shield_up(_delta):
 	velocity = calc_velocity(Vector2.ZERO)
@@ -197,7 +200,7 @@ func do_surprise_shield_up(_delta):
 
 	if $SurpriseShieldUpTimer.time_left <= 0.0:
 		change_state("surprise_end")
-	elif bodies_on_shield.size() > 0 && $BodyOnShieldTimer.time_left <= 0.0:
+	elif get_valid_body_on_shield().size() > 0 && $BodyOnShieldTimer.time_left <= 0.0:
 		change_state("surprise_launch")
 
 func exit_surprise_shield_up(_next_state):
@@ -222,6 +225,7 @@ func do_surprise_launch(_delta):
 func enter_surprise_end(_prev_state):
 	move_dir = -move_dir
 	$BodyOnShieldDetection.monitoring = false
+	$BodyOnShieldBanDetection.monitoring = false
 	$Hurtbox/NoShield.disabled = true
 	$Hurtbox/Side.disabled = false
 	$Hitbox/NoShield.disabled = true
@@ -230,7 +234,7 @@ func enter_surprise_end(_prev_state):
 	$BulletBlocker/Side.disabled = false
 	$BulletBlocker/StaticBody2D/Up.disabled = true
 	$BulletBlocker/StaticBody2D/Side.disabled = false
-	$BulletBlocker/StaticBody2D.set_collision_layer_value(4, false)
+	$BulletBlocker/StaticBody2D.set_collision_layer_value(10, false)
 	if difficulty == 0:
 		ap.play("LowerNS")
 	else:
@@ -350,7 +354,7 @@ func set_sprite_offset():
 	$Sprite2D.position = Vector2(8.0, -16.0) * Vector2(move_dir.x, 1.0)
 
 func launch():
-	for body in bodies_on_shield:
+	for body in get_valid_body_on_shield():
 		if body.get_collision_layer_value(16):
 			var main_body = body.get_parent()
 			if main_body is RigidBody2D:
@@ -373,6 +377,20 @@ func check_player_in_shield_charge_range() -> bool:
 	if !collision.is_empty() && collision["collider"] is not TileMapLayer && collision["collider"].get_collision_layer_value(1):
 		return true
 	return false
+
+func update_actor_on_shield():
+	var valid_bodies_size = get_valid_body_on_shield().size()
+	if valid_bodies_size > 0:
+		$BodyOnShieldTimer.start()
+		$SurpriseShieldUpTimer.paused = true
+	else:
+		$BodyOnShieldTimer.stop()
+		$SurpriseShieldUpTimer.paused = false
+
+func get_valid_body_on_shield() -> Array:
+	var result = bodies_on_shield.filter(func (ele): return ele not in bodies_on_shield_ban)
+	return result
+
 
 ### SIGNALS ###
 func _on_BulletBlocker_body_entered(body):
@@ -402,15 +420,23 @@ func _on_PlayerBehindDetection_body_exited(_body):
 
 func _on_BodyOnShieldDetection_body_entered(body):
 	if body != $PhysicsLayerBody:
-		$BodyOnShieldTimer.start()
-		$SurpriseShieldUpTimer.paused = true
 		bodies_on_shield.append(body)
+		update_actor_on_shield()
 
 func _on_BodyOnShieldDetection_body_exited(body):
 	if body != $PhysicsLayerBody:
-		$BodyOnShieldTimer.stop()
-		$SurpriseShieldUpTimer.paused = false
 		bodies_on_shield.erase(body)
+		update_actor_on_shield()
+
+func _on_BodyOnShieldBanDetection_body_entered(body: Node2D) -> void:
+	if body != $PhysicsLayerBody:
+		bodies_on_shield_ban.append(body)
+		update_actor_on_shield()
+
+func _on_BodyOnShieldBanDetection_body_exited(body: Node2D) -> void:
+	if body != $PhysicsLayerBody:
+		bodies_on_shield_ban.erase(body)
+		update_actor_on_shield()
 
 func _on_ShieldChargeDetection_body_entered(_body):
 	player_in_shield_charge_range = true
