@@ -68,10 +68,14 @@ var editor_delete_blacklist = ["background", "spawn_point", "tile_map"]
 ### SETUP ###
 
 func _ready():
+	var dialog_layer := w.get_node("DialogLayer")
+	if dialog_layer.has_node("DialogBox"):
+		dialog_layer.get_node("DialogBox").exit()
+	
 	#connect("tile_map_selected", Callable(inspector, "on_selected").bind("tile_map"))
 	connect("level_selected", Callable(inspector, "on_selected").bind("level"))
 	w.el.add_child(EDITOR_CAMERA.instantiate())
-
+	
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 	enter()
