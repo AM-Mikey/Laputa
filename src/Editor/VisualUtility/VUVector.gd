@@ -39,7 +39,8 @@ func _ready():
 		visible = false
 #name
 	var name_index = 0
-	for vuv in get_tree().get_nodes_in_group("VUVectors"):
+	for vuv in get_parent().get_children():
+		if !vuv.is_in_group("VUVectors"): break
 		if vuv == self: break
 		else: name_index +=1
 		if name_index == 0: name = "VUVector"

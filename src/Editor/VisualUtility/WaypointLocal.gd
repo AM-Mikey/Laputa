@@ -21,7 +21,8 @@ func _ready():
 
 #name
 	var name_index = 0
-	for wpl in get_tree().get_nodes_in_group("WaypointLocals"):
+	for wpl in get_parent().get_children():
+		if !wpl.is_in_group("WaypointLocals"): break
 		if wpl == self: break
 		else: name_index +=1
 		if name_index == 0: name = "WaypointLocal"

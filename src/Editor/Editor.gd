@@ -71,11 +71,11 @@ func _ready():
 	var dialog_layer := w.get_node("DialogLayer")
 	if dialog_layer.has_node("DialogBox"):
 		dialog_layer.get_node("DialogBox").exit()
-	
+
 	#connect("tile_map_selected", Callable(inspector, "on_selected").bind("tile_map"))
 	connect("level_selected", Callable(inspector, "on_selected").bind("level"))
 	w.el.add_child(EDITOR_CAMERA.instantiate())
-	
+
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 	enter()
@@ -878,7 +878,6 @@ func paste_actor_spawn(pos):
 	set_owner_recursive(actor_spawn, actor_spawn)
 	actor_spawn.global_position = (pos * 16) + Vector2i(8, 16)
 	spawn_collection.add_child(actor_spawn)
-
 	#initialize but only the parts we want to use
 	actor_spawn.properties["id"] = [actor_spawn.name, TYPE_STRING, ""]
 	var actor = load(actor_spawn.actor_path).instantiate()
@@ -897,7 +896,6 @@ func paste_prop_spawn(pos):
 	set_owner_recursive(prop_spawn, prop_spawn)
 	prop_spawn.global_position = (pos * 16)
 	spawn_collection.add_child(prop_spawn)
-
 	#initialize but only the parts we want to use
 	prop_spawn.properties["id"] = [prop_spawn.name, TYPE_STRING, ""]
 	var prop = load(prop_spawn.prop_path).instantiate()
@@ -916,7 +914,6 @@ func paste_trigger_spawn(pos):
 	set_owner_recursive(trigger_spawn, trigger_spawn)
 	trigger_spawn.global_position = (pos * 16)
 	spawn_collection.add_child(trigger_spawn)
-
 	#initialize but only the parts we want to use
 	trigger_spawn.properties["id"] = [trigger_spawn.name, TYPE_STRING, ""]
 	var trigger = load(trigger_spawn.trigger_path).instantiate()
@@ -1075,6 +1072,7 @@ func set_owner_recursive(node: Node, new_owner: Node):
 	for child in node.get_children():
 		child.owner = new_owner
 		set_owner_recursive(child, new_owner)
+
 
 ### UI ###
 func set_menu_alpha():
