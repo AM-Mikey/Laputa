@@ -3,13 +3,13 @@ extends Camera2D
 var h_dir = -1
 var homing_camera = false
 
-@export var h_pan_min_speed = 0.5
-@export var h_pan_time = 1.5
-@export var v_pan_time = 1.5
-@export var h_pan_delay = 0.0
-@export var v_pan_delay = 0.0
-@export var h_pan_distance = 2.0
-@export var v_pan_distance = 2.0
+@export var h_pan_min_speed := 0.5
+@export var h_pan_time := 1.5
+@export var v_pan_time := 1.5
+@export var h_pan_delay := 0.0
+@export var v_pan_delay := 0.0
+@export var h_pan_distance := 2.0
+@export var v_pan_distance := 2.0
 @export var curve_elastic: Curve
 #@export var control_overshoot_distance = 4.0
 
@@ -20,6 +20,13 @@ var h_tween: Tween
 var v_tween: Tween
 var control_tween: Tween
 var control_return_tween: Tween
+var screen_shake_tween: Tween
+
+var screen_shake_enabled := true
+var noise := FastNoiseLite.new()
+var active_shakes: Array[ScreenShake] = []
+var active_impulses: Array[ScreenImpulse] = []
+var default_impulse_curve: Curve
 
 var adjusting_level_limits = false
 var adjusted_limit_left: float
@@ -32,11 +39,18 @@ var control_active := false
 var control_target: Node = null #reference to a node, not strictly necessary but saves performance
 
 func _ready():
+	noise.frequency = 1.0  #baseline shake
+	default_impulse_curve = Curve.new()
+	default_impulse_curve.add_point(Vector2(0.0, 0.0))
+	default_impulse_curve.add_point(Vector2(0.15, 1.0))   # snap out fast
+	default_impulse_curve.add_point(Vector2(1.0, 0.0))    # ease back slow
+	default_impulse_curve.set_point_right_mode(0, Curve.TANGENT_LINEAR)
+
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 	control_processing()
 
-func _physics_process(_delta):
+func _process(delta):
 	#print("offset: ", offset, "limit left: ", limit_left)
 	if !control_active: #regular camera
 		if h_dir != pc.look_dir.x:
@@ -51,6 +65,9 @@ func _physics_process(_delta):
 			if inp.pressed("look_up",1) or inp.pressed("look_down",1) \
 			or inp.released("look_up") or inp.released("look_down"):
 				pan_vertical(get_v_dir())
+
+	if screen_shake_enabled:
+		process_shake(delta)
 	#else:
 		#var ll = w.current_level.get_node("LevelLimiter")
 		#on_limit_camera(ll.offset_left, ll.offset_right, ll.offset_top, ll.offset_bottom) #set limit every frame
@@ -88,6 +105,44 @@ func reset(): #TODO: REMOVE THESE AWAITS IT CAUSES SHIT TO MULTITHREAD
 	position_smoothing_enabled = true
 
 
+### Screen Shake ###
+
+#write code to prevent shake if rumble is going on and vice versa
+func process_shake(delta):
+	var total_offset := Vector2.ZERO
+	var t := Time.get_ticks_msec() / 1000.0
+	#shake
+	for s in active_shakes.duplicate():
+		s.elapsed += delta
+		if s.elapsed >= s.duration:
+			active_shakes.erase(shake)
+			continue
+		var ratio = s.elapsed / s.duration
+		var decay = 1.0 - ratio  # linear falloff; use pow(1.0 - ratio, 2) for a snappier cutoff
+		var nx := noise.get_noise_1d(t * s.frequency + s.seed_x)
+		var ny := noise.get_noise_1d(t * s.frequency + s.seed_y)
+		total_offset += Vector2(nx, ny) * s.amplitude * decay
+	#impulse
+	for i in active_impulses.duplicate():
+		i.elapsed += delta
+		if i.elapsed >= i.duration:
+			active_impulses.erase(impulse)
+			continue
+		var ratio = i.elapsed / i.duration
+		var weight = i.curve.sample(ratio)
+		total_offset += i.direction * i.strength * weight
+
+	if total_offset.length_squared() > 0.000001:
+		offset = total_offset
+	else:
+		offset = Vector2(0.001, 0.001)
+
+
+func shake(pixels: float, duration: float = 0.4, frequency: float = 4.0):
+	active_shakes.append(ScreenShake.new(pixels, duration, frequency))
+
+func impulse(direction: Vector2, strength: float, duration: float = 0.15, curve: Curve = null):
+	active_impulses.append(ScreenImpulse.new(direction, strength, duration, curve if curve else default_impulse_curve))
 
 ### MANUAL CONTROL
 

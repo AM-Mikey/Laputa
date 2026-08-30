@@ -1,9 +1,13 @@
-[gd_scene format=3 uid="uid://3uxdrhtpnk0"]
+[gd_scene format=3 uid="uid://ck6rcpgpi8c1m"]
 
 [ext_resource type="Script" uid="uid://dgx5afpu8m3bo" path="res://src/Actor/Enemy/Golem.gd" id="1_wvikc"]
 [ext_resource type="Texture2D" uid="uid://cc8ipptje33gi" path="res://assets/Actor/Enemy/Golem.png" id="2_4jdro"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_ieiyb"]
 [ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="4_tf2u3"]
+
+[sub_resource type="Curve" id="Curve_wvikc"]
+_data = [Vector2(0, 0), 0.0, 10.229628, 0, 0, Vector2(0.22947763, 1), 0.0, 0.0, 0, 0, Vector2(0.49813432, 0), 0.0, 0.0, 0, 0, Vector2(0.7518657, 0.27721614), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sy72i"]
 size = Vector2(32, 32)
@@ -20,11 +24,123 @@ size = Vector2(32, 33)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2e12y"]
 size = Vector2(32, 6)
 
+[sub_resource type="Animation" id="Animation_4jdro"]
+resource_name = "Charge"
+length = 0.9
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"charge_shake"
+}, {
+"args": [],
+"method": &"charge_shake"
+}, {
+"args": [],
+"method": &"charge_shake"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_wvikc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ieiyb"]
+resource_name = "Walk"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_tf2u3"]
+resource_name = "WallSlam"
+length = 0.8
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"slam_shake"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4jdro"]
+_data = {
+&"Charge": SubResource("Animation_4jdro"),
+&"RESET": SubResource("Animation_wvikc"),
+&"Walk": SubResource("Animation_ieiyb"),
+&"WallSlam": SubResource("Animation_tf2u3")
+}
+
 [node name="Golem" type="CharacterBody2D" unique_id=147745042 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 floor_max_angle = 0.87266463
 script = ExtResource("1_wvikc")
+charge_impulse_curve = SubResource("Curve_wvikc")
 debug = true
 do_bubbles = false
 editor_hidden = false
@@ -32,6 +148,7 @@ editor_hidden = false
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1818064119]
 position = Vector2(0, -32)
 texture = ExtResource("2_4jdro")
+vframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1482682800]
 position = Vector2(0, -16)
@@ -85,6 +202,10 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Standable" unique_id=1154934702]
 position = Vector2(0, -29)
 shape = SubResource("RectangleShape2D_2e12y")
+one_way_collision = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=476341075]
+libraries/ = SubResource("AnimationLibrary_4jdro")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

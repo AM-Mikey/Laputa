@@ -1,5 +1,7 @@
 extends Gun
 
+@export var recoil_curve : Curve
+
 func _ready():
 	display_name = "Roberta"
 	description = "Provides reliable rapid fire. Its large ammo capacity is stored in its stock."
@@ -38,5 +40,7 @@ func _set_level(val: int) -> void:
 			max_xp = 10
 
 func activate():
+	#if f.pc(): #and camera gun recoil is true
+		#f.pc().get_node("PlayerCamera").impulse(pc.shoot_dir * -1, 1.5, 0.1, recoil_curve)
 	var bullet = spawn_bullet(get_origin(), pc.shoot_dir)
 	bullet.instant_fizzle_check()
