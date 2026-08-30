@@ -30,7 +30,8 @@ func _ready():
 		visible = false
 #name
 	var name_index = 0
-	for vur in get_tree().get_nodes_in_group("VURects"):
+	for vur in get_parent().get_children():
+		if !vur.is_in_group("VURects"): break
 		if vur == self: break
 		else: name_index +=1
 		if name_index == 0: name = "VURect"

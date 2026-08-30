@@ -192,7 +192,8 @@ func _ready():
 		visible = false
 #name
 	var name_index = 0
-	for vua in get_tree().get_nodes_in_group("VUActors"):
+	for vua in get_parent().get_children():
+		if !vua.is_in_group("VUActors"): break
 		if vua == self: break
 		else: name_index +=1
 		if name_index == 0: name = "VUActor"

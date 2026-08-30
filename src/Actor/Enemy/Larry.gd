@@ -17,6 +17,7 @@ func setup(): #Reminder: no function called can use await
 
 	rng.randomize()
 	move_dir = Vector2(sign(rng.randf_range(-1, 1)), 0)
+	$Sprite2D.flip_h = false if move_dir == Vector2.LEFT else true
 	idle_time = rng.randf_range(0.5, 2)
 	active_time = rng.randf_range(2, 4)
 	$Timer.start(active_time)
@@ -24,8 +25,7 @@ func setup(): #Reminder: no function called can use await
 	w.emit_signal("finished_spawn_entities_step")
 
 func _physics_process(_delta):
-	if disabled or dead:
-		return
+	if disabled or dead: return
 	velocity = calc_velocity(move_dir)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
@@ -34,6 +34,7 @@ func _physics_process(_delta):
 	if is_on_wall():
 		if !idle and $TurnCooldown.time_left <= 0.0:
 			move_dir *= -1.0
+			$Sprite2D.flip_h = !$Sprite2D.flip_h
 			$TurnCooldown.start()
 
 func wait():
@@ -45,6 +46,7 @@ func wait():
 	await $Timer.timeout
 	rng.randomize()
 	move_dir = Vector2(sign(rng.randf_range(-1, 1)), 0)
+	$Sprite2D.flip_h = false if move_dir == Vector2.LEFT else true
 	idle = false
 	speed = old_speed
 	$Timer.start(active_time)
@@ -53,20 +55,11 @@ func wait():
 func animate():
 	if !idle:
 		if velocity.length() > 1.0:
-			if move_dir == Vector2.LEFT:
-				$AnimationPlayer.play("WalkLeft")
-			if move_dir == Vector2.RIGHT:
-				$AnimationPlayer.play("WalkRight")
+			$AnimationPlayer.play("Walk")
 		else:
-			if move_dir == Vector2.LEFT:
-				$AnimationPlayer.play("IdleLeft")
-			if move_dir == Vector2.RIGHT:
-				$AnimationPlayer.play("IdleRight")
+			$AnimationPlayer.play("Idle")
 	else:
-		if move_dir == Vector2.LEFT:
-			$AnimationPlayer.play("IdleLeft")
-		if move_dir == Vector2.RIGHT:
-			$AnimationPlayer.play("IdleRight")
+		$AnimationPlayer.play("Idle")
 
 
 func _on_Timer_timeout():

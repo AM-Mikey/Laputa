@@ -19,6 +19,8 @@ func setup(): #Reminder: no function called can use await
 		base_gravity_scale = 0.0
 		water_gravity_scale = 0.0
 		gravity_scale = 0.0
+	else:
+		$Sprite2D.frame = 0
 	w.emit_signal("finished_spawn_entities_step")
 
 func on_break(method = "cut"):
@@ -40,6 +42,10 @@ func on_break(method = "cut"):
 				$Sprite2D.frame = 2
 	else:
 		$Sprite2D.visible = false
+
+	var enemy = load($VUActor.actor_path).instantiate()
+	enemy.global_position = $VUActor.global_position
+	w.current_level.get_node("Actors").add_child(enemy)
 
 
 func _physics_process(_delta):

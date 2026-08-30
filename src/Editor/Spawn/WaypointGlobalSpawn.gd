@@ -19,7 +19,8 @@ func _ready():
 		input_pickable = false
 #name
 	var name_index = 0
-	for wpgs in get_tree().get_nodes_in_group("WaypointGlobalSpawns"):
+	for wpgs in get_parent().get_children():
+		if !wpgs.is_in_group("WaypointGlobalSpawns"): break
 		if wpgs == self: break
 		else: name_index +=1
 		if name_index == 0: name = "WaypointGlobalSpawn"

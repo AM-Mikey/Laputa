@@ -21,8 +21,8 @@ func _ready(): #Reminder: no function called can use await
 		if name_index == 0: name = "WaypointGlobal"
 		else: name = str("WaypointGlobal", name_index)
 
-	await get_tree().process_frame #it seems like the WPGs set up too fast without this, and the signal doesn't have time to reset properly
-	w.emit_signal("finished_spawn_entities_step")
+		await get_tree().process_frame #it seems like the WPGs set up too fast without this, and the signal doesn't have time to reset properly
+		w.emit_signal("finished_spawn_entities_step")
 
 func activate():
 	active_count += 1
