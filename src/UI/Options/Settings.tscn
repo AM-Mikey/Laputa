@@ -20,7 +20,7 @@ grow_vertical = 2
 theme = ExtResource("2")
 script = ExtResource("6")
 mastervolume_path = NodePath("Margin/Scroll/VBox/MasterVolume")
-sfxvolume_path = NodePath("Margin/Scroll/VBox/HBox/VBoxContainer/SFXVolume")
+sfxvolume_path = NodePath("Margin/Scroll/VBox/HBox/VBoxContainer2/SFXVolume")
 musicvolume_path = NodePath("Margin/Scroll/VBox/HBox/VBoxContainer/MusicVolume")
 displaymode_path = NodePath("Margin/Scroll/VBox/DisplayMode/OptionButton")
 resolutionscale_path = NodePath("Margin/Scroll/VBox/ResolutionScale/OptionButton")
@@ -103,17 +103,42 @@ scrollable = false
 tick_count = 11
 ticks_on_borders = true
 
-[node name="SFXVolume" type="VBoxContainer" parent="Margin/Scroll/VBox/HBox/VBoxContainer" unique_id=1148084297]
+[node name="CameraPanSpeed" type="VBoxContainer" parent="Margin/Scroll/VBox/HBox/VBoxContainer" unique_id=363084637]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Margin/Scroll/VBox/HBox/VBoxContainer/SFXVolume" unique_id=525575905]
+[node name="Label" type="Label" parent="Margin/Scroll/VBox/HBox/VBoxContainer/CameraPanSpeed" unique_id=1522527136]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Camera Pan Speed: 1.5"
+
+[node name="Slider" type="HSlider" parent="Margin/Scroll/VBox/HBox/VBoxContainer/CameraPanSpeed" unique_id=566326898]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.1
+max_value = 2.0
+step = 0.1
+value = 1.0
+scrollable = false
+tick_count = 11
+ticks_on_borders = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Margin/Scroll/VBox/HBox" unique_id=1216060655]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SFXVolume" type="VBoxContainer" parent="Margin/Scroll/VBox/HBox/VBoxContainer2" unique_id=1148084297]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Margin/Scroll/VBox/HBox/VBoxContainer2/SFXVolume" unique_id=525575905]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SFX Volume: 100%"
 
-[node name="Slider" type="HSlider" parent="Margin/Scroll/VBox/HBox/VBoxContainer/SFXVolume" unique_id=1640422647]
+[node name="Slider" type="HSlider" parent="Margin/Scroll/VBox/HBox/VBoxContainer2/SFXVolume" unique_id=1640422647]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 10.0
@@ -123,6 +148,7 @@ tick_count = 11
 ticks_on_borders = true
 
 [node name="Control" type="Control" parent="Margin/Scroll/VBox/HBox" unique_id=1718457029]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -251,7 +277,8 @@ icon_alignment = 1
 
 [connection signal="value_changed" from="Margin/Scroll/VBox/MasterVolume/Slider" to="." method="on_mastervolume_changed"]
 [connection signal="value_changed" from="Margin/Scroll/VBox/HBox/VBoxContainer/MusicVolume/Slider" to="." method="on_musicvolume_changed"]
-[connection signal="value_changed" from="Margin/Scroll/VBox/HBox/VBoxContainer/SFXVolume/Slider" to="." method="on_sfxvolume_changed"]
+[connection signal="value_changed" from="Margin/Scroll/VBox/HBox/VBoxContainer/CameraPanSpeed/Slider" to="." method="_on_camera_pan_speed_changed"]
+[connection signal="value_changed" from="Margin/Scroll/VBox/HBox/VBoxContainer2/SFXVolume/Slider" to="." method="on_sfxvolume_changed"]
 [connection signal="item_selected" from="Margin/Scroll/VBox/DisplayMode/OptionButton" to="." method="on_displaymode_changed"]
 [connection signal="item_selected" from="Margin/Scroll/VBox/ResolutionScale/OptionButton" to="." method="on_resolutionscale_changed"]
 [connection signal="toggled" from="Margin/Scroll/VBox/MouseLock/CheckButton" to="." method="on_mouselock"]
