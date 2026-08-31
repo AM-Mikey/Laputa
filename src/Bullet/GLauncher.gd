@@ -37,7 +37,12 @@ func _on_physics_process(delta):
 		if abs(velocity.y) > minimum_speed:
 			velocity *= bounciness
 			velocity = velocity.bounce(collision.get_normal())
+			touched_floor = true
+			$BounceGraceTimer.start()
 			am.play("gun_grenade_bounce", self)
+			var collider = collision.get_collider()
+			if collider is not TileMapLayer and collider.get_collision_layer_value(6):
+				collider.blocked.emit(self, collider)
 		else:
 			velocity = Vector2.ZERO
 		if velocity.x < 0:
@@ -86,8 +91,14 @@ func is_world_blocking(target) -> bool:
 	$WorldCast.target_position = to_local(target_center_global_position)
 	$WorldCast.force_raycast_update()
 	if $WorldCast.is_colliding():
-		print("World in way of grenade")
-		return true
+		var collider = $WorldCast.get_collider()
+		if collider is not TileMapLayer and collider.get_collision_layer_value(6):
+			print("Armor in the way of explosion")
+			collider.blocked.emit($ExplosionDetector, collider)
+			return true
+		else:
+			print("World in way of grenade")
+			return true
 	else:
 		return false
 
@@ -96,18 +107,19 @@ func is_world_blocking(target) -> bool:
 ### SIGNALS ###
 
 func _on_CollisionDetector_body_entered(body):
-	if body is TileMapLayer:
-		if body.tile_set.get_physics_layer_collision_layer(0) == 8: #world (layer value)
-			touched_floor = true
+	if body is not TileMapLayer:
+		if body.get_collision_layer_value(6): #armor
+			armor_check(body)
 
 func _on_CollisionDetector_area_entered(area): #shadows
 	#enemyhurt
 	if area.get_collision_layer_value(18):
-		if not touched_floor:
-			area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
-		else:
-			area.get_parent().hit(int(damage/2.0), get_blood_dir(area.get_parent()))
-		queue_free()
+		if $BounceGraceTimer.time_left <= 0.0:
+			if not touched_floor:
+				area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
+			else:
+				area.get_parent().hit(int(damage/2.0), get_blood_dir(area.get_parent()))
+			queue_free()
 
 func _on_Timer_timeout():
 	$ExplosionDetector/CollisionShape2D.set_deferred("disabled", false)

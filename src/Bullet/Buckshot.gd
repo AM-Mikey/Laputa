@@ -31,7 +31,8 @@ func _on_CollisionDetector_body_entered(body): #shadows parent
 			body.get_parent().hit(damage, get_blood_dir(body))
 		#armor #TODO:fix this interaction
 		elif body.get_collision_layer_value(6):
-			do_fizzle("armor")
+			if shield_check(body):
+				do_fizzle("armor")
 
 
 func _on_Timer_timeout():

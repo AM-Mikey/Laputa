@@ -54,7 +54,7 @@ func setup(): #Reminder: no function called can use await
 	$ShieldChargeDetection.monitoring = difficulty == 2
 	$ShieldChargeDetection/CollisionShape2D.shape.size.x = shield_charge_distance + 20.0
 	$ShieldChargeDetection/CollisionShape2D.position = -$ShieldChargeDetection/CollisionShape2D.shape.size / 2.0
-	$BulletBlocker/StaticBody2D.add_collision_exception_with(self)
+	$Armor.add_collision_exception_with(self)
 	move_dir = $MoveDir.direction.snappedf(1.0)
 
 	w.emit_signal("finished_spawn_entities_step")
@@ -169,7 +169,7 @@ func enter_surprise_shield_up(_prev_state):
 		ap.play("UpNS")
 	else:
 		ap.play("Up")
-	$BulletBlocker/StaticBody2D.set_collision_layer_value(10, true)
+	$Armor.set_collision_layer_value(10, true)
 	$BodyOnShieldDetection.monitoring = true
 	$BodyOnShieldBanDetection.monitoring = true
 	$SurpriseShieldUpTimer.start()
@@ -177,10 +177,9 @@ func enter_surprise_shield_up(_prev_state):
 	$Hurtbox/Side.disabled = true
 	$Hitbox/NoShield.disabled = false
 	$Hitbox/Side.disabled = true
-	$BulletBlocker/Up.disabled = false
-	$BulletBlocker/Side.disabled = true
-	$BulletBlocker/StaticBody2D/Up.disabled = false
-	$BulletBlocker/StaticBody2D/Side.disabled = true
+	$Armor/Up.disabled = false
+	$Armor/Side.disabled = true
+	$Armor.block_dir = Vector2.UP
 	bodies_on_shield = []
 	bodies_on_shield_ban = []
 
@@ -220,11 +219,10 @@ func enter_surprise_end(_prev_state):
 	$Hurtbox/Side.disabled = false
 	$Hitbox/NoShield.disabled = true
 	$Hitbox/Side.disabled = false
-	$BulletBlocker/Up.disabled = true
-	$BulletBlocker/Side.disabled = false
-	$BulletBlocker/StaticBody2D/Up.disabled = true
-	$BulletBlocker/StaticBody2D/Side.disabled = false
-	$BulletBlocker/StaticBody2D.set_collision_layer_value(10, false)
+	$Armor/Up.disabled = true
+	$Armor/Side.disabled = false
+	$Armor.block_dir = Vector2.LEFT
+	$Armor.set_collision_layer_value(10, false)
 	if difficulty == 0:
 		ap.play("LowerNS")
 	else:
@@ -319,8 +317,7 @@ func set_move_dir(dir):
 	if scale_x_value == 0.0: scale_x_value = 1.0
 	$Hurtbox.scale.x = scale_x_value
 	$Hitbox.scale.x = scale_x_value
-	$BulletBlocker.scale.x = scale_x_value
-	#$BulletBlocker/StaticBody2D.scale.x = scale_x_valuep
+	$Armor.scale.x = scale_x_value
 	$AttackDetection.scale.x = scale_x_value
 	$AttackHitbox.scale.x = scale_x_value
 	$ShieldChargeDetection.scale.x = scale_x_value
@@ -329,8 +326,7 @@ func set_move_dir(dir):
 
 ### UTILITY ###
 func enable_shield(val: bool):
-	$BulletBlocker/Side.set_deferred("disabled", !val)
-	$BulletBlocker/StaticBody2D/Side.set_deferred("disabled", !val)
+	$Armor/Side.set_deferred("disabled", !val)
 
 func enable_attack_hitbox(val: bool):
 	$AttackHitbox.monitorable = val
@@ -382,10 +378,7 @@ func get_valid_body_on_shield() -> Array:
 
 
 ### SIGNALS ###
-func _on_BulletBlocker_body_entered(body):
-	_on_BulletBlocker_area_entered(body)
-
-func _on_BulletBlocker_area_entered(_area):
+func _on_Armor_blocked(body: Variant, shield_body: Variant) -> void:
 	$DefendTimer.start()
 	if state == "walk":
 		change_state("defend")

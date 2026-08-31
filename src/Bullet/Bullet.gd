@@ -146,6 +146,46 @@ func get_blood_dir(body) -> Vector2: #TODO this update changed knockback dir cal
 		out = Vector2.ZERO
 	return out
 
+### UTILITY ###
+func armor_check(body) -> bool:
+	if body.block_dir != Vector2.ZERO:
+		var block_dir = body.block_dir * body.scale
+		var valid_collision_shape = null
+		for child in body.get_children():
+			if child is CollisionShape2D and !child.disabled and child.shape is RectangleShape2D:
+				valid_collision_shape = child
+				break
+		if valid_collision_shape:
+			var collision_rect_center = valid_collision_shape.global_position
+			#var collision_rect_size = valid_collision_shape.shape.size
+			print(block_dir)
+			match block_dir:
+				Vector2.LEFT:
+					print("Left", global_position.x <= collision_rect_center.x)
+					if global_position.x <= collision_rect_center.x:
+						body.blocked.emit(self, body)
+						return true
+				Vector2.RIGHT:
+					print("Right",  global_position.x >= collision_rect_center.x)
+					if global_position.x >= collision_rect_center.x:
+						body.blocked.emit(self, body)
+						return true
+				Vector2.DOWN:
+					if global_position.y >= collision_rect_center.y:
+						body.blocked.emit(self, body)
+						return true
+				Vector2.UP:
+					if global_position.y <= collision_rect_center.y:
+						body.blocked.emit(self, body)
+						return true
+		#print(block_dir, rad_to_deg(abs(bullet_dir.angle_to(block_dir))) )
+		#if abs(bullet_dir.angle_to(block_dir)) >= 3.0 * PI / 4.0:
+			#body.blocked.emit(self, body)
+			#return true
+		return false
+	else:
+		body.blocked.emit(self, body)
+		return true
 
 
 ### SIGNALS ###
@@ -158,7 +198,8 @@ func _on_CollisionDetector_body_entered(body):
 	else: #not TileMapLayer
 		#armor
 		if body.get_collision_layer_value(6):
-			do_fizzle("armor")
+			if armor_check(body):
+				do_fizzle("armor")
 		#breakable
 		elif body.get_collision_layer_value(9):
 			on_break(break_method)
@@ -170,7 +211,7 @@ func _on_CollisionDetector_body_entered(body):
 func _on_CollisionDetector_area_entered(area):
 	if area.get_collision_layer_value(6): #armor
 		do_fizzle("armor")
-	if area.get_collision_layer_value(18): #enemyhurt
+	elif area.get_collision_layer_value(18): #enemyhurt
 		if !is_queued_for_deletion():
 			area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
 			queue_free()

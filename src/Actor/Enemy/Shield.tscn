@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cfowbliw450pc" path="res://src/Actor/Enemy/Shield.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_wlkrp"]
+[ext_resource type="Script" uid="uid://i74nu1vn2rcv" path="res://src/Utility/Armor.gd" id="3_kcsk2"]
 [ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="4_tk834"]
 [ext_resource type="Texture2D" uid="uid://dbdcwuuqby42r" path="res://assets/Actor/Enemy/Shield0.png" id="5_o1iq0"]
 
@@ -319,7 +320,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("BulletBlocker/StaticBody2D/Up:position")
+tracks/3/path = NodePath("Armor/Up:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -374,7 +375,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("BulletBlocker/StaticBody2D/Up:position")
+tracks/3/path = NodePath("Armor/Up:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -471,7 +472,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("BulletBlocker/StaticBody2D/Up:position")
+tracks/2/path = NodePath("Armor/Up:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1021,13 +1022,13 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tk834"]
-size = Vector2(10, 20)
+size = Vector2(18, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kcsk2"]
 size = Vector2(22, 2)
 
 [sub_resource type="RectangleShape2D" id="10"]
-size = Vector2(7, 20)
+size = Vector2(14, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_np4sj"]
 size = Vector2(6, 14)
@@ -1082,45 +1083,31 @@ shape = SubResource("RectangleShape2D_513p3")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=547631705]
 libraries/ = SubResource("AnimationLibrary_kfp7m")
 
-[node name="BulletBlocker" type="Area2D" parent="." unique_id=1594386711]
-collision_layer = 32
-collision_mask = 64
-input_pickable = false
-
-[node name="Side" type="CollisionShape2D" parent="BulletBlocker" unique_id=1573356133]
-position = Vector2(-5, -10)
-shape = SubResource("RectangleShape2D_tk834")
-debug_color = Color(0, 0.588235, 0.705882, 0.235294)
-
-[node name="Up" type="CollisionShape2D" parent="BulletBlocker" unique_id=1078921533]
-position = Vector2(0, -15)
-shape = SubResource("RectangleShape2D_kcsk2")
-disabled = true
-debug_color = Color(0, 0.588235, 0.705882, 0.235294)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="BulletBlocker" unique_id=966788885]
+[node name="Armor" type="StaticBody2D" parent="." unique_id=966788885]
 collision_layer = 32
 collision_mask = 0
+script = ExtResource("3_kcsk2")
+block_dir = Vector2(-1, 0)
 
-[node name="Side" type="CollisionShape2D" parent="BulletBlocker/StaticBody2D" unique_id=999651742]
-position = Vector2(-5, -10)
+[node name="Side" type="CollisionShape2D" parent="Armor" unique_id=999651742]
+position = Vector2(-4.5, -10)
 shape = SubResource("RectangleShape2D_tk834")
-debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+debug_color = Color(0, 1, 0, 0.23529412)
 
-[node name="Up" type="CollisionShape2D" parent="BulletBlocker/StaticBody2D" unique_id=736746001]
+[node name="Up" type="CollisionShape2D" parent="Armor" unique_id=736746001]
+visible = false
 position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_kcsk2")
 disabled = true
 one_way_collision = true
-debug_color = Color(0, 0.588235, 0.705882, 0.235294)
+debug_color = Color(0, 1, 0, 0.23529412)
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1159295574]
-visible = false
 collision_layer = 131072
 collision_mask = 0
 
 [node name="Side" type="CollisionShape2D" parent="Hurtbox" unique_id=1212747302]
-position = Vector2(3.5, -10)
+position = Vector2(0, -10)
 shape = SubResource("10")
 debug_color = Color(0, 1, 0, 0.235294)
 
@@ -1167,6 +1154,7 @@ process_callback = 0
 one_shot = true
 
 [node name="BodyOnShieldDetection" type="Area2D" parent="." unique_id=1550618608]
+visible = false
 collision_layer = 0
 collision_mask = 32769
 monitoring = false
@@ -1178,6 +1166,7 @@ shape = SubResource("RectangleShape2D_46mcm")
 debug_color = Color(1, 1, 0, 0.41960785)
 
 [node name="BodyOnShieldBanDetection" type="Area2D" parent="." unique_id=1486723929]
+visible = false
 collision_layer = 0
 collision_mask = 32769
 monitoring = false
@@ -1282,8 +1271,7 @@ hframes = 8
 vframes = 13
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
-[connection signal="area_entered" from="BulletBlocker" to="." method="_on_BulletBlocker_area_entered"]
-[connection signal="body_entered" from="BulletBlocker" to="." method="_on_BulletBlocker_body_entered"]
+[connection signal="blocked" from="Armor" to="." method="_on_Armor_blocked"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_PlayerDetection_body_entered"]
