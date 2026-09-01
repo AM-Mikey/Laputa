@@ -18,8 +18,9 @@ var damage: int = 1
 var f_range: int = 60
 var f_time: float
 var speed: int = 200
-
 var cooldown_time: float = 0.2
+var recoil: float = 0.0
+
 var automatic: bool = false
 var do_muzzle_flash: bool = true
 var charging: bool = false
@@ -51,6 +52,7 @@ func fire(_type):
 				ammo -= 1
 			pc.emit_signal("guns_updated", pc.get_node("GunManager/Guns").get_children(), "fire")
 			am.play(sfx)
+			pc.velocity += (pc.shoot_dir * -1) * recoil
 			activate()
 		else:
 			print("out of ammo")

@@ -1,6 +1,6 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://0xif3oukmbp7"]
 
-[ext_resource type="Script" path="res://src/World.gd" id="8"]
+[ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
 
 [sub_resource type="Animation" id="Animation_qbf6s"]
 resource_name = "Flash"
@@ -46,23 +46,11 @@ script = ExtResource("8")
 development_stage = "alpha"
 release_version = "1.8"
 do_skip_title = true
-default_gun_array = Array[String](["Revolver", "Speeder", "MPistol", "GLauncher", "Shotgun", "Tsurugi", "Red7", "Roberta"])
+default_gun_array = Array[String](["Revolver", "Speeder", "MPistol", "GLauncher", "Shotgun", "Tsurugi", "Red7", "Roberta", "TurnstileJumper"])
 start_level_path = "res://src/Level/PlaytestZone.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=912648782]
 scroll_offset = Vector2(-15120.003, -9151.469)
-
-[node name="Back" type="Node2D" parent="." unique_id=1451941770]
-visibility_layer = 2
-scale = Vector2(4, 4)
-
-[node name="Middle" type="Node2D" parent="." unique_id=906505202]
-visibility_layer = 2
-z_index = 1
-
-[node name="Front" type="Node2D" parent="." unique_id=448726191]
-visibility_layer = 2
-z_index = 2
 
 [node name="InventoryLayer" type="CanvasLayer" parent="." unique_id=1283144760]
 scale = Vector2(4, 4)
@@ -116,4 +104,13 @@ layer = 8
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
-[connection signal="level_saved" from="EditorLayer/Editor" to="EditorLayer/Editor/Main/Win/Tab/Levels" method="on_save"]
+[node name="Back" type="Node2D" parent="." unique_id=1451941770]
+visibility_layer = 2
+
+[node name="Middle" type="Node2D" parent="." unique_id=906505202]
+visibility_layer = 2
+z_index = 1
+
+[node name="Front" type="Node2D" parent="." unique_id=448726191]
+visibility_layer = 2
+z_index = 3

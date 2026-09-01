@@ -1,5 +1,6 @@
 extends Gun
 
+const GUN_SMOKE = preload("res://src/Effect/GunSmoke.tscn")
 
 func _ready():
 	display_name = "Shotgun"
@@ -21,14 +22,17 @@ func _ready():
 func _set_level(val: int) -> void:
 	match val:
 		1:
+			recoil = 10
 			bullets_per_activate = 4
 			speed = 512
 			max_xp = 10
 		2:
+			recoil = 20
 			bullets_per_activate = 8
 			speed = 640
 			max_xp = 15
 		3:
+			recoil = 30 #NOTE: this level of recoil allows jp to reach up +1 and over +0, don't allow more than this.
 			bullets_per_activate = 16
 			speed = 748
 			max_xp = 20
@@ -37,3 +41,7 @@ func activate():
 	for i in bullets_per_activate:
 		var bullet = spawn_bullet(get_origin(), pc.shoot_dir)
 		bullet.instant_fizzle_check()
+	var gun_smoke = GUN_SMOKE.instantiate()
+	gun_smoke.direction = Vector2(pc.shoot_dir.x, 0)
+	gun_smoke.global_position = $Muzzle.global_position
+	w.middle.add_child(gun_smoke)

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bsuu8hatrjr1j"]
+
+[ext_resource type="Texture2D" uid="uid://clk1iars3y7nu" path="res://assets/Effect/GunSmoke.png" id="1_s2okd"]
+[ext_resource type="Script" uid="uid://cw1bcyj65k2dg" path="res://src/Effect/BasicParticle.gd" id="2_s2okd"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8n5dw"]
+particles_animation = true
+particles_anim_h_frames = 16
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="GunSmoke" type="CPUParticles2D" unique_id=2103415329]
+material = SubResource("CanvasItemMaterial_8n5dw")
+amount = 6
+texture = ExtResource("1_s2okd")
+lifetime = 1.5999999999999999
+explosiveness = 1.0
+lifetime_randomness = 0.2
+gravity = Vector2(0, -50)
+initial_velocity_min = 2.0
+initial_velocity_max = 32.0
+damping_max = 16.0
+anim_speed_min = 1.0
+anim_speed_max = 1.2
+script = ExtResource("2_s2okd")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

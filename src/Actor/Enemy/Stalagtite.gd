@@ -16,6 +16,8 @@ var drop_damage: int
 var wait_time: float
 var terminal_drop_velocity: float = 320.0
 
+@export var land_impulse_curve: Curve
+
 func set_is_in_water(val):
 	if (state not in ["hang", "hangactive"]):
 		super.set_is_in_water(val)
@@ -93,6 +95,8 @@ func do_drop(_delta):
 
 func exit_drop(_next_state):
 	hit_enemies_on_contact = false
+	am.play("enemy_thud_0", self, null, 0.8, 0.1)
+	land_impulse()
 
 func enter_squirm(_last_state):
 	$RayCast2D.queue_free()
@@ -143,10 +147,35 @@ func exit_run(_next_state):
 
 func enter_stake(_last_state):
 	$AnimationPlayer.play("Stake")
+	am.play("enemy_stomp", self, null, 0.8, 0.1)
+	stake_shake()
 	await get_tree().process_frame
 	$CollisionShape2D.set_deferred("disabled", true) #so it doesn't see itself
 	$Standable/CollisionShape2D.set_deferred("disabled", false)
 
+### HELPERS ###
+
+func stake_shake():
+	if f.pc():
+		var player_distance = f.pc().global_position.distance_to(global_position)
+		var max_distance := 512
+		var max_shape_pixels := 4.0
+		#var fall_velocity_modifier := (velocity.y * 300.0) / terminal_drop_velocity
+		var shake_pixels = remap(player_distance, 0, max_distance, max_shape_pixels, 0.0)
+		shake_pixels = clampf(shake_pixels, 0.0, max_shape_pixels)
+		#shake_pixels *= fall_velocity_modifier
+		f.pc().get_node("PlayerCamera").shake(shake_pixels, 0.2, 4.0)
+
+func land_impulse():
+	if f.pc():
+		var player_distance = f.pc().global_position.distance_to(global_position)
+		var max_distance := 512
+		var max_shape_pixels := 2.0
+		#var fall_velocity_modifier := (velocity.y * 300.0) / terminal_drop_velocity
+		var shake_pixels = remap(player_distance, 0, max_distance, max_shape_pixels, 0.0)
+		shake_pixels = clampf(shake_pixels, 0.0, max_shape_pixels)
+		#shake_pixels *= fall_velocity_modifier
+		f.pc().get_node("PlayerCamera").impulse(Vector2.DOWN, shake_pixels, 0.2, land_impulse_curve)
 
 ### SIGNALS ###
 

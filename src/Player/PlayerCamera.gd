@@ -115,7 +115,7 @@ func process_shake(delta):
 	for s in active_shakes.duplicate():
 		s.elapsed += delta
 		if s.elapsed >= s.duration:
-			active_shakes.erase(shake)
+			active_shakes.erase(s)
 			continue
 		var ratio = s.elapsed / s.duration
 		var decay = 1.0 - ratio  # linear falloff; use pow(1.0 - ratio, 2) for a snappier cutoff
@@ -126,7 +126,7 @@ func process_shake(delta):
 	for i in active_impulses.duplicate():
 		i.elapsed += delta
 		if i.elapsed >= i.duration:
-			active_impulses.erase(impulse)
+			active_impulses.erase(i)
 			continue
 		var ratio = i.elapsed / i.duration
 		var weight = i.curve.sample(ratio)

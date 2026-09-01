@@ -36,6 +36,6 @@ func _set_level(val: int) -> void:
 			f_time = 2.0
 
 func activate():
-	var origin = pc.get_node("BulletOrigin").global_position
-	var bullet = spawn_bullet(origin, pc.shoot_dir)
+	#var origin = pc.get_node("BulletOrigin").global_position
+	var bullet = spawn_bullet(get_origin(), pc.shoot_dir)
 	bullet.instant_fizzle_check()

@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://bkhtdi4w7rvqd"]
 
-[ext_resource type="Script" uid="uid://d0x7wxbe62wi6" path="res://src/Bullet/Defender.gd" id="1"]
+[ext_resource type="Script" uid="uid://d0x7wxbe62wi6" path="res://src/Bullet/Outdated/Defender.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bd1h41uc6n18t" path="res://assets/Bullet/BulletPistol.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_xgyw3"]
+
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 2)

@@ -5,6 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_xt7hv"]
 
+[sub_resource type="Curve" id="Curve_xt7hv"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.12126866, 1), 0.13105068, 0.13105068, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(10, 10)
 
@@ -60,6 +64,9 @@ _data = {
 collision_layer = 64
 collision_mask = 8
 script = ExtResource("2")
+camera_recoil_distance = 8.0
+camera_recoil_curve = SubResource("Curve_xt7hv")
+camera_recoil_time = 0.5
 is_water_affected = true
 is_wind_affected = true
 

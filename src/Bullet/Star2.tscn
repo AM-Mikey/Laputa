@@ -5,6 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_he0pi"]
 [ext_resource type="Texture2D" uid="uid://da323nnsbu3cg" path="res://assets/Bullet/Star.png" id="3_mf8v5"]
 
+[sub_resource type="Curve" id="Curve_he0pi"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.12126866, 1), 0.0, 0.0, 0, 0, Vector2(0.24067165, 0.6916796), 0.0, 0.0, 0, 0, Vector2(0.40485078, 0.6916796), 0.0, 0.0, 0, 0, Vector2(0.5317164, 0.30754274), 0.0, 0.0, 0, 0, Vector2(0.6511194, 0.35808706), 0.0, 0.0, 0, 0, Vector2(0.80037314, 0.07503891), 0.0, 0.0, 0, 0, Vector2(0.87873137, 0.15590978), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 9
+
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(9, 9)
 
@@ -70,6 +74,8 @@ _data = {
 collision_layer = 64
 collision_mask = 8
 script = ExtResource("1_ijee2")
+camera_recoil_distance = 0.5
+camera_recoil_curve = SubResource("Curve_he0pi")
 is_water_affected = true
 is_wind_affected = true
 

@@ -13,6 +13,8 @@ func _ready(): #since preload, this happens on game start
 	max_level = 3
 	set_level(level)
 
+#only one level, freezes enemies/puts them to sleep. no damage just freezes non-boss enemy code
+
 func _set_level(val: int) -> void:
 	match val:
 		1:

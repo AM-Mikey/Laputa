@@ -58,6 +58,7 @@ signal music_fadeout_finished
 	"gun_grenade": preload("res://assets/SFX/Placeholder/snd_expl_small.ogg"),
 	"gun_grenade_bounce": preload("res://assets/SFX/Placeholder/snd_thud.ogg"),
 	"gun_star_bounce": preload("res://assets/SFX/Placeholder/snd_splash.ogg"),
+	"gun_turnstile_jumper": preload("res://assets/SFX/TurnstileJumper.ogg"),
 
 	"bullet_thud": preload("res://assets/SFX/Placeholder/snd_shot_hit.ogg"),
 	"bullet_clink": preload("res://assets/SFX/Placeholder/snd_shot_bounce.ogg"),

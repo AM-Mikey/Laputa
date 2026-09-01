@@ -33,7 +33,5 @@ func _set_level(val: int) -> void:
 			max_xp = 20
 
 func activate():
-	#if f.pc(): #and camera gun recoil is true
-		#f.pc().get_node("PlayerCamera").impulse(pc.shoot_dir * -1, 1, 0.1)
 	var bullet = spawn_bullet(get_origin(), pc.shoot_dir)
 	bullet.instant_fizzle_check()

@@ -1,5 +1,7 @@
 extends Gun
 
+const GUN_SMOKE = preload("res://src/Effect/GunSmoke.tscn")
+
 func _ready():
 	display_name = "Grenade Launcher"
 	description = "Packs a punch. Hold down for a more direct arc. Extra damage if grenades don't bounce"
@@ -37,3 +39,7 @@ func _set_level(val: int) -> void:
 
 func activate():
 	spawn_bullet(get_origin(), pc.shoot_dir)
+	var gun_smoke = GUN_SMOKE.instantiate()
+	gun_smoke.direction = Vector2(pc.shoot_dir.x, 0)
+	gun_smoke.global_position = $Muzzle.global_position
+	w.middle.add_child(gun_smoke)
