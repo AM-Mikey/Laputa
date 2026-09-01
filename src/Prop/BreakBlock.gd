@@ -61,12 +61,12 @@ func crush(type, target):
 		"player":
 			if crush_players:
 				f.pc().invincible = false
-				target.hit(999, Vector2.ZERO)
+				target.hit(999, Vector2.ZERO, $CrushDetector)
 			else:
 				on_break()
 		"enemy":
 			if crush_enemies:
-				target.hit(999, Vector2.ZERO)
+				target.hit(999, Vector2.ZERO, $CrushDetector)
 			else:
 				on_break()
 

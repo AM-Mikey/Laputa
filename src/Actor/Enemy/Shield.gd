@@ -62,9 +62,14 @@ func setup(): #Reminder: no function called can use await
 	change_state("idle")
 	prev_global_position = global_position
 
-func _on_hit(_damage, blood_direction):
+func _on_hit(_damage, _blood_direction, hitbox):
 	if state in ["idle", "walk", "defend"]:
-		if abs(blood_direction.angle_to(move_dir)) <= PI / 18.0 && $SurpriseCooldown.time_left <= 0.0:
+		var hurtbox = $Hurtbox/Side
+		var hurtbox_rect: Rect2 = Rect2(hurtbox.global_position - hurtbox.shape.size / 2.0, $Hurtbox/Side.shape.size)
+		var bullet_pos = hitbox.global_position - hurtbox.global_position
+		if bullet_pos.x * move_dir.x < 0.0 \
+			&& hitbox.global_position.y >= hurtbox_rect.position.y && hitbox.global_position.y <= hurtbox_rect.end.y \
+			&& $SurpriseCooldown.time_left <= 0.0:
 			change_state("surprise")
 	elif state == "surprise_shield_up":
 		if difficulty == 0:
@@ -429,10 +434,10 @@ func _on_Attack_hitbox_body_entered(body, hitbox_name):
 	if body.get_collision_layer_value(17):
 		var player = body.get_parent()
 		if hitbox_name == "Attack":
-			player.hit(attack_damage, Vector2(signf(move_dir.x), 0.0))
+			player.hit(attack_damage, Vector2(signf(move_dir.x), 0.0), $AttackHitbox)
 		else:
 			var knockback: = Vector2(100.0 * move_dir.x, -20.0)
-			player.hit(shield_charge_damage, knockback)
+			player.hit(shield_charge_damage, knockback, $ShieldChargeHitbox)
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if state == "surprise_shield_up" && anim_name in ["UpHurtNS", "UpHurt"]:

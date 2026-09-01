@@ -72,9 +72,9 @@ func _on_CollisionDetector_body_entered(body): #shadows
 		#enemys
 		elif body.get_collision_layer_value(2):
 			if not touched_floor:
-				body.hit(damage, get_blood_dir(body))
+				body.hit(damage, get_blood_dir(body), $PlayerCollisionDetector)
 			else:
-				body.hit(int(damage / 2.0), get_blood_dir(body))
+				body.hit(int(damage / 2.0), get_blood_dir(body), $PlayerCollisionDetector)
 			queue_free()
 		#breakable
 		elif body.get_collision_layer_value(9):

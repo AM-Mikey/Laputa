@@ -80,7 +80,7 @@ func _on_CollisionDetector_area_entered(area):
 
 	if area.get_collision_layer_value(18): #enemyhurt
 		if !is_queued_for_deletion():
-			area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
+			area.get_parent().hit(damage, get_blood_dir(area.get_parent()), $PlayerCollisionDetector)
 			queue_free()
 	elif area.get_collision_layer_value(9): #breakable
 		area.get_parent().on_break(break_method)
