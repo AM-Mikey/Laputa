@@ -18,7 +18,6 @@ extends StaticBody2D
 					child.shape.size = curr_shape
 				else:
 					child.shape.size = curr_shape
-				print(val, " ", rad_to_deg(child.rotation))
 		block_dir = val
 
 ## Assuming the shape rotation is 0.0

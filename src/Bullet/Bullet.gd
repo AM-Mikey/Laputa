@@ -158,15 +158,12 @@ func armor_check(body) -> bool:
 		if valid_collision_shape:
 			var collision_rect_center = valid_collision_shape.global_position
 			#var collision_rect_size = valid_collision_shape.shape.size
-			print(block_dir)
 			match block_dir:
 				Vector2.LEFT:
-					print("Left", global_position.x <= collision_rect_center.x)
 					if global_position.x <= collision_rect_center.x:
 						body.blocked.emit(self, body)
 						return true
 				Vector2.RIGHT:
-					print("Right",  global_position.x >= collision_rect_center.x)
 					if global_position.x >= collision_rect_center.x:
 						body.blocked.emit(self, body)
 						return true
