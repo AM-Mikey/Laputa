@@ -68,8 +68,7 @@ func _on_hit(_damage, _blood_direction, hitbox):
 		var hurtbox_rect: Rect2 = Rect2(hurtbox.global_position - hurtbox.shape.size / 2.0, $Hurtbox/Side.shape.size)
 		var bullet_pos = hitbox.global_position - hurtbox.global_position
 		if bullet_pos.x * move_dir.x < 0.0 \
-			&& hitbox.global_position.y >= hurtbox_rect.position.y && hitbox.global_position.y <= hurtbox_rect.end.y \
-			&& $SurpriseCooldown.time_left <= 0.0:
+			&& hitbox.global_position.y >= hurtbox_rect.position.y && hitbox.global_position.y <= hurtbox_rect.end.y:
 			change_state("surprise")
 	elif state == "surprise_shield_up":
 		if difficulty == 0:
@@ -232,7 +231,6 @@ func enter_surprise_end(_prev_state):
 	else:
 		ap.play("Lower")
 	await ap.animation_finished
-	$SurpriseCooldown.start()
 	change_state("walk")
 
 func do_surprise_end(_delta):
@@ -446,3 +444,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	if difficulty > 0:
 		if state == "attack" && anim_name == "Slash":
 			change_state("walk")
+
+
+func _on_AttackHitbox_body_entered(body: Node2D, extra_arg_0: String) -> void:
+	pass # Replace with function body.

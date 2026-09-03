@@ -1177,10 +1177,6 @@ position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_32sx3")
 debug_color = Color(1, 1, 0, 0.41960785)
 
-[node name="SurpriseCooldown" type="Timer" parent="." unique_id=1334267570]
-process_callback = 0
-one_shot = true
-
 [node name="AttackDetection" type="Area2D" parent="." unique_id=9286811]
 visible = false
 collision_layer = 0
@@ -1276,5 +1272,9 @@ vframes = 13
 [connection signal="body_exited" from="BodyOnShieldBanDetection" to="." method="_on_BodyOnShieldBanDetection_body_exited"]
 [connection signal="body_entered" from="AttackDetection" to="." method="_on_AttackDetection_body_entered"]
 [connection signal="body_exited" from="AttackDetection" to="." method="_on_AttackDetection_body_exited"]
+[connection signal="area_entered" from="AttackHitbox" to="." method="_on_Attack_hitbox_body_entered" binds= ["Attack"]]
+[connection signal="body_entered" from="AttackHitbox" to="." method="_on_AttackHitbox_body_entered" binds= ["Attack"]]
 [connection signal="body_entered" from="ShieldChargeDetection" to="." method="_on_ShieldChargeDetection_body_entered"]
 [connection signal="body_exited" from="ShieldChargeDetection" to="." method="_on_ShieldChargeDetection_body_exited"]
+[connection signal="area_entered" from="ShieldChargeHitbox" to="." method="_on_Attack_hitbox_body_entered" binds= ["ShieldCharge"]]
+[connection signal="body_entered" from="ShieldChargeHitbox" to="." method="_on_Attack_hitbox_body_entered" binds= ["ShieldCharge"]]
