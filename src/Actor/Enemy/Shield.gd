@@ -194,13 +194,12 @@ func do_surprise_shield_up(_delta):
 
 	if $SurpriseShieldUpTimer.time_left <= 0.0:
 		change_state("surprise_end")
-	elif get_valid_body_on_shield().size() > 0 && $BodyOnShieldTimer.time_left <= 0.0:
+	elif get_valid_body_on_shield().size() > 0:
 		change_state("surprise_launch")
 
 func exit_surprise_shield_up(_next_state):
 	$SurpriseShieldUpTimer.paused = false
 	$SurpriseShieldUpTimer.stop()
-	$BodyOnShieldTimer.stop()
 
 
 func enter_surprise_launch(_prev_state):
@@ -371,10 +370,8 @@ func check_player_in_shield_charge_range() -> bool:
 func update_actor_on_shield():
 	var valid_bodies_size = get_valid_body_on_shield().size()
 	if valid_bodies_size > 0:
-		$BodyOnShieldTimer.start()
 		$SurpriseShieldUpTimer.paused = true
 	else:
-		$BodyOnShieldTimer.stop()
 		$SurpriseShieldUpTimer.paused = false
 
 func get_valid_body_on_shield() -> Array:
