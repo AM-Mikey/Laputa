@@ -157,7 +157,6 @@ func armor_check(body) -> bool:
 				break
 		if valid_collision_shape:
 			var collision_rect_center = valid_collision_shape.global_position
-			#var collision_rect_size = valid_collision_shape.shape.size
 			match block_dir:
 				Vector2.LEFT:
 					if global_position.x <= collision_rect_center.x:
@@ -175,10 +174,6 @@ func armor_check(body) -> bool:
 					if global_position.y <= collision_rect_center.y:
 						body.blocked.emit(self, body)
 						return true
-		#print(block_dir, rad_to_deg(abs(bullet_dir.angle_to(block_dir))) )
-		#if abs(bullet_dir.angle_to(block_dir)) >= 3.0 * PI / 4.0:
-			#body.blocked.emit(self, body)
-			#return true
 		return false
 	else:
 		body.blocked.emit(self, body)

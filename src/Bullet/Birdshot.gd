@@ -28,15 +28,19 @@ func _on_physics_process(delta):
 
 	var collision = move_and_collide(velocity * delta)
 	if collision:
+		var collider = collision.get_collider()
 		cool = true
 		$AnimationPlayer.play("Cool")
-		if velocity.length() > free_speed:
-			velocity *= bounciness
-			velocity = velocity.bounce(collision.get_normal())
-			am.play("bullet_birdshot_bounce", self)
+		if collider is not TileMapLayer && collider.get_collision_layer_value(6) && armor_check(collider):
+			do_fizzle("armor")
 		else:
-			velocity = Vector2.ZERO
-			queue_free()
+			if velocity.length() > free_speed:
+				velocity *= bounciness
+				velocity = velocity.bounce(collision.get_normal())
+				am.play("bullet_birdshot_bounce", self)
+			else:
+				velocity = Vector2.ZERO
+				queue_free()
 
 
 ### GETTERS ###
