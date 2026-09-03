@@ -33,10 +33,6 @@ func exit():
 	w.ui.visible = true
 	w.hl.visible = true
 	queue_free()
-	var camera = get_viewport().get_camera_2d()
-	if camera:
-		if camera.is_in_group("PlayerCameras"):
-			camera.reset()
 
 ### SIGNALS ###
 

@@ -68,6 +68,10 @@ var editor_delete_blacklist = ["background", "spawn_point", "tile_map"]
 ### SETUP ###
 
 func _ready():
+	var dialog_layer := w.get_node("DialogLayer")
+	if dialog_layer.has_node("DialogBox"):
+		dialog_layer.get_node("DialogBox").exit()
+
 	#connect("tile_map_selected", Callable(inspector, "on_selected").bind("tile_map"))
 	connect("level_selected", Callable(inspector, "on_selected").bind("level"))
 	w.el.add_child(EDITOR_CAMERA.instantiate())
@@ -269,18 +273,40 @@ func _unhandled_input(event):
 	if event.is_action_released("editor_alt"): alt_held = false
 
 
-	if event is InputEventKey and event.is_pressed() and not event.is_echo() and ctrl_held:
+	if event is InputEventKey && event.is_pressed() && !event.is_echo() && ctrl_held:
 		match event.keycode:
 			KEY_C:
-				copy_tile_map_selection()
+				if inspector.active_type == "actor_spawn":
+					copy_actor_spawn()
+				elif inspector.active_type == "prop_spawn":
+					copy_prop_spawn()
+				elif inspector.active_type == "trigger_spawn":
+					copy_trigger_spawn()
+				elif inspector.active_type in ["waypoint_local", "waypoint_global", "waypoint_global_spawn", "vu_vector", "vu_rect", "vu_actor"]:
+					copy_misc(inspector.active_type)
+				else:
+					copy_tile_map_selection()
 			KEY_V:
 				var pos: Vector2i = get_cell(w.get_global_mouse_position())
-				paste_tiles_from_buffer(pos)
+				if inspector.active_type == "actor_spawn":
+					paste_actor_spawn(pos)
+				elif inspector.active_type == "prop_spawn":
+					paste_prop_spawn(pos)
+				elif inspector.active_type == "trigger_spawn":
+					paste_trigger_spawn(pos)
+				elif inspector.active_type in ["waypoint_local", "waypoint_global", "waypoint_global_spawn", "vu_vector", "vu_rect", "vu_actor"]:
+					paste_misc(inspector.active_type, pos)
+				else:
+					paste_tiles_from_buffer(pos)
 			KEY_Z:
 				if shift_held: redo()
 				else: undo()
 			KEY_S:
 				emit_signal("level_saved")
+
+	#double click inputs, only when nothing is selectable
+	if event.is_action_pressed("editor_rmb") && event.double_click:
+		inspector.on_deselected() #slight consequence is in inspector, unsaved values will reset on moving entity
 
 
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
@@ -323,8 +349,6 @@ func _unhandled_input(event):
 	if event.is_action_released("editor_rmb"):
 		rmb_physically_held = false
 		rmb_held = false
-
-
 
 func do_tile_input(event):
 	var mouse_pos = w.get_global_mouse_position()
@@ -844,6 +868,76 @@ func free_previews():
 
 
 
+func copy_actor_spawn():
+	e_log.lprint("copied actor spawn")
+	inspector.copied_entity = inspector.active
+
+func paste_actor_spawn(pos):
+	e_log.lprint("pasted actor spawn")
+	var actor_spawn = inspector.copied_entity.duplicate() #flag 8 if this is broken
+	set_owner_recursive(actor_spawn, actor_spawn)
+	actor_spawn.global_position = (pos * 16) + Vector2i(8, 16)
+	spawn_collection.add_child(actor_spawn)
+	#initialize but only the parts we want to use
+	actor_spawn.properties["id"] = [actor_spawn.name, TYPE_STRING, ""]
+	var actor = load(actor_spawn.actor_path).instantiate()
+	actor_spawn.setup_vus(actor)
+	actor.free()
+	inspector.on_selected(actor_spawn, "actor_spawn", true)
+
+
+func copy_prop_spawn():
+	e_log.lprint("copied prop spawn")
+	inspector.copied_entity = inspector.active
+
+func paste_prop_spawn(pos):
+	e_log.lprint("pasted prop spawn")
+	var prop_spawn = inspector.copied_entity.duplicate() #flag 8 if this is broken
+	set_owner_recursive(prop_spawn, prop_spawn)
+	prop_spawn.global_position = (pos * 16)
+	spawn_collection.add_child(prop_spawn)
+	#initialize but only the parts we want to use
+	prop_spawn.properties["id"] = [prop_spawn.name, TYPE_STRING, ""]
+	var prop = load(prop_spawn.prop_path).instantiate()
+	prop_spawn.setup_vus(prop)
+	prop.free()
+	inspector.on_selected(prop_spawn, "prop_spawn", true)
+
+
+func copy_trigger_spawn():
+	e_log.lprint("copied trigger spawn")
+	inspector.copied_entity = inspector.active
+
+func paste_trigger_spawn(pos):
+	e_log.lprint("pasted trigger spawn")
+	var trigger_spawn = inspector.copied_entity.duplicate() #flag 8 if this is broken
+	set_owner_recursive(trigger_spawn, trigger_spawn)
+	trigger_spawn.global_position = (pos * 16)
+	spawn_collection.add_child(trigger_spawn)
+	#initialize but only the parts we want to use
+	trigger_spawn.properties["id"] = [trigger_spawn.name, TYPE_STRING, ""]
+	var trigger = load(trigger_spawn.trigger_path).instantiate()
+	trigger_spawn.setup_vus(trigger)
+	trigger.free()
+	inspector.on_selected(trigger_spawn, "trigger_spawn", true)
+
+func copy_misc(type):
+	e_log.lprint("copied type " + type.to_lower())
+	inspector.copied_entity = inspector.active
+
+func paste_misc(type, pos):
+	e_log.lprint("pasted " + type.to_lower())
+	var misc = inspector.copied_entity.duplicate() #flag 8 if this is broken
+	set_owner_recursive(misc, misc)
+	if type in ["waypoint_local", "vu_vector", "vu_rect", "vu_actor", "waypoint_global_spawn"]:
+		inspector.active.get_parent().add_child(misc)
+	elif type in ["waypoint_global"]:
+		waypoint_collection.add_child(misc)
+	else:
+		w.current_level.add_child(misc)
+	misc.global_position = (pos * 16) + Vector2i(8, 8)
+	inspector.on_selected(misc, type, true)
+
 ### GETTERS ###
 
 
@@ -973,6 +1067,12 @@ func clear_tile_map_cursor(): #Warning: it still exists after!
 	tile_map_selection = Rect2i(0,0,0,0)
 	tile_map_cursor.size = Vector2i.ZERO
 	tile_map_cursor.position = Vector2i.ZERO
+
+func set_owner_recursive(node: Node, new_owner: Node):
+	for child in node.get_children():
+		child.owner = new_owner
+		set_owner_recursive(child, new_owner)
+
 
 ### UI ###
 func set_menu_alpha():

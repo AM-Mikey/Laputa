@@ -17,45 +17,20 @@ func _ready():
 	if w.el.get_child_count() == 0: #not in editor
 		visible = false
 		input_pickable = false
+#name
+	var name_index = 0
+	for wpgs in get_parent().get_children():
+		if !wpgs.is_in_group("WaypointGlobalSpawns"): break
+		if wpgs == self: break
+		else: name_index +=1
+		if name_index == 0: name = "WaypointGlobalSpawn"
+		else: name = str("WaypointGlobalSpawn", name_index)
 
 func _process(_delta):
 	if w.el.get_child_count() > 0:
 		if prev_global_position != global_position:
 			value_changed.emit(self, prev_global_position, global_position)
 		prev_global_position = global_position
-
-func initialize(): #first time set up properties
-	pass
-	#var actor = load(actor_path).instantiate()
-	#for p in actor.get_property_list():
-		#if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
-			#properties[p["name"]] = [actor.get(p["name"]), p["type"]]
-	#for c in actor.get_children():
-		#if c.is_in_group("WaypointLocals"):
-			#if !get_if_actor_has_waypoint(c):
-				#actor.remove_child(c)
-				#add_child(c)
-				#c.owner = w.current_level
-	#actor.free()
-
-func reinitialize(): #makes sure properties are up to date and in the right order without deleting old values
-	pass
-	#var old_properties = properties
-	#properties = {}
-	#var actor = load(actor_path).instantiate()
-	#for p in actor.get_property_list():
-		#if p["usage"] == 4102 || p["usage"] == 69638: #exported properties
-			#if old_properties.has(p["name"]):
-				#properties[p["name"]] = old_properties[p["name"]]
-			#else:
-				#properties[p["name"]] = [actor.get(p["name"]), p["type"]]
-	#for c in actor.get_children():
-		#if c.is_in_group("WaypointLocals"):
-			#if !get_if_actor_has_waypoint(c):
-				#actor.remove_child(c)
-				#add_child(c)
-				#c.owner = w.current_level
-	#actor.free()
 
 
 func spawn():
@@ -75,10 +50,10 @@ func spawn():
 ### SIGNALS
 
 func on_editor_select(): #when
-	modulate = Color(1,0,0,.75)
+	modulate = Color.RED
 
 func on_editor_deselect():
-	modulate = Color(1,1,1,.75)
+	modulate = Color(0.0, 0.502, 1.0)
 
 
 func _input_event(_viewport, event, _shape_idx): #selecting in editor

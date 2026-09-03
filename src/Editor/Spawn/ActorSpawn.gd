@@ -123,8 +123,6 @@ func _ready():
 		add_to_group("EnemySpawns")
 
 	var actor = load(actor_path).instantiate()
-	actor.queue_free()
-
 	#name
 	var index = 0
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
@@ -147,12 +145,13 @@ func _ready():
 	$CollisionShape2D.shape = collision_shape.shape
 	$CollisionShape2D.position = collision_shape.position
 
+	actor.free()
 	if w.el.get_child_count() == 0: #not in editor
 		visible = false
 		input_pickable = false
 
 func initialize(): #first time set up properties
-	print("init")
+	#print("init")
 	if (actor_path != ""):
 		var actor = load(actor_path).instantiate()
 		for p in actor.get_property_list():
@@ -164,25 +163,8 @@ func initialize(): #first time set up properties
 					properties[p["name"]] = [actor.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
 		properties["id"] = [name, TYPE_STRING, ""]
 
-		var visual_ult_groups = ["WaypointLocals", "WaypointGlobalSpawns",
-			 "VUVectors", "VURects", "VUActors"]
-		for ac in actor.get_children():
-			for vu_group in visual_ult_groups:
-				if ac.is_in_group(vu_group):
-					if !get_if_actor_has_visual_utility(ac, vu_group):
-						actor.remove_child(ac)
-						ac.owner = null
-						add_child(ac)
-						ac.visible = true
-						ac.owner = w.current_level
-
-		actor.queue_free()
-
-		for child in get_children():
-			if child.is_in_group("VisualUtilities"):
-				if child.has_signal("value_changed") && !child.value_changed.is_connected(on_vu_value_changed):
-					child.value_changed.connect(on_vu_value_changed)
-
+		setup_vus(actor)
+		actor.free()
 		set_sprite()
 		for prop in properties: # init all special interaction when changing property
 			on_property_changed(prop, properties[prop][0])
@@ -205,25 +187,8 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 				else:
 					properties[p["name"]] = [actor.get(p["name"]), p["type"], p["hint_string"] if p["hint"] == PROPERTY_HINT_ENUM else ""]
 
-		var visual_ult_groups = ["WaypointLocals", "WaypointGlobalSpawns",
-			 "VUVectors", "VURects", "VUActors"]
-		for ac in actor.get_children():
-			for vu_group in visual_ult_groups:
-				if ac.is_in_group(vu_group):
-					if !get_if_actor_has_visual_utility(ac, vu_group):
-						actor.remove_child(ac)
-						ac.owner = null
-						add_child(ac)
-						ac.visible = true
-						ac.owner = w.current_level
-
-		actor.queue_free()
-
-		for child in get_children():
-			if child.is_in_group("VisualUtilities"):
-				if child.has_signal("value_changed") && !child.value_changed.is_connected(on_vu_value_changed):
-					child.value_changed.connect(on_vu_value_changed)
-
+		setup_vus(actor)
+		actor.free()
 		set_sprite()
 		for prop in properties: # init all special interaction when changing property
 			on_property_changed(prop, properties[prop][0])
@@ -271,6 +236,25 @@ func set_sprite():
 	$Sprite2D.frame = actor.get_node("Sprite2D").frame
 	$Sprite2D.position = actor.get_node("Sprite2D").position
 
+
+func setup_vus(actor):
+	var vu_groups = ["WaypointLocals", "WaypointGlobalSpawns", "VUVectors", "VURects", "VUActors"]
+	for i in actor.get_children():
+		for vu_group in vu_groups:
+			if i.is_in_group(vu_group):
+				if !get_if_actor_has_visual_utility(i, vu_group):
+					actor.remove_child(i)
+					i.visible = true
+					i.owner = null
+					add_child(i)
+					i.owner = w.current_level
+	for j in get_children():
+		if j.is_in_group("VisualUtilities"):
+			if j.has_signal("value_changed") && !j.value_changed.is_connected(on_vu_value_changed):
+				j.value_changed.connect(on_vu_value_changed)
+
+
+
 ### GETTERS
 func get_if_actor_has_visual_utility(actor_waypoint, group) -> bool:
 	var out = false
@@ -283,10 +267,10 @@ func get_if_actor_has_visual_utility(actor_waypoint, group) -> bool:
 ### SIGNALS
 
 func on_editor_select(): #when
-	modulate = Color(1,0,0,.75)
+	modulate = Color.RED
 
 func on_editor_deselect():
-	modulate = Color(1,1,1,.75)
+	modulate = Color(1,1,1)
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
 	if w.get_node_or_null("EditorLayer/Editor"):

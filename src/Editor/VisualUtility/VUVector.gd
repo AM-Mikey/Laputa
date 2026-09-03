@@ -37,6 +37,15 @@ func _ready():
 		$CollisionShape2D.visible = false
 	if w.el.get_child_count() == 0: #not in editor
 		visible = false
+#name
+	var name_index = 0
+	for vuv in get_parent().get_children():
+		if !vuv.is_in_group("VUVectors"): break
+		if vuv == self: break
+		else: name_index +=1
+		if name_index == 0: name = "VUVector"
+		else: name = str("VUVector", name_index)
+
 	direction = _snap_dir(direction)
 	_update_arrow_visuals()
 
