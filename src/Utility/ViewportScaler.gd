@@ -8,6 +8,8 @@ var debug_resolution_scale := 1.0
 var inventory_resolution_scale := 4.0
 var dialog_resolution_scale := 4.0
 
+var gun_screen_shake := 1.0 #store these here for now until we have a better place
+var other_screen_shake := 1.0
 
 func _ready():
 	var _err = get_tree().root.connect("size_changed", Callable(self, "_viewport_size_changed"))

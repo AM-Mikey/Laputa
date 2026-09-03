@@ -15,10 +15,13 @@ var default = {
 	"MasterVolume": 10.0,
 	"MusicVolume": 0.0,
 	"SFXVolume" : 10.0,
+	"GunScreenShake": 1.0,
+	"OtherScreenShake": 1.0,
 	"DisplayMode": 3,
 	"ResolutionScale": 0,
 	"MouseLock": false,
 	"TooltipIconType": 0,
+	"PreferredControllerGUID": "",
 	"JumpOnHold": false,
 	}
 var after_ready = false #so we don't trigger a change when loading settings
@@ -108,6 +111,16 @@ func change_bus_volume(value, busname:String):
 		save_setting(busname + "Volume", value)
 
 
+func on_gunscreenshake_value_changed(value: float):
+	vs.gun_screen_shake = value
+	%GunScreenShake.get_node("Label").text = "Gun Screen Shake: %.f" % (value * 100) + "%"
+	save_setting("GunScreenShake", value)
+
+func on_otherscreenshake_value_changed(value: float):
+	vs.other_screen_shake = value
+	%OtherScreenShake.get_node("Label").text = "Other Screen Shake: %.f" % (value * 100) + "%"
+	save_setting("OtherScreenShake", value)
+
 
 func on_mouselock(value):
 	if value: Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
@@ -162,6 +175,11 @@ func load_settings():
 	sfxvolume.get_node("Slider").value = data["SFXVolume"]
 	on_sfxvolume_changed(data["SFXVolume"])
 
+	%GunScreenShake.get_node("Slider").value = data["GunScreenShake"]
+	on_gunscreenshake_value_changed(data["GunScreenShake"])
+	%OtherScreenShake.get_node("Slider").value = data["OtherScreenShake"]
+	on_otherscreenshake_value_changed(data["OtherScreenShake"])
+
 	displaymode.selected = data["DisplayMode"]
 	on_displaymode_changed(data["DisplayMode"])
 	#resolutionscale.selected = data["ResolutionScale"]
@@ -171,6 +189,18 @@ func load_settings():
 	on_mouselock(data["MouseLock"])
 
 	await get_tree().process_frame
+
+	var preferred_controller_index = 0
+	var valid_controllers = []
+	if data["PreferredControllerGUID"] != "":
+		for j in Input.get_connected_joypads():
+			if Input.get_joy_guid(j) == data["PreferredControllerGUID"]:
+				valid_controllers.append(j)
+	if !valid_controllers.is_empty():
+		preferred_controller_index = valid_controllers[0] #first in the case of duplicate guids
+	controller_config.active_controller_node.get_node("Button").text = Input.get_joy_info(preferred_controller_index)["raw_name"]
+	inp.set_active_controller_index(preferred_controller_index)
+
 	controller_config.tooltip_icon_type_node.get_node("OptionButton").selected = data["TooltipIconType"]
 	controller_config.on_tooltip_icon_type_selected(data["TooltipIconType"])
 	controller_config.jump_on_hold_node.get_node("CheckBox").button_pressed = (data["JumpOnHold"]) #by allowing a signal here, it will automatically go to keyconfig's button as well

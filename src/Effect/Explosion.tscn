@@ -11,10 +11,8 @@ particles_anim_loop = false
 
 [node name="Explosion" type="CPUParticles2D" unique_id=2103415329]
 material = SubResource("CanvasItemMaterial_yjbno")
-emitting = false
 texture = ExtResource("2")
 lifetime = 0.5
-one_shot = true
 explosiveness = 1.0
 emission_shape = 1
 emission_sphere_radius = 8.0

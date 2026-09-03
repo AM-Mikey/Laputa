@@ -1,5 +1,9 @@
 extends Camera2D
 
+const MAX_SHAKE_PIXELS_FOR_RUMBLE := 30.0
+const RUMBLE_MIN_FREQ := 2.0
+const RUMBLE_MAX_FREQ := 25.0
+
 var h_dir = -1
 var homing_camera = false
 
@@ -22,7 +26,6 @@ var control_tween: Tween
 var control_return_tween: Tween
 var screen_shake_tween: Tween
 
-var screen_shake_enabled := true
 var noise := FastNoiseLite.new()
 var active_shakes: Array[ScreenShake] = []
 var active_impulses: Array[ScreenImpulse] = []
@@ -66,7 +69,6 @@ func _process(delta):
 			or inp.released("look_up") or inp.released("look_down"):
 				pan_vertical(get_v_dir())
 
-	if screen_shake_enabled:
 		process_shake(delta)
 	#else:
 		#var ll = w.current_level.get_node("LevelLimiter")
@@ -107,10 +109,22 @@ func reset(): #TODO: REMOVE THESE AWAITS IT CAUSES SHIT TO MULTITHREAD
 
 ### Screen Shake ###
 
-#write code to prevent shake if rumble is going on and vice versa
+func shake(pixels: float, duration: float = 0.4, frequency: float = 4.0, from_gun := false):
+	var pixel_multiplier = vs.gun_screen_shake if from_gun else vs.other_screen_shake
+	active_shakes.append(ScreenShake.new(pixels * pixel_multiplier, pixels, duration, frequency))
+
+func impulse(direction: Vector2, strength: float, duration: float = 0.15, curve: Curve = null, from_gun := false):
+	var strength_multiplier = vs.gun_screen_shake if from_gun else vs.other_screen_shake
+	active_impulses.append(ScreenImpulse.new(direction, strength * strength_multiplier, duration, curve if curve else default_impulse_curve))
+	#impulse rumble
+	var mag = clamp(strength / MAX_SHAKE_PIXELS_FOR_RUMBLE, 0.0, 1.0)
+	oup.vibrate_impulse(mag, duration)
+
 func process_shake(delta):
 	var total_offset := Vector2.ZERO
 	var t := Time.get_ticks_msec() / 1000.0
+	var rumble_weak := 0.0
+	var rumble_strong := 0.0
 	#shake
 	for s in active_shakes.duplicate():
 		s.elapsed += delta
@@ -122,6 +136,11 @@ func process_shake(delta):
 		var nx := noise.get_noise_1d(t * s.frequency + s.seed_x)
 		var ny := noise.get_noise_1d(t * s.frequency + s.seed_y)
 		total_offset += Vector2(nx, ny) * s.amplitude * decay
+		#shake rumble
+		var mag = clamp((s.base_amplitude * decay) / MAX_SHAKE_PIXELS_FOR_RUMBLE, 0.0, 1.0)
+		var freq_t = clamp(inverse_lerp(RUMBLE_MIN_FREQ, RUMBLE_MAX_FREQ, s.frequency), 0.0, 1.0)
+		rumble_weak = max(rumble_weak, mag * freq_t)
+		rumble_strong = max(rumble_strong, mag * (1.0 - freq_t))
 	#impulse
 	for i in active_impulses.duplicate():
 		i.elapsed += delta
@@ -132,17 +151,15 @@ func process_shake(delta):
 		var weight = i.curve.sample(ratio)
 		total_offset += i.direction * i.strength * weight
 
+	if rumble_weak > 0.01 or rumble_strong > 0.01:
+		oup.vibrate_shake(rumble_weak, rumble_strong)
+
 	if total_offset.length_squared() > 0.000001:
 		offset = total_offset
 	else:
 		offset = Vector2(0.001, 0.001)
 
 
-func shake(pixels: float, duration: float = 0.4, frequency: float = 4.0):
-	active_shakes.append(ScreenShake.new(pixels, duration, frequency))
-
-func impulse(direction: Vector2, strength: float, duration: float = 0.15, curve: Curve = null):
-	active_impulses.append(ScreenImpulse.new(direction, strength, duration, curve if curve else default_impulse_curve))
 
 ### MANUAL CONTROL
 

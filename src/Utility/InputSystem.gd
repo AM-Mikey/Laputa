@@ -1,4 +1,8 @@
 extends Node
+
+var active_controller_index = 0
+var controller_asleep = false
+
 var buttonconfig := {
 	holdjumping = false,
 	buttons = {},
@@ -51,6 +55,36 @@ var buffer:Array=[
 	["inventory",0,9000,9000],
 	]
 
+
+func set_active_controller_index(index):
+	active_controller_index = index
+	set_input_map_index(active_controller_index)
+	for j in Input.get_connected_joypads():
+		if j == active_controller_index:
+			oup.set_controller_light_color(j, oup.active_controller_color)
+		else:
+			oup.set_controller_light_color(j, oup.inactive_controller_color)
+
+func set_input_map_index(index: int):
+	for action in InputMap.get_actions():
+		for event in InputMap.action_get_events(action):
+			if event is InputEventJoypadButton or event is InputEventJoypadMotion:
+				InputMap.action_erase_event(action, event)
+				event.device = index
+				InputMap.action_add_event(action, event)
+
+
+func _input(event: InputEvent): #for sleep
+	if event.device == active_controller_index && (event is InputEventJoypadButton || (event is InputEventJoypadMotion && event.axis in [4, 5])): #triggers
+		if controller_asleep:
+			controller_asleep = false
+			oup.set_controller_light_color(active_controller_index, oup.active_controller_color)
+	elif event is InputEventKey:
+		if !controller_asleep:
+			controller_asleep = true
+			oup.set_controller_light_color(active_controller_index, oup.asleep_controller_color)
+	else:
+		printerr("ERROR: could not load input map data")
 
 
 func base_inputheld(button:String) -> bool:

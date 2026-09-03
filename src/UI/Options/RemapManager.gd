@@ -210,10 +210,12 @@ func load_input_map(path = input_map_path): #called on savesystem load options #
 						"joy":
 							new_input = InputEventJoypadButton.new()
 							new_input.set_button_index(i[1])
+							new_input.device = -1
 						"joy_analog":
 							new_input = InputEventJoypadMotion.new()
 							new_input.axis = i[1]
 							new_input.axis_value = i[2]
+							new_input.device = -1
 
 					InputMap.action_add_event(a, new_input) #TODO: joy analog might need deadzone set to 0 here
 
