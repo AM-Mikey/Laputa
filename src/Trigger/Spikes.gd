@@ -7,7 +7,7 @@ func _ready(): #Reminder: no function called can use await
 	w.emit_signal("finished_spawn_entities_step")
 
 func _do_damage():
-	active_pc.hit(damage, Vector2.ZERO)
+	active_pc.hit(damage, Vector2.ZERO, self)
 
 
 

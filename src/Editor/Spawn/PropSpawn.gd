@@ -112,6 +112,7 @@ func setup_vus(prop):
 			if i.is_in_group(vu_group):
 				if !get_if_prop_has_visual_utility(i, vu_group):
 					prop.remove_child(i)
+					i.visible = true
 					i.owner = null
 					add_child(i)
 					i.owner = w.current_level

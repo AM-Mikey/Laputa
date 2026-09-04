@@ -7,21 +7,23 @@ extends Node
 
 func state_process(_delta):
 	set_move_dir()
-	if mm.knockback_velocity == Vector2.ZERO:
-		mm.knockback_velocity = Vector2(mm.knockback_speed.x * mm.knockback_direction.x, mm.knockback_speed.y * -1)
-		pc.velocity.y = mm.knockback_velocity.y #set knockback y to this ONCE
 
-	pc.velocity.x += mm.knockback_velocity.x
-	pc.velocity.x = min(abs(pc.velocity.x), mm.speed.x) * sign(pc.velocity.x)
-	mm.knockback_velocity.x *= 0.5 #next frame it falls off
+	if mm.knockback_direction.length() <= 1.0:
+		pc.velocity.x += mm.knockback_velocity.x
+		pc.velocity.x = min(abs(pc.velocity.x), mm.speed.x) * sign(pc.velocity.x)
+		mm.knockback_velocity.x *= 0.5 #next frame it falls off
+	else:
+		pc.velocity += mm.knockback_velocity
+		mm.knockback_velocity = lerp(mm.knockback_velocity, Vector2.ZERO, 0.25)
 
-	if abs(mm.knockback_velocity.x) < 1:
+	if abs(mm.knockback_velocity.x) < 1.0:
 		mm.knockback_velocity = Vector2.ZERO
 		#pc.knockback = false
 		#print("changing from kb to cached")
 		var next_state: String = mm.cached_state.name.to_lower()
 		if (next_state in ["ladder", "knockback"]):
 			next_state = "run"
+
 		mm.change_state(next_state)
 		return
 
@@ -53,7 +55,7 @@ func get_move_velocity(velocity, move_dir):
 	if sign(move_dir.y) == -1:
 		out.y = mm.speed.y * pc.move_dir.y
 	#X
-	if move_dir.x != 0.0:
+	if move_dir.x != 0.0 and abs(out.x) <= mm.speed.x:
 		out.x = min(abs(out.x) + mm.acceleration, mm.speed.x)
 		out.x *= pc.move_dir.x
 	return out
@@ -73,6 +75,13 @@ func enter(_prev_state: String) -> void:
 
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
+
+	if mm.knockback_direction.length() <= 1.0:
+		mm.knockback_velocity = Vector2(mm.knockback_speed.x * mm.knockback_direction.x, mm.knockback_speed.y * -1)
+		pc.velocity.y = mm.knockback_velocity.y #set knockback y to this ONCE
+	else:
+		mm.knockback_velocity = mm.knockback_direction
+		pc.velocity = mm.knockback_velocity
 
 func exit(_next_state: String) -> void:
 	var disable = [

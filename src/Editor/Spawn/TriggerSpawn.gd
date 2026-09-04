@@ -166,6 +166,7 @@ func setup_vus(trigger):
 			if i.is_in_group(vu_group):
 				if !get_if_trigger_has_visual_utility(i, vu_group):
 					trigger.remove_child(i)
+					i.visible = true
 					i.owner = null
 					add_child(i)
 					i.owner = w.current_level

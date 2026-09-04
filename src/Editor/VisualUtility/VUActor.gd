@@ -52,6 +52,7 @@ enum ActorTeamFilter {NONE, ENEMY, NPC}
 							actor.remove_child(ac)
 							ac.owner = null
 							add_child(ac)
+							ac.visible = true
 							ac.owner = w.current_level
 
 			actor.queue_free()

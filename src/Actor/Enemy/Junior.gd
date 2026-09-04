@@ -87,7 +87,7 @@ func do_flip_check():
 
 ### SIGNALS ###
 
-func _on_hit(_damage, blood_direction):
+func _on_hit(_damage, blood_direction, _hitbox):
 	if sign(blood_direction.x) == sign(move_dir.x): #shot from behind
 		ap.play("Shock")
 		await ap.animation_finished
