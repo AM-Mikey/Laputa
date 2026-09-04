@@ -44,9 +44,7 @@ func setup(): #Reminder: no function called can use await
 	await get_tree().physics_frame
 	if toggled:
 		create_phys_wind_column()
-
-
-
+		
 ### HELPERS ###
 
 func create_phys_wind_column():
@@ -80,7 +78,7 @@ func get_column_rect() -> Rect2:
 	if $WorldCast.is_colliding():
 		end_point = $WorldCast.get_collision_point() + Vector2(0, 8).rotated(wind_dir.angle())
 	else:
-		print("PhysFan didn't find a collision point, using PhysFan/WorldCast's length")
+		#print("PhysFan didn't find a collision point, using PhysFan/WorldCast's length")
 		end_point = $WorldCast.global_position + $WorldCast.target_position.rotated($WorldCast.rotation) + Vector2(0, 8).rotated(wind_dir.angle())
 
 	var rect_pos = Vector2(min(start_point.x, end_point.x), min(start_point.y, end_point.y))
@@ -144,7 +142,12 @@ func _physics_process(_delta):
 	else:
 		doing_retrigger_wind_up = false #done winding up
 		$AnimationPlayer.speed_scale = max_speed_scale #TODO: doesnt yet have a way to play a continuous sfx, make vol scalable to speed
-
+	
+	#update wind hitobx
+	if phys_wind_column:
+		phys_wind_column.column_rect = get_column_rect()
+		phys_wind_column.update()
+	
 ### SIGNALS ###
 
 func on_switch_toggled(switch_toggled):
