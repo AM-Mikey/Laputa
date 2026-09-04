@@ -37,7 +37,8 @@ func setup():
 		$NotOnScreenTimer.start()
 
 func _on_physics_process(_delta):
-	velocity = calc_velocity(speed)
+	if wind_areas_inside.size() == 0:
+		velocity = calc_velocity(speed)
 	move_and_slide()
 
 func calc_velocity(projectile_speed) -> Vector2:
