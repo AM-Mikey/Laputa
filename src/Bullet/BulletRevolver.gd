@@ -6,7 +6,7 @@ var collision_shape: RectangleShape2D
 
 
 
-func _ready():
+func setup():
 	rotation_degrees = get_rot(direction)
 
 func _on_physics_process(_delta):

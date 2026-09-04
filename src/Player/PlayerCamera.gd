@@ -1,6 +1,6 @@
 extends Camera2D
 
-const MAX_SHAKE_PIXELS_FOR_RUMBLE := 30.0
+const MAX_SHAKE_PIXELS_FOR_RUMBLE := 32.0
 const RUMBLE_MIN_FREQ := 2.0
 const RUMBLE_MAX_FREQ := 25.0
 

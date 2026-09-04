@@ -1,25 +1,26 @@
 [gd_scene format=4 uid="uid://dqg7tphhf01n2"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_gqwwp"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_3ucb2"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_tj576"]
-[ext_resource type="TileSet" path="res://src/Tile/Wastes.tres" id="4_tdjow"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_gqwwp"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_3ucb2"]
+[ext_resource type="TileSet" uid="uid://lxvvoeye2frj" path="res://src/Tile/Wastes.tres" id="4_tdjow"]
 [ext_resource type="Resource" path="res://src/Background/PlainsWastes.tres" id="4_tj576"]
-[ext_resource type="Texture2D" path="res://assets/Background/PlainsWastes.png" id="5_w87fu"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="6_8lqyu"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_w87fu"]
-[ext_resource type="Script" path="res://src/Tile/WastesAutoTile.gd" id="9_633jl"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="9_ag25g"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="10_cmtxb"]
-[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/WaypointGlobal.tscn" id="10_htl27"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_c6eqk"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointGlobal.gd" id="12_fdvdy"]
-[ext_resource type="Script" path="res://src/Tile/WastesAnimator.gd" id="12_obofi"]
-[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="13_hmghs"]
-[ext_resource type="Texture2D" path="res://assets/Actor/Vehicle/SushiFullSize.png" id="13_iyha2"]
-[ext_resource type="PackedScene" path="res://src/Editor/TitlePreview.tscn" id="14_iyha2"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="16_maf5u"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="18_mop3r"]
+[ext_resource type="Texture2D" uid="uid://cx3q6icspkqra" path="res://assets/Background/PlainsWastes.png" id="5_w87fu"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="6_8lqyu"]
+[ext_resource type="Script" uid="uid://brhels8sdivp3" path="res://src/Tile/WastesAutoTile.gd" id="9_633jl"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="9_ag25g"]
+[ext_resource type="PackedScene" uid="uid://dim3av368jfya" path="res://src/Editor/VisualUtility/WaypointGlobal.tscn" id="10_htl27"]
+[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_c6eqk"]
+[ext_resource type="Script" uid="uid://wftb1fa7j2ti" path="res://src/Tile/WastesAnimator.gd" id="12_obofi"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="13_hmghs"]
+[ext_resource type="Texture2D" uid="uid://c7xr7xjmw36a7" path="res://assets/Actor/Vehicle/SushiFullSize.png" id="13_iyha2"]
+[ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="14_iyha2"]
+
+[sub_resource type="Gradient" id="Gradient_iyha2"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(0.76862746, 0.42745098, 0.09411765, 1, 0.8352941, 0.9490196, 0.28235295, 1, 0.3647059, 0.68235296, 0.21176471, 1, 0.8352941, 0.9490196, 0.28235295, 1, 0.76862746, 0.42745098, 0.09411765, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
 
 [node name="WastesTesting" type="Node2D" unique_id=156549534]
 visibility_layer = 2
@@ -27,6 +28,7 @@ script = ExtResource("1_gqwwp")
 level_name = "WastesTesting"
 music = "dogtown_day"
 dialog_json = "res://src/Dialog/Village.json"
+controller_color_gradient = SubResource("Gradient_iyha2")
 
 [node name="LevelLimiter" parent="." unique_id=1349839013 instance=ExtResource("2_3ucb2")]
 visibility_layer = 2
@@ -34,8 +36,6 @@ offset_left = 1600.0
 offset_top = 1648.0
 offset_right = 3008.0
 offset_bottom = 2240.0
-mouse_filter = 2
-script = ExtResource("3_tj576")
 background_resource = ExtResource("4_tj576")
 texture = ExtResource("5_w87fu")
 layers = 5
@@ -102,9 +102,6 @@ visibility_layer = 2
 [node name="Cardinal" parent="Spawns" unique_id=1046349528 instance=ExtResource("11_c6eqk")]
 visibility_layer = 2
 position = Vector2(2584, 1928)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_w87fu")
 actor_path = "res://src/Actor/Enemy/Cardinal.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -125,8 +122,6 @@ offset_left = 1648.0
 offset_top = 2112.0
 offset_right = 1664.0
 offset_bottom = 2144.0
-mouse_filter = 2
-script = ExtResource("10_cmtxb")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -147,8 +142,6 @@ offset_left = 2864.0
 offset_top = 2160.0
 offset_right = 2896.0
 offset_bottom = 2176.0
-mouse_filter = 2
-script = ExtResource("10_cmtxb")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -167,8 +160,6 @@ offset_left = 3008.0
 offset_top = 1600.0
 offset_right = 3024.0
 offset_bottom = 2160.0
-mouse_filter = 2
-script = ExtResource("10_cmtxb")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -183,20 +174,14 @@ size_is_default = false
 [node name="Waypoints" type="Node2D" parent="." unique_id=228139383]
 visibility_layer = 2
 
-[node name="Waypoint" type="Area2D" parent="Waypoints" unique_id=368447829 groups=["Entities", "VisualUtilities", "WaypointGlobals", "Waypoints"] instance=ExtResource("10_htl27")]
+[node name="Waypoint" parent="Waypoints" unique_id=368447829 instance=ExtResource("10_htl27")]
 visibility_layer = 2
 position = Vector2(2392, 1976)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_fdvdy")
 owner_id = "bird1"
 
-[node name="Waypoint2" type="Area2D" parent="Waypoints" unique_id=2037427852 groups=["Entities", "VisualUtilities", "WaypointGlobals", "Waypoints"] instance=ExtResource("10_htl27")]
+[node name="Waypoint2" parent="Waypoints" unique_id=2037427852 instance=ExtResource("10_htl27")]
 visibility_layer = 2
 position = Vector2(2576, 1928)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_fdvdy")
 owner_id = "bird1"
 index = 1
 
@@ -211,29 +196,17 @@ script = ExtResource("9_633jl")
 [node name="VanishingPoint" parent="." unique_id=1961289487 instance=ExtResource("13_hmghs")]
 visibility_layer = 2
 position = Vector2(2304, 2008)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_maf5u")
 
 [node name="SpawnPoint" parent="." unique_id=865907600 instance=ExtResource("6_8lqyu")]
 visibility_layer = 2
 position = Vector2(2680, 1888)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_mop3r")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1753038356]
 visibility_layer = 2
 position = Vector2(1912, 1908)
 texture = ExtResource("13_iyha2")
 
-[node name="TitlePreview" type="Area2D" parent="." unique_id=2052223351 groups=["TitlePreviews"] instance=ExtResource("14_iyha2")]
+[node name="TitlePreview" parent="." unique_id=2052223351 instance=ExtResource("14_iyha2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2016, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_maf5u")
 zoom = 3.0
-
-[connection signal="body_exited" from="Triggers/KillBox" to="Triggers/KillBox" method="_on_body_exited"]

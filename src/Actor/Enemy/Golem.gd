@@ -104,9 +104,9 @@ func charge_shake():
 	if f.pc():
 		var player_distance = f.pc().global_position.distance_to(global_position)
 		var max_distance := 512
-		var max_shape_pixels := 4.0
-		var shake_pixels = remap(player_distance, 0, max_distance, max_shape_pixels, 0.0)
-		shake_pixels = clampf(shake_pixels, 0.0, max_shape_pixels)
+		var max_shake_pixels := 4.0
+		var shake_pixels = remap(player_distance, 0, max_distance, max_shake_pixels, 0.0)
+		shake_pixels = clampf(shake_pixels, 0.0, max_shake_pixels)
 		#f.pc().get_node("PlayerCamera").shake(shake_pixels, 0.2, 4.0)
 		f.pc().get_node("PlayerCamera").impulse(Vector2.DOWN, shake_pixels, 0.2, charge_impulse_curve)
 
@@ -115,9 +115,9 @@ func slam_shake():
 	if f.pc():
 		var player_distance = f.pc().global_position.distance_to(global_position)
 		var max_distance := 512
-		var max_shape_pixels := 16.0
-		var shake_pixels = remap(player_distance, 0, max_distance, max_shape_pixels, 0.0)
-		shake_pixels = clampf(shake_pixels, 0.0, max_shape_pixels)
+		var max_shake_pixels := 16.0
+		var shake_pixels = remap(player_distance, 0, max_distance, max_shake_pixels, 0.0)
+		shake_pixels = clampf(shake_pixels, 0.0, max_shake_pixels)
 		f.pc().get_node("PlayerCamera").shake(shake_pixels, 0.6, 16.0)
 
 func calc_velocity(dir, _do_gravity = true, _do_acceleration = true, _do_friction = true) -> Vector2:

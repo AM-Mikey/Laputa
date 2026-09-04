@@ -91,8 +91,6 @@ func is_world_blocking(target) -> bool:
 	else:
 		return false
 
-
-
 ### SIGNALS ###
 
 func _on_CollisionDetector_body_entered(body):

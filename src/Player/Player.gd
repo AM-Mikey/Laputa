@@ -127,6 +127,7 @@ func hit(damage, knockback_direction):
 		if damage > 0:
 			hp -= damage
 			am.play("pc_hurt")
+			oup.vibrate_impulse(1)
 			emit_signal("hp_updated", hp, max_hp, "take_damage")
 			if experience_number != null: experience_number.queue_free()
 			if heart_number != null: heart_number.queue_free()
@@ -221,6 +222,7 @@ func _on_ItemDetector_area_entered(area):
 
 	if area.get_collision_layer_value(11): #pickup
 		var pickup = area.get_parent()
+		oup.vibrate_impulse(0.1)
 
 
 		if pickup.is_in_group("HeartPickups"):

@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cedgb08fkp6av"]
+[gd_scene format=3 uid="uid://cedgb08fkp6av"]
 
 [ext_resource type="Texture2D" uid="uid://dmcaw64yr8dm3" path="res://assets/Effect/Splash.png" id="1"]
-[ext_resource type="Script" uid="uid://dw4anlvmhp12k" path="res://src/Effect/Splash.gd" id="2"]
+[ext_resource type="Script" uid="uid://dw4anlvmhp12k" path="res://src/Effect/Outdated/Splash.gd" id="2"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "Splash"
@@ -24,15 +24,13 @@ _data = {
 &"Splash": SubResource("1")
 }
 
-[node name="Splash" type="Node2D"]
+[node name="Splash" type="Node2D" unique_id=1727288480]
 position = Vector2(0, -8)
 script = ExtResource("2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1826474575]
 texture = ExtResource("1")
 hframes = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_0bkjk")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=961662367]
+libraries/ = SubResource("AnimationLibrary_0bkjk")

@@ -3,6 +3,7 @@ extends Node2D
 var secondary_started = false
 
 func _ready():
+	oup.vibrate_impulse_light(0.1, 0.5)
 	for p in get_children():
 		p.emitting = false
 		p.one_shot = true

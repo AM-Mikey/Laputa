@@ -10,7 +10,7 @@ const FIZZLE_ARMOR = preload("res://src/Effect/BulletFizzleArmor.tscn")
 @export var base_gravity := 300.0
 @export var water_gravity := 150.0
 @export var damage := 0.0
-@export var camera_recoil_distance : float
+@export var camera_recoil_distance := 0.0
 @export var camera_recoil_hit_distance : float
 @export var camera_recoil_wall_distance : float
 @export var camera_recoil_curve : Curve
@@ -49,9 +49,13 @@ const level_exit_safe_distance: float = 512.0
 
 
 func _ready():
+	print("doing ready")
 	setup_timeout()
-	if f.pc() && camera_recoil_distance != 0.0:
+	if f.pc():
+		if camera_recoil_distance > 0.0:
 			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_distance, camera_recoil_time, camera_recoil_curve)
+		else: #do simple vibrate instead
+			oup.vibrate_impulse(0.1, 0.075)
 	setup()
 
 func setup(): #for children

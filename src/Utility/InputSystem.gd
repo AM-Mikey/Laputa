@@ -18,6 +18,9 @@ var Y_axis_shoot_deadzone:float = 0.25
 			#ETC
 var can_act:= true
 
+func _ready():
+	Input.joy_connection_changed.connect(_on_joypad_connection_changed)
+
 func rawstick() -> Vector2:
 	var outputX:float = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var outputY:float = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
@@ -55,6 +58,12 @@ var buffer:Array=[
 	["inventory",0,9000,9000],
 	]
 
+func _on_joypad_connection_changed(_device: int, _connected: bool): #for if controller is connected during
+	print("controllers changed")
+	if active_controller_index in Input.get_connected_joypads():
+		set_active_controller_index(active_controller_index)
+	else:
+		set_active_controller_index(Input.get_connected_joypads()[0]) #lowest number
 
 func set_active_controller_index(index):
 	active_controller_index = index
@@ -83,8 +92,6 @@ func _input(event: InputEvent): #for sleep
 		if !controller_asleep:
 			controller_asleep = true
 			oup.set_controller_light_color(active_controller_index, oup.asleep_controller_color)
-	else:
-		printerr("ERROR: could not load input map data")
 
 
 func base_inputheld(button:String) -> bool:

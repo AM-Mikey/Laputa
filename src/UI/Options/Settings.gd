@@ -190,16 +190,17 @@ func load_settings():
 
 	await get_tree().process_frame
 
-	var preferred_controller_index = 0
-	var valid_controllers = []
-	if data["PreferredControllerGUID"] != "":
-		for j in Input.get_connected_joypads():
-			if Input.get_joy_guid(j) == data["PreferredControllerGUID"]:
-				valid_controllers.append(j)
-	if !valid_controllers.is_empty():
-		preferred_controller_index = valid_controllers[0] #first in the case of duplicate guids
-	controller_config.active_controller_node.get_node("Button").text = Input.get_joy_info(preferred_controller_index)["raw_name"]
-	inp.set_active_controller_index(preferred_controller_index)
+	if Input.get_connected_joypads().size() > 0:
+		var preferred_controller_index = 0
+		var valid_controllers = []
+		if data["PreferredControllerGUID"] != "":
+			for j in Input.get_connected_joypads():
+				if Input.get_joy_guid(j) == data["PreferredControllerGUID"]:
+					valid_controllers.append(j)
+		if !valid_controllers.is_empty():
+			preferred_controller_index = valid_controllers[0] #first in the case of duplicate guids
+		controller_config.active_controller_node.get_node("Button").text = Input.get_joy_info(preferred_controller_index)["raw_name"]
+		inp.set_active_controller_index(preferred_controller_index)
 
 	controller_config.tooltip_icon_type_node.get_node("OptionButton").selected = data["TooltipIconType"]
 	controller_config.on_tooltip_icon_type_selected(data["TooltipIconType"])

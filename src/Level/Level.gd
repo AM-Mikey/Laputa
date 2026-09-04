@@ -15,6 +15,7 @@ var conversation_on_enter: String
 @export var debug_main_mission_stage_name: String
 @export var side_missions_on_enter: Array[String]
 @export var debug_guns_on_enter: Array[String] = []
+@export var controller_color_gradient: Gradient
 
 var time_created: Dictionary
 
@@ -26,6 +27,8 @@ func _ready():
 	if has_node("Notes"):
 		get_node("Notes").visible = false
 	setup_kill_box()
+	if controller_color_gradient:
+		oup.level_gradient = controller_color_gradient
 
 	for i in $TileMap.get_children():
 		i.fix_invalid_tiles()

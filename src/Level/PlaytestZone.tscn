@@ -1838,6 +1838,71 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="Bat" type="Area2D" parent="Spawns" unique_id=1101564188 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(4032, 2400)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_ys6yb")
+actor_path = "res://src/Actor/Enemy/Bat.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"flap_time": [0.1, 3, ""],
+"id": [&"Bat", 4, ""],
+"idle_time": [0.05, 3, ""],
+"move_dir": [Vector2(0, 0), 5, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"start_waypoint": [0, 2, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Frog" type="Area2D" parent="Spawns" unique_id=896678959 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_nycf8")]
+modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
+z_index = 999
+position = Vector2(2056, 1920)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_ys6yb")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"croak_time": [1.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [1, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Frog", 4, ""],
+"jump_delay": [3.0, 3, ""],
+"speed": [Vector2(50, 100), 5, ""],
+"tongue_damage": [2.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="LookVector" type="Area2D" parent="Spawns/Frog" unique_id=184522390 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_e3csl")]
+visibility_layer = 2
+position = Vector2(0, -7)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_jsyjw")
+tag_name = "look"
+snap_degrees = 180.0
+movement_locked = true
+
+[node name="TongueRange" type="Area2D" parent="Spawns/Frog" unique_id=83080317 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_ys6yb")]
+visibility_layer = 2
+position = Vector2(-32, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_0qug2")
+tag_name = "tongue_range"
+lock_y = true
+
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
 
@@ -1951,3 +2016,5 @@ zoom = 2.0
 [connection signal="input_event" from="Spawns/HealthUpgrade" to="Spawns/HealthUpgrade" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Stalagtite31" to="Spawns/Stalagtite31" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Stalagtite32" to="Spawns/Stalagtite32" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Bat" to="Spawns/Bat" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Frog" to="Spawns/Frog" method="_on_input_event"]

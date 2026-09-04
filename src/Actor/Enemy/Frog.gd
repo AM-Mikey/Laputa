@@ -99,6 +99,14 @@ func enter_jump(_last_state):
 func do_jump(_delta):
 	if is_on_floor():
 		move_dir = Vector2.ZERO
+
+		if f.pc():
+			var player_distance = f.pc().global_position.distance_to(global_position)
+			var max_distance = 128
+			var max_shake = 0.15
+			var shake = remap(player_distance, 0, max_distance, max_shake, 0.0)
+			oup.vibrate_impulse_light(shake)
+
 		$AnimationPlayer.play("Stand")
 		$JumpTimer.start(jump_delay)
 		$CroakTimer.start(croak_time)
