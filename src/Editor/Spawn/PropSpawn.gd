@@ -8,6 +8,24 @@ var physics_prop_spawn_distance = 0.001
 
 @onready var w = get_tree().get_root().get_node("World")
 
+func _draw():
+	var prop = get_prop_name()
+	if prop == "": return
+
+	match prop:
+		"PhysFan":
+			var from_point = Vector2(8.0, 8.0)
+			var to_point = $Distance.position
+			var color = Color.CYAN
+			var width = 2.0
+			color.a = 0.4
+			draw_line(from_point, to_point, color, width)
+			draw_arrow(to_point, $Distance.position.normalized(), 8.0, PI / 6.0, color, width)
+
+func draw_arrow(pos: Vector2, dir: Vector2, arrow_length: float, arrow_angle: float, color: Color, width: float = -1.0):
+	draw_line(pos, pos - dir.rotated(arrow_angle) * arrow_length, color, width)
+	draw_line(pos, pos - dir.rotated(-arrow_angle) * arrow_length, color, width)
+
 func _ready():
 	if prop_path == null:
 		printerr("ERROR: no prop chosen in PropSpawn")
@@ -149,7 +167,45 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
 			inspector.on_selected(self, "prop_spawn")
 
 func on_property_changed(p_name, p_value):
-	pass
+	var prop = get_prop_name()
+	if prop == "": return
 
-func on_vu_value_changed(vu, _old_value, _new_value):
-	pass
+			
+
+func on_vu_value_changed(vu, _old_value, new_value):
+	var prop = get_prop_name()
+	if prop == "": return
+
+	match prop:
+		"PhysFan":
+			if vu.is_in_group("VUVectors") and vu.tag_name == "wind_dir":
+				var distance_waypoint = $Distance
+				var true_wp_pos = $Distance.position - Vector2(8.0, 8.0) - 8.0 * new_value
+				var curr_distance = true_wp_pos.length()
+				
+				var is_dir_vertical = new_value.snappedf(1.0) in [Vector2.UP, Vector2.DOWN]
+				distance_waypoint.lock_x = is_dir_vertical
+				distance_waypoint.lock_y = !is_dir_vertical
+				distance_waypoint.position = (curr_distance + 8.0) * new_value + Vector2(8.0, 8.0)
+				queue_redraw()
+			elif vu.is_in_group("WaypointLocals") and vu.tag_name == "distance":
+				queue_redraw()
+
+func get_prop_name() -> String:
+	var file_path = prop_path
+	if file_path.begins_with("uid://"):
+		var uid = ResourceUID.text_to_id(prop_path)
+		if !ResourceUID.has_id(uid):
+			print("ActorSpawn | get_actor_name(): The provided actor_path doesn't have a corresponding UID")
+			return ""
+		file_path = ResourceUID.get_id_path(uid)
+
+	if !file_path.is_absolute_path():
+		print("ActorSpawn | get_actor_name(): actor_path is not a valid path!")
+		return ""
+	var actor = file_path.get_file()
+	if actor.get_extension() != "tscn":
+		printerr("ActorSpawn | get_actor_name(): actor_path does not point to a scene (.tscn) file!")
+		return ""
+	actor = actor.split(".")[0]
+	return actor

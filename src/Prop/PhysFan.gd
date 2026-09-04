@@ -3,11 +3,12 @@ extends Prop
 const ICON = preload("res://assets/Prop/PhysFanIcon.png")
 const PHYS_WIND_COLUMN = preload("res://src/Utility/PhysWindColumn.tscn")
 
-
 var wind_dir : Vector2
-var phys_wind_column : Node
+var distance: = 0.0
 @export var speed := 20.0 #4 is about equal with gravity
 @export var toggled := true
+
+var phys_wind_column : Node
 var fan_start_sfx_player: Node
 var fan_loop_sfx_player: Node
 var fan_vis_wind_up_duration := 3.33
@@ -16,7 +17,8 @@ var doing_retrigger_wind_up := false
 
 func setup(): #Reminder: no function called can use await
 	wind_dir = $WindVector.direction.snapped(Vector2(1, 1)) #remove VUVector imprecision
-
+	distance = (($Distance.position - Vector2(8.0, 8.0)) * wind_dir - 8.0 * wind_dir).length()
+	$WorldCast.target_position.x = -distance + 8.0
 	match wind_dir:
 		Vector2.LEFT:
 			$Sprite2D.frame_coords.y = 0

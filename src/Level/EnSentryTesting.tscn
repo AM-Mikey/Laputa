@@ -779,7 +779,7 @@ properties = {
 visibility_layer = 2
 script = ExtResource("14_mdql1")
 tag_name = "player_detector"
-value = Rect2(-144, -192, 384, 384)
+value = Rect2(-152, -200, 384, 384)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry12" unique_id=984527057 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 visible = false
@@ -1044,7 +1044,7 @@ properties = {
 visibility_layer = 2
 script = ExtResource("14_mdql1")
 tag_name = "player_detector"
-value = Rect2(-192, -224, 384, 384)
+value = Rect2(-200, -200, 384, 384)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry17" unique_id=1730444829 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 visibility_layer = 2
@@ -1066,13 +1066,12 @@ tag_name = "shoot_y"
 lock_x = true
 
 [node name="Water1" type="MarginContainer" parent="Spawns" unique_id=1632964686 groups=["TriggerSpawns"] instance=ExtResource("13_l0h4m")]
-modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
-offset_left = 2944.0
+offset_left = 2936.0
 offset_top = 1664.0
-offset_right = 3168.0
+offset_right = 3160.0
 offset_bottom = 2384.0
 mouse_filter = 2
 script = ExtResource("8_edts7")
@@ -1904,12 +1903,22 @@ properties = {
 "toggled": [true, 1, ""]
 }
 
+[node name="Distance" type="Area2D" parent="Spawns/PhysFan" unique_id=1207560166 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visibility_layer = 2
+position = Vector2(256.27112, 8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_qyk2k")
+tag_name = "distance"
+lock_y = true
+
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("19_acqtr")]
 visibility_layer = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("20_acqtr")
+tag_name = "wind_dir"
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1929,12 +1938,22 @@ properties = {
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" type="Area2D" parent="Spawns/PhysFan1" unique_id=1128398673 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("19_acqtr")]
+[node name="Distance" type="Area2D" parent="Spawns/PhysFan1" unique_id=636222661 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visibility_layer = 2
+position = Vector2(8, -208)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_qyk2k")
+tag_name = "distance"
+lock_x = true
+
+[node name="WindVector" type="Area2D" parent="Spawns/PhysFan1" unique_id=611934309 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("19_acqtr")]
 visibility_layer = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("20_acqtr")
+tag_name = "wind_dir"
 direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
@@ -1955,12 +1974,22 @@ properties = {
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" type="Area2D" parent="Spawns/PhysFan2" unique_id=1670048636 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("19_acqtr")]
+[node name="Distance" type="Area2D" parent="Spawns/PhysFan2" unique_id=359427698 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visibility_layer = 2
+position = Vector2(8, -128)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_qyk2k")
+tag_name = "distance"
+lock_x = true
+
+[node name="WindVector" type="Area2D" parent="Spawns/PhysFan2" unique_id=544047623 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("19_acqtr")]
 visibility_layer = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("20_acqtr")
+tag_name = "wind_dir"
 direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
@@ -1981,12 +2010,22 @@ properties = {
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" type="Area2D" parent="Spawns/PhysFan3" unique_id=360009050 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("19_acqtr")]
+[node name="Distance" type="Area2D" parent="Spawns/PhysFan3" unique_id=965826635 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visibility_layer = 2
+position = Vector2(8, -72)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_qyk2k")
+tag_name = "distance"
+lock_x = true
+
+[node name="WindVector" type="Area2D" parent="Spawns/PhysFan3" unique_id=1387935275 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("19_acqtr")]
 visibility_layer = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("20_acqtr")
+tag_name = "wind_dir"
 direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
@@ -2223,13 +2262,23 @@ properties = {
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" type="Area2D" parent="Spawns/PhysFan4" unique_id=1720471834 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("19_acqtr")]
+[node name="Distance" type="Area2D" parent="Spawns/PhysFan4" unique_id=1092359970 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visibility_layer = 2
+position = Vector2(-256, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_qyk2k")
+tag_name = "distance"
+lock_x = true
+
+[node name="WindVector" type="Area2D" parent="Spawns/PhysFan4" unique_id=850089880 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("19_acqtr")]
 visibility_layer = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("20_acqtr")
-direction = Vector2(-4.371139e-08, -1)
+tag_name = "wind_dir"
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2249,13 +2298,23 @@ properties = {
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" type="Area2D" parent="Spawns/PhysFan5" unique_id=138853876 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("19_acqtr")]
+[node name="Distance" type="Area2D" parent="Spawns/PhysFan5" unique_id=1441641015 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visibility_layer = 2
+position = Vector2(-256, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_qyk2k")
+tag_name = "distance"
+lock_x = true
+
+[node name="WindVector" type="Area2D" parent="Spawns/PhysFan5" unique_id=1070961000 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("19_acqtr")]
 visibility_layer = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("20_acqtr")
-direction = Vector2(-4.371139e-08, -1)
+tag_name = "wind_dir"
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://jk7dd4awkfvv" path="res://src/Prop/PhysFan.gd" id="1_gjt0e"]
 [ext_resource type="Texture2D" uid="uid://dgpbiesdiqwdg" path="res://assets/Prop/PhysFan.png" id="2_rweh6"]
 [ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="3_igokt"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="4_igokt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rweh6"]
 size = Vector2(16, 16)
@@ -83,12 +84,6 @@ centered = false
 hframes = 4
 vframes = 4
 
-[node name="WindVector" parent="." unique_id=872564127 instance=ExtResource("3_igokt")]
-position = Vector2(8, 8)
-direction = Vector2(-1, 0)
-snap_degrees = 90.0
-movement_locked = true
-
 [node name="WorldCast" type="RayCast2D" parent="." unique_id=2024427602]
 position = Vector2(8, 8)
 target_position = Vector2(-256, 0)
@@ -111,3 +106,15 @@ one_shot = true
 
 [node name="VisWindDown" type="Timer" parent="." unique_id=56432646]
 one_shot = true
+
+[node name="WindVector" parent="." unique_id=872564127 instance=ExtResource("3_igokt")]
+position = Vector2(8, 8)
+tag_name = "wind_dir"
+direction = Vector2(-1, 0)
+snap_degrees = 90.0
+movement_locked = true
+
+[node name="Distance" parent="." unique_id=1432238783 instance=ExtResource("4_igokt")]
+position = Vector2(-264, 8)
+tag_name = "distance"
+lock_x = true
