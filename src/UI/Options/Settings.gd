@@ -187,13 +187,15 @@ func load_settings():
 	_on_camera_pan_speed_changed(data["CameraPanSpeed"])
 
 	displaymode.selected = data["DisplayMode"]
-	on_displaymode_changed(data["DisplayMode"])
+	if SaveSystem.first_time_loading_settings:
+		on_displaymode_changed(data["DisplayMode"])
 	#resolutionscale.selected = data["ResolutionScale"]
 	#on_resolutionscale_changed(data["ResolutionScale"])
 
 	mouselock.button_pressed = data["MouseLock"]
 	on_mouselock(data["MouseLock"])
 
+	SaveSystem.first_time_loading_settings = false
 	await get_tree().process_frame
 	controller_config.tooltip_icon_type_node.get_node("OptionButton").selected = data["TooltipIconType"]
 	controller_config.on_tooltip_icon_type_selected(data["TooltipIconType"])
