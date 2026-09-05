@@ -1669,7 +1669,7 @@ properties = {
 visibility_layer = 2
 script = ExtResource("14_mdql1")
 tag_name = "player_detector"
-value = Rect2(-192, -192, 384, 384)
+value = Rect2(-192, -200, 384, 384)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry26" unique_id=1998186146 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
 visibility_layer = 2
@@ -2278,7 +2278,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("20_acqtr")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2314,9 +2314,48 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("20_acqtr")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
+
+[node name="Crusher" type="Area2D" parent="Spawns" unique_id=402634482 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_d7k7o")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3544, 2480)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_4pk0b")
+actor_path = "res://src/Actor/Enemy/Crusher.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"crushing": [true, 1, ""],
+"debug": [false, 1, ""],
+"do_bubbles": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Crusher", 4, ""],
+"loop": [true, 1, ""],
+"non_segment_path_reverse": [false, 1, ""],
+"non_segment_path_start": [0.0, 3, ""],
+"path_type": [0, 2, "Segment:0,Rectangle:1,Ellipse:2"],
+"speed": [Vector2(150, 350), 5, ""],
+"travel_time": [3.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="ToPoint" type="Area2D" parent="Spawns/Crusher" unique_id=950496797 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_flikr")]
+visibility_layer = 2
+position = Vector2(0, -80)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_qyk2k")
+tag_name = "to_point"
+
+[node name="Shape" type="Node2D" parent="Spawns/Crusher" unique_id=288921876 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("13_xxkol")]
+visible = false
+visibility_layer = 2
+script = ExtResource("14_mdql1")
+tag_name = "shape_define"
+value = Rect2(-16, -16, 48, 48)
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
@@ -2405,3 +2444,4 @@ zoom = 2.0
 [connection signal="input_event" from="Spawns/BreakBlock25" to="Spawns/BreakBlock25" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/PhysFan4" to="Spawns/PhysFan4" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/PhysFan5" to="Spawns/PhysFan5" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Crusher" to="Spawns/Crusher" method="_on_input_event"]
