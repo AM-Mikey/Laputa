@@ -17,8 +17,8 @@ var doing_retrigger_wind_up := false
 
 func setup(): #Reminder: no function called can use await
 	wind_dir = $WindVector.direction.snapped(Vector2(1, 1)) #remove VUVector imprecision
-	distance = (($Distance.position - Vector2(8.0, 8.0)) * wind_dir - 8.0 * wind_dir).length()
-	$WorldCast.target_position.x = -distance + 8.0
+	distance = ($Distance.position - Vector2(8.0, 8.0) - 8.0 * wind_dir).length()
+	$WorldCast.target_position.x = -distance
 	match wind_dir:
 		Vector2.LEFT:
 			$Sprite2D.frame_coords.y = 0

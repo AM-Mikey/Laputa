@@ -88,6 +88,7 @@ vframes = 4
 position = Vector2(8, 8)
 target_position = Vector2(-256, 0)
 collision_mask = 8
+hit_from_inside = true
 
 [node name="EditorArea" type="Area2D" parent="." unique_id=2019635167]
 collision_layer = 0

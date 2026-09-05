@@ -39,7 +39,7 @@ func _on_BodyDetector_body_entered(body: Node2D):
 		target = body.get_parent()
 	elif body.get_collision_layer_value(2) || body.get_collision_layer_value(8): #enemy, npc
 		if body.is_wind_affected:
-			print("got one")
+			#print("got one")
 			target = body
 	elif body.get_collision_layer_value(5):
 		if body.is_in_group("PhysicsProps"):

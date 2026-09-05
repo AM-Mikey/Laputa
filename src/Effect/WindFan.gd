@@ -20,6 +20,12 @@ func _ready():
 func update(): 
 	var lifetime = tile_distance / 6.5
 	var amount = tile_distance * 1.5
+	var visible_rect: = Rect2()
+	visible_rect.size.x = (tile_distance + 16.0 * 3.0) * 7.0
+	visible_rect.size.y = 16.0 * 3.0
+	visible_rect.position.x = -16.0 * 1.5 * 7.0
+	$Left.visibility_rect = visible_rect
+	$Right.visibility_rect = visible_rect
 	$Left.lifetime = lifetime
 	$Right.lifetime = lifetime
 	$Left.amount_ratio = amount / max_amount
