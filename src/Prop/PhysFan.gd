@@ -5,7 +5,7 @@ const PHYS_WIND_COLUMN = preload("res://src/Utility/PhysWindColumn.tscn")
 
 var wind_dir : Vector2
 var distance: = 0.0
-@export var speed := 20.0 #4 is about equal with gravity
+@export var speed := 450.0 #300.0 is about equal with gravity
 @export var toggled := true
 
 var phys_wind_column : Node
