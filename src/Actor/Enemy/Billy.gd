@@ -287,7 +287,13 @@ func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction =
 			if $JumpAccelTimer.time_left <= 0.0 and on_floor:
 				jump_dir_x = 0.0
 				is_jumping = false
+	
 
+
+	if is_wind_affected && wind_areas_inside.size() > 0:
+		for wind_area in wind_areas_inside:
+			gravity_velocity += wind_area.speed * wind_area.wind_dir * delta
+	
 	out = move_velocity + gravity_velocity
 	return out
 

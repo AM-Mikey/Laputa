@@ -65,7 +65,7 @@ func _physics_process(delta):
 				am.play("xp", self)
 
 	if wind_areas_inside.size() != 0: #Inside Wind
-		print("inside")
+		#print("inside")
 		if velocity.y < 0.0:
 			velocity.y *= 0.9
 

@@ -120,7 +120,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [20.0, 3, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -131,7 +131,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -176,7 +176,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Sentry" type="Area2D" parent="Spawns" unique_id=1748391449 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -241,8 +241,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan1", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -253,7 +253,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -277,8 +277,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan2", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -289,7 +289,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -313,8 +313,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan3", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -325,7 +325,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -349,8 +349,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan4", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -385,8 +385,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan4", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -421,8 +421,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan4", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -457,8 +457,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan4", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -493,8 +493,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan4", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -529,8 +529,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan4", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -565,8 +565,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan4", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -601,8 +601,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan4", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -637,8 +637,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan4", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -673,8 +673,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan4", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -709,8 +709,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan4", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -745,8 +745,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan4", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -781,8 +781,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan4", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -817,8 +817,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan4", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -853,8 +853,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan4", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -889,8 +889,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan5", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -925,8 +925,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan5", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -961,8 +961,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan5", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -997,8 +997,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan5", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1033,8 +1033,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan5", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1069,8 +1069,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan5", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1105,8 +1105,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan5", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1141,8 +1141,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan5", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1177,8 +1177,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan5", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1213,8 +1213,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan5", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1249,8 +1249,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan5", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1285,8 +1285,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan5", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1321,8 +1321,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan5", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1378,7 +1378,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy2" type="Area2D" parent="Spawns" unique_id=1692964768 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -1413,7 +1413,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Larry" type="Area2D" parent="Spawns" unique_id=779889913 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -1538,8 +1538,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan6", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1550,7 +1550,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1574,8 +1574,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan7", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1586,7 +1586,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1610,8 +1610,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan8", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1622,7 +1622,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1646,8 +1646,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan9", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1658,7 +1658,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1682,8 +1682,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan10", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1694,7 +1694,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1718,8 +1718,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan11", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1730,7 +1730,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1754,8 +1754,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan12", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1766,7 +1766,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1790,8 +1790,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan13", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1802,7 +1802,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1826,8 +1826,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan14", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1838,7 +1838,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1862,8 +1862,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan15", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1874,7 +1874,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1898,8 +1898,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan16", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1910,7 +1910,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1934,8 +1934,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan17", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1946,7 +1946,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2142,7 +2142,7 @@ properties = {
 [node name="Crusher" type="Area2D" parent="Spawns" unique_id=1768773609 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
 visibility_layer = 2
 z_index = 999
-position = Vector2(3744, 2088)
+position = Vector2(3744, 2104)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("16_bw3n0")
@@ -2165,7 +2165,7 @@ properties = {
 
 [node name="ToPoint" type="Area2D" parent="Spawns/Crusher" unique_id=1458214159 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
-position = Vector2(0, -88)
+position = Vector2(0, -104)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_bke65")
@@ -2249,7 +2249,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Frog" type="Area2D" parent="Spawns" unique_id=1379839189 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -2483,8 +2483,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan18", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -2495,7 +2495,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2519,8 +2519,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan18", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -2531,7 +2531,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2555,8 +2555,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan18", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -2567,7 +2567,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2591,8 +2591,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan18", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -2603,7 +2603,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2627,8 +2627,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan18", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -2639,7 +2639,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2663,8 +2663,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan18", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -2675,7 +2675,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2699,8 +2699,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan18", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -2711,7 +2711,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2735,8 +2735,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan18", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -2747,7 +2747,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2771,8 +2771,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan19", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -2783,7 +2783,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2807,8 +2807,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan20", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -2819,7 +2819,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2843,8 +2843,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan21", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -2855,7 +2855,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2879,8 +2879,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan22", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -2891,7 +2891,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2915,8 +2915,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan23", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -2927,7 +2927,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2951,8 +2951,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan24", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -2963,7 +2963,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2987,8 +2987,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan25", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -2999,7 +2999,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -3023,8 +3023,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan26", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -3035,7 +3035,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -3059,8 +3059,8 @@ prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"PhysFan27", 4, ""],
-"speed": [20.0, 3, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [600.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -3071,7 +3071,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -3224,7 +3224,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy5" type="Area2D" parent="Spawns" unique_id=1098773137 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -3259,7 +3259,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy6" type="Area2D" parent="Spawns" unique_id=1372743431 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -3294,7 +3294,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy7" type="Area2D" parent="Spawns" unique_id=1170767736 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -3329,7 +3329,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy8" type="Area2D" parent="Spawns" unique_id=279572768 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -3364,7 +3364,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy9" type="Area2D" parent="Spawns" unique_id=1639456806 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -3399,7 +3399,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Sentry4" type="Area2D" parent="Spawns" unique_id=338863541 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -3730,181 +3730,6 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Billy10" type="Area2D" parent="Spawns" unique_id=1413338682 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
-visibility_layer = 2
-z_index = 999
-position = Vector2(3864, 2400)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_bw3n0")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Billy10", 4, ""],
-"idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"walk_max_time": [10.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VUVector" type="Area2D" parent="Spawns/Billy10" unique_id=285939045 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_bke65")]
-visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dmmt2")
-tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
-snap_degrees = 180.0
-
-[node name="Billy11" type="Area2D" parent="Spawns" unique_id=1296921010 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
-visibility_layer = 2
-z_index = 999
-position = Vector2(3912, 2400)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_bw3n0")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Billy11", 4, ""],
-"idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"walk_max_time": [10.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VUVector" type="Area2D" parent="Spawns/Billy11" unique_id=963988871 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_bke65")]
-visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dmmt2")
-tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
-snap_degrees = 180.0
-
-[node name="Billy12" type="Area2D" parent="Spawns" unique_id=450781992 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
-visibility_layer = 2
-z_index = 999
-position = Vector2(3960, 2400)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_bw3n0")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Billy12", 4, ""],
-"idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"walk_max_time": [10.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VUVector" type="Area2D" parent="Spawns/Billy12" unique_id=1209681821 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_bke65")]
-visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dmmt2")
-tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
-snap_degrees = 180.0
-
-[node name="Billy13" type="Area2D" parent="Spawns" unique_id=1911103852 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
-visibility_layer = 2
-z_index = 999
-position = Vector2(4008, 2400)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_bw3n0")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Billy13", 4, ""],
-"idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"walk_max_time": [10.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VUVector" type="Area2D" parent="Spawns/Billy13" unique_id=113656252 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_bke65")]
-visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dmmt2")
-tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
-snap_degrees = 180.0
-
-[node name="Billy14" type="Area2D" parent="Spawns" unique_id=2071336924 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
-visibility_layer = 2
-z_index = 999
-position = Vector2(4056, 2400)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_bw3n0")
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Billy14", 4, ""],
-"idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"walk_max_time": [10.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VUVector" type="Area2D" parent="Spawns/Billy14" unique_id=1149925865 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_bke65")]
-visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dmmt2")
-tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
-snap_degrees = 180.0
-
 [node name="Frog2" type="Area2D" parent="Spawns" unique_id=979577689 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
 visibility_layer = 2
 z_index = 999
@@ -4200,6 +4025,577 @@ script = ExtResource("14_bke65")
 tag_name = "tongue_range"
 lock_y = true
 
+[node name="Shield" type="Area2D" parent="Spawns" unique_id=2104860352 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3752, 1808)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/Enemy/Shield.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"defend_time": [0.4, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Shield", 4, ""],
+"move_dir": [Vector2(-1, 0), 5, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"wait_max_time": [5.0, 3, ""],
+"walk_max_time": [10.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Shield1" type="Area2D" parent="Spawns" unique_id=220187908 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3768, 1968)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/Enemy/Shield.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"defend_time": [0.4, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Shield1", 4, ""],
+"move_dir": [Vector2(-1, 0), 5, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"wait_max_time": [5.0, 3, ""],
+"walk_max_time": [10.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Shield2" type="Area2D" parent="Spawns" unique_id=976630217 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3704, 2096)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/Enemy/Shield.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"defend_time": [0.4, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Shield2", 4, ""],
+"move_dir": [Vector2(-1, 0), 5, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"wait_max_time": [5.0, 3, ""],
+"walk_max_time": [10.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Billy10" type="Area2D" parent="Spawns" unique_id=1413338682 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3864, 2400)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/Enemy/Billy.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"bullet_damage": [2, 2, ""],
+"bullet_speed": [200, 2, ""],
+"deaggro_delay": [3.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Billy10", 4, ""],
+"idle_max_time": [5.0, 3, ""],
+"lock_distance": [128, 2, ""],
+"lock_tolerance": [16, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"walk_max_time": [10.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VUVector" type="Area2D" parent="Spawns/Billy10" unique_id=285939045 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_bke65")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dmmt2")
+tag_name = "move_dir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
+[node name="Billy11" type="Area2D" parent="Spawns" unique_id=1296921010 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3912, 2400)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/Enemy/Billy.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"bullet_damage": [2, 2, ""],
+"bullet_speed": [200, 2, ""],
+"deaggro_delay": [3.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Billy11", 4, ""],
+"idle_max_time": [5.0, 3, ""],
+"lock_distance": [128, 2, ""],
+"lock_tolerance": [16, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"walk_max_time": [10.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VUVector" type="Area2D" parent="Spawns/Billy11" unique_id=963988871 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_bke65")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dmmt2")
+tag_name = "move_dir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
+[node name="Billy12" type="Area2D" parent="Spawns" unique_id=450781992 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3960, 2400)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/Enemy/Billy.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"bullet_damage": [2, 2, ""],
+"bullet_speed": [200, 2, ""],
+"deaggro_delay": [3.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Billy12", 4, ""],
+"idle_max_time": [5.0, 3, ""],
+"lock_distance": [128, 2, ""],
+"lock_tolerance": [16, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"walk_max_time": [10.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VUVector" type="Area2D" parent="Spawns/Billy12" unique_id=1209681821 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_bke65")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dmmt2")
+tag_name = "move_dir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
+[node name="Billy13" type="Area2D" parent="Spawns" unique_id=1911103852 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(4008, 2400)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/Enemy/Billy.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"bullet_damage": [2, 2, ""],
+"bullet_speed": [200, 2, ""],
+"deaggro_delay": [3.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Billy13", 4, ""],
+"idle_max_time": [5.0, 3, ""],
+"lock_distance": [128, 2, ""],
+"lock_tolerance": [16, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"walk_max_time": [10.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VUVector" type="Area2D" parent="Spawns/Billy13" unique_id=113656252 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_bke65")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dmmt2")
+tag_name = "move_dir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
+[node name="Billy14" type="Area2D" parent="Spawns" unique_id=2071336924 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(4056, 2400)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/Enemy/Billy.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"bullet_damage": [2, 2, ""],
+"bullet_speed": [200, 2, ""],
+"deaggro_delay": [3.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Billy14", 4, ""],
+"idle_max_time": [5.0, 3, ""],
+"lock_distance": [128, 2, ""],
+"lock_tolerance": [16, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"walk_max_time": [10.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VUVector" type="Area2D" parent="Spawns/Billy14" unique_id=1149925865 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_bke65")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dmmt2")
+tag_name = "move_dir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
+[node name="Aikka1" type="Area2D" parent="Spawns" unique_id=751646884 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3624, 1808)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/NPC/Aikka.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Aikka1", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Aikka2" type="Area2D" parent="Spawns" unique_id=745461672 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3688, 1968)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/NPC/Aikka.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Aikka2", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Aikka3" type="Area2D" parent="Spawns" unique_id=854755793 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3720, 2096)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/NPC/Aikka.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Aikka3", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Aikka4" type="Area2D" parent="Spawns" unique_id=1228810407 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3720, 2192)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/NPC/Aikka.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Aikka4", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Aikka5" type="Area2D" parent="Spawns" unique_id=1039841264 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3704, 2240)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/NPC/Aikka.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Aikka5", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Aikka6" type="Area2D" parent="Spawns" unique_id=1149931721 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3864, 2320)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/NPC/Aikka.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Aikka6", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Aikka7" type="Area2D" parent="Spawns" unique_id=1825905032 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3912, 2320)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/NPC/Aikka.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Aikka7", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Aikka8" type="Area2D" parent="Spawns" unique_id=235122112 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3960, 2320)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/NPC/Aikka.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Aikka8", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Aikka9" type="Area2D" parent="Spawns" unique_id=609010643 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(4008, 2320)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/NPC/Aikka.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Aikka9", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Aikka10" type="Area2D" parent="Spawns" unique_id=284268582 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(4056, 2320)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/NPC/Aikka.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Aikka10", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Aikka11" type="Area2D" parent="Spawns" unique_id=1539039901 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3704, 2288)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/NPC/Aikka.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Aikka11", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Aikka12" type="Area2D" parent="Spawns" unique_id=228106151 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3704, 2336)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/NPC/Aikka.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Aikka12", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Aikka13" type="Area2D" parent="Spawns" unique_id=1558346202 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3704, 2384)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/NPC/Aikka.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Aikka13", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Aikka14" type="Area2D" parent="Spawns" unique_id=1123475689 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3704, 2432)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/NPC/Aikka.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Aikka14", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Aikka15" type="Area2D" parent="Spawns" unique_id=1525204721 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3704, 2480)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_bw3n0")
+actor_path = "res://src/Actor/NPC/Aikka.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Aikka15", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
 
@@ -4330,11 +4726,6 @@ zoom = 2.0
 [connection signal="input_event" from="Spawns/Sentry8" to="Spawns/Sentry8" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Sentry9" to="Spawns/Sentry9" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Aikka" to="Spawns/Aikka" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Billy10" to="Spawns/Billy10" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Billy11" to="Spawns/Billy11" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Billy12" to="Spawns/Billy12" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Billy13" to="Spawns/Billy13" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Billy14" to="Spawns/Billy14" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Frog2" to="Spawns/Frog2" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Larry9" to="Spawns/Larry9" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Larry10" to="Spawns/Larry10" method="_on_input_event"]
@@ -4345,3 +4736,26 @@ zoom = 2.0
 [connection signal="input_event" from="Spawns/Frog4" to="Spawns/Frog4" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Frog5" to="Spawns/Frog5" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Frog6" to="Spawns/Frog6" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield" to="Spawns/Shield" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield1" to="Spawns/Shield1" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield2" to="Spawns/Shield2" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy10" to="Spawns/Billy10" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy11" to="Spawns/Billy11" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy12" to="Spawns/Billy12" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy13" to="Spawns/Billy13" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy14" to="Spawns/Billy14" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Aikka1" to="Spawns/Aikka1" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Aikka2" to="Spawns/Aikka2" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Aikka3" to="Spawns/Aikka3" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Aikka4" to="Spawns/Aikka4" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Aikka5" to="Spawns/Aikka5" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Aikka6" to="Spawns/Aikka6" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Aikka7" to="Spawns/Aikka7" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Aikka8" to="Spawns/Aikka8" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Aikka9" to="Spawns/Aikka9" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Aikka10" to="Spawns/Aikka10" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Aikka11" to="Spawns/Aikka11" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Aikka12" to="Spawns/Aikka12" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Aikka13" to="Spawns/Aikka13" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Aikka14" to="Spawns/Aikka14" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Aikka15" to="Spawns/Aikka15" method="_on_input_event"]

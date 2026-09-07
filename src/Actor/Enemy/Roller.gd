@@ -268,8 +268,12 @@ func _calc_velocity_rolling() -> Vector2:
 				gravity_velocity.x = move_toward(gravity_velocity.x, 0.0, 1.0)
 				gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
 				gravity_velocity.y = 0.0
+				
+	if is_wind_affected && wind_areas_inside.size() > 0:
+		for wind_area in wind_areas_inside:
+			gravity_velocity += wind_area.speed * wind_area.wind_dir
 
-	return gravity_velocity + move_velocity
+	return move_velocity + gravity_velocity
 
 
 func _angle_to_nearest_x_axis(angle: float) -> float: # Return value in [0, PI / 2.0]
