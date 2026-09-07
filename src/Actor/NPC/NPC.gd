@@ -111,6 +111,9 @@ func change_state(new):
 
 
 ### STATES ###
+func enter_idle(_prev_state):
+	speed = Vector2.ZERO
+
 #func do_idle():
 	#if target_waypoint:
 		#change_state("walkto")
@@ -251,7 +254,8 @@ func calc_velocity(do_gravity = true) -> Vector2:
 	var fractional_speed = speed
 	if is_in_water:
 		fractional_speed = speed * Vector2(0.666, 0.666)
-	out.x = fractional_speed.x * move_dir.x
+	if move_dir.x * fractional_speed.x != 0.0:
+		out.x = fractional_speed.x * move_dir.x
 	if do_gravity:
 		out.y += gravity * get_physics_process_delta_time()
 		if move_dir.y < 0:

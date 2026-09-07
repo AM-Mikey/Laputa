@@ -131,7 +131,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -176,7 +176,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Sentry" type="Area2D" parent="Spawns" unique_id=1748391449 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -253,7 +253,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -289,7 +289,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -325,7 +325,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1378,7 +1378,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy2" type="Area2D" parent="Spawns" unique_id=1692964768 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -1413,7 +1413,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Larry" type="Area2D" parent="Spawns" unique_id=779889913 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -1550,7 +1550,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1586,7 +1586,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1622,7 +1622,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1658,7 +1658,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1694,7 +1694,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1730,7 +1730,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1766,7 +1766,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1802,7 +1802,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1838,7 +1838,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1874,7 +1874,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1910,7 +1910,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1946,7 +1946,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2249,7 +2249,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Frog" type="Area2D" parent="Spawns" unique_id=1379839189 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -2495,7 +2495,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2531,7 +2531,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2567,7 +2567,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2603,7 +2603,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2639,7 +2639,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2675,7 +2675,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2711,7 +2711,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2747,7 +2747,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2783,7 +2783,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2819,7 +2819,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2855,7 +2855,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2891,7 +2891,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2927,7 +2927,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2963,7 +2963,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2999,7 +2999,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -3035,7 +3035,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -3071,7 +3071,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -3224,7 +3224,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy5" type="Area2D" parent="Spawns" unique_id=1098773137 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -3259,7 +3259,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy6" type="Area2D" parent="Spawns" unique_id=1372743431 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -3294,7 +3294,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy7" type="Area2D" parent="Spawns" unique_id=1170767736 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -3329,7 +3329,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy8" type="Area2D" parent="Spawns" unique_id=279572768 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -3364,7 +3364,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy9" type="Area2D" parent="Spawns" unique_id=1639456806 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -3399,7 +3399,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Sentry4" type="Area2D" parent="Spawns" unique_id=338863541 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -4123,7 +4123,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy11" type="Area2D" parent="Spawns" unique_id=1296921010 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -4158,7 +4158,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy12" type="Area2D" parent="Spawns" unique_id=450781992 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -4193,7 +4193,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy13" type="Area2D" parent="Spawns" unique_id=1911103852 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -4228,7 +4228,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy14" type="Area2D" parent="Spawns" unique_id=2071336924 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -4263,7 +4263,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_dmmt2")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Aikka1" type="Area2D" parent="Spawns" unique_id=751646884 groups=["ActorSpawns", "Entities"] instance=ExtResource("15_idcuc")]
@@ -4596,6 +4596,62 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="HealthUpgrade" type="Area2D" parent="Spawns" unique_id=1227155674 groups=["Entities", "PropSpawns"] instance=ExtResource("9_uijyh")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3664, 1952)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_uijyh")
+prop_path = "res://src/Prop/HealthUpgrade.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"HealthUpgrade", 4, ""]
+}
+
+[node name="SaveDisk" type="Area2D" parent="Spawns" unique_id=746599624 groups=["Entities", "PropSpawns"] instance=ExtResource("9_uijyh")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3712, 1952)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_uijyh")
+prop_path = "res://src/Prop/SaveDisk.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"SaveDisk", 4, ""]
+}
+
+[node name="AmmoRefill" type="Area2D" parent="Spawns" unique_id=1571972813 groups=["Entities", "PropSpawns"] instance=ExtResource("9_uijyh")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3632, 1952)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_uijyh")
+prop_path = "res://src/Prop/AmmoRefill.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [null, 1, ""],
+"id": [&"AmmoRefill", 4, ""]
+}
+
+[node name="HealthRefill" type="Area2D" parent="Spawns" unique_id=503685372 groups=["Entities", "PropSpawns"] instance=ExtResource("9_uijyh")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3584, 1952)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_uijyh")
+prop_path = "res://src/Prop/HealthRefill.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"HealthRefill", 4, ""]
+}
+
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
 
@@ -4759,3 +4815,7 @@ zoom = 2.0
 [connection signal="input_event" from="Spawns/Aikka13" to="Spawns/Aikka13" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Aikka14" to="Spawns/Aikka14" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Aikka15" to="Spawns/Aikka15" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/HealthUpgrade" to="Spawns/HealthUpgrade" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/SaveDisk" to="Spawns/SaveDisk" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/AmmoRefill" to="Spawns/AmmoRefill" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/HealthRefill" to="Spawns/HealthRefill" method="_on_input_event"]
