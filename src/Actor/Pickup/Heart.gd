@@ -1,7 +1,7 @@
 extends Actor
 
 var value: int
-var dir = Vector2.DOWN
+var dir = Vector2.ZERO
 var normal_time = 2.0
 var end_time = 1.0
 var state = "normal"
@@ -27,7 +27,6 @@ func calc_velocity(direction) -> Vector2:
 	var fractional_speed = speed
 	if is_in_water:
 		fractional_speed = speed * Vector2(0.666, 0.666)
-	out.x = fractional_speed.x * direction.x
 	out.y += gravity * get_physics_process_delta_time()
 	if direction.y == -1.0:
 		out.y = fractional_speed.y * direction.y
