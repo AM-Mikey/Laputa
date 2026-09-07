@@ -105,6 +105,9 @@ libraries/ = SubResource("AnimationLibrary_ms45c")
 wait_time = 0.1
 one_shot = true
 
+[node name="BounceTimer" type="Timer" parent="." unique_id=198122956]
+wait_time = 0.1
+
 [node name="RFloor" type="RayCast2D" parent="." unique_id=1996564239]
 position = Vector2(6, -5)
 target_position = Vector2(0, 22)

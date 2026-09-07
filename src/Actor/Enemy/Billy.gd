@@ -289,7 +289,6 @@ func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction =
 				is_jumping = false
 	
 
-
 	if is_wind_affected && wind_areas_inside.size() > 0:
 		for wind_area in wind_areas_inside:
 			gravity_velocity += wind_area.speed * wind_area.wind_dir * delta
